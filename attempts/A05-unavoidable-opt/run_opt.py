@@ -74,7 +74,7 @@ def one_cont(args):
             grp, spec = "C2", ["g"] * (len(P0) // 2) + (["c"] if len(P0) % 2 else [])
         param = Param(grp, spec, rec["s0"])
         z = param.z_from_P(P0)
-    kw = dict(iters=200, nth=64, nc=80, K=40)
+    kw = dict(iters=250, nth=90, nc=100, K=40)
     t0 = time.time()
     s_best, z_best, g_best, p_best = find_max_s0(grp, spec, z, rec["s0"], m_target=margin, tol_s=tol_s, slp_kw=kw)
     P = p_best.P(z_best)

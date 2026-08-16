@@ -25,3 +25,11 @@
   data survived on disk. Resumed each agent from its transcript with pointers to its partial work.
 - Correction broadcast to A04: its "CANDIDATE" files (s ≈ 3.87708359224) are re-discoveries of Trump's packing,
   2.2e-9 ABOVE the exact record 3.877083590022814 (the threshold had been my rounded 3.877084).
+
+## 2026-08-16 — advisor — second interruption (OAuth expiry) and re-dispatch
+- All agents died again (401). Partial results on disk before death: A07 LP logs show τ*(3.7071)=10.000 for the
+  n=10 calibration (LP method reproduces Stromquist's exact s(10)), and for n=11 τ*(3.65)≈9.37, τ*(3.80)≈10.43,
+  τ*(3.85)≈11.07 (grid LP, row generation, not yet rigorous). A05: best pure 10-point unavoidable set s0≈3.751
+  (< 3.7889) ⇒ point method alone cannot beat Stromquist. A04: Trump packing rediscovered repeatedly, nothing below.
+- Re-dispatched A02–A07; spawned A08-measure-verify (independent exact-rational verifier for measure certificates)
+  and asked A06 to prototype the Lean checker for measure certificates (I-C2). Critical path: A07 → A08 → A06.

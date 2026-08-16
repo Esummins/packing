@@ -13,3 +13,4 @@ Status ∈ {planned, running, done-success, done-negative, abandoned}.
 | A05-unavoidable-opt | LB agent | maximise s admitting a 10-point unavoidable set | numeric optimisation over point sets + rigorous 3-D interval verification | planned | | attempts/A05-unavoidable-opt |
 | A06-lean-setup | lean agent | Lean 4 toolchain + prototype integer-arithmetic packing checker | elan/lake, native_decide | planned | | attempts/A06-lean-setup |
 | A07-lp-dual | LP agent | LP/measure ("fractional unavoidable set") lower bound; compute τ*(s) ceiling | discretised covering LP with row generation (HiGHS), D4 symmetry, rigorous interval verification | planned | | attempts/A07-lp-dual |
+| A08-measure-verify | verify agent | independent exact-rational verifier for measure (LP-dual) lower-bound certificates | interval B&B over (tan(θ/2), cx, cy) in Fraction/int arithmetic; Lean-portable design | running | | attempts/A08-measure-verify |

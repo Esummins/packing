@@ -89,8 +89,43 @@ def main():
         print('%.7f  cnt=%4d  up=%2d  contacts=%2d+%2d  angles=%s  %s' % (
             o['s'], o['count'], o['n_upright'], o['n_pair_contacts'], o['n_wall_contacts'],
             [a for a in o['angles_deg'] if 0.5 <= a <= 89.5], o['methods']))
-    hits = [r for r in recs if abs(r['s'] - RECORD) < 2e-5]
-    print('\nrecords within 2e-5 of 3.877084:', len(hits), ' below record:', sum(1 for r in recs if r['s'] < RECORD))
+    hits = [r for r in recs if abs(r['s'] - RECORD) < 1e-6]
+    print('\nrecords within 1e-6 of the exact record:', len(hits), ' strictly below record-1e-9:',
+          sum(1 for r in recs if r['s'] < RECORD - 1e-9))
+    # ---- structural families: n_upright + canonical tilt multiset (angles folded to [0,45], rounded to 5 deg)
+    def fam_key(r):
+        a = r['angles']
+        ups = sum(1 for v in a if v < 0.5 or v > 89.5)
+        tilt = tuple(sorted(int(round(min(v, 90 - v) / 5.0)) * 5 for v in a if 0.5 <= v <= 89.5))
+        return (ups, tilt)
+    fams = {}
+    for r in recs:
+        k = fam_key(r)
+        f = fams.setdefault(k, dict(n_upright=k[0], tilt_pattern_deg=list(k[1]), count=0, s_min=9, s_values=set(),
+                                    methods=set(), best=None))
+        f['count'] += 1; f['s_values'].add(round(r['s'], 4)); f['methods'].add(r['method'])
+        if r['s'] < f['s_min']:
+            f['s_min'] = r['s']; f['best'] = r
+    fl = []
+    for k, f in fams.items():
+        b = f['best']
+        npair, nwall = contacts(b['x'])
+        fl.append(dict(n_upright=f['n_upright'], tilt_pattern_deg=f['tilt_pattern_deg'], count=f['count'],
+                       s_min=f['s_min'], n_distinct_s_1e4=len(f['s_values']), methods=sorted(f['methods']),
+                       best_angles_deg=b['angles'], n_pair_contacts=npair, n_wall_contacts=nwall,
+                       best_x=b['x']))
+    fl.sort(key=lambda f: f['s_min'])
+    json.dump(dict(record_exact=RECORD, n_records=len(recs), n_families=len(fl), families=fl),
+              open('families_catalogue.json', 'w'), indent=1)
+    print('\nstructural families (n_upright, tilt multiset to 5 deg):', len(fl),
+          ' with s_min<3.95:', sum(1 for f in fl if f['s_min'] < 3.95))
+    print('%-10s %-5s %-4s %-3s %-5s %-6s %s' % ('s_min', 'cnt', 'ns', 'up', 'ctc', 'meth', 'tilt pattern / best angles'))
+    for f in fl:
+        if f['s_min'] < 3.95:
+            print('%.7f %5d %4d %3d %2d+%2d %-6s %s  best=%s' % (
+                f['s_min'], f['count'], f['n_distinct_s_1e4'], f['n_upright'], f['n_pair_contacts'],
+                f['n_wall_contacts'], ','.join(m[:4] for m in f['methods']), f['tilt_pattern_deg'],
+                [round(min(a, 90 - a), 1) for a in f['best_angles_deg'] if 0.5 <= a <= 89.5]))
     # plots
     try:
         import matplotlib
