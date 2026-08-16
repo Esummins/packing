@@ -1,0 +1,60 @@
+axes  ggv          seed=102 g=0.16793 g_fine=0.17500 t=6s
+axes  gvvh         seed=103 g=-0.01094 g_fine=-0.00693 t=13s
+axes  gvvv         seed=104 g=0.17358 g_fine=0.17642 t=9s
+axes  vvvhh        seed=105 g=0.85000 g_fine=0.85000 t=4s
+C2    ggggg        seed=101 g=0.04140 g_fine=0.04316 t=24s
+diag  gdda         seed=107 g=0.03760 g_fine=0.03935 t=11s
+diag  ggd          seed=106 g=0.16356 g_fine=0.18644 t=14s
+none  gggggggggg   seed=100 g=0.10211 g_fine=0.10291 t=30s
+C2    ggggg        seed=110 g=0.17017 g_fine=0.17983 t=8s
+axes  ggv          seed=111 g=0.17142 g_fine=0.17858 t=11s
+axes  gvvh         seed=112 g=-0.01067 g_fine=-0.00876 t=7s
+diag  gddd         seed=108 g=0.18840 g_fine=0.20186 t=22s
+axes  vvvhh        seed=114 g=0.85000 g_fine=0.85000 t=4s
+axes  gvvv         seed=113 g=0.17364 g_fine=0.17628 t=11s
+diag  ggd          seed=115 g=0.16356 g_fine=0.18644 t=9s
+none  gggggggggg   seed=109 g=0.07567 g_fine=0.07626 t=37s
+diag  gdda         seed=116 g=0.03730 g_fine=0.04035 t=20s
+diag  gddd         seed=117 g=0.18886 g_fine=0.20243 t=19s
+C2    ggggg        seed=119 g=-0.00480 g_fine=-0.00176 t=8s
+axes  ggv          seed=120 g=0.17500 g_fine=0.17500 t=6s
+axes  vvvhh        seed=123 g=0.85000 g_fine=0.85000 t=3s
+axes  gvvv         seed=122 g=0.17366 g_fine=0.17634 t=8s
+axes  gvvh         seed=121 g=-0.00986 g_fine=-0.00864 t=12s
+diag  ggd          seed=124 g=0.16356 g_fine=0.18644 t=6s
+none  gggggggggg   seed=118 g=0.07865 g_fine=0.08089 t=31s
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A05-unavoidable-opt\run_opt.py", line 32, in one_start
+    z, g = basin_hop(param, z0, s0, rng=rng, n_kicks=n_kicks, slp_kw=kw)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A05-unavoidable-opt\unavoid.py", line 539, in basin_hop
+    z2, g2, _, _ = slp(param, z_try, s0, **slp_kw)
+                   ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A05-unavoidable-opt\unavoid.py", line 331, in slp
+    A_ub = np.vstack([np.hstack([Au, -np.ones((m, 1))]),
+                      np.hstack([-Au, -np.ones((m, 1))]),
+                      np.hstack([Av, -np.ones((m, 1))]),
+                      np.hstack([-Av, -np.ones((m, 1))])])
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\numpy\_core\shape_base.py", line 290, in vstack
+    return _nx.concatenate(arrs, 0, dtype=dtype, casting=casting)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.76 MiB for an array with shape (10988, 21) and data type float64
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A05-unavoidable-opt\run_opt.py", line 98, in <module>
+    phaseA(a)
+    ~~~~~~^^^
+  File "C:\Users\esumm\code\packing\attempts\A05-unavoidable-opt\run_opt.py", line 49, in phaseA
+    for r in pool.imap_unordered(one_start, jobs):
+             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\pool.py", line 873, in next
+    raise value
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.76 MiB for an array with shape (10988, 21) and data type float64

@@ -49,3 +49,21 @@ work inside this repo, keep the artefacts). Status: running → A03.
 
 **I-C2. Lean 4 checker for measure/point unavoidable-set certificates** (lower bounds): rational
 box subdivision of (x,y,θ) with rational bounds on cos/sin. Status: open, depends on I-L1/I-L2.
+Design note (advisor): parametrise θ ∈ [0,π/2) by t = tan(θ/2) ∈ [0,1); cos = (1−t²)/(1+t²) and
+sin = 2t/(1+t²) are monotone rational functions on [0,1], so for a rational t-box the enclosures of
+cos, sin are exact rationals; "p ∈ Q(c,θ)" ⟺ |cos·(px−cx)+sin·(py−cy)| ≤ 1/2 ∧ |−sin·(px−cx)+cos·(py−cy)| ≤ 1/2
+is then checked on a (t,cx,cy)-box by exact rational interval arithmetic. The certificate is a list of
+boxes covering [0,1]×[0,s]² each with a witness point (or list of atoms with weights summing ≥ 1);
+Lean checks it by `decide`/`native_decide` over ℚ (or scaled ℤ). The bridge lemma (every unit square in
+the container is Q(c,θ) for some θ ∈ [0,π/2), and 90° symmetry) is the only real-analysis content.
+
+**Advisor remarks on the LP method (I-L2).** Pairwise overlap constraints are implied by point
+constraints (two overlapping squares share a point), so the point-LP can only be beaten by fractional
+packings that exploit ≥3-cliques with no common point (pinwheels / odd cycles in the placement
+conflict graph). Possible strengthenings if the pure LP saturates below 3.877: (a) clique constraints
+for pinwheel triples; (b) "region rank" constraints: at most k(R) centres in region R (e.g. wall bands:
+centres pairwise ≥ 1 apart since each square contains its incircle); (c) Lovász-theta-type SDP on a
+discretised placement graph (rigorous via shrink-and-snap, but the discretisation must be very fine —
+probably infeasible directly). The incircle relaxation alone (11 points pairwise ≥1 apart in a
+square of side s−1) gives only s ≥ 1 + 1/d₁₁ ≈ 3.51 (d₁₁ ≈ 0.398 = max-min distance of 11 points in
+a unit square), so region constraints must be used together with point/measure constraints.

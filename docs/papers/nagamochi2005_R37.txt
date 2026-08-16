@@ -1,0 +1,731 @@
+Packing Unit Squares in a Rectangle
+Hiroshi Nagamochi
+Department of Applied Mathematics and Physics, Kyoto University
+Sakyo, Kyoto-city, Kyoto 606-8501, Japan
+nag@amp.i.kyoto-u.ac.jp
+Submitted: Sep 29, 2004; Accepted: Jul 8, 2005; Published: Jul 30, 2005.
+Mathematics Subject Classiﬁcations: 05B40, 52C15
+Abstract
+For a positive integer N, let s(N) be the side length of the minimum square into
+which N unit squares can be packed. This paper shows that, for given real numbers
+a, b ≥2, no more than ab −(a + 1 −⌈a⌉) −(b + 1 −⌈b⌉) unit squares can be packed
+in any a′ × b′ rectangle R with a′ < a and b′ < b. From this, we can deduce that,
+for any integer N ≥4, s(N) ≥min{⌈
+√
+N⌉,
+q
+N −2⌊
+√
+N⌋+ 1 + 1}. In particular,
+for any integer n ≥2, s(n2) = s(n2 −1) = s(n2 −2) = n holds.
+1
+Introduction
+Packing geometric objects such as circles and squares into another object is one of the
+fundamental problems in combinatorial geometry [1, 2, 4]. For a positive integer N, let
+s(N) be the side length of the minimum square that can contain N unit squares in the
+plane whose interiors do not overlap. The problem of packing unit squares into a square
+was initiated by Erd˝os and Graham [2]. They prove that, for a large number s, unit
+squares can be packed into an s × s square so that the wasted area is O(s7/11). This is
+surprisingly small compared with the wasted area in the ‘trivial’ packing of N = n2 −n
+unit squares in an n × n square, where n is an integer more than 1.
+Determining or estimating s(N) is posed as one of the unsolved geometric problems
+listed by Croft et al.
+[1].
+We easily observe that for any positive integer N,
+√
+N ≤
+s(N) ≤⌈
+√
+N⌉, and that for any square number N = n2, s(N) = n. It was conjectured
+that s(n2−n) = n holds for integers n ≥2 (whenever n is small). For n ≥17, s(n2−n) < n
+is demonstrated by an explicit construction (see [3]). Friedman [3] conjectures that, once
+s(n2 −k) = n holds for some integers n and k, s((n+ 1)2 −k) = n+ 1 holds. Determining
+s(N) for non-square numbers N seems rather diﬃcult. Currently such s(N) has been
+determined only for some limited numbers N < 100 (see [3, 5]). These nontrivial values
+for s(N) are based on lower bounds which are established in a particular way for each N.
+the electronic journal of combinatorics 12 (2005), #R37
+1
+In this paper, we introduce a lower bound on s(N) that is systematically constructible
+for any integer N ≥4. For two positive real numbers a and b, let ν(a, b) denote the
+maximum number of unit squares that can be packed into the inside of an a′×b′ rectangle
+R with a′ < a and b′ < b. A trivial upper bound on ν(a, b) is ν(a, b) < ab. In this paper,
+we prove the following result.
+Theorem 1 For real numbers a, b ≥2, ν(a, b) < ab −(a + 1 −⌈a⌉) −(b + 1 −⌈b⌉).
+2
+In particular, for two integers a ≥b ≥2, we see that an a × b rectangle is the smallest
+rectangle with aspect ratio a/b into which ab −2 unit squares can be packed. Theorem 1
+also provides a new lower bound on s(N), determining s(N) for inﬁnitely many new
+numbers N.
+Theorem 2
+(i) For any positive integer N such that N ∈{n2, n2 −1, n2 −2} for some
+integer n ≥1, s(N) = n holds.
+(ii) For any integer N ≥4 such that N̸ ∈{n2, n2 −1, n2 −2 |
+integers n ≥1},
+s(N) ≥
+q
+N −2⌊
+√
+N⌋+ 1 + 1 >
+√
+N.
+2
+Note that our new lower bound in Theorem 2(ii) is strictly stronger than the trivial
+lower bound
+√
+N. This paper is organized as follows. After deriving Theorem 2 from
+Theorem 1 in section 2, we deﬁne an unavoidable set U in section 3, showing that proving
+the unavoidability of U implies Theorem 1.
+In section 5, we present a proof for the
+unavoidability of U after preparing a series of technical lemmas in section 4. We make
+concluding remarks in section 5.
+2
+Proof of Theorem 2
+This section shows that Theorem 2 follows from Theorem 1. Any square number N = n2
+satisﬁes s(N) = n =
+√
+N = ⌈
+√
+N⌉=
+q
+N −2⌊
+√
+N⌋+ 1 + 1 and inequality
+√
+N + 2 ≥
+⌈
+√
+N⌉. Now assume that
+√
+N is not an integer, for which ⌈
+√
+N⌉= ⌊
+√
+N⌋+ 1 holds.
+Then we have
+q
+N −2⌊
+√
+N⌋+ 1 + 1 =
+q
+N −(⌈
+√
+N⌉)2 + (⌊
+√
+N⌋+ 1)2 −2⌊
+√
+N⌋+ 1 + 1
+=
+q
+N + 2 −(⌈
+√
+N⌉)2 + (⌊
+√
+N⌋)2 + 1. Hence
+q
+N −2⌊
+√
+N⌋+ 1 + 1 ≥⌊
+√
+N⌋+ 1 if and
+only if
+√
+N + 2 ≥⌈
+√
+N⌉. A positive integer N satisﬁes
+√
+N + 2 ≥⌈
+√
+N⌉if and only if
+there is an integer n such that
+√
+N + 2 ≥n ≥
+√
+N, i.e., n2 ≥N ≥n2 −2. It is known
+that s(1) = 1 and s(2) = s(3) = s(4) = 2 [4]. Let N ≥4.
+We ﬁrst consider the case where
+√
+N + 2 ≥⌈
+√
+N⌉. Then by Theorem 1 with a =
+b = ⌈
+√
+N⌉≥2, we have ν(⌈
+√
+N⌉, ⌈
+√
+N⌉) < (⌈
+√
+N⌉)2 −2 ≤N.
+This says that N
+unit squares cannot be packed in any square with side length less than ⌈
+√
+N⌉. Thus,
+s(N) ≥⌈
+√
+N⌉. So for any integer N ∈{n2, n2 −1, n2 −2}, where n ≥1 is an integer, we
+have s(N) ≥n = ⌈
+√
+N⌉≥s(N). This proves (i).
+the electronic journal of combinatorics 12 (2005), #R37
+2
+We next consider the case where
+√
+N + 2 < ⌈
+√
+N⌉. Let k = ⌊
+√
+N⌋≥2 and α =
+q
+N −2⌊
+√
+N⌋+ 1 −⌊
+√
+N⌋+ 1. Note that α is a solution to (α + k −1)2 = N −2k + 1.
+Note that α < 1 since
+√
+N + 2 < ⌈
+√
+N⌉. Hence by Theorem 1 with a = b = k +α ≥2, we
+have ν(k+α, k+α) < (k+α)2−2(α+1−⌈α⌉) = (k+α)2−2α = (k+α−1)2+2k−1 = N.
+Therefore, N unit squares cannot be packed in any square with side length less than
+k + α =
+q
+N −2⌊
+√
+N⌋+ 1 + 1. Thus, s(N) ≥
+q
+N −2⌊
+√
+N⌋+ 1 + 1. Furthermore, we
+see that
+q
+N −2⌊
+√
+N⌋+ 1 + 1 >
+q
+N −2
+√
+N + 1 + 1 =
+√
+N. This proves (ii).
+3
+Unavoidable Sets
+The conventional method for deriving a lower bound on s(N) [3] is as follows. Suppose
+that we wish to show s(N) ≥a. Let R be a square with side length less than a, and U
+be a set of some points inside R, where U is called unavoidable if any unit square placed
+inside R must contain at least one point from U. If we successfully obtain an avoidable
+set U with |U| < N, then we can conclude that |U| + 1 unit squares cannot be packed
+inside R, i.e., s(N) ≥s(|U| + 1) ≥a. For example, let N = 2. Take a square R with
+side length less than a = 2. Then we easily see that U consisting of the center of R is
+unavoidable, and thereby we need a square R with side length at least a = 2 to pack two
+unit squares, i.e., s(2) ≥2. An unavoidable set U with |U| < N over a smaller square
+R provides a better lower bound on s(N). Only for few integers N < 100, have such
+unavoidable sets been constructed to obtain nontrivial lower bounds on s(N). However,
+these constructions are not systematic in terms of N, providing no general lower bound
+on s(N) for large N.
+In this paper, we use not only points but also other geometric objects such as line
+segments and rectangles to deﬁne our unavoidable set U. Recall that the trivial lower
+bound s(N) ≥
+√
+N follows from the fact that each unit square consumes at least area 1
+from the entire square R, where R can be regarded as an unavoidable set from which unit
+square takes score 1.
+In the xy-plane, a line segment L connecting two points p1 = (x1, y1) and p2 = (x2, y2)
+is denoted by L = [p1, p2] or L = [(x1, y1), (x2, y2)]. A rectangle R′ with edges parallel
+with x-, y-axes may be written as [x1, x2] × [y1, y2] if the four corners of R′ are given by
+(x1, y1), (x1, y2), (x2, y1) and (x2, y2) for real numbers x1 ≤x2 and y1 ≤y2.
+To prove ν(a, b) < ab −(a + 1 −⌈a⌉) −(b + 1 −⌈b⌉) for given real numbers a, b ≥2,
+we consider a rectangle R = [0, a] × [0, b] in the xy-plane. Let U consist of a rectangle
+R∗, four lines Li (i = 1, 2, 3, 4), a set Q of eight points, and a set P of 2⌈a⌉+ 2⌈b⌉−12
+points, such that
+R∗
+=
+[1, a −1] × [1, b −1],
+L1
+=
+[(0.9, 1), (a −0.9, 1)],
+L2 = [(0.9, b −1), (a −0.9, b −1)],
+L3
+=
+[(1, 0.9), (1, b −0.9)],
+L4 = [(a −1, 0.9), (a −1, b −0.9)],
+Q
+=
+{(0.9, 1), (a −0.9, 1), (0.9, b −1), (a −0.9, b −1),
+the electronic journal of combinatorics 12 (2005), #R37
+3
+(1, 0.9), (1, b −0.9), (a −1, 0.9), (a −1, b −0.9)},
+P
+=
+{(i, 0.9), (i, a −0.9) | i = 2, 3, . . ., ⌈a⌉−2}
+∪{(0.9, j), (b −0.9, j) | j = 2, 3, . . ., ⌈b⌉−2}.
+See Fig. 1.
+score 0.5
+score 0.05
+(0,0)
+(a,b)
+(a,0)
+(0,b)
+1+a- | a | 
+- -
+1+b- | b | 
+- -
+0.9
+R*
+L1
+L3
+L4
+L2
+}
+}
+score 0.5
+score 0.45
+P
+Q
+P
+Q
+P
+Q
+P
+Q
+P
+P
+P
+P
+Q
+Q
+Q
+Q
+Figure 1: An unavoidable set U for a rectangle R = [0, a] × [0, b].
+Let λ > 1. We say that R and U are shrunken toward the origin (0, 0) by factor λ−1
+if we map each point (x, y) in R and U to a new point (λ−1x, λ−1y). Let λ−1R and λ−1U
+respectively denote such R and U shrunken by factor λ−1.
+For a given unit square S inside λ−1R and an object K ∈{Q, P, L1, L2, L3, L4, R∗},
+we deﬁne score σ(S; K) of S by K as follows.
+• σ(S; R∗) =(the area of the intersection of S and R∗) ×λ2,
+• σ(S; Li) =(the sum of length of the intersection of S and line segment Li)×0.5 × λ,
+• σ(S; Q) =(the number of points in Q contained in S)×0.45, and
+• σ(S; P) =(the number of points in P contained in S)×0.5.
+Deﬁne
+σ(S) = σ(S; R∗) + σ(S; L1) + σ(S; L2) + σ(S; L3) + σ(S; L4) + σ(S; Q) + σ(S; P).
+Note that the total score from Li (i = 1, 2, 3, 4) and Q is 2(a−1.8)×0.5+2(b−1.8)×
+0.5+8×0.45 = a+b. Then the total score from U is (a−2)(b−2)+a+b+⌈a⌉−3+⌈b⌉−3 =
+ab −(a + 1 −⌈a⌉) −(b + 1 −⌈b⌉). In what follows, we prove that U is an unavoidable set
+in the following sense.
+the electronic journal of combinatorics 12 (2005), #R37
+4
+Lemma 1 Any unit square S inside λ−1R satisﬁes σ(S) > 1.
+2
+We show that Theorem 1 follows from Lemma 1. Assume that N ′ unit squares are
+packed inside λ−1R. Each of the N′ unit squares has σ(S) > 1 by Lemma 1 and the total
+score of U is ab−(a+1−⌈a⌉)−(b+1−⌈b⌉). Then we have N′ < ab−(a+1−⌈a⌉)−(b+1−⌈b⌉)
+for any factor λ−1 < 1, i.e., ν(a, b) < ab −(a + 1 −⌈a⌉) −(b + 1 −⌈b⌉), as required.
+A square S with side length λ is called a λ×λ square. For a notational convenience to
+prove Lemma 1, we consider packing λ × λ squares with λ > 1 into the original rectangle
+R = [0, a]×[0, b], instead of considering λ−1R and λ−1U. In this case, each Li contributes
+to σ(S) by 0.5 per length and R∗by 1 per area while each point in Q (resp., P) contributes
+to σ(S) by 0.45 (resp., 0.5). It suﬃces to show that any λ × λ square S with λ ∈(1, 1.01]
+has σ(S) > 1 over the original R and U.
+4
+Technical Lemmas
+In this section, we prepare some technical lemmas in order to establish a proof of Lemma 1
+in the next section. Let λ ∈[1, 1.01] for a technical reason to prove the lemmas in this
+section.
+Lemma 2 Let S be a λ × λ square with λ ∈[1, 1.01]. For a line L with distance h ∈
+[0, (
+√
+2−1)/2) from the center of S, let c be the length of the intersection of S and L (see
+Fig. 2(a)). Then c ≥λ or c > 1.
+Proof: Let L intersect edges e1 and e2 of S. If e1 and e2 are not adjacent, then c ≥λ.
+We consider the case where e1 and e2 are adjacent. We can assume that λ = 1 to estimate
+the minimum c. Let θ denote the angle made by L and e2, where 0 < θ ≤π/4 is assumed
+without loss of generality.
+Let t = tan(θ/2), where 0 < t = tan(θ/2) ≤
+√
+2 −1 for
+θ ∈(0, π/4].
+Then we have
+c = −h (1 + t2)2
+2t(1 −t2) + (1 + t2)(1 + 2t −t2)
+4t(1 −t2)
+,
+which is a decreasing function of h for a ﬁxed t. Hence it suﬃces to show that f(h, t) =
+−2h(1 + t2)2 + (1 + t2)(1 + 2t −t2) −4t(1 −t2) is nonnegative for h = (
+√
+2 −1)/2. We
+have
+f(
+√
+2 −1
+2
+, t) = (t + 1 −
+√
+2)2(−
+√
+2t2 + (2 + 2
+√
+2)t + 2 +
+√
+2).
+By the concavity of g(t) = −
+√
+2t2 + (2 + 2
+√
+2)t + 2 +
+√
+2, g(0) > 0 and g(
+√
+2 −1) > 0
+mean g(t) > 0 (0 < t ≤
+√
+2 −1). Hence f((
+√
+2 −1)/2, t) ≥0 and c > 1.
+2
+Lemma 3 Let S be a λ × λ square with λ ∈[1, 1.01] such that one corner of S touches
+the x-axis and S is entirely above the x-axis. For a line L : y = h with h ∈(0.5,
+√
+2−0.5),
+let c be the length of the intersection of S and L (see Fig. 2(b)). Then c ≥λ or c > 1.
+the electronic journal of combinatorics 12 (2005), #R37
+5
+h
+θ
+c
+L
+S
+e
+e1
+2
+(a)
+(b)
+h
+θ
+c
+L
+S
+e
+e1
+2
+θ
+Figure 2: (a) Illustration for Lemma 2; (b) Illustration for Lemma 3.
+Proof: Let L intersect edges e1 and e2 of S. We consider the case where e1 and e2 are
+adjacent (otherwise c ≥λ). By h > 0.5, both e1 and e2 are not touching the x-axis.
+We can assume that λ = 1 to estimate the minimum c. Let θ be angle made by L and
+e2, where 0 < θ ≤π/4 is assumed without loss of generality. Let t = tan(θ/2), where
+0 < t = tan(θ/2) ≤
+√
+2 −1) for θ ∈(0, π/4].
+Then we have
+c = −(h −1) (1 + t2)2
+2t(1 −t2) + 2t(1 −t + t2 −t3)
+2t(1 −t2)
+,
+which is a decreasing function of h for a ﬁxed t. To prove the lemma, it suﬃces to show
+that f(h, t) = −(h −1)(1 + t2)2 + 2t −2t2 + 2t3 −2t4 −2t + 2t3 ≥0 for h =
+√
+2 −0.5. We
+see that
+f(
+√
+2 −0.5, t) = (t + 1 −
+√
+2)2(−(1 + 2
+√
+2)t2 + (2
+√
+2 + 2)t + 1).
+By the concavity of g(t) = −(1 + 2
+√
+2)t2 + (2
+√
+2 + 2)t + 1, g(0) > 0 and g(
+√
+2 −1) > 0
+mean g(t) > 0 (0 < t <
+√
+2 −1). Therefore f(
+√
+2 −0.5, t) ≥0 and c > 1.
+2
+Lemma 4 Let S be a λ × λ square with λ ∈[1, 1.01], and e1 and e2 be two adjacent
+edges of S that meet at a corner v of S. For a point p1 on e1 and a point p2 on e2 with
+p1̸ = v̸ = p2, let c be the length of the line segment L = [p1, p2], and d be the area of the
+triangle enclosed by L and line segments [p1, v] and [v, p2] (see Fig. 3). Then 0.5c > d.
+2
+Proof: Let h and ℓbe the lengths of the line segments [p1, v] and [v, p2], respectively. Then
+c =
+√
+h2 + ℓ2 and d = hℓ/2. To prove c/2 > d, it suﬃces to show that h2 + ℓ2 −h2ℓ2 > 0.
+Since h, ℓ∈(0, λ], we have h2 + ℓ2 −h2ℓ2 = (h −ℓ)2 + hℓ(2 −hℓ) ≥hℓ(2 −λ2) > 0.
+2
+the electronic journal of combinatorics 12 (2005), #R37
+6
+c
+L
+S
+e
+e1
+2
+T
+d
+v
+p2
+p1
+Figure 3: Illustration for Lemma 4.
+Lemma 5 Let S be a λ × λ square with λ ∈[1, 1.01] such that one corner of S touches
+the x-axis and S is entirely above the x-axis, c > 0 be the length of the intersection of S
+and line L : y = 1, and d be the area of the triangle enclosed by S and L (see Fig. 4(a)).
+Then d + 0.5c > 0.5.
+Proof: Let θ ∈(0, π/4] be the angle made by an edge of S and the x-axis, and t =
+tan(θ/2). We obtain d = c2 × t(1 −t2)/(1 + t2)2. We denote c and d for λ = 1 by ¯c and ¯d.
+Then we have 1−¯c = ¯d = (t−t2)/(1+t), for which ¯d+0.5¯c = 1−¯c+0.5¯c = 0.5+0.5(1−¯c) >
+0.5. Now consider the case of λ > 1. Since λ −1 is small, we can write c = ¯c + x and
+d = (¯c + x)2 × t(1 −t2)/(1 + t2)2 = ¯d + (2¯c + x2) × t(1 −t2)/(1 + t2)2 for some number
+x > 0. Then d+0.5c = ¯d+0.5¯c+0.5x+(2¯c +x2)×t(1−t2)/(1+t2)2 ≥¯d+0.5¯c > 0.5.
+2
+θ
+θ
+1
+d
+c
+S
+(a)
+(b)
+θ
+x=1
+d
+x=2
+c
+c
+`
+{ p
+`
+(2,0.9)
+1
+Figure 4: (a) Illustration for Lemma 5; (b) Illustration for Lemma 6.
+the electronic journal of combinatorics 12 (2005), #R37
+7
+Lemma 6 Let S be a λ × λ square with λ ∈[1, 1.01] such that one corner of S touches
+the x-axis and S is entirely above the x-axis. Assume that two adjacent edges e1 and e2
+of S intersect line L : y = 1, point (1, 1) is not in S, point (2, 0.9) is on an edge e2 of S.
+Let c be the length of the intersection of S and L, d be the area of the triangle enclosed
+by S and L, and p′ = (1, 1 −c′) be the crossing point of e1 and line x = 1 (see Fig. 4(b)).
+Then d + 0.5c + 0.5 −0.5c′ > 1 holds.
+2
+Proof: For values d, c, −c′ for a λ × λ square S with λ > 1, we can get smaller d, c,
+−c′ choosing a λ′ × λ′ square S with 1 ≤λ′ < λ. Then we only consider the case of
+λ = 1. Let θ ∈(0, π/2] be the angle made by e1 and L : y = 1. By calculation, we have
+d = t(1 −t)/(1 + t), c = (t + t2)/(1 + t), and c′ = 2t(t(1 −t)2 −0.2t)/(1 −t2)2. To have
+c′ > 0 (i.e., to keep (1, 1) outside S), t(1 −t)2 −0.2t > 0 (i.e., t < 1 −
+√
+0.2) must hold.
+Note that c = 1 −d holds. To prove d + 0.5c + 0.5 −0.5c′ > 1, it suﬃces to show that
+d > c′, i.e.,
+t(1 −t)
+1 + t
+> 2t(t(1 −t)2 −0.2t)
+(1 −t2)2
+,
+(0 < t < 1 −
+√
+0.2).
+For this, we show f(t) = (1 −t)2(1 −t2) −2(t(1 −t)2 −0.2t) ≥0. We have f(t) =
+(1 −t)2(2 −(1 + t)2) + 0.4t, which is positive for 0 < t ≤
+√
+2 −1. On the other hand, for
+0.41 <
+√
+2 −1 < t < 1 −
+√
+0.2 < 0.56, we have (1 −0.41)2(2 −(1 + 0.56)2) + 0.4 · 0.41 > 0.
+This completes the proof of the lemma.
+2
+5
+Proof of Lemma 1
+Throughout this section, S denotes a λ × λ square with λ ∈(1, 1.01] that is entirely
+contained in a given a × b rectangle R = [0, a] × [0, b]. We prove that σ(S) > 1, from
+which Lemma 1 follows. We distinguish the following seven cases:
+Case-1: S is contained completely inside R∗= [1, a −1] × [1, b −1].
+Case-2: S is not completely contained inside R∗, the center of S is inside R∗, S does not
+contain any point in Q as its interior point, and there is no line segment Li ∈U
+that intersects two nonadjacent edges of S.
+Case-3: The center of S is inside R∗, S does not contain any point in Q as its interior
+point, and there is a line segment Li that intersects two nonadjacent edges of S.
+Case-4: The center of S is inside R∗, and S contains a point in Q as its interior point.
+Case-5: The center of S belongs to the rectangle [0, 1] × [0, 1].
+Case-6: The center of S belongs to the rectangle [1, a−1]×[0, 1], and line y = 1 intersects
+two adjacent edges of S.
+the electronic journal of combinatorics 12 (2005), #R37
+8
+Case-7: The center of S belongs to the rectangle [1, a−1]×[0, 1], and line y = 1 intersects
+two nonadjacent edges of S.
+The case where the center of S belongs to one of the rectangles [a −1, a] × [0, 1],
+[0, 1] × [b −1, b] and [a −1, a] × [b −1, b] can be treated analogously with Case-5. Also
+the case where the center of S belongs to one of the rectangles [1, a −1] × [b −1, b],
+[0, 1] × [1, b −1] and [a −1, a] × [1, b −1] can be treated in a similar way of Cases-6 and 7.
+In Case-1, we easily see that σ(S) ≥σ(S; R∗) = λ2 > 1 holds. The rest of the cases
+will be discussed in the subsequent subsections.
+5.1
+Case-2
+In this case, S is not completely contained inside R∗, the center of S is inside R∗, S does
+not contain any point in Q as its interior point, and there is no line segment Li ∈U that
+intersects two nonadjacent edges of S. Then there is a line segment Li ∈U that intersects
+two adjacent edges of S, cutting out from S a triangle Ti that is not covered by R∗(see
+Fig. 5). For each of all those line segments Li, let di be the area of the triangle Ti, and ci
+be the length of the intersection of Li and S (some of these triangles may be overlapping,
+as illustrated by S3 in Fig. 5). By Lemma 4, we have 0.5ci −di > 0 for all such Li. This
+implies that σ(S; Li) = 0.5ci compensates the loss di in σ(S; R∗). Thus σ(S) is not less
+than that of a λ × λ square S which is completely contained in R∗. Therefore, σ(S) > 1.
+S1
+S3
+S2
+Figure 5: Illustration for λ × λ squares in Case-2.
+5.2
+Case-3
+In this subsection, we consider the case where the center of S is inside R∗, S does not
+contain any point in Q as its interior point, and there is a line segment Li that intersects
+two nonadjacent edges of S. The length of the intersection of Li and S is at least λ > 1.
+Then if there are two such line segments Li and Li′, then σ(S) ≥σ(S; Li) + σ(S; Li′) ≥
+λ × 0.5 × 2 > 1. Assume that there is exactly one such line segment Li, which cuts out
+from S an quadrangle uncovered by R∗. From the above observation using Lemma 4,
+the electronic journal of combinatorics 12 (2005), #R37
+9
+we can assume that there is no other line segment Lj ∈U that cuts out from S an
+uncovered triangle Tj. Since the center is in R∗and σ(S; R∗) ≥0.5λ2, we have σ(S) ≥
+σ(S; R∗) + σ(S; Li) ≥0.5λ2 + 0.5λ > 1.
+5.3
+Case-4
+In this case, the center of S is inside R∗, S contains a point in Q as its interior point.
+We show that this case can be reduced to Case-2. Assume that S contains point (1, 0.9)
+(the case where S contains other point in Q can be treated analogously). To estimate
+the minimum σ(S), we temporarily replace the point (1, 0.9) with line segment L′ =
+[(1, 0.9), (1, 0)], setting the score of L′ per length to be 0.5 (note that the total score of
+L′ is 0.45, the same as that of point (1, 0.9)). If S contains other points in Q, we replace
+each of them in a similar manner. With this modiﬁcation, the score of S never increases
+and the argument in Case-2 can be applied, indicating σ(S) > 1.
+5.4
+Case-5
+We start with the following lemma to handle Cases-5, 6 and 7.
+Lemma 7 Let S be a λ × λ square with λ ∈(1, 1.01] that is entirely contained in R.
+Assume that the center of S belongs to the rectangle [0, a] × [0, 1]. Then
+(i) The length c of the intersection of S and line L : y = 0.9 is more than 1.
+(ii) If the center of S belongs to the square [0, 1] × [0, 1], then S contains three points
+(1, 1) and (1, 0.9), (0.9, 1) ∈Q as its interior points.
+(iii) S contains at least one point in Q ∪P.
+(iv) σ(S; R∗) > 0.
+Proof: (i) If L intersects two nonadjacent edges of S, then c ≥λ > 1. Assume that L
+intersects two adjacent edges of S. If the center is below L then we only have to consider
+the case where one corner of S touches the x-axis, and in this case c > 1 follows from
+Lemma 3 with h = 0.9. In the other case (i.e., the center of S is situated between L and
+line y = 1), c > 1 holds by Lemma 2 with h = 0.1.
+(ii) It is known that any unit square inside the ﬁrst quadrant whose center is in
+[0, 1] × [0, 1] contains the point (1, 1) (for example, see [3]). Then S contains (1, 1) as
+its interior point since λ > 1. We show that S contains (1, 0.9) (we can show that S
+contains (0.9, 1) analogously). By (i), S contains one of the points (0, 0.9) and (1, 0.9).
+Assume that S contains (0, 0.9) but not (1, 0.9). This can occur only when one corner of
+S attaches the y-axis at the point (0, 0.9). Let e and e′ be the edges of S that are not
+incident to the point (0, 0.9). Since any point on e and e′ has distance at least λ > 1 from
+the (0, 0.9), S must contain (1, 0.9) as its interior point.
+(iii) Immediate from (i) and (iii).
+the electronic journal of combinatorics 12 (2005), #R37
+10
+(iv) We easily see that σ(S; R∗) > 0 holds from λ > 1 if the center of S belongs to the
+rectangle [1, a −1] × [0, 1]; σ(S; R∗) > 0 holds from (ii) otherwise.
+2
+In Case-5, the center of S belongs to the rectangle [0, 1] × [0, 1]. Then by Lemma 7(ii)
+S contains (1, 0.9), (0.9, 1) ∈Q and line segments [(1, 0.9), (1, 1)] and [(0.9, 1), (1, 1)], and
+thereby σ(S) ≥σ(S; R∗) + 0.45 × 2 + 0.1 × 2 × 0.5 > 1.
+5.5
+Case-6
+In this case, the center of S belongs to the rectangle [1, a −1] × [0, 1], and line y = 1
+intersects two adjacent edges e1 and e2 of S. Let L′ be the line segment obtained as the
+intersection of line y = 1 and S, c be the length of L′, and d be the area of the triangle
+T enclosed by L′, e1 and e2.
+We ﬁrst assume that S contains a point in P and none of points (0.9, 1), (a−0.9, 1) ∈Q.
+Then L′ is contained in L1. To estimate the minimum of d + 0.5c in this case, we can
+assume that one corner of S touches the x-axis. Assume that triangle T is contained
+in R∗. Since S contains T, L′ and a point in P, we have σ(S) ≥d + 0.5c + 0.5 > 1
+by Lemma 5. Even if T has an intersection with L2, σ(S) > 1 still holds by applying
+Lemma 4 to the triangle T ′ enclosed by L2 and S.
+We next consider the case where S contains a point in P and at least one of points
+(0.9, 1), (a −0.9, 1) ∈Q (say (0.9, 1)). Then S contains line segment [(0.9, 1), (1, 1)] and
+hence σ(S) ≥σ(S; R∗) + 0.5 + 0.45 + 0.05 > 1.
+We now consider the case where S contains no point in P. Then, by Lemma 7(iii), S
+contains at least one of points (1, 0.9), (a −1, 0.9) ∈Q. Assume that S contains (1, 0.9)
+(the case that S contains (a −1, 0.9) can be treated analogously). If S contains point
+(0.9, 1), then it contains line segments [(0.9, 1), (1, 1)] and [(1, 0.9), (1, 1)], and σ(S) ≥
+σ(S; R∗) + (0.45 + 0.1 × 0.5) × 2 > 1 holds. Similarly if S contains (a −1, 0.9), then we
+can show that S contains line segments [(a−1, 0.9), (a−1, 1)] and [(a−0.9, 1), (a−1, 1)],
+implying σ(S) ≥1. Then assume that S contains none of points (0.9, 1) and (a −1, 0.9).
+If S contains point (min{2, a −1}, 0.9) then σ(S) ≥0.45 × 2 + d + 0.5c > 1 by Lemma 5.
+Assume further that S does not contain point (min{2, a −1}, 0.9); a ≥3 is assumed (the
+case of a < 3 can be treated analogously). To estimate the minimum σ(S) in this case,
+we can assume that one corner of S touches the x-axis and point (2, 0.9) is on an edge of
+S. If point (1, 1) is in S, then σ(S; L3) + σ(S; Q) ≥0.5 and σ(S) ≥d + 0.5c + 0.5 > 1
+by Lemma 5. Assume that (1, 1) is not in S. Let p′ = (1, 1 −c′) be the crossing point
+of line segment [(1, 0.9), (1, 1)] and an edge of S, where line segment [p′, (1, 1)] is not
+covered by S. Note that σ(S; L1) = 0.5c and σ(S; L3) + σ(S; Q) = 0.5 −0.5c′. Then
+σ(S) ≥d + 0.5c + 0.5 −0.5c′, which is greater than 1 by Lemma 6.
+5.6
+Case-7
+Finally we consider the case where the center of S belongs to the rectangle [1, a−1]×[0, 1],
+and line y = 1 intersects two nonadjacent edges e1 and e2 of S. Let L′ be the line segment
+the electronic journal of combinatorics 12 (2005), #R37
+11
+obtained as the intersection of line y = 1 and S, and c be the length of L′. Then c ≥λ > 1
+since y = 1 intersects two nonadjacent edges of S. If L′ is contained in L1 (i.e., S contains
+none of (0.9, 1), (a−0.9, 1) ∈Q) and S contains a point in P, then σ(S) ≥0.5c + 0.5 > 1.
+We next consider the case where S contains one of (0.9, 1), (a −0.9, 1) ∈Q. If S
+contains both (0.9, 1) and (a−0.9, 1), then L1 is entirely contained in S, implying σ(S) ≥
+σ(S; R∗) + (0.45 + 0.05) × 2 > 1. Assume that S contains (0.9, 1) but not (a −0.9, 1) (the
+other case can be treated analogously). By Lemma 7(iii), S contains (2, 0.9) or (1,0.9).
+In any case, S contains line segment [(0.9, 1), (1, 1)] and point (2, 0.9) (or line segment
+[(1, 0.9), (1, 1)]), indicating σ(S) ≥σ(S; R∗) + 0.5 + 0.5 > 1.
+We ﬁnally consider the case where L′ is contained in L1 and S contains no point in P.
+Then by Lemma 7(iii) S contains (1, 0.9) or (a −1, 0.9); We assume that (1, 0.9) is in
+S (the other case can be treated analogously). If S contains (1, 1), then it also contains
+line segment [(1, 0.9), (1, 1)] and satisﬁes σ(S) ≥0.5c + 0.5 > 1. Hence the remaining
+case is that S contains (1, 0.9) but none of (1, 1) and (min{2, a −1}, 0.9) (see Fig. 6).
+To estimate the minimum σ(S) in this case, we can assume that S touches the x-axis
+(allowing it to violate the condition that y = 1 intersects two nonadjacent edges of S).
+Now y = 1 intersects two adjacent edges of S and this case has already been discussed in
+Case-6.
+S
+y=1
+Figure 6:
+Illustration for the case where S contains (1, 0.9) but none of (1, 1) and
+(min{2, a −1}, 0.9) in Case-7.
+This completes the proof of Lemma 1.
+6
+Concluding Remarks
+In this paper, we have established a nontrivial upper bound on the number of unit squares
+that can be packed into a rectangle with given side lengths. With this bound, we have
+derived a stronger lower bound on s(N) and determined that s(n2 −1) = s(n2 −2) = n
+for all integers n ≥2. Our unavoidable set U can be seen as a modiﬁcation of the entire
+area R so that the total score becomes less than the area of R by replacing the boundary
+part of R with a set of points and line segments with appropriate scores. This technique
+the electronic journal of combinatorics 12 (2005), #R37
+12
+can be easily applied to the problem of packing unit squares into other types of convex
+polygons such as regular k-gons (k ≥3) by modifying the deﬁnition of endpoints in Q
+and their scores.
+Acknowledgment
+We would like to express our gratitude to the anonymous referees whose suggestions
+contributed to improving the written style.
+This research was partially supported by
+a Scientiﬁc Grant in Aid from the Ministry of Education, Culture, Sports, Science and
+Technology of Japan.
+References
+[1] H. T. Croft, K. J. Falconer, and R. K. Guy, Unsolved Problems in Geometry, Springer
+Verlag, Berlin (1991) 108–114.
+[2] P. Erd˝os and R. L. Graham, On packing squares with equal squares, J. Combin.
+Theory Ser. A, 19 (1975) 119–123.
+[3] E. Friedman, Packing unit squares in squares: A survey and new results, The Elec-
+tronic Journal of Combinatorics, Dynamic Surveys (#DS7), (2000).
+[4] F. G¨obel, Geometrical packing and covering problems, in Packing and Covering in
+Combinatorics, A. Schrijver (ed.), Math Centrum Tracts, 106 (1979) 179–199.
+[5] M. J. Kearney and P. Shiu, Eﬃcient packing of unit squares in a square, The Elec-
+tronic Journal of Combinatorics, 9 (2002) (#R14).
+the electronic journal of combinatorics 12 (2005), #R37
+13

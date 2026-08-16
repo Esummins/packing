@@ -1,0 +1,220 @@
+{{short description|Two-dimensional packing problem}} 
+{{CS1 config|mode=cs2}}
+'''Square packing''' is a [[packing problem]] where the objective is to determine how many [[Congruence (geometry)|congruent]] [[square]]s can be packed into some larger shape, often a square or circle.
+
+==In a square==
+'''Square packing in a square''' is the problem of determining the maximum number of [[unit square]]s (squares of side length one) that can be packed inside a larger square of side length <math>a</math>. If <math>a</math> is an [[integer]], the answer is <math>a^2,</math> but the precise – or even [[asymptotic]] – amount of unfilled space for an arbitrary non-integer <math>a</math> is an open question.<ref name=Brass2005>{{citation |last1=Brass |first1=Peter |last2=Moser |first2=William |last3=Pach |first3=János |author3-link=János Pach |year=2005 |title=Research Problems in Discrete Geometry |publisher=Springer |location=New York |isbn=978-0387-23815-9 |mr=2163782 |lccn=2005924022 |page=45 |url=https://books.google.com/books?id=WehCspo0Qa0C&pg=PA45}}</ref>
+
+{{multiple image|total_width=540
+|image1=5 kvadratoj en kvadrato.svg
+|caption1=5 unit squares in a square of side length <math>2+1/\sqrt{2}\approx 2.707</math>
+|image2=10 kvadratoj en kvadrato.svg
+|caption2=10 unit squares in a square of side length <math>3+1/\sqrt{2}\approx 3.707</math>
+|image3=Packing_11_unit_squares_in_a_square_with_side_length_3.87708359....svg
+|caption3=11 unit squares in a square of side length
+<math>a\approx 3.877084</math>
+}}
+The smallest value of <math>a</math> that allows the packing of <math>n</math> unit squares is known when <math>n</math> is a perfect square (in which case it is <math>\sqrt{n}</math>), as well as for <math>n={}</math>2, 3, 5, 6, 7, 8, 10, 13, 14, 15, 24, 34, 35, 46, 47, and 48. For most of these numbers (with the exceptions only of 5 and 10), the packing is the natural one with axis-aligned squares, and <math>a</math> is <math>\lceil\sqrt{n}\,\rceil</math>, where <math>\lceil\,\ \rceil</math> is the [[ceiling function|ceiling]] (round up) function.<ref name=ks02/><ref>{{citation
+ | last = Bentz | first = Wolfram
+ | year = 2010
+ | title = Optimal packings of 13 and 46 unit squares in a square
+ | journal = The Electronic Journal of Combinatorics
+ | volume = 17
+ | article-number = R126
+ | doi = 10.37236/398
+ | mr = 2729375
+ | url = https://www.combinatorics.org/Volume_17/Abstracts/v17i1r126.html
+| arxiv = 1606.03746
+ }}</ref>
+The figure shows the optimal packings for 5 and 10 squares, the two smallest numbers of squares for which the optimal packing involves tilted squares.<ref name="survey">{{citation
+ | last = Friedman
+ | first = Erich
+ | year = 2009
+ | title = Packing unit squares in squares: a survey and new results
+ | journal = [[Electronic Journal of Combinatorics]]
+ | volume = 1000
+ | doi = 10.37236/28
+ | article-number = DS7 (version Aug 14, 2009)
+ | mr = 1668055
+ | url = http://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7
+ | doi-access = free
+ | access-date = 2018-02-23
+ | archive-date = 2018-02-24
+ | archive-url = https://web.archive.org/web/20180224053022/http://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7
+ | url-status = live
+ }}</ref><ref>{{citation
+ | last = Stromquist
+ | first = Walter
+ | year = 2003
+ | title = Packing 10 or 11 unit squares in a square
+ | journal = [[Electronic Journal of Combinatorics]]
+ | volume = 10
+ | doi = 10.37236/1701
+ | mr = 2386538
+ | article-number = R8
+ | url = http://www.combinatorics.org/Volume_10/Abstracts/v10i1r8.html
+ | access-date = 2011-06-01
+ | archive-date = 2011-06-04
+ | archive-url = https://web.archive.org/web/20110604002838/http://www.combinatorics.org/Volume_10/Abstracts/v10i1r8.html
+ | url-status = live
+ }}</ref>
+
+The smallest unresolved case is <math>n=11</math>.  It is known that 11 unit squares cannot be packed in a square of side length less than <math>\textstyle 2+\frac{4}{\sqrt{5}} \approx 3.789</math>. By contrast, the tightest known packing of 11 squares is inside a square of side length approximately 3.877084 found by [[Walter Trump]].<ref name=survey /><ref>The 2000 version of {{harvtxt|Friedman|2009}} listed this side length as 3.8772; the tighter bound stated here is from {{citation
+ | last1 = Gensane | first1 = Thierry
+ | last2 = Ryckelynck | first2 = Philippe
+ | year = 2005
+ | title = Improved dense packings of congruent squares in a square
+ | journal = [[Discrete & Computational Geometry]]
+ | mr = 2140885
+ | doi = 10.1007/s00454-004-1129-z
+ | doi-access = free
+ | volume = 34
+ | issue = 1
+ | pages = 97–109
+}}</ref>
+
+The smallest case where the best known packing involves squares at three different angles is <math>n=17</math>. It was discovered in 1998 by John Bidwell, an undergraduate student at the [[University of Hawaiʻi]], and has side length <math>a\approx 4.6756</math>.<ref name=survey />
+
+[[File:Mutilated chessboard vectorized.svg|thumb|upright=0.6|A [[Mutilated chessboard problem|mutilated chessboard]], an optimal packing for {{math|''n''<sup>2</sup> &minus; 2}} squares]]
+
+Below are the minimum solutions for values up to <math>n = 16</math>; the case <math>n=11</math> remains unresolved.<ref>{{mathworld|id=SquarePacking |title=Square Packing }}</ref>
+{| class="wikitable" style="text-align:center"
+!Number of unit squares <math>n</math>
+! Minimal side length <math>a</math> of big square
+|-
+|1
+| 1
+|-
+|2, 3, 4
+| 2
+|-
+|5
+|<math>2+\frac{\sqrt{2}}{2} \approx 2.707\ldots</math>
+|-
+|6, 7, 8, 9
+|3
+|-
+|10
+|<math>3+\frac{\sqrt{2}}{2} \approx 3.707\ldots</math>
+|-
+|11
+|3.877... ?
+|-
+|12, ..., 16
+| 4
+|}
+
+Some numbers of unit squares are never the optimal number in a packing. In particular,
+if a square of size <math>a\times a</math> allows the packing of <math>n^2-2</math> unit squares, then it must be the case that <math>a\ge n</math>
+and that a packing of <math>n^2</math> unit squares is also possible.<ref name="ks02">{{Cite journal |last=Nagamochi |first=Hiroshi |date=2005-07-30 |title=Packing Unit Squares in a Rectangle |url=https://www.combinatorics.org/ojs/index.php/eljc/article/view/v12i1r37 |journal=The Electronic Journal of Combinatorics |volume=12 |language=en |article-number=R37 |doi=10.37236/1934 |issn=1077-8926|doi-access=free }}</ref>
+
+===Asymptotic results===
+{{unsolved|mathematics|What is the asymptotic growth rate of wasted space for square packing in a half-integer square?}}
+
+For larger values of the side length <math>a</math>, the exact number of unit squares that can pack an <math>a\times a</math> square remains unknown.
+It is always possible to pack a <math>\lfloor a\rfloor \!\times\! \lfloor a\rfloor</math> grid of axis-aligned unit squares,
+but this may leave a large area, approximately <math>2a(a-\lfloor a\rfloor)</math>, uncovered and wasted.<ref name="survey" />
+Instead, [[Paul Erdős]] and [[Ronald Graham]] showed that for a different packing by tilted unit squares, the wasted space could be significantly reduced to <math display="inline">O(a^{7/11}) \subseteq o(a^{0.637})</math> (the latter written in [[little o notation]]).<ref>{{citation
+ | last1 = Erdős | first1 = P. | author1-link = Paul Erdős
+ | last2 = Graham | first2 = R. L. | author2-link = Ronald Graham
+ | year = 1975
+ | title = On packing squares with equal squares
+ | journal = [[Journal of Combinatorial Theory]]
+ | series = Series A
+ | doi = 10.1016/0097-3165(75)90099-0
+ | doi-access = free
+ | mr = 0370368
+ | volume = 19
+ | pages = 119–123
+ | url = http://www.math.ucsd.edu/~sbutler/ron/75_06_squares.pdf
+ }}</ref>
+Later, Graham and [[Fan Chung]] further reduced the wasted space to <math display="inline">O(a^{0.631})</math>,<ref>{{Cite journal |last1=Chung |first1=Fan |last2=Graham |first2=Ron |date=2009-08-01 |title=Packing equal squares into a large square |url=https://www.sciencedirect.com/science/article/pii/S0097316509000272 |journal=Journal of Combinatorial Theory, Series A |volume=116 |issue=6 |pages=1167–1175 |doi=10.1016/j.jcta.2009.02.005 |issn=0097-3165|url-access=subscription }}</ref> and subsequent work reduced the wasted space to <math display="inline">O(a^{0.625})</math>,<ref>{{Citation |last1=Wang |first1=Shuang |title=A New Result on Packing Unit Squares into a Large Square |date=2016-04-09 |arxiv=1603.02368 |last2=Dong |first2=Tian |last3=Li |first3=Jiamin}}</ref> and then <math display="inline">O(a^{0.6})</math>.<ref>{{Cite thesis |last=McClenagan |first=Rory |title=Asymptotic square packing problems |date=2024 |degree=Master of Science |publisher=University of Northern British Columbia |url=https://unbc.arcabc.ca/islandora/object/unbc%3A59553 |doi=10.24124/2024/59553 |page=47|url-access=subscription }}</ref>
+However, as [[Klaus Roth]] and [[Bob Vaughan]] [[mathematical proof|proved]], all solutions must waste space at least <math>\Omega\bigl((a \cdot |a-\operatorname{round} a|)^{1/2}\bigr)</math>. In particular, when <math>a</math> is a [[half-integer]], the wasted space is at least proportional to its [[square root]].<ref>{{citation
+ | last1 = Roth | first1 = K. F. | author1-link = Klaus Roth
+ | last2 = Vaughan | first2 = R. C. | author2-link = Bob Vaughan
+ | year = 1978
+ | title = Inefficiency in packing squares with unit squares
+ | journal = [[Journal of Combinatorial Theory]]
+ | series = Series A
+ | doi = 10.1016/0097-3165(78)90005-5
+ | doi-access = free
+ | mr = 0487806
+ | volume = 24
+ | issue = 2
+ | pages = 170–186
+}}</ref> The precise [[asymptotic analysis|asymptotic growth rate]] of the wasted space, even for half-integer side lengths, remains an [[open problem]].<ref name=Brass2005/>
+
+== In a circle ==
+'''Square packing in a circle''' is a related problem of packing ''n'' unit squares into a [[circle]] with radius as small as possible. For this problem, good solutions are known for ''n'' up to 35. Here are the minimum known solutions for up to <math>n = 12</math> (although only the cases <math>n = 1</math> and <math>n = 2</math> are known to be optimal):<ref>{{citation |last=Friedman |first=Erich |date= |title=Squares in Circles |url=https://erich-friedman.github.io/packing/squincir/}}</ref>
+
+{| class="wikitable" style="text-align:center"
+!Number of squares
+!Circle radius
+|-
+|1
+|<math>\sqrt{2}/2 \approx 0.707\ldots</math>
+|-
+|2
+||<math>\sqrt{5}/2 \approx 1.118\ldots</math>
+|-
+|3
+|<math>5\sqrt{17}/16 \approx 1.288\ldots</math>
+|-
+|4
+|<math>\sqrt{2} \approx 1.414\ldots</math>
+|-
+|5
+|<math>\sqrt{10}/2 \approx 1.581\ldots</math>
+|-
+|6
+|1.688...
+|-
+|7
+|<math>\sqrt{13}/2 \approx 1.802\ldots</math>
+|-
+|8
+|1.978...
+|-
+|9
+|<math>\sqrt{1105}/16 \approx 2.077\ldots</math>
+|-
+|10
+|<math>3\sqrt{2}/2 \approx 2.121\ldots</math>
+|-
+|11
+|2.214...
+|-
+|12
+|<math>\sqrt{5} \approx 2.236\ldots</math>
+|}
+
+== In other shapes ==
+Packing squares into other shapes can have high [[computational complexity]]: testing whether a given number of axis-parallel unit squares can fit into a given [[polygon]] is [[NP-complete]]. It remains NP-complete even for a [[simple polygon]] (with no holes) that is [[Orthogonal convexity|orthogonally convex]], with [[rectilinear polygon|axis-parallel sides]], and with [[half-integer]] vertex coordinates.<ref>{{citation
+ | last1 = Abrahamsen | first1 = Mikkel
+ | last2 = Stade | first2 = Jack
+ | arxiv = 2404.09835
+ | contribution = Hardness of packing, covering and partitioning simple polygons with unit squares
+ | doi = 10.1109/FOCS61266.2024.00087
+ | pages = 1355–1371
+ | publisher = IEEE
+ | title = 65th IEEE Annual Symposium on Foundations of Computer Science, FOCS 2024, Chicago, IL, USA, October 27–30, 2024
+ | year = 2024
+ | isbn = 979-8-3315-1674-1
+ }}</ref>
+
+==See also==
+*[[Circle packing in a square]]
+*[[Squaring the square]]
+*[[Rectangle packing]]
+*[[Moving sofa problem]]
+
+==References==
+{{reflist}}
+
+==External links==
+*{{citation |title=Squares in Squares |series=Erich's Packing Center |last=Friedman |first=Erich |website=Github |url=https://kingbird.myphotos.cc/packing/squares_in_squares.html}}
+
+{{Packing_problems}}
+ 
+[[Category:Packing problems]]
+[[Category:Unsolved problems in geometry]]

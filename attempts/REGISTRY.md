@@ -6,7 +6,7 @@ Status ∈ {planned, running, done-success, done-negative, abandoned}.
 
 | id | owner | goal | method | status | outcome | dir |
 |---|---|---|---|---|---|---|
-| A01-literature | lit agent | establish true state of the art for s(11) and methods | web/arXiv sweep, fetch PDFs | planned | | attempts/A01-literature |
+| A01-literature | lit agent | establish true state of the art for s(11) and methods | web/arXiv sweep, fetch PDFs | done-success | Confirmed 3.788854 (Stromquist 2003, unimproved 2003–2026) ≤ s(11) ≤ 3.8770835900228 (Trump 1979 rigid packing; exact octic public via Ellsworth 2023; G–R 2005 only refined digits; unimproved by 2024–26 SA searches); s(12) also open; "Vienna" = Montanher–Neumaier et al. JOGO 2019 (3 squares in a circle); no formalisation exists; see docs/literature.md | attempts/A01-literature |
 | A02-stromquist-analysis | analysis agent | understand Stromquist's 3.7889 proof, locate slack | read paper, reconstruct argument | planned | | attempts/A02-stromquist-analysis |
 | A03-upper-reconstruct | UB agent | rebuild best-known packing exactly, rational certificate | numeric search → contact graph → exact solve → Fraction verifier | planned | | attempts/A03-upper-reconstruct |
 | A04-upper-search | search agent | find a packing with s < 3.877084 | multi-start penalty optimisation / basin hopping, long runs | planned | | attempts/A04-upper-search |
