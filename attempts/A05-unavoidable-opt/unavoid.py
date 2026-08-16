@@ -22,6 +22,10 @@ import numpy as np
 from scipy.optimize import minimize, linprog
 from scipy import ndimage
 
+# optional: ignore squares whose centre is within WALL_DELTA of the boundary of the centre domain
+# (used only for the "how much could a wall case-argument buy" experiment; must be 0 for real claims)
+WALL_DELTA = 0.0
+
 # ----------------------------------------------------------------------------------------
 # evaluator
 # ----------------------------------------------------------------------------------------
@@ -49,8 +53,8 @@ def uncov_grid(P, s0, nth=64, nc=80):
     for i, t in enumerate(th):
         ct, st = np.cos(t), np.sin(t)
         w = ct + st
-        CX = w / 2 + (s0 - w) * U
-        CY = w / 2 + (s0 - w) * V
+        CX = w / 2 + WALL_DELTA + (s0 - w - 2 * WALL_DELTA) * U
+        CY = w / 2 + WALL_DELTA + (s0 - w - 2 * WALL_DELTA) * V
         dx = px - CX[None]
         dy = py - CY[None]
         u = ct * dx + st * dy
@@ -69,8 +73,8 @@ def _f_uv(x, P, s0):
     t = min(max(t, 0.0), np.pi / 2)
     ct, st = np.cos(t), np.sin(t)
     w = ct + st
-    cx = w / 2 + (s0 - w) * u
-    cy = w / 2 + (s0 - w) * v
+    cx = w / 2 + WALL_DELTA + (s0 - w - 2 * WALL_DELTA) * u
+    cy = w / 2 + WALL_DELTA + (s0 - w - 2 * WALL_DELTA) * v
     return -uncov_point(P, s0, cx, cy, t)
 
 
@@ -81,8 +85,8 @@ def _d_batch(P, s0, X):
     t = np.clip(X[:, 2], 0.0, np.pi / 2)
     ct, st = np.cos(t), np.sin(t)
     w = ct + st
-    cx = w / 2 + (s0 - w) * u
-    cy = w / 2 + (s0 - w) * v
+    cx = w / 2 + WALL_DELTA + (s0 - w - 2 * WALL_DELTA) * u
+    cy = w / 2 + WALL_DELTA + (s0 - w - 2 * WALL_DELTA) * v
     dx = P[None, :, 0] - cx[:, None]
     dy = P[None, :, 1] - cy[:, None]
     uu = ct[:, None] * dx + st[:, None] * dy
@@ -179,8 +183,8 @@ def worst_configs(P, s0, nth=64, nc=80, K=40, window=0.08, refine=True, dedup=1e
         u, v, t = min(max(x0[0], 0), 1), min(max(x0[1], 0), 1), min(max(x0[2], 0), np.pi / 2)
         ct, st = np.cos(t), np.sin(t)
         w = ct + st
-        cx = w / 2 + (s0 - w) * u
-        cy = w / 2 + (s0 - w) * v
+        cx = w / 2 + WALL_DELTA + (s0 - w - 2 * WALL_DELTA) * u
+        cy = w / 2 + WALL_DELTA + (s0 - w - 2 * WALL_DELTA) * v
         out.append((cx, cy, t, val))
     out.sort(key=lambda r: -r[3])
     kept = []
@@ -236,7 +240,9 @@ class Param:
                 elif tag == "c":
                     rows += [({}, s / 2), ({}, s / 2)]
             elif group == "axes":
-                if tag == "g":
+                if tag == "G":   # fixed corner orbit (1,1),(s-1,1),(1,s-1),(s-1,s-1)  (Lemma 1 anchor)
+                    rows += [({}, 1), ({}, 1), ({}, s - 1), ({}, 1), ({}, 1), ({}, s - 1), ({}, s - 1), ({}, s - 1)]
+                elif tag == "g":
                     x, y = k, k + 1
                     rows += [({x: 1}, 0), ({y: 1}, 0), ({x: -1}, s), ({y: 1}, 0),
                              ({x: 1}, 0), ({y: -1}, s), ({x: -1}, s), ({y: -1}, s)]; k += 2
@@ -302,7 +308,7 @@ class Param:
     def _npar(self, tag):
         if self.group == "none":
             return 2
-        return {"g": 2, "v": 1, "h": 1, "c": 0, "d": 1, "a": 1, "x": 1}[tag]
+        return {"g": 2, "v": 1, "h": 1, "c": 0, "d": 1, "a": 1, "x": 1, "G": 0}[tag]
 
     def z_from_P(self, P):
         """least squares fit of z to a point set (used for warm starts across s0)."""
@@ -508,7 +514,7 @@ def _set_orbit(param, z, oi, target):
     g = param.group
     if g == "none" or tag == "g":
         z[k0], z[k0 + 1] = tx, ty
-    elif tag == "c":
+    elif tag in ("c", "G"):
         pass
     elif g == "axes":
         if tag == "v":
@@ -536,7 +542,7 @@ def _set_orbit(param, z, oi, target):
 
 def orbit_points(param, oi):
     tag, k0, r0 = param.orbits[oi]
-    npts = {"none": {"g": 1}, "C2": {"g": 2, "c": 1}, "axes": {"g": 4, "v": 2, "h": 2, "c": 1},
+    npts = {"none": {"g": 1}, "C2": {"g": 2, "c": 1}, "axes": {"g": 4, "v": 2, "h": 2, "c": 1, "G": 4},
             "diag": {"g": 4, "d": 2, "a": 2, "c": 1}, "D4": {"g": 8, "x": 4, "d": 4, "c": 1}}[param.group][tag]
     return list(range(r0 // 2, r0 // 2 + npts))
 

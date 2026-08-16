@@ -1,20 +1,20 @@
 import PackingCert.Checker
 import PackingCert.Data
+import PackingCert.DataTight
 
 /-!
-# Kernel-only variant (no `native_decide`, no `ofReduceBool` axiom)
+# Kernel-only variants (no `native_decide`, no extra axioms)
 
-Same statement as `PackingCert.trump11_ok`, proven with `decide` so that
-the proof term is checked by the Lean kernel using only its built-in
-GMP-accelerated `Nat` arithmetic.  This file is slower to build; if it becomes
-infeasible for a certificate it can be dropped from the default target.
+Same statements as in `Main.lean`, proven with `decide`, so the proof is
+checked by the Lean kernel using only its built-in GMP-accelerated `Nat`
+arithmetic.  `#print axioms` reports no axioms for these.
 -/
 
 namespace PackingCert
 
 open Data
 
-set_option maxRecDepth 100000 in
 theorem trump11_ok_kernel : checkPacking trump11 = true := by decide
+theorem trump11_tight_ok_kernel : checkPacking trump11_tight = true := by decide
 
 end PackingCert

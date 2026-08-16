@@ -11,6 +11,7 @@ from scipy import ndimage
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from unavoid import *
+from unavoid import _transfer
 from plot_set import plot
 
 

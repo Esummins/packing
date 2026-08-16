@@ -356,6 +356,23 @@ class ColOracle:
         return out, (cov.max() if len(cov) else 0.0)
 
 
+def save_state(M, path, extra=None):
+    st = dict(s=M.s, n=M.n, eps_geo=EPS_GEO, tau=float(M.obj) if M.obj is not None else None,
+              rows=[list(r) for r in M.rows], orbits=[[float(o["rep"][0]), float(o["rep"][1])] for o in M.orbits],
+              w=[float(v) for v in M.w] if M.w is not None else None,
+              y=[float(v) for v in M.y] if M.y is not None else None)
+    if extra: st.update(extra)
+    tmp = path + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(st, f)
+    os.replace(tmp, path)
+
+
+def load_state(path):
+    st = json.load(open(path))
+    return [tuple(o) for o in st["orbits"]], [tuple(r) for r in st["rows"]]
+
+
 # ------------------------------------------------------------------ driver
 def initial_rows(s, n_theta=10, cstep=0.1):
     out = []
@@ -371,7 +388,11 @@ def initial_rows(s, n_theta=10, cstep=0.1):
 
 
 def run(s, n=11, N0=38, max_iter=300, tol=1e-6, out=None, verbose=True, time_limit=None,
-        row_kw=None, col_kw=None, max_rows_add=1200, max_cols_add=60, init_atoms=None, init_rows=None):
+        row_kw=None, col_kw=None, max_rows_add=1200, max_cols_add=60, init_atoms=None, init_rows=None,
+        col_stop_iter=10**9, col_stop_cov=1.0, fine_row_kw=None, checkpoint=None):
+    """col_stop_iter / col_stop_cov: stop adding columns after that iteration or once maxcov < col_stop_cov
+    (row-only phase -> primal-feasible mu).  fine_row_kw: settings for a final fine row search.
+    checkpoint: path to write the full model state (all rows/orbits + solution) every iteration."""
     t0 = time.time()
     M = Model(s, n)
     # initial atoms: grid orbits (spacing s/N0) restricted to the fundamental triangle
@@ -402,9 +423,23 @@ def run(s, n=11, N0=38, max_iter=300, tol=1e-6, out=None, verbose=True, time_lim
         co = ColOracle(s, M.packing_images())
         over, maxcov = co.search(thresh=1.0 + tol, **ckw)
         nc = 0
-        for (x, y, c) in over[:max_cols_add]:
-            nc += M.add_orbit(x, y)
+        cols_on = (it < col_stop_iter) and (maxcov >= col_stop_cov)
+        if cols_on:
+            for (x, y, c) in over[:max_cols_add]:
+                nc += M.add_orbit(x, y)
         minmass = viol[0][3] if viol else 1.0
+        if nr == 0 and not cols_on and fine_row_kw:
+            # rows converged at coarse settings: run the fine search once before declaring convergence
+            rof = RowOracle(s, M.P, wp, **fine_row_kw)
+            violf = rof.search(thresh=1.0 - tol)
+            for (cx, cy, th, m) in violf[:max_rows_add]:
+                nr += M.add_row(cx, cy, th)
+            if violf:
+                minmass = min(minmass, violf[0][3])
+            if verbose:
+                print(f"    fine row search: minmass={violf[0][3] if violf else 1.0:.6f} +rows={nr}", flush=True)
+        if checkpoint:
+            save_state(M, checkpoint, dict(it=it, obj=obj, minmass=float(minmass), maxcov=float(maxcov)))
         hist.append(dict(it=it, obj=obj, rows=len(M.rows), orbits=len(M.orbits), atoms_nz=int((wp > 1e-9).sum()),
                          minmass=float(minmass), maxcov=float(maxcov), added_rows=nr, added_cols=nc, t=time.time() - t0))
         if verbose:
@@ -443,6 +478,11 @@ if __name__ == "__main__":
     ap.add_argument("--cstep", type=float, default=0.02)
     ap.add_argument("--time_limit", type=float, default=None)
     ap.add_argument("--warm", type=str, default=None, help="json result to warm start atoms/rows from")
+    ap.add_argument("--state", type=str, default=None, help="checkpoint state file to resume from (all rows/orbits)")
+    ap.add_argument("--col_stop_iter", type=int, default=10**9)
+    ap.add_argument("--col_stop_cov", type=float, default=1.0)
+    ap.add_argument("--max_cols_add", type=int, default=60)
+    ap.add_argument("--fine", action="store_true", help="final fine row search (n_theta=361, cstep=0.005)")
     a = ap.parse_args()
     out = a.out or f"results/v2_n{a.n}_s{a.s:.4f}.json"
     ia = ir = None
@@ -450,5 +490,10 @@ if __name__ == "__main__":
         wr = json.load(open(a.warm))
         ia = [tuple(x["rep"]) for x in wr["atoms"]]
         ir = [(p["cx"], p["cy"], p["theta"]) for p in wr["packing"]] + initial_rows(a.s)
+    if a.state:
+        ia, ir = load_state(a.state)
     run(a.s, n=a.n, N0=a.N0, max_iter=a.max_iter, out=out, time_limit=a.time_limit,
-        row_kw=dict(n_theta=a.n_theta, cstep=a.cstep), init_atoms=ia, init_rows=ir)
+        row_kw=dict(n_theta=a.n_theta, cstep=a.cstep), init_atoms=ia, init_rows=ir,
+        col_stop_iter=a.col_stop_iter, col_stop_cov=a.col_stop_cov, max_cols_add=a.max_cols_add,
+        fine_row_kw=(dict(n_theta=361, cstep=0.005, delta=0.001) if a.fine else None),
+        checkpoint=out.replace(".json", "_state.json"))

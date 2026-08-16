@@ -51,5 +51,22 @@
   "margin": 0.002,
   "float_max_uncoveredness": -0.0016498051490297927
  },
- "method": "see certs/verify_unavoidable.py (exact rational interval branch-and-bound, t=tan(theta/2))"
+ "method": "see certs/verify_unavoidable.py (exact rational interval branch-and-bound, t=tan(theta/2))",
+ "verification": {
+  "float_mode": {
+   "passed": true,
+   "boxes": 1149605,
+   "minsize": "1e-6",
+   "time_s": 45.8,
+   "note": "IEEE-double intervals with outward rounding (math.nextafter); no transcendental functions"
+  },
+  "fraction_mode": {
+   "passed": true,
+   "boxes": 863953,
+   "minsize": "1/1000000",
+   "cpu_time_s": 269.7,
+   "note": "pure fractions.Fraction arithmetic, t=tan(theta/2) rationalisation; run: python certs/verify_unavoidable.py certs/unavoidable_10pt_3.7416.json"
+  }
+ },
+ "note": "SANITY ARTEFACT ONLY: 3.741594 < Stromquist's proven 3.788854; this certificate does not improve s(11)."
 }
