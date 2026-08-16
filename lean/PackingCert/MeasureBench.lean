@@ -1,4 +1,5 @@
 import PackingCert.MeasureExample
+import PackingCert.MeasureData
 open PackingCert.Measure PackingCert.Measure.Example
 
 /-- Scaling test only (NOT a meaningful bound): atoms on a grid of spacing `1/k`
@@ -18,7 +19,8 @@ def run (label : String) (c : MCert) : IO Unit := do
   IO.println s!"{label}: atoms={c.atoms.length} ok={r.1} boxes={r.2} time={t1-t0}ms"
 
 /-- `lake exe measure_bench goebel <sideNum> <sideDen> <epsNum> <epsDen> <fuel>`
-    `lake exe measure_bench grid <sideNum> <sideDen> <k> <wNum> <wDen> <fuel>` -/
+    `lake exe measure_bench grid <sideNum> <sideDen> <k> <wNum> <wDen> <fuel>`
+    `lake exe measure_bench data <fuel>`   (the certificate in PackingCert/MeasureData.lean) -/
 def main (args : List String) : IO UInt32 := do
   match args with
   | ["goebel", sn, sd, en, ed, f] =>
@@ -31,4 +33,8 @@ def main (args : List String) : IO UInt32 := do
     let w : Rat := (wn.toInt!) / (wd.toInt!)
     run s!"grid side={side} k={k} w={w} fuel={f}" (gridCert side k.toNat! w f.toNat!)
     return 0
-  | _ => IO.println "usage: measure_bench goebel sN sD eN eD fuel | grid sN sD k wN wD fuel"; return 1
+  | ["data", f] =>
+    let c := { Data.a05_10pt with fuel := f.toNat! }
+    run s!"data side={c.side} n={c.n} fuel={f}" c
+    return 0
+  | _ => IO.println "usage: measure_bench goebel sN sD eN eD fuel | grid sN sD k wN wD fuel | data fuel"; return 1

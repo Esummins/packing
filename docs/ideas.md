@@ -30,6 +30,17 @@ must have a square at a "generic" angle. Can we prove strong restrictions on pac
 (e.g. at least k tilted squares, tilt in some interval) and then finish by I-L2/I-L4 on the reduced
 family? Status: open.
 
+**I-L6. LP-based branch-and-bound over packing structure ("case-LP", from A02 + advisor).** The pure
+measure LP saturates where its fractional packing reaches 11 (A07: ≈3.84–3.85). Beyond that, use
+integrality by case splits, exactly as Stromquist does by hand: pick a family F of placements (e.g.
+squares centred in a wall rectangle R that avoid a chosen point set P'). Branch YES: some square X of the
+packing lies in F ⇒ require μ(Q) ≥ 1+β for Q ∈ F, μ(Q) ≥ 1 otherwise; contradiction if total < 11+β.
+Branch NO: no square of the packing is in F ⇒ drop the coverage constraint on F entirely; contradiction if
+total < 11. Each branch is an LP; recurse (split F further, or split on other regions). This is LP-based
+branch and bound on the combinatorial structure of the packing and can in principle go all the way to
+3.877 if the tree stays finite; the certificate is a tree of measure certificates. Status: open, next
+after I-L2 is certified.
+
 ## Upper bound (beat 3.877084)
 
 **I-U1. Massive multi-start continuous optimisation** (penalty / augmented Lagrangian on overlap

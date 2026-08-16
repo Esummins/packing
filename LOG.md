@@ -101,3 +101,21 @@
 - A02 done: Stromquist proof fully reconstructed; two errata found (table value f(√(4/5)); Fig. 14 point G leaves
   a 1e-4 hole at centre (0.6427,1.3750), tilt 69.67° — repaired by G'=(.78,1.845)); theorem unaffected. Recommends
   "case-LP": LP for the bulk + Stromquist-style wall case splits, to push beyond the pure-LP ceiling.
+
+## 2026-08-16 — A06 (lean agent) — Lean 4 toolchain + checkers: done-success
+- Toolchain: elan 4.2.3, Lean 4.33.0 stable, Lake 5.0.0 (`~/.elan/bin`, 82 s install). Mathlib NOT installed:
+  `lake exe cache get` (v4.34.0-rc1, 8691 files, 9 min) filled the disk (31 GB → 1.6 GB free) and was rolled back;
+  bridge lemmas therefore remain on paper (sketch in lean/PackingCertMathlib/BridgeSketch.lean, unbuilt).
+- lean/PackingCert (core Lean only), `lake build` 4.7 s + 97 s for the measure theorem:
+  * UB: `checkPacking : Cert → Bool` (Int arithmetic; unit-square shape, strict containment, strict SAT
+    separation over the 8 edge vectors). `trump11_ok : checkPacking Data.trump11 = true` (side 969271/250000)
+    and `trump11_tight_ok` (side 3877083591023/10^12) by native_decide AND by axiom-free kernel `decide`
+    (1.3 s). Data generated from certs/trump11_certificate_int.json / _tight_int.json by lean/gen_cert_lean.py
+    (which re-checks in Fraction arithmetic first).
+  * LB: `checkMeasure : MCert → Bool` (Rat interval branch-and-bound over (t=tan θ/2, cx, cy), semantics aligned
+    with certs/verify_measure.py). `s11_ge_37416 : checkMeasure Data.a05_10pt = true` — A05's 10-point set at
+    s = 3.741594 (571k boxes, 93 s native / 97 s native_decide); `s5_gt_26` (perturbed Göbel). Kernel `decide`
+    does not work for Rat. Finding: unperturbed Göbel-type sets have zero margin (atom on the edge of wall-flush
+    squares) and are unverifiable by any box method — certificates must be backed off.
+- Files: lean/README.md, lean/gen_cert_lean.py, lean/gen_measure_lean.py, lean/PackingCert/MeasureBench.lean
+  (native timing exe), attempts/A06-lean-setup/notes.md (versions, timings, exact statements, gap analysis).

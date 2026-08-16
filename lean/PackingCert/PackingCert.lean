@@ -8,4 +8,5 @@ import PackingCert.Main
 import PackingCert.Kernel
 import PackingCert.Measure
 import PackingCert.MeasureExample
+import PackingCert.MeasureData
 import PackingCert.MeasureMain

@@ -35,10 +35,13 @@ def imul(alo, ahi, blo, bhi):
 
 
 class Verifier:
-    def __init__(self, s, atoms, weights, min_width=1e-5, batch=3000):
+    def __init__(self, s, atoms, weights, min_width=1e-5, batch=3000, cand=None):
         self.s = float(s)
-        self.P = np.asarray(atoms, dtype=float)
-        self.w = np.asarray(weights, dtype=float)
+        self.P_all = np.asarray(atoms, dtype=float)
+        self.w_all = np.asarray(weights, dtype=float)
+        self.cand = np.arange(len(self.w_all)) if cand is None else np.asarray(cand, dtype=int)
+        self.P = self.P_all[self.cand]
+        self.w = self.w_all[self.cand]
         self.w_lo = self.w * (1 - 1e-14)
         self.min_width = min_width
         self.batch = batch
@@ -78,7 +81,7 @@ class Verifier:
         for k in range(len(B)):
             if ok[k]:
                 if keep_subsets:
-                    sub = [] if empty[k] else np.nonzero(inside[k])[0].tolist()
+                    sub = [] if empty[k] else self.cand[np.nonzero(inside[k])[0]].tolist()
                     self.leaves.append((B[k].tolist(), "empty" if empty[k] else "mass", sub))
                 continue
             if max(wt[k], wx[k], wy[k]) < self.min_width:
@@ -93,13 +96,16 @@ class Verifier:
                 out.append(b[:4] + [b[4] + 1, 2 * b[5]]); out.append(b[:4] + [b[4] + 1, 2 * b[5] + 1])
         return out
 
-    def run(self, init_level=3, keep_subsets=True, verbose=True, max_fails=200, t_boxes=None):
+    def run(self, init_level=3, keep_subsets=True, verbose=True, max_fails=200, roots=None):
         n0 = 2 ** init_level
         stack = []
-        for i in (range(n0) if t_boxes is None else t_boxes):
-            for j in range(n0):
-                for k in range(n0):
-                    stack.append([init_level, i, init_level, j, init_level, k])
+        if roots is not None:
+            stack = [list(r) for r in roots]
+        else:
+            for i in range(n0):
+                for j in range(n0):
+                    for k in range(n0):
+                        stack.append([init_level, i, init_level, j, init_level, k])
         t0 = time.time(); depth = 0
         while stack:
             nxt = []
@@ -136,18 +142,65 @@ def load_cert(path):
     return cert, s, atoms, wts
 
 
+def region_candidates(s, P, root):
+    """atoms that can possibly lie in a unit square whose centre is in the root's c-range:
+    dist(p, c-box) <= sqrt(2)/2 + margin"""
+    lt, it, lx, ix, ly, iy = root
+    x1 = s * ix / 2 ** lx; x2 = s * (ix + 1) / 2 ** lx
+    y1 = s * iy / 2 ** ly; y2 = s * (iy + 1) / 2 ** ly
+    dx = np.maximum(0, np.maximum(x1 - P[:, 0], P[:, 0] - x2))
+    dy = np.maximum(0, np.maximum(y1 - P[:, 1], P[:, 1] - y2))
+    return np.nonzero(dx * dx + dy * dy <= (math.sqrt(0.5) + 1e-6) ** 2)[0]
+
+
+_G = {}
+
+
+def _init(s, atoms, wts, mw):
+    _G.update(s=s, atoms=np.asarray(atoms, float), wts=np.asarray(wts, float), mw=mw)
+
+
+def _work(root):
+    s, P, w, mw = _G["s"], _G["atoms"], _G["wts"], _G["mw"]
+    cand = region_candidates(s, P, root)
+    V = Verifier(s, P, w, min_width=mw, cand=cand)
+    ok = V.run(roots=[root], verbose=False, max_fails=20)
+    return root, ok, V.n_boxes, V.leaves, V.fails
+
+
+def verify_parallel(s, atoms, wts, mw=1e-5, nproc=4, level_t=3, level_c=4, verbose=True, keep_leaves=True):
+    from multiprocessing import Pool
+    roots = [[level_t, i, level_c, j, level_c, k] for i in range(2 ** level_t)
+             for j in range(2 ** level_c) for k in range(2 ** level_c)]
+    t0 = time.time()
+    leaves, fails, nb = [], [], 0
+    done = 0
+    with Pool(nproc, initializer=_init, initargs=(s, atoms, wts, mw)) as pool:
+        for root, ok, n, lv, fl in pool.imap_unordered(_work, roots, chunksize=4):
+            nb += n; done += 1
+            if keep_leaves:
+                leaves += lv
+            fails += fl
+            if verbose and (done % 256 == 0 or done == len(roots)):
+                print(f"  regions {done}/{len(roots)} boxes={nb} leaves={len(leaves)} fails={len(fails)} t={time.time()-t0:.0f}s", flush=True)
+    return len(fails) == 0, nb, leaves, fails
+
+
 if __name__ == "__main__":
-    cert, s, atoms, wts = load_cert(sys.argv[1])
-    mw = float(sys.argv[2]) if len(sys.argv) > 2 else 1e-5
-    V = Verifier(float(s), atoms, wts, min_width=mw)
-    ok = V.run()
-    print("PASS" if ok else "FAIL", "boxes", V.n_boxes, "leaves", len(V.leaves), "fails", len(V.fails), flush=True)
-    if V.fails:
-        for b, m in V.fails[:10]:
-            print("  fail box", b, "mass", m, "witness", witness_from_fail(b, float(s)))
-    if len(sys.argv) > 3:
-        with open(sys.argv[3], "w") as f:
-            json.dump(dict(cert=sys.argv[1], min_width=mw, pass_=ok, n_boxes=V.n_boxes,
-                           leaves=[(b, k, sub) for (b, k, sub) in V.leaves],
-                           fails=[(b, m) for (b, m) in V.fails]), f)
-        print("leaves written to", sys.argv[3])
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("cert"); ap.add_argument("--mw", type=float, default=1e-5)
+    ap.add_argument("--leaves", type=str, default=None); ap.add_argument("--nproc", type=int, default=4)
+    ap.add_argument("--fails_out", type=str, default=None)
+    a = ap.parse_args()
+    cert, s, atoms, wts = load_cert(a.cert)
+    ok, nb, leaves, fails = verify_parallel(float(s), atoms, wts, mw=a.mw, nproc=a.nproc, keep_leaves=bool(a.leaves))
+    print("PASS" if ok else "FAIL", "boxes", nb, "leaves", len(leaves), "fails", len(fails), flush=True)
+    for b, m in fails[:10]:
+        print("  fail box", b, "mass", m, "witness", witness_from_fail(b, float(s)))
+    if a.fails_out:
+        json.dump([dict(box=b, mass=m, witness=witness_from_fail(b, float(s))) for b, m in fails], open(a.fails_out, "w"))
+    if a.leaves:
+        with open(a.leaves, "w") as f:
+            json.dump(dict(cert=a.cert, min_width=a.mw, pass_=ok, n_boxes=nb, leaves=leaves, fails=fails), f)
+        print("leaves written to", a.leaves)
