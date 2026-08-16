@@ -1,0 +1,95 @@
+I was recently looking at the square packing solutions (the smallest n for which a square of side length n can contain without overlap p unit squares, for each p).
+There don't seem to be any clear patterns to me, can you take a look at the existing literature on this problem and tell me where the current state of the art sits?
+
+
+Searched the web
+Searched the web
+Mr Statewide 🗽🐵 on Twitter: "im bringing this madness to an end. these ...
+twitter
+Daniel Piker on Twitter: "The arrangement on the left is a more ...
+twitter
+Square Packing -- from Wolfram MathWorld
+MathWorld
+Results from the web(opens in new tab)
+The upper bound (the packing itself). In Friedman's survey, the reference for the 17-square packing is literally "J. Bidwell, 1998, private communication" — Bidwell, an undergraduate at the University of Hawaii, found it by improving Hämäläinen's 1980 packing (which used squares at 45°), and it's the smallest example where the best known packing uses squares at three different angles. It was never published as a paper; it was sent to Friedman, verified, and entered into the survey, which is how a large fraction of results in this field exist (Cottingham, Cantrell, Stenlund, Trump's n=11, etc. are all "private communication" citations too). 
+Myphotos
+Myphotos
+
+The number itself comes from a standard procedure once you have the configuration:
+
+Fix the contact structure — the combinatorial data of which square touches which square/wall along which edge or corner. In Bidwell's packing, 10 squares sit axis-aligned around the border and 7 tilted squares are wedged in the middle, and the whole thing is rigid: every tilted square is pinned by its neighbors.
+Parametrize the configuration by the unknowns: the tilt angles, the positions of the tilted squares, and the container side s.
+Each tangency (corner-on-edge contact) gives one polynomial equation in sines/cosines of the angles and the coordinates. Rigidity means you get exactly as many independent equations as unknowns.
+Solve the system; s falls out as an algebraic number.
+Friedman's survey shows this recipe explicitly for simpler cases. For instance, in the 272-squares-in-side-17 packing, the whole thing reduces to one angle: the tilted squares sit at angle θ, and Ellsworth found in 2023 that the optimum is θ ≈ 28.5506°, with the side given in closed form as s = 4cos θ + sin θ + 13. And for his own 29-square packing, the survey writes down the system: the tilted squares contact the others in 3 places, and the contact lengths, the side s, and the tilt angle θ satisfy a system of equations solved numerically. The 17-square case is the same game, just with more unknowns because there are two nontrivial angle families instead of one, so there's no tidy closed form — the modern high-precision solve of Bidwell's contact system gives s(17) ≤ 4.67553009360455. That constant is a root of the polynomial system defined by the contact structure; nobody has exhibited a pleasant minimal polynomial for it. 
+Myphotos + 2
+
+The lower bound (the only actual proof content for n = 17). The proven side is much weaker: s(17) ≥ (40√2 + 19)/17 ≈ 4.4452, due to Trevor Green (2000, also unpublished private communication). The technique is the unavoidable-set method: to show s(n) ≥ k, you exhibit a set P of n−1 points in the side-k square such that every unit square placed inside must contain a point of P; then n squares can't fit in anything smaller, since a packing would need n distinct points but only n−1 exist. The engine behind these sets is a stack of geometric lemmas — e.g., any unit square in the corner region must contain the point (1,1), and any unit square whose center lies in a triangle with all sides ≤ 1 must contain one of the triangle's vertices. Green's set for 17 (Figure 34 in the survey) uses 16 cleverly placed points, and the specific value (40√2 + 19)/17 emerges from optimizing where those points can sit while keeping the covering property. 
+Myphotos + 3
+
+So the state of n = 17 specifically: 4.4452 ≤ s(17) ≤ 4.6756, a gap of about 0.23, and the trivial bound s(17) > 4 is barely improved. Nobody has proven Bidwell's packing optimal, and given that n = 11 — with far fewer degrees of freedom — remains unproven despite Trump's packing being rigid and 45 years old, 17 isn't close. The reason the picture looks so unsettling is exactly the derivation structure: the configuration is the solution of a rigid contact system, and there's no reason for the roots of such a system to look symmetric or pretty. In principle the interval-arithmetic branch-and-bound approach (the one being used in Vienna for small n) could someday certify it, but the search space over 17 squares × free rotations is currently out of reach.
+
+One footnote since the meme version gets it wrong: the viral image is often captioned as "the optimal packing." It's the best known packing. If you found something below 4.6755, you'd have a publishable result — that's the actual bar.
+
+
+Thought for 3m 28s
+Thought for 3m 28s
+On it. Step one: turn the extracted contact list into an exact tangency system — programmatically determine each contact's edge normal and wall corner from the feasible configuration, then Newton in mpmath at 60 digits:
+
+
+Ran a command
+Ran a command
+All eleven normals identify cleanly at +0.5000000. Now the exact solve — 13 equations, 13 unknowns, mpmath Newton at 60 digits, then PSLQ to extract the minimal polynomial of the resulting s:
+
+
+Ran 7 commands · 1 note
+Ran 7 commands · 1 note
+Done. The octic is derived — exactly, end to end, with no floating point and no integer-relation guessing anywhere in the final chain. Here is the complete constructive derivation, every step in exact rational arithmetic:
+
+Contact graph → closure polynomial. The 13 tangency equations are linear in the 12 center/size unknowns with coefficients in ℚ[cos θ, sin θ]. Substituting the rational rotation t = tan(θ/2) and computing the 13×13 consistency determinant exactly (111 rational-point evaluations + interpolation, 0.7 s), it factors as
+
+G(t) = t · (t²+1)²¹ · p(t), p(t) = 5t⁸ + 10t⁷ − 2t⁶ − 14t⁵ + 12t⁴ + 6t³ + 2t² − 2t − 1
+
+The first two factors are the degenerate branch and the projective artifact. p(t) is the minimal polynomial of tan(θ/2) — Trump's closure condition as an explicit integer polynomial, which I haven't found written down anywhere.
+
+Closure polynomial → the packing, as field arithmetic. Working over the number field F = ℚ[t]/(p) with hand-rolled exact arithmetic: the coefficient matrix has rank 12 over F, and the thirteenth equation reduces to exactly zero — that's the clean statement that p(t) is the consistency condition for this contact structure, not merely a polynomial sharing a root with it. Solving the system in F gives the side length as an explicit element of the field:
+
+s = (20 − 37t − 40t² − 35t³ + 64t⁴ − 15t⁵ − 60t⁶ − 25t⁷)/8, where p(t) = 0
+
+Field element → the octic. The minimal polynomial of that element, by pure rational linear algebra on its powers: [−6865, 12420, −6754, −496, 1923, −842, 178, −20, 1] — coefficient-for-coefficient identical to the catalog octic s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865. Derived, not fitted, not PSLQ'd. (The earlier 50-digit Newton solve and PSLQ now serve as independent corroboration rather than evidence.)
+
+Along the way the exact arithmetic exposed structure that float precision had smeared: the two famous "small gaps" are exactly equal (0.0248745350255969539804755091748…, algebraic of degree 8 — they're one quantity, the perpendicular separation of the strip's two rails minus 1); the strip has an internal translation period (T1→T3 and T2→T4 by the same vector, broken at T5 by the wall); the top and right wall contacts are congruent, forcing sq1.y = sq5.x; and θ itself now stands at 30+ digits (40.18193729032971646523034236 81…°) with its cosine's minimal polynomial 5c⁸ − 12c⁷ + 8c⁶ + 2c⁵ − c⁴ − 2c + 1 as a byproduct. There's also a satisfying historical footnote in the shape of the result: one closure condition in one variable is exactly what's iterable on a 1979 pocket calculator — the structure explains the HP-67 story.
+
+Scope, stated precisely so the claim doesn't inflate: the contact combinatorics came from Trump's packing (via the 1998 GIF) — what's derived is everything downstream of the graph, which is the constructive half you asked for. Ab-initio discovery would mean enumerating candidate contact graphs and solving each, which is the same combinatorial explosion that blocks the optimality proof; and optimality itself remains open, as it must. The 60-digit global feasibility audit validates the graph to overwhelming-but-numerical precision — the exact-rational certificate upgrades that to unconditional, and it's now the natural next step since t̄ is already the perfect coordinate for it: pick a rational t near the root of p, everything about every square becomes exactly rational, verify strict disjointness and containment in Fraction arithmetic at s = 3.8771, and hand the whole thing to a Lean 4 native_decide checker. Say the word and I'll cut the certificate.
+
+First, can you generate a PNG of the packing solution for me, given your derivation so far?
+
+
+Ran 2 commands, read a file
+Ran 2 commands, read a file
+There it is — rendered straight from the exact field solution (floats enter only at the pixel level). Tan squares are the six uprights, blue is the five-square tilted strip at θ = 40.1819…°, red dots mark the 14 contacts (11 vertex-on-edge tangencies, the two wall corners, and the degenerate corner-corner meeting at (1,1)), and the red double-arrows mark the two provably-equal gaps of 0.0248745… separating the strip's rails.
+
+Seeing it drawn makes the structure legible at a glance: the strip runs wall-to-wall as a rigid width-2 ladder, square 3 is the one upright that's slid off-lattice (x₃ = 2.5325…, creating the third gap against square 2), and squares 7 and 8 are the corner-pinned anchors the whole frame braces against. Ready to cut the rational certificate whenever you are.
+
+
+Trump packing 11
+Image · PNG 
+Go ahead and create the cert
+
+
+Thought for 1m 42s
+Thought for 1m 42s
+Cutting the certificate. Design: take the exact field solution, scale all centers by λ = s_c/s* about the origin (squares stay unit-size, so every contact opens into a strictly positive gap of order (λ−1) ≈ 4×10⁻⁶, with the tightest being the wall-flush margins at (λ−1)/2), then round centers and the shared t = tan(θ/2) to denominator 10¹² (perturbing corners by ~10⁻¹², three orders below the opened gaps). Every corner of every square is then an exact rational point, and both containment and pairwise SAT separation become finite checks in Fraction arithmetic. I'll cut two: the headline s_c = 38771/10000 and a tight one at 3877084/10⁶, just 4.1×10⁻⁷ above the true optimum:
+
+
+Ran 3 commands, read a file · 1 note
+Ran 3 commands, read a file · 1 note
+The certificate exists, verifies, and the verifier demonstrably rejects corruption. What you have:
+
+Two certificates. The headline (trump11_certificate.json) proves s(11) ≤ 38771/10000 = 3.8771 — the survey's stated bound, now backed by explicit rational data rather than a floating-point drawing. The tight one (trump11_certificate_tight.json) proves s(11) ≤ 3.877084, just 4.1×10⁻⁷ above the true octic root. Each is eleven squares given by rational centers and a shared rational t = tan(θ/2) with denominator 10¹², plus the container side — fully self-contained, with the derivation provenance (p(t), the octic, s as a field element) embedded as metadata.
+
+The verifier (verify_certificate.py) is ~70 lines of stdlib Python, Fraction arithmetic only, no floats in any comparison. It checks three things exactly: each rotation vector is identically unit (the tan-half parametrization makes cos²+sin² = 1 an algebraic identity, so the SAT margins are true Euclidean distances), every corner lies strictly inside [0, s], and every one of the 55 pairs admits a separating axis with strictly positive margin. Headline margins: 2.116×10⁻⁶ at the walls, 4.233×10⁻⁶ between squares — printed as exact rationals, absurd denominators and all. The corrupted-copy test failed exactly where it should (pair 2–9, the square I nudged into its neighbor), so the checker has teeth.
+
+Epistemic status, stated precisely: conditional on one piece of elementary convex geometry — that disjoint projections onto an axis imply disjoint convex hulls, and that a polygon's projection is the interval spanned by its vertices' projections — the certificates are unconditional proofs of the two upper bounds. No trust in my optimizer, in mpmath, in the GIF, or in the catalog is required; an adversary auditing the JSON with pencil and exact arithmetic would be forced to the same conclusion. That SAT lemma is deliberately the load-bearing residue, because it's exactly what the Lean formalization discharges: a decidable ℚ-checker mirroring this verifier, native_decide over the certificate data, and the bridge lemma proven once in the geometry. That's the remaining step whenever you want it.
+
+One honest footnote: the construction of the certificate leaned on the derived 55-digit solution, but the certificate's validity doesn't — it stands or falls entirely on the rational arithmetic the verifier performs, which is the whole point of the exercise.
