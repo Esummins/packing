@@ -119,3 +119,52 @@
     squares) and are unverifiable by any box method — certificates must be backed off.
 - Files: lean/README.md, lean/gen_cert_lean.py, lean/gen_measure_lean.py, lean/PackingCert/MeasureBench.lean
   (native timing exe), attempts/A06-lean-setup/notes.md (versions, timings, exact statements, gap analysis).
+
+## 2026-08-16 — A07-lp-dual (LP agent) — INTERIM (14:35): measure certificate for s(11) >= 3.80 on disk
+- Method: covering LP for tau*(s) = min total mass of a measure with mu(Q) >= 1 for every closed unit
+  square Q in [0,s]^2, solved by simultaneous row generation (placements) AND column generation (atoms
+  placed where the dual fractional packing over-covers). Grid-atom version (v1) is useless: its dual
+  exploits sliver overlaps between grid points (tau_grid(3.80) = 11.000 exactly, true coverage 1.5).
+- Numbers so far (free atoms, v2): tau*(3.65) = 9.364, tau*(3.7071) = 10.000 exactly (LP tight at s(10)),
+  tau*(3.80) = 10.4865 (row-converged, 137 atom orbits), tau*(3.82) ~ 10.65, tau*(3.84) ~ 11.01,
+  tau*(3.85) ~ 11.06  => crossing of 11 near s ~ 3.835-3.84.
+- certs/measure_certificate_3.80.json (format measure-certificate-v1, 1069 atoms, exact rationals,
+  weights x1.03 rounded up, total 10.801639 < 11).  A07's float-interval B&B (outward rounding 1e-12,
+  min box width 1e-5, 12.2M boxes) PASSES an earlier iterate; the official file is being re-verified by
+  A07's verifier and by A08's exact-integer certs/verify_measure.py (running).  If both pass:
+  s(11) >= 3.80 > 2+2sqrt(4/5) = 3.788854 (Stromquist).  Details: attempts/A07-lp-dual/notes.md.
+
+## 2026-08-16 — A08-measure-verify (verify agent) — done-success
+- Deliverable `certs/verify_measure.py` (+ `certs/README.md` describing all certificate formats/verifiers): independent,
+  exact-integer interval branch-and-bound over (t = tan θ/2, cx, cy) with admissible-region clipping, inherited certified
+  atoms, numpy float shortlist (accept decisions always exact), witnesses with EXACT masses (kinds hole/tight/undecided),
+  `--jobs`, `--strict-margin`, `--scale-weights`, `--report`, `--selftest` (int core vs Fraction core, 0 mismatches).
+- Tests: centre-atom s<2 PASS / s>2 FAIL; Göbel's literal 4-point set is a *tangency* (atom (1,1) on the edge of the
+  wall-flush corner square, at every s) — unverifiable by any box method (A06 found the same); backed off by 4e-4 it
+  PASSES at 2.70610678 (51k boxes, 1.7 s) and FAILS at 2.72 (holes at θ≈34°, c≈(1.36,1.36)); A05's 10-point set at
+  3.741594 independently PASSES (568k boxes, 15 s). A07's raw LP files FAIL as expected: v1 grid atoms on wall-square
+  edges (tight); v2test has 39 genuine holes (θ=0.0017°, c=(0.50004,1.49988), exact mass 0.9678: eps_geo=1e-4 shrink is
+  smaller than the row spacing) — witnesses in attempts/A08-measure-verify/witnesses_*.json.
+- **A07's frozen `certs/measure_certificate_3.80.json` (1069 atoms, total 10.801639 < 11) PASSES**: 5 836 650 boxes,
+  max depth 45, 62.9 s on 4 processes (`--depth 48 --jobs 4`). Re-verified with two other box trees (tscale 1 / 4:
+  PASS), float-free exact runs on sub-boxes (identical trees), 300k random float placements (min mass 1.0300),
+  `--strict-margin 0.04` (rigorous holes at mass 1.0288 ⇒ the certificate's slack is exactly A07's ×1.03).
+  ⇒ **s(11) ≥ 19/5 = 3.80** (beats Stromquist's 3.788854), pending A07's own verifier and A06's Lean re-check
+  (regenerate MeasureData.lean from the certificate, fuel ≥ 48).
+- Cost model for the future: leaves ~ (tight volume)/δ³ with δ = certificate robustness margin; δ = 1e-4 was
+  affordable here (6M boxes) because tight regions are thin; a larger eps_geo would make Lean re-checks cheaper.
+- Files: attempts/A08-measure-verify/{notes.md, make_tests.py, convert_a07.py, tests/, a07/, witnesses_*.json,
+  report_*.json}; Lean-port design (integer scheme enabling kernel `decide`) in notes.md §6.
+- 14:50 UPDATE: certs/measure_certificate_3.80.json PASSES BOTH verifiers: A07 float-interval B&B
+  (12.0M boxes, min width 1e-5, outward rounding) and A08's independent EXACT integer B&B
+  certs/verify_measure.py (5.84M boxes, max depth 45, 115 s):
+  "PASS: every closed unit square in [0,19/5]^2 has mass >= 1; total 10801639/1000000 < 11 ==> s(11) >= 19/5".
+  ==> NEW LOWER BOUND s(11) >= 3.80 (previous: 2+2sqrt(4/5) = 3.788854, Stromquist 2003).
+  Certificate: 1069 atoms (137 D4-orbits), exact rationals, total mass 10.801639.  Now pushing to 3.82.
+
+## 2026-08-16 — advisor — NEW LOWER BOUND s(11) ≥ 3.80 (computer-verified)
+- certs/measure_certificate_3.80.json (A07: 1069 atoms, s = 19/5, total 10.801639, weights ×1.03 robustness)
+  PASSES certs/verify_measure.py (A08, independent exact-integer interval B&B: 5,836,650 boxes, depth ≤ 45,
+  51 s), reproduced by the advisor; advisor's own float spot-check: 200k random + adversarial placements,
+  min mass 1.0300. Bridge argument (scale + shrink) is two lines. This beats Stromquist's 3.788854.
+- Next: A07 pushing s to 3.82/3.84; A06 asked to Lean-check the certificate.

@@ -39,3 +39,26 @@
   it  37 tau=11.009572 rows=6209 orbs=2490 atoms>0=792 minmass=0.998492 maxcov=1.018847 +rows=1 +cols=60 t=1103s
   it  38 tau=11.006660 rows=6213 orbs=2550 atoms>0=736 minmass=0.986125 maxcov=1.021940 +rows=4 +cols=60 t=1185s
   it  39 tau=11.005993 rows=6216 orbs=2610 atoms>0=676 minmass=0.982772 maxcov=1.020974 +rows=3 +cols=60 t=1251s
+  it  40 tau=11.005993 rows=6222 orbs=2670 atoms>0=736 minmass=0.967041 maxcov=1.016713 +rows=6 +cols=60 t=1290s
+  it  41 tau=11.005490 rows=6228 orbs=2730 atoms>0=780 minmass=0.983531 maxcov=1.015097 +rows=6 +cols=60 t=1373s
+  it  42 tau=11.005836 rows=6265 orbs=2790 atoms>0=824 minmass=0.995095 maxcov=1.018423 +rows=37 +cols=60 t=1422s
+  it  43 tau=11.005841 rows=6275 orbs=2850 atoms>0=788 minmass=0.980900 maxcov=1.013727 +rows=10 +cols=60 t=1466s
+  it  44 tau=11.005195 rows=6277 orbs=2910 atoms>0=796 minmass=0.975108 maxcov=1.016364 +rows=2 +cols=60 t=1567s
+  it  45 tau=11.005195 rows=6277 orbs=2970 atoms>0=925 minmass=1.000000 maxcov=1.027208 +rows=0 +cols=60 t=1641s
+  it  46 tau=11.005195 rows=6277 orbs=3030 atoms>0=788 minmass=1.000000 maxcov=1.020162 +rows=0 +cols=60 t=1680s
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A07-lp-dual\lp_measure2.py", line 495, in <module>
+    ap.add_argument("--warm", type=str, default=None, help="json result to warm start atoms/rows from")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    ap.add_argument("--max_cols_add", type=int, default=60)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A07-lp-dual\lp_measure2.py", line 424, in run
+    viol = ro.search(thresh=1.0 - tol)
+                   ~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A07-lp-dual\lp_measure2.py", line 337, in search
+    cav = self.coverage(av)
+  File "C:\Users\esumm\code\packing\attempts\A07-lp-dual\lp_measure2.py", line 267, in coverage
+    ux = dx * self.cos[None, :] + dy * self.sin[None, :]
+                                  ~~~^~~~~~~~~~~~~~~~~~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 76.3 MiB for an array with shape (12500, 800) and data type float64

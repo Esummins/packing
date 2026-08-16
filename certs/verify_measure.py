@@ -35,8 +35,10 @@ PARAMETRISATION
 
 BRANCH AND BOUND over boxes B = [t0,t1] x [x0,x1] x [y0,y1]  (root: [0,1] x [1/2, s-1/2]^2;
     every admissible centre lies there because w >= 1).  A box is DISCHARGED if
-      (a) VACUOUS: no admissible placement in B, certified by  x1 < wmin/2  or  x0 > s - wmin/2
-          (or the same in y) with wmin = min(w(t0), w(t1)), a lower bound for w on all of [t0,t1];
+      (a) VACUOUS: no admissible placement in B.  The centre ranges are first CLIPPED to
+          [wmin/2, s - wmin/2] with wmin = min(w(t0), w(t1)) <= w(t) on [t0,t1] (rounded outward to
+          the integer grid); an empty clipped box is vacuous, otherwise the clipped box (which still
+          contains every admissible placement of B) is used for (b) and for splitting;
       (b) COVERED: sum{ w_i : p_i inside Q(c,theta) for EVERY (t,c) in B } >= 1 + margin,
           the inclusion being decided by exact interval arithmetic on u, v.
     Otherwise it is bisected along its widest side (t-width scaled by --tscale) and the two halves
@@ -162,6 +164,29 @@ def vacuous_int(SD, D, K, T0, T1, X0, X1, Y0, Y1):
     return False
 
 
+def clip_int(SD, D, K, T0, T1, X0, X1, Y0, Y1):
+    """Clip the centre ranges of the box to the admissible region wLo/2 <= c <= s - wLo/2, where
+    wLo = min(w(t0), w(t1)) <= w(t) on the box (w = cos+sin is unimodal in t).  The bounds are
+    rounded OUTWARD to the integer grid (floor / ceil), so the clipped box still contains every
+    admissible placement of the original box.  Returns None if the box is vacuous."""
+    cn0, sn0, dn0 = trig_int(T0, K)
+    cn1, sn1, dn1 = trig_int(T1, K)
+    wn0, wn1 = cn0 + sn0, cn1 + sn1
+    if wn0 * dn1 <= wn1 * dn0:            # w(t0) <= w(t1)
+        wn, wd = wn0, dn0
+    else:
+        wn, wd = wn1, dn1
+    lo = (wn * D) // (2 * wd)                       # floor(wLo/2 * D)
+    hi = -((-(2 * SD * wd - wn * D)) // (2 * wd))   # ceil((s - wLo/2) * D)
+    X0c = X0 if X0 > lo else lo
+    X1c = X1 if X1 < hi else hi
+    Y0c = Y0 if Y0 > lo else lo
+    Y1c = Y1 if Y1 < hi else hi
+    if X0c > X1c or Y0c > Y1c:
+        return None
+    return X0c, X1c, Y0c, Y1c
+
+
 # ============================================================================= reference (Fractions)
 def cos_sin_t(t):
     tt = t * t
@@ -228,6 +253,8 @@ class Verifier:
         self.need = ONE + margin
         self.depth = depth
         self.tscale = F(tscale)
+        if self.tscale.denominator == 1:
+            self.tscale = int(self.tscale)      # keep the split-rule comparison in pure ints
         self.max_witnesses = max_witnesses
         self.verbose = verbose
         self.progress_every = progress_every
@@ -329,10 +356,11 @@ class Verifier:
             r = self.T_ROOT
             D = self.D
             cand = self.float_candidates(T0 / r, T1 / r, X0 / D, X1 / D, Y0 / D, Y1 / D)
-            if self.fW[cand].sum() < self.fneed:      # even the optimistic float shortlist is too light
-                self.n_float_reject += 1
-                return False, known, kmass
             idx = cand.tolist()
+            if self.fW[cand].sum() < self.fneed:      # even the optimistic float shortlist is too light:
+                self.n_float_reject += 1              # the box will be split; still certify the candidates
+                if len(idx) == len(known):            # exactly so that the children inherit them
+                    return False, known, kmass
         else:
             idx = range(len(self.atoms))
         Clo, Chi, Slo, Shi, E = box_trig(T0, T1, self.K)
@@ -437,9 +465,11 @@ class Verifier:
                 self.n_boxes += 1
                 if d > self.max_depth_seen:
                     self.max_depth_seen = d
-                if vacuous_int(SD, D, K, T0, T1, X0, X1, Y0, Y1):
+                clipped = clip_int(SD, D, K, T0, T1, X0, X1, Y0, Y1)
+                if clipped is None:
                     self.n_vac += 1
                     continue
+                X0, X1, Y0, Y1 = clipped          # sound: contains all admissible placements of the box
                 ok, known, kmass = self.covered(T0, T1, X0, X1, Y0, Y1, known, kmass)
                 if ok:
                     self.n_cov += 1
@@ -576,6 +606,25 @@ def selftest(n_iter=3000, seed=1):
         r2 = atom_inside_frac(px, py, F(T0, v.T_ROOT), F(T1, v.T_ROOT), F(X0, D), F(X1, D), F(Y0, D), F(Y1, D))
         v1 = vacuous_int(v.SD, D, K, T0, T1, X0, X1, Y0, Y1)
         v2 = vacuous_frac(s, F(T0, v.T_ROOT), F(T1, v.T_ROOT), F(X0, D), F(X1, D), F(Y0, D), F(Y1, D))
+        cl = clip_int(v.SD, D, K, T0, T1, X0, X1, Y0, Y1)
+        if (cl is None) != v1:
+            # clip may declare vacuous slightly less often (outward rounding) but never more often
+            if cl is None and not v1:
+                bad += 1
+                print("CLIP declares vacuous but vacuous_frac does not", (T0, T1, X0, X1, Y0, Y1))
+        if cl is not None:
+            # every admissible placement in the box must lie in the clipped box
+            for _ in range(3):
+                TT = rng.randint(T0, T1)
+                cn, sn, dn = trig_int(TT, K)
+                # admissible cx in [w/2, s-w/2] intersect [x0,x1]  (as Fractions)
+                w = F(cn + sn, dn)
+                lo_, hi_ = max(F(X0, D), w / 2), min(F(X1, D), s - w / 2)
+                if lo_ <= hi_:
+                    cx = lo_ + (hi_ - lo_) * F(rng.randint(0, 100), 100)
+                    if not (F(cl[0], D) <= cx <= F(cl[1], D)):
+                        bad += 1
+                        print("CLIP lost an admissible cx", (T0, T1, X0, X1), cx, cl)
         if r1 != r2 or v1 != v2:
             bad += 1
             print("MISMATCH", s, atoms, (T0, T1, X0, X1, Y0, Y1), r1, r2, v1, v2)

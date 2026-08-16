@@ -36,3 +36,27 @@
   it  34 tau=10.430312 rows=4343 orbs=2388 atoms>0=1721 minmass=0.994517 maxcov=1.014261 +rows=9 +cols=60 t=1117s
   it  35 tau=10.429953 rows=4360 orbs=2448 atoms>0=1728 minmass=0.956975 maxcov=1.010357 +rows=17 +cols=60 t=1174s
   it  36 tau=10.430026 rows=4368 orbs=2508 atoms>0=1717 minmass=0.984780 maxcov=1.011303 +rows=8 +cols=60 t=1225s
+  it  37 tau=10.430060 rows=4408 orbs=2568 atoms>0=1740 minmass=0.965739 maxcov=1.008543 +rows=40 +cols=60 t=1272s
+  it  38 tau=10.431586 rows=4450 orbs=2628 atoms>0=1664 minmass=0.983711 maxcov=1.013243 +rows=42 +cols=60 t=1318s
+  it  39 tau=10.430528 rows=4452 orbs=2688 atoms>0=1545 minmass=0.996377 maxcov=1.011679 +rows=2 +cols=60 t=1367s
+  it  40 tau=10.430233 rows=4454 orbs=2748 atoms>0=1629 minmass=0.995440 maxcov=1.008154 +rows=2 +cols=60 t=1429s
+  it  41 tau=10.429933 rows=4462 orbs=2808 atoms>0=1780 minmass=0.990313 maxcov=1.009562 +rows=8 +cols=60 t=1499s
+  it  42 tau=10.429969 rows=4464 orbs=2868 atoms>0=1641 minmass=0.998952 maxcov=1.008029 +rows=2 +cols=60 t=1565s
+  it  43 tau=10.429582 rows=4472 orbs=2928 atoms>0=1577 minmass=0.979220 maxcov=1.010180 +rows=8 +cols=60 t=1633s
+  it  44 tau=10.429583 rows=4587 orbs=2988 atoms>0=1737 minmass=0.999155 maxcov=1.008412 +rows=115 +cols=60 t=1688s
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A07-lp-dual\lp_measure2.py", line 495, in <module>
+    ap.add_argument("--warm", type=str, default=None, help="json result to warm start atoms/rows from")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    ap.add_argument("--max_cols_add", type=int, default=60)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A07-lp-dual\lp_measure2.py", line 424, in run
+    viol = ro.search(thresh=1.0 - tol)
+                   ~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A07-lp-dual\lp_measure2.py", line 337, in search
+    cav = self.coverage(av)
+  File "C:\Users\esumm\code\packing\attempts\A07-lp-dual\lp_measure2.py", line 267, in coverage
+    ux = dx * self.cos[None, :] + dy * self.sin[None, :]
+                                  ~~~^~~~~~~~~~~~~~~~~~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 76.3 MiB for an array with shape (5122, 1952) and data type float64

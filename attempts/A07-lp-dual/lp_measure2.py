@@ -389,7 +389,8 @@ def initial_rows(s, n_theta=10, cstep=0.1):
 
 def run(s, n=11, N0=38, max_iter=300, tol=1e-6, out=None, verbose=True, time_limit=None,
         row_kw=None, col_kw=None, max_rows_add=1200, max_cols_add=60, init_atoms=None, init_rows=None,
-        col_stop_iter=10**9, col_stop_cov=1.0, fine_row_kw=None, checkpoint=None):
+        col_stop_iter=10**9, col_stop_cov=1.0, fine_row_kw=None, checkpoint=None, neigh_rows=0, neigh_d=0.003,
+        extra_rows=None):
     """col_stop_iter / col_stop_cov: stop adding columns after that iteration or once maxcov < col_stop_cov
     (row-only phase -> primal-feasible mu).  fine_row_kw: settings for a final fine row search.
     checkpoint: path to write the full model state (all rows/orbits + solution) every iteration."""
@@ -406,6 +407,10 @@ def run(s, n=11, N0=38, max_iter=300, tol=1e-6, out=None, verbose=True, time_lim
                 M.add_orbit(i * h0, j * h0)
     for (cx, cy, th) in (init_rows if init_rows is not None else initial_rows(s)):
         M.add_row(cx, cy, th)
+    if extra_rows:
+        for (cx, cy, th) in extra_rows:
+            # map to theta in [0,pi/4] and the C4 quadrant is unnecessary: rows are D4-invariant sums, any image works
+            M.add_row(cx, cy, th)
     rkw = dict(delta=0.002, cstep=0.02, n_theta=91); rkw.update(row_kw or {})
     ckw = dict(grid=0.005); ckw.update(col_kw or {})
     hist = []
@@ -420,6 +425,16 @@ def run(s, n=11, N0=38, max_iter=300, tol=1e-6, out=None, verbose=True, time_lim
         nr = 0
         for (cx, cy, th, m) in viol[:max_rows_add]:
             nr += M.add_row(cx, cy, th)
+        # neighbourhood rows around the most violated placements (stabilises the cutting-plane loop)
+        for (cx, cy, th, m) in viol[:neigh_rows]:
+            for dcx in (-1, 0, 1):
+                for dcy in (-1, 0, 1):
+                    for dth in (-1, 0, 1):
+                        if dcx == dcy == dth == 0:
+                            continue
+                        th2 = min(max(th + dth * neigh_d, 0.0), math.pi / 4)
+                        lo, hi = centre_range(s, th2)
+                        nr += M.add_row(min(max(cx + dcx * neigh_d, lo), hi), min(max(cy + dcy * neigh_d, lo), hi), th2)
         co = ColOracle(s, M.packing_images())
         over, maxcov = co.search(thresh=1.0 + tol, **ckw)
         nc = 0
@@ -483,6 +498,9 @@ if __name__ == "__main__":
     ap.add_argument("--col_stop_cov", type=float, default=1.0)
     ap.add_argument("--max_cols_add", type=int, default=60)
     ap.add_argument("--fine", action="store_true", help="final fine row search (n_theta=361, cstep=0.005)")
+    ap.add_argument("--neigh_rows", type=int, default=0, help="add 26 neighbourhood rows around the k most violated placements")
+    ap.add_argument("--neigh_d", type=float, default=0.003)
+    ap.add_argument("--extra_rows", type=str, default=None, help="json list of [cx,cy,theta] rows to add at start (e.g. verifier witnesses)")
     a = ap.parse_args()
     out = a.out or f"results/v2_n{a.n}_s{a.s:.4f}.json"
     ia = ir = None
@@ -496,4 +514,5 @@ if __name__ == "__main__":
         row_kw=dict(n_theta=a.n_theta, cstep=a.cstep), init_atoms=ia, init_rows=ir,
         col_stop_iter=a.col_stop_iter, col_stop_cov=a.col_stop_cov, max_cols_add=a.max_cols_add,
         fine_row_kw=(dict(n_theta=361, cstep=0.005, delta=0.001) if a.fine else None),
-        checkpoint=out.replace(".json", "_state.json"))
+        checkpoint=out.replace(".json", "_state.json"), neigh_rows=a.neigh_rows, neigh_d=a.neigh_d,
+        extra_rows=(json.load(open(a.extra_rows)) if a.extra_rows else None))
