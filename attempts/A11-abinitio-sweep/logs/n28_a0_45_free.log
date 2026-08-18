@@ -1,0 +1,2172 @@
+n=28 angles=[0.0, 45.0] axes=8 cols=3137 rows=6622 solver=cpsat
+
+Starting CP-SAT solver v9.15.6755
+Parameters: random_seed: 0 max_time_in_seconds: 900 log_search_progress: true num_workers: 4
+
+Initial optimization model '': (model_fingerprint: 0xb8bb5417303cedbb)
+#Variables: 3'164 (#ints: 1 in objective) (3'136 primary variables)
+  - 3'107 Booleans in [0,1]
+  - 56 in [0,600000]
+  - 1 in [529151,600000]
+#kBoolOr: 3'402 (#enforced: 3'024) (#literals: 9'072)
+#kExactlyOne: 28 (#literals: 56)
+#kLinear1: 112 (#enforced: 112)
+#kLinear2: 4'756 (#enforced: 4'729 #multi: 4'536)
+#kLinearN: 4'538 (#enforced: 4'536 #multi: 4'536) (#terms: 18'202)
+
+Starting presolve at 0.03s
+The solution hint is incomplete: 113 out of 3164 non fixed variables hinted.
+  6.22e-03s  0.00e+00d  [DetectDominanceRelations] 
+  8.83e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  6.74e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::ExtractEncodingFromLinear] 
+  2.46e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  1.17e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+[Symmetry] Graph for symmetry has 19'136 nodes and 70'742 arcs.
+[Symmetry] Symmetry computation done. time: 0.0073937 dtime: 0.00917933
+[SAT presolve] num removable Booleans: 0 / 3'079
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:3'537 literals:12'420 vars:3'079 one_side_vars:0 simple_definition:3'024 singleton_clauses:0
+[SAT presolve] [0.0005281s] clauses:3'510 literals:12'123 vars:3'079 one_side_vars:0 simple_definition:3'051 singleton_clauses:0
+[SAT presolve] [0.0006991s] clauses:3'510 literals:12'123 vars:3'079 one_side_vars:0 simple_definition:3'051 singleton_clauses:0
+  2.95e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  1.00e+00s  1.46e-01d  [operations_research::sat::CpModelPresolver::Probe] #probed=6'326 #new_bounds=56 #new_binary_clauses=15'669 
+  1.00e-02s  4.32e-02d  [MaxClique] Merged 3'321 constraints with 6'642 literals into 594 constraints with 1'241 literals
+  2.92e-03s  0.00e+00d  [DetectDominanceRelations] 
+  3.50e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  5.20e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::ProcessAtMostOneAndLinear] 
+  2.04e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+  2.68e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  6.76e-03s  5.83e-04d  [operations_research::sat::CpModelPresolver::DetectDominatedLinearConstraints] #relevant_constraints=3'026 #num_inclusions=10'584 
+  8.21e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDifferentVariables] 
+  1.71e-03s  1.94e-05d  [operations_research::sat::CpModelPresolver::ProcessSetPPC] #relevant_constraints=999 #num_inclusions=27 
+  1.93e-03s  2.37e-04d  [operations_research::sat::CpModelPresolver::TransformClausesToExactlyOne] #num_amos=3'375 #num_clauses=378 #num_checked=378 
+  3.01e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+  1.58e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::FindAlmostIdenticalLinearConstraints] 
+  2.78e-03s  3.43e-04d  [operations_research::sat::CpModelPresolver::FindBigAtMostOneAndLinearOverlap] 
+  1.48e-02s  1.28e-03d  [operations_research::sat::CpModelPresolver::FindBigVerticalLinearOverlap] #blocks=29 #saved_nz=3'045 
+  8.03e-04s  2.90e-07d  [operations_research::sat::CpModelPresolver::FindBigHorizontalLinearOverlap] #linears=2 
+  1.02e-03s  1.51e-05d  [operations_research::sat::CpModelPresolver::MergeClauses] 
+  4.17e-03s  0.00e+00d  [DetectDominanceRelations] 
+  2.65e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  3.19e-03s  0.00e+00d  [DetectDominanceRelations] 
+  2.17e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  1.61e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  1.97e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+[Symmetry] Graph for symmetry has 16'114 nodes and 43'879 arcs.
+[Symmetry] Symmetry computation done. time: 0.0037128 dtime: 0.00616294
+[SAT presolve] num removable Booleans: 0 / 3'079
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:3'727 literals:9'722 vars:3'052 one_side_vars:2 simple_definition:3'024 singleton_clauses:0
+[SAT presolve] [0.0004039s] clauses:3'727 literals:9'722 vars:3'052 one_side_vars:2 simple_definition:3'024 singleton_clauses:0
+[SAT presolve] [0.0005127s] clauses:3'727 literals:9'722 vars:3'052 one_side_vars:2 simple_definition:3'024 singleton_clauses:0
+  1.67e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  6.38e-01s  1.19e-01d  [operations_research::sat::CpModelPresolver::Probe] #probed=6'326 #new_binary_clauses=1'161 
+  3.98e-02s  9.03e-02d  [MaxClique] 
+  3.23e-03s  0.00e+00d  [DetectDominanceRelations] 
+  2.31e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  3.50e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::ProcessAtMostOneAndLinear] 
+  1.93e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+  1.78e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  3.29e-03s  2.23e-04d  [operations_research::sat::CpModelPresolver::DetectDominatedLinearConstraints] #relevant_constraints=2'263 #num_inclusions=3'508 
+  9.37e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDifferentVariables] 
+  2.47e-03s  5.28e-05d  [operations_research::sat::CpModelPresolver::ProcessSetPPC] #relevant_constraints=3'780 
+  2.09e-03s  2.37e-04d  [operations_research::sat::CpModelPresolver::TransformClausesToExactlyOne] #num_amos=3'375 #num_clauses=378 #num_checked=378 
+  8.88e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+  9.56e-04s  3.00e-08d  [operations_research::sat::CpModelPresolver::FindAlmostIdenticalLinearConstraints] #num_tested_pairs=2 
+  2.69e-03s  5.32e-04d  [operations_research::sat::CpModelPresolver::FindBigAtMostOneAndLinearOverlap] 
+  9.39e-03s  1.01e-03d  [operations_research::sat::CpModelPresolver::FindBigVerticalLinearOverlap] #blocks=21 #saved_nz=2'205 
+  6.17e-04s  2.90e-07d  [operations_research::sat::CpModelPresolver::FindBigHorizontalLinearOverlap] #linears=2 
+  9.79e-04s  1.51e-05d  [operations_research::sat::CpModelPresolver::MergeClauses] 
+  3.29e-03s  0.00e+00d  [DetectDominanceRelations] 
+  2.84e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  4.08e-03s  0.00e+00d  [DetectDominanceRelations] 
+  2.51e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  2.69e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  2.53e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+[Symmetry] Graph for symmetry has 16'177 nodes and 41'695 arcs.
+[Symmetry] Symmetry computation done. time: 0.0035034 dtime: 0.00621449
+[SAT presolve] num removable Booleans: 0 / 3'079
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:3'727 literals:9'722 vars:3'052 one_side_vars:2 simple_definition:3'024 singleton_clauses:0
+[SAT presolve] [0.0003546s] clauses:3'727 literals:9'722 vars:3'052 one_side_vars:2 simple_definition:3'024 singleton_clauses:0
+[SAT presolve] [0.0004949s] clauses:3'727 literals:9'722 vars:3'052 one_side_vars:2 simple_definition:3'024 singleton_clauses:0
+  2.10e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  6.09e-01s  1.19e-01d  [operations_research::sat::CpModelPresolver::Probe] #probed=6'326 #new_binary_clauses=1'161 
+  2.68e-02s  9.03e-02d  [MaxClique] 
+  3.40e-03s  0.00e+00d  [DetectDominanceRelations] 
+  2.19e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  3.94e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::ProcessAtMostOneAndLinear] 
+  2.13e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+  1.88e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  1.46e-03s  3.18e-05d  [operations_research::sat::CpModelPresolver::DetectDominatedLinearConstraints] #relevant_constraints=660 #num_inclusions=912 
+  8.60e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDifferentVariables] 
+  2.44e-03s  5.28e-05d  [operations_research::sat::CpModelPresolver::ProcessSetPPC] #relevant_constraints=3'780 
+  2.20e-03s  2.37e-04d  [operations_research::sat::CpModelPresolver::TransformClausesToExactlyOne] #num_amos=3'375 #num_clauses=378 #num_checked=378 
+  1.03e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+  1.11e-03s  2.70e-07d  [operations_research::sat::CpModelPresolver::FindAlmostIdenticalLinearConstraints] #num_tested_pairs=18 
+  3.29e-03s  4.97e-04d  [operations_research::sat::CpModelPresolver::FindBigAtMostOneAndLinearOverlap] 
+  8.43e-03s  8.54e-04d  [operations_research::sat::CpModelPresolver::FindBigVerticalLinearOverlap] #blocks=3 #saved_nz=315 
+  8.78e-04s  2.90e-07d  [operations_research::sat::CpModelPresolver::FindBigHorizontalLinearOverlap] #linears=2 
+  1.50e-03s  1.51e-05d  [operations_research::sat::CpModelPresolver::MergeClauses] 
+  3.43e-03s  0.00e+00d  [DetectDominanceRelations] 
+  2.43e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  5.65e-04s  0.00e+00d  [MergeNoOverlap] 
+  3.72e-04s  0.00e+00d  [MergeNoOverlap2D] 
+  7.68e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::ExpandObjective] #entries=374 #tight_variables=187 #tight_constraints=80 
+
+Presolve summary:
+  - 28 affine relations were detected.
+  - rule 'TODO dual: only one blocking constraint?' was applied 27'223 times.
+  - rule 'TODO dual: only one unspecified blocking constraint?' was applied 9 times.
+  - rule 'TODO dual: tighten at most one' was applied 1 time.
+  - rule 'affine: new relation' was applied 28 times.
+  - rule 'at_most_one: transformed into max clique' was applied 1 time.
+  - rule 'bool_or: implications' was applied 2'835 times.
+  - rule 'bool_or: removed enforcement literal' was applied 54 times.
+  - rule 'deductions: 166 stored' was applied 1 time.
+  - rule 'exactly_one: size two' was applied 28 times.
+  - rule 'linear matrix: common vertical rectangle' was applied 53 times.
+  - rule 'linear2: convert ax + by != cte to clauses' was applied 27 times.
+  - rule 'linear2: convert implied ax + by == cte to clauses' was applied 27 times.
+  - rule 'linear2: implied ax + by = cte has only one solution' was applied 27 times.
+  - rule 'linear: always true' was applied 56 times.
+  - rule 'linear: divide by GCD' was applied 9'074 times.
+  - rule 'linear: remapped using affine relations' was applied 81 times.
+  - rule 'presolve: 0 unused variables removed.' was applied 1 time.
+  - rule 'presolve: iteration' was applied 3 times.
+  - rule 'probing: bool_or reduced to implication' was applied 2'808 times.
+  - rule 'probing: reduced enforced constraint to implication' was applied 3'024 times.
+  - rule 'probing: simplified enforcement list' was applied 6'048 times.
+  - rule 'setppc: bool_or in at_most_one' was applied 27 times.
+
+Presolved optimization model '': (model_fingerprint: 0xf125c326b088ef0b)
+#Variables: 3'189 (#ints: 1 in objective) (3'134 primary variables)
+  - 3'079 Booleans in [0,1]
+  - 25 in [-500000,500000]
+  - 56 in [50000,550000]
+  - 28 in [100000,1100000]
+  - 1 in [529151,600000]
+#kAtMostOne: 26 (#literals: 78)
+#kBoolAnd: 54 (#enforced: 54) (#literals: 3'403)
+#kBoolOr: 378 (#literals: 3'024)
+#kExactlyOne: 27 (#literals: 81)
+#kLinear1: 56 (#enforced: 56)
+#kLinear2: 5'875 (#enforced: 5'875 #multi: 5'736)
+#kLinear3: 353 (#enforced: 300 #multi: 300)
+#kLinearN: 14 (#enforced: 12 #multi: 12) (#terms: 106)
+[Symmetry] Graph for symmetry has 16'158 nodes and 41'383 arcs.
+[Symmetry] Symmetry computation done. time: 0.0040541 dtime: 0.00621893
+
+Preloading model.
+#Bound   2.91s best:inf   next:[529151,600000] initial_domain
+The solution hint is incomplete: 138 out of 3189 non fixed variables hinted.
+#Model   2.92s var:3189/3189 constraints:6783/6783
+
+Starting search at 2.92s with 4 workers.
+3 full problem subsolvers: [default_lp, max_lp, no_lp]
+1 first solution subsolver: [fj]
+9 interleaved subsolvers: [feasibility_pump, graph_arc_lns, graph_cst_lns, graph_dec_lns, graph_var_lns, ls, rins/rens, rnd_cst_lns, rnd_var_lns]
+3 helper subsolvers: [neighborhood_helper, synchronization_agent, update_gap_integral]
+
+#1       3.09s best:600000 next:[529151,599999] fj_restart_compound(batch:1 lin{mvs:0 evals:3'235} gen{mvs:425 evals:0} comp{mvs:425 btracks:0} #w_updates:0 #perturb:0)
+#Model 191.58s var:3187/3189 constraints:6756/6783
+#Model 218.78s var:3186/3189 constraints:6754/6783
+#Model 218.91s var:3169/3189 constraints:6720/6783
+#Model 219.04s var:3164/3189 constraints:6710/6783
+#Model 219.07s var:3161/3189 constraints:6704/6783
+#2     279.37s best:599999 next:[529151,599998] no_lp
+#3     279.38s best:599998 next:[529151,599997] ls_restart_compound(batch:1 lin{mvs:0 evals:10'008} gen{mvs:1'726 evals:0} comp{mvs:218 btracks:754} #w_updates:25 #perturb:0)
+#4     280.22s best:599997 next:[529151,599996] no_lp
+#5     280.23s best:599996 next:[529151,599995] no_lp
+#6     280.24s best:599995 next:[529151,599994] no_lp
+#7     280.24s best:599994 next:[529151,599993] no_lp
+#8     280.25s best:599993 next:[529151,599992] no_lp
+#9     280.26s best:599992 next:[529151,599991] no_lp
+#10    280.27s best:599991 next:[529151,599990] no_lp
+#11    280.28s best:599990 next:[529151,599989] no_lp
+#12    280.28s best:599989 next:[529151,599988] no_lp
+#13    280.29s best:599988 next:[529151,599987] no_lp
+#14    280.30s best:599987 next:[529151,599986] no_lp
+#15    280.31s best:599986 next:[529151,599985] no_lp
+#16    280.31s best:599985 next:[529151,599984] no_lp
+#17    280.32s best:599984 next:[529151,599983] no_lp
+#18    280.33s best:599983 next:[529151,599982] no_lp
+#19    280.34s best:599982 next:[529151,599981] no_lp
+#20    280.35s best:599981 next:[529151,599980] no_lp
+#21    280.36s best:599980 next:[529151,599979] no_lp
+#22    280.38s best:599979 next:[529151,599978] no_lp
+#23    280.38s best:599978 next:[529151,599977] no_lp
+#24    280.39s best:599977 next:[529151,599976] no_lp
+#25    280.39s best:599976 next:[529151,599975] no_lp
+#26    280.40s best:599975 next:[529151,599974] no_lp
+#27    280.41s best:599974 next:[529151,599973] no_lp
+#28    280.42s best:599973 next:[529151,599972] no_lp
+#29    280.43s best:599972 next:[529151,599971] no_lp
+#30    280.43s best:599971 next:[529151,599970] no_lp
+#31    280.44s best:599970 next:[529151,599969] no_lp
+#32    280.45s best:599969 next:[529151,599968] no_lp
+#33    280.46s best:599968 next:[529151,599967] no_lp
+#34    280.51s best:599967 next:[529151,599966] no_lp
+#35    280.53s best:599966 next:[529151,599965] no_lp
+#36    280.53s best:599965 next:[529151,599964] no_lp
+#37    280.54s best:599964 next:[529151,599963] no_lp
+#38    280.54s best:599963 next:[529151,599962] no_lp
+#39    280.55s best:599962 next:[529151,599961] no_lp
+#40    280.56s best:599961 next:[529151,599960] no_lp
+#41    280.57s best:599960 next:[529151,599959] no_lp
+#42    280.58s best:599959 next:[529151,599958] no_lp
+#43    280.60s best:599958 next:[529151,599957] no_lp
+#44    280.60s best:599957 next:[529151,599956] no_lp
+#45    280.61s best:599956 next:[529151,599955] no_lp
+#46    280.61s best:599955 next:[529151,599954] no_lp
+#47    280.72s best:599954 next:[529151,599953] no_lp
+#48    280.72s best:599953 next:[529151,599952] no_lp
+#49    280.73s best:599952 next:[529151,599951] no_lp
+#50    280.74s best:599951 next:[529151,599950] no_lp
+#51    280.74s best:599950 next:[529151,599949] no_lp
+#52    280.75s best:599949 next:[529151,599948] no_lp
+#53    280.76s best:599948 next:[529151,599947] no_lp
+#54    280.79s best:599947 next:[529151,599946] no_lp
+#55    280.80s best:599946 next:[529151,599945] no_lp
+#56    280.80s best:599945 next:[529151,599944] no_lp
+#57    280.82s best:599944 next:[529151,599943] no_lp
+#58    280.83s best:599943 next:[529151,599942] no_lp
+#59    280.84s best:599942 next:[529151,599941] no_lp
+#60    280.85s best:599941 next:[529151,599940] no_lp
+#61    280.85s best:599940 next:[529151,599939] no_lp
+#62    280.86s best:599939 next:[529151,599938] no_lp
+#63    280.86s best:599938 next:[529151,599937] no_lp
+#64    280.87s best:599937 next:[529151,599936] no_lp
+#65    280.88s best:599936 next:[529151,599935] no_lp
+#66    280.88s best:599935 next:[529151,599934] no_lp
+#67    280.89s best:599934 next:[529151,599933] no_lp
+#68    280.90s best:599933 next:[529151,599932] no_lp
+#69    280.95s best:599932 next:[529151,599931] no_lp
+#70    280.95s best:599931 next:[529151,599930] no_lp
+#71    280.96s best:599930 next:[529151,599929] no_lp
+#72    280.97s best:599929 next:[529151,599928] no_lp
+#73    280.98s best:599928 next:[529151,599927] no_lp
+#74    280.99s best:599927 next:[529151,599926] no_lp
+#75    281.01s best:599926 next:[529151,599925] no_lp
+#76    281.01s best:599925 next:[529151,599924] no_lp
+#77    281.02s best:599924 next:[529151,599923] no_lp
+#78    281.03s best:599923 next:[529151,599922] no_lp
+#79    281.04s best:599922 next:[529151,599921] no_lp
+#80    281.05s best:599921 next:[529151,599920] no_lp
+#81    281.06s best:599920 next:[529151,599919] no_lp
+#82    281.06s best:599919 next:[529151,599918] no_lp
+#83    281.08s best:599918 next:[529151,599917] no_lp
+#84    281.08s best:599917 next:[529151,599916] no_lp
+#85    281.09s best:599916 next:[529151,599915] no_lp
+#86    281.10s best:599915 next:[529151,599914] no_lp
+#87    281.11s best:599914 next:[529151,599913] no_lp
+#88    281.11s best:599913 next:[529151,599912] no_lp
+#89    281.12s best:599912 next:[529151,599911] no_lp
+#90    281.13s best:599911 next:[529151,599910] no_lp
+#91    281.14s best:599910 next:[529151,599909] no_lp
+#92    281.15s best:599909 next:[529151,599908] no_lp
+#93    281.15s best:599908 next:[529151,599907] no_lp
+#94    281.16s best:599907 next:[529151,599906] no_lp
+#95    281.18s best:599906 next:[529151,599905] no_lp
+#96    281.21s best:599905 next:[529151,599904] no_lp
+#97    281.22s best:599904 next:[529151,599903] no_lp
+#98    281.22s best:599903 next:[529151,599902] no_lp
+#99    281.26s best:599902 next:[529151,599901] no_lp
+#100   281.27s best:599901 next:[529151,599900] no_lp
+#101   281.28s best:599900 next:[529151,599899] no_lp
+#102   281.32s best:599899 next:[529151,599898] no_lp
+#103   281.33s best:599898 next:[529151,599897] no_lp
+#104   281.42s best:599897 next:[529151,599896] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:591} gen{mvs:184 evals:0} comp{mvs:72 btracks:56} #w_updates:5 #perturb:0)
+#105   281.79s best:599896 next:[529151,599895] no_lp
+#106   281.81s best:599895 next:[529151,599894] no_lp
+#107   281.81s best:599894 next:[529151,599893] no_lp
+#108   281.86s best:599893 next:[529151,599892] no_lp
+#109   281.87s best:599892 next:[529151,599891] no_lp
+#110   281.87s best:599891 next:[529151,599890] no_lp
+#111   281.88s best:599890 next:[529151,599889] no_lp
+#112   281.89s best:599889 next:[529151,599888] no_lp
+#113   281.90s best:599888 next:[529151,599887] no_lp
+#114   281.90s best:599887 next:[529151,599886] no_lp
+#115   281.91s best:599886 next:[529151,599885] no_lp
+#116   281.92s best:599885 next:[529151,599884] no_lp
+#117   281.93s best:599884 next:[529151,599883] no_lp
+#118   281.94s best:599883 next:[529151,599882] no_lp
+#119   281.95s best:599882 next:[529151,599881] no_lp
+#120   281.95s best:599881 next:[529151,599880] no_lp
+#121   281.96s best:599880 next:[529151,599879] no_lp
+#122   281.98s best:599879 next:[529151,599878] no_lp
+#123   281.98s best:599878 next:[529151,599877] no_lp
+#124   281.99s best:599877 next:[529151,599876] no_lp
+#125   282.00s best:599876 next:[529151,599875] no_lp
+#126   282.01s best:599875 next:[529151,599874] no_lp
+#127   282.02s best:599874 next:[529151,599873] no_lp
+#128   282.02s best:599873 next:[529151,599872] no_lp
+#129   282.03s best:599872 next:[529151,599871] no_lp
+#130   282.04s best:599871 next:[529151,599870] no_lp
+#131   282.06s best:599870 next:[529151,599869] no_lp
+#132   282.06s best:599869 next:[529151,599868] no_lp
+#133   282.07s best:599868 next:[529151,599867] no_lp
+#134   282.07s best:599867 next:[529151,599866] no_lp
+#135   282.08s best:599866 next:[529151,599865] no_lp
+#136   282.11s best:599865 next:[529151,599864] no_lp
+#137   282.12s best:599864 next:[529151,599863] no_lp
+#138   282.13s best:599863 next:[529151,599862] no_lp
+#139   282.14s best:599862 next:[529151,599861] no_lp
+#140   282.15s best:599861 next:[529151,599860] no_lp
+#141   282.16s best:599860 next:[529151,599859] no_lp
+#142   282.16s best:599859 next:[529151,599858] no_lp
+#143   282.17s best:599858 next:[529151,599857] no_lp
+#144   282.20s best:599857 next:[529151,599856] no_lp
+#145   282.21s best:599856 next:[529151,599855] no_lp
+#146   282.22s best:599855 next:[529151,599854] no_lp
+#147   282.23s best:599854 next:[529151,599853] no_lp
+#148   282.24s best:599853 next:[529151,599852] no_lp
+#149   282.25s best:599852 next:[529151,599851] no_lp
+#150   282.26s best:599851 next:[529151,599850] no_lp
+#151   282.26s best:599850 next:[529151,599849] no_lp
+#152   282.27s best:599849 next:[529151,599848] no_lp
+#153   282.29s best:599848 next:[529151,599847] no_lp
+#154   282.29s best:599847 next:[529151,599846] no_lp
+#155   282.33s best:599846 next:[529151,599845] no_lp
+#156   282.33s best:599845 next:[529151,599844] no_lp
+#157   282.38s best:599844 next:[529151,599843] no_lp
+#158   282.39s best:599843 next:[529151,599842] no_lp
+#159   282.40s best:599842 next:[529151,599841] no_lp
+#160   282.42s best:599841 next:[529151,599840] no_lp
+#161   282.42s best:599840 next:[529151,599839] no_lp
+#162   282.43s best:599839 next:[529151,599838] no_lp
+#163   282.44s best:599838 next:[529151,599837] no_lp
+#164   282.45s best:599837 next:[529151,599836] no_lp
+#165   282.48s best:599836 next:[529151,599835] no_lp
+#166   282.50s best:599835 next:[529151,599834] no_lp
+#167   282.51s best:599834 next:[529151,599833] no_lp
+#168   282.52s best:599833 next:[529151,599832] no_lp
+#169   282.52s best:599832 next:[529151,599831] no_lp
+#170   282.54s best:599831 next:[529151,599830] no_lp
+#171   282.55s best:599830 next:[529151,599829] no_lp
+#172   282.59s best:599829 next:[529151,599828] no_lp
+#173   282.60s best:599828 next:[529151,599827] no_lp
+#174   282.61s best:599827 next:[529151,599826] no_lp
+#175   282.62s best:599826 next:[529151,599825] no_lp
+#176   282.63s best:599825 next:[529151,599824] no_lp
+#177   282.64s best:599824 next:[529151,599823] no_lp
+#178   282.65s best:599823 next:[529151,599822] no_lp
+#179   282.65s best:599822 next:[529151,599821] no_lp
+#180   282.68s best:599821 next:[529151,599820] no_lp
+#181   282.69s best:599820 next:[529151,599819] no_lp
+#182   282.70s best:599819 next:[529151,599818] no_lp
+#183   282.74s best:599818 next:[529151,599817] no_lp
+#184   282.75s best:599817 next:[529151,599816] no_lp
+#185   282.76s best:599816 next:[529151,599815] no_lp
+#186   282.77s best:599815 next:[529151,599814] no_lp
+#187   282.79s best:599814 next:[529151,599813] no_lp
+#188   282.80s best:599813 next:[529151,599812] no_lp
+#189   282.82s best:599812 next:[529151,599811] no_lp
+#190   282.82s best:599811 next:[529151,599810] no_lp
+#191   282.84s best:599810 next:[529151,599809] no_lp
+#192   282.85s best:599809 next:[529151,599808] no_lp
+#193   282.86s best:599808 next:[529151,599807] no_lp
+#194   282.87s best:599807 next:[529151,599806] no_lp
+#195   282.88s best:599806 next:[529151,599805] no_lp
+#196   282.89s best:599805 next:[529151,599804] no_lp
+#197   282.90s best:599804 next:[529151,599803] no_lp
+#198   282.91s best:599803 next:[529151,599802] no_lp
+#199   282.92s best:599802 next:[529151,599801] no_lp
+#200   282.94s best:599801 next:[529151,599800] no_lp
+#201   282.95s best:599800 next:[529151,599799] no_lp
+#202   282.96s best:599799 next:[529151,599798] no_lp
+#203   282.96s best:599798 next:[529151,599797] no_lp
+#204   282.98s best:599797 next:[529151,599796] no_lp
+#205   282.99s best:599796 next:[529151,599795] no_lp
+#206   283.00s best:599795 next:[529151,599794] no_lp
+#207   283.00s best:599794 next:[529151,599793] no_lp
+#208   283.02s best:599793 next:[529151,599792] no_lp
+#209   283.03s best:599792 next:[529151,599791] no_lp
+#210   283.03s best:599683 next:[529151,599682] graph_cst_lns (d=9.40e-01 s=1242 t=0.10 p=0.52 stall=0 h=base)
+#211   283.04s best:599682 next:[529151,599681] ls_restart(batch:1 lin{mvs:33 evals:169} #w_updates:25 #perturb:0)
+#212   283.05s best:599681 next:[529151,599680] no_lp
+#213   283.07s best:599680 next:[529151,599679] no_lp
+#214   283.07s best:599679 next:[529151,599678] no_lp
+#215   283.08s best:599678 next:[529151,599677] no_lp
+#216   283.09s best:599677 next:[529151,599676] no_lp
+#217   283.10s best:599676 next:[529151,599675] no_lp
+#218   283.12s best:599675 next:[529151,599674] no_lp
+#219   283.13s best:599674 next:[529151,599673] no_lp
+#220   283.14s best:599673 next:[529151,599672] no_lp
+#221   283.15s best:599672 next:[529151,599671] no_lp
+#222   283.18s best:599671 next:[529151,599670] no_lp
+#223   283.19s best:599670 next:[529151,599669] no_lp
+#224   283.19s best:599669 next:[529151,599668] no_lp
+#225   283.20s best:599668 next:[529151,599667] no_lp
+#226   283.22s best:599667 next:[529151,599666] no_lp
+#227   283.23s best:599666 next:[529151,599665] no_lp
+#228   283.23s best:599665 next:[529151,599664] no_lp
+#229   283.24s best:599664 next:[529151,599663] no_lp
+#230   283.25s best:599663 next:[529151,599662] no_lp
+#231   283.27s best:599662 next:[529151,599661] no_lp
+#232   283.27s best:599661 next:[529151,599660] no_lp
+#233   283.28s best:599660 next:[529151,599659] no_lp
+#234   283.29s best:599659 next:[529151,599658] no_lp
+#235   283.32s best:599658 next:[529151,599657] no_lp
+#236   283.33s best:599657 next:[529151,599656] no_lp
+#237   283.38s best:599656 next:[529151,599655] no_lp
+#238   283.38s best:599655 next:[529151,599654] no_lp
+#239   283.39s best:599654 next:[529151,599653] no_lp
+#240   283.41s best:599653 next:[529151,599652] no_lp
+#241   283.41s best:599652 next:[529151,599651] no_lp
+#242   283.42s best:599651 next:[529151,599650] no_lp
+#243   283.43s best:599650 next:[529151,599649] no_lp
+#244   283.44s best:599649 next:[529151,599648] no_lp
+#245   283.47s best:599648 next:[529151,599647] no_lp
+#246   283.48s best:599647 next:[529151,599646] no_lp
+#247   283.49s best:599646 next:[529151,599645] no_lp
+#248   283.50s best:599645 next:[529151,599644] no_lp
+#249   283.51s best:599644 next:[529151,599643] no_lp
+#250   283.52s best:599643 next:[529151,599642] no_lp
+#251   283.53s best:599642 next:[529151,599641] no_lp
+#252   283.54s best:599641 next:[529151,599640] no_lp
+#253   283.56s best:599640 next:[529151,599639] no_lp
+#254   283.57s best:599639 next:[529151,599638] no_lp
+#255   283.58s best:599638 next:[529151,599637] no_lp
+#256   283.58s best:599637 next:[529151,599636] no_lp
+#257   283.59s best:599636 next:[529151,599635] no_lp
+#258   283.61s best:599635 next:[529151,599634] no_lp
+#259   283.62s best:599634 next:[529151,599633] no_lp
+#260   283.63s best:599633 next:[529151,599632] no_lp
+#261   283.65s best:599632 next:[529151,599631] no_lp
+#262   283.66s best:599631 next:[529151,599630] no_lp
+#263   283.68s best:599630 next:[529151,599629] no_lp
+#264   283.69s best:599629 next:[529151,599628] no_lp
+#265   283.73s best:599628 next:[529151,599627] no_lp
+#266   283.73s best:599627 next:[529151,599626] no_lp
+#267   283.74s best:599626 next:[529151,599625] no_lp
+#268   283.75s best:599625 next:[529151,599624] no_lp
+#269   283.76s best:599624 next:[529151,599623] no_lp
+#270   283.76s best:599623 next:[529151,599622] no_lp
+#271   283.77s best:599622 next:[529151,599621] no_lp
+#272   283.78s best:599621 next:[529151,599620] no_lp
+#273   283.79s best:599620 next:[529151,599619] no_lp
+#274   283.80s best:599619 next:[529151,599618] no_lp
+#275   283.81s best:599618 next:[529151,599617] no_lp
+#276   283.81s best:599617 next:[529151,599616] no_lp
+#277   283.82s best:599616 next:[529151,599615] no_lp
+#278   283.83s best:599615 next:[529151,599614] no_lp
+#279   283.84s best:599614 next:[529151,599613] no_lp
+#280   283.84s best:599613 next:[529151,599612] no_lp
+#281   283.85s best:599612 next:[529151,599611] no_lp
+#282   283.86s best:599611 next:[529151,599610] no_lp
+#283   283.87s best:599610 next:[529151,599609] no_lp
+#284   283.88s best:599609 next:[529151,599608] no_lp
+#285   283.88s best:599608 next:[529151,599607] no_lp
+#286   283.89s best:599607 next:[529151,599606] no_lp
+#287   283.90s best:599606 next:[529151,599605] no_lp
+#288   283.91s best:599605 next:[529151,599604] no_lp
+#289   283.91s best:599604 next:[529151,599603] no_lp
+#290   283.95s best:599603 next:[529151,599602] no_lp
+#291   283.96s best:599602 next:[529151,599601] no_lp
+#292   283.97s best:599601 next:[529151,599600] no_lp
+#293   283.98s best:599600 next:[529151,599599] no_lp
+#294   283.99s best:599599 next:[529151,599598] no_lp
+#295   283.99s best:599598 next:[529151,599597] no_lp
+#296   284.00s best:599597 next:[529151,599596] no_lp
+#297   284.02s best:599596 next:[529151,599595] no_lp
+#298   284.03s best:599595 next:[529151,599594] no_lp
+#299   284.03s best:599594 next:[529151,599593] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:71} gen{mvs:18 evals:0} comp{mvs:18 btracks:0} #w_updates:0 #perturb:0)
+#300   284.04s best:599593 next:[529151,599592] no_lp
+#301   284.08s best:599592 next:[529151,599591] no_lp
+#302   284.09s best:599591 next:[529151,599590] no_lp
+#303   284.10s best:599590 next:[529151,599589] no_lp
+#304   284.11s best:599589 next:[529151,599588] no_lp
+#305   284.13s best:599588 next:[529151,599587] no_lp
+#306   284.14s best:599587 next:[529151,599586] no_lp
+#307   284.15s best:599586 next:[529151,599585] no_lp
+#308   284.15s best:599585 next:[529151,599584] no_lp
+#309   284.16s best:599584 next:[529151,599583] no_lp
+#310   284.17s best:599583 next:[529151,599582] no_lp
+#311   284.18s best:599582 next:[529151,599581] no_lp
+#312   284.19s best:599581 next:[529151,599580] no_lp
+#313   284.19s best:599580 next:[529151,599579] no_lp
+#314   284.20s best:599579 next:[529151,599578] no_lp
+#315   284.22s best:599578 next:[529151,599577] no_lp
+#316   284.22s best:599577 next:[529151,599576] no_lp
+#317   284.23s best:599576 next:[529151,599575] no_lp
+#318   284.24s best:599575 next:[529151,599574] no_lp
+#319   284.25s best:599574 next:[529151,599573] no_lp
+#320   284.26s best:599573 next:[529151,599572] no_lp
+#321   284.26s best:599572 next:[529151,599571] no_lp
+#322   284.27s best:599571 next:[529151,599570] no_lp
+#323   284.28s best:599570 next:[529151,599569] no_lp
+#324   284.29s best:599569 next:[529151,599568] no_lp
+#325   284.30s best:599568 next:[529151,599567] no_lp
+#326   284.31s best:599567 next:[529151,599566] no_lp
+#327   284.31s best:599566 next:[529151,599565] no_lp
+#328   284.32s best:599565 next:[529151,599564] no_lp
+#329   284.36s best:599564 next:[529151,599563] no_lp
+#330   284.37s best:599563 next:[529151,599562] no_lp
+#331   284.37s best:599562 next:[529151,599561] no_lp
+#332   284.38s best:599561 next:[529151,599560] no_lp
+#333   284.39s best:599560 next:[529151,599559] no_lp
+#334   284.40s best:599559 next:[529151,599558] no_lp
+#335   284.41s best:599558 next:[529151,599557] no_lp
+#336   284.42s best:599557 next:[529151,599556] no_lp
+#337   284.42s best:599556 next:[529151,599555] no_lp
+#338   284.43s best:599555 next:[529151,599554] no_lp
+#339   284.43s best:599554 next:[529151,599553] no_lp
+#340   284.46s best:599553 next:[529151,599552] no_lp
+#341   284.46s best:599552 next:[529151,599551] no_lp
+#342   284.47s best:599551 next:[529151,599550] no_lp
+#343   284.48s best:599550 next:[529151,599549] no_lp
+#344   284.49s best:599549 next:[529151,599548] no_lp
+#345   284.50s best:599548 next:[529151,599547] no_lp
+#346   284.51s best:599547 next:[529151,599546] no_lp
+#347   284.51s best:599546 next:[529151,599545] no_lp
+#348   284.52s best:599545 next:[529151,599544] no_lp
+#349   284.53s best:599544 next:[529151,599543] no_lp
+#350   284.54s best:599543 next:[529151,599542] no_lp
+#351   284.56s best:599542 next:[529151,599541] no_lp
+#352   284.57s best:599541 next:[529151,599540] no_lp
+#353   284.58s best:599540 next:[529151,599539] no_lp
+#354   284.59s best:599539 next:[529151,599538] no_lp
+#355   284.60s best:599538 next:[529151,599537] no_lp
+#356   284.62s best:599537 next:[529151,599536] no_lp
+#357   284.63s best:599536 next:[529151,599535] no_lp
+#358   284.64s best:599535 next:[529151,599534] no_lp
+#359   284.66s best:599534 next:[529151,599533] no_lp
+#360   284.67s best:599533 next:[529151,599532] no_lp
+#361   284.69s best:599532 next:[529151,599531] no_lp
+#362   284.70s best:599531 next:[529151,599530] no_lp
+#363   284.71s best:599530 next:[529151,599529] no_lp
+#364   284.73s best:599529 next:[529151,599528] no_lp
+#365   284.74s best:599528 next:[529151,599527] no_lp
+#366   284.75s best:599527 next:[529151,599526] no_lp
+#367   284.76s best:599526 next:[529151,599525] no_lp
+#368   284.77s best:599525 next:[529151,599524] no_lp
+#369   284.78s best:599524 next:[529151,599523] no_lp
+#370   284.79s best:599523 next:[529151,599522] no_lp
+#371   284.80s best:599522 next:[529151,599521] no_lp
+#372   284.81s best:599521 next:[529151,599520] no_lp
+#373   284.82s best:599520 next:[529151,599519] no_lp
+#374   284.82s best:599519 next:[529151,599518] no_lp
+#375   284.83s best:599518 next:[529151,599517] no_lp
+#376   284.84s best:599517 next:[529151,599516] no_lp
+#377   284.87s best:599516 next:[529151,599515] no_lp
+#378   284.87s best:599515 next:[529151,599514] no_lp
+#379   284.88s best:599514 next:[529151,599513] no_lp
+#380   284.89s best:599513 next:[529151,599512] no_lp
+#381   284.90s best:599512 next:[529151,599511] no_lp
+#382   284.91s best:599511 next:[529151,599510] no_lp
+#383   284.92s best:599510 next:[529151,599509] no_lp
+#384   284.93s best:599509 next:[529151,599508] no_lp
+#385   284.94s best:599508 next:[529151,599507] no_lp
+#386   284.94s best:599507 next:[529151,599506] no_lp
+#387   284.96s best:599506 next:[529151,599505] no_lp
+#388   284.96s best:599505 next:[529151,599504] no_lp
+#389   284.98s best:599504 next:[529151,599503] no_lp
+#390   284.99s best:599503 next:[529151,599502] no_lp
+#391   285.01s best:599502 next:[529151,599501] no_lp
+#392   285.02s best:599501 next:[529151,599500] no_lp
+#393   285.04s best:599500 next:[529151,599499] no_lp
+#394   285.05s best:599499 next:[529151,599498] no_lp
+#395   285.06s best:599498 next:[529151,599497] no_lp
+#396   285.07s best:599497 next:[529151,599496] no_lp
+#397   285.07s best:599496 next:[529151,599495] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:970} gen{mvs:221 evals:0} comp{mvs:41 btracks:90} #w_updates:9 #perturb:0)
+#398   285.09s best:599495 next:[529151,599494] no_lp
+#399   285.10s best:599494 next:[529151,599493] no_lp
+#400   285.11s best:599493 next:[529151,599492] no_lp
+#401   285.11s best:599492 next:[529151,599491] no_lp
+#402   285.12s best:599491 next:[529151,599490] no_lp
+#403   285.13s best:599490 next:[529151,599489] no_lp
+#404   285.13s best:599489 next:[529151,599488] no_lp
+#405   285.14s best:599488 next:[529151,599487] no_lp
+#406   285.19s best:599487 next:[529151,599486] no_lp
+#407   285.20s best:599486 next:[529151,599485] no_lp
+#408   285.21s best:599485 next:[529151,599484] no_lp
+#409   285.22s best:599484 next:[529151,599483] no_lp
+#410   285.22s best:599483 next:[529151,599482] no_lp
+#411   285.23s best:599482 next:[529151,599481] no_lp
+#412   285.24s best:599481 next:[529151,599480] no_lp
+#413   285.25s best:599480 next:[529151,599479] no_lp
+#414   285.25s best:599479 next:[529151,599478] no_lp
+#415   285.27s best:599478 next:[529151,599477] no_lp
+#416   285.28s best:599477 next:[529151,599476] no_lp
+#417   285.28s best:599476 next:[529151,599475] no_lp
+#418   285.32s best:599475 next:[529151,599474] no_lp
+#419   285.33s best:599474 next:[529151,599473] no_lp
+#420   285.34s best:599473 next:[529151,599472] no_lp
+#421   285.35s best:599472 next:[529151,599471] no_lp
+#422   285.36s best:599471 next:[529151,599470] no_lp
+#423   285.37s best:599470 next:[529151,599469] no_lp
+#424   285.39s best:599469 next:[529151,599468] no_lp
+#425   285.40s best:599468 next:[529151,599467] no_lp
+#426   285.40s best:599467 next:[529151,599466] no_lp
+#427   285.42s best:599466 next:[529151,599465] no_lp
+#428   285.42s best:599465 next:[529151,599464] no_lp
+#429   285.43s best:599464 next:[529151,599463] no_lp
+#430   285.44s best:599463 next:[529151,599462] no_lp
+#431   285.49s best:599462 next:[529151,599461] no_lp
+#432   285.50s best:599461 next:[529151,599460] no_lp
+#433   285.51s best:599460 next:[529151,599459] no_lp
+#434   285.52s best:599459 next:[529151,599458] no_lp
+#435   285.52s best:599458 next:[529151,599457] no_lp
+#436   285.53s best:599457 next:[529151,599456] no_lp
+#437   285.59s best:599456 next:[529151,599455] no_lp
+#438   285.59s best:599455 next:[529151,599454] no_lp
+#439   285.60s best:599454 next:[529151,599453] no_lp
+#440   285.61s best:599453 next:[529151,599452] no_lp
+#441   285.62s best:599452 next:[529151,599451] no_lp
+#442   285.63s best:599451 next:[529151,599450] no_lp
+#443   285.63s best:599450 next:[529151,599449] no_lp
+#444   285.64s best:599449 next:[529151,599448] no_lp
+#445   285.65s best:599448 next:[529151,599447] no_lp
+#446   285.66s best:599447 next:[529151,599446] no_lp
+#447   285.67s best:599446 next:[529151,599445] no_lp
+#448   285.68s best:599445 next:[529151,599444] no_lp
+#449   285.69s best:599444 next:[529151,599443] no_lp
+#450   285.70s best:599443 next:[529151,599442] no_lp
+#451   285.71s best:599442 next:[529151,599441] no_lp
+#452   285.72s best:599441 next:[529151,599440] no_lp
+#453   285.74s best:599440 next:[529151,599439] no_lp
+#454   285.74s best:599439 next:[529151,599438] no_lp
+#455   285.75s best:599438 next:[529151,599437] no_lp
+#456   285.77s best:599437 next:[529151,599436] no_lp
+#457   285.79s best:599436 next:[529151,599435] no_lp
+#458   285.80s best:599435 next:[529151,599434] no_lp
+#459   285.81s best:599434 next:[529151,599433] no_lp
+#460   285.82s best:599433 next:[529151,599432] no_lp
+#461   285.84s best:599432 next:[529151,599431] no_lp
+#462   285.85s best:599431 next:[529151,599430] no_lp
+#463   285.86s best:599430 next:[529151,599429] no_lp
+#464   285.87s best:599429 next:[529151,599428] no_lp
+#465   285.88s best:599428 next:[529151,599427] no_lp
+#466   285.89s best:599427 next:[529151,599426] no_lp
+#467   285.90s best:599426 next:[529151,599425] no_lp
+#468   285.91s best:599425 next:[529151,599424] no_lp
+#469   285.93s best:599424 next:[529151,599423] no_lp
+#470   285.95s best:599423 next:[529151,599422] no_lp
+#471   285.96s best:599422 next:[529151,599421] no_lp
+#472   285.98s best:599421 next:[529151,599420] no_lp
+#473   285.98s best:599420 next:[529151,599419] no_lp
+#474   286.00s best:599419 next:[529151,599418] no_lp
+#475   286.01s best:599418 next:[529151,599417] no_lp
+#476   286.02s best:599417 next:[529151,599416] no_lp
+#477   286.03s best:599416 next:[529151,599415] no_lp
+#478   286.04s best:599415 next:[529151,599414] no_lp
+#479   286.05s best:599414 next:[529151,599413] no_lp
+#480   286.06s best:599413 next:[529151,599412] no_lp
+#481   286.07s best:599412 next:[529151,599411] no_lp
+#482   286.08s best:599411 next:[529151,599410] no_lp
+#483   286.09s best:599410 next:[529151,599409] no_lp
+#484   286.10s best:599409 next:[529151,599408] no_lp
+#485   286.11s best:599408 next:[529151,599407] no_lp
+#486   286.13s best:599407 next:[529151,599406] no_lp
+#487   286.14s best:599406 next:[529151,599405] no_lp
+#488   286.15s best:599405 next:[529151,599404] no_lp
+#489   286.15s best:599404 next:[529151,599403] no_lp
+#490   286.17s best:599403 next:[529151,599402] no_lp
+#491   286.18s best:599402 next:[529151,599401] no_lp
+#492   286.18s best:599401 next:[529151,599400] no_lp
+#493   286.19s best:599400 next:[529151,599399] no_lp
+#494   286.20s best:599399 next:[529151,599398] no_lp
+#495   286.21s best:599398 next:[529151,599397] no_lp
+#496   286.23s best:599397 next:[529151,599396] no_lp
+#497   286.24s best:599396 next:[529151,599395] no_lp
+#498   286.25s best:599395 next:[529151,599394] no_lp
+#499   286.26s best:599394 next:[529151,599393] no_lp
+#500   286.27s best:599393 next:[529151,599392] no_lp
+#501   286.29s best:599392 next:[529151,599391] no_lp
+#502   286.31s best:599391 next:[529151,599390] no_lp
+#503   286.33s best:599390 next:[529151,599389] no_lp
+#504   286.35s best:599389 next:[529151,599388] no_lp
+#505   286.37s best:599388 next:[529151,599387] no_lp
+#506   286.39s best:599387 next:[529151,599386] no_lp
+#507   286.40s best:599386 next:[529151,599385] no_lp
+#508   286.42s best:599385 next:[529151,599384] no_lp
+#509   286.43s best:599384 next:[529151,599383] no_lp
+#510   286.44s best:599383 next:[529151,599382] no_lp
+#511   286.45s best:599382 next:[529151,599381] no_lp
+#512   286.47s best:599381 next:[529151,599380] no_lp
+#513   286.48s best:599380 next:[529151,599379] no_lp
+#514   286.49s best:599379 next:[529151,599378] no_lp
+#515   286.50s best:599378 next:[529151,599377] no_lp
+#516   286.51s best:599377 next:[529151,599376] no_lp
+#517   286.52s best:599376 next:[529151,599375] no_lp
+#518   286.53s best:599375 next:[529151,599374] no_lp
+#519   286.55s best:599374 next:[529151,599373] no_lp
+#520   286.56s best:599373 next:[529151,599372] no_lp
+#521   286.58s best:599372 next:[529151,599371] no_lp
+#522   286.59s best:599371 next:[529151,599370] no_lp
+#523   286.60s best:599370 next:[529151,599369] no_lp
+#524   286.61s best:599369 next:[529151,599368] no_lp
+#525   286.62s best:599368 next:[529151,599367] no_lp
+#526   286.63s best:599367 next:[529151,599366] no_lp
+#527   286.64s best:599366 next:[529151,599365] no_lp
+#528   286.65s best:599365 next:[529151,599364] no_lp
+#529   286.67s best:599364 next:[529151,599363] no_lp
+#530   286.74s best:599363 next:[529151,599362] no_lp
+#531   286.74s best:599362 next:[529151,599361] no_lp
+#532   286.76s best:599361 next:[529151,599360] no_lp
+#533   286.77s best:599360 next:[529151,599359] no_lp
+#534   286.78s best:599359 next:[529151,599358] no_lp
+#535   286.79s best:599358 next:[529151,599357] no_lp
+#536   286.80s best:599357 next:[529151,599356] no_lp
+#537   286.81s best:599356 next:[529151,599355] no_lp
+#538   286.82s best:599355 next:[529151,599354] no_lp
+#539   286.83s best:599354 next:[529151,599353] no_lp
+#540   286.84s best:599353 next:[529151,599352] no_lp
+#541   286.85s best:599352 next:[529151,599351] no_lp
+#542   286.87s best:599351 next:[529151,599350] no_lp
+#543   286.87s best:599350 next:[529151,599349] no_lp
+#544   286.89s best:599349 next:[529151,599348] no_lp
+#545   286.90s best:599348 next:[529151,599347] no_lp
+#546   286.91s best:599347 next:[529151,599346] no_lp
+#547   286.92s best:599346 next:[529151,599345] no_lp
+#548   286.94s best:599345 next:[529151,599344] no_lp
+#549   286.95s best:599344 next:[529151,599343] no_lp
+#550   286.96s best:599343 next:[529151,599342] no_lp
+#551   286.97s best:599342 next:[529151,599341] no_lp
+#552   286.98s best:599341 next:[529151,599340] no_lp
+#553   286.99s best:599340 next:[529151,599339] no_lp
+#554   287.00s best:599339 next:[529151,599338] no_lp
+#555   287.01s best:599338 next:[529151,599337] no_lp
+#556   287.02s best:599337 next:[529151,599336] no_lp
+#557   287.03s best:599336 next:[529151,599335] no_lp
+#558   287.04s best:599335 next:[529151,599334] no_lp
+#559   287.05s best:599334 next:[529151,599333] no_lp
+#560   287.06s best:599333 next:[529151,599332] no_lp
+#561   287.07s best:599332 next:[529151,599331] no_lp
+#562   287.12s best:599331 next:[529151,599330] no_lp
+#563   287.13s best:599330 next:[529151,599329] no_lp
+#564   287.14s best:599329 next:[529151,599328] no_lp
+#565   287.14s best:599274 next:[529151,599273] graph_arc_lns (d=9.59e-01 s=1256 t=0.10 p=0.54 stall=0 h=base)
+#566   287.21s best:599273 next:[529151,599272] no_lp
+#567   287.22s best:599272 next:[529151,599271] no_lp
+#568   287.23s best:599271 next:[529151,599270] no_lp
+#569   287.25s best:599270 next:[529151,599269] no_lp
+#570   287.26s best:599269 next:[529151,599268] no_lp
+#571   287.28s best:599268 next:[529151,599267] no_lp
+#572   287.29s best:599267 next:[529151,599266] no_lp
+#573   287.30s best:599266 next:[529151,599265] no_lp
+#574   287.31s best:599265 next:[529151,599264] no_lp
+#575   287.33s best:599264 next:[529151,599263] no_lp
+#576   287.33s best:599263 next:[529151,599262] no_lp
+#577   287.36s best:599262 next:[529151,599261] no_lp
+#578   287.36s best:599261 next:[529151,599260] no_lp
+#579   287.38s best:599260 next:[529151,599259] no_lp
+#580   287.39s best:599259 next:[529151,599258] no_lp
+#581   287.40s best:599258 next:[529151,599257] no_lp
+#582   287.41s best:599257 next:[529151,599256] no_lp
+#583   287.42s best:599256 next:[529151,599255] no_lp
+#584   287.43s best:599255 next:[529151,599254] no_lp
+#585   287.44s best:599254 next:[529151,599253] no_lp
+#586   287.45s best:599253 next:[529151,599252] no_lp
+#587   287.46s best:599252 next:[529151,599251] no_lp
+#588   287.47s best:599251 next:[529151,599250] no_lp
+#589   287.49s best:599250 next:[529151,599249] no_lp
+#590   287.50s best:599249 next:[529151,599248] no_lp
+#591   287.57s best:599248 next:[529151,599247] no_lp
+#592   287.58s best:599247 next:[529151,599246] no_lp
+#593   287.59s best:599246 next:[529151,599245] no_lp
+#594   287.60s best:599245 next:[529151,599244] no_lp
+#595   287.68s best:599244 next:[529151,599243] no_lp
+#596   287.68s best:599243 next:[529151,599242] no_lp
+#597   287.69s best:599242 next:[529151,599241] no_lp
+#598   287.70s best:599241 next:[529151,599240] no_lp
+#599   287.71s best:599240 next:[529151,599239] no_lp
+#600   287.72s best:599239 next:[529151,599238] no_lp
+#601   287.73s best:599238 next:[529151,599237] no_lp
+#602   287.74s best:599237 next:[529151,599236] no_lp
+#603   287.75s best:599236 next:[529151,599235] no_lp
+#604   287.75s best:599235 next:[529151,599234] no_lp
+#605   287.77s best:599234 next:[529151,599233] no_lp
+#606   287.79s best:599233 next:[529151,599232] no_lp
+#607   287.85s best:599232 next:[529151,599231] no_lp
+#608   287.86s best:599231 next:[529151,599230] no_lp
+#609   287.87s best:599230 next:[529151,599229] no_lp
+#610   287.89s best:599229 next:[529151,599228] no_lp
+#611   287.90s best:599228 next:[529151,599227] no_lp
+#612   287.92s best:599227 next:[529151,599226] no_lp
+#613   287.93s best:599226 next:[529151,599225] no_lp
+#614   287.95s best:599225 next:[529151,599224] no_lp
+#615   287.96s best:599224 next:[529151,599223] no_lp
+#616   287.98s best:599223 next:[529151,599222] no_lp
+#617   288.00s best:599222 next:[529151,599221] no_lp
+#618   288.02s best:599221 next:[529151,599220] no_lp
+#619   288.04s best:599220 next:[529151,599219] no_lp
+#620   288.06s best:599219 next:[529151,599218] no_lp
+#621   288.07s best:599218 next:[529151,599217] no_lp
+#622   288.09s best:599217 next:[529151,599216] no_lp
+#623   288.10s best:599216 next:[529151,599215] no_lp
+#624   288.13s best:599215 next:[529151,599214] no_lp
+#625   288.14s best:599214 next:[529151,599213] no_lp
+#626   288.16s best:599213 next:[529151,599212] no_lp
+#627   288.19s best:599212 next:[529151,599211] no_lp
+#628   288.45s best:599211 next:[529151,599210] no_lp
+#629   288.47s best:599210 next:[529151,599209] no_lp
+#630   288.49s best:599209 next:[529151,599208] no_lp
+#631   288.52s best:599208 next:[529151,599207] no_lp
+#632   288.54s best:599207 next:[529151,599206] no_lp
+#633   288.56s best:599206 next:[529151,599205] no_lp
+#634   288.58s best:599205 next:[529151,599204] no_lp
+#635   288.60s best:599204 next:[529151,599203] no_lp
+#636   288.62s best:599203 next:[529151,599202] no_lp
+#637   288.64s best:599202 next:[529151,599201] no_lp
+#638   288.66s best:599201 next:[529151,599200] no_lp
+#639   288.68s best:599200 next:[529151,599199] no_lp
+#640   288.71s best:599199 next:[529151,599198] no_lp
+#641   288.74s best:599198 next:[529151,599197] no_lp
+#642   288.76s best:599197 next:[529151,599196] no_lp
+#643   288.79s best:599196 next:[529151,599195] no_lp
+#644   288.81s best:599195 next:[529151,599194] no_lp
+#645   288.83s best:599194 next:[529151,599193] no_lp
+#646   288.86s best:599193 next:[529151,599192] no_lp
+#647   288.89s best:599192 next:[529151,599191] no_lp
+#648   288.93s best:599191 next:[529151,599190] no_lp
+#649   288.96s best:599190 next:[529151,599189] no_lp
+#650   288.99s best:599189 next:[529151,599188] no_lp
+#651   289.08s best:599188 next:[529151,599187] no_lp
+#652   289.10s best:599187 next:[529151,599186] no_lp
+#653   289.11s best:599186 next:[529151,599185] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:5'881} gen{mvs:1'695 evals:0} comp{mvs:149 btracks:773} #w_updates:32 #perturb:0)
+#654   289.13s best:599185 next:[529151,599184] ls_restart_compound(batch:1 lin{mvs:0 evals:5'123} gen{mvs:1'349 evals:0} comp{mvs:115 btracks:617} #w_updates:31 #perturb:0)
+#655   289.16s best:599184 next:[529151,599183] no_lp
+#656   289.18s best:599183 next:[529151,599182] no_lp
+#657   289.21s best:599182 next:[529151,599181] no_lp
+#658   289.23s best:599181 next:[529151,599180] no_lp
+#659   289.25s best:599180 next:[529151,599179] no_lp
+#660   289.27s best:599179 next:[529151,599178] no_lp
+#661   289.30s best:599178 next:[529151,599177] no_lp
+#662   289.32s best:599177 next:[529151,599176] no_lp
+#663   289.34s best:599176 next:[529151,599175] no_lp
+#664   289.36s best:599175 next:[529151,599174] no_lp
+#665   289.38s best:599174 next:[529151,599173] no_lp
+#666   289.40s best:599173 next:[529151,599172] no_lp
+#667   289.43s best:599172 next:[529151,599171] no_lp
+#668   289.45s best:599171 next:[529151,599170] no_lp
+#669   289.47s best:599170 next:[529151,599169] no_lp
+#670   289.49s best:599169 next:[529151,599168] no_lp
+#671   289.52s best:599168 next:[529151,599167] no_lp
+#672   289.54s best:599167 next:[529151,599166] no_lp
+#673   289.57s best:599166 next:[529151,599165] no_lp
+#674   289.59s best:599165 next:[529151,599164] no_lp
+#675   289.61s best:599164 next:[529151,599163] no_lp
+#676   289.63s best:599163 next:[529151,599162] no_lp
+#677   289.65s best:599162 next:[529151,599161] no_lp
+#678   289.68s best:599161 next:[529151,599160] no_lp
+#679   289.70s best:599160 next:[529151,599159] no_lp
+#680   289.72s best:599159 next:[529151,599158] no_lp
+#681   289.74s best:599158 next:[529151,599157] no_lp
+#682   289.76s best:599157 next:[529151,599156] no_lp
+#683   289.78s best:599156 next:[529151,599155] no_lp
+#684   289.80s best:599155 next:[529151,599154] no_lp
+#685   289.82s best:599154 next:[529151,599153] no_lp
+#686   289.84s best:599153 next:[529151,599152] no_lp
+#687   289.86s best:599152 next:[529151,599151] no_lp
+#688   289.89s best:599151 next:[529151,599150] no_lp
+#689   289.91s best:599150 next:[529151,599149] no_lp
+#690   289.93s best:599149 next:[529151,599148] no_lp
+#691   289.95s best:599148 next:[529151,599147] no_lp
+#692   289.97s best:599147 next:[529151,599146] no_lp
+#693   289.99s best:599146 next:[529151,599145] no_lp
+#694   290.01s best:599145 next:[529151,599144] no_lp
+#695   290.03s best:599144 next:[529151,599143] no_lp
+#696   290.05s best:599143 next:[529151,599142] no_lp
+#697   290.07s best:599142 next:[529151,599141] no_lp
+#698   290.10s best:599141 next:[529151,599140] no_lp
+#699   290.13s best:599140 next:[529151,599139] no_lp
+#700   290.17s best:599139 next:[529151,599138] no_lp
+#701   290.20s best:599138 next:[529151,599137] no_lp
+#702   290.23s best:599137 next:[529151,599136] no_lp
+#703   290.25s best:599136 next:[529151,599135] no_lp
+#704   290.28s best:599135 next:[529151,599134] no_lp
+#705   290.30s best:599134 next:[529151,599133] no_lp
+#706   290.33s best:599133 next:[529151,599132] no_lp
+#707   290.36s best:599132 next:[529151,599131] no_lp
+#708   290.38s best:599131 next:[529151,599130] no_lp
+#709   290.40s best:599130 next:[529151,599129] no_lp
+#710   290.43s best:599129 next:[529151,599128] no_lp
+#711   290.45s best:599128 next:[529151,599127] no_lp
+#712   290.47s best:599127 next:[529151,599126] no_lp
+#713   290.49s best:599126 next:[529151,599125] no_lp
+#714   290.52s best:599125 next:[529151,599124] no_lp
+#715   290.55s best:599124 next:[529151,599123] no_lp
+#716   290.58s best:599123 next:[529151,599122] no_lp
+#717   290.60s best:599122 next:[529151,599121] no_lp
+#718   290.63s best:599121 next:[529151,599120] no_lp
+#719   290.65s best:599120 next:[529151,599119] no_lp
+#720   290.67s best:599119 next:[529151,599118] no_lp
+#721   290.70s best:599118 next:[529151,599117] no_lp
+#722   290.72s best:599117 next:[529151,599116] no_lp
+#723   290.75s best:599116 next:[529151,599115] no_lp
+#724   290.77s best:599115 next:[529151,599114] no_lp
+#725   290.79s best:599114 next:[529151,599113] no_lp
+#726   290.82s best:599113 next:[529151,599112] no_lp
+#727   290.84s best:599112 next:[529151,599111] no_lp
+#728   290.87s best:599111 next:[529151,599110] no_lp
+#729   290.89s best:599110 next:[529151,599109] no_lp
+#730   290.91s best:599109 next:[529151,599108] no_lp
+#731   290.93s best:599108 next:[529151,599107] no_lp
+#732   290.95s best:599107 next:[529151,599106] no_lp
+#733   290.98s best:599106 next:[529151,599105] no_lp
+#734   291.00s best:599105 next:[529151,599104] no_lp
+#735   291.02s best:599104 next:[529151,599103] no_lp
+#736   291.05s best:599103 next:[529151,599102] no_lp
+#737   291.07s best:599102 next:[529151,599101] no_lp
+#738   291.10s best:599101 next:[529151,599100] no_lp
+#739   291.12s best:599100 next:[529151,599099] no_lp
+#740   291.14s best:599099 next:[529151,599098] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:1'094} gen{mvs:349 evals:0} comp{mvs:81 btracks:134} #w_updates:3 #perturb:0)
+#741   291.16s best:599098 next:[529151,599097] ls_restart_perturb(batch:1 lin{mvs:151 evals:831} #w_updates:82 #perturb:0)
+#742   291.18s best:599097 next:[529151,599096] no_lp
+#743   291.19s best:599096 next:[529151,599095] no_lp
+#744   291.20s best:599095 next:[529151,599094] no_lp
+#745   291.22s best:599094 next:[529151,599093] no_lp
+#746   291.23s best:599093 next:[529151,599092] no_lp
+#747   291.25s best:599092 next:[529151,599091] no_lp
+#748   291.26s best:599091 next:[529151,599090] no_lp
+#749   291.27s best:599090 next:[529151,599089] no_lp
+#750   291.29s best:599089 next:[529151,599088] no_lp
+#751   291.30s best:599088 next:[529151,599087] no_lp
+#752   291.31s best:599087 next:[529151,599086] no_lp
+#753   291.33s best:599086 next:[529151,599085] no_lp
+#754   291.34s best:599085 next:[529151,599084] no_lp
+#755   291.36s best:599084 next:[529151,599083] no_lp
+#756   291.37s best:599083 next:[529151,599082] no_lp
+#757   291.38s best:599082 next:[529151,599081] no_lp
+#758   291.40s best:599081 next:[529151,599080] no_lp
+#759   291.42s best:599080 next:[529151,599079] no_lp
+#760   291.43s best:599079 next:[529151,599078] no_lp
+#761   291.45s best:599078 next:[529151,599077] no_lp
+#762   291.47s best:599077 next:[529151,599076] no_lp
+#763   291.49s best:599076 next:[529151,599075] no_lp
+#764   291.50s best:599075 next:[529151,599074] no_lp
+#765   291.51s best:599074 next:[529151,599073] no_lp
+#766   291.53s best:599073 next:[529151,599072] no_lp
+#767   291.54s best:599072 next:[529151,599071] no_lp
+#768   291.55s best:599071 next:[529151,599070] no_lp
+#769   291.57s best:599070 next:[529151,599069] no_lp
+#770   291.58s best:599069 next:[529151,599068] no_lp
+#771   291.60s best:599068 next:[529151,599067] no_lp
+#772   291.61s best:599067 next:[529151,599066] no_lp
+#773   291.63s best:599066 next:[529151,599065] no_lp
+#774   291.65s best:599065 next:[529151,599064] no_lp
+#775   291.66s best:599064 next:[529151,599063] no_lp
+#776   291.68s best:599063 next:[529151,599062] no_lp
+#777   291.69s best:599062 next:[529151,599061] no_lp
+#778   291.71s best:599061 next:[529151,599060] no_lp
+#779   291.72s best:599060 next:[529151,599059] no_lp
+#780   291.73s best:599059 next:[529151,599058] no_lp
+#781   291.75s best:599058 next:[529151,599057] no_lp
+#782   291.76s best:599057 next:[529151,599056] no_lp
+#783   291.77s best:599056 next:[529151,599055] no_lp
+#784   291.78s best:599055 next:[529151,599054] no_lp
+#785   291.80s best:599054 next:[529151,599053] no_lp
+#786   291.81s best:599053 next:[529151,599052] no_lp
+#787   291.83s best:599052 next:[529151,599051] no_lp
+#788   291.85s best:599051 next:[529151,599050] no_lp
+#789   291.86s best:599050 next:[529151,599049] no_lp
+#790   291.87s best:599049 next:[529151,599048] no_lp
+#791   291.89s best:599048 next:[529151,599047] no_lp
+#792   291.90s best:599047 next:[529151,599046] no_lp
+#793   291.91s best:599046 next:[529151,599045] no_lp
+#794   291.93s best:599045 next:[529151,599044] no_lp
+#795   291.95s best:599044 next:[529151,599043] no_lp
+#796   291.96s best:599043 next:[529151,599042] no_lp
+#797   291.97s best:599042 next:[529151,599041] no_lp
+#798   291.99s best:599041 next:[529151,599040] no_lp
+#799   292.00s best:599040 next:[529151,599039] no_lp
+#800   292.01s best:599039 next:[529151,599038] no_lp
+#801   292.03s best:599038 next:[529151,599037] no_lp
+#802   292.04s best:599037 next:[529151,599036] no_lp
+#803   292.05s best:599036 next:[529151,599035] no_lp
+#804   292.06s best:599035 next:[529151,599034] no_lp
+#805   292.07s best:599034 next:[529151,599033] no_lp
+#806   292.09s best:599033 next:[529151,599032] no_lp
+#807   292.10s best:599032 next:[529151,599031] no_lp
+#808   292.12s best:599031 next:[529151,599030] no_lp
+#809   292.14s best:599030 next:[529151,599029] no_lp
+#810   292.16s best:599029 next:[529151,599028] no_lp
+#811   292.18s best:599028 next:[529151,599027] no_lp
+#812   292.19s best:599027 next:[529151,599026] no_lp
+#813   292.21s best:599026 next:[529151,599025] no_lp
+#814   292.23s best:599025 next:[529151,599024] no_lp
+#815   292.24s best:599024 next:[529151,599023] no_lp
+#816   292.25s best:599023 next:[529151,599022] no_lp
+#817   292.27s best:599022 next:[529151,599021] no_lp
+#818   292.28s best:599021 next:[529151,599020] no_lp
+#819   292.29s best:599020 next:[529151,599019] no_lp
+#820   292.30s best:599019 next:[529151,599018] no_lp
+#821   292.32s best:599018 next:[529151,599017] no_lp
+#822   292.33s best:599017 next:[529151,599016] no_lp
+#823   292.38s best:599016 next:[529151,599015] no_lp
+#824   292.40s best:599015 next:[529151,599014] no_lp
+#825   292.41s best:599014 next:[529151,599013] no_lp
+#826   292.42s best:599013 next:[529151,599012] no_lp
+#827   292.44s best:599012 next:[529151,599011] no_lp
+#828   292.46s best:599011 next:[529151,599010] no_lp
+#829   292.47s best:599010 next:[529151,599009] no_lp
+#830   292.49s best:599009 next:[529151,599008] no_lp
+#831   292.50s best:599008 next:[529151,599007] no_lp
+#832   292.52s best:599007 next:[529151,599006] no_lp
+#833   292.53s best:599006 next:[529151,599005] no_lp
+#834   292.54s best:599005 next:[529151,599004] no_lp
+#835   292.56s best:599004 next:[529151,599003] no_lp
+#836   292.57s best:599003 next:[529151,599002] no_lp
+#837   292.59s best:599002 next:[529151,599001] no_lp
+#838   292.60s best:599001 next:[529151,599000] no_lp
+#839   292.61s best:599000 next:[529151,598999] no_lp
+#840   292.62s best:598999 next:[529151,598998] no_lp
+#841   292.64s best:598998 next:[529151,598997] no_lp
+#842   292.65s best:598997 next:[529151,598996] no_lp
+#843   292.67s best:598996 next:[529151,598995] no_lp
+#844   292.68s best:598995 next:[529151,598994] no_lp
+#845   292.69s best:598994 next:[529151,598993] no_lp
+#846   292.70s best:598993 next:[529151,598992] no_lp
+#847   292.71s best:598992 next:[529151,598991] no_lp
+#848   293.16s best:598991 next:[529151,598990] ls_restart(batch:1 lin{mvs:116 evals:594} #w_updates:42 #perturb:0)
+#849   293.17s best:598990 next:[529151,598989] ls_restart_decay(batch:1 lin{mvs:157 evals:700} #w_updates:39 #perturb:0)
+#850   293.18s best:598989 next:[529151,598988] ls_restart(batch:1 lin{mvs:150 evals:843} #w_updates:71 #perturb:0)
+#851   293.19s best:598988 next:[529151,598987] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:6'258} gen{mvs:1'628 evals:0} comp{mvs:164 btracks:732} #w_updates:26 #perturb:0)
+#852   294.19s best:598987 next:[529151,598986] ls_restart_decay_perturb(batch:1 lin{mvs:191 evals:766} #w_updates:36 #perturb:0)
+#853   295.67s best:598946 next:[529151,598945] rnd_var_lns (d=9.44e-01 s=1288 t=0.10 p=0.51 stall=0 h=base)
+#854   295.68s best:598945 next:[529151,598944] ls_restart(batch:1 lin{mvs:109 evals:587} #w_updates:64 #perturb:0)
+#855   296.53s best:598481 next:[529151,598480] graph_cst_lns (d=9.24e-01 s=1291 t=0.10 p=0.51 stall=0 h=base)
+#856   296.54s best:598480 next:[529151,598479] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:3'152} gen{mvs:854 evals:0} comp{mvs:118 btracks:368} #w_updates:13 #perturb:0)
+#857   296.55s best:598479 next:[529151,598478] ls_restart_decay(batch:1 lin{mvs:172 evals:845} #w_updates:42 #perturb:0)
+#858   296.57s best:598478 next:[529151,598477] no_lp
+#859   296.58s best:598477 next:[529151,598476] no_lp
+#860   296.59s best:598476 next:[529151,598475] no_lp
+#861   296.60s best:598475 next:[529151,598474] no_lp
+#862   296.63s best:598474 next:[529151,598473] no_lp
+#863   296.64s best:598473 next:[529151,598472] no_lp
+#864   296.66s best:598472 next:[529151,598471] no_lp
+#865   296.67s best:598471 next:[529151,598470] no_lp
+#866   296.68s best:598470 next:[529151,598469] no_lp
+#867   296.69s best:598469 next:[529151,598468] no_lp
+#868   296.70s best:598468 next:[529151,598467] no_lp
+#869   296.71s best:598467 next:[529151,598466] no_lp
+#870   296.72s best:598466 next:[529151,598465] no_lp
+#871   296.72s best:598465 next:[529151,598464] no_lp
+#872   296.73s best:598464 next:[529151,598463] no_lp
+#873   296.74s best:598463 next:[529151,598462] no_lp
+#874   296.75s best:598462 next:[529151,598461] no_lp
+#875   296.76s best:598461 next:[529151,598460] no_lp
+#876   296.77s best:598460 next:[529151,598459] no_lp
+#877   296.78s best:598459 next:[529151,598458] no_lp
+#878   296.79s best:598458 next:[529151,598457] no_lp
+#879   296.80s best:598457 next:[529151,598456] no_lp
+#880   296.80s best:598456 next:[529151,598455] no_lp
+#881   296.81s best:598455 next:[529151,598454] no_lp
+#882   296.82s best:598454 next:[529151,598453] no_lp
+#883   296.83s best:598453 next:[529151,598452] no_lp
+#884   296.84s best:598452 next:[529151,598451] no_lp
+#885   296.86s best:598451 next:[529151,598450] no_lp
+#886   296.87s best:598450 next:[529151,598449] no_lp
+#887   296.88s best:598449 next:[529151,598448] no_lp
+#888   296.89s best:598448 next:[529151,598447] no_lp
+#889   296.91s best:598447 next:[529151,598446] no_lp
+#890   296.92s best:598446 next:[529151,598445] no_lp
+#891   296.93s best:598445 next:[529151,598444] no_lp
+#892   296.94s best:598444 next:[529151,598443] no_lp
+#893   296.95s best:598443 next:[529151,598442] no_lp
+#894   296.95s best:598442 next:[529151,598441] no_lp
+#895   296.96s best:598441 next:[529151,598440] no_lp
+#896   296.97s best:598440 next:[529151,598439] no_lp
+#897   296.98s best:598439 next:[529151,598438] no_lp
+#898   296.99s best:598438 next:[529151,598437] no_lp
+#899   297.00s best:598437 next:[529151,598436] no_lp
+#900   297.02s best:598436 next:[529151,598435] no_lp
+#901   297.03s best:598435 next:[529151,598434] no_lp
+#902   297.04s best:598434 next:[529151,598433] no_lp
+#903   297.05s best:598433 next:[529151,598432] no_lp
+#904   297.06s best:598432 next:[529151,598431] no_lp
+#905   297.07s best:598431 next:[529151,598430] no_lp
+#906   297.08s best:598430 next:[529151,598429] no_lp
+#907   297.09s best:598429 next:[529151,598428] no_lp
+#908   297.11s best:598428 next:[529151,598427] no_lp
+#909   297.12s best:598427 next:[529151,598426] no_lp
+#910   297.13s best:598426 next:[529151,598425] no_lp
+#911   297.14s best:598425 next:[529151,598424] no_lp
+#912   297.16s best:598326 next:[529151,598325] rnd_cst_lns (d=8.53e-01 s=1296 t=0.10 p=0.49 stall=0 h=base)
+#913   297.17s best:598325 next:[529151,598324] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:5'084} gen{mvs:1'261 evals:0} comp{mvs:173 btracks:544} #w_updates:19 #perturb:0)
+#914   321.53s best:598324 next:[529151,598323] no_lp
+#915   321.55s best:598323 next:[529151,598322] no_lp
+#916   321.56s best:598322 next:[529151,598321] no_lp
+#917   321.56s best:598321 next:[529151,598320] no_lp
+#918   321.57s best:598320 next:[529151,598319] no_lp
+#919   321.58s best:598319 next:[529151,598318] no_lp
+#920   321.59s best:598318 next:[529151,598317] no_lp
+#921   321.60s best:598317 next:[529151,598316] no_lp
+#922   321.61s best:598316 next:[529151,598315] no_lp
+#923   321.62s best:598315 next:[529151,598314] no_lp
+#924   321.63s best:598314 next:[529151,598313] no_lp
+#925   321.64s best:598313 next:[529151,598312] no_lp
+#926   321.65s best:598312 next:[529151,598311] no_lp
+#927   321.66s best:598311 next:[529151,598310] no_lp
+#928   321.67s best:598310 next:[529151,598309] no_lp
+#929   321.79s best:598309 next:[529151,598308] no_lp
+#930   321.80s best:598308 next:[529151,598307] no_lp
+#931   321.81s best:598307 next:[529151,598306] no_lp
+#932   321.82s best:598306 next:[529151,598305] no_lp
+#933   321.83s best:598305 next:[529151,598304] no_lp
+#934   321.84s best:598304 next:[529151,598303] no_lp
+#935   321.86s best:598303 next:[529151,598302] no_lp
+#936   321.87s best:598302 next:[529151,598301] no_lp
+#937   321.88s best:598301 next:[529151,598300] no_lp
+#938   321.89s best:598300 next:[529151,598299] no_lp
+#939   321.90s best:598299 next:[529151,598298] no_lp
+#940   321.91s best:598298 next:[529151,598297] no_lp
+#941   321.92s best:598297 next:[529151,598296] no_lp
+#942   321.93s best:598296 next:[529151,598295] no_lp
+#943   321.94s best:598295 next:[529151,598294] no_lp
+#944   321.95s best:598294 next:[529151,598293] no_lp
+#945   321.96s best:598293 next:[529151,598292] no_lp
+#946   321.97s best:598292 next:[529151,598291] no_lp
+#947   321.98s best:598291 next:[529151,598290] no_lp
+#948   321.99s best:598290 next:[529151,598289] no_lp
+#949   322.00s best:598289 next:[529151,598288] no_lp
+#950   322.01s best:598288 next:[529151,598287] no_lp
+#951   322.03s best:598287 next:[529151,598286] no_lp
+#952   322.04s best:598286 next:[529151,598285] no_lp
+#953   322.07s best:598285 next:[529151,598284] no_lp
+#954   322.08s best:598284 next:[529151,598283] no_lp
+#955   322.09s best:598283 next:[529151,598282] no_lp
+#956   322.10s best:598282 next:[529151,598281] no_lp
+#957   322.11s best:598281 next:[529151,598280] no_lp
+#958   322.13s best:598280 next:[529151,598279] no_lp
+#959   322.14s best:598279 next:[529151,598278] no_lp
+#960   322.16s best:598278 next:[529151,598277] no_lp
+#961   322.17s best:598277 next:[529151,598276] no_lp
+#962   322.18s best:598276 next:[529151,598275] no_lp
+#963   322.19s best:598275 next:[529151,598274] no_lp
+#964   322.20s best:598274 next:[529151,598273] no_lp
+#965   322.21s best:598273 next:[529151,598272] no_lp
+#966   322.22s best:598272 next:[529151,598271] no_lp
+#967   322.23s best:598271 next:[529151,598270] no_lp
+#968   322.24s best:598270 next:[529151,598269] no_lp
+#969   322.25s best:598269 next:[529151,598268] no_lp
+#970   322.26s best:598268 next:[529151,598267] no_lp
+#971   322.28s best:598267 next:[529151,598266] no_lp
+#972   322.29s best:598266 next:[529151,598265] no_lp
+#973   322.30s best:598265 next:[529151,598264] no_lp
+#974   322.31s best:598264 next:[529151,598263] no_lp
+#975   322.32s best:598263 next:[529151,598262] no_lp
+#976   322.33s best:598262 next:[529151,598261] no_lp
+#977   322.34s best:598261 next:[529151,598260] no_lp
+#978   322.35s best:598260 next:[529151,598259] no_lp
+#979   322.37s best:598259 next:[529151,598258] no_lp
+#980   322.38s best:598258 next:[529151,598257] no_lp
+#981   322.39s best:598257 next:[529151,598256] no_lp
+#982   322.40s best:598256 next:[529151,598255] no_lp
+#983   322.41s best:598255 next:[529151,598254] no_lp
+#984   322.42s best:598254 next:[529151,598253] no_lp
+#985   322.43s best:598253 next:[529151,598252] no_lp
+#986   322.44s best:598252 next:[529151,598251] no_lp
+#987   322.45s best:598251 next:[529151,598250] no_lp
+#988   322.46s best:598250 next:[529151,598249] no_lp
+#989   322.47s best:598249 next:[529151,598248] no_lp
+#990   322.48s best:598248 next:[529151,598247] no_lp
+#991   322.49s best:598247 next:[529151,598246] no_lp
+#992   322.50s best:598246 next:[529151,598245] no_lp
+#993   322.51s best:598245 next:[529151,598244] no_lp
+#994   322.52s best:598244 next:[529151,598243] no_lp
+#995   322.53s best:598243 next:[529151,598242] no_lp
+#996   322.54s best:598242 next:[529151,598241] no_lp
+#997   322.55s best:598241 next:[529151,598240] no_lp
+#998   322.56s best:598240 next:[529151,598239] no_lp
+#999   322.57s best:598239 next:[529151,598238] no_lp
+#1000  322.58s best:598238 next:[529151,598237] no_lp
+#1001  322.60s best:598237 next:[529151,598236] no_lp
+#1002  322.61s best:598236 next:[529151,598235] no_lp
+#1003  322.62s best:598235 next:[529151,598234] no_lp
+#1004  322.63s best:598234 next:[529151,598233] no_lp
+#1005  322.65s best:598233 next:[529151,598232] no_lp
+#1006  322.66s best:598232 next:[529151,598231] no_lp
+#1007  322.67s best:598231 next:[529151,598230] no_lp
+#1008  322.68s best:598230 next:[529151,598229] no_lp
+#1009  322.69s best:598229 next:[529151,598228] no_lp
+#1010  322.70s best:598228 next:[529151,598227] no_lp
+#1011  322.71s best:598227 next:[529151,598226] no_lp
+#1012  322.72s best:598226 next:[529151,598225] no_lp
+#1013  322.73s best:598225 next:[529151,598224] no_lp
+#1014  322.75s best:598224 next:[529151,598223] no_lp
+#1015  322.75s best:598223 next:[529151,598222] no_lp
+#1016  322.76s best:598222 next:[529151,598221] no_lp
+#1017  322.77s best:598221 next:[529151,598220] no_lp
+#1018  322.78s best:598220 next:[529151,598219] no_lp
+#1019  322.79s best:598219 next:[529151,598218] no_lp
+#1020  322.80s best:598218 next:[529151,598217] no_lp
+#1021  322.81s best:598217 next:[529151,598216] no_lp
+#1022  322.83s best:598216 next:[529151,598215] no_lp
+#1023  322.84s best:598215 next:[529151,598214] no_lp
+#1024  322.85s best:598214 next:[529151,598213] no_lp
+#1025  322.86s best:598213 next:[529151,598212] no_lp
+#1026  322.87s best:598212 next:[529151,598211] no_lp
+#1027  322.88s best:598211 next:[529151,598210] no_lp
+#1028  322.89s best:598210 next:[529151,598209] no_lp
+#1029  322.90s best:598209 next:[529151,598208] no_lp
+#1030  322.91s best:598208 next:[529151,598207] no_lp
+#1031  322.92s best:598207 next:[529151,598206] no_lp
+#1032  322.94s best:598206 next:[529151,598205] no_lp
+#1033  322.95s best:598205 next:[529151,598204] no_lp
+#1034  322.95s best:598204 next:[529151,598203] no_lp
+#1035  322.96s best:598203 next:[529151,598202] no_lp
+#1036  322.98s best:598202 next:[529151,598201] no_lp
+#1037  322.99s best:598201 next:[529151,598200] no_lp
+#1038  323.00s best:598200 next:[529151,598199] no_lp
+#1039  323.01s best:598199 next:[529151,598198] no_lp
+#1040  323.02s best:598198 next:[529151,598197] no_lp
+#1041  323.03s best:598197 next:[529151,598196] no_lp
+#1042  323.04s best:598196 next:[529151,598195] no_lp
+#1043  323.05s best:598195 next:[529151,598194] no_lp
+#1044  323.06s best:598194 next:[529151,598193] no_lp
+#1045  323.07s best:598193 next:[529151,598192] no_lp
+#1046  323.09s best:598192 next:[529151,598191] no_lp
+#1047  323.10s best:598191 next:[529151,598190] no_lp
+#1048  323.10s best:598190 next:[529151,598189] no_lp
+#1049  323.11s best:598189 next:[529151,598188] no_lp
+#1050  323.13s best:598188 next:[529151,598187] no_lp
+#1051  323.14s best:598187 next:[529151,598186] no_lp
+#1052  323.15s best:598186 next:[529151,598185] no_lp
+#1053  323.16s best:598185 next:[529151,598184] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:2'048} gen{mvs:448 evals:0} comp{mvs:108 btracks:170} #w_updates:3 #perturb:0)
+#1054  323.17s best:598184 next:[529151,598183] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:3'348} gen{mvs:626 evals:0} comp{mvs:114 btracks:256} #w_updates:20 #perturb:0)
+#1055  323.18s best:598183 next:[529151,598182] no_lp
+#1056  323.19s best:598182 next:[529151,598181] ls_restart(batch:1 lin{mvs:101 evals:552} #w_updates:27 #perturb:0)
+#1057  323.20s best:598181 next:[529151,598180] ls_restart_compound(batch:1 lin{mvs:0 evals:4'064} gen{mvs:662 evals:0} comp{mvs:80 btracks:291} #w_updates:20 #perturb:0)
+#1058  323.22s best:598180 next:[529151,598179] no_lp
+#1059  323.22s best:598179 next:[529151,598178] no_lp
+#1060  323.23s best:598178 next:[529151,598177] no_lp
+#1061  323.24s best:598177 next:[529151,598176] no_lp
+#1062  323.25s best:598176 next:[529151,598175] no_lp
+#1063  323.26s best:598175 next:[529151,598174] no_lp
+#1064  323.28s best:598174 next:[529151,598173] no_lp
+#1065  323.28s best:598173 next:[529151,598172] no_lp
+#1066  323.29s best:598172 next:[529151,598171] no_lp
+#1067  323.30s best:598171 next:[529151,598170] no_lp
+#1068  323.32s best:598170 next:[529151,598169] no_lp
+#1069  323.33s best:598169 next:[529151,598168] no_lp
+#1070  323.34s best:598168 next:[529151,598167] no_lp
+#1071  323.36s best:598167 next:[529151,598166] no_lp
+#1072  323.37s best:598166 next:[529151,598165] no_lp
+#1073  323.38s best:598165 next:[529151,598164] no_lp
+#1074  323.39s best:598164 next:[529151,598163] no_lp
+#1075  323.40s best:598163 next:[529151,598162] no_lp
+#1076  323.41s best:598162 next:[529151,598161] no_lp
+#1077  323.43s best:598161 next:[529151,598160] no_lp
+#1078  323.44s best:598160 next:[529151,598159] no_lp
+#1079  323.45s best:598159 next:[529151,598158] no_lp
+#1080  323.47s best:598158 next:[529151,598157] no_lp
+#1081  323.48s best:598157 next:[529151,598156] no_lp
+#1082  323.50s best:598156 next:[529151,598155] no_lp
+#1083  323.51s best:598155 next:[529151,598154] no_lp
+#1084  323.52s best:598154 next:[529151,598153] no_lp
+#1085  323.53s best:598153 next:[529151,598152] no_lp
+#1086  323.55s best:598152 next:[529151,598151] no_lp
+#1087  323.56s best:598151 next:[529151,598150] no_lp
+#1088  323.57s best:598150 next:[529151,598149] no_lp
+#1089  323.59s best:598149 next:[529151,598148] no_lp
+#1090  323.60s best:598148 next:[529151,598147] no_lp
+#1091  323.61s best:598147 next:[529151,598146] no_lp
+#1092  323.62s best:598146 next:[529151,598145] no_lp
+#1093  323.63s best:598145 next:[529151,598144] no_lp
+#1094  323.64s best:598144 next:[529151,598143] no_lp
+#1095  323.65s best:598143 next:[529151,598142] no_lp
+#1096  323.67s best:598142 next:[529151,598141] no_lp
+#1097  323.68s best:598141 next:[529151,598140] no_lp
+#1098  323.69s best:598140 next:[529151,598139] no_lp
+#1099  323.71s best:598139 next:[529151,598138] no_lp
+#1100  323.72s best:598138 next:[529151,598137] no_lp
+#1101  323.73s best:598137 next:[529151,598136] no_lp
+#1102  323.74s best:598136 next:[529151,598135] no_lp
+#1103  323.76s best:598135 next:[529151,598134] no_lp
+#1104  323.77s best:598134 next:[529151,598133] no_lp
+#1105  323.77s best:598133 next:[529151,598132] no_lp
+#1106  323.80s best:598132 next:[529151,598131] no_lp
+#1107  323.81s best:598131 next:[529151,598130] no_lp
+#1108  323.82s best:598130 next:[529151,598129] no_lp
+#1109  323.83s best:598129 next:[529151,598128] no_lp
+#1110  323.87s best:598128 next:[529151,598127] no_lp
+#1111  323.88s best:598127 next:[529151,598126] no_lp
+#1112  323.89s best:598126 next:[529151,598125] no_lp
+#1113  323.90s best:598125 next:[529151,598124] no_lp
+#1114  323.91s best:598124 next:[529151,598123] no_lp
+#1115  323.92s best:598123 next:[529151,598122] no_lp
+#1116  323.93s best:598122 next:[529151,598121] no_lp
+#1117  323.95s best:598121 next:[529151,598120] no_lp
+#1118  323.96s best:598120 next:[529151,598119] no_lp
+#1119  323.97s best:598119 next:[529151,598118] no_lp
+#1120  323.99s best:598118 next:[529151,598117] no_lp
+#1121  324.00s best:598117 next:[529151,598116] no_lp
+#1122  324.01s best:598116 next:[529151,598115] no_lp
+#1123  324.02s best:598115 next:[529151,598114] no_lp
+#1124  324.04s best:598114 next:[529151,598113] no_lp
+#1125  324.05s best:598113 next:[529151,598112] no_lp
+#1126  324.06s best:598112 next:[529151,598111] no_lp
+#1127  324.08s best:598111 next:[529151,598110] no_lp
+#1128  324.09s best:598110 next:[529151,598109] no_lp
+#1129  324.09s best:598109 next:[529151,598108] no_lp
+#1130  324.10s best:598108 next:[529151,598107] no_lp
+#1131  324.11s best:598107 next:[529151,598106] no_lp
+#1132  324.13s best:598106 next:[529151,598105] no_lp
+#1133  324.13s best:598105 next:[529151,598104] no_lp
+#1134  324.14s best:598104 next:[529151,598103] no_lp
+#1135  324.16s best:598103 next:[529151,598102] no_lp
+#1136  324.17s best:598102 next:[529151,598101] no_lp
+#1137  324.18s best:598101 next:[529151,598100] no_lp
+#1138  324.19s best:598100 next:[529151,598099] no_lp
+#1139  324.20s best:598099 next:[529151,598098] no_lp
+#1140  324.21s best:598098 next:[529151,598097] no_lp
+#1141  324.22s best:598097 next:[529151,598096] no_lp
+#1142  324.24s best:598096 next:[529151,598095] no_lp
+#1143  324.25s best:598095 next:[529151,598094] no_lp
+#1144  324.26s best:598094 next:[529151,598093] no_lp
+#1145  324.27s best:598093 next:[529151,598092] no_lp
+#1146  324.28s best:598092 next:[529151,598091] no_lp
+#1147  324.29s best:598091 next:[529151,598090] no_lp
+#1148  324.30s best:598090 next:[529151,598089] no_lp
+#1149  324.31s best:598089 next:[529151,598088] no_lp
+#1150  324.32s best:598088 next:[529151,598087] no_lp
+#1151  324.33s best:598087 next:[529151,598086] no_lp
+#1152  324.34s best:598086 next:[529151,598085] no_lp
+#1153  324.35s best:598085 next:[529151,598084] no_lp
+#1154  324.36s best:598084 next:[529151,598083] no_lp
+#1155  324.37s best:598083 next:[529151,598082] no_lp
+#1156  324.38s best:598082 next:[529151,598081] no_lp
+#1157  324.40s best:598081 next:[529151,598080] no_lp
+#1158  324.41s best:598080 next:[529151,598079] no_lp
+#1159  324.42s best:598079 next:[529151,598078] no_lp
+#1160  324.43s best:598078 next:[529151,598077] no_lp
+#1161  324.44s best:598077 next:[529151,598076] no_lp
+#1162  324.45s best:598076 next:[529151,598075] no_lp
+#1163  324.46s best:598075 next:[529151,598074] no_lp
+#1164  324.48s best:598074 next:[529151,598073] no_lp
+#1165  324.49s best:598073 next:[529151,598072] no_lp
+#1166  324.50s best:598072 next:[529151,598071] no_lp
+#1167  324.51s best:598071 next:[529151,598070] no_lp
+#1168  324.53s best:598070 next:[529151,598069] ls_restart_decay(batch:1 lin{mvs:114 evals:517} #w_updates:24 #perturb:0)
+#1169  324.54s best:598069 next:[529151,598068] no_lp
+#1170  324.55s best:598068 next:[529151,598067] no_lp
+#1171  324.56s best:598067 next:[529151,598066] no_lp
+#1172  324.59s best:598066 next:[529151,598065] no_lp
+#1173  324.60s best:598065 next:[529151,598064] no_lp
+#1174  324.61s best:598064 next:[529151,598063] no_lp
+#1175  324.63s best:598063 next:[529151,598062] no_lp
+#1176  324.64s best:598062 next:[529151,598061] no_lp
+#1177  324.65s best:598061 next:[529151,598060] no_lp
+#1178  324.66s best:598060 next:[529151,598059] no_lp
+#1179  324.68s best:598059 next:[529151,598058] no_lp
+#1180  324.70s best:598058 next:[529151,598057] no_lp
+#1181  324.71s best:598057 next:[529151,598056] no_lp
+#1182  324.72s best:598056 next:[529151,598055] no_lp
+#1183  324.74s best:598055 next:[529151,598054] no_lp
+#1184  324.74s best:598054 next:[529151,598053] no_lp
+#1185  324.76s best:598053 next:[529151,598052] no_lp
+#1186  324.77s best:598052 next:[529151,598051] no_lp
+#1187  324.78s best:598051 next:[529151,598050] no_lp
+#1188  324.79s best:598050 next:[529151,598049] no_lp
+#1189  324.80s best:598049 next:[529151,598048] no_lp
+#1190  324.81s best:598048 next:[529151,598047] no_lp
+#1191  324.82s best:598047 next:[529151,598046] no_lp
+#1192  324.84s best:598046 next:[529151,598045] no_lp
+#1193  324.85s best:598045 next:[529151,598044] no_lp
+#1194  324.86s best:598044 next:[529151,598043] no_lp
+#1195  324.87s best:598043 next:[529151,598042] no_lp
+#1196  324.88s best:598042 next:[529151,598041] no_lp
+#1197  324.90s best:598041 next:[529151,598040] no_lp
+#1198  324.91s best:598040 next:[529151,598039] no_lp
+#1199  324.92s best:598039 next:[529151,598038] no_lp
+#1200  324.93s best:598038 next:[529151,598037] no_lp
+#1201  324.94s best:598037 next:[529151,598036] no_lp
+#1202  324.95s best:598036 next:[529151,598035] no_lp
+#1203  324.97s best:598035 next:[529151,598034] no_lp
+#1204  324.98s best:598034 next:[529151,598033] no_lp
+#1205  324.99s best:598033 next:[529151,598032] no_lp
+#1206  325.00s best:598032 next:[529151,598031] no_lp
+#1207  325.01s best:598031 next:[529151,598030] no_lp
+#1208  325.02s best:598030 next:[529151,598029] no_lp
+#1209  325.03s best:598029 next:[529151,598028] no_lp
+#1210  325.05s best:598028 next:[529151,598027] no_lp
+#1211  325.05s best:598027 next:[529151,598026] no_lp
+#1212  325.06s best:598026 next:[529151,598025] no_lp
+#1213  325.08s best:598025 next:[529151,598024] no_lp
+#1214  325.09s best:598024 next:[529151,598023] no_lp
+#1215  325.09s best:598023 next:[529151,598022] no_lp
+#1216  325.11s best:598022 next:[529151,598021] no_lp
+#1217  325.12s best:598021 next:[529151,598020] no_lp
+#1218  325.13s best:598020 next:[529151,598019] no_lp
+#1219  325.14s best:598019 next:[529151,598018] no_lp
+#1220  325.16s best:598018 next:[529151,598017] ls_restart(batch:1 lin{mvs:119 evals:594} #w_updates:46 #perturb:0)
+#1221  325.17s best:598017 next:[529151,598016] no_lp
+#1222  325.18s best:598016 next:[529151,598015] no_lp
+#1223  325.19s best:598015 next:[529151,598014] no_lp
+#1224  325.25s best:598014 next:[529151,598013] no_lp
+#1225  325.26s best:598013 next:[529151,598012] no_lp
+#1226  325.27s best:598012 next:[529151,598011] no_lp
+#1227  325.29s best:598011 next:[529151,598010] no_lp
+#1228  325.30s best:598010 next:[529151,598009] no_lp
+#1229  325.31s best:598009 next:[529151,598008] no_lp
+#1230  325.32s best:598008 next:[529151,598007] no_lp
+#1231  325.33s best:598007 next:[529151,598006] no_lp
+#1232  325.34s best:598006 next:[529151,598005] no_lp
+#1233  325.35s best:598005 next:[529151,598004] no_lp
+#1234  325.37s best:598004 next:[529151,598003] no_lp
+#1235  325.38s best:598003 next:[529151,598002] no_lp
+#1236  325.39s best:598002 next:[529151,598001] no_lp
+#1237  325.40s best:598001 next:[529151,598000] no_lp
+#1238  325.42s best:598000 next:[529151,597999] no_lp
+#1239  325.43s best:597999 next:[529151,597998] no_lp
+#1240  325.44s best:597998 next:[529151,597997] no_lp
+#1241  325.46s best:597997 next:[529151,597996] no_lp
+#1242  325.47s best:597996 next:[529151,597995] no_lp
+#1243  325.48s best:597995 next:[529151,597994] no_lp
+#1244  325.49s best:597994 next:[529151,597993] no_lp
+#1245  325.50s best:597993 next:[529151,597992] no_lp
+#1246  325.52s best:597992 next:[529151,597991] no_lp
+#1247  325.53s best:597991 next:[529151,597990] no_lp
+#1248  325.55s best:597990 next:[529151,597989] no_lp
+#1249  325.56s best:597989 next:[529151,597988] no_lp
+#1250  325.57s best:597988 next:[529151,597987] no_lp
+#1251  325.59s best:597987 next:[529151,597986] no_lp
+#1252  325.60s best:597986 next:[529151,597985] no_lp
+#1253  325.61s best:597985 next:[529151,597984] no_lp
+#1254  325.62s best:597984 next:[529151,597983] no_lp
+#1255  325.64s best:597983 next:[529151,597982] no_lp
+#1256  325.65s best:597982 next:[529151,597981] no_lp
+#1257  325.66s best:597981 next:[529151,597980] no_lp
+#1258  325.68s best:597980 next:[529151,597979] no_lp
+#1259  325.69s best:597979 next:[529151,597978] no_lp
+#1260  325.70s best:597978 next:[529151,597977] no_lp
+#1261  325.71s best:597977 next:[529151,597976] no_lp
+#1262  325.73s best:597976 next:[529151,597975] no_lp
+#1263  325.74s best:597975 next:[529151,597974] no_lp
+#1264  325.75s best:597974 next:[529151,597973] no_lp
+#1265  325.76s best:597973 next:[529151,597972] no_lp
+#1266  325.77s best:597972 next:[529151,597971] no_lp
+#1267  325.78s best:597971 next:[529151,597970] no_lp
+#1268  325.79s best:597970 next:[529151,597969] no_lp
+#1269  325.81s best:597969 next:[529151,597968] no_lp
+#1270  325.82s best:597968 next:[529151,597967] no_lp
+#1271  325.83s best:597967 next:[529151,597966] no_lp
+#1272  325.85s best:597966 next:[529151,597965] no_lp
+#1273  325.86s best:597965 next:[529151,597964] no_lp
+#1274  325.87s best:597964 next:[529151,597963] no_lp
+#1275  325.89s best:597963 next:[529151,597962] no_lp
+#1276  325.90s best:597962 next:[529151,597961] no_lp
+#1277  325.91s best:597961 next:[529151,597960] no_lp
+#1278  325.92s best:597960 next:[529151,597959] no_lp
+#1279  325.94s best:597959 next:[529151,597958] no_lp
+#1280  325.95s best:597958 next:[529151,597957] no_lp
+#1281  325.98s best:597957 next:[529151,597956] no_lp
+#1282  325.99s best:597956 next:[529151,597955] no_lp
+#1283  326.00s best:597955 next:[529151,597954] no_lp
+#1284  326.01s best:597954 next:[529151,597953] no_lp
+#1285  326.02s best:597953 next:[529151,597952] no_lp
+#1286  326.04s best:597952 next:[529151,597951] no_lp
+#1287  326.05s best:597951 next:[529151,597950] no_lp
+#1288  326.06s best:597950 next:[529151,597949] no_lp
+#1289  326.07s best:597949 next:[529151,597948] no_lp
+#1290  326.08s best:597948 next:[529151,597947] no_lp
+#1291  326.09s best:597947 next:[529151,597946] no_lp
+#1292  326.10s best:597946 next:[529151,597945] no_lp
+#1293  326.11s best:597945 next:[529151,597944] no_lp
+#1294  326.12s best:597944 next:[529151,597943] no_lp
+#1295  326.13s best:597943 next:[529151,597942] no_lp
+#1296  326.15s best:597942 next:[529151,597941] no_lp
+#1297  326.16s best:597941 next:[529151,597940] no_lp
+#1298  326.17s best:597940 next:[529151,597939] no_lp
+#1299  326.18s best:597939 next:[529151,597938] no_lp
+#1300  326.19s best:597938 next:[529151,597937] no_lp
+#1301  326.20s best:597937 next:[529151,597936] no_lp
+#1302  326.22s best:597936 next:[529151,597935] no_lp
+#1303  326.23s best:597935 next:[529151,597934] no_lp
+#1304  326.24s best:597934 next:[529151,597933] no_lp
+#1305  326.24s best:597933 next:[529151,597932] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:3'034} gen{mvs:452 evals:0} comp{mvs:112 btracks:170} #w_updates:5 #perturb:0)
+#1306  326.25s best:597932 next:[529151,597931] no_lp
+#1307  326.27s best:597931 next:[529151,597930] no_lp
+#1308  326.28s best:597930 next:[529151,597929] no_lp
+#1309  326.29s best:597929 next:[529151,597928] no_lp
+#1310  326.30s best:597928 next:[529151,597927] no_lp
+#1311  326.33s best:597927 next:[529151,597926] no_lp
+#1312  326.34s best:597926 next:[529151,597925] no_lp
+#1313  326.35s best:597925 next:[529151,597924] no_lp
+#1314  326.37s best:597924 next:[529151,597923] no_lp
+#1315  326.38s best:597923 next:[529151,597922] no_lp
+#1316  326.39s best:597922 next:[529151,597921] no_lp
+#1317  326.40s best:597921 next:[529151,597920] no_lp
+#1318  326.43s best:597920 next:[529151,597919] no_lp
+#1319  326.44s best:597919 next:[529151,597918] no_lp
+#1320  326.45s best:597918 next:[529151,597917] no_lp
+#1321  326.47s best:597917 next:[529151,597916] no_lp
+#1322  326.48s best:597916 next:[529151,597915] no_lp
+#1323  326.49s best:597915 next:[529151,597914] no_lp
+#1324  326.50s best:597914 next:[529151,597913] no_lp
+#1325  326.52s best:597913 next:[529151,597912] no_lp
+#1326  326.53s best:597912 next:[529151,597911] no_lp
+#1327  326.54s best:597911 next:[529151,597910] no_lp
+#1328  326.54s best:597910 next:[529151,597909] no_lp
+#1329  326.56s best:597909 next:[529151,597908] no_lp
+#1330  326.57s best:597908 next:[529151,597907] no_lp
+#1331  326.58s best:597907 next:[529151,597906] no_lp
+#1332  326.60s best:597906 next:[529151,597905] no_lp
+#1333  326.61s best:597905 next:[529151,597904] no_lp
+#1334  326.62s best:597904 next:[529151,597903] no_lp
+#1335  326.66s best:597903 next:[529151,597902] no_lp
+#1336  326.67s best:597902 next:[529151,597901] no_lp
+#1337  326.67s best:597901 next:[529151,597900] no_lp
+#1338  326.68s best:597900 next:[529151,597899] no_lp
+#1339  326.74s best:597899 next:[529151,597898] no_lp
+#1340  326.75s best:597898 next:[529151,597897] no_lp
+#1341  326.77s best:597897 next:[529151,597896] no_lp
+#1342  326.80s best:597896 next:[529151,597895] no_lp
+#1343  326.81s best:597895 next:[529151,597894] no_lp
+#1344  326.82s best:597894 next:[529151,597893] no_lp
+#1345  326.87s best:597893 next:[529151,597892] no_lp
+#1346  326.88s best:597892 next:[529151,597891] no_lp
+#1347  326.90s best:597891 next:[529151,597890] no_lp
+#1348  326.93s best:597890 next:[529151,597889] no_lp
+#1349  326.94s best:597889 next:[529151,597888] no_lp
+#1350  326.95s best:597888 next:[529151,597887] no_lp
+#1351  326.96s best:597887 next:[529151,597886] no_lp
+#1352  326.99s best:597886 next:[529151,597885] no_lp
+#1353  327.00s best:597885 next:[529151,597884] no_lp
+#1354  327.01s best:597884 next:[529151,597883] no_lp
+#1355  327.03s best:597883 next:[529151,597882] no_lp
+#1356  327.04s best:597882 next:[529151,597881] no_lp
+#1357  327.05s best:597881 next:[529151,597880] no_lp
+#1358  327.06s best:597880 next:[529151,597879] no_lp
+#1359  327.09s best:597879 next:[529151,597878] no_lp
+#1360  327.10s best:597878 next:[529151,597877] no_lp
+#1361  327.11s best:597877 next:[529151,597876] no_lp
+#1362  327.14s best:597876 next:[529151,597875] no_lp
+#1363  327.15s best:597875 next:[529151,597874] no_lp
+#1364  327.16s best:597874 next:[529151,597873] no_lp
+#1365  327.17s best:597873 next:[529151,597872] no_lp
+#1366  327.19s best:597872 next:[529151,597871] no_lp
+#1367  327.20s best:597871 next:[529151,597870] no_lp
+#1368  327.21s best:597870 next:[529151,597869] no_lp
+#1369  327.23s best:597869 next:[529151,597868] no_lp
+#1370  327.24s best:597868 next:[529151,597867] ls_restart_decay_perturb(batch:1 lin{mvs:142 evals:740} #w_updates:30 #perturb:0)
+#1371  327.24s best:597867 next:[529151,597866] ls_restart_decay(batch:1 lin{mvs:96 evals:499} #w_updates:35 #perturb:0)
+#1372  327.25s best:597866 next:[529151,597865] no_lp
+#1373  327.27s best:597865 next:[529151,597864] no_lp
+#1374  327.28s best:597864 next:[529151,597863] no_lp
+#1375  327.29s best:597863 next:[529151,597862] no_lp
+#1376  327.30s best:597862 next:[529151,597861] no_lp
+#1377  327.32s best:597861 next:[529151,597860] no_lp
+#1378  327.33s best:597860 next:[529151,597859] no_lp
+#1379  327.34s best:597859 next:[529151,597858] no_lp
+#1380  327.38s best:597858 next:[529151,597857] no_lp
+#1381  327.39s best:597857 next:[529151,597856] no_lp
+#1382  327.40s best:597856 next:[529151,597855] no_lp
+#1383  327.42s best:597855 next:[529151,597854] no_lp
+#1384  327.43s best:597854 next:[529151,597853] no_lp
+#1385  327.44s best:597853 next:[529151,597852] no_lp
+#1386  327.45s best:597852 next:[529151,597851] no_lp
+#1387  327.47s best:597851 next:[529151,597850] no_lp
+#1388  327.48s best:597850 next:[529151,597849] no_lp
+#1389  327.49s best:597849 next:[529151,597848] no_lp
+#1390  327.51s best:597848 next:[529151,597847] no_lp
+#1391  327.52s best:597847 next:[529151,597846] no_lp
+#1392  327.52s best:597846 next:[529151,597845] no_lp
+#1393  327.54s best:597845 next:[529151,597844] no_lp
+#1394  327.56s best:597844 next:[529151,597843] no_lp
+#1395  327.58s best:597843 next:[529151,597842] no_lp
+#1396  327.59s best:597842 next:[529151,597841] no_lp
+#1397  327.60s best:597841 next:[529151,597840] no_lp
+#1398  327.62s best:597840 next:[529151,597839] no_lp
+#1399  327.63s best:597839 next:[529151,597838] no_lp
+#1400  327.64s best:597838 next:[529151,597837] no_lp
+#1401  327.65s best:597837 next:[529151,597836] no_lp
+#1402  327.66s best:597836 next:[529151,597835] no_lp
+#1403  327.67s best:597835 next:[529151,597834] no_lp
+#1404  327.68s best:597834 next:[529151,597833] no_lp
+#1405  327.70s best:597833 next:[529151,597832] no_lp
+#1406  327.71s best:597832 next:[529151,597831] no_lp
+#1407  327.72s best:597831 next:[529151,597830] no_lp
+#1408  327.74s best:597830 next:[529151,597829] no_lp
+#1409  327.75s best:597829 next:[529151,597828] no_lp
+#1410  327.77s best:597828 next:[529151,597827] no_lp
+#1411  327.79s best:597827 next:[529151,597826] no_lp
+#1412  327.81s best:597826 next:[529151,597825] no_lp
+#1413  327.82s best:597825 next:[529151,597824] no_lp
+#1414  327.83s best:597824 next:[529151,597823] no_lp
+#1415  327.84s best:597823 next:[529151,597822] no_lp
+#1416  327.86s best:597822 next:[529151,597821] no_lp
+#1417  327.87s best:597821 next:[529151,597820] no_lp
+#1418  327.88s best:597820 next:[529151,597819] no_lp
+#1419  327.90s best:597819 next:[529151,597818] no_lp
+#1420  327.92s best:597818 next:[529151,597817] no_lp
+#1421  327.93s best:597817 next:[529151,597816] no_lp
+#1422  327.95s best:597816 next:[529151,597815] no_lp
+#1423  327.96s best:597815 next:[529151,597814] no_lp
+#1424  327.97s best:597814 next:[529151,597813] no_lp
+#1425  327.99s best:597813 next:[529151,597812] no_lp
+#1426  328.00s best:597812 next:[529151,597811] no_lp
+#1427  328.01s best:597811 next:[529151,597810] no_lp
+#1428  328.03s best:597810 next:[529151,597809] no_lp
+#1429  328.04s best:597809 next:[529151,597808] no_lp
+#1430  328.06s best:597808 next:[529151,597807] no_lp
+#1431  328.07s best:597807 next:[529151,597806] no_lp
+#1432  328.08s best:597806 next:[529151,597805] no_lp
+#1433  328.09s best:597805 next:[529151,597804] no_lp
+#1434  328.11s best:597804 next:[529151,597803] no_lp
+#1435  328.12s best:597803 next:[529151,597802] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:2'934} gen{mvs:629 evals:0} comp{mvs:103 btracks:263} #w_updates:18 #perturb:0)
+#1436  328.13s best:597802 next:[529151,597801] no_lp
+#1437  328.14s best:597801 next:[529151,597800] no_lp
+#1438  328.17s best:597800 next:[529151,597799] no_lp
+#1439  328.18s best:597799 next:[529151,597798] no_lp
+#1440  328.19s best:597798 next:[529151,597797] no_lp
+#1441  328.21s best:597797 next:[529151,597796] no_lp
+#1442  328.22s best:597796 next:[529151,597795] no_lp
+#1443  328.24s best:597795 next:[529151,597794] no_lp
+#1444  328.28s best:597794 next:[529151,597793] no_lp
+#1445  328.29s best:597793 next:[529151,597792] no_lp
+#1446  328.30s best:597792 next:[529151,597791] no_lp
+#1447  328.33s best:597791 next:[529151,597790] no_lp
+#1448  328.34s best:597790 next:[529151,597789] no_lp
+#1449  328.35s best:597789 next:[529151,597788] no_lp
+#1450  328.37s best:597788 next:[529151,597787] no_lp
+#1451  328.38s best:597787 next:[529151,597786] no_lp
+#1452  328.39s best:597786 next:[529151,597785] no_lp
+#1453  328.41s best:597785 next:[529151,597784] no_lp
+#1454  328.42s best:597784 next:[529151,597783] no_lp
+#1455  328.44s best:597783 next:[529151,597782] no_lp
+#1456  328.45s best:597782 next:[529151,597781] no_lp
+#1457  328.47s best:597781 next:[529151,597780] no_lp
+#1458  328.48s best:597780 next:[529151,597779] no_lp
+#1459  328.49s best:597779 next:[529151,597778] no_lp
+#1460  328.51s best:597778 next:[529151,597777] no_lp
+#1461  328.51s best:597777 next:[529151,597776] no_lp
+#1462  328.53s best:597776 next:[529151,597775] no_lp
+#1463  328.54s best:597775 next:[529151,597774] no_lp
+#1464  328.55s best:597774 next:[529151,597773] no_lp
+#1465  328.56s best:597773 next:[529151,597772] no_lp
+#1466  328.57s best:597772 next:[529151,597771] no_lp
+#1467  328.60s best:597771 next:[529151,597770] no_lp
+#1468  328.61s best:597770 next:[529151,597769] no_lp
+#1469  328.62s best:597769 next:[529151,597768] no_lp
+#1470  328.64s best:597768 next:[529151,597767] no_lp
+#1471  328.65s best:597767 next:[529151,597766] no_lp
+#1472  328.66s best:597766 next:[529151,597765] no_lp
+#1473  328.67s best:597765 next:[529151,597764] no_lp
+#1474  328.69s best:597764 next:[529151,597763] no_lp
+#1475  328.70s best:597763 next:[529151,597762] no_lp
+#1476  328.71s best:597762 next:[529151,597761] no_lp
+#1477  328.72s best:597761 next:[529151,597760] no_lp
+#1478  328.73s best:597760 next:[529151,597759] no_lp
+#1479  328.74s best:597759 next:[529151,597758] no_lp
+#1480  328.75s best:597758 next:[529151,597757] no_lp
+#1481  328.76s best:597757 next:[529151,597756] no_lp
+#1482  328.77s best:597756 next:[529151,597755] no_lp
+#1483  328.78s best:597755 next:[529151,597754] no_lp
+#1484  328.79s best:597754 next:[529151,597753] no_lp
+#1485  328.80s best:597753 next:[529151,597752] no_lp
+#1486  328.81s best:597752 next:[529151,597751] no_lp
+#1487  328.82s best:597751 next:[529151,597750] no_lp
+#1488  328.84s best:597750 next:[529151,597749] no_lp
+#1489  328.85s best:597749 next:[529151,597748] no_lp
+#1490  328.86s best:597748 next:[529151,597747] no_lp
+#1491  328.87s best:597747 next:[529151,597746] no_lp
+#1492  328.89s best:597746 next:[529151,597745] no_lp
+#1493  328.90s best:597745 next:[529151,597744] no_lp
+#1494  328.91s best:597744 next:[529151,597743] no_lp
+#1495  328.92s best:597743 next:[529151,597742] no_lp
+#1496  328.93s best:597742 next:[529151,597741] no_lp
+#1497  328.94s best:597741 next:[529151,597740] no_lp
+#1498  328.95s best:597740 next:[529151,597739] no_lp
+#1499  328.96s best:597739 next:[529151,597738] no_lp
+#1500  328.97s best:597738 next:[529151,597737] no_lp
+#1501  328.98s best:597737 next:[529151,597736] no_lp
+#1502  329.00s best:597736 next:[529151,597735] no_lp
+#1503  329.01s best:597735 next:[529151,597734] no_lp
+#1504  329.02s best:597734 next:[529151,597733] no_lp
+#1505  329.03s best:597733 next:[529151,597732] no_lp
+#1506  329.04s best:597732 next:[529151,597731] no_lp
+#1507  329.05s best:597731 next:[529151,597730] no_lp
+#1508  329.06s best:597730 next:[529151,597729] no_lp
+#1509  329.07s best:597729 next:[529151,597728] no_lp
+#1510  329.08s best:597728 next:[529151,597727] no_lp
+#1511  329.09s best:597727 next:[529151,597726] no_lp
+#1512  329.11s best:597726 next:[529151,597725] no_lp
+#1513  329.12s best:597725 next:[529151,597724] no_lp
+#1514  329.13s best:597724 next:[529151,597723] no_lp
+#1515  329.15s best:597723 next:[529151,597722] no_lp
+#1516  329.16s best:597722 next:[529151,597721] no_lp
+#1517  329.17s best:597721 next:[529151,597720] no_lp
+#1518  329.18s best:597720 next:[529151,597719] no_lp
+#1519  329.19s best:597719 next:[529151,597718] no_lp
+#1520  329.20s best:597718 next:[529151,597717] no_lp
+#1521  329.21s best:597717 next:[529151,597716] no_lp
+#1522  329.24s best:597716 next:[529151,597715] no_lp
+#1523  329.25s best:597715 next:[529151,597714] no_lp
+#1524  329.26s best:597714 next:[529151,597713] no_lp
+#1525  329.27s best:597713 next:[529151,597712] no_lp
+#1526  329.28s best:597712 next:[529151,597711] no_lp
+#1527  329.29s best:597711 next:[529151,597710] no_lp
+#1528  329.30s best:597710 next:[529151,597709] no_lp
+#1529  329.32s best:597709 next:[529151,597708] no_lp
+#1530  329.33s best:597708 next:[529151,597707] no_lp
+#1531  329.33s best:597639 next:[529151,597638] graph_cst_lns (d=8.65e-01 s=1436 t=0.10 p=0.47 stall=0 h=base)
+#1532  329.34s best:597638 next:[529151,597637] ls_restart_perturb(batch:1 lin{mvs:75 evals:422} #w_updates:54 #perturb:0)
+#1533  329.36s best:597637 next:[529151,597636] no_lp
+#1534  329.38s best:597636 next:[529151,597635] no_lp
+#1535  329.39s best:597635 next:[529151,597634] no_lp
+#1536  329.40s best:597634 next:[529151,597633] no_lp
+#1537  329.41s best:597633 next:[529151,597632] no_lp
+#1538  329.42s best:597632 next:[529151,597631] no_lp
+#1539  329.43s best:597631 next:[529151,597630] no_lp
+#1540  329.45s best:597630 next:[529151,597629] no_lp
+#1541  329.46s best:597629 next:[529151,597628] no_lp
+#1542  329.47s best:597628 next:[529151,597627] no_lp
+#1543  329.48s best:597627 next:[529151,597626] no_lp
+#1544  329.49s best:597626 next:[529151,597625] no_lp
+#1545  329.51s best:597625 next:[529151,597624] no_lp
+#1546  329.52s best:597624 next:[529151,597623] no_lp
+#1547  329.53s best:597623 next:[529151,597622] no_lp
+#1548  329.54s best:597622 next:[529151,597621] no_lp
+#1549  329.55s best:597621 next:[529151,597620] no_lp
+#1550  329.57s best:597620 next:[529151,597619] no_lp
+#1551  329.58s best:597619 next:[529151,597618] no_lp
+#1552  329.59s best:597618 next:[529151,597617] no_lp
+#1553  329.63s best:597617 next:[529151,597616] no_lp
+#1554  329.65s best:597616 next:[529151,597615] no_lp
+#1555  329.66s best:597615 next:[529151,597614] no_lp
+#1556  329.69s best:597614 next:[529151,597613] no_lp
+#1557  329.70s best:597613 next:[529151,597612] no_lp
+#1558  329.71s best:597612 next:[529151,597611] no_lp
+#1559  329.73s best:597611 next:[529151,597610] no_lp
+#1560  329.76s best:597610 next:[529151,597609] no_lp
+#1561  329.77s best:597609 next:[529151,597608] no_lp
+#1562  329.78s best:597608 next:[529151,597607] no_lp
+#1563  329.80s best:597607 next:[529151,597606] no_lp
+#1564  329.81s best:597606 next:[529151,597605] no_lp
+#1565  329.82s best:597605 next:[529151,597604] no_lp
+#1566  329.83s best:597604 next:[529151,597603] no_lp
+#1567  329.84s best:597603 next:[529151,597602] no_lp
+#1568  329.85s best:597602 next:[529151,597601] no_lp
+#1569  329.86s best:597601 next:[529151,597600] no_lp
+#1570  329.88s best:597600 next:[529151,597599] no_lp
+#1571  329.89s best:597599 next:[529151,597598] no_lp
+#1572  329.90s best:597598 next:[529151,597597] no_lp
+#1573  329.91s best:597597 next:[529151,597596] no_lp
+#1574  329.92s best:597596 next:[529151,597595] no_lp
+#1575  329.93s best:597595 next:[529151,597594] no_lp
+#1576  329.94s best:597594 next:[529151,597593] no_lp
+#1577  329.96s best:597593 next:[529151,597592] no_lp
+#1578  329.97s best:597592 next:[529151,597591] no_lp
+#1579  329.98s best:597591 next:[529151,597590] no_lp
+#1580  329.99s best:597590 next:[529151,597589] no_lp
+#1581  330.00s best:597589 next:[529151,597588] no_lp
+#1582  330.01s best:597588 next:[529151,597587] no_lp
+#1583  330.02s best:597587 next:[529151,597586] no_lp
+#1584  330.04s best:597586 next:[529151,597585] no_lp
+#1585  330.05s best:597585 next:[529151,597584] no_lp
+#1586  330.06s best:597584 next:[529151,597583] no_lp
+#1587  330.07s best:597583 next:[529151,597582] no_lp
+#1588  330.09s best:597582 next:[529151,597581] no_lp
+#1589  330.10s best:597581 next:[529151,597580] no_lp
+#1590  330.11s best:597580 next:[529151,597579] no_lp
+#1591  330.12s best:597579 next:[529151,597578] no_lp
+#1592  330.13s best:597578 next:[529151,597577] no_lp
+#1593  330.14s best:597577 next:[529151,597576] no_lp
+#1594  330.15s best:597576 next:[529151,597575] no_lp
+#1595  330.17s best:597575 next:[529151,597574] no_lp
+#1596  330.18s best:597574 next:[529151,597573] no_lp
+#1597  330.19s best:597573 next:[529151,597572] no_lp
+#1598  330.21s best:597572 next:[529151,597571] no_lp
+#1599  330.22s best:597571 next:[529151,597570] no_lp
+#1600  330.23s best:597570 next:[529151,597569] no_lp
+#1601  330.25s best:597569 next:[529151,597568] no_lp
+#1602  330.26s best:597568 next:[529151,597567] no_lp
+#1603  330.27s best:597567 next:[529151,597566] no_lp
+#1604  330.28s best:597566 next:[529151,597565] no_lp
+#1605  330.29s best:597565 next:[529151,597564] no_lp
+#1606  330.30s best:597564 next:[529151,597563] no_lp
+#1607  330.31s best:597563 next:[529151,597562] no_lp
+#1608  330.33s best:597562 next:[529151,597561] no_lp
+#1609  330.34s best:597561 next:[529151,597560] no_lp
+#1610  330.34s best:597560 next:[529151,597559] no_lp
+#1611  330.36s best:597559 next:[529151,597558] no_lp
+#1612  330.37s best:597558 next:[529151,597557] no_lp
+#1613  330.38s best:597557 next:[529151,597556] no_lp
+#1614  330.39s best:597556 next:[529151,597555] no_lp
+#1615  330.40s best:597555 next:[529151,597554] no_lp
+#1616  330.41s best:597554 next:[529151,597553] no_lp
+#1617  330.42s best:597553 next:[529151,597552] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:4'027} gen{mvs:566 evals:0} comp{mvs:100 btracks:233} #w_updates:7 #perturb:0)
+#1618  330.44s best:597552 next:[529151,597551] no_lp
+#1619  330.45s best:597551 next:[529151,597550] no_lp
+#1620  330.46s best:597550 next:[529151,597549] no_lp
+#1621  330.47s best:597549 next:[529151,597548] no_lp
+#1622  330.50s best:597548 next:[529151,597547] no_lp
+#1623  330.51s best:597547 next:[529151,597546] no_lp
+#1624  330.52s best:597546 next:[529151,597545] no_lp
+#1625  330.54s best:597545 next:[529151,597544] no_lp
+#1626  330.55s best:597544 next:[529151,597543] no_lp
+#1627  330.56s best:597543 next:[529151,597542] no_lp
+#1628  330.57s best:597542 next:[529151,597541] no_lp
+#1629  330.59s best:597541 next:[529151,597540] no_lp
+#1630  330.60s best:597540 next:[529151,597539] no_lp
+#1631  330.61s best:597539 next:[529151,597538] no_lp
+#1632  331.48s best:597538 next:[529151,597537] ls_restart_compound(batch:1 lin{mvs:0 evals:1'133} gen{mvs:170 evals:0} comp{mvs:42 btracks:64} #w_updates:2 #perturb:0)
+#1633  331.51s best:597537 next:[529151,597536] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:3'388} gen{mvs:794 evals:0} comp{mvs:82 btracks:356} #w_updates:23 #perturb:0)
+#1634  331.51s best:597536 next:[529151,597535] ls_restart_perturb(batch:1 lin{mvs:123 evals:615} #w_updates:84 #perturb:0)
+#1635  332.28s best:597535 next:[529151,597534] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:1'766} gen{mvs:408 evals:0} comp{mvs:66 btracks:171} #w_updates:5 #perturb:0)
+#1636  332.29s best:597534 next:[529151,597533] ls_restart_perturb(batch:1 lin{mvs:131 evals:649} #w_updates:81 #perturb:0)
+#1637  333.12s best:597533 next:[529151,597532] ls_restart_decay(batch:1 lin{mvs:113 evals:456} #w_updates:27 #perturb:0)
+#1638  334.25s best:597532 next:[529151,597531] no_lp
+#1639  334.26s best:597531 next:[529151,597530] no_lp
+#1640  334.27s best:597530 next:[529151,597529] no_lp
+#1641  334.28s best:597529 next:[529151,597528] no_lp
+#1642  334.29s best:597528 next:[529151,597527] no_lp
+#1643  334.30s best:597527 next:[529151,597526] no_lp
+#1644  334.31s best:597526 next:[529151,597525] no_lp
+#1645  334.32s best:597525 next:[529151,597524] no_lp
+#1646  334.34s best:597524 next:[529151,597523] no_lp
+#1647  334.35s best:597523 next:[529151,597522] no_lp
+#1648  334.36s best:597522 next:[529151,597521] no_lp
+#1649  334.37s best:597521 next:[529151,597520] no_lp
+#1650  334.38s best:597520 next:[529151,597519] no_lp
+#1651  334.40s best:597519 next:[529151,597518] no_lp
+#1652  334.41s best:597518 next:[529151,597517] no_lp
+#1653  334.42s best:597517 next:[529151,597516] no_lp
+#1654  334.43s best:597516 next:[529151,597515] no_lp
+#1655  334.44s best:597515 next:[529151,597514] no_lp
+#1656  334.45s best:597514 next:[529151,597513] no_lp
+#1657  334.46s best:597513 next:[529151,597512] no_lp
+#1658  334.47s best:597512 next:[529151,597511] no_lp
+#1659  334.48s best:597511 next:[529151,597510] no_lp
+#1660  334.49s best:597510 next:[529151,597509] no_lp
+#1661  334.50s best:597509 next:[529151,597508] no_lp
+#1662  334.51s best:597508 next:[529151,597507] no_lp
+#1663  334.52s best:597507 next:[529151,597506] no_lp
+#1664  334.54s best:597506 next:[529151,597505] no_lp
+#1665  334.55s best:597505 next:[529151,597504] no_lp
+#1666  334.56s best:597504 next:[529151,597503] no_lp
+#1667  334.57s best:597503 next:[529151,597502] no_lp
+#1668  334.59s best:597502 next:[529151,597501] no_lp
+#1669  334.60s best:597501 next:[529151,597500] no_lp
+#1670  334.61s best:597500 next:[529151,597499] no_lp
+#1671  334.62s best:597499 next:[529151,597498] no_lp
+#1672  334.63s best:597498 next:[529151,597497] no_lp
+#1673  334.64s best:597497 next:[529151,597496] no_lp
+#1674  334.65s best:597496 next:[529151,597495] no_lp
+#1675  334.66s best:597495 next:[529151,597494] no_lp
+#1676  334.67s best:597494 next:[529151,597493] no_lp
+#1677  334.69s best:597493 next:[529151,597492] no_lp
+#1678  334.70s best:597492 next:[529151,597491] no_lp
+#1679  334.71s best:597491 next:[529151,597490] no_lp
+#1680  334.87s best:597490 next:[529151,597489] no_lp
+#1681  334.88s best:597489 next:[529151,597488] no_lp
+#1682  335.35s best:597488 next:[529151,597487] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:4'884} gen{mvs:1'341 evals:0} comp{mvs:151 btracks:595} #w_updates:20 #perturb:0)
+#Model 389.23s var:3160/3189 constraints:6599/6783
+#Model 395.02s var:3155/3189 constraints:6487/6783
+#1683  399.06s best:597345 next:[529151,597344] graph_arc_lns (d=7.88e-01 s=1731 t=0.10 p=0.44 stall=0 h=base)
+#1684  399.07s best:597344 next:[529151,597343] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:4'443} gen{mvs:1'242 evals:0} comp{mvs:114 btracks:564} #w_updates:21 #perturb:0)
+#1685  399.20s best:597343 next:[529151,597342] ls_restart_perturb(batch:1 lin{mvs:130 evals:673} #w_updates:43 #perturb:0)
+#1686  400.44s best:597342 next:[529151,597341] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:10'165} gen{mvs:2'749 evals:0} comp{mvs:241 btracks:1'254} #w_updates:34 #perturb:0)
+#1687  401.44s best:597341 next:[529151,597340] ls_restart_perturb(batch:1 lin{mvs:62 evals:287} #w_updates:21 #perturb:0)
+#1688  401.46s best:597340 next:[529151,597339] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:9'648} gen{mvs:2'474 evals:0} comp{mvs:198 btracks:1'138} #w_updates:45 #perturb:0)
+#1689  401.46s best:597339 next:[529151,597338] ls_restart_decay(batch:1 lin{mvs:125 evals:599} #w_updates:32 #perturb:0)
+#1690  402.39s best:597338 next:[529151,597337] graph_var_lns (d=6.99e-01 s=1749 t=0.10 p=0.49 stall=0 h=base)
+#1691  402.42s best:597337 next:[529151,597336] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:5'220} gen{mvs:1'329 evals:0} comp{mvs:159 btracks:585} #w_updates:20 #perturb:0)
+#Model 402.65s var:3147/3189 constraints:6371/6783
+#1692  404.50s best:597336 next:[529151,597335] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:1'972} gen{mvs:512 evals:0} comp{mvs:76 btracks:218} #w_updates:8 #perturb:0)
+#1693  405.15s best:597335 next:[529151,597334] ls_restart(batch:1 lin{mvs:83 evals:428} #w_updates:51 #perturb:0)
+#1694  406.32s best:596628 next:[529151,596627] graph_dec_lns (d=9.48e-01 s=1759 t=0.10 p=0.51 stall=0 h=base)
+#1695  406.33s best:596627 next:[529151,596626] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:2'006} gen{mvs:654 evals:0} comp{mvs:60 btracks:297} #w_updates:12 #perturb:0)
+#1696  406.34s best:596626 next:[529151,596625] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:3'631} gen{mvs:1'095 evals:0} comp{mvs:191 btracks:452} #w_updates:19 #perturb:0)
+#1697  406.36s best:596625 next:[529151,596624] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:4'416} gen{mvs:1'312 evals:0} comp{mvs:164 btracks:574} #w_updates:22 #perturb:0)
+#1698  406.37s best:596624 next:[529151,596623] ls_restart_compound(batch:1 lin{mvs:0 evals:2'685} gen{mvs:891 evals:0} comp{mvs:117 btracks:387} #w_updates:17 #perturb:0)
+#1699  407.40s best:596623 next:[529151,596622] ls_restart_decay_perturb(batch:1 lin{mvs:206 evals:920} #w_updates:53 #perturb:0)
+#1700  407.41s best:596622 next:[529151,596621] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:5'213} gen{mvs:1'460 evals:0} comp{mvs:164 btracks:648} #w_updates:19 #perturb:0)
+#1701  408.91s best:596621 next:[529151,596620] ls_restart(batch:1 lin{mvs:251 evals:1'046} #w_updates:212 #perturb:0)
+#1702  408.93s best:596620 next:[529151,596619] ls_restart(batch:1 lin{mvs:207 evals:929} #w_updates:164 #perturb:0)
+#1703  409.92s best:596619 next:[529151,596618] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:5'277} gen{mvs:1'389 evals:0} comp{mvs:99 btracks:645} #w_updates:23 #perturb:0)
+#1704  409.93s best:596618 next:[529151,596617] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:4'267} gen{mvs:1'270 evals:0} comp{mvs:152 btracks:559} #w_updates:22 #perturb:0)
+#1705  410.65s best:596617 next:[529151,596616] ls_restart(batch:1 lin{mvs:159 evals:715} #w_updates:125 #perturb:0)
+#1706  411.23s best:596616 next:[529151,596615] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:4'694} gen{mvs:1'297 evals:0} comp{mvs:181 btracks:558} #w_updates:23 #perturb:0)
+#1707  411.42s best:596615 next:[529151,596614] ls_restart_compound(batch:1 lin{mvs:0 evals:999} gen{mvs:295 evals:0} comp{mvs:77 btracks:109} #w_updates:5 #perturb:0)
+#1708  411.43s best:596614 next:[529151,596613] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:4'737} gen{mvs:1'441 evals:0} comp{mvs:141 btracks:650} #w_updates:28 #perturb:0)
+#1709  412.67s best:596611 next:[529151,596610] rnd_cst_lns (d=7.47e-01 s=1798 t=0.10 p=0.47 stall=2 h=base)
+#1710  412.67s best:596610 next:[529151,596609] ls_restart_decay(batch:1 lin{mvs:167 evals:708} #w_updates:32 #perturb:0)
+#1711  413.74s best:596609 next:[529151,596608] ls_restart_decay_perturb(batch:1 lin{mvs:165 evals:690} #w_updates:36 #perturb:0)
+#1712  413.75s best:596608 next:[529151,596607] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:6'199} gen{mvs:1'843 evals:0} comp{mvs:279 btracks:782} #w_updates:32 #perturb:0)
+#1713  420.33s best:596321 next:[529151,596320] graph_cst_lns (d=8.12e-01 s=1807 t=0.10 p=0.46 stall=2 h=base)
+#1714  422.43s best:596320 next:[529151,596319] ls_restart(batch:1 lin{mvs:194 evals:881} #w_updates:83 #perturb:0)
+#1715  423.17s best:596319 next:[529151,596318] ls_restart_compound(batch:1 lin{mvs:0 evals:7'644} gen{mvs:2'457 evals:0} comp{mvs:249 btracks:1'104} #w_updates:45 #perturb:0)
+#1716  424.14s best:596318 next:[529151,596317] ls_restart(batch:1 lin{mvs:158 evals:715} #w_updates:50 #perturb:0)
+#1717  424.14s best:596317 next:[529151,596316] ls_restart_decay_perturb(batch:1 lin{mvs:177 evals:755} #w_updates:42 #perturb:0)
+#1718  424.15s best:596316 next:[529151,596315] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:3'425} gen{mvs:1'103 evals:0} comp{mvs:187 btracks:458} #w_updates:21 #perturb:0)
+#1719  424.16s best:596315 next:[529151,596314] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:4'601} gen{mvs:1'314 evals:0} comp{mvs:130 btracks:592} #w_updates:32 #perturb:0)
+#1720  424.19s best:596314 next:[529151,596313] ls_restart_compound(batch:1 lin{mvs:0 evals:1'912} gen{mvs:631 evals:0} comp{mvs:89 btracks:271} #w_updates:11 #perturb:0)
+#1721  429.27s best:595997 next:[529151,595996] rnd_cst_lns (d=7.20e-01 s=1826 t=0.10 p=0.46 stall=0 h=base)
+#1722  429.28s best:595996 next:[529151,595995] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:2'816} gen{mvs:854 evals:0} comp{mvs:138 btracks:358} #w_updates:15 #perturb:0)
+#1723  430.08s best:595995 next:[529151,595994] ls_restart_compound(batch:1 lin{mvs:0 evals:1'830} gen{mvs:620 evals:0} comp{mvs:124 btracks:248} #w_updates:9 #perturb:0)
+#1724  431.84s best:595994 next:[529151,595993] ls_restart_perturb(batch:1 lin{mvs:152 evals:620} #w_updates:86 #perturb:0)
+#1725  431.86s best:595993 next:[529151,595992] ls_restart(batch:1 lin{mvs:164 evals:849} #w_updates:67 #perturb:0)
+#1726  432.02s best:595992 next:[529151,595991] ls_restart(batch:1 lin{mvs:139 evals:612} #w_updates:82 #perturb:0)
+#1727  432.03s best:595991 next:[529151,595990] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:3'605} gen{mvs:1'150 evals:0} comp{mvs:192 btracks:479} #w_updates:23 #perturb:0)
+#1728  433.37s best:595990 next:[529151,595989] ls_restart_decay(batch:1 lin{mvs:197 evals:839} #w_updates:38 #perturb:0)
+#1729  433.37s best:595989 next:[529151,595988] ls_restart_perturb(batch:1 lin{mvs:139 evals:629} #w_updates:73 #perturb:0)
+#1730  433.38s best:595988 next:[529151,595987] ls_restart_decay(batch:1 lin{mvs:240 evals:1'047} #w_updates:50 #perturb:0)
+#1731  434.55s best:595987 next:[529151,595986] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:1'811} gen{mvs:568 evals:0} comp{mvs:128 btracks:220} #w_updates:10 #perturb:0)
+#1732  434.72s best:595986 next:[529151,595985] ls_restart_decay_perturb(batch:1 lin{mvs:151 evals:632} #w_updates:44 #perturb:0)
+#1733  436.32s best:595985 next:[529151,595984] ls_restart_compound(batch:1 lin{mvs:0 evals:2'009} gen{mvs:690 evals:0} comp{mvs:124 btracks:283} #w_updates:12 #perturb:0)
+#1734  436.48s best:595984 next:[529151,595983] ls_restart_perturb(batch:1 lin{mvs:112 evals:516} #w_updates:42 #perturb:0)
+#1735  437.39s best:595983 next:[529151,595982] ls_restart_perturb(batch:1 lin{mvs:114 evals:514} #w_updates:44 #perturb:0)
+#1736  438.17s best:595982 next:[529151,595981] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:2'783} gen{mvs:887 evals:0} comp{mvs:157 btracks:365} #w_updates:15 #perturb:0)
+#1737  438.17s best:595981 next:[529151,595980] ls_restart_compound(batch:1 lin{mvs:0 evals:1'616} gen{mvs:464 evals:0} comp{mvs:94 btracks:185} #w_updates:16 #perturb:0)
+#1738  438.18s best:595980 next:[529151,595979] ls_restart_perturb(batch:1 lin{mvs:137 evals:706} #w_updates:61 #perturb:0)
+#1739  438.20s best:595979 next:[529151,595978] ls_restart_decay_perturb(batch:1 lin{mvs:184 evals:796} #w_updates:63 #perturb:0)
+#1740  438.20s best:595978 next:[529151,595977] ls_restart(batch:1 lin{mvs:167 evals:736} #w_updates:108 #perturb:0)
+#1741  439.19s best:595977 next:[529151,595976] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:1'780} gen{mvs:577 evals:0} comp{mvs:107 btracks:235} #w_updates:9 #perturb:0)
+#1742  440.09s best:595976 next:[529151,595975] ls_restart(batch:1 lin{mvs:133 evals:551} #w_updates:68 #perturb:0)
+#1743  442.14s best:595975 next:[529151,595974] ls_restart_decay(batch:1 lin{mvs:101 evals:467} #w_updates:19 #perturb:0)
+#1744  443.02s best:595974 next:[529151,595973] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:2'156} gen{mvs:631 evals:0} comp{mvs:117 btracks:257} #w_updates:10 #perturb:0)
+#1745  443.03s best:595973 next:[529151,595972] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:2'135} gen{mvs:679 evals:0} comp{mvs:155 btracks:262} #w_updates:16 #perturb:0)
+#1746  443.03s best:595972 next:[529151,595971] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:2'379} gen{mvs:642 evals:0} comp{mvs:114 btracks:264} #w_updates:15 #perturb:0)
+#1747  443.04s best:595971 next:[529151,595970] ls_restart(batch:1 lin{mvs:133 evals:635} #w_updates:60 #perturb:0)
+#1748  443.04s best:595970 next:[529151,595969] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:2'072} gen{mvs:620 evals:0} comp{mvs:100 btracks:260} #w_updates:13 #perturb:0)
+#1749  443.07s best:595969 next:[529151,595968] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:3'419} gen{mvs:949 evals:0} comp{mvs:163 btracks:393} #w_updates:17 #perturb:0)
+#1750  443.08s best:595968 next:[529151,595967] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:3'434} gen{mvs:1'006 evals:0} comp{mvs:174 btracks:416} #w_updates:21 #perturb:0)
+#1751  444.28s best:595967 next:[529151,595966] ls_restart_decay(batch:1 lin{mvs:102 evals:465} #w_updates:14 #perturb:0)
+#1752  445.19s best:595966 next:[529151,595965] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:2'015} gen{mvs:634 evals:0} comp{mvs:114 btracks:260} #w_updates:8 #perturb:0)
+#1753  446.62s best:595965 next:[529151,595964] ls_restart_decay_perturb(batch:1 lin{mvs:138 evals:529} #w_updates:48 #perturb:0)
+#1754  447.60s best:595964 next:[529151,595963] ls_restart_compound(batch:1 lin{mvs:0 evals:1'008} gen{mvs:364 evals:0} comp{mvs:80 btracks:142} #w_updates:7 #perturb:0)
+#1755  447.60s best:595963 next:[529151,595962] ls_restart_decay_perturb(batch:1 lin{mvs:233 evals:983} #w_updates:51 #perturb:0)
+#1756  447.62s best:595962 next:[529151,595961] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:2'490} gen{mvs:785 evals:0} comp{mvs:125 btracks:330} #w_updates:17 #perturb:0)
+#1757  447.63s best:595961 next:[529151,595960] ls_restart_decay(batch:1 lin{mvs:109 evals:535} #w_updates:31 #perturb:0)
+#1758  448.28s best:595960 next:[529151,595959] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:3'550} gen{mvs:1'068 evals:0} comp{mvs:140 btracks:464} #w_updates:23 #perturb:0)
+#1759  448.28s best:595959 next:[529151,595958] ls_restart_perturb(batch:1 lin{mvs:161 evals:676} #w_updates:107 #perturb:0)
+#1760  448.29s best:595958 next:[529151,595957] ls_restart(batch:1 lin{mvs:89 evals:458} #w_updates:39 #perturb:0)
+#1761  448.98s best:595957 next:[529151,595956] ls_restart_decay_perturb(batch:1 lin{mvs:111 evals:495} #w_updates:21 #perturb:0)
+#1762  450.05s best:595956 next:[529151,595955] ls_restart_perturb(batch:1 lin{mvs:141 evals:628} #w_updates:62 #perturb:0)
+#1763  451.61s best:595955 next:[529151,595954] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:1'156} gen{mvs:410 evals:0} comp{mvs:74 btracks:168} #w_updates:9 #perturb:0)
+#1764  452.13s best:595954 next:[529151,595953] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:1'220} gen{mvs:406 evals:0} comp{mvs:128 btracks:139} #w_updates:10 #perturb:0)
+#1765  452.15s best:595953 next:[529151,595952] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:2'533} gen{mvs:811 evals:0} comp{mvs:139 btracks:336} #w_updates:16 #perturb:0)
+#1766  452.15s best:595952 next:[529151,595951] ls_restart_perturb(batch:1 lin{mvs:92 evals:482} #w_updates:40 #perturb:0)
+#1767  452.15s best:595951 next:[529151,595950] ls_restart(batch:1 lin{mvs:90 evals:462} #w_updates:40 #perturb:0)
+#1768  452.76s best:595950 next:[529151,595949] ls_restart(batch:1 lin{mvs:125 evals:608} #w_updates:41 #perturb:0)
+#1769  453.47s best:595949 next:[529151,595948] ls_restart_perturb(batch:1 lin{mvs:142 evals:586} #w_updates:66 #perturb:0)
+#1770  454.45s best:595948 next:[529151,595947] ls_restart_decay_perturb(batch:1 lin{mvs:142 evals:630} #w_updates:36 #perturb:0)
+#1771  454.88s best:595947 next:[529151,595946] ls_restart_compound(batch:1 lin{mvs:0 evals:2'309} gen{mvs:758 evals:0} comp{mvs:136 btracks:311} #w_updates:15 #perturb:0)
+#1772  455.72s best:595946 next:[529151,595945] ls_restart_decay(batch:1 lin{mvs:183 evals:790} #w_updates:27 #perturb:0)
+#1773  456.96s best:595945 next:[529151,595944] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:2'243} gen{mvs:647 evals:0} comp{mvs:111 btracks:268} #w_updates:14 #perturb:0)
+#1774  458.11s best:595944 next:[529151,595943] graph_var_lns (d=4.99e-01 s=1986 t=0.10 p=0.46 stall=4 h=base) [hint]
+#1775  458.14s best:595943 next:[529151,595942] ls_restart_compound(batch:1 lin{mvs:0 evals:4'603} gen{mvs:1'409 evals:0} comp{mvs:121 btracks:644} #w_updates:25 #perturb:0)
+#1776  462.24s best:595942 next:[529151,595941] ls_restart(batch:1 lin{mvs:130 evals:632} #w_updates:59 #perturb:0)
+#1777  462.71s best:595941 next:[529151,595940] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:5'291} gen{mvs:1'499 evals:0} comp{mvs:211 btracks:644} #w_updates:15 #perturb:0)
+#1778  462.72s best:595940 next:[529151,595939] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:4'144} gen{mvs:1'169 evals:0} comp{mvs:135 btracks:517} #w_updates:18 #perturb:0)
+#1779  462.74s best:595939 next:[529151,595938] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:3'201} gen{mvs:990 evals:0} comp{mvs:158 btracks:416} #w_updates:19 #perturb:0)
+#1780  464.03s best:595938 next:[529151,595937] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:2'768} gen{mvs:814 evals:0} comp{mvs:102 btracks:356} #w_updates:12 #perturb:0)
+#1781  464.89s best:595937 next:[529151,595936] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:2'754} gen{mvs:867 evals:0} comp{mvs:95 btracks:386} #w_updates:8 #perturb:0)
+#1782  465.47s best:595936 next:[529151,595935] ls_restart_decay_perturb(batch:1 lin{mvs:178 evals:748} #w_updates:24 #perturb:0)
+#1783  466.16s best:595935 next:[529151,595934] ls_restart_decay_perturb(batch:1 lin{mvs:145 evals:581} #w_updates:23 #perturb:0)
+#1784  466.17s best:595934 next:[529151,595933] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:2'788} gen{mvs:859 evals:0} comp{mvs:109 btracks:375} #w_updates:14 #perturb:0)
+#1785  466.17s best:595933 next:[529151,595932] ls_restart(batch:1 lin{mvs:159 evals:789} #w_updates:57 #perturb:0)
+#1786  468.39s best:595932 next:[529151,595931] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:3'579} gen{mvs:1'025 evals:0} comp{mvs:95 btracks:465} #w_updates:12 #perturb:0)
+#1787  468.39s best:595931 next:[529151,595930] ls_restart(batch:1 lin{mvs:149 evals:738} #w_updates:57 #perturb:0)
+#1788  468.41s best:595930 next:[529151,595929] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:1'993} gen{mvs:538 evals:0} comp{mvs:100 btracks:219} #w_updates:14 #perturb:0)
+#1789  469.17s best:595929 next:[529151,595928] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:1'189} gen{mvs:412 evals:0} comp{mvs:96 btracks:158} #w_updates:6 #perturb:0)
+#1790  469.32s best:595928 next:[529151,595927] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:1'383} gen{mvs:434 evals:0} comp{mvs:110 btracks:162} #w_updates:11 #perturb:0)
+#1791  470.54s best:595927 next:[529151,595926] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:5'833} gen{mvs:1'633 evals:0} comp{mvs:195 btracks:719} #w_updates:19 #perturb:0)
+#1792  470.55s best:595926 next:[529151,595925] ls_restart_decay_perturb(batch:1 lin{mvs:176 evals:712} #w_updates:46 #perturb:0)
+#1793  471.69s best:595925 next:[529151,595924] ls_restart_decay(batch:1 lin{mvs:129 evals:524} #w_updates:17 #perturb:0)
+#1794  472.66s best:595924 next:[529151,595923] ls_restart_perturb(batch:1 lin{mvs:135 evals:662} #w_updates:35 #perturb:0)
+#1795  472.68s best:595923 next:[529151,595922] ls_restart(batch:1 lin{mvs:156 evals:765} #w_updates:63 #perturb:0)
+#1796  480.51s best:595574 next:[529151,595573] rnd_cst_lns (d=6.23e-01 s=2055 t=0.10 p=0.45 stall=2 h=base)
+#1797  480.55s best:595573 next:[529151,595572] ls_restart_decay_compound(batch:1 lin{mvs:0 evals:15'610} gen{mvs:4'278 evals:0} comp{mvs:502 btracks:1'888} #w_updates:56 #perturb:0)
+#1798  480.73s best:595572 next:[529151,595571] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:5'810} gen{mvs:1'650 evals:0} comp{mvs:308 btracks:671} #w_updates:26 #perturb:0)
+#1799  481.46s best:595571 next:[529151,595570] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:7'045} gen{mvs:2'401 evals:0} comp{mvs:265 btracks:1'068} #w_updates:39 #perturb:0)
+#1800  481.73s best:595570 next:[529151,595569] ls_restart_decay(batch:1 lin{mvs:371 evals:1'273} #w_updates:82 #perturb:0)
+#1801  482.62s best:595569 next:[529151,595568] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:7'267} gen{mvs:2'105 evals:0} comp{mvs:377 btracks:864} #w_updates:23 #perturb:0)
+#1802  483.60s best:595568 next:[529151,595567] ls_restart_compound(batch:1 lin{mvs:0 evals:6'430} gen{mvs:2'147 evals:0} comp{mvs:299 btracks:924} #w_updates:34 #perturb:0)
+#1803  483.67s best:595567 next:[529151,595566] ls_restart_compound_perturb(batch:1 lin{mvs:0 evals:14'649} gen{mvs:4'856 evals:0} comp{mvs:440 btracks:2'208} #w_updates:94 #perturb:0)
+#1804  485.43s best:595465 next:[529151,595464] graph_cst_lns (d=7.45e-01 s=2080 t=0.10 p=0.44 stall=2 h=base)
+#1805  544.38s best:595384 next:[529151,595383] graph_cst_lns (d=8.43e-01 s=2398 t=0.10 p=0.48 stall=0 h=base)
+#1806  544.41s best:595383 next:[529151,595382] ls_restart_compound(batch:1 lin{mvs:0 evals:5'894} gen{mvs:1'986 evals:0} comp{mvs:160 btracks:913} #w_updates:32 #perturb:0)
+#1807  545.59s best:595382 next:[529151,595381] rnd_cst_lns (d=7.67e-01 s=2402 t=0.10 p=0.48 stall=0 h=base) [hint]
+#1808  545.59s best:595381 next:[529151,595380] ls_restart_decay_perturb(batch:1 lin{mvs:191 evals:920} #w_updates:38 #perturb:0)
+#1809  546.71s best:594281 next:[529151,594280] graph_arc_lns (d=7.99e-01 s=2405 t=0.10 p=0.46 stall=0 h=base)
+#1810  581.52s best:594280 next:[529151,594279] graph_dec_lns (d=8.93e-01 s=2565 t=0.10 p=0.48 stall=0 h=base)
+
+Task timing                   n [     min,      max]      avg      dev     time         n [     min,      max]      avg      dev    dtime
+        'default_lp':         1 [  14.95m,   14.95m]   14.95m   0.00ns   14.95m         2 [139.83ms,   10.78m]    5.39m    5.39m   10.78m
+  'feasibility_pump':      1164 [ 23.20us,  26.02ms] 135.56us 775.13us 157.79ms      1161 [ 14.48us, 100.19us]  14.56us   2.51us  16.90ms
+                'fj':         2 [  1.91ms,  84.64ms]  43.27ms  41.36ms  86.54ms         2 [743.14us, 100.14ms]  50.44ms  49.70ms 100.88ms
+     'graph_arc_lns':       206 [  3.72ms,    4.09s] 569.93ms 448.52ms    1.96m       186 [  3.68us, 100.17ms]  65.04ms  42.11ms   12.10s
+     'graph_cst_lns':       175 [  4.25ms,    6.38s] 665.52ms 559.73ms    1.94m       166 [912.00ns, 100.30ms]  65.66ms  41.67ms   10.90s
+     'graph_dec_lns':       241 [  5.97ms,    1.28s] 483.00ms 362.74ms    1.94m       189 [ 10.00ns, 102.45ms]  68.10ms  43.15ms   12.87s
+     'graph_var_lns':       198 [  3.10ms,    1.33s] 588.25ms 343.64ms    1.94m       173 [ 10.00ns, 100.21ms]  73.19ms  36.46ms   12.66s
+                'ls':      1164 [  1.15ms, 153.48ms]  67.11ms  29.04ms    1.30m      1164 [ 91.74us, 100.17ms]  87.46ms  31.92ms    1.70m
+            'max_lp':         1 [  14.95m,   14.95m]   14.95m   0.00ns   14.95m         2 [587.36ms,    2.19m]    1.10m    1.09m    2.20m
+             'no_lp':         1 [  14.96m,   14.96m]   14.96m   0.00ns   14.96m         2 [139.69ms,    4.01m]    2.01m    2.00m    4.01m
+         'rins/rens':       426 [117.40us,    1.23s] 273.31ms 387.91ms    1.94m       179 [ 10.00ns, 101.04ms]  69.22ms  42.43ms   12.39s
+       'rnd_cst_lns':       180 [  4.28ms,    7.44s] 646.92ms 691.33ms    1.94m       174 [  2.71us, 100.11ms]  60.36ms  43.98ms   10.50s
+       'rnd_var_lns':       251 [  3.42ms,    1.48s] 465.61ms 355.78ms    1.95m       206 [ 10.00ns, 102.67ms]  62.52ms  46.39ms   12.88s
+
+Search stats       Bools  Conflicts    Branches  Restarts  BacktrackToRoot   Backtrack     BoolPropag  IntegerPropag
+  'default_lp':  301'660    593'951  18'121'102       671          210'343  17'020'858  6'412'887'213     83'605'220
+      'max_lp':   71'579    162'800   2'144'211       350          162'720   1'603'763    578'692'165     75'429'213
+       'no_lp':   16'945  3'088'422  12'369'817    10'730          351'818   4'210'661  1'254'451'276    136'109'184
+
+SAT formula      Fixed  Equiv    Total  VarLeft  BinaryClauses  PermanentClauses  TemporaryClauses
+  'default_lp':  2'650      1  301'660  299'009        623'030           125'554            17'104
+      'max_lp':    343      1   71'579   71'235        168'526            21'816            13'953
+       'no_lp':  1'408      1   16'945   15'536         38'310            31'218            14'983
+
+SAT stats        ClassicMinim  LitRemoved  LitRemovedBinary  LitLearned  LitForgotten  Subsumed
+  'default_lp':       395'823   2'129'183         4'698'331   6'168'223     4'043'122    16'890
+      'max_lp':       129'184     585'716         1'372'961   1'863'734       890'103    11'506
+       'no_lp':     2'623'594  21'329'312        58'137'578  66'042'201    54'794'532   488'177
+
+Vivification     Clauses  Decisions  LitTrue  Subsumed  LitRemoved  DecisionReused  Conflicts
+  'default_lp':  221'287    338'253      249    17'745     183'887         876'273        410
+      'max_lp':  105'796    486'473       37     5'510      48'484         149'915        327
+       'no_lp':  243'781  1'446'584        0     5'659      65'864         100'263        955
+
+Clause deletion    at_true  l_and_not(l)  to_binary  sub_conflict  sub_extra  sub_decisions  sub_eager  sub_vivify  sub_probing  sub_inpro  blocked  eliminated  forgotten   promoted  conflicts
+    'default_lp':   14'485             2         24        16'085        213            179        805      17'745       13'161     63'419        0           0    328'962    883'359    593'951
+        'max_lp':    4'630             1          9        10'955        187             93        551       5'510       12'062     28'401        0           0     69'698    300'169    162'800
+         'no_lp':      987             0         10       458'379      6'628          9'414     29'798       5'659        3'442     30'819        0           0  2'499'024  8'815'847  3'088'422
+
+Lp stats         Component  Iterations  AddedCuts  OPTIMAL  DUAL_F.  DUAL_U.
+  'default_lp':          1      40'902          0  803'277        0        0
+      'max_lp':          1   1'053'874     91'673  166'073   65'851      132
+
+Lp dimension       Final dimension of first component
+  'default_lp':     53 rows, 110 columns, 159 entries
+      'max_lp':  939 rows, 3189 columns, 5202 entries
+
+Lp debug         CutPropag  CutEqPropag  Adjust  Overflow      Bad  BadScaling
+  'default_lp':          0            0       0         0        0           0
+      'max_lp':          1           66      37         0  724'666           0
+
+Lp pool          Constraints  Updates  Simplif  Merged  Shortened   Split  Strengthened       Cuts/Call
+  'default_lp':           55        0        0       0          0       0             0             0/0
+      'max_lp':       19'473    2'273  256'643     278      2'223  25'622       409'827  91'673/171'654
+
+Lp Cut            max_lp
+          CG_FF:   3'472
+           CG_K:   1'495
+           CG_R:     639
+          CG_RB:     372
+         CG_RBP:      14
+         Clique:   2'903
+             IB:  29'237
+       MIR_1_FF:   8'547
+        MIR_1_K:     787
+        MIR_1_R:   1'939
+       MIR_1_RB:   2'353
+      MIR_1_RBP:      99
+      MIR_1_RLT:     771
+       MIR_2_FF:   9'603
+        MIR_2_K:     879
+        MIR_2_R:   3'085
+       MIR_2_RB:   2'494
+      MIR_2_RBP:     113
+       MIR_3_FF:   5'546
+        MIR_3_K:     536
+        MIR_3_R:   1'798
+       MIR_3_RB:   1'293
+      MIR_3_RBP:      76
+       MIR_4_FF:   2'712
+        MIR_4_K:     363
+       MIR_4_KL:       1
+        MIR_4_R:     842
+       MIR_4_RB:     675
+      MIR_4_RBP:      45
+       MIR_5_FF:   1'397
+        MIR_5_K:     231
+       MIR_5_KL:       2
+        MIR_5_R:     413
+       MIR_5_RB:     377
+      MIR_5_RBP:      27
+       MIR_6_FF:     802
+        MIR_6_K:     114
+       MIR_6_KL:       1
+        MIR_6_R:     235
+       MIR_6_RB:     215
+      MIR_6_RBP:      18
+   ZERO_HALF_FF:   2'644
+    ZERO_HALF_K:     166
+    ZERO_HALF_R:   1'318
+   ZERO_HALF_RB:   1'019
+  ZERO_HALF_RBP:       5
+
+LNS stats           Improv/Calls  Closed  Difficulty  TimeLimit
+  'graph_arc_lns':       182/193     48%    8.02e-01       0.10
+  'graph_cst_lns':       168/174     48%    7.99e-01       0.10
+  'graph_dec_lns':       212/232     50%    9.16e-01       0.10
+  'graph_var_lns':       172/189     49%    6.56e-01       0.10
+      'rins/rens':       210/220     49%    4.33e-01       0.10
+    'rnd_cst_lns':       169/177     50%    8.36e-01       0.10
+    'rnd_var_lns':       220/242     50%    9.41e-01       0.10
+
+LS stats                                    Batches  Restarts/Perturbs   LinMoves   GenMoves  CompoundMoves  Bactracks  WeightUpdates  ScoreComputed
+                    'fj_restart_compound':        1                  1          0        425            425          0              0          4'510
+  'fj_restart_decay_compound_perturb_obj':        1                  1          0     19'031          2'142      8'444             83        204'031
+                             'ls_restart':      201                 85  2'007'779          0              0          0      3'042'848     10'835'525
+                    'ls_restart_compound':      152                 82          0  1'637'489         86'094    775'570         16'255     14'001'023
+            'ls_restart_compound_perturb':      103                 66          0  1'033'739         64'925    484'332         12'512      8'813'198
+                       'ls_restart_decay':      114                 70  2'144'390          0              0          0         21'711      6'136'699
+              'ls_restart_decay_compound':      134                 84          0  1'566'623        176'367    694'961          5'905     14'303'561
+      'ls_restart_decay_compound_perturb':      195                 77          0  2'479'296        363'893  1'057'545          5'560     23'677'849
+               'ls_restart_decay_perturb':      138                 73  2'716'477          0              0          0         25'091      7'495'537
+                     'ls_restart_perturb':      127                 67  1'162'239          0              0          0      2'479'187      6'489'029
+
+Solutions (1810)                          Num         Rank
+                'fj_restart_compound':      2        [0,1]
+                      'graph_arc_lns':      6   [564,1809]
+                      'graph_cst_lns':     12   [209,1805]
+                      'graph_dec_lns':      4  [1693,1810]
+                      'graph_var_lns':      4  [1689,1774]
+                         'ls_restart':     48   [210,1795]
+                'ls_restart_compound':     32     [2,1806]
+        'ls_restart_compound_perturb':     34  [1053,1803]
+                   'ls_restart_decay':     30   [848,1800]
+          'ls_restart_decay_compound':     50   [298,1797]
+  'ls_restart_decay_compound_perturb':     48   [103,1801]
+           'ls_restart_decay_perturb':     30   [851,1808]
+                 'ls_restart_perturb':     32   [740,1794]
+                              'no_lp':  3'276     [1,1681]
+                        'rnd_cst_lns':     10   [911,1807]
+                        'rnd_var_lns':      2    [852,853]
+
+Objective bounds     Num
+  'initial_domain':    1
+
+Solution repositories    Added  Queried  Synchro
+    'alternative_path':      6      511        6
+      'best_solutions':  2'120    2'096    2'032
+   'fj solution hints':      0        0        0
+        'lp solutions':  2'996      210    2'872
+                'pump':  1'163      216
+
+Improving bounds shared        Num  Sym
+            'default_lp':    2'127    0
+                'max_lp':    2'136    0
+                 'no_lp':  189'797    0
+
+Clauses shared    #Exported  #Imported  #BinaryRead  #BinaryTotal
+   'default_lp':      2'206      4'707        3'813         3'816
+       'max_lp':      1'423      4'956        3'811         3'816
+        'no_lp':      6'578      2'185        3'816         3'816
+
+LRAT_status: NA
+CpSolverResponse summary:
+status: FEASIBLE
+objective: 594280
+best_bound: 529151
+integers: 110
+booleans: 301660
+conflicts: 593951
+branches: 18121102
+propagations: 6412887213
+integer_propagations: 83605220
+restarts: 671
+lp_iterations: 40902
+walltime: 900.472
+usertime: 900.472
+deterministic_time: 1205.97
+gap_integral: 13367.3
+solution_fingerprint: 0x50462319e0f9fde5
+
+RESULT n=28 angles=[0.0, 45.0] s=5.9428090416 (solver 5.9428000) bound=5.2915100000 status=FEASIBLE time=900.5s structure=22x0deg + 6x45deg min_sep=-8.88e-16 min_margin=0.00e+00

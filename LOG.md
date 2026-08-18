@@ -221,3 +221,18 @@
   the two-point case) -> recommended follow-up: A07 LP with theta restricted to [theta*-delta, theta*+delta] u {0}.
 
 ## 2026-08-18 — advisor — dispatched A10 (angle-box LP sizing) and A11 (ab-initio sweep over open n ≤ 100)
+
+## 2026-08-18 — A11-abinitio-sweep — angle-lattice MILP sweep over open n ≤ 100: 2 exact rediscoveries, no beat
+- `attempts/A11-abinitio-sweep/`: records n ≤ 100 parsed from Ellsworth's triangular table (`records.json`); tilt
+  angles of the record packings read from his SVG sources (17: 39.805/53.376, 18: 24.295/65.705, 28: 30.291,
+  29: 5 angles, 37: 45+42.09/47.91, 39, 41, 50 = atan(3/4), 53); A09's CP-SAT + LP-polish + rational-cert
+  pipeline run as a 4-slot queue (39 runs, 600–900 s each, `results.jsonl`, `notes.md` §4).
+- MATCHES (ab initio, no contact graph, certificates PASS `certs/verify_certificate.py`): n=11 Trump 3.8770835900228
+  (43 s) and n=18 Hämäläinen 7/2+√7/2 = 4.822875655532295 (14 uprights + 2×2 block tilted 24.295°, < 600 s).
+- NO BEAT for any n. n=17 stalls at 4.7071 (16+1) on all lattices/seeds, n=19 at 4.9428 (16+3); feasibility at
+  record−1e-4 UNKNOWN (12, 17, 18, 19, 20, 21); n ≥ 26 stays near the grid in 900 s (26–29, 37–41, 50, 52, 65).
+  Curiosities: n=18 at 4.8385 with 13+5 at Trump's angle; n=50 at 7+5/7 with one 3-4-5 tilted square.
+- Verdict (notes.md §5–6): finder competitive only for n ≲ 20 with |Θ| ≤ 3, the record tilt on the lattice and a
+  small tilted cluster; larger n needs seeding with the record structure + fix-s at record−ε, angle refinement near
+  the record tilt, in-search LP polish, more workers/longer runs. Bugs: fix-s off the 1e-5 grid ⇒ MODEL_INVALID
+  (fixed in A11's milp_pack.py); `--counts` silently ignored by the CP-SAT back-end (A09's counts run was unconstrained).

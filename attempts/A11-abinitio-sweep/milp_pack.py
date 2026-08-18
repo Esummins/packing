@@ -283,7 +283,7 @@ def solve_cpsat(m: Model, time_limit, threads, scale=100000, log=True, seed=0, h
     n, K, A = m.n, m.K, m.A
     md = cp_model.CpModel()
     smax = int(round(m.s_max * S))
-    s = md.NewIntVar(int(math.ceil(m.s_min * S)), smax, 's')
+    s = md.NewIntVar(int(math.ceil(m.s_min * S - 1e-6)), smax, 's')   # -1e-6: float noise made ceil > smax in fix-s mode (A11)
     x = [md.NewIntVar(0, smax, f'x{i}') for i in range(n)]
     y = [md.NewIntVar(0, smax, f'y{i}') for i in range(n)]
     z = [[md.NewBoolVar(f'z{i}_{k}') for k in range(K)] for i in range(n)]
@@ -488,6 +488,9 @@ def main():
     if args.smax is None:
         args.smax = float(math.ceil(math.sqrt(args.n) - 1e-9))
     if args.fix_s is not None:
+        # CP-SAT works on a 1e-5 grid: round DOWN to the grid, otherwise ceil(smin*S) > round(smax*S) and the
+        # model is MODEL_INVALID (A11 bug found on n=17 fix-s = record - 1e-4).
+        args.fix_s = math.floor(args.fix_s * 100000) / 100000
         args.smax = args.fix_s
         args.smin = args.fix_s
     m = Model(args.n, angles, s_max=args.smax, symbreak=not args.no_symbreak, com=not args.no_com,

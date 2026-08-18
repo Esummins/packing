@@ -1,0 +1,1855 @@
+n=19 angles=[0.0, 40.181937290329714] axes=8 cols=1445 rows=3040 solver=cpsat
+
+Starting CP-SAT solver v9.15.6755
+Parameters: random_seed: 0 max_time_in_seconds: 600 log_search_progress: true num_workers: 4
+
+Initial optimization model '': (model_fingerprint: 0xf0e50eeba9d92d6)
+#Variables: 1'463 (#ints: 1 in objective) (1'444 primary variables)
+  - 1'424 Booleans in [0,1]
+  - 38 in [0,500000]
+  - 1 in [435890,500000]
+#kBoolOr: 1'539 (#enforced: 1'368) (#literals: 4'104)
+#kExactlyOne: 19 (#literals: 38)
+#kLinear1: 76 (#enforced: 76)
+#kLinear2: 2'200 (#enforced: 2'182 #multi: 2'052)
+#kLinearN: 2'054 (#enforced: 2'052 #multi: 2'052) (#terms: 8'248)
+
+Starting presolve at 0.01s
+The solution hint is incomplete: 77 out of 1463 non fixed variables hinted.
+  1.39e-03s  0.00e+00d  [DetectDominanceRelations] 
+  2.92e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  1.90e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::ExtractEncodingFromLinear] 
+  1.14e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  4.03e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+[Symmetry] Graph for symmetry has 8'977 nodes and 32'449 arcs.
+[Symmetry] Symmetry computation done. time: 0.0045065 dtime: 0.00388995
+[SAT presolve] num removable Booleans: 0 / 1'405
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:1'629 literals:5'688 vars:1'405 one_side_vars:0 simple_definition:1'368 singleton_clauses:0
+[SAT presolve] [0.0002282s] clauses:1'611 literals:5'490 vars:1'405 one_side_vars:0 simple_definition:1'386 singleton_clauses:0
+[SAT presolve] [0.0002897s] clauses:1'611 literals:5'490 vars:1'405 one_side_vars:0 simple_definition:1'386 singleton_clauses:0
+  4.85e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  1.69e-01s  3.17e-02d  [operations_research::sat::CpModelPresolver::Probe] #probed=2'924 #new_bounds=38 #new_binary_clauses=5'019 
+  3.05e-03s  8.05e-03d  [MaxClique] Merged 1'566 constraints with 3'132 literals into 315 constraints with 665 literals
+  1.18e-03s  0.00e+00d  [DetectDominanceRelations] 
+  1.65e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  1.64e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::ProcessAtMostOneAndLinear] 
+  3.83e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+  3.25e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  3.16e-03s  1.99e-04d  [operations_research::sat::CpModelPresolver::DetectDominatedLinearConstraints] #relevant_constraints=1'370 #num_inclusions=4'788 
+  3.21e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDifferentVariables] 
+  6.60e-04s  8.53e-06d  [operations_research::sat::CpModelPresolver::ProcessSetPPC] #relevant_constraints=504 #num_inclusions=18 
+  7.47e-04s  5.73e-05d  [operations_research::sat::CpModelPresolver::TransformClausesToExactlyOne] #num_amos=1'521 #num_clauses=171 #num_checked=171 
+  2.85e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+  2.80e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::FindAlmostIdenticalLinearConstraints] 
+  8.74e-04s  1.68e-04d  [operations_research::sat::CpModelPresolver::FindBigAtMostOneAndLinearOverlap] 
+  7.48e-03s  5.77e-04d  [operations_research::sat::CpModelPresolver::FindBigVerticalLinearOverlap] #blocks=27 #saved_nz=1'863 
+  2.49e-04s  2.00e-07d  [operations_research::sat::CpModelPresolver::FindBigHorizontalLinearOverlap] #linears=2 
+  2.45e-04s  6.84e-06d  [operations_research::sat::CpModelPresolver::MergeClauses] 
+  1.55e-03s  0.00e+00d  [DetectDominanceRelations] 
+  1.27e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  1.54e-03s  0.00e+00d  [DetectDominanceRelations] 
+  1.02e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  4.97e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  3.75e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+[Symmetry] Graph for symmetry has 7'582 nodes and 19'685 arcs.
+[Symmetry] Symmetry computation done. time: 0.0017462 dtime: 0.00281328
+[SAT presolve] num removable Booleans: 0 / 1'405
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:1'675 literals:4'376 vars:1'387 one_side_vars:2 simple_definition:1'368 singleton_clauses:0
+[SAT presolve] [0.0001533s] clauses:1'675 literals:4'376 vars:1'387 one_side_vars:2 simple_definition:1'368 singleton_clauses:0
+[SAT presolve] [0.0001993s] clauses:1'675 literals:4'376 vars:1'387 one_side_vars:2 simple_definition:1'368 singleton_clauses:0
+  3.92e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  1.32e-01s  2.78e-02d  [operations_research::sat::CpModelPresolver::Probe] #probed=2'924 #new_binary_clauses=531 
+  8.57e-03s  1.94e-02d  [MaxClique] 
+  1.48e-03s  0.00e+00d  [DetectDominanceRelations] 
+  1.04e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  1.54e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::ProcessAtMostOneAndLinear] 
+  6.93e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+  7.28e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  1.25e-03s  3.90e-05d  [operations_research::sat::CpModelPresolver::DetectDominatedLinearConstraints] #relevant_constraints=721 #num_inclusions=1'038 
+  3.93e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDifferentVariables] 
+  9.96e-04s  2.11e-05d  [operations_research::sat::CpModelPresolver::ProcessSetPPC] #relevant_constraints=1'710 
+  2.01e-03s  5.73e-05d  [operations_research::sat::CpModelPresolver::TransformClausesToExactlyOne] #num_amos=1'521 #num_clauses=171 #num_checked=171 
+  4.27e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+  4.09e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::FindAlmostIdenticalLinearConstraints] 
+  1.09e-03s  2.66e-04d  [operations_research::sat::CpModelPresolver::FindBigAtMostOneAndLinearOverlap] 
+  2.67e-03s  4.25e-04d  [operations_research::sat::CpModelPresolver::FindBigVerticalLinearOverlap] #blocks=6 #saved_nz=414 
+  2.44e-04s  2.00e-07d  [operations_research::sat::CpModelPresolver::FindBigHorizontalLinearOverlap] #linears=2 
+  4.03e-04s  6.84e-06d  [operations_research::sat::CpModelPresolver::MergeClauses] 
+  1.30e-03s  0.00e+00d  [DetectDominanceRelations] 
+  1.06e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  1.35e-03s  0.00e+00d  [DetectDominanceRelations] 
+  9.83e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  5.34e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  4.27e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+[Symmetry] Graph for symmetry has 7'588 nodes and 19'265 arcs.
+[Symmetry] Symmetry computation done. time: 0.0016189 dtime: 0.00285006
+[SAT presolve] num removable Booleans: 0 / 1'405
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:1'675 literals:4'376 vars:1'387 one_side_vars:2 simple_definition:1'368 singleton_clauses:0
+[SAT presolve] [0.0001764s] clauses:1'675 literals:4'376 vars:1'387 one_side_vars:2 simple_definition:1'368 singleton_clauses:0
+[SAT presolve] [0.000224s] clauses:1'675 literals:4'376 vars:1'387 one_side_vars:2 simple_definition:1'368 singleton_clauses:0
+  9.78e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  1.28e-01s  2.80e-02d  [operations_research::sat::CpModelPresolver::Probe] #probed=2'924 #new_binary_clauses=531 
+  8.58e-03s  1.94e-02d  [MaxClique] 
+  1.26e-03s  0.00e+00d  [DetectDominanceRelations] 
+  1.26e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  1.52e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::ProcessAtMostOneAndLinear] 
+  9.11e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+  6.61e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  5.52e-04s  1.43e-05d  [operations_research::sat::CpModelPresolver::DetectDominatedLinearConstraints] #relevant_constraints=379 #num_inclusions=516 
+  2.12e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDifferentVariables] 
+  1.02e-03s  2.11e-05d  [operations_research::sat::CpModelPresolver::ProcessSetPPC] #relevant_constraints=1'710 
+  7.69e-04s  5.73e-05d  [operations_research::sat::CpModelPresolver::TransformClausesToExactlyOne] #num_amos=1'521 #num_clauses=171 #num_checked=171 
+  2.83e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+  4.04e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::FindAlmostIdenticalLinearConstraints] 
+  1.00e-03s  2.59e-04d  [operations_research::sat::CpModelPresolver::FindBigAtMostOneAndLinearOverlap] 
+  3.27e-03s  3.98e-04d  [operations_research::sat::CpModelPresolver::FindBigVerticalLinearOverlap] #blocks=3 #saved_nz=207 
+  3.30e-04s  2.00e-07d  [operations_research::sat::CpModelPresolver::FindBigHorizontalLinearOverlap] #linears=2 
+  4.35e-04s  6.84e-06d  [operations_research::sat::CpModelPresolver::MergeClauses] 
+  1.47e-03s  0.00e+00d  [DetectDominanceRelations] 
+  1.16e-02s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  7.34e-05s  0.00e+00d  [MergeNoOverlap] 
+  7.09e-05s  0.00e+00d  [MergeNoOverlap2D] 
+  2.09e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::ExpandObjective] #entries=252 #tight_variables=126 #tight_constraints=54 
+
+Presolve summary:
+  - 19 affine relations were detected.
+  - rule 'TODO dual: only one blocking constraint?' was applied 12'319 times.
+  - rule 'TODO dual: only one unspecified blocking constraint?' was applied 9 times.
+  - rule 'TODO dual: tighten at most one' was applied 1 time.
+  - rule 'affine: new relation' was applied 19 times.
+  - rule 'at_most_one: transformed into max clique' was applied 1 time.
+  - rule 'bool_or: implications' was applied 1'242 times.
+  - rule 'bool_or: removed enforcement literal' was applied 36 times.
+  - rule 'deductions: 112 stored' was applied 1 time.
+  - rule 'exactly_one: size two' was applied 19 times.
+  - rule 'linear matrix: common vertical rectangle' was applied 36 times.
+  - rule 'linear2: convert ax + by != cte to clauses' was applied 18 times.
+  - rule 'linear2: convert implied ax + by == cte to clauses' was applied 18 times.
+  - rule 'linear2: implied ax + by = cte has only one solution' was applied 18 times.
+  - rule 'linear: always true' was applied 38 times.
+  - rule 'linear: divide by GCD' was applied 4'104 times.
+  - rule 'linear: remapped using affine relations' was applied 54 times.
+  - rule 'presolve: 0 unused variables removed.' was applied 1 time.
+  - rule 'presolve: iteration' was applied 3 times.
+  - rule 'probing: bool_or reduced to implication' was applied 1'224 times.
+  - rule 'probing: reduced enforced constraint to implication' was applied 1'368 times.
+  - rule 'probing: simplified enforcement list' was applied 2'736 times.
+  - rule 'setppc: bool_or in at_most_one' was applied 18 times.
+
+Presolved optimization model '': (model_fingerprint: 0xc8b37500bfa91b54)
+#Variables: 1'480 (#ints: 1 in objective) (1'443 primary variables)
+  - 1'405 Booleans in [0,1]
+  - 9 in [-15576950000,12607450000]
+  - 8 in [-12607450000,15576950000]
+  - 38 in [50000,450000]
+  - 1 in [435890,500000]
+  - 19 in [3523050000,31707450000]
+#kAtMostOne: 17 (#literals: 51)
+#kBoolAnd: 36 (#enforced: 36) (#literals: 1'540)
+#kBoolOr: 171 (#literals: 1'368)
+#kExactlyOne: 18 (#literals: 54)
+#kLinear1: 38 (#enforced: 38)
+#kLinear2: 2'690 (#enforced: 2'690 #multi: 2'596)
+#kLinear3: 172 (#enforced: 136 #multi: 136)
+#kLinearN: 6 (#enforced: 4 #multi: 4) (#terms: 56)
+[Symmetry] Graph for symmetry has 7'574 nodes and 19'057 arcs.
+[Symmetry] Symmetry computation done. time: 0.0020601 dtime: 0.00279661
+
+Preloading model.
+#Bound   0.68s best:inf   next:[435890,500000] initial_domain
+The solution hint is incomplete: 94 out of 1480 non fixed variables hinted.
+#Model   0.69s var:1480/1480 constraints:3148/3148
+
+Starting search at 0.69s with 4 workers.
+3 full problem subsolvers: [default_lp, max_lp, no_lp]
+1 first solution subsolver: [fj]
+9 interleaved subsolvers: [feasibility_pump, graph_arc_lns, graph_cst_lns, graph_dec_lns, graph_var_lns, ls, rins/rens, rnd_cst_lns, rnd_var_lns]
+3 helper subsolvers: [neighborhood_helper, synchronization_agent, update_gap_integral]
+
+#1       0.80s best:500000 next:[435890,499999] fj_restart_compound(batch:1 lin{mvs:0 evals:1'530} gen{mvs:203 evals:0} comp{mvs:203 btracks:0} #w_updates:0 #perturb:0)
+#Model   5.63s var:1478/1480 constraints:3129/3148
+#Model   5.78s var:1473/1480 constraints:3119/3148
+#Model   6.22s var:1466/1480 constraints:2963/3148
+#Model   6.33s var:1457/1480 constraints:2878/3148
+#Model  16.45s var:1447/1480 constraints:2867/3148
+#Model  16.57s var:1445/1480 constraints:2863/3148
+#2      81.09s best:499999 next:[435890,499998] no_lp
+#3      81.10s best:499998 next:[435890,499997] no_lp
+#4      81.10s best:499997 next:[435890,499996] no_lp
+#5      81.11s best:499996 next:[435890,499995] no_lp
+#6      81.11s best:499995 next:[435890,499994] no_lp
+#7      81.12s best:499994 next:[435890,499993] no_lp
+#8      81.12s best:499993 next:[435890,499992] no_lp
+#9      81.12s best:499992 next:[435890,499991] no_lp
+#10     81.13s best:499991 next:[435890,499990] no_lp
+#11     81.13s best:499990 next:[435890,499989] no_lp
+#12     81.13s best:499989 next:[435890,499988] no_lp
+#13     81.13s best:499988 next:[435890,499987] no_lp
+#14     81.14s best:499987 next:[435890,499986] no_lp
+#15     81.14s best:499986 next:[435890,499985] no_lp
+#16     81.14s best:499985 next:[435890,499984] no_lp
+#17     82.04s best:499984 next:[435890,499983] no_lp
+#18     82.05s best:499983 next:[435890,499982] no_lp
+#19     82.05s best:499982 next:[435890,499981] no_lp
+#20     82.06s best:499981 next:[435890,499980] no_lp
+#21     82.06s best:499980 next:[435890,499979] no_lp
+#22     82.07s best:499979 next:[435890,499978] no_lp
+#23     82.07s best:499978 next:[435890,499977] no_lp
+#24     82.08s best:499977 next:[435890,499976] no_lp
+#25     82.08s best:499976 next:[435890,499975] no_lp
+#26     82.09s best:499975 next:[435890,499974] no_lp
+#27     82.09s best:499974 next:[435890,499973] no_lp
+#28     82.09s best:499973 next:[435890,499972] no_lp
+#29     82.10s best:499972 next:[435890,499971] no_lp
+#30     82.10s best:499971 next:[435890,499970] no_lp
+#31     82.11s best:499970 next:[435890,499969] no_lp
+#32     82.11s best:499969 next:[435890,499968] no_lp
+#33     82.12s best:499968 next:[435890,499967] no_lp
+#34     82.12s best:499967 next:[435890,499966] no_lp
+#35     82.12s best:499966 next:[435890,499965] no_lp
+#36     82.13s best:499965 next:[435890,499964] no_lp
+#37     82.13s best:499964 next:[435890,499963] no_lp
+#38     82.14s best:499963 next:[435890,499962] no_lp
+#39     82.14s best:499962 next:[435890,499961] no_lp
+#40     82.14s best:499961 next:[435890,499960] no_lp
+#41     82.15s best:499960 next:[435890,499959] no_lp
+#42     82.15s best:499959 next:[435890,499958] no_lp
+#43     82.16s best:499958 next:[435890,499957] no_lp
+#44     82.16s best:499957 next:[435890,499956] no_lp
+#45     82.17s best:499956 next:[435890,499955] no_lp
+#46     82.17s best:499955 next:[435890,499954] no_lp
+#47     82.18s best:499954 next:[435890,499953] no_lp
+#48     82.18s best:499953 next:[435890,499952] no_lp
+#49     82.18s best:499952 next:[435890,499951] no_lp
+#50     82.18s best:499951 next:[435890,499950] no_lp
+#51     82.19s best:499950 next:[435890,499949] no_lp
+#52     82.19s best:499949 next:[435890,499948] no_lp
+#53     82.19s best:499948 next:[435890,499947] no_lp
+#54     82.20s best:499947 next:[435890,499946] no_lp
+#55     82.20s best:499946 next:[435890,499945] no_lp
+#56     82.21s best:499945 next:[435890,499944] no_lp
+#57     82.21s best:499944 next:[435890,499943] no_lp
+#58     82.21s best:499943 next:[435890,499942] no_lp
+#59     82.21s best:499942 next:[435890,499941] no_lp
+#60     82.22s best:499941 next:[435890,499940] no_lp
+#61     82.22s best:499940 next:[435890,499939] no_lp
+#62     82.22s best:499939 next:[435890,499938] no_lp
+#63     82.23s best:499938 next:[435890,499937] no_lp
+#64     82.23s best:499937 next:[435890,499936] no_lp
+#65     82.23s best:499936 next:[435890,499935] no_lp
+#66     82.24s best:499935 next:[435890,499934] no_lp
+#67     82.24s best:499934 next:[435890,499933] no_lp
+#68     82.24s best:499933 next:[435890,499932] no_lp
+#69     82.29s best:499932 next:[435890,499931] no_lp
+#70     82.29s best:499931 next:[435890,499930] no_lp
+#71     82.30s best:499930 next:[435890,499929] no_lp
+#72     82.30s best:499929 next:[435890,499928] no_lp
+#73     82.30s best:499928 next:[435890,499927] no_lp
+#74     82.31s best:499927 next:[435890,499926] no_lp
+#75     82.31s best:499926 next:[435890,499925] no_lp
+#76     82.32s best:499925 next:[435890,499924] no_lp
+#77     82.33s best:499924 next:[435890,499923] no_lp
+#78     82.33s best:499923 next:[435890,499922] no_lp
+#79     82.34s best:499922 next:[435890,499921] no_lp
+#80     82.34s best:499921 next:[435890,499920] no_lp
+#81     82.35s best:499920 next:[435890,499919] no_lp
+#82     82.35s best:499919 next:[435890,499918] no_lp
+#83     82.36s best:499918 next:[435890,499917] no_lp
+#84     82.36s best:499917 next:[435890,499916] no_lp
+#85     82.36s best:499916 next:[435890,499915] no_lp
+#86     82.37s best:499915 next:[435890,499914] no_lp
+#87     82.37s best:499914 next:[435890,499913] no_lp
+#88     82.38s best:499913 next:[435890,499912] no_lp
+#89     82.38s best:499912 next:[435890,499911] no_lp
+#90     82.38s best:499911 next:[435890,499910] no_lp
+#91     82.39s best:499910 next:[435890,499909] no_lp
+#92     82.39s best:499909 next:[435890,499908] no_lp
+#93     82.39s best:499908 next:[435890,499907] no_lp
+#94     82.39s best:499907 next:[435890,499906] no_lp
+#95     82.40s best:499906 next:[435890,499905] no_lp
+#96     82.40s best:499905 next:[435890,499904] no_lp
+#97     82.40s best:499904 next:[435890,499903] no_lp
+#98     82.41s best:499903 next:[435890,499902] no_lp
+#99     82.41s best:499902 next:[435890,499901] no_lp
+#100    82.41s best:499901 next:[435890,499900] no_lp
+#101    82.42s best:499900 next:[435890,499899] no_lp
+#102    82.42s best:499899 next:[435890,499898] no_lp
+#103    82.42s best:499898 next:[435890,499897] no_lp
+#104    82.42s best:499897 next:[435890,499896] no_lp
+#105    82.43s best:499896 next:[435890,499895] no_lp
+#106    82.43s best:499895 next:[435890,499894] no_lp
+#107    82.43s best:499894 next:[435890,499893] no_lp
+#108    82.43s best:499893 next:[435890,499892] no_lp
+#109    82.44s best:499892 next:[435890,499891] no_lp
+#110    82.44s best:499891 next:[435890,499890] no_lp
+#111    82.45s best:499890 next:[435890,499889] no_lp
+#112    82.45s best:499889 next:[435890,499888] no_lp
+#113    82.46s best:499888 next:[435890,499887] no_lp
+#114    82.46s best:499887 next:[435890,499886] no_lp
+#115    82.46s best:499886 next:[435890,499885] no_lp
+#116    82.47s best:499885 next:[435890,499884] no_lp
+#117    82.47s best:499884 next:[435890,499883] no_lp
+#118    82.47s best:499883 next:[435890,499882] no_lp
+#119    82.48s best:499882 next:[435890,499881] no_lp
+#120    82.48s best:499881 next:[435890,499880] no_lp
+#121    82.49s best:499880 next:[435890,499879] no_lp
+#122    82.49s best:499879 next:[435890,499878] no_lp
+#123    82.49s best:499878 next:[435890,499877] no_lp
+#124    82.49s best:499877 next:[435890,499876] no_lp
+#125    82.50s best:499876 next:[435890,499875] no_lp
+#126    82.50s best:499875 next:[435890,499874] no_lp
+#127    82.50s best:499874 next:[435890,499873] no_lp
+#128    82.50s best:499873 next:[435890,499872] no_lp
+#129    82.51s best:499872 next:[435890,499871] no_lp
+#130    82.51s best:499871 next:[435890,499870] no_lp
+#131    82.51s best:499870 next:[435890,499869] no_lp
+#132    82.52s best:499869 next:[435890,499868] no_lp
+#133    82.52s best:499868 next:[435890,499867] no_lp
+#134    82.52s best:499867 next:[435890,499866] no_lp
+#135    82.53s best:499866 next:[435890,499865] no_lp
+#136    82.53s best:499865 next:[435890,499864] no_lp
+#137    82.54s best:499864 next:[435890,499863] no_lp
+#138    82.54s best:499863 next:[435890,499862] no_lp
+#139    82.54s best:499862 next:[435890,499861] no_lp
+#140    82.55s best:499861 next:[435890,499860] no_lp
+#141    82.55s best:499860 next:[435890,499859] no_lp
+#142    82.55s best:499859 next:[435890,499858] no_lp
+#143    82.55s best:499858 next:[435890,499857] no_lp
+#144    82.56s best:499857 next:[435890,499856] no_lp
+#145    82.56s best:499856 next:[435890,499855] no_lp
+#146    82.56s best:499855 next:[435890,499854] no_lp
+#147    82.57s best:499854 next:[435890,499853] no_lp
+#148    82.57s best:499853 next:[435890,499852] no_lp
+#149    82.59s best:499852 next:[435890,499851] no_lp
+#150    82.60s best:499851 next:[435890,499850] no_lp
+#151    82.60s best:499850 next:[435890,499849] no_lp
+#152    82.61s best:499849 next:[435890,499848] no_lp
+#153    83.60s best:499848 next:[435890,499847] no_lp
+#154    83.60s best:499847 next:[435890,499846] no_lp
+#155    83.60s best:499846 next:[435890,499845] no_lp
+#156    83.61s best:499845 next:[435890,499844] no_lp
+#157    83.61s best:499844 next:[435890,499843] no_lp
+#158    83.61s best:499843 next:[435890,499842] no_lp
+#159    83.62s best:499842 next:[435890,499841] no_lp
+#160    83.62s best:499841 next:[435890,499840] no_lp
+#161    83.63s best:499840 next:[435890,499839] no_lp
+#162    83.63s best:499839 next:[435890,499838] no_lp
+#163    83.64s best:499838 next:[435890,499837] no_lp
+#164    83.64s best:499837 next:[435890,499836] no_lp
+#165    83.65s best:499836 next:[435890,499835] no_lp
+#166    83.65s best:499835 next:[435890,499834] no_lp
+#167    83.65s best:499834 next:[435890,499833] no_lp
+#168    83.66s best:499833 next:[435890,499832] no_lp
+#169    83.66s best:499832 next:[435890,499831] no_lp
+#170    83.67s best:499831 next:[435890,499830] no_lp
+#171    83.67s best:499830 next:[435890,499829] no_lp
+#172    83.68s best:499829 next:[435890,499828] no_lp
+#173    83.68s best:499828 next:[435890,499827] no_lp
+#174    83.69s best:499827 next:[435890,499826] no_lp
+#175    83.69s best:499826 next:[435890,499825] no_lp
+#176    83.70s best:499825 next:[435890,499824] no_lp
+#177    83.70s best:499824 next:[435890,499823] no_lp
+#178    83.70s best:499823 next:[435890,499822] no_lp
+#179    83.71s best:499822 next:[435890,499821] no_lp
+#180    83.71s best:499821 next:[435890,499820] no_lp
+#181    83.72s best:499820 next:[435890,499819] no_lp
+#182    83.72s best:499819 next:[435890,499818] no_lp
+#183    83.72s best:499818 next:[435890,499817] no_lp
+#184    83.73s best:499817 next:[435890,499816] no_lp
+#185    83.73s best:499816 next:[435890,499815] no_lp
+#186    83.73s best:499815 next:[435890,499814] no_lp
+#187    83.74s best:499814 next:[435890,499813] no_lp
+#188    83.74s best:499813 next:[435890,499812] no_lp
+#189    83.74s best:499812 next:[435890,499811] no_lp
+#190    83.75s best:499811 next:[435890,499810] no_lp
+#191    83.75s best:499810 next:[435890,499809] no_lp
+#192    83.76s best:499809 next:[435890,499808] no_lp
+#193    83.76s best:499808 next:[435890,499807] no_lp
+#194    83.89s best:499807 next:[435890,499806] no_lp
+#195    83.89s best:499806 next:[435890,499805] no_lp
+#196    83.89s best:499805 next:[435890,499804] no_lp
+#197    83.90s best:499804 next:[435890,499803] no_lp
+#198    83.90s best:499803 next:[435890,499802] no_lp
+#199    83.91s best:499802 next:[435890,499801] no_lp
+#200    83.91s best:499801 next:[435890,499800] no_lp
+#201    83.92s best:499800 next:[435890,499799] no_lp
+#202    83.93s best:499799 next:[435890,499798] no_lp
+#203    83.93s best:499798 next:[435890,499797] no_lp
+#204    83.94s best:499797 next:[435890,499796] no_lp
+#205    83.94s best:499796 next:[435890,499795] no_lp
+#206    83.95s best:499795 next:[435890,499794] no_lp
+#207    83.96s best:499794 next:[435890,499793] no_lp
+#208    83.96s best:499793 next:[435890,499792] no_lp
+#209    83.96s best:499792 next:[435890,499791] no_lp
+#210    83.97s best:499791 next:[435890,499790] no_lp
+#211    83.97s best:499790 next:[435890,499789] no_lp
+#212    83.98s best:499789 next:[435890,499788] no_lp
+#213    83.98s best:499788 next:[435890,499787] no_lp
+#214    83.99s best:499787 next:[435890,499786] no_lp
+#215    83.99s best:499786 next:[435890,499785] no_lp
+#216    84.00s best:499785 next:[435890,499784] no_lp
+#217    84.00s best:499784 next:[435890,499783] no_lp
+#218    84.01s best:499783 next:[435890,499782] no_lp
+#219    84.01s best:499782 next:[435890,499781] no_lp
+#220    84.02s best:499781 next:[435890,499780] no_lp
+#221    84.02s best:499780 next:[435890,499779] no_lp
+#222    84.03s best:499779 next:[435890,499778] no_lp
+#223    84.05s best:499778 next:[435890,499777] no_lp
+#224    84.05s best:499777 next:[435890,499776] no_lp
+#225    84.06s best:499776 next:[435890,499775] no_lp
+#226    84.06s best:499775 next:[435890,499774] no_lp
+#227    84.07s best:499774 next:[435890,499773] no_lp
+#228    84.07s best:499773 next:[435890,499772] no_lp
+#229    84.08s best:499772 next:[435890,499771] no_lp
+#230    84.08s best:499771 next:[435890,499770] no_lp
+#231    84.08s best:499770 next:[435890,499769] no_lp
+#232    84.09s best:499769 next:[435890,499768] no_lp
+#233    84.09s best:499768 next:[435890,499767] no_lp
+#234    84.09s best:499767 next:[435890,499766] no_lp
+#235    84.10s best:499766 next:[435890,499765] no_lp
+#236    84.10s best:499765 next:[435890,499764] no_lp
+#237    84.11s best:499764 next:[435890,499763] no_lp
+#238    84.11s best:499763 next:[435890,499762] no_lp
+#239    84.11s best:499762 next:[435890,499761] no_lp
+#240    84.12s best:499761 next:[435890,499760] no_lp
+#241    84.12s best:499760 next:[435890,499759] no_lp
+#242    84.13s best:499759 next:[435890,499758] no_lp
+#243    84.13s best:499758 next:[435890,499757] no_lp
+#244    84.14s best:499757 next:[435890,499756] no_lp
+#245    84.14s best:499756 next:[435890,499755] no_lp
+#246    84.15s best:499755 next:[435890,499754] no_lp
+#247    84.15s best:499754 next:[435890,499753] no_lp
+#248    84.16s best:499753 next:[435890,499752] no_lp
+#249    84.16s best:499752 next:[435890,499751] no_lp
+#250    84.16s best:499751 next:[435890,499750] no_lp
+#251    84.17s best:499750 next:[435890,499749] no_lp
+#252    84.17s best:499749 next:[435890,499748] no_lp
+#253    84.17s best:499748 next:[435890,499747] no_lp
+#254    84.18s best:499747 next:[435890,499746] no_lp
+#255    84.18s best:499746 next:[435890,499745] no_lp
+#256    84.19s best:499745 next:[435890,499744] no_lp
+#257    84.19s best:499744 next:[435890,499743] no_lp
+#258    84.19s best:499743 next:[435890,499742] no_lp
+#259    84.20s best:499742 next:[435890,499741] no_lp
+#260    84.20s best:499741 next:[435890,499740] no_lp
+#261    84.21s best:499740 next:[435890,499739] no_lp
+#262    84.21s best:499739 next:[435890,499738] no_lp
+#263    84.21s best:499738 next:[435890,499737] no_lp
+#264    84.22s best:499737 next:[435890,499736] no_lp
+#265    84.22s best:499736 next:[435890,499735] no_lp
+#266    84.22s best:499735 next:[435890,499734] no_lp
+#267    84.23s best:499734 next:[435890,499733] no_lp
+#268    84.23s best:499733 next:[435890,499732] no_lp
+#269    84.23s best:499732 next:[435890,499731] no_lp
+#270    84.24s best:499731 next:[435890,499730] no_lp
+#271    84.24s best:499730 next:[435890,499729] no_lp
+#272    84.25s best:499729 next:[435890,499728] no_lp
+#273    84.25s best:499728 next:[435890,499727] no_lp
+#274    84.25s best:499727 next:[435890,499726] no_lp
+#275    84.26s best:499726 next:[435890,499725] no_lp
+#276    84.26s best:499725 next:[435890,499724] no_lp
+#277    84.27s best:499724 next:[435890,499723] no_lp
+#278    84.27s best:499723 next:[435890,499722] no_lp
+#279    84.28s best:499722 next:[435890,499721] no_lp
+#280    84.28s best:499721 next:[435890,499720] no_lp
+#281    84.29s best:499720 next:[435890,499719] no_lp
+#282    84.29s best:499719 next:[435890,499718] no_lp
+#283    84.29s best:499718 next:[435890,499717] no_lp
+#284    84.30s best:499717 next:[435890,499716] no_lp
+#285    84.30s best:499716 next:[435890,499715] no_lp
+#286    84.30s best:499715 next:[435890,499714] no_lp
+#287    84.31s best:499714 next:[435890,499713] no_lp
+#288    84.32s best:499713 next:[435890,499712] no_lp
+#289    84.32s best:499712 next:[435890,499711] no_lp
+#290    84.32s best:499711 next:[435890,499710] no_lp
+#291    84.33s best:499710 next:[435890,499709] no_lp
+#292    84.33s best:499709 next:[435890,499708] no_lp
+#293    84.34s best:499708 next:[435890,499707] no_lp
+#294    84.34s best:499707 next:[435890,499706] no_lp
+#295    84.35s best:499706 next:[435890,499705] no_lp
+#296    84.35s best:499705 next:[435890,499704] no_lp
+#297    84.36s best:499704 next:[435890,499703] no_lp
+#298    84.36s best:499703 next:[435890,499702] no_lp
+#299    84.37s best:499702 next:[435890,499701] no_lp
+#300    84.37s best:499701 next:[435890,499700] no_lp
+#301    84.37s best:499700 next:[435890,499699] no_lp
+#302    84.38s best:499699 next:[435890,499698] no_lp
+#303    84.38s best:499698 next:[435890,499697] no_lp
+#304    84.38s best:499697 next:[435890,499696] no_lp
+#305    84.39s best:499696 next:[435890,499695] no_lp
+#306    84.39s best:499695 next:[435890,499694] no_lp
+#307    84.39s best:499694 next:[435890,499693] no_lp
+#308    84.40s best:499693 next:[435890,499692] no_lp
+#309    84.40s best:499692 next:[435890,499691] no_lp
+#310    84.40s best:499691 next:[435890,499690] no_lp
+#311    84.41s best:499690 next:[435890,499689] no_lp
+#312    84.41s best:499689 next:[435890,499688] no_lp
+#313    84.41s best:499688 next:[435890,499687] no_lp
+#314    84.42s best:499687 next:[435890,499686] no_lp
+#315    84.42s best:499686 next:[435890,499685] no_lp
+#316    84.42s best:499685 next:[435890,499684] no_lp
+#317    84.43s best:499684 next:[435890,499683] no_lp
+#318    84.43s best:499683 next:[435890,499682] no_lp
+#319    84.43s best:499682 next:[435890,499681] no_lp
+#320    84.44s best:499681 next:[435890,499680] no_lp
+#321    84.44s best:499680 next:[435890,499679] no_lp
+#322    84.45s best:499679 next:[435890,499678] no_lp
+#323    84.45s best:499678 next:[435890,499677] no_lp
+#324    84.45s best:499677 next:[435890,499676] no_lp
+#325    84.46s best:499676 next:[435890,499675] no_lp
+#326    84.46s best:499675 next:[435890,499674] no_lp
+#327    84.46s best:499674 next:[435890,499673] no_lp
+#328    84.47s best:499673 next:[435890,499672] no_lp
+#329    84.47s best:499672 next:[435890,499671] no_lp
+#330    84.47s best:499671 next:[435890,499670] no_lp
+#331    84.48s best:499670 next:[435890,499669] no_lp
+#332    84.48s best:499669 next:[435890,499668] no_lp
+#333    84.49s best:499668 next:[435890,499667] no_lp
+#334    84.49s best:499667 next:[435890,499666] no_lp
+#335    84.49s best:499666 next:[435890,499665] no_lp
+#336    84.50s best:499665 next:[435890,499664] no_lp
+#337    84.50s best:499664 next:[435890,499663] no_lp
+#338    84.51s best:499663 next:[435890,499662] no_lp
+#339    84.51s best:499662 next:[435890,499661] no_lp
+#340    84.51s best:499661 next:[435890,499660] no_lp
+#341    84.52s best:499660 next:[435890,499659] no_lp
+#342    84.52s best:499659 next:[435890,499658] no_lp
+#343    84.53s best:499658 next:[435890,499657] no_lp
+#344    84.54s best:499657 next:[435890,499656] no_lp
+#345    84.54s best:499656 next:[435890,499655] no_lp
+#346    84.54s best:499655 next:[435890,499654] no_lp
+#347    84.55s best:499654 next:[435890,499653] no_lp
+#348    84.55s best:499653 next:[435890,499652] no_lp
+#349    84.56s best:499652 next:[435890,499651] no_lp
+#350    84.56s best:499651 next:[435890,499650] no_lp
+#351    84.57s best:499650 next:[435890,499649] no_lp
+#352    84.57s best:499649 next:[435890,499648] no_lp
+#353    84.57s best:499648 next:[435890,499647] no_lp
+#354    84.58s best:499647 next:[435890,499646] no_lp
+#355    84.58s best:499646 next:[435890,499645] no_lp
+#356    84.58s best:499645 next:[435890,499644] no_lp
+#357    84.59s best:499644 next:[435890,499643] no_lp
+#358    84.60s best:499643 next:[435890,499642] no_lp
+#359    84.61s best:499642 next:[435890,499641] no_lp
+#360    84.61s best:499641 next:[435890,499640] no_lp
+#361    84.61s best:499640 next:[435890,499639] no_lp
+#362    84.62s best:499639 next:[435890,499638] no_lp
+#363    84.62s best:499638 next:[435890,499637] no_lp
+#364    84.63s best:499637 next:[435890,499636] no_lp
+#365    84.63s best:499636 next:[435890,499635] no_lp
+#366    84.64s best:499635 next:[435890,499634] no_lp
+#367    84.64s best:499634 next:[435890,499633] no_lp
+#368    84.64s best:499633 next:[435890,499632] no_lp
+#369    84.65s best:499632 next:[435890,499631] no_lp
+#370    84.65s best:499631 next:[435890,499630] no_lp
+#371    84.65s best:499630 next:[435890,499629] no_lp
+#372    84.66s best:499629 next:[435890,499628] no_lp
+#373    84.66s best:499628 next:[435890,499627] no_lp
+#374    84.67s best:499627 next:[435890,499626] no_lp
+#375    84.67s best:499626 next:[435890,499625] no_lp
+#376    84.68s best:499625 next:[435890,499624] no_lp
+#377    84.68s best:499624 next:[435890,499623] no_lp
+#378    84.69s best:499623 next:[435890,499622] no_lp
+#379    84.69s best:499622 next:[435890,499621] no_lp
+#380    84.70s best:499621 next:[435890,499620] no_lp
+#381    84.70s best:499620 next:[435890,499619] no_lp
+#382    84.95s best:499619 next:[435890,499618] no_lp
+#383    84.96s best:499618 next:[435890,499617] no_lp
+#384    84.97s best:499617 next:[435890,499616] no_lp
+#385    84.97s best:499616 next:[435890,499615] no_lp
+#386    84.97s best:499615 next:[435890,499614] no_lp
+#387    84.98s best:499614 next:[435890,499613] no_lp
+#388    84.98s best:499613 next:[435890,499612] no_lp
+#389    84.99s best:499612 next:[435890,499611] no_lp
+#390    84.99s best:499611 next:[435890,499610] no_lp
+#391    84.99s best:499610 next:[435890,499609] no_lp
+#392    85.00s best:499609 next:[435890,499608] no_lp
+#393    85.00s best:499608 next:[435890,499607] no_lp
+#394    85.02s best:499607 next:[435890,499606] no_lp
+#395    85.02s best:499606 next:[435890,499605] no_lp
+#396    85.03s best:499605 next:[435890,499604] no_lp
+#397    85.03s best:499604 next:[435890,499603] no_lp
+#398    85.04s best:499603 next:[435890,499602] no_lp
+#399    85.04s best:499602 next:[435890,499601] no_lp
+#400    85.04s best:499601 next:[435890,499600] no_lp
+#401    85.05s best:499600 next:[435890,499599] no_lp
+#402    85.05s best:499599 next:[435890,499598] no_lp
+#403    85.06s best:499598 next:[435890,499597] no_lp
+#404    85.06s best:499597 next:[435890,499596] no_lp
+#405    85.07s best:499596 next:[435890,499595] no_lp
+#406    85.07s best:499595 next:[435890,499594] no_lp
+#407    85.07s best:499594 next:[435890,499593] no_lp
+#408    85.08s best:499593 next:[435890,499592] no_lp
+#409    85.08s best:499592 next:[435890,499591] no_lp
+#410    85.09s best:499591 next:[435890,499590] no_lp
+#411    85.09s best:499590 next:[435890,499589] no_lp
+#412    85.09s best:499589 next:[435890,499588] no_lp
+#413    85.10s best:499588 next:[435890,499587] no_lp
+#414    85.10s best:499587 next:[435890,499586] no_lp
+#415    85.11s best:499586 next:[435890,499585] no_lp
+#416    85.11s best:499585 next:[435890,499584] no_lp
+#417    85.11s best:499584 next:[435890,499583] no_lp
+#418    85.12s best:499583 next:[435890,499582] no_lp
+#419    85.13s best:499582 next:[435890,499581] no_lp
+#420    85.13s best:499581 next:[435890,499580] no_lp
+#421    85.14s best:499580 next:[435890,499579] no_lp
+#422    85.14s best:499579 next:[435890,499578] no_lp
+#423    85.14s best:499578 next:[435890,499577] no_lp
+#424    85.15s best:499577 next:[435890,499576] no_lp
+#425    85.15s best:499576 next:[435890,499575] no_lp
+#426    85.16s best:499575 next:[435890,499574] no_lp
+#427    85.17s best:499574 next:[435890,499573] no_lp
+#428    85.17s best:499573 next:[435890,499572] no_lp
+#429    85.18s best:499572 next:[435890,499571] no_lp
+#430    85.18s best:499571 next:[435890,499570] no_lp
+#431    85.18s best:499570 next:[435890,499569] no_lp
+#432    85.19s best:499569 next:[435890,499568] no_lp
+#433    85.19s best:499568 next:[435890,499567] no_lp
+#434    85.20s best:499567 next:[435890,499566] no_lp
+#435    85.20s best:499566 next:[435890,499565] no_lp
+#436    85.21s best:499565 next:[435890,499564] no_lp
+#437    85.21s best:499564 next:[435890,499563] no_lp
+#438    85.21s best:499563 next:[435890,499562] no_lp
+#439    85.22s best:499562 next:[435890,499561] no_lp
+#440    85.22s best:499561 next:[435890,499560] no_lp
+#441    85.23s best:499560 next:[435890,499559] no_lp
+#442    85.23s best:499559 next:[435890,499558] no_lp
+#443    85.23s best:499558 next:[435890,499557] no_lp
+#444    85.24s best:499557 next:[435890,499556] no_lp
+#445    85.24s best:499556 next:[435890,499555] no_lp
+#446    85.25s best:499555 next:[435890,499554] no_lp
+#447    85.25s best:499554 next:[435890,499553] no_lp
+#448    85.26s best:499553 next:[435890,499552] no_lp
+#449    85.26s best:499552 next:[435890,499551] no_lp
+#450    85.26s best:499551 next:[435890,499550] no_lp
+#451    85.27s best:499550 next:[435890,499549] no_lp
+#452    85.27s best:499549 next:[435890,499548] no_lp
+#453    85.27s best:499548 next:[435890,499547] no_lp
+#454    85.29s best:499547 next:[435890,499546] no_lp
+#455    85.29s best:499546 next:[435890,499545] no_lp
+#456    85.29s best:499545 next:[435890,499544] no_lp
+#457    85.30s best:499544 next:[435890,499543] no_lp
+#458    85.30s best:499543 next:[435890,499542] no_lp
+#459    85.31s best:499542 next:[435890,499541] no_lp
+#460    85.31s best:499541 next:[435890,499540] no_lp
+#461    85.31s best:499540 next:[435890,499539] no_lp
+#462    85.32s best:499539 next:[435890,499538] no_lp
+#463    85.33s best:499538 next:[435890,499537] no_lp
+#464    85.33s best:499537 next:[435890,499536] no_lp
+#465    85.34s best:499536 next:[435890,499535] no_lp
+#466    85.35s best:499535 next:[435890,499534] no_lp
+#467    85.35s best:499534 next:[435890,499533] no_lp
+#468    85.36s best:499533 next:[435890,499532] no_lp
+#469    85.37s best:499532 next:[435890,499531] no_lp
+#470    85.38s best:499531 next:[435890,499530] no_lp
+#471    85.39s best:499530 next:[435890,499529] no_lp
+#472    85.39s best:499529 next:[435890,499528] no_lp
+#473    85.40s best:499528 next:[435890,499527] no_lp
+#474    85.40s best:499527 next:[435890,499526] no_lp
+#475    85.40s best:499526 next:[435890,499525] no_lp
+#476    85.41s best:499525 next:[435890,499524] no_lp
+#477    85.41s best:499524 next:[435890,499523] no_lp
+#478    85.42s best:499523 next:[435890,499522] no_lp
+#479    85.43s best:499522 next:[435890,499521] no_lp
+#480    85.43s best:499521 next:[435890,499520] no_lp
+#481    85.44s best:499520 next:[435890,499519] no_lp
+#482    85.44s best:499519 next:[435890,499518] no_lp
+#483    85.44s best:499518 next:[435890,499517] no_lp
+#484    85.45s best:499517 next:[435890,499516] no_lp
+#485    85.45s best:499516 next:[435890,499515] no_lp
+#486    85.46s best:499515 next:[435890,499514] no_lp
+#487    85.47s best:499514 next:[435890,499513] no_lp
+#488    85.47s best:499513 next:[435890,499512] no_lp
+#489    85.48s best:499512 next:[435890,499511] no_lp
+#490    85.48s best:499511 next:[435890,499510] no_lp
+#491    85.49s best:499510 next:[435890,499509] no_lp
+#492    85.49s best:499509 next:[435890,499508] no_lp
+#493    85.50s best:499508 next:[435890,499507] no_lp
+#494    85.50s best:499507 next:[435890,499506] no_lp
+#495    85.51s best:499506 next:[435890,499505] no_lp
+#496    85.52s best:499505 next:[435890,499504] no_lp
+#497    85.52s best:499504 next:[435890,499503] no_lp
+#498    85.53s best:499503 next:[435890,499502] no_lp
+#499    85.53s best:499502 next:[435890,499501] no_lp
+#500    85.54s best:499501 next:[435890,499500] no_lp
+#501    85.54s best:499500 next:[435890,499499] no_lp
+#502    85.55s best:499499 next:[435890,499498] no_lp
+#503    85.56s best:499498 next:[435890,499497] no_lp
+#504    85.56s best:499497 next:[435890,499496] no_lp
+#505    85.57s best:499496 next:[435890,499495] no_lp
+#506    85.57s best:499495 next:[435890,499494] no_lp
+#507    85.58s best:499494 next:[435890,499493] no_lp
+#508    85.58s best:499493 next:[435890,499492] no_lp
+#509    85.59s best:499492 next:[435890,499491] no_lp
+#510    85.59s best:499491 next:[435890,499490] no_lp
+#511    85.61s best:499490 next:[435890,499489] no_lp
+#512    85.62s best:499489 next:[435890,499488] no_lp
+#513    85.62s best:499488 next:[435890,499487] no_lp
+#514    85.62s best:499487 next:[435890,499486] no_lp
+#515    85.63s best:499486 next:[435890,499485] no_lp
+#516    85.63s best:499485 next:[435890,499484] no_lp
+#517    85.64s best:499484 next:[435890,499483] no_lp
+#518    85.64s best:499483 next:[435890,499482] no_lp
+#519    85.65s best:499482 next:[435890,499481] no_lp
+#520    85.66s best:499481 next:[435890,499480] no_lp
+#521    85.66s best:499480 next:[435890,499479] no_lp
+#522    85.66s best:499479 next:[435890,499478] no_lp
+#523    85.67s best:499478 next:[435890,499477] no_lp
+#524    85.67s best:499477 next:[435890,499476] no_lp
+#525    85.68s best:499476 next:[435890,499475] no_lp
+#526    85.68s best:499475 next:[435890,499474] no_lp
+#527    85.69s best:499474 next:[435890,499473] no_lp
+#528    85.70s best:499473 next:[435890,499472] no_lp
+#529    85.70s best:499472 next:[435890,499471] no_lp
+#530    85.71s best:499471 next:[435890,499470] no_lp
+#531    85.72s best:499470 next:[435890,499469] no_lp
+#532    85.72s best:499469 next:[435890,499468] no_lp
+#533    85.73s best:499468 next:[435890,499467] no_lp
+#534    85.73s best:499467 next:[435890,499466] no_lp
+#535    85.74s best:499466 next:[435890,499465] no_lp
+#536    85.74s best:499465 next:[435890,499464] no_lp
+#537    85.75s best:499464 next:[435890,499463] no_lp
+#538    85.75s best:499463 next:[435890,499462] no_lp
+#539    85.75s best:499462 next:[435890,499461] no_lp
+#540    85.76s best:499461 next:[435890,499460] no_lp
+#541    85.76s best:499460 next:[435890,499459] no_lp
+#542    85.77s best:499459 next:[435890,499458] no_lp
+#543    85.77s best:499458 next:[435890,499457] no_lp
+#544    85.78s best:499457 next:[435890,499456] no_lp
+#545    85.78s best:499456 next:[435890,499455] no_lp
+#546    85.79s best:499455 next:[435890,499454] no_lp
+#547    85.79s best:499454 next:[435890,499453] no_lp
+#548    85.80s best:499453 next:[435890,499452] no_lp
+#549    85.80s best:499452 next:[435890,499451] no_lp
+#550    85.81s best:499451 next:[435890,499450] no_lp
+#551    85.81s best:499450 next:[435890,499449] no_lp
+#552    85.82s best:499449 next:[435890,499448] no_lp
+#553    85.82s best:499448 next:[435890,499447] no_lp
+#554    85.82s best:499447 next:[435890,499446] no_lp
+#555    85.83s best:499446 next:[435890,499445] no_lp
+#556    85.83s best:499445 next:[435890,499444] no_lp
+#557    85.84s best:499444 next:[435890,499443] no_lp
+#558    85.85s best:499443 next:[435890,499442] no_lp
+#559    85.86s best:499442 next:[435890,499441] no_lp
+#560    85.86s best:499441 next:[435890,499440] no_lp
+#561    85.87s best:499440 next:[435890,499439] no_lp
+#562    85.87s best:499439 next:[435890,499438] no_lp
+#563    85.88s best:499438 next:[435890,499437] no_lp
+#564    85.88s best:499437 next:[435890,499436] no_lp
+#565    85.89s best:499436 next:[435890,499435] no_lp
+#566    85.89s best:499435 next:[435890,499434] no_lp
+#567    85.90s best:499434 next:[435890,499433] no_lp
+#568    85.90s best:499433 next:[435890,499432] no_lp
+#569    85.90s best:499432 next:[435890,499431] no_lp
+#570    85.91s best:499431 next:[435890,499430] no_lp
+#571    85.91s best:499430 next:[435890,499429] no_lp
+#572    85.92s best:499429 next:[435890,499428] no_lp
+#573    85.92s best:499428 next:[435890,499427] no_lp
+#574    85.93s best:499427 next:[435890,499426] no_lp
+#575    85.93s best:499426 next:[435890,499425] no_lp
+#576    85.93s best:499425 next:[435890,499424] no_lp
+#577    85.94s best:499424 next:[435890,499423] no_lp
+#578    85.94s best:499423 next:[435890,499422] no_lp
+#579    85.95s best:499422 next:[435890,499421] no_lp
+#580    85.95s best:499421 next:[435890,499420] no_lp
+#581    85.96s best:499420 next:[435890,499419] no_lp
+#582    85.96s best:499419 next:[435890,499418] no_lp
+#583    85.97s best:499418 next:[435890,499417] no_lp
+#584    85.97s best:499417 next:[435890,499416] no_lp
+#585    85.98s best:499416 next:[435890,499415] no_lp
+#586    85.98s best:499415 next:[435890,499414] no_lp
+#587    85.99s best:499414 next:[435890,499413] no_lp
+#588    85.99s best:499413 next:[435890,499412] no_lp
+#589    86.00s best:499412 next:[435890,499411] no_lp
+#590    86.00s best:499411 next:[435890,499410] no_lp
+#591    86.01s best:499410 next:[435890,499409] no_lp
+#592    86.01s best:499409 next:[435890,499408] no_lp
+#593    86.02s best:499408 next:[435890,499407] no_lp
+#594    86.02s best:499407 next:[435890,499406] no_lp
+#595    86.02s best:499406 next:[435890,499405] no_lp
+#596    86.03s best:499405 next:[435890,499404] no_lp
+#597    86.03s best:499404 next:[435890,499403] no_lp
+#598    87.73s best:499403 next:[435890,499402] graph_var_lns (d=7.00e-01 s=742 t=0.10 p=0.50 stall=1 h=base)
+#599    88.81s best:499402 next:[435890,499401] no_lp
+#600    88.81s best:499401 next:[435890,499400] no_lp
+#601    88.82s best:499400 next:[435890,499399] no_lp
+#602    88.83s best:499399 next:[435890,499398] no_lp
+#603    88.83s best:499398 next:[435890,499397] no_lp
+#604    88.84s best:499397 next:[435890,499396] no_lp
+#605    88.85s best:499396 next:[435890,499395] no_lp
+#606    88.85s best:499395 next:[435890,499394] no_lp
+#607    88.85s best:499394 next:[435890,499393] no_lp
+#608    88.86s best:499393 next:[435890,499392] no_lp
+#609    88.86s best:499392 next:[435890,499391] no_lp
+#610    88.87s best:499391 next:[435890,499390] no_lp
+#611    88.87s best:499390 next:[435890,499389] no_lp
+#612    88.88s best:499389 next:[435890,499388] no_lp
+#613    88.88s best:499388 next:[435890,499387] no_lp
+#614    88.89s best:499387 next:[435890,499386] no_lp
+#615    88.89s best:499386 next:[435890,499385] no_lp
+#616    88.90s best:499385 next:[435890,499384] no_lp
+#617    88.90s best:499384 next:[435890,499383] no_lp
+#618    88.91s best:499383 next:[435890,499382] no_lp
+#619    88.91s best:499382 next:[435890,499381] no_lp
+#620    88.91s best:499381 next:[435890,499380] no_lp
+#621    88.92s best:499380 next:[435890,499379] no_lp
+#622    88.92s best:499379 next:[435890,499378] no_lp
+#623    88.93s best:499378 next:[435890,499377] no_lp
+#624    88.93s best:499377 next:[435890,499376] no_lp
+#625    88.94s best:499376 next:[435890,499375] no_lp
+#626    88.95s best:499375 next:[435890,499374] no_lp
+#627    88.96s best:499374 next:[435890,499373] no_lp
+#628    88.97s best:499373 next:[435890,499372] no_lp
+#629    88.98s best:499372 next:[435890,499371] no_lp
+#630    88.98s best:499371 next:[435890,499370] no_lp
+#631    88.99s best:499370 next:[435890,499369] no_lp
+#632    88.99s best:499369 next:[435890,499368] no_lp
+#633    89.44s best:499368 next:[435890,499367] no_lp
+#634    89.45s best:499367 next:[435890,499366] no_lp
+#635    89.86s best:499366 next:[435890,499365] no_lp
+#636    89.87s best:499365 next:[435890,499364] no_lp
+#637    89.87s best:499364 next:[435890,499363] no_lp
+#638    89.88s best:499363 next:[435890,499362] no_lp
+#639    89.88s best:499362 next:[435890,499361] no_lp
+#640    89.89s best:499361 next:[435890,499360] no_lp
+#641    89.89s best:499360 next:[435890,499359] no_lp
+#642    89.90s best:499359 next:[435890,499358] no_lp
+#643    89.91s best:499358 next:[435890,499357] no_lp
+#644    89.92s best:499357 next:[435890,499356] no_lp
+#645    89.93s best:499356 next:[435890,499355] no_lp
+#646    89.94s best:499355 next:[435890,499354] no_lp
+#647    89.94s best:499354 next:[435890,499353] no_lp
+#648    89.95s best:499353 next:[435890,499352] no_lp
+#649    89.97s best:499352 next:[435890,499351] no_lp
+#650    89.97s best:499351 next:[435890,499350] no_lp
+#651    89.98s best:499350 next:[435890,499349] no_lp
+#652    89.98s best:499349 next:[435890,499348] no_lp
+#653    89.99s best:499348 next:[435890,499347] no_lp
+#654    89.99s best:499347 next:[435890,499346] no_lp
+#655    90.00s best:499346 next:[435890,499345] no_lp
+#656    90.01s best:499345 next:[435890,499344] no_lp
+#657    90.02s best:499344 next:[435890,499343] no_lp
+#658    90.02s best:499343 next:[435890,499342] no_lp
+#659    90.03s best:499342 next:[435890,499341] no_lp
+#660    90.03s best:499341 next:[435890,499340] no_lp
+#661    90.04s best:499340 next:[435890,499339] no_lp
+#662    90.04s best:499339 next:[435890,499338] no_lp
+#663    90.05s best:499338 next:[435890,499337] no_lp
+#664    90.06s best:499337 next:[435890,499336] no_lp
+#665    90.07s best:499336 next:[435890,499335] no_lp
+#666    90.08s best:499335 next:[435890,499334] no_lp
+#667    90.09s best:499334 next:[435890,499333] no_lp
+#668    90.09s best:499333 next:[435890,499332] no_lp
+#669    90.10s best:499332 next:[435890,499331] no_lp
+#670    90.10s best:499331 next:[435890,499330] no_lp
+#671    90.11s best:499330 next:[435890,499329] no_lp
+#672    90.11s best:499329 next:[435890,499328] no_lp
+#673    90.11s best:499328 next:[435890,499327] no_lp
+#674    90.12s best:499327 next:[435890,499326] no_lp
+#675    90.13s best:499326 next:[435890,499325] no_lp
+#676    90.13s best:499325 next:[435890,499324] no_lp
+#677    90.14s best:499324 next:[435890,499323] no_lp
+#678    90.15s best:499323 next:[435890,499322] no_lp
+#679    90.15s best:499322 next:[435890,499321] no_lp
+#680    90.16s best:499321 next:[435890,499320] no_lp
+#681    90.17s best:499320 next:[435890,499319] no_lp
+#682    90.17s best:499319 next:[435890,499318] no_lp
+#683    90.18s best:499318 next:[435890,499317] no_lp
+#684    90.19s best:499317 next:[435890,499316] no_lp
+#685    90.20s best:499316 next:[435890,499315] no_lp
+#686    90.20s best:499315 next:[435890,499314] no_lp
+#687    90.21s best:499314 next:[435890,499313] no_lp
+#688    90.22s best:499313 next:[435890,499312] no_lp
+#689    90.22s best:499312 next:[435890,499311] no_lp
+#690    90.23s best:499311 next:[435890,499310] no_lp
+#691    90.24s best:499310 next:[435890,499309] no_lp
+#692    90.24s best:499309 next:[435890,499308] no_lp
+#693    90.25s best:499308 next:[435890,499307] no_lp
+#694    90.25s best:499307 next:[435890,499306] no_lp
+#695    90.26s best:499306 next:[435890,499305] no_lp
+#696    90.27s best:499305 next:[435890,499304] no_lp
+#697    90.28s best:499304 next:[435890,499303] no_lp
+#698    90.28s best:499303 next:[435890,499302] no_lp
+#699    90.28s best:499302 next:[435890,499301] no_lp
+#700    90.29s best:499301 next:[435890,499300] no_lp
+#701    90.30s best:499300 next:[435890,499299] no_lp
+#702    90.30s best:499299 next:[435890,499298] no_lp
+#703    90.31s best:499298 next:[435890,499297] no_lp
+#704    90.32s best:499297 next:[435890,499296] no_lp
+#705    90.32s best:499296 next:[435890,499295] no_lp
+#706    90.33s best:499295 next:[435890,499294] no_lp
+#707    90.34s best:499294 next:[435890,499293] no_lp
+#708    90.35s best:499293 next:[435890,499292] no_lp
+#709    90.35s best:499292 next:[435890,499291] no_lp
+#710    90.36s best:499291 next:[435890,499290] no_lp
+#711    90.36s best:499290 next:[435890,499289] no_lp
+#712    90.37s best:499289 next:[435890,499288] no_lp
+#713    90.38s best:499288 next:[435890,499287] no_lp
+#714    90.39s best:499287 next:[435890,499286] no_lp
+#715    90.39s best:499286 next:[435890,499285] no_lp
+#716    90.41s best:499285 next:[435890,499284] no_lp
+#717    90.41s best:499284 next:[435890,499283] no_lp
+#718    90.42s best:499283 next:[435890,499282] no_lp
+#719    90.43s best:499282 next:[435890,499281] no_lp
+#720    90.44s best:499281 next:[435890,499280] no_lp
+#721    90.45s best:499280 next:[435890,499279] no_lp
+#722    90.45s best:499279 next:[435890,499278] no_lp
+#723    90.46s best:499278 next:[435890,499277] no_lp
+#724    90.47s best:499277 next:[435890,499276] no_lp
+#725    90.47s best:499276 next:[435890,499275] no_lp
+#726    90.48s best:499275 next:[435890,499274] no_lp
+#727    90.48s best:499274 next:[435890,499273] no_lp
+#728    90.49s best:499273 next:[435890,499272] no_lp
+#729    90.50s best:499272 next:[435890,499271] no_lp
+#730    90.51s best:499271 next:[435890,499270] no_lp
+#731    90.52s best:499270 next:[435890,499269] no_lp
+#732    90.52s best:499269 next:[435890,499268] no_lp
+#733    90.53s best:499268 next:[435890,499267] no_lp
+#734    90.54s best:499267 next:[435890,499266] no_lp
+#735    90.55s best:499266 next:[435890,499265] no_lp
+#736    90.56s best:499265 next:[435890,499264] no_lp
+#737    90.57s best:499264 next:[435890,499263] no_lp
+#738    90.57s best:499263 next:[435890,499262] no_lp
+#739    90.58s best:499262 next:[435890,499261] no_lp
+#740    90.59s best:499261 next:[435890,499260] no_lp
+#741    90.60s best:499260 next:[435890,499259] no_lp
+#742    90.61s best:499259 next:[435890,499258] no_lp
+#743    90.61s best:499258 next:[435890,499257] no_lp
+#744    90.62s best:499257 next:[435890,499256] no_lp
+#745    90.63s best:499256 next:[435890,499255] no_lp
+#746    90.64s best:499255 next:[435890,499254] no_lp
+#747    90.64s best:499254 next:[435890,499253] no_lp
+#748    90.65s best:499253 next:[435890,499252] no_lp
+#749    90.65s best:499252 next:[435890,499251] no_lp
+#750    90.66s best:499251 next:[435890,499250] no_lp
+#751    90.67s best:499250 next:[435890,499249] no_lp
+#752    90.68s best:499249 next:[435890,499248] no_lp
+#753    90.69s best:499248 next:[435890,499247] no_lp
+#754    90.69s best:499247 next:[435890,499246] no_lp
+#755    90.70s best:499246 next:[435890,499245] no_lp
+#756    90.71s best:499245 next:[435890,499244] no_lp
+#757    90.72s best:499244 next:[435890,499243] no_lp
+#758    90.73s best:499243 next:[435890,499242] no_lp
+#759    90.74s best:499242 next:[435890,499241] no_lp
+#760    90.74s best:499241 next:[435890,499240] no_lp
+#761    90.75s best:499240 next:[435890,499239] no_lp
+#762    90.76s best:499239 next:[435890,499238] no_lp
+#763    90.77s best:499238 next:[435890,499237] no_lp
+#764    90.78s best:499237 next:[435890,499236] no_lp
+#765    90.78s best:499236 next:[435890,499235] no_lp
+#766    90.79s best:499235 next:[435890,499234] no_lp
+#767    90.80s best:499234 next:[435890,499233] no_lp
+#768    90.81s best:499233 next:[435890,499232] no_lp
+#769    90.81s best:499232 next:[435890,499231] no_lp
+#770    90.83s best:499231 next:[435890,499230] no_lp
+#771    90.83s best:499230 next:[435890,499229] no_lp
+#772    90.84s best:499229 next:[435890,499228] no_lp
+#773    90.84s best:499228 next:[435890,499227] no_lp
+#774    90.85s best:499227 next:[435890,499226] no_lp
+#775    90.86s best:499226 next:[435890,499225] no_lp
+#776    90.86s best:499225 next:[435890,499224] no_lp
+#777    90.87s best:499224 next:[435890,499223] no_lp
+#778    90.88s best:499223 next:[435890,499222] no_lp
+#779    90.89s best:499222 next:[435890,499221] no_lp
+#780    90.89s best:499221 next:[435890,499220] no_lp
+#781    90.90s best:499220 next:[435890,499219] no_lp
+#782    90.91s best:499219 next:[435890,499218] no_lp
+#783    90.92s best:499218 next:[435890,499217] no_lp
+#784    90.93s best:499217 next:[435890,499216] no_lp
+#785    90.94s best:499216 next:[435890,499215] no_lp
+#786    90.95s best:499215 next:[435890,499214] no_lp
+#787    90.96s best:499214 next:[435890,499213] no_lp
+#788    90.97s best:499213 next:[435890,499212] no_lp
+#789    90.97s best:499212 next:[435890,499211] no_lp
+#790    90.98s best:499211 next:[435890,499210] no_lp
+#791    90.99s best:499210 next:[435890,499209] no_lp
+#792    91.00s best:499209 next:[435890,499208] no_lp
+#793    91.01s best:499208 next:[435890,499207] no_lp
+#794    91.02s best:499207 next:[435890,499206] no_lp
+#795    91.02s best:499206 next:[435890,499205] no_lp
+#796    91.03s best:499205 next:[435890,499204] no_lp
+#797    91.04s best:499204 next:[435890,499203] no_lp
+#798    91.05s best:499203 next:[435890,499202] no_lp
+#799    91.06s best:499202 next:[435890,499201] no_lp
+#800    91.06s best:499201 next:[435890,499200] no_lp
+#801    91.07s best:499200 next:[435890,499199] no_lp
+#802    91.08s best:499199 next:[435890,499198] no_lp
+#803    91.10s best:499198 next:[435890,499197] no_lp
+#804    91.11s best:499197 next:[435890,499196] no_lp
+#805    91.11s best:499196 next:[435890,499195] no_lp
+#806    91.12s best:499195 next:[435890,499194] no_lp
+#807    91.12s best:499194 next:[435890,499193] no_lp
+#808    91.13s best:499193 next:[435890,499192] no_lp
+#809    91.13s best:499192 next:[435890,499191] no_lp
+#810    91.14s best:499191 next:[435890,499190] no_lp
+#811    91.14s best:499190 next:[435890,499189] no_lp
+#812    91.15s best:499189 next:[435890,499188] no_lp
+#813    91.16s best:499188 next:[435890,499187] no_lp
+#814    91.16s best:499187 next:[435890,499186] no_lp
+#815    91.17s best:499186 next:[435890,499185] no_lp
+#816    91.18s best:499185 next:[435890,499184] no_lp
+#817    91.18s best:499184 next:[435890,499183] no_lp
+#818    91.19s best:499183 next:[435890,499182] no_lp
+#819    91.19s best:499182 next:[435890,499181] no_lp
+#820    91.20s best:499181 next:[435890,499180] no_lp
+#821    91.21s best:499180 next:[435890,499179] no_lp
+#822    91.22s best:499179 next:[435890,499178] no_lp
+#823    91.22s best:499178 next:[435890,499177] no_lp
+#824    91.23s best:499177 next:[435890,499176] no_lp
+#825    91.23s best:499176 next:[435890,499175] no_lp
+#826    91.24s best:499175 next:[435890,499174] no_lp
+#827    91.25s best:499174 next:[435890,499173] no_lp
+#828    91.26s best:499173 next:[435890,499172] no_lp
+#829    91.27s best:499172 next:[435890,499171] no_lp
+#830    91.27s best:499171 next:[435890,499170] no_lp
+#831    91.28s best:499170 next:[435890,499169] no_lp
+#832    91.29s best:499169 next:[435890,499168] no_lp
+#833    91.29s best:499168 next:[435890,499167] no_lp
+#834    91.30s best:499167 next:[435890,499166] no_lp
+#835    91.31s best:499166 next:[435890,499165] no_lp
+#836    91.31s best:499165 next:[435890,499164] no_lp
+#837    91.32s best:499164 next:[435890,499163] no_lp
+#838    91.32s best:499163 next:[435890,499162] no_lp
+#839    91.33s best:499162 next:[435890,499161] no_lp
+#840    91.33s best:499161 next:[435890,499160] no_lp
+#841    91.34s best:499160 next:[435890,499159] no_lp
+#842    91.35s best:499159 next:[435890,499158] no_lp
+#843    91.35s best:499158 next:[435890,499157] no_lp
+#844    91.36s best:499157 next:[435890,499156] no_lp
+#845    91.37s best:499156 next:[435890,499155] no_lp
+#846    91.37s best:499155 next:[435890,499154] no_lp
+#847    91.38s best:499154 next:[435890,499153] no_lp
+#848    91.38s best:499153 next:[435890,499152] no_lp
+#849    91.39s best:499152 next:[435890,499151] no_lp
+#850    91.39s best:499151 next:[435890,499150] no_lp
+#851    91.40s best:499150 next:[435890,499149] no_lp
+#852    91.41s best:499149 next:[435890,499148] no_lp
+#853    91.41s best:499148 next:[435890,499147] no_lp
+#854    91.42s best:499147 next:[435890,499146] no_lp
+#855    91.42s best:499146 next:[435890,499145] no_lp
+#856    91.43s best:499145 next:[435890,499144] no_lp
+#857    91.44s best:499144 next:[435890,499143] no_lp
+#858    91.44s best:499143 next:[435890,499142] no_lp
+#859    91.45s best:499142 next:[435890,499141] no_lp
+#860    91.46s best:499141 next:[435890,499140] no_lp
+#861    91.46s best:499140 next:[435890,499139] no_lp
+#862    91.47s best:499139 next:[435890,499138] no_lp
+#863    91.48s best:499138 next:[435890,499137] no_lp
+#864    91.49s best:499137 next:[435890,499136] no_lp
+#865    91.49s best:499136 next:[435890,499135] no_lp
+#866    91.50s best:499135 next:[435890,499134] no_lp
+#867    91.51s best:499134 next:[435890,499133] no_lp
+#868    91.51s best:499133 next:[435890,499132] no_lp
+#869    91.52s best:499132 next:[435890,499131] no_lp
+#870    91.53s best:499131 next:[435890,499130] no_lp
+#871    91.53s best:499130 next:[435890,499129] no_lp
+#872    91.54s best:499129 next:[435890,499128] no_lp
+#873    91.54s best:499128 next:[435890,499127] no_lp
+#874    91.55s best:499127 next:[435890,499126] no_lp
+#875    91.55s best:499126 next:[435890,499125] no_lp
+#876    91.56s best:499125 next:[435890,499124] no_lp
+#877    91.56s best:499124 next:[435890,499123] no_lp
+#878    91.57s best:499123 next:[435890,499122] no_lp
+#879    91.58s best:499122 next:[435890,499121] no_lp
+#880    91.59s best:499121 next:[435890,499120] no_lp
+#881    91.60s best:499120 next:[435890,499119] no_lp
+#882    91.60s best:499119 next:[435890,499118] no_lp
+#883    91.62s best:499118 next:[435890,499117] no_lp
+#884    91.63s best:499117 next:[435890,499116] no_lp
+#885    91.63s best:499116 next:[435890,499115] no_lp
+#886    91.64s best:499115 next:[435890,499114] no_lp
+#887    91.65s best:499114 next:[435890,499113] no_lp
+#888    91.65s best:499113 next:[435890,499112] no_lp
+#889    91.66s best:499112 next:[435890,499111] no_lp
+#890    91.67s best:499111 next:[435890,499110] no_lp
+#891    91.67s best:499110 next:[435890,499109] no_lp
+#892    91.68s best:499109 next:[435890,499108] no_lp
+#893    91.69s best:499108 next:[435890,499107] no_lp
+#894    91.69s best:499107 next:[435890,499106] no_lp
+#895    91.70s best:499106 next:[435890,499105] no_lp
+#896    91.71s best:499105 next:[435890,499104] no_lp
+#897    91.72s best:499104 next:[435890,499103] no_lp
+#898    91.72s best:499103 next:[435890,499102] no_lp
+#899    91.73s best:499102 next:[435890,499101] no_lp
+#900    91.74s best:499101 next:[435890,499100] no_lp
+#901    91.74s best:499100 next:[435890,499099] no_lp
+#902    91.75s best:499099 next:[435890,499098] no_lp
+#903    91.75s best:499098 next:[435890,499097] no_lp
+#904    91.76s best:499097 next:[435890,499096] no_lp
+#905    91.77s best:499096 next:[435890,499095] no_lp
+#906    91.78s best:499095 next:[435890,499094] no_lp
+#907    91.78s best:499094 next:[435890,499093] no_lp
+#908    91.79s best:499093 next:[435890,499092] no_lp
+#909    91.79s best:499092 next:[435890,499091] no_lp
+#910    91.80s best:499091 next:[435890,499090] no_lp
+#911    91.80s best:499090 next:[435890,499089] no_lp
+#912    91.81s best:499089 next:[435890,499088] no_lp
+#913    91.82s best:499088 next:[435890,499087] no_lp
+#914    91.83s best:499087 next:[435890,499086] no_lp
+#915    91.84s best:499086 next:[435890,499085] no_lp
+#916    91.84s best:499085 next:[435890,499084] no_lp
+#917    91.85s best:499084 next:[435890,499083] no_lp
+#918    91.86s best:499083 next:[435890,499082] no_lp
+#919    91.87s best:499082 next:[435890,499081] no_lp
+#920    91.88s best:499081 next:[435890,499080] no_lp
+#921    91.88s best:499080 next:[435890,499079] no_lp
+#922    91.89s best:499079 next:[435890,499078] no_lp
+#923    91.90s best:499078 next:[435890,499077] no_lp
+#924    91.90s best:499077 next:[435890,499076] no_lp
+#925    91.91s best:499076 next:[435890,499075] no_lp
+#926    91.91s best:499075 next:[435890,499074] no_lp
+#927    91.92s best:499074 next:[435890,499073] no_lp
+#928    91.92s best:499073 next:[435890,499072] no_lp
+#929    91.93s best:499072 next:[435890,499071] no_lp
+#930    91.94s best:499071 next:[435890,499070] no_lp
+#931    91.94s best:499070 next:[435890,499069] no_lp
+#932    91.95s best:499069 next:[435890,499068] no_lp
+#933    91.95s best:499068 next:[435890,499067] no_lp
+#934    91.96s best:499067 next:[435890,499066] no_lp
+#935    91.97s best:499066 next:[435890,499065] no_lp
+#936    91.97s best:499065 next:[435890,499064] no_lp
+#937    91.98s best:499064 next:[435890,499063] no_lp
+#938    91.99s best:499063 next:[435890,499062] no_lp
+#939    91.99s best:499062 next:[435890,499061] no_lp
+#940    92.00s best:499061 next:[435890,499060] no_lp
+#941    92.01s best:499060 next:[435890,499059] no_lp
+#942    92.02s best:499059 next:[435890,499058] no_lp
+#943    92.03s best:499058 next:[435890,499057] no_lp
+#944    92.04s best:499057 next:[435890,499056] no_lp
+#945    92.04s best:499056 next:[435890,499055] no_lp
+#946    92.05s best:499055 next:[435890,499054] no_lp
+#947    92.06s best:499054 next:[435890,499053] no_lp
+#948    92.06s best:499053 next:[435890,499052] no_lp
+#949    92.07s best:499052 next:[435890,499051] no_lp
+#950    92.07s best:499051 next:[435890,499050] no_lp
+#951    92.08s best:499050 next:[435890,499049] no_lp
+#952    92.08s best:499049 next:[435890,499048] no_lp
+#953    92.09s best:499048 next:[435890,499047] no_lp
+#954    92.10s best:499047 next:[435890,499046] no_lp
+#955    92.11s best:499046 next:[435890,499045] no_lp
+#956    92.11s best:499045 next:[435890,499044] no_lp
+#957    92.12s best:499044 next:[435890,499043] no_lp
+#958    92.13s best:499043 next:[435890,499042] no_lp
+#959    92.13s best:499042 next:[435890,499041] no_lp
+#960    92.14s best:499041 next:[435890,499040] no_lp
+#961    92.14s best:499040 next:[435890,499039] no_lp
+#962    92.15s best:499039 next:[435890,499038] no_lp
+#963    92.16s best:499038 next:[435890,499037] no_lp
+#964    92.16s best:499037 next:[435890,499036] no_lp
+#965    92.17s best:499036 next:[435890,499035] no_lp
+#966    92.18s best:499035 next:[435890,499034] no_lp
+#967    92.18s best:499034 next:[435890,499033] no_lp
+#968    92.19s best:499033 next:[435890,499032] no_lp
+#969    92.19s best:499032 next:[435890,499031] no_lp
+#970    92.20s best:499031 next:[435890,499030] no_lp
+#971    92.21s best:499030 next:[435890,499029] no_lp
+#972    92.22s best:499029 next:[435890,499028] no_lp
+#973    92.22s best:499028 next:[435890,499027] no_lp
+#974    92.23s best:499027 next:[435890,499026] no_lp
+#975    92.23s best:499026 next:[435890,499025] no_lp
+#976    92.24s best:499025 next:[435890,499024] no_lp
+#977    92.25s best:499024 next:[435890,499023] no_lp
+#978    92.26s best:499023 next:[435890,499022] no_lp
+#979    92.27s best:499022 next:[435890,499021] no_lp
+#980    92.27s best:499021 next:[435890,499020] no_lp
+#981    92.28s best:499020 next:[435890,499019] no_lp
+#982    92.29s best:499019 next:[435890,499018] no_lp
+#983    92.30s best:499018 next:[435890,499017] no_lp
+#984    92.31s best:499017 next:[435890,499016] no_lp
+#985    92.32s best:499016 next:[435890,499015] no_lp
+#986    92.33s best:499015 next:[435890,499014] no_lp
+#987    92.33s best:499014 next:[435890,499013] no_lp
+#988    92.34s best:499013 next:[435890,499012] no_lp
+#989    92.35s best:499012 next:[435890,499011] no_lp
+#990    92.36s best:499011 next:[435890,499010] no_lp
+#991    92.36s best:499010 next:[435890,499009] no_lp
+#992    92.37s best:499009 next:[435890,499008] no_lp
+#993    92.38s best:499008 next:[435890,499007] no_lp
+#994    92.38s best:499007 next:[435890,499006] no_lp
+#995    92.39s best:499006 next:[435890,499005] no_lp
+#996    92.40s best:499005 next:[435890,499004] no_lp
+#997    92.40s best:499004 next:[435890,499003] no_lp
+#998    92.41s best:499003 next:[435890,499002] no_lp
+#999    92.42s best:499002 next:[435890,499001] no_lp
+#1000   92.42s best:499001 next:[435890,499000] no_lp
+#1001   92.43s best:499000 next:[435890,498999] no_lp
+#1002   92.43s best:498999 next:[435890,498998] no_lp
+#1003   92.45s best:498998 next:[435890,498997] no_lp
+#1004   92.46s best:498997 next:[435890,498996] no_lp
+#1005   92.47s best:498996 next:[435890,498995] no_lp
+#1006   92.48s best:498995 next:[435890,498994] no_lp
+#1007   92.48s best:498994 next:[435890,498993] no_lp
+#1008   92.49s best:498993 next:[435890,498992] no_lp
+#1009   92.50s best:498992 next:[435890,498991] no_lp
+#1010   92.51s best:498991 next:[435890,498990] no_lp
+#1011   92.51s best:498990 next:[435890,498989] no_lp
+#1012   92.52s best:498989 next:[435890,498988] no_lp
+#1013   92.52s best:498988 next:[435890,498987] no_lp
+#1014   92.53s best:498987 next:[435890,498986] no_lp
+#1015   92.54s best:498986 next:[435890,498985] no_lp
+#1016   92.55s best:498985 next:[435890,498984] no_lp
+#1017   92.56s best:498984 next:[435890,498983] no_lp
+#1018   92.57s best:498983 next:[435890,498982] no_lp
+#1019   92.58s best:498982 next:[435890,498981] no_lp
+#1020   92.59s best:498981 next:[435890,498980] no_lp
+#1021   92.60s best:498980 next:[435890,498979] no_lp
+#1022   92.61s best:498979 next:[435890,498978] no_lp
+#1023   92.61s best:498978 next:[435890,498977] no_lp
+#1024   92.62s best:498977 next:[435890,498976] no_lp
+#1025   92.62s best:498976 next:[435890,498975] no_lp
+#1026   92.63s best:498975 next:[435890,498974] no_lp
+#1027   92.64s best:498974 next:[435890,498973] no_lp
+#1028   92.65s best:498973 next:[435890,498972] no_lp
+#1029   92.65s best:498972 next:[435890,498971] no_lp
+#1030   92.66s best:498971 next:[435890,498970] no_lp
+#1031   92.67s best:498970 next:[435890,498969] no_lp
+#1032   92.68s best:498969 next:[435890,498968] no_lp
+#1033   92.68s best:498968 next:[435890,498967] no_lp
+#1034   92.69s best:498967 next:[435890,498966] no_lp
+#1035   92.70s best:498966 next:[435890,498965] no_lp
+#1036   92.72s best:498965 next:[435890,498964] no_lp
+#1037   92.73s best:498964 next:[435890,498963] no_lp
+#1038   92.74s best:498963 next:[435890,498962] no_lp
+#1039   92.75s best:498962 next:[435890,498961] no_lp
+#1040   92.75s best:498961 next:[435890,498960] no_lp
+#1041   92.76s best:498960 next:[435890,498959] no_lp
+#1042   92.77s best:498959 next:[435890,498958] no_lp
+#1043   92.78s best:498958 next:[435890,498957] no_lp
+#1044   92.79s best:498957 next:[435890,498956] no_lp
+#1045   92.80s best:498956 next:[435890,498955] no_lp
+#1046   92.81s best:498955 next:[435890,498954] no_lp
+#1047   92.82s best:498954 next:[435890,498953] no_lp
+#1048   92.82s best:498953 next:[435890,498952] no_lp
+#1049   92.83s best:498952 next:[435890,498951] no_lp
+#1050   92.84s best:498951 next:[435890,498950] no_lp
+#1051   92.84s best:498950 next:[435890,498949] no_lp
+#1052   92.85s best:498949 next:[435890,498948] no_lp
+#1053   92.86s best:498948 next:[435890,498947] no_lp
+#1054   92.86s best:498947 next:[435890,498946] no_lp
+#1055   92.87s best:498946 next:[435890,498945] no_lp
+#1056   92.88s best:498945 next:[435890,498944] no_lp
+#1057   92.88s best:498944 next:[435890,498943] no_lp
+#1058   92.89s best:498943 next:[435890,498942] no_lp
+#1059   92.90s best:498942 next:[435890,498941] no_lp
+#1060   92.91s best:498941 next:[435890,498940] no_lp
+#1061   92.91s best:498940 next:[435890,498939] no_lp
+#1062   92.92s best:498939 next:[435890,498938] no_lp
+#1063   92.93s best:498938 next:[435890,498937] no_lp
+#1064   92.94s best:498937 next:[435890,498936] no_lp
+#1065   92.94s best:498936 next:[435890,498935] no_lp
+#1066   92.95s best:498935 next:[435890,498934] no_lp
+#1067   92.95s best:498934 next:[435890,498933] no_lp
+#1068   92.96s best:498933 next:[435890,498932] no_lp
+#1069   92.97s best:498932 next:[435890,498931] no_lp
+#1070   92.98s best:498931 next:[435890,498930] no_lp
+#1071   92.99s best:498930 next:[435890,498929] no_lp
+#1072   93.00s best:498929 next:[435890,498928] no_lp
+#1073   93.01s best:497857 next:[435890,497856] graph_arc_lns (d=6.29e-01 s=763 t=0.10 p=0.43 stall=0 h=base)
+#1074   93.02s best:497856 next:[435890,497855] no_lp
+#1075   93.03s best:497855 next:[435890,497854] no_lp
+#1076   93.03s best:497854 next:[435890,497853] no_lp
+#1077   93.04s best:497853 next:[435890,497852] no_lp
+#1078   93.05s best:497852 next:[435890,497851] no_lp
+#1079   93.06s best:497851 next:[435890,497850] no_lp
+#1080   93.06s best:497850 next:[435890,497849] no_lp
+#1081   93.07s best:497849 next:[435890,497848] no_lp
+#1082   93.07s best:497848 next:[435890,497847] no_lp
+#1083   93.08s best:497847 next:[435890,497846] no_lp
+#1084   93.09s best:497846 next:[435890,497845] no_lp
+#1085   93.10s best:497845 next:[435890,497844] no_lp
+#1086   93.11s best:497844 next:[435890,497843] no_lp
+#1087   93.11s best:497843 next:[435890,497842] no_lp
+#1088   93.12s best:497842 next:[435890,497841] no_lp
+#1089   93.12s best:497841 next:[435890,497840] no_lp
+#1090   93.13s best:497840 next:[435890,497839] no_lp
+#1091   93.13s best:497839 next:[435890,497838] no_lp
+#1092   93.14s best:497838 next:[435890,497837] no_lp
+#1093   93.14s best:497837 next:[435890,497836] no_lp
+#1094   93.15s best:497836 next:[435890,497835] no_lp
+#1095   93.15s best:497835 next:[435890,497834] no_lp
+#1096   93.16s best:497834 next:[435890,497833] no_lp
+#1097   93.16s best:497833 next:[435890,497832] no_lp
+#1098   93.17s best:497832 next:[435890,497831] no_lp
+#1099   93.18s best:497831 next:[435890,497830] no_lp
+#1100   93.18s best:497830 next:[435890,497829] no_lp
+#1101   93.19s best:497829 next:[435890,497828] no_lp
+#1102   93.19s best:497828 next:[435890,497827] no_lp
+#1103   93.21s best:497827 next:[435890,497826] no_lp
+#1104   93.21s best:497826 next:[435890,497825] no_lp
+#1105   93.22s best:497825 next:[435890,497824] no_lp
+#1106   93.23s best:497824 next:[435890,497823] no_lp
+#1107   93.24s best:497823 next:[435890,497822] no_lp
+#1108   93.25s best:497822 next:[435890,497821] no_lp
+#1109   93.26s best:497821 next:[435890,497820] no_lp
+#1110   93.27s best:497820 next:[435890,497819] no_lp
+#1111   93.28s best:497819 next:[435890,497818] no_lp
+#1112   93.28s best:497818 next:[435890,497817] no_lp
+#1113   93.29s best:497817 next:[435890,497816] no_lp
+#1114   93.30s best:497816 next:[435890,497815] no_lp
+#1115   93.30s best:497815 next:[435890,497814] no_lp
+#1116   93.31s best:497814 next:[435890,497813] no_lp
+#1117   93.32s best:497813 next:[435890,497812] no_lp
+#1118   93.33s best:497812 next:[435890,497811] no_lp
+#1119   93.33s best:497811 next:[435890,497810] no_lp
+#1120   93.34s best:497810 next:[435890,497809] no_lp
+#1121   93.35s best:497809 next:[435890,497808] no_lp
+#1122   93.36s best:497808 next:[435890,497807] no_lp
+#1123   93.37s best:497807 next:[435890,497806] no_lp
+#1124   93.38s best:497806 next:[435890,497805] no_lp
+#1125   93.39s best:497805 next:[435890,497804] no_lp
+#1126   93.40s best:497804 next:[435890,497803] no_lp
+#1127   93.40s best:497803 next:[435890,497802] no_lp
+#1128   93.41s best:497802 next:[435890,497801] no_lp
+#1129   93.41s best:497801 next:[435890,497800] no_lp
+#1130   93.42s best:497800 next:[435890,497799] no_lp
+#1131   93.43s best:497799 next:[435890,497798] no_lp
+#1132   93.44s best:497798 next:[435890,497797] no_lp
+#1133   93.44s best:497797 next:[435890,497796] no_lp
+#1134   93.45s best:497796 next:[435890,497795] no_lp
+#1135   93.45s best:497795 next:[435890,497794] no_lp
+#1136   93.46s best:497794 next:[435890,497793] no_lp
+#1137   93.46s best:497793 next:[435890,497792] no_lp
+#1138   93.47s best:497792 next:[435890,497791] no_lp
+#1139   93.48s best:497791 next:[435890,497790] no_lp
+#1140   93.48s best:497790 next:[435890,497789] no_lp
+#1141   93.49s best:497789 next:[435890,497788] no_lp
+#1142   93.49s best:497788 next:[435890,497787] no_lp
+#1143   93.50s best:497787 next:[435890,497786] no_lp
+#1144   93.50s best:497786 next:[435890,497785] no_lp
+#1145   93.51s best:497785 next:[435890,497784] no_lp
+#1146   93.51s best:497784 next:[435890,497783] no_lp
+#1147   93.52s best:497783 next:[435890,497782] no_lp
+#1148   93.53s best:497782 next:[435890,497781] no_lp
+#1149   93.53s best:497781 next:[435890,497780] no_lp
+#1150   93.54s best:497780 next:[435890,497779] no_lp
+#1151   93.54s best:497779 next:[435890,497778] no_lp
+#1152   93.55s best:497778 next:[435890,497777] no_lp
+#1153   93.56s best:497777 next:[435890,497776] no_lp
+#1154   93.56s best:497776 next:[435890,497775] no_lp
+#1155   93.57s best:497775 next:[435890,497774] no_lp
+#1156   93.58s best:497774 next:[435890,497773] no_lp
+#1157   93.59s best:497773 next:[435890,497772] no_lp
+#1158   93.59s best:497772 next:[435890,497771] no_lp
+#1159   93.60s best:497771 next:[435890,497770] no_lp
+#1160   93.62s best:497770 next:[435890,497769] no_lp
+#1161   93.63s best:497769 next:[435890,497768] no_lp
+#1162   93.64s best:497768 next:[435890,497767] no_lp
+#1163   93.65s best:497767 next:[435890,497766] no_lp
+#1164   93.66s best:497766 next:[435890,497765] no_lp
+#1165   93.67s best:497765 next:[435890,497764] no_lp
+#1166   93.68s best:497764 next:[435890,497763] no_lp
+#1167   93.69s best:497763 next:[435890,497762] no_lp
+#1168   93.70s best:497762 next:[435890,497761] no_lp
+#1169   93.71s best:497761 next:[435890,497760] no_lp
+#1170   93.71s best:497760 next:[435890,497759] no_lp
+#1171   93.72s best:497759 next:[435890,497758] no_lp
+#1172   93.72s best:497758 next:[435890,497757] no_lp
+#1173   93.73s best:497757 next:[435890,497756] no_lp
+#1174   93.74s best:497756 next:[435890,497755] no_lp
+#1175   93.75s best:497755 next:[435890,497754] no_lp
+#1176   93.75s best:497754 next:[435890,497753] no_lp
+#1177   93.76s best:497753 next:[435890,497752] no_lp
+#1178   93.77s best:497752 next:[435890,497751] no_lp
+#1179   93.78s best:497751 next:[435890,497750] no_lp
+#1180   93.78s best:497750 next:[435890,497749] no_lp
+#1181   93.80s best:497749 next:[435890,497748] no_lp
+#1182   93.80s best:497748 next:[435890,497747] no_lp
+#1183   93.81s best:497747 next:[435890,497746] no_lp
+#1184   93.81s best:497746 next:[435890,497745] no_lp
+#1185   93.82s best:497745 next:[435890,497744] no_lp
+#1186   93.82s best:497744 next:[435890,497743] no_lp
+#1187   93.83s best:497743 next:[435890,497742] no_lp
+#1188   93.83s best:497742 next:[435890,497741] no_lp
+#1189   93.84s best:497741 next:[435890,497740] no_lp
+#1190   93.85s best:497740 next:[435890,497739] no_lp
+#1191   93.86s best:497739 next:[435890,497738] no_lp
+#1192   93.86s best:497738 next:[435890,497737] no_lp
+#1193   93.87s best:497737 next:[435890,497736] no_lp
+#1194   93.88s best:497736 next:[435890,497735] no_lp
+#1195   93.88s best:497735 next:[435890,497734] no_lp
+#1196   93.88s best:497734 next:[435890,497733] no_lp
+#1197   93.89s best:497733 next:[435890,497732] no_lp
+#1198   93.89s best:497732 next:[435890,497731] no_lp
+#1199   93.90s best:497731 next:[435890,497730] no_lp
+#1200   93.90s best:497730 next:[435890,497729] no_lp
+#1201   93.91s best:497729 next:[435890,497728] no_lp
+#1202   93.92s best:497728 next:[435890,497727] no_lp
+#1203   93.92s best:497727 next:[435890,497726] no_lp
+#1204   93.93s best:497726 next:[435890,497725] no_lp
+#1205   93.93s best:497725 next:[435890,497724] no_lp
+#1206   93.94s best:497724 next:[435890,497723] no_lp
+#1207   93.95s best:497723 next:[435890,497722] no_lp
+#1208   93.95s best:497722 next:[435890,497721] no_lp
+#1209   93.96s best:497721 next:[435890,497720] no_lp
+#1210   93.97s best:497720 next:[435890,497719] no_lp
+#1211   93.98s best:497719 next:[435890,497718] no_lp
+#1212   93.99s best:497718 next:[435890,497717] no_lp
+#1213   93.99s best:497717 next:[435890,497716] no_lp
+#1214   94.00s best:497716 next:[435890,497715] no_lp
+#1215   94.00s best:497715 next:[435890,497714] no_lp
+#1216   94.01s best:497714 next:[435890,497713] no_lp
+#1217   94.02s best:497713 next:[435890,497712] no_lp
+#1218   94.02s best:497712 next:[435890,497711] no_lp
+#1219   94.02s best:497711 next:[435890,497710] no_lp
+#1220   94.03s best:497710 next:[435890,497709] no_lp
+#1221   94.04s best:497709 next:[435890,497708] no_lp
+#1222   94.04s best:497708 next:[435890,497707] no_lp
+#1223   94.05s best:497707 next:[435890,497706] no_lp
+#1224   94.06s best:497706 next:[435890,497705] no_lp
+#1225   94.06s best:497705 next:[435890,497704] no_lp
+#1226   94.06s best:496959 next:[435890,496958] graph_var_lns (d=6.88e-01 s=767 t=0.10 p=0.50 stall=0 h=base)
+#1227   94.38s best:496958 next:[435890,496957] no_lp
+#1228   94.39s best:496957 next:[435890,496956] no_lp
+#1229   94.39s best:496956 next:[435890,496955] no_lp
+#1230   94.40s best:496955 next:[435890,496954] no_lp
+#1231   94.40s best:496954 next:[435890,496953] no_lp
+#1232   94.41s best:496953 next:[435890,496952] no_lp
+#1233   94.41s best:496952 next:[435890,496951] no_lp
+#1234   94.42s best:496951 next:[435890,496950] no_lp
+#1235   94.43s best:496950 next:[435890,496949] no_lp
+#1236   94.43s best:496949 next:[435890,496948] no_lp
+#1237   94.44s best:496948 next:[435890,496947] no_lp
+#1238   94.45s best:496947 next:[435890,496946] no_lp
+#1239   94.46s best:496946 next:[435890,496945] no_lp
+#1240   94.47s best:496945 next:[435890,496944] no_lp
+#1241   94.47s best:496944 next:[435890,496943] no_lp
+#1242   94.48s best:496943 next:[435890,496942] no_lp
+#1243   94.48s best:496942 next:[435890,496941] no_lp
+#1244   94.49s best:496941 next:[435890,496940] no_lp
+#1245   94.49s best:496940 next:[435890,496939] no_lp
+#1246   94.50s best:496939 next:[435890,496938] no_lp
+#1247   94.50s best:496938 next:[435890,496937] no_lp
+#1248   94.51s best:496937 next:[435890,496936] no_lp
+#1249   94.52s best:496936 next:[435890,496935] no_lp
+#1250   94.53s best:496935 next:[435890,496934] no_lp
+#1251   94.54s best:496934 next:[435890,496933] no_lp
+#1252   94.54s best:496933 next:[435890,496932] no_lp
+#1253   94.55s best:496932 next:[435890,496931] no_lp
+#1254   94.56s best:496931 next:[435890,496930] no_lp
+#1255   94.57s best:496930 next:[435890,496929] no_lp
+#1256   94.57s best:496929 next:[435890,496928] no_lp
+#1257   94.58s best:496928 next:[435890,496927] no_lp
+#1258   94.59s best:496927 next:[435890,496926] no_lp
+#1259   94.59s best:496926 next:[435890,496925] no_lp
+#1260   94.60s best:496925 next:[435890,496924] no_lp
+#1261   94.61s best:496924 next:[435890,496923] no_lp
+#1262   94.61s best:496923 next:[435890,496922] no_lp
+#1263   94.62s best:496922 next:[435890,496921] no_lp
+#1264   94.63s best:496921 next:[435890,496920] no_lp
+#1265   94.64s best:496920 next:[435890,496919] no_lp
+#1266   94.65s best:496919 next:[435890,496918] no_lp
+#1267   94.65s best:496918 next:[435890,496917] no_lp
+#1268   94.66s best:496917 next:[435890,496916] no_lp
+#1269   94.67s best:496916 next:[435890,496915] no_lp
+#1270   94.67s best:496915 next:[435890,496914] no_lp
+#1271   94.68s best:496914 next:[435890,496913] no_lp
+#1272   94.69s best:496913 next:[435890,496912] no_lp
+#1273   94.70s best:496912 next:[435890,496911] no_lp
+#1274   94.70s best:496911 next:[435890,496910] no_lp
+#1275   94.71s best:496910 next:[435890,496909] no_lp
+#1276   94.72s best:496909 next:[435890,496908] no_lp
+#1277   94.73s best:496908 next:[435890,496907] no_lp
+#1278   94.74s best:496907 next:[435890,496906] no_lp
+#1279   94.75s best:496906 next:[435890,496905] no_lp
+#1280   94.75s best:496905 next:[435890,496904] no_lp
+#1281   94.76s best:496904 next:[435890,496903] no_lp
+#1282   94.77s best:496903 next:[435890,496902] no_lp
+#1283   94.78s best:496902 next:[435890,496901] no_lp
+#1284   94.78s best:496901 next:[435890,496900] no_lp
+#1285   94.79s best:496900 next:[435890,496899] no_lp
+#1286   94.80s best:496899 next:[435890,496898] no_lp
+#1287   94.80s best:496898 next:[435890,496897] no_lp
+#1288   94.81s best:496897 next:[435890,496896] no_lp
+#1289   94.82s best:496896 next:[435890,496895] no_lp
+#1290   94.82s best:496895 next:[435890,496894] no_lp
+#1291   94.83s best:496894 next:[435890,496893] no_lp
+#1292   94.84s best:496893 next:[435890,496892] no_lp
+#1293   94.85s best:496892 next:[435890,496891] no_lp
+#1294   94.85s best:496891 next:[435890,496890] no_lp
+#1295   94.86s best:496890 next:[435890,496889] no_lp
+#1296   94.87s best:496889 next:[435890,496888] no_lp
+#1297   94.88s best:496888 next:[435890,496887] no_lp
+#1298   94.89s best:496887 next:[435890,496886] no_lp
+#1299   94.89s best:496886 next:[435890,496885] no_lp
+#1300   94.90s best:496885 next:[435890,496884] no_lp
+#1301   94.91s best:496884 next:[435890,496883] no_lp
+#1302   94.92s best:496883 next:[435890,496882] no_lp
+#1303   94.92s best:496882 next:[435890,496881] no_lp
+#1304   94.93s best:496881 next:[435890,496880] no_lp
+#1305   94.94s best:496880 next:[435890,496879] no_lp
+#1306   94.95s best:496879 next:[435890,496878] no_lp
+#1307   94.96s best:496878 next:[435890,496877] no_lp
+#1308   94.97s best:496877 next:[435890,496876] no_lp
+#1309   94.98s best:496876 next:[435890,496875] no_lp
+#1310   94.99s best:496875 next:[435890,496874] no_lp
+#1311   95.00s best:496874 next:[435890,496873] no_lp
+#1312   95.00s best:496873 next:[435890,496872] no_lp
+#1313   95.01s best:496872 next:[435890,496871] no_lp
+#1314   95.02s best:496871 next:[435890,496870] no_lp
+#1315   95.03s best:496870 next:[435890,496869] no_lp
+#1316   95.03s best:496869 next:[435890,496868] no_lp
+#1317   95.04s best:496868 next:[435890,496867] no_lp
+#1318   95.05s best:496867 next:[435890,496866] no_lp
+#1319   95.06s best:496866 next:[435890,496865] no_lp
+#1320   95.07s best:496865 next:[435890,496864] no_lp
+#1321   95.08s best:496864 next:[435890,496863] no_lp
+#1322   95.09s best:496863 next:[435890,496862] no_lp
+#1323   95.10s best:496862 next:[435890,496861] no_lp
+#1324   95.11s best:496861 next:[435890,496860] no_lp
+#1325   95.11s best:496860 next:[435890,496859] no_lp
+#1326   95.12s best:496859 next:[435890,496858] no_lp
+#1327   95.13s best:496858 next:[435890,496857] no_lp
+#1328   95.14s best:496857 next:[435890,496856] no_lp
+#1329   95.15s best:496856 next:[435890,496855] no_lp
+#1330   95.16s best:496855 next:[435890,496854] no_lp
+#1331   95.16s best:496854 next:[435890,496853] no_lp
+#1332   95.17s best:496853 next:[435890,496852] no_lp
+#1333   95.18s best:496852 next:[435890,496851] no_lp
+#1334   95.19s best:496851 next:[435890,496850] no_lp
+#1335   95.20s best:496850 next:[435890,496849] no_lp
+#1336   95.21s best:496849 next:[435890,496848] no_lp
+#1337   95.21s best:496848 next:[435890,496847] no_lp
+#1338   95.23s best:496847 next:[435890,496846] no_lp
+#1339   95.23s best:496846 next:[435890,496845] no_lp
+#1340   95.24s best:496845 next:[435890,496844] no_lp
+#1341   95.25s best:496844 next:[435890,496843] no_lp
+#1342   95.27s best:496843 next:[435890,496842] no_lp
+#1343   95.27s best:496842 next:[435890,496841] no_lp
+#1344   95.28s best:496841 next:[435890,496840] no_lp
+#1345   95.29s best:496840 next:[435890,496839] no_lp
+#1346   95.30s best:496839 next:[435890,496838] no_lp
+#1347   95.30s best:496838 next:[435890,496837] no_lp
+#1348   95.31s best:496837 next:[435890,496836] no_lp
+#1349   95.32s best:496836 next:[435890,496835] no_lp
+#1350   95.33s best:496835 next:[435890,496834] no_lp
+#1351   95.35s best:496834 next:[435890,496833] no_lp
+#1352   95.35s best:496833 next:[435890,496832] no_lp
+#1353   95.36s best:496832 next:[435890,496831] no_lp
+#1354   95.37s best:496831 next:[435890,496830] no_lp
+#1355   95.38s best:496830 next:[435890,496829] no_lp
+#1356   95.38s best:496829 next:[435890,496828] no_lp
+#1357   95.39s best:496828 next:[435890,496827] no_lp
+#1358   95.40s best:496827 next:[435890,496826] no_lp
+#1359   95.42s best:496826 next:[435890,496825] no_lp
+#1360   95.42s best:496825 next:[435890,496824] no_lp
+#1361   95.43s best:496824 next:[435890,496823] no_lp
+#1362   95.44s best:496823 next:[435890,496822] no_lp
+#1363   95.45s best:496822 next:[435890,496821] no_lp
+#1364   95.46s best:496821 next:[435890,496820] no_lp
+#1365   95.47s best:496820 next:[435890,496819] no_lp
+#1366   95.48s best:496819 next:[435890,496818] no_lp
+#1367   95.49s best:496818 next:[435890,496817] no_lp
+#1368   95.50s best:496817 next:[435890,496816] no_lp
+#1369   95.51s best:496816 next:[435890,496815] no_lp
+#1370   95.51s best:496564 next:[435890,496563] graph_arc_lns (d=6.27e-01 s=772 t=0.10 p=0.44 stall=1 h=base)
+#1371   95.52s best:496563 next:[435890,496562] ls_restart_decay_compound_perturb(batch:1 lin{mvs:0 evals:19'573} gen{mvs:3'637 evals:0} comp{mvs:203 btracks:1'717} #w_updates:84 #perturb:0)
+#1372   95.82s best:496562 next:[435890,496561] no_lp
+#1373   95.83s best:496561 next:[435890,496560] no_lp
+#1374   95.84s best:496560 next:[435890,496559] no_lp
+#1375   95.84s best:496559 next:[435890,496558] no_lp
+#1376   95.85s best:496558 next:[435890,496557] no_lp
+#1377   95.86s best:496557 next:[435890,496556] no_lp
+#1378   95.86s best:496556 next:[435890,496555] no_lp
+#1379   95.87s best:496555 next:[435890,496554] no_lp
+#1380   95.88s best:496554 next:[435890,496553] no_lp
+#1381   95.89s best:496553 next:[435890,496552] no_lp
+#1382   95.90s best:496552 next:[435890,496551] no_lp
+#1383   95.91s best:496551 next:[435890,496550] no_lp
+#1384   95.91s best:496349 next:[435890,496348] graph_cst_lns (d=9.02e-01 s=775 t=0.10 p=0.53 stall=0 h=base)
+#1385   96.06s best:496348 next:[435890,496347] no_lp
+#1386   96.07s best:496347 next:[435890,496346] no_lp
+#1387   96.09s best:496346 next:[435890,496345] no_lp
+#1388   96.10s best:496345 next:[435890,496344] no_lp
+#1389   96.10s best:496344 next:[435890,496343] no_lp
+#1390   96.11s best:496343 next:[435890,496342] no_lp
+#1391   96.11s best:496342 next:[435890,496341] no_lp
+#1392   96.12s best:496341 next:[435890,496340] no_lp
+#1393   96.13s best:496340 next:[435890,496339] no_lp
+#1394   96.13s best:496339 next:[435890,496338] no_lp
+#1395   96.14s best:496338 next:[435890,496337] no_lp
+#1396   96.15s best:496337 next:[435890,496336] no_lp
+#1397   96.15s best:496336 next:[435890,496335] no_lp
+#1398   96.16s best:496335 next:[435890,496334] no_lp
+#1399   96.16s best:496334 next:[435890,496333] no_lp
+#1400   96.17s best:496333 next:[435890,496332] no_lp
+#1401   96.18s best:496332 next:[435890,496331] no_lp
+#1402   96.19s best:496331 next:[435890,496330] no_lp
+#1403   96.19s best:496330 next:[435890,496329] no_lp
+#1404   96.20s best:496329 next:[435890,496328] no_lp
+#1405   96.21s best:496328 next:[435890,496327] no_lp
+#1406   96.21s best:496327 next:[435890,496326] no_lp
+#1407   96.22s best:496326 next:[435890,496325] no_lp
+#1408   96.22s best:496325 next:[435890,496324] no_lp
+#1409   96.23s best:496324 next:[435890,496323] no_lp
+#1410   96.24s best:496323 next:[435890,496322] no_lp
+#1411   96.25s best:496322 next:[435890,496321] no_lp
+#1412   96.26s best:496321 next:[435890,496320] no_lp
+#1413   96.26s best:496320 next:[435890,496319] no_lp
+#1414   96.27s best:496319 next:[435890,496318] no_lp
+#1415   96.28s best:496318 next:[435890,496317] no_lp
+#1416   96.29s best:496317 next:[435890,496316] no_lp
+#1417   96.29s best:496316 next:[435890,496315] no_lp
+#1418   96.30s best:496315 next:[435890,496314] no_lp
+#1419   96.31s best:496314 next:[435890,496313] no_lp
+#1420   96.31s best:496313 next:[435890,496312] no_lp
+#1421   96.32s best:496312 next:[435890,496311] no_lp
+#1422   96.32s best:496311 next:[435890,496310] no_lp
+#1423   96.33s best:496310 next:[435890,496309] no_lp
+#1424   96.34s best:496309 next:[435890,496308] no_lp
+#1425   96.35s best:496308 next:[435890,496307] no_lp
+#1426   96.35s best:496307 next:[435890,496306] no_lp
+#1427   96.36s best:496306 next:[435890,496305] no_lp
+#1428   96.37s best:496305 next:[435890,496304] no_lp
+#1429   96.37s best:496304 next:[435890,496303] no_lp
+#1430   96.38s best:496303 next:[435890,496302] no_lp
+#1431   96.39s best:496302 next:[435890,496301] no_lp
+#1432   96.39s best:496301 next:[435890,496300] no_lp
+#1433   96.40s best:496300 next:[435890,496299] no_lp
+#1434   96.41s best:496299 next:[435890,496298] no_lp
+#1435   96.41s best:496298 next:[435890,496297] no_lp
+#1436   96.42s best:496297 next:[435890,496296] no_lp
+#1437   96.43s best:496296 next:[435890,496295] no_lp
+#1438   96.43s best:496295 next:[435890,496294] no_lp
+#1439   96.44s best:496294 next:[435890,496293] no_lp
+#1440   96.45s best:496293 next:[435890,496292] no_lp
+#1441   96.45s best:496292 next:[435890,496291] no_lp
+#1442   96.46s best:496291 next:[435890,496290] no_lp
+#1443   96.47s best:496290 next:[435890,496289] no_lp
+#1444   96.47s best:496289 next:[435890,496288] no_lp
+#1445   96.48s best:496288 next:[435890,496287] no_lp
+#1446   96.49s best:496287 next:[435890,496286] no_lp
+#1447   96.49s best:496147 next:[435890,496146] graph_var_lns (d=6.90e-01 s=776 t=0.10 p=0.50 stall=0 h=base)
+#1448   96.50s best:496146 next:[435890,496145] no_lp
+#1449   96.51s best:496145 next:[435890,496144] no_lp
+#1450   96.52s best:496144 next:[435890,496143] no_lp
+#1451   96.52s best:496143 next:[435890,496142] no_lp
+#1452   96.53s best:496142 next:[435890,496141] no_lp
+#1453   96.54s best:496141 next:[435890,496140] no_lp
+#1454   96.55s best:496140 next:[435890,496139] no_lp
+#1455   96.56s best:496139 next:[435890,496138] no_lp
+#1456   96.56s best:496138 next:[435890,496137] no_lp
+#1457   96.57s best:496137 next:[435890,496136] no_lp
+#1458   96.58s best:496136 next:[435890,496135] no_lp
+#1459   96.58s best:496135 next:[435890,496134] no_lp
+#1460   96.59s best:496134 next:[435890,496133] no_lp
+#1461   96.59s best:496133 next:[435890,496132] no_lp
+#1462   96.60s best:496132 next:[435890,496131] no_lp
+#1463   96.61s best:496131 next:[435890,496130] no_lp
+#1464   96.61s best:496130 next:[435890,496129] no_lp
+#1465   96.62s best:496129 next:[435890,496128] no_lp
+#1466   96.62s best:496128 next:[435890,496127] no_lp
+#1467   96.63s best:496127 next:[435890,496126] no_lp
+#1468   96.63s best:496126 next:[435890,496125] no_lp
+#1469   96.64s best:496125 next:[435890,496124] no_lp
+#1470   96.65s best:496124 next:[435890,496123] no_lp
+#1471   96.65s best:496123 next:[435890,496122] no_lp
+#1472   97.25s best:496122 next:[435890,496121] no_lp
+#1473   97.26s best:496121 next:[435890,496120] no_lp
+#1474   97.27s best:496120 next:[435890,496119] no_lp
+#1475   97.28s best:496119 next:[435890,496118] no_lp
+#1476   97.28s best:496118 next:[435890,496117] no_lp
+#1477   97.29s best:496117 next:[435890,496116] no_lp
+#1478   97.30s best:496116 next:[435890,496115] no_lp
+#1479   97.31s best:496115 next:[435890,496114] no_lp
+#1480   97.31s best:496114 next:[435890,496113] no_lp
+#1481   97.32s best:496113 next:[435890,496112] no_lp
+#1482   97.33s best:496112 next:[435890,496111] no_lp
+#1483   97.34s best:496111 next:[435890,496110] no_lp
+#1484   97.35s best:496110 next:[435890,496109] no_lp
+#1485   97.35s best:496109 next:[435890,496108] no_lp
+#1486   97.36s best:496108 next:[435890,496107] no_lp
+#1487   97.37s best:496107 next:[435890,496106] no_lp
+#1488   97.37s best:496106 next:[435890,496105] no_lp
+#1489   97.39s best:496105 next:[435890,496104] no_lp
+#1490   97.39s best:496104 next:[435890,496103] no_lp
+#1491   97.40s best:496103 next:[435890,496102] no_lp
+#1492   97.41s best:496102 next:[435890,496101] no_lp
+#1493   97.41s best:496101 next:[435890,496100] no_lp
+#1494   97.42s best:496100 next:[435890,496099] no_lp
+#1495   97.43s best:496099 next:[435890,496098] no_lp
+#1496   97.43s best:496098 next:[435890,496097] no_lp
+#1497   97.44s best:496097 next:[435890,496096] no_lp
+#1498   97.45s best:496096 next:[435890,496095] no_lp
+#1499   97.46s best:496095 next:[435890,496094] no_lp
+#1500   97.47s best:495882 next:[435890,495881] graph_arc_lns (d=4.39e-01 s=781 t=0.10 p=0.39 stall=0 h=base)
+#1501  115.59s best:495544 next:[435890,495543] graph_var_lns (d=8.28e-01 s=851 t=0.10 p=0.55 stall=0 h=base)
+#1502  116.24s best:495434 next:[435890,495433] graph_arc_lns (d=8.76e-01 s=852 t=0.10 p=0.56 stall=0 h=base)
+#1503  117.06s best:494423 next:[435890,494422] graph_var_lns (d=7.97e-01 s=855 t=0.10 p=0.53 stall=0 h=base)
+#1504  117.20s best:494392 next:[435890,494391] graph_arc_lns (d=8.54e-01 s=856 t=0.10 p=0.55 stall=0 h=base)
+
+Task timing                   n [     min,      max]      avg      dev     time         n [     min,      max]      avg      dev    dtime
+        'default_lp':         1 [   9.99m,    9.99m]    9.99m   0.00ns    9.99m         2 [ 44.76ms,    5.45m]    2.72m    2.72m    5.45m
+  'feasibility_pump':       759 [ 14.70us,  10.04ms] 104.89us 413.24us  79.61ms       756 [ 10.09us,  80.21us]  10.18us   2.55us   7.70ms
+                'fj':         2 [945.50us,  92.63ms]  46.79ms  45.84ms  93.58ms         2 [348.46us, 100.05ms]  50.20ms  49.85ms 100.40ms
+     'graph_arc_lns':       324 [  1.44ms, 819.58ms] 234.48ms 269.85ms    1.27m       183 [ 31.34us, 100.70ms]  63.47ms  41.65ms   11.61s
+     'graph_cst_lns':       174 [  2.04ms, 946.77ms] 438.97ms 262.88ms    1.27m       164 [ 57.01us, 100.12ms]  66.34ms  40.40ms   10.88s
+     'graph_dec_lns':       201 [  2.62ms, 878.72ms] 381.52ms 298.80ms    1.28m       162 [ 29.27us, 100.15ms]  66.08ms  42.38ms   10.70s
+     'graph_var_lns':       300 [  1.57ms, 874.03ms] 253.04ms 293.50ms    1.27m       163 [351.90us, 100.14ms]  65.29ms  40.85ms   10.64s
+                'ls':       759 [  8.89ms, 197.67ms]  83.60ms  27.25ms    1.06m       759 [ 14.19ms, 100.08ms]  99.90ms   3.11ms    1.26m
+            'max_lp':         1 [   9.99m,    9.99m]    9.99m   0.00ns    9.99m         2 [144.10ms,    2.03m]    1.02m    1.02m    2.04m
+             'no_lp':         1 [   9.99m,    9.99m]    9.99m   0.00ns    9.99m         2 [ 44.64ms,    3.14m]    1.57m    1.57m    3.14m
+         'rins/rens':       394 [ 62.10us, 919.15ms] 193.32ms 298.51ms    1.27m       132 [  7.41us, 100.23ms]  80.65ms  31.27ms   10.65s
+       'rnd_cst_lns':       175 [  2.01ms, 952.81ms] 436.89ms 271.35ms    1.27m       170 [ 31.43us, 100.19ms]  62.92ms  42.56ms   10.70s
+       'rnd_var_lns':       203 [  1.36ms, 892.32ms] 375.36ms 294.25ms    1.27m       170 [ 73.00ns, 100.13ms]  63.40ms  44.00ms   10.78s
+
+Search stats       Bools  Conflicts   Branches  Restarts  BacktrackToRoot  Backtrack     BoolPropag  IntegerPropag
+  'default_lp':  205'174    265'428  1'761'212       143           40'555  1'374'041  2'865'050'335    200'593'217
+      'max_lp':   68'076     64'727    889'044       223           52'928    604'430    155'220'595    349'461'113
+       'no_lp':   11'659  1'660'862  5'278'371     4'516          186'345  2'377'009  1'054'172'247     84'254'894
+
+SAT formula      Fixed  Equiv    Total  VarLeft  BinaryClauses  PermanentClauses  TemporaryClauses
+  'default_lp':     64      1  205'174  205'109        672'276             5'702            14'201
+      'max_lp':    130     12   68'076   67'934        162'342            13'780            17'285
+       'no_lp':  1'559      1   11'659   10'099         22'512            36'808            11'555
+
+SAT stats        ClassicMinim  LitRemoved  LitRemovedBinary  LitLearned  LitForgotten  Subsumed
+  'default_lp':       172'283     812'297         2'272'142   3'663'277     3'234'023     3'751
+      'max_lp':        46'039     290'582           522'175     733'723       335'256     4'981
+       'no_lp':     1'451'373  12'526'229        24'096'028  29'196'165    22'903'005   285'438
+
+Vivification     Clauses  Decisions  LitTrue  Subsumed  LitRemoved  DecisionReused  Conflicts
+  'default_lp':   29'146    110'915        1     5'506      33'037          57'536        120
+      'max_lp':   40'316    157'468        0     2'049      16'692         112'881        157
+       'no_lp':  131'499    824'506        0     8'966     105'085          51'447      1'477
+
+Clause deletion    at_true  l_and_not(l)  to_binary  sub_conflict  sub_extra  sub_decisions  sub_eager  sub_vivify  sub_probing  sub_inpro  blocked  eliminated  forgotten   promoted  conflicts
+    'default_lp':      631             0          4         3'489         32            111        262       5'506           87      1'166        0           0    234'962    415'735    265'428
+        'max_lp':       85             2          0         4'705         34             36        276       2'049        1'120      4'921        0           0     23'406     95'899     64'727
+         'no_lp':       12             0          5       271'318      3'730          5'757     14'120       8'966        4'466     67'856        0           0  1'236'709  4'443'724  1'660'862
+
+Lp stats         Component  Iterations  AddedCuts  OPTIMAL  DUAL_F.  DUAL_U.
+  'default_lp':          1      32'281         53  374'062        0        0
+      'max_lp':          1     506'510     30'520  139'595   29'068      280
+
+Lp dimension       Final dimension of first component
+  'default_lp':      36 rows, 75 columns, 108 entries
+      'max_lp':  358 rows, 1480 columns, 1895 entries
+
+Lp debug         CutPropag  CutEqPropag  Adjust  Overflow      Bad  BadScaling
+  'default_lp':          0            0       0         3    1'097           0
+      'max_lp':          0           60     159       178  269'436           0
+
+Lp pool          Constraints  Updates  Simplif  Merged  Shortened  Split  Strengthened      Cuts/Call
+  'default_lp':           91        0        0       0          0      0             0         53/657
+      'max_lp':       13'993      944   44'620     143      1'232  2'862        52'593  30'520/85'762
+
+Lp Cut            default_lp  max_lp
+          CG_FF:           -   1'907
+           CG_K:           -   1'030
+           CG_R:           -     529
+          CG_RB:           -     330
+         CG_RBP:           -      67
+         Clique:           -   1'472
+             IB:           -  11'065
+       MIR_1_FF:           -   1'976
+        MIR_1_K:          24     273
+        MIR_1_R:          24     551
+       MIR_1_RB:           -     730
+      MIR_1_RBP:           -      12
+      MIR_1_RLT:           -     226
+       MIR_2_FF:           -   1'990
+        MIR_2_K:           -     245
+        MIR_2_R:           3     765
+       MIR_2_RB:           -     632
+      MIR_2_RBP:           -      15
+       MIR_3_FF:           -   1'415
+        MIR_3_K:           -     167
+       MIR_3_KL:           -       1
+        MIR_3_R:           2     411
+       MIR_3_RB:           -     377
+      MIR_3_RBP:           -       9
+       MIR_4_FF:           -     838
+        MIR_4_K:           -     126
+        MIR_4_R:           -     228
+       MIR_4_RB:           -     254
+      MIR_4_RBP:           -       8
+       MIR_5_FF:           -     499
+        MIR_5_K:           -      77
+       MIR_5_KL:           -       5
+        MIR_5_R:           -     138
+       MIR_5_RB:           -     116
+      MIR_5_RBP:           -      11
+       MIR_6_FF:           -     259
+        MIR_6_K:           -      52
+       MIR_6_KL:           -       2
+        MIR_6_R:           -      73
+       MIR_6_RB:           -      64
+      MIR_6_RBP:           -       2
+   ZERO_HALF_FF:           -     791
+    ZERO_HALF_K:           -      47
+    ZERO_HALF_R:           -     406
+   ZERO_HALF_RB:           -     326
+  ZERO_HALF_RBP:           -       3
+
+LNS stats           Improv/Calls  Closed  Difficulty  TimeLimit
+  'graph_arc_lns':       186/188     50%    8.26e-01       0.10
+  'graph_cst_lns':       168/168     49%    8.41e-01       0.10
+  'graph_dec_lns':       189/189     51%    9.38e-01       0.10
+  'graph_var_lns':       167/169     50%    7.94e-01       0.10
+      'rins/rens':       178/178     49%    5.11e-01       0.10
+    'rnd_cst_lns':       172/173     50%    8.43e-01       0.10
+    'rnd_var_lns':       194/195     50%    9.31e-01       0.10
+
+LS stats                                    Batches  Restarts/Perturbs   LinMoves   GenMoves  CompoundMoves  Bactracks  WeightUpdates  ScoreComputed
+                    'fj_restart_compound':        1                  1          0        203            203          0              0          2'139
+  'fj_restart_decay_compound_perturb_obj':        1                  1          0     45'846          1'975     21'932            125        258'501
+                             'ls_restart':       92                 40  1'750'267          0              0          0     10'065'300      3'830'719
+                    'ls_restart_compound':       66                 38          0  1'904'351         11'907    946'199         67'479     13'084'965
+            'ls_restart_compound_perturb':       85                 42          0  2'587'439         14'796  1'286'299         91'145     16'758'143
+                       'ls_restart_decay':       75                 35  1'563'322          0              0          0         43'082      6'390'018
+              'ls_restart_decay_compound':      126                 40          0  3'499'949        469'204  1'515'254         11'542     27'251'367
+      'ls_restart_decay_compound_perturb':       91                 40          0  2'629'310        317'317  1'155'920          9'569     19'427'333
+               'ls_restart_decay_perturb':      154                 38  2'953'983          0              0          0         84'606     13'519'883
+                     'ls_restart_perturb':       70                 31    997'856          0              0          0     11'121'752      2'285'936
+
+Solutions (1504)                          Num         Rank
+                'fj_restart_compound':      2        [0,1]
+                      'graph_arc_lns':     10  [1072,1504]
+                      'graph_cst_lns':      2  [1383,1384]
+                      'graph_var_lns':     10   [597,1503]
+  'ls_restart_decay_compound_perturb':      2  [1370,1371]
+                              'no_lp':  2'982     [1,1499]
+
+Objective bounds     Num
+  'initial_domain':    1
+
+Solution repositories    Added  Queried  Synchro
+    'alternative_path':      8      793        8
+      'best_solutions':  1'527    1'558    1'515
+   'fj solution hints':      0        0        0
+        'lp solutions':  2'201      185    2'089
+                'pump':    758      209
+
+Improving bounds shared        Num  Sym
+            'default_lp':      114    0
+                'max_lp':       12    0
+                 'no_lp':  113'198    0
+
+Clauses shared    #Exported  #Imported  #BinaryRead  #BinaryTotal
+   'default_lp':        716        945        1'210         1'459
+       'max_lp':        424      3'322        1'415         1'459
+        'no_lp':      6'010        579        1'459         1'459
+
+LRAT_status: NA
+CpSolverResponse summary:
+status: FEASIBLE
+objective: 494392
+best_bound: 435890
+integers: 75
+booleans: 11659
+conflicts: 1660862
+branches: 5278371
+propagations: 1054172247
+integer_propagations: 84254894
+restarts: 4516
+lp_iterations: 0
+walltime: 600.183
+usertime: 600.183
+deterministic_time: 789.661
+gap_integral: 8668.83
+solution_fingerprint: 0x6c734c184f0d4135
+
+RESULT n=19 angles=[0.0, 40.181937290329714] s=4.9439168978 (solver 4.9439200) bound=4.3589000000 status=FEASIBLE time=600.2s structure=14x0deg + 5x40.1819deg min_sep=-8.88e-16 min_margin=0.00e+00
