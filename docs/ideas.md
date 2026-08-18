@@ -78,3 +78,15 @@ discretised placement graph (rigorous via shrink-and-snap, but the discretisatio
 probably infeasible directly). The incircle relaxation alone (11 points pairwise ≥1 apart in a
 square of side s−1) gives only s ≥ 1 + 1/d₁₁ ≈ 3.51 (d₁₁ ≈ 0.398 = max-min distance of 11 points in
 a unit square), so region constraints must be used together with point/measure constraints.
+
+**I-U4 / I-L7. Angle-lattice MILP and angle-box branch-and-bound (PI + advisor, 2026-08-18).** At fixed
+orientations the packing problem is a disjunctive LP (containment linear; each pair separated by one of
+≤ 8 axes, each a linear inequality once angles are fixed). Hence for a finite angle set Θ the exact
+optimum over packings with angles in Θ is a MILP (angle-choice binaries × axis-choice binaries); Stromquist's
+0°/45° theorem is the case Θ = {0°,45°}. Ab-initio discovery = solve the MILP over a fine lattice Θ; rigorous
+proof = replace lattice points by angle BOXES with interval coefficients and branch over the angle torus
+modulo S₁₁ and the 90° symmetries, pruning each box either by MILP infeasibility (relaxed coefficients) or by
+the measure LP restricted to that box (I-L2 with orientation-restricted constraints — strictly stronger per
+box than the global τ*). Symmetry helps exactly here (S₁₁ ordering, D₄, 90°), but the optimum itself has
+trivial symmetry (Trump's packing is asymmetric; the octic's Galois group is S₈ — verified 2026-08-18 by
+cycle-type statistics mod 426 primes), so no symmetric-stratum shortcut exists. Status: running → A09.
