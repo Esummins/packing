@@ -205,3 +205,17 @@
 - Lean: advisor added targets PackingCertSlow381/382; `s11_ge_3_81` built (12 min, native_decide axiom only);
   `s11_ge_3_82` building. docs/results.md and README updated.
 - Lean `s11_ge_3_82` built (26.5 min, native_decide axiom only). Final certified chain: s(11) ≥ 3.82.
+
+## 2026-08-18 — A09-angle-lattice-milp — angle-lattice MILP: ab-initio finder yes, certifier no
+- `attempts/A09-angle-lattice-milp/milp_pack.py`: fixed-angle-lattice packing MILP (SAT-axis disjunctions, per-axis
+  big-M, symmetry breaking, HiGHS or CP-SAT back-end, fixed-structure LP polish); `make_cert.py` -> rational
+  certificate + exact verification.
+- Calibration reproduced exactly (polished LP): {0}: n=5,10,11 -> 3,4,4; {0,45}: n=5 2.7071067812, n=10 3.7071067812
+  (CP-SAT proves optimality, 535 s), n=11 3.8856180832 (= 2+4sqrt2/3, Stromquist Thm 3; found in ~1 min, not proven).
+- AB INITIO: Theta={0,theta*} -> Trump's packing s=3.8770835900228 (diff 4e-16, 6 uprights + 5 tilted, no contact
+  graph given) in 23-39 s; coarse lattice {0,30,35,40,45} -> Trump structure at 40 deg, s=3.87764 (rational cert
+  PASSES). Solver dual bound never leaves sqrt(11): LP relaxation void; feasibility at 3.87707 with counts fixed:
+  UNKNOWN in 900 s. HiGHS unusable beyond n=10 uprights. n=12 {0,45},{0,40,45}: nothing < 4 in 600 s.
+- Assessment (notes.md sec. 4): interval angle-box B&B with a MILP oracle is hopeless (per-box oracle already fails on
+  a point box); the viable box killer is Theorem 1 restricted to orientations in the box (Stromquist's 0/45 result is
+  the two-point case) -> recommended follow-up: A07 LP with theta restricted to [theta*-delta, theta*+delta] u {0}.

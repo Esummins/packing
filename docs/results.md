@@ -86,10 +86,26 @@ this machine for disk reasons; estimated 3–5 days of work).
   the literal Fig. 14 point G, repaired by G' = (.78, 1.845)); the theorem stands.
 - A07: τ*(s) curve for n = 10, 11 (see `attempts/A07-lp-dual/notes.md`, `plots/tau_vs_s.png`).
 
+
+## Ab-initio discovery (A09, 2026-08-18)
+
+At fixed orientations the packing problem is a disjunctive LP, so for a finite angle set Θ the optimum
+over packings with angles in Θ is a MILP (`attempts/A09-angle-lattice-milp/milp_pack.py`, CP-SAT/HiGHS).
+Calibration is exact: Θ={0°,45°} gives Göbel's 2.7071 (n=5), Stromquist's 3.7071 (n=10, proven optimal by
+CP-SAT in 535 s) and Stromquist's Theorem 3 value 3.8856180832 (n=11). **Ab initio:** Θ={0°,θ*} recovers
+Trump's packing (s = 3.8770835900228144, 6 uprights + 5 tilted) in 23–39 s with no contact graph given; the
+coarse lattice {0°,30°,35°,40°,45°} finds the same structure at 40° (s = 3.87764). So "coarse angle lattice
+→ MILP → contact-graph Newton polish (A03)" is a working ab-initio pipeline. **It is not a certifier:** the
+LP relaxation of the big-M disjunctions is void, so solver lower bounds sit at √n; the viable rigorous
+route is the angle-box branch-and-bound whose box killer is Theorem 1 restricted to the box's orientations
+(Stromquist's 0°/45° theorem is its two-point case) — see `docs/ideas.md` I-U4/I-L7.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
 2. I-L6 "case-LP": LP-based branch and bound over the packing structure (case splits on wall regions à la
    Stromquist, each branch an LP with modified right-hand sides). This is the only identified route past
    the pure-LP ceiling ≈ 3.83.
-3. Formalise the bridge lemmas in Lean/Mathlib (needs ~10 GB disk).
+3. Angle-box B&B with the orientation-restricted measure LP as box killer (first experiment: A07's LP with θ
+   restricted to [θ*−δ, θ*+δ] ∪ {0} for δ = 10°, 5°, 2°, to see where τ*_B(3.877) crosses 11).
+4. Formalise the bridge lemmas in Lean/Mathlib (needs ~10 GB disk).

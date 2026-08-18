@@ -277,7 +277,7 @@ class Model:
 # --------------------------------------------------------------------------------------------
 # CP-SAT alternative (scaled integers)
 # --------------------------------------------------------------------------------------------
-def solve_cpsat(m: Model, time_limit, threads, scale=100000, log=True):
+def solve_cpsat(m: Model, time_limit, threads, scale=100000, log=True, seed=0):
     from ortools.sat.python import cp_model
     S = scale
     n, K, A = m.n, m.K, m.A
@@ -329,6 +329,7 @@ def solve_cpsat(m: Model, time_limit, threads, scale=100000, log=True):
     solver.parameters.max_time_in_seconds = float(time_limit)
     solver.parameters.num_workers = int(threads)
     solver.parameters.log_search_progress = bool(log)
+    solver.parameters.random_seed = int(seed)
     t0 = time.time()
     st = solver.Solve(md)
     dt = time.time() - t0
@@ -450,6 +451,7 @@ def main():
     ap.add_argument('--counts', type=str, default=None, help='fix the number of squares per angle, e.g. 6,5')
     ap.add_argument('--warm', type=str, default=None, help='JSON packing (this format or certs trump) as MIP start')
     ap.add_argument('--solver', choices=['highs', 'cpsat'], default='highs')
+    ap.add_argument('--seed', type=int, default=0)
     ap.add_argument('--out', type=str, default=None)
     ap.add_argument('--png', type=str, default=None)
     ap.add_argument('--log', type=str, default=None)
@@ -466,7 +468,7 @@ def main():
     print(f'n={args.n} angles={angles} axes={m.A} cols={m.ncol} rows={len(m.rows)} solver={args.solver}', flush=True)
     t0 = time.time()
     if args.solver == 'cpsat':
-        res = solve_cpsat(m, args.time, args.threads, log=not args.quiet)
+        res = solve_cpsat(m, args.time, args.threads, log=not args.quiet, seed=args.seed)
         res['proven_optimal'] = res['status'] == 'OPTIMAL'
         res['gap'] = (res['s'] - res['bound']) / res['s'] if res['s'] else None
     else:
