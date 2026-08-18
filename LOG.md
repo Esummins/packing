@@ -219,3 +219,5 @@
 - Assessment (notes.md sec. 4): interval angle-box B&B with a MILP oracle is hopeless (per-box oracle already fails on
   a point box); the viable box killer is Theorem 1 restricted to orientations in the box (Stromquist's 0/45 result is
   the two-point case) -> recommended follow-up: A07 LP with theta restricted to [theta*-delta, theta*+delta] u {0}.
+
+## 2026-08-18 — advisor — dispatched A10 (angle-box LP sizing) and A11 (ab-initio sweep over open n ≤ 100)
