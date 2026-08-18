@@ -3,7 +3,7 @@
 **Problem.** Let s(n) be the side of the smallest square that contains n non-overlapping unit
 squares (rotations allowed). Determine s(11).
 
-**Status at project start (2026-08-16), to be verified by literature sweep — see `docs/known_results.md`.**
+**Status at project start (2026-08-16), verified by A01 — see `docs/known_results.md`.**
 
 | bound | value | source |
 |---|---|---|
@@ -11,6 +11,9 @@ squares (rotations allowed). Determine s(11).
 | lower (proof) | 2 + 2·sqrt(4/5) = 3.788854… | Stromquist 2003, EJC 10 R8 |
 
 Gap ≈ 0.088.
+
+**Lab result (2026-08-18): s(11) ≥ 3.82** — measure/LP certificates in `certs/`, two independent exact verifiers,
+Lean 4 theorems in `lean/PackingCert`. See `docs/results.md`. Remaining gap 3.82 ≤ s(11) ≤ 3.877084.
 
 **Goals** (either closes the project):
 1. Raise the lower bound and/or lower the upper bound until they meet; or

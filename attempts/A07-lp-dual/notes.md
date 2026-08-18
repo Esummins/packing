@@ -1,9 +1,10 @@
 # A07-lp-dual — LP / measure ("fractional unavoidable set") lower bound for s(11)
 
 Owner: LP agent (postdoc, optimisation / LP duality / rigorous numerics). 2026-08-16 … 2026-08-18.
-Status: **done-success** — `certs/measure_certificate_3.80.json` PASSES the independent exact verifier
-(A08, `certs/verify_measure.py`) ⇒ **s(11) ≥ 3.80** (previous record 2+2√(4/5) = 3.788854, Stromquist 2003).
-The s = 3.82 certificate is in the last fix/verify round (see §7 for the final word).
+Status: **done-success** — `certs/measure_certificate_3.80.json`, `_3.81.json`, `_3.82.json` all PASS the
+independent exact verifier (A08, `certs/verify_measure.py`) and A07's float-interval B&B
+⇒ **s(11) ≥ 3.82** (previous record 2+2√(4/5) = 3.788854, Stromquist 2003). Ceiling of the pure
+measure/LP method: τ*(s) crosses 11 at s ≈ 3.83.
 
 Files: `lp_measure.py` (v1, grid atoms), `lp_measure2.py` (v2, free atoms — the real thing),
 `analyze_packing.py`, `analyze2.py`, `pinwheel_check.py`, `plot_tau.py`, `make_cert.py`, `bb_verify.py`
@@ -70,7 +71,8 @@ the semi-infinite LP):
 | 3.6500 | 9.364 | – | n=10: 9.36 < 10 |
 | 3.7071 = 3+1/√2 = s(10) | **10.000** (stable from it. 10, `logs/v2_s3.7071.log`) | – | LP tight at s(10): 10-packing exists ⇒ ν* ≥ 10; LP finds blocking mass exactly 10 |
 | 3.8000 | 10.423 | **10.4865** (137 orbits, 1069 atoms) | **certified** ×1.03 → 10.8016 < 11 |
-| 3.8200 | 10.621 | **10.7159** (237 orbits, 1793 atoms) | ×1.025 → 10.985; fix/verify round in progress (§7) |
+| 3.8100 | – | **10.5622** (124 orbits, 980 atoms) | **certified** ×1.04 → 10.9852 < 11 |
+| 3.8200 | 10.621 | **10.7167** (232 orbits, 1769 atoms, after 2 witness rounds) | **certified** ×1.025 → 10.98547 < 11 |
 | 3.8300 | 11.000 (not conv., minmass 1.0) | – | at/above threshold |
 | 3.8400 | 11.020 | – | > 11 |
 | 3.8500 | 11.061 | – | > 11 |
@@ -156,4 +158,40 @@ A08 verifier (`certs/verify_measure.py`, independent code, exact integers) is th
   re-solve from the checkpoint (`results/v2_s3.82_fix1*`) → new certificate → re-verify. See §7.
 
 ## 7. Final status / log
-(see bottom entries)
+
+**s = 3.81** (`certs/measure_certificate_3.81.json`, 980 atoms (124 orbits), s = 381/100, weights ×1.04,
+total 27463/2500 = 10.9852 < 11; from `results/v2_s3.81_rowonly.json`, τ = 10.5622, row-only run started
+from the union of the 3.80 and 3.82 atom sets, 19 min):
+- A08 exact: `PASS: every closed unit square in [0,381/100]^2 has mass >= 1 ; total 27463/2500 < 11 ==>
+  s(11) >= 381/100 (~3.8100000000)`, 5,116,306 boxes, max depth 42, 6,606,903 exact atom checks, 82 s (3 jobs).
+- A07 float-interval B&B: PASS, 9,961,682 boxes, 0 fails (`logs/bb_3.81.log`).
+- ⇒ **s(11) ≥ 3.81.**
+
+**s = 3.82, rigorous separation loop**: round 1 (`results/v2_s3.82_fix1.json`, τ = 10.71634, 96 A08
+witnesses + 26 neighbourhood rows each, 8 row-only iterations, fine search converged) → certificate v2
+(1709 atoms, ×1.025, total 10.985127) → A08: FAIL, 16 holes (unscaled mass 0.9727 at θ ≈ 39–40°, centres
+(1.437,1.255)-type and (1.65,1.44)-type — interior pockets missed by the heuristic oracle), 6.1M boxes,
+122 s; A07 verifier: same two families (445 witness boxes). Round 2 (`results/v2_s3.82_fix2.json`, τ = 10.71666,
+96 new A08 witnesses + neighbourhoods, 4 row-only iterations, fine search converged) → certificate v3
+(**final**, 1769 atoms (232 orbits), s = 191/50, weights ×1.025, total 5492737/500000 = 10.985474 < 11):
+- A08 exact: `PASS: every closed unit square in [0,191/50]^2 has mass >= 1 ; total 5492737/500000 < 11 ==>
+  s(11) >= 191/50 (~3.8200000000)`, 7,639,758 boxes (covered 3,819,911), 12,672,169 exact atom checks,
+  max depth 43, 107 s (4 jobs, `--depth 56`).
+- A07 float-interval B&B: PASS, 14,777,750 boxes, 0 fails, 355 s (`logs/bb_3.82_v3.log`).
+- ⇒ **s(11) ≥ 3.82.**  (3.83 is not reachable: τ(3.83) = 11.000 already for the joint LP.)
+Lesson: LP vertex solutions have many exactly-tight
+placements and the heuristic oracle (θ-step 0.125°, c-step 0.005 + pattern search) misses pockets a few
+1e-3 wide with deficit 3–4 %; the exact verifier is the right separation oracle for the last rounds; a
+weight scale of ≥ 1.03 (i.e. τ ≤ 10.68) closes in one round, 1.025 needs 2–3 rounds.
+
+### How to reproduce
+```
+cd attempts/A07-lp-dual
+python lp_measure2.py --s 3.80 --col_stop_cov 1.003 --fine --time_limit 3000 --out results/v2_s3.80.json   # joint
+python lp_measure2.py --s 3.80 --warm results/v2_s3.80.json --col_stop_iter 0 --fine --n_theta 181 --cstep 0.01        --out results/v2_s3.80_rowonly.json                                                              # row-only
+python make_cert.py results/v2_s3.80_rowonly.json 19/5 1.03 ../../certs/measure_certificate_3.80.json
+python ../../certs/verify_measure.py ../../certs/measure_certificate_3.80.json --jobs 4               # A08 exact
+python bb_verify.py ../../certs/measure_certificate_3.80.json --mw 1e-5 --nproc 4 --fails_out f.json  # A07 float
+# holes -> rows:  python lp_measure2.py --s S --state results/X_state.json --extra_rows rows.json --col_stop_iter 0 --fine --neigh_rows 100
+python plot_tau.py; python analyze2.py results/v2_s3.80_rowonly.json; python pinwheel_check.py results/v2_s3.84.json
+```

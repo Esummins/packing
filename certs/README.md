@@ -83,3 +83,8 @@ Notes: the accept decision is exact integer arithmetic (lengths scaled by `den(s
 centre region `[w_min/2, s - w_min/2]` (rounded outward) before testing.  Certificates must be
 *robust*: at every placement, atoms at positive distance from the boundary of Q must already reach
 mass 1 (see `attempts/A08-measure-verify/notes.md` for why and for the cost model).
+
+Files (A07, all PASS `verify_measure.py`): `measure_certificate_3.80.json` (s = 19/5, 1069 atoms, total
+10.801639), `measure_certificate_3.81.json` (s = 381/100, 980 atoms, total 10.9852), `measure_certificate_3.82.json`
+(s = 191/50, 1769 atoms, total 10.985474)  ==>  s(11) >= 3.82.  Producer: `attempts/A07-lp-dual/` (LP with
+row+column generation; see its notes.md for the construction recipe and the verifier witness -> LP row loop).

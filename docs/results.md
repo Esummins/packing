@@ -7,13 +7,13 @@ Notation: s(n) = side of the smallest square containing n unit squares with disj
 
 | | before this project | now | status |
 |---|---|---|---|
-| lower bound | 2 + 2√(4/5) = 3.788854… (Stromquist 2003) | **s(11) ≥ 3.80** (certificate `certs/measure_certificate_3.80.json`) | computer-verified by two independent exact verifiers (A07 float-interval, A08 exact-integer) + Lean checker (A06, in progress: see `lean/README.md`) |
+| lower bound | 2 + 2√(4/5) = 3.788854… (Stromquist 2003) | **s(11) ≥ 3.82** (certificates `certs/measure_certificate_3.80/3.81/3.82.json`) | each PASSES two independent exact verifiers (A07 float-interval B&B, A08 exact-integer B&B) and the advisor's re-runs; Lean 4 theorems `s11_ge_3_80`, `s11_ge_3_81`, `s11_ge_3_82` (`checkMeasureI cert = true` by `native_decide`, only the native_decide axiom) — see `lean/README.md` |
 | upper bound | 3.877083590022814… (Trump 1979) | unchanged; now backed by exact rational certificates and an axiom-free Lean kernel proof of the checker (`lean/PackingCert`) | done |
 | method ceiling | — | the pure measure/LP method (Theorem 1) cannot exceed ≈ 3.83: τ*(3.83) = 11.000, τ*(3.84) = 11.02 (numerical LP) | see A07 |
 
-The gap 3.80 ≤ s(11) ≤ 3.877084 remains open; the lab did **not** close it. What changed is the lower
-bound (+0.011 over a 23-year-old bound, with a possibly larger certified value at 3.82 pending) and the
-existence of a machine-checkable, extensible method with a known ceiling and a clear next step (I-L6).
+The gap 3.82 ≤ s(11) ≤ 3.877084 remains open; the lab did **not** close it. What changed is the lower
+bound (+0.031 over a 23-year-old bound; the gap shrank from 0.088 to 0.057) and the existence of a
+machine-checkable, extensible method with a known ceiling (≈ 3.83) and a clear next step (I-L6).
 
 ## Theorem 1 (measure / fractional-cover bound)
 
@@ -54,9 +54,15 @@ PASS on `certs/measure_certificate_3.80.json`: 5,836,650 boxes, max depth 45, ~5
 The advisor's own float spot-check (200k random + adversarial placements) gives min mass 1.0300 (the
 certificate carries a 3% robustness margin).
 
-Lean 4: `lean/PackingCert` contains a decidable checker with the same semantics (`checkMeasure`,
-Rat) which already proves A05's 10-point certificate at 3.741594 by `native_decide`; the run on the
-3.80 certificate is in progress (see `lean/README.md` for the current theorem list). Not formalised:
+Certificates: 3.80 (1069 atoms, mass 10.801639; 5.84M boxes), 3.81 (980 atoms, 10.9852; 5.12M boxes),
+3.82 (1769 atoms, 10.985474; 7.64M boxes). Each was built by the LP + rigorous-separation loop
+(verifier witnesses fed back as LP rows) and carries a 2.5–4% weight margin.
+
+Lean 4: `lean/PackingCert` contains decidable checkers with the same semantics (`checkMeasure` over Rat,
+`checkMeasureI` over scaled Int); theorems `PackingCert.MeasureI.s11_ge_3_80`, `s11_ge_3_81`,
+`s11_ge_3_82` (`lake build PackingCertSlow`, `PackingCertSlow381`, `PackingCertSlow382`; 11–15 min each,
+`#print axioms` = the native_decide axiom only). Kernel `decide` works for the Int checker on small
+certificates (Göbel, no axioms) but not at 5–8M boxes. Not formalised:
 the bridge lemma "checker = true ⇒ hypothesis (b)" and Theorem 1 itself (Mathlib was not installable on
 this machine for disk reasons; estimated 3–5 days of work).
 
@@ -82,7 +88,7 @@ this machine for disk reasons; estimated 3–5 days of work).
 
 ## Next steps (ordered)
 
-1. Certify s = 3.82 (τ* = 10.716 there) — in progress.
+1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
 2. I-L6 "case-LP": LP-based branch and bound over the packing structure (case splits on wall regions à la
    Stromquist, each branch an LP with modified right-hand sides). This is the only identified route past
    the pure-LP ceiling ≈ 3.83.

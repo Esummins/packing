@@ -181,3 +181,26 @@
 - certs/measure_certificate_3.82.json is REJECTED by the Lean checker (false after 103 534 boxes, 12 s), consistent
   with A08 (17 holes, min mass 0.988). No theorem for it; data kept (`MeasureIntData382.lean`, bench mode int_3_82).
 - Docs: lean/README.md (theorem table, axioms per theorem, build commands), attempts/A06-lean-setup/notes.md §8.
+
+## 2026-08-18 — A07-lp-dual — s(11) >= 3.81 certified; 3.82 in the rigorous separation loop
+- certs/measure_certificate_3.81.json (980 atoms, s = 381/100, weights x1.04, total 27463/2500 = 10.9852 < 11)
+  PASSES A08's exact verifier: "PASS: every closed unit square in [0,381/100]^2 has mass >= 1 ; total
+  27463/2500 < 11 ==> s(11) >= 381/100", 5,116,306 boxes, max depth 42, 82 s (3 jobs).  ==> s(11) >= 3.81.
+- 3.82: row-converged tau = 10.7163 (x1.025 = 10.985); A08 + A07 verifiers found oracle-missed pockets
+  (unscaled mass 0.963-0.975 at theta ~ 39-45 deg); witnesses fed back as LP rows (rigorous separation
+  loop, results/v2_s3.82_fix*.json); second round running.
+- 13:10 FINAL: certs/measure_certificate_3.82.json (1769 atoms, s = 191/50, weights x1.025, total
+  5492737/500000 = 10.985474 < 11; two rounds of "verifier witnesses -> LP rows -> re-solve") PASSES A08 exact
+  verifier ("PASS ... ==> s(11) >= 191/50", 7,639,758 boxes, depth 43, 107 s) and A07 float B&B (14.8M boxes).
+  ==> s(11) >= 3.82.  Ceiling of the pure LP/measure method: tau*(3.83) = 11.000, so 3.82 is (essentially) the
+  end of the road for I-L2; blocking fractional packing at 3.83-3.85 does not exploit small cliques (max
+  pinwheel weight sum 0.31, heaviest overlapping pair 0.93) => next: case-LP (I-L6), not clique cuts.
+  A07 done-success; full write-up attempts/A07-lp-dual/notes.md, plot plots/tau_vs_s.png.
+
+## 2026-08-18 — advisor — s(11) ≥ 3.82 certified; Lean theorems
+- A07 shipped certs/measure_certificate_3.81.json and _3.82.json (rigorous separation loop: verifier witnesses
+  → LP rows, two rounds for 3.82). Both PASS A08's exact verifier and the advisor's re-runs
+  (3.81: 5.12M boxes 47 s; 3.82: 7.64M boxes). Pure-LP ceiling: τ*(3.83) = 11.000. Blocking fractional
+  packing is Trump-like and does NOT exploit pinwheels ⇒ next step is I-L6 case-LP branching, not clique cuts.
+- Lean: advisor added targets PackingCertSlow381/382; `s11_ge_3_81` built (12 min, native_decide axiom only);
+  `s11_ge_3_82` building. docs/results.md and README updated.
