@@ -131,3 +131,10 @@ system, scaled by `s_c/s*` and rounded to rationals; A05/A08: optimised 10-point
 Template Mathlib project for the bridge lemmas.  **Not built**: `lake exe cache get` needs
 ≈ 5 GB + a second 3 GB toolchain and ran this machine's disk out of space (see notes.md).
 `BridgeSketch.lean` there is an unbuilt sketch of the intended statements.
+
+### Added by the advisor (2026-08-18)
+| theorem | target | build | axioms |
+|---|---|---|---|
+| `PackingCert.MeasureI.s11_ge_3_81 : checkMeasureI Data.cert_3_81 = true` (certs/measure_certificate_3.81.json, 980 atoms, mass 10.9852) | `lake build PackingCertSlow381` | 12 min | native_decide only |
+| `PackingCert.MeasureI.s11_ge_3_82 : checkMeasureI Data.cert_3_82 = true` (certs/measure_certificate_3.82.json, 1769 atoms, mass 10.985474) | `lake build PackingCertSlow382` | 26.5 min | native_decide only |
+Data files generated with `python lean/gen_measure_lean.py certs/measure_certificate_3.8X.json --fuel 48 --int --name cert_3_8X -o lean/PackingCert/PackingCert/MeasureIntData38X.lean`.

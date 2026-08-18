@@ -204,3 +204,4 @@
   packing is Trump-like and does NOT exploit pinwheels ⇒ next step is I-L6 case-LP branching, not clique cuts.
 - Lean: advisor added targets PackingCertSlow381/382; `s11_ge_3_81` built (12 min, native_decide axiom only);
   `s11_ge_3_82` building. docs/results.md and README updated.
+- Lean `s11_ge_3_82` built (26.5 min, native_decide axiom only). Final certified chain: s(11) ≥ 3.82.
