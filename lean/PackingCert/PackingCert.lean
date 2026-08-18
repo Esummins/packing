@@ -10,3 +10,7 @@ import PackingCert.Measure
 import PackingCert.MeasureExample
 import PackingCert.MeasureData
 import PackingCert.MeasureMain
+import PackingCert.MeasureInt
+import PackingCert.MeasureIntDataA05
+import PackingCert.MeasureIntDataGoebel
+import PackingCert.MeasureIntMain

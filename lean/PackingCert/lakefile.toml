@@ -5,6 +5,11 @@ defaultTargets = ["PackingCert"]
 [[lean_lib]]
 name = "PackingCert"
 
+# Slow target (minutes): `lake build PackingCertSlow`
+[[lean_lib]]
+name = "PackingCertSlow"
+roots = ["PackingCertSlow"]
+
 [[lean_exe]]
 name = "measure_bench"
 root = "MeasureBench"
