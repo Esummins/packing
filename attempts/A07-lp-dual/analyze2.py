@@ -1,6 +1,7 @@
 """Structure of a v2 LP solution: atoms (mu), fractional packing (dual), coverage map, pinwheel check.
 usage: python analyze2.py results/v2_s3.80_rowonly.json [plots/prefix]"""
-import json, math, sys, itertools
+import json, math, sys, itertools, functools
+print = functools.partial(print, flush=True)
 import numpy as np
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from lp_measure2 import d4_point_images, d4_placement_images, EPS_GEO
@@ -50,8 +51,11 @@ def main(path, prefix):
         m = (ang >= lo) & (ang < lo + 5)
         print(f"   theta in [{lo},{lo+5}): weight {yy[m].sum():.4f}")
     # pinwheels: triples of pairwise-overlapping squares (positive area) with empty triple intersection
-    polys = [square_poly(a, b, t) for (a, b, t, w) in pl if w > 1e-6]
-    wts = [w for (a, b, t, w) in pl if w > 1e-6]
+    WMIN = 0.01   # pinwheel analysis restricted to images of weight > WMIN (cubic cost)
+    polys = [square_poly(a, b, t) for (a, b, t, w) in pl if w > WMIN]
+    wts = [w for (a, b, t, w) in pl if w > WMIN]
+    plw = [q for q in pl if q[3] > WMIN]
+    print(f"pinwheel analysis on {len(polys)} images with weight > {WMIN} (weight {sum(wts):.4f} of {sum(q[3] for q in pl):.4f})")
     n = len(polys)
     inter = {}
     for i in range(n):
@@ -71,7 +75,7 @@ def main(path, prefix):
     print(f"pinwheels (3-cliques of pairwise-overlapping squares with empty common intersection): {pin}; "
           f"pairs overlapping: {len(inter)}")
     for (i, j, k) in examples:
-        print("   e.g.", [(round(pl[q][0], 3), round(pl[q][1], 3), round(math.degrees(pl[q][2]), 1), round(pl[q][3], 4)) for q in (i, j, k)])
+        print("   e.g.", [(round(plw[q][0], 3), round(plw[q][1], 3), round(math.degrees(plw[q][2]), 1), round(plw[q][3], 4)) for q in (i, j, k)])
     # plots
     fig, ax = plt.subplots(1, 3, figsize=(20, 6.5))
     ax[0].scatter(P[:, 0], P[:, 1], s=2000 * W, c="k", alpha=0.7)

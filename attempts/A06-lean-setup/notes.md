@@ -177,3 +177,35 @@ induction on `go`).
 
 Files: `lean/PackingCert/PackingCert/Measure.lean`, `MeasureExample.lean`, `MeasureData.lean`
 (generated), `MeasureMain.lean`, `lean/PackingCert/MeasureBench.lean` (exe), `lean/gen_measure_lean.py`.
+
+## 8. Integer measure checker `checkMeasureI` and the s(11) ≥ 3.80 theorem (2026-08-18)
+
+`PackingCert/MeasureInt.lean`: the same branch and bound as §7 but with A08's integer scaling
+(K = depth+1, t = T/2^K, cos = (4^K−T²)/(4^K+T²), sin = 2T·2^K/(4^K+T²); lengths × D = den(s)·2^(depth+2);
+atoms (PXn,PYn)/PD; weights WI/WD, need Σ WI ≥ WD; outward-rounded clipping with wmin = min(w(t0),w(t1));
+split rule wt = (T1−T0)·2·D vs wx = (X1−X0)·2^K, floor midpoints; children inherit sure mass, drop
+provably-outside atoms, atoms sorted heavy-first with early exit). Only Int `+ * ≤ <` → no gcd, GMP-fast,
+kernel-reducible. Header comment states the certified claim (identical to certs/verify_measure.py) and
+the bridge lemma in words. Generator: `lean/gen_measure_lean.py --int`.
+
+Agreement Int vs Rat vs A08 Python: Göbel 795 = 795 boxes; A05 10-pt 570 941 (Int) / 570 943 (Rat) /
+604 631 (A08, different root partition); 3.80 cert 5 837 883 (Int) / 5 836 650 (A08). All PASS/FAIL
+verdicts agree, including the REJECTION of certs/measure_certificate_3.82.json (Int checker: ok=false
+after 103 534 boxes, 12 s; A08: 17 genuine holes, min mass 0.988174 at θ≈44.5°, centre (2.33,2.61)).
+
+Timings (compiled exe `lake exe measure_bench`): A05 set 570 941 boxes **8.9 s** (Rat: 93 s);
+3.80 cert 5 837 883 boxes **536 s = 8 min 56 s** (A08 Python: 115 s on 6 procs / ~5 min single).
+Kernel `decide` on the Göbel Int cert (795 boxes, depth 18): 30 s, no axioms (`scratch/IntKernel.lean`)
+— feasible for toys only; the 3.80 theorem uses `native_decide`.
+
+Theorems:
+- `PackingCert.MeasureI.a05_10pt_int_ok : checkMeasureI Data.a05_10pt_int = true` (default build, 13 s)
+- `PackingCert.MeasureI.goebel26_int_ok` (default build), `goebel26_int_kernel` (scratch, `decide`)
+- **`PackingCert.MeasureI.s11_ge_3_80 : checkMeasureI Data.cert_3_80 = true`** in the separate lib
+  target `PackingCertSlow` (`lake build PackingCertSlow`): **654 s (10 min 57 s wall)** with
+  `precompileModules = true` on the PackingCert lib (native_decide then calls the compiled `checkMeasureI`
+  from the module dynlib; works on Windows); **1509 s (25 min 10 s)** without precompilation (pure IR
+  interpretation; build_slow_log_interp.txt). Compiled exe: 536 s. Default `lake build` clean: 76 s.
+Axioms: `#print axioms s11_ge_3_80` → `[s11_ge_3_80._native.native_decide.ax_1_1]` only (the native_decide
+axiom, i.e. trust in the Lean compiler + runtime); no `propext/Classical.choice/Quot.sound` (unlike the Rat
+theorems). Kernel `decide` on 5.8 M boxes is out of reach (30 s for 795 boxes ⇒ ~2.5 days extrapolated).

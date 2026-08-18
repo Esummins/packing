@@ -76,6 +76,18 @@ class Verifier:
         inside = (ux_hi <= 0.5) & (ux_lo >= -0.5) & (uy_hi <= 0.5) & (uy_lo >= -0.5)
         mass = (inside * self.w_lo[None, :]).sum(1) - 1e-12
         ok = empty | (mass >= 1.0)
+        # early hole detection: point mass at the box centre (if admissible) -- a real counterexample
+        # (float evaluation with a small tolerance; only used to stop early and report a witness)
+        hole = np.zeros(len(B), dtype=bool)
+        nk = np.nonzero(~ok)[0]
+        if len(nk):
+            tm = 0.5 * (t1[nk] + t2[nk]); xm = 0.5 * (x1[nk] + x2[nk]); ym = 0.5 * (y1[nk] + y2[nk])
+            cm = (1 - tm * tm) / (1 + tm * tm); sm = 2 * tm / (1 + tm * tm); wm = cm + sm
+            adm = (xm >= wm / 2) & (xm <= s - wm / 2) & (ym >= wm / 2) & (ym <= s - wm / 2)
+            dx = P[None, :, 0] - xm[:, None]; dy = P[None, :, 1] - ym[:, None]
+            ux = dx * cm[:, None] + dy * sm[:, None]; uy = -dx * sm[:, None] + dy * cm[:, None]
+            pm = (((np.abs(ux) <= 0.5 + 1e-9) & (np.abs(uy) <= 0.5 + 1e-9)) * self.w[None, :]).sum(1)
+            hole[nk] = adm & (pm < 1 - 1e-7)
         out = []
         wt = 2 * (t2 - t1); wx = x2 - x1; wy = y2 - y1
         for k in range(len(B)):
@@ -84,7 +96,7 @@ class Verifier:
                     sub = [] if empty[k] else self.cand[np.nonzero(inside[k])[0]].tolist()
                     self.leaves.append((B[k].tolist(), "empty" if empty[k] else "mass", sub))
                 continue
-            if max(wt[k], wx[k], wy[k]) < self.min_width:
+            if hole[k] or max(wt[k], wx[k], wy[k]) < self.min_width:
                 self.fails.append((B[k].tolist(), float(mass[k])))
                 continue
             b = B[k].tolist()

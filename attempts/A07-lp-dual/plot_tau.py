@@ -13,6 +13,10 @@ for f in sorted(glob.glob("results/v2_s*.json")):
     rows.append(dict(file=os.path.basename(f), s=r["s"], tau=r["tau"], conv=r["converged"], rows=r["n_rows"],
                      orbits=r["n_orbits"], minmass=last.get("minmass"), maxcov=last.get("maxcov"), it=len(h),
                      mode="rowonly" if "rowonly" in f else "joint"))
+# the s = 3+1/sqrt2 run (logs/v2_s3.7071.log) was killed before writing its JSON: tau = 10.000000 stable
+# from iteration 10 to 38 (5542 rows, 2530 orbits, minmass 1.0, maxcov 1.009)
+rows.append(dict(file="logs/v2_s3.7071.log", s=3.7071, tau=10.0, conv=False, rows=5542, orbits=2530,
+                 minmass=1.0, maxcov=1.0093, it=39, mode="joint"))
 rows.sort(key=lambda r: (r["s"], r["mode"]))
 print("| s | mode | tau (LP) | converged | last minmass | last maxcov | rows | orbits | iters | file |")
 print("|---|---|---|---|---|---|---|---|---|---|")

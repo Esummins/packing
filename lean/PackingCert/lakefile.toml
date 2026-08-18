@@ -4,6 +4,7 @@ defaultTargets = ["PackingCert"]
 
 [[lean_lib]]
 name = "PackingCert"
+precompileModules = true   # native_decide then calls compiled code (faster on the big measure theorem)
 
 # Slow target (minutes): `lake build PackingCertSlow`
 [[lean_lib]]

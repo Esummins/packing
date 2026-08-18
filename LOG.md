@@ -168,3 +168,16 @@
   51 s), reproduced by the advisor; advisor's own float spot-check: 200k random + adversarial placements,
   min mass 1.0300. Bridge argument (scale + shrink) is two lines. This beats Stromquist's 3.788854.
 - Next: A07 pushing s to 3.82/3.84; A06 asked to Lean-check the certificate.
+
+## 2026-08-18 — A06 (lean agent) — Lean theorem for the new lower bound s(11) ≥ 3.80
+- New all-integer measure checker `lean/PackingCert/PackingCert/MeasureInt.lean` (`checkMeasureI`), same integer
+  scaling and box rules as certs/verify_measure.py (A08); header states the certified claim and the bridge lemma in
+  words. ~10× faster than the Rat prototype (no gcds); kernel `decide` works on toys (Göbel, 795 boxes, 30 s, no axioms).
+- `PackingCert.MeasureI.s11_ge_3_80 : checkMeasureI Data.cert_3_80 = true` (certs/measure_certificate_3.80.json,
+  1069 atoms, mass 10.801639 < 11, s = 19/5) by native_decide in the separate target `lake build PackingCertSlow`:
+  654 s wall (precompileModules on; 1509 s interpreted); compiled exe 5 837 883 boxes in 536 s (A08 Python:
+  5 836 650 boxes). Axioms: native_decide only. Default `lake build` clean ≈ 76 s (UB theorems + A05 measure
+  theorems `a05_10pt_int_ok` 13 s / `s11_ge_37416` 71 s).
+- certs/measure_certificate_3.82.json is REJECTED by the Lean checker (false after 103 534 boxes, 12 s), consistent
+  with A08 (17 holes, min mass 0.988). No theorem for it; data kept (`MeasureIntData382.lean`, bench mode int_3_82).
+- Docs: lean/README.md (theorem table, axioms per theorem, build commands), attempts/A06-lean-setup/notes.md §8.
