@@ -190,12 +190,35 @@ route is the angle-box branch-and-bound whose box killer is Theorem 1 restricted
   continuum ϑ′ kernel certificate at the root first (target: λ < 11 at 3.84); fall back to the 14-node ϑ′ tree only if the
   root kernel stalls above 11.**
 
+## The continuum ϑ′-kernel at the root, float phase (A17, 2026-08-19)
+
+- **Goal.** The I-L9 kernel certificate at the root: φ(x) = (1, 1[p∈Q(x)]/m(x)) over an LP atom set, M ⪰ 0 D4-invariant,
+  K = φᵀMφ with K(x,x) ≤ λ−1 on P_s and K(x,y) ≤ −1 on disjoint pairs ⇒ s(11) ≥ s if λ < 11; target λ < 11 at 3.84,
+  float cutting-plane phase (exact phase = A18).  Calibration at 3.80 PASSES (the LP certificate is reproduced as a kernel:
+  pair oracle −1.000000000 exactly, min coverage 1.0297 vs the advisor's 1.0300).
+- **Result: λ < 11 NOT reached in the 1181-atom indicator class** (A07's 3.84 LP atoms). The cutting-plane loop (13
+  iterations, 8044 rows, Burer–Monteiro block SDP validated vs Clarabel) stalls at λ_sdp ≈ 11.05–11.13: the diagonal is
+  pinned by a continuum of coverage-1 cells (corr(K(x,x), τ/m(x)) = 0.99) and the pair oracle finds a non-converging
+  stream of interior mid-tilt (29–68°) barely-disjoint violations — the ¼-structure region. Honest class estimate
+  ≈ 11.0–11.2, i.e. ≈ +0.7 above the discrete ϑ′ (10.38): **A16's risk R2 (feature class too short) binds before R1
+  (grid→continuum)**. The kernel does beat the pure LP form on the same atoms by ≈ 1.25 (12.38 → ~11.1).
+- **Two structural discoveries.** (1) Bridge bookkeeping: condition (ii) is needed only for pairs of disjoint CLOSED
+  squares — touching pairs are exempt, and must be (a touching pair can share a boundary atom, forcing K > −1).
+  (2) The subclass M = LP-form + C with C ≤ 0 off-diagonal satisfies (ii) for EVERY disjoint pair by pure algebra
+  (strictly disjoint closed squares share no atom), eliminating the 6-D pair verification entirely: the rigorous
+  certificate reduces to rational LDLᵀ + one verify_measure-style 3-D cell B&B with a quadratic form. On the A15 c384
+  graph, 80 % of edges share an atom and deleting the 220k non-sharing edges leaves α = 10 unchanged — the restriction
+  is not obviously lossy.  Recommended A18: restricted class + atoms placed inside the mid-tilt sliver-overlap regions
+  (the non-sharing edges say where) + ~40 smooth D4 features interpolating the discrete duals' dominant eigenvectors.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
 2. I-L6 "case-LP": piloted (A13) and pushed (A14) at 3.84 — the tree does not close with LP nodes; A16 shows ϑ′ node
    certificates kill the stalling nodes with margin 0.3–0.6 on the same placement graphs ⇒ the viable route is the
-   I-L9 kernel certificate (root first, then the 14-node tree if needed).
+   I-L9 kernel certificate. A17 (float phase) shows the plain LP-atom indicator class stalls at λ ≈ 11.0–11.2 at 3.84;
+   next: the C ≤ 0 restricted class (no pair verification) with kernel-purposed atoms + smooth features (A17 §6.3),
+   and only then the 14-node tree if the enriched root still misses 11.
 3. Angle-box B&B with the orientation-restricted measure LP as box killer (first experiment: A07's LP with θ
    restricted to [θ*−δ, θ*+δ] ∪ {0} for δ = 10°, 5°, 2°, to see where τ*_B(3.877) crosses 11).
 4. Formalise the bridge lemmas in Lean/Mathlib (needs ~10 GB disk).

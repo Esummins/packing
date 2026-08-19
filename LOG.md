@@ -344,3 +344,40 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   K(x,y) ≤ −1 on disjoint non-exempt pairs (verify_case.py exemption semantics), LP-atom indicator features + cross terms
   (node duals have 30–45 eigenvalues > 1 %), verification by cell B&B + pairwise cell table, rational LDLᵀ; ≈ 4–6 weeks to a
   first certified node.  Recommendation: build the I-L9 continuum kernel at the ROOT first (λ < 11 at 3.84), tree as fallback.
+
+## 2026-08-19 — A17-kernel-root — continuum ϑ′-kernel certificate at the root (float phase, done-negative + two structural discoveries)
+- `attempts/A17-kernel-root/`: `features.py` (normalised coverage-indicator features φ(x) = (1, 1[p∈Q(x)]/m(x)) over
+  A07's 1181 LP atoms at 3.84; D4 action on atoms/features; isotypic basis reusing A16 theta_sdp; LP-form kernel;
+  D4-canonical pattern keys), `sdp.py` (kernel SDP min λ s.t. K(x,x) ≤ λ−1, K(x,y) ≤ −1−δ on rows, M ⪰ 0 D4-invariant:
+  per-block Burer–Monteiro X = YᵀY + L-BFGS hinge² feasibility + λ-descent — the sparse-conic SCS form was built and
+  abandoned because the patterns are DENSE (71–277 atoms per square, ~2·10⁵ nnz per row); validated vs cvxpy/Clarabel),
+  `oracle_diag.py` (scans + admissible-boundary sweeps + A07-style rotated-frame prefix-sum coverage scan + pattern-search
+  polish), `oracle_pair.py` (strict SAT-disjointness geometry, tangent-pair sampler by contact-distance bisection,
+  node-set K scans, alternating polish with re-contact), `calibrate.py`, `loop.py` (cutting-plane driver, crash-resumable),
+  `check_feas.py`, `export_cert.py`; results/ (calibration_380.json, k384.json history, kernel_k384.json + _M.npy), notes.md.
+- **Calibration at 3.80 PASS**: the LP certificate IS a kernel in this class; pair oracle max = −1.000000000 exactly,
+  diag oracle min coverage 1.029676 (advisor's independent spot check 1.0300 — ours slightly sharper) ⇒ λ = τ/m_min = 10.49
+  (= τ exactly for the min-mass-1 unscaled measure, as the theory says).
+- **Bridge bookkeeping discovery**: condition (ii) must be stated for pairs of disjoint CLOSED squares (touching EXEMPT):
+  a touching pair can share a boundary atom, forcing K > −1 there (seen live in calibration, K = −0.706 on a touching grid
+  pair); the scale-shrink step of Theorem 1 produces closed-disjoint squares, so the exemption is sound — and necessary for
+  ANY closed-indicator feature class.  No fixed positive gap can be assumed (gaps → 0 as s′ → s).
+- **At 3.84 the 1181-atom indicator class does NOT reach λ < 11 (done-negative on the target)**: 13 cutting-plane
+  iterations, 8044 rows; λ_sdp stalls at 11.05–11.13; the optimised diagonal is LP-shaped (corr(K(x,x), τ/m(x)) = 0.99,
+  binding cells = a continuum of coverage-1.000 cells: corners, walls, interior tilts); the pair oracle finds a
+  NON-CONVERGING stream of violations K ≈ −0.72…−0.86 (need ≤ −1), all interior mid-tilt (29–68°) barely-disjoint pairs —
+  the ¼-structure region again.  Strongest float attack: maxdiag 10.4282 (at the min-coverage cell, m = 0.9687),
+  maxpair −0.7163 ⇒ scaled fully-certified-in-float λ = 15.56 (worthless); honest class estimate ≈ 11.0–11.2 vs discrete
+  ϑ′ 10.38 ⇒ the feature class (A16 risk R2), not the grid→continuum gap (R1), binds first, costing ≈ +0.7.  The kernel
+  beats the LP form on the same atoms by ≈ 1.25 (λ_LP-form = 1 + τ/m_min = 12.38) — cross terms are worth a unit; the
+  basis is too short by ~0.15.
+- **A18-structure discovery (removes the 6-D pair verification!)**: in the subclass M = [[1, −wᵀ],[−w, τ·diag(w) + C]]
+  with C ≤ 0 off-diagonal (diagonal free), K(x,y) = −1 + a(x)ᵀCa(y)/(m m′) ≤ −1 holds for EVERY pattern-disjoint pair by
+  algebra, and strictly disjoint closed squares never share an atom ⇒ (ii) is UNIVERSAL, no pair oracle/verifier at all;
+  the rigorous certificate reduces to rational LDLᵀ (M is a Gram matrix by construction here) + ONE verify_measure-style
+  3-D cell B&B with a quadratic form.  Viability evidence: on the A15 c384 graph 80.15 % of the 1.11M edges share an atom,
+  and dropping the 220,820 non-sharing edges leaves α = 10 unchanged (CP-SAT OPTIMAL).  Recommended A18: restricted class
+  + atoms placed INSIDE the mid-tilt sliver-overlap regions (the non-sharing edges say where) + ~40 smooth D4 features
+  interpolating the discrete duals' dominant eigenvectors (the indicator basis is constant on cells; the discrete Z varies
+  within the tight-cell continuum — that is the missing 0.15).
+- 3.85/3.86 not run (λ < 11 already fails at 3.84 in this class).
