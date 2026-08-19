@@ -1,0 +1,40 @@
+18:14:02 start s=3.84 tag=t384 workers=8 node_budget=400 time_limit=180.0
+18:14:02 launch node 0 (depth 0, D4, budget 11, prio 99.000): root
+18:17:06 node 0 done: tau=11.0465 budget=11 slack=+0.0465 conv=False minmass=0.985 maxcov=1.074 rows=11469 t=182s -> alive
+18:17:06    branch corners (symmetric) zone_w={'corner0': 0.9692, 'corner1': 0.9692, 'corner2': 0.9692, 'corner3': 0.9692, 'side0': 1.0, 'side1': 1.0, 'side2': 1.0, 'side3': 1.0, 'interior': 3.1697} -> 13 children
+18:17:06 launch node 1 (depth 1, D4, budget 11, prio 0.047): NO(all corners) [D4 WLOG]
+18:17:06 launch node 2 (depth 1, C1, budget 10, prio 0.047): YES corner0 B([0.500,0.800]x[0.500,0.800]x[0.00,30.00]deg) [WLOG]
+18:17:06 launch node 3 (depth 1, C1, budget 10, prio 0.047): YES corner0 B([0.500,0.800]x[0.500,0.800]x[30.00,60.00]deg) [WLOG]
+18:17:06 launch node 4 (depth 1, C1, budget 10, prio 0.047): YES corner0 B([0.500,0.800]x[0.500,0.800]x[60.00,90.00]deg) [WLOG]
+18:17:06 launch node 5 (depth 1, C1, budget 10, prio 0.047): YES corner0 B([0.500,0.800]x[0.800,1.100]x[0.00,30.00]deg) [WLOG]
+18:17:06 launch node 6 (depth 1, C1, budget 10, prio 0.047): YES corner0 B([0.500,0.800]x[0.800,1.100]x[30.00,60.00]deg) [WLOG]
+18:17:06 launch node 7 (depth 1, C1, budget 10, prio 0.047): YES corner0 B([0.500,0.800]x[0.800,1.100]x[60.00,90.00]deg) [WLOG]
+18:17:06 launch node 8 (depth 1, C1, budget 10, prio 0.047): YES corner0 B([0.800,1.100]x[0.500,0.800]x[0.00,30.00]deg) [WLOG]
+18:20:10 node 1 done: tau=11.0482 budget=11 slack=+0.0482 conv=False minmass=1.000 maxcov=1.040 rows=7374 t=184s -> alive
+18:20:10    branch side0 zone_w={'side0': 1.0, 'side1': 1.0, 'side2': 1.0, 'side3': 1.0, 'interior': 3.175} -> 19 children
+18:20:10 node 6 done: tau=9.5644 budget=10 slack=-0.4356 conv=False minmass=0.714 maxcov=1.313 rows=7421 t=183s -> dead??
+18:20:10    branch corner1 zone_w={'corner1': 0.9569, 'corner2': 0.8016, 'corner3': 0.8097, 'side0': 0.9913, 'side1': 1.0, 'side2': 1.044, 'side3': 1.0431, 'interior': 2.9176} -> 13 children
+18:20:10 launch node 14 (depth 2, C1, budget 11, prio 0.048): NO side0
+18:20:10 launch node 15 (depth 2, C1, budget 10, prio 0.048): YES side0 B([0.500,0.800]x[1.100,1.647]x[0.00,30.00]deg)
+18:20:32 node 7 done: tau=9.3912 budget=10 slack=-0.6088 conv=False minmass=0.890 maxcov=1.304 rows=7350 t=205s -> dead??
+18:20:32    branch corner3 zone_w={'corner1': 0.7321, 'corner2': 0.7035, 'corner3': 0.8144, 'side0': 1.0141, 'side1': 1.0558, 'side2': 1.0879, 'side3': 1.0607, 'interior': 2.9228} -> 13 children
+18:20:32 launch node 16 (depth 2, C1, budget 10, prio 0.048): YES side0 B([0.500,0.800]x[1.100,1.647]x[30.00,60.00]deg)
+18:20:40 node 5 done: tau=9.3835 budget=10 slack=-0.6165 conv=False minmass=0.965 maxcov=1.222 rows=6139 t=213s -> dead??
+18:20:40    branch corner1 zone_w={'corner1': 0.9225, 'corner2': 0.5104, 'corner3': 0.8266, 'side0': 1.1368, 'side1': 1.0, 'side2': 1.0475, 'side3': 1.2664, 'interior': 2.6734} -> 13 children
+18:20:40 launch node 17 (depth 2, C1, budget 10, prio 0.048): YES side0 B([0.500,0.800]x[1.100,1.647]x[60.00,90.00]deg)
+18:20:46 node 8 done: tau=9.5556 budget=10 slack=-0.4444 conv=False minmass=1.000 maxcov=1.310 rows=7910 t=218s -> dead?
+18:20:46 launch node 18 (depth 2, C1, budget 10, prio 0.048): YES side0 B([0.500,0.800]x[1.647,2.193]x[0.00,30.00]deg)
+18:21:12 node 3 done: tau=10.0663 budget=10 slack=+0.0663 conv=False minmass=0.435 maxcov=1.525 rows=10168 t=245s -> alive
+18:21:12    branch corner1 zone_w={'corner1': 0.963, 'corner2': 0.8978, 'corner3': 0.9354, 'side0': 1.0321, 'side1': 1.037, 'side2': 1.0137, 'side3': 1.0622, 'interior': 3.125} -> 13 children
+18:21:12 node 4 done: tau=10.0775 budget=10 slack=+0.0775 conv=False minmass=0.519 maxcov=1.389 rows=8839 t=244s -> alive
+18:21:12    branch corner3 zone_w={'corner1': 0.8471, 'corner2': 0.8242, 'corner3': 0.8987, 'side0': 1.0847, 'side1': 1.1069, 'side2': 1.046, 'side3': 1.1085, 'interior': 3.1615} -> 13 children
+18:21:12 launch node 85 (depth 2, C1, budget 10, prio 0.077): NO corner3
+18:21:12 launch node 86 (depth 2, C1, budget 9, prio 0.077): YES corner3 B([0.500,0.800]x[2.740,3.040]x[0.00,30.00]deg)
+18:21:16 node 2 done: tau=10.0331 budget=10 slack=+0.0331 conv=False minmass=0.804 maxcov=1.345 rows=9488 t=250s -> alive
+18:21:16    branch corner2 zone_w={'corner1': 0.9169, 'corner2': 0.9493, 'corner3': 0.9437, 'side0': 1.0256, 'side1': 1.2251, 'side2': 1.0578, 'side3': 1.0215, 'interior': 2.8931} -> 13 children
+18:21:16 launch node 87 (depth 2, C1, budget 9, prio 0.077): YES corner3 B([0.500,0.800]x[2.740,3.040]x[30.00,60.00]deg)
+18:23:11 node 86 done: tau=9.0767 budget=9 slack=+0.0767 conv=True minmass=1.000 maxcov=1.234 rows=5622 t=116s -> alive
+18:23:11    branch corner1 zone_w={'corner1': 0.8605, 'corner2': 0.7906, 'side0': 1.0, 'side1': 1.1395, 'side2': 1.0548, 'side3': 1.1143, 'interior': 3.1169} -> 13 children
+18:23:11 launch node 88 (depth 2, C1, budget 9, prio 0.077): YES corner3 B([0.500,0.800]x[2.740,3.040]x[60.00,90.00]deg)
+18:23:19 node 87 done: tau=8.9473 budget=9 slack=-0.0527 conv=True minmass=1.000 maxcov=1.281 rows=5374 t=120s -> dead
+18:23:19 launch node 89 (depth 2, C1, budget 9, prio 0.077): YES corner3 B([0.500,0.800]x[3.040,3.340]x[0.00,30.00]deg)

@@ -1,0 +1,23 @@
+18:08:19 start s=3.84 tag=smoke384 workers=4 node_budget=6 time_limit=120.0
+18:08:20 launch node 0 (depth 0, D4, budget 11, prio 99.000): root
+18:10:22 node 0 done: tau=11.0433 budget=11 slack=+0.0433 conv=False minmass=0.979 maxcov=1.026 rows=2269 t=121s -> alive
+18:10:22    branch interior zone_w={'corner0': 0.9673, 'corner1': 0.9673, 'corner2': 0.9673, 'corner3': 0.9673, 'side0': 1.0, 'side1': 1.0, 'side2': 1.0, 'side3': 1.0, 'interior': 3.1742} -> 28 children
+18:10:22 launch node 1 (depth 1, D4, budget 11, prio 0.043): NO interior
+18:10:22 launch node 2 (depth 1, C1, budget 10, prio 0.043): YES interior B([1.100,1.647]x[1.100,1.647]x[0.00,30.00]deg)
+18:10:22 launch node 3 (depth 1, C1, budget 10, prio 0.043): YES interior B([1.100,1.647]x[1.100,1.647]x[30.00,60.00]deg)
+18:10:22 launch node 4 (depth 1, C1, budget 10, prio 0.043): YES interior B([1.100,1.647]x[1.100,1.647]x[60.00,90.00]deg)
+18:11:34 node 1 done: tau=9.2473 budget=11 slack=-1.7527 conv=True minmass=1.000 maxcov=1.105 rows=1207 t=70s -> dead
+18:11:34 launch node 5 (depth 1, C1, budget 10, prio 0.043): YES interior B([1.100,1.647]x[1.647,2.193]x[0.00,30.00]deg)
+18:12:24 node 2 done: tau=10.6347 budget=10 slack=+0.6347 conv=False minmass=0.661 maxcov=1.479 rows=3177 t=120s -> alive
+18:12:24    branch side1 zone_w={'corner0': 0.6551, 'corner1': 0.7862, 'corner2': 1.0, 'corner3': 0.8377, 'side0': 1.291, 'side1': 1.3557, 'side2': 1.0, 'side3': 1.0} -> 19 children
+18:12:24 node 3 done: tau=10.6750 budget=10 slack=+0.6750 conv=False minmass=0.667 maxcov=1.444 rows=4038 t=122s -> alive
+18:12:24    branch side1 zone_w={'corner0': 0.4875, 'corner1': 0.9625, 'corner2': 1.0, 'corner3': 0.95, 'side0': 1.275, 'side1': 1.325, 'side2': 1.0, 'side3': 1.0} -> 19 children
+18:12:24 node 4 done: tau=10.7183 budget=10 slack=+0.7183 conv=False minmass=0.822 maxcov=1.429 rows=2927 t=121s -> alive
+18:12:24    branch side1 zone_w={'corner0': 0.4789, 'corner1': 0.8873, 'corner2': 1.0, 'corner3': 0.9437, 'side0': 1.2817, 'side1': 1.3803, 'side2': 1.0, 'side3': 1.0} -> 19 children
+18:12:46 node 5 done: tau=10.1037 budget=10 slack=+0.1037 conv=True minmass=1.000 maxcov=1.478 rows=2464 t=70s -> alive
+18:12:46    branch side0 zone_w={'corner0': 0.6321, 'corner1': 0.7525, 'corner2': 0.7559, 'corner3': 0.6288, 'side0': 1.4047, 'side1': 1.1505, 'side2': 1.1405, 'side3': 1.1037} -> 19 children
+18:12:46 FINISHED: 6 LPs, elapsed 266s, status counts {'alive': 5, 'dead': 1, 'pending': 99}
+18:12:46   depth 0: {'alive': 1}
+18:12:46   depth 1: {'dead': 1, 'alive': 4, 'pending': 23}
+18:12:46   depth 2: {'pending': 76}
+18:12:46   frontier: 104 nodes; slack of solved alive nodes: 0:+0.043, 2:+0.635, 3:+0.675, 4:+0.718, 5:+0.104

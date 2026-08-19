@@ -274,3 +274,6 @@
   side zones" τ = 5.000 < 7 (DEAD, 12 s) ⇒ the 8+3 structure needs conditional counts (case-LP I-L6, fix-a-square branches).
 - Verdict: region cuts don't kill the mid-tilt band; "angle boxes × region cuts" campaign stays 10⁶+ LPs. Recommend a pilot of
   an asymmetric (C1) conditional LP with box-of-fixed-square "shadow" rows (est. 10³–10⁴ LPs per angle box).
+
+## 2026-08-18 — A13-case-lp-bnb (case-LP branch-and-bound pilot, I-L6)
+Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inner squares + NO-families; C1 node LP; exact verifier with exempt tests; certify loop). Sanity: A12's conditional LP reproduced exactly (7.000 / 5.000). At s = 3.84: NO(all corners) dead by 1.59, 9/12 corner boxes dead by ≥ 0.23, the 3 corner-square boxes at slack ≈ 0 (undecided by 300-s LPs); tree not closed in ~40 LPs; one node certificate verified end to end; core-node certification exposed a row-oracle blind spot (touching shell) — fixed, not re-certified. Verdict: LP convergence (column generation) is the bottleneck; 3.84 hinges on three LPs; 3.85+ not viable yet. See attempts/A13-case-lp-bnb/notes.md.
