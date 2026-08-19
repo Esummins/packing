@@ -1,0 +1,30 @@
+[n2_385] node N2 (four corner squares fixed exactly) s=3.85 budget=7 h=0.2 dtheta=10.0 seeded=True (seeds 281): grid 3097 -> admissible N=2157, group D4 (|H|=8), orbits=280, edges=1138008, density=0.489 t=1.6s
+  LP init points from A14 atoms: 245
+  LP it 0: nu=7.000000 rows=4574 maxcov grid=1.353407 arr=1.353407 t=6.8s [Optimal]
+  LP it 1: nu=7.000000 rows=9274 maxcov grid=1.153460 arr=1.158900 t=23.9s [Optimal]
+  LP it 2: nu=7.000000 rows=13974 maxcov grid=1.083339 arr=1.083339 t=58.3s [Optimal]
+  LP it 3: nu=7.000000 rows=18563 maxcov grid=1.048950 arr=1.063311 t=105.6s [Optimal]
+  LP it 4: nu=7.000000 rows=22204 maxcov grid=1.015144 arr=1.032076 t=168.1s [Optimal]
+  LP it 5: nu=7.000000 rows=25386 maxcov grid=1.014694 arr=1.025186 t=232.7s [Optimal]
+  LP it 6: nu=7.000000 rows=26453 maxcov grid=1.002921 arr=1.007429 t=280.1s [Optimal]
+  LP it 7: nu=7.000000 rows=26594 maxcov grid=1.001220 arr=1.007796 t=320.1s [Optimal]
+  LP it 8: nu=7.000000 rows=26712 maxcov grid=1.003882 arr=1.008692 t=361.3s [Optimal]
+  LP it 9: nu=7.000000 rows=26833 maxcov grid=1.000000 arr=1.002282 t=403.4s [Optimal]
+  LP it 10: nu=7.000000 rows=26861 maxcov grid=1.000000 arr=1.000449 t=436.6s [Optimal]
+[n2_385] nu*_H = 7.000000 (maxcov 1.000449, 26861 points, 487 support, 437s)  budget 7  slack +0.0000
+  symmetry basis: blocks {'A1': 280, 'A2': 266, 'B1': 269, 'B2': 268, 'E': 537} (sum d*m = 2157 = N 2157) t=0.1s
+  pair orbits: 291385 (edge orbits 142661, non-edge 148724)
+  SCS data: 583051 rows x 291665 vars, nnz 2552134, psd blocks [280, 266, 269, 268, 537]
+  build t=1.0s; solving SCS eps=1e-06 (trace scale 2157.0)
+  SCS: status solved (inaccurate - reached time_limit_secs) iters 11450 pobj 6.655116 dobj 6.591262 res_pri 1.33e-02 res_dual 5.21e-09 gap 6.39e-02 t=2407.3s
+  bracket: 5.240262 <= theta'_H <= 6.591277  (cert lam 6.591262, min eig -1.5e-05, eps 0.0e+00)
+[n2_385] theta'_H ~ 6.655116 (dual 6.591262, solved (inaccurate - reached time_limit_secs), 11450 it, 2413s); bracket [5.2403, 6.5913]; budget 7; ub slack -0.4087
+  support sub-SDP: |S| = 924 nodes, 116 orbits, 161350 edges (thr 0.001)
+  symmetry basis: blocks {'A1': 116, 'A2': 115, 'B1': 115, 'B2': 116, 'E': 231} (sum d*m = 924 = N 924) t=0.1s
+  pair orbits: 53592 (edge orbits 20301, non-edge 33291)
+  SCS data: 107301 rows x 53708 vars, nnz 480597, psd blocks [116, 115, 115, 116, 231]
+  build t=0.3s; solving SCS eps=1e-07 (trace scale 924.0)
+  SCS: status solved (inaccurate - reached time_limit_secs) iters 27700 pobj 6.435458 dobj 6.475340 res_pri 5.75e-03 res_dual 2.87e-09 gap 3.99e-02 t=1200.6s
+[n2_385] theta'(G[S]) in [5.90444, 6.47535] (solved (inaccurate - reached time_limit_secs), 27700 it); LP on G[S] 7.00000; alpha(G[S]) 6 (OPTIMAL); => theta'_H bracket [5.9044, 6.5913]  (1288s)
+[n2_385] alpha_H = 6 (OPTIMAL, bound 6.0, 19s)  budget 7
+[n2_385] done, total 4159s

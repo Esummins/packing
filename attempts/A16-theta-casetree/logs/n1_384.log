@@ -1,0 +1,24 @@
+[n1_384] node N1 (one corner square fixed exactly (core = [0,1]^2)) s=3.84 budget=10 h=0.2 dtheta=10.0 seeded=True (seeds 63): grid 1692 -> admissible N=1494, group Z2^1 (|H|=2), orbits=753, edges=497677, density=0.446 t=1.0s
+  LP init points from A14 atoms: 189
+  LP it 0: nu=10.000000 rows=5718 maxcov grid=2.000000 arr=2.000000 t=1.3s [Optimal]
+  LP it 1: nu=10.000000 rows=6165 maxcov grid=1.250000 arr=1.250000 t=1.8s [Optimal]
+  LP it 2: nu=10.000000 rows=6197 maxcov grid=1.250000 arr=1.250000 t=2.1s [Optimal]
+  LP it 3: nu=10.000000 rows=6230 maxcov grid=1.125000 arr=1.125000 t=2.5s [Optimal]
+  LP it 4: nu=10.000000 rows=6268 maxcov grid=1.000000 arr=1.000000 t=2.9s [Optimal]
+[n1_384] nu*_H = 10.000000 (maxcov 1.000000, 6268 points, 30 support, 3s)  budget 10  slack +0.0000
+  symmetry basis: blocks {'X0': 753, 'X1': 741} (sum d*m = 1494 = N 1494) t=0.1s
+  pair orbits: 558039 (edge orbits 249035, non-edge 309004)
+  SCS data: 1116832 rows x 558792 vars, nnz 1667406, psd blocks [753, 741]
+  build t=0.4s; solving SCS eps=1e-06 (trace scale 1494.0)
+  SCS: status solved (inaccurate - reached time_limit_secs) iters 7325 pobj 9.624122 dobj 9.438074 res_pri 5.72e-02 res_dual 1.39e-08 gap 1.86e-01 t=3007.4s
+  bracket: 7.117866 <= theta'_H <= 9.438104  (cert lam 9.438074, min eig -3.0e-05, eps 0.0e+00)
+[n1_384] theta'_H ~ 9.624122 (dual 9.438074, solved (inaccurate - reached time_limit_secs), 7325 it, 3009s); bracket [7.1179, 9.4381]; budget 10; ub slack -0.5619
+  support sub-SDP: |S| = 137 nodes, 71 orbits, 3228 edges (thr 0.001)
+  symmetry basis: blocks {'X0': 71, 'X1': 66} (sum d*m = 137 = N 137) t=0.0s
+  pair orbits: 4696 (edge orbits 1630, non-edge 3066)
+  SCS data: 9464 rows x 4767 vars, nnz 13956, psd blocks [71, 66]
+  build t=0.0s; solving SCS eps=1e-07 (trace scale 137.0)
+  SCS: status solved iters 76325 pobj 9.382836 dobj 9.382835 res_pri 1.13e-05 res_dual 1.75e-09 gap 1.04e-06 t=219.6s
+[n1_384] theta'(G[S]) in [9.38263, 9.38284] (solved, 76325 it); LP on G[S] 10.00000; alpha(G[S]) 9 (OPTIMAL); => theta'_H bracket [9.3826, 9.4381]  (221s)
+[n1_384] alpha_H = 9 (OPTIMAL, bound 9.0, 10s)  budget 10
+[n1_384] done, total 3245s

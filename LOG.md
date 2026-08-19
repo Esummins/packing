@@ -319,3 +319,28 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   (finite induced subgraph; the grid LP is 11 only because the ¼-structure was injected).
 - Numerics: SCS on the symmetry-reduced SDP (0.3–0.9 M pair-orbit rows, PSD blocks ≈ N/8…N/4) is 0.25–0.6 s/iteration and needs ≳ 3·10⁴
   iterations; 25–55-min runs give reliable dual upper bounds only; tight values from 400–520-node support sub-SDPs (15 min).
+
+## 2026-08-19 — A16-theta-casetree — ϑ′ as the node certificate of the A13/A14 case tree (decisive comparison test, done)
+- `attempts/A16-theta-casetree/`: `nodes.py` (node catalogue with A14's exact hypothesis/exemption semantics via caselp.Hyp:
+  root, one/four corners fixed exactly, A14's depth-1 on-corner and off-corner boxes, corners + NO side zone, NO corner zones;
+  seeds = the node's own A14 LP fractional packing + A12 ¼-structures; LP initial points = A14's atoms), `theta_sdp.py`
+  (A15's ϑ′ SDP generalised to any subgroup H ≤ D4 — the stabiliser of the admissible set is computed and used: D4/Z2/C1;
+  validated against full-matrix cvxpy), `graph.py` (near-duplicate merge, subgroup-closed seeding), `lp_point.py`
+  (incremental HiGHS), `run_node.py`, `table.py`; results/*.json (+ table.md), logs/, notes.md.
+- Per node: one seeded placement graph (h = 0.2, Δθ = 10°, N = 970–3150), the LP ν*_H, ϑ′ bracket (certified dual-certificate
+  upper bound + tight support-sub-SDP lower bound), α (CP-SAT).  NOT a bound on s(11).  Un-seeded grids (h down to 0.1) are
+  integral (LP = α = 10): uninformative.
+- **Results (certified ub / tight, s = 3.84 | 3.85 | 3.87): four corners fixed exactly (the node that stalls the tree,
+  LP = 7.000 = budget): ϑ′ ≤ 6.62 | 6.59 | 6.51 (tight 6.25–6.46), α = 6 — dead by ≥ 0.38–0.49, stable under grid refinement
+  (N 2177→3152) ; one corner exact (LP = 10.000 = budget): ϑ′ ≤ 9.44 | 9.49 | 9.48 (tight 9.38–9.45) — dead by ≥ 0.5 ;
+  A14's three alive on-corner boxes (LP grid 10.03–10.05, continuum 10.11–10.19): ϑ′ ≤ 9.61–9.67 | 9.52–9.64 (tight 9.44–9.50),
+  dead by ≥ 0.24–0.48 even with richer seeding ; A14's uncertifiable off-corner boxes: ϑ′ ≤ 9.41 / 9.14 (dead 0.59 / 0.86) ;
+  corners + NO side0: ϑ′ = α = 6.000 exactly (integral) vs LP 6.25.  Everywhere α = budget − 1 and ϑ′ ≈ α + 0.4–0.6.**
+- Consequence: the ϑ′ tree at 3.84/3.85 is root + 13 leaves (A14 estimated 10⁵–10⁶ LP nodes); the root alone (A15: ϑ′ < 11
+  up to 3.87 on seeded grids) may suffice.  Cost 40–60 min per node (SCS: dual certificate accurate after ≈ 2000 iterations;
+  C1 nodes are eigendecomposition-bound at 1.3–1.5 s/it — dual-side/cutting-plane or Burer–Monteiro needed to scale).
+  Caveat: grid ϑ′ only lower-bounds the continuum ϑ′ (no upward drift seen under refinement/seeding, but only the continuum
+  kernel certificate settles it).  Rigorous plan (notes §3(e)): per-node kernel K ⪰ 0, K(x,x) ≤ λ−1 on non-exempt placements,
+  K(x,y) ≤ −1 on disjoint non-exempt pairs (verify_case.py exemption semantics), LP-atom indicator features + cross terms
+  (node duals have 30–45 eigenvalues > 1 %), verification by cell B&B + pairwise cell table, rational LDLᵀ; ≈ 4–6 weeks to a
+  first certified node.  Recommendation: build the I-L9 continuum kernel at the ROOT first (λ < 11 at 3.84), tree as fallback.

@@ -1,0 +1,27 @@
+[n3c_385] node N3c (YES corner0 box [0.5,0.8]^2 x [60,90] deg) s=3.85 budget=10 h=0.2 dtheta=10.0 seeded=True (seeds 160): grid 1733 -> admissible N=1593, group C1 (|H|=1), orbits=1593, edges=554429, density=0.437 t=1.4s
+  LP init points from A14 atoms: 201
+  LP it 0: nu=10.138889 rows=5818 maxcov grid=2.000000 arr=2.000000 t=3.7s [Optimal]
+  LP it 1: nu=10.073572 rows=9009 maxcov grid=1.132623 arr=1.176186 t=9.3s [Optimal]
+  LP it 2: nu=10.000000 rows=12076 maxcov grid=1.157948 arr=1.157948 t=15.1s [Optimal]
+  LP it 3: nu=10.000000 rows=13894 maxcov grid=1.069370 arr=1.079995 t=20.9s [Optimal]
+  LP it 4: nu=10.000000 rows=14717 maxcov grid=1.007247 arr=1.018643 t=25.5s [Optimal]
+  LP it 5: nu=10.000000 rows=14969 maxcov grid=1.012277 arr=1.012277 t=31.3s [Optimal]
+  LP it 6: nu=10.000000 rows=14985 maxcov grid=1.000000 arr=1.000766 t=35.1s [Optimal]
+  LP it 7: nu=10.000000 rows=14989 maxcov grid=1.000000 arr=1.000000 t=40.8s [Optimal]
+[n3c_385] nu*_H = 10.000000 (maxcov 1.000000, 14989 points, 94 support, 41s)  budget 10  slack +0.0000
+  symmetry basis: blocks {'X0': 1593} (sum d*m = 1593 = N 1593) t=0.1s
+  pair orbits: 1268028 (edge orbits 554429, non-edge 713599)
+  SCS data: 2537650 rows x 1269621 vars, nnz 2539242, psd blocks [1593]
+  build t=0.7s; solving SCS eps=1e-06 (trace scale 1593.0)
+  SCS: status solved (inaccurate - reached time_limit_secs) iters 2200 pobj 10.054875 dobj 9.640374 res_pri 1.06e-01 res_dual 2.13e-08 gap 4.15e-01 t=3021.3s
+  bracket: 5.636259 <= theta'_H <= 9.640434  (cert lam 9.640374, min eig -6.1e-05, eps 0.0e+00)
+[n3c_385] theta'_H ~ 10.054875 (dual 9.640374, solved (inaccurate - reached time_limit_secs), 2200 it, 3024s); bracket [5.6363, 9.6404]; budget 10; ub slack -0.3596
+  support sub-SDP: |S| = 121 nodes, 121 orbits, 2817 edges (thr 0.001)
+  symmetry basis: blocks {'X0': 121} (sum d*m = 121 = N 121) t=0.0s
+  pair orbits: 7260 (edge orbits 2817, non-edge 4443)
+  SCS data: 14642 rows x 7381 vars, nnz 14762, psd blocks [121]
+  build t=0.0s; solving SCS eps=1e-07 (trace scale 121.0)
+  SCS: status solved iters 58025 pobj 9.494712 dobj 9.494711 res_pri 1.22e-05 res_dual 1.92e-10 gap 6.60e-07 t=311.5s
+[n3c_385] theta'(G[S]) in [9.49442, 9.49471] (solved, 58025 it); LP on G[S] 10.00000; alpha(G[S]) 9 (OPTIMAL); => theta'_H bracket [9.4944, 9.6404]  (314s)
+[n3c_385] alpha_H = 9 (OPTIMAL, bound 9.0, 9s)  budget 10
+[n3c_385] done, total 3390s

@@ -161,11 +161,41 @@ route is the angle-box branch-and-bound whose box killer is Theorem 1 restricted
   box B&B (K is piecewise constant in the atom-arrangement cells).  Recommended next experiments: ϑ′ on an un-seeded refined grid at
   3.85–3.87, and ϑ′ as the node relaxation inside the A13/A14 case tree (LP = 7.000 = budget with four corners fixed — is ϑ′ < 7?).
 
+## ϑ′ as the node certificate of the case tree (A16, 2026-08-19)
+
+- **Question.** A14 showed the case-LP tree cannot close at 3.84: with corner squares fixed the LP sits exactly at the
+  budget (one corner: 10.000 = 10; four corners: 7.000 = 7) and killing power exists only in empty side zones (depth ≥ 6,
+  10⁵–10⁶ nodes).  Does ϑ′ (A15) kill exactly those nodes?  Test (`attempts/A16-theta-casetree`): per hypothesis node H one
+  finite placement graph (seeded grid h = 0.2, Δθ = 10°; nodes = placements admissible under H with A14's exact exemption
+  semantics; budget = 11 − #cores), compare ν*_H (point-clique LP), ϑ′(G_H) (SDP block-diagonalised for the stabiliser of
+  the admissible set — D4, Z2 or C1 — with certified dual-certificate upper bounds and support-sub-SDP lower bounds) and
+  α(G_H).  Comparison of relaxations on finite induced subgraphs — NOT a bound on s(11) (ϑ′_G ≤ ϑ′_cont).  Un-seeded grids
+  (h down to 0.1) are integral (LP = α = 10): no information; seeding as in A15 is what makes the LP show its cheat.
+- **Answer: ϑ′ kills every node type the LP cannot.**  Certified ϑ′ upper bounds (tight support values in parens), s = 3.84 / 3.85 / 3.87:
+  one corner fixed exactly: LP 10.000 = budget, **ϑ′ ≤ 9.44 / 9.49 / 9.48 (9.38–9.45)**, α = 9; four corners fixed exactly (THE
+  stalling node): LP 7.000 = budget, **ϑ′ ≤ 6.62 / 6.59 / 6.51 (6.25–6.46)**, α = 6 — stable under grid refinement (N 2177 → 3152:
+  tight 6.44); A14's three alive on-corner boxes: LP 10.03–10.05 grid (10.11–10.19 continuum), **ϑ′ ≤ 9.61–9.67 / 9.52–9.64
+  (tight 9.44–9.46)**, α = 9 — richer seeding raises the LP (10.08) but not ϑ′; A14's uncertifiable off-corner boxes (nodes 5, 6):
+  LP 9.76 / 9.32, **ϑ′ ≤ 9.41 / 9.14**; four corners + NO side0: LP 6.25–6.33, **ϑ′ = α = 6.000 exactly** (integral).  Pattern on every
+  node graph: α = budget − 1, LP = budget, ϑ′ ≈ α + 0.4…0.6 — the same split as A15's root (10 / 10.4 / 11).
+- **Consequence.**  With ϑ′ as node certificate A14's whole first level at 3.84/3.85 is dead on the grids by 0.24–1.0 (honest
+  continuum estimate 0.2–0.45, since the grid LP under-shoots the continuum LP by 0.06–0.15 at the N3 boxes): the tree is
+  **root + 13 leaves, not 10⁵–10⁶ nodes** — and the root itself (A15: ϑ′ ≈ 10.38–10.64 < 11 up to 3.87) may need no tree at all.
+  Cost: 40–60 min per node (SCS; the dual certificate is accurate after ~2000 iterations even where the primal is useless);
+  the open risk is that grid ϑ′ only lower-bounds continuum ϑ′ (no upward drift seen under refinement or richer seeding).
+  Rigorous version = per-node kernel certificate (I-L9 continuous ϑ′): K PSD, K(x,x) ≤ λ−1 on non-exempt placements,
+  K(x,y) ≤ −1 on disjoint non-exempt pairs ⇒ budget ≤ λ; LP-atom indicator features + cross terms (node duals have 30–45
+  eigenvalues > 1%), verification = verify_case.py-style cell B&B + pairwise cell table (piecewise-constant kernel), exact
+  PSD by rational LDLᵀ; estimate 4–6 weeks to a first certified node (A16 notes §3(e)).  **Recommendation: build the
+  continuum ϑ′ kernel certificate at the root first (target: λ < 11 at 3.84); fall back to the 14-node ϑ′ tree only if the
+  root kernel stalls above 11.**
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
-2. I-L6 "case-LP": piloted (A13) and pushed (A14) at 3.84 — the tree does not close (see above); a fundamentally
-   stronger node relaxation would be needed before spending more on it.
+2. I-L6 "case-LP": piloted (A13) and pushed (A14) at 3.84 — the tree does not close with LP nodes; A16 shows ϑ′ node
+   certificates kill the stalling nodes with margin 0.3–0.6 on the same placement graphs ⇒ the viable route is the
+   I-L9 kernel certificate (root first, then the 14-node tree if needed).
 3. Angle-box B&B with the orientation-restricted measure LP as box killer (first experiment: A07's LP with θ
    restricted to [θ*−δ, θ*+δ] ∪ {0} for δ = 10°, 5°, 2°, to see where τ*_B(3.877) crosses 11).
 4. Formalise the bridge lemmas in Lean/Mathlib (needs ~10 GB disk).

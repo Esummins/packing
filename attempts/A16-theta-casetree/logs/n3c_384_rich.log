@@ -1,0 +1,26 @@
+[n3c_384_rich] node N3c (YES corner0 box [0.5,0.8]^2 x [60,90] deg) s=3.84 budget=10 h=0.2 dtheta=10.0 seeded=True (seeds 219): grid 1792 -> admissible N=1649, group C1 (|H|=1), orbits=1649, edges=604505, density=0.445 t=1.4s
+  LP init points from A14 atoms: 297
+  LP it 0: nu=10.187500 rows=5915 maxcov grid=1.385417 arr=1.385417 t=3.4s [Optimal]
+  LP it 1: nu=10.093580 rows=9272 maxcov grid=1.129489 arr=1.221436 t=9.1s [Optimal]
+  LP it 2: nu=10.068081 rows=12559 maxcov grid=1.049416 arr=1.049416 t=13.2s [Optimal]
+  LP it 3: nu=10.056353 rows=13343 maxcov grid=1.023690 arr=1.023690 t=17.3s [Optimal]
+  LP it 4: nu=10.055131 rows=13943 maxcov grid=1.006326 arr=1.006326 t=21.2s [Optimal]
+  LP it 5: nu=10.055104 rows=14416 maxcov grid=1.000000 arr=1.000929 t=24.5s [Optimal]
+  LP it 6: nu=10.055103 rows=14420 maxcov grid=1.000000 arr=1.000000 t=27.2s [Optimal]
+[n3c_384_rich] nu*_H = 10.055103 (maxcov 1.000000, 14420 points, 96 support, 28s)  budget 10  slack +0.0551
+  symmetry basis: blocks {'X0': 1649} (sum d*m = 1649 = N 1649) t=0.1s
+  pair orbits: 1358776 (edge orbits 604505, non-edge 754271)
+  SCS data: 2719202 rows x 1360425 vars, nnz 2720850, psd blocks [1649]
+  build t=0.7s; solving SCS eps=1e-06 (trace scale 1649.0)
+  SCS: status solved (inaccurate - reached time_limit_secs) iters 2650 pobj 10.181013 dobj 9.652552 res_pri 9.95e-02 res_dual 1.95e-08 gap 5.28e-01 t=3005.4s
+  bracket: 5.346539 <= theta'_H <= 9.652607  (cert lam 9.652552, min eig -5.5e-05, eps 0.0e+00)
+[n3c_384_rich] theta'_H ~ 10.181013 (dual 9.652552, solved (inaccurate - reached time_limit_secs), 2650 it, 3008s); bracket [5.3465, 9.6526]; budget 10; ub slack -0.3474
+  support sub-SDP: |S| = 120 nodes, 120 orbits, 2585 edges (thr 0.001)
+  symmetry basis: blocks {'X0': 120} (sum d*m = 120 = N 120) t=0.0s
+  pair orbits: 7140 (edge orbits 2585, non-edge 4555)
+  SCS data: 14401 rows x 7260 vars, nnz 14520, psd blocks [120]
+  build t=0.0s; solving SCS eps=1e-07 (trace scale 120.0)
+  SCS: status solved iters 73425 pobj 9.447109 dobj 9.447108 res_pri 1.37e-06 res_dual 2.10e-11 gap 1.04e-06 t=329.6s
+[n3c_384_rich] theta'(G[S]) in [9.44708, 9.44711] (solved, 73425 it); LP on G[S] 10.00000; alpha(G[S]) 9 (OPTIMAL); => theta'_H bracket [9.4471, 9.6526]  (331s)
+[n3c_384_rich] alpha_H = 9 (OPTIMAL, bound 9.0, 7s)  budget 10
+[n3c_384_rich] done, total 3375s
