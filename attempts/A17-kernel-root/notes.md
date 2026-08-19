@@ -240,9 +240,11 @@ Where the +0.13 (to get below 11) has to come from, in order of recommendation:
 
 `python check_feas.py k384 10.90 4200` — the full it-12 row set (1069 diag + 6430 pair rows), warm
 start from the λ = 11.1275-feasible factor, target λ = 10.90, 6 × 700 L-BFGS iterations:
-round 0 (700 it, 1056 s): max diag-row violation +1.07e-1, max pair-row violation +2.6e-2 —
-after 700 iterations beyond the loop's 300 the residuals are still ~0.1 (vs 1e-8 at 11.1275 in 10
-iterations). Not a proof of infeasibility (nonconvex solver, finite iterations, rank-120 blocks),
+round 0 (700 it, 1056 s): max diag-row violation +1.07e-1, max pair-row violation +2.6e-2;
+round 1 (1400 it total): +7.6e-2 / +1.9e-2 — residuals decay slowly (×0.7 per 700 iterations, vs
+1e-8 reached in 10 iterations at 11.1275); consistent with infeasibility at 10.90 or at best very
+slow approach from a value near it. Not a proof of infeasibility (nonconvex, finite iterations,
+rank-120 blocks),
 but strong evidence that the ROW SET is infeasible at 10.90, i.e. the class optimum on these rows
 lies in ≈ (10.9, 11.13]. Combined with the diag attack value 10.428 (⇒ true λ ≥ 11.43 for THIS M;
 the class could trade some of that back), the honest class estimate is ≈ 11.0–11.2. (Later rounds,
