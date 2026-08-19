@@ -241,10 +241,14 @@ Where the +0.13 (to get below 11) has to come from, in order of recommendation:
 `python check_feas.py k384 10.90 4200` — the full it-12 row set (1069 diag + 6430 pair rows), warm
 start from the λ = 11.1275-feasible factor, target λ = 10.90, 6 × 700 L-BFGS iterations:
 round 0 (700 it, 1056 s): max diag-row violation +1.07e-1, max pair-row violation +2.6e-2;
-round 1 (1400 it total): +7.6e-2 / +1.9e-2; round 2 (2100 it): +6.2e-2 / +1.7e-2 — the decay ratio
-per 700 iterations is worsening (0.71 → 0.81), i.e. the residuals flatten out at ~0.05–0.06 rather
-than collapse (vs 1e-8 reached in 10 iterations at 11.1275); consistent with infeasibility at 10.90
-or at best very slow approach from a value near it (remaining rounds: logs/check1090.out). Not a proof of infeasibility (nonconvex, finite iterations,
+rounds 1–5 (up to 4200 it): +7.6e-2 / +1.9e-2 → +6.2e-2 / +1.7e-2 → +5.5e-2 / +1.6e-2 →
++4.8e-2 / +1.5e-2 → FINAL +4.48e-2 / +1.36e-2 — the decay ratio per 700 iterations worsens
+monotonically (0.71 → 0.81 → 0.89 → 0.88 → 0.92): the residuals plateau at ≈ 0.045, they do not
+collapse (vs 1e-8 reached in 10 iterations at 11.1275); the row set is infeasible at λ = 10.90 to
+the best of this solver's ability. The violated/binding diag rows at 10.90 are the same tight-cell
+continuum as §6.2(b): (0.520, 1.520, 0°) cov 1.0000 (worst, +4.5e-2), (0.520, 0.520, 0°),
+(2.447, 2.506, 28.5°), (1.399, 2.468, 69.6°), … — wall/corner uprights and interior tilts, all at
+coverage ≈ 1.000 (full list: logs/check1090.out). Not a proof of infeasibility (nonconvex, finite iterations,
 rank-120 blocks),
 but strong evidence that the ROW SET is infeasible at 10.90, i.e. the class optimum on these rows
 lies in ≈ (10.9, 11.13]. Combined with the diag attack value 10.428 (⇒ true λ ≥ 11.43 for THIS M;
