@@ -100,6 +100,24 @@ LP relaxation of the big-M disjunctions is void, so solver lower bounds sit at �
 route is the angle-box branch-and-bound whose box killer is Theorem 1 restricted to the box's orientations
 (Stromquist's 0°/45° theorem is its two-point case) — see `docs/ideas.md` I-U4/I-L7.
 
+
+## Angle-box sizing, ab-initio sweep, and cut pilots (A10–A12, 2026-08-18)
+
+- **A10 (orientation-restricted LP).** Restricting Theorem 1's coverage rows to orientations in a box Θ_B kills
+  the box for all packings whose 11 orientations lie in Θ_B. Sanity: {0°} → crossing exactly at 4; {0°,45°} → (3.885, 3.886]
+  = Stromquist's 2+4√2/3. Trump box [0,δ]∪[θ*±δ]: crossing s_B(δ) with s* − s_B(δ) ≈ 0.006·δ (δ=1°: 3.874; δ=2°: 3.865;
+  δ=5°: 3.85) — the restricted LP is tight at the optimum as δ→0; a rigorous restricted certificate proves that no
+  packing with all orientations in [0°,2°]∪[38.2°,42.2°] has side ≤ 3.85. But boxes "uprights + one tilt in ≈[20°,36°]"
+  stay at τ = 11.000 exactly at 3.85–3.87 down to half-width 0.5°, via 4-fold ¼/½-weight fractional structures
+  (no packing exists there below 3.89): pure angle-box B&B is not viable (≥10⁶ boxes).
+- **A11 (ab-initio sweep, all open n ≤ 100).** The angle-lattice MILP + LP polish rediscovers the n=11 and n=18
+  records exactly (rational certificates PASS) but beats nothing; competitive only for n ≲ 20, |Θ| ≤ 3, small tilted
+  clusters; CP-SAT stays in the grid basin for n ≥ 26.
+- **A12 (region-rank cuts, I-L8).** Cannot kill the mid-tilt cheat: its fractional packing is locally integral
+  (corners 1, side zones 4×¼, interior 8 tilted ¼ + 4 upright ¼); every macroscopic region is realisable, and an
+  LP-certified k(R) never yields a violated cut (lemma). What kills it is a CONDITIONAL LP: corners fixed + side zones
+  empty ⇒ τ = 5 < 7. ⇒ the viable route is the case-LP branch-and-bound (I-L6), piloted as A13.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
