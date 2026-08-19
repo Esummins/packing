@@ -104,3 +104,10 @@ realising packing on every macroscopic region (4+4+3 with 4+4+1 / 4+2+3 / 8+1 al
 violated cut on integer loads (x*|_R is dual-feasible for the sub-LP); combinatorially certified fine cuts (ρ ≤ 0.05) are escaped by
 sliding the support (τ = 11.000, λ = 0 over 25 rounds at 3.85–3.87). Conditional (fixed-square / excluded-zone) LPs DO kill it
 (τ = 5 < 7 with corners fixed and side zones empty) ⇒ pursue I-L6 with fix-a-square branches instead.
+
+**I-L9. Lovász–Schrijver ϑ′ kernel bound (advisor, 2026-08-19).** Certificate: PSD kernel K on the placement space
+with K(x,x) ≤ λ−1 ∀x and K(x,y) ≤ −1 for all disjoint pairs; then Σᵢⱼ K(xᵢ,xⱼ) ≥ 0 over any packing gives n ≤ λ.
+ϑ ≤ fractional clique cover ≤ τ* (Theorem 1), and ϑ sees odd cycles (ϑ(C₅)=√5), i.e. exactly the ¼-weight cheats of
+A10–A14. Ansatz K = φᵀMφ (D4-symmetric polynomial/Fourier basis, M ⪰ 0), cutting planes on the pair constraint,
+rigor by exact LDLᵀ + 6-D interval check. Pilot: discretised ϑ′ vs LP on the same placement graph at s = 3.85.
+Follow-ups: 3-point (Bachoc–Vallentin-type) bound; ϑ′ as node relaxation in the case tree (I-L6). Status: proposed.

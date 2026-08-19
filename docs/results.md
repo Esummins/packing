@@ -118,12 +118,32 @@ route is the angle-box branch-and-bound whose box killer is Theorem 1 restricted
   LP-certified k(R) never yields a violated cut (lemma). What kills it is a CONDITIONAL LP: corners fixed + side zones
   empty ⇒ τ = 5 < 7. ⇒ the viable route is the case-LP branch-and-bound (I-L6), piloted as A13.
 
+
+## Case-LP branch-and-bound at 3.84 (A13–A14, 2026-08-18)
+
+- **A13** built the rigorous case-LP machinery (I-L6: hypotheses = core boxes "some square has (centre,θ) in B" with a rational
+  inner square, and NO-families "no square centred in zone Z"; node LP = Theorem 1 with the exempt placements removed; exact
+  verifier with exempt tests) and ran a wall-first tree at s = 3.84 (root τ = 11.03).
+- **A14** (attempts/A14-close-tree-384) found and fixed three blind spots of the exact row oracle used since A10 at hypothesis
+  nodes (the lowest-cell cap was applied before the hypothesis filter; cells at the admissible-domain boundary were never
+  sampled; cap exhaustion at unconverged nodes) — every LP value A10–A13 reported at a hypothesis node is an under-estimate.
+  With the fixed oracle: the three "undecided" on-corner boxes at 3.84 are ALIVE (τ ≈ 10.11–10.19 vs budget 10), and the LP
+  with one corner square fixed EXACTLY has τ = 10.000 with a fractional packing of coverage exactly 1 (τ = 7.000 = budget with
+  all four corners fixed): corner refinement can never kill them; killing power sits only in empty side zones (4 corners +
+  no square in side zone 0: 6.36 < 7; + all four side zones empty: ≈ 4.3; root + all side zones empty: 8.28 < 11). One more
+  corner level: 9 of 12 boxes survive per level with slack growing (+0.13…+0.54). Certification overhead (3e-3 shrink + 3 %)
+  costs 0.1–0.25 per node. Verdict: closing the tree at 3.84 needs 10⁵–10⁶ node LPs — not viable; the case-LP line is stopped.
+- **Certified (exact verifier PASS, `attempts/A14-close-tree-384/certs_wip/leaf_NO_corners.json`, total 10.117 < 11):**
+  every packing of 11 unit squares in a square of side ≤ 3.84 has a square whose centre lies within 0.6 of a corner of the
+  admissible centre square, i.e. in [0.5,1.1]² up to symmetry (Lemma; a Stromquist-style wall lemma obtained by LP). A second
+  leaf is certified too (no square with centre in [0.8,1.1]² and orientation in [60°,90°], total 9.9755 < 10); the other ten
+  first-level leaves are not certifiable (three are provably alive).
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
-2. I-L6 "case-LP": LP-based branch and bound over the packing structure (case splits on wall regions à la
-   Stromquist, each branch an LP with modified right-hand sides). This is the only identified route past
-   the pure-LP ceiling ≈ 3.83.
+2. I-L6 "case-LP": piloted (A13) and pushed (A14) at 3.84 — the tree does not close (see above); a fundamentally
+   stronger node relaxation would be needed before spending more on it.
 3. Angle-box B&B with the orientation-restricted measure LP as box killer (first experiment: A07's LP with θ
    restricted to [θ*−δ, θ*+δ] ∪ {0} for δ = 10°, 5°, 2°, to see where τ*_B(3.877) crosses 11).
 4. Formalise the bridge lemmas in Lean/Mathlib (needs ~10 GB disk).

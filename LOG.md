@@ -277,3 +277,28 @@
 
 ## 2026-08-18 — A13-case-lp-bnb (case-LP branch-and-bound pilot, I-L6)
 Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inner squares + NO-families; C1 node LP; exact verifier with exempt tests; certify loop). Sanity: A12's conditional LP reproduced exactly (7.000 / 5.000). At s = 3.84: NO(all corners) dead by 1.59, 9/12 corner boxes dead by ≥ 0.23, the 3 corner-square boxes at slack ≈ 0 (undecided by 300-s LPs); tree not closed in ~40 LPs; one node certificate verified end to end; core-node certification exposed a row-oracle blind spot (touching shell) — fixed, not re-certified. Verdict: LP convergence (column generation) is the bottleneck; 3.84 hinges on three LPs; 3.85+ not viable yet. See attempts/A13-case-lp-bnb/notes.md.
+
+## 2026-08-18 — A14-close-tree-384 — close A13's case tree at 3.84? NO: the tree cannot close (done-negative)
+- `attempts/A14-close-tree-384/`: A14 copies of A13's `lpbox/caselp/certify/verify_case` + `run_node.py` (one node, warm),
+  `branch_node.py` (one wall-first level with a process pool), `level1_385.py`, `verify_casetree.py` (exact tree-logic checker:
+  box cover of the corner zone in rationals, core lemma re-derived with rational tangent bounds, NO-family set = C4-orbit,
+  leaf re-verification), `summarize_a14.py`; notes.md (§1 D4 WLOG + budget check confirmed; §3b–§5b bugs; §6 verdict).
+- Engineering: vectorised column incidence (A13 spent 0.2 s per column in a Python loop); alternating row/column iterations
+  (dual/primal simplex stay warm; mixed additions took 340 s per HiGHS solve at 8k×5k) with row pruning (6 strikes) and
+  column pruning (zero weight, positive reduced cost, 2 strikes): 2–30 s per iteration; HiGHS status check.
+- BUG (A10→A13 `RowOracle.exact_theta`, all hypothesis nodes): the max_cand cut of the lowest-mass arrangement cells was
+  applied before the hypothesis filter ⇒ exempt cells (mass 0.2–0.5) exhausted it ⇒ "minmass = 1" with genuine holes
+  (verifier: 0.958 at θ = 8.27°). Two further blind spots (cells straddling the admissible-domain boundary are clipped into
+  neighbours ⇒ wall-touching placements never proposed; the cap exhausted at unconverged nodes) — all three fixed (v1–v3).
+  Every A13 τ at a hypothesis node is an under-estimate; A13's "9 of 12 corner boxes dead by 0.2–0.7" was an artefact
+  (A14: −0.13…+0.04, and 0.00 with the 3e-3 certification shrink). A13's node 13 was never solved (pending in tree.json).
+- Results at 3.84 (fixed oracle): NO(all corners) 9.59 (dead −1.4) — **certified, exact verifier PASS: every packing at side
+  ≤ 3.84 has a square centred in a corner zone [0.5,1.1]²**; far box 13 ([0.8,1.1]²×[60,90]°, −0.40) also certified (total
+  9.9755 < 10); on-corner boxes 2/3/4 alive +0.11…+0.19; exact corner square
+  fixed: τ = 10.000 with dual coverage 1.000 ⇒ τ* ≥ 10 for every box containing it (no refinement can kill); four exact
+  corners fixed: 7.000 = budget (the ¼-weight structure survives all corner fixing); killing power only in NO-side zones
+  (4 corners + NO side0: 6.36 < 7; + NO all sides 4.25; root + NO all sides 8.28). One more corner level under 2/3/4:
+  NO child −0.26…−0.30, diagonal-off boxes −0.2, 9/12 YES boxes alive by +0.13…+0.54 (growth ×9, slack grows with depth).
+  Certification overhead 0.1–0.25 per node. 3.85 level 1: root 11.07, NO corners 9.56, on-corner boxes 0.00…+0.11.
+- Verdict: 3.84 not certifiable by this tree; closing needs ≥ 2 empty side zones per leaf ⇒ 10⁵–10⁶ node LPs (10⁴–10⁵ CPU-h);
+  recommend stopping the case-LP campaign; the machine-checked yield of I-L6 is the corner-zone lemma + the structural facts.
