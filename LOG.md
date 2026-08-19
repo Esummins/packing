@@ -254,3 +254,23 @@
 - Verdict: pure angle-box B&B not viable at 3.85–3.87 (mid-tilt band never dies; ≥10⁶–10⁹ multisets meet it; per-box
   LP 1–15 min); the box LP is a good first-level killer inside a case-LP (I-L6) tree with clique/region cuts against
   the ¼-weight 4-fold structures. Trump neighbourhood alone would be ~10³ LPs.
+
+## 2026-08-18 — A12-region-rank-pilot — region-rank cuts (I-L8) do NOT close the mid-tilt integrality gap (done-negative)
+- `attempts/A12-region-rank-pilot/`: `lp_region.py` (A10 box LP + region dual variables λ_R with cost k(R); row oracle on
+  μ + Λ with cell/shell sampling), `make_regions.py` (k(R) ≤ α(G_robust) for unions of small (c,θ)-boxes, robust pairwise
+  overlap by interval witness points), `analyze.py`/`geom.py` (support dissection, exact SAT overlaps, CP-SAT MIS,
+  rank-inequality violation search, realised lower bounds k_lb(R)), `iterate.py`, `depth_profile.py`, `lp_fixed.py`
+  (conditional LP: fixed squares / excluded zones, budget n−1); notes.md, results/, plots/, logs/.
+- Box [0,2]∪[32,36] reproduced: τ = 11.000 (3.86: conv 96 s; 3.87: conv 33 s). Fractional packing = 4 corners (1) + 4 side
+  zones (4×¼ each) + interior 3 (8 tilted ¼ pinwheel at 32–33° + 4 upright ¼); Σx(frac) = 7 vs α = 6, support 11 vs α = 10,
+  max rank violation 1.5. ALL orbit weights are integers ⇒ integer load on every C4-symmetric region; every macroscopic
+  region tried (discs 0.6–1.0, annulus, side/corner zones, tilted blobs, corners+disc, sides+disc, …) is realised
+  (x*(R) ≤ k_lb(R)) — 4+4+1, 4+2+3, 8+1 all packable, only the global 4+4+3 fails.
+- Lemma: with k(R) certified by the sub-LP (I-L8 recursion) a cut is never violated when x*(R) ∈ ℤ (x*|_R is dual-feasible
+  for the sub-LP, τ_R ≥ x*(R)). Combinatorially certified fine cuts (28 boxes, ρ ≤ 0.05, θ±1°, k = 6 vs 7; ρ ≥ 0.08 ⇒ α ≥ 8)
+  added to the LP: τ = 11.000000, λ = 0 in 10+9 rounds at 3.86, 3 at 3.85, 3 at 3.87; support slides 0.06–0.33 per round
+  (continuum escape); even an uncertified ρ = 0.3, k = 6 region is escaped. Per round 10–100 s.
+- Contrast: conditional LP "four corner squares fixed" τ = 7.000 = budget (alive); "corners fixed + no square centred in
+  side zones" τ = 5.000 < 7 (DEAD, 12 s) ⇒ the 8+3 structure needs conditional counts (case-LP I-L6, fix-a-square branches).
+- Verdict: region cuts don't kill the mid-tilt band; "angle boxes × region cuts" campaign stays 10⁶+ LPs. Recommend a pilot of
+  an asymmetric (C1) conditional LP with box-of-fixed-square "shadow" rows (est. 10³–10⁴ LPs per angle box).

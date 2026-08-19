@@ -99,3 +99,8 @@ container) whose centres lie in R. Dual certificate: μ ≥ 0 and λ_R ≥ 0 wit
 and μ(total) + Σ_R λ_R·k(R) < 11 (bridge: sum over the 11 squares). Each k(R) is itself a small packing bound,
 provable by the SAME measure LP with n = k(R)+1 restricted to centres in R (recursion). This is the dual form of
 Stromquist-style "at most k boxes in region R" lemmas and directly targets the A10 obstruction. Pilot = A12.
+Status: **closed (A12, done-negative)** — the mid-tilt fractional packing has integer load on every symmetric region and a
+realising packing on every macroscopic region (4+4+3 with 4+4+1 / 4+2+3 / 8+1 all packable); LP-certified k(R) can never yield a
+violated cut on integer loads (x*|_R is dual-feasible for the sub-LP); combinatorially certified fine cuts (ρ ≤ 0.05) are escaped by
+sliding the support (τ = 11.000, λ = 0 over 25 rounds at 3.85–3.87). Conditional (fixed-square / excluded-zone) LPs DO kill it
+(τ = 5 < 7 with corners fixed and side zones empty) ⇒ pursue I-L6 with fix-a-square branches instead.
