@@ -110,4 +110,4 @@ with K(x,x) ≤ λ−1 ∀x and K(x,y) ≤ −1 for all disjoint pairs; then Σ�
 ϑ ≤ fractional clique cover ≤ τ* (Theorem 1), and ϑ sees odd cycles (ϑ(C₅)=√5), i.e. exactly the ¼-weight cheats of
 A10–A14. Ansatz K = φᵀMφ (D4-symmetric polynomial/Fourier basis, M ⪰ 0), cutting planes on the pair constraint,
 rigor by exact LDLᵀ + 6-D interval check. Pilot: discretised ϑ′ vs LP on the same placement graph at s = 3.85.
-Follow-ups: 3-point (Bachoc–Vallentin-type) bound; ϑ′ as node relaxation in the case tree (I-L6). Status: proposed.
+Follow-ups: 3-point (Bachoc–Vallentin-type) bound; ϑ′ as node relaxation in the case tree (I-L6). Status: **piloted (A15, 2026-08-19): on the same discretised placement graph ϑ′ ∈ [10.38, 10.48] vs LP 11.000 vs α 10 at s = 3.84–3.85 (mid-tilt graph too) — about half the LP gap removed, gap stable under grid refinement; continuous kernel version recommended, with the kernel class containing the LP's coverage-indicator features (the LP certificate is such a kernel). Next: ϑ′ on an un-seeded fine grid; ϑ′ as node relaxation in the case tree.**

@@ -1,4 +1,4 @@
-# Results (as of 2026-08-18)
+# Results (as of 2026-08-19)
 
 Notation: s(n) = side of the smallest square containing n unit squares with disjoint interiors
 (rotations allowed). Everything below refers to n = 11 unless stated.
@@ -138,6 +138,28 @@ route is the angle-box branch-and-bound whose box killer is Theorem 1 restricted
   admissible centre square, i.e. in [0.5,1.1]² up to symmetry (Lemma; a Stromquist-style wall lemma obtained by LP). A second
   leaf is certified too (no square with centre in [0.8,1.1]² and orientation in [60°,90°], total 9.9755 < 10); the other ten
   first-level leaves are not certifiable (three are provably alive).
+
+
+## ϑ′ (Lovász–Schrijver) vs the point-clique LP on a discretised placement graph (A15, 2026-08-19)
+
+- **Question (I-L9).** On one finite placement graph G (grid of (cx,cy,θ), edges = interior overlap, the A12 ¼-structure
+  placements injected so that the grid LP shows the cheat), is Schrijver's ϑ′(G) meaningfully below the point-clique LP ν*_G?
+  (α ≤ ϑ′ ≤ χ̄_f ≤ ν*_G on the same graph; ϑ′ sees odd cycles.)  A finite induced subgraph says NOTHING about s(11) — this is a
+  comparison of relaxations only.
+- **Answer: yes.**  Same graph, N ≈ 2150–2340 (h = 0.2, Δθ = 10°, or mid-tilt {0°}∪[30°,36°]):
+  s = 3.80: LP 10.000, ϑ′ 10.000, α 10 | s = 3.84: LP 11.000, **ϑ′ ∈ [10.376, 10.392]**, α 10 | s = 3.85: LP 11.000,
+  **ϑ′ ∈ [10.43, 10.48]** (mid-tilt graph [10.41, 10.48]; refined N = 3750: [10.40, 10.74]), α 10 | s = 3.87: LP 11.000, ϑ′ ∈ [10.45, 10.64], α 10.
+  On the A12 ¼-structure support alone ϑ′ = α (10 / 10 / 9) while the LP is 10.5–10.9.  So ϑ′ removes about half of the LP's
+  integrality gap on the discretisation that carries the ¼-cheat, and the gap does not shrink between N = 2229 and N = 3750;
+  ϑ′ is still ≈ 0.4 above α (rank-150 optimum: corners 0.93, eight side uprights 0.37, interior 2.5).
+- **Machinery.** D4 block-diagonalised SDP (5 PSD blocks ≈ N/8,…,N/4, one constraint per pair orbit) in SCS with certified
+  brackets (dual certificate Z ⪰ 0 ⇒ upper bound; primal-feasible B ⇒ lower bound; exact ϑ′ on the 400–520-node support subgraph).
+  SCS needs ≳ 3·10⁴ iterations at N ≈ 2200 (0.25 s each): a better SDP solver / lazy pair constraints are needed to scale to 10⁴ nodes.
+- **Consequence for the lower-bound programme.** The LP certificate is itself a kernel certificate with coverage-indicator features
+  (φ(x) = (1, 1[p∈Q(x)]/μ(Q(x))), M = Σ_p μ_p (τe_p − e_0)(τe_p − e_0)ᵀ/τ ⪰ 0 gives K = −1 on disjoint pairs, K(x,x) ≤ τ−1), so the
+  continuous ϑ′-kernel certificate of I-L9 should be built on "LP atoms + cross terms" (then a smooth basis), verified by the A08-style
+  box B&B (K is piecewise constant in the atom-arrangement cells).  Recommended next experiments: ϑ′ on an un-seeded refined grid at
+  3.85–3.87, and ϑ′ as the node relaxation inside the A13/A14 case tree (LP = 7.000 = budget with four corners fixed — is ϑ′ < 7?).
 
 ## Next steps (ordered)
 

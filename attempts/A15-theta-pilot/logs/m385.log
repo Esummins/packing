@@ -1,0 +1,18 @@
+[m385] s=3.85 h=0.2 thetas=5 extra=121: N=2149 orbits=281 edges=918190 density=0.398 t=0.9s
+  LP it 0: nu=11.111111 rows=5929 maxcov grid=1.555556 arr=1.555556 t=1.6s [Optimal]
+  LP it 1: nu=11.000000 rows=8263 maxcov grid=1.248874 arr=1.272473 t=10.0s [Optimal]
+  LP it 2: nu=11.000000 rows=12963 maxcov grid=1.211682 arr=1.211682 t=25.2s [Optimal]
+  LP it 3: nu=11.000000 rows=17663 maxcov grid=1.069964 arr=1.182951 t=67.0s [Optimal]
+  LP it 4: nu=11.000000 rows=18920 maxcov grid=1.083333 arr=1.166667 t=81.6s [Optimal]
+  LP it 5: nu=11.000000 rows=19082 maxcov grid=1.205168 arr=1.205168 t=100.1s [Optimal]
+  LP it 6: nu=11.000000 rows=20702 maxcov grid=1.000000 arr=1.000000 t=117.0s [Optimal]
+[m385] nu*_G = 11.000000 (maxcov 1.000000, 20702 points, 32 support placements, 117s)
+  symmetry basis: blocks {'A1': 281, 'A2': 263, 'B1': 266, 'B2': 269, 'E': 535} (sum d*m = 2149 = N 2149) t=0.1s
+  pair orbits: 289262 (edge orbits 115134, non-edge 174128)
+  SCS data: 578806 rows x 289543 vars, nnz 2516287, psd blocks [281, 263, 266, 269, 535]
+  build t=0.9s; solving SCS eps=1e-05 (trace scale 2149.0)
+  SCS: status solved (inaccurate - reached time_limit_secs) iters 6950 pobj 10.950069 dobj 10.697210 res_pri 7.32e-02 res_dual 2.76e-08 gap 2.53e-01 t=1506.6s
+  bracket: 6.821563 <= theta'_G <= 10.697239  (cert lam 10.697210, min eig -2.9e-05, eps 0.0e+00)
+[m385] theta'_G = 10.950069 (dual 10.697210, solved (inaccurate - reached time_limit_secs), 6950 it, 1509s); cleaned-B value 11.172350 (min eig -3.5e-04); B rank(1e-3) 124, support 752
+[m385] alpha_G = 10 (OPTIMAL, bound 10.0, 15s)
+[m385] done, total 1643s

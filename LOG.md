@@ -302,3 +302,20 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   Certification overhead 0.1–0.25 per node. 3.85 level 1: root 11.07, NO corners 9.56, on-corner boxes 0.00…+0.11.
 - Verdict: 3.84 not certifiable by this tree; closing needs ≥ 2 empty side zones per leaf ⇒ 10⁵–10⁶ node LPs (10⁴–10⁵ CPU-h);
   recommend stopping the case-LP campaign; the machine-checked yield of I-L6 is the corner-zone lemma + the structural facts.
+
+## 2026-08-19 — A15-theta-pilot — ϑ′ (Lovász–Schrijver) vs the point-clique LP on one discretised placement graph (I-L9 pilot, done)
+- `attempts/A15-theta-pilot/`: `graph.py` (D4-invariant grid of placements + injected A12 ¼-structure / A07 dual placements, exact SAT
+  adjacency), `lp_point.py` (point-LP, row generation), `theta_sdp.py` (ϑ′ with the D4 symmetry block-diagonalised via isotypic projectors,
+  one constraint per pair orbit, SCS direct; dual-certificate upper bound and primal-feasible lower bound), `support_sdp.py` (exact ϑ′ on the
+  support subgraph ⇒ tight lower bound), `continue_sdp.py`, `alpha.py` (CP-SAT), `run_pilot.py`, `analyze.py`, `post_dual.py`, `table.py`;
+  `results/*.json` (+ graphs, B, LP x, SCS duals), `logs/`; notes.md.
+- Table (same graph for all three numbers; N ≈ 2150–2340, h = 0.2, Δθ = 10° or mid-tilt {0}∪[30,36]; f385: N = 3750, Δθ = 5°):
+  s=3.80: LP 10.000, ϑ′ 10.000, α 10 | s=3.84: LP 11.000, ϑ′ ∈ [10.376, 10.392], α 10 | s=3.85: LP 11.000, ϑ′ ∈ [10.43, 10.48]
+  (mid-tilt graph [10.41, 10.48]; N=3750: [10.40, 10.74]), α 10 | s=3.87: LP 11.000 (row generation not converged, ≥ 10.97),
+  ϑ′ ∈ [10.45, 10.64], α 10.  On the A12 ¼-structure support alone (52–80 nodes): LP 10.5–10.9, ϑ′ = α = 10 (9 at 3.87).
+- Verdict: ϑ′ − LP ≈ −0.55…−0.6 at 3.84/3.85 on the same placement graph (≈ half of the LP's integrality gap; ϑ′ is still ≈ 0.4 above α,
+  B has rank ≈ 150 with corners 0.93, side uprights 8 × 0.37, interior 2.5); continuous kernel version worth building: YES — with the
+  kernel class containing coverage-indicator features (the LP certificate is itself such a kernel, notes §4).  NOT a bound on s(11)
+  (finite induced subgraph; the grid LP is 11 only because the ¼-structure was injected).
+- Numerics: SCS on the symmetry-reduced SDP (0.3–0.9 M pair-orbit rows, PSD blocks ≈ N/8…N/4) is 0.25–0.6 s/iteration and needs ≳ 3·10⁴
+  iterations; 25–55-min runs give reliable dual upper bounds only; tight values from 400–520-node support sub-SDPs (15 min).

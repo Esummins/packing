@@ -1,0 +1,20 @@
+[c384] s=3.84 h=0.2 thetas=9 extra=131: N=2337 orbits=304 edges=1112562 density=0.408 t=1.2s
+  LP it 0: nu=11.119816 rows=5929 maxcov grid=2.258065 arr=2.258065 t=3.7s [Optimal]
+  LP it 1: nu=11.000000 rows=10629 maxcov grid=1.586704 arr=1.586704 t=16.1s [Optimal]
+  LP it 2: nu=11.000000 rows=15329 maxcov grid=1.409490 arr=1.465780 t=38.1s [Optimal]
+  LP it 3: nu=11.000000 rows=20029 maxcov grid=1.750000 arr=1.750000 t=58.4s [Optimal]
+  LP it 4: nu=11.000000 rows=20873 maxcov grid=1.250000 arr=1.250000 t=87.6s [Optimal]
+  LP it 5: nu=11.000000 rows=20982 maxcov grid=1.142857 arr=1.160714 t=113.2s [Optimal]
+  LP it 6: nu=11.000000 rows=21534 maxcov grid=1.150000 arr=1.150000 t=132.2s [Optimal]
+  LP it 7: nu=11.000000 rows=21593 maxcov grid=1.200000 arr=1.200000 t=144.8s [Optimal]
+  LP it 8: nu=11.000000 rows=22174 maxcov grid=1.000000 arr=1.000000 t=176.9s [Optimal]
+[c384] nu*_G = 11.000000 (maxcov 1.000000, 22174 points, 58 support placements, 177s)
+  symmetry basis: blocks {'A1': 304, 'A2': 287, 'B1': 290, 'B2': 292, 'E': 582} (sum d*m = 2337 = N 2337) t=0.1s
+  pair orbits: 342010 (edge orbits 139447, non-edge 202563)
+  SCS data: 684325 rows x 342314 vars, nnz 2987983, psd blocks [304, 287, 290, 292, 582]
+  build t=1.0s; solving SCS eps=1e-05 (trace scale 2337.0)
+  SCS: status solved (inaccurate - reached time_limit_secs) iters 5875 pobj 11.004345 dobj 10.623967 res_pri 8.44e-02 res_dual 4.68e-08 gap 3.80e-01 t=1503.5s
+  bracket: 6.487086 <= theta'_G <= 10.623991  (cert lam 10.623967, min eig -2.4e-05, eps 0.0e+00)
+[c384] theta'_G = 11.004345 (dual 10.623967, solved (inaccurate - reached time_limit_secs), 5875 it, 1506s); cleaned-B value 11.252944 (min eig -3.7e-04); B rank(1e-3) 176, support 748
+[c384] alpha_G = 10 (OPTIMAL, bound 10.0, 17s)
+[c384] done, total 1702s

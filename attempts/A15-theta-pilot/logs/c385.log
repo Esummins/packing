@@ -1,0 +1,23 @@
+[c385] s=3.85 h=0.2 thetas=9 extra=131: N=2229 orbits=291 edges=1001682 density=0.403 t=1.0s
+  LP it 0: nu=11.111111 rows=5929 maxcov grid=1.388889 arr=1.388889 t=3.9s [Optimal]
+  LP it 1: nu=11.000000 rows=8849 maxcov grid=1.218263 arr=1.306319 t=17.8s [Optimal]
+  LP it 2: nu=11.000000 rows=13549 maxcov grid=1.147674 arr=1.147674 t=38.2s [Optimal]
+  LP it 3: nu=11.000000 rows=17919 maxcov grid=1.186650 arr=1.192213 t=54.0s [Optimal]
+  LP it 4: nu=11.000000 rows=20372 maxcov grid=1.073235 arr=1.089171 t=77.7s [Optimal]
+  LP it 5: nu=11.000000 rows=21616 maxcov grid=1.086281 arr=1.086281 t=111.9s [Optimal]
+  LP it 6: nu=11.000000 rows=21931 maxcov grid=1.250000 arr=1.500000 t=126.8s [Optimal]
+  LP it 7: nu=11.000000 rows=22948 maxcov grid=1.144840 arr=1.157839 t=144.0s [Optimal]
+  LP it 8: nu=11.000000 rows=23594 maxcov grid=1.054054 arr=1.131757 t=180.3s [Optimal]
+  LP it 9: nu=11.000000 rows=23879 maxcov grid=1.051772 arr=1.051772 t=219.2s [Optimal]
+  LP it 10: nu=11.000000 rows=24108 maxcov grid=1.003474 arr=1.014980 t=246.1s [Optimal]
+  LP it 11: nu=11.000000 rows=24137 maxcov grid=1.000000 arr=1.000000 t=291.6s [Optimal]
+[c385] nu*_G = 11.000000 (maxcov 1.000000, 24137 points, 118 support placements, 292s)
+  symmetry basis: blocks {'A1': 291, 'A2': 273, 'B1': 276, 'B2': 279, 'E': 555} (sum d*m = 2229 = N 2229) t=0.1s
+  pair orbits: 311172 (edge orbits 125570, non-edge 185602)
+  SCS data: 622636 rows x 311463 vars, nnz 2710217, psd blocks [291, 273, 276, 279, 555]
+  build t=1.0s; solving SCS eps=1e-05 (trace scale 2229.0)
+  SCS: status solved (inaccurate - reached time_limit_secs) iters 6475 pobj 10.975591 dobj 10.703888 res_pri 7.90e-02 res_dual 3.20e-08 gap 2.72e-01 t=1502.6s
+  bracket: 6.749549 <= theta'_G <= 10.703914  (cert lam 10.703888, min eig -2.6e-05, eps 0.0e+00)
+[c385] theta'_G = 10.975591 (dual 10.703888, solved (inaccurate - reached time_limit_secs), 6475 it, 1505s); cleaned-B value 11.199621 (min eig -3.5e-04); B rank(1e-3) 132, support 792
+[c385] alpha_G = 10 (OPTIMAL, bound 10.0, 17s)
+[c385] done, total 1815s
