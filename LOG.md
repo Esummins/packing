@@ -236,3 +236,21 @@
   small tilted cluster; larger n needs seeding with the record structure + fix-s at record−ε, angle refinement near
   the record tilt, in-search LP polish, more workers/longer runs. Bugs: fix-s off the 1e-5 grid ⇒ MODEL_INVALID
   (fixed in A11's milp_pack.py); `--counts` silently ignored by the CP-SAT back-end (A09's counts run was unconstrained).
+
+## 2026-08-18 — A10-angle-box-lp — orientation-restricted measure LP: Trump box tight, mid-tilt band not; angle B&B sizing
+- `attempts/A10-angle-box-lp/lp_measure_box.py` (A07's lp_measure2 with θ-restricted rows, C4/D4 symmetry chosen by
+  reflection-closure, EXACT per-θ arrangement row oracle — the c-grid oracle missed sliver holes and gave τ=10.76 at
+  {0,45}/3.89 where ν≥11 — and non-binding row pruning: LP 60 s → 1 s), `verify_measure_restricted.py` (A08 copy +
+  `--theta-range`), `make_cert_box.py`, `run_batch.py`, `summarize.py`; results/*.json, notes.md.
+- Sanity: {0°} → crossing exactly at s=4 (9→16); {0°,45°} → (3.885, 3.886] = Stromquist's 2+4√2/3.
+- Trump box [0,δ]∪[θ*±δ]: τ*_B ≈ 10.3–10.8 then jumps to 11 exactly (weight-11 fractional packing appears):
+  s_B(10°)≤3.84, s_B(5°)∈(3.84,3.85), s_B(2°)∈(3.86,3.865), s_B(1°)∈(3.87,3.874], s_B(≤0.5°)≤3.876 (EPS_GEO floor 8e-4)
+  ⇒ s*−s_B(δ) ≈ 0.006·δ: the restricted LP is tight at Trump as δ→0. Rigorous restricted certificate
+  (certs_wip/box_cert_3.85_d2.json, PASS): no packing with all orientations in [0,2°]∪[38.18,42.18°] has side ≤ 3.85.
+- Negative: boxes "uprights + one tilt in ≈[20°,36°]" ([0,10]∪[20,30], [0,2]∪[32,36], [0,1]∪[34.5,35.5], [0,1]∪[31,33],
+  [0,5]∪[25,35]∪[38,43]) are ALIVE at 3.85 and 3.87 with τ=11.000 exactly via 4-fold ¼/½-weight fractional structures
+  (no packing known there < 3.89), down to half-width 0.5°; class weights/counts do not help (τ(α) convex, min at α=1);
+  [0,10] alone: 9.33 (3.85), 10.5 (3.87), 11.0 (3.90). Far boxes without uprights or with tilts ≥ 38° die easily.
+- Verdict: pure angle-box B&B not viable at 3.85–3.87 (mid-tilt band never dies; ≥10⁶–10⁹ multisets meet it; per-box
+  LP 1–15 min); the box LP is a good first-level killer inside a case-LP (I-L6) tree with clique/region cuts against
+  the ¼-weight 4-fold structures. Trump neighbourhood alone would be ~10³ LPs.

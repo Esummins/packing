@@ -90,3 +90,12 @@ the measure LP restricted to that box (I-L2 with orientation-restricted constrai
 box than the global τ*). Symmetry helps exactly here (S₁₁ ordering, D₄, 90°), but the optimum itself has
 trivial symmetry (Trump's packing is asymmetric; the octic's Galois group is S₈ — verified 2026-08-18 by
 cycle-type statistics mod 426 primes), so no symmetric-stratum shortcut exists. Status: running → A09.
+
+**I-L8. Region-rank cuts, recursively certified (advisor, 2026-08-18, after A10).** A10 shows the box LP's
+integrality gap is concentrated in 4-fold-symmetric fractional structures (½-weight edge uprights, four ½-weight
+rotations of a ~30–35° square, ¼-weight uprights) with centres in a ring/edge region R. Valid inequality for every
+real packing: Σ_{Q : c(Q) ∈ R} x_Q ≤ k(R), where k(R) = max number of pairwise-disjoint unit squares (inside the
+container) whose centres lie in R. Dual certificate: μ ≥ 0 and λ_R ≥ 0 with μ(Q) + Σ_{R ∋ c(Q)} λ_R ≥ 1 for all Q
+and μ(total) + Σ_R λ_R·k(R) < 11 (bridge: sum over the 11 squares). Each k(R) is itself a small packing bound,
+provable by the SAME measure LP with n = k(R)+1 restricted to centres in R (recursion). This is the dual form of
+Stromquist-style "at most k boxes in region R" lemmas and directly targets the A10 obstruction. Pilot = A12.

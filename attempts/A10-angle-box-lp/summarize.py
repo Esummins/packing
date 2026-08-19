@@ -57,6 +57,8 @@ if "--plot" in sys.argv:
         if not tag.startswith("trump") and not tag.startswith("san"):
             continue
         rs2 = [r for r in rs if r["alpha"] in (None, "")]
+        if not rs2:
+            continue
         ax.plot([r["s"] for r in rs2], [r["tau"] for r in rs2], "o-", label=tag)
     ax.axhline(11, color="k", lw=0.8)
     ax.axvline(3.877083590, color="r", lw=0.8, ls="--", label="s* (Trump)")

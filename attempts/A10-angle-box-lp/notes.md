@@ -11,9 +11,9 @@ far boxes; campaign-size estimate and verdict.
 
 **TL;DR.** (i) The restricted LP is calibrated: {0°} crosses 11 exactly at s = 4, {0°,45°} in (3.885, 3.886] =
 Stromquist's 2+4√2/3 = 3.88562. (ii) Trump box: τ*_B(s) sits at 10.3–10.8 and then JUMPS to exactly 11 (a weight-11
-fractional packing inside the box appears): s_B(10°) ≤ 3.84, s_B(5°) ∈ (3.84, 3.85), s_B(2°) ∈ (3.86, 3.87),
-s_B(1°) ∈ (3.87, 3.877); i.e. s* − s_B(δ) ≈ 0.006·δ[°] → the restricted LP IS tight at the optimum as δ → 0
-(resolution floor from EPS_GEO = 1e-4 is ≈ 8e-4 in s). A rigorous restricted certificate for
+fractional packing inside the box appears): s_B(10°) ≤ 3.84, s_B(5°) ∈ (3.84, 3.85), s_B(2°) ∈ (3.86, 3.865),
+s_B(1°) ∈ (3.87, 3.874], s_B(0.5°) ∈ (3.87, 3.876], s_B(0.25°) ≤ 3.876; i.e. s* − s_B(δ) ≈ 0.006·δ[°] down to the
+resolution floor (EPS_GEO = 1e-4 ⇒ ≈ 8e-4 in s) → the restricted LP IS tight at the optimum as δ → 0. A rigorous restricted certificate for
 [0°,2°] ∪ [38.18°,42.18°] at s = 3.85 PASSES the exact verifier. (iii) BUT the box LP is NOT tight away from Trump:
 boxes "uprights + moderate tilts 20°–36°" (e.g. [0,2]∪[32,36], [0,10]∪[20,30], [0,5]∪[25,35]∪[38,43]) are ALIVE at
 3.85 and 3.87 with τ*_B = 11.000 exactly, through 4-fold-symmetric fractional structures (weights 1/4, 1/2), although
@@ -77,14 +77,14 @@ fractional-cover bound with slack ~0.3 below the threshold).
 
 τ*_B(s) (joint value / row-only value where run):
 
-| δ | 3.83 | 3.84 | 3.85 | 3.86 | 3.865 | 3.87 | 3.874 | 3.876 | 3.877 | crossing s_B(δ) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 10° | – | **11.000 (ν=11)** | 11.000 (ν=11) | (≥11) | | (≥11) | | | (≥11) | ≤ 3.84 (global ceiling is 3.83) |
-| 5° | 10.51 | 10.56 | **11.000 (ν=11, conv)** | 11.000 (ν=11) | | (≥11) | | | (≥11) | (3.84, 3.85) |
-| 2° | – | 10.35 | 10.57 / 10.597 | 10.64 / 10.684 | PENDING | **11.0007 (ν=11)** | | | 11.04 | (3.86, 3.87) |
-| 1° | – | 10.31 | 10.54 / 10.560 | 10.60 / 10.632 | | 10.76 / PENDING | PENDING | PENDING | 11.008 | (3.87, 3.877) |
-| 0.5° | | | | | | PENDING | | PENDING | | |
-| 0.25° | | | | | | | | PENDING | | |
+| δ | 3.83 | 3.84 | 3.85 | 3.86 | 3.865 | 3.87 | 3.874 | 3.876 | 3.877 | crossing s_B(δ) | s* − s_B(δ) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 10° | – | **11.000 (ν=11)** | 11.000 (ν=11) | (≥11) | | (≥11) | | | (≥11) | ≤ 3.84 (global ceiling 3.83) | ≥ 0.037 |
+| 5° | 10.51 | 10.56 | **11.000 (ν=11, conv)** | 11.000 (ν=11) | | (≥11) | | | (≥11) | (3.84, 3.85) | 0.027–0.037 |
+| 2° | – | 10.35 | 10.57 / 10.597 | 10.64 / 10.684 | **11.000 (ν=11)** | 11.0007 (ν=11) | | | 11.04 | (3.86, 3.865) | 0.012–0.017 |
+| 1° | – | 10.31 | 10.54 / 10.560 | 10.60 / 10.632 | | 10.76 / **10.792** (ro, minmass 0.997) | 11.000 (maxcov 1.013) | **11.000 (ν=11, conv)** | 11.008 | (3.87, 3.874] | 0.003–0.007 |
+| 0.5° | | | | | | 10.68 | | **11.000 (ν=11, conv, 250 s)** | | (3.87, 3.876] | 0.001–0.007 |
+| 0.25° | | | | | | | | **11.000 (ν=11, conv, 60 s)** | | ≤ 3.876 | ≤ 0.001 (= floor) |
 
 (≥11): implied by monotonicity in s (τ*_B non-decreasing) or by the box containing a box already at 11.
 Caveat at s = 3.877: EPS_GEO = 1e-4 shrinks LP squares to side 1−2e-4, so the LP at s "sees" s·(1+2e-4);
@@ -95,40 +95,50 @@ Shape: for every δ the value hovers at 10.3–10.8 (slope ≈ 20/unit s, like t
 11 at s_B(δ), where a weight-11 fractional packing with orientations in the box appears; the "packing" that appears
 uses tilts at the LOWER end of the tilted interval (30.7° for δ=10, 35.18° for δ=5 at 3.85) — the same
 "uprights + 30–35° tilt" structure that saturates the global LP (A07 §5). Empirically **s* − s_B(δ) ≈ 0.006·δ**
-(δ=5: 0.03; δ=2: ~0.012; δ=1: ~0.005) ⇒ s_B(δ) → s* as δ → 0: the restricted LP is tight at the optimum in the
-same sense as the global LP at s(10). Plot: `plots/tau_trump_box.png`.
+(δ=5: 0.03; δ=2: ~0.014; δ=1: ~0.005; δ ≤ 0.5: below the 1e-3 resolution floor set by EPS_GEO) ⇒ s_B(δ) → s* as
+δ → 0: the restricted LP is tight at the optimum in the same sense as the global LP at s(10) — but only in a
+neighbourhood of Trump's angles: for the box to die at s_t one needs δ ≲ (s* − s_t)/0.006. Plot: `plots/tau_trump_box.png`.
 
 Robustness of these numbers: values at 10.3–10.8 are joint-LP values with maxcov 1.02–1.07 and minmass 0.87–0.94;
 the row-only continuations move them by ≤ +0.05 (10.572 → 10.597, 10.642 → 10.684, 10.540 → 10.560, 10.600 → 10.632),
-so "< 11" is safe by ≥ 0.3 in every dead cell; the "≥ 11" cells are dual-certified to oracle tolerance (maxcov 1.000).
+so "< 11" is safe by ≥ 0.2 in every dead cell (δ=1 at 3.87: row-only 10.792 with minmass 0.997 ⇒ τ*_B ≤ 10.83 for that
+atom set); the "≥ 11" cells marked ν=11 are dual-certified to oracle tolerance (maxcov 1.000); the 3.874/δ=1 cell has
+maxcov 1.013 (dual scaled by 1/1.013 only gives ≥ 10.86) — "probably alive".
 
 ## 4. Counts-weighted variant (task 3)
 
 Box δ=2 with counts (n_0, n_θ) = (6, 5): rows of class c get RHS α_c, normalised 6α_0 + 5α_θ = 11 (the LP is homogeneous
 in α, so this is WLOG); box dead iff τ*_B(α) < 11.
 
-| s | α_0 | α_θ | τ*_B(α) | unweighted | note |
-|---|---|---|---|---|---|
-| 3.86 | 0.8 | 1.24 | 12.16 | 10.68 | worse: cheap tilted squares get expensive |
-| 3.87 | 0.9 | 1.12 | PENDING | 11.0007 | |
-| 3.87 | 1.1 | 0.88 | PENDING | 11.0007 | |
-| mid box [0,2]∪[32,36] (6,5), 3.85 | 0.8/0.9 | 1.24/1.12 | PENDING | 11.000 | the alive fractional structure has upright weight ≈ 9, tilted ≈ 2 |
-| mid box, 3.87 | 0.8 | 1.24 | PENDING | 11.000 | |
+| box, counts | s | α_0 | α_θ | τ*_B(α) | unweighted τ*_B | note |
+|---|---|---|---|---|---|---|
+| Trump δ=2, (6,5) | 3.86 | 0.8 | 1.24 | 12.16 | 10.68 | worse |
+| Trump δ=2, (6,5) | 3.87 | 0.9 | 1.12 | 11.21 | 11.0007 | worse |
+| Trump δ=2, (6,5) | 3.87 | 1.1 | 0.88 | 11.66 (conv, 30 s) | 11.0007 | worse: uprights expensive ⇒ corner/edge upright structure pays more |
+| mid [0,2]∪[32,36], (6,5) | 3.85 | 0.8 | 1.24 | 12.17 | 11.000 | worse (the dual re-optimises to a tilt-heavier fractional structure) |
+| mid [0,2]∪[32,36], (6,5) | 3.85 | 0.9 | 1.12 | 11.18 | 11.000 | worse |
+| mid [0,2]∪[32,36], (6,5) | 3.87 | 0.8 | 1.24 | not run (pattern clear) | 11.000 | |
+
+τ*_B(α) is the value of an LP minimisation as a function of its RHS, hence CONVEX in α; on the segment
+6α_0 + 5α_θ = 11 the minimum is at/near α = (1,1) in every case tested. **Counts do not help** for balanced boxes:
+the dual simply moves to a fractional structure matching the weights (uprights are cheap coverage, tilted squares
+expensive, or vice versa). They can only help for boxes whose counts are far from what the fractional packing wants
+(e.g. a box with 2 uprights and 9 tilted), which is not where the difficulty lies.
 
 ## 5. Far boxes (task 4), 600–900 s each
 
 | Θ_B | 3.85 | 3.87 | 3.90 / 3.95 | verdict |
 |---|---|---|---|---|
-| [0,10] (all near-upright) | 9.333 (conv) | 10.500 (conv) | 11.000 / 11.000 (ν=11) | dead ≤ 3.87, alive at 3.90 (LP not tight: no small-tilt packing < 4 is known) |
+| [0,10] (all near-upright) | 9.333 (conv) | 10.500 (conv) | 11.000 / 11.000 (ν=11) | dead ≤ 3.87, alive at 3.90 (LP not tight there: no small-tilt packing < 4 is known) |
 | [10,35] (no uprights) | 10.43 | 10.64 | | dead |
-| [0,10] ∪ [20,30] | **11.000 (ν=11, conv, 211 s)** | **11.000 (ν=11)** | | ALIVE — mid-tilt fractional structure |
-| [0,10] ∪ [40,45] | 10.55 | PENDING | | dead at 3.85 |
-| [30,45] | 9.87 | PENDING | | dead |
-| [0,5] ∪ [25,35] ∪ [38,43] (3 classes) | **11.0005 (ν=11)** | PENDING | | ALIVE via [25,35] |
+| [0,10] ∪ [20,30] | **11.000 (ν=11, conv, 211 s)** | **11.000 (ν=11, conv, 246 s)** | | ALIVE — mid-tilt fractional structure |
+| [0,10] ∪ [40,45] | 10.55 | 10.86 | | dead (consistent with Trump δ=2) |
+| [30,45] | 9.87 | 10.06 | | dead |
+| [0,5] ∪ [25,35] ∪ [38,43] (3 classes) | **11.0005 (ν=11)** | 11.07 | | ALIVE via [25,35] |
 | mid [0,2] ∪ [32,36] | **11.000 (ν=11, conv, 181 s)** | **11.000 (ν=11)** | | ALIVE |
-| mid [0,1] ∪ [34.5,35.5] | PENDING | PENDING | | |
-| mid [0,2] ∪ [29,31] | PENDING | PENDING | | |
-| mid [0,1] ∪ [31,33] | PENDING | PENDING | | |
+| mid [0,1] ∪ [34.5,35.5] | **11.000 (ν=11, conv, 50 s)** | **11.000 (ν=11, conv, 45 s)** | | ALIVE at half-width 0.5° |
+| mid [0,2] ∪ [29,31] | **11.000 (ν=11, conv, 55 s)** | **11.000 (ν=11, conv, 70 s)** | | ALIVE |
+| mid [0,1] ∪ [31,33] | **11.000 (ν=11, conv, 70 s)** | **11.000 (ν=11, conv, 80 s)** | | ALIVE at half-width 0.5–1° |
 
 The alive far/mid boxes all carry the same weight-11 fractional structure (e.g. [0,10]∪[20,30] at 3.85: 4 corner
 uprights weight 1, 4 mid-edge uprights ½, the 4 rotations of a 30°-square at (2.46,2.53) with weight ½ each,
@@ -145,7 +155,8 @@ Ingredients measured here: (a) per-box LP cost: 3–15 min for a fresh box (600�
 per iteration after pruning; ~2–3 min when the box is alive, because a weight-11 packing is found early);
 (b) Trump neighbourhood: a box containing 0° and θ* dies at s_t iff its half-width δ ≲ (s* − s_t)/0.006, i.e.
 δ ≲ 4.5° at 3.85, δ ≲ 1.2° at 3.87, δ ≲ 0.17° at s* − 1e-3 (and EPS_GEO already blurs 8e-4 in s there);
-(c) the mid-tilt band is unkillable by the box LP at 3.85–3.87 whatever δ.
+(c) the mid-tilt band (uprights + one tilt anywhere in ≈ [20°, 36°]) is unkillable by the box LP at 3.85–3.87 down to
+half-width 0.5° (all six mid boxes: τ = 11.000 exactly, converged in 45–250 s), and counts do not help (§4).
 
 Box count. Boxes are multisets of 11 intervals of width w (mod reflection): C(90/w + 10, 11)/2 ≈ 3.8·10⁴ (w = 10°),
 1.1·10⁷ (5°), 6·10¹⁰ (2°), 7·10¹³ (1°). Union-monotonicity (Θ ⊂ Θ' ⇒ τ*_Θ ≤ τ*_Θ') lets one kill all multisets
