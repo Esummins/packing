@@ -462,3 +462,29 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   pushes the convex form to k ~ 600; pure engineering); (2) A17-style Burer–Monteiro on the full hybrid with sign
   hinges (k = m = 1181, loses convexity guarantees); (3) leave the indicator class: smooth features interpolating the
   discrete duals' dominant eigenvectors (A17 §6.3-2, still untested).
+
+## 2026-08-19 (late) — A20-scaled-hybrid: block-diagonalised R-cone; gates fail; the re-pinning is the continuum, not the solver
+- **Step-1 engineering delivered**: the hybrid (k+1)-cone Schur block is now solved in D4-isotypic blocks
+  (BlockHybridSDP; sparse per-irrep affine maps built from A16's projectors; blocks ≈ k/8, E ≈ k/4). Exactness
+  validated two ways (random-member eigenvalue match 2e-14; A19's h384 values reproduced on identical rows to
+  3.5e-5). Practical envelope on 32 GB: k = 480 with ~10k rows OK (10–25 min/solve); k = 597 (22.5k F-orbit
+  variables) dies on memory. Every headline solve is verified feasible a posteriori from (g, F) — residuals
+  ≤ 2e-7 — because Clarabel returns "optimal_inaccurate" throughout (the values are nonetheless real).
+- **A19 correction**: A19's h380 hybrid number (10.5037, "F buys +0.0025 at 3.80") was a SILENT full-cone
+  Clarabel stall. On A19's own h380 rows the class reaches ≤ 10.344876 (verified feasible member) — below
+  τ*(3.80) = 10.42. The k ≤ 150 hybrid was never the bottleneck A19 measured at 3.80.
+- **But the gates still fail, now for the right reason.** Low fixed-row values are properties of unconverged row
+  sets: under a working solver+oracle loop with container-spanning R the value climbs monotonically back to the
+  automatic class. 3.80 (k = 308): 10.4914 → 10.5052 vs F=0 10.5061 — F buys ≤ 0.001 of the 0.086 needed to
+  reach τ*(3.80); gate (b) FAILS. 3.84 (k = 480, R inventory includes the exact LP-floor tight structure):
+  8.5683 → 11.0860 over 5 iterations, oracle violations still +0.4/+0.8 at stop; same-rows comparison
+  hybrid 11.085959 vs F=0 11.144051 (F buys +0.058 — 34× the k=148 gain, yet already above 11 and rising;
+  A17's full-class BM equilibrated at 11.05–11.13, the same band).
+- **Programme consequence**: the "solver couldn't reach big R" explanation of A19 is now eliminated along with
+  the localisation hypothesis itself — what re-pins the hybrid class is the 6-D pair CONTINUUM (grid→continuum
+  risk R1 in its sharpest observed form): every finite pair-row set leaves neighbouring near-tangent mid-tilt
+  cells open, the convex optimum exploits them, the oracle closes them, λ climbs. The graph diagnostic
+  (≈ 10.4 feasible on the c384 graph) stands — on GRAPHS; the continuum eats the difference. Remaining
+  kernel-shaped move: leave the piecewise-constant indicator class (smooth features, A17 §6.3-2) — untested
+  here per protocol (the 3.80 gate failed below the 0.02 threshold), and any such attempt must now expect the
+  same continuum pricing unless the features change what the pair oracle can find (see A20 notes §3.4).

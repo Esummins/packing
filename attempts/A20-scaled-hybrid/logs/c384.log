@@ -1,0 +1,67 @@
+[c384] s=3.84 atoms=1181 tau=11.0204 | A18 rows 6359 | kcap=480 fdist=None
+[c384] GATE (a): F=0 SDP on A18 rows (6359) lam = 11.144061 (8s) [refs: r384 11.1438 / r380b 10.5063]
+    [diag] scan 89893 placements: max K(x,x) 10.144061
+    [diag] best after polish: 10.144061
+[c384] F=0 attack: lam = 11.144061 at (3.1613,3.0613,2.50deg)
+[c384] inventory: 4000 fresh attack cands + 925 near-binding A18 rows
+[c384] inventory: 4000 attack cands + A12/A17 + 265 LP-floor pts
+[c384] binding inventory: 6967 placements
+[c384] R selection: k=480 of 1181
+[c384] n_forb = 14530
+  [blocks] k=480 sizes {'A1': 64, 'A2': 57, 'B1': 62, 'B2': 58, 'E': 120} n_forb=14530 build t=0.3s
+[c384] row pruning: 6359 -> 2200 (near 1744, R-cov 5966)
+[c384] initial rows: 3362 diag, 1800 pair (t=25s)
+[c384] R hull (np.float64(0.51), np.float64(3.33), np.float64(0.51), np.float64(3.33)), radius 1.686
+[c384] it 0: SOLVE lam 8.568290 (670s, optimal_inaccurate)
+[c384] --solve_only: stop
+[c384] resumed at it 1: 3362 diag, 1800 pair, k=480, n_forb=14530, lam_auto=11.1441
+[c384] R hull (np.float64(0.51), np.float64(3.33), np.float64(0.51), np.float64(3.33)), radius 1.686
+  [blocks] k=480 sizes {'A1': 64, 'A2': 57, 'B1': 62, 'B2': 58, 'E': 120} n_forb=14530 build t=0.2s
+[c384] it 1: SOLVE lam 8.568289 (679s, optimal_inaccurate)
+    [diag] scan 87612 placements: max K(x,x) 13.506725
+    [diag] best after polish: 19.808816
+    [pairR] node-set N_R=2053: 1108013 pairs, max K 5.261689
+    [pairR] seed pairs (1800): 1800 pairs, max K -1.001000
+    [pairR] tangent (3491): 3491 pairs, max K -0.270074
+    [pairR] best after polish: 5.261689
+[c384] it 1: lam 8.568289 | maxdiag 19.80882 (viol +1.22e+01) maxpair 5.261689 (viol +6.26e+00) | +196d +1174p (3558d/2974p) | solve 679s tot 797s
+[c384] it 2: SOLVE lam 11.076386 (1256s, optimal_inaccurate)
+    [diag] scan 89893 placements: max K(x,x) 11.032757
+    [diag] best after polish: 13.084042
+    [pairR] node-set N_R=2053: 1136093 pairs, max K 1.434304
+    [pairR] seed pairs (2974): 2974 pairs, max K -1.001000
+    [pairR] tangent (3581): 3581 pairs, max K -0.148653
+    [pairR] best after polish: 1.434304
+[c384] it 2: lam 11.076386 | maxdiag 13.08404 (viol +3.01e+00) maxpair 1.434304 (viol +2.44e+00) | +91d +1180p (3649d/4154p) | solve 1256s tot 1377s
+[c384] resumed at it 3: 3649 diag, 4154 pair, k=480, n_forb=14530, lam_auto=11.1441
+[c384] R hull (np.float64(0.51), np.float64(3.33), np.float64(0.51), np.float64(3.33)), radius 1.686
+  [blocks] k=480 sizes {'A1': 64, 'A2': 57, 'B1': 62, 'B2': 58, 'E': 120} n_forb=14530 build t=0.3s
+[c384] resumed at it 3: 3649 diag, 4154 pair, k=480, n_forb=14530, lam_auto=11.1441
+[c384] R hull (np.float64(0.51), np.float64(3.33), np.float64(0.51), np.float64(3.33)), radius 1.686
+  [blocks] k=480 sizes {'A1': 64, 'A2': 57, 'B1': 62, 'B2': 58, 'E': 120} n_forb=14530 build t=0.2s
+[c384] it 3: SOLVE lam 11.077694 (1196s, optimal_inaccurate)
+    [diag] scan 87612 placements: max K(x,x) 10.335104
+    [diag] best after polish: 11.183360
+    [pairR] node-set N_R=2053: 1191446 pairs, max K 0.084099
+    [pairR] seed pairs (4154): 4154 pairs, max K -1.001000
+    [pairR] tangent (3491): 3491 pairs, max K -0.738554
+    [pairR] best after polish: 0.084099
+[c384] it 3: lam 11.077694 | maxdiag 11.18336 (viol +1.11e+00) maxpair 0.084099 (viol +1.09e+00) | +28d +889p (3677d/5043p) | solve 1196s tot 1287s
+[c384] it 4: SOLVE lam 11.083774 (1265s, optimal_inaccurate)
+    [diag] scan 89893 placements: max K(x,x) 10.599647
+    [diag] best after polish: 11.214671
+    [pairR] node-set N_R=2053: 1205123 pairs, max K -0.074434
+    [pairR] seed pairs (5043): 5043 pairs, max K -1.001000
+    [pairR] tangent (3581): 3581 pairs, max K -0.699595
+    [pairR] best after polish: -0.021489
+[c384] it 4: lam 11.083774 | maxdiag 11.21467 (viol +1.13e+00) maxpair -0.021489 (viol +9.80e-01) | +10d +950p (3687d/5993p) | solve 1265s tot 1350s
+[c384] it 5: SOLVE lam 11.085959 (1389s, optimal_inaccurate)
+    [diag] scan 87612 placements: max K(x,x) 10.500236
+    [diag] best after polish: 10.500236
+    [pairR] node-set N_R=2053: 1200379 pairs, max K -0.218767
+    [pairR] seed pairs (5993): 5993 pairs, max K -1.001000
+    [pairR] tangent (3466): 3466 pairs, max K -0.680829
+    [pairR] best after polish: -0.218767
+[c384] it 5: lam 11.085959 | maxdiag 10.50024 (viol +4.14e-01) maxpair -0.218767 (viol +7.82e-01) | +14d +1073p (3701d/7066p) | solve 1389s tot 1474s
+[c384] SAME-ROWS: hybrid 11.085959 vs F=0 11.144051 -> F buys +0.058092
+[c384] done, total 4121s
