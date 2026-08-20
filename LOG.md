@@ -520,3 +520,36 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
 - Programme consequence: the optimality frame now needs only the GLOBAL half — exclude
   s <= s-hat outside N/(D4 x S11).  Any future bound s(11) >= s-hat - delta localises all
   near-optimal packings to 156 delta of Trump inside N.
+
+## 2026-08-20 — A23-wastage-oracle (geometry postdoc) — the PI's area ledger BITES: the integral pinwheel is dead, at 3.86 and at s'
+- Built the dead-region certifier (`attempts/A23-wastage-oracle/dead_region.py`): D is DEAD for a partial
+  configuration H if no unit square Q ⊂ [0,s]² with int(Q) ∩ int(P_i) = ∅ meets int(D).  3-D (t,cx,cy)
+  interval B&B, exact-Fractions and float-guard modes; sound discharges only (admissibility clip;
+  separating-axis disjointness with exact cos/sin enclosures; overlap by WITNESS POINT p ∈ int(P) exact +
+  p ∈ Q over the whole box — the tempting "SAT projections overlap on all axes" test is necessary-not-
+  sufficient and was rejected).  Budget lemma: interior-disjoint dead regions satisfy Σ area ≤ s² − 11 in
+  any 11-packing extending H (one-line proof in notes §1); deadness is monotone under adding squares, so
+  certificates persist down a branch tree.  Validated on hand cases incl. a genuinely instructive negative
+  (a 0.9-wide channel is NOT dead where 45–60° corners can dip through the slot; certifier found the
+  escape).  Exact rechecks: every float-mapped cell list tested so far re-verifies in pure Fractions with
+  0 failures; independent random-legal-placement adversarial tests: 0 hits.
+- Wastage tables (s = 3.85): one mid-tilt square near a wall strands 0.19–0.47 of certified dead area
+  (θ ∈ {20..35}°, d ∈ {0..0.2}, monotone in both); in a container corner 0.34–0.61.  Core-box-UNIFORM
+  version (PlacedBox: certificates hold for EVERY placement of an A14-style core [0.72,0.74]²×[39,41]°)
+  0.5285, all 410 cells exact-PASS — the object that composes into A14's verify_case semantics.
+- Ledger on the real obstruction (s = 3.86, budget 3.8996): four flush corner squares strand 0.0000
+  (why A14's corner stage was barren).  But A12's interior ¼-pinwheel, taken INTEGRALLY: the adjacent
+  33° pair (exactly disjoint at the raw support rationals) strands 1.8834 — 48 % of the budget at depth
+  2 — via a wall-shadow mechanism the coverage LP never sees; the full 4-cycle strands **6.5488 > budget:
+  killed at depth 4, margin 2.65; EXACT-Fraction subset 4.4032 > 3.8996, 0 cell failures** (Lemma 2: any packing containing it has ≤ 8 squares; sharp — pinwheel
+  + 4 corner squares is legal and meets 0 dead cells).  A 10-square A12-style realisation leaves no legal
+  placement anywhere (entire free region certified dead, 4.80).
+- **At s' = 3.8770836 (budget 4.03178): the scaled 4-cycle strands 6.5758 (float), and the kill is
+  EXACT — a 176-cell subset re-certifies in pure Fractions to 4.5056 = 2816/625 > s'² − 11 (0 failures):
+  machine-checked theorem, no packing of 11 (indeed ≥ 11) unit squares in [0,s']² contains it.**
+  A continuum PlacedBox-pair version (cores centres ±0.01, θ ±0.9°) still strands 1.3837 uniformly.  First argument in the programme that kills a
+  mid-tilt structure at the optimality side.  Role going forward: an independent, cheap (minutes/node,
+  parallel) kill test inside the case tree whose strength GROWS with depth, complementary to the node LP
+  whose slack shrinks; not a root-stage killer (single squares strand ≤ 0.6).  Recommended: composed
+  pilot on A14's node-3 pinwheel children; NO-zone discharge; PlacedBox sweep to lift realisation kills
+  to continuum statements.
