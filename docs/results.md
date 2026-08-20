@@ -230,6 +230,23 @@ route is the angle-box branch-and-bound whose box killer is Theorem 1 restricted
   ≈ 10.35–10.4 on the c384 graph where ϑ′ = 10.38). Remaining kernel moves: D4-block-diagonalised R-cone (k → ~600),
   Burer–Monteiro with sign hinges, or smooth non-indicator features. Details: attempts/A19-hybrid-kernel/notes.md.
 
+
+## The ϑ′/kernel programme (A15–A20, 2026-08-19): conclusion
+
+Discrete phase (A15–A16): on finite placement graphs, Schrijver's ϑ′ removes about half of the LP's integrality
+gap (10.38–10.48 vs LP 11.000 vs α 10 at 3.84–3.85) and kills every hypothesis node that stalls the case-LP tree
+(four-corners-fixed: ϑ′ ≤ 6.6 vs budget 7). Continuum phase (A17–A20): the kernel-certificate form of ϑ′ does NOT
+reach λ < 11 at 3.84. A17: the LP-atom indicator class stalls at ≈ 11.0–11.2. A18 (theorem, machine-validated):
+every kernel class with automatic pair constraints collapses to the LP floor λ ≥ τ*(s); and A19 made that floor
+rigorous at 3.84 (exact rational fractional packing of value exactly 11, exact Fraction B&B PASS ⇒ τ*(3.84) ≥ 11).
+A19–A20: the hybrid class (localised pair verification) buys ≤ 0.001 at 3.80 and +0.058 at 3.84 over the automatic
+class — far short — because the 6-D pair CONTINUUM re-pins every finite kernel: each finite pair-row set leaves
+near-tangent mid-tilt cells open, the optimum exploits them, the oracle closes them, λ climbs back (verified with
+an exact-feasibility-checked convex solver at k = 480 in D4-isotypic blocks; a silent Clarabel stall in A19's h380
+number was found and corrected). The grid→continuum gap (risk R1) is real: graph-ϑ′ ≈ 10.4 does not transfer.
+Untested residue: smooth feature classes that change what the pair oracle can find (piecewise-smooth pair bounds),
+rather than only enriching the diagonal. Certified bounds unchanged: 3.82 ≤ s(11) ≤ 3.877084.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
