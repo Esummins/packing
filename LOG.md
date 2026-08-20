@@ -488,3 +488,10 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   kernel-shaped move: leave the piecewise-constant indicator class (smooth features, A17 §6.3-2) — untested
   here per protocol (the 3.80 gate failed below the 0.02 threshold), and any such attempt must now expect the
   same continuum pricing unless the features change what the pair oracle can find (see A20 notes §3.4).
+
+## 2026-08-19 — advisor — optimality roadmap dispatched (per PI)
+- Pivot from fixed-s ladders to the optimality frame (PI's observation: 3.84-lemmas are vacuous if Trump is optimal;
+  proofs must live at s' = 3.877083590… / s'+δ). Three parallel legs: A21 structure theorems at 3.88 (non-vacuous,
+  constrain all near-optimal packings), A22 rigorous local optimality at Trump (Krawczyk + KKT — the s→s'⁻ endgame),
+  A23 wastage/dead-area oracle (PI's integral constraint; the one killer whose strength may survive at s' in the
+  mid-tilt band).
