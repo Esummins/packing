@@ -234,10 +234,11 @@ graph (where true ϑ′ = 10.38), the BM solver maintains feasibility at the λ-
 3. **Is the whole kernel-class programme (indicator features on these atoms) capable of 10.38 at
    all?** Partial answer (graph_class.py, exact finite pair oracle on the A15 c384 graph where
    ϑ′ = 10.38, LP = 11.000): with ALL cross terms free, the A17-validated BM solver keeps the
-   pattern class FEASIBLE at λ = 10.35–10.4 through ~30k accumulated exact pair rows (max pair
-   violation declining +0.47 → −0.40 over 19 iterations, target −1). Not yet oracle-clean at
-   write-up, but the trend is that the 1181-atom pattern class on the GRAPH sits near ϑ′ ≈ 10.4,
-   NOT near 11 — i.e. the feature basis is NOT intrinsically too weak on the discretisation; what
+   pattern class FEASIBLE at λ = 10.35 through 33k accumulated exact pair rows; at it 24 (34,837
+   rows) feasibility at 10.35 finally broke and the λ-descent settled at **10.4300** (diag clean to
+   −8e-7, max pair violation −0.579 and closing; results/gclass384.json). The 1181-atom pattern
+   class on the GRAPH sits at ≈ 10.43 — essentially the discrete ϑ′ (10.38–10.48 across A15's
+   brackets), NOT near 11 — i.e. the feature basis is NOT intrinsically too weak on the discretisation; what
    kills the continuum runs is the combination of (a) the continuum tight-cell continuum (grid→
    continuum risk R1, which A17 §4b had already implicated) and (b) the D4-invariant convex
    machinery ceasing to scale exactly where the needed cross-term support (most of the container ×

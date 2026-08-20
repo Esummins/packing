@@ -445,8 +445,8 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   ≳ 250–300, measured 6–9 GB alloc failures with silent exit; SCS at eps 3e-5 produced non-monotone junk λ — measured,
   rejected). Burden had it worked: 9.9 % of disjoint pairs are R-meeting (centres within 1.163 of centre).
 - **Exact-graph diagnostic** (BM + EXACT finite pair oracle on the A15 c384 graph, ϑ′ = 10.38, LP = 11.000): the
-  1181-atom pattern class stays feasible at λ ≈ 10.35–10.4 through 31k+ accumulated exact pair rows (max violation
-  +0.47 → −0.56, still open at write-up; results/gclass384.json tracks it) — the indicator basis is NOT intrinsically
+  1181-atom pattern class stays feasible at λ = 10.35 through 33k exact pair rows; at 34.8k rows the value settles at
+  **λ ≈ 10.4300** (diag clean, max pair violation −0.58 and closing; results/gclass384.json) — the indicator basis is NOT intrinsically
   ≥ 11 on the graph; the continuum tight-cell continuum plus solver scaling are what bind, not the basis.
 - **τ*(3.84) ≥ 11, fully rigorous** (attempts/A19-hybrid-kernel/lp_floor_384.json + results/lp_floor_verify.json):
   18 closed unit squares — 4 corner squares (weight 1) + 10 upright ½-slide placements + the interior 61.5° pinwheel
