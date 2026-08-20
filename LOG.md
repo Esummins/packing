@@ -553,3 +553,14 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   whose slack shrinks; not a root-stage killer (single squares strand ≤ 0.6).  Recommended: composed
   pilot on A14's node-3 pinwheel children; NO-zone discharge; PlacedBox sweep to lift realisation kills
   to continuum statements.
+
+## 2026-08-20 — A21-structure-388 (consolidated by advisor; agent hit spend limit mid-write-up)
+- CERTIFIED at s = 97/25 = 3.88 > s' (non-vacuous — constrains all near-optimal packings incl. Trump's):
+  THM1 corner occupancy (total 10.5611 < 11, exact verifier PASS) and THM2 side-zone occupancy (total 8.7453,
+  margin 2.25, PASS). Zones: corners [0.5,1.1]² + images; sides 0.6-bands on the mid-walls.
+- NOT certifiable at 3.88: per-corner (LP ~10.7, above certifiability ceiling), per-side (verifier FAIL at 10.937),
+  orientation windows (FAIL ~10.96–10.98; the [0,5]∪[40,50] window is alive via Trump itself; [0,5]∪[43,47]∪[85,90]
+  alive via ~43° near-packings at ≈3.880). All verdicts from certs_wip/*.report.json on disk.
+- Roadmap status: optimality = certified local theorem (A22) + structure scaffolding at 3.88 (A21, this) +
+  wastage killer for the mid-tilt band (A23). Global stage remains the open problem; next composed pilot =
+  wastage + coverage on A14 pinwheel children.

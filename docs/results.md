@@ -252,6 +252,30 @@ number was found and corrected). The grid→continuum gap (risk R1) is real: gra
 Untested residue: smooth feature classes that change what the pair oracle can find (piecewise-smooth pair bounds),
 rather than only enriching the diagonal. Certified bounds unchanged: 3.82 ≤ s(11) ≤ 3.877084.
 
+
+## The optimality programme (A21–A23, 2026-08-19/20)
+
+Pivot (PI): fixed-s certificates below s' are vacuous if Trump is optimal; optimality statements must live at s'
+or above. Three legs, all delivered:
+- **A22 (LOCAL, certified):** strict local optimality of Trump's packing — in the box ‖z−z₀‖∞ ≤ 5·10⁻⁴ (34 coords)
+  the contact system has a unique solution ẑ (Krawczyk, enclosure 10⁻⁵⁰), ẑ is feasible, and every feasible
+  configuration in the box has s ≥ ŝ with equality iff ẑ; stability ‖z−ẑ‖∞ ≤ 155.7·(s−ŝ). Min KKT multiplier
+  0.0175 (strict complementarity; one pinwheel self-stress), min inactive margin 0.019. All-rational certificate +
+  standalone interval re-checker (attempts/A22-local-rigidity/). First local-optimality certificate for n = 11.
+- **A21 (STRUCTURE at 3.88, certified):** every 11-packing at side ≤ 3.88 has a corner-zone square (total 10.5611 < 11)
+  and a side-zone square (total 8.7453). Per-corner/per-side/orientation-window versions are NOT certifiable at 3.88
+  (above the certifiability ceiling / alive via ≈43° near-packings; Trump itself keeps the [0°,5°]∪[40°,50°] window alive).
+- **A23 (WASTAGE, the PI's integral constraint):** sound dead-region certifier (witness-point overlap; float-guarded
+  and pure-Fraction modes; core-box-uniform "PlacedBox" certificates). Ledger results: single squares strand ≤ 0.6 of
+  the s²−11 ≈ 4.03 budget (weak at the root; corner squares strand 0), but the interior mid-tilt structures die:
+  adjacent 33° pinwheel pair strands 1.88 at depth 2 (1.38 over a continuum box), the full 4-cycle 6.55 > budget, and
+  **exactly at s': dead area 2816/625 = 4.5056 > s'²−11 (pure Fractions, 0 failures) ⇒ no 11-packing at s' contains
+  the pinwheel 4-cycle** — the first tool that kills a mid-tilt structure on the optimality side.
+
+Remaining for s(11) = s': the global stage — exclude packings outside the A22 box at s ≤ s' — with the composed
+killer (coverage LP + wastage ledger + A21 scaffolding) as the candidate node test; first experiment = A14 node-3
+pinwheel children.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).

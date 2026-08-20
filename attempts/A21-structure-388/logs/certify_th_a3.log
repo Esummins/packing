@@ -1,0 +1,29 @@
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.88 n=11 sym=D4 box=[0,45]x1] init orbits=354 points=2629 rows=1522 (rejected 1574)
+  it   0 tau=10.737747 rows=2043 orbs=754 atoms>0=468 minmass=0.763296 maxcov=1.199813 +rows=521 -rows=0 +cols=400 -cols=0 t=5s [lp 0s row 4s +r 0s col 1s +c 0s]
+  it   1 tau=10.693115 rows=3133 orbs=1154 atoms>0=572 minmass=0.871163 maxcov=1.145316 +rows=1090 -rows=0 +cols=400 -cols=0 t=13s [lp 1s row 4s +r 1s col 2s +c 0s]
+  it   2 tau=10.622517 rows=4134 orbs=1554 atoms>0=800 minmass=0.866093 maxcov=1.066910 +rows=1001 -rows=0 +cols=400 -cols=0 t=36s [lp 5s row 13s +r 3s col 2s +c 0s]
+  it   3 tau=10.613721 rows=5155 orbs=1954 atoms>0=1004 minmass=0.893851 maxcov=1.046484 +rows=1021 -rows=0 +cols=400 -cols=0 t=78s [lp 16s row 19s +r 4s col 3s +c 0s]
+  it   4 tau=10.597829 rows=6252 orbs=2354 atoms>0=1152 minmass=0.876586 maxcov=1.047070 +rows=1097 -rows=0 +cols=400 -cols=0 t=150s [lp 35s row 27s +r 6s col 3s +c 0s]
+  it   5 tau=10.619298 rows=7249 orbs=2754 atoms>0=1512 minmass=0.923039 maxcov=1.069020 +rows=997 -rows=0 +cols=400 -cols=0 t=249s [lp 40s row 47s +r 9s col 4s +c 0s]
+  it   6 tau=10.615828 rows=8211 orbs=3154 atoms>0=1636 minmass=0.927037 maxcov=1.024186 +rows=962 -rows=0 +cols=400 -cols=0 t=395s [lp 77s row 53s +r 11s col 5s +c 0s]
+  it   7 tau=10.626269 rows=9188 orbs=3554 atoms>0=2004 minmass=0.940954 maxcov=1.040507 +rows=977 -rows=0 +cols=400 -cols=0 t=595s [lp 110s row 70s +r 14s col 6s +c 0s]
+  it   8 tau=10.621654 rows=10398 orbs=3954 atoms>0=2224 minmass=0.944397 maxcov=1.015059 +rows=1210 -rows=0 +cols=400 -cols=0 t=825s [lp 123s row 79s +r 21s col 6s +c 0s]
+  it   9 tau=10.640252 rows=11179 orbs=4354 atoms>0=2208 minmass=0.908739 maxcov=1.051624 +rows=781 -rows=0 +cols=400 -cols=0 t=1115s [lp 197s row 68s +r 17s col 7s +c 0s]
+  time limit
+DONE s=3.88 n=11 sym=D4 tau=10.637683 nu=10.637683 conv=False minmass=0.908739 maxcov=1.051624 rows=11179 orbits=4354 atoms_nz=336 packing_support=386 time=1241s
+   tau=10.63768 conv=False minmass=0.9087 maxcov=1.0516
+[round 0] tau=10.63768 conv=False scale=1.0300 cert total=10.95808 budget=11 atoms=2600
+    boxes = 9218  covered = 4141  vacuous = 0  exempt = 296 (core 0, nofam 296)  split = 4717  exact atom checks = 41768  max depth = 56  time = 1.6s
+    FAIL: 64 witness boxes at depth 56: 22 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 42 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 18.039963 deg, centre = (0.630261162, 1.979375000), exact mass = 495549/500000 (~0.991098000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.88 n=11 sym=D4 box=[0,45]x1] init orbits=545 points=4113 rows=5749 (rejected 2086)
+  it   0 tau=10.670117 rows=6204 orbs=545 atoms>0=1288 minmass=0.916921 maxcov=1.146880 +rows=455 -rows=0 +cols=0 -cols=0 t=28s [lp 2s row 21s +r 1s col 3s +c 0s]
+  it   1 tau=10.683704 rows=6204 orbs=1545 atoms>0=1172 minmass=0.932677 maxcov=1.163666 +rows=0 -rows=0 +cols=1000 -cols=0 t=49s [lp 1s row 17s +r 0s col 3s +c 0s]
+  it   2 tau=10.659757 rows=6940 orbs=1545 atoms>0=1644 minmass=0.938097 maxcov=1.042524 +rows=736 -rows=0 +cols=0 -cols=0 t=108s [lp 5s row 47s +r 3s col 4s +c 0s]
+  it   3 tau=10.679122 rows=6940 orbs=1715 atoms>0=1396 minmass=0.938077 maxcov=1.071421 +rows=0 -rows=0 +cols=1000 -cols=830 t=152s [lp 3s row 37s +r 0s col 4s +c 1s]
+  it   4 tau=10.655453 rows=7565 orbs=1654 atoms>0=2036 minmass=0.934294 maxcov=1.026453 +rows=625 -rows=0 +cols=0 -cols=61 t=233s [lp 8s row 63s +r 4s col 6s +c 0s]
+  it   5 tau=10.676769 rows=3121 orbs=1789 atoms>0=1928 minmass=0.909987 maxcov=1.046266 +rows=0 -rows=4444 +cols=1000 -cols=865 t=294s [lp 6s row 49s +r 0s col 5s +c 0s]
+  it   6 tau=10.658339 rows=3778 orbs=1740 atoms>0=2436 minmass=0.939737 maxcov=1.029040 +rows=1085 -rows=428 +cols=0 -cols=49 t=389s [lp 8s row 77s +r 3s col 6s +c 0s]
+  it   7 tau=10.660014 rows=3598 orbs=1762 atoms>0=2360 minmass=0.923101 maxcov=1.021960 +rows=0 -rows=180 +cols=807 -cols=785 t=470s [lp 1s row 73s +r 0s col 6s +c 0s]
