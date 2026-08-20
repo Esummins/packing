@@ -381,3 +381,42 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   interpolating the discrete duals' dominant eigenvectors (the indicator basis is constant on cells; the discrete Z varies
   within the tight-cell continuum — that is the missing 0.15).
 - 3.85/3.86 not run (λ < 11 already fails at 3.84 in this class).
+
+## 2026-08-19 — A18-restricted-kernel — the automatic-(ii) kernel class collapses to the LP: λ ≥ τ*(s), goal provably unreachable (done-negative, with THEOREM)
+
+- **Task**: push A17's discovery D2 (M = [[1, −wᵀ],[−w, τdiag(w)+C]], C ≤ 0 off-diagonal ⇒ condition (ii) automatic for
+  every pair of strictly disjoint closed squares — no 6-D pair verification) to λ < 11 at s = 3.84 by optimising atoms, w, C.
+- **Main result — collapse theorem (proved in notes.md §3, machine-validated §4)**: with φ = (1, a(x)/m(x)) and the border
+  tied to the normalisation weights, M ⪰ 0 ⟺ S := D − wwᵀ ⪰ 0 and K(x,x) = a(x)ᵀSa(x)/m(x)²; the class constraint makes S a
+  PSD **Z-matrix** with entrywise margin (S_pq ≤ −w_pw_q). Every PSD Z-matrix is a limit of scaled-diagonally-dominant ones
+  (u_ε = (S+εI)⁻¹1 > 0), and the dominance decomposition is pointwise monotone on 0/1 patterns ⇒ the class optimum sits on
+  the boundary family S_u with **C ≡ 0** and D = diag(w_p(Σw_qu_q)/u_p): a TWO-MEASURE LP-form kernel,
+  K_u(x,x) = (Σ_q w_qu_q)·(Σ_{p∈x} w_p/u_p)/m(x)² − 1. Cauchy–Schwarz with ν := w∘u then gives
+  **λ = 1 + sup K ≥ Σν/inf_x ν(Q(x)) ≥ τ*(s)** — the plain Theorem-1 LP value, with equality at w = LP measure, u = 1.
+  τ*(3.84) = 11.02 ⇒ **λ < 11 at 3.84 is impossible in the restricted class**; the automatic-(ii) kernel ceiling IS the LP
+  ceiling ≈ 3.83. All no-pair-verification generalisations are blocked too: border σ < 1 (λ ≥ σ−1+τ*/σ, min at σ=1), free
+  border/normalisation with pointwise ρ ≥ 1 (same C–S chain), positive entries on "inseparable" atom pairs (exist only for
+  atoms exactly ON the container boundary — cap(p) = inward unit segment — and a closure/measure-zero argument restores the
+  bound; no atom set in use has boundary atoms). Corollary: everything A17's full kernel gained over the LP (11.13 vs 11.38)
+  is carried by POSITIVE off-diagonal mass on overlapping non-sharing (interior mid-tilt, ¼-structure) pairs — exactly the
+  entries the restricted class deletes. The pair-free shortcut does not exist, at the root or at any case-tree node.
+- **Machine validation**: tiny (28 atoms): identities to 7e-15, (ii)-automatic exact (K = −1.000000000 on 2460 disjoint
+  pairs for diagonal D), monotonicity, SDP = u-family to 1.3e-4, SDP = row-LP τ* to 2e-6 at w = ν_LP. Medium (96 atoms,
+  220 rows, cvxpy/Clarabel vs full-θ convex GP): **17.057096 vs 17.057133 (4e-5)**, and the SDP's own dominance vector
+  u_ε = (S*+εI)⁻¹1 plugged into the two-measure formula reproduces the SDP value in the ε→0 limit (17.057097) — the
+  collapse realised constructively. Two solver pitfalls documented (cvxpy fancy-index sign constraints; orbit-constant u
+  is only WLOG on D4-closed/canon-deduped row sets).
+- **Full-scale numerics** (convex GP over log u per D4 orbit + A17 diag oracle + two-measure ratio scan; no pair side
+  exists at all): calibration PASS (LP-form identity λ = τ/m_min; at 3.84 the u=1 supremum independently reproduces A17's
+  continuum min-coverage cell 0.968742). λ(u=1) → λ(u*): 3.80: 10.618 → **10.506** (τ* = 10.42); 3.82: 10.749 → **10.725**
+  (τ* = 10.62–10.72); 3.84: 11.376 → **11.179** (τ* = 11.02). Optimising C (≡ u) strictly reduces λ everywhere — the
+  dispatch's hoped-for datum exists — but the gain is precisely the certificate-margin slack and can never cross the LP
+  floor. Binding cells at 3.80/3.82 are admissible-boundary WALL cells (coverage 1.0173/1.0220, sharper than A17's
+  calibration attack found; A08's exact ≥ 1 untouched); at 3.84 interior mid-tilt cells (24–28°, 45°) — the ¼ region.
+- **By-product**: every class member (including the plain LP certificates read as kernels) has a one-vector rational PSD
+  certificate — M is a Z-matrix with M·(W, u)ᵀ = 0 — no rational LDLᵀ needed, ever, for LP-form kernels.
+- **Consequence for the programme**: the only kernel-shaped route to λ < 11 at 3.84 is a HYBRID: Z-sign structure globally,
+  D_pq > 0 permitted only for atom pairs inside the mid-tilt sliver-overlap region (A17 §6.1's 220k non-sharing edges,
+  median depth 0.094), with the 6-D cell-pair verification restricted to pairs of squares both meeting that region — a
+  pair table orders of magnitude smaller than A17's full pair space. That is the recommended A19; the 14-node ϑ′ tree
+  faces the same theorem at every node (node LPs sit AT the budget), so it, too, needs genuine pair verification.
