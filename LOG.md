@@ -495,3 +495,28 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   constrain all near-optimal packings), A22 rigorous local optimality at Trump (Krawczyk + KKT — the s→s'⁻ endgame),
   A23 wastage/dead-area oracle (PI's integral constraint; the one killer whose strength may survive at s' in the
   mid-tilt band).
+
+## 2026-08-20 — A22-local-rigidity — strict local optimality of Trump's packing CERTIFIED
+- **The s -> s'^- endgame theorem is done**: in the explicit box N = {||z - z0||_inf <= 5e-4}
+  around the 60-digit Trump configuration (34 coordinates: 11 centres + 11 angles + s), every
+  feasible 11-square configuration has s >= s-hat, with equality exactly at the unique contact
+  solution z-hat (Krawczyk-enclosed to 1e-50, itself a feasible packing, s-hat = octic root to
+  1e-50).  Quantitative version: s <= s-hat + delta forces ||z - z-hat||_inf <= 155.7 delta.
+- Method: curated smooth active set (degenerate flush/corner-corner contacts replaced by
+  centre-distance rows ||c_i-c_j||^2 >= 1, valid by the support-function argument; corner-on-edge
+  rows valid by an interval-checked corner-in-interior lemma); unique strictly positive KKT
+  multipliers (min 0.01754) on a rank-34 subsystem chosen from the 4-dim multiplier freedom
+  (3 wall redundancies + 1 pinwheel self-stress — one flush-pair row must always be dropped);
+  68 closed-form rational positive-spanning certificates; an interval-MVT argument that needs
+  no Hessian bounds (beta = 0.634 < 1 at r = 5e-4).  A second Krawczyk system with angle-equality
+  rows proves z-hat's exact structure (uprights exactly cornered, all five tilts equal), which
+  in turn makes z-hat's feasibility and the dropped rows' vanishing exact.
+- Verification: standalone recheck.py (mpmath.iv + fractions only) re-verifies every interval
+  claim from results/krawczyk_cert.json in ~40 s; corruption gates (z0 by 1e-3 and 1e-8, mu
+  sign flip, edge-index tamper) all fail loudly.
+- Remaining gaps to full formality: mpmath.iv trusted; symbolic identification s-hat = octic
+  root (Q(t) bridge) not re-proved; D4 x S11 relabelling reduction stated, not formalised; not
+  in Lean (the JSON was designed integer-interval-replayable for a future A06-style port).
+- Programme consequence: the optimality frame now needs only the GLOBAL half — exclude
+  s <= s-hat outside N/(D4 x S11).  Any future bound s(11) >= s-hat - delta localises all
+  near-optimal packings to 156 delta of Trump inside N.

@@ -74,6 +74,11 @@ this machine for disk reasons; estimated 3–5 days of work).
   margins). Integer-corner versions `_int.json` feed Lean.
 - Lean: `PackingCert.trump11_ok`, `trump11_ok_kernel` (plain kernel `decide`, `#print axioms` = none),
   same for the tight certificate. Bridge lemma (separating axis ⇒ disjoint convex hulls) not formalised.
+- **Local optimality (A22)**: certified strict local optimality — in the box
+  ||z − z₀||∞ ≤ 5·10⁻⁴ around the Trump configuration every feasible packing has s ≥ ŝ,
+  equality only at the unique contact solution ẑ (Krawczyk + 68 rational Farkas certificates,
+  standalone interval re-checker `attempts/A22-local-rigidity/recheck.py`); stability:
+  s ≤ ŝ+δ ⇒ ||z−ẑ||∞ ≤ 155.7 δ.
 - Exact algebra (A03, 60 digits; consistent with Ellsworth 2023 and Gensane–Ryckelynck 2005): s is the
   second real root of s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865;
   θ = 40.18193729032971646523…°; the contact system is rigid (rank 33/33).
