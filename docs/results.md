@@ -211,6 +211,25 @@ route is the angle-box branch-and-bound whose box killer is Theorem 1 restricted
   is not obviously lossy.  Recommended A18: restricted class + atoms placed inside the mid-tilt sliver-overlap regions
   (the non-sharing edges say where) + ~40 smooth D4 features interpolating the discrete duals' dominant eigenvectors.
 
+## The restricted-kernel collapse is now fully rigorous at 3.84, and the hybrid escape fails (A18–A19, 2026-08-19)
+
+- **A18 (theorem)**: every kernel whose pair condition is discharged by a sign/pointwise argument (the automatic-(ii)
+  class and all its no-pair-verification variants) collapses to a two-measure LP-form kernel with λ ≥ τ*(s).
+- **A19 (exact certificate)**: **τ*(3.84) ≥ 11 is now PROVED** — `attempts/A19-hybrid-kernel/lp_floor_384.json` holds 18
+  closed unit squares (rational centres, exactly-rational directions, weights 4×1 + 14×½ summing to exactly 11) whose
+  pointwise closed-cover ≤ 1 is verified by an exact Fraction B&B (10,009 boxes, 0 undecided); weak duality gives
+  τ*(3.84) ≥ 11, hence **λ ≥ 11 at 3.84 for the whole automatic class, rigorously** (the ceiling ≈ 3.83 statement no
+  longer rests on a float LP).
+- **A19 (hybrid, done-negative)**: the one escape A18 left open — unrestricted D_pq on atom pairs inside a region R,
+  with (ii)-verification localised to R-meeting pairs (measured: 9.9 % of disjoint pairs at 3.84 with a 148-atom
+  central R) — buys ≈ 0.002–0.005 in λ over the automatic class on identical row sets at BOTH 3.80 and 3.84
+  (11.14579 vs 11.14406 at 3.84; 10.50369 vs 10.50615 at 3.80, vs the 0.086 needed to reach τ*(3.80)): the LP's tight
+  set is a coverage-1 continuum spanning the whole container, so a small R-patch is always re-pinned from outside, and
+  covering the whole tight set (k ~ 600+) exceeds the convex (k+1)-cone form's reach (Clarabel memory wall ≈ cone 250).
+  An exact-finite-graph diagnostic suggests the 1181-atom indicator basis itself is NOT the obstruction (pattern class
+  ≈ 10.35–10.4 on the c384 graph where ϑ′ = 10.38). Remaining kernel moves: D4-block-diagonalised R-cone (k → ~600),
+  Burer–Monteiro with sign hinges, or smooth non-indicator features. Details: attempts/A19-hybrid-kernel/notes.md.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).

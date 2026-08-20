@@ -420,3 +420,45 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   median depth 0.094), with the 6-D cell-pair verification restricted to pairs of squares both meeting that region — a
   pair table orders of magnitude smaller than A17's full pair space. That is the recommended A19; the 14-node ϑ′ tree
   faces the same theorem at every node (node LPs sit AT the budget), so it, too, needs genuine pair verification.
+
+## 2026-08-19 — A19-hybrid-kernel — hybrid kernel (free R-block) buys ≈ nothing at reachable sizes (done-negative); **τ*(3.84) ≥ 11 PROVED by exact rational certificate**
+
+- **Task**: the only kernel route A18's collapse theorem leaves open — Z-sign structure globally, D_pq unrestricted only
+  for atom pairs inside a designated region R, so that (ii)-verification localises to R-meeting pairs; target λ < 11 at
+  3.84; plus make τ*(3.84) ≥ 11 rigorous.
+- **Class algebra (notes §1, machine-validated to 9e-15)**: D = diag(g) + F with supp F ⊆ R×R gives K(x,y) = −1 EXACTLY
+  on every disjoint closed pair unless both squares cover an R-atom (automaticity), K(x,x) linear in (g,F), and
+  M ⪰ 0 ⟺ one (k+1)×(k+1) cone by Schur (k = |R-atoms|) + per-atom scalar terms — a convex SDP at FULL 1181-atom
+  resolution. F = 0 recovers A18's two-measure family exactly (gate (a) PASS on A18's own rows: 11.14406 vs their
+  11.1438 at 3.84; 10.50617 vs 10.50627 at 3.80). The diag+R form equals the D4-invariant full hybrid (pair-orbit SDP)
+  to 3e-5. NEW PITFALL for the lab list: with canon-deduped representative rows, a NON-D4-invariant matrix variable
+  under-estimates massively (10.55 vs the true 14.47 on a tiny instance) — every SDP variable must be tied to the
+  invariant subspace.
+- **Result (same-rows F-on/F-off, Clarabel, the decisive comparisons)**: 3.84 (R = 148 central mid-tilt atoms from the
+  binding-placement inventory): hybrid 11.14579 vs F=0 11.14406 — F buys −0.0017 = exactly the δ_p pair-margin cost;
+  3.80 (gate (b), R = wall bands): 10.50369 vs 10.50615 — +0.0025 of the 0.086 needed to reach τ*(3.80) = 10.42.
+  **Gate (b) FAILS; λ < 11 at 3.84 is not approached.** The optimal F is genuinely active (≈ half its entries positive,
+  |F|max 0.36–0.55): the mechanism exists but the localised pair constraints price it at exactly its diagonal benefit.
+  Mechanism (observed live): the automatic optimum's tight set is a coverage-1 continuum spanning the whole container;
+  relieving the R-patch re-pins the supremum outside R (binding cell moved to a wall cell at it 1). Covering the whole
+  tight structure needs k ~ 600+, beyond the convex (k+1)-cone form on this hardware (Clarabel memory death at cone
+  ≳ 250–300, measured 6–9 GB alloc failures with silent exit; SCS at eps 3e-5 produced non-monotone junk λ — measured,
+  rejected). Burden had it worked: 9.9 % of disjoint pairs are R-meeting (centres within 1.163 of centre).
+- **Exact-graph diagnostic** (BM + EXACT finite pair oracle on the A15 c384 graph, ϑ′ = 10.38, LP = 11.000): the
+  1181-atom pattern class stays feasible at λ ≈ 10.35–10.4 through 31k+ accumulated exact pair rows (max violation
+  +0.47 → −0.56, still open at write-up; results/gclass384.json tracks it) — the indicator basis is NOT intrinsically
+  ≥ 11 on the graph; the continuum tight-cell continuum plus solver scaling are what bind, not the basis.
+- **τ*(3.84) ≥ 11, fully rigorous** (attempts/A19-hybrid-kernel/lp_floor_384.json + results/lp_floor_verify.json):
+  18 closed unit squares — 4 corner squares (weight 1) + 10 upright ½-slide placements + the interior 61.5° pinwheel
+  (4 × ½) — with rational centres (den 2^20), exactly-rational unit directions, weights summing to EXACTLY 11, and
+  Σᵢ wᵢ·1[p ∈ Qᵢ] ≤ 1 verified for EVERY point by an exact Fraction quadtree B&B (10,009 boxes, depth 15, 0 undecided);
+  weak duality then gives τ*(3.84) ≥ 11. Combined with A18's collapse theorem, **λ ≥ 11 at 3.84 for every
+  automatic-(ii) kernel is now a fully rigorous statement**. (Two soundness traps found en route: the raw ¼-structure
+  violates CLOSED-cover at touching lines — cover 1.125 — and coarse coordinate snapping creates 1.5-cover coincidence
+  lines invisible to float scans; the pipeline handles both: η-inflated LP + edge-line probes + exact-B&B feedback.)
+- **Programme consequence**: a small sliver-localised unrestricted block does NOT turn the automatic class into a
+  sub-11 certificate — the ¼-cheat's kernel-killing cross terms live wherever the LP's tight structure lives, i.e.
+  everywhere. Remaining kernel-shaped moves, in order: (1) D4-block-diagonalise the R-cone (isotypic blocks ~k/8 —
+  pushes the convex form to k ~ 600; pure engineering); (2) A17-style Burer–Monteiro on the full hybrid with sign
+  hinges (k = m = 1181, loses convexity guarantees); (3) leave the indicator class: smooth features interpolating the
+  discrete duals' dominant eigenvectors (A17 §6.3-2, still untested).
