@@ -253,8 +253,15 @@ float SAT check `code/squares.is_valid`) for **10 unit squares of tilt ≤ ε in
 | 10° | −0.006470 | no packing |
 | **12°** | **−0.0000000** | exactly tangential — the threshold |
 | **15°** | **+0.0000009** | **FITS** (witness, `is_valid(X, 3.84, 0)` = True, max\|tilt\| = 15.000°) |
+| 20° | +0.0000445 | FITS |
+| 25° | +0.0000525 | FITS |
 | 28.5° | +0.0000904 | **FITS** (witness has max\|tilt\| = 23.359°) |
-| 45° | +0.0000462 | FITS (of course: s(10) ≤ 3 + 1/√2 = 3.7071) |
+| 35° | +0.0001097 | FITS |
+| 45° | +0.0000711 | FITS (of course: s(10) ≤ 3 + 1/√2 = 3.7071) |
+
+(Full 12-point sweep, 300 restarts per ε on 8 workers, 3801 s; the ε = 28.5° and 45° rows were
+reproduced independently by a separate 120-restart run, `results/tiltmax_key.json`, to identical
+values. Every FITS row is confirmed by `code/squares.is_valid(X, 3.84, tol = 0)`.)
 
 **So ten unit squares of tilt ≤ 15° do fit in a 3.84 square, and the true 9-vs-10 threshold is
 ε* ≈ 12°.** Three consequences, and they close the route:
@@ -428,7 +435,7 @@ python band.py
 python charge.py
 python compose.py
 python rankcuts.py
-python tiltmax.py --n 10 --eps 0 3 5 8 10 12 15 --restarts 300 --workers 8
+python tiltmax.py --n 10 --eps 0 3 5 8 10 12 15 20 25 28.5 35 45 --restarts 300 --workers 8
 python tiltmax.py --n 10 --eps 28.5 45 --restarts 120 --workers 2 --out results/tiltmax_key.json
 for n s in "2 1.84" "2 1.95" "4 2.0" "5 2.56" "5 2.71" "6 2.99":     python tiltmax.py --n $n --eps 45 --s $s --restarts 40 --workers 2 --out results/mcheck_${n}_${s}.json
 ```
