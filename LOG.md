@@ -569,3 +569,13 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
 - Detached certify run finished after the agent was killed: every 11-packing at side <= 3.88 has a square oriented in
   [0,18] u [27,63] u [72,90] deg (total 10.9748 < 11, 292228 boxes, 0 witnesses). I.e. the pure narrow-tilt family
   (all squares between 18 and 27 deg) is DEAD at 3.88. Recorded in REGISTRY + docs/results.md.
+
+## 2026-08-20 — advisor — campaign launched (PI raised spend limit)
+- A24-composed-tree: the headline attempt — case tree at s = 96/25 = 3.84 with TWO independent node-kill tests
+  (T1 coverage LP, T2 wastage ledger vs budget 2341/625 = 3.7456). Target: certified s(11) >= 3.84, which the pure
+  measure LP provably cannot reach (A07 ceiling 3.83; A19's exact value-11 fractional packing at 3.84 makes the
+  impossibility rigorous). Fallback target 3.83 (still a record over the lab's 3.82).
+- A25-wastage-atlas: certified continuum dead-area atlas over (centre-box x tilt-box) cells + pair atlas in the
+  mid-tilt band, with a query API for A24. Key efficiency idea: certified LOWER bounds only, capped candidate
+  regions, early exit.
+- Both agents instructed for token frugality (detached compute, single blocking wait, one final report).
