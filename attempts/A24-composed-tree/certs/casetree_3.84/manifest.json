@@ -1,0 +1,67 @@
+{
+ "attempt": "A24-composed-tree",
+ "s": "96/25",
+ "s_float": 3.84,
+ "n": 11,
+ "area_budget": "2341/625",
+ "area_budget_float": 3.7456,
+ "status": "TREE NOT CLOSED - s(11) >= 3.84 is NOT established: 15 of 216 level-1 leaves certified, 106 solved, at least one box alive (tau > 10); see notes.md sect.5-6",
+ "root": {
+  "file": "root_interior_occupancy.json",
+  "report": "root_interior_occupancy.report.json",
+  "claim": "every packing of 11 unit squares in a square of side <= 96/25 has a square whose centre lies in the closed interior zone [11/10,137/50]^2",
+  "kind": "T1 coverage measure (NO-family = the interior zone, all theta)",
+  "total": "1030019/125000",
+  "budget": 11,
+  "verifier": "verify_case.py (exact) PASS"
+ },
+ "level1": {
+  "cover": "level1.py cover(s=3.84, nx=8, nth=6) over the D4 fundamental triangle T={1.92<=y<=x<=2.74} x [0,90] deg",
+  "n_boxes": 216,
+  "n_certified": 15,
+  "certified_indices": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   10,
+   11,
+   12,
+   16,
+   17,
+   18
+  ],
+  "leaf_kind": "T1 coverage measure, one core box, budget 10",
+  "exhaustive": "cover checked exactly in rationals by level1.check_cover / verify_tree.py",
+  "n_solved": 106,
+  "status_counts": {
+   "dead(T1)": 26,
+   "alive": 76,
+   "dead?(T1)": 4
+  }
+ },
+ "aux": [
+  {
+   "file": "aux_pw4_cores_T1.json",
+   "kind": "T1",
+   "claim": "no packing of 11 unit squares in side <= 96/25 has four squares in the four pinwheel core boxes (+-0.03, theta in [30,36] deg)",
+   "total": "103/25",
+   "budget": 7
+  },
+  {
+   "file": "t2_pw4_d030_exact.json",
+   "kind": "T2 wastage ledger (exact Fractions)",
+   "claim": "same node, killed by area: certified dead area 2416/625 > 2341/625 = s^2-11",
+   "area": "2416/625",
+   "cells": 232,
+   "failed": 0
+  }
+ ],
+ "verifier": "python verify_tree.py",
+ "generated": "2026-08-20 20:38:34"
+}

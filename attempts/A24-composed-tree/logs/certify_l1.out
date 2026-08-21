@@ -1,0 +1,130 @@
+certifying 23 dead leaves with 3 workers
+[1/23] leaf 0: PASS total=8240159/1000000 304s  (1 certified so far)
+[2/23] leaf 4: PASS total=206/25 326s  (2 certified so far)
+[3/23] leaf 6: PASS total=206/25 329s  (3 certified so far)
+[4/23] leaf 7: PASS total=1158751/125000 126s  (4 certified so far)
+[5/23] leaf 5: PASS total=8240001/1000000 204s  (5 certified so far)
+[6/23] leaf 1: PASS total=8240001/1000000 255s  (6 certified so far)
+[7/23] leaf 11: PASS total=1030001/125000 204s  (7 certified so far)
+[8/23] leaf 3: PASS total=927/100 417s  (8 certified so far)
+[9/23] leaf 2: PASS total=8240003/1000000 229s  (9 certified so far)
+[10/23] leaf 16: PASS total=927/100 331s  (10 certified so far)
+[11/23] leaf 10: PASS total=927/100 411s  (11 certified so far)
+[12/23] leaf 8: PASS total=927/100 377s  (12 certified so far)
+[13/23] leaf 12: PASS total=4635003/500000 799s  (13 certified so far)
+[14/23] leaf 18: PASS total=1854001/200000 308s  (14 certified so far)
+[15/23] leaf 17: PASS total=1854001/200000 419s  (15 certified so far)
+Process SpawnPoolWorker-3:
+Process SpawnPoolWorker-1:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\pool.py", line 131, in worker
+    put((job, i, result))
+    ~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\queues.py", line 394, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 207, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 296, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 232] The pipe is being closed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\process.py", line 320, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\pool.py", line 136, in worker
+    put((job, i, (False, wrapped)))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\queues.py", line 394, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 207, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 296, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 232] The pipe is being closed
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\pool.py", line 131, in worker
+    put((job, i, result))
+    ~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\queues.py", line 394, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 207, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 296, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 232] The pipe is being closed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\process.py", line 320, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\pool.py", line 136, in worker
+    put((job, i, (False, wrapped)))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\queues.py", line 394, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 207, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 296, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 232] The pipe is being closed
+Process SpawnPoolWorker-2:
+Traceback (most recent call last):
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\pool.py", line 131, in worker
+    put((job, i, result))
+    ~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\queues.py", line 394, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 207, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 296, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 232] The pipe is being closed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\process.py", line 320, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\pool.py", line 136, in worker
+    put((job, i, (False, wrapped)))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\queues.py", line 394, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 207, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\connection.py", line 296, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 232] The pipe is being closed

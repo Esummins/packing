@@ -609,3 +609,61 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   double counts, |D4| = 8 = 4 x 2); and 54/330 pair cells are NOT realisable — max centre distance >= 1 is necessary
   but not sufficient for two tilted squares — so they are flagged and excluded, a pair atlas without that flag
   manufactures vacuously-true kills.
+
+
+## A24-composed-tree — the two-kill-test case tree at 3.84 (done-negative, two new certified theorems)
+
+Composed A14's coverage LP (T1) with A23/A25's wastage ledger (T2) into one tree at s = 96/25 = 3.84
+(budget for T2: s^2 - 11 = 2341/625 = 3.7456). **3.84 is NOT certified; the record stays 3.82.** But the
+attempt produced two certified theorems, the first YES-branch kills in the I-L6 line, and the first
+affordable cost estimate for closing 3.84.
+
+- **Composition + validation.** `kill_tests.py` maps an A14 `Hyp` to A23 certifier data: YES boxes become
+  `PlacedBox` cores with OUTWARD rounding (so the certificate is uniform over the whole box), and NO-families
+  become a **new discharge rule** in the dead-region B&B (A23 listed this as future work) — under the node
+  hypothesis every packing square avoids the family, so a parameter box inside it holds no legal placement.
+  Interior-disjointness of the dead regions is structural (one quadtree, one window) and audited exactly.
+  Reproduces A23 to the digit: corners4 0.0000, corner_box 0.5285, plus new NO-zone unit tests.
+
+- **THEOREM A24.1 (certified, exact `verify_case.py` PASS).** Every packing of 11 unit squares in a square of
+  side <= 3.84 has a square whose centre lies in the closed **interior** zone [11/10, 137/50]^2. Measure total
+  1030019/125000 = 8.240152 < 11, **margin 2.76** — the largest case-LP margin at 3.84 (A14's corner lemma:
+  0.88). The zone ladder is sharp: cw = 0.8 gives tau = 10.21 (not certifiable), cw = 1.0 gives tau = 11.000
+  with maxcov = 1.000 (the quarter-structure re-appears).
+
+- **THEOREM A24.W (certified, pure Fractions, 0 cell failures).** No such packing has four squares in the four
+  core boxes (c_i +- 0.03) x [30 deg, 36 deg] on the rigidly translated A12 pinwheel: certified dead area
+  **2416/625 = 3.8656 > 2341/625**. The SAME node is independently killed by T1 with an exact coverage
+  certificate (total 103/25 < 7) — the first node in the programme killed by a coverage certificate AND by an
+  area certificate.
+
+- **Wastage scaling law at 3.84** (`sweep.py`), k translated-pinwheel cores of centre half-width d:
+  k=1 0.92 (exact) / 0.68 (d=0.01); k=2 2.60 / 2.05 / 1.42 (d=.03) / 0.98 (d=.06); k=3 **4.36 exact = DEAD**;
+  k=4 6.60 / 5.72 / **4.45 (d=.03) = DEAD** / 3.47 (d=.06). Strongly super-additive — and there is a **cliff**:
+  at d = 0.10 the certified area collapses to exactly **0** (independent confirmation of A25's 0.075-vs-0.15
+  threshold). Cross-validation with A25's atlas on a level-1 box: A24 1.1196 (cells 1/8) -> 1.2260 (1/32) vs
+  atlas 1.2812 — two independent certifiers agreeing.
+
+- **The first YES-branch kills.** A14's blocker (a corner square fixed EXACTLY still leaves tau* = 10 = budget,
+  so the corner stage can never close) does not carry over to the interior. T1's power at an interior node is
+  governed by the rational core half-side a = (1/2 - d sqrt2)/(1 + dt): a >= 0.35 kills (slack -0.7 ... -2.0),
+  a ~ 0.31 is marginal, a <= 0.28 is alive — i.e. centre half-width <= 0.05 and tilt window <= 15 deg.
+
+- **T1/T2 split: 30 kills, ALL of them T1; T2 fired at ZERO tree nodes.** The ledger needs k >= 3 cores of
+  centre width <= 0.075, and by that depth T1 has already won. T2's role remains A23's: killing *realised*
+  mid-tilt structures whose quarter-weight fractional versions hold tau* = 11 and are invisible to every LP.
+
+- **Frontier and cost.** Root lemma + ONE D4-reduced exhaustive level (216 boxes of 0.1025^2 x 15 deg over the
+  fundamental triangle {1.92 <= y <= x <= 2.74}; cover verified exactly in rationals). 106/216 solved at a
+  150 s LP: 26 converged deaths (slack -1.0 ... -2.0), 4 robust deaths, 76 undecided of which **3 genuinely
+  alive (tau up to 10.018)**; **15/15 attempted leaves certified** by the exact verifier. Closing needs
+  converged LPs (~36 CPU-h) + leaf certification (~15 CPU-h) + one refinement level under the survivors:
+  **100-300 CPU-hours**, two orders of magnitude below A14's 10^4-10^5 estimate for the wall-first tree. That
+  is the first affordable route to 3.84 this programme has had — but the three alive boxes mean termination is
+  not guaranteed, so it is a gamble, not a plan.
+
+- Package `attempts/A24-composed-tree/certs/casetree_3.84/` with `manifest.json` and `verify_tree.py`
+  (re-verifies the root, the cover logic in rationals, every leaf, and the T2 certificate; OVERALL PASS,
+  CLOSURE 15/216 — the verifier reports honestly that the tree is open).
+- D4 note (after A25's correction): A24 reduces the CENTRE to an octant and keeps ALL theta (relative size
+  1/8) — equivalent to A25's quadrant x theta <= 45, and not the unsound octant x theta <= 45.

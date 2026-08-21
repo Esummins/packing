@@ -1,6 +1,6 @@
 # A24-composed-tree — case tree at 3.84 with TWO independent kill tests (coverage LP + wastage ledger)
 
-Owner: postdoc (rigorous computation). 2026-08-20. Status: **running** (updated as results land).
+Owner: postdoc (rigorous computation). 2026-08-20. Status: **done-negative-with-two-theorems** (~5 h): 3.84 NOT certified; two new certified theorems, the first YES-branch kills in the programme, and a costed route to closure.
 
 Goal (PI): certify **s(11) ≥ 3.84** (s = 96/25) with a case tree whose nodes die by EITHER
 (T1) A14's coverage LP (τ_H < 11 − m) or (T2) A23's wastage ledger (Σ certified dead area > s² − 11).
@@ -162,3 +162,158 @@ Multi-core interior nodes (budget 11 − m):
 `certs_wip/pw4_cores_T1.json` (exact `verify_case.py` PASS: 4 atoms, total 103/25 = 4.12 < 7, 1394 boxes,
 0.5 s) and T2 by `results/exact_k4_d030.json` (exact dead area 2416/625 > 2341/625). This is the first node
 in the programme killed independently by a coverage certificate and by an area certificate.
+
+## 5. The composed tree at 3.84 (task 3)
+
+### 5a. Generic interior-first tree (`ctree.py`, `results/t384/`)
+Root τ = 11.0288 (matches A13/A14), and the branch heuristic picked **interior × [15°,75°]** with fractional
+mass 2.981 (sides 0.17 each, corners 0.003) — i.e. the LP dual itself says the mid-tilt mass is in the
+interior, confirming the design choice. 33 children (1 NO + 32 YES boxes of 0.41 × 0.41 × 30°). Not pursued
+further: at that box size the core half-side is a ≈ 0.166 and **both** tests are worthless (§2, §4), which
+is exactly the lesson — a generic tree with coarse boxes learns nothing new.
+
+### 5b. The real tree: certified root lemma + one exhaustive level (`level1.py`, `results/l1g_8x6.json`)
+Using Theorem A24.1 as the root, the whole case split is ONE level:
+
+* **D4 WLOG.** The root hypothesis set is empty and Z = [1.1, 2.74]² is centred at (s/2, s/2), so Z is
+  D4-invariant. The triangle T = {(x,y) : 1.92 ≤ y ≤ x ≤ 2.74} is a fundamental domain of the D4-action on
+  Z (its 8 images cover Z), so for every packing there is g ∈ D4 with g(witness centre) ∈ T; the orientation
+  of the image lies in [0°,90°] (a rotation fixes θ mod 90°, a reflection sends θ ↦ 90° − θ).
+  **We reduce the CENTRE to the octant and keep ALL θ** — a *covering* of the placement space of relative
+  size 1/8, equivalent in size (and equally valid) to A25's "quadrant × θ ≤ 45°" fundamental domain. It is
+  NOT the unsound "octant × θ ≤ 45°" (= 1/16) that A25 warns about. Checked in `level1.check_cover`
+  (exact rational grid/θ-cut checks) and re-checked by `verify_tree.py`.
+* **Cover.** T × [0°,90°] by an 8 × 8 grid on T (cells 0.1025 wide) × 6 θ-bins of 15° = **216 boxes**
+  (core half-side a ≈ 0.35–0.38, i.e. right at the T1 threshold of §4). Each box is one node, budget 10.
+
+Status at write-up (LP time limit 150 s per node, 7 workers; `results/l1g_8x6.json` is rewritten after
+every node, so the run can be continued):
+
+| | count | comment |
+|---|---|---|
+| solved nodes | 106 / 216 (150 s LP each, 7 workers) | |
+| **dead(T1)**, converged | **26** | slacks −1.000 … −2.000 (huge margins) |
+| dead?(T1) (slack < −0.03, minmass ≥ 0.97) | 4 | |
+| unresolved at 150 s | 76 | τ ∈ [8.786, 10.018]; most are below the budget 10 but with minmass < 0.97, i.e. the measure is not yet feasible and τ can only rise — genuinely undecided. **3 have already crossed 10 (ALIVE)** |
+| **dead(T2)** | **0** | see §5c |
+| certified leaves (exact `verify_case.py` PASS) | **15 / 15 attempted** | totals 8.24 … 9.27 < 10 |
+
+At 400 s per node (an earlier partial run, `results/l1f_8x6_partial400.json`) the unresolved fraction was
+4/19 = 21 % instead of 76/106 = 72 %, so most of the 76 are time-limit artefacts rather than live nodes —
+but **3 level-1 boxes are genuinely alive (τ up to 10.018 > 10)**, so this cover does not close as it
+stands and needs a refinement level under the survivors.
+
+### 5c. The T1/T2 split — the key scientific datum
+**Every kill in the composed tree was T1. T2 fired at zero nodes.** The reason is quantitative and now
+precisely known (§2 here plus A25's atlas):
+
+* a single core at a **deep-interior** position strands **0** — independently confirmed by A24's `dead_map`
+  and by A25's atlas, both returning 0 for all 34 solved level-1 boxes with centres in [1.92, 2.13]²;
+* a single core near the **corner of the interior zone** (centre ≈ 1.1–1.2 from a container corner) at mid
+  tilt strands **1.07–1.28** — A25's "L-moat" band. Cross-validation of the two independent implementations
+  on level-1 box #199 = [2.6375, 2.74] × [2.4325, 2.535] × [15°,30°]:
+  **A24 `dead_map` 1.1196 (cells 1/8) → 1.2260 (cells 1/32) vs A25 atlas 1.2812** ✓ (two independent
+  certifiers, two independent region constructions, consistent lower bounds);
+* over the whole 216-box cover the atlas gives a positive T2 value on **42 / 216 boxes**, max 1.2812 =
+  **34 % of the budget** (`results/atlas_t2_cover.json`). Refining the centre 2×2 or 4×4 does not raise the
+  *guaranteed* value at this width, consistent with A25's threshold finding (the collapse happens between
+  0.075- and 0.15-wide centre boxes, and 0.1025 is already on the wrong side).
+
+So T2 needs **≥ 3 cores** (A25: 3 × 1.5977 = 4.7930 > 3.7456; A24 independently: 3 exact pinwheel squares
+4.3576 > 3.7456; k = 2 is out of reach, best 3.1953 / 2.6040), each in a centre box of width ≤ 0.075. That
+is depth 3 of a 0.075-cover — but the LP kills such nodes long before: a single core with a ≈ 0.43 already
+has slack −0.7 … −2.0 (§4). **In the regime where T2 becomes usable, T1 has already won.** T2's unique
+value stays where A23 found it: killing *specific realised* mid-tilt structures (Theorem A24.W) — precisely
+the structures whose ¼-weight fractional versions hold τ* = 11 and are therefore invisible to every LP.
+
+## 6. Verdict (task 5 — honest)
+
+**s(11) ≥ 3.84 is NOT certified here, and neither is 3.83.** What WAS established:
+
+1. **Theorem A24.1 (certified, exact verifier PASS)** — every packing of 11 unit squares in a square of
+   side ≤ 3.84 has a square centred in [11/10, 137/50]². Margin 2.76, the largest of any case-LP lemma at
+   3.84 (A14's corner lemma: margin 0.88).
+2. **Theorem A24.W (certified, exact Fractions)** — no such packing has four squares in the four pinwheel
+   core boxes (± 0.03, θ ∈ [30°,36°]); certified dead area 2416/625 > 2341/625 = s² − 11. That node is
+   *also* killed by T1 with an exact coverage certificate (`certs/casetree_3.84/aux_pw4_cores_T1.json`,
+   total 103/25 < 7): **the first node in the programme killed independently by a coverage certificate and
+   by an area certificate.**
+3. **Interior YES-boxes have real LP killing power, unlike corner ones.** A14's blocker (a corner square
+   fixed *exactly* still leaves τ* = 10 = budget, so the corner stage can never close) does not carry over:
+   an interior core with half-side a ≳ 0.35 gives slack −0.7 … −2.0, and 26 of the 106 solved level-1 boxes
+   are converged deaths with slack ≤ −1.0, 15 already certified by the exact verifier. **This is the first
+   place in the I-L6 line where a YES branch kills.**
+4. **The frontier.** The level-1 cover (216 boxes at 0.1025 × 0.1025 × 15°) is not enough — at least one box
+   are alive (τ up to 10.018) and 76/106 are undecided at a 150 s LP. Closing it needs (i) converged LPs
+   (≈ 400–900 s per node ⇒ 216 × ~10 min ≈ 36 CPU-hours) plus certification (~4 min per leaf ⇒ ~15
+   CPU-hours), and (ii) one refinement level under the alive boxes (each split 2×2×2 = 8 children with
+   a ≈ 0.40, where T1 is stronger). Estimate for a serious attempt: **100–300 CPU-hours** — two orders of
+   magnitude below A14's 10⁴–10⁵ CPU-hour estimate for the wall-first tree, and the first estimate in this
+   programme that is affordable. Whether it terminates depends on whether the alive boxes die under
+   refinement; the three boxes with τ > 10 say that is not automatic.
+5. **How much did the wastage ledger buy over A14's pure-LP tree?** In this tree: nothing (0 of 30 kills).
+   Its measured contributions are (a) the independent second certificate on the pinwheel node, and (b) the
+   quantitative map of where an integral test can and cannot bite (§2, §5c). The real gain over A14 is not
+   T2-vs-T1 but **interior-first vs wall-first**: A14's tree had 9/12 survivors per level with GROWING
+   slack; this one has 26 converged deaths with slack ≤ −1.0 at level 1 under a certified root.
+
+**3.83.** Not run separately. Smaller s makes T1 strictly easier (τ decreases with s) and moves the area
+budget only from 3.7456 to 3.6689, while A25 established the atlas is essentially s-independent on
+[3.84, 3.88] — so the T2 picture is unchanged and the bottleneck (216+ converged node LPs) is identical.
+If the level-1 programme is run at all it should be run at 3.84 directly; falling back to 3.83 buys nothing
+here.
+
+## 7. Files / reproduction
+
+* `kill_tests.py` — the composition (T2 at an A14 node), validation suite (`--validate`), exact
+  disjointness audit. `dead_region.py` = A23's + the **NO-family discharge** (`nozones=`,
+  `Certifier._in_nozone`); `wastage.py` = A23's + `nozones` passthrough and a PlacedBox-safe container
+  assert.
+* `sweep.py` — the wastage scaling law (k × core size) at 3.84. `recheck.py` — parallel exact (Fraction)
+  re-certification targeted at the budget.
+* `probe.py` — LP probes (structure-theorem ladders, interior core-size ladder, pinwheel nodes).
+  `certify.py` / `verify_case.py` — A14's certification loop and exact verifier (unmodified copies).
+* `ctree.py` — the generic composed tree (T2 then T1 at every node, interior-first mid-tilt branching).
+* `level1.py` — the D4-reduced exhaustive level-1 cover under the certified root lemma.
+  `certify_l1.py` — parallel leaf certification. `verify_tree.py` — top-level verifier (root + cover
+  logic + every leaf + closure verdict). `atlas_t2.py` — T2 for the whole cover via A25's atlas.
+* `certs/casetree_3.84/` — `root_interior_occupancy.json` (+ `.report.json`), `leaf_*.json` (+ reports),
+  `aux_pw4_cores_T1.json`, `t2_pw4_d030_exact.json`, `manifest.json`.
+* Reproduce: `python kill_tests.py --validate`; `python sweep.py --workers 6 --min_cell 32`;
+  `python recheck.py --src results/sweep_law384_k4_d030.json --k 4 --d 3/100 --a 3 --workers 5`;
+  `python probe.py --tag p --which int_no,thw_5,gbox_1920_1920_30_36_30 --warm ""`;
+  `python level1.py --nx 8 --nth 6 --workers 7 --time_limit 400`; `python certify_l1.py --workers 7`;
+  `python verify_tree.py`.
+
+## 8. Gaps / caveats
+
+* The 76 unresolved level-1 nodes are *time-limit* artefacts of a 150 s LP, not verdicts. τ at an
+  unconverged node is an UNDER-estimate (A14 §3b), so an unconverged τ < budget is **not** a kill; only the
+  30 converged/robust deaths (15 of them certified) count.
+* T2 numbers other than `results/exact_k4_d030.json` are float-interval lower bounds (outward-guarded);
+  the flagship kill is exact (0 cell failures).
+* T2 areas depend on the mapper resolution: the level-1 run used min_cell = 1/8 for speed, which
+  underestimates (box #199: 1.1196 at 1/8 vs 1.2260 at 1/32 vs A25's 1.2812). No kill decision depended on
+  a coarse map.
+* `ctree.py`'s status label 'alive' conflates "LP above budget" with "LP not converged"; the level-1 tables
+  above separate them explicitly.
+* The D4 reduction is used only at the root (as in A14 §1). `check_cover` verifies the grid/θ cuts exactly
+  but the statement "the 8 D4 images of T cover Z" is the standard fundamental-domain fact, argued in §5b,
+  not machine-checked.
+* The pinwheel configuration of §2 is one specific mid-tilt structure (A12's), rigidly translated; the
+  scaling law is measured on it and is not claimed to be the extremal one. A25's atlas gives the
+  configuration-independent version.
+
+## 9. Top-level verification (`python verify_tree.py`)
+
+```
+A24 composed case tree at s = 96/25 = 3.84
+  area budget s^2 - 11 = 2341/625 = 3.745600
+(1) ROOT root_interior_occupancy.json: PASS  (total 1030019/125000 < 11)
+(2) COVER of T x [0,90] by 216 boxes: PASS  (exact rational grid/theta cut check)
+(3a) T1 LEAF certificates: 15 PASS, 0 FAIL
+(3b) T2 t2_pw4_d030_exact.json: disjoint=True, area=2416/625=3.865600 > budget 3.745600, 0 failed cells -> PASS
+(4) CLOSURE: 15/216 level-1 leaves certified; 201 missing
+    ==> the tree is NOT closed: s(11) >= 3.84 is NOT established here.
+OVERALL certificate integrity: PASS
+```
