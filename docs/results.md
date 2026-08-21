@@ -276,6 +276,38 @@ Remaining for s(11) = s': the global stage — exclude packings outside the A22 
 killer (coverage LP + wastage ledger + A21 scaffolding) as the candidate node test; first experiment = A14 node-3
 pinwheel children.
 
+
+## Campaign: composed case tree at 3.84 (A24–A25, 2026-08-20)
+
+Goal: certify s(11) >= 3.84, which the measure LP provably cannot reach (ceiling 3.83; A19's exact value-11
+fractional packing at 3.84 makes the impossibility rigorous). Two independent node-kill tests were composed:
+T1 = coverage LP (A14), T2 = wastage ledger (A23/A25) against the budget s^2 - 11 = 2341/625 = 3.7456.
+
+**Verdict: NOT certified; the record stays 3.82.** What the campaign did establish:
+- **A25 continuum wastage atlas** (`attempts/A25-wastage-atlas/`, query.py): certified dead-area lower bounds
+  uniform over (centre-box x tilt-box) hypothesis cells, 2.9 s/cell (A23's exhaustive method: ~1 CPU-day/cell).
+  **Minimum k = 3**: three mid-tilt squares strand 4.7930 > 3.7456 at 3.84 and 4.2070 > 4.0318 **at s'** (exact
+  Fractions); k = 2 is impossible (best 3.1953). The certified value is a THRESHOLD in centre-box size
+  (point 1.74 / 0.075-box 1.49 / 0.15-box 0.32 / cliff to 0 at 0.10-0.15), tilt width nearly free. Strongest
+  single-square wastage is a square ~1.2 from a corner (L-moat 1.40-1.60), not the flush-to-wall square.
+  Coverage: 35-43% of mid-tilt cells >= 0.3; deep-interior cells are genuinely 0.
+- **A24.1 (certified theorem)**: every packing of 11 unit squares in side <= 3.84 has a square centred in the
+  interior zone [11/10, 137/50]^2 (measure total 8.240152 < 11, margin 2.76 — the largest case-LP margin at 3.84;
+  A14's corner lemma had 0.88). Sharp: widening the zone by 0.2 returns tau = 11.000 and the 1/4-structure.
+- **A24.W (certified)**: no such packing has four squares in the four core boxes (c_i +- 0.03) x [30,36] deg of the
+  translated A12 pinwheel — certified dead area 2416/625 > 2341/625. The same node is also killed by a coverage
+  certificate (total 103/25 < 7): **the first node killed independently by an area certificate and a coverage
+  certificate**.
+- **T1/T2 split: 30 kills, all T1; T2 fired at no tree node.** Reason quantified: T2 needs >= 3 cores of centre
+  half-width <= 0.075, a depth at which T1 has already won; the wastage scaling law at 3.84 is k=1: 0.92,
+  k=2: 2.60, k=3: 4.36 (dead), with a cliff to 0 at half-width 0.10.
+- **Interior-first beats wall-first**: A14's blocker (a corner square fixed exactly still leaves tau* = budget)
+  does not carry over — an interior core of half-side >= 0.35 gives slack -0.7...-2.0. Certified root + one
+  exhaustive D4-reduced level (216 boxes, cover checked in rationals): 26 converged deaths, 15/15 attempted leaves
+  certified, 3 genuinely alive. Estimated cost to close 3.84 this way: **100-300 CPU-hours**, two orders of
+  magnitude below A14's wall-first estimate — the first affordable route, though the 3 alive boxes make
+  termination a gamble.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
