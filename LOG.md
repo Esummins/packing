@@ -564,3 +564,8 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
 - Roadmap status: optimality = certified local theorem (A22) + structure scaffolding at 3.88 (A21, this) +
   wastage killer for the mid-tilt band (A23). Global stage remains the open problem; next composed pilot =
   wastage + coverage on A14 pinwheel children.
+
+## 2026-08-20 — advisor — A21 late certification landed (thm3_orientation_pm18: PASS)
+- Detached certify run finished after the agent was killed: every 11-packing at side <= 3.88 has a square oriented in
+  [0,18] u [27,63] u [72,90] deg (total 10.9748 < 11, 292228 boxes, 0 witnesses). I.e. the pure narrow-tilt family
+  (all squares between 18 and 27 deg) is DEAD at 3.88. Recorded in REGISTRY + docs/results.md.

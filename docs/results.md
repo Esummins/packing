@@ -263,7 +263,7 @@ or above. Three legs, all delivered:
   0.0175 (strict complementarity; one pinwheel self-stress), min inactive margin 0.019. All-rational certificate +
   standalone interval re-checker (attempts/A22-local-rigidity/). First local-optimality certificate for n = 11.
 - **A21 (STRUCTURE at 3.88, certified):** every 11-packing at side ≤ 3.88 has a corner-zone square (total 10.5611 < 11)
-  and a side-zone square (total 8.7453). Per-corner/per-side/orientation-window versions are NOT certifiable at 3.88
+  and a side-zone square (total 8.7453). Also certified (THM3 orientation exclusion, total 10.9748 < 11): every such packing has a square oriented in [0,18]u[27,63]u[72,90] degrees, i.e. no 11-packing at side <= 3.88 has all squares tilted strictly between 18 and 27 degrees. Per-corner/per-side/wider-orientation-window versions are NOT certifiable at 3.88
   (above the certifiability ceiling / alive via ≈43° near-packings; Trump itself keeps the [0°,5°]∪[40°,50°] window alive).
 - **A23 (WASTAGE, the PI's integral constraint):** sound dead-region certifier (witness-point overlap; float-guarded
   and pure-Fraction modes; core-box-uniform "PlacedBox" certificates). Ledger results: single squares strand ≤ 0.6 of
