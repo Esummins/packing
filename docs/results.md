@@ -308,6 +308,50 @@ T1 = coverage LP (A14), T2 = wastage ledger (A23/A25) against the budget s^2 - 1
   magnitude below A14's wall-first estimate — the first affordable route, though the 3 alive boxes make
   termination a gamble.
 
+## The global boundary ledger: counting works, charging has an exact zero (A26, 2026-08-21)
+
+The PI's reformulation of the wastage test: a uniformly tilted lattice of unit squares tiles the plane with zero
+waste, so waste is made only where a same-tilt block TERMINATES (wall wedge / inter-block sliver) — evaluate a
+boundary functional globally on all 11 squares instead of summing local pockets.
+
+- **The band-counting lemma is exact and reduces to the small-n constants.** A unit square avoids the width-w
+  boundary band iff its centre is >= w + h(theta) from every wall (h = (cos+sin)/2), i.e. iff it lies in the
+  CONCENTRIC square of side B = s-2w. Hence **m(w) = max{ n : s(n) <= s-2w }**, exact for n <= 9 and unavailable
+  exactly when B >= 3 (it would need the open s(10)).
+- **Theorem A26.1 (elementary, exact, self-contained).** If (2B-1)^2 < 8 then at most ONE unit square fits in a
+  square of side B. At s = 96/25 with w = 1: 4489/625 = 7.1824 < 8, so **at least 10 of the 11 squares meet the
+  width-1 boundary band** — at 3.84, at s' = 3.877084, and at every s < 3.914213. Proof: SAT gives
+  |u.(c1-c2)| >= 1/2 + h(psi) >= 1 for an edge normal u of Q1, while |u.(c1-c2)| <= 2 h1 (B - h1 - h2) <=
+  (B-1/2)^2/2. (Side effect: re-proves s(2) >= 1/2 + sqrt2.)
+- **Theorem A26.2 / the R-profile.** With R := dist(centre, nearest wall) - h(theta), #{R >= w} <= m(w): at most 1
+  square above R = 0.93, at most 4 above 0.5665, at most 5 above 0.42. Hence **at least 7 of the 11 squares have
+  centre within 1.34711 of a wall.** TIGHT against Trump: his profile is (0.9840, 0.5676, 0.5486, 0 x 8) and the
+  threshold at s' is 0.98144 — exactly one square above it; ZERO Trump squares avoid the width-1 band.
+- **The charged wall functional has an EXACT ZERO, and that is the end of the route.** Built on A25's atlas with
+  proper unions (exact rational cross-square rectangle disjointness, max-weight independent set) and validated
+  against every published A23/A25 number. Over the 1070 admissible band cells the MINIMUM certified charge is
+  **0.0000** (smallest positive 0.0039): a unit square flush against a wall and within a few degrees of
+  axis-parallel strands nothing, because an axis-parallel block terminating on an axis-parallel wall makes no wedge.
+  That configuration is 6 of Trump's own 11 squares. **Minimum total charge over all admissible profiles = 0.0000
+  against the budget 3.7456**; 0 kills at A24's three live level-1 boxes and 0 at the root. Requirement:
+  0.5351 per square at n = 7, or 0.9364 at n = 4; best certified value with tilt and depth floors is 0.1602.
+  Calibration: **Trump's own certified wall charge is 0.8672 = 21.5 % of his budget.**
+- **Theorem A26.3 (negative, and it closes the I-L8 boundary-band line).** The band lemma is a family of region-rank
+  cuts. A19's EXACT rational value-11 fractional packing at 3.84 satisfies every band, tilt, band x tilt and A21
+  zone rank cut, several with equality (weight 1 = m(w) in the deep interior, weight 9 = the near-upright cap,
+  weight 1 = each corner-zone rank). So it remains feasible for the cut-strengthened LP: **tau_cut(3.84) >= 11.**
+- **The weak link is quantitative tilt forcing, and it is now CLOSED negatively.** Elementary: two squares with tilt
+  within eps of axis-parallel have ||Dc||_inf >= 1/(cos eps + sin eps), so an NxN pigeonhole on the centre square of
+  side s-1 gives at most N^2 when (s-1)(cos eps + sin eps) < N: at most 9 within 3.326 deg at 3.84 (2.503 deg at s').
+  A24's LP probe already does better and IS a valid rank bound (a tilt class of a packing is itself a packing, so its
+  size is <= floor(tau_B)): at most 9 within 10 deg (tau = 9.358). And a numerical search with an exact-SAT-verified
+  witness shows **ten unit squares of tilt <= 15 deg DO fit in [0,3.84]^2**, the 9-vs-10 threshold being
+  eps* ~ 12 deg. **The provable ceiling is within 2 deg of the truth: at most ~2 squares can ever be forced to be
+  mid-tilt, against the ~7 the ledger needs.** Conjecture A26.T ("at most 9 within 28.5 deg", the cheapest cut that
+  would have cut off A19's value-11 solution) is REFUTED by a 10-square witness of max tilt 23.36 deg. General
+  principle: **an LP-certified rank bound tau_B(R) is automatically satisfied by every feasible fractional packing**
+  (restrict y to R), so only a combinatorial bound strictly below tau_B(R) can ever cut.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
@@ -318,4 +362,12 @@ T1 = coverage LP (A14), T2 = wastage ledger (A23/A25) against the budget s^2 - 1
    and only then the 14-node tree if the enriched root still misses 11.
 3. Angle-box B&B with the orientation-restricted measure LP as box killer (first experiment: A07's LP with θ
    restricted to [θ*−δ, θ*+δ] ∪ {0} for δ = 10°, 5°, 2°, to see where τ*_B(3.877) crosses 11).
-4. Formalise the bridge lemmas in Lean/Mathlib (needs ~10 GB disk).
+4. Formalise the bridge lemmas in Lean/Mathlib (needs ~10 GB disk). A26's Lemma B0/E1 is the cheapest non-trivial
+   geometric statement in the repo to formalise (SAT + rational arithmetic, a four-line proof) and yields a real
+   structure theorem (>= 10 of 11 squares meet the width-1 band).
+5. A26 follow-ups: (a) FREE, today - LP-less pruning for A24's interior-first tree: "two squares both with R >= 0.93"
+   is dead by Theorem A26.1 and "five squares with R >= 0.5665" by Theorem A26.2; (b) the only surviving charging
+   direction is a CORNER-occupancy statement ("how many squares must sit at depth 0.9-1.35 near a corner?", where the
+   certified charge is 1.40-1.60 and three squares already exceed the budget) - an LP question of the A21.1 type;
+   (c) do NOT refine the wall atlas (its failure is an exact zero, not a resolution problem) and do NOT chase tilt
+   forcing past 12 deg (nothing is there).

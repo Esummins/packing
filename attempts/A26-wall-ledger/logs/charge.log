@@ -1,0 +1,124 @@
+==============================================================================
+A26 task 2 -- the charged wall functional  (budget s^2-11 = 2341/625 = 3.7456)
+==============================================================================
+--- validation of charge.py against A23/A25 published numbers ---
+  PASS  A25 near-corner L-moat (1.20-1.35)^2, th 0-3   [A25: 1.4648]: got 1.4648 (12 rects)
+  PASS  A25 fine near-corner (1.275,1.35)^2, th 15-20  [A25: 1.5977]: got 1.5977 (18 rects)
+  PASS  A25 head max at d=0.45, th 0-3: cell (1.20,1.35)x(0.45,0.60) [0.5078]: got 0.5078 (7 rects)
+  PASS  mid-wall flush cell (0.45,0.60)x(1.65,1.80), th 0-3 -> genuine 0: got 0.0000 (0 rects)
+  PASS  flush CORNER cell (0.45,0.60)^2 th 0-3  [A23 corners4: 0.0000]: got 0.0000 (0 rects)
+  PASS  deep interior (1.80,1.95)^2, th 21-24          [A25: 0 by design]: got 0.0000 (0 rects)
+  PASS  D4 image of the corner cell (rotated)          [same value]: got 1.4648 (12 rects)
+  region-area sum = 1.4648 vs dead_lb 1.4648 PASS
+  flush corner cell [0.50,0.65]^2 x [0,3]deg -> 0.0000 (A23 exact flush corner square: 0.0000; the atlas value is the BOX-uniformity moat, not a wedge)
+
+--- SENSITIVITY: min certified charge over admissible BAND cells ---
+    (band = dist(centre, nearest wall) <= 1.3471; a cell qualifies if its
+     lower corner min(cx0,cy0) <= 1.3471.  min over cells = the value the
+     ledger may assume for ONE forced band square.)
+
+  atlas=coarse  (1070 admissible band cells)
+   tilt floor \ wall-dist floor d0:    0.00   0.75   0.90   1.05   1.20
+    theta >=  0 deg                0.000   0.074   0.102   0.102   0.102
+    theta >=  3 deg                0.000   0.074   0.102   0.102   0.102
+    theta >=  6 deg                0.004   0.074   0.102   0.102   0.102
+    theta >=  9 deg                0.016   0.074   0.102   0.102   0.102
+    theta >= 12 deg                0.023   0.074   0.102   0.102   0.102
+    theta >= 15 deg                0.031   0.074   0.102   0.102   0.102
+    theta >= 21 deg                0.043   0.074   0.102   0.102   0.102
+    theta >= 27 deg                0.047   0.074   0.102   0.102   0.102
+    theta >= 33 deg                0.055   0.074   0.102   0.102   0.102
+    theta >= 39 deg                0.062   0.074   0.102   0.102   0.102
+
+  atlas=fine  (1455 admissible band cells)
+   tilt floor \ wall-dist floor d0:    0.00   0.75   0.90   1.05   1.20
+    theta >= 15 deg                0.043   0.121   0.160   0.160   0.160
+    theta >= 20 deg                0.059   0.121   0.160   0.160   0.160
+    theta >= 25 deg                0.074   0.121   0.160   0.160   0.160
+    theta >= 30 deg                0.086   0.121   0.160   0.160   0.160
+    theta >= 35 deg                0.094   0.121   0.160   0.160   0.160
+    theta >= 40 deg                0.102   0.121   0.160   0.160   0.160
+
+  n_required = ceil(budget / c) squares of that minimum charge needed to kill:
+    coarse          0|0: c=0.0000 -> n_required=inf  (1070 cells)
+    coarse      0|21/20: c=0.1016 -> n_required=37  (300 cells)
+    coarse        0|3/4: c=0.0742 -> n_required=51  (720 cells)
+    coarse        0|6/5: c=0.1016 -> n_required=37  (135 cells)
+    coarse       0|9/10: c=0.1016 -> n_required=37  (495 cells)
+    coarse         12|0: c=0.0234 -> n_required=160  (734 cells)
+    coarse     12|21/20: c=0.1016 -> n_required=37  (220 cells)
+    coarse       12|3/4: c=0.0742 -> n_required=51  (528 cells)
+    coarse       12|6/5: c=0.1016 -> n_required=37  (99 cells)
+    coarse      12|9/10: c=0.1016 -> n_required=37  (363 cells)
+    coarse         15|0: c=0.0312 -> n_required=120  (650 cells)
+    coarse     15|21/20: c=0.1016 -> n_required=37  (200 cells)
+    coarse       15|3/4: c=0.0742 -> n_required=51  (480 cells)
+    coarse       15|6/5: c=0.1016 -> n_required=37  (90 cells)
+    coarse      15|9/10: c=0.1016 -> n_required=37  (330 cells)
+    coarse         21|0: c=0.0430 -> n_required=88  (520 cells)
+    coarse     21|21/20: c=0.1016 -> n_required=37  (160 cells)
+    coarse       21|3/4: c=0.0742 -> n_required=51  (384 cells)
+    coarse       21|6/5: c=0.1016 -> n_required=37  (72 cells)
+    coarse      21|9/10: c=0.1016 -> n_required=37  (264 cells)
+    coarse         27|0: c=0.0469 -> n_required=80  (390 cells)
+    coarse     27|21/20: c=0.1016 -> n_required=37  (120 cells)
+    coarse       27|3/4: c=0.0742 -> n_required=51  (288 cells)
+    coarse       27|6/5: c=0.1016 -> n_required=37  (54 cells)
+    coarse      27|9/10: c=0.1016 -> n_required=37  (198 cells)
+    coarse         33|0: c=0.0547 -> n_required=69  (260 cells)
+    coarse     33|21/20: c=0.1016 -> n_required=37  (80 cells)
+    coarse       33|3/4: c=0.0742 -> n_required=51  (192 cells)
+    coarse       33|6/5: c=0.1016 -> n_required=37  (36 cells)
+    coarse      33|9/10: c=0.1016 -> n_required=37  (132 cells)
+    coarse         39|0: c=0.0625 -> n_required=60  (130 cells)
+    coarse     39|21/20: c=0.1016 -> n_required=37  (40 cells)
+    coarse       39|3/4: c=0.0742 -> n_required=51  (96 cells)
+    coarse       39|6/5: c=0.1016 -> n_required=37  (18 cells)
+    coarse      39|9/10: c=0.1016 -> n_required=37  (66 cells)
+    coarse          3|0: c=0.0000 -> n_required=inf  (986 cells)
+    coarse      3|21/20: c=0.1016 -> n_required=37  (280 cells)
+    coarse        3|3/4: c=0.0742 -> n_required=51  (672 cells)
+    coarse        3|6/5: c=0.1016 -> n_required=37  (126 cells)
+    coarse       3|9/10: c=0.1016 -> n_required=37  (462 cells)
+    coarse          6|0: c=0.0039 -> n_required=959  (902 cells)
+    coarse      6|21/20: c=0.1016 -> n_required=37  (260 cells)
+    coarse        6|3/4: c=0.0742 -> n_required=51  (624 cells)
+    coarse        6|6/5: c=0.1016 -> n_required=37  (117 cells)
+    coarse       6|9/10: c=0.1016 -> n_required=37  (429 cells)
+    coarse          9|0: c=0.0156 -> n_required=240  (818 cells)
+    coarse      9|21/20: c=0.1016 -> n_required=37  (240 cells)
+    coarse        9|3/4: c=0.0742 -> n_required=51  (576 cells)
+    coarse        9|6/5: c=0.1016 -> n_required=37  (108 cells)
+    coarse       9|9/10: c=0.1016 -> n_required=37  (396 cells)
+    fine           15|0: c=0.0430 -> n_required=88  (1455 cells)
+    fine       15|21/20: c=0.1602 -> n_required=24  (480 cells)
+    fine         15|3/4: c=0.1211 -> n_required=31  (1152 cells)
+    fine         15|6/5: c=0.1602 -> n_required=24  (216 cells)
+    fine        15|9/10: c=0.1602 -> n_required=24  (792 cells)
+    fine           20|0: c=0.0586 -> n_required=64  (1195 cells)
+    fine       20|21/20: c=0.1602 -> n_required=24  (400 cells)
+    fine         20|3/4: c=0.1211 -> n_required=31  (960 cells)
+    fine         20|6/5: c=0.1602 -> n_required=24  (180 cells)
+    fine        20|9/10: c=0.1602 -> n_required=24  (660 cells)
+    fine           25|0: c=0.0742 -> n_required=51  (935 cells)
+    fine       25|21/20: c=0.1602 -> n_required=24  (320 cells)
+    fine         25|3/4: c=0.1211 -> n_required=31  (768 cells)
+    fine         25|6/5: c=0.1602 -> n_required=24  (144 cells)
+    fine        25|9/10: c=0.1602 -> n_required=24  (528 cells)
+    fine           30|0: c=0.0859 -> n_required=44  (675 cells)
+    fine       30|21/20: c=0.1602 -> n_required=24  (240 cells)
+    fine         30|3/4: c=0.1211 -> n_required=31  (576 cells)
+    fine         30|6/5: c=0.1602 -> n_required=24  (108 cells)
+    fine        30|9/10: c=0.1602 -> n_required=24  (396 cells)
+    fine           35|0: c=0.0938 -> n_required=40  (450 cells)
+    fine       35|21/20: c=0.1602 -> n_required=24  (160 cells)
+    fine         35|3/4: c=0.1211 -> n_required=31  (384 cells)
+    fine         35|6/5: c=0.1602 -> n_required=24  (72 cells)
+    fine        35|9/10: c=0.1602 -> n_required=24  (264 cells)
+    fine           40|0: c=0.1016 -> n_required=37  (225 cells)
+    fine       40|21/20: c=0.1602 -> n_required=24  (80 cells)
+    fine         40|3/4: c=0.1211 -> n_required=31  (192 cells)
+    fine         40|6/5: c=0.1602 -> n_required=24  (36 cells)
+    fine        40|9/10: c=0.1602 -> n_required=24  (132 cells)
+
+  wrote results/sensitivity.json;  validation PASS

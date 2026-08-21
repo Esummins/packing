@@ -1,0 +1,109 @@
+==============================================================================
+A26 task 3 -- composition.  budget s^2-11 = 2341/625 = 3.7456
+==============================================================================
+  admissible BAND cells: coarse 1070, fine(refined, th>=15) 1455
+
+--- the cheapest band square (this is what decides everything) ---
+  coarse (all tilts)              : min charge 0.0000  at cell   (theta0=0 deg, cx0=0.450, cy0=0.450)
+  fine-refined (tilt >= 15 deg)   : min charge 0.0430  at cell   (theta0=15 deg, cx0=0.600, cy0=1.500)
+
+  ==> a unit square FLUSH against the middle of a wall and within a few
+      degrees of axis-parallel strands CERTIFIED ZERO dead area.  This is
+      geometric, not an atlas gap: A25 enumerated those cells and got 0
+      (cells (i,j)=(3,10..12) exist at theta 6-15 deg with 0.004-0.027 and
+      are absent = 0 at theta 0-6 deg), and it matches A23's corners4 = 0.
+
+--- MIN TOTAL CHARGE over all profiles satisfying (i)+(ii)+(iii) ---
+  Cheapest profile (explicit):
+    4 squares deep interior (dist to every wall >= 1.35)      charge 0 each
+      -- allowed: m(0.64) = 4 band-avoiders, and 2 of them may carry the
+         tilt required by (ii)
+    7 squares flush and near-upright at the middles of the 4 walls  charge 0 each
+      -- allowed: only 9 of the 11 are near-upright, and 9 <= 9
+  MIN TOTAL CERTIFIED CHARGE = 0.0000   vs budget 3.7456
+  ==> NO KILL.  The wall-strip ledger has an exact ZERO on the flush
+      near-upright wall square -- which is 6 of Trump's own 11 squares.
+
+--- SENSITIVITY: what forcing would close the gap? ---
+  n * c > 3.7456 with n = number of squares the counting lemmas can force
+  into a class and c = the MINIMUM certified charge of that class.
+
+   class (band, tilt floor tau, wall-dist floor d0)      c        n needed
+   coarse  tau>= 0 deg, d0>=0.00       0.0000   infinity
+   coarse  tau>= 0 deg, d0>=0.75       0.0742         51
+   coarse  tau>= 0 deg, d0>=0.90       0.1016         37
+   coarse  tau>= 0 deg, d0>=1.20       0.1016         37
+   coarse  tau>= 6 deg, d0>=0.00       0.0039        959
+   coarse  tau>= 6 deg, d0>=0.75       0.0742         51
+   coarse  tau>= 6 deg, d0>=0.90       0.1016         37
+   coarse  tau>= 6 deg, d0>=1.20       0.1016         37
+   coarse  tau>=15 deg, d0>=0.00       0.0312        120
+   coarse  tau>=15 deg, d0>=0.75       0.0742         51
+   coarse  tau>=15 deg, d0>=0.90       0.1016         37
+   coarse  tau>=15 deg, d0>=1.20       0.1016         37
+   coarse  tau>=27 deg, d0>=0.00       0.0469         80
+   coarse  tau>=27 deg, d0>=0.75       0.0742         51
+   coarse  tau>=27 deg, d0>=0.90       0.1016         37
+   coarse  tau>=27 deg, d0>=1.20       0.1016         37
+   coarse  tau>=39 deg, d0>=0.00       0.0625         60
+   coarse  tau>=39 deg, d0>=0.75       0.0742         51
+   coarse  tau>=39 deg, d0>=0.90       0.1016         37
+   coarse  tau>=39 deg, d0>=1.20       0.1016         37
+   fine    tau>=15 deg, d0>=0.00       0.0430         88
+   fine    tau>=15 deg, d0>=0.75       0.1211         31
+   fine    tau>=15 deg, d0>=0.90       0.1602         24
+   fine    tau>=15 deg, d0>=1.20       0.1602         24
+   fine    tau>=25 deg, d0>=0.00       0.0742         51
+   fine    tau>=25 deg, d0>=0.75       0.1211         31
+   fine    tau>=25 deg, d0>=0.90       0.1602         24
+   fine    tau>=25 deg, d0>=1.20       0.1602         24
+   fine    tau>=35 deg, d0>=0.00       0.0938         40
+   fine    tau>=35 deg, d0>=0.75       0.1211         31
+   fine    tau>=35 deg, d0>=0.90       0.1602         24
+   fine    tau>=35 deg, d0>=1.20       0.1602         24
+   fine    tau>=40 deg, d0>=0.00       0.1016         37
+   fine    tau>=40 deg, d0>=0.75       0.1211         31
+   fine    tau>=40 deg, d0>=0.90       0.1602         24
+   fine    tau>=40 deg, d0>=1.20       0.1602         24
+
+  Counting can force n = 7 (band) and n = 2 (tilt >= 3.33 deg).
+  n = 7 needs c > 3.7456/7 = 0.5351 ; best certified c is 0.16.
+  n = 4 (one per wall, automatic disjointness) needs c > 0.9364.
+  So the ledger is short by a factor 3.3 (n=7) to 5.9 (n=4).
+
+--- reality check: the certified wall charge of TRUMP's packing ---
+  s' = 3.877084, budget = 4.0318
+  naive sum of per-square atlas values : 0.8672
+  CERTIFIED (max pairwise-disjoint sub-family): 0.8672   (21.5 % of budget)
+  (must be <= budget -- the packing exists.  The headroom left is what any
+   ledger of this kind could ever have used at s'.)
+
+==============================================================================
+A26 task 4 -- A24's three live level-1 boxes and the root
+==============================================================================
+  L1 #89 : centre [2.33, 2.4325] x [2.33, 2.4325] theta (75, 90)
+      dist(centre, nearest wall) in [1.4075,1.5100],  R = D-h in [0.7951,1.0100]
+      T2 (A25 atlas single) charge  = 0.0000   (budget 3.7456)  -> NO KILL
+      band-counting: the node square avoids the width-w band for every w <= 0.7951;
+        m(0.93) = 1 and m(0.64) = 4, so ONE such square is allowed -- no contradiction.
+  L1 #95 : centre [2.4325, 2.535] x [1.92, 2.0225] theta (75, 90)
+      dist(centre, nearest wall) in [1.3050,1.4075],  R = D-h in [0.6926,0.9075]
+      T2 (A25 atlas single) charge  = 0.0000   (budget 3.7456)  -> NO KILL
+      band-counting: the node square avoids the width-w band for every w <= 0.6926;
+        m(0.93) = 1 and m(0.64) = 4, so ONE such square is allowed -- no contradiction.
+  L1 #101: centre [2.4325, 2.535] x [2.0225, 2.125] theta (75, 90)
+      dist(centre, nearest wall) in [1.3050,1.4075],  R = D-h in [0.6926,0.9075]
+      T2 (A25 atlas single) charge  = 0.0000   (budget 3.7456)  -> NO KILL
+      band-counting: the node square avoids the width-w band for every w <= 0.6926;
+        m(0.93) = 1 and m(0.64) = 4, so ONE such square is allowed -- no contradiction.
+
+  ROOT (s = 3.84, no hypothesis): the counting lemmas give
+    >= 10 squares meet the width-1 band, >= 7 have centre within 1.3471
+    of a wall, >= 2 have tilt >= 3.326 deg.  Certified charge of the
+    cheapest such configuration: 0.0000.  NO KILL at the root either.
+
+  ==> counting + charge kills NOTHING that the coverage LP could not:
+      0 of the 3 live boxes, 0 at the root.  (The LP kills 30 level-1
+      boxes; T2 killed 0 in A24 and A26 does not change that.)
+
+wrote results/compose.json

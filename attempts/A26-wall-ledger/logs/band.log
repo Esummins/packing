@@ -1,0 +1,100 @@
+C:\Users\esumm\code\packing\attempts\A26-wall-ledger\band.py:8: SyntaxWarning: "\s" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\s"? A raw string is also an option.
+  DEFINITION.  Q *avoids the width-w boundary band* iff Q \subseteq [w, s-w]^2.
+==============================================================================
+A26 task 1 -- BAND-COUNTING LEMMA (exact rationals)
+==============================================================================
+
+--- s = 96/25 = 3.840000 ---
+w = 1:  B = s-2 = 46/25 = 1.840000
+  PI pigeonhole:  a = B-1 = 21/25 = 0.8400, 5a^2/4 = 441/500 = 0.882000 < 1  ==> m(1) <= 2  OK
+  E1 (SAT lemma): (2B-1)^2 = 4489/625 = 7.182400 < 8  ==> m(1) = 1  (STRONGER)
+  ==> at least 10 of the 11 squares MEET the width-1 band at s=3.840000
+
+--- s = 969271/250000 = 3.877084 ---
+w = 1:  B = s-2 = 469271/250000 = 1.877084
+  PI pigeonhole:  a = B-1 = 219271/250000 = 0.8771, 5a^2/4 = 48079771441/50000000000 = 0.961595 < 1  ==> m(1) <= 2  OK
+  E1 (SAT lemma): (2B-1)^2 = 118522521441/15625000000 = 7.585441 < 8  ==> m(1) = 1  (STRONGER)
+  ==> at least 10 of the 11 squares MEET the width-1 band at s=3.877084
+
+--- m(w) table, s = 3.840000  (B = s-2w, a = B-1) ---
+   w      B       a     | E1 | E2grid | TierE | TierP | TierS=m(w) | >= this many MEET the band
+  0.00  3.8400  2.8400 | .  |   20   |  20   | None  |    None    | 
+  0.10  3.6400  2.6400 | .  |   16   |  16   | None  |    None    | 
+  0.20  3.4400  2.4400 | .  |   15   |  15   | None  |    None    | 
+  0.30  3.2400  2.2400 | .  |   12   |  12   | None  |    None    | 
+  0.40  3.0400  2.0400 | .  |   9    |   9   | None  |    None    | 
+  0.42  3.0000  2.0000 | .  |   9    |   9   | None  |    None    | 
+  0.45  2.9400  1.9400 | .  |   9    |   9   |   8   |     5      | 6
+  0.50  2.8400  1.8400 | .  |   9    |   9   |   6   |     5      | 6
+  0.55  2.7400  1.7400 | .  |   8    |   8   |   6   |     5      | 6
+  0.57  2.7000  1.7000 | .  |   8    |   8   |   6   |     4      | 7
+  0.60  2.6400  1.6400 | .  |   6    |   6   |   5   |     4      | 7
+  0.64  2.5600  1.5600 | .  |   6    |   6   |   5   |     4      | 7
+  0.70  2.4400  1.4400 | .  |   6    |   6   |   5   |     4      | 7
+  0.75  2.3400  1.3400 | .  |   4    |   4   |   4   |     4      | 7
+  0.80  2.2400  1.2400 | .  |   4    |   4   |   4   |     4      | 7
+  0.85  2.1400  1.1400 | .  |   4    |   4   |   4   |     4      | 7
+  0.90  2.0400  1.0400 | .  |   4    |   4   |   4   |     4      | 7
+  0.92  2.0000  1.0000 | .  |   4    |   4   |   4   |     4      | 7
+  0.95  1.9400  0.9400 | .  |   3    |   3   |   2   |     1      | 10
+  1.00  1.8400  0.8400 | Y  |   2    |   1   |   2   |     1      | 10
+  1.10  1.6400  0.6400 | Y  |   1    |   1   |   1   |     1      | 10
+
+--- m(w) table, s = 3.877084  (B = s-2w, a = B-1) ---
+   w      B       a     | E1 | E2grid | TierE | TierP | TierS=m(w) | >= this many MEET the band
+  0.00  3.8771  2.8771 | .  |   20   |  20   | None  |    None    | 
+  0.10  3.6771  2.6771 | .  |   16   |  16   | None  |    None    | 
+  0.20  3.4771  2.4771 | .  |   15   |  15   | None  |    None    | 
+  0.30  3.2771  2.2771 | .  |   12   |  12   | None  |    None    | 
+  0.40  3.0771  2.0771 | .  |   9    |   9   | None  |    None    | 
+  0.42  3.0371  2.0371 | .  |   9    |   9   | None  |    None    | 
+  0.45  2.9771  1.9771 | .  |   9    |   9   |   8   |     5      | 6
+  0.50  2.8771  1.8771 | .  |   9    |   9   |   7   |     5      | 6
+  0.55  2.7771  1.7771 | .  |   8    |   8   |   6   |     5      | 6
+  0.57  2.7371  1.7371 | .  |   8    |   8   |   6   |     5      | 6
+  0.60  2.6771  1.6771 | .  |   8    |   8   |   6   |     4      | 7
+  0.64  2.5971  1.5971 | .  |   6    |   6   |   5   |     4      | 7
+  0.70  2.4771  1.4771 | .  |   6    |   6   |   5   |     4      | 7
+  0.75  2.3771  1.3771 | .  |   4    |   4   |   4   |     4      | 7
+  0.80  2.2771  1.2771 | .  |   4    |   4   |   4   |     4      | 7
+  0.85  2.1771  1.1771 | .  |   4    |   4   |   4   |     4      | 7
+  0.90  2.0771  1.0771 | .  |   4    |   4   |   4   |     4      | 7
+  0.92  2.0371  1.0371 | .  |   4    |   4   |   4   |     4      | 7
+  0.95  1.9771  0.9771 | .  |   4    |   4   |   3   |     1      | 10
+  1.00  1.8771  0.8771 | Y  |   2    |   1   |   2   |     1      | 10
+  1.10  1.6771  0.6771 | Y  |   1    |   1   |   1   |     1      | 10
+
+  TierS is EXACT (Lemma B0 + proven s(n), n<=9): m(w) = max{n : s(n) <= B}.
+  "None" = B >= 3, needs s(10) which is NOT proven -> only m <= 9 from TierP/E.
+
+--- the CHARGE band (w chosen so band-meeting => centre within 1.35 of a wall) ---
+  s=3.840000  w=0.64  B=2.5600  a=1.5600: TierE m<=6  TierP m<=5  TierS m=4   => at least 7 squares have centre within 1.3471 of a wall
+  s=3.877084  w=0.64  B=2.5971  a=1.5971: TierE m<=6  TierP m<=5  TierS m=4   => at least 7 squares have centre within 1.3471 of a wall
+
+--- QUANTITATIVE TILT FORCING (the weak link) ---
+  s=3.840000: at most 9 squares have tilt within 3.326 deg of axis-parallel   (exact check: True)
+  s=3.840000: at most 16 squares have tilt within 39.825 deg of axis-parallel   (exact check: True)
+  s=3.877084: at most 9 squares have tilt within 2.503 deg of axis-parallel   (exact check: True)
+  s=3.877084: at most 16 squares have tilt within 34.447 deg of axis-parallel   (exact check: True)
+  (For eps above this threshold the elementary pigeonhole jumps from 9 to 16
+   and gives NOTHING.  Closing the gap between 3.3 deg and the true threshold
+   is a genuine 30-dimensional packing question -- see notes.md sect.5.)
+
+--- TRUMP SANITY CHECK ---
+  container side 3.8770840;  per square: D = dist(centre, nearest wall),
+  h = half-width, w_avoid = D - h = the largest band width this square avoids
+   theta= 40.18  centre=(1.6886,1.9596)  D=1.6886  h=0.7046  w_avoid=+0.9840
+   theta= 40.18  centre=(2.4245,1.2723)  D=1.2723  h=0.7046  w_avoid=+0.5676
+   theta= 40.18  centre=(2.4365,2.6238)  D=1.2532  h=0.7046  w_avoid=+0.5486
+   theta= 40.18  centre=(1.5363,3.1725)  D=0.7046  h=0.7046  w_avoid=+0.0000
+   theta= 40.18  centre=(3.1725,1.9365)  D=0.7046  h=0.7046  w_avoid=+0.0000
+   theta=  0.00  centre=(0.5000,0.5000)  D=0.5000  h=0.5000  w_avoid=+0.0000
+   theta=  0.00  centre=(1.5000,0.5000)  D=0.5000  h=0.5000  w_avoid=+0.0000
+   theta=  0.00  centre=(3.3771,0.5000)  D=0.5000  h=0.5000  w_avoid=+0.0000
+   theta=  0.00  centre=(0.5000,1.5000)  D=0.5000  h=0.5000  w_avoid=+0.0000
+   theta=  0.00  centre=(0.5000,2.5326)  D=0.5000  h=0.5000  w_avoid=+0.0000
+   theta=  0.00  centre=(3.3771,3.3771)  D=0.5000  h=0.5000  w_avoid=+0.0000
+  max w_avoid over Trump squares = 0.9840  ==> ZERO Trump squares avoid the
+  width-1 band (need w_avoid >= 1); consistent with m(1) = 1 (which allows one).
+
+wrote results/band.json

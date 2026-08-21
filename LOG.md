@@ -667,3 +667,67 @@ affordable cost estimate for closing 3.84.
   CLOSURE 15/216 — the verifier reports honestly that the tree is open).
 - D4 note (after A25's correction): A24 reduces the CENTRE to an octant and keeps ALL theta (relative size
   1/8) — equivalent to A25's quadrant x theta <= 45, and not the unsound octant x theta <= 45.
+
+
+## 2026-08-21 — A26-wall-ledger — the GLOBAL boundary ledger: counting works, charging has an exact zero (done-negative, three theorems)
+
+- **The PI's reformulation, tested.** A tilted lattice of unit squares tiles the plane with zero waste, so waste is
+  produced only where a same-tilt block TERMINATES (wall wedge / inter-block sliver): evaluate a boundary functional
+  GLOBALLY on all 11 squares instead of summing A23/A25's local pockets. Counting half: success. Charging half: dies
+  on a zero. Net: **no kill at 3.84, 0 of A24's 3 live level-1 boxes, 0 at the root** — but the failure is now exact.
+- **Lemma B0 (the right formulation).** A unit square avoids the width-w boundary band iff its centre is
+  >= w + h(theta) from every wall, h = (cos+sin)/2, i.e. iff the square lies in the CONCENTRIC square of side
+  B = s-2w. So the band-avoiders are a packing one level down and
+  **m(w) = max{ n : s(n) <= s-2w }** — exact wherever the small-n constants s(n) are known (n <= 9), and
+  unavailable exactly when B >= 3 because it then needs the OPEN s(10). Pleasing self-similarity.
+- **Theorem A26.1 (elementary, exact, self-contained; four-line proof).** If (2B-1)^2 < 8 then at most ONE unit
+  square fits in a square of side B. [SAT: |u.(c1-c2)| >= 1/2 + h(psi) >= 1 for an edge normal u of Q1, while
+  |u.(c1-c2)| <= (B-h1-h2)(|cos|+|sin|) = 2 h1 (B-h1-h2) <= (B-1/2)^2/2.] At s = 96/25, w = 1: (2B-1)^2 =
+  4489/625 = 7.1824 < 8. **=> at most one of the 11 squares avoids the width-1 band, i.e. >= 10 MEET it** —
+  stronger than the dispatch's pigeonhole target (>= 9), and it also holds at s' (7.5854 < 8) and at every
+  s < 3.914213. Side effect: re-proves s(2) >= 1/2 + sqrt2 from scratch.
+- **Theorem A26.2 + the R-profile.** With R := dist(centre, nearest wall) - h(theta): #{R >= w} <= m(w). At 3.84
+  that is <=1 above 0.93, <=4 above 0.5665 (s(5) = 2+1/sqrt2), <=5 above 0.42. Hence **>= 7 of the 11 squares have
+  centre within 0.64 + sqrt2/2 = 1.34711 of a wall.** TIGHT against Trump: his R-profile is
+  (0.9840, 0.5676, 0.5486, 0 x 8), and the E1 threshold at s' is 0.98144 — exactly one square above it. ZERO Trump
+  squares avoid the width-1 band, as the dispatch predicted.
+- **The charged wall functional (charge.py)** does unions properly: A25 atlas cells + exact rational cross-square
+  rectangle-disjointness (max-weight independent set, bitmask-exact), validated against every published A23/A25
+  number (L-moat 1.4648, fine 1.5977, d=0.45 head 0.5078, deep interior 0, flush corner 0, D4 round trip).
+- **The killer fact: the functional has an EXACT ZERO.** Over the 1070 admissible band cells the minimum certified
+  charge is 0.0000 (16 cells at d = 0.45, theta in [0,6] deg) and the smallest positive value is 0.0039. A flush
+  near-upright wall square strands NOTHING — an axis-parallel block terminating on an axis-parallel wall makes no
+  wedge. Verified to be a computed zero, not an atlas gap (the same (i,j) cells carry 0.004-0.027 at theta 6-15 deg).
+  That configuration is 6 of Trump's own 11 squares. **min-over-profiles total charge = 0.0000 vs budget 3.7456.**
+  Best certified per-square charge with tilt AND depth floors: 0.1602; the requirement is 0.5351 (n = 7 forced by
+  counting) or 0.9364 (n = 4, one per wall). Short by 3.3x-5.8x, from a base of 0.
+- **Reality check:** the certified wall charge of Trump's ACTUAL packing is 0.8672 = 21.5 % of his budget 4.0318 —
+  the calibration any ledger of this type has to beat in the WORST case, not the best.
+- **Theorem A26.3 (decisive negative, and the cheap by-product).** The band lemma is a family of region-rank cuts
+  (I-L8): sum_{R(p) >= w} y_p <= m(w), plus tilt cuts, band x tilt cuts, A21 zone ranks. Evaluated on A19's EXACT
+  rational value-11 fractional packing at 3.84: **0 violations**, and several cuts are TIGHT (weight 1 = m(w) in the
+  deep interior; weight 9 = the near-upright cap; weight 1 = each corner-zone rank). So that y stays feasible for the
+  cut-strengthened LP: **tau_cut(3.84) >= 11 and the boundary-band/tilt/zone rank-cut family cannot break the pure-LP
+  ceiling.** The I-L8 boundary-band instantiation is closed.
+- **The weak link, quantified AND CLOSED (as the PI predicted, but worse).** Elementary tilt forcing: two squares
+  with tilt within eps of axis-parallel have ||Dc||_inf >= 1/(cos eps + sin eps), centres in a square of side s-1, so
+  an NxN pigeonhole gives at most N^2 whenever (s-1)(cos eps + sin eps) < N: at most 9 within **3.326 deg** at 3.84
+  (2.503 deg at s'), then the bound jumps uselessly to 16. But A24's own LP probe already does better and IS a valid
+  rank bound (the tilt-<=-eps squares of any packing are themselves a packing in that class, so their number is
+  <= floor(tau_B)): "NO square with theta in [10,80]" gives tau = 9.358 => **at most 9 within 10 deg**. And
+  tiltmax.py (numerical, witness confirmed by exact float SAT) finds **TEN unit squares of tilt <= 15 deg that DO
+  fit in [0,3.84]^2**, with the 9-vs-10 threshold at **eps* ~ 12 deg**. So the provable ceiling (10 deg) is within
+  2 deg of the truth (12 deg): **tilt forcing is maxed out, the best obtainable statement is "at least 2 squares have
+  tilt >= 10 deg", and the ledger's requirement of ~7 charged squares is unreachable IN PRINCIPLE.** Conjecture
+  A26.T ("at most 9 within 28.5 deg" - the cheapest cut that would have cut off A19's solution) is REFUTED by a
+  10-square witness of max tilt 23.36 deg; only the cap-10 version survives, and that is a restricted form of the
+  main conjecture. General reason, worth recording: **LP-certified rank bounds tau_B(R) can never be violated by a
+  feasible fractional packing** (restrict y to R), so only a COMBINATORIAL bound strictly below tau_B can cut.
+- Independent numerical validation of the cited constants (same searcher): 2 squares in 1.84 / 1.95 no; 4 in 2.00
+  tangential; 5 in 2.56 no; 5 in 2.71 tangential; 6 in 2.99 no - s(2)=2, s(4)=2, s(5)=2+1/sqrt2, s(6)=3 reproduced.
+- **Next (ranked).** (a) FREE, today: use the R-profile as an LP-less pruning rule in A24's interior-first tree -
+  "two squares both with R >= 0.93" is dead by Thm A26.1, "five with R >= 0.5665" by Thm A26.2; (b) ~1 CPU-hour:
+  formalise Lemma B0 + E1 in Lean - four lines of rational geometry, no certificate file, and it yields a real
+  structure theorem at 3.84 AND at s'; (c) the only surviving ledger direction is a CORNER-occupancy statement
+  ("how many squares must sit at depth 0.9-1.35 near a corner?", where the charge is 1.40-1.60 and 3 suffice) - an
+  LP question, not a counting one; (d) do NOT refine the wall atlas and do NOT chase tilt forcing past 12 deg.

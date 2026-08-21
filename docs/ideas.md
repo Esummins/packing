@@ -111,3 +111,44 @@ with K(x,x) ≤ λ−1 ∀x and K(x,y) ≤ −1 for all disjoint pairs; then Σ�
 A10–A14. Ansatz K = φᵀMφ (D4-symmetric polynomial/Fourier basis, M ⪰ 0), cutting planes on the pair constraint,
 rigor by exact LDLᵀ + 6-D interval check. Pilot: discretised ϑ′ vs LP on the same placement graph at s = 3.85.
 Follow-ups: 3-point (Bachoc–Vallentin-type) bound; ϑ′ as node relaxation in the case tree (I-L6). Status: **piloted (A15, 2026-08-19): on the same discretised placement graph ϑ′ ∈ [10.38, 10.48] vs LP 11.000 vs α 10 at s = 3.84–3.85 (mid-tilt graph too) — about half the LP gap removed, gap stable under grid refinement; continuous kernel version recommended, with the kernel class containing the LP's coverage-indicator features (the LP certificate is such a kernel). Next: ϑ′ on an un-seeded fine grid; ϑ′ as node relaxation in the case tree.  A16 (2026-08-19): ϑ′ as the case-tree node certificate — kills every node type the LP cannot (four corners fixed: LP 7.000 = budget vs ϑ′ ≤ 6.51–6.62, tight 6.25–6.46; one corner: 10.000 vs ≤ 9.44–9.49; A14's alive boxes: ≤ 9.52–9.67; corners+NO side: ϑ′ = α); un-seeded grids are integral (uninformative); ϑ′ tree = root + 13 leaves ⇒ build the continuum kernel certificate, root first.**
+
+**I-L10. The GLOBAL boundary/interface ledger (PI, 2026-08-20, after A24).** A23/A25's wastage oracle is a LOCAL,
+monotone lower bound on a partial configuration, so a lone interior square contributes ~0 and the test only bites at
+depth >= 3 (A24: T2 fired at ZERO tree nodes; all 30 kills were the coverage LP). The physics it ignores: a uniformly
+tilted lattice of unit squares TILES the plane with zero waste, so tilt costs nothing in the bulk — waste is produced
+only where a same-tilt block TERMINATES, at a container wall (wedge) or against a differently oriented block (sliver).
+So the right invariant is a boundary/interface functional evaluated GLOBALLY on all 11 squares, which could kill at
+shallow depth — exactly A24's bottleneck. Ingredients: (a) a band-counting lemma bounding how many squares can avoid
+a width-w boundary band, (b) a charged wall functional = certified dead-area of the UNION over a hypothesis profile,
+(c) a combinatorial minimisation over profiles giving min-total-charge vs the budget s^2-11.
+Status: **closed as a killer, kept as counting (A26, 2026-08-21, done-negative with three theorems).**
+(a) SUCCEEDS and is exact: a square avoids the width-w band iff it lies in the concentric square of side B = s-2w, so
+m(w) = max{n : s(n) <= s-2w} — the lemma is exactly as strong as the small-n square-packing constants, and it is
+unavailable precisely when B >= 3 (it would then need the OPEN s(10)). Elementary SAT lemma: (2B-1)^2 < 8 => at most
+ONE square, giving **>= 10 of the 11 squares meet the width-1 band at 3.84 and at s'** (Thm A26.1), and
+**>= 7 have centre within 1.34711 of a wall** (Thm A26.2). TIGHT against Trump (his R_max = 0.9840 vs threshold
+0.98144 at s').
+(b)+(c) FAIL, for an exact geometric reason: the functional has a ZERO. A unit square flush against a wall and within
+a few degrees of axis-parallel strands certified-ZERO dead area (an axis-parallel block terminating on an
+axis-parallel wall makes no wedge) — 16 of the 1070 admissible band cells are exactly 0, the smallest positive value
+is 0.0039, and that configuration is 6 of Trump's own 11 squares. **min-over-profiles charge = 0.0000 vs budget
+3.7456**; 0 kills at A24's three live level-1 boxes and 0 at the root. Requirement is 0.5351 per square with n = 7 or
+0.9364 with n = 4; the best certified value with tilt AND depth floors is 0.1602. Trump's own certified wall charge
+is 0.8672 = 21.5 % of his budget — the worst-case calibration the route would have to beat.
+BY-PRODUCT (Thm A26.3): the band lemma is the boundary-band instantiation of I-L8, and A19's exact value-11
+fractional packing satisfies EVERY band / tilt / band x tilt / zone rank cut, several with equality, so
+tau_cut(3.84) >= 11 — that instantiation of I-L8 is now closed too.
+WHAT WOULD HAVE REVIVED IT - and why it cannot. The route needs quantitative tilt forcing. Elementary methods give
+"at most 9 squares have tilt within 3.326 deg of axis-parallel" (2.503 deg at s'); A24's LP probe already gives
+10 deg (tau = 9.358, a valid rank bound because a tilt class of a packing is itself a packing); and A26's numerical
+search finds TEN unit squares of tilt <= 15 deg that fit in [0,3.84]^2, with the true 9-vs-10 threshold at
+eps* ~ 12 deg. So the provable ceiling is within 2 deg of the truth and **at most ~2 squares can ever be forced to be
+mid-tilt**, against the ~7 the ledger needs. Conjecture A26.T ("at most 9 within 28.5 deg" - the cheapest cut that
+would have cut off A19's value-11 fractional packing) is REFUTED by an explicit 10-square witness of max tilt
+23.36 deg. General principle recorded here: **an LP-certified rank bound tau_B(R) can never be violated by a feasible
+fractional packing** (y|_R is feasible for the sub-LP), so a useful region-rank cut must come from a COMBINATORIAL
+bound strictly below tau_B(R) - and none of the elementary families (bands, tilt classes, A21 zones, small-n s(n)) is.
+STILL USABLE TODAY: "two squares both with R >= 0.93" is dead by Thm A26.1 and "five squares with R >= 0.5665" by
+Thm A26.2 - LP-free pruning rules for A24's interior-first tree. The only surviving charging direction is a
+CORNER-occupancy statement (the charge is 1.40-1.60 only at depth ~1.2 near a CORNER, where 3 squares already exceed
+the budget), which is an LP question of the A21.1 type rather than a counting one.
