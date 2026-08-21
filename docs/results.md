@@ -352,6 +352,44 @@ boundary functional globally on all 11 squares instead of summing local pockets.
   principle: **an LP-certified rank bound tau_B(R) is automatically satisfied by every feasible fractional packing**
   (restrict y to R), so only a combinatorial bound strictly below tau_B(R) can ever cut.
 
+
+## The global wall-strip ledger (A26, 2026-08-20) — counting works, charging cannot
+
+Motivated by the PI's observation that the per-node wastage test is local and monotone (a lone interior square
+strands ~0), hence blind to propagation: a tilted block must terminate, at a wall or against another block.
+
+**Certified counting results (exact, elementary):**
+- **Lemma B0.** A square avoids the width-w boundary band iff it lies in the concentric square of side B = s-2w.
+  So band-avoiders are themselves a packing one level down: m(w) = max{n : s(n) <= s-2w}. (Exactly known for
+  n <= 9; hits the open s(10) for large B.)
+- **Theorem A26.1.** If (2B-1)^2 < 8 then at most ONE unit square fits in a square of side B. At s = 3.84, w = 1:
+  (2*1.84-1)^2 = 7.1824 < 8, so **at least 10 of the 11 squares meet the width-1 boundary band**; likewise at s'
+  (7.5854 < 8) and for every s < 3.9142. Four-line proof (SAT normal + support bound); re-proves s(2) >= 1/2+sqrt2.
+- **Theorem A26.2.** At least 7 of the 11 squares have centre within 0.64 + sqrt(2)/2 = 1.34711 of a wall (via s(5)).
+- Trump check, tight: his band profile is (0.9840, 0.5676, 0.5486, 0 x8) — zero squares clear the width-1 band and
+  exactly one clears the s' threshold.
+
+**Why the ledger nevertheless cannot close: the charge functional has an exact zero.** A flush near-upright square
+at a wall strands nothing — an axis-parallel block terminating on an axis-parallel wall makes no wedge (6 of Trump's
+own 11 squares are exactly this). Over 1070 admissible band cells the minimum certified charge is 0.0000, so the
+minimum total charge over all profiles consistent with the counting lemmas is **0.0000 vs budget 2341/625 = 3.7456**.
+Closing would need ~7 wall-meeting squares at substantial tilt (0.5351 each at n = 7, or 0.9364 at n = 4).
+
+**And tilt cannot be forced: a hard ceiling, verified.** Ten unit squares with all tilts <= 23.36 deg fit in
+[0,3.84]^2 (witness in `attempts/A26-wall-ledger/results/tiltmax_key.json`; independently re-checked by the advisor:
+min containment margin +2.3e-4, min pairwise SAT separation +9.0e-5). Hence "at most 9 squares have tilt <= eps" is
+FALSE for eps >= ~12 deg, so at most ~1-2 squares can ever be forced to substantial tilt, against the ~7 the ledger
+needs — unreachable in principle, not merely unproved. The specific cut that would have worked ("<= 9 squares within
+28.5 deg of axis-parallel") is refuted by the same witness.
+
+**Theorem A26.3 (closes the I-L8 rank-cut line).** A19's exact value-11 fractional packing at 3.84 satisfies EVERY
+band / tilt / band-x-tilt / A21-zone rank cut, several with equality, so tau_cut(3.84) >= 11. General principle:
+an LP-certified rank bound tau_B(R) can never be violated by a feasible fractional packing (restrict the packing to
+R), so only a COMBINATORIAL bound strictly below tau_B can cut. This also explains A12's failure retrospectively.
+
+Residual value: the counting lemmas are free pruning for the case tree ("two squares both with band-clearance
+>= 0.93" is dead by A26.1), and B0+A26.1 is the cheapest non-trivial geometry in the repo to formalise in Lean.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
