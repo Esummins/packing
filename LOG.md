@@ -579,3 +579,33 @@ Implemented the rigorous case-LP B&B (hypotheses = core boxes with rational inne
   mid-tilt band, with a query API for A24. Key efficiency idea: certified LOWER bounds only, capped candidate
   regions, early exit.
 - Both agents instructed for token frugality (detached compute, single blocking wait, one final report).
+
+## 2026-08-20 — A25-wastage-atlas — continuum wastage atlas delivered (done-success)
+- **A23's dead-region oracle is now a lookup table over hypothesis BOXES.** `attempts/A25-wastage-atlas/query.py`
+  is A24's import surface: `Atlas.lookup(cx_box, cy_box, theta_box) -> (certified rational lower bound on the
+  stranded/dead area, list of realising rectangles in the query frame)`, D4-aware, 0 when uncovered.
+  `disjoint_regions()` checks the cross-square interior-disjointness side condition of A23's budget lemma.
+- Atlases shipped: coarse single at s = 96/25 and at s' = 3.877084 (1310 cells each, theta 0-45 in 3 deg bins,
+  centre boxes 0.15); FINE single at 3.84 (centre 0.075, 5 deg bins, mid-tilt, 1839 cells); pair atlas (330 pairs,
+  mid-tilt, box-centre separation 1.00-1.25, realisability-flagged). Cost **2.9-8.9 s per cell** vs A23's ~1 CPU-day
+  estimate: capped candidate windows (wall/corner shadow strips, made pairwise disjoint by rectangle subtraction),
+  coarse 1/8 -> 1/16 tiling visited in level order with a work budget, and a midpoint-realisation negative filter.
+  Every cap only drops tiles, so the numbers stay certified LOWER bounds.
+- **Headline: min k = 3.** Any node fixing three mid-tilt squares in [1.275,1.35]^2 x [15,20] deg and its two
+  90 deg rotations has certified dead area 4.7930 > 3.7456 = s^2-11 at 3.84; the coarse-cell version gives
+  4.2070 > 4.0318 **at s'**. k = 2 is out of reach (best two-square value 3.1953). Both witness families are inside
+  the exact-Fraction re-certified set (58 entries / 5083 tiles, **0 failures**), so the statement is exact.
+  Compare A23: k = 4, and only for four exactly fixed placements.
+- **Two findings A24 must act on.** (i) The certified value is a THRESHOLD in core-box size: same centre, mid tilt,
+  point 1.74 / 0.15-box 0.32 / 0.075-box 1.49 / 0.01-box 1.65 — while tilt width is nearly free (3 deg -> 1 deg buys
+  2 %). Branch the CENTRE to 0.075 before querying. (ii) The strongest single-square wastage is not the flush-to-wall
+  square of A23 but the square parked ~1.2 from a corner, which strands an L-moat of 1.40-1.60 — over a third of the
+  whole budget from ONE square.
+- Coverage/limits: 35 % (coarse) / 43 % (fine) of mid-tilt cells carry a useful value >= 0.3, but the median cell is
+  only 0.20/0.29 (typical-case k ~ 19/13) — the ledger is decisive in the near-corner band and useless generically.
+  Deep-interior cells are genuinely 0 (verified, not assumed). The atlas is essentially s-independent on [3.84,3.88];
+  only the budget moves.
+- Corrections to the dispatch: the D4 fundamental domain is quadrant x theta<=45 (NOT octant x theta<=45, which
+  double counts, |D4| = 8 = 4 x 2); and 54/330 pair cells are NOT realisable — max centre distance >= 1 is necessary
+  but not sufficient for two tilted squares — so they are flagged and excluded, a pair atlas without that flag
+  manufactures vacuously-true kills.

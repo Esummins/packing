@@ -1,0 +1,43 @@
+== single-square atlas: max certified dead area
+   rows = tilt bin (deg), cols = min(cx0,cy0) = closest the centre may
+   come to a wall;  s = 3.84  budget s^2-11 = 3.7456
+theta\d   0.45  0.60  0.75  0.90  1.05  1.20  1.35
+  0-  3  0.508 0.625 0.844 1.078 1.293 1.465 0.000
+  3-  6  0.500 0.598 0.840 1.055 1.266 1.445 0.000
+  6-  9  0.531 0.594 0.816 1.051 1.250 1.434 0.000
+  9- 12  0.582 0.625 0.820 1.043 1.246 1.422 0.000
+ 12- 15  0.598 0.617 0.820 1.039 1.238 1.402 0.000
+ 15- 18  0.000 0.621 0.848 1.031 1.227 1.402 0.000
+ 18- 21  0.000 0.637 0.840 0.992 1.199 0.414 0.000
+ 21- 24  0.000 0.641 0.832 0.988 1.195 0.391 0.000
+ 24- 27  0.000 0.652 0.816 0.988 1.188 0.371 0.000
+ 27- 30  0.000 0.641 0.793 0.969 1.207 0.297 0.000
+ 30- 33  0.000 0.656 0.789 1.035 1.207 0.270 0.004
+ 33- 36  0.000 0.680 0.781 1.027 1.168 0.258 0.004
+ 36- 39  0.000 0.691 0.762 1.008 1.164 0.262 0.004
+ 39- 42  0.000 0.703 0.762 1.004 1.164 0.262 0.000
+ 42- 45  0.000 0.672 0.758 1.016 1.152 0.250 0.008
+
+== best achievable sum of atlas values with exactly <= k squares
+   k=1: any tilt 1.4648   mid-tilt 1.4023
+   k=2: any tilt 3.0805   mid-tilt 3.0805
+   k=3: any tilt 4.5453 > budget   mid-tilt 4.4828 > budget
+   k=4: any tilt 6.0102 > budget   mid-tilt 5.8852 > budget
+   k=5: any tilt 6.0102 > budget   mid-tilt 5.8852 > budget
+   MINIMUM k that kills:  any tilt 3   mid-tilt 3   (budget 3.7456)
+   witness (mid-tilt):
+     +3.0805 16_16_14_-1_25.0_25.0 nsq=2 centre [1.20,1.27]x[1.20,1.27] th 25-30 + [2.25,2.33]x[1.12,1.20]
+     +1.4023 15_8_8 nsq=1 centre [2.49,2.64]x[2.49,2.64] th 15-18
+   typical (median mid-tilt positive cell = 0.2031) -> k ~ 19 squares if the regions can be kept disjoint
+
+== minimum k (greedy, region-disjoint, pairwise placeable)
+   any tilt : k = 4 squares, sum dead = 6.1609 vs budget 3.7456  -> KILLS
+   mid-tilt : k = 4 squares, sum dead = 6.1609 -> KILLS
+     +3.0805  16_16_14_-1_25.0_25.0  centre [1.20,1.27]x[1.20,1.27] theta 25-30 + [2.25,2.33]x[1.12,1.20]
+     +3.0805  16_16_14_-1_25.0_25.0  centre [2.56,2.64]x[2.56,2.64] theta 25-30 + [1.51,1.59]x[2.64,2.71]
+     --- mid-tilt ---
+     +3.0805  16_16_14_-1_25.0_25.0  centre [1.20,1.27]x[1.20,1.27] theta 25-30 + [2.25,2.33]x[1.12,1.20]
+     +3.0805  16_16_14_-1_25.0_25.0  centre [2.56,2.64]x[2.56,2.64] theta 25-30 + [1.51,1.59]x[2.64,2.71]
+
+wrote results/headline_3.84.json
+wrote plots/headline_3.84.png

@@ -1,0 +1,35 @@
+== single-square atlas: max certified dead area
+   rows = tilt bin (deg), cols = min(cx0,cy0) = closest the centre may
+   come to a wall;  s = 3.84  budget s^2-11 = 3.7456
+theta\d   0.60  0.75  0.90  1.05  1.20  1.35  1.50
+ 15- 20  0.684 0.926 1.281 1.383 1.598 0.281 0.008
+ 20- 25  0.703 0.902 1.246 1.363 1.508 0.176 0.020
+ 25- 30  0.719 0.895 1.234 1.348 1.480 0.172 0.031
+ 30- 35  0.000 0.863 1.254 1.324 1.453 0.164 0.035
+ 35- 40  0.000 0.836 1.219 1.316 1.449 0.195 0.059
+ 40- 45  0.000 0.828 1.207 1.328 1.445 0.199 0.051
+
+== best achievable sum of atlas values with exactly <= k squares
+   k=1: any tilt 1.5977   mid-tilt 1.5977
+   k=2: any tilt 3.1953   mid-tilt 3.1953
+   k=3: any tilt 4.7930 > budget   mid-tilt 4.7930 > budget
+   k=4: any tilt 6.3906 > budget   mid-tilt 6.3906 > budget
+   k=5: any tilt 6.3906 > budget   mid-tilt 6.3906 > budget
+   MINIMUM k that kills:  any tilt 3   mid-tilt 3   (budget 3.7456)
+   witness (mid-tilt):
+     +1.5977 15.0_17_17 nsq=1 centre [1.27,1.35]x[1.27,1.35] th 15-20
+     +1.5977 15.0_17_17 nsq=1 centre [2.49,2.56]x[1.27,1.35] th 15-20
+     +1.5977 15.0_17_17 nsq=1 centre [2.49,2.56]x[2.49,2.56] th 15-20
+   typical (median mid-tilt positive cell = 0.2891) -> k ~ 13 squares if the regions can be kept disjoint
+
+== minimum k (greedy, region-disjoint, pairwise placeable)
+   any tilt : k = 4 squares, sum dead = 6.1609 vs budget 3.7456  -> KILLS
+   mid-tilt : k = 4 squares, sum dead = 6.1609 -> KILLS
+     +3.0805  16_16_14_-1_25.0_25.0  centre [1.20,1.27]x[1.20,1.27] theta 25-30 + [2.25,2.33]x[1.12,1.20]
+     +3.0805  16_16_14_-1_25.0_25.0  centre [2.56,2.64]x[2.56,2.64] theta 25-30 + [1.51,1.59]x[2.64,2.71]
+     --- mid-tilt ---
+     +3.0805  16_16_14_-1_25.0_25.0  centre [1.20,1.27]x[1.20,1.27] theta 25-30 + [2.25,2.33]x[1.12,1.20]
+     +3.0805  16_16_14_-1_25.0_25.0  centre [2.56,2.64]x[2.56,2.64] theta 25-30 + [1.51,1.59]x[2.64,2.71]
+
+wrote results/headline_fine_3.84.json
+wrote plots/headline_fine_3.84.png
