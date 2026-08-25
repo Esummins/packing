@@ -31,7 +31,7 @@ def _run(cmd, cwd=HERE):
 
 
 def _one(args):
-    name, node_json, s_rat, eps_geo, rounds, time_limit, depth, stages = args
+    name, node_json, s_rat, eps_geo, rounds, time_limit, depth, stages, resolve_time = args
     out = os.path.join(OUT, f'leaf_{name}.json')
     logd = os.path.join(HERE, 'logs', 'cert')
     os.makedirs(logd, exist_ok=True)
@@ -43,7 +43,8 @@ def _one(args):
         cmd = [sys.executable, os.path.join(HERE, 'certify.py'), node_json,
                '--s_rat', s_rat, '--eps_geo', str(eps_geo), '--scale', str(scale),
                '--rounds', str(rounds), '--jobs', '1', '--depth', str(depth),
-               '--time_limit', str(time_limit), '--max_cols', '800', '--out', out]
+               '--time_limit', str(time_limit), '--resolve_time', str(resolve_time),
+               '--max_cols', '800', '--out', out]
         rc, txt = _run(cmd)
         txt_all.append(f"##### scale={scale} rc={rc}\n" + txt)
         if 'CERTIFIED:' in txt:
@@ -102,9 +103,11 @@ def main():
     ap.add_argument('--eps_geo', type=float, default=0.003)
     ap.add_argument('--rounds', type=int, default=3)
     ap.add_argument('--time_limit', type=float, default=400)
+    ap.add_argument('--resolve_time', type=float, default=200)
     ap.add_argument('--depth', type=int, default=56)
     ap.add_argument('--workers', type=int, default=9)
     ap.add_argument('--slack_max', type=float, default=-0.02)
+    ap.add_argument('--nodes_dir', default=None)
     ap.add_argument('--only', default=None)
     ap.add_argument('--skip_done', action='store_true', default=True)
     a = ap.parse_args()
@@ -114,7 +117,8 @@ def main():
         todo = [(n, p) for n, p in todo
                 if not os.path.exists(os.path.join(OUT, f'leaf_{n}.json'))]
     stages = (1.03, 0)
-    jobs = [(n, p, a.s_rat, a.eps_geo, a.rounds, a.time_limit, a.depth, stages) for n, p in todo]
+    jobs = [(n, p, a.s_rat, a.eps_geo, a.rounds, a.time_limit, a.depth, stages, a.resolve_time)
+            for n, p in todo]
     print(f"certifying {len(jobs)} nodes of tag {a.tag} with {a.workers} workers", flush=True)
     outp = os.path.join(HERE, 'results', f'certs_{a.tag}.json')
     res, t0 = [], time.time()

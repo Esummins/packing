@@ -1,0 +1,59 @@
+##### scale=1.03 rc=1
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=705 points=705 rows=2386 (rejected 961)
+  it   0 tau=9.000000 rows=2704 orbs=1505 atoms>0=33 minmass=0.235294 maxcov=1.833333 +rows=318 -rows=0 +cols=800 -cols=0 t=7s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   1 tau=9.000000 rows=3349 orbs=1549 atoms>0=9 minmass=0.000000 maxcov=2.000000 +rows=645 -rows=0 +cols=44 -cols=0 t=13s [lp 1s row 4s +r 1s col 0s +c 0s]
+  it   2 tau=9.000000 rows=3935 orbs=2349 atoms>0=9 minmass=0.000000 maxcov=1.648649 +rows=586 -rows=0 +cols=800 -cols=0 t=31s [lp 11s row 5s +r 1s col 0s +c 0s]
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\certify.py", line 119, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\certify.py", line 59, in main
+    res = solve_node(s, hyp, budget, sym_kind=sym, warm=warm, time_limit=(a.resolve_time or a.time_limit), out=None, log=lambda *x: print(*x, flush=True),
+                     col_stop_iter=10**6, col_stop_cov=1.01, max_cols_add=a.max_cols, fine_slack=99.0, max_iter=1000)
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\caselp.py", line 324, in solve_node
+    res, M = lpbox.run(s, tbox, sym, n=budget, N0=N0_, max_iter=max_iter, out=None, verbose=True, time_limit=time_limit,
+             ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       row_kw=dict(n_theta=n_theta, cstep=0.02), col_kw=dict(grid=grid, max_refine=30), init_atoms=ia, init_rows=ir,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+                       col_stop_iter=col_stop_iter, col_stop_cov=col_stop_cov, extra_rows=extra_rows, neigh_rows=neigh_rows,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       prune_cols=prune_cols, alternate=alternate)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\lpbox.py", line 859, in run
+    over, maxcov = co.search(thresh=1.0 + tol, **ckw)
+                   ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\lpbox.py", line 732, in search
+    cov = self.coverage(pts)
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\lpbox.py", line 673, in coverage
+    uy = -dx * self.sin[None, :] + dy * self.cos[None, :]
+         ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 36.2 MiB for an array with shape (148225, 32) and data type float64
+
+##### scale=0 rc=0
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=705 points=705 rows=2386 (rejected 961)
+  it   0 tau=9.000000 rows=2704 orbs=1505 atoms>0=33 minmass=0.235294 maxcov=1.833333 +rows=318 -rows=0 +cols=800 -cols=0 t=6s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   1 tau=9.000000 rows=3349 orbs=1549 atoms>0=9 minmass=0.000000 maxcov=2.000000 +rows=645 -rows=0 +cols=44 -cols=0 t=13s [lp 1s row 4s +r 1s col 0s +c 0s]
+  it   2 tau=9.000000 rows=3935 orbs=2349 atoms>0=9 minmass=0.000000 maxcov=1.648649 +rows=586 -rows=0 +cols=800 -cols=0 t=30s [lp 11s row 5s +r 1s col 0s +c 0s]
+  it   3 tau=9.000000 rows=4253 orbs=2828 atoms>0=74 minmass=0.510101 maxcov=1.454545 +rows=318 -rows=0 +cols=479 -cols=0 t=55s [lp 17s row 6s +r 1s col 0s +c 0s]
+  it   4 tau=9.000000 rows=4627 orbs=3396 atoms>0=71 minmass=0.666667 maxcov=1.500000 +rows=374 -rows=0 +cols=568 -cols=0 t=129s [lp 66s row 5s +r 2s col 0s +c 0s]
+  it   5 tau=9.000000 rows=4654 orbs=3920 atoms>0=9 minmass=0.000000 maxcov=1.285714 +rows=27 -rows=0 +cols=524 -cols=0 t=206s [lp 76s row 1s +r 0s col 0s +c 0s]
+  it   6 tau=9.000000 rows=4654 orbs=4023 atoms>0=9 minmass=1.000000 maxcov=1.500000 +rows=0 -rows=0 +cols=103 -cols=0 t=272s [lp 66s row 0s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.84 n=10 sym=C1 tau=9.000000 nu=9.000000 conv=False minmass=1.000000 maxcov=1.500000 rows=4654 orbits=4023 atoms_nz=115 packing_support=62 time=441s
+   tau=9.00000 conv=False minmass=1.0000 maxcov=1.5000
+[round 0] tau=9.00000 conv=False scale=1.0300 cert total=9.27007 budget=10 atoms=115
+    boxes = 9892  covered = 4784  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 5044  exact atom checks = 7699  max depth = 56  time = 0.5s
+    FAIL: 64 witness boxes at depth 56: 39 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 25 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 5.828388 deg, centre = (0.548190995, 2.807500000), exact mass = 238797/250000 (~0.955188000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=693 points=693 rows=3666 (rejected 1217)
+    fine row search: minmass=1.000000 +rows=0
+  it   0 tau=9.000000 rows=3666 orbs=693 atoms>0=9 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=1s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.84 n=10 sym=C1 tau=9.000000 nu=9.000000 conv=True minmass=1.000000 maxcov=2.000000 rows=3666 orbits=693 atoms_nz=9 packing_support=9 time=1s
+[round 1] tau=9.00000 conv=True scale=1.0300 cert total=9.27000 budget=10 atoms=9
+    boxes = 15618  covered = 6413  vacuous = 0  exempt = 1428 (core 1428, nofam 0)  split = 7777  exact atom checks = 6413  max depth = 25  time = 0.6s
+    PASS: every NON-EXEMPT closed unit square in [0,96/25]^2 has mass >= 1 ; total 927/100 < budget 10  ==>  no packing of 11 unit squares in side <= 96/25 (~3.8400000000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A27-close-384\certs\casetree_3.84\leaf_95_110.json

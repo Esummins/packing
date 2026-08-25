@@ -277,6 +277,7 @@ def main():
     ok_all &= (nfail == 0)
 
     # ---- (5) refinement tiling + (7) closure
+    sym_log = []
     have = set(certified)          # names of nodes with a PASSing certificate
     prefixes = set()               # a node is worth recursing into only if some cert lives below it
     for nm in have:
@@ -284,10 +285,44 @@ def main():
         for L in range(1, len(parts)):
             prefixes.add('_'.join(parts[:L]))
 
+    def mirror_path(path):
+        """sigma-image path: level-1 cell (i,j,k) -> (j,i,NTH-1-k) (only defined for i == j),
+        and each 8-way split suffix (a,b,c) -> (b,a,1-c) because sigma swaps x and y and
+        reverses the tilt interval."""
+        parts = path.split('_')
+        mid = sigma_cell(int(parts[0]))
+        if mid is None:
+            return None
+        out = [str(mid)]
+        for p in parts[1:]:
+            a, b, c = p
+            out.append(f"{b}{a}{1 - int(c)}")
+        return '_'.join(out)
+
+    def sigma_ok(path):
+        """True iff the mirror node's certified core covers the WHOLE sigma-image of `path`
+        (checked exactly; using the image box rather than the mirror's own box makes the 2^-24
+        outward rounding of the t-endpoints harmless)."""
+        mp_ = mirror_path(path)
+        if mp_ is None or mp_ not in have:
+            return False, None
+        X0, X1, Y0, Y1, T0, T1 = qbox(box_of_path(path))
+        cj = json.load(open(os.path.join(CERTS, f'leaf_{mp_}.json')))['hypotheses']['cores'][0]
+        Ks = (F(cj['kx']), F(cj['ky']), F(cj['tm']), F(cj['a']))
+        okc, worst = core_in_every_square(Ks, Y0, Y1, X0, X1, sigma_t(T1), sigma_t(T0),
+                                          a.nt, a.nxs)
+        return okc, (mp_, worst)
+
     def discharged(path, depth=0):
         if path in have:
             return True, 'certificate'
-        if depth >= 4 or path not in prefixes:
+        oks, info = sigma_ok(path)
+        if oks:
+            sym_log.append(dict(node=path, mirror=info[0], worst_proj=str(info[1])))
+            return True, f'sigma<-{info[0]}'
+        mp_ = mirror_path(path)
+        worth = (path in prefixes) or (mp_ is not None and mp_ in prefixes)
+        if depth >= 4 or not worth:
             return False, 'open'
         Bx = box_of_path(path)
         kids = [f"{path}_{suf}" for suf, _ in split8(Bx)]
@@ -313,37 +348,14 @@ def main():
     for idx in range(len(boxes)):
         ok, how = discharged(str(idx))
         covered[idx] = (ok, how)
-    # ---- (6) symmetry.  sigma(x,y,theta) = (y,x,90-theta) is the reflection of the container
-    # [0,s]^2 in its main diagonal, hence maps packings to packings; in t-coordinates
-    # sigma(t) = (1-t)/(1+t).  If the MIRROR cell's certified core K_s is contained in every
-    # unit square whose parameters lie in sigma(cell idx) -- which is checked here exactly, over
-    # the sigma-IMAGE box rather than over the mirror cell's own box, so that the 2^-24 outward
-    # rounding of the t-endpoints cannot bite -- then "no packing has a square in sigma(idx)",
-    # and applying sigma once more discharges cell idx itself.
-    sym_used = []
-    for idx in range(len(boxes)):
-        if covered[idx][0]:
-            continue
-        sidx = sigma_cell(idx)
-        if sidx is None or not covered[sidx][0] or str(sidx) not in certified:
-            continue
-        X0, X1, Y0, Y1, T0, T1 = qbox(boxes[idx])
-        # sigma-image of cell idx: centres swapped, t reversed by the decreasing map sigma_t
-        IX0, IX1, IY0, IY1 = Y0, Y1, X0, X1
-        IT0, IT1 = sigma_t(T1), sigma_t(T0)
-        cj = json.load(open(os.path.join(CERTS, f'leaf_{sidx}.json')))['hypotheses']['cores'][0]
-        Ks = (F(cj['kx']), F(cj['ky']), F(cj['tm']), F(cj['a']))
-        okc, worst = core_in_every_square(Ks, IX0, IX1, IY0, IY1, IT0, IT1, a.nt, a.nxs)
-        rec = dict(cell=idx, mirror=sidx, used=bool(okc), worst_proj=str(worst),
-                   image_box=[str(v) for v in (IX0, IX1, IY0, IY1, IT0, IT1)])
-        if okc:
-            covered[idx] = (True, f'sigma<-{sidx}')
-        sym_used.append(rec)
-        print(f"(6) SYMMETRY cell {idx} <- mirror {sidx}: core of leaf_{sidx} covers "
-              f"sigma(cell {idx}) = {okc} (worst projection {float(worst):.6f} <= 0.5)")
-    rep['checks']['symmetry'] = sym_used
-    if not sym_used:
-        print("(6) SYMMETRY: not needed (no cell relies on its mirror)")
+    # ---- (6) symmetry (applied inside `discharged`; see sigma_ok above)
+    rep['checks']['symmetry'] = sym_log
+    if sym_log:
+        for s_ in sym_log:
+            print(f"(6) SYMMETRY node {s_['node']} <- mirror {s_['mirror']}: the mirror's certified "
+                  f"core covers the whole sigma-image (worst projection {float(F(s_['worst_proj'])):.6f} <= 0.5)")
+    else:
+        print("(6) SYMMETRY: not used (no node relies on its mirror)")
 
     missing = [i for i in range(len(boxes)) if not covered[i][0]]
     rep['checks']['closure'] = dict(n_cells=len(boxes), n_covered=len(boxes) - len(missing),

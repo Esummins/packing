@@ -139,7 +139,7 @@ def main():
     if os.path.exists(p24):
         for n in json.load(open(p24))['nodes']:
             prev[n['idx']] = n.get('tau') or 0.0
-    jobs.sort(key=lambda j: -prev.get(j[0], 9.5))
+    jobs.sort(key=lambda j: prev.get(j[0], 9.5))   # EASIEST first: harvest certifiable deaths early
     outp = os.path.join(HERE, 'results', '%s_summary.json' % a.tag)
     res, t0 = [], time.time()
     with mp.Pool(min(a.workers, len(jobs))) as pool:

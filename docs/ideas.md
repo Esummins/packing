@@ -166,3 +166,15 @@ wall-to-wall stressed contact structure; Connelly-type jamming for polygons with
 THE missing theorem), (3) enumeration of stressed bridges (≥3 squares spanning 3.84, each tilted hard;
 A26 tilt caps make the candidate set small; refute each via MILP → Newton → Krawczyk). Advisor to draft
 lemmas 1–2 in-loop; enumeration is Opus work. Status: open — next after A27's verdict.
+
+**I-L12. Critical-point exclusion as a third kill test (PI's basin proposal, simplified; 2026-08-21).**
+The PI proposed certifying basins of the compression flow from the 32 known critical points and checking
+coverage. Simplification via the drain lemma (I-L11): basins are unnecessary — it suffices to cover
+configuration space with cells each certified (a) infeasible, (b) min side > s (= LP kill T1), or
+(c) CONTAINING NO CRITICAL POINT (Krawczyk root-exclusion on the KKT/contact system, per active-set
+branch; small menus per cell since only nearby contacts can activate). No flow, no basin boundaries,
+no acyclicity. Point-on-point "balanced" configs = degenerate active-set branches, handled uniformly.
+Slack cells are free (gap-squeeze ⇒ not critical). Practical form: T3 kill test for LP-residual cells
+(currently the 3 live boxes at 3.84); at s' this is the road to full optimality. Order: drain lemma +
+stress lemma (advisor, in progress) → per-cell exclusion implementation (Opus, reuse A22 machinery).
+Status: open; pilot after A27's verdict.

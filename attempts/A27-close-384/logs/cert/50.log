@@ -1,0 +1,27 @@
+##### scale=1.03 rc=0
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=627 points=627 rows=1592 (rejected 930)
+  it   0 tau=9.000000 rows=1679 orbs=1082 atoms>0=9 minmass=0.000000 maxcov=2.000000 +rows=87 -rows=0 +cols=455 -cols=0 t=4s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   1 tau=9.000000 rows=1850 orbs=1344 atoms>0=9 minmass=0.000000 maxcov=2.000000 +rows=171 -rows=0 +cols=262 -cols=0 t=10s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   2 tau=9.000000 rows=1850 orbs=2144 atoms>0=9 minmass=1.000000 maxcov=1.513364 +rows=0 -rows=0 +cols=800 -cols=0 t=13s [lp 1s row 0s +r 0s col 2s +c 0s]
+  it   3 tau=9.000000 rows=1850 orbs=2944 atoms>0=9 minmass=1.000000 maxcov=1.381020 +rows=0 -rows=0 +cols=800 -cols=0 t=23s [lp 7s row 1s +r 0s col 1s +c 0s]
+  it   4 tau=9.000000 rows=2800 orbs=3744 atoms>0=14 minmass=0.000000 maxcov=1.600000 +rows=950 -rows=0 +cols=800 -cols=0 t=48s [lp 15s row 6s +r 4s col 0s +c 0s]
+  it   5 tau=9.000000 rows=2847 orbs=4544 atoms>0=11 minmass=0.500000 maxcov=1.448399 +rows=47 -rows=0 +cols=800 -cols=0 t=76s [lp 23s row 3s +r 0s col 1s +c 0s]
+  it   6 tau=9.000000 rows=2889 orbs=5344 atoms>0=9 minmass=0.000000 maxcov=1.481664 +rows=42 -rows=0 +cols=800 -cols=0 t=149s [lp 68s row 2s +r 0s col 2s +c 0s]
+  it   7 tau=9.000000 rows=3274 orbs=5590 atoms>0=9 minmass=0.000000 maxcov=2.000000 +rows=385 -rows=0 +cols=246 -cols=0 t=561s [lp 401s row 8s +r 3s col 0s +c 0s]
+  time limit
+DONE s=3.84 n=10 sym=C1 tau=9.000000 nu=9.000000 conv=False minmass=0.000000 maxcov=2.000000 rows=3274 orbits=5590 atoms_nz=9 packing_support=154 time=666s
+   tau=9.00000 conv=False minmass=0.0000 maxcov=2.0000
+[round 0] tau=9.00000 conv=False scale=1.0300 cert total=9.27000 budget=10 atoms=9
+    boxes = 54034  covered = 16209  vacuous = 0  exempt = 10826 (core 10826, nofam 0)  split = 26991  exact atom checks = 16209  max depth = 56  time = 4.1s
+    FAIL: 8 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+      worst witness: theta = 13.806878 deg, centre = (3.235121987, 1.417988853), exact mass = 1030001/1000000 (~1.030001000000)
+    feeding back 168 witness rows (total extra 168), re-solving (rows only)
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=630 points=630 rows=2325 (rejected 994)
+    fine row search: minmass=1.000000 +rows=0
+  it   0 tau=9.000000 rows=2325 orbs=630 atoms>0=9 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=2s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.84 n=10 sym=C1 tau=9.000000 nu=9.000000 conv=True minmass=1.000000 maxcov=2.000000 rows=2325 orbits=630 atoms_nz=9 packing_support=21 time=2s
+[round 1] tau=9.00000 conv=True scale=1.0300 cert total=9.27000 budget=10 atoms=9
+    boxes = 31436  covered = 10965  vacuous = 0  exempt = 4785 (core 4785, nofam 0)  split = 15686  exact atom checks = 10965  max depth = 28  time = 2.2s
+    PASS: every NON-EXEMPT closed unit square in [0,96/25]^2 has mass >= 1 ; total 927/100 < budget 10  ==>  no packing of 11 unit squares in side <= 96/25 (~3.8400000000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A27-close-384\certs\casetree_3.84\leaf_50.json

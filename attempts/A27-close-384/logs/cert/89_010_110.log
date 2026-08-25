@@ -1,0 +1,89 @@
+##### scale=1.03 rc=1
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=784 points=784 rows=3479 (rejected 1019)
+  it   0 tau=9.340426 rows=3934 orbs=1584 atoms>0=56 minmass=0.340426 maxcov=1.638298 +rows=455 -rows=0 +cols=800 -cols=0 t=5s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   1 tau=9.500000 rows=4735 orbs=2384 atoms>0=18 minmass=0.000000 maxcov=1.687500 +rows=801 -rows=0 +cols=800 -cols=0 t=11s [lp 1s row 4s +r 1s col 0s +c 0s]
+  it   2 tau=9.400000 rows=5767 orbs=3184 atoms>0=36 minmass=0.400000 maxcov=1.563636 +rows=1032 -rows=0 +cols=800 -cols=0 t=44s [lp 24s row 4s +r 4s col 1s +c 0s]
+  it   3 tau=9.244755 rows=6865 orbs=3984 atoms>0=65 minmass=0.489510 maxcov=1.271329 +rows=1098 -rows=0 +cols=800 -cols=0 t=168s [lp 111s row 4s +r 7s col 1s +c 0s]
+  it   4 tau=9.278592 rows=7652 orbs=4784 atoms>0=81 minmass=0.587977 maxcov=1.239492 +rows=787 -rows=0 +cols=800 -cols=0 t=348s [lp 168s row 5s +r 7s col 1s +c 0s]
+  time limit
+DONE s=3.84 n=10 sym=C1 tau=9.281250 nu=9.281250 conv=False minmass=0.587977 maxcov=1.239492 rows=7652 orbits=4784 atoms_nz=156 packing_support=112 time=877s
+   tau=9.28125 conv=False minmass=0.5880 maxcov=1.2395
+[round 0] tau=9.28125 conv=False scale=1.0300 cert total=9.55976 budget=10 atoms=156
+    boxes = 66251  covered = 32668  vacuous = 0  exempt = 303 (core 303, nofam 0)  split = 33216  exact atom checks = 60266  max depth = 56  time = 4.8s
+    FAIL: 64 witness boxes at depth 56: 12 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 52 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 57.283434 deg, centre = (0.690920303, 1.565000000), exact mass = 965637/1000000 (~0.965637000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=768 points=768 rows=4677 (rejected 1339)
+  it   0 tau=9.298450 rows=5005 orbs=768 atoms>0=120 minmass=0.740310 maxcov=1.872578 +rows=328 -rows=0 +cols=0 -cols=0 t=9s [lp 0s row 7s +r 0s col 1s +c 0s]
+  it   1 tau=9.363796 rows=5235 orbs=768 atoms>0=104 minmass=0.791301 maxcov=1.950791 +rows=230 -rows=0 +cols=0 -cols=0 t=17s [lp 0s row 6s +r 0s col 1s +c 0s]
+  it   2 tau=9.397849 rows=5689 orbs=768 atoms>0=100 minmass=0.752688 maxcov=1.956989 +rows=454 -rows=0 +cols=0 -cols=0 t=24s [lp 0s row 6s +r 0s col 1s +c 0s]
+  it   3 tau=9.442857 rows=6112 orbs=768 atoms>0=89 minmass=0.778571 maxcov=1.928571 +rows=423 -rows=0 +cols=0 -cols=0 t=33s [lp 0s row 6s +r 1s col 1s +c 0s]
+  it   4 tau=9.473239 rows=6433 orbs=768 atoms>0=95 minmass=0.828169 maxcov=1.963380 +rows=321 -rows=0 +cols=0 -cols=0 t=40s [lp 0s row 6s +r 1s col 1s +c 0s]
+  it   5 tau=9.500000 rows=6652 orbs=768 atoms>0=94 minmass=0.936131 maxcov=2.000000 +rows=219 -rows=0 +cols=0 -cols=0 t=47s [lp 0s row 6s +r 0s col 0s +c 0s]
+  it   6 tau=9.500000 rows=6745 orbs=768 atoms>0=35 minmass=0.750000 maxcov=2.000000 +rows=93 -rows=0 +cols=0 -cols=0 t=52s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   7 tau=9.500000 rows=6912 orbs=768 atoms>0=66 minmass=0.703704 maxcov=2.000000 +rows=167 -rows=0 +cols=0 -cols=0 t=58s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   8 tau=9.500038 rows=7030 orbs=768 atoms>0=96 minmass=0.711620 maxcov=1.987081 +rows=118 -rows=0 +cols=0 -cols=0 t=65s [lp 0s row 6s +r 0s col 1s +c 0s]
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\certify.py", line 119, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\certify.py", line 110, in main
+    res = solve_node(s, hyp, budget, sym_kind=sym, warm=warm, time_limit=a.time_limit, out=None, log=lambda *x: print(*x, flush=True),
+                     extra_rows=extra, neigh_rows=0, col_stop_iter=0, fine_slack=99.0, max_iter=1000)
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\caselp.py", line 324, in solve_node
+    res, M = lpbox.run(s, tbox, sym, n=budget, N0=N0_, max_iter=max_iter, out=None, verbose=True, time_limit=time_limit,
+             ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       row_kw=dict(n_theta=n_theta, cstep=0.02), col_kw=dict(grid=grid, max_refine=30), init_atoms=ia, init_rows=ir,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+                       col_stop_iter=col_stop_iter, col_stop_cov=col_stop_cov, extra_rows=extra_rows, neigh_rows=neigh_rows,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       prune_cols=prune_cols, alternate=alternate)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\lpbox.py", line 859, in run
+    over, maxcov = co.search(thresh=1.0 + tol, **ckw)
+                   ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\lpbox.py", line 732, in search
+    cov = self.coverage(pts)
+  File "C:\Users\esumm\code\packing\attempts\A27-close-384\lpbox.py", line 672, in coverage
+    ux = dx * self.cos[None, :] + dy * self.sin[None, :]
+         ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 76.3 MiB for an array with shape (111111, 90) and data type float64
+
+##### scale=0 rc=0
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=784 points=784 rows=3479 (rejected 1019)
+  it   0 tau=9.340426 rows=3934 orbs=1584 atoms>0=56 minmass=0.340426 maxcov=1.638298 +rows=455 -rows=0 +cols=800 -cols=0 t=7s [lp 0s row 5s +r 0s col 1s +c 0s]
+  it   1 tau=9.500000 rows=4735 orbs=2384 atoms>0=18 minmass=0.000000 maxcov=1.687500 +rows=801 -rows=0 +cols=800 -cols=0 t=16s [lp 1s row 5s +r 2s col 0s +c 0s]
+  it   2 tau=9.400000 rows=5767 orbs=3184 atoms>0=36 minmass=0.400000 maxcov=1.563636 +rows=1032 -rows=0 +cols=800 -cols=0 t=76s [lp 47s row 5s +r 6s col 1s +c 0s]
+  it   3 tau=9.244755 rows=6865 orbs=3984 atoms>0=65 minmass=0.489510 maxcov=1.271329 +rows=1098 -rows=0 +cols=800 -cols=0 t=289s [lp 197s row 5s +r 10s col 1s +c 0s]
+  time limit
+DONE s=3.84 n=10 sym=C1 tau=9.278592 nu=9.278592 conv=False minmass=0.489510 maxcov=1.271329 rows=6865 orbits=3984 atoms_nz=81 packing_support=118 time=569s
+   tau=9.27859 conv=False minmass=0.4895 maxcov=1.2713
+[round 0] tau=9.27859 conv=False scale=1.0300 cert total=9.55699 budget=10 atoms=81
+    boxes = 32963  covered = 15640  vacuous = 0  exempt = 684 (core 684, nofam 0)  split = 16575  exact atom checks = 32165  max depth = 56  time = 2.2s
+    FAIL: 64 witness boxes at depth 56: 22 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 42 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 0.000656 deg, centre = (0.855002708, 1.349999008), exact mass = 892571/1000000 (~0.892571000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=690 points=690 rows=3678 (rejected 1291)
+  it   0 tau=9.363636 rows=4153 orbs=690 atoms>0=35 minmass=0.636364 maxcov=2.000000 +rows=475 -rows=0 +cols=0 -cols=0 t=6s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   1 tau=9.675000 rows=4476 orbs=690 atoms>0=45 minmass=0.625000 maxcov=2.000000 +rows=323 -rows=0 +cols=0 -cols=0 t=11s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   2 tau=9.750000 rows=4989 orbs=690 atoms>0=37 minmass=0.750000 maxcov=1.916667 +rows=513 -rows=0 +cols=0 -cols=0 t=17s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   3 tau=9.764706 rows=5276 orbs=690 atoms>0=50 minmass=0.588235 maxcov=1.882353 +rows=287 -rows=0 +cols=0 -cols=0 t=23s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   4 tau=9.833333 rows=5311 orbs=690 atoms>0=44 minmass=0.666667 maxcov=2.000000 +rows=35 -rows=0 +cols=0 -cols=0 t=26s [lp 0s row 3s +r 0s col 0s +c 0s]
+  it   5 tau=9.838235 rows=5501 orbs=690 atoms>0=51 minmass=0.985294 maxcov=2.000000 +rows=190 -rows=0 +cols=0 -cols=0 t=31s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   6 tau=9.838235 rows=5507 orbs=690 atoms>0=53 minmass=0.970588 maxcov=2.000000 +rows=6 -rows=0 +cols=0 -cols=0 t=33s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it   7 tau=9.838235 rows=5576 orbs=690 atoms>0=51 minmass=0.970588 maxcov=2.000000 +rows=69 -rows=0 +cols=0 -cols=0 t=37s [lp 0s row 4s +r 0s col 1s +c 0s]
+  it   8 tau=9.838889 rows=5582 orbs=690 atoms>0=56 minmass=0.988889 maxcov=2.000000 +rows=6 -rows=0 +cols=0 -cols=0 t=39s [lp 0s row 2s +r 0s col 0s +c 0s]
+    fine row search: minmass=0.677778 +rows=1
+  it   9 tau=9.838889 rows=5583 orbs=690 atoms>0=57 minmass=0.677778 maxcov=2.000000 +rows=1 -rows=0 +cols=0 -cols=0 t=42s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it  10 tau=9.875000 rows=5743 orbs=690 atoms>0=42 minmass=0.833333 maxcov=2.083333 +rows=160 -rows=0 +cols=0 -cols=0 t=47s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it  11 tau=9.878505 rows=5755 orbs=690 atoms>0=57 minmass=0.990654 maxcov=2.093458 +rows=12 -rows=0 +cols=0 -cols=0 t=49s [lp 0s row 1s +r 0s col 1s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it  12 tau=9.878505 rows=5755 orbs=690 atoms>0=58 minmass=1.000000 maxcov=2.093458 +rows=0 -rows=0 +cols=0 -cols=0 t=53s [lp 0s row 1s +r 0s col 1s +c 0s]
+DONE s=3.84 n=10 sym=C1 tau=9.878505 nu=9.878505 conv=True minmass=1.000000 maxcov=2.093458 rows=5755 orbits=690 atoms_nz=58 packing_support=56 time=53s
+[round 1] tau=9.87850 conv=True scale=1.0098 cert total=9.97528 budget=10 atoms=58
+    boxes = 137460  covered = 42060  vacuous = 0  exempt = 26702 (core 26702, nofam 0)  split = 68698  exact atom checks = 59735  max depth = 30  time = 10.1s
+    PASS: every NON-EXEMPT closed unit square in [0,96/25]^2 has mass >= 1 ; total 9975279/1000000 < budget 10  ==>  no packing of 11 unit squares in side <= 96/25 (~3.8400000000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A27-close-384\certs\casetree_3.84\leaf_89_010_110.json
