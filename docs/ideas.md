@@ -152,3 +152,17 @@ STILL USABLE TODAY: "two squares both with R >= 0.93" is dead by Thm A26.1 and "
 Thm A26.2 - LP-free pruning rules for A24's interior-first tree. The only surviving charging direction is a
 CORNER-occupancy statement (the charge is 1.40-1.60 only at depth ~1.2 near a CORNER, where 3 squares already exceed
 the budget), which is an LP question of the A21.1 type rather than a counting one.
+
+**I-L11. Critical-point (Morse/flow) reduction — the PI's "illusory volume" observation formalised
+(2026-08-21).** With t = tan(θ/2) all constraints are polynomial, so the feasible set of 11-packings is
+SEMI-ALGEBRAIC: finitely many components, no fractal behaviour (theorem, discharges the PI's hedge).
+Compressing the container defines a flow whose drains are critical (jammed) configurations; to exclude
+packings at side ≤ s it suffices to exclude CRITICAL packings at ≤ s. Diagnosis of the whole campaign in
+this language: measure/coverage certificates cannot express "WLOG critical", so they pay full price for
+the non-critical ocean — the ¼-structure ghost lives exactly there; A22's Krawczyk certificate is the
+one flow-native tool and it worked. Programme: (1) drain lemma (every component contains a critical
+config; gap-squeeze + compactness; rattlers → strata, park them), (2) stress lemma (critical ⇒
+wall-to-wall stressed contact structure; Connelly-type jamming for polygons with sliding contacts —
+THE missing theorem), (3) enumeration of stressed bridges (≥3 squares spanning 3.84, each tilted hard;
+A26 tilt caps make the candidate set small; refute each via MILP → Newton → Krawczyk). Advisor to draft
+lemmas 1–2 in-loop; enumeration is Opus work. Status: open — next after A27's verdict.
