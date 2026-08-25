@@ -400,6 +400,41 @@ of the 11 squares avoids the width-w band whenever w > (s−2)/2 — w* = 0.92 a
 valid for every s < 4 (A26.1: w = 1, s < 3.9142). Human proof + numeric check; Lean pending (A28's
 Band.lean is wired to accept it).
 
+
+## The 3.84 case tree after A27 (rigorous-computation postdoc, 2026-08-25)
+
+**s(11) >= 3.84 is still NOT certified.** The certified lower bound remains **s(11) >= 3.80** (Lean,
+axiom-free kernel check) / **3.82** (exact Python verifier). What A27 established about the case-tree route:
+
+* The interior-first tree of A24 (certified root: every packing of 11 unit squares in side <= 96/25 has a
+  square centred in [11/10, 137/50]^2; 216 level-1 cells over a D4 fundamental triangle) is now
+  **123/216 discharged**, up from 15/216, with **162 exact leaf certificates** and a verifier that passes with
+  0 failures. 93 cells remain open. Closing them needs ~340 CPU-hours and no new mathematics.
+* **All three level-1 cells that A24 reported alive are now certified dead** (cells 89, 95, 101, plus 84 = the
+  diagonal mirror of 89): 95 and 101 die after ONE 8-way refinement, 89 needs TWO. This is the first time a
+  live node of an I-L6 case tree has been killed by refinement in this programme, and it is evidence that the
+  tree terminates rather than regenerating survivors indefinitely (A14's wall-first tree did the opposite).
+* **A rigorous negative to replace the ambiguous "alive" label.** If a node LP has tau >= budget and the column
+  oracle is exhausted (no atom improves the fractional packing), then the dual is feasible for the entire atom
+  space and tau_LP(box) >= budget: that node can never be killed by the coverage LP at that box size. 20 of the
+  216 level-1 cells, and 2 of the 8 children of cell 89, are of this kind. Only refinement moves them.
+* **A soundness gap in the earlier verifier, found and closed.** The exact verifier `verify_case.py` proves a
+  statement about the rational CORE square K of a node; the bridge "every unit square whose centre/orientation
+  lie in the node's box contains K" was computed in floating point inside the certificate builder and never
+  checked. `verify_tree2.py` now verifies it in exact rational interval arithmetic (the construction turns out
+  to carry 2-6 % slack). The whole tree is additionally re-parametrised by t = tan(theta/2), which makes every
+  cut, every 8-way tiling, and the diagonal reflection sigma(t) = (1-t)/(1+t) rational: pi does not enter the
+  verification at any point.
+* **The counting lemmas do not help a one-square-per-node tree.** A26.1 ("at most one square has band clearance
+  >= 0.93"), A26.2 and the sharpened A28.* threshold w* = (s-2)/2 = 0.92 kill a hypothesis only when it fixes
+  TWO squares in the band; every node of an interior-first tree fixes exactly one. Cost 0, kills 0 — recorded
+  so nobody spends CPU on it again. The same verdict, for the same structural reason, applies to the A23/A24
+  wastage ledger T2 (it needs >= 3 cores in boxes of half-width <= 0.05, by which depth T1 has long since won).
+* **Where the cost is.** Certification, not the node LP, dominates at the margin: a node LP reaches a usable
+  state in 100-700 s, but turning a marginal node into an exact certificate costs 300-2400 s. The two obvious
+  savings are to refine `alive(LP)` cells immediately instead of grinding their LPs, and to warm-start each
+  child's certificate from its parent's converged dual.
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).

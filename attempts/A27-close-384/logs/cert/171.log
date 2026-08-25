@@ -1,3 +1,25 @@
-##### scale=1.03 rc=3221226091
-
-##### scale=0 rc=3221226091
+##### scale=1.03 rc=0
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=630 points=630 rows=2770 (rejected 804)
+  it   0 tau=9.000000 rows=2771 orbs=1430 atoms>0=9 minmass=0.000000 maxcov=1.698577 +rows=1 -rows=0 +cols=800 -cols=0 t=1s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   1 tau=9.000000 rows=3170 orbs=2230 atoms>0=9 minmass=0.000000 maxcov=1.637103 +rows=399 -rows=0 +cols=800 -cols=0 t=6s [lp 0s row 3s +r 0s col 1s +c 0s]
+  it   2 tau=9.000000 rows=3866 orbs=3030 atoms>0=19 minmass=0.333333 maxcov=1.361887 +rows=696 -rows=0 +cols=800 -cols=0 t=15s [lp 3s row 4s +r 1s col 1s +c 0s]
+  it   3 tau=9.000000 rows=4977 orbs=3830 atoms>0=32 minmass=0.500000 maxcov=1.600000 +rows=1111 -rows=0 +cols=800 -cols=0 t=48s [lp 26s row 4s +r 4s col 0s +c 0s]
+  it   4 tau=9.000000 rows=5024 orbs=4444 atoms>0=9 minmass=0.000000 maxcov=2.000000 +rows=47 -rows=0 +cols=614 -cols=0 t=201s [lp 151s row 1s +r 0s col 0s +c 0s]
+  it   5 tau=9.000000 rows=5963 orbs=4602 atoms>0=143 minmass=0.460154 maxcov=1.500000 +rows=939 -rows=0 +cols=158 -cols=0 t=514s [lp 301s row 6s +r 6s col 0s +c 0s]
+  time limit
+DONE s=3.84 n=10 sym=C1 tau=8.961538 nu=8.961538 conv=False minmass=0.460154 maxcov=1.500000 rows=5963 orbits=4602 atoms_nz=100 packing_support=78 time=752s
+   tau=8.96154 conv=False minmass=0.4602 maxcov=1.5000
+[round 0] tau=8.96154 conv=False scale=1.0300 cert total=9.23044 budget=10 atoms=100
+    boxes = 10959  covered = 5318  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 5577  exact atom checks = 9157  max depth = 56  time = 0.5s
+    FAIL: 64 witness boxes at depth 56: 34 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 30 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 5.723688 deg, centre = (0.547373741, 2.186250000), exact mass = 442373/500000 (~0.884746000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=697 points=697 rows=4179 (rejected 1124)
+    fine row search: minmass=1.000000 +rows=0
+  it   0 tau=9.000000 rows=4179 orbs=697 atoms>0=9 minmass=1.000000 maxcov=1.869565 +rows=0 -rows=0 +cols=0 -cols=0 t=1s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.84 n=10 sym=C1 tau=9.000000 nu=9.000000 conv=True minmass=1.000000 maxcov=1.869565 rows=4179 orbits=697 atoms_nz=9 packing_support=36 time=1s
+[round 1] tau=9.00000 conv=True scale=1.0300 cert total=9.27000 budget=10 atoms=9
+    boxes = 17820  covered = 7378  vacuous = 0  exempt = 1564 (core 1564, nofam 0)  split = 8878  exact atom checks = 7378  max depth = 26  time = 0.7s
+    PASS: every NON-EXEMPT closed unit square in [0,96/25]^2 has mass >= 1 ; total 927/100 < budget 10  ==>  no packing of 11 unit squares in side <= 96/25 (~3.8400000000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A27-close-384\certs\casetree_3.84\leaf_171.json

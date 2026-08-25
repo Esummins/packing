@@ -792,3 +792,43 @@ affordable cost estimate for closing 3.84.
   `geometric_hahn_banach_open` and a Riesz identification); the **lower-bound** measure bridge lemma
   (`checkMeasureI c = true ⇒ μ(Q) ≥ 1 for every unit square in [0,s]²`), still A06's 3–5 day estimate; the
   A22 replay. Notes: `attempts/A28-lean-batch/notes.md`; theorem/axiom table: `lean/README.md`.
+
+## 2026-08-25 — A27-close-384 (rigorous-computation postdoc) — done-negative, but the tree moved a long way
+
+- **Verdict: s(11) >= 3.84 is still NOT certified.** A24's interior-first case tree went from **15/216** to
+  **123/216** discharged level-1 cells, with **162 exact leaf certificates** (`verify_tree2.py`: root PASS,
+  cover exact, 162 PASS / 0 FAIL). 93 cells remain open.
+- **All 216 level-1 node LPs solved** (A24 had 106, each at a 150 s limit): 65 converged deaths, 20 proved
+  `alive(LP)`, 131 undecided at the 700 s limit — but **117 cells are certified dead by the exact verifier**,
+  because an unconverged LP can still yield a certifiable measure after the EPS_GEO = 3e-3 re-solve and the
+  witness-feedback rounds. The exact verifier, not the LP status, is the arbiter.
+- **New rigorous negative, `alive(LP)`:** tau >= budget AND the column oracle exhausted (maxcov <= 1+1e-3) means
+  the fractional packing is dual-feasible for the whole atom space, so tau_LP(box) >= budget: such a node can
+  NEVER be killed by the coverage LP at that box size. 20 level-1 cells are in this class. A24's "alive" label
+  conflated this with "LP not converged"; the two are now separated.
+- **The three boxes A24 left alive are dead.** Cells 95 and 101 close at level 2 (8/8 children certified,
+  tau 8.61-9.00). Cell 89 needs level 3: two of its children (89_010, 89_111 — the near-axis-parallel tilts at
+  centre ~(2.38,2.38)) sit at tau = 10.000000 with maxcov = 1.000000, i.e. provably LP-unkillable at
+  0.05125 x 0.05125 x 7.5 deg; a third (89_101, slack only -0.325) fails certification. All 24 grandchildren
+  have tau in [7.03, 9.00] and all 24 certify. Cell 84 = sigma(cell 89) is discharged for free.
+- **Soundness gap in A24's verify_tree.py, found and closed.** `verify_case.py` proves a statement about the
+  rational CORE square; the step "every unit square with (centre, theta) in the box contains that core" was
+  float arithmetic inside the certificate builder and was never machine-checked. `verify_tree2.py` now checks
+  it in exact rational interval arithmetic (worst projection 0.468-0.489 against the bound 0.5, i.e. the
+  construction has 2-6 % slack). It also re-parametrises the tree by t = tan(theta/2), so every cut, every
+  8-way tiling and the diagonal symmetry sigma(t) = (1-t)/(1+t) are RATIONAL — pi never enters the verification.
+- **Diagonal symmetry machine-checked and used:** 31 exact transfers (29 of them discharging the entire
+  sub-tree under cell 84 from cell 89's). The naive transfer fails by ~7e-8 because the t-endpoints are
+  outward-rounded to denominator 2^24; checking the mirror's core against the sigma-IMAGE box instead of the
+  mirror's own box makes it exact.
+- **The free A26 band pre-filter is provably inert on this tree** (0 CPU, 0 kills): A26.1/A26.2 and the
+  sharpened A28.* threshold w* = 0.92 all cap the number of squares with band clearance >= w at >= 1, and every
+  node of an interior-first tree fixes exactly ONE square. It would only pay in a tree with 2+ cores per node.
+  T2 (the wastage ledger) skipped per node for A24's measured reason (a single core strands <= 1.2812 of the
+  3.7456 budget); A24's 4-core pinwheel certificates are still carried and re-checked.
+- **Measured cost to finish:** ~340 CPU-hours over ~1200 more nodes (branching 1 -> 8 -> ~0.5 surviving
+  grandchildren), no new mathematics. Certification, not the node LP, dominates at the margin; the two cheap
+  wins available are (i) stop grinding cells that the `alive(LP)` test already condemns and refine immediately,
+  (ii) warm-start each child's certificate from the parent's converged dual.
+- Machine was powered off mid-run; everything is checkpointed and the full exact re-verification after restart
+  passed with 0 failures.

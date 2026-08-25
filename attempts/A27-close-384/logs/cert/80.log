@@ -1,3 +1,53 @@
-##### scale=1.03 rc=3221226091
+##### scale=1.03 rc=3
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=1057 points=1057 rows=4412 (rejected 907)
+  it   0 tau=10.000000 rows=5076 orbs=1615 atoms>0=127 minmass=0.494191 maxcov=2.000000 +rows=664 -rows=0 +cols=558 -cols=0 t=6s [lp 1s row 5s +r 0s col 0s +c 0s]
+  it   1 tau=9.175474 rows=5936 orbs=2415 atoms>0=61 minmass=0.482552 maxcov=1.637587 +rows=860 -rows=0 +cols=800 -cols=0 t=39s [lp 26s row 4s +r 2s col 1s +c 0s]
+  it   2 tau=9.194030 rows=6426 orbs=3215 atoms>0=60 minmass=0.701493 maxcov=1.305970 +rows=490 -rows=0 +cols=800 -cols=0 t=80s [lp 35s row 3s +r 2s col 0s +c 0s]
+  it   3 tau=9.108108 rows=7482 orbs=4015 atoms>0=77 minmass=0.631632 maxcov=1.756757 +rows=1056 -rows=0 +cols=800 -cols=0 t=257s [lp 166s row 4s +r 6s col 1s +c 0s]
+  time limit
+DONE s=3.84 n=10 sym=C1 tau=9.062500 nu=9.062500 conv=False minmass=0.631632 maxcov=1.756757 rows=7482 orbits=4015 atoms_nz=75 packing_support=110 time=890s
+   tau=9.06250 conv=False minmass=0.6316 maxcov=1.7568
+[round 0] tau=9.06250 conv=False scale=1.0300 cert total=9.33441 budget=10 atoms=75
+    boxes = 402797  covered = 130257  vacuous = 0  exempt = 71012 (core 71012, nofam 0)  split = 201464  exact atom checks = 168479  max depth = 56  time = 21.2s
+    FAIL: 64 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 51 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 0.046992 deg, centre = (1.710147743, 1.381953125), exact mass = 901257/1000000 (~0.901257000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=691 points=691 rows=3617 (rejected 1073)
+  it   0 tau=10.000000 rows=3868 orbs=691 atoms>0=47 minmass=0.619048 maxcov=2.000000 +rows=251 -rows=0 +cols=0 -cols=0 t=5s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   1 tau=10.000000 rows=3976 orbs=691 atoms>0=49 minmass=0.700000 maxcov=2.000000 +rows=108 -rows=0 +cols=0 -cols=0 t=8s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   2 tau=10.000000 rows=4322 orbs=691 atoms>0=46 minmass=0.700000 maxcov=2.000000 +rows=346 -rows=0 +cols=0 -cols=0 t=13s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   3 tau=10.000000 rows=4627 orbs=691 atoms>0=51 minmass=0.833333 maxcov=2.000000 +rows=305 -rows=0 +cols=0 -cols=0 t=17s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   4 tau=10.000000 rows=4872 orbs=691 atoms>0=41 minmass=0.750000 maxcov=2.000000 +rows=245 -rows=0 +cols=0 -cols=0 t=21s [lp 0s row 4s +r 0s col 0s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it   5 tau=10.000000 rows=4872 orbs=691 atoms>0=10 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=21s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.84 n=10 sym=C1 tau=10.000000 nu=10.000000 conv=True minmass=1.000000 maxcov=2.000000 rows=4872 orbits=691 atoms_nz=10 packing_support=33 time=21s
+[round 1] tau=10.00000 conv=True scale=1.0300 cert total=10.30000 budget=10 atoms=10
+certificate total >= budget: cannot certify (LP tau too close to the budget for the margin)
 
-##### scale=0 rc=3221226091
+##### scale=0 rc=3
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=1057 points=1057 rows=4412 (rejected 907)
+  it   0 tau=10.000000 rows=5076 orbs=1615 atoms>0=127 minmass=0.494191 maxcov=2.000000 +rows=664 -rows=0 +cols=558 -cols=0 t=7s [lp 1s row 5s +r 1s col 0s +c 0s]
+  it   1 tau=9.175474 rows=5936 orbs=2415 atoms>0=61 minmass=0.482552 maxcov=1.637587 +rows=860 -rows=0 +cols=800 -cols=0 t=43s [lp 29s row 4s +r 2s col 1s +c 0s]
+  it   2 tau=9.194030 rows=6426 orbs=3215 atoms>0=60 minmass=0.701493 maxcov=1.305970 +rows=490 -rows=0 +cols=800 -cols=0 t=94s [lp 44s row 4s +r 2s col 0s +c 0s]
+  it   3 tau=9.108108 rows=7482 orbs=4015 atoms>0=77 minmass=0.631632 maxcov=1.756757 +rows=1056 -rows=0 +cols=800 -cols=0 t=296s [lp 189s row 4s +r 7s col 1s +c 0s]
+  time limit
+DONE s=3.84 n=10 sym=C1 tau=9.062500 nu=9.062500 conv=False minmass=0.631632 maxcov=1.756757 rows=7482 orbits=4015 atoms_nz=75 packing_support=110 time=977s
+   tau=9.06250 conv=False minmass=0.6316 maxcov=1.7568
+[round 0] tau=9.06250 conv=False scale=1.0300 cert total=9.33441 budget=10 atoms=75
+    boxes = 402797  covered = 130257  vacuous = 0  exempt = 71012 (core 71012, nofam 0)  split = 201464  exact atom checks = 168479  max depth = 56  time = 17.1s
+    FAIL: 64 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 51 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 0.046992 deg, centre = (1.710147743, 1.381953125), exact mass = 901257/1000000 (~0.901257000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.84 n=10 sym=C1 box=[0,90]x1] init orbits=691 points=691 rows=3617 (rejected 1073)
+  it   0 tau=10.000000 rows=3868 orbs=691 atoms>0=47 minmass=0.619048 maxcov=2.000000 +rows=251 -rows=0 +cols=0 -cols=0 t=4s [lp 0s row 3s +r 0s col 0s +c 0s]
+  it   1 tau=10.000000 rows=3976 orbs=691 atoms>0=49 minmass=0.700000 maxcov=2.000000 +rows=108 -rows=0 +cols=0 -cols=0 t=7s [lp 0s row 3s +r 0s col 0s +c 0s]
+  it   2 tau=10.000000 rows=4322 orbs=691 atoms>0=46 minmass=0.700000 maxcov=2.000000 +rows=346 -rows=0 +cols=0 -cols=0 t=10s [lp 0s row 3s +r 0s col 0s +c 0s]
+  it   3 tau=10.000000 rows=4627 orbs=691 atoms>0=51 minmass=0.833333 maxcov=2.000000 +rows=305 -rows=0 +cols=0 -cols=0 t=14s [lp 0s row 3s +r 0s col 0s +c 0s]
+  it   4 tau=10.000000 rows=4872 orbs=691 atoms>0=41 minmass=0.750000 maxcov=2.000000 +rows=245 -rows=0 +cols=0 -cols=0 t=17s [lp 0s row 3s +r 0s col 0s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it   5 tau=10.000000 rows=4872 orbs=691 atoms>0=10 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=18s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.84 n=10 sym=C1 tau=10.000000 nu=10.000000 conv=True minmass=1.000000 maxcov=2.000000 rows=4872 orbits=691 atoms_nz=10 packing_support=33 time=18s
+[round 1] tau=10.00000 conv=True scale=1.0050 cert total=10.05000 budget=10 atoms=10
+certificate total >= budget: cannot certify (LP tau too close to the budget for the margin)
