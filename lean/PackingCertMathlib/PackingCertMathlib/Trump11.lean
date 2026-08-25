@@ -16,12 +16,16 @@ namespace PackingCert
 
 open Data
 
-/-- The certificate is accepted by the counter-clockwise checker. -/
+/-- The certificate is accepted by the counter-clockwise checker (`native_decide`). -/
 theorem trump11_ccw_ok : checkPackingCCW Data.trump11 = true := by native_decide
+
+set_option maxRecDepth 10000 in
+/-- The same fact by **kernel** evaluation: no `native_decide`, hence no compiler trust. -/
+theorem trump11_ccw_ok_kernel : checkPackingCCW Data.trump11 = true := by decide
 
 /-- Hence it is also accepted by the checker verified in `lean/PackingCert`. -/
 theorem trump11_ok_of_ccw : checkPacking Data.trump11 = true :=
-  checkPackingCCW_imp trump11_ccw_ok
+  checkPackingCCW_imp trump11_ccw_ok_kernel
 
 theorem trump11_squares_length : Data.trump11.squares.length = 11 := by rfl
 
@@ -33,7 +37,7 @@ theorem eleven_unit_squares_in_3877084 :
       (∀ q ∈ Q, IsUnitSquare q) ∧
       (∀ q ∈ Q, q ⊆ Set.Icc (0 : ℝ) (969271 / 250000) ×ˢ Set.Icc (0 : ℝ) (969271 / 250000)) ∧
       Q.Pairwise Disjoint := by
-  obtain ⟨Q, hlen, hunit, hsub, hdisj⟩ := checkPackingCCW_sound Data.trump11 trump11_ccw_ok
+  obtain ⟨Q, hlen, hunit, hsub, hdisj⟩ := checkPackingCCW_sound Data.trump11 trump11_ccw_ok_kernel
   refine ⟨Q, by rw [hlen]; rfl, hunit, ?_, hdisj⟩
   intro q hq
   have := hsub q hq

@@ -731,3 +731,64 @@ affordable cost estimate for closing 3.84.
   structure theorem at 3.84 AND at s'; (c) the only surviving ledger direction is a CORNER-occupancy statement
   ("how many squares must sit at depth 0.9-1.35 near a corner?", where the charge is 1.40-1.60 and 3 suffice) - an
   LP question, not a counting one; (d) do NOT refine the wall atlas and do NOT chase tilt forcing past 12 deg.
+
+## 2026-08-24 — A28-lean-batch: Mathlib installed; **the upper-bound bridge lemma is a theorem over ℝ²**
+
+- **The headline.** `lean/PackingCert` only ever proved `checkPacking Data.trump11 = true` — a `Bool`
+  computation, with the geometric meaning left as an assumed "bridge lemma" (A06 §5). That gap is closed:
+  ```
+  PackingCert.eleven_unit_squares_in_3877084 :
+    ∃ Q : List (Set (ℝ × ℝ)), Q.length = 11 ∧ (∀ q ∈ Q, IsUnitSquare q)
+      ∧ (∀ q ∈ Q, q ⊆ Set.Icc (0:ℝ) (969271/250000) ×ˢ Set.Icc (0:ℝ) (969271/250000))
+      ∧ Q.Pairwise Disjoint
+  ```
+  **Axioms: `[propext, Classical.choice, Quot.sound]` — no `native_decide`.** The certificate is evaluated
+  by kernel `decide` (`trump11_ccw_ok_kernel`, axiom-free, `maxRecDepth 10000`, 18 s), so the entire chain
+  from the 75-bit integer data to the real-plane statement is kernel-checked. `s(11) ≤ 3.877084` is now a
+  statement about ℝ², not about a Boolean.
+- **Mathlib finally installed.** `lake exe cache get` succeeded: 8691 `.ltar` files in 6 min 15 s;
+  6.52 GB `.lake` + 0.41 GB download cache + 3.02 GB toolchain v4.34.0-rc1. Our modules then compile in
+  seconds (Bridge 15 s, Band 22 s, Trump11 18 s). **All of it was deleted at the end** — free space on this
+  machine hit **0.29 GB** mid-run (A27's output; Lean's own incremental builds cost ~10 MB) — returning
+  ~10 GB. The `.lean` sources are committed and one `lake exe cache get` rebuilds everything.
+- **How the bridge is proved, and why it is short.** Following A06's own suggestion, a square is
+  `sqSet p0 e = {p0 + a·e + b·e⊥ : a,b ∈ [0,1]}` rather than a `convexHull` — this needs **no** convexity
+  API at all. Two lemmas carry everything: the algebraic identity
+  `rdot (aff p0 e a b) n = (1−a)(1−b)d₀ + a(1−b)d₁ + ab·d₂ + (1−a)b·d₃` (a convex combination of the four
+  corner projections, pure `ring`), and `aff_sqdist` (the parametrisation is a Euclidean isometry, so the
+  set really IS a congruent copy of `[0,1]²` — proved, not asserted). Then
+  **`disjoint_of_strictlyBelow`**: if along ANY vector `n` all four corners of one square project strictly
+  below all four of the other, the two CLOSED squares are `Disjoint`. No unit-length, no edge-direction
+  hypothesis — which is the precise sense in which the checker's choice of candidate axes affects only
+  completeness, never soundness. Containment is the same machinery with `n = (1,0), (0,1)`; the 55 pairs
+  lift to `List.Pairwise Disjoint` through `allPairs_pairwise`.
+  One concession: `checkPackingCCW` (the `+n` orientation branch of `isUnitSquare`), with
+  `checkPackingCCW_imp` back to the original checker; all 11 squares of the certificate are CCW.
+- **A26.1: formalised, but with the constant lost — and a better constant found in the process.** Mathlib's
+  separating-hyperplane theorem hands you *a* direction; A26's E1 needs an **edge normal** of one of the
+  squares, which requires the H-representation of the Minkowski sum of two squares (an octagon). Not
+  attempted. Running the same chain with an arbitrary direction gives
+  `two_unit_squares_side_ge : 1 + √2/2 ≤ B` (**1.7071** vs A26's **1.9142**), hence `band_96_25`: at
+  s = 96/25, at most one square avoids the width-**1.08** band (A26: width 1).
+  **But** — running A26's chain WITHOUT its final relaxation `2h₁(B−½−h₁) ≤ (B−½)²/2`, and minimising over
+  the separating direction α and both tilts, gives **exactly 2.0000** (grid 361×361×721, minimiser
+  θ₁ = 0°, θ₂ = 90°). So even the WEAK form of SAT already implies `B ≥ 2`, which is **sharp** (= s(2)) and
+  strictly stronger than E1. It decouples completely into one two-vector inequality:
+  **(A28.★)  `|u·e| + |u·e⊥| + ‖u‖₁·‖e‖₁ ≥ 2‖u‖₁` for unit `u, e ∈ ℝ²`** (verified numerically to −4.4e−16,
+  equality at θ ∈ {0°, 90°}). It is NOT formalised: 6-fold sign split with two quadratic constraints, and
+  the tight branches need their own factorisations (`e₁+e₂−1 = 2e₁e₂/(e₁+e₂+1)`, `1−e₁ = e₂²/(1+e₁)`) —
+  one `nlinarith` does not do it. **Payoff for whoever does: A26.1 with band width (s−2)/2 — 0.92 at 3.84
+  instead of 1 — and valid for every s < 4 rather than s < 3.9142.** Cheapest high-value item in the Lean
+  queue.
+- **A22's Krawczyk certificate cannot be replayed in Lean as it stands, and the fix is on A22's side.**
+  `krawczyk_cert.json` stores the 11 tilts as raw rational ANGLES, and all 36 wall/edge rows evaluate
+  `c_i + R(θ_i)(±½,±½)`; a decidable checker would therefore need certified rational enclosures of cos/sin
+  (Taylor with rigorous remainder) built from scratch — a bigger project than the checker itself. Re-emit
+  the certificate in `t = tan(θ/2)`, the parametrisation `certs/`, `gen_cert_lean.py` and `MeasureInt.lean`
+  already use, and every constraint row becomes a rational function: a `checkKrawczyk` in the existing
+  all-`Int` MeasureInt style is then a direct 1–2 day port of `recheck.py`'s [K]/[E]/[B] gates.
+- **Still assumed after A28** (in decreasing value): (A28.★); the Hahn–Banach step that would turn
+  `Band.lean`'s separation hypotheses into "interior-disjoint" (needs `Convex (sqSet p0 e)` — easy — plus
+  `geometric_hahn_banach_open` and a Riesz identification); the **lower-bound** measure bridge lemma
+  (`checkMeasureI c = true ⇒ μ(Q) ≥ 1 for every unit square in [0,s]²`), still A06's 3–5 day estimate; the
+  A22 replay. Notes: `attempts/A28-lean-batch/notes.md`; theorem/axiom table: `lean/README.md`.

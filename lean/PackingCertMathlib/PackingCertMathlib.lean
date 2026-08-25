@@ -2,4 +2,5 @@ import PackingCertMathlib.Basic
 import PackingCertMathlib.Checker
 import PackingCertMathlib.Data
 import PackingCertMathlib.Bridge
+import PackingCertMathlib.Band
 import PackingCertMathlib.Trump11

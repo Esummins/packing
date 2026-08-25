@@ -1,6 +1,31 @@
 # lean/ — Lean 4 certificates for the square-packing lab
 
-Two independent, no-Mathlib, decidable checkers plus certificate data:
+Two projects:
+
+* **`lean/PackingCert`** (Lean 4.33.0, **no Mathlib**) — decidable `Bool` checkers + certificate
+  data. Fast, self-contained, kernel-checkable.
+* **`lean/PackingCertMathlib`** (Lean 4.34.0-rc1 + Mathlib) — the **bridge lemmas over ℝ²**, i.e.
+  the statements that give the `Bool` theorems their geometric meaning (A28). Build artefacts are
+  **not** committed and were deleted after A28 for disk (see "Mathlib project" below).
+
+## Theorem index (real-geometry statements — A28)
+
+| theorem | file | statement | axioms |
+|---|---|---|---|
+| `PackingCert.eleven_unit_squares_in_3877084` | `PackingCertMathlib/Trump11.lean` | **∃ 11 pairwise-`Disjoint` closed unit squares ⊆ `[0, 969271/250000]²` in ℝ²** ⇒ `s(11) ≤ 3.877084` | `propext, Classical.choice, Quot.sound` (**no `native_decide`** — kernel `decide` on the certificate) |
+| `PackingCert.checkPackingCCW_sound` | `PackingCertMathlib/Bridge.lean` | the bridge: `checkPackingCCW c = true` ⇒ unit squares, contained, pairwise disjoint | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.disjoint_of_strictlyBelow` | `PackingCertMathlib/Bridge.lean` | separating axis with positive margin ⇒ two closed squares are `Disjoint` (any axis `n`) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.aff_sqdist` | `PackingCertMathlib/Bridge.lean` | the parametrisation `(a,b) ↦ p₀ + a·e + b·e⊥` is a Euclidean isometry ⇒ `sqSet p₀ e` is a congruent copy of `[0,1]²` | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.two_unit_squares_side_ge` | `PackingCertMathlib/Band.lean` | two unit squares in `[lo,lo+B]²` admitting a separating direction ⇒ `B ≥ 1 + √2/2` | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.band_96_25` | `PackingCertMathlib/Band.lean` | at `s = 96/25`: at most one square avoids the width-`27/25` boundary band (⇒ ≥ 10 of 11 meet it) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.trump11_ccw_ok_kernel` | `PackingCertMathlib/Trump11.lean` | `checkPackingCCW Data.trump11 = true`, kernel `decide` | **none** |
+
+`Band.lean` proves the A26.1 family with an *arbitrary* separating direction, hence band width
+`27/25 = 1.08` rather than A26's `1`; see `attempts/A28-lean-batch/notes.md` §3, which also records
+the single unformalised two-vector inequality (A28.★) that would upgrade the constant to the
+**sharp** `B ≥ 2` and give A26.1 for every `s < 4`.
+
+## `Bool`-checker theorems (`lean/PackingCert`, no Mathlib)
 
 | what | file | theorem | proof method |
 |---|---|---|---|
@@ -11,9 +36,10 @@ Two independent, no-Mathlib, decidable checkers plus certificate data:
 | Lower bound `s(5) > 2.6` (perturbed Göbel 4-point measure, prototype) | same | `PackingCert.MeasureI.goebel26_int_ok`, `PackingCert.Measure.s5_gt_26`; kernel `decide` also works for the Int version (`scratch/IntKernel.lean`, 30 s, no axioms) | `native_decide` / `decide` |
 
 Both checkers are `Bool`-valued functions; Lean proves *that the checker returns `true` on the
-data*.  The elementary "bridge lemmas" that connect `= true` to the geometric statements over ℝ²
-are **not** formalised (they need Mathlib; see "What is assumed" and
-`attempts/A06-lean-setup/notes.md`).
+data*.  The bridge lemma connecting `= true` to the geometric statement over ℝ² is **proved** for
+the **upper bound** (A28, `lean/PackingCertMathlib`, table at the top of this file) and still
+**assumed** for the **lower bound** (measure) checker — see `attempts/A06-lean-setup/notes.md` and
+`attempts/A28-lean-batch/notes.md` §7.
 
 ## Toolchain / build
 
@@ -66,7 +92,8 @@ Certificate `Cert = {denom, sideNum, sideDen, squares}`; every coordinate is an 
 4. each of the 55 pairs is strictly separated by one of the 8 edge vectors `n` of the two squares:
    all corners of one project strictly below all corners of the other (`a·n < b·n`).
 
-**Bridge lemma (assumed, elementary):** `checkPacking c = true` ⇒ the 11 closed unit squares
+**Bridge lemma — NO LONGER ASSUMED (A28):** proved in `PackingCertMathlib/Bridge.lean` as
+`checkPackingCCW_sound`; the statement below is what it says. `checkPacking c = true` ⇒ the 11 closed unit squares
 `conv{corners/denom}` are contained in `[0, side]²` and pairwise disjoint (any linear functional
 that strictly separates two finite point sets separates their convex hulls; the choice of axes
 only affects completeness, never soundness). Hence `s(11) ≤ side`.
@@ -126,11 +153,36 @@ writing Lean, so a failing `lake build` means "Lean disagrees", never "bad input
 How the certificates were generated: see `certs/` (A03: exact 60-digit solution of Trump's contact
 system, scaled by `s_c/s*` and rounded to rationals; A05/A08: optimised 10-point unavoidable set).
 
-## `lean/PackingCertMathlib`
+## Mathlib project `lean/PackingCertMathlib` (A28, 2026-08-24)
 
-Template Mathlib project for the bridge lemmas.  **Not built**: `lake exe cache get` needs
-≈ 5 GB + a second 3 GB toolchain and ran this machine's disk out of space (see notes.md).
-`BridgeSketch.lean` there is an unbuilt sketch of the intended statements.
+`lake exe cache get` **succeeded** on the retry: 8691 files, 6 min 15 s, 6.5 GB `.lake` +
+0.4 GB download cache + 3.0 GB extra toolchain. All artefacts were deleted afterwards (free space
+on this machine fell to 0.29 GB while the sibling A27 run was going); the `.lean` sources are
+committed, so the theorems above rebuild with
+
+```
+cd lean/PackingCertMathlib
+lake exe cache get           # ~6 min, ~7 GB; elan re-installs toolchain v4.34.0-rc1 (3 GB)
+lake build                   # Bridge 15 s, Band 22 s, Trump11 18 s, Checker/Data 1.3 s each
+lake env lean scratch/Axioms.lean     # the axiom table above
+```
+
+Layout:
+
+```
+PackingCertMathlib/Checker.lean   verbatim copy of PackingCert/{Geometry,Checker}.lean
+                                  + isUnitSquareCCW / checkPackingCCW (⇒ checkPacking)
+PackingCertMathlib/Data.lean      copy of the generated trump11 data
+PackingCertMathlib/Bridge.lean    RP, rdot, aff, sqSet, IsUnitSquare; SAT soundness; the bridge
+PackingCertMathlib/Band.lean      centred squares, support function, the A26-family band lemma
+PackingCertMathlib/Trump11.lean   native_decide + kernel decide + the real-plane theorem
+scratch/Axioms.lean               #print axioms
+BridgeSketch.lean                 A06's original sketch — superseded by Bridge.lean
+```
+
+The copy of the checker in `Checker.lean` is byte-identical to `lean/PackingCert`'s (the two
+projects are pinned to different Lean toolchains, so they cannot `require` each other); that is
+what makes the bridge a theorem *about the same checker*.
 
 ### Added by the advisor (2026-08-18)
 | theorem | target | build | axioms |
