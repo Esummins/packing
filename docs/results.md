@@ -390,6 +390,16 @@ R), so only a COMBINATORIAL bound strictly below tau_B can cut. This also explai
 Residual value: the counting lemmas are free pruning for the case tree ("two squares both with band-clearance
 >= 0.93" is dead by A26.1), and B0+A26.1 is the cheapest non-trivial geometry in the repo to formalise in Lean.
 
+
+## Sharp band lemma via A28.★ (advisor, 2026-08-21)
+
+A28's formalisation left one inequality open: |u·e| + |u·e⊥| + ‖u‖₁‖e‖₁ ≥ 2‖u‖₁ for unit u, e.
+Proved (docs/proofs/a28star.md): a two-branch reduction collapses both branches to
+(1−sinθ)(1−cosθ) ≥ 0. Consequence: two unit squares need side B ≥ 2 (sharp, = s(2)), so at most one
+of the 11 squares avoids the width-w band whenever w > (s−2)/2 — w* = 0.92 at 3.84 / 0.9385 at s′,
+valid for every s < 4 (A26.1: w = 1, s < 3.9142). Human proof + numeric check; Lean pending (A28's
+Band.lean is wired to accept it).
+
 ## Next steps (ordered)
 
 1. (done) s = 3.82 certified. Pushing to 3.83 is not possible with the pure measure method (τ*(3.83) = 11.000).
