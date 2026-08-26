@@ -870,3 +870,18 @@ affordable cost estimate for closing 3.84.
   (homotopy/Groebner + certified root isolation), coordinate cells only at the last level inside
   structure-reduced boxes, composed with A22's neighbourhood at Trump. Next advisor task: stress
   lemma + a bound on the pruned structure-graph count (the go/no-go number for the campaign).
+
+## 2026-08-26 — structure lemmas L1-L7 written; A31 counting pilot dispatched
+- docs/proofs/structure_lemmas.md v1 (advisor): L1 loaded degree >= 2 (single contact cannot
+  balance); L2 degree-2 collinearity (thin branch); L3 floating components are rattlers OR carry a
+  compression self-stress (A_K^T lambda_K = 0 — never silently dropped); L4 planarity of the contact
+  graph (contact sets of disjoint convex bodies are convex => simple graph; edges drawn through
+  contact points cannot cross); L5 metric caps; **L6 = the stress lemma's core, PROVED in 3 lines**:
+  lambda0 > 0 forces load on the far wall; summing x-stationarity over that load's H-component,
+  internal forces cancel in Newton pairs and y-wall normals have no x-component, so the component
+  must also press the near wall — a wall-to-wall loaded chain (>= 3 squares at s*; Trump's strip has
+  5). lambda0 = 0 branch = global self-stress, kept as its own excludable system. L7 binding-axis
+  walls. Soundness ledger separates HARD prunes / THIN branches / SOFT report-only filters (Maxwell
+  count is NOT a theorem — soft only).
+- A31 dispatched (Opus): Level-0 ablation counts k=3..6, Level-1 decoration fan-out under tilt
+  propagation, Level-2 projection to k=11. Completeness over speed. PI approved this test.
