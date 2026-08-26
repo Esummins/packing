@@ -885,3 +885,23 @@ affordable cost estimate for closing 3.84.
   count is NOT a theorem — soft only).
 - A31 dispatched (Opus): Level-0 ablation counts k=3..6, Level-1 decoration fan-out under tilt
   propagation, Level-2 projection to k=11. Completeness over speed. PI approved this test.
+
+## 2026-08-26 — A31 verdict: naive enumerate-then-solve dead (4e29); joint structure-B&B is the shape
+- Level-0 exhaustive k=3..7 with per-filter ablation (validated: OEIS match, independent brute force
+  at k<=4 exact agreement, Burnside cross-check, Trump's own graph passes every hard filter).
+  Dominant filters: metric realizability (x50 at k=7), wall-cycle planarity (x3.3), L6 wall-to-wall.
+  Non-thin MAIN series is a clean exponential (~17^k -> ~7e9 at k=11); ALL super-exponential growth
+  lives in the L2 degree-2 thin branch (89% of survivors at k=7).
+- Decoration fan-out: tilt propagation (exact for the tilt subsystem) kills 79-98% but leaves
+  ~4e10/graph at k=7; planar rotation-system consistency (added, Level 1b) kills up to 91% more and
+  strengthens with k. Composed projection at k=11: 4e29-3e30 structures (best case with every
+  promotion ~2.5e25). Even the undecorated graph layer alone is ~1e4 CPU-days. NAIVE
+  ENUMERATE-THEN-SOLVE IS NOT VIABLE.
+- Free lemma found (tight at Trump 3/3/3/2): at most 3 squares touch any one wall (gap 0.97832 vs
+  range s-1 <= 2.8771). Maxwell: planarity caps |E| <= 3k+2, survivors max 3k-1 < 3k+1 => FLUSH
+  CONTACTS (2 rows/edge) ARE MANDATORY for rigidity — |E| >= 3k+1 must never be used as a prune.
+- Design consequence (agent + advisor concur): never materialise a level. The campaign must be a
+  BRANCH-AND-BOUND OVER PARTIAL STRUCTURES (subgraph-closed kills: an infeasible partial structure
+  kills all completions), with the metric/LP/Farkas/FJ tests applied at partial nodes and contact
+  TYPE resolved algebraically inside the per-graph solve. The go/no-go number is now the B&B
+  FRONTIER size, not the leaf count — unmeasured (next pilot candidate A32).

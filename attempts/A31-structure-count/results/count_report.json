@@ -1,0 +1,775 @@
+{
+ "what": "A31 structure-space counting pilot: size of the PRUNED contact-structure space for the structure-first exclusion campaign at s0 = 3.8771",
+ "object": "SUPPORT graph H on a loaded core of k squares + 4 wall nodes, counted up to S_k x D4 (exact orbit counts)",
+ "filters_used": {
+  "hard": [
+   "Fact 0 (simple)",
+   "L1",
+   "L3 (branch kept)",
+   "L4",
+   "L5(a) broad",
+   "L5(b)",
+   "L5(d)",
+   "L6 (branch kept)"
+  ],
+  "thin_flagged": [
+   "L2 degree-2",
+   "L3/L6 self-stress and lam0=0 branches"
+  ],
+  "soft_report_only": [
+   "Maxwell m >= 3k+1",
+   "L5(c) per-wall cap 5",
+   "kissing 8"
+  ]
+ },
+ "ablation_orbit_counts": {
+  "3": {
+   "R0": 1072,
+   "R2": 192,
+   "R3": 106,
+   "R4": 106,
+   "R5": 106,
+   "R6": 35,
+   "R7": 34,
+   "R8": 10,
+   "R9": 10,
+   "R10": 10,
+   "_hard_survivors_MAIN": 10
+  },
+  "4": {
+   "R0": 28796,
+   "R2": 2979,
+   "R3": 1920,
+   "R4": 1920,
+   "R5": 1920,
+   "R6": 354,
+   "R7": 350,
+   "R8": 146,
+   "R9": 140,
+   "R10": 140,
+   "_hard_survivors_MAIN": 140
+  },
+  "5": {
+   "R0": 1318560,
+   "R2": 76238,
+   "R3": 55838,
+   "R4": 55838,
+   "R5": 55558,
+   "R6": 5188,
+   "R7": 5169,
+   "R8": 2730,
+   "R9": 2275,
+   "R10": 2275,
+   "_hard_survivors_MAIN": 2275
+  },
+  "6": {
+   "R0": 105405892,
+   "R2": 3422212,
+   "R3": 2780542,
+   "R4": 2780542,
+   "R5": 2695838,
+   "R6": 117493,
+   "R7": 117371,
+   "R8": 71382,
+   "R9": 41951,
+   "R10": 41951,
+   "_hard_survivors_MAIN": 41951
+  },
+  "7": {
+   "R0": 14828211568,
+   "R2": 269537948,
+   "R3": 235850411,
+   "R4": 235850411,
+   "R5": 207791913,
+   "R6": 4180697,
+   "R7": 4179618,
+   "R8": 2748105,
+   "R9": 842398,
+   "R10": 842398,
+   "_hard_survivors_MAIN": 842398
+  }
+ },
+ "ablation_rows": [
+  {
+   "row": "R0",
+   "meaning": "no filter (simple graphs, k squares + 4 walls, no wall-wall edges)"
+  },
+  {
+   "row": "R2",
+   "meaning": "+ L5(b)  wall-degree <= 2 and the two walls adjacent"
+  },
+  {
+   "row": "R3",
+   "meaning": "+ L1     every loaded square has degree >= 2"
+  },
+  {
+   "row": "R4",
+   "meaning": "+ L5(d)  square-square degree <= 12"
+  },
+  {
+   "row": "R5",
+   "meaning": "+ L4(a)  Euler edge bound |E| + 4 <= 3(k+4)-6"
+  },
+  {
+   "row": "R6",
+   "meaning": "+ L5(a)  metric / hop-distance consistency (broad phase)"
+  },
+  {
+   "row": "R7",
+   "meaning": "+ L3     no floating component (self-stress branch split off)"
+  },
+  {
+   "row": "R8",
+   "meaning": "+ L6     some H-component joins two opposite walls (lam0=0 branch split off)"
+  },
+  {
+   "row": "R9",
+   "meaning": "+ L4(b)  full planarity of H + wall 4-cycle"
+  },
+  {
+   "row": "R10",
+   "meaning": "+ L7     (implied by L6 here; see gap G1)"
+  }
+ ],
+ "marginal_kill_on_metric_consistent_set": {
+  "3": {
+   "base_after_L5a": 35,
+   "L3_alone": 34,
+   "L6_alone": 10,
+   "L4b_with_wall_cycle": 35,
+   "L4b_graph_only": 35,
+   "frac_L6": 0.2857142857142857,
+   "frac_planar_wallcycle": 1.0,
+   "frac_planar_graphonly": 1.0
+  },
+  "4": {
+   "base_after_L5a": 354,
+   "L3_alone": 350,
+   "L6_alone": 146,
+   "L4b_with_wall_cycle": 338,
+   "L4b_graph_only": 352,
+   "frac_L6": 0.4124293785310734,
+   "frac_planar_wallcycle": 0.9548022598870056,
+   "frac_planar_graphonly": 0.9943502824858758
+  },
+  "5": {
+   "base_after_L5a": 5188,
+   "L3_alone": 5169,
+   "L6_alone": 2731,
+   "L4b_with_wall_cycle": 4272,
+   "L4b_graph_only": 4941,
+   "frac_L6": 0.5264070932922128,
+   "frac_planar_wallcycle": 0.8234387047031612,
+   "frac_planar_graphonly": 0.9523901310717039
+  },
+  "6": {
+   "base_after_L5a": 117493,
+   "L3_alone": 117371,
+   "L6_alone": 71395,
+   "L4b_with_wall_cycle": 67950,
+   "L4b_graph_only": 98322,
+   "frac_L6": 0.6076532218940703,
+   "frac_planar_wallcycle": 0.5783323261811342,
+   "frac_planar_graphonly": 0.8368328325942822
+  },
+  "7": {
+   "base_after_L5a": 4180697,
+   "L3_alone": 4179618,
+   "L6_alone": 2748292,
+   "L4b_with_wall_cycle": 1244519,
+   "L4b_graph_only": 2547312,
+   "frac_L6": 0.6573765092280067,
+   "frac_planar_wallcycle": 0.2976821807464162,
+   "frac_planar_graphonly": 0.6093031855692962
+  }
+ },
+ "branch_counts": {
+  "3": {
+   "main": 10,
+   "thin_main": 9,
+   "selfstress_float": 1,
+   "lam0": 24,
+   "both": 1,
+   "main_non_thin": 1
+  },
+  "4": {
+   "main": 140,
+   "thin_main": 121,
+   "selfstress_float": 4,
+   "lam0": 194,
+   "both": 4,
+   "main_non_thin": 19
+  },
+  "5": {
+   "main": 2275,
+   "thin_main": 1989,
+   "selfstress_float": 18,
+   "lam0": 1979,
+   "both": 17,
+   "main_non_thin": 286
+  },
+  "6": {
+   "main": 41951,
+   "thin_main": 37022,
+   "selfstress_float": 109,
+   "lam0": 25890,
+   "both": 96,
+   "main_non_thin": 4929
+  },
+  "7": {
+   "main": 842398,
+   "thin_main": 753767,
+   "selfstress_float": 871,
+   "lam0": 401250,
+   "both": 691,
+   "main_non_thin": 88631
+  }
+ },
+ "soft_columns": {
+  "3": {
+   "main": 10,
+   "maxwell_possible_2E_ge_3k1": 9,
+   "maxwell_certain_E_ge_3k1": 0,
+   "wall_node_degree_le_5": 10,
+   "kissing_le_8": 10,
+   "wall_node_degree_le_3_certified": 10,
+   "main_wallcap3_and_non_thin": 1,
+   "all_soft": 0,
+   "frac_maxwell_possible": 0.9,
+   "frac_wallcap": 1.0,
+   "E_hist_main": {
+    "4": 1,
+    "5": 3,
+    "6": 5,
+    "7": 1
+   },
+   "E_max_main": 7,
+   "E_budget_3k_plus_2": 11,
+   "maxwell_threshold_3k_plus_1": 10
+  },
+  "4": {
+   "main": 140,
+   "maxwell_possible_2E_ge_3k1": 128,
+   "maxwell_certain_E_ge_3k1": 0,
+   "wall_node_degree_le_5": 140,
+   "kissing_le_8": 140,
+   "wall_node_degree_le_3_certified": 131,
+   "main_wallcap3_and_non_thin": 17,
+   "all_soft": 0,
+   "frac_maxwell_possible": 0.9142857142857143,
+   "frac_wallcap": 1.0,
+   "E_hist_main": {
+    "5": 1,
+    "6": 11,
+    "7": 49,
+    "8": 55,
+    "9": 21,
+    "10": 3
+   },
+   "E_max_main": 10,
+   "E_budget_3k_plus_2": 14,
+   "maxwell_threshold_3k_plus_1": 13
+  },
+  "5": {
+   "main": 2275,
+   "maxwell_possible_2E_ge_3k1": 2249,
+   "maxwell_certain_E_ge_3k1": 0,
+   "wall_node_degree_le_5": 2275,
+   "kissing_le_8": 2275,
+   "wall_node_degree_le_3_certified": 2007,
+   "main_wallcap3_and_non_thin": 245,
+   "all_soft": 0,
+   "frac_maxwell_possible": 0.9885714285714285,
+   "frac_wallcap": 1.0,
+   "E_hist_main": {
+    "6": 1,
+    "7": 25,
+    "8": 211,
+    "9": 620,
+    "10": 781,
+    "11": 475,
+    "12": 144,
+    "13": 18
+   },
+   "E_max_main": 13,
+   "E_budget_3k_plus_2": 17,
+   "maxwell_threshold_3k_plus_1": 16
+  },
+  "6": {
+   "main": 41951,
+   "maxwell_possible_2E_ge_3k1": 41273,
+   "maxwell_certain_E_ge_3k1": 0,
+   "wall_node_degree_le_5": 41766,
+   "kissing_le_8": 41951,
+   "wall_node_degree_le_3_certified": 33967,
+   "main_wallcap3_and_non_thin": 4001,
+   "all_soft": 0,
+   "frac_maxwell_possible": 0.9838382875259231,
+   "frac_wallcap": 0.9955900932039761,
+   "E_hist_main": {
+    "7": 1,
+    "8": 48,
+    "9": 629,
+    "10": 3443,
+    "11": 8992,
+    "12": 12663,
+    "13": 10200,
+    "14": 4706,
+    "15": 1149,
+    "16": 120
+   },
+   "E_max_main": 16,
+   "E_budget_3k_plus_2": 20,
+   "maxwell_threshold_3k_plus_1": 19
+  },
+  "7": {
+   "main": 842398,
+   "maxwell_possible_2E_ge_3k1": 840776,
+   "maxwell_certain_E_ge_3k1": 0,
+   "wall_node_degree_le_5": 832268,
+   "kissing_le_8": 842398,
+   "wall_node_degree_le_3_certified": 623194,
+   "main_wallcap3_and_non_thin": 67130,
+   "all_soft": 0,
+   "frac_maxwell_possible": 0.998074544336525,
+   "frac_wallcap": 0.987974805258322,
+   "E_hist_main": {
+    "8": 1,
+    "9": 76,
+    "10": 1545,
+    "11": 13198,
+    "12": 57673,
+    "13": 144184,
+    "14": 220928,
+    "15": 213771,
+    "16": 130764,
+    "17": 48957,
+    "18": 10324,
+    "19": 968,
+    "20": 9
+   },
+   "E_max_main": 20,
+   "E_budget_3k_plus_2": 23,
+   "maxwell_threshold_3k_plus_1": 22
+  }
+ },
+ "level1_fanout": {
+  "k3": {
+   "n_graphs": 10,
+   "E_mean": 5.6000000000000005,
+   "E_median": 6.0,
+   "gauge_surv_median": 863.9999999999997,
+   "gauge_surv_max": 928.0000000000001,
+   "gauge_surv_geomean_weighted": 270.67896700133974,
+   "per_edge_median": 2.870187284511442,
+   "per_edge_max": 5.421612021659069,
+   "per_edge_weighted": 3.0041533601495067,
+   "kill_median": 0.86,
+   "kill_weighted": 0.79225,
+   "zero_surv": 0
+  },
+  "k4": {
+   "n_graphs": 140,
+   "E_mean": 7.664285714285714,
+   "E_median": 8.0,
+   "gauge_surv_median": 20716.632931053275,
+   "gauge_surv_max": 2222079.999999999,
+   "gauge_surv_geomean_weighted": 17326.86020319912,
+   "per_edge_median": 3.5124574190576854,
+   "per_edge_max": 7.946482491744472,
+   "per_edge_weighted": 3.786203080674545,
+   "kill_median": 0.9108499999999999,
+   "kill_weighted": 0.8824295714285715,
+   "zero_surv": 0
+  },
+  "k5": {
+   "n_graphs": 160,
+   "E_mean": 9.863680154142582,
+   "E_median": 10.0,
+   "gauge_surv_median": 4853760.000000003,
+   "gauge_surv_max": 6303121407.999991,
+   "gauge_surv_geomean_weighted": 2179022.186037889,
+   "per_edge_median": 4.4293164681140595,
+   "per_edge_max": 9.286004822858152,
+   "per_edge_weighted": 4.585227514268503,
+   "kill_median": 0.950002,
+   "kill_weighted": 0.9367135514313238,
+   "zero_surv": 0
+  },
+  "k6": {
+   "n_graphs": 160,
+   "E_mean": 12.031890414898974,
+   "E_median": 12.5,
+   "gauge_surv_median": 1496905184.7276733,
+   "gauge_surv_max": 1601001488383.9978,
+   "gauge_surv_geomean_weighted": 329802693.9198265,
+   "per_edge_median": 5.731214576753432,
+   "per_edge_max": 10.169182152333851,
+   "per_edge_weighted": 5.335394785169048,
+   "kill_median": 0.9807219039999999,
+   "kill_weighted": 0.9589106524815563,
+   "zero_surv": 0
+  },
+  "k7": {
+   "n_graphs": 40,
+   "E_mean": 14.09321371931735,
+   "E_median": 15.0,
+   "gauge_surv_median": 3610333673554.7354,
+   "gauge_surv_max": 3.2120946399641584e+16,
+   "gauge_surv_geomean_weighted": 40951791128.24038,
+   "per_edge_median": 7.144079677387237,
+   "per_edge_max": 9.35378856891453,
+   "per_edge_weighted": 5.84759291750791,
+   "kill_median": 0.9893357088,
+   "kill_weighted": 0.9792990126208153,
+   "zero_surv": 0
+  }
+ },
+ "level1b_rotation_system": {
+  "k4": {
+   "n_graphs": 30,
+   "samples": 20000,
+   "rot_keep_weighted": 0.978065269866321,
+   "rot_keep_median": 1.0,
+   "rot_keep_min": 0.768018018018018,
+   "rot_keep_max": 1.0,
+   "mc_vs_exact_rel_err_max": 0.0805739514348786
+  },
+  "k5": {
+   "n_graphs": 30,
+   "samples": 20000,
+   "rot_keep_weighted": 0.951282524236048,
+   "rot_keep_median": 1.0,
+   "rot_keep_min": 0.19093851132686085,
+   "rot_keep_max": 1.0,
+   "mc_vs_exact_rel_err_max": 0.07806451612903226
+  },
+  "k6": {
+   "n_graphs": 30,
+   "samples": 20000,
+   "rot_keep_weighted": 0.7875665138930656,
+   "rot_keep_median": 0.4919862542955326,
+   "rot_keep_min": 0.03333333333333333,
+   "rot_keep_max": 1.0,
+   "mc_vs_exact_rel_err_max": 0.22858426492926012
+  },
+  "k7": {
+   "n_graphs": 30,
+   "samples": 20000,
+   "rot_keep_weighted": 0.4984339666922968,
+   "rot_keep_median": 0.08777777777777779,
+   "rot_keep_min": 0.0,
+   "rot_keep_max": 1.0,
+   "mc_vs_exact_rel_err_max": 0.2350815785853875
+  }
+ },
+ "level2": {
+  "fits": {
+   "main_non_thin": {
+    "M1_exp": "log N = -8.4724 + 2.8343 k",
+    "M2_logquad": "log N = -8.4310 + 2.8163 k + 0.0018 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 17.7977 + -0.0874 k"
+   },
+   "main_wallcap3": {
+    "M1_exp": "log N = -6.1074 + 2.7638 k",
+    "M2_logquad": "log N = -4.8371 + 2.2115 k + 0.0552 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 6.3833 + 1.7345 k"
+   },
+   "main_wallcap3_nonthin": {
+    "M1_exp": "log N = -8.2963 + 2.7690 k",
+    "M2_logquad": "log N = -8.1341 + 2.6985 k + 0.0071 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 15.4406 + 0.1254 k"
+   },
+   "main": {
+    "M1_exp": "log N = -6.3403 + 2.8385 k",
+    "M2_logquad": "log N = -4.9474 + 2.2330 k + 0.0606 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 5.9553 + 2.0432 k"
+   },
+   "main_holdout": {
+    "M1_exp": "log N = -6.1113 + 2.7813 k",
+    "M2_logquad": "log N = -4.8029 + 2.1615 k + 0.0689 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 5.1300 + 2.2200 k"
+   },
+   "holdout_check": {
+    "M1_exp": {
+     "predicted": 632751.2593646168,
+     "actual": 842398,
+     "ratio": 0.7511310085786254
+    },
+    "M2_logquad": {
+     "predicted": 892840.9882650867,
+     "actual": 842398,
+     "ratio": 1.0598802326988985
+    },
+    "M3_ratio_lin": {
+     "predicted": 867127.17,
+     "actual": 842398,
+     "ratio": 1.0293556846051393
+    }
+   },
+   "fanout": {
+    "Ess": "-3.6556 + 1.6784 k",
+    "Esw": "2.8292 + 0.4570 k",
+    "log_keep_fraction": "0.0294 + -0.5924 k",
+    "per_edge_weighted": {
+     "3": 3.0041533601495067,
+     "4": 3.786203080674545,
+     "5": 4.585227514268503,
+     "6": 5.335394785169048,
+     "7": 5.84759291750791
+    },
+    "kill_weighted": {
+     "3": 0.79225,
+     "4": 0.8824295714285715,
+     "5": 0.9367135514313238,
+     "6": 0.9589106524815563,
+     "7": 0.9792990126208153
+    },
+    "measured_surv": {
+     "3": 270.67896700133974,
+     "4": 17326.86020319912,
+     "5": 2179022.186037889,
+     "6": 329802693.9198265,
+     "7": 40951791128.24038
+    }
+   }
+  },
+  "projection": {
+   "other_series": {
+    "main_non_thin": {
+     "M1_exp": {
+      "8": 1471789.7535840746,
+      "9": 25047444.714429595,
+      "10": 426266377.5139312,
+      "11": 7254353754.264304
+     },
+     "M2_logquad": {
+      "8": 1490421.7572102381,
+      "9": 25685631.050940175,
+      "10": 444254946.0420689,
+      "11": 7711436320.084123
+     },
+     "M3_ratio_lin": {
+      "8": 1515472.28320366,
+      "9": 25780146.78790224,
+      "10": 436301147.95877403,
+      "11": 7345803913.157141
+     }
+    },
+    "main_wallcap3": {
+     "M1_exp": {
+      "8": 8912705.392417913,
+      "9": 141355526.80902168,
+      "10": 2241898961.055564,
+      "11": 35556522373.35244
+     },
+     "M2_logquad": {
+      "8": 13119618.262550334,
+      "9": 306292306.57341444,
+      "10": 7985934327.748692,
+      "11": 232535967520.52808
+     },
+     "M3_ratio_lin": {
+      "8": 12625396.463275973,
+      "9": 277678595.21388674,
+      "10": 6588794294.683234,
+      "11": 167767899599.59586
+     }
+    },
+    "main_wallcap3_nonthin": {
+     "M1_exp": {
+      "8": 1040892.5931637158,
+      "9": 16594386.86604825,
+      "10": 264555322.2961231,
+      "11": 4217662220.374172
+     },
+     "M2_logquad": {
+      "8": 1093572.9131950913,
+      "9": 18316600.090498805,
+      "10": 311148863.12421167,
+      "11": 5360654404.372602
+     },
+     "M3_ratio_lin": {
+      "8": 1103859.6430892278,
+      "9": 18289837.09954493,
+      "10": 305337203.67528874,
+      "11": 5135692588.546379
+     }
+    }
+   },
+   "main_level0": {
+    "M1_exp": {
+     "8": 12840102.69284518,
+     "9": 219448891.165479,
+     "10": 3750578713.0965047,
+     "11": 64100759900.97031
+    },
+    "M2_logquad": {
+     "8": 19618655.745561786,
+     "9": 512312425.8553968,
+     "10": 15100827505.512949,
+     "11": 502419882906.5847
+    },
+    "M3_ratio_lin": {
+     "8": 18785915.565053515,
+     "9": 457318303.2839895,
+     "10": 12067183079.061699,
+     "11": 343069927779.9336
+    }
+   },
+   "fanout": {
+    "3": 199.5990201403824,
+    "4": 23124.668510190553,
+    "5": 2679122.840032463,
+    "6": 310391441.45225257,
+    "7": 35960593328.24039,
+    "8": 4166236886135.337,
+    "9": 482681963363587.9,
+    "10": 5.592141880646807e+16,
+    "11": 6.478810725671843e+18
+   },
+   "total_structures": {
+    "M1_exp": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3237453.5914266775,
+      "5": 6095004461.0738535,
+      "6": 13021231360363.447,
+      "7": 3.0293131898523044e+16,
+      "8": 5.349490946069726e+19,
+      "9": 1.0592402164571572e+23,
+      "10": 2.097376829816937e+26,
+      "11": 4.15296690770122e+29
+     },
+     "k11": 4.15296690770122e+29,
+     "sum_all_cores": 4.1550653443065054e+29
+    },
+    "M2_logquad": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3237453.5914266775,
+      "5": 6095004461.0738535,
+      "6": 13021231360363.447,
+      "7": 3.0293131898523044e+16,
+      "8": 8.173596722355048e+19,
+      "9": 2.4728396756744548e+23,
+      "10": 8.444596992600221e+26,
+      "11": 3.255083326165972e+30
+     },
+     "k11": 3.255083326165972e+30,
+     "sum_all_cores": 3.2559280332309663e+30
+    },
+    "M3_ratio_lin": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3237453.5914266775,
+      "5": 6095004461.0738535,
+      "6": 13021231360363.447,
+      "7": 3.0293131898523044e+16,
+      "8": 7.826657436694992e+19,
+      "9": 2.207392965112208e+23,
+      "10": 6.748139987785342e+26,
+      "11": 2.2226851277560982e+30
+     },
+     "k11": 2.2226851277560982e+30,
+     "sum_all_cores": 2.22336016257247e+30
+    }
+   }
+  }
+ },
+ "validation": [
+  "graph-rep counts match OEIS A000088 (1,2,4,11,34,156,1044)",
+  "k=2 and k=3: FULL independent brute force over every edge subset with an independent filter implementation - all 8 ablation rows and all 5 branch counts agree exactly",
+  "k=4: independent brute force from the L1 stage on - all rows agree exactly",
+  "Burnside orbit formula for R0/R2 agrees with the brute-force orbit count at k=2,3",
+  "Level-1 exact decoration count agrees with an independent brute-force enumeration + explicit tilt-ladder search on 24 small cases",
+  "Level-1b Monte Carlo reproduces the exact Level-1 tilt acceptance rate within sampling error on every graph tested",
+  "SOUNDNESS: the contact graph of Trump's known optimum (s = 3.877084, k = 11 loaded squares, 14 square-square + 11 square-wall edges) passes EVERY hard filter (code/check_trump.py). Its per-wall degrees are 3/3/3/2, exactly meeting the certified per-wall cap of 3 derived here, and its minimum total degree is 3, so it is NOT in the L2 thin branch. Its |E| = 25 is far below the Maxwell threshold 3k+1 = 34, confirming that flush/multi-row contacts carry the rigidity and that |E| >= 3k+1 must NOT be applied as a prune."
+ ],
+ "gaps": [
+  {
+   "id": "G1",
+   "kind": "soundness/bookkeeping",
+   "text": "The object enumerated is the SUPPORT graph H (positive multipliers), because L1, L3 and L6 are statements about H. L7 is a statement about the ACTIVE-CONTACT graph G, so it is NOT a legitimate hard filter on H and is only reported as a column. In the lambda0>0 branch L6 already implies it, and empirically R10 = R9 at every k, so nothing is lost - but a future enumerator that works on G must not double-use it."
+  },
+  {
+   "id": "G2",
+   "kind": "filter strength",
+   "text": "L4 planarity is applied to H together with the wall 4-cycle, exactly as L4's drawing constructs it. If one only accepts planarity of H alone the filter is about 2x weaker (measured: see marginal_kill_on_metric_consistent_set, L4b_graph_only vs L4b_with_wall_cycle). Both counts are reported; MAIN uses the wall-cycle version."
+  },
+  {
+   "id": "G3",
+   "kind": "approximation (sound)",
+   "text": "L5(a) is implemented as a relaxation: certified centre boxes from wall membership (x in [1/2, sqrt2/2] on a wall, [s-sqrt2/2, s-1/2] on the far wall, s in [3.80, 3.8771]), the universal centre separation >= 1 for interior-disjoint unit squares, and the chain bound |c_i-c_j| <= sqrt2 * hop-distance. No triangle closure, no full distance-geometry feasibility, no tilt information. It can only ADMIT unrealizable graphs, never reject realizable ones. The 3.80 endpoint uses the certified lower bound s(11) >= 3.80 (A06/A07/A08); with only Stromquist (3.7889) the filter weakens slightly."
+  },
+  {
+   "id": "G4",
+   "kind": "completeness",
+   "text": "The core has EXACTLY k loaded squares; the other 11-k are rattlers / unloaded (L3 case i). The completion multiplicity (ways to park 11-k rattlers) is NOT counted, so the projected totals are PER CORE and the true structure count is larger."
+  },
+  {
+   "id": "G5",
+   "kind": "branch bookkeeping",
+   "text": "L2 degree-2 thin branches are kept and flagged. They are ~90% of all survivors (k=7: 753767 of 842398), so if L2 collinearity is ever upgraded to a hard prune the space shrinks by roughly one order of magnitude."
+  },
+  {
+   "id": "G6",
+   "kind": "branch bookkeeping",
+   "text": "The L3 self-stress branch and the lambda0=0 branch are counted SEPARATELY and are not part of MAIN. The lambda0=0 branch is large (k=7: 401250, ~48% of MAIN) and needs its own excludable row system, as drain_lemma requires."
+  },
+  {
+   "id": "G7",
+   "kind": "soft filter",
+   "text": "The Maxwell count m >= 3k+1 in its CERTAIN form (all contacts point contacts, m = |E|) is satisfied by ZERO survivors at every k: planarity caps |E| at 3k+2 and no survivor reaches 3k+1. So every candidate needs flush contacts (2 rows each). If Maxwell is ever proved necessary it becomes a very strong filter, forcing at least 3k+1-|E| flush edges; it is NOT applied here (the ledger marks it soft)."
+  },
+  {
+   "id": "G8",
+   "kind": "Level 1 approximation",
+   "text": "Level 1 checks the TILT subsystem only, and does so exactly (equalities mod 90 by union-find, a zero class from wall-flush, strict inequalities from corner-on-edge, feasible iff the class digraph is acyclic and nothing sits below phi=0). Positions are never checked: whether the touching corner actually lands inside the unit edge, non-overlap of non-adjacent squares, and containment are all ignored. The Level-1 fan-out is therefore an UPPER bound."
+  },
+  {
+   "id": "G9",
+   "kind": "Level 1b partial",
+   "text": "The rotation-system (planar embedding) consistency test is applied only to the square-square subgraph, because the rotation at a wall node (the order of squares along that wall) is not determined by a decoration. Including the walls, and requiring the embedding to be consistent with the L4 drawing, would strengthen it further. It is measured by Monte Carlo, not enumerated."
+  },
+  {
+   "id": "G10",
+   "kind": "sampling",
+   "text": "Level-1 per-graph counts are exact; the per-k aggregate uses <= 160 sampled graphs, weighted by the MAIN count of their A-rep (reservoir sampling is uniform within an A-rep, so the estimator is unbiased across A-reps, but sampling error remains, especially in the max column)."
+  },
+  {
+   "id": "G11",
+   "kind": "extrapolation",
+   "text": "Level 2 is extrapolation, not a bound. Three models are fitted to k=3..7 and the k=7 point is used as a one-step holdout for models fitted on k=3..6. The spread between models at k=11 is about a factor of 20."
+  },
+  {
+   "id": "G12",
+   "kind": "budget",
+   "text": "Level 0 is exhaustive only for k = 3..7. Measured cost of k=8 with the present code is ~120 core-hours (5.3e11 mask rows); k >= 9 needs an orderly generator with metric pruning inside the generation, plus a canonical-labelling routine that does not enumerate k! permutations."
+  },
+  {
+   "id": "G13",
+   "kind": "encoding",
+   "text": "The brief's raw decoration menu (48 per square-square edge, 8 per square-wall edge) is an un-gauge-fixed encoding and is redundant non-uniformly. All decoration counts here are gauge-fixed (20 per SS edge, 2 per SW edge), where each label is one physically distinct arrangement."
+  },
+  {
+   "id": "G14",
+   "kind": "not modelled",
+   "text": "Not used at all, and each would shrink the space: L5(c)-style strip capacity counts (soft), the A23/A25/A26 area-wastage ledger, A22-style local rigidity, the requirement that the FJ system of a structure actually has a solution with sigma <= s0, and any use of the known certified lower bound beyond the box endpoints."
+  }
+ ],
+ "findings": [
+  "Level 0 is EXHAUSTIVE and orbit-exact for k = 3, 4, 5, 6, 7 (S_k x D4). MAIN hard survivors: k=3: 10, k=4: 140, k=5: 2275, k=6: 41951, k=7: 842398.",
+  "The survivor ratio N(k)/N(k-1) is close to LINEAR in k (3->4: 14.00, 4->5: 16.25, 5->6: 18.44, 6->7: 20.08), i.e. the space grows like k! times an exponential, not like a pure exponential. That is the shape that decides the campaign.",
+  "KEY STRUCTURAL FACT: the factorial-looking growth is entirely in the L2 THIN branch. The NON-THIN survivors (1, 19, 286, 4929, 88631) grow with an essentially CONSTANT ratio (19.0, 15.1, 17.2, 18.0), i.e. a pure exponential ~17^k, and all three fit models agree on their k=11 value to within 6% (~7e9). So if L2 degree-2 collinearity is upgraded from a thin branch to a hard prune, the structure space becomes exponential rather than factorial and the k=11 graph count drops by ~50x to ~7e9.",
+  "Filter strength (cumulative, orbit counts): the metric broad phase L5(a) is by far the strongest hard filter (k=7: 207791913 -> 4180697, x50), then L6 (x1.5) and full planarity (x3.3). L5(d) and the Euler bound are almost free.",
+  "Thin (L2 degree-2) branches are ~89% of MAIN at k=7; the two flagged branches that must be excluded by their own row systems are the lambda0=0 branch (401250, 48% of MAIN) and the L3 self-stress branch (871).",
+  "MAXWELL: not one survivor at any k reaches |E| >= 3k+1 (planarity caps |E| at 3k+2 and the observed maximum is {3: 7, 4: 10, 5: 13, 6: 16, 7: 20}). Every candidate structure therefore needs FLUSH contacts to be first-order rigid. If the Maxwell row count is ever proved necessary it becomes a very strong filter; the ledger currently marks it soft, so it is not applied.",
+  "A CERTIFIED tightening of L5(c) is available for free: two squares on the same wall have centres within sqrt2/2 of it and >= 1 apart, so their along-wall coordinates differ by >= 0.97832 while the range is s-1 <= 2.8771 - hence AT MOST 3 squares per wall, not 5. Applied as a soft column it keeps 623194 of 842398 MAIN survivors at k=7 (x0.74), and combined with dropping the L2 thin branches, 67130 (x13 smaller).",
+  "Level 1 (decorations): tilt propagation is exact for the tilt subsystem and kills 79.2%, 88.2%, 93.7%, 95.9%, 97.9% of the gauge-fixed menu at k=[3, 4, 5, 6, 7], but what survives still grows fast: weighted geometric-mean survivors per graph 271, 1.73e+04, 2.18e+06, 3.3e+08, 4.1e+10.",
+  "Level 1b: the ROTATION-SYSTEM (planar embedding) test that Level 1 ignores is a real filter and it strengthens fast with k. It removes 2%, 5%, 21%, 50% of the tilt-feasible decorations (weighted mean) at k=[4, 5, 6, 7], and for the MEDIAN graph it removes 0%, 0%, 51%, 91% - i.e. at k=7 a typical graph loses 91% of its decorations to embedding consistency alone. The weighted mean lags the median because a minority of low-degree graphs keep everything. This is the single cheapest unexploited constraint found here and it should be built into any structure-first generator; even so it does not change the order of magnitude of the k=11 projection.",
+  "PROJECTION to the full loaded core k=11 (extrapolation, not a bound): Level-0 graphs M1_exp 6.41e+10 / M2_logquad 5.02e+11 / M3_ratio_lin 3.43e+11; decoration fan-out ~6.5e+18; composed total M1_exp 4.15e+29 / M2_logquad 3.26e+30 / M3_ratio_lin 2.22e+30. Summed over all core sizes k=3..11 (rattler completion NOT counted): M1_exp 4.16e+29 / M2_logquad 3.26e+30 / M3_ratio_lin 2.22e+30.",
+  "BEST CASE if every cheap improvement lands (L2 promoted to a hard prune, the certified per-wall cap of 3 promoted, and the rotation-system test built into the decoration generator with its median keep-rate extrapolated to k=11, ~8e-04): about 4.9e+09 graphs x 5.2e+15 decorations = ~2.5e+25 structures at k=11. That is 5-6 orders of magnitude better than the naive count and still astronomically far beyond any compute budget - the verdict does not change.",
+  "GO/NO-GO: an enumerate-then-solve structure-first campaign at k=11 is not viable - ~1e11-1e12 contact graphs before decoration, ~1e30 decorated structures after. Even the undecorated Level-0 layer at 1 ms/graph is ~1e4 CPU-days. Viability requires (i) branching on structure jointly with the metric solve (prune during generation, never enumerate a level), (ii) promoting L2 and the certified per-wall cap 3 (about 1.5 orders of magnitude), and (iii) treating the contact TYPE (flush / corner-on-edge) as an algebraic unknown inside one FJ solve per graph rather than as 1e18 separate branches."
+ ]
+}
