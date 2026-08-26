@@ -832,3 +832,24 @@ affordable cost estimate for closing 3.84.
   (ii) warm-start each child's certificate from the parent's converged dual.
 - Machine was powered off mid-run; everything is checkpointed and the full exact re-verification after restart
   passed with 0 failures.
+
+## 2026-08-26 — pivot: A29 paused, T3 pilot dispatched (A30), drain lemma v2
+- PI question: is finishing 3.84 necessary for the endgame (s(11) = s*)? Advisor answer: NO — a
+  container-side lower bound prunes no configuration cells of the exclusion program; the tree's only
+  transferable value (exact bridge, cell machinery, Krawczyk toolkit) is already banked. 3.84 is a
+  standalone record + insurance, ~2 days of compute. PI decision: pause A29 (fully resumable, 179
+  certs on disk), pivot compute to the T3 pilot. Resume at <=6 workers if T3 stalls (9 workers OOM'd
+  the machine).
+- drain_lemma.md v2: D3 (KKT + degenerate taxonomy TODO) REPLACED by D3′ (Fritz John per selection):
+  smooth selection NLP = containment (no selection needed) + selected separation with dominance rows
+  (S-feasible => disjoint; every z in D0 is S-feasible for some menu selection; ties covered by
+  membership in several selections). FJ needs NO constraint qualification, so the corner-corner /
+  flush taxonomy obligation is discharged entirely; the only residue is the lambda0 = 0 branch, a
+  COST issue (split the cell), not soundness. T3 now sound on D1 + D2 + D3′ with no outstanding
+  proof debt.
+- A30-t3-pilot dispatched (Opus): P1 reproduce A22's root isolation inside the new harness, P2
+  exclusion on an offset cell, P3 menu-size + per-selection cost on a generic cell; report
+  extrapolated full-cover cost at s0 = s* and every heuristic shortcut taken.
+- Also this session: docs/plain_language_guide.md written for the PI; A29 resume bug (FAIL markers)
+  and a provisional-certificate soundness bug found and fixed (fb9272a) after the PI caught the
+  retry behaviour in the logs.
