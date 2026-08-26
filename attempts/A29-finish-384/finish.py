@@ -62,6 +62,39 @@ def phaseA_alive():
         return False
 
 
+def release_stage1_reservation():
+    """drive.py leaves the nodes of results/phaseA_todo.txt to the level-1 wave until each has a
+    certificate or a failure marker.  If that wave has died without finishing them, retire the
+    file so the refinement driver takes them over instead of waiting forever."""
+    p = os.path.join(HERE, 'results', 'phaseA_todo.txt')
+    if not os.path.exists(p):
+        return
+    C = os.path.join(HERE, 'certs', 'casetree_3.84')
+    def settled(n):
+        m = os.path.join(C, f'leaf_{n}.certify.json')
+        if os.path.exists(os.path.join(C, f'leaf_{n}.attempt.json')):
+            return True
+        try:
+            return json.load(open(m)).get('result') == 'PASS'
+        except Exception:
+            return False
+    names = [x.strip() for x in open(p).read().split(',') if x.strip()]
+    pending = [n for n in names if not settled(n)]
+    if not pending:
+        os.replace(p, p + '.done')
+        say('stage-1 reservation released (all listed nodes settled)')
+        return
+    try:
+        q = subprocess.run(['wmic', 'process', 'where', "name='python.exe'", 'get', 'commandline'],
+                           capture_output=True, text=True, timeout=120)
+        if not any('certify_a27.py' in l for l in q.stdout.splitlines()):
+            os.replace(p, p + '.abandoned')
+            say(f'stage-1 wave is gone with {len(pending)} node(s) unsettled '
+                f'({",".join(pending)}); handing them to the refinement driver')
+    except Exception:
+        pass
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--workers', type=int, default=9)
@@ -70,6 +103,8 @@ def main():
     ap.add_argument('--time_limit', type=float, default=400)
     ap.add_argument('--rounds', type=int, default=2)
     ap.add_argument('--max_cols', type=int, default=400)
+    ap.add_argument('--workers_low', type=int, default=5)
+    ap.add_argument('--stage1_workers', type=int, default=4)
     ap.add_argument('--a_resolve_time', type=float, default=500)
     ap.add_argument('--skip_phaseA', action='store_true')
     a = ap.parse_args()
@@ -88,8 +123,10 @@ def main():
             else:
                 time.sleep(60)
         if not phaseA_done():
-            only = os.path.join(HERE, 'results', 'phaseA_only.txt')
-            args = [py, 'certify_a27.py', '--tag', 'l1', '--workers', str(a.workers),
+            only = os.path.join(HERE, 'results', 'phaseA_todo.txt')
+            if not os.path.exists(only):
+                only = os.path.join(HERE, 'results', 'phaseA_only.txt')
+            args = [py, 'certify_a27.py', '--tag', 'l1', '--workers', str(a.stage1_workers),
                     '--resolve_time', str(a.a_resolve_time), '--time_limit', '500',
                     '--rounds', '3', '--slack_max', '-0.01']
             if os.path.exists(only):
@@ -98,11 +135,28 @@ def main():
         say('stage 1 (level-1 certification) complete')
 
     # ---------- stages 2+3: refine the frontier --------------------------------------------
-    run([py, 'drive.py', 'seed'], os.path.join(LOGS, 'drive.out'))
-    run([py, 'drive.py', 'run', '--workers', str(a.workers), '--max_depth', str(a.max_depth),
-         '--resolve_time', str(a.resolve_time), '--time_limit', str(a.time_limit),
-         '--rounds', str(a.rounds), '--max_cols', str(a.max_cols)],
-        os.path.join(LOGS, 'drive.out'))
+    # Outer loop: `seed` re-derives the open level-1 cells from the closure verdict, so a node
+    # that only failed certification AFTER the previous seed (a straggler of a concurrent stage-1
+    # wave) is still picked up.  Stops when nothing is open, or when a whole round makes no
+    # progress (everything left is at --max_depth).
+    prev_open = None
+    for outer in range(8):
+        release_stage1_reservation()
+        run([py, 'drive.py', 'seed'], os.path.join(LOGS, 'drive.out'))
+        st = json.load(open(os.path.join(WORK, 'state.json')))
+        n_open = len(st.get('queue') or [])
+        say(f'stage 3 round {outer}: {n_open} open level-1 cells')
+        if n_open == 0:
+            break
+        if prev_open is not None and n_open >= prev_open:
+            say('no progress in a whole round -- stopping the refinement loop')
+            break
+        prev_open = n_open
+        run([py, 'drive.py', 'run', '--workers', str(a.workers),
+             '--workers_low', str(a.workers_low), '--max_depth', str(a.max_depth),
+             '--resolve_time', str(a.resolve_time), '--time_limit', str(a.time_limit),
+             '--rounds', str(a.rounds), '--max_cols', str(a.max_cols)],
+            os.path.join(LOGS, 'drive.out'))
     say('stage 3 (refinement) complete')
 
     # ---------- stage 4: exact end-to-end verification -------------------------------------

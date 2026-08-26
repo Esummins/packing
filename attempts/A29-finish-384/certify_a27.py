@@ -30,9 +30,84 @@ def _run(cmd, cwd=HERE):
     return p.returncode, p.stdout + p.stderr
 
 
+# ---------------------------------------------------------------- A29 resume bookkeeping
+# certify.py writes leaf_<n>.json BEFORE it calls the verifier, so the mere existence of that
+# file proves nothing: it may be an in-flight or interrupted attempt.  The only proof of a
+# certificate is leaf_<n>.certify.json with result PASS.  And a FAILED attempt used to leave no
+# trace at all, so a resumed run could not tell "already failed with these parameters" from
+# "never attempted" and re-ran the whole failed set deterministically.  Both are fixed here:
+#   * PASSED(name)            -- the real "already certified" test;
+#   * leaf_<n>.attempt.json   -- a PARAM-STAMPED failure marker (never a certificate: the
+#                                verifiers glob leaf_*.json and keep only single-dot basenames,
+#                                so leaf_<n>.attempt.json is invisible to them);
+#   * sweep_provisional()     -- interrupted leaf_<n>.json files are moved aside at startup.
+
+def marker_path(name):
+    return os.path.join(OUT, f'leaf_{name}.attempt.json')
+
+
+def PASSED(name):
+    p = os.path.join(OUT, f'leaf_{name}.certify.json')
+    if not os.path.exists(p):
+        return False
+    try:
+        return json.load(open(p)).get('result') == 'PASS'
+    except Exception:
+        return False
+
+
+def params_of(a, stages, max_cols):
+    return dict(eps_geo=float(a.eps_geo), rounds=int(a.rounds), time_limit=float(a.time_limit),
+                resolve_time=float(a.resolve_time), depth=int(a.depth), max_cols=int(max_cols),
+                stages=[float(s) for s in stages])
+
+
+def no_stronger_than(cur, old):
+    """True iff an attempt with `cur` parameters can only repeat what `old` already did:
+    no more rounds, no more LP time, no more columns, no finer verifier subdivision and no
+    smaller robustness margin (a SMALLER eps_geo is a WEAKER, easier-to-certify demand, so a
+    smaller eps_geo counts as stronger and forces a retry)."""
+    if not old:
+        return False
+    try:
+        return (cur['rounds'] <= old['rounds'] and cur['time_limit'] <= old['time_limit']
+                and cur['resolve_time'] <= old['resolve_time'] and cur['depth'] <= old['depth']
+                and cur['max_cols'] <= old['max_cols'] and cur['eps_geo'] >= old['eps_geo'])
+    except Exception:
+        return False
+
+
+def read_marker(name):
+    p = marker_path(name)
+    if not os.path.exists(p):
+        return None
+    try:
+        return json.load(open(p))
+    except Exception:
+        return None
+
+
+def sweep_provisional(names=None):
+    """move aside every leaf_<n>.json that the exact verifier has not accepted."""
+    n = 0
+    for p in glob.glob(os.path.join(OUT, 'leaf_*.json')):
+        if os.path.basename(p).count('.') != 1:
+            continue
+        name = os.path.basename(p)[len('leaf_'):-len('.json')]
+        if names is not None and name not in names:
+            continue
+        if not PASSED(name):
+            os.replace(p, p + '.provisional')
+            n += 1
+    if n:
+        print(f'swept {n} unverified provisional certificate file(s)', flush=True)
+    return n
+
+
 def _one(args):
     name, node_json, s_rat, eps_geo, rounds, time_limit, depth, stages, resolve_time = args[:9]
     max_cols = args[9] if len(args) > 9 else 800      # A29: optional, see drive.py
+    params = args[10] if len(args) > 10 else None     # A29: stamped into the failure marker
     out = os.path.join(OUT, f'leaf_{name}.json')
     logd = os.path.join(HERE, 'logs', 'cert')
     os.makedirs(logd, exist_ok=True)
@@ -67,6 +142,19 @@ def _one(args):
         if ln.strip():
             tail = ln.strip()[:300]
             break
+    if not ok:
+        # A29: param-stamped failure marker, so a resumed run does not repeat a deterministic
+        # failure with the same (or weaker) parameters.
+        try:
+            json.dump(dict(name=name, certified=False, node=node_json, tail=tail,
+                           seconds=time.time() - t0, when=time.strftime('%Y-%m-%d %H:%M:%S'),
+                           params=params,
+                           note='FAILED certification attempt -- NOT a certificate'),
+                      open(marker_path(name), 'w'), indent=1)
+        except Exception:
+            pass
+    elif os.path.exists(marker_path(name)):
+        os.remove(marker_path(name))
     return dict(name=name, certified=bool(ok), scale=used, total=total,
                 seconds=time.time() - t0, node=node_json, tail=tail)
 
@@ -111,15 +199,30 @@ def main():
     ap.add_argument('--nodes_dir', default=None)
     ap.add_argument('--only', default=None)
     ap.add_argument('--skip_done', action='store_true', default=True)
+    ap.add_argument('--max_cols', type=int, default=800)
+    ap.add_argument('--retry_failed', action='store_true',
+                    help='ignore the param-stamped failure markers and retry failed nodes anyway')
     a = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
     todo = collect(a.tag, a.slack_max, a.only)
-    if a.skip_done:
-        todo = [(n, p) for n, p in todo
-                if not os.path.exists(os.path.join(OUT, f'leaf_{n}.json'))]
     stages = (1.03, 0)
-    jobs = [(n, p, a.s_rat, a.eps_geo, a.rounds, a.time_limit, a.depth, stages, a.resolve_time)
-            for n, p in todo]
+    cur = params_of(a, stages, a.max_cols)
+    sweep_provisional({n for n, _ in todo})
+    if a.skip_done:
+        keep, done, repeat = [], 0, 0
+        for n, p in todo:
+            if PASSED(n):
+                done += 1
+                continue
+            if not a.retry_failed and no_stronger_than(cur, (read_marker(n) or {}).get('params')):
+                repeat += 1
+                continue
+            keep.append((n, p))
+        print(f"skipping {done} already-certified and {repeat} already-failed-at-these-parameters "
+              f"node(s)", flush=True)
+        todo = keep
+    jobs = [(n, p, a.s_rat, a.eps_geo, a.rounds, a.time_limit, a.depth, stages, a.resolve_time,
+             a.max_cols, cur) for n, p in todo]
     print(f"certifying {len(jobs)} nodes of tag {a.tag} with {a.workers} workers", flush=True)
     outp = os.path.join(HERE, 'results', f'certs_{a.tag}.json')
     res, t0 = [], time.time()

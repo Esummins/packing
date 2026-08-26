@@ -205,6 +205,16 @@ def synth_node(name):
     return out
 
 
+def stage1_running():
+    """True while a separate certify_a27.py wave still owns part of the 9-worker budget."""
+    try:
+        q = subprocess.run(['wmic', 'process', 'where', "name='python.exe'", 'get', 'commandline'],
+                           capture_output=True, text=True, timeout=120)
+        return any('certify_a27.py' in l for l in q.stdout.splitlines())
+    except Exception:
+        return False
+
+
 # ------------------------------------------------------------------ state
 def load_state():
     if os.path.exists(STATE):
@@ -246,16 +256,45 @@ def cmd_seed(a):
             drop.append(m)
         keep.append(i)
         seen.add(i)
+    # nodes a concurrently-running certify_a27.py wave owns: leave them alone this round, the
+    # outer loop in finish.py re-seeds and picks up whatever that wave could not certify.
+    # Ownership is decided by STATE, not by the process table: a node listed in phaseA_todo.txt
+    # that has neither a certificate nor a failure marker has not been dispatched yet and still
+    # belongs to the level-1 wave.  As soon as that wave finishes a node it leaves one or the
+    # other behind, and the reservation lapses by itself -- no race with process startup, and
+    # nothing can be worked by two drivers at once (they share output paths).
+    reserved = set()
+    p = os.path.join(HERE, 'results', 'phaseA_todo.txt')
+    if os.path.exists(p):
+        for x in open(p).read().split(','):
+            x = x.strip()
+            if x and not certified(x) and not os.path.exists(
+                    os.path.join(CERTS, f'leaf_{x}.attempt.json')):
+                reserved.add(x)
+        keep = [i for i in keep if str(i) not in reserved]
     st = load_state()
     st['queue'] = [str(i) for i in keep]
+    st['reserved_for_stage1'] = sorted(reserved)
     st['depth'] = 1
     st['sigma_deferred'] = sorted(drop)
     st['seeded_missing'] = miss
     done = st.setdefault('done', {})
     # (a) cells whose level-1 certification has ALREADY been attempted and failed: do not pay for
     #     the same attempt twice, refine them.
-    p = os.path.join(HERE, 'results', 'certs_l1.json')
     nfail = 0
+    for mp_ in glob.glob(os.path.join(CERTS, 'leaf_*.attempt.json')):
+        nm = os.path.basename(mp_)[len('leaf_'):-len('.attempt.json')]
+        if '_' in nm or certified(nm):
+            continue
+        try:
+            mk = json.load(open(mp_))
+        except Exception:
+            continue
+        done.setdefault(nm, dict(certified=False, depth=1, tail=(mk.get('tail') or '')[:200],
+                                 params=mk.get('params'),
+                                 why='level-1 certification already failed'))
+        nfail += 1
+    p = os.path.join(HERE, 'results', 'certs_l1.json')
     if os.path.exists(p):
         for r in json.load(open(p)).get('results', []):
             if not r.get('certified') and not certified(r['name']):
@@ -292,6 +331,10 @@ def cmd_run(a):
     os.makedirs(os.path.join(HERE, 'logs', 'cert'), exist_ok=True)
     sweep_provisional()
     stages = (1.03, 0)
+    cur_params = dict(eps_geo=float(a.eps_geo), rounds=int(a.rounds),
+                      time_limit=float(a.time_limit), resolve_time=float(a.resolve_time),
+                      depth=int(a.depth), max_cols=int(a.max_cols),
+                      stages=[float(s) for s in stages])
     while st['queue'] and st['depth'] <= a.max_depth:
         depth = st['depth']
         queue = list(st['queue'])
@@ -320,15 +363,21 @@ def cmd_run(a):
                 print(f'   !! {e}', flush=True)
                 continue
             jobs.append((n, nj, '96/25', a.eps_geo, a.rounds, a.time_limit, a.depth,
-                         stages, a.resolve_time, a.max_cols))
+                         stages, a.resolve_time, a.max_cols, cur_params))
         res = []
         t0 = time.time()
-        if jobs:
-            with mp.Pool(min(a.workers, len(jobs))) as pool:
-                for r in pool.imap_unordered(certify_one, jobs):
+        # Work the depth in chunks with a fresh pool each time, so the worker count can be
+        # re-read between chunks: while a level-1 certification wave is still running elsewhere
+        # the driver stays at --workers_low, and takes the full --workers once that wave is gone.
+        done_names = 0
+        while done_names < len(jobs):
+            w = a.workers if stage1_running() is False else a.workers_low
+            chunk = jobs[done_names:done_names + max(1, 4 * w)]
+            with mp.Pool(min(w, len(chunk))) as pool:
+                for r in pool.imap_unordered(certify_one, chunk):
                     res.append(r)
                     nok = sum(1 for x in res if x['certified'])
-                    print(f'[d{depth} {len(res)}/{len(jobs)}] {r["name"]}: '
+                    print(f'[d{depth} {len(res)}/{len(jobs)} w{w}] {r["name"]}: '
                           f'{"PASS" if r["certified"] else "FAIL"} total={r["total"]} '
                           f'{r["seconds"]:.0f}s ({nok} ok) {"" if r["certified"] else r["tail"][:90]}',
                           flush=True)
@@ -336,6 +385,7 @@ def cmd_run(a):
                                                  scale=r['scale'], seconds=r['seconds'],
                                                  tail=r['tail'][:200], depth=depth)
                     save_state(st)
+            done_names += len(chunk)
         nok = sum(1 for x in res if x['certified'])
         nxt = []
         for n in queue:
@@ -379,6 +429,9 @@ def main():
     sub.add_parser('seed')
     r = sub.add_parser('run')
     r.add_argument('--workers', type=int, default=9)
+    r.add_argument('--workers_low', type=int, default=5,
+                   help='workers to use while a separate certify_a27.py wave is still running '
+                        '(the two together must not exceed the machine budget)')
     r.add_argument('--max_depth', type=int, default=4)
     r.add_argument('--resolve_time', type=float, default=400)
     r.add_argument('--time_limit', type=float, default=400)
