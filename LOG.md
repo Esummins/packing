@@ -905,3 +905,26 @@ affordable cost estimate for closing 3.84.
   kills all completions), with the metric/LP/Farkas/FJ tests applied at partial nodes and contact
   TYPE resolved algebraically inside the per-graph solve. The go/no-go number is now the B&B
   FRONTIER size, not the leaf count — unmeasured (next pilot candidate A32).
+
+## 2026-08-26 — A32 verdict: NO-GO. The structure-B&B frontier cannot beat flat enumeration
+- Canary PASS (Trump survives to leaf, real decoration survives mode-D). Engine reproduces A31
+  exactly (9/9 cross-checks). ~1h20m wall.
+- Decisive structural fact: with all-monotone kills every surviving structure is a leaf that must be
+  visited, so nodes >= leaves; measured overhead 80-122x and GROWING with k. Frontier ratios linear
+  in k (factorial x exponential): 5.6e12-1.4e14 graph nodes at k=11, ~1e30 decorated leaves — 7-24
+  orders above the GO target. B&B collapse vs A31 flat: only 2.7x, and 3x SLOWER in wall clock.
+- Stages 4-6 (Farkas / case-LP / FJ) fire ZERO times at the structure level: a structure fixes
+  contacts but not selection rows (~500 possible vs ~35 needed), so the FJ system is not well-posed
+  above the decoration layer. The exclusion tests only bite below a decoration+geometry resolution
+  the search cannot afford to reach.
+- One real win: exact strut-DFS (L2) kills ~43% of THIN graphs wholesale (0% of non-thin) — factor
+  1.6, not the 10x a hard L2 prune would need, and even 10x is noise against 24 orders.
+- CONCLUSION (three pilots, three sides of the same wall): coordinate cover c^33 (A30), flat
+  structure enumeration 4e29 (A31), structure-B&B frontier >= leaves ~1e30 (A32). Any COMPLETE
+  search that visits survivors of the current lemma set is dead. The endgame s(11) = s* needs a
+  family-kill mathematics that collapses the space itself (O(1) core-shape theorem or equivalent) —
+  not better search. All engines validated along the way are banked (FJ/Krawczyk, Farkas, filters,
+  tilt/embedding propagation, drain v3 + structure lemmas L1-L7).
+- Advisor recommendation to PI: resume A29 (s(11) >= 3.84 becomes the main line again, ~2 days at 6
+  workers); advisor pursues L2 hard-closure (a real lemma regardless) and family-kill ideas in
+  background; consider consolidating the corpus for write-up.
