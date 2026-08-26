@@ -853,3 +853,20 @@ affordable cost estimate for closing 3.84.
 - Also this session: docs/plain_language_guide.md written for the PI; A29 resume bug (FAIL markers)
   and a provisional-certificate soundness bug found and fixed (fb9272a) after the PI caught the
   retry behaviour in the logs.
+
+## 2026-08-26 — A30 pilot verdict: engine works, coordinate cover dies; structure-first reformulation
+- A30 (5.5 min wall!): per-branch FJ machinery validated against A22 (rows to 2.6e-30, min-lambda
+  0.017542 vs 0.01754; isolates Trump at h <= 2.4e-4). Three corrections to drain_lemma v2 found and
+  advisor-verified -> v3: C1 FJ sign (v2 unsatisfiable everywhere - blocking), C2 D2 vacuous
+  (centroid-shrink repair), C3 separation-row form. New preferred test (c1): Gordan/Farkas direction
+  certificate, exactly first-order-complete, ~2 ms/selection, lambda0=0 covered free.
+- Decisive negative: discharge-radius/cell-width ratio c ~ 1.86 is SCALE-INVARIANT => ~c^33 ~ 8e8
+  surviving cells around EVERY critical point at every refinement depth; >= 1e5-5e7 CPU-h floor for
+  Trump's shell alone; D2 reach at s* is zero. T3-as-coordinate-cover rejected: the blow-up is
+  dimensional, not algorithmic.
+- Reformulation (validates the PI's earlier contact-graph proposal): branch on selection/contact
+  STRUCTURE at the top (finite combinatorial menu, pruned by counting lemmas + the stress lemma, now
+  load-bearing), solve each structure's FJ system GLOBALLY as a polynomial system in t = tan(theta/2)
+  (homotopy/Groebner + certified root isolation), coordinate cells only at the last level inside
+  structure-reduced boxes, composed with A22's neighbourhood at Trump. Next advisor task: stress
+  lemma + a bound on the pruned structure-graph count (the go/no-go number for the campaign).
