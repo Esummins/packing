@@ -199,3 +199,17 @@ ghost is a level-1 artifact: A15's theta' (a hand-built level-2 fragment) killed
 Endgame shape: certify s >= s-hat - eps OUTSIDE A22's box (one benign disjunction), A22 closes the
 inside; rational PSD certificates are exactly verifiable and Lean-portable. Validation targets with
 known answers: s(2)=3? no — s(2)=2, s(3)=2, s(5)=2+1/sqrt2.
+
+**I-L13 refinement (PI, 2026-08-26 — slip lines and interface charging).** The property behind the
+grain picture is not just "tiles the plane" but tiles WITH straight slip lines contained in tile
+edges: squares (2 line families), triangles (3), rhomboids (2) — columns shear cleanly, giving
+linear grain boundaries at ~constant wastage per length. Hexagons tile but have ZERO slip lines
+(every straight line crosses tile interiors — grains interlock, no cheap shear boundary);
+pentagons+ do not tile. Consequences: charge INTERFACES, not squares (explains A26's exact-zero
+failure — same-grain squares legitimately cost 0); Trump = bicrystal (6-square upright wall-wetting
+grain + 5-square common-tilt grain absorbing the 1-vs-3.877 incommensurability, theta* = optimal
+misorientation); pinwheel = 4-grain vortex junction (6.55 strand = junction premium); Erdos-Graham
+constructions = upright bulk + tilted shear strips. Candidate theorem: wastage >= sum over grain
+boundaries of length x f(misorientation), f(0) = 0 — forces few-grain structure at optimality.
+Testable: eta(n) dips at m^2 / m^2+m, peaks at maximal incommensurability; per-length boundary
+wastage in record packings converges to a constant; tight variety concentrates on lattice sheets.
