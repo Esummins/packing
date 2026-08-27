@@ -178,3 +178,24 @@ Slack cells are free (gap-squeeze ⇒ not critical). Practical form: T3 kill tes
 (currently the 3 live boxes at 3.84); at s' this is the road to full optimality. Order: drain lemma +
 stress lemma (advisor, in progress) → per-cell exclusion implementation (Opus, reuse A22 machinery).
 Status: open; pilot after A27's verdict.
+
+**I-L13. Equality-pigeonhole / tight-variety collapse (advisor, 2026-08-26; PI grain refinement).**
+STATUS: active — A33 (Fable). A guard field of total 11+eta at side s0 forces EVERY square of any
+11-packing to cover guard mass in [1, 1+eta] and caps escaped mass at eta (pure pigeonhole on the
+equality case we never exploited). GLOBAL, family-killing, stacks over multiple fields (intersection
+of near-tight varieties), composes with the case tree and the wastage ledger (escape = wastage in
+guard units). Gate: eta(s) = tau*(s) - 11 at s up to s-hat, never measured. PI refinement (grain
+conjecture): large-n optimal packings look like crystal grains (uprights / common-tilt clusters)
+with wastage confined to grain boundaries; interface wastage per unit length tends to a constant,
+so eta should FALL as n grows and n=11 sits near the WORST case for this method — i.e. the idea has
+more forcing power at high n, worth testing there (connect to Erdos-Graham-type wastage asymptotics).
+
+**I-L14. Sparse SOS / Lasserre hierarchy on the lifted POP (advisor, 2026-08-26).**
+STATUS: active — A34 (Fable). Lift the separating direction per pair (2 vars each) so the packing
+set becomes ONE basic semialgebraic set in ~145 vars, polynomial in t = tan(theta/2); the projection
+onto configurations is exactly the packings, so min over the lift = s(11). Lasserre converges;
+correlative/term sparsity (TSSOS) + D4xS11 symmetry make level 2 plausibly computable. Evidence the
+ghost is a level-1 artifact: A15's theta' (a hand-built level-2 fragment) killed it on every sample.
+Endgame shape: certify s >= s-hat - eps OUTSIDE A22's box (one benign disjunction), A22 closes the
+inside; rational PSD certificates are exactly verifiable and Lean-portable. Validation targets with
+known answers: s(2)=3? no — s(2)=2, s(3)=2, s(5)=2+1/sqrt2.

@@ -928,3 +928,14 @@ affordable cost estimate for closing 3.84.
 - Advisor recommendation to PI: resume A29 (s(11) >= 3.84 becomes the main line again, ~2 days at 6
   workers); advisor pursues L2 hard-closure (a real lemma regardless) and family-kill ideas in
   background; consider consolidating the corpus for write-up.
+
+## 2026-08-26 — I-L13/I-L14 dispatched as Fable-led attempts A33/A34 (PI directive: Fable for theory)
+- PI refined I-L13 with the grain conjecture: large-n optima are crystal-like (grains + boundary-
+  confined wastage, interface cost -> constant), so eta should FALL with n and n=11 is near the
+  method's worst case — A33 tests eta(n) across n and the high-n forcing question, alongside the
+  eta(s) gate table and tight-variety maps at s-hat.
+- A34 pilots sparse SOS on the lifted POP: validation on solved s(2)/s(3)/s(5), then the decision
+  number — does sparse level 2 beat the proven pure-LP ceiling 3.83 at n=11?
+- Both leads run on Fable (PI: Opus hopeless at theoretical math; Opus/Sonnet subagents for coding
+  only). Machine shared 3+3 heavy processes; A29 remains paused (PI has not asked to resume).
+- Idea 3 (structure ladder at s >= s-hat) shelved by PI for now — on the board, not active.
