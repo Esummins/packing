@@ -1016,3 +1016,7 @@ affordable cost estimate for closing 3.84.
   (A31/A32 1e30, LP ceiling 3.83) untouched — A35 removes the per-critical-point factor only.
 - Cost: ~1 desktop-hour for the whole pilot; ~10-30 min per critical point steady-state; all 36 A04
   optima ~ 1 desktop-day (each needs its own contact audit first).
+
+## 2026-08-27 — A36 dispatched: chase A35's levers L1 (endpoint-row lemma) + L2 (omega scale)
+- PI directive. Target: composed escape-complex theorem on a box strictly larger than A22's r_N —
+  turning "method validated" into "method dominates A22." A35 lead resumed with context.
