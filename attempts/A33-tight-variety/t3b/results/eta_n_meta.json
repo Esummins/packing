@@ -1,0 +1,83 @@
+{
+ "attempt": "A33-tight-variety / T3(b)",
+ "calibration": {
+  "anchor_n10": {
+   "s": 3.70710678118654,
+   "tau_required": 10.0,
+   "tau_measured": 10.000000000002752,
+   "row_violation": 1.212363542890671e-13,
+   "dual": 10.000000000090278,
+   "verdict": "PASS (1e-13, required 1e-3)"
+  },
+  "anchor_n11": {
+   "s": 3.877084,
+   "tau_T1": 11.242866732290468,
+   "verdict": "carried over from T1"
+  }
+ },
+ "definitions": {
+  "tau_star": "min total mass of an atomic field on [0,s]^2 with mu(Q) >= 1 for every EPS-SHRUNK closed unit square (EPS_GEO = 1e-4); this, not the closed-square version, is the quantity the pipeline solves and the one Theorem 1 needs",
+  "eta": "tau*(s_n) - n",
+  "rho": "eta / (s_n^2 - n)",
+  "rigorous_bracket": "n <= tau_eps(s_n) <= s_n^2/(1-2*eps)^2 for every n that packs at s_n"
+ },
+ "corrections": {
+  "grain_theory_section_4": "FALSE as written: 'tau*(m) > m^2 strictly' at crystal sides. The uniform measure of density (1-2eps)^-2 is feasible, so tau_eps(m) <= m^2/(1-2eps)^2 and tau_eps(m) >= m^2 (an m^2-packing of eps-shrunk squares is disjoint); hence eta(m^2) = 0 up to 4*eps*m^2 <= 6.4e-3 at m = 4. The lattice-vertex argument in that section only rules out the naive ATOMIC field, not all feasible measures. Measured: tau = 4.000000 / 9.000000 / 16.000000 at s = 2 / 3 / 4.",
+  "closed_square_tau": "the CLOSED-unit-square version of tau* stated in the T3(b) brief is degenerate at commensurate sides: at s = 2 a single atom of mass 1 at (1,1) lies in every closed unit square, so that tau would be 1, not 4. All numbers here use the eps-shrunk constraint."
+ },
+ "trend": {
+  "eta_by_n": {
+   "4": 0.0,
+   "5": 0.0,
+   "9": 0.0,
+   "10": 2.751576744230988e-12,
+   "11": 0.24286673229046762,
+   "16": 3.694822225952521e-12,
+   "18": 1.2751349643499381,
+   "26": 1.5675527770756013
+  },
+  "rho_by_n": {
+   "5": 0.0,
+   "10": 7.351966096293687e-13,
+   "11": 0.06023808631061981,
+   "18": 0.24241512358990605,
+   "26": 0.2799580128374002
+  },
+  "verdict_eta": "RISES with n (0, 0, 0, 0, 0.243, 0, 1.275, 1.568 at n = 4,5,9,10,11,16,18,26)",
+  "verdict_rho": "RISES with n (0, 0, 0.060, 0.242, 0.280 at n = 5,10,11,18,26)",
+  "verdict_crystal_dip": "CONFIRMED and total: eta = 0 exactly at n = 4, 9, 16 (and at 5, 10)",
+  "verdict_PI_grain_conjecture": "REFUTED in the measured range n <= 26: eta does not fall and n = 11 is the method's BEST non-trivial case, not its worst",
+  "free_corollary": "rho(n) = 1 exactly whenever the record side of n is a crystal side m (n = 2,3 at s=2; 6,7,8 at s=3; 12..15 at s=4), because tau*(m) = m^2 and tau* does not depend on n",
+  "equivalence": "eta(n) = 0 <=> the measure/LP method alone certifies s(n) = s_n; eta(n) is exactly the method's failure margin at the record side"
+ },
+ "caveats": {
+  "non_converged": [
+   "n=18 (row violation 4.4e-2)",
+   "n=26 (row violation 1.9e-2)",
+   "n=16 (8.3e-3, but bracketed by theory to 6.4e-3)"
+  ],
+  "dual_lower_bounds": "rigorous but weak at large s (n=18: 18.606 -> eta >= 0.606; n=26: 26.002 -> eta >= 0.002); the LP point estimate sits between the dual floor and tau_ub",
+  "n41": "NOT RUN: the row oracle costs ~s^4 and the wall budget went to the s(12) seal instead; one start-up iteration only (killed). The {4,5,9,10,11,16,18,26} trend already answers the PI.",
+  "n66": "not attempted",
+  "record_sides": "for n >= 11 the record side upper-bounds s(n), so the measured eta(n) upper-bounds eta at the true optimal side (grain_theory gap G4)"
+ },
+ "P2_c_n": {
+  "2": 0.25,
+  "3": 0.125,
+  "4": 0.0,
+  "5": 0.2150291171489721,
+  "6": 0.25,
+  "7": 0.16666666666666666,
+  "8": 0.08333333333333333,
+  "9": 0.0,
+  "10": 0.25239633682208873,
+  "11": 0.2599750445860858,
+  "12": 0.25,
+  "13": 0.1875,
+  "14": 0.125,
+  "15": 0.0625,
+  "16": 0.0,
+  "18": 0.2726656233969122,
+  "26": 0.24901811597219048
+ }
+}

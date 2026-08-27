@@ -1,0 +1,135 @@
+{
+ "quantity": "tau*(s) = min total mass of an atomic guard field on [0,s]^2 giving every eps-shrunk closed unit square (eps = 1e-4) mass >= 1",
+ "theorem": "tau*(s) < n  ==>  s(n) >= s   (docs/results.md Theorem 1, certs/verify_measure.py)",
+ "points": [
+  {
+   "s": 3.84,
+   "tau_LP": 11.045665230860529,
+   "row_violation": 0.0003751710000574615,
+   "tau_ub": 11.049810799428595,
+   "tau_lb_opt": 11.004025392978749,
+   "source": "t1/results/field_3.84.json",
+   "converged": true
+  },
+  {
+   "s": 3.85,
+   "tau_LP": 11.092787986692061,
+   "row_violation": 0.00020846193846324468,
+   "tau_ub": 11.095100892931647,
+   "tau_lb_opt": 11.052697023994728,
+   "source": "t1/results/field_3.85.json",
+   "converged": true
+  },
+  {
+   "s": 3.86,
+   "tau_LP": 11.147532414825093,
+   "row_violation": 0.0010815132099766256,
+   "tau_ub": 11.159601671450845,
+   "tau_lb_opt": 11.11380537962768,
+   "source": "t1/results/field_3.86.json",
+   "converged": true
+  },
+  {
+   "s": 3.87,
+   "tau_LP": 11.197056078375438,
+   "row_violation": 0.000415439077329105,
+   "tau_ub": 11.20170970632034,
+   "tau_lb_opt": 11.13793103447254,
+   "source": "t1/results/field_3.87.json",
+   "converged": true
+  },
+  {
+   "s": 3.877084,
+   "tau_LP": 11.242866732290468,
+   "row_violation": 0.0,
+   "tau_ub": 11.242866732290468,
+   "tau_lb_opt": 11.193121693016534,
+   "source": "t1/results/field_3.877084.json",
+   "converged": true
+  },
+  {
+   "s": 3.9,
+   "tau_LP": 11.457047078146745,
+   "row_violation": 3.7536640462576543e-13,
+   "tau_ub": 11.457047078089758,
+   "tau_lb_opt": null,
+   "converged": true,
+   "n_rows": 18713,
+   "n_orbits": 2197,
+   "wall_time_s": 880.1663517951965,
+   "lp_verify_ok": true,
+   "source": "field_n12_s3.9.json"
+  },
+  {
+   "s": 3.95,
+   "tau_LP": 11.828630382576304,
+   "row_violation": 0.013199161174494156,
+   "tau_ub": 11.986846704192013,
+   "tau_lb_opt": null,
+   "converged": false,
+   "n_rows": 23167,
+   "n_orbits": 2063,
+   "wall_time_s": 2257.7989144325256,
+   "lp_verify_ok": true,
+   "source": "field_n12_s3.95.json"
+  },
+  {
+   "s": 3.99,
+   "tau_LP": 12.225278215635813,
+   "row_violation": 0.006391068564947977,
+   "tau_ub": 12.303913369597968,
+   "tau_lb_opt": null,
+   "converged": false,
+   "n_rows": 22215,
+   "n_orbits": 2270,
+   "wall_time_s": 2144.215662240982,
+   "lp_verify_ok": true,
+   "source": "field_n12_s3.99.json"
+  }
+ ],
+ "crossing_tau_eq_12": {
+  "from_tau_LP": 3.9672817903581477,
+  "from_tau_ub": 3.951659372900793,
+  "comment": "tau_ub = tau_LP/(1-row_violation) is a rigorous upper bound on tau* given the field (scaling a field whose worst placement carries 1-v by 1/(1-v) makes it feasible); tau_LP is the raw LP value, an under-estimate while rows are missing. The true crossing lies between the two interpolations."
+ },
+ "prior_state": {
+  "best_published_lower_bound_s12": 3.7889,
+  "t1_sealed": {
+   "s": "969271/250000",
+   "s_float": 3.877084,
+   "total_float": 11.425399552,
+   "file": "t1/certs/A33_measure_feasible_3.877084.json",
+   "note": "T1's sealed feasibility certificate already implies s(12) >= 3.877084 by Theorem 1 (total < 12)"
+  }
+ },
+ "certificates": [
+  {
+   "cert": "certs/A33_s12_3.90_v1.json",
+   "report": "A33_s12_3.90_v1.report.json",
+   "s": "39/10",
+   "s_float": null,
+   "n": 12,
+   "total": "364133/31250",
+   "total_float": 11.652256,
+   "result": "FAIL",
+   "slack_to_12": 0.3477440000000005,
+   "time_s": 99.00451135635376,
+   "scale_weights": "1",
+   "atoms": 1652
+  },
+  {
+   "cert": "certs/A33_s12_3.90_v2.json",
+   "report": "A33_s12_3.90_v2.report.json",
+   "s": "39/10",
+   "s_float": null,
+   "n": 12,
+   "total": "184752/15625",
+   "total_float": 11.824128,
+   "result": "PASS",
+   "slack_to_12": 0.17587200000000003,
+   "time_s": 75.10011100769043,
+   "scale_weights": "1",
+   "atoms": 1652
+  }
+ ]
+}

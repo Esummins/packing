@@ -225,10 +225,13 @@ certificate would be the first in this problem family.
 - M. Z. Arslanov, S. A. Mustafin, Z. K. Shangitbayev, "Improved Packings of n(n−1) Unit Squares in a Square",
   Electron. J. Combin. 28 (2021), DOI 10.37236/8586 (open access): s(n²−n) < n for all n ≥ 12 (Friedman's
   s(n²−n)=n conjecture fails from n = 12 on; Ellsworth/Cantrell 2025–26 pushed to n = 11 not-yet-analytic).
-- Asymptotics (not directly relevant): Erdős–Graham 1975 W(s)=O(s^{7/11}); Roth–Vaughan 1978 lower bound;
-  Chung–Graham 2009 (O(s^{0.631})) and 2019 DCG "Efficient packings of unit squares in a large square";
-  Wang–Dong–Li arXiv:1603.02368 (O(s^{0.625})); McClenagan 2024 thesis / arXiv:2602.01484 (O(s^{0.6}));
-  H. D. Bui arXiv:2504.09489, arXiv:2508.04603 (O(x^{0.6}) construction, 2025–26); Praton math/0504341,
+- Asymptotics (not directly relevant to n=11 itself, but see §F for the A33 sweep with exact statements
+  verified against primary sources — including a 2025 erratum in the Chung–Graham 2020 chain that the
+  literature had not yet flagged as of this A01 pass): Erdős–Graham 1975 W(s)=O(s^{7/11}); Roth–Vaughan 1978
+  lower bound; Chung–Graham 2009 (O(s^{0.631})) and 2020 DCG "Efficient packings of unit squares in a large
+  square" (claimed O(s^{0.6}), later shown flawed); Wang–Dong–Li arXiv:1603.02368 (O(s^{0.625})); McClenagan
+  arXiv:2602.01484 (O(s^{0.6}), independent correct proof); H. D. Bui arXiv:2504.09489, arXiv:2508.04603
+  (O(x^{0.6}) construction, 2025–26, also an independent correct proof); Praton math/0504341,
   Baek–Koizumi–Ueoro arXiv:2411.07274, A. R. Singh arXiv:2506.23284/2601.22163 (Erdős's square-packing
   conjecture, a different problem — packing squares of total area 1 in a square).
 - Complexity: Abrahamsen–Stade, FOCS 2024 (packing simple polygons with unit squares is NP-hard);
@@ -247,3 +250,219 @@ certificate would be the first in this problem family.
   No LP/SDP-duality lower bound for finite-container square packing exists in the literature that I could
   find; the closest relatives are Kearney–Shiu's two-lattice "duality" (B2) and the piercing-number viewpoint
   (B6).
+
+## F. Wastage asymptotics for unit squares in a large square (A33 sweep, 2026-08-26)
+
+Not directly about n = 11, but A33/T3(a) wants the exact state of the asymptotic question: how does
+W(x) = x² − s(x) (wasted area when packing unit squares into a side-x square) grow as x → ∞? All entries
+below were checked against the primary PDF (arXiv or the authors' own site), not against blog/Wikipedia
+summaries. Local copies of the papers I could pull past a captcha/paywall are in `docs/papers/`:
+`erdos_graham1975_JCTA.pdf`, `chung_graham2009_JCTA.pdf`, `chung_graham2020_DCG_flawed.pdf`,
+`bui2025_good_squares_arXiv2504.09489.pdf`, `bui2025_Ox06_arXiv2508.04603.pdf`,
+`mcclenagan2026_arXiv2602.01484.pdf` (the last is metadata-only extractable, see F10; Roth–Vaughan 1978 and
+the Arslanov–Bui 2025 erratum note are paywalled with no open copy found, see F4/F7).
+
+**Exponent chain (all upper bounds on W(x), decreasing = better):**
+
+| year | exponent | value | source |
+|---|---|---|---|
+| 1975 | 7/11 | 0.636364… | Erdős–Graham |
+| — | (3−√3)/2 | 0.633975… | Montgomery (unpublished) |
+| 2009 | (3+√2)/7, with a log x factor | 0.630601… | Chung–Graham |
+| 2016 | 5/8, no log factor | 0.625 | Wang–Dong–Li |
+| 2020 (claimed) / 2025–26 (actually proved) | 3/5 | 0.6 | Chung–Graham claimed it in 2020; the proof had a bug found in 2025 (Arslanov–Bui); reproved correctly, independently, by Bui and by McClenagan in 2025–26 |
+
+Lower bound (Roth–Vaughan 1978, still the only one): W(x) ≫ x^{1/2} when x is bounded away from an integer —
+**the 1/2-vs-0.6 gap is still open**, and has been since 1978. No paper found narrows it from either side.
+
+### F1. P. Erdős, R. L. Graham, "On Packing Squares with Equal Squares", J. Combin. Theory (A) 19 (1975) 119–123.
+- URL: https://mathweb.ucsd.edu/~fan/ron/papers/75_06_squares.pdf (Graham's own site; the older
+  `math.ucsd.edu/~fan/...` URL 302-redirects here — WebFetch chokes on the redirected host's cert, curl -kL
+  works). Local `docs/papers/erdos_graham1975_JCTA.pdf`.
+- **Proves (the Theorem, verbatim):** W(α) = O(α^{7/11}), where W(α) = α² − sup_𝒫|𝒫| over packings 𝒫 of
+  unit squares into S(α). (They also phrase it as a circle-inscribing-squares corollary: f(k²+[cα^{7/11}]) > 4k
+  for f(l) = max total circumference of l nonoverlapping squares in a unit square — the packing question was
+  originally motivated by that circumference problem and by "multidimensional stock cutting".)
+- **Construction:** first fill S(α) with an axis-aligned N×N block (N = α − α^{8/11}), leaving two border
+  rectangles of width β = α − N ≈ α^{8/11}; tile each with *tilted* stacks of unit squares (angle
+  θ = Ω(α^{-4/11})) so the stacks touch both long edges, leaving two right trapezoids per rectangle of base
+  β and height ≈ α^{2/11}/α^{4/11}; recursively subdivide each trapezoid into strips of base m = α^{4/11} and
+  pack those with more tilted stacks, at each stage accounting for the small border triangles. This is exactly
+  the "one global tilt angle per stack, staircase of trapezoids" scheme that all later improvements (Chung–
+  Graham, Wang–Dong–Li, McClenagan, Bui) still use as the skeleton — they only change the exponents at which
+  the strip widths/tilt angles are set and add extra levels of recursion.
+- **Explicitly flags the open lower-bound question** at the end: "It is rather annoying that we do not at
+  present have any nontrivial lower estimate for W(α)... Perhaps the correct bound is O(α^{1/2})" — i.e. they
+  themselves guessed the 1/2 exponent that Roth–Vaughan later made rigorous as a *lower* bound (not, as E–G
+  guessed, an upper bound — the truth is presumably strictly between 1/2 and the current 3/5 upper bound).
+- **Relevance to A33 grain conjecture:** this is the origin of the "single global tilt, staircase of strips"
+  picture — i.e. optimal-ish packings are conjectured/constructed as one dominant "grain" (a big block of
+  axis-aligned squares) plus boundary strips at a small number of distinct tilts, not a fine mosaic of many
+  differently-oriented grains. Every later paper in this chain keeps that same qualitative picture; none
+  produces (or needs) more than O(1) distinct tilt angles.
+
+### F2. H. Montgomery, unpublished (cited only as "personal communication" in Chung–Graham 2009, ref [8] there).
+- **Claim (as reported by Chung–Graham):** W(x) = O(x^{(3−√3)/2}) = O(x^0.633975…). No preprint, no arXiv id,
+  no journal version found anywhere (searched arXiv, Google Scholar, MathSciNet-adjacent search); this is a
+  citation to an oral/private communication only, exactly as Erdős–Graham's own paper cites Montgomery-style
+  personal communications for other facts. Treat as unverifiable folklore, cited only because Chung–Graham
+  built on it.
+
+### F3. F. Chung, R. Graham, "Packing Equal Squares into a Large Square", J. Combin. Theory (A) 116 (2009) 1167–1175.
+- URL: https://mathweb.ucsd.edu/~ronspubs/09_03_square_packing.pdf (authors' site; also
+  https://www.sciencedirect.com/science/article/pii/S0097316509000272). Local `docs/papers/chung_graham2009_JCTA.pdf`.
+- **Proves (Thm 1):** W(x) = O(x^{(3+√2)/7} log x), (3+√2)/7 = 0.630601…, improving Erdős–Graham's 7/11 and
+  Montgomery's (3−√3)/2. Also (Thm 2) a matching cover bound s′(x) = x² + O(x^{(3+√2)/7} log x), and (Thm 3) a
+  general trapezoid-angle result Wθ(x) = O(x^{1−δ/(2+√2)}) for tilt θ = 1/x^δ.
+- **Quotes Roth–Vaughan's theorem verbatim (their eq. (1)):** "if x(x−⌊x⌋) > 1/6, then
+  W(x) > 10^{-100}√(x·|x−⌊x+1/2⌋|)" — this is the exact form of the lower bound (see F4); Chung–Graham note it
+  gives W(x) ≫ x^{1/2−ε} for x bounded away from an integer.
+- **Method:** an induction on three parametrized shapes — Type-1 rectangle, Type-2 trapezoid (tilt
+  θ ≤ √(2/x)), Type-3 trapezoid (tilt θ ≤ 1/x) — each packed by tilted unit-square stacks with the recursion
+  bottoming out in O(x^{2−2α}) sized subproblems, α = (3+√2)/7. Genuinely a refinement of Erdős–Graham's
+  scheme with a second level of recursion (Type-2/Type-3 shapes calling each other) rather than a new idea.
+- Poses "Challenge ($100): improve (3+√2)/7" and "Conjecture ($1000): W(x) ≫ x^{1/2+c}" (i.e. they
+  explicitly *don't* believe the truth is 1/2, contra their 1975 paper's own guess) — both bounties still
+  formally open as far as I could tell (no claim of payout found).
+
+### F4. K. F. Roth, R. C. Vaughan, "Inefficiency in Packing Squares with Unit Squares", J. Combin. Theory (A) 24 (1978) 170–186.
+- URL: https://www.sciencedirect.com/science/article/pii/0097316578900055 (paywalled; ScienceDirect blocked
+  automated fetch, no open-access or arXiv copy found). **Not independently re-verified against the original
+  text** — the statement below is quoted verbatim from two independent later papers that cite it (Chung–Graham
+  2009 §1 and Chung–Graham's own 2020 note §1, both reproducing the same inequality with the same "10^{-100}"
+  constant), so it is reliable but technically a secondary-source confirmation, not primary.
+- **Proves:** if x(x − ⌊x⌋) > 1/6, then W(x) > 10^{-100}·√(x·‖x‖) where ‖x‖ = |x − ⌊x+1/2⌋| is the distance
+  from x to the nearest integer. Corollary: W(x) ≫ x^{1/2} for x bounded away from any integer (constant
+  depends on the distance). **This is still the only nontrivial lower bound in the literature** — nothing
+  published since 1978 improves the exponent 1/2, weakens the "bounded away from an integer" hypothesis, or
+  improves the (astronomically bad) 10^{-100} constant.
+- **2025 simplification of the proof technique (not the bound):** H. D. Bui, "Square Packing with
+  Asymptotically Smallest Waste Only Needs Good Squares", arXiv:2504.09489 (13 Apr 2025), CCCG 2025 — see F8.
+
+### F5. S. Wang, T. Dong, J. Li, "A New Result on Packing Unit Squares into a Large Square", arXiv:1603.02368 (8 Mar 2016, rev. 9 Apr 2016).
+- URL: https://arxiv.org/abs/1603.02368.
+- **Proves:** W(x) = O(x^{5/8}) = O(x^0.625), improving Chung–Graham 2009's O(x^{(3+√2)/7} log x) — note this
+  removes the log factor too, not just the exponent (0.625 < 0.630601, and no log x). Also improves the dual
+  cover bound to s′(x) = x² + O(x^{5/8}).
+- Abstract states explicitly it "improved the earlier results of Erdős-Graham, Roth-Vaughan, and
+  Karabash-Soifer" via the Chung–Graham 2009 baseline. Construction not independently checked in detail
+  (paper not fully read past the abstract/citation chain) but the exponent and its position in the chain is
+  confirmed by every later paper (Bui 2025, McClenagan 2026) citing it identically.
+
+### F6. F. Chung, R. Graham, "Efficient Packings of Unit Squares in a Large Square", Discrete Comput. Geom. 64(3) (2020) 690–699 — **claim later shown flawed, see F7.**
+- URL (preprint, identical content to published version): https://fanchung.ucsd.edu/wp/spacking.pdf.
+  DOI 10.1007/s00454-019-00088-9.
+- **Claims (Theorem 1, as stated in the paper):** W(x) = O(x^{3/5}), improving their own 2009 bound
+  O(x^{(3+√2)/7} log x) (they do not cite or compare against Wang–Dong–Li's intervening O(x^{5/8})).
+  **This claim was invalidated in 2025 — see F7 — the exponent 3/5 turned out to be correct, but this specific
+  paper's proof of it is broken.**
+- **Method (verified by full read of the PDF):** three-stage construction. Stage 1: partition S(x) into an
+  integral-side square plus two rectangles of short side x^{4/5}. Stage 2: pack the rectangles with tilted
+  stacks of M+1 unit squares (tilt θ ~ 1/√M ~ x^{-2/5}), leaving trapezoids with top edge x^{2/5}. Stage 3:
+  subdivide each trapezoid into ~x^{2/5} sub-trapezoids B_i of height ~x^{2/5}, "serrate" the right-hand edge
+  by removing x^{1/5} small triangles per B_i, then fill with stacks of height m = ⌈b_0⌉+1, tracking nine
+  named waste terms W1,…,W9(x), each separately bounded O(x^{3/5}).
+- **The bug (per Arslanov–Bui, F7):** it is in the computation of **W5(x)**, defined on p. 8 of the PDF — the
+  term bounding "the elongated triangle between two [tilted stacks with slightly different tilt] within a
+  serrated B_i" (their Fig. 9). Arslanov–Bui show the angle-difference computation there is wrong and,
+  worse, give a triangle-inequality argument that the true bound the authors' own method can support is
+  weaker than O(x^{3/5}) as stated — so Theorem 1 as proved in this paper does not follow from the argument
+  given (whether some other repair of the same skeleton recovers 3/5 is exactly what F8–F10 settle, in the
+  affirmative, by different means).
+
+### F7. M. Z. Arslanov, H. D. Bui, "Note on 'Efficient Packings of Unit Squares in a Large Square'", Discrete Comput. Geom. (2025), DOI 10.1007/s00454-025-00767-w, published online 3 Aug 2025.
+- URL: https://link.springer.com/article/10.1007/s00454-025-00767-w (Springer paywall — blocked automated
+  fetch; content below is reconstructed from the citing sentence in Bui's own arXiv:2508.04603 v2 §1, which
+  quotes it directly: **"[Chung and Graham (2019)] claims W(x) ∈ O(x^{0.6}), but [Arslanov and Bui (2025)]
+  shows that there is a technical error in the calculation of W₅, with W₅ defined on [Chung and Graham, 2019],
+  p. 8."** — matches exactly the W5/Fig.9 term identified independently by reading the Chung–Graham PDF
+  itself (F6). Also per web search of the abstract: the note illustrates the error "by directly analyzing
+  where the mistake arose in an angle computation, and by checking against a simple geometric argument using
+  the triangle inequality" — **not independently read in full (paywalled); treat the mechanism description as
+  secondary-source-confirmed, but the *existence* and *location* (W5, p.8) of the error is corroborated by two
+  independent sources (the citing sentence in Bui 2025, and my own read of the flawed Fig. 9 argument in the
+  original PDF).**
+- M. Z. Arslanov is the same author as Arslanov–Mustafin–Shangitbayev (already in §D, EJC 28 (2021)
+  #P4.22, on s(n²−n) < n) — i.e. this is a group that also works on small-n exact packings, not purely
+  asymptotics.
+- **This appears to be new information relative to the existing docs/literature.md §D one-liner** ("Chung–
+  Graham 2020... O(s^{0.6})"), which did not flag that the 2020 paper's proof was subsequently retracted/
+  corrected in the technical sense — the *statement* W(x)=O(x^{3/5}) survives (reproved independently below),
+  but *this specific paper* should no longer be cited as its proof.
+
+### F8. H. D. Bui, "Square Packing with Asymptotically Smallest Waste Only Needs Good Squares", arXiv:2504.09489 (13 Apr 2025), CCCG 2025.
+- URL: https://arxiv.org/abs/2504.09489 / https://arxiv.org/pdf/2504.09489. Local
+  `docs/papers/bui2025_good_squares_arXiv2504.09489.pdf` (full text read).
+- **Proves (Theorem 1):** W(x) ∈ Θ(W*(x)), where W*(x) is the minimum waste restricted to packings using only
+  "good" unit squares — a *good square* (definition taken directly from Roth–Vaughan 1978) is one whose tilt
+  relative to the container is ≤ c = 10^{-10}. I.e., **up to a constant factor, only near-axis-aligned squares
+  matter for the asymptotics; "bad" (more-tilted) squares can always be surgically removed at a cost that's
+  absorbed into the same Θ-class.**
+- **Method:** an explicit max-flow/min-cut argument (§3, Prop. 19: a set of "marked" grid cells containing all
+  bad squares can be covered by rectangles of total perimeter O(f), where f is the max number of
+  vertex-disjoint paths from marked cells to the grid boundary — a genuinely new combinatorial tool, credited
+  as a strengthening of Roth–Vaughan's own √|M|-row/column pigeonhole argument) combined with a generalized
+  version of Roth–Vaughan's "Lemma 4" fundamental lemma (angle-difference between two squares forces wasted
+  area nearby, Prop. 21) extended to handle squares arbitrarily far apart via a path/disk-chaining argument.
+  A surgery procedure then cuts out all bad-square regions at O(f) = O(W(A)) extra cost.
+- **Direct relevance to A33's grain conjecture (η(n) trend):** this is the closest thing in the literature to
+  a formal "grain" theorem. It does **not** show a packing is one single grain — it shows the opposite
+  direction is *unnecessary to worry about*: any near-optimal packing can be assumed WLOG to consist entirely
+  of squares within 10^{-10} radians of one fixed axis (the container's), with no asymptotic loss. This
+  formalizes (for the *asymptotic*, large-x regime — not finite n like our n=11 problem) the intuition that
+  "many small oddly-tilted grains" cannot be asymptotically efficient; it does not by itself say how many
+  large axis-aligned grains are needed or whether they must all share literally one tilt vs. O(1) many. Open
+  problems section explicitly asks (Discussion 6.2) whether the tilt bound can be sharpened from the constant
+  10^{-10} to O(1/log x) or O(x^{-ε}) — i.e. whether "good" packings are forced to be *even more* uniformly
+  aligned than just "roughly axis-aligned", which is exactly the kind of quantitative grain-purity statement
+  A33 would want. Not answered in this paper.
+
+### F9. H. D. Bui, "Square Packing with O(x^{0.6}) Wasted Area", arXiv:2508.04603 (6 Aug 2025, v2 15 Mar 2026).
+- URL: https://arxiv.org/abs/2508.04603 / https://arxiv.org/pdf/2508.04603.
+- **Proves:** W(x) = O(x^{3/5}) = O(x^{0.6}) — a *correct* independent re-proof of the exponent Chung–Graham
+  had claimed (and Arslanov–Bui, F7, had shown their proof of, did not establish). Abstract: "We show a new
+  construction for square packing, and prove that it is more efficient than previous results."
+- **Explicitly cites the error it is fixing** (v2 §1, quoted in F7 above) and **explicitly acknowledges
+  McClenagan's simultaneous independent discovery**: "After putting this manuscript on arXiv, we learnt that
+  an equivalent result was independently discovered by McClenagan..., with a somewhat different method."
+- Not fully read past the introduction (24 pages, 20 figures; time-boxed). No mention found of fractional/LP
+  relaxation or explicit "grain" terminology — purely a geometric tiling construction (continuing the
+  Erdős–Graham → Chung–Graham lineage of tilted-stack recursions).
+
+### F10. R. McClenagan, "Optimally Packing a Large Square by Unit Squares", arXiv:2602.01484 (1 Feb 2026).
+- URL: https://arxiv.org/abs/2602.01484 / https://arxiv.org/pdf/2602.01484 / https://arxiv.org/html/2602.01484.
+  Local `docs/papers/mcclenagan2026_arXiv2602.01484.pdf` (PDF text layer would not extract cleanly through
+  either WebFetch or the PDF reader here — compressed/embedded content streams; only metadata-level info
+  obtained, flagged below as **not fully verified**).
+- **Abstract (verified, exact text):** "A large square of sidelength x can be packed by unit squares in a
+  manner so that the wasted space W(x) = O(x^{3/5})." Independent proof of the same exponent as F9, "with a
+  somewhat different method" per Bui's acknowledgment (F9). States the work originated in McClenagan's 2024
+  doctoral thesis (University of Northern British Columbia).
+- **Not verified:** the internal construction/method detail (the extraction tool could only read compressed
+  PDF object streams, not render them; one general-purpose secondary extraction pass claimed a "two
+  alternating sub-algorithms... horizontal stacks and vertical stacks" structure with parameters φ, ψ, θ′, m′,
+  but this should be treated as unconfirmed until the PDF is read properly, e.g. by downloading and running a
+  real PDF-to-text tool rather than the lossy extraction attempted here). Also unverified: whether it discusses
+  the lower-bound side, fractional/LP methods, or grain structure — a first-pass secondary summary said no to
+  all three, but this is not confirmed against primary text.
+
+### F11. What was searched and not found in this sweep
+- **No post-2020 improvement below the 3/5 exponent.** Searched arXiv (math.CO, math.MG, cs.CG) for
+  "packing unit squares", "square packing wasted area", "wastage exponent" combined with 2021–2026: nothing
+  found beating O(x^{3/5}); the two 2025–26 papers (F9, F10) both land exactly on 3/5, not below it.
+- **The lower-bound gap (1/2 vs. current-best ~0.6 upper bound) is still open.** No paper found that improves
+  Roth–Vaughan's exponent 1/2 in either direction (no better lower bound, no proof that 1/2 is tight). Chung–
+  Graham 2009 explicitly bet ($1000, apparently unclaimed) that it is *not* tight, i.e. that
+  W(x) ≫ x^{1/2+c} for some c > 0 — the opposite of Erdős–Graham's own 1975 guess.
+- **No fractional-packing / LP-relaxation treatment of this problem found anywhere** — confirms and extends
+  §E's earlier finding (which was scoped to the finite-n / s(11)-adjacent literature): searched specifically
+  for "LP relaxation unit square packing", "fractional packing duality square container" and found only
+  generic 2D bin-packing/cutting-stock LP-relaxation literature (item-area/container-area continuous bound,
+  online rectangle packing LP duality) with no connection to this x²-vs-⌊x⌋² asymptotic problem or to finite
+  n like s(11).
+- **No formal "grain"/crystalline-structure paper.** The closest is Bui's "good squares" reduction (F8),
+  which is a *removal* result (bad-tilt squares can be surgically deleted at no asymptotic cost) rather than a
+  positive structural theorem about grain count, grain size distribution, or grain-boundary energy. No
+  physics-style heuristic/crystalline literature on this specific discrete problem was found (searched
+  "square packing crystalline defects", "grain boundary unit square tiling" — only returned unrelated
+  materials-science hits).

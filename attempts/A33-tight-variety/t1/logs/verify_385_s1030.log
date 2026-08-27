@@ -1,0 +1,20 @@
+weights scaled by 103/100
+certificate: certs/cert_3.85_v1.json
+s = 77/20 (~3.8500000000), n = 12, atoms = 1492, total mass = 57133379/5000000 (~11.4266758000), margin = 0
+  ... 600000 boxes (299995 covered, 0 vacuous, 0 witnesses), stack 13, 25s
+  ... 1800000 boxes (899963 covered, 0 vacuous, 16 witnesses), stack 9, 77s
+  ... 2000000 boxes (999963 covered, 0 vacuous, 16 witnesses), stack 12, 87s
+  ... 2200000 boxes (1099962 covered, 0 vacuous, 16 witnesses), stack 14, 96s
+  ... 2400000 boxes (1199964 covered, 0 vacuous, 16 witnesses), stack 12, 105s
+boxes = 2899246  covered = 1449540  vacuous = 0  split = 1449666  exact atom checks = 4868840  max depth = 48  time = 128.2s
+depth histogram (covered leaves): 9:6 10:9 11:159 12:230 13:536 14:1131 15:1440 16:3272 17:4923 18:3822 19:6998 20:10573 21:7248 22:11876 23:16829 24:10943 25:23236 26:33661 27:18764 28:40577 29:58457 30:31387 31:72507 32:99825 33:50730 34:118116 35:173411 36:92520 37:160101 38:239591 39:60668 40:34075 41:61244 42:356 43:51 44:56 45:59 46:51 47:42 48:60
+FAIL: 40 witness boxes at depth 48: 4 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 36 undecided at this depth  [stopped at --max-witnesses]
+  worst witness: theta = 55.405936 deg, centre = (0.695488780, 1.963953972), exact mass = 99986529/100000000 (~0.999865290000)
+  5 witness clusters (theta~1deg, centre~0.05):
+    theta~ 55 deg centre~(0.70,1.95)  n=  8  min mass 0.999865290
+    theta~ 55 deg centre~(1.90,0.70)  n=  8  min mass 0.999865290
+    theta~ 34 deg centre~(0.70,1.90)  n=  8  min mass 1.048558540
+    theta~ 34 deg centre~(1.90,3.15)  n=  8  min mass 1.048558540
+    theta~ 34 deg centre~(1.95,0.70)  n=  8  min mass 1.048558540
+  witnesses written to certs/cert_3.85_v1_s1030.witnesses.json
+  report written to certs/cert_3.85_v1_s1030.report.json

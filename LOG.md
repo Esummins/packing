@@ -957,3 +957,27 @@ affordable cost estimate for closing 3.84.
   recipe recorded. If a strong relaxation ever exists, its certificates are Lean-portable.
 - I-L14 closed on the idea board; registry row final. A33 (I-L13 tight variety + grain) still
   running: eta(s) gate in flight, T2/T3b queued.
+
+## 2026-08-27 — A33 closed: grain conjecture refuted in range; tight-sum cuts + s(12) >= 3.90 banked
+- Lemma A33.1 (equality pigeonhole) formalized: field total 11+eta => every subfamily I of any
+  11-packing has coverage sum in [|I|, |I|+eta], escape <= eta; eta < 0 recovers Theorem 1; A33.4:
+  eta < 1 excludes 12-packings.
+- eta(s) gate: 0.046 (3.84, float; certified 0.3229 — tangency cluster blocks a tighter seal, G5)
+  -> 0.243 (s-hat, float; bracket [0.193, 0.4254 certified]). Linear, slope ~5.3.
+- T2 verdict: single-square variety pinning weak at s-hat (48% excluded, one blob, wall bands
+  alive); multi-field stacking structurally dead (near-optimal fields share the tight set of the
+  essentially unique optimal fractional packing). THE WIN: k-subset TIGHT-SUM CUTS — 51.5% of
+  disjoint pairs in TxT violate cov(x)+cov(y) <= 2+eta; deployable as side rows in the A29 tree and
+  I-L12 cells. Trump canary PASS everywhere.
+- T3 verdict: PI's grain conjecture REFUTED in measured range — eta/rho RISE with n (n=11 is the
+  method's best non-trivial case); crystal dips exact (eta(m^2) = 0); characterization eta(n) = 0
+  iff LP alone settles s(n). PI's constant-wastage-per-perimeter is real (flat 0.26-0.27 in records
+  to n=100) but the LP gap grows regardless. Literature section F added (CG-2020 flaw; Bui/
+  McClenagan repairs; Bui's near-upright crystallization theorem; no prior LP treatment).
+- NEW CERTIFIED THEOREMS: s(12) >= 3.877084 and s(12) >= 39/10 = 3.90 (vs published 3.7889), exact
+  verifier PASS, independently re-verified, Lean-portable. tau*=12 crossing at ~3.95-3.97 = 99% of
+  the n=12 record side 4.0 => an n=12 campaign (LP + tight-sum-cut tree) may NEARLY CLOSE s(12)=4 —
+  the natural sequel.
+- Endgame scoreboard after A30-A34: five approaches measured (coordinate cover, flat enumeration,
+  structure B&B, sparse SOS, tight-variety pinning) — all dead or weak AT s-hat; the live equity is
+  tight-sum cuts at 3.84-3.85 (fallback tree), the n=12 target, and the corpus write-up.

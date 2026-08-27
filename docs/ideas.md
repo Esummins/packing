@@ -180,7 +180,18 @@ stress lemma (advisor, in progress) → per-cell exclusion implementation (Opus,
 Status: open; pilot after A27's verdict.
 
 **I-L13. Equality-pigeonhole / tight-variety collapse (advisor, 2026-08-26; PI grain refinement).**
-STATUS: active — A33 (Fable). A guard field of total 11+eta at side s0 forces EVERY square of any
+STATUS: **closed (A33, 2026-08-27, done-mixed).** Lemma formalized (A33.1-A33.4, generalizes Thm 1).
+eta(s) measured: 0.046 at 3.84 -> 0.243 at s-hat (linear, slope 5.3). VARIETY COLLAPSE DEAD: single
+fields exclude <= 48% of placement volume at s-hat (one giant component; walls 99% alive) and
+multi-field stacking buys 4.6% (complementary slackness: all near-optimal fields share the
+fractional-packing support — a structural obstruction, not a sampling one). GRAIN CONJECTURE
+REFUTED for n <= 26: eta RISES with n (0 exactly at crystals and at n=5,10; n=11 is the method's
+best non-trivial case); eta(n)=0 iff the LP alone settles s(n). WHAT SURVIVES: (1) the joint
+k-subfamily bound bites hard (51.5% of disjoint pairs in T x T violate cov+cov <= 2+eta) =>
+"tight-sum cuts" as case-tree side rows, incl. certified eta(3.84) = 0.3229 for the paused A29
+tree; (2) **NEW CERTIFIED THEOREMS s(12) >= 3.877084 and s(12) >= 3.90** (Cor. A33.4, total < 12
+fields; both exact-verifier PASS) vs published 3.7889, with the tau*=12 crossing at ~3.95-3.97 =
+99% of the n=12 record side => an n=12 campaign is the natural sequel. See attempts/A33-tight-variety/. A guard field of total 11+eta at side s0 forces EVERY square of any
 11-packing to cover guard mass in [1, 1+eta] and caps escaped mass at eta (pure pigeonhole on the
 equality case we never exploited). GLOBAL, family-killing, stacks over multiple fields (intersection
 of near-tight varieties), composes with the case tree and the wastage ledger (escape = wastage in
