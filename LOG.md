@@ -939,3 +939,21 @@ affordable cost estimate for closing 3.84.
 - Both leads run on Fable (PI: Opus hopeless at theoretical math; Opus/Sonnet subagents for coding
   only). Machine shared 3+3 heavy processes; A29 remains paused (PI has not asked to resume).
 - Idea 3 (structure ladder at s >= s-hat) shelved by PI for now — on the board, not active.
+
+## 2026-08-27 — A34 closed: NO-GO with a new collapse theorem (advisor-reviewed: PASS)
+- COLLAPSE THEOREM (A34, Fable lead; advisor verified the proof): any sparse moment relaxation of
+  the lifted POP whose every clique carries <= m < n squares is feasible at s(m) at EVERY level with
+  EVERY cut valid for m-square sub-packings — construction: uniform INJECTIVE assignment of each
+  clique's squares to an optimal m-packing's placements; marginals agree, measures never glue (RIP
+  failure as a hard ceiling, the anti-correlated-triangle phenomenon). 7 machine confirmations
+  (Tier A n-independent in two cut settings x three levels). Consequences: pair cliques cap at
+  s(2)=2; even 10-square cliques cap at s(10)=3.7071 < Stromquist 3.7889 — NO intermediate design
+  can beat known results; the full 44-var clique is mandatory, and there level 3 = 16215-block
+  (unreachable), while affordable level 2 is distance-geometry strength (projected 2.3-2.9 at n=11).
+  Retro-explains A17-A20's wall. Reusable no-go criterion for all future sparse-relaxation ideas.
+- Trust chain VALIDATED end-to-end: exact rational SOS certificate s(2) >= 1.7070435822
+  (461253418188326279/270206000000000000), independent exact checker PASS (53 PSD blocks, LDL^T
+  over Q, 4 corruption gates); Grams provably singular at the optimum — adaptive-shift rounding
+  recipe recorded. If a strong relaxation ever exists, its certificates are Lean-portable.
+- I-L14 closed on the idea board; registry row final. A33 (I-L13 tight variety + grain) still
+  running: eta(s) gate in flight, T2/T3b queued.

@@ -191,7 +191,17 @@ so eta should FALL as n grows and n=11 sits near the WORST case for this method 
 more forcing power at high n, worth testing there (connect to Erdos-Graham-type wastage asymptotics).
 
 **I-L14. Sparse SOS / Lasserre hierarchy on the lifted POP (advisor, 2026-08-26).**
-STATUS: active — A34 (Fable). Lift the separating direction per pair (2 vars each) so the packing
+STATUS: closed NO-GO — A34 (Fable, 2026-08-27). Level 2 cannot beat 3.83 and the reason is now a
+theorem, not a solver limit: (i) COLLAPSE THEOREM — any clique design whose cliques carry ≤ m < n
+squares is feasible at s(m) at EVERY level with any sub-packing-valid cuts (uniform-injective-
+assignment local measures; RIP failure = hard ceiling), so pair cliques cap at s(2)=2 (measured:
+level-2/3 values n-independent, 4 confirmations) and even 10-square cliques cap at s(10)=3.707 <
+Stromquist 3.789; (ii) the mandatory full 44-var clique at level 2 is distance-geometry strength
+only — measured deficit GROWS with n (1.79 vs 2 at n=3, 1.86 vs 2.707 at n=5), projecting ~2.3-2.9
+at n=11; (iii) level ≥ 3 on 44 vars = 16215-block, unreachable (Mosek included; license immaterial).
+The A15 θ′ evidence does not transfer: discretised-graph level 2 ≠ continuum level 2. Salvage: the
+collapse theorem as a screening test for all future sparse-relaxation proposals; degree-2 circle-form
+POP + exact SOS checker certs/verify_sos.py in attempts/A34-sos-pilot/. See notes/verdict.md. Lift the separating direction per pair (2 vars each) so the packing
 set becomes ONE basic semialgebraic set in ~145 vars, polynomial in t = tan(theta/2); the projection
 onto configurations is exactly the packings, so min over the lift = s(11). Lasserre converges;
 correlative/term sparsity (TSSOS) + D4xS11 symmetry make level 2 plausibly computable. Evidence the
