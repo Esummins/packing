@@ -1,0 +1,53 @@
+effect 1: cone-aliveness with the extended generator set ...
+  conj  Z0: 20 (none) -> 20 (aux) -> 21 (aux+dom)  of 42 rows
+  selx  Z0: 17 (none) -> 18 (aux) -> 20 (aux+dom)  of 41 rows
+  sely  Z0: 18 (none) -> 18 (aux) -> 20 (aux+dom)  of 41 rows
+effect 2: (W-prime) wedge over the queue ...
+    conj       0/ 17625 dead=1 alive=0 [0s]
+    conj    2000/ 17625 dead=2001 alive=0 [95s]
+    conj    4000/ 17625 dead=4001 alive=0 [178s]
+    conj    6000/ 17625 dead=6001 alive=0 [282s]
+    conj    8000/ 17625 dead=8001 alive=0 [380s]
+    conj   10000/ 17625 dead=9575 alive=426 [482s]
+    conj   12000/ 17625 dead=10718 alive=1283 [575s]
+    conj   14000/ 17625 dead=12444 alive=1557 [672s]
+    conj   16000/ 17625 dead=14210 alive=1791 [767s]
+  conj : 17625 queue -> 15600 (W-prime) dead, 2025 alive [847s]
+    selx       0/ 12375 dead=1 alive=0 [0s]
+    selx    2000/ 12375 dead=1919 alive=82 [52s]
+    selx    4000/ 12375 dead=3059 alive=942 [94s]
+    selx    6000/ 12375 dead=4588 alive=1413 [137s]
+    selx    8000/ 12375 dead=5976 alive=2025 [178s]
+    selx   10000/ 12375 dead=7301 alive=2700 [219s]
+    selx   12000/ 12375 dead=8788 alive=3213 [264s]
+  selx : 12375 queue -> 9000 (W-prime) dead, 3375 alive [273s]
+    sely       0/  5625 dead=1 alive=0 [0s]
+    sely    2000/  5625 dead=1801 alive=200 [55s]
+    sely    4000/  5625 dead=2443 alive=1558 [104s]
+  sely : 5625 queue -> 3600 (W-prime) dead, 2025 alive [144s]
+task 3: sampled per-stratum re-derivation ...
+    [ 1/30] B=[0, 2, 22, 26, 37, 40, 41] k= 7 W=FAIL h_W=0.00075029 Vfloor=0.0544 86.2+1.3s
+    [ 6/30] B=[0, 2, 8, 12, 21, 26]      k= 6 W=OK  h_W=0.00076081 Vfloor=2.0647 44.0+0.6s
+    [11/30] B=[0, 1, 2, 8, 9, 12, 22, 26 k=12 W=OK  h_W=0.00068714 Vfloor=1.5014 91.0+1.3s
+    [16/30] B=[0, 2, 3, 4, 9, 22, 36]    k= 7 W=OK  h_W=0.0011481 Vfloor=1.4952 35.3+0.6s
+    [21/30] B=[0, 2, 3, 8, 9, 23, 37, 41 k= 8 W=OK  h_W=0.00096707 Vfloor=1.1629 73.0+1.2s
+    [26/30] B=[0, 2, 3, 4, 10, 21, 22, 2 k=10 W=OK  h_W=0.00078607 Vfloor=1.4952 44.3+0.6s
+{
+ "n_sampled": 30,
+ "n_W_certified": 25,
+ "W_success_rate": 0.8333333333333334,
+ "n_V_all_selections_positive": 30,
+ "secs_W_full_menu_median": 44.16264092922211,
+ "secs_W_full_menu_max": 91.02810788154602,
+ "secs_V_full_menu_median": 0.633082389831543,
+ "h_W_min_min": 0.000659782470703125,
+ "h_W_min_max": 0.001265946533203125,
+ "h_W_over_rN_min": 1.3195649414062498,
+ "n_reaching_v1_radius": 0,
+ "Hbar_W_max": 68.87023839065614,
+ "eps_w_max": 6.162066290170681e-46,
+ "V_floor_min_over_sample": 0.05442006143250648,
+ "note": "a per-stratum certificate is the FULL tie menu (32 selections for selx/sely, 64 for conj); the stratum is only certified when every selection is, so secs_*_full_menu is the honest per-stratum price.  m2b_global.json prices the same coverage at 128 certificates for the ENTIRE lattice, so per-stratum re-derivation is never the right way to pay for this queue."
+}
+-> C:\Users\esumm\code\packing\attempts\A35-escape-complex\results\m2b_queue.json
+

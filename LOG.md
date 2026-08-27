@@ -992,3 +992,27 @@ affordable cost estimate for closing 3.84.
 - Risks to measure: truncation K (codim beyond which slack kills) and cascade branching (new
   contacts subdividing routes). A35 measures both + certificate reach + stratum counts; deliverable
   = desktop-days estimate for certifying Trump's full basin boundary at s-hat.
+
+## 2026-08-27 — A35 closed: GO as a tool, NO-GO as a basin closer. A30's per-CP assassin is dead
+- PI's I-L15 (semantic cells, not metric balls) VALIDATED: Trump's jam neighbourhood covered by
+  ~10^2 exactly re-checkable certificates in MINUTES on the desktop, vs A30's c^33 ~ 8e8-cell shell
+  (1e5-5e7 CPU-h). The jam has NO escape routes: every break set empty, load-refuted, or wedged
+  (min wedge strength 0.577); cascade trivial; zero sigma dips in ~4,700 followed segments.
+- Modeling bugs found & repaired en route (M4/M1b/M3b/M2b, each caught by independent checkers):
+  A22's basis misses the exact (1,3) corner-corner contact and used dist surrogates for two flush
+  contacts (A22's own theorem survives — superset optimality); m1b minimal-dead enumeration missed
+  4 triples (20,700 sets would have been silently uncovered); a positive-omega-on-dominance-rows
+  soundness bug self-caught. Lessons recorded: surrogate rows = valid aux inequalities, never
+  stratification coordinates; minimal-dead searches must run past size 2.
+- The v2 25,050-stratum explosion proven an ARTIFACT: aux dist rows restored as valid inequalities
+  kill both flat seeds at first order and yield a UNIVERSAL stratum-independent certificate — 64
+  certs cover all 2^42 break sets, TRUE SURVIVORS 0, 553 s (vs 12.8 CPU-days per-stratum).
+- Composed theorem: sigma >= s-hat, equality iff z-hat, all break sets, both FJ branches, on
+  box(z-hat, 0.25 r_N) — currently SUBSUMED IN REACH by A22 (structure/cost vastly better, radius
+  worse), conditional on an endpoint-row lemma. Two bounded levers to beat A22's reach: L1 the
+  endpoint-row lemma, L2 omega-scale normalization (per-stratum form already reaches 1.6-3.1 r_N).
+- Assassins named: semantic cliff R* ~ 0.006 (gained contacts revive 82% of sets; the ridge sits AT
+  the cliff — the full basin boundary is where the method's language expires); the GLOBAL wall
+  (A31/A32 1e30, LP ceiling 3.83) untouched — A35 removes the per-critical-point factor only.
+- Cost: ~1 desktop-hour for the whole pilot; ~10-30 min per critical point steady-state; all 36 A04
+  optima ~ 1 desktop-day (each needs its own contact audit first).
