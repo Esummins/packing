@@ -234,3 +234,17 @@ constructions = upright bulk + tilted shear strips. Candidate theorem: wastage >
 boundaries of length x f(misorientation), f(0) = 0 — forces few-grain structure at optimality.
 Testable: eta(n) dips at m^2 / m^2+m, peaks at maximal incommensurability; per-length boundary
 wastage in record packings converges to a constant; tight variety concentrates on lattice sheets.
+
+**I-L15. Escape-complex inflation — semantic basin certification (PI, 2026-08-27).**
+STATUS: active — A35 (Fable). The A30 metric-shell wall (1.86^33 boxes) is an ARTIFACT of covering a
+semantic object with metric balls: the 33 axes mean slide/rotate moves whose character changes only
+at contact-change hypersurfaces. Decompose the neighbourhood of a certified jam (Trump: 38 contacts)
+into ESCAPE STRATA — "these k contacts break, the rest hold, these new pairs may touch" — each a
+fixed smooth system on which ONE dual certificate (A22-style positive spanning / Farkas) can cover
+the whole stratum to its combinatorial boundary, no interval boxes. Low codim = few strata (C(38,k));
+high codim = loose configurations = D2/slack + LP far-field territory. Mountain-pass logic made
+certifiable: optimality of the jam = every escape route runs uphill. Composes with the PI's
+bidirectional protocol (gaps -> minimizer -> new certified CP or death). Risks to measure: the
+truncation constant K (codim beyond which slack always kills) and cascade branching (new contacts
+forming along a route re-subdivide it). Evades A30 (no metric boxes) and A31/A32 (perturbations of
+ONE known graph, not all graphs).
