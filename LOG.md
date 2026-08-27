@@ -981,3 +981,14 @@ affordable cost estimate for closing 3.84.
 - Endgame scoreboard after A30-A34: five approaches measured (coordinate cover, flat enumeration,
   structure B&B, sparse SOS, tight-variety pinning) — all dead or weak AT s-hat; the live equity is
   tight-sum cuts at 3.84-3.85 (fallback tree), the n=12 target, and the corpus write-up.
+
+## 2026-08-27 — I-L15 (PI): escape-complex inflation; A35 dispatched (Fable lead)
+- PI diagnosis of the A30 wall: the 1.86^33 shell is an artifact of metric boxes over a semantic
+  object; the basin should be a cell complex cut along contact-change hypersurfaces — per stratum a
+  FIXED smooth system where ONE dual certificate covers the whole cell to its combinatorial
+  boundary. Escape strata of Trump's 38 contacts, codim-graded; loose regime handed to D2 + LP
+  far-field; PI's bidirectional gap protocol (minimizer -> new certified CP or death) patrols the
+  seam. Evades A30 (no boxes) and A31/A32 (one known graph's perturbations, not all graphs).
+- Risks to measure: truncation K (codim beyond which slack kills) and cascade branching (new
+  contacts subdividing routes). A35 measures both + certificate reach + stratum counts; deliverable
+  = desktop-days estimate for certifying Trump's full basin boundary at s-hat.
