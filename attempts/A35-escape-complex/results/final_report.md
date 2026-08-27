@@ -202,3 +202,32 @@ theory: notes/theory.md; verification: notes/verification_log.md. Measurements: 
 m2_*, m3_*, m4_*, m1b_*, m2b_*, m3b_* (+ code/ per-task, re-checkers m2_check_route.py,
 m2_check_inflation.py, m2b_check.py; certificate stores results/m2_certs/ 224, results/m2b_certs/
 288, results/m3_certs.json, results/m3b_certs.json). Registry row: attempts/REGISTRY.md A35.
+
+---
+
+# ADDENDUM — A36 (the two levers): the composed theorem now STRICTLY DOMINATES A22
+
+PI directive after A35 closed: chase L1 (endpoint-row lemma) and L2 (omega-scale). Outcome
+(attempts/A36-levers/, one analysis pass + one 12-min compute run, 17 certificates, 339 checks,
+5/5 corruption gates; independently re-verified by the lead):
+
+**THEOREM (A36).** Every feasible 11-square packing configuration z with
+||z − z-hat||_inf ≤ 3.7e-3 (safety-margin radius; certified maximum 3.779e-3 = 7.56 × r_N)
+has σ(z) ≥ s-hat, with equality iff z = z-hat. All break sets at once, both FJ branches
+(the barrier is stratum-blind — stationarity is never used), on the repaired basis v3.
+
+- L1 discharged by the OVER-ESTIMATE PRINCIPLE: a separation row with any corner over-estimates
+  the axis gap, so barrier validity needs only "the owner edge separates", proved as a certified
+  16-fold killed-axis disjunction (margins ~0.99). The endpoint/dominance caveat (M2b-a) is
+  gone, and tie menus leave the value layer entirely. L1 holds to h = 5.22e-3 (binder: A22's
+  old-row tangential margins — the next ceiling).
+- L2's decisive lever was a THIRD one, found by the run: max-form pinning
+  (kappa_eff = max_r c_r/omega_r = 19.3 instead of kappa/alpha = 784) — worth ×11.4 in radius;
+  L1/basis v3 add +2.4%; a branch-free UNIVERSAL certificate on A22's own rows + the two aux
+  dist rows already reaches 7.38 × r_N (minimal trust chain).
+- Binding constant now: the second-order term kappa_eff·Hbar·h/(1−beta); 4.8% more radius
+  available from a re-fit pin basis (declined for trust-chain hygiene).
+- Still open: G1 (ridge handoff / semantic cliff R* ≈ 0.006 — unchanged), and the global wall.
+
+Verdict upgrade: A35's "method validated, reach subsumed by A22" becomes "method strictly
+dominates A22 in reach (×7.4–7.6), structure (FJ-complete, stratum-blind), and cost (minutes)".

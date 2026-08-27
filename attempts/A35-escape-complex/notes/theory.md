@@ -1,5 +1,18 @@
 # A35 theory: escape-complex stratification of Trump's jam (Fable, 2026-08-27)
 
+A36 OUTCOME (2026-08-27, attempts/A36-levers/ — the levers landed; supersedes the reach caveats
+below). COMPOSED THEOREM (A36): every feasible 11-square packing configuration z with
+||z - z-hat||_inf <= 3.7e-3 (safety-margin radius; certified maximum 3779/10^6 = 3.779e-3 =
+7.56 x r_N) has sigma(z) >= s-hat, with equality iff z = z-hat. Stratum-blind (all break sets,
+both FJ branches, no stationarity used), 17 IV certificates, standalone re-checker, 5/5
+corruption gates. STRICTLY DOMINATES A22 (radius x7.56). Ingredients: L1 branch-disjunction
+lemma (over-estimate principle: a sep row with ANY corner over-estimates the axis gap, so
+"axis separates" => all four corner rows valid — dominance never needed by barriers; 16
+killed-axis IV refutations; h_L1_max = 5.22e-3 bound by A22's old-row tangential margins),
+L2 max-form pinning (kappa_eff = max_r c_r/omega_r = 19.32 vs kappa/alpha = 784 — the decisive
+x11.4), iterated dichotomy. Binding constant now: kappa_eff * Hbar * h/(1-beta) (second-order).
+G1 (ridge handoff) remains open; G2/M2b-a (endpoint rows) DISCHARGED by L1.
+
 T0 (per-stratum soundness + composition) and T1 (truncation lemma draft) for I-L15.
 Builds on: drain_lemma.md v3 (D1, D2, D3', T3), A22's certificate (z-hat, 38 geometric rows,
 r_N = 1/2000, multiplier identity, 68 positive-spanning certificates), structure_lemmas.md L1-L7.

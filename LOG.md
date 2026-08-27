@@ -1020,3 +1020,19 @@ affordable cost estimate for closing 3.84.
 ## 2026-08-27 — A36 dispatched: chase A35's levers L1 (endpoint-row lemma) + L2 (omega scale)
 - PI directive. Target: composed escape-complex theorem on a box strictly larger than A22's r_N —
   turning "method validated" into "method dominates A22." A35 lead resumed with context.
+
+## 2026-08-27 — A36 closed: composed theorem STRICTLY DOMINATES A22 — 7.56x radius
+- THEOREM (A36, quoted at safety radius): every feasible 11-square configuration z with
+  ||z - z-hat||_inf <= 3.7e-3 (certified max 3.779e-3 = 7.56 r_N) has sigma(z) >= s-hat, equality
+  iff z = z-hat. Stratum-blind (all 2^44 break sets, both FJ branches, stationarity never used).
+  17 IV certificates, standalone re-checker (339 checks, independently re-run by the lead), 5/5
+  corruption gates. ~12 min of compute. Volume vs A22's box: ~7.56^33 ~ 10^29 x larger.
+- Honest attribution: the L1 endpoint lemma (over-estimate principle: any-corner separation rows
+  over-estimate the axis gap, so barriers never need dominance rows) is sound, discharges M2b-a for
+  good, but bought +2.4%. The decisive lever was DISCOVERED, not ordered: MAX-FORM PINNING —
+  kappa_eff = max_r(|Y_ir|/omega_r) = 19.3 vs kappa/alpha = 784 => x11.4 radius. Branch-free
+  certificate on A22's own rows + 2 aux dist rows already reaches 7.38 r_N on the minimal trust
+  chain.
+- Standing limits: local theorem; ridge handoff G1 + semantic cliff R* ~ 0.006 unchanged (current
+  radius = ~60% of the cliff; next ceiling = A22 old-row tangential margins at 5.2e-3); global
+  far-field wall untouched. Binding constant kappa_eff*Hbar*h/(1-beta).
