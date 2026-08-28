@@ -1104,3 +1104,13 @@ affordable cost estimate for closing 3.84.
   fallback tree and the n = 12 campaign (A33) are unaffected and remain the affordable targets.
   T0 composition note (seams S1-S8) in attempts/A38-root-power/notes/T0_composition.md; full
   report attempts/A38-root-power/results/rootpower_report.md; registry row final.
+
+## 2026-08-28 — PI verdict on A38: a win (assassin named, levers actionable). A39/A40/A41 dispatched in parallel
+- PI reframing: compute is down to reasonable numbers with a clear plan to kill the pure-guard-LP
+  asymptotics. Two PI options (bottom-up basin growth crossing only limiting boundaries; better
+  top-down deletion) + advisor's third (early certification — the root certified from an
+  UNCONVERGED LP in 1.7s; A27's rule gated certification on convergence, so depth nodes never
+  tried). All three fired in parallel: A39 (Opus: cert-in-the-loop calibration + field reseal),
+  A40 (Fable: surgery-lemma basin growth to h ~ 0.03 — the cliff is the enumeration's limit, not
+  the barrier's; tangential margins bind and they're per-row), A41 (Fable: S1 seam design with the
+  parametrized cost formula). Decision point after all three report.
