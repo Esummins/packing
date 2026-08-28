@@ -1,0 +1,42 @@
+=== LONG-LIMIT probe (A38-G7): 1 depth-2 node, 1800 s cap, warm (runs beside P2b) ===
+=== P2B reseal ===
+[init] s=3.877084 rows=26894 orbits=3349
+[it0] tau=11.244816546 (A33 r7: 11.244816546)  909s
+[it0] tau=11.244817 total@1=11.245520  verify@251/250 -> FAIL (189s)  witnesses=196
+[it0] +904 rows -> 27798  (1099s)
+[it1] tau=11.244859 total@1=11.245676  verify@251/250 -> FAIL (221s)  witnesses=216
+[it1] +1088 rows -> 28886  (2099s)
+[it2] tau=11.244894 total@1=11.245844  verify@251/250 -> FAIL (415s)  witnesses=168
+[it2] +920 rows -> 29806  (2879s)
+[it3] tau=11.244969 total@1=11.245764  verify@251/250 -> FAIL (843s)  witnesses=168
+[it3] +1056 rows -> 30862  (3881s)
+[it4] tau=11.244993 total@1=11.245832  verify@251/250 -> FAIL (228s)  witnesses=120
+[it4] +648 rows -> 31510  (4243s)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A39-early-cert\code\reseal_shat.py", line 240, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A39-early-cert\code\reseal_shat.py", line 223, in main
+    fld, tau = solve_field(st, rows, "%s_it%d" % (a.tag, it + 1), t0, solver=a.solver, w0=w_prev)
+               ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A39-early-cert\code\reseal_shat.py", line 123, in solve_field
+    h.run()
+    ~~~~~^^
+MemoryError: bad allocation
+=== P2B seal scan on the last field ===
+cert cert_a39_it4.json total@1 = 1405729/125000 = 11.245832000 (eta 0.245832000)
+  scale 101/100 -> FAIL  eta=0.358290  (4s)
+  scale 127/125 -> FAIL  eta=0.425765  (28s)
+  scale 51/50 -> PASS  eta=0.470749  (74s)
+results/p2b/certs/A39_measure_feasible_3.877084.json: atoms 1544 total 71692179/6250000 = 11.470748640 eta = 0.470748640
+sealed results/p2b/certs/A39_measure_feasible_3.877084.json standalone -> PASS (78s)
+{
+ "cert": "results/p2b/certs/cert_a39_it4.json",
+ "total1": "1405729/125000",
+ "min_pass_scale": "51/50",
+ "eta_cert": 0.47074864000000005,
+ "sealed": "results/p2b/certs/A39_measure_feasible_3.877084.json",
+ "sealed_standalone_rc": 0,
+ "sealed_verify_s": 77.7156286239624
+}
+=== A39 TAIL ALL DONE ===

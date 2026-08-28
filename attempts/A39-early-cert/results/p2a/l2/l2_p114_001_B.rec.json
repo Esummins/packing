@@ -1,0 +1,97 @@
+{
+ "rule": "A39-earlycert",
+ "s_rat": "969271/250000",
+ "s": 3.877084,
+ "budget": 10,
+ "tag": "l2_p114_001",
+ "boxes": [
+  {
+   "x0": 2.46263075,
+   "x1": 2.515039625,
+   "y0": 2.357813,
+   "y1": 2.4102218750000004,
+   "th0": 7.5,
+   "th1": 15.0
+  }
+ ],
+ "nofams": [],
+ "eps_geo": 0.0001,
+ "time_limit": 180.0,
+ "field": {
+  "core_mlow": [
+   0.5519409840000001
+  ],
+  "thr_cert": 1.425399552,
+  "eta": 0.425399552,
+  "thr_node": 1.425399552
+ },
+ "tau": 10.00000000000365,
+ "slack": 3.650413304967515e-12,
+ "converged": false,
+ "minmass": 1.2261038777034785e-08,
+ "maxcov": 2.99999999954879,
+ "n_rows": 8126,
+ "n_orbits": 4297,
+ "last_added_rows": 387,
+ "iters": 6,
+ "status_a27": "undecided",
+ "cert_attempts": [
+  {
+   "it": 0,
+   "tau": 9.999999999999996,
+   "skipped": "tau_too_high",
+   "t": 17.372239589691162
+  },
+  {
+   "it": 1,
+   "tau": 9.999999999998908,
+   "skipped": "tau_too_high",
+   "t": 31.75027632713318
+  },
+  {
+   "it": 2,
+   "tau": 9.750000000000098,
+   "scale": 1.025230769230759,
+   "total": 9.996011,
+   "atoms": 41,
+   "rc": 1,
+   "verify_s": 2.2219629287719727,
+   "t": 77.98361659049988,
+   "tail": [
+    "boxes = 33621  covered = 16687  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 16886  exact atom checks = 18193  max depth = 56  time = 1.8s",
+    "FAIL: 48 witness boxes at depth 56: 25 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 23 undecided at this depth  [stopped at --max-witnesses]"
+   ],
+   "rows_fed": 91
+  },
+  {
+   "it": 3,
+   "tau": 10.000000000582697,
+   "skipped": "tau_too_high",
+   "t": 134.9339234828949
+  },
+  {
+   "it": 4,
+   "tau": 10.00000000041329,
+   "skipped": "tau_too_high",
+   "t": 169.87040901184082
+  },
+  {
+   "it": 5,
+   "tau": 10.000000000000083,
+   "skipped": "tau_too_high",
+   "t": 178.07056069374084
+  }
+ ],
+ "n_cert_attempts": 1,
+ "cert_verify_s": 2.2219629287719727,
+ "rows_fed_back": 91,
+ "final_attempt": {
+  "skipped": "tau_too_high",
+  "tau": 10.00000000000365
+ },
+ "status": "undecided",
+ "decided": false,
+ "certified": false,
+ "t_decide": null,
+ "seconds": 255.6292018890381
+}

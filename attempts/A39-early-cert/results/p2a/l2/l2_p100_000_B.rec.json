@@ -1,0 +1,100 @@
+{
+ "rule": "A39-earlycert",
+ "s_rat": "969271/250000",
+ "s": 3.877084,
+ "budget": 10,
+ "tag": "l2_p100_000",
+ "boxes": [
+  {
+   "x0": 2.46263075,
+   "x1": 2.515039625,
+   "y0": 2.04335975,
+   "y1": 2.095768625,
+   "th0": 60.0,
+   "th1": 67.5
+  }
+ ],
+ "nofams": [],
+ "eps_geo": 0.0001,
+ "time_limit": 180.0,
+ "field": {
+  "core_mlow": [
+   0.8109772960000001
+  ],
+  "thr_cert": 1.425399552,
+  "eta": 0.425399552,
+  "thr_node": 1.425399552
+ },
+ "tau": 9.000000000000004,
+ "slack": -0.9999999999999964,
+ "converged": false,
+ "minmass": 0.6122449057918231,
+ "maxcov": 1.3421052636840758,
+ "n_rows": 7640,
+ "n_orbits": 6930,
+ "last_added_rows": 0,
+ "iters": 3,
+ "status_a27": "undecided",
+ "cert_attempts": [
+  {
+   "it": 0,
+   "tau": 8.999999999999998,
+   "scale": 1.03,
+   "total": 9.270041,
+   "atoms": 68,
+   "rc": 1,
+   "verify_s": 5.691781759262085,
+   "t": 21.272910118103027,
+   "tail": [
+    "boxes = 113102  covered = 56414  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 56640  exact atom checks = 76772  max depth = 56  time = 5.4s",
+    "FAIL: 48 witness boxes at depth 56: 15 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 33 undecided at this depth  [stopped at --max-witnesses]"
+   ],
+   "rows_fed": 57
+  },
+  {
+   "it": 1,
+   "tau": 9.051282051283533,
+   "scale": 1.03,
+   "total": 9.322858,
+   "atoms": 70,
+   "rc": 1,
+   "verify_s": 6.693028926849365,
+   "t": 38.368913650512695,
+   "tail": [
+    "boxes = 131631  covered = 65690  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 65893  exact atom checks = 100972  max depth = 56  time = 6.3s",
+    "FAIL: 48 witness boxes at depth 56: 21 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 27 undecided at this depth  [stopped at --max-witnesses]"
+   ],
+   "rows_fed": 81
+  },
+  {
+   "it": 2,
+   "tau": 9.000000000527553,
+   "scale": 1.03,
+   "total": 9.270054,
+   "atoms": 86,
+   "rc": 1,
+   "verify_s": 9.238975524902344,
+   "t": 157.32012009620667,
+   "tail": [
+    "boxes = 177463  covered = 88616  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 88799  exact atom checks = 111021  max depth = 56  time = 8.9s",
+    "FAIL: 48 witness boxes at depth 56: 9 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 39 undecided at this depth  [stopped at --max-witnesses]"
+   ],
+   "rows_fed": 94
+  }
+ ],
+ "n_cert_attempts": 3,
+ "cert_verify_s": 21.623786211013794,
+ "rows_fed_back": 232,
+ "final_attempt": {
+  "rc": 1,
+  "tau": 9.000000000000004,
+  "scale": 1.03,
+  "total": 9.27011,
+  "verify_s": 10.620088577270508
+ },
+ "status": "undecided",
+ "decided": false,
+ "certified": false,
+ "t_decide": null,
+ "seconds": 215.064710855484
+}

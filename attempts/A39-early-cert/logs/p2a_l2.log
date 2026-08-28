@@ -1,0 +1,56 @@
+=== l2 stage B (48 nodes, warm, cap 180 s) ===
+population l2: 49 nodes
+resumed stage A from ledger: 1 certified, 48 to do
+  B l2_p100_000      undecided         215.1s attempts=3 fed=232
+  B l2_p100_001      undecided         332.2s attempts=2 fed=167
+  B l2_p100_010      undecided         394.0s attempts=4 fed=344
+  B l2_p100_011      undecided         227.2s attempts=2 fed=195
+  B l2_p114_000      undecided         266.5s attempts=2 fed=102
+  B l2_p114_001      undecided         255.7s attempts=1 fed=91
+  B l2_p114_010      undecided         261.1s attempts=2 fed=122
+  B l2_p114_011      undecided         419.9s attempts=4 fed=347
+  B l2_p210_000      undecided         219.4s attempts=2 fed=175
+  B l2_p210_001      undecided         418.3s attempts=2 fed=131
+  B l2_p210_010      undecided         252.0s attempts=2 fed=190
+  B l2_p210_011      undecided         238.6s attempts=2 fed=171
+  B l2_p215_000      undecided         511.6s attempts=3 fed=308
+  B l2_p215_001      undecided         283.9s attempts=2 fed=181
+  B l2_p215_010      undecided         233.4s attempts=3 fed=246
+  B l2_p215_011      undecided         536.0s attempts=2 fed=146
+  B l2_p61_000       undecided         528.4s attempts=2 fed=120
+=== l1u stage B (10 nodes, warm, cap 480 s) ===
+population l1u: 10 nodes
+resumed stage A from ledger: 0 certified, 10 to do
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A39-early-cert\code\p2a_run.py", line 202, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A39-early-cert\code\p2a_run.py", line 175, in main
+    for r in ex.map(stage_b, jobs):
+             ~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\process.py", line 617, in _chain_from_iterable_of_lists
+    for element in iterable:
+                   ^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 639, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 311, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 450, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+concurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.
+=== l2 stage C (cold, from scratch, cap 480 s) ===
+population l2: 49 nodes
+resumed stage A from ledger: 1 certified, 48 to do
+  C l2_p100_000      undecided         532.8s attempts=13
+  C l2_p100_001      undecided         710.0s attempts=10
+  C l2_p100_010      undecided         635.0s attempts=18
+  C l2_p100_011      undecided         795.5s attempts=14
+  C l2_p114_000      undecided         513.6s attempts=16
+  C l2_p114_001      undecided         634.2s attempts=10
+done 1345s -> C:\Users\esumm\code\packing\attempts\A39-early-cert\results\p2a\l2\ledger.json
+=== P2A ALL DONE ===

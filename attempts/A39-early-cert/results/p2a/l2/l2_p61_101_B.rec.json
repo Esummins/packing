@@ -1,0 +1,85 @@
+{
+ "rule": "A39-earlycert",
+ "s_rat": "969271/250000",
+ "s": 3.877084,
+ "budget": 10,
+ "tag": "l2_p61_101",
+ "boxes": [
+  {
+   "x0": 2.4102218750000004,
+   "x1": 2.46263075,
+   "y0": 1.938542,
+   "y1": 1.990950875,
+   "th0": 22.5,
+   "th1": 30.0
+  }
+ ],
+ "nofams": [],
+ "eps_geo": 0.0001,
+ "time_limit": 180.0,
+ "field": {
+  "core_mlow": [
+   1.005757704
+  ],
+  "thr_cert": 1.425399552,
+  "eta": 0.425399552,
+  "thr_node": 1.419641848
+ },
+ "tau": 9.000000000014309,
+ "slack": -0.9999999999856914,
+ "converged": false,
+ "minmass": 0.6558966102813996,
+ "maxcov": 1.3000000000036938,
+ "n_rows": 7314,
+ "n_orbits": 3397,
+ "last_added_rows": 879,
+ "iters": 2,
+ "status_a27": "undecided",
+ "cert_attempts": [
+  {
+   "it": 0,
+   "tau": 9.00000000000001,
+   "scale": 1.03,
+   "total": 9.270034,
+   "atoms": 68,
+   "rc": 1,
+   "verify_s": 3.937751531600952,
+   "t": 15.22801160812378,
+   "tail": [
+    "boxes = 87564  covered = 43670  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 43846  exact atom checks = 56033  max depth = 56  time = 3.6s",
+    "FAIL: 48 witness boxes at depth 56: 16 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 32 undecided at this depth  [stopped at --max-witnesses]"
+   ],
+   "rows_fed": 70
+  },
+  {
+   "it": 1,
+   "tau": 9.000000000002649,
+   "scale": 1.03,
+   "total": 9.270044,
+   "atoms": 89,
+   "rc": 1,
+   "verify_s": 2.685978889465332,
+   "t": 32.14102101325989,
+   "tail": [
+    "boxes = 60000  covered = 29865  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 30087  exact atom checks = 41774  max depth = 56  time = 2.4s",
+    "FAIL: 48 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 18 undecided at this depth  [stopped at --max-witnesses]"
+   ],
+   "rows_fed": 56
+  }
+ ],
+ "n_cert_attempts": 2,
+ "cert_verify_s": 6.623730421066284,
+ "rows_fed_back": 126,
+ "final_attempt": {
+  "rc": 1,
+  "tau": 9.000000000014309,
+  "scale": 1.03,
+  "total": 9.270082,
+  "verify_s": 2.755582332611084
+ },
+ "status": "undecided",
+ "decided": false,
+ "certified": false,
+ "t_decide": null,
+ "seconds": 217.13918709754944
+}

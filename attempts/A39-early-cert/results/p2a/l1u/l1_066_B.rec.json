@@ -1,0 +1,103 @@
+{
+ "rule": "A39-earlycert",
+ "s_rat": "969271/250000",
+ "s": 3.877084,
+ "budget": 10,
+ "tag": "l1_066",
+ "boxes": [
+  {
+   "x0": 2.357813,
+   "x1": 2.46263075,
+   "y0": 2.04335975,
+   "y1": 2.1481775,
+   "th0": 0.0,
+   "th1": 15.0
+  }
+ ],
+ "nofams": [],
+ "eps_geo": 0.0001,
+ "time_limit": 480.0,
+ "field": {
+  "core_mlow": [
+   0.637627376
+  ],
+  "thr_cert": 1.425399552,
+  "eta": 0.425399552,
+  "thr_node": 1.425399552
+ },
+ "tau": 10.000000000000629,
+ "slack": 6.288303211476887e-13,
+ "converged": false,
+ "minmass": 0.4991539770696243,
+ "maxcov": 2.000000000000368,
+ "n_rows": 9591,
+ "n_orbits": 7546,
+ "last_added_rows": 0,
+ "iters": 7,
+ "status_a27": "undecided",
+ "cert_attempts": [
+  {
+   "it": 0,
+   "tau": 9.913461538461526,
+   "scale": 1.0083258971871982,
+   "total": 9.996067,
+   "atoms": 137,
+   "rc": 1,
+   "verify_s": 1.2661657333374023,
+   "t": 29.887346267700195,
+   "tail": [
+    "boxes = 28047  covered = 13867  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 14132  exact atom checks = 15882  max depth = 56  time = 1.0s",
+    "FAIL: 48 witness boxes at depth 56: 39 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undecided at this depth  [stopped at --max-witnesses]"
+   ],
+   "rows_fed": 31
+  },
+  {
+   "it": 1,
+   "tau": 9.999999999961867,
+   "skipped": "tau_too_high",
+   "t": 80.87056636810303
+  },
+  {
+   "it": 2,
+   "tau": 10.000000000000206,
+   "skipped": "tau_too_high",
+   "t": 96.1273546218872
+  },
+  {
+   "it": 3,
+   "tau": 10.000000000000885,
+   "skipped": "tau_too_high",
+   "t": 128.05779123306274
+  },
+  {
+   "it": 4,
+   "tau": 9.999999998778597,
+   "skipped": "tau_too_high",
+   "t": 248.26690936088562
+  },
+  {
+   "it": 5,
+   "tau": 10.000000000000247,
+   "skipped": "tau_too_high",
+   "t": 342.4930498600006
+  },
+  {
+   "it": 6,
+   "tau": 10.0000000000001,
+   "skipped": "tau_too_high",
+   "t": 377.94615364074707
+  }
+ ],
+ "n_cert_attempts": 1,
+ "cert_verify_s": 1.2661657333374023,
+ "rows_fed_back": 31,
+ "final_attempt": {
+  "skipped": "tau_too_high",
+  "tau": 10.000000000000629
+ },
+ "status": "undecided",
+ "decided": false,
+ "certified": false,
+ "t_decide": null,
+ "seconds": 515.8380477428436
+}
