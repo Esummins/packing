@@ -1036,3 +1036,14 @@ affordable cost estimate for closing 3.84.
 - Standing limits: local theorem; ridge handoff G1 + semantic cliff R* ~ 0.006 unchanged (current
   radius = ~60% of the cliff; next ceiling = A22 old-row tangential margins at 5.2e-3); global
   far-field wall untouched. Binding constant kappa_eff*Hbar*h/(1-beta).
+
+## 2026-08-27 — campaign architecture settled; A37 (CP atlas) dispatched
+- PI's composed architecture confirmed with the value-discharge subtlety: far-field exclusion tests
+  STRUCTURALLY FAIL near any CP (a critical point is genuinely there, value > s-hat) — the per-CP
+  A35/A36 value certificate is the only discharge for those holes. CP list completeness NOT assumed:
+  BDBFS protocol (survivor -> minimizer probe -> new CP audited+certified, or death) keeps it sound.
+- Campaign map: Trump box DONE (7.56 r_N); A37 = CP atlas (~1 desktop-day, mechanical + audits);
+  A38 = root-power pilot at s-hat (THE last unmeasured factor: can the conditioned LP-tree with
+  tight-sum cuts/wastage/occupancy shrink the far field to the CP boxes at tractable node count);
+  seam = G1 cliff handoff. s(11) = s-hat exactly composes from D1 + far field + atlas + A36
+  uniqueness, IF A38's number is finite-and-desktop.
