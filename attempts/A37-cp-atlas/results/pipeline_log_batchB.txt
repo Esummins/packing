@@ -1,0 +1,1317 @@
+### family 19  md5=a059e64f start=18:26:56
+
+==========================================================================
+FAMILY 19 (catalogue 19)  s_min = 3.903006188193683
+catalogue: 13 pair contacts, 9 wall contacts, tilt [10, 40, 45, 45, 45], count 1
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 8.18e-09, ls_res 1.18e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 8.18e-09, ls_res 1.18e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 8.18e-09, ls_res 1.18e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 8.18e-09, ls_res 1.18e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (5.4s): tol_c 1e-07, GN residual 5.433e-71, |zhat - z0|_inf = 8.179e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 1.56e-46 1.56e-46 1.56e-46 1.56e-46 | next above tol: 5.705e-02
+  pair gap spectrum (low 6): -7.34e-46 -5.91e-46 -4.41e-46 -4.29e-46 -2.33e-46 -1.18e-46 | first above tol: 8.271e-04
+  pair ( 0, 5) POINT         gap +6.60e-47 owner 5 edge 3 dom [1] t ['-0.1239'] axes_tied 1
+  pair ( 2, 3) POINT         gap -5.91e-46 owner 3 edge 1 dom [3] t ['0.1863'] axes_tied 1
+  pair ( 2, 5) POINT         gap +1.42e-46 owner 2 edge 3 dom [2] t ['0.1896'] axes_tied 1
+  pair ( 2, 9) POINT         gap -4.29e-46 owner 2 edge 1 dom [3] t ['0.0887'] axes_tied 1
+  pair ( 2,10) POINT         gap -7.34e-46 owner 10 edge 2 dom [0] t ['0.4764'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +2.75e-46 owner 3 edge 0 dom [2, 3] t ['0.5681', '-0.4319'] axes_tied 2
+  pair ( 4, 7) CORNER-CORNER gap -3.89e-62 owner 4 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 4, 9) CORNER-CORNER gap +3.12e-46 owner 4 edge 1 dom [0, 3] t ['0.5000', '1.5000'] axes_tied 4
+  pair ( 4,10) POINT         gap -1.18e-46 owner 10 edge 1 dom [3] t ['-0.2193'] axes_tied 1
+  pair ( 5, 8) POINT         gap -4.41e-46 owner 5 edge 0 dom [2] t ['0.1528'] axes_tied 1
+  pair ( 5,10) POINT         gap -2.33e-46 owner 10 edge 3 dom [1] t ['0.1914'] axes_tied 1
+  pair ( 6, 8) FLUSH         gap +8.12e-47 owner 6 edge 2 dom [0, 1] t ['0.7598', '-0.2402'] axes_tied 2
+  pair ( 7, 9) CORNER-CORNER gap -3.89e-62 owner 7 edge 2 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (4,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,9): 4 tied separating axes
+  SURPRISE: pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.070e-01  sv_max_dropped 5.898e-16  rattlers [1]
+KKT: e_s in row space res 1.18e-02 (theta rows dropped: 2.45e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.18e-02); dropping the 11 theta equations makes it feasible (2.45e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((4, 7), [(4, 1), (7, 3)]), ((4, 9), [(4, 1), (4, 2), (9, 0), (9, 3)]), ((7, 9), [(7, 2), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902506183087365 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902006183087364 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901006183087363 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 2123453/81920000 (2.5921e-02), V = 3.877085125958
+  wall time 6.1s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 19 exit=0 end=18:27:03
+### family 20  md5=a059e64f start=18:27:03
+
+==========================================================================
+FAMILY 20 (catalogue 20)  s_min = 3.903040465950461
+catalogue: 13 pair contacts, 9 wall contacts, tilt [30, 40, 45, 45, 45], count 5
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 8.07e-09, ls_res 1.14e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 8.07e-09, ls_res 1.14e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 8.07e-09, ls_res 1.14e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 8.07e-09, ls_res 1.14e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.7s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 8.069e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 3.486e-02
+  pair gap spectrum (low 6): -9.19e-46 -7.38e-46 -6.69e-46 -4.29e-46 -2.30e-46 -1.94e-46 | first above tol: 1.686e-02
+  pair ( 0, 5) POINT         gap +5.53e-47 owner 5 edge 3 dom [1] t ['-0.1242'] axes_tied 1
+  pair ( 2, 3) POINT         gap -7.38e-46 owner 3 edge 1 dom [3] t ['0.1915'] axes_tied 1
+  pair ( 2, 5) POINT         gap -1.94e-46 owner 2 edge 3 dom [2] t ['0.1948'] axes_tied 1
+  pair ( 2, 9) POINT         gap -2.30e-46 owner 2 edge 1 dom [0] t ['0.0841'] axes_tied 1
+  pair ( 2,10) POINT         gap -9.19e-46 owner 10 edge 2 dom [0] t ['0.4841'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +3.14e-46 owner 5 edge 2 dom [0, 1] t ['0.5678', '-0.4322'] axes_tied 2
+  pair ( 4, 8) FLUSH         gap +0.00e+00 owner 4 edge 3 dom [1, 2] t ['0.5478', '-0.4522'] axes_tied 2
+  pair ( 5, 8) POINT         gap -6.69e-46 owner 5 edge 0 dom [3] t ['0.1526'] axes_tied 1
+  pair ( 5,10) POINT         gap -1.02e-46 owner 10 edge 3 dom [1] t ['0.1968'] axes_tied 1
+  pair ( 6, 7) CORNER-CORNER gap -1.56e-46 owner 6 edge 2 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 6, 9) CORNER-CORNER gap +0.00e+00 owner 6 edge 2 dom [0, 1] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 6,10) POINT         gap -4.29e-46 owner 10 edge 1 dom [0] t ['-0.2154'] axes_tied 1
+  pair ( 7, 9) CORNER-CORNER gap -1.56e-46 owner 9 edge 1 dom [2, 3] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (6,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (6,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (6,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (6,9): 4 tied separating axes
+  SURPRISE: pair (6,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (6,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (6,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (6,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (6,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (6,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.085e-01  sv_max_dropped 5.482e-16  rattlers [1]
+KKT: e_s in row space res 1.14e-02 (theta rows dropped: 2.18e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.14e-02); dropping the 11 theta equations makes it feasible (2.18e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((6, 7), [(6, 2), (7, 3)]), ((6, 9), [(6, 2), (6, 3), (9, 0), (9, 1)]), ((7, 9), [(7, 2), (9, 1)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902540461013225 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902040461013224 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901040461013223 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 850479/32768000 (2.5955e-02), V = 3.877085901687
+  wall time 5.4s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 20 exit=0 end=18:27:09
+### family 21  md5=a059e64f start=18:27:09
+
+==========================================================================
+FAMILY 21 (catalogue 21)  s_min = 3.903079441884515
+catalogue: 13 pair contacts, 9 wall contacts, tilt [40, 45, 45, 45], count 1
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 4.04e-09, ls_res 1.17e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 4.04e-09, ls_res 1.17e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 4.04e-09, ls_res 1.17e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 4.04e-09, ls_res 1.17e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.7s): tol_c 1e-07, GN residual 6.339e-71, |zhat - z0|_inf = 4.035e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 1.414e-01
+  pair gap spectrum (low 6): -6.94e-46 -5.71e-46 -3.40e-46 -1.56e-46 -1.56e-46 -1.33e-46 | first above tol: 3.064e-03
+  pair ( 0, 5) POINT         gap -6.94e-46 owner 5 edge 3 dom [2] t ['-0.1240'] axes_tied 1
+  pair ( 1, 3) POINT         gap -5.71e-46 owner 3 edge 1 dom [3] t ['0.1905'] axes_tied 1
+  pair ( 1, 5) POINT         gap +8.68e-46 owner 1 edge 3 dom [2] t ['0.1939'] axes_tied 1
+  pair ( 1, 9) POINT         gap -1.33e-46 owner 1 edge 1 dom [3] t ['0.0850'] axes_tied 1
+  pair ( 1,10) POINT         gap +7.36e-46 owner 10 edge 2 dom [0] t ['0.4764'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap -1.44e-48 owner 5 edge 2 dom [0, 1] t ['0.5681', '-0.4319'] axes_tied 2
+  pair ( 4, 7) CORNER-CORNER gap -1.56e-46 owner 7 edge 0 dom [1, 2] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 4, 9) CORNER-CORNER gap +3.12e-46 owner 4 edge 1 dom [0, 3] t ['0.5000', '1.5000'] axes_tied 4
+  pair ( 4,10) POINT         gap -3.40e-46 owner 10 edge 1 dom [3] t ['-0.2245'] axes_tied 1
+  pair ( 5, 8) POINT         gap -2.48e-47 owner 5 edge 0 dom [3] t ['0.1528'] axes_tied 1
+  pair ( 5,10) POINT         gap +5.92e-46 owner 10 edge 3 dom [1] t ['0.1956'] axes_tied 1
+  pair ( 6, 8) FLUSH         gap +0.00e+00 owner 6 edge 3 dom [1, 2] t ['0.9392', '-0.0608'] axes_tied 2
+  pair ( 7, 9) CORNER-CORNER gap -1.56e-46 owner 7 edge 3 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,9): 4 tied separating axes
+  SURPRISE: pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.074e-01  sv_max_dropped 5.247e-16  rattlers [2]
+KKT: e_s in row space res 1.17e-02 (theta rows dropped: 1.97e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.17e-02); dropping the 11 theta equations makes it feasible (1.97e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((4, 7), [(4, 1), (7, 0)]), ((4, 9), [(4, 1), (4, 2), (9, 0), (9, 3)]), ((7, 9), [(7, 3), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902579438893712 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902079438893712 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901079438893711 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 2129441/81920000 (2.5994e-02), V = 3.877085286062
+  wall time 5.5s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 21 exit=0 end=18:27:16
+### family 22  md5=a059e64f start=18:27:16
+
+==========================================================================
+FAMILY 22 (catalogue 22)  s_min = 3.903098025529174
+catalogue: 13 pair contacts, 9 wall contacts, tilt [0, 40, 40, 45, 45], count 4
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 8.63e-09, ls_res 1.16e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 8.63e-09, ls_res 1.16e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 8.63e-09, ls_res 1.16e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 8.63e-09, ls_res 1.16e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.6s): tol_c 1e-07, GN residual 6.339e-71, |zhat - z0|_inf = 8.626e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 6.962e-02
+  pair gap spectrum (low 6): -6.42e-46 -6.00e-46 -4.94e-46 -3.76e-46 -2.73e-46 -1.82e-46 | first above tol: 1.857e-02
+  pair ( 1, 7) CORNER-CORNER gap -1.56e-46 owner 7 edge 0 dom [1, 2] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 1, 9) CORNER-CORNER gap +3.12e-46 owner 1 edge 1 dom [0, 3] t ['0.5000', '1.5000'] axes_tied 4
+  pair ( 1,10) POINT         gap -1.82e-46 owner 10 edge 1 dom [3] t ['-0.2061'] axes_tied 1
+  pair ( 2, 3) POINT         gap +5.75e-46 owner 3 edge 1 dom [3] t ['0.1977'] axes_tied 1
+  pair ( 2, 5) POINT         gap -3.76e-46 owner 2 edge 3 dom [2] t ['0.2010'] axes_tied 1
+  pair ( 2, 9) POINT         gap -6.00e-46 owner 2 edge 1 dom [3] t ['0.0786'] axes_tied 1
+  pair ( 2,10) POINT         gap -4.94e-46 owner 10 edge 2 dom [0] t ['0.4965'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap -2.73e-46 owner 3 edge 0 dom [2, 3] t ['0.5676', '-0.4324'] axes_tied 2
+  pair ( 4, 6) FLUSH         gap +0.00e+00 owner 4 edge 3 dom [1, 2] t ['0.8502', '-0.1498'] axes_tied 2
+  pair ( 5, 6) POINT         gap -5.63e-47 owner 5 edge 0 dom [3] t ['0.1524'] axes_tied 1
+  pair ( 5, 8) POINT         gap +4.35e-46 owner 5 edge 3 dom [2] t ['-0.1245'] axes_tied 1
+  pair ( 5,10) POINT         gap -6.42e-46 owner 10 edge 3 dom [1] t ['0.2030'] axes_tied 1
+  pair ( 7, 9) CORNER-CORNER gap -1.56e-46 owner 7 edge 3 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (1,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (1,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,9): 4 tied separating axes
+  SURPRISE: pair (1,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (1,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.090e-01  sv_max_dropped 5.742e-16  rattlers [0]
+KKT: e_s in row space res 1.16e-02 (theta rows dropped: 6.86e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.16e-02); dropping the 11 theta equations makes it feasible (6.86e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((1, 7), [(1, 1), (7, 0)]), ((1, 9), [(1, 1), (1, 2), (9, 0), (9, 3)]), ((7, 9), [(7, 3), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902598020873486 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902098020873485 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901098020873484 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 1065469/40960000 (2.6012e-02), V = 3.877085594116
+  wall time 5.3s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 22 exit=0 end=18:27:22
+### family 23  md5=0eae05c8 start=18:27:22
+
+==========================================================================
+FAMILY 23 (catalogue 23)  s_min = 3.903159488968592
+catalogue: 13 pair contacts, 9 wall contacts, tilt [40, 40, 45, 45], count 1
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 9.25e-09, ls_res 1.24e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 9.25e-09, ls_res 1.24e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 9.25e-09, ls_res 1.24e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 9.25e-09, ls_res 1.24e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (5.0s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 9.251e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 1.190e-01
+  pair gap spectrum (low 6): -3.80e-46 -2.75e-46 -2.60e-46 -1.56e-46 -4.34e-47 -3.89e-62 | first above tol: 1.848e-02
+  pair ( 1, 7) CORNER-CORNER gap -1.56e-46 owner 1 edge 2 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 1, 9) CORNER-CORNER gap +1.56e-46 owner 9 edge 3 dom [2, 3] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 1,10) POINT         gap +8.58e-47 owner 10 edge 1 dom [0] t ['-0.1941'] axes_tied 1
+  pair ( 2, 3) POINT         gap -3.80e-46 owner 3 edge 1 dom [3] t ['0.2006'] axes_tied 1
+  pair ( 2, 5) POINT         gap +5.04e-48 owner 2 edge 3 dom [2] t ['0.2039'] axes_tied 1
+  pair ( 2, 9) POINT         gap +1.14e-46 owner 2 edge 1 dom [3] t ['0.0761'] axes_tied 1
+  pair ( 2,10) POINT         gap +8.55e-46 owner 2 edge 0 dom [3] t ['-0.4917'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +6.22e-46 owner 5 edge 2 dom [0, 1] t ['0.5676', '-0.4324'] axes_tied 2
+  pair ( 4, 6) FLUSH         gap +1.30e-46 owner 4 edge 2 dom [0, 1] t ['0.9173', '-0.0827'] axes_tied 2
+  pair ( 5, 6) POINT         gap -2.75e-46 owner 5 edge 0 dom [2] t ['0.1524'] axes_tied 1
+  pair ( 5, 8) POINT         gap -4.34e-47 owner 5 edge 3 dom [2] t ['-0.1245'] axes_tied 1
+  pair ( 5,10) POINT         gap -2.60e-46 owner 10 edge 3 dom [1] t ['0.2070'] axes_tied 1
+  pair ( 7, 9) CORNER-CORNER gap -3.89e-62 owner 7 edge 2 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (1,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (1,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,9): 4 tied separating axes
+  SURPRISE: pair (1,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (1,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.073e-01  sv_max_dropped 5.616e-16  rattlers [0]
+KKT: e_s in row space res 1.24e-02 (theta rows dropped: 1.92e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.24e-02); dropping the 11 theta equations makes it feasible (1.92e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((1, 7), [(1, 2), (7, 3)]), ((1, 9), [(1, 2), (1, 3), (9, 0), (9, 3)]), ((7, 9), [(7, 2), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902659484617837 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902159484617837 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901159484617836 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 266991/10240000 (2.6073e-02), V = 3.877086144774
+  wall time 5.7s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 23 exit=0 end=18:27:29
+### family 24  md5=0eae05c8 start=18:27:29
+
+==========================================================================
+FAMILY 24 (catalogue 24)  s_min = 3.903231982775124
+catalogue: 13 pair contacts, 9 wall contacts, tilt [25, 40, 40, 45, 45], count 2
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 2.34e-08, ls_res 1.10e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 2.34e-08, ls_res 1.10e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 2.34e-08, ls_res 1.10e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 2.34e-08, ls_res 1.10e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (5.0s): tol_c 1e-07, GN residual 5.433e-71, |zhat - z0|_inf = 2.340e-08 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 3.144e-03
+  pair gap spectrum (low 6): -1.12e-45 -1.09e-45 -4.93e-46 -1.56e-46 -6.20e-47 -2.76e-47 | first above tol: 1.792e-02
+  pair ( 0, 5) POINT         gap +1.52e-46 owner 5 edge 3 dom [1] t ['-0.1247'] axes_tied 1
+  pair ( 2, 3) POINT         gap -2.76e-47 owner 3 edge 1 dom [3] t ['0.2060'] axes_tied 1
+  pair ( 2, 5) POINT         gap +2.85e-46 owner 2 edge 3 dom [2] t ['0.2092'] axes_tied 1
+  pair ( 2, 9) POINT         gap -1.09e-45 owner 2 edge 1 dom [3] t ['0.0714'] axes_tied 1
+  pair ( 2,10) POINT         gap -6.20e-47 owner 10 edge 2 dom [0] t ['0.4931'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +1.18e-46 owner 3 edge 0 dom [2, 3] t ['0.5675', '-0.4325'] axes_tied 2
+  pair ( 4, 7) CORNER-CORNER gap +0.00e+00 owner 4 edge 2 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 4, 9) CORNER-CORNER gap +1.56e-46 owner 9 edge 3 dom [2, 3] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 4,10) POINT         gap -1.12e-45 owner 10 edge 1 dom [0] t ['-0.2211'] axes_tied 1
+  pair ( 5, 8) POINT         gap -4.93e-46 owner 5 edge 0 dom [2] t ['0.1523'] axes_tied 1
+  pair ( 5,10) POINT         gap +5.18e-46 owner 10 edge 3 dom [1] t ['0.2110'] axes_tied 1
+  pair ( 6, 8) FLUSH         gap +3.76e-48 owner 6 edge 2 dom [0, 1] t ['0.5120', '-0.4880'] axes_tied 2
+  pair ( 7, 9) CORNER-CORNER gap -1.56e-46 owner 7 edge 3 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,9): 4 tied separating axes
+  SURPRISE: pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.120e-01  sv_max_dropped 5.241e-16  rattlers [1]
+KKT: e_s in row space res 1.10e-02 (theta rows dropped: 2.65e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.10e-02); dropping the 11 theta equations makes it feasible (2.65e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((4, 7), [(4, 2), (7, 0)]), ((4, 9), [(4, 2), (4, 3), (9, 0), (9, 3)]), ((7, 9), [(7, 3), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902731976328991 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902231976328991 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901231976328990 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 535479/20480000 (2.6146e-02), V = 3.877085540782
+  wall time 5.8s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 24 exit=0 end=18:27:35
+### family 25  md5=0eae05c8 start=18:27:36
+
+==========================================================================
+FAMILY 25 (catalogue 25)  s_min = 3.912522236644026
+catalogue: 11 pair contacts, 9 wall contacts, tilt [20, 40, 45], count 2
+  LADDER tol 1e-07: 47 rows (11 pairs/18 wall rows), GN res 7.24e-71, |dz| 1.27e-08, ls_res 1.48e-02, KKT LP False
+  LADDER tol 1e-06: 47 rows (11 pairs/18 wall rows), GN res 7.24e-71, |dz| 1.27e-08, ls_res 1.48e-02, KKT LP False
+  LADDER tol 1e-05: 47 rows (11 pairs/18 wall rows), GN res 7.24e-71, |dz| 1.27e-08, ls_res 1.48e-02, KKT LP False
+  LADDER tol 1e-04: 47 rows (11 pairs/18 wall rows), GN res 7.24e-71, |dz| 1.27e-08, ls_res 1.48e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.3s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 1.269e-08 -> 18 wall rows, 11 contact pairs, 2 aux rows, 47 rows (29 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 6.291e-04
+  pair gap spectrum (low 6): -6.33e-46 -3.07e-46 -2.10e-46 -1.56e-46 -4.98e-47 0.00e+00 | first above tol: 1.102e-03
+  pair ( 0, 9) POINT         gap +6.99e-47 owner 9 edge 3 dom [1] t ['-0.1441'] axes_tied 1
+  pair ( 1, 8) POINT         gap -2.10e-46 owner 1 edge 1 dom [0] t ['-0.2075'] axes_tied 1
+  pair ( 1, 9) POINT         gap -3.07e-46 owner 1 edge 3 dom [1] t ['0.2443'] axes_tied 1
+  pair ( 2, 6) FLUSH         gap +1.06e-47 owner 2 edge 2 dom [0, 1] t ['0.5338', '-0.4662'] axes_tied 2
+  pair ( 3, 5) POINT         gap +3.45e-48 owner 5 edge 3 dom [2] t ['-0.1770'] axes_tied 1
+  pair ( 3, 9) POINT         gap +3.26e-46 owner 9 edge 2 dom [1] t ['0.1454'] axes_tied 1
+  pair ( 4, 7) CORNER-CORNER gap -1.56e-46 owner 4 edge 3 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 4, 8) CORNER-CORNER gap +0.00e+00 owner 4 edge 0 dom [2, 3] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 5, 7) POINT         gap -4.98e-47 owner 5 edge 1 dom [3] t ['0.2062'] axes_tied 1
+  pair ( 6, 9) POINT         gap -6.33e-46 owner 9 edge 0 dom [2] t ['0.1464'] axes_tied 1
+  pair ( 7, 8) CORNER-CORNER gap +1.56e-46 owner 7 edge 3 dom [2, 3] t ['1.5000', '0.5000'] axes_tied 4
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,8): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,8): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,8): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,8): 4 tied separating axes
+  SURPRISE: pair (7,8): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,8): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,8): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,8): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,8): 4 tied separating axes
+  SURPRISE: [post-refine] pair (7,8): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 26/34  sv_min_kept 2.305e-01  sv_max_dropped 3.847e-16  rattlers [10]
+KKT: e_s in row space res 1.48e-02 (theta rows dropped: 1.37e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.48e-02); dropping the 11 theta equations makes it feasible (1.37e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((4, 7), [(4, 3), (7, 0)]), ((4, 8), [(4, 0), (8, 2)]), ((7, 8), [(7, 0), (7, 3), (8, 2), (8, 3)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.912022232141598 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.911522232141598 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.910522232141597 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 2902891/81920000 (3.5436e-02), V = 3.877086550989
+  wall time 5.0s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 25 exit=0 end=18:27:42
+### family 26  md5=0eae05c8 start=18:27:42
+
+==========================================================================
+FAMILY 26 (catalogue 26)  s_min = 3.912657753885496
+catalogue: 11 pair contacts, 9 wall contacts, tilt [20, 20, 40, 45], count 1
+  LADDER tol 1e-07: 47 rows (11 pairs/18 wall rows), GN res 8.60e-71, |dz| 1.06e-07, ls_res 1.65e-02, KKT LP False
+  LADDER tol 1e-06: 47 rows (11 pairs/18 wall rows), GN res 8.60e-71, |dz| 1.06e-07, ls_res 1.65e-02, KKT LP False
+  LADDER tol 1e-05: 48 rows (11 pairs/19 wall rows), GN res 7.70e-71, |dz| 1.02e-06, ls_res 1.65e-02, KKT LP False
+  LADDER tol 1e-04: 49 rows (12 pairs/19 wall rows), GN res 7.70e-71, |dz| 2.38e-05, ls_res 1.65e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.5s): tol_c 1e-07, GN residual 8.603e-71, |zhat - z0|_inf = 1.057e-07 -> 18 wall rows, 11 contact pairs, 2 aux rows, 47 rows (29 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 1.114e-06
+  pair gap spectrum (low 6): -7.91e-46 -3.03e-46 -1.56e-46 -1.95e-47 0.00e+00 0.00e+00 | first above tol: 5.030e-05
+  pair ( 0, 6) POINT         gap +6.84e-46 owner 0 edge 1 dom [3] t ['-0.1752'] axes_tied 1
+  pair ( 0, 8) POINT         gap -7.91e-46 owner 0 edge 3 dom [1] t ['0.2307'] axes_tied 1
+  pair ( 1, 2) POINT         gap +5.98e-47 owner 2 edge 1 dom [0] t ['0.2079'] axes_tied 1
+  pair ( 1, 6) CORNER-CORNER gap +1.56e-46 owner 6 edge 1 dom [0, 1] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 1,10) CORNER-CORNER gap +0.00e+00 owner 1 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 2, 9) POINT         gap -1.95e-47 owner 2 edge 3 dom [1] t ['-0.1770'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +0.00e+00 owner 3 edge 3 dom [1, 2] t ['0.5272', '-0.4728'] axes_tied 2
+  pair ( 4, 8) POINT         gap +1.45e-46 owner 8 edge 3 dom [1] t ['-0.1434'] axes_tied 1
+  pair ( 5, 8) POINT         gap -3.03e-46 owner 8 edge 0 dom [3] t ['0.1472'] axes_tied 1
+  pair ( 6,10) CORNER-CORNER gap -1.56e-46 owner 10 edge 0 dom [1, 2] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 8, 9) POINT         gap +6.42e-46 owner 8 edge 2 dom [0] t ['0.1455'] axes_tied 1
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (1,6): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,6): 4 tied separating axes
+  SURPRISE: pair (1,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (1,10): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,10): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (6,10): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (6,10): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: gap spectrum: 1 wall clearances in (tol, 100 tol]: ['1.11e-06']
+  SURPRISE: gap spectrum: largest ACCEPTED pair gap is 6.21e-08 (A04 point is only ~1e-8 converged on that contact)
+  SURPRISE: [post-refine] pair (1,6): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,6): 4 tied separating axes
+  SURPRISE: [post-refine] pair (1,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,10): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,10): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (6,10): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (6,10): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 26/34  sv_min_kept 2.293e-01  sv_max_dropped 4.274e-16  rattlers [7]
+KKT: e_s in row space res 1.65e-02 (theta rows dropped: 1.72e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.65e-02); dropping the 11 theta equations makes it feasible (1.72e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((1, 6), [(1, 0), (1, 1), (6, 1), (6, 2)]), ((1, 10), [(1, 1), (10, 3)]), ((6, 10), [(6, 1), (10, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.912157739865597 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.911657739865596 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.910657739865596 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 5828237/163840000 (3.5573e-02), V = 3.877085004270
+  wall time 5.2s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 26 exit=0 end=18:27:48
+### family 27  md5=0eae05c8 start=18:27:48
+
+==========================================================================
+FAMILY 27 (catalogue 27)  s_min = 3.925148813695428
+catalogue: 11 pair contacts, 10 wall contacts, tilt [40, 40, 45], count 3
+  LADDER tol 1e-07: 39 rows (11 pairs/19 wall rows), GN res 6.79e-71, |dz| 1.55e-09, ls_res 7.27e-08, KKT LP False
+  LADDER tol 1e-06: 39 rows (11 pairs/19 wall rows), GN res 6.79e-71, |dz| 1.55e-09, ls_res 7.27e-08, KKT LP False
+  LADDER tol 1e-05: 39 rows (11 pairs/19 wall rows), GN res 6.79e-71, |dz| 1.55e-09, ls_res 7.27e-08, KKT LP False
+  LADDER tol 1e-04: 39 rows (11 pairs/19 wall rows), GN res 6.79e-71, |dz| 1.55e-09, ls_res 7.27e-08, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.5s): tol_c 1e-07, GN residual 6.792e-71, |zhat - z0|_inf = 1.553e-09 -> 19 wall rows, 11 contact pairs, 0 aux rows, 39 rows (33 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 8.713e-02
+  pair gap spectrum (low 6): -5.95e-46 -2.55e-46 -1.24e-46 -8.45e-47 -3.44e-47 -2.41e-47 | first above tol: 1.511e-02
+  pair ( 0, 6) POINT         gap -5.95e-46 owner 0 edge 3 dom [2] t ['-0.4490'] axes_tied 1
+  pair ( 0, 8) POINT         gap -2.55e-46 owner 0 edge 0 dom [2] t ['0.4490'] axes_tied 1
+  pair ( 1, 2) FLUSH         gap +0.00e+00 owner 1 edge 2 dom [0, 1] t ['0.4129', '-0.5871'] axes_tied 2
+  pair ( 2, 8) POINT         gap -2.41e-47 owner 8 edge 0 dom [3] t ['-0.1943'] axes_tied 1
+  pair ( 3, 4) FLUSH         gap -1.24e-46 owner 3 edge 3 dom [2, 3] t ['0.6046', '-0.3954'] axes_tied 2
+  pair ( 3, 6) POINT         gap +1.92e-46 owner 6 edge 0 dom [2] t ['-0.1529'] axes_tied 1
+  pair ( 3, 8) POINT         gap -3.44e-47 owner 8 edge 3 dom [1] t ['0.1529'] axes_tied 1
+  pair ( 5, 6) POINT         gap +1.63e-46 owner 6 edge 2 dom [0] t ['-0.1115'] axes_tied 1
+  pair ( 6,10) POINT         gap +6.20e-46 owner 6 edge 3 dom [2] t ['0.1943'] axes_tied 1
+  pair ( 7, 8) POINT         gap +4.92e-46 owner 8 edge 1 dom [0] t ['0.1115'] axes_tied 1
+  pair ( 9,10) FLUSH         gap -8.45e-47 owner 9 edge 1 dom [0, 1] t ['0.7297', '-0.2703'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+CLASSIFY: VALLEY  rank 29/34  sv_min_kept 3.046e-01  sv_max_dropped 4.804e-16  rattlers []
+KKT: e_s in row space res 7.27e-08 (theta rows dropped: 1.45e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 7.27e-08); dropping the 11 theta equations makes it feasible (1.45e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 0 branched pairs [] -> 1 variants; min kill margin 1000000000000000000.0000
+  3S variants: 1 total, 1 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.924648812142093 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.924148812142092 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.923148812142092 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 1968659/40960000 (4.8063e-02), V = 3.877085848275
+  wall time 4.6s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 27 exit=0 end=18:27:53
+### family 28  md5=0eae05c8 start=18:27:53
+
+==========================================================================
+FAMILY 28 (catalogue 28)  s_min = 3.925199029243744
+catalogue: 11 pair contacts, 9 wall contacts, tilt [5, 20, 35, 40, 40], count 1
+  LADDER tol 1e-07: 48 rows (11 pairs/16 wall rows), GN res 7.24e-71, |dz| 8.34e-09, ls_res 2.12e-02, KKT LP False
+  LADDER tol 1e-06: 48 rows (11 pairs/16 wall rows), GN res 7.24e-71, |dz| 8.34e-09, ls_res 2.12e-02, KKT LP False
+  LADDER tol 1e-05: 48 rows (11 pairs/16 wall rows), GN res 7.24e-71, |dz| 8.34e-09, ls_res 2.12e-02, KKT LP False
+  LADDER tol 1e-04: 48 rows (11 pairs/16 wall rows), GN res 7.24e-71, |dz| 8.34e-09, ls_res 2.12e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (3.6s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 8.338e-09 -> 16 wall rows, 11 contact pairs, 2 aux rows, 48 rows (28 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 7.080e-03
+  pair gap spectrum (low 6): -1.06e-45 -8.31e-46 -7.87e-46 0.00e+00 0.00e+00 0.00e+00 | first above tol: 3.604e-04
+  pair ( 0, 6) POINT         gap -7.87e-46 owner 0 edge 1 dom [0] t ['-0.1201'] axes_tied 1
+  pair ( 0, 8) POINT         gap +1.79e-46 owner 0 edge 3 dom [1] t ['0.2679'] axes_tied 1
+  pair ( 1, 2) POINT         gap -1.06e-45 owner 2 edge 1 dom [0] t ['0.2276'] axes_tied 1
+  pair ( 1, 4) CORNER-CORNER gap +0.00e+00 owner 1 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 1, 6) CORNER-CORNER gap +0.00e+00 owner 1 edge 0 dom [2, 3] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 2, 9) POINT         gap +5.90e-46 owner 2 edge 3 dom [2] t ['-0.2198'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +0.00e+00 owner 3 edge 3 dom [1, 2] t ['0.5251', '-0.4749'] axes_tied 2
+  pair ( 4, 6) CORNER-CORNER gap +0.00e+00 owner 4 edge 0 dom [2, 3] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 5, 8) POINT         gap +3.57e-46 owner 8 edge 0 dom [3] t ['0.1469'] axes_tied 1
+  pair ( 8, 9) POINT         gap -8.31e-46 owner 8 edge 2 dom [1] t ['0.2452'] axes_tied 1
+  pair ( 8,10) FLUSH         gap +4.79e-46 owner 10 edge 1 dom [0, 3] t ['-0.5195', '0.4805'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (1,4): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,4): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (1,6): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,6): 4 tied separating axes
+  SURPRISE: pair (1,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,6): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,4): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,4): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,6): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,6): 4 tied separating axes
+  SURPRISE: [post-refine] pair (1,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,6): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,6): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 26/34  sv_min_kept 1.950e-01  sv_max_dropped 4.174e-16  rattlers [7]
+KKT: e_s in row space res 2.12e-02 (theta rows dropped: 7.61e-16); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 2.12e-02); dropping the 11 theta equations makes it feasible (7.61e-16), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((1, 4), [(1, 1), (4, 3)]), ((1, 6), [(1, 0), (1, 1), (6, 2), (6, 3)]), ((4, 6), [(4, 0), (6, 2)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.924699024850709 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.924199024850708 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.923199024850708 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 7883119/163840000 (4.8115e-02), V = 3.877084284860
+  wall time 4.2s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 28 exit=0 end=18:27:59
+### family 29  md5=0eae05c8 start=18:27:59
+
+==========================================================================
+FAMILY 29 (catalogue 29)  s_min = 3.925527077928808
+catalogue: 10 pair contacts, 9 wall contacts, tilt [20, 35, 35, 40], count 1
+  LADDER tol 1e-07: 37 rows (10 pairs/17 wall rows), GN res 7.70e-71, |dz| 8.44e-09, ls_res 1.85e-02, KKT LP False
+  LADDER tol 1e-06: 37 rows (10 pairs/17 wall rows), GN res 7.70e-71, |dz| 8.44e-09, ls_res 1.85e-02, KKT LP False
+  LADDER tol 1e-05: 37 rows (10 pairs/17 wall rows), GN res 7.70e-71, |dz| 8.44e-09, ls_res 1.85e-02, KKT LP False
+  LADDER tol 1e-04: 37 rows (10 pairs/17 wall rows), GN res 7.70e-71, |dz| 8.44e-09, ls_res 1.85e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.5s): tol_c 1e-07, GN residual 7.697e-71, |zhat - z0|_inf = 8.443e-09 -> 17 wall rows, 10 contact pairs, 1 aux rows, 37 rows (29 [V]-safe)
+  wall |g| spectrum: 1.56e-46 1.56e-46 1.56e-46 1.56e-46 | next above tol: 9.309e-04
+  pair gap spectrum (low 6): -9.31e-46 -8.98e-46 -7.85e-46 -1.09e-46 -9.08e-47 -3.89e-62 | first above tol: 8.026e-03
+  pair ( 0, 4) POINT         gap +2.47e-47 owner 4 edge 3 dom [1] t ['0.2284'] axes_tied 1
+  pair ( 0, 9) POINT         gap +4.95e-46 owner 9 edge 0 dom [2] t ['-0.1638'] axes_tied 1
+  pair ( 1, 6) POINT         gap -8.98e-46 owner 6 edge 2 dom [1] t ['0.0521'] axes_tied 1
+  pair ( 1, 8) FLUSH         gap +6.34e-46 owner 1 edge 3 dom [1, 2] t ['0.5370', '-0.4630'] axes_tied 2
+  pair ( 2, 7) FLUSH         gap -1.09e-46 owner 2 edge 3 dom [1, 2] t ['0.1511', '-0.8489'] axes_tied 2
+  pair ( 4, 5) POINT         gap -7.85e-46 owner 4 edge 1 dom [3] t ['-0.2605'] axes_tied 1
+  pair ( 5, 6) CORNER-CORNER gap -3.89e-62 owner 5 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 7, 9) POINT         gap -9.31e-46 owner 9 edge 2 dom [0] t ['-0.2288'] axes_tied 1
+  pair ( 8, 9) POINT         gap -9.08e-47 owner 8 edge 3 dom [2] t ['-0.3216'] axes_tied 1
+  pair ( 9,10) POINT         gap +3.06e-47 owner 9 edge 3 dom [1] t ['0.0704'] axes_tied 1
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (5,6): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (5,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (5,6): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (5,6): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 26/34  sv_min_kept 2.030e-01  sv_max_dropped 3.079e-16  rattlers [3]
+KKT: e_s in row space res 1.85e-02 (theta rows dropped: 1.50e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.85e-02); dropping the 11 theta equations makes it feasible (1.50e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 1 branched pairs [((5, 6), [(5, 1), (6, 3)])] -> 2 variants; min kill margin 0.8426
+  3S variants: 2 total, 2 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.925027073612455 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.924527073612455 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.923527073612454 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 15501/320000 (4.8441e-02), V = 3.877086448612
+  wall time 4.7s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 29 exit=0 end=18:28:04
+### family 30  md5=0eae05c8 start=18:28:04
+
+==========================================================================
+FAMILY 30 (catalogue 30)  s_min = 3.926293180604455
+catalogue: 11 pair contacts, 10 wall contacts, tilt [35, 40, 45], count 1
+  LADDER tol 1e-07: 39 rows (11 pairs/19 wall rows), GN res 7.24e-71, |dz| 6.66e-09, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-06: 39 rows (11 pairs/19 wall rows), GN res 7.24e-71, |dz| 6.66e-09, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-05: 39 rows (11 pairs/19 wall rows), GN res 7.24e-71, |dz| 6.66e-09, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-04: 39 rows (11 pairs/19 wall rows), GN res 7.24e-71, |dz| 6.66e-09, ls_res 1.38e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.2s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 6.661e-09 -> 19 wall rows, 11 contact pairs, 0 aux rows, 39 rows (33 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 8.673e-02
+  pair gap spectrum (low 6): -5.88e-46 -5.82e-46 -3.51e-46 -1.74e-46 -1.39e-46 -8.19e-47 | first above tol: 5.918e-02
+  pair ( 0, 6) POINT         gap -5.82e-46 owner 0 edge 3 dom [2] t ['-0.3871'] axes_tied 1
+  pair ( 0, 8) POINT         gap +2.38e-46 owner 8 edge 2 dom [1] t ['-0.4952'] axes_tied 1
+  pair ( 1, 2) FLUSH         gap +0.00e+00 owner 1 edge 2 dom [0, 1] t ['0.4133', '-0.5867'] axes_tied 2
+  pair ( 2, 8) POINT         gap -5.88e-46 owner 8 edge 0 dom [3] t ['-0.1488'] axes_tied 1
+  pair ( 3, 4) FLUSH         gap -1.39e-46 owner 3 edge 3 dom [2, 3] t ['0.5551', '-0.4449'] axes_tied 2
+  pair ( 3, 6) POINT         gap -4.85e-48 owner 6 edge 0 dom [2] t ['-0.1546'] axes_tied 1
+  pair ( 3, 8) POINT         gap -3.51e-46 owner 8 edge 3 dom [1] t ['0.1553'] axes_tied 1
+  pair ( 5, 6) POINT         gap -6.29e-47 owner 6 edge 2 dom [0] t ['-0.0613'] axes_tied 1
+  pair ( 6,10) POINT         gap +9.70e-47 owner 6 edge 3 dom [2] t ['0.2369'] axes_tied 1
+  pair ( 7, 8) POINT         gap -1.74e-46 owner 8 edge 1 dom [3] t ['0.1611'] axes_tied 1
+  pair ( 9,10) FLUSH         gap -8.19e-47 owner 9 edge 1 dom [0, 1] t ['0.7380', '-0.2620'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+CLASSIFY: VALLEY  rank 29/34  sv_min_kept 2.916e-01  sv_max_dropped 2.865e-16  rattlers []
+KKT: e_s in row space res 1.38e-02 (theta rows dropped: 2.24e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.38e-02); dropping the 11 theta equations makes it feasible (2.24e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 0 branched pairs [] -> 1 variants; min kill margin 1000000000000000000.0000
+  3S variants: 1 total, 1 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.925793175698187 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.925293175698187 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.924293175698186 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 403113/8192000 (4.9208e-02), V = 3.877085045815
+  wall time 4.3s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 30 exit=0 end=18:28:09
+### family 31  md5=0eae05c8 start=18:28:09
+
+==========================================================================
+FAMILY 31 (catalogue 31)  s_min = 3.936964160130347
+catalogue: 11 pair contacts, 10 wall contacts, tilt [40, 40, 40, 45], count 3
+  LADDER tol 1e-07: 41 rows (11 pairs/18 wall rows), GN res 5.43e-71, |dz| 3.59e-12, ls_res 3.13e-09, KKT LP True
+  LADDER tol 1e-06: 41 rows (11 pairs/18 wall rows), GN res 5.43e-71, |dz| 3.59e-12, ls_res 3.13e-09, KKT LP True
+  LADDER tol 1e-05: 41 rows (11 pairs/18 wall rows), GN res 5.43e-71, |dz| 3.59e-12, ls_res 3.13e-09, KKT LP True
+  LADDER tol 1e-04: 41 rows (11 pairs/18 wall rows), GN res 5.43e-71, |dz| 3.59e-12, ls_res 3.13e-09, KKT LP True
+AUDIT+REFINE (3.8s): tol_c 1e-07, GN residual 5.433e-71, |zhat - z0|_inf = 3.592e-12 -> 18 wall rows, 11 contact pairs, 0 aux rows, 41 rows (33 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 7.335e-02
+  pair gap spectrum (low 6): -7.17e-46 -5.39e-46 -4.61e-46 -1.24e-46 -2.88e-47 0.00e+00 | first above tol: 6.482e-03
+  pair ( 0, 6) POINT         gap -7.17e-46 owner 0 edge 3 dom [2] t ['-0.4676'] axes_tied 1
+  pair ( 0, 8) FLUSH         gap -1.24e-46 owner 0 edge 0 dom [2, 3] t ['0.4681', '-0.5319'] axes_tied 2
+  pair ( 1, 2) POINT         gap +1.90e-46 owner 1 edge 2 dom [0] t ['0.0573'] axes_tied 1
+  pair ( 2, 8) FLUSH         gap -5.39e-46 owner 2 edge 2 dom [0, 1] t ['0.2831', '-0.7169'] axes_tied 2
+  pair ( 3, 4) FLUSH         gap +0.00e+00 owner 3 edge 0 dom [2, 3] t ['0.2770', '-0.7230'] axes_tied 2
+  pair ( 3, 6) POINT         gap -4.61e-46 owner 6 edge 0 dom [3] t ['-0.1627'] axes_tied 1
+  pair ( 3, 8) POINT         gap +1.39e-46 owner 8 edge 3 dom [2] t ['0.2477'] axes_tied 1
+  pair ( 5, 6) POINT         gap +2.33e-46 owner 6 edge 2 dom [1] t ['-0.1702'] axes_tied 1
+  pair ( 6,10) POINT         gap +1.21e-46 owner 6 edge 3 dom [1] t ['0.1548'] axes_tied 1
+  pair ( 7, 8) POINT         gap -2.88e-47 owner 8 edge 1 dom [3] t ['0.0427'] axes_tied 1
+  pair ( 9,10) FLUSH         gap +2.29e-47 owner 10 edge 3 dom [1, 2] t ['0.5734', '-0.4266'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+CLASSIFY: VALLEY  rank 30/34  sv_min_kept 2.501e-01  sv_max_dropped 2.357e-16  rattlers []
+KKT: e_s in row space res 3.13e-09 (theta rows dropped: 1.24e-15); LP on [V]-safe rows True; LP on all active rows True
+  3S branch structure at h_probe=0.05: 0 branched pairs [] -> 1 variants; min kill margin 1000000000000000000.0000
+  3S variants: 1 total, 0 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 4.552, max r_res = 6.87e-09, max W0 = 6.89e-46
+  3S h=5.0e-04: V_soft 3.936962287385084 (Hbar<=7.491, wt>=0.02974)
+  3S h=1.0e-03: V_soft 3.936956660661347 (Hbar<=7.499, wt>=0.02757)
+  3S h=2.0e-03: V_soft 3.936934094209982 (Hbar<=7.516, wt>=0.02322)
+  3S h_max vs incumbent 3.877084: h = 1/20 (5.0000e-02), V = 3.886964160126
+  wall time 4.2s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 31 exit=0 end=18:28:15
+### BATCH B DONE 18:28:15
+=== RERUN ALL 14 ON PIPELINE md5=0eae05c8 18:28:51 ===
+### family 18  md5=0eae05c8 start=18:28:51
+
+==========================================================================
+FAMILY 18 (catalogue 18)  s_min = 3.902688537256738
+catalogue: 11 pair contacts, 9 wall contacts, tilt [20, 30, 30, 30, 30], count 1
+  LADDER tol 1e-07: 39 rows (10 pairs/13 wall rows), GN res 6.34e-71, |dz| 7.68e-08, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-06: 42 rows (11 pairs/15 wall rows), GN res 7.24e-71, |dz| 2.36e-07, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-05: 42 rows (11 pairs/15 wall rows), GN res 7.24e-71, |dz| 2.36e-07, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-04: 42 rows (11 pairs/15 wall rows), GN res 7.24e-71, |dz| 2.36e-07, ls_res 1.38e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.1s): tol_c 1e-07, GN residual 6.339e-71, |zhat - z0|_inf = 7.676e-08 -> 13 wall rows, 10 contact pairs, 1 aux rows, 39 rows (27 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 2.463e-07
+  pair gap spectrum (low 6): -7.47e-46 -4.92e-46 -2.48e-46 -2.09e-46 0.00e+00 0.00e+00 | first above tol: 1.804e-07
+  pair ( 0,10) POINT         gap +3.41e-46 owner 0 edge 3 dom [2] t ['-0.4060'] axes_tied 1
+  pair ( 2, 7) FLUSH         gap +0.00e+00 owner 2 edge 0 dom [2, 3] t ['0.3162', '-0.6838'] axes_tied 2
+  pair ( 3,10) POINT         gap +2.96e-46 owner 10 edge 3 dom [1] t ['-0.0286'] axes_tied 1
+  pair ( 4, 9) POINT         gap +7.36e-46 owner 9 edge 0 dom [2] t ['-0.0229'] axes_tied 1
+  pair ( 5, 6) FLUSH         gap +0.00e+00 owner 5 edge 0 dom [2, 3] t ['0.5700', '-0.4300'] axes_tied 2
+  pair ( 6, 9) POINT         gap -7.47e-46 owner 9 edge 1 dom [0] t ['-0.1226'] axes_tied 1
+  pair ( 7,10) POINT         gap +1.65e-47 owner 10 edge 2 dom [1] t ['-0.2698'] axes_tied 1
+  pair ( 8, 9) CORNER-CORNER gap -2.48e-46 owner 8 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 8,10) FLUSH         gap -2.09e-46 owner 8 edge 2 dom [0, 1] t ['0.2635', '-0.7365'] axes_tied 2
+  pair ( 9,10) FLUSH         gap -4.92e-46 owner 9 edge 2 dom [0, 1] t ['1.2635', '0.2635'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (8,9): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (8,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: gap spectrum: 2 wall clearances in (tol, 100 tol]: ['2.00e-07', '2.35e-07']
+  SURPRISE: gap spectrum: 1 pair gaps in (tol, 100 tol]: ['1.14e-07']
+  SURPRISE: gap spectrum: largest ACCEPTED pair gap is 3.40e-08 (A04 point is only ~1e-8 converged on that contact)
+  SURPRISE: [post-refine] pair (8,9): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (8,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 25/34  sv_min_kept 1.563e-01  sv_max_dropped 4.084e-16  rattlers [1]
+KKT: e_s in row space res 1.38e-02 (theta rows dropped: 1.20e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.38e-02); dropping the 11 theta equations makes it feasible (1.20e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 1 branched pairs [((8, 9), [(8, 1), (9, 3)])] -> 2 variants; min kill margin 0.7870
+  3S variants: 2 total, 2 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902188534315015 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.901688534315014 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.900688534315013 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 419501/16384000 (2.5604e-02), V = 3.877084225233
+  wall time 4.3s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 18 exit=0 end=18:28:56
+### family 19  md5=0eae05c8 start=18:28:56
+
+==========================================================================
+FAMILY 19 (catalogue 19)  s_min = 3.903006188193683
+catalogue: 13 pair contacts, 9 wall contacts, tilt [10, 40, 45, 45, 45], count 1
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 8.18e-09, ls_res 1.18e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 8.18e-09, ls_res 1.18e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 8.18e-09, ls_res 1.18e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 8.18e-09, ls_res 1.18e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (5.1s): tol_c 1e-07, GN residual 5.433e-71, |zhat - z0|_inf = 8.179e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 1.56e-46 1.56e-46 1.56e-46 1.56e-46 | next above tol: 5.705e-02
+  pair gap spectrum (low 6): -7.34e-46 -5.91e-46 -4.41e-46 -4.29e-46 -2.33e-46 -1.18e-46 | first above tol: 8.271e-04
+  pair ( 0, 5) POINT         gap +6.60e-47 owner 5 edge 3 dom [1] t ['-0.1239'] axes_tied 1
+  pair ( 2, 3) POINT         gap -5.91e-46 owner 3 edge 1 dom [3] t ['0.1863'] axes_tied 1
+  pair ( 2, 5) POINT         gap +1.42e-46 owner 2 edge 3 dom [2] t ['0.1896'] axes_tied 1
+  pair ( 2, 9) POINT         gap -4.29e-46 owner 2 edge 1 dom [3] t ['0.0887'] axes_tied 1
+  pair ( 2,10) POINT         gap -7.34e-46 owner 10 edge 2 dom [0] t ['0.4764'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +2.75e-46 owner 3 edge 0 dom [2, 3] t ['0.5681', '-0.4319'] axes_tied 2
+  pair ( 4, 7) CORNER-CORNER gap -3.89e-62 owner 4 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 4, 9) CORNER-CORNER gap +3.12e-46 owner 4 edge 1 dom [0, 3] t ['0.5000', '1.5000'] axes_tied 4
+  pair ( 4,10) POINT         gap -1.18e-46 owner 10 edge 1 dom [3] t ['-0.2193'] axes_tied 1
+  pair ( 5, 8) POINT         gap -4.41e-46 owner 5 edge 0 dom [2] t ['0.1528'] axes_tied 1
+  pair ( 5,10) POINT         gap -2.33e-46 owner 10 edge 3 dom [1] t ['0.1914'] axes_tied 1
+  pair ( 6, 8) FLUSH         gap +8.12e-47 owner 6 edge 2 dom [0, 1] t ['0.7598', '-0.2402'] axes_tied 2
+  pair ( 7, 9) CORNER-CORNER gap -3.89e-62 owner 7 edge 2 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (4,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,9): 4 tied separating axes
+  SURPRISE: pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.070e-01  sv_max_dropped 5.898e-16  rattlers [1]
+KKT: e_s in row space res 1.18e-02 (theta rows dropped: 2.45e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.18e-02); dropping the 11 theta equations makes it feasible (2.45e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((4, 7), [(4, 1), (7, 3)]), ((4, 9), [(4, 1), (4, 2), (9, 0), (9, 3)]), ((7, 9), [(7, 2), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902506183087365 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902006183087364 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901006183087363 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 2123453/81920000 (2.5921e-02), V = 3.877085125958
+  wall time 5.8s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 19 exit=0 end=18:29:02
+### family 20  md5=0eae05c8 start=18:29:03
+
+==========================================================================
+FAMILY 20 (catalogue 20)  s_min = 3.903040465950461
+catalogue: 13 pair contacts, 9 wall contacts, tilt [30, 40, 45, 45, 45], count 5
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 8.07e-09, ls_res 1.14e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 8.07e-09, ls_res 1.14e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 8.07e-09, ls_res 1.14e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 8.07e-09, ls_res 1.14e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.5s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 8.069e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 3.486e-02
+  pair gap spectrum (low 6): -9.19e-46 -7.38e-46 -6.69e-46 -4.29e-46 -2.30e-46 -1.94e-46 | first above tol: 1.686e-02
+  pair ( 0, 5) POINT         gap +5.53e-47 owner 5 edge 3 dom [1] t ['-0.1242'] axes_tied 1
+  pair ( 2, 3) POINT         gap -7.38e-46 owner 3 edge 1 dom [3] t ['0.1915'] axes_tied 1
+  pair ( 2, 5) POINT         gap -1.94e-46 owner 2 edge 3 dom [2] t ['0.1948'] axes_tied 1
+  pair ( 2, 9) POINT         gap -2.30e-46 owner 2 edge 1 dom [0] t ['0.0841'] axes_tied 1
+  pair ( 2,10) POINT         gap -9.19e-46 owner 10 edge 2 dom [0] t ['0.4841'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +3.14e-46 owner 5 edge 2 dom [0, 1] t ['0.5678', '-0.4322'] axes_tied 2
+  pair ( 4, 8) FLUSH         gap +0.00e+00 owner 4 edge 3 dom [1, 2] t ['0.5478', '-0.4522'] axes_tied 2
+  pair ( 5, 8) POINT         gap -6.69e-46 owner 5 edge 0 dom [3] t ['0.1526'] axes_tied 1
+  pair ( 5,10) POINT         gap -1.02e-46 owner 10 edge 3 dom [1] t ['0.1968'] axes_tied 1
+  pair ( 6, 7) CORNER-CORNER gap -1.56e-46 owner 6 edge 2 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 6, 9) CORNER-CORNER gap +0.00e+00 owner 6 edge 2 dom [0, 1] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 6,10) POINT         gap -4.29e-46 owner 10 edge 1 dom [0] t ['-0.2154'] axes_tied 1
+  pair ( 7, 9) CORNER-CORNER gap -1.56e-46 owner 9 edge 1 dom [2, 3] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (6,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (6,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (6,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (6,9): 4 tied separating axes
+  SURPRISE: pair (6,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (6,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (6,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (6,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (6,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (6,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.085e-01  sv_max_dropped 5.482e-16  rattlers [1]
+KKT: e_s in row space res 1.14e-02 (theta rows dropped: 2.18e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.14e-02); dropping the 11 theta equations makes it feasible (2.18e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((6, 7), [(6, 2), (7, 3)]), ((6, 9), [(6, 2), (6, 3), (9, 0), (9, 1)]), ((7, 9), [(7, 2), (9, 1)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902540461013225 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902040461013224 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901040461013223 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 850479/32768000 (2.5955e-02), V = 3.877085901687
+  wall time 5.2s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 20 exit=0 end=18:29:09
+### family 21  md5=0eae05c8 start=18:29:09
+
+==========================================================================
+FAMILY 21 (catalogue 21)  s_min = 3.903079441884515
+catalogue: 13 pair contacts, 9 wall contacts, tilt [40, 45, 45, 45], count 1
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 4.04e-09, ls_res 1.17e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 4.04e-09, ls_res 1.17e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 4.04e-09, ls_res 1.17e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 4.04e-09, ls_res 1.17e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.5s): tol_c 1e-07, GN residual 6.339e-71, |zhat - z0|_inf = 4.035e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 1.414e-01
+  pair gap spectrum (low 6): -6.94e-46 -5.71e-46 -3.40e-46 -1.56e-46 -1.56e-46 -1.33e-46 | first above tol: 3.064e-03
+  pair ( 0, 5) POINT         gap -6.94e-46 owner 5 edge 3 dom [2] t ['-0.1240'] axes_tied 1
+  pair ( 1, 3) POINT         gap -5.71e-46 owner 3 edge 1 dom [3] t ['0.1905'] axes_tied 1
+  pair ( 1, 5) POINT         gap +8.68e-46 owner 1 edge 3 dom [2] t ['0.1939'] axes_tied 1
+  pair ( 1, 9) POINT         gap -1.33e-46 owner 1 edge 1 dom [3] t ['0.0850'] axes_tied 1
+  pair ( 1,10) POINT         gap +7.36e-46 owner 10 edge 2 dom [0] t ['0.4764'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap -1.44e-48 owner 5 edge 2 dom [0, 1] t ['0.5681', '-0.4319'] axes_tied 2
+  pair ( 4, 7) CORNER-CORNER gap -1.56e-46 owner 7 edge 0 dom [1, 2] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 4, 9) CORNER-CORNER gap +3.12e-46 owner 4 edge 1 dom [0, 3] t ['0.5000', '1.5000'] axes_tied 4
+  pair ( 4,10) POINT         gap -3.40e-46 owner 10 edge 1 dom [3] t ['-0.2245'] axes_tied 1
+  pair ( 5, 8) POINT         gap -2.48e-47 owner 5 edge 0 dom [3] t ['0.1528'] axes_tied 1
+  pair ( 5,10) POINT         gap +5.92e-46 owner 10 edge 3 dom [1] t ['0.1956'] axes_tied 1
+  pair ( 6, 8) FLUSH         gap +0.00e+00 owner 6 edge 3 dom [1, 2] t ['0.9392', '-0.0608'] axes_tied 2
+  pair ( 7, 9) CORNER-CORNER gap -1.56e-46 owner 7 edge 3 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,9): 4 tied separating axes
+  SURPRISE: pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.074e-01  sv_max_dropped 5.247e-16  rattlers [2]
+KKT: e_s in row space res 1.17e-02 (theta rows dropped: 1.97e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.17e-02); dropping the 11 theta equations makes it feasible (1.97e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((4, 7), [(4, 1), (7, 0)]), ((4, 9), [(4, 1), (4, 2), (9, 0), (9, 3)]), ((7, 9), [(7, 3), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902579438893712 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902079438893712 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901079438893711 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 2129441/81920000 (2.5994e-02), V = 3.877085286062
+  wall time 5.2s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 21 exit=0 end=18:29:15
+### family 22  md5=0eae05c8 start=18:29:15
+
+==========================================================================
+FAMILY 22 (catalogue 22)  s_min = 3.903098025529174
+catalogue: 13 pair contacts, 9 wall contacts, tilt [0, 40, 40, 45, 45], count 4
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 8.63e-09, ls_res 1.16e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 8.63e-09, ls_res 1.16e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 8.63e-09, ls_res 1.16e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 6.34e-71, |dz| 8.63e-09, ls_res 1.16e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.3s): tol_c 1e-07, GN residual 6.339e-71, |zhat - z0|_inf = 8.626e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 6.962e-02
+  pair gap spectrum (low 6): -6.42e-46 -6.00e-46 -4.94e-46 -3.76e-46 -2.73e-46 -1.82e-46 | first above tol: 1.857e-02
+  pair ( 1, 7) CORNER-CORNER gap -1.56e-46 owner 7 edge 0 dom [1, 2] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 1, 9) CORNER-CORNER gap +3.12e-46 owner 1 edge 1 dom [0, 3] t ['0.5000', '1.5000'] axes_tied 4
+  pair ( 1,10) POINT         gap -1.82e-46 owner 10 edge 1 dom [3] t ['-0.2061'] axes_tied 1
+  pair ( 2, 3) POINT         gap +5.75e-46 owner 3 edge 1 dom [3] t ['0.1977'] axes_tied 1
+  pair ( 2, 5) POINT         gap -3.76e-46 owner 2 edge 3 dom [2] t ['0.2010'] axes_tied 1
+  pair ( 2, 9) POINT         gap -6.00e-46 owner 2 edge 1 dom [3] t ['0.0786'] axes_tied 1
+  pair ( 2,10) POINT         gap -4.94e-46 owner 10 edge 2 dom [0] t ['0.4965'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap -2.73e-46 owner 3 edge 0 dom [2, 3] t ['0.5676', '-0.4324'] axes_tied 2
+  pair ( 4, 6) FLUSH         gap +0.00e+00 owner 4 edge 3 dom [1, 2] t ['0.8502', '-0.1498'] axes_tied 2
+  pair ( 5, 6) POINT         gap -5.63e-47 owner 5 edge 0 dom [3] t ['0.1524'] axes_tied 1
+  pair ( 5, 8) POINT         gap +4.35e-46 owner 5 edge 3 dom [2] t ['-0.1245'] axes_tied 1
+  pair ( 5,10) POINT         gap -6.42e-46 owner 10 edge 3 dom [1] t ['0.2030'] axes_tied 1
+  pair ( 7, 9) CORNER-CORNER gap -1.56e-46 owner 7 edge 3 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (1,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (1,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,9): 4 tied separating axes
+  SURPRISE: pair (1,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (1,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.090e-01  sv_max_dropped 5.742e-16  rattlers [0]
+KKT: e_s in row space res 1.16e-02 (theta rows dropped: 6.86e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.16e-02); dropping the 11 theta equations makes it feasible (6.86e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((1, 7), [(1, 1), (7, 0)]), ((1, 9), [(1, 1), (1, 2), (9, 0), (9, 3)]), ((7, 9), [(7, 3), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902598020873486 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902098020873485 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901098020873484 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 1065469/40960000 (2.6012e-02), V = 3.877085594116
+  wall time 4.9s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 22 exit=0 end=18:29:21
+### family 23  md5=0eae05c8 start=18:29:21
+
+==========================================================================
+FAMILY 23 (catalogue 23)  s_min = 3.903159488968592
+catalogue: 13 pair contacts, 9 wall contacts, tilt [40, 40, 45, 45], count 1
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 9.25e-09, ls_res 1.24e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 9.25e-09, ls_res 1.24e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 9.25e-09, ls_res 1.24e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 7.24e-71, |dz| 9.25e-09, ls_res 1.24e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.6s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 9.251e-09 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 1.190e-01
+  pair gap spectrum (low 6): -3.80e-46 -2.75e-46 -2.60e-46 -1.56e-46 -4.34e-47 -3.89e-62 | first above tol: 1.848e-02
+  pair ( 1, 7) CORNER-CORNER gap -1.56e-46 owner 1 edge 2 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 1, 9) CORNER-CORNER gap +1.56e-46 owner 9 edge 3 dom [2, 3] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 1,10) POINT         gap +8.58e-47 owner 10 edge 1 dom [0] t ['-0.1941'] axes_tied 1
+  pair ( 2, 3) POINT         gap -3.80e-46 owner 3 edge 1 dom [3] t ['0.2006'] axes_tied 1
+  pair ( 2, 5) POINT         gap +5.04e-48 owner 2 edge 3 dom [2] t ['0.2039'] axes_tied 1
+  pair ( 2, 9) POINT         gap +1.14e-46 owner 2 edge 1 dom [3] t ['0.0761'] axes_tied 1
+  pair ( 2,10) POINT         gap +8.55e-46 owner 2 edge 0 dom [3] t ['-0.4917'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +6.22e-46 owner 5 edge 2 dom [0, 1] t ['0.5676', '-0.4324'] axes_tied 2
+  pair ( 4, 6) FLUSH         gap +1.30e-46 owner 4 edge 2 dom [0, 1] t ['0.9173', '-0.0827'] axes_tied 2
+  pair ( 5, 6) POINT         gap -2.75e-46 owner 5 edge 0 dom [2] t ['0.1524'] axes_tied 1
+  pair ( 5, 8) POINT         gap -4.34e-47 owner 5 edge 3 dom [2] t ['-0.1245'] axes_tied 1
+  pair ( 5,10) POINT         gap -2.60e-46 owner 10 edge 3 dom [1] t ['0.2070'] axes_tied 1
+  pair ( 7, 9) CORNER-CORNER gap -3.89e-62 owner 7 edge 2 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (1,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (1,9): CORNER-CORNER (t = ['0.500000', '1.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,9): 4 tied separating axes
+  SURPRISE: pair (1,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,7): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (1,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.073e-01  sv_max_dropped 5.616e-16  rattlers [0]
+KKT: e_s in row space res 1.24e-02 (theta rows dropped: 1.92e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.24e-02); dropping the 11 theta equations makes it feasible (1.92e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((1, 7), [(1, 2), (7, 3)]), ((1, 9), [(1, 2), (1, 3), (9, 0), (9, 3)]), ((7, 9), [(7, 2), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902659484617837 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902159484617837 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901159484617836 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 266991/10240000 (2.6073e-02), V = 3.877086144774
+  wall time 5.3s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 23 exit=0 end=18:29:27
+### family 24  md5=0eae05c8 start=18:29:27
+
+==========================================================================
+FAMILY 24 (catalogue 24)  s_min = 3.903231982775124
+catalogue: 13 pair contacts, 9 wall contacts, tilt [25, 40, 40, 45, 45], count 2
+  LADDER tol 1e-07: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 2.34e-08, ls_res 1.10e-02, KKT LP False
+  LADDER tol 1e-06: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 2.34e-08, ls_res 1.10e-02, KKT LP False
+  LADDER tol 1e-05: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 2.34e-08, ls_res 1.10e-02, KKT LP False
+  LADDER tol 1e-04: 51 rows (13 pairs/17 wall rows), GN res 5.43e-71, |dz| 2.34e-08, ls_res 1.10e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.7s): tol_c 1e-07, GN residual 5.433e-71, |zhat - z0|_inf = 2.340e-08 -> 17 wall rows, 13 contact pairs, 2 aux rows, 51 rows (31 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 3.144e-03
+  pair gap spectrum (low 6): -1.12e-45 -1.09e-45 -4.93e-46 -1.56e-46 -6.20e-47 -2.76e-47 | first above tol: 1.792e-02
+  pair ( 0, 5) POINT         gap +1.52e-46 owner 5 edge 3 dom [1] t ['-0.1247'] axes_tied 1
+  pair ( 2, 3) POINT         gap -2.76e-47 owner 3 edge 1 dom [3] t ['0.2060'] axes_tied 1
+  pair ( 2, 5) POINT         gap +2.85e-46 owner 2 edge 3 dom [2] t ['0.2092'] axes_tied 1
+  pair ( 2, 9) POINT         gap -1.09e-45 owner 2 edge 1 dom [3] t ['0.0714'] axes_tied 1
+  pair ( 2,10) POINT         gap -6.20e-47 owner 10 edge 2 dom [0] t ['0.4931'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +1.18e-46 owner 3 edge 0 dom [2, 3] t ['0.5675', '-0.4325'] axes_tied 2
+  pair ( 4, 7) CORNER-CORNER gap +0.00e+00 owner 4 edge 2 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 4, 9) CORNER-CORNER gap +1.56e-46 owner 9 edge 3 dom [2, 3] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 4,10) POINT         gap -1.12e-45 owner 10 edge 1 dom [0] t ['-0.2211'] axes_tied 1
+  pair ( 5, 8) POINT         gap -4.93e-46 owner 5 edge 0 dom [2] t ['0.1523'] axes_tied 1
+  pair ( 5,10) POINT         gap +5.18e-46 owner 10 edge 3 dom [1] t ['0.2110'] axes_tied 1
+  pair ( 6, 8) FLUSH         gap +3.76e-48 owner 6 edge 2 dom [0, 1] t ['0.5120', '-0.4880'] axes_tied 2
+  pair ( 7, 9) CORNER-CORNER gap -1.56e-46 owner 7 edge 3 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,9): 4 tied separating axes
+  SURPRISE: pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,9): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,9): 4 tied separating axes
+  SURPRISE: [post-refine] pair (4,9): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,9): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,9): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 28/34  sv_min_kept 2.120e-01  sv_max_dropped 5.241e-16  rattlers [1]
+KKT: e_s in row space res 1.10e-02 (theta rows dropped: 2.65e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.10e-02); dropping the 11 theta equations makes it feasible (2.65e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((4, 7), [(4, 2), (7, 0)]), ((4, 9), [(4, 2), (4, 3), (9, 0), (9, 3)]), ((7, 9), [(7, 3), (9, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.902731976328991 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.902231976328991 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.901231976328990 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 535479/20480000 (2.6146e-02), V = 3.877085540782
+  wall time 5.4s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 24 exit=0 end=18:29:33
+### family 25  md5=0eae05c8 start=18:29:33
+
+==========================================================================
+FAMILY 25 (catalogue 25)  s_min = 3.912522236644026
+catalogue: 11 pair contacts, 9 wall contacts, tilt [20, 40, 45], count 2
+  LADDER tol 1e-07: 47 rows (11 pairs/18 wall rows), GN res 7.24e-71, |dz| 1.27e-08, ls_res 1.48e-02, KKT LP False
+  LADDER tol 1e-06: 47 rows (11 pairs/18 wall rows), GN res 7.24e-71, |dz| 1.27e-08, ls_res 1.48e-02, KKT LP False
+  LADDER tol 1e-05: 47 rows (11 pairs/18 wall rows), GN res 7.24e-71, |dz| 1.27e-08, ls_res 1.48e-02, KKT LP False
+  LADDER tol 1e-04: 47 rows (11 pairs/18 wall rows), GN res 7.24e-71, |dz| 1.27e-08, ls_res 1.48e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.1s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 1.269e-08 -> 18 wall rows, 11 contact pairs, 2 aux rows, 47 rows (29 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 6.291e-04
+  pair gap spectrum (low 6): -6.33e-46 -3.07e-46 -2.10e-46 -1.56e-46 -4.98e-47 0.00e+00 | first above tol: 1.102e-03
+  pair ( 0, 9) POINT         gap +6.99e-47 owner 9 edge 3 dom [1] t ['-0.1441'] axes_tied 1
+  pair ( 1, 8) POINT         gap -2.10e-46 owner 1 edge 1 dom [0] t ['-0.2075'] axes_tied 1
+  pair ( 1, 9) POINT         gap -3.07e-46 owner 1 edge 3 dom [1] t ['0.2443'] axes_tied 1
+  pair ( 2, 6) FLUSH         gap +1.06e-47 owner 2 edge 2 dom [0, 1] t ['0.5338', '-0.4662'] axes_tied 2
+  pair ( 3, 5) POINT         gap +3.45e-48 owner 5 edge 3 dom [2] t ['-0.1770'] axes_tied 1
+  pair ( 3, 9) POINT         gap +3.26e-46 owner 9 edge 2 dom [1] t ['0.1454'] axes_tied 1
+  pair ( 4, 7) CORNER-CORNER gap -1.56e-46 owner 4 edge 3 dom [0, 1] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 4, 8) CORNER-CORNER gap +0.00e+00 owner 4 edge 0 dom [2, 3] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 5, 7) POINT         gap -4.98e-47 owner 5 edge 1 dom [3] t ['0.2062'] axes_tied 1
+  pair ( 6, 9) POINT         gap -6.33e-46 owner 9 edge 0 dom [2] t ['0.1464'] axes_tied 1
+  pair ( 7, 8) CORNER-CORNER gap +1.56e-46 owner 7 edge 3 dom [2, 3] t ['1.5000', '0.5000'] axes_tied 4
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,8): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,8): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (7,8): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (7,8): 4 tied separating axes
+  SURPRISE: pair (7,8): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,7): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,7): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,8): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,8): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (7,8): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (7,8): 4 tied separating axes
+  SURPRISE: [post-refine] pair (7,8): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 26/34  sv_min_kept 2.305e-01  sv_max_dropped 3.847e-16  rattlers [10]
+KKT: e_s in row space res 1.48e-02 (theta rows dropped: 1.37e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.48e-02); dropping the 11 theta equations makes it feasible (1.37e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((4, 7), [(4, 3), (7, 0)]), ((4, 8), [(4, 0), (8, 2)]), ((7, 8), [(7, 0), (7, 3), (8, 2), (8, 3)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.912022232141598 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.911522232141598 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.910522232141597 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 2902891/81920000 (3.5436e-02), V = 3.877086550989
+  wall time 4.7s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 25 exit=0 end=18:29:39
+### family 26  md5=0eae05c8 start=18:29:39
+
+==========================================================================
+FAMILY 26 (catalogue 26)  s_min = 3.912657753885496
+catalogue: 11 pair contacts, 9 wall contacts, tilt [20, 20, 40, 45], count 1
+  LADDER tol 1e-07: 47 rows (11 pairs/18 wall rows), GN res 8.60e-71, |dz| 1.06e-07, ls_res 1.65e-02, KKT LP False
+  LADDER tol 1e-06: 47 rows (11 pairs/18 wall rows), GN res 8.60e-71, |dz| 1.06e-07, ls_res 1.65e-02, KKT LP False
+  LADDER tol 1e-05: 48 rows (11 pairs/19 wall rows), GN res 7.70e-71, |dz| 1.02e-06, ls_res 1.65e-02, KKT LP False
+  LADDER tol 1e-04: 49 rows (12 pairs/19 wall rows), GN res 7.70e-71, |dz| 2.38e-05, ls_res 1.65e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.4s): tol_c 1e-07, GN residual 8.603e-71, |zhat - z0|_inf = 1.057e-07 -> 18 wall rows, 11 contact pairs, 2 aux rows, 47 rows (29 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 1.114e-06
+  pair gap spectrum (low 6): -7.91e-46 -3.03e-46 -1.56e-46 -1.95e-47 0.00e+00 0.00e+00 | first above tol: 5.030e-05
+  pair ( 0, 6) POINT         gap +6.84e-46 owner 0 edge 1 dom [3] t ['-0.1752'] axes_tied 1
+  pair ( 0, 8) POINT         gap -7.91e-46 owner 0 edge 3 dom [1] t ['0.2307'] axes_tied 1
+  pair ( 1, 2) POINT         gap +5.98e-47 owner 2 edge 1 dom [0] t ['0.2079'] axes_tied 1
+  pair ( 1, 6) CORNER-CORNER gap +1.56e-46 owner 6 edge 1 dom [0, 1] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 1,10) CORNER-CORNER gap +0.00e+00 owner 1 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 2, 9) POINT         gap -1.95e-47 owner 2 edge 3 dom [1] t ['-0.1770'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +0.00e+00 owner 3 edge 3 dom [1, 2] t ['0.5272', '-0.4728'] axes_tied 2
+  pair ( 4, 8) POINT         gap +1.45e-46 owner 8 edge 3 dom [1] t ['-0.1434'] axes_tied 1
+  pair ( 5, 8) POINT         gap -3.03e-46 owner 8 edge 0 dom [3] t ['0.1472'] axes_tied 1
+  pair ( 6,10) CORNER-CORNER gap -1.56e-46 owner 10 edge 0 dom [1, 2] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 8, 9) POINT         gap +6.42e-46 owner 8 edge 2 dom [0] t ['0.1455'] axes_tied 1
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (1,6): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,6): 4 tied separating axes
+  SURPRISE: pair (1,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (1,10): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,10): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (6,10): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (6,10): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: gap spectrum: 1 wall clearances in (tol, 100 tol]: ['1.11e-06']
+  SURPRISE: gap spectrum: largest ACCEPTED pair gap is 6.21e-08 (A04 point is only ~1e-8 converged on that contact)
+  SURPRISE: [post-refine] pair (1,6): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,6): 4 tied separating axes
+  SURPRISE: [post-refine] pair (1,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,10): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,10): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (6,10): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (6,10): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 26/34  sv_min_kept 2.293e-01  sv_max_dropped 4.274e-16  rattlers [7]
+KKT: e_s in row space res 1.65e-02 (theta rows dropped: 1.72e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.65e-02); dropping the 11 theta equations makes it feasible (1.72e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((1, 6), [(1, 0), (1, 1), (6, 1), (6, 2)]), ((1, 10), [(1, 1), (10, 3)]), ((6, 10), [(6, 1), (10, 0)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.912157739865597 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.911657739865596 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.910657739865596 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 5828237/163840000 (3.5573e-02), V = 3.877085004270
+  wall time 5.0s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 26 exit=0 end=18:29:45
+### family 27  md5=0eae05c8 start=18:29:45
+
+==========================================================================
+FAMILY 27 (catalogue 27)  s_min = 3.925148813695428
+catalogue: 11 pair contacts, 10 wall contacts, tilt [40, 40, 45], count 3
+  LADDER tol 1e-07: 39 rows (11 pairs/19 wall rows), GN res 6.79e-71, |dz| 1.55e-09, ls_res 7.27e-08, KKT LP False
+  LADDER tol 1e-06: 39 rows (11 pairs/19 wall rows), GN res 6.79e-71, |dz| 1.55e-09, ls_res 7.27e-08, KKT LP False
+  LADDER tol 1e-05: 39 rows (11 pairs/19 wall rows), GN res 6.79e-71, |dz| 1.55e-09, ls_res 7.27e-08, KKT LP False
+  LADDER tol 1e-04: 39 rows (11 pairs/19 wall rows), GN res 6.79e-71, |dz| 1.55e-09, ls_res 7.27e-08, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.4s): tol_c 1e-07, GN residual 6.792e-71, |zhat - z0|_inf = 1.553e-09 -> 19 wall rows, 11 contact pairs, 0 aux rows, 39 rows (33 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 8.713e-02
+  pair gap spectrum (low 6): -5.95e-46 -2.55e-46 -1.24e-46 -8.45e-47 -3.44e-47 -2.41e-47 | first above tol: 1.511e-02
+  pair ( 0, 6) POINT         gap -5.95e-46 owner 0 edge 3 dom [2] t ['-0.4490'] axes_tied 1
+  pair ( 0, 8) POINT         gap -2.55e-46 owner 0 edge 0 dom [2] t ['0.4490'] axes_tied 1
+  pair ( 1, 2) FLUSH         gap +0.00e+00 owner 1 edge 2 dom [0, 1] t ['0.4129', '-0.5871'] axes_tied 2
+  pair ( 2, 8) POINT         gap -2.41e-47 owner 8 edge 0 dom [3] t ['-0.1943'] axes_tied 1
+  pair ( 3, 4) FLUSH         gap -1.24e-46 owner 3 edge 3 dom [2, 3] t ['0.6046', '-0.3954'] axes_tied 2
+  pair ( 3, 6) POINT         gap +1.92e-46 owner 6 edge 0 dom [2] t ['-0.1529'] axes_tied 1
+  pair ( 3, 8) POINT         gap -3.44e-47 owner 8 edge 3 dom [1] t ['0.1529'] axes_tied 1
+  pair ( 5, 6) POINT         gap +1.63e-46 owner 6 edge 2 dom [0] t ['-0.1115'] axes_tied 1
+  pair ( 6,10) POINT         gap +6.20e-46 owner 6 edge 3 dom [2] t ['0.1943'] axes_tied 1
+  pair ( 7, 8) POINT         gap +4.92e-46 owner 8 edge 1 dom [0] t ['0.1115'] axes_tied 1
+  pair ( 9,10) FLUSH         gap -8.45e-47 owner 9 edge 1 dom [0, 1] t ['0.7297', '-0.2703'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+CLASSIFY: VALLEY  rank 29/34  sv_min_kept 3.046e-01  sv_max_dropped 4.804e-16  rattlers []
+KKT: e_s in row space res 7.27e-08 (theta rows dropped: 1.45e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 7.27e-08); dropping the 11 theta equations makes it feasible (1.45e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 0 branched pairs [] -> 1 variants; min kill margin 1000000000000000000.0000
+  3S variants: 1 total, 1 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.924648812142093 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.924148812142092 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.923148812142092 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 1968659/40960000 (4.8063e-02), V = 3.877085848275
+  wall time 4.5s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 27 exit=0 end=18:29:50
+### family 28  md5=0eae05c8 start=18:29:50
+
+==========================================================================
+FAMILY 28 (catalogue 28)  s_min = 3.925199029243744
+catalogue: 11 pair contacts, 9 wall contacts, tilt [5, 20, 35, 40, 40], count 1
+  LADDER tol 1e-07: 48 rows (11 pairs/16 wall rows), GN res 7.24e-71, |dz| 8.34e-09, ls_res 2.12e-02, KKT LP False
+  LADDER tol 1e-06: 48 rows (11 pairs/16 wall rows), GN res 7.24e-71, |dz| 8.34e-09, ls_res 2.12e-02, KKT LP False
+  LADDER tol 1e-05: 48 rows (11 pairs/16 wall rows), GN res 7.24e-71, |dz| 8.34e-09, ls_res 2.12e-02, KKT LP False
+  LADDER tol 1e-04: 48 rows (11 pairs/16 wall rows), GN res 7.24e-71, |dz| 8.34e-09, ls_res 2.12e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (3.6s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 8.338e-09 -> 16 wall rows, 11 contact pairs, 2 aux rows, 48 rows (28 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 7.080e-03
+  pair gap spectrum (low 6): -1.06e-45 -8.31e-46 -7.87e-46 0.00e+00 0.00e+00 0.00e+00 | first above tol: 3.604e-04
+  pair ( 0, 6) POINT         gap -7.87e-46 owner 0 edge 1 dom [0] t ['-0.1201'] axes_tied 1
+  pair ( 0, 8) POINT         gap +1.79e-46 owner 0 edge 3 dom [1] t ['0.2679'] axes_tied 1
+  pair ( 1, 2) POINT         gap -1.06e-45 owner 2 edge 1 dom [0] t ['0.2276'] axes_tied 1
+  pair ( 1, 4) CORNER-CORNER gap +0.00e+00 owner 1 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 1, 6) CORNER-CORNER gap +0.00e+00 owner 1 edge 0 dom [2, 3] t ['1.5000', '0.5000'] axes_tied 4
+  pair ( 2, 9) POINT         gap +5.90e-46 owner 2 edge 3 dom [2] t ['-0.2198'] axes_tied 1
+  pair ( 3, 5) FLUSH         gap +0.00e+00 owner 3 edge 3 dom [1, 2] t ['0.5251', '-0.4749'] axes_tied 2
+  pair ( 4, 6) CORNER-CORNER gap +0.00e+00 owner 4 edge 0 dom [2, 3] t ['0.5000', '-0.5000'] axes_tied 2
+  pair ( 5, 8) POINT         gap +3.57e-46 owner 8 edge 0 dom [3] t ['0.1469'] axes_tied 1
+  pair ( 8, 9) POINT         gap -8.31e-46 owner 8 edge 2 dom [1] t ['0.2452'] axes_tied 1
+  pair ( 8,10) FLUSH         gap +4.79e-46 owner 10 edge 1 dom [0, 3] t ['-0.5195', '0.4805'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (1,4): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,4): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (1,6): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (1,6): 4 tied separating axes
+  SURPRISE: pair (1,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: pair (4,6): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (4,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,4): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,4): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (1,6): CORNER-CORNER (t = ['1.500000', '0.500000'], 4 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (1,6): 4 tied separating axes
+  SURPRISE: [post-refine] pair (1,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (4,6): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (4,6): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 26/34  sv_min_kept 1.950e-01  sv_max_dropped 4.174e-16  rattlers [7]
+KKT: e_s in row space res 2.12e-02 (theta rows dropped: 7.61e-16); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 2.12e-02); dropping the 11 theta equations makes it feasible (7.61e-16), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 3 branched pairs [((1, 4), [(1, 1), (4, 3)]), ((1, 6), [(1, 0), (1, 1), (6, 2), (6, 3)]), ((4, 6), [(4, 0), (6, 2)])] -> 16 variants; min kill margin 0.8426
+  3S variants: 16 total, 16 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.924699024850709 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.924199024850708 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.923199024850708 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 7883119/163840000 (4.8115e-02), V = 3.877084284860
+  wall time 4.2s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 28 exit=0 end=18:29:55
+### family 29  md5=0eae05c8 start=18:29:55
+
+==========================================================================
+FAMILY 29 (catalogue 29)  s_min = 3.925527077928808
+catalogue: 10 pair contacts, 9 wall contacts, tilt [20, 35, 35, 40], count 1
+  LADDER tol 1e-07: 37 rows (10 pairs/17 wall rows), GN res 7.70e-71, |dz| 8.44e-09, ls_res 1.85e-02, KKT LP False
+  LADDER tol 1e-06: 37 rows (10 pairs/17 wall rows), GN res 7.70e-71, |dz| 8.44e-09, ls_res 1.85e-02, KKT LP False
+  LADDER tol 1e-05: 37 rows (10 pairs/17 wall rows), GN res 7.70e-71, |dz| 8.44e-09, ls_res 1.85e-02, KKT LP False
+  LADDER tol 1e-04: 37 rows (10 pairs/17 wall rows), GN res 7.70e-71, |dz| 8.44e-09, ls_res 1.85e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.6s): tol_c 1e-07, GN residual 7.697e-71, |zhat - z0|_inf = 8.443e-09 -> 17 wall rows, 10 contact pairs, 1 aux rows, 37 rows (29 [V]-safe)
+  wall |g| spectrum: 1.56e-46 1.56e-46 1.56e-46 1.56e-46 | next above tol: 9.309e-04
+  pair gap spectrum (low 6): -9.31e-46 -8.98e-46 -7.85e-46 -1.09e-46 -9.08e-47 -3.89e-62 | first above tol: 8.026e-03
+  pair ( 0, 4) POINT         gap +2.47e-47 owner 4 edge 3 dom [1] t ['0.2284'] axes_tied 1
+  pair ( 0, 9) POINT         gap +4.95e-46 owner 9 edge 0 dom [2] t ['-0.1638'] axes_tied 1
+  pair ( 1, 6) POINT         gap -8.98e-46 owner 6 edge 2 dom [1] t ['0.0521'] axes_tied 1
+  pair ( 1, 8) FLUSH         gap +6.34e-46 owner 1 edge 3 dom [1, 2] t ['0.5370', '-0.4630'] axes_tied 2
+  pair ( 2, 7) FLUSH         gap -1.09e-46 owner 2 edge 3 dom [1, 2] t ['0.1511', '-0.8489'] axes_tied 2
+  pair ( 4, 5) POINT         gap -7.85e-46 owner 4 edge 1 dom [3] t ['-0.2605'] axes_tied 1
+  pair ( 5, 6) CORNER-CORNER gap -3.89e-62 owner 5 edge 1 dom [0, 3] t ['-0.5000', '0.5000'] axes_tied 2
+  pair ( 7, 9) POINT         gap -9.31e-46 owner 9 edge 2 dom [0] t ['-0.2288'] axes_tied 1
+  pair ( 8, 9) POINT         gap -9.08e-47 owner 8 edge 3 dom [2] t ['-0.3216'] axes_tied 1
+  pair ( 9,10) POINT         gap +3.06e-47 owner 9 edge 3 dom [1] t ['0.0704'] axes_tied 1
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+  SURPRISE: pair (5,6): CORNER-CORNER (t = ['0.500000', '-0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: pair (5,6): NO [V]-safe row for this contact -> omega = 0
+  SURPRISE: [post-refine] pair (5,6): CORNER-CORNER (t = ['-0.500000', '0.500000'], 2 tied axes, 0 [V]-safe rows)
+  SURPRISE: [post-refine] pair (5,6): NO [V]-safe row for this contact -> omega = 0
+CLASSIFY: VALLEY  rank 26/34  sv_min_kept 2.030e-01  sv_max_dropped 3.079e-16  rattlers [3]
+KKT: e_s in row space res 1.85e-02 (theta rows dropped: 1.50e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.85e-02); dropping the 11 theta equations makes it feasible (1.50e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 1 branched pairs [((5, 6), [(5, 1), (6, 3)])] -> 2 variants; min kill margin 0.8426
+  3S variants: 2 total, 2 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.925027073612455 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.924527073612455 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.923527073612454 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 15501/320000 (4.8441e-02), V = 3.877086448612
+  wall time 4.7s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 29 exit=0 end=18:30:01
+### family 30  md5=0eae05c8 start=18:30:01
+
+==========================================================================
+FAMILY 30 (catalogue 30)  s_min = 3.926293180604455
+catalogue: 11 pair contacts, 10 wall contacts, tilt [35, 40, 45], count 1
+  LADDER tol 1e-07: 39 rows (11 pairs/19 wall rows), GN res 7.24e-71, |dz| 6.66e-09, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-06: 39 rows (11 pairs/19 wall rows), GN res 7.24e-71, |dz| 6.66e-09, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-05: 39 rows (11 pairs/19 wall rows), GN res 7.24e-71, |dz| 6.66e-09, ls_res 1.38e-02, KKT LP False
+  LADDER tol 1e-04: 39 rows (11 pairs/19 wall rows), GN res 7.24e-71, |dz| 6.66e-09, ls_res 1.38e-02, KKT LP False
+  LADDER: no tol is both consistent and KKT-feasible; falling back to tol 1e-07
+AUDIT+REFINE (4.3s): tol_c 1e-07, GN residual 7.245e-71, |zhat - z0|_inf = 6.661e-09 -> 19 wall rows, 11 contact pairs, 0 aux rows, 39 rows (33 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 8.673e-02
+  pair gap spectrum (low 6): -5.88e-46 -5.82e-46 -3.51e-46 -1.74e-46 -1.39e-46 -8.19e-47 | first above tol: 5.918e-02
+  pair ( 0, 6) POINT         gap -5.82e-46 owner 0 edge 3 dom [2] t ['-0.3871'] axes_tied 1
+  pair ( 0, 8) POINT         gap +2.38e-46 owner 8 edge 2 dom [1] t ['-0.4952'] axes_tied 1
+  pair ( 1, 2) FLUSH         gap +0.00e+00 owner 1 edge 2 dom [0, 1] t ['0.4133', '-0.5867'] axes_tied 2
+  pair ( 2, 8) POINT         gap -5.88e-46 owner 8 edge 0 dom [3] t ['-0.1488'] axes_tied 1
+  pair ( 3, 4) FLUSH         gap -1.39e-46 owner 3 edge 3 dom [2, 3] t ['0.5551', '-0.4449'] axes_tied 2
+  pair ( 3, 6) POINT         gap -4.85e-48 owner 6 edge 0 dom [2] t ['-0.1546'] axes_tied 1
+  pair ( 3, 8) POINT         gap -3.51e-46 owner 8 edge 3 dom [1] t ['0.1553'] axes_tied 1
+  pair ( 5, 6) POINT         gap -6.29e-47 owner 6 edge 2 dom [0] t ['-0.0613'] axes_tied 1
+  pair ( 6,10) POINT         gap +9.70e-47 owner 6 edge 3 dom [2] t ['0.2369'] axes_tied 1
+  pair ( 7, 8) POINT         gap -1.74e-46 owner 8 edge 1 dom [3] t ['0.1611'] axes_tied 1
+  pair ( 9,10) FLUSH         gap -8.19e-47 owner 9 edge 1 dom [0, 1] t ['0.7380', '-0.2620'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+CLASSIFY: VALLEY  rank 29/34  sv_min_kept 2.916e-01  sv_max_dropped 2.865e-16  rattlers []
+KKT: e_s in row space res 1.38e-02 (theta rows dropped: 2.24e-15); LP on [V]-safe rows False; LP on all active rows False
+  ** NOT-CP: e_s is NOT in the cone of ANY active row gradient (least-squares residual 1.38e-02); dropping the 11 theta equations makes it feasible (2.24e-15), i.e. the A04 point is a local minimum only at FIXED ANGLES -- s strictly decreases under rotation. Not a drain; only the trivial coordinate bound s(z) >= s(zhat) - h is available here.
+  3S branch structure at h_probe=0.05: 0 branched pairs [] -> 1 variants; min kill margin 1000000000000000000.0000
+  3S variants: 1 total, 1 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 0.000, max r_res = 1.00e+00, max W0 = 1.00e-300
+  3S h=5.0e-04: V_soft 3.925793175698187 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=1.0e-03: V_soft 3.925293175698187 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h=2.0e-03: V_soft 3.924293175698186 (Hbar<=0.000, wt>=1000000000.00000)
+  3S h_max vs incumbent 3.877084: h = 403113/8192000 (4.9208e-02), V = 3.877085045815
+  wall time 4.4s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 30 exit=0 end=18:30:06
+### family 31  md5=0eae05c8 start=18:30:06
+
+==========================================================================
+FAMILY 31 (catalogue 31)  s_min = 3.936964160130347
+catalogue: 11 pair contacts, 10 wall contacts, tilt [40, 40, 40, 45], count 3
+  LADDER tol 1e-07: 41 rows (11 pairs/18 wall rows), GN res 5.43e-71, |dz| 3.59e-12, ls_res 3.13e-09, KKT LP True
+  LADDER tol 1e-06: 41 rows (11 pairs/18 wall rows), GN res 5.43e-71, |dz| 3.59e-12, ls_res 3.13e-09, KKT LP True
+  LADDER tol 1e-05: 41 rows (11 pairs/18 wall rows), GN res 5.43e-71, |dz| 3.59e-12, ls_res 3.13e-09, KKT LP True
+  LADDER tol 1e-04: 41 rows (11 pairs/18 wall rows), GN res 5.43e-71, |dz| 3.59e-12, ls_res 3.13e-09, KKT LP True
+AUDIT+REFINE (3.6s): tol_c 1e-07, GN residual 5.433e-71, |zhat - z0|_inf = 3.592e-12 -> 18 wall rows, 11 contact pairs, 0 aux rows, 41 rows (33 [V]-safe)
+  wall |g| spectrum: 0.00e+00 0.00e+00 0.00e+00 0.00e+00 | next above tol: 7.335e-02
+  pair gap spectrum (low 6): -7.17e-46 -5.39e-46 -4.61e-46 -1.24e-46 -2.88e-47 0.00e+00 | first above tol: 6.482e-03
+  pair ( 0, 6) POINT         gap -7.17e-46 owner 0 edge 3 dom [2] t ['-0.4676'] axes_tied 1
+  pair ( 0, 8) FLUSH         gap -1.24e-46 owner 0 edge 0 dom [2, 3] t ['0.4681', '-0.5319'] axes_tied 2
+  pair ( 1, 2) POINT         gap +1.90e-46 owner 1 edge 2 dom [0] t ['0.0573'] axes_tied 1
+  pair ( 2, 8) FLUSH         gap -5.39e-46 owner 2 edge 2 dom [0, 1] t ['0.2831', '-0.7169'] axes_tied 2
+  pair ( 3, 4) FLUSH         gap +0.00e+00 owner 3 edge 0 dom [2, 3] t ['0.2770', '-0.7230'] axes_tied 2
+  pair ( 3, 6) POINT         gap -4.61e-46 owner 6 edge 0 dom [3] t ['-0.1627'] axes_tied 1
+  pair ( 3, 8) POINT         gap +1.39e-46 owner 8 edge 3 dom [2] t ['0.2477'] axes_tied 1
+  pair ( 5, 6) POINT         gap +2.33e-46 owner 6 edge 2 dom [1] t ['-0.1702'] axes_tied 1
+  pair ( 6,10) POINT         gap +1.21e-46 owner 6 edge 3 dom [1] t ['0.1548'] axes_tied 1
+  pair ( 7, 8) POINT         gap -2.88e-47 owner 8 edge 1 dom [3] t ['0.0427'] axes_tied 1
+  pair ( 9,10) FLUSH         gap +2.29e-47 owner 10 edge 3 dom [1, 2] t ['0.5734', '-0.4266'] axes_tied 2
+  SURPRISE: tolerance ladder chose tol_c = 1e-07 (see ladder record)
+CLASSIFY: VALLEY  rank 30/34  sv_min_kept 2.501e-01  sv_max_dropped 2.357e-16  rattlers []
+KKT: e_s in row space res 3.13e-09 (theta rows dropped: 1.24e-15); LP on [V]-safe rows True; LP on all active rows True
+  3S branch structure at h_probe=0.05: 0 branched pairs [] -> 1 variants; min kill margin 1000000000000000000.0000
+  3S variants: 1 total, 0 with an infeasible multiplier LP (those fall back to omega = 0, i.e. the trivial bound s(z) >= s(zhat) - h)
+  3S max ||omega||_1 = 4.552, max r_res = 6.87e-09, max W0 = 6.89e-46
+  3S h=5.0e-04: V_soft 3.936962287385084 (Hbar<=7.491, wt>=0.02974)
+  3S h=1.0e-03: V_soft 3.936956660661347 (Hbar<=7.499, wt>=0.02757)
+  3S h=2.0e-03: V_soft 3.936934094209982 (Hbar<=7.516, wt>=0.02322)
+  3S h_max vs incumbent 3.877084: h = 1/20 (5.0000e-02), V = 3.886964160126
+  wall time 4.0s
+  checkpointed atlas -> ../results/atlas_batchB.json
+### family 31 exit=0 end=18:30:11
+### BATCH B RERUN DONE 18:30:11

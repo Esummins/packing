@@ -1047,3 +1047,19 @@ affordable cost estimate for closing 3.84.
   tight-sum cuts/wastage/occupancy shrink the far field to the CP boxes at tractable node count);
   seam = G1 cliff handoff. s(11) = s-hat exactly composes from D1 + far field + atlas + A36
   uniqueness, IF A38's number is finite-and-desktop.
+
+## 2026-08-27 — A37 closed: the certified critical-point atlas. 32 catalog families -> 10 attractors
+- HEADLINE COLLAPSE: below 3.95 the material structure is Trump (the only RIGID CP) + 9 valley
+  mechanisms ({1~2}, 6, {13~14}, 27 marginal, 31, A37-NEW-0..3 at s = 3.9027-3.9255 — four
+  attractors A04 MISSED, found by draining its own fixed-angle artifacts). The other 24 catalog
+  entries are NOT-CP tilt-lattice shadows, each CONSTRUCTIVELY refuted (explicit smaller-s packing)
+  and drained 24/24, 0 stuck, into the 10.
+- Atlas (results/atlas_final.json, 36 entries): every entry carries a certified discharge box
+  sigma >= V >= 3.877084 (exact rationals) within radius h (3.76e-3 Trump barrier regime ... 6.0e-2
+  high-s trivial regime). 37 certificates, 2018 checks PASS, corruption gates bite (with the
+  applicability honesty fix). Trump through the GENERIC pipeline reproduces A22 + A36 from scratch.
+- Lessons banked for A38: discovery loop is LOAD-BEARING (catalog provably incomplete); CP
+  classification needs residual scales + constructive witnesses (two false NOT-CPs caught at 1e-7);
+  trivial Lipschitz beats barrier for s_min >= ~3.887; dedupe s-primary at 1e-8, never s-alone.
+- Cost: < 2 desktop-hours vs 1-day budget. Gaps G-A37-1..5 recorded (float-rationalized NEW
+  centers, marginal classes, [NUM] drain taxonomy, completeness-beyond-today = the global wall).
