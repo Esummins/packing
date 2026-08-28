@@ -1,0 +1,32 @@
+re-solving node LP with EPS_GEO=0.003 (rows + columns, fine oracle) ...
+[s=3.877084 n=10 sym=C1 box=[0,90]x1] init orbits=1043 points=1043 rows=5584 (rejected 863)
+  it   0 tau=9.000000 rows=5757 orbs=1643 atoms>0=9 minmass=0.000000 maxcov=1.449661 +rows=173 -rows=0 +cols=600 -cols=0 t=5s [lp 0s row 3s +r 0s col 1s +c 0s]
+  it   1 tau=9.313725 rows=6538 orbs=2243 atoms>0=60 minmass=0.598039 maxcov=1.627451 +rows=781 -rows=0 +cols=600 -cols=0 t=17s [lp 6s row 4s +r 2s col 0s +c 0s]
+  it   2 tau=9.000000 rows=6935 orbs=2461 atoms>0=12 minmass=0.500000 maxcov=1.500000 +rows=397 -rows=0 +cols=218 -cols=0 t=34s [lp 11s row 5s +r 1s col 0s +c 0s]
+  it   3 tau=9.000000 rows=7413 orbs=3061 atoms>0=11 minmass=0.000000 maxcov=1.698447 +rows=478 -rows=0 +cols=600 -cols=0 t=52s [lp 11s row 5s +r 2s col 1s +c 0s]
+  it   4 tau=9.000000 rows=7499 orbs=3661 atoms>0=9 minmass=0.000000 maxcov=1.272059 +rows=86 -rows=0 +cols=600 -cols=0 t=154s [lp 98s row 3s +r 0s col 1s +c 0s]
+  it   5 tau=9.014925 rows=8555 orbs=4261 atoms>0=70 minmass=0.604478 maxcov=1.432836 +rows=1056 -rows=0 +cols=600 -cols=0 t=223s [lp 57s row 5s +r 6s col 1s +c 0s]
+  it   6 tau=9.000000 rows=9325 orbs=4861 atoms>0=27 minmass=0.500000 maxcov=1.368852 +rows=770 -rows=0 +cols=600 -cols=0 t=361s [lp 123s row 7s +r 6s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=10 sym=C1 tau=9.000000 nu=9.000000 conv=False minmass=0.500000 maxcov=1.368852 rows=9325 orbits=4861 atoms_nz=32 packing_support=59 time=1443s
+   tau=9.00000 conv=False minmass=0.5000 maxcov=1.3689
+[round 0] tau=9.00000 conv=False scale=1.0300 cert total=9.27002 budget=10 atoms=32
+    boxes = 32542  covered = 16120  vacuous = 0  exempt = 5 (core 5, nofam 0)  split = 16353  exact atom checks = 21061  max depth = 56  time = 0.9s
+    FAIL: 64 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 33 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 5.621976 deg, centre = (0.546577644, 2.298177500), exact mass = 772501/1000000 (~0.772501000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.877084 n=10 sym=C1 box=[0,90]x1] init orbits=644 points=644 rows=3339 (rejected 991)
+  it   0 tau=9.250000 rows=3549 orbs=644 atoms>0=26 minmass=0.250000 maxcov=2.006098 +rows=210 -rows=0 +cols=0 -cols=0 t=9s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   1 tau=9.372881 rows=3800 orbs=644 atoms>0=46 minmass=0.661017 maxcov=2.389831 +rows=251 -rows=0 +cols=0 -cols=0 t=17s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   2 tau=9.450704 rows=3993 orbs=644 atoms>0=58 minmass=0.774648 maxcov=1.915493 +rows=193 -rows=0 +cols=0 -cols=0 t=25s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   3 tau=9.471572 rows=4264 orbs=644 atoms>0=59 minmass=0.886288 maxcov=2.100334 +rows=271 -rows=0 +cols=0 -cols=0 t=34s [lp 0s row 8s +r 0s col 0s +c 0s]
+  it   4 tau=9.500000 rows=4455 orbs=644 atoms>0=51 minmass=0.918367 maxcov=2.250000 +rows=191 -rows=0 +cols=0 -cols=0 t=42s [lp 0s row 7s +r 0s col 0s +c 0s]
+    fine row search: minmass=0.333333 +rows=1
+  it   5 tau=9.500000 rows=4456 orbs=644 atoms>0=23 minmass=0.333333 maxcov=2.250000 +rows=1 -rows=0 +cols=0 -cols=0 t=43s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   6 tau=10.000000 rows=4763 orbs=644 atoms>0=18 minmass=0.666667 maxcov=2.000000 +rows=307 -rows=0 +cols=0 -cols=0 t=51s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   7 tau=10.000000 rows=4895 orbs=644 atoms>0=86 minmass=0.815484 maxcov=2.000000 +rows=132 -rows=0 +cols=0 -cols=0 t=59s [lp 0s row 8s +r 0s col 0s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it   8 tau=10.000000 rows=4895 orbs=644 atoms>0=14 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=61s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.877084 n=10 sym=C1 tau=10.000000 nu=10.000000 conv=True minmass=1.000000 maxcov=2.000000 rows=4895 orbits=644 atoms_nz=14 packing_support=10 time=61s
+[round 1] tau=10.00000 conv=True scale=1.0050 cert total=10.05000 budget=10 atoms=14
+certificate total >= budget: cannot certify (LP tau too close to the budget for the margin)

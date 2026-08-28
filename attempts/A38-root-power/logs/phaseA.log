@@ -1,0 +1,42 @@
+CANARY: 3 of 216 level-1 cells contain a D4 image of a Trump placement
+   idx= 21 (i2 j0 k3) status=undecided  tau=9.7773  hits=2  first={"mode": "s0", "d4": "r90", "placement": 6, "xytheta": [2.1885250000000003, 1.959613, 49.81805003305043]}
+   idx=152 (i6 j4 k2) status=notrun     tau=-  hits=2  first={"mode": "s0", "d4": "mx", "placement": 3, "xytheta": [2.6048299999999998, 2.424525, 40.18194996694957]}
+   idx=153 (i6 j4 k3) status=notrun     tau=-  hits=2  first={"mode": "s0", "d4": "e", "placement": 8, "xytheta": [2.623834, 2.436509, 49.81805003305043]}
+CANARY VERDICT: OK (no Trump-containing cell is dead)
+
+survivors: 172 ({'alive(LP)': 5, 'undecided': 85, 'notrun': 82})
+CENSUS all survivors: {"unexplained": 135, "atlas_consistent": 34, "trump_consistent": 3}
+CENSUS by status: {"undecided": {"unexplained": 62, "atlas_consistent": 22, "trump_consistent": 1}, "alive(LP)": {"unexplained": 3, "atlas_consistent": 2}, "notrun": {"atlas_consistent": 10, "unexplained": 70, "trump_consistent": 2}}
+CENSUS alive(LP) detail:
+   idx= 61 unexplained        trump(d_c=0.1693 d_th=19.818 r90#6) other(e13 fam13 d_c=0.0899 d_th=3.896) dist_centre=0.4746
+   idx= 65 atlas_consistent   trump(d_c=0.1693 d_th=25.182 r90#6) other(e30 fam30 d_c=0.0000 d_th=0.000) dist_centre=0.4746
+   idx= 74 atlas_consistent   trump(d_c=0.1715 d_th=0.000 mx#3) other(e21 fam21 d_c=0.0000 d_th=1.824) dist_centre=0.5396
+   idx= 95 unexplained        trump(d_c=0.2741 d_th=25.182 r90#6) other(e31 fam31 d_c=0.0257 d_th=0.000) dist_centre=0.5789
+   idx=100 unexplained        trump(d_c=0.2741 d_th=10.182 r90#6) other(e28 fam28 d_c=0.0606 d_th=6.013) dist_centre=0.5976
+GEOGRAPHY: {
+ "undecided": {
+  "n": 85,
+  "dist_min": 0.16573141460705693,
+  "dist_max": 0.7448700665959511,
+  "dist_median": 0.5188213926960136,
+  "tau_min": 8.999999999999078,
+  "tau_max": 10.500000000000062,
+  "tau_median": 9.810945273631468
+ },
+ "alive(LP)": {
+  "n": 5,
+  "dist_min": 0.474582547781502,
+  "dist_max": 0.5975531133209259,
+  "dist_median": 0.5395823931052206,
+  "tau_min": 9.999999999999808,
+  "tau_max": 10.000000000053884,
+  "tau_median": 9.999999999999979
+ },
+ "notrun": {
+  "n": 82,
+  "dist_min": 0.7448700665959511,
+  "dist_max": 1.1117601272057438,
+  "dist_median": 0.8675212441097805
+ }
+}
+-> C:\Users\esumm\code\packing\attempts\A38-root-power\code\..\results\census_l1survivors.json in 1.2 s

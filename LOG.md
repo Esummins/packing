@@ -1070,3 +1070,37 @@ affordable cost estimate for closing 3.84.
   cut (joint coverage > 2+eta => conflict rows), atlas discharge (36 certified boxes as termination),
   Farkas/FJ for near-jammed nodes, the A27 case-LP arsenal. Measures kill matrix by depth x weapon,
   survivor census, the G1 seam (tree-leaf scale vs box scale), extrapolation bracket, GO/NO-GO.
+
+## 2026-08-28 — A38 closed: NO-GO — the far-field cost wall at s-hat is named; root theorem banked
+- THE MEASUREMENT the s(11) = s-hat composition was waiting for, and it is honest and negative:
+  the conditioned interior-first tree at s0 = 3.877084 CANNOT reach the atlas boxes with today's
+  engine. Assassin = per-node LP DECISION COST at s0 (cost wall, not geometry wall): 0/60
+  depth-2/3 nodes decided at 180-485 s — tau sits 0.5-1.5 BELOW budget (kills plausibly exist)
+  but the row-generation LP never stabilizes (minmass 0-0.5); the same rule decides in 150-500 s
+  at 3.84. Driver: eta(s0) ~ 0.24 vs eta(3.84) ~ 0.046. b_eff = 8.00 flat, every weapon silent
+  until W1's onset at depth 5-7 => frontier floor 70-700 desktop-days, bracket open-ended above
+  (no decision constant exists in the data; cheapest closer = one 3600 s calibration node, G7).
+- BANKED: THEOREM A38.1 (certified) — every 11-packing at side <= 3.877084 has a square centred
+  in the interior zone [1.1, 2.777084]^2; margin 0.9994 (vs 2.76 at 3.84): the interior-first
+  entry point survives AT the endgame side, barely.
+- TRUST-CHAIN FINDING: exact-certification sample failed 2/8 at level 1 — the float row oracle
+  leaves coverage holes on nodes that PASS A27's converged/minmass/added_rows rule at s0; both
+  repaired to tau = budget. A27/A29's 3.84 results are NOT contaminated (their leaves were each
+  exact-certified). Rule for all future sweeps: certification-in-the-loop, float classification
+  is measurement-only.
+- Weapons ledger: W1-as-row-filter dead shallow (oracle already hunts the tight variety) but its
+  bite GROWS with depth (row-drop x16 by 2-core scale; c_core median 0.658 -> 1.21 by depth 3);
+  A33's sealing margin (G5) quantified as a ~5x multiplier on W1 => reseal is lever L1, worth ~2
+  depths (~64x frontier). W2 strictly post-refinement (pair bound collapses over wide cores).
+  W3/W4 structural zeros at pilot depths (need all 11 squares pinned) — the G1 seam probe leaned
+  right (occupancy tau 9.2 < 10) but could not converge: seam OPEN, cost-blocked at step one.
+- Census clean: Trump's 3 witness cells survive (a sound tree must not kill them); the 5
+  alive(LP) cells sit at tau = 10.000000 / maxcov = 1.000000 exactly — the equality-manifold
+  knife edge (A33's essentially-unique optimal fractional packing showing through), the true-wall
+  geography to watch if the cost wall ever falls.
+- Endgame consequence: s(11) = s-hat is NOT currently composable — D1 + atlas + A36 uniqueness
+  stand, the far field does not. Live equity: L1 (reseal eta at s-hat), L2 (decide-without-
+  convergence: witness-feedback in the solve loop), L3 (warm-started children); the 3.84-3.85
+  fallback tree and the n = 12 campaign (A33) are unaffected and remain the affordable targets.
+  T0 composition note (seams S1-S8) in attempts/A38-root-power/notes/T0_composition.md; full
+  report attempts/A38-root-power/results/rootpower_report.md; registry row final.

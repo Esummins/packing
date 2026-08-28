@@ -1,0 +1,71 @@
+{
+ "format": "A38-code-manifest-v1",
+ "source_attempt": "attempts/A27-close-384",
+ "note": "dead_region.py and wastage.py are pulled in because kill_tests.py imports them; level1.py is the A24 cover reference that cover38.py re-instantiates at s0.",
+ "copied": {
+  "caselp.py": {
+   "sha256_a27": "443dd48dfcce57dee43de10d06c710f2ef66029a722bcfc49878368468bbbee2",
+   "sha256_a38": "4e313d7f9809d9ac8445c690793512eba6dc63f9099b842fee3dcfd090394a99",
+   "verbatim": false
+  },
+  "lpbox.py": {
+   "sha256_a27": "f8eede2fafa246977504ebc78619d2a1c0840f8e3eec3c519782e8372382318e",
+   "sha256_a38": "f8eede2fafa246977504ebc78619d2a1c0840f8e3eec3c519782e8372382318e",
+   "verbatim": true
+  },
+  "kill_tests.py": {
+   "sha256_a27": "6eb53919a7069724654d8df368bd77629ff9d7dd80b309e0de716123eac7cc7d",
+   "sha256_a38": "6eb53919a7069724654d8df368bd77629ff9d7dd80b309e0de716123eac7cc7d",
+   "verbatim": true
+  },
+  "certify.py": {
+   "sha256_a27": "70f51443bda67d8aa4a0b60471c8cc568abc76ad4888f7dda161b62c53b3333b",
+   "sha256_a38": "70f51443bda67d8aa4a0b60471c8cc568abc76ad4888f7dda161b62c53b3333b",
+   "verbatim": true
+  },
+  "verify_case.py": {
+   "sha256_a27": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "sha256_a38": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "verbatim": true
+  },
+  "dead_region.py": {
+   "sha256_a27": "846cd4fb86aa6bc1018eee1516adfc8bde2a8a1a744184cb6836d3410b0e3e21",
+   "sha256_a38": "846cd4fb86aa6bc1018eee1516adfc8bde2a8a1a744184cb6836d3410b0e3e21",
+   "verbatim": true
+  },
+  "wastage.py": {
+   "sha256_a27": "a09290dea3749741b1e5b206f99e2f16771f0668c9ebb617c56e8ee6020b394c",
+   "sha256_a38": "a09290dea3749741b1e5b206f99e2f16771f0668c9ebb617c56e8ee6020b394c",
+   "verbatim": true
+  },
+  "level1.py": {
+   "sha256_a27": "4ec8d274c6afc978b929491f8ca7863377d8be5d82beb5b5e7d0398d0744d879",
+   "sha256_a38": "4ec8d274c6afc978b929491f8ca7863377d8be5d82beb5b5e7d0398d0744d879",
+   "verbatim": true
+  }
+ },
+ "new": {
+  "fieldcut.py": {
+   "sha256": "346dcbec8ab3e8eb4a83142e5fb547ff8cd2bca6d37865208195655d1c3b58fb"
+  },
+  "node38.py": {
+   "sha256": "6a9fff40a43d1b0801897bf659471a0bc857907ad78936e599d488f397655910"
+  },
+  "selftest38.py": {
+   "sha256": "aae6370c6fc8464bc0842b853f482e479b31f0eec2e541689834e8f062fc87c7"
+  },
+  "cover38.py": {
+   "sha256": "7a5839e3664b9f48d58a33301a05d1618d477f15b954939c1dad50adcd577a91"
+  }
+ },
+ "caselp_edit": {
+  "lines_added": 13,
+  "marker": "# A38",
+  "what": "module-level ROW_EXEMPT hook + 2 lines in Hyp.ok_many; ROW_EXEMPT=None reproduces A27 exactly"
+ },
+ "field_cert": "attempts/A33-tight-variety/t1/certs/A33_measure_feasible_3.877084.json",
+ "field_cert_sha256": "fbbeb2ff1878cd26c995a14983d6aae48363d4ef9920af42ee8fbfbd352d57a4",
+ "atlas": "attempts/A37-cp-atlas/results/atlas_final.json",
+ "atlas_sha256": "832b5983e3d61b9031f1863edea2985e26f73cc6f122db4ee11403adaf2226cf",
+ "canonical_sig_convention": "theta in RADIANS (third component); confirmed geometrically, see results/selftest38.json .convention"
+}
