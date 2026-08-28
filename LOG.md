@@ -1114,3 +1114,36 @@ affordable cost estimate for closing 3.84.
   A40 (Fable: surgery-lemma basin growth to h ~ 0.03 — the cliff is the enumeration's limit, not
   the barrier's; tangential margins bind and they're per-row), A41 (Fable: S1 seam design with the
   parametrized cost formula). Decision point after all three report.
+
+## 2026-08-28 — A40 closed: surgery-lemma basin growth — Trump's certified box grown 3.7e-3 -> 6.55e-3 (13.1 r_N); honest saturation named
+- THEORY (T1, banked in attempts/A40-basin-surgery/notes/theory.md): the SURGERY LEMMA set —
+  S1 pointwise [V]-validity (A37's rule, now proved); S2 over-estimate (A36 L1.1); S3 axis
+  disjunction with kills on a region; S4 safe/forced axes (gained-contact rows valid WITHOUT
+  dominance); S5 multi-cut ANCHOR certificate (face cut + tie cuts as valid affine rows; the
+  negative-at-z-hat cut value is the anchor; accumulated-interval Hessian with signed-diagonal
+  refinement, ~25% below the triangle bound); S5' leaf-emptiness (Taylor bound drives a valid
+  combination negative on the sub-box); S7 floor-shifted rows; S7' RELATIVE floors (same-axis
+  corner rows differ by an exact 1-D trig of the relative angle — endpoint/couple rows priced
+  at sin(tau) under a tie cut); S6 composition (rings x faces x branch trees, strict margins
+  preserve "equality only at z-hat" on top of A36's theorem).
+- RESULT (T2): certified growth 37/10000 -> 5794/884563 = 6.5501e-3 = 13.10 r_N = 1.77x A36,
+  in 7 rings, 2930 certificates (2564 anchors, 42 wall-empties, 324 leaf-empties), 45 min
+  wall, seconds-per-certificate. Chain, coverage trees, kills, [V]/floor/relfloor claims and
+  margins re-verified by the standalone corruption-gated checker (a40_check.py, no producer
+  libs): 168,774 checks, 0 failures, reproduced twice; 5/5 gates fail as required.
+- BINDING SEQUENCE: (i) h < 4.5e-3 anchor-only (61 faces, wall-empties); (ii) 4.5-5.4e-3 the
+  |t|=0.475-0.479 [V]-deaths force surgery on (3,7),(4,7) then all 10 flush/corner pairs;
+  (iii) 5.4-6.5e-3 deep branch trees (up to ~10 pairs/leaf) + leaf-empties carry the load;
+  (iv) SATURATION at h = 6.55e-3, face sq6.theta-, all-near leaf with (6,9) in its switched
+  selection: the worst-leaf growth rate omega_b = 0.0518 = 1/kappa_eff(A22) (the A36 pin
+  constant reappearing as a rate) vs quadratic cost 2*Hbar*h with Hbar ~ 8 => hard ceiling
+  h ~ 0.0065 for this certificate form. NOT a geometry wall: a cost-of-certificate wall,
+  named quantitatively.
+- Levers left on the table (gap list, attempts/A40-basin-surgery/): G-A40-1 signed quadratic
+  remainder beyond diagonal (the |H|-mass Taylor bound is the assassin's other half);
+  G-A40-2 recentred anchors inside the slivers; G-A40-3 full-near-cone rate 0.164 => ceiling
+  ~0.02 if the switched-selection slivers are closed; G-A40-4 tie-cut search is budgeted DFS
+  (facesearch 90s) — saturation declared at budget on the known wall, deep probe confirms the
+  rate wall at 240s+; G-A40-5 h=0.01/0.03 checkpoints NOT reached — brief's goal partially
+  met, honest NO recorded with the constraint named.
+- A29 untouched; 1 background process throughout; Opus subagent used for the verification run.
