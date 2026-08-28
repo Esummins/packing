@@ -1063,3 +1063,10 @@ affordable cost estimate for closing 3.84.
   trivial Lipschitz beats barrier for s_min >= ~3.887; dedupe s-primary at 1e-8, never s-alone.
 - Cost: < 2 desktop-hours vs 1-day budget. Gaps G-A37-1..5 recorded (float-rationalized NEW
   centers, marginal classes, [NUM] drain taxonomy, completeness-beyond-today = the global wall).
+
+## 2026-08-27 — A38 dispatched: the far-field root-power measurement at s-hat
+- The last unmeasured factor in the s(11) = s-hat composition. Weapons composed into the tree for
+  the first time: tight-sum domain cut (placements with coverage > 1+eta pruned everywhere), pair
+  cut (joint coverage > 2+eta => conflict rows), atlas discharge (36 certified boxes as termination),
+  Farkas/FJ for near-jammed nodes, the A27 case-LP arsenal. Measures kill matrix by depth x weapon,
+  survivor census, the G1 seam (tree-leaf scale vs box scale), extrapolation bracket, GO/NO-GO.
