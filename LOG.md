@@ -1244,3 +1244,10 @@ affordable cost estimate for closing 3.84.
 - Report: attempts/A43-spine-census/results/a43_report.md; formalization + soundness ledger:
   notes/formalization.md; lead checks: notes/verification_log.md. A29 untouched; 2 Opus workers,
   <= 3 processes each, ~1 h compute total.
+
+## 2026-08-29 — A44/A45 dispatched in parallel (A43's ranked levers)
+- A44: the FJ-Maxwell bound — refutation hunt against the atlas first (valleys make naive
+  isostaticity false), then proof or counterexample; x1e4 census multiplier if proved.
+- A45: the PI's interface-charging calculus — per-contact-type certified charges, ownership
+  disjointness, Trump canary, zero-charge-class composition; the one certificate whose unit of
+  account matches the enumerated object.
