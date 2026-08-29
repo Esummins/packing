@@ -1307,3 +1307,12 @@ affordable cost estimate for closing 3.84.
   so the 0.34-0.61 corner charge FIRES on flush-free structures (5-10x wedge scale). Thin branch
   closable outright via A46's designed-not-run rectangle lemmas (W1.6 quantization residue).
   A47 = (a) rectangle lemmas, (b) certified corner/wall primitives, (c) majority composition.
+
+## 2026-08-29 — A48 dispatched (I-L19): the bridge-cascade descent
+- The criticality-aware route, untouched by all six closed faces. The cascade: near-flush loaded
+  contacts need blockers at STRICTLY greater slope (R1); the recursion can't cycle or die in the
+  interior (R2); wall termination collapses the lever (1/sin d) into the lambda0=0/self-stress
+  branch (R3); the strictly-rising mismatches reach mid-tilt, where tilt-forcing + the certified
+  corner/wedge tables charge what the recursion FORCES (R4). Compose with A47's thin-branch
+  theorem. Bridge mechanism = positive control; a globally-embedded flush-free critical
+  configuration, if found instead, would be a discovery.
