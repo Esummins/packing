@@ -1,0 +1,58 @@
+A43-H1 run log (terse)
+======================
+workspace: attempts/A43-spine-census/code/h1  (copies only; A31 and A29 untouched)
+outputs  : attempts/A43-spine-census/results/h1
+field    : A39 resealed, results/p2b/certs/A39_measure_feasible_3.877084.json
+           artifact + report BOTH present, report result=PASS, margin=0, s=969271/250000
+           total = 71268483/6250000, eta_cert = 2518483/6250000 = 0.40295728 exactly
+           1+eta = 8768483/6250000 = 1.40295728 ; 2+eta = 15018483/6250000 = 2.40295728
+           1468 atoms, D4-closed (0 defects)
+           (A33 fallback eta = 1661717/3906250 = 0.425399552 NOT used)
+
+1. mlow grid build (A39 field, dt=0.01 dc=0.02, 100x144x144)          8.8 s
+   frac of admissible eroded cells exempt at 1+eta                    7.13 %
+2. per-wall-mask certified m_low (9 masks, full tilt x centre box)    all 0.000000  -> N5 inert
+   pair table (81 mask pairs) vs 2+eta                                all 0.000000  -> N6 inert
+3. Level 0 exhaustive k=3,4,5   (3 workers)                           1.5 / 1.1 / 2.0 s
+4. Level 0 exhaustive k=6                                             37.2 s
+5. Level 0 exhaustive k=7       (3 workers)                           see level0_k7.json
+6. regression vs A31 level0_k*.json                                   EXACT MATCH k=3..7
+7. Trump canary (extended: N1, N2, N5 exact+window+grid, N6, A33.1)   PASS (all 20 checks)
+   NOTE: Trump's contact graph CONTAINS a 4-cycle -> N7a proxy would kill the optimum
+8. hand-check: k=4 gmask=1 w=[2,2,6,3], wall B degree 4               N1 violation documented
+9. Level 1 (seed 7, cap 160 / 40) k=3..7                              gauge_surv reproduces A31
+   wall-edge-resolved re-enumeration ratio to A31                     exactly 1.0 at every graph
+10. L1 wall-flush N5 scan (2000 slabs, 4 walls)                       min 1.013644 max 1.437085
+    36/2000 slabs (1.8% of the along-wall range) certified exempt     NO total kill
+11. Level 2 refit + k=11 join                                         level2.json
+12. report assembly                                                   h1_report.json
+
+FINAL NUMBERS
+-------------
+Level 0 exhaustive, orbit-exact (S_k x D4), k = 3..7:
+  k      MAIN     R11=MAIN&N1   R12=+N5+N6   MAIN' non-thin   N2 all-wall(of MAIN&N1)
+  3        10             10           10             1            7  (0.700)
+  4       140            131          131            17           61  (0.466)
+  5      2275           2007         2007           245          485  (0.242)
+  6     41951          33967        33967          4001         3246  (0.096)
+  7    842398         623194       623194         67130        19545  (0.031)
+  N5 kills 0, N6 kills 0 at every k (windows certify m_low = 0.000000).
+  N7a (APPROX) share of MAIN: 0.000 / 0.093 / 0.299 / 0.521 / 0.690
+  N4 (CONDITIONAL) share of MAIN: 0.900 / 0.914 / 0.989 / 0.984 / 0.998
+k=7 wall time 1532.5 s at 3 workers (A31 baseline 560 s at 6).
+
+Level 1 (seed 7, cap 160/40), weighted:
+  k   gauge_surv (= A31)   N3 no-zero-class   N4 flush-mandatory   N7d all-CE 4-cycle
+  3        270.679              0.3557             0.1354               0.0000
+  4      17326.86               0.3454             0.0533               0.0501
+  5    2179022.19               0.3406             0.0314               0.2248
+  6  329802693.9                0.3369             0.0250               0.3829
+  7 4.0952e10                   0.3358             0.0072               0.4438
+
+Level 2 (3 models, k=7 holdout), k=11 composed:
+  main (A31 reproduction)      4.153e29 / 3.255e30 / 2.223e30   <- matches A31 headline
+  MAIN' EXACT                  2.304e29 / 1.507e30 / 1.087e30
+  MAIN' non-thin EXACT         2.733e28 / 3.473e28 / 3.327e28
+  MAIN' +N4 CONDITIONAL        1.634e26 / 8.933e26 / 6.909e26
+  MAIN' +N4 non-thin COND      1.716e25 / 2.181e25 / 2.090e25   (cf A31 best case 2.5e25)
+  fanout k=11 6.479e18 ; N2 all-wall frac k=11 1.75e-3 ; N3 no-zero frac k=11 0.314

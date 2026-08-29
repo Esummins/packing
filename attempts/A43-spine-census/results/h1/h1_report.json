@@ -1,0 +1,1334 @@
+{
+ "what": "A43 H1: the A31 structure census re-run with the 2026 theorem library as additional filters, per-filter ablation, exact vs conditional vs approximate labelled. Level 0 exhaustive and orbit-exact (S_k x D4) for k = 3..7.",
+ "when": "2026-08-28T21:59:05",
+ "field": {
+  "chosen": {
+   "field": "A39 resealed (results/p2b)",
+   "report": "PASS",
+   "report_margin": "0",
+   "report_time_s": 150.3892982006073
+  },
+  "cert": "attempts\\A39-early-cert\\results\\p2b\\certs\\A39_measure_feasible_3.877084.json",
+  "n_atoms": 1468,
+  "d4_defects": 0,
+  "total_mass_exact": "71268483/6250000",
+  "eta_cert_exact": "2518483/6250000",
+  "eta_cert_float": 0.40295728,
+  "W1_threshold_exact": "1 + eta = 8768483/6250000",
+  "W1_threshold_float": 1.40295728,
+  "W2_threshold_exact": "2 + eta = 15018483/6250000",
+  "W2_threshold_float": 2.40295728,
+  "note": "A39 resealed field selected: the artifact AND its standalone verification report (result PASS, margin 0, s = 969271/250000) are both present, per the H1 brief. The A33 fallback (eta = 1661717/3906250 = 0.425399552) was NOT used. Field is exactly D4-closed (0 defects).",
+  "grid": {
+   "NT": 100,
+   "NC": 144,
+   "clo": 0.5,
+   "chi": 3.377084,
+   "ht": 0.01,
+   "hc": 0.01997975,
+   "s": 3.877084,
+   "dt": 0.01,
+   "dc": 0.02,
+   "slop": 1e-06,
+   "cert": "attempts/A39-early-cert/results/p2b/certs/A39_measure_feasible_3.877084.json",
+   "n_atoms": 1468,
+   "total": "71268483/6250000",
+   "eta_cert": "2518483/6250000",
+   "thr_cert": "8768483/6250000",
+   "wall_s": 8.838674545288086
+  }
+ },
+ "filter_ledger": [
+  {
+   "id": "N1",
+   "filter": "per-wall <= 3",
+   "klass": "EXACT",
+   "level": "L0",
+   "use": "NEW HARD ablation row R11 (A31 soft bit 16 promoted); old soft column kept"
+  },
+  {
+   "id": "N2",
+   "filter": "A38.1 interior occupancy: all-wall core is dead",
+   "klass": "EXACT-EXISTENTIAL",
+   "level": "L0 column + k=11 join",
+   "use": "column only for k < 11 (the A38.1 witness may be a rattler); hard at k=11"
+  },
+  {
+   "id": "N3",
+   "filter": "A21 THM3 orientation; necessary condition = no zero-pinned class",
+   "klass": "EXACT-EXISTENTIAL",
+   "level": "L1 column + k=11 join"
+  },
+  {
+   "id": "N4",
+   "filter": "Maxwell flush-mandatory (2E >= 3k+1 at L0, #flush >= 3k+1-E at L1)",
+   "klass": "CONDITIONAL",
+   "level": "L0+L1 columns",
+   "use": "provenance check: structure_lemmas.md marks m >= 3k+1 SOFT, NOT a theorem; reported both ways, never in the composed exact count"
+  },
+  {
+   "id": "N5",
+   "filter": "W1 tight-variety: certified m_low over a placement window > 1+eta",
+   "klass": "EXACT",
+   "level": "L0+L1"
+  },
+  {
+   "id": "N6",
+   "filter": "W2 pair tight-sum: m_low(i) + m_low(j) > 2+eta kills the pair",
+   "klass": "EXACT",
+   "level": "L0+L1"
+  },
+  {
+   "id": "N7",
+   "filter": "wastage motifs: (a) any square-square 4-cycle; (d) 4-cycle with all four links corner-on-edge in a common (18,45) deg band",
+   "klass": "APPROX",
+   "level": "L0+L1 columns",
+   "use": "NEVER composed; see finding on Trump"
+  },
+  {
+   "id": "N8",
+   "filter": "band count (A26.1/A28.*): at most one square with wall clearance >= 0.938542",
+   "klass": "EXACT but inert here",
+   "level": "-",
+   "use": "0-cost column: a mask-0 centre box cannot certify clearance either way, so the filter has no L0 handle. Recorded so it is not re-spent on."
+  }
+ ],
+ "ablation_cumulative_orbit_counts": {
+  "rows_meaning": [
+   "R0 no filter",
+   "R2 +L5b",
+   "R3 +L1",
+   "R4 +L5d",
+   "R5 +L4a",
+   "R6 +L5a",
+   "R7 +L3",
+   "R8 +L6",
+   "R9 +L4b",
+   "R10 +L7",
+   "R11 +N1 (NEW HARD, EXACT)",
+   "R12 +N5 +N6 (NEW HARD, EXACT)"
+  ],
+  "table": {
+   "k3": {
+    "R0 no filter": 1072,
+    "R2 +L5b": 192,
+    "R3 +L1": 106,
+    "R4 +L5d": 106,
+    "R5 +L4a": 106,
+    "R6 +L5a": 35,
+    "R7 +L3": 34,
+    "R8 +L6": 10,
+    "R9 +L4b": 10,
+    "R10 +L7": 10,
+    "R11 +N1 (NEW HARD, EXACT)": 10,
+    "R12 +N5 +N6 (NEW HARD, EXACT)": 10,
+    "A31_R10_reference": 10
+   },
+   "k4": {
+    "R0 no filter": 28796,
+    "R2 +L5b": 2979,
+    "R3 +L1": 1920,
+    "R4 +L5d": 1920,
+    "R5 +L4a": 1920,
+    "R6 +L5a": 354,
+    "R7 +L3": 350,
+    "R8 +L6": 146,
+    "R9 +L4b": 140,
+    "R10 +L7": 140,
+    "R11 +N1 (NEW HARD, EXACT)": 131,
+    "R12 +N5 +N6 (NEW HARD, EXACT)": 131,
+    "A31_R10_reference": 140
+   },
+   "k5": {
+    "R0 no filter": 1318560,
+    "R2 +L5b": 76238,
+    "R3 +L1": 55838,
+    "R4 +L5d": 55838,
+    "R5 +L4a": 55558,
+    "R6 +L5a": 5188,
+    "R7 +L3": 5169,
+    "R8 +L6": 2730,
+    "R9 +L4b": 2275,
+    "R10 +L7": 2275,
+    "R11 +N1 (NEW HARD, EXACT)": 2007,
+    "R12 +N5 +N6 (NEW HARD, EXACT)": 2007,
+    "A31_R10_reference": 2275
+   },
+   "k6": {
+    "R0 no filter": 105405892,
+    "R2 +L5b": 3422212,
+    "R3 +L1": 2780542,
+    "R4 +L5d": 2780542,
+    "R5 +L4a": 2695838,
+    "R6 +L5a": 117493,
+    "R7 +L3": 117371,
+    "R8 +L6": 71382,
+    "R9 +L4b": 41951,
+    "R10 +L7": 41951,
+    "R11 +N1 (NEW HARD, EXACT)": 33967,
+    "R12 +N5 +N6 (NEW HARD, EXACT)": 33967,
+    "A31_R10_reference": 41951
+   },
+   "k7": {
+    "R0 no filter": 14828211568,
+    "R2 +L5b": 269537948,
+    "R3 +L1": 235850411,
+    "R4 +L5d": 235850411,
+    "R5 +L4a": 207791913,
+    "R6 +L5a": 4180697,
+    "R7 +L3": 4179618,
+    "R8 +L6": 2748105,
+    "R9 +L4b": 842398,
+    "R10 +L7": 842398,
+    "R11 +N1 (NEW HARD, EXACT)": 623194,
+    "R12 +N5 +N6 (NEW HARD, EXACT)": 623194,
+    "A31_R10_reference": 842398
+   }
+  },
+  "note": "R0..R10 are A31 verbatim and reproduce exactly (see verification.regression). R11/R12 are new. R12 = R11 at every k: N5 and N6 kill nothing at Level-0 window scale."
+ },
+ "level0_columns": {
+  "k3": {
+   "MAIN (A31 hard branch)": 10,
+   "MAIN thin (L2)": 9,
+   "N1 MAIN&N1  [EXACT]": 10,
+   "N5 kills on MAIN  [EXACT]": 0,
+   "N6 kills on MAIN, contact edges  [EXACT]": 0,
+   "N6 kills on MAIN, all pairs  [EXACT]": 0,
+   "MAIN' = MAIN&N1&N5&N6  [EXACT composed]": 10,
+   "MAIN' non-thin  [EXACT composed]": 1,
+   "N2 all-wall, of MAIN  [EXACT-EXISTENTIAL]": 7,
+   "N2 all-wall, of MAIN&N1  [EXACT-EXISTENTIAL]": 7,
+   "N4 2E>=3k+1, of MAIN  [CONDITIONAL]": 9,
+   "N4 2E>=3k+1, of MAIN'  [CONDITIONAL]": 9,
+   "N7a has 4-cycle, of MAIN  [APPROX]": 0,
+   "N7a has 4-cycle, of MAIN'  [APPROX]": 0,
+   "A-reps containing a 4-cycle": "0/4"
+  },
+  "k4": {
+   "MAIN (A31 hard branch)": 140,
+   "MAIN thin (L2)": 121,
+   "N1 MAIN&N1  [EXACT]": 131,
+   "N5 kills on MAIN  [EXACT]": 0,
+   "N6 kills on MAIN, contact edges  [EXACT]": 0,
+   "N6 kills on MAIN, all pairs  [EXACT]": 0,
+   "MAIN' = MAIN&N1&N5&N6  [EXACT composed]": 131,
+   "MAIN' non-thin  [EXACT composed]": 17,
+   "N2 all-wall, of MAIN  [EXACT-EXISTENTIAL]": 70,
+   "N2 all-wall, of MAIN&N1  [EXACT-EXISTENTIAL]": 61,
+   "N4 2E>=3k+1, of MAIN  [CONDITIONAL]": 128,
+   "N4 2E>=3k+1, of MAIN'  [CONDITIONAL]": 119,
+   "N7a has 4-cycle, of MAIN  [APPROX]": 13,
+   "N7a has 4-cycle, of MAIN'  [APPROX]": 13,
+   "A-reps containing a 4-cycle": "3/11"
+  },
+  "k5": {
+   "MAIN (A31 hard branch)": 2275,
+   "MAIN thin (L2)": 1989,
+   "N1 MAIN&N1  [EXACT]": 2007,
+   "N5 kills on MAIN  [EXACT]": 0,
+   "N6 kills on MAIN, contact edges  [EXACT]": 0,
+   "N6 kills on MAIN, all pairs  [EXACT]": 0,
+   "MAIN' = MAIN&N1&N5&N6  [EXACT composed]": 2007,
+   "MAIN' non-thin  [EXACT composed]": 245,
+   "N2 all-wall, of MAIN  [EXACT-EXISTENTIAL]": 677,
+   "N2 all-wall, of MAIN&N1  [EXACT-EXISTENTIAL]": 485,
+   "N4 2E>=3k+1, of MAIN  [CONDITIONAL]": 2249,
+   "N4 2E>=3k+1, of MAIN'  [CONDITIONAL]": 1981,
+   "N7a has 4-cycle, of MAIN  [APPROX]": 681,
+   "N7a has 4-cycle, of MAIN'  [APPROX]": 629,
+   "A-reps containing a 4-cycle": "16/34"
+  },
+  "k6": {
+   "MAIN (A31 hard branch)": 41951,
+   "MAIN thin (L2)": 37022,
+   "N1 MAIN&N1  [EXACT]": 33967,
+   "N5 kills on MAIN  [EXACT]": 0,
+   "N6 kills on MAIN, contact edges  [EXACT]": 0,
+   "N6 kills on MAIN, all pairs  [EXACT]": 0,
+   "MAIN' = MAIN&N1&N5&N6  [EXACT composed]": 33967,
+   "MAIN' non-thin  [EXACT composed]": 4001,
+   "N2 all-wall, of MAIN  [EXACT-EXISTENTIAL]": 6783,
+   "N2 all-wall, of MAIN&N1  [EXACT-EXISTENTIAL]": 3246,
+   "N4 2E>=3k+1, of MAIN  [CONDITIONAL]": 41273,
+   "N4 2E>=3k+1, of MAIN'  [CONDITIONAL]": 33297,
+   "N7a has 4-cycle, of MAIN  [APPROX]": 21839,
+   "N7a has 4-cycle, of MAIN'  [APPROX]": 18699,
+   "A-reps containing a 4-cycle": "112/156"
+  },
+  "k7": {
+   "MAIN (A31 hard branch)": 842398,
+   "MAIN thin (L2)": 753767,
+   "N1 MAIN&N1  [EXACT]": 623194,
+   "N5 kills on MAIN  [EXACT]": 0,
+   "N6 kills on MAIN, contact edges  [EXACT]": 0,
+   "N6 kills on MAIN, all pairs  [EXACT]": 0,
+   "MAIN' = MAIN&N1&N5&N6  [EXACT composed]": 623194,
+   "MAIN' non-thin  [EXACT composed]": 67130,
+   "N2 all-wall, of MAIN  [EXACT-EXISTENTIAL]": 68291,
+   "N2 all-wall, of MAIN&N1  [EXACT-EXISTENTIAL]": 19545,
+   "N4 2E>=3k+1, of MAIN  [CONDITIONAL]": 840776,
+   "N4 2E>=3k+1, of MAIN'  [CONDITIONAL]": 621593,
+   "N7a has 4-cycle, of MAIN  [APPROX]": 581145,
+   "N7a has 4-cycle, of MAIN'  [APPROX]": 454617,
+   "A-reps containing a 4-cycle": "927/1044"
+  }
+ },
+ "per_filter_kill_factors": {
+  "k3": {
+   "N1 keep-factor on MAIN": 1.0,
+   "N5 keep-factor": 1.0,
+   "N6 keep-factor": 1.0,
+   "composed EXACT keep-factor MAIN'/MAIN": 1.0,
+   "N2 all-wall share of MAIN&N1 (existential)": 0.7,
+   "N4 share of MAIN (conditional)": 0.9,
+   "N7a share of MAIN (approx)": 0.0,
+   "L2-thin share of MAIN": 0.9
+  },
+  "k4": {
+   "N1 keep-factor on MAIN": 0.9357142857142857,
+   "N5 keep-factor": 1.0,
+   "N6 keep-factor": 1.0,
+   "composed EXACT keep-factor MAIN'/MAIN": 0.9357142857142857,
+   "N2 all-wall share of MAIN&N1 (existential)": 0.46564885496183206,
+   "N4 share of MAIN (conditional)": 0.9142857142857143,
+   "N7a share of MAIN (approx)": 0.09285714285714286,
+   "L2-thin share of MAIN": 0.8642857142857143
+  },
+  "k5": {
+   "N1 keep-factor on MAIN": 0.8821978021978022,
+   "N5 keep-factor": 1.0,
+   "N6 keep-factor": 1.0,
+   "composed EXACT keep-factor MAIN'/MAIN": 0.8821978021978022,
+   "N2 all-wall share of MAIN&N1 (existential)": 0.24165421026407574,
+   "N4 share of MAIN (conditional)": 0.9885714285714285,
+   "N7a share of MAIN (approx)": 0.29934065934065934,
+   "L2-thin share of MAIN": 0.8742857142857143
+  },
+  "k6": {
+   "N1 keep-factor on MAIN": 0.8096827250840266,
+   "N5 keep-factor": 1.0,
+   "N6 keep-factor": 1.0,
+   "composed EXACT keep-factor MAIN'/MAIN": 0.8096827250840266,
+   "N2 all-wall share of MAIN&N1 (existential)": 0.09556334088968704,
+   "N4 share of MAIN (conditional)": 0.9838382875259231,
+   "N7a share of MAIN (approx)": 0.5205835379371171,
+   "L2-thin share of MAIN": 0.8825057805535029
+  },
+  "k7": {
+   "N1 keep-factor on MAIN": 0.7397857069936064,
+   "N5 keep-factor": 1.0,
+   "N6 keep-factor": 1.0,
+   "composed EXACT keep-factor MAIN'/MAIN": 0.7397857069936064,
+   "N2 all-wall share of MAIN&N1 (existential)": 0.03136262544247859,
+   "N4 share of MAIN (conditional)": 0.998074544336525,
+   "N7a share of MAIN (approx)": 0.6898698714859247,
+   "L2-thin share of MAIN": 0.8947872620780202
+  }
+ },
+ "level1": {
+  "protocol": "A31 level1.py sampling protocol: reservoir of <=40 MAIN survivors per A-rep, numpy default_rng(7), cap 160 (k<=6) / 40 (k=7); gauge-fixed menu 20 per square-square edge, 2 per square-wall edge.",
+  "per_k": {
+   "k3": {
+    "n_graphs": 10,
+    "n_we": 10,
+    "seconds": 0.0,
+    "E_mean": 5.6000000000000005,
+    "E_median": 6.0,
+    "gauge_surv_median": 863.9999999999997,
+    "gauge_surv_max": 928.0000000000001,
+    "gauge_surv_geomean_weighted": 270.67896700133974,
+    "per_edge_median": 2.870187284511442,
+    "per_edge_max": 5.421612021659069,
+    "per_edge_weighted": 3.0041533601495067,
+    "kill_median": 0.86,
+    "kill_weighted": 0.79225,
+    "zero_surv": 0,
+    "we_surv_geomean_weighted": 270.67896700133974,
+    "we_over_a31_ratio": 1.0,
+    "N3_frac_nozero_weighted": 0.35569923371647516,
+    "N4_frac_weighted": 0.13542145593869734,
+    "N7d_frac_weighted": 0.0,
+    "N3_frac_nozero_median": 0.43103448275862066,
+    "N4_frac_median": 0.07215836526181353,
+    "N7d_frac_median": 0.0
+   },
+   "k4": {
+    "n_graphs": 140,
+    "n_we": 140,
+    "seconds": 0.1,
+    "E_mean": 7.664285714285714,
+    "E_median": 8.0,
+    "gauge_surv_median": 20716.632931053275,
+    "gauge_surv_max": 2222079.999999999,
+    "gauge_surv_geomean_weighted": 17326.86020319912,
+    "per_edge_median": 3.5124574190576854,
+    "per_edge_max": 7.946482491744472,
+    "per_edge_weighted": 3.786203080674545,
+    "kill_median": 0.9108499999999999,
+    "kill_weighted": 0.8824295714285715,
+    "zero_surv": 0,
+    "we_surv_geomean_weighted": 17326.86020319912,
+    "we_over_a31_ratio": 1.0,
+    "N3_frac_nozero_weighted": 0.3453538226339248,
+    "N4_frac_weighted": 0.05328018689701773,
+    "N7d_frac_weighted": 0.05012332282330105,
+    "N3_frac_nozero_median": 0.3698224852071006,
+    "N4_frac_median": 0.02424942263279446,
+    "N7d_frac_median": 0.0
+   },
+   "k5": {
+    "n_graphs": 160,
+    "n_we": 160,
+    "seconds": 0.3,
+    "E_mean": 9.863680154142582,
+    "E_median": 10.0,
+    "gauge_surv_median": 4853760.000000003,
+    "gauge_surv_max": 6303121407.999991,
+    "gauge_surv_geomean_weighted": 2179022.186037889,
+    "per_edge_median": 4.4293164681140595,
+    "per_edge_max": 9.286004822858152,
+    "per_edge_weighted": 4.585227514268503,
+    "kill_median": 0.950002,
+    "kill_weighted": 0.9367135514313238,
+    "zero_surv": 0,
+    "we_surv_geomean_weighted": 2179022.186037889,
+    "we_over_a31_ratio": 1.0,
+    "N3_frac_nozero_weighted": 0.34063492999188416,
+    "N4_frac_weighted": 0.03144860287234216,
+    "N7d_frac_weighted": 0.22480006912028833,
+    "N3_frac_nozero_median": 0.3436960245711226,
+    "N4_frac_median": 0.013364493231449517,
+    "N7d_frac_median": 0.0
+   },
+   "k6": {
+    "n_graphs": 160,
+    "n_we": 160,
+    "seconds": 1.2,
+    "E_mean": 12.031890414898974,
+    "E_median": 12.5,
+    "gauge_surv_median": 1496905184.7276733,
+    "gauge_surv_max": 1601001488383.9978,
+    "gauge_surv_geomean_weighted": 329802693.9198265,
+    "per_edge_median": 5.731214576753432,
+    "per_edge_max": 10.169182152333851,
+    "per_edge_weighted": 5.335394785169048,
+    "kill_median": 0.9807219039999999,
+    "kill_weighted": 0.9589106524815563,
+    "zero_surv": 0,
+    "we_surv_geomean_weighted": 329802693.9198265,
+    "we_over_a31_ratio": 1.0,
+    "N3_frac_nozero_weighted": 0.3368586966955568,
+    "N4_frac_weighted": 0.025039470349773586,
+    "N7d_frac_weighted": 0.38288320802731424,
+    "N3_frac_nozero_median": 0.38232054372573065,
+    "N4_frac_median": 0.007951579121065545,
+    "N7d_frac_median": 0.8151024642485185
+   },
+   "k7": {
+    "n_graphs": 40,
+    "n_we": 40,
+    "seconds": 1.7,
+    "E_mean": 14.09321371931735,
+    "E_median": 15.0,
+    "gauge_surv_median": 3610333673554.7354,
+    "gauge_surv_max": 3.2120946399641584e+16,
+    "gauge_surv_geomean_weighted": 40951791128.24038,
+    "per_edge_median": 7.144079677387237,
+    "per_edge_max": 9.35378856891453,
+    "per_edge_weighted": 5.84759291750791,
+    "kill_median": 0.9893357088,
+    "kill_weighted": 0.9792990126208153,
+    "zero_surv": 0,
+    "we_surv_geomean_weighted": 40951791128.24038,
+    "we_over_a31_ratio": 1.0,
+    "N3_frac_nozero_weighted": 0.3357652627026157,
+    "N4_frac_weighted": 0.0072192919792916895,
+    "N7d_frac_weighted": 0.44378670670365944,
+    "N3_frac_nozero_median": 0.5047798521123903,
+    "N4_frac_median": 0.007171811322766669,
+    "N7d_frac_median": 0.9646408279111434
+   }
+  },
+  "N3_column": "we_surv_nozero / we_surv = share of tilt-feasible decorations with NO zero-pinned class  [EXACT-EXISTENTIAL]",
+  "N4_column": "we_surv_N4 / we_surv = share with #flush >= 3k+1-E  [CONDITIONAL]",
+  "N7d_column": "we_surv_N7d / we_surv = share containing a 4-cycle whose four links are all corner-on-edge  [APPROX]",
+  "walledge_crosscheck": "we_surv (wall-edge-resolved re-enumeration: each square-wall edge independently flush/corner, with the phi=0 vs phi!=0 consistency constraint) equals A31 gauge_surv at EVERY sampled graph, ratio 1.0 -- an independent confirmation of A31's wall-class enumeration."
+ },
+ "level1_N5_wallflush": {
+  "field": "attempts\\A39-early-cert\\results\\p2b\\certs\\A39_measure_feasible_3.877084.json",
+  "eta_exact": "2518483/6250000",
+  "thr_exact": "8768483/6250000",
+  "thr_float": 1.40295728,
+  "n_slabs": 2000,
+  "n_pin_slabs": 40,
+  "window": "t = 0 exactly; pinned coord = 1/2 (L,B) or s-1/2 in [3.3, 3.377084] (R,T); free coord in [1/2, 3.377084]",
+  "walls": {
+   "L": {
+    "mlow_min": 1.0136440859999998,
+    "mlow_max": 1.437085416,
+    "mlow_mean": 1.085657956344,
+    "mlow_median": 1.030950024,
+    "argmin_free": [
+     1.3775106199999998,
+     1.378949162
+    ],
+    "argmax_free": [
+     1.4695773079999999,
+     1.47101585
+    ],
+    "slabs_exempt": 36,
+    "slabs": 2000,
+    "frac_free_range_exempt": 0.018,
+    "kills_all_wall_flush": false
+   },
+   "B": {
+    "mlow_min": 1.0136440859999998,
+    "mlow_max": 1.437085416,
+    "mlow_mean": 1.085657956344,
+    "mlow_median": 1.030950024,
+    "argmin_free": [
+     1.3775106199999998,
+     1.378949162
+    ],
+    "argmax_free": [
+     1.4695773079999999,
+     1.47101585
+    ],
+    "slabs_exempt": 36,
+    "slabs": 2000,
+    "frac_free_range_exempt": 0.018,
+    "kills_all_wall_flush": false
+   },
+   "R": {
+    "mlow_min": 1.0136440859999998,
+    "mlow_max": 1.437085416,
+    "mlow_mean": 1.085657956344,
+    "mlow_median": 1.030950024,
+    "argmin_free": [
+     1.3775106199999998,
+     1.378949162
+    ],
+    "argmax_free": [
+     1.4695773079999999,
+     1.47101585
+    ],
+    "slabs_exempt": 36,
+    "slabs": 2000,
+    "frac_free_range_exempt": 0.018,
+    "kills_all_wall_flush": false
+   },
+   "T": {
+    "mlow_min": 1.0136440859999998,
+    "mlow_max": 1.437085416,
+    "mlow_mean": 1.085657956344,
+    "mlow_median": 1.030950024,
+    "argmin_free": [
+     1.3775106199999998,
+     1.378949162
+    ],
+    "argmax_free": [
+     1.4695773079999999,
+     1.47101585
+    ],
+    "slabs_exempt": 36,
+    "slabs": 2000,
+    "frac_free_range_exempt": 0.018,
+    "kills_all_wall_flush": false
+   }
+  },
+  "exact_confirmation_L": {
+   "argmin": {
+    "free": [
+     1.3775106199999998,
+     1.378949162
+    ],
+    "mlow_exact": "506822043/500000000",
+    "mlow_float": 1.013644086,
+    "matches_float_scan": true
+   },
+   "argmax": {
+    "free": [
+     1.4695773079999999,
+     1.47101585
+    ],
+    "mlow_exact": "179635677/125000000",
+    "mlow_float": 1.437085416,
+    "matches_float_scan": true
+   }
+  },
+  "verdict": "NO KILL: no wall-flush window is certified exempt"
+ },
+ "extrapolation": {
+  "series": {
+   "main_A31": {
+    "3": 10,
+    "4": 140,
+    "5": 2275,
+    "6": 41951,
+    "7": 842398
+   },
+   "main_nonthin_A31": {
+    "3": 1,
+    "4": 19,
+    "5": 286,
+    "6": 4929,
+    "7": 88631
+   },
+   "MAINprime_exact": {
+    "3": 10,
+    "4": 131,
+    "5": 2007,
+    "6": 33967,
+    "7": 623194
+   },
+   "MAINprime_nonthin": {
+    "3": 1,
+    "4": 17,
+    "5": 245,
+    "6": 4001,
+    "7": 67130
+   },
+   "MAINprime_N4_conditional": {
+    "3": 9,
+    "4": 119,
+    "5": 1981,
+    "6": 33297,
+    "7": 621593
+   },
+   "MAINprime_N4_nonthin_conditional": {
+    "3": 1,
+    "4": 17,
+    "5": 245,
+    "6": 4001,
+    "7": 67130
+   }
+  },
+  "fits": {
+   "main_A31": {
+    "M1_exp": "log N = -6.3403 + 2.8385 k",
+    "M2_logquad": "log N = -4.9474 + 2.2330 k + 0.0606 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 5.9553 + 2.0432 k"
+   },
+   "main_nonthin_A31": {
+    "M1_exp": "log N = -8.4724 + 2.8343 k",
+    "M2_logquad": "log N = -8.4310 + 2.8163 k + 0.0018 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 17.7977 + -0.0874 k"
+   },
+   "MAINprime_exact": {
+    "M1_exp": "log N = -6.1074 + 2.7638 k",
+    "M2_logquad": "log N = -4.8371 + 2.2115 k + 0.0552 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 6.3833 + 1.7345 k"
+   },
+   "MAINprime_nonthin": {
+    "M1_exp": "log N = -8.2963 + 2.7690 k",
+    "M2_logquad": "log N = -8.1341 + 2.6985 k + 0.0071 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 15.4406 + 0.1254 k"
+   },
+   "MAINprime_N4_conditional": {
+    "M1_exp": "log N = -6.2957 + 2.7920 k",
+    "M2_logquad": "log N = -5.1465 + 2.2924 k + 0.0500 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 7.2620 + 1.6499 k"
+   },
+   "MAINprime_N4_nonthin_conditional": {
+    "M1_exp": "log N = -8.2963 + 2.7690 k",
+    "M2_logquad": "log N = -8.1341 + 2.6985 k + 0.0071 k^2",
+    "M3_ratio_lin": "N(k)/N(k-1) = 15.4406 + 0.1254 k"
+   },
+   "fanout": {
+    "Ess": "-3.6556 + 1.6784 k",
+    "Esw": "2.8292 + 0.4570 k",
+    "log_keep_fraction": "0.0294 + -0.5924 k",
+    "measured_surv": {
+     "3": 270.67896700133974,
+     "4": 17326.86020319912,
+     "5": 2179022.186037889,
+     "6": 329802693.9198265,
+     "7": 40951791128.24038
+    },
+    "N3_frac_nozero": {
+     "3": 0.35569923371647516,
+     "4": 0.3453538226339248,
+     "5": 0.34063492999188416,
+     "6": 0.3368586966955568,
+     "7": 0.3357652627026157
+    },
+    "N3_fit": "0.3670 + -0.0048 k (linear)",
+    "N4_frac": {
+     "3": 0.13542145593869734,
+     "4": 0.05328018689701773,
+     "5": 0.03144860287234216,
+     "6": 0.025039470349773586,
+     "7": 0.0072192919792916895
+    },
+    "N4_fit": "log frac = -0.0927 + -0.6618 k",
+    "N7d_frac": {
+     "3": 0.0,
+     "4": 0.05012332282330105,
+     "5": 0.22480006912028833,
+     "6": 0.38288320802731424,
+     "7": 0.44378670670365944
+    }
+   }
+  },
+  "holdout_k7": {
+   "main_A31": {
+    "M1_exp": {
+     "predicted": 632751.2593646168,
+     "actual": 842398,
+     "ratio": 0.7511310085786254
+    },
+    "M2_logquad": {
+     "predicted": 892840.9882650867,
+     "actual": 842398,
+     "ratio": 1.0598802326988985
+    },
+    "M3_ratio_lin": {
+     "predicted": 867127.17,
+     "actual": 842398,
+     "ratio": 1.0293556846051393
+    }
+   },
+   "main_nonthin_A31": {
+    "M1_exp": {
+     "predicted": 83356.95367514405,
+     "actual": 88631,
+     "ratio": 0.9404943380436196
+    },
+    "M2_logquad": {
+     "predicted": 73788.86238551748,
+     "actual": 88631,
+     "ratio": 0.8325401088278084
+    },
+    "M3_ratio_lin": {
+     "predicted": 75561.0680898049,
+     "actual": 88631,
+     "ratio": 0.8525354344394727
+    }
+   },
+   "MAINprime_exact": {
+    "M1_exp": {
+     "predicted": 481205.8268166603,
+     "actual": 623194,
+     "ratio": 0.7721605580552128
+    },
+    "M2_logquad": {
+     "predicted": 662794.7066989104,
+     "actual": 623194,
+     "ratio": 1.0635447496267783
+    },
+    "M3_ratio_lin": {
+     "predicted": 643308.6100140602,
+     "actual": 623194,
+     "ratio": 1.0322766426089791
+    }
+   },
+   "MAINprime_nonthin": {
+    "M1_exp": {
+     "predicted": 62625.55584583695,
+     "actual": 67130,
+     "ratio": 0.9328996848776545
+    },
+    "M2_logquad": {
+     "predicted": 59558.46903893159,
+     "actual": 67130,
+     "ratio": 0.8872109196921136
+    },
+    "M3_ratio_lin": {
+     "predicted": 60994.1963185274,
+     "actual": 67130,
+     "ratio": 0.9085981873756502
+    }
+   },
+   "MAINprime_N4_conditional": {
+    "M1_exp": {
+     "predicted": 493999.02204458107,
+     "actual": 621593,
+     "ratio": 0.7947306711056609
+    },
+    "M2_logquad": {
+     "predicted": 666801.1074392044,
+     "actual": 621593,
+     "ratio": 1.0727294345965999
+    },
+    "M3_ratio_lin": {
+     "predicted": 637474.6736315258,
+     "actual": 621593,
+     "ratio": 1.025549955729112
+    }
+   },
+   "MAINprime_N4_nonthin_conditional": {
+    "M1_exp": {
+     "predicted": 62625.55584583695,
+     "actual": 67130,
+     "ratio": 0.9328996848776545
+    },
+    "M2_logquad": {
+     "predicted": 59558.46903893159,
+     "actual": 67130,
+     "ratio": 0.8872109196921136
+    },
+    "M3_ratio_lin": {
+     "predicted": 60994.1963185274,
+     "actual": 67130,
+     "ratio": 0.9085981873756502
+    }
+   }
+  },
+  "projection_level0": {
+   "main_A31": {
+    "M1_exp": {
+     "8": 12840102.69284518,
+     "9": 219448891.165479,
+     "10": 3750578713.0965047,
+     "11": 64100759900.97031
+    },
+    "M2_logquad": {
+     "8": 19618655.745561786,
+     "9": 512312425.8553968,
+     "10": 15100827505.512949,
+     "11": 502419882906.5847
+    },
+    "M3_ratio_lin": {
+     "8": 18785915.565053515,
+     "9": 457318303.2839895,
+     "10": 12067183079.061699,
+     "11": 343069927779.9336
+    }
+   },
+   "main_nonthin_A31": {
+    "M1_exp": {
+     "8": 1471789.7535840746,
+     "9": 25047444.714429595,
+     "10": 426266377.5139312,
+     "11": 7254353754.264304
+    },
+    "M2_logquad": {
+     "8": 1490421.7572102381,
+     "9": 25685631.050940175,
+     "10": 444254946.0420689,
+     "11": 7711436320.084123
+    },
+    "M3_ratio_lin": {
+     "8": 1515472.28320366,
+     "9": 25780146.78790224,
+     "10": 436301147.95877403,
+     "11": 7345803913.157141
+    }
+   },
+   "MAINprime_exact": {
+    "M1_exp": {
+     "8": 8912705.392417913,
+     "9": 141355526.80902168,
+     "10": 2241898961.055564,
+     "11": 35556522373.35244
+    },
+    "M2_logquad": {
+     "8": 13119618.262550334,
+     "9": 306292306.57341444,
+     "10": 7985934327.748692,
+     "11": 232535967520.52808
+    },
+    "M3_ratio_lin": {
+     "8": 12625396.463275973,
+     "9": 277678595.21388674,
+     "10": 6588794294.683234,
+     "11": 167767899599.59586
+    }
+   },
+   "MAINprime_nonthin": {
+    "M1_exp": {
+     "8": 1040892.5931637158,
+     "9": 16594386.86604825,
+     "10": 264555322.2961231,
+     "11": 4217662220.374172
+    },
+    "M2_logquad": {
+     "8": 1093572.9131950913,
+     "9": 18316600.090498805,
+     "10": 311148863.12421167,
+     "11": 5360654404.372602
+    },
+    "M3_ratio_lin": {
+     "8": 1103859.6430892278,
+     "9": 18289837.09954493,
+     "10": 305337203.67528874,
+     "11": 5135692588.546379
+    }
+   },
+   "MAINprime_N4_conditional": {
+    "M1_exp": {
+     "8": 9249806.34295641,
+     "9": 150893723.65335557,
+     "10": 2461555949.7970924,
+     "11": 40155796724.19808
+    },
+    "M2_logquad": {
+     "8": 13122626.122882865,
+     "9": 303701828.2394751,
+     "10": 7767310409.550145,
+     "11": 219528303372.4018
+    },
+    "M3_ratio_lin": {
+     "8": 12718486.480039494,
+     "9": 281218488.9588349,
+     "10": 6682001414.966229,
+     "11": 169794841899.8101
+    }
+   },
+   "MAINprime_N4_nonthin_conditional": {
+    "M1_exp": {
+     "8": 1040892.5931637158,
+     "9": 16594386.86604825,
+     "10": 264555322.2961231,
+     "11": 4217662220.374172
+    },
+    "M2_logquad": {
+     "8": 1093572.9131950913,
+     "9": 18316600.090498805,
+     "10": 311148863.12421167,
+     "11": 5360654404.372602
+    },
+    "M3_ratio_lin": {
+     "8": 1103859.6430892278,
+     "9": 18289837.09954493,
+     "10": 305337203.67528874,
+     "11": 5135692588.546379
+    }
+   },
+   "fanout": {
+    "3": 199.5990201403824,
+    "4": 23124.668510190553,
+    "5": 2679122.840032463,
+    "6": 310391441.45225257,
+    "7": 35960593328.24039,
+    "8": 4166236886135.337,
+    "9": 482681963363587.9,
+    "10": 5.592141880646807e+16,
+    "11": 6.478810725671843e+18
+   },
+   "fanout_N3_frac_k11": 0.31384454836843934,
+   "fanout_N4_frac_k11": 0.000628056995069806
+  },
+  "composed_totals": {
+   "main_A31": {
+    "M1_exp": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3237453.5914266775,
+      "5": 6095004461.0738535,
+      "6": 13021231360363.447,
+      "7": 3.0293131898523044e+16,
+      "8": 5.349490946069726e+19,
+      "9": 1.0592402164571572e+23,
+      "10": 2.097376829816937e+26,
+      "11": 4.15296690770122e+29
+     },
+     "k11": 4.15296690770122e+29,
+     "sum_all_cores": 4.1550653443065054e+29
+    },
+    "M2_logquad": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3237453.5914266775,
+      "5": 6095004461.0738535,
+      "6": 13021231360363.447,
+      "7": 3.0293131898523044e+16,
+      "8": 8.173596722355048e+19,
+      "9": 2.4728396756744548e+23,
+      "10": 8.444596992600221e+26,
+      "11": 3.255083326165972e+30
+     },
+     "k11": 3.255083326165972e+30,
+     "sum_all_cores": 3.2559280332309663e+30
+    },
+    "M3_ratio_lin": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3237453.5914266775,
+      "5": 6095004461.0738535,
+      "6": 13021231360363.447,
+      "7": 3.0293131898523044e+16,
+      "8": 7.826657436694992e+19,
+      "9": 2.207392965112208e+23,
+      "10": 6.748139987785342e+26,
+      "11": 2.2226851277560982e+30
+     },
+     "k11": 2.2226851277560982e+30,
+     "sum_all_cores": 2.22336016257247e+30
+    }
+   },
+   "MAINprime_exact": {
+    "M1_exp": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3029331.5748349624,
+      "5": 5376999539.945153,
+      "6": 10543066091808.662,
+      "7": 2.241042599859944e+16,
+      "8": 3.713244196114883e+19,
+      "9": 6.822976321247287e+22,
+      "10": 1.2537017072297385e+26,
+      "11": 2.3036397852006663e+29
+     },
+     "k11": 2.3036397852006663e+29,
+     "sum_all_cores": 2.304894169577077e+29
+    },
+    "M2_logquad": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3029331.5748349624,
+      "5": 5376999539.945153,
+      "6": 10543066091808.662,
+      "7": 2.241042599859944e+16,
+      "8": 5.4659437537452e+19,
+      "9": 1.4784177190001766e+23,
+      "10": 4.465847781029847e+26,
+      "11": 1.5065565204764765e+30
+     },
+     "k11": 1.5065565204764765e+30,
+     "sum_all_cores": 1.5070032531510333e+30
+    },
+    "M3_ratio_lin": {
+     "per_k": {
+      "3": 1995.9902014038241,
+      "4": 3029331.5748349624,
+      "5": 5376999539.945153,
+      "6": 10543066091808.662,
+      "7": 2.241042599859944e+16,
+      "8": 5.260039244738299e+19,
+      "9": 1.3403044952188182e+23,
+      "10": 3.6845472518264856e+26,
+      "11": 1.0869364673492985e+30
+     },
+     "k11": 1.0869364673492985e+30,
+     "sum_all_cores": 1.0873050561575536e+30
+    }
+   },
+   "MAINprime_nonthin": {
+    "M1_exp": {
+     "per_k": {
+      "3": 199.5990201403824,
+      "4": 393119.3646732394,
+      "5": 656385095.8079535,
+      "6": 1241876157250.4624,
+      "7": 2414034630124777.0,
+      "8": 4.3366051161437353e+18,
+      "9": 8.009811233319105e+21,
+      "10": 1.479430897560164e+25,
+      "11": 2.7325435230621105e+28
+     },
+     "k11": 2.7325435230621105e+28,
+     "sum_all_cores": 2.734023755374696e+28
+    },
+    "M2_logquad": {
+     "per_k": {
+      "3": 199.5990201403824,
+      "4": 393119.3646732394,
+      "5": 656385095.8079535,
+      "6": 1241876157250.4624,
+      "7": 2414034630124777.0,
+      "8": 4.5560838086318664e+18,
+      "9": 8.841092493827634e+21,
+      "10": 1.739988588592545e+25,
+      "11": 3.473066525166922e+28
+     },
+     "k11": 3.473066525166922e+28,
+     "sum_all_cores": 3.474807398320614e+28
+    },
+    "M3_ratio_lin": {
+     "per_k": {
+      "3": 199.5990201403824,
+      "4": 393119.3646732394,
+      "5": 656385095.8079535,
+      "6": 1241876157250.4624,
+      "7": 2414034630124777.0,
+      "8": 4.598940762154529e+18,
+      "9": 8.828174480808536e+21,
+      "10": 1.7074889643921665e+25,
+      "11": 3.327318022642767e+28
+     },
+     "k11": 3.327318022642767e+28,
+     "sum_all_cores": 3.329026394884743e+28
+    }
+   },
+   "MAINprime_N4_conditional": {
+    "M1_exp": {
+     "per_k": {
+      "3": 243.26990920213163,
+      "4": 146618.31255838947,
+      "5": 166908501.75019917,
+      "6": 258785525813.8513,
+      "7": 161371773017399.7,
+      "8": 1.7626803390924378e+17,
+      "9": 1.7186861311776627e+20,
+      "10": 1.675789961453446e+23,
+      "11": 1.6339644243151254e+26
+     },
+     "k11": 1.6339644243151254e+26,
+     "sum_all_cores": 1.6356419347270068e+26
+    },
+    "M2_logquad": {
+     "per_k": {
+      "3": 243.26990920213163,
+      "4": 146618.31255838947,
+      "5": 166908501.75019917,
+      "6": 258785525813.8513,
+      "7": 161371773017399.7,
+      "8": 2.5007004694406774e+17,
+      "9": 3.4591771451514506e+20,
+      "10": 5.2878671365929896e+23,
+      "11": 8.932743641084511e+26
+     },
+     "k11": 8.932743641084511e+26,
+     "sum_all_cores": 8.938034969900566e+26
+    },
+    "M3_ratio_lin": {
+     "per_k": {
+      "3": 243.26990920213163,
+      "4": 146618.31255838947,
+      "5": 166908501.75019917,
+      "6": 258785525813.8513,
+      "7": 161371773017399.7,
+      "8": 2.4236859919180957e+17,
+      "9": 3.203090924541181e+20,
+      "10": 4.5490052316467386e+23,
+      "11": 6.909058062078368e+26
+     },
+     "k11": 6.909058062078368e+26,
+     "sum_all_cores": 6.913610272826242e+26
+    }
+   },
+   "MAINprime_N4_nonthin_conditional": {
+    "M1_exp": {
+     "per_k": {
+      "3": 27.029989911347958,
+      "4": 20945.473222627068,
+      "5": 20642394.20938859,
+      "6": 31095921217.563717,
+      "7": 17427620842992.184,
+      "8": 1.9835668348600276e+16,
+      "9": 1.8901079429647733e+19,
+      "10": 1.8010525147294289e+22,
+      "11": 1.7161930739918503e+25
+     },
+     "k11": 1.7161930739918503e+25,
+     "sum_all_cores": 1.7179960185998354e+25
+    },
+    "M2_logquad": {
+     "per_k": {
+      "3": 27.029989911347958,
+      "4": 20945.473222627068,
+      "5": 20642394.20938859,
+      "6": 31095921217.563717,
+      "7": 17427620842992.184,
+      "8": 2.083956573772901e+16,
+      "9": 2.0862687846571516e+19,
+      "10": 2.118254274838592e+22,
+      "11": 2.1812837254738695e+25
+     },
+     "k11": 2.1812837254738695e+25,
+     "sum_all_cores": 2.183404068103195e+25
+    },
+    "M3_ratio_lin": {
+     "per_k": {
+      "3": 27.029989911347958,
+      "4": 20945.473222627068,
+      "5": 20642394.20938859,
+      "6": 31095921217.563717,
+      "7": 17427620842992.184,
+      "8": 2.103559380432476e+16,
+      "9": 2.083220468248251e+19,
+      "10": 2.078689378640747e+22,
+      "11": 2.089745358942625e+25
+     },
+     "k11": 2.089745358942625e+25,
+     "sum_all_cores": 2.0918261336470394e+25
+    }
+   }
+  }
+ },
+ "k11_join": {
+  "N2_allwall_frac_of_MAIN_N1": {
+   "3": 0.7,
+   "4": 0.46564885496183206,
+   "5": 0.24165421026407574,
+   "6": 0.09556334088968704,
+   "7": 0.03136262544247859
+  },
+  "N2_allwall_counts": {
+   "3": 7,
+   "4": 61,
+   "5": 485,
+   "6": 3246,
+   "7": 19545
+  },
+  "N2_fit": "log frac = 2.2270 + -0.7795 k",
+  "N2_frac_k11_extrapolated": 0.0017519747908697114,
+  "N2_statement": "At k = 11 the loaded core IS the whole packing (no rattlers), so A38.1 applies directly: a structure in which EVERY square carries a nonzero wall mask has no square with centre in Z = [11/10, 694271/250000]^2 and is DEAD.  For k < 11 the A38.1 witness may be one of the 11-k rattlers, so the column is vacuous there.  Extrapolated all-wall fraction of MAIN&N1 at k=11: 1.752e-03 -- i.e. N2 removes a vanishing share of the k=11 graph count.  Note also the exact combinatorial squeeze: with N1 (per-wall <= 3) the four walls carry at most 12 square-wall incidences, so an all-wall k=11 core has at most ONE corner square.",
+  "N3_frac_no_zero_class": {
+   "3": 0.35569923371647516,
+   "4": 0.3453538226339248,
+   "5": 0.34063492999188416,
+   "6": 0.3368586966955568,
+   "7": 0.3357652627026157
+  },
+  "N3_frac_k11_extrapolated": 0.31384454836843934,
+  "N3_statement": "A21 THM3 is existential over the 11 squares, so like N2 it bites only at k = 11.  It can bite only on decorations with NO zero-pinned tilt class (a wall-flush edge gives phi = 0 in [0,18] deg and satisfies THM3 for free).  Measured share of tilt-feasible decorations with no zero class is FLAT in k ({3: 0.3557, 4: 0.3454, 5: 0.3406, 6: 0.3369, 7: 0.3358}), extrapolating to 0.314 at k=11.  So THM3 can remove AT MOST ~31% of decorated k=11 structures, and only that subset in which the tilt system additionally FORCES all 11 tilts into (18,27)u(63,72) deg -- a condition this census does not test."
+ },
+ "comparison_to_A31": {
+  "A31_headline_k11_composed": {
+   "M1_exp": 4.15e+29,
+   "M2_logquad": 3.26e+30,
+   "M3_ratio_lin": 2.22e+30
+  },
+  "A31_best_case_if_every_cheap_improvement_lands": 2.5e+25,
+  "A43_k11_composed_EXACT": {
+   "M1_exp": 2.3036397852006663e+29,
+   "M2_logquad": 1.5065565204764765e+30,
+   "M3_ratio_lin": 1.0869364673492985e+30
+  },
+  "A43_k11_composed_EXACT_nonthin": {
+   "M1_exp": 2.7325435230621105e+28,
+   "M2_logquad": 3.473066525166922e+28,
+   "M3_ratio_lin": 3.327318022642767e+28
+  },
+  "A43_k11_composed_CONDITIONAL_N4": {
+   "M1_exp": 1.6339644243151254e+26,
+   "M2_logquad": 8.932743641084511e+26,
+   "M3_ratio_lin": 6.909058062078368e+26
+  }
+ },
+ "verification": {
+  "a_regression": {
+   "k3": "EXACT MATCH",
+   "k4": "EXACT MATCH",
+   "k5": "EXACT MATCH",
+   "k6": "EXACT MATCH",
+   "k7": "EXACT MATCH",
+   "verdict": "PASS"
+  },
+  "a_regression_level1": "gauge_surv_geomean_weighted reproduces A31 level2 measured_surv exactly at k = 3,4,5,6,7",
+  "b_trump_canary": {
+   "L1 every square degree >= 2": "PASS",
+   "L5(b) wall-degree <= 2 and adjacent": "PASS",
+   "L5(d) square-square degree <= 12": "PASS",
+   "L4(a) Euler |E| <= 3k+2": "PASS  [E=25, bound=35]",
+   "L5(a) metric broad phase": "PASS",
+   "L4(b) planar (H alone)": "PASS",
+   "L4(b) planar (H + wall 4-cycle)": "PASS",
+   "L3 no floating component": "PASS",
+   "L6 spanning component": "PASS",
+   "L7 some axis both walls touched": "PASS",
+   "N1 per-wall <= 3 (NEW HARD row R11)": "PASS  [LBRT=[3, 3, 3, 2]]",
+   "N2 all-wall does NOT fire (Trump has interior squares)": "PASS  [3 squares with zero wall mask]",
+   "N5 W1: every Trump placement satisfies mu(Q) <= 1 + eta (EXACT rationals)": "PASS  [max mu = 1.137624852, threshold = 1.402957280, slack = 0.265332428]",
+   "N5 field feasibility sanity: every Trump placement has mu(Q) >= 1": "PASS  [min mu = 1.014032448]",
+   "N5 window form: no Trump wall-mask window is certified exempt": "PASS  [max window m_low = 0.000000]",
+   "N5 grid form (A38 canary): no Trump placement lies in an exempt eroded cell": "PASS  [0/11 exempt]",
+   "N6 W2: every Trump PAIR satisfies mu+mu <= 2 + eta (EXACT)": "PASS  [worst pair (6,10) = 2.207686884, threshold 2.402957280]",
+   "N6 window form: no Trump contact edge is killed": "PASS",
+   "A33.1 global: sum of all 11 Trump coverages <= 11 + eta": "PASS  [sum = 11.375094588, total mass = 11.402957280]"
+  },
+  "b_trump_verdict": "PASS",
+  "b_trump_extra": {
+   "wall_degrees_LBRT": [
+    3,
+    3,
+    3,
+    2
+   ],
+   "n_interior_squares": 3,
+   "max_coverage": 1.137624852,
+   "threshold": 1.40295728,
+   "has_4cycle": true
+  },
+  "c_handcheck_k4_N1": {
+   "k": 4,
+   "gmask": 1,
+   "edges": [
+    [
+     0,
+     1
+    ]
+   ],
+   "wall_masks": [
+    2,
+    2,
+    6,
+    3
+   ],
+   "wall_degrees_LBRT": [
+    1,
+    4,
+    1,
+    0
+   ],
+   "violating_wall": "B",
+   "squares_on_that_wall": 4,
+   "separation_lower_bound": 0.9783183434785159,
+   "required_along_wall_extent": 2.934955030435548,
+   "available_along_wall_extent": 2.877084,
+   "violation": "4 squares on wall B force along-wall extent >= 3*0.9783183435 = 2.9349550304, but the available range is s-1 <= 3.877084 - 1 = 2.8770840000. 2.9349550304 > 2.8770840000, contradiction; the structure is impossible.",
+   "max_squares_per_wall": 3
+  }
+ },
+ "gaps": [
+  {
+   "id": "G-A43-1",
+   "kind": "measurement (the headline gap)",
+   "text": "N5 (W1) and N6 (W2) are EXACT and were applied at the Level-0 window scale, and they kill NOTHING: the certified m_low over a wall-mask centre box (x full tilt t in [0,1]) is 0.000000 for all 9 admissible masks, against the threshold 1 + eta = 1.40295728. The windows are the whole container up to a wall strip; no atomic-measure lower bound survives that much translation freedom. The filters are sound and simply have no purchase on a purely combinatorial structure -- they need position information the census does not carry."
+  },
+  {
+   "id": "G-A43-2",
+   "kind": "existential/vacuous",
+   "text": "N2 and N3 are EXACT but EXISTENTIAL over the 11 squares. On a loaded core of k < 11 the A38.1 / THM3 witness may be one of the 11-k rattlers, so neither is a legitimate prune below k = 11. They are reported as columns and folded in only in the k = 11 projection."
+  },
+  {
+   "id": "G-A43-3",
+   "kind": "provenance correction",
+   "text": "The A43 brief lists flush-mandatory (Maxwell m >= 3k+1) as certified. The provenance check says it is NOT: docs/proofs/structure_lemmas.md marks it SOFT (\"NOT a theorem - degenerate structures can jam with fewer independent rows\") and A32-H1 resolved it as unusable. It is therefore reported only as a labelled CONDITIONAL column, never composed into the exact count."
+  },
+  {
+   "id": "G-A43-4",
+   "kind": "approximation (over-kill), CONFIRMED BY CANARY",
+   "text": "N7's graph-level proxies over-kill. Trump's own contact graph CONTAINS a 4-cycle, so the N7a proxy would remove the known optimum. This is exactly the realizability caveat A25 recorded, now demonstrated on a realized packing. N7a/N7d are report-only columns and must never be composed. Note also that N7d's extra condition -- \"tilt classes admit a common assignment in (18,45) deg\" -- is VACUOUS at this resolution: any acyclic orientation of a 4-cycle is realisable by 4 distinct tilt values inside any open interval, so N7d reduces to \"some 4-cycle has all four links corner-on-edge\"."
+  },
+  {
+   "id": "G-A43-5",
+   "kind": "soundness of the N5/N6 window semantics",
+   "text": "Centre boxes use lib0._box semantics with the EXACT s0 = 969271/250000 upper endpoint and the certified lower endpoint s >= 3.80, so they are valid for every container side in [3.80, s0]; float endpoints are widened outward by 1e-9 before certification (a larger window can only lower m_low, so the kill test stays one-sided). m_low is the max of two independent valid lower bounds: an exact-rational single-box evaluation (A38 mlow_box_exact) and the min over all dense-grid cells meeting the box."
+  },
+  {
+   "id": "G-A43-6",
+   "kind": "inherited from A31",
+   "text": "All of A31 gaps G1-G7 still apply unchanged: L7 is a statement about the active-contact graph G not the support graph H (column only); the core has exactly k loaded squares and rattler completion multiplicity is NOT counted; L2 degree-2 thin branches are kept and flagged; the L3 self-stress and lambda0 = 0 branches are counted separately and are not in MAIN."
+  },
+  {
+   "id": "G-A43-7",
+   "kind": "extrapolation, not a bound",
+   "text": "Everything at k = 8..11 is a fit of k = 3..7 counts under three models with a k = 7 holdout, exactly as in A31. It is an extrapolation, not a bound, and the decoration fan-out multiplier is a fitted mean over a 160-graph sample."
+  },
+  {
+   "id": "G-A43-8",
+   "kind": "resolution",
+   "text": "The L1 wall-flush N5 scan partitions the free along-wall coordinate into 2000 slabs (and, for the right/top walls, the pinned coordinate into 40). A finer partition can only RAISE the certified m_low, so the reported exempt fraction is a lower bound on what this filter can restrict; the no-kill verdict (m_low min < 1+eta) is likewise resolution-limited and could in principle change under refinement."
+  }
+ ],
+ "findings": [
+  "FIELD: the A39 resealed guard field was used (artifact + standalone PASS report both present). eta_cert = 2518483/6250000 = 0.40295728 EXACTLY, so the W1 threshold is 1 + eta = 8768483/6250000 = 1.40295728 and the W2 threshold is 2 + eta = 15018483/6250000 = 2.40295728. The A33 fallback (eta = 0.425399552) was not needed. The field is exactly D4-closed (0 defects over 1468 atoms).",
+  "REGRESSION PASS. With the new filters off, every number in A31 level0_k{3..7}.json (cum, marg, soft, branch, Ehist, Burnside rows) reproduces EXACTLY, and the Level-1 weighted geometric-mean decoration counts reproduce A31 exactly at every k (271, 1.733e4, 2.179e6, 3.298e8, 4.095e10). The refitted k=11 composed totals reproduce A31 headline to the digit: 4.153e29 / 3.255e30 / 2.223e30.",
+  "N1 (per-wall <= 3) is the ONLY member of the 2026 library that bites at Level 0, and it is now a HARD row (R11). Keep-factor on MAIN: {3: 1.0, 4: 0.9357, 5: 0.8822, 6: 0.8097, 7: 0.7398}. It weakens as k grows only slowly and is worth x1.35 at k=7.",
+  "N5 (W1 tight-variety) and N6 (W2 pair tight-sum) are EXACT and kill NOTHING at Level 0: the certified m_low over the centre box of EVERY one of the 9 admissible wall masks (full tilt t in [0,1]) is exactly 0.000000, against the threshold 1.40295728. R12 = R11 at every k. This is a measurement, not a failure: the same field pointwise exempts 7.13%% of admissible (t,cx,cy) grid cells at that threshold, so the kill power exists but a wall-mask window is ~10^6 times too coarse to see it. The guard field needs POSITION information that a combinatorial structure does not carry.",
+  "COMPOSED EXACT count MAIN' = MAIN & N1 & N5 & N6 (= MAIN & N1, since N5/N6 are inert): {3: 10, 4: 131, 5: 2007, 6: 33967, 7: 623194} at k = 3..7. Non-thin: {3: 1, 4: 17, 5: 245, 6: 4001, 7: 67130}.",
+  "HEADLINE: the whole 2026 theorem library buys a factor of about 2 on the k=11 structure count. Composed EXACT k=11 projection {'M1_exp': '2.304e+29', 'M2_logquad': '1.507e+30', 'M3_ratio_lin': '1.087e+30'} versus A31 4.15e29 / 3.26e30 / 2.22e30. MAIN' non-thin gives {'M1_exp': '2.733e+28', 'M2_logquad': '3.473e+28', 'M3_ratio_lin': '3.327e+28'}. A31's GO/NO-GO verdict is unchanged: an enumerate-then-solve structure-first campaign at k=11 remains non-viable.",
+  "N2 (A38.1 all-wall kill) at the k=11 JOIN: the all-wall share of MAIN&N1 decays exponentially in k ({'3': 0.7, '4': 0.4656, '5': 0.2417, '6': 0.0956, '7': 0.0314}), fit log frac = 2.2270 - 0.7795 k, extrapolating to 1.75e-03 at k=11. So the one place where N2 is a legitimate hard kill it removes about 0.2% of the k=11 graph count. There is also an exact combinatorial squeeze: under N1 the four walls carry at most 12 square-wall incidences, so an all-wall k=11 core has at most ONE corner square.",
+  "N3 (A21 THM3) at the k=11 JOIN: two thirds of tilt-feasible decorations already carry a zero-pinned tilt class (a wall-flush edge forces phi = 0, which satisfies THM3 for free). The no-zero-class share is FLAT in k ({'3': 0.3557, '4': 0.3454, '5': 0.3406, '6': 0.3369, '7': 0.3358}) and extrapolates to 0.314 at k=11, so THM3 can bite on at most ~31% of decorated k=11 structures -- and only on the subset of those in which the tilt system FORCES all 11 tilts into (18,27)u(63,72) deg, which this census does not test. THM3 is not a bulk filter.",
+  "N4 (Maxwell flush-mandatory) is CONDITIONAL, not certified -- the provenance check contradicts the A43 brief (structure_lemmas.md marks m >= 3k+1 SOFT and A32-H1 ruled it unusable). Two measurements: (i) at Level 0 the column 2E >= 3k+1 is IMPLIED by non-thinness -- min total degree 3 gives 2E >= 3k and at least one wall edge gives 2E >= 3k+1 -- which is why MAIN'&N4&non-thin equals MAIN'&non-thin at every k; (ii) at Level 1 the flush-mandatory share of decorations collapses with k ({'3': 0.1354, '4': 0.0533, '5': 0.0314, '6': 0.025, '7': 0.0072}), extrapolating to 6.3e-04 at k=11. If Maxwell were ever proved, the composed k=11 total would fall to {'M1_exp': '1.634e+26', 'M2_logquad': '8.933e+26', 'M3_ratio_lin': '6.909e+26'}, and with non-thinness to {'M1_exp': '1.716e+25', 'M2_logquad': '2.181e+25', 'M3_ratio_lin': '2.090e+25'} -- i.e. to A31's own best case of ~2.5e25. Maxwell is the single biggest available lever and it is the one that is unproven.",
+  "N7 (wastage motifs) OVER-KILLS THE KNOWN OPTIMUM: Trump's contact graph contains a 4-cycle, so the N7a proxy would delete the realized packing. The proxy share of MAIN grows fast with k ({3: 0.0, 4: 0.0929, 5: 0.2993, 6: 0.5206, 7: 0.6899}) and at Level 1 the all-corner-on-edge 4-cycle share reaches 0.44 weighted / 0.96 median at k=7, so it LOOKS like the strongest filter available and is in fact unsound as stated. A23/A25 kill specific certified CELLS, not graph motifs; the realizability caveat A25 recorded is now demonstrated on a realized packing.",
+  "N5 DOES bite at Level 1, partially. On the wall-flush pinned window (tilt exactly 0, centre exactly 1/2 from the wall, along-wall coordinate free) the certified m_low runs from 1.013644 to 1.437085 against the threshold 1.402957, and 36 of 2000 slabs -- 1.8%% of the along-wall range -- are certified EXEMPT, identically on all four walls. So W1 does not forbid wall-flush contacts, but it does forbid 1.8%% of their positions. This is the only place in the census where the guard field actually cuts, and it cuts only because the decoration pins two of the three placement coordinates.",
+  "TRUMP CANARY PASS (20/20 checks). Wall degrees 3/3/3/2 exactly meet the new N1 cap; 3 squares are interior so N2 correctly does not fire; max exact coverage 1.137624852 vs threshold 1.402957280 (slack 0.265); worst exact pair sum 2.207686884 vs 2.402957280; total coverage 11.375094588 vs total field mass 11.402957280 (slack 0.0279); no Trump placement lies in an exempt eroded grid cell (A38 canary cross-check).",
+  "INDEPENDENT CROSS-CHECK of A31 Level 1: a wall-edge-resolved re-enumeration (each square-wall edge chosen flush or corner independently, with the phi = 0 versus phi != 0 consistency constraint) reproduces A31's wall-CLASS enumeration exactly -- ratio 1.000 on every sampled graph at every k. A31's decoration count was suspected of under-counting the 2^Esw wall menu; it does not.",
+  "BOTTOM LINE for the PI bulk-kill thesis: no certified theorem proven since A31 bulk-kills structures. Each one fails for a different structural reason -- N2/N3 are EXISTENTIAL and therefore vacuous on a k<11 core; N5/N6 are POSITIONAL and a contact structure carries no position; N4 is UNPROVEN; N7 is UNSOUND as a motif filter (it kills Trump). Only N1, which was already computed as a soft column in A31, survives as a hard prune, and it is worth x1.35 at k=7. The composed exact k=11 count moves from 4.15e29 to 2.30e29."
+ ]
+}

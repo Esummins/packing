@@ -1,0 +1,354 @@
+{
+ "side": "969271/250000",
+ "side_float": 3.877084,
+ "k": 11,
+ "ss_edges": 14,
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   0,
+   3
+  ],
+  [
+   1,
+   3
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   2,
+   8
+  ],
+  [
+   3,
+   7
+  ],
+  [
+   4,
+   6
+  ],
+  [
+   4,
+   7
+  ],
+  [
+   5,
+   9
+  ],
+  [
+   6,
+   9
+  ],
+  [
+   7,
+   8
+  ],
+  [
+   7,
+   9
+  ],
+  [
+   8,
+   10
+  ],
+  [
+   9,
+   10
+  ]
+ ],
+ "wall_masks": [
+  3,
+  2,
+  6,
+  1,
+  1,
+  12,
+  8,
+  0,
+  0,
+  0,
+  4
+ ],
+ "sw_edges": 11,
+ "degrees": [
+  2,
+  3,
+  1,
+  3,
+  2,
+  1,
+  2,
+  4,
+  4,
+  4,
+  2
+ ],
+ "total_degrees": [
+  4,
+  4,
+  3,
+  4,
+  3,
+  3,
+  3,
+  4,
+  4,
+  4,
+  3
+ ],
+ "checks": [
+  {
+   "name": "L1 every square degree >= 2",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "L5(b) wall-degree <= 2 and adjacent",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "L5(d) square-square degree <= 12",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "L4(a) Euler |E| <= 3k+2",
+   "pass_": true,
+   "detail": "E=25, bound=35"
+  },
+  {
+   "name": "L5(a) metric broad phase",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "L4(b) planar (H alone)",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "L4(b) planar (H + wall 4-cycle)",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "L3 no floating component",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "L6 spanning component",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "L7 some axis both walls touched",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "N1 per-wall <= 3 (NEW HARD row R11)",
+   "pass_": true,
+   "detail": "LBRT=[3, 3, 3, 2]"
+  },
+  {
+   "name": "N2 all-wall does NOT fire (Trump has interior squares)",
+   "pass_": true,
+   "detail": "3 squares with zero wall mask"
+  },
+  {
+   "name": "N5 W1: every Trump placement satisfies mu(Q) <= 1 + eta (EXACT rationals)",
+   "pass_": true,
+   "detail": "max mu = 1.137624852, threshold = 1.402957280, slack = 0.265332428"
+  },
+  {
+   "name": "N5 field feasibility sanity: every Trump placement has mu(Q) >= 1",
+   "pass_": true,
+   "detail": "min mu = 1.014032448"
+  },
+  {
+   "name": "N5 window form: no Trump wall-mask window is certified exempt",
+   "pass_": true,
+   "detail": "max window m_low = 0.000000"
+  },
+  {
+   "name": "N5 grid form (A38 canary): no Trump placement lies in an exempt eroded cell",
+   "pass_": true,
+   "detail": "0/11 exempt"
+  },
+  {
+   "name": "N6 W2: every Trump PAIR satisfies mu+mu <= 2 + eta (EXACT)",
+   "pass_": true,
+   "detail": "worst pair (6,10) = 2.207686884, threshold 2.402957280"
+  },
+  {
+   "name": "N6 window form: no Trump contact edge is killed",
+   "pass_": true,
+   "detail": null
+  },
+  {
+   "name": "A33.1 global: sum of all 11 Trump coverages <= 11 + eta",
+   "pass_": true,
+   "detail": "sum = 11.375094588, total mass = 11.402957280"
+  }
+ ],
+ "wall_degrees_LBRT": [
+  3,
+  3,
+  3,
+  2
+ ],
+ "n_interior_squares": 3,
+ "field": {
+  "cert": "attempts\\A39-early-cert\\results\\p2b\\certs\\A39_measure_feasible_3.877084.json",
+  "eta": "2518483/6250000",
+  "thr1": "8768483/6250000",
+  "thr1_float": 1.40295728,
+  "thr2": "15018483/6250000"
+ },
+ "trump_coverage_exact": [
+  "15844257/15625000",
+  "253514703/250000000",
+  "15844257/15625000",
+  "253514703/250000000",
+  "513153459/500000000",
+  "15844257/15625000",
+  "284406213/250000000",
+  "256222083/250000000",
+  "513589479/500000000",
+  "31838079/31250000",
+  "66878877/62500000"
+ ],
+ "trump_coverage_float": [
+  1.014032448,
+  1.014058812,
+  1.014032448,
+  1.014058812,
+  1.026306918,
+  1.014032448,
+  1.137624852,
+  1.024888332,
+  1.027178958,
+  1.018818528,
+  1.070062032
+ ],
+ "trump_mask_windows": {
+  "0": {
+   "box": [
+    0.5,
+    3.377084,
+    0.5,
+    3.377084
+   ],
+   "mlow_singlebox_exact": "0",
+   "mlow_singlebox": 0.0,
+   "mlow_gridmin": 0.0,
+   "mlow_certified": 0.0
+  },
+  "1": {
+   "box": [
+    0.5,
+    0.7071067811865476,
+    0.5,
+    3.377084
+   ],
+   "mlow_singlebox_exact": "0",
+   "mlow_singlebox": 0.0,
+   "mlow_gridmin": 0.0,
+   "mlow_certified": 0.0
+  },
+  "2": {
+   "box": [
+    0.5,
+    3.377084,
+    0.5,
+    0.7071067811865476
+   ],
+   "mlow_singlebox_exact": "0",
+   "mlow_singlebox": 0.0,
+   "mlow_gridmin": 0.0,
+   "mlow_certified": 0.0
+  },
+  "3": {
+   "box": [
+    0.5,
+    0.7071067811865476,
+    0.5,
+    0.7071067811865476
+   ],
+   "mlow_singlebox_exact": "0",
+   "mlow_singlebox": 0.0,
+   "mlow_gridmin": 0.0,
+   "mlow_certified": 0.0
+  },
+  "4": {
+   "box": [
+    3.0928932188134524,
+    3.377084,
+    0.5,
+    3.377084
+   ],
+   "mlow_singlebox_exact": "0",
+   "mlow_singlebox": 0.0,
+   "mlow_gridmin": 0.0,
+   "mlow_certified": 0.0
+  },
+  "6": {
+   "box": [
+    3.0928932188134524,
+    3.377084,
+    0.5,
+    0.7071067811865476
+   ],
+   "mlow_singlebox_exact": "0",
+   "mlow_singlebox": 0.0,
+   "mlow_gridmin": 0.0,
+   "mlow_certified": 0.0
+  },
+  "8": {
+   "box": [
+    0.5,
+    3.377084,
+    3.0928932188134524,
+    3.377084
+   ],
+   "mlow_singlebox_exact": "0",
+   "mlow_singlebox": 0.0,
+   "mlow_gridmin": 0.0,
+   "mlow_certified": 0.0
+  },
+  "12": {
+   "box": [
+    3.0928932188134524,
+    3.377084,
+    3.0928932188134524,
+    3.377084
+   ],
+   "mlow_singlebox_exact": "0",
+   "mlow_singlebox": 0.0,
+   "mlow_gridmin": 0.0,
+   "mlow_certified": 0.0
+  }
+ },
+ "trump_cell_exempt": [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+ ],
+ "trump_has_4cycle": true,
+ "verdict": "PASS"
+}

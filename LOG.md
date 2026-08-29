@@ -1207,3 +1207,40 @@ affordable cost estimate for closing 3.84.
   dozens-hundreds), then per-spine A35-style anchored completion. Conjecture: only Trump's tilted
   5-strip spine completes below s-hat. A43 = H1 (library re-census, per-filter ablation) + H2
   (spine census, Trump canary) + composition.
+
+## 2026-08-28 — A43 closed: bulk-kill thesis refuted at both levels; the enumeration-certificate mismatch named
+- H1 (re-census, Opus, verified): the ENTIRE 2026 theorem library, soundly applied, buys ~x2 on
+  the k=11 graph count (composed exact 2.3e29-1.5e30 vs A31 4.2e29-3.3e30). Only per-wall<=3
+  hard-prunes (x1.35 at k=7, now HARD row R11). Per-filter reasons, each different: A38.1/THM3
+  existential => vacuous below the k=11 join (witness may be a rattler); W1/W2 positional =>
+  certified m_low = 0.000000 on every wall-mask window while the SAME field exempts 7.13% of
+  placement cells (power exists, window ~1e6x too coarse); flush-mandatory NOT certified (ledger
+  SOFT + A32-H1; brief corrected, run as CONDITIONAL — worth x1e4 IF ever proved, the biggest
+  unproven lever); motif filters UNSOUND as filters (Trump's own graph contains a 4-cycle —
+  canary-confirmed over-kill). Keepers: wall-flush slab cut (t=0, d=1/2 pinned => 36/2000
+  along-wall positions certified exempt — the census's only positional bite); A31's numbers
+  regression-confirmed EXACT; Trump canary 20/20.
+- H2 (spine census, Opus, verified): L6 spine types at s0 under span/tilt-coupling/field/wastage:
+  LARGE, not small — 10/132/523/2074/8249 at k=3..7, ~2.1e6 at k=11 (C0-C2 DP). Only k=3 is
+  strong (72% cut; all survivors C-C, no wall-flush end possible, tilt classes forced into
+  [18,72] deg — a real 3-chain structure theorem at s-hat); k>=4 cuts <0.4% (only C1's two local
+  tilt rules). C3 (field) and C4 (wastage) INERT: wastage floor exactly 0 on every survivor — a
+  spine type forgets the transverse coordinate and deep-interior dead area is genuinely 0.
+  Canaries clean: 30/30 Trump chains (x-spines k=4, y-spines k=5; the tilted strip = y-spine
+  F-CEab.FL.FL.FL-C), 163/163 A37 valley chains at their own s, all 48 kills witness-audited by
+  an independent implementation. Per-spine completion: 1.3e-3.9e18 desktop-days BEFORE the
+  ~490^k unpriced transverse debt — no far-field program written (honest-either-way clause).
+- THE LAW (composed result): the ENUMERATION-CERTIFICATE MISMATCH — our certificates price
+  PLACEMENTS; every object cheap enough to enumerate quotients placement away; bulk enumeration
+  and bulk certification cannot meet. Third face of the finding/refuting asymmetry beside the
+  ghost shield (A42 F4) and the c^33 cover (A30). Positive corollary, measured twice: bite is
+  proportional to pinned coordinates (wall-flush slabs; k=3 tilt forcing).
+- Double-spine lever assessed on paper (no compute): crossing lemma (x-spine separates bottom
+  from top => the two spines share a square or a contact; Trump shares {2,8}) pins both
+  coordinates of 1-2 squares out of ~9; joint types ~x1e3 MORE (523^2 x crossings at k=5) for a
+  predicted x1.1-2 cut; mono-axis branch uncovered. NO-GO. Ranked instead: (i) prove/refute an
+  FJ-specific Maxwell row bound (N4), (ii) I-L13 interface charging — the only certificate
+  family whose unit of account matches the enumerated object.
+- Report: attempts/A43-spine-census/results/a43_report.md; formalization + soundness ledger:
+  notes/formalization.md; lead checks: notes/verification_log.md. A29 untouched; 2 Opus workers,
+  <= 3 processes each, ~1 h compute total.
