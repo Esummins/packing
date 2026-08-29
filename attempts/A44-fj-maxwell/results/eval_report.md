@@ -1,6 +1,6 @@
 # A44 / eval_atlas — candidate Maxwell bounds vs the A37 CP atlas
 
-Generated 2026-08-29T00:35:55.  Seed 20260829.  Runtime 1.5 s, single process.
+Generated 2026-08-29T00:36:55.  Seed 20260829.  Runtime 1.5 s, single process.
 Code: `attempts/A44-fj-maxwell/code/eval_atlas.py`, `code/a44_geom.py`.  Data: `results/candidates.json`, `logs/eval.log`.
 
 Rigour tags: `[EXACT]` exact combinatorics on the certified contact table; `[NUM]` float64 SVD / HiGHS LP with the numerical cut recorded.
@@ -257,7 +257,7 @@ At every entry's `z_center` all 55 pair SAT gaps and all 176 corner-wall clearan
 
 ## 3. FJ multiplier diagnostics  `[NUM]`
 
-| fam | rowset used | feasible | ||A^T λ − e_s||_inf | Σλ | Σλ far-wall | #loadable | #forced | min-support found | support edges |
+| fam | rowset used | feasible | ‖A^T λ − e_s‖_inf | Σλ | Σλ far-wall | #loadable | #forced | min-support found | support edges |
 |---|---|---|---|---|---|---|---|---|---|
 | 0 | physical | yes | 3.89e-16 | 4.5188 | 1.000000 | 41 | 21 | 30 | 23 |
 | 1 | physical | yes | 3.33e-16 | 4.5523 | 1.000000 | 17 | 9 | 13 | 10 |
@@ -304,7 +304,7 @@ The physical row set was feasible directly on all 10; the tie-expanded row set (
 
 ### Rattler / dropped-contact alarm
 
-36 rattler squares are declared across the 36 entries.  **The total number of dropped contacts is 0** — 0 of 36 entries have any contact incident to a declared rattler.  This is by construction: A37's rattler test (`classify()`) is "no row touches this square's coordinates at all", so a rattler square carries no wall contact, no pair contact and no aux row.  The alarm condition ("a dropped contact carries a positive multiplier") is therefore vacuous, and the check was run anyway and reported nothing.
+36 rattler squares are declared in total across the 36 entries.  **The total number of dropped contacts is 0** — 0 of 36 entries have any contact incident to a declared rattler.  This is by construction: A37's rattler test (`classify()`) is "no row touches this square's coordinates at all", so a rattler square carries no wall contact, no pair contact and no aux row.  The alarm condition ("a dropped contact carries a positive multiplier") is therefore vacuous, and the check was run anyway and reported nothing.
 
 **Consequence worth flagging to the theory lead:** because A37's rattler set is the *zero-contact* set and not the *zero-load* set, the "core" of an atlas entry can still contain squares that carry contacts but no load.  Families 1 and 2 each have a core square with a single incident row (squares 10 and 7 respectively) — a rattler with one incidental touch.  That is what kills B5, and it means any per-square degree hypothesis must be stated over the **loaded** core (the k_H column), not over the contact core.
 
@@ -316,9 +316,9 @@ A44 physical (Fact 0) count at Trump: **k = 11, E = 25 (E_pair 14 + E_wall 11), 
 
 | basis | rows | rank | self-stress | itemisation |
 |---|---|---|---|---|
-| A22 v1 | 38 | 34 | 4 | 20 wall rows + 16 pair sep rows (12 pair contacts) + 2 `dist` centre-distance surrogate rows |
+| A22 v1 | 38 | 34 | 4 | 20 wall rows + 16 pair sep rows (11 pair contacts) + 2 `dist` centre-distance surrogate rows |
 | A35 v2 | 42 | 34 | 8 | A22 rows 0..35 (20 wall + 16 sep) + 4 flush rows for the two centre-distance-1 contacts + 2 corner-corner tie-alternative rows for (1,3); the 2 `dist` rows dropped |
-| **A44 physical** | **41** | 34 | 7 | 20 wall rows (11 wall edges, 9 of them 2-corner flush) + 19 pair rows (14 pair edges: 7 segment contacts x 2 rows + 7 point contacts x 1 row) |
+| **A44 physical** | **41** | 34 | 7 | 20 wall rows (11 wall edges, 9 of them 2-corner flush) + 21 pair rows (14 pair edges: 7 segment contacts x 2 rows + 7 point contacts x 1 row) |
 
 The A44 physical row set decomposes as
 
@@ -384,8 +384,8 @@ The brief prescribed `CORNER-CORNER = 1 row`.  Taken literally against the A37 *
 
 ## 6. Conventions decided (every one of them)
 
-1. Coordinates: z[3i]=cx_i, z[3i+1]=cy_i, z[3i+2]=theta_i in RADIANS, z[33]=s.  (The A44 brief's 't = tan(theta/2)' is wrong: A37/A22 store the angle itself; verified by evaluating every contact row at z_center, residual < 1e-15.)
-2. Loaded core = 11 squares minus atlas rattler_squares.  Every contact incident to a rattler is dropped; the drop count is recorded and the dropped rows are separately LP-tested for loadability (alarm test).
+1. Coordinates: z[3i]=cx_i, z[3i+1]=cy_i, z[3i+2]=theta_i in RADIANS, z[33]=s.  (The A44 brief's 't = tan(theta/2)' is WRONG: A37/A22 store the angle itself.  Verified by evaluating every contact row at z_center: max |g| over all 36 entries is 4.1e-10, and < 1e-15 on the 30 entries whose z_center is machine-converged.  Under a tan(theta/2) reading the residuals would be O(1).)
+2. Contact core = 11 squares minus atlas rattler_squares; k = |core|.  NOTE this is the ZERO-CONTACT core, not the zero-LOAD core: A37's rattler test is 'no row touches this square at all', so the total number of dropped (rattler-incident) contacts is 0 on every entry, and the core can still contain squares that touch something but carry no load.  The dropped rows are LP-tested for loadability anyway (alarm test; nothing fired).  The zero-load core is reported separately as k_H.
 3. Fact 0 (PRIMARY convention, docs/proofs/structure_lemmas.md): the contact set of a pair is a point or a segment.  Segment -> 1 edge, 2 rows; point -> 1 edge, 1 row.  Segment/point is decided GEOMETRICALLY, not from the A37 class label: the contact points are the rowspec corners with |t| <= 1/2 + 1e-6 (i.e. lying on the owner's edge segment), clustered at 1e-6.  1 cluster = point contact, 2 clusters = segment contact.
 4. A37 class labels are NOT used for the row count because A37's CORNER-CORNER label conflates two geometries: (a) n_axes_tied = 4, 8 rowspecs, 1 contact point -- a genuine corner-to-corner POINT touch (1 row); (b) n_axes_tied = 2, 4 rowspecs, 2 contact points -- a FLUSH segment contact whose two endpoints are corners of both squares (2 rows; these are exactly the centre-distance-1 pairs that A35/M1b identified as flush).  Across the atlas: 105 A37-FLUSH (2 pts), 56 CC-2axes (2 pts), 16 CC-4axes (1 pt), 224 POINT (1 pt) -- the split is perfectly clean.
 5. The literal brief convention (FLUSH=2, POINT=1, CORNER-CORNER=1 from the A37 label) is reported as a SHADOW count (counts_brief_convention / brief_convention_shadow).

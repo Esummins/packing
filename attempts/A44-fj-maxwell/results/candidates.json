@@ -1,7 +1,7 @@
 {
  "meta": {
   "attempt": "A44-fj-maxwell",
-  "generated": "2026-08-29T00:35:55",
+  "generated": "2026-08-29T00:36:55",
   "seed": 20260829,
   "atlas": "A37-cp-atlas/results/atlas_final.json",
   "rank_tol_absolute": 1e-09,
@@ -21,8 +21,8 @@
    "VALLEY-MARGINAL"
   ],
   "conventions": [
-   "Coordinates: z[3i]=cx_i, z[3i+1]=cy_i, z[3i+2]=theta_i in RADIANS, z[33]=s.  (The A44 brief's 't = tan(theta/2)' is wrong: A37/A22 store the angle itself; verified by evaluating every contact row at z_center, residual < 1e-15.)",
-   "Loaded core = 11 squares minus atlas rattler_squares.  Every contact incident to a rattler is dropped; the drop count is recorded and the dropped rows are separately LP-tested for loadability (alarm test).",
+   "Coordinates: z[3i]=cx_i, z[3i+1]=cy_i, z[3i+2]=theta_i in RADIANS, z[33]=s.  (The A44 brief's 't = tan(theta/2)' is WRONG: A37/A22 store the angle itself.  Verified by evaluating every contact row at z_center: max |g| over all 36 entries is 4.1e-10, and < 1e-15 on the 30 entries whose z_center is machine-converged.  Under a tan(theta/2) reading the residuals would be O(1).)",
+   "Contact core = 11 squares minus atlas rattler_squares; k = |core|.  NOTE this is the ZERO-CONTACT core, not the zero-LOAD core: A37's rattler test is 'no row touches this square at all', so the total number of dropped (rattler-incident) contacts is 0 on every entry, and the core can still contain squares that touch something but carry no load.  The dropped rows are LP-tested for loadability anyway (alarm test; nothing fired).  The zero-load core is reported separately as k_H.",
    "Fact 0 (PRIMARY convention, docs/proofs/structure_lemmas.md): the contact set of a pair is a point or a segment.  Segment -> 1 edge, 2 rows; point -> 1 edge, 1 row.  Segment/point is decided GEOMETRICALLY, not from the A37 class label: the contact points are the rowspec corners with |t| <= 1/2 + 1e-6 (i.e. lying on the owner's edge segment), clustered at 1e-6.  1 cluster = point contact, 2 clusters = segment contact.",
    "A37 class labels are NOT used for the row count because A37's CORNER-CORNER label conflates two geometries: (a) n_axes_tied = 4, 8 rowspecs, 1 contact point -- a genuine corner-to-corner POINT touch (1 row); (b) n_axes_tied = 2, 4 rowspecs, 2 contact points -- a FLUSH segment contact whose two endpoints are corners of both squares (2 rows; these are exactly the centre-distance-1 pairs that A35/M1b identified as flush).  Across the atlas: 105 A37-FLUSH (2 pts), 56 CC-2axes (2 pts), 16 CC-4axes (1 pt), 224 POINT (1 pt) -- the split is perfectly clean.",
    "The literal brief convention (FLUSH=2, POINT=1, CORNER-CORNER=1 from the A37 label) is reported as a SHADOW count (counts_brief_convention / brief_convention_shadow).",
@@ -27196,5 +27196,5 @@
   "itemisation": null
  },
  "global_alarms": [],
- "wall_seconds": 1.5235540866851807
+ "wall_seconds": 1.51739501953125
 }

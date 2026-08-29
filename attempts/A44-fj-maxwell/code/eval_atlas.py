@@ -881,12 +881,18 @@ def main():
 
 CONVENTIONS = [
     "Coordinates: z[3i]=cx_i, z[3i+1]=cy_i, z[3i+2]=theta_i in RADIANS, "
-    "z[33]=s.  (The A44 brief's 't = tan(theta/2)' is wrong: A37/A22 store the "
-    "angle itself; verified by evaluating every contact row at z_center, "
-    "residual < 1e-15.)",
-    "Loaded core = 11 squares minus atlas rattler_squares.  Every contact "
-    "incident to a rattler is dropped; the drop count is recorded and the "
-    "dropped rows are separately LP-tested for loadability (alarm test).",
+    "z[33]=s.  (The A44 brief's 't = tan(theta/2)' is WRONG: A37/A22 store the "
+    "angle itself.  Verified by evaluating every contact row at z_center: "
+    "max |g| over all 36 entries is 4.1e-10, and < 1e-15 on the 30 entries "
+    "whose z_center is machine-converged.  Under a tan(theta/2) reading the "
+    "residuals would be O(1).)",
+    "Contact core = 11 squares minus atlas rattler_squares; k = |core|.  "
+    "NOTE this is the ZERO-CONTACT core, not the zero-LOAD core: A37's "
+    "rattler test is 'no row touches this square at all', so the total number "
+    "of dropped (rattler-incident) contacts is 0 on every entry, and the "
+    "core can still contain squares that touch something but carry no load.  "
+    "The dropped rows are LP-tested for loadability anyway (alarm test; "
+    "nothing fired).  The zero-load core is reported separately as k_H.",
     "Fact 0 (PRIMARY convention, docs/proofs/structure_lemmas.md): the contact "
     "set of a pair is a point or a segment.  Segment -> 1 edge, 2 rows; point "
     "-> 1 edge, 1 row.  Segment/point is decided GEOMETRICALLY, not from the "
@@ -1147,7 +1153,7 @@ def write_report(out, pem):
     P('')
     P('## 3. FJ multiplier diagnostics  `[NUM]`')
     P('')
-    P('| fam | rowset used | feasible | ||A^T λ − e_s||_inf | Σλ | Σλ far-wall | #loadable | #forced | min-support found | support edges |')
+    P('| fam | rowset used | feasible | ‖A^T λ − e_s‖_inf | Σλ | Σλ far-wall | #loadable | #forced | min-support found | support edges |')
     P('|---|---|---|---|---|---|---|---|---|---|')
     for r in out['per_entry']:
         lp = (r['lp_expanded'] if r['lp_rowset_used'] == 'expanded'
@@ -1191,7 +1197,7 @@ def write_report(out, pem):
                    or r['dropped']['n_dropped_pair_edges']]
     P('')
     n_rat = sum(len(r['rattlers']) for r in out['per_entry'])
-    P('%d rattler squares are declared across the 36 entries.  **The total '
+    P('%d rattler squares are declared in total across the 36 entries.  **The total '
       'number of dropped contacts is 0** — %d of 36 entries have any contact '
       'incident to a declared rattler.  This is by construction: A37\'s '
       'rattler test (`classify()`) is "no row touches this square\'s '
@@ -1228,15 +1234,17 @@ def write_report(out, pem):
     P('')
     P('| basis | rows | rank | self-stress | itemisation |')
     P('|---|---|---|---|---|')
-    P('| A22 v1 | 38 | 34 | 4 | 20 wall rows + 16 pair sep rows (12 pair '
+    P('| A22 v1 | 38 | 34 | 4 | 20 wall rows + 16 pair sep rows (11 pair '
       'contacts) + 2 `dist` centre-distance surrogate rows |')
     P('| A35 v2 | 42 | 34 | 8 | A22 rows 0..35 (20 wall + 16 sep) + 4 flush '
       'rows for the two centre-distance-1 contacts + 2 corner-corner '
       'tie-alternative rows for (1,3); the 2 `dist` rows dropped |')
-    P('| **A44 physical** | **%d** | %d | %d | 20 wall rows (11 wall edges, '
-      '9 of them 2-corner flush) + 19 pair rows (14 pair edges: 7 segment '
-      'contacts x 2 rows + 7 point contacts x 1 row) |'
-      % (a['m'], pem['0']['rank_num'], pem['0']['s_stress']))
+    P('| **A44 physical** | **%d** | %d | %d | %d wall rows (%d wall edges, '
+      '%d of them 2-corner flush) + %d pair rows (%d pair edges: %d segment '
+      'contacts x 2 rows + %d point contacts x 1 row) |'
+      % (a['m'], pem['0']['rank_num'], pem['0']['s_stress'], a['m_wall'],
+         a['E_wall'], a['F_wall'], a['m_pair'], a['E_pair'], a['F_pair'],
+         a['E_pair'] - a['F_pair']))
     P('')
     P('The A44 physical row set decomposes as')
     P('')
