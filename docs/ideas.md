@@ -260,3 +260,17 @@ opposite walls, per-link interface wastage chargeable vs the 4.03 budget, every 
 variety. Spines are the ANCHOR the far field lacked: enumerate certified-possible spine types at
 s-hat first (plausibly dozens-hundreds, not 10^30), then per-spine A35-style semantic completion.
 Conjecture in this language: only Trump's spine type (the tilted 5-strip) completes below s-hat.
+
+**I-L17. Flush-mandatory via balanced-wedge budget (PI, 2026-08-29).**
+STATUS: active — A46 (Fable). Route to "critical structures must contain flush contacts" that
+evades BOTH closed roads: not FJ+counting (A44's dead end — this is drain + area), and not
+raw-contact charging (A45's quadratic ceiling — "BALANCED corner" imports criticality/torque
+balance into the local object, pinning the wedge geometry => macroscopic certifiable dead area;
+bite ~ pinned coordinates, and balance pins more). Dichotomy: a flush-free critical structure's
+corner contacts are all balanced; W1 (novel math): balanced corners have relative angle delta >=
+delta_0 (near-flush corners admit the wedge-closing relaxation toward the flush stratum — or the
+near-flush critical case dies by a stratum/limit argument; the sigma-non-increase of closing is the
+crux); W2 (computation): certified pair-wedge table w(delta) for delta >= delta_0 (A23 oracle) +
+A25 union-disjointness => >= ~17 balanced corners blow the 4.0318 budget. W1 AND W2 => flush-
+mandatory (worth ~x1e3 census + first proved constraint on unknown CPs beyond the L-lemmas).
+Complements the PI's ruler laws (which killed the nearly-all-flush end): the two extremes pincer.
