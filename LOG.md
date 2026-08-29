@@ -1156,3 +1156,43 @@ affordable cost estimate for closing 3.84.
 - A42 = T1 prove N1, T2 chain slack-decay k=0..3+, T3 the sweep down to the 0.0066 basin
   rendezvous, T4 composed desktop-days + GO/NO-GO. The occupancy family only; the deep-core family
   stays dead per A39.
+
+## 2026-08-28 — A42 closed: occupancy family measured to ZERO forcing power at every legal zone size; N1 proved; far-field NO-GO by MECHANISM
+- **T1: Lemma N1 PROVED** (docs/proofs/occupancy_collapse.md). Separation ||c-c'|| >= 1
+  (inscribed disks; Trump attains equality EXACTLY — min pairwise dist^2 = 1 in exact
+  rationals); zones of diameter < 1 hold at most one centre GEOMETRICALLY (no pigeonhole);
+  11 disjoint certified zones => exactly one each, assignment unique mod S11, complement
+  centre-free. Cor N1.1: wrap-window conditioning as full-theta core + complement NO-family —
+  kills the 2^6 wall-square branch. Instance hypotheses machine-checked exact (n1_check.py).
+- **T2 (chain, r = 0.06 balls): dead at k = 1 by an exact integer.** tau(k) = 11-k exactly,
+  k = 1..5 (12-k for k >= 6: the clipped corner ball buys NOTHING, permanent +1), all
+  converged, minmass 1 — true optima. F2 "unit exchange": each ball core buys exactly the
+  1.0 budget unit it costs. F3 "reflow": the forcing target nofam is worth exactly zero
+  (delta-tau < 1.2e-12 on deletion; d tau / d rho' = 0 at k=2 over six radii). A38 probe-A's
+  slack -0.80 = early-relaxation artifact (converged union optimum 10.000000, 619 s).
+- **T3 (PI's tightening sweep): structurally vacuous — F1, the last-square identity** (one
+  line: tau >= mu(Q0) >= 1 for any live placement) => budget-1 kills iff EXACT emptiness;
+  111 nodes, tau = 1.000000 at every rho' across three decades, dying radius = R_j itself,
+  **second-pass gain = exactly 0** (PI conjecture honestly refuted at budget 1). Identity
+  retro-explains 3.84 deep-leaf full pinning. KEEPER (F5): the N1 assignment step is FREE —
+  given 10 cores + complement cover the verifier alone forces the 11th square, 11/11 PASS,
+  38.1 s total, measure 1e-6, no LP.
+- **Zone-size lever (last design point): dead, volume scaling REFUTED.** w = 0.35 zones
+  (side 0.70, diam 0.99 < 1, N1-legal, 34x ball volume): tau = 11.000000 exactly at k = 0,
+  29 cert attempts all fail ON COVERAGE; w = 0.25 / 0.15 worse; medium cores ANTI-economical
+  (cost 1.0 budget, buy 0.145 tau). The side-1.68 central-window root stays the UNIQUE
+  certifying occupancy statement. Conjecture recorded (no compute): occupancy power = ghost
+  mass displaced, not volume — profile the ghost measure vs zone kills as future work.
+- **T4 verdict: NO-GO by mechanism.** seam_design's cascade term does not exist — no
+  certificate at any (k, radius, zone size, interleaving). Integer-exact conditional taus =
+  the 1/4-ghost saturates EVERY conditional budget at s0: the five A38 knife-edge cells were
+  not a corner, N6 is the GENERIC far-field mode. Survives: root (banked), N1 (proved,
+  Lean-friendly), F5 free assignment (machinery-in-waiting), F1/F4 as proposal filters, A39
+  cheap-cert rule re-validated (0.6-16 s/attempt). Requires: N6-class mathematics — two-field
+  budgets (vs A33's shared-support obstruction), a NOFAM-AWARE FJ/Farkas (F4 shield: any
+  nofam-blind weapon is structurally unable to force occupancy — Trump realizes the rest of
+  the hypothesis), theta'-type second-order rows (A17-A20 caveat), ghost-mass profiling as
+  the diagnostic first step. Report: attempts/A42-occupancy-chain/results/a42_report.md;
+  facts F1-F6: notes/structural_facts.md; verification V1-V5: notes/verification_log.md.
+- A29 untouched; 3 Opus compute agents, <= 2 solver processes each; ~80 min total LP time —
+  the family failed on VALUE, never on cost.

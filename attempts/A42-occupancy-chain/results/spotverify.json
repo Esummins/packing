@@ -1,0 +1,11 @@
+{
+ "what": "A42-T2 standalone spot-verification of the only PASSing certificate produced",
+ "cert": "results/chain_nodes/cw_root.certified.json",
+ "cmd": "python verify_case.py ../results/chain_nodes/cw_root.certified.json --jobs 2 --depth 56 --max-witnesses 48 --report",
+ "pass_line": "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 206/25 < budget 11  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)",
+ "stats": "boxes = 56924  covered = 23644  vacuous = 0  exempt = 4850 (core 0, nofam 4850)  split = 28430  exact atom checks = 23644  max depth = 39  time = 1.1s",
+ "atoms": 8,
+ "total": "206/25",
+ "budget": 11,
+ "note": "cw_root is the A38 central-window root (nofam [1.1,2.777084]^2 x [0,90]), rerun here ONLY to exercise the identical solve->certify->verify path; no A42 chain/union/cond node ever produced a certificate."
+}
