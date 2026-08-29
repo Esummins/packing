@@ -1196,3 +1196,14 @@ affordable cost estimate for closing 3.84.
   facts F1-F6: notes/structural_facts.md; verification V1-V5: notes/verification_log.md.
 - A29 untouched; 3 Opus compute agents, <= 2 solver processes each; ~80 min total LP time —
   the family failed on VALUE, never on cost.
+
+## 2026-08-28 — A43 dispatched (I-L16): the ghost-immune bulk-kill axis + spines as anchors
+- PI push: the 10^30 counts survivors of the WEAK 2025 filter set; most illegality is invisible to
+  those filters; bulk evaluation should kill grains en masse. Advisor synthesis: every post-A31
+  theorem is combinatorial/geometric = GHOST-IMMUNE (F4 shields only coverage-type certificates) —
+  the bulk axis was never systematically applied. And L6 gives every jammed grain a GUARANTEED
+  anchor: the wall-to-wall loaded chain (spine, 3-6 squares, 1-D, heavily constrained). Spine-first
+  enumeration inverts A31/A32: enumerate spine types under the full stack (plausibly
+  dozens-hundreds), then per-spine A35-style anchored completion. Conjecture: only Trump's tilted
+  5-strip spine completes below s-hat. A43 = H1 (library re-census, per-filter ablation) + H2
+  (spine census, Trump canary) + composition.
