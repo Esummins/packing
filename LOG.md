@@ -1299,3 +1299,11 @@ affordable cost estimate for closing 3.84.
   wedge geometry; bite ~ pinned coordinates). W1 = small-angle exclusion (novel math, the crux);
   W2 = certified w(delta) table + disjoint union + budget composition (A23/A25 machinery).
   Advisor prior: above even odds — first such in the campaign.
+
+## 2026-08-29 — A47 dispatched (I-L18 expanded): the PI's majority route with magnitude primitives
+- Advisor reality-check folded in: A46's ceiling shows contact-local wedges cap at 0.70 x budget
+  even all-large-angle — the majority argument needs bigger primitives. The synthesis: A21's
+  certified corner occupancy gives POSITION unconditionally; flush-freeness forbids wall-flush;
+  so the 0.34-0.61 corner charge FIRES on flush-free structures (5-10x wedge scale). Thin branch
+  closable outright via A46's designed-not-run rectangle lemmas (W1.6 quantization residue).
+  A47 = (a) rectangle lemmas, (b) certified corner/wall primitives, (c) majority composition.
