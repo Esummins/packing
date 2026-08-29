@@ -297,3 +297,13 @@ flush-free cores, so even 10x per-unit gains need a count argument to close any 
 min-over-bin uniform or become an A25-scale atlas; (iii) A45 Ceiling 3 (min-over-realizations)
 applies one level up. Prerequisite before any attempt: a back-of-envelope showing some
 critical-structure class where junction counts x junction charges plausibly exceed the budget.
+
+**I-L18 (expanded — PI majority refinement, 2026-08-29).** STATUS: active — A47 (Fable). The A46
+refutation killed "no small-angle corners" but the needed statement is the PI's MAJORITY form: not
+all corners simultaneously small-angle — and the magnitude fix is multi-square/corner-region
+primitives. THE SYNTHESIS: A21's certified corner-zone occupancy (unconditional position!) +
+flush-freeness (forbids wall-flush) => the corner square is tilted/corner-touching => A23-4b's
+0.34-0.61 corner charge FIRES — 5-10x wedge scale, position from a THEOREM not the graph. Thin
+branch: A46's W1.6 quantization ([45,0,0,45] minimal structure) + its designed-not-run rectangle
+lemmas (gap G3) = closable outright. A47 legs: (a) run the rectangle lemmas; (b) certify I-L18
+corner/wall-region primitives; (c) majority composition on the non-thin branch vs 4.0318.
