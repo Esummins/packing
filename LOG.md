@@ -1290,3 +1290,12 @@ affordable cost estimate for closing 3.84.
 - Report: attempts/A45-interface-charge/results/a45_report.md; theory+verdict:
   notes/charging_lemma.md; lead checks V1-V9: notes/verification_log.md. A29 untouched;
   2 Opus workers (A <= 2, B <= 1 processes), ~2 h compute.
+
+## 2026-08-29 — A46 dispatched (I-L17, PI): flush-mandatory via balanced wedges
+- PI's dichotomy: in a flush-free critical structure every corner contact is BALANCED (else the
+  wedge-closing relaxation drains toward flush), and balanced corners at substantial angle strand
+  macroscopic certified wedges — the budget kills the network. Evades both closed roads: not
+  FJ+counting (A44), not raw-contact charging (A45 — "balanced" imports criticality, pinning the
+  wedge geometry; bite ~ pinned coordinates). W1 = small-angle exclusion (novel math, the crux);
+  W2 = certified w(delta) table + disjoint union + budget composition (A23/A25 machinery).
+  Advisor prior: above even odds — first such in the campaign.
