@@ -298,7 +298,8 @@ min-over-bin uniform or become an A25-scale atlas; (iii) A45 Ceiling 3 (min-over
 applies one level up. Prerequisite before any attempt: a back-of-envelope showing some
 critical-structure class where junction counts x junction charges plausibly exceed the budget.
 
-**I-L18 (expanded — PI majority refinement, 2026-08-29).** STATUS: active — A47 (Fable). The A46
+**I-L18 (expanded — PI majority refinement, 2026-08-29).** STATUS: CLOSED done-negative — A47
+(Fable, 2026-08-29), with a theorem banked and the route refined into I-L19. The A46
 refutation killed "no small-angle corners" but the needed statement is the PI's MAJORITY form: not
 all corners simultaneously small-angle — and the magnitude fix is multi-square/corner-region
 primitives. THE SYNTHESIS: A21's certified corner-zone occupancy (unconditional position!) +
@@ -307,3 +308,41 @@ flush-freeness (forbids wall-flush) => the corner square is tilted/corner-touchi
 branch: A46's W1.6 quantization ([45,0,0,45] minimal structure) + its designed-not-run rectangle
 lemmas (gap G3) = closable outright. A47 legs: (a) run the rectangle lemmas; (b) certify I-L18
 corner/wall-region primitives; (c) majority composition on the non-thin branch vs 4.0318.
+OUTCOME (attempts/A47-corner-majority/results/a47_report.md): (a) closed STRONGER by pure theory —
+Theorem T1: thin chains span exactly o*sqrt2 + r, never s0; thin branch EMPTY at every s in the
+window except s* = 2 sqrt2 + 1, and the exception structure [45,0,45] admits NO 11-packing
+completion (obstacle-aware A08 certificate, 50/50 parameter boxes, coverage audit 0 gaps, margin
+0.159) => the thin branch of flush-mandatory is CLOSED COMPLETELY over [3.82, s0]; A46's G3
+lemmas were VACUOUS as posed (the [45,0,0,45] anchor cannot span, W1.6(f) corrected). (b) 54-entry exact corner table
+(max 0.8523, feasibility law: tilt > 40 deg infeasible within 0.7 of a wall) — but the near-flush
+cell is EXACTLY 0. (c) The synthesis premise fails at the PACKING level: flush-freeness does NOT
+activate the corner charge (an eps-tilted square parked eps off the corner charges 0 — rattlers
+are unconstrained); FORCED composition sum = 0; even grant-all is x1.35-2.27 short. Sixth face:
+occupancy activation is zeroed by flush-adjacent parking, and the budget is diffuse (max certified
+capture ~14%). BUT the escape witness is not critical (it drains) — the criticality-aware
+statement is untouched: see I-L19.
+
+**I-L19. Flush-mandatory via global bridge-cascade descent (PI, recorded by A47, 2026-08-29).**
+STATUS: candidate — the criticality-aware route, untouched by every closure so far (A44 was
+first/second-order FJ + counting only; A45/A46/A47 budget routes priced PACKINGS and never used
+criticality). Formulation (PI): "every flush-free configuration admits an unblocked descent —
+sustaining all-near-flush balance requires bridge structures whose own mid-tilt support
+requirements are globally self-defeating." Evidence: no flush-free critical structure has ever
+been observed; the measured near-flush LOADED contacts (1.029/2.272 deg) all sit inside
+flush-RICH structures; A46's bridge is a LOCAL balance certificate never embedded globally.
+THE ATTACK SURFACE = the bridge's structural requirements (A46 w1_theory par. 5 + W1.4, exact):
+to balance a loaded corner-on-edge contact at mismatch d > 0, the corner square needs (i) a
+BLOCKER: its far corner resting on a support edge sloping g > d — the blocker is strictly MORE
+tilted than the contact it rescues, and it is itself loaded (lam_b = sin(g-d)/sin g > 0), so it
+needs its own load path (L6) and, if near-flush, its own bridge — a recursion that pushes
+mid-tilt demands through the structure; (ii) a PRESSER loaded from above (its own wall path);
+(iii) NO WALL SHORTCUTS: wall-blocked families need lam ~ 1/sin d and die in the limit (W1.4) —
+the recursion cannot terminate at a wall. Target theorem: in a flush-free FJ configuration the
+support-slope recursion either terminates (some minimal-mismatch contact has no admissible
+blocker => its wedge-closing rotation is an unblocked descent, contradicting criticality) or
+cycles/diverges (self-supporting mid-tilt cycle or unbounded tilt — separately excludable
+finite structures). Ingredients ready: torque dichotomy W1.1-W1.2, blocker taxonomy W1.4,
+route-b neighbourhood form (A46-G4), the A47 feasibility law (mid-tilt cannot hide near walls),
+and the atlas as canary (all genuine CPs are flush-rich — the theorem must be vacuous on them).
+Prerequisite: formalize "support order" and the descent functional (sigma-non-increase of
+wedge-closing along the cascade — the crux A46 flagged, now with the cascade structure named).

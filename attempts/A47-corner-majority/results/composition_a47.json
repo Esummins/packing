@@ -1,0 +1,127 @@
+{
+ "what": "A47 leg (c) majority composition, flush-free non-thin branch, s <= s0",
+ "B0": "251986271441/62500000000",
+ "B0_float": 4.031780343056,
+ "corner_table": {
+  "min": "0",
+  "max": "3491/4096"
+ },
+ "side_table": {
+  "min": "0",
+  "max": "4008341/32000000"
+ },
+ "profiles": [
+  {
+   "profile": "NONTHIN kH=3 1axis",
+   "n_WC": 3,
+   "n_int": 3,
+   "forced_sum": "0",
+   "forced_float": 0.0,
+   "forced_fires": false,
+   "grantall_sum": "59289591/32000000",
+   "grantall_float": 1.85279971875,
+   "grantall_fires": false,
+   "grantall_shortfall_factor": 2.1760475793768252
+  },
+  {
+   "profile": "NONTHIN kH=4 1axis",
+   "n_WC": 2,
+   "n_int": 5,
+   "forced_sum": "0",
+   "forced_float": 0.0,
+   "forced_fires": false,
+   "grantall_sum": "56727091/32000000",
+   "grantall_float": 1.77272159375,
+   "grantall_fires": false,
+   "grantall_shortfall_factor": 2.274344915338458
+  },
+  {
+   "profile": "NONTHIN kH=5 1axis",
+   "n_WC": 2,
+   "n_int": 7,
+   "forced_sum": "0",
+   "forced_float": 0.0,
+   "forced_fires": false,
+   "grantall_sum": "15310679/8000000",
+   "grantall_float": 1.913834875,
+   "grantall_fires": false,
+   "grantall_shortfall_factor": 2.1066500541516153
+  },
+  {
+   "profile": "NONTHIN kH=3 2axes",
+   "n_WC": 4,
+   "n_int": 3,
+   "forced_sum": "0",
+   "forced_float": 0.0,
+   "forced_fires": false,
+   "grantall_sum": "16591929/8000000",
+   "grantall_float": 2.073991125,
+   "grantall_fires": false,
+   "grantall_shortfall_factor": 1.943971839829353
+  },
+  {
+   "profile": "NONTHIN kH=11 all-loaded",
+   "n_WC": 4,
+   "n_int": 16,
+   "forced_sum": "0",
+   "forced_float": 0.0,
+   "forced_fires": false,
+   "grantall_sum": "191438557/64000000",
+   "grantall_float": 2.991227453125,
+   "grantall_fires": false,
+   "grantall_shortfall_factor": 1.347868193321077
+  }
+ ],
+ "absolute_ceiling": {
+  "walls12_int23_sharpCC_plus_zones": {
+   "sum": "84074483/16000000",
+   "float": 5.2546551875,
+   "fires": true
+  },
+  "walls12_int23_CEonly_plus_zones": {
+   "sum": "15178777/4000000",
+   "float": 3.79469425,
+   "fires": false
+  }
+ },
+ "fire_zone": {
+  "n_points": 84,
+  "min_total_contact_points": [
+   [
+    12,
+    6
+   ],
+   [
+    12,
+    7
+   ],
+   [
+    11,
+    9
+   ],
+   [
+    12,
+    8
+   ],
+   [
+    11,
+    10
+   ],
+   [
+    12,
+    9
+   ],
+   [
+    10,
+    12
+   ],
+   [
+    11,
+    11
+   ]
+  ],
+  "note": "counts needing nwc*maxWC + nint*maxSharpCC + cornerMax + sideMax > B0; A46's zone-free fire zone was 5 points; atlas max is 3 WC + 1 aligned CC (charge 0) \u2014 still nothing real within reach"
+ },
+ "a26_population_note": "A26 (universal, exact): at most 9 squares within 2.503 deg of axis-parallel, so every 11-packing has >= 2 mid-tilt squares. This bounds the near-upright POPULATION but forces neither zone membership nor wall contact for the mid-tilt squares, so it adds 0 to the FORCED sum; it would matter only jointly with a (nonexistent) positional lemma pinning a mid-tilt square to a corner zone.",
+ "note_ownership": "GRANTALL/ceiling are upper accountings (overlaps only overstate). FORCED uses table minima; zone occupant bins are not forced by any known lemma (rattler evasion), WC tilts not bounded below (A46: no delta_0)."
+}
