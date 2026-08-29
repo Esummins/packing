@@ -1147,3 +1147,12 @@ affordable cost estimate for closing 3.84.
   rate wall at 240s+; G-A40-5 h=0.01/0.03 checkpoints NOT reached — brief's goal partially
   met, honest NO recorded with the constraint named.
 - A29 untouched; 1 background process throughout; Opus subagent used for the verification run.
+
+## 2026-08-28 — A42 dispatched: occupancy-chain pricing + N1 + the PI's tightening sweep
+- PI approved A42 and contributed the tightening-sweep schedule (gym insight): after full coarse
+  assignment + N1, the placement domain COLLAPSES to 11 islands — re-tightening each ball against
+  the restricted domain (Gauss-Seidel over balls, incl. a second pass) may be tiny+strong, a regime
+  never measured (every prior occupancy LP was played against the full box). First-class T3.
+- A42 = T1 prove N1, T2 chain slack-decay k=0..3+, T3 the sweep down to the 0.0066 basin
+  rendezvous, T4 composed desktop-days + GO/NO-GO. The occupancy family only; the deep-core family
+  stays dead per A39.
