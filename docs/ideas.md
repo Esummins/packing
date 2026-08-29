@@ -248,3 +248,15 @@ bidirectional protocol (gaps -> minimizer -> new certified CP or death). Risks t
 truncation constant K (codim beyond which slack always kills) and cascade branching (new contacts
 forming along a route re-subdivide it). Evades A30 (no metric boxes) and A31/A32 (perturbations of
 ONE known graph, not all graphs).
+
+**I-L16. Spine-first anchored enumeration (PI bulk-kill push + advisor L6-anchor synthesis, 2026-08-28).**
+STATUS: active — A43 (Fable). Two observations compose: (1) the 10^30 grain count (A31/A32) measured
+survivors of the WEAK 2025-era filter set; every theorem proven since (occupancy at s-hat A38.1,
+per-wall <= 3, flush-mandatory, A21 tilt windows, wastage motif kills, tight-variety, pair
+tight-sums) is COMBINATORIAL/GEOMETRIC — ghost-immune — and was never applied as a bulk filter.
+(2) L6 (proved) guarantees every jammed grain contains a wall-to-wall loaded chain: a 1-D SPINE of
+3-6 squares with link distances in [1, sqrt2], tilt profiles coupled by contact type, ends on
+opposite walls, per-link interface wastage chargeable vs the 4.03 budget, every link in the tight
+variety. Spines are the ANCHOR the far field lacked: enumerate certified-possible spine types at
+s-hat first (plausibly dozens-hundreds, not 10^30), then per-spine A35-style semantic completion.
+Conjecture in this language: only Trump's spine type (the tilted 5-strip) completes below s-hat.
