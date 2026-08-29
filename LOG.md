@@ -1251,3 +1251,42 @@ affordable cost estimate for closing 3.84.
 - A45: the PI's interface-charging calculus — per-contact-type certified charges, ownership
   disjointness, Trump canary, zero-charge-class composition; the one certificate whose unit of
   account matches the enumerated object.
+
+## 2026-08-29 — A45 closed: interface charging certified-sound and a magnitude NO-GO by theorem; the PI's ruler laws are the live bite
+- THEORY (notes/charging_lemma.md): the charging lemma EXISTS at T-quality — plane-mode
+  position-freeness (big-container trick), moat-Voronoi ownership (A23's closed-contact
+  exclusion makes a certified moat box repel every other packing square; charged contact
+  points >= min-moat apart; ownership free at rho_min/2), Thm A45.1 sum(charges) <= s^2-11.
+  Lead audit caught 3 soundness issues pre-compute: CC uncharge­able (a free wedge >= 90 deg
+  kills every moat), FL zero-proof repaired (slid flush union not convex — reentrant-notch
+  argument), WCC container-corner coincident-point leak patched.
+- TABLE (Opus A): 25/75 bins kept, ALL exact-Fraction certified (270 tiles + 25 moats, 0
+  failures); rho_min = 1/16. Trump canary PASS: his 25 contacts sum 0.00174 <= 4.0318 —
+  capture 4.3e-4 of budget, ~500x under A26's per-square 0.8672.
+- THE NO-GO, as theorems: (2) TABLE-INDEPENDENT — charge <= rho_min^2 <= 1/16/contact,
+  contacts <= 3k+2 => max conceivable sum at k=11 is 2.1875 < 4.0318: the charge filter can
+  NEVER fire at n=11 (actual table: max sum 0.0219 = 184x short; firing needs rho_min >= 0.34,
+  off the moat ladder); (1) on-paper, kills EVERY ownership scheme — the binding cap is the
+  plane-dead pair area itself (measured 0.054 WC / 0.004 CE full wedges): magic multiplicity-1
+  overlap accounting sums ~0.9 at k=11; Bonferroni /m no better; (3) min-over-realizations
+  collapse (CC/WCC/dropped-bin loopholes). MECHANISM (4th face of the mismatch law): an
+  interface pins RELATIVE coordinates; relative-coordinate certificates price only sliver
+  wastage (~1e-2), never the far field where the budget lives (A25's corner moats). A26 died
+  on an exact zero; A45 dies on quadratic smallness. Lawful: bite ~ pinned coordinates.
+- LIVE BITE — the PI's two flush-ruler laws, now EXACT census filters (Opus B, regression
+  to A31/A43 exact, canaries 100%): Lemma R k <= s(cos+sin) (upright rulers <= 3, 5-rulers
+  force tilt [20.77, 69.23] deg, 6 impossible; Trump's 5-strip extremal, margin 0.4636) +
+  Lemma Q quantization. L0 inert (all-corner decoration — same law again); L1 RULER cuts
+  5-7% of decoration weight per k (keep 0.894-0.928 at k=11; composed k=11 count 2.30e29 ->
+  2.06-2.14e29 = x1.09; kill audit 411/411 wall-anchored: Lemma-Q path 392, NEW odd-cycle
+  parity 16, integrality 3; the pure length cap kills 0 — bite is gauge multiplicity, only
+  where a wall pins a coordinate). ZERO-CHARGE COMPOSITION mostly
+  closed: the k >= 10 zero-charge class is DEAD EXACTLY (tilt propagation + A26's 2.503-deg
+  9-cap — UNIVERSAL, no k=11 join); k <= 9: ruler kills 60-78% of the class, rattler-join
+  residue stands; m_ub(theta) certified 9 on [0,3) deg, 12 on [3,18), 14 on [18,45)
+  (GAP-Z1 stands on 14/15 bins; the sharp m(theta) B&B = the one open computation).
+- Keeper: Ceiling 2 as a SCREENING TEST for any future per-contact certificate proposal
+  (required mean charge/contact 0.29-0.37 vs ownership ceiling 1/16).
+- Report: attempts/A45-interface-charge/results/a45_report.md; theory+verdict:
+  notes/charging_lemma.md; lead checks V1-V9: notes/verification_log.md. A29 untouched;
+  2 Opus workers (A <= 2, B <= 1 processes), ~2 h compute.

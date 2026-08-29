@@ -1,0 +1,433 @@
+{
+ "checks": [
+  {
+   "name": "C1a RULER does not kill Trump",
+   "pass_": true,
+   "detail": "feasible (family,sign) assignments 1632 of 65536"
+  },
+  {
+   "name": "C1b Trump's REALIZED (family,sign) assignment is feasible in every component",
+   "pass_": true,
+   "detail": "4 component-axis systems checked"
+  },
+  {
+   "name": "C2 Lemma R on the 5-square flush strip at 40.1819 deg: k <= s0(cos+sin)",
+   "pass_": true,
+   "detail": "capacity 5.463650, margin 0.463650 (brief: 0.4636 at 40.18 deg)"
+  },
+  {
+   "name": "C3a every upright square's wall contact is WF (charge 0 exactly, A26)",
+   "pass_": true,
+   "detail": "6 upright squares, 9 WF, 0 WC"
+  },
+  {
+   "name": "C3b every contact of an upright square that the table prices is charged 0",
+   "pass_": true,
+   "detail": "9 WF (exact 0, A26) + 3 FL (exact 0, Sec 6.1) = 0"
+  },
+  {
+   "name": "C4 Theorem A45.1 self-test: Trump's charge sum <= B0",
+   "pass_": true,
+   "detail": "sum = 0.000000000 (CERTIFIED table), B0 = 4.031780343"
+  },
+  {
+   "name": "C4b even the (unsound) CE-forced pricing stays under B0",
+   "pass_": true,
+   "detail": "sum = 0.000000000"
+  },
+  {
+   "name": "C4c Theorem A45.1 at the REALIZED bins: Trump's charge sum <= B0",
+   "pass_": true,
+   "detail": "sum = 0.002319336, B0 = 4.031780343, capture = 0.0575% of the budget (CERTIFIED table)"
+  }
+ ],
+ "side": 3.877084,
+ "k": 11,
+ "ss_edges": 14,
+ "fl_edges": [
+  [
+   0,
+   1
+  ],
+  [
+   0,
+   3
+  ],
+  [
+   1,
+   3
+  ],
+  [
+   6,
+   9
+  ],
+  [
+   7,
+   8
+  ],
+  [
+   7,
+   9
+  ],
+  [
+   8,
+   10
+  ],
+  [
+   9,
+   10
+  ]
+ ],
+ "ce_edges": [
+  [
+   1,
+   8
+  ],
+  [
+   2,
+   8
+  ],
+  [
+   3,
+   7
+  ],
+  [
+   4,
+   6
+  ],
+  [
+   4,
+   7
+  ],
+  [
+   5,
+   9
+  ]
+ ],
+ "wf_edges": [
+  [
+   0,
+   0
+  ],
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   2,
+   1
+  ],
+  [
+   2,
+   2
+  ],
+  [
+   3,
+   0
+  ],
+  [
+   4,
+   0
+  ],
+  [
+   5,
+   2
+  ],
+  [
+   5,
+   3
+  ]
+ ],
+ "wc_edges": [
+  [
+   6,
+   3
+  ],
+  [
+   10,
+   2
+  ]
+ ],
+ "wall_masks": [
+  3,
+  2,
+  6,
+  1,
+  1,
+  12,
+  8,
+  0,
+  0,
+  0,
+  4
+ ],
+ "phis": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  40.181937,
+  40.181937,
+  40.181937,
+  40.181937,
+  40.181937
+ ],
+ "ruler": {
+  "kill": false,
+  "gauge_full": 65536,
+  "gauge_ok": 1632,
+  "exact": true,
+  "n_comp_zero": 4,
+  "capped": 0
+ },
+ "realized_assignment": [
+  {
+   "component": [
+    0,
+    1,
+    3
+   ],
+   "axis": "u",
+   "zero_pinned": true,
+   "families": [
+    0,
+    1,
+    1
+   ],
+   "signs": [
+    1,
+    1,
+    1
+   ],
+   "feasible": true
+  },
+  {
+   "component": [
+    0,
+    1,
+    3
+   ],
+   "axis": "v",
+   "zero_pinned": true,
+   "families": [
+    0,
+    1,
+    1
+   ],
+   "signs": [
+    1,
+    1,
+    1
+   ],
+   "feasible": true
+  },
+  {
+   "component": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "axis": "u",
+   "zero_pinned": false,
+   "families": [
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   "signs": [
+    -1,
+    -1,
+    1,
+    1,
+    -1
+   ],
+   "feasible": true
+  },
+  {
+   "component": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "axis": "v",
+   "zero_pinned": false,
+   "families": [
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   "signs": [
+    -1,
+    -1,
+    1,
+    1,
+    -1
+   ],
+   "feasible": true
+  }
+ ],
+ "flush_strip": {
+  "squares": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "phi_deg": 40.18193729048284,
+  "k": 5,
+  "capacity_s0_cos_plus_sin": 5.463650123281851,
+  "margin": 0.46365012328185085
+ },
+ "upright_squares": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "charge": {
+  "table": "CERTIFIED",
+  "source": "results\\charge_table.json",
+  "sum_min_semantics": "0",
+  "sum_min_float": 0.0,
+  "sum_ce_forced": "0",
+  "sum_ce_forced_float": 0.0,
+  "budget": "251986271441/62500000000",
+  "budget_float": 4.031780343056,
+  "detail": [
+   [
+    "WC",
+    6,
+    3,
+    "0"
+   ],
+   [
+    "WC",
+    10,
+    2,
+    "0"
+   ],
+   [
+    "SS-corner",
+    1,
+    8,
+    "0 (CC branch reachable; CC uncharged by design)"
+   ],
+   [
+    "SS-corner",
+    2,
+    8,
+    "0 (CC branch reachable; CC uncharged by design)"
+   ],
+   [
+    "SS-corner",
+    3,
+    7,
+    "0 (CC branch reachable; CC uncharged by design)"
+   ],
+   [
+    "SS-corner",
+    4,
+    6,
+    "0 (CC branch reachable; CC uncharged by design)"
+   ],
+   [
+    "SS-corner",
+    4,
+    7,
+    "0 (CC branch reachable; CC uncharged by design)"
+   ],
+   [
+    "SS-corner",
+    5,
+    9,
+    "0 (CC branch reachable; CC uncharged by design)"
+   ]
+  ],
+  "realized_bin_sum": "19/8192",
+  "realized_bin_sum_float": 0.0023193359375,
+  "realized_bin_detail": [
+   [
+    "WC",
+    6,
+    3,
+    40.1819,
+    13,
+    "19/65536"
+   ],
+   [
+    "WC",
+    10,
+    2,
+    40.1819,
+    13,
+    "19/65536"
+   ],
+   [
+    "CE(upper: CC not distinguished)",
+    1,
+    8,
+    40.1819,
+    13,
+    "19/65536"
+   ],
+   [
+    "CE(upper: CC not distinguished)",
+    2,
+    8,
+    40.1819,
+    13,
+    "19/65536"
+   ],
+   [
+    "CE(upper: CC not distinguished)",
+    3,
+    7,
+    40.1819,
+    13,
+    "19/65536"
+   ],
+   [
+    "CE(upper: CC not distinguished)",
+    4,
+    6,
+    40.1819,
+    13,
+    "19/65536"
+   ],
+   [
+    "CE(upper: CC not distinguished)",
+    4,
+    7,
+    40.1819,
+    13,
+    "19/65536"
+   ],
+   [
+    "CE(upper: CC not distinguished)",
+    5,
+    9,
+    40.1819,
+    13,
+    "19/65536"
+   ]
+  ]
+ },
+ "verdict": "PASS"
+}

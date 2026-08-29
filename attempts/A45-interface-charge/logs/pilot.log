@@ -1,0 +1,34 @@
+
+=== WC {'phi': (21, 24)} nsub={'nsub': 6} ===
+  realisable: True  {'t': '1989123/10000000', 'corner_on_wall': True}
+  6 sub-configs
+    moat rho=1/4 -> fail (0.03s, 182 boxes)
+    moat rho=3/16 -> PASS (0.11s, 674 boxes)
+  MOAT rho = 3/16
+  full dead map R=1/2: area=0.053711 extent_rel=[-0.25, 0.0, 0.5, 0.21875] 4.39s (pass=61 drop=621)
+  charge map: area(B(p,1/8))=0.012985  area(B(p,3/32))=0.006897  1.72s (pass=80 keydrop=0)
+
+=== CE {'d': (21, 24), 'u': (Fraction(0, 1), Fraction(1, 4))} nsub={'nsub': 6, 'nsub_u': 4} ===
+  realisable: True  {'t': '1989123/10000000', 'u': '1/8', 'corner': ['10', '10'], 'on_edge': True, 'strict_interior_of_edge': True, 'interiors_disjoint': True}
+  24 sub-configs
+    moat rho=1/4 -> fail (0.12s, 873 boxes)
+    moat rho=3/16 -> fail (0.04s, 372 boxes)
+    moat rho=1/8 -> fail (0.03s, 277 boxes)
+    moat rho=3/32 -> fail (0.05s, 406 boxes)
+    moat rho=1/16 -> PASS (1.09s, 6114 boxes)
+  MOAT rho = 1/16
+  full dead map R=1/2: area=0.003662 extent_rel=[-0.140625, 0.0, 0.171875, 0.0625] 15.49s (pass=9 drop=826)
+  charge map: area(B(p,1/8))=0.009644  area(B(p,1/32))=0.000458  126.4s (pass=95 keydrop=0)
+
+=== CC {'delta': (Fraction(261, 2), Fraction(279, 2))} nsub={'nsub': 1} ===
+  realisable: True  {'t': '828427/2000000', 'shared_corner': True, 'interiors_disjoint': True}
+  1 sub-configs
+    moat rho=1/4 -> fail (0.02s, 53 boxes)
+    moat rho=3/16 -> fail (0.0s, 48 boxes)
+    moat rho=1/8 -> fail (0.0s, 50 boxes)
+    moat rho=3/32 -> fail (0.0s, 52 boxes)
+    moat rho=1/16 -> fail (0.0s, 51 boxes)
+  MOAT rho = None
+  full dead map R=1/2: area=0.023193 extent_rel=[-0.15625, 0.203125, 0.0, 0.484375] 5.03s (pass=20 drop=1241)
+
+PILOT DONE: 1/3 bins with NO moat
