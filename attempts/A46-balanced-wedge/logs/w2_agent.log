@@ -1,0 +1,58 @@
+# A46 W2 (Opus) work log -- balanced-wedge budget. All times UTC.
+2026-08-29T18:39Z  setup: created A46/{code,results,logs,work,notes};
+  copied VERBATIM from A45/code: a45_lib.py dead_region.py atlas_lib.py wastage.py
+  exactify.py canary.py.  A45/A25/A23/A44/A37/A29 untouched (read-only).
+2026-08-29T18:40Z  read: A46/BRIEF.md, A45/code/README_A.md, A45/notes/charging_lemma.md
+  ss2/5/9, A23/notes.md ss1-2/4a, A44/code/{a44_geom.py,eval_atlas.py},
+  docs/proofs/structure_lemmas.md.  Genuine atlas entries = 12
+  (1 RIGID fam00, 9 VALLEY, 2 VALLEY-MARGINAL).
+2026-08-29T18:55Z  TASK 1 DONE (float-only).  code/task1_audit.py -> results/atlas_mismatch_audit.json
+  12 genuine A37 entries audited; contact types by float SAT (TOL=1e-6), loadability by
+  re-running A44's FJ LP (physical rows; expanded fallback).
+  GLOBAL min mismatch:  CE loaded 1.029 deg (fam A37-NEW-0);  CE all 0.1958 deg (fam 01, unloadable);
+                        WC loaded 33.896 deg;  CC always exactly 0 (aligned, wedges 90/90).
+  => conjecture W1 is EMPIRICALLY REFUTED at the level of genuine critical points:
+     forced CE contacts occur at 1.03, 2.27, 5.83, 6.85, 7.11 deg.  No usable delta_0.
+  CE consistency check: corner-tilt-mod-90 == relative-angle-mismatch on all 72 CE contacts.
+  fam 27 / A37-NEW-1 (VALLEY-MARGINAL): lambda0=1 LP infeasible => loadability 'unknown' (A44 expected).
+2026-08-29T19:00Z  TASK 2 float pass COMPLETE (11/11 bins, 3 procs, ~4 min).
+  frame = A45 WC frame (S=20, corner at p=(10,0) on bottom wall), nsub=4, cell0=1/8,
+  min_cell=1/64, window x in [10-13/8, 10+13/8] y in [0,5/4] (>= the brief's 1.6/1.2),
+  Lemma-K slab keeper (a45_lib.keeper_wc VERBATIM, bbox exposed for fast rejection).
+  w_WC float lower bounds:
+    (0.5,1] 0        (1,2] 0.001221   (2,5] 0.008545   (5,10] 0.028076
+    (10,15] 0.064697 (15,20] 0.102539 (20,25] 0.137695 (25,30] 0.168701
+    (30,35] 0.195068 (35,40] 0.212402 (40,45] 0.221191
+  => max w_WC = 0.2212.  12 x max = 2.654 < B0 = 4.0318 ALREADY.  First sight of the verdict.
+2026-08-29T19:25Z  TASK 2 EXACT pass COMPLETE.  11/11 bins exact-certified in Fractions,
+  869/869 tiles pass, 0 failures, ~15 s per bin.  results/w_wc_table.json.
+  Lemma-K probe (task4_pilot --what probe, NO keeper): (40,45] 0.221191, (20,25] 0.137695,
+  (2,5] 0.008545 -- IDENTICAL to the keepered numbers.  The Lemma-K slab costs NOTHING in
+  this window: the whole plane-dead region already sits inside the square's own wall slab.
+2026-08-29T19:30Z  TASK 4 pilots (CE 3 bins + CC 5 bins, float; 3 bins exact-recertified).
+  CE (2,5] 0 ; (18,21] 0.003174 ; (39,42] 0.007080 EXACT (0/20 failures).
+  CC by SHARP FREE WEDGE (not by mismatch mod 90 -- convention correction, recorded):
+    wedge 87-90 (aligned) 0 ; 80-87 0 ; 70-80 0.003662 ; 45-55 0.056152 EXACT ;
+    20-30 0.070557 EXACT (0/58 failures).
+  => interior contacts are 0.003-0.07, i.e. 3-30x SMALLER than one wall wedge.  The lead's
+  0.01-0.04 estimate is right for CE (in fact CE <= 0.0071) but CC with a sharp free wedge
+  reaches 0.0706 -- the only interior number that matters for the fire zone.
+2026-08-29T19:45Z  TASK 5 disjointification implemented (code/clip_util.py): exact tile
+  clipping, along-wall Voronoi truncation, adjacent-wall corner deduction + diagonal split.
+  Per-wall Voronoi cap on the (40,45] bin, r contacts evenly spread on a wall of length s0:
+  r=1..6 -> 0.2212 0.4424 0.6636 0.8843 0.9317 0.7829.  Truncation is INERT up to r=3.
+  Under N1<=12 the best distribution is (3,3,3,3) = 2.654297 = 12 x max w_WC exactly.
+2026-08-29T19:50Z  TASK 3 composition done (code/task3_compose.py -> results/composition.json,
+  results/composition_report.md).  Honest flush-free minima derived from L1/L2/L5b/L6/L7/L11
+  + planarity: thin 4 contacts (2 WC + 2 int); non-thin 6 (3 WC + 3 int) at k_H=3.
+  NOTHING FIRES.  Best case delta_0 = 45: minimal profile 0.583 (x6.91 short); richest
+  count-admissible profile (11 loaded squares) 2.014 (x2.00 short).
+  Max conceivable with CE-only interiors 2.8171 = 0.699 B0 -> a table-independent CEILING.
+  Fire zone = exactly 5 lattice points, all needing n_WC in {11,12} AND >= 20 sharp-wedge
+  CC contacts.  Atlas max is 3 WC and 1 (aligned, zero-charge) CC.
+2026-08-29T19:55Z  TASK 6 canaries ALL PASS.  Trump (exact extraction) 0.484863 <= 4.031780
+  (12.0% capture); 12 atlas families at their own s all pass, max capture 14.0% (fam 13/14).
+  Trump's 2 WC are on adjacent walls, each >= 2.0 from the shared corner => corner deduction 0.
+2026-08-29T19:57Z  W2 COMPLETE.  Deliverables: results/{atlas_mismatch_audit.json,
+  w_wc_table.json, w_ce_cc_pilot.json, composition.json, composition_report.md, canaries.json}.
+  No file outside attempts/A46-balanced-wedge was written.

@@ -262,7 +262,15 @@ s-hat first (plausibly dozens-hundreds, not 10^30), then per-spine A35-style sem
 Conjecture in this language: only Trump's spine type (the tilted 5-strip) completes below s-hat.
 
 **I-L17. Flush-mandatory via balanced-wedge budget (PI, 2026-08-29).**
-STATUS: active — A46 (Fable). Route to "critical structures must contain flush contacts" that
+STATUS: CLOSED done-negative — A46 (Fable, 2026-08-29). Refuted twice over: W1 is false
+(bridge mechanism balances loaded corner contacts at every delta > 0; atlas confirms —
+A37-NEW-0 has a forced loaded CE row at 1.029 deg) and the budget cannot reach B0 even at
+delta_0 = 45 (honest minima 4-6 contacts fall x2-7 short; CE-only ceiling 0.699*B0
+table-independent). Banked: Theorem W1.6 (flush-free thin chains quantize to 45/0 tilts;
+3-chains impossible at s0), the exact w_WC table (0.2212 max, 280x A45), torque-dichotomy
+toolkit, CC sharp-wedge convention. Flush-mandatory itself remains an atlas-consistent
+CONJECTURE (every genuine CP has F >= 3). See attempts/A46-balanced-wedge/results/
+a46_report.md. Successor candidate: I-L18 below. Route to "critical structures must contain flush contacts" that
 evades BOTH closed roads: not FJ+counting (A44's dead end — this is drain + area), and not
 raw-contact charging (A45's quadratic ceiling — "BALANCED corner" imports criticality/torque
 balance into the local object, pinning the wedge geometry => macroscopic certifiable dead area;
@@ -274,3 +282,18 @@ crux); W2 (computation): certified pair-wedge table w(delta) for delta >= delta_
 A25 union-disjointness => >= ~17 balanced corners blow the 4.0318 budget. W1 AND W2 => flush-
 mandatory (worth ~x1e3 census + first proved constraint on unknown CPs beyond the L-lemmas).
 Complements the PI's ruler laws (which killed the nearly-all-flush end): the two extremes pincer.
+
+**I-L18. Multi-square corner-hypothesis charging (CANDIDATE, recorded by A46, 2026-08-29 — NOT pursued).**
+STATUS: candidate only, no attempt assigned. A46's one live direction out of the per-contact
+ceiling: enlarge the certificate HYPOTHESIS from the pair to the balanced JUNCTION — the pair
+plus the blocker geometry that criticality pins (A46 W1.4 taxonomy: bridge/brace squares, the
+b|d chimney under a near-flush bridge), or an interface plus its wall. Evidence the primitive
+is stronger: A23-4b certifies 0.34-0.54 for ONE square in a container corner (2.4x the
+single-wall wedge); A23-4c's pair shadow is 1.88; A46's CE-only ceiling (0.699*B0) is a
+statement about PAIR hypotheses only. Honest warnings from A46: (i) the count, not the
+per-unit charge, is what falls short — criticality forces only 4-6 contacts on minimal
+flush-free cores, so even 10x per-unit gains need a count argument to close any budget;
+(ii) junction parameters (e.g. the b|d gap) are NOT pinned by balance, so tables must be
+min-over-bin uniform or become an A25-scale atlas; (iii) A45 Ceiling 3 (min-over-realizations)
+applies one level up. Prerequisite before any attempt: a back-of-envelope showing some
+critical-structure class where junction counts x junction charges plausibly exceed the budget.
