@@ -1,0 +1,77 @@
+
+=== 2026-08-29T17:05:36  canary_cascade.py ===
+A48 canary_cascade  tol_c=1e-06 lp_tol=1e-07 tau_tol=1e-07
+fam 0          RIGID            flush(WF=9,FL=7)=16 rows=32 | CE= 6 WC= 2 blk= 6 pen= 2 fail= 0 minmarg=6.452e-01 | negctl fail=0/8
+fam 1          VALLEY           flush(WF=8,FL=7)=15 rows=30 | CE= 3 WC= 0 blk= 2 pen= 1 fail= 0 minmarg=1.000e+00 | negctl fail=0/3
+fam 2          VALLEY           flush(WF=8,FL=7)=15 rows=30 | CE= 3 WC= 0 blk= 1 pen= 2 fail= 0 minmarg=1.000e+00 | negctl fail=0/3
+fam 6          VALLEY           flush(WF=10,FL=7)=17 rows=34 | CE= 4 WC= 1 blk= 1 pen= 4 fail= 0 minmarg=1.000e+00 | negctl fail=0/5
+fam 13         VALLEY           flush(WF=6,FL=7)=13 rows=26 | CE= 3 WC= 3 blk= 5 pen= 1 fail= 0 minmarg=8.300e-01 | negctl fail=1/6
+fam 14         VALLEY           flush(WF=6,FL=7)=13 rows=26 | CE= 3 WC= 3 blk= 3 pen= 3 fail= 0 minmarg=8.300e-01 | negctl fail=1/6
+fam 27         VALLEY-MARGINAL  flush(WF=9,FL=3)=12 rows=24 | CE=-1 WC=-1 blk=-1 pen=-1 fail=-1 minmarg=n/a | negctl fail=0/0
+fam 31         VALLEY           flush(WF=8,FL=4)=12 rows=24 | CE= 7 WC= 2 blk= 7 pen= 2 fail= 0 minmarg=3.235e-02 | negctl fail=3/9
+fam A37-NEW-0  VALLEY           flush(WF=8,FL=4)=12 rows=24 | CE= 9 WC= 1 blk= 9 pen= 1 fail= 0 minmarg=3.062e-01 | negctl fail=2/10
+fam A37-NEW-1  VALLEY-MARGINAL  flush(WF=9,FL=3)=12 rows=24 | CE=-1 WC=-1 blk=-1 pen=-1 fail=-1 minmarg=n/a | negctl fail=0/0
+fam A37-NEW-2  VALLEY           flush(WF=7,FL=5)=12 rows=24 | CE= 5 WC= 2 blk= 4 pen= 3 fail= 0 minmarg=6.217e-01 | negctl fail=1/7
+fam A37-NEW-3  VALLEY           flush(WF=9,FL=4)=13 rows=26 | CE= 7 WC= 1 blk= 7 pen= 1 fail= 0 minmarg=6.603e-01 | negctl fail=4/8
+
+flush edges over 12 genuine entries: 12..17 (all >= 1: True)
+W1.2: loaded CE=50 WC=15 -> blocker 45, pencil 20, FAIL 0
+  min blocker margin 3.235e-02 ; max identity residual 9.97e-09 ; max |tau_geo - tau_grad| 3.33e-16
+negative control: 12/65 rows fail on 6 entries -> fired=True
+blocker tally (CE only): {"CC/rest": 1, "CE/recv": 6, "CE/rest": 6, "FL/recv": 6, "FL/rest": 6, "WC": 2, "WF": 11}
+blocker tally (CE+WC)  : {"CC/rest": 1, "CE/recv": 7, "CE/rest": 6, "FL/recv": 17, "FL/rest": 9, "WC": 5, "WF": 11}
+VERDICT: PASS   (0.1 s)
+-> attempts/A48-bridge-cascade/results/canary_cascade.json
+
+=== 2026-08-29T17:06:40  canary_cascade.py ===
+A48 canary_cascade  tol_c=1e-06 lp_tol=1e-07 tau_tol=1e-07
+fam 0          RIGID            flush(WF=9,FL=7)=16 rows=32 | CE= 6 WC= 2 blk= 6 pen= 2 fail= 0 minmarg=6.452e-01 | negctl fail=0/8
+fam 1          VALLEY           flush(WF=8,FL=7)=15 rows=30 | CE= 3 WC= 0 blk= 2 pen= 1 fail= 0 minmarg=1.000e+00 | negctl fail=0/3
+fam 2          VALLEY           flush(WF=8,FL=7)=15 rows=30 | CE= 3 WC= 0 blk= 1 pen= 2 fail= 0 minmarg=1.000e+00 | negctl fail=0/3
+fam 6          VALLEY           flush(WF=10,FL=7)=17 rows=34 | CE= 4 WC= 1 blk= 1 pen= 4 fail= 0 minmarg=1.000e+00 | negctl fail=0/5
+fam 13         VALLEY           flush(WF=6,FL=7)=13 rows=26 | CE= 3 WC= 3 blk= 5 pen= 1 fail= 0 minmarg=8.300e-01 | negctl fail=1/6
+fam 14         VALLEY           flush(WF=6,FL=7)=13 rows=26 | CE= 3 WC= 3 blk= 3 pen= 3 fail= 0 minmarg=8.300e-01 | negctl fail=1/6
+fam 27         VALLEY-MARGINAL  flush(WF=9,FL=3)=12 rows=24 | CE=-1 WC=-1 blk=-1 pen=-1 fail=-1 minmarg=n/a | negctl fail=0/0
+fam 31         VALLEY           flush(WF=8,FL=4)=12 rows=24 | CE= 7 WC= 2 blk= 7 pen= 2 fail= 0 minmarg=3.235e-02 | negctl fail=3/9
+fam A37-NEW-0  VALLEY           flush(WF=8,FL=4)=12 rows=24 | CE= 9 WC= 1 blk= 9 pen= 1 fail= 0 minmarg=3.062e-01 | negctl fail=2/10
+fam A37-NEW-1  VALLEY-MARGINAL  flush(WF=9,FL=3)=12 rows=24 | CE=-1 WC=-1 blk=-1 pen=-1 fail=-1 minmarg=n/a | negctl fail=0/0
+fam A37-NEW-2  VALLEY           flush(WF=7,FL=5)=12 rows=24 | CE= 5 WC= 2 blk= 4 pen= 3 fail= 0 minmarg=6.217e-01 | negctl fail=1/7
+fam A37-NEW-3  VALLEY           flush(WF=9,FL=4)=13 rows=26 | CE= 7 WC= 1 blk= 7 pen= 1 fail= 0 minmarg=6.603e-01 | negctl fail=4/8
+
+flush edges over 12 genuine entries: 12..17 (all >= 1: True)
+W1.2: loaded CE=50 WC=15 -> blocker 45, pencil 20, FAIL 0
+  min blocker margin 3.235e-02 ; max identity residual 9.97e-09 ; max |tau_geo - tau_grad| 3.33e-16
+negative control: 12/65 rows fail on 6 entries -> fired=True
+blocker tally (CE only): {"CC/rest": 1, "CE/recv": 6, "CE/rest": 6, "FL/recv": 6, "FL/rest": 6, "WC": 2, "WF": 11}
+blocker tally (CE+WC)  : {"CC/rest": 1, "CE/recv": 7, "CE/rest": 6, "FL/recv": 17, "FL/rest": 9, "WC": 5, "WF": 11}
+near-flush (delta<=5deg): {"blocker_types": {"CE/recv": 2, "CE/rest": 1, "FL/recv": 1, "FL/rest": 1}, "n_loaded_CE_WC_rows": 2, "n_pencil": 0}
+A46 audit type-count agreement: 12/12 identical
+VERDICT: PASS   (0.1 s)
+-> attempts/A48-bridge-cascade/results/canary_cascade.json
+
+=== 2026-08-29T17:07:21  canary_cascade.py ===
+A48 canary_cascade  tol_c=1e-06 lp_tol=1e-07 tau_tol=1e-07
+fam 0          RIGID            flush(WF=9,FL=7)=16 rows=32 | CE= 6 WC= 2 blk= 6 pen= 2 fail= 0 minmarg=6.452e-01 | negctl fail=0/8
+fam 1          VALLEY           flush(WF=8,FL=7)=15 rows=30 | CE= 3 WC= 0 blk= 2 pen= 1 fail= 0 minmarg=1.000e+00 | negctl fail=0/3
+fam 2          VALLEY           flush(WF=8,FL=7)=15 rows=30 | CE= 3 WC= 0 blk= 1 pen= 2 fail= 0 minmarg=1.000e+00 | negctl fail=0/3
+fam 6          VALLEY           flush(WF=10,FL=7)=17 rows=34 | CE= 4 WC= 1 blk= 1 pen= 4 fail= 0 minmarg=1.000e+00 | negctl fail=0/5
+fam 13         VALLEY           flush(WF=6,FL=7)=13 rows=26 | CE= 3 WC= 3 blk= 5 pen= 1 fail= 0 minmarg=8.300e-01 | negctl fail=1/6
+fam 14         VALLEY           flush(WF=6,FL=7)=13 rows=26 | CE= 3 WC= 3 blk= 3 pen= 3 fail= 0 minmarg=8.300e-01 | negctl fail=1/6
+fam 27         VALLEY-MARGINAL  flush(WF=9,FL=3)=12 rows=24 | CE=-1 WC=-1 blk=-1 pen=-1 fail=-1 minmarg=n/a | negctl fail=0/0
+fam 31         VALLEY           flush(WF=8,FL=4)=12 rows=24 | CE= 7 WC= 2 blk= 7 pen= 2 fail= 0 minmarg=3.235e-02 | negctl fail=3/9
+fam A37-NEW-0  VALLEY           flush(WF=8,FL=4)=12 rows=24 | CE= 9 WC= 1 blk= 9 pen= 1 fail= 0 minmarg=3.062e-01 | negctl fail=2/10
+fam A37-NEW-1  VALLEY-MARGINAL  flush(WF=9,FL=3)=12 rows=24 | CE=-1 WC=-1 blk=-1 pen=-1 fail=-1 minmarg=n/a | negctl fail=0/0
+fam A37-NEW-2  VALLEY           flush(WF=7,FL=5)=12 rows=24 | CE= 5 WC= 2 blk= 4 pen= 3 fail= 0 minmarg=6.217e-01 | negctl fail=1/7
+fam A37-NEW-3  VALLEY           flush(WF=9,FL=4)=13 rows=26 | CE= 7 WC= 1 blk= 7 pen= 1 fail= 0 minmarg=6.603e-01 | negctl fail=4/8
+
+flush edges over 12 genuine entries: 12..17 (all >= 1: True)
+W1.2: loaded CE=50 WC=15 -> blocker 45, pencil 20, FAIL 0
+  min blocker margin 3.235e-02 ; max identity residual 9.97e-09 ; max |tau_geo - tau_grad| 3.33e-16
+negative control: 12/65 rows fail on 6 entries -> fired=True
+blocker tally (CE only): {"CC/rest": 1, "CE/recv": 6, "CE/rest": 6, "FL/recv": 6, "FL/rest": 6, "WC": 2, "WF": 11}
+blocker tally (CE+WC)  : {"CC/rest": 1, "CE/recv": 7, "CE/rest": 6, "FL/recv": 17, "FL/rest": 9, "WC": 5, "WF": 11}
+near-flush (delta<=5deg): {"blocker_types": {"CE/recv": 2, "CE/rest": 1, "FL/recv": 1, "FL/rest": 1}, "n_loaded_CE_WC_rows": 2, "n_pencil": 0}
+pencil support: 20/20 pencils have a FLUSH row among the loaded rows at a; min pencil mismatch 22.42 deg; signatures {"CC/recv+WF/rest_wall": 1, "FL/recv+WF/rest_wall": 1, "FL/rest+WF/rest_wall": 10, "WF/rest_wall+WF/rest_wall": 8}
+A46 audit type-count agreement: 12/12 identical
+VERDICT: PASS   (0.1 s)
+-> attempts/A48-bridge-cascade/results/canary_cascade.json

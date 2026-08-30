@@ -323,7 +323,24 @@ capture ~14%). BUT the escape witness is not critical (it drains) — the critic
 statement is untouched: see I-L19.
 
 **I-L19. Flush-mandatory via global bridge-cascade descent (PI, recorded by A47, 2026-08-29).**
-STATUS: candidate — the criticality-aware route, untouched by every closure so far (A44 was
+STATUS: EXPLORED, DOWNGRADED to global-realizability conjecture — A48 (Fable, 2026-08-29,
+attempts/A48-bridge-cascade/results/a48_report.md). The cascade is now a formal object (demand
+graph on loaded CE/WC rows) and its LOCAL theory is settled: R1 proved in corrected form (support
+SLOPE escalates strictly, g > d IFF loaded — exact; per-contact mismatch does NOT escalate); B3
+also escalates strictly (new); B2-cascades can never cycle (height functional, orientation-free);
+BUT R3 is REFUTED as formulated (wall-lever arm = sin(absolute tilt), not sin(mismatch) — the
+1/sin d collapse assumed an axis-parallel frame; and even there an exact evasion exists: presser
+at u = sin^2 d, bounded multipliers, no lambda0 -> 0) and R4 is arithmetically unreachable (exact
+no-go: grant-all ceiling of ALL certified tables = 0.9416 B0 < B0, robust). One non-escalating
+branch (B1 overhang press, any mismatch) + confined-presser wall terminations let a flush-free
+structure route every rotational demand without forced mid-tilt; each step is an exact FJ balance.
+The self-defeating clause survives ONLY as: "this routing cannot close globally at s <= s0"
+(= W1-G2 sharpened). Decisive next experiment (named in the report): a drain-style numerical hunt
+for a flush-free critical point built on the two evasion branches. Banked regardless: the
+escalation lemmas as case-tree rows, the presser-confinement near-CC signature, universal
+non-thinness (T1 + C4), and the criticality Ceiling C6' as a screening test for all future
+criticality-aware budget proposals. Original formulation kept below for the record.
+ORIGINAL: the criticality-aware route, untouched by every closure so far (A44 was
 first/second-order FJ + counting only; A45/A46/A47 budget routes priced PACKINGS and never used
 criticality). Formulation (PI): "every flush-free configuration admits an unblocked descent —
 sustaining all-near-flush balance requires bridge structures whose own mid-tilt support

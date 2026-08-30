@@ -1,0 +1,5901 @@
+{
+ "what": "A48 canary: cascade-theory premises (flush-vacuity + W1.2 blocking dichotomy + blocker taxonomy) checked against all 36 A37 critical-point atlas entries, with a sign-flip corruption gate.  Empirical, float64, never an input to a certified verdict.",
+ "float_only": true,
+ "generated": "2026-08-29T17:07:21",
+ "inputs": {
+  "atlas": "attempts/A37-cp-atlas/results/atlas_final.json",
+  "machinery": [
+   "attempts/A44-fj-maxwell/code/eval_atlas.py",
+   "attempts/A44-fj-maxwell/code/a44_geom.py",
+   "attempts/A46-balanced-wedge/code/task1_audit.py"
+  ],
+  "theory": "attempts/A46-balanced-wedge/notes/w1_theory.md sect. 2 (Theorem W1.2), sect. 1 (Lemma W1.1)"
+ },
+ "tolerances": {
+  "contact": 1e-06,
+  "lp_loaded": 1e-07,
+  "tau_zero": 1e-07,
+  "identity": 1e-06
+ },
+ "conventions": [
+  "Certificate: ONE FJ multiplier vector at lambda0 = 1 -- the min-sum-lambda HiGHS vertex of A^T lambda = e_s, 0 <= lambda <= 1e6 on the A44 Fact-0 physical row set (expanded row set as fallback where the physical set is infeasible: the two VALLEY-MARGINAL entries).  W1.2 is per-certificate, so LOADED means lambda_k > 1e-7 in THIS vector, not \"loadable\".",
+  "Force direction ON square a: wall row -> inward wall normal; a-corner-on-j-edge (resting) -> j's outward edge normal (points into a); other-corner-on-a-edge (received) -> MINUS a's outward edge normal.  Identical to grad_{c_a} g_k, which is how it is cross-checked (tau_geo vs tau_grad).",
+  "tau_k = cross(p_k - q, n_k); the row (a,b) itself has p = q so tau = 0 (reported as max_self_tau).",
+  "Flushness is decided by the A44 Fact-0 row count (2 rows = segment contact = flush); the A46 task-1 geometric label is computed independently and the agreement is reported.",
+  "A flush edge contributes its TWO contact points as two rows, each with its own tau."
+ ],
+ "n_entries": 36,
+ "n_genuine": 12,
+ "n_not_cp": 24,
+ "vacuity": {
+  "statement": "every genuine entry carries >= 1 flush contact, so the flush-free hypothesis of every A48 statement is VACUOUS on all 36 atlas entries (the 24 NOT-CP entries are vacuous for a second, independent reason: they are not critical points).",
+  "flush_edges_per_entry": {
+   "0": 16,
+   "1": 15,
+   "2": 15,
+   "6": 17,
+   "13": 13,
+   "14": 13,
+   "27": 12,
+   "31": 12,
+   "A37-NEW-0": 12,
+   "A37-NEW-1": 12,
+   "A37-NEW-2": 12,
+   "A37-NEW-3": 13
+  },
+  "flush_rows_per_entry": {
+   "0": 32,
+   "1": 30,
+   "2": 30,
+   "6": 34,
+   "13": 26,
+   "14": 26,
+   "27": 24,
+   "31": 24,
+   "A37-NEW-0": 24,
+   "A37-NEW-1": 24,
+   "A37-NEW-2": 24,
+   "A37-NEW-3": 26
+  },
+  "min_flush_edges": 12,
+  "max_flush_edges": 17,
+  "all_at_least_one": true
+ },
+ "dichotomy": {
+  "0": {
+   "n_loaded_CE": 6,
+   "n_loaded_WC": 2,
+   "n_blocker_ok": 6,
+   "n_pencil": 2,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 0.6452168660870328,
+   "max_torque_identity_residual": 2.949029909160572e-17,
+   "lp_rowset": "physical"
+  },
+  "1": {
+   "n_loaded_CE": 3,
+   "n_loaded_WC": 0,
+   "n_blocker_ok": 2,
+   "n_pencil": 1,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 1.0,
+   "max_torque_identity_residual": 3.489094352630609e-17,
+   "lp_rowset": "physical"
+  },
+  "2": {
+   "n_loaded_CE": 3,
+   "n_loaded_WC": 0,
+   "n_blocker_ok": 1,
+   "n_pencil": 2,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 1.0000000000000002,
+   "max_torque_identity_residual": 6.938893903907228e-18,
+   "lp_rowset": "physical"
+  },
+  "6": {
+   "n_loaded_CE": 4,
+   "n_loaded_WC": 1,
+   "n_blocker_ok": 1,
+   "n_pencil": 4,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 1.0000000000000002,
+   "max_torque_identity_residual": 1.7520707107365752e-16,
+   "lp_rowset": "physical"
+  },
+  "13": {
+   "n_loaded_CE": 3,
+   "n_loaded_WC": 3,
+   "n_blocker_ok": 5,
+   "n_pencil": 1,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 0.8300481656375274,
+   "max_torque_identity_residual": 9.71445146547012e-17,
+   "lp_rowset": "physical"
+  },
+  "14": {
+   "n_loaded_CE": 3,
+   "n_loaded_WC": 3,
+   "n_blocker_ok": 3,
+   "n_pencil": 3,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 0.8300481656375274,
+   "max_torque_identity_residual": 9.71445146547012e-17,
+   "lp_rowset": "physical"
+  },
+  "27": {
+   "n_loaded_CE": null,
+   "n_loaded_WC": null,
+   "n_blocker_ok": null,
+   "n_pencil": null,
+   "n_fail": null,
+   "status": "NO-CERTIFICATE (lambda0=1 infeasible on physical AND expanded rows)",
+   "min_blocker_margin": null,
+   "max_torque_identity_residual": null,
+   "lp_rowset": "infeasible"
+  },
+  "31": {
+   "n_loaded_CE": 7,
+   "n_loaded_WC": 2,
+   "n_blocker_ok": 7,
+   "n_pencil": 2,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 0.032354477854809716,
+   "max_torque_identity_residual": 6.869029747780253e-09,
+   "lp_rowset": "physical"
+  },
+  "A37-NEW-0": {
+   "n_loaded_CE": 9,
+   "n_loaded_WC": 1,
+   "n_blocker_ok": 9,
+   "n_pencil": 1,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 0.30615642035197144,
+   "max_torque_identity_residual": 9.970537673265056e-09,
+   "lp_rowset": "physical"
+  },
+  "A37-NEW-1": {
+   "n_loaded_CE": null,
+   "n_loaded_WC": null,
+   "n_blocker_ok": null,
+   "n_pencil": null,
+   "n_fail": null,
+   "status": "NO-CERTIFICATE (lambda0=1 infeasible on physical AND expanded rows)",
+   "min_blocker_margin": null,
+   "max_torque_identity_residual": null,
+   "lp_rowset": "infeasible"
+  },
+  "A37-NEW-2": {
+   "n_loaded_CE": 5,
+   "n_loaded_WC": 2,
+   "n_blocker_ok": 4,
+   "n_pencil": 3,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 0.6217077170329927,
+   "max_torque_identity_residual": 5.551115123125783e-17,
+   "lp_rowset": "physical"
+  },
+  "A37-NEW-3": {
+   "n_loaded_CE": 7,
+   "n_loaded_WC": 1,
+   "n_blocker_ok": 7,
+   "n_pencil": 1,
+   "n_fail": 0,
+   "status": "PASS",
+   "min_blocker_margin": 0.6603280755049727,
+   "max_torque_identity_residual": 5.551115123125783e-17,
+   "lp_rowset": "physical"
+  }
+ },
+ "dichotomy_totals": {
+  "n_loaded_CE_rows_checked": 50,
+  "n_loaded_WC_rows_checked": 15,
+  "n_blocker_ok": 45,
+  "n_pencil": 20,
+  "n_fail": 0,
+  "global_min_blocker_margin": 0.032354477854809716,
+  "max_torque_identity_residual": 9.970537673265056e-09,
+  "max_tau_geo_minus_tau_grad": 3.3306690738754696e-16
+ },
+ "negative_control": {
+  "perturbation": "n_k negated on RECEIVED rows (another body's corner resting on a's edge) only; everything else identical.",
+  "n_rows_checked": 65,
+  "n_dichotomy_failures": 12,
+  "entries_that_fail": [
+   "13",
+   "14",
+   "31",
+   "A37-NEW-0",
+   "A37-NEW-2",
+   "A37-NEW-3"
+  ],
+  "fired": true
+ },
+ "blocker_tally": {
+  "note": "blocker rows (tau > tol) found at loaded CE/WC rows; role rest = a's corner pushing on a partner edge, recv = a partner corner pushing on a's edge, rest_wall = a container wall.",
+  "all_CE_and_WC": {
+   "FL/recv": 17,
+   "CE/rest": 6,
+   "WF": 11,
+   "CC/rest": 1,
+   "FL/rest": 9,
+   "WC": 5,
+   "CE/recv": 7
+  },
+  "CE_only": {
+   "CE/rest": 6,
+   "WF": 11,
+   "CC/rest": 1,
+   "FL/recv": 6,
+   "FL/rest": 6,
+   "CE/recv": 6,
+   "WC": 2
+  },
+  "n_loaded_CE_rows_with_blocker": 30,
+  "by_mismatch_threshold": {
+   "delta_le_2_deg": {
+    "n_loaded_CE_WC_rows": 1,
+    "n_pencil": 0,
+    "blocker_types": {
+     "CE/rest": 1,
+     "FL/rest": 1,
+     "FL/recv": 1
+    }
+   },
+   "delta_le_5_deg": {
+    "n_loaded_CE_WC_rows": 2,
+    "n_pencil": 0,
+    "blocker_types": {
+     "CE/recv": 2,
+     "CE/rest": 1,
+     "FL/rest": 1,
+     "FL/recv": 1
+    }
+   },
+   "delta_le_10_deg": {
+    "n_loaded_CE_WC_rows": 6,
+    "n_pencil": 0,
+    "blocker_types": {
+     "CE/recv": 5,
+     "CE/rest": 2,
+     "FL/rest": 2,
+     "FL/recv": 2,
+     "WC": 1
+    }
+   }
+  }
+ },
+ "pencil_support": {
+  "note": "for every loaded CE/WC row landing in the W1.2 PENCIL branch, the multiset of the OTHER loaded rows at the corner square a (all of which have tau = 0).",
+  "n_pencil": 20,
+  "n_pencil_supported_by_a_flush_row": 20,
+  "signature_tally": {
+   "CC/recv+WF/rest_wall": 1,
+   "WF/rest_wall+WF/rest_wall": 8,
+   "FL/rest+WF/rest_wall": 10,
+   "FL/recv+WF/rest_wall": 1
+  },
+  "pencil_mismatch_deltas_deg": [
+   22.4216,
+   33.8963,
+   33.8963,
+   33.8963,
+   33.8963,
+   38.4409,
+   38.4409,
+   40.1819,
+   40.1819,
+   40.4982,
+   41.3249,
+   41.5649,
+   41.5649,
+   41.5649,
+   41.5649,
+   42.0624,
+   44.3348,
+   45.0,
+   45.0,
+   45.0
+  ],
+  "min_pencil_delta_deg": 22.4216
+ },
+ "near_flush_rows": [
+  {
+   "family_id": 31,
+   "edge": [
+    "pair",
+    "0",
+    "6"
+   ],
+   "type": "CE",
+   "delta_deg": 2.2723840583949837,
+   "status": "blocker",
+   "lam": 0.16026519656741833,
+   "blockers": [
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.32981949595916793,
+     "edge": [
+      "pair",
+      "5",
+      "6"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.6547976247398586,
+     "edge": [
+      "pair",
+      "6",
+      "10"
+     ]
+    }
+   ],
+   "loaded_rows_at_a": [
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": -0.6627211713679958,
+     "lam": 0.30868840391555036,
+     "edge": [
+      "pair",
+      "3",
+      "6"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.32981949595916793,
+     "lam": 0.3023338588899826,
+     "edge": [
+      "pair",
+      "5",
+      "6"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.6547976247398586,
+     "lam": 0.16013916756468818,
+     "edge": [
+      "pair",
+      "6",
+      "10"
+     ]
+    }
+   ]
+  },
+  {
+   "family_id": "A37-NEW-0",
+   "edge": [
+    "pair",
+    "2",
+    "3"
+   ],
+   "type": "CE",
+   "delta_deg": 5.8253226544582475,
+   "status": "blocker",
+   "lam": 0.1619997497645924,
+   "blockers": [
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.6718904025998268,
+     "edge": [
+      "pair",
+      "2",
+      "5"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "rest",
+     "tau": 0.11934724574761119,
+     "edge": [
+      "pair",
+      "2",
+      "10"
+     ]
+    }
+   ],
+   "loaded_rows_at_a": [
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.6718904025998268,
+     "lam": 0.2267885688323901,
+     "edge": [
+      "pair",
+      "2",
+      "5"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": -0.3958511571829752,
+     "lam": 0.389928216400766,
+     "edge": [
+      "pair",
+      "2",
+      "9"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "rest",
+     "tau": 0.11934724574761119,
+     "lam": 0.01656069103499395,
+     "edge": [
+      "pair",
+      "2",
+      "10"
+     ]
+    }
+   ]
+  },
+  {
+   "family_id": "A37-NEW-0",
+   "edge": [
+    "pair",
+    "2",
+    "5"
+   ],
+   "type": "CE",
+   "delta_deg": 5.8253226544582475,
+   "status": "blocker",
+   "lam": 0.2267885688323901,
+   "blockers": [
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.37662611833325643,
+     "edge": [
+      "pair",
+      "0",
+      "5"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "rest",
+     "tau": 1.0,
+     "edge": [
+      "pair",
+      "3",
+      "5"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "recv",
+     "tau": 0.06819418054440249,
+     "edge": [
+      "pair",
+      "3",
+      "5"
+     ]
+    }
+   ],
+   "loaded_rows_at_a": [
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.37662611833325643,
+     "lam": 0.44404833081014894,
+     "edge": [
+      "pair",
+      "0",
+      "5"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "rest",
+     "tau": 1.0,
+     "lam": 0.10835680906129815,
+     "edge": [
+      "pair",
+      "3",
+      "5"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "recv",
+     "tau": 0.06819418054440249,
+     "lam": 0.046326455626990504,
+     "edge": [
+      "pair",
+      "3",
+      "5"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": -0.34714066810460215,
+     "lam": 0.17377766026909222,
+     "edge": [
+      "pair",
+      "5",
+      "8"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "rest",
+     "tau": -0.9998386994206416,
+     "lam": 0.2184661485545603,
+     "edge": [
+      "pair",
+      "5",
+      "10"
+     ]
+    }
+   ]
+  },
+  {
+   "family_id": "A37-NEW-0",
+   "edge": [
+    "pair",
+    "2",
+    "10"
+   ],
+   "type": "CE",
+   "delta_deg": 6.85443178576201,
+   "status": "blocker",
+   "lam": 0.01656069103499395,
+   "blockers": [
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.6041488428170247,
+     "edge": [
+      "pair",
+      "2",
+      "9"
+     ]
+    }
+   ],
+   "loaded_rows_at_a": [
+    {
+     "type": "CE",
+     "role": "rest",
+     "tau": -0.9948359484496994,
+     "lam": 0.1619997497645924,
+     "edge": [
+      "pair",
+      "2",
+      "3"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": -0.32810959740017326,
+     "lam": 0.2267885688323901,
+     "edge": [
+      "pair",
+      "2",
+      "5"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": 0.6041488428170247,
+     "lam": 0.389928216400766,
+     "edge": [
+      "pair",
+      "2",
+      "9"
+     ]
+    }
+   ]
+  },
+  {
+   "family_id": "A37-NEW-0",
+   "edge": [
+    "pair",
+    "5",
+    "10"
+   ],
+   "type": "CE",
+   "delta_deg": 1.0291091313037626,
+   "status": "blocker",
+   "lam": 0.2184661485545603,
+   "blockers": [
+    {
+     "type": "CE",
+     "role": "rest",
+     "tau": 0.9948359484496995,
+     "edge": [
+      "pair",
+      "2",
+      "5"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "rest",
+     "tau": 1.0000000000000002,
+     "edge": [
+      "pair",
+      "3",
+      "5"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "recv",
+     "tau": 0.06819418054440257,
+     "edge": [
+      "pair",
+      "3",
+      "5"
+     ]
+    }
+   ],
+   "loaded_rows_at_a": [
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": -0.6233738816667438,
+     "lam": 0.44404833081014894,
+     "edge": [
+      "pair",
+      "0",
+      "5"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "rest",
+     "tau": 0.9948359484496995,
+     "lam": 0.2267885688323901,
+     "edge": [
+      "pair",
+      "2",
+      "5"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "rest",
+     "tau": 1.0000000000000002,
+     "lam": 0.10835680906129815,
+     "edge": [
+      "pair",
+      "3",
+      "5"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "recv",
+     "tau": 0.06819418054440257,
+     "lam": 0.046326455626990504,
+     "edge": [
+      "pair",
+      "3",
+      "5"
+     ]
+    },
+    {
+     "type": "CE",
+     "role": "recv",
+     "tau": -0.3471406681046023,
+     "lam": 0.17377766026909222,
+     "edge": [
+      "pair",
+      "5",
+      "8"
+     ]
+    }
+   ]
+  },
+  {
+   "family_id": "A37-NEW-3",
+   "edge": [
+    "pair",
+    "0",
+    "8"
+   ],
+   "type": "CE",
+   "delta_deg": 7.106449941728187,
+   "status": "blocker",
+   "lam": 0.13147318753675916,
+   "blockers": [
+    {
+     "type": "WC",
+     "role": "rest_wall",
+     "tau": 0.6603280755049727,
+     "edge": [
+      "wall",
+      "0",
+      "y=s"
+     ]
+    }
+   ],
+   "loaded_rows_at_a": [
+    {
+     "type": "WC",
+     "role": "rest_wall",
+     "tau": 0.6603280755049727,
+     "lam": 0.17372458685424455,
+     "edge": [
+      "wall",
+      "0",
+      "y=s"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "recv",
+     "tau": -0.8896378106309789,
+     "lam": 0.1289459831119336,
+     "edge": [
+      "pair",
+      "0",
+      "6"
+     ]
+    },
+    {
+     "type": "FL",
+     "role": "rest",
+     "tau": 1.6653345369377348e-16,
+     "lam": 0.0020342058264667252,
+     "edge": [
+      "pair",
+      "0",
+      "6"
+     ]
+    }
+   ]
+  }
+ ],
+ "a46_audit_agreement": {
+  "file": "attempts/A46-balanced-wedge/results/atlas_mismatch_audit.json",
+  "n_entries_compared": 12,
+  "identical_type_counts": 12,
+  "differing": 0,
+  "differences": {},
+  "note": "A46 counts non-rattler-incident CONTACTS; A48 counts kept contact EDGES -- the same objects. Flushness in A48 is decided by the A44 Fact-0 row count, in A46 by the geometric FL/WF test; they agree edge-for-edge (see a46_label_agreement per entry)."
+ },
+ "per_entry": [
+  {
+   "family_id": 0,
+   "class": "RIGID",
+   "s": 3.877083590022814,
+   "lp_rowset": "physical",
+   "rattlers": [],
+   "k_core": 11,
+   "n_rows": 41,
+   "flush": {
+    "n_WF_wall_flush_edges": 9,
+    "n_FL_pair_flush_edges": 7,
+    "n_flush_edges": 16,
+    "n_flush_rows_fact0": 32,
+    "n_WC_wall_corner_edges": 2,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "FL": 7,
+    "CE": 6,
+    "CC": 1,
+    "WC": 2,
+    "WF": 9
+   },
+   "a46_label_agreement": {
+    "agree": 14,
+    "disagree": 0
+   },
+   "n_loaded_rows": 30,
+   "lambda_max": 0.3209237892587842,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 6,
+    "n_loaded_WC": 2,
+    "n_blocker_ok": 6,
+    "n_pencil": 2,
+    "n_fail": 0,
+    "min_blocker_margin": 0.6452168660870328,
+    "min_closer_margin": 0.26087506138911104,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 0.0,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 2.949029909160572e-17,
+    "max_tau_geo_minus_tau_grad": 3.3306690738754696e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 0,
+    "n_checked": 8,
+    "n_pencil": 2,
+    "example_fail": null
+   },
+   "rows_detail": [
+    {
+     "row": 0,
+     "type": "WC",
+     "a": 0,
+     "q": [
+      3.8770835900228144,
+      1.595678484086742
+     ],
+     "lam": 0.2710282515938629,
+     "edge": [
+      "wall",
+      "0",
+      "x=s"
+     ],
+     "delta_deg": 40.181937290329714,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.6662240396367678,
+       "lam": 0.06847507863734312,
+       "edge": [
+        "pair",
+        "0",
+        "7"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 3.885780586188048e-16,
+       "lam": 0.13859036292098528,
+       "edge": [
+        "pair",
+        "0",
+        "7"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.26087506138911104,
+       "lam": 0.17487199911444004,
+       "edge": [
+        "pair",
+        "0",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.6662240396367678,
+     "min_neg_tau": -0.26087506138911104,
+     "max_abs_tau": 0.6662240396367678,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.6662240396367678,
+       "edge": [
+        "pair",
+        "0",
+        "7"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 19,
+     "type": "WC",
+     "a": 10,
+     "q": [
+      1.8770835900228142,
+      3.8770835900228144
+     ],
+     "lam": 0.3209237892587842,
+     "edge": [
+      "wall",
+      "10",
+      "y=s"
+     ],
+     "delta_deg": 40.181937290329714,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.6653345369377348e-16,
+       "lam": 0.07717257248227152,
+       "edge": [
+        "pair",
+        "2",
+        "10"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9751254649744032,
+       "lam": 0.16801303358886635,
+       "edge": [
+        "pair",
+        "2",
+        "10"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -1.0000000000000004,
+       "lam": 0.1580064302081283,
+       "edge": [
+        "pair",
+        "7",
+        "10"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.11878260754945358,
+       "lam": 0.04905901135019986,
+       "edge": [
+        "pair",
+        "7",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 0.9751254649744032,
+     "min_neg_tau": -1.0000000000000004,
+     "max_abs_tau": 1.0000000000000004,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9751254649744032,
+       "edge": [
+        "pair",
+        "2",
+        "10"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 22,
+     "type": "CE",
+     "a": 9,
+     "q": [
+      3.0325583143496146,
+      1.0
+     ],
+     "lam": 0.17487199911444004,
+     "edge": [
+      "pair",
+      "0",
+      "9"
+     ],
+     "delta_deg": 40.181937290329714,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.09528809361534,
+       "edge": [
+        "wall",
+        "9",
+        "y=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.1336021152771923,
+       "edge": [
+        "wall",
+        "9",
+        "y=0"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.6452168660870328,
+       "lam": 0.14768382325964596,
+       "edge": [
+        "pair",
+        "4",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.6452168660870328,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.6452168660870328,
+       "edge": [
+        "pair",
+        "4",
+        "9"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 23,
+     "type": "CE",
+     "a": 1,
+     "q": [
+      1.0,
+      2.0
+     ],
+     "lam": 0.24518560607113793,
+     "edge": [
+      "pair",
+      "1",
+      "2"
+     ],
+     "delta_deg": 40.181937290329714,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.15819788835886936,
+       "edge": [
+        "wall",
+        "1",
+        "x=0"
+       ]
+      },
+      {
+       "type": "CC",
+       "role": "recv",
+       "tau": 0.0,
+       "lam": 0.18732167398159225,
+       "edge": [
+        "pair",
+        "1",
+        "3"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 29,
+     "type": "CE",
+     "a": 6,
+     "q": [
+      1.0,
+      2.877083590022814
+     ],
+     "lam": 0.14768382325964624,
+     "edge": [
+      "pair",
+      "2",
+      "6"
+     ],
+     "delta_deg": 40.181937290329714,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.01754226961965341,
+       "edge": [
+        "wall",
+        "6",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.09528809361534019,
+       "edge": [
+        "wall",
+        "6",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.09528809361534019,
+       "edge": [
+        "wall",
+        "6",
+        "y=s"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "6",
+        "y=s"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 32,
+     "type": "CE",
+     "a": 3,
+     "q": [
+      2.0,
+      1.0
+     ],
+     "lam": 0.22193885829721166,
+     "edge": [
+      "pair",
+      "3",
+      "4"
+     ],
+     "delta_deg": 40.181937290329714,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.1695611709185524,
+       "edge": [
+        "wall",
+        "3",
+        "y=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.18732167398159225,
+       "edge": [
+        "wall",
+        "3",
+        "y=0"
+       ]
+      },
+      {
+       "type": "CC",
+       "role": "rest",
+       "tau": 1.0,
+       "lam": 0.18732167398159225,
+       "edge": [
+        "pair",
+        "1",
+        "3"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 6.123233995736766e-17,
+       "lam": 0.14319869461346096,
+       "edge": [
+        "pair",
+        "3",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "CC",
+       "role": "rest",
+       "tau": 1.0,
+       "edge": [
+        "pair",
+        "1",
+        "3"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 37,
+     "type": "CE",
+     "a": 9,
+     "q": [
+      2.0325583143496146,
+      1.0
+     ],
+     "lam": 0.14768382325964596,
+     "edge": [
+      "pair",
+      "4",
+      "9"
+     ],
+     "delta_deg": 40.181937290329714,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.09528809361534,
+       "edge": [
+        "wall",
+        "9",
+        "y=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.1336021152771923,
+       "edge": [
+        "wall",
+        "9",
+        "y=0"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": -0.7639994736364862,
+       "lam": 0.17487199911444004,
+       "edge": [
+        "pair",
+        "0",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -0.7639994736364862,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "9",
+        "y=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 38,
+     "type": "CE",
+     "a": 5,
+     "q": [
+      2.877083590022814,
+      2.877083590022814
+     ],
+     "lam": 0.22193885829721127,
+     "edge": [
+      "pair",
+      "5",
+      "7"
+     ],
+     "delta_deg": 40.181937290329714,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.14319869461346066,
+       "edge": [
+        "wall",
+        "5",
+        "x=s"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.1695611709185521,
+       "edge": [
+        "wall",
+        "5",
+        "y=s"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": 1,
+   "class": "VALLEY",
+   "s": 3.8856180831641267,
+   "lp_rowset": "physical",
+   "rattlers": [],
+   "k_core": 11,
+   "n_rows": 38,
+   "flush": {
+    "n_WF_wall_flush_edges": 8,
+    "n_FL_pair_flush_edges": 7,
+    "n_flush_edges": 15,
+    "n_flush_rows_fact0": 30,
+    "n_WC_wall_corner_edges": 2,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "FL": 7,
+    "CE": 6,
+    "WF": 8,
+    "WC": 2
+   },
+   "a46_label_agreement": {
+    "agree": 13,
+    "disagree": 0
+   },
+   "n_loaded_rows": 13,
+   "lambda_max": 0.6666666666666669,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 3,
+    "n_loaded_WC": 0,
+    "n_blocker_ok": 2,
+    "n_pencil": 1,
+    "n_fail": 0,
+    "min_blocker_margin": 1.0,
+    "min_closer_margin": 1.0,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 0.0,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 3.489094352630609e-17,
+    "max_tau_geo_minus_tau_grad": 2.220446049250313e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 0,
+    "n_checked": 3,
+    "n_pencil": 1,
+    "example_fail": null
+   },
+   "rows_detail": [
+    {
+     "row": 20,
+     "type": "CE",
+     "a": 5,
+     "q": [
+      1.9428090415820634,
+      2.885618083164127
+     ],
+     "lam": 0.6666666666666669,
+     "edge": [
+      "pair",
+      "0",
+      "5"
+     ],
+     "delta_deg": 45.0,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.048511144905378056,
+       "lam": 0.16514627514796337,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "lam": 0.30625824564306814,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -1.0000000000000002,
+       "lam": 0.31426968052735443,
+       "edge": [
+        "pair",
+        "5",
+        "9"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -2.220446049250313e-16,
+       "lam": 0.15713484026367713,
+       "edge": [
+        "pair",
+        "5",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 1.0000000000000002,
+     "min_neg_tau": -1.0000000000000002,
+     "max_abs_tau": 1.0000000000000002,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.048511144905378056,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 23,
+     "type": "CE",
+     "a": 1,
+     "q": [
+      2.8856180831641267,
+      1.0
+     ],
+     "lam": 0.4714045207910316,
+     "edge": [
+      "pair",
+      "1",
+      "9"
+     ],
+     "delta_deg": 45.0,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.3333333333333333,
+       "edge": [
+        "wall",
+        "1",
+        "x=s"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.3333333333333333,
+       "edge": [
+        "wall",
+        "1",
+        "y=0"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "1",
+        "y=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 26,
+     "type": "CE",
+     "a": 7,
+     "q": [
+      1.0,
+      1.0
+     ],
+     "lam": 0.47140452079103157,
+     "edge": [
+      "pair",
+      "2",
+      "7"
+     ],
+     "delta_deg": 45.0,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.33333333333333326,
+       "edge": [
+        "wall",
+        "7",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.33333333333333326,
+       "edge": [
+        "wall",
+        "7",
+        "y=0"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": 2,
+   "class": "VALLEY",
+   "s": 3.8856180831641267,
+   "lp_rowset": "physical",
+   "rattlers": [
+    2
+   ],
+   "k_core": 10,
+   "n_rows": 36,
+   "flush": {
+    "n_WF_wall_flush_edges": 8,
+    "n_FL_pair_flush_edges": 7,
+    "n_flush_edges": 15,
+    "n_flush_rows_fact0": 30,
+    "n_WC_wall_corner_edges": 1,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "FL": 7,
+    "CE": 5,
+    "WC": 1,
+    "WF": 8
+   },
+   "a46_label_agreement": {
+    "agree": 12,
+    "disagree": 0
+   },
+   "n_loaded_rows": 13,
+   "lambda_max": 0.6666666666666666,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 3,
+    "n_loaded_WC": 0,
+    "n_blocker_ok": 1,
+    "n_pencil": 2,
+    "n_fail": 0,
+    "min_blocker_margin": 1.0000000000000002,
+    "min_closer_margin": 1.0000000000000002,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 0.0,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 6.938893903907228e-18,
+    "max_tau_geo_minus_tau_grad": 2.220446049250313e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 0,
+    "n_checked": 3,
+    "n_pencil": 2,
+    "example_fail": null
+   },
+   "rows_detail": [
+    {
+     "row": 22,
+     "type": "CE",
+     "a": 4,
+     "q": [
+      1.0,
+      2.8856180831641267
+     ],
+     "lam": 0.4714045207910317,
+     "edge": [
+      "pair",
+      "1",
+      "4"
+     ],
+     "delta_deg": 45.0,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.33333333333333337,
+       "edge": [
+        "wall",
+        "4",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.33333333333333337,
+       "edge": [
+        "wall",
+        "4",
+        "y=s"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 29,
+     "type": "CE",
+     "a": 6,
+     "q": [
+      2.885618083164127,
+      1.9428090415820634
+     ],
+     "lam": 0.6666666666666666,
+     "edge": [
+      "pair",
+      "5",
+      "6"
+     ],
+     "delta_deg": 45.0,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "lam": 0.3142696805273545,
+       "edge": [
+        "pair",
+        "1",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 2.220446049250313e-16,
+       "lam": 0.15713484026367722,
+       "edge": [
+        "pair",
+        "1",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -1.0000000000000002,
+       "lam": 0.30579414617354195,
+       "edge": [
+        "pair",
+        "6",
+        "10"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.05117755680094638,
+       "lam": 0.16561037461748976,
+       "edge": [
+        "pair",
+        "6",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 1.0000000000000002,
+     "min_neg_tau": -1.0000000000000002,
+     "max_abs_tau": 1.0000000000000002,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "edge": [
+        "pair",
+        "1",
+        "6"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 35,
+     "type": "CE",
+     "a": 9,
+     "q": [
+      1.0,
+      1.0
+     ],
+     "lam": 0.47140452079103184,
+     "edge": [
+      "pair",
+      "9",
+      "10"
+     ],
+     "delta_deg": 45.0,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.3333333333333335,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.3333333333333335,
+       "edge": [
+        "wall",
+        "9",
+        "y=0"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": 3,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 4,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 5,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 6,
+   "class": "VALLEY",
+   "s": 3.8867460286056636,
+   "lp_rowset": "physical",
+   "rattlers": [],
+   "k_core": 11,
+   "n_rows": 41,
+   "flush": {
+    "n_WF_wall_flush_edges": 10,
+    "n_FL_pair_flush_edges": 7,
+    "n_flush_edges": 17,
+    "n_flush_rows_fact0": 34,
+    "n_WC_wall_corner_edges": 1,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "FL": 7,
+    "CE": 5,
+    "CC": 1,
+    "WF": 10,
+    "WC": 1
+   },
+   "a46_label_agreement": {
+    "agree": 13,
+    "disagree": 0
+   },
+   "n_loaded_rows": 22,
+   "lambda_max": 0.6130047213505861,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 4,
+    "n_loaded_WC": 1,
+    "n_blocker_ok": 1,
+    "n_pencil": 4,
+    "n_fail": 0,
+    "min_blocker_margin": 1.0000000000000002,
+    "min_closer_margin": 1.0,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 0.0,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 1.7520707107365752e-16,
+    "max_tau_geo_minus_tau_grad": 3.3306690738754696e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 0,
+    "n_checked": 5,
+    "n_pencil": 4,
+    "example_fail": null
+   },
+   "rows_detail": [
+    {
+     "row": 18,
+     "type": "WC",
+     "a": 9,
+     "q": [
+      3.886746028605664,
+      1.886746028605664
+     ],
+     "lam": 0.6130047213505861,
+     "edge": [
+      "wall",
+      "9",
+      "x=s"
+     ],
+     "delta_deg": 41.564880624920576,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -1.0,
+       "lam": 0.2698381949190762,
+       "edge": [
+        "pair",
+        "3",
+        "9"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 4.996003610813204e-16,
+       "lam": 0.18881494298798784,
+       "edge": [
+        "pair",
+        "3",
+        "9"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "lam": 0.257166389117758,
+       "edge": [
+        "pair",
+        "4",
+        "9"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.08473717665013147,
+       "lam": 0.1495424594288569,
+       "edge": [
+        "pair",
+        "4",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 1.0000000000000002,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0000000000000002,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "edge": [
+        "pair",
+        "4",
+        "9"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.08473717665013147,
+       "edge": [
+        "pair",
+        "4",
+        "9"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 23,
+     "type": "CE",
+     "a": 7,
+     "q": [
+      1.0,
+      2.0
+     ],
+     "lam": 0.05857854186516879,
+     "edge": [
+      "pair",
+      "0",
+      "7"
+     ],
+     "delta_deg": 41.564880624920576,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.04382875221790378,
+       "edge": [
+        "wall",
+        "7",
+        "x=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 0.0,
+       "lam": 0.03886497196796786,
+       "edge": [
+        "pair",
+        "5",
+        "7"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 24,
+     "type": "CE",
+     "a": 1,
+     "q": [
+      2.0,
+      2.8867460286056636
+     ],
+     "lam": 0.406708848546615,
+     "edge": [
+      "pair",
+      "1",
+      "4"
+     ],
+     "delta_deg": 41.564880624920576,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.3043015544635421,
+       "edge": [
+        "wall",
+        "1",
+        "y=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -0.0,
+       "lam": 0.2698381949190761,
+       "edge": [
+        "pair",
+        "1",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 27,
+     "type": "CE",
+     "a": 2,
+     "q": [
+      2.8867460286056636,
+      2.8867460286056636
+     ],
+     "lam": 0.05857854186516884,
+     "edge": [
+      "pair",
+      "2",
+      "4"
+     ],
+     "delta_deg": 41.564880624920576,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.04382875221790381,
+       "edge": [
+        "wall",
+        "2",
+        "x=s"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.03886497196796789,
+       "edge": [
+        "wall",
+        "2",
+        "y=s"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 31,
+     "type": "CE",
+     "a": 8,
+     "q": [
+      2.0,
+      1.0
+     ],
+     "lam": 0.458653137907064,
+     "edge": [
+      "pair",
+      "3",
+      "8"
+     ],
+     "delta_deg": 41.564880624920576,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.30430155446354207,
+       "edge": [
+        "wall",
+        "8",
+        "y=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -0.0,
+       "lam": 0.34316652643150997,
+       "edge": [
+        "pair",
+        "5",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": 7,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 8,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 9,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 10,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 11,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 12,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 13,
+   "class": "VALLEY",
+   "s": 3.897230786627943,
+   "lp_rowset": "physical",
+   "rattlers": [
+    1
+   ],
+   "k_core": 10,
+   "n_rows": 33,
+   "flush": {
+    "n_WF_wall_flush_edges": 6,
+    "n_FL_pair_flush_edges": 7,
+    "n_flush_edges": 13,
+    "n_flush_rows_fact0": 26,
+    "n_WC_wall_corner_edges": 3,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "CE": 3,
+    "FL": 7,
+    "CC": 1,
+    "WF": 6,
+    "WC": 3
+   },
+   "a46_label_agreement": {
+    "agree": 11,
+    "disagree": 0
+   },
+   "n_loaded_rows": 27,
+   "lambda_max": 0.49167020285665286,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 3,
+    "n_loaded_WC": 3,
+    "n_blocker_ok": 5,
+    "n_pencil": 1,
+    "n_fail": 0,
+    "min_blocker_margin": 0.8300481656375274,
+    "min_closer_margin": 0.557691709389494,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 6.123233995736766e-17,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 9.71445146547012e-17,
+    "max_tau_geo_minus_tau_grad": 2.220446049250313e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 1,
+    "n_checked": 6,
+    "n_pencil": 1,
+    "example_fail": {
+     "row": 7,
+     "type": "WC",
+     "a": 5,
+     "edge": [
+      "wall",
+      "5",
+      "y=s"
+     ],
+     "max_pos_tau": null,
+     "min_neg_tau": -0.9170016721416091
+    }
+   },
+   "rows_detail": [
+    {
+     "row": 6,
+     "type": "WC",
+     "a": 5,
+     "q": [
+      3.8972307866279428,
+      3.339539077238449
+     ],
+     "lam": 0.11281720893228755,
+     "edge": [
+      "wall",
+      "5",
+      "x=s"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.8300481656375274,
+       "lam": 0.1679130525879662,
+       "edge": [
+        "wall",
+        "5",
+        "y=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -0.9999999999999998,
+       "lam": 0.13368124876234252,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.08299832785839095,
+       "lam": 0.06861189462289563,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.8300481656375274,
+     "min_neg_tau": -0.9999999999999998,
+     "max_abs_tau": 0.9999999999999998,
+     "blockers": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.8300481656375274,
+       "edge": [
+        "wall",
+        "5",
+        "y=s"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 7,
+     "type": "WC",
+     "a": 5,
+     "q": [
+      3.0671826209904154,
+      3.8972307866279428
+     ],
+     "lam": 0.1679130525879662,
+     "edge": [
+      "wall",
+      "5",
+      "y=s"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": -0.557691709389494,
+       "lam": 0.11281720893228755,
+       "edge": [
+        "wall",
+        "5",
+        "x=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 3.3306690738754696e-16,
+       "lam": 0.13368124876234252,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9170016721416091,
+       "lam": 0.06861189462289563,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.9170016721416091,
+     "min_neg_tau": -0.557691709389494,
+     "max_abs_tau": 0.9170016721416091,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9170016721416091,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 10,
+     "type": "WC",
+     "a": 8,
+     "q": [
+      1.762441073821785,
+      3.8972307866279428
+     ],
+     "lam": 0.49167020285665286,
+     "edge": [
+      "wall",
+      "8",
+      "y=s"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.1102230246251565e-16,
+       "lam": 0.22774979751804794,
+       "edge": [
+        "pair",
+        "4",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9621373234235587,
+       "lam": 0.18036015246174766,
+       "edge": [
+        "pair",
+        "4",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -1.0,
+       "lam": 0.1358508394185844,
+       "edge": [
+        "pair",
+        "6",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.2723564562480325,
+       "lam": 0.13834955646842173,
+       "edge": [
+        "pair",
+        "6",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 0.9621373234235587,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9621373234235587,
+       "edge": [
+        "pair",
+        "4",
+        "8"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 15,
+     "type": "CE",
+     "a": 3,
+     "q": [
+      2.0,
+      1.0
+     ],
+     "lam": 0.20229314338523807,
+     "edge": [
+      "pair",
+      "0",
+      "3"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.055095843655678656,
+       "edge": [
+        "wall",
+        "3",
+        "y=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.1128172089322875,
+       "edge": [
+        "wall",
+        "3",
+        "y=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0,
+       "lam": 0.1128172089322875,
+       "edge": [
+        "pair",
+        "2",
+        "3"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0,
+       "edge": [
+        "pair",
+        "2",
+        "3"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 25,
+     "type": "CE",
+     "a": 9,
+     "q": [
+      1.0,
+      2.0
+     ],
+     "lam": 0.4081099499797956,
+     "edge": [
+      "pair",
+      "4",
+      "9"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.11478232669080572,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.11281720893228751,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -0.9999999999999999,
+       "lam": 0.11281720893228747,
+       "edge": [
+        "pair",
+        "2",
+        "9"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 6.123233995736766e-17,
+       "lam": 0.2259337064268649,
+       "edge": [
+        "pair",
+        "2",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -0.9999999999999999,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 28,
+     "type": "CE",
+     "a": 7,
+     "q": [
+      2.897230786627943,
+      2.0
+     ],
+     "lam": 0.2742003958870061,
+     "edge": [
+      "pair",
+      "6",
+      "7"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": -0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.2275995356230932,
+       "edge": [
+        "wall",
+        "7",
+        "x=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 6.123233995736766e-17,
+       "lam": 0.1529192874975005,
+       "edge": [
+        "pair",
+        "7",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 6.123233995736766e-17,
+     "blockers": []
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": 14,
+   "class": "VALLEY",
+   "s": 3.897230786627943,
+   "lp_rowset": "physical",
+   "rattlers": [
+    1
+   ],
+   "k_core": 10,
+   "n_rows": 33,
+   "flush": {
+    "n_WF_wall_flush_edges": 6,
+    "n_FL_pair_flush_edges": 7,
+    "n_flush_edges": 13,
+    "n_flush_rows_fact0": 26,
+    "n_WC_wall_corner_edges": 3,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "CE": 3,
+    "FL": 7,
+    "CC": 1,
+    "WF": 6,
+    "WC": 3
+   },
+   "a46_label_agreement": {
+    "agree": 11,
+    "disagree": 0
+   },
+   "n_loaded_rows": 24,
+   "lambda_max": 0.4916702028566528,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 3,
+    "n_loaded_WC": 3,
+    "n_blocker_ok": 3,
+    "n_pencil": 3,
+    "n_fail": 0,
+    "min_blocker_margin": 0.8300481656375274,
+    "min_closer_margin": 0.557691709389494,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 6.123233995736766e-17,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 9.71445146547012e-17,
+    "max_tau_geo_minus_tau_grad": 2.220446049250313e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 1,
+    "n_checked": 6,
+    "n_pencil": 3,
+    "example_fail": {
+     "row": 7,
+     "type": "WC",
+     "a": 5,
+     "edge": [
+      "wall",
+      "5",
+      "y=s"
+     ],
+     "max_pos_tau": null,
+     "min_neg_tau": -0.9170016721416091
+    }
+   },
+   "rows_detail": [
+    {
+     "row": 6,
+     "type": "WC",
+     "a": 5,
+     "q": [
+      3.8972307866279428,
+      3.339539077238449
+     ],
+     "lam": 0.1128172089322876,
+     "edge": [
+      "wall",
+      "5",
+      "x=s"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.8300481656375274,
+       "lam": 0.1679130525879663,
+       "edge": [
+        "wall",
+        "5",
+        "y=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -0.9999999999999998,
+       "lam": 0.13368124876234258,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.08299832785839095,
+       "lam": 0.06861189462289567,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.8300481656375274,
+     "min_neg_tau": -0.9999999999999998,
+     "max_abs_tau": 0.9999999999999998,
+     "blockers": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.8300481656375274,
+       "edge": [
+        "wall",
+        "5",
+        "y=s"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 7,
+     "type": "WC",
+     "a": 5,
+     "q": [
+      3.0671826209904154,
+      3.8972307866279428
+     ],
+     "lam": 0.1679130525879663,
+     "edge": [
+      "wall",
+      "5",
+      "y=s"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": -0.557691709389494,
+       "lam": 0.1128172089322876,
+       "edge": [
+        "wall",
+        "5",
+        "x=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 3.3306690738754696e-16,
+       "lam": 0.13368124876234258,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9170016721416091,
+       "lam": 0.06861189462289567,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.9170016721416091,
+     "min_neg_tau": -0.557691709389494,
+     "max_abs_tau": 0.9170016721416091,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9170016721416091,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 10,
+     "type": "WC",
+     "a": 8,
+     "q": [
+      1.762441073821785,
+      3.8972307866279428
+     ],
+     "lam": 0.4916702028566528,
+     "edge": [
+      "wall",
+      "8",
+      "y=s"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.1102230246251565e-16,
+       "lam": 0.23228146327694363,
+       "edge": [
+        "pair",
+        "4",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.986934697533265,
+       "lam": 0.1758284867028519,
+       "edge": [
+        "pair",
+        "4",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -1.0,
+       "lam": 0.13585083941858442,
+       "edge": [
+        "pair",
+        "6",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.2723564562480325,
+       "lam": 0.13834955646842173,
+       "edge": [
+        "pair",
+        "6",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 0.986934697533265,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.986934697533265,
+       "edge": [
+        "pair",
+        "4",
+        "8"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 15,
+     "type": "CE",
+     "a": 3,
+     "q": [
+      2.0,
+      1.0
+     ],
+     "lam": 0.2022931433852382,
+     "edge": [
+      "pair",
+      "0",
+      "3"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.16791305258796627,
+       "edge": [
+        "wall",
+        "3",
+        "y=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 6.123233995736766e-17,
+       "lam": 0.11281720893228754,
+       "edge": [
+        "pair",
+        "2",
+        "3"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 6.123233995736766e-17,
+     "blockers": []
+    },
+    {
+     "row": 25,
+     "type": "CE",
+     "a": 9,
+     "q": [
+      1.0,
+      2.0
+     ],
+     "lam": 0.40810994997979555,
+     "edge": [
+      "pair",
+      "4",
+      "9"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.2275995356230932,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 6.123233995736766e-17,
+       "lam": 0.3387509153591523,
+       "edge": [
+        "pair",
+        "2",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 6.123233995736766e-17,
+     "blockers": []
+    },
+    {
+     "row": 28,
+     "type": "CE",
+     "a": 7,
+     "q": [
+      2.897230786627943,
+      2.0
+     ],
+     "lam": 0.2742003958870061,
+     "edge": [
+      "pair",
+      "6",
+      "7"
+     ],
+     "delta_deg": 33.8963139039382,
+     "self_tau": -0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.2275995356230932,
+       "edge": [
+        "wall",
+        "7",
+        "x=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 6.123233995736766e-17,
+       "lam": 0.1529192874975005,
+       "edge": [
+        "pair",
+        "7",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 6.123233995736766e-17,
+     "blockers": []
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": 15,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 16,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 17,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 18,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 19,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 20,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 21,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 22,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 23,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 24,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 25,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 26,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 27,
+   "class": "VALLEY-MARGINAL",
+   "s": 3.9251488121420937,
+   "lp_rowset": "infeasible",
+   "rattlers": [],
+   "k_core": 11,
+   "n_rows": 39,
+   "flush": {
+    "n_WF_wall_flush_edges": 9,
+    "n_FL_pair_flush_edges": 3,
+    "n_flush_edges": 12,
+    "n_flush_rows_fact0": 24,
+    "n_WC_wall_corner_edges": 1,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "CE": 8,
+    "FL": 3,
+    "WC": 1,
+    "WF": 9
+   },
+   "a46_label_agreement": {
+    "agree": 11,
+    "disagree": 0
+   },
+   "dichotomy": {
+    "status": "NO-CERTIFICATE (lambda0=1 infeasible on physical AND expanded rows)"
+   },
+   "negative_control": {
+    "n_fail": 0,
+    "n_checked": 0,
+    "n_pencil": 0,
+    "example_fail": null,
+    "note": "no certificate -- not checked"
+   },
+   "rows_detail": [],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": 28,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 29,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 30,
+   "class": "NOT-CP",
+   "verdict": "vacuous (not a critical point)"
+  },
+  {
+   "family_id": 31,
+   "class": "VALLEY",
+   "s": 3.936964160126408,
+   "lp_rowset": "physical",
+   "rattlers": [],
+   "k_core": 11,
+   "n_rows": 33,
+   "flush": {
+    "n_WF_wall_flush_edges": 8,
+    "n_FL_pair_flush_edges": 4,
+    "n_flush_edges": 12,
+    "n_flush_rows_fact0": 24,
+    "n_WC_wall_corner_edges": 2,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "CE": 7,
+    "FL": 4,
+    "WC": 2,
+    "WF": 8
+   },
+   "a46_label_agreement": {
+    "agree": 11,
+    "disagree": 0
+   },
+   "n_loaded_rows": 27,
+   "lambda_max": 0.3473738270865221,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 7,
+    "n_loaded_WC": 2,
+    "n_blocker_ok": 7,
+    "n_pencil": 2,
+    "n_fail": 0,
+    "min_blocker_margin": 0.032354477854809716,
+    "min_closer_margin": 0.6627211713679958,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 0.0,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 6.869029747780253e-09,
+    "max_tau_geo_minus_tau_grad": 2.220446049250313e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 3,
+    "n_checked": 9,
+    "n_pencil": 2,
+    "example_fail": {
+     "row": 3,
+     "type": "WC",
+     "a": 2,
+     "edge": [
+      "wall",
+      "2",
+      "x=s"
+     ],
+     "max_pos_tau": null,
+     "min_neg_tau": -0.7830889066964659
+    }
+   },
+   "rows_detail": [
+    {
+     "row": 0,
+     "type": "WC",
+     "a": 0,
+     "q": [
+      1.876414144892257,
+      3.936964160126408
+     ],
+     "lam": 0.2158700669593335,
+     "edge": [
+      "wall",
+      "0",
+      "y=s"
+     ],
+     "delta_deg": 42.06244687608544,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.032354477854809716,
+       "lam": 0.16026519656741833,
+       "edge": [
+        "pair",
+        "0",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -1.0000000000000002,
+       "lam": 0.0005892688545225499,
+       "edge": [
+        "pair",
+        "0",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.03191004419618665,
+       "lam": 0.14403075942038096,
+       "edge": [
+        "pair",
+        "0",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.032354477854809716,
+     "min_neg_tau": -1.0000000000000002,
+     "max_abs_tau": 1.0000000000000002,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.032354477854809716,
+       "edge": [
+        "pair",
+        "0",
+        "6"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 3,
+     "type": "WC",
+     "a": 2,
+     "q": [
+      3.936964160126408,
+      1.7424150963811473
+     ],
+     "lam": 0.10736809223035686,
+     "edge": [
+      "wall",
+      "2",
+      "x=s"
+     ],
+     "delta_deg": 42.06244687608544,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": -0.6699401649889127,
+       "lam": 0.09688676560319018,
+       "edge": [
+        "pair",
+        "1",
+        "2"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.7830889066964659,
+       "lam": 0.08288756893168779,
+       "edge": [
+        "pair",
+        "2",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 2.220446049250313e-16,
+       "lam": 0.061732459343215855,
+       "edge": [
+        "pair",
+        "2",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.7830889066964659,
+     "min_neg_tau": -0.6699401649889127,
+     "max_abs_tau": 0.7830889066964659,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.7830889066964659,
+       "edge": [
+        "pair",
+        "2",
+        "8"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 18,
+     "type": "CE",
+     "a": 6,
+     "q": [
+      1.2304944326982845,
+      3.172873499513079
+     ],
+     "lam": 0.16026519656741833,
+     "edge": [
+      "pair",
+      "0",
+      "6"
+     ],
+     "delta_deg": 2.2723840583949837,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.6627211713679958,
+       "lam": 0.30868840391555036,
+       "edge": [
+        "pair",
+        "3",
+        "6"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.32981949595916793,
+       "lam": 0.3023338588899826,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.6547976247398586,
+       "lam": 0.16013916756468818,
+       "edge": [
+        "pair",
+        "6",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.6547976247398586,
+     "min_neg_tau": -0.6627211713679958,
+     "max_abs_tau": 0.6627211713679958,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.32981949595916793,
+       "edge": [
+        "pair",
+        "5",
+        "6"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.6547976247398586,
+       "edge": [
+        "pair",
+        "6",
+        "10"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 21,
+     "type": "CE",
+     "a": 2,
+     "q": [
+      3.267023995137495,
+      1.0
+     ],
+     "lam": 0.09688676560319018,
+     "edge": [
+      "pair",
+      "1",
+      "2"
+     ],
+     "delta_deg": 42.06244687608544,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.7424150963811473,
+       "lam": 0.10736809223035686,
+       "edge": [
+        "wall",
+        "2",
+        "x=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.21691109330353409,
+       "lam": 0.08288756893168779,
+       "edge": [
+        "pair",
+        "2",
+        "8"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -0.9999999999999998,
+       "lam": 0.061732459343215855,
+       "edge": [
+        "pair",
+        "2",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.7424150963811473,
+     "min_neg_tau": -0.9999999999999998,
+     "max_abs_tau": 0.9999999999999998,
+     "blockers": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.7424150963811473,
+       "edge": [
+        "wall",
+        "2",
+        "x=s"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 26,
+     "type": "CE",
+     "a": 3,
+     "q": [
+      1.4826196101782645,
+      2.0
+     ],
+     "lam": 0.30868840391555036,
+     "edge": [
+      "pair",
+      "3",
+      "6"
+     ],
+     "delta_deg": 44.33483093448042,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 0.0,
+       "lam": 0.14548381381405934,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.7769520273957355,
+       "lam": 0.3149239573685599,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": -0.7424150963811474,
+       "lam": 0.3295741268539271,
+       "edge": [
+        "pair",
+        "3",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.7769520273957355,
+     "min_neg_tau": -0.7424150963811474,
+     "max_abs_tau": 0.7769520273957355,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.7769520273957355,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 27,
+     "type": "CE",
+     "a": 3,
+     "q": [
+      2.4826196101782645,
+      2.0
+     ],
+     "lam": 0.3295741268539271,
+     "edge": [
+      "pair",
+      "3",
+      "8"
+     ],
+     "delta_deg": 42.06244687608544,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -1.0,
+       "lam": 0.14548381381405934,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.22304797260426446,
+       "lam": 0.3149239573685599,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.698850236332966,
+       "lam": 0.30868840391555036,
+       "edge": [
+        "pair",
+        "3",
+        "6"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.698850236332966,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.698850236332966,
+       "edge": [
+        "pair",
+        "3",
+        "6"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 28,
+     "type": "CE",
+     "a": 5,
+     "q": [
+      1.0,
+      2.936964160126408
+     ],
+     "lam": 0.3023338588899826,
+     "edge": [
+      "pair",
+      "5",
+      "6"
+     ],
+     "delta_deg": 44.33483093448042,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.2162497420522068,
+       "edge": [
+        "wall",
+        "5",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.21128608873672192,
+       "edge": [
+        "wall",
+        "5",
+        "y=s"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 29,
+     "type": "CE",
+     "a": 10,
+     "q": [
+      1.0,
+      2.0
+     ],
+     "lam": 0.16013916756468818,
+     "edge": [
+      "pair",
+      "6",
+      "10"
+     ],
+     "delta_deg": 44.33483093448042,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.0057726075074006275,
+       "edge": [
+        "wall",
+        "10",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.10614068759134615,
+       "edge": [
+        "wall",
+        "10",
+        "x=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.9266495502089999,
+       "lam": 0.11454242606323693,
+       "edge": [
+        "pair",
+        "9",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -0.9266495502089999,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "10",
+        "x=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 30,
+     "type": "CE",
+     "a": 7,
+     "q": [
+      2.936964160126408,
+      2.936964160126408
+     ],
+     "lam": 0.32957412685392723,
+     "edge": [
+      "pair",
+      "7",
+      "8"
+     ],
+     "delta_deg": 42.06244687608544,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.2207949449205968,
+       "edge": [
+        "wall",
+        "7",
+        "x=s"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.2446808071529909,
+       "edge": [
+        "wall",
+        "7",
+        "y=s"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": "A37-NEW-0",
+   "class": "VALLEY",
+   "s": 3.902673974138597,
+   "lp_rowset": "physical",
+   "rattlers": [
+    1
+   ],
+   "k_core": 10,
+   "n_rows": 35,
+   "flush": {
+    "n_WF_wall_flush_edges": 8,
+    "n_FL_pair_flush_edges": 4,
+    "n_flush_edges": 12,
+    "n_flush_rows_fact0": 24,
+    "n_WC_wall_corner_edges": 1,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "CE": 9,
+    "FL": 4,
+    "CC": 1,
+    "WF": 8,
+    "WC": 1
+   },
+   "a46_label_agreement": {
+    "agree": 14,
+    "disagree": 0
+   },
+   "n_loaded_rows": 27,
+   "lambda_max": 0.44404833081014894,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 9,
+    "n_loaded_WC": 1,
+    "n_blocker_ok": 9,
+    "n_pencil": 1,
+    "n_fail": 0,
+    "min_blocker_margin": 0.30615642035197144,
+    "min_closer_margin": 0.32592575911613053,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 0.0,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 9.970537673265056e-09,
+    "max_tau_geo_minus_tau_grad": 2.7755575615628914e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 2,
+    "n_checked": 10,
+    "n_pencil": 1,
+    "example_fail": {
+     "row": 27,
+     "type": "CE",
+     "a": 4,
+     "edge": [
+      "pair",
+      "4",
+      "10"
+     ],
+     "max_pos_tau": 1.0,
+     "min_neg_tau": null
+    }
+   },
+   "rows_detail": [
+    {
+     "row": 4,
+     "type": "WC",
+     "a": 3,
+     "q": [
+      0.0,
+      1.9485514830189299
+     ],
+     "lam": 0.22398846242254916,
+     "edge": [
+      "wall",
+      "3",
+      "x=0"
+     ],
+     "delta_deg": 43.67650257781422,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.3315792740753509,
+       "lam": 0.1619997497645924,
+       "edge": [
+        "pair",
+        "2",
+        "3"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.06819418054440263,
+       "lam": 0.10835680906129815,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "lam": 0.046326455626990504,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0000000000000002,
+     "min_neg_tau": -0.3315792740753509,
+     "max_abs_tau": 1.0000000000000002,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.06819418054440263,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 17,
+     "type": "CE",
+     "a": 0,
+     "q": [
+      1.0,
+      1.0
+     ],
+     "lam": 0.44404833081014894,
+     "edge": [
+      "pair",
+      "0",
+      "5"
+     ],
+     "delta_deg": 43.67650257781422,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.30665349789098895,
+       "edge": [
+        "wall",
+        "0",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.014504644348158902,
+       "edge": [
+        "wall",
+        "0",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.30665349789098895,
+       "edge": [
+        "wall",
+        "0",
+        "y=0"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "0",
+        "x=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 18,
+     "type": "CE",
+     "a": 2,
+     "q": [
+      0.9522343788367753,
+      2.399322492243877
+     ],
+     "lam": 0.1619997497645924,
+     "edge": [
+      "pair",
+      "2",
+      "3"
+     ],
+     "delta_deg": 5.8253226544582475,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.6718904025998268,
+       "lam": 0.2267885688323901,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.3958511571829752,
+       "lam": 0.389928216400766,
+       "edge": [
+        "pair",
+        "2",
+        "9"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.11934724574761119,
+       "lam": 0.01656069103499395,
+       "edge": [
+        "pair",
+        "2",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.6718904025998268,
+     "min_neg_tau": -0.3958511571829752,
+     "max_abs_tau": 0.6718904025998268,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.6718904025998268,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.11934724574761119,
+       "edge": [
+        "pair",
+        "2",
+        "10"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 19,
+     "type": "CE",
+     "a": 5,
+     "q": [
+      1.463157749697927,
+      1.962980857496933
+     ],
+     "lam": 0.2267885688323901,
+     "edge": [
+      "pair",
+      "2",
+      "5"
+     ],
+     "delta_deg": 5.8253226544582475,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.37662611833325643,
+       "lam": 0.44404833081014894,
+       "edge": [
+        "pair",
+        "0",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0,
+       "lam": 0.10835680906129815,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.06819418054440249,
+       "lam": 0.046326455626990504,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.34714066810460215,
+       "lam": 0.17377766026909222,
+       "edge": [
+        "pair",
+        "5",
+        "8"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": -0.9998386994206416,
+       "lam": 0.2184661485545603,
+       "edge": [
+        "pair",
+        "5",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 5,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -0.9998386994206416,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.37662611833325643,
+       "edge": [
+        "pair",
+        "0",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.06819418054440249,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 20,
+     "type": "CE",
+     "a": 9,
+     "q": [
+      1.902673974138597,
+      2.902673974138597
+     ],
+     "lam": 0.389928216400766,
+     "edge": [
+      "pair",
+      "2",
+      "9"
+     ],
+     "delta_deg": 40.498174767727534,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.29651180898919915,
+       "edge": [
+        "wall",
+        "9",
+        "y=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 0.0,
+       "lam": 0.2532286734859133,
+       "edge": [
+        "pair",
+        "7",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 21,
+     "type": "CE",
+     "a": 2,
+     "q": [
+      1.7126610330711178,
+      1.7498986679734982
+     ],
+     "lam": 0.01656069103499395,
+     "edge": [
+      "pair",
+      "2",
+      "10"
+     ],
+     "delta_deg": 6.85443178576201,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": -0.9948359484496994,
+       "lam": 0.1619997497645924,
+       "edge": [
+        "pair",
+        "2",
+        "3"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.32810959740017326,
+       "lam": 0.2267885688323901,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.6041488428170247,
+       "lam": 0.389928216400766,
+       "edge": [
+        "pair",
+        "2",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.6041488428170247,
+     "min_neg_tau": -0.9948359484496994,
+     "max_abs_tau": 0.9948359484496994,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.6041488428170247,
+       "edge": [
+        "pair",
+        "2",
+        "9"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 27,
+     "type": "CE",
+     "a": 4,
+     "q": [
+      2.902673974138597,
+      1.902673974138597
+     ],
+     "lam": 0.23371980459697345,
+     "edge": [
+      "pair",
+      "4",
+      "10"
+     ],
+     "delta_deg": 42.647393446510456,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.013567978290405423,
+       "edge": [
+        "wall",
+        "4",
+        "x=s"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.15834157223673928,
+       "edge": [
+        "wall",
+        "4",
+        "x=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -1.0,
+       "lam": 0.15834157223673928,
+       "edge": [
+        "pair",
+        "4",
+        "7"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "4",
+        "x=s"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 28,
+     "type": "CE",
+     "a": 8,
+     "q": [
+      1.902673974138597,
+      1.0
+     ],
+     "lam": 0.17377766026909222,
+     "edge": [
+      "pair",
+      "5",
+      "8"
+     ],
+     "delta_deg": 43.67650257781422,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.1375754650068779,
+       "edge": [
+        "wall",
+        "8",
+        "y=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.010624418328070928,
+       "edge": [
+        "wall",
+        "8",
+        "y=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 0.0,
+       "lam": 0.12000839476100358,
+       "edge": [
+        "pair",
+        "6",
+        "8"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.4718793223745492,
+       "lam": 0.02251511737070334,
+       "edge": [
+        "pair",
+        "8",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 4,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -0.4718793223745492,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "8",
+        "y=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 29,
+     "type": "CE",
+     "a": 5,
+     "q": [
+      2.153743608519897,
+      1.2397304364150492
+     ],
+     "lam": 0.2184661485545603,
+     "edge": [
+      "pair",
+      "5",
+      "10"
+     ],
+     "delta_deg": 1.0291091313037626,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.6233738816667438,
+       "lam": 0.44404833081014894,
+       "edge": [
+        "pair",
+        "0",
+        "5"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.9948359484496995,
+       "lam": 0.2267885688323901,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "lam": 0.10835680906129815,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.06819418054440257,
+       "lam": 0.046326455626990504,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.3471406681046023,
+       "lam": 0.17377766026909222,
+       "edge": [
+        "pair",
+        "5",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 5,
+     "max_pos_tau": 1.0000000000000002,
+     "min_neg_tau": -0.6233738816667438,
+     "max_abs_tau": 1.0000000000000002,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.9948359484496995,
+       "edge": [
+        "pair",
+        "2",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000002,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.06819418054440257,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 34,
+     "type": "CE",
+     "a": 10,
+     "q": [
+      2.374553296513146,
+      1.0
+     ],
+     "lam": 0.02251511737070334,
+     "edge": [
+      "pair",
+      "8",
+      "10"
+     ],
+     "delta_deg": 42.647393446510456,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.02119859978485905,
+       "lam": 0.01656069103499395,
+       "edge": [
+        "pair",
+        "2",
+        "10"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.30615642035197144,
+       "lam": 0.23371980459697345,
+       "edge": [
+        "pair",
+        "4",
+        "10"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": -0.32592575911613053,
+       "lam": 0.2184661485545603,
+       "edge": [
+        "pair",
+        "5",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.30615642035197144,
+     "min_neg_tau": -0.32592575911613053,
+     "max_abs_tau": 0.32592575911613053,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "recv",
+       "tau": 0.30615642035197144,
+       "edge": [
+        "pair",
+        "4",
+        "10"
+       ]
+      }
+     ]
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": "A37-NEW-1",
+   "class": "VALLEY-MARGINAL",
+   "s": 3.9122320402247284,
+   "lp_rowset": "infeasible",
+   "rattlers": [
+    10
+   ],
+   "k_core": 10,
+   "n_rows": 46,
+   "flush": {
+    "n_WF_wall_flush_edges": 9,
+    "n_FL_pair_flush_edges": 3,
+    "n_flush_edges": 12,
+    "n_flush_rows_fact0": 24,
+    "n_WC_wall_corner_edges": 0,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "CE": 8,
+    "FL": 3,
+    "CC": 1,
+    "WF": 9
+   },
+   "a46_label_agreement": {
+    "agree": 12,
+    "disagree": 0
+   },
+   "dichotomy": {
+    "status": "NO-CERTIFICATE (lambda0=1 infeasible on physical AND expanded rows)"
+   },
+   "negative_control": {
+    "n_fail": 0,
+    "n_checked": 0,
+    "n_pencil": 0,
+    "example_fail": null,
+    "note": "no certificate -- not checked"
+   },
+   "rows_detail": [],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": "A37-NEW-2",
+   "class": "VALLEY",
+   "s": 3.924402476308098,
+   "lp_rowset": "physical",
+   "rattlers": [
+    7
+   ],
+   "k_core": 10,
+   "n_rows": 32,
+   "flush": {
+    "n_WF_wall_flush_edges": 7,
+    "n_FL_pair_flush_edges": 5,
+    "n_flush_edges": 12,
+    "n_flush_rows_fact0": 24,
+    "n_WC_wall_corner_edges": 2,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "CE": 5,
+    "FL": 5,
+    "CC": 1,
+    "WF": 7,
+    "WC": 2
+   },
+   "a46_label_agreement": {
+    "agree": 11,
+    "disagree": 0
+   },
+   "n_loaded_rows": 23,
+   "lambda_max": 0.476140728202257,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 5,
+    "n_loaded_WC": 2,
+    "n_blocker_ok": 4,
+    "n_pencil": 3,
+    "n_fail": 0,
+    "min_blocker_margin": 0.6217077170329927,
+    "min_closer_margin": 0.6217077170329927,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 6.123233995736766e-17,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 5.551115123125783e-17,
+    "max_tau_geo_minus_tau_grad": 2.220446049250313e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 1,
+    "n_checked": 7,
+    "n_pencil": 3,
+    "example_fail": {
+     "row": 15,
+     "type": "WC",
+     "a": 10,
+     "edge": [
+      "wall",
+      "10",
+      "y=0"
+     ],
+     "max_pos_tau": null,
+     "min_neg_tau": -0.9733539462647096
+    }
+   },
+   "rows_detail": [
+    {
+     "row": 14,
+     "type": "WC",
+     "a": 10,
+     "q": [
+      0.0,
+      0.7832493310444794
+     ],
+     "lam": 0.13050424633109756,
+     "edge": [
+      "wall",
+      "10",
+      "x=0"
+     ],
+     "delta_deg": 38.440948542231524,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.6217077170329927,
+       "lam": 0.10358833877511531,
+       "edge": [
+        "wall",
+        "10",
+        "y=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.026646053735290443,
+       "lam": 0.10501561536742098,
+       "edge": [
+        "pair",
+        "8",
+        "10"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -1.0000000000000002,
+       "lam": 0.061603417880992294,
+       "edge": [
+        "pair",
+        "8",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.6217077170329927,
+     "min_neg_tau": -1.0000000000000002,
+     "max_abs_tau": 1.0000000000000002,
+     "blockers": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.6217077170329927,
+       "edge": [
+        "wall",
+        "10",
+        "y=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 15,
+     "type": "WC",
+     "a": 10,
+     "q": [
+      0.6217077170329927,
+      0.0
+     ],
+     "lam": 0.10358833877511531,
+     "edge": [
+      "wall",
+      "10",
+      "y=0"
+     ],
+     "delta_deg": 38.440948542231524,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": -0.7832493310444794,
+       "lam": 0.13050424633109756,
+       "edge": [
+        "wall",
+        "10",
+        "x=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9733539462647096,
+       "lam": 0.10501561536742098,
+       "edge": [
+        "pair",
+        "8",
+        "10"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -5.551115123125783e-17,
+       "lam": 0.061603417880992294,
+       "edge": [
+        "pair",
+        "8",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.9733539462647096,
+     "min_neg_tau": -0.7832493310444794,
+     "max_abs_tau": 0.9733539462647096,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9733539462647096,
+       "edge": [
+        "pair",
+        "8",
+        "10"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 16,
+     "type": "CE",
+     "a": 6,
+     "q": [
+      2.924402476308098,
+      1.924402476308098
+     ],
+     "lam": 0.16661903324841326,
+     "edge": [
+      "pair",
+      "0",
+      "6"
+     ],
+     "delta_deg": 38.440948542231524,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.13050424633109753,
+       "edge": [
+        "wall",
+        "6",
+        "x=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": -0.0,
+       "lam": 0.10358833877511531,
+       "edge": [
+        "pair",
+        "4",
+        "6"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 19,
+     "type": "CE",
+     "a": 1,
+     "q": [
+      1.924402476308098,
+      2.924402476308098
+     ],
+     "lam": 0.476140728202257,
+     "edge": [
+      "pair",
+      "1",
+      "2"
+     ],
+     "delta_deg": 22.42157468220512,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.1816088758795718,
+       "edge": [
+        "wall",
+        "1",
+        "y=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.0,
+       "lam": 0.4401456682221624,
+       "edge": [
+        "pair",
+        "1",
+        "4"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 23,
+     "type": "CE",
+     "a": 9,
+     "q": [
+      1.0,
+      2.542983989871669
+     ],
+     "lam": 0.476140728202257,
+     "edge": [
+      "pair",
+      "2",
+      "9"
+     ],
+     "delta_deg": 22.42157468220511,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.1441528707920529,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.44014566822216233,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": -0.6217077170329927,
+       "lam": 0.23186598274829368,
+       "edge": [
+        "pair",
+        "8",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -0.6217077170329927,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 28,
+     "type": "CE",
+     "a": 5,
+     "q": [
+      1.924402476308098,
+      1.0
+     ],
+     "lam": 0.23186598274829368,
+     "edge": [
+      "pair",
+      "5",
+      "8"
+     ],
+     "delta_deg": 38.440948542231524,
+     "self_tau": -0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.1816088758795718,
+       "edge": [
+        "wall",
+        "5",
+        "y=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 6.123233995736766e-17,
+       "lam": 0.1441528707920529,
+       "edge": [
+        "pair",
+        "3",
+        "5"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 6.123233995736766e-17,
+     "blockers": []
+    },
+    {
+     "row": 29,
+     "type": "CE",
+     "a": 9,
+     "q": [
+      1.0,
+      1.542983989871669
+     ],
+     "lam": 0.23186598274829368,
+     "edge": [
+      "pair",
+      "8",
+      "9"
+     ],
+     "delta_deg": 38.440948542231524,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.1441528707920529,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.44014566822216233,
+       "edge": [
+        "wall",
+        "9",
+        "x=0"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.9244024763098937,
+       "lam": 0.476140728202257,
+       "edge": [
+        "pair",
+        "2",
+        "9"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.9244024763098937,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.9244024763098937,
+       "edge": [
+        "pair",
+        "2",
+        "9"
+       ]
+      }
+     ]
+    }
+   ],
+   "verdict": "genuine"
+  },
+  {
+   "family_id": "A37-NEW-3",
+   "class": "VALLEY",
+   "s": 3.9254700672933747,
+   "lp_rowset": "physical",
+   "rattlers": [],
+   "k_core": 11,
+   "n_rows": 34,
+   "flush": {
+    "n_WF_wall_flush_edges": 9,
+    "n_FL_pair_flush_edges": 4,
+    "n_flush_edges": 13,
+    "n_flush_rows_fact0": 26,
+    "n_WC_wall_corner_edges": 1,
+    "has_flush": true
+   },
+   "edge_type_counts": {
+    "FL": 4,
+    "CE": 7,
+    "WC": 1,
+    "WF": 9
+   },
+   "a46_label_agreement": {
+    "agree": 11,
+    "disagree": 0
+   },
+   "n_loaded_rows": 27,
+   "lambda_max": 0.33764187015394265,
+   "dichotomy": {
+    "status": "PASS",
+    "n_loaded_CE": 7,
+    "n_loaded_WC": 1,
+    "n_blocker_ok": 7,
+    "n_pencil": 1,
+    "n_fail": 0,
+    "min_blocker_margin": 0.6603280755049727,
+    "min_closer_margin": 0.12371318546219129,
+    "max_self_tau": 0.0,
+    "max_pencil_abs_tau": 0.0,
+    "pencil_min_n_loaded_at_a": 2,
+    "n_pencil_with_empty_L_a": 0,
+    "max_torque_identity_residual": 5.551115123125783e-17,
+    "max_tau_geo_minus_tau_grad": 2.220446049250313e-16,
+    "failures": []
+   },
+   "negative_control": {
+    "n_fail": 4,
+    "n_checked": 8,
+    "n_pencil": 1,
+    "example_fail": {
+     "row": 21,
+     "type": "CE",
+     "a": 0,
+     "edge": [
+      "pair",
+      "0",
+      "8"
+     ],
+     "max_pos_tau": 0.8896378106309789,
+     "min_neg_tau": null
+    }
+   },
+   "rows_detail": [
+    {
+     "row": 0,
+     "type": "WC",
+     "a": 0,
+     "q": [
+      1.9701466379829125,
+      3.925470067293375
+     ],
+     "lam": 0.17372458685424455,
+     "edge": [
+      "wall",
+      "0",
+      "y=s"
+     ],
+     "delta_deg": 41.32489849442748,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.11036218936902131,
+       "lam": 0.1289459831119336,
+       "edge": [
+        "pair",
+        "0",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000004,
+       "lam": 0.0020342058264667252,
+       "edge": [
+        "pair",
+        "0",
+        "6"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": -0.12371318546219129,
+       "lam": 0.13147318753675916,
+       "edge": [
+        "pair",
+        "0",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0000000000000004,
+     "min_neg_tau": -0.12371318546219129,
+     "max_abs_tau": 1.0000000000000004,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.11036218936902131,
+       "edge": [
+        "pair",
+        "0",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.0000000000000004,
+       "edge": [
+        "pair",
+        "0",
+        "6"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 21,
+     "type": "CE",
+     "a": 0,
+     "q": [
+      2.630474713487885,
+      3.1744928155074774
+     ],
+     "lam": 0.13147318753675916,
+     "edge": [
+      "pair",
+      "0",
+      "8"
+     ],
+     "delta_deg": 7.106449941728187,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.6603280755049727,
+       "lam": 0.17372458685424455,
+       "edge": [
+        "wall",
+        "0",
+        "y=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.8896378106309789,
+       "lam": 0.1289459831119336,
+       "edge": [
+        "pair",
+        "0",
+        "6"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 1.6653345369377348e-16,
+       "lam": 0.0020342058264667252,
+       "edge": [
+        "pair",
+        "0",
+        "6"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.6603280755049727,
+     "min_neg_tau": -0.8896378106309789,
+     "max_abs_tau": 0.8896378106309789,
+     "blockers": [
+      {
+       "type": "WC",
+       "role": "rest_wall",
+       "tau": 0.6603280755049727,
+       "edge": [
+        "wall",
+        "0",
+        "y=s"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 24,
+     "type": "CE",
+     "a": 2,
+     "q": [
+      2.9254700672933747,
+      2.0
+     ],
+     "lam": 0.13147318753675924,
+     "edge": [
+      "pair",
+      "2",
+      "8"
+     ],
+     "delta_deg": 41.568651563844334,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.08021377981230149,
+       "edge": [
+        "wall",
+        "2",
+        "x=s"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 0.0,
+       "lam": 0.018149362515056028,
+       "edge": [
+        "wall",
+        "2",
+        "x=s"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9195169847048112,
+       "lam": 0.08723469076327305,
+       "edge": [
+        "pair",
+        "1",
+        "2"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.9195169847048112,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.9195169847048112,
+       "edge": [
+        "pair",
+        "1",
+        "2"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 27,
+     "type": "CE",
+     "a": 3,
+     "q": [
+      1.4618810611992752,
+      2.0
+     ],
+     "lam": 0.33764187015394265,
+     "edge": [
+      "pair",
+      "3",
+      "6"
+     ],
+     "delta_deg": 41.32489849442748,
+     "self_tau": -0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.08611076068525919,
+       "lam": 0.2774530575786031,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 0.9999999999999998,
+       "lam": 0.227504806911142,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": -0.7481612347753847,
+       "lam": 0.3360191481040333,
+       "edge": [
+        "pair",
+        "3",
+        "8"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.9999999999999998,
+     "min_neg_tau": -0.7481612347753847,
+     "max_abs_tau": 0.9999999999999998,
+     "blockers": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": 0.08611076068525919,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 0.9999999999999998,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 28,
+     "type": "CE",
+     "a": 3,
+     "q": [
+      2.461881061199275,
+      2.0
+     ],
+     "lam": 0.3360191481040333,
+     "edge": [
+      "pair",
+      "3",
+      "8"
+     ],
+     "delta_deg": 41.568651563844334,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.9138892393147405,
+       "lam": 0.2774530575786031,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "rest",
+       "tau": 0.0,
+       "lam": 0.227504806911142,
+       "edge": [
+        "pair",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.7509772517858971,
+       "lam": 0.33764187015394265,
+       "edge": [
+        "pair",
+        "3",
+        "6"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 0.7509772517858971,
+     "min_neg_tau": -0.9138892393147405,
+     "max_abs_tau": 0.9138892393147405,
+     "blockers": [
+      {
+       "type": "CE",
+       "role": "rest",
+       "tau": 0.7509772517858971,
+       "edge": [
+        "pair",
+        "3",
+        "6"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 29,
+     "type": "CE",
+     "a": 5,
+     "q": [
+      1.0,
+      2.9254700672933747
+     ],
+     "lam": 0.33764187015394265,
+     "edge": [
+      "pair",
+      "5",
+      "6"
+     ],
+     "delta_deg": 41.32489849442748,
+     "self_tau": 0.0,
+     "status": "pencil",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.2229544063286528,
+       "edge": [
+        "wall",
+        "5",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.2535613637360586,
+       "edge": [
+        "wall",
+        "5",
+        "y=s"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 2,
+     "max_pos_tau": null,
+     "min_neg_tau": null,
+     "max_abs_tau": 0.0,
+     "blockers": []
+    },
+    {
+     "row": 30,
+     "type": "CE",
+     "a": 10,
+     "q": [
+      1.0,
+      2.0
+     ],
+     "lam": 0.13098018893840035,
+     "edge": [
+      "pair",
+      "6",
+      "10"
+     ],
+     "delta_deg": 41.32489849442748,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.0651227448502756,
+       "edge": [
+        "wall",
+        "10",
+        "x=0"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.03324039747708189,
+       "edge": [
+        "wall",
+        "10",
+        "x=0"
+       ]
+      },
+      {
+       "type": "FL",
+       "role": "recv",
+       "tau": -0.7529520532869912,
+       "lam": 0.08648989609097162,
+       "edge": [
+        "pair",
+        "9",
+        "10"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -0.7529520532869912,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "10",
+        "x=0"
+       ]
+      }
+     ]
+    },
+    {
+     "row": 31,
+     "type": "CE",
+     "a": 7,
+     "q": [
+      2.9254700672933747,
+      2.9254700672933747
+     ],
+     "lam": 0.3360191481040334,
+     "edge": [
+      "pair",
+      "7",
+      "8"
+     ],
+     "delta_deg": 41.568651563844334,
+     "self_tau": 0.0,
+     "status": "blocker",
+     "loaded_rows_at_a": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "lam": 0.22295440632865285,
+       "edge": [
+        "wall",
+        "7",
+        "x=s"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -1.0,
+       "lam": 0.22295440632865285,
+       "edge": [
+        "wall",
+        "7",
+        "y=s"
+       ]
+      },
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": -0.0,
+       "lam": 0.028442094425033676,
+       "edge": [
+        "wall",
+        "7",
+        "y=s"
+       ]
+      }
+     ],
+     "n_loaded_at_a": 3,
+     "max_pos_tau": 1.0,
+     "min_neg_tau": -1.0,
+     "max_abs_tau": 1.0,
+     "blockers": [
+      {
+       "type": "WF",
+       "role": "rest_wall",
+       "tau": 1.0,
+       "edge": [
+        "wall",
+        "7",
+        "x=s"
+       ]
+      }
+     ]
+    }
+   ],
+   "verdict": "genuine"
+  }
+ ],
+ "verdict": "PASS",
+ "wall_seconds": 0.047920942306518555
+}
