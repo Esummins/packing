@@ -1316,3 +1316,10 @@ affordable cost estimate for closing 3.84.
   corner/wedge tables charge what the recursion FORCES (R4). Compose with A47's thin-branch
   theorem. Bridge mechanism = positive control; a globally-embedded flush-free critical
   configuration, if found instead, would be a discovery.
+
+## 2026-08-29 — A49 dispatched: the flush-free critical-point hunt (I-L19's decisive experiment)
+- Seeds built from A48's own evasion architecture (the configurations its local theory says COULD
+  balance flush-free); unconstrained drains record which contact flushes first (the global-breaking
+  map); stratum-constrained drains find flush-free-stratum minimizers and test them against the
+  full FJ LP. Either a certified flush-free critical point (refutes flush-mandatory — discovery) or
+  the flush-acquisition map that the global argument needs. A48 lead resumed with context.
