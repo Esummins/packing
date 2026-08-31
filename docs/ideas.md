@@ -201,6 +201,27 @@ with wastage confined to grain boundaries; interface wastage per unit length ten
 so eta should FALL as n grows and n=11 sits near the WORST case for this method — i.e. the idea has
 more forcing power at high n, worth testing there (connect to Erdos-Graham-type wastage asymptotics).
 
+**I-L13 / N6 addendum (A52, 2026-08-31): the two-field / guard-field-budget route is CLOSED — by
+theorem, not measurement.** PROP 1 (A52, 3-line proof): the joint node LP over ANY finite list of
+certified guard fields (one packing variable set; per-field point-capacity + budget rows) has
+value exactly tau — every Farkas combination of such rows is itself a covering measure paying
+full mass. So multi-field stacking is void term by term (A33's "4.6% vs predicted 7%" was the
+float shadow), and on knife-edge cells (tau = budget exactly: A38's five + A42's whole
+conditional chain) no strict drop is possible from any second coverage-type field, ever. Machine
+confirmation 21/21 with genuinely diverse exactly-optimal second fields (supp Jaccard 0.00-0.17,
+yet tight-set Jaccard 0.79-0.99: the equality face is a NODE property, field-invariant); even
+exhaustion rows at full strength (coverage forced = 1 on both supports simultaneously) leave
+nu = budget with zero binding rows. Probes can kill a ghost VERTEX (6/21 leak rows, leak2 up to
+1.0), never the ghost FACE — a replacement full-value fractional packing always exists. Banked
+as the SEVENTH FACE of the enumeration-certificate mismatch law, and as a 3-line screening test:
+any future N6 proposal reducible to "capacity/budget rows from certified fields" is dead on
+arrival. What honestly remains for N6: constraints FALSE for the fractional ghost — integrality/
+enumeration information (I-L20/A53's discrete skeletons + residual-region LPs are exactly this
+shape), theta'-type second-order rows (continuum revival still needs a new idea), ghost-mass
+profiling as the diagnostic; signed-measure (J2/Farkas) weapons are outside the current verifier
+and measured toothless at full strength. See attempts/A52-twofield-probe/ (formulation note +
+a52_report).
+
 **I-L14. Sparse SOS / Lasserre hierarchy on the lifted POP (advisor, 2026-08-26).**
 STATUS: closed NO-GO — A34 (Fable, 2026-08-27). Level 2 cannot beat 3.83 and the reason is now a
 theorem, not a solver limit: (i) COLLAPSE THEOREM — any clique design whose cliques carry ≤ m < n
