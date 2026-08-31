@@ -1357,3 +1357,28 @@ affordable cost estimate for closing 3.84.
   domain) have never been run. Hazard flagged: k unstable under epsilon (near-grid squares strand
   ~epsilon) — patched by the k-maximality drain selection (grid-sliding is sigma-non-increasing;
   A49 measured the press-into-flush dynamics). Four attempts now in flight (A50/A51/A52/A53).
+
+## 2026-08-31 — A52 closed (done-negative): two-field route to N6 dead by theorem; Prop 1 banked as the SEVENTH FACE
+- Prop 1 (A52 formulation note §3, pre-registered before compute, 3-line proof): the joint node
+  LP over ANY finite list of certified guard fields — one packing variable set, per-field point
+  capacities + budget rows — has value EXACTLY tau (single-field): every Farkas combination of
+  such rows IS a covering measure and pays full mass. On knife-edge cells no strict drop is
+  possible in exact arithmetic. Seventh face of the enumeration-certificate mismatch law:
+  coverage certificates cannot be COMPOSED — the ghost equality manifold is a node property,
+  invariant under choice of certified field; only constraints false for fractional z can thin it.
+- Machine confirmation 21/21 (A38 knife-edge n061/065/074/095/100 + A42 k1/k2; p1/p2 perturbed +
+  region-weighted fields, all oracle-feasible, all EXACTLY optimal T2 = B + O(1e-11)): baselines
+  tau = B to 1.8e-15; tau_J1 = B to 2.5e-9; zero certification attempts warranted. Diversity was
+  real and bought nothing: supp Jaccard 0.00-0.17 (vs A33's 0.41-0.50) but tight-set Jaccard
+  0.79-0.99. J2 exhaustion at FULL strength (delta = 0: coverage forced exactly 1 at all 19-23
+  atoms of both supports + capacities + cardinality): nu_J2 = B on every node x variant, 0
+  binding rows. 6/21 leak rows (leak2 = 0.4-1.0, L2 = 0): a specific ghost vertex dies (one
+  placement covering two field-2 atoms), a replacement full-value vertex always exists — probes
+  kill ghost VERTICES, never the ghost FACE. A33's "4.6% where independence predicts 7%" and the
+  A42 complementary-slackness caveat were this theorem's float shadow.
+- N6 status: coverage/capacity route CLOSED with prejudice (Prop 1 is a 3-line screening test for
+  all future proposals of this shape). Remaining honest routes: integrality/enumeration
+  constraints (A53's discrete skeletons + residual LPs are exactly this shape), theta' continuum
+  revival (still needs a new idea), ghost-mass profiling as diagnostic. Signed-measure (J2/Farkas)
+  weapons: outside current verifier and measurably toothless at full strength. 1062 s of compute
+  total; A29 untouched. Report: attempts/A52-twofield-probe/results/a52_report.md.

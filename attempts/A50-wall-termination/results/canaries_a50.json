@@ -1,0 +1,182 @@
+{
+ "canaries": [
+  {
+   "name": "C1 phi=45 s* reproduction",
+   "pass": true,
+   "hitting_set": [
+    [
+     0,
+     4,
+     1
+    ],
+    [
+     1,
+     3,
+     1
+    ],
+    [
+     2,
+     2,
+     1
+    ],
+    [
+     3,
+     1,
+     1
+    ],
+    [
+     4,
+     0,
+     1
+    ],
+    [
+     5,
+     -1,
+     1
+    ]
+   ],
+   "hitting_set_size": 6,
+   "expected_rule": "{(a,b,c) in A(6) : a+b=4, c=1}",
+   "expected_size": 6,
+   "hitting_set_equals_expected": true,
+   "span_at_45": "2*sqrt2 + 1",
+   "exact_squaring_lo": {
+    "claim": "8 - (191/50 - 1)^2 > 0",
+    "value_num": "119",
+    "value_den": "2500"
+   },
+   "exact_squaring_hi": {
+    "claim": "(s0 - 1)^2 - 8 > 0",
+    "value_num": "17350771441",
+    "value_den": "62500000000"
+   }
+  },
+  {
+   "name": "C2 Trump spine ledger",
+   "certificate": "certs\\trump11_certificate.json",
+   "spines": {
+    "x": {
+     "squares": [
+      0,
+      1,
+      8,
+      2
+     ],
+     "k": 4,
+     "c_first": "50000005287/100000000000",
+     "c_last": "337708394713/100000000000",
+     "t_first": "0",
+     "t_last": "0",
+     "rhs_s0_minus_h_minus_h": "719271/250000",
+     "residual_exact": "-5287/50000000000",
+     "_float_residual": -1.0574e-07,
+     "bound": "1/100000",
+     "pass": true,
+     "note": "flush links present (outside the flush-free P-chain class); this canary tests the ledger arithmetic only"
+    },
+    "y": {
+     "squares": [
+      2,
+      8,
+      7,
+      9,
+      5
+     ],
+     "k": 5,
+     "c_first": "50000005287/100000000000",
+     "c_last": "337708394713/100000000000",
+     "t_first": "0",
+     "t_last": "0",
+     "rhs_s0_minus_h_minus_h": "719271/250000",
+     "residual_exact": "-5287/50000000000",
+     "_float_residual": -1.0574e-07,
+     "bound": "1/100000",
+     "pass": true,
+     "note": "flush links present (outside the flush-free P-chain class); this canary tests the ledger arithmetic only"
+    }
+   },
+   "pass": true
+  },
+  {
+   "name": "C3 the 2.6e-6 margin",
+   "t_T": "194075/530594",
+   "_float_theta_T_deg": 40.181937290482836,
+   "cos_theta_T": "243864887211/319195098461",
+   "claim": "5 cos theta_T < 191/50",
+   "difference_191_50_minus_5cos": "42003301/15959754923050",
+   "_float_difference": 2.631826190472161e-06,
+   "strictly_less": true,
+   "cell": {
+    "cell_kind": "admitted_intervals",
+    "_float_deg_lo": 37.2080488572149,
+    "_float_deg_hi": 40.254255622576196
+   },
+   "theta_T_admitted": true,
+   "hitting_triples_at_theta_T": [
+    [
+     0,
+     6,
+     0
+    ]
+   ],
+   "admitted_intervals_deg": [
+    [
+     1.7346504143603825,
+     4.94915373915829
+    ],
+    [
+     5.85653997679258,
+     8.953373013259993
+    ],
+    [
+     9.776726769052992,
+     10.712003769364673
+    ],
+    [
+     11.749366396737217,
+     13.972938747141999
+    ],
+    [
+     14.075448525403104,
+     26.232202772161088
+    ],
+    [
+     26.934982682239525,
+     36.62045425824339
+    ],
+    [
+     37.2080488572149,
+     40.254255622576196
+    ],
+    [
+     40.340755842639695,
+     45.00000000000001
+    ]
+   ],
+   "pass": true
+  },
+  {
+   "name": "C4 theta* enclosure + full multiset audit",
+   "quadratic": {
+    "A": "1969271",
+    "B": "2000000",
+    "C": "-30729",
+    "root_index": 1
+   },
+   "_float_theta_star_deg": 1.7346504143603858,
+   "t_below": "128043594488893/8457954541961216",
+   "four_cos_minus_sin_below": "277418504274559926903916201141724/71553390195971999215929548564105",
+   "t_above": "256087188977787/16915909083922432",
+   "four_cos_minus_sin_above": "1109674017098239570239694621365148/286213560783887997375892572211993",
+   "below_gt_s0": true,
+   "above_lt_s0": true,
+   "audit_L6_covers_all_multisets": true,
+   "audit_L8_covers_all_multisets": true,
+   "audit_L6_excluded": true,
+   "audit_L8_excluded": true,
+   "audit_L6_hits_window": 0,
+   "pass": true
+  }
+ ],
+ "all_pass": true
+}
