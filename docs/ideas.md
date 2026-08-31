@@ -370,3 +370,17 @@ A49's hunt: OUTCOME B — 252/252 drains acquire flush, 0/324 stratum minimisers
 breaks at chain wall terminations (the banked map). I-L19 stands as a strongly corroborated
 GLOBAL-REALIZABILITY conjecture; the named formalization target = chain wall-termination
 instability. Mid-tilt non-thin flush-free basins unsampled (caveat).
+
+**I-L20. Simple-square stratification (PI, 2026-08-31).** STATUS: active — A53 (Fable). Split by
+k = number of grid-locked ("simple") squares: doubly-flush, wall-anchored squares sit at EXACT
+rational grid slots => skeletons are a tiny discrete enumerable set. Leverage: (1) non-Trump
+skeletons are F4-SHIELD-FREE (Trump doesn't realize them) => LP-killable in principle — no prior
+branching had this; (2) pinning a skeleton exactly and deleting its area gives a guard LP on an
+L-shaped RESIDUAL REGION where the 1/4-ghost's full-box symmetry (corners + 4 side zones +
+pinwheel) may not survive — never measured (A14's full-box corner pins let the ghost live at tau =
+budget exactly; four corners + an emptied side zone broke it: 6.36 < 7 — Trump's skeleton pins a
+side-zone pair). Hazard: k unstable under epsilon-perturbation (near-grid squares strand ~epsilon
+=> low-k strata don't auto-carry wastage); patch = K-MAXIMALITY drain selection (sliding onto grid
+is sigma-non-increasing; A49 measured everything presses into flush) — a D2-style refinement.
+Trump: k = 5 skeleton; his branch wants LOCALIZATION of the residual 6 (tight variety on the
+residual region), not killing.
