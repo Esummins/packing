@@ -1348,3 +1348,12 @@ affordable cost estimate for closing 3.84.
 - A50 (Fable): span table + wall-termination instability lemma. A51 (Opus): mid-tilt flush-free
   hunt. A52 (Fable light): two-field probe vs the knife-edge/saturated cells — first direct crack
   attempt at the ghost's equality manifold.
+
+## 2026-08-31 — A53 dispatched (I-L20, PI): simple-square stratification
+- PI's decomposition: k = number of grid-locked doubly-flush squares. Two leverages no prior
+  branching had: skeletons are DISCRETE (exact rational grid slots, tiny census) and non-Trump
+  skeletons are F4-SHIELD-FREE; plus the measurable crux — the 1/4-ghost's power is built on
+  full-box symmetry, and residual-region LPs (skeleton pinned exactly, area deleted, L-shaped
+  domain) have never been run. Hazard flagged: k unstable under epsilon (near-grid squares strand
+  ~epsilon) — patched by the k-maximality drain selection (grid-sliding is sigma-non-increasing;
+  A49 measured the press-into-flush dynamics). Four attempts now in flight (A50/A51/A52/A53).
