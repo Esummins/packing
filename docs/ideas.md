@@ -363,3 +363,10 @@ route-b neighbourhood form (A46-G4), the A47 feasibility law (mid-tilt cannot hi
 and the atlas as canary (all genuine CPs are flush-rich — the theorem must be vacuous on them).
 Prerequisite: formalize "support order" and the descent functional (sigma-non-increase of
 wedge-closing along the cascade — the crux A46 flagged, now with the cascade structure named).
+
+**I-L19 status update (2026-08-31, post-A48/A49):** local cascade theory settled as exact theorems
+(C1-C6'); the composed flush-mandatory does NOT follow locally (R3 refuted, R4 no-go a priori);
+A49's hunt: OUTCOME B — 252/252 drains acquire flush, 0/324 stratum minimisers interior, evasion
+breaks at chain wall terminations (the banked map). I-L19 stands as a strongly corroborated
+GLOBAL-REALIZABILITY conjecture; the named formalization target = chain wall-termination
+instability. Mid-tilt non-thin flush-free basins unsampled (caveat).

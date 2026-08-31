@@ -1,5 +1,19 @@
 # A36 lead verification log (Fable)
 
+## POST-A36 NOTE (2026-08-27, from the A37 pilot — recorded here because it concerns A36's basis)
+The A37 pilot's Trump audit reported "three corner-corner pairs (1,3), (1,8), (3,8), two absent
+from the A35/M4 list". LEAD VERIFICATION (exact arithmetic, A22 labels): the complete list of
+corner-coincidences at z-hat is (0,1) at (1,0) AND (1,1); (0,3) at (1,1) AND (0,1); (1,3) at
+(1,1) — i.e. exactly the two FLUSH pairs' edge-endpoint coincidences (inevitable for aligned
+equal squares in full-edge contact) plus the known (1,3) corner-corner contact. The pilot's
+labels are the A04 family-0 square ordering, and its audit classifies flush-with-coincident-
+corners as "corner-corner". NO contact is missing from the A35 v2 / A36 v3 basis; A36's theorem
+is unaffected. REFERENCE CONTACT LIST for Trump = A36 basis v3 (results/a36_basis_v3.json):
+14 pair contacts (13 with A22 rows + (1,3)), 10 wall contacts, aux dist rows for the two flush
+pairs; flush endpoint coincidences admit corner-corner tie selections, which the A36 branch
+disjunction already covers. Do NOT re-derive strata from raw audit labels without mapping the
+square ordering.
+
 ## Pre-dispatch analysis (lead, in-context)
 - L1 over-estimate principle proved (one line: owner support along its own edge normal =
   n.c_o + 1/2 exactly; any corner row >= axis gap). Float sanity of the disjunction premises:

@@ -1323,3 +1323,14 @@ affordable cost estimate for closing 3.84.
   map); stratum-constrained drains find flush-free-stratum minimizers and test them against the
   full FJ LP. Either a certified flush-free critical point (refutes flush-mandatory — discovery) or
   the flush-acquisition map that the global argument needs. A48 lead resumed with context.
+
+## 2026-08-31 — A49 closed (advisor close-out; lead hit usage limit post-compute): OUTCOME B
+- The decisive I-L19 experiment: 252/252 evasion drains acquire flush; 0 candidates; 72/72
+  stratum minimisers pressed against the flush boundary (0/324 interior). The PI's original
+  drain-to-flush intuition measured at scale. Flush-acquisition map banked: the break is at the
+  chain's WALL TERMINATION, never the presser — the target a future global proof should formalize.
+  Sampling caveat recorded (near-upright basins only). a37_drain.repair bug found+fixed.
+- PI's paper vision recorded (shower notes): paper WHEN full optimality proof exists; appendices
+  publishing every off-critical-path investigation (negative results as first-class output);
+  a methods section on the human+Fable+Opus division of labour; a validation/simplification
+  section. Write-up deferred accordingly; the lab keeps REGISTRY/LOG/certs paper-ready.
