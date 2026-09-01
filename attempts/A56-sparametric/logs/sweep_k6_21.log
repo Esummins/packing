@@ -1,0 +1,14 @@
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k6_21.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_21.param.json --name k6_21 --beta-gap 19/10,27/10
+k6_21: 18 atoms, 6 cores, budget 5, anchoring gap -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_21.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_21.param.json --slo 191/50 --shi 969271/250000 --depth 48 --sscale 8 --tscale 2 --split 3 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_21.param.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_21.param.wit.json --max-witnesses 20 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_21.param.json  (k6_21)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 18, cores = 6, budget = 5, total = 4869099/1000000 (~4.869099000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '99/50', 'threshold_y': '2077189/1000000', 'threshold_x_float': 1.98, 'threshold_y_float': 2.077189, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 10748702  covered = 3911019  vacuous = 3  exempt = 1463327  split = 5374337  s-splits = 1124338  s-cells = 4982  max depth = 48  max s-depth = 11  time = 207.1s
+FAIL: 16 witness boxes at depth 48 (0 HOLES)
+  worst witness: s = 979732417/256000000 (~3.827079754), theta = 0.013988 deg, centre = (3.326867913, 1.607178627), exact mass = 1030001/1000000 (~1.030001000000)
+  witness s-ranges: [3.827079754, 3.876805270] over 16 boxes
+  witnesses written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_21.param.wit.json
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_21.param.report.json

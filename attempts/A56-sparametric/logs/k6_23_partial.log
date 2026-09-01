@@ -1,0 +1,6 @@
+parametric certificate: certs/k6_23.param.json  (k6_23)
+s in [191/50, 3877/1000]  (~[3.820000000, 3.877000000], width 0.057000000), n = 11, atoms = 501, cores = 6, budget = 5, total = 997089/200000 (~4.985445000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '40279/20000', 'threshold_y': '40279/20000', 'threshold_x_float': 2.01395, 'threshold_y_float': 2.01395, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 146487020  covered = 62625030  vacuous = 41398  exempt = 10577114  split = 73243478  s-splits = 13736508  s-cells = 35365  max depth = 56  max s-depth = 12  time = 2888.3s
+PASS: for EVERY s in [191/50, 3877/1000], every admissible closed unit square in [0,s]^2 disjoint from all 6 cores has mu_s >= 1; total 997089/200000 < budget 5  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to certs/k6_23.partial.report.json

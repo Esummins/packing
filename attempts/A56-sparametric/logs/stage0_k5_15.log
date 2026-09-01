@@ -1,0 +1,14 @@
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_15.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.param.json --name k5_15
+k5_15: 33 atoms, 5 cores, budget 6, anchoring nearest-wall -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.slo.json
+specialised k5_15 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.slo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.slo.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.slo.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.wit.json --max-witnesses 40 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.slo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 33, total mass = 2961259/500000 (~5.9225180000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 80708  covered = 36750  vacuous = 0  exempt = 3636 (core 3636, nofam 0)  split = 40322  exact atom checks = 48748  max depth = 39  time = 2.7s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 2961259/500000 < budget 6  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_15.nw.slo.report.json

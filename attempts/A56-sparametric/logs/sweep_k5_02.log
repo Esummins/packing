@@ -1,0 +1,14 @@
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_02.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_02.param.json --name k5_02 --beta-gap 19/10,27/10
+k5_02: 54 atoms, 5 cores, budget 6, anchoring gap -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_02.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_02.param.json --slo 191/50 --shi 969271/250000 --depth 48 --sscale 8 --tscale 2 --split 3 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_02.param.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_02.param.wit.json --max-witnesses 20 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_02.param.json  (k5_02)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 54, cores = 5, budget = 6, total = 5999447/1000000 (~5.999447000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '468481/200000', 'threshold_y': '4641393/2000000', 'threshold_x_float': 2.342405, 'threshold_y_float': 2.3206965, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 3118228  covered = 770037  vacuous = 0  exempt = 789049  split = 1559118  s-splits = 290129  s-cells = 2351  max depth = 48  max s-depth = 10  time = 88.2s
+FAIL: 24 witness boxes at depth 48 (0 HOLES)  [stopped at --max-witnesses]
+  worst witness: s = 969271/250000 (~3.877084000), theta = 41.821721 deg, centre = (2.417938931, 2.640603879), exact mass = 128751/125000 (~1.030008000000)
+  witness s-ranges: [3.820000000, 3.877084000] over 24 boxes
+  witnesses written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_02.param.wit.json
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_02.param.report.json

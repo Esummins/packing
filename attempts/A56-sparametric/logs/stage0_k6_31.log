@@ -1,0 +1,14 @@
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k6_31.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.param.json --name k6_31
+k6_31: 3 atoms, 6 cores, budget 5, anchoring nearest-wall -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.slo.json
+specialised k6_31 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.slo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.slo.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.slo.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.wit.json --max-witnesses 40 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.slo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 3, total mass = 309/100 (~3.0900000000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 3528  covered = 961  vacuous = 0  exempt = 835 (core 835, nofam 0)  split = 1732  exact atom checks = 961  max depth = 24  time = 0.2s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 309/100 < budget 5  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k6_31.nw.slo.report.json

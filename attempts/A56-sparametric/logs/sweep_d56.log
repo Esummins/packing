@@ -1,0 +1,13 @@
+  k6_32    k=6 margin=0.536660 -> TIMEOUT        param 900.0s  s-splits 46  [cum 203.0 min]
+  k5_19    k=5 margin=0.506643 -> TIMEOUT        param 900.0s  s-splits 11256  [cum 218.0 min]
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\sweep.py", line 424, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\sweep.py", line 420, in main
+    return cmd_stage0(a) if a.cmd == "stage0" else cmd_sweep(a)
+                                                   ~~~~~~~~~^^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\sweep.py", line 366, in cmd_sweep
+    print(f"  {row['name']:8s} k={row['k']} margin={row['margin']:.6f} -> {row['result']:14s} "
+                                                                          ^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown format code 's' for object of type 'int'

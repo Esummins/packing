@@ -1,0 +1,34 @@
+sub-window bisection: 7 certificates, depth 48, guard 2/250000
+  k6_07   [3.820000, 3.827068] -> PASS     173.4s
+  k6_07   [3.827144, 3.877084] -> FAIL     87.0s
+  k6_28   [3.820120, 3.877084] -> FAIL     123.3s
+  k5_14   [3.820232, 3.877084] -> FAIL     91.3s
+  k5_20   [3.820232, 3.877084] -> FAIL     12.7s
+  k6_32   [3.820232, 3.877084] -> FAIL     0.5s
+  k5_04   [3.820000, 3.876628] -> FAIL     144.1s
+  k6_19   [3.821792, 3.877084] -> FAIL     26.2s
+{
+ "total": 52,
+ "by_result": {
+  "M1": 4,
+  "TRANSFERRED": 21,
+  "OPEN": 22,
+  "TIMEOUT": 3,
+  "partial": 2
+ },
+ "by_k": {
+  "k6": {
+   "M1": 2,
+   "TRANSFERRED": 15,
+   "OPEN": 12,
+   "TIMEOUT": 2,
+   "partial": 2
+  },
+  "k5": {
+   "TRANSFERRED": 6,
+   "M1": 2,
+   "OPEN": 10,
+   "TIMEOUT": 1
+  }
+ }
+}

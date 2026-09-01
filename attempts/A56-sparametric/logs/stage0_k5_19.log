@@ -1,0 +1,32 @@
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_19.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.param.json --name k5_19
+k5_19: 29 atoms, 5 cores, budget 6, anchoring nearest-wall -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.slo.json
+specialised k5_19 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.slo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.slo.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.slo.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.wit.json --max-witnesses 40 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.slo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 29, total mass = 5493357/1000000 (~5.4933570000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 368271  covered = 179026  vacuous = 0  exempt = 5123 (core 5123, nofam 0)  split = 184114  exact atom checks = 188427  max depth = 44  time = 11.8s
+FAIL: 8 witness boxes at depth 44: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+  worst witness: theta = 44.353907 deg, centre = (2.454154663, 1.250525513), exact mass = 68667/50000 (~1.373340000000)
+  1 witness clusters (theta~1deg, centre~0.05):
+    theta~ 44 deg centre~(2.45,1.25)  n=  8  min mass 1.373340000
+  witnesses written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.wit.json
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.nw.slo.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_19.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.param.json --name k5_19 --beta-mid 1/2
+k5_19: 29 atoms, 5 cores, budget 6, anchoring mid-band -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.slo.json
+specialised k5_19 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.slo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.slo.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.slo.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.wit.json --max-witnesses 40 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.slo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 29, total mass = 5493357/1000000 (~5.4933570000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 109718  covered = 52030  vacuous = 0  exempt = 2861 (core 2861, nofam 0)  split = 54827  exact atom checks = 56247  max depth = 42  time = 3.5s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 5493357/1000000 < budget 6  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_19.mb.slo.report.json

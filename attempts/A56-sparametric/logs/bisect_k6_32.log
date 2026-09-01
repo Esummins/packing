@@ -1,0 +1,11 @@
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_32.param.json --slo 477529/125000 --shi 969271/250000 --depth 48 --sscale 8 --jobs 3 --split 3 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_32.sub0.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_32.sub0.wit.json --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_32.param.json  (k6_32)
+s in [477529/125000, 969271/250000]  (~[3.820232000, 3.877084000], width 0.056852000), n = 11, atoms = 11, cores = 6, budget = 5, total = 223167/50000 (~4.463340000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '265727/125000', 'threshold_y': '1091771/500000', 'threshold_x_float': 2.125816, 'threshold_y_float': 2.183542, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 447  covered = 81  vacuous = 0  exempt = 74  split = 268  s-splits = 46  s-cells = 34  max depth = 48  max s-depth = 10  time = 0.3s
+FAIL: 24 witness boxes at depth 48 (0 HOLES)  [stopped at --max-witnesses]
+  worst witness: s = 477529/125000 (~3.820232000), theta = 0.013988 deg, centre = (0.500175603, 2.499945659), exact mass = 1030001/1000000 (~1.030001000000)
+  witness s-ranges: [3.820232000, 3.820454078] over 24 boxes
+  witnesses written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_32.sub0.wit.json
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k6_32.sub0.report.json

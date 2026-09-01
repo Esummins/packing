@@ -1,0 +1,444 @@
+{
+ "note": "A56 T2 stage 1: pricing of the 4D s-parametric verifier on three representatives (window [191/50, 969271/250000], sscale 8, jobs 3).",
+ "representatives": [
+  {
+   "name": "k6_05",
+   "role": "easy k=6",
+   "atoms": 4,
+   "margin": 0.88,
+   "depth": 48,
+   "result": "PASS",
+   "time_s": 2.2,
+   "boxes": 98452,
+   "s_splits": 8872,
+   "s_cells": 319,
+   "fixed_s_time_s": 0.5,
+   "ratio": 4.4
+  },
+  {
+   "name": "k5_15",
+   "role": "representative k=5",
+   "atoms": 33,
+   "margin": 0.077482,
+   "depth": 48,
+   "result": "FAIL",
+   "time_s": 276.9,
+   "boxes": 20472459,
+   "s_splits": 1983394,
+   "s_cells": 9386,
+   "note": "0 holes; depth-limited"
+  },
+  {
+   "name": "k5_15",
+   "role": "representative k=5 (repaired by depth)",
+   "atoms": 33,
+   "margin": 0.077482,
+   "depth": 56,
+   "result": "PASS",
+   "time_s": 687.1,
+   "boxes": 39236974,
+   "s_splits": 3338333,
+   "s_cells": 18983,
+   "fixed_s_time_s": 2.9,
+   "ratio": 237.0
+  },
+  {
+   "name": "k6_23",
+   "role": "hard (A54)",
+   "atoms": 501,
+   "margin": 0.014555,
+   "depth": 56,
+   "result": "FAIL",
+   "time_s": 2727.6,
+   "boxes": 148432453,
+   "s_splits": 13936524,
+   "s_cells": 35459,
+   "fixed_s_time_s": 11.2,
+   "witness_s_range": [
+    3.877000381,
+    3.877084
+   ],
+   "witnesses": 9,
+   "holes": 0
+  }
+ ],
+ "cost_model": {
+  "form": "t_4D ~= 261 us * (number of s-splits)",
+  "spearman_t_vs_ssplits": 0.978,
+  "spearman_t_vs_margin": -0.352,
+  "spearman_t_vs_atoms": 0.453,
+  "spearman_t_vs_fixed_s_time": 0.705,
+  "ratio_to_fixed_s": {
+   "median": 59.6,
+   "min": 4.0,
+   "max": 393.3,
+   "n": 21
+  },
+  "reading": "neither the LP margin nor the atom count predicts the 4D cost; the driver is how many s-subdivisions the certificate demands, i.e. how close its tightest covering atom sits to the boundary of Q. Depth, not time, is the binding resource: a run that FAILs at depth 48 typically FAILs fast, and +8 depth costs about 2.5x (k5_15: 277s FAIL at 48 -> 687s PASS at 56)."
+ },
+ "depth_scaling": {
+  "note": "added by the depth-60/64 completion pass (2026-09-01). Attempts and outcomes:",
+  "points": [
+   {
+    "cert": "k5_15",
+    "d48": {
+     "result": "FAIL",
+     "time_s": 276.9
+    },
+    "d56": {
+     "result": "PASS",
+     "time_s": 687.1
+    },
+    "factor_per_+8_depth": 2.48
+   },
+   {
+    "cert": "k6_23",
+    "d56_full_window": {
+     "result": "FAIL",
+     "time_s": 2727.6
+    },
+    "d56_subwindow_[3.82,3.877]": {
+     "result": "PASS",
+     "time_s": 2888.3
+    }
+   },
+   {
+    "cert": "k6_32",
+    "d48": {
+     "result": "FAIL",
+     "time_s": 0.7
+    },
+    "d56": {
+     "result": "TIMEOUT",
+     "time_s": 900
+    },
+    "d60": {
+     "result": "TIMEOUT",
+     "time_s": 600
+    },
+    "lower_bound_factor": ">1300x"
+   },
+   {
+    "cert": "k5_19",
+    "d48": {
+     "result": "FAIL",
+     "time_s": 7.9
+    },
+    "d56": {
+     "result": "TIMEOUT",
+     "time_s": 900
+    },
+    "d60": {
+     "result": "TIMEOUT",
+     "time_s": 600
+    },
+    "lower_bound_factor": ">114x"
+   },
+   {
+    "cert": "k5_20",
+    "d48": {
+     "result": "FAIL",
+     "time_s": 18.0
+    },
+    "d60": {
+     "result": "TIMEOUT",
+     "time_s": 600
+    },
+    "lower_bound_factor": ">33x"
+   }
+  ],
+  "correction": "The +8-depth ~2.5x factor fitted on k5_15 generalises ONLY to runs that CONVERGE. The depth-48 FAIL times are NOT a cost baseline: they are --max-witnesses aborts (20 witnesses reached and the search stops), so a 0.7 s depth-48 FAIL says nothing about the cost of the completed search. Lifting the depth removes the early witnesses, and the same certificate then explores unboundedly. Observed: 5/5 lifted-depth attempts on the OPEN set timed out at 600-900 s having produced fewer than 20 witnesses.",
+  "operating_point": "depth 48 is the affordable regime and is what produced all 21 TRANSFERRED rows. depth 56 pays for a certificate whose tangency is just past the depth-48 horizon (k5_15, k6_23). depth 60 with a <=15 min cap is unaffordable: it converts fast informative FAILs into uninformative TIMEOUTs."
+ },
+ "cumulative_verifier_time_s": 34584.0,
+ "corrected_cost_law": {
+  "headline": "t_4D ~= 261 us x (number of s-splits), Spearman 0.978 on the 21 PASSes. The s-subdivision count is the cost; neither the LP margin (rho -0.35) nor the atom count (rho +0.45) predicts it.",
+  "artifact_1_witness_capped_FAIL_times": "A FAIL time is NOT a cost measurement. verify_param stops a root box after --max-witnesses-per-box (8) witnesses, so a FAIL reports whatever the DFS reached first and exits. k6_32 'FAILs in 0.7 s' at depth 48 and then runs >900 s at depth 56 and >600 s at depth 60 without finishing. Only PASS times are true costs.",
+  "artifact_2_witness_s_ranges_do_not_localise": "For the same reason the recorded witness_s_range is a sample, not the failing set. A witness s-range localises the failure ONLY when the search completed, i.e. when the witness count is NOT a multiple of the per-box cap 8. Across the whole campaign exactly one run satisfied this: k6_23's full-window run (9 witnesses), and it is exactly the one whose sub-window bisection PASSed. Every other OPEN row reports 16 or 24 witnesses (truncated), and 6 of 7 attempted sub-window bisections FAILed.",
+  "depth_scaling_0_of_5": "Lifting the depth converted 0 of 5 attempts: k6_32, k5_19 (depth 56 AND 60), k5_20 (60), all timing out at 600-900 s. The +8-depth ~2.5x factor holds only for a run that CONVERGES (k5_15: 277 s FAIL@48 -> 687 s PASS@56). Depth 48 is the affordable regime and produced all 21 original TRANSFERRED rows; depth 56 pays only for a certificate whose tangency sits just past the depth-48 horizon."
+ },
+ "repairs_priced": {
+  "sub_window_bisection": {
+   "what": "verify_param on the complementary sub-window of the recorded witness band",
+   "verdict": "WORKS ONLY WHEN THE WITNESS SET IS COMPLETE (see artifact 2)",
+   "results": "2 successes / 8 windows attempted: k6_23 [191/50, 3877/1000] (2888 s, 99.85% of the window) and k6_07 [191/50, 956767/250000] (173 s, 12.4%). k6_28, k5_14, k5_20, k6_32, k5_04, k6_19 all FAILed on their complementary windows (0.5-144 s each).",
+   "price": "one depth-48 run per window, 0.5-2900 s; cheap to attempt, low hit rate"
+  },
+  "resolve_with_margin": {
+   "what": "re-solve the guard LP with a ROW-SHRINK robustness margin eps_geo, so every covering atom must sit at least eps_geo INSIDE Q, then re-certify at the largest weight scale the budget allows and re-run the 4D verifier",
+   "verdict": "CONVERTS. 3 of 4 sampled certificates went from OPEN to full-window PASS.",
+   "the_lever_is_eps_geo_not_the_weight_scale": "k6_08 was first re-solved with witness-feedback rows and scale 1.03 -> 1.06 and STILL failed the 4D run (26 s). The same certificate with eps_geo = 0.003 converted in 12 s total. Scaling weights cannot help when coverage at the weak placement rests on ONE atom that must lie inside Q: the mass is already >= 1, it is the atom's POSITION that has no slack. eps_geo buys exactly that slack, and it is the same quantity the 4D verifier needs against the atom's s-interval.",
+   "witness_feedback_was_inert": "In all four sampled runs the witness glob matched 0 files (the sweep writes <name>.param.wit.json, the glob looked for *.witnesses.json), so n_4d_witnesses = 0 and the three conversions are due to eps_geo ALONE. The glob is fixed in resolve_margin.py, but the priced result stands without witness feedback.",
+   "prices": {
+    "k6_08": "CONVERTS in 12.0 s (LP 7.6 + certify 0.9 + 4D 1.5); new cert 4 atoms, margin 0.760",
+    "k6_28": "CONVERTS in 96.7 s (LP 49.5 + certify 2.8 + 4D 39.4); new cert 9 atoms, margin 0.230",
+    "k6_32": "CONVERTS in 677.3 s (LP 651.9 + certify 2.8 + 4D 17.9); new cert 452 atoms, margin 0.230. The LP dominates; the 4D run is 18 s.",
+    "k5_02": "INFEASIBLE at eps_geo = 0.003: tau rose to exactly 6.000000 = budget. A certificate with total margin 0.00055 cannot pay for 0.003 of positional slack. Retry with eps_geo ~ 0.0003."
+   },
+   "robustness_budget_rule": "eps_geo is affordable iff the re-solved tau stays below the budget. The observed cost of eps_geo = 0.003 was tau 4.000 -> 4.500 for k6_28/k6_32 (0.5 of budget) and 0 for k6_08. So certificates with budget - tau >= ~0.5 can afford it; the thin ones need eps_geo scaled down in proportion.",
+   "caveat": "a converted row kills the STRATUM over the window, but via a NEW base certificate; the original A53/A54 certificate stays s0-only.",
+   "recipe_steps": "see the module docstring of code/resolve_margin.py (steps 1-5)"
+  }
+ },
+ "final_sweep": {
+  "attempted": 21,
+  "converted": 13,
+  "eps_threshold_rule": "eps_geo >= 0.0015 converted 13 of 16; eps_geo < 0.0015 converted 0 of 5. The row shrink must exceed the positional deficit at the weak placement, and that deficit is of order 1.5e-3 across this library. Since eps_geo is capped by the LP slack budget - tau, a certificate can be repaired iff its slack buys at least ~1.5e-3 of shrink -- empirically budget - tau >= ~0.5.",
+  "schedule_used": "eps_geo = clamp(0.003 * min(1, (budget - tau_0)/1.0), 0.0002, 0.003), tau_0 from the A53 node json",
+  "cost_shape": "LP-dominated as predicted: median LP 433 s, median certify 3 s, median 4D 45 s. The 4D verification is now a rounding error; a converted row costs 12-680 s end to end. FAILED rows cost MORE than successes (certify burns its full witness-feedback rounds before giving up): k6_29 1480 s of certify, k6_27 1485 s, k5_02 1497 s.",
+  "rows": [
+   {
+    "name": "k5_02",
+    "eps_geo": 0.001011,
+    "verdict": "fixed-s re-certification failed; recipe did not produce a base cert",
+    "lp_s": 461.6,
+    "certify_s": 1497.3,
+    "param_s": null,
+    "total_s": null,
+    "new_atoms": null,
+    "tau": 5.668256852945585,
+    "budget": 6
+   },
+   {
+    "name": "k5_04",
+    "eps_geo": 0.003,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 532.0,
+    "certify_s": 42.0,
+    "param_s": 44.6,
+    "total_s": 626.1,
+    "new_atoms": 25,
+    "tau": 5.009624639034961,
+    "budget": 6
+   },
+   {
+    "name": "k5_05",
+    "eps_geo": 0.002948,
+    "verdict": "recipe did NOT convert (4D still open)",
+    "lp_s": 654.7,
+    "certify_s": 404.4,
+    "param_s": 83.5,
+    "total_s": 1142.7,
+    "new_atoms": 22,
+    "tau": 4.999999999991133,
+    "budget": 6
+   },
+   {
+    "name": "k5_10",
+    "eps_geo": 0.001,
+    "verdict": "recipe did NOT convert (4D still open)",
+    "lp_s": 717.1,
+    "certify_s": 479.5,
+    "param_s": 219.1,
+    "total_s": 1415.7,
+    "new_atoms": 10,
+    "tau": 5.588235293246485,
+    "budget": 6
+   },
+   {
+    "name": "k5_17",
+    "eps_geo": 0.001846,
+    "verdict": "recipe did NOT convert (4D still open)",
+    "lp_s": 656.7,
+    "certify_s": 991.2,
+    "param_s": 28.7,
+    "total_s": 1676.7,
+    "new_atoms": 14,
+    "tau": 5.399999999999932,
+    "budget": 6
+   },
+   {
+    "name": "k5_19",
+    "eps_geo": 0.002,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 421.7,
+    "certify_s": 4.9,
+    "param_s": 116.9,
+    "total_s": 552.4,
+    "new_atoms": 298,
+    "tau": 5.500000005468233,
+    "budget": 6
+   },
+   {
+    "name": "k5_20",
+    "eps_geo": 0.0015,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 105.8,
+    "certify_s": 2.7,
+    "param_s": 32.2,
+    "total_s": 145.3,
+    "new_atoms": 20,
+    "tau": 5.49999999995146,
+    "budget": 6
+   },
+   {
+    "name": "k6_04",
+    "eps_geo": 0.003,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 83.5,
+    "certify_s": 1.0,
+    "param_s": 5.8,
+    "total_s": 92.7,
+    "new_atoms": 186,
+    "tau": 3.999999996032689,
+    "budget": 5
+   },
+   {
+    "name": "k6_08",
+    "eps_geo": 0.003,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 7.6,
+    "certify_s": 0.9,
+    "param_s": 1.5,
+    "total_s": 12.0,
+    "new_atoms": 4,
+    "tau": 4.0000000000000115,
+    "budget": 5
+   },
+   {
+    "name": "k6_18",
+    "eps_geo": 0.003,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 53.5,
+    "certify_s": 1.1,
+    "param_s": 9.7,
+    "total_s": 67.0,
+    "new_atoms": 8,
+    "tau": 4.000000000000076,
+    "budget": 5
+   },
+   {
+    "name": "k6_19",
+    "eps_geo": 0.003,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 45.4,
+    "certify_s": 2.1,
+    "param_s": 112.0,
+    "total_s": 165.2,
+    "new_atoms": 6,
+    "tau": 3.999999999998622,
+    "budget": 5
+   },
+   {
+    "name": "k6_20",
+    "eps_geo": 0.001286,
+    "verdict": "recipe did NOT convert (4D still open)",
+    "lp_s": 433.7,
+    "certify_s": 324.7,
+    "param_s": 234.7,
+    "total_s": 993.1,
+    "new_atoms": 8,
+    "tau": 4.666666666671003,
+    "budget": 5
+   },
+   {
+    "name": "k6_21",
+    "eps_geo": 0.001286,
+    "verdict": "recipe did NOT convert (4D still open)",
+    "lp_s": 743.8,
+    "certify_s": 235.3,
+    "param_s": 49.7,
+    "total_s": 1028.8,
+    "new_atoms": 8,
+    "tau": 4.600000000000063,
+    "budget": 5
+   },
+   {
+    "name": "k6_22",
+    "eps_geo": 0.002,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 421.2,
+    "certify_s": 2.4,
+    "param_s": 54.6,
+    "total_s": 482.9,
+    "new_atoms": 9,
+    "tau": 4.5,
+    "budget": 5
+   },
+   {
+    "name": "k6_24",
+    "eps_geo": 0.002,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 422.3,
+    "certify_s": 3.8,
+    "param_s": 223.0,
+    "total_s": 656.9,
+    "new_atoms": 8,
+    "tau": 4.50000000000002,
+    "budget": 5
+   },
+   {
+    "name": "k6_25",
+    "eps_geo": 0.003,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 57.7,
+    "certify_s": 0.9,
+    "param_s": 1.8,
+    "total_s": 62.6,
+    "new_atoms": 91,
+    "tau": 3.9999999999529665,
+    "budget": 5
+   },
+   {
+    "name": "k6_27",
+    "eps_geo": 0.001,
+    "verdict": "recipe did NOT convert (4D still open)",
+    "lp_s": 818.9,
+    "certify_s": 1484.5,
+    "param_s": 76.2,
+    "total_s": 2379.7,
+    "new_atoms": 77,
+    "tau": 4.670979667278662,
+    "budget": 5
+   },
+   {
+    "name": "k6_28",
+    "eps_geo": 0.003,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 49.5,
+    "certify_s": 2.8,
+    "param_s": 39.4,
+    "total_s": 96.7,
+    "new_atoms": 9,
+    "tau": 4.499999999980621,
+    "budget": 5
+   },
+   {
+    "name": "k6_29",
+    "eps_geo": 0.0015,
+    "verdict": "recipe did NOT convert (4D still open)",
+    "lp_s": 753.9,
+    "certify_s": 1480.6,
+    "param_s": 11.6,
+    "total_s": 2246.2,
+    "new_atoms": 49,
+    "tau": 4.718109216490503,
+    "budget": 5
+   },
+   {
+    "name": "k6_30",
+    "eps_geo": 0.002,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 253.6,
+    "certify_s": 3.0,
+    "param_s": 230.6,
+    "total_s": 494.3,
+    "new_atoms": 9,
+    "tau": 4.500000000000997,
+    "budget": 5
+   },
+   {
+    "name": "k6_32",
+    "eps_geo": 0.003,
+    "verdict": "RECIPE CONVERTS",
+    "lp_s": 651.9,
+    "certify_s": 2.8,
+    "param_s": 17.9,
+    "total_s": 677.3,
+    "new_atoms": 452,
+    "tau": 4.500000004288314,
+    "budget": 5
+   }
+  ]
+ }
+}

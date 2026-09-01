@@ -1,0 +1,62 @@
+=== k5_10: k=5 budget=6; warm = 57 atoms, 10441 rows (9793 from A53 + 24 4D witnesses x 27 stencil) from ['k5_10.json', 'k5_10.param.wit.json']
+[s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=672 points=672 rows=3766 (rejected 1450)
+  it   0 tau=6.000000 rows=4339 orbs=672 atoms>0=41 minmass=0.689655 maxcov=3.000000 +rows=573 -rows=0 +cols=0 -cols=0 t=8s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   1 tau=6.000000 rows=4339 orbs=1734 atoms>0=43 minmass=0.851064 maxcov=3.000000 +rows=0 -rows=0 +cols=1062 -cols=0 t=15s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   2 tau=5.666667 rows=4368 orbs=1734 atoms>0=14 minmass=0.666667 maxcov=1.329966 +rows=29 -rows=0 +cols=0 -cols=0 t=18s [lp 1s row 1s +r 0s col 0s +c 0s]
+  it   3 tau=5.666667 rows=4368 orbs=2934 atoms>0=13 minmass=0.666667 maxcov=1.329966 +rows=0 -rows=0 +cols=1200 -cols=0 t=26s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   4 tau=5.642857 rows=6143 orbs=2934 atoms>0=38 minmass=0.785714 maxcov=1.352041 +rows=1775 -rows=0 +cols=0 -cols=0 t=43s [lp 4s row 8s +r 5s col 1s +c 0s]
+  it   5 tau=5.678161 rows=6143 orbs=4134 atoms>0=53 minmass=0.908046 maxcov=1.321839 +rows=0 -rows=0 +cols=1200 -cols=0 t=52s [lp 1s row 7s +r 0s col 0s +c 0s]
+  it   6 tau=5.562500 rows=8083 orbs=4134 atoms>0=37 minmass=0.562500 maxcov=1.225575 +rows=1940 -rows=0 +cols=0 -cols=0 t=85s [lp 12s row 8s +r 12s col 0s +c 0s]
+  it   7 tau=5.654545 rows=8083 orbs=5334 atoms>0=91 minmass=0.872727 maxcov=1.290909 +rows=0 -rows=0 +cols=1200 -cols=0 t=103s [lp 10s row 7s +r 0s col 0s +c 0s]
+  it   8 tau=5.583333 rows=9535 orbs=5334 atoms>0=37 minmass=0.583333 maxcov=1.295222 +rows=1452 -rows=0 +cols=0 -cols=0 t=209s [lp 81s row 10s +r 15s col 1s +c 0s]
+  it   9 tau=5.666667 rows=9535 orbs=5447 atoms>0=125 minmass=0.868896 maxcov=1.333333 +rows=0 -rows=0 +cols=113 -cols=0 t=274s [lp 56s row 9s +r 0s col 0s +c 0s]
+  it  10 tau=5.659686 rows=11265 orbs=5447 atoms>0=129 minmass=0.884490 maxcov=1.319372 +rows=1730 -rows=0 +cols=0 -cols=0 t=325s [lp 21s row 8s +r 21s col 0s +c 0s]
+  it  11 tau=5.666667 rows=11265 orbs=5570 atoms>0=139 minmass=0.954742 maxcov=1.333333 +rows=0 -rows=0 +cols=123 -cols=0 t=350s [lp 14s row 11s +r 0s col 0s +c 0s]
+  it  12 tau=5.663507 rows=12844 orbs=5570 atoms>0=139 minmass=0.942563 maxcov=1.322275 +rows=1579 -rows=0 +cols=0 -cols=0 t=408s [lp 26s row 9s +r 23s col 1s +c 0s]
+  it  13 tau=5.666667 rows=12844 orbs=6310 atoms>0=149 minmass=0.917778 maxcov=1.333333 +rows=0 -rows=0 +cols=740 -cols=0 t=444s [lp 24s row 12s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=6 sym=C1 tau=5.588235 nu=5.588235 conv=False minmass=0.917778 maxcov=1.333333 rows=12844 orbits=6310 atoms_nz=208 packing_support=232 time=717s
+    LP: tau=5.588235 budget=6 conv=False (717.1s)
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A54-stragglers\code\certify.py C:\Users\esumm\code\packing\attempts\A56-sparametric\results\nodes\k5_10.json --s_rat 969271/250000 --rounds 4 --jobs 3 --depth 56 --time_limit 300.0 --out C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.json --scale 0 --scale_cap 1.06000 --max_w 96 --loop_cols
+[round 0] tau=5.58824 conv=False scale=1.0600 cert total=5.92370 budget=6 atoms=208
+    boxes = 559929  covered = 139905  vacuous = 0  exempt = 139958 (core 139958, nofam 0)  split = 280002  exact atom checks = 455496  max depth = 56  time = 15.9s
+    FAIL: 64 witness boxes at depth 56: 6 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 58 undecided at this depth
+      worst witness: theta = 38.494045 deg, centre = (2.208268625, 1.938542000), exact mass = 997707/1000000 (~0.997707000000)
+    feeding back 1344 witness rows (total extra 1344), re-solving (rows only)
+[s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=820 points=820 rows=7214 (rejected 1578)
+  it   0 tau=5.555556 rows=7410 orbs=820 atoms>0=27 minmass=0.777778 maxcov=1.333333 +rows=196 -rows=0 +cols=0 -cols=0 t=9s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   1 tau=5.576923 rows=7410 orbs=1820 atoms>0=31 minmass=0.884615 maxcov=1.340326 +rows=0 -rows=0 +cols=1000 -cols=0 t=17s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   2 tau=5.500000 rows=7419 orbs=1820 atoms>0=10 minmass=0.500000 maxcov=1.356030 +rows=9 -rows=0 +cols=0 -cols=0 t=24s [lp 5s row 2s +r 0s col 0s +c 0s]
+  it   3 tau=5.500000 rows=7419 orbs=2660 atoms>0=16 minmass=0.750000 maxcov=1.356030 +rows=0 -rows=0 +cols=1000 -cols=160 t=33s [lp 0s row 8s +r 0s col 0s +c 0s]
+  it   4 tau=5.500000 rows=7659 orbs=2660 atoms>0=35 minmass=0.750000 maxcov=1.250387 +rows=240 -rows=0 +cols=0 -cols=0 t=57s [lp 10s row 12s +r 1s col 1s +c 0s]
+  it   5 tau=5.538462 rows=4953 orbs=3182 atoms>0=34 minmass=0.846154 maxcov=1.234031 +rows=0 -rows=2706 +cols=1000 -cols=478 t=73s [lp 8s row 7s +r 0s col 1s +c 0s]
+  it   6 tau=5.500000 rows=5995 orbs=2747 atoms>0=110 minmass=0.750000 maxcov=1.115790 +rows=1068 -rows=26 +cols=0 -cols=435 t=102s [lp 11s row 14s +r 3s col 1s +c 0s]
+  it   7 tau=5.500000 rows=5995 orbs=2949 atoms>0=24 minmass=0.750000 maxcov=1.114949 +rows=0 -rows=0 +cols=1000 -cols=798 t=106s [lp 0s row 2s +r 0s col 1s +c 0s]
+  it   8 tau=5.500000 rows=5902 orbs=2949 atoms>0=24 minmass=0.750000 maxcov=1.146424 +rows=26 -rows=119 +cols=0 -cols=0 t=130s [lp 12s row 10s +r 0s col 2s +c 0s]
+  it   9 tau=5.500000 rows=5902 orbs=2993 atoms>0=10 minmass=1.000000 maxcov=1.146424 +rows=0 -rows=0 +cols=1000 -cols=956 t=132s [lp 0s row 0s +r 0s col 2s +c 0s]
+  it  10 tau=5.500000 rows=5890 orbs=3993 atoms>0=10 minmass=1.000000 maxcov=1.081569 +rows=0 -rows=12 +cols=1000 -cols=0 t=175s [lp 32s row 9s +r 0s col 2s +c 0s]
+  it  11 tau=5.500000 rows=5888 orbs=3777 atoms>0=10 minmass=1.000000 maxcov=1.023179 +rows=0 -rows=2 +cols=500 -cols=716 t=221s [lp 43s row 1s +r 0s col 2s +c 0s]
+  it  12 tau=5.500000 rows=5858 orbs=3671 atoms>0=10 minmass=1.000000 maxcov=1.031661 +rows=0 -rows=30 +cols=621 -cols=727 t=298s [lp 65s row 10s +r 0s col 2s +c 0s]
+  it  13 tau=5.500000 rows=5858 orbs=3475 atoms>0=10 minmass=1.000000 maxcov=1.056049 +rows=0 -rows=0 +cols=300 -cols=496 t=368s [lp 67s row 0s +r 0s col 2s +c 0s]
+  time limit
+DONE s=3.877084 n=6 sym=C1 tau=5.500000 nu=5.500000 conv=False minmass=1.000000 maxcov=1.056049 rows=5858 orbits=3475 atoms_nz=10 packing_support=534 time=450s
+[round 1] tau=5.50000 conv=False scale=1.0600 cert total=5.83000 budget=6 atoms=10
+    boxes = 590646  covered = 135720  vacuous = 0  exempt = 159635 (core 159635, nofam 0)  split = 295291  exact atom checks = 140225  max depth = 42  time = 12.7s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1457501/250000 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.json
+
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.param.json --name k5_10 --beta-gap 19/10,27/10
+k5_10: 10 atoms, 5 cores, budget 6, anchoring gap -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.param.json --slo 191/50 --shi 969271/250000 --depth 48 --sscale 8 --jobs 3 --split 3 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.param.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.param.wit.json --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.param.json  (k5_10)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 10, cores = 5, budget = 6, total = 1457501/250000 (~5.830004000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '787111/400000', 'threshold_y': '64959/31250', 'threshold_x_float': 1.9677775, 'threshold_y_float': 2.078688, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17828243  covered = 7494262  vacuous = 28  exempt = 1419847  split = 8914097  s-splits = 1788325  s-cells = 6434  max depth = 48  max s-depth = 11  time = 218.9s
+FAIL: 9 witness boxes at depth 48 (0 HOLES)
+  worst witness: s = 992519233/256000000 (~3.877028254), theta = 80.861314 deg, centre = (3.303933291, 1.910445477), exact mass = 1060001/1000000 (~1.060001000000)
+  witness s-ranges: [3.876805270, 3.877084000] over 9 boxes
+  witnesses written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.param.wit.json
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k5_10.param.report.json
+    {"verdict": "recipe did NOT convert (4D still open)", "lp_seconds": 717.1, "certify_seconds": 479.5, "param_seconds": 219.1, "total_seconds": 1415.7}

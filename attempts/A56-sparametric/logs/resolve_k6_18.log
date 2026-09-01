@@ -1,0 +1,67 @@
+=== k6_18: k=6 budget=5; warm = 4 atoms, 3206 rows (2558 from A53 + 24 4D witnesses x 27 stencil) from ['k6_18.json', 'k6_18.param.wit.json']
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=628 points=628 rows=1174 (rejected 1570)
+  it   0 tau=4.000000 rows=1217 orbs=628 atoms>0=4 minmass=0.000000 maxcov=2.000000 +rows=43 -rows=0 +cols=0 -cols=0 t=8s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   1 tau=4.333333 rows=1217 orbs=1828 atoms>0=11 minmass=1.000000 maxcov=1.666667 +rows=0 -rows=0 +cols=1200 -cols=0 t=8s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   2 tau=4.000000 rows=2527 orbs=1828 atoms>0=11 minmass=0.333333 maxcov=1.000000 +rows=1310 -rows=0 +cols=0 -cols=0 t=18s [lp 0s row 8s +r 1s col 0s +c 0s]
+  it   3 tau=4.000000 rows=2527 orbs=1828 atoms>0=4 minmass=0.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=23s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   4 tau=4.000000 rows=2693 orbs=1828 atoms>0=4 minmass=0.000000 maxcov=1.000000 +rows=166 -rows=0 +cols=0 -cols=0 t=29s [lp 0s row 5s +r 0s col 0s +c 0s]
+  it   5 tau=4.000000 rows=2693 orbs=1828 atoms>0=8 minmass=0.500000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=30s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it   6 tau=4.000000 rows=2706 orbs=1828 atoms>0=8 minmass=0.500000 maxcov=1.000000 +rows=13 -rows=0 +cols=0 -cols=0 t=31s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it   7 tau=4.000000 rows=2706 orbs=1828 atoms>0=11 minmass=0.666667 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=40s [lp 0s row 9s +r 0s col 0s +c 0s]
+  it   8 tau=4.000000 rows=4651 orbs=1828 atoms>0=11 minmass=0.666667 maxcov=1.000000 +rows=1945 -rows=0 +cols=0 -cols=0 t=52s [lp 0s row 9s +r 3s col 0s +c 0s]
+  it   9 tau=4.000000 rows=4651 orbs=1828 atoms>0=8 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=53s [lp 0s row 0s +r 0s col 0s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it  10 tau=4.000000 rows=4651 orbs=1828 atoms>0=8 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=53s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.877084 n=5 sym=C1 tau=4.000000 nu=4.000000 conv=True minmass=1.000000 maxcov=1.000000 rows=4651 orbits=1828 atoms_nz=8 packing_support=4 time=53s
+    LP: tau=4.000000 budget=5 conv=True (53.5s)
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A54-stragglers\code\certify.py C:\Users\esumm\code\packing\attempts\A56-sparametric\results\nodes\k6_18.json --s_rat 969271/250000 --rounds 4 --jobs 3 --depth 56 --time_limit 300.0 --out C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.json --scale 0 --scale_cap 1.06000 --max_w 96 --loop_cols
+[round 0] tau=4.00000 conv=True scale=1.0600 cert total=4.24001 budget=5 atoms=8
+    boxes = 27514  covered = 8598  vacuous = 0  exempt = 5191 (core 5191, nofam 0)  split = 13725  exact atom checks = 9364  max depth = 27  time = 0.7s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 2120003/500000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.json
+
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.json --name k6_18 --beta-gap 19/10,27/10
+k6_18: 8 atoms, 6 cores, budget 5, anchoring gap -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.json --slo 191/50 --shi 969271/250000 --depth 48 --sscale 8 --jobs 3 --split 3 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.wit.json --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.json  (k6_18)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 8, cores = 6, budget = 5, total = 2120003/500000 (~4.240006000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '43/20', 'threshold_y': '437/200', 'threshold_x_float': 2.15, 'threshold_y_float': 2.185, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 453230  covered = 121377  vacuous = 0  exempt = 105270  split = 226583  s-splits = 35801  s-cells = 381  max depth = 33  max s-depth = 6  time = 9.5s
+PASS: for EVERY s in [191/50, 969271/250000], every admissible closed unit square in [0,s]^2 disjoint from all 6 cores has mu_s >= 1; total 2120003/500000 < budget 5  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.lo.json
+specialised k6_18 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.lo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.lo.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.lo.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.lo.wit.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.lo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 8, total mass = 2120003/500000 (~4.2400060000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 13396  covered = 3173  vacuous = 0  exempt = 3557 (core 3557, nofam 0)  split = 6666  exact atom checks = 3692  max depth = 27  time = 0.5s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 2120003/500000 < budget 5  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.lo.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.json --s 1924271/500000 -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.mid.json
+specialised k6_18 at s = 1924271/500000 (~3.848542000) -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.mid.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.mid.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.mid.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.mid.wit.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.mid.json
+s = 1924271/500000 (~3.8485420000), n = 11, atoms = 8, total mass = 2120003/500000 (~4.2400060000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 16644  covered = 4209  vacuous = 0  exempt = 4145 (core 4145, nofam 0)  split = 8290  exact atom checks = 4804  max depth = 27  time = 0.6s
+PASS: every NON-EXEMPT closed unit square in [0,1924271/500000]^2 has mass >= 1 ; total 2120003/500000 < budget 5  ==>  no packing of 11 unit squares in side <= 1924271/500000 (~3.8485420000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.mid.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\resolved\k6_18.param.json --s 969271/250000 -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.hi.json
+specialised k6_18 at s = 969271/250000 (~3.877084000) -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.hi.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.hi.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.hi.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.hi.wit.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.hi.json
+s = 969271/250000 (~3.8770840000), n = 11, atoms = 8, total mass = 2120003/500000 (~4.2400060000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 27514  covered = 8598  vacuous = 0  exempt = 5191 (core 5191, nofam 0)  split = 13725  exact atom checks = 9364  max depth = 27  time = 0.7s
+PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 2120003/500000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\c2\k6_18.resolved.hi.report.json
+    {"verdict": "RECIPE CONVERTS", "lp_seconds": 53.5, "certify_seconds": 1.1, "param_seconds": 9.7, "total_seconds": 67.0}

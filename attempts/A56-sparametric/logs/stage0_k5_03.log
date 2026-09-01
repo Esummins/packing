@@ -1,0 +1,14 @@
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_03.json -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.param.json --name k5_03
+k5_03: 40 atoms, 5 cores, budget 6, anchoring nearest-wall -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.slo.json
+specialised k5_03 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.slo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.slo.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.slo.report.json --witness-file C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.wit.json --max-witnesses 40 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.slo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 1102736  covered = 469844  vacuous = 0  exempt = 81556 (core 81556, nofam 0)  split = 551336  exact atom checks = 582397  max depth = 42  time = 38.1s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\stage0\k5_03.nw.slo.report.json
