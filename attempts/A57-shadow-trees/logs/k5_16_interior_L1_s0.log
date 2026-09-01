@@ -1,0 +1,24 @@
+=== A57 k5_16_interior_L1 shard 0/6 2026-09-01 09:36:48 children=193 done=0 warm=3486 atoms 30000 rows from ['k5_16.json', 'k5_16.json', 'k5_16.prev1788240896.json', 'k5_16_state.json']
+    folded pool = 3486 atoms
+[09:36:48] LP k5_16_interior_NO budget=6 a=None gd=1000000000.000 pool=3486
+[s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=3486 points=3486 rows=4180 (rejected 25591)
+    fine row search: minmass=1.000000 +rows=0
+  it   0 tau=3.000000 rows=4180 orbs=3486 atoms>0=3 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=4s [lp 1s row 0s +r 0s col 0s +c 0s]
+DONE s=3.877084 n=6 sym=C1 tau=3.000000 nu=3.000000 conv=True minmass=1.000000 maxcov=1.000000 rows=4180 orbits=3486 atoms_nz=3 packing_support=3 time=5s
+[round 0] tau=3.00000 conv=True scale=1.4000 cert total=4.20000 budget=6 atoms=3
+    boxes = 6986  covered = 1813  vacuous = 0  exempt = 1712 (core 1565, nofam 147)  split = 3461  exact atom checks = 1813  max depth = 27  time = 0.5s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 21/5 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_16_interior_L1\k5_16_interior_NO.json
+
+    {"id": "k5_16_interior_NO", "kind": "NO", "budget": 6, "zone": "interior", "a": null, "ghost_dist": 1000000000.0, "trump_realizes": false, "tau": 3.0, "converged": true, "minmass": 1.0, "maxcov": 1.0, "eta": -3.0, "lp_seconds": 4.5, "scale_ceiling": 2.0, "cert": "PASS", "cert_seconds": 1.0, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_16_interior_L1\\k5_16_interior_NO.json"}
+[09:36:54] LP k5_16_interior_Y0005 budget=5 a=0.35660164866212035 gd=1.369 pool=3486
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3486 points=3486 rows=17574 (rejected 11139)
+  it   0 tau=5.000000 rows=19008 orbs=3486 atoms>0=12 minmass=0.000000 maxcov=1.388328 +rows=1434 -rows=0 +cols=0 -cols=0 t=44s [lp 8s row 9s +r 22s col 1s +c 0s]
+=== A57 k5_16_interior_L1 shard 0/6 2026-09-01 10:05:13 children=193 done=1 warm=3486 atoms 30000 rows from ['k5_16.json', 'k5_16.json', 'k5_16.prev1788240896.json', 'k5_16_state.json']
+    folded pool = 3486 atoms
+    {"id": "k5_16_interior_Y0005", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660164866212035, "ghost_dist": 1.36878, "box": {"x0": 1.239757, "x1": 1.3795140000000001, "y0": 1.239757, "y1": 1.3795140000000001, "th0": 82.3718503314193, "th1": 90.0}, "trump_realizes": false, "pin": "contradictory", "pin_info": 0, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[10:05:13] LP k5_16_interior_Y0011 budget=5 a=0.35660164866212035 gd=1.319 pool=3486
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3486 points=3486 rows=13276 (rejected 15800)
+  it   0 tau=4.000000 rows=13276 orbs=3886 atoms>0=4 minmass=1.000000 maxcov=1.253112 +rows=0 -rows=0 +cols=400 -cols=0 t=14s [lp 8s row 0s +r 0s col 0s +c 0s]
+  it   1 tau=4.000000 rows=13276 orbs=3918 atoms>0=4 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=32 -cols=0 t=125s [lp 43s row 68s +r 0s col 0s +c 0s]
+  it   2 tau=4.000000 rows=13276 orbs=3939 atoms>0=4 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=21 -cols=0 t=219s [lp 94s row 0s +r 0s col 0s +c 0s]
