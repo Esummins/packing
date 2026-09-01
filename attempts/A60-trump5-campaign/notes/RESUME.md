@@ -67,6 +67,34 @@ Verified after adoption: A60 workers run at **1–4 threads / 54–140 MB** agai
 0.3–1.8 GB** for the pre-T18 processes still on the machine.  **Launch nothing that does not go
 through one of those two paths.**
 
+**T18 is necessary but NOT sufficient — the second constraint is the machine's COMMIT LIMIT.**
+After the pinning was applied and verified active (1–4 threads), cover shard 1/2 died *again*:
+
+    numpy ArrayMemoryError: Unable to allocate 37.9 MiB for an array with shape (150544, 33)
+    ... lpbox.py:673 coverage()   <- the column oracle, not BLAS
+
+Measured at the time: commit **57.7 / 61.0 GB**, headroom 3.4 GB, while the pagefile held only
+212 MB of its 30 GB allocation and A60's own workers were 52–140 MB.  The committers are the
+lab's other attempts — a single `certify.py` reserving **6.7 GB** of commit against a 1.75 GB
+working set, plus two `tree57.py` at ~4 GB each.  So this is a **shared-resource** condition, not
+an A60 bug, and A60 cannot fix it by shrinking further.
+
+Two responses, both in place:
+
+1. **A60 workers now survive an allocation failure.**  `tree60.defer()` catches `MemoryError`
+   (numpy's `_ArrayMemoryError` subclasses it) in all three phases, writes the node to
+   `results/a60_deferred_j<J>.jsonl`, sleeps 30 s and continues.  A deferred node is deliberately
+   **NOT** added to the phase's done-set, so the next pass re-attempts it — one failed 37.9 MiB
+   allocation no longer destroys a shard holding hundreds of queued children.  `board` surfaces a
+   `deferred` section listing any tag that is still unresolved; **treat a non-empty
+   `still_unresolved` list as outstanding work, never as progress.**
+2. The commit headroom check below stays, as a launch gate.
+
+**For the coordinator / machine owner (outside A60's remit):** the commit limit is RAM + pagefile
+= 31.7 + 30 ≈ 61 GB, and the pagefile is capped at 30 GB while barely being used (212 MB). Raising
+that cap would raise the commit limit directly and is the cheapest global fix. Changing a system
+setting is not something this attempt should do on its own.
+
 Secondary guard — commit, not free physical RAM.  Watch the COMMIT charge:
 
     $os=Get-CimInstance Win32_OperatingSystem

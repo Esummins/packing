@@ -162,3 +162,39 @@ several concurrent jobs exhaust thread arenas and a *76 MiB* numpy allocation fa
 free, killing jobs outright (it took out one tree shard and one deepen job simultaneously).
 
     powershell -File code\run_job.ps1 -Script deepen.py -JobArgs "--key k5_11_interior_L1 --levels 3" -Tag deepen_k5_11
+
+
+## memory discipline (T19) — read before launching anything
+
+* **Check commit, not RAM.**  `(Get-CimInstance Win32_OperatingSystem).FreeVirtualMemory / 1MB`
+  is commit-available in GB; `TotalVirtualMemorySize` is the commit limit.  A worker reserves
+  2-4 GB of commit against a 0.5-1.2 GB working set, so free physical memory badly overstates
+  the room available.  `scaleup.ps1` gates at 10.5 GB and will sit idle below it.
+* **Every Python process costs ~628 MB of commit before it works** (measured on a bare
+  `import numpy`).  That is why `VERIFY_JOBS_CAP = 1`: `verify_case.py --jobs N` spawns an
+  `mp.Pool` of N on top of itself and its parent.  Do not raise it to buy verifier speed without
+  checking commit headroom first.
+* **`A57_ORACLE_CHUNK`** (default 2e6) bounds the oracle's numpy temporaries.  Raising it speeds
+  the oracles slightly and raises steady commit permanently (Windows keeps the charge on freed
+  blocks).  Result-neutral either way.
+* **Deferred nodes**: `results/deferred_<key>.jsonl` lists nodes skipped on a MemoryError.  They
+  are deliberately NOT in the summary, so simply re-running the shard picks them up.
+
+## current state after the T19 commit work (2026-09-01 ~16:40)
+
+* **Running:** 2 `tree57.py` shards only, holding 4.39 and 3.86 GB of commit.  They started
+  BEFORE the T19 trims, so they still carry `--jobs 2` verifier fan-out and the old 1e7/2e7
+  oracle chunks; they were deliberately NOT recycled (coordinator: do not destabilise a running
+  shard).  Recycling them is the single biggest immediate saving available and is safe whenever
+  wanted — they are resumable and skip finished children.
+* **Stopped deliberately:** the `sweepfails.py --watch` daemon, to give commit back to A60.
+  Commit-available went 1.42 GB -> 5.71 GB when it went (its in-flight certify subtree went with
+  it).  Nothing was lost: the sweep writes no record until it concludes, so its in-flight child
+  stays eligible.  **Restart it when commit-available is comfortably above ~10 GB:**
+
+      powershell -File code\run_job.ps1 -Script sweepfails.py -JobArgs "--watch 600 --rounds 1 --jobs 2 --depth 60 --cert_time 300" -Tag sweepfails
+
+  Until then `deepen.py` covers the same children, just more expensively.
+* **Scaler:** commit-gated at 10.5 GB, so it will sit idle rather than add workers while the box
+  is tight.  It has been logging unreliably (starts silently); confirm what it is doing from the
+  process list, not from `logs/scaleup.log`.

@@ -1,5 +1,6 @@
 import PackingCertMathlib.Trump11
 import PackingCertMathlib.Band
+import PackingCertMathlib.TopLevel
 #print axioms PackingCert.disjoint_of_strictlyBelow
 #print axioms PackingCert.checkPackingCCW_sound
 #print axioms PackingCert.aff_sqdist
@@ -11,3 +12,6 @@ import PackingCertMathlib.Band
 #print axioms PackingCert.atMostOne_of_side_lt
 #print axioms PackingCert.band_96_25
 #print axioms PackingCert.isUnitSquare_csqSet
+#print axioms PackingCert.S11.s_eleven_ge
+#print axioms PackingCert.S11.s_eleven_eq
+#print axioms PackingCert.S11.s_eleven_unique

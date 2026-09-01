@@ -45,6 +45,14 @@ from warm57 import merged_warm
 
 S_RAT = "969271/250000"
 
+# T19: every extra Python process costs ~628 MB of COMMIT before it does any work (measured:
+# bare `python -c "import numpy"` = 27 MB working set, 628 MB commit).  verify_case.py spawns an
+# mp.Pool of --jobs workers ON TOP of itself and its parent, so a certify at --jobs 2 was four
+# processes ~= 2.5 GB of commit in baselines alone.  At --jobs 1 verify_case takes its in-process
+# branch and spawns nothing.  The machine's binding constraint is the commit limit (61 GB), not
+# RAM, and A60 lost a shard to a 38 MiB allocation while A57 held reservations.
+VERIFY_JOBS_CAP = 1
+
 
 # ------------------------------------------------------------------ cover
 def theta_edges(nth):
@@ -159,7 +167,7 @@ def run_eps_geo(node_path, kid, a, certdir, log, margins=None):
     for m in margins:
         cert_out = os.path.join(certdir, f"{kid['id']}_epsgeo{m:g}.json")
         cmd = [sys.executable, os.path.join(HERE, "certify.py"), node_path, "--s_rat", S_RAT,
-               "--eps_geo", f"{m:g}", "--rounds", "1", "--jobs", str(a.jobs),
+               "--eps_geo", f"{m:g}", "--rounds", "1", "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)),
                "--depth", str(a.depth), "--time_limit", str(a.cert_time),
                "--resolve_time", str(a.cert_time), "--out", cert_out, "--scale", "0",
                "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "32", "--loop_cols"]
@@ -202,7 +210,7 @@ def run_eps_ladder(node_path, kid, a, certdir, log, eps=(5e-4, 2e-4, 5e-5)):
                 json.dump(r, open(np2, "w"))
                 cert_out = os.path.join(certdir, f"{kid['id']}_eps{e:g}.json")
                 cmd = [sys.executable, os.path.join(HERE, "certify.py"), np2, "--s_rat", S_RAT,
-                       "--rounds", str(a.rounds), "--jobs", str(a.jobs), "--depth", str(a.depth),
+                       "--rounds", str(a.rounds), "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)), "--depth", str(a.depth),
                        "--time_limit", str(a.cert_time), "--out", cert_out, "--scale", "0",
                        "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "64", "--loop_cols"]
                 p = subprocess.run(cmd, capture_output=True, text=True)
@@ -222,6 +230,30 @@ def run_eps_ladder(node_path, kid, a, certdir, log, eps=(5e-4, 2e-4, 5e-5)):
                    if all(s.get("cert") is None for s in out["eps_ladder"])
                    else "FAIL(eps ladder exhausted)")
     return out
+
+
+def defer(kid_id, exc, log, base, key, stats):
+    """T19 (A60's tree60.defer, adopted): a transient COMMIT spike must not destroy a queue.
+
+    The machine's binding constraint is the commit limit, and a spike elsewhere can make a
+    ~40 MiB allocation fail here.  Previously that killed the worker outright and the whole
+    remaining shard queue died with it (measured: one tree shard and one deepen job lost
+    together).  On MemoryError we now record the node, sleep, and carry on -- and crucially we
+    do NOT append a summary record, so the node stays absent from `done` and is retried on the
+    next pass.  Deferring is always safe: it can only postpone work, never assert a verdict.
+    """
+    import json as _json, time as _time, gc as _gc
+    _gc.collect()
+    p = os.path.join(base, "results", f"deferred_{key}.jsonl")
+    try:
+        with open(p, "a") as f:
+            f.write(_json.dumps(dict(id=kid_id, error=repr(exc)[:200],
+                                     when=_time.strftime("%Y-%m-%d %H:%M:%S"))) + chr(10))
+    except Exception:
+        pass
+    stats["deferred"] = stats.get("deferred", 0) + 1
+    log(f"    DEFERRED {kid_id}: {repr(exc)[:120]} -- sleeping 30 s, node left NOT done")
+    _time.sleep(30)
 
 
 # ------------------------------------------------------------------ driver
@@ -384,19 +416,24 @@ def main():
                 f.write(json.dumps(rec) + chr(10))
             flush(); continue
         t0 = time.time()
-        if os.path.exists(node_path):
-            res = json.load(open(node_path))
-        else:
-            tl = a.no_time_limit if kid["kind"] == "NO" else a.time_limit
-            log(f"[{time.strftime('%H:%M:%S')}] LP {kid['id']} budget={kid['budget']} "
-                f"a={kid['a']} gd={kid['score']:.3f} pool={len(pool)}")
-            res = solve_node(S0F, kid["hyp"], kid["budget"], sym_kind="C1",
-                             warm=dict(atoms=pool, rows=warm["rows"]),
-                             time_limit=tl, max_iter=900, out=None, log=log,
-                             prune=0, prune_cols=3, col_stop_iter=10 ** 6, col_stop_cov=1.002,
-                             max_cols_add=400, max_rows_add=2000, fine_slack=99.0, alternate=True)
-            res["parent"] = a.name; res["child_id"] = kid["id"]
-            json.dump(res, open(node_path, "w"))
+        try:
+            if os.path.exists(node_path):
+                res = json.load(open(node_path))
+            else:
+                tl = a.no_time_limit if kid["kind"] == "NO" else a.time_limit
+                log(f"[{time.strftime('%H:%M:%S')}] LP {kid['id']} budget={kid['budget']} "
+                    f"a={kid['a']} gd={kid['score']:.3f} pool={len(pool)}")
+                res = solve_node(S0F, kid["hyp"], kid["budget"], sym_kind="C1",
+                                 warm=dict(atoms=pool, rows=warm["rows"]),
+                                 time_limit=tl, max_iter=900, out=None, log=log,
+                                 prune=0, prune_cols=3, col_stop_iter=10 ** 6, col_stop_cov=1.002,
+                                 max_cols_add=400, max_rows_add=2000, fine_slack=99.0,
+                                 alternate=True)
+                res["parent"] = a.name; res["child_id"] = kid["id"]
+                json.dump(res, open(node_path, "w"))
+        except MemoryError as e:           # numpy's _ArrayMemoryError subclasses MemoryError
+            defer(kid["id"], e, log, BASE, key + f"_s{si}", stats)
+            flush(); continue
         rec.update(tau=res["tau"], converged=res["converged"], minmass=res["minmass"],
                    maxcov=res["maxcov"], eta=res["tau"] - kid["budget"],
                    lp_seconds=round(time.time() - t0, 1),
@@ -427,7 +464,7 @@ def main():
         else:
             cert_out = os.path.join(certdir, f"{kid['id']}.json")
             cmd = [sys.executable, os.path.join(HERE, "certify.py"), node_path, "--s_rat", S_RAT,
-                   "--rounds", str(a.rounds), "--jobs", str(a.jobs), "--depth", str(a.depth),
+                   "--rounds", str(a.rounds), "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)), "--depth", str(a.depth),
                    "--time_limit", str(a.cert_time), "--out", cert_out, "--scale", "0",
                    "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "64", "--loop_cols"]
             t1 = time.time()

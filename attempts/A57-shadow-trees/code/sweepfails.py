@@ -21,6 +21,14 @@ from tree57 import eps_geo_margins
 BASE = os.path.abspath(os.path.join(HERE, ".."))
 S_RAT = "969271/250000"
 
+# T19: every extra Python process costs ~628 MB of COMMIT before it does any work (measured:
+# bare `python -c "import numpy"` = 27 MB working set, 628 MB commit).  verify_case.py spawns an
+# mp.Pool of --jobs workers ON TOP of itself and its parent, so a certify at --jobs 2 was four
+# processes ~= 2.5 GB of commit in baselines alone.  At --jobs 1 verify_case takes its in-process
+# branch and spawns nothing.  The machine's binding constraint is the commit limit (61 GB), not
+# RAM, and A60 lost a shard to a 38 MiB allocation while A57 held reservations.
+VERIFY_JOBS_CAP = 1
+
 
 def scan(a, certdir):
     todo = []
@@ -109,7 +117,7 @@ def run_batch(a, certdir, todo, t0):
         for m in margins:
             out = os.path.join(certdir, r["id"] + ".json")
             cmd = [sys.executable, os.path.join(HERE, "certify.py"), node, "--s_rat", S_RAT,
-                   "--eps_geo", f"{m:g}", "--rounds", str(a.rounds), "--jobs", str(a.jobs),
+                   "--eps_geo", f"{m:g}", "--rounds", str(a.rounds), "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)),
                    "--depth", str(a.depth), "--time_limit", str(a.cert_time),
                    "--resolve_time", str(a.cert_time), "--out", out, "--scale", "0",
                    "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "32", "--loop_cols"]

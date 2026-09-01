@@ -1464,3 +1464,20 @@ affordable cost estimate for closing 3.84.
 - PI noted idle capacity (CPU 10%, 11 GB free with only A57's 3 workers active). A60 executes
   A59's GO program (falsifier check first per its own conditions); A61 runs the G-A56-1 successor
   recipe. Concurrency budget: A57 ~3 + A60 <= 4 + A61 <= 2 heavy LPs with 4 GB RAM guards.
+
+## 2026-09-01 — A62 (trust ledger) closed: formal statement finds three new HIGH holes; zero load-bearing conjectures
+- F3 executed: TopLevel.lean (PackingCertMathlib, CI green) states the composed optimality
+  theorem with 13 named axioms; the three top theorems are PROVED from exactly those axioms.
+  Writing the composition forced the holes it was designed to find: (F2) no certificate route
+  to the UB AT s-hat (strict-margin checkers can never certify the contact-closed packing);
+  (F3) the uniqueness clause follows from NO written lemma (selection slides squares — proves
+  the bound, not uniqueness; needs a slide-path + basin-rigidity argument); (F9) checklist S4
+  confirmed as a missing lemma applied at every kill (certificates exclude disjoint-closed
+  families, minimisers are interior-disjoint; the lambda-scaling repair is written nowhere).
+- H13/H11: dependency graph shipped (attempts/A62-trust-ledger/results/depgraph.json + .svg).
+  Sweep: no conjecture node is load-bearing — G-A59-12 motivation-only, I-L19/seam-S3
+  off-tree, G-A59-10 already caught and corrected by A60's falsifier. The proof's distance
+  is 14 OPEN nodes; H10 (k<=4/k<=3 exactness) remains the largest.
+- C1/C2/C9: docs/specs/tcb.md + four frozen certificate specs + docs/manifest_3.8x.md.
+  TCB debt named: no end-to-end verifier for the s0 tree compositions (the A54-gap layer);
+  C3 clean-room inputs now exist for verify_case/verify_param.

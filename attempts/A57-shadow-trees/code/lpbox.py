@@ -32,6 +32,20 @@ import argparse, json, math, time, os
 import numpy as np
 import highspy
 
+# --- A57 T19: the ONLY A57 edit to A54's lpbox.py -------------------------------------------
+# The two oracle loops below are already chunked; the chunk CONSTANT sets the size of the numpy
+# temporaries (dx, dy, ux, uy, ins, ...) live at once.  At 1e7/2e7 elements each temporary is
+# 80/160 MB and the live set peaks near half a gigabyte -- and on Windows a freed heap block
+# keeps its COMMIT charge, so that peak becomes the process's steady commit.  This machine's
+# binding constraint is the commit limit (61 GB, 57.9 GB used when measured), not RAM, so peak
+# temporaries are what matter.  A60 lost a shard to a 38 MiB allocation while A57 held ~4 GB
+# reservations per worker.
+# Shrinking the chunk is RESULT-NEUTRAL, bit for bit: every output element is a dot product over
+# the full inner dimension and each iteration writes a disjoint output slice, so the arithmetic
+# per element is identical however the rows are batched.  Only the loop count changes.
+A57_CHUNK = float(os.environ.get("A57_ORACLE_CHUNK", 2e6))
+# ---------------------------------------------------------------------------------------------
+
 EPS_GEO = 1e-4      # squares are shrunk by this margin in the LP rows (see verifier)
 DEG = math.pi / 180.0
 THETA_STAR_DEG = 40.18193729032971646523   # Trump packing tilt (A03)
@@ -450,7 +464,7 @@ class RowOracle:
     def mass_many(self, C, theta):
         out = np.empty(len(C))
         U = rot_coords(self.P, theta); Cr = rot_coords(C, theta)
-        chunk = max(1, int(2e7 // max(self.K, 1)))
+        chunk = max(1, int(2 * A57_CHUNK // max(self.K, 1)))
         half = 0.5 - EPS_GEO
         for a in range(0, len(C), chunk):
             cc = Cr[a:a + chunk]
@@ -665,7 +679,7 @@ class ColOracle:
         R = len(self.pl)
         if R == 0:
             return out
-        chunk = max(1, int(1e7 // max(R, 1)))
+        chunk = max(1, int(A57_CHUNK // max(R, 1)))
         for a in range(0, len(pts), chunk):
             p = pts[a:a + chunk]
             dx = p[:, None, 0] - self.pl[None, :, 0]; dy = p[:, None, 1] - self.pl[None, :, 1]

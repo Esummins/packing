@@ -35,12 +35,39 @@ from warm57 import merged_warm
 
 S_RAT = "969271/250000"
 
+# T19: every extra Python process costs ~628 MB of COMMIT before it does any work (measured:
+# bare `python -c "import numpy"` = 27 MB working set, 628 MB commit).  verify_case.py spawns an
+# mp.Pool of --jobs workers ON TOP of itself and its parent, so a certify at --jobs 2 was four
+# processes ~= 2.5 GB of commit in baselines alone.  At --jobs 1 verify_case takes its in-process
+# branch and spawns nothing.  The machine's binding constraint is the commit limit (61 GB), not
+# RAM, and A60 lost a shard to a 38 MiB allocation while A57 held reservations.
+VERIFY_JOBS_CAP = 1
+
 
 def split_n(box, levels):
     out = [box]
     for _ in range(levels):
         out = [h for b in out for h in b.split()]
     return out
+
+
+def defer(kid_id, exc, log, base, key, stats):
+    """T19 (A60's tree60.defer, adopted).  A transient COMMIT spike must not destroy the queue:
+    record the node, sleep, continue -- and do NOT append a summary record, so the node stays
+    absent from `done` and is retried next pass.  Deferring only postpones work, never asserts a
+    verdict."""
+    import json as _json, time as _time, gc as _gc
+    _gc.collect()
+    p = os.path.join(base, "results", f"deferred_{key}.jsonl")
+    try:
+        with open(p, "a") as f:
+            f.write(_json.dumps(dict(id=kid_id, error=repr(exc)[:200],
+                                     when=_time.strftime("%Y-%m-%d %H:%M:%S"))) + chr(10))
+    except Exception:
+        pass
+    stats["deferred"] = stats.get("deferred", 0) + 1
+    log(f"    DEFERRED {kid_id}: {repr(exc)[:120]} -- sleeping 30 s, node left NOT done")
+    _time.sleep(30)
 
 
 def main():
@@ -129,16 +156,20 @@ def main():
             else:
                 npth = os.path.join(outdir, cid + ".json")
                 t0 = time.time()
-                if os.path.exists(npth):
-                    res = json.load(open(npth))
-                else:
-                    res = solve_node(S0F, hyp, budget, sym_kind="C1",
-                                     warm=dict(atoms=pool, rows=[]),
-                                     time_limit=a.time_limit, max_iter=900, out=None, log=log,
-                                     prune=0, prune_cols=3, col_stop_iter=10 ** 6,
-                                     col_stop_cov=1.002, max_cols_add=400, max_rows_add=2000,
-                                     fine_slack=0.05, alternate=True)
-                    json.dump(res, open(npth, "w"))
+                try:
+                    if os.path.exists(npth):
+                        res = json.load(open(npth))
+                    else:
+                        res = solve_node(S0F, hyp, budget, sym_kind="C1",
+                                         warm=dict(atoms=pool, rows=[]),
+                                         time_limit=a.time_limit, max_iter=900, out=None, log=log,
+                                         prune=0, prune_cols=3, col_stop_iter=10 ** 6,
+                                         col_stop_cov=1.002, max_cols_add=400, max_rows_add=2000,
+                                         fine_slack=0.05, alternate=True)
+                        json.dump(res, open(npth, "w"))
+                except MemoryError as e:
+                    defer(cid, e, log, BASE, a.key + "_D2", stats)
+                    continue
                 rec.update(tau=res["tau"], eta=res["tau"] - budget, converged=res["converged"],
                            minmass=res["minmass"], maxcov=res["maxcov"],
                            lp_seconds=round(time.time() - t0, 1))
@@ -147,7 +178,7 @@ def main():
                 else:
                     cert_out = os.path.join(certdir, cid + ".json")
                     cmd = [sys.executable, os.path.join(HERE, "certify.py"), npth, "--s_rat", S_RAT,
-                           "--rounds", str(a.rounds), "--jobs", str(a.jobs), "--depth", str(a.depth),
+                           "--rounds", str(a.rounds), "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)), "--depth", str(a.depth),
                            "--time_limit", str(a.cert_time), "--out", cert_out, "--scale", "0",
                            "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "64", "--loop_cols"]
                     t1 = time.time()

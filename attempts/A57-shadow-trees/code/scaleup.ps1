@@ -42,6 +42,14 @@ function A57Count {
                     $_.CommandLine -like '*certify.py*' -or $_.CommandLine -like '*epsladder.py*' -or
                     $_.CommandLine -like '*sweepfails.py*') }).Count
 }
+function CommitFreeGB {
+  # T19: the binding constraint on this box is the COMMIT limit (RAM 31.7 + pagefile), not RAM.
+  # A worker reserves ~2-4 GB of commit against a ~0.5-1.2 GB working set, so "free physical
+  # memory" badly overstates how much room there is to launch another one.
+  $os = Get-CimInstance Win32_OperatingSystem
+  [math]::Round($os.FreeVirtualMemory / 1MB, 2)
+}
+
 function A56Running {
   @(Get-CimInstance Win32_Process -Filter "Name like 'python%'" |
     Where-Object { $_.CommandLine -like '*final_sweep*' -or $_.CommandLine -like '*A56-sparametric*' }).Count -gt 0
@@ -60,6 +68,15 @@ Note "scaleup started; A57=$(A57Count) A56running=$(A56Running)"
 for ($i = 0; $i -lt 5000; $i++) {
   $cap = if (A56Running) { 3 } else { 5 }
   $now = A57Count
+  # Never start a worker without commit headroom for it.  Budget ~4.5 GB per new worker plus a
+  # 6 GB cushion for OTHER campaigns -- A60 lost a shard to a 38 MiB allocation while A57 held
+  # its reservations, so the cushion is not ours to spend.
+  $commitFree = CommitFreeGB
+  if ($commitFree -lt 10.5) {
+    Note "commit headroom ${commitFree} GB < 10.5 GB: NOT launching (running=$now cap=$cap)"
+    Start-Sleep -Seconds 180
+    continue
+  }
   if ($now -lt $cap -and $qi -lt $queue.Count) {
     $j = $queue[$qi]; $qi++
     & powershell -ExecutionPolicy Bypass -File "$base\code\launch.ps1" -Name $j.n -Shard $j.s `

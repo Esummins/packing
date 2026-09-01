@@ -8,6 +8,19 @@ Two projects:
   the statements that give the `Bool` theorems their geometric meaning (A28). Build artefacts are
   **not** committed and were deleted after A28 for disk (see "Mathlib project" below).
 
+## The formal top-level STATEMENT (A62, checklist F3)
+
+`PackingCertMathlib/TopLevel.lean` defines packings over ℝ² (closed unit squares, pairwise
+disjoint **interiors**, container `[0,s]²`, tan-half configuration layer), `s(11)` as an
+infimum, and **states** the composed optimality theorem `s(11) = ŝ` + uniqueness with every
+leaf family of the live proof plan as a NAMED `axiom` (13 of them: attainment,
+parametrisation, Theorem 1, UB-at-ŝ, root isolation, stratification, per-stratum kills with
+the window fused in, trump5 residual, A22/A36 basin, uniqueness transfer, plus the opaque
+census layer). The three theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved
+from exactly those axioms (`scratch/Axioms.lean` prints them; CI asserts no `sorryAx`).
+Each axiom's docstring records the lab artefact meant to discharge it and its status; the
+ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`.
+
 ## Theorem index (real-geometry statements — A28)
 
 | theorem | file | statement | axioms |

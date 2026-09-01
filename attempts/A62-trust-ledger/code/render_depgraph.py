@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""Render results/depgraph.json as a layered SVG (results/depgraph.svg).
+Stdlib only. Layout: fixed layers by node-id prefix; edges as curves;
+node colour = label; dashed edge = motivation."""
+import json, os, html
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+RES = os.path.join(HERE, "..", "results")
+G = json.load(open(os.path.join(RES, "depgraph.json"), encoding="utf-8"))
+
+COLORS = {
+    "proved-prose": "#2e7d32",          # green
+    "certificate+verifier": "#1565c0",  # blue
+    "cited": "#6a1b9a",                 # purple
+    "conjecture": "#e65100",            # orange
+    "open": "#c62828",                  # red
+}
+
+# layers top->bottom
+LAYERS = [
+    ["TOP"],
+    ["A.D1", "A.PARAM", "A.LB382", "A.S3", "A.UBshat", "A.UNIQ"],
+    ["B.SEL", "B.CENSUS", "B.K1", "B.EXACT", "C.WIN"],
+    ["C.K61", "C.A57", "C.K4TIER", "C.CC2", "C.T5T11", "C.M1", "C.A61"],
+    ["D.TREE", "D.N1", "D.TRAP", "D.P1", "D.LADDER", "D.ALIVE", "D.SLAB", "D.D4", "D.S6", "D.TAUK"],
+    ["A.F2", "V.MEAS", "V.CASE", "V.PARAM", "E.A36", "E.A22", "E.COORD", "E.IV"],
+    ["X.IL19", "X.S3BDBFS", "X.ATLAS", "X.CSTAR", "X.GA531"],
+]
+LAYER_TITLES = [
+    "top-level theorem (TopLevel.lean)",
+    "frame: attainment / parametrisation / bounds / uniqueness",
+    "stratification layer",
+    "per-stratum kills + window transfer",
+    "trump5 residual (A59/A60)",
+    "verifier soundness + rigidity trust chain",
+    "off-tree (motivation only; H11 sweep)",
+]
+
+nodes = {n["id"]: n for n in G["nodes"]}
+W, ROW_H, NH = 1720, 118, 54
+H = ROW_H * len(LAYERS) + 130
+pos = {}
+width = {}
+for r, layer in enumerate(LAYERS):
+    n = len(layer)
+    gap = W / (n + 1)
+    nw = min(196, gap * 0.94)
+    for k, nid in enumerate(layer):
+        pos[nid] = ((k + 1) * gap, 70 + r * ROW_H)
+        width[nid] = nw
+
+out = []
+out.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
+           f'font-family="Segoe UI, sans-serif" font-size="11">')
+out.append(f'<rect width="{W}" height="{H}" fill="white"/>')
+out.append(f'<text x="12" y="22" font-size="15" font-weight="bold">s(11) optimality — lemma dependency graph '
+           f'(A62 / H13, commit {G["meta"]["commit"][:8]}, {G["meta"]["date"]})</text>')
+# legend
+lx = 12
+for lab, col in COLORS.items():
+    out.append(f'<rect x="{lx}" y="32" width="12" height="12" fill="{col}" rx="2"/>')
+    out.append(f'<text x="{lx+16}" y="42">{lab}</text>')
+    lx += 30 + 7 * len(lab)
+out.append(f'<text x="{lx+10}" y="42">solid edge = uses (load-bearing) &#183; dashed = motivation only</text>')
+
+# layer titles
+for r, t in enumerate(LAYER_TITLES):
+    y = 70 + r * ROW_H - NH / 2 - 6
+    out.append(f'<text x="8" y="{y}" font-size="10" fill="#888" font-style="italic">{html.escape(t)}</text>')
+
+# edges under nodes
+for e in G["edges"]:
+    (x1, y1), (x2, y2) = pos[e["from"]], pos[e["to"]]
+    y1 += NH / 2 - NH / 2  # centers
+    dash = ' stroke-dasharray="5,4"' if e["kind"] == "motivation" else ""
+    col = "#bbb" if e["kind"] == "motivation" else "#666"
+    ya, yb = y1 + NH / 2 - NH / 2, y2
+    midy = (y1 + y2) / 2
+    out.append(f'<path d="M {x1:.0f} {y1 + NH/2 - NH/2 + NH/2 - NH/2:.0f} C {x1:.0f} {midy:.0f} {x2:.0f} {midy:.0f} {x2:.0f} {y2:.0f}" '
+               f'fill="none" stroke="{col}" stroke-width="1.1"{dash} opacity="0.75"/>')
+
+# nodes
+for nid, (x, y) in pos.items():
+    n = nodes[nid]
+    NW = width[nid]
+    col = COLORS[n["label"]]
+    title = html.escape(n["title"])
+    note = html.escape(n.get("note", ""))
+    out.append(f'<g><title>{html.escape(nid)} — {title}&#10;[{n["label"]}]&#10;{note}</title>')
+    out.append(f'<rect x="{x-NW/2:.0f}" y="{y-NH/2:.0f}" width="{NW:.0f}" height="{NH}" rx="7" '
+               f'fill="{col}" fill-opacity="0.13" stroke="{col}" stroke-width="1.6"/>')
+    out.append(f'<text x="{x:.0f}" y="{y-NH/2+15:.0f}" text-anchor="middle" font-weight="bold" fill="{col}">{html.escape(nid)}</text>')
+    # wrap the title into <=2 lines scaled to the node width
+    maxc = max(16, int(NW / 5.9))
+    words, lines, cur = n["title"].split(), [], ""
+    for w_ in words:
+        if len(cur) + len(w_) + 1 > maxc and cur:
+            lines.append(cur); cur = w_
+        else:
+            cur = (cur + " " + w_).strip()
+    lines.append(cur)
+    for j, ln in enumerate(lines[:2]):
+        if j == 1 and len(lines) > 2:
+            ln = ln[:30] + "…"
+        out.append(f'<text x="{x:.0f}" y="{y-NH/2+29+j*12:.0f}" text-anchor="middle" fill="#222">{html.escape(ln)}</text>')
+    out.append('</g>')
+
+out.append('</svg>')
+open(os.path.join(RES, "depgraph.svg"), "w", encoding="utf-8").write("\n".join(out))
+print("wrote", os.path.join(RES, "depgraph.svg"))

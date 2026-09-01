@@ -1,0 +1,237 @@
+{
+  "meta": {
+    "attempt": "A62-trust-ledger",
+    "date": "2026-09-01",
+    "commit": "c9980bfcda1582d1e1a20126927a8a7d34ca1bb6",
+    "checklist_items": ["H13", "H11"],
+    "scope": "The LIVE proof plan (A53-A60 stratification composition), i.e. exactly the axiom roster of lean/PackingCertMathlib/PackingCertMathlib/TopLevel.lean. The superseded A38/T0 far-field composition is represented only by its off-tree remnants (X.* nodes). Each node's `lean_axiom` field names the axiom in TopLevel.lean it feeds, when one exists.",
+    "labels": {
+      "proved-prose": "a human-readable proof exists in the repo (docs/proofs/ or attempt notes); not formalised",
+      "certificate+verifier": "established by exact certificate(s) checked by a named verifier",
+      "cited": "external result or trusted third-party component",
+      "conjecture": "labelled conjecture/extrapolated/[NUM] in the repo; NOT usable in the proof",
+      "open": "no proof, no certificate; an obligation"
+    },
+    "edge_kinds": {
+      "uses": "load-bearing dependency: the source cannot be established without the target",
+      "motivation": "informed the search/design only; the source does not logically depend on the target"
+    }
+  },
+  "nodes": [
+    {"id": "TOP", "title": "s(11) = s-hat, equality only for Trump mod G (S1)", "label": "open",
+     "lean": "PackingCert.S11.s_eleven_eq / s_eleven_unique (statement formal, composition proved from axioms)",
+     "note": "The composed theorem. Open until every 'open' descendant below closes."},
+
+    {"id": "A.D1", "title": "Attainment: s(11) is a minimum (D1)", "label": "proved-prose",
+     "lean_axiom": "attained", "source": "docs/proofs/drain_lemma.md D1",
+     "note": "Compactness; two paragraphs. Formalisation cost: closedness of Fits."},
+
+    {"id": "A.PARAM", "title": "Every packing is represented in (cx,cy,t), t in [0,1]", "label": "open",
+     "lean_axiom": "parametrize", "source": "stated in verify_measure.py header + MeasureInt.lean header",
+     "note": "Elementary but load-bearing for EVERY certificate family; same lemma the measure bridge (F2) needs. Never written out."},
+
+    {"id": "A.LB382", "title": "Theorem 1: s(11) >= 3.82", "label": "certificate+verifier",
+     "lean_axiom": "lb_382", "source": "certs/measure_certificate_3.82.json",
+     "note": "Two independent exact verifiers (verify_measure.py; Lean checkMeasureI via native_decide). Bridge lemma is A.F2."},
+
+    {"id": "A.F2", "title": "Measure bridge: checker PASS => mu(Q)>=1 for all Q => no packing", "label": "proved-prose",
+     "source": "certs/verify_measure.py header (the two-line scaling argument); checklist F2",
+     "note": "Prose only; Lean formalisation estimated 3-5 days (A28 notes 7 item 4)."},
+
+    {"id": "A.S3", "title": "s-hat is THE octic root (isolation certificate)", "label": "open",
+     "lean_axiom": "shat_spec", "source": "A03 has the octic + 60-digit solution; no Sturm/sign-change certificate in certs/",
+     "note": "Statement-identity obligation: the Lean composition never uses the octic (shat_spec is absent from #print axioms of s_eleven_eq); it is what makes the theorem MEAN s-hat."},
+
+    {"id": "A.UBshat", "title": "Upper bound AT s-hat exactly (Trump's packing exists at s-hat)", "label": "open",
+     "lean_axiom": "zhat, trump_packs_at_shat",
+     "note": "SURFACED BY F3 (findings F2): the strongest Lean-checked UB is 3.877083591023 > s-hat, and checkPacking demands strictly positive margins, so the current UB certificate family can NEVER certify the contact-closed packing at s-hat. Routes: A22 Krawczyk existence + feasibility (needs F6 t-reparametrised replay), or Fits-closedness + a certificate sequence."},
+
+    {"id": "A.UNIQ", "title": "Uniqueness transfer: EVERY packing at s-hat reaches a stratified representative mod G", "label": "open",
+     "lean_axiom": "unique_transfer",
+     "note": "SURFACED BY F3 (findings F3): the selection lemma produces a DIFFERENT minimiser (slides move squares), so it proves the bound but NOT uniqueness of the original packing. No written lemma implies this. Candidate route: slide paths stay at side s-hat; basin rigidity forces them constant near z-hat."},
+
+    {"id": "B.SEL", "title": "Selection: a k-maximal slide-stuck minimiser exists (H1 / L6 / CC-2)", "label": "proved-prose",
+     "lean_axiom": "stratify (with B.CENSUS)", "source": "A53 notes/lemmas.md [S]; A58 notes/theory.md CC-2/CC-2'",
+     "note": "CAVEAT (H1): degenerate slide cases (slide creating a contact mid-way, ties, sigma-changing slides) not written; not in docs/proofs/."},
+
+    {"id": "B.CENSUS", "title": "Census: skeleton classes are exhaustive (1110 tuples / 163 D4 classes)", "label": "certificate+verifier",
+     "lean_axiom": "stratify (with B.SEL)", "source": "attempts/A53-simple-strata/code/skeletons2.py -> results/skeletons_young.json",
+     "note": "Exact Fractions enumeration, D4-reduced, Trump canary. CAVEAT (H2): ONE implementation; independent re-enumeration + diff still owed. The Young-form definition is also the depgraph's biggest DEFINITIONAL debt: InStratum is opaque in the Lean statement."},
+
+    {"id": "B.K1", "title": "K1: kills climb containment, aliveness descends (H3)", "label": "proved-prose",
+     "source": "A55 registry row (adjoin-the-pin argument); no standalone document",
+     "note": "Two lines, load-bearing for the k>=7 cap and for the sharpness analysis. Needs a docs/proofs/ home."},
+
+    {"id": "B.EXACT", "title": "Exact-skeleton vs pin-monotone bridge", "label": "open",
+     "note": "SURFACED BY F3 (findings F4): certificates natively prove 'no packing whose skeleton CONTAINS these pins'; the stratification needs 'skeleton EXACTLY this class'. For killed classes the monotone form suffices (it is stronger); for the K1-protected survivors the exactness is the ONLY exclusion mechanism and the bridge (K1 + census containment lattice + maximality) exists as scattered A55 cap-logic, not as a lemma."},
+
+    {"id": "C.K61", "title": "61 pin-set kill certificates (k=3: 1, k=4: 8, k=5: 19, k=6: 33)", "label": "certificate+verifier",
+     "lean_axiom": "stratum_kill (part)", "source": "A53/A54/A55(+k3_ext) certs/, verified by verify_case.py at depth 60",
+     "note": "All exact, independently re-verified, corruption-gated. At s0; window coverage tracked at C.WIN."},
+
+    {"id": "C.A57", "title": "k5_11 + k5_16 killed by sub-stratification trees", "label": "certificate+verifier",
+     "lean_axiom": "stratum_kill (part)", "source": "attempts/A57-shadow-trees (interior-zone lemma A57-1, depth-2 trees, 25+ kills)",
+     "note": "CAVEAT: s0-only (the sub-tree kills have no parametric window form yet); pinguard soundness gate closed the A54 substrat.py gap (H5)."},
+
+    {"id": "C.T5T11", "title": "Logic-kill rules T5/T11 (+ pinguard semantics)", "label": "proved-prose",
+     "source": "attempts/A57-shadow-trees/notes/lemmas.md",
+     "note": "H5: the A54 unsoundness is fixed and gated, but the fix is a code invariant + notes, not a standalone lemma document."},
+
+    {"id": "C.K4TIER", "title": "k<=4 / k<=3 tier exclusion (H10)", "label": "open",
+     "lean_axiom": "stratum_kill (part)",
+     "note": "THE LARGEST OPEN LEAF. K1-protected classes ({k4_03,k4_05,k4_06,k4_08,k4_11,corners4} + ten k<=3) can never be killed by pin certificates (A55 sharpness); exclusion must come from skeleton maximality. A58 delivered CC-2 and the 2-crowd theorem; the residue is 'a crowd-pricing problem' with no executed route."},
+
+    {"id": "C.CC2", "title": "CC-2/CC-2' exchange (teleport) lemma + clear-corner 2-crowd", "label": "proved-prose",
+     "source": "attempts/A58-clear-corner/notes/theory.md",
+     "note": "Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it."},
+
+    {"id": "C.WIN", "title": "Window transfer: every kill valid on all of [3.82, s-hat] (H6)", "label": "certificate+verifier",
+     "lean_axiom": "stratum_kill (the forall-s quantifier)", "source": "attempts/A56-sparametric (M1 + 4D parametric certificates)",
+     "note": "PARTIAL: 38/52 strata full-window; 12 s0-only (A61 running); 2 partial slivers (k6_23, k6_07); A57 sub-tree kills s0-only. A56 REFUTED transfer-as-a-principle, so this cannot be factored out as a single lemma — it is a per-certificate obligation, which is why the Lean axiom fuses it into stratum_kill (findings F6)."},
+
+    {"id": "C.M1", "title": "M1: single-corner pin-sets transfer down the window free", "label": "proved-prose",
+     "source": "attempts/A56-sparametric/notes/soundness.md", "note": "Covers 4 classes."},
+
+    {"id": "C.A61", "title": "12 s0-only strata + 2 sliver bands", "label": "open",
+     "source": "A61-window-stragglers (running)", "note": "Bounded compute per A56's recipe, not theory."},
+
+    {"id": "D.TREE", "title": "trump5 residual: zone-tree discharges the stratum into the basin", "label": "open",
+     "lean_axiom": "trump_residual", "source": "A59 program (results/a59_report.md), A60 campaign (running)",
+     "note": "GO-priced finite program; every kill an exact certificate. Open until the campaign closes; window form is D.SLAB."},
+
+    {"id": "D.N1", "title": "N1: zone-assignment collapse (occupancy pigeonhole)", "label": "proved-prose",
+     "source": "docs/proofs/occupancy_collapse.md", "note": "PROVED; H1-style machine-checked component in exact rationals."},
+
+    {"id": "D.TRAP", "title": "Upward trap: all six one-cell Young completions of trump5 certified empty", "label": "certificate+verifier",
+     "source": "A59 (six k=6 PASS certificates)", "note": "Drain cannot escape upward at s0; window form = A56's six-class ticket (partially open, see C.WIN)."},
+
+    {"id": "D.P1", "title": "A59-P1: trump5 packings have a square centred in [1.1,2.777]^2", "label": "certificate+verifier",
+     "source": "A59 pilot", "note": "Exact cert, re-verified depth 60."},
+
+    {"id": "D.LADDER", "title": "Residue ladders terminate into the basin (depth-2/3 conditioning)", "label": "open",
+     "source": "G-A59-10; A60 falsifier",
+     "note": "H11 SUSPECT #1 (was 'extrapolated'). The A60 falsifier VINDICATED the suspicion: at A59's basin radius the ladders DIVERGE (18->620 boxes); they terminate only at the corrected conditioning radius r=4.45e-4 (level 24, 15-35 boxes, all inside the basin). Now measured, not extrapolated; still open until the full campaign closes. Also G-A60-2: the zone-cover route is dead for the outer squares; confinement is the verified fix."},
+
+    {"id": "D.ALIVE", "title": "alivewitness: exact disjoint-family bound tau* >= budget", "label": "certificate+verifier",
+     "source": "attempts/A57-shadow-trees/code/alivewitness.py (lemma in header)",
+     "note": "The ALIVE-side arbiter; strict positive gaps in exact rationals. Carries the load G-A59-12 would otherwise carry."},
+
+    {"id": "D.TAUK", "title": "G-A59-12: tau* = k on Trump-adjacent boxes", "label": "conjecture",
+     "note": "H11 SUSPECT #2. VERDICT: MOTIVATION-ONLY. The load-bearing direction (tau* >= k, which blocks certificates) is witness-certified per node by D.ALIVE; the conjectured equality only informed pricing."},
+
+    {"id": "D.SLAB", "title": "Low-s slab / window form of the residual (H7, G-A59-7)", "label": "open",
+     "note": "Packings with sigma well below s0 inside trump5 are invisible at fixed-s nodes; the residual tree's (K) leaves need their A56-parametric overhead. The Lean axiom trump_residual quantifies over the whole window, which makes this hole explicit."},
+
+    {"id": "D.D4", "title": "D4 reduction machine-checked at the working side (H12)", "label": "open",
+     "source": "A27 verify_tree2.py semantics (3.84)",
+     "note": "Machine-checked at 3.84; the s0 re-run is 'mechanical' but NOT DONE. The residual tree's mod-G bookkeeping (and the f, e produced by trump_residual) rest on it."},
+
+    {"id": "D.S6", "title": "S6: residue boxes land inside the basin in ALL 33 coordinates", "label": "open",
+     "source": "A60 falsifier measurements (level-24 boxes inside the basin slice)",
+     "note": "Measured at conditioning depth 3; the composed containment statement (mod G, all coordinates) is what trump_residual's InBasin conclusion needs in writing."},
+
+    {"id": "E.A36", "title": "Basin theorem: sigma >= s-hat on box(z-hat, 3.7e-3), equality iff z-hat", "label": "certificate+verifier",
+     "lean_axiom": "basin", "source": "attempts/A36-levers (17 IV certificates + a36_check.py re-checker, 339 checks, 5 corruption gates)",
+     "note": "Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius."},
+
+    {"id": "E.A22", "title": "Krawczyk: unique contact solution z-hat, feasible, strict local optimality", "label": "certificate+verifier",
+     "source": "attempts/A22-local-rigidity/results/krawczyk_cert.json + recheck.py",
+     "note": "Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat)."},
+
+    {"id": "E.IV", "title": "mpmath.iv validated interval arithmetic", "label": "cited",
+     "note": "Third-party library inside the rigidity trust chain (unlike the case-LP chain, which is stdlib-only). Checklist F6: either replay in Lean via t-parametrisation or disclose as Python-interval-only."},
+
+    {"id": "E.COORD", "title": "Basin box in t-coordinates (theta -> t re-emission)", "label": "open",
+     "note": "SURFACED BY F3 (findings F5): A22/A36 certify in (c, theta); the composition's configuration space (and every case certificate) is (c, t); dt/dtheta = (1+t^2)/2 != 1, so the radius does not transfer verbatim. rBasin is opaque in the Lean file until the certificate is re-emitted (A28's recommendation, now load-bearing)."},
+
+    {"id": "V.MEAS", "title": "verify_measure.py soundness (+ Lean checkMeasureI evaluation)", "label": "proved-prose",
+     "source": "certs/verify_measure.py header; lean/PackingCert/PackingCert/MeasureInt.lean",
+     "note": "Exact integer B&B; Lean proves the checker evaluates true (native_decide); soundness argument prose. Two independent implementations EXIST for this family (C3 done here only)."},
+
+    {"id": "V.CASE", "title": "verify_case.py soundness (PASS => no packing satisfies the pin hypotheses)", "label": "proved-prose",
+     "source": "attempts/A53-simple-strata/code/verify_case.py header (A13 extension bridge argument)",
+     "note": "Single implementation (C3 OPEN — decides the optimality tree); spec frozen by A62 as docs/specs/case_lp_certificate_v1.md."},
+
+    {"id": "V.PARAM", "title": "verify_param.py soundness (P0-P7)", "label": "proved-prose",
+     "source": "attempts/A56-sparametric/notes/soundness.md",
+     "note": "Imports the audited A53 integer core unmodified; new predicates are point->interval widenings (conservative direction argued in prose). Single implementation."},
+
+    {"id": "X.IL19", "title": "I-L19 flush-mandatory (global-realizability form)", "label": "conjecture",
+     "note": "H11 SUSPECT #3. VERDICT: OFF-TREE / MOTIVATION-ONLY. The A46-A51 flush-free program fed census design for the ABANDONED enumerate-then-solve routes; no leaf of the live stratification composition invokes it. (If the k<=3 route ever reaches for the A46/A48/A50 toolkit, its lemmas apply only under flush-free hypotheses — re-run this sweep then.)"},
+
+    {"id": "X.S3BDBFS", "title": "Seam S3: BDBFS/atlas discovery-loop termination (empirical)", "label": "conjecture",
+     "note": "H11 SUSPECT #4. VERDICT: OFF-TREE. It belonged to the superseded T0/A38 far-field composition. The live plan discharges trump5 into the A36 basin only; atlas completeness and loop termination are not invoked by any live leaf."},
+
+    {"id": "X.ATLAS", "title": "CP-atlas completeness (36 entries = all attractors)", "label": "conjecture",
+     "note": "OFF-TREE for the composition (A51-NEW-0 showed it incomplete and it did not matter). Used as a map, never as a premise."},
+
+    {"id": "X.CSTAR", "title": "A44 C* / C-rep (FJ counting bounds)", "label": "conjecture",
+     "note": "OFF-TREE: census-pricing only, for routes not taken."},
+
+    {"id": "X.GA531", "title": "G-A53-1 s-monotonicity of kills", "label": "conjecture",
+     "note": "SUPERSEDED, deliberately unused: A56's adopted form is parametric verification precisely so that monotonicity is never assumed. No live edge."}
+  ],
+  "edges": [
+    {"from": "TOP", "to": "A.D1", "kind": "uses"},
+    {"from": "TOP", "to": "A.PARAM", "kind": "uses"},
+    {"from": "TOP", "to": "A.LB382", "kind": "uses"},
+    {"from": "TOP", "to": "A.S3", "kind": "uses"},
+    {"from": "TOP", "to": "A.UBshat", "kind": "uses"},
+    {"from": "TOP", "to": "A.UNIQ", "kind": "uses"},
+    {"from": "TOP", "to": "B.SEL", "kind": "uses"},
+    {"from": "TOP", "to": "B.CENSUS", "kind": "uses"},
+    {"from": "TOP", "to": "C.K61", "kind": "uses"},
+    {"from": "TOP", "to": "C.A57", "kind": "uses"},
+    {"from": "TOP", "to": "C.K4TIER", "kind": "uses"},
+    {"from": "TOP", "to": "C.WIN", "kind": "uses"},
+    {"from": "TOP", "to": "D.TREE", "kind": "uses"},
+    {"from": "TOP", "to": "E.A36", "kind": "uses"},
+    {"from": "A.LB382", "to": "A.F2", "kind": "uses"},
+    {"from": "A.LB382", "to": "V.MEAS", "kind": "uses"},
+    {"from": "A.LB382", "to": "A.PARAM", "kind": "uses"},
+    {"from": "A.UBshat", "to": "E.A22", "kind": "uses"},
+    {"from": "A.UNIQ", "to": "C.CC2", "kind": "motivation"},
+    {"from": "A.UNIQ", "to": "E.A36", "kind": "uses"},
+    {"from": "B.CENSUS", "to": "B.SEL", "kind": "uses"},
+    {"from": "C.K61", "to": "V.CASE", "kind": "uses"},
+    {"from": "C.K61", "to": "B.K1", "kind": "uses"},
+    {"from": "C.A57", "to": "V.CASE", "kind": "uses"},
+    {"from": "C.A57", "to": "C.T5T11", "kind": "uses"},
+    {"from": "C.A57", "to": "D.ALIVE", "kind": "uses"},
+    {"from": "C.K4TIER", "to": "C.CC2", "kind": "uses"},
+    {"from": "C.K4TIER", "to": "B.K1", "kind": "uses"},
+    {"from": "C.K4TIER", "to": "B.EXACT", "kind": "uses"},
+    {"from": "C.WIN", "to": "C.M1", "kind": "uses"},
+    {"from": "C.WIN", "to": "V.PARAM", "kind": "uses"},
+    {"from": "C.WIN", "to": "C.A61", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.N1", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.TRAP", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.P1", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.LADDER", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.ALIVE", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.SLAB", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.D4", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.S6", "kind": "uses"},
+    {"from": "D.TREE", "to": "V.CASE", "kind": "uses"},
+    {"from": "D.TREE", "to": "D.TAUK", "kind": "motivation"},
+    {"from": "D.ALIVE", "to": "V.CASE", "kind": "uses"},
+    {"from": "D.S6", "to": "E.COORD", "kind": "uses"},
+    {"from": "E.A36", "to": "E.A22", "kind": "uses"},
+    {"from": "E.A36", "to": "E.IV", "kind": "uses"},
+    {"from": "E.A36", "to": "E.COORD", "kind": "uses"},
+    {"from": "E.A22", "to": "E.IV", "kind": "uses"},
+    {"from": "D.TREE", "to": "X.ATLAS", "kind": "motivation"},
+    {"from": "C.K4TIER", "to": "X.IL19", "kind": "motivation"}
+  ],
+  "h11_sweep": {
+    "method": "walk 'uses' edges from TOP; flag every reachable node labelled conjecture; classify each named suspect load-bearing vs motivation-only",
+    "named_suspects": {
+      "G-A59-10 (residue ladders, 'extrapolated')": "WAS load-bearing and WAS wrong as extrapolated (A60 falsifier: divergence at the stated radius); the corrected, conditioning-radius form is now MEASURED and carried inside the open node D.LADDER. No conjecture remains, but the node is open until A60 closes.",
+      "G-A59-12 (tau* = k)": "motivation-only; the load-bearing direction is witness-certified per node (D.ALIVE).",
+      "I-L19 (flush-mandatory)": "off-tree; no live leaf depends on it.",
+      "seam S3 (search termination empirical)": "off-tree; belonged to the superseded far-field composition."
+    },
+    "conjectures_reachable_by_uses": [],
+    "verdict": "ZERO nodes labelled 'conjecture' are load-bearing in the live composition. The go/no-go criterion 'dependency graph has zero conjecture nodes' is MET on labels — but 12 nodes are labelled 'open', of which three (A.UBshat, A.UNIQ, B.EXACT) were only surfaced by writing the formal statement (F3). The proof's distance-to-done is measured in open nodes, not conjectures: A.PARAM, A.S3, A.UBshat, A.UNIQ, A.F2(prose->Lean is F-track, prose itself fine), B.EXACT, C.K4TIER (largest), C.A61, D.TREE, D.LADDER, D.SLAB, D.D4, D.S6, E.COORD."
+  }
+}

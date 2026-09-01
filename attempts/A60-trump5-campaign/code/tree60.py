@@ -263,6 +263,27 @@ def run_eps_geo(tag, margins=(0.002, 0.004), cert_time=240.0, depth=56, jobs=2):
     return dict(verdict="FAIL(eps_geo retries exhausted) -> deepen", eps_geo=steps)
 
 
+
+# ------------------------------------------------------------------ allocation-failure resilience
+#
+# A57 T18 (BLAS pinning) removes one cause of spurious allocation failures, but NOT the other:
+# this machine's COMMIT limit is 61.0 GB (31.7 GB RAM + a 30 GB pagefile cap) and the lab's other
+# attempts sit near it, so a worker can still fail a modest allocation (measured: 37.9 MiB for a
+# (150544, 33) coverage array, killing cover shard 1/2 outright AFTER the T18 fix was verified
+# active at 1-4 threads).  A single failed allocation must not take down a shard with hundreds of
+# queued children.  Deferred nodes are written to their own jsonl and deliberately NOT added to
+# the phase's done-set, so a later pass re-attempts them.
+def defer(phase, j, tag, exc, extra=None):
+    rec = dict(tag=tag, phase=phase, verdict="DEFERRED(%s)" % type(exc).__name__,
+               error=str(exc)[:300], ts=time.strftime("%Y-%m-%d %H:%M:%S"))
+    if extra:
+        rec.update(extra)
+    with open(os.path.join(RES, "a60_deferred_j%d.jsonl" % j), "a") as f:
+        f.write(json.dumps(rec) + chr(10))
+    logline("  DEFERRED %s: %s (node NOT marked done; a later pass retries it)" % (tag, exc))
+    return rec
+
+
 # ------------------------------------------------------------------ PHASE: zone cover
 def build_cover(w=0.15, nth=8, a_min=0.34, cw=0.6, zone="interior"):
     from tree57 import cover
@@ -339,10 +360,17 @@ def phase_cover(cond_names, shard="0/1", w=0.15, nth=8, a_min=0.34, lp_time=300.
             logline("wall reached; stopping cleanly")
             break
         b = Box.from_json(r["box"])
-        rec = kill(sink, tag, b, cond, [], budget,
-                   dict(kind="YES-cover", depth_j=j, pinguard="ok", a=float(b.core().a),
-                        hugs=r["hugs"], k=r["k"], cond=list(cond_names), level=0),
-                   lp_time=lp_time, cert_time=cert_time)
+        try:
+            rec = kill(sink, tag, b, cond, [], budget,
+                       dict(kind="YES-cover", depth_j=j, pinguard="ok", a=float(b.core().a),
+                            hugs=r["hugs"], k=r["k"], cond=list(cond_names), level=0),
+                       lp_time=lp_time, cert_time=cert_time)
+        except MemoryError as e:          # numpy's _ArrayMemoryError subclasses MemoryError
+            defer("cover", j, tag, e, dict(box=r["box"], budget=budget))
+            st["deferred"] = st.get("deferred", 0) + 1
+            flush()
+            time.sleep(30.0)              # let the machine recover before the next node
+            continue
         v = (rec or {}).get("verdict", "")
         st["done"] += 1
         st["passed"] += 1 if v == "PASS" else 0
@@ -497,10 +525,17 @@ def phase_ladder(cond_names, levels=26, shard="0/1", lp_time=300.0, cert_time=24
             logline("wall reached; stopping cleanly")
             break
         b = Box.from_json(q["box"])
-        rec = kill(sink, tag, b, cond, [], budget,
-                   dict(kind="YES-ladder", depth_j=j, level=level, pinguard="ok",
-                        a=float(b.core().a), hugs=q["hugs"], k=q["k"], cond=list(cond_names)),
-                   lp_time=lp_time, cert_time=cert_time)
+        try:
+            rec = kill(sink, tag, b, cond, [], budget,
+                       dict(kind="YES-ladder", depth_j=j, level=level, pinguard="ok",
+                            a=float(b.core().a), hugs=q["hugs"], k=q["k"], cond=list(cond_names)),
+                       lp_time=lp_time, cert_time=cert_time)
+        except MemoryError as e:
+            defer("ladder", j, tag, e, dict(box=q["box"], budget=budget, level=level))
+            st["deferred"] = st.get("deferred", 0) + 1
+            flush()
+            time.sleep(30.0)
+            continue
         v = (rec or {}).get("verdict", "")
         st["done"] += 1
         st["passed"] += 1 if v == "PASS" else 0
@@ -597,10 +632,17 @@ def phase_deepen(cond_names, source, rnd=1, shard="0/1", lp_time=300.0, cert_tim
             st["done"] += 1
             flush()
             continue
-        rec = kill(sink, tag, sb, cond, [], budget,
-                   dict(kind="YES-deepen", depth_j=j, round=rnd, parent=ptag, pinguard="ok",
-                        a=float(sb.core().a), hugs=g["hugs"], k=g["k"], cond=list(cond_names)),
-                   lp_time=lp_time, cert_time=cert_time)
+        try:
+            rec = kill(sink, tag, sb, cond, [], budget,
+                       dict(kind="YES-deepen", depth_j=j, round=rnd, parent=ptag, pinguard="ok",
+                            a=float(sb.core().a), hugs=g["hugs"], k=g["k"], cond=list(cond_names)),
+                       lp_time=lp_time, cert_time=cert_time)
+        except MemoryError as e:
+            defer("deepen", j, tag, e, dict(box=sb.to_json(), budget=budget, parent=ptag))
+            st["deferred"] = st.get("deferred", 0) + 1
+            flush()
+            time.sleep(30.0)
+            continue
         v = (rec or {}).get("verdict", "")
         st["done"] += 1
         st["passed"] += 1 if v == "PASS" else 0
@@ -648,6 +690,28 @@ def scoreboard(out="a60_scoreboard.json"):
                         kill_rate=(round(c["PASS"] / float(c["PASS"] + c["LP-alive"] +
                                                            c["cert-FAIL"]), 4)
                                    if (c["PASS"] + c["LP-alive"] + c["cert-FAIL"]) else None))
+    # deferred nodes (allocation failures) are UNRESOLVED work, surfaced separately so they can
+    # never be mistaken for progress
+    deferred = {}
+    for p in sorted(os.listdir(RES)):
+        if p.startswith("a60_deferred_") and p.endswith(".jsonl"):
+            tags = {}
+            for line in open(os.path.join(RES, p)):
+                try:
+                    r = json.loads(line)
+                except Exception:
+                    continue
+                tags[r.get("tag")] = r.get("verdict")
+            resolved = set()
+            for q in os.listdir(RES):
+                if q.startswith("a60_") and q.endswith(".jsonl") and not q.startswith("a60_deferred"):
+                    for line in open(os.path.join(RES, q)):
+                        try:
+                            resolved.add(json.loads(line).get("tag"))
+                        except Exception:
+                            pass
+            deferred[p] = dict(events=len(tags),
+                               still_unresolved=sorted(set(tags) - resolved))
     prog = {}
     for p in sorted(os.listdir(PROG)):
         if p.endswith(".json"):
@@ -655,7 +719,8 @@ def scoreboard(out="a60_scoreboard.json"):
                 prog[p] = json.load(open(os.path.join(PROG, p)))
             except Exception:
                 pass
-    res = dict(generated=time.strftime("%Y-%m-%d %H:%M:%S"), phases=board, progress=prog)
+    res = dict(generated=time.strftime("%Y-%m-%d %H:%M:%S"), phases=board, deferred=deferred,
+               progress=prog)
     json.dump(res, open(os.path.join(RES, out), "w"), indent=1)
     return res
 

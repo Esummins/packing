@@ -478,13 +478,14 @@ them, and headroom does not predict which:
 | k5_11_interior_Y0107 | 1.1111 | 0.002 | **PASS** (re-verified independently at depth 60) |
 | k5_11_interior_Y0467 | 1.0795 | 0.002 | **PASS** (941.6 s, daemon, unattended) |
 | k5_16_interior_Y0431 | 1.1111 | 0.002 | **PASS** (1105.3 s, daemon, unattended) |
+| k5_11_interior_Y0041_**D02** | 1.1538 | 0.002 | **PASS** (1294.6 s) — a *depth-2* sub-box |
 | **k5_11_interior_Y0485** | **1.1111** | 0.002, 0.004 | **FAIL** — both exhausted (873.5 s) → depth 2 |
 | **k5_16_interior_Y0461** | 1.0169 | 0.0005, 0.001 | **FAIL** — both exhausted → depth 2 |
 | k5_11_interior_Y0461 | 1.0169 | 0.002, 0.004 (**wrong**, T16 wants 0.0005/0.001) | invalid trial; re-run pending |
 
-**3 of 5 at correct margins** (the sixth trial used the wrong margins and does not count).  The
-rate has fallen with every batch — 4/4, then 3/4, now 3/5 — so treat it as "roughly half" and not
-better.  Y0485 in particular has exactly the ceiling of two that passed, so **good headroom is
+**4 of 6 at correct margins** (a seventh trial used the wrong margins and does not count).  The
+rate has wobbled with every batch — 4/4, 3/4, 3/5, now 4/6 — so treat it as "roughly two thirds,
+maybe half" and do not quote it as settled until the cover is done.  Y0485 in particular has exactly the ceiling of two that passed, so **good headroom is
 NECESSARY for the lever (T16) but nowhere near sufficient**; the gate is not a predictor of
 success, it only stops hopeless cases burning 30 minutes.  Depth 2 remains the backstop, and on
 current evidence it is the workhorse rather than the exception.
@@ -524,3 +525,86 @@ the contention was pure cost.
 and a core budget is not a memory budget.  Check free memory before adding a job, and do not read
 "9.9 GB free" as "safe to launch" — the failure mode here is per-process thread arenas, which a
 free-memory check does not see at all.
+
+
+## T19 [M] — COMMIT, not RAM, is the machine's binding constraint (A60 relay)
+
+A60 measured an A57 `certify.py` reserving **6.7 GB of commit against a 1.75 GB working set**
+(~4x) and two `tree57.py` at ~4 GB commit each, and lost its shard 1/2 to a 38 MiB allocation
+while A57 held those reservations.  T18's BLAS pinning was necessary but not sufficient.
+Confirmed here: **commit limit 61.0 GB, 57.9 GB used, 3.1 GB free** at the time of measurement,
+with A57 workers at commit/working-set ratios of 3.25, 4.07, 4.60 and 30.
+
+**Where the overreserve comes from — measured, not guessed.**
+
+    python -c "import numpy"   ->  working set 27 MB,  COMMIT 628 MB   (23x)
+
+Per-process *baseline* dominates.  Two consequences, both fixed:
+
+1. **Process fan-out.**  `verify_case.py` runs `mp.Pool(--jobs)`, so a certify at `--jobs 2` was
+   `certify.py` + `verify_case.py` + 2 pool workers = 4 processes, ~2.5 GB of commit in baselines
+   before touching a byte of data.  `--jobs 1` takes verify_case's in-process branch and spawns
+   nothing.  `VERIFY_JOBS_CAP = 1` now caps the verifier fan-out in `tree57.py`, `deepen.py` and
+   `sweepfails.py`.  **Saving ~1.3 GB of commit per concurrent certify.**
+2. **Peak numpy temporaries become permanent commit.**  Windows keeps the commit charge on a
+   freed heap block, so a process's steady commit tracks its *peak* allocation, not its current
+   one.  The two oracle loops in `lpbox.py` were chunked at 1e7 / 2e7 elements — 80 / 160 MB per
+   temporary, with several live at once.  `A57_CHUNK` (env `A57_ORACLE_CHUNK`, default 2e6) cuts
+   those to 16 / 32 MB.
+
+**The chunk change is result-neutral, bit for bit**, and this was verified rather than asserted:
+every output element is a dot product over the full inner dimension and each iteration writes a
+disjoint output slice, so only the loop count changes.  Re-running the k5_16 (2.0084, 2.0084, 86 deg)
+probe after the change reproduced the earlier run exactly — tau = 3.000000, converged,
+minmass 1.000000, maxcov 1.000000, **rows 144, orbits 3486** — identical on every field.
+This is the one A57 edit to A54's `lpbox.py`; it is flagged in the file itself.
+
+**Defer instead of dying.**  Adopted A60's `tree60.defer()`.  `tree57.py` and `deepen.py` now
+catch `MemoryError` (numpy's `_ArrayMemoryError` subclasses it) around the node solve, append the
+node to `results/deferred_<key>.jsonl`, sleep 30 s and continue — **without** writing a summary
+record, so the node stays out of `done` and is retried on the next pass.  Deferring can only
+postpone work, never assert a verdict, so it is safe by construction.  Previously a transient
+spike killed the worker and took its whole remaining queue with it (T18: one tree shard and one
+deepen job lost together).
+
+**The scaler is now commit-aware.**  Process count was never the right budget: `scaleup.ps1`
+reads `Win32_OperatingSystem.FreeVirtualMemory` (which on Windows *is* commit-available;
+`TotalVirtualMemorySize` is the commit limit) and refuses to launch below **10.5 GB** — roughly
+4.5 GB for the new worker plus a 6 GB cushion that belongs to the other campaigns, not to A57.
+Measured immediately after: limit 58.4 GB, used 52.2 GB, **available 6.19 GB**, so the gate is
+correctly holding launches off right now.
+
+**Standing rule:** free *physical* memory is not the number to check before launching an A57
+worker.  Check commit-available.  T18's crash looked like a RAM problem and was not; this one
+looked like a per-job problem and was per-process.
+
+
+## T19b [M] — the recycle, measured per shard
+
+Both level-1 shards were started before the T19 trims, so they still carried `--jobs 2` verifier
+fan-out and the 1e7/2e7 oracle chunks.  Recycled **one at a time** (coordinator's call), so at
+most one in-flight child is lost at a time and each shard gives a clean before/after:
+
+| shard | commit before | commit after | peak before | peak after | resumed at |
+|---|---|---|---|---|---|
+| 1/6 | 4.89 GB | 4.27 GB | **5.86 GB** | **4.66 GB** (−20 %) | done = 50 |
+| 0/6 | 3.86 GB | 3.82 GB | **4.43 GB** | **3.98 GB** (−10 %) | done = 106 |
+
+Peak commit across the pair: **10.29 -> 8.64 GB (−1.65 GB)**.  Commit-available over the whole
+operation went 4.32 GB -> 10.61 GB, most of it simply from stopping the two old processes
+(4.87 GB and 3.69 GB released respectively) and the rest from the trimmed relaunch.
+
+**Caveat on the headline number.**  Shard 1/6 measured 3.69 GB commit / 3.96 GB peak 45 s after
+relaunch, which would have read as −1.90 GB peak; by the time it had warmed up it settled at
+4.27 / 4.66, i.e. −1.20 GB.  A freshly launched worker has not yet hit its peak, so **do not
+quote a commit figure from a process that has not been through several children.**  The table
+above uses settled figures.
+
+The verifier fan-out saving (~1.3 GB per concurrent certify, from `VERIFY_JOBS_CAP = 1`) is
+*not* in these numbers: it is per-certify and neither shard was in a certify when measured.
+Both shards resumed correctly — finished children skipped, column pool re-folded (3860 and 4471
+atoms).  Note 0/6's jsonl has 110 lines but resumed at done = 106: `done` is keyed by child id
+and four lines are superseded records (e.g. Y0107's T14 correction), which is the intended
+behaviour of the last-record-wins convention.
+
+The `sweepfails` daemon was restarted once commit-available cleared 10 GB, as agreed.

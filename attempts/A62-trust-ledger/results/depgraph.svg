@@ -1,0 +1,321 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="956" font-family="Segoe UI, sans-serif" font-size="11">
+<rect width="1720" height="956" fill="white"/>
+<text x="12" y="22" font-size="15" font-weight="bold">s(11) optimality — lemma dependency graph (A62 / H13, commit c9980bfc, 2026-09-01)</text>
+<rect x="12" y="32" width="12" height="12" fill="#2e7d32" rx="2"/>
+<text x="28" y="42">proved-prose</text>
+<rect x="126" y="32" width="12" height="12" fill="#1565c0" rx="2"/>
+<text x="142" y="42">certificate+verifier</text>
+<rect x="296" y="32" width="12" height="12" fill="#6a1b9a" rx="2"/>
+<text x="312" y="42">cited</text>
+<rect x="361" y="32" width="12" height="12" fill="#e65100" rx="2"/>
+<text x="377" y="42">conjecture</text>
+<rect x="461" y="32" width="12" height="12" fill="#c62828" rx="2"/>
+<text x="477" y="42">open</text>
+<text x="529" y="42">solid edge = uses (load-bearing) &#183; dashed = motivation only</text>
+<text x="8" y="37.0" font-size="10" fill="#888" font-style="italic">top-level theorem (TopLevel.lean)</text>
+<text x="8" y="155.0" font-size="10" fill="#888" font-style="italic">frame: attainment / parametrisation / bounds / uniqueness</text>
+<text x="8" y="273.0" font-size="10" fill="#888" font-style="italic">stratification layer</text>
+<text x="8" y="391.0" font-size="10" fill="#888" font-style="italic">per-stratum kills + window transfer</text>
+<text x="8" y="509.0" font-size="10" fill="#888" font-style="italic">trump5 residual (A59/A60)</text>
+<text x="8" y="627.0" font-size="10" fill="#888" font-style="italic">verifier soundness + rigidity trust chain</text>
+<text x="8" y="745.0" font-size="10" fill="#888" font-style="italic">off-tree (motivation only; H11 sweep)</text>
+<path d="M 860 70 C 860 129 246 129 246 188" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 129 491 129 491 188" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 129 737 129 737 188" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 129 983 129 983 188" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 129 1229 129 1229 188" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 129 1474 129 1474 188" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 188 287 188 287 306" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 188 573 188 573 306" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 247 215 247 215 424" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 247 430 247 430 424" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 247 645 247 645 424" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 188 1433 188 1433 306" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 306 156 306 156 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 860 70 C 860 365 956 365 956 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 737 188 C 737 424 191 424 191 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 737 188 C 737 424 382 424 382 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 737 188 C 737 188 491 188 491 188" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 1229 188 C 1229 424 1147 424 1147 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 1474 188 C 1474 306 860 306 860 424" fill="none" stroke="#bbb" stroke-width="1.1" stroke-dasharray="5,4" opacity="0.75"/>
+<path d="M 1474 188 C 1474 424 956 424 956 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 573 306 C 573 306 287 306 287 306" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 215 424 C 215 542 573 542 573 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 215 424 C 215 365 860 365 860 306" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 430 424 C 430 542 573 542 573 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 430 424 C 430 424 1075 424 1075 424" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 430 424 C 430 483 938 483 938 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 645 424 C 645 424 860 424 860 424" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 645 424 C 645 365 860 365 860 306" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 645 424 C 645 365 1147 365 1147 306" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 1433 306 C 1433 365 1290 365 1290 424" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 1433 306 C 1433 483 764 483 764 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 1433 306 C 1433 365 1505 365 1505 424" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 313 542 313 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 469 542 469 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 625 542 625 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 782 542 782 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 938 542 938 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 1095 542 1095 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 1251 542 1251 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 1407 542 1407 542" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 601 573 601 573 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 542 1564 542 1564 542" fill="none" stroke="#bbb" stroke-width="1.1" stroke-dasharray="5,4" opacity="0.75"/>
+<path d="M 938 542 C 938 601 573 601 573 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 1407 542 C 1407 601 1338 601 1338 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 956 660 C 956 660 1147 660 1147 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 956 660 C 956 660 1529 660 1529 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 956 660 C 956 660 1338 660 1338 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 1147 660 C 1147 660 1529 660 1529 660" fill="none" stroke="#666" stroke-width="1.1" opacity="0.75"/>
+<path d="M 156 542 C 156 660 860 660 860 778" fill="none" stroke="#bbb" stroke-width="1.1" stroke-dasharray="5,4" opacity="0.75"/>
+<path d="M 645 424 C 645 601 287 601 287 778" fill="none" stroke="#bbb" stroke-width="1.1" stroke-dasharray="5,4" opacity="0.75"/>
+<g><title>TOP — s(11) = s-hat, equality only for Trump mod G (S1)&#10;[open]&#10;The composed theorem. Open until every &#x27;open&#x27; descendant below closes.</title>
+<rect x="762" y="43" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="860" y="58" text-anchor="middle" font-weight="bold" fill="#c62828">TOP</text>
+<text x="860" y="72" text-anchor="middle" fill="#222">s(11) = s-hat, equality only for</text>
+<text x="860" y="84" text-anchor="middle" fill="#222">Trump mod G (S1)</text>
+</g>
+<g><title>A.D1 — Attainment: s(11) is a minimum (D1)&#10;[proved-prose]&#10;Compactness; two paragraphs. Formalisation cost: closedness of Fits.</title>
+<rect x="148" y="161" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="246" y="176" text-anchor="middle" font-weight="bold" fill="#2e7d32">A.D1</text>
+<text x="246" y="190" text-anchor="middle" fill="#222">Attainment: s(11) is a minimum</text>
+<text x="246" y="202" text-anchor="middle" fill="#222">(D1)</text>
+</g>
+<g><title>A.PARAM — Every packing is represented in (cx,cy,t), t in [0,1]&#10;[open]&#10;Elementary but load-bearing for EVERY certificate family; same lemma the measure bridge (F2) needs. Never written out.</title>
+<rect x="393" y="161" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="491" y="176" text-anchor="middle" font-weight="bold" fill="#c62828">A.PARAM</text>
+<text x="491" y="190" text-anchor="middle" fill="#222">Every packing is represented in</text>
+<text x="491" y="202" text-anchor="middle" fill="#222">(cx,cy,t), t in [0,1]</text>
+</g>
+<g><title>A.LB382 — Theorem 1: s(11) &gt;= 3.82&#10;[certificate+verifier]&#10;Two independent exact verifiers (verify_measure.py; Lean checkMeasureI via native_decide). Bridge lemma is A.F2.</title>
+<rect x="639" y="161" width="196" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="737" y="176" text-anchor="middle" font-weight="bold" fill="#1565c0">A.LB382</text>
+<text x="737" y="190" text-anchor="middle" fill="#222">Theorem 1: s(11) &gt;= 3.82</text>
+</g>
+<g><title>A.S3 — s-hat is THE octic root (isolation certificate)&#10;[open]&#10;Statement-identity obligation: the Lean composition never uses the octic (shat_spec is absent from #print axioms of s_eleven_eq); it is what makes the theorem MEAN s-hat.</title>
+<rect x="885" y="161" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="983" y="176" text-anchor="middle" font-weight="bold" fill="#c62828">A.S3</text>
+<text x="983" y="190" text-anchor="middle" fill="#222">s-hat is THE octic root</text>
+<text x="983" y="202" text-anchor="middle" fill="#222">(isolation certificate)</text>
+</g>
+<g><title>A.UBshat — Upper bound AT s-hat exactly (Trump&#x27;s packing exists at s-hat)&#10;[open]&#10;SURFACED BY F3 (findings F2): the strongest Lean-checked UB is 3.877083591023 &gt; s-hat, and checkPacking demands strictly positive margins, so the current UB certificate family can NEVER certify the contact-closed packing at s-hat. Routes: A22 Krawczyk existence + feasibility (needs F6 t-reparametrised replay), or Fits-closedness + a certificate sequence.</title>
+<rect x="1131" y="161" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="1229" y="176" text-anchor="middle" font-weight="bold" fill="#c62828">A.UBshat</text>
+<text x="1229" y="190" text-anchor="middle" fill="#222">Upper bound AT s-hat exactly</text>
+<text x="1229" y="202" text-anchor="middle" fill="#222">(Trump&#x27;s packing exists at s-hat)</text>
+</g>
+<g><title>A.UNIQ — Uniqueness transfer: EVERY packing at s-hat reaches a stratified representative mod G&#10;[open]&#10;SURFACED BY F3 (findings F3): the selection lemma produces a DIFFERENT minimiser (slides move squares), so it proves the bound but NOT uniqueness of the original packing. No written lemma implies this. Candidate route: slide paths stay at side s-hat; basin rigidity forces them constant near z-hat.</title>
+<rect x="1376" y="161" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="1474" y="176" text-anchor="middle" font-weight="bold" fill="#c62828">A.UNIQ</text>
+<text x="1474" y="190" text-anchor="middle" fill="#222">Uniqueness transfer: EVERY</text>
+<text x="1474" y="202" text-anchor="middle" fill="#222">packing at s-hat reaches a…</text>
+</g>
+<g><title>B.SEL — Selection: a k-maximal slide-stuck minimiser exists (H1 / L6 / CC-2)&#10;[proved-prose]&#10;CAVEAT (H1): degenerate slide cases (slide creating a contact mid-way, ties, sigma-changing slides) not written; not in docs/proofs/.</title>
+<rect x="189" y="279" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="287" y="294" text-anchor="middle" font-weight="bold" fill="#2e7d32">B.SEL</text>
+<text x="287" y="308" text-anchor="middle" fill="#222">Selection: a k-maximal</text>
+<text x="287" y="320" text-anchor="middle" fill="#222">slide-stuck minimiser exists (…</text>
+</g>
+<g><title>B.CENSUS — Census: skeleton classes are exhaustive (1110 tuples / 163 D4 classes)&#10;[certificate+verifier]&#10;Exact Fractions enumeration, D4-reduced, Trump canary. CAVEAT (H2): ONE implementation; independent re-enumeration + diff still owed. The Young-form definition is also the depgraph&#x27;s biggest DEFINITIONAL debt: InStratum is opaque in the Lean statement.</title>
+<rect x="475" y="279" width="196" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="573" y="294" text-anchor="middle" font-weight="bold" fill="#1565c0">B.CENSUS</text>
+<text x="573" y="308" text-anchor="middle" fill="#222">Census: skeleton classes are</text>
+<text x="573" y="320" text-anchor="middle" fill="#222">exhaustive (1110 tuples / 163 …</text>
+</g>
+<g><title>B.K1 — K1: kills climb containment, aliveness descends (H3)&#10;[proved-prose]&#10;Two lines, load-bearing for the k&gt;=7 cap and for the sharpness analysis. Needs a docs/proofs/ home.</title>
+<rect x="762" y="279" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="860" y="294" text-anchor="middle" font-weight="bold" fill="#2e7d32">B.K1</text>
+<text x="860" y="308" text-anchor="middle" fill="#222">K1: kills climb containment,</text>
+<text x="860" y="320" text-anchor="middle" fill="#222">aliveness descends (H3)</text>
+</g>
+<g><title>B.EXACT — Exact-skeleton vs pin-monotone bridge&#10;[open]&#10;SURFACED BY F3 (findings F4): certificates natively prove &#x27;no packing whose skeleton CONTAINS these pins&#x27;; the stratification needs &#x27;skeleton EXACTLY this class&#x27;. For killed classes the monotone form suffices (it is stronger); for the K1-protected survivors the exactness is the ONLY exclusion mechanism and the bridge (K1 + census containment lattice + maximality) exists as scattered A55 cap-logic, not as a lemma.</title>
+<rect x="1049" y="279" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="1147" y="294" text-anchor="middle" font-weight="bold" fill="#c62828">B.EXACT</text>
+<text x="1147" y="308" text-anchor="middle" fill="#222">Exact-skeleton vs pin-monotone</text>
+<text x="1147" y="320" text-anchor="middle" fill="#222">bridge</text>
+</g>
+<g><title>C.WIN — Window transfer: every kill valid on all of [3.82, s-hat] (H6)&#10;[certificate+verifier]&#10;PARTIAL: 38/52 strata full-window; 12 s0-only (A61 running); 2 partial slivers (k6_23, k6_07); A57 sub-tree kills s0-only. A56 REFUTED transfer-as-a-principle, so this cannot be factored out as a single lemma — it is a per-certificate obligation, which is why the Lean axiom fuses it into stratum_kill (findings F6).</title>
+<rect x="1335" y="279" width="196" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="1433" y="294" text-anchor="middle" font-weight="bold" fill="#1565c0">C.WIN</text>
+<text x="1433" y="308" text-anchor="middle" fill="#222">Window transfer: every kill valid</text>
+<text x="1433" y="320" text-anchor="middle" fill="#222">on all of [3.82, s-hat] (H6)</text>
+</g>
+<g><title>C.K61 — 61 pin-set kill certificates (k=3: 1, k=4: 8, k=5: 19, k=6: 33)&#10;[certificate+verifier]&#10;All exact, independently re-verified, corruption-gated. At s0; window coverage tracked at C.WIN.</title>
+<rect x="117" y="397" width="196" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="215" y="412" text-anchor="middle" font-weight="bold" fill="#1565c0">C.K61</text>
+<text x="215" y="426" text-anchor="middle" fill="#222">61 pin-set kill certificates</text>
+<text x="215" y="438" text-anchor="middle" fill="#222">(k=3: 1, k=4: 8, k=5: 19, k=6:…</text>
+</g>
+<g><title>C.A57 — k5_11 + k5_16 killed by sub-stratification trees&#10;[certificate+verifier]&#10;CAVEAT: s0-only (the sub-tree kills have no parametric window form yet); pinguard soundness gate closed the A54 substrat.py gap (H5).</title>
+<rect x="332" y="397" width="196" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="430" y="412" text-anchor="middle" font-weight="bold" fill="#1565c0">C.A57</text>
+<text x="430" y="426" text-anchor="middle" fill="#222">k5_11 + k5_16 killed by</text>
+<text x="430" y="438" text-anchor="middle" fill="#222">sub-stratification trees</text>
+</g>
+<g><title>C.K4TIER — k&lt;=4 / k&lt;=3 tier exclusion (H10)&#10;[open]&#10;THE LARGEST OPEN LEAF. K1-protected classes ({k4_03,k4_05,k4_06,k4_08,k4_11,corners4} + ten k&lt;=3) can never be killed by pin certificates (A55 sharpness); exclusion must come from skeleton maximality. A58 delivered CC-2 and the 2-crowd theorem; the residue is &#x27;a crowd-pricing problem&#x27; with no executed route.</title>
+<rect x="547" y="397" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="645" y="412" text-anchor="middle" font-weight="bold" fill="#c62828">C.K4TIER</text>
+<text x="645" y="426" text-anchor="middle" fill="#222">k&lt;=4 / k&lt;=3 tier exclusion (H10)</text>
+</g>
+<g><title>C.CC2 — CC-2/CC-2&#x27; exchange (teleport) lemma + clear-corner 2-crowd&#10;[proved-prose]&#10;Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it.</title>
+<rect x="762" y="397" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="860" y="412" text-anchor="middle" font-weight="bold" fill="#2e7d32">C.CC2</text>
+<text x="860" y="426" text-anchor="middle" fill="#222">CC-2/CC-2&#x27; exchange (teleport)</text>
+<text x="860" y="438" text-anchor="middle" fill="#222">lemma + clear-corner 2-crowd</text>
+</g>
+<g><title>C.T5T11 — Logic-kill rules T5/T11 (+ pinguard semantics)&#10;[proved-prose]&#10;H5: the A54 unsoundness is fixed and gated, but the fix is a code invariant + notes, not a standalone lemma document.</title>
+<rect x="977" y="397" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="1075" y="412" text-anchor="middle" font-weight="bold" fill="#2e7d32">C.T5T11</text>
+<text x="1075" y="426" text-anchor="middle" fill="#222">Logic-kill rules T5/T11 (+</text>
+<text x="1075" y="438" text-anchor="middle" fill="#222">pinguard semantics)</text>
+</g>
+<g><title>C.M1 — M1: single-corner pin-sets transfer down the window free&#10;[proved-prose]&#10;Covers 4 classes.</title>
+<rect x="1192" y="397" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="1290" y="412" text-anchor="middle" font-weight="bold" fill="#2e7d32">C.M1</text>
+<text x="1290" y="426" text-anchor="middle" fill="#222">M1: single-corner pin-sets</text>
+<text x="1290" y="438" text-anchor="middle" fill="#222">transfer down the window free</text>
+</g>
+<g><title>C.A61 — 12 s0-only strata + 2 sliver bands&#10;[open]&#10;Bounded compute per A56&#x27;s recipe, not theory.</title>
+<rect x="1407" y="397" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="1505" y="412" text-anchor="middle" font-weight="bold" fill="#c62828">C.A61</text>
+<text x="1505" y="426" text-anchor="middle" fill="#222">12 s0-only strata + 2 sliver</text>
+<text x="1505" y="438" text-anchor="middle" fill="#222">bands</text>
+</g>
+<g><title>D.TREE — trump5 residual: zone-tree discharges the stratum into the basin&#10;[open]&#10;GO-priced finite program; every kill an exact certificate. Open until the campaign closes; window form is D.SLAB.</title>
+<rect x="83" y="515" width="147" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="156" y="530" text-anchor="middle" font-weight="bold" fill="#c62828">D.TREE</text>
+<text x="156" y="544" text-anchor="middle" fill="#222">trump5 residual:</text>
+<text x="156" y="556" text-anchor="middle" fill="#222">zone-tree discharges the…</text>
+</g>
+<g><title>D.N1 — N1: zone-assignment collapse (occupancy pigeonhole)&#10;[proved-prose]&#10;PROVED; H1-style machine-checked component in exact rationals.</title>
+<rect x="239" y="515" width="147" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="313" y="530" text-anchor="middle" font-weight="bold" fill="#2e7d32">D.N1</text>
+<text x="313" y="544" text-anchor="middle" fill="#222">N1: zone-assignment</text>
+<text x="313" y="556" text-anchor="middle" fill="#222">collapse (occupancy…</text>
+</g>
+<g><title>D.TRAP — Upward trap: all six one-cell Young completions of trump5 certified empty&#10;[certificate+verifier]&#10;Drain cannot escape upward at s0; window form = A56&#x27;s six-class ticket (partially open, see C.WIN).</title>
+<rect x="396" y="515" width="147" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="469" y="530" text-anchor="middle" font-weight="bold" fill="#1565c0">D.TRAP</text>
+<text x="469" y="544" text-anchor="middle" fill="#222">Upward trap: all six</text>
+<text x="469" y="556" text-anchor="middle" fill="#222">one-cell Young…</text>
+</g>
+<g><title>D.P1 — A59-P1: trump5 packings have a square centred in [1.1,2.777]^2&#10;[certificate+verifier]&#10;Exact cert, re-verified depth 60.</title>
+<rect x="552" y="515" width="147" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="625" y="530" text-anchor="middle" font-weight="bold" fill="#1565c0">D.P1</text>
+<text x="625" y="544" text-anchor="middle" fill="#222">A59-P1: trump5 packings</text>
+<text x="625" y="556" text-anchor="middle" fill="#222">have a square centred in…</text>
+</g>
+<g><title>D.LADDER — Residue ladders terminate into the basin (depth-2/3 conditioning)&#10;[open]&#10;H11 SUSPECT #1 (was &#x27;extrapolated&#x27;). The A60 falsifier VINDICATED the suspicion: at A59&#x27;s basin radius the ladders DIVERGE (18-&gt;620 boxes); they terminate only at the corrected conditioning radius r=4.45e-4 (level 24, 15-35 boxes, all inside the basin). Now measured, not extrapolated; still open until the full campaign closes. Also G-A60-2: the zone-cover route is dead for the outer squares; confinement is the verified fix.</title>
+<rect x="708" y="515" width="147" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="782" y="530" text-anchor="middle" font-weight="bold" fill="#c62828">D.LADDER</text>
+<text x="782" y="544" text-anchor="middle" fill="#222">Residue ladders</text>
+<text x="782" y="556" text-anchor="middle" fill="#222">terminate into the basin…</text>
+</g>
+<g><title>D.ALIVE — alivewitness: exact disjoint-family bound tau* &gt;= budget&#10;[certificate+verifier]&#10;The ALIVE-side arbiter; strict positive gaps in exact rationals. Carries the load G-A59-12 would otherwise carry.</title>
+<rect x="865" y="515" width="147" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="938" y="530" text-anchor="middle" font-weight="bold" fill="#1565c0">D.ALIVE</text>
+<text x="938" y="544" text-anchor="middle" fill="#222">alivewitness: exact</text>
+<text x="938" y="556" text-anchor="middle" fill="#222">disjoint-family bound…</text>
+</g>
+<g><title>D.SLAB — Low-s slab / window form of the residual (H7, G-A59-7)&#10;[open]&#10;Packings with sigma well below s0 inside trump5 are invisible at fixed-s nodes; the residual tree&#x27;s (K) leaves need their A56-parametric overhead. The Lean axiom trump_residual quantifies over the whole window, which makes this hole explicit.</title>
+<rect x="1021" y="515" width="147" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="1095" y="530" text-anchor="middle" font-weight="bold" fill="#c62828">D.SLAB</text>
+<text x="1095" y="544" text-anchor="middle" fill="#222">Low-s slab / window form</text>
+<text x="1095" y="556" text-anchor="middle" fill="#222">of the residual (H7,…</text>
+</g>
+<g><title>D.D4 — D4 reduction machine-checked at the working side (H12)&#10;[open]&#10;Machine-checked at 3.84; the s0 re-run is &#x27;mechanical&#x27; but NOT DONE. The residual tree&#x27;s mod-G bookkeeping (and the f, e produced by trump_residual) rest on it.</title>
+<rect x="1177" y="515" width="147" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="1251" y="530" text-anchor="middle" font-weight="bold" fill="#c62828">D.D4</text>
+<text x="1251" y="544" text-anchor="middle" fill="#222">D4 reduction</text>
+<text x="1251" y="556" text-anchor="middle" fill="#222">machine-checked at the…</text>
+</g>
+<g><title>D.S6 — S6: residue boxes land inside the basin in ALL 33 coordinates&#10;[open]&#10;Measured at conditioning depth 3; the composed containment statement (mod G, all coordinates) is what trump_residual&#x27;s InBasin conclusion needs in writing.</title>
+<rect x="1334" y="515" width="147" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="1407" y="530" text-anchor="middle" font-weight="bold" fill="#c62828">D.S6</text>
+<text x="1407" y="544" text-anchor="middle" fill="#222">S6: residue boxes land</text>
+<text x="1407" y="556" text-anchor="middle" fill="#222">inside the basin in ALL…</text>
+</g>
+<g><title>D.TAUK — G-A59-12: tau* = k on Trump-adjacent boxes&#10;[conjecture]&#10;H11 SUSPECT #2. VERDICT: MOTIVATION-ONLY. The load-bearing direction (tau* &gt;= k, which blocks certificates) is witness-certified per node by D.ALIVE; the conjectured equality only informed pricing.</title>
+<rect x="1490" y="515" width="147" height="54" rx="7" fill="#e65100" fill-opacity="0.13" stroke="#e65100" stroke-width="1.6"/>
+<text x="1564" y="530" text-anchor="middle" font-weight="bold" fill="#e65100">D.TAUK</text>
+<text x="1564" y="544" text-anchor="middle" fill="#222">G-A59-12: tau* = k on</text>
+<text x="1564" y="556" text-anchor="middle" fill="#222">Trump-adjacent boxes</text>
+</g>
+<g><title>A.F2 — Measure bridge: checker PASS =&gt; mu(Q)&gt;=1 for all Q =&gt; no packing&#10;[proved-prose]&#10;Prose only; Lean formalisation estimated 3-5 days (A28 notes 7 item 4).</title>
+<rect x="101" y="633" width="180" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="191" y="648" text-anchor="middle" font-weight="bold" fill="#2e7d32">A.F2</text>
+<text x="191" y="662" text-anchor="middle" fill="#222">Measure bridge: checker PASS</text>
+<text x="191" y="674" text-anchor="middle" fill="#222">=&gt; mu(Q)&gt;=1 for all Q =&gt; no…</text>
+</g>
+<g><title>V.MEAS — verify_measure.py soundness (+ Lean checkMeasureI evaluation)&#10;[proved-prose]&#10;Exact integer B&amp;B; Lean proves the checker evaluates true (native_decide); soundness argument prose. Two independent implementations EXIST for this family (C3 done here only).</title>
+<rect x="292" y="633" width="180" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="382" y="648" text-anchor="middle" font-weight="bold" fill="#2e7d32">V.MEAS</text>
+<text x="382" y="662" text-anchor="middle" fill="#222">verify_measure.py soundness (+</text>
+<text x="382" y="674" text-anchor="middle" fill="#222">Lean checkMeasureI evaluation)</text>
+</g>
+<g><title>V.CASE — verify_case.py soundness (PASS =&gt; no packing satisfies the pin hypotheses)&#10;[proved-prose]&#10;Single implementation (C3 OPEN — decides the optimality tree); spec frozen by A62 as docs/specs/case_lp_certificate_v1.md.</title>
+<rect x="484" y="633" width="180" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="573" y="648" text-anchor="middle" font-weight="bold" fill="#2e7d32">V.CASE</text>
+<text x="573" y="662" text-anchor="middle" fill="#222">verify_case.py soundness (PASS</text>
+<text x="573" y="674" text-anchor="middle" fill="#222">=&gt; no packing satisfies the…</text>
+</g>
+<g><title>V.PARAM — verify_param.py soundness (P0-P7)&#10;[proved-prose]&#10;Imports the audited A53 integer core unmodified; new predicates are point-&gt;interval widenings (conservative direction argued in prose). Single implementation.</title>
+<rect x="675" y="633" width="180" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="764" y="648" text-anchor="middle" font-weight="bold" fill="#2e7d32">V.PARAM</text>
+<text x="764" y="662" text-anchor="middle" fill="#222">verify_param.py soundness</text>
+<text x="764" y="674" text-anchor="middle" fill="#222">(P0-P7)</text>
+</g>
+<g><title>E.A36 — Basin theorem: sigma &gt;= s-hat on box(z-hat, 3.7e-3), equality iff z-hat&#10;[certificate+verifier]&#10;Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius.</title>
+<rect x="866" y="633" width="180" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="956" y="648" text-anchor="middle" font-weight="bold" fill="#1565c0">E.A36</text>
+<text x="956" y="662" text-anchor="middle" fill="#222">Basin theorem: sigma &gt;= s-hat</text>
+<text x="956" y="674" text-anchor="middle" fill="#222">on box(z-hat, 3.7e-3),…</text>
+</g>
+<g><title>E.A22 — Krawczyk: unique contact solution z-hat, feasible, strict local optimality&#10;[certificate+verifier]&#10;Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat).</title>
+<rect x="1057" y="633" width="180" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="1147" y="648" text-anchor="middle" font-weight="bold" fill="#1565c0">E.A22</text>
+<text x="1147" y="662" text-anchor="middle" fill="#222">Krawczyk: unique contact</text>
+<text x="1147" y="674" text-anchor="middle" fill="#222">solution z-hat, feasible,…</text>
+</g>
+<g><title>E.COORD — Basin box in t-coordinates (theta -&gt; t re-emission)&#10;[open]&#10;SURFACED BY F3 (findings F5): A22/A36 certify in (c, theta); the composition&#x27;s configuration space (and every case certificate) is (c, t); dt/dtheta = (1+t^2)/2 != 1, so the radius does not transfer verbatim. rBasin is opaque in the Lean file until the certificate is re-emitted (A28&#x27;s recommendation, now load-bearing).</title>
+<rect x="1248" y="633" width="180" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
+<text x="1338" y="648" text-anchor="middle" font-weight="bold" fill="#c62828">E.COORD</text>
+<text x="1338" y="662" text-anchor="middle" fill="#222">Basin box in t-coordinates</text>
+<text x="1338" y="674" text-anchor="middle" fill="#222">(theta -&gt; t re-emission)</text>
+</g>
+<g><title>E.IV — mpmath.iv validated interval arithmetic&#10;[cited]&#10;Third-party library inside the rigidity trust chain (unlike the case-LP chain, which is stdlib-only). Checklist F6: either replay in Lean via t-parametrisation or disclose as Python-interval-only.</title>
+<rect x="1439" y="633" width="180" height="54" rx="7" fill="#6a1b9a" fill-opacity="0.13" stroke="#6a1b9a" stroke-width="1.6"/>
+<text x="1529" y="648" text-anchor="middle" font-weight="bold" fill="#6a1b9a">E.IV</text>
+<text x="1529" y="662" text-anchor="middle" fill="#222">mpmath.iv validated interval</text>
+<text x="1529" y="674" text-anchor="middle" fill="#222">arithmetic</text>
+</g>
+<g><title>X.IL19 — I-L19 flush-mandatory (global-realizability form)&#10;[conjecture]&#10;H11 SUSPECT #3. VERDICT: OFF-TREE / MOTIVATION-ONLY. The A46-A51 flush-free program fed census design for the ABANDONED enumerate-then-solve routes; no leaf of the live stratification composition invokes it. (If the k&lt;=3 route ever reaches for the A46/A48/A50 toolkit, its lemmas apply only under flush-free hypotheses — re-run this sweep then.)</title>
+<rect x="189" y="751" width="196" height="54" rx="7" fill="#e65100" fill-opacity="0.13" stroke="#e65100" stroke-width="1.6"/>
+<text x="287" y="766" text-anchor="middle" font-weight="bold" fill="#e65100">X.IL19</text>
+<text x="287" y="780" text-anchor="middle" fill="#222">I-L19 flush-mandatory</text>
+<text x="287" y="792" text-anchor="middle" fill="#222">(global-realizability form)</text>
+</g>
+<g><title>X.S3BDBFS — Seam S3: BDBFS/atlas discovery-loop termination (empirical)&#10;[conjecture]&#10;H11 SUSPECT #4. VERDICT: OFF-TREE. It belonged to the superseded T0/A38 far-field composition. The live plan discharges trump5 into the A36 basin only; atlas completeness and loop termination are not invoked by any live leaf.</title>
+<rect x="475" y="751" width="196" height="54" rx="7" fill="#e65100" fill-opacity="0.13" stroke="#e65100" stroke-width="1.6"/>
+<text x="573" y="766" text-anchor="middle" font-weight="bold" fill="#e65100">X.S3BDBFS</text>
+<text x="573" y="780" text-anchor="middle" fill="#222">Seam S3: BDBFS/atlas</text>
+<text x="573" y="792" text-anchor="middle" fill="#222">discovery-loop termination…</text>
+</g>
+<g><title>X.ATLAS — CP-atlas completeness (36 entries = all attractors)&#10;[conjecture]&#10;OFF-TREE for the composition (A51-NEW-0 showed it incomplete and it did not matter). Used as a map, never as a premise.</title>
+<rect x="762" y="751" width="196" height="54" rx="7" fill="#e65100" fill-opacity="0.13" stroke="#e65100" stroke-width="1.6"/>
+<text x="860" y="766" text-anchor="middle" font-weight="bold" fill="#e65100">X.ATLAS</text>
+<text x="860" y="780" text-anchor="middle" fill="#222">CP-atlas completeness (36 entries</text>
+<text x="860" y="792" text-anchor="middle" fill="#222">= all attractors)</text>
+</g>
+<g><title>X.CSTAR — A44 C* / C-rep (FJ counting bounds)&#10;[conjecture]&#10;OFF-TREE: census-pricing only, for routes not taken.</title>
+<rect x="1049" y="751" width="196" height="54" rx="7" fill="#e65100" fill-opacity="0.13" stroke="#e65100" stroke-width="1.6"/>
+<text x="1147" y="766" text-anchor="middle" font-weight="bold" fill="#e65100">X.CSTAR</text>
+<text x="1147" y="780" text-anchor="middle" fill="#222">A44 C* / C-rep (FJ counting</text>
+<text x="1147" y="792" text-anchor="middle" fill="#222">bounds)</text>
+</g>
+<g><title>X.GA531 — G-A53-1 s-monotonicity of kills&#10;[conjecture]&#10;SUPERSEDED, deliberately unused: A56&#x27;s adopted form is parametric verification precisely so that monotonicity is never assumed. No live edge.</title>
+<rect x="1335" y="751" width="196" height="54" rx="7" fill="#e65100" fill-opacity="0.13" stroke="#e65100" stroke-width="1.6"/>
+<text x="1433" y="766" text-anchor="middle" font-weight="bold" fill="#e65100">X.GA531</text>
+<text x="1433" y="780" text-anchor="middle" fill="#222">G-A53-1 s-monotonicity of kills</text>
+</g>
+</svg>
