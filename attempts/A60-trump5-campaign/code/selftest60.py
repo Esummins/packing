@@ -26,6 +26,7 @@ ATT = os.path.abspath(os.path.join(BASE, ".."))
 A59 = os.path.join(ATT, "A59-trump-residual")
 sys.path.insert(0, HERE)
 
+import blas1  # A57 T18: pin BLAS to 1 thread BEFORE numpy loads
 import tree60 as T
 from tree60 import gate, classify_at, census, basin_box, H, TSC
 from pilot59 import PINS, SLOTS, FREE, deep_cores, no_fam_7, core_box

@@ -39,15 +39,25 @@ read-only sources; A29 is untouched.
 Usage:
   python resolve61.py --name k6_21 [--eps_geo 0.003] [--lp_time 1500] [--gate 0.5]
 """
-import argparse
-import glob
-import json
-import math
 import os
-import subprocess
-import sys
-import time
-from fractions import Fraction as F
+
+# A57 T18 / A61 M1: pin every BLAS backend to ONE thread BEFORE numpy or highspy is imported.
+# Concurrent workers' BLAS thread arenas fragment the address space, and the failure looks like
+# an OOM at ~10 GB free (A57 lost a shard and a deepen job this way; A61 lost k5_05's stage A
+# twice to `MemoryError: bad allocation`).  The enrichment LPs -- dense rows x orbits matrices
+# at ~2k columns x ~15k rows -- are exactly the vulnerable class.
+for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS",
+           "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_v, "1")
+
+import argparse                                                       # noqa: E402
+import glob                                                           # noqa: E402
+import json                                                           # noqa: E402
+import math                                                           # noqa: E402
+import subprocess                                                     # noqa: E402
+import sys                                                            # noqa: E402
+import time                                                           # noqa: E402
+from fractions import Fraction as F                                   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 A61 = os.path.abspath(os.path.join(HERE, ".."))
@@ -208,6 +218,8 @@ def main(argv=None):
     ap.add_argument("--eps_geo", type=float, default=0.003)
     ap.add_argument("--gate", type=float, default=0.5,
                     help="soundness.md P6(v) repairability gate on budget - tau0")
+    ap.add_argument("--gate_tol", type=float, default=1e-6,
+                    help="slack tolerance on the gate (tau lands on exact rationals + noise)")
     ap.add_argument("--lp_time", type=float, default=1500, help="stage-A LP cap (s)")
     ap.add_argument("--lp_time_b", type=float, default=1100, help="stage-B LP cap (s)")
     ap.add_argument("--cert_time", type=float, default=420)
@@ -270,7 +282,10 @@ def main(argv=None):
                        "n_rows": resA["n_rows"], "seconds": round(dtA, 1),
                        "minmass": resA["minmass"], "maxcov": resA["maxcov"]})
     save(rec)
-    if slack0 < a.gate and not a.force:
+    # P6(v)'s gate is a measured "~0.5", and tau lands on exact rationals plus solver noise
+    # (k5_10: tau0 = 5.5 + 4e-13 at budget 6), so the comparison carries a tolerance --
+    # otherwise a row sitting EXACTLY on the law is refused on floating-point dust.
+    if slack0 < a.gate - a.gate_tol and not a.force:
         rec["verdict"] = "GATE-FAIL (enrichment stalled: budget - tau0 < gate)"
         rec["total_seconds"] = round(time.time() - t_all, 1)
         L(f"    GATE-FAIL: slack0={slack0:.4f} < {a.gate}; no certify round burnt.")

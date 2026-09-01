@@ -380,7 +380,7 @@ falling through to depth 2, so the three repair classes are ordered by cost:
 | symptom | cause | repair | cost |
 |---|---|---|---|
 | `rc = 3`, τ = budget | genuinely critical box (T11) | depth 2 refinement (`deepen.py`) | 8 sub-solves |
-| `rc = 1`, 0 holes, undecided | atoms on placement boundaries | `--eps_geo` row shrink (T14) | ~2 min |
+| `rc = 1`, 0 holes, undecided | atoms on placement boundaries | `--eps_geo` row shrink (T14), **gated on scale headroom (T16)** | ~2 min |
 | `rc = 1`, real holes | measure too weak | more witness rounds, then depth 2 | varies |
 
 
@@ -430,3 +430,97 @@ With only 1 % of τ headroom there is no room to buy that convergence back — m
 for one costs more than the headroom the other needs.  A54 W3's "1.9 % short, blocked by
 convergence" was half the story; T15 supplies the other half.  **The tree is the only line**, and
 that is now an argued conclusion rather than a preference.
+
+
+## T16 [M] — the eps_geo retry must be gated on scale headroom
+
+Wiring the T14 lever in unconditionally was wrong, and the cost showed up immediately.
+`eps_geo` shrinks rows, so it **only ever raises τ** — measured +1.59 % at margin 0.002
+(k5_11_interior_Y0107: 4.500000 → 4.571429) and +0.72 % at 0.0005 on the k5_11 parent — while
+certification needs τ·1.005 < budget.  A child sitting *at* the budget (the T11 knife edge,
+scale ceiling 1.0000) therefore cannot be helped by any margin at all.
+
+`k5_11_interior_Y0036` is the receipt: τ = 5.000000, ceiling 1.0000, and the inline retry
+dutifully tried margin 0.002 (rc = 3 after 349.8 s) and 0.004 (rc = 3 after 1496.8 s) before
+falling through to depth 2 — **1847 s spent to reach the conclusion its own τ already implied.**
+
+`tree57.eps_geo_margins(tau, budget)` now decides from the ceiling, and `sweepfails.py` imports
+the same function so both paths agree:
+
+| scale ceiling = budget/τ | margins tried | rationale |
+|---|---|---|
+| < 1.010 | **none** — straight to depth 2 | a margin costs more headroom than exists |
+| 1.010 – 1.050 | 0.0005, 0.001 | thin: only a small shrink is affordable |
+| ≥ 1.050 | 0.002, 0.004 | the Y0107 regime, where it works |
+
+The retry is also capped at **one** witness round: a margin either fixes the degeneracy at
+round 0 (as at Y0107) or it does not, and extra rounds just drag the measure around — exactly
+what happened on the k5_11 parent in T15, where rounds 3–6 manufactured real holes.
+
+Live check of the rule against the four children measured so far:
+
+| child | τ | ceiling | margins chosen | actual outcome |
+|---|---|---|---|---|
+| Y0036 | 5.000000 | 1.0000 | () | rc = 3 twice, 1847 s wasted — rule would have skipped |
+| Y0461 | 4.916667 | 1.0169 | (0.0005, 0.001) | written off by the first sweep at the WRONG margins; re-run pending |
+| Y0467 | 4.631579 | 1.0795 | (0.002, 0.004) | **PASS at 0.002** (941.6 s) |
+| Y0107 | 4.500000 | 1.1111 | (0.002, 0.004) | **PASS at 0.002** |
+
+
+## T17 — the T14 lever's hit rate, and why the sweep is a daemon
+
+Boundary-degeneracy failures are **not rare**: `Y0107`, `Y0461`, `Y0467`, `Y0431`, `Y0485` in the
+first ~180 children, i.e. roughly 3-5 % of the cover.  The margin cures most but **not all** of
+them, and headroom does not predict which:
+
+| child | ceiling | margin | outcome |
+|---|---|---|---|
+| k5_11_interior_Y0107 | 1.1111 | 0.002 | **PASS** (re-verified independently at depth 60) |
+| k5_11_interior_Y0467 | 1.0795 | 0.002 | **PASS** (941.6 s, daemon, unattended) |
+| k5_16_interior_Y0431 | 1.1111 | 0.002 | **PASS** (1105.3 s, daemon, unattended) |
+| **k5_11_interior_Y0485** | **1.1111** | 0.002, 0.004 | **FAIL** — both exhausted (873.5 s) → depth 2 |
+| **k5_16_interior_Y0461** | 1.0169 | 0.0005, 0.001 | **FAIL** — both exhausted → depth 2 |
+| k5_11_interior_Y0461 | 1.0169 | 0.002, 0.004 (**wrong**, T16 wants 0.0005/0.001) | invalid trial; re-run pending |
+
+**3 of 5 at correct margins** (the sixth trial used the wrong margins and does not count).  The
+rate has fallen with every batch — 4/4, then 3/4, now 3/5 — so treat it as "roughly half" and not
+better.  Y0485 in particular has exactly the ceiling of two that passed, so **good headroom is
+NECESSARY for the lever (T16) but nowhere near sufficient**; the gate is not a predictor of
+success, it only stops hopeless cases burning 30 minutes.  Depth 2 remains the backstop, and on
+current evidence it is the workhorse rather than the exception.
+
+At ~5 % of the ~1700 remaining pinguard-ok children that is on the order of 80 children which
+would otherwise each have cost 8 depth-2 sub-solves instead of one margin retry — which is what
+makes T14 worth its complexity, and T16 (the headroom gate) worth the care.
+
+All five came from the two shards launched **before** the T14 wiring; every shard started since
+carries the inline retry, so the backlog stops growing once those two finish.  `sweepfails.py`
+runs as a daemon (`--watch 600`) because a one-shot sweep only ever sees the snapshot it started
+with — three hand-runs were needed before that was obvious.
+
+
+## T18 [M] — BLAS oversubscription, not RAM, is what kills concurrent A57 jobs
+
+Running five top-level jobs at once took down **two of them at the same moment**:
+
+* `deepen.py` — `OpenBLAS error: Memory allocation still failed after 10 retries, giving up.`
+* tree shard `k5_11_interior_L1_s0` — `numpy._core._exceptions._ArrayMemoryError: Unable to
+  allocate 76.3 MiB for an array with shape (63291, 158)`
+
+**76 MiB failed while 9.9 GB was free**, and A57's own processes held only ~2 GB between them.
+So this is not RAM exhaustion: numpy/OpenBLAS spawns roughly one thread per core (20 here) in
+*every* process, each thread carrying its own allocation arenas, and several concurrent jobs
+multiply that until an allocation fails against fragmentation / arena limits rather than against
+free memory.  A54 W7 hit the same class of failure (`MemoryError: bad allocation` at 32k rows
+× 6k columns with four jobs) and worked around it by pruning columns; that treated the symptom.
+
+Fix: pin every A57 worker to a single BLAS thread — `OPENBLAS_NUM_THREADS=OMP_NUM_THREADS=
+MKL_NUM_THREADS=NUMEXPR_NUM_THREADS=1` — set in `code/launch.ps1` and in the new generic
+`code/run_job.ps1` so shards, `deepen`, `sweepfails` and one-off certifies all inherit it.  These
+jobs are LP + numpy-oracle work and are not BLAS-bound, so the parallelism was buying nothing;
+the contention was pure cost.
+
+**Operational lesson:** the brief's "≤ 3 processes while A56 runs, 5 after" is a *core* budget,
+and a core budget is not a memory budget.  Check free memory before adding a job, and do not read
+"9.9 GB free" as "safe to launch" — the failure mode here is per-process thread arenas, which a
+free-memory check does not see at all.

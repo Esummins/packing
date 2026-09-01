@@ -46,18 +46,36 @@ keeps the **last** record per tag, so both lines stay on disk for the audit trai
 ≤ **4** heavy LP processes for A60.  A57 (`tree57.py` k5_11/k5_16 + `certify.py`) and A61
 (`resolve61.py`) own the rest of this 31.7 GB / 20-core machine.
 
-**The guard is the COMMIT charge, not free physical RAM** (measured here, 2026-09-01: a cover
-shard died with `numpy MemoryError: unable to allocate 66.6 MiB` while
-`FreePhysicalMemory` still read **9.1 GB** — because commit stood at **57.7 / 61.0 GB**, i.e.
-3.3 GB of headroom, and the pagefile is capped at ~30 GB).  Before launching a heavy job:
+**A57 T18 — pin BLAS to one thread in EVERY worker.  This is the actual root cause.**
+numpy/OpenBLAS spawns ~one thread per core (20 here) in every process, each with its own
+allocation arenas; concurrent jobs multiply that until an allocation fails against fragmentation
+while GBs sit free.  Measured twice on the same day: A57 lost a tree shard *and* a deepen job to
+a 76.3 MiB failure at **9.9 GB free**; A60's cover shard 1/2 died on **66.6 MiB at 9.1 GB free**.
+A54 W7 is the same failure, worked around by pruning columns — that treated the symptom.  These
+jobs are LP + numpy-oracle work, not BLAS-bound, so the parallelism bought nothing.
+
+Adopted at BOTH layers, because the restart lines above invoke python directly and would not
+inherit PowerShell environment:
+
+* `code/launch.ps1` sets `OPENBLAS_NUM_THREADS = OMP_NUM_THREADS = MKL_NUM_THREADS =
+  NUMEXPR_NUM_THREADS = 1` (child `certify.py` / `verify_case.py` processes inherit them);
+* `code/blas1.py` sets the same in-process and is imported **before numpy** by every entry point
+  (`tree60`, `falsify60`, `confine60`, `selftest60`, `sidezones60`).  It warns loudly if numpy
+  was already imported, and respects pre-existing values so an operator can override.
+
+Verified after adoption: A60 workers run at **1–4 threads / 54–140 MB** against **21–22 threads /
+0.3–1.8 GB** for the pre-T18 processes still on the machine.  **Launch nothing that does not go
+through one of those two paths.**
+
+Secondary guard — commit, not free physical RAM.  Watch the COMMIT charge:
 
     $os=Get-CimInstance Win32_OperatingSystem
-    "CommitUsedGB {0:N2} / {1:N2}" -f (($os.TotalVirtualMemorySize-$os.FreeVirtualMemory)/1MB),
-                                      ($os.TotalVirtualMemorySize/1MB)
+    "CommitHeadroomGB {0:N2}" -f ($os.FreeVirtualMemory/1MB)
 
-**Launch only while commit headroom > ~6 GB**; otherwise stagger.  Dead shards are harmless —
-every phase is resumable, so a shard that OOMs is restarted with the same command line and skips
-what it finished.  Check liveness with
+Pinned workers are light, so ~3 GB of headroom is enough for one more; the pre-T18 6 GB rule was
+calibrated against 20-thread processes and is now over-cautious.  Dead shards are harmless — every
+phase is resumable, so a shard that dies is restarted with the same command line and skips what it
+finished.  Check liveness with
 
     foreach ($f in Get-ChildItem progress\*.pid) { $id=(Get-Content $f).Trim()
       "{0,-28} pid {1,-7} alive={2}" -f $f.BaseName,$id,
@@ -69,8 +87,8 @@ Child solves use **columns-only** warm starts (`rows=[]`), per A54 W7 / A57 T4.
 
 | job | shard | state |
 |---|---|---|
-| `tree60.py cover` (j = 0 interior, budget 5, 767 attemptable) | 0/2 | **detached, running**, `--wall 172800`, resumable |
-| `tree60.py cover` | 1/2 | **stopped** — OOMed on commit pressure; relaunch when headroom > 6 GB |
+| `tree60.py cover` (j = 0 interior, budget 5, 767 attemptable) | 0/2 | **detached, running, BLAS-pinned**, `--wall 172800`, resumable |
+| `tree60.py cover` | 1/2 | **detached, running, BLAS-pinned** (was the T18 casualty; relaunched after the fix) |
 | `confine60.py --sq sq10` (j = 3, budget 3) | — | detached, the G-A60-2 route check |
 | `falsify60.py --cond sq7` (budget 4 pricing) | 0/2, 1/2 | stopped after 7 samples to free commit; data banked |
 | `sidezones60.py` | — | stopped: the route it measures is a dead end (see step 6) |

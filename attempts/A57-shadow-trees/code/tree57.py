@@ -123,18 +123,43 @@ def build_children(name, zone, w, nth, cw, a_min):
 
 
 # ------------------------------------------------------------------ eps_geo retry (T14)
-def run_eps_geo(node_path, kid, a, certdir, log, margins=(0.002, 0.004)):
+def eps_geo_margins(tau, budget):
+    """Which row-shrink margins are worth trying, from the scale headroom.
+
+    eps_geo only RAISES tau (shrunk rows are strictly harder), and certification needs
+    tau*1.005 < budget.  Measured rises: +1.59 % at margin 0.002 (k5_11_interior_Y0107,
+    4.500000 -> 4.571429) and +0.72 % at margin 0.0005 on the k5_11 parent.  So a child sitting
+    AT the budget (the T11 knife edge, scale ceiling 1.0000) can never be helped by a margin --
+    and trying anyway cost 1847 s at k5_11_interior_Y0036 before falling through to depth 2,
+    which is where it belonged from the start.  Gate on the ceiling."""
+    ceil = budget / tau if tau > 0 else 0.0
+    if ceil < 1.010:
+        return ()                       # no headroom: straight to depth 2
+    if ceil < 1.050:
+        return (0.0005, 0.001)          # thin: small margins only
+    return (0.002, 0.004)
+
+
+def run_eps_geo(node_path, kid, a, certdir, log, margins=None):
     """A certificate with tau comfortably under budget can still FAIL with **0 holes** and a
     handful of witness boxes the verifier cannot DECIDE -- atoms sitting on placement boundaries,
     a degeneracy that more depth does not fix (measured at k5_11_interior_Y0107: the same 8
     undecided boxes at depth 56, 64 and 72).  A56's row-shrink margin is the cure: re-solve the
     node LP with EPS_GEO = margin so the measure is robust to boundary effects, then certify.
     Sound: shrinking rows makes the LP HARDER (tau rises), and the arbiter is unchanged."""
+    if margins is None:
+        res0 = json.load(open(node_path))
+        margins = eps_geo_margins(res0["tau"], kid["budget"])
     out = dict(eps_geo=[])
+    if not margins:
+        out["cert"] = ("ALIVE-at-LP (no scale headroom for a row-shrink margin) "
+                       "-> queued for depth 2 (deepen.py)")
+        log(f"    eps_geo skipped: scale ceiling too tight for a margin")
+        return out
     for m in margins:
         cert_out = os.path.join(certdir, f"{kid['id']}_epsgeo{m:g}.json")
         cmd = [sys.executable, os.path.join(HERE, "certify.py"), node_path, "--s_rat", S_RAT,
-               "--eps_geo", f"{m:g}", "--rounds", str(a.rounds), "--jobs", str(a.jobs),
+               "--eps_geo", f"{m:g}", "--rounds", "1", "--jobs", str(a.jobs),
                "--depth", str(a.depth), "--time_limit", str(a.cert_time),
                "--resolve_time", str(a.cert_time), "--out", cert_out, "--scale", "0",
                "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "32", "--loop_cols"]

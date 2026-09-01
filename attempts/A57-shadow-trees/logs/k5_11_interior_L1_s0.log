@@ -968,3 +968,294 @@ NOT certified
     {"id": "k5_11_interior_Y0467", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.74911, "box": {"x0": 1.519271, "x1": 1.6590280000000002, "y0": 1.519271, "y1": 1.6590280000000002, "th0": 64.01076641616699, "th1": 73.73979529168804}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 4.631578947383382, "converged": false, "minmass": 0.7500000000001383, "maxcov": 1.3749999999999987, "eta": -0.3684210526166183, "lp_seconds": 376.7, "scale_ceiling": 1.0795454545419674, "cert": "FAIL(rc=1)", "cert_seconds": 620.4, "cert_path": null}
 [13:33:47] LP k5_11_interior_Y0473 budget=5 a=0.35660164866212035 gd=0.745 pool=3213
 [s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3213 points=3213 rows=7139 (rejected 24529)
+  it   0 tau=3.000000 rows=7236 orbs=3213 atoms>0=3 minmass=0.000000 maxcov=1.000000 +rows=97 -rows=0 +cols=0 -cols=0 t=14s [lp 2s row 6s +r 1s col 0s +c 0s]
+  it   1 tau=3.000000 rows=7236 orbs=3213 atoms>0=6 minmass=0.500000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=17s [lp 0s row 3s +r 0s col 0s +c 0s]
+  it   2 tau=3.000000 rows=7276 orbs=3213 atoms>0=6 minmass=0.500000 maxcov=1.000000 +rows=40 -rows=0 +cols=0 -cols=0 t=20s [lp 0s row 3s +r 0s col 0s +c 0s]
+  it   3 tau=3.000000 rows=7276 orbs=3213 atoms>0=3 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=21s [lp 0s row 0s +r 0s col 0s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it   4 tau=3.000000 rows=7276 orbs=3213 atoms>0=3 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=22s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.877084 n=5 sym=C1 tau=3.000000 nu=3.000000 conv=True minmass=1.000000 maxcov=1.000000 rows=7276 orbits=3213 atoms_nz=3 packing_support=3 time=22s
+[round 0] tau=3.00000 conv=True scale=1.4000 cert total=4.20000 budget=5 atoms=3
+    boxes = 1028816  covered = 491445  vacuous = 0  exempt = 22995 (core 22995, nofam 0)  split = 514376  exact atom checks = 491445  max depth = 42  time = 33.3s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 21/5 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0473.json
+
+    {"id": "k5_11_interior_Y0473", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660164866212035, "ghost_dist": 0.74453, "box": {"x0": 1.938542, "x1": 2.078299, "y0": 2.49757, "y1": 2.637327, "th0": 0.0, "th1": 14.250032697803595}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 3.0, "converged": true, "minmass": 1.0, "maxcov": 1.0, "eta": -2.0, "lp_seconds": 22.2, "scale_ceiling": 1.6666666666666667, "cert": "PASS", "cert_seconds": 34.1, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0473.json"}
+    {"id": "k5_11_interior_Y0479", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.74244, "box": {"x0": 1.6590280000000002, "x1": 1.798785, "y0": 1.239757, "y1": 1.3795140000000001, "th0": 14.250032697803595, "th1": 28.072486935852957}, "trump_realizes": false, "pin": "contradictory", "pin_info": 3, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[13:34:43] LP k5_11_interior_Y0485 budget=5 a=0.35660162976868715 gd=0.738 pool=3213
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3213 points=3213 rows=19325 (rejected 11617)
+  it   0 tau=4.500000 rows=19793 orbs=3213 atoms>0=9 minmass=0.000000 maxcov=1.629268 +rows=468 -rows=0 +cols=0 -cols=0 t=38s [lp 10s row 12s +r 11s col 1s +c 0s]
+  it   1 tau=4.500000 rows=19793 orbs=3613 atoms>0=20 minmass=0.500000 maxcov=1.629268 +rows=0 -rows=0 +cols=400 -cols=0 t=54s [lp 3s row 12s +r 0s col 1s +c 0s]
+  it   2 tau=4.500000 rows=21364 orbs=3613 atoms>0=155 minmass=0.500001 maxcov=1.279729 +rows=1571 -rows=0 +cols=0 -cols=0 t=769s [lp 650s row 25s +r 37s col 2s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.500000 nu=4.500012 conv=False minmass=0.500001 maxcov=1.279729 rows=21364 orbits=3613 atoms_nz=12 packing_support=784 time=987s
+ time = 15.2s
+    FAIL: 16 witness boxes at depth 56: 4 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 12 undecided at this depth
+      worst witness: theta = 41.617318 deg, centre = (2.677480566, 2.399324984), exact mass = 277/500 (~0.554000000000)
+    feeding back 336 witness rows (total extra 672), re-solving (rows only)
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=634 points=634 rows=3593 (rejected 1639)
+  it   0 tau=4.666667 rows=3605 orbs=634 atoms>0=11 minmass=0.333333 maxcov=1.666667 +rows=12 -rows=0 +cols=0 -cols=0 t=6s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   1 tau=5.000000 rows=3605 orbs=896 atoms>0=24 minmass=0.666667 maxcov=2.000000 +rows=0 -rows=0 +cols=262 -cols=0 t=19s [lp 0s row 13s +r 0s col 0s +c 0s]
+  it   2 tau=4.833333 rows=3718 orbs=896 atoms>0=16 minmass=0.666667 maxcov=1.500000 +rows=113 -rows=0 +cols=0 -cols=0 t=28s [lp 0s row 8s +r 0s col 0s +c 0s]
+  it   3 tau=4.872727 rows=3718 orbs=1822 atoms>0=24 minmass=0.872727 maxcov=1.654545 +rows=0 -rows=0 +cols=1000 -cols=74 t=42s [lp 0s row 13s +r 0s col 0s +c 0s]
+  it   4 tau=4.500000 rows=4596 orbs=1822 atoms>0=9 minmass=0.500000 maxcov=2.000000 +rows=878 -rows=0 +cols=0 -cols=0 t=61s [lp 2s row 15s +r 3s col 0s +c 0s]
+  it   5 tau=4.600000 rows=3986 orbs=2822 atoms>0=22 minmass=0.600000 maxcov=1.320000 +rows=0 -rows=610 +cols=1000 -cols=0 t=78s [lp 4s row 13s +r 0s col 0s +c 0s]
+  it   6 tau=4.571429 rows=4906 orbs=2619 atoms>0=22 minmass=0.714286 maxcov=1.241497 +rows=946 -rows=26 +cols=0 -cols=203 t=108s [lp 12s row 13s +r 4s col 0s +c 0s]
+  it   7 tau=4.600000 rows=4904 orbs=2834 atoms>0=22 minmass=0.450000 maxcov=1.400000 +rows=0 -rows=2 +cols=578 -cols=363 t=128s [lp 7s row 13s +r 0s col 0s +c 0s]
+  it   8 tau=4.500000 rows=6099 orbs=2757 atoms>0=9 minmass=0.500000 maxcov=1.200137 +rows=1244 -rows=49 +cols=0 -cols=77 t=166s [lp 14s row 17s +r 6s col 1s +c 0s]
+  it   9 tau=4.571429 rows=6086 orbs=3149 atoms>0=21 minmass=0.857143 maxcov=1.219806 +rows=0 -rows=13 +cols=1000 -cols=608 t=213s [lp 32s row 15s +r 0s col 1s +c 0s]
+  it  10 tau=4.500000 rows=7245 orbs=2839 atoms>0=31 minmass=0.666667 maxcov=1.453891 +rows=1203 -rows=44 +cols=0 -cols=310 t=317s [lp 64s row 28s +r 10s col 2s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.500000 nu=4.500012 conv=False minmass=0.666667 maxcov=1.453891 rows=7245 orbits=2839 atoms_nz=204 packing_support=764 time=534s
+[round 2] tau=4.50000 conv=False scale=1.1080 cert total=4.98620 budget=5 atoms=204
+    boxes = 295049  covered = 114550  vacuous = 0  exempt = 32933 (core 32933, nofam 0)  split = 147534  exact atom checks = 189689  max depth = 56  time = 11.5s
+    FAIL: 32 witness boxes at depth 56: 17 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 15 undecided at this depth
+      worst witness: theta = 0.092453 deg, centre = (2.271181241, 2.375442939), exact mass = 554057/1000000 (~0.554057000000)
+NOT certified
+
+    {"id": "k5_11_interior_Y0485", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.73794, "box": {"x0": 1.239757, "x1": 1.3795140000000001, "y0": 2.49757, "y1": 2.637327, "th0": 14.250032697803595, "th1": 28.072486935852957}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 4.500000000021885, "converged": false, "minmass": 0.5000005255297099, "maxcov": 1.2797293611068699, "eta": -0.4999999999781153, "lp_seconds": 987.5, "scale_ceiling": 1.1111111111057075, "cert": "FAIL(rc=1)", "cert_seconds": 873.5, "cert_path": null}
+[14:05:44] LP k5_11_interior_Y0491 budget=5 a=0.35660162976868715 gd=0.731 pool=3216
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3216 points=3216 rows=7947 (rejected 23476)
+  it   0 tau=4.000000 rows=8229 orbs=3216 atoms>0=4 minmass=0.000000 maxcov=1.333333 +rows=282 -rows=0 +cols=0 -cols=0 t=22s [lp 2s row 13s +r 2s col 0s +c 0s]
+  it   1 tau=4.000000 rows=8229 orbs=3362 atoms>0=4 minmass=0.000000 maxcov=1.333333 +rows=0 -rows=0 +cols=146 -cols=0 t=28s [lp 0s row 6s +r 0s col 0s +c 0s]
+  it   2 tau=4.000000 rows=8325 orbs=3362 atoms>0=4 minmass=0.000000 maxcov=1.500000 +rows=96 -rows=0 +cols=0 -cols=0 t=36s [lp 2s row 6s +r 1s col 0s +c 0s]
+  it   3 tau=4.000000 rows=8325 orbs=3677 atoms>0=4 minmass=0.000000 maxcov=1.500000 +rows=0 -rows=0 +cols=315 -cols=0 t=57s [lp 3s row 18s +r 0s col 0s +c 0s]
+  it   4 tau=4.000000 rows=9573 orbs=3672 atoms>0=4 minmass=0.000000 maxcov=1.000000 +rows=1248 -rows=0 +cols=0 -cols=5 t=100s [lp 3s row 29s +r 11s col 0s +c 0s]
+  it   5 tau=4.000000 rows=9573 orbs=3672 atoms>0=4 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=109s [lp 6s row 3s +r 0s col 0s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it   6 tau=4.000000 rows=9573 orbs=3672 atoms>0=4 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=121s [lp 0s row 3s +r 0s col 0s +c 0s]
+DONE s=3.877084 n=5 sym=C1 tau=4.000000 nu=4.000000 conv=True minmass=1.000000 maxcov=1.000000 rows=9573 orbits=3672 atoms_nz=4 packing_support=4 time=122s
+[round 0] tau=4.00000 conv=True scale=1.2468 cert total=4.98700 budget=5 atoms=4
+    boxes = 254600  covered = 112511  vacuous = 0  exempt = 14821 (core 14821, nofam 0)  split = 127268  exact atom checks = 112513  max depth = 37  time = 8.6s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 2493501/500000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0491.json
+
+    {"id": "k5_11_interior_Y0491", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.73136, "box": {"x0": 2.49757, "x1": 2.637327, "y0": 1.519271, "y1": 1.6590280000000002, "th0": 64.01076641616699, "th1": 73.73979529168804}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 3.9999999999999822, "converged": true, "minmass": 1.0, "maxcov": 1.0000000000006897, "eta": -1.0000000000000178, "lp_seconds": 121.6, "scale_ceiling": 1.2500000000000056, "cert": "PASS", "cert_seconds": 9.1, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0491.json"}
+    {"id": "k5_11_interior_Y0497", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.72913, "box": {"x0": 1.1, "x1": 1.239757, "y0": 2.218056, "y1": 2.357813, "th0": 53.13010235415598, "th1": 64.01076641616699}, "trump_realizes": false, "pin": "contradictory", "pin_info": 1, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[14:07:55] LP k5_11_interior_Y0503 budget=5 a=0.35660162976868715 gd=0.725 pool=3216
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3216 points=3216 rows=10338 (rejected 21311)
+  it   0 tau=4.000000 rows=10338 orbs=3303 atoms>0=4 minmass=1.000000 maxcov=1.250000 +rows=0 -rows=0 +cols=87 -cols=0 t=8s [lp 3s row 0s +r 0s col 0s +c 0s]
+  it   1 tau=4.000000 rows=10338 orbs=3324 atoms>0=4 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=21 -cols=0 t=9s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   2 tau=4.000000 rows=10338 orbs=3369 atoms>0=4 minmass=1.000000 maxcov=1.500000 +rows=0 -rows=0 +cols=45 -cols=0 t=10s [lp 1s row 0s +r 0s col 0s +c 0s]
+  it   3 tau=4.000000 rows=10338 orbs=3769 atoms>0=4 minmass=1.000000 maxcov=1.380952 +rows=0 -rows=0 +cols=400 -cols=0 t=27s [lp 15s row 2s +r 0s col 0s +c 0s]
+  it   4 tau=4.000000 rows=10338 orbs=4143 atoms>0=14 minmass=1.000000 maxcov=1.083741 +rows=0 -rows=0 +cols=400 -cols=26 t=98s [lp 37s row 33s +r 0s col 0s +c 0s]
+  it   5 tau=4.000000 rows=10338 orbs=4505 atoms>0=4 minmass=1.000000 maxcov=1.073062 +rows=0 -rows=0 +cols=400 -cols=38 t=204s [lp 45s row 61s +r 0s col 1s +c 0s]
+  it   6 tau=4.000000 rows=10338 orbs=4668 atoms>0=4 minmass=1.000000 maxcov=1.044676 +rows=0 -rows=0 +cols=400 -cols=237 t=292s [lp 71s row 15s +r 0s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.000000 nu=4.000000 conv=False minmass=1.000000 maxcov=1.044676 rows=10338 orbits=4668 atoms_nz=280 packing_support=227 time=397s
+[round 0] tau=4.00000 conv=False scale=1.2467 cert total=4.98728 budget=5 atoms=280
+    boxes = 57256  covered = 14162  vacuous = 0  exempt = 14498 (core 14498, nofam 0)  split = 28596  exact atom checks = 52640  max depth = 39  time = 2.5s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4987279/1000000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0503.json
+
+    {"id": "k5_11_interior_Y0503", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.72511, "box": {"x0": 2.637327, "x1": 2.777084, "y0": 2.357813, "y1": 2.49757, "th0": 64.01076641616699, "th1": 73.73979529168804}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 4.000000000072748, "converged": false, "minmass": 1.0, "maxcov": 1.044676341103194, "eta": -0.999999999927252, "lp_seconds": 397.2, "scale_ceiling": 1.2499999999772662, "cert": "PASS", "cert_seconds": 3.0, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0503.json"}
+[14:14:35] LP k5_11_interior_Y0509 budget=5 a=0.35660162976868715 gd=0.724 pool=3276
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3276 points=3276 rows=9932 (rejected 21484)
+  it   0 tau=4.500000 rows=11671 orbs=3276 atoms>0=64 minmass=0.567029 maxcov=1.500000 +rows=1739 -rows=0 +cols=0 -cols=0 t=38s [lp 10s row 10s +r 14s col 0s +c 0s]
+  it   1 tau=4.500000 rows=11671 orbs=3315 atoms>0=64 minmass=0.687075 maxcov=1.500000 +rows=0 -rows=0 +cols=39 -cols=0 t=54s [lp 4s row 12s +r 0s col 0s +c 0s]
+  it   2 tau=4.500000 rows=13389 orbs=3315 atoms>0=64 minmass=0.687075 maxcov=1.500000 +rows=1718 -rows=0 +cols=0 -cols=0 t=105s [lp 23s row 11s +r 17s col 0s +c 0s]
+  it   3 tau=4.500000 rows=13389 orbs=3334 atoms>0=80 minmass=0.893425 maxcov=1.500000 +rows=0 -rows=0 +cols=19 -cols=0 t=135s [lp 11s row 19s +r 0s col 0s +c 0s]
+  it   4 tau=4.500000 rows=14996 orbs=3322 atoms>0=213 minmass=0.893426 maxcov=1.166667 +rows=1607 -rows=0 +cols=0 -cols=12 t=259s [lp 56s row 46s +r 22s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.500000 nu=4.500000 conv=False minmass=0.893426 maxcov=1.166667 rows=14996 orbits=3322 atoms_nz=78 packing_support=19 time=269s
+[round 0] tau=4.50000 conv=False scale=1.1080 cert total=4.98604 budget=5 atoms=78
+    boxes = 432066  covered = 135712  vacuous = 0  exempt = 80353 (core 80353, nofam 0)  split = 216001  exact atom checks = 247594  max depth = 44  time = 18.6s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4986037/1000000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0509.json
+
+    {"id": "k5_11_interior_Y0509", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.72365, "box": {"x0": 1.519271, "x1": 1.6590280000000002, "y0": 2.49757, "y1": 2.637327, "th0": 53.13010235415598, "th1": 64.01076641616699}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 4.5000000000004565, "converged": false, "minmass": 0.8934255218147401, "maxcov": 1.1666666687258274, "eta": -0.4999999999995435, "lp_seconds": 269.5, "scale_ceiling": 1.1111111111109984, "cert": "PASS", "cert_seconds": 19.1, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0509.json"}
+    {"id": "k5_11_interior_Y0515", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660164866212035, "ghost_dist": 0.72093, "box": {"x0": 1.239757, "x1": 1.3795140000000001, "y0": 1.798785, "y1": 1.938542, "th0": 0.0, "th1": 14.250032697803595}, "trump_realizes": false, "pin": "contradictory", "pin_info": 1, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[14:19:24] LP k5_11_interior_Y0521 budget=5 a=0.35660164866212035 gd=0.718 pool=3276
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3276 points=3276 rows=11599 (rejected 19626)
+  it   0 tau=4.181818 rows=13149 orbs=3276 atoms>0=30 minmass=0.181818 maxcov=1.545455 +rows=1550 -rows=0 +cols=0 -cols=0 t=40s [lp 5s row 11s +r 19s col 0s +c 0s]
+  it   1 tau=4.250000 rows=13149 orbs=3676 atoms>0=15 minmass=0.500000 maxcov=1.531758 +rows=0 -rows=0 +cols=400 -cols=0 t=59s [lp 5s row 13s +r 0s col 1s +c 0s]
+  it   2 tau=4.233438 rows=14433 orbs=3676 atoms>0=76 minmass=0.671924 maxcov=1.277603 +rows=1284 -rows=0 +cols=0 -cols=0 t=172s [lp 77s row 13s +r 22s col 1s +c 0s]
+  it   3 tau=4.296296 rows=14433 orbs=4076 atoms>0=82 minmass=0.791667 maxcov=1.320988 +rows=0 -rows=0 +cols=400 -cols=0 t=193s [lp 8s row 13s +r 0s col 0s +c 0s]
+  it   4 tau=4.250000 rows=15408 orbs=3945 atoms>0=16 minmass=0.750000 maxcov=1.233115 +rows=975 -rows=0 +cols=0 -cols=131 t=323s [lp 96s row 14s +r 19s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.291667 nu=4.291667 conv=False minmass=0.750000 maxcov=1.233115 rows=15408 orbits=3945 atoms_nz=104 packing_support=100 time=402s
+s only)
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=723 points=723 rows=4657 (rejected 1630)
+  it   0 tau=4.291667 rows=5012 orbs=723 atoms>0=41 minmass=0.708333 maxcov=1.666667 +rows=355 -rows=0 +cols=0 -cols=0 t=16s [lp 0s row 13s +r 0s col 0s +c 0s]
+  it   1 tau=4.291667 rows=5012 orbs=1723 atoms>0=43 minmass=0.750000 maxcov=1.666667 +rows=0 -rows=0 +cols=1000 -cols=0 t=30s [lp 0s row 13s +r 0s col 0s +c 0s]
+  it   2 tau=4.176471 rows=5610 orbs=1723 atoms>0=42 minmass=0.823529 maxcov=1.323529 +rows=598 -rows=0 +cols=0 -cols=0 t=50s [lp 4s row 14s +r 2s col 0s +c 0s]
+  it   3 tau=4.287879 rows=5610 orbs=2271 atoms>0=61 minmass=0.765152 maxcov=1.303030 +rows=0 -rows=0 +cols=999 -cols=451 t=65s [lp 1s row 13s +r 0s col 0s +c 0s]
+  it   4 tau=4.250000 rows=6682 orbs=2101 atoms>0=26 minmass=0.125000 maxcov=1.241279 +rows=1072 -rows=0 +cols=0 -cols=170 t=93s [lp 8s row 14s +r 6s col 1s +c 0s]
+  it   5 tau=4.500000 rows=4919 orbs=2228 atoms>0=23 minmass=0.666667 maxcov=1.500000 +rows=0 -rows=1763 +cols=213 -cols=86 t=116s [lp 9s row 13s +r 0s col 0s +c 0s]
+  it   6 tau=4.444444 rows=5169 orbs=2200 atoms>0=28 minmass=0.777778 maxcov=1.244444 +rows=259 -rows=9 +cols=0 -cols=28 t=142s [lp 12s row 13s +r 1s col 0s +c 0s]
+  it   7 tau=4.500000 rows=5166 orbs=2374 atoms>0=25 minmass=0.833333 maxcov=1.376344 +rows=0 -rows=3 +cols=999 -cols=825 t=156s [lp 1s row 12s +r 0s col 1s +c 0s]
+  it   8 tau=4.500000 rows=6214 orbs=2361 atoms>0=25 minmass=0.833333 maxcov=1.500000 +rows=1081 -rows=33 +cols=0 -cols=13 t=176s [lp 3s row 12s +r 5s col 0s +c 0s]
+  it   9 tau=4.523810 rows=6209 orbs=3178 atoms>0=58 minmass=0.809524 maxcov=1.340659 +rows=0 -rows=5 +cols=1000 -cols=183 t=193s [lp 4s row 12s +r 0s col 1s +c 0s]
+  it  10 tau=4.500000 rows=6100 orbs=2687 atoms>0=38 minmass=0.833333 maxcov=1.176471 +rows=1120 -rows=1229 +cols=0 -cols=491 t=221s [lp 9s row 13s +r 6s col 0s +c 0s]
+  it  11 tau=4.516129 rows=5751 orbs=3275 atoms>0=59 minmass=0.795699 maxcov=1.193548 +rows=0 -rows=349 +cols=1000 -cols=412 t=238s [lp 4s row 12s +r 0s col 0s +c 0s]
+  it  12 tau=4.507937 rows=6276 orbs=2922 atoms>0=66 minmass=0.809524 maxcov=1.126984 +rows=869 -rows=344 +cols=0 -cols=353 t=262s [lp 6s row 12s +r 6s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.533333 nu=4.533333 conv=False minmass=0.809524 maxcov=1.126984 rows=6276 orbits=2922 atoms_nz=42 packing_support=43 time=267s
+[round 1] tau=4.53333 conv=False scale=1.0998 cert total=4.98595 budget=5 atoms=42
+    boxes = 350838  covered = 137506  vacuous = 0  exempt = 37945 (core 37945, nofam 0)  split = 175387  exact atom checks = 168633  max depth = 39  time = 13.6s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 997191/200000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0521.json
+
+    {"id": "k5_11_interior_Y0521", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660164866212035, "ghost_dist": 0.71765, "box": {"x0": 1.519271, "x1": 1.6590280000000002, "y0": 1.519271, "y1": 1.6590280000000002, "th0": 0.0, "th1": 14.250032697803595}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 4.291666666667201, "converged": false, "minmass": 0.7500000000133569, "maxcov": 1.2331154684113554, "eta": -0.7083333333327992, "lp_seconds": 402.5, "scale_ceiling": 1.1650485436891753, "cert": "PASS", "cert_seconds": 284.5, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0521.json"}
+[14:30:51] LP k5_11_interior_Y0527 budget=5 a=0.356601610875256 gd=0.713 pool=3295
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3295 points=3295 rows=21390 (rejected 9565)
+  it   0 tau=5.000000 rows=22702 orbs=3295 atoms>0=44 minmass=0.523810 maxcov=1.449438 +rows=1312 -rows=0 +cols=0 -cols=0 t=188s [lp 144s row 12s +r 25s col 0s +c 0s]
+  it   1 tau=5.000000 rows=22702 orbs=3695 atoms>0=28 minmass=0.526316 maxcov=1.449438 +rows=0 -rows=0 +cols=400 -cols=0 t=225s [lp 20s row 17s +r 0s col 0s +c 0s]
+  it   2 tau=5.000000 rows=23213 orbs=3695 atoms>0=215 minmass=0.526316 maxcov=2.000000 +rows=511 -rows=0 +cols=0 -cols=0 t=492s [lp 127s row 128s +r 12s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=5.000000 nu=5.000000 conv=False minmass=0.526316 maxcov=2.000000 rows=23213 orbits=3695 atoms_nz=16 packing_support=5 time=514s
+    {"id": "k5_11_interior_Y0527", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.356601610875256, "ghost_dist": 0.71324, "box": {"x0": 1.1, "x1": 1.239757, "y0": 2.357813, "y1": 2.49757, "th0": 41.11209043916693, "th1": 53.13010235415598}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 5.000000000000614, "converged": false, "minmass": 0.5263158717608546, "maxcov": 2.0000000370326876, "eta": 6.137312880127865e-13, "lp_seconds": 514.6, "scale_ceiling": 0.9999999999998772, "cert": "ALIVE-at-LP (tau >= budget: certification refused)"}
+    {"id": "k5_11_interior_Y0533", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.71114, "box": {"x0": 1.6590280000000002, "x1": 1.798785, "y0": 1.1, "y1": 1.239757, "th0": 28.072486935852957, "th1": 41.11209043916693}, "trump_realizes": false, "pin": "contradictory", "pin_info": 3, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+    {"id": "k5_11_interior_Y0539", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.70774, "box": {"x0": 2.078299, "x1": 2.218056, "y0": 1.1, "y1": 1.239757, "th0": 64.01076641616699, "th1": 73.73979529168804}, "trump_realizes": false, "pin": "contradictory", "pin_info": 3, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[14:39:25] LP k5_11_interior_Y0545 budget=5 a=0.35660162976868715 gd=0.707 pool=3295
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3295 points=3295 rows=10161 (rejected 21207)
+  it   0 tau=4.000000 rows=11363 orbs=3295 atoms>0=12 minmass=0.666667 maxcov=1.250000 +rows=1202 -rows=0 +cols=0 -cols=0 t=31s [lp 4s row 12s +r 11s col 0s +c 0s]
+  it   1 tau=4.000000 rows=11363 orbs=3335 atoms>0=8 minmass=0.500000 maxcov=1.250000 +rows=0 -rows=0 +cols=40 -cols=0 t=38s [lp 0s row 7s +r 0s col 0s +c 0s]
+  it   2 tau=4.000000 rows=11515 orbs=3335 atoms>0=8 minmass=0.500000 maxcov=1.333333 +rows=152 -rows=0 +cols=0 -cols=0 t=47s [lp 1s row 7s +r 2s col 0s +c 0s]
+  it   3 tau=4.000000 rows=11515 orbs=3485 atoms>0=8 minmass=0.500000 maxcov=1.333333 +rows=0 -rows=0 +cols=150 -cols=0 t=50s [lp 2s row 1s +r 0s col 0s +c 0s]
+  it   4 tau=4.000000 rows=11570 orbs=3485 atoms>0=183 minmass=0.500000 maxcov=1.000000 +rows=55 -rows=0 +cols=0 -cols=0 t=205s [lp 58s row 97s +r 1s col 0s +c 0s]
+  it   5 tau=4.000000 rows=11570 orbs=3485 atoms>0=382 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=304s [lp 11s row 87s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.000000 nu=4.000000 conv=True minmass=1.000000 maxcov=1.000000 rows=11570 orbits=3485 atoms_nz=503 packing_support=784 time=304s
+[round 0] tau=4.00000 conv=True scale=1.2468 cert total=4.98750 budget=5 atoms=503
+    boxes = 19876  covered = 3993  vacuous = 0  exempt = 5977 (core 5977, nofam 0)  split = 9906  exact atom checks = 42765  max depth = 27  time = 1.0s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4987503/1000000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0545.json
+
+    {"id": "k5_11_interior_Y0545", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.7069, "box": {"x0": 1.798785, "x1": 1.938542, "y0": 1.6590280000000002, "y1": 1.798785, "th0": 64.01076641616699, "th1": 73.73979529168804}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 3.9999999990044763, "converged": true, "minmass": 1.0, "maxcov": 1.0000000244179221, "eta": -1.0000000009955237, "lp_seconds": 304.3, "scale_ceiling": 1.2500000003111011, "cert": "PASS", "cert_seconds": 1.4, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0545.json"}
+[14:44:31] LP k5_11_interior_Y0551 budget=5 a=0.35660162976868715 gd=0.704 pool=3342
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3342 points=3342 rows=9013 (rejected 22394)
+  it   0 tau=4.000000 rows=9381 orbs=3342 atoms>0=4 minmass=0.000000 maxcov=1.295455 +rows=368 -rows=0 +cols=0 -cols=0 t=20s [lp 2s row 10s +r 3s col 0s +c 0s]
+  it   1 tau=4.000000 rows=9381 orbs=3742 atoms>0=4 minmass=0.000000 maxcov=1.295455 +rows=0 -rows=0 +cols=400 -cols=0 t=27s [lp 0s row 6s +r 0s col 0s +c 0s]
+  it   2 tau=4.000000 rows=9803 orbs=3742 atoms>0=4 minmass=0.000000 maxcov=1.251445 +rows=422 -rows=0 +cols=0 -cols=0 t=52s [lp 9s row 12s +r 4s col 1s +c 0s]
+  it   3 tau=4.000000 rows=9803 orbs=4142 atoms>0=4 minmass=0.000000 maxcov=1.251445 +rows=0 -rows=0 +cols=400 -cols=0 t=55s [lp 0s row 2s +r 0s col 1s +c 0s]
+  it   4 tau=4.000000 rows=9834 orbs=4006 atoms>0=4 minmass=0.000000 maxcov=1.192717 +rows=31 -rows=0 +cols=0 -cols=136 t=69s [lp 10s row 2s +r 0s col 1s +c 0s]
+  it   5 tau=4.000000 rows=9834 orbs=4406 atoms>0=8 minmass=0.500000 maxcov=1.192717 +rows=0 -rows=0 +cols=400 -cols=0 t=71s [lp 1s row 1s +r 0s col 1s +c 0s]
+  it   6 tau=4.000000 rows=10900 orbs=4402 atoms>0=11 minmass=0.500000 maxcov=1.500000 +rows=1066 -rows=0 +cols=0 -cols=4 t=169s [lp 22s row 62s +r 13s col 0s +c 0s]
+  it   7 tau=4.000000 rows=10900 orbs=4416 atoms>0=7 minmass=1.000000 maxcov=1.500000 +rows=0 -rows=0 +cols=14 -cols=0 t=192s [lp 7s row 17s +r 0s col 0s +c 0s]
+  it   8 tau=4.000000 rows=10900 orbs=4445 atoms>0=7 minmass=1.000000 maxcov=1.500000 +rows=0 -rows=0 +cols=47 -cols=18 t=315s [lp 48s row 75s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.000000 nu=4.000001 conv=False minmass=1.000000 maxcov=1.500000 rows=10900 orbits=4445 atoms_nz=602 packing_support=1137 time=352s
+[round 0] tau=4.00000 conv=False scale=1.2468 cert total=4.98760 budget=5 atoms=602
+    boxes = 2887630  covered = 1424044  vacuous = 0  exempt = 19803 (core 19803, nofam 0)  split = 1443783  exact atom checks = 1862210  max depth = 43  time = 104.7s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 2493799/500000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0551.json
+
+    {"id": "k5_11_interior_Y0551", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.70425, "box": {"x0": 1.519271, "x1": 1.6590280000000002, "y0": 2.49757, "y1": 2.637327, "th0": 14.250032697803595, "th1": 28.072486935852957}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 3.999999998573027, "converged": false, "minmass": 1.0, "maxcov": 1.5000000000050602, "eta": -1.0000000014269732, "lp_seconds": 352.6, "scale_ceiling": 1.250000000445929, "cert": "PASS", "cert_seconds": 105.3, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0551.json"}
+    {"id": "k5_11_interior_Y0557", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.70073, "box": {"x0": 1.3795140000000001, "x1": 1.519271, "y0": 1.239757, "y1": 1.3795140000000001, "th0": 28.072486935852957, "th1": 41.11209043916693}, "trump_realizes": false, "pin": "contradictory", "pin_info": 1, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[14:52:09] LP k5_11_interior_Y0563 budget=5 a=0.35660164866212035 gd=0.698 pool=3500
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3500 points=3500 rows=7213 (rejected 24349)
+  it   0 tau=4.000000 rows=7818 orbs=3500 atoms>0=4 minmass=0.000000 maxcov=1.230769 +rows=605 -rows=0 +cols=0 -cols=0 t=19s [lp 2s row 10s +r 3s col 0s +c 0s]
+  it   1 tau=4.000000 rows=7818 orbs=3900 atoms>0=4 minmass=1.000000 maxcov=1.230769 +rows=0 -rows=0 +cols=400 -cols=0 t=20s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   2 tau=4.000000 rows=7818 orbs=4020 atoms>0=5 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=120 -cols=0 t=58s [lp 13s row 25s +r 0s col 0s +c 0s]
+  it   3 tau=4.000000 rows=7818 orbs=4420 atoms>0=4 minmass=1.000000 maxcov=1.174780 +rows=0 -rows=0 +cols=400 -cols=0 t=123s [lp 64s row 0s +r 0s col 1s +c 0s]
+  it   4 tau=4.000000 rows=7818 orbs=4819 atoms>0=4 minmass=1.000000 maxcov=1.091395 +rows=0 -rows=0 +cols=400 -cols=1 t=199s [lp 74s row 1s +r 0s col 1s +c 0s]
+  it   5 tau=4.000000 rows=7818 orbs=5101 atoms>0=4 minmass=1.000000 maxcov=1.050648 +rows=0 -rows=0 +cols=400 -cols=118 t=255s [lp 54s row 1s +r 0s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.000000 nu=4.000000 conv=False minmass=1.000000 maxcov=1.050648 rows=7818 orbits=5101 atoms_nz=55 packing_support=205 time=343s
+[round 0] tau=4.00000 conv=False scale=1.2468 cert total=4.98705 budget=5 atoms=55
+    boxes = 38344  covered = 14186  vacuous = 0  exempt = 5018 (core 5018, nofam 0)  split = 19140  exact atom checks = 20284  max depth = 39  time = 1.3s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1246763/250000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0563.json
+
+    {"id": "k5_11_interior_Y0563", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660164866212035, "ghost_dist": 0.69783, "box": {"x0": 2.218056, "x1": 2.357813, "y0": 1.519271, "y1": 1.6590280000000002, "th0": 0.0, "th1": 14.250032697803595}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 3.999999999988472, "converged": false, "minmass": 1.0, "maxcov": 1.050647820964966, "eta": -1.0000000000115281, "lp_seconds": 342.9, "scale_ceiling": 1.2500000000036025, "cert": "PASS", "cert_seconds": 1.8, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0563.json"}
+[14:57:53] LP k5_11_interior_Y0569 budget=5 a=0.35660162976868715 gd=0.693 pool=3531
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3531 points=3531 rows=7435 (rejected 24208)
+  it   0 tau=3.500000 rows=8040 orbs=3531 atoms>0=6 minmass=0.000000 maxcov=1.366667 +rows=605 -rows=0 +cols=0 -cols=0 t=23s [lp 3s row 12s +r 4s col 0s +c 0s]
+  it   1 tau=3.755102 rows=8040 orbs=3931 atoms>0=45 minmass=0.775510 maxcov=1.632653 +rows=0 -rows=0 +cols=400 -cols=0 t=37s [lp 1s row 12s +r 0s col 0s +c 0s]
+  it   2 tau=3.666667 rows=8473 orbs=3931 atoms>0=10 minmass=0.333333 maxcov=1.222222 +rows=433 -rows=0 +cols=0 -cols=0 t=62s [lp 8s row 13s +r 4s col 0s +c 0s]
+  it   3 tau=3.700000 rows=8473 orbs=4018 atoms>0=65 minmass=0.800000 maxcov=1.200000 +rows=0 -rows=0 +cols=87 -cols=0 t=77s [lp 2s row 12s +r 0s col 0s +c 0s]
+  it   4 tau=3.680000 rows=9779 orbs=3926 atoms>0=42 minmass=0.800000 maxcov=1.240000 +rows=1306 -rows=0 +cols=0 -cols=92 t=108s [lp 4s row 13s +r 13s col 0s +c 0s]
+  it   5 tau=3.700000 rows=9779 orbs=4100 atoms>0=69 minmass=0.858621 maxcov=1.300000 +rows=0 -rows=0 +cols=174 -cols=0 t=124s [lp 3s row 13s +r 0s col 0s +c 0s]
+  it   6 tau=3.666667 rows=10442 orbs=4089 atoms>0=22 minmass=0.833333 maxcov=1.333333 +rows=663 -rows=0 +cols=0 -cols=11 t=162s [lp 13s row 16s +r 9s col 0s +c 0s]
+  it   7 tau=3.705882 rows=10442 orbs=4159 atoms>0=46 minmass=0.882353 maxcov=1.117647 +rows=0 -rows=0 +cols=74 -cols=4 t=185s [lp 9s row 14s +r 0s col 0s +c 0s]
+  it   8 tau=3.684211 rows=11485 orbs=4154 atoms>0=66 minmass=0.347368 maxcov=1.210526 +rows=1043 -rows=0 +cols=0 -cols=5 t=225s [lp 12s row 14s +r 15s col 0s +c 0s]
+  it   9 tau=3.739048 rows=11485 orbs=4452 atoms>0=101 minmass=0.779048 maxcov=1.260952 +rows=0 -rows=0 +cols=400 -cols=102 t=249s [lp 11s row 12s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=3.700000 nu=3.700000 conv=False minmass=0.779048 maxcov=1.260952 rows=11485 orbits=4452 atoms_nz=40 packing_support=51 time=260s
+[round 0] tau=3.70000 conv=False scale=1.3480 cert total=4.98761 budget=5 atoms=40
+    boxes = 91738  covered = 24609  vacuous = 0  exempt = 21292 (core 21292, nofam 0)  split = 45837  exact atom checks = 37518  max depth = 39  time = 3.0s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 498761/100000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0569.json
+
+    {"id": "k5_11_interior_Y0569", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.69314, "box": {"x0": 1.798785, "x1": 1.938542, "y0": 2.49757, "y1": 2.637327, "th0": 53.13010235415598, "th1": 64.01076641616699}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 3.7000000000457782, "converged": false, "minmass": 0.7790476190476492, "maxcov": 1.2609523809523802, "eta": -1.2999999999542218, "lp_seconds": 260.3, "scale_ceiling": 1.3513513513346318, "cert": "PASS", "cert_seconds": 3.5, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0569.json"}
+    {"id": "k5_11_interior_Y0575", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.69127, "box": {"x0": 1.1, "x1": 1.239757, "y0": 2.637327, "y1": 2.777084, "th0": 14.250032697803595, "th1": 28.072486935852957}, "trump_realizes": false, "pin": "contradictory", "pin_info": 2, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[15:02:17] LP k5_11_interior_Y0581 budget=5 a=0.35660162976868715 gd=0.689 pool=3543
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3543 points=3543 rows=3600 (rejected 28252)
+    fine row search: minmass=1.000000 +rows=0
+  it   0 tau=4.000000 rows=3600 orbs=3543 atoms>0=4 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=5s [lp 1s row 0s +r 0s col 0s +c 0s]
+DONE s=3.877084 n=5 sym=C1 tau=4.000000 nu=4.000000 conv=True minmass=1.000000 maxcov=1.000000 rows=3600 orbits=3543 atoms_nz=4 packing_support=4 time=5s
+[round 0] tau=4.00000 conv=True scale=1.2468 cert total=4.98700 budget=5 atoms=4
+    boxes = 42348  covered = 11695  vacuous = 0  exempt = 9511 (core 9511, nofam 0)  split = 21142  exact atom checks = 11695  max depth = 39  time = 2.0s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4987/1000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0581.json
+
+    {"id": "k5_11_interior_Y0581", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.6889, "box": {"x0": 2.218056, "x1": 2.357813, "y0": 2.357813, "y1": 2.49757, "th0": 64.01076641616699, "th1": 73.73979529168804}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 4.0, "converged": true, "minmass": 1.0, "maxcov": 1.0, "eta": -1.0, "lp_seconds": 5.3, "scale_ceiling": 1.25, "cert": "PASS", "cert_seconds": 2.5, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0581.json"}
+    {"id": "k5_11_interior_Y0587", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660164866212035, "ghost_dist": 0.68725, "box": {"x0": 1.519271, "x1": 1.6590280000000002, "y0": 1.1, "y1": 1.239757, "th0": 0.0, "th1": 14.250032697803595}, "trump_realizes": false, "pin": "contradictory", "pin_info": 3, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[15:02:25] LP k5_11_interior_Y0593 budget=5 a=0.35660162976868715 gd=0.683 pool=3543
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3543 points=3543 rows=12491 (rejected 18850)
+  it   0 tau=4.500000 rows=14294 orbs=3543 atoms>0=40 minmass=0.700000 maxcov=1.259386 +rows=1803 -rows=0 +cols=0 -cols=0 t=42s [lp 5s row 10s +r 22s col 0s +c 0s]
+  it   1 tau=4.500000 rows=14294 orbs=3943 atoms>0=42 minmass=0.807692 maxcov=1.259386 +rows=0 -rows=0 +cols=400 -cols=0 t=55s [lp 2s row 10s +r 0s col 0s +c 0s]
+  it   2 tau=4.500000 rows=15866 orbs=3943 atoms>0=42 minmass=0.807692 maxcov=1.365124 +rows=1572 -rows=0 +cols=0 -cols=0 t=139s [lp 46s row 14s +r 23s col 1s +c 0s]
+  it   3 tau=4.500000 rows=15866 orbs=4343 atoms>0=46 minmass=0.850000 maxcov=1.365124 +rows=0 -rows=0 +cols=400 -cols=0 t=161s [lp 9s row 13s +r 0s col 1s +c 0s]
+  it   4 tau=4.500000 rows=16438 orbs=4179 atoms>0=46 minmass=0.850000 maxcov=1.124306 +rows=572 -rows=0 +cols=0 -cols=164 t=211s [lp 27s row 11s +r 11s col 1s +c 0s]
+  it   5 tau=4.500000 rows=16438 orbs=4579 atoms>0=43 minmass=0.900000 maxcov=1.124306 +rows=0 -rows=0 +cols=400 -cols=0 t=227s [lp 9s row 6s +r 0s col 1s +c 0s]
+=== A57 k5_11_interior_L1 shard 0/6 2026-09-01 15:19:55 children=193 done=99 warm=3522 atoms 30000 rows from ['k5_11.json', 'k5_11.json', 'k5_11.prev1788237925.json', 'k5_11.prev1788241588.json', 'k5_11_state.json', 'k5_11.resolve1.json', 'k5_11.resolve2.json', 'k5_11.resolve3.json', 'k5_11.json', 'k5_11_state.json', 'k5_11.resolve1.json', 'k5_11.resolve2.json', 'k5_11.resolve3.json', 'k5_11.resolve4.json', 'k5_11.resolve5.json', 'k5_11.resolve6.json', 'k5_11.witnesses.json', 'k5_11.witnesses.json']
+    folded pool = 4470 atoms
+[15:19:56] LP k5_11_interior_Y0593 budget=5 a=0.35660162976868715 gd=0.683 pool=4470
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=4470 points=4470 rows=12585 (rejected 18850)
+  it   0 tau=4.500000 rows=13422 orbs=4470 atoms>0=9 minmass=0.000000 maxcov=1.212687 +rows=837 -rows=0 +cols=0 -cols=0 t=47s [lp 19s row 10s +r 12s col 1s +c 0s]
+  it   1 tau=4.500000 rows=13422 orbs=4870 atoms>0=62 minmass=0.504505 maxcov=1.212687 +rows=0 -rows=0 +cols=400 -cols=0 t=66s [lp 7s row 12s +r 0s col 1s +c 0s]
+  it   2 tau=4.500000 rows=15242 orbs=4870 atoms>0=62 minmass=0.689189 maxcov=1.250000 +rows=1820 -rows=0 +cols=0 -cols=0 t=177s [lp 68s row 10s +r 33s col 0s +c 0s]
+  it   3 tau=4.500000 rows=15242 orbs=4913 atoms>0=44 minmass=0.576923 maxcov=1.250000 +rows=0 -rows=0 +cols=43 -cols=0 t=274s [lp 47s row 50s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.500000 nu=4.500000 conv=False minmass=0.576923 maxcov=1.250000 rows=15242 orbits=4913 atoms_nz=46 packing_support=9 time=478s
+l extra 168), re-solving (rows only)
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=669 points=669 rows=4512 (rejected 1631)
+  it   0 tau=4.500000 rows=4513 orbs=669 atoms>0=9 minmass=0.500000 maxcov=1.571429 +rows=1 -rows=0 +cols=0 -cols=0 t=3s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   1 tau=4.500000 rows=4513 orbs=1669 atoms>0=9 minmass=0.500000 maxcov=1.571429 +rows=0 -rows=0 +cols=1000 -cols=0 t=4s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   2 tau=4.500000 rows=4516 orbs=1669 atoms>0=9 minmass=0.500000 maxcov=1.500000 +rows=3 -rows=0 +cols=0 -cols=0 t=6s [lp 1s row 1s +r 0s col 0s +c 0s]
+  it   3 tau=4.500000 rows=4516 orbs=2245 atoms>0=9 minmass=1.000000 maxcov=1.500000 +rows=0 -rows=0 +cols=620 -cols=44 t=8s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it   4 tau=4.500000 rows=4516 orbs=3245 atoms>0=9 minmass=1.000000 maxcov=1.315789 +rows=0 -rows=0 +cols=1000 -cols=0 t=17s [lp 9s row 0s +r 0s col 0s +c 0s]
+  it   5 tau=4.500000 rows=2390 orbs=2839 atoms>0=9 minmass=1.000000 maxcov=1.200000 +rows=0 -rows=2126 +cols=376 -cols=782 t=24s [lp 5s row 1s +r 0s col 0s +c 0s]
+  it   6 tau=4.500000 rows=2390 orbs=2654 atoms>0=9 minmass=1.000000 maxcov=1.166667 +rows=0 -rows=0 +cols=265 -cols=450 t=25s [lp 1s row 0s +r 0s col 0s +c 0s]
+  it   7 tau=4.500000 rows=2390 orbs=2708 atoms>0=9 minmass=1.000000 maxcov=1.147727 +rows=0 -rows=0 +cols=171 -cols=117 t=28s [lp 1s row 1s +r 0s col 0s +c 0s]
+  it   8 tau=4.500000 rows=2180 orbs=2583 atoms>0=9 minmass=1.000000 maxcov=1.130769 +rows=0 -rows=210 +cols=210 -cols=335 t=32s [lp 1s row 3s +r 0s col 0s +c 0s]
+  it   9 tau=4.500000 rows=2180 orbs=2501 atoms>0=9 minmass=1.000000 maxcov=1.022727 +rows=0 -rows=0 +cols=12 -cols=94 t=34s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it  10 tau=4.500000 rows=2180 orbs=2551 atoms>0=9 minmass=1.000000 maxcov=1.041667 +rows=0 -rows=0 +cols=119 -cols=69 t=44s [lp 1s row 9s +r 0s col 0s +c 0s]
+  it  11 tau=4.500000 rows=2180 orbs=2551 atoms>0=182 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=55s [lp 1s row 10s +r 0s col 0s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it  12 tau=4.500000 rows=2180 orbs=2545 atoms>0=182 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=6 t=94s [lp 0s row 10s +r 0s col 0s +c 0s]
+DONE s=3.877084 n=5 sym=C1 tau=4.500000 nu=4.500000 conv=True minmass=1.000000 maxcov=1.000000 rows=2180 orbits=2545 atoms_nz=9 packing_support=45 time=94s
+[round 1] tau=4.50000 conv=True scale=1.1080 cert total=4.98600 budget=5 atoms=9
+    boxes = 779874  covered = 317178  vacuous = 0  exempt = 72791 (core 72791, nofam 0)  split = 389905  exact atom checks = 318584  max depth = 39  time = 29.5s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1246501/250000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0593.json
+
+    {"id": "k5_11_interior_Y0593", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.68253, "box": {"x0": 2.49757, "x1": 2.637327, "y0": 1.3795140000000001, "y1": 1.519271, "th0": 64.01076641616699, "th1": 73.73979529168804}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 4.500000000001102, "converged": false, "minmass": 0.5769230772539398, "maxcov": 1.2499999999983056, "eta": -0.49999999999889777, "lp_seconds": 478.3, "scale_ceiling": 1.111111111110839, "cert": "PASS", "cert_seconds": 133.3, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0593.json"}
+    {"id": "k5_11_interior_Y0599", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.67779, "box": {"x0": 1.1, "x1": 1.239757, "y0": 2.078299, "y1": 2.218056, "th0": 53.13010235415598, "th1": 64.01076641616699}, "trump_realizes": false, "pin": "contradictory", "pin_info": 1, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[15:30:08] LP k5_11_interior_Y0605 budget=5 a=0.35660162976868715 gd=0.674 pool=4471
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=4471 points=4471 rows=8314 (rejected 23335)
+  it   0 tau=3.000000 rows=8421 orbs=4471 atoms>0=3 minmass=0.000000 maxcov=1.333333 +rows=107 -rows=0 +cols=0 -cols=0 t=15s [lp 4s row 6s +r 1s col 0s +c 0s]
+  it   1 tau=3.000000 rows=8421 orbs=4559 atoms>0=3 minmass=0.000000 maxcov=1.333333 +rows=0 -rows=0 +cols=88 -cols=0 t=17s [lp 0s row 2s +r 0s col 0s +c 0s]
+  it   2 tau=3.000000 rows=8448 orbs=4559 atoms>0=3 minmass=0.000000 maxcov=1.125000 +rows=27 -rows=0 +cols=0 -cols=0 t=20s [lp 1s row 2s +r 0s col 0s +c 0s]
+  it   3 tau=3.000000 rows=8448 orbs=4725 atoms>0=3 minmass=1.000000 maxcov=1.125000 +rows=0 -rows=0 +cols=166 -cols=0 t=21s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   4 tau=3.000000 rows=8448 orbs=4722 atoms>0=3 minmass=1.000000 maxcov=1.500000 +rows=0 -rows=0 +cols=5 -cols=8 t=23s [lp 1s row 1s +r 0s col 0s +c 0s]
+  it   5 tau=3.000000 rows=8448 orbs=4750 atoms>0=3 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=28 -cols=0 t=57s [lp 6s row 28s +r 0s col 0s +c 0s]
+  it   6 tau=3.000000 rows=8448 orbs=4944 atoms>0=3 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=194 -cols=0 t=163s [lp 21s row 84s +r 0s col 0s +c 0s]
+  it   7 tau=3.000000 rows=8448 orbs=5011 atoms>0=3 minmass=1.000000 maxcov=1.333333 +rows=0 -rows=0 +cols=67 -cols=0 t=204s [lp 27s row 14s +r 0s col 0s +c 0s]
+  it   8 tau=3.000000 rows=8448 orbs=5202 atoms>0=3 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=191 -cols=0 t=461s [lp 107s row 150s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=3.000000 nu=3.000000 conv=False minmass=1.000000 maxcov=2.000000 rows=8448 orbits=5202 atoms_nz=3 packing_support=3 time=501s
+[round 0] tau=3.00000 conv=False scale=1.4000 cert total=4.20000 budget=5 atoms=3
+    boxes = 457164  covered = 206420  vacuous = 0  exempt = 22194 (core 22194, nofam 0)  split = 228550  exact atom checks = 206420  max depth = 37  time = 12.8s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4200001/1000000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_11_interior_L1\k5_11_interior_Y0605.json
+
+    {"id": "k5_11_interior_Y0605", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.67385, "box": {"x0": 1.798785, "x1": 1.938542, "y0": 2.637327, "y1": 2.777084, "th0": 14.250032697803595, "th1": 28.072486935852957}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 2.999999999998678, "converged": false, "minmass": 1.0, "maxcov": 2.000000000280715, "eta": -2.000000000001322, "lp_seconds": 500.6, "scale_ceiling": 1.666666666667401, "cert": "PASS", "cert_seconds": 13.6, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_11_interior_L1\\k5_11_interior_Y0605.json"}
+    {"id": "k5_11_interior_Y0611", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.67035, "box": {"x0": 1.1, "x1": 1.239757, "y0": 1.6590280000000002, "y1": 1.798785, "th0": 14.250032697803595, "th1": 28.072486935852957}, "trump_realizes": false, "pin": "contradictory", "pin_info": 1, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+    {"id": "k5_11_interior_Y0617", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660164866212035, "ghost_dist": 0.66757, "box": {"x0": 2.078299, "x1": 2.218056, "y0": 1.239757, "y1": 1.3795140000000001, "th0": 0.0, "th1": 14.250032697803595}, "trump_realizes": false, "pin": "contradictory", "pin_info": 3, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+    {"id": "k5_11_interior_Y0623", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.66611, "box": {"x0": 1.519271, "x1": 1.6590280000000002, "y0": 1.239757, "y1": 1.3795140000000001, "th0": 28.072486935852957, "th1": 41.11209043916693}, "trump_realizes": false, "pin": "contradictory", "pin_info": 3, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+    {"id": "k5_11_interior_Y0629", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.66144, "box": {"x0": 1.798785, "x1": 1.938542, "y0": 1.239757, "y1": 1.3795140000000001, "th0": 14.250032697803595, "th1": 28.072486935852957}, "trump_realizes": false, "pin": "contradictory", "pin_info": 3, "tau": null, "eta": null, "cert": "KILL-BY-LOGIC (core meets pin core)", "lp_seconds": 0.0}
+[15:38:42] LP k5_11_interior_Y0635 budget=5 a=0.35660162976868715 gd=0.659 pool=4471
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=4471 points=4471 rows=15936 (rejected 15365)

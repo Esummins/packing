@@ -34,6 +34,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
 
+import blas1  # A57 T18: pin BLAS to 1 thread BEFORE numpy loads
 import pilot59 as P
 from pilot59 import (S0F, S_RAT, PINS, SLOTS, FREE, TH_T, core_box, rq, tbox_deg,
                      boxes_pairwise_disjoint, init_warm)

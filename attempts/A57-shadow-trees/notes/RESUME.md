@@ -128,3 +128,37 @@ bare `FAIL(rc=1)`.  This sweep covers them without disturbing a running shard (n
 lost LP work).  Only `rc=1` is eligible — `rc=3` is the T11 knife edge and wants `deepen.py`.
 Idempotent: a node with a `certs/epsgeo/<id>.json.PASS` marker is skipped.  Corrected records are
 APPENDED (board.py keeps the last record per id), so both lines stay on disk for the audit trail.
+
+## pending: re-sweep Y0461 with the right margins
+
+`k5_11_interior_Y0461` (tau 4.916667, ceiling **1.0169**) was written off by the FIRST sweep,
+which still used the fixed margins 0.002/0.004 — both far too large for that headroom (T16 would
+choose 0.0005/0.001).  Its record now reads "queued for depth 2", so the eligibility filter skips
+it.  Re-run it explicitly when a slot is free:
+
+    python code/sweepfails.py --ids k5_11_interior_Y0461 --rounds 1 --jobs 2 --depth 60
+
+This is an optimisation, not a correctness issue — `deepen.py` will kill it at depth 2 either
+way, just for ~8 sub-solves instead of ~2 minutes.  General lesson: **a sweep killed mid-flight
+leaves records written by the superseded logic**, and the "queued for depth 2" filter then treats
+those premature verdicts as final.  `--ids` exists to override that.
+
+## the T14 sweep runs as a daemon
+
+    python code/sweepfails.py --watch 600 --rounds 1 --jobs 2 --depth 60
+
+The shards launched before the T14 wiring keep emitting `FAIL(rc=1)` records, and a one-shot
+sweep only ever sees the snapshot it started with — three separate hand-runs were needed before
+this was obvious.  `--watch N` re-scans every N seconds, so new failures are picked up without
+touching a running shard.  Margins are chosen per node from its scale headroom (T16), and
+records already routed to depth 2 are left alone.  One instance is enough; it counts against the
+process cap.
+
+## always launch through launch.ps1 / run_job.ps1
+
+Both pin `OPENBLAS_NUM_THREADS / OMP_NUM_THREADS / MKL_NUM_THREADS / NUMEXPR_NUM_THREADS = 1`.
+Launching a worker any other way risks the T18 failure: with ~20 BLAS threads per process,
+several concurrent jobs exhaust thread arenas and a *76 MiB* numpy allocation fails with ~10 GB
+free, killing jobs outright (it took out one tree shard and one deepen job simultaneously).
+
+    powershell -File code\run_job.ps1 -Script deepen.py -JobArgs "--key k5_11_interior_L1 --levels 3" -Tag deepen_k5_11

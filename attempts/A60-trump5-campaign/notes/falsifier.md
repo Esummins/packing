@@ -273,11 +273,18 @@ refusals into smaller boxes with larger rational cores — is where the campaign
 
 ### Operational notes banked for the campaign
 
-* **The RAM guard is the COMMIT charge, not free physical RAM.**  A cover shard died with
-  `numpy MemoryError: unable to allocate 66.6 MiB` while `FreePhysicalMemory` still read 9.1 GB —
-  commit stood at **57.7 / 61.0 GB** (pagefile capped near 30 GB).  Launch heavy jobs only above
-  ~6 GB of commit headroom (`notes/RESUME.md`).  Every phase is resumable, so an OOMed shard
-  costs only its in-flight LP.
+* **A cover shard died with `numpy MemoryError: unable to allocate 66.6 MiB` while
+  `FreePhysicalMemory` read 9.1 GB.**  My first reading — commit exhaustion (57.7 / 61.0 GB) — was
+  only half of it.  A57's T18, found the same day, is the root cause: numpy/OpenBLAS spawns ~one
+  thread per core (20 here) in *every* process, each with its own allocation arenas, and
+  concurrent jobs multiply that until an allocation fails against fragmentation rather than
+  against free memory (A57 lost two jobs at once to a 76.3 MiB failure at 9.9 GB free; A54 W7 is
+  the same failure, worked around by pruning columns).  **Adopted:** `code/blas1.py` (imported
+  before numpy by every entry point) and `code/launch.ps1` both pin
+  `OPENBLAS/OMP/MKL/NUMEXPR_NUM_THREADS = 1`.  Verified: A60 workers now run at **1–4 threads /
+  54–140 MB** against **21–22 threads / 0.3–1.8 GB** for the pre-T18 processes, and the shard that
+  had been held back is running again.  Commit headroom remains a secondary guard; every phase is
+  resumable, so a dead shard costs only its in-flight LP.
 * `pilot59.run_child` appends its record *before* the driver merges the campaign's own fields, so
   `tree60.kill` now always appends an **enriched** record afterwards (level / k / hugs / cond /
   any eps_geo repair); the scoreboard keeps the **last** record per tag, A57's convention.

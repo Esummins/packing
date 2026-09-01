@@ -8,13 +8,20 @@ conversions land first and a truncated campaign is still maximally informative.
 
 Usage: python campaign61.py [--heavy 2] [--only k5_05,k6_21] [--restart]
 """
-import argparse
-import json
 import os
-import subprocess
-import sys
-import time
-from concurrent.futures import ThreadPoolExecutor
+
+# A57 T18: single-thread BLAS per worker (see resolve61.py's header).  Set here too so that
+# every child inherits it even if invoked through a shell that drops the parent's environment.
+for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS",
+           "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_v, "1")
+
+import argparse                                                       # noqa: E402
+import json                                                           # noqa: E402
+import subprocess                                                     # noqa: E402
+import sys                                                            # noqa: E402
+import time                                                           # noqa: E402
+from concurrent.futures import ThreadPoolExecutor, as_completed       # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 A61 = os.path.abspath(os.path.join(HERE, ".."))
@@ -58,8 +65,12 @@ def one(name, pred, note, a, st):
            "--param_timeout", str(a.param_timeout),
            "--max_atoms", str(a.max_atoms), "--max_cols_add", str(a.max_cols_add)]
     lp = os.path.join(LOGS, f"campaign_{name}.out")
+    env = dict(os.environ)
+    for v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS",
+              "NUMEXPR_NUM_THREADS"):
+        env[v] = "1"
     with open(lp, "w", encoding="utf-8") as fh:
-        p = subprocess.run(cmd, stdout=fh, stderr=subprocess.STDOUT, text=True)
+        p = subprocess.run(cmd, stdout=fh, stderr=subprocess.STDOUT, text=True, env=env)
     rec = {}
     rp = os.path.join(RESULTS, f"resolve61_{name}.json")
     if os.path.exists(rp):
@@ -103,15 +114,36 @@ def main(argv=None):
     if a.only:
         keep = set(a.only.split(","))
         todo = [q for q in todo if q[0] in keep]
+    # resume off the per-name RECORD files, not just the progress file: a killed driver may
+    # have finished strata whose rows never got written (results land as they complete).
+    for (n, p, nt) in list(QUEUE):
+        rp = os.path.join(RESULTS, f"resolve61_{n}.json")
+        if n in st["rows"] or not os.path.exists(rp):
+            continue
+        try:
+            rec = json.load(open(rp))
+        except Exception:
+            continue
+        if rec.get("verdict"):
+            st["rows"][n] = {"name": n, "predicted_slack0": p, "note": nt, "rc": None,
+                             "wall_s": rec.get("total_seconds"),
+                             "verdict": rec.get("verdict"),
+                             "slack0": (rec.get("stageA") or {}).get("slack0"),
+                             "tau0": (rec.get("stageA") or {}).get("tau0"),
+                             "tau_eps": (rec.get("stageB") or {}).get("tau"),
+                             "certify": rec.get("certify"),
+                             "cert_margin": (rec.get("new_cert") or {}).get("margin"),
+                             "anchoring": rec.get("anchoring"), "record": rp,
+                             "recovered": True}
+    json.dump(st, open(PROG, "w"), indent=1)
     todo = [q for q in todo if q[0] not in st["rows"]]
     print(f"campaign61: {len(todo)} strata, {a.heavy} concurrent, gate {a.gate}, "
           f"eps_geo {a.eps_geo}", flush=True)
     done = 0
     with ThreadPoolExecutor(max_workers=a.heavy) as ex:
         futs = {ex.submit(one, n, p, nt, a, st): n for (n, p, nt) in todo}
-        for f in futs:
-            pass
-        for f, nm in list(futs.items()):
+        for f in as_completed(futs):
+            nm = futs[f]
             row = f.result()
             st["rows"][nm] = row
             st["updated"] = time.strftime("%Y-%m-%dT%H:%M:%S")

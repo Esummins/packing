@@ -41,3 +41,46 @@ CERTIFIED: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_1
 
 $ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.json -o C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.json --name k5_17 --beta-gap 19/10,27/10
 k5_17: 11 atoms, 5 cores, budget 6, anchoring gap -> C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.json --slo 191/50 --shi 969271/250000 --depth 48 --sscale 8 --jobs 3 --split 3 --report C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.wit.json --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.json  (k5_17)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 11, cores = 5, budget = 6, total = 1166001/200000 (~5.830005000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '203/100', 'threshold_y': '1111771/500000', 'threshold_x_float': 2.03, 'threshold_y_float': 2.223542, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 2269282  covered = 510600  vacuous = 0  exempt = 624073  split = 1134609  s-splits = 217972  s-cells = 659  max depth = 37  max s-depth = 7  time = 78.2s
+PASS: for EVERY s in [191/50, 969271/250000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 1166001/200000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.report.json
+    4D[gap] PASS 78.5s
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.lo.json
+specialised k5_17 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.lo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.lo.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.lo.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.lo.wit.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.lo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 11, total mass = 1166001/200000 (~5.8300050000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 35230  covered = 8017  vacuous = 0  exempt = 9630 (core 9630, nofam 0)  split = 17583  exact atom checks = 9089  max depth = 28  time = 1.3s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 1166001/200000 < budget 6  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.lo.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.json --s 1924271/500000 -o C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.mid.json
+specialised k5_17 at s = 1924271/500000 (~3.848542000) -> C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.mid.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.mid.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.mid.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.mid.wit.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.mid.json
+s = 1924271/500000 (~3.8485420000), n = 11, atoms = 11, total mass = 1166001/200000 (~5.8300050000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 45258  covered = 10588  vacuous = 0  exempt = 12073 (core 12073, nofam 0)  split = 22597  exact atom checks = 11993  max depth = 28  time = 1.6s
+PASS: every NON-EXEMPT closed unit square in [0,1924271/500000]^2 has mass >= 1 ; total 1166001/200000 < budget 6  ==>  no packing of 11 unit squares in side <= 1924271/500000 (~3.8485420000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.mid.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_17.gp.param.json --s 969271/250000 -o C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.hi.json
+specialised k5_17 at s = 969271/250000 (~3.877084000) -> C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.hi.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.hi.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.hi.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.hi.wit.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.hi.json
+s = 969271/250000 (~3.8770840000), n = 11, atoms = 11, total mass = 1166001/200000 (~5.8300050000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 101736  covered = 24321  vacuous = 0  exempt = 26579 (core 26579, nofam 0)  split = 50836  exact atom checks = 25980  max depth = 30  time = 3.0s
+PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1166001/200000 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k5_17.hi.report.json
+    A61 CONVERTS (full window)

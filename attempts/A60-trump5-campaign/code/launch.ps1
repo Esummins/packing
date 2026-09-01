@@ -10,6 +10,17 @@ param(
   [double]$Wall = 1e9,
   [string]$Tag = ""
 )
+# A57 T18 (adopted 2026-09-01): pin every worker to ONE BLAS thread.  numpy/OpenBLAS spawns ~one
+# thread per core (20 here) in EVERY process, each with its own allocation arenas; concurrent jobs
+# multiply that until an allocation fails against fragmentation while GBs sit free.  Measured
+# twice: A57 lost a shard and a deepen job to a 76.3 MiB failure at 9.9 GB free; A60 cover shard
+# 1/2 died on 66.6 MiB at 9.1 GB free.  These jobs are LP + numpy-oracle work, not BLAS-bound, so
+# the parallelism bought nothing.  Child processes (certify.py / verify_case.py) inherit these.
+# code/blas1.py sets the same variables in-process, for workers started by hand.
+$env:OPENBLAS_NUM_THREADS = "1"
+$env:OMP_NUM_THREADS = "1"
+$env:MKL_NUM_THREADS = "1"
+$env:NUMEXPR_NUM_THREADS = "1"
 $py   = "C:\Users\esumm\AppData\Local\Python\bin\python.exe"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $base = Split-Path -Parent $here

@@ -9,6 +9,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
 
+import blas1  # A57 T18: pin BLAS to 1 thread BEFORE numpy loads
 import tree60 as T
 from tree60 import census, ladder_scan, gate, RES
 from caselp import Box

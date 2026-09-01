@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A57-shadow-trees\code\certify.py", line 120, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A57-shadow-trees\code\certify.py", line 107, in main
+    res = solve_node(s, hyp, budget, sym_kind=sym, warm=warm, time_limit=a.time_limit, out=None, log=lambda *x: print(*x, flush=True),
+                     extra_rows=extra, neigh_rows=0, col_stop_iter=10**6, col_stop_cov=1.01, max_cols_add=1000, max_rows_add=1500,
+                     fine_slack=99.0, max_iter=1000, prune=6, prune_cols=2, alternate=True)
+  File "C:\Users\esumm\code\packing\attempts\A57-shadow-trees\code\caselp.py", line 337, in solve_node
+    res, M = lpbox.run(s, tbox, sym, n=budget, N0=N0_, max_iter=max_iter, out=None, verbose=True, time_limit=time_limit,
+             ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       row_kw=dict(n_theta=n_theta, cstep=0.02), col_kw=dict(grid=grid, max_refine=30), init_atoms=ia, init_rows=ir,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+                       col_stop_iter=col_stop_iter, col_stop_cov=col_stop_cov, extra_rows=extra_rows, neigh_rows=neigh_rows,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       prune_cols=prune_cols, alternate=alternate)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A57-shadow-trees\code\lpbox.py", line 832, in run
+    obj = M.solve()
+  File "C:\Users\esumm\code\packing\attempts\A57-shadow-trees\code\lpbox.py", line 403, in solve
+    self.h.run()
+    ~~~~~~~~~~^^
+MemoryError: bad allocation
