@@ -1406,3 +1406,12 @@ affordable cost estimate for closing 3.84.
   k-maximality slide-selection lemma (slide-stuck minimizer exists; blockedness — semi-algebraic,
   LP-invisible — is precisely the A50 cascade's target). Gap list: s-parametric transfer of the
   kills (G-A53-1), blocked-slide pricing (G-A53-2), k=4 sweep (14 classes), k6_23 certification.
+
+## 2026-09-01 — A54 dispatched (stragglers); low-k design settled in discussion with the PI
+- PI question answered and banked as the low-k design: the strata ARE disjoint (L3) but naive
+  exclusions ("no square exactly at slot X") are measure-zero = LP-invisible (epsilon-parking).
+  The usable form = the SLIDE-STUCK DICHOTOMY: hunt the slide-stuck minimizer (L6); every square is
+  then either FAR from every completing slot (delta-radius NoFam zones — LP-visible positive-volume
+  exclusions) or NEAR-BUT-BLOCKED (forcing a mid-tilt intruder in the landing corridor — Trump's
+  own measured mechanism, intrusion 0.0135; priced by the wedge/cascade toolkit). = G-A53-2 made
+  operational. Sequence: after stragglers + k=4 sweep.
