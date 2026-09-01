@@ -1,0 +1,17 @@
+=== k3_ext k3_00 e2 2026-09-01 07:53:43 k=3 budget=8 cert_only=False
+    merged warm: 2951 atoms, 64297 rows from ['k3_00.json', 'k3_00.resolve1.json', 'k3_00.resolve2.json', 'k3_00.resolve3.json', 'k3_00.resolve4.json', 'k3_00_state.json', 'k3_00_state_e1keep.json', 'k3_00.witnesses.json']
+[s=3.877084 n=8 sym=C1 box=[0,90]x1] init orbits=2951 points=2951 rows=49628 (rejected 1369)
+  it   0 tau=7.661061 rows=50736 orbs=2951 atoms>0=442 minmass=0.702799 maxcov=1.181825 +rows=1108 -rows=0 +cols=0 -cols=0 t=1298s [lp 1249s row 15s +r 25s col 2s +c 0s]
+  it   1 tau=7.666667 rows=50736 orbs=3072 atoms>0=656 minmass=0.654868 maxcov=1.333333 +rows=0 -rows=0 +cols=121 -cols=0 t=2313s [lp 958s row 57s +r 0s col 0s +c 0s]
+  it   2 tau=7.663591 rows=51773 orbs=3072 atoms>0=557 minmass=0.681113 maxcov=1.115841 +rows=1037 -rows=0 +cols=0 -cols=0 t=3138s [lp 747s row 48s +r 27s col 2s +c 0s]
+  time limit
+DONE s=3.877084 n=8 sym=C1 tau=7.664262 nu=7.664262 conv=False minmass=0.681113 maxcov=1.115841 rows=51773 orbits=3072 atoms_nz=579 packing_support=494 time=3451s
+    rung1 done tau=7.664262 budget=8 conv=False minmass=0.681113 maxcov=1.115841 (3452s)
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A55-k4-sweep\code\certify.py C:\Users\esumm\code\packing\attempts\A55-k4-sweep\k3_ext\results\nodes\k3_00.json --s_rat 969271/250000 --rounds 10 --jobs 3 --depth 56 --time_limit 700.0 --out C:\Users\esumm\code\packing\attempts\A55-k4-sweep\k3_ext\certs\k3_00.json --scale 0 --scale_cap 1.40000 --max_w 96 --loop_cols
+[round 0] tau=7.66426 conv=False scale=1.0412 cert total=7.98000 budget=8 atoms=579
+    boxes = 2817596  covered = 1352961  vacuous = 0  exempt = 55869 (core 55869, nofam 0)  split = 1408766  exact atom checks = 3174945  max depth = 44  time = 64.9s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 399/50 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A55-k4-sweep\k3_ext\certs\k3_00.json
+
+
+    {"name": "k3_00", "k": 3, "budget": 8, "tau": 7.66426177885124, "converged": false, "minmass": 0.6811125389027415, "maxcov": 1.115841440075091, "eta": -0.33573822114875984, "lp_seconds": 3451.562008857727, "rung": "1", "tag": "e2", "n_rows": 51773, "n_orbits": 3072, "scale_ceiling": 1.0438056829002365, "scale_cap": 1.4, "cert": "PASS", "cert_seconds": 65.43530344963074}
