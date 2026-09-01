@@ -1420,3 +1420,11 @@ affordable cost estimate for closing 3.84.
 - PI sequencing: cheap extensions first (k=4 cap-extension + making the kill library
   proof-grade over the full window); the satellite trees (~2 desktop-days) and the low-k
   slide-stuck campaign held until these land.
+
+## 2026-09-01 — the three-front endgame dispatched (A57/A58/A59)
+- The stratification's residue = {trump5, k5_11, k5_16} + their sub-skeleton strata. PI's plan:
+  (1) A57 shadow trees (the priced compute item); (2) A58 clear-corner composition — k <= 3 leaves
+  a corner with no simple square, marrying the flush-free toolkit to the stratification with the
+  corner-occupancy anchor; (3) A59 trump5 as an 18-d ANCHORED grain problem (pinned squares =
+  walls; upward stratum boundary certified empty by the k=6 tier — the drain cannot escape up).
+  A56's window sweep finishing underneath.
