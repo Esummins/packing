@@ -101,6 +101,28 @@ def cap_atoms(atoms, n_base, cap):
     return base + rest[::step][:room], len(atoms)
 
 
+def lp_robust(name, hyp, budget, warm, eps, tlim, tag, L, rec, save, n_base, a):
+    """A61 M1: HiGHS allocates a dense rows x orbits working matrix, so a fat pool at ~12k
+    rows can exhaust the box with two concurrent workers.  Walk the pool down on
+    MemoryError rather than losing the stratum."""
+    caps = [a.max_atoms, a.max_atoms // 2, 900, 350]
+    mcs = [a.max_cols_add, a.max_cols_add // 2, 300, 150]
+    last = None
+    for i, (cap, mc) in enumerate(zip(caps, mcs)):
+        at = cap_atoms(list(warm["atoms"]), n_base, cap)[0]
+        if last is not None and len(at) >= last:
+            continue
+        last = len(at)
+        try:
+            return lp(name, hyp, budget, dict(atoms=at, rows=warm["rows"]), eps, tlim,
+                      tag, L, max_cols_add=mc, max_rows_add=(1200 if i == 0 else 800))
+        except MemoryError:
+            L(f"    MemoryError in stage {tag} at {len(at)} columns; stepping the pool down")
+            rec.setdefault("memory_retries", []).append({"stage": tag, "columns": len(at)})
+            save(rec)
+    raise MemoryError(f"stage {tag}: LP exhausted memory at every pool size")
+
+
 def enriched_warm(name):
     """Columns: every orbit/atom this lab ever produced for the node, INCLUDING A56's and
     A61's own interrupted-solve checkpoints.  Rows: A53's row set plus the 27-point stencil
@@ -156,14 +178,19 @@ def enriched_warm(name):
     return (dict(atoms=atoms, rows=rows), sorted(set(used_c)) + used_w, n_a53, n_wit, n_base)
 
 
-def lp(name, hyp, budget, warm, eps, tlim, tag, L, max_iter=4000, max_cols_add=800):
+def lp(name, hyp, budget, warm, eps, tlim, tag, L, max_iter=4000, max_cols_add=800,
+       prune_cols=3, max_rows_add=1200):
+    """prune=0 keeps every row (tau monotone across iterations, A56's discipline).
+    prune_cols > 0 deletes only ZERO-weight columns with strictly positive reduced cost
+    (A14 semantics): they are not in the optimum, they are regenerable by the column
+    oracle, and dropping them cannot lower tau -- it is purely a memory bound (A61 M1)."""
     import lpbox
     lpbox.EPS_GEO = eps
     t0 = time.time()
     res = solve_node(S0F, hyp, budget, sym_kind="C1", warm=warm, time_limit=tlim,
-                     max_iter=max_iter, out=None, log=L, prune=0, prune_cols=0,
+                     max_iter=max_iter, out=None, log=L, prune=0, prune_cols=prune_cols,
                      col_stop_iter=10 ** 6, col_stop_cov=1.002, max_cols_add=max_cols_add,
-                     max_rows_add=2500, fine_slack=99.0, alternate=True,
+                     max_rows_add=max_rows_add, fine_slack=99.0, alternate=True,
                      checkpoint=os.path.join(NODES, f"{name}_{tag}_state.json"))
     res["skeleton_name"] = name
     res["k"] = 11 - budget
@@ -233,16 +260,8 @@ def main(argv=None):
 
     # ---------------------------------------------------------------- stage A: tau0
     t_all = time.time()
-    try:
-        resA, dtA = lp(name, hyp, budget, warm, 1e-4, a.lp_time, "A", L,
-                       max_cols_add=a.max_cols_add)
-    except MemoryError:                       # A61 M1: halve the pool once and retry
-        L("    MemoryError in stage A; halving the column pool and retrying")
-        warm["atoms"] = cap_atoms(warm["atoms"], n_base, max(400, len(warm["atoms"]) // 2))[0]
-        rec["memory_retry"] = {"stage": "A", "columns": len(warm["atoms"])}
-        save(rec)
-        resA, dtA = lp(name, hyp, budget, warm, 1e-4, a.lp_time, "A", L,
-                       max_cols_add=max(200, a.max_cols_add // 2))
+    resA, dtA = lp_robust(name, hyp, budget, warm, 1e-4, a.lp_time, "A", L, rec, save,
+                          n_base, a)
     json.dump(resA, open(os.path.join(NODES, f"{name}.stageA.json"), "w"))
     tau0 = resA["tau"]
     slack0 = budget - tau0
@@ -265,18 +284,9 @@ def main(argv=None):
         if kk not in seen:
             seen.add(kk)
             bat.append(p)
-    warmB = dict(atoms=cap_atoms(bat, len(resA["atoms_all"]), a.max_atoms)[0],
-                 rows=[tuple(r) for r in resA["rows_all"]])
-    try:
-        resB, dtB = lp(name, hyp, budget, warmB, a.eps_geo, a.lp_time_b, "B", L,
-                       max_cols_add=a.max_cols_add)
-    except MemoryError:
-        L("    MemoryError in stage B; halving the column pool and retrying")
-        warmB["atoms"] = warmB["atoms"][:max(400, len(warmB["atoms"]) // 2)]
-        rec["memory_retry_b"] = {"stage": "B", "columns": len(warmB["atoms"])}
-        save(rec)
-        resB, dtB = lp(name, hyp, budget, warmB, a.eps_geo, a.lp_time_b, "B", L,
-                       max_cols_add=max(200, a.max_cols_add // 2))
+    warmB = dict(atoms=bat, rows=[tuple(r) for r in resA["rows_all"]])
+    resB, dtB = lp_robust(name, hyp, budget, warmB, a.eps_geo, a.lp_time_b, "B", L, rec,
+                          save, len(resA["atoms_all"]), a)
     node_out = os.path.join(NODES, f"{name}.json")
     resB["skeleton_slots"] = [[x, y] for (x, y) in slots]
     json.dump(resB, open(node_out, "w"))

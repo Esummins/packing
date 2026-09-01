@@ -1,0 +1,21 @@
+[round 0] tau=1.50000 conv=False scale=1.4000 cert total=2.10000 budget=3 atoms=3
+    boxes = 34897  covered = 15848  vacuous = 0  exempt = 1614 (core 1609, nofam 5)  split = 17427  exact atom checks = 15999  max depth = 56  time = 1.9s
+    FAIL: 8 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 3 undecided at this depth
+      worst witness: theta = 39.973031 deg, centre = (1.534484360, 3.172695506), exact mass = 7/10 (~0.700000000000)
+    feeding back 168 witness rows (total extra 168), re-solving (rows only)
+[s=3.877084 n=3 sym=C1 box=[0,90]x1] init orbits=627 points=627 rows=178 (rejected 2128)
+  it   0 tau=2.000000 rows=178 orbs=650 atoms>0=2 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=23 -cols=0 t=1s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   1 tau=2.000000 rows=178 orbs=731 atoms>0=2 minmass=1.000000 maxcov=2.000000 +rows=0 -rows=0 +cols=81 -cols=0 t=1s [lp 0s row 0s +r 0s col 0s +c 0s]
+  it   2 tau=1.500000 rows=182 orbs=731 atoms>0=3 minmass=0.500000 maxcov=1.500000 +rows=4 -rows=0 +cols=0 -cols=0 t=2s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it   3 tau=2.000000 rows=182 orbs=738 atoms>0=4 minmass=0.500000 maxcov=2.000000 +rows=0 -rows=0 +cols=7 -cols=0 t=10s [lp 0s row 8s +r 0s col 0s +c 0s]
+  it   4 tau=2.000000 rows=261 orbs=738 atoms>0=4 minmass=0.500000 maxcov=1.000000 +rows=79 -rows=0 +cols=0 -cols=0 t=18s [lp 0s row 8s +r 0s col 0s +c 0s]
+  it   5 tau=2.000000 rows=246 orbs=738 atoms>0=4 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=15 +cols=0 -cols=0 t=18s [lp 0s row 0s +r 0s col 0s +c 0s]
+    fine row search: minmass=1.000000 +rows=0
+  it   6 tau=2.000000 rows=246 orbs=738 atoms>0=4 minmass=1.000000 maxcov=1.000000 +rows=0 -rows=0 +cols=0 -cols=0 t=20s [lp 0s row 0s +r 0s col 0s +c 0s]
+DONE s=3.877084 n=3 sym=C1 tau=2.000000 nu=2.000000 conv=True minmass=1.000000 maxcov=1.000000 rows=246 orbits=738 atoms_nz=4 packing_support=2 time=20s
+[round 1] tau=2.00000 conv=True scale=1.4000 cert total=2.80000 budget=3 atoms=4
+    boxes = 2858  covered = 502  vacuous = 0  exempt = 959 (core 954, nofam 5)  split = 1397  exact atom checks = 598  max depth = 35  time = 0.6s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 14/5 < budget 3  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\certs\conf60_sq10_a0.3_tw.json
+
+---stderr---

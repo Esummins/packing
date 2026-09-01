@@ -39,7 +39,8 @@ def main():
     si, sn = map(int, a.shard.split("/"))
     scan = json.load(open(os.path.join(RES, a.scan or ("a60_ladder_j%d_scan.json" % j))))
     budget = scan["budget"]
-    cond = [basin_box(n) for n in cond_names]
+    cond = ([Box.from_json(d) for d in scan["cond_boxes"]] if scan.get("cond_boxes")
+            else [basin_box(n) for n in cond_names])
     sink = Sink("a60_falsify_j%d.jsonl" % j, "falsify_j%d_s%d.log" % (j, si))
     init_warm()
     sel = sample_queue(scan, a.n)

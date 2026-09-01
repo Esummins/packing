@@ -220,23 +220,62 @@ def kill(sink, tag, b, cond_boxes, nofams, budget, extra, lp_time=300.0, cert_ti
     if rec is not None:
         rec.update({k: v for k, v in extra.items() if k not in rec})
         sink.done[tag] = rec
+        if str(rec.get("verdict", "")).startswith("FAIL"):
+            fix = run_eps_geo(tag, cert_time=cert_time, depth=depth, jobs=jobs)
+            if fix:
+                rec = dict(rec)
+                rec.update(fix)
+        # run_child appended its own record BEFORE `extra` was merged, so append the enriched
+        # one too (level / k / hugs / cond / any eps_geo repair).  board keeps the LAST per tag.
+        sink.put(rec)
     return rec
 
 
+def run_eps_geo(tag, margins=(0.002, 0.004), cert_time=240.0, depth=56, jobs=2):
+    """A57 T14, folded in (A59's copy of tree57.py predates it).  A certificate with tau
+    comfortably under budget can still FAIL with ZERO holes and a few witness boxes the verifier
+    cannot DECIDE -- atoms sitting on placement boundaries, which more depth does not fix.
+    Re-solve the node LP with A56's row-shrink margin EPS_GEO = m, then certify.  Sound: shrinking
+    rows makes the LP HARDER (tau can only rise) and the arbiter is unchanged, so a wrong margin
+    can only produce another FAIL."""
+    import subprocess
+    node_path = os.path.join(RES, "nodes", tag + ".json")
+    if not os.path.exists(node_path):
+        return {}
+    certdir = os.path.join(BASE, "certs")
+    steps = []
+    for m in margins:
+        cert_out = os.path.join(certdir, "%s_epsgeo%g.json" % (tag, m))
+        cmd = [sys.executable, os.path.join(HERE, "certify.py"), node_path, "--s_rat", S_RAT,
+               "--eps_geo", "%g" % m, "--rounds", "2", "--jobs", str(jobs), "--depth", str(depth),
+               "--time_limit", str(cert_time), "--resolve_time", str(cert_time),
+               "--out", cert_out, "--scale", "0", "--scale_cap", "1.40000",
+               "--max_w", "32", "--loop_cols"]
+        t0 = time.time()
+        p = subprocess.run(cmd, capture_output=True, text=True)
+        with open(os.path.join(LOGS, "epsgeo_%s.log" % tag), "a") as f:
+            f.write(p.stdout[-4000:] + "\n---\n")
+        steps.append(dict(eps_geo=m, rc=p.returncode, seconds=round(time.time() - t0, 1)))
+        if p.returncode == 0:
+            open(cert_out + ".PASS", "w").write("ok")
+            return dict(verdict="PASS", cert_path=cert_out, eps_geo_used=m, eps_geo=steps)
+    return dict(verdict="FAIL(eps_geo retries exhausted) -> deepen", eps_geo=steps)
+
+
 # ------------------------------------------------------------------ PHASE: zone cover
-def build_cover(w=0.15, nth=8, a_min=0.34, cw=0.6):
+def build_cover(w=0.15, nth=8, a_min=0.34, cw=0.6, zone="interior"):
     from tree57 import cover
-    rect = zones(S0F, cw)["interior"]
+    rect = zones(S0F, cw)[zone]
     boxes, bad, grid = cover(rect, S0F, w, nth, a_min)
     return rect, boxes, bad, grid
 
 
-def census(cond_names, w=0.15, nth=8, a_min=0.34, out=None):
+def census(cond_names, w=0.15, nth=8, a_min=0.34, out=None, cond_boxes=None, zone="interior"):
     """classify the whole interior cover at conditioning depth j = len(cond_names).  Exact
     arithmetic only -- no LP is launched.  This IS the alive gate applied wholesale."""
-    cond = [basin_box(n) for n in cond_names]
-    budget = 6 - len(cond_names) - 1                    # YES child budget
-    rect, boxes, bad, grid = build_cover(w, nth, a_min)
+    cond = list(cond_boxes) if cond_boxes is not None else [basin_box(n) for n in cond_names]
+    budget = 6 - len(cond) - 1                          # YES child budget
+    rect, boxes, bad, grid = build_cover(w, nth, a_min, zone=zone)
     rows, counts = [], dict(cover=len(boxes), uncoverable=len(bad), contradictory=0, parent=0,
                             shared=0, nocore=0, attemptable=0, unkillable=0)
     trump_boxes = 0
@@ -250,7 +289,7 @@ def census(cond_names, w=0.15, nth=8, a_min=0.34, out=None):
         trump_boxes += 1 if hit else 0
         rows.append(dict(i=i, box=b.to_json(), state=g["state"], k=g["k"], fam=g["fam"],
                          hugs=g["hugs"], shares=g["shares"], trump_in_box=hit))
-    res = dict(cond=list(cond_names), j=len(cond_names), child_budget=budget, rect=list(rect),
+    res = dict(cond=list(cond_names), j=len(cond_names), zone=zone, child_budget=budget, rect=list(rect),
                grid=list(grid), counts=counts, boxes_with_a_trump_placement=trump_boxes,
                rows=rows)
     if out:
@@ -292,6 +331,8 @@ def phase_cover(cond_names, shard="0/1", w=0.15, nth=8, a_min=0.34, lp_time=300.
         tag = "%s_Y%04d" % (pref, r["i"])
         if sink.has(tag):
             st["done"] += 1
+            st["skipped"] = st.get("skipped", 0) + 1
+            flush()
             continue
         if time.time() - t0 > wall:
             logline("wall reached; stopping cleanly")
@@ -317,20 +358,22 @@ def phase_cover(cond_names, shard="0/1", w=0.15, nth=8, a_min=0.34, lp_time=300.
 
 # ------------------------------------------------------------------ PHASE: residue ladder
 def ladder_scan(cond_names, levels, w=0.15, nth=8, a_min=0.34, out=None, seed=None,
-                stop_when_basin=True, refine_chain=False):
+                stop_when_basin=True, refine_chain=False, cond_boxes=None, zone="interior"):
     """the EXACT part of the residue ladder: bisect only the unkillable boxes, re-run pinguard +
     the alive gate on every sub-box, keep the still-unkillable ones.  No LP.  Emits, per level,
     the residue statistics AND the list of newly attemptable sub-boxes (the kill queue)."""
-    cond = [basin_box(n) for n in cond_names]
-    j = len(cond_names)
+    cond = list(cond_boxes) if cond_boxes is not None else [basin_box(n) for n in cond_names]
+    j = len(cond)
     budget = 6 - j - 1
     if seed is not None:
         residue = [Box.from_json(d) for d in seed]
         chain = []
     else:
         cen_path = os.path.join(RES, "a60_census_j%d.json" % j)
-        cen = (json.load(open(cen_path)) if os.path.exists(cen_path)
-               else census(cond_names, w, nth, a_min, out="a60_census_j%d.json" % j))
+        cen = (json.load(open(cen_path)) if (os.path.exists(cen_path) and cond_boxes is None)
+               else census(cond_names, w, nth, a_min,
+                           out=("a60_census_j%d.json" % j) if cond_boxes is None else None,
+                           cond_boxes=cond_boxes, zone=zone))
         residue = [Box.from_json(r["box"]) for r in cen["rows"] if r["state"] == "unkillable"]
         chain = [(Box.from_json(r["box"]), r["shares"]) for r in cen["rows"]
                  if r["state"] == "shared"]
@@ -399,6 +442,7 @@ def ladder_scan(cond_names, levels, w=0.15, nth=8, a_min=0.34, out=None, seed=No
         out_levels[-1]["queue"] = queue
         residue = nxt
     res = dict(cond=list(cond_names), j=j, budget=budget, levels=out_levels,
+               cond_boxes=[b.to_json() for b in cond],
                final_residue=[b.to_json() for b in residue],
                final_chain=[[b.to_json(), nm] for (b, nm) in chain])
     if out:
@@ -419,7 +463,8 @@ def phase_ladder(cond_names, levels=26, shard="0/1", lp_time=300.0, cert_time=24
         scan = json.load(open(scan_path))
     else:
         scan, _ = ladder_scan(cond_names, levels, out="a60_ladder_j%d_scan.json" % j)
-    cond = [basin_box(n) for n in cond_names]
+    cond = ([Box.from_json(d) for d in scan["cond_boxes"]] if scan.get("cond_boxes")
+            else [basin_box(n) for n in cond_names])
     budget = scan["budget"]
     prog = os.path.join(PROG, "ladder_j%d_s%d.json" % (j, si))
     queue = [(L["level"], i, q) for L in scan["levels"] for i, q in enumerate(L.get("queue", []))]
@@ -444,6 +489,8 @@ def phase_ladder(cond_names, levels=26, shard="0/1", lp_time=300.0, cert_time=24
         tag = "l%d_L%02d_%04d" % (j, level, i)
         if sink.has(tag):
             st["done"] += 1
+            st["skipped"] = st.get("skipped", 0) + 1
+            flush()
             continue
         if time.time() - t0 > wall:
             logline("wall reached; stopping cleanly")
@@ -464,10 +511,159 @@ def phase_ladder(cond_names, levels=26, shard="0/1", lp_time=300.0, cert_time=24
     return st
 
 
+# ------------------------------------------------------------------ PHASE: deepen (A57 T11)
+#
+# G-A60-3.  The alive gate's 'attemptable' verdict only says the A57-3 obstruction is ABSENT
+# (k is a lower bound on tau*, never an upper one -- A54 S0).  A box the gate calls attemptable
+# can still come back `refused (tau >= budget)` or FAIL from the certifier, and such a box is
+# NOT resolved: it must be bisected and re-processed at the SAME budget (A57 T11 -- a refinement
+# of the same disjunction spends no budget).  Sub-boxes have a strictly larger rational core
+# (a = (1/2 - hd)/(1 + dt) rises toward 1/2 as the box shrinks), which is what makes the retry
+# worth anything.  This phase is what closes the gap between 'attemptable' and 'killed'.
+def resisters(jsonl):
+    """records that did not resolve: LP-alive at the node's resolution, or a failed certificate."""
+    p = os.path.join(RES, jsonl)
+    if not os.path.exists(p):
+        return []
+    out = []
+    for line in open(p):
+        try:
+            r = json.loads(line)
+        except Exception:
+            continue
+        v = r.get("verdict", "")
+        if (v.startswith("refused (tau") or v.startswith("FAIL")) and r.get("box"):
+            out.append(r)
+    return out
+
+
+def phase_deepen(cond_names, source, rnd=1, shard="0/1", lp_time=300.0, cert_time=240.0,
+                 wall=1e9, max_children=10 ** 9, cond_boxes=None):
+    j = len(cond_names)
+    si, sn = map(int, shard.split("/"))
+    cond = (list(cond_boxes) if cond_boxes is not None
+            else [basin_box(n) for n in cond_names])
+    budget = 6 - len(cond) - 1
+    src = resisters(source)
+    sink = Sink("a60_deepen_j%d_r%d.jsonl" % (j, rnd), "deepen_j%d_r%d_s%d.log" % (j, rnd, si))
+    init_warm()
+    subs = []
+    for r in src:
+        b = Box.from_json(r["box"])
+        for si_, sb in enumerate(b.split()):
+            subs.append((r["tag"], si_, sb))
+    mine = [x for i, x in enumerate(subs) if i % sn == si][:max_children]
+    prog = os.path.join(PROG, "deepen_j%d_r%d_s%d.json" % (j, rnd, si))
+    st = dict(phase="deepen", j=j, round=rnd, source=source, cond=list(cond_names), budget=budget,
+              shard=shard, parents=len(src), total=len(mine), done=0, free=0, residue=0,
+              passed=0, failed=0, alive=0, started=time.strftime("%Y-%m-%d %H:%M:%S"))
+    t0 = time.time()
+
+    def flush():
+        st["elapsed_s"] = round(time.time() - t0, 1)
+        st["updated"] = time.strftime("%Y-%m-%d %H:%M:%S")
+        json.dump(st, open(prog, "w"), indent=1)
+
+    flush()
+    logline("A60 deepen j=%d round=%d parents=%d sub-boxes=%d shard=%s"
+            % (j, rnd, len(src), len(mine), shard))
+    for (ptag, si_, sb) in mine:
+        tag = "%s_D%d" % (ptag, si_)
+        if sink.has(tag):
+            st["done"] += 1
+            st["skipped"] = st.get("skipped", 0) + 1
+            flush()
+            continue
+        if time.time() - t0 > wall:
+            logline("wall reached; stopping cleanly")
+            break
+        g = gate(sb, cond, [], budget, cond_names)
+        if g["state"] in ("contradictory", "parent", "nocore", "shared"):
+            sink.put(dict(tag=tag, parent=ptag, verdict="KILL-BY-LOGIC" if g["state"] == "contradictory"
+                          else "carried (%s)" % g["state"], state=g["state"], budget=budget,
+                          box=sb.to_json(), depth_j=j, round=rnd,
+                          ts=time.strftime("%Y-%m-%d %H:%M:%S")))
+            st["free" if g["state"] == "contradictory" else "residue"] += 1
+            st["done"] += 1
+            flush()
+            continue
+        if g["state"] == "unkillable":
+            sink.put(dict(tag=tag, parent=ptag, verdict="ALIVE-CERTIFIED (A57-3, k=%d>=budget %d)"
+                          % (g["k"], budget), state=g["state"], k=g["k"], hugs=g["hugs"],
+                          budget=budget, box=sb.to_json(), depth_j=j, round=rnd,
+                          ts=time.strftime("%Y-%m-%d %H:%M:%S")))
+            st["residue"] += 1
+            st["done"] += 1
+            flush()
+            continue
+        rec = kill(sink, tag, sb, cond, [], budget,
+                   dict(kind="YES-deepen", depth_j=j, round=rnd, parent=ptag, pinguard="ok",
+                        a=float(sb.core().a), hugs=g["hugs"], k=g["k"], cond=list(cond_names)),
+                   lp_time=lp_time, cert_time=cert_time)
+        v = (rec or {}).get("verdict", "")
+        st["done"] += 1
+        st["passed"] += 1 if v == "PASS" else 0
+        st["failed"] += 1 if v.startswith("FAIL") else 0
+        st["alive"] += 1 if v.startswith("refused") else 0
+        flush()
+    st["finished"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    flush()
+    logline("deepen done " + json.dumps({k: st[k] for k in
+            ("j", "round", "shard", "total", "done", "free", "residue", "passed", "failed",
+             "alive", "elapsed_s")}))
+    return st
+
+
+# ------------------------------------------------------------------ scoreboard
+def scoreboard(out="a60_scoreboard.json"):
+    """one consolidated per-phase scoreboard over every jsonl this campaign has written."""
+    import collections
+    board = {}
+    for p in sorted(os.listdir(RES)):
+        if not (p.startswith("a60_") and p.endswith(".jsonl")):
+            continue
+        c = collections.Counter()
+        lp = ct = 0.0
+        last = {}
+        for line in open(os.path.join(RES, p)):
+            try:
+                r = json.loads(line)
+            except Exception:
+                continue
+            last[r.get("tag")] = r          # A57 convention: last record per tag wins
+        n = len(last)
+        for r in last.values():
+            v = r.get("verdict", "?")
+            key = ("PASS" if v == "PASS" else
+                   "KILL-BY-LOGIC" if v.startswith("KILL-BY-LOGIC") else
+                   "ALIVE-CERTIFIED" if v.startswith("ALIVE") else
+                   "CANARY" if "CANARY" in v else
+                   "LP-alive" if v.startswith("refused (tau") else
+                   "cert-FAIL" if v.startswith("FAIL") else "other")
+            c[key] += 1
+            lp += r.get("lp_s") or 0.0
+            ct += r.get("cert_s") or 0.0
+        board[p] = dict(records=n, verdicts=dict(c), lp_s=round(lp, 1), cert_s=round(ct, 1),
+                        kill_rate=(round(c["PASS"] / float(c["PASS"] + c["LP-alive"] +
+                                                           c["cert-FAIL"]), 4)
+                                   if (c["PASS"] + c["LP-alive"] + c["cert-FAIL"]) else None))
+    prog = {}
+    for p in sorted(os.listdir(PROG)):
+        if p.endswith(".json"):
+            try:
+                prog[p] = json.load(open(os.path.join(PROG, p)))
+            except Exception:
+                pass
+    res = dict(generated=time.strftime("%Y-%m-%d %H:%M:%S"), phases=board, progress=prog)
+    json.dump(res, open(os.path.join(RES, out), "w"), indent=1)
+    return res
+
+
 # ------------------------------------------------------------------ cli
 def cli():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["census", "cover", "ladderscan", "ladder"])
+    ap.add_argument("cmd", choices=["census", "cover", "ladderscan", "ladder", "deepen",
+                                    "board"])
     ap.add_argument("--cond", default="", help="comma list of conditioned Trump squares, in order")
     ap.add_argument("--shard", default="0/1")
     ap.add_argument("--levels", type=int, default=26)
@@ -479,6 +675,9 @@ def cli():
     ap.add_argument("--nth", type=int, default=8)
     ap.add_argument("--a_min", type=float, default=0.34)
     ap.add_argument("--no_kill", action="store_true")
+    ap.add_argument("--zone", default="interior")
+    ap.add_argument("--source", default=None)
+    ap.add_argument("--round", type=int, default=1)
     a = ap.parse_args()
     cond = [c for c in a.cond.split(",") if c]
     for c in cond:
@@ -499,6 +698,14 @@ def cli():
         st = phase_ladder(cond, a.levels, a.shard, a.lp_time, a.cert_time, a.wall,
                           kill_queue=not a.no_kill, max_kills=a.max_children)
         print(json.dumps({k: st[k] for k in st if k != "levels"}, indent=1))
+    elif a.cmd == "deepen":
+        src = a.source or ("a60_cover_j%d.jsonl" % len(cond))
+        st = phase_deepen(cond, src, a.round, a.shard, a.lp_time, a.cert_time, a.wall,
+                          a.max_children)
+        print(json.dumps(st, indent=1))
+    elif a.cmd == "board":
+        b = scoreboard()
+        print(json.dumps(b["phases"], indent=1))
 
 
 if __name__ == "__main__":

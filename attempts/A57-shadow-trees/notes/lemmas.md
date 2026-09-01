@@ -407,11 +407,26 @@ need (rounds 3–6 then manufacture real holes as the measure is dragged around)
 across the run: exact mass 0.981814 at (1.500019, 1.949778, 0.026°) — note the centre is within
 2e-5 of the pin slot (1.5, ...) — then 0.997441 and 0.999337.
 
-**Experiment running:** `certify.py --eps_geo` on the k5_11 node.  The margin must be *small*
+**Experiment run — NEGATIVE.** `certify.py --eps_geo` on the k5_11 node.  The margin must be *small*
 here, unlike at the child: certification needs τ·1.005 < 6, i.e. τ < 5.970, and τ is at 5.9101 —
 **1.0 % of headroom**, whereas eps_geo = 0.002 raised the child's τ by 1.6 % (4.500000 →
-4.571429).  So the pass uses **eps_geo = 0.0005**, and the re-solved τ is itself the verdict: if
-it lands under 5.970 the certificate is worth attempting, if not the margin is unaffordable on
-the direct route and the tree remains the only line.  This is the lab's closest near-miss
-(A54 W3) and the first time its failure has been *diagnosed* rather than attributed to
-convergence.
+4.571429).  So the pass used **eps_geo = 0.0005**.  Result:
+
+| | value |
+|---|---|
+| re-solve τ (1500 s limit, **not converged**, minmass 0.9388) | 5.952640 → 5.941270 |
+| scale / certificate total | 1.0070 / 5.98334 < 6 — budget was never the obstacle |
+| round 0 verifier | **FAIL: 23 HOLES + 25 undecided** |
+
+The margin traded *undecided* boxes for **real holes**.  The difference from the child case
+(T14) is convergence, not the lever: at the child the eps_geo re-solve converged and the
+certificate passed at round 0, whereas here the re-solve was still 6 % short of covering its
+rows when the time limit hit (minmass 0.9388), so the shrunk measure genuinely fails to cover.
+With only 1 % of τ headroom there is no room to buy that convergence back — more LP time raises
+τ toward the 5.970 ceiling as fast as it improves coverage.
+
+**Verdict: the direct route on k5_11 stays blocked, and now for a diagnosed reason** — it is a
+*double* bind (boundary degeneracy AND unconverged coverage) on 1 % of headroom, where the cure
+for one costs more than the headroom the other needs.  A54 W3's "1.9 % short, blocked by
+convergence" was half the story; T15 supplies the other half.  **The tree is the only line**, and
+that is now an argued conclusion rather than a preference.

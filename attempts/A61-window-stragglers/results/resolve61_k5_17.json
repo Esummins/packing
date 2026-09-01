@@ -5,11 +5,11 @@
  "eps_geo": 0.003,
  "gate": 0.5,
  "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
- "started": "2026-09-01T12:58:03",
- "warm_atoms": 3000,
- "warm_pool": 7742,
+ "started": "2026-09-01T13:09:54",
+ "warm_atoms": 2200,
+ "warm_pool": 4941,
  "warm_base": 46,
- "max_atoms": 3000,
+ "max_atoms": 2200,
  "warm_rows": 12277,
  "warm_rows_from_a53": 10765,
  "n_4d_witnesses": 56,
@@ -18,10 +18,40 @@
   "k5_17.resolve1.json",
   "k5_17.resolve2.json",
   "k5_17.resolve3.json",
-  "k5_17_A_state.json",
   "k5_17_state.json",
   "k5_17.param.wit.json",
   "k5_17.param.wit.json",
   "k5_17.witnesses.json"
- ]
+ ],
+ "stageA": {
+  "eps_geo": 0.0001,
+  "tau0": 5.333333333244774,
+  "slack0": 0.6666666667552263,
+  "converged": false,
+  "n_orbits": 4685,
+  "n_rows": 11940,
+  "seconds": 1263.7,
+  "minmass": 1.0,
+  "maxcov": 1.0440253230508822
+ },
+ "stageB": {
+  "eps_geo": 0.003,
+  "tau": 5.500000000000071,
+  "slack": 0.49999999999992895,
+  "converged": true,
+  "n_orbits": 4331,
+  "n_rows": 11084,
+  "seconds": 326.2,
+  "minmass": 1.0,
+  "maxcov": 1.0000000000343572
+ },
+ "dtau_deps": 57.47126439837841,
+ "certify_seconds": 3.9,
+ "certify": "PASS",
+ "new_cert": {
+  "path": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_17.json",
+  "atoms": 11,
+  "total": "1166001/200000",
+  "margin": 0.16999500000000012
+ }
 }

@@ -1,0 +1,44 @@
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\tree60.py", line 703, in <module>
+    cli()
+    ~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\tree60.py", line 682, in cli
+    print(json.dumps(phase_cover(cond, a.shard, a.w, a.nth, a.a_min, a.lp_time,
+                     ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                 a.cert_time, a.wall, a.max_children), indent=1)[:2000])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\tree60.py", line 336, in phase_cover
+    rec = kill(sink, tag, b, cond, [], budget,
+               dict(kind="YES-cover", depth_j=j, pinguard="ok", a=float(b.core().a),
+                    hugs=r["hugs"], k=r["k"], cond=list(cond_names), level=0),
+               lp_time=lp_time, cert_time=cert_time)
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\tree60.py", line 216, in kill
+    rec = P.run_child(tag, hyp, budget, extra.get("depth_j", 0), extra.get("a"), extra.get("at"),
+                      extra.get("kind", "YES"), st, extra.get("info"),
+                      b.to_json() if b is not None else None,
+                      lp_time=lp_time, cert_time=cert_time, depth=depth, jobs=jobs)
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\pilot59.py", line 173, in run_child
+    res = solve_node(S0F, hyp, budget, sym_kind="C1",
+                     warm=dict(atoms=warm["atoms"], rows=[]),
+                     time_limit=lp_time, max_iter=900, out=None, log=lambda *x: None,
+                     prune=0, prune_cols=3, col_stop_iter=10 ** 6, col_stop_cov=1.002,
+                     max_cols_add=400, max_rows_add=2000, fine_slack=99.0, alternate=True)
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\caselp.py", line 337, in solve_node
+    res, M = lpbox.run(s, tbox, sym, n=budget, N0=N0_, max_iter=max_iter, out=None, verbose=True, time_limit=time_limit,
+             ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       row_kw=dict(n_theta=n_theta, cstep=0.02), col_kw=dict(grid=grid, max_refine=30), init_atoms=ia, init_rows=ir,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+                       col_stop_iter=col_stop_iter, col_stop_cov=col_stop_cov, extra_rows=extra_rows, neigh_rows=neigh_rows,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       prune_cols=prune_cols, alternate=alternate)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\lpbox.py", line 859, in run
+    over, maxcov = co.search(thresh=1.0 + tol, **ckw)
+                   ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\lpbox.py", line 732, in search
+    cov = self.coverage(pts)
+  File "C:\Users\esumm\code\packing\attempts\A60-trump5-campaign\code\lpbox.py", line 672, in coverage
+    ux = dx * self.cos[None, :] + dy * self.sin[None, :]
+                                  ~~~^~~~~~~~~~~~~~~~~~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 66.6 MiB for an array with shape (150544, 58) and data type float64
