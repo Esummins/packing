@@ -1459,3 +1459,8 @@ affordable cost estimate for closing 3.84.
   invisible at fixed-s nodes - merged into G-A59-7); depth-2/3 ladders extrapolated (G-A59-10,
   check first); tau*=k conjecture noted (G-A59-12). Report: attempts/A59-trump-residual/
   results/a59_report.md.
+
+## 2026-09-01 — machine headroom deployed: A60 (trump5 campaign) + A61 (window stragglers) launched
+- PI noted idle capacity (CPU 10%, 11 GB free with only A57's 3 workers active). A60 executes
+  A59's GO program (falsifier check first per its own conditions); A61 runs the G-A56-1 successor
+  recipe. Concurrency budget: A57 ~3 + A60 <= 4 + A61 <= 2 heavy LPs with 4 GB RAM guards.
