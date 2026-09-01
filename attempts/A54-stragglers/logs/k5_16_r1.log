@@ -1,0 +1,25 @@
+=== A54 k5_16 rung1 2026-08-31 20:36:18 k=5 budget=6
+    merged warm: 291 atoms, 17912 rows from ['k5_16.json', 'k5_16.json.v1']
+[s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=888 points=888 rows=9690 (rejected 1393)
+  it   0 tau=5.992544 rows=10395 orbs=888 atoms>0=142 minmass=0.920236 maxcov=1.511531 +rows=705 -rows=0 +cols=0 -cols=0 t=38s [lp 1s row 31s +r 2s col 1s +c 0s]
+  it   1 tau=6.000000 rows=10395 orbs=2088 atoms>0=6 minmass=1.000000 maxcov=1.522867 +rows=0 -rows=0 +cols=1200 -cols=0 t=42s [lp 0s row 1s +r 0s col 1s +c 1s]
+  it   2 tau=5.978801 rows=11867 orbs=2088 atoms>0=181 minmass=0.861349 maxcov=1.308829 +rows=1472 -rows=0 +cols=0 -cols=0 t=124s [lp 30s row 38s +r 12s col 2s +c 0s]
+  it   3 tau=6.000000 rows=11867 orbs=3288 atoms>0=6 minmass=1.000000 maxcov=1.181788 +rows=0 -rows=0 +cols=1200 -cols=0 t=132s [lp 2s row 2s +r 0s col 2s +c 1s]
+  it   4 tau=5.982106 rows=13248 orbs=3288 atoms>0=212 minmass=0.944316 maxcov=1.144964 +rows=1381 -rows=0 +cols=0 -cols=0 t=279s [lp 116s row 17s +r 12s col 1s +c 0s]
+  it   5 tau=5.994559 rows=13248 orbs=4488 atoms>0=219 minmass=0.946698 maxcov=1.140398 +rows=0 -rows=0 +cols=1200 -cols=0 t=306s [lp 7s row 19s +r 0s col 2s +c 0s]
+  it   6 tau=5.976570 rows=15054 orbs=4488 atoms>0=273 minmass=0.913374 maxcov=1.185661 +rows=1806 -rows=0 +cols=0 -cols=0 t=519s [lp 158s row 25s +r 28s col 2s +c 0s]
+  it   7 tau=5.982452 rows=15054 orbs=5688 atoms>0=276 minmass=0.944816 maxcov=1.118222 +rows=0 -rows=0 +cols=1200 -cols=0 t=565s [lp 20s row 24s +r 0s col 2s +c 1s]
+  it   8 tau=5.966210 rows=16812 orbs=5688 atoms>0=347 minmass=0.912106 maxcov=1.061980 +rows=1758 -rows=0 +cols=0 -cols=0 t=945s [lp 277s row 57s +r 43s col 2s +c 0s]
+  it   9 tau=5.974632 rows=16812 orbs=6431 atoms>0=400 minmass=0.950564 maxcov=1.070904 +rows=0 -rows=0 +cols=743 -cols=0 t=1132s [lp 122s row 62s +r 0s col 2s +c 0s]
+  it  10 tau=5.967548 rows=18520 orbs=6431 atoms>0=457 minmass=0.916014 maxcov=1.064052 +rows=1708 -rows=0 +cols=0 -cols=0 t=1581s [lp 332s row 73s +r 42s col 2s +c 0s]
+  it  11 tau=5.971297 rows=18520 orbs=7004 atoms>0=440 minmass=0.878823 maxcov=1.074607 +rows=0 -rows=0 +cols=573 -cols=0 t=1764s [lp 103s row 77s +r 0s col 2s +c 0s]
+  it  12 tau=5.967922 rows=20202 orbs=7004 atoms>0=505 minmass=0.864228 maxcov=1.042419 +rows=1682 -rows=0 +cols=0 -cols=0 t=2273s [lp 338s row 104s +r 63s col 3s +c 0s]
+  time limit
+DONE s=3.877084 n=6 sym=C1 tau=5.972514 nu=5.972514 conv=False minmass=0.864228 maxcov=1.042419 rows=20202 orbits=7004 atoms_nz=595 packing_support=643 time=2595s
+    rung1 done tau=5.972514 budget=6 conv=False minmass=0.864228 maxcov=1.042419 (2596s)
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A54-stragglers\code\certify.py C:\Users\esumm\code\packing\attempts\A54-stragglers\results\nodes\k5_16.json --s_rat 969271/250000 --rounds 3 --jobs 3 --depth 56 --time_limit 420.0 --out C:\Users\esumm\code\packing\attempts\A54-stragglers\certs\k5_16.json --scale 0 --scale_cap 1.06000 --max_w 96 --loop_cols
+[round 0] tau=5.97251 conv=False scale=1.0050 cert total=6.00271 budget=6 atoms=595
+certificate total >= budget: cannot certify (LP tau too close to the budget for the margin)
+
+
+    {"name": "k5_16", "k": 5, "budget": 6, "tau": 5.9725135372733655, "converged": false, "minmass": 0.864228140120626, "maxcov": 1.0424192617131345, "eta": -0.027486462726634464, "lp_seconds": 2595.688187122345, "rung": "1", "n_rows": 20202, "n_orbits": 7004, "scale_cap": 1.06, "cert": "FAIL(rc=3)", "cert_seconds": 0.29355525970458984}

@@ -1,0 +1,32 @@
+=== A54 k6_23 rung1 2026-08-31 21:45:24 k=6 budget=5
+    merged warm: 1443 atoms, 48647 rows from ['k6_23.json', 'k6_23.json.v1', 'k6_23.resolve1.json', 'k6_23.resolve2.json', 'k6_23.resolve3.json', 'k6_23.resolve4.json', 'k6_23.resolve5.json', 'k6_23.resolve6.json', 'k6_23.resolve7.json', 'k6_23.resolve8.json', 'k6_23.resolve1.json', 'k6_23.witnesses.json', 'k6_23.witnesses.json']
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=2032 points=2032 rows=35071 (rejected 2074)
+  it   0 tau=4.907247 rows=36219 orbs=2032 atoms>0=518 minmass=0.982023 maxcov=1.248177 +rows=1148 -rows=0 +cols=0 -cols=0 t=333s [lp 183s row 124s +r 17s col 2s +c 0s]
+  it   1 tau=4.908377 rows=36219 orbs=2382 atoms>0=555 minmass=0.985461 maxcov=1.298413 +rows=0 -rows=0 +cols=350 -cols=0 t=548s [lp 49s row 164s +r 0s col 2s +c 0s]
+  it   2 tau=4.908377 rows=37315 orbs=2382 atoms>0=554 minmass=0.985461 maxcov=1.083832 +rows=1096 -rows=0 +cols=0 -cols=0 t=764s [lp 6s row 185s +r 23s col 2s +c 0s]
+  it   3 tau=4.909341 rows=37315 orbs=2732 atoms>0=538 minmass=0.990898 maxcov=1.085519 +rows=0 -rows=0 +cols=350 -cols=0 t=989s [lp 47s row 174s +r 0s col 2s +c 0s]
+  it   4 tau=4.908257 rows=38536 orbs=2446 atoms>0=515 minmass=0.983521 maxcov=1.155009 +rows=1221 -rows=0 +cols=0 -cols=286 t=1429s [lp 256s row 157s +r 25s col 2s +c 0s]
+  it   5 tau=4.908837 rows=38536 orbs=2787 atoms>0=546 minmass=0.964984 maxcov=1.123154 +rows=0 -rows=0 +cols=350 -cols=9 t=1734s [lp 107s row 195s +r 0s col 2s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.907742 nu=4.907742 conv=False minmass=0.964984 maxcov=1.123154 rows=38536 orbits=2787 atoms_nz=619 packing_support=502 time=2014s
+    rung1 done tau=4.907742 budget=5 conv=False minmass=0.964984 maxcov=1.123154 (2014s)
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A54-stragglers\code\certify.py C:\Users\esumm\code\packing\attempts\A54-stragglers\results\nodes\k6_23.json --s_rat 969271/250000 --rounds 6 --jobs 3 --depth 56 --time_limit 400.0 --out C:\Users\esumm\code\packing\attempts\A54-stragglers\certs\k6_23.json --scale 0 --scale_cap 1.02000 --max_w 96 --loop_cols
+[round 0] tau=4.90774 conv=False scale=1.0158 cert total=4.98554 budget=5 atoms=619
+    boxes = 2327740  covered = 746004  vacuous = 0  exempt = 417864 (core 417864, nofam 0)  split = 1163856  exact atom checks = 2669864  max depth = 56  time = 46.6s
+    FAIL: 16 witness boxes at depth 56: 1 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 15 undecided at this depth
+      worst witness: theta = 50.612093 deg, centre = (1.902631131, 3.173365016), exact mass = 499793/500000 (~0.999586000000)
+    feeding back 336 witness rows (total extra 336), re-solving (rows only)
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=1231 points=1231 rows=27289 (rejected 1674)
+  it   0 tau=4.909100 rows=27763 orbs=1231 atoms>0=406 minmass=0.978157 maxcov=1.324384 +rows=474 -rows=0 +cols=0 -cols=0 t=117s [lp 31s row 77s +r 3s col 1s +c 0s]
+  it   1 tau=4.910149 rows=27763 orbs=2231 atoms>0=390 minmass=0.989154 maxcov=1.338202 +rows=0 -rows=0 +cols=1000 -cols=0 t=202s [lp 9s row 75s +r 0s col 1s +c 1s]
+  it   2 tau=4.905830 rows=28281 orbs=2231 atoms>0=397 minmass=0.966790 maxcov=1.163281 +rows=518 -rows=0 +cols=0 -cols=0 t=365s [lp 84s row 71s +r 6s col 1s +c 0s]
+  it   3 tau=4.908799 rows=28281 orbs=2446 atoms>0=433 minmass=0.994545 maxcov=1.103121 +rows=0 -rows=0 +cols=1000 -cols=785 t=493s [lp 30s row 95s +r 0s col 2s +c 1s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.906864 nu=4.906864 conv=False minmass=0.994545 maxcov=1.103121 rows=28281 orbits=2446 atoms_nz=501 packing_support=422 time=636s
+[round 1] tau=4.90686 conv=False scale=1.0160 cert total=4.98545 budget=5 atoms=501
+    boxes = 2449492  covered = 792110  vacuous = 0  exempt = 432668 (core 432668, nofam 0)  split = 1224714  exact atom checks = 2439578  max depth = 47  time = 43.9s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 997089/200000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A54-stragglers\certs\k6_23.json
+
+
+    {"name": "k6_23", "k": 6, "budget": 5, "tau": 4.907742264279296, "converged": false, "minmass": 0.9649841045066428, "maxcov": 1.12315364465859, "eta": -0.09225773572070395, "lp_seconds": 2014.4114105701447, "rung": "1", "n_rows": 38536, "n_orbits": 2787, "scale_cap": 1.02, "cert": "PASS", "cert_seconds": 727.9115164279938}
