@@ -1428,3 +1428,34 @@ affordable cost estimate for closing 3.84.
   corner-occupancy anchor; (3) A59 trump5 as an 18-d ANCHORED grain problem (pinned squares =
   walls; upward stratum boundary certified empty by the k=6 tier — the drain cannot escape up).
   A56's window sweep finishing underneath.
+
+## 2026-09-01 - A59 closed (done-success): trump5 residual - census refuted the unit, zone-tree GO
+- THEORY: stratum-restricted drain written (T1-T5'): trump5 = feasible set of a 19-var NLP with
+  the 5 pins as obstacles; normalization rigid (pins touch all four walls); slide-stuckness
+  AUTOMATIC for every stratum point (stronger than A53 L6); UPWARD TRAP certified: SIX one-cell
+  Young completions {k6_07,19,21,22,23,24} (two of the naive eight overlap a pin for all s -
+  vacuously dead), all carrying PASS kills => the drain cannot escape up, unconditional at s0;
+  window form = A56's six-class priority ticket.
+- CENSUS (leg b, honest): ~4.4e10 Level-0 grains in the residual polygon (rigorous bracket
+  [2.29e6, 8.22e11]; 91 masks; canary PASS; corner-cap-3 proved). Anchoring does NOT shrink the
+  combinatorial census; every filter is a containment filter - the F4/A43 law at Level 0. Grain
+  unit dead by 10 orders; census kept as map + banked lemmas.
+- PILOT (leg c, 87 exact certs, 0 canary events): the sibling-kill arithmetic is IMPOSSIBLE, not
+  expensive - all Trump-adjacent YES children ALIVE-certified (A57-3); tau_LP = k(N) =
+  surviving-Trump-witness count in 17/18 converged solves (exception documented; only
+  tau* >= k is load-bearing). The tree closes by RESIDUE CONTRACTION: unkillable residue
+  bounded (~34 boxes/level over 24 levels), contracts onto Trump at gap ~ 4.6 x radius, all
+  inside the A36 basin slice at level 24. r_kill = 4.55 x hw exactly; the annulus closes at
+  +2.19 bisection levels (hw <= 8.13e-4): genuine discharge leaves exist, no A40/wedge work.
+  Nesting collapses: unkillable 41 -> 18 -> 7 -> 0 -> 0; 93-100% free logic kills from j=1.
+  Budget-1 kills = zero-atom vacuity certs (0.5-1.5 s, no LP; caselp's 2e-3 epsilons blind the
+  LP route at the h scale). Lemma A59-P1 banked: every trump5-skeleton packing has a square
+  centred in the interior zone (exact cert, re-verified depth 60).
+- COMPOSED PROGRAM (leg d): P0 engine (alive-gate + vac59 - the pilot burnt 64% of its LP time
+  re-deriving 1-ms alive facts) -> P1 upward trap (A56) -> P3-P5 zone cover + residue ladders +
+  confinement to hw <= 8.13e-4 -> (D) discharge into the A36 basin -> composition theorem.
+  ~1e4-1e5 certificates = SINGLE-DIGIT DESKTOP-DAYS at 5 processes. GO, with conditions: A56
+  parametric overhead on the kill leaves is the open cost line (the low-s slab is structurally
+  invisible at fixed-s nodes - merged into G-A59-7); depth-2/3 ladders extrapolated (G-A59-10,
+  check first); tau*=k conjecture noted (G-A59-12). Report: attempts/A59-trump-residual/
+  results/a59_report.md.

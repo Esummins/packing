@@ -1,0 +1,42 @@
+A59 leg (b): Level-0 grain census of the trump5 residual polygon
+s-window [3.820000, 3.877084], 8 sub-intervals
+capacity caps: {'A0': 2, 'A1': 2, 'A2': 3, 'A3': 3, 'A4': 2, 'A5': 3, 'A6': 3, 'A7': 2, 'A8': 2, 'A9': 2, 'A10': 2, 'A11': 2, 'C1': 3, 'C2': 3, 'C3': 3, 'C4': 3}
+admissible anchor masks: 91
+   by |mu|: {0: 1, 1: 16, 2: 35, 3: 27, 4: 10, 5: 2}
+max mask-box min-distance = 2.786403  (2*sqrt2 = 2.828427) -> hop bound vacuous for hops >= 2
+pair-table densities: COEX 0.8233  TOUCH 0.8657  INTERLEAVE 0.1807
+CANARY derived grain (A03 contacts, tol 1e-9):
+   sq4  -> A0             centre (0.500000, 2.532558)
+   sq6  -> A3             centre (1.536287, 3.172475)
+   sq7  -> C1             centre (1.688559, 1.959613)
+   sq8  -> C2,C3          centre (2.424525, 1.272254)
+   sq9  -> C4             centre (2.436509, 2.623834)
+   sq10 -> A2             centre (3.172475, 1.936475)
+   E (A03 labels) = [(4, 6), (4, 7), (6, 9), (7, 8), (7, 9), (8, 10), (9, 10)]
+CANARY verdict: PASS
+ablation 1 mask admissibility         -> 26113311517020 grains   (10.4s)
+ablation 2 + pairwise coexistence     -> 4617417645080 grains   (7.5s)
+ablation 3 + touching window          -> 1707953952209 grains   (7.5s)
+ablation 6a + planarity(interleave)   -> 822380205647 grains   (5.8s)
+exact per-prefix growth curve (labelled, filters 1-4): [91, 12524, 2890264, 1177982744, 875345809472, 1211807015741424]
+exact per-prefix growth curve (labelled, filters 1-4+interleave): [91, 11200, 2236252, 779338728, 493302695632, 581412051461424]
+exact breakdown by #anchored squares (interpolating the empty-mask weight)
+   z=0 -> 697046527851
+   z=1 -> 822380205647
+   z=2 -> 965708012427
+   z=3 -> 1128954066351
+   z=4 -> 1314184146539
+   z=5 -> 1523611849071
+   z=6 -> 1759604855307
+   exact by #anchored: {0: 156, 1: 48960, 2: 5402800, 3: 287031520, 4: 8097411096, 5: 116943783264, 6: 697046527851}
+rigorous LOWER bound (E empty, masks pairwise element-disjoint and non-crossing; caps and planarity then automatic): 2290359
+Monte Carlo: 400000 uniform samples of pairwise-admissible labelled structures
+   caps pass rate     0.79258
+   caps+planar rate   0.02598  (+- 0.00025, 1 sigma)
+   estimated grains after caps           1.3537e+12
+   estimated grains after caps+planarity 4.4364e+10  (+- 4.30e+08)
+   MC validation: interleave rate MC 0.479658 vs exact labelled 0.479789 (0.17 sigma); orbit ratio 0.481500
+   soft stats over passing samples: connected&all-anchored 0.1948, all squares loaded (deg>=2) 0.6382
+   mean sum|mu| = 9.921, mean |E| = 4.835
+wrote 1000 stratified sample grains to C:\Users\esumm\code\packing\attempts\A59-trump-residual\code\..\results\grains_sample.jsonl
+runtime 197.1s
