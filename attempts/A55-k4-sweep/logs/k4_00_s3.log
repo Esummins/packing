@@ -1,0 +1,23 @@
+=== A54 k4_00 rung1 2026-09-01 03:44:27 k=4 budget=7
+    merged warm: 1269 atoms, 49824 rows from ['k4_00.prev1788251078.json', 'k4_00.resolve1.json', 'k4_00.resolve2.json', 'k4_00.resolve3.json', 'k4_00.resolve4.json', 'k4_00.resolve5.json', 'k4_00.resolve6.json', 'k4_00.witnesses.json']
+[s=3.877084 n=7 sym=C1 box=[0,90]x1] init orbits=1864 points=1864 rows=32999 (rejected 1096)
+  it   0 tau=6.660205 rows=34213 orbs=1864 atoms>0=391 minmass=0.587815 maxcov=1.301650 +rows=1214 -rows=0 +cols=0 -cols=0 t=747s [lp 697s row 26s +r 16s col 2s +c 0s]
+  it   1 tau=6.660512 rows=34213 orbs=2214 atoms>0=379 minmass=0.499919 maxcov=1.367747 +rows=0 -rows=0 +cols=350 -cols=0 t=833s [lp 62s row 22s +r 0s col 2s +c 0s]
+  it   2 tau=6.660512 rows=35142 orbs=2214 atoms>0=379 minmass=0.500109 maxcov=1.235387 +rows=929 -rows=0 +cols=0 -cols=0 t=935s [lp 32s row 52s +r 15s col 2s +c 0s]
+  it   3 tau=6.662140 rows=35142 orbs=2564 atoms>0=382 minmass=0.500320 maxcov=1.244628 +rows=0 -rows=0 +cols=350 -cols=0 t=1187s [lp 233s row 17s +r 0s col 2s +c 0s]
+  it   4 tau=6.662140 rows=36393 orbs=2345 atoms>0=407 minmass=0.499725 maxcov=1.185062 +rows=1251 -rows=0 +cols=0 -cols=219 t=1303s [lp 45s row 50s +r 19s col 2s +c 0s]
+  it   5 tau=6.666667 rows=36393 orbs=2693 atoms>0=668 minmass=0.582381 maxcov=1.266667 +rows=0 -rows=0 +cols=350 -cols=2 t=1776s [lp 377s row 94s +r 0s col 1s +c 0s]
+  it   6 tau=6.661405 rows=37516 orbs=2639 atoms>0=451 minmass=0.578906 maxcov=1.254847 +rows=1123 -rows=0 +cols=0 -cols=54 t=2502s [lp 641s row 57s +r 25s col 3s +c 0s]
+  it   7 tau=6.664826 rows=37516 orbs=2985 atoms>0=480 minmass=0.571829 maxcov=1.303828 +rows=0 -rows=0 +cols=350 -cols=4 t=3038s [lp 479s row 55s +r 0s col 2s +c 0s]
+  it   8 tau=6.662071 rows=38683 orbs=2626 atoms>0=385 minmass=0.540037 maxcov=1.209896 +rows=1167 -rows=0 +cols=0 -cols=359 t=3752s [lp 623s row 62s +r 26s col 3s +c 0s]
+  time limit
+DONE s=3.877084 n=7 sym=C1 tau=6.662982 nu=6.662982 conv=False minmass=0.540037 maxcov=1.209896 rows=38683 orbits=2626 atoms_nz=433 packing_support=465 time=4223s
+    rung1 done tau=6.662982 budget=7 conv=False minmass=0.540037 maxcov=1.209896 (4223s)
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A55-k4-sweep\code\certify.py C:\Users\esumm\code\packing\attempts\A55-k4-sweep\results\nodes\k4_00.json --s_rat 969271/250000 --rounds 8 --jobs 3 --depth 56 --time_limit 700.0 --out C:\Users\esumm\code\packing\attempts\A55-k4-sweep\certs\k4_00.json --scale 0 --scale_cap 1.40000 --max_w 96 --loop_cols
+[round 0] tau=6.66298 conv=False scale=1.0478 cert total=6.98187 budget=7 atoms=433
+    boxes = 1494990  covered = 649088  vacuous = 0  exempt = 98439 (core 98439, nofam 0)  split = 747463  exact atom checks = 1591789  max depth = 44  time = 37.9s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 436367/62500 < budget 7  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A55-k4-sweep\certs\k4_00.json
+
+
+    {"name": "k4_00", "k": 4, "budget": 7, "tau": 6.662981975656896, "converged": false, "minmass": 0.5400369046526869, "maxcov": 1.2098963064159025, "eta": -0.337018024343104, "lp_seconds": 4223.432153463364, "rung": "1", "n_rows": 38683, "n_orbits": 2626, "scale_cap": 1.4, "cert": "PASS", "cert_seconds": 38.50391697883606}
