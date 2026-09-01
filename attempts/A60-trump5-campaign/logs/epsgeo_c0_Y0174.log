@@ -20,3 +20,18 @@ DONE s=3.877084 n=5 sym=C1 tau=5.000000 nu=5.000000 conv=True minmass=1.000000 m
 certificate total >= budget: cannot certify (LP tau too close to the budget for the margin)
 
 ---
+re-solving node LP with EPS_GEO=0.004 (rows + columns, fine oracle) ...
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=627 points=627 rows=1739 (rejected 1848)
+  it   0 tau=5.500000 rows=1870 orbs=1027 atoms>0=7 minmass=0.000000 maxcov=1.750000 +rows=131 -rows=0 +cols=400 -cols=0 t=16s [lp 0s row 15s +r 0s col 0s +c 0s]
+  it   1 tau=5.400000 rows=2937 orbs=1427 atoms>0=15 minmass=0.600000 maxcov=1.600000 +rows=1067 -rows=0 +cols=400 -cols=0 t=33s [lp 0s row 15s +r 1s col 0s +c 0s]
+  it   2 tau=5.000000 rows=3598 orbs=1827 atoms>0=5 minmass=0.000000 maxcov=1.513793 +rows=661 -rows=0 +cols=400 -cols=0 t=51s [lp 4s row 13s +r 1s col 0s +c 0s]
+  it   3 tau=5.000000 rows=4734 orbs=2227 atoms>0=5 minmass=0.000000 maxcov=1.379324 +rows=1136 -rows=0 +cols=400 -cols=0 t=80s [lp 12s row 13s +r 3s col 1s +c 0s]
+  it   4 tau=5.500000 rows=5341 orbs=2627 atoms>0=31 minmass=0.500000 maxcov=1.750000 +rows=607 -rows=0 +cols=400 -cols=0 t=100s [lp 5s row 13s +r 2s col 0s +c 0s]
+  it   5 tau=5.333333 rows=6262 orbs=3027 atoms>0=10 minmass=0.333333 maxcov=1.739868 +rows=921 -rows=0 +cols=400 -cols=0 t=245s [lp 127s row 12s +r 5s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=5.444444 nu=5.444444 conv=False minmass=0.333333 maxcov=1.739868 rows=6262 orbits=3027 atoms_nz=70 packing_support=33 time=256s
+   tau=5.44444 conv=False minmass=0.3333 maxcov=1.7399
+[round 0] tau=5.44444 conv=False scale=1.0050 cert total=5.47170 budget=5 atoms=70
+certificate total >= budget: cannot certify (LP tau too close to the budget for the margin)
+
+---

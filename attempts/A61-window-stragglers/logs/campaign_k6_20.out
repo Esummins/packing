@@ -22,3 +22,18 @@ DONE s=3.877084 n=5 sym=C1 tau=4.500000 nu=4.500000 conv=False minmass=1.000000 
   it   4 tau=4.689769 rows=10116 orbs=3476 atoms>0=88 minmass=0.834983 maxcov=1.115512 +rows=979 -rows=0 +cols=0 -cols=232 t=237s [lp 63s row 19s +r 13s col 1s +c 0s]
   it   5 tau=4.714286 rows=10116 orbs=3995 atoms>0=39 minmass=0.761905 maxcov=1.123503 +rows=0 -rows=0 +cols=600 -cols=81 t=259s [lp 9s row 12s +r 0s col 1s +c 0s]
   it   6 tau=4.686330 rows=11077 orbs=3692 atoms>0=91 minmass=0.857366 maxcov=1.127486 +rows=961 -rows=0 +cols=0 -cols=303 t=496s [lp 200s row 19s +r 15s col 2s +c 0s]
+  it   7 tau=4.709763 rows=11077 orbs=4246 atoms>0=102 minmass=0.849604 maxcov=1.134565 +rows=0 -rows=0 +cols=600 -cols=46 t=578s [lp 58s row 23s +r 0s col 1s +c 0s]
+  it   8 tau=4.687811 rows=11979 orbs=3979 atoms>0=100 minmass=0.786484 maxcov=1.074627 +rows=902 -rows=0 +cols=0 -cols=267 t=767s [lp 157s row 14s +r 16s col 2s +c 0s]
+  it   9 tau=4.696886 rows=11979 orbs=4435 atoms>0=141 minmass=0.864469 maxcov=1.084737 +rows=0 -rows=0 +cols=600 -cols=144 t=868s [lp 42s row 56s +r 0s col 2s +c 0s]
+  it  10 tau=4.680165 rows=12952 orbs=4150 atoms>0=148 minmass=0.833190 maxcov=1.050687 +rows=973 -rows=0 +cols=0 -cols=285 t=1264s [lp 345s row 25s +r 24s col 2s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.689227 nu=4.689227 conv=False minmass=0.833190 maxcov=1.050687 rows=12952 orbits=4150 atoms_nz=163 packing_support=266 time=1372s
+    [B] eps_geo=0.003 tau=4.689227 budget=5 slack=0.3108 conv=False orbits=4150 rows=12952 (1372s)
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A54-stragglers\code\certify.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\results\nodes\k6_20.json --s_rat 969271/250000 --rounds 3 --jobs 3 --depth 56 --time_limit 300.0 --out C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_20.json --scale 0 --scale_cap 1.06000 --max_w 96 --loop_cols --eps_geo 0.003 --no_resolve --warm_state C:\Users\esumm\code\packing\attempts\A61-window-stragglers\results\nodes\k6_20_B_state.json
+[round 0] tau=4.68923 conv=False scale=1.0600 cert total=4.97066 budget=5 atoms=163
+    boxes = 331432  covered = 72977  vacuous = 0  exempt = 92771 (core 92771, nofam 0)  split = 165684  exact atom checks = 405158  max depth = 36  time = 10.9s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 2485329/500000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_20.json
+
+    4D[gap] PASS 121.3s
+    A61 CONVERTS (full window)
