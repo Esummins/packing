@@ -1382,3 +1382,27 @@ affordable cost estimate for closing 3.84.
   revival (still needs a new idea), ghost-mass profiling as diagnostic. Signed-measure (J2/Farkas)
   weapons: outside current verifier and measurably toothless at full strength. 1062 s of compute
   total; A29 untouched. Report: attempts/A52-twofield-probe/results/a52_report.md.
+
+## 2026-08-31 — A53 closed (done-success, pilot): I-L20 simple-square stratification
+- DEFINITION AUDIT: PI's Young-form ("tiling grown in from a corner") adopted as primary; it is
+  STRICTLY stronger than the brief's recursive doubly-flush reading (1110 tuples/163 D4 classes
+  vs 7204/944; explicit witness for the divergence — partial-overlap cross-family chains). Census
+  exact (Fractions), k = 0..9, stable in s across (3.82, 3.9). Trump = ((2,1),(1),(1),()) at k=5,
+  certified from A03's 60-digit data; the 6th upright is eps-off-grid by 0.0325583143 (degree-7
+  minpoly) and its completing slide is BLOCKED by a tilted square's corner intruding 0.0135 into
+  the landing corridor — the bridge geometry measured inside Trump's own packing.
+- HEADLINE: residual-region guard LPs with EXACT skeleton pins break the 1/4-ghost. All 33 k=6
+  classes LP-dead (typical tau = 4.000000 exactly = an integral 4-square blocking packing;
+  6 + 4 < 11), 32/33 exactly certified (most kills are 3-8-atom finite unavoidable sets, certs
+  1-60 s under the A39 rule); k>=7 capped unconditionally (every k=7 class contains a certified
+  k=6 sub-tuple). All 21 non-Trump k=5 classes LP-dead, 18 certified. Ghost law: corner pins keep
+  tau = budget (corners4 -> 7.000, A14/A16 baseline reproduced); side-zone/interior pins collapse
+  it. Kill hardness concentrates on Trump-adjacent classes; opens: k6_23 = Trump+TL (4.9337),
+  k5_11 (5.905), k5_13 (5.677), k5_16 = corners4+1 (5.98951 — essentially at budget).
+- Trump stratum: provably alive (feasibility canary), eta_residual consistent with 0; residual
+  tight variety does NOT collapse (5.1% of placement space at eta 0.02 — the localization hope of
+  I-L20's Trump branch fails at pilot LP quality; the mid-tilt pinwheel core is the last stand).
+- Theory banked: partition exhaustiveness, anchor uniqueness, the 33-node cap, and the honest
+  k-maximality slide-selection lemma (slide-stuck minimizer exists; blockedness — semi-algebraic,
+  LP-invisible — is precisely the A50 cascade's target). Gap list: s-parametric transfer of the
+  kills (G-A53-1), blocked-slide pricing (G-A53-2), k=4 sweep (14 classes), k6_23 certification.

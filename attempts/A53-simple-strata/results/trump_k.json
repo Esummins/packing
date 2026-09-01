@@ -1,0 +1,85 @@
+{
+ "s_T": "3.87708359002281417730789706010096270637",
+ "squares": [
+  {
+   "i": 0,
+   "cx": "0.5",
+   "cy": "0.5",
+   "locked": true,
+   "cy_minpoly_degree": 1
+  },
+  {
+   "i": 1,
+   "cx": "1.5",
+   "cy": "0.5",
+   "locked": true,
+   "cy_minpoly_degree": 1
+  },
+  {
+   "i": 2,
+   "cx": "3.3770835900228141773",
+   "cy": "0.5",
+   "locked": true,
+   "cy_minpoly_degree": 1
+  },
+  {
+   "i": 3,
+   "cx": "0.5",
+   "cy": "1.5",
+   "locked": true,
+   "cy_minpoly_degree": 1
+  },
+  {
+   "i": 4,
+   "cx": "0.5",
+   "cy": "2.5325583143496147871",
+   "locked": false,
+   "cy_minpoly_degree": 7
+  },
+  {
+   "i": 5,
+   "cx": "3.3770835900228141773",
+   "cy": "3.3770835900228141773",
+   "locked": true,
+   "cy_minpoly_degree": 7
+  }
+ ],
+ "k_trump": 5,
+ "locked_indices": [
+  0,
+  1,
+  2,
+  3,
+  5
+ ],
+ "tilted_nonsimple": {
+  "indices": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "theta_deg": "40.18193729032971646",
+  "reason": "theta = 40.18 deg != 0 mod 90 -> not axis-aligned -> not simple"
+ },
+ "square4_classification": {
+  "cy": "2.532558314349614787062616300314746103516",
+  "epsilon_off_grid": "0.0325583143496147870626163003147",
+  "gap_bottom_edge_to_square3_top_edge": "0.0325583143496147870626163003147",
+  "distance_to_slot_5_2": "0.0325583143496147870626163003147",
+  "distance_to_slot_sT_minus_3_2": "-0.155474724326800609754719240214",
+  "cy_minpoly": [
+   -141578,
+   255957,
+   28184,
+   857962,
+   244037,
+   -2766727,
+   1599635,
+   -1430160
+  ],
+  "reason": "x flush to left wall (cx = 1/2 exactly) but NO exact horizontal flush: bottom edge sits 0.0326 above square 3's top edge, 0.5 above the floor slot, and 0.155 below the from-above slot s_T - 3/2; cy has minimal polynomial of degree 7 (irrational), so cy equals NO rational grid value; wedged by the tilted strip -> non-simple. Margin of every separation > 1e-2 >> 1e-50."
+ },
+ "conclusion": "k_Trump = 5: squares 0,1,2,3,5 (BL corner, its two adjacent on-grid squares, BR corner, TR corner) are simple; square 4 is epsilon-off-grid (eps = 0.032558...); squares 6-10 are tilted. Tier boundary: kill k >= 6, enumerate at k = 5."
+}
