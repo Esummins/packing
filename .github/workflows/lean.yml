@@ -1,0 +1,134 @@
+name: Lean CI
+
+# Root-level workflow. GitHub only reads .github/workflows/ at the repository root; the copies
+# that lived under lean/PackingCert/.github/ and lean/PackingCertMathlib/.github/ never ran.
+#
+# Jobs:
+#   packingcert       — no Mathlib. Builds the default target (kernel-checked upper-bound theorems,
+#                       A05 measure theorems), audits axioms, re-generates the Lean certificate data
+#                       from certs/*.json and diffs it, runs the Python verifiers' fast checks.
+#   mathlib           — the R^2 bridge lemmas (Lean 4.34.0-rc1 + Mathlib cache), axiom audit.
+#   packingcert-slow  — s(11) >= 3.80 / 3.81 / 3.82 by native_decide (11 + 12 + 27 min on the
+#                       desktop; expect 1-3 h here). Manual trigger only, to save Actions minutes:
+#                           gh workflow run lean.yml -f slow=true
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'lean/**'
+      - 'certs/**'
+      - '.github/workflows/lean.yml'
+  pull_request:
+    paths:
+      - 'lean/**'
+      - 'certs/**'
+      - '.github/workflows/lean.yml'
+  workflow_dispatch:
+    inputs:
+      slow:
+        description: 'Also build the slow lower-bound targets (s(11) >= 3.80 / 3.81 / 3.82)'
+        type: boolean
+        default: true
+
+concurrency:
+  group: lean-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  packingcert:
+    name: PackingCert — kernel UB proofs, fast measure theorems, data regen
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build lean/PackingCert (default target)
+        uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean/PackingCert
+          use-github-cache: true
+
+      - name: Axiom audit
+        working-directory: lean/PackingCert
+        run: |
+          lake env lean scratch/CIAxioms.lean | tee axioms.txt
+          echo "--- assertions ---"
+          ! grep -q sorryAx axioms.txt
+          grep -q "trump11_ok_kernel' does not depend on any axioms" axioms.txt
+          grep -q "trump11_tight_ok_kernel' does not depend on any axioms" axioms.txt
+          echo OK
+
+      - name: Lean certificate data regenerates byte-identically from certs/*.json
+        run: |
+          python3 lean/gen_measure_lean.py certs/measure_certificate_3.80.json --fuel 48 --int --name cert_3_80 -o /tmp/D380.lean
+          diff /tmp/D380.lean lean/PackingCert/PackingCert/MeasureIntData.lean
+          python3 lean/gen_measure_lean.py certs/measure_certificate_3.81.json --fuel 48 --int --name cert_3_81 -o /tmp/D381.lean
+          diff /tmp/D381.lean lean/PackingCert/PackingCert/MeasureIntData381.lean
+          python3 lean/gen_measure_lean.py certs/measure_certificate_3.82.json --fuel 48 --int --name cert_3_82 -o /tmp/D382.lean
+          diff /tmp/D382.lean lean/PackingCert/PackingCert/MeasureIntData382.lean
+          echo OK
+
+      - name: Python verifiers — selftest and upper-bound certificates
+        run: |
+          python3 certs/verify_measure.py --selftest
+          python3 certs/verify_certificate.py certs/trump11_certificate_int.json
+          python3 certs/verify_certificate.py certs/trump11_certificate_tight_int.json
+
+  mathlib:
+    name: PackingCertMathlib — R^2 bridge lemmas
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Free disk space (Mathlib cache ~7 GB + toolchain ~3 GB)
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+
+      - name: Build lean/PackingCertMathlib
+        uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean/PackingCertMathlib
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Axiom audit
+        working-directory: lean/PackingCertMathlib
+        run: |
+          lake env lean scratch/Axioms.lean | tee axioms.txt
+          ! grep -q sorryAx axioms.txt
+          grep -q "trump11_ccw_ok_kernel' does not depend on any axioms" axioms.txt
+          echo OK
+
+  packingcert-slow:
+    name: PackingCert — s(11) >= 3.80 / 3.81 / 3.82 (native_decide, slow)
+    if: github.event_name == 'workflow_dispatch' && inputs.slow
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Toolchain (no build)
+        uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean/PackingCert
+          use-github-cache: true
+          build: false
+
+      - name: lake build PackingCertSlow PackingCertSlow381 PackingCertSlow382
+        working-directory: lean/PackingCert
+        run: |
+          lake build PackingCert
+          time lake build PackingCertSlow
+          time lake build PackingCertSlow381
+          time lake build PackingCertSlow382
+
+      - name: Axiom audit (expect exactly the native_decide axiom Lean.ofReduceBool)
+        working-directory: lean/PackingCert
+        run: |
+          for f in scratch/AxiomsSlow.lean scratch/Axioms381.lean scratch/Axioms382.lean; do
+            lake env lean "$f" | tee -a axioms.txt
+          done
+          ! grep -q sorryAx axioms.txt
+          test "$(grep -c 'Lean.ofReduceBool' axioms.txt)" -eq 3
+          echo OK
