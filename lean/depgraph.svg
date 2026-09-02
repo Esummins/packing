@@ -3,9 +3,9 @@
 <rect width="1720" height="1180" fill="white"/>
 <text x="12" y="22" font-size="15" font-weight="bold">s(11) optimality — lemma dependency graph (live; base commit c9980bfc, updated 2026-09-01)</text>
 <rect x="12" y="32" width="12" height="12" fill="#b8860b" rx="2"/>
-<text x="28" y="42">lean-proved (11)</text>
+<text x="28" y="42">lean-proved (14)</text>
 <rect x="154" y="32" width="12" height="12" fill="#2e7d32" rx="2"/>
-<text x="170" y="42">proved-prose (6)</text>
+<text x="170" y="42">proved-prose (3)</text>
 <rect x="296" y="32" width="12" height="12" fill="#1565c0" rx="2"/>
 <text x="312" y="42">certificate+verifier (12)</text>
 <rect x="501" y="32" width="12" height="12" fill="#6a1b9a" rx="2"/>
@@ -228,14 +228,12 @@
 <text x="1529" y="222" text-anchor="middle" fill="#222">Theorem U: one-square rigidity</text>
 <text x="1529" y="234" text-anchor="middle" fill="#222">of z-hat (11 re-insertion…</text>
 </g>
-<g><title>B.SEL — Selection: a k-maximal slide-stuck minimiser exists (H1 / L6 / CC-2)&#10;[proved-prose]&#10;CAVEAT (H1): degenerate slide cases (slide creating a contact mid-way, ties, sigma-changing slides) not written; not in docs/proofs/.</title>
+<g><title>B.SEL — Selection: a k-maximal slide-stuck minimiser exists (H1 / L6 / CC-2)&#10;[proved-prose]&#10;CAVEAT (H1): degenerate slide cases (slide creating a contact mid-way, ties, sigma-changing slides) not written; not in docs/proofs/. A75 LEAN PARTIAL (Selection.lean): exists_kmax (the k-maximal selection, Nat.sSup_mem) + teleport_packing + cc2_stuck; H1 degenerate-case audit DONE - in the teleport (CC-2) formulation every listed case (mid-slide contact, ties, sigma-changing slides, one-normalisation simplicity) is absent by the shape of the statement; the sole residue is the census interface hinc (F11/H2).</title>
 <rect x="189" y="343" width="196" height="54" rx="7" fill="white"/>
 <rect x="189" y="343" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
 <text x="287" y="358" text-anchor="middle" font-weight="bold" fill="#2e7d32">B.SEL</text>
 <text x="287" y="372" text-anchor="middle" fill="#222">Selection: a k-maximal</text>
 <text x="287" y="384" text-anchor="middle" fill="#222">slide-stuck minimiser exists (…</text>
-<rect x="358" y="336" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="373" y="346" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A75</text>
 </g>
 <g><title>B.CENSUS — Census: skeleton classes are exhaustive (1110 tuples / 163 D4 classes)&#10;[certificate+verifier]&#10;Exact Fractions enumeration, D4-reduced, Trump canary. **H2 CLOSED (A72, 2026-09-02): DOUBLY WITNESSED.** Clean-room re-enumeration from the written L1-L3 definition only (A53 code never opened; output sha256-frozen before the diff) reproduces the census EXACTLY: the 1110 slot-sets are identical as sets of exact rational plane points, the 163-orbit partition is identical, the two D4 groups coincide as maps on the 36-slot lattice, and Trump lands in the same class. sha256 tuple_set f035681aca981b050c4519ed4fde6d7e019f3be40a209dbea4a29af2e8934be2 (A72) vs skeletons_young.json a7d769a08c6d3327673be14f0babb380d46babdcc1e28c3fd1d96a7d17a83ef7 (A53). hface&#x27;s computational content is now witnessed by two independent implementations. RESIDUE (unchanged): the DEFINITIONAL debt - InStratum is still opaque in the Lean statement (F11); and 12 written-definition ambiguities had to be resolved by hand to write the second enumerator (8 binding), listed in attempts/A72-census-cleanroom/notes/ambiguities.md - a Lean definition must pin all 8.</title>
 <rect x="475" y="343" width="196" height="54" rx="7" fill="white"/>
@@ -251,14 +249,12 @@
 <text x="860" y="372" text-anchor="middle" fill="#222">K1: kills climb containment,</text>
 <text x="860" y="384" text-anchor="middle" fill="#222">aliveness descends (H3)</text>
 </g>
-<g><title>B.EXACT — Exact-skeleton vs pin-monotone bridge&#10;[proved-prose]&#10;CLOSED for the certified part (A63): exactly =&gt; contains is reflexivity + D4 bookkeeping; the certificate&#x27;s monotone form is strictly stronger. A68: Lean skeleton landed (monotone_to_exact, Skeleton.lean) with the census interface as an explicit hypothesis hface (&quot;exact class membership =&gt; ContainsPins of the class tuple&quot;); hface becomes a theorem only when the Young census is a Lean definition (F11/H2; D4 equivariance machine-checked computationally by A67 R8). The K1-protected tier is deliberately out of scope - that is H10, target form H10-stuck.</title>
+<g><title>B.EXACT — Exact-skeleton vs pin-monotone bridge&#10;[proved-prose]&#10;CLOSED for the certified part (A63): exactly =&gt; contains is reflexivity + D4 bookkeeping; the certificate&#x27;s monotone form is strictly stronger. A68: Lean skeleton landed (monotone_to_exact, Skeleton.lean) with the census interface as an explicit hypothesis hface (&quot;exact class membership =&gt; ContainsPins of the class tuple&quot;); hface becomes a theorem only when the Young census is a Lean definition (F11/H2; D4 equivariance machine-checked computationally by A67 R8). The K1-protected tier is deliberately out of scope - that is H10, target form H10-stuck. A75: reviewed, unchanged; E.2 D4 bookkeeping (symmetry action on slots/configurations) still prose - to land with the census definition.</title>
 <rect x="1049" y="343" width="196" height="54" rx="7" fill="white"/>
 <rect x="1049" y="343" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
 <text x="1147" y="358" text-anchor="middle" font-weight="bold" fill="#2e7d32">B.EXACT</text>
 <text x="1147" y="372" text-anchor="middle" fill="#222">Exact-skeleton vs pin-monotone</text>
 <text x="1147" y="384" text-anchor="middle" fill="#222">bridge</text>
-<rect x="1218" y="336" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="1233" y="346" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A75</text>
 </g>
 <g><title>C.WIN — Window transfer: every kill valid on all of [3.82, s-hat] (H6)&#10;[certificate+verifier]&#10;PARTIAL: 38/52 strata full-window; 12 s0-only (A61 running); 2 partial slivers (k6_23, k6_07); A57 sub-tree kills s0-only. A56 REFUTED transfer-as-a-principle, so this cannot be factored out as a single lemma â€” it is a per-certificate obligation, which is why the Lean axiom fuses it into stratum_kill (findings F6). A63: the S4 application step (kill at the minimiser&#x27;s own side) is now the WRITTEN Lemma B/B-prime of docs/proofs/closed_disjoint_bridge.md; full-window parametric coverage + dense rationals instantiate stratum_kill at every m in [3.82, s-hat] for covered classes. A75: verifier soundness (V.PARAM) is now a Lean theorem (checkParamI_kill, real-s window form) -&gt; gold verifier accent; corpus-wide native_decide replay of the parametric certificates remains a separate evaluation axis (pilot: k5_06.param).</title>
 <rect x="1335" y="343" width="196" height="54" rx="7" fill="white"/>
@@ -294,32 +290,26 @@
 <rect x="716" y="486" width="31" height="14" rx="7" fill="#37474f"/>
 <text x="732" y="496" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A74</text>
 </g>
-<g><title>C.CC2 — CC-2/CC-2&#x27; exchange (teleport) lemma + clear-corner 2-crowd&#10;[proved-prose]&#10;Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it.</title>
+<g><title>C.CC2 — CC-2/CC-2&#x27; exchange (teleport) lemma + clear-corner 2-crowd&#10;[proved-prose]&#10;Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it. A75 LEAN PARTIAL (Selection.lean): teleport_packing (the exchange preserves the packing at the same side - no corridor hypothesis) + cc2_stuck / cc2_two_meeters (CC-2/CC-2-prime at a k-maximal packing) are theorems CONDITIONAL on the census interface hinc (teleporting a non-simple square onto a completable slot raises k); hinc = F11/H2 debt, same as hface.</title>
 <rect x="762" y="493" width="196" height="54" rx="7" fill="white"/>
 <rect x="762" y="493" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
 <text x="860" y="508" text-anchor="middle" font-weight="bold" fill="#2e7d32">C.CC2</text>
 <text x="860" y="522" text-anchor="middle" fill="#222">CC-2/CC-2&#x27; exchange (teleport)</text>
 <text x="860" y="534" text-anchor="middle" fill="#222">lemma + clear-corner 2-crowd</text>
-<rect x="931" y="486" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="946" y="496" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A75</text>
 </g>
-<g><title>C.T5T11 — Logic-kill rules T5/T11 (+ pinguard semantics)&#10;[proved-prose]&#10;H5: the A54 unsoundness is fixed and gated, but the fix is a code invariant + notes, not a standalone lemma document.</title>
+<g><title>C.T5T11 — Logic-kill rules T5/T11 (+ pinguard semantics)&#10;[lean-proved]&#10;H5: the A54 unsoundness is fixed and gated, but the fix is a code invariant + notes, not a standalone lemma document. A75: the two RULES are Lean theorems (Zones.lean: core_meet_same_square = T5 contradictory-box kill; refine_cover = T11 same-witness refinement, same budget). The pinguard PARENT classification is the case where witness = pin is consistent (reduced budget unsound) - a certification GATE (code invariant, pinguard.classify), not a lemma; the label covers the rules, the gate stays procedural.</title>
 <rect x="977" y="493" width="196" height="54" rx="7" fill="white"/>
-<rect x="977" y="493" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
-<text x="1075" y="508" text-anchor="middle" font-weight="bold" fill="#2e7d32">C.T5T11</text>
+<rect x="977" y="493" width="196" height="54" rx="7" fill="#b8860b" fill-opacity="0.13" stroke="#b8860b" stroke-width="1.6"/>
+<text x="1075" y="508" text-anchor="middle" font-weight="bold" fill="#b8860b">C.T5T11</text>
 <text x="1075" y="522" text-anchor="middle" fill="#222">Logic-kill rules T5/T11 (+</text>
 <text x="1075" y="534" text-anchor="middle" fill="#222">pinguard semantics)</text>
-<rect x="1146" y="486" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="1162" y="496" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A75</text>
 </g>
-<g><title>C.M1 — M1: single-corner pin-sets transfer down the window free&#10;[proved-prose]&#10;Covers 4 classes.</title>
+<g><title>C.M1 — M1: single-corner pin-sets transfer down the window free&#10;[lean-proved]&#10;Covers 4 classes. LEAN-PROVED (A75, Zones.lean): strictFamily_mono + M1_transfer (an s0 case certificate with s-independent cores kills every s &lt;= s0) + M1_transfer_packing (lambda-dilated). The single-corner clause = &quot;coreSets identical at every side&quot; (beta = 0 slots).</title>
 <rect x="1192" y="493" width="196" height="54" rx="7" fill="white"/>
-<rect x="1192" y="493" width="196" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
-<text x="1290" y="508" text-anchor="middle" font-weight="bold" fill="#2e7d32">C.M1</text>
+<rect x="1192" y="493" width="196" height="54" rx="7" fill="#b8860b" fill-opacity="0.13" stroke="#b8860b" stroke-width="1.6"/>
+<text x="1290" y="508" text-anchor="middle" font-weight="bold" fill="#b8860b">C.M1</text>
 <text x="1290" y="522" text-anchor="middle" fill="#222">M1: single-corner pin-sets</text>
 <text x="1290" y="534" text-anchor="middle" fill="#222">transfer down the window free</text>
-<rect x="1361" y="486" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="1376" y="496" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A75</text>
 </g>
 <g><title>C.A61 — 12 s0-only strata + 2 sliver bands&#10;[open]&#10;Bounded compute per A56&#x27;s recipe, not theory.</title>
 <rect x="1407" y="493" width="196" height="54" rx="7" fill="white"/>
@@ -339,14 +329,12 @@
 <rect x="203" y="636" width="31" height="14" rx="7" fill="#37474f"/>
 <text x="218" y="646" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>
 </g>
-<g><title>D.N1 — N1: zone-assignment collapse (occupancy pigeonhole)&#10;[proved-prose]&#10;PROVED; H1-style machine-checked component in exact rationals.</title>
+<g><title>D.N1 — N1: zone-assignment collapse (occupancy pigeonhole)&#10;[lean-proved]&#10;PROVED; H1-style machine-checked component in exact rationals. LEAN-PROVED (A75, Zones.lean): centre_separation (N1.0, inscribed-disk midpoint argument via mem_interior_iff_uv), at_most_one_centre (N1.0.1), zone_assign_injective/_unique/_bijective (N1 (i)-(iii)); the per-instance exact checks (footprint diameter, disjointness) stay the certificate side.</title>
 <rect x="239" y="643" width="147" height="54" rx="7" fill="white"/>
-<rect x="239" y="643" width="147" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
-<text x="313" y="658" text-anchor="middle" font-weight="bold" fill="#2e7d32">D.N1</text>
+<rect x="239" y="643" width="147" height="54" rx="7" fill="#b8860b" fill-opacity="0.13" stroke="#b8860b" stroke-width="1.6"/>
+<text x="313" y="658" text-anchor="middle" font-weight="bold" fill="#b8860b">D.N1</text>
 <text x="313" y="672" text-anchor="middle" fill="#222">N1: zone-assignment</text>
 <text x="313" y="684" text-anchor="middle" fill="#222">collapse (occupancy…</text>
-<rect x="359" y="636" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="375" y="646" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A75</text>
 </g>
 <g><title>D.TRAP — Upward trap: all six one-cell Young completions of trump5 certified empty&#10;[certificate+verifier]&#10;Drain cannot escape upward at s0; window form = A56&#x27;s six-class ticket (partially open, see C.WIN).</title>
 <rect x="396" y="643" width="147" height="54" rx="7" fill="white"/>

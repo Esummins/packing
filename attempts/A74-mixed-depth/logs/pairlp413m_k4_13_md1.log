@@ -1,0 +1,23 @@
+[07:21:27] A74 mixed-depth LP: cls=k4_13 beta=0 levels=eta=0.05@1.0000 eta=0.02@1.0063 eta=0.008@1.0088 eta=0.002@1.0100
+[07:21:27] headroom OK: ullAvailPageFile=8.10 GB, ullAvailPhys=11.20 GB (need > 6.0 GB)
+[07:21:27] class k4_13: k=4 N=7 m=8 threshold=21 + beta*8
+[07:21:27] catalog |S|=404 {"n_placements": 404, "imported": 404, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 0.0, "m_histogram": {"0": 16, "1": 64, "2": 249, "3": 75}}
+[07:21:27] disjoint pairs: 32544 (m2>0: 2558)
+[07:21:44] family L0 eta=0.05 rhs=1.0000: raw=360290 distinct=80639 maximal=3768 (edge-int 38384 kept of 106922, skipped=False) depth mean 67.8 max 115 (16.8s)
+[07:22:03] family L1 eta=0.02 rhs=1.0063: raw=360290 distinct=86458 maximal=4278 (edge-int 38384 kept of 119675, skipped=False) depth mean 78.4 max 123 (19.2s)
+[07:22:23] family L2 eta=0.008 rhs=1.0088: raw=360290 distinct=88338 maximal=4616 (edge-int 38384 kept of 124635, skipped=False) depth mean 83.2 max 126 (20.5s)
+[07:22:43] family L3 eta=0.002 rhs=1.0100: raw=360290 distinct=88974 maximal=4791 (edge-int 38384 kept of 127017, skipped=False) depth mean 86.3 max 127 (20.0s)
+[07:22:43] headroom OK: ullAvailPageFile=6.32 GB, ullAvailPhys=10.89 GB (need > 6.0 GB)
+[07:22:44] dual-seed pair_dual_k4_13eta001.json: 1435 rows pushed (cap 1200)
+[07:22:44] dual-seed pair_dual_k4_13eta002.json: 1343 rows pushed (cap 1200)
+[07:22:45] dual-seed pair_dual_k4_13eta005.json: 1526 rows pushed (cap 1200)
+[07:22:45] seed rows=2184 nnz=10185988 cols=32544
+[07:24:46] r1: value=21.565940 excess=0.562805 lvl_relmax=1.1434,1.2840,1.4100,1.5628 viol=730 supz=7242 rows=6488 nnz=10185988 purged=0 (lp 119.6s, tot 123s)
+[07:27:06] r2: value=21.489670 excess=0.586283 lvl_relmax=1.0994,1.2450,1.4897,1.5863 viol=684 supz=6614 rows=7215 nnz=11746604 purged=0 (lp 138.0s, tot 263s)
+[07:29:53] r3: value=21.451354 excess=0.429087 lvl_relmax=1.0424,1.1506,1.3428,1.4291 viol=577 supz=5758 rows=7897 nnz=13239598 purged=0 (lp 164.9s, tot 429s)
+[07:32:51] non-optimal LP status HighsModelStatus.kTimeLimit at round 4
+[07:36:16] full: FINAL ipm/on rows=8466 -> HighsModelStatus.kOptimal value=21.395987 (204s)
+[07:36:16] full duals: W2=21.239510 priced=21.395987 (LP value 21.395987) hist={"0.05": {"n": 28, "mass": 2.02981}, "0.02": {"n": 119, "mass": 6.604327}, "0.008": {"n": 192, "mass": 8.683223}, "0.002": {"n": 145, "mass": 3.92215}}
+[07:36:16] RESULT: LP value(full)=21.395987 value(emitted)=21.395987 W2=21.239510 thr=21 -> OVER converged=False excess=0.429087160890568 hist={"0.05": {"n": 28, "mass": 2.02981}, "0.02": {"n": 119, "mass": 6.604327}, "0.008": {"n": 192, "mass": 8.683223}, "0.002": {"n": 145, "mass": 3.92215}}
+[07:36:16] dumped 484 atoms (W2=21.239752) depth hist {"0.02": {"n": 119, "mass": 6.60438}, "0.008": {"n": 192, "mass": 8.683322}, "0.002": {"n": 145, "mass": 3.922226}, "0.05": {"n": 28, "mass": 2.029824}} -> C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\pair_primal_k4_13_b0_md1.json
+[07:36:16] wrote C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\pairlp413m_k4_13_md1.json (888.9s)

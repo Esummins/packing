@@ -1849,3 +1849,26 @@ affordable cost estimate for closing 3.84.
   A57/A60/A61 untouched; frozen verifiers untouched; rust-gnu 1.98.0 installed via scoop (user-level).
   Files: attempts/A73-pair-v2/*, docs/specs/pair_certificate_v2.md, docs/proofs/pair_kill.md sect 6.6,
   depgraph C.K4TIER note + svg, REGISTRY row.
+
+## 2026-09-02 A75-lean-wave5 (Fable lead + 1 Opus chore) -- done-success
+- T1 LEAN-PROVED, both nodes. V.MEAS: MeasurePy.lean + MeasurePyBridge.lean model the verify_measure.py DRIVER
+  (tscale, 4^k --split grid with fuel = depth-2k, --strict-margin, no-drop known-inheritance, float shortlist as an
+  arbitrary oracle, s<1 shortcut); checkMeasurePy_no_packing sound for every oracle/tscale/split/margin from the A64
+  primitives; no new mathematics (one grid-coverage lemma). V.PARAM: ParamChecker.lean + ParamBridge.lean = the
+  verify_param.py 4-D (t,cx,cy,s) checker; point->interval widenings are TRANSLATIONS of A70's coreExempt / A64's
+  projI (translation invariance of PSq.set/coreSet), so no interval argument was re-derived; checkParamI_kill is
+  the window kill at EVERY REAL side (no dense-rationals step needed) in the form stratum_kill consumes; pilot
+  k5_06.param full window depth 56 native_decide 215 s (ParamData506/ParamK506, lean/gen_param_lean.py); Python
+  --no-float-prepass replay reproduces the campaign tree box for box (293854 boxes). C.WIN verifier_lean set.
+- T3: D.N1 (centre separation, at-most-one, zone assignment injective/unique/bijective), C.M1 (single-corner
+  transfer), C.T5T11 (T5 contradictory-box rule + T11 refinement; the pinguard PARENT gate stays a code invariant)
+  -> lean-proved (Zones.lean).
+- T2: B.SEL/C.CC2 Lean PARTIAL (Selection.lean): exists_kmax, teleport_packing (no corridor hypothesis), cc2_stuck /
+  cc2_two_meeters conditional on the census interface hinc (F11/H2 = hface's debt); H1 degenerate-case audit done
+  (all absent in the teleport form). B.EXACT reviewed, unchanged (E.2 D4 bookkeeping still prose).
+- Axioms: all new theorems propext/Choice/Quot.sound only (+ native_decide axiom for the 3 pilot theorems); full
+  library build green (3175 jobs), Measure382Check cache hit, A57/A60/A61/A74 untouched. Engineering: a `let x := if
+  ...` inside a checker def defeats `split at` (name it: sWidth); rcases on a beta-unreduced False; subst on c.n
+  needs rcases c. Files: attempts/A75-lean-wave5/{notes/findings.md,logs/}, lean/PackingCertMathlib/.../{MeasurePy,
+  MeasurePyBridge,ParamChecker,ParamBridge,ParamData506,ParamK506,Selection,Zones}.lean, lean/gen_param_lean.py,
+  lean/README.md, scratch/Axioms.lean, depgraph json+svg, REGISTRY row.

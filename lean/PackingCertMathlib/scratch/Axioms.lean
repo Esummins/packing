@@ -4,6 +4,10 @@ import PackingCertMathlib.TopLevel
 import PackingCertMathlib.Dilation
 import PackingCertMathlib.Skeleton
 import PackingCertMathlib.CaseK506
+import PackingCertMathlib.MeasurePyBridge
+import PackingCertMathlib.ParamK506
+import PackingCertMathlib.Selection
+import PackingCertMathlib.Zones
 #print axioms PackingCert.disjoint_of_strictlyBelow
 #print axioms PackingCert.checkPackingCCW_sound
 #print axioms PackingCert.aff_sqdist
@@ -47,3 +51,18 @@ import PackingCertMathlib.CaseK506
 #print axioms PackingCert.S11.check_k5_06_lo
 #print axioms PackingCert.S11.k5_06_lo_kill
 #print axioms PackingCert.S11.k5_06_lo_kill_packing
+#print axioms PackingCert.S11.checkMeasurePy_no_packing
+#print axioms PackingCert.S11.goPy_sound
+#print axioms PackingCert.S11.checkParamI_price
+#print axioms PackingCert.S11.checkParamI_kill
+#print axioms PackingCert.S11.checkParamI_kill_packing
+#print axioms PackingCert.S11.check_k5_06_param
+#print axioms PackingCert.S11.k5_06_param_kill
+#print axioms PackingCert.S11.k5_06_param_kill_packing
+#print axioms PackingCert.S11.exists_kmax
+#print axioms PackingCert.S11.teleport_packing
+#print axioms PackingCert.S11.cc2_stuck
+#print axioms PackingCert.S11.centre_separation
+#print axioms PackingCert.S11.zone_assign_bijective
+#print axioms PackingCert.S11.core_meet_same_square
+#print axioms PackingCert.S11.M1_transfer

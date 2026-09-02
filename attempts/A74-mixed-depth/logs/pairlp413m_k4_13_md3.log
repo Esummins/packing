@@ -1,0 +1,27 @@
+[07:55:31] A74 mixed-depth LP: cls=k4_13 beta=0 levels=eta=0.05@1.0000 eta=0.02@1.0063 eta=0.008@1.0088 eta=0.002@1.0100
+[07:55:31] headroom OK: ullAvailPageFile=11.05 GB, ullAvailPhys=12.24 GB (need > 6.0 GB)
+[07:55:31] class k4_13: k=4 N=7 m=8 threshold=21 + beta*8
+[07:55:31] catalog |S|=404 {"n_placements": 404, "imported": 404, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 0.0, "m_histogram": {"0": 16, "1": 64, "2": 249, "3": 75}}
+[07:55:31] disjoint pairs: 32544 (m2>0: 2558)
+[07:55:47] family L0 eta=0.05 rhs=1.0000: raw=360290 distinct=80639 maximal=3768 (edge-int 38384 kept of 106922, skipped=False) depth mean 67.8 max 115 (16.0s)
+[07:56:06] family L1 eta=0.02 rhs=1.0063: raw=360290 distinct=86458 maximal=4278 (edge-int 38384 kept of 119675, skipped=False) depth mean 78.4 max 123 (18.8s)
+[07:56:26] family L2 eta=0.008 rhs=1.0088: raw=360290 distinct=88338 maximal=4616 (edge-int 38384 kept of 124635, skipped=False) depth mean 83.2 max 126 (20.0s)
+[07:56:46] family L3 eta=0.002 rhs=1.0100: raw=360290 distinct=88974 maximal=4791 (edge-int 38384 kept of 127017, skipped=False) depth mean 86.3 max 127 (20.7s)
+[07:56:46] headroom OK: ullAvailPageFile=11.95 GB, ullAvailPhys=12.23 GB (need > 6.0 GB)
+[07:56:47] dual-seed pair_dual_k4_13eta001.json: 1435 rows pushed (cap 1200)
+[07:56:47] dual-seed pair_dual_k4_13eta002.json: 1343 rows pushed (cap 1200)
+[07:56:48] dual-seed pair_dual_k4_13eta005.json: 1526 rows pushed (cap 1200)
+[07:56:48] seed rows=2184 nnz=10185988 cols=32544
+[07:58:57] r1: value=21.565940 excess=0.876692 lvl_relmax=1.2598,1.3600,1.6114,1.8767 viol=479 supz=424 rows=6488 nnz=10185988 purged=0 (lp 127.4s, tot 131s)
+[07:58:57] r1: W2=21.407823 (unpriced dual mass; gate quantity)
+[08:01:12] r2: value=21.496415 excess=0.621112 lvl_relmax=1.1214,1.4173,1.5184,1.6211 viol=519 supz=424 rows=6963 nnz=10889597 purged=0 (lp 133.1s, tot 265s)
+[08:01:12] r2: W2=21.338006 (unpriced dual mass; gate quantity)
+[08:03:51] r3: value=21.455972 excess=0.490190 lvl_relmax=1.0359,1.2328,1.3221,1.4902 viol=590 supz=489 rows=7479 nnz=11940140 purged=0 (lp 157.8s, tot 425s)
+[08:03:51] r3: W2=21.296702 (unpriced dual mass; gate quantity)
+[08:06:46] r4: value=21.386034 excess=0.462596 lvl_relmax=1.0156,1.2565,1.3199,1.4626 viol=513 supz=537 rows=2527 nnz=4992186 purged=5537 (lp 172.7s, tot 600s)
+[08:06:46] r4: W2=16.960202 (unpriced dual mass; gate quantity)
+[08:07:25] r5: value=21.331046 excess=0.589671 lvl_relmax=1.0896,1.4079,1.5357,1.5897 viol=600 supz=526 rows=3035 nnz=5996838 purged=0 (lp 37.7s, tot 639s)
+[08:07:25] r5: W2=21.170406 (unpriced dual mass; gate quantity)
+[08:08:21] r6: value=21.324283 excess=0.446902 lvl_relmax=1.0948,1.3630,1.4054,1.4469 viol=583 supz=555 rows=2518 nnz=4869171 purged=1115 (lp 53.5s, tot 694s)
+[08:08:21] r6: W2=19.828820 (unpriced dual mass; gate quantity)
+[08:08:21] W2/value target 20.9500 reached at round 6 (W2=19.8288 value=21.3243 excess=0.4469)

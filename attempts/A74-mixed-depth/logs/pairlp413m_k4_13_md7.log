@@ -1,0 +1,43 @@
+[09:09:21] A74 mixed-depth LP: cls=k4_13 beta=0 levels=eta=0.05@1.0000 eta=0.02@1.0061 eta=0.008@1.0085 eta=0.002@1.0097 eta=0.0005@1.0100
+[09:09:21] headroom low: 0.74 GB <= 6.0 GB, waiting...
+[09:09:31] headroom low: 4.87 GB <= 6.0 GB, waiting...
+[09:09:41] headroom OK: ullAvailPageFile=9.81 GB, ullAvailPhys=12.76 GB (need > 6.0 GB)
+[09:09:41] class k4_13: k=4 N=7 m=8 threshold=21 + beta*8
+[09:09:41] catalog |S|=404 {"n_placements": 404, "imported": 404, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 0.0, "m_histogram": {"0": 16, "1": 64, "2": 249, "3": 75}}
+[09:09:41] disjoint pairs: 32544 (m2>0: 2558)
+[09:10:06] family L0 eta=0.05 rhs=1.0000: raw=360290 distinct=80639 maximal=3768 (edge-int 38384 kept of 106922, skipped=False) depth mean 67.8 max 115 (24.8s)
+[09:10:34] family L1 eta=0.02 rhs=1.0061: raw=360290 distinct=86458 maximal=4278 (edge-int 38384 kept of 119675, skipped=False) depth mean 78.4 max 123 (28.1s)
+[09:11:04] family L2 eta=0.008 rhs=1.0085: raw=360290 distinct=88338 maximal=4616 (edge-int 38384 kept of 124635, skipped=False) depth mean 83.2 max 126 (30.4s)
+[09:11:34] family L3 eta=0.002 rhs=1.0097: raw=360290 distinct=88974 maximal=4791 (edge-int 38384 kept of 127017, skipped=False) depth mean 86.3 max 127 (29.7s)
+[09:12:04] family L4 eta=0.0005 rhs=1.0100: raw=360290 distinct=88865 maximal=4922 (edge-int 38384 kept of 127575, skipped=False) depth mean 87.2 max 127 (30.1s)
+[09:12:04] headroom low: 5.28 GB <= 6.0 GB, waiting...
+[09:12:14] headroom OK: ullAvailPageFile=6.33 GB, ullAvailPhys=11.19 GB (need > 6.0 GB)
+[09:12:15] dual-seed pair_dual_k4_13_a71cg.json: 2473 rows pushed (cap 500)
+[09:12:16] dual-seed pair_dual_k4_13eta001.json: 1793 rows pushed (cap 500)
+[09:12:17] dual-seed seed_md5.json: 1749 rows pushed (cap 500)
+[09:12:17] seed rows=2186 nnz=12305028 cols=32544
+[09:15:50] r1: value=21.124580 excess=0.602157 lvl_relmax=1.0758,1.2821,1.3932,1.5875,1.6022 viol=300 supz=464 rows=8201 nnz=12305028 purged=0 (lp 210.0s, tot 216s)
+[09:15:50] r1: W2=20.963156 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[09:19:19] r2: value=21.116116 excess=0.529571 lvl_relmax=1.0600,1.2227,1.4058,1.5288,1.5296 viol=300 supz=494 rows=8500 nnz=12819910 purged=0 (lp 206.3s, tot 425s)
+[09:19:19] r2: W2=20.954675 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[09:23:06] r3: value=21.110103 excess=0.582613 lvl_relmax=1.0708,1.1088,1.2676,1.5181,1.5826 viol=300 supz=517 rows=8799 nnz=13524356 purged=0 (lp 223.8s, tot 652s)
+[09:23:06] r3: W2=20.947728 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[09:23:06] nnz/row cap at round 3 (nnz=14021052 rows=9099)
+[09:27:11] full: FINAL ipm/on rows=9099 -> HighsModelStatus.kOptimal value=21.101966 n_ub=0 (244s)
+[09:27:11] full duals: W2=20.939018 priced=21.101966 (LP value 21.101966) hist={"0.05": {"n": 16, "mass": 0.640204}, "0.02": {"n": 86, "mass": 6.935996}, "0.008": {"n": 162, "mass": 7.370199}, "0.002": {"n": 178, "mass": 5.112934}, "0.0005": {"n": 53, "mass": 0.879685}}
+[09:27:15] consol r0 wmin=0.0005: FINAL ipm/on rows=487 -> HighsModelStatus.kOptimal value=21.101968 n_ub=0 (3s)
+[09:27:15] consol r0: wmin=0.0005 rows 9099->487 value=21.101968 W2=20.939012 supp=486 n_ub=0
+[09:27:18] consol r1 wmin=0.001: FINAL ipm/on rows=480 -> HighsModelStatus.kOptimal value=21.102004 n_ub=0 (3s)
+[09:27:18] consol r1: wmin=0.001 rows 487->480 value=21.102004 W2=20.939066 supp=476 n_ub=0
+[09:27:21] consol r2 wmin=0.002: FINAL ipm/on rows=465 -> HighsModelStatus.kOptimal value=21.102647 n_ub=0 (3s)
+[09:27:21] consol r2: wmin=0.002 rows 480->465 value=21.102647 W2=20.939791 supp=458 n_ub=0
+[09:27:23] consol r3 wmin=0.004: FINAL ipm/on rows=411 -> HighsModelStatus.kOptimal value=21.106933 n_ub=0 (2s)
+[09:27:23] consol r3: wmin=0.004 rows 465->411 value=21.106933 W2=20.943851 supp=407 n_ub=0
+[09:27:25] consol r4 wmin=0.008: FINAL ipm/on rows=355 -> HighsModelStatus.kOptimal value=21.122951 n_ub=0 (2s)
+[09:27:25] consol r4: wmin=0.008 rows 411->355 value=21.122951 W2=20.959546 supp=353 n_ub=0
+[09:27:26] consol r5 wmin=0.016: FINAL ipm/on rows=271 -> HighsModelStatus.kOptimal value=21.215432 n_ub=0 (1s)
+[09:27:26] consol r5: wmin=0.016 rows 355->271 value=21.215432 W2=21.051745 supp=264 n_ub=0
+[09:27:26] consol r5: REJECTED (status/n_ub/W2 guard) -- revert
+[09:27:26] RESULT: LP value(full)=21.101966 value(emitted)=21.122951 W2=20.959546 thr=21 -> UNDER converged=False excess=0.5826127037827256 hist={"0.05": {"n": 9, "mass": 0.592088}, "0.02": {"n": 70, "mass": 6.978357}, "0.008": {"n": 122, "mass": 7.413709}, "0.002": {"n": 127, "mass": 5.102028}, "0.0005": {"n": 25, "mass": 0.873364}}
+[09:27:26] dumped 353 atoms (W2=20.959717) depth hist {"0.002": {"n": 127, "mass": 5.102091}, "0.0005": {"n": 25, "mass": 0.873375}, "0.02": {"n": 70, "mass": 6.978393}, "0.008": {"n": 122, "mass": 7.413766}, "0.05": {"n": 9, "mass": 0.592092}} -> C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\pair_primal_k4_13_b0_md7.json
+[09:27:26] wrote C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\pairlp413m_k4_13_md7.json (1084.7s)

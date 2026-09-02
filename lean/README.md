@@ -71,6 +71,32 @@ theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved from exactly t
   `sinT_eq_sin` tie the rational parametrisation to `θ(t) = 2·arctan t`; X.1 both directions
   (`|Δt| ≤ |Δθ| ≤ 2|Δt|`); X.2 with the sharp constant `r_c + √2·r_t`; the two rBasin gates
   are TopLevel theorems (`rBasin_gate_tilt`, `rBasin_gate_slab`).
+**Discharged by A75 (2026-09-02, Lean wave 5):**
+* **The `verify_measure.py` DRIVER is Lean-sound (V.MEAS)** (`MeasurePy.lean` +
+  `MeasurePyBridge.lean`): `checkMeasurePy` models `Verifier.run`/`covered`/`root_boxes`/
+  `main` — `--tscale`, the `4^k` `--split` root grid, `--strict-margin`, the no-drop
+  `known`-inheritance, the float shortlist as an arbitrary ORACLE, the `s < 1` shortcut —
+  and `checkMeasurePy_no_packing` proves PASS ⟹ `s(n) ≥ s` for every oracle/tscale/split/
+  margin from the A64 primitives.  Residual TCB = the line-by-line model↔source table
+  (`MeasurePy.lean` header, `attempts/A75-lean-wave5/notes/findings.md`).
+* **The `verify_param.py` window checker is Lean-sound (V.PARAM)** (`ParamChecker.lean` +
+  `ParamBridge.lean`): the 4-D `(t, cx, cy, s)` branch-and-bound with the point→interval
+  widenings (`atom_inside_int_iv`, `core_exempt_frac_iv` = A70's `coreExempt` on a
+  centre-shifted box), `checkParamI_price` (claim (P2) at EVERY REAL side of the window),
+  `checkParamI_kill` (the per-side Lemma B `hcert` for the whole window from one PASS —
+  the form `stratum_kill` consumes) and `checkParamI_kill_packing` (λ-dilated).  Pilot
+  replay `ParamData506.lean` + `ParamK506.lean` (`lean/gen_param_lean.py`): `k5_06.param`
+  over `[191/50, 969271/250000]` at depth 56, `native_decide` 215 s.  C.WIN carries the
+  gold verifier accent.
+* **D.N1, C.M1, C.T5T11 are Lean** (`Zones.lean`): centre separation / at-most-one / zone
+  assignment injective-unique-bijective; single-corner window transfer `M1_transfer`; the
+  T5 contradictory-box rule `core_meet_same_square` and the T11 refinement `refine_cover`
+  (the pinguard "parent" gate stays a code invariant).
+* **B.SEL / C.CC2 Lean partial** (`Selection.lean`): `exists_kmax` (k-maximal selection),
+  `teleport_packing` (the CC-2 exchange preserves the packing at the same side — no
+  corridor), `cc2_stuck` / `cc2_two_meeters` conditional on the census interface `hinc`
+  (F11/H2, the same debt as `hface`); the H1 degenerate cases are absent in the teleport
+  form by the shape of the statement.
 Each axiom's docstring records the lab artefact meant to discharge it and its status; the
 ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, updated by
 `attempts/A63-hole-closure/notes/findings.md` (bridge lemmas now in `docs/proofs/`).
@@ -96,6 +122,11 @@ ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, u
 | `PackingCert.S11.checkCaseI_kill`, `checkCaseI_no_family` | `PackingCertMathlib/CaseBridge.lean` | **the case-LP bridge (V.CASE)**: `checkCaseI c = true` ⇒ no strict family at the certified side realises the pin hypotheses (B-NO: some non-owner is NO-exempt) | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.k5_06_lo_kill` (+`_packing`) | `PackingCertMathlib/CaseK506.lean` | **one case certificate end to end**: the k5_06 pin-set kill at `s = 191/50` (strict-family and λ-dilated packing forms) | + the `native_decide` axiom (`check_k5_06_lo._native.native_decide.ax_1_1`; seconds) |
 | `PackingCert.S11.containsPins_mono`, `kill_mono`, `monotone_to_exact` | `PackingCertMathlib/Skeleton.lean` | **K1(i) (B.K1)**: kills climb the pin-set containment order; M→E conditional on the census interface `hface` | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.checkMeasurePy_no_packing` | `PackingCertMathlib/MeasurePyBridge.lean` | **`verify_measure.py` driver soundness (V.MEAS)**: `checkMeasurePy c need ts k pick = true` ⇒ `s(c.n) ≥ c.sNum/c.sDen`, for every shortlist oracle, tscale, root split, margin | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.checkParamI_price`, `checkParamI_kill`, `checkParamI_kill_packing` | `PackingCertMathlib/ParamBridge.lean` | **the parametric (window) bridge (V.PARAM)**: `checkParamI c ts ss k pick = true` ⇒ at every real `s ∈ [s_lo, s_hi]` no strict family realises the pin hypotheses (cores `K_j(s)`); λ-dilated packing form | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.k5_06_param_kill` (+`_packing`) | `PackingCertMathlib/ParamK506.lean` | **one window certificate end to end**: the k5_06 pin-set kill at EVERY side of `[191/50, 969271/250000]` | + the `native_decide` axiom (`check_k5_06_param._native.native_decide.ax_1_1`; 215 s) |
+| `PackingCert.S11.centre_separation`, `zone_assign_bijective`, `core_meet_same_square`, `M1_transfer` | `PackingCertMathlib/Zones.lean` | **D.N1 / C.T5T11 / C.M1**: centre separation + zone-assignment collapse; the T5/T11 logic rules; single-corner transfer down the window | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.exists_kmax`, `teleport_packing`, `cc2_stuck` | `PackingCertMathlib/Selection.lean` | **B.SEL / C.CC2**: k-maximal selection; the CC-2 exchange preserves the packing; teleport-stuckness conditional on the census interface `hinc` | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.theta_lipschitz`, `sub_le_theta`, `corner_perturb`, `rBasin_gate_*` | `PackingCertMathlib/ThetaT.lean` (+ `TopLevel.lean`) | **θ↔t transfer (E.COORD)**: `|Δt| ≤ |Δθ| ≤ 2|Δt|`; corner motion ≤ `r_c + √2·r_t`; the two rBasin gates | `propext, Classical.choice, Quot.sound` |
 
 `Band.lean` proves the A26.1 family with an *arbitrary* separating direction, hence band width
