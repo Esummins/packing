@@ -124,6 +124,34 @@ bound and not a change to the LP's value) plus a `--max_atoms` cap on the initia
    and a 4D run costs 10–250 s, so A56's single `gap` attempt left a cheap lever unused).
 7. **C2** on a PASS: the unmodified A53 `verify_case.py` at s_lo, the midpoint and s0.
 
+## L5 [M] — dτ/d(eps_geo) is HALVED by the enriched pool, so P6(v)'s 0.5 pre-gate is ~2x conservative
+
+A56 measured dτ/dε ≈ 1.1–1.7 × 10², making eps_geo = 0.003 cost ≈ 0.42 of budget, which is where
+the 0.5 gate comes from. A61 measures it directly on its three first-pass conversions:
+
+| row | τ0 | τ(0.003) | dτ/dε | cost of ε = 0.003 |
+|---|---|---|---|---|
+| k5_17 | 5.333333 | 5.500000 | 57.5 | 0.167 |
+| k6_20 | 4.500000 | 4.689227 | 65.3 | 0.189 |
+| k6_29 | 4.500000 | 4.760417 | 89.8 | 0.260 |
+
+**57–90, i.e. roughly half A56's figure.** The reason is structural: a shrunk row is a harder
+constraint, and how much harder depends on whether the measure has an ALTERNATIVE atom that
+still covers the shrunk square. A rich column pool supplies those alternatives, so the same
+shrink costs less. The lever that drops τ0 (L2) also flattens the shrink curve.
+
+Consequence: the P6(v) pre-gate at 0.5 was calibrated on the un-enriched pipeline and, under
+enrichment, rejects rows that can in fact pay (cost ≈ 0.26 worst case, not 0.42). A61 therefore
+splits the gate in two:
+* **pre-gate** on slack0 — an extrapolation, now recalibrated to 0.30 for enriched runs;
+* **post-shrink gate** (`--gate_b`, default 0.03) on the MEASURED `budget − τ(eps_geo)` — this is
+  the real condition for a certificate to exist (certify builds `total = τ·scale` with
+  `scale ≥ 1.005`, so it needs `budget − τ > 0.005·τ ≈ 0.028`).
+
+The abort-early discipline is preserved exactly — no certify round is ever burnt on a row that
+provably cannot certify — while the honest test moves from a prediction to a measurement. The
+extra cost of being wrong is one stage-B LP (~15 min), not a ~1500 s certify burn.
+
 ## L4 [S] — what an A61 conversion licenses (unchanged from A56)
 
 A61 produces no new soundness statement. A PASS is exactly A56 P3's parametric soundness theorem

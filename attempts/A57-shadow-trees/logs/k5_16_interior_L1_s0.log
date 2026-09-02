@@ -1358,3 +1358,17 @@ certificate total >= budget: cannot certify (LP tau too close to the budget for 
     {"id": "k5_16_interior_Y0623", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.66611, "box": {"x0": 1.519271, "x1": 1.6590280000000002, "y0": 1.239757, "y1": 1.3795140000000001, "th0": 28.072486935852957, "th1": 41.11209043916693}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 4.999999999999987, "converged": false, "minmass": 6.387577300815544e-08, "maxcov": 2.0000000244942937, "eta": -1.3322676295501878e-14, "lp_seconds": 891.2, "scale_ceiling": 1.0000000000000027, "cert": "ALIVE-at-LP (no scale headroom for a row-shrink margin) -> queued for depth 2 (deepen.py)", "cert_seconds": 0.3, "cert_path": null, "eps_geo": []}
 [18:15:26] LP k5_16_interior_Y0629 budget=5 a=0.35660162976868715 gd=0.661 pool=3898
 [s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3898 points=3898 rows=12425 (rejected 17599)
+  it   0 tau=4.000000 rows=12425 orbs=4298 atoms>0=4 minmass=1.000000 maxcov=1.278596 +rows=0 -rows=0 +cols=400 -cols=0 t=20s [lp 14s row 0s +r 0s col 1s +c 0s]
+  it   1 tau=4.000000 rows=12425 orbs=4364 atoms>0=90 minmass=1.000000 maxcov=1.500000 +rows=0 -rows=0 +cols=66 -cols=0 t=155s [lp 111s row 23s +r 0s col 0s +c 0s]
+  it   2 tau=4.000000 rows=12425 orbs=4764 atoms>0=4 minmass=1.000000 maxcov=1.300971 +rows=0 -rows=0 +cols=400 -cols=0 t=258s [lp 103s row 0s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.000000 nu=4.000000 conv=False minmass=1.000000 maxcov=1.300971 rows=12425 orbits=4764 atoms_nz=4 packing_support=8 time=678s
+[round 0] tau=4.00000 conv=False scale=1.2468 cert total=4.98700 budget=5 atoms=4
+    boxes = 7200  covered = 1960  vacuous = 0  exempt = 1672 (core 1672, nofam 0)  split = 3568  exact atom checks = 1960  max depth = 30  time = 0.4s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 2493501/500000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A57-shadow-trees\certs\tree\k5_16_interior_L1\k5_16_interior_Y0629.json
+
+    {"id": "k5_16_interior_Y0629", "kind": "YES", "budget": 5, "zone": "interior", "a": 0.35660162976868715, "ghost_dist": 0.66144, "box": {"x0": 1.798785, "x1": 1.938542, "y0": 1.239757, "y1": 1.3795140000000001, "th0": 14.250032697803595, "th1": 28.072486935852957}, "trump_realizes": false, "pin": "ok", "pin_info": null, "tau": 3.9999999999988973, "converged": false, "minmass": 1.0, "maxcov": 1.300970873786677, "eta": -1.0000000000011027, "lp_seconds": 678.5, "scale_ceiling": 1.2500000000003446, "cert": "PASS", "cert_seconds": 1.0, "cert_path": "C:\\Users\\esumm\\code\\packing\\attempts\\A57-shadow-trees\\certs\\tree\\k5_16_interior_L1\\k5_16_interior_Y0629.json"}
+[18:26:46] LP k5_16_interior_Y0635 budget=5 a=0.35660162976868715 gd=0.659 pool=3898
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3898 points=3898 rows=12469 (rejected 17612)
+  it   0 tau=5.000000 rows=12469 orbs=4298 atoms>0=5 minmass=1.000000 maxcov=1.194539 +rows=0 -rows=0 +cols=400 -cols=0 t=24s [lp 17s row 0s +r 0s col 1s +c 0s]

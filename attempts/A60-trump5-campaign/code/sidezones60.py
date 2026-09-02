@@ -64,7 +64,7 @@ def main():
               "contain=%.3e all_inside=%s queue=%d  (%.0f s)"
               % (z, cen["counts"]["cover"], cen["counts"]["contradictory"],
                  cen["counts"]["parent"], cen["counts"]["attemptable"],
-                 r["levels"][0]["boxes"], L["level"], L["boxes"], L["max_containment"] or 0,
+                 r["levels"][0]["boxes"], L["level"], L["boxes"], L.get("max_containment_t") or 0,
                  L["all_inside"], q, time.time() - t0), flush=True)
 
 

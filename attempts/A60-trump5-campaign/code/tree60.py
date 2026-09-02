@@ -45,6 +45,16 @@ from alive59 import alive_verdict
 import vac59
 
 H = 3.7e-3                      # A36 basin radius, sup-norm in (cx, cy, theta_rad)
+# A63 (docs/proofs/theta_t_transfer.md X.3): the Lean-concrete basin radius, and the coordinates
+# the discharge obligation D.S6 is actually stated in are the **t-world** (t = tan(theta/2)),
+# NOT theta-radians.  Both changes matter and they pull in opposite directions:
+#   * the radius tightens  3.7e-3 -> 3/2000 = 1.5e-3;
+#   * the metric loosens, since |dt| <= |dtheta| (X.1), so a t-radius is <= the theta-radius.
+# Measured on A60's own level-24 located boxes: containment is 2.010e-3 in theta-radians (which
+# FAILS rBasin) and 1.143e-3 in the t-world (which passes, by a margin of only 1.24x).  So the
+# discharge test MUST be the t-world one against RBASIN; the theta/h numbers are kept as a
+# diagnostic only.  Getting this wrong silently manufactures false (D) leaves.
+RBASIN = 3.0 / 2000.0
 TSC = 0.566                     # dt/dtheta at theta_T: t half-width of a theta-radian ball
 HW_TARGET = H / 4.55            # 8.13e-4 -- the G-A59-9 annulus closure (P5)
 ORDER = ["sq7", "sq8", "sq9", "sq4", "sq6", "sq10"]     # P4 conditioning order
@@ -74,11 +84,25 @@ def box_radius(b):
 
 
 def sup_containment(b, name):
-    """max sup-norm distance from Trump's placement `name` to a point of b, in
-    (cx, cy, theta_rad).  b lies inside the A36 basin slice of `name` iff this is <= h."""
+    """DIAGNOSTIC ONLY: max sup-norm distance from Trump's placement to a point of b, with the
+    angle in theta-RADIANS (the A36 h-metric).  Not the discharge test -- see contain_t."""
     cx, cy, thd = trump_deg(name)
     return max(abs(b.x0 - cx), abs(b.x1 - cx), abs(b.y0 - cy), abs(b.y1 - cy),
                abs(math.radians(b.th0 - thd)), abs(math.radians(b.th1 - thd)))
+
+
+def _t_of_deg(d):
+    return math.tan(math.radians(d) / 2.0)
+
+
+def contain_t(b, name):
+    """THE DISCHARGE TEST (A63 D.S6): max sup-norm distance from Trump's placement to a point of
+    b, in the (cx, cy, t) coordinates the Lean statement uses.  b is a (D)-leaf core for `name`
+    iff this is <= RBASIN = 3/2000."""
+    cx, cy, th = FREE[name]
+    tT = math.tan(th / 2.0)
+    return max(abs(b.x0 - cx), abs(b.x1 - cx), abs(b.y0 - cy), abs(b.y1 - cy),
+               abs(_t_of_deg(b.th0) - tT), abs(_t_of_deg(b.th1) - tT))
 
 
 def sup_gap(b, name):
@@ -415,19 +439,22 @@ def ladder_scan(cond_names, levels, w=0.15, nth=8, a_min=0.34, out=None, seed=No
     for level in range(levels + 1):
         rad = max([box_radius(b) for b in residue], default=0.0)
         vol = sum(box_volume(b) for b in residue)
-        gaps, inside, cont = [], 0, []
+        gaps, inside, cont, cont_t = [], 0, [], []
         for b in residue:
             hb = hug.get(b.key())
             if hb:
                 gaps.append(sup_gap(b, hb))
-                cont.append(sup_containment(b, hb))
-                inside += 1 if sup_containment(b, hb) <= H else 0
+                cont.append(sup_containment(b, hb))          # theta-world, diagnostic
+                cont_t.append(contain_t(b, hb))              # t-world, THE test
+                inside += 1 if contain_t(b, hb) <= RBASIN else 0
         # (D)-chain bookkeeping: a 'shared' box is discharged into the conditioning core it
         # shares as soon as it lies inside that square's A36 basin slice.
-        ch_open = [(b, nm) for (b, nm) in chain if sup_containment(b, nm) > H]
+        ch_open = [(b, nm) for (b, nm) in chain if contain_t(b, nm) > RBASIN]
         rowl = dict(level=level, boxes=len(residue), volume=vol,
                     max_box_radius=rad, max_gap_to_trump=(max(gaps) if gaps else None),
-                    max_containment=(max(cont) if cont else None),
+                    max_containment_theta=(max(cont) if cont else None),
+                    max_containment_t=(max(cont_t) if cont_t else None),
+                    rbasin=RBASIN,
                     inside_A36_basin=inside, all_inside=(inside == len(residue)),
                     chain_boxes=len(chain), chain_open=len(ch_open),
                     chain_discharged=len(chain) - len(ch_open))
@@ -465,7 +492,7 @@ def ladder_scan(cond_names, levels, w=0.15, nth=8, a_min=0.34, out=None, seed=No
                     hug[sb.key()] = (h_ if isinstance(h_, str) else (h_[0] if h_ else None)) or nm
                 elif g["state"] == "attemptable":
                     queue.append(dict(box=sb.to_json(), k=g["k"], hugs=g["hugs"], level=level))
-        chain = ([(b, nm) for (b, nm) in chain if sup_containment(b, nm) <= H] + nchain
+        chain = ([(b, nm) for (b, nm) in chain if contain_t(b, nm) <= RBASIN] + nchain
                  if refine_chain else chain)
         out_levels[-1]["kill_queue"] = len(queue)
         out_levels[-1]["queue"] = queue

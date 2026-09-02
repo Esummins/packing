@@ -84,3 +84,19 @@ three theorems clean (no sorryAx; shat_spec = propext/choice/Quot.sound only). D
 (A63 copy at `results/depgraph.json`): A.S3 → certificate+verifier; B.EXACT, E.COORD →
 proved-prose; +A.SBRIDGE (proved-prose), +A.THMU (open); open nodes 14 → 13, with A.UBshat
 and A.UNIQ still open but route-decided with named residues.
+
+## N8 [MED] — A60 feedback round: Lemma B-NO (nofams-aware clause) added; grid pricing held.
+A60's ledger (notes/ledger.md) surfaced that its four confinement PASSes — the only viable
+route for trump5's outer triple — carry a NO-family, which Lemma B as first written excluded.
+Added B.2″ **Lemma B-NO**: with nonempty nofams the bridged claim is occupancy, and it
+transfers to side m = s″/λ as "some non-owner square has (c, t) ∈ λ⁻¹F_k" — no side condition
+on core owners (the pricing dichotomy never touches them); the zone contracts toward the
+origin, so downstream consumers must hypothesise the OUTWARD widening F^{+ε},
+ε = (λ_max−1)·max-coordinate (1.6e-9 in the fat-pin shell; ≈1.6e-3 under the slack-core
+grid). Also B.2′: the general owner-frame (H) criterion ((λ−1)|c_o|₂ < ρ_j), codifying A60's
+recorded false alarm (B′'s axis-parallel width formula misapplied to tilted cores gives
+ρ ≈ −0.204; the correct margin is 1/2 − a > 0). Confirmations banked: ρ = 1.0000009e-9
+independently reproduced on A60's 49 leaves; the T5 θ↔t lemma caught A60's basin-discharge
+test (θ-radians vs wrong radius → corrected to contain_t vs 3/2000, square-1 ladder passes at
+1.24× — thin; squares 2–3 to be re-checked). B.4's ×37 grid price is HELD: A60's measured law
+is η ≤ −1 (the 0.5-slack regime failed on trump5); one δ = 1e-3 re-emission test is running.

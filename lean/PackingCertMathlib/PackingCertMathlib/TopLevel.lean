@@ -355,7 +355,10 @@ whole window, which is exactly that open obligation.  A63 sharpening
 (`closed_disjoint_bridge.md` B.2/B.4): the tree's s₀ kill certificates, with the library's
 ε-fat pin cores (margin ~1e-9), instantiate at NO side of the window via the dilation
 bridge; the named upgrade paths are parametric re-emission or the slack-core fixed-side
-grid.  Dilation transfers KILLS only, never this axiom's containment conclusion (the
+grid (pricing HELD pending A60's δ-re-emission test — its measured law is η ≤ −1, stricter
+than A56's slack gate).  The confinement leaves (nonempty `nofams`, the only route for the
+outer triple) transfer via Lemma B-NO (B.2″) as occupancy with the zone contracted by 1/λ —
+downstream consumers must hypothesise the outward-widened zone.  Dilation transfers KILLS only, never this axiom's containment conclusion (the
 pulled-back basin box misses `InBasin` by ~(λ−1)·|ĉ| ≫ rBasin) — D.SLAB stands.  The
 `InBasin` target is now concrete: all 33 coordinates within 3/2000, mod G (A60's landing
 radius 4.45e-4 = 0.30 × rBasin).  The symmetry/relabelling is produced by the D4 reduction

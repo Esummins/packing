@@ -220,6 +220,10 @@ def main(argv=None):
                     help="soundness.md P6(v) repairability gate on budget - tau0")
     ap.add_argument("--gate_tol", type=float, default=1e-6,
                     help="slack tolerance on the gate (tau lands on exact rationals + noise)")
+    ap.add_argument("--gate_b", type=float, default=0.03,
+                    help="post-shrink gate on budget - tau(eps_geo) (A61 L5): the MEASURED "
+                         "condition for a certificate to exist at all, replacing the "
+                         "pre-gate's extrapolation once stage B has priced the shrink")
     ap.add_argument("--lp_time", type=float, default=1500, help="stage-A LP cap (s)")
     ap.add_argument("--lp_time_b", type=float, default=1100, help="stage-B LP cap (s)")
     ap.add_argument("--cert_time", type=float, default=420)
@@ -312,9 +316,18 @@ def main(argv=None):
                        "maxcov": resB["maxcov"]},
                dtau_deps=((resB["tau"] - tau0) / (a.eps_geo - 1e-4)))
     save(rec)
-    if resB["tau"] >= budget:
-        rec["verdict"] = f"LP infeasible for a kill at eps_geo={a.eps_geo} (tau >= budget)"
+    # POST-SHRINK GATE (A61 L5).  P6(v)'s pre-gate on slack0 is a PREDICTOR of whether the row
+    # can pay for the shrink; stage B has now MEASURED the price, so gate on the measured
+    # quantity.  certify builds total = tau_eps * scale with scale >= 1.005, so a kill needs
+    # budget - tau_eps > 0.005 * tau_eps (~0.028 here); --gate_b is that with headroom.  This
+    # keeps the abort-early property (no certify round is burnt on a row that provably cannot
+    # certify) without inheriting the pre-gate's conservatism.
+    slack_e = budget - resB["tau"]
+    if slack_e < a.gate_b:
+        rec["verdict"] = (f"POST-SHRINK GATE-FAIL at eps_geo={a.eps_geo}: "
+                          f"budget - tau = {slack_e:.5f} < {a.gate_b}")
         rec["total_seconds"] = round(time.time() - t_all, 1)
+        L("    " + rec["verdict"] + "; no certify round burnt.")
         save(rec)
         return 1
 

@@ -131,6 +131,59 @@ Consequences, per certificate family:
   packing at m < 3.82 dilates to a strictly-disjoint family at 3.82. One line, previously
   unwritten.)
 
+## B.2′ [T] The general (H) criterion — owner frame, not axis-parallel width
+
+Corollary B′'s formula ρ = 1/2 − a(cos θ_c + sin θ_c) compares a core against an
+**axis-aligned** pin square; it is the wrong test for a tilted core hypothesised inside a
+same-orientation packing square, where it can go spuriously negative (A60 recorded exactly this
+false alarm: ρ ≈ −0.204 on its tilted conditioning cores — a misapplication, not a failure;
+`attempts/A60-trump5-campaign/notes/ledger.md` §1). The correct general condition: if the
+hypothesis square Q_o (any orientation) contains core K_j with margin ρ_j in **Q_o's body
+frame** (for a same-orientation pair, ρ_j = 1/2 − a_j), then (H) survives dilation whenever
+
+  (λ − 1) · |c_o|₂ < ρ_j    (sufficient: body-frame offset ≤ Euclidean centre motion),
+
+and |c_o|₂ ≤ √2·(s″ − 1/2) < 4.78 bounds it certificate-side when the owner's position is not
+otherwise localised. For slot pins B′'s per-axis form with A = 5/2 is sharper; use it there.
+In every A60 certificate the binding core is the ε-fat PIN core (ρ ≈ 1.0e-9), independently
+reproduced by A60 over its 49 leaves; the tilted cores have ρ_tilt = 1/2 − a ∈ [6.4e-4, 0.14]
+and never bind.
+
+## B.2″ [T] Lemma B-NO (the `nofams`-aware clause)
+
+Lemma B required empty `nofams`. Four A60 PASS certificates — exactly the CONFINEMENT leaves,
+the only viable route for trump5's outer triple (G-A60-2) — carry a NO-family, so they need
+their own clause. Recall the semantics: with nonempty nofams the certificate's bridged claim
+at its own side s″ is not emptiness but **occupancy**: every disjoint-closed family containing
+the cores has some square whose (centre, t) lies in some F_k (otherwise all ≥ b core-free
+squares are priced and μ ≥ b > Σw).
+
+**Lemma B-NO.** Same setting and hypotheses (H) as Lemma B, but with NO-families
+F_1 … F_m (centre rectangles × t-interval lists). Then P (interior-disjoint, side m = s″/λ)
+has a square Q, distinct from the r core-owning squares, with
+
+  (c_Q, t_Q) ∈ λ⁻¹F_k for some k,  where λ⁻¹F_k := ([x0/λ, x1/λ] × [y0/λ, y1/λ]) × (same
+  t-intervals — dilation does not change orientation).
+
+*Proof.* Dilate as in Lemma B. If no square of G (the ≥ b non-owners) were NO-exempt, every
+member of G would be priced (admissible, meets no core, non-exempt) and μ(total) ≥ b,
+contradicting (P1). So some Δ_λQ ∈ G has (λc_Q, t_Q) ∈ F_k; divide the centre by λ. ∎
+No side condition on the core owners is needed: the dichotomy only prices the non-owners, so
+exempt-or-not status of the owners never enters.
+
+**Composition bookkeeping (the part consumers must not skip).** λ⁻¹F_k is NOT a subset of
+F_k — it is F_k contracted toward the origin, so it protrudes below F_k on the near-origin
+sides by up to (1 − 1/λ)·x1 ≤ (λ − 1)·x1 per axis. A downstream node that hypothesises "the
+confined square lies in F_k" must instead hypothesise the outward widening
+F_k^{+ε}, ε = (λ_max − 1)·(max coordinate of F_k):
+* within the current fat-pin transfer shell (λ − 1 ≤ 4.0e-10): ε ≤ 1.6e-9 — negligible against
+  any real margin, but it must be STATED in the (D)/(K) child hypotheses;
+* under the slack-core grid (B.4, λ − 1 ≤ ~4e-4): ε ≈ 1.6e-3 — a real widening that must be
+  built into the grid re-emission of every zone consumer, alongside the slackened pin cores.
+And the shell caveat is unchanged: with today's ε-fat pin cores the confinement leaves, like
+every other A60 leaf, transfer only within the 4e-10 shell — Lemma B-NO removes the
+*structural* exclusion of the confinement route from the bridge, not the margin problem.
+
 ## B.3 [F] The F6 interaction, made explicit
 
 A56 refuted "kill at s0 × transfer principle" as a factorisation; Lemma B does not resurrect
@@ -154,8 +207,15 @@ certificates with δ = 1e-3 cores covers the whole window [3.82, s0] for a strat
 the 4-D parametric s-axis entirely** — an alternative route for the A61 stragglers and the only
 currently-visible route for giving the A57 sub-trees and the A60 zone-tree a window form
 without re-architecting them parametrically (re-run the same trees at the grid sides with
-slackened pin cores; the LP cost of δ = 1e-3 slack is the eps_geo-measured regime, known
-affordable at ~0.5 budget-slack per A56 P6(v)). Named: **the slack-core grid route**.
+slackened pin cores). Named: **the slack-core grid route**.
+
+COST CAVEAT (A60 relay, 2026-09-01): do NOT price the ×37 off A56's 0.5-budget-slack rule.
+A60's measured certification law on trump5 is stricter — a node certifies iff η = τ − budget
+reaches −1; every fractional-η node (−0.33, −0.50) FAILed (`A60 notes/falsifier.md` §6), i.e.
+the 0.5-slack regime is exactly what fails there. Affordability of δ = 1e-3 cores on trump5
+is UNMEASURED; A60 is re-emitting one already-PASSing cover leaf at δ = 1e-3 as the decisive
+one-LP test. Hold any grid budgeting until that lands. (For zone CONSUMERS in the grid, also
+apply the B.2″ widening ε ≈ 1.6e-3.)
 
 Boundary discipline note (S4 checklist item): with Lemma B in place, every kill application in
 the composition is at a certified side s″ STRICTLY ABOVE the packing side m, and no lemma is
@@ -167,7 +227,13 @@ That is exactly depgraph node D.SLAB, unchanged by this file.
 
 ## B.5 Status
 
-Lemma B, Corollary B′, and the corpus margin computation: proved/computed here (A63). Uses:
+Lemma B, Corollary B′, B.2′ (owner-frame criterion), B.2″ (Lemma B-NO), and the corpus margin
+computation: proved/computed here (A63; B.2′/B.2″ added after the A60 feedback round —
+`attempts/A60-trump5-campaign/notes/ledger.md`). Cross-checks: A60 independently reproduced
+ρ = 1.0000009e-9 as the binding margin on all 49 of its leaves; the θ↔t companion lemma
+(`theta_t_transfer.md`) caught A60's basin-discharge test running in θ-radians against the
+wrong radius (corrected to contain_t vs rBasin = 3/2000; square-1 ladder passes at 1.24×,
+squares 2–3 to be re-checked as their ladders close). Uses:
 separating-axis for convex polygons (as drain_lemma D3′ and A36 L1 do — cited, standard), the
 case-LP PASS claim (P1)/(P2) as frozen in `docs/specs/case_lp_certificate_v1.md`, and the A56
 P3 parametric soundness theorem for specialisation. Degenerate case "tight pin containment"

@@ -1524,3 +1524,10 @@ affordable cost estimate for closing 3.84.
   certificate+verifier; B.EXACT, E.COORD -> proved-prose; +A.SBRIDGE (proved-prose),
   +A.THMU (open); open nodes 14 -> 13. Lean builds clean, #print axioms audited, README
   matrix updated. A57/A60/A61 untouched; light CPU only.
+- A63 addendum (A60 feedback round): Lemma B-NO added to closed_disjoint_bridge.md (B.2'')
+  — nofams certificates (A60's confinement leaves) transfer as occupancy with the zone
+  contracted by 1/lambda; consumers must widen by (lambda_max-1)*coord. Owner-frame (H)
+  criterion codified (B.2'; kills the tilted-core rho false alarm). rho independently
+  reproduced by A60 (49 leaves); theta-t lemma caught A60's basin-discharge coordinate/radius
+  bug (now contain_t vs 3/2000, 1.24x margin — watch squares 2-3). Slack-core grid pricing
+  HELD pending A60's delta=1e-3 re-emission test (measured law eta <= -1, not 0.5-slack).
