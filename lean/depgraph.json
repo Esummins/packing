@@ -16,7 +16,7 @@
    "conjecture": "labelled conjecture/extrapolated/[NUM] in the repo; NOT usable in the proof",
    "open": "no proof, no certificate; an obligation",
    "blocked_only_flag": "nodes may carry \"blocked_only\": true \u2014 the node's OWN work is done (its statement/composition written or proved) and it is open solely because a dependency is open; rendered with a dashed outline",
-   "owner_flag": "nodes may carry \"owner\": \"A<nn>\" - the attempt actively working the node right now; rendered as a chip in the node corner. Remove the field when the attempt closes.",
+   "owner_flag": "nodes may carry \"owner\": \"A<nn>\" - the attempt actively working the node right now; rendered as a chip in the node corner. Remove the field when the attempt closes. Non-attempt owners: \"auto\" = closes automatically when descendants close (no work); \"off-tree\" = motivation-only node, never needs closing (H11 sweep verdict).",
    "own_tier_flag": "blocked_only nodes may carry own_tier: the tier of the node OWN work; rendered as the dashed outline color (fill stays open-red until dependencies close)",
    "verifier_lean_flag": "a certificate+verifier (blue) node may carry \"verifier_lean\": true \u2014 its verifier SOUNDNESS (PASS => the claim) is a Lean theorem, not just prose; rendered with a gold inner accent. Certificate EVALUATION replay in Lean (native_decide, corpus-wide) is a separate axis, tracked in the note.",
    "resolved_flag": "a node may carry \"resolved\": true \u2014 its concern is discharged but the node is kept as an audit record (rendered dimmed with a check)."
@@ -34,7 +34,8 @@
    "blocked_only": true,
    "lean": "PackingCert.S11.s_eleven_eq / s_eleven_unique (statement formal, composition proved from axioms)",
    "note": "The composed theorem. Open until every 'open' descendant below closes. [own_tier lean-proved: the composition is already a Lean theorem from the axioms]",
-   "own_tier": "lean-proved"
+   "own_tier": "lean-proved",
+   "owner": "auto"
   },
   {
    "id": "A.D1",
@@ -81,7 +82,8 @@
    "label": "certificate+verifier",
    "lean_axiom": "zhat, trump_packs_at_shat",
    "note": "ROUTE DECIDED (A63, docs/proofs/attainment_ub.md): route (b) (Fits-closed + certificate sequence) REFUTED as a finite route (scaling breaks unit squares; rational curves have rational sigma-limits). Route (a) already certifies Fits(s_A22) (A22 feasibility, Python-interval TCB); residue = the algebraic identity s_A22 = s-hat, pinned to 2.1e-47 by T1's Taylor bound; closure specs: exact number-field verification (compositum deg <= 56 - a coordinate has a degree-7 minimal polynomial, so the field is NOT Q(s-hat)) or the S3-fallback restatement with s-hat := s_A22. || A64: axiom SPLIT executed in TopLevel.lean - shatA22 + trump_packs_at_shatA22 (certified, Python-interval TCB) + shatA22_eq_shat (THE open identity, single axiom); trump_packs_at_shat now a theorem. Sign/interval route to the identity REFUTED (no separation gap without a height bound - attainment_ub.md section 6); NEW cheaper closure spec (c-idl): saturated ideal-membership cofactor certificate, verification = rational polynomial identities + one sign gate, no number-field arithmetic; search = bounded Groebner/Macaulay campaign. || A69: (c-idl) EXECUTED - certs/cidl_identity.json + certs/verify_cidl.py (PASS 0.7 s, stdlib rationals; corruption gates OK): e(t)*Delta^8*octic(S) = sum q_j G_j over the 13 reduced contact rows, sign gate via exact Sturm on [3/10,2/5]; found by exact linear elimination (no Groebner) - deg Delta 34, deg D 35, m(t) = the tan-half octic DERIVED, m | G_oct. shatA22 = shat now certificate-backed (attainment_ub.md sec 7); the A53 L4 degree-7/compositum-56 obstacle VOID (spurious A03 minpoly annotations; all coordinates lie in Q(t-hat), degree 8). Lean residue = named obligation CIDL-LEAN (sec 7.5): native_decide replay + refined A22-interface axioms; then shatA22_eq_shat becomes a theorem via shat_spec.",
-   "source": "certs/cidl_identity.json + verify_cidl.py; attempts/A22-local-rigidity (feasibility)"
+   "source": "certs/cidl_identity.json + verify_cidl.py; attempts/A22-local-rigidity (feasibility)",
+   "owner": "A78"
   },
   {
    "id": "A.UNIQ",
@@ -90,7 +92,8 @@
    "blocked_only": true,
    "lean_axiom": "unique_transfer",
    "note": "RE-DIAGNOSED (A63, docs/proofs/unique_transfer.md): the axiom AS STATED follows from census exhaustiveness (A53 L3); the hole moved into stratum_kill's forall-packings quantifier at the K1-protected classes. Full architecture on file: CC-2 teleport chain to a stuck packing + stuck-kills (H10-stuck) + residual/basin + COLLAPSE back via Theorem U (node A.THMU). Obligations U-O1..U-O4. A65: U-O1 DISCHARGED (Theorem U certified, docs/proofs/theorem_u.md); remaining: U-O2 (=H10-stuck, see C.K4TIER / docs/proofs/h10_stuck.md), U-O3 (A57 G1), U-O4 (D/E nodes as axiomatised). [own_tier proved-prose: the reduction is prose (unique_transfer.md); formalising the derivation in Lean is still owed even after dependencies close]",
-   "own_tier": "proved-prose"
+   "own_tier": "proved-prose",
+   "owner": "A78"
   },
   {
    "id": "B.SEL",
@@ -98,7 +101,8 @@
    "label": "proved-prose",
    "lean_axiom": "stratify (with B.CENSUS)",
    "source": "A53 notes/lemmas.md [S]; A58 notes/theory.md CC-2/CC-2'; lean/PackingCertMathlib/PackingCertMathlib/Selection.lean (A75)",
-   "note": "CAVEAT (H1): degenerate slide cases (slide creating a contact mid-way, ties, sigma-changing slides) not written; not in docs/proofs/. A75 LEAN PARTIAL (Selection.lean): exists_kmax (the k-maximal selection, Nat.sSup_mem) + teleport_packing + cc2_stuck; H1 degenerate-case audit DONE - in the teleport (CC-2) formulation every listed case (mid-slide contact, ties, sigma-changing slides, one-normalisation simplicity) is absent by the shape of the statement; the sole residue is the census interface hinc (F11/H2)."
+   "note": "CAVEAT (H1): degenerate slide cases (slide creating a contact mid-way, ties, sigma-changing slides) not written; not in docs/proofs/. A75 LEAN PARTIAL (Selection.lean): exists_kmax (the k-maximal selection, Nat.sSup_mem) + teleport_packing + cc2_stuck; H1 degenerate-case audit DONE - in the teleport (CC-2) formulation every listed case (mid-slide contact, ties, sigma-changing slides, one-normalisation simplicity) is absent by the shape of the statement; the sole residue is the census interface hinc (F11/H2).",
+   "owner": "A78"
   },
   {
    "id": "B.CENSUS",
@@ -106,7 +110,8 @@
    "label": "certificate+verifier",
    "lean_axiom": "stratify (with B.SEL)",
    "source": "attempts/A53-simple-strata/code/skeletons2.py -> results/skeletons_young.json; INDEPENDENTLY RE-ENUMERATED attempts/A72-census-cleanroom/code/enum_census.py -> results/census_cleanroom.json (diff_report.json)",
-   "note": "Exact Fractions enumeration, D4-reduced, Trump canary. **H2 CLOSED (A72, 2026-09-02): DOUBLY WITNESSED.** Clean-room re-enumeration from the written L1-L3 definition only (A53 code never opened; output sha256-frozen before the diff) reproduces the census EXACTLY: the 1110 slot-sets are identical as sets of exact rational plane points, the 163-orbit partition is identical, the two D4 groups coincide as maps on the 36-slot lattice, and Trump lands in the same class. sha256 tuple_set f035681aca981b050c4519ed4fde6d7e019f3be40a209dbea4a29af2e8934be2 (A72) vs skeletons_young.json a7d769a08c6d3327673be14f0babb380d46babdcc1e28c3fd1d96a7d17a83ef7 (A53). hface's computational content is now witnessed by two independent implementations. RESIDUE (unchanged): the DEFINITIONAL debt - InStratum is still opaque in the Lean statement (F11); and 12 written-definition ambiguities had to be resolved by hand to write the second enumerator (8 binding), listed in attempts/A72-census-cleanroom/notes/ambiguities.md - a Lean definition must pin all 8."
+   "note": "Exact Fractions enumeration, D4-reduced, Trump canary. **H2 CLOSED (A72, 2026-09-02): DOUBLY WITNESSED.** Clean-room re-enumeration from the written L1-L3 definition only (A53 code never opened; output sha256-frozen before the diff) reproduces the census EXACTLY: the 1110 slot-sets are identical as sets of exact rational plane points, the 163-orbit partition is identical, the two D4 groups coincide as maps on the 36-slot lattice, and Trump lands in the same class. sha256 tuple_set f035681aca981b050c4519ed4fde6d7e019f3be40a209dbea4a29af2e8934be2 (A72) vs skeletons_young.json a7d769a08c6d3327673be14f0babb380d46babdcc1e28c3fd1d96a7d17a83ef7 (A53). hface's computational content is now witnessed by two independent implementations. RESIDUE (unchanged): the DEFINITIONAL debt - InStratum is still opaque in the Lean statement (F11); and 12 written-definition ambiguities had to be resolved by hand to write the second enumerator (8 binding), listed in attempts/A72-census-cleanroom/notes/ambiguities.md - a Lean definition must pin all 8.",
+   "owner": "A78"
   },
   {
    "id": "B.K1",
@@ -120,7 +125,8 @@
    "title": "Exact-skeleton vs pin-monotone bridge",
    "label": "proved-prose",
    "note": "CLOSED for the certified part (A63): exactly => contains is reflexivity + D4 bookkeeping; the certificate's monotone form is strictly stronger. A68: Lean skeleton landed (monotone_to_exact, Skeleton.lean) with the census interface as an explicit hypothesis hface (\"exact class membership => ContainsPins of the class tuple\"); hface becomes a theorem only when the Young census is a Lean definition (F11/H2; D4 equivariance machine-checked computationally by A67 R8). The K1-protected tier is deliberately out of scope - that is H10, target form H10-stuck. A75: reviewed, unchanged; E.2 D4 bookkeeping (symmetry action on slots/configurations) still prose - to land with the census definition.",
-   "source": "docs/proofs/instratum_bridge.md (A63): K1 (E.1) + Lemma M->E (E.2) + exact coverage table (E.3)"
+   "source": "docs/proofs/instratum_bridge.md (A63): K1 (E.1) + Lemma M->E (E.2) + exact coverage table (E.3)",
+   "owner": "A78"
   },
   {
    "id": "C.K61",
@@ -130,7 +136,8 @@
    "source": "A53/A54/A55(+k3_ext) certs/, verified by verify_case.py at depth 60",
    "note": "All exact, independently re-verified, corruption-gated. At s0; window coverage tracked at C.WIN.",
    "verifier_lean": true,
-   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done).",
+   "owner": "A78"
   },
   {
    "id": "C.A57",
@@ -164,7 +171,8 @@
    "title": "CC-2/CC-2' exchange (teleport) lemma + clear-corner 2-crowd",
    "label": "proved-prose",
    "source": "attempts/A58-clear-corner/notes/theory.md; lean/PackingCertMathlib/PackingCertMathlib/Selection.lean (A75)",
-   "note": "Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it. A75 LEAN PARTIAL (Selection.lean): teleport_packing (the exchange preserves the packing at the same side - no corridor hypothesis) + cc2_stuck / cc2_two_meeters (CC-2/CC-2-prime at a k-maximal packing) are theorems CONDITIONAL on the census interface hinc (teleporting a non-simple square onto a completable slot raises k); hinc = F11/H2 debt, same as hface."
+   "note": "Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it. A75 LEAN PARTIAL (Selection.lean): teleport_packing (the exchange preserves the packing at the same side - no corridor hypothesis) + cc2_stuck / cc2_two_meeters (CC-2/CC-2-prime at a k-maximal packing) are theorems CONDITIONAL on the census interface hinc (teleporting a non-simple square onto a completable slot raises k); hinc = F11/H2 debt, same as hface.",
+   "owner": "A78"
   },
   {
    "id": "C.WIN",
@@ -172,8 +180,9 @@
    "label": "certificate+verifier",
    "lean_axiom": "stratum_kill (the forall-s quantifier)",
    "source": "attempts/A56-sparametric (M1 + 4D parametric certificates)",
-   "note": "PARTIAL: 38/52 strata full-window; 12 s0-only (A61 running); 2 partial slivers (k6_23, k6_07); A57 sub-tree kills s0-only. A56 REFUTED transfer-as-a-principle, so this cannot be factored out as a single lemma \u00e2\u20ac\u201d it is a per-certificate obligation, which is why the Lean axiom fuses it into stratum_kill (findings F6). A63: the S4 application step (kill at the minimiser's own side) is now the WRITTEN Lemma B/B-prime of docs/proofs/closed_disjoint_bridge.md; full-window parametric coverage + dense rationals instantiate stratum_kill at every m in [3.82, s-hat] for covered classes. A75: verifier soundness (V.PARAM) is now a Lean theorem (checkParamI_kill, real-s window form) -> gold verifier accent; corpus-wide native_decide replay of the parametric certificates remains a separate evaluation axis (pilot: k5_06.param).",
-   "verifier_lean": true
+   "note": "PARTIAL: 38/52 strata full-window; 12 s0-only (A61 running); 2 partial slivers (k6_23, k6_07); A57 sub-tree kills s0-only. A56 REFUTED transfer-as-a-principle, so this cannot be factored out as a single lemma \u00e2\u20ac\u201d it is a per-certificate obligation, which is why the Lean axiom fuses it into stratum_kill (findings F6). A63: the S4 application step (kill at the minimiser's own side) is now the WRITTEN Lemma B/B-prime of docs/proofs/closed_disjoint_bridge.md; full-window parametric coverage + dense rationals instantiate stratum_kill at every m in [3.82, s-hat] for covered classes. A75: verifier soundness (V.PARAM) is now a Lean theorem (checkParamI_kill, real-s window form) -> gold verifier accent; corpus-wide native_decide replay of the parametric certificates remains a separate evaluation axis (pilot: k5_06.param). || remaining: corpus-wide Lean replay (C8) gated on A61 stragglers + A57 G1 finishing; verifier soundness already Lean (V.CASE + V.PARAM).",
+   "verifier_lean": true,
+   "owner": "A61"
   },
   {
    "id": "C.M1",
@@ -213,7 +222,8 @@
    "source": "A59 (six k=6 PASS certificates)",
    "note": "Drain cannot escape upward at s0; window form = A56's six-class ticket (partially open, see C.WIN).",
    "verifier_lean": true,
-   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done).",
+   "owner": "A78"
   },
   {
    "id": "D.P1",
@@ -222,7 +232,8 @@
    "source": "A59 pilot",
    "note": "Exact cert, re-verified depth 60.",
    "verifier_lean": true,
-   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done).",
+   "owner": "A78"
   },
   {
    "id": "D.LADDER",
@@ -237,13 +248,15 @@
    "title": "alivewitness: exact disjoint-family bound tau* >= budget",
    "label": "certificate+verifier",
    "source": "attempts/A57-shadow-trees/code/alivewitness.py (lemma in header)",
-   "note": "The ALIVE-side arbiter; strict positive gaps in exact rationals. Carries the load G-A59-12 would otherwise carry."
+   "note": "The ALIVE-side arbiter; strict positive gaps in exact rationals. Carries the load G-A59-12 would otherwise carry.",
+   "owner": "A78"
   },
   {
    "id": "D.TAUK",
    "title": "G-A59-12: tau* = k on Trump-adjacent boxes",
    "label": "conjecture",
-   "note": "H11 SUSPECT #2. VERDICT: MOTIVATION-ONLY. The load-bearing direction (tau* >= k, which blocks certificates) is witness-certified per node by D.ALIVE; the conjectured equality only informed pricing."
+   "note": "H11 SUSPECT #2. VERDICT: MOTIVATION-ONLY. The load-bearing direction (tau* >= k, which blocks certificates) is witness-certified per node by D.ALIVE; the conjectured equality only informed pricing.",
+   "owner": "off-tree"
   },
   {
    "id": "D.SLAB",
@@ -257,7 +270,8 @@
    "title": "D4 reduction machine-checked at the working side (H12)",
    "label": "certificate+verifier",
    "source": "attempts/A67-d4-rerun/code/verify_d4_s0.py (imports A27 caselp/level1/refine/verify_tree2, side rebound) -> results/d4_s0.json; write-up docs/proofs/d4_reduction_s0.md; run record attempts/A67-d4-rerun/notes/run_record.md",
-   "note": "A67 2026-09-02: s0 RE-RUN DONE, PASS in 36.7 s (control at 96/25 also PASS; A27 verify_tree2 --skip_leaf_verify anchor PASS). PORTED MECHANICALLY - no assumption bakes in the side; only mutation is verify_tree2.S / refine.S. Exact-rational: R1 Z(s0) concentric with the container; R2 the acting group IS D4 (8 signed perms, closed, orders {1,2^5,4^2}, nonabelian); R3 each g maps [0,s0]^2 and Z onto themselves; R4 the 8 images of the fundamental triangle T COVER Z (octant decomposition exhibited, each octant mapped into convex T on 3 vertices); R5 g(Q(c,th)) = Q(g(c),th') with th' = th / 90-th, i.e. t -> (1-t)/(1+t) (polynomial identity in t, deg <= 2, 5 points); R6 verify_tree2 check (2) verbatim (216 cells, cell<->box exact, none vacuous/coreless); R7 check (6) bookkeeping + t-bins are SIDE-INDEPENDENT (identical at 96/25 and s0); R8 CENSUS SIDE - A53 skeletons.py d4_images is the SAME group of plane maps as the container D4 at s0, preserves the slot lattice and corner anchors, canon is orbit-invariant/selecting on 7204 locked sets (944 classes) and the 1110 Young slot-sets (163 classes, = B.CENSUS), and the Young slot map is D4-equivariant g.slots(c,lam) = slots(g.c, lam or lam^T) - this is the action instratum_bridge.md E.2 consumes. SCOPE (d4_reduction_s0.md D4.4): conditional on the ROOT occupancy lemma at s0, which does NOT exist (it exists only at 3.84); verify_tree2's cert-consuming checks (1)(3)(4)(5)(7) have no input at s0 because there is no s0 case tree - that is D.TREE, not D.D4. Says nothing about S11 (seam S6 = D.S6, still open) and proves no bound (it is a WLOG). Reported non-assertion: sigma(box) is NOT inside the mirror box in t-coords (~5.3e-8, both directions) - the documented t_lo/t_hi outward-rounding artefact verify_tree2 works around by using the image box; identical at 3.84."
+   "note": "A67 2026-09-02: s0 RE-RUN DONE, PASS in 36.7 s (control at 96/25 also PASS; A27 verify_tree2 --skip_leaf_verify anchor PASS). PORTED MECHANICALLY - no assumption bakes in the side; only mutation is verify_tree2.S / refine.S. Exact-rational: R1 Z(s0) concentric with the container; R2 the acting group IS D4 (8 signed perms, closed, orders {1,2^5,4^2}, nonabelian); R3 each g maps [0,s0]^2 and Z onto themselves; R4 the 8 images of the fundamental triangle T COVER Z (octant decomposition exhibited, each octant mapped into convex T on 3 vertices); R5 g(Q(c,th)) = Q(g(c),th') with th' = th / 90-th, i.e. t -> (1-t)/(1+t) (polynomial identity in t, deg <= 2, 5 points); R6 verify_tree2 check (2) verbatim (216 cells, cell<->box exact, none vacuous/coreless); R7 check (6) bookkeeping + t-bins are SIDE-INDEPENDENT (identical at 96/25 and s0); R8 CENSUS SIDE - A53 skeletons.py d4_images is the SAME group of plane maps as the container D4 at s0, preserves the slot lattice and corner anchors, canon is orbit-invariant/selecting on 7204 locked sets (944 classes) and the 1110 Young slot-sets (163 classes, = B.CENSUS), and the Young slot map is D4-equivariant g.slots(c,lam) = slots(g.c, lam or lam^T) - this is the action instratum_bridge.md E.2 consumes. SCOPE (d4_reduction_s0.md D4.4): conditional on the ROOT occupancy lemma at s0, which does NOT exist (it exists only at 3.84); verify_tree2's cert-consuming checks (1)(3)(4)(5)(7) have no input at s0 because there is no s0 case tree - that is D.TREE, not D.D4. Says nothing about S11 (seam S6 = D.S6, still open) and proves no bound (it is a WLOG). Reported non-assertion: sigma(box) is NOT inside the mirror box in t-coords (~5.3e-8, both directions) - the documented t_lo/t_hi outward-rounding artefact verify_tree2 works around by using the image box; identical at 3.84.",
+   "owner": "A78"
   },
   {
    "id": "D.S6",
@@ -273,14 +287,16 @@
    "label": "certificate+verifier",
    "lean_axiom": "basin",
    "source": "attempts/A36-levers (17 IV certificates + a36_check.py re-checker, 339 checks, 5 corruption gates)",
-   "note": "Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE \u2014 the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member. || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a36_check_exact.py re-verifies all 17 certificates (339/339 checks, 10.8 s) in EXACT rational arithmetic - stdlib fractions only, dyadic outward-rounded intervals + certified alternating-Taylor cos/sin enclosures; all 5 corruption gates fail as required; mpmath.iv is OUT of the decision path at the Python tier. Emission is theta-frame (no certificate re-derivation needed); the t-frame stays the route for the Lean rungs (b)/(c), still open."
+   "note": "Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE \u2014 the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member. || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a36_check_exact.py re-verifies all 17 certificates (339/339 checks, 10.8 s) in EXACT rational arithmetic - stdlib fractions only, dyadic outward-rounded intervals + certified alternating-Taylor cos/sin enclosures; all 5 corruption gates fail as required; mpmath.iv is OUT of the decision path at the Python tier. Emission is theta-frame (no certificate re-derivation needed); the t-frame stays the route for the Lean rungs (b)/(c), still open.",
+   "owner": "A79"
   },
   {
    "id": "E.A22",
    "title": "Krawczyk: unique contact solution z-hat, feasible, strict local optimality",
    "label": "certificate+verifier",
    "source": "attempts/A22-local-rigidity/results/krawczyk_cert.json + recheck.py",
-   "note": "Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat). || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a22_recheck_exact.py re-verifies the full chain (G/K/K0/V/E/B/F, 1.5 s) in exact rational arithmetic, 4/4 corruption gates fail as required - mpmath.iv out of the decision path at the Python tier; Lean replay (rung b) open."
+   "note": "Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat). || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a22_recheck_exact.py re-verifies the full chain (G/K/K0/V/E/B/F, 1.5 s) in exact rational arithmetic, 4/4 corruption gates fail as required - mpmath.iv out of the decision path at the Python tier; Lean replay (rung b) open.",
+   "owner": "A79"
   },
   {
    "id": "E.IV",
@@ -321,31 +337,36 @@
    "id": "X.IL19",
    "title": "I-L19 flush-mandatory (global-realizability form)",
    "label": "conjecture",
-   "note": "H11 SUSPECT #3. VERDICT: OFF-TREE / MOTIVATION-ONLY. The A46-A51 flush-free program fed census design for the ABANDONED enumerate-then-solve routes; no leaf of the live stratification composition invokes it. (If the k<=3 route ever reaches for the A46/A48/A50 toolkit, its lemmas apply only under flush-free hypotheses \u00e2\u20ac\u201d re-run this sweep then.)"
+   "note": "H11 SUSPECT #3. VERDICT: OFF-TREE / MOTIVATION-ONLY. The A46-A51 flush-free program fed census design for the ABANDONED enumerate-then-solve routes; no leaf of the live stratification composition invokes it. (If the k<=3 route ever reaches for the A46/A48/A50 toolkit, its lemmas apply only under flush-free hypotheses \u00e2\u20ac\u201d re-run this sweep then.)",
+   "owner": "off-tree"
   },
   {
    "id": "X.S3BDBFS",
    "title": "Seam S3: BDBFS/atlas discovery-loop termination (empirical)",
    "label": "conjecture",
-   "note": "H11 SUSPECT #4. VERDICT: OFF-TREE. It belonged to the superseded T0/A38 far-field composition. The live plan discharges trump5 into the A36 basin only; atlas completeness and loop termination are not invoked by any live leaf."
+   "note": "H11 SUSPECT #4. VERDICT: OFF-TREE. It belonged to the superseded T0/A38 far-field composition. The live plan discharges trump5 into the A36 basin only; atlas completeness and loop termination are not invoked by any live leaf.",
+   "owner": "off-tree"
   },
   {
    "id": "X.ATLAS",
    "title": "CP-atlas completeness (36 entries = all attractors)",
    "label": "conjecture",
-   "note": "OFF-TREE for the composition (A51-NEW-0 showed it incomplete and it did not matter). Used as a map, never as a premise."
+   "note": "OFF-TREE for the composition (A51-NEW-0 showed it incomplete and it did not matter). Used as a map, never as a premise.",
+   "owner": "off-tree"
   },
   {
    "id": "X.CSTAR",
    "title": "A44 C* / C-rep (FJ counting bounds)",
    "label": "conjecture",
-   "note": "OFF-TREE: census-pricing only, for routes not taken."
+   "note": "OFF-TREE: census-pricing only, for routes not taken.",
+   "owner": "off-tree"
   },
   {
    "id": "X.GA531",
    "title": "G-A53-1 s-monotonicity of kills",
    "label": "conjecture",
-   "note": "SUPERSEDED, deliberately unused: A56's adopted form is parametric verification precisely so that monotonicity is never assumed. No live edge."
+   "note": "SUPERSEDED, deliberately unused: A56's adopted form is parametric verification precisely so that monotonicity is never assumed. No live edge.",
+   "owner": "off-tree"
   },
   {
    "id": "A.SBRIDGE",
@@ -361,7 +382,8 @@
    "source": "attempts/A65-low-k-closure (certs + results/u_ledger.json), docs/proofs/theorem_u.md",
    "note": "DISCHARGED AT CERTIFICATE LEVEL (A65, 2026-09-01): 11 re-insertion certificates u_reinsert_00..10 PASS (verify_case depth 60, Sigma w = 0, budget 1) at s''=3877083591023/1e12 with exact side-condition ledger (core margins ~1e-4, nofam-to-basin dev <= 1.0000010e-3 < rBasin); falsifier control FAILs exactly at Trump's pocket. Composition docs/proofs/theorem_u.md: consumes only basin's equality clause (not the open D-nodes). Trust residue: A22 z0/r0 enclosure (mpmath.iv tier) + two dps-80 tilt evals; both vanish under the t-reparametrised A22 re-emission (E.IV).",
    "verifier_lean": true,
-   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done).",
+   "owner": "A78"
   }
  ],
  "edges": [

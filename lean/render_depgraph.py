@@ -320,7 +320,9 @@ for nid, (x, y) in pos.items():
         cw = 10 + 7 * len(owner)
         cx0 = x + NW / 2 - cw + 4
         cy0 = y - NH / 2 - 7
-        out.append(f'<rect x="{cx0:.0f}" y="{cy0:.0f}" width="{cw}" height="14" rx="7" fill="#37474f"/>')
+        # attempt chips are dark; non-attempt owners ("auto", "off-tree") are gray = no work pending
+        chip_fill = "#37474f" if owner[:1] == "A" and owner[1:].isdigit() else "#9e9e9e"
+        out.append(f'<rect x="{cx0:.0f}" y="{cy0:.0f}" width="{cw}" height="14" rx="7" fill="{chip_fill}"/>')
         out.append(f'<text x="{cx0 + cw/2:.0f}" y="{cy0 + 10.5:.0f}" text-anchor="middle" fill="white" '
                    f'font-size="9" font-weight="bold">{html.escape(owner)}</text>')
     out.append('</g>')
