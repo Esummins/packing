@@ -1,0 +1,386 @@
+{
+ "s": "96/25",
+ "s_float": 3.84,
+ "checks": {
+  "R1_zone": {
+   "ok": true,
+   "A": "11/10",
+   "B": "137/50",
+   "m": "48/25",
+   "h": "41/50",
+   "m_eq_s_over_2": true
+  },
+  "R2_group": {
+   "ok": true,
+   "distinct": true,
+   "closed": true,
+   "orders": [
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    4,
+    4
+   ],
+   "nonabelian": true
+  },
+  "R3_invariance": {
+   "ok": true,
+   "violations": 0
+  },
+  "R4_fundamental_domain": {
+   "ok": true,
+   "octants_into_T": true,
+   "quadrant_glue": true,
+   "zone_glue": true,
+   "maps_in_D4": true,
+   "T": [
+    [
+     "48/25",
+     "48/25"
+    ],
+    [
+     "137/50",
+     "48/25"
+    ],
+    [
+     "137/50",
+     "137/50"
+    ]
+   ]
+  },
+  "R5_orientation": {
+   "ok": true,
+   "transport": [
+    {
+     "M": [
+      "1",
+      "0",
+      "0",
+      "1"
+     ],
+     "det": "1",
+     "rule": "id",
+     "P": [
+      "1",
+      "0",
+      "0",
+      "1"
+     ],
+     "consistent": true
+    },
+    {
+     "M": [
+      "1",
+      "0",
+      "0",
+      "-1"
+     ],
+     "det": "-1",
+     "rule": "sigma",
+     "P": [
+      "0",
+      "-1",
+      "-1",
+      "0"
+     ],
+     "consistent": true
+    },
+    {
+     "M": [
+      "-1",
+      "0",
+      "0",
+      "1"
+     ],
+     "det": "-1",
+     "rule": "sigma",
+     "P": [
+      "0",
+      "1",
+      "1",
+      "0"
+     ],
+     "consistent": true
+    },
+    {
+     "M": [
+      "-1",
+      "0",
+      "0",
+      "-1"
+     ],
+     "det": "1",
+     "rule": "id",
+     "P": [
+      "-1",
+      "0",
+      "0",
+      "-1"
+     ],
+     "consistent": true
+    },
+    {
+     "M": [
+      "0",
+      "1",
+      "1",
+      "0"
+     ],
+     "det": "-1",
+     "rule": "sigma",
+     "P": [
+      "1",
+      "0",
+      "0",
+      "-1"
+     ],
+     "consistent": true
+    },
+    {
+     "M": [
+      "0",
+      "-1",
+      "1",
+      "0"
+     ],
+     "det": "1",
+     "rule": "id",
+     "P": [
+      "0",
+      "-1",
+      "1",
+      "0"
+     ],
+     "consistent": true
+    },
+    {
+     "M": [
+      "0",
+      "1",
+      "-1",
+      "0"
+     ],
+     "det": "1",
+     "rule": "id",
+     "P": [
+      "0",
+      "1",
+      "-1",
+      "0"
+     ],
+     "consistent": true
+    },
+    {
+     "M": [
+      "0",
+      "-1",
+      "-1",
+      "0"
+     ],
+     "det": "-1",
+     "rule": "sigma",
+     "P": [
+      "-1",
+      "0",
+      "0",
+      "1"
+     ],
+     "consistent": true
+    }
+   ],
+   "t_samples": [
+    "0",
+    "1/3",
+    "1/2",
+    "2/3",
+    "1"
+   ]
+  },
+  "R6_cover": {
+   "ok": true,
+   "n_cells": 216,
+   "x_cuts": true,
+   "t_bins": true,
+   "count": true,
+   "cell_box": true,
+   "cores": true,
+   "level1_check_cover": {
+    "theta_partition": true,
+    "grid_partition": true,
+    "all_cells_present": true,
+    "Z": [
+     "11/10",
+     "137/50"
+    ],
+    "m": "48/25",
+    "h": "41/50",
+    "n_boxes": 216,
+    "ok": true
+   },
+   "bad_cells": [],
+   "xcuts": [
+    "48/25",
+    "809/400",
+    "17/8",
+    "891/400",
+    "233/100",
+    "973/400",
+    "507/200",
+    "211/80",
+    "137/50"
+   ],
+   "tbins": [
+    [
+     "0",
+     "552191/4194304"
+    ],
+    [
+     "2208761/16777216",
+     "4495443/16777216"
+    ],
+    [
+     "280965/1048576",
+     "868669/2097152"
+    ],
+    [
+     "6949349/16777216",
+     "2421583/4194304"
+    ],
+    [
+     "9686329/16777216",
+     "3218403/4194304"
+    ],
+    [
+     "12873609/16777216",
+     "1"
+    ]
+   ]
+  },
+  "R7_sigma": {
+   "ok": true,
+   "t_involution": true,
+   "cell_involution": true,
+   "offdiag_undefined": true,
+   "degree_bins_exact": true,
+   "tbins_side_independent": true,
+   "xy_swap_exact": true,
+   "t_rounding_relations": [
+    "image_in_mirror",
+    "mirror_in_image"
+   ],
+   "sample_i0": [
+    {
+     "cell": 0,
+     "mirror": 5,
+     "sigma_image_t": [
+      "3642113/4746495",
+      "1"
+     ],
+     "mirror_t": [
+      "12873609/16777216",
+      "1"
+     ],
+     "gap_lo": "-4253047/79632971857920",
+     "gap_hi": "0",
+     "relation": "mirror_in_image"
+    },
+    {
+     "cell": 1,
+     "mirror": 4,
+     "sigma_image_t": [
+      "12281773/21272659",
+      "14568455/18985977"
+     ],
+     "mirror_t": [
+      "9686329/16777216",
+      "3218403/4194304"
+     ],
+     "gap_lo": "-15294843/356895994937344",
+     "gap_hi": "-3745589/79632959275008",
+     "relation": "mirror_in_image"
+    },
+    {
+     "cell": 2,
+     "mirror": 3,
+     "sigma_image_t": [
+      "1228483/2965821",
+      "767611/1329541"
+     ],
+     "mirror_t": [
+      "6949349/16777216",
+      "2421583/4194304"
+     ],
+     "gap_lo": "-557201/49758219534336",
+     "gap_hi": "-4341/5576499134464",
+     "relation": "mirror_in_image"
+    },
+    {
+     "cell": 3,
+     "mirror": 2,
+     "sigma_image_t": [
+      "1772721/6615887",
+      "9827867/23726565"
+     ],
+     "mirror_t": [
+      "280965/1048576",
+      "868669/2097152"
+     ],
+     "gap_lo": "4341/6937260326912",
+     "gap_hi": "557201/49758213242880",
+     "relation": "image_in_mirror"
+    },
+    {
+     "cell": 4,
+     "mirror": 1,
+     "sigma_image_t": [
+      "975901/7412707",
+      "7090887/26463545"
+     ],
+     "mirror_t": [
+      "2208761/16777216",
+      "4495443/16777216"
+     ],
+     "gap_lo": "3745589/124364586483712",
+     "gap_hi": "15294843/443984610590720",
+     "relation": "image_in_mirror"
+    },
+    {
+     "cell": 5,
+     "mirror": 0,
+     "sigma_image_t": [
+      "0",
+      "3903607/29650825"
+     ],
+     "mirror_t": [
+      "0",
+      "552191/4194304"
+     ],
+     "gap_lo": "0",
+     "gap_hi": "4253047/124364573900800",
+     "relation": "image_in_mirror"
+    }
+   ]
+  },
+  "R8_census": {
+   "ok": null,
+   "skipped": true
+  }
+ },
+ "ok": true,
+ "wall_seconds": 0.06,
+ "provenance": {
+  "verifier": "attempts/A27-close-384/verify_tree2.py",
+  "modules": [
+   "attempts/A27-close-384/caselp.py",
+   "attempts/A27-close-384/level1.py",
+   "attempts/A27-close-384/refine.py"
+  ],
+  "mutation": [
+   "verify_tree2.S := 96/25",
+   "refine.S := 3.84"
+  ]
+ }
+}

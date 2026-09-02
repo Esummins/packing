@@ -1,0 +1,12 @@
+﻿A67 D4 reduction re-check at s = 969271/250000 = 3.877084   (A27 verify_tree2 semantics, side rebound; cw = 3/5)
+R1 ZONE PASS  Z = [11/10,694271/250000]^2, centre m = 969271/500000 = s/2, h = 419271/500000
+R2 GROUP PASS  |G| = 8 distinct, closed = True, orders = [1, 2, 2, 2, 2, 2, 4, 4], nonabelian = True  ==> D4 (unique nonabelian order-8 group with 5 involutions)
+R3 INVARIANCE PASS  all 8 g map [0,969271/250000]^2 onto itself and Z onto Z (vertex sets equal); violations = 0
+R4 FUND DOMAIN PASS  T = conv{(Fraction(969271, 500000), Fraction(969271, 500000)),(Fraction(694271, 250000), Fraction(969271, 500000)),(Fraction(694271, 250000), Fraction(694271, 250000))}; 8 octants -> T (True), octant pairs tile the 4 quadrants (True), quadrants tile Z (True), all 8 sorting maps in D4 (True)
+R5 ORIENTATION PASS  M_g R(t) = R(t') P for all 8 g with t' = t (det +1) / t' = (1-t)/(1+t) (det -1), P a symmetry of the unit square; polynomial identity in t verified at 5 points (deg <= 2)
+R6 COVER(vt2 chk 2) PASS  216 cells; x-cuts True, t-bins union [0,1] True, count True, cell<->box exact True, no vacuous/coreless cell True, level1.check_cover True
+R7 SIGMA PASS  sigma_t involution True, sigma_cell involution on the 48 diagonal cells True, undefined off-diagonal True, degree bins k <-> 5-k exact True, t-bins side-independent (== 3.84) True, sigma swaps x/y ranges exactly True; t-rounding relation(s) observed: ['image_in_mirror', 'mirror_in_image']
+R8 CENSUS D4 PASS  d4_images == container D4 at s0 True; preserves [0,s0]^2 + slot lattice + corner anchors True; canon orbit-invariant/selecting on 7204 locked sets (944 classes) True; Young slot map D4-equivariant True; Young corpus (1110 sets, 163 classes) D4-closed and canon-consistent True
+
+OVERALL D4 reduction at s = 969271/250000: PASS   (36.65 s)
+-> C:\Users\esumm\code\packing\attempts\A67-d4-rerun\results\d4_s0.json

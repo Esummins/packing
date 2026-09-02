@@ -1582,3 +1582,51 @@ affordable cost estimate for closing 3.84.
   audit updated (no sorryAx; kernel theorems still axiom-free). CI note: the mathlib
   job now includes the ~40 min native_decide module (cached; .github out of A64 scope —
   gate it like PackingCertSlow382 if Actions minutes hurt). A57/A60/A61 untouched.
+
+## 2026-09-02 — A67-d4-rerun (Opus, mechanical) — done
+- **D.D4 / H12 closed: the D4 container-symmetry reduction is machine-checked at
+  s0 = 969271/250000. PASS, 36.7 s, one process, BLAS-pinned.** Verifier
+  `attempts/A67-d4-rerun/code/verify_d4_s0.py` **imports** A27's `caselp/level1/refine/
+  verify_tree2` and rebinds two module constants (`verify_tree2.S`, `refine.S`) — no A27
+  source copied or edited, so "same semantics, same verifier, side changed" is literal.
+  Every predicate exact (`Fraction`).
+- **The harness ported mechanically — nothing bakes in the side** (the brief's STOP
+  condition did not fire). `zone/xcuts/tbins/qbox/cell_ijk/sigma_cell/sigma_t` and
+  `level1.cover/check_cover` are all parametric in S; `t_lo/t_hi/q/cos_sin_t` never see it.
+- Checked exactly at s0: R1 Z(s0) = [11/10, 694271/250000]² is concentric with [0,s0]²;
+  R2 the acting group **is** D4 (8 signed perms, closed, orders {1,2⁵,4²}, nonabelian —
+  the unique nonabelian order-8 group with 5 involutions); R3 every g maps container and
+  zone **onto** themselves; R4 the 8 D4-images of the fundamental triangle T **cover** Z
+  (octant decomposition exhibited: 8 triangles → convex T on 3 vertices each, glued into
+  quadrants, quadrants into Z); R5 g(Q(c,θ)) = Q(g(c),θ′) with θ′ = θ or 90−θ, i.e.
+  t ↦ (1−t)/(1+t) — a polynomial identity in t of degree ≤ 2 verified at 5 points;
+  R6 `verify_tree2` check (2) verbatim (216 cells, cell↔box exact, none vacuous/coreless,
+  `level1.check_cover` PASS); R7 check-(6) bookkeeping, **and the t-bins are proved
+  side-independent** (identical at 96/25 and s0 — they depend only on NTH), so the whole
+  t-side of check (6) transfers verbatim rather than merely re-passing.
+- **Census side (R8, the second half of the brief):** A53 `skeletons.py`'s `d4_images` is
+  **the same group of plane maps** as the container D4 at s0; it preserves [0,s0]², the slot
+  lattice and the 4 corner anchors; `canon` is orbit-invariant and orbit-selecting on the
+  whole corpus (7204 recursively-locked skeletons → 944 classes; 1110 Young slot-sets → 163
+  classes, D4-closed, ⊆ the locked corpus — reproducing **B.CENSUS** exactly); and the Young
+  slot map is D4-equivariant, g·slots(c,λ) = slots(g·c, λ or λᵀ), over all 8 g × 4 corners ×
+  20 partitions. That equivariant action is precisely what `instratum_bridge.md` §E.2 uses
+  when it applies h = g′g⁻¹ to a packing.
+- Controls: same checker at 96/25 PASS (0.06 s, identical verdicts and identical t-rounding
+  relation multiset); `A27 verify_tree2.py --skip_leaf_verify` PASS (19.1 s) as a live anchor.
+- **Reported non-assertion, not a regression:** σ(box(i,i,k)) is *not* contained in the
+  mirror cell's box in t-coordinates (worst ≈ 5.3e-8, and the failure flips direction across
+  the mid-bin). That is the `t_lo/t_hi` outward-rounding artefact `verify_tree2`'s own
+  docstring records, which is why its check (6) tests the mirror's certified core against the
+  σ-**image** box. It is a property of `t_lo/t_hi` alone, hence identical at 3.84.
+- **Scope (docs/proofs/d4_reduction_s0.md §D4.4):** the WLOG is conditional on the root
+  occupancy lemma at s0, **which does not exist** (it exists only at 3.84, τ = 8.240152 < 11).
+  `verify_tree2`'s certificate-consuming checks (1)(3)(4)(5)(7) have **no input** at s0 — the
+  162 leaf certs are 3.84 objects — but that is the absence of a tree (D.TREE), not a
+  portability blocker in the reduction. Says nothing about S₁₁ (seam S6 = D.S6, still open),
+  and being a WLOG it proves no bound. Single implementation, as with B.CENSUS; R8's
+  tree-side/census-side group identity is the nearest cross-check and it holds.
+- Files: `docs/proofs/d4_reduction_s0.md` (addendum), `attempts/A67-d4-rerun/{code,results,
+  logs,notes}`, depgraph `D.D4` open → **certificate+verifier** (+ re-render), REGISTRY row.
+  A57/A60/A61/A29 untouched. Note for schedulers: commit headroom oscillated 2.9–6.6 GB
+  during the run (the live campaigns), so the launcher polls and waits for the >6 GB gate.

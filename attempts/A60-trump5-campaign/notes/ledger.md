@@ -295,3 +295,81 @@ Both are clean, so no recovery action is needed for either — but the check had
 path constants and can be pointed at either tree if this recurs; the one class it is designed to
 catch and that would be silent otherwise is **a torn certificate still carrying its `.PASS`
 marker**, which reads as a proof that was never verified.
+
+---
+
+## 8. D.S6 — the composed containment statement (A60's obligation)
+
+*Ownership confirmed by the advisor relay, 2026-09-01: the written composed containment statement
+is A60's, and folds into the joint landings+widening budget document planned for after cover
+j = 0.  This section is that document's skeleton; two of its four parts close now, and the other
+two are exactly what the cover phase gates.*
+
+**Statement to be written.**  Every packing in a (D) leaf has all **33 coordinates** within
+`rBasin = 3/2000` of ẑ in the t-world, mod G — which is what `trump_residual`'s `InBasin`
+conclusion needs on paper.  The 33 = 11 squares × 3 coordinates `(cx, cy, t)` split as
+**5 pins × 3 = 15** and **6 free × 3 = 18**.
+
+### 8.1 The pin half (15 coordinates) — CLOSED, measured
+
+A60's pins sit at `slots(s0)`; ẑ's five simple squares sit at `slots(s_T)`, and `|s0 − s_T| =
+4.100e-7`.  Both families are axis-aligned, so the t-coordinates agree exactly (θ = 0 for all ten;
+max |θ| over the five matched ẑ squares is **0.000e+00** rad).  Centre deviations:
+
+| pin | slots(s0) | slots(s_T) | sup-dev |
+|---|---|---|---|
+| 0, 1, 2 (BL staircase, s-independent) | — | — | **0** |
+| 3 (BR), 4 (TR) | 3.3770840 | 3.3770836 | **4.100e-7** |
+
+**Worst pin deviation 4.100e-7 = 0.027 % of rBasin.**  The pin half of D.S6 is discharged with
+3.6 orders of magnitude to spare, and it does not depend on any campaign result.  (The matching
+also fixes the pin↔ẑ bijection: pins 0..4 ↔ ẑ squares 0, 1, 3, 2, 5, sup-distances ≤ 1.5e-14.)
+
+### 8.2 mod-G bookkeeping — CLOSED in structure
+
+G = D4 × relabelling.  Both factors are pinned, not quantified over:
+
+* **D4.** A59 theory.md §0: the trump5 pin set has **trivial stabiliser in D4** — the x↔y
+  reflection fixes the BL staircase (λ = (2,1) is self-conjugate) but maps BR to TL, which is
+  empty.  So the frame is rigid: the group element g is *determined* by the pin set, and there is
+  no mod-D4 ambiguity to quantify over.  This is the one place A60's stratum is easier than a
+  symmetric one.
+* **Relabelling.** The pins are labelled by slot (§8.1's bijection), and each free square is
+  labelled by the ẑ square its residue box hugs — which is exactly the ladder's `hugs` map,
+  already recorded per box in every scan (`results/a60_ladder_j*_scan.json`).  So the bijection is
+  *produced* by the tree rather than asserted.
+
+**Consequence:** "mod G" in the written statement is discharged by exhibiting one specific g
+(identity in the pin frame) and one specific bijection (§8.1 ∪ the `hugs` map), both of which the
+campaign already emits.  No search over G is needed.
+
+### 8.3 The free half (18 coordinates) — the budget, PENDING cover j = 0
+
+This is the quantitative half, and the arithmetic is fixed in form; only the final landings are
+missing.  Per free square, the requirement is
+
+    landing(square)  +  dilation displacement  ≤  rBasin = 1.5e-3
+
+with `displacement = (δ/A)·|c|` (centres only — Δ_λ preserves orientation, so t is not displaced).
+Current status at the settled operating point δ = 1e-4:
+
+| square | landing (measured) | displacement | sum | vs rBasin | verdict |
+|---|---|---|---|---|---|
+| 1 | 1.1426e-3 (L24) | 1.269e-4 | 1.2695e-3 | 1.5e-3 | **fits**, 15 % spare |
+| 2 | 1.4472e-3 (L26) | 1.269e-4 | 1.5741e-3 | 1.5e-3 | **over by 4.9 %** |
+| 3 | 1.4472e-3 (L26) | 1.269e-4 | 1.5741e-3 | 1.5e-3 | **over by 4.9 %** |
+| 4, 5, 6 (outer, confinement route) | not yet run | 1.269e-4 | — | — | pending |
+
+**The fix is one more bisection level** on squares 2 and 3: halving the box radius takes the
+landing from 1.4472e-3 toward ~7.3e-4, buying ~7e-4 of headroom against a 7.4e-5 shortfall — a
+14× margin on the repair.  That must be *run and measured*, not asserted, because a 1.04× margin
+is exactly where eyeballing fails.
+
+### 8.4 What closes this document
+
+1. cover j = 0 completes → the ladder phase runs → squares 2, 3 re-land at level 27+;
+2. the outer triple's confinement ladders run to their (D) radii (§2's route), giving rows 4–6;
+3. drop the measured numbers into §8.3's table and state §8.1 + §8.2 + §8.3 as one lemma.
+
+Nothing in 8.1 or 8.2 can change from campaign results — they are settled.  **D.S6 is therefore
+gated only on the free-square landings, i.e. on ladder depth, i.e. on compute.**

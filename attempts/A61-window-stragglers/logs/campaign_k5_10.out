@@ -24,3 +24,49 @@ DONE s=3.877084 n=6 sym=C1 tau=5.500000 nu=5.500000 conv=False minmass=0.000000 
 DONE s=3.877084 n=6 sym=C1 tau=5.681818 nu=5.681818 conv=False minmass=0.666667 maxcov=1.079301 rows=13423 orbits=5463 atoms_nz=83 packing_support=228 time=1142s
     [B] eps_geo=0.003 tau=5.681818 budget=6 slack=0.3182 conv=False orbits=5463 rows=13423 (1143s)
     C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A54-stragglers\code\certify.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\results\nodes\k5_10.json --s_rat 969271/250000 --rounds 6 --jobs 3 --depth 56 --time_limit 420.0 --out C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_10.json --scale 0 --scale_cap 1.06000 --max_w 96 --loop_cols --eps_geo 0.003 --no_resolve --warm_state C:\Users\esumm\code\packing\attempts\A61-window-stragglers\results\nodes\k5_10_B_state.json
+[round 0] tau=5.68182 conv=False scale=1.0531 cert total=5.98371 budget=6 atoms=83
+    boxes = 320187  covered = 83437  vacuous = 0  exempt = 76608 (core 76608, nofam 0)  split = 160102  exact atom checks = 204196  max depth = 56  time = 10.1s
+    FAIL: 40 witness boxes at depth 56: 4 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 36 undecided at this depth
+      worst witness: theta = 44.129850 deg, centre = (3.170056652, 2.950016844), exact mass = 95739/100000 (~0.957390000000)
+    feeding back 840 witness rows (total extra 840), re-solving (rows only)
+[s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=5463 points=5463 rows=13500 (rejected 1626)
+  it   0 tau=5.684211 rows=14636 orbs=5463 atoms>0=62 minmass=0.663158 maxcov=1.210526 +rows=1136 -rows=0 +cols=0 -cols=0 t=469s [lp 421s row 11s +r 30s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=6 sym=C1 tau=5.703883 nu=5.703883 conv=False minmass=0.663158 maxcov=1.210526 rows=14636 orbits=5463 atoms_nz=110 packing_support=167 time=527s
+[round 1] tau=5.70388 conv=False scale=1.0490 cert total=5.98365 budget=6 atoms=110
+    boxes = 361687  covered = 82308  vacuous = 0  exempt = 98549 (core 98549, nofam 0)  split = 180822  exact atom checks = 296683  max depth = 56  time = 10.1s
+    FAIL: 8 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+      worst witness: theta = 43.210240 deg, centre = (3.170320115, 1.941867487), exact mass = 100249/100000 (~1.002490000000)
+    feeding back 168 witness rows (total extra 1008), re-solving (rows only)
+[s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=5463 points=5463 rows=14650 (rejected 1690)
+  it   0 tau=5.705426 rows=15874 orbs=5463 atoms>0=112 minmass=0.837209 maxcov=1.203488 +rows=1224 -rows=0 +cols=0 -cols=0 t=212s [lp 157s row 10s +r 37s col 1s +c 0s]
+  it   1 tau=5.718750 rows=15874 orbs=6463 atoms>0=110 minmass=0.814904 maxcov=1.271104 +rows=0 -rows=0 +cols=1000 -cols=0 t=306s [lp 81s row 11s +r 0s col 1s +c 1s]
+  it   2 tau=5.676471 rows=17148 orbs=6463 atoms>0=120 minmass=0.828829 maxcov=1.128058 +rows=1274 -rows=0 +cols=0 -cols=0 t=2336s [lp 1945s row 22s +r 61s col 2s +c 0s]
+  time limit
+DONE s=3.877084 n=6 sym=C1 tau=5.685717 nu=5.685717 conv=False minmass=0.828829 maxcov=1.128058 rows=17148 orbits=6463 atoms_nz=161 packing_support=364 time=2603s
+[round 2] tau=5.68572 conv=False scale=1.0524 cert total=5.98371 budget=6 atoms=161
+    boxes = 359323  covered = 89558  vacuous = 0  exempt = 90094 (core 90094, nofam 0)  split = 179655  exact atom checks = 423024  max depth = 56  time = 10.2s
+    FAIL: 16 witness boxes at depth 56: 2 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 14 undecided at this depth
+      worst witness: theta = 37.966420 deg, centre = (2.384755400, 2.179469688), exact mass = 495139/500000 (~0.990278000000)
+    feeding back 336 witness rows (total extra 1344), re-solving (rows only)
+[s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=5510 points=5510 rows=17037 (rejected 1690)
+  it   0 tau=5.687279 rows=18252 orbs=5510 atoms>0=126 minmass=0.879859 maxcov=1.161664 +rows=1215 -rows=0 +cols=0 -cols=0 t=391s [lp 322s row 11s +r 49s col 2s +c 0s]
+  it   1 tau=5.694767 rows=18252 orbs=6510 atoms>0=178 minmass=0.874364 maxcov=1.159717 +rows=0 -rows=0 +cols=1000 -cols=0 t=496s [lp 75s row 27s +r 0s col 2s +c 1s]
+  time limit
+DONE s=3.877084 n=6 sym=C1 tau=5.680988 nu=5.680988 conv=False minmass=0.874364 maxcov=1.159717 rows=18252 orbits=6510 atoms_nz=162 packing_support=378 time=1544s
+[round 3] tau=5.68099 conv=False scale=1.0533 cert total=5.98372 budget=6 atoms=162
+    boxes = 351098  covered = 81198  vacuous = 0  exempt = 94364 (core 94364, nofam 0)  split = 175528  exact atom checks = 396481  max depth = 56  time = 10.9s
+    FAIL: 8 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+      worst witness: theta = 48.629388 deg, centre = (1.705681087, 1.873684029), exact mass = 51709/50000 (~1.034180000000)
+    feeding back 168 witness rows (total extra 1512), re-solving (rows only)
+[s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=5542 points=5542 rows=18228 (rejected 1738)
+  it   0 tau=5.680988 rows=19137 orbs=5542 atoms>0=158 minmass=0.828295 maxcov=1.232133 +rows=909 -rows=0 +cols=0 -cols=0 t=1518s [lp 1460s row 12s +r 33s col 3s +c 0s]
+  time limit
+DONE s=3.877084 n=6 sym=C1 tau=5.694915 nu=5.694915 conv=False minmass=0.828295 maxcov=1.232133 rows=19137 orbits=5542 atoms_nz=182 packing_support=334 time=1828s
+[round 4] tau=5.69492 conv=False scale=1.0507 cert total=5.98374 budget=6 atoms=182
+    boxes = 391532  covered = 87376  vacuous = 0  exempt = 108422 (core 108422, nofam 0)  split = 195734  exact atom checks = 443550  max depth = 32  time = 11.2s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 93496/15625 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k5_10.json
+
+    4D[gap] PASS 137.5s
+    A61 CONVERTS (full window)

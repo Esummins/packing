@@ -147,7 +147,9 @@ that quietly drops a case.
   D4 on the container, S₁₁ on the squares, "WLOG the witness lies in the fundamental triangle". The
   reduction lemma at 3.84 (A27's `verify_tree2` semantics) must be re-proved at s₀ (seam S5), and any
   per-node WLOG recorded in the certificate so the verifier checks it.
-  Status: **PARTIAL** — machine-checked at 3.84; s₀ re-run listed as "mechanical", not done.
+  Status: **PARTIAL** — machine-checked at 3.84; D4 half machine-checked at s₀ 2026-09-02 (A67:
+  R1–R8 PASS incl. census-side equivariance, `docs/proofs/d4_reduction_s0.md`; conditional on the
+  s₀ root occupancy lemma = D.TREE, which does not yet exist). S₁₁ half still open (D.S6).
 
 - [ ] **H13 — Draw the lemma dependency graph; every node is proved, certified, or cited.**
   One figure: theorem at the top, leaves at the bottom. Each node carries one of three labels —
