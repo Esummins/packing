@@ -54,7 +54,16 @@ theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved from exactly t
   closed-disjoint family at `λm`), `lemma_B`, the pricing pigeonhole `priced_dichotomy` /
   `hcert_of_priced` ((P1)+(P2) ⟹ the bridged claim; `Exempt`-aware, so Lemma B-NO is the
   same theorem), `bprime_containment` ((H′) ⟹ (H)) and `pullback_mem_Icc` (B.2″ widening).
-  Producing (P2) from a PASS file remains the case-LP verifier soundness (V.CASE).
+* **The case-LP verifier soundness (V.CASE) is Lean** (A70; `CaseChecker.lean` +
+  `CaseSat.lean` + `CaseHyp.lean` + `CaseBridge.lean`): `checkCaseI` (the
+  `verify_case.py` decision core: cores / NO-families / budget over the A64 measure
+  layer) with the full soundness chain — `sat_squares` (SAT sufficiency for two
+  squares: geometric Hahn–Banach + 4-cone support bound), exemption-test soundness,
+  `checkCaseI_price` (= claim (P2) of the frozen spec, scaled by `wd`), and
+  `checkCaseI_kill` / `checkCaseI_no_family` (Lemma B's `hcert` / the B-NO form,
+  produced per PASS file — A68's named residue discharged).  One certificate is
+  replayed end to end (`CaseData506.lean` + `CaseK506.lean`: the k5_06 pin-set kill
+  at `s = 191/50`, `native_decide`, seconds).
 * **K1(i) is Lean** (`Skeleton.lean`, depgraph B.K1): slot model + `ContainsPins` +
   `containsPins_mono` / `kill_mono`; M→E as `monotone_to_exact`, conditional on the census
   interface hypothesis `hface` (F11/H2 — the census is not yet a Lean definition).
@@ -83,6 +92,9 @@ ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, u
 | `PackingCert.S11.attained` | `PackingCertMathlib/Attain.lean` (+ `TopLevel.lean`) | **attainment (A.D1)**: `{s | Fits 11 s}` has a least element (drain lemma D1; was the `attained` axiom) | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.mem_interior_iff_uv` | `PackingCertMathlib/Attain.lean` | the interior of a parametrised square is exactly the open `u/v` box | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.dilation_bridge`, `lemma_B`, `priced_dichotomy` | `PackingCertMathlib/Dilation.lean` | **the λ-dilation bridge (A.SBRIDGE)**: interior-disjoint packing ⟹ closed-disjoint family at `λm`; Lemma B / B-NO from the frozen (P1)+(P2) claims; B′ margin condition (H′) ⟹ (H) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.sat_squares` | `PackingCertMathlib/CaseSat.lean` | **SAT sufficiency for two squares**: four-axis projection overlap ⇒ the squares intersect (the `core_exempt_frac` geometry) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.checkCaseI_kill`, `checkCaseI_no_family` | `PackingCertMathlib/CaseBridge.lean` | **the case-LP bridge (V.CASE)**: `checkCaseI c = true` ⇒ no strict family at the certified side realises the pin hypotheses (B-NO: some non-owner is NO-exempt) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.k5_06_lo_kill` (+`_packing`) | `PackingCertMathlib/CaseK506.lean` | **one case certificate end to end**: the k5_06 pin-set kill at `s = 191/50` (strict-family and λ-dilated packing forms) | + the `native_decide` axiom (`check_k5_06_lo._native.native_decide.ax_1_1`; seconds) |
 | `PackingCert.S11.containsPins_mono`, `kill_mono`, `monotone_to_exact` | `PackingCertMathlib/Skeleton.lean` | **K1(i) (B.K1)**: kills climb the pin-set containment order; M→E conditional on the census interface `hface` | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.theta_lipschitz`, `sub_le_theta`, `corner_perturb`, `rBasin_gate_*` | `PackingCertMathlib/ThetaT.lean` (+ `TopLevel.lean`) | **θ↔t transfer (E.COORD)**: `|Δt| ≤ |Δθ| ≤ 2|Δt|`; corner motion ≤ `r_c + √2·r_t`; the two rBasin gates | `propext, Classical.choice, Quot.sound` |
 

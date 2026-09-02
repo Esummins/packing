@@ -1,6 +1,6 @@
 {
  "meta": {
-  "attempt": "A63-hole-closure (promoted to lean/ as the LIVE monitoring copy, 2026-09-02: the advisor updates labels/notes here as milestones land and re-renders depgraph.svg via lean/render_depgraph.py; the A62/A63 results/ copies are frozen provenance) || A64 lean-wave updates: lean-proved (gold) tier added; A.PARAM + A.F2 + A.LB382 -> lean-proved; A.S3 -> lean-proved; A.UBshat split (identity axiom isolated, (c-idl) closure spec added) || A68 lean-wave3: A.D1 (attained) DISCHARGED -> lean-proved (roster 13 -> 12); A.SBRIDGE, B.K1(i), E.COORD -> lean-proved (Dilation.lean, Skeleton.lean, ThetaT.lean); B.EXACT Lean skeleton conditional on census interface (hface) || A70 lean-wave4: V.CASE -> lean-proved (checkCaseI + sat_squares + soundness chain + k5_06.lo end-to-end replay); A68's (P2) residue discharged; E.A36/E.A22 untouched (scoped for the next wave)",
+  "attempt": "A63-hole-closure (promoted to lean/ as the LIVE monitoring copy, 2026-09-02: the advisor updates labels/notes here as milestones land and re-renders depgraph.svg via lean/render_depgraph.py; the A62/A63 results/ copies are frozen provenance) || A64 lean-wave updates: lean-proved (gold) tier added; A.PARAM + A.F2 + A.LB382 -> lean-proved; A.S3 -> lean-proved; A.UBshat split (identity axiom isolated, (c-idl) closure spec added) || A68 lean-wave3: A.D1 (attained) DISCHARGED -> lean-proved (roster 13 -> 12); A.SBRIDGE, B.K1(i), E.COORD -> lean-proved (Dilation.lean, Skeleton.lean, ThetaT.lean); B.EXACT Lean skeleton conditional on census interface (hface) || A70 lean-wave4: V.CASE -> lean-proved (checkCaseI + sat_squares + soundness chain + k5_06.lo end-to-end replay); A68's (P2) residue discharged; E.A36/E.A22 rung (a) LANDED (exact-rational stdlib replays of both re-checkers, all corruption gates; mpmath.iv out of the Python-tier decision path); Lean rungs (b)/(c) open",
   "date": "2026-09-01",
   "commit": "c9980bfcda1582d1e1a20126927a8a7d34ca1bb6",
   "checklist_items": [
@@ -262,20 +262,20 @@
    "label": "certificate+verifier",
    "lean_axiom": "basin",
    "source": "attempts/A36-levers (17 IV certificates + a36_check.py re-checker, 339 checks, 5 corruption gates)",
-   "note": "Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE \u2014 the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member. || A70: not reached (T1 V.CASE consumed the wave, per the strict priority); scoping in attempts/A70-lean-wave4/notes/findings.md - rung (a) = exact-rational interval-jet re-emission of the 70-row order-2 jet machine, own attempt."
+   "note": "Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE \u2014 the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member. || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a36_check_exact.py re-verifies all 17 certificates (339/339 checks, 10.8 s) in EXACT rational arithmetic - stdlib fractions only, dyadic outward-rounded intervals + certified alternating-Taylor cos/sin enclosures; all 5 corruption gates fail as required; mpmath.iv is OUT of the decision path at the Python tier. Emission is theta-frame (no certificate re-derivation needed); the t-frame stays the route for the Lean rungs (b)/(c), still open."
   },
   {
    "id": "E.A22",
    "title": "Krawczyk: unique contact solution z-hat, feasible, strict local optimality",
    "label": "certificate+verifier",
    "source": "attempts/A22-local-rigidity/results/krawczyk_cert.json + recheck.py",
-   "note": "Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat)."
+   "note": "Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat). || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a22_recheck_exact.py re-verifies the full chain (G/K/K0/V/E/B/F, 1.5 s) in exact rational arithmetic, 4/4 corruption gates fail as required - mpmath.iv out of the decision path at the Python tier; Lean replay (rung b) open."
   },
   {
    "id": "E.IV",
    "title": "mpmath.iv validated interval arithmetic",
    "label": "cited",
-   "note": "Third-party library inside the rigidity trust chain (unlike the case-LP chain, which is stdlib-only). Checklist F6: either replay in Lean via t-parametrisation or disclose as Python-interval-only."
+   "note": "Third-party library inside the rigidity trust chain (unlike the case-LP chain, which is stdlib-only). Checklist F6: either replay in Lean via t-parametrisation or disclose as Python-interval-only. || A70: checklist F6 option 1 partially executed - the ENTIRE rigidity decision path (A22 recheck + A36 basin) now has a stdlib-only exact replay (theta-frame Taylor enclosures, not yet Lean); mpmath.iv remains only as the historical producer-side tool."
   },
   {
    "id": "E.COORD",

@@ -1,0 +1,52 @@
+*** CORRUPTION TEST: z0-big (this run MUST fail) ***
+checking certificate (EXACT rational arithmetic): A22 strict local optimality certificate for the Trump 11-square packing
+r_N = 1/2000 = 0.0005, |S| = 34, |S2| = 34, 68 certificates
+  [FAIL] G centre residual max |g_k(z0)| <= 1.00e-03 over all 42 rows
+  [FAIL] K Krawczyk F on N (=> unique z-hat in N) max|K|/r = 2.063
+  [FAIL] K Krawczyk F on box(z0,r_0) (tight enclosure) max|K|/r = 1.001e+47
+  [FAIL] K Krawczyk F~ on N (angle-equality system => z-hat exact structure) max|K|/r = 2.043
+  [PASS] V edge validity margins min tangential margin = 0.01900
+  [FAIL] E multiplier identity ||A^T lam - e_s||_inf <= 1.65e-04, all lam > 0: True
+  [FAIL] B Farkas certificates beta = 0.6888 (need < 1), nu_max = 57.01, all 68 present = True
+  [FAIL] F feasibility of z-hat min noncontact sep = 0.0244, min proj slack = 0.6452, min corner clearance = 5.49e-01, exact-row sanity = 1.0e-03
+=> FAILURES: ['G centre residual', 'K Krawczyk F on N (=> unique z-hat in N)', 'K Krawczyk F on box(z0,r_0) (tight enclosure)', 'K Krawczyk F~ on N (angle-equality system => z-hat exact structure)', 'E multiplier identity', 'B Farkas certificates', 'F feasibility of z-hat']
+corruption test z0-big: OK (checker failed as required)
+*** CORRUPTION TEST: z0-small (this run MUST fail) ***
+checking certificate (EXACT rational arithmetic): A22 strict local optimality certificate for the Trump 11-square packing
+r_N = 1/2000 = 0.0005, |S| = 34, |S2| = 34, 68 certificates
+  [FAIL] G centre residual max |g_k(z0)| <= 1.00e-08 over all 42 rows
+  [PASS] K Krawczyk F on N (=> unique z-hat in N) max|K|/r = 0.05896
+  [FAIL] K Krawczyk F on box(z0,r_0) (tight enclosure) max|K|/r = 1e+42
+  [PASS] K Krawczyk F~ on N (angle-equality system => z-hat exact structure) max|K|/r = 0.04713
+  [PASS] V edge validity margins min tangential margin = 0.01900
+  [FAIL] E multiplier identity ||A^T lam - e_s||_inf <= 1.65e-09, all lam > 0: True
+  [PASS] B Farkas certificates beta = 0.6339 (need < 1), nu_max = 57.01, all 68 present = True
+  [FAIL] F feasibility of z-hat min noncontact sep = 0.0249, min proj slack = 0.6452, min corner clearance = 5.49e-01, exact-row sanity = 1.0e-08
+=> FAILURES: ['G centre residual', 'K Krawczyk F on box(z0,r_0) (tight enclosure)', 'E multiplier identity', 'F feasibility of z-hat']
+corruption test z0-small: OK (checker failed as required)
+*** CORRUPTION TEST: mu (this run MUST fail) ***
+checking certificate (EXACT rational arithmetic): A22 strict local optimality certificate for the Trump 11-square packing
+r_N = 1/2000 = 0.0005, |S| = 34, |S2| = 34, 68 certificates
+  [PASS] G centre residual max |g_k(z0)| <= 6.01e-60 over all 42 rows
+  [PASS] K Krawczyk F on N (=> unique z-hat in N) max|K|/r = 0.05896
+  [PASS] K Krawczyk F on box(z0,r_0) (tight enclosure) max|K|/r = 4.919e-10
+  [PASS] K Krawczyk F~ on N (angle-equality system => z-hat exact structure) max|K|/r = 0.04713
+  [PASS] V edge validity margins min tangential margin = 0.01900
+  [PASS] E multiplier identity ||A^T lam - e_s||_inf <= 6.38e-41, all lam > 0: True
+  [FAIL] B Farkas certificates beta = 15.8257 (need < 1), nu_max = 57.01, all 68 present = True
+  [PASS] F feasibility of z-hat min noncontact sep = 0.0249, min proj slack = 0.6452, min corner clearance = 5.49e-01, exact-row sanity = 4.3e-50
+=> FAILURES: ['B Farkas certificates']
+corruption test mu: OK (checker failed as required)
+*** CORRUPTION TEST: spec (this run MUST fail) ***
+checking certificate (EXACT rational arithmetic): A22 strict local optimality certificate for the Trump 11-square packing
+r_N = 1/2000 = 0.0005, |S| = 34, |S2| = 34, 68 certificates
+  [FAIL] G centre residual max |g_k(z0)| <= 5.66e-01 over all 42 rows
+  [FAIL] K Krawczyk F on N (=> unique z-hat in N) max|K|/r = 1528
+  [FAIL] K Krawczyk F on box(z0,r_0) (tight enclosure) max|K|/r = 7.612e+49
+  [FAIL] K Krawczyk F~ on N (angle-equality system => z-hat exact structure) max|K|/r = 1528
+  [FAIL] V edge validity margins min tangential margin = -0.00200
+  [FAIL] E multiplier identity ||A^T lam - e_s||_inf <= 3.46e-01, all lam > 0: True
+  [FAIL] B Farkas certificates beta = 60.0925 (need < 1), nu_max = 57.01, all 68 present = True
+  [FAIL] F feasibility of z-hat min noncontact sep = 0.0249, min proj slack = -0.6452, min corner clearance = 5.49e-01, exact-row sanity = 4.3e-50
+=> FAILURES: ['G centre residual', 'K Krawczyk F on N (=> unique z-hat in N)', 'K Krawczyk F on box(z0,r_0) (tight enclosure)', 'K Krawczyk F~ on N (angle-equality system => z-hat exact structure)', 'V edge validity margins', 'E multiplier identity', 'B Farkas certificates', 'F feasibility of z-hat']
+corruption test spec: OK (checker failed as required)

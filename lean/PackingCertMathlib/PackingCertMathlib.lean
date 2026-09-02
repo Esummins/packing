@@ -7,6 +7,12 @@ import PackingCertMathlib.Attain
 import PackingCertMathlib.Dilation
 import PackingCertMathlib.ThetaT
 import PackingCertMathlib.Skeleton
+import PackingCertMathlib.CaseChecker
+import PackingCertMathlib.CaseSat
+import PackingCertMathlib.CaseHyp
+import PackingCertMathlib.CaseBridge
+import PackingCertMathlib.CaseData506
+import PackingCertMathlib.CaseK506
 import PackingCertMathlib.MeasureChecker
 import PackingCertMathlib.MeasureBridge
 import PackingCertMathlib.MeasureData382

@@ -1,0 +1,42 @@
+*** CORRUPTION TEST: omega-sign (this run MUST fail) ***
+re-checking 1 certificates in C:\Users\esumm\code\packing\attempts\A36-levers\results\a36_certs (EXACT rational arithmetic)
+  [FAIL] O A01a-A03a-B13x omega >= 0 on R_V 
+  [FAIL] O A01a-A03a-B13x omega > 0 on every pin row 
+  [FAIL] G A01a-A03a-B13x eps_w recomputed 2.240e-01 vs claimed 7.777e-45
+  [FAIL] E A01a-A03a-B13x kappa_eff recomputed inf vs claimed 19.315664
+  [FAIL] P A01a-A03a-B13x contraction psi(h) < h psi = 0.000000e+00 vs h = 3.779000e-03 (ratio 0.0000)
+  [FAIL] P A01a-A03a-B13x fixed point x* <= r_N x* = 3.7790e-03 vs r_N = 5.0000e-04
+  [ok] A01a-A03a-B13x             h=3779/1000000 beta=0.44591 Hbar=7.560 keff=inf psi/h=0.0000 x*=3.78e-03
+corruption test omega-sign: OK (checker failed as required)
+*** CORRUPTION TEST: h-big (this run MUST fail) ***
+re-checking 1 certificates in C:\Users\esumm\code\packing\attempts\A36-levers\results\a36_certs (EXACT rational arithmetic)
+  [FAIL] H A01a-A03a-B13x Hbar recomputed 8.033049 vs claimed 7.575322
+  [FAIL] K A01a-A03a-B13x beta < 1 recomputed 3.58530700 vs claimed 0.44590885
+  [FAIL] P A01a-A03a-B13x contraction psi(h) < h psi = 0.000000e+00 vs h = 3.023200e-02 (ratio 0.0000)
+  [FAIL] P A01a-A03a-B13x fixed point x* <= r_N x* = 3.0232e-02 vs r_N = 5.0000e-04
+  [FAIL] V A01a-A03a-B13x A22 rows 0..35 SAT selection valid on box(h) tangential -0.110015, depth+1/2 0.870183
+  [ok] A01a-A03a-B13x             h=3779/125000  beta=3.58531 Hbar=8.033 keff=19.316 psi/h=0.0000 x*=3.02e-02
+corruption test h-big: OK (checker failed as required)
+*** CORRUPTION TEST: drop-aux (this run MUST fail) ***
+re-checking 1 certificates in C:\Users\esumm\code\packing\attempts\A36-levers\results\a36_certs (EXACT rational arithmetic)
+  [FAIL] O A01a-A03a-B13x omega > 0 on every pin row 
+  [FAIL] G A01a-A03a-B13x eps_w recomputed 2.099e-01 vs claimed 7.777e-45
+  [FAIL] E A01a-A03a-B13x kappa_eff recomputed inf vs claimed 19.315664
+  [FAIL] P A01a-A03a-B13x contraction psi(h) < h psi = 0.000000e+00 vs h = 3.779000e-03 (ratio 0.0000)
+  [FAIL] P A01a-A03a-B13x fixed point x* <= r_N x* = 3.7790e-03 vs r_N = 5.0000e-04
+  [ok] A01a-A03a-B13x             h=3779/1000000 beta=0.44591 Hbar=7.155 keff=inf psi/h=0.0000 x*=3.78e-03
+corruption test drop-aux: OK (checker failed as required)
+*** CORRUPTION TEST: drop-branch (this run MUST fail) ***
+re-checking 1 certificates in C:\Users\esumm\code\packing\attempts\A36-levers\results\a36_certs (EXACT rational arithmetic)
+  [FAIL] O A01a-A03a-B13x every branch axis carries omega > 0 (non-vacuity) per-axis: [False, False, False]
+  [FAIL] G A01a-A03a-B13x eps_w recomputed 5.563e-01 vs claimed 7.777e-45
+  [FAIL] P A01a-A03a-B13x contraction psi(h) < h psi = 7.677073e-02 vs h = 3.779000e-03 (ratio 20.3151)
+  [FAIL] P A01a-A03a-B13x fixed point x* <= r_N x* = 2.9284e+00 vs r_N = 5.0000e-04
+  [ok] A01a-A03a-B13x             h=3779/1000000 beta=0.44591 Hbar=7.007 keff=19.316 psi/h=20.3151 x*=2.93e+00
+corruption test drop-branch: OK (checker failed as required)
+*** CORRUPTION TEST: wrong-branch (this run MUST fail) ***
+re-checking 1 certificates in C:\Users\esumm\code\packing\attempts\A36-levers\results\a36_certs (EXACT rational arithmetic)
+  [FAIL] O A01a-A03a-B13x' omega = 0 outside R_V nonzero outside: [40, 59]
+  [FAIL] O A01a-A03a-B13x' every branch axis carries omega > 0 (non-vacuity) per-axis: [True, True, False]
+  [ok] A01a-A03a-B13x'            h=3779/1000000 beta=0.44591 Hbar=7.575 keff=19.316 psi/h=0.9979 x*=5.16e-58
+corruption test wrong-branch: OK (checker failed as required)

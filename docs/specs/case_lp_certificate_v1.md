@@ -131,3 +131,22 @@ No float value reaches an accept decision. Decision path: Python ints + `fractio
   see `docs/specs/parametric_kill_certificate_v1.md`.
 * One implementation. The C3 second implementation must be written from **this document**;
   the Lean `checkMeasureI` covers only the hypothesis-free special case.
+
+---
+
+**Erratum (A70, 2026-09-02).** §1/§2 above state that half-side `a = 0` (point
+core) is "legal and used by A53-lineage pin certificates". Both claims are wrong
+for the frozen verifier this spec describes: the canonical loader (sha
+`521cb01f…`) rejects `a ≤ 0` ("bad core"), and a scan of all 9 217 cores across
+the repository's certificates finds none with `a = 0` (the A53-lineage pin
+certificates use eps-fat cores, `a > 0`). A clean-room implementation written
+from this document must gate `a > 0` to reproduce PASS/FAIL behaviour (rejecting
+as malformed), though the mathematical claim (P2) is sound for any `a ≥ 0`.
+The Lean port + soundness proof of the decision core is
+`lean/PackingCertMathlib/PackingCertMathlib/Case{Checker,Sat,Hyp,Bridge}.lean`
+(A70, depgraph V.CASE): `checkCaseI` PASS ⟹ (P1) ∧ (P2) ⟹ no strict family
+realises the pin hypotheses at the certified side (`checkCaseI_kill`, the
+`lemma_B` `hcert` input; B-NO form `checkCaseI_no_family`). This partially
+discharges the C3 second-implementation obligation for the case checker
+(a second implementation now exists WITH a machine-checked soundness proof;
+it is not clean-room in the C3 sense, having been written from the code).

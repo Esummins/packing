@@ -3,6 +3,7 @@ import PackingCertMathlib.Band
 import PackingCertMathlib.TopLevel
 import PackingCertMathlib.Dilation
 import PackingCertMathlib.Skeleton
+import PackingCertMathlib.CaseK506
 #print axioms PackingCert.disjoint_of_strictlyBelow
 #print axioms PackingCert.checkPackingCCW_sound
 #print axioms PackingCert.aff_sqdist
@@ -36,3 +37,13 @@ import PackingCertMathlib.Skeleton
 #print axioms PackingCert.S11.corner_perturb
 #print axioms PackingCert.S11.rBasin_gate_tilt
 #print axioms PackingCert.S11.rBasin_gate_slab
+#print axioms PackingCert.S11.sat_squares
+#print axioms PackingCert.S11.coreExempt_sound
+#print axioms PackingCert.S11.exemptB_sound
+#print axioms PackingCert.S11.checkCaseI_price
+#print axioms PackingCert.S11.priced_dichotomy_scaled
+#print axioms PackingCert.S11.checkCaseI_no_family
+#print axioms PackingCert.S11.checkCaseI_kill
+#print axioms PackingCert.S11.check_k5_06_lo
+#print axioms PackingCert.S11.k5_06_lo_kill
+#print axioms PackingCert.S11.k5_06_lo_kill_packing
