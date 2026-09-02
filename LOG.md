@@ -1896,3 +1896,49 @@ affordable cost estimate for closing 3.84.
 - Canary SAFE per emission (md5 x2, md7, md8: min gap = lambda-1 = 1.0574e-7, Sigma m2 = 6; notes/ledger.md). Discipline:
   1 LP slot at a time, BLAS pinned, headroom gate held; A57/A60/A61 untouched; frozen verifiers untouched (import-only).
   Files: attempts/A74-mixed-depth/*, docs/proofs/pair_kill.md 6.7, depgraph C.K4TIER note, REGISTRY row.
+
+## 2026-09-02 A76-grain-discharge (Fable lead + 1 Opus chore + 1 LP slot) -- done-mixed
+- PI bottom-up front: grains adjacent to Trump on the protected exact strata. HEADLINE = a quantified
+  WALL: no radius beyond A22/A36/A40 is certifiable grain-by-grain for stuck minimisers, because every
+  discharge available (Krawczyk for rigid grains, drain-flex for s-flexible grains, Gordan/FJ, the
+  A22/A36/A40 inequality forms) is a box-nonsingularity statement capped by kappa_eff. The HINGE grains
+  (strip flush pair -> single-corner contact; two of them in the 7-8-10-9 ring worst) have drain-flex
+  ratio 10.7 at (1e-3,1e-3) and 48 at (rc,rt)=(1e-2,2e-3) = A40's saturation face (omega_b = 1/kappa_eff)
+  seen from below; all-pass box ~1e-4 (A22's inequality form beats it: it keeps the hinge's second
+  corner row as an inequality). Size law (census, k4_08, 1.7e7 grains, 143 370 at codim<=4): hard
+  count 113/335/658/13702 at (1e-3)/(2e-3)/(5e-3,1e-3)/(1e-2,2e-3); ratio DEcreases with codim (>= 8
+  contacts broken: 0.2 at the target box) - the top of the lattice is the only hard part; residue = a
+  d-dim continuation cover ~ratio^d per hard grain, ~1e7 Krawczyk steps for (1e-2,2e-3) = 1.5x A40 in
+  centres, 0.6x in tilts. Not started (not worth it: see LP line).
+- Theory [T] (docs/proofs/grain_discharge.md): Lemma G-R local completeness BY CONSTRUCTION (the checker
+  generates all 1936 corner-wall/corner-edge rows; contact <=> a corner on an edge SEGMENT) with exact
+  certificate (78 rows on (1e-2,2e-3,1e-2): 36 Trump + 20 flush-upright coincidences + 22 type
+  switches incl. the 7-4 blocked slide; 56 up to rc+1.4rt ~ 6e-3); Lemma K (rigid grain => z = z-hat =>
+  not exact-S: the class hypothesis enters only here); Lemma DF (drain-flex: e_s not in the row span on
+  the box => feasible side-decreasing curve => not a minimiser; downward-closed; implied-row bookkeeping
+  via the wall-circuit identity, the flush TIE identity g_a - g_b = 0 on {t_i = t_j} for antipodal
+  contact corners, the tie cycle); Lemma D2'' (minimiser => wall-to-wall contact chain on a binding axis,
+  the other axis's walls are not connectors) proved without Fritz-John; K/DF dichotomy EXHAUSTIVE on
+  Trump's rows (e_s in span of a proper sub-basis would give a second multiplier vector on S); no
+  positive dependency at z-hat (max sum lambda = 0: lambda0=0 FJ never occurs); 21 necessary rows.
+- Measured [M exact]: t-native Krawczyk (rational trig, monotone enclosures, no Taylor) contracts to the
+  uniform t-box 1/250 (0.827), fails 3/500; pinned bases 0.74-0.78 at 1/250 (pins ~10%); anisotropic
+  pinned k4_08 (1e-2,2e-3) 0.818 PASS vs unpinned FAIL (pins double the centre radius); tilt radius caps
+  ~4e-3. D1 codim-1 certificates: 9/22 pass at the target box (the 13 failures are hinges + sq2's
+  corner-rotation mode). Per-class: images.json (k4_08's two images = one grain problem; k4_05 and
+  corners4 have NO compatible image: d_min 0.4365 / 0.8445 = trivial exact-class emptiness radius);
+  census of the other pin sets (logs/census_p*_d2.log) shows the same hinge families (ratios 48-53).
+- A40 basin EXACT-rechecked (Opus chore, code/a40_check_exact.py: 2930 certs, 168 774 checks, 0
+  failures, 5 gates FAIL as required, 70.5 s at PREC 330; min anchor margin 2.4266e-7 exact): the
+  6.55e-3 (theta-world) basin is now at A36's trust tier. P-B(R) re-read PER COORDINATE (pair_kill.md
+  sect 6.8): (rc, rt) = (6.55e-3 - sqrt2 rho_B, 3.27e-3) vs the uniform 1.5e-3 (3.4x / 2.2x); Lean
+  rBasin raisable to 27/10000.
+- LP measurement (A66 basinlp rig imported unmodified, output redirected; k4_08, beta=1, gamma=0.1,
+  converged): margin -1.40 / -1.50 / -1.51 / -1.51 at r_z = 1e-3 / 3.7e-3 / 6.5e-3 / 1e-2 (2e-2
+  unconverged in budget): the basin row's gain is ~0.1 per DECADE of zone radius - reserve, not lever;
+  the two fronts do NOT meet in the middle. The k4 tier stays the emission problem (A74).
+- Canary SAFE at every step: Trump is the rigid grain's unique solution in every lattice, identified
+  never excluded; only the exact-stratum hypothesis removes him. Discipline: <= 2 slots, BLAS-pinned,
+  headroom gate held; A57/A60/A61/A74 untouched; frozen verifiers untouched; certs/verify_grain.py NEW
+  (stdlib, exact, 5 gates) - not TCB. Files: attempts/A76-grain-discharge/*, certs/verify_grain.py,
+  docs/proofs/grain_discharge.md, pair_kill.md 6.8, depgraph C.K4TIER note + svg, REGISTRY row.

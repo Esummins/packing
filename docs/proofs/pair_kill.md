@@ -463,6 +463,59 @@ C.K4TIER on that shell; full-window coverage is the slack-core slab grid (~38 si
 15–25 min — ≈ 1 h per loop iteration, iterations-to-convergence and the certification
 run itself unpriced (not reached).
 
+## 6.8 [T+M] Lemma P-B(R): per-coordinate zones, the exact-checked A40 radius, and the saturation law (A76, 2026-09-02)
+
+The basin row of §6 consumed ONE uniform radius (rBasin = 3/2000 in t-world) for all 33
+coordinates. The bottom-up attempt A76 (`docs/proofs/grain_discharge.md`) shows no larger
+basin can be certified grain-by-grain beyond the A36/A40 wall (their §5: every grain discharge
+is a box-nonsingularity certificate capped by κ_eff; the hinge grains — a strip flush pair
+degraded to a single-corner contact — carry ratio 48 at (10⁻², 2·10⁻³)), but it delivers two
+things the row can consume today: a per-coordinate reading of the basin theorems and an
+exact-rational re-check of A40.
+
+**Lemma P-B(R) (per-coordinate form).** Let a basin theorem hold on the θ-world ∞-box of
+radius h around (ẑ, ŝ): σ ≥ ŝ for every packing z with |c − ĉ|∞ ≤ h, |θ − θ̂|∞ ≤ h, |s − ŝ| ≤ h,
+equality iff z = ẑ (A36: h = 37/10000, exact-checked by A70; A40: h = 5794/884563 ≈ 6.55·10⁻³,
+exact-checked in A76: `attempts/A76-grain-discharge/code/a40_check_exact.py`, 2930
+certificates, 168 774 checks, 0 failures, 5 gates FAIL as required, 70.5 s at PREC 330 —
+`results/a40_exact_report.json`). Replace in Lemma P-B the single condition "r_z + √2·ρ_B +
+slop ≤ 3/2000" by the three conditions
+
+  centre zones   r_c + √2·ρ_B + rounding slop ≤ h,
+  tilt zones     r_t ≤ h/2                            (t-radius; X.1: |Δθ| ≤ 2|Δt|),
+  side shell     ρ_B ≤ h.
+
+Then the conclusion of Lemma P-B holds verbatim (the pull-back of the N in-zone free squares
+and the pins' slot drift place all 33 coordinates and the side inside the basin box; the basin
+theorem's equality clause forces z = g·ẑ; the exact-stratum hypothesis contradicts). The
+(1+√2) s-slab gate of `theta_t_transfer.md` X.3 is NOT needed here: the side is separately in
+the shell. *Proof: as Lemma P-B, with the three coordinate families bounded separately.* ∎
+Numbers: A36 gives (r_c, r_t) = (3.7·10⁻³ − √2ρ_B, 1.85·10⁻³); A40 gives (6.55·10⁻³ − √2ρ_B,
+3.27·10⁻³) — e.g. ρ_B = 10⁻³: (5.1·10⁻³, 3.27·10⁻³) versus the uniform 1.5·10⁻³ in use (3.4× in
+centres, 2.2× in tilts). Lean side: rBasin may be raised to 27/10000 (both X.3 gates pass with
+A40's h: 2·rBasin ≤ h and rBasin(1+√2) < h) once the A40 store is accepted at the same trust
+tier as A36's (it now is, at Python tier).
+
+**Measured saturation law [M float LP, A66 rig unmodified, k4_08, β = 1, γ = 0.1, converged
+cells, `attempts/A76-grain-discharge/results/pairlp_k4_08_basin_rz*.json`]:** the restricted
+pair value against threshold 21 + 7β − 15γ = 26.5, with zones of radius r_z and perturbation
+columns at 0.3 r_z (in-zone) and 3 r_z (out):
+
+  r_z = 10⁻³: 25.10 (margin −1.40, in-zone ghost fraction 0.70)   [A66's pilot value]
+  r_z = 3.7·10⁻³: 25.00 (−1.50, 0.87)
+  r_z = 6.5·10⁻³: 24.99 (−1.51, 0.86)
+  r_z = 10⁻²: 24.99 (−1.51, 0.87)
+  r_z = 2·10⁻²: unconverged in the 300 s cell budget (Lmax 1.6; unscaled 24.92) — not a verdict.
+  (γ = 0.2 cells unconverged at every r_z, Lmax 1.2–1.5, as in A66 beyond γ ≈ 0.245.)
+
+The discount's gain grows by only ≈ 0.1 per DECADE of zone radius across the whole range any
+local certificate can reach (A22's 5·10⁻⁴ to the A40 wall at 6.5·10⁻³ and beyond): the
+fractional ghost's value is carried by mass the LP can park just outside any zone at a cost
+independent of the zone's size until the meeter margins (~1.6·10⁻²) are reached — exactly
+A66's "reserve, not a lever", now quantified in R. Consequence for the two-front design: the
+fronts do NOT meet in the middle; the basin row's usable window is γ ≲ 0.245 with ≈ +0.4–0.5
+of margin at every reachable R, and the k4 tier's kill remains the emission problem of §6.6.
+
 ## 7 What remains open for a certified pair kill (the honest ledger)
 
 * [M, pilot] the fractional pair-LP verdict per class — A66 measures k4_08 (boosted) and

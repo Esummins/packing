@@ -1,0 +1,125 @@
+EXACT re-check of C:\Users\esumm\code\packing\attempts\A40-basin-surgery\results\certs_a40 (PREC = 330, dyadic grid 2^-330; no mpmath)
+  ring ring_00 done (67 certs, 2036 checks, 0 failures, 2.1 s)
+  ring ring_01 done (201 certs, 6795 checks, 0 failures, 5.8 s)
+  ring ring_02 done (773 certs, 41136 checks, 0 failures, 19.3 s)
+  ring ring_03 done (1301 certs, 72336 checks, 0 failures, 31.9 s)
+  ring ring_04 done (1831 certs, 103361 checks, 0 failures, 44.6 s)
+  ring ring_05 done (2366 certs, 134764 checks, 0 failures, 57.3 s)
+  ring ring_06 done (2930 certs, 168774 checks, 0 failures, 70.5 s)
+checked 2930 certificates, 168774 checks, 0 failures
+  min anchor margin (EXACT) = 2.426567e-07  [sq6_t-_b79_o9e3-b37_o7e3-b47_o7e2-b810_o10e3-b910_o10e2-b01_o1e3.json]
+  max |exact-claimed|/|claimed| for V0_sup  = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for eps_w   = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for Hbar    = 2.035e-16  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for margin  = 7.277e-14  [sq6_t-_b79_o9e3-b37_o7e3-b47_o7e2-b810_o10e3-b910_o10e2-b01_o1e3.json]
+=> ALL CHECKS PASS
+wall 70.5 s
+
+===== CORRUPTION GATE omega-sign (exit 0, 91.0 s) =====
+EXACT re-check of C:\Users\esumm\code\packing\attempts\A40-basin-surgery\results\certs_a40 (PREC = 330, dyadic grid 2^-330; no mpmath)
+*** CORRUPTION TEST: omega-sign (this run MUST fail) ***
+  [FAIL] s-.json omega>=0 
+  ring ring_00 done (67 certs, 2036 checks, 1 failures, 3.3 s)
+  ring ring_01 done (201 certs, 6795 checks, 1 failures, 8.3 s)
+  ring ring_02 done (773 certs, 41136 checks, 1 failures, 25.6 s)
+  ring ring_03 done (1301 certs, 72336 checks, 1 failures, 41.7 s)
+  ring ring_04 done (1831 certs, 103361 checks, 1 failures, 57.7 s)
+  ring ring_05 done (2366 certs, 134764 checks, 1 failures, 73.7 s)
+  ring ring_06 done (2930 certs, 168774 checks, 1 failures, 90.7 s)
+checked 2930 certificates, 168774 checks, 1 failures
+  min anchor margin (EXACT) = 2.426567e-07  [sq6_t-_b79_o9e3-b37_o7e3-b47_o7e2-b810_o10e3-b910_o10e2-b01_o1e3.json]
+  max |exact-claimed|/|claimed| for V0_sup  = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for eps_w   = 4.253e+14  [s-.json]
+  max |exact-claimed|/|claimed| for Hbar    = 1.041e-02  [s-.json]
+  max |exact-claimed|/|claimed| for margin  = 6.480e-01  [s-.json]
+corruption omega-sign: checker FAILED as required => PASS
+wall 90.7 s
+
+===== CORRUPTION GATE h-big (exit 0, 91.3 s) =====
+EXACT re-check of C:\Users\esumm\code\packing\attempts\A40-basin-surgery\results\certs_a40 (PREC = 330, dyadic grid 2^-330; no mpmath)
+*** CORRUPTION TEST: h-big (this run MUST fail) ***
+  [FAIL] s-.json V row a22_13 |t|=0.6273 d_inf=-0.145566
+  [FAIL] s-.json V row a22_16 |t|=0.625274 d_inf=-0.144926
+  [FAIL] s-.json V row a22_27 |t|=0.637564 d_inf=-0.155701
+  [FAIL] s-.json V row a22_28 |t|=0.637564 d_inf=-0.155701
+  [FAIL] s-.json V row a22_29 |t|=0.540362 d_inf=-0.152297
+  [FAIL] s-.json V row a22_30 |t|=0.637564 d_inf=-0.155701
+  [FAIL] s-.json V row a22_31 |t|=0.540362 d_inf=-0.152297
+  [FAIL] s-.json V row a22_33 |t|=0.637564 d_inf=-0.155701
+  [FAIL] s-.json V row a22_35 |t|=0.540362 d_inf=-0.152297
+  [FAIL] s-.json margin>0 margin=-0.372267
+  ring ring_00 done (67 certs, 2036 checks, 10 failures, 3.7 s)
+  ring ring_01 done (201 certs, 6795 checks, 10 failures, 8.6 s)
+  ring ring_02 done (773 certs, 41136 checks, 10 failures, 26.0 s)
+  ring ring_03 done (1301 certs, 72336 checks, 10 failures, 42.0 s)
+  ring ring_04 done (1831 certs, 103361 checks, 10 failures, 58.0 s)
+  ring ring_05 done (2366 certs, 134764 checks, 10 failures, 74.2 s)
+  ring ring_06 done (2930 certs, 168774 checks, 10 failures, 91.0 s)
+checked 2930 certificates, 168774 checks, 10 failures
+  min anchor margin (EXACT) = -3.722669e-01  [s-.json]
+  max |exact-claimed|/|claimed| for V0_sup  = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for eps_w   = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for Hbar    = 4.794e-02  [s-.json]
+  max |exact-claimed|/|claimed| for margin  = 3.107e+00  [s-.json]
+corruption h-big: checker FAILED as required => PASS
+wall 91.0 s
+
+===== CORRUPTION GATE drop-anchor (exit 0, 91.4 s) =====
+EXACT re-check of C:\Users\esumm\code\packing\attempts\A40-basin-surgery\results\certs_a40 (PREC = 330, dyadic grid 2^-330; no mpmath)
+*** CORRUPTION TEST: drop-anchor (this run MUST fail) ***
+  [FAIL] s-.json margin>0 margin=-0.234882
+  ring ring_00 done (67 certs, 2036 checks, 1 failures, 3.2 s)
+  ring ring_01 done (201 certs, 6795 checks, 1 failures, 8.2 s)
+  ring ring_02 done (773 certs, 41136 checks, 1 failures, 25.6 s)
+  ring ring_03 done (1301 certs, 72336 checks, 1 failures, 41.8 s)
+  ring ring_04 done (1831 certs, 103361 checks, 1 failures, 58.1 s)
+  ring ring_05 done (2366 certs, 134764 checks, 1 failures, 74.2 s)
+  ring ring_06 done (2930 certs, 168774 checks, 1 failures, 91.1 s)
+checked 2930 certificates, 168774 checks, 1 failures
+  min anchor margin (EXACT) = -2.348820e-01  [s-.json]
+  max |exact-claimed|/|claimed| for V0_sup  = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for eps_w   = 8.409e+14  [s-.json]
+  max |exact-claimed|/|claimed| for Hbar    = 2.035e-16  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for margin  = 2.329e+00  [s-.json]
+corruption drop-anchor: checker FAILED as required => PASS
+wall 91.1 s
+
+===== CORRUPTION GATE floor-raise (exit 0, 92.3 s) =====
+EXACT re-check of C:\Users\esumm\code\packing\attempts\A40-basin-surgery\results\certs_a40 (PREC = 330, dyadic grid 2^-330; no mpmath)
+*** CORRUPTION TEST: floor-raise (this run MUST fail) ***
+  [FAIL] sq10_x+.json floor lb sep_2-8_o8e3k0 inf=-0.0465726 lb=-0.0365726
+  ring ring_00 done (67 certs, 2036 checks, 1 failures, 3.2 s)
+  ring ring_01 done (201 certs, 6795 checks, 1 failures, 8.1 s)
+  ring ring_02 done (773 certs, 41136 checks, 1 failures, 26.0 s)
+  ring ring_03 done (1301 certs, 72336 checks, 1 failures, 42.4 s)
+  ring ring_04 done (1831 certs, 103361 checks, 1 failures, 58.6 s)
+  ring ring_05 done (2366 certs, 134764 checks, 1 failures, 74.7 s)
+  ring ring_06 done (2930 certs, 168774 checks, 1 failures, 92.0 s)
+checked 2930 certificates, 168774 checks, 1 failures
+  min anchor margin (EXACT) = 2.426567e-07  [sq6_t-_b79_o9e3-b37_o7e3-b47_o7e2-b810_o10e3-b910_o10e2-b01_o1e3.json]
+  max |exact-claimed|/|claimed| for V0_sup  = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for eps_w   = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for Hbar    = 2.035e-16  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for margin  = 2.184e-02  [sq10_x+.json]
+corruption floor-raise: checker FAILED as required => PASS
+wall 92.0 s
+
+===== CORRUPTION GATE drop-sibling (exit 0, 92.0 s) =====
+EXACT re-check of C:\Users\esumm\code\packing\attempts\A40-basin-surgery\results\certs_a40 (PREC = 330, dyadic grid 2^-330; no mpmath)
+*** CORRUPTION TEST: drop-sibling (this run MUST fail) ***
+  ring ring_00 done (67 certs, 2036 checks, 0 failures, 3.5 s)
+  [FAIL] COV ring_01/sq0.t+ tree covers 2 leaves
+  ring ring_01 done (200 certs, 6744 checks, 1 failures, 8.2 s)
+  ring ring_02 done (772 certs, 41085 checks, 1 failures, 26.1 s)
+  ring ring_03 done (1300 certs, 72285 checks, 1 failures, 42.0 s)
+  ring ring_04 done (1830 certs, 103310 checks, 1 failures, 58.3 s)
+  ring ring_05 done (2365 certs, 134713 checks, 1 failures, 74.4 s)
+  ring ring_06 done (2929 certs, 168723 checks, 1 failures, 91.6 s)
+checked 2929 certificates, 168723 checks, 1 failures
+  min anchor margin (EXACT) = 2.426567e-07  [sq6_t-_b79_o9e3-b37_o7e3-b47_o7e2-b810_o10e3-b910_o10e2-b01_o1e3.json]
+  max |exact-claimed|/|claimed| for V0_sup  = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for eps_w   = 1.000e+00  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for Hbar    = 2.035e-16  [sq2_x+.json]
+  max |exact-claimed|/|claimed| for margin  = 7.277e-14  [sq6_t-_b79_o9e3-b37_o7e3-b47_o7e2-b810_o10e3-b910_o10e2-b01_o1e3.json]
+corruption drop-sibling: checker FAILED as required => PASS
+wall 91.6 s
