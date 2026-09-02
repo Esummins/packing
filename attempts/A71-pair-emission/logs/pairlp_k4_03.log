@@ -1,0 +1,35 @@
+[02:30:07] A66 pair-LP pilot: class=k4_03 betas=0,0.25,1.0
+[02:30:07] headroom OK: ullAvailPageFile=11.16 GB, ullAvailPhys=12.90 GB (need > 6.0 GB)
+[02:30:07] class k4_03: k=4 N=7 m=5  threshold = 21 + beta*5
+[02:30:07] control k4_03: core-free=True disjoint=True min_gap=1.144e-07 sum_m2=4 box_meets=[2, 2, 2, 1, 2]
+[02:30:07] catalog: coarse core-free = 1083
+[02:30:07] catalog: enrichment core-free = 11778
+[02:30:07] catalog: |S|=254  stats={"coarse_corefree": 1083, "enrich_corefree": 11778, "enrich_m2_avail": 4174, "enrich_m2_kept": 167, "enrich_m1_avail": 6017, "enrich_m1_kept": 60, "extra_added": 7, "extra_rejected_not_core_free": 0, "extra_rejected_not_contained": 0, "coarse_kept": 40, "containment_violators": 16, "min_containment_margin": -1.3177385965194963e-16, "min_containment_margin_kept": 0.0, "near_tangent_to_core": 2, "min_core_margin": 1.2134174265376885e-07, "n_placements": 254, "m_histogram": {"0": 5, "1": 76, "2": 165, "3": 8}}
+[02:30:07] disjoint pairs: 15263 of 32131 (m2>0: 1354, m2 max 1)
+[02:30:07] cut-loop points: 913 (membership depth mean 31.8, max 76)
+[02:30:07] headroom OK: ullAvailPageFile=11.27 GB, ullAvailPhys=13.00 GB (need > 6.0 GB)
+[02:30:07] beta=0: seed rows=1824 nnz=940090 cols=15263
+[02:30:10] beta=0 p0 r1: value=25.930691 Lmax_cut=4.936907 viol=1500 pts=3083(probe 3963) supsq=127 rows=1824 nnz=940090 (3s)
+[02:30:16] beta=0 p0 r2: value=22.039869 Lmax_cut=2.613122 viol=1500 pts=2716(probe 3945) supsq=108 rows=3323 nnz=5404369 (9s)
+[02:30:18] beta=0 p0 r3: value=21.000000 Lmax_cut=2.000000 viol=21 pts=40(probe 616) supsq=14 rows=4653 nnz=6791152 (11s)
+[02:30:18] beta=0 p0 r4: value=21.000000 Lmax_cut=1.000000 viol=0 pts=8(probe 216) supsq=8 rows=4674 nnz=6796446 (11s)
+[02:30:18] fine validity: raw=36577 unique=7 used=7 (support squares=8, edge-int=34)
+[02:30:18] beta=0 p0: fine Lmax=1.000000 (violators 0)
+[02:30:18] RESULT beta=0: value=21.000000 Lmax_fine=1.000000 scaled=21.000000 thr=21.0000 margin=-0.000000 mbar2=0.1905 ctrl=21.0 converged=True (11.3s)
+[02:30:18] headroom OK: ullAvailPageFile=10.33 GB, ullAvailPhys=12.13 GB (need > 6.0 GB)
+[02:30:19] beta=0.25: warm start rows=4674 nnz=6796446 cols=15263
+[02:30:25] beta=0.25 p0 r1: value=22.000000 Lmax_cut=2.000000 viol=4 pts=17(probe 350) supsq=11 rows=4674 nnz=6796446 (7s)
+[02:30:25] beta=0.25 p0 r2: value=22.000000 Lmax_cut=2.000000 viol=1 pts=11(probe 254) supsq=9 rows=4678 nnz=6797023 (7s)
+[02:30:26] beta=0.25 p0 r3: value=22.000000 Lmax_cut=1.000000 viol=0 pts=8(probe 216) supsq=8 rows=4679 nnz=6797090 (7s)
+[02:30:26] fine validity: raw=36577 unique=7 used=7 (support squares=8, edge-int=34)
+[02:30:26] beta=0.25 p0: fine Lmax=1.000000 (violators 0)
+[02:30:26] RESULT beta=0.25: value=22.000000 Lmax_fine=1.000000 scaled=22.000000 thr=22.2500 margin=-0.250000 mbar2=0.1905 ctrl=22.0 converged=True (7.6s)
+[02:30:26] headroom OK: ullAvailPageFile=7.35 GB, ullAvailPhys=11.71 GB (need > 6.0 GB)
+[02:30:26] beta=1: warm start rows=4679 nnz=6797090 cols=15263
+[02:30:36] beta=1 p0 r1: value=25.425676 Lmax_cut=2.057432 viol=1500 pts=2167(probe 3934) supsq=86 rows=4679 nnz=6797090 (10s)
+[02:30:38] beta=1 p0 r2: value=25.000000 Lmax_cut=2.000000 viol=19 pts=40(probe 554) supsq=13 rows=5986 nnz=7284848 (12s)
+[02:30:38] beta=1 p0 r3: value=25.000000 Lmax_cut=1.000000 viol=0 pts=7(probe 194) supsq=7 rows=6005 nnz=7297905 (13s)
+[02:30:39] fine validity: raw=36555 unique=7 used=7 (support squares=7, edge-int=28)
+[02:30:39] beta=1 p0: fine Lmax=1.000000 (violators 0)
+[02:30:39] RESULT beta=1: value=25.000000 Lmax_fine=1.000000 scaled=25.000000 thr=26.0000 margin=-1.000000 mbar2=0.1905 ctrl=25.0 converged=True (12.8s)
+[02:30:39] wrote C:\Users\esumm\code\packing\attempts\A71-pair-emission\results\pairlp_k4_03.json (31.9s total)

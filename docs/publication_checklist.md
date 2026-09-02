@@ -75,12 +75,25 @@ that quietly drops a case.
   Status: **PARTIAL** — L6 stated in A53's notes and the LOG ("honest k-maximality slide-selection
   lemma"); not in `docs/proofs/`.
 
-- [ ] **H2 — Stratification is exhaustive and the class census is itself certified.**
+- [x] **H2 — Stratification is exhaustive and the class census is itself certified.**
   Every selected minimizer's skeleton lies in exactly one enumerated class (L3). The census — 1110
   skeleton tuples, 163 D4 classes under the Young-form definition — is produced by code, so it is a
   certificate: re-enumerate it independently (different author, from the definition, not the code) and
   diff.
-  Status: **PARTIAL** — census exists (A53, "exact, PI Young-form definition"); one implementation.
+  Status: **DONE** — A72 clean-room re-enumeration (`attempts/A72-census-cleanroom/`), written from the
+  written L1–L3 / d4_reduction_s0 statements with A53's code never opened and its own output sha256-frozen
+  before the diff. **MATCH at every level**: the 1110 skeleton slot-sets are identical as sets of exact
+  rational plane points (0 tuples on either side only), the induced 163-orbit partition is identical, the
+  two D4 groups coincide as maps on the 36-slot lattice, the per-k census agrees on both rows
+  (1/4/14/40/85/156/222/260/208/120 and 1/1/3/6/14/22/33/35/30/18), and the Trump canary lands in the same
+  class. Digests in `results/sha256s`, diff in `results/diff_report.json`.
+  Carried forward (NOT part of H2): the census is now doubly witnessed *computationally*, but the
+  Young-form **definition** still needs 8 binding choices pinned before it can become a Lean definition
+  (F11) — enumerated in `attempts/A72-census-cleanroom/notes/ambiguities.md` (B1–B8); the sharpest are the
+  interior- vs closed-disjointness predicate (B2) and the fact that L1's "largest Young set" and L3's
+  unfiltered enumeration point in opposite directions, resolved only by an L3 parenthetical (B4).
+  Also unaddressed: the 7204/944 recursive corpus (L1 Reading 2) is stated in one clause and is not
+  precise enough to re-enumerate clean-room at all.
 
 - [ ] **H3 — Lemma K1 ("kills climb containment, aliveness descends") written out.**
   Used to discharge the six surviving k = 4 classes via their k = 5 supersets, and to say which classes

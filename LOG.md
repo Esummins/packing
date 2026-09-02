@@ -1720,3 +1720,54 @@ affordable cost estimate for closing 3.84.
 - T2 (docs/proofs/pair_kill.md, docs/specs/pair_certificate_v1.md, attempts/A66-corners4-pair/code/verify_pair.py): Lemma P/P0, canary theorem (trump5 provably unkillable by pair certificates), A34 non-applicability, Lemma P-B (PI's basin-exclusion row: sound for exact strata in a ~5e-4 shell below s-hat; the monotone->exact bridge is load-bearing exactly at the skeleton-contradiction step). Verifier: pure-Fraction 6-D B&B, selftest clean (caught an unsound-PASS bug in build), toy PASS s=199/100, FAIL s=201/100 exact witnesses; NEW trusted code, not TCB.
 - Pilot (restricted pair-LP, adequacy criterion tau_f_cat, exact containment audit): k4_08 tau_2 = 21+6beta exactly (margin -beta; a "saturated death witness" and a "21+7beta tie" were RETRACTED — perturbation columns had escaped the containment filter; caught by the lead's independent exact re-verification); basin discount window 0<gamma<0.245, +0.4 at gamma~0.1; corners4 beta=0 bracket [14.89, 21.32] OPEN. Emission not attempted.
 - Canary: safe at every step (Trump not in corners4; canary theorem; controls reproduce his image family). Constraints honoured: <= 2 BLAS-pinned LP slots, headroom checked, A57/A60/A61 untouched, frozen verifiers untouched.
+
+## A72 closed (done-success) — CENSUS CLEAN-ROOM: independent re-enumeration MATCHES exactly; H2 CLOSED, B.CENSUS doubly witnessed (2026-09-02)
+- VERDICT **MATCH**. Clean-room enumerator (`attempts/A72-census-cleanroom/code/enum_census.py`, stdlib +
+  Fractions, one process) written from the WRITTEN definition only — A53 `notes/lemmas.md` L1-L3
+  statements, `docs/proofs/instratum_bridge.md` E.2-E.4, `docs/proofs/d4_reduction_s0.md` R2/R3/R8,
+  LOG 2026-08-31 — with `skeletons2.py` / `skeletons.py` / `skeletons_young.json` NEVER opened until A72's
+  own output was sha256-frozen (`results/sha256s`, timestamped pre-diff). Discipline held end to end.
+- Diff (`results/diff_report.json`) matches at every level, not just on counts: the **1110 skeleton
+  slot-sets are identical as sets of exact rational plane points** (0 tuples on either side only; the
+  tuple -> slot-set map is injective in both implementations); the induced **163-orbit D4 partition is
+  identical** (compared representative-free, so the comparison is convention-proof); the **two D4 groups
+  are identical as maps on the 36-slot lattice** (A72's 8 signed-permutation matrices about the centre vs
+  A53's `d4_images` rot/refl loop, graph-of-map comparison); per-k census identical on BOTH rows
+  (1/4/14/40/85/156/222/260/208/120 raw, 1/1/3/6/14/22/33/35/30/18 D4); orbit-size histogram identical
+  (1x2, 2x4, 4x39, 8x118 = 1110); Trump canary in the same class. `hface`'s computational content
+  (instratum_bridge E.4) is now witnessed by two independent implementations.
+- Method choices that made it a real cross-check rather than a transcription: the 3x3 slot box was
+  **DERIVED** (offsets kept iff the closed unit square fits in [0,s0]^2; max offset came out 2) instead of
+  assumed from L3's "inside 3x3"; the D4 action was implemented on **PLANE POINTS ONLY** and image points
+  re-decoded to (corner, i, j), so `d4_reduction_s0.md` R8's slot-level rule "g.slots(c,lam) =
+  slots(g.c, lam or lam^T)" is a *checked consequence* in A72, never an input — it PASSES, independently
+  of A67's check of the same statement.
+- Canonical **representatives** agree on only **3/163**. This is pure naming convention (A53 takes lex-min
+  of the sorted plane-coordinate tuple; A72 lex-min of the corner-major cell encoding) and was
+  pre-registered as non-binding in `notes/ambiguities.md` L4c before the diff — the invariant object is
+  the orbit partition, and that matches. Consumers keyed to A53's class names (k5_11, k6_23, corners4, ...)
+  are unaffected: A53's 163 stored reps each land in a distinct A72 orbit and cover all 163.
+- SECOND FINDING — the definitional debt H2 does NOT cover. Writing the second enumerator required
+  resolving **12 recorded ambiguities, 8 of them BINDING** (`notes/ambiguities.md` B1-B8, written before
+  peeking). Sharpest: **B2** — L3's filter says "pairwise interior-disjoint" and only inherits the
+  predicate from L1; read as closed-disjointness (strict > 1) it deletes every flush pair and collapses
+  the census. **B4** — L1 defines Simp(P) as the LARGEST Young set at each corner, while L3 enumerates
+  with NO maximality or realizability filter; the definition and the census point in opposite directions
+  and only L3's parenthetical ("Realizability of a stratum is NOT claimed") resolves it. **B1** — "inside
+  3x3" is a consequence of s0 < 4, not a definitional restriction. **B3** — the "4-tuple is a partition of
+  Simp(P)" property is s0-SPECIFIC (needs s0 not in Z); at an integer side L1/L3 would be genuinely
+  ambiguous about a square simple at two corners. The 4 label-only items include the one A53 and A72
+  actually differ on: **A53 indexes lambda by ROW, A72 by COLUMN** — L1 never says which inward axis is
+  e_c, so the Trump canary ((2,1),(1),(1),0) is only well-posed up to transposition. A Lean definition of
+  the census (F11 / `InStratum`) must pin all 8 binding choices; that debt is now itemised, not just named.
+- THIRD FINDING — the 7204 / 944 "recursively locked" corpus (A53 L1 Reading 2, consumed by A67 R8) is
+  stated in a single clause with no written recursion, seeding rule, or definition of which flush contacts
+  count. It is **not clean-room re-enumerable**: any second implementation would measure the author's
+  guesses, not the definition. Deliberately out of A72's scope and recorded as a finding; it remains a
+  single-implementation object.
+- Files: `attempts/A72-census-cleanroom/{BRIEF.md, code/enum_census.py, code/diff_census.py,
+  results/census_cleanroom.json, results/sha256s, results/diff_report.json, results/{enum,diff}_run.log,
+  notes/ambiguities.md}`, REGISTRY row, `docs/publication_checklist.md` H2 -> DONE,
+  `lean/depgraph.{json,svg}` (B.CENSUS note + source; label stays `certificate+verifier` — now two
+  verifiers). Constraints honoured: one process, stdlib + Fractions only, no LP solvers, thread env pinned;
+  A53/A67 read-only (imported, never written); A57/A60/A61/A29 untouched.
