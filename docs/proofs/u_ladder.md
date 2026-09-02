@@ -240,14 +240,18 @@ per rung (45M-nnz / 45k-row caps not hit); every cell CONVERGED (fine Lmax = 1.0
 Against the BRIEF's thresholds the k = 1 row gains **+0.59 over P-B's optimum (−1.41; A66's
 hand-tuned γ = 0.1 was −1.40) and +1.00 over the plain pair LP** — above "~0.1 = reserve", below
 "≥ 1 = lever": a reserve-plus. The ladder is LINEAR in k at ≈ −0.55 per rung, not the (k + 1)-unit
-jump hoped for. Rung 1 re-measured at the ladder's real zone r_z = 10⁻⁴ (§6.1): RZ1E4.
+jump hoped for. Rung 1 re-measured at the ladder's real zone r_z = 10⁻⁴ (§6.1, variants at 3·10⁻⁵ / 3·10⁻⁴): **26.000000 again, converged, γ* = 1/8, same class masses (in-in 10.0, in-near 4.67, far-in 4.0)** — the zone radius is irrelevant to the price, exactly as A76's saturation law says.
 
 **The dodge witness (A12's mechanism, quantified).** The rung-1 optimum is 26 = 21 + 5 EXACTLY on a
-35-pair support: the LP keeps FOUR members of the ghost family (the trump-sym4 image at zones 1, 2,
-3, 5) at weight 1 — their C(4,2) = 6 in-zone pairs — and splits the other three members 2/3 : 1/3
-between the in-zone pose and its 3·10⁻³-displaced variant (weight-1 pairs all in-zone; weight-2/3
-pairs mix zone members with the variants at cy = 0.503, cx = 1.5333, 2.6208, …); Σ z bz = 10.000
-(cap tight), Σ z = 19.33, mean m₂ = 0.345. The displaced variants keep every box incidence (A58's
+35-pair support (re-run with the support dump: identical value; `results/ladderlp_k4_08_rz1e-3_img1_k1_dodge.json`).
+Pair-mass by class: in-zone/in-zone 10.000 (= the cap, tight), in-zone/near-variant 4.333,
+in-zone/far 4.333, far/far 0.667 (Σ z = 19.333). Per placement (an integral 7-family gives every
+member degree 6): five ghost members — the trump-sym4 image's squares at zones 0, 3, 4, 5, 6 — keep
+degree 4.333 each; zone 2 keeps 3.667 and zone 1 3.333, and their missing degree is carried by the
+3·10⁻³-displaced variants (cx = 1.5333 at degree 1.333, cy = 0.503 at 1.000, 2.6208/2.4335/1.5393 at
+0.667) plus a few A66 grid placements (degrees 0.33–1.33). Six weight-1 pairs sit entirely inside
+the zones; the weight-2/3 and 1/3 pairs mix zone members with the variants. So the row is paid by
+thinning TWO ghost members by ≈ 1/3 onto variants that keep every box incidence — mean m₂ 0.345. The displaced variants keep every box incidence (A58's
 meeter margins 1.6·10⁻² ≫ 3 r_z) and lose only the discount, so each unit of in-zone-pair budget the
 row removes costs the adversary γ* ≈ 0.09–0.16, and the rungs (5, 4, 3, 2, 1 pairs removed) cost
 ≈ 0.6, 0.55, 0.5, … — the linear law. This is exactly the A12 signature: the row counts SQUARES in
