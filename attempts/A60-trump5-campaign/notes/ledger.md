@@ -373,3 +373,70 @@ is exactly where eyeballing fails.
 
 Nothing in 8.1 or 8.2 can change from campaign results — they are settled.  **D.S6 is therefore
 gated only on the free-square landings, i.e. on ladder depth, i.e. on compute.**
+
+---
+
+## 9. A40's raised basin (A76 relay): same object — but A60 does NOT need it
+
+**Question (1): is A40's box the same object A60's (D) leaves land in?  YES.**
+Lemma P-B(R) (`docs/proofs/pair_kill.md` §6.8) states both A36 and A40 in the *same* form: a
+θ-world ∞-box of radius h around (ẑ, ŝ) on which σ ≥ ŝ, equality iff z = ẑ, with
+A36 h = 37/10000 and A40 h = 5794/884563 ≈ 6.55e-3 (2930 certs, 168 774 checks, 0 failures,
+5 gates, exact-rational — same Python trust tier as A36 post-A70).  Checked against A60's three
+requirements:
+
+* **all 33 coordinates** — the box quantifies over `|c − ĉ|∞ ≤ h` and `|θ − θ̂|∞ ≤ h`, i.e. all 11
+  centres and tilts.  Same object. ✓
+* **t-frame (E.COORD)** — the theorem is θ-world; the transfer is X.1's `|Δθ| ≤ 2|Δt|`, so a
+  t-radius of h/2 is what a (D) leaf may use.  P-B(R) writes exactly this ("tilt zones r_t ≤ h/2
+  (t-radius)").  A60's landings are already measured in t. ✓
+* **mod G** — unchanged by the raise; discharged as in §8.2 by trump5's trivial D4 stabiliser plus
+  the ladder's `hugs` map. ✓
+
+**Question (2): should A60 budget against 27/10000?  NO — and A79 should not be retargeted.**
+
+The overshoot is an artefact of collapsing an *anisotropic* box to one uniform radius, not a real
+geometric shortfall.  Split per coordinate, A60's landings are:
+
+| square | centre containment | tilt containment (t) |
+|---|---|---|
+| 1 | 1.1426e-3 | 1.1400e-3 |
+| 2, 3 | **1.4472e-3** (binding) | 1.1400e-3 |
+
+The dilation displacement (1.269e-4 at δ = 1e-4) applies to **centres only**.  Against A36's own
+per-coordinate radii — *no A40, no new certificate store, same theorem already exact-checked by
+A70 and already the one A79 is formalizing*:
+
+| square | centre + widening | vs A36 centre 3.70e-3 | tilt | vs A36 tilt 1.85e-3 |
+|---|---|---|---|---|
+| 1 | 1.2695e-3 | fits, **66 % spare** | 1.1400e-3 | fits, 38 % spare |
+| 2, 3 | 1.5741e-3 | fits, **57 % spare** | 1.1400e-3 | fits, 38 % spare |
+
+**Why the uniform constant was tighter than the theorem it came from.**  A63 X.3 picked
+rBasin = 3/2000 under two gates: (a) tilt transfer `2·rBasin ≤ h` → ≤ 1.85e-3, and (b) s-slab
+closure `rBasin(1+√2) < h` → < 1.5326e-3.  **Gate (b) is what caps it**, and P-B(R) drops (b)
+when the side is separately in the shell.  For A60's (D) leaves the side is *fixed at s0*, with
+`|s0 − s_T| = 4.100e-7` = 1.1e-4 of h — trivially in the shell.  So gate (b) is not binding for
+A60 and the per-coordinate radii are legitimately available.  (A60's ρ_B is the same 4.1e-7 pin
+drift of §8.1, so `√2·ρ_B = 5.8e-7` is negligible against either h.)
+
+**Recommendation.**  Three ways to close the 4.9 % overshoot, cheapest first:
+
+1. **One more bisection level on squares 2–3** (landing 1.4472e-3 → ~7.3e-4).  Pure compute, a few
+   hundred extra queue LPs, **touches no formalization at all** — the uniform rBasin = 3/2000 in
+   Lean stays exactly as A79 has it.  *This is the recommended route and it is already in the
+   phase plan (`notes/resume_plan.md` step 5).*
+2. **Per-coordinate form of A36** — free fallback if the extra level proves expensive; needs A79 to
+   state the basin anisotropically (centre h, tilt h/2) but from the *same* A36 theorem, with no
+   new certificate provenance.
+3. **A40's h = 27/10000** — genuinely available and the same object, but buys A60 nothing that (1)
+   or (2) does not, while adding a certificate-store retarget.  **Not requested.**
+
+**So: do not retarget A79 on A60's account.**  A60 will close D.S6 against the uniform 3/2000 by
+spending one ladder level.  Reported so the decision is on the record rather than implicit.
+
+**Scope caveat, stated explicitly.**  This relief holds because A60's (D) leaves are stated at
+**fixed s = s0**.  It does *not* extend to the window form: for a packing at side m ∈ [3.82, ŝ]
+the side is not in the shell, gate (b) returns, and that is exactly **D.SLAB** — unchanged, still
+open, still A60's (§4).  If D.SLAB is ever discharged by relocating (D) leaves to other sides, the
+s-slab gate and this budget must both be re-derived at those sides.

@@ -1,0 +1,390 @@
+#!/usr/bin/env python3
+"""
+gen_rigidity_lean.py -- convert the two rigidity certificate families into Lean 4
+data modules for the PackingCert.Rigid kernel
+(lean/PackingCertMathlib/PackingCertMathlib/RigidKernel.lean).
+
+  A22  attempts/A22-local-rigidity/results/krawczyk_cert.json
+         -> lean/PackingCertMathlib/PackingCertMathlib/RigidData22.lean  (def a22)
+  A36  attempts/A36-levers/results/a36_certs/G3_*.json  (17 files)
+         -> lean/PackingCertMathlib/PackingCertMathlib/RigidData36.lean  (17 defs + a36All)
+
+Usage:
+    python lean/gen_rigidity_lean.py [--a22 PATH] [--a36dir DIR]
+                                     [--out22 PATH] [--out36 PATH]
+
+All rationals in the inputs are exact strings "num/den"; floats are refused.
+Rational literal convention matches lean/gen_case_lean.py's rat_lean.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from fractions import Fraction
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+
+DEF_A22 = REPO / "attempts" / "A22-local-rigidity" / "results" / "krawczyk_cert.json"
+DEF_A36DIR = REPO / "attempts" / "A36-levers" / "results" / "a36_certs"
+DEF_OUT22 = REPO / "lean" / "PackingCertMathlib" / "PackingCertMathlib" / "RigidData22.lean"
+DEF_OUT36 = REPO / "lean" / "PackingCertMathlib" / "PackingCertMathlib" / "RigidData36.lean"
+
+WALL_CODE = {"x=0": 0, "y=0": 1, "x=s": 2, "y=s": 3}
+
+
+# ---------------------------------------------------------------- rationals
+
+def to_frac(v) -> Fraction:
+    if isinstance(v, bool):
+        raise ValueError("boolean is not a number")
+    if isinstance(v, float):
+        raise ValueError(f"float {v!r} in certificate: refuse (not exact)")
+    if isinstance(v, int):
+        return Fraction(v)
+    if isinstance(v, str):
+        return Fraction(v.strip())
+    raise ValueError(f"cannot parse rational from {v!r}")
+
+
+def rat_lean(q: Fraction) -> str:
+    if q.denominator == 1:
+        return f"({q.numerator} : Rat)"
+    return f"(({q.numerator} : Rat) / {q.denominator})"
+
+
+def nat_lean(v) -> str:
+    if isinstance(v, bool) or not isinstance(v, int):
+        raise ValueError(f"expected int, got {v!r}")
+    if v < 0:
+        raise ValueError(f"expected non-negative int, got {v}")
+    return str(v)
+
+
+def arr(items) -> str:
+    return "#[" + ", ".join(items) + "]"
+
+
+def arr_lines(items, indent: str) -> str:
+    """One element per line, for the long arrays."""
+    if not items:
+        return "#[]"
+    inner = (",\n" + indent + "  ").join(items)
+    return "#[\n" + indent + "  " + inner + "\n" + indent + "]"
+
+
+# ---------------------------------------------------------------- A22
+
+def row_lean(c: dict) -> str:
+    kind = c["kind"]
+    if kind == "wall":
+        w = WALL_CODE.get(c["wall"])
+        if w is None:
+            raise ValueError(f"unknown wall {c['wall']!r}")
+        return f"Row.wall {nat_lean(c['i'])} {nat_lean(c['corner'])} {w}"
+    if kind == "edge":
+        return (f"Row.edge {nat_lean(c['i'])} {nat_lean(c['corner'])} "
+                f"{nat_lean(c['j'])} {nat_lean(c['edge'])}")
+    if kind == "dist":
+        return f"Row.dist {nat_lean(c['i'])} {nat_lean(c['j'])}"
+    if kind == "angeq":
+        return f"Row.angeq {nat_lean(c['i'])} {nat_lean(c['j'])}"
+    raise ValueError(f"unknown constraint kind {kind!r}")
+
+
+def gen_a22(src: Path) -> tuple[str, dict]:
+    d = json.loads(src.read_text(encoding="utf-8"))
+
+    z0 = [to_frac(v) for v in d["z0"]]
+    rN = to_frac(d["r_N"])
+    r0 = to_frac(d["r_0"])
+    rows = [row_lean(c) for c in d["constraints"]]
+    S = [nat_lean(v) for v in d["S"]]
+    S2 = [nat_lean(v) for v in d["S2"]]
+    Y = [[to_frac(v) for v in row] for row in d["Y"]]
+    Y2 = [[to_frac(v) for v in row] for row in d["Y2"]]
+    lam = [to_frac(v) for v in d["lambda"]]
+
+    n = len(z0)
+    for nm, M in (("Y", Y), ("Y2", Y2)):
+        if len(M) != n or any(len(r) != n for r in M):
+            raise ValueError(f"{nm} is not {n}x{n}")
+    for nm, a in (("S", S), ("S2", S2), ("lambda", lam)):
+        if len(a) != n:
+            raise ValueError(f"{nm} has {len(a)} entries, expected {n}")
+
+    farkas = []
+    for f in d["certificates"]:
+        sigma = f["sigma"]
+        if sigma not in (1, -1):
+            raise ValueError(f"sigma must be +-1, got {sigma!r}")
+        sig = "1" if sigma == 1 else "(-1 : Int)"
+        mu = [rat_lean(to_frac(v)) for v in f["mu"]]
+        if len(mu) != n:
+            raise ValueError(f"mu has {len(mu)} entries, expected {n}")
+        farkas.append((nat_lean(f["i"]), sig, rat_lean(to_frac(f["nu"])), mu))
+
+    contact = [nat_lean(p["con"]) for p in d["contact_edge_pairs"]]
+    noncontact = []
+    for p in d["noncontact_pairs"]:
+        if len(p) != 2:
+            raise ValueError(f"noncontact pair must have 2 entries: {p!r}")
+        noncontact.append(f"({nat_lean(p[0])}, {nat_lean(p[1])})")
+
+    L = []
+    L.append("import PackingCertMathlib.RigidKernel")
+    L.append("")
+    L.append(f"/-! GENERATED by lean/gen_rigidity_lean.py from "
+             f"attempts/A22-local-rigidity/results/krawczyk_cert.json — do not edit. -/")
+    L.append("")
+    L.append("namespace PackingCert.Rigid.Data")
+    L.append("")
+    # One top-level def per large component (a single record literal exceeds the
+    # elaborator's recursion depth).
+    L.append("set_option maxRecDepth 8000")
+    L.append("")
+    L.append("def a22_z0 : Array Rat := " + arr_lines([rat_lean(q) for q in z0], ""))
+    L.append("")
+    L.append("def a22_rows : Array Row := " + arr_lines(rows, ""))
+    L.append("")
+    for nm, M in (("Y", Y), ("Y2", Y2)):
+        for ri, row in enumerate(M):
+            L.append(f"def a22_{nm}_{ri} : Array Rat := "
+                     + arr_lines([rat_lean(q) for q in row], ""))
+            L.append("")
+        L.append(f"def a22_{nm} : Array (Array Rat) := #["
+                 + ", ".join(f"a22_{nm}_{ri}" for ri in range(len(M))) + "]")
+        L.append("")
+    L.append("def a22_lam : Array Rat := " + arr_lines([rat_lean(q) for q in lam], ""))
+    L.append("")
+    for fi, (i, sig, nu, mu) in enumerate(farkas):
+        L.append(f"def a22_f_{fi} : Farkas := {{ i := " + i + ", sigma := " + sig
+                 + ", nu := " + nu + ", mu := " + arr_lines(mu, "  ") + " }")
+        L.append("")
+    L.append("def a22_farkas : Array Farkas := #["
+             + ", ".join(f"a22_f_{fi}" for fi in range(len(farkas))) + "]")
+    L.append("")
+    L.append("def a22 : A22Cert := {")
+    L.append("  z0 := a22_z0,")
+    L.append("  rN := " + rat_lean(rN) + ",")
+    L.append("  r0 := " + rat_lean(r0) + ",")
+    L.append("  rows := a22_rows,")
+    L.append("  S := " + arr(S) + ",")
+    L.append("  S2 := " + arr(S2) + ",")
+    L.append("  Y := a22_Y,")
+    L.append("  Y2 := a22_Y2,")
+    L.append("  lam := a22_lam,")
+    L.append("  farkas := a22_farkas,")
+    L.append("  contactEdge := " + arr(contact) + ",")
+    L.append("  noncontact := " + arr(noncontact))
+    L.append("}")
+    L.append("")
+    L.append("end PackingCert.Rigid.Data")
+    L.append("")
+
+    stats = {
+        "z0": len(z0), "rows": len(rows), "S": len(S), "S2": len(S2),
+        "Y": (len(Y), len(Y[0])), "Y2": (len(Y2), len(Y2[0])), "lam": len(lam),
+        "farkas": len(farkas), "mu_widths": sorted({len(f[3]) for f in farkas}),
+        "contactEdge": len(contact), "noncontact": len(noncontact),
+    }
+    return "\n".join(L), stats
+
+
+# ---------------------------------------------------------------- A36
+
+def lean_ident(name: str) -> str:
+    ident = "a36_" + name.replace("-", "_")
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", ident):
+        raise ValueError(f"cert name {name!r} does not yield a Lean identifier ({ident})")
+    return ident
+
+
+def lean_str(s: str) -> str:
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def gen_a36(srcdir: Path) -> tuple[str, list, dict]:
+    files = sorted(srcdir.glob("G3_*.json"))
+    if not files:
+        raise ValueError(f"no G3_*.json under {srcdir}")
+
+    defs, idents, percert = [], [], []
+    for p in files:
+        d = json.loads(p.read_text(encoding="utf-8"))
+        name = p.name[len("G3_"):-len(".json")]
+        ident = lean_ident(name)
+        h = to_frac(d["h"])
+        omega = [rat_lean(to_frac(v)) for v in d["omega_rational"]]
+        P = [nat_lean(v) for v in d["P"]]
+        universal = d["universal"]
+        if not isinstance(universal, bool):
+            raise ValueError(f"{p.name}: 'universal' is not a bool")
+        va = d.get("variant_axes")
+        if va is None:
+            va = []
+        axes = [nat_lean(v) for v in va]
+        valid = [nat_lean(v) for v in d["valid_rows"]]
+        branch = [nat_lean(v) for v in d["branch_rows"]]
+
+        B = []
+        B.append(f"def {ident} : A36Cert := {{")
+        B.append("  name := " + lean_str(name) + ",")
+        B.append("  h := " + rat_lean(h) + ",")
+        B.append("  omega := " + arr_lines(omega, "  ") + ",")
+        B.append("  P := " + arr(P) + ",")
+        B.append("  universal := " + ("true" if universal else "false") + ",")
+        B.append("  variantAxes := " + arr(axes) + ",")
+        B.append("  validRows := " + arr(valid) + ",")
+        B.append("  branchRows := " + arr(branch))
+        B.append("}")
+        defs.append("\n".join(B))
+        idents.append(ident)
+        percert.append({"name": name, "ident": ident, "omega": len(omega),
+                        "P": len(P), "universal": universal,
+                        "variantAxes": len(axes), "validRows": len(valid),
+                        "branchRows": len(branch)})
+
+    L = []
+    L.append("import PackingCertMathlib.RigidKernel")
+    L.append("")
+    L.append(f"/-! GENERATED by lean/gen_rigidity_lean.py from "
+             f"attempts/A36-levers/results/a36_certs/G3_*.json "
+             f"({len(files)} certificates) — do not edit. -/")
+    L.append("")
+    L.append("namespace PackingCert.Rigid.Data")
+    L.append("")
+    for b in defs:
+        L.append(b)
+        L.append("")
+    L.append("def a36All : Array A36Cert := " + arr_lines(idents, ""))
+    L.append("")
+    L.append("end PackingCert.Rigid.Data")
+    L.append("")
+
+    stats = {"certs": len(files),
+             "omega_widths": sorted({c["omega"] for c in percert}),
+             "P_widths": sorted({c["P"] for c in percert})}
+    return "\n".join(L), percert, stats
+
+
+# ---------------------------------------------------------------- sanity
+
+def reparse22(text: str) -> dict:
+    """Re-parse the emitted Lean with crude structural counts."""
+    def field(name):
+        m = re.search(r"^  " + name + r" := ", text, re.M)
+        if not m:
+            raise ValueError(f"emitted A22 lacks field {name}")
+        return m.end()
+
+    blocks = {}
+    for blk in text.split("\ndef ")[1:]:
+        name = blk.split(" ", 1)[0]
+        blocks[name] = blk
+    counts = {}
+    for name in ("z0", "lam"):
+        counts[name] = len(re.findall(r": Rat\)", blocks[f"a22_{name}"]))
+    counts["rows"] = len(re.findall(r"\bRow\.(wall|edge|dist|angeq)\b", blocks["a22_rows"]))
+    for name in ("Y", "Y2"):
+        rowdefs = [b for n, b in blocks.items() if re.fullmatch(rf"a22_{name}_\d+", n)]
+        widths = [len(re.findall(r": Rat\)", b)) for b in rowdefs]
+        counts[name] = (len(widths), sorted(set(widths)))
+    fdefs = [b for n, b in blocks.items() if re.fullmatch(r"a22_f_\d+", n)]
+    counts["farkas"] = len(fdefs)
+    counts["mu_widths"] = sorted({len(re.findall(r": Rat\)", b[b.index("mu := "):]))
+                                  for b in fdefs})
+    body = blocks["a22"]
+    ce = re.search(r"  contactEdge := #\[(.*?)\]", body).group(1)
+    counts["contactEdge"] = len([x for x in ce.split(",") if x.strip()])
+    nc = re.search(r"  noncontact := #\[(.*?)\]\n\}", body, re.S).group(1)
+    counts["noncontact"] = len(re.findall(r"\(\d+, \d+\)", nc))
+    field("rN"), field("r0")
+    counts["floats"] = len(re.findall(r"\d\.\d", text))
+    return counts
+
+
+def reparse36(text: str) -> dict:
+    defs = re.findall(r"def (a36_\w+) : A36Cert := \{(.*?)\n\}", text, re.S)
+    omega_w, P_w = set(), set()
+    for _, b in defs:
+        oseg = b[b.index("  omega := "):]
+        oseg = oseg[:oseg.index("\n  ],")]
+        omega_w.add(len(re.findall(r": Rat\)", oseg)))
+        P_w.add(len([x for x in re.search(r"  P := #\[(.*?)\]", b).group(1).split(",")
+                     if x.strip()]))
+    allseg = re.search(r"def a36All : Array A36Cert := #\[\n(.*?)\n\]", text, re.S).group(1)
+    return {"certs": len(defs), "omega_widths": sorted(omega_w),
+            "P_widths": sorted(P_w),
+            "a36All": len([x for x in allseg.split(",") if x.strip()]),
+            "floats": len(re.findall(r"\d\.\d", text))}
+
+
+# ---------------------------------------------------------------- main
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--a22", default=str(DEF_A22))
+    ap.add_argument("--a36dir", default=str(DEF_A36DIR))
+    ap.add_argument("--out22", default=str(DEF_OUT22))
+    ap.add_argument("--out36", default=str(DEF_OUT36))
+    a = ap.parse_args()
+
+    text22, st22 = gen_a22(Path(a.a22))
+    text36, per36, st36 = gen_a36(Path(a.a36dir))
+
+    out22, out36 = Path(a.out22), Path(a.out36)
+    out22.parent.mkdir(parents=True, exist_ok=True)
+    out36.parent.mkdir(parents=True, exist_ok=True)
+    out22.write_text(text22, encoding="utf-8")
+    out36.write_text(text36, encoding="utf-8")
+
+    # sanity: re-parse what we just wrote from disk
+    r22 = reparse22(out22.read_text(encoding="utf-8"))
+    r36 = reparse36(out36.read_text(encoding="utf-8"))
+
+    ok = True
+
+    def chk(cond, msg):
+        nonlocal ok
+        if not cond:
+            ok = False
+            print(f"  FAIL: {msg}")
+
+    chk(r22["z0"] == 34, f"z0 = {r22['z0']} != 34")
+    chk(r22["rows"] == 42, f"rows = {r22['rows']} != 42")
+    chk(r22["Y"] == (34, [34]), f"Y = {r22['Y']} != 34x34")
+    chk(r22["Y2"] == (34, [34]), f"Y2 = {r22['Y2']} != 34x34")
+    chk(r22["lam"] == 34, f"lam = {r22['lam']} != 34")
+    chk(r22["farkas"] == 68, f"farkas = {r22['farkas']} != 68")
+    chk(r22["mu_widths"] == [34], f"mu widths = {r22['mu_widths']} != [34]")
+    chk(r22["floats"] == 0, "float literal in RigidData22.lean")
+    chk(r22["contactEdge"] == st22["contactEdge"], "contactEdge count mismatch")
+    chk(r22["noncontact"] == st22["noncontact"], "noncontact count mismatch")
+    chk(r36["certs"] == 17, f"A36 certs = {r36['certs']} != 17")
+    chk(r36["a36All"] == 17, f"a36All = {r36['a36All']} != 17")
+    chk(r36["omega_widths"] == [70], f"omega widths = {r36['omega_widths']} != [70]")
+    chk(r36["P_widths"] == [34], f"P widths = {r36['P_widths']} != [34]")
+    chk(r36["floats"] == 0, "float literal in RigidData36.lean")
+
+    print(f"{out22}  ({out22.stat().st_size} bytes)")
+    print(f"  z0={r22['z0']} rows={r22['rows']} S={st22['S']} S2={st22['S2']} "
+          f"Y={r22['Y'][0]}x{r22['Y'][1][0]} Y2={r22['Y2'][0]}x{r22['Y2'][1][0]} "
+          f"lam={r22['lam']} farkas={r22['farkas']} (mu widths {r22['mu_widths']}) "
+          f"contactEdge={r22['contactEdge']} noncontact={r22['noncontact']}")
+    print(f"{out36}  ({out36.stat().st_size} bytes)")
+    print(f"  certs={r36['certs']} a36All={r36['a36All']} "
+          f"omega widths={r36['omega_widths']} P widths={r36['P_widths']} "
+          f"universal={sum(1 for c in per36 if c['universal'])}")
+    for c in per36:
+        print(f"    {c['ident']:<28} name={c['name']:<20} omega={c['omega']} "
+              f"P={c['P']} universal={str(c['universal']).lower()} "
+              f"axes={c['variantAxes']} valid={c['validRows']} branch={c['branchRows']}")
+    print("SANITY: " + ("OK" if ok else "FAILED"))
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

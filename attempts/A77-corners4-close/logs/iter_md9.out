@@ -1,0 +1,10 @@
+[11:11:39] grow: 41 holes -> +56 placements (total 525) -> C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\catalog_k4_13_md9.json
+[11:11:39] RUN LP md9: C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A77-corners4-close\code\pairlp413m.py --cls k4_13 --beta 0 --etas 0.05,0.02,0.008,0.002,0.0005 --mu 0.01 --catalog C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\catalog_k4_13_md9.json --tag _md9 --seed_dual C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\seed_md8.json,C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\seed_md7.json,C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\seed_md5.json,C:\Users\esumm\code\packing\attempts\A71-pair-emission\results\pair_dual_k4_13_a71cg.json,C:\Users\esumm\code\packing\attempts\A73-pair-v2\results\pair_dual_k4_13eta001.json --seed_dual_cap 500 --max_cuts 300 --cuts_per_point 2 --max_rows 30000 --max_nnz 14000000 --purge_every 4 --purge_min 150 --stop_value 20.9 --lp_solver ipm --loop_crossover on --final_solver ipm --lp_time 1500 --cls_budget 6000 --consolidate_rounds 12 --consol_wmin 0.0005 --consol_guard 20.97 --headroom 6 --headroom_wait 3600
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A77-corners4-close\code\iter77.py", line 152, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A77-corners4-close\code\iter77.py", line 118, in main
+    res = json.load(open(os.path.join(R, "pairlp413m_k4_13_%s.json" % ("_" + args.tag))))
+                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\esumm\\code\\packing\\attempts\\A77-corners4-close\\results\\pairlp413m_k4_13__md9.json'

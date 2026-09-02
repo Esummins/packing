@@ -77,3 +77,29 @@ E.1(ii) (aliveness descends) is deliberately NOT formalised: it is a statement a
 `stratum_kill` instance for its class; the Lean statement should take (class i, pin-set S,
 D4 element g, side-window W) and the Lemma-B hypotheses as explicit arguments so that the
 per-class instantiation is a table, not a proof search.
+
+## E.5 Formalisation note — the census is a Lean DEFINITION; E.2 is LEAN-PROVED (A78, 2026-09-02)
+
+`lean/PackingCertMathlib/PackingCertMathlib/Census.lean` pins the Young-form definition
+(`skeleton s z` = per corner the cells whose whole down-set is occupied by exactly-on-grid
+axis-aligned squares; all eight A72 binding choices B1–B8 are resolved at their definitions,
+B1/B3/B6 as THEOREMS), enumerates the census (`censusL`, D4 action `d4Slot`/`d4Pins`,
+canonical codes, class representatives `classRep`), and proves L3 as a statement about
+packings — `skeleton_mem_census`: at every side `s ∈ (3,4)` the skeleton of a packing is a
+census tuple (the B2 predicate is decided combinatorially and proved equal to the real
+predicate on the whole window, `slotFar_iff`).  `CensusCheck.lean` verifies by `native_decide`:
+1110 tuples, 163 classes, D4-closure, EXACT equality with A72's tuple set and orbit partition,
+Trump in a `k = 5` class.  `TopLevel.lean`'s `StratumIdx / trumpStratum / InStratum` are now
+definitions (`InStratum i s z` = "the skeleton is a D4-image of representative `i`").
+
+* `hface` is discharged: `containsPins_skeleton` (exact ⟹ contains, by reflexivity of the slot
+  assignment, injective on the skeleton at `s ∉ ℤ`).
+* The D4 bookkeeping of E.2 is machine-checked: the action on points (`d4Apply`), squares
+  (`d4Sq`, tilt `t ↦ (1−t)/(1+t)` for reflections, R5), slots (`d4Slot`; R8 is the theorem
+  `d4Apply_slotCentre`), configurations (`d4Cfg`, preserves packings: `d4_packing`), and the
+  equivariance `skeleton_d4 : Simp(g·P) = g·Simp(P)`.
+* **Lemma M→E is the Lean theorem `class_kill`**: a monotone kill of some `S ≤ g·T` at side
+  `s ∈ (3,4)` empties the exact class of `T` — the per-class instantiation table this section
+  asked for is `class_kill T S g hS kill`.
+* E.1(ii) stays deliberately unformalised (completeness); its arbiter `alivewitness` has its own
+  Lean soundness statement (A78 T3, `AliveBridge.lean`).

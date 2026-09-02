@@ -9,6 +9,8 @@ import PackingCertMathlib.Parametrize
 import PackingCertMathlib.Measure382
 import PackingCertMathlib.Attain
 import PackingCertMathlib.ThetaT
+import PackingCertMathlib.Census
+import PackingCertMathlib.CidlBridge
 
 /-!
 # The composed optimality theorem for s(11) — formal STATEMENT (A62, checklist item F3)
@@ -32,8 +34,17 @@ so `s(11) ≥ 3.82` is an end-to-end Lean theorem whose only extra axiom is
 the `native_decide` evaluation axiom); `trump_packs_at_shat` (A64) is now a theorem
 from the finer split `shatA22` + `trump_packs_at_shatA22` (certified) +
 `shatA22_eq_shat` (the open identity); `attained` (A68, `Attain.lean` — drain lemma D1,
-compactness in coordinates).  12 named axioms remain, but only
-`shatA22_eq_shat` and the genuinely-open leaf families carry open mathematics.
+compactness in coordinates); `shatA22_eq_shat` (A78 T2, obligation CIDL-LEAN —
+`CidlCheck.lean` + `CidlBridge.lean` replay `certs/cidl_identity.json`, so the algebraic
+identity is machine-checked and only A22's *certified content* is assumed, now as the
+single axiom `a22_exact_structure`); the census layer `StratumIdx` / `trumpStratum` /
+`InStratum` (A78 T1, `Census.lean` — definitions) and with it `stratify` and
+`unique_transfer` (A78 T1/T4 — theorems from census exhaustiveness,
+`unique_transfer.md` §1; the honest chain + Theorem U route is `UniqueChain.lean`).
+**7 named axioms remain** (was 12): the three genuinely-open leaf families
+`stratum_kill`, `trump_residual`, `basin`, and the four A22 interface axioms `zhat` /
+`shatA22` / `trump_packs_at_shatA22` / `a22_exact_structure` (all = A22's
+Python-interval certificate, TCB T3; no axiom of this file carries open ALGEBRA).
 
 The point of the file (per `docs/publication_checklist.md` F3) is to force the definition of
 "packing", the quantifier order, and the exact form of each leaf obligation.  Every ambiguity
@@ -42,10 +53,13 @@ load-bearing ones are repeated in the docstrings below.
 
 ## Definitional debt (opaque layers, declared as axioms)
 
-* `StratumIdx / trumpStratum / InStratum` — the Young-form skeleton census (A53) is not yet a
-  formal definition; the stratum predicate is opaque here.  NOTE the intended semantics is
-  "the selected minimiser's skeleton is EXACTLY this class" (see `stratum_kill` docstring for
-  why the certificate-native "contains these pins" reading would make the axiom false).
+* `StratumIdx / trumpStratum / InStratum` — DISCHARGED (A78, `Census.lean`): the Young-form
+  skeleton census is a Lean DEFINITION (`skeleton`, `censusL`, `classCodes`, the D4 action);
+  `StratumIdx` is the index type of the 163 class representatives, `InStratum i s z` is
+  "the skeleton of `z` at side `s` is a D4-image of representative `i`" (EXACT class
+  membership, as the `stratum_kill` docstring requires), `trumpStratum` the class of
+  `((2,1),(1),(1),∅)`.  Census exhaustiveness (`skeleton_mem_census`, A53 L3) then proves
+  `stratify` and `unique_transfer` below (unique_transfer.md §1).
 * `shat` — DISCHARGED (A63): a definition (unique octic root in the isolating interval),
   with `shat_spec` a theorem; certificate `certs/octic_root_isolation.json` +
   `certs/verify_sturm.py` (checklist S3).
@@ -210,6 +224,14 @@ def wnd : Set ℝ := Icc (191 / 50 : ℝ) shat
 
 /-! ## The named hypotheses (the leaf families of the proof plan) -/
 
+theorem shat_ge_382 : (191 / 50 : ℝ) ≤ shat := by
+  have h := shat_spec.2.1.1
+  norm_num at h ⊢
+  linarith
+
+theorem shat_mem_wnd : shat ∈ wnd := ⟨shat_ge_382, le_refl _⟩
+
+
 /-- **[D1 — attainment]** `{s | Fits 11 s}` has a least element.  DISCHARGED (A68): was an
 axiom; now the theorem `attained_thm` of `PackingCertMathlib/Attain.lean`
 (`docs/proofs/drain_lemma.md` D1).  No Hausdorff limits: the coordinate feasible region
@@ -258,60 +280,136 @@ Certified (Python-interval TCB; exact flush/coincidence arguments + interval SAT
 min margins 0.0249/0.549). -/
 axiom trump_packs_at_shatA22 : CfgPacking shatA22 zhat
 
-/-- **[UB at ŝ — the algebraic identity, now CERTIFICATE-BACKED]** `ŝ_A22 = ŝ_octic`.
-CLOSED at the Python-certificate tier by A69 (`docs/proofs/attainment_ub.md` §7): the
-(c-idl) saturated ideal-membership certificate `certs/cidl_identity.json`, checker
-`certs/verify_cidl.py` (stdlib rationals; PASS 0.7 s; corruption gates fail loudly):
+/-- **[UB at ŝ — A22's certified content on the exact-structure slice]**
+The A22 interface axiom that REPLACES the former opaque identity axiom
+`shatA22_eq_shat` (A78 T2, obligation CIDL-LEAN, `docs/proofs/attainment_ub.md` §7.5).
+It asserts nothing algebraic: only what A22's certificate already establishes about the
+point `P̂` (`attempts/A22-local-rigidity/notes.md` headline items 1–3, and the
+composition paragraph of `certs/verify_cidl.py`'s docstring):
+
+1. **the tilt is in the gate interval.**  A22's second Krawczyk system `F̃` encloses the
+   common angle `θ̂` of squares 6–10 within 1e-50 of the A03 rational angle
+   `0.70130710554614222…`, so `θ̂/2 ∈ [0.35, 0.351]`; with `x ≤ tan x ≤ x + x³/(3(1−x²))`
+   there, `t̂ = tan(θ̂/2) ∈ [0.35, 0.3672] ⊂ [3/10, 2/5]`.
+2. **the side is in the octic's isolating interval.**  `ŝ_A22` is within 1e-50 of the A03
+   rational side `3.87708359002281417…` (4.1e-7 clearance to both ends).
+3. **the 13 reduced contact rows vanish at `P̂`.**  A22 item 2 pins the EXACT structure of
+   ẑ (squares 0–5 axis-parallel at `(½,½), (3/2,½), (S−½,½), (½,3/2), (½,y4),
+   (S−½,S−½)`; squares 6–10 sharing exactly one angle θ̂), and all 38 curated constraint
+   rows vanish at ẑ (A22 §3).  Substituting the structure and `t = tan(θ/2)` and clearing
+   the positive factors `(1+t²)^k` turns the 18 surviving rows into the 13 distinct
+   polynomial generators `Cidl.gens` — REBUILT in `CidlGen.lean` from A22's own
+   corner/edge conventions, byte-for-byte the construction of `certs/verify_cidl.py`.
+
+The 13 coordinates are, in `certs/verify_cidl.py`'s `VARS` order,
+`(t, y4, x6, y6, x7, y7, x8, y8, x9, y9, x10, y10, S)` = the common tilt of squares 6–10,
+square 4's centre height, the five tilted centres, and the side.
+
+TCB: exactly A22's (mpmath.iv Krawczyk + the A70 exact-rational re-check
+`a22_recheck_exact.py`).  NO algebra is assumed: the ideal-membership identity
+`e(t)·Δ(t)⁸·octic(S) = Σ_j q_j(t,S)·G_j` and both sign gates are machine-checked
+(`CidlCheck.lean`, `native_decide` over ℚ) and composed in `CidlBridge.lean`. -/
+axiom a22_exact_structure :
+    (zhat 6).t ∈ Icc (3 / 10 : ℝ) (2 / 5) ∧
+      shatA22 ∈ Icc (3877083 / 1000000 : ℝ) (3877084 / 1000000) ∧
+      ∀ g ∈ Cidl.gens, Cidl.eval g
+        (Cidl.pt13 (zhat 6).t (zhat 4).cy (zhat 6).cx (zhat 6).cy (zhat 7).cx (zhat 7).cy
+          (zhat 8).cx (zhat 8).cy (zhat 9).cx (zhat 9).cy (zhat 10).cx (zhat 10).cy
+          shatA22) = 0
+
+/-- **[UB at ŝ — the algebraic identity]** `ŝ_A22 = ŝ_octic`.  A THEOREM since A78 T2
+(obligation CIDL-LEAN of `docs/proofs/attainment_ub.md` §7.5 — DISCHARGED; was an axiom).
+
+Route: `Cidl.octic_zero_of_generators` (`CidlBridge.lean`) is the composed content of the
+(c-idl) saturated ideal-membership certificate `certs/cidl_identity.json` — the identity
 
     e(t)·Δ(t)⁸·octic(S) = Σ_j q_j(t,S)·G_j
 
-over the 13 reduced A22 contact rows on the certified exact-structure slice, with the
-sign gate "e·Δ has no root in [3/10, 2/5] ∋ t̂" (exact Sturm).  Evaluating at the A22
-point gives `octic ŝ_A22 = 0`; with A22's 1e-50 enclosure (`ŝ_A22 ∈ Icc 3.877083
-3.877084`) and `shat_spec`'s uniqueness this yields `shatA22 = shat` (the octic's
-SECOND real root; the other lies in `(-2,-1)`).  En route the tan-half minimal
-polynomial `5t⁸−10t⁷−2t⁶+14t⁵+12t⁴−6t³+2t²+2t−1` is DERIVED (upgrading A22 §7 gap 2),
-and A53 L4's "degree-7 coordinate / compositum 56" obstacle is VOID (spurious A03
-minpoly annotations; every ẑ-coordinate lies in ℚ(t̂), degree 8).
-* Still an AXIOM pending the named obligation CIDL-LEAN (attainment_ub.md §7.5):
-  (i) `native_decide` replay of the identity + Sturm gates (Measure382Check isolation
-  pattern), (ii) refined A22-interface axioms carrying "the generators vanish at ẑ,
-  t̂ ∈ [3/10,2/5], ŝ_A22 ∈ Icc 3.877083 3.877084" in place of the opaque `shatA22` —
-  then this becomes a theorem via `shat_spec`.  No new mathematics remains.
-* S3-fallback: WITHOUT this axiom the remaining axioms still support the restated
-  theorem `s(11) = ŝ_A22` (attainment_ub.md §5) — this decomposition is the Lean-side
-  preparation for that restatement, keeping `shat`/`shat_spec` (A63) intact. -/
-axiom shatA22_eq_shat : shatA22 = shat
+over the 13 reduced A22 contact rows, replayed in Lean by `native_decide` over ℚ with the
+generators REBUILT from A22's conventions, plus the sign gates `e < 0` and `Δ < 0` on
+`[3/10, 2/5]` (a monomial interval bound — strictly stronger than the checker's Sturm
+"no root", and certified by the same evaluation).  Feeding it `a22_exact_structure`
+gives `trumpOctic ŝ_A22 = 0`; `shat_spec`'s uniqueness on `[3.877083, 3.877084]` then
+gives `ŝ_A22 = ŝ`, the octic's SECOND real root (the other lies in `(−2,−1)`).
+
+En route A69 DERIVED the tan-half minimal polynomial
+`5t⁸−10t⁷−2t⁶+14t⁵+12t⁴−6t³+2t²+2t−1` (upgrading A22 §7 gap 2), and A53 L4's
+"degree-7 coordinate / compositum 56" obstacle is VOID (spurious A03 minpoly
+annotations; every ẑ-coordinate lies in ℚ(t̂), degree 8). -/
+theorem shatA22_eq_shat : shatA22 = shat := by
+  obtain ⟨ht, hs, hg⟩ := a22_exact_structure
+  have hoct : Cidl.octicR shatA22 = 0 :=
+    Cidl.octic_zero_of_generators _ _ _ _ _ _ _ _ _ _ _ _ _ hg ht.1 ht.2
+  refine shat_spec.2.2 shatA22 hs ?_
+  simpa only [trumpOctic, Cidl.octicR_eq] using hoct
 
 /-- The composed upper-bound-at-ŝ statement — a THEOREM from the split (A64); its
-`#print axioms` separates the certified feasibility from the open identity. -/
+`#print axioms` separates the certified feasibility from the certified identity. -/
 theorem trump_packs_at_shat : CfgPacking shat zhat :=
   shatA22_eq_shat ▸ trump_packs_at_shatA22
 
-/-- **[census — definitional debt]** Index type of the stratification (intended: the 163
-D4 classes of the A53 Young-form census; kept opaque until the census definition is
-formalised — checklist H2's independent re-enumeration then gets a formal target). -/
-axiom StratumIdx : Type
+/-- **[census]** Index type of the stratification: the D4 class representatives of the
+Young-form census (`Census.lean`: `classCodes`, the distinct canonical codes of the 1110
+census tuples — 163 of them, `CensusCheck.lean`).  DISCHARGED (A78): was an opaque axiom;
+checklist F11/H2. -/
+def StratumIdx : Type := Fin classCodes.length
 
-/-- The distinguished stratum: Trump's `k = 5` skeleton class (`trump5`). -/
-axiom trumpStratum : StratumIdx
+/-- Trump's tuple lies in the census (kernel `decide`), hence its canonical code is one of
+the class codes. -/
+theorem trumpCode_mem : canonCode trumpPins ∈ classCodes :=
+  List.mem_dedup.mpr (List.mem_map.mpr
+    ⟨trumpPins, mem_censusL_of_isCensusTuple trumpPins_isCensusTuple, rfl⟩)
+
+/-- The distinguished stratum: Trump's `k = 5` skeleton class (`trump5`,
+`((2,1),(1),(1),∅)` up to D4; `trumpPins`).  DISCHARGED (A78): a definition. -/
+def trumpStratum : StratumIdx :=
+  ⟨classCodes.idxOf (canonCode trumpPins), List.idxOf_lt_length_of_mem trumpCode_mem⟩
 
 /-- `InStratum i s z`: the configuration `z`, as a packing at side `s`, has skeleton
-EXACTLY of class `i`.  The side parameter is essential: skeleton pins are anchored to the
-walls of `[0,s]²`, so the predicate is a different subset of configuration space at every
-`s` — this is what makes window transfer (H6) a per-certificate obligation rather than a
-bookkeeping step.  Findings F4/F6. -/
-axiom InStratum : StratumIdx → ℝ → Cfg → Prop
+EXACTLY of class `i` — its Young-form skeleton at side `s` (`skeleton s z`, the largest
+Young set of exactly-on-grid axis-aligned squares at each corner, A53 L1) is a D4-image of
+the class representative `classRep i`.  DISCHARGED (A78): a definition.  The side
+parameter is essential: skeleton pins are anchored to the walls of `[0,s]²`, so the
+predicate is a different subset of configuration space at every `s` — this is what makes
+window transfer (H6) a per-certificate obligation rather than a bookkeeping step.
+Findings F4/F6. -/
+def InStratum (i : StratumIdx) (s : ℝ) (z : Cfg) : Prop :=
+  InClassOf (skeleton s z) (classRep i)
+
+/-- The window sits inside `(3, 4)`, where the census is one object (A53 L2(iv),
+`Census.lean`). -/
+theorem wnd_subset_Ioo {m : ℝ} (hm : m ∈ wnd) : 3 < m ∧ m < 4 := by
+  obtain ⟨h1, h2⟩ := hm
+  have h3 := shat_spec.2.1.2
+  norm_num at h1 h3
+  exact ⟨by linarith, by linarith⟩
+
+/-- **Census exhaustiveness in composition form** (A53 L3, `skeleton_mem_census` +
+`exists_class_skeleton`): every packing at a side in the window lies in some stratum. -/
+theorem exists_stratum {m : ℝ} (hm : m ∈ wnd) {z : Cfg} (hz : CfgPacking m z) :
+    ∃ i : StratumIdx, InStratum i m z :=
+  exists_class_skeleton (wnd_subset_Ioo hm).1 (wnd_subset_Ioo hm).2 hz.2
 
 /-- **[H1 + H2 — selection + exhaustiveness]** If the minimum is attained at
-`m ∈ [3.82, ŝ]`, then SOME minimiser (the k-maximal slide-stuck selected one) lies in some
-stratum.  Note the quantifier: this produces an existential witness, NOT a statement about
-every minimiser — the uniqueness clause therefore needs the separate, strictly stronger
-`unique_transfer` below (findings F3, the largest hole this file forced).  STATUS: L6/CC-2
-selection lemma in attempt notes (A53/A58), census exact but single-implementation;
-degenerate slide cases (H1) unwritten. -/
-axiom stratify : ∀ m : ℝ, IsLeast {s : ℝ | Fits 11 s} m → m ∈ wnd →
-    ∃ (z : Cfg) (i : StratumIdx), CfgPacking m z ∧ InStratum i m z
+`m ∈ [3.82, ŝ]`, then SOME minimiser lies in some stratum.  DISCHARGED (A78): was an
+axiom; now a theorem from `parametrize` + census exhaustiveness (`exists_stratum`).  As
+STATED the selection content is empty — any minimiser has a skeleton — and the
+k-maximal/teleport-stuck selection (`exists_kmax_skeleton`, `cc2_stuck_census` in
+`CensusSelection.lean`) is consumed downstream by the H10-stuck route of
+`stratum_kill`'s quantifier caveat, not here.  The uniqueness clause needs the separate
+`unique_transfer` below (findings F3). -/
+theorem stratify : ∀ m : ℝ, IsLeast {s : ℝ | Fits 11 s} m → m ∈ wnd →
+    ∃ (z : Cfg) (i : StratumIdx), CfgPacking m z ∧ InStratum i m z := by
+  intro m hm hw
+  obtain ⟨Q, hQ⟩ := hm.1
+  obtain ⟨z, hzt, hzQ⟩ := parametrize Q hQ
+  have hz : CfgPacking m z := by
+    refine ⟨hzt, ?_⟩
+    have hfun : (fun i => (z i).set) = Q := funext fun i => (hzQ i).symm
+    rw [hfun]
+    exact hQ
+  obtain ⟨i, hi⟩ := exists_stratum hw hz
+  exact ⟨z, i, hz, hi⟩
 
 /-- **[per-stratum kills, window form]** No packing at any side `s ∈ [3.82, ŝ]` has
 skeleton exactly of a non-Trump class.  This single axiom fuses THREE obligations that are
@@ -425,21 +523,30 @@ no corridor), stuck-packing kills (H10-stuck), residual+basin at the endpoint, a
 COLLAPSE back along the chain via Theorem U (one-square rigidity of ẑ), the single new
 leaf, with an executable 11-certificate spec (re-insertion certificates at a rational
 side in T1's isolating interval, budget 1, `nofams` zone inside the basin box).
-Obligations ledger: U-O1..U-O4 in `unique_transfer.md` §5.  Kept as an axiom until the
-prose is independently verified. -/
-axiom unique_transfer : ∀ z : Cfg, CfgPacking shat z →
+Obligations ledger: U-O1..U-O4 in `unique_transfer.md` §5.
+DISCHARGED (A78): was an axiom; now a theorem — exactly §1's re-diagnosis: with
+`InStratum` definitional, EVERY packing at `ŝ` lies in some stratum (`exists_stratum`),
+with `f = id`, `e = 1`, `z' = z` (the D4 normalisation is absorbed by the class
+definition).  The hole is therefore now entirely visible in `stratum_kill`'s
+∀-packings quantifier at the K1-protected classes (its docstring), where the
+non-circular route is the CC-2 chain + Theorem U collapse (`unique_transfer.md` §2–§4;
+the chain/collapse formalisation `unique_via_chain` is in `UniqueChain.lean`). -/
+theorem unique_transfer : ∀ z : Cfg, CfgPacking shat z →
     ∃ (z' : Cfg) (f : RP → RP) (e : Equiv.Perm (Fin 11)) (i : StratumIdx),
       IsCtrSym shat f ∧ CfgPacking shat z' ∧ InStratum i shat z' ∧
-        ∀ j, (z (e j)).set = f '' (z' j).set
+        ∀ j, (z (e j)).set = f '' (z' j).set := by
+  intro z hz
+  obtain ⟨i, hi⟩ := exists_stratum shat_mem_wnd hz
+  refine ⟨z, id, 1, i, ⟨fun _ _ => rfl, Set.image_id _⟩, hz, hi, fun j => ?_⟩
+  simp
+
+/-- Every D4 element is a container symmetry (`Census.lean`: `d4Apply_sqdist`,
+`d4Apply_image_container`) — the `f` of `trump_residual`/`unique_transfer` can be taken
+to be an explicit signed permutation. -/
+theorem isCtrSym_d4Apply (s : ℝ) (g : D4) : IsCtrSym s (d4Apply s g) :=
+  ⟨d4Apply_sqdist s g, d4Apply_image_container s g⟩
 
 /-! ## Composition glue (the only proofs in this file) -/
-
-theorem shat_ge_382 : (191 / 50 : ℝ) ≤ shat := by
-  have h := shat_spec.2.1.1
-  norm_num at h ⊢
-  linarith
-
-theorem shat_mem_wnd : shat ∈ wnd := ⟨shat_ge_382, le_refl _⟩
 
 theorem fits_shat : Fits 11 shat := ⟨fun i => (zhat i).set, trump_packs_at_shat.2⟩
 

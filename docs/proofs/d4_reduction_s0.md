@@ -71,3 +71,21 @@ per-bin gaps are in `results/d4_s0.json` → `checks.R7_sigma.sample_i0`.
 4. **Single implementation.** As with B.CENSUS, the D4 action is checked, not independently
    re-implemented; R8's group identity between the tree side and the census side is the closest
    thing to a cross-check and it holds.
+
+## D4.5 The reduction as a Lean theorem, at every side (A78, 2026-09-02)
+
+`lean/PackingCertMathlib/PackingCertMathlib/D4Wlog.lean`, on the D4 action of `Census.lean`
+(R2/R3: `d4Apply`, `d4Apply_mul`/`inv`, `d4Apply_sqdist`, `d4Apply_image_container`; R5:
+`d4Sq_set` — the tilt transport `t ↦ (1−t)/(1+t)` for the reflections with
+`cosT_tRefl`/`sinT_tRefl`; R8: `d4Apply_slotCentre`, `skeleton_d4`):
+
+* `d4_cover_zone` — R4 at every side `s` and zone width `cw`: for `p ∈ Z(s)` some `g ∈ D4`
+  sends `p` into `T(s)` (sign-normalise, then swap if `|dy| > |dx|`);
+* `d4_wlog` — D4.1 itself, CONDITIONAL on the root occupancy hypothesis exactly as D4.4(1)
+  records: if every packing at side `s` has a square centred in `Z(s)`, then every packing at
+  side `s` has a D4-image that is a packing at `s`, has a square centred in `T(s)`, all tilts in
+  `[0,1]`, and whose squares are the explicit images `g '' (z j).set`.
+
+D4.4 is unchanged: no root lemma at `s₀`, no `s₀` tree (D.TREE), nothing about `S₁₁` (D.S6). The
+Python R6/R7 checks (verify_tree2's cells/t-bins) are tree machinery, not part of the WLOG's
+mathematical content, and are not ported.

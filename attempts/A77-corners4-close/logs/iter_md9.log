@@ -1,0 +1,36 @@
+[11:11:39] grow: 41 holes -> +56 placements (total 525) -> C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\catalog_k4_13_md9.json
+[11:11:39] RUN LP md9: C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A77-corners4-close\code\pairlp413m.py --cls k4_13 --beta 0 --etas 0.05,0.02,0.008,0.002,0.0005 --mu 0.01 --catalog C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\catalog_k4_13_md9.json --tag _md9 --seed_dual C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\seed_md8.json,C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\seed_md7.json,C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\seed_md5.json,C:\Users\esumm\code\packing\attempts\A71-pair-emission\results\pair_dual_k4_13_a71cg.json,C:\Users\esumm\code\packing\attempts\A73-pair-v2\results\pair_dual_k4_13eta001.json --seed_dual_cap 500 --max_cuts 300 --cuts_per_point 2 --max_rows 30000 --max_nnz 14000000 --purge_every 4 --purge_min 150 --stop_value 20.9 --lp_solver ipm --loop_crossover on --final_solver ipm --lp_time 1500 --cls_budget 6000 --consolidate_rounds 12 --consol_wmin 0.0005 --consol_guard 20.97 --headroom 6 --headroom_wait 3600
+[11:11:39] A74 mixed-depth LP: cls=k4_13 beta=0 levels=eta=0.05@1.0000 eta=0.02@1.0061 eta=0.008@1.0085 eta=0.002@1.0097 eta=0.0005@1.0100
+[11:11:39] headroom low: 0.26 GB <= 6.0 GB, waiting...
+[11:11:49] headroom low: 0.48 GB <= 6.0 GB, waiting...
+[11:11:59] headroom low: 0.80 GB <= 6.0 GB, waiting...
+[11:12:09] headroom low: 2.12 GB <= 6.0 GB, waiting...
+[11:12:19] headroom OK: ullAvailPageFile=7.64 GB, ullAvailPhys=7.10 GB (need > 6.0 GB)
+[11:12:19] class k4_13: k=4 N=7 m=8 threshold=21 + beta*8
+[11:12:19] catalog |S|=525 {"n_placements": 525, "imported": 525, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 0.0, "m_histogram": {"0": 36, "1": 64, "2": 342, "3": 83}}
+[11:12:20] disjoint pairs: 62811 (m2>0: 2919)
+[11:12:24] family L0 eta=0.05 rhs=1.0000: raw=57193 distinct=13914 maximal=2733 (edge-int 0 kept of 0, skipped=True) depth mean 73.1 max 138 (4.3s)
+[11:12:28] family L1 eta=0.02 rhs=1.0061: raw=57193 distinct=14698 maximal=2662 (edge-int 0 kept of 0, skipped=True) depth mean 86.0 max 157 (4.5s)
+[11:12:33] family L2 eta=0.008 rhs=1.0085: raw=57193 distinct=15137 maximal=2699 (edge-int 0 kept of 0, skipped=True) depth mean 91.4 max 163 (4.5s)
+[11:12:38] family L3 eta=0.002 rhs=1.0097: raw=57193 distinct=15325 maximal=2726 (edge-int 0 kept of 0, skipped=True) depth mean 94.6 max 165 (4.7s)
+[11:12:42] family L4 eta=0.0005 rhs=1.0100: raw=57193 distinct=15311 maximal=2732 (edge-int 0 kept of 0, skipped=True) depth mean 95.3 max 167 (4.6s)
+[11:12:42] headroom low: 4.21 GB <= 6.0 GB, waiting...
+[11:12:52] headroom low: 3.50 GB <= 6.0 GB, waiting...
+[11:13:02] headroom low: 2.14 GB <= 6.0 GB, waiting...
+[11:13:12] headroom low: 1.11 GB <= 6.0 GB, waiting...
+[11:13:22] headroom low: 1.47 GB <= 6.0 GB, waiting...
+[11:13:32] headroom OK: ullAvailPageFile=10.24 GB, ullAvailPhys=5.87 GB (need > 6.0 GB)
+[11:13:33] dual-seed seed_md8.json: 1695 rows pushed (cap 500)
+[11:13:34] dual-seed seed_md7.json: 180 rows pushed (cap 500)
+[11:13:36] dual-seed seed_md5.json: 592 rows pushed (cap 500)
+[11:13:37] dual-seed pair_dual_k4_13_a71cg.json: 2458 rows pushed (cap 500)
+[11:13:38] dual-seed pair_dual_k4_13eta001.json: 1249 rows pushed (cap 500)
+[11:13:40] seed rows=2526 nnz=23411777 cols=62811
+[11:22:35] r1: value=21.437096 excess=0.840017 lvl_relmax=1.2807,1.8094,1.8239,1.8394,1.8400 viol=300 supz=461 rows=8700 nnz=23411777 purged=0 (lp 533.1s, tot 542s)
+[11:22:35] r1: W2=21.267488 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[11:22:35] nnz/row cap at round 1 (nnz=24664048 rows=9000)
+[11:31:40] full: FINAL ipm/on rows=9000 -> HighsModelStatus.kOptimal value=21.322095 n_ub=0 (543s)
+[11:31:40] full duals: W2=21.152697 priced=21.322095 (LP value 21.322095) hist={"0.05": {"n": 11, "mass": 0.511737}, "0.02": {"n": 73, "mass": 5.65139}, "0.008": {"n": 165, "mass": 8.703236}, "0.002": {"n": 177, "mass": 5.154052}, "0.0005": {"n": 51, "mass": 1.132282}}
+[11:31:40] RESULT: LP value(full)=21.322095 value(emitted)=21.322095 W2=21.152697 thr=21 -> OVER converged=False excess=0.8400168346602297 hist={"0.05": {"n": 11, "mass": 0.511737}, "0.02": {"n": 73, "mass": 5.65139}, "0.008": {"n": 165, "mass": 8.703236}, "0.002": {"n": 177, "mass": 5.154052}, "0.0005": {"n": 51, "mass": 1.132282}}
+[11:31:40] dumped 477 atoms (W2=21.152953) depth hist {"0.05": {"n": 11, "mass": 0.511744}, "0.02": {"n": 73, "mass": 5.651429}, "0.008": {"n": 165, "mass": 8.703325}, "0.002": {"n": 177, "mass": 5.154147}, "0.0005": {"n": 51, "mass": 1.132308}} -> C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\pair_primal_k4_13_b0_md9.json
+[11:31:40] wrote C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\pairlp413m_k4_13_md9.json (1200.5s)

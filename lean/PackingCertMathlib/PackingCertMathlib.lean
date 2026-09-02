@@ -13,6 +13,10 @@ import PackingCertMathlib.CaseHyp
 import PackingCertMathlib.CaseBridge
 import PackingCertMathlib.CaseData506
 import PackingCertMathlib.CaseK506
+import PackingCertMathlib.AliveChecker
+import PackingCertMathlib.AliveBridge
+import PackingCertMathlib.AliveDataTrump5
+import PackingCertMathlib.AliveDataTrump5K
 import PackingCertMathlib.MeasurePy
 import PackingCertMathlib.MeasurePyBridge
 import PackingCertMathlib.ParamChecker
@@ -28,4 +32,15 @@ import PackingCertMathlib.Measure382Check
 import PackingCertMathlib.Measure382
 import PackingCertMathlib.Band
 import PackingCertMathlib.Trump11
+import PackingCertMathlib.CidlPoly
+import PackingCertMathlib.CidlGen
+import PackingCertMathlib.CidlData
+import PackingCertMathlib.CidlCheck
+import PackingCertMathlib.CidlBridge
 import PackingCertMathlib.TopLevel
+import PackingCertMathlib.Census
+import PackingCertMathlib.CensusCorpus
+import PackingCertMathlib.CensusCheck
+import PackingCertMathlib.CensusSelection
+import PackingCertMathlib.D4Wlog
+import PackingCertMathlib.UniqueChain

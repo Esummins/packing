@@ -8,6 +8,11 @@ import PackingCertMathlib.MeasurePyBridge
 import PackingCertMathlib.ParamK506
 import PackingCertMathlib.Selection
 import PackingCertMathlib.Zones
+import PackingCertMathlib.AliveDataTrump5K
+import PackingCertMathlib.CensusCheck
+import PackingCertMathlib.CensusSelection
+import PackingCertMathlib.D4Wlog
+import PackingCertMathlib.UniqueChain
 #print axioms PackingCert.disjoint_of_strictlyBelow
 #print axioms PackingCert.checkPackingCCW_sound
 #print axioms PackingCert.aff_sqdist
@@ -66,3 +71,51 @@ import PackingCertMathlib.Zones
 #print axioms PackingCert.S11.zone_assign_bijective
 #print axioms PackingCert.S11.core_meet_same_square
 #print axioms PackingCert.S11.M1_transfer
+-- A78 T2 (CIDL-LEAN): the (c-idl) replay and the discharged identity
+#print axioms PackingCert.Cidl.cidl_identity
+#print axioms PackingCert.Cidl.cidl_octic_canonical
+#print axioms PackingCert.Cidl.cidl_gate_e
+#print axioms PackingCert.Cidl.cidl_gate_delta
+#print axioms PackingCert.Cidl.octic_zero_of_generators
+#print axioms PackingCert.S11.shatA22_eq_shat
+#print axioms PackingCert.S11.trump_packs_at_shat
+-- A78 T1/T4 (census definition, D4, selection interface, chain): all propext/choice/Quot.sound
+#print axioms PackingCert.S11.skeleton_mem_census
+#print axioms PackingCert.S11.exists_class_skeleton
+#print axioms PackingCert.S11.containsPins_skeleton
+#print axioms PackingCert.S11.skeleton_card_le
+#print axioms PackingCert.S11.d4_packing
+#print axioms PackingCert.S11.d4Apply_slotCentre
+#print axioms PackingCert.S11.skeleton_d4
+#print axioms PackingCert.S11.class_kill
+#print axioms PackingCert.S11.trumpPins_isCensusTuple
+#print axioms PackingCert.S11.card_lt_teleport
+#print axioms PackingCert.S11.exists_kmax_skeleton
+#print axioms PackingCert.S11.cc2_stuck_census
+#print axioms PackingCert.S11.cc2_two_meeters_census
+#print axioms PackingCert.S11.d4_cover_zone
+#print axioms PackingCert.S11.d4_wlog
+#print axioms PackingCert.S11.exists_stratum
+#print axioms PackingCert.S11.stratify
+#print axioms PackingCert.S11.unique_transfer
+#print axioms PackingCert.S11.isCtrSym_d4Apply
+#print axioms PackingCert.S11.unique_via_chain
+#print axioms PackingCert.S11.s_eleven_unique_of_chain
+-- A78 T1 census counts / A72 cross-check (native_decide each)
+#print axioms PackingCert.S11.censusL_length
+#print axioms PackingCert.S11.classCodes_length
+#print axioms PackingCert.S11.census_eq_corpus
+#print axioms PackingCert.S11.census_d4_closed
+#print axioms PackingCert.S11.corpus_classes_canon
+#print axioms PackingCert.S11.corpus_classes_distinct
+#print axioms PackingCert.S11.trumpPins_eq_corpus
+#print axioms PackingCert.S11.trumpClassIdx_lt
+#print axioms PackingCert.S11.gsq_proj
+#print axioms PackingCert.S11.gsq_disjoint_sep
+#print axioms PackingCert.S11.gap_disjoint
+#print axioms PackingCert.S11.admissible_sound
+#print axioms PackingCert.S11.massIn_sum_disjoint_le
+#print axioms PackingCert.S11.alive_sound_mono
+#print axioms PackingCert.S11.alive_sound
+#print axioms PackingCert.AliveData.check_trump5_alive
+#print axioms PackingCert.S11.trump5_no_case_certificate

@@ -1,0 +1,176 @@
+✖ [3011/3011] Building PackingCertMathlib.CidlBridge (21s)
+trace: .> LEAN_PATH=C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\Cli\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\batteries\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\Qq\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\aesop\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\proofwidgets\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\importGraph\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\LeanSearchClient\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\plausible\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\mathlib\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\lib\lean c:\Users\esumm\.elan\toolchains\leanprover--lean4---v4.34.0-rc1\bin\lean.exe C:\Users\esumm\code\packing\lean\PackingCertMathlib\PackingCertMathlib\CidlBridge.lean -o C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\lib\lean\PackingCertMathlib\CidlBridge.olean -i C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\lib\lean\PackingCertMathlib\CidlBridge.ilean -c C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\ir\PackingCertMathlib\CidlBridge.c --setup C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\ir\PackingCertMathlib\CidlBridge.setup.json --json
+warning: PackingCertMathlib/CidlBridge.lean:116:28: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: PackingCertMathlib/CidlBridge.lean:116:40: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: PackingCertMathlib/CidlBridge.lean:119:28: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: PackingCertMathlib/CidlBridge.lean:119:40: `if_neg` has been deprecated: Use `ite_eq_right` instead
+info: PackingCertMathlib/CidlBridge.lean:121:10: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+error: PackingCertMathlib/CidlBridge.lean:119:8: unsolved goals
+case neg
+m : Mono
+c : ℚ
+p : Poly
+xs : List ℝ
+c₂ : ℚ
+r : List (Mono × ℚ)
+hc : ¬c + c₂ = 0
+⊢ eval ((m, c + c₂) :: r) xs = ↑c * evalM m xs + evalM m xs * ↑c₂ + eval r xs
+warning: PackingCertMathlib/CidlBridge.lean:124:28: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: PackingCertMathlib/CidlBridge.lean:124:39: `if_neg` has been deprecated: Use `ite_eq_right` instead
+error: PackingCertMathlib/CidlBridge.lean:125:10: No goals to be solved
+warning: PackingCertMathlib/CidlBridge.lean:116:28: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [pcons, if_pos hc, eval_cons]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:119:28: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [pcons, if_neg hc, eval_cons]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+error: PackingCertMathlib/CidlBridge.lean:151:62: unsolved goals
+xs : List ℝ
+⊢ evalM [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] xs = 1
+warning: PackingCertMathlib/CidlBridge.lean:152:14: This simp argument is unused:
+  monoZero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [pone, evalM_replicate_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:152:24: This simp argument is unused:
+  evalM_replicate_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [pone, monoZero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:229:29: `if_pos` has been deprecated: Use `ite_eq_left` instead
+info: PackingCertMathlib/CidlBridge.lean:231:6: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+error: PackingCertMathlib/CidlBridge.lean:229:4: unsolved goals
+case pos
+t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S : ℝ
+s : ℕ
+c : ℤ
+cs : List ℤ
+ih : ∀ (k : ℕ), eval (bivAux s k cs) (pt13 t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S) = uniRAux cs k t * S ^ s
+k : ℕ
+hc : c = 0
+⊢ eval ([] ++ bivAux s (1 + k) cs) (pt13 t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S) = uniRAux cs (1 + k) t * S ^ s
+warning: PackingCertMathlib/CidlBridge.lean:232:25: `if_neg` has been deprecated: Use `ite_eq_right` instead
+info: PackingCertMathlib/CidlBridge.lean:234:6: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+error: PackingCertMathlib/CidlBridge.lean:232:4: unsolved goals
+case neg
+t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S : ℝ
+s : ℕ
+c : ℤ
+cs : List ℤ
+ih : ∀ (k : ℕ), eval (bivAux s k cs) (pt13 t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S) = uniRAux cs k t * S ^ s
+k : ℕ
+hc : ¬c = 0
+⊢ ↑↑c * t ^ k * S ^ s + S ^ s * uniRAux cs (1 + k) t = t ^ k * S ^ s * ↑c + S ^ s * uniRAux cs (1 + k) t
+warning: PackingCertMathlib/CidlBridge.lean:229:29: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [bivAux, hc, List.nil_append, ih, uniRAux]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:229:41: This simp argument is unused:
+  List.nil_append
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [bivAux, hc, if_pos rfl, ih, uniRAux]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:229:58: This simp argument is unused:
+  ih
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [bivAux, hc, if_pos rfl, List.nil_append, uniRAux]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:248:27: `if_pos` has been deprecated: Use `ite_eq_left` instead
+info: PackingCertMathlib/CidlBridge.lean:250:6: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+error: PackingCertMathlib/CidlBridge.lean:248:4: unsolved goals
+case pos
+t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S : ℝ
+c : ℤ
+cs : List ℤ
+ih : ∀ (k : ℕ), eval (sAux k cs) (pt13 t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S) = uniRAux cs k S
+k : ℕ
+hc : c = 0
+⊢ eval ([] ++ sAux (1 + k) cs) (pt13 t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S) = uniRAux cs (1 + k) S
+warning: PackingCertMathlib/CidlBridge.lean:251:23: `if_neg` has been deprecated: Use `ite_eq_right` instead
+info: PackingCertMathlib/CidlBridge.lean:253:6: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+error: PackingCertMathlib/CidlBridge.lean:251:4: unsolved goals
+case neg
+t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S : ℝ
+c : ℤ
+cs : List ℤ
+ih : ∀ (k : ℕ), eval (sAux k cs) (pt13 t y4 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 S) = uniRAux cs k S
+k : ℕ
+hc : ¬c = 0
+⊢ ↑↑c * S ^ k + uniRAux cs (1 + k) S = S ^ k * ↑c + uniRAux cs (1 + k) S
+warning: PackingCertMathlib/CidlBridge.lean:248:27: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [sAux, hc, List.nil_append, ih, uniRAux]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:248:39: This simp argument is unused:
+  List.nil_append
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [sAux, hc, if_pos rfl, ih, uniRAux]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:248:56: This simp argument is unused:
+  ih
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [sAux, hc, if_pos rfl, List.nil_append, uniRAux]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:274:19: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: PackingCertMathlib/CidlBridge.lean:281:19: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: PackingCertMathlib/CidlBridge.lean:287:4: Unused tactic linter: `push_cast at hterm hrest` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: PackingCertMathlib/CidlBridge.lean:270:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+Some required targets logged failures:
+- PackingCertMathlib.CidlBridge
+error: build failed
+lakeb: lake build PackingCertMathlib.CidlBridge -> exit 1 in 31.0 s

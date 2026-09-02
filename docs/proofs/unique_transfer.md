@@ -146,3 +146,23 @@ transfer, and it is certifiable by the existing machinery:
 Net effect on the ledger: A.UNIQ's content = {U-O1 (new, executable), U-O2 (= H10, re-based),
 U-O3 (= F6 residue), U-O4 (= existing D/E nodes)}. No other new mathematics is required for
 the uniqueness clause.
+
+## 6 Formalisation (A78, 2026-09-02) — §1 and §2–§4 are Lean theorems
+
+* **§1 is now literal Lean.** With the census a definition (`Census.lean`, F11/H2), the axiom
+  `unique_transfer` of `TopLevel.lean` is a THEOREM (`f = id`, `e = 1`, `z' = z`: every packing
+  at ŝ has a skeleton, `exists_stratum`), and so is `stratify`. The hole is therefore exactly
+  where §1 put it: `stratum_kill`'s ∀-packings quantifier at the K1-protected classes.
+* **§2–§4 are the Lean theorem `unique_via_chain`** (`UniqueChain.lean`): with the two open
+  obligations as explicit hypotheses — `hstuck` (U-O2, H10-stuck: no TELEPORT-STUCK packing
+  at ŝ lies in a non-Trump class; `TeleportStuck` = no CC-2/CC-2′ move available) and `hU`
+  (U-O1, Theorem U as an interface: a packing at ŝ agreeing with a G-image of ẑ in all but
+  one square is a G-image of ẑ) — every packing at ŝ is a G-image of ẑ, from `trump_residual`
+  + `basin` at the stuck endpoint. The chain is a strong induction on `11 − k`
+  (`skeleton_card_le`, `card_lt_teleport`: a CC-2 move raises `k` and changes one square;
+  `teleport_packing`: it stays a packing at ŝ); the `k = 11` base case is stuck because an
+  injective assignment of 11 skeleton slots to 11 squares is onto. `s_eleven_unique_of_chain`
+  is the uniqueness clause obtained WITHOUT `stratum_kill` and WITHOUT `unique_transfer` —
+  the recommended re-split of §4, realised without changing any axiom statement.
+* The H1 degenerate cases are absent by the shape of the statements (A75); double completion
+  is harmless (`Finset.card_lt_card` needs only `old ⊂ new`).

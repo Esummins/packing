@@ -1942,3 +1942,34 @@ affordable cost estimate for closing 3.84.
   headroom gate held; A57/A60/A61/A74 untouched; frozen verifiers untouched; certs/verify_grain.py NEW
   (stdlib, exact, 5 gates) - not TCB. Files: attempts/A76-grain-discharge/*, certs/verify_grain.py,
   docs/proofs/grain_discharge.md, pair_kill.md 6.8, depgraph C.K4TIER note + svg, REGISTRY row.
+
+## 2026-09-02 A78-lean-wave6 (Fable lead; Opus T2/T3/T5) -- done-success
+- T1 F11/H2 DISCHARGED: the Young-form census is a Lean DEFINITION (Census.lean: skeleton s z = per corner the
+  cells whose down-set is occupied by exactly-on-grid axis-aligned squares; all 8 A72 binding choices pinned,
+  B1/B3/B6 THEOREMS; B2 decided combinatorially and proved = the real predicate on ALL of (3,4), so the census
+  is one object on (3,4)). L3 exhaustiveness = theorem skeleton_mem_census (propext/choice/Quot.sound only);
+  CensusCheck.lean (native_decide): 1110 tuples, 163 classes, D4-closed, EXACTLY A72's tuple set AND orbit
+  partition, Trump ((2,1),(1),(1),{}) k=5. D4 action on points/squares/slots/configurations with
+  skeleton_d4 (Simp(g.P) = g.Simp(P)); hface = containsPins_skeleton; Lemma M->E = class_kill; hinc =
+  card_lt_teleport (CensusSelection.lean). B.CENSUS, B.EXACT, B.SEL, C.CC2 -> lean-proved.
+- TopLevel: StratumIdx/trumpStratum/InStratum are DEFINITIONS (computation-free); stratify and unique_transfer
+  are THEOREMS (census exhaustiveness); roster 12 -> 7 named axioms (stratum_kill, trump_residual, basin +
+  the 4 A22 interface axioms). s_eleven_unique depends on exactly basin/stratum_kill/trump_residual/zhat.
+- T2 CIDL-LEAN DISCHARGED (A.UBshat -> lean-proved): Cidl{Poly,Gen,Data,Check,Bridge}.lean replay
+  certs/cidl_identity.json by native_decide (generators REBUILT from A22 conventions; 86728 -> 2682 terms;
+  27 s), sign gates proved STRONGER (e<0, Delta<0 on [3/10,2/5], no Sturm needed); axiom shatA22_eq_shat
+  replaced by a22_exact_structure (A22 certified content only); shatA22_eq_shat is a theorem.
+- T4 A.UNIQ own tier -> lean-proved: unique_via_chain / s_eleven_unique_of_chain (UniqueChain.lean): the
+  CC-2 chain + Theorem U collapse as a strong induction on 11-k, with H10-stuck (U-O2) and Theorem U (U-O1)
+  as explicit hypotheses; the clause WITHOUT stratum_kill. Confirms A63's diagnosis exactly.
+- D.D4 verifier_lean: d4_wlog (D4Wlog.lean) = the WLOG at every side, conditional on root occupancy (D4.5).
+- T3 D.ALIVE verifier_lean: AliveChecker/AliveBridge.lean, alive_sound (PASS => no checkCaseI certificate of
+  that budget); pilot trump5_strict 2.8 s. FINDINGS: F1 obstacles are full pin squares not the cert cores
+  (theorem proved in core-monotone form); F2 admissibility hard-wired at s0; F3 nofams=[] implicit; F4 LOUD:
+  attempts/A57-shadow-trees/results/alive/k5_16_m5.json carries a FALSE LP-UNKILLABLE claim (m=5 < budget 6)
+  - do not cite; trump5_strict.json is the only sound witness file.
+- T5 corpus replays (PackingCertCorpus target, one native_decide theorem per certificate): K61 26/61, TRAP 0/6 (⊂ K61), P1 1/1, THMU 11/11; 38 certificates, all OK; total Lean wall 60.4 min; max k6_08 = 747 s (8 atoms, 343470 boxes); Lean/Python wall ratio median 80×
+- Audit: every new theorem propext/choice/Quot.sound (+ its own native_decide axiom for the check theorems);
+  0 sorryAx; full default target green; Measure382Check cache hit throughout; A57/A60/A61/A76/A77/A79 untouched.
+  Docs: instratum_bridge.md E.5, unique_transfer.md 6, d4_reduction_s0.md D4.5, attainment_ub.md 7.6;
+  lean/README.md; depgraph json+svg (corpus_replayed accent added to the renderer); REGISTRY row.

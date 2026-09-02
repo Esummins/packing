@@ -1,0 +1,23 @@
+✔ [3007/3011] Built PackingCertMathlib.CidlPoly (2.8s)
+✔ [3008/3011] Built PackingCertMathlib.CidlGen (224s)
+✔ [3009/3011] Built PackingCertMathlib.CidlData (224s)
+✔ [3010/3011] Built PackingCertMathlib.CidlCheck (30s)
+✖ [3011/3011] Building PackingCertMathlib.CidlBridge (35s)
+trace: .> LEAN_PATH=C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\Cli\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\batteries\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\Qq\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\aesop\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\proofwidgets\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\importGraph\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\LeanSearchClient\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\plausible\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\packages\mathlib\.lake\build\lib\lean;C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\lib\lean c:\Users\esumm\.elan\toolchains\leanprover--lean4---v4.34.0-rc1\bin\lean.exe C:\Users\esumm\code\packing\lean\PackingCertMathlib\PackingCertMathlib\CidlBridge.lean -o C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\lib\lean\PackingCertMathlib\CidlBridge.olean -i C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\lib\lean\PackingCertMathlib\CidlBridge.ilean -c C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\ir\PackingCertMathlib\CidlBridge.c --setup C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\ir\PackingCertMathlib\CidlBridge.setup.json --json
+error: PackingCertMathlib/CidlBridge.lean:138:8: No goals to be solved
+warning: PackingCertMathlib/CidlBridge.lean:165:40: This simp argument is unused:
+  monoZero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [pone, eval_cons, eval_nil, evalM_replicate_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/CidlBridge.lean:304:19: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: PackingCertMathlib/CidlBridge.lean:311:19: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: PackingCertMathlib/CidlBridge.lean:317:4: Unused tactic linter: `push_cast at hterm` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+Some required targets logged failures:
+- PackingCertMathlib.CidlBridge
+error: build failed
+lakeb: lake build PackingCertMathlib.CidlBridge -> exit 1 in 302.5 s

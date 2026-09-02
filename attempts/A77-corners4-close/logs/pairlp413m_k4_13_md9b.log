@@ -1,0 +1,33 @@
+[11:56:15] A74 mixed-depth LP: cls=k4_13 beta=0 levels=eta=0.05@1.0000 eta=0.02@1.0061 eta=0.008@1.0085 eta=0.002@1.0097 eta=0.0005@1.0100
+[11:56:15] headroom OK: ullAvailPageFile=12.57 GB, ullAvailPhys=10.69 GB (need > 6.0 GB)
+[11:56:15] class k4_13: k=4 N=7 m=8 threshold=21 + beta*8
+[11:56:15] catalog |S|=525 {"n_placements": 525, "imported": 525, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 0.0, "m_histogram": {"0": 36, "1": 64, "2": 342, "3": 83}}
+[11:56:15] disjoint pairs: 62811 (m2>0: 2919)
+[11:56:19] family L0 eta=0.05 rhs=1.0000: raw=57193 distinct=13914 maximal=2733 (edge-int 0 kept of 0, skipped=True) depth mean 73.1 max 138 (3.5s)
+[11:56:23] family L1 eta=0.02 rhs=1.0061: raw=57193 distinct=14698 maximal=2662 (edge-int 0 kept of 0, skipped=True) depth mean 86.0 max 157 (3.9s)
+[11:56:26] family L2 eta=0.008 rhs=1.0085: raw=57193 distinct=15137 maximal=2699 (edge-int 0 kept of 0, skipped=True) depth mean 91.4 max 163 (3.4s)
+[11:56:30] family L3 eta=0.002 rhs=1.0097: raw=57193 distinct=15325 maximal=2726 (edge-int 0 kept of 0, skipped=True) depth mean 94.6 max 165 (3.6s)
+[11:56:33] family L4 eta=0.0005 rhs=1.0100: raw=57193 distinct=15311 maximal=2732 (edge-int 0 kept of 0, skipped=True) depth mean 95.3 max 167 (3.6s)
+[11:56:33] headroom OK: ullAvailPageFile=10.10 GB, ullAvailPhys=10.72 GB (need > 6.0 GB)
+[11:56:34] dual-seed seed_md8.json: 1695 rows pushed (cap 500)
+[11:56:35] dual-seed seed_md7.json: 180 rows pushed (cap 500)
+[11:56:35] seed rows=681 nnz=6879985 cols=62811
+[11:57:41] r1: value=21.593856 excess=0.899685 lvl_relmax=1.4263,1.7100,1.8065,1.8736,1.8997 viol=400 supz=335 rows=2556 nnz=6879985 purged=0 (lp 63.9s, tot 67s)
+[11:57:41] r1: W2=21.424307 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[11:59:03] r2: value=21.424620 excess=0.558550 lvl_relmax=1.2933,1.4173,1.4479,1.5408,1.5585 viol=400 supz=373 rows=2956 nnz=8857970 purged=0 (lp 81.0s, tot 150s)
+[11:59:03] r2: W2=21.252077 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:00:45] r3: value=21.314446 excess=0.485527 lvl_relmax=1.1730,1.2900,1.4170,1.4797,1.4855 viol=400 supz=413 rows=3340 nnz=10164215 purged=0 (lp 100.6s, tot 252s)
+[12:00:45] r3: W2=21.140749 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:02:49] r4: value=21.271223 excess=0.495856 lvl_relmax=1.1946,1.4317,1.4714,1.4764,1.4959 viol=400 supz=438 rows=1838 nnz=6339979 purged=1898 (lp 122.1s, tot 376s)
+[12:02:49] r4: W2=21.098285 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:03:29] r5: value=21.240098 excess=1.108274 lvl_relmax=1.2971,1.7261,1.9464,2.0786,2.1083 viol=400 supz=451 rows=2238 nnz=7682635 purged=0 (lp 37.9s, tot 416s)
+[12:03:29] r5: W2=21.067376 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:04:36] r6: value=21.240098 excess=0.539055 lvl_relmax=1.1390,1.2441,1.3183,1.4190,1.5391 viol=400 supz=458 rows=2638 nnz=9458436 purged=0 (lp 65.0s, tot 482s)
+[12:04:36] r6: W2=21.067376 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:06:08] r7: value=21.212139 excess=0.414948 lvl_relmax=1.0919,1.2342,1.2858,1.3965,1.4149 viol=400 supz=495 rows=3038 nnz=11118417 purged=0 (lp 90.9s, tot 575s)
+[12:06:08] r7: W2=21.040334 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:09:13] r8: value=21.197013 excess=0.280694 lvl_relmax=1.0622,1.1100,1.1691,1.2535,1.2807 viol=400 supz=534 rows=2001 nnz=7416889 purged=1431 (lp 181.9s, tot 760s)
+[12:09:13] r8: W2=21.024712 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:11:05] r9: value=21.169589 excess=0.686850 lvl_relmax=1.1988,1.4990,1.5852,1.6869,1.6863 viol=374 supz=501 rows=2397 nnz=8882139 purged=0 (lp 109.8s, tot 872s)
+[12:11:05] r9: W2=20.997384 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:11:53] non-optimal LP status HighsModelStatus.kTimeLimit at round 10

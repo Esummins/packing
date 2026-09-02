@@ -97,6 +97,29 @@ theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved from exactly t
   corridor), `cc2_stuck` / `cc2_two_meeters` conditional on the census interface `hinc`
   (F11/H2, the same debt as `hface`); the H1 degenerate cases are absent in the teleport
   form by the shape of the statement.
+**Discharged by A78 (2026-09-02, Lean wave 6) — roster 12 → 7 named axioms:**
+* **The Young-form census is a Lean DEFINITION (F11/H2)** (`Census.lean`; counts and A72
+  cross-check `CensusCheck.lean`, corpus literal `CensusCorpus.lean`): `skeleton s z`,
+  `censusL` (1110), `classCodes` (163), the D4 action; L3 exhaustiveness is the theorem
+  `skeleton_mem_census` at every side `s ∈ (3,4)`; `StratumIdx` / `trumpStratum` /
+  `InStratum` are definitions.  `hface` (`containsPins_skeleton`) and Lemma M→E
+  (`class_kill`) are theorems; `skeleton_d4` is the D4 equivariance.
+* **`stratify` and `unique_transfer` are THEOREMS** (census exhaustiveness); the honest
+  chain + Theorem U route is `unique_via_chain` / `s_eleven_unique_of_chain`
+  (`UniqueChain.lean`, H10-stuck and Theorem U as explicit hypotheses).
+* **`hinc` discharged** (`CensusSelection.lean`: `card_lt_teleport`; `cc2_stuck_census`,
+  `exists_kmax_skeleton` unconditional).
+* **`shatA22_eq_shat` is a THEOREM** (CIDL-LEAN: `Cidl*.lean` replay
+  `certs/cidl_identity.json` by `native_decide`, generators rebuilt from A22's conventions,
+  sign gates `e, Δ < 0` on `[3/10, 2/5]`); the new interface axiom `a22_exact_structure`
+  carries only A22's certified content.
+* **The D4 reduction (D.D4) is the theorem `d4_wlog`** (`D4Wlog.lean`).
+* **`alivewitness` has a Lean checker + soundness theorem** (`AliveChecker.lean`,
+  `AliveBridge.lean`: PASS ⟹ no case-LP certificate of that budget passes `checkCaseI`).
+* **Fixed corpora replayed** (`PackingCertMathlib/Corpus/`, separate lake target
+  `PackingCertCorpus`, generator `lean/gen_corpus_lean.py`): C.K61 (61), D.TRAP (6 ⊂ K61),
+  D.P1 (1), A.THMU (11) — one `native_decide` theorem per certificate; timings in
+  `attempts/A78-lean-wave6/results/t5_timings.jsonl`.
 Each axiom's docstring records the lab artefact meant to discharge it and its status; the
 ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, updated by
 `attempts/A63-hole-closure/notes/findings.md` (bridge lemmas now in `docs/proofs/`).
@@ -128,6 +151,13 @@ ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, u
 | `PackingCert.S11.centre_separation`, `zone_assign_bijective`, `core_meet_same_square`, `M1_transfer` | `PackingCertMathlib/Zones.lean` | **D.N1 / C.T5T11 / C.M1**: centre separation + zone-assignment collapse; the T5/T11 logic rules; single-corner transfer down the window | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.exists_kmax`, `teleport_packing`, `cc2_stuck` | `PackingCertMathlib/Selection.lean` | **B.SEL / C.CC2**: k-maximal selection; the CC-2 exchange preserves the packing; teleport-stuckness conditional on the census interface `hinc` | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.theta_lipschitz`, `sub_le_theta`, `corner_perturb`, `rBasin_gate_*` | `PackingCertMathlib/ThetaT.lean` (+ `TopLevel.lean`) | **θ↔t transfer (E.COORD)**: `|Δt| ≤ |Δθ| ≤ 2|Δt|`; corner motion ≤ `r_c + √2·r_t`; the two rBasin gates | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.skeleton_mem_census`, `exists_class_skeleton`, `containsPins_skeleton`, `skeleton_card_le`, `skeleton_d4`, `d4_packing`, `class_kill` | `PackingCertMathlib/Census.lean` | **the Young-form census (B.CENSUS/B.EXACT, F11)**: every packing at `s ∈ (3,4)` has its skeleton in the census; exact ⟹ contains; `k ≤ 11`; D4 equivariance; Lemma M→E | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.censusL_length`, `classCodes_length`, `census_eq_corpus`, `census_d4_closed`, `corpus_classes_canon` | `PackingCertMathlib/CensusCheck.lean` | **1110 / 163, D4-closed, = A72's tuple set and orbit partition** | + one `native_decide` axiom each |
+| `PackingCert.S11.card_lt_teleport`, `exists_kmax_skeleton`, `cc2_stuck_census` | `PackingCertMathlib/CensusSelection.lean` | **B.SEL / C.CC2 unconditional**: a teleport of a non-simple square onto a completable slot raises `k`; selection; CC-2/CC-2′ | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.stratify`, `unique_transfer` | `PackingCertMathlib/TopLevel.lean` | **were axioms**: from census exhaustiveness (`exists_stratum`) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.unique_via_chain`, `s_eleven_unique_of_chain` | `PackingCertMathlib/UniqueChain.lean` | **the uniqueness clause via CC-2 chain + Theorem U** (H10-stuck, Theorem U as hypotheses) | `+ basin, trump_residual, zhat` |
+| `PackingCert.S11.d4_cover_zone`, `d4_wlog` | `PackingCertMathlib/D4Wlog.lean` | **the D4 reduction (D.D4)** at every side, conditional on root occupancy | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.Cidl.cidl_identity`, `octic_zero_of_generators`; `PackingCert.S11.shatA22_eq_shat` | `PackingCertMathlib/Cidl{Check,Bridge}.lean`, `TopLevel.lean` | **CIDL-LEAN**: the (c-idl) identity + sign gates replayed; `ŝ_A22 = ŝ` a theorem from `a22_exact_structure` | + the three CIDL `native_decide` axioms (+ `a22_exact_structure, shatA22, zhat`) |
 
 `Band.lean` proves the A26.1 family with an *arbitrary* separating direction, hence band width
 `27/25 = 1.08` rather than A26's `1`; see `attempts/A28-lean-batch/notes.md` §3, which also records

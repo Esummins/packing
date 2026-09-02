@@ -260,3 +260,17 @@ content — ∃ (t̂, ŷ4, …, ŝ_A22) with all G_j = 0, t̂ ∈ [3/10, 2/5],
 ŝ_A22 ∈ [3.877083, 3.877084], and `CfgPacking shatA22 zhat` — then `shatA22_eq_shat`
 becomes a THEOREM via `shat_spec`. Zero new mathematics; pure engineering. Until
 then the axiom stands with this certificate as its documented backing.
+
+### 7.6 [T] CIDL-LEAN DISCHARGED (A78 T2, 2026-09-02)
+
+`lean/PackingCertMathlib/PackingCertMathlib/{CidlPoly,CidlGen,CidlData,CidlCheck,CidlBridge}.lean`
+(+ `lean/gen_cidl_lean.py`): the 13 generators are REBUILT in Lean from A22's
+`HALF`/`NHAT`/`frame`/`row_wall`/`row_edge`/`ROWSPEC` (byte-for-byte the construction of
+`verify_cidl.py`), the identity [I] and [O] are `native_decide` facts over ℚ in the isolated
+module `CidlCheck.lean` (27 s), and the sign gates are proved STRONGER than [G]: `e < 0` and
+`Δ < 0` on all of `[3/10, 2/5]` by a monomial interval bound (no Sturm chain needed in Lean).
+`TopLevel.lean`: `shatA22_eq_shat` is a THEOREM; the single new interface axiom
+`a22_exact_structure` asserts exactly (i)–(iii) of §7.5 — `t̂ ∈ [3/10, 2/5]`,
+`ŝ_A22 ∈ [3.877083, 3.877084]`, the 13 generators vanish at `P̂` built from `zhat`'s coordinates
+— i.e. A22's certified content and nothing algebraic. Notes:
+`attempts/A78-lean-wave6/notes/t2_cidl.md`.

@@ -297,6 +297,10 @@ for nid, (x, y) in pos.items():
     if n.get("verifier_lean"):
         out.append(f'<rect x="{x-NW/2+3:.0f}" y="{y-NH/2+3:.0f}" width="{NW-6:.0f}" height="{NH-6}" rx="5" '
                    f'fill="none" stroke="{COLORS["lean-proved"]}" stroke-width="1.4"/>')
+    # gold corner dot: the node's certificate corpus is REPLAYED in Lean (C8, one native_decide
+    # theorem per certificate)
+    if n.get("corpus_replayed"):
+        out.append(f'<circle cx="{x-NW/2+9:.0f}" cy="{y-NH/2+9:.0f}" r="3.5" fill="{COLORS["lean-proved"]}"/>')
     if resolved:
         out.append(f'<text x="{x+NW/2-9:.0f}" y="{y-NH/2+13:.0f}" text-anchor="middle" fill="{COLORS["proved-prose"]}" '
                    f'font-size="13" font-weight="bold">&#10003;</text>')
