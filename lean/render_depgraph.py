@@ -206,8 +206,11 @@ out.append(f'<text x="{lx+26}" y="42">dashed = waiting only on dependencies (out
 lx += 26 + 7 * len("dashed = waiting only on dependencies (outline color = tier of its own finished work)")
 out.append(f'<rect x="{lx+10}" y="31" width="30" height="14" rx="7" fill="#37474f"/>')
 out.append(f'<text x="{lx+25}" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>')
-out.append(f'<text x="{lx+46}" y="42">= attempt working this node now &#183; '
-           f'one wire per source&#8594;row &#183; hover for details</text>')
+out.append(f'<text x="{lx+46}" y="42">= working now</text>')
+lx += 46 + 7 * len("= working now")
+out.append(f'<rect x="{lx+10}" y="32" width="12" height="12" fill="{COLORS["certificate+verifier"]}" fill-opacity="0.13" stroke="{COLORS["certificate+verifier"]}" stroke-width="1.4" rx="2"/>')
+out.append(f'<rect x="{lx+12}" y="34" width="8" height="8" fill="none" stroke="{COLORS["lean-proved"]}" stroke-width="1.2" rx="1"/>')
+out.append(f'<text x="{lx+26}" y="42">gold accent = verifier soundness Lean-proved &#183; hover for details</text>')
 
 for r, t in enumerate(LAYER_TITLES):
     out.append(f'<text x="8" y="{row_y(r) - NH/2 - 8}" font-size="10" fill="#888" font-style="italic">{html.escape(t)}</text>')
@@ -284,9 +287,19 @@ for nid, (x, y) in pos.items():
     note = html.escape(n.get("note", ""))
     status = n["label"] + (" — own work done; waiting on dependencies" if blocked else "")
     out.append(f'<g><title>{html.escape(nid)} — {title}&#10;[{status}]&#10;{note}</title>')
+    resolved = n.get("resolved", False)
+    if resolved:
+        out.append('<g opacity="0.5">')
     out.append(f'<rect x="{x-NW/2:.0f}" y="{y-NH/2:.0f}" width="{NW:.0f}" height="{NH}" rx="7" fill="white"/>')
     out.append(f'<rect x="{x-NW/2:.0f}" y="{y-NH/2:.0f}" width="{NW:.0f}" height="{NH}" rx="7" '
                f'fill="{col}" fill-opacity="0.13" stroke="{stroke_col}" stroke-width="{2.2 if blocked else 1.6}"{node_dash}/>')
+    # gold inner accent: verifier soundness is Lean-proved (PASS => claim is a Lean theorem)
+    if n.get("verifier_lean"):
+        out.append(f'<rect x="{x-NW/2+3:.0f}" y="{y-NH/2+3:.0f}" width="{NW-6:.0f}" height="{NH-6}" rx="5" '
+                   f'fill="none" stroke="{COLORS["lean-proved"]}" stroke-width="1.4"/>')
+    if resolved:
+        out.append(f'<text x="{x+NW/2-9:.0f}" y="{y-NH/2+13:.0f}" text-anchor="middle" fill="{COLORS["proved-prose"]}" '
+                   f'font-size="13" font-weight="bold">&#10003;</text>')
     out.append(f'<text x="{x:.0f}" y="{y-NH/2+15:.0f}" text-anchor="middle" font-weight="bold" fill="{col}">{html.escape(nid)}</text>')
     maxc = max(16, int(NW / 5.9))
     words, lines, cur = n["title"].split(), [], ""
@@ -300,6 +313,8 @@ for nid, (x, y) in pos.items():
         if j == 1 and len(lines) > 2:
             ln = ln[:30] + "…"
         out.append(f'<text x="{x:.0f}" y="{y-NH/2+29+j*12:.0f}" text-anchor="middle" fill="#222">{html.escape(ln)}</text>')
+    if resolved:
+        out.append('</g>')
     owner = n.get("owner")
     if owner:
         cw = 10 + 7 * len(owner)

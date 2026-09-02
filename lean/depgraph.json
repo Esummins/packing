@@ -17,7 +17,9 @@
    "open": "no proof, no certificate; an obligation",
    "blocked_only_flag": "nodes may carry \"blocked_only\": true \u2014 the node's OWN work is done (its statement/composition written or proved) and it is open solely because a dependency is open; rendered with a dashed outline",
    "owner_flag": "nodes may carry \"owner\": \"A<nn>\" - the attempt actively working the node right now; rendered as a chip in the node corner. Remove the field when the attempt closes.",
-   "own_tier_flag": "blocked_only nodes may carry own_tier: the tier of the node OWN work; rendered as the dashed outline color (fill stays open-red until dependencies close)"
+   "own_tier_flag": "blocked_only nodes may carry own_tier: the tier of the node OWN work; rendered as the dashed outline color (fill stays open-red until dependencies close)",
+   "verifier_lean_flag": "a certificate+verifier (blue) node may carry \"verifier_lean\": true \u2014 its verifier SOUNDNESS (PASS => the claim) is a Lean theorem, not just prose; rendered with a gold inner accent. Certificate EVALUATION replay in Lean (native_decide, corpus-wide) is a separate axis, tracked in the note.",
+   "resolved_flag": "a node may carry \"resolved\": true \u2014 its concern is discharged but the node is kept as an audit record (rendered dimmed with a check)."
   },
   "edge_kinds": {
    "uses": "load-bearing dependency: the source cannot be established without the target",
@@ -96,7 +98,8 @@
    "label": "proved-prose",
    "lean_axiom": "stratify (with B.CENSUS)",
    "source": "A53 notes/lemmas.md [S]; A58 notes/theory.md CC-2/CC-2'",
-   "note": "CAVEAT (H1): degenerate slide cases (slide creating a contact mid-way, ties, sigma-changing slides) not written; not in docs/proofs/."
+   "note": "CAVEAT (H1): degenerate slide cases (slide creating a contact mid-way, ties, sigma-changing slides) not written; not in docs/proofs/.",
+   "owner": "A75"
   },
   {
    "id": "B.CENSUS",
@@ -118,7 +121,8 @@
    "title": "Exact-skeleton vs pin-monotone bridge",
    "label": "proved-prose",
    "note": "CLOSED for the certified part (A63): exactly => contains is reflexivity + D4 bookkeeping; the certificate's monotone form is strictly stronger. A68: Lean skeleton landed (monotone_to_exact, Skeleton.lean) with the census interface as an explicit hypothesis hface (\"exact class membership => ContainsPins of the class tuple\"); hface becomes a theorem only when the Young census is a Lean definition (F11/H2; D4 equivariance machine-checked computationally by A67 R8). The K1-protected tier is deliberately out of scope - that is H10, target form H10-stuck.",
-   "source": "docs/proofs/instratum_bridge.md (A63): K1 (E.1) + Lemma M->E (E.2) + exact coverage table (E.3)"
+   "source": "docs/proofs/instratum_bridge.md (A63): K1 (E.1) + Lemma M->E (E.2) + exact coverage table (E.3)",
+   "owner": "A75"
   },
   {
    "id": "C.K61",
@@ -126,7 +130,9 @@
    "label": "certificate+verifier",
    "lean_axiom": "stratum_kill (part)",
    "source": "A53/A54/A55(+k3_ext) certs/, verified by verify_case.py at depth 60",
-   "note": "All exact, independently re-verified, corruption-gated. At s0; window coverage tracked at C.WIN."
+   "note": "All exact, independently re-verified, corruption-gated. At s0; window coverage tracked at C.WIN.",
+   "verifier_lean": true,
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
   },
   {
    "id": "C.A57",
@@ -135,14 +141,17 @@
    "lean_axiom": "stratum_kill (part)",
    "source": "attempts/A57-shadow-trees (interior-zone lemma A57-1, depth-2 trees, 25+ kills)",
    "note": "CAVEAT: s0-only (the sub-tree kills have no parametric window form yet); pinguard soundness gate closed the A54 substrat.py gap (H5). A63 SHARPENING (closed_disjoint_bridge B.3): with the library's eps-fat pin cores (margin ~1e-9) an s0-only certificate reaches only a ~4e-10-relative shell below s0, i.e. NO side of [3.82, s-hat]; upgrade = parametric tree or slack-core fixed-side grid (B.4). A63 follow-up: cover-invariance lemma PROVED (docs/proofs/cover_invariance.md) - the parametric route is theory-open; residue = 601 logic-kill C-checks + make_param/verify_param tool gaps + one 4D pass; slack-core grid (delta 1e-2, ~8 days, T21) is the measured alternative; routes compose per leaf. LIVE 2026-09-02: window campaign G1 RUNNING (4-side slack-core grid delta=1e-2 covering [3.81794, s0] with 95%-overlap slabs, V9/E4 gate clean; parametric skip-list as upside; first 4D window-wide PASS achieved on an eps_geo-repaired leaf; est 6.4 desktop-days, 4-5 w/ skip list).",
-   "owner": "A57"
+   "owner": "A57",
+   "verifier_lean": true,
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
   },
   {
    "id": "C.T5T11",
    "title": "Logic-kill rules T5/T11 (+ pinguard semantics)",
    "label": "proved-prose",
    "source": "attempts/A57-shadow-trees/notes/lemmas.md",
-   "note": "H5: the A54 unsoundness is fixed and gated, but the fix is a code invariant + notes, not a standalone lemma document."
+   "note": "H5: the A54 unsoundness is fixed and gated, but the fix is a code invariant + notes, not a standalone lemma document.",
+   "owner": "A75"
   },
   {
    "id": "C.K4TIER",
@@ -158,7 +167,8 @@
    "title": "CC-2/CC-2' exchange (teleport) lemma + clear-corner 2-crowd",
    "label": "proved-prose",
    "source": "attempts/A58-clear-corner/notes/theory.md",
-   "note": "Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it."
+   "note": "Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it.",
+   "owner": "A75"
   },
   {
    "id": "C.WIN",
@@ -173,7 +183,8 @@
    "title": "M1: single-corner pin-sets transfer down the window free",
    "label": "proved-prose",
    "source": "attempts/A56-sparametric/notes/soundness.md",
-   "note": "Covers 4 classes."
+   "note": "Covers 4 classes.",
+   "owner": "A75"
   },
   {
    "id": "C.A61",
@@ -197,21 +208,26 @@
    "title": "N1: zone-assignment collapse (occupancy pigeonhole)",
    "label": "proved-prose",
    "source": "docs/proofs/occupancy_collapse.md",
-   "note": "PROVED; H1-style machine-checked component in exact rationals."
+   "note": "PROVED; H1-style machine-checked component in exact rationals.",
+   "owner": "A75"
   },
   {
    "id": "D.TRAP",
    "title": "Upward trap: all six one-cell Young completions of trump5 certified empty",
    "label": "certificate+verifier",
    "source": "A59 (six k=6 PASS certificates)",
-   "note": "Drain cannot escape upward at s0; window form = A56's six-class ticket (partially open, see C.WIN)."
+   "note": "Drain cannot escape upward at s0; window form = A56's six-class ticket (partially open, see C.WIN).",
+   "verifier_lean": true,
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
   },
   {
    "id": "D.P1",
    "title": "A59-P1: trump5 packings have a square centred in [1.1,2.777]^2",
    "label": "certificate+verifier",
    "source": "A59 pilot",
-   "note": "Exact cert, re-verified depth 60."
+   "note": "Exact cert, re-verified depth 60.",
+   "verifier_lean": true,
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
   },
   {
    "id": "D.LADDER",
@@ -275,7 +291,8 @@
    "id": "E.IV",
    "title": "mpmath.iv validated interval arithmetic",
    "label": "cited",
-   "note": "Third-party library inside the rigidity trust chain (unlike the case-LP chain, which is stdlib-only). Checklist F6: either replay in Lean via t-parametrisation or disclose as Python-interval-only. || A70: checklist F6 option 1 partially executed - the ENTIRE rigidity decision path (A22 recheck + A36 basin) now has a stdlib-only exact replay (theta-frame Taylor enclosures, not yet Lean); mpmath.iv remains only as the historical producer-side tool."
+   "note": "Third-party library inside the rigidity trust chain (unlike the case-LP chain, which is stdlib-only). Checklist F6: either replay in Lean via t-parametrisation or disclose as Python-interval-only. || A70: checklist F6 option 1 partially executed - the ENTIRE rigidity decision path (A22 recheck + A36 basin) now has a stdlib-only exact replay (theta-frame Taylor enclosures, not yet Lean); mpmath.iv remains only as the historical producer-side tool. || RESOLVED at the Python tier 2026-09-03: A70's exact-rational recheckers (a22_recheck_exact.py, a36_check_exact.py) removed mpmath.iv from the rigidity DECISION PATH entirely; the node is retained only as the audit record of the former dependency. Full closure = the Lean rungs (b)/(c) of E.A22/E.A36 (t-frame replay), which are open and do NOT re-introduce mpmath.",
+   "resolved": true
   },
   {
    "id": "E.COORD",
@@ -289,7 +306,8 @@
    "title": "verify_measure.py soundness (+ Lean checkMeasureI evaluation)",
    "label": "proved-prose",
    "source": "certs/verify_measure.py header; lean/PackingCert/PackingCert/MeasureInt.lean",
-   "note": "Exact integer B&B; Lean proves the checker evaluates true (native_decide); soundness argument prose. Two independent implementations EXIST for this family (C3 done here only)."
+   "note": "Exact integer B&B; Lean proves the checker evaluates true (native_decide); soundness argument prose. Two independent implementations EXIST for this family (C3 done here only).",
+   "owner": "A75"
   },
   {
    "id": "V.CASE",
@@ -303,7 +321,8 @@
    "title": "verify_param.py soundness (P0-P7)",
    "label": "proved-prose",
    "source": "attempts/A56-sparametric/notes/soundness.md",
-   "note": "Imports the audited A53 integer core unmodified; new predicates are point->interval widenings (conservative direction argued in prose). Single implementation."
+   "note": "Imports the audited A53 integer core unmodified; new predicates are point->interval widenings (conservative direction argued in prose). Single implementation.",
+   "owner": "A75"
   },
   {
    "id": "X.IL19",
@@ -347,7 +366,9 @@
    "title": "Theorem U: one-square rigidity of z-hat (11 re-insertion certificates)",
    "label": "certificate+verifier",
    "source": "attempts/A65-low-k-closure (certs + results/u_ledger.json), docs/proofs/theorem_u.md",
-   "note": "DISCHARGED AT CERTIFICATE LEVEL (A65, 2026-09-01): 11 re-insertion certificates u_reinsert_00..10 PASS (verify_case depth 60, Sigma w = 0, budget 1) at s''=3877083591023/1e12 with exact side-condition ledger (core margins ~1e-4, nofam-to-basin dev <= 1.0000010e-3 < rBasin); falsifier control FAILs exactly at Trump's pocket. Composition docs/proofs/theorem_u.md: consumes only basin's equality clause (not the open D-nodes). Trust residue: A22 z0/r0 enclosure (mpmath.iv tier) + two dps-80 tilt evals; both vanish under the t-reparametrised A22 re-emission (E.IV)."
+   "note": "DISCHARGED AT CERTIFICATE LEVEL (A65, 2026-09-01): 11 re-insertion certificates u_reinsert_00..10 PASS (verify_case depth 60, Sigma w = 0, budget 1) at s''=3877083591023/1e12 with exact side-condition ledger (core margins ~1e-4, nofam-to-basin dev <= 1.0000010e-3 < rBasin); falsifier control FAILs exactly at Trump's pocket. Composition docs/proofs/theorem_u.md: consumes only basin's equality clause (not the open D-nodes). Trust residue: A22 z0/r0 enclosure (mpmath.iv tier) + two dps-80 tilt evals; both vanish under the t-reparametrised A22 re-emission (E.IV).",
+   "verifier_lean": true,
+   "verifier_lean_note": "verifier soundness (PASS => kill) is the Lean theorem V.CASE (gold); certificate EVALUATION replay in Lean is corpus-wide-pending (C8, one pilot k5_06 done)."
   }
  ],
  "edges": [
