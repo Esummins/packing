@@ -39,8 +39,16 @@
    covering primal had a 0.157 deficit. After the fix the primal's max deficit is -2e-6.
 10. **What is still soft.** Cell-representative point sets are *heuristically complete*: every load
     computed is exact for its point, but maximality over all of [0,s]^2 rests on the construction
-    (vertices + pairwise edge intersections nudged by +-1e-5 in 8 directions), not on a proof. And
-    pricing showed A66's 204-placement support catalog is **not** pair-adequate — 40% of the 1.74M
-    enriched-catalog pair columns have positive reduced cost against the converged dual, so 20.528
-    is that catalog's value, not the enriched catalog's. See `results/k4_13_dual_upper.json` and
-    the `colgen` / `grow_history` blocks of `results/pairlp_k4_13_a71cg.json`.
+    (vertices + pairwise edge intersections nudged by +-1e-5 in 8 directions), not on a proof — and
+    from 304 placements on, the intersection set is subsampled to `--base_cap`, which weakens it
+    further. Pricing also showed A66's 204-placement support catalog is **not** pair-adequate: 40.4%
+    of the 1.74M enriched-catalog pair columns have positive reduced cost against the converged
+    dual (`results/k4_13_dual_upper.json`), so 20.528144 is *that catalog's* value. Column
+    generation was run to measure the gap and was **cut short at session close** during grow 2:
+    204 placements converged to 20.528144; 304 placements bracket to [20.528144, 20.542388]
+    (the 204-optimum stays feasible on any superset catalog, hence a valid lower bound there too);
+    max reduced cost fell 0.957 -> 0.848 and the positive fraction 40.4% -> 16.7%. Enrichment buys
+    about **0.014 per 100 priced placements**, and **every converged or bracketed measurement sits
+    at least 0.457 below the decision line 21**. The enriched 3287-placement value is not
+    established — only bounded below by 20.528144, and still creeping up when the run stopped.
+    See the `colgen` / `grow_history` / `run_truncated` blocks of `results/pairlp_k4_13_a71cg.json`.

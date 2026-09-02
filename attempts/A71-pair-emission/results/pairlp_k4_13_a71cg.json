@@ -47,6 +47,17 @@
    "n_positive": 703807,
    "n_priced_pairs": 1743050,
    "frac_positive": 0.4037790080605835
+  },
+  {
+   "grow": 1,
+   "n_placements": 304,
+   "value": 20.54238840423048,
+   "converged": false,
+   "max_reduced_cost": 0.847571,
+   "n_positive": 291960,
+   "n_priced_pairs": 1743050,
+   "frac_positive": 0.16749949800636815,
+   "recovered_from_log": true
   }
  ],
  "control": null,
@@ -973,5 +984,24 @@
   }
  ],
  "rowstore_rows": 19195,
- "rowstore_nnz": 23001448
+ "rowstore_nnz": 23001448,
+ "catalog_pair_adequate": false,
+ "run_truncated": {
+  "reason": "session close: the column-generation loop was stopped by hand during grow 2",
+  "grows_completed": 2,
+  "grow2_state": "404 placements / 32544 disjoint pairs; the cut loop was at round 19 with value 21.809672 and Lmax 1.402 -- an UNCONVERGED relaxation upper bound still descending (grow 1 was at 22.18 at the same round and finished at 20.542), so it carries no information and is not recorded as a value",
+  "note": "Every CONVERGED or bracketed measurement in this run sits at least 0.45 below the decision line 21 = C(7,2): 204 placements converged to 20.528144 exactly; 304 placements bracket to [20.528144, 20.542388] (the 204-optimum stays feasible when the catalog grows, so it is a valid lower bound for every superset catalog).  Enrichment is worth about 0.014 per 100 priced placements here, and the pricing signal is decaying (max reduced cost 0.957 -> 0.848, positive fraction 40.4% -> 16.7%).  The enriched 3287-placement value is NOT established -- it is bounded below by 20.528144 and was still rising slowly when the run stopped."
+ },
+ "bracket_summary": {
+  "decision_line": 21,
+  "decision_line_meaning": "C(7,2)",
+  "catalog_204_converged_value": 20.52814378038428,
+  "catalog_204_exact_certified_lower": "4103377/200000",
+  "catalog_204_exact_certified_lower_float": 20.516885,
+  "catalog_304_bracket": [
+   20.52814378038428,
+   20.54238840423048
+  ],
+  "below_line_by_at_least": 0.4576115957695201
+ }
 }
