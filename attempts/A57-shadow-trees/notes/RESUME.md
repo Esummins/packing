@@ -233,3 +233,14 @@ scaler fills the rest up to the cap.
 check contains the script name and will match (this cost a scaler twice).  Check
 `logs/scaleup.pid` and confirm that pid is a live `powershell` whose command line lacks
 `-NonInteractive`, or just read the tail of `logs/scaleup.log` for a fresh `scaleup started`.
+
+## attributing processes during a resource investigation
+
+    python code/whose.py --certify-only
+
+Do NOT identify a process by its script name or by "some path in the command line".  The lab
+copies code between campaigns, so one command line can name three campaigns at once: the script
+may be A54's copy, the data and the `--out` target A61's.  Attribute by the **`--out` target**
+(fallback: the data/node argument; script path only as a flagged last resort).  Getting this wrong
+put 11.5 GB on the wrong campaign in T27, and the error was invisible until a single extra tag was
+added to the match list.

@@ -220,13 +220,24 @@ def logline(*x):
 
 # ------------------------------------------------------------------ the kill unit
 def kill(sink, tag, b, cond_boxes, nofams, budget, extra, lp_time=300.0, cert_time=240.0,
-         depth=56, jobs=2):
+         depth=56, jobs=2, pins=None):
     """attempt an exact kill on an attemptable node.  budget 1 -> zero-atom vacuity (no LP);
-    budget >= 2 -> LP + certify.  Returns the record (or the cached one)."""
+    budget >= 2 -> LP + certify.  Returns the record (or the cached one).
+
+    `pins` REPLACES the standard trump5 pin cores (default PINS).  It exists for the slack-core
+    experiments, which re-emit a node with widened pin boxes: passing those as `cond_boxes`
+    instead would ADD five cores on top of the standard five, giving 11 cores at budget 5 and a
+    certificate the verifier rejects as MALFORMED (budget != n - #cores).  That bug invalidated
+    the first slack-core measurement, so the parameter is here to make the mistake unavailable."""
     if sink.has(tag):
         return sink.done[tag]
-    hyp = Hyp(PINS + list(cond_boxes) + [b] if b is not None else PINS + list(cond_boxes),
-              list(nofams))
+    pin_boxes = list(PINS if pins is None else pins)
+    base = pin_boxes + list(cond_boxes)
+    hyp = Hyp(base + [b] if b is not None else base, list(nofams))
+    n_cores = len(hyp.boxes)
+    if 11 - n_cores != budget:
+        raise AssertionError("node %s: budget %d != 11 - #cores %d -- the certificate would be "
+                             "MALFORMED; check pins/cond_boxes" % (tag, budget, n_cores))
     if trump_realizes(hyp, SLOTS):
         rec = dict(tag=tag, verdict="refused (CANARY: Trump-realizable, never certified)",
                    budget=budget, ts=time.strftime("%Y-%m-%d %H:%M:%S"), **extra)

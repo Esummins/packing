@@ -5,3 +5,38 @@ warm pool: 249 atoms (columns only) from ['trump5.json']
   {"tag": "slack0.001_c0_Y0081", "budget": 5, "tau": 3.9999999999971987, "eta": -1.0000000000028013, "converged": true, "lp_s": 518.5, "cert_s": 0.7, "verdict": "FAIL(rc=2)"}
   slack0.001_c0_Y0081: tau=3.9999999999971987 eta=-1.0000000000028013 -> FAIL(eps_geo retries exhausted) -> deepen
 [LP] slack0.001_c0_Y0083 budget=5 cols=251 tl=600.0s
+  {"tag": "slack0.001_c0_Y0083", "budget": 5, "tau": 3.9999999999681144, "eta": -1.0000000000318856, "converged": false, "lp_s": 767.1, "cert_s": 1.0, "verdict": "FAIL(rc=2)"}
+  slack0.001_c0_Y0083: tau=3.9999999999681144 eta=-1.0000000000318856 -> FAIL(eps_geo retries exhausted) -> deepen
+{
+ "delta": 0.001,
+ "pin_core_a": 0.49899996825728415,
+ "rho": "73787054479930880918605157/73786980692884783104003906250",
+ "rho_float": 0.0010000010000008864,
+ "shell_rel": 0.0004000004000003546,
+ "grid_sides": 38,
+ "reaches_m": 3.875533784935811,
+ "budget": 5,
+ "results": [
+  {
+   "tag": "slack0.001_c0_Y0081",
+   "source": "c0_Y0081",
+   "budget": 5,
+   "tau": 3.9999999999971987,
+   "eta": -1.0000000000028013,
+   "verdict": "FAIL(eps_geo retries exhausted) -> deepen",
+   "lp_s": 518.5,
+   "cert_s": 0.7
+  },
+  {
+   "tag": "slack0.001_c0_Y0083",
+   "source": "c0_Y0083",
+   "budget": 5,
+   "tau": 3.9999999999681144,
+   "eta": -1.0000000000318856,
+   "verdict": "FAIL(eps_geo retries exhausted) -> deepen",
+   "lp_s": 767.1,
+   "cert_s": 1.0
+  }
+ ],
+ "eta_law": "A60 measured: certifies iff eta <= -1 (notes/falsifier.md 6)"
+}

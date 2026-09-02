@@ -129,9 +129,11 @@ transfer, and it is certifiable by the existing machinery:
 
 ## 5 Obligations ledger (what remains open for the uniqueness clause)
 
-* **U-O1 [C]** Theorem U's 11 re-insertion certificates: produce + verify at s″ (spec above;
-  bounded compute, new-file-only). Depends on T1's isolating interval (s″ rational above ŝ)
-  and rBasin's concrete value (T5).
+* **U-O1 [DISCHARGED — A65, 2026-09-01]** Theorem U's 11 re-insertion certificates: emitted
+  and verified at s″ = 3877083591023/10¹² (all 11 PASS at depth 60, Σw = 0, plus a falsifier
+  control whose only hole is Trump's own pocket); exact side-condition ledger and the
+  Lemma B-NO + basin composition in `docs/proofs/theorem_u.md`
+  (`attempts/A65-low-k-closure/certs/u_reinsert_*.json`, `results/u_ledger.json`).
 * **U-O2 [C]** H10-stuck: A58's programme, re-based on teleport-stuck (no new mathematics in
   the re-base; the crowd-pricing residue is unchanged and remains THE largest open node).
 * **U-O3 [C]** Window/at-ŝ instantiation of the k5_11/k5_16 kills (s0-only today — see

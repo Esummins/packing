@@ -103,11 +103,63 @@ Secondary guard — commit, not free physical RAM.  Watch the COMMIT charge:
 Pinned workers are light, so ~3 GB of headroom is enough for one more; the pre-T18 6 GB rule was
 calibrated against 20-thread processes and is now over-cautious.  Dead shards are harmless — every
 phase is resumable, so a shard that dies is restarted with the same command line and skips what it
-finished.  Check liveness with
+finished.
 
-    foreach ($f in Get-ChildItem progress\*.pid) { $id=(Get-Content $f).Trim()
-      "{0,-28} pid {1,-7} alive={2}" -f $f.BaseName,$id,
-        ($null -ne (Get-Process -Id $id -ErrorAction SilentlyContinue)) }
+**Do NOT check liveness from the .pid files alone.**  Two ways that lied, both observed here:
+
+1. *PID recycling across a reboot.*  After the 19:08 crash, `progress/cover_j0_s2-4.pid` still
+   held 6300 and `Get-Process -Id 6300` reported alive — 6300 had been reused by `VSSrv.exe`.
+   Every A60 process was in fact dead.
+2. *Matching the wrong string.*  Filtering `CommandLine -like '*A60-trump5-campaign*'` finds
+   nothing, because the launchers pass a RELATIVE script path (`code	ree60.py`) with the
+   attempt directory only in `-WorkingDirectory`.
+
+Check by SCRIPT NAME instead, which is immune to both:
+
+    Get-CimInstance Win32_Process -Filter "Name like 'python%'" |
+      Where-Object { $_.CommandLine -match 'tree60\.py|slackcore60\.py|confine60\.py' } |
+      ForEach-Object {
+        $m = if ($_.CommandLine -match '--shard\s+(\S+)') { "cover shard " + $Matches[1] }
+             elseif ($_.CommandLine -match 'slackcore60') { 'slackcore' } else { 'other' }
+        $pr = Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue
+        "{0,-18} pid {1,-7} threads={2,-3} wsMB={3}" -f $m,$_.ProcessId,$pr.Threads.Count,
+          [int]($pr.WorkingSet64/1MB) }
+
+Stale `.pid` files after a reboot are meaningless; the launchers overwrite their own on start.
+
+**Attributing a shared-filename process to an attempt: use the OUTPUT path, not the name and
+not the script path.**  A60 got this wrong twice in one session, each time more subtly:
+
+1. *By process name* — `certify.py` is copied into every campaign directory, so "the big
+   `certify.py` committers" says nothing about who owns them.  (A57's T27 names this trap.)
+2. *By script path* — the fix "attribute by path" is still not enough, because this lab **copies
+   code between campaigns**: A54's `certify.py` is what A61 runs, exactly as A59's stack was
+   copied into A60.  A command line therefore contains SEVERAL attempt paths, and the first one
+   (the script) is the wrong one.
+
+Measured on the two biggest committers here, which resolve differently under each rule:
+
+    pid 26760  8835 MB   script path A54-stragglers   -->  --out A61-window-stragglers/certs/k5_10.json
+    pid 31932  5555 MB   script path A54-stragglers   -->  --out A61-window-stragglers/certs/k5_05.json
+
+    by script path:  A54 2 procs 14.05 GB  |  A61 2 procs 0.19 GB     <- wrong
+    by output path:  A54 -                 |  A61 4 procs 14.25 GB    <- right (matches A57's audit)
+
+**Rule: attribute by the `--out` target, falling back to the data/node argument; never the script
+path and never the process name.**  The `--jobs 3` in those command lines is a second confirming
+signal — A57 and A60 both certify at `--jobs 1`/`--jobs 2`.
+
+**After any crash, run the integrity sweep before resuming:**
+
+    python code\integrity60.py          # report
+    python code\integrity60.py --fix    # trim torn jsonl tails / quarantine torn json
+
+It checks every `results/*.jsonl` line, every `results/nodes/*.json` (a torn one makes a shard
+crash on resume — `run_child` does a bare `json.load`), every `certs/*.json` **and its `.PASS`
+marker together** (a torn certificate under a PASS marker is a false claim of proof), and reports
+orphan markers.  Quarantines under `crashquarantine/`, never deletes.  After the 19:08 hard crash
+it found **zero** damaged artefacts — appends are whole-line and node/cert writes are
+dump-to-fresh-file, so power loss left nothing half-written.
 
 Child solves use **columns-only** warm starts (`rows=[]`), per A54 W7 / A57 T4.
 

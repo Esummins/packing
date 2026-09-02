@@ -42,8 +42,8 @@ def main(argv=None):
     for p in sorted(glob.glob(os.path.join(RESULTS, "resolve61_*.json"))):
         r = json.load(open(p))
         n = r["name"]
-        if n not in rows:
-            continue
+        if n not in rows or not r.get("verdict"):
+            continue          # in-flight record (no verdict yet): never fold a partial run in
         row = rows[n]
         A = r.get("stageA") or {}
         B = r.get("stageB") or {}

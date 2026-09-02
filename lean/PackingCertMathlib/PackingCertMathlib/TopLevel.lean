@@ -5,6 +5,7 @@ import Mathlib.Order.ConditionallyCompleteLattice.Basic
 import Mathlib.Topology.Instances.Real.Lemmas
 import Mathlib.Tactic
 import PackingCertMathlib.Bridge
+import PackingCertMathlib.Parametrize
 
 /-!
 # The composed optimality theorem for s(11) — formal STATEMENT (A62, checklist item F3)
@@ -51,53 +52,21 @@ noncomputable section
 
 open Set
 
-/-! ## The packing problem, set level -/
+/-! ## The packing problem, set level
 
-/-- The closed container `[0,s]²`. -/
-def container (s : ℝ) : Set RP := Icc (0 : ℝ) s ×ˢ Icc (0 : ℝ) s
-
-/-- A **packing** of `n` unit squares at side `s`: `n` closed unit squares (`IsUnitSquare`,
-from `Bridge.lean`: congruent copies of `[0,1]²`), each contained in the closed container,
-with pairwise disjoint **interiors** (contacts allowed — Trump's packing has 56 of them;
-`Disjoint (Q i) (Q j)` on the closed sets, as in the A28 upper-bound theorem, would be the
-WRONG notion here: it is strictly stronger and does not admit the extremal packing).
-Findings F1. -/
-structure IsPacking (n : ℕ) (s : ℝ) (Q : Fin n → Set RP) : Prop where
-  unit : ∀ i, IsUnitSquare (Q i)
-  contained : ∀ i, Q i ⊆ container s
-  interiorDisjoint : ∀ i j, i ≠ j → Disjoint (interior (Q i)) (interior (Q j))
-
-/-- `n` unit squares fit in `[0,s]²`. Monotone in `s` by construction of `container`. -/
-def Fits (n : ℕ) (s : ℝ) : Prop := ∃ Q : Fin n → Set RP, IsPacking n s Q
+`container`, `IsPacking` and `Fits` live in `PackingCertMathlib/Parametrize.lean` since A64
+(moved there unchanged, same namespace, so the measure bridge can consume them). -/
 
 /-- `s(n)`, as an infimum (checklist S2).  `attained` below is the statement that the
 infimum is a minimum (drain lemma D1). -/
 def sPack (n : ℕ) : ℝ := sInf {s : ℝ | Fits n s}
 
-/-! ## The packing problem, configuration level (tan-half parametrisation) -/
+/-! ## The packing problem, configuration level (tan-half parametrisation)
 
-/-- `cos θ` as a rational function of `t = tan(θ/2)`. -/
-def cosT (t : ℝ) : ℝ := (1 - t ^ 2) / (1 + t ^ 2)
-
-/-- `sin θ` as a rational function of `t = tan(θ/2)`. -/
-def sinT (t : ℝ) : ℝ := 2 * t / (1 + t ^ 2)
-
-/-- A parametrised square: centre `(cx, cy)`, orientation `t = tan(θ/2) ∈ [0,1]`
-(`θ ∈ [0°, 90°]`; `t = 0` and `t = 1` denote the same square set — findings F8). -/
-structure PSq where
-  cx : ℝ
-  cy : ℝ
-  t : ℝ
-
-/-- The unit edge vector `(cos θ, sin θ)` of a parametrised square. -/
-def edir (q : PSq) : RP := (cosT q.t, sinT q.t)
-
-/-- The base corner: centre minus `(e + e⊥)/2`. -/
-def baseCorner (q : PSq) : RP :=
-  (q.cx - (cosT q.t - sinT q.t) / 2, q.cy - (cosT q.t + sinT q.t) / 2)
-
-/-- The closed unit square denoted by a parametrised square (via `Bridge.sqSet`). -/
-def PSq.set (q : PSq) : Set RP := sqSet (baseCorner q) (edir q)
+The configuration layer (`cosT`, `sinT`, `PSq`, `edir`, `baseCorner`, `PSq.set`)
+lives in `PackingCertMathlib/Parametrize.lean` since A64 (moved there unchanged,
+same namespace, so that the parametrisation lemma and the measure bridge can use
+it without importing this statement file). -/
 
 /-- A configuration: 11 parametrised squares — the 33 coordinates
 `(cxᵢ, cyᵢ, tᵢ)` every certificate family speaks about. -/
@@ -235,13 +204,14 @@ def wnd : Set ℝ := Icc (191 / 50 : ℝ) shat
 Hausdorff-limit argument on the configuration representation). -/
 axiom attained : ∃ m, IsLeast {s : ℝ | Fits 11 s} m
 
-/-- **[parametrisation]** Every set-level packing is represented by a configuration: each
-unit square is `PSq.set` of some `(cx, cy, t)` with `t ∈ [0,1]`.  Elementary (every unit
-square is a rotation of an axis-parallel one; `θ ∈ [0°,90°]` suffices; `tan(θ/2)`
-surjects onto `[0,1]`), but load-bearing for every certificate family — it is the same
-lemma the measure-bridge (F2) needs, stated once.  STATUS: unproved prose. -/
-axiom parametrize : ∀ {n : ℕ} {s : ℝ} (Q : Fin n → Set RP), IsPacking n s Q →
-    ∃ z : Fin n → PSq, (∀ i, (z i).t ∈ Icc (0 : ℝ) 1) ∧ ∀ i, Q i = (z i).set
+/-!
+**[parametrisation]** — every set-level packing is represented by a configuration
+(`parametrize`).  DISCHARGED (A64): was an axiom here; now a THEOREM in
+`PackingCertMathlib/Parametrize.lean` (the square's own 90° symmetry `sqSet_rot` brings the
+edge vector into the closed first quadrant, then the half-angle substitution
+`t = e₂/(1+e₁) ∈ [0,1]` is exact algebra — no transcendental functions).
+Prose: `docs/proofs/parametrization.md`.
+-/
 
 /-- **[Theorem 1 — s(11) ≥ 3.82]** STATUS: certificate
 `certs/measure_certificate_3.82.json` + two independent exact verifiers; Lean proves the

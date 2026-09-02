@@ -27,6 +27,12 @@ from run_skel import S0F
 
 S_RAT = "969271/250000"
 
+# T19/T27: cap the verifier fan-out.  verify_case.py spawns an mp.Pool of --jobs workers on top of
+# itself and its parent, and every Python process costs ~628 MB of COMMIT before it does any work.
+# These entry points are not currently in the campaign, but an uncapped --jobs here is exactly how
+# a 3-worker certify reaches 5-9 GB of commit (measured on A61's copies, which lack this cap).
+VERIFY_JOBS_CAP = 1
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -66,7 +72,7 @@ def main():
         if res["tau"] < budget:
             cert = os.path.join(certdir, f"{nid}_eps{e:g}.json")
             cmd = [sys.executable, os.path.join(HERE, "certify.py"), npth, "--s_rat", S_RAT,
-                   "--rounds", str(a.rounds), "--jobs", str(a.jobs), "--depth", str(a.depth),
+                   "--rounds", str(a.rounds), "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)), "--depth", str(a.depth),
                    "--time_limit", str(a.cert_time), "--out", cert, "--scale", "0",
                    "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "64", "--loop_cols"]
             t1 = time.time()

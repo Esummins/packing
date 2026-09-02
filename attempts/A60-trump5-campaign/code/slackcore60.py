@@ -78,11 +78,11 @@ def main():
         r = rows[i]
         b = Box.from_json(r["box"])
         tag = "slack%g_%s" % (a.delta, tg)
-        rec = kill(sink, tag, b, pins, [], budget,
+        rec = kill(sink, tag, b, [], [], budget,
                    dict(kind="YES-cover-slackcore", depth_j=0, pinguard="ok", delta=a.delta,
                         a=float(b.core().a), source_tag=tg, rho=str(rho_pin),
                         shell_rel=float(shell), grid_sides=n_grid),
-                   lp_time=a.lp_time, cert_time=a.cert_time)
+                   lp_time=a.lp_time, cert_time=a.cert_time, pins=pins)
         v = (rec or {}).get("verdict", "?")
         tau = (rec or {}).get("tau")
         eta = None if tau is None else tau - budget

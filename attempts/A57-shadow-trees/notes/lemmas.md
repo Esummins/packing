@@ -745,13 +745,15 @@ the theory lead, and a PASS here would still be conditional on it.
 | leaf | atoms | eta | 4D result, s in [3.82, s0], depth 48, margin 0 | wall |
 |---|---|---|---|---|
 | `k5_11_interior_Y0275` | 4 | -1.000 | **FAIL** — 205550 boxes, 479 s-cells, **0 HOLES**, 8 undecided | **14 s** |
-| `k5_11_interior_Y0377` | 159 | -2.000 | running past 340 s CPU | > 20x the 4-atom leaf |
-| `k5_16_interior_Y0593` | 363 | -0.250 | queued | — |
+| `k5_11_interior_Y0377` | 159 | -2.000 | **NO VERDICT** at the 2400 s cap | **> 2400 s** |
+| `k5_16_interior_Y0593` | 363 | -0.250 | **PASS**, 2348522 boxes, 0 witnesses | **276 s** |
 
 **Two findings already decisive.**
 
-1. **Cost scales steeply with the atom count.**  4 atoms cost 14 s; 159 atoms had not finished at
-   340 s CPU, i.e. > 24x for 40x the atoms.  A57's leaves are mostly small (the NO children carry
+1. **RETRACTED: cost is not monotone in the atom count.**  With only the first two leaves in hand
+   this looked like an atom-count explosion (4 atoms 14 s, 159 atoms no verdict in 2400 s).  The
+   third leaf refutes it: **363 atoms PASSED in 276 s** with 2348522 boxes and zero witnesses.
+   See T24 for what actually predicts the cost.  A57's leaves are mostly small (the NO children carry
    3 atoms, many YES leaves 4-30), but the eps_geo-repaired ones carry 99-363.  A blanket 4D pass
    over ~2300 leaves is therefore dominated by the fat tail, not the median.
 
@@ -834,3 +836,171 @@ takes it toward 4-5.  Honest caveat: side 1 is NOT free -- the ~300 children alr
 delta = 0 carry certificates whose cores are eps-fat, so they must be re-emitted; what carries
 over for free is the accumulated warm-start column pool (G1 started warm at 3522 atoms) and,
 after the C-check, the logic kills.
+
+
+## T24 [M] — 4D cost, final, and what it bounds the skip list to
+
+| leaf | atoms | 4D result, s in [3.82, s0], depth 48, margin 0 | wall |
+|---|---|---|---|
+| `k5_11_interior_Y0275` | 4 | FAIL (0 holes, 8 undecided at s ~ 3.8224) | **14 s** |
+| `k5_11_interior_Y0377` | 159 | **no verdict at the cap** | **> 2400 s** |
+
+So 40x the atoms costs **> 170x** the time.  4D verification is usable only on genuinely small
+leaves, which is exactly why the advisor's "parametric as a skip-list generator, <= 30 atoms, one
+attempt each" is the right shape -- a blanket parametric pass over the corpus was never on.
+
+**What the skip list can reach.**  Over the 198 PASS leaves emitted so far:
+
+    atoms: min 3, median 7, mean 47.2, p90 157, max 602
+    <= 10 atoms: 133 (67 %)   <= 30: 150 (76 %)   <= 50: 157 (79 %)   <= 100: 169 (85 %)
+
+The distribution is strongly bimodal -- a median of 7 against a mean of 47 -- because the
+eps_geo-repaired leaves (T14) carry 99-363 atoms while ordinary ones carry 3-10.  So the <= 30
+cut covers **76 %** of leaves at a cost of seconds each, and the expensive tail is precisely the
+minority that the grid has to do anyway.
+
+**Yield is still unmeasured.**  The single completed 4D run FAILed, and on the naive nearest-wall
+anchoring -- so the fraction of small leaves that PASS in one `--beta-mid` attempt is unknown, and
+the T23 estimate table deliberately brackets it (20 / 30 / 50 %) rather than assuming one.  The
+skip list is upside on a 6.4-desktop-day grid, not a load-bearing part of it.
+
+## T25 [M] — CORRECTION: atom count does not predict 4D cost; ROBUSTNESS does
+
+The third cost-probe leaf refutes T24's first reading, and the refutation is more useful than the
+claim it replaces.
+
+| leaf | atoms | origin | eta | 4D over [3.82, s0] | wall |
+|---|---|---|---|---|---|
+| `k5_11_interior_Y0275` | 4 | ordinary | -1.000 | FAIL (0 holes, 8 undecided at s ~ 3.8224) | 14 s |
+| `k5_11_interior_Y0377` | 159 | ordinary | -2.000 | no verdict at the cap | > 2400 s |
+| `k5_16_interior_Y0593` | **363** | **eps_geo-repaired** | -0.250 | **PASS**, 2348522 boxes, **0 witnesses** | **276 s** |
+
+The **largest** certificate is the one that passed, and it passed comfortably.  So "cost explodes
+with atoms" was an artefact of n = 2 -- I should not have stated it before the third leaf landed.
+
+**Hypothesis (n = 1, stated as a hypothesis).**  What separates Y0593 is not its size but that it
+was repaired with `--eps_geo 0.004` (T14).  eps_geo re-solves with shrunken rows precisely to make
+the measure ROBUST to boundary effects; a robust measure discharges 4D boxes instead of leaving
+them undecided.  Both failures are the undecided-not-uncovered signature (Y0275: 0 holes, 8
+undecided), which is exactly what a non-robust measure produces.  If this holds up, then:
+
+* the right skip-list filter is **"was this leaf eps_geo-repaired?"**, not "does it have <= 30
+  atoms" -- and those are nearly ANTI-correlated, since eps_geo leaves are the fat-atom tail
+  (99-363 atoms) while ordinary leaves are the 3-10 atom bulk;
+* the T24 recommendation to restrict the skip list to <= 30 atoms would have selected almost
+  exactly the wrong subset;
+* a cheap way to manufacture skip-list candidates is to run `--eps_geo` on a leaf *before* the 4D
+  attempt, even when its 3D certificate already passed.
+
+**This is also A57's first 4D PASS over the whole window** -- soundness-conditional on the
+cover-invariance lemma (still with the theory lead), but it demonstrates route (a) is not merely
+affordable on some leaves, it is achievable, and that the skip list has real yield.
+
+**Next measurement to settle it** (cheap, and it decides the skip-list filter): run the 4D pass on
+3-4 more leaves split by origin -- 2 eps_geo-repaired, 2 ordinary of similar atom count -- and see
+whether the PASS/FAIL split tracks origin rather than size.  Until that is done the skip-list
+yield stays bracketed in the T23 estimate rather than assumed.
+
+## T26 — the 19:08 hard stop: no data damage (incident closed)
+
+Kernel-Power 41, BugcheckCode 0, no dump.  PI attributed it to two games running alongside the
+campaigns; **not** a hardware or software fault of A57's, and no cooling investigation followed.
+The 5-worker cap therefore stands.
+
+**Integrity check** (`code/fsck.py`, written for this and kept for the next one).  A hard stop can
+leave a partially written last line in an append-only jsonl or a truncated whole-json.  Result
+across 9 jsonl files and every progress / node / certificate json:
+
+    jsonl_files 9 | jsonl_trimmed 0 | jsonl_would_trim 0 | jsonl_midfile_bad 1 | json_corrupt 0
+
+**Zero crash damage.**  The single malformed line was **my own emitter bug, not the crash**:
+`code/param_cost.sh` substituted an empty `boxes` field on the timeout path, writing
+`...,"verdict":"TIMEOUT/ERR(rc=0)",""}`.  Repaired in place (original in `quarantine/`), the
+emitter fixed, and `fsck` now reports the corpus fully clean.
+
+Why nothing was lost: every writer appends a complete record only after the work it describes is
+finished, so an interrupted child leaves NO record and is simply redone — the same property that
+makes `defer()` safe (T19).  `fsck.py` will only ever trim a malformed **last** line, and copies
+both the file and the offending text to `quarantine/` first; a malformed line anywhere else is
+reported and left for a human, since that is corruption of a different kind.
+
+**The T19 commit gate demonstrably worked during the incident window**, refusing to add load while
+the box was starved:
+
+    19:22:38 commit headroom 3.9 GB < 6 GB: NOT launching (running=3 cap=3)
+
+Resumed cleanly at 19:37 with G1 intact: k5_11 shard 0/6 at done = 4, k5_16 shard 0/6 at done = 9,
+five workers, 28.6 GB commit available.
+
+## T27 [M] — the big committers are NOT A57's; the trims are live
+
+A60 relayed that commit headroom dipped to 2.57 GB with `certify.py` processes at 8.5 and 5.6 GB
+commit, and asked whether A57's T19 trims had been bypassed on the G1 path.  Attributed by
+campaign directory rather than by process name:
+
+| campaign | procs | total commit | biggest certify |
+|---|---|---|---|
+| **A61-window-stragglers** | 4 | **14.24 GB** | **8.63 GB at `--jobs 3`**, 5.42 GB at `--jobs 3` |
+| A57-shadow-trees | 6 | 4.86 GB | **0.84 GB at `--jobs 1`** |
+| other | 12 | 3.13 GB | — |
+| A60-trump5-campaign | 3 | 1.33 GB | 0.49 GB at `--jobs 2` |
+
+**The trims are active and working.**  A57's certify processes run at `--jobs 1` and 0.52-0.84 GB
+of commit; the two multi-gigabyte ones are A61's, at `--jobs 3`.  `A57_CHUNK` is 2e6 by default
+with no env var needed, so it is live in every A57 path including G1's.  A57 is not the dominant
+committer — A61 is, by roughly 3x.
+
+**Why the misattribution was easy — and my first fix was ALSO wrong.**  `certify.py` is copied
+into every campaign directory, so a scan keyed on the *process name* identifies nothing.  My
+repair was "attribute by the path in the command line" — which A60 correctly points out is still
+ambiguous, because **a command line contains several paths naming different campaigns**:
+
+    python ...attempts\A54-stragglers\code\certify.py                 <- SCRIPT (A54's copy)
+           ...attempts\A61-window-stragglersesults
+odes\k5_05.json  <- DATA   (A61's)
+           --out ...attempts\A61-window-stragglers\certs\k5_05.json     <- OUTPUT (A61's)
+
+The two big committers run **A54's** copy of `certify.py` and write **A61's** certificates.  My
+T27 number (A61 11.5 GB) was right **only by luck**: 'A54-stragglers' was not in my tag list, so
+the script path was invisible to the scan and it fell through to the data argument.  Demonstrated:
+
+    T27's scan, A54 not in the tag list  ->  {A61: 11.50, A60: 1.72, A57: 0.78}
+    the SAME scan with 'A54' added       ->  {A54: 11.50, A60: 1.72, A57: 0.78}   <- WRONG
+
+One tag added to a list flips 11.5 GB onto the wrong campaign.
+
+> **Refined rule (A60).  Attribute by the `--out` target; fall back to the data/node argument;
+> use the script path only as a last resort and flag it unreliable.  Never the process name.**
+
+Implemented as `code/whose.py`, verified against the live process table:
+
+    campaign attributed by            commit GB    WS GB
+    A61     --out                         6.08     2.01
+    A61     --out                         5.42     1.97
+    A60     --out                         0.89     0.29
+    A57     --out                         0.52     0.19
+    total: A61 11.50 GB | A60 1.18 GB | A57 0.87 GB
+
+**Fourth instance of one trap class this session** (A60's count), and the shape is always the
+same — *matching on an identifier that is not unique to the thing identified*:
+
+| # | identifier matched | what it actually matched | cost |
+|---|---|---|---|
+| 1 | `scaleup.ps1` in a command line | my own status checks, which mention the script | killed the real scaler; ~1.5 h with no auto-scaling |
+| 2 | same string, inside the single-instance guard | a transient tool session | made genuine scalers exit on sight |
+| 3 | a PID reported as "already running" | a recycled/dead PID | a scaler believed alive was not |
+| 4 | `certify.py`, then *any* path in its command line | a shared filename; then the script's own copy | 11.5 GB attributable to the wrong campaign |
+
+The general remedy: identify a process by **what it is acting on**, not by what it is or where its
+code lives.  For certifiers that is the `--out` target, because a certificate belongs to whoever
+it is written for.
+
+**The lever, for whoever wants it.**  Both trims are one-line changes in a campaign's own copies:
+`--jobs 1` on the certify invocation (verify_case takes its in-process branch and spawns no pool —
+worth ~1.3 GB per concurrent certify at `--jobs 3`), and the `A57_CHUNK` bound on the two oracle
+loops in `lpbox.py` (peak numpy temporaries 80/160 MB -> 16/32 MB; bit-for-bit result-neutral,
+verified in T19).  A61 would gain the most.
+
+Hygiene done here: `ladder57.py` and `epsladder.py` — not currently in the campaign but able to be
+run later — now carry `VERIFY_JOBS_CAP` too.  `ladder.py` and `substrat.py` are unmodified A54
+copies kept for provenance and are never invoked by A57.

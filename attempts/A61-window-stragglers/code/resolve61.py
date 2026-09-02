@@ -68,11 +68,16 @@ A56 = os.path.join(ATT, "A56-sparametric")
 A56C = os.path.join(A56, "code")
 A57C = os.path.join(ATT, "A57-shadow-trees", "code")
 
-# A54's caselp/lpbox are the audited solver of record (A57's copies are byte-identical, but
-# the import order is pinned so that a future A57 edit can never silently change A61's LP).
+# Solver of record: A57's copies of caselp/lpbox.  caselp is byte-identical to A54's; lpbox
+# differs ONLY in the oracle chunk constant (A57 T19: `A57_CHUNK`, env `A57_ORACLE_CHUNK`,
+# default 2e6), which bounds the numpy temporaries in the two oracle loops from 80/160 MB to
+# 16/32 MB.  That edit is result-neutral bit for bit -- each output element is a dot product
+# over the full inner dimension and each iteration writes a disjoint output slice, so only the
+# loop count changes -- and COMMIT, not RAM, is this machine's binding constraint.
+os.environ.setdefault("A57_ORACLE_CHUNK", "2e6")
 sys.path.insert(0, A56C)
-sys.path.insert(0, A57C)
 sys.path.insert(0, A54C)
+sys.path.insert(0, A57C)
 import sweep as SW                                                    # noqa: E402
 from warm57 import merged_warm                                        # noqa: E402
 from caselp import solve_node                                         # noqa: E402
@@ -333,8 +338,11 @@ def main(argv=None):
 
     # ---------------------------------------------------------------- certify (L1 fix)
     cert_out = os.path.join(CERTS, f"{name}.json")
+    # A57 T19: certify at --jobs 1 -- verify_case then takes its IN-PROCESS branch instead of
+    # forking per-job verifiers, saving ~1.3 GB of commit per concurrent certify.  The verifier
+    # result is identical; only the parallel decomposition changes.
     cmd = [sys.executable, os.path.join(A54C, "certify.py"), node_out, "--s_rat", str(S0),
-           "--rounds", str(a.cert_rounds), "--jobs", str(a.jobs), "--depth", str(a.cert_depth),
+           "--rounds", str(a.cert_rounds), "--jobs", "1", "--depth", str(a.cert_depth),
            "--time_limit", str(a.cert_time), "--out", cert_out, "--scale", "0",
            "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "96", "--loop_cols",
            "--eps_geo", str(a.eps_geo), "--no_resolve",          # <-- A61 L1: keep the shrink

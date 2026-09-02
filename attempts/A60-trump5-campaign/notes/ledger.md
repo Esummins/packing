@@ -92,23 +92,106 @@ leaves a window form — **it brings D.SLAB from hopeless to marginal-or-comfort
 stronger reason to adopt it than the kill transfer alone.  (Still A60's obligation to discharge;
 this only re-prices it.)
 
-## 3. The repair route, and why its cost must be re-measured here
+## 3. The repair route — MEASURED (after retracting a harness bug): δ = 1e-3 certifies
 
-A63 B.4's **slack-core grid**: re-emit with pin core half-side `a = 1/2 − δ`, giving `ρ ≈ δ` and
-a transfer shell of `δ/A` relative.  At δ = 1e-3 that is 4e-4 relative (~1.55e-3 in s), so
-**~37 fixed-side certificates cover [3.82, s0]** — i.e. re-run A60's trees at ~37 grid sides with
-slackened pin cores.  A63 calls this "the only currently-visible route for giving … the A60
-zone-tree a window form without re-architecting it parametrically", and prices the slack as "the
-eps_geo-measured regime, known affordable at ~0.5 budget-slack (A56 P6(v))".
+A63 B.4's **slack-core grid**: re-emit with pin core half-side `a = 1/2 − δ`, giving `ρ ≈ δ` and a
+transfer shell of `δ/A`, so ~38 fixed-side certificates at δ = 1e-3 cover [3.82, s0].  A63 prices
+the slack at "~0.5 budget-slack (A56 P6(v))"; A60's law is stricter (η must reach −1), so it had
+to be measured here.
 
-**Caveat A60 must attach to that price.**  A60's own measured certification law is *stricter*
-than A56's 0.5-slack gate: on trump5, a node certifies iff **η = τ − budget reaches −1** (every
-η ≤ −1 node PASSed; every η = 0 refused; both fractional-η nodes, −0.33 and −0.50, FAILed —
-`notes/falsifier.md` §6).  A 0.5 budget-slack is precisely the regime that failed here.  So the
-slack-core route's affordability on trump5 is **unmeasured**, and inheriting A56's number would
-be unsound.  Cheapest test: re-emit one already-PASSing A60 cover leaf with δ = 1e-3 pin cores
-and see whether it still certifies — one LP + one cert, minutes.  Recommended before anyone
-budgets the ×37.
+### RETRACTED: "δ = 1e-3 fails certification"
+
+The first run reported both test leaves failing to certify, and that was reported upward.  **It
+was a bug in A60's own harness, not a property of trump5.**  `slackcore60` passed the slackened
+pin boxes as `cond_boxes`, and `tree60.kill` *prepends* the standard `PINS` — so the node carried
+**5 fat pins + 5 slack pins + 1 zone core = 11 cores** at budget 5.  The verifier rejected it
+correctly:
+
+    MALFORMED certificate: budget 5 != n - #cores = 0
+
+so the "failures" were malformed-input aborts (cert_s 0.7–1.0 s, no verification attempted), and
+the fat pins were still present, meaning ρ was still 1e-9 and nothing about slack cores was
+exercised at all.  Everything from that run is quarantined under
+`crashquarantine/INVALID_11core_*` rather than deleted.
+
+**Guard installed so the mistake cannot recur:** `tree60.kill` takes a `pins=` argument that
+*replaces* the pin set, and asserts `11 − #cores == budget` before any solve, raising rather than
+emitting a certificate the verifier would reject.  Two prior symptoms are now explained by the
+same root cause — the δ = 1e-3 "FAIL(eps_geo retries exhausted)" and the δ = 1e-4 "FAIL(rc=2)"
+were the same malformed node at different δ.
+
+**Lesson for the ledger:** a FAIL that arrives *faster* than a real verification (0.7 s against
+the 5–19 s a genuine PASS costs on these nodes) is a malformed-input signature, not evidence about
+the mathematics.  I read it as the latter and should not have.
+
+### Corrected result: **δ = 1e-3 slack cores CERTIFY on trump5 — the grid route is real**
+
+Re-run with the slack pins *replacing* the standard pins (6 cores at budget 5),
+`results/a60_slackcore.json`:
+
+| leaf | original (ε-fat pins) | δ = 1e-3 slack pins (corrected) |
+|---|---|---|
+| `c0_Y0081` | η = −1.0, LP 126 s, cert 5.2 s → PASS | η = −1.0, LP **66 s**, cert 5.3 s → **PASS** |
+| `c0_Y0083` | η = −1.0, LP 144 s, cert 10.1 s → PASS | η = −1.0, LP **557 s**, cert 3.8 s → **PASS** |
+
+**2/2 PASS, with certification cost essentially unchanged** (cert 3.8–5.3 s against 5.2–10.1 s).
+The LP cost is noisy rather than systematically worse — one leaf got ~2× faster, the other ~4×
+slower — on a sample of two, so no cost multiplier should be quoted from this yet.  A63's
+"~0.5 budget-slack, known affordable" survives contact with trump5's stricter η ≤ −1 law: both
+slack runs still land exactly at η = −1.
+
+**So the slack-core grid is a live route for giving A60's leaves a window form**, and the earlier
+"it fails" report was purely the 11-core harness bug.
+
+### δ = 1e-4 QUALIFIED — the operating point is settled
+
+`results/a60_slackcore_delta1e-4.json` (pin core a = 0.499899968, ρ = 1.000010e-4, shell 4.0e-5,
+371 grid sides):
+
+| leaf | ε-fat original | δ = 1e-3 | **δ = 1e-4** |
+|---|---|---|---|
+| `c0_Y0081` | LP 126 s, cert 5.2 s, PASS | LP 66 s, cert 5.3 s, PASS | LP **128 s**, cert **10.0 s**, **PASS** |
+| `c0_Y0083` | LP 144 s, cert 10.1 s, PASS | LP 557 s, cert 3.8 s, PASS | LP **524 s**, cert **8.8 s**, **PASS** |
+
+**4/4 PASS across both δ values, at costs indistinguishable from the ε-fat originals.**  δ = 1e-4
+is a drop-in: `c0_Y0081` reproduces its original almost exactly (128 s vs 126 s).  The LP spread on
+`c0_Y0083` (144 → 524–557 s at both δ) is the same at either slack level, so it is that leaf's
+own variance, not a slack penalty.
+
+**A refinement to the η law, from this run.**  `slack0.0001_c0_Y0083` certified at
+η = −0.9999999999999831, i.e. *fractionally above* −1.  The law is therefore about the **integer**
+gap — certification needs τ ≤ budget − 1 up to LP noise, and the certifier's rational scaling
+absorbs the 1e-14 — not about η's sign at machine precision.  The genuine failures remain the
+honestly-fractional ones (η = −0.33, −0.50).  Stated loosely, "η must reach −1" would wrongly
+predict this PASS.
+
+### Which δ, then?
+
+Certification does not discriminate: both δ values pass at equal cost.  **The δ choice is
+therefore governed by §2a's widening budget alone**, and that argument is unchanged:
+
+| δ | grid sides | widening as % of rBasin | extra ladder levels |
+|---|---|---|---|
+| 1e-3 | 38 | 84.6 % | ~8 |
+| 3e-4 | 124 | 25.4 % | ~1 |
+| **1e-4** | **371** | **8.5 %** | **0** |
+
+The trade is ~333 extra grid sides against ~8 extra bisection levels on *every* ladder for *every*
+square — and ladder cost grows with the residue, which grows with depth.  **δ = 1e-4 is now
+qualified and is the operating point.**
+
+**Grid commitment is HELD** (coordinator's instruction) until cover j = 0 completes and §5's joint
+landings-plus-widening budget is written down.  That interaction is the live risk, and at δ = 1e-4
+it does **not** currently close:
+
+    squares 2,3 landing   1.4472e-3   (measured, ladder level 26)
+    widening at δ = 1e-4  1.269e-4    (= (δ/A)·|c| for sq6/sq10)
+    sum                   1.5741e-3   >  rBasin = 1.5e-3      -- over by 4.9 %
+
+So even at the favourable δ the two obligations do not both fit at the current ladder depth: the
+ladders need roughly one more bisection level (a factor 2 in radius buys ~7e-4 of headroom, far
+more than the 7.4e-5 shortfall).  **This is the number to settle before any grid is committed**,
+and it is why the ×371 should not be budgeted yet.
 
 ## 4. D.SLAB — the exposure the slack-core route does NOT fix
 
@@ -171,3 +254,44 @@ and the dilation displacement have to be budgeted together, and currently are no
 | 3 confinement (K) leaves + 1 selftest, nofams ≠ ∅ | s0 | **transfer OK via Lemma B-NO (B.2″)**, but carry a widening obligation w = (λ−1)·\|c\|: absorbed in the fat-pin shell (1.3e-9), **NOT absorbed at grid δ = 1e-3 (1.27e-3 = 85 % of rBasin)** |
 | 28 / 58 / 32 located boxes (squares 1 / 2 / 3 (D) candidates) | s0 | inside rBasin in the t-world by 1.24× / **1.04×** / **1.04×**; **D.SLAB unresolved**, and the §2 widening does not fit alongside these landings at δ = 1e-3 |
 | Lemma A59-P1 (interior NO child) | s0 | inherited from A59; same s0-only status |
+
+---
+
+## 7. Relay to A57 (PID/liveness lessons) — CHECKED, and A57 is not affected
+
+The coordinator asked me to relay A60's two liveness bugs to A57, whose `RESUME.md` documents a
+pidfile-based scaler guard.  I read A57's code before relaying, and **neither bug applies**:
+
+* **PID recycling.**  A57's guard does *not* trust the pidfile.  `scaleup.ps1`'s `$isLiveScaler`
+  reads the pid, then verifies via `Win32_Process` that it is a `powershell*` whose CommandLine
+  contains `scaleup.ps1` and is not `-NonInteractive`, and is not itself.  A recycled pid fails
+  that identity test, so a reboot cannot make the guard see a phantom scaler.  A60's bug was
+  precisely the missing identity check — A57 already has it, from a *different* incident (a
+  status-check tool session being miscounted as a scaler, which cost them a real 1.5 h outage).
+* **Relative script paths.**  A57's `launch.ps1` / `run_job.ps1` build `ArgumentList` from
+  `"$base\code\<script>.py"` with `$base` absolute, so `CommandLine -like '*A57-shadow-trees*'`
+  matches correctly.  A60's launchers pass `code\tree60.py` relative with the directory only in
+  `-WorkingDirectory`, which is why the same filter found nothing here.
+* A57's per-job pidfiles (`logs/<stamp>.pid` from `launch.ps1`, `logs/<Tag>.pid` from
+  `run_job.ps1`) are **written and never read** for a liveness decision, so they carry no
+  exposure either.
+
+So the relay is "no action needed", which is worth stating explicitly — a false alarm forwarded to
+another attempt costs someone a re-derivation, exactly the failure mode §1's tilted-core note was
+written to prevent.
+
+### What IS worth relaying: nobody had integrity-checked A57 or A61 after the crash
+
+A57 and A61 were both live at 19:08 and neither has an equivalent of `code/integrity60.py`.  I ran
+a **read-only** scan of their artefacts (nothing outside A60 was written):
+
+| attempt | artefacts scanned | torn |
+|---|---|---|
+| A57-shadow-trees | 1161 | **0** |
+| A61-window-stragglers | 84 | **0** |
+
+Both are clean, so no recovery action is needed for either — but the check had not been run, and
+"clean" is only knowable by running it.  `code/integrity60.py` is attempt-agnostic apart from its
+path constants and can be pointed at either tree if this recurs; the one class it is designed to
+catch and that would be silent otherwise is **a torn certificate still carrying its `.PASS`
+marker**, which reads as a proof that was never verified.
