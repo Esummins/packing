@@ -15,10 +15,10 @@
 <rect x="722" y="32" width="12" height="12" fill="#c62828" rx="2"/>
 <text x="738" y="42">open (9)</text>
 <rect x="818" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>
-<text x="834" y="42">dashed = waiting only on dependencies</text>
-<rect x="1103" y="31" width="30" height="14" rx="7" fill="#37474f"/>
-<text x="1118" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>
-<text x="1139" y="42">= attempt working this node now &#183; one wire per source&#8594;row &#183; hover for details</text>
+<text x="834" y="42">dashed = waiting only on dependencies (outline color = tier of its own finished work)</text>
+<rect x="1439" y="31" width="30" height="14" rx="7" fill="#37474f"/>
+<text x="1454" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>
+<text x="1475" y="42">= attempt working this node now &#183; one wire per source&#8594;row &#183; hover for details</text>
 <text x="8" y="35.0" font-size="10" fill="#888" font-style="italic">top-level theorem (TopLevel.lean)</text>
 <text x="8" y="185.0" font-size="10" fill="#888" font-style="italic">frame: attainment / parametrisation / bounds / uniqueness / bridges</text>
 <text x="8" y="335.0" font-size="10" fill="#888" font-style="italic">stratification layer</text>
@@ -162,9 +162,9 @@
 <g><title>A.LB382 &#8594; A.SBRIDGE (uses)</title><path d="M 618 247 C 618 297 1338 297 1338 247" fill="none" stroke="#666" stroke-width="1.2" opacity="0.7" marker-end="url(#arr)"/></g>
 <g><title>A.UNIQ &#8594; A.THMU (uses)</title><path d="M 1192 247 C 1192 285 1574 285 1574 247" fill="none" stroke="#666" stroke-width="1.2" opacity="0.7" marker-end="url(#arr)"/></g>
 <g><title>A.THMU &#8594; A.S3 (uses)</title><path d="M 1484 247 C 1484 309 764 309 764 247" fill="none" stroke="#666" stroke-width="1.2" opacity="0.7" marker-end="url(#arr)"/></g>
-<g><title>TOP — s(11) = s-hat, equality only for Trump mod G (S1)&#10;[open — own work done; waiting on dependencies]&#10;The composed theorem. Open until every &#x27;open&#x27; descendant below closes.</title>
+<g><title>TOP — s(11) = s-hat, equality only for Trump mod G (S1)&#10;[open — own work done; waiting on dependencies]&#10;The composed theorem. Open until every &#x27;open&#x27; descendant below closes. [own_tier lean-proved: the composition is already a Lean theorem from the axioms]</title>
 <rect x="762" y="43" width="196" height="54" rx="7" fill="white"/>
-<rect x="762" y="43" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6" stroke-dasharray="7,4"/>
+<rect x="762" y="43" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#b8860b" stroke-width="2.2" stroke-dasharray="7,4"/>
 <text x="860" y="58" text-anchor="middle" font-weight="bold" fill="#c62828">TOP</text>
 <text x="860" y="72" text-anchor="middle" fill="#222">s(11) = s-hat, equality only for</text>
 <text x="860" y="84" text-anchor="middle" fill="#222">Trump mod G (S1)</text>
@@ -207,9 +207,9 @@
 <rect x="1018" y="186" width="31" height="14" rx="7" fill="#37474f"/>
 <text x="1034" y="196" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A69</text>
 </g>
-<g><title>A.UNIQ — Uniqueness transfer: EVERY packing at s-hat reaches a stratified representative mod G&#10;[open — own work done; waiting on dependencies]&#10;RE-DIAGNOSED (A63, docs/proofs/unique_transfer.md): the axiom AS STATED follows from census exhaustiveness (A53 L3); the hole moved into stratum_kill&#x27;s forall-packings quantifier at the K1-protected classes. Full architecture on file: CC-2 teleport chain to a stuck packing + stuck-kills (H10-stuck) + residual/basin + COLLAPSE back via Theorem U (node A.THMU). Obligations U-O1..U-O4. A65: U-O1 DISCHARGED (Theorem U certified, docs/proofs/theorem_u.md); remaining: U-O2 (=H10-stuck, see C.K4TIER / docs/proofs/h10_stuck.md), U-O3 (A57 G1), U-O4 (D/E nodes as axiomatised).</title>
+<g><title>A.UNIQ — Uniqueness transfer: EVERY packing at s-hat reaches a stratified representative mod G&#10;[open — own work done; waiting on dependencies]&#10;RE-DIAGNOSED (A63, docs/proofs/unique_transfer.md): the axiom AS STATED follows from census exhaustiveness (A53 L3); the hole moved into stratum_kill&#x27;s forall-packings quantifier at the K1-protected classes. Full architecture on file: CC-2 teleport chain to a stuck packing + stuck-kills (H10-stuck) + residual/basin + COLLAPSE back via Theorem U (node A.THMU). Obligations U-O1..U-O4. A65: U-O1 DISCHARGED (Theorem U certified, docs/proofs/theorem_u.md); remaining: U-O2 (=H10-stuck, see C.K4TIER / docs/proofs/h10_stuck.md), U-O3 (A57 G1), U-O4 (D/E nodes as axiomatised). [own_tier proved-prose: the reduction is prose (unique_transfer.md); formalising the derivation in Lean is still owed even after dependencies close]</title>
 <rect x="1057" y="193" width="180" height="54" rx="7" fill="white"/>
-<rect x="1057" y="193" width="180" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6" stroke-dasharray="7,4"/>
+<rect x="1057" y="193" width="180" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#2e7d32" stroke-width="2.2" stroke-dasharray="7,4"/>
 <text x="1147" y="208" text-anchor="middle" font-weight="bold" fill="#c62828">A.UNIQ</text>
 <text x="1147" y="222" text-anchor="middle" fill="#222">Uniqueness transfer: EVERY</text>
 <text x="1147" y="234" text-anchor="middle" fill="#222">packing at s-hat reaches a…</text>

@@ -16,7 +16,8 @@
    "conjecture": "labelled conjecture/extrapolated/[NUM] in the repo; NOT usable in the proof",
    "open": "no proof, no certificate; an obligation",
    "blocked_only_flag": "nodes may carry \"blocked_only\": true \u2014 the node's OWN work is done (its statement/composition written or proved) and it is open solely because a dependency is open; rendered with a dashed outline",
-   "owner_flag": "nodes may carry \"owner\": \"A<nn>\" - the attempt actively working the node right now; rendered as a chip in the node corner. Remove the field when the attempt closes."
+   "owner_flag": "nodes may carry \"owner\": \"A<nn>\" - the attempt actively working the node right now; rendered as a chip in the node corner. Remove the field when the attempt closes.",
+   "own_tier_flag": "blocked_only nodes may carry own_tier: the tier of the node OWN work; rendered as the dashed outline color (fill stays open-red until dependencies close)"
   },
   "edge_kinds": {
    "uses": "load-bearing dependency: the source cannot be established without the target",
@@ -30,7 +31,8 @@
    "label": "open",
    "blocked_only": true,
    "lean": "PackingCert.S11.s_eleven_eq / s_eleven_unique (statement formal, composition proved from axioms)",
-   "note": "The composed theorem. Open until every 'open' descendant below closes."
+   "note": "The composed theorem. Open until every 'open' descendant below closes. [own_tier lean-proved: the composition is already a Lean theorem from the axioms]",
+   "own_tier": "lean-proved"
   },
   {
    "id": "A.D1",
@@ -86,7 +88,8 @@
    "label": "open",
    "blocked_only": true,
    "lean_axiom": "unique_transfer",
-   "note": "RE-DIAGNOSED (A63, docs/proofs/unique_transfer.md): the axiom AS STATED follows from census exhaustiveness (A53 L3); the hole moved into stratum_kill's forall-packings quantifier at the K1-protected classes. Full architecture on file: CC-2 teleport chain to a stuck packing + stuck-kills (H10-stuck) + residual/basin + COLLAPSE back via Theorem U (node A.THMU). Obligations U-O1..U-O4. A65: U-O1 DISCHARGED (Theorem U certified, docs/proofs/theorem_u.md); remaining: U-O2 (=H10-stuck, see C.K4TIER / docs/proofs/h10_stuck.md), U-O3 (A57 G1), U-O4 (D/E nodes as axiomatised)."
+   "note": "RE-DIAGNOSED (A63, docs/proofs/unique_transfer.md): the axiom AS STATED follows from census exhaustiveness (A53 L3); the hole moved into stratum_kill's forall-packings quantifier at the K1-protected classes. Full architecture on file: CC-2 teleport chain to a stuck packing + stuck-kills (H10-stuck) + residual/basin + COLLAPSE back via Theorem U (node A.THMU). Obligations U-O1..U-O4. A65: U-O1 DISCHARGED (Theorem U certified, docs/proofs/theorem_u.md); remaining: U-O2 (=H10-stuck, see C.K4TIER / docs/proofs/h10_stuck.md), U-O3 (A57 G1), U-O4 (D/E nodes as axiomatised). [own_tier proved-prose: the reduction is prose (unique_transfer.md); formalising the derivation in Lean is still owed even after dependencies close]",
+   "own_tier": "proved-prose"
   },
   {
    "id": "B.SEL",

@@ -202,8 +202,8 @@ for lab, col in COLORS.items():
     out.append(f'<text x="{lx+16}" y="42">{txt}</text>')
     lx += 30 + 7 * len(txt)
 out.append(f'<rect x="{lx+10}" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>')
-out.append(f'<text x="{lx+26}" y="42">dashed = waiting only on dependencies</text>')
-lx += 26 + 7 * len("dashed = waiting only on dependencies")
+out.append(f'<text x="{lx+26}" y="42">dashed = waiting only on dependencies (outline color = tier of its own finished work)</text>')
+lx += 26 + 7 * len("dashed = waiting only on dependencies (outline color = tier of its own finished work)")
 out.append(f'<rect x="{lx+10}" y="31" width="30" height="14" rx="7" fill="#37474f"/>')
 out.append(f'<text x="{lx+25}" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>')
 out.append(f'<text x="{lx+46}" y="42">= attempt working this node now &#183; '
@@ -279,13 +279,14 @@ for nid, (x, y) in pos.items():
     col = COLORS[n["label"]]
     blocked = n.get("blocked_only", False)
     node_dash = ' stroke-dasharray="7,4"' if blocked else ""
+    stroke_col = COLORS.get(n.get("own_tier"), col) if blocked else col
     title = html.escape(n["title"])
     note = html.escape(n.get("note", ""))
     status = n["label"] + (" — own work done; waiting on dependencies" if blocked else "")
     out.append(f'<g><title>{html.escape(nid)} — {title}&#10;[{status}]&#10;{note}</title>')
     out.append(f'<rect x="{x-NW/2:.0f}" y="{y-NH/2:.0f}" width="{NW:.0f}" height="{NH}" rx="7" fill="white"/>')
     out.append(f'<rect x="{x-NW/2:.0f}" y="{y-NH/2:.0f}" width="{NW:.0f}" height="{NH}" rx="7" '
-               f'fill="{col}" fill-opacity="0.13" stroke="{col}" stroke-width="1.6"{node_dash}/>')
+               f'fill="{col}" fill-opacity="0.13" stroke="{stroke_col}" stroke-width="{2.2 if blocked else 1.6}"{node_dash}/>')
     out.append(f'<text x="{x:.0f}" y="{y-NH/2+15:.0f}" text-anchor="middle" font-weight="bold" fill="{col}">{html.escape(nid)}</text>')
     maxc = max(16, int(NW / 5.9))
     words, lines, cur = n["title"].split(), [], ""
