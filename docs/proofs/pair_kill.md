@@ -516,6 +516,95 @@ A66's "reserve, not a lever", now quantified in R. Consequence for the two-front
 fronts do NOT meet in the middle; the basin row's usable window is γ ≲ 0.245 with ≈ +0.4–0.5
 of margin at every reachable R, and the k4 tier's kill remains the emission problem of §6.6.
 
+## 6.9 [M+T] Lemma W‴: the complete-tree growth law, the root-order finding, and the corners4 loop verdict (A77, 2026-09-02)
+
+**Machinery** (`attempts/A77-corners4-close/code/`, emission-side only; frozen verifiers untouched).
+`hintbatch.py` builds a COMPLETE spec-§4 hint tree per root pair: level-synchronous float B&B
+(every box of a level evaluated in one numpy pass over boxes × atoms, atoms pruned per chunk by
+float possibility), cut = the A74 max-min lookahead over the six midpoint cuts (exact
+certain-mass score; a slack-graded "soft" score and the plain widest rule were also measured),
+cuts emitted as short dyadics strictly inside the float-mirrored CLIPPED interval, leaves emitted
+as `null` (the verifier's own clause table discharges them in one step; a COVERED leaf hint buys
+nothing since `verify_hint_leaf` re-runs `eval_node`). Leaf census {COV, EX, ND, VAC, HOLE,
+OPEN}; HOLE = float-possible mass < 1 AND a float-admissible interior-disjoint placement pair on
+the 3×3×3 fractional grid of the box collecting < 1. The float predicates were fuzzed against
+the reference's exact `exc_certain` / `nondisjoint_certain` / `contain_vacuous` (4000 random
+boxes, 0 disagreements), and an exact walk of the emitted trees with the reference's own
+`split_box` / `clip_factor` / `discharge` reproduces the builder's census node for node
+(roots 1,1 and 1,2: 47 092 nodes, 0 cut misses, 0 undischarged leaves). All 41 md8 hole pairs
+re-check exactly (admissible, core-free, interior-disjoint, collected < 1).
+
+**[M] The A74 "converging holes" was a budget artifact.** The Rust `--nodes` is a hard stop of
+the whole search; the stored cap witnesses are a `faildump` sample. Recomputed from the A74
+report counts (leaves = examined − split, undischarged = leaves − discharged): md5 unhinted 2 M
+nodes → 393 k undischarged depth-34 leaves, md8 hinted 1 M nodes → 283 k. The 3000-node/root
+DFS-truncated hint trees ran past `--depth 34` (hinted cut nodes bypass the depth check), so
+every fallback node was already at the cap. "Holes 220 → 57" measured which slice of the tree
+the traversal reached before the stop, not the certificate's residue.
+
+**[M] Lemma W‴ (complete-tree growth law).** Let r(d) = splits(d) / (2·splits(d−1)) be the
+per-level retention (fraction of children still undecided). On the md8 certificate
+(363 atoms, W₂ = 20.95828):
+
+* root 2,11, 1.59 M nodes to depth 25 (rule certain): r(d) = 0.75–0.78 FLAT from d = 14 to 25
+  (0.782, 0.781, 0.775, 0.763, 0.756, 0.757, 0.747, 0.757, 0.762, 0.751, 0.771, 0.783);
+  at d = 26: 475 k open boxes (certain-mass median 0.915, q90 0.979), 3280 holes (d ≥ 20,
+  collecting 0.58–0.83). Rule soft: r = 0.80–0.83 (d = 8–21); rule widest: 0.73–0.89. The law
+  is rule-insensitive. Root 4,6 (rule soft): r = 0.86–0.90, opens median 0.38.
+* all 78 non-exempt roots (58 of 136 root pairs are EXEMPT at the root), cap 60 k/root:
+  2.71 M nodes, 14 roots complete (adjacent-cell roots closed by EXEMPT/NONDISJOINT/VACUOUS at
+  depths 8–50, 92 k nodes), 64 roots at the cap (depth 16–33); aggregate r(d) = 0.85–0.86 over
+  d = 7–14; open-box certain mass median 0.60 (q10 0.17, q90 0.95); 41 holes at median depth 17.
+
+Reading: the frontier grows ×1.5–1.75 per level and the retention does not fall over the
+measured range (box widths 0.72 → ~0.05 per coordinate at d ≈ 25). Coverage needs widths at the
+atom-depth scale of the Lemma W″ profile (70 % of the mass at 0.008–0.02, 25 % at 0.002):
+4–6 more halvings per coordinate, i.e. depth ~40–50, so the complete tree is
+~1.6^20–1.6^25 × (frontier at d = 25) ≈ 10⁹–10¹¹ nodes over the 78 roots. Binding resource
+= tree size (the η-fine boundary structure of a tight measure — every valid corners4 measure
+is tight: total slack ≤ 0.04 by Lemma W″, so no coverage redundancy can fatten the cells), not
+holes and not the LP. Certification cost at the asymptote: at the measured HINTED Rust
+throughput of 46 k nodes/s, 10⁹–10¹¹ nodes is 6 h–25 days of verifier time, but the hint file
+is 27 bytes/node (73 MB per 2.7 M nodes) and the frozen verifier holds it as a `serde_json`
+Value: ≥ 27 GB for 10⁹ nodes — beyond the frozen implementation. Unhinted, the verifier's own
+splitter thrashes on t at 1.2–1.5 k nodes/s (BigInt at depth 60, caps at 0.85 certain): never.
+
+**[M] The loop at equal budget (T1 crank, cap 60 k/root).**
+
+| iter | catalog | atoms | W₂ | slack | tree nodes | COV / OPEN | holes | open cm median | LP / build |
+|---|---|---|---|---|---|---|---|---|---|
+| md8 | 469 | 363 | 20.95828 | 0.0417 | 2.71 M | 176 k / 856 k | 41 | 0.602 | 975 s / 1338 s |
+| md9 | 525 (+56 hole placements) | 479 | 20.99646 | 0.0035 | 2.70 M | 175 k / 853 k | 7 | 0.594 | 1200 s (IPM kTimeLimit at r10, unconverged) / 2671 s |
+
+Holes fall ~6× per iteration (A74 saw ~4×), but the 56 placements consumed 0.038 of the 0.042
+slack at this LP budget (the first md9 solve at the A74 seed load hit the nnz cap after one
+round at W₂ = 21.153 OVER; the re-solve with two seeds ran 9 rounds, W₂ 21.42 → 20.996, still
+falling ~0.03/round when the IPM timed out), and the open-box count is unchanged: the loop
+cannot buy the frontier down — catalog growth is NOT free once the exact holes are deep
+(md9's holes collect 0.79, md8's 0.57–0.75). One more iteration crosses 21 at this budget.
+Verdict: NO corners4 PASS; the route is closed by Lemma W‴ unless the certificate form changes
+(a hint format the verifier streams, or a clause that certifies η-thin boundary layers
+in bulk — COVERED-F fires on only 5 % of leaves here).
+
+**[M] C3 gap found: root-enumeration order.** The two frozen implementations enumerate the
+2^k×2^k centre grid differently — reference `roots()` ix-major (index = ix·2^k + iy), Rust
+`build_roots` iy-major (index = iy·2^k + ix); spec §3.1/§4 are silent. Hint keys "i,j" are
+therefore NOT portable: A74's and this campaign's Python-keyed trees, fed to Rust, land on the
+transposed root boxes (verdicts unaffected — Lemma S — but 79–1493 hint misses and the
+fallback thrash). With trees rebuilt in Rust order (`--root_order rust`), Rust reports
+0 hint misses and, on the identical box-pair tree (Python key 4,8 = Rust key 1,2), both
+implementations fire rule for rule: vacuous 1726, exempt 6449, nondisjoint 14201, split
+22375, examined 43025, covered/covered_f/vacuous_contain 0 — exact agreement (the
+VACUOUS-CONTAIN caveat is moot here: 0 firings in both). Rust on the full Rust-keyed md8 tree
+(3.15 M nodes, 1767 s, jobs 6): 0 misses, exempt/nondisjoint/vacuous 30 k/245 k/375 k,
+covered 476 k + covered_f 78 k, 557 k undischarged (the builder's open leaves), caps at 0.938.
+Needs a spec erratum fixing the order (side data only; no verifier edit).
+
+**A76 relay.** No P-B(R) row is added: A76 certified no Trump image compatible with the
+corners4 pins within d_min = 0.8445, so the exact class is empty near every Trump image and
+the basin row is irrelevant for corners4 — consistent with this wall being emission shape,
+not ghost saturation. Canary SAFE at both emissions (`notes/ledger.md`).
+
 ## 7 What remains open for a certified pair kill (the honest ledger)
 
 * [M, pilot] the fractional pair-LP verdict per class — A66 measures k4_08 (boosted) and

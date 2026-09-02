@@ -2012,3 +2012,23 @@ affordable cost estimate for closing 3.84.
   Files: lean/PackingCertMathlib/PackingCertMathlib/Rigid*.lean, Rigidity.lean, RigidityCheck.lean, lean/gen_rigidity_lean.py,
   attempts/A79-rigidity-lean/{notes/findings.md,LOG.md,logs}, lean/README.md, depgraph E.A22/E.A36/E.IV (chips cleared),
   REGISTRY row. A57/A60/A61/A76/A77/A78 untouched.
+
+## 2026-09-02 A77-corners4-close (Fable lead, solo) -- done-mixed (Lemma W''' measured, no PASS)
+- MACHINERY: code/hintbatch.py = level-synchronous vectorised float B&B building COMPLETE spec-s4 hint trees (numpy pass over boxes x atoms per
+  level, per-chunk atom pruning, A74 max-min lookahead cut, dyadic cuts inside the float-mirrored clipped interval, null leaves), leaf census
+  cov/ex/nd/vac/hole/open; float predicates fuzzed vs the reference's exact ones (0/4000 disagreements); exact walk of the emitted trees with the
+  reference's split/clip/discharge reproduces the census node for node; all 41 md8 hole pairs re-check exactly. code/iter77.py = grow -> LP ->
+  emit (canary) -> build. ~1k nodes/s/process.
+- FINDING 1 [M]: A74's "holes 220 -> 57" was a --nodes HARD-STOP artifact (283k-393k undischarged leaves behind the sampled caps; hinted cut
+  nodes bypass --depth). FINDING 2 [M] Lemma W''' (pair_kill.md 6.9): complete-tree per-level retention r(d) = 0.75-0.86, FLAT from depth 8 to
+  25 (root 2,11: 1.59M nodes; all 78 non-exempt roots: 2.71M nodes at 60k/root, 64 roots at cap, opens median certain 0.60, 41 holes),
+  rule-insensitive => complete tree ~1e9-1e11 nodes at the W'' atom-depth scale; frozen verifier holds hints as serde_json Values (27 B/node)
+  => route CLOSED in this certificate form. FINDING 3 [M]: the loop at equal budget md8 -> md9: holes 41 -> 7 (~6x) but the 56 hole placements
+  cost 0.038 of the 0.042 slack (W2 20.95828 -> 20.99646, LP unconverged at kTimeLimit), open boxes unchanged 856k -> 853k; one more iteration
+  crosses 21. FINDING 4 [M] C3 GAP: reference roots() is ix-major, Rust build_roots iy-major (spec 3.1/4 silent) -> "i,j" hint keys NOT
+  portable (A74's 1493 misses explained); with --root_order rust both implementations fire rule-for-rule identically on the identical tree
+  (vac 1726 / ex 6449 / nd 14201 / split 22375 / examined 43025, 0 misses); hinted Rust runs at 46k nodes/s vs 1.2-1.5k/s thrashing unhinted.
+  Spec erratum owed (side data only). A76 relay: no P-B(R) row (corners4 d_min 0.8445). Canary SAFE x2 (min gap = lambda-1, sum m2 = 6).
+- Discipline: 1 LP at a time (BLAS pinned, headroom gate waited out two dips to 0.26 GB), builder 4-6 procs, Rust jobs <= 6; A57/A60/A61/A76
+  untouched; frozen verifiers untouched (import-only). Hinted certs (73 MB each) NOT committed (certs/.gitignore; regenerate with hintbatch.py).
+  Files: attempts/A77-corners4-close/*, docs/proofs/pair_kill.md 6.9, depgraph C.K4TIER note (owner A77 closed), REGISTRY row.
