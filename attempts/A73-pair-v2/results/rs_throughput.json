@@ -1,0 +1,116 @@
+{
+  "arithmetic": "exact i128 fast path with overflow-checked BigInt promotion",
+  "benchmark": "A73 T2 verify_pair2 (Rust) throughput",
+  "host_target": "x86_64-pc-windows-gnu",
+  "max_nodes_per_second": 323172.4749951309,
+  "meets_target_all_regimes": false,
+  "meets_target_any_regime": true,
+  "min_nodes_per_second": 22015.73594173669,
+  "node_budget_per_regime": 1200000,
+  "note": "A node is one pair box examined (`pairs_examined`). Rate in the atom-bearing regimes is governed by how many atoms fall in a node's certain-membership shortlist, which is why density is reported alongside each figure.",
+  "profile": "release (opt-level 3, lto, codegen-units 1)",
+  "regimes": [
+    {
+      "atoms": 3025,
+      "counts": {
+        "covered": 0,
+        "covered_f": 0,
+        "exempt_core": 0,
+        "max_depth": 40,
+        "nondisjoint": 74529,
+        "pairs_examined": 1200000,
+        "pairs_root": 136,
+        "split": 600016,
+        "vacuous": 0
+      },
+      "nodes_examined": 1200000,
+      "nodes_per_second": 22015.73594173669,
+      "note": "3025 atoms at 0.17 spacing in a side-12 container (~35 endpoints/unit^2); every node carries a large certain-membership shortlist, so exact Lemma M evaluation dominates",
+      "regime": "synthetic_atoms_dense",
+      "verdict": "FAIL",
+      "wall_seconds": 54.5064677
+    },
+    {
+      "atoms": 3025,
+      "counts": {
+        "covered": 0,
+        "covered_f": 0,
+        "exempt_core": 0,
+        "max_depth": 40,
+        "nondisjoint": 81248,
+        "pairs_examined": 1200000,
+        "pairs_root": 136,
+        "split": 600013,
+        "vacuous": 0
+      },
+      "nodes_examined": 1200000,
+      "nodes_per_second": 47345.73347552625,
+      "note": "3025 atoms at 0.46 spacing in a side-28 container (~4.7 endpoints/unit^2)",
+      "regime": "synthetic_atoms_realistic",
+      "verdict": "FAIL",
+      "wall_seconds": 25.3454728
+    },
+    {
+      "atoms": 0,
+      "counts": {
+        "covered": 0,
+        "covered_f": 0,
+        "exempt_core": 0,
+        "max_depth": 25,
+        "nondisjoint": 569053,
+        "pairs_examined": 1200002,
+        "pairs_root": 524800,
+        "split": 630948,
+        "vacuous": 314648
+      },
+      "nodes_examined": 1200002,
+      "nodes_per_second": 300159.5019921928,
+      "note": "pair_toy_s199 at a 32x32 root grid: no atoms, NONDISJOINT-heavy, exercising the exact rational interval enclosures",
+      "regime": "toy_corpus_s199_split5",
+      "verdict": "FAIL",
+      "wall_seconds": 3.9978811
+    },
+    {
+      "atoms": 3025,
+      "counts": {
+        "covered": 0,
+        "covered_f": 0,
+        "exempt_core": 6512,
+        "max_depth": 40,
+        "nondisjoint": 46546,
+        "pairs_examined": 1200000,
+        "pairs_root": 136,
+        "split": 600122,
+        "vacuous": 0
+      },
+      "nodes_examined": 1200000,
+      "nodes_per_second": 131294.7015377662,
+      "note": "as synthetic_atoms_dense, multi-threaded over root pairs",
+      "regime": "synthetic_atoms_dense_parallel",
+      "verdict": "FAIL",
+      "wall_seconds": 9.1397443
+    },
+    {
+      "atoms": 3025,
+      "counts": {
+        "covered": 0,
+        "covered_f": 0,
+        "exempt_core": 18839,
+        "max_depth": 40,
+        "nondisjoint": 38895,
+        "pairs_examined": 1200003,
+        "pairs_root": 136,
+        "split": 600118,
+        "vacuous": 0
+      },
+      "nodes_examined": 1200003,
+      "nodes_per_second": 323172.4749951309,
+      "note": "as synthetic_atoms_realistic, multi-threaded over root pairs",
+      "regime": "synthetic_atoms_realistic_parallel",
+      "verdict": "FAIL",
+      "wall_seconds": 3.7131968
+    }
+  ],
+  "target_nodes_per_second": 100000.0,
+  "threads_used_for_parallel_regimes": 8
+}

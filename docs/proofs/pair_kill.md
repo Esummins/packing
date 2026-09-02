@@ -330,6 +330,66 @@ run-level canary re-verified the dilated 60-digit Trump family as an exact death
 under the A71 parameters (min SAT gap = λ − 1 = 1.06e-7 exactly, Σm₂ = 6;
 `results/canary_trump.json`).
 
+## 6.6 [T+M] pair-certificate v2, Lemma W′, and the corners4 depth-profile wall (A73, 2026-09-02)
+
+**v2 exists** (`docs/specs/pair_certificate_v2.md`, claim IDENTICAL to v1 — every
+consumption path and the canary theorem carry over verbatim): free rational-cut
+margin-aware splitting (Lemma S), EXACT quadratic-sign-test membership/exemption
+predicates (Lemmas M/E/Q — iff, no interval slop), the analytic handoff clause
+COVERED-F (Lemma F, failing-set form), VACUOUS-CONTAIN (the container-boundary sliver
+the v1 clip provably cannot discharge), and DEFICIENT-EARLY (exact rational
+counterexample rows). Two implementations from the spec: the A73 reference
+(`attempts/A73-pair-v2/code/verify_pair2.py`; selftest 0 violations, toys + corruption
+gates) and a clean-room compiled Rust build (`code/verify_pair2_rs/`, selftest-clean,
+20k–440k nodes/s single-thread by regime, ≥100k with jobs) — checklist C3 for the pair
+family. **The v1 THROUGHPUT wall is broken** [M]: the first full-quantifier
+atom-bearing (P2′) PASSes exist — synthetic grid-pair certificates at s = 3 verified
+end-to-end (5866 nodes at atom margin 0.146; 1098 nodes at margin 0.076; the SMALLER
+margin cost FEWER nodes) — and the measured v2 cost law tracks the measure's FRONTIER
+STRUCTURE (where coverage hands off between witnesses), not (1/margin)^6.
+
+**Lemma W′ (fractional margin law; Lemma W's quantified successor).** Let z* be any
+η-feasible adversary (load of η-deep collection ≤ 1 at every atom position), of value
+V = Σ z*(1 + βm₂). Then every P1′-valid certificate satisfies
+Σ_i w_i·S_i^η(z*) ≥ V − W₂ > V − (C(N,2) + βm), where S_i^η = the z*-mass of rows
+collecting atom i sharply but not η-deep. *Proof:* V ≤ Σ z*μ₂ = Σ_i w_i L_i,
+L_i ≤ 1 + S_i^η by η-feasibility at atom i's own position. ∎ The τ₂^η curve therefore
+prices the DEPTH PROFILE of every valid certificate.
+
+**Measured corners4 τ₂^η curve (catalog-restricted, A73 `pairlp413e.py` = A71 rig +
+η-deep membership + η-shrunk arrangement; brackets = [feasible-scaled, relaxation]):**
+sharp η→0: 20.528 CONVERGED (A71); η = 0.01: [18.01, 21.38] unconverged, still
+descending ~0.008/round at the IPM wall (plausible asymptote 21.1–21.3, i.e. ABOVE the
+line); η = 0.02: [17.77, 22.30]; η = 0.05: [18.31, 26.24]; η = 0.1: scaled ≥ ~34
+(relaxation plateau 57.000) — DEAD decisively, and by Lemma W′ ≥ ~13 weighted units of
+sub-0.1-margin service are FORCED in every valid corners4 certificate. **The fractional
+wall crosses 21 at η* somewhere in (~0.006, ~0.05) — far below Lemma W's integral
+0.12–0.15.** Uniform-η emission is dead on that whole range while sharp 20.528 stays
+open: any valid corners4 certificate is a MIXED-DEPTH measure (deep coverage of generic
+rows + the forced shallow units at the exploit families' own scale), and its
+verification cost concentrates near the exploit manifolds — exactly what margin-aware
+splitting + hint trees localize.
+
+**The tangency trap [M].** LP-optimal covering primals put atoms ON the membership
+boundaries of the squares they serve (arrangement-cell representatives; margins ~1e-6):
+the A71 seed is emission-side anti-verifiable — v2's first corners4 survey measured
+COVERED firing ZERO times on it. Emitters must solve at η-deep semantics or deepen
+post-hoc; η-deep coverage implies true coverage (conservative).
+
+**Status of the corners4 pilot (honest).** No corners4 certificate emitted: the residue
+is no longer verifier throughput but the EMISSION problem — produce a mixed-depth,
+weight-CONSOLIDATED measure (W₂ < 21 with the Lemma W′-forced shallow structure), for
+which the uniform-η LP is only a sufficient-side probe (and its η-runs hit genuine IPM
+scaling walls: η-shrunk arrangements yield ~2× denser rows, nnz 4–6M, rounds 30–900 s,
+all runs at η ∈ {0.01, 0.02, 0.05} stopped unconverged straddling 21). Constructive
+successor, priced: a deepening/consolidation pass on the sharp primal (move each atom to
+maximize min serving depth subject to tight rows, consolidate onto a coarse net), the
+survey loop (DEFICIENT-EARLY rows) against the compiled verifier, and hint-tree
+emission. Canary [M]: the dilated Trump family re-verified SAFE under A73 parameters
+(min pair SAT gap = λ − 1 = 1.06e-7 exactly, Σm₂ = 6); all η-probes are
+adversary-side. P0 consumption path unchanged and restated in
+`attempts/A73-pair-v2/notes/findings.md`.
+
 ## 7 What remains open for a certified pair kill (the honest ledger)
 
 * [M, pilot] the fractional pair-LP verdict per class — A66 measures k4_08 (boosted) and

@@ -1,0 +1,21 @@
+[package]
+name = "verify_pair2_rs"
+version = "0.1.0"
+edition = "2021"
+description = "Compiled verifier for pair-certificate-v2 (A73 T2, clean-room from docs/specs/pair_certificate_v2.md)"
+
+[[bin]]
+name = "verify_pair2"
+path = "src/main.rs"
+
+[dependencies]
+serde_json = "1"
+num-bigint = "0.4"
+num-integer = "0.1"
+num-traits = "0.2"
+sha2 = "0.10"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

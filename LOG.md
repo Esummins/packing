@@ -1819,3 +1819,33 @@ affordable cost estimate for closing 3.84.
   rejects float literals even inside the spec-ignored provenance block - emitters must
   stringify). Files: attempts/A71-pair-emission/*, docs/proofs/stuck_rows.md, pair_kill.md
   sect 6.5 + ledger updates, depgraph C.K4TIER note + svg, REGISTRY row.
+
+## 2026-09-02 A73-pair-v2 (Fable lead + 1 Opus clean-room chore) -- done-mixed
+- T1: docs/specs/pair_certificate_v2.md - versioned (v1 frozen, sha d9b7a24a re-verified), claim IDENTICAL to v1
+  so P0/stuckness consumption + canary theorem carry over. Lemma S (free rational cuts), Lemma Q (exact quadratic
+  sign test), Lemma M/E (EXACT iff membership/exemption: corner reduction via sign-fixedness of C,S,1-t^2,t on
+  [0,1]), Lemma F (COVERED-F handoff: pinned slack-sum >= 0 => pointwise disjunction; failing-set form because
+  coordinate/body axes degenerate pairwise at t=0), VACUOUS-CONTAIN (container-boundary sliver the v1 clip
+  provably cannot discharge - found by the clean-room build), DEFICIENT-EARLY (exact rational counterexample
+  rows), hint trees.
+- T2: reference code/verify_pair2.py (selftest 0 violations; toys match v1; gates) + CLEAN-ROOM Rust
+  code/verify_pair2_rs (from spec + v1 spec + toy corpus only; i128 fast path, overflow-checked BigInt; selftest
+  0 violations, 9/9 gates; reproduced v1 toy 201080 nodes / depth 37 exactly). C3 CROSS-VALIDATION ALL AGREE
+  (results/crossval.json). Throughput 300k nodes/s geometry regime, 22-47k atom regimes single-thread, 131-323k
+  at --jobs 8. FIRST full-quantifier atom-bearing (P2') PASSes: grid anchors at s=3 (5866 nodes at margin
+  0.146; 1098 at 0.076 - smaller margin, fewer nodes: cost tracks frontier structure, not (1/margin)^6).
+- T3 corners4 pilot: NO certificate; wall MEASURED + re-quantified. Tangency trap: the A71 seed's atoms sit on
+  membership boundaries (COVERED fired 0 times). Lemma W' [T]: weighted shallow service >= tau_2^eta - threshold.
+  Measured tau_2^eta(k4_13,0) (A71 rig at eta-deep membership): eta=0.1 DEAD (scaled >= ~34, plateau 57.000,
+  >= 13 forced sub-0.1 units); 0.05/0.02/0.01 unconverged brackets [18.3,26.2]/[17.8,22.3]/[18.0,21.38] (IPM
+  walls at nnz 4-6M; four runs); sharp 20.528 open => fractional wall crosses 21 at eta* in (~0.006, ~0.05),
+  far below Lemma W's integral 0.12-0.15: uniform-eta emission dead, every valid certificate is MIXED-DEPTH,
+  verification cost concentrates near the exploit manifolds. Cost-model survey (eta=0.01 primal, labeled
+  non-certificate): COVERED-F 104x, zero coverage holes, 250 cap witnesses at depth 26 - weight fragmentation
+  is the driver. Residue priced: deepening/consolidation emission pass + DEFICIENT-EARLY survey loop
+  (code/loop413.py ready) + hint trees, then the compiled certification run. P0 path stated (findings.md).
+- Canary per run SAFE (dilated Trump: min gap = lambda-1 = 1.06e-7, Sigma m2 = 6). Discipline: <= 2 LP slots
+  (sequential), BLAS pinned, headroom gate held (2 dips waited out), one own LP killed at a decisive plateau;
+  A57/A60/A61 untouched; frozen verifiers untouched; rust-gnu 1.98.0 installed via scoop (user-level).
+  Files: attempts/A73-pair-v2/*, docs/specs/pair_certificate_v2.md, docs/proofs/pair_kill.md sect 6.6,
+  depgraph C.K4TIER note + svg, REGISTRY row.

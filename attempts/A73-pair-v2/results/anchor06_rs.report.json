@@ -1,0 +1,104 @@
+{
+  "N": 18,
+  "W2": "136",
+  "beta": "0",
+  "certificate": "../certs/anchor_grid06_s3.json",
+  "coincident_atoms": 16,
+  "counts": {
+    "covered": 0,
+    "covered_f": 0,
+    "deficient_early": 0,
+    "exempt_core": 0,
+    "hint_misses": 0,
+    "max_depth": 40,
+    "nondisjoint": 9,
+    "pairs_examined": 50,
+    "pairs_root": 136,
+    "split": 40,
+    "vacuous": 0
+  },
+  "format": "pair-certificate-v2",
+  "k": 0,
+  "m": 0,
+  "n": 18,
+  "p1_prime_ok": true,
+  "s": "3",
+  "settings": {
+    "arithmetic": "exact i128 with overflow-checked BigInt promotion",
+    "depth": 40,
+    "hinted": false,
+    "jobs": 1,
+    "nodes": null,
+    "probe_stride": 8,
+    "split": 2,
+    "survey": false
+  },
+  "threshold": "153",
+  "verdict": "FAIL",
+  "verifier": "verify_pair2 (Rust)",
+  "verifier_impl": "attempts/A73-pair-v2/code/verify_pair2_rs",
+  "verifier_sha256": "cc1fd7650321b43cd58c16d538ba7658e61ce43773aabc03929eb0b833af0ded",
+  "verifier_sources": [
+    {
+      "file": "main.rs",
+      "sha256": "12149b993c010335f51c0e693e69b8163eb713a2e053cd00bfa7f1f99dd61fe1"
+    },
+    {
+      "file": "rat.rs",
+      "sha256": "deddce68c335c0d8fd0d1109c2125f9d5577f0d5ddfcd980c61c923e78750d01"
+    },
+    {
+      "file": "geom.rs",
+      "sha256": "084a9d6f2e060ba0a242dc20c2818341bc47c40d9daec85d22d8724581883e5c"
+    },
+    {
+      "file": "cert.rs",
+      "sha256": "8c8c8ad4a63b0d1e0da91a9ef2aabf8c3f9b5b576a1e105a000937581d18f550"
+    },
+    {
+      "file": "bb.rs",
+      "sha256": "ddf732ab9e9606dbb7ade59a5cdb9a9aaf7cbd24271289a59d02b75f3fc29dd3"
+    },
+    {
+      "file": "selftest.rs",
+      "sha256": "5908c392fc1bca3e7eb5aa01d2a5f5feebac74e94a7e385c551a96a566bfcc2b"
+    }
+  ],
+  "wall_seconds": 0.006577,
+  "witness_kinds": {
+    "cap": 1,
+    "definitive": 0
+  },
+  "witnesses": [
+    {
+      "F": [
+        "1073689447/1073741824",
+        "1",
+        "10387/16384",
+        "2597/4096",
+        "16383/16384",
+        "1"
+      ],
+      "Fp": [
+        "0",
+        "1",
+        "1",
+        "3/2",
+        "1/2",
+        "1"
+      ],
+      "U": 0,
+      "certain_mass": "0",
+      "confirm": null,
+      "deficit": "1",
+      "depth": 40,
+      "kind": "cap",
+      "sat_margins": [
+        "1/2",
+        "5060157116932273943011/37777089056047313469440",
+        "1097/8192",
+        "-5997/16384"
+      ]
+    }
+  ]
+}

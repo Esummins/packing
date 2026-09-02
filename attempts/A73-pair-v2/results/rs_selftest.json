@@ -1,0 +1,212 @@
+{
+  "corruption_gates": [
+    {
+      "certain_mass": "5/4",
+      "covered_fires": true,
+      "expected": true,
+      "gate": "baseline (mass 5/4 >= 1)",
+      "ok": true
+    },
+    {
+      "certain_mass": "7/8",
+      "covered_fires": false,
+      "expected": false,
+      "gate": "(a) atom weight halved",
+      "ok": true
+    },
+    {
+      "certain_mass": "1/2",
+      "covered_fires": false,
+      "expected": false,
+      "gate": "(b) atom deleted",
+      "ok": true
+    },
+    {
+      "contained_box_kept": true,
+      "gate": "VACUOUS-CONTAIN fires iff no contained placement",
+      "ok": true,
+      "uncontained_box_discharged": true
+    },
+    {
+      "detail": "JSON float literal `1.5` at byte offset 162 (spec §2: floats rejected anywhere)",
+      "gate": "(c) float literal in provenance",
+      "ok": true,
+      "result": "malformed (exit 2)"
+    },
+    {
+      "gate": "(c2) float total",
+      "ok": true,
+      "result": "malformed (exit 2)"
+    },
+    {
+      "detail": "total-gate: `total` = 3/4 but sum(w) = 1/2 (spec §2)",
+      "gate": "(d) total != sum(w)",
+      "ok": true,
+      "result": "malformed (exit 2)"
+    },
+    {
+      "W2": "5",
+      "gate": "(e) W2 >= threshold",
+      "ok": true,
+      "result": "(P1') violated -> exit 2",
+      "threshold": "1"
+    },
+    {
+      "gate": "(f) hint cut outside interval",
+      "hint_misses": 1,
+      "ok": true,
+      "verdict": "PASS (unchanged)"
+    }
+  ],
+  "draws_per_predicate": {
+    "lemma_q_dense_samples": 401,
+    "predicate_draws": 2500,
+    "samples_per_draw": 16
+  },
+  "fastpath_vs_rational": {
+    "lemma_e_disagreements": 0,
+    "lemma_m_disagreements": 0,
+    "ok": true
+  },
+  "gates_note": "Gates (a)/(b) are applied to the COVERED clause directly: the v1 toy PASS certificate has an empty atom list (its PASS is by NONDISJOINT), and no mass-load-bearing PASS certificate exists at toy scale (obligations begin at exactly s = 2, which is the tangency case spec §8 calls uncertifiable). This follows the v1 precedent that the COVERED branch is exercised by unit tests (v1 §5).",
+  "lemma_e": {
+    "completeness_misses": 10,
+    "draws": 2500,
+    "predicate_fired": 1074,
+    "soundness_violations": 0
+  },
+  "lemma_m": {
+    "completeness_misses": 32,
+    "draws": 2500,
+    "predicate_fired": 889,
+    "soundness_violations": 0
+  },
+  "lemma_q": {
+    "completeness_misses": 0,
+    "draws": 2500,
+    "predicate_fired": 1129,
+    "soundness_violations": 0
+  },
+  "nondisjoint": {
+    "completeness_misses": 230,
+    "draws": 2500,
+    "predicate_fired": 1182,
+    "soundness_violations": 0
+  },
+  "selftest": "PASS",
+  "sqrt2_constants": {
+    "identity_1393sq_lt_2x985sq": true,
+    "identity_19601sq_gt_2x13860sq": true,
+    "ok": true,
+    "t_star_lower": "408/985",
+    "t_star_upper": "5741/13860",
+    "w_upper_bound": "19601/13860"
+  },
+  "toy_corpus": {
+    "anchor_grid05_s3.json": {
+      "W2": "325",
+      "covered": 9934,
+      "covered_f": 561,
+      "expected": "PASS",
+      "max_depth": 26,
+      "ok": true,
+      "pairs_examined": 23782,
+      "threshold": "780",
+      "vacuous_contain": 0,
+      "verdict": "PASS"
+    },
+    "anchor_grid06_s3.json": {
+      "W2": "136",
+      "covered": 153,
+      "covered_f": 127,
+      "expected": "PASS",
+      "max_depth": 6,
+      "ok": true,
+      "pairs_examined": 514,
+      "threshold": "153",
+      "vacuous_contain": 0,
+      "verdict": "PASS"
+    },
+    "dir": "attempts/A66-corners4-pair/certs",
+    "pair_control_s201.json": {
+      "W2": "0",
+      "covered": 0,
+      "covered_f": 0,
+      "deficient_early": 1,
+      "exempt_core": 0,
+      "expected": "FAIL",
+      "max_depth": 0,
+      "nondisjoint": 3,
+      "ok": true,
+      "pairs_examined": 4,
+      "threshold": "1",
+      "vacuous": 0,
+      "verdict": "FAIL"
+    },
+    "pair_smoke_paths.json": {
+      "W2": "225/4",
+      "covered": 0,
+      "covered_f": 0,
+      "deficient_early": 0,
+      "exempt_core": 41,
+      "expected": "?",
+      "max_depth": 44,
+      "nondisjoint": 19,
+      "ok": true,
+      "pairs_examined": 149,
+      "threshold": "66001/1000",
+      "vacuous": 0,
+      "verdict": "FAIL"
+    },
+    "pair_toy_s199.json": {
+      "W2": "0",
+      "covered": 0,
+      "covered_f": 0,
+      "deficient_early": 0,
+      "exempt_core": 0,
+      "expected": "PASS",
+      "max_depth": 37,
+      "nondisjoint": 100608,
+      "ok": true,
+      "pairs_examined": 201080,
+      "threshold": "1",
+      "vacuous": 0,
+      "verdict": "PASS"
+    }
+  },
+  "vacuous_contain": {
+    "completeness_misses": 17,
+    "draws": 2500,
+    "predicate_fired": 1135,
+    "soundness_violations": 0
+  },
+  "verifier_sha256": {
+    "combined": "c4d0e3eb579eae2b85ee6e60903f6b24fc3b8428568376cfe928268d6c357d3a",
+    "files": [
+      {
+        "file": "main.rs",
+        "sha256": "7f816b84ce7717ee8fe3dc6ea6c45d63d1dac814e659e208b847aea457367a08"
+      },
+      {
+        "file": "rat.rs",
+        "sha256": "deddce68c335c0d8fd0d1109c2125f9d5577f0d5ddfcd980c61c923e78750d01"
+      },
+      {
+        "file": "geom.rs",
+        "sha256": "dd3a1ecfbacbbe4c5f19af6fc3fb326d89d506ef01acc7e972f54054e4ac1860"
+      },
+      {
+        "file": "cert.rs",
+        "sha256": "8c8c8ad4a63b0d1e0da91a9ef2aabf8c3f9b5b576a1e105a000937581d18f550"
+      },
+      {
+        "file": "bb.rs",
+        "sha256": "fd8c03619cb7c30b7bacfa309b9174284dac400a64f1287e11bc874a73b7dbbe"
+      },
+      {
+        "file": "selftest.rs",
+        "sha256": "dedaa6ca205f261e92e6dc58883358e59275f34fc6642977756ba5689db4ba55"
+      }
+    ]
+  }
+}

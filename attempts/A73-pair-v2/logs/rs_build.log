@@ -1,0 +1,382 @@
+===============================================================================
+A73 T2 - verify_pair2 (Rust): build + selftest + corpus transcript
+Clean-room implementation from docs/specs/pair_certificate_v2.md (+ v1 clauses,
++ the v1 selftest corpus + the A73 anchor certs). No verifier source was read.
+date: 2026-09-02T13:37:15Z
+spec revision implemented: 2026-09-02 (failing-set Lemma F 3.6; VACUOUS-CONTAIN
+  3.3 item 1b; failing-set hint schema 4; possible-collectability split gate 6)
+===============================================================================
+
+--- toolchain ---
+cargo 1.98.0 (797e8a9bc 2026-08-05)
+rustc 1.98.0 (88d9e12ae 2026-08-18)
+host: x86_64-pc-windows-gnu
+release: 1.98.0
+LLVM version: 22.1.8
+
+--- clean release build ---
+warning: `verify_pair2_rs` (bin "verify_pair2") generated 9 warnings (run `cargo fix --bin "verify_pair2" -p verify_pair2_rs` to apply 1 suggestion)
+    Finished `release` profile [optimized] target(s) in 0.04s
+
+--- source inventory + sha256 ---
+main.rs         393 lines  7f816b84ce7717ee8fe3dc6ea6c45d63d1dac814e659e208b847aea457367a08
+rat.rs          645 lines  deddce68c335c0d8fd0d1109c2125f9d5577f0d5ddfcd980c61c923e78750d01
+geom.rs        1012 lines  dd3a1ecfbacbbe4c5f19af6fc3fb326d89d506ef01acc7e972f54054e4ac1860
+cert.rs         531 lines  8c8c8ad4a63b0d1e0da91a9ef2aabf8c3f9b5b576a1e105a000937581d18f550
+bb.rs          1979 lines  fd8c03619cb7c30b7bacfa309b9174284dac400a64f1287e11bc874a73b7dbbe
+selftest.rs     928 lines  dedaa6ca205f261e92e6dc58883358e59275f34fc6642977756ba5689db4ba55
+bench.rs        237 lines  343c5f2f026e0f1e11c893a9f2d789d5dad87f0a334b359fd2f0a262923d572b
+
+===============================================================================
+SELFTEST (spec 5; mandatory once per build before any citable run)
+===============================================================================
+{
+  "corruption_gates": [
+    {
+      "certain_mass": "5/4",
+      "covered_fires": true,
+      "expected": true,
+      "gate": "baseline (mass 5/4 >= 1)",
+      "ok": true
+    },
+    {
+      "certain_mass": "7/8",
+      "covered_fires": false,
+      "expected": false,
+      "gate": "(a) atom weight halved",
+      "ok": true
+    },
+    {
+      "certain_mass": "1/2",
+      "covered_fires": false,
+      "expected": false,
+      "gate": "(b) atom deleted",
+      "ok": true
+    },
+    {
+      "contained_box_kept": true,
+      "gate": "VACUOUS-CONTAIN fires iff no contained placement",
+      "ok": true,
+      "uncontained_box_discharged": true
+    },
+    {
+      "detail": "JSON float literal `1.5` at byte offset 162 (spec §2: floats rejected anywhere)",
+      "gate": "(c) float literal in provenance",
+      "ok": true,
+      "result": "malformed (exit 2)"
+    },
+    {
+      "gate": "(c2) float total",
+      "ok": true,
+      "result": "malformed (exit 2)"
+    },
+    {
+      "detail": "total-gate: `total` = 3/4 but sum(w) = 1/2 (spec §2)",
+      "gate": "(d) total != sum(w)",
+      "ok": true,
+      "result": "malformed (exit 2)"
+    },
+    {
+      "W2": "5",
+      "gate": "(e) W2 >= threshold",
+      "ok": true,
+      "result": "(P1') violated -> exit 2",
+      "threshold": "1"
+    },
+    {
+      "gate": "(f) hint cut outside interval",
+      "hint_misses": 1,
+      "ok": true,
+      "verdict": "PASS (unchanged)"
+    }
+  ],
+  "draws_per_predicate": {
+    "lemma_q_dense_samples": 401,
+    "predicate_draws": 2500,
+    "samples_per_draw": 16
+  },
+  "fastpath_vs_rational": {
+    "lemma_e_disagreements": 0,
+    "lemma_m_disagreements": 0,
+    "ok": true
+  },
+  "gates_note": "Gates (a)/(b) are applied to the COVERED clause directly: the v1 toy PASS certificate has an empty atom list (its PASS is by NONDISJOINT), and no mass-load-bearing PASS certificate exists at toy scale (obligations begin at exactly s = 2, which is the tangency case spec §8 calls uncertifiable). This follows the v1 precedent that the COVERED branch is exercised by unit tests (v1 §5).",
+  "lemma_e": {
+    "completeness_misses": 10,
+    "draws": 2500,
+    "predicate_fired": 1074,
+    "soundness_violations": 0
+  },
+  "lemma_m": {
+    "completeness_misses": 32,
+    "draws": 2500,
+    "predicate_fired": 889,
+    "soundness_violations": 0
+  },
+  "lemma_q": {
+    "completeness_misses": 0,
+    "draws": 2500,
+    "predicate_fired": 1129,
+    "soundness_violations": 0
+  },
+  "nondisjoint": {
+    "completeness_misses": 230,
+    "draws": 2500,
+    "predicate_fired": 1182,
+    "soundness_violations": 0
+  },
+  "selftest": "PASS",
+  "sqrt2_constants": {
+    "identity_1393sq_lt_2x985sq": true,
+    "identity_19601sq_gt_2x13860sq": true,
+    "ok": true,
+    "t_star_lower": "408/985",
+    "t_star_upper": "5741/13860",
+    "w_upper_bound": "19601/13860"
+  },
+  "toy_corpus": {
+    "anchor_grid05_s3.json": {
+      "W2": "325",
+      "covered": 9934,
+      "covered_f": 561,
+      "expected": "PASS",
+      "max_depth": 26,
+      "ok": true,
+      "pairs_examined": 23782,
+      "threshold": "780",
+      "vacuous_contain": 0,
+      "verdict": "PASS"
+    },
+    "anchor_grid06_s3.json": {
+      "W2": "136",
+      "covered": 153,
+      "covered_f": 127,
+      "expected": "PASS",
+      "max_depth": 6,
+      "ok": true,
+      "pairs_examined": 514,
+      "threshold": "153",
+      "vacuous_contain": 0,
+      "verdict": "PASS"
+    },
+    "dir": "attempts/A66-corners4-pair/certs",
+    "pair_control_s201.json": {
+      "W2": "0",
+      "covered": 0,
+      "covered_f": 0,
+      "deficient_early": 1,
+      "exempt_core": 0,
+      "expected": "FAIL",
+      "max_depth": 0,
+      "nondisjoint": 3,
+      "ok": true,
+      "pairs_examined": 4,
+      "threshold": "1",
+      "vacuous": 0,
+      "verdict": "FAIL"
+    },
+    "pair_smoke_paths.json": {
+      "W2": "225/4",
+      "covered": 0,
+      "covered_f": 0,
+      "deficient_early": 0,
+      "exempt_core": 41,
+      "expected": "?",
+      "max_depth": 44,
+      "nondisjoint": 19,
+      "ok": true,
+      "pairs_examined": 149,
+      "threshold": "66001/1000",
+      "vacuous": 0,
+      "verdict": "FAIL"
+    },
+    "pair_toy_s199.json": {
+      "W2": "0",
+      "covered": 0,
+      "covered_f": 0,
+      "deficient_early": 0,
+      "exempt_core": 0,
+      "expected": "PASS",
+      "max_depth": 37,
+      "nondisjoint": 100608,
+      "ok": true,
+      "pairs_examined": 201080,
+      "threshold": "1",
+      "vacuous": 0,
+      "verdict": "PASS"
+    }
+  },
+  "vacuous_contain": {
+    "completeness_misses": 17,
+    "draws": 2500,
+    "predicate_fired": 1135,
+    "soundness_violations": 0
+  },
+  "verifier_sha256": {
+    "combined": "c4d0e3eb579eae2b85ee6e60903f6b24fc3b8428568376cfe928268d6c357d3a",
+    "files": [
+      {
+        "file": "main.rs",
+        "sha256": "7f816b84ce7717ee8fe3dc6ea6c45d63d1dac814e659e208b847aea457367a08"
+      },
+      {
+        "file": "rat.rs",
+        "sha256": "deddce68c335c0d8fd0d1109c2125f9d5577f0d5ddfcd980c61c923e78750d01"
+      },
+      {
+        "file": "geom.rs",
+        "sha256": "dd3a1ecfbacbbe4c5f19af6fc3fb326d89d506ef01acc7e972f54054e4ac1860"
+      },
+      {
+        "file": "cert.rs",
+        "sha256": "8c8c8ad4a63b0d1e0da91a9ef2aabf8c3f9b5b576a1e105a000937581d18f550"
+      },
+      {
+        "file": "bb.rs",
+        "sha256": "fd8c03619cb7c30b7bacfa309b9174284dac400a64f1287e11bc874a73b7dbbe"
+      },
+      {
+        "file": "selftest.rs",
+        "sha256": "dedaa6ca205f261e92e6dc58883358e59275f34fc6642977756ba5689db4ba55"
+      }
+    ]
+  }
+}
+
+===============================================================================
+CORPUS (cold single invocation each)
+===============================================================================
+--- v1 corpus, depth 44 split 2 ---
+PASS  attempts/A66-corners4-pair/certs/pair_toy_s199.json  W2 = 0  threshold = 1  examined = 201080  max_depth = 37  1.429s
+   exit=0
+FAIL  attempts/A66-corners4-pair/certs/pair_control_s201.json  W2 = 0  threshold = 1  examined = 4  max_depth = 0  0.000s
+  witness[0] kind=definitive depth=0 U=0 certain_mass=0 deficit=1
+    confirmed counterexample: sat_gap = 1/100 mass = 0 m2 = 0 need = 1
+   exit=1
+FAIL  attempts/A66-corners4-pair/certs/pair_smoke_paths.json  W2 = 225/4  threshold = 66001/1000  examined = 149  max_depth = 44  0.001s
+  witness[0] kind=cap depth=44 U=0 certain_mass=0 deficit=1
+   exit=1
+--- A73 anchors (mass-load-bearing PASS path), depth 40 split 2 ---
+WARNING (hard): 25 coincident atom(s) (p == p'). These can never be collected by an interior-disjoint pair; their weight counts toward W2 as pure loss.
+PASS  attempts/A73-pair-v2/certs/anchor_grid05_s3.json  W2 = 325  threshold = 780  examined = 23782  max_depth = 26  6.352s
+   exit=0
+WARNING (hard): 16 coincident atom(s) (p == p'). These can never be collected by an interior-disjoint pair; their weight counts toward W2 as pure loss.
+PASS  attempts/A73-pair-v2/certs/anchor_grid06_s3.json  W2 = 136  threshold = 153  examined = 514  max_depth = 6  0.059s
+   exit=0
+
+clause counts per certificate:
+  pair_toy_s199      PASS examined=201080  vac=0     vac_contain=0     exempt=0     nd=100608  cov=0      cov_f=0    maxd=37
+  pair_control_s201  FAIL examined=4       vac=0     vac_contain=0     exempt=0     nd=3       cov=0      cov_f=0    maxd=0
+  pair_smoke_paths   FAIL examined=149     vac=0     vac_contain=0     exempt=41    nd=19      cov=0      cov_f=0    maxd=44
+  anchor_grid05_s3   PASS examined=23782   vac=154   vac_contain=0     exempt=0     nd=1387    cov=9934   cov_f=561  maxd=26
+  anchor_grid06_s3   PASS examined=514     vac=0     vac_contain=0     exempt=0     nd=45      cov=153    cov_f=127  maxd=6
+
+===============================================================================
+CLI / EXIT-CODE MATRIX
+===============================================================================
+  toy PASS                         exit=0 (want 0)
+  anchor_grid06 PASS               exit=0 (want 0)
+  control FAIL                     exit=1 (want 1)
+  float literal anywhere           exit=2 (want 2)
+  unsupported format               exit=2 (want 2)
+  (P1) W2 >= threshold             exit=2 (want 2)
+  unreadable certificate           exit=2 (want 2)
+  --nodes budget exhausted         exit=1 (want 1)
+
+format acceptance (spec 2: a v2 verifier MUST accept v1 certificates):
+  pair-certificate-v1 -> accepted (the v1 corpus above)
+  pair-certificate-v2 -> PASS  C:/Users/esumm/AppData/Local/Temp/claude/C--Users-esumm-code-packing/8b20e315-017a-445b-9327-302e5359887a/scratchpad/toy_v2.json  W2 = 0  threshold = 1  examined = 201080  max_depth = 37  1.384s
+
+hints (spec 4, failing-SET schema): untrusted; every leaf re-proved exactly
+  hint_ok   verdict=PASS hint_misses=0 examined=201082
+  hint_bad  verdict=PASS hint_misses=1 examined=201080
+  (unhinted baseline examined=201080; a wrong leaf claim falls back, verdict unchanged)
+
+parallelism (--jobs optional; verdict and node counts identical):
+  jobs=1  PASS  attempts/A66-corners4-pair/certs/pair_toy_s199.json  W2 = 0  threshold = 1  examined = 201080  max_depth = 37  1.371s
+  jobs=8  PASS  attempts/A66-corners4-pair/certs/pair_toy_s199.json  W2 = 0  threshold = 1  examined = 201080  max_depth = 37  0.623s
+
+===============================================================================
+THROUGHPUT (results/rs_throughput.json)
+===============================================================================
+  node = one pair box examined; --survey + hard --nodes budget; DEFICIENT-EARLY off
+  regime                               nodes      nodes/s  wall
+  synthetic_atoms_dense                1200000      22016  54.51s
+  synthetic_atoms_realistic            1200000      47346  25.35s
+  toy_corpus_s199_split5               1200002     300160  4.00s
+  synthetic_atoms_dense_parallel       1200000     131295  9.14s
+  synthetic_atoms_realistic_parallel   1200003     323172  3.71s
+
+  target >= 100k nodes/s at a setting examining >= 1e6 nodes:
+    MET single-threaded in the NONDISJOINT regime (300160 n/s)
+    MET in both atom regimes at --jobs 8
+    NOT met single-threaded in the atom regimes (synthetic_atoms_dense 22016, synthetic_atoms_realistic 47346)
+
+===============================================================================
+SPEC OBSERVATIONS RAISED BY THIS BUILD (all now resolved in the spec)
+===============================================================================
+
+[S1] RESOLVED -> new clause 3.3 item 1b VACUOUS-CONTAIN.
+     Reported: the 3.1 clip uses w_lo = min(w(t0),w(t1)) and is the only clause that
+     consults containment, but admissibility needs cx >= w(t)/2 POINTWISE. Near t in
+     {0,1}, w_lo = 1 while w(t) > 1 in the interior, so the clipped box keeps placements
+     with cx in [1/2, w(t)/2) that leave [0,s]^2. Splitting t never helps (any
+     subinterval retaining t=0 or t=1 still has w_lo=1) -> infinite regress -> cap FAIL.
+     Measured on pair_smoke_paths: stuck box F t=[0.995278,1] x=[511/512,257/256]
+     y=[1/2,131/256]; at t=256/257, centre (511/512,1/2) the E3- quadratic has
+     A=257/512, B=-1, C=255/512, so 4AC-B^2 = -4/262144 < 0 with interior vertex - the
+     square is genuinely core-separated (~4e-6) while reaching y=-0.0019, i.e. not
+     container-admissible and not a real obligation.
+     Implemented per the new 1b: exact endpoint-only test per side, e.g. left violated
+     for all placements iff (x1+1/2)t^2 - t + (x1-1/2) < 0 at BOTH t0 and t1 (positive
+     leading coefficient => the sup over the interval is at an endpoint).
+     Selftest coverage: 2500-draw fuzz vs float containment sampling (0 soundness
+     violations, predicate fired 1135x) PLUS two unit assertions, because a clause that
+     never fires would pass a fuzz vacuously - and it fires 0 times on the whole corpus.
+
+[S2] RESOLVED -> 4 hint schema now carries failing SETS.
+     Reported: 4 still specified a scalar sigma per witness while 3.6 had moved to
+     failing sets, which 3.6 itself calls the norm near axis orientations (size 2).
+     This build re-derives COVERED/COVERED_F from scratch, so witness payloads are
+     advisory; the parser now validates the failing-SET shape so a hint written against
+     the superseded scalar schema is reported as version skew (hint_miss) rather than
+     silently ignored.
+
+[S3] ACCEPTED as implemented. Gates (a)/(b) of 5.4 name the toy PASS cert, but
+     pair_toy_s199 has an EMPTY atom list (PASS is by NONDISJOINT), so halving or
+     deleting an atom is a no-op there; nor can a mass-load-bearing PASS cert exist at
+     toy scale (obligations begin at exactly s=2, the tangency case 8 calls
+     uncertifiable). Gates are applied to the COVERED clause directly, per the v1
+     precedent. The A73 anchors now supply the mass-load-bearing PASS path and are wired
+     into the selftest corpus.
+
+[S4] Smoke has no v1 report, so its verdict cannot be cross-validated against v1; the
+     agreed criterion is AGREEMENT between the two v2 implementations. Both report FAIL
+     with a cap witness at comparable budgets.
+
+[S5] Lemma M pinning (3.4) confirmed by independent derivation:
+     du/dcx = -C <= 0, du/dcy = -S <= 0, dv/dcx = +S >= 0, dv/dcy = -C <= 0 on t in
+     [0,1], so the SLACK-minimising corners are g1@(x0,y0), g2@(x1,y1), g3@(x1,y0),
+     g4@(x0,y1) exactly as written.
+
+SPLIT HEURISTIC (6) - two gates, both found by cross-validation against the reference:
+  (i)  possible-collectability: only atoms possibly collectable in BOTH factors are
+       eligible targets (each constraint's max over the box >= 0, pinned at the corner
+       OPPOSITE Lemma M's min corner, via Lemma Q's max analogue).
+  (ii) weight-per-needed-shrink, not weight alone: a tangentially-reachable atom has a
+       pinned min stuck at e.g. -1/4 regardless of how t is halved, so ranking by weight
+       alone chases it forever while x and y collapse for vanishing gains. Ranking by
+       w / (needed shrink) demotes it.
+  Plus: a dimension's halving must close >= 1% of the remaining gap to be chosen;
+  otherwise the v1 widest-dimension rule (tscale 2) takes over and guarantees progress.
+  Before these: anchor_grid06 thrashed to depth 40 in 50 nodes with cov=0. After:
+  grid05 PASS in 23782 nodes (max_depth 26), grid06 PASS in 514 (max_depth 6).
+  Reference node counts are 5866 and 1098; 3.2 Lemma S makes soundness independent of
+  the split rule, so counts are free to differ.
+
+COMPLETENESS-ONLY IMPLEMENTATION LIMITS (never affect soundness; all make PASS harder):
+  - COVERED-F greedy caps: <= 12 MEM and <= 6 EXC witnesses per node, failing sets of
+    size <= 4, <= 512 atoms evaluated per node.
+  - COVERED-F witness candidates are drawn from the certain-membership shortlist.
+  - The float pre-screen skips atoms already PROVEN (via an endpoint value of a pinned
+    slack quadratic, which upper-bounds its minimum) to fail more than 4 constraints.
