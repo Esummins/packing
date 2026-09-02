@@ -1872,3 +1872,27 @@ affordable cost estimate for closing 3.84.
   needs rcases c. Files: attempts/A75-lean-wave5/{notes/findings.md,logs/}, lean/PackingCertMathlib/.../{MeasurePy,
   MeasurePyBridge,ParamChecker,ParamBridge,ParamData506,ParamK506,Selection,Zones}.lean, lean/gen_param_lean.py,
   lean/README.md, scratch/Axioms.lean, depgraph json+svg, REGISTRY row.
+
+## 2026-09-02 A74-mixed-depth (Fable lead, solo) -- done-mixed
+- T1 MIXED-DEPTH EMISSION LOOP BUILT + RUN: code/pairlp413m.py (rows at depth levels eta in {0.05,0.02,0.008,0.002[,0.0005]}
+  priced rhs_l = 1 + mu*(eta_max-eta_l)/(eta_max-eta_min); dual = depth-priced covering measure over ALL catalog pairs;
+  gate = unpriced W2 = sum y with n_ub = 0; consolidation by rising dual-weight floor under a W2 guard; dual seeding
+  from earlier runs' binding rows at every level; IPM+crossover rounds), emit413m.py (canary inside), loop413m.py,
+  hinttree.py (spec s4 hint trees, max-min lookahead), primal2seed.py.
+- FIRST SUB-THRESHOLD corners4 MEASURES [M]: md5 W2 = 20.98857 (461 atoms; floor 0.002), md7 W2 = 20.95955 (353;
+  floor 0.0005), md8 W2 = 20.95828 on the catalog grown by 65 exact counterexample placements. Profile: ~70% of mass
+  at 0.008-0.02, ~25% at 0.002, 3-4% at 0.05. Lemma W'' (pair_kill.md 6.7): slack 21-W2 is 0.011 / 0.040 at floors
+  0.002 / 0.0005 vs 0.47 sharp; depth pricing spends W2 one-for-one (mu = 0.3: dual mass RISES to 21.55, killed);
+  consolidation and depth compete for the same slack (accepted 470 rows / rejected 398 for md5). Catalog growth by
+  exact holes costs ~nothing.
+- VERIFICATION RESIDUE MEASURED: unhinted Rust survey (2M nodes, depth 34): FAIL by cap only, 0 definitive rows, caps at
+  84.5% median certain mass with factor B's tilt UNSPLIT in all 300 (splitter dove A to 2e-4). Hint trees (verifier
+  untouched): 30/root -> caps at 99.8% certain; 3000/root (237k nodes, 82 MB cert) -> COVERED +8%, DEFICIENT-EARLY 7317x:
+  exact continuum counterexample rows (collect 0.948-0.992) harvested -> catalog grown -> md8. NO corners4 PASS;
+  T2 skipped per BRIEF. Per-side loop iteration ~1 h (LP 25-40 min, hints 10, hinted survey 15-25); certification unpriced.
+- Rig lessons [M]: IPM-no-crossover times out with no feasible iterate above ~10M nnz; simplex cold start does not finish;
+  purge after solve invalidates HiGHS row duals (read duals BEFORE deleteRows); bound-saturated columns make the dual a
+  non-covering; the Rust float-literal gate rejects floats in provenance (correct).
+- Canary SAFE per emission (md5 x2, md7, md8: min gap = lambda-1 = 1.0574e-7, Sigma m2 = 6; notes/ledger.md). Discipline:
+  1 LP slot at a time, BLAS pinned, headroom gate held; A57/A60/A61 untouched; frozen verifiers untouched (import-only).
+  Files: attempts/A74-mixed-depth/*, docs/proofs/pair_kill.md 6.7, depgraph C.K4TIER note, REGISTRY row.

@@ -14,3 +14,24 @@
 [09:42:46] dual-seed pair_dual_k4_13_a71cg.json: 2455 rows pushed (cap 500)
 [09:42:46] dual-seed pair_dual_k4_13eta001.json: 1265 rows pushed (cap 500)
 [09:42:47] seed rows=2691 nnz=23000182 cols=49360
+[09:49:41] r1: value=21.130666 excess=0.575477 lvl_relmax=1.0958,1.3119,1.4544,1.5755,1.5750 viol=300 supz=485 rows=8804 nnz=23000182 purged=0 (lp 410.2s, tot 417s)
+[09:49:41] r1: W2=20.968435 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[09:49:41] nnz/row cap at round 1 (nnz=23922094 rows=9104)
+[09:56:45] full: FINAL ipm/on rows=9104 -> HighsModelStatus.kOptimal value=21.109416 n_ub=0 (422s)
+[09:56:45] full duals: W2=20.945656 priced=21.109416 (LP value 21.109416) hist={"0.05": {"n": 15, "mass": 0.574912}, "0.02": {"n": 86, "mass": 6.875721}, "0.008": {"n": 162, "mass": 7.465028}, "0.002": {"n": 167, "mass": 5.118543}, "0.0005": {"n": 44, "mass": 0.911453}}
+[09:56:47] consol r0 wmin=0.0005: FINAL ipm/on rows=460 -> HighsModelStatus.kOptimal value=21.109434 n_ub=0 (2s)
+[09:56:47] consol r0: wmin=0.0005 rows 9104->460 value=21.109434 W2=20.945712 supp=460 n_ub=0
+[09:56:50] consol r1 wmin=0.001: FINAL ipm/on rows=451 -> HighsModelStatus.kOptimal value=21.109495 n_ub=0 (2s)
+[09:56:50] consol r1: wmin=0.001 rows 460->451 value=21.109495 W2=20.945752 supp=450 n_ub=0
+[09:56:52] consol r2 wmin=0.002: FINAL ipm/on rows=443 -> HighsModelStatus.kOptimal value=21.109696 n_ub=0 (2s)
+[09:56:52] consol r2: wmin=0.002 rows 451->443 value=21.109696 W2=20.946031 supp=440 n_ub=0
+[09:56:54] consol r3 wmin=0.004: FINAL ipm/on rows=406 -> HighsModelStatus.kOptimal value=21.112462 n_ub=0 (2s)
+[09:56:54] consol r3: wmin=0.004 rows 443->406 value=21.112462 W2=20.948814 supp=401 n_ub=0
+[09:56:55] consol r4 wmin=0.008: FINAL ipm/on rows=367 -> HighsModelStatus.kOptimal value=21.122080 n_ub=0 (1s)
+[09:56:55] consol r4: wmin=0.008 rows 406->367 value=21.122080 W2=20.958284 supp=363 n_ub=0
+[09:56:56] consol r5 wmin=0.016: FINAL ipm/on rows=277 -> HighsModelStatus.kOptimal value=21.262201 n_ub=0 (1s)
+[09:56:56] consol r5: wmin=0.016 rows 367->277 value=21.262201 W2=21.098089 supp=260 n_ub=0
+[09:56:56] consol r5: REJECTED (status/n_ub/W2 guard) -- revert
+[09:56:56] RESULT: LP value(full)=21.109416 value(emitted)=21.122080 W2=20.958284 thr=21 -> UNDER converged=False excess=0.5754773824449493 hist={"0.05": {"n": 11, "mass": 0.606824}, "0.02": {"n": 74, "mass": 6.808236}, "0.008": {"n": 128, "mass": 7.465725}, "0.002": {"n": 125, "mass": 5.233952}, "0.0005": {"n": 25, "mass": 0.843547}}
+[09:56:56] dumped 363 atoms (W2=20.958469) depth hist {"0.05": {"n": 11, "mass": 0.606828}, "0.02": {"n": 74, "mass": 6.808277}, "0.008": {"n": 128, "mass": 7.465788}, "0.002": {"n": 125, "mass": 5.234015}, "0.0005": {"n": 25, "mass": 0.843561}} -> C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\pair_primal_k4_13_b0_md8.json
+[09:56:56] wrote C:\Users\esumm\code\packing\attempts\A74-mixed-depth\results\pairlp413m_k4_13_md8.json (975.4s)

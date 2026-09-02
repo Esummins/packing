@@ -390,6 +390,79 @@ emission. Canary [M]: the dilated Trump family re-verified SAFE under A73 parame
 adversary-side. P0 consumption path unchanged and restated in
 `attempts/A73-pair-v2/notes/findings.md`.
 
+## 6.7 [M+T] Mixed-depth emission: the first sub-threshold corners4 measures, hint trees, and Lemma W″ (A74, 2026-09-02)
+
+**Machinery** (`attempts/A74-mixed-depth/code/`, emission-side only; the frozen v2
+verifiers are untouched and every claim below about the continuum is theirs). The (P2′)
+point-pattern rows are offered to the A71/A73 adversary LP at SEVERAL depth levels
+η₁ > … > η_L at once (each level's own arrangement of the η-shrunk squares; row (c,d,l)
+counts z_ij only when both endpoints are η_l-deep), priced into the adversary as
+load ≤ rhs_l = 1 + μ·(η_max − η_l)/(η_max − η_min). By LP duality the row duals y then
+minimise the depth-priced covering cost Σ y_r·rhs_r subject to Aᵀy ≥ 1 over EVERY catalog
+pair (all pairs are columns, so any HiGHS-optimal dual is a restricted covering measure —
+provided no column sits at its bound, which is checked), and the certificate gate is the
+UNPRICED mass W₂ = Σ y ≤ priced value. Consolidation drops rows below a rising dual-weight
+floor and re-solves, accepted while W₂ < guard. Dual seeding (the binding point pairs of
+earlier runs re-membershipped at every level) replaces ~15 cut rounds; the loop solves are
+IPM + crossover (exact duals each round; IPM-only iterates time out without a feasible
+point above ~10 M nnz, and simplex cold-starts do not finish). Canary per emission SAFE
+(`notes/ledger.md`: min gap = λ − 1 = 1.06e-7, Σm₂ = 6).
+
+**[M] Sub-threshold measures exist (restricted).** On the 404-placement A71 colgen catalog
+(+ control columns):
+
+| run | menu η | μ | exact W₂ | atoms | mass at 0.05 / 0.02 / 0.008 / 0.002 / 0.0005 |
+|---|---|---|---|---|---|
+| md5 | 0.05, 0.02, 0.008, 0.002 | 0.01 | **20.98857** | 461 | 0.87 / 7.29 / 7.55 / 5.28 / — |
+| md7 | + 0.0005 | 0.01 | **20.95955** | 353 | 0.59 / 6.98 / 7.41 / 5.10 / 0.87 |
+| md8 | md7 menu, catalog grown by 65 exact-counterexample placements (469) | 0.01 | **20.95828** | 363 | 0.61 / 6.81 / 7.47 / 5.23 / 0.84 |
+
+Every atom is ≥ its level's η deep in every square its row serves (the A73 tangency trap
+is closed by construction; positions rounded to 1e-6 ≪ η). Certificates:
+`attempts/A74-mixed-depth/certs/pair_k4_13_s0_b0_md{5,7,8}.json` (+ `_hinted`).
+
+**Lemma W″ (the measured mixed-depth law, restricted form).** Let V(η_min, μ) be the
+converged value of the depth-priced adversary LP on a catalog S with menu floor η_min.
+By weak duality every covering of S's pairs whose atoms are all ≥ η_min-deep in the
+squares they serve has W₂ ≥ V(η_min, μ)/(1 + μ); and the measured values pin the
+restricted optimum to the threshold from below: slack 21 − W₂ = 0.011 at floor 0.002,
+0.040 at floor 0.0005, against 0.47 at the sharp limit (A71: 20.528 converged). The
+forced profile is not "bulk deep + thin shallow stratum": ~70 % of the mass sits at
+0.008–0.02, ~25 % at 0.002, 3–4 % at 0.05 — the bulk lives just below the A73 bracket
+η* ∈ (0.006, 0.05), as Lemma W′ predicts. Depth and consolidation compete for the same
+slack: at μ = 0.3 the dual mass rises ABOVE 21 while rows are added (21.31 → 21.55, run
+killed), and consolidation is accepted down to 470 rows (20.9886) and rejected at the
+next floor (398 rows, 21.0026) for md5; 355 → 271 rows: 20.9595 → 21.0517 for md7.
+Catalog growth by exact counterexample rows costs essentially nothing (md7 → md8:
+−0.001 with 65 new placements), so the restricted optimum is not what blocks a
+certificate; the verification residue is.
+
+**[M] Verification residue and hint trees.** md5 unhinted (Rust verify_pair2 `--jobs 8`,
+depth 34, 2 M nodes, survey): FAIL by cap only — 0 definitive rows, 300 cap witnesses at
+depth 34 with certain mass median 0.845 (min 0.68), the verifier's own splitter having
+driven factor A to widths 2e-4–7e-4 while factor B's tilt interval stayed UNSPLIT in all
+300: the residue is tilt uncertainty in the un-split factor, not the atom margins.
+`code/hinttree.py` (spec §4 hint trees: emitter-side float B&B, cut = max-min lookahead
+over the six midpoint cuts, COVERED leaves where float-certain mass ≥ 1, empty nodes for
+verifier fallback; verifier untouched, every leaf re-proved) changes the search shape:
+30 nodes/root → cap witnesses at 99.8 % certain mass; 3000 nodes/root (237 k hint nodes,
+5.9 k leaves) → COVERED 106.8 k vs 98.6 k, and DEFICIENT-EARLY fires 7317× — exact
+rational counterexample pairs (collecting 0.948–0.992) exist in the continuum between
+catalog placements, which the unhinted search never probed. Those rows are the survey
+loop's row source (md8 is the first grown-catalog re-solve). No corners4 PASS yet: the
+honest state is a working mixed-depth emission loop with exact holes being harvested,
+not a certificate.
+
+**P0 consumption and window pricing (unchanged in form, now priced per side).** A v2 PASS
+of any of these certificates at s₀ with δ = 1/1000 slack cores consumes verbatim as in
+§6.6 / A73 (`Corollary P0`; ε_box = 1/833 = 3δ/(5/2 − δ) exactly): emptiness of every
+packing containing the corner pins on (s₀/(1 + δ/(5/2)), s₀), i.e. the corners4 leaf of
+C.K4TIER on that shell; full-window coverage is the slack-core slab grid (~38 sides at
+δ = 1e-3 over [3.82, s₀]). Measured per-side loop cost at this scale: LP 25–40 min
+(IPM+crossover rounds, dual-seeded), hint build ~10 min, hinted 1–2 M-node survey
+15–25 min — ≈ 1 h per loop iteration, iterations-to-convergence and the certification
+run itself unpriced (not reached).
+
 ## 7 What remains open for a certified pair kill (the honest ledger)
 
 * [M, pilot] the fractional pair-LP verdict per class — A66 measures k4_08 (boosted) and
