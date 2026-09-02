@@ -49,6 +49,31 @@ def main():
         with open(p, "w") as fh:
             json.dump(toy(s), fh, indent=1, sort_keys=True)
         print("wrote %s" % p)
+    p = os.path.join(CERTS, "pair_smoke_paths.json")
+    with open(p, "w") as fh:
+        json.dump(smoke(), fh, indent=1, sort_keys=True)
+    print("wrote %s" % p)
+
+
+def smoke():
+    """A path-coverage smoke certificate (NOT a claim): a big core plus a dense atom
+    grid, so that the EXEMPT-core and COVERED discharge branches are both exercised."""
+    fr = lambda a, b: "%d/%d" % (a, b)
+    atoms = []
+    for i in range(1, 16):
+        for j in range(1, 16):
+            # genuine PAIR atoms: p and its reflection through the centre of [0,4]^2
+            # (coincident atoms can never be collected -- spec section 2)
+            atoms.append({"px": fr(i, 4), "py": fr(j, 4),
+                          "qx": fr(64 - i, 4), "qy": fr(64 - j, 4), "w": "1/4"})
+    return {
+        "format": "pair-certificate-v1",
+        "s": "4", "n": 13, "k": 1, "m": 1, "beta": "1/1000",
+        "cores": [{"kx": "2", "ky": "2", "a": "1"}],
+        "boxes": [{"bx": "2", "by": "2", "h": "1/2"}],
+        "atoms": atoms,
+        "provenance": {"purpose": "exercise EXEMPT-core + COVERED + bonus U branches"},
+    }
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "attempt": "A63-hole-closure (promoted to lean/ as the LIVE monitoring copy, 2026-09-02: the advisor updates labels/notes here as milestones land and re-renders depgraph.svg via lean/render_depgraph.py; the A62/A63 results/ copies are frozen provenance) || A64 lean-wave updates: lean-proved (gold) tier added; A.PARAM + A.F2 + A.LB382 -> lean-proved; A.S3 -> lean-proved; A.UBshat split (identity axiom isolated, (c-idl) closure spec added) || A68 lean-wave3: A.D1 (attained) DISCHARGED -> lean-proved (roster 13 -> 12); A.SBRIDGE, B.K1(i), E.COORD -> lean-proved (Dilation.lean, Skeleton.lean, ThetaT.lean); B.EXACT Lean skeleton conditional on census interface (hface)",
+  "attempt": "A63-hole-closure (promoted to lean/ as the LIVE monitoring copy, 2026-09-02: the advisor updates labels/notes here as milestones land and re-renders depgraph.svg via lean/render_depgraph.py; the A62/A63 results/ copies are frozen provenance) || A64 lean-wave updates: lean-proved (gold) tier added; A.PARAM + A.F2 + A.LB382 -> lean-proved; A.S3 -> lean-proved; A.UBshat split (identity axiom isolated, (c-idl) closure spec added) || A68 lean-wave3: A.D1 (attained) DISCHARGED -> lean-proved (roster 13 -> 12); A.SBRIDGE, B.K1(i), E.COORD -> lean-proved (Dilation.lean, Skeleton.lean, ThetaT.lean); B.EXACT Lean skeleton conditional on census interface (hface) || A70 lean-wave4: V.CASE -> lean-proved (checkCaseI + sat_squares + soundness chain + k5_06.lo end-to-end replay); A68's (P2) residue discharged; E.A36/E.A22 untouched (scoped for the next wave)",
   "date": "2026-09-01",
   "commit": "c9980bfcda1582d1e1a20126927a8a7d34ca1bb6",
   "checklist_items": [
@@ -149,9 +149,8 @@
    "title": "k<=4 / k<=3 tier exclusion (H10)",
    "label": "open",
    "lean_axiom": "stratum_kill (part)",
-   "note": "THE LARGEST OPEN LEAF; A65 (2026-09-01) priced the re-based H10-STUCK routes (docs/proofs/h10_stuck.md): route (a) decoupled crowd-pricing DEAD [T, ties the threshold exactly]; route (b) crowd-position conditioning DEAD on cost; route (c) upward absorption DEAD [T, occupancy-matrix closure]; the merged boosted-kill LP (per-placement RHS 1+beta*m(Q), certifiable through the frozen verifier) DEAD at every beta \u2014 measured fractional boost-slope ~ N*L_eff (21.5 on corners4, 17 on k4_08) vs stuckness revenue 2m (16, 14); the 2m <= N*L_eff gap >= 3 holds in EVERY protected class. Integral side: NO class has a crowd-saturated family (exact-verified maxima short by 1-3; corners4 pins+7 not even feasible at s0 in search) \u2014 H10-stuck is very likely TRUE but beyond ALL single-square measure certificates: the crowd's value is pairwise. Residue: (1) pair certificates [A58-G3 pair version, now provably necessary], (2) corners4 direct integral infeasibility (channel width s-2 < 2 = s(2)), (3) A60-style conditioning / FJ cascade (A50-G1).",
-   "source": "attempts/A65-low-k-closure (results/crowdfam.json, boost_*.json, clique_caps.json), docs/proofs/h10_stuck.md",
-   "owner": "A66"
+   "note": "THE LARGEST OPEN LEAF; A65 priced the re-based H10-STUCK routes (docs/proofs/h10_stuck.md): decoupled counting / conditioning / absorption / boosted-kill LP all DEAD - the crowd's value is pairwise. A66 (2026-09-02) executed the residue: (R2) corners4 direct integral counting REFUTED [T+M, docs/proofs/corners4_empty.md] - the centre-occupancy relaxation admits exact 7-point witnesses at EVERY window side (the 1.877 channel holds 3 centres lengthwise + 2 pin-edge + 2 wall-mid); emptiness is orientation-coupled, corners4 NOT deleted. (R1) pair certificates DESIGNED + SOUND [T, docs/proofs/pair_kill.md Lemma P/P0; spec docs/specs/pair_certificate_v1.md; new verifier attempts/A66-corners4-pair/code/verify_pair.py, NOT yet TCB]: stuckness rows = CC-2' 2-crowds only, bridge via Delta_lambda with slack cores + box widening 3(lambda-1); CANARY THEOREM: dilated Trump saturates the trump5 pair threshold C(6,2)+6*beta exactly - trump5 provably unkillable by the formalism; A34 collapse does not apply (pricing dual, no marginal gluing). PILOT [F]: k4_08 restricted pair value = 21+6*beta EXACTLY (margin -beta, zero fractional excess; integral optimum = the crowdfam ghost) - boosted pair kill LIVE at restricted strength; basin discount +0.4 at gamma~0.1 then dodged (window gamma<0.245); corners4 beta=0 emptiness bracket [14.89, 21.32] straddles 21 - OPEN (solver-bound). No certificate emitted; successor = emission oracle loop vs verify_pair.py. Residue: conditioning/FJ cascade (A50-G1) and the priced corners4 mini-tree (docs/proofs/corners4_empty.md sect. 6).",
+   "source": "attempts/A65-low-k-closure + attempts/A66-corners4-pair (results/pairlp_*.json), docs/proofs/h10_stuck.md, docs/proofs/corners4_empty.md, docs/proofs/pair_kill.md"
   },
   {
    "id": "C.CC2",
@@ -262,8 +261,7 @@
    "label": "certificate+verifier",
    "lean_axiom": "basin",
    "source": "attempts/A36-levers (17 IV certificates + a36_check.py re-checker, 339 checks, 5 corruption gates)",
-   "note": "Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE \u2014 the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member.",
-   "owner": "A70"
+   "note": "Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE \u2014 the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member. || A70: not reached (T1 V.CASE consumed the wave, per the strict priority); scoping in attempts/A70-lean-wave4/notes/findings.md - rung (a) = exact-rational interval-jet re-emission of the 70-row order-2 jet machine, own attempt."
   },
   {
    "id": "E.A22",
@@ -295,10 +293,9 @@
   {
    "id": "V.CASE",
    "title": "verify_case.py soundness (PASS => no packing satisfies the pin hypotheses)",
-   "label": "proved-prose",
-   "source": "attempts/A53-simple-strata/code/verify_case.py header (A13 extension bridge argument)",
-   "note": "Single implementation (C3 OPEN \u00e2\u20ac\u201d decides the optimality tree); spec frozen by A62 as docs/specs/case_lp_certificate_v1.md.",
-   "owner": "A70"
+   "label": "lean-proved",
+   "source": "attempts/A53-simple-strata/code/verify_case.py (sha 521cb01f) + lean/PackingCertMathlib/PackingCertMathlib/Case{Checker,Sat,Hyp,Bridge,K506}.lean (A70)",
+   "note": "LEAN-PROVED (A70): checkCaseI (Lean port of the decision core; core-Rat exempt tests over the A64 integer layer) + full soundness chain: sat_squares (SAT sufficiency for two squares - geometric Hahn-Banach + 4-cone support bound; the spec's one-parenthesis citation is now a machine-checked theorem), coreExempt_sound/nofamExempt_sound/exemptB_sound, goC_sound, checkCaseI_price = claim (P2) scaled by wd, priced_dichotomy_scaled, checkCaseI_no_family (B-NO) / checkCaseI_kill (the lemma_B hcert producer per PASS file - A68's named residue DISCHARGED). One certificate replayed end to end (k5_06.lo at s=191/50, native_decide; k5_06_lo_kill + k5_06_lo_kill_packing via lemma_B). Axioms: propext/Choice/Quot.sound (+ the per-theorem native_decide axiom on the replay only). RESIDUES: corpus-wide replay separately priced; B.2' owner-frame prose-only; single-side only (window = V.PARAM). FINDING: spec's 'a = 0 point core legal/used' is wrong on both counts (loader rejects a<=0; 0 of 9217 corpus cores have a=0) - erratum in the spec."
   },
   {
    "id": "V.PARAM",
@@ -342,7 +339,7 @@
    "title": "Lemma B: interior-disjoint packings vs closed-disjoint certificate families (lambda-dilation with pin slack, S4/F9)",
    "label": "lean-proved",
    "source": "docs/proofs/closed_disjoint_bridge.md (A63) + lean/PackingCertMathlib/PackingCertMathlib/Dilation.lean (A68)",
-   "note": "LEAN-PROVED (A68, Dilation.lean): B.0(a) scaleC_disjoint (A64 pull-back trick replaces the SAT citation), B.0(b) = A64 scaleC_subset, B.0(c) slot_tracking ((lambda-1)*alpha exact, any beta), dilation_bridge (packing -> IsStrictFamily at lambda*m), lemma_B, AND the pricing pigeonhole priced_dichotomy/hcert_of_priced ((P1)+(P2) => bridged claim, Exempt-aware so B-NO = the same theorem), bprime_containment ((H') => (H)), pullback_mem_Icc (B.2'' widening). All axioms propext/Choice/Quot.sound. RESIDUES: producing (P2) from a PASS file is V.CASE; B.2' owner-frame (tilted-core) criterion remains prose; corpus margin rho ~ 1.0000009e-9 remains a [M] computation (A63 scan, reproduced by A60 on 49 leaves)."
+   "note": "LEAN-PROVED (A68, Dilation.lean): B.0(a) scaleC_disjoint (A64 pull-back trick replaces the SAT citation), B.0(b) = A64 scaleC_subset, B.0(c) slot_tracking ((lambda-1)*alpha exact, any beta), dilation_bridge (packing -> IsStrictFamily at lambda*m), lemma_B, AND the pricing pigeonhole priced_dichotomy/hcert_of_priced ((P1)+(P2) => bridged claim, Exempt-aware so B-NO = the same theorem), bprime_containment ((H') => (H)), pullback_mem_Icc (B.2'' widening). All axioms propext/Choice/Quot.sound. RESIDUES: producing (P2) from a PASS file is V.CASE; B.2' owner-frame (tilted-core) criterion remains prose; corpus margin rho ~ 1.0000009e-9 remains a [M] computation (A63 scan, reproduced by A60 on 49 leaves). || A70: the '(P2) from a PASS file' residue is DISCHARGED (V.CASE lean-proved; checkCaseI_kill produces lemma_B's hcert per certificate)."
   },
   {
    "id": "A.THMU",

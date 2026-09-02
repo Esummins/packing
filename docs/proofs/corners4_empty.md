@@ -115,8 +115,17 @@ integral counting included. It remains open, with three constructive routes, in 
 * (a) **Pair certificate at β = 0** (A66 T2 object, `docs/specs/pair_certificate_v1.md`): an
   emptiness certificate for corners4 needs NO stuckness — W₂ < C(7,2) = 21 with pair rows
   μ₂ ≥ 1 on all interior-disjoint core-free pairs kills every pins+7 family outright, and the
-  pair LP is not subject to the τ(0) wall. Measured in the A66 pilot: see
-  `attempts/A66-corners4-pair/notes/findings.md` (T1-residue line) for the verdict.
+  pair LP is not subject to the τ(0) wall. **Measured in the A66 pilot [F]: OPEN.** On an
+  adversary-adequate catalog (its single-square fractional packing reaches τ_f = 7.084 after
+  13 column-generation rounds, vs A65's 7.2545), the restricted β = 0 pair value brackets
+  τ₂(0) ∈ [14.82, 21.32] — the lower end a certified product dual witness (Lmax = 1.000000),
+  the upper end the last optimal of an UNCONVERGED cutting-plane run (simplex time on a
+  16.8k × 10.5k LP is the binder, not row/nnz caps) with a monotone trend 22.20 → 21.53 →
+  21.32 toward 21 and not yet across it. The route is neither refuted nor confirmed; the
+  successor needs a first-order/interior-point LP solver, then an emission oracle loop against
+  `verify_pair.py`. A first "15" on a coarse catalog was a catalog artifact (that catalog's
+  τ_f was 6.0) — the adequacy criterion (reproduce τ_f) is mandatory for every pair-LP
+  verdict. (`attempts/A66-corners4-pair/results/pairlp_k4_13_conv.json`, `singlelp_k4_13*.json`.)
 * (b) **Conditioned mini-tree**: branch on the cells of the near-feasible centre family of §5
   (wall/pin-forced squares are near-axis; the free interior square carries the tilt), each
   branch a case-LP with crowd-cell cores. Estimated branches: tens, not thousands (the

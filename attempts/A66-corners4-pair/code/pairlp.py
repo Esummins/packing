@@ -98,6 +98,34 @@ def width(th):
     return abs(math.cos(th)) + abs(math.sin(th))
 
 
+S0Q = Fr(969271, 250000)
+ENFORCE_CONTAINMENT = True     # set False ONLY by the audit, to reproduce the pre-fix catalogs
+
+
+def w_exact(tq):
+    """exact w(t) = |cos th| + |sin th| for th = 2*atan(t): cos = (1-t^2)/(1+t^2),
+    sin = 2t/(1+t^2), both rational, and |t| <= 1 so 1 - t^2 >= 0."""
+    a = abs(tq)
+    return (1 - tq * tq + 2 * a) / (1 + tq * tq)
+
+
+def contain_margin_exact(t, cx, cy):
+    """exact min over the four walls of (centre - w/2) resp. (s0 - centre - w/2).
+    >= 0  <=>  the closed unit square at (cx,cy) with tilt t lies inside [0,s0]^2.
+    (P2') quantifies over pairs of closed unit squares IN [0,s0]^2, so a placement with a
+    negative margin is not an admissible test object and must never become a column."""
+    tq, xq, yq = Fr(t), Fr(cx), Fr(cy)
+    h = w_exact(tq) / 2
+    return min(xq - h, yq - h, S0Q - xq - h, S0Q - yq - h)
+
+
+def contained_mask_exact(t, C):
+    """(n,) bool + (n,) float margins, computed in exact rational arithmetic."""
+    marg = np.array([float(contain_margin_exact(t[a], C[a, 0], C[a, 1])) for a in range(len(t))])
+    ok = np.array([contain_margin_exact(t[a], C[a, 0], C[a, 1]) >= 0 for a in range(len(t))])
+    return ok, marg
+
+
 def core_free_mask(C, th, pins):
     """(n,) bool: unit square at centres C (n,2), tilt th, is separated from EVERY axis unit pin.
     Separated on direction u iff |dc.u| >= (1+w)/2 (margin EPS_CORE), u in {e1,e2,a1,a2}."""
@@ -159,15 +187,27 @@ def inside_mask_points(P, cx, cy, th):
 
 
 # ------------------------------------------------------------------ catalog
-def greedy_diverse(X, keep, seed_idx=None):
-    """farthest-point sampling of `keep` rows of X (n,d), max-min Euclidean."""
+def greedy_diverse(X, keep, C=None, tbin=None, min_sep=0.0):
+    """farthest-point sampling of `keep` rows of X (n,d), max-min Euclidean.
+    If min_sep > 0, a candidate whose CENTRE (C) is within min_sep of an already-kept square of
+    the SAME tilt bin is barred: that is what keeps the membership depth (and hence the row
+    density of the pair LP) down."""
     n = len(X)
-    if n <= keep:
+    if n <= keep and min_sep <= 0.0:
         return np.arange(n)
-    sel = [0 if seed_idx is None else int(seed_idx)]
-    d = np.linalg.norm(X - X[sel[0]], axis=1)
-    for _ in range(keep - 1):
-        j = int(np.argmax(d))
+    sel = [0]
+    d = np.linalg.norm(X - X[0], axis=1)
+    barred = np.zeros(n, dtype=bool)
+    while len(sel) < keep:
+        if min_sep > 0.0:
+            j0 = sel[-1]
+            close = (np.hypot(C[:, 0] - C[j0, 0], C[:, 1] - C[j0, 1]) < min_sep) & (tbin == tbin[j0])
+            barred |= close
+            barred[j0] = True
+        dd = np.where(barred, -1.0, d)
+        j = int(np.argmax(dd))
+        if dd[j] <= 0.0:
+            break
         sel.append(j)
         d = np.minimum(d, np.linalg.norm(X - X[j], axis=1))
     return np.array(sel)
@@ -181,7 +221,8 @@ def grid_vals(lo, hi, step):
     return np.unique(np.concatenate([[lo, hi], v]))
 
 
-def build_catalog(pins, boxes, cap_total, cap_m2, cap_m1, fh, extra=None):
+def build_catalog(pins, boxes, args, fh, extra=None):
+    cap_total, cap_m2, cap_m1 = args.cap_total, args.cap_m2, args.cap_m1
     """returns dict with arrays t, th, cx, cy, mask, m, and per-source counts."""
     stats = {}
 
@@ -237,7 +278,8 @@ def build_catalog(pins, boxes, cap_total, cap_m2, cap_m1, fh, extra=None):
         if len(sel) == 0:
             continue
         X = np.column_stack([en_c[sel, 0], en_c[sel, 1], 2.0 * en_t[sel]])
-        g = greedy_diverse(X, min(cap, len(sel)))
+        g = greedy_diverse(X, min(cap, len(sel)), C=en_c[sel],
+                           tbin=np.round(en_t[sel] / 0.05).astype(int), min_sep=args.min_sep)
         pick.append(sel[g])
         stats["enrich_m%s_avail" % lo_m] = int(len(sel))
         stats["enrich_m%s_kept" % lo_m] = int(len(g))
@@ -246,18 +288,28 @@ def build_catalog(pins, boxes, cap_total, cap_m2, cap_m1, fh, extra=None):
     T = list(en_t[pick])
     C = list(map(tuple, en_c[pick]))
 
-    # ---- explicit extra placements (control family), before the coarse fill
-    n_extra = 0
+    # ---- explicit extra placements (control family / zone perturbations), before the coarse fill
+    # These bypass the grid clip, so they need BOTH filters applied explicitly.
+    n_extra = n_extra_rej_core = n_extra_rej_cont = 0
     if extra:
         for (t, cx, cy) in extra:
+            if not core_free_mask(np.array([[cx, cy]]), theta_of(t), pins)[0]:
+                n_extra_rej_core += 1
+                continue
+            if ENFORCE_CONTAINMENT and contain_margin_exact(t, cx, cy) < 0:
+                n_extra_rej_cont += 1
+                continue
             T.append(t); C.append((cx, cy)); n_extra += 1
     stats["extra_added"] = n_extra
+    stats["extra_rejected_not_core_free"] = n_extra_rej_core
+    stats["extra_rejected_not_contained"] = n_extra_rej_cont
 
     # ---- coarse fill
-    room = cap_total - len(T)
+    room = min(args.cap_coarse, cap_total - len(T))
     if room > 0 and len(co_t):
         X = np.column_stack([co_c[:, 0], co_c[:, 1], 2.0 * co_t])
-        g = greedy_diverse(X, min(room, len(co_t)))
+        g = greedy_diverse(X, min(room, len(co_t)), C=co_c,
+                           tbin=np.round(co_t / 0.05).astype(int), min_sep=args.min_sep)
         T += list(co_t[g])
         C += list(map(tuple, co_c[g]))
     stats["coarse_kept"] = int(len(T) - len(pick) - n_extra)
@@ -275,6 +327,14 @@ def build_catalog(pins, boxes, cap_total, cap_m2, cap_m1, fh, extra=None):
     for tv in np.unique(t):
         sel = np.nonzero(t == tv)[0]
         mask[sel] = box_mask_bits(C[sel], theta_of(float(tv)), boxes)
+    # ---- FINAL exact containment sweep over the assembled catalog (defence in depth)
+    okc, margc = contained_mask_exact(t, C)
+    stats["containment_violators"] = int((~okc).sum())
+    stats["min_containment_margin"] = float(margc.min()) if len(margc) else None
+    if ENFORCE_CONTAINMENT and not okc.all():
+        t, C, th, mask = t[okc], C[okc], th[okc], mask[okc]
+        margc = margc[okc]
+    stats["min_containment_margin_kept"] = float(margc.min()) if len(margc) else None
     m = np.array([bin(int(x)).count("1") for x in mask])
     cm = np.zeros(len(t))
     for tv in np.unique(t):
@@ -285,6 +345,32 @@ def build_catalog(pins, boxes, cap_total, cap_m2, cap_m1, fh, extra=None):
     stats["n_placements"] = int(len(t))
     stats["m_histogram"] = {int(k): int(v) for k, v in zip(*np.unique(m, return_counts=True))}
     return dict(t=t, th=th, C=C, mask=mask, m=m, stats=stats)
+
+
+def catalog_from_list(placements, pins, boxes):
+    """build a catalog dict from an explicit [[t,cx,cy],...] list (e.g. a D1-enriched catalog)."""
+    t = np.array([p[0] for p in placements], dtype=float)
+    C = np.array([[p[1], p[2]] for p in placements], dtype=float)
+    th = np.array([theta_of(x) for x in t])
+    mask = np.zeros(len(t), dtype=np.int64)
+    cm = np.zeros(len(t))
+    for a in range(len(t)):
+        mask[a] = box_mask_bits(C[a:a + 1], th[a], boxes)[0]
+        cm[a] = core_margin(C[a:a + 1], th[a], pins)[0]
+    m = np.array([bin(int(x)).count("1") for x in mask])
+    keep = cm >= -EPS_CORE                      # re-verify core-freeness of an imported catalog
+    okc, margc = contained_mask_exact(t, C)     # and containment, exactly
+    n_bad_cont = int((~okc).sum())
+    if ENFORCE_CONTAINMENT:
+        keep = keep & okc
+    stats = dict(n_placements=int(keep.sum()), imported=int(len(t)),
+                 dropped_not_core_free=int((~(cm >= -EPS_CORE)).sum()),
+                 dropped_not_contained=n_bad_cont,
+                 min_containment_margin=float(margc.min()) if len(margc) else None,
+                 min_containment_margin_kept=float(margc[keep].min()) if keep.any() else None,
+                 min_core_margin=float(cm[keep].min()) if keep.any() else None,
+                 m_histogram={int(k): int(v) for k, v in zip(*np.unique(m[keep], return_counts=True))})
+    return dict(t=t[keep], th=th[keep], C=C[keep], mask=mask[keep], m=m[keep], stats=stats)
 
 
 # ------------------------------------------------------------------ disjoint pairs
@@ -375,7 +461,7 @@ def dedupe_by_pattern(P, A, keep_empty=False, protect=0):
 
 
 # ------------------------------------------------------------------ load / cuts
-def chunk_load_topk(Af, Z, k, exclude=None, chunk=384, only_upper=True):
+def chunk_load_topk(Af, Z, k, exclude=None, chunk=384, only_upper=True, tol=EPS_LOAD):
     """max entries of L = Af Z Af^T over c<d, returning (list of (val,c,d), Lmax)."""
     npts = Af.shape[0]
     best = []
@@ -391,7 +477,7 @@ def chunk_load_topk(Af, Z, k, exclude=None, chunk=384, only_upper=True):
         lmax = max(lmax, float(L.max()) if L.size else 0.0)
         if k > 0:
             flat = L.ravel()
-            v = 1.0 + EPS_LOAD
+            v = 1.0 + tol
             hits = np.nonzero(flat > v)[0]
             if len(hits):
                 vals = flat[hits]
@@ -443,7 +529,29 @@ def arrangement_probes(cat, sup_sq, z, I, J, args, rng):
 
 
 # ------------------------------------------------------------------ LP
-def solve_beta(cat, I, J, m2, P, A, beta, args, fh):
+class RowStore:
+    """The (P2') rows found so far, keyed by their SUPPORT set of pair-columns.  Shared across
+    betas: a row is valid for every beta (the constraint does not depend on it), so each new beta
+    starts warm from every cut the previous betas paid for."""
+
+    def __init__(self):
+        self.keys = set()
+        self.rows = []
+        self.pts = []            # the (c, d) point pair that generated each row (for the primal)
+        self.nnz = 0
+
+    def add(self, sup, pt=None):
+        key = sup.tobytes()
+        if key in self.keys:
+            return False
+        self.keys.add(key)
+        self.rows.append(sup)
+        self.pts.append(pt)
+        self.nnz += len(sup)
+        return True
+
+
+def solve_beta(cat, I, J, m2, P, A, beta, args, fh, store, boxes):
     ns = len(cat["t"])
     npair = len(I)
     t0 = time.time()
@@ -462,8 +570,6 @@ def solve_beta(cat, I, J, m2, P, A, beta, args, fh):
     h.addCols(npair, obj, np.zeros(npair), np.full(npair, float(args.zub)),
               0, np.zeros(0, dtype=np.int32), np.zeros(0, dtype=np.int32), np.zeros(0))
 
-    added = set()          # rows are identified by their SUPPORT (point sets come and go)
-
     def row_support_from_masks(mc, md):
         Ic = np.nonzero(mc)[0]
         Id = np.nonzero(md)[0]
@@ -475,102 +581,152 @@ def solve_beta(cat, I, J, m2, P, A, beta, args, fh):
             return None
         return np.unique(v)
 
-    def add_rows(Amat, pairs):
-        starts, idxs = [], []
-        nnew, run = 0, 0
+    def push(sups):
+        """append already-computed supports to HiGHS (CSR)."""
+        if not sups:
+            return 0, 0
+        starts, run = [], 0
+        for sup in sups:
+            starts.append(run)
+            run += len(sup)
+        ind = np.concatenate(sups).astype(np.int32)
+        st = np.array(starts, dtype=np.int32)
+        nrow0 = h.getNumRow()
+        h.addRows(len(sups), np.full(len(sups), -highspy.kHighsInf), np.ones(len(sups)),
+                  len(ind), st, ind, np.ones(len(ind)))
+        if h.getNumRow() != nrow0 + len(sups):
+            raise RuntimeError("addRows rejected %d rows (have %d, wanted %d)"
+                               % (len(sups), h.getNumRow(), nrow0 + len(sups)))
+        return len(sups), len(ind)
+
+    def add_rows(Amat, pairs, pts=None):
+        fresh = []
         for (c, d) in pairs:
             sup = row_support_from_masks(Amat[c], Amat[d])
             if sup is None:
                 continue
-            key = sup.tobytes()
-            if key in added:
-                continue
-            added.add(key)
-            starts.append(run)          # cumulative NONZERO offset (not list length)
-            run += len(sup)
-            idxs.append(sup)
-            nnew += 1
-        if nnew == 0:
-            return 0, 0
-        ind = np.concatenate(idxs).astype(np.int32)
-        st = np.array(starts, dtype=np.int32)
-        nrow0 = h.getNumRow()
-        h.addRows(nnew, np.full(nnew, -highspy.kHighsInf), np.ones(nnew),
-                  len(ind), st, ind, np.ones(len(ind)))
-        if h.getNumRow() != nrow0 + nnew:
-            raise RuntimeError("addRows rejected %d rows (have %d, wanted %d)"
-                               % (nnew, h.getNumRow(), nrow0 + nnew))
-        return nnew, len(ind)
+            pp = None if pts is None else (tuple(pts[c]), tuple(pts[d]))
+            if store.add(sup, pp):
+                fresh.append(sup)
+        return push(fresh)
 
-    # ---- seed rows: box centres/corners pairs + random pattern pairs
-    rng = np.random.default_rng(args.seed)
-    nb = args.n_boxpts
-    seed_pairs = [(c, d) for c in range(nb) for d in range(c + 1, nb)]
-    rp = rng.integers(0, len(P), size=(args.n_seed_random, 2))
-    seed_pairs += [(int(a), int(b)) for a, b in rp if a != b]
-    nr, nnz = add_rows(A, seed_pairs)
-    total_nnz = nnz
-    log("beta=%.4g: seed rows=%d nnz=%d cols=%d" % (beta, nr, nnz, npair), fh)
+    # ---- warm start from every row any earlier beta paid for
+    if store.rows:
+        nr, nnz = push(list(store.rows))
+        log("beta=%.4g: warm start rows=%d nnz=%d cols=%d" % (beta, nr, nnz, npair), fh)
+    else:
+        rng0 = np.random.default_rng(args.seed)
+        nb = args.n_boxpts
+        seed_pairs = [(c, d) for c in range(nb) for d in range(c + 1, nb)]
+        rp = rng0.integers(0, len(P), size=(args.n_seed_random, 2))
+        seed_pairs += [(int(a), int(b)) for a, b in rp if a != b]
+        nr, nnz = add_rows(A, seed_pairs, pts=P)
+        log("beta=%.4g: seed rows=%d nnz=%d cols=%d" % (beta, nr, nnz, npair), fh)
 
+    rng = np.random.default_rng(args.seed + 11)
+    last_good = None
     rounds = 0
     status_note = "converged"
-    lm_last = None
-    for rd in range(args.max_rounds):
-        rounds = rd + 1
+    lm_cut = None
+    lm_fine = None
+    fine_info = {}
+    converged = False
+    stop = False
+    for outer in range(args.outer_passes):
+        # ---------- inner: cut on the working (coarse + arrangement-probe) point set
+        while rounds < args.max_rounds:
+            rounds += 1
+            h.run()
+            st = h.getModelStatus()
+            if st != highspy.HighsModelStatus.kOptimal:
+                status_note = "non-optimal LP status %s at round %d" % (st, rounds)
+                log("beta=%.4g: %s" % (beta, status_note), fh)
+                stop = True
+                break
+            z = np.array(h.getSolution().col_value)
+            val = float(h.getInfo().objective_function_value)
+            last_good = (val, z.copy())
+            Z = np.zeros((ns, ns))
+            Z[I, J] = z
+            Z[J, I] = z
+            sup_pairs = np.nonzero(z > 1e-9)[0]
+            sup_sq = (np.unique(np.concatenate([I[sup_pairs], J[sup_pairs]]))
+                      if len(sup_pairs) else np.zeros(0, dtype=int))
+            probes = arrangement_probes(cat, sup_sq, z, I, J, args, rng)
+            W = np.vstack([P, probes]) if len(probes) else P
+            Asub = membership(W, cat, sup_sq)
+            keep = Asub.any(axis=1)
+            W, Asub = W[keep], Asub[keep]
+            W, Asub = dedupe_by_pattern(W, Asub)
+            Zs = Z[np.ix_(sup_sq, sup_sq)] if len(sup_sq) else np.zeros((0, 0))
+            cuts, lm_cut = chunk_load_topk(Asub.astype(float), Zs, args.max_cuts,
+                                           chunk=args.chunk, tol=args.cut_tol)
+            log("beta=%.4g p%d r%d: value=%.6f Lmax_cut=%.6f viol=%d pts=%d(probe %d) "
+                "supsq=%d rows=%d nnz=%d (%.0fs)"
+                % (beta, outer, rounds, val, lm_cut, len(cuts), len(W), len(probes),
+                   len(sup_sq), h.getNumRow(), store.nnz, time.time() - t0), fh)
+            if not cuts:
+                break
+            idx = np.unique(np.array([[c, d] for (_, c, d) in cuts]).ravel())
+            remap = {int(v): a for a, v in enumerate(idx)}
+            Afull = membership(W[idx], cat)
+            nr, nnz = add_rows(Afull, [(remap[c], remap[d]) for (_, c, d) in cuts], pts=W[idx])
+            if nr == 0:
+                status_note = "no new distinct rows at round %d" % rounds
+                stop = True
+                break
+            if store.nnz > args.max_nnz or h.getNumRow() > args.max_rows:
+                status_note = ("nnz/row cap hit at round %d (nnz=%d rows=%d)"
+                               % (rounds, store.nnz, h.getNumRow()))
+                log("beta=%.4g: %s" % (beta, status_note), fh)
+                stop = True
+                break
+            if time.time() - t0 > args.cls_budget:
+                status_note = "time budget hit at round %d" % rounds
+                log("beta=%.4g: %s" % (beta, status_note), fh)
+                stop = True
+                break
+        else:
+            status_note = "round cap %d reached" % args.max_rounds
+            stop = True
+
         h.run()
-        st = h.getModelStatus()
-        if st != highspy.HighsModelStatus.kOptimal:
-            status_note = "non-optimal LP status %s at round %d" % (st, rounds)
-            log("beta=%.4g: %s" % (beta, status_note), fh)
-            break
         z = np.array(h.getSolution().col_value)
-        val = float(h.getInfo().objective_function_value)
         Z = np.zeros((ns, ns))
         Z[I, J] = z
         Z[J, I] = z
         sup_pairs = np.nonzero(z > 1e-9)[0]
         sup_sq = (np.unique(np.concatenate([I[sup_pairs], J[sup_pairs]]))
                   if len(sup_pairs) else np.zeros(0, dtype=int))
-        # working point set = coarse grid + arrangement probes of the CURRENT support squares
-        probes = arrangement_probes(cat, sup_sq, z, I, J, args, rng)
-        W = np.vstack([P, probes]) if len(probes) else P
-        Asub = membership(W, cat, sup_sq)
-        keep = Asub.any(axis=1)
-        W, Asub = W[keep], Asub[keep]
-        W, Asub = dedupe_by_pattern(W, Asub)
-        Zs = Z[np.ix_(sup_sq, sup_sq)] if len(sup_sq) else np.zeros((0, 0))
-        cuts, lm = chunk_load_topk(Asub.astype(float), Zs, args.max_cuts, chunk=args.chunk)
-        lm_last = lm
-        log("beta=%.4g round %d: value=%.6f Lmax=%.6f violated=%d pts=%d(probe %d) "
-            "supsq=%d rows=%d nnz=%d (%.0fs)"
-            % (beta, rounds, val, lm, len(cuts), len(W), len(probes), len(sup_sq),
-               h.getNumRow(), total_nnz, time.time() - t0), fh)
-        if not cuts:
-            break
-        idx = np.unique(np.array([[c, d] for (_, c, d) in cuts]).ravel())
-        remap = {int(v): a for a, v in enumerate(idx)}
-        Afull = membership(W[idx], cat)
-        nr, nnz = add_rows(Afull, [(remap[c], remap[d]) for (_, c, d) in cuts])
-        total_nnz += nnz
-        if nr == 0:
-            status_note = "no new distinct rows at round %d" % rounds
-            break
-        if total_nnz > args.max_nnz:
-            status_note = "nnz cap %d hit at round %d" % (args.max_nnz, rounds)
-            log("beta=%.4g: %s" % (beta, status_note), fh)
-            h.run()
-            break
-        if time.time() - t0 > args.cls_budget:
-            status_note = "time budget hit at round %d" % rounds
-            log("beta=%.4g: %s" % (beta, status_note), fh)
-            h.run()
-            break
-    else:
-        status_note = "round cap %d reached" % args.max_rounds
 
+        # ---------- outer: independent fine-grid validity check, its violators fed back
+        lm_fine, fine_info, fpts, fcuts = fine_eval(cat, Z, sup_sq, boxes, args, fh,
+                                                    want_cuts=args.max_cuts)
+        log("beta=%.4g p%d: fine Lmax=%.6f (violators %d)" % (beta, outer, lm_fine, len(fcuts)), fh)
+        if lm_fine <= args.fine_tol:
+            converged = True
+            if status_note.startswith("round cap") or status_note.startswith("nnz"):
+                pass
+            else:
+                status_note = "converged"
+            break
+        if stop or outer == args.outer_passes - 1 or not fcuts:
+            break
+        idx = np.unique(np.array([[c, d] for (_, c, d) in fcuts]).ravel())
+        remap = {int(v): a for a, v in enumerate(idx)}
+        Afull = membership(fpts[idx], cat)
+        nr, _ = add_rows(Afull, [(remap[c], remap[d]) for (_, c, d) in fcuts], pts=fpts[idx])
+        log("beta=%.4g p%d: fed %d fine violator rows back" % (beta, outer, nr), fh)
+        if nr == 0:
+            break
+
+    total_nnz = store.nnz
     st = h.getModelStatus()
     z = np.array(h.getSolution().col_value)
     val = float(h.getInfo().objective_function_value)
+    if st != highspy.HighsModelStatus.kOptimal and last_good is not None:
+        val, z = last_good[0], last_good[1]     # never report a time-limited garbage solve
+        status_note += " | reported last OPTIMAL solve (final solve was %s)" % st
     Z = np.zeros((ns, ns))
     Z[I, J] = z
     Z[J, I] = z
@@ -590,10 +746,12 @@ def solve_beta(cat, I, J, m2, P, A, beta, args, fh):
                           a=dict(t=float(cat["t"][i]), cx=float(cat["C"][i, 0]), cy=float(cat["C"][i, 1])),
                           b=dict(t=float(cat["t"][j]), cx=float(cat["C"][j, 0]), cy=float(cat["C"][j, 1]))))
 
+    row_dual = np.array(h.getSolution().row_dual)[:len(store.rows)]
     return dict(value=val, z=z, Z=Z, support=sup, mbar2=mbar2, top10=top10,
+                row_dual=row_dual,
                 rounds=rounds, n_rows=int(h.getNumRow()), nnz=total_nnz, n_at_ub=n_at_ub,
-                status=str(st), note=status_note, last_cut_Lmax=lm_last,
-                seconds=time.time() - t0)
+                status=str(st), note=status_note, Lmax_cut=lm_cut, Lmax_fine=lm_fine,
+                converged=converged, fine=fine_info, seconds=time.time() - t0)
 
 
 # ------------------------------------------------------------------ fine validity
@@ -635,9 +793,11 @@ def seg_intersections(cat, idx, cap=400000):
     return X, False
 
 
-def fine_validity(cat, Z, sup_sq, boxes, args, fh):
+def fine_eval(cat, Z, sup_sq, boxes, args, fh, want_cuts=0):
+    """independent validity check of the final z on a much finer point set; returns
+    (Lmax, info, points, violator list) so the violators can be fed back as rows."""
     if len(sup_sq) == 0:
-        return 1.0, 0, {}
+        return 1.0, {}, np.zeros((0, 2)), []
     # arrangement cell representatives FIRST (they carry the true load maxima), grids after
     V = square_vertices(cat, sup_sq)
     X, skipped = seg_intersections(cat, sup_sq, cap=args.seg_cap)
@@ -679,10 +839,11 @@ def fine_validity(cat, Z, sup_sq, boxes, args, fh):
     log("fine validity: raw=%d unique=%d used=%d (support squares=%d, edge-int=%d)"
         % (n_raw, n_uniq, len(P), len(sup_sq), len(X)), fh)
     if len(P) == 0:
-        return 1.0, 0, info
+        return 1.0, info, P, []
     Zs = Z[np.ix_(sup_sq, sup_sq)]
-    lm = chunk_lmax(A.astype(float), Zs, chunk=args.chunk)
-    return lm, len(P), info
+    cuts, lm = chunk_load_topk(A.astype(float), Zs, want_cuts, chunk=args.chunk,
+                               tol=args.fine_tol - 1.0)
+    return lm, info, P, cuts
 
 
 # ------------------------------------------------------------------ control
@@ -729,21 +890,86 @@ def control_family(cls, cat_pins, boxes, fh):
     return out
 
 
+# ------------------------------------------------------------------ D2 emission prep
+def _q(x, den=10 ** 6, up=False):
+    f = Fr(x).limit_denominator(10 ** 12) * den
+    n = math.ceil(f) if up else round(f)
+    return "%d/%d" % (int(n), den)
+
+
+def dump_primal(args, cat, I, J, m2, store, r, beta, thresh_base, mboxes, fh):
+    """The row duals of the packing LP ARE the restricted covering primal: each row is the point
+    pattern (c,d) of an atom, its dual is the atom weight.  Emitted in pair-certificate-v1 atom
+    shape (exact rational strings).  Positions round to 1e-6; WEIGHTS ROUND UP so the restricted
+    covering inequalities A^T y >= obj stay satisfied."""
+    y = r["row_dual"]
+    atoms, W2 = [], Fr(0)
+    for k in np.nonzero(y > 1e-12)[0]:
+        pp = store.pts[k]
+        if pp is None:
+            continue
+        (cx, cy), (dx, dy) = pp
+        w = _q(float(y[k]), up=True)
+        W2 += Fr(w)
+        atoms.append(dict(px=_q(cx), py=_q(cy), qx=_q(dx), qy=_q(dy), w=w))
+    # residual check of the restricted rows with the ROUNDED-UP weights
+    obj = 1.0 + beta * m2.astype(float)
+    cov = np.zeros(len(I))
+    for k in np.nonzero(y > 1e-12)[0]:
+        if store.pts[k] is None:
+            continue
+        np.add.at(cov, store.rows[k], float(Fr(_q(float(y[k]), up=True))))
+    deficit = float(np.max(obj - cov)) if len(cov) else 0.0
+    out = dict(format="pair-certificate-v1", s=str(Fr("969271/250000")), n=11,
+               k=int(len(json.load(open(BOXSPEC))["classes"][args.cls]["pins"])),
+               m=int(mboxes), beta=_q(beta), atoms=atoms, total=str(W2),
+               provenance=dict(source="A66 pairlp.py restricted covering primal (row duals)",
+                               cls=args.cls, beta=beta, lp_value=r["value"],
+                               threshold="%d + beta*%d" % (thresh_base, mboxes),
+                               n_atoms=len(atoms), W2_float=float(W2),
+                               restricted_row_max_deficit=deficit,
+                               note=("cores/boxes NOT filled in: this is the atom measure only. "
+                                     "Positions rounded to 1e-6 (membership may shift); weights "
+                                     "rounded UP to 1e-6. max_deficit<=0 means every restricted "
+                                     "row still holds with the rounded weights.")))
+    fp = os.path.join(BASE, "results", "pair_primal_%s_b%s.json"
+                      % (args.cls, ("%g" % beta).replace(".", "")))
+    json.dump(out, open(fp, "w"), indent=1)
+    log("dumped %d atoms (W2=%.6f, restricted-row max deficit %.3e) -> %s"
+        % (len(atoms), float(W2), deficit, fp), fh)
+
+    rp = os.path.join(BASE, "results", "pair_rows_%s.json" % args.cls)
+    json.dump(dict(cls=args.cls, s0=S0, n_placements=int(len(cat["t"])),
+                   placements=[[float(cat["t"][a]), float(cat["C"][a, 0]), float(cat["C"][a, 1])]
+                               for a in range(len(cat["t"]))],
+                   n_pairs=int(len(I)),
+                   pairs=[[int(a), int(b), int(c)] for a, b, c in zip(I, J, m2)],
+                   note="disjoint core-free catalog pairs (i, j, m2) = the restricted (P2') rows"),
+              open(rp, "w"))
+    log("dumped %d restricted rows -> %s" % (len(I), rp), fh)
+
+
 # ------------------------------------------------------------------ main
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cls", required=True)
     ap.add_argument("--betas", default="0,0.25,0.5,1.0")
-    ap.add_argument("--cap_total", type=int, default=450)
-    ap.add_argument("--cap_m2", type=int, default=220)
-    ap.add_argument("--cap_m1", type=int, default=130)
-    ap.add_argument("--max_rounds", type=int, default=25)
-    ap.add_argument("--max_cuts", type=int, default=3000)
+    ap.add_argument("--cap_total", type=int, default=300)
+    ap.add_argument("--cap_m2", type=int, default=200)
+    ap.add_argument("--cap_m1", type=int, default=60)
+    ap.add_argument("--cap_coarse", type=int, default=40)
+    ap.add_argument("--min_sep", type=float, default=0.35)
+    ap.add_argument("--max_rounds", type=int, default=40)
+    ap.add_argument("--max_cuts", type=int, default=1500)
+    ap.add_argument("--max_rows", type=int, default=25000)
+    ap.add_argument("--outer_passes", type=int, default=3)
+    ap.add_argument("--cut_tol", type=float, default=1e-6)
+    ap.add_argument("--fine_tol", type=float, default=1.05)
     ap.add_argument("--probe_squares", type=int, default=200)
     ap.add_argument("--probe_cap", type=int, default=4000)
     ap.add_argument("--seg_cap", type=int, default=900000)
     ap.add_argument("--probe_eps", type=float, default=1e-5)
-    ap.add_argument("--max_nnz", type=int, default=9000000)
+    ap.add_argument("--max_nnz", type=int, default=25000000)
     ap.add_argument("--n_seed_random", type=int, default=2000)
     ap.add_argument("--lp_time", type=float, default=300.0)
     ap.add_argument("--cls_budget", type=float, default=600.0)
@@ -757,11 +983,16 @@ def main():
     ap.add_argument("--headroom", type=float, default=6.0)
     ap.add_argument("--headroom_wait", type=float, default=300.0)
     ap.add_argument("--no_control_cols", action="store_true")
+    ap.add_argument("--catalog", default=None,
+                    help="JSON with .placements = [[t,cx,cy],...]; replaces the built catalog")
+    ap.add_argument("--tag", default="")
+    ap.add_argument("--dump_primal", default=None,
+                    help="beta whose restricted covering PRIMAL (atoms) to dump, e.g. 0.0")
     args = ap.parse_args()
 
     os.makedirs(os.path.join(BASE, "results"), exist_ok=True)
     os.makedirs(os.path.join(BASE, "logs"), exist_ok=True)
-    fh = open(os.path.join(BASE, "logs", "pairlp_%s.log" % args.cls), "w")
+    fh = open(os.path.join(BASE, "logs", "pairlp_%s%s.log" % (args.cls, args.tag)), "w")
     T00 = time.time()
 
     log("A66 pair-LP pilot: class=%s betas=%s" % (args.cls, args.betas), fh)
@@ -780,7 +1011,14 @@ def main():
     if ctrl and not args.no_control_cols:
         extra = ctrl["placements"]
 
-    cat = build_catalog(pins, boxes, args.cap_total, args.cap_m2, args.cap_m1, fh, extra=extra)
+    if args.catalog:
+        pls = json.load(open(args.catalog))["placements"]
+        if extra:
+            pls = pls + [[t, cx, cy] for (t, cx, cy) in extra]
+        cat = catalog_from_list(pls, pins, boxes)
+        log("catalog IMPORTED from %s: %s" % (args.catalog, json.dumps(cat["stats"])), fh)
+    else:
+        cat = build_catalog(pins, boxes, args, fh, extra=extra)
     log("catalog: |S|=%d  stats=%s" % (len(cat["t"]), json.dumps(cat["stats"])), fh)
 
     I, J = disjoint_pairs(cat)
@@ -841,31 +1079,44 @@ def main():
                 "only meaningful if the control family's pairs are available to the LP)"
                 % ctrl["n"])
 
+    store = RowStore()
     for beta in betas:
         require_headroom(args.headroom, fh, args.headroom_wait)
-        r = solve_beta(cat, I, J, m2, P, A, beta, args, fh)
-        sup_sq = np.unique(np.concatenate([I[r["support"]], J[r["support"]]])) if len(r["support"]) else np.zeros(0, dtype=int)
-        lmax, nfine, finfo = fine_validity(cat, r["Z"], sup_sq, boxes, args, fh)
-        lmax = max(lmax, 1.0)
+        r = solve_beta(cat, I, J, m2, P, A, beta, args, fh, store, boxes)
+        sup_sq = (np.unique(np.concatenate([I[r["support"]], J[r["support"]]]))
+                  if len(r["support"]) else np.zeros(0, dtype=int))
+        lmax = max(r["Lmax_fine"] if r["Lmax_fine"] is not None else 1.0, 1.0)
         scaled = r["value"] / lmax
         thr = thresh_base + beta * m
         ctrl_val = (thresh_base + beta * ctrl["sum_m2"]) if ctrl else None
+        lo = max(x for x in (scaled, ctrl_val or 0.0) if x is not None)
         rec = dict(beta=beta, value=r["value"], Lmax_fine=lmax, scaled_value=scaled,
                    threshold=thr, margin=scaled - thr, mbar2=r["mbar2"],
+                   converged=bool(r["converged"]),
+                   tau2_bracket=[lo, r["value"]],
+                   bracket_note=("scaled_value is a VALID lower bound on tau2; value is the "
+                                 "restricted-LP optimum on the rows found so far and is an upper "
+                                 "bound on what this catalog can give"),
                    control_value=ctrl_val,
                    value_ge_control=(None if ctrl_val is None else bool(r["value"] >= ctrl_val - 1e-6)),
                    n_support_pairs=int(len(r["support"])), n_support_squares=int(len(sup_sq)),
                    rounds=r["rounds"], n_rows=r["n_rows"], nnz=r["nnz"],
+                   Lmax_cut=r["Lmax_cut"],
                    n_z_at_ub=r["n_at_ub"], lp_status=r["status"], note=r["note"],
-                   seconds=r["seconds"], fine=finfo, top10=r["top10"])
+                   seconds=r["seconds"], fine=r["fine"], top10=r["top10"])
         out["betas"][repr(beta)] = rec
-        log("RESULT beta=%.4g: value=%.6f Lmax=%.6f scaled=%.6f thr=%.4f margin=%+.6f "
-            "mbar2=%.4f ctrl=%s (%.1fs)"
+        log("RESULT beta=%.4g: value=%.6f Lmax_fine=%.6f scaled=%.6f thr=%.4f margin=%+.6f "
+            "mbar2=%.4f ctrl=%s converged=%s (%.1fs)"
             % (beta, r["value"], lmax, scaled, thr, scaled - thr, r["mbar2"],
-               ctrl_val, r["seconds"]), fh)
+               ctrl_val, r["converged"], r["seconds"]), fh)
+        out["rowstore_rows"] = len(store.rows)
+        out["rowstore_nnz"] = store.nnz
+        json.dump(out, open(os.path.join(BASE, "results", "pairlp_%s%s.json" % (args.cls, args.tag)), "w"), indent=1)
+        if args.dump_primal is not None and abs(beta - float(args.dump_primal)) < 1e-12:
+            dump_primal(args, cat, I, J, m2, store, r, beta, thresh_base, m, fh)
 
     out["total_seconds"] = time.time() - T00
-    fp = os.path.join(BASE, "results", "pairlp_%s.json" % args.cls)
+    fp = os.path.join(BASE, "results", "pairlp_%s%s.json" % (args.cls, args.tag))
     json.dump(out, open(fp, "w"), indent=1)
     log("wrote %s (%.1fs total)" % (fp, out["total_seconds"]), fh)
     fh.close()

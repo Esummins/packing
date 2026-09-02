@@ -149,7 +149,117 @@ analogue of single placements in `measure-certificate-v1`), not the support of r
 cliques. The certificate's strength lives in the row quantifier (checked by branch-and-bound,
 co-NP side), not in any moment matrix.
 
-## 6 What remains open for a certified pair kill (the honest ledger)
+## 6 [T] Lemma P-B: the basin-exclusion discount (PI's fat-mass row, drain-basin framing)
+
+The ε-parking ghost's home — the Trump-image perturbation families that A65 found to be the
+ONLY realisable death-witness material — is an open neighbourhood that the A36 basin deletes
+QUANTITATIVELY for exact-form strata. Monetised at pair level it is a row DISCOUNT with a
+threshold rebate, and the accounting favours the certificate 21 : 15.
+
+**Setup.** Setting of Lemma P (class S, k pins, N = 11 − k free squares, certified side s″,
+slack δ), plus: a rational γ ∈ [0, 1]; a declared set G_S of **compatible Trump images** —
+D4 images g of ẑ whose five simple slots contain S's pin slots (any other image has a pin
+coordinate ≥ the slot spacing 1 ≫ rBasin from its counterpart, so its basin box cannot meet
+the stratum; the compatible set is a per-class pattern computation, e.g. crowdfam's
+`trump-sym4` embedding for k4_08); and for each g ∈ G_S, N zone boxes Ẑ_{g,1} … Ẑ_{g,N} in
+(c, t)-space at side s″ around the dilated poses of g·ẑ's N non-pin-matching squares (zone
+radius r_z, with the mod-π/2 t-branch for near-upright squares as in `theorem_u.md` §3).
+
+**Certificate claim.** (P2″) for every admissible interior-disjoint core-free pair:
+μ₂{Q,Q′} ≥ 1 + β·m₂(Q,Q′) − γ·Σ_{g∈G_S} bz_g(Q,Q′), where bz_g = 1 iff Q and Q′ lie in two
+distinct zones of g (two disjoint unit squares can never share a zone: zone diameter ≪ 1 ≤
+centre distance). (P1″) W₂ < C(N,2) + β·m − γ·C(N−1,2)·|G_S|.
+
+**Lemma P-B.** In addition to Lemma P's hypotheses, suppose
+
+  m̃ ∈ [ŝ − ρ_B, ŝ]  with  r_z + √2·ρ_B + rounding slop ≤ 3/2000  and  ρ_B ≤ 3/2000
+  (the pullback bookkeeping per Lemma B-NO/B.2″: a centre coordinate's zone, centred at the
+  s″/ŝ-dilated pose but pulled back by λ = s″/m̃, drifts by |ĉ|·(ŝ − m̃)/ŝ ≤ √2·(ŝ − m̃) —
+  the DOMINANT slop, an order above the slack-core shell width; t-coordinates do not scale
+  under dilation, so tilt zones pull back undrifted. E.g. r_z = 5·10⁻⁴, ρ_B = 5·10⁻⁴ leaves
+  ≥ 2.9·10⁻⁴ slack),
+
+and that the stratum hypothesis is EXACT (skeleton exactly S). Then the conclusion of
+Lemma P holds with the discounted claim (P1″)/(P2″).
+
+*Proof.* As Lemma P, with one further count. Fix g ∈ G_S and suppose ALL N free squares of
+the stuck packing z lie (after Δ_λ dilation) in distinct zones of g. Pull back: every free
+square's (c, t) is within r_z + √2·(ŝ − m̃) + slop ≤ 3/2000 of the corresponding non-pin
+square of g·ẑ. The pins: z's pins sit exactly at slots(m̃), g·ẑ's matching simple squares exactly at
+slots(ŝ), so each pin coordinate deviates by β_c·(ŝ − m̃) ≤ 3/2000 (slot arithmetic; tilt
+coordinates 0 = 0 exactly). Hence ALL 33 coordinates of z lie within 3/2000 of g·ẑ: z is in
+the A36 basin box of g·ẑ (D4 × S₁₁-covariant). The basin theorem gives σ(z) ≥ ŝ; but
+σ(z) ≤ m̃ ≤ ŝ, so σ(z) = ŝ = m̃ and the equality clause forces z = g·ẑ. Now g·ẑ has FIVE
+simple squares (a trump5 image), so its skeleton is not exactly S (|S| = k ≤ 4) —
+contradicting the exact-stratum hypothesis. Hence for every g at most N − 1 free squares are
+in-zone, so Σ_{pairs} bz_g ≤ C(N−1,2), and the additivity chain reads
+W₂ ≥ Σ_{a<b}(1 + βm₂ − γΣ_g bz_g) ≥ C(N,2) + βm − γ·C(N−1,2)·|G_S|, contradicting (P1″). ∎
+
+**Where the monotone→exact bridge enters (stated per the PI's bookkeeping demand).** The
+skeleton-contradiction step is the ONLY place, and it is load-bearing: a MONOTONE hypothesis
+("z contains the pins of S") would NOT contradict z = g·ẑ — the compatible image g·ẑ
+*contains* S's pins by definition of compatibility. The basin row is therefore UNSOUND for
+monotone pin quantifiers and sound exactly for the InStratum-exact semantics
+(`instratum_bridge.md`, H2/F11 definitional layer) that H10-stuck already uses (CC-2′'s "in
+stratum S the non-pin squares are exactly the non-simple ones"). The other imported
+equality is `basin`'s equality clause (= A36's certified theorem after the X.1/X.3
+transfers), consumed exactly as in `theorem_u.md` §4 — none of A60's open D-node content.
+
+**Shell caveat (why this is a near-ŝ weapon).** For m̃ below the ρ_B-shell the pins' own
+slot drift (and the √2-weighted zone drift) exceeds the basin radius: z can sit outside the basin box on its PIN coordinates while all N
+free squares are in-zone, the count Σbz ≤ C(N−1,2) loses its justification, and the row must
+be DROPPED (γ = 0, plain Lemma P). The composition consumes basin-discounted certificates
+only on [ŝ − 3/2000, ŝ] — which is exactly where the ghost lives (the attained side) and
+where H10-stuck's consumers (the selection chain at the attained minimum, the uniqueness
+chain at ŝ) need it. Deep-window kills stay plain.
+
+**The naive accounting, and what the pilot measured [M].** Against a PURE ghost family (all
+N free squares in one image's zones — e.g. the crowdfam k4_08 family, a trump-sym4
+perturbation at ~10⁻⁷ ≪ r_z) the floor drops by γ·C(N,2) = 21γ while the threshold rebate
+is only γ·C(N−1,2) = 15γ: a naive net gain of 6γ. Measured (A66 γ-pilot, k4_08, contained
+adequate catalog with zone-perturbation columns at 3·10⁻⁴ (in-zone) and 3·10⁻³ (out),
+all cells converged at Lmax = 1.000000, β = 1,
+`attempts/A66-corners4-pair/results/pairlp_k4_08_basin_v2.json`):
+
+  γ = 0: value 27.000 vs threshold 28.000 (margin −1.000, ghost-mass fraction 1.00);
+  γ = 0.1: 25.100 vs 26.500 (margin −1.400, ghost fraction 0.70);
+  γ = 0.3: 24.031 vs 23.500 (margin +0.531: REFUTED, ghost fraction 0.10).
+
+**The mechanism is real but smaller and non-monotone: the discount gains ≈ 4γ near γ = 0
+(0.4 at γ = 0.1), then the fractional dual dodges — it re-weights toward out-of-zone
+variants displaced 3·10⁻³ that keep almost the full value (A58's meeter margins ~1.6·10⁻²
+≫ the 1.5·10⁻³ basin), the value is convex in γ, and beyond γ ≈ 0.245 the unconditional
+rebate wins and the certificate is refuted.** Usable window 0 < γ ≲ 0.245, optimum near
+γ ≈ 0.1: the basin row widens k4_08's certifiable margin from β to ≈ β + 0.4 at β = 1 — a
+reserve, not a lever; PI's dτ/dε ~ 10² is not observed (the ghost's value is robust to the
+whole basin radius). Sound at every γ (Lemma P-B), profitable only in that window. What the
+basin can still do beyond pricing is disjunctive conditioning (branch on which square
+deviates — A60-style), which is not a row. Credit: PI idea (drain-basin/grain framing);
+formulation, accounting and the measurement this file + the A66 pilot. (A first γ-run
+reported a "+14γ law / dead at every β" — retracted: its perturbation columns had escaped
+the containment filter; the exact audit is `results/containment_audit.json`.)
+
+**Measured pair-tier verdicts (A66 pilot; adequacy criterion: the catalog's single-square
+fractional packing reproduces the A65 value — k4_08 τ_f = 7.000000 exact; corners4 7.084 vs
+7.2545 after 13 column-generation rounds, residual attributed to the δ = 0 core-free
+filter; every catalog audited for exact containment).** k4_08: restricted τ₂(β) = 21 + 6β
+EXACTLY at β ∈ {0, 1/4, 1} (integral optimum = the crowdfam ghost family; best exact
+contained 7-family in any support has Σm₂ = 6, I = 13 — §4's kill-hope paragraph stands),
+i.e. margin −β below the threshold 21 + 7β with ZERO fractional excess on the restricted
+instance; product witness certifies τ₂(0) ≥ 21 (emptiness dead, as for every class with a
+full N-family). **k4_08's boosted pair kill is LIVE at restricted strength** — the first
+protected-class pricing object in the lab whose restricted value sits strictly below its
+kill threshold — and the residue is the full-quantifier question (emission + exact
+verification, or a richer dual). corners4: β = 0 value brackets τ₂(0) ∈ [14.89, 21.32]
+(certified product witness; unconverged cutting-plane upper end, trend 22.20 → 21.53 → 21.32
+toward 21), straddling 21 — OPEN; the solver (simplex time on a 17k × 10k LP), not the
+formulation, is the binder. **Composed-family answer:** (i) corners4: β = 0 emptiness
+(Corollary P0), no basin row (G_S = ∅: every trump5 image has a clear corner); (ii) k4_08
+and, by the same ghost mechanism, k4_11 (floors one pair-incidence short): pair rows +
+stuckness boost β (margin β) + basin discount γ ≈ 0.1 near ŝ (≈ +0.4); (iii) subcritical
+classes (floors 2–3 short per crowdfam): plain pair + β with 2β–3β windows, untested.
+
+## 7 What remains open for a certified pair kill (the honest ledger)
 
 * [M, pilot] the fractional pair-LP verdict per class — A66 measures k4_08 (boosted) and
   corners4 (β = 0 and boosted) at restricted-LP strength; a restricted value above threshold

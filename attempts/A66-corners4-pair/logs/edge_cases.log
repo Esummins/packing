@@ -1,0 +1,7 @@
+=== edge cases ===
+json_float_s             exit=2  MALFORMED: JSON float literal encountered; all numbers must be exact rational STRINGS (e.g. "199/100", "3.877084")
+wrong_format             exit=2  MALFORMED: format must be "pair-certificate-v1" (got 'pair-certificate-v2')
+p1_violated              exit=2  (P1') VIOLATED: W2 >= C(N,2) + beta*m -- the certificate proves nothing
+k_vs_cores_mismatch      exit=2  MALFORMED: k = 1 but 0 cores given
+negative_beta            exit=2  MALFORMED: beta must be >= 0
+missing_s                exit=2  MALFORMED: bad s: None (expected rational string)

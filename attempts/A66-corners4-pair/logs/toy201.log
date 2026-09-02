@@ -1,5 +1,6 @@
 === A66 pair-certificate-v1 control FAIL run (cold, single invocation) ===
-Tue Sep  1 23:25:24 PDT 2026
+Tue Sep  1 23:27:37 PDT 2026
+d9b7a24a600e5b22b2dd0e1588abf5597e96e65d3b27e1347dda856c0188662d *code/verify_pair.py
 cmd: python code/verify_pair.py certs/pair_control_s201.json --depth 40 --report
 cert            C:\Users\esumm\code\packing\attempts\A66-corners4-pair\certs\pair_control_s201.json
 s = 201/100   n = 2  k = 0  m = 0  beta = 0  N = 2
@@ -15,7 +16,7 @@ nondisjoint     23
 covered         0
 split           57
 max_depth       40
-wall            0.236 s
+wall            0.233 s
 VERDICT: FAIL  (8 witness(es) reported, first below)
   witness depth 40
   F  = t[255/256,1] x[7711/5120,151/100] y[6501/12800,13103/25600]
@@ -31,17 +32,19 @@ report          C:\Users\esumm\code\packing\attempts\A66-corners4-pair\certs\pai
 EXIT=1
 === HAND ARITHMETIC CHECK of witness #0 (independent of verify_pair.py) ===
 s = 201/100 = 2.0100
-t1 = 1 -> cos=0 sin=1  (axis-aligned, theta=90deg)
-t2 = 1 -> cos=0 sin=1
-Q1 centre = (7711/5120, 6501/12800) = (1.506055, 0.507891)
-Q2 centre = (7711/5120, 151/100) = (1.506055, 1.510000)
-  Q1 = [5151/5120,10271/5120] x [101/12800,12901/12800] = [1.006055,2.006055]x[0.007891,1.007891]; inside [0,s]^2: True
-  Q2 = [5151/5120,10271/5120] x [101/100,201/100] = [1.006055,2.006055]x[1.010000,2.010000]; inside [0,s]^2: True
-dc = (0, 12827/12800);  |dc_y| = 12827/12800 = 1.002109375
-half-width sum on the y normal (both squares axis-aligned) = 1/2 + 1/2 = 1
-SAT gap on e_y = |dc_y| - 1 = 27/12800 = 0.002109375  > 0  =>  e_y STRICTLY SEPARATES
-y-extent Q1 = [101/12800,12901/12800], y-extent Q2 = [101/100,201/100]; 12901/12800 < 101/100 so interiors are disjoint.
-collected mass mu2 = 0 (no atoms) < 1 = 1 + beta*m2  =>  (P2') genuinely FAILS. FAIL is CORRECT.
+t1 = 1 -> (cos,sin) = (0,1) : axis-aligned (theta = 90 deg), w = 1
+t2 = 1 -> (cos,sin) = (0,1) : axis-aligned (theta = 90 deg), w = 1
+Q1 centre (7711/5120, 6501/12800) -> Q1 = [5151/5120,10271/5120] x [101/12800,12901/12800]
+        ~ [1.006055,2.006055] x [0.007891,1.007891]; contained in [0,s]^2: True
+Q2 centre (7711/5120, 151/100) -> Q2 = [5151/5120,10271/5120] x [101/100,201/100]
+        ~ [1.006055,2.006055] x [1.010000,2.010000]; contained in [0,s]^2: True
+dc = c2 - c1 = (0, 12827/12800);  |dc_y| = 12827/12800 = 1.002109375
+half-width sum on the normal e_y = 1/2 + 1/2 = 1
+SAT gap on e_y = |dc_y| - 1 = 27/12800 = 0.002109375 > 0  =>  e_y STRICTLY SEPARATES
+indeed  max y(Q1) = 12901/12800 < 101/100 = min y(Q2)   (gap 27/12800)
+so int Q1 ^ int Q2 = empty, no core is met (k = 0), and the collected mass is
+mu2 = 0 < 1 = 1 + beta*m2.  (P2') genuinely FAILS at s = 201/100.  FAIL is CORRECT.
+(this is exactly the s(2) = 2 boundary: 201/100 > 2, so opposite-edge unit squares fit.)
 
 witnesses reported: 8;  with a CONFIRMED concrete disjoint admissible placement: 7
 confirmed SAT gaps: 27/12800, 27/12800, 27/12800, 27/12800, 68250918811/436382072857600, 37494651291/218191036428800, 299931/1671180800

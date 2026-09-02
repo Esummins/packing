@@ -3,9 +3,9 @@
 <rect width="1720" height="1180" fill="white"/>
 <text x="12" y="22" font-size="15" font-weight="bold">s(11) optimality — lemma dependency graph (live; base commit c9980bfc, updated 2026-09-01)</text>
 <rect x="12" y="32" width="12" height="12" fill="#b8860b" rx="2"/>
-<text x="28" y="42">lean-proved (8)</text>
+<text x="28" y="42">lean-proved (9)</text>
 <rect x="147" y="32" width="12" height="12" fill="#2e7d32" rx="2"/>
-<text x="163" y="42">proved-prose (9)</text>
+<text x="163" y="42">proved-prose (8)</text>
 <rect x="289" y="32" width="12" height="12" fill="#1565c0" rx="2"/>
 <text x="305" y="42">certificate+verifier (12)</text>
 <rect x="494" y="32" width="12" height="12" fill="#6a1b9a" rx="2"/>
@@ -210,7 +210,7 @@
 <text x="1147" y="222" text-anchor="middle" fill="#222">Uniqueness transfer: EVERY</text>
 <text x="1147" y="234" text-anchor="middle" fill="#222">packing at s-hat reaches a…</text>
 </g>
-<g><title>A.SBRIDGE — Lemma B: interior-disjoint packings vs closed-disjoint certificate families (lambda-dilation with pin slack, S4/F9)&#10;[lean-proved]&#10;LEAN-PROVED (A68, Dilation.lean): B.0(a) scaleC_disjoint (A64 pull-back trick replaces the SAT citation), B.0(b) = A64 scaleC_subset, B.0(c) slot_tracking ((lambda-1)*alpha exact, any beta), dilation_bridge (packing -&gt; IsStrictFamily at lambda*m), lemma_B, AND the pricing pigeonhole priced_dichotomy/hcert_of_priced ((P1)+(P2) =&gt; bridged claim, Exempt-aware so B-NO = the same theorem), bprime_containment ((H&#x27;) =&gt; (H)), pullback_mem_Icc (B.2&#x27;&#x27; widening). All axioms propext/Choice/Quot.sound. RESIDUES: producing (P2) from a PASS file is V.CASE; B.2&#x27; owner-frame (tilted-core) criterion remains prose; corpus margin rho ~ 1.0000009e-9 remains a [M] computation (A63 scan, reproduced by A60 on 49 leaves).</title>
+<g><title>A.SBRIDGE — Lemma B: interior-disjoint packings vs closed-disjoint certificate families (lambda-dilation with pin slack, S4/F9)&#10;[lean-proved]&#10;LEAN-PROVED (A68, Dilation.lean): B.0(a) scaleC_disjoint (A64 pull-back trick replaces the SAT citation), B.0(b) = A64 scaleC_subset, B.0(c) slot_tracking ((lambda-1)*alpha exact, any beta), dilation_bridge (packing -&gt; IsStrictFamily at lambda*m), lemma_B, AND the pricing pigeonhole priced_dichotomy/hcert_of_priced ((P1)+(P2) =&gt; bridged claim, Exempt-aware so B-NO = the same theorem), bprime_containment ((H&#x27;) =&gt; (H)), pullback_mem_Icc (B.2&#x27;&#x27; widening). All axioms propext/Choice/Quot.sound. RESIDUES: producing (P2) from a PASS file is V.CASE; B.2&#x27; owner-frame (tilted-core) criterion remains prose; corpus margin rho ~ 1.0000009e-9 remains a [M] computation (A63 scan, reproduced by A60 on 49 leaves). || A70: the &#x27;(P2) from a PASS file&#x27; residue is DISCHARGED (V.CASE lean-proved; checkCaseI_kill produces lemma_B&#x27;s hcert per certificate).</title>
 <rect x="1248" y="193" width="180" height="54" rx="7" fill="white"/>
 <rect x="1248" y="193" width="180" height="54" rx="7" fill="#b8860b" fill-opacity="0.13" stroke="#b8860b" stroke-width="1.6"/>
 <text x="1338" y="208" text-anchor="middle" font-weight="bold" fill="#b8860b">A.SBRIDGE</text>
@@ -275,13 +275,11 @@
 <rect x="501" y="486" width="31" height="14" rx="7" fill="#37474f"/>
 <text x="516" y="496" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A57</text>
 </g>
-<g><title>C.K4TIER — k&lt;=4 / k&lt;=3 tier exclusion (H10)&#10;[open]&#10;THE LARGEST OPEN LEAF; A65 (2026-09-01) priced the re-based H10-STUCK routes (docs/proofs/h10_stuck.md): route (a) decoupled crowd-pricing DEAD [T, ties the threshold exactly]; route (b) crowd-position conditioning DEAD on cost; route (c) upward absorption DEAD [T, occupancy-matrix closure]; the merged boosted-kill LP (per-placement RHS 1+beta*m(Q), certifiable through the frozen verifier) DEAD at every beta — measured fractional boost-slope ~ N*L_eff (21.5 on corners4, 17 on k4_08) vs stuckness revenue 2m (16, 14); the 2m &lt;= N*L_eff gap &gt;= 3 holds in EVERY protected class. Integral side: NO class has a crowd-saturated family (exact-verified maxima short by 1-3; corners4 pins+7 not even feasible at s0 in search) — H10-stuck is very likely TRUE but beyond ALL single-square measure certificates: the crowd&#x27;s value is pairwise. Residue: (1) pair certificates [A58-G3 pair version, now provably necessary], (2) corners4 direct integral infeasibility (channel width s-2 &lt; 2 = s(2)), (3) A60-style conditioning / FJ cascade (A50-G1).</title>
+<g><title>C.K4TIER — k&lt;=4 / k&lt;=3 tier exclusion (H10)&#10;[open]&#10;THE LARGEST OPEN LEAF; A65 priced the re-based H10-STUCK routes (docs/proofs/h10_stuck.md): decoupled counting / conditioning / absorption / boosted-kill LP all DEAD - the crowd&#x27;s value is pairwise. A66 (2026-09-02) executed the residue: (R2) corners4 direct integral counting REFUTED [T+M, docs/proofs/corners4_empty.md] - the centre-occupancy relaxation admits exact 7-point witnesses at EVERY window side (the 1.877 channel holds 3 centres lengthwise + 2 pin-edge + 2 wall-mid); emptiness is orientation-coupled, corners4 NOT deleted. (R1) pair certificates DESIGNED + SOUND [T, docs/proofs/pair_kill.md Lemma P/P0; spec docs/specs/pair_certificate_v1.md; new verifier attempts/A66-corners4-pair/code/verify_pair.py, NOT yet TCB]: stuckness rows = CC-2&#x27; 2-crowds only, bridge via Delta_lambda with slack cores + box widening 3(lambda-1); CANARY THEOREM: dilated Trump saturates the trump5 pair threshold C(6,2)+6*beta exactly - trump5 provably unkillable by the formalism; A34 collapse does not apply (pricing dual, no marginal gluing). PILOT [F]: k4_08 restricted pair value = 21+6*beta EXACTLY (margin -beta, zero fractional excess; integral optimum = the crowdfam ghost) - boosted pair kill LIVE at restricted strength; basin discount +0.4 at gamma~0.1 then dodged (window gamma&lt;0.245); corners4 beta=0 emptiness bracket [14.89, 21.32] straddles 21 - OPEN (solver-bound). No certificate emitted; successor = emission oracle loop vs verify_pair.py. Residue: conditioning/FJ cascade (A50-G1) and the priced corners4 mini-tree (docs/proofs/corners4_empty.md sect. 6).</title>
 <rect x="547" y="493" width="196" height="54" rx="7" fill="white"/>
 <rect x="547" y="493" width="196" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
 <text x="645" y="508" text-anchor="middle" font-weight="bold" fill="#c62828">C.K4TIER</text>
 <text x="645" y="522" text-anchor="middle" fill="#222">k&lt;=4 / k&lt;=3 tier exclusion (H10)</text>
-<rect x="716" y="486" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="732" y="496" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A66</text>
 </g>
 <g><title>C.CC2 — CC-2/CC-2&#x27; exchange (teleport) lemma + clear-corner 2-crowd&#10;[proved-prose]&#10;Subsumes A53 L6. Trump is teleport-extremal (canary). Feeds C.K4TIER, does not close it.</title>
 <rect x="762" y="493" width="196" height="54" rx="7" fill="white"/>
@@ -405,14 +403,12 @@
 <text x="382" y="822" text-anchor="middle" fill="#222">verify_measure.py soundness (+</text>
 <text x="382" y="834" text-anchor="middle" fill="#222">Lean checkMeasureI evaluation)</text>
 </g>
-<g><title>V.CASE — verify_case.py soundness (PASS =&gt; no packing satisfies the pin hypotheses)&#10;[proved-prose]&#10;Single implementation (C3 OPEN â€” decides the optimality tree); spec frozen by A62 as docs/specs/case_lp_certificate_v1.md.</title>
+<g><title>V.CASE — verify_case.py soundness (PASS =&gt; no packing satisfies the pin hypotheses)&#10;[lean-proved]&#10;LEAN-PROVED (A70): checkCaseI (Lean port of the decision core; core-Rat exempt tests over the A64 integer layer) + full soundness chain: sat_squares (SAT sufficiency for two squares - geometric Hahn-Banach + 4-cone support bound; the spec&#x27;s one-parenthesis citation is now a machine-checked theorem), coreExempt_sound/nofamExempt_sound/exemptB_sound, goC_sound, checkCaseI_price = claim (P2) scaled by wd, priced_dichotomy_scaled, checkCaseI_no_family (B-NO) / checkCaseI_kill (the lemma_B hcert producer per PASS file - A68&#x27;s named residue DISCHARGED). One certificate replayed end to end (k5_06.lo at s=191/50, native_decide; k5_06_lo_kill + k5_06_lo_kill_packing via lemma_B). Axioms: propext/Choice/Quot.sound (+ the per-theorem native_decide axiom on the replay only). RESIDUES: corpus-wide replay separately priced; B.2&#x27; owner-frame prose-only; single-side only (window = V.PARAM). FINDING: spec&#x27;s &#x27;a = 0 point core legal/used&#x27; is wrong on both counts (loader rejects a&lt;=0; 0 of 9217 corpus cores have a=0) - erratum in the spec.</title>
 <rect x="484" y="793" width="180" height="54" rx="7" fill="white"/>
-<rect x="484" y="793" width="180" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
-<text x="573" y="808" text-anchor="middle" font-weight="bold" fill="#2e7d32">V.CASE</text>
+<rect x="484" y="793" width="180" height="54" rx="7" fill="#b8860b" fill-opacity="0.13" stroke="#b8860b" stroke-width="1.6"/>
+<text x="573" y="808" text-anchor="middle" font-weight="bold" fill="#b8860b">V.CASE</text>
 <text x="573" y="822" text-anchor="middle" fill="#222">verify_case.py soundness (PASS</text>
 <text x="573" y="834" text-anchor="middle" fill="#222">=&gt; no packing satisfies the…</text>
-<rect x="636" y="786" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="652" y="796" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A70</text>
 </g>
 <g><title>V.PARAM — verify_param.py soundness (P0-P7)&#10;[proved-prose]&#10;Imports the audited A53 integer core unmodified; new predicates are point-&gt;interval widenings (conservative direction argued in prose). Single implementation.</title>
 <rect x="675" y="793" width="180" height="54" rx="7" fill="white"/>
@@ -421,14 +417,12 @@
 <text x="764" y="822" text-anchor="middle" fill="#222">verify_param.py soundness</text>
 <text x="764" y="834" text-anchor="middle" fill="#222">(P0-P7)</text>
 </g>
-<g><title>E.A36 — Basin theorem: sigma &gt;= s-hat on box(z-hat, 3.7e-3), equality iff z-hat&#10;[certificate+verifier]&#10;Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE — the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member.</title>
+<g><title>E.A36 — Basin theorem: sigma &gt;= s-hat on box(z-hat, 3.7e-3), equality iff z-hat&#10;[certificate+verifier]&#10;Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE — the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member. || A70: not reached (T1 V.CASE consumed the wave, per the strict priority); scoping in attempts/A70-lean-wave4/notes/findings.md - rung (a) = exact-rational interval-jet re-emission of the 70-row order-2 jet machine, own attempt.</title>
 <rect x="866" y="793" width="180" height="54" rx="7" fill="white"/>
 <rect x="866" y="793" width="180" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
 <text x="956" y="808" text-anchor="middle" font-weight="bold" fill="#1565c0">E.A36</text>
 <text x="956" y="822" text-anchor="middle" fill="#222">Basin theorem: sigma &gt;= s-hat</text>
 <text x="956" y="834" text-anchor="middle" fill="#222">on box(z-hat, 3.7e-3),…</text>
-<rect x="1018" y="786" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="1034" y="796" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A70</text>
 </g>
 <g><title>E.A22 — Krawczyk: unique contact solution z-hat, feasible, strict local optimality&#10;[certificate+verifier]&#10;Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat).</title>
 <rect x="1057" y="793" width="180" height="54" rx="7" fill="white"/>

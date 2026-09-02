@@ -1,0 +1,25 @@
+=== smoke path-coverage (depth 26) ===
+cert            C:\Users\esumm\code\packing\attempts\A66-corners4-pair\certs\pair_smoke_paths.json
+s = 4   n = 13  k = 1  m = 1  beta = 1/1000  N = 12
+W2 = 225/4   threshold C(N,2)+beta*m = 66001/1000
+atoms 225  cores 1  boxes 1
+settings: depth=26 split=2 tscale=2
+(P1') OK
+pairs_root      136
+pairs_examined  1468
+vacuous         0
+exempt_core     384
+nondisjoint     143
+covered         0
+split           741
+max_depth       26
+wall            10.827 s
+VERDICT: FAIL  (200 witness(es) reported, first below)
+  witness depth 26
+
+=== unit tests of the COVERED branch (the B&B above never gets tight enough) ===
+collected certain mass = 6/5 (~1.200); U = 0; need = 1; COVERED = True
+orientation symmetry (both orders of the pair box): 6/5 == 6/5 -> True
+bonus branch: factor on box B(2,2,h=1/2) -> possible = [0], U(g,g) = 1, need = 1001/1000
+far factor -> possible = [] (certainly separated)
+EXEMPT-core branch exercised 384 times in the B&B run above.
