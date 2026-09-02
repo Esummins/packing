@@ -100,3 +100,20 @@ independently reproduced on A60's 49 leaves; the T5 θ↔t lemma caught A60's ba
 test (θ-radians vs wrong radius → corrected to contain_t vs 3/2000, square-1 ladder passes at
 1.24× — thin; squares 2–3 to be re-checked). B.4's ×37 grid price is HELD: A60's measured law
 is η ≤ −1 (the 0.5-slack regime failed on trump5); one δ = 1e-3 re-emission test is running.
+
+## N9 [MED, decision-gating] — A57 cover-invariance lemma PROVED; route (a) is theory-open.
+`docs/proofs/cover_invariance.md`: the tree57 disjunction (zone [c0, s−c0]², 12×12 columns ×
+8 t-intervals, dyadic refinement) is a complete disjunction at EVERY s ∈ [3.82, s0] (CI-1,
+tautological per T1); the frozen (a, tm) cores stay valid on the whole window because box
+widths are maximal at s0 (CI-2 — needs the window to sit BELOW s0, which it does); pinguard
+parent-freeness and witness distinctness hold at every s by slot arithmetic (CI-3: pins have
+a coordinate in {1/2, s−1/2}, both outside [c0, s−c0]). Affine form CONFIRMED exactly against
+the corpus: box edges/centres at c0 + q(s−2c0), q dyadic/12 (e.g. 6216841/4000000 =
+11/10 + (13/48)(s0−2c0) exact); pins β ∈ {0,1} (844271/250000 = s0 − 1/2 exact); NO-child
+nofam zone x1 = s − 11/10 (β = 1). NOT invariant: the 601 logic kills (contradictory boxes)
+— relative core-vs-pin motion up to 0.0547 across the window ⇒ per-box exact SAT re-check
+(C-check) with LP only on flippers; fallback family (P-fix, everything frozen at s0) makes
+β=0-pin contradictions exactly s-invariant. Tool gaps: make_param anchor rule (known),
+verify_param affine-nofam exemption (new — intersection over the s-cell is the sound
+direction), C-check driver. Net: route (a) = 2 tool changes + C-check + one 4D pass vs
+~8 desktop-days for the δ=1e-2 grid; the routes compose per leaf ((a) first, grid mop-up).

@@ -648,3 +648,80 @@ writes its pid.
 Also fixed while relaunching: the scaler's `deepen.py` launch was a direct `Start-Process` and so
 ran **unpinned** — `launch.ps1` sets the BLAS variables in its own process, but that path bypassed
 it.  The pinning is now set at the top of `scaleup.ps1`, where every child inherits it.
+
+## T21 [M] — A63 window assessment: which repair is cheaper for A57's leaves
+
+A63's Lemma B/B' (`docs/proofs/closed_disjoint_bridge.md`): a fixed-side PASS transfers to sides
+m with (s"/m - 1)*A < rho(C), rho(C) = min_j (1/2 - a_j*(cos th_j + sin th_j)), A <= 5/2.
+
+**Which core binds, for A57.**  A leaf carries SIX cores: the 5 pins at slots (eps-fat,
+a = 16383999967232/32768001953125, rho ~ 1e-9) and the YES cover box at an interior centre
+(a ~ 0.3566, th_m ~ 87 deg, rho ~ 0.127).  rho(C) is a MINIMUM, so **the pins bind and the cover
+box is irrelevant** — the knob is `hyp_from_slots`'s pin boxes, not the branch geometry.  caselp
+derives a from the box: a square pin box of half-width h gives a = 1/2 - h*sqrt(2), so
+h = delta/sqrt(2) yields rho = delta exactly.  Fattening the pin box also WEAKENS the hypothesis
+(the pinned square need only lie within h of the slot), enlarging the stratum — sound, and a
+strictly stronger kill.
+
+### (a) parametric re-emission — BLOCKED, and not by a format detail
+
+`make_param.core_anchor()` raises `ValueError` unless a core coordinate is exactly in
+{1/2, 3/2, 5/2} u {s0-1/2, s0-3/2, s0-5/2}.  Every A57 leaf has a sixth core at an arbitrary
+interior centre (measured: kx = 4855383/2000000 = 2.427692, ky = 4016841/2000000 = 2.008421), so
+**make_param rejects every A57 tree leaf outright**.  This is structural: the forced anchoring
+encodes A56 P1 (slot coordinates are affine with beta in {0,1}).  `verify_param.py` itself is more
+general — it widens core centres to [alpha+beta*a, alpha+beta*b] for rational beta — so the
+VERIFIER could take an interior core; the blockers are (i) the emitter's anchor rule and (ii) a
+missing lemma that the interior cover REMAINS A COVER of the zone across the s-family (the zone is
+[c0, s-c0], c0 = 1.1, subdivided into 12 columns, so each box edge is affine in s with
+beta = i/12 not in {0,1}).  So this is an A56 tool change + a new soundness argument + 4D
+re-verification of ~2300 leaves — not the advertised "post-pass, no LP redo".
+
+### (b) slack cores — measured cost, and it is NOT flat
+
+`code/slackprobe.py`, three representative children, tau at the same box with slackened pins:
+
+| delta | sides to cover [3.82, s0] | eta = -2.0 child | Y0107 (eta = -0.500) | knife edge (eta = 0) |
+|---|---|---|---|---|
+| 0 | 1 203 879 | 3.000000 | 4.500000 | 5.000000 |
+| 1e-3 | **38** | 3.000000 (+0) | 4.538462 (**+0.038**, eta -0.462) | 5.000000 (+0) |
+| 1e-2 | **4** | 3.000000 (+0) | 4.666667 (**+0.167**, eta -0.333) | 5.000000 (+0) |
+| 3e-2 | **2** | 3.000000 (+0) | **5.000000 (+0.500, eta = 0 — KILLABLE NO MORE)** | 5.000000 |
+
+So the cost is zero on slack children and on the knife edge, but **scales with delta on thin
+ones**: 8 % of margin at 1e-3, 33 % at 1e-2, and 100 % at 3e-2.  **delta = 3e-2 (2 sides) is
+excluded** — it turns the thinnest killable class (tau = 4.5, the commonest non-trivial leaf
+value) into an unkillable one.  delta = 1e-2 is affordable with ~2x headroom on that class.
+
+### (b') re-emission as a free post-pass — mostly a dead end
+
+Shrinking the pin cores of an EXISTING PASS certificate and re-verifying (no LP at all) works
+only where the measure already covered the shell:
+
+| leaf | delta = 1e-3 | delta = 1e-2 | delta = 3e-2 |
+|---|---|---|---|
+| `k5_11_interior_NO` (eta = -3.0) | PASS | PASS | FAIL (16 holes) |
+| `k5_11_interior_Y0023` | PASS | FAIL | — |
+| `k5_11_interior_Y0024` | PASS | FAIL | — |
+| `k5_11_interior_Y0017` | FAIL | FAIL | — |
+
+The first result (the NO child, PASS at 1e-2) was **not representative** — that child has eta = -3
+and enormous slack.  On real YES leaves it is ~2/3 free at 1e-3 and ~0/3 free at 1e-2.  Since
+1e-3 needs 38 sides anyway, the free post-pass does not by itself buy a window.
+
+### Cost estimate
+
+| route | sides | LP work | estimate |
+|---|---|---|---|
+| (b) delta = 1e-3 | 38 | ~1/3 of leaves per side + 37 full re-runs | ~76 desktop-days — not viable |
+| **(b) delta = 1e-2** | **4** | 4 full tree re-runs (re-emission does not carry at this delta) | **~8 desktop-days = 4x the current campaign** |
+| (b) delta = 3e-2 | 2 | — | EXCLUDED: kills the tau = 4.5 class |
+| (a) parametric | 1 | A56 emitter change + cover-invariance lemma + 4D verify of ~2300 leaves | unbounded until the lemma exists; 4D cost per leaf unmeasured |
+
+**Recommendation for A57: the slack-core grid at delta = 1e-2, four fixed sides, ~4x the current
+campaign, needing no new theory beyond B' which is already proved.**  Two caveats for the
+advisor: (i) at delta = 1e-2 the pin box half-width is 7.07e-3, so the pin hypothesis weakens —
+slot spacing is 1.0 so no slots overlap, but A53 V9 / A55 E4 class-containment relations assume
+exact slots and should be re-checked before the census is reused; (ii) any child found at
+eta > -0.167 would flip to alive at this delta — the natural remedy is depth-2 refinement, which
+empirically returns eta <= -0.667 (T11), so the tree already has the tool.

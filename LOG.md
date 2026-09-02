@@ -1531,3 +1531,13 @@ affordable cost estimate for closing 3.84.
   reproduced by A60 (49 leaves); theta-t lemma caught A60's basin-discharge coordinate/radius
   bug (now contain_t vs 3/2000, 1.24x margin — watch squares 2-3). Slack-core grid pricing
   HELD pending A60's delta=1e-3 re-emission test (measured law eta <= -1, not 0.5-slack).
+- A63 addendum 2 (advisor follow-up, decision-gating): cover-invariance lemma for A57's
+  shadow trees PROVED (docs/proofs/cover_invariance.md, CI-1..CI-3) — the t-uniform cover x
+  12-column zone subdivision stays a complete disjunction at every s in [3.82, s0]; frozen
+  cores valid window-wide (box widths maximal at s0); pinguard sound at every s; (alpha,
+  beta) affine form confirmed exactly (boxes beta = dyadic/12, pins beta in {0,1}, NO-child
+  nofam x1 beta = 1). Residue: 601 logic kills are NOT invariant (relative motion <= 0.0547)
+  => per-box exact C-check, LP only on flippers; (P-fix) frozen family as fallback. Tool
+  gaps: make_param anchor rule, verify_param affine-nofam exemption (intersect over the
+  s-cell), C-check driver. Route (a) unblocked as theory: 2 tool changes + C-check + one 4D
+  pass, vs ~8 desktop-days for the delta=1e-2 grid; routes compose per leaf.
