@@ -1,83 +1,103 @@
-# Known results relevant to s(11)
+# What is actually established (human-maintained ledger — checklist R5)
 
-Seeded from advisor memory 2026-08-16; verified/corrected by A01-literature (2026-08-16) against the primary
-sources listed in `docs/literature.md` (local copies in `docs/papers/`). Tags: [verified: …] = checked in the
-cited source by A01; [unverified] = not checked against a primary source.
+Status key: **LEAN** = Lean theorem (axioms at most propext/Classical.choice/Quot.sound + native_decide) ·
+**CERT** = exact certificate checked by an exact verifier (verifier soundness Lean-proved where noted) ·
+**PROSE** = written proof in docs/proofs/ or attempt notes, not yet formalised.
+Kill certificates are at s0 = 969271/250000 unless "window" is stated; window = [3.82, s0].
+Maintained by the advisor at close-out commits; last update 2026-09-03. Corrections welcome — this
+file is the record of truth for claims, LOG.md is the record of events.
 
-Notation: s(n) = side of smallest square containing n unit squares, rotations allowed.
+## A. The number
+1. LEAN  s(11) >= 3.82 (`s_eleven_ge_382`: measure certificate + formalised bridge).
+2. LEAN  s(11) <= s-hat: Trump's packing exists at side s-hat exactly (`trump_packs_at_shatA22`, `basin`
+   theorems; modulo the single axiom `a22_exact_structure` = A22's certified contact structure, derived
+   in Lean from the structure alone by A79).
+3. LEAN  s-hat is the SECOND real root of s^8-20s^7+178s^6-842s^5+1923s^4-496s^3-6754s^2+12420s-6865;
+   the octic has exactly two real roots (Sturm certificate; `shat_spec`).
+4. CERT  Every coordinate of Trump's configuration z-hat lies in Q(t-hat), degree 8; minimal polynomials
+   derived (A69). A03's "degree-7 coordinate" annotations were junk.
+5. LEAN  s_A22 = s-hat (CIDL cofactor identity, `shatA22_eq_shat`).
 
-## Exact values known
-- s(n²) = n (trivial). s(n²−1) = s(n²−2) = n for all n ≥ 2 [verified: Nagamochi 2005, EJC 12 #R37, Thm 2(i)];
-  small cases earlier (Göbel 1979: n=2,3; Friedman DS7: 8, 15, 24, 35, and 7, 14; El Moumni 1999: 7, 8, 15).
-- s(5) = 2 + 1/√2 ≈ 2.7071 (Göbel 1979) [verified: Friedman DS7 Thm 2 gives the unavoidable-set proof].
-- s(6) = 3 [verified: Kearney–Shiu 2002, EJC 9 #R14, Thm 1, "duality" method]. s(7) = 3 [verified: Friedman
-  DS7 Thm 7; Kearney–Shiu §2 give a shorter proof].
-- s(10) = 3 + 1/√2 ≈ 3.7071 [verified: Stromquist 2003, EJC 10 #R8, Thm 1].
-- s(13) = 4, s(46) = 7 [verified: Bentz 2010, EJC 17 #R126]; s(22) = 5, s(33) = 6 [verified: Bentz,
-  arXiv:1606.03746 (2016)]. So s(m²−3) = m is proved for m = 3,…,7.
-- Complete list of n ≤ 100 with s(n) proved: 1–10, 13–16, 22–25, 33–36, 46–49, 62–64, 79–81, 98–100 (plus the
-  n²−1, n²−2 family beyond) [verified: Ellsworth's page + the papers above]. **s(11) and s(12) are the two
-  smallest open cases** (s(12) is NOT known: 3.7889 ≤ s(12) ≤ 4; the Wikipedia table row "12–16 → 4" is
-  misleading).
-- General lower bounds: s(n) ≥ √n; Nagamochi 2005 Thm 2(ii): s(N) ≥ min{⌈√N⌉, sqrt(N − 2⌊√N⌋ + 1) + 1}
-  [verified]. For N = 11 this gives only sqrt(6)+1 ≈ 3.449.
-- Friedman DS7 Table 2 (2009) lists best lower bounds for n ≤ 85, e.g. s(11)=s(12) ≥ 3.7888 (Stromquist),
-  s(17),s(18) ≥ (40√2+19)/17 ≈ 4.4452 (Green), s(19),s(20) ≥ 6√2−4 ≈ 4.4852 [verified]. Its s(13) ≥ 3.8437 is
-  superseded by Bentz.
+## B. Near Trump
+6. LEAN  BASIN: every packing within rBasin = 3/2000 (t-coords; universal certificate radius 3689/10^6
+   theta-coords) of Trump mod symmetry has sigma >= s-hat, equality only at Trump (`a36_basin`).
+   Stratum-blind. ("Close enough to Trump IS Trump.")
+7. LEAN  Krawczyk: unique contact solution in the A22 box; Trump is a strict local optimum (`krawczyk_sound`,
+   `a22_optimal`).
+8. CERT  THEOREM U: remove any one of Trump's squares; the other ten force it into its slot (11 certificates,
+   Sigma w = 0; verifier soundness LEAN; certificates replayed in Lean).
+9. CERT  Trump's contact structure is rigid with pins out to (1e-2 centre, 2e-3 tilt) (A76); the hinge grains
+   (strip flush pair degraded to a single-corner contact) are the first flexible neighbours.
+10. PROSE/CERT  Grain lemmas G-R (local completeness by construction), K, DF (drain-flex), D2'' (A76).
 
-## n = 11
-- **Upper bound (best known packing): s(11) ≤ 3.877083590022814177…**, the second real root of
-  s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865 [verified: Ellsworth "Squares in
-  Squares" page and the SVG source `docs/papers/ellsworth_square-11.svg`, exact derivation by D. Ellsworth June
-  2023, confirmed independently by B. Alexeev; consistent with Gensane–Ryckelynck 2005 §7 who give
-  cos(45°−θ) as a root of 80z⁸ − 128√2z⁷ − 32z⁶ + 144√2z⁵ + 72z⁴ − 112√2z³ + 40z² − 12√2z − 7 — A01 checked
-  numerically to 30 digits that both descriptions agree]. Configuration: six upright squares + a rigid strip
-  of five squares tilted θ = 40.18193729032971646523…° with cos θ a root of 5c⁸ − 12c⁷ + 8c⁶ + 2c⁵ − c⁴ − 2c + 1
-  (equivalently sec θ a root of x⁸ − 2x⁷ − x⁴ + 2x³ + 8x² − 12x + 5) [verified: same SVG]; closed form
-  s = 2 + (2 + sin θ)/(cos θ + sin θ); the two small internal gaps are equal, u1 = 0.0248745350255969539…
-  [verified: SVG parameter u1]. Everything in `chat_history.txt` (octic, tan(θ/2) polynomial
-  5t⁸ + 10t⁷ − 2t⁶ − 14t⁵ + 12t⁴ + 6t³ + 2t² − 2t − 1, equal gaps) is consistent with these public data —
-  the tan(θ/2) polynomial itself is not published anywhere I found, so A03 should re-derive it.
-- **Attribution (corrected):** the packing was found by hand by Walter Trump in 1979 (HP-67 calculator, value
-  3.8770835903 sent to Gardner; published in Gardner's *Fractal Music, Hypercards and More*, 1991); independently
-  by Gustafsson & Thulin 1980 ("Problem Ronden") and others. Gensane–Ryckelynck 2005 did **not** find a new
-  arrangement: their inflation algorithm re-found Trump's rigid configuration and reported s11 = 3.87708359…,
-  "slightly better" only than the survey's rounded 3.8772 [verified: G–R 2005 §7 text; Trump 2023 preprint
-  abstract; Ellsworth SVG history note]. Friedman DS7 says "s(11) < 3.8771 … rigid" [verified].
-- **No improvement since 1979** despite the 2024–2026 simulated-annealing campaign (Schadt, Ellsworth, Cantrell,
-  Hajba) that improved n = 29, 51, 54, 55, 69, 87, … [verified: Ellsworth page, updates to Feb 2026].
-- **Lower bound: s(11) ≥ 2 + 2·sqrt(4/5) = 2 + 4/√5 = 3.788854…** [verified: Stromquist 2003 Thm 2].
-  **No later improvement exists** (checked: arXiv 2003–2026, forward citations of Stromquist/Bentz/Nagamochi/
-  Friedman/G–R, Wikipedia, MathWorld, Ellsworth, OEIS) — the bound is 23 years old and, per Stromquist's own
-  remark, "not rigid" in its second stage.
-- Same paper, Thm 3: with orientations restricted to 0°/45°, 11 squares need side ≥ 2 + (4/3)√2 = 3.8856 >
-  3.877, attained by Hämäläinen's packing ⇒ Gardner's conjecture that n = 11 is the first case needing a
-  generic tilt [verified]. (Advisor's seed wrote "2 + 2√(8/9)"; that equals 2 + (4/3)√2 — same number.)
-- **How Stromquist's s(11) proof works (for A02):** 10 points (Fig. 13: (1,1), (s/2,1), (3/2−s/4, s/2),
-  (1/2+s/4, s/2) + symmetric images) are unavoidable everywhere except two top/bottom rectangles; a box in
-  such a rectangle must (Lemmas 4, 6) contain three specified points A; the 12-point set of Fig. 14 is
-  unavoidable ⇒ ≤ 10 boxes. The value is fixed by the unit-triangle lemma (sloping triangle sides in Fig. 13
-  have length exactly 1: (s/4−1/2)² + (s/2−1)² = 1). It is an *almost*-unavoidable-set + one-case argument,
-  not a pure 10-point unavoidable set [verified: paper text].
-- Method for lower bounds ("unavoidable sets", Friedman DS7 §5): exhibit n−1 points in the side-k square such
-  that every unit square inside contains one (boundary allowed; shrink by (1−ε/k)) ⇒ s(n) ≥ k [verified].
-  Extensions in the literature: "almost unavoidable sets" + case analysis (Friedman s(7), s(14); Stromquist;
-  Bentz 2010), *continuously varying families* of unavoidable sets (Bentz 2016), *two unavoidable sets used
-  simultaneously* — Kearney–Shiu's "duality" (2002), and the piercing-number viewpoint (Bašić–Slivková 2018,
-  DAM 247). No LP/SDP-dual bound for finite square containers exists in the literature.
-- Rigorous computer-assisted packing proofs with rotating squares: only Montanher–Neumaier–Markót–Domes–Schichl
-  (Vienna, JOGO 2019): 3 unit squares in a circle, interval B&B with tiling constraints (this is the "Vienna"
-  approach in `chat_history.txt`) [verified]. Nothing for squares in a square. No formalisation (Lean/Isabelle/
-  Coq) of any result in this family exists.
+## C. Stratification by simple squares
+11. LEAN  Census: exactly 1110 skeleton tuples / 163 D4 classes under the Young-form definition
+    (`Census.lean`; two independent enumerations A53/A72 agree exactly; kernel-checked).
+12. LEAN  Every selected (k-maximal, slide-stuck) minimiser's skeleton lies in exactly one class (`stratify`);
+    K1: kills climb containment, aliveness descends.
+13. CERT  AT MOST 5 SIMPLE SQUARES: all 33 k=6 classes killed at s0 (hence all k >= 6 by K1). Window
+    coverage: 41/52 scoreboard rows full-window, 9 converting (A61), 2 slivers.
+14. CERT  k=5: 19 of 22 classes killed; alive: trump5 (Trump's own), k5_11, k5_16 — the latter two killed at
+    s0 by sub-stratification trees (A57), window grid G1 in progress.
+15. LEAN+CERT  k<=4: 8 of 14 k=4 classes killed, 1 of 6 k=3 (k3_00); the 16 survivors (6 k4 + 10 k<=3)
+    are exactly the sub-skeletons of trump5 and are PROVABLY unkillable by single-square certificates
+    (A55 sharpness + K1): Trump is a feasible point of each monotone hypothesis.
+16. LEAN  Verifier soundness: measure checker + driver, case-LP checker, 4-D parametric checker,
+    alivewitness, D4 reduction — all Lean theorems. Corpus replays: measure (3.82), Theorem U, P1, K61
+    (in progress), TRAP (in progress); A57/A60 corpora priced multi-day.
 
-## Sources (all fetched unless noted; see `docs/literature.md` for annotations)
-- E. Friedman, "Packing Unit Squares in Squares: A Survey and New Results", EJC DS7, v5 Aug 2009 — `docs/papers/friedman_DS7_survey_2009.pdf`.
-- W. Stromquist, "Packing 10 or 11 unit squares in a square", EJC 10 (2003) #R8 — `docs/papers/stromquist2003.pdf`; 1984 memoranda I–III scans `stromquist1984_memo*.pdf`.
-- T. Gensane, P. Ryckelynck, "Improved dense packings of congruent squares in a square", DCG 34 (2005) 97–109 — `docs/papers/gensane_ryckelynck2005_DCG.pdf`.
-- H. Nagamochi, "Packing unit squares in a rectangle", EJC 12 (2005) #R37 — `docs/papers/nagamochi2005_R37.pdf`.
-- M. Kearney, P. Shiu, EJC 9 (2002) #R14 — `docs/papers/kearney_shiu2002_R14.pdf`.
-- W. Bentz, EJC 17 (2010) #R126 and arXiv:1606.03746 — `docs/papers/bentz2010_13and46_R126.pdf`, `bentz2018_22and33_arXiv1606.03746.pdf`.
-- Montanher et al., JOGO 73 (2019) — `docs/papers/montanher_neumaier_markot_domes_schichl_2019_squares_in_circle_JOGO.pdf`.
-- D. Ellsworth, "Squares in Squares" (2023–2026) — `docs/papers/ellsworth_squares_in_squares.*`, `ellsworth_square-11.svg`.
-- F. Göbel 1979 (Math. Centre Tracts 106) — not online. W. Trump 2023 ResearchGate preprint — not downloadable
-  (403). B. Bašić, A. Slivková, DAM 2018 — paywalled.
+## D. Structure of minimisers
+17. LEAN  Attainment: s(11) is a minimum.
+18. PROSE Wall-to-wall contact chain: every minimiser has a chain of contacts from one wall to the opposite
+    wall (L6 / D2''); hence >= 2 wall contacts on a pair of opposite walls, loaded (L7). Flushness NOT forced.
+19. CERT  Corner-zone occupancy: every 11-packing at side <= 3.84 has a corner-zone square (A13/A14);
+    corner-zone and side-zone squares exist at <= 3.88 (A21).
+20. PROSE Near-flush exclusion (A50): no spanning chain has all tilts strictly in (0, theta*) with
+    theta* = 1.73465 deg (root of 1969271t^2 + 2000000t - 30729); flush rulers have length <= 5; a 5-ruler
+    forces the remaining tilts into [20.77, 69.23] deg; tilt pinning yields finite algebraic menus.
+21. CERT  Thin flush-free branch (A47): spans quantise to o*sqrt2 + r; the only window value 2*sqrt2 + 1 is
+    killed by an exception certificate.
+22. LEAN  Teleport/exchange lemma CC-2 (`teleport_packing`); PROSE clear-corner crowding (A58): every clear
+    corner of a k<=3 minimiser has >= 2 non-simple squares meeting its corner box; k=0: >= 8 of 11 squares
+    corner-tied; Trump is teleport-extremal.
+23. LEAN  Zone-assignment collapse N1; single-corner transfer M1; logic-kill rules T5/T11.
+24. PROSE Index identity m = 3k + 1 + sigma - d; rigid => Maxwell (A44).
+25. CERT  Trump saturates his own class's crowd threshold exactly (load 2.00; A65) — the mechanism of
+    protection.
+26. LEAN  lambda-dilation bridge (interior-disjoint minimisers vs closed-disjoint certificate families) incl.
+    the NO-family clause; theta<->t transfer with sharp constant; cover invariance (PROSE, A63).
+
+## E. What cannot work (proved or measured)
+27. PROSE Collapse theorem (A34): any sparse SDP relaxation whose cliques carry <= m squares is capped at
+    s(m) <= 3.71.
+28. LEAN+CERT Single-square guard-field certificates cannot kill any protected class (item 15).
+29. PROSE Canary theorem (A66): dilated Trump saturates trump5's pair threshold exactly — no sound pair
+    certificate kills him.
+30. CERT  corners4 cannot be killed by occupancy counting: exact 7-point witnesses exist at every window
+    side; its obstruction is orientation coupling (A66).
+31. CERT  Bottom-up grain discharge cannot extend the certified radius beyond the basin theorems (hinge-grain
+    wall, A76); the basin-exclusion LP row gains ~0.1 margin per decade of radius.
+32. CERT  Any valid corners4 pair certificate is a necessarily-tight measure whose complete verification
+    tree is ~1e9-1e11 nodes (frontier retention 0.75-0.86 per level, flat; Lemma W''', A77).
+33. CERT  The enumeration-certificate mismatch law, seven+ faces (A30-A52): certificates price placements;
+    enumerable objects quotient placement away.
+34. CERT  s(12) >= 3.90 (A33).
+
+## F. NOT established (frequently misremembered)
+- "Every packing at or below s-hat has an axis-aligned square": NOT proven — k=0 (no simple squares) is a
+  protected open class; item 19 gives corner-zone occupancy, not alignment.
+- "Every packing at or below s-hat has a flush contact": NOT proven — I-L19 ("flush-mandatory") is a
+  CONJECTURE, off the proof tree. Nearest theorems: items 18, 20, 21.
+- A minimum number of FLUSH contacts against walls: NO theorem. Item 18 gives >= 2 wall CONTACTS on
+  opposite walls (possibly corner-on-wall); in any k >= 1 stratum the simple square is flush to two walls by
+  definition; a k=0 minimiser could a priori touch walls only with corners.
+- Global confinement ("every near-optimal packing is near Trump"): TRUE EMPIRICALLY (A04: of 702 local
+  optima exactly one, Trump's, has s <= s0) but NOT PROVEN — proving it is what the protected-tier
+  campaign amounts to.
+
+## G. Open (owned)
+- trump5 residual tree -> basin (A60): cover j0 0.781 kill rate, deepen/ladders/confinement/window pending.
+- Window coverage stragglers (A61), k5_11/k5_16 window grid G1 (A57).
+- The 16 protected classes (C.K4TIER): pair route walled (32), grain route walled (31), U-ladder verdict
+  pending (A80); likely next = A60-style conditioning trees on each exact protected stratum.
+- TopLevel axioms remaining: `stratum_kill`, `trump_residual`, `a22_exact_structure`.
