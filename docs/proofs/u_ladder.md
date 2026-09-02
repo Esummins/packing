@@ -233,14 +233,16 @@ per rung (45M-nnz / 45k-row caps not hit); every cell CONVERGED (fine Lmax = 1.0
 | 0 = Lemma P-B optimised over γ | 15 | 26.588235 | −1.412 | 0.0882 | +0.41 | 148 s |
 | **1 (BRIEF's decisive row: ≤ 9 within δ)** | 10 | **26.000000** | **−2.000** | 0.1250 | **+0.59** | 204 s |
 | 2 | 6 | 25.435705 | −2.564 | 0.1610 | +0.56 | 5 min |
-| 3 | 3 | 24.889964 (UNCONVERGED: HiGHS time limit at round 19, fine Lmax 14.3 — not a verdict; long re-run RUNG3L) | | 0.2389 | | 626 s |
-| 4 | 1 | 24.277778 | −3.722 | 0.4464 | +0.58 per rung over rung 2 | 461 s |
-| 5 | 0 | 23.785896 (UNCONVERGED: time limit at round 14, fine Lmax 7.8; long re-run RUNG5L) | | 1.1048 | | 616 s |
+| 3 | 3 | 24.885193 (long re-run, lp_time 1800: converged) | −3.115 | 0.2398 | +0.55 | 451 s |
+| 4 | 1 | 24.277778 | −3.722 | 0.4464 | +0.61 | 461 s |
+| 5 | 0 | 23.705394 (long re-run: converged, fine Lmax 1.008, scaled 23.513) | −4.487 (scaled) | 1.0160 | +0.76 | 624 s |
 
 Against the BRIEF's thresholds the k = 1 row gains **+0.59 over P-B's optimum (−1.41; A66's
 hand-tuned γ = 0.1 was −1.40) and +1.00 over the plain pair LP** — above "~0.1 = reserve", below
-"≥ 1 = lever": a reserve-plus. The ladder is LINEAR in k at ≈ −0.55 per rung, not the (k + 1)-unit
-jump hoped for. Rung 1 re-measured at the ladder's real zone r_z = 10⁻⁴ (§6.1, variants at 3·10⁻⁵ / 3·10⁻⁴): **26.000000 again, converged, γ* = 1/8, same class masses (in-in 10.0, in-near 4.67, far-in 4.0)** — the zone radius is irrelevant to the price, exactly as A76's saturation law says.
+"≥ 1 = lever": a reserve-plus. The ladder is LINEAR in k at ≈ −0.55 to −0.6 per rung (five converged rungs:
+−1.41, −2.00, −2.56, −3.11, −3.72, and −4.49 at the last rung whose cap is 0 — the whole ladder to k = 5
+buys ≈ 3.5 units of restricted slack over plain Lemma P), not the (k + 1)-unit jump hoped for. (Rungs 3
+and 5 first hit the HiGHS 600 s time limit unconverged; the 1800 s re-runs converged.) Rung 1 re-measured at the ladder's real zone r_z = 10⁻⁴ (§6.1, variants at 3·10⁻⁵ / 3·10⁻⁴): **26.000000 again, converged, γ* = 1/8, same class masses (in-in 10.0, in-near 4.67, far-in 4.0)** — the zone radius is irrelevant to the price, exactly as A76's saturation law says.
 
 **The dodge witness (A12's mechanism, quantified).** The rung-1 optimum is 26 = 21 + 5 EXACTLY on a
 35-pair support (re-run with the support dump: identical value; `results/ladderlp_k4_08_rz1e-3_img1_k1_dodge.json`).

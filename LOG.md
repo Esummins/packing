@@ -1977,8 +1977,9 @@ affordable cost estimate for closing 3.84.
 ## 2026-09-02 A80-u-ladder (Fable lead + Opus chores, 1 LP slot) -- done-mixed
 - T2 VERDICT FIRST: the U_k counting row is a RESERVE-PLUS, not a lever. k4_08 pair LP (A66 rig copied, beta=1, thr 28,
   r_z=1e-3, converged cells): plain -1.00; rung 0 (= Lemma P-B optimised over gamma, one hard row with dual gamma*=0.088)
-  -1.412; rung 1 ('<= 9 within delta') -2.000 (gamma* = 1/8): +0.59 over P-B, +1.00 over plain; rung 2 -2.564; rung 4 -3.722;
-  linear ~0.55-0.58 per rung (rungs 3/5 hit the HiGHS time limit; long re-runs queued). Dodge witness = A12's mechanism
+  -1.412; rung 1 ('<= 9 within delta') -2.000 (gamma* = 1/8): +0.59 over P-B, +1.00 over plain; rung 2 -2.564; rung 3
+  -3.115; rung 4 -3.722; rung 5 (cap 0) -4.487 - all converged (3/5 needed lp_time 1800): linear ~0.55-0.6 per rung,
+  ~3.5 units over plain for the whole ladder; rung 1 at r_z = 1e-4 identical (26.000000). Dodge witness = A12's mechanism
   quantified: rung-1 optimum 26 = 21+5 EXACTLY on 35 pairs - four ghost members at weight 1 (6 in-zone pairs = the cap),
   three split 2/3:1/3 with 3e-3-displaced variants keeping every box incidence; the row counts SQUARES, the adversary pays
   in pair mass parked outside the zones at gamma* per pair; zone radius irrelevant (A76 saturation law).
