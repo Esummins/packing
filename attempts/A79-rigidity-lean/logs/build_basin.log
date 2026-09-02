@@ -1,0 +1,83 @@
+error: PackingCertMathlib/RigidA36.lean:70:4: unsolved goals
+case pos
+a : A36Cert
+f : ℕ → ℝ
+hf : ∀ (k : ℕ), a.omega.getD k 0 = 0 → f k = 0
+n : ℕ
+ih : (List.map f (List.filter (fun k ↦ decide (a.omega.getD k 0 ≠ 0)) (List.range n))).sum = ∑ k ∈ Finset.range n, f k
+h : a.omega.getD n 0 ≠ 0
+⊢ (List.map f (List.filter (fun k ↦ !decide (a.omega[k]?.getD 0 = 0)) [n])).sum = f n
+warning: PackingCertMathlib/RigidA36.lean:71:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+error: PackingCertMathlib/RigidA36.lean:71:4: unsolved goals
+case neg
+a : A36Cert
+f : ℕ → ℝ
+hf : ∀ (k : ℕ), a.omega.getD k 0 = 0 → f k = 0
+n : ℕ
+ih : (List.map f (List.filter (fun k ↦ decide (a.omega.getD k 0 ≠ 0)) (List.range n))).sum = ∑ k ∈ Finset.range n, f k
+h : a.omega.getD n 0 = 0
+⊢ (List.map f (List.filter (fun k ↦ !decide (a.omega[k]?.getD 0 = 0)) [n])).sum = 0
+warning: PackingCertMathlib/RigidA36.lean:70:12: This simp argument is unused:
+  h
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/RigidA36.lean:72:12: This simp argument is unused:
+  h
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hf n h]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+error: PackingCertMathlib/RigidA36.lean:87:4: Type mismatch: After simplification, term
+  this
+ has type
+  @HasDerivAt ℝ DenselyNormedField.toNontriviallyNormedField ℝ Real.normedAddCommGroup.toAddCommGroup
+    RCLike.toInnerProductSpaceReal.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace ⋯
+    ((fun x ↦ φ x - φ 0) - fun y ↦ φ' 0 * y) (φ' t - φ' 0) t
+but is expected to have type
+  @HasDerivAt ℝ DenselyNormedField.toNontriviallyNormedField ℝ Real.instAddCommGroup Semiring.toModule
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace ⋯ (fun t ↦ φ t - φ 0 - φ' 0 * t) (φ' t - φ' 0) t
+warning: PackingCertMathlib/RigidA36.lean:117:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: PackingCertMathlib/RigidA36.lean:148:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+error: PackingCertMathlib/RigidA36.lean:166:9: typeclass instance problem is stuck
+  NormedSpace ?m.30 ?m.32
+
+Note: Lean will not try to resolve this typeclass instance problem because the first, second, third, and fourth type arguments to `NormedSpace` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+error: PackingCertMathlib/RigidA36.lean:173:9: typeclass instance problem is stuck
+  NormedSpace ?m.59 ?m.61
+
+Note: Lean will not try to resolve this typeclass instance problem because the first, second, third, and fourth type arguments to `NormedSpace` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+warning: PackingCertMathlib/RigidA36.lean:186:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: PackingCertMathlib/RigidA36.lean:214:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+error: PackingCertMathlib/RigidA36.lean:250:8: Invalid projection: Projections extract constructor fields for one-constructor inductive types. The expression
+  h.left.left.left.left.left
+has type `a.omega.size = NEXT3` which has no fields.
+Some required targets logged failures:
+- PackingCertMathlib.RigidA36
+error: build failed
+BASIN-BUILD-DONE

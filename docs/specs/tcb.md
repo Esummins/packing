@@ -60,3 +60,10 @@ The measure **bridge** lemma is prose (checklist F2); the Lean side proves check
 5. **16 copies of `verify_case.py`** are byte-identical today (verified, `tcb_raw.md`
    §1.3); any future edit must change the canonical copy and re-propagate, or better,
    deduplicate to one import point (as `verify_param.py` already does).
+
+**A79 update (2026-09-02):** the rigidity chain (rows 31-32 above: `recheck.py`,
+`a36_check.py`) is replayed in Lean — `RigidityCheck.lean` (`native_decide`) + the soundness
+theorems `krawczyk_sound`, `zhatV_feas`, `a22_optimal`, `a36_basin` — with its own dyadic
+interval kernel and certified Taylor trigonometry; `mpmath.iv` is no longer in the decision
+path of E.A22/E.A36 at either tier (A70's stdlib re-checkers are the second implementation).
+`a37_check.py` (row 33, off the critical path) is unchanged.

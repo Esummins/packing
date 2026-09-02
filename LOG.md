@@ -1998,3 +1998,17 @@ affordable cost estimate for closing 3.84.
   (3,4) needs a covering LP); priced ~hours emission per rung for ~0.55 slack. Canary SAFE throughout. Discipline held.
   Files: attempts/A80-u-ladder/{code,certs,results,logs}, certs/uladder/, certs/verify_uladder.py, docs/proofs/u_ladder.md,
   depgraph C.K4TIER note + svg (chip stays A77), REGISTRY row.
+- 2026-09-02 A79-rigidity-lean closed (done-success, Fable 5.1): RIGIDITY REPLAY IN LEAN, rungs (b)+(c). E.A22 and
+  E.A36 -> lean-proved: theta-frame port of A70's exact re-checkers (RigidKernel.lean: dyadic 2^-330 intervals,
+  alternating-Taylor cos/sin certified from Mathlib Real.hasSum_cos/sin; deep-embedded row language with symbolic D and
+  order-2 interval jets) replayed by native_decide (RigidityCheck.lean: checkA22_a22, checkA36_universal, checkA36_all17;
+  140 s). Soundness: krawczyk_sound (Banach on the true box, Neumann invertibility of Y) => unique contact solution z-hat;
+  zhatV_feas (interval SAT + exact-structure witnesses searched in S) => z-hat packs at its own side; a22_optimal (A22 sect 5);
+  a36_basin (universal certificate: Taylor with interval Hessian mass, max-form pinning, quadratic dichotomy replacing the
+  800-step iteration, handover to A22). TopLevel: zhat/shatA22 DEFINITIONS, trump_packs_at_shatA22/basin THEOREMS,
+  roster 7 -> 3 (stratum_kill, trump_residual, a22_exact_structure); mpmath.iv out at both tiers. FINDING: only G3_UNIVERSAL
+  is load-bearing (rBasin(1+sqrt2) = 3.6213e-3 < 3689/10^6; E.COORD gates untouched); A22's [F] re-check needs the
+  exact-structure argument, derivable from S alone; eps0/g_max/eps_w must be box(z0,r0)-evaluated (x* 6e-48, harmless).
+  Files: lean/PackingCertMathlib/PackingCertMathlib/Rigid*.lean, Rigidity.lean, RigidityCheck.lean, lean/gen_rigidity_lean.py,
+  attempts/A79-rigidity-lean/{notes/findings.md,LOG.md,logs}, lean/README.md, depgraph E.A22/E.A36/E.IV (chips cleared),
+  REGISTRY row. A57/A60/A61/A76/A77/A78 untouched.

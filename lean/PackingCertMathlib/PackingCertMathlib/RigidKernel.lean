@@ -634,15 +634,19 @@ def signIV (bx0 : Box) (a b : Nat) : Option Rat :=
 
 /-- Propagate one `S` dist row `(i, j)` of two upright squares: equal known `y` ⇒ the `x`
 coordinates differ by the certified sign (and symmetrically). -/
-def propDist (bx0 : Box) (K : Known) (i j : Nat) : Known :=
-  let K1 := match ky K i, ky K j, kx K i, kx K j, signIV bx0 (3 * i) (3 * j) with
-    | some yi, some yj, some (a, b), none, some σ => if yi = yj then setKx K j (a + σ, b) else K
-    | some yi, some yj, none, some (a, b), some σ => if yi = yj then setKx K i (a - σ, b) else K
-    | _, _, _, _, _ => K
-  match kx K1 i, kx K1 j, ky K1 i, ky K1 j, signIV bx0 (3 * i + 1) (3 * j + 1) with
-    | some xi, some xj, some (a, b), none, some σ => if xi = xj then setKy K1 j (a + σ, b) else K1
-    | some xi, some xj, none, some (a, b), some σ => if xi = xj then setKy K1 i (a - σ, b) else K1
-    | _, _, _, _, _ => K1
+def propX (bx0 : Box) (K : Known) (i j : Nat) : Known :=
+  match ky K i, ky K j, kx K i, kx K j, signIV bx0 (3 * i) (3 * j) with
+  | some yi, some yj, some (a, b), none, some σ => if yi = yj then setKx K j (a + σ, b) else K
+  | some yi, some yj, none, some (a, b), some σ => if yi = yj then setKx K i (a - σ, b) else K
+  | _, _, _, _, _ => K
+
+def propY (bx0 : Box) (K : Known) (i j : Nat) : Known :=
+  match kx K i, kx K j, ky K i, ky K j, signIV bx0 (3 * i + 1) (3 * j + 1) with
+  | some xi, some xj, some (a, b), none, some σ => if xi = xj then setKy K j (a + σ, b) else K
+  | some xi, some xj, none, some (a, b), some σ => if xi = xj then setKy K i (a - σ, b) else K
+  | _, _, _, _, _ => K
+
+def propDist (bx0 : Box) (K : Known) (i j : Nat) : Known := propY bx0 (propX bx0 K i j) i j
 
 def knownStep (c : A22Cert) (bx0 : Box) (K : Known) : Known :=
   c.S.foldl (fun K r => match c.row r with
@@ -911,11 +915,38 @@ def pinningOK (c : A22Cert) (a : A36Cert) (st : A36Stats) : Bool :=
   decide (psi st.keff st.e0 st.ew st.hb st.kap st.gm st.beta st.xstar ≤ st.xstar) &&
   decide (st.xstar + c.r0 ≤ c.rN)
 
-/-- All 70 rows of the v3 table use only their declared variables. -/
+/-- All 70 rows of the v3 table use only their declared variables and are well-shaped. -/
 def rows70OK (c : A22Cert) : Bool :=
   (rng NEXT3).all fun k =>
     let r := row70 c k
-    (rowExpr r).usesOnly (rowVars r)
+    (rowExpr r).usesOnly (rowVars r) &&
+    (match r with
+      | .wall i kc w => decide (i < 11) && decide (kc < 4) && decide (w < 4)
+      | .edge i kc j e => decide (i < 11) && decide (kc < 4) && decide (j < 11) && decide (e < 4) &&
+          decide (i ≠ j)
+      | .dist i j => decide (i < 11) && decide (j < 11) && decide (i ≠ j)
+      | .angeq i j => decide (i < 11) && decide (j < 11))
+
+/-- Every loaded row is a wall/edge/dist row, and every loaded EDGE row has its validity
+margins over the box (tangential `< ½`, depth `> −½`). -/
+def loadedValidOK (c : A22Cert) (a : A36Cert) (bx : Box) : Bool :=
+  (loaded a).all fun k => match row70 c k with
+    | .edge i kc j e =>
+      decide ((evalIV bx (tanE i kc j e)).mag < 1 / 2) &&
+        decide (-1 / 2 < (evalIV bx (depE i kc j e)).lo)
+    | .angeq _ _ => false
+    | _ => true
+
+/-- The pin positions are distinct and within the 70-row table. -/
+def pinsRangeOK (a : A36Cert) : Bool :=
+  a.P.all (fun k => decide (k < NEXT3)) && decide a.P.toList.Nodup
+
+/-- Some `S` wall row touches the far walls `x = s` or `y = s` (the slab gate of the
+θ↔t transfer needs a corner of `ẑ` ON the far wall). -/
+def farWallOK (c : A22Cert) : Bool :=
+  c.S.any fun r => match c.row r with
+    | .wall _ _ w => decide (w = 2) || decide (w = 3)
+    | _ => false
 
 /-- The A36 chain for one certificate. -/
 def checkA36 (c : A22Cert) (a : A36Cert) : Bool :=
@@ -926,7 +957,8 @@ def checkA36 (c : A22Cert) (a : A36Cert) : Bool :=
   pinsOK c a && omegaOK a && activityOK c a bx0 &&
   pinningOK c a st &&
   validityOK c (Array.ofFn (n := 36) fun i => i.val) bx &&
-  killedOK bx
+  killedOK bx &&
+  (!a.universal || loadedValidOK c a bx) && pinsRangeOK a && anglesSmall bx && farWallOK c
 
 def checkA36All (c : A22Cert) (as : Array A36Cert) : Bool := as.all fun a => checkA36 c a
 

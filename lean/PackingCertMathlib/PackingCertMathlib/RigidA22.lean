@@ -218,7 +218,9 @@ theorem relGet_ofFn_false (g : Fin 11 → Fin 11 → Bool) {i j : ℕ} (h : ¬ (
       rw [getD_of_lt _ (by simpa using hi)]
       simp
     rw [h1, getD_of_ge _ (by simpa using hj)]
-  · rw [getD_of_ge _ (by simpa using hi)]
+  · have h1 : (Array.ofFn fun i => Array.ofFn fun j => g i j).getD i #[] = #[] :=
+      getD_of_ge _ (by simpa using hi) _
+    rw [h1]
     simp
 
 /-- Soundness of a relation array: `true` entries are equal angles. -/
@@ -406,7 +408,7 @@ theorem setKy_sound {z : Vec} {K : Known} (hK : KnownSound z K) {j : ℕ} {v : A
 theorem signIV_sound {b : Array IV} {z : Vec} (hz : MemBox b z) {p q : ℕ} {σ : ℚ}
     (h : signIV (Box.ofArray b) p q = some σ) :
     (σ = 1 ∧ 0 < getV z q - getV z p) ∨ (σ = -1 ∧ getV z q - getV z p < 0) := by
-  unfold signIV at h
+  simp only [signIV] at h
   have hm := mem_sub (mem_get hz q) (mem_get hz p)
   split_ifs at h with h1 h2
   · rw [Option.some.injEq] at h
@@ -423,96 +425,81 @@ theorem signIV_sound {b : Array IV} {z : Vec} (hz : MemBox b z) {p q : ℕ} {σ 
       exact_mod_cast h2
     push_cast at this
     linarith [hm.2]
-  · exact absurd h (by simp)
 
-/-- One dist propagation is sound when the dist row vanishes and both squares are upright. -/
-theorem propDist_sound {b : Array IV} {z : Vec} (hz : MemBox b z) {K : Known} (hK : KnownSound z K)
-    {i j : ℕ} (hd : eval z (rowExpr (.dist i j)) = 0) :
-    KnownSound z (propDist (Box.ofArray b) K i j) := by
-  rw [eval_dist] at hd
-  unfold propDist
-  -- the x-step
-  have hstep : ∀ K1 : Known, KnownSound z K1 →
-      KnownSound z (match ky K1 i, ky K1 j, kx K1 i, kx K1 j, signIV (Box.ofArray b) (3 * i) (3 * j) with
-        | some yi, some yj, some (a, b), none, some σ => if yi = yj then setKx K1 j (a + σ, b) else K1
-        | some yi, some yj, none, some (a, b), some σ => if yi = yj then setKx K1 i (a - σ, b) else K1
-        | _, _, _, _, _ => K1) := by
-    intro K1 hK1
-    split
-    · next yi yj a b σ hyi hyj hxi hxj hσ =>
-      split_ifs with hyy
-      · refine setKx_sound hK1 ?_
-        subst hyy
-        have hyi' := (hK1 i).2 yi.1 yi.2 hyi
-        have hyj' := (hK1 j).2 yi.1 yi.2 hyj
-        have hxi' := (hK1 i).1 a b hxi
-        have hcy : cyZ z i - cyZ z j = 0 := by rw [hyi', hyj']; ring
-        rw [hcy] at hd
-        have hsq : (cxZ z i - cxZ z j) ^ 2 = 1 := by linarith
-        have hcx : cxZ z i - cxZ z j = 1 ∨ cxZ z i - cxZ z j = -1 := by
-          rcases sq_eq_one_iff_of_ne_zero (by norm_num : (1:ℝ) ≠ 0) |>.mp ?_ with h | h
-          · exact Or.inl h
-          · exact Or.inr h
-          · simpa using hsq
-        rcases signIV_sound hz hσ with ⟨rfl, hs⟩ | ⟨rfl, hs⟩
-        · -- `cx_j − cx_i > 0`, so `cx_j = cx_i + 1`
-          change cxZ z j = ((a + 1 : ℚ) : ℝ) + (b : ℝ) * sZ z
-          change 0 < cxZ z j - cxZ z i at hs
-          push_cast
-          rcases hcx with h | h <;> linarith
-        · change cxZ z j = ((a + -1 : ℚ) : ℝ) + (b : ℝ) * sZ z
-          change cxZ z j - cxZ z i < 0 at hs
-          push_cast
-          rcases hcx with h | h <;> linarith
-      · exact hK1
-    · next yi yj a b σ hyi hyj hxi hxj hσ =>
-      split_ifs with hyy
-      · refine setKx_sound hK1 ?_
-        subst hyy
-        have hyi' := (hK1 i).2 yi.1 yi.2 hyi
-        have hyj' := (hK1 j).2 yi.1 yi.2 hyj
-        have hxj' := (hK1 j).1 a b hxj
-        have hcy : cyZ z i - cyZ z j = 0 := by rw [hyi', hyj']; ring
-        rw [hcy] at hd
-        have hsq : (cxZ z i - cxZ z j) ^ 2 = 1 := by linarith
-        have hcx : cxZ z i - cxZ z j = 1 ∨ cxZ z i - cxZ z j = -1 := by
-          rcases sq_eq_one_iff_of_ne_zero (by norm_num : (1:ℝ) ≠ 0) |>.mp ?_ with h | h
-          · exact Or.inl h
-          · exact Or.inr h
-          · simpa using hsq
-        rcases signIV_sound hz hσ with ⟨rfl, hs⟩ | ⟨rfl, hs⟩
-        · change cxZ z i = ((a - 1 : ℚ) : ℝ) + (b : ℝ) * sZ z
-          change 0 < cxZ z j - cxZ z i at hs
-          push_cast
-          rcases hcx with h | h <;> linarith
-        · change cxZ z i = ((a - -1 : ℚ) : ℝ) + (b : ℝ) * sZ z
-          change cxZ z j - cxZ z i < 0 at hs
-          push_cast
-          rcases hcx with h | h <;> linarith
-      · exact hK1
-    · exact hK1
-  -- the y-step, on the result of the x-step
-  set K1 := (match ky K i, ky K j, kx K i, kx K j, signIV (Box.ofArray b) (3 * i) (3 * j) with
-        | some yi, some yj, some (a, b), none, some σ => if yi = yj then setKx K j (a + σ, b) else K
-        | some yi, some yj, none, some (a, b), some σ => if yi = yj then setKx K i (a - σ, b) else K
-        | _, _, _, _, _ => K) with hK1def
-  have hK1 : KnownSound z K1 := hstep K hK
+theorem sq_eq_one_cases {x : ℝ} (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
+  have : (x - 1) * (x + 1) = 0 := by ring_nf; linarith
+  rcases mul_eq_zero.mp this with h | h
+  · left; linarith
+  · right; linarith
+
+set_option maxHeartbeats 800000 in
+-- the 5-way match with nested option/pair patterns is elaboration-heavy
+/-- The `x`-propagation of a dist row is sound when the row vanishes. -/
+theorem propX_sound {b : Array IV} {z : Vec} (hz : MemBox b z) {K : Known} (hK : KnownSound z K)
+    {i j : ℕ} (hd : (cxZ z i - cxZ z j) ^ 2 + (cyZ z i - cyZ z j) ^ 2 - 1 = 0) :
+    KnownSound z (propX (Box.ofArray b) K i j) := by
+  unfold propX
+  split
+  · next yi yj a b σ hyi hyj hxi hxj hσ =>
+    split_ifs with hyy
+    · refine setKx_sound hK ?_
+      subst hyy
+      have hyi' := (hK i).2 yi.1 yi.2 hyi
+      have hyj' := (hK j).2 yi.1 yi.2 hyj
+      have hxi' := (hK i).1 a b hxi
+      have hcy : cyZ z i - cyZ z j = 0 := by rw [hyi', hyj']; ring
+      rw [hcy] at hd
+      have hcx := sq_eq_one_cases (x := cxZ z i - cxZ z j) (by linarith)
+      rcases signIV_sound hz hσ with ⟨rfl, hs⟩ | ⟨rfl, hs⟩
+      · change cxZ z j = ((a + 1 : ℚ) : ℝ) + (b : ℝ) * sZ z
+        change 0 < cxZ z j - cxZ z i at hs
+        push_cast
+        rcases hcx with h | h <;> linarith
+      · change cxZ z j = ((a + -1 : ℚ) : ℝ) + (b : ℝ) * sZ z
+        change cxZ z j - cxZ z i < 0 at hs
+        push_cast
+        rcases hcx with h | h <;> linarith
+    · exact hK
+  · next yi yj a b σ hyi hyj hxi hxj hσ =>
+    split_ifs with hyy
+    · refine setKx_sound hK ?_
+      subst hyy
+      have hyi' := (hK i).2 yi.1 yi.2 hyi
+      have hyj' := (hK j).2 yi.1 yi.2 hyj
+      have hxj' := (hK j).1 a b hxj
+      have hcy : cyZ z i - cyZ z j = 0 := by rw [hyi', hyj']; ring
+      rw [hcy] at hd
+      have hcx := sq_eq_one_cases (x := cxZ z i - cxZ z j) (by linarith)
+      rcases signIV_sound hz hσ with ⟨rfl, hs⟩ | ⟨rfl, hs⟩
+      · change cxZ z i = ((a - 1 : ℚ) : ℝ) + (b : ℝ) * sZ z
+        change 0 < cxZ z j - cxZ z i at hs
+        push_cast
+        rcases hcx with h | h <;> linarith
+      · change cxZ z i = ((a - -1 : ℚ) : ℝ) + (b : ℝ) * sZ z
+        change cxZ z j - cxZ z i < 0 at hs
+        push_cast
+        rcases hcx with h | h <;> linarith
+    · exact hK
+  · exact hK
+
+set_option maxHeartbeats 800000 in
+-- the 5-way match with nested option/pair patterns is elaboration-heavy
+/-- The `y`-propagation of a dist row is sound when the row vanishes. -/
+theorem propY_sound {b : Array IV} {z : Vec} (hz : MemBox b z) {K : Known} (hK : KnownSound z K)
+    {i j : ℕ} (hd : (cxZ z i - cxZ z j) ^ 2 + (cyZ z i - cyZ z j) ^ 2 - 1 = 0) :
+    KnownSound z (propY (Box.ofArray b) K i j) := by
+  unfold propY
   split
   · next xi xj a b σ hxi hxj hyi hyj hσ =>
     split_ifs with hxx
-    · refine setKy_sound hK1 ?_
+    · refine setKy_sound hK ?_
       subst hxx
-      have hxi' := (hK1 i).1 xi.1 xi.2 hxi
-      have hxj' := (hK1 j).1 xi.1 xi.2 hxj
-      have hyi' := (hK1 i).2 a b hyi
+      have hxi' := (hK i).1 xi.1 xi.2 hxi
+      have hxj' := (hK j).1 xi.1 xi.2 hxj
+      have hyi' := (hK i).2 a b hyi
       have hcx : cxZ z i - cxZ z j = 0 := by rw [hxi', hxj']; ring
       rw [hcx] at hd
-      have hsq : (cyZ z i - cyZ z j) ^ 2 = 1 := by linarith
-      have hcy : cyZ z i - cyZ z j = 1 ∨ cyZ z i - cyZ z j = -1 := by
-        rcases sq_eq_one_iff_of_ne_zero (by norm_num : (1:ℝ) ≠ 0) |>.mp ?_ with h | h
-        · exact Or.inl h
-        · exact Or.inr h
-        · simpa using hsq
+      have hcy := sq_eq_one_cases (x := cyZ z i - cyZ z j) (by linarith)
       rcases signIV_sound hz hσ with ⟨rfl, hs⟩ | ⟨rfl, hs⟩
       · change cyZ z j = ((a + 1 : ℚ) : ℝ) + (b : ℝ) * sZ z
         change 0 < cyZ z j - cyZ z i at hs
@@ -522,22 +509,17 @@ theorem propDist_sound {b : Array IV} {z : Vec} (hz : MemBox b z) {K : Known} (h
         change cyZ z j - cyZ z i < 0 at hs
         push_cast
         rcases hcy with h | h <;> linarith
-    · exact hK1
+    · exact hK
   · next xi xj a b σ hxi hxj hyi hyj hσ =>
     split_ifs with hxx
-    · refine setKy_sound hK1 ?_
+    · refine setKy_sound hK ?_
       subst hxx
-      have hxi' := (hK1 i).1 xi.1 xi.2 hxi
-      have hxj' := (hK1 j).1 xi.1 xi.2 hxj
-      have hyj' := (hK1 j).2 a b hyj
+      have hxi' := (hK i).1 xi.1 xi.2 hxi
+      have hxj' := (hK j).1 xi.1 xi.2 hxj
+      have hyj' := (hK j).2 a b hyj
       have hcx : cxZ z i - cxZ z j = 0 := by rw [hxi', hxj']; ring
       rw [hcx] at hd
-      have hsq : (cyZ z i - cyZ z j) ^ 2 = 1 := by linarith
-      have hcy : cyZ z i - cyZ z j = 1 ∨ cyZ z i - cyZ z j = -1 := by
-        rcases sq_eq_one_iff_of_ne_zero (by norm_num : (1:ℝ) ≠ 0) |>.mp ?_ with h | h
-        · exact Or.inl h
-        · exact Or.inr h
-        · simpa using hsq
+      have hcy := sq_eq_one_cases (x := cyZ z i - cyZ z j) (by linarith)
       rcases signIV_sound hz hσ with ⟨rfl, hs⟩ | ⟨rfl, hs⟩
       · change cyZ z i = ((a - 1 : ℚ) : ℝ) + (b : ℝ) * sZ z
         change 0 < cyZ z j - cyZ z i at hs
@@ -547,8 +529,16 @@ theorem propDist_sound {b : Array IV} {z : Vec} (hz : MemBox b z) {K : Known} (h
         change cyZ z j - cyZ z i < 0 at hs
         push_cast
         rcases hcy with h | h <;> linarith
-    · exact hK1
-  · exact hK1
+    · exact hK
+  · exact hK
+
+/-- One dist propagation is sound when the dist row vanishes. -/
+theorem propDist_sound {b : Array IV} {z : Vec} (hz : MemBox b z) {K : Known} (hK : KnownSound z K)
+    {i j : ℕ} (hd : eval z (rowExpr (.dist i j)) = 0) :
+    KnownSound z (propDist (Box.ofArray b) K i j) := by
+  rw [eval_dist] at hd
+  unfold propDist
+  exact propY_sound hz (propX_sound hz hK hd) hd
 
 theorem foldl_preserve_mem {α β : Type} {P : β → Prop} {f : β → α → β} :
     ∀ (l : List α), (∀ a ∈ l, ∀ b, P b → P (f b a)) → ∀ {b : β}, P b → P (l.foldl f b)
@@ -572,7 +562,7 @@ theorem knownStep_sound (hc : checkA22 c = true) {K : Known} (hK : KnownSound (z
   rw [← Array.foldl_toList]
   refine foldl_preserve_mem (P := KnownSound (zhatV c hc)) c.S.toList ?_ hK
   intro r hr K hKr
-  have hmem : r ∈ c.S := Array.mem_toList.mp hr
+  have hmem : r ∈ c.S := by simpa using hr
   split
   · next i j hrow =>
     split_ifs with hu
@@ -604,7 +594,7 @@ theorem affUnit_sound {u v : Option Aff} {x y s : ℝ}
     simp only [Bool.and_eq_true, decide_eq_true_eq] at h
     obtain ⟨hb, hab⟩ := h
     rw [hu a b rfl, hv a' b' rfl, hb]
-    have : ((rabs (a - a') : ℚ) : ℝ) = ((1 : ℚ) : ℝ) := by rw [hab]
+    have : ((CaseI.rabs (a - a') : ℚ) : ℝ) = ((1 : ℚ) : ℝ) := by rw [hab]
     rw [rabs_cast] at this
     push_cast at this
     rw [← this]
@@ -680,10 +670,10 @@ theorem mem_cornerList {z : Vec} {i : ℕ} (hθ : |thZ z i| < Real.pi) {q : RP}
   obtain ⟨c0, c1, c2, c3⟩ := cornerP_eq_aff hθ
   simp only [cornerList, List.mem_cons, List.not_mem_nil, or_false] at hq
   rcases hq with rfl | rfl | rfl | rfl
-  · exact ⟨0, by norm_num, c0⟩
-  · exact ⟨1, by norm_num, c1⟩
-  · exact ⟨2, by norm_num, c2⟩
-  · exact ⟨3, by norm_num, c3⟩
+  · exact ⟨0, by norm_num, c0.symm⟩
+  · exact ⟨1, by norm_num, c1.symm⟩
+  · exact ⟨2, by norm_num, c2.symm⟩
+  · exact ⟨3, by norm_num, c3.symm⟩
 
 theorem zhatV_contained (hc : checkA22 c = true) {i : ℕ} (hi : i < 11) :
     (sqZ (zhatV c hc) i).set ⊆ container (sZ (zhatV c hc)) := by

@@ -1,0 +1,180 @@
+error: PackingCertMathlib/RigidBasinMain.lean:72:4: Type mismatch: After simplification, term
+  this
+ has type
+  |d k| ≤ ‖d‖
+but is expected to have type
+  |d k| ≤ x
+error: PackingCertMathlib/RigidBasinMain.lean:88:41: mod_cast has type
+  decide (betaA36 c a (radBox c.z0 (a.h + c.r0)) < 1) = true
+but is expected to have type
+  betaA36 c a (radBox c.z0 hb) < 1
+error: PackingCertMathlib/RigidBasinMain.lean:95:17: mod_cast has type
+  decide
+      (psi (kappaEff c a) (eps0 c a (radBox c.z0 c.r0)) (epsW c a (radBox c.z0 c.r0))
+          (hbar c a (radBox c.z0 (a.h + c.r0))) (kappa c) (gmax c a (radBox c.z0 c.r0))
+          (betaA36 c a (radBox c.z0 (a.h + c.r0))) a.h <
+        a.h) =
+    true
+but is expected to have type
+  psi (kappaEff c a) (eps0 c a (radBox c.z0 c.r0)) (epsW c a (radBox c.z0 c.r0)) (hbar c a (radBox c.z0 hb)) (kappa c)
+      (gmax c a (radBox c.z0 c.r0)) (betaA36 c a (radBox c.z0 hb)) a.h <
+    a.h
+error: PackingCertMathlib/RigidBasinMain.lean:97:17: mod_cast has type
+  decide
+      (psi (kappaEff c a) (eps0 c a (radBox c.z0 c.r0)) (epsW c a (radBox c.z0 c.r0))
+          (hbar c a (radBox c.z0 (a.h + c.r0))) (kappa c) (gmax c a (radBox c.z0 c.r0))
+          (betaA36 c a (radBox c.z0 (a.h + c.r0))) (a36Stats c a).xstar ≤
+        (a36Stats c a).xstar) =
+    true
+but is expected to have type
+  ↑(psi (kappaEff c a) (eps0 c a (radBox c.z0 c.r0)) (epsW c a (radBox c.z0 c.r0)) (hbar c a (radBox c.z0 hb)) (kappa c)
+        (gmax c a (radBox c.z0 c.r0)) (betaA36 c a (radBox c.z0 hb)) (a36Stats c a).xstar) ≤
+    xs
+error: PackingCertMathlib/RigidBasinMain.lean:105:48: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Box.ofArray (boxArr ?c ?r)
+in the target expression
+  |Wfun c a zh| ≤ ↑(eps0 c a (radBox c.z0 c.r0))
+
+c : A22Cert
+a : A36Cert
+hc : checkA22 c = true
+ha : checkA36 c a = true
+hu : a.universal = true
+z : Vec
+hf : Feas z
+hh : 0 < a.h
+hr : rows70OK c = true
+hpins : pinsOK c a = true
+ho : omegaOK a = true
+hrange : pinsRangeOK a = true
+hsh : shapeOK c = true
+hz0 : c.z0.size = NV
+hS : c.S.size = NV
+hr0 : 0 < c.r0
+hr0N : c.r0 ≤ c.rN
+hP : a.P.size = NV
+--
+error: PackingCertMathlib/RigidBasinMain.lean:107:13: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Box.ofArray (boxArr ?c ?r)
+in the target expression
+  ∑ j, |Wgrad c a zh j - if ↑j = S_IDX then 1 else 0| ≤ ↑(epsW c a (radBox c.z0 c.r0))
+
+c : A22Cert
+a : A36Cert
+hc : checkA22 c = true
+ha : checkA36 c a = true
+hu : a.universal = true
+z : Vec
+hf : Feas z
+hh : 0 < a.h
+hr : rows70OK c = true
+hpins : pinsOK c a = true
+ho : omegaOK a = true
+hrange : pinsRangeOK a = true
+hsh : shapeOK c = true
+hz0 : c.z0.size = NV
+hS : c.S.size = NV
+hr0 : 0 < c.r0
+hr0N : c.r0 ≤ c.rN
+hP : a.P.size = NV
+--
+error: PackingCertMathlib/RigidBasinMain.lean:109:14: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Box.ofArray (boxArr ?c ?r)
+in the target expression
+  ∑ i, ∑ j, |Whess c a η i j| ≤ 2 * ↑(hbar c a (radBox c.z0 hb))
+
+c : A22Cert
+a : A36Cert
+hc : checkA22 c = true
+ha : checkA36 c a = true
+hu : a.universal = true
+z : Vec
+hf : Feas z
+hh : 0 < a.h
+hr : rows70OK c = true
+hpins : pinsOK c a = true
+ho : omegaOK a = true
+hrange : pinsRangeOK a = true
+hsh : shapeOK c = true
+hz0 : c.z0.size = NV
+hS : c.S.size = NV
+hr0 : 0 < c.r0
+hr0N : c.r0 ≤ c.rN
+hP : a.P.size = NV
+--
+error: PackingCertMathlib/RigidBasinMain.lean:141:31: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ i ∈ ?s, ?f i * ?a
+in the target expression
+  ∑ y, ∑ x_1, |Whess c a η y x_1| * (x * x) = (∑ i, ∑ j, |Whess c a η i j|) * x ^ 2
+
+c : A22Cert
+a : A36Cert
+hc : checkA22 c = true
+ha : checkA36 c a = true
+hu : a.universal = true
+z : Vec
+hf : Feas z
+hh : 0 < a.h
+hr : rows70OK c = true
+hpins : pinsOK c a = true
+ho : omegaOK a = true
+hrange : pinsRangeOK a = true
+hsh : shapeOK c = true
+hz0 : c.z0.size = NV
+hS : c.S.size = NV
+hr0 : 0 < c.r0
+hr0N : c.r0 ≤ c.rN
+hP : a.P.size = NV
+--
+error: PackingCertMathlib/RigidBasinMain.lean:222:21: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Box.ofArray (boxArr ?c ?r)
+in the target expression
+  |eval zh (e70 c (pinPos a ↑rr))| ≤ ↑(gmax c a (radBox c.z0 c.r0))
+
+c : A22Cert
+a : A36Cert
+hc : checkA22 c = true
+ha : checkA36 c a = true
+hu : a.universal = true
+z : Vec
+hf : Feas z
+hh : 0 < a.h
+hr : rows70OK c = true
+hpins : pinsOK c a = true
+ho : omegaOK a = true
+hrange : pinsRangeOK a = true
+hsh : shapeOK c = true
+hz0 : c.z0.size = NV
+hS : c.S.size = NV
+hr0 : 0 < c.r0
+hr0N : c.r0 ≤ c.rN
+hP : a.P.size = NV
+--
+error: PackingCertMathlib/RigidBasinMain.lean:234:33: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+error: PackingCertMathlib/RigidBasinMain.lean:233:66: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+error: PackingCertMathlib/RigidBasinMain.lean:253:4: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+Some required targets logged failures:
+- PackingCertMathlib.RigidBasinMain
+error: build failed
+MAIN-BUILD-DONE
+✔ [5/7] Built PackingCertMathlib.RigidData36 (6.6s)
+✔ [6/7] Built PackingCertMathlib.RigidData22 (13s)
+✔ [7/7] Built PackingCertMathlib.RigidityCheck (140s)
+Build completed successfully (7 jobs).
+
+real	2m39.963s
+user	0m0.374s
+sys	0m0.998s
+CHECK-BUILD-DONE

@@ -1,1 +1,84 @@
 [11:56:15] RUN LP md9b: C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A77-corners4-close\code\pairlp413m.py --cls k4_13 --beta 0 --etas 0.05,0.02,0.008,0.002,0.0005 --mu 0.01 --catalog results/catalog_k4_13_md9.json --tag _md9b --seed_dual results/seed_md8.json,../A74-mixed-depth/results/seed_md7.json --seed_dual_cap 500 --max_cuts 300 --cuts_per_point 2 --max_rows 30000 --max_nnz 14000000 --purge_every 4 --purge_min 150 --stop_value 20.9 --lp_solver ipm --loop_crossover on --final_solver ipm --lp_time 1500 --cls_budget 6000 --consolidate_rounds 12 --consol_wmin 0.0005 --consol_guard 20.97 --headroom 6 --headroom_wait 3600 --n_seed_random 600 --seed_deep 30 --lp_time 900 --cls_budget 5400 --max_cuts 400 --consol_guard 20.99
+[11:56:15] A74 mixed-depth LP: cls=k4_13 beta=0 levels=eta=0.05@1.0000 eta=0.02@1.0061 eta=0.008@1.0085 eta=0.002@1.0097 eta=0.0005@1.0100
+[11:56:15] headroom OK: ullAvailPageFile=12.57 GB, ullAvailPhys=10.69 GB (need > 6.0 GB)
+[11:56:15] class k4_13: k=4 N=7 m=8 threshold=21 + beta*8
+[11:56:15] catalog |S|=525 {"n_placements": 525, "imported": 525, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 0.0, "m_histogram": {"0": 36, "1": 64, "2": 342, "3": 83}}
+[11:56:15] disjoint pairs: 62811 (m2>0: 2919)
+[11:56:19] family L0 eta=0.05 rhs=1.0000: raw=57193 distinct=13914 maximal=2733 (edge-int 0 kept of 0, skipped=True) depth mean 73.1 max 138 (3.5s)
+[11:56:23] family L1 eta=0.02 rhs=1.0061: raw=57193 distinct=14698 maximal=2662 (edge-int 0 kept of 0, skipped=True) depth mean 86.0 max 157 (3.9s)
+[11:56:26] family L2 eta=0.008 rhs=1.0085: raw=57193 distinct=15137 maximal=2699 (edge-int 0 kept of 0, skipped=True) depth mean 91.4 max 163 (3.4s)
+[11:56:30] family L3 eta=0.002 rhs=1.0097: raw=57193 distinct=15325 maximal=2726 (edge-int 0 kept of 0, skipped=True) depth mean 94.6 max 165 (3.6s)
+[11:56:33] family L4 eta=0.0005 rhs=1.0100: raw=57193 distinct=15311 maximal=2732 (edge-int 0 kept of 0, skipped=True) depth mean 95.3 max 167 (3.6s)
+[11:56:33] headroom OK: ullAvailPageFile=10.10 GB, ullAvailPhys=10.72 GB (need > 6.0 GB)
+[11:56:34] dual-seed seed_md8.json: 1695 rows pushed (cap 500)
+[11:56:35] dual-seed seed_md7.json: 180 rows pushed (cap 500)
+[11:56:35] seed rows=681 nnz=6879985 cols=62811
+[11:57:41] r1: value=21.593856 excess=0.899685 lvl_relmax=1.4263,1.7100,1.8065,1.8736,1.8997 viol=400 supz=335 rows=2556 nnz=6879985 purged=0 (lp 63.9s, tot 67s)
+[11:57:41] r1: W2=21.424307 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[11:59:03] r2: value=21.424620 excess=0.558550 lvl_relmax=1.2933,1.4173,1.4479,1.5408,1.5585 viol=400 supz=373 rows=2956 nnz=8857970 purged=0 (lp 81.0s, tot 150s)
+[11:59:03] r2: W2=21.252077 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:00:45] r3: value=21.314446 excess=0.485527 lvl_relmax=1.1730,1.2900,1.4170,1.4797,1.4855 viol=400 supz=413 rows=3340 nnz=10164215 purged=0 (lp 100.6s, tot 252s)
+[12:00:45] r3: W2=21.140749 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:02:49] r4: value=21.271223 excess=0.495856 lvl_relmax=1.1946,1.4317,1.4714,1.4764,1.4959 viol=400 supz=438 rows=1838 nnz=6339979 purged=1898 (lp 122.1s, tot 376s)
+[12:02:49] r4: W2=21.098285 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:03:29] r5: value=21.240098 excess=1.108274 lvl_relmax=1.2971,1.7261,1.9464,2.0786,2.1083 viol=400 supz=451 rows=2238 nnz=7682635 purged=0 (lp 37.9s, tot 416s)
+[12:03:29] r5: W2=21.067376 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:04:36] r6: value=21.240098 excess=0.539055 lvl_relmax=1.1390,1.2441,1.3183,1.4190,1.5391 viol=400 supz=458 rows=2638 nnz=9458436 purged=0 (lp 65.0s, tot 482s)
+[12:04:36] r6: W2=21.067376 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:06:08] r7: value=21.212139 excess=0.414948 lvl_relmax=1.0919,1.2342,1.2858,1.3965,1.4149 viol=400 supz=495 rows=3038 nnz=11118417 purged=0 (lp 90.9s, tot 575s)
+[12:06:08] r7: W2=21.040334 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:09:13] r8: value=21.197013 excess=0.280694 lvl_relmax=1.0622,1.1100,1.1691,1.2535,1.2807 viol=400 supz=534 rows=2001 nnz=7416889 purged=1431 (lp 181.9s, tot 760s)
+[12:09:13] r8: W2=21.024712 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:11:05] r9: value=21.169589 excess=0.686850 lvl_relmax=1.1988,1.4990,1.5852,1.6869,1.6863 viol=374 supz=501 rows=2397 nnz=8882139 purged=0 (lp 109.8s, tot 872s)
+[12:11:05] r9: W2=20.997384 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[12:11:53] non-optimal LP status HighsModelStatus.kTimeLimit at round 10
+[12:22:08] full: FINAL ipm/on rows=6093 -> HighsModelStatus.kOptimal value=21.168237 n_ub=0 (613s)
+[12:22:08] full duals: W2=20.996224 priced=21.168237 (LP value 21.168237) hist={"0.05": {"n": 9, "mass": 0.375164}, "0.02": {"n": 73, "mass": 5.034523}, "0.008": {"n": 149, "mass": 8.290387}, "0.002": {"n": 177, "mass": 5.953262}, "0.0005": {"n": 71, "mass": 1.342889}}
+[12:22:08] RESULT: LP value(full)=21.168237 value(emitted)=21.168237 W2=20.996224 thr=21 -> UNDER converged=False excess=0.6868504979601961 hist={"0.05": {"n": 9, "mass": 0.375164}, "0.02": {"n": 73, "mass": 5.034523}, "0.008": {"n": 149, "mass": 8.290387}, "0.002": {"n": 177, "mass": 5.953262}, "0.0005": {"n": 71, "mass": 1.342889}}
+[12:22:08] dumped 479 atoms (W2=20.996462) depth hist {"0.05": {"n": 9, "mass": 0.375169}, "0.02": {"n": 73, "mass": 5.034558}, "0.008": {"n": 149, "mass": 8.29046}, "0.002": {"n": 177, "mass": 5.953349}, "0.0005": {"n": 71, "mass": 1.342926}} -> C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\pair_primal_k4_13_b0_md9b.json
+[12:22:08] wrote C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\pairlp413m_k4_13_md9b.json (1553.1s)
+[12:22:51] RUN EMIT md9b: C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A77-corners4-close\code\emit413m.py --seed C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\pair_primal_k4_13_b0_md9b.json --out C:\Users\esumm\code\packing\attempts\A77-corners4-close\certs\pair_k4_13_s0_b0_md9b.json
+[12:22:52] CANARY trump5: contained=True core_free=True closed_disjoint=True (min gap 1.06e-07) sum_m2=6 >= 6: OK
+canary: SAFE
+wrote C:\Users\esumm\code\packing\attempts\A77-corners4-close\certs\pair_k4_13_s0_b0_md9b.json  atoms=479 W2=10498231/500000 (threshold 21)
+[12:22:52] canary: {"lam": 1.0000001057437056, "all_contained": true, "min_contain": 5.287185278479711e-08, "all_core_free": true, "min_coresep": 0.0014094182273340916, "min_pair_sat_gap": 1.0574370534754962e-07, "all_closed_disjoint": true, "sum_m2": 6, "boxes_met": [2, 2, 2, 2, 2, 2], "threshold_saturated": true, "v
+[12:22:53] RUN BUILD md9b: C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A77-corners4-close\code\hintbatch.py C:\Users\esumm\code\packing\attempts\A77-corners4-close\certs\pair_k4_13_s0_b0_md9b.json C:\Users\esumm\code\packing\attempts\A77-corners4-close\certs\pair_k4_13_s0_b0_md9b_hb.json --cap 60000 --maxdepth 60 --jobs 4 --chunk 512 --rule certain --keep_open 500 --holes C:\Users\esumm\code\packing\attempts\A77-corners4-close\results\hb_md9b.json
+nd": 2277, "cov": 2087, "hole": 0, "open": 13832, "amb": 0} holes=0 budget_hit=True (113s)
+  root 8,12: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 7,14: nodes=50578 depth=18 census={"split": 26009, "vac": 1441, "ex": 4271, "nd": 9, "cov": 4125, "hole": 0, "open": 16164, "amb": 0} holes=0 budget_hit=True (173s)
+  root 8,10: nodes=34852 depth=16 census={"split": 17565, "vac": 279, "ex": 1976, "nd": 85, "cov": 1862, "hole": 0, "open": 13364, "amb": 0} holes=0 budget_hit=True (156s)
+  root 8,15: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 9,9: nodes=269 depth=16 census={"split": 134, "vac": 0, "ex": 10, "nd": 111, "cov": 14, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 8,11: nodes=47848 depth=18 census={"split": 24671, "vac": 1495, "ex": 2855, "nd": 0, "cov": 3978, "hole": 2, "open": 16342, "amb": 0} holes=2 budget_hit=True (121s)
+  root 8,13: nodes=50112 depth=19 census={"split": 26270, "vac": 2429, "ex": 4290, "nd": 660, "cov": 4894, "hole": 0, "open": 13998, "amb": 0} holes=0 budget_hit=True (122s)
+  root 9,12: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 8,14: nodes=45207 depth=18 census={"split": 23239, "vac": 1272, "ex": 4434, "nd": 11, "cov": 3787, "hole": 0, "open": 13736, "amb": 0} holes=0 budget_hit=True (122s)
+  root 9,13: nodes=40240 depth=18 census={"split": 20446, "vac": 653, "ex": 1816, "nd": 2414, "cov": 2613, "hole": 0, "open": 12951, "amb": 0} holes=0 budget_hit=True (100s)
+  root 9,15: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 10,10: nodes=255 depth=17 census={"split": 127, "vac": 0, "ex": 12, "nd": 109, "cov": 7, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 9,11: nodes=31900 depth=16 census={"split": 16040, "vac": 181, "ex": 1404, "nd": 56, "cov": 1985, "hole": 0, "open": 12415, "amb": 0} holes=0 budget_hit=True (147s)
+  root 10,12: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 9,10: nodes=35017 depth=17 census={"split": 17508, "vac": 0, "ex": 1125, "nd": 2038, "cov": 1837, "hole": 0, "open": 12509, "amb": 0} holes=0 budget_hit=True (169s)
+  root 9,14: nodes=41655 depth=17 census={"split": 21116, "vac": 578, "ex": 2381, "nd": 1442, "cov": 2398, "hole": 0, "open": 14318, "amb": 0} holes=0 budget_hit=True (167s)
+  root 10,15: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 11,11: nodes=111 depth=9 census={"split": 55, "vac": 0, "ex": 16, "nd": 40, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 11,12: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 10,11: nodes=36914 depth=18 census={"split": 18727, "vac": 541, "ex": 1324, "nd": 1905, "cov": 2819, "hole": 0, "open": 12139, "amb": 0} holes=0 budget_hit=True (120s)
+  root 10,14: nodes=38943 depth=18 census={"split": 19739, "vac": 536, "ex": 1864, "nd": 2141, "cov": 2542, "hole": 0, "open": 12657, "amb": 0} holes=0 budget_hit=True (112s)
+  root 11,15: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 12,12: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 12,13: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 12,14: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 12,15: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 13,13: nodes=143 depth=10 census={"split": 71, "vac": 0, "ex": 16, "nd": 56, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 10,13: nodes=45492 depth=17 census={"split": 23045, "vac": 599, "ex": 3709, "nd": 1581, "cov": 2135, "hole": 0, "open": 15022, "amb": 0} holes=0 budget_hit=True (177s)
+  root 13,15: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 14,14: nodes=111 depth=9 census={"split": 55, "vac": 0, "ex": 16, "nd": 40, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 14,15: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 15,15: nodes=1 depth=1 census={"split": 0, "vac": 0, "ex": 1, "nd": 0, "cov": 0, "hole": 0, "open": 0, "amb": 0} holes=0 budget_hit=False (0s)
+  root 13,14: nodes=50443 depth=29 census={"split": 26646, "vac": 2850, "ex": 7091, "nd": 13985, "cov": 0, "hole": 0, "open": 2721, "amb": 0} holes=0 budget_hit=True (64s)
+  root 11,14: nodes=39685 depth=19 census={"split": 21149, "vac": 2614, "ex": 2494, "nd": 182, "cov": 4878, "hole": 0, "open": 10982, "amb": 0} holes=0 budget_hit=True (105s)
+  root 11,13: nodes=44365 depth=19 census={"split": 23635, "vac": 2906, "ex": 4354, "nd": 5, "cov": 4931, "hole": 0, "open": 11440, "amb": 0} holes=0 budget_hit=True (131s)
+TOTAL nodes=2703072 census={"split": 1381710, "vac": 60484, "ex": 189861, "nd": 103936, "cov": 174630, "hole": 7, "open": 852928, "amb": 0} holes=7 open=852928 budget_roots=64 (2671s)
+wrote C:\Users\esumm\code\packing\attempts\A77-corners4-close\certs\pair_k4_13_s0_b0_md9b_hb.json
+[13:07:32] build md9b: nodes=2703072 census={"split": 1381710, "vac": 60484, "ex": 189861, "nd": 103936, "cov": 174630, "hole": 7, "open": 852928, "amb": 0} holes=7 open=852928 budget_roots=64 secs=2671.0

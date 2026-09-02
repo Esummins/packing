@@ -79,3 +79,24 @@ min inactive margin, and the corruption-gate results (all four must FAIL). A22's
 * **D4×S11 bookkeeping** around the box is stated, not formalised (checklist H12).
 * Single implementation of the re-checker; `a36_check.py`/`a37_check.py` are descendants,
   not independent (C3 applies to this family too).
+
+## 6. Erratum / status update (A79, 2026-09-02)
+
+* Section 3's "No Lean replay exists: blocked on interval trigonometry ... re-emitting in
+  `t = tan(theta/2)`" is superseded: the certificate IS replayed in Lean in the THETA frame
+  (`lean/PackingCertMathlib/PackingCertMathlib/RigidKernel.lean`, `RigidityCheck.lean`,
+  `native_decide`), with cos/sin enclosed by certified alternating-Taylor brackets; no
+  `t` re-emission was needed (A70 rung (a) already found this at the Python tier).
+* The trust base is no longer `mpmath.iv` at either tier: A70's `a22_recheck_exact.py`
+  (stdlib rationals) is the second implementation (C3), and the Lean checker + soundness
+  theorems (`krawczyk_sound`, `zhatV_feas`, `a22_optimal`) are the primary.
+* Finding: the [F] check of section 3 is not self-contained — the recheck skips the three
+  wall rows dropped from `S` and the flush pairs ("exact by inspection", notes.md sections
+  3-4).  The Lean port makes the exact-structure argument explicit and shows it is derivable
+  from `S` alone (mate wall rows => theta = 0; corner-on-edge / edge-on-corner pairs with
+  parallel body normals => equal tilts, using the [V] tangential margin; row transfer across
+  a corner; an affine known-centre inference over the dist rows for the flush-upright
+  block).  The second system `S2` ([K~]) is replayed but is NOT load-bearing.
+* Quantities the recheckers evaluate AT `z0` (`eps_0`, `g_max`, `eps_w`, row activity) are
+  evaluated over `box(z0, r_0)` in Lean (the theorem is about z-hat); the float `claims`
+  for those are therefore not reproduced (harmless: `x* + r_0 <= r_N` by 46 orders).

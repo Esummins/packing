@@ -3,25 +3,25 @@
 <rect width="1720" height="1180" fill="white"/>
 <text x="12" y="22" font-size="15" font-weight="bold">s(11) optimality — lemma dependency graph (live; base commit c9980bfc, updated 2026-09-02)</text>
 <rect x="12" y="32" width="12" height="12" fill="#b8860b" rx="2"/>
-<text x="28" y="42">lean-proved (19)</text>
+<text x="28" y="42">lean-proved (21)</text>
 <rect x="154" y="32" width="12" height="12" fill="#2e7d32" rx="2"/>
 <text x="170" y="42">proved-prose (0)</text>
 <rect x="296" y="32" width="12" height="12" fill="#1565c0" rx="2"/>
-<text x="312" y="42">certificate+verifier (10)</text>
-<rect x="501" y="32" width="12" height="12" fill="#6a1b9a" rx="2"/>
-<text x="517" y="42">cited (1)</text>
-<rect x="594" y="32" width="12" height="12" fill="#e65100" rx="2"/>
-<text x="610" y="42">conjecture (6)</text>
-<rect x="722" y="32" width="12" height="12" fill="#c62828" rx="2"/>
-<text x="738" y="42">open (8)</text>
-<rect x="818" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>
-<text x="834" y="42">dashed = waiting only on dependencies (outline color = tier of its own finished work)</text>
-<rect x="1439" y="31" width="30" height="14" rx="7" fill="#37474f"/>
-<text x="1454" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>
-<text x="1475" y="42">= working now</text>
-<rect x="1576" y="32" width="12" height="12" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.4" rx="2"/>
-<rect x="1578" y="34" width="8" height="8" fill="none" stroke="#b8860b" stroke-width="1.2" rx="1"/>
-<text x="1592" y="42">gold accent = verifier soundness Lean-proved &#183; hover for details</text>
+<text x="312" y="42">certificate+verifier (8)</text>
+<rect x="494" y="32" width="12" height="12" fill="#6a1b9a" rx="2"/>
+<text x="510" y="42">cited (1)</text>
+<rect x="587" y="32" width="12" height="12" fill="#e65100" rx="2"/>
+<text x="603" y="42">conjecture (6)</text>
+<rect x="715" y="32" width="12" height="12" fill="#c62828" rx="2"/>
+<text x="731" y="42">open (8)</text>
+<rect x="811" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>
+<text x="827" y="42">dashed = waiting only on dependencies (outline color = tier of its own finished work)</text>
+<rect x="1432" y="31" width="30" height="14" rx="7" fill="#37474f"/>
+<text x="1447" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>
+<text x="1468" y="42">= working now</text>
+<rect x="1569" y="32" width="12" height="12" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.4" rx="2"/>
+<rect x="1571" y="34" width="8" height="8" fill="none" stroke="#b8860b" stroke-width="1.2" rx="1"/>
+<text x="1585" y="42">gold accent = verifier soundness Lean-proved &#183; hover for details</text>
 <text x="8" y="35.0" font-size="10" fill="#888" font-style="italic">top-level theorem (TopLevel.lean)</text>
 <text x="8" y="185.0" font-size="10" fill="#888" font-style="italic">frame: attainment / parametrisation / bounds / uniqueness / bridges</text>
 <text x="8" y="335.0" font-size="10" fill="#888" font-style="italic">stratification layer</text>
@@ -442,23 +442,19 @@
 <text x="764" y="822" text-anchor="middle" fill="#222">verify_param.py soundness</text>
 <text x="764" y="834" text-anchor="middle" fill="#222">(P0-P7)</text>
 </g>
-<g><title>E.A36 — Basin theorem: sigma &gt;= s-hat on box(z-hat, 3.7e-3), equality iff z-hat&#10;[certificate+verifier]&#10;Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE — the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member. || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a36_check_exact.py re-verifies all 17 certificates (339/339 checks, 10.8 s) in EXACT rational arithmetic - stdlib fractions only, dyadic outward-rounded intervals + certified alternating-Taylor cos/sin enclosures; all 5 corruption gates fail as required; mpmath.iv is OUT of the decision path at the Python tier. Emission is theta-frame (no certificate re-derivation needed); the t-frame stays the route for the Lean rungs (b)/(c), still open.</title>
+<g><title>E.A36 — Basin theorem: sigma &gt;= s-hat on box(z-hat, 3.7e-3), equality iff z-hat&#10;[lean-proved]&#10;Stratum-blind, all break sets, both FJ branches; x7.5 the A22 radius. PI 2026-09-02: moved up the Lean queue to right behind V.CASE — the basin theorem terminates both remaining fronts (trump5 residual + protected-tier basin exclusion) and its chain includes mpmath.iv (E.IV), the one third-party TCB member. || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a36_check_exact.py re-verifies all 17 certificates (339/339 checks, 10.8 s) in EXACT rational arithmetic - stdlib fractions only, dyadic outward-rounded intervals + certified alternating-Taylor cos/sin enclosures; all 5 corruption gates fail as required; mpmath.iv is OUT of the decision path at the Python tier. Emission is theta-frame (no certificate re-derivation needed); the t-frame stays the route for the Lean rungs (b)/(c), still open. || A79 RUNG (c) LANDED: checkA36 ([S][N][A][O][Z][G][H][K][E][P][V][L] + explicit psi(x*)&lt;=x*, x*+r0&lt;=r_N, loaded-row validity) replayed by native_decide on ALL 17 certificates (checkA36_all17; module 140 s) and on G3_UNIVERSAL; a36_basin (universal certificate: second-order Taylor along the segment with the interval Hessian mass, max-form pinning, quadratic dichotomy replacing the 800-step iteration, handover to a22_optimal) =&gt; TopLevel basin is a THEOREM. FINDING: the composition needs only the UNIVERSAL certificate — slab gate rBasin*(1+sqrt2)=3.6213e-3 &lt; 3689/10^6 (sharper than the 37/10000 E.COORD gate, which is untouched); the 16 variants (L1 axis disjunction) are replayed but not load-bearing. Axioms: propext/choice/Quot.sound + checkA22_a22 + checkA36_universal native_decide.</title>
 <rect x="866" y="793" width="180" height="54" rx="7" fill="white"/>
-<rect x="866" y="793" width="180" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
-<text x="956" y="808" text-anchor="middle" font-weight="bold" fill="#1565c0">E.A36</text>
+<rect x="866" y="793" width="180" height="54" rx="7" fill="#b8860b" fill-opacity="0.13" stroke="#b8860b" stroke-width="1.6"/>
+<text x="956" y="808" text-anchor="middle" font-weight="bold" fill="#b8860b">E.A36</text>
 <text x="956" y="822" text-anchor="middle" fill="#222">Basin theorem: sigma &gt;= s-hat</text>
 <text x="956" y="834" text-anchor="middle" fill="#222">on box(z-hat, 3.7e-3),…</text>
-<rect x="1018" y="786" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="1034" y="796" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A79</text>
 </g>
-<g><title>E.A22 — Krawczyk: unique contact solution z-hat, feasible, strict local optimality&#10;[certificate+verifier]&#10;Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat). || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a22_recheck_exact.py re-verifies the full chain (G/K/K0/V/E/B/F, 1.5 s) in exact rational arithmetic, 4/4 corruption gates fail as required - mpmath.iv out of the decision path at the Python tier; Lean replay (rung b) open.</title>
+<g><title>E.A22 — Krawczyk: unique contact solution z-hat, feasible, strict local optimality&#10;[lean-proved]&#10;Also the natural carrier of A.UBshat (existence + feasibility of the exact packing at s-hat). || A70 RUNG (a) LANDED: attempts/A70-lean-wave4/code/a22_recheck_exact.py re-verifies the full chain (G/K/K0/V/E/B/F, 1.5 s) in exact rational arithmetic, 4/4 corruption gates fail as required - mpmath.iv out of the decision path at the Python tier; Lean replay (rung b) open. || A79 RUNG (b) LANDED: checkA22 (theta-frame port of a22_recheck_exact.py, dyadic 2^-330 intervals, alternating-Taylor cos/sin via Real.hasSum_cos) replayed by native_decide (RigidityCheck.lean); krawczyk_sound (Banach on the true box, Neumann invertibility of Y) =&gt; unique contact solution z-hat in box(z0,1e-50); zhatV_feas (interval SAT + exact-structure witnesses searched in S: mate walls =&gt; theta=0, corner-on-edge pairs =&gt; equal tilts, row transfer, affine known-centre inference for the flush-upright block) =&gt; trump_packs_at_shatA22 is a TopLevel THEOREM, zhat/shatA22 DEFINITIONS; a22_optimal = A22 sect 5 (Farkas + MVT on the box). mpmath.iv out at both tiers. Axioms: propext/choice/Quot.sound + checkA22_a22 native_decide.</title>
 <rect x="1057" y="793" width="180" height="54" rx="7" fill="white"/>
-<rect x="1057" y="793" width="180" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
-<text x="1147" y="808" text-anchor="middle" font-weight="bold" fill="#1565c0">E.A22</text>
+<rect x="1057" y="793" width="180" height="54" rx="7" fill="#b8860b" fill-opacity="0.13" stroke="#b8860b" stroke-width="1.6"/>
+<text x="1147" y="808" text-anchor="middle" font-weight="bold" fill="#b8860b">E.A22</text>
 <text x="1147" y="822" text-anchor="middle" fill="#222">Krawczyk: unique contact</text>
 <text x="1147" y="834" text-anchor="middle" fill="#222">solution z-hat, feasible,…</text>
-<rect x="1209" y="786" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="1225" y="796" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A79</text>
 </g>
 <g><title>E.COORD — Basin box in t-coordinates (theta -&gt; t re-emission)&#10;[lean-proved]&#10;LEAN-PROVED (A68, ThetaT.lean): cosT/sinT ARE cos/sin of theta(t) = 2*arctan t (the formal t&lt;-&gt;theta tie); X.1 both directions (|dt| &lt;= |dtheta| &lt;= 2|dt|, arctan 1-Lipschitz / tan 2-Lipschitz on [0,pi/4] via MVT); X.2 with the SHARP constant r_c + sqrt2*r_t (the naive r_c + 2*r_t does NOT close gate (b)); X.3 gates rBasin_gate_tilt (2*rBasin &lt;= 37/10000) and rBasin_gate_slab (rBasin*(1+sqrt2) &lt; 37/10000, binding) now TopLevel theorems. Residue unchanged: the t-reparametrised re-emission of A22/A36 (trust-chain item, = checklist F6 / E.IV) and the wall-touching step of X.3(b), which consumes the opaque zhat and lives inside the basin axiom.</title>
 <rect x="1248" y="793" width="180" height="54" rx="7" fill="white"/>
@@ -467,7 +463,7 @@
 <text x="1338" y="822" text-anchor="middle" fill="#222">Basin box in t-coordinates</text>
 <text x="1338" y="834" text-anchor="middle" fill="#222">(theta -&gt; t re-emission)</text>
 </g>
-<g><title>E.IV — mpmath.iv validated interval arithmetic&#10;[cited]&#10;Third-party library inside the rigidity trust chain (unlike the case-LP chain, which is stdlib-only). Checklist F6: either replay in Lean via t-parametrisation or disclose as Python-interval-only. || A70: checklist F6 option 1 partially executed - the ENTIRE rigidity decision path (A22 recheck + A36 basin) now has a stdlib-only exact replay (theta-frame Taylor enclosures, not yet Lean); mpmath.iv remains only as the historical producer-side tool. || RESOLVED at the Python tier 2026-09-03: A70&#x27;s exact-rational recheckers (a22_recheck_exact.py, a36_check_exact.py) removed mpmath.iv from the rigidity DECISION PATH entirely; the node is retained only as the audit record of the former dependency. Full closure = the Lean rungs (b)/(c) of E.A22/E.A36 (t-frame replay), which are open and do NOT re-introduce mpmath.</title>
+<g><title>E.IV — mpmath.iv validated interval arithmetic&#10;[cited]&#10;Third-party library inside the rigidity trust chain (unlike the case-LP chain, which is stdlib-only). Checklist F6: either replay in Lean via t-parametrisation or disclose as Python-interval-only. || A70: checklist F6 option 1 partially executed - the ENTIRE rigidity decision path (A22 recheck + A36 basin) now has a stdlib-only exact replay (theta-frame Taylor enclosures, not yet Lean); mpmath.iv remains only as the historical producer-side tool. || RESOLVED at the Python tier 2026-09-03: A70&#x27;s exact-rational recheckers (a22_recheck_exact.py, a36_check_exact.py) removed mpmath.iv from the rigidity DECISION PATH entirely; the node is retained only as the audit record of the former dependency. Full closure = the Lean rungs (b)/(c) of E.A22/E.A36 (t-frame replay), which are open and do NOT re-introduce mpmath. || A79: dependency now ABSENT at BOTH tiers — the Lean replay (RigidityCheck.lean) evaluates the rigidity chain with its own dyadic interval kernel and certified Taylor brackets (Mathlib Real.hasSum_cos/sin); mpmath.iv is no longer on any decision path of E.A22/E.A36.</title>
 <g opacity="0.5">
 <rect x="1439" y="793" width="180" height="54" rx="7" fill="white"/>
 <rect x="1439" y="793" width="180" height="54" rx="7" fill="#6a1b9a" fill-opacity="0.13" stroke="#6a1b9a" stroke-width="1.6"/>

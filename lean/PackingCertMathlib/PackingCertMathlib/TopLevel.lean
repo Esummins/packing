@@ -11,6 +11,7 @@ import PackingCertMathlib.Attain
 import PackingCertMathlib.ThetaT
 import PackingCertMathlib.Census
 import PackingCertMathlib.CidlBridge
+import PackingCertMathlib.Rigidity
 
 /-!
 # The composed optimality theorem for s(11) — formal STATEMENT (A62, checklist item F3)
@@ -41,10 +42,17 @@ single axiom `a22_exact_structure`); the census layer `StratumIdx` / `trumpStrat
 `InStratum` (A78 T1, `Census.lean` — definitions) and with it `stratify` and
 `unique_transfer` (A78 T1/T4 — theorems from census exhaustiveness,
 `unique_transfer.md` §1; the honest chain + Theorem U route is `UniqueChain.lean`).
-**7 named axioms remain** (was 12): the three genuinely-open leaf families
-`stratum_kill`, `trump_residual`, `basin`, and the four A22 interface axioms `zhat` /
-`shatA22` / `trump_packs_at_shatA22` / `a22_exact_structure` (all = A22's
-Python-interval certificate, TCB T3; no axiom of this file carries open ALGEBRA).
+Then A79 (`Rigidity.lean`): `zhat` and `shatA22` are DEFINITIONS (the unique zero of
+A22's contact system in `box(z0, 1e-50)`, by the Lean replay of the Krawczyk certificate —
+θ frame, certified Taylor trigonometry, `native_decide` on `checkA22`),
+`trump_packs_at_shatA22` and `basin` are THEOREMS (feasibility of ẑ; the A36 universal
+basin certificate's (V′) chain + A22 §5's Farkas optimality + the θ↔t transfer) — the
+mpmath.iv trust item (TCB T3 / checklist F6) is gone at both tiers.
+**3 named axioms remain** (was 12): the two genuinely-open leaf families
+`stratum_kill`, `trump_residual`, and the A22 interface axiom `a22_exact_structure`
+(the exact structure of ẑ on the CIDL slice; now an axiom ABOUT the defined `zhat`,
+its content within reach of `Rigidity.lean`'s witness lemmas — no axiom of this file
+carries open ALGEBRA).
 
 The point of the file (per `docs/publication_checklist.md` F3) is to force the definition of
 "packing", the quantifier order, and the exact form of each leaf obligation.  Every ambiguity
@@ -63,9 +71,10 @@ load-bearing ones are repeated in the docstrings below.
 * `shat` — DISCHARGED (A63): a definition (unique octic root in the isolating interval),
   with `shat_spec` a theorem; certificate `certs/octic_root_isolation.json` +
   `certs/verify_sturm.py` (checklist S3).
-* `zhat` — the exact Trump configuration; formal target: definable from A22's Krawczyk
-  existence certificate once replayed in the `t = tan(θ/2)` parametrisation (A28 §4, F6);
-  route decision and the ŝ_A22 = ŝ identification gap: `docs/proofs/attainment_ub.md`.
+* `zhat` — DISCHARGED (A79): a DEFINITION, the unique zero of A22's contact system in
+  `box(z0, 1e-50)` (`Rigidity.lean`, `Rigid.zhatCfg`; the certificate is replayed in the
+  θ frame with certified Taylor trigonometry — no `t` re-emission was needed); the
+  ŝ_A22 = ŝ identification gap remains `shatA22_eq_shat` (A78, `docs/proofs/attainment_ub.md`).
 * `rBasin` — DISCHARGED (A63): a definition, 3/2000, justified by the exact θ↔t transfer
   constants (`docs/proofs/theta_t_transfer.md`).
 -/
@@ -260,25 +269,31 @@ argument; was the A28 §7 item 4 prose, checklist F2).  Axioms: `propext,
 Classical.choice, Quot.sound, Lean.ofReduceBool`. -/
 theorem lb_382 : ∀ s : ℝ, Fits 11 s → (191 / 50 : ℝ) ≤ s := s_eleven_ge_382
 
-/-- **[UB at ŝ exactly]** Trump's configuration.  STATUS: OPEN as a whole, but SPLIT by
-A64 into its certified and open parts (the A63 route decision, executed Lean-side):
-route (a) — A22 Krawczyk existence + FEASIBILITY — certifies `Fits ŝ_A22` for the
-INTRINSIC side `shatA22` of the contact solution (Python-interval TCB;
-`trump_packs_at_shatA22` below); the whole algebraically-open residue is the single
-identity axiom `shatA22_eq_shat`.  Route (b) remains REFUTED as a finite route
-(`docs/proofs/attainment_ub.md` §2). -/
-axiom zhat : Cfg
+/-- **[UB at ŝ exactly]** Trump's configuration.  SPLIT by A64 into its certified and open
+parts (the A63 route decision, executed Lean-side): route (a) — A22 Krawczyk existence +
+FEASIBILITY — certifies `Fits ŝ_A22` for the INTRINSIC side `shatA22` of the contact
+solution (`trump_packs_at_shatA22` below); the whole algebraically-open residue is the
+single identity axiom `shatA22_eq_shat`.  Route (b) remains REFUTED as a finite route
+(`docs/proofs/attainment_ub.md` §2).
+DISCHARGED (A79): a DEFINITION — `Rigid.zhatCfg`, the unique zero of the curated 34-row
+contact system in `box(z0, 1e-50)` (`Rigid.krawczyk_sound`, Banach on the true box), read
+in the half-angle parametrisation `t = tan(θ̂/2)`. -/
+noncomputable def zhat : Cfg := Rigid.zhatCfg
 
 /-- **[UB at ŝ — intrinsic side]** The side of A22's unique contact solution ẑ in the
 Krawczyk box `N = box(z0, 5e-4)`: `‖ẑ − z0‖∞ ≤ 1e-50`, and ẑ IS a packing at its own
-side (A22 §4 feasibility).  Certified TODAY modulo the mpmath.iv trust item (TCB T3);
-Lean replay = the t-reparametrised Krawczyk checker (A28 §4 / checklist F6). -/
-axiom shatA22 : ℝ
+side (A22 §4 feasibility).  DISCHARGED (A79): a DEFINITION, `Rigid.shatR = ẑ_33`; the
+mpmath.iv trust item (TCB T3 / checklist F6) is gone at both tiers — the Lean replay stays
+in the θ frame with certified Taylor trigonometry (`RigidityCheck.lean`). -/
+noncomputable def shatA22 : ℝ := Rigid.shatR
 
 /-- See `shatA22`: A22 feasibility, i.e. `Fits 11 shatA22` in configuration form.
-Certified (Python-interval TCB; exact flush/coincidence arguments + interval SAT with
-min margins 0.0249/0.549). -/
-axiom trump_packs_at_shatA22 : CfgPacking shatA22 zhat
+DISCHARGED (A79): a THEOREM (`Rigid.zhatCfg_packing` — interval SAT for the 41
+non-contact pairs, exact half-plane separation for the contact pairs, and the
+exact-structure witnesses searched in `S` for the flush pairs and the dropped wall rows;
+axioms `propext, Classical.choice, Quot.sound` + the `native_decide` evaluation of
+`checkA22`). -/
+theorem trump_packs_at_shatA22 : CfgPacking shatA22 zhat := Rigid.zhatCfg_packing
 
 /-- **[UB at ŝ — A22's certified content on the exact-structure slice]**
 The A22 interface axiom that REPLACES the former opaque identity axiom
@@ -500,15 +515,20 @@ axiom trump_residual : ∀ s ∈ wnd, ∀ z : Cfg, CfgPacking s z → InStratum 
       IsCtrSym s f ∧ CfgPacking s z' ∧ InBasin z' ∧ ∀ j, (z (e j)).set = f '' (z' j).set
 
 /-- **[A22/A36 — local rigidity at Trump]** Inside the basin box: every packing side is
-≥ ŝ, and a packing at side exactly ŝ inside the box IS Trump's configuration.  STATUS:
-certified by Python interval arithmetic (mpmath.iv Krawczyk + Farkas, standalone
-re-checker, corruption gates); Lean replay blocked on interval trigonometry until the
-certificate is re-emitted in `t` (A28 §4 / checklist F6).  The coordinate-box caveat is
-RESOLVED (A63): with `rBasin = 3/2000` this axiom asserts exactly A36's certified theorem
-after the θ↔t transfer, including the `∀ s` slab (`docs/proofs/theta_t_transfer.md` X.3;
-the transfer constants are exact, the underlying intervals remain Python-certified). -/
-axiom basin : ∀ z : Cfg, InBasin z →
-    (∀ s : ℝ, CfgPacking s z → shat ≤ s) ∧ (CfgPacking shat z → z = zhat)
+≥ ŝ, and a packing at side exactly ŝ inside the box IS Trump's configuration.
+DISCHARGED (A79): a THEOREM from `Rigid.basin_tframe` (the (V′) chain of A36's UNIVERSAL
+certificate `G3_UNIVERSAL` at radius `3689/10⁶`, composed with A22 §5's Farkas optimality
+at the handover radius, and the θ↔t transfer of `ThetaT.lean`; the slab gate is closed
+against the universal radius, `(3/2000)(1 + √2) ≤ 3689/10⁶` — the 16 variant certificates
+are replayed but not load-bearing) and the identity `shatA22_eq_shat`.  Axioms:
+`propext, Classical.choice, Quot.sound`, the two `native_decide` evaluations
+(`checkA22`, `checkA36` on UNIVERSAL) and `shatA22_eq_shat`. -/
+theorem basin : ∀ z : Cfg, InBasin z →
+    (∀ s : ℝ, CfgPacking s z → shat ≤ s) ∧ (CfgPacking shat z → z = zhat) := by
+  intro z hz
+  have h := Rigid.basin_tframe z (fun i => by simpa [rBasin, zhat] using hz i)
+  rw [← shatA22_eq_shat]
+  exact h
 
 /-- **[uniqueness transfer]** EVERY packing at side ŝ has, after a container symmetry and
 a relabelling, a representative that lies in some stratum.  STATUS RE-DIAGNOSED by A63

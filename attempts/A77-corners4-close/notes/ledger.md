@@ -9,3 +9,4 @@ overwritten per run, rows appended here.
 | run | when | delta | eps_box | verdict | min gap | sum m2 |
 |---|---|---|---|---|---|---|
 | md8 re-emit in A77 (certs/pair_k4_13_s0_b0_md8.json, atoms identical to A74 md8) | 2026-09-02 10:49 | 1/1000 | 1/833 | SAFE | 1.0574e-7 = lambda-1 | 6 |
+| md9b emit (certs/pair_k4_13_s0_b0_md9b.json, 479 atoms, W2 = 20.996462) | 2026-09-02 12:22 | 1/1000 | 1/833 | SAFE | 1.0574e-7 = lambda-1 | 6 |

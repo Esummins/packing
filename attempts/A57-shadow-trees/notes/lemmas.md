@@ -174,9 +174,11 @@ which is why A57's witnesses carry an exact positive gap rather than A53 V6's ex
 The search is float (grid + DFS over a candidate pool, tilts allowed); the *verdict* is exact
 rational arithmetic throughout (`Fraction`, cos/sin from a rational t = tan(θ/2)).
 
-Measured: `results/alive/k5_16_m5.json` — five pairwise-disjoint admissible squares in the
-k5_16 residual, exact min gap 0.0017314…> 0, so τ*(k5_16) ≥ 5 (a lower bound; k5_16's budget is
-6, so this is not yet an unkillability proof for the stratum itself).  With the interior core
+Measured: `results/alive/quarantine/k5_16_m5.json` (**QUARANTINED — see T28**) — five
+pairwise-disjoint admissible squares in the k5_16 residual, exact min gap 0.0017314…> 0, so
+τ*(k5_16) ≥ 5 (a lower bound; k5_16's budget is 6, so this is **not** an unkillability proof for
+the stratum itself).  *The prose here was right; the JSON artefact's own `claim` string was not,
+and asserted LP-unkillability — A78 caught it.  The file is quarantined and must not be cited.*  With the interior core
 added as a sixth obstacle no 5-family is found, consistent with T5's τ* = 5 knife edge: the
 interior YES children are *critical*, not comfortably alive.
 
@@ -956,7 +958,8 @@ repair was "attribute by the path in the command line" — which A60 correctly p
 ambiguous, because **a command line contains several paths naming different campaigns**:
 
     python ...attempts\A54-stragglers\code\certify.py                 <- SCRIPT (A54's copy)
-           ...attempts\A61-window-stragglersesults
+           ...attempts\A61-window-stragglers
+esults
 odes\k5_05.json  <- DATA   (A61's)
            --out ...attempts\A61-window-stragglers\certs\k5_05.json     <- OUTPUT (A61's)
 
@@ -1004,3 +1007,42 @@ verified in T19).  A61 would gain the most.
 Hygiene done here: `ladder57.py` and `epsladder.py` — not currently in the campaign but able to be
 run later — now carry `VERIFY_JOBS_CAP` too.  `ladder.py` and `substrat.py` are unmodified A54
 copies kept for provenance and are never invoked by A57.
+
+
+## T28 — a FALSE artefact, caught by A78's Lean formalization (bug-ledger)
+
+**`results/alive/k5_16_m5.json` carried a false LP-UNKILLABLE claim.**  Found by A78 while
+formalizing `alivewitness.py` in Lean; independently re-audited here over all 11 files in
+`results/alive/` before acting.  The file records `budget = 6`, `m = 5`, `ALIVE-CERTIFIED`, and
+
+    tau*(k5_16) >= 5 = budget => NO certificate can exist for this node (LP-unkillable)
+
+"5 = budget" is false — k5_16's budget is **6**.  A57-3 gives `tau* >= m`, and unkillability needs
+`m >= budget`; at m = 5 < 6 the bound is a real lower bound that says nothing about killability.
+
+**Provenance: an A57 bug, and a specific kind.**  The probe ran with `--m 5` *before*
+`alivewitness.py` gained its `unkillable = bool(m >= budget)` guard, while the claim f-string
+still hard-coded the words "= budget".  I noticed and fixed the tool the same session — but
+**fixed the code and left the already-written artefact on disk**.  That is the lesson worth
+keeping: *a guard added to an emitter does not retroactively correct output it has already
+produced.*  When a claim-emitting tool is fixed, its existing artefacts must be re-audited or
+regenerated, not assumed to inherit the fix.
+
+**Scope: exactly one file.**  Audit of `results/alive/`:
+
+| verdict | files | sound? |
+|---|---|---|
+| `NO-WITNESS` (asserts nothing) | 9 | n/a |
+| `ALIVE-CERTIFIED`, m = 6 >= budget 6 | `trump5_strict.json` | **yes** — the only sound witness |
+| `ALIVE-CERTIFIED`, m = 5 < budget 6 | `k5_16_m5.json` | **NO — quarantined** |
+
+**Nothing depends on it.**  G1 kills k5_16 children by exact certificate (`verify_case.py`);
+`alivewitness.py` is only ever consulted to decide whether to *stop* spending compute on a node,
+and no A57 kill has ever been gated on an aliveness claim.  Verified: no A57 code path imports or
+reads `results/alive/`, and no campaign record cites it.  The T7 prose already described the file
+correctly as a lower bound — the error was confined to the artefact's own claim string, so there
+is nothing to retract in the notes, only a pointer to add.
+
+**A78 for the ledger:** `alive_sound` proved in Lean in core-monotone form; Python's obstacles are
+full pin squares rather than certificate cores, admissibility is hard-wired at s0, and
+`nofams = []` is implicit — **no soundness bug in the tool**, just the one bad artefact.

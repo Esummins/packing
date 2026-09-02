@@ -1,0 +1,13 @@
+error: PackingCertMathlib/TopLevel.lean:529:46: Type mismatch: After simplification, term
+  hz i
+ has type
+  And (|(z i).cx - (zhat i).cx| ≤ 3 / 2000) (|(z i).cy - (zhat i).cy| ≤ 3 / 2000 ∧ |(z i).t - (zhat i).t| ≤ 3 / 2000)
+but is expected to have type
+  And (|(z i).cx - (Rigid.zhatCfg i).cx| ≤ 3 / 2000)
+    (|(z i).cy - (Rigid.zhatCfg i).cy| ≤ 3 / 2000 ∧ |(z i).t - (Rigid.zhatCfg i).t| ≤ 3 / 2000)
+Some required targets logged failures:
+- PackingCertMathlib.TopLevel
+error: build failed
+TOP-BUILD-DONE
+scratch/AxiomsA79.lean:1:0: error: object file 'C:\Users\esumm\code\packing\lean\PackingCertMathlib\.lake\build\lib\lean\PackingCertMathlib\TopLevel.olean' of module PackingCertMathlib.TopLevel does not exist
+AX-DONE

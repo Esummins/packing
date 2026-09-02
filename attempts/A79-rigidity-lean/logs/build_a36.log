@@ -1,0 +1,45 @@
+error: PackingCertMathlib/RigidOptimal.lean:196:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑i
+in the target expression
+  ∑ x, (if ↑x = f.i then ↑f.sigma else 0) * d x + ∑ x, (if ↑x = S_IDX then ↑f.nu else 0) * d x =
+    ↑σ * d i + ↑f.nu * d sIdx
+
+c : A22Cert
+hc : checkA22 c = true
+z : Vec
+hz : MemBox (boxArr c c.rN) z
+hsm : SmallTilt z
+hf✝ : Feas z
+hsh : shapeOK c = true
+hsh' : Shape c c.S c.Y
+zh : Vec := zhatV c hc
+hs : sZ z ≤ sZ zh
+hzh : zh = zhatV c hc
+d : Vec := fun j ↦ z j - zh j
+hd : d = fun j ↦ z j - zh j
+ξ : Fin NV → Vec
+hξ : ∀ (rr : Fin NV), MemBox (boxArr c c.rN) (ξ rr)
+hmvt :
+  ∀ (rr : Fin NV),
+--
+error: PackingCertMathlib/RigidOptimal.lean:220:10: Invalid rewrite argument: The pattern to be substituted is a metavariable (`?z sIdx`) in this equality
+  ?z sIdx = sZ ?z
+warning: PackingCertMathlib/RigidOptimal.lean:145:73: This simp argument is unused:
+  List.mem_singleton
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [farkasOK, Bool.and_eq_true, Array.all_eq_true, List.all_eq_true, rng_eq, List.mem_range,
+    Array.any_eq_true, decide_eq_true_eq, List.mem_cons, List.not_mem_nil, or_false] at hB
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: PackingCertMathlib/RigidOptimal.lean:256:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+Some required targets logged failures:
+- PackingCertMathlib.RigidOptimal
+error: build failed
+A36-BUILD-DONE

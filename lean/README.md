@@ -120,6 +120,23 @@ theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved from exactly t
   `PackingCertCorpus`, generator `lean/gen_corpus_lean.py`): C.K61 (61), D.TRAP (6 ⊂ K61),
   D.P1 (1), A.THMU (11) — one `native_decide` theorem per certificate; timings in
   `attempts/A78-lean-wave6/results/t5_timings.jsonl`.
+**Discharged by A79 (2026-09-02, rigidity replay rungs (b)/(c)):**
+* **`zhat` / `shatA22` are DEFINITIONS and `trump_packs_at_shatA22` / `basin` are THEOREMS**
+  (`Rigidity.lean`): A22's Krawczyk certificate and A36's basin certificates are replayed
+  in Lean by the θ-frame port of A70's exact re-checkers (`RigidKernel.lean`: dyadic
+  `2^-330` intervals, alternating-Taylor cos/sin brackets certified from Mathlib's
+  `Real.hasSum_cos/sin`, a deep-embedded row language with symbolic differentiation and
+  order-2 interval jets), `native_decide` in the isolated `RigidityCheck.lean`
+  (`checkA22_a22`, `checkA36_universal`, `checkA36_all17`; module 140 s).  Soundness:
+  `krawczyk_sound` (Banach on the true box, `Y` invertible by Neumann) ⟹ the unique contact
+  solution ẑ; `zhatV_feas` (interval SAT + exact-structure witnesses searched in `S`) ⟹ ẑ is
+  a packing at its own side; `a22_optimal` (A22 §5, Farkas + MVT on the box); `a36_basin`
+  (the universal certificate's (V′) chain: second-order Taylor with the interval Hessian
+  mass, max-form pinning, quadratic dichotomy in place of the 800-step iteration, handover to
+  A22).  The composition needs only `G3_UNIVERSAL` (slab gate `rBasin(1+√2) < 3689/10⁶`);
+  the 16 variant certificates are replayed but not load-bearing.  mpmath.iv (E.IV) is out of
+  the rigidity chain at both tiers.  TopLevel roster: 3 named axioms
+  (`stratum_kill`, `trump_residual`, `a22_exact_structure`).
 Each axiom's docstring records the lab artefact meant to discharge it and its status; the
 ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, updated by
 `attempts/A63-hole-closure/notes/findings.md` (bridge lemmas now in `docs/proofs/`).
@@ -150,6 +167,10 @@ ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, u
 | `PackingCert.S11.k5_06_param_kill` (+`_packing`) | `PackingCertMathlib/ParamK506.lean` | **one window certificate end to end**: the k5_06 pin-set kill at EVERY side of `[191/50, 969271/250000]` | + the `native_decide` axiom (`check_k5_06_param._native.native_decide.ax_1_1`; 215 s) |
 | `PackingCert.S11.centre_separation`, `zone_assign_bijective`, `core_meet_same_square`, `M1_transfer` | `PackingCertMathlib/Zones.lean` | **D.N1 / C.T5T11 / C.M1**: centre separation + zone-assignment collapse; the T5/T11 logic rules; single-corner transfer down the window | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.exists_kmax`, `teleport_packing`, `cc2_stuck` | `PackingCertMathlib/Selection.lean` | **B.SEL / C.CC2**: k-maximal selection; the CC-2 exchange preserves the packing; teleport-stuckness conditional on the census interface `hinc` | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.Rigid.krawczyk_sound` | `PackingCertMathlib/RigidKrawczyk.lean` | **Krawczyk soundness (E.A22)**: `krawczykOK c S Y r = true` ⇒ the 34-row contact system has exactly one zero in `box(z0, r)`, strictly inside | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.Rigid.zhatV_feas`, `a22_optimal` | `PackingCertMathlib/RigidA22.lean`, `RigidOptimal.lean` | **A22 feasibility + strict local optimality**: `checkA22 c = true` ⇒ ẑ is a packing at its own side; every feasible small-tilt configuration of `N` with side `≤ s(ẑ)` is ẑ | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.Rigid.a36_basin` | `PackingCertMathlib/RigidBasinMain.lean` | **A36 basin (E.A36, universal certificate)**: `checkA36 c a = true` ⇒ every feasible `z` with `‖z − ẑ‖_∞ ≤ h` has `s(z) ≥ s(ẑ)`, equality only at ẑ | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.Rigid.zhatCfg_packing`, `basin_tframe` | `PackingCertMathlib/Rigidity.lean` (+ `TopLevel.lean`: `trump_packs_at_shatA22`, `basin`) | **the certificate replays composed, t-frame**: Trump's configuration (DEFINED as the contact solution) packs at `ŝ_A22`; the `InBasin` basin theorem with `ŝ_A22` | + the `native_decide` axioms `checkA22_a22` and `checkA36_universal` (`RigidityCheck.lean`, 140 s for all three replays) |
 | `PackingCert.S11.theta_lipschitz`, `sub_le_theta`, `corner_perturb`, `rBasin_gate_*` | `PackingCertMathlib/ThetaT.lean` (+ `TopLevel.lean`) | **θ↔t transfer (E.COORD)**: `|Δt| ≤ |Δθ| ≤ 2|Δt|`; corner motion ≤ `r_c + √2·r_t`; the two rBasin gates | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.skeleton_mem_census`, `exists_class_skeleton`, `containsPins_skeleton`, `skeleton_card_le`, `skeleton_d4`, `d4_packing`, `class_kill` | `PackingCertMathlib/Census.lean` | **the Young-form census (B.CENSUS/B.EXACT, F11)**: every packing at `s ∈ (3,4)` has its skeleton in the census; exact ⟹ contains; `k ≤ 11`; D4 equivariance; Lemma M→E | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.censusL_length`, `classCodes_length`, `census_eq_corpus`, `census_d4_closed`, `corpus_classes_canon` | `PackingCertMathlib/CensusCheck.lean` | **1110 / 163, D4-closed, = A72's tuple set and orbit partition** | + one `native_decide` axiom each |
