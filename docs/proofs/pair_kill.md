@@ -693,8 +693,9 @@ scale r_z = 10⁻⁴ (forced by the U_1 reach, `u_ladder.md` §6.1) and the adve
 mass sits 3·10⁻⁴ outside the zones, so every atom that cashes the row's slack must
 separate an in-zone pose from its 3·10⁻⁴ variant — a margin below the shallowest menu
 level — and the depth-limited measure recovers only the unit-box-like 27 = 21 + 6 of the
-variant families (support: id-near|id-near 15.6 of Σz = 20.2). The row's slack is
-ultra-shallow by construction: it can be cashed only at the zone scale, which is exactly
+variant families (support: id-near|id-near 15.6 of Σz = 20.2). The rung-3 rows (sharp
+slack 1.04) give W₂ = 28.000000 at every one of 31 mixed-depth rounds (run stopped: dead at
+this menu). The row's slack is ultra-shallow by construction: it can be cashed only at the zone scale, which is exactly
 the η-fine boundary structure Lemma W‴ prices. Certificate `certs/pair_k4_08_s0_b1_md_k5.json`
 (v2.1 form; canaries SAFE ×2: trump5 witness min gap 1.06·10⁻⁷, Σm₂ = 6; U-row canary: both
 image families 7/7 in-zone, 21 > cap, Σm₂(widened) = 7).
