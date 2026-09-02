@@ -1481,3 +1481,46 @@ affordable cost estimate for closing 3.84.
 - C1/C2/C9: docs/specs/tcb.md + four frozen certificate specs + docs/manifest_3.8x.md.
   TCB debt named: no end-to-end verifier for the s0 tree compositions (the A54-gap layer);
   C3 clean-room inputs now exist for verify_case/verify_param.
+
+## 2026-09-01 — A63 (hole closure) closed: shat_spec + rBasin discharged in Lean; the S4 bridge is a lemma and it re-prices the whole s0-only ledger
+
+- T1 CLOSED: Sturm root-isolation certificate for the octic (certs/octic_root_isolation.json
+  + certs/verify_sturm.py, exact stdlib rationals, 5 corruption gates). The octic has exactly
+  2 real roots; the [3.877083, 3.877084] one is the second; all Taylor coefficients at the
+  left endpoint above degree 0 are positive, so shat is now a Lean DEFINITION and shat_spec a
+  THEOREM (propext/choice/Quot.sound only) — no calculus, no intervals. Axioms 16 -> 13
+  (rBasin also discharged: definition 3/2000, docs/proofs/theta_t_transfer.md — the binding
+  constraint is the forall-s slab (r(1+sqrt2) <= h), NOT the naive h/2 tilt transfer).
+- T2 CLOSED (docs/proofs/closed_disjoint_bridge.md): Lemma B, the lambda-dilation bridge —
+  centres x lambda, sizes fixed: strict disjointness (gap >= lambda-1) + pin tracking
+  ((lambda-1)|alpha| <= (lambda-1)5/2). HEADLINE FINDING: the deployed cores are eps-fat
+  (a ~ 1/2 - 3.1e-8), exact containment margin rho ~ 1.0000009e-9, so a fixed-side
+  certificate binds only a 4e-10-relative shell below its side: parametric coverage + dense
+  rationals fully instantiate stratum_kill on covered classes, but s0-ONLY certificates
+  (A57 k5_11/k5_16 trees, A60 zone-tree leaves, A61 stragglers pre-conversion) instantiate
+  the kill/residual axioms at NO side of [3.82, s-hat]. Named repair: the slack-core grid
+  (cores at 1/2 - 1e-3 => ~37 fixed sides cover the window; alternative to 4D parametric,
+  and the only visible window route for the tree compositions). lb_382's S4 gap closed too
+  (r = 0 case).
+- T3 HALF-CLOSED (docs/proofs/unique_transfer.md): F3 RE-DIAGNOSED — unique_transfer as
+  stated follows from census exhaustiveness (L3); the uniqueness load sits in stratum_kill's
+  forall-packings quantifier at the K1-protected classes. Full architecture written: CC-2
+  teleport chain to a stuck packing (H1 degeneracies evaporate — teleports need no corridor)
+  + H10 re-based to H10-STUCK + residual/basin + collapse back via THEOREM U (one-square
+  rigidity of z-hat) — the single new leaf, with an executable 11-re-insertion-certificate
+  spec (the only load-bearing nofams use). Obligations U-O1..U-O4 named.
+- T4 HALF-CLOSED (docs/proofs/attainment_ub.md): route (b) REFUTED as a finite route
+  (scaling breaks unit squares; rational curves have rational sigma-limits); attainment/
+  fits-ray lemma written (also discharges `attained` prose). A22 already certifies
+  Fits(s_A22); the whole residue is the algebraic identity s_A22 = s-hat-octic, now pinned
+  to |diff| <= 2.1e-47 via T1's Taylor bound; closure = number-field verification
+  (compositum deg <= 56 — a coordinate has a deg-7 minimal polynomial, so NOT Q(s-hat)) or
+  the S3-fallback restatement (s-hat := s_A22).
+- T5 CLOSED (docs/proofs/instratum_bridge.md + theta_t_transfer.md): K1 homed with both
+  directions; Lemma M->E (exact => contains => killed, reflexivity + D4 bookkeeping); exact
+  coverage table; K1-protected residue = H10 by design. Exact theta<->t constants
+  (|dt| <= |dtheta| <= 2|dt|), rBasin concrete, A60 landing radius = 0.30 x rBasin.
+- Ledger: depgraph updated (attempts/A63-hole-closure/results/depgraph.json): A.S3 ->
+  certificate+verifier; B.EXACT, E.COORD -> proved-prose; +A.SBRIDGE (proved-prose),
+  +A.THMU (open); open nodes 14 -> 13. Lean builds clean, #print axioms audited, README
+  matrix updated. A57/A60/A61 untouched; light CPU only.

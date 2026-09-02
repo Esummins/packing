@@ -198,3 +198,38 @@ free, killing jobs outright (it took out one tree shard and one deepen job simul
 * **Scaler:** commit-gated at 10.5 GB, so it will sit idle rather than add workers while the box
   is tight.  It has been logging unreliably (starts silently); confirm what it is doing from the
   process list, not from `logs/scaleup.log`.
+
+## depth-2 backlog (as of 2026-09-01 ~17:00)
+
+**23 children queued for depth 2; 21 depth-2 children already certified; no `deepen.py` running.**
+This is by design, not neglect: the brief specifies breadth-first, so level 1 is finished before
+the refinement pass, and the backlog grows while L1 runs.  `scaleup.ps1` launches `deepen.py`
+once its L1 shard queue is exhausted AND commit-available clears 10.5 GB.
+
+To run it sooner (it is the proven killer — every parent it has touched died, 8/8 on Y0017):
+
+    powershell -File code\run_job.ps1 -Script deepen.py -JobArgs "--key k5_11_interior_L1 --levels 3 --time_limit 240 --cert_time 240" -Tag deepen_k5_11
+
+Check commit-available first; a deepen worker peaks around 4 GB.  Trading one L1 shard for a
+deepen worker is commit-neutral if the box is tight.
+
+
+## after a machine restart
+
+Nothing is lost — all results are on disk and every worker resumes by skipping finished children.
+Relaunch in this order, and check the resume header of each shard (`grep '=== A57' logs/<shard>.log
+| tail -1` should show a non-zero `done=`):
+
+    powershell -File code\launch.ps1  -Name k5_11 -Shard 0/6 -Tag L1 -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000
+    powershell -File code\launch.ps1  -Name k5_16 -Shard 0/6 -Tag L1 -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000
+    powershell -File codeun_job.ps1 -Script deepen.py     -JobArgs "--key k5_11_interior_L1 --levels 3 --time_limit 240 --cert_time 240" -Tag deepen_k5_11
+    powershell -File codeun_job.ps1 -Script sweepfails.py -JobArgs "--watch 600 --rounds 1 --jobs 2 --depth 60 --cert_time 300" -Tag sweepfails
+    Start-Process powershell -ArgumentList '-ExecutionPolicy','Bypass','-File','code\scaleup.ps1' -WindowStyle Hidden
+
+Shards 0/6 are NOT in the scaler's queue (it starts at 1/6), so they must be started by hand; the
+scaler fills the rest up to the cap.
+
+**Do not trust a command-line scan to tell you whether a scaler is running** — your own status
+check contains the script name and will match (this cost a scaler twice).  Check
+`logs/scaleup.pid` and confirm that pid is a live `powershell` whose command line lacks
+`-NonInteractive`, or just read the tail of `logs/scaleup.log` for a fresh `scaleup started`.

@@ -15,3 +15,96 @@ DONE s=3.877084 n=5 sym=C1 tau=4.500000 nu=4.500009 conv=False minmass=0.500000 
   it   1 tau=5.000000 rows=10552 orbs=3215 atoms>0=5 minmass=0.000000 maxcov=1.666667 +rows=0 -rows=0 +cols=600 -cols=0 t=115s [lp 4s row 2s +r 0s col 0s +c 0s]
   it   2 tau=4.820000 rows=11571 orbs=3215 atoms>0=87 minmass=0.653333 maxcov=1.366667 +rows=1019 -rows=0 +cols=0 -cols=0 t=456s [lp 308s row 16s +r 17s col 1s +c 0s]
   it   3 tau=4.888559 rows=11571 orbs=3815 atoms>0=118 minmass=0.767961 maxcov=1.275571 +rows=0 -rows=0 +cols=600 -cols=0 t=494s [lp 22s row 15s +r 0s col 1s +c 0s]
+  it   4 tau=4.766404 rows=12379 orbs=3458 atoms>0=92 minmass=0.706037 maxcov=1.196210 +rows=808 -rows=0 +cols=0 -cols=357 t=680s [lp 151s row 18s +r 15s col 1s +c 0s]
+  it   5 tau=4.798851 rows=12379 orbs=4039 atoms>0=108 minmass=0.839080 maxcov=1.275862 +rows=0 -rows=0 +cols=600 -cols=19 t=732s [lp 36s row 14s +r 0s col 1s +c 0s]
+  it   6 tau=4.770632 rows=13436 orbs=3832 atoms>0=103 minmass=0.815847 maxcov=1.133011 +rows=1057 -rows=0 +cols=0 -cols=207 t=854s [lp 74s row 23s +r 24s col 1s +c 0s]
+  it   7 tau=4.780626 rows=13436 orbs=4343 atoms>0=136 minmass=0.848410 maxcov=1.145952 +rows=0 -rows=0 +cols=600 -cols=89 t=894s [lp 16s row 23s +r 0s col 1s +c 0s]
+  it   8 tau=4.734575 rows=14338 orbs=3921 atoms>0=140 minmass=0.765716 maxcov=1.125728 +rows=902 -rows=0 +cols=0 -cols=422 t=1227s [lp 278s row 33s +r 21s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.760417 nu=4.760417 conv=False minmass=0.765716 maxcov=1.125728 rows=14338 orbits=3921 atoms_nz=111 packing_support=156 time=1251s
+    [B] eps_geo=0.003 tau=4.760417 budget=5 slack=0.2396 conv=False orbits=3921 rows=14338 (1252s)
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A54-stragglers\code\certify.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\results\nodes\k6_29.json --s_rat 969271/250000 --rounds 3 --jobs 3 --depth 56 --time_limit 300.0 --out C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.json --scale 0 --scale_cap 1.06000 --max_w 96 --loop_cols --eps_geo 0.003 --no_resolve --warm_state C:\Users\esumm\code\packing\attempts\A61-window-stragglers\results\nodes\k6_29_B_state.json
+[round 0] tau=4.76042 conv=False scale=1.0473 cert total=4.98554 budget=5 atoms=111
+    boxes = 245811  covered = 56967  vacuous = 0  exempt = 65792 (core 65792, nofam 0)  split = 122996  exact atom checks = 207641  max depth = 56  time = 8.4s
+    FAIL: 56 witness boxes at depth 56: 52 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth
+      worst witness: theta = 0.000219 deg, centre = (1.930003291, 1.496982086), exact mass = 963663/1000000 (~0.963663000000)
+    feeding back 1176 witness rows (total extra 1176), re-solving (rows only)
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3921 points=3921 rows=14428 (rejected 1626)
+  it   0 tau=4.761062 rows=15616 orbs=3921 atoms>0=105 minmass=0.879056 maxcov=1.230734 +rows=1188 -rows=0 +cols=0 -cols=0 t=187s [lp 119s row 24s +r 36s col 1s +c 0s]
+  it   1 tau=4.777273 rows=15616 orbs=4921 atoms>0=116 minmass=0.897115 maxcov=1.307265 +rows=0 -rows=0 +cols=1000 -cols=0 t=242s [lp 33s row 20s +r 0s col 1s +c 1s]
+  it   2 tau=4.756438 rows=16850 orbs=4921 atoms>0=143 minmass=0.886266 maxcov=1.119635 +rows=1234 -rows=0 +cols=0 -cols=0 t=559s [lp 250s row 28s +r 38s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.771044 nu=4.771044 conv=False minmass=0.886266 maxcov=1.119635 rows=16850 orbits=4921 atoms_nz=157 packing_support=179 time=604s
+[round 1] tau=4.77104 conv=False scale=1.0449 cert total=4.98553 budget=5 atoms=157
+    boxes = 343470  covered = 93312  vacuous = 0  exempt = 78409 (core 78409, nofam 0)  split = 171725  exact atom checks = 373499  max depth = 56  time = 10.4s
+    FAIL: 24 witness boxes at depth 56: 14 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 10 undecided at this depth
+      worst witness: theta = 50.009603 deg, centre = (2.174552797, 2.371228461), exact mass = 197331/200000 (~0.986655000000)
+    feeding back 504 witness rows (total extra 1680), re-solving (rows only)
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3954 points=3954 rows=16870 (rejected 1626)
+  it   0 tau=4.771044 rows=18010 orbs=3954 atoms>0=136 minmass=0.878788 maxcov=1.120444 +rows=1140 -rows=0 +cols=0 -cols=0 t=200s [lp 148s row 14s +r 31s col 1s +c 0s]
+  it   1 tau=4.775687 rows=18010 orbs=4954 atoms>0=176 minmass=0.864481 maxcov=1.106408 +rows=0 -rows=0 +cols=1000 -cols=0 t=255s [lp 25s row 28s +r 0s col 1s +c 1s]
+  it   2 tau=4.752652 rows=19217 orbs=4954 atoms>0=186 minmass=0.883525 maxcov=1.080832 +rows=1207 -rows=0 +cols=0 -cols=0 t=655s [lp 310s row 49s +r 39s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.765596 nu=4.765596 conv=False minmass=0.883525 maxcov=1.080832 rows=19217 orbits=4954 atoms_nz=180 packing_support=207 time=689s
+[round 2] tau=4.76560 conv=False scale=1.0461 cert total=4.98556 budget=5 atoms=180
+    boxes = 341899  covered = 97444  vacuous = 0  exempt = 73519 (core 73519, nofam 0)  split = 170928  exact atom checks = 420520  max depth = 56  time = 9.5s
+    FAIL: 8 witness boxes at depth 56: 4 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth
+      worst witness: theta = 34.785491 deg, centre = (1.863707568, 2.191410711), exact mass = 249673/250000 (~0.998692000000)
+    feeding back 168 witness rows (total extra 1848), re-solving (rows only)
+[s=3.877084 n=5 sym=C1 box=[0,90]x1] init orbits=3972 points=3972 rows=19120 (rejected 1626)
+  it   0 tau=4.765596 rows=20343 orbs=3972 atoms>0=188 minmass=0.891013 maxcov=1.182150 +rows=1223 -rows=0 +cols=0 -cols=0 t=176s [lp 116s row 17s +r 35s col 1s +c 0s]
+  it   1 tau=4.776688 rows=20343 orbs=4972 atoms>0=180 minmass=0.959845 maxcov=1.201396 +rows=0 -rows=0 +cols=1000 -cols=0 t=227s [lp 32s row 17s +r 0s col 1s +c 1s]
+  it   2 tau=4.758704 rows=21551 orbs=4972 atoms>0=180 minmass=0.897093 maxcov=1.288230 +rows=1208 -rows=0 +cols=0 -cols=0 t=938s [lp 646s row 18s +r 46s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=5 sym=C1 tau=4.765767 nu=4.765767 conv=False minmass=0.897093 maxcov=1.288230 rows=21551 orbits=4972 atoms_nz=239 packing_support=220 time=1144s
+[round 3] tau=4.76577 conv=False scale=1.0461 cert total=4.98559 budget=5 atoms=239
+    boxes = 340620  covered = 94567  vacuous = 0  exempt = 75775 (core 75775, nofam 0)  split = 170278  exact atom checks = 538368  max depth = 32  time = 10.3s
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 623199/125000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.json
+
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.json -o C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.json --name k6_29 --beta-gap 19/10,27/10
+k6_29: 239 atoms, 6 cores, budget 5, anchoring gap -> C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.json --slo 191/50 --shi 969271/250000 --depth 48 --sscale 8 --jobs 3 --split 3 --report C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.wit.json --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.json  (k6_29)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 239, cores = 6, budget = 5, total = 623199/125000 (~4.985592000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '4551951/2000000', 'threshold_y': '1119661/500000', 'threshold_x_float': 2.2759755, 'threshold_y_float': 2.239322, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 4435038  covered = 1575309  vacuous = 0  exempt = 642242  split = 2217487  s-splits = 376362  s-cells = 1935  max depth = 40  max s-depth = 8  time = 103.4s
+PASS: for EVERY s in [191/50, 969271/250000], every admissible closed unit square in [0,s]^2 disjoint from all 6 cores has mu_s >= 1; total 623199/125000 < budget 5  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.report.json
+    4D[gap] PASS 103.7s
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.lo.json
+specialised k6_29 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.lo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.lo.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.lo.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.lo.wit.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.lo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 239, total mass = 623199/125000 (~4.9855920000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 48464  covered = 19282  vacuous = 0  exempt = 4982 (core 4982, nofam 0)  split = 24200  exact atom checks = 120280  max depth = 29  time = 1.5s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 623199/125000 < budget 5  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.lo.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.json --s 1924271/500000 -o C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.mid.json
+specialised k6_29 at s = 1924271/500000 (~3.848542000) -> C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.mid.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.mid.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.mid.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.mid.wit.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.mid.json
+s = 1924271/500000 (~3.8485420000), n = 11, atoms = 239, total mass = 623199/125000 (~4.9855920000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 68434  covered = 25890  vacuous = 0  exempt = 8359 (core 8359, nofam 0)  split = 34185  exact atom checks = 166869  max depth = 29  time = 1.9s
+PASS: every NON-EXEMPT closed unit square in [0,1924271/500000]^2 has mass >= 1 ; total 623199/125000 < budget 5  ==>  no packing of 11 unit squares in side <= 1924271/500000 (~3.8485420000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.mid.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\k6_29.gp.param.json --s 969271/250000 -o C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.hi.json
+specialised k6_29 at s = 969271/250000 (~3.877084000) -> C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.hi.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.hi.json --depth 44 --jobs 3 --report C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.hi.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.hi.wit.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.hi.json
+s = 969271/250000 (~3.8770840000), n = 11, atoms = 239, total mass = 623199/125000 (~4.9855920000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 340620  covered = 94567  vacuous = 0  exempt = 75775 (core 75775, nofam 0)  split = 170278  exact atom checks = 538368  max depth = 32  time = 9.7s
+PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 623199/125000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A61-window-stragglers\certs\c2\k6_29.hi.report.json
+    A61 CONVERTS (full window)

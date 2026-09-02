@@ -479,13 +479,16 @@ them, and headroom does not predict which:
 | k5_11_interior_Y0467 | 1.0795 | 0.002 | **PASS** (941.6 s, daemon, unattended) |
 | k5_16_interior_Y0431 | 1.1111 | 0.002 | **PASS** (1105.3 s, daemon, unattended) |
 | k5_11_interior_Y0041_**D02** | 1.1538 | 0.002 | **PASS** (1294.6 s) — a *depth-2* sub-box |
+| k5_16_interior_Y0593 | — | **0.004** | **PASS** — first win on the SECOND margin |
 | **k5_11_interior_Y0485** | **1.1111** | 0.002, 0.004 | **FAIL** — both exhausted (873.5 s) → depth 2 |
 | **k5_16_interior_Y0461** | 1.0169 | 0.0005, 0.001 | **FAIL** — both exhausted → depth 2 |
 | k5_11_interior_Y0461 | 1.0169 | 0.002, 0.004 (**wrong**, T16 wants 0.0005/0.001) | invalid trial; re-run pending |
 
-**4 of 6 at correct margins** (a seventh trial used the wrong margins and does not count).  The
-rate has wobbled with every batch — 4/4, 3/4, 3/5, now 4/6 — so treat it as "roughly two thirds,
-maybe half" and do not quote it as settled until the cover is done.  Y0485 in particular has exactly the ceiling of two that passed, so **good headroom is
+**5 of 7 at correct margins** (an eighth trial used the wrong margins and does not count).  The
+rate has wobbled with every batch — 4/4, 3/4, 3/5, 4/6, now 5/7 — so treat it as "roughly two
+thirds" and do not quote it as settled until the cover is done.  Y0593 is the first child cured
+by the **second** margin (0.004 after 0.002 failed), which is what justifies trying a pair rather
+than a single value.  Y0485 in particular has exactly the ceiling of two that passed, so **good headroom is
 NECESSARY for the lever (T16) but nowhere near sufficient**; the gate is not a predictor of
 success, it only stops hopeless cases burning 30 minutes.  Depth 2 remains the backstop, and on
 current evidence it is the workhorse rather than the exception.
@@ -608,3 +611,40 @@ and four lines are superseded records (e.g. Y0107's T14 correction), which is th
 behaviour of the last-record-wins convention.
 
 The `sweepfails` daemon was restarted once commit-available cleared 10 GB, as agreed.
+
+
+## T20 — relaunch after the pagefile restart, and a guard bug that hid a dead scaler
+
+The PI restarted the machine to move the pagefile to `F:\pagefile.sys` at **25 GB initial /
+100 GB maximum**, so the commit limit now grows on demand toward ~130 GB.  **Commit is no longer
+the binding constraint** (it was: 61 GB limit, 57.9 GB used, A60 losing a shard to a 38 MiB
+allocation).  `scaleup.ps1`'s gate drops 10.5 GB -> 6 GB, kept only as a safety net because a
+growing pagefile still takes time to extend.  T18 pinning and the T19 trims stay: they were never
+about the pagefile.
+
+**All state survived** (results are on disk): 110 / 67 / 104 level-1 records, 15 + 8 depth-2, and
+**168 PASS certificates**.  Every worker resumed at the right place:
+
+| worker | resumed at |
+|---|---|
+| k5_11 shard 0/6 | done = 106 of 193 |
+| k5_16 shard 0/6 | done = 101 of 193 |
+| k5_11 shard 1/6 | relaunched by the scaler |
+| deepen k5_11 | parents = 22 (the current backlog) |
+| sweepfails | eligible = 0 (nothing outstanding) |
+
+**The guard bug.**  The single-instance guard matched `-File*scaleup.ps1*` on command lines, and
+a *status check* — `powershell -NonInteractive -Command '... -File ...\scaleup.ps1 ...'` — carries
+both tokens in its own command line.  So the guard saw a tool session as a running scaler and
+made the genuine one exit: `another scaler (pid 7368) is older; this one (14584) exits`, where
+7368 was a transient tool session that had already gone.  This is the **third** appearance of the
+same false positive (T19 documented it for *counting* scalers; it then bit the *guard* itself),
+which is the lesson: **a process's own command line is not a usable identity when the thing you
+are searching for is the script's name — every observer mentions it.**  Fixed with a pidfile as
+the primary record (`logs/scaleup.pid`), plus a command-line scan that now excludes
+`-NonInteractive` and self.  Verified: the scaler starts, logs `scaleup started; A57=4`, and
+writes its pid.
+
+Also fixed while relaunching: the scaler's `deepen.py` launch was a direct `Start-Process` and so
+ran **unpinned** — `launch.ps1` sets the BLAS variables in its own process, but that path bypassed
+it.  The pinning is now set at the top of `scaleup.ps1`, where every child inherits it.

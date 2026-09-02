@@ -13,13 +13,19 @@ Two projects:
 `PackingCertMathlib/TopLevel.lean` defines packings over ℝ² (closed unit squares, pairwise
 disjoint **interiors**, container `[0,s]²`, tan-half configuration layer), `s(11)` as an
 infimum, and **states** the composed optimality theorem `s(11) = ŝ` + uniqueness with every
-leaf family of the live proof plan as a NAMED `axiom` (13 of them: attainment,
-parametrisation, Theorem 1, UB-at-ŝ, root isolation, stratification, per-stratum kills with
+leaf family of the live proof plan as a NAMED `axiom` (13 of them after A63: attainment,
+parametrisation, Theorem 1, UB-at-ŝ ×2, stratification, per-stratum kills with
 the window fused in, trump5 residual, A22/A36 basin, uniqueness transfer, plus the opaque
-census layer). The three theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved
+census layer ×3). The three theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved
 from exactly those axioms (`scratch/Axioms.lean` prints them; CI asserts no `sorryAx`).
+**Discharged by A63 (2026-09-01): `shat` is now a definition and `shat_spec` a THEOREM
+(root isolation — certificate `certs/octic_root_isolation.json`, checker
+`certs/verify_sturm.py`, all-positive Taylor shift inside Lean; depends only on
+`propext, Classical.choice, Quot.sound`), and `rBasin` is a definition (`3/2000`,
+`docs/proofs/theta_t_transfer.md`).**
 Each axiom's docstring records the lab artefact meant to discharge it and its status; the
-ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`.
+ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, updated by
+`attempts/A63-hole-closure/notes/findings.md` (bridge lemmas now in `docs/proofs/`).
 
 ## Theorem index (real-geometry statements — A28)
 

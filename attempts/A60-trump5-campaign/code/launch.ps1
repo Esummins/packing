@@ -29,11 +29,15 @@ $sh   = $Shard.Replace('/','-')
 $name = "$Job`_j$j`_s$sh$Tag"
 $log  = Join-Path $base "logs\$name.out"
 
+# PowerShell drops "" from an array literal, which silently shifts every later argument
+# (measured: -Cond "" turned --shard into the value of --cond).  Pass it only when set.
+$condArg = if ($Cond) { @("--cond", $Cond) } else { @() }
+
 switch ($Job) {
-  "falsify"    { $script = "falsify60.py"; $argl = @("--cond",$Cond,"--n","$N","--shard",$Shard,"--lp_time","$LpTime","--cert_time","$CertTime","--wall","$Wall") }
-  "cover"      { $script = "tree60.py";    $argl = @("cover","--cond",$Cond,"--shard",$Shard,"--lp_time","$LpTime","--cert_time","$CertTime","--wall","$Wall") }
-  "ladder"     { $script = "tree60.py";    $argl = @("ladder","--cond",$Cond,"--shard",$Shard,"--levels","$Levels","--lp_time","$LpTime","--cert_time","$CertTime","--wall","$Wall") }
-  "ladderscan" { $script = "tree60.py";    $argl = @("ladderscan","--cond",$Cond,"--levels","$Levels") }
+  "falsify"    { $script = "falsify60.py"; $argl = $condArg + @("--n","$N","--shard",$Shard,"--lp_time","$LpTime","--cert_time","$CertTime","--wall","$Wall") }
+  "cover"      { $script = "tree60.py";    $argl = @("cover") + $condArg + @("--shard",$Shard,"--lp_time","$LpTime","--cert_time","$CertTime","--wall","$Wall") }
+  "ladder"     { $script = "tree60.py";    $argl = @("ladder") + $condArg + @("--shard",$Shard,"--levels","$Levels","--lp_time","$LpTime","--cert_time","$CertTime","--wall","$Wall") }
+  "ladderscan" { $script = "tree60.py";    $argl = @("ladderscan") + $condArg + @("--levels","$Levels") }
   default      { throw "unknown job $Job" }
 }
 $all = @((Join-Path $here $script)) + $argl

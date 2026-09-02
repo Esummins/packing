@@ -34,13 +34,14 @@ load-bearing ones are repeated in the docstrings below.
   formal definition; the stratum predicate is opaque here.  NOTE the intended semantics is
   "the selected minimiser's skeleton is EXACTLY this class" (see `stratum_kill` docstring for
   why the certificate-native "contains these pins" reading would make the axiom false).
-* `shat` — tied to the octic only through `shat_spec` (checklist S3: no root-isolation
-  certificate in `certs/` yet).
+* `shat` — DISCHARGED (A63): a definition (unique octic root in the isolating interval),
+  with `shat_spec` a theorem; certificate `certs/octic_root_isolation.json` +
+  `certs/verify_sturm.py` (checklist S3).
 * `zhat` — the exact Trump configuration; formal target: definable from A22's Krawczyk
-  existence certificate once replayed in the `t = tan(θ/2)` parametrisation (A28 §4, F6).
-* `rBasin` — the basin radius.  A22/A36 certify 3.7e-3 in `(c, θ)` coordinates; this file's
-  configuration space is `(c, t)`, and no certified radius exists in `t` coordinates yet
-  (findings F5).
+  existence certificate once replayed in the `t = tan(θ/2)` parametrisation (A28 §4, F6);
+  route decision and the ŝ_A22 = ŝ identification gap: `docs/proofs/attainment_ub.md`.
+* `rBasin` — DISCHARGED (A63): a definition, 3/2000, justified by the exact θ↔t transfer
+  constants (`docs/proofs/theta_t_transfer.md`).
 -/
 
 namespace PackingCert
@@ -128,17 +129,99 @@ def trumpOctic (x : ℝ) : ℝ :=
   x ^ 8 - 20 * x ^ 7 + 178 * x ^ 6 - 842 * x ^ 5 + 1923 * x ^ 4 - 496 * x ^ 3
     - 6754 * x ^ 2 + 12420 * x - 6865
 
-/-- **ŝ = 3.877083590022813…**, the conjectured value of `s(11)`. Opaque; specified only
-through `shat_spec`. -/
-axiom shat : ℝ
+/-- The Taylor expansion of the octic at `a = 3877083/1000000`: every coefficient above
+degree 0 is POSITIVE (certificate `certs/octic_root_isolation.json`, checker
+`certs/verify_sturm.py`), so the octic is strictly increasing on `[a, ∞)` by pure algebra —
+no calculus enters the uniqueness argument. -/
+private lemma trumpOctic_taylor (x : ℝ) :
+    trumpOctic x =
+      -(89907663116138493411101284007125861208828959 /
+          1000000000000000000000000000000000000000000000000)
+        + (19047448354002451638684536547366689841780627 /
+            125000000000000000000000000000000000000000)
+            * (x - 3877083 / 1000000)
+        + (165507240204079365683276620593074875583 / 250000000000000000000000000000000000)
+            * (x - 3877083 / 1000000) ^ 2
+        + (140531576756507493150247963879501 / 125000000000000000000000000000)
+            * (x - 3877083 / 1000000) ^ 3
+        + (75650550884558810753780247 / 100000000000000000000000)
+            * (x - 3877083 / 1000000) ^ 4
+        + (31128529333060215509 / 125000000000000000)
+            * (x - 3877083 / 1000000) ^ 5
+        + (14024503122223 / 250000000000)
+            * (x - 3877083 / 1000000) ^ 6
+        + (1377083 / 125000)
+            * (x - 3877083 / 1000000) ^ 7
+        + (x - 3877083 / 1000000) ^ 8 := by
+  unfold trumpOctic; ring
 
-/-- **[S3 — root isolation]** ŝ is the unique root of the octic in
-`[3.877083, 3.877084]`.  STATUS: the octic and a 60-digit solution exist (A03); no exact
-isolation certificate (Sturm sequence / sign changes at rational points) is in `certs/`.
-Once one exists this axiom becomes a theorem and `shat` a definition.  Findings F7. -/
-axiom shat_spec :
+/-- The octic strictly increases to the right of `a = 3877083/1000000`. -/
+private lemma trumpOctic_strictMono {x y : ℝ}
+    (hx : (3877083 / 1000000 : ℝ) ≤ x) (hxy : x < y) : trumpOctic x < trumpOctic y := by
+  rw [trumpOctic_taylor x, trumpOctic_taylor y]
+  set u := x - 3877083 / 1000000 with hu_def
+  set v := y - 3877083 / 1000000 with hv_def
+  have hu : (0 : ℝ) ≤ u := by simp only [hu_def]; linarith
+  have huv : u < v := by simp only [hu_def, hv_def]; linarith
+  have huv' : u ≤ v := le_of_lt huv
+  have h2 : u ^ 2 ≤ v ^ 2 := pow_le_pow_left₀ hu huv' 2
+  have h3 : u ^ 3 ≤ v ^ 3 := pow_le_pow_left₀ hu huv' 3
+  have h4 : u ^ 4 ≤ v ^ 4 := pow_le_pow_left₀ hu huv' 4
+  have h5 : u ^ 5 ≤ v ^ 5 := pow_le_pow_left₀ hu huv' 5
+  have h6 : u ^ 6 ≤ v ^ 6 := pow_le_pow_left₀ hu huv' 6
+  have h7 : u ^ 7 ≤ v ^ 7 := pow_le_pow_left₀ hu huv' 7
+  have h8 : u ^ 8 ≤ v ^ 8 := pow_le_pow_left₀ hu huv' 8
+  linarith
+
+private lemma trumpOctic_continuous : Continuous trumpOctic := by
+  unfold trumpOctic; fun_prop
+
+/-- **[S3 — root isolation, existence half]** sign change on the isolating interval. -/
+private lemma trumpOctic_exists_root :
+    ∃ x ∈ Icc (3877083 / 1000000 : ℝ) (3877084 / 1000000), trumpOctic x = 0 := by
+  have hab : (3877083 / 1000000 : ℝ) ≤ 3877084 / 1000000 := by norm_num
+  have hivt := intermediate_value_Icc hab trumpOctic_continuous.continuousOn
+  have h0 : (0 : ℝ) ∈ Icc (trumpOctic (3877083 / 1000000)) (trumpOctic (3877084 / 1000000)) := by
+    have ha : trumpOctic (3877083 / 1000000 : ℝ) < 0 := by unfold trumpOctic; norm_num
+    have hb : 0 < trumpOctic (3877084 / 1000000 : ℝ) := by unfold trumpOctic; norm_num
+    exact ⟨le_of_lt ha, le_of_lt hb⟩
+  exact hivt h0
+
+/-- **[S3 — root isolation]** the octic has exactly one root in `[3.877083, 3.877084]`.
+Certificate: `certs/octic_root_isolation.json` (Sturm; the octic has exactly TWO real
+roots, the other in `(-2, -1)`, so this root is the SECOND real root, as the theorem
+statement requires), checker `certs/verify_sturm.py` (exact rational arithmetic, stdlib
+only).  The Lean proof is certificate-free: IVT for existence, the all-positive Taylor
+shift for uniqueness. -/
+theorem trumpOctic_existsUnique :
+    ∃! x : ℝ, x ∈ Icc (3877083 / 1000000 : ℝ) (3877084 / 1000000) ∧ trumpOctic x = 0 := by
+  obtain ⟨x, hx, hfx⟩ := trumpOctic_exists_root
+  refine ⟨x, ⟨hx, hfx⟩, ?_⟩
+  rintro y ⟨hy, hfy⟩
+  by_contra hne
+  rcases lt_or_gt_of_ne hne with h | h
+  · have := trumpOctic_strictMono hy.1 h
+    rw [hfy, hfx] at this
+    exact lt_irrefl 0 this
+  · have := trumpOctic_strictMono hx.1 h
+    rw [hfx, hfy] at this
+    exact lt_irrefl 0 this
+
+/-- **ŝ = 3.877083590022813…**, the value of `s(11)`: the unique (and second real) root of
+the octic in `[3.877083, 3.877084]`.  A DEFINITION since A63 (was an axiom); tied to the
+octic by the theorem `shat_spec` below. -/
+noncomputable def shat : ℝ := trumpOctic_existsUnique.choose
+
+/-- **[S3 — root isolation]** ŝ is the unique root of the octic in `[3.877083, 3.877084]`.
+DISCHARGED (A63): was an axiom; now proved from `trumpOctic_existsUnique`
+(certificate `certs/octic_root_isolation.json` + `certs/verify_sturm.py` document the
+Sturm count and the second-root index; the Lean proof itself needs neither).
+Findings F7 closed. -/
+theorem shat_spec :
     trumpOctic shat = 0 ∧ shat ∈ Icc (3877083 / 1000000 : ℝ) (3877084 / 1000000) ∧
-      ∀ x ∈ Icc (3877083 / 1000000 : ℝ) (3877084 / 1000000), trumpOctic x = 0 → x = shat
+      ∀ x ∈ Icc (3877083 / 1000000 : ℝ) (3877084 / 1000000), trumpOctic x = 0 → x = shat := by
+  obtain ⟨⟨hmem, hroot⟩, huniq⟩ := trumpOctic_existsUnique.choose_spec
+  exact ⟨hroot, hmem, fun x hx hfx => huniq x ⟨hx, hfx⟩⟩
 
 /-- The window on which every per-stratum obligation is stated: `[3.82, ŝ]`.
 The lower end is Theorem 1 (`lb_382`); certificates are produced on the rational
@@ -167,13 +250,17 @@ unit square has mass ≥ 1 ⇒ no 11-packing" is prose (checklist F2, A28 §7 it
 axiom lb_382 : ∀ s : ℝ, Fits 11 s → (191 / 50 : ℝ) ≤ s
 
 /-- **[UB at ŝ exactly]** Trump's configuration and the fact that it is a packing at side
-ŝ.  STATUS: OPEN as a certificate — the strongest Lean-checked upper bound is
-`s(11) ≤ 3.877083591023 > ŝ` (`trump11_tight_ok`), and `checkPacking` requires strictly
-positive separation margins, so no certificate of the current UB family can EVER certify
-the contact-closed packing at ŝ itself.  Intended discharge: A22's Krawczyk existence
-certificate (exact contact solution, feasible), replayed in `t`-parametrisation (F6) —
-or a closedness argument (`Fits` closed + rational certificates at sides ↓ ŝ).
-Findings F2 — this obligation was previously implicit. -/
+ŝ.  STATUS: OPEN; route DECIDED by A63 (`docs/proofs/attainment_ub.md`):
+* route (b) — `Fits` closed + certificate sequence ↓ ŝ — is REFUTED as a finite route
+  (scaling breaks unit squares; finite certificate sets have min side > ŝ; rational
+  parametric curves have rational σ-limits ≠ ŝ).  Struck.
+* route (a) — A22 Krawczyk existence + FEASIBILITY — already certifies `Fits ŝ_A22` for
+  the INTRINSIC side ŝ_A22 of the contact solution (Python-interval TCB).  The residue is
+  the statement identity ŝ_A22 = ŝ (the octic root): now pinned to |ŝ_A22 − ŝ| ≤ 2.1e-47
+  (A22's octic enclosure ± 3.1e-45 divided by the T1 Taylor bound octic′ ≥ 152.37), with
+  equality still an OPEN algebraic identity — closure specs (c-alg: exact number-field
+  verification, compositum degree ≤ 56; or the S3-fallback restatement with ŝ := ŝ_A22)
+  in `attainment_ub.md` §4. -/
 axiom zhat : Cfg
 
 /-- See `zhat`. -/
@@ -221,18 +308,38 @@ pins"; the composition needs the exact-skeleton form; the bridge is K1 + the cen
 containment lattice and must become a written lemma (findings F4).
 FOURTH fused obligation (findings F9, checklist S4): a `verify_case` PASS speaks about
 families of pairwise-DISJOINT closed squares, while this axiom quantifies over
-interior-disjoint packings (contacts allowed — the minimiser has them).  The bridge is a
-λ-scaling-with-pin-slack argument (scale to a nearby rational side inside the window,
-where the scaled packing is strictly disjoint and, for point/small cores, still contains
-the pins); it is applied implicitly at EVERY use of a kill and is written nowhere. -/
+interior-disjoint packings (contacts allowed — the minimiser has them).
+A63 STATUS UPDATE:
+* (F9/S4) the λ-dilation bridge is now WRITTEN and proved:
+  `docs/proofs/closed_disjoint_bridge.md` Lemma B + Corollary B′ (centre dilation to a
+  certified rational side strictly above the packing's side; corpus containment margin
+  ρ ≈ 1.0000009e-9, exactly positive, uniform across all 68 kill certificates).
+* (F4) the monotone→exact bridge is written: `docs/proofs/instratum_bridge.md` (K1 +
+  Lemma M→E); it covers exactly the certified classes, and records that the K1-protected
+  tier is H10's business, in the target form H10-stuck (`unique_transfer.md` §3).
+* (F6, SHARPENED) via Lemma B an s₀-only certificate reaches only sides within relative
+  distance ~4e-10 below s₀ — i.e. NO side of `[3.82, ŝ]` at all (the gap to ŝ is
+  ~1.06e-7 relative).  The window quantifier of this axiom is carried by parametric
+  coverage + B′ for the 38(+A61) full-window classes; the A57 k5_11/k5_16 trees and any
+  s₀-only stragglers instantiate NOTHING here until re-emitted (parametric form, or the
+  slack-core fixed-side grid of `closed_disjoint_bridge.md` B.4).
+* QUANTIFIER CAVEAT (A63, from `unique_transfer.md` §1): as stated this axiom quantifies
+  over ALL packings.  For the K1-protected classes at `s = ŝ` that strength is equivalent
+  to (a piece of) the uniqueness theorem and can never come from certificates; the
+  non-circular discharge routes the uniqueness composition through teleport-stuck
+  packings (H10-stuck) + Theorem U — see `unique_transfer.md`.  At sides `< ŝ` the
+  low-k instances are needed only for the `stratify`-selected minimiser. -/
 axiom stratum_kill : ∀ i : StratumIdx, i ≠ trumpStratum → ∀ s ∈ wnd, ∀ z : Cfg,
     CfgPacking s z → ¬InStratum i s z
 
-/-- The basin radius (∞-norm, in `(cx, cy, t)` coordinates).  A22/A36 certify 3.7e-3 in
-`(c, θ)` coordinates; `dθ/dt = 2/(1+t²) ≠ 1`, so the certified radius does NOT transfer
-numerically to this coordinate system — the residual tree and the basin certificate must
-be re-expressed in the SAME box (findings F5).  Opaque until then. -/
-axiom rBasin : ℝ
+/-- The basin radius (∞-norm, in `(cx, cy, t)` coordinates): **3/2000 = 1.5e-3**.
+A DEFINITION since A63 (was an opaque axiom, findings F5).  Derivation
+(`docs/proofs/theta_t_transfer.md` X.3): A36 certifies the basin at radius 37/10000 in
+`(c, θ, s)`; a t-deviation ≤ 3/2000 gives a θ-deviation ≤ 3/1000 ≤ 37/10000 (X.1,
+`|Δθ| ≤ 2|Δt|`), and the corner-perturbation bound `r·(1+√2) < 37/10000` (X.2) closes the
+`∀ s` slab so that every case of the `basin` axiom below lands inside A36's certified
+34-dim box.  The A60 residual tree's landing radius 4.45e-4 sits at 0.30 × this value. -/
+noncomputable def rBasin : ℝ := 3 / 2000
 
 /-- `z` lies in the certified rigidity box around Trump's configuration. -/
 def InBasin (z : Cfg) : Prop := ∀ i,
@@ -244,9 +351,15 @@ def InBasin (z : Cfg) : Prop := ∀ i,
 the rigidity basin.  STATUS: A60 campaign running (zone cover + residue ladders +
 confinement, every kill an exact certificate); the low-`s` slab (H7/G-A59-7) and the
 s-parametric form of the (K) leaves are open — as stated the axiom quantifies over the
-whole window, which is exactly that open obligation.  The symmetry/relabelling is produced
-by the D4 reduction inside the tree (H12; machine-checked at 3.84, re-proof at s₀ listed
-as mechanical). -/
+whole window, which is exactly that open obligation.  A63 sharpening
+(`closed_disjoint_bridge.md` B.2/B.4): the tree's s₀ kill certificates, with the library's
+ε-fat pin cores (margin ~1e-9), instantiate at NO side of the window via the dilation
+bridge; the named upgrade paths are parametric re-emission or the slack-core fixed-side
+grid.  Dilation transfers KILLS only, never this axiom's containment conclusion (the
+pulled-back basin box misses `InBasin` by ~(λ−1)·|ĉ| ≫ rBasin) — D.SLAB stands.  The
+`InBasin` target is now concrete: all 33 coordinates within 3/2000, mod G (A60's landing
+radius 4.45e-4 = 0.30 × rBasin).  The symmetry/relabelling is produced by the D4 reduction
+inside the tree (H12; machine-checked at 3.84, re-proof at s₀ listed as mechanical). -/
 axiom trump_residual : ∀ s ∈ wnd, ∀ z : Cfg, CfgPacking s z → InStratum trumpStratum s z →
     ∃ (z' : Cfg) (f : RP → RP) (e : Equiv.Perm (Fin 11)),
       IsCtrSym s f ∧ CfgPacking s z' ∧ InBasin z' ∧ ∀ j, (z (e j)).set = f '' (z' j).set
@@ -255,19 +368,28 @@ axiom trump_residual : ∀ s ∈ wnd, ∀ z : Cfg, CfgPacking s z → InStratum 
 ≥ ŝ, and a packing at side exactly ŝ inside the box IS Trump's configuration.  STATUS:
 certified by Python interval arithmetic (mpmath.iv Krawczyk + Farkas, standalone
 re-checker, corruption gates); Lean replay blocked on interval trigonometry until the
-certificate is re-emitted in `t` (A28 §4 / checklist F6); coordinate-box caveat as in
-`rBasin`. -/
+certificate is re-emitted in `t` (A28 §4 / checklist F6).  The coordinate-box caveat is
+RESOLVED (A63): with `rBasin = 3/2000` this axiom asserts exactly A36's certified theorem
+after the θ↔t transfer, including the `∀ s` slab (`docs/proofs/theta_t_transfer.md` X.3;
+the transfer constants are exact, the underlying intervals remain Python-certified). -/
 axiom basin : ∀ z : Cfg, InBasin z →
     (∀ s : ℝ, CfgPacking s z → shat ≤ s) ∧ (CfgPacking shat z → z = zhat)
 
 /-- **[uniqueness transfer]** EVERY packing at side ŝ has, after a container symmetry and
-a relabelling, a representative that lies in some stratum.  STATUS: OPEN, and — finding F3
-— NOT implied by any written lemma: the selection lemma (L6/CC-2) produces a DIFFERENT
-minimiser (slides move squares), so it proves the bound but not uniqueness for the
-original packing.  Candidate route: slides at the optimal side move through packings at
-side ŝ; once the slid representative is known to be `zhat`, the basin equality clause
-applied along the (continuous) slide path forces the path constant.  Until this (or an
-equivalent) is written, the uniqueness half of S1 has no proof sketch on file. -/
+a relabelling, a representative that lies in some stratum.  STATUS RE-DIAGNOSED by A63
+(`docs/proofs/unique_transfer.md`): AS STATED this axiom follows from census
+exhaustiveness (A53 L3 — every packing has exactly one Young skeleton; take the D4
+normalisation).  The F3 hole did not close, it MOVED: `s_eleven_unique` then feeds an
+arbitrary packing to `stratum_kill`, whose ∀-packing strength at the K1-protected classes
+is not what H10's machinery will prove (see the quantifier caveat on `stratum_kill`).
+The full uniqueness architecture is now on file at drain-lemma rigor: selection CHAIN of
+CC-2 teleports to a teleport-stuck packing (degenerate H1 cases resolved — teleports need
+no corridor), stuck-packing kills (H10-stuck), residual+basin at the endpoint, and the
+COLLAPSE back along the chain via Theorem U (one-square rigidity of ẑ), the single new
+leaf, with an executable 11-certificate spec (re-insertion certificates at a rational
+side in T1's isolating interval, budget 1, `nofams` zone inside the basin box).
+Obligations ledger: U-O1..U-O4 in `unique_transfer.md` §5.  Kept as an axiom until the
+prose is independently verified. -/
 axiom unique_transfer : ∀ z : Cfg, CfgPacking shat z →
     ∃ (z' : Cfg) (f : RP → RP) (e : Equiv.Perm (Fin 11)) (i : StratumIdx),
       IsCtrSym shat f ∧ CfgPacking shat z' ∧ InStratum i shat z' ∧

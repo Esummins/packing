@@ -67,33 +67,33 @@ Verified after adoption: A60 workers run at **1–4 threads / 54–140 MB** agai
 0.3–1.8 GB** for the pre-T18 processes still on the machine.  **Launch nothing that does not go
 through one of those two paths.**
 
-**T18 is necessary but NOT sufficient — the second constraint is the machine's COMMIT LIMIT.**
-After the pinning was applied and verified active (1–4 threads), cover shard 1/2 died *again*:
+**T18 alone was not sufficient — but the second constraint (COMMIT) is now LIFTED.**
+History, kept because it explains the machinery: after the pinning was applied and verified
+active (1–4 threads), cover shard 1/2 still died —
 
     numpy ArrayMemoryError: Unable to allocate 37.9 MiB for an array with shape (150544, 33)
     ... lpbox.py:673 coverage()   <- the column oracle, not BLAS
 
-Measured at the time: commit **57.7 / 61.0 GB**, headroom 3.4 GB, while the pagefile held only
-212 MB of its 30 GB allocation and A60's own workers were 52–140 MB.  The committers are the
-lab's other attempts — a single `certify.py` reserving **6.7 GB** of commit against a 1.75 GB
-working set, plus two `tree57.py` at ~4 GB each.  So this is a **shared-resource** condition, not
-an A60 bug, and A60 cannot fix it by shrinking further.
+— because the machine's commit limit was 61.0 GB (31.7 GB RAM + a 30 GB pagefile cap) and the
+lab's other attempts sat against it (one `certify.py` reserving 6.7 GB of commit against a 1.75 GB
+working set) while A60's own workers were ~50 MB.
 
-Two responses, both in place:
+**2026-09-01, after the PI's restart:** the pagefile moved to `F:\pagefile.sys`, **25 GB initial /
+100 GB maximum**, so the commit limit is 56 GB now and grows on demand to ~130 GB.  The commit
+constraint is effectively gone; measured with four A60 shards plus A57/A61 running, headroom was
+17.4 GB with the pagefile still at 0 bytes used.  **Keep both mitigations anyway** — they are
+cheap and the failure modes are real:
 
-1. **A60 workers now survive an allocation failure.**  `tree60.defer()` catches `MemoryError`
-   (numpy's `_ArrayMemoryError` subclasses it) in all three phases, writes the node to
-   `results/a60_deferred_j<J>.jsonl`, sleeps 30 s and continues.  A deferred node is deliberately
-   **NOT** added to the phase's done-set, so the next pass re-attempts it — one failed 37.9 MiB
-   allocation no longer destroys a shard holding hundreds of queued children.  `board` surfaces a
-   `deferred` section listing any tag that is still unresolved; **treat a non-empty
+1. **BLAS pinning stays mandatory** (T18 is about thread arenas, not the commit limit, so a bigger
+   pagefile does not address it): `code/launch.ps1` and `code/blas1.py`.
+2. **`tree60.defer()` stays.**  It catches `MemoryError` (numpy's `_ArrayMemoryError` subclasses
+   it) in all three phases, writes the node to `results/a60_deferred_j<J>.jsonl`, sleeps 30 s and
+   continues.  A deferred node is deliberately **NOT** added to the phase's done-set, so a later
+   pass re-attempts it.  `board` surfaces a `deferred` section; **treat a non-empty
    `still_unresolved` list as outstanding work, never as progress.**
-2. The commit headroom check below stays, as a launch gate.
 
-**For the coordinator / machine owner (outside A60's remit):** the commit limit is RAM + pagefile
-= 31.7 + 30 ≈ 61 GB, and the pagefile is capped at 30 GB while barely being used (212 MB). Raising
-that cap would raise the commit limit directly and is the cheapest global fix. Changing a system
-setting is not something this attempt should do on its own.
+Concurrency: A60's cap is 4 heavy LP shards, and with commit lifted that cap is now the binding
+one rather than memory.  Measured at 4 shards: 1–3 threads and 46–148 MB per worker.
 
 Secondary guard — commit, not free physical RAM.  Watch the COMMIT charge:
 
@@ -115,11 +115,12 @@ Child solves use **columns-only** warm starts (`rows=[]`), per A54 W7 / A57 T4.
 
 | job | shard | state |
 |---|---|---|
-| `tree60.py cover` (j = 0 interior, budget 5, 767 attemptable) | 0/2 | **detached, running, BLAS-pinned**, `--wall 172800`, resumable |
-| `tree60.py cover` | 1/2 | **detached, running, BLAS-pinned** (was the T18 casualty; relaunched after the fix) |
-| `confine60.py --sq sq10` (j = 3, budget 3) | — | detached, the G-A60-2 route check |
-| `falsify60.py --cond sq7` (budget 4 pricing) | 0/2, 1/2 | stopped after 7 samples to free commit; data banked |
-| `sidezones60.py` | — | stopped: the route it measures is a dead end (see step 6) |
+| `tree60.py cover` (j = 0 interior, budget 5, 767 attemptable) | 0/4, 1/4, 2/4, 3/4 | **detached, running, BLAS-pinned + defer-resilient**, `--wall 172800` |
+
+Relaunched through `code\launch.ps1` after the PI's restart; all four shards skipped exactly the
+65 children already on disk (`skipped` in each progress file sums to 65) and picked up at four
+consecutive unfinished children.  Earlier phases (`falsify60`, `confine60`) are complete and their
+records are banked; `sidezones60` measured a dead-end route and is not to be rerun.
 
 Also on the machine and NOT to be disturbed: A57 (`tree57.py` k5_11 / k5_16 + `certify.py`) and
 A61 (`resolve61.py` ×2).  A29 untouched.

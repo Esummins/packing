@@ -56,14 +56,55 @@ time limit, which it checkpointed to `A56/results/nodes/<name>_state.json` and n
 A61's `enriched_warm` folds every orbit this lab ever produced for the node (warm57's A53/A54/A55/
 A57 sources, extended to A56's and A61's own `_state` checkpoints) as the *initial* column pool.
 
-Measured effect at the baseline shrink (τ0, the quantity P6(v)'s gate is stated on):
+Measured effect at the baseline shrink (τ0, the quantity P6(v)'s gate is stated on), all 12 rows:
 
-| row | budget | A53 cert τ0 | A61 τ0 (enriched) | slack0 | gate 0.5 |
+| row | budget | A53/A54 cert slack | A61 τ0 (enriched) | slack0 | gate 0.5 |
 |---|---|---|---|---|---|
-| k6_21 | 5 | 4.86910 | **4.500000** | 0.500 | pass (exactly at) |
-| k5_17 | 6 | 5.83669 | **5.333333** | 0.667 | pass |
+| k5_05 | 6 | 0.66623 | 5.000000 | **1.00000** | pass |
+| k5_17 | 6 | 0.33499 | 5.333333 | **0.66667** | pass |
+| k5_10 | 6 | 0.07749 | 5.500000 | **0.50000** | pass (exactly at) |
+| k6_20 | 5 | 0.10748 | 4.500000 | **0.50000** | pass (exactly at) |
+| k6_21 | 5 | 0.13090 | 4.500000 | **0.50000** | pass (exactly at) |
+| k6_29 | 5 | 0.36490 | 4.500000 | **0.50000** | pass (exactly at) |
+| k5_02 | 6 | 0.00055 | 5.605206 | 0.39479 | fail |
+| k5_12 | 6 | 0.16330 | 5.620000 | 0.38000 | fail |
+| k6_27 | 5 | 0.07888 | 4.620690 | 0.37931 | fail |
+| k5_03 | 6 | 0.16331 | 5.666667 | 0.33333 | fail |
+| k5_13 | 6 | 0.03745 | (see results) | | |
+| k5_14 | 6 | 0.13819 | (see results) | | |
 
-(Full table in `results/campaign61_progress.json`; see L3.)
+The enrichment moves every row, and by a large factor on the thin ones (k5_02: 0.00055 → 0.395,
+a 700×). Full records in `results/resolve61_*.json` and `results/campaign61_progress.json`.
+
+## L2b [M] — the enriched guard LP lands on EXACT rationals, and the modal value is the gate
+
+Four of the six rows that clear the gate land on τ0 = budget − 1/2 to 12 significant figures
+(k5_10: 5.500000000001527 at budget 6; k6_20: 4.500000000000028; k6_21: 4.500000000000409;
+k6_29: 4.499999999999991 at budget 5); the other two land on budget − 2/3 (k5_17: 5.333333333)
+and budget − 1 (k5_05: 5.0). The below-gate rows land on 5.605206, 5.62, 4.62069, 5.666667 —
+also exact rationals (5.62 = 281/50, 4.62069 = 134/29, 5.666667 = 17/3). So the guard LP is not
+drifting toward a continuum optimum: with a large enough column pool it snaps to a small-
+denominator rational floor, and for this family of strata that floor is **exactly** P6(v)'s
+repairability threshold.
+
+**Operational consequence (cost a full campaign pass to learn).** A61's first pass compared
+`slack0 < 0.5` in floating point and rejected k5_10 (slack0 = 0.4999999999984732) and k6_21
+(0.49999999999959144) — rows sitting exactly ON the law, refused on solver dust, each after a
+~25-minute LP. The gate now carries `--gate_tol` (1e-6). Any future use of a P6-style measured
+threshold against an LP optimum must do the same: these τ are exact rationals plus noise, and
+the interesting rows pile up precisely at the threshold rather than scattering around it.
+
+## L2c [M] — BLAS oversubscription, not RAM, is the failure mode (A57 T18, re-confirmed)
+
+A61's first launch lost k5_05's stage A twice to `MemoryError: bad allocation` with ~10 GB
+physically free, exactly the signature A57 banked in T18. Two mitigations were applied and both
+are kept: (i) single-thread pinning of every BLAS backend (`OPENBLAS/OMP/MKL/NUMEXPR_NUM_THREADS
+= 1`) set in the process environment BEFORE numpy or highspy is imported, in `resolve61.py`,
+`campaign61.py` and the child environment; (ii) a memory-bounded LP — `prune_cols = 3` (A14
+semantics: only ZERO-weight columns with strictly positive reduced cost are dropped, they are
+regenerable by the column oracle, and dropping them cannot lower τ, so it is a pure memory
+bound and not a change to the LP's value) plus a `--max_atoms` cap on the initial pool and a
+`lp_robust` ladder that steps the pool down rather than losing the stratum.
 
 ## L3 [M] — the A61 pipeline and its gate
 

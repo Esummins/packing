@@ -5,6 +5,14 @@ $base = Split-Path -Parent $PSScriptRoot
 $log  = "$base\logs\scaleup.log"
 $py   = "C:\Users\esumm\AppData\Local\Python\bin\python.exe"
 if (-not (Test-Path $py)) { $py = "python" }
+# T18 pinning, set HERE so every child this script starts inherits it.  launch.ps1 sets these in
+# its own process, but the deepen.py launch below is a direct Start-Process from the scaler and
+# would otherwise run unpinned -- ~20 OpenBLAS threads per worker, which is what took out a tree
+# shard and a deepen job simultaneously.
+$env:OPENBLAS_NUM_THREADS = "1"
+$env:OMP_NUM_THREADS = "1"
+$env:MKL_NUM_THREADS = "1"
+$env:NUMEXPR_NUM_THREADS = "1"
 function Note($m) {
   # Add-Content can lose a line to file-lock contention when two processes write at once,
   # which is how the "launched ..." entries went missing during the scaler outage.  Retry.
@@ -22,8 +30,29 @@ function Note($m) {
 # false positive already cost one scaler -- checks looked like restarts, and the guard would make
 # every genuine new instance exit.
 $mine = $PID
+$pidFile = "$base\logs\scaleup.pid"
+# Command-line matching alone is NOT enough, and the earlier fix was still wrong: a status check
+# run as `powershell -NonInteractive -Command '... -File ...\scaleup.ps1 ...'` contains BOTH
+# '-File' and 'scaleup.ps1' in its own command line, so the guard saw a tool session as a running
+# scaler and made the genuine one exit ("another scaler (pid 7368) is older" -- 7368 was a
+# transient tool session).  Belt and braces now: a pidfile is the primary record, and the
+# command-line scan additionally excludes -NonInteractive (every tool session sets it) and self.
+$isLiveScaler = {
+  param($procId)
+  if (-not $procId) { return $false }
+  $p = Get-CimInstance Win32_Process -Filter "ProcessId=$procId" -ErrorAction SilentlyContinue
+  return ($p -and $p.Name -like 'powershell*' -and $p.CommandLine -like '*scaleup.ps1*' -and
+          $p.CommandLine -notlike '*-NonInteractive*' -and $p.ProcessId -ne $mine)
+}
+$prior = $null
+if (Test-Path $pidFile) { $prior = (Get-Content $pidFile -ErrorAction SilentlyContinue | Select-Object -First 1) -as [int] }
+if (& $isLiveScaler $prior) {
+  Note "scaler pid $prior already running (pidfile); this one ($mine) exits"
+  exit 0
+}
 $others = @(Get-CimInstance Win32_Process -Filter "Name like 'powershell%'" |
-            Where-Object { $_.CommandLine -like '*-File*scaleup.ps1*' -and $_.ProcessId -ne $mine } |
+            Where-Object { $_.CommandLine -like '*-File*scaleup.ps1*' -and $_.ProcessId -ne $mine -and
+                           $_.CommandLine -notlike '*-NonInteractive*' } |
             Sort-Object CreationDate)
 if ($others.Count -gt 0) {
   $oldest = $others[0]
@@ -32,6 +61,7 @@ if ($others.Count -gt 0) {
     exit 0
   }
 }
+Set-Content -Path $pidFile -Value $mine -Encoding utf8
 
 
 function A57Count {
@@ -68,12 +98,15 @@ Note "scaleup started; A57=$(A57Count) A56running=$(A56Running)"
 for ($i = 0; $i -lt 5000; $i++) {
   $cap = if (A56Running) { 3 } else { 5 }
   $now = A57Count
-  # Never start a worker without commit headroom for it.  Budget ~4.5 GB per new worker plus a
-  # 6 GB cushion for OTHER campaigns -- A60 lost a shard to a 38 MiB allocation while A57 held
-  # its reservations, so the cushion is not ours to spend.
+  # Commit gate.  The PI moved the pagefile to F:\pagefile.sys at 25 GB initial / 100 GB max, so
+  # the commit limit now GROWS ON DEMAND to ~130 GB and commit is no longer the binding
+  # constraint (it was: 61 GB limit, 57.9 GB used, and A60 lost a shard to a 38 MiB allocation).
+  # The gate stays as a safety net -- a growing pagefile still takes time to extend, and a burst
+  # of launches into a momentarily tight window would still hurt other campaigns -- but the
+  # threshold drops from 10.5 GB to 6 GB: roughly one worker's peak plus a small cushion.
   $commitFree = CommitFreeGB
-  if ($commitFree -lt 10.5) {
-    Note "commit headroom ${commitFree} GB < 10.5 GB: NOT launching (running=$now cap=$cap)"
+  if ($commitFree -lt 6.0) {
+    Note "commit headroom ${commitFree} GB < 6 GB: NOT launching (running=$now cap=$cap)"
     Start-Sleep -Seconds 180
     continue
   }
