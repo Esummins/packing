@@ -113,19 +113,19 @@ for ($i = 0; $i -lt 5000; $i++) {
   if ($now -lt $cap -and $qi -lt $queue.Count) {
     $j = $queue[$qi]; $qi++
     & powershell -ExecutionPolicy Bypass -File "$base\code\launch.ps1" -Name $j.n -Shard $j.s `
-        -Tag L1 -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000 | Out-Null
+        -Tag G1 -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000 | Out-Null
     Note "cap=$cap running=$now -> launched $($j.n) shard $($j.s)"
     Start-Sleep -Seconds 45
   } elseif ($now -lt $cap) {
     # L1 queue exhausted: keep freed slots on depth 2.  deepen.py owns every ALIVE-at-LP /
     # cert-FAIL record of a level-1 key and is resumable, so re-launching it is safe.
-    foreach ($k in @('k5_11_interior_L1', 'k5_16_interior_L1')) {
+    foreach ($k in @('k5_11_interior_G1', 'k5_16_interior_G1')) {
       if ((A57Count) -ge $cap) { break }
       $running = @(Get-CimInstance Win32_Process -Filter "Name like 'python%'" |
                    Where-Object { $_.CommandLine -like "*deepen.py*$k*" }).Count
       if ($running -eq 0) {
         Start-Process -FilePath $py -ArgumentList @('-u', "$base\code\deepen.py", '--key', $k,
-            '--levels', '3', '--time_limit', '240', '--cert_time', '240') -WorkingDirectory $base `
+            '--levels', '3', '--time_limit', '240', '--cert_time', '240', '--pin_delta', '0.01') -WorkingDirectory $base `
             -RedirectStandardOutput "$base\logs\deepen_$k.out" `
             -RedirectStandardError "$base\logs\deepen_$k.err" -WindowStyle Hidden | Out-Null
         Note "cap=$cap -> launched deepen $k"

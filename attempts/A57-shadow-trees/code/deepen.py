@@ -20,7 +20,7 @@ Usage:
     python code/deepen.py --key k5_16_interior_L1     # every ALIVE-at-LP / cert-FAIL record
     python code/deepen.py --key k5_16_interior_L1 --id k5_16_interior_Y0017
 """
-import argparse, glob, json, os, subprocess, sys, time
+import argparse, glob, json, math, os, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, ".."))
@@ -76,6 +76,7 @@ def main():
     ap.add_argument("--id", default=None,
                     help="one child id (default: every ALIVE-at-LP and cert-FAIL record)")
     ap.add_argument("--levels", type=int, default=3, help="bisections (3 -> 8 sub-boxes)")
+    ap.add_argument("--pin_delta", type=float, default=1e-2, help="slack pin cores (A63 B'); see tree57")
     ap.add_argument("--time_limit", type=float, default=240)
     ap.add_argument("--cert_time", type=float, default=240)
     ap.add_argument("--rounds", type=int, default=2)
@@ -87,7 +88,8 @@ def main():
 
     name = a.key.split("_interior")[0].split("_side")[0].split("_corner")[0]
     slots = [tuple(p) for p in json.load(open(os.path.join(A53, "results", "name_to_slots.json")))[name]]
-    pins = [Box(x, x, y, y, 0.0, 0.0) for (x, y) in slots]
+    hh = 0.0 if a.pin_delta <= 0 else a.pin_delta / math.sqrt(2.0)
+    pins = [Box(x - hh, x + hh, y - hh, y + hh, 0.0, 0.0) for (x, y) in slots]
     alive = []
     for p in glob.glob(os.path.join(BASE, "results", f"tree_{a.key}_s*.jsonl")):
         for line in open(p):
@@ -141,7 +143,7 @@ def main():
                 log("    wall_seconds reached; stopping cleanly"); break
             c = b.core()
             rec = dict(id=cid, parent=par["id"], kind="YES-D2", budget=budget,
-                       box=b.to_json(), a=(float(c.a) if c else None))
+                       box=b.to_json(), a=(float(c.a) if c else None), pin_delta=a.pin_delta)
             st, info = classify(b, pins, slots)
             rec["pin"] = st; rec["pin_info"] = info
             hyp = Hyp(pins + [b], [])

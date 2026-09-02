@@ -725,3 +725,112 @@ slot spacing is 1.0 so no slots overlap, but A53 V9 / A55 E4 class-containment r
 exact slots and should be re-checked before the census is reused; (ii) any child found at
 eta > -0.167 would flip to alive at this delta — the natural remedy is depth-2 refinement, which
 empirically returns eta <= -0.667 (T11), so the tree already has the tool.
+
+## T22 [M] — route (a) 4D cost probe (soundness-conditional)
+
+Requested by the coordinator to price route (a) against T21's 8 desktop-days for the slack-core
+grid.  `code/to_param.py` converts an A57 leaf to `parametric-kill-certificate-v1`, bypassing
+`make_param`'s forced anchor rule.  The interior cover core gets the affine centre the cover
+actually implies, and the reconstruction is **exact**:
+
+    zone [c0, s - c0], c0 = 11/10, 12 columns
+    centre_x(s) = alpha + beta s,  beta = (i + 1/2)/12,  alpha = c0 (1 - 2 beta)
+    verified as Fractions: beta = 19/24, alpha = -77/120 reproduces kx = 4855383/2000000 exactly
+                           beta = 13/24, alpha = -11/120 reproduces ky = 4016841/2000000 exactly
+
+Pins keep their slot anchors; atoms use make_param's default nearest-wall rule.  **This is a cost
+probe, not a kill**: the cover-invariance lemma (that the cover stays a cover for every s) is with
+the theory lead, and a PASS here would still be conditional on it.
+
+| leaf | atoms | eta | 4D result, s in [3.82, s0], depth 48, margin 0 | wall |
+|---|---|---|---|---|
+| `k5_11_interior_Y0275` | 4 | -1.000 | **FAIL** — 205550 boxes, 479 s-cells, **0 HOLES**, 8 undecided | **14 s** |
+| `k5_11_interior_Y0377` | 159 | -2.000 | running past 340 s CPU | > 20x the 4-atom leaf |
+| `k5_16_interior_Y0593` | 363 | -0.250 | queued | — |
+
+**Two findings already decisive.**
+
+1. **Cost scales steeply with the atom count.**  4 atoms cost 14 s; 159 atoms had not finished at
+   340 s CPU, i.e. > 24x for 40x the atoms.  A57's leaves are mostly small (the NO children carry
+   3 atoms, many YES leaves 4-30), but the eps_geo-repaired ones carry 99-363.  A blanket 4D pass
+   over ~2300 leaves is therefore dominated by the fat tail, not the median.
+
+2. **The failure is at the BOTTOM of the window and is the T14 signature.**  Witnesses cluster at
+   s in [3.822397, 3.823066] — the far end from s0 — with **0 holes** and worst mass 1.2468 >= 1,
+   i.e. undecided boxes, not uncovered ones.  That is the anchoring being wrong far from s0, not
+   the geometry failing: the measure is tuned at s0 and the nearest-wall rule drags atoms badly
+   over a 1.5 % change in s.  A56 ships `--beta-mid` and `--overrides` precisely because anchoring
+   choice decides completeness (soundness.md P3: "a bad anchoring can only make the verification
+   FAIL").
+
+**So route (a) is not "convert and verify" — it is "convert, verify, and SEARCH ANCHORINGS until
+PASS", per leaf, over ~2300 leaves**, with each attempt costing seconds to many minutes.  Even
+before the pending two leaves land, that is a materially worse profile than T21's slack-core grid,
+whose cost is four ordinary tree runs of already-proven machinery.
+
+## T23 [M] — the hybrid window route: gate, grid, emission switch
+
+### (1) GATE PASSED — V9/E4 survive a fattened pin
+
+At delta = 1e-2 the pin box half-width is h = 7.0711e-3 and the pin core half-side is a = 0.49.
+
+| check | value | verdict |
+|---|---|---|
+| min Chebyshev separation between distinct slots, over the whole census | **1.000000** (k6_00) | — |
+| h-balls around distinct slots disjoint? | 2h = 1.4142e-2 < 1.0 | **yes** |
+| fattened pin CORES pairwise disjoint? | 2a = 0.98 < 1.0 | **yes** |
+| can one centre lie in two pin boxes (the pinguard "parent" failure)? | needs 2h >= 1.0 | **no** |
+| A55 E4: every open k <= 4 class inside one of {k5_11, trump5, k5_16} | re-checked class by class | **holds** |
+
+The containment argument is monotone and so survives fattening for free: if S subset T as slot
+sets then a packing with a square within h of every slot of T also has one within h of every slot
+of S, i.e. stratum_h(T) subset stratum_h(S).  Nothing in V9/E4 depends on the pin radius, and the
+separation numbers show the fattening is three orders of magnitude away from making distinct
+slots interfere.  **Gate clean.**
+
+### (2) The grid, and the switch
+
+rho = 1125896618508387/112589990684262500 = 9.99997079e-3, slab relative width rho/(5/2) =
+3.999988e-3.  Sides on the 1/250000 grid, stepped at 95 % of a slab so consecutive slabs OVERLAP:
+
+| side | s | covers |
+|---|---|---|
+| 1 | 969271/250000 = 3.877084 | (3.861637, 3.877084] |
+| 2 | 965601/250000 = 3.862404 | (3.847016, 3.862404] |
+| 3 | 192389/50000 = 3.847780 | (3.832450, 3.847780] |
+| 4 | 958303/250000 = 3.833212 | (3.817940, 3.833212] |
+
+Four sides cover down to 3.81794 < 3.82.  **Emission switched**: `tree57.py` and `deepen.py` take
+`--pin_delta` (default **1e-2**), every record carries `pin_delta` and `side`, and the campaign
+now runs under tag **G1** = grid side 1 so that delta = 0 and delta = 1e-2 records can never be
+mixed (a delta = 0 logic kill is not valid at delta = 1e-2 -- the pin core is smaller, so 331 of
+k5_11's 344 contradictory boxes survive and 13 become ordinary `ok` children).
+
+**Per-side C-check** (A63's per-box C-check, pure geometry, seconds per side).  The cover shrinks
+at the lower sides because the zone [c0, s - c0] does:
+
+| side | k5_11 free / ok | k5_16 free / ok |
+|---|---|---|
+| 1 | 331 / 821 | 238 / 914 |
+| 2 | 336 / 816 | 245 / 907 |
+| 3 | 264 / 704 | 184 / 784 |
+| 4 | 273 / 695 | 191 / 777 |
+
+### (3) Revised estimate
+
+Across four sides and both strata: **6418 `ok` children needing an LP, 2062 free logic kills, 8 NO
+children.**  Side 1 alone is 1735, so the grid is **3.70x a single side, not 4x**.
+
+| scenario | children | estimate |
+|---|---|---|
+| no skip list, 3 workers | 6418 | 10.7 desktop-days |
+| no skip list, 5 workers | 6418 | **6.4 desktop-days** |
+| skip list exempts 20 % of sides 2-4 | 5481 | 5.4 days |
+| skip list exempts 30 % | 5013 | 5.0 days |
+| skip list exempts 50 % | 4076 | 4.0 days |
+
+So it lands **under** the naive 8 days even with no skip list at all, and the skip list is what
+takes it toward 4-5.  Honest caveat: side 1 is NOT free -- the ~300 children already emitted at
+delta = 0 carry certificates whose cores are eps-fat, so they must be re-emitted; what carries
+over for free is the accumulated warm-start column pool (G1 started warm at 3522 atoms) and,
+after the C-check, the logic kills.

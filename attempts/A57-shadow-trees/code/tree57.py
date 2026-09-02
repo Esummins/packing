@@ -112,9 +112,17 @@ def ghost_dist(b, G):
 
 
 # ------------------------------------------------------------------ children
-def build_children(name, zone, w, nth, cw, a_min):
+def build_children(name, zone, w, nth, cw, a_min, pin_delta=0.0):
+    """pin_delta > 0 emits SLACK pin cores (A63 route (b) / T21): a square pin box of half-width
+    delta/sqrt(2) gives core half-side a = 1/2 - delta and hence rho = delta, so one fixed-side
+    certificate transfers to a slab of relative width delta/(5/2) instead of ~4e-10.  It also
+    weakens the pin hypothesis (the pinned square need only lie within delta/sqrt(2) of the slot),
+    which ENLARGES the stratum -- sound, and a strictly stronger kill.  Gate re-checked (T23):
+    min slot separation is 1.0, 2h = 1.41e-2 and 2a = 0.98 are both below it, so the h-balls and
+    the fattened cores stay pairwise disjoint and no centre can lie in two pin boxes."""
     slots = [tuple(p) for p in json.load(open(os.path.join(A53, "results", "name_to_slots.json")))[name]]
-    pins = [Box(x, x, y, y, 0.0, 0.0) for (x, y) in slots]
+    hh = 0.0 if pin_delta <= 0 else pin_delta / math.sqrt(2.0)
+    pins = [Box(x - hh, x + hh, y - hh, y + hh, 0.0, 0.0) for (x, y) in slots]
     rect = zones(S0F, cw)[zone]
     boxes, bad, grid = cover(rect, S0F, w, nth, a_min)
     G = ghost_placements()
@@ -265,6 +273,10 @@ def main():
     ap.add_argument("--w", type=float, default=0.15, help="centre-cell width")
     ap.add_argument("--nth", type=int, default=8, help="theta cells, uniform in t")
     ap.add_argument("--a_min", type=float, default=0.34)
+    ap.add_argument("--pin_delta", type=float, default=1e-2,
+                    help="slack pin cores: core half-side 1/2 - delta, so rho = delta and one "
+                         "certified side covers a slab of relative width delta/2.5 (A63 B'). "
+                         "0 = the library's eps-fat pins (rho ~ 1e-9, no usable window).")
     ap.add_argument("--shard", default="0/1")
     ap.add_argument("--sample_theta", type=int, default=0,
                     help="diagnostic: instead of a shard, run this many children spread EVENLY "
@@ -292,7 +304,7 @@ def main():
     ap.add_argument("--lp_only", action="store_true")
     a = ap.parse_args()
 
-    kids, bad, slots, rect, grid = build_children(a.name, a.zone, a.w, a.nth, a.cw, a.a_min)
+    kids, bad, slots, rect, grid = build_children(a.name, a.zone, a.w, a.nth, a.cw, a.a_min, a.pin_delta)
     si, sn = map(int, a.shard.split("/"))
     key = f"{a.name}_{a.zone}_{a.tag}"
     outdir = os.path.join(BASE, "results", "tree", key)
@@ -388,7 +400,8 @@ def main():
             log("    wall_seconds reached; stopping cleanly"); break
         node_path = os.path.join(outdir, f"{kid['id']}.json")
         rec = dict(id=kid["id"], kind=kid["kind"], budget=kid["budget"], zone=a.zone,
-                   a=kid["a"], ghost_dist=round(kid["score"], 5))
+                   a=kid["a"], ghost_dist=round(kid["score"], 5), pin_delta=a.pin_delta,
+                   side=str(S0F))
         if kid["kind"] == "YES":
             rec["box"] = kid["box"].to_json()
         canary = trump_realizes(kid["hyp"], slots)
