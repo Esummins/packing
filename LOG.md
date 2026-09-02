@@ -2067,3 +2067,27 @@ affordable cost estimate for closing 3.84.
 - Discipline: two light python processes max, no LP; A57/A60/A61/A81/A82 untouched; frozen verifiers untouched; certs/ new
   files only; depgraph notes on D.SLAB + E.A36 (owners unchanged), svg re-rendered. Files: attempts/A83-contraction-tube/*,
   certs/verify_tube.py, certs/tube_*.json, docs/proofs/contraction_tube.md, lean/tube_obligation_A83.md, REGISTRY row.
+
+## 2026-09-02 A81-slack-verify (Fable lead + 1 Opus chore, <= 2 slots) -- done-mixed (T1 answered NO: Lemma W'''' measured; T2 not entered)
+- T1 VERDICT FIRST: slack does NOT buy verifiability. Complete hint trees (code/hintbatch81.py = A77 builder + beta/U/zone targets) on the
+  k4_08 rung-5 measure (slack 1.0, 196 atoms, 63% of the mass at depth >= 0.05): r(d) = 0.84-0.87 aggregate over d 8-14 (136 roots, 2.92M
+  nodes, 64 roots at the 60k cap - the same count as corners4) and 0.79-0.88 on root 7,10 to depth 21 (1.15M nodes) - ABOVE corners4's tight
+  measure (0.75-0.86, slack 0.042). Tree-size law unchanged: ~1e9-3e10 nodes to the measure's own 0.02-0.05 scale, 1e15 to its 5e-4 tail.
+  Lemma W'''' (pair_kill.md 6.10): retention is set by the frontier structure (atom handoff loci + the beta U-bonus layer at the 7 widened
+  boxes, a source corners4 never had), not by slack; open boxes on the deep root sit at 1.968 vs target 2. Redirect: conditioning trees.
+- FINDING [T exact] Corollary S-08: the k4_08 images of Trump have Sigma m2 = 7 against ANY positively widened class box (member 4 tangent to
+  TL(0,0) at -2.96e-7 = the dilation gap; +1.69e-3 at eps_box = 1/833) => plain boosted k4_08 value 28 = threshold at every beta (A66/A71/A80's
+  "27 = 21+6 beta" was a unit-box artifact); the exact-stratum row is NECESSARY and BOTH images' rows are mandatory. Measured 28.000000.
+- FINDING [M] rung 1 is DEAD in certificate semantics: both rung-1 rows -> 28.000000, gamma = 0; exact dodge = the two image families at
+  weight 1/2 each (42 pairs, sum z = 21, 10.0 in-zone + one variant pair per image) halve every per-image counting row. Widened two-image
+  ladder: 28.000 / 28.000 / 27.667 / 26.962 / ~26.06 (budget) / 25.045 at plain, k1..k5 (gains 0, 0.33, 0.70, ~0.9, ~1.0 - accelerating).
+- FINDING [M] the U-row's slack is ultra-shallow: mixed-depth emission (eta >= 5e-4, A74 menu + 0.1) under the rung-5 rows gives
+  W2 = 27.000000 (sharp 25.045): the exclusion lives in 1e-4 zones with the adversary parked at 3e-4 (A76 saturation law), so only atoms of
+  margin < 3e-4 cash it - exactly the eta-fine structure W''' prices. Coarse measures are less complete: 1848 float holes at cap 60k (corners4: 41).
+- Machinery (emission-side; frozen verifiers untouched): code/pairlp_u.py (U-rows as hard rows in EVERY model, duality gamma = discount,
+  GATE = W2 + sum gamma cap, widened-box m2, candidate ladder + adversary support dumps), code/emit81.py (v2.1 candidate form: `urow` block =
+  rung/cap/per-image gamma + (t,cx,cy) zone boxes with both tilt branches at uprights; trump5 canary + U-row canary, both SAFE x3),
+  code/catalog81.py, code/retention81.py. No v2.1 verifier written (T2 not entered).
+- Discipline: one LP at a time, BLAS pinned, 6 GB gate held (rung 5 waited 23 min); builder 4 procs; A57/A60/A61 untouched; hinted 70+ MB
+  certs gitignored. Files: attempts/A81-slack-verify/{code,results,certs,logs}, docs/proofs/pair_kill.md 6.10, docs/proofs/u_ladder.md 6.2
+  addendum, depgraph C.K4TIER (A81 note, owner closed) + svg, REGISTRY row. notes/findings.md blocked by the harness (findings in 6.10).

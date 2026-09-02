@@ -1,0 +1,29 @@
+[13:56:41] A81 mixed-depth LP + U-row: cls=k4_08 beta=1 levels=eta=0.1@1.0000 eta=0.05@1.0151 eta=0.02@1.0241 eta=0.008@1.0277 eta=0.002@1.0295 eta=0.0005@1.0300
+[13:56:41] headroom OK: ullAvailPageFile=9.78 GB, ullAvailPhys=10.65 GB (need > 6.0 GB)
+[13:56:41] class k4_08: k=4 N=7 m=7 threshold=21 + beta*7
+[13:56:41] control k4_08: core-free=True disjoint=True min_gap=1.098e-07 sum_m2=6 box_meets=[2, 2, 2, 2, 2, 2, 1]
+[13:56:41] catalog |S|=345 {"n_placements": 345, "imported": 345, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 1.1513348252556455e-07, "m_histogram": {"1": 77, "2": 219, "3": 46, "4": 3}}
+[13:56:41] widened boxes h=0.501200 (eps_box=1/833 r_infl=0): 7 placements changed mask; m histogram {"1": 76, "2": 214, "3": 52, "4": 3}
+[13:56:41] disjoint pairs: 30151 (m2>0: 3304)
+[13:56:41] U-row id: rung 1 cap 10, in-zone placements per zone [4, 4, 5, 4, 4, 4, 5], ghost pairs 285, image family Sigma m2 (widened) = 7 -> family pair value 28 vs threshold 28
+[13:56:41] U-row diag: rung 1 cap 10, in-zone placements per zone [5, 4, 5, 4, 4, 4, 5], ghost pairs 309, image family Sigma m2 (widened) = 7 -> family pair value 28 vs threshold 28
+[13:56:51] family L0 eta=0.1 rhs=1.0000: raw=359655 distinct=45696 maximal=1464 (edge-int 38620 kept of 50448, skipped=False) depth mean 45.7 max 63 (10.1s)
+[13:57:01] family L1 eta=0.05 rhs=1.0151: raw=359655 distinct=52684 maximal=1579 (edge-int 38620 kept of 59546, skipped=False) depth mean 56.3 max 73 (10.6s)
+[13:57:13] family L2 eta=0.02 rhs=1.0241: raw=359655 distinct=57161 maximal=1565 (edge-int 38620 kept of 65500, skipped=False) depth mean 63.7 max 80 (11.2s)
+[13:57:24] family L3 eta=0.008 rhs=1.0277: raw=359655 distinct=58623 maximal=1569 (edge-int 38620 kept of 67446, skipped=False) depth mean 66.8 max 83 (11.3s)
+[13:57:36] family L4 eta=0.002 rhs=1.0295: raw=359655 distinct=59363 maximal=1612 (edge-int 38620 kept of 68590, skipped=False) depth mean 67.8 max 84 (11.7s)
+[13:57:47] family L5 eta=0.0005 rhs=1.0300: raw=359655 distinct=59570 maximal=1578 (edge-int 38620 kept of 68822, skipped=False) depth mean 68.3 max 84 (11.7s)
+[13:57:47] headroom OK: ullAvailPageFile=6.83 GB, ullAvailPhys=9.63 GB (need > 6.0 GB)
+[13:57:48] seed rows=3182 nnz=3947912 cols=30151
+[13:57:51] r1: value=36332.598744 excess=22755.053882 lvl_relmax=13866.1008,21704.9547,22099.1210,22756.0539,22716.0686,22706.0943 viol=135 supz=1301 rows=3182 nnz=3947912 purged=0 uload=['10.000', '10.000'] (lp 2.9s, tot 4s)
+[13:57:51] r1: W2=71.000000 gamma=['1.00000', '1.00000'] GATE=W2+sum(gamma*cap)=91.000000 n_ub=1208 exact (unpriced dual mass; gate needs n_ub=0)
+[13:57:57] r2: value=6130.731099 excess=3324.998465 lvl_relmax=2623.0390,3325.9985,3296.6315,3285.0259,3279.2537,3277.8138 viol=248 supz=287 rows=3317 nnz=4285591 purged=0 uload=['1.024', '10.000'] (lp 4.7s, tot 9s)
+[13:57:57] r2: W2=59.250000 gamma=['0.00000', '1.00000'] GATE=W2+sum(gamma*cap)=69.250000 n_ub=202 exact (unpriced dual mass; gate needs n_ub=0)
+[13:58:04] r3: value=1461.668116 excess=564.525668 lvl_relmax=363.0957,565.5257,560.5514,558.5781,557.5966,557.3517 viol=260 supz=140 rows=3561 nnz=4586623 purged=0 uload=['1.024', '0.037'] (lp 7.2s, tot 17s)
+[13:58:04] r3: W2=50.500000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=50.500000 n_ub=47 exact (unpriced dual mass; gate needs n_ub=0)
+[13:58:21] r4: value=249.559193 excess=182.296716 lvl_relmax=183.2967,181.3261,179.7388,179.1060,178.7913,178.7128 viol=208 supz=123 rows=733 nnz=1307819 purged=3088 uload=['0.510', '0.354'] (lp 16.0s, tot 34s)
+[13:58:21] r4: W2=38.611111 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=38.611111 n_ub=7 exact (unpriced dual mass; gate needs n_ub=0)
+[13:58:28] r5: value=34.167080 excess=2.422214 lvl_relmax=2.5627,2.9756,2.9831,3.4222,3.4162,3.4147 viol=300 supz=107 rows=941 nnz=1671227 purged=0 uload=['0.000', '1.119'] (lp 6.3s, tot 40s)
+[13:58:28] r5: W2=33.346154 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=33.346154 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[13:58:39] r6: value=32.511410 excess=1.360508 lvl_relmax=1.7603,2.1527,2.3312,2.3605,2.3564,2.3553 viol=300 supz=109 rows=1241 nnz=2490992 purged=0 uload=['0.754', '0.198'] (lp 10.8s, tot 52s)
+[13:58:39] r6: W2=31.761261 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=31.761261 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)

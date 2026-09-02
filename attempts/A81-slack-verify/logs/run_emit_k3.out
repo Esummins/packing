@@ -1,0 +1,93 @@
+[16:07:01] A81 mixed-depth LP + U-row: cls=k4_08 beta=1 levels=eta=0.1@1.0000 eta=0.05@1.0151 eta=0.02@1.0241 eta=0.008@1.0277 eta=0.002@1.0295 eta=0.0005@1.0300
+[16:07:01] headroom low: 4.62 GB <= 6.0 GB, waiting...
+[16:07:11] headroom low: 4.44 GB <= 6.0 GB, waiting...
+[16:07:21] headroom low: 4.41 GB <= 6.0 GB, waiting...
+[16:07:31] headroom low: 4.96 GB <= 6.0 GB, waiting...
+[16:07:41] headroom low: 4.65 GB <= 6.0 GB, waiting...
+[16:07:51] headroom low: 4.31 GB <= 6.0 GB, waiting...
+[16:08:01] headroom low: 4.31 GB <= 6.0 GB, waiting...
+[16:08:11] headroom low: 4.17 GB <= 6.0 GB, waiting...
+[16:08:21] headroom low: 4.14 GB <= 6.0 GB, waiting...
+[16:08:31] headroom low: 3.89 GB <= 6.0 GB, waiting...
+[16:08:41] headroom low: 3.84 GB <= 6.0 GB, waiting...
+[16:08:51] headroom low: 3.76 GB <= 6.0 GB, waiting...
+[16:09:01] headroom low: 3.76 GB <= 6.0 GB, waiting...
+[16:09:11] headroom OK: ullAvailPageFile=6.06 GB, ullAvailPhys=7.79 GB (need > 6.0 GB)
+[16:09:11] class k4_08: k=4 N=7 m=7 threshold=21 + beta*7
+[16:09:11] control k4_08: core-free=True disjoint=True min_gap=1.098e-07 sum_m2=6 box_meets=[2, 2, 2, 2, 2, 2, 1]
+[16:09:11] catalog |S|=345 {"n_placements": 345, "imported": 345, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 1.1513348252556455e-07, "m_histogram": {"1": 77, "2": 219, "3": 46, "4": 3}}
+[16:09:11] widened boxes h=0.501200 (eps_box=1/833 r_infl=0): 7 placements changed mask; m histogram {"1": 76, "2": 214, "3": 52, "4": 3}
+[16:09:11] disjoint pairs: 30151 (m2>0: 3304)
+[16:09:11] U-row id: rung 3 cap 3, in-zone placements per zone [4, 4, 5, 4, 4, 4, 5], ghost pairs 285, image family Sigma m2 (widened) = 7 -> family pair value 28 vs threshold 28
+[16:09:11] U-row diag: rung 3 cap 3, in-zone placements per zone [5, 4, 5, 4, 4, 4, 5], ghost pairs 309, image family Sigma m2 (widened) = 7 -> family pair value 28 vs threshold 28
+[16:09:28] family L0 eta=0.1 rhs=1.0000: raw=359655 distinct=45696 maximal=1464 (edge-int 38620 kept of 50448, skipped=False) depth mean 45.7 max 63 (16.8s)
+[16:09:45] family L1 eta=0.05 rhs=1.0151: raw=359655 distinct=52684 maximal=1579 (edge-int 38620 kept of 59546, skipped=False) depth mean 56.3 max 73 (17.7s)
+[16:10:03] family L2 eta=0.02 rhs=1.0241: raw=359655 distinct=57161 maximal=1565 (edge-int 38620 kept of 65500, skipped=False) depth mean 63.7 max 80 (18.1s)
+[16:10:21] family L3 eta=0.008 rhs=1.0277: raw=359655 distinct=58623 maximal=1569 (edge-int 38620 kept of 67446, skipped=False) depth mean 66.8 max 83 (17.6s)
+[16:10:40] family L4 eta=0.002 rhs=1.0295: raw=359655 distinct=59363 maximal=1612 (edge-int 38620 kept of 68590, skipped=False) depth mean 67.8 max 84 (18.8s)
+[16:10:59] family L5 eta=0.0005 rhs=1.0300: raw=359655 distinct=59570 maximal=1578 (edge-int 38620 kept of 68822, skipped=False) depth mean 68.3 max 84 (18.9s)
+[16:10:59] headroom OK: ullAvailPageFile=6.92 GB, ullAvailPhys=9.12 GB (need > 6.0 GB)
+[16:11:00] seed rows=3182 nnz=3947912 cols=30151
+[16:11:06] r1: value=36318.598744 excess=22755.053882 lvl_relmax=13866.1021,21704.9547,22099.1210,22756.0539,22716.0686,22706.0943 viol=135 supz=1300 rows=3182 nnz=3947912 purged=0 uload=['3.000', '3.000'] (lp 5.5s, tot 7s)
+[16:11:06] r1: W2=71.000000 gamma=['1.00000', '1.00000'] GATE=W2+sum(gamma*cap)=77.000000 n_ub=1208 exact (unpriced dual mass; gate needs n_ub=0)
+[16:11:15] r2: value=6123.731099 excess=3318.102426 lvl_relmax=2616.0390,3319.1024,3289.7963,3278.2148,3272.4546,3271.0177 viol=249 supz=289 rows=3317 nnz=4285165 purged=0 uload=['1.024', '3.000'] (lp 8.6s, tot 17s)
+[16:11:15] r2: W2=59.250000 gamma=['0.00000', '1.00000'] GATE=W2+sum(gamma*cap)=62.250000 n_ub=202 exact (unpriced dual mass; gate needs n_ub=0)
+[16:11:30] r3: value=1461.670327 excess=564.539926 lvl_relmax=363.0998,565.5399,560.5573,558.5839,557.6024,557.3576 viol=260 supz=139 rows=3562 nnz=4589580 purged=0 uload=['0.000', '0.034'] (lp 13.9s, tot 31s)
+[16:11:30] r3: W2=50.500000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=50.500000 n_ub=47 exact (unpriced dual mass; gate needs n_ub=0)
+[16:12:04] r4: value=249.678241 excess=182.250854 lvl_relmax=183.2509,181.3261,179.8027,179.1697,178.8549,178.7764 viol=202 supz=122 rows=642 nnz=1073071 purged=3179 uload=['0.000', '0.405'] (lp 33.7s, tot 66s)
+[16:12:04] r4: W2=38.750000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=38.750000 n_ub=7 exact (unpriced dual mass; gate needs n_ub=0)
+[16:12:13] r5: value=34.195902 excess=2.181005 lvl_relmax=2.2715,2.9953,2.9688,3.1810,3.1754,3.1740 viol=300 supz=98 rows=844 nnz=1418334 purged=0 uload=['1.015', '1.141'] (lp 7.6s, tot 74s)
+[16:12:13] r5: W2=33.395833 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=33.395833 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:12:30] r6: value=32.626097 excess=2.279477 lvl_relmax=2.7441,2.9847,3.2194,3.2795,3.2772,3.2758 viol=300 supz=103 rows=1144 nnz=2094568 purged=0 uload=['1.650', '0.000'] (lp 16.2s, tot 91s)
+[16:12:30] r6: W2=31.858136 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=31.858136 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:12:52] r7: value=30.183901 excess=1.279562 lvl_relmax=1.6748,1.9643,2.0025,1.9955,2.2796,2.2786 viol=300 supz=113 rows=1444 nnz=2798836 purged=0 uload=['0.739', '0.435'] (lp 20.9s, tot 113s)
+[16:12:52] r7: W2=29.465164 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=29.465164 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:13:21] r8: value=28.935757 excess=0.859803 lvl_relmax=1.6049,1.6526,1.7481,1.7419,1.8598,1.8590 viol=300 supz=144 rows=991 nnz=2014619 purged=743 uload=['0.228', '0.598'] (lp 28.7s, tot 142s)
+[16:13:21] r8: W2=28.235802 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.235802 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:13:41] r9: value=28.791768 excess=0.996159 lvl_relmax=1.3969,1.8642,1.8514,1.8554,1.9962,1.9953 viol=300 supz=136 rows=1287 nnz=2655501 purged=0 uload=['0.353', '0.454'] (lp 19.5s, tot 163s)
+[16:13:41] r9: W2=28.092932 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.092932 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:14:11] r10: value=28.631893 excess=0.980865 lvl_relmax=1.9553,1.9809,1.9654,1.9592,1.9578,1.9604 viol=300 supz=156 rows=1586 nnz=3363005 purged=0 uload=['0.051', '0.944'] (lp 28.7s, tot 192s)
+[16:14:11] r10: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:14:48] r11: value=28.597128 excess=0.927229 lvl_relmax=1.4688,1.9090,1.9272,1.9204,1.9181,1.9172 viol=300 supz=167 rows=1886 nnz=4105951 purged=0 uload=['0.488', '0.504'] (lp 35.7s, tot 229s)
+[16:14:48] r11: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:15:32] r12: value=28.563650 excess=0.919743 lvl_relmax=1.0417,1.0368,1.0404,1.0367,1.9197,1.9189 viol=300 supz=171 rows=1860 nnz=4005289 purged=322 uload=['0.098', '0.942'] (lp 43.7s, tot 273s)
+[16:15:32] r12: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:16:06] r13: value=28.521806 excess=0.967799 lvl_relmax=1.9548,1.9678,1.9504,1.9518,1.9484,1.9476 viol=300 supz=199 rows=2157 nnz=4440205 purged=0 uload=['0.942', '0.023'] (lp 33.2s, tot 307s)
+[16:16:06] r13: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:16:41] r14: value=28.501634 excess=0.024957 lvl_relmax=1.0199,1.0202,1.0237,1.0250,1.0232,1.0227 viol=300 supz=203 rows=2454 nnz=5016011 purged=0 uload=['0.046', '0.957'] (lp 34.6s, tot 343s)
+[16:16:41] r14: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:17:22] r15: value=28.470039 excess=0.188088 lvl_relmax=1.0216,1.0164,1.0129,1.0169,1.1881,1.1876 viol=300 supz=207 rows=2752 nnz=5708966 purged=0 uload=['0.218', '3.000'] (lp 40.2s, tot 384s)
+[16:17:22] r15: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:18:13] r16: value=28.454168 excess=0.906852 lvl_relmax=1.0162,1.0128,1.0150,1.0134,1.9069,1.9060 viol=300 supz=209 rows=2502 nnz=5386087 purged=548 uload=['0.052', '0.947'] (lp 49.8s, tot 434s)
+[16:18:13] r16: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:19:02] r17: value=28.437276 excess=0.727531 lvl_relmax=1.0098,1.0185,1.0142,1.0209,1.7265,1.7275 viol=300 supz=219 rows=2796 nnz=5954373 purged=0 uload=['3.000', '0.433'] (lp 48.8s, tot 484s)
+[16:19:02] r17: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:19:56] r18: value=28.428574 excess=0.012525 lvl_relmax=1.0118,1.0125,1.0111,1.0125,1.0108,1.0104 viol=300 supz=235 rows=3093 nnz=6616334 purged=0 uload=['3.000', '0.027'] (lp 53.4s, tot 538s)
+[16:19:56] r18: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:20:53] r19: value=28.417166 excess=0.010416 lvl_relmax=1.0047,1.0087,1.0030,1.0098,1.0080,1.0104 viol=189 supz=240 rows=3393 nnz=7315848 purged=0 uload=['0.022', '3.000'] (lp 55.9s, tot 594s)
+[16:20:53] r19: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:21:53] r20: value=28.411846 excess=0.909587 lvl_relmax=1.0026,1.0077,1.0047,1.0066,1.9096,1.9087 viol=150 supz=257 rows=3320 nnz=7278734 purged=262 uload=['0.024', '3.000'] (lp 59.0s, tot 654s)
+[16:21:53] r20: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:22:48] r21: value=28.406960 excess=0.910485 lvl_relmax=1.0059,1.0085,1.0091,1.0058,1.9094,1.9105 viol=219 supz=252 rows=3468 nnz=7599321 purged=0 uload=['0.051', '0.952'] (lp 54.7s, tot 709s)
+[16:22:48] r21: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:23:51] r22: value=28.404679 excess=0.899387 lvl_relmax=1.0016,1.0060,1.0012,1.0044,1.8975,1.8994 viol=100 supz=262 rows=3685 nnz=8138735 purged=0 uload=['3.000', '0.037'] (lp 62.0s, tot 772s)
+[16:23:51] r22: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:24:51] r23: value=28.401502 excess=0.583041 lvl_relmax=1.0023,1.0043,1.0031,1.0027,1.5813,1.5830 viol=144 supz=260 rows=3785 nnz=8363713 purged=0 uload=['3.000', '0.377'] (lp 60.2s, tot 833s)
+[16:24:51] r23: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:26:09] r24: value=28.400444 excess=0.003866 lvl_relmax=1.0013,1.0039,1.0023,1.0019,1.0016,1.0011 viol=101 supz=269 rows=3925 nnz=8722554 purged=0 uload=['3.000', '0.017'] (lp 76.8s, tot 910s)
+[16:26:09] r24: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:27:30] r25: value=28.399251 excess=0.002697 lvl_relmax=1.0007,1.0027,1.0005,1.0018,1.0009,1.0006 viol=53 supz=268 rows=4026 nnz=8959977 purged=0 uload=['0.052', '3.000'] (lp 80.4s, tot 991s)
+[16:27:30] r25: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:28:51] r26: value=28.398843 excess=0.014148 lvl_relmax=1.0008,1.0022,1.0003,1.0017,1.0141,1.0137 viol=57 supz=271 rows=4079 nnz=9080082 purged=0 uload=['0.062', '3.000'] (lp 80.6s, tot 1072s)
+[16:28:51] r26: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:30:16] r27: value=28.398576 excess=0.002824 lvl_relmax=1.0027,1.0028,1.0014,1.0007,1.0001,1.0004 viol=28 supz=276 rows=4136 nnz=9197653 purged=0 uload=['0.167', '0.952'] (lp 84.1s, tot 1157s)
+[16:30:16] r27: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:31:42] r28: value=28.398247 excess=0.003141 lvl_relmax=1.0031,1.0023,1.0010,1.0009,1.0002,1.0002 viol=37 supz=252 rows=4164 nnz=9272315 purged=0 uload=['3.000', '0.224'] (lp 85.3s, tot 1243s)
+[16:31:42] r28: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:33:02] r29: value=28.397905 excess=0.002675 lvl_relmax=1.0014,1.0009,1.0027,1.0013,1.0025,1.0021 viol=39 supz=267 rows=4201 nnz=9364593 purged=0 uload=['0.085', '3.000'] (lp 79.7s, tot 1323s)
+[16:33:02] r29: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:34:25] r30: value=28.397856 excess=0.004448 lvl_relmax=1.0001,1.0044,1.0000,1.0015,1.0000,1.0001 viol=17 supz=266 rows=4240 nnz=9467390 purged=0 uload=['0.102', '3.000'] (lp 83.0s, tot 1407s)
+[16:34:25] r30: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:35:49] r31: value=28.397836 excess=0.001580 lvl_relmax=1.0005,1.0016,1.0010,1.0009,1.0009,1.0004 viol=22 supz=280 rows=4257 nnz=9510111 purged=0 uload=['0.179', '0.950'] (lp 83.0s, tot 1490s)
+[16:35:49] r31: W2=28.000000 gamma=['0.00000', '0.00000'] GATE=W2+sum(gamma*cap)=28.000000 n_ub=0 exact (unpriced dual mass; gate needs n_ub=0)
+[16:36:22] non-optimal LP status HighsModelStatus.kTimeLimit at round 32

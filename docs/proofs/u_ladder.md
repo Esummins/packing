@@ -263,6 +263,17 @@ law) the zone radius does not change the price. The row is sound and bites integ
 Full support of the dodge: `results/ladderlp_k4_08_rz1e-3_img1_k1_dodge.json` (`support`,
 `support_class_mass`).
 
+**A81 addendum (2026-09-02, `pair_kill.md` §6.10).** The table above is at UNIT class boxes
+on a ONE-image catalog. In the certificate's own semantics (boxes widened by ε_box, both
+compatible images as columns) the plain value is 28 = threshold (Corollary S-08: the image
+family has Σm₂ = 7 against any widened box), and with both rung-1 rows the value is again
+28.000000: the two image families at weight ½ each halve every per-image counting row (exact
+42-pair witness). The widened two-image ladder is 28.000 / 27.667 / 26.962 / ≈ 26.06 / 25.045
+at rungs 1–5 (gains 0, 0.33, 0.70, ≈ 0.9, ≈ 1.0 — accelerating once the cap is below the
+mixture's reach), and the slack is cashable only at the zone scale (mixed-depth emission at
+rung 5 recovers 27.000 = one unit). The row remains sound as stated here; its pricing value
+in certificate semantics is rung 5's ≈ 3 sharp units, and rung 1's is zero.
+
 ### 6.3 T3 probe — what the climb would cost (census only; the climb was NOT run)
 
 Lemma BR census at rung 2, δ = 10⁻⁴, zones = the per-square minima × 1.1

@@ -605,6 +605,177 @@ corners4 pins within d_min = 0.8445, so the exact class is empty near every Trum
 the basin row is irrelevant for corners4 — consistent with this wall being emission shape,
 not ghost saturation. Canary SAFE at both emissions (`notes/ledger.md`).
 
+## 6.10 [T+M] The U-row in emission, the k4_08 saturation corollary, and Lemma W⁗ (A81, 2026-09-02)
+
+**Setting.** k4_08 (k_S = 4 pins, N = 7, m = 7 boxes, threshold 28 at β = 1), certified
+side s0, slack cores δ = 1/1000, class boxes widened to h = 1/2 + ε_box with ε_box = 1/833
+(the Lemma P bridge), compatible images G_S = {id, diag} (A71/A76), the rung-k counting
+row of `u_ladder.md` Lemma U-ROW per image. Machinery `attempts/A81-slack-verify/code/`:
+`pairlp_u.py` (the A74/A77 mixed-depth LP + the U-rows as HARD constraints in every
+model, m₂ against the WIDENED boxes), `emit81.py` (v2.1 candidate form + both canaries),
+`hintbatch81.py` (the A77 complete-tree builder extended to β > 0: target 1 + βU − Σγ·bz).
+Frozen verifiers untouched; the v2.1 form is spec-side data, not a verifier edit.
+
+**Corollary S-08 (saturation at k4_08) [T, exact].** Let g ∈ G_S and let Q₁…Q₇ be the
+seven free-square poses of the dilated image g·ẑ at s0 (the crowdfam `trump-sym4` family,
+exact rationals; diag = its reflection t ↦ (1−t)/(1+t)). Against the UNIT class boxes
+(EPS_MEET-strict open-interior meeting) the family has Σ_{a<b} m₂ = 6; against the boxes
+widened by ANY ε_box > 3·10⁻⁷ it has Σ m₂ = 7: member 4 (t = 0.4644, c = (1.2723, 2.4245))
+is separated from slot TL(0,0) = (1/2, s0 − 1/2) by exactly −2.96·10⁻⁷ on the unit box
+(the dilated 4–0 point contact of ẑ: the gap is λ − 1 ≈ 1.1·10⁻⁷ in the family's own
+min SAT gap) and meets the ε_box = 1/833 box with margin +1.69·10⁻³ (exact check in
+`emit81.py`/`results/canary_urow.json`, both images). Since the family is core-free,
+contained and pairwise interior-disjoint, it is an admissible death witness of value
+C(7,2) + β·7 = the threshold for every β ≥ 0: **no plain (P1′)/(P2′) k4_08 certificate
+exists at any β**, and the restricted "21 + 6β, margin −β" of A66/A71/A80 was a unit-box
+artifact. This is the canary theorem (§4) seen from the k4_08 side — the k4_08-compatible
+image of Trump saturates every threshold it is counted in — so an exact-stratum row
+(P-B or U-ROW) is NECESSARY for k4_08, not a reserve: it is what removes g·ẑ from the
+quantifier. Measured [M, sharp LP, widened boxes, both images' columns, A66 adequacy
+catalog + 110 zone/perturbation columns, converged]: plain 28.000000 (the pure family).
+
+**The U-row in the emission LP [T].** In the depth-priced adversary LP of §6.7 add, per
+image g, the hard row Σ_{ij: bz_g(ij)=1} z_ij ≤ cap_k = C(N−1−k, 2) (zones of radius r_z
+about g's poses; both tilt branches at uprights). Its multiplier γ_g ≥ 0 joins the row
+duals y: at any optimal solve, for every catalog pair, Σ_r A_{r,ij} y_r + Σ_g γ_g bz_g(ij)
+≥ 1 + βm₂(ij), i.e. y is a restricted covering measure for the discounted claim (P2‴) of
+`u_ladder.md` §3, and the value V = Σ y_r rhs_r + Σ_g γ_g cap_k ≥ W₂ + Σ_g γ_g cap_k =: GATE.
+The certificate condition (P1‴) is GATE < C(N,2) + βm; slack := threshold − GATE. Sound
+for every subset of G_S — but by Corollary S-08 a subset leaves the other image's family
+saturating, so at k4_08 BOTH rows are mandatory, and against the two pure families the
+net margin is 21γ_g − 10(γ_id + γ_diag) = γ per image at equal γ.
+
+**[M] The two-image mixture dodge (rung 1 is DEAD).** Sharp LP, widened boxes, both
+rung-1 rows (cap 10 each): value **28.000000**, γ_id = γ_diag = 0, in-zone loads
+(10.000, 9.500) — the rows bind but price nothing. Exact dodge witness
+(`results/pairlp_u_k4_08_sharp_wide_k1.json`, `support`): 42 pairs, Σz = 21, each image
+family at weight exactly ½ on all 21 of its pairs (10.0 in its zones + one pair moved to a
+3·10⁻⁴-displaced variant), class mass id|id = diag|diag = 10.5: value 2·½·28 = 28. Two
+half-weight disjoint families load every point by ≤ 1, and the row of each image sees only
+its own half. A80's rung-1 gain (26.000 on a ONE-image catalog, unit boxes) was the absence
+of the second family; with |G_S| = 2 the mixture halves every per-image counting row. The rung-1 slack the BRIEF budgeted (≈ 2) is therefore 0 in the certificate's own
+semantics.
+
+**[M] The widened two-image ladder (sharp, converged unless noted).**
+
+| rung k | cap C(6−k,2) | value V_k | GATE slack 28 − V_k | γ* (id, diag) | in-zone loads |
+|---|---|---|---|---|---|
+| plain | — | 28.000000 | 0 | — | — |
+| 1 | 10 | 28.000000 | 0.000 | 0, 0 | 10.0, 9.5 |
+| 2 | 6 | 27.666667 | 0.333 | 1/12, 1/12 | 6.0, 6.0 |
+| 3 | 3 | 26.962441 | 1.038 | 0.149, 0.154 | 3.0, 3.0 |
+| 4 | 1 | 26.061512 (budget, Lmax 1.055 — not a verdict; ≥ 24.7 scaled) | ≈ 1.94 | 0.332, 0.332 | 1.0, 1.0 |
+| 5 | 0 | 25.044526 | 2.956 | (cap 0: rebate-free) | 0, 0 |
+
+(`results/pairlp_u_k4_08_sharp_wide_k*.json`, `logs/`; 345 placements, 30 151 disjoint
+pairs, 3 304 with m₂ > 0; every cell's dual is a restricted covering measure, n_ub = 0.)
+Against A80's unit-box one-image ladder (−1.00, −1.41, −2.00, −2.56, −3.11, −3.72, −4.49)
+the certificate-semantics ladder is shifted up by the saturation unit AND flattened at the
+bottom by the mixture: gains per rung 0, 0.33, 0.70, ≈0.9, ≈1.0 (accelerating, not the
+A80 flat 0.55 — once the cap is below the mixture's reach the rows start pricing the
+cross-image pairs: diag|id support mass 5.67 → 3.16 → 1.84 → 2.08 across rungs 2–5). The
+rung-5 row (cap 0: no two free squares of Δ_λ z in distinct zones of one image) buys 2.96
+units of restricted slack at sharp semantics — the only rung in the BRIEF's "slack ≈ 2"
+regime, and it needs U_5 (A80 T3 census: rung 2 alone = 41 direct + 14 atom certificates
+with peeling; rung 5 unpriced).
+
+**[M] Mixed-depth emission under the rung-5 rows (the slack-2 regime, tested).** A74 menu
+extended one level deeper (η = 0.1, 0.05, 0.02, 0.008, 0.002, 0.0005; μ = 0.03), both rows,
+cold start, 38 cut rounds to excess 1.3·10⁻³, full-store final solve exact (n_ub = 0):
+priced value 27.455772, **unpriced W₂ = 27.000000 on 196 atoms** (consolidation 10 717 →
+197 → 196 rows changes nothing: the optimal dual IS 196 atoms), GATE = 27.000 (cap 0: no
+rebate), slack 1.000. Depth profile of the measure: **4.95 at η = 0.1, 12.08 at 0.05, 2.32 at
+0.02, 4.93 at 0.008, 1.57 at 0.002, 1.15 at 0.0005** — 63 % of the mass at ≥ 0.05 and 72 % at
+≥ 0.02, against corners4's md8 (Lemma W″: 3–4 % at 0.05, 70 % at 0.008–0.02, 25 % at 0.002).
+So the slack IS spent on coarseness as the BRIEF asked. But the depth cost at k4_08 is
+2 units (sharp 25.04 → 27.00), not corners4's 0.43: the rung-5 exclusion lives at the zone
+scale r_z = 10⁻⁴ (forced by the U_1 reach, `u_ladder.md` §6.1) and the adversary's parked
+mass sits 3·10⁻⁴ outside the zones, so every atom that cashes the row's slack must
+separate an in-zone pose from its 3·10⁻⁴ variant — a margin below the shallowest menu
+level — and the depth-limited measure recovers only the unit-box-like 27 = 21 + 6 of the
+variant families (support: id-near|id-near 15.6 of Σz = 20.2). The row's slack is
+ultra-shallow by construction: it can be cashed only at the zone scale, which is exactly
+the η-fine boundary structure Lemma W‴ prices. Certificate `certs/pair_k4_08_s0_b1_md_k5.json`
+(v2.1 form; canaries SAFE ×2: trump5 witness min gap 1.06·10⁻⁷, Σm₂ = 6; U-row canary: both
+image families 7/7 in-zone, 21 > cap, Σm₂(widened) = 7).
+
+**[M] Complete hint trees on the rung-5 measure (`hintbatch81.py`, rule certain, Rust
+root order, targets 1 + βU − Σγ·bz; `results/hb_md_k5.json`, `results/deep_md_k5_root7_10.json`).**
+
+| tree | nodes | census (cov / open / hole) | r(d) |
+|---|---|---|---|
+| all 136 roots, cap 60 k/root (457 s, 4 procs) | 2.92 M | 228 k / 938 k / **1 848** | aggregate d = 7…14: 0.872, 0.853, 0.838, 0.866, 0.854, 0.851, 0.852, 0.841 (64 roots at the cap — the same 64 as A77's corners4 build; 72 complete) |
+| root 7,10 (Rust key), cap 2 M, depth 23 (987 s) | 1.15 M | 142 k / 350 k / 396 | d = 10…21: 0.877, 0.884, 0.880, 0.875, 0.870, 0.860, 0.841, 0.828, 0.817, 0.809, 0.801, 0.794 |
+| A77 corners4 md8 (slack 0.042), all roots cap 60 k | 2.71 M | 176 k / 856 k / 41 | aggregate d = 7…14: 0.884, 0.872, 0.847, 0.852, 0.862, 0.857, 0.859, 0.852 |
+| A77 corners4 md8, root 2,11, 1.59 M, depth 25 | 1.59 M | 187 k / 475 k / 3 280 | d = 14…25: 0.782 … 0.783, flat 0.75–0.78 |
+
+Open-box census on the rung-5 tree: certain-mass median 0.912 (all roots), **1.968 against target
+2 on the deep root** (q90 2.15): the residue is the β-boost layer — boxes possibly meeting one
+widened class box (U = 1) where the measure delivers ≈ 2 but not certainly — a frontier
+source that does not exist at corners4 (β = 0) and that box widening creates at all 7
+slots. Holes: 1 848 at cap 60 k (1 797 at m₂ = 0 collecting 0.57–0.90, 51 at m₂ = 1
+collecting ≈ 1 against 2), against corners4's 41: the coarse measure is far less complete
+on the continuum, and (A77 loop law) deep holes cost slack one-for-one when harvested.
+
+**Lemma W⁗ (retention vs slack) [M+T].** The per-level frontier retention of a complete
+spec-§4 hint tree is set by the FRONTIER STRUCTURE of the measure (the loci where coverage
+responsibility hands off between atoms, and, at β > 0, the loci where the U-bound changes
+— the ε_box-widened box boundaries), not by its total slack: at slack 1.0 (k4_08, rung 5,
+63 % of the mass at η ≥ 0.05) the measured r(d) is 0.84–0.87 aggregate and 0.79–0.88 on a
+single root to depth 21, ABOVE the tight corners4 measure's 0.75–0.86 (slack 0.042). The
+mechanism is a scale separation: (i) the U-row's slack exists only at the zone scale (its
+exclusion is 21 pairs inside 10⁻⁴-boxes, and by the A76 saturation law the adversary
+parks at 3·10⁻⁴ with no loss), so a measure at any menu depth ≥ 5·10⁻⁴ sees at most the
+unit-box-like 27 and any atom that cashes the row must have margin < 3·10⁻⁴ — the η-fine
+structure Lemma W‴ prices; (ii) the slack that IS available at coarse depth (1 unit here)
+fattens atoms but does not remove handoff loci: a covered leaf still needs every
+placement of the box to collect the same atoms, and the number of handoff loci is a
+property of which atoms serve which regions, not of how much they over-deliver; (iii)
+β > 0 adds the box-meeting boundaries as target discontinuities of height 1. Tree-size
+law: frontier growth 2r ≈ 1.6–1.75 per level as in W‴; root 7,10 alone has 3.5·10⁵ open
+boxes at widths ≈ 0.06 and needs 6–12 more levels to the measure's dominant 0.02–0.05
+scale (≈ 10⁷–5·10⁸ nodes for that root, ≈ 10⁹–3·10¹⁰ over the 64 budget roots) and ≈ 40
+to its 5·10⁻⁴ tail (10¹⁵) — the W‴ wall, unchanged in order. *Proof of the T-half:* Lemma S
+plus the observation that COVERED at a box needs certain membership of every counted
+atom for every placement in the box (spec §3.4, an iff), so a box straddling a membership
+boundary of any atom the certificate relies on is never COVERED whatever the surplus;
+the surplus can only substitute atoms, and a substitute has its own boundary. ∎
+
+**Verdict.** Slack does NOT buy verifiability: the wall is intrinsic to pair geometry (and
+worse at β > 0), not to tightness. T2 not entered; no v2.1 verifier was written (the v2.1
+form exists only as spec-side data in the emitted candidate). Corollary S-08 also closes
+the plain boosted k4_08/k4_11/k4_03 route (every one-short class carries a compatible
+Trump image saturating its widened-box threshold — k4_11/k4_03 via their own images, A71)
+independently of verification cost. The protected tier redirects to conditioning trees
+(`h10_stuck.md` route 3 / A60-style branch on which square deviates), where the
+exact-stratum content (basin, U_R) enters as disjunctive branching rather than as a
+priced row.
+
+**Canary (per run) [M].** trump5: the dilated Trump family is an exact death witness at
+δ = 1/1000, ε_box = 1/833 (min SAT gap 1.06·10⁻⁷ = λ − 1, Σm₂ = 6) — SAFE, twice
+(`attempts/A81-slack-verify/results/canary_trump.json`). U-row: both image families sit
+7/7 in their own zones (distinct slots), core-free and contained, Σm₂(widened) = 7, 21
+discounted pairs > cap — the rows exclude exactly the pure image families through the
+exact-stratum skeleton mismatch; Trump (skeleton trump5) is outside the quantifier
+(`results/canary_urow.json`). SAFE.
+
+**Discipline.** One LP at a time (the sharp ladder and the emission ran sequentially; the
+hint builder used the second slot at 4 procs), BLAS pinned, the 6 GB commit gate held at
+every LP start (rung 5 waited out a 23-minute dip to 5.7 GB); A57/A60/A61 untouched;
+frozen verifiers untouched (import-only for roots/clip); certs/ new files only.
+
+**Pointers (this section doubles as A81's findings file; the harness blocks
+`notes/findings.md` as it did for A80).** `attempts/A81-slack-verify/code/`: `catalog81.py`
+(A80-rig catalog, both images + perturbation columns), `pairlp_u.py` (A77 mixed-depth LP +
+U-rows in every model, widened-box m₂, GATE = W₂ + Σγ·cap, every accepted consolidation
+round dumped as a candidate, adversary support dump), `emit81.py` (v2.1 candidate + both
+canaries), `hintbatch81.py` (A77 builder + β/U/zone targets; β = 0 census byte-identical),
+`retention81.py`. `results/`: `pairlp_u_k4_08_sharp_wide_{plain,k1..k5}.json` (ladder +
+supports), `pairlp_u_k4_08_md_k5.json` + `pair_primal_k4_08_b1_md_k5_{full,c0,c1}.json`,
+`hb_md_k5.json`, `deep_md_k5_root7_10.json`, `canary_{trump,urow}.json`. `certs/`:
+`pair_k4_08_s0_b1_md_k5.json` (v2.1 candidate, 196 atoms, W₂ = 27.000101),
+`pair_k4_08_s0_b1_sharp_k5.json`; hinted trees regenerable (gitignored).
+
 ## 7 What remains open for a certified pair kill (the honest ledger)
 
 * [M, pilot] the fractional pair-LP verdict per class — A66 measures k4_08 (boosted) and
