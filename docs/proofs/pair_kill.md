@@ -449,7 +449,7 @@ verifier fallback; verifier untouched, every leaf re-proved) changes the search 
 5.9 k leaves) → COVERED 106.8 k vs 98.6 k, and DEFICIENT-EARLY fires 7317× — exact
 rational counterexample pairs (collecting 0.948–0.992) exist in the continuum between
 catalog placements, which the unhinted search never probed. Those rows are the survey
-loop's row source (md8 is the first grown-catalog re-solve). No corners4 PASS yet: the
+loop's row source; the first grown-catalog re-solve (md8, W₂ = 20.95828) cut the exact-hole count 220 → 57 at the same 1 M-node hinted budget (shallowest hole 0.948 → 0.964 collected): the loop converges ~4× per iteration. No corners4 PASS yet: the
 honest state is a working mixed-depth emission loop with exact holes being harvested,
 not a certificate.
 

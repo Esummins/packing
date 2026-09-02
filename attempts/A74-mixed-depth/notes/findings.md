@@ -116,3 +116,31 @@ possible-mass < 1.  Verifier untouched; hints re-proved exactly.
   definitive rows).  This is the survey loop's row source working as designed;
   the harvest (--faildump 30000) and the grown-catalog re-solve are the next
   iteration (md8).
+
+### [M] Loop iteration 2 (md8 = md7 menu on the catalog grown by the 65 harvested placements)
+
+* LP: W2 = 20.95828 (363 atoms), profile 0.61 / 6.81 / 7.47 / 5.23 / 0.84 — the
+  65 exact-hole placements cost ~0.001: catalog growth is not the constraint.
+* Hinted harvest (3000 nodes/root tree, 1M nodes, depth 34, jobs 8), same budget
+  as the md5 harvest: DEFICIENT-EARLY 220 -> 57, stored definitive rows 67 -> 2,
+  shallowest hole 0.948 -> 0.964 collected.  The survey loop converges ~4x per
+  iteration at this budget (counts vary with the parallel traversal order:
+  the md5 2M-node run reported 7317, its 1M-node harvest 220).  Cap witnesses
+  still dominate at depth 34; no PASS.  Per iteration ~1 h wall.
+* Hinted certificates (82 MB) are NOT committed; regenerate with
+  `python code/hinttree.py certs/pair_k4_13_s0_b0_md8.json OUT --cap 3000 --maxdepth 44`.
+
+## Status at close (2026-09-02)
+
+T1: NO verified corners4 certificate.  Delivered instead: the mixed-depth
+emission loop (working end to end against the frozen Rust verifier), the first
+sub-threshold restricted measures (md5/md7/md8), Lemma W'' (the measured law:
+slack, forced profile, depth-vs-consolidation competition, free catalog growth),
+the verification residue diagnosis (un-split factor tilt) and the hint-tree
+remedy with a converging hole count.  T2 skipped per BRIEF.  Next: continue the
+loop (md8 -> harvest -> md9 ...) until the hinted survey is cap-only, then the
+certification run at a node budget set by the cap-witness depth profile;
+consider a verifier-side (versioned, both implementations) split heuristic
+that never leaves a factor's tilt interval unsplit — an efficiency change, not
+a soundness one, so it needs the erratum discipline only if the spec's s6
+guidance is changed.
