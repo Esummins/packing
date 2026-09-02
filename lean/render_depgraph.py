@@ -202,8 +202,12 @@ for lab, col in COLORS.items():
     out.append(f'<text x="{lx+16}" y="42">{txt}</text>')
     lx += 30 + 7 * len(txt)
 out.append(f'<rect x="{lx+10}" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>')
-out.append(f'<text x="{lx+26}" y="42">dashed outline = own work done, waiting only on dependencies &#183; '
-           f'one wire per source&#8594;row, arrows at each dependency &#183; hover for details</text>')
+out.append(f'<text x="{lx+26}" y="42">dashed = waiting only on dependencies</text>')
+lx += 26 + 7 * len("dashed = waiting only on dependencies")
+out.append(f'<rect x="{lx+10}" y="31" width="30" height="14" rx="7" fill="#37474f"/>')
+out.append(f'<text x="{lx+25}" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>')
+out.append(f'<text x="{lx+46}" y="42">= attempt working this node now &#183; '
+           f'one wire per source&#8594;row &#183; hover for details</text>')
 
 for r, t in enumerate(LAYER_TITLES):
     out.append(f'<text x="8" y="{row_y(r) - NH/2 - 8}" font-size="10" fill="#888" font-style="italic">{html.escape(t)}</text>')
@@ -295,6 +299,14 @@ for nid, (x, y) in pos.items():
         if j == 1 and len(lines) > 2:
             ln = ln[:30] + "…"
         out.append(f'<text x="{x:.0f}" y="{y-NH/2+29+j*12:.0f}" text-anchor="middle" fill="#222">{html.escape(ln)}</text>')
+    owner = n.get("owner")
+    if owner:
+        cw = 10 + 7 * len(owner)
+        cx0 = x + NW / 2 - cw + 4
+        cy0 = y - NH / 2 - 7
+        out.append(f'<rect x="{cx0:.0f}" y="{cy0:.0f}" width="{cw}" height="14" rx="7" fill="#37474f"/>')
+        out.append(f'<text x="{cx0 + cw/2:.0f}" y="{cy0 + 10.5:.0f}" text-anchor="middle" fill="white" '
+                   f'font-size="9" font-weight="bold">{html.escape(owner)}</text>')
     out.append('</g>')
 
 out.append('</svg>')
