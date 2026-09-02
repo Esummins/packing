@@ -7,18 +7,18 @@
 <rect x="147" y="32" width="12" height="12" fill="#2e7d32" rx="2"/>
 <text x="163" y="42">proved-prose (13)</text>
 <rect x="296" y="32" width="12" height="12" fill="#1565c0" rx="2"/>
-<text x="312" y="42">certificate+verifier (10)</text>
+<text x="312" y="42">certificate+verifier (11)</text>
 <rect x="501" y="32" width="12" height="12" fill="#6a1b9a" rx="2"/>
 <text x="517" y="42">cited (1)</text>
 <rect x="594" y="32" width="12" height="12" fill="#e65100" rx="2"/>
 <text x="610" y="42">conjecture (6)</text>
 <rect x="722" y="32" width="12" height="12" fill="#c62828" rx="2"/>
-<text x="738" y="42">open (10)</text>
-<rect x="825" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>
-<text x="841" y="42">dashed = waiting only on dependencies</text>
-<rect x="1110" y="31" width="30" height="14" rx="7" fill="#37474f"/>
-<text x="1125" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>
-<text x="1146" y="42">= attempt working this node now &#183; one wire per source&#8594;row &#183; hover for details</text>
+<text x="738" y="42">open (9)</text>
+<rect x="818" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>
+<text x="834" y="42">dashed = waiting only on dependencies</text>
+<rect x="1103" y="31" width="30" height="14" rx="7" fill="#37474f"/>
+<text x="1118" y="41.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>
+<text x="1139" y="42">= attempt working this node now &#183; one wire per source&#8594;row &#183; hover for details</text>
 <text x="8" y="35.0" font-size="10" fill="#888" font-style="italic">top-level theorem (TopLevel.lean)</text>
 <text x="8" y="185.0" font-size="10" fill="#888" font-style="italic">frame: attainment / parametrisation / bounds / uniqueness / bridges</text>
 <text x="8" y="335.0" font-size="10" fill="#888" font-style="italic">stratification layer</text>
@@ -175,6 +175,8 @@
 <text x="191" y="208" text-anchor="middle" font-weight="bold" fill="#2e7d32">A.D1</text>
 <text x="191" y="222" text-anchor="middle" fill="#222">Attainment: s(11) is a minimum</text>
 <text x="191" y="234" text-anchor="middle" fill="#222">(D1)</text>
+<rect x="254" y="186" width="31" height="14" rx="7" fill="#37474f"/>
+<text x="269" y="196" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A68</text>
 </g>
 <g><title>A.PARAM — Every packing is represented in (cx,cy,t), t in [0,1]&#10;[lean-proved]&#10;DISCHARGED (A64): prose + Lean theorem (axioms propext/Choice/Quot.sound only). The square&#x27;s own 90-degree symmetry (sqSet_rot) brings the edge vector into the closed first quadrant; the half-angle substitution t = e2/(1+e1) is exact algebra - no transcendental functions. Also provides the u/v membership and w-containment characterisations + w quasiconcavity that the measure bridge consumes.</title>
 <rect x="292" y="193" width="180" height="54" rx="7" fill="white"/>
@@ -203,7 +205,7 @@
 <text x="956" y="222" text-anchor="middle" fill="#222">Upper bound AT s-hat exactly</text>
 <text x="956" y="234" text-anchor="middle" fill="#222">(Trump&#x27;s packing exists at…</text>
 <rect x="1018" y="186" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="1034" y="196" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A64</text>
+<text x="1034" y="196" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A69</text>
 </g>
 <g><title>A.UNIQ — Uniqueness transfer: EVERY packing at s-hat reaches a stratified representative mod G&#10;[open — own work done; waiting on dependencies]&#10;RE-DIAGNOSED (A63, docs/proofs/unique_transfer.md): the axiom AS STATED follows from census exhaustiveness (A53 L3); the hole moved into stratum_kill&#x27;s forall-packings quantifier at the K1-protected classes. Full architecture on file: CC-2 teleport chain to a stuck packing + stuck-kills (H10-stuck) + residual/basin + COLLAPSE back via Theorem U (node A.THMU). Obligations U-O1..U-O4. A65: U-O1 DISCHARGED (Theorem U certified, docs/proofs/theorem_u.md); remaining: U-O2 (=H10-stuck, see C.K4TIER / docs/proofs/h10_stuck.md), U-O3 (A57 G1), U-O4 (D/E nodes as axiomatised).</title>
 <rect x="1057" y="193" width="180" height="54" rx="7" fill="white"/>
@@ -370,10 +372,10 @@
 <rect x="1141" y="636" width="31" height="14" rx="7" fill="#37474f"/>
 <text x="1157" y="646" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A60</text>
 </g>
-<g><title>D.D4 — D4 reduction machine-checked at the working side (H12)&#10;[open]&#10;Machine-checked at 3.84; the s0 re-run is &#x27;mechanical&#x27; but NOT DONE. The residual tree&#x27;s mod-G bookkeeping (and the f, e produced by trump_residual) rest on it.</title>
+<g><title>D.D4 — D4 reduction machine-checked at the working side (H12)&#10;[certificate+verifier]&#10;A67 2026-09-02: s0 RE-RUN DONE, PASS in 36.7 s (control at 96/25 also PASS; A27 verify_tree2 --skip_leaf_verify anchor PASS). PORTED MECHANICALLY - no assumption bakes in the side; only mutation is verify_tree2.S / refine.S. Exact-rational: R1 Z(s0) concentric with the container; R2 the acting group IS D4 (8 signed perms, closed, orders {1,2^5,4^2}, nonabelian); R3 each g maps [0,s0]^2 and Z onto themselves; R4 the 8 images of the fundamental triangle T COVER Z (octant decomposition exhibited, each octant mapped into convex T on 3 vertices); R5 g(Q(c,th)) = Q(g(c),th&#x27;) with th&#x27; = th / 90-th, i.e. t -&gt; (1-t)/(1+t) (polynomial identity in t, deg &lt;= 2, 5 points); R6 verify_tree2 check (2) verbatim (216 cells, cell&lt;-&gt;box exact, none vacuous/coreless); R7 check (6) bookkeeping + t-bins are SIDE-INDEPENDENT (identical at 96/25 and s0); R8 CENSUS SIDE - A53 skeletons.py d4_images is the SAME group of plane maps as the container D4 at s0, preserves the slot lattice and corner anchors, canon is orbit-invariant/selecting on 7204 locked sets (944 classes) and the 1110 Young slot-sets (163 classes, = B.CENSUS), and the Young slot map is D4-equivariant g.slots(c,lam) = slots(g.c, lam or lam^T) - this is the action instratum_bridge.md E.2 consumes. SCOPE (d4_reduction_s0.md D4.4): conditional on the ROOT occupancy lemma at s0, which does NOT exist (it exists only at 3.84); verify_tree2&#x27;s cert-consuming checks (1)(3)(4)(5)(7) have no input at s0 because there is no s0 case tree - that is D.TREE, not D.D4. Says nothing about S11 (seam S6 = D.S6, still open) and proves no bound (it is a WLOG). Reported non-assertion: sigma(box) is NOT inside the mirror box in t-coords (~5.3e-8, both directions) - the documented t_lo/t_hi outward-rounding artefact verify_tree2 works around by using the image box; identical at 3.84.</title>
 <rect x="1177" y="643" width="147" height="54" rx="7" fill="white"/>
-<rect x="1177" y="643" width="147" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
-<text x="1251" y="658" text-anchor="middle" font-weight="bold" fill="#c62828">D.D4</text>
+<rect x="1177" y="643" width="147" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="1251" y="658" text-anchor="middle" font-weight="bold" fill="#1565c0">D.D4</text>
 <text x="1251" y="672" text-anchor="middle" fill="#222">D4 reduction</text>
 <text x="1251" y="684" text-anchor="middle" fill="#222">machine-checked at the…</text>
 <rect x="1297" y="636" width="31" height="14" rx="7" fill="#37474f"/>

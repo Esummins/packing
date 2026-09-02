@@ -38,7 +38,8 @@
    "label": "proved-prose",
    "lean_axiom": "attained",
    "source": "docs/proofs/drain_lemma.md D1",
-   "note": "Compactness; two paragraphs. Formalisation cost: closedness of Fits."
+   "note": "Compactness; two paragraphs. Formalisation cost: closedness of Fits.",
+   "owner": "A68"
   },
   {
    "id": "A.PARAM",
@@ -77,7 +78,7 @@
    "label": "open",
    "lean_axiom": "zhat, trump_packs_at_shat",
    "note": "ROUTE DECIDED (A63, docs/proofs/attainment_ub.md): route (b) (Fits-closed + certificate sequence) REFUTED as a finite route (scaling breaks unit squares; rational curves have rational sigma-limits). Route (a) already certifies Fits(s_A22) (A22 feasibility, Python-interval TCB); residue = the algebraic identity s_A22 = s-hat, pinned to 2.1e-47 by T1's Taylor bound; closure specs: exact number-field verification (compositum deg <= 56 - a coordinate has a degree-7 minimal polynomial, so the field is NOT Q(s-hat)) or the S3-fallback restatement with s-hat := s_A22. || A64: axiom SPLIT executed in TopLevel.lean - shatA22 + trump_packs_at_shatA22 (certified, Python-interval TCB) + shatA22_eq_shat (THE open identity, single axiom); trump_packs_at_shat now a theorem. Sign/interval route to the identity REFUTED (no separation gap without a height bound - attainment_ub.md section 6); NEW cheaper closure spec (c-idl): saturated ideal-membership cofactor certificate, verification = rational polynomial identities + one sign gate, no number-field arithmetic; search = bounded Groebner/Macaulay campaign.",
-   "owner": "A64"
+   "owner": "A69"
   },
   {
    "id": "A.UNIQ",
@@ -241,9 +242,9 @@
   {
    "id": "D.D4",
    "title": "D4 reduction machine-checked at the working side (H12)",
-   "label": "open",
-   "source": "A27 verify_tree2.py semantics (3.84)",
-   "note": "Machine-checked at 3.84; the s0 re-run is 'mechanical' but NOT DONE. The residual tree's mod-G bookkeeping (and the f, e produced by trump_residual) rest on it.",
+   "label": "certificate+verifier",
+   "source": "attempts/A67-d4-rerun/code/verify_d4_s0.py (imports A27 caselp/level1/refine/verify_tree2, side rebound) -> results/d4_s0.json; write-up docs/proofs/d4_reduction_s0.md; run record attempts/A67-d4-rerun/notes/run_record.md",
+   "note": "A67 2026-09-02: s0 RE-RUN DONE, PASS in 36.7 s (control at 96/25 also PASS; A27 verify_tree2 --skip_leaf_verify anchor PASS). PORTED MECHANICALLY - no assumption bakes in the side; only mutation is verify_tree2.S / refine.S. Exact-rational: R1 Z(s0) concentric with the container; R2 the acting group IS D4 (8 signed perms, closed, orders {1,2^5,4^2}, nonabelian); R3 each g maps [0,s0]^2 and Z onto themselves; R4 the 8 images of the fundamental triangle T COVER Z (octant decomposition exhibited, each octant mapped into convex T on 3 vertices); R5 g(Q(c,th)) = Q(g(c),th') with th' = th / 90-th, i.e. t -> (1-t)/(1+t) (polynomial identity in t, deg <= 2, 5 points); R6 verify_tree2 check (2) verbatim (216 cells, cell<->box exact, none vacuous/coreless); R7 check (6) bookkeeping + t-bins are SIDE-INDEPENDENT (identical at 96/25 and s0); R8 CENSUS SIDE - A53 skeletons.py d4_images is the SAME group of plane maps as the container D4 at s0, preserves the slot lattice and corner anchors, canon is orbit-invariant/selecting on 7204 locked sets (944 classes) and the 1110 Young slot-sets (163 classes, = B.CENSUS), and the Young slot map is D4-equivariant g.slots(c,lam) = slots(g.c, lam or lam^T) - this is the action instratum_bridge.md E.2 consumes. SCOPE (d4_reduction_s0.md D4.4): conditional on the ROOT occupancy lemma at s0, which does NOT exist (it exists only at 3.84); verify_tree2's cert-consuming checks (1)(3)(4)(5)(7) have no input at s0 because there is no s0 case tree - that is D.TREE, not D.D4. Says nothing about S11 (seam S6 = D.S6, still open) and proves no bound (it is a WLOG). Reported non-assertion: sigma(box) is NOT inside the mirror box in t-coords (~5.3e-8, both directions) - the documented t_lo/t_hi outward-rounding artefact verify_tree2 works around by using the image box; identical at 3.84.",
    "owner": "A67"
   },
   {
