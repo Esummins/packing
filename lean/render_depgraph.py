@@ -5,15 +5,18 @@ LIVE monitoring copy (promoted from A62/A63 per PI request 2026-09-02): the advi
 updates depgraph.json labels/notes as milestones land and re-runs this script.
 Stdlib only. Layout: fixed layers by node id; any node NOT named in LAYERS is
 appended to a trailing "new / unplaced" row so additions never vanish silently.
-Node colour = label; dashed edge = motivation.
 
-Edge routing (PI request 2026-09-02): orthogonal with per-gap lanes.
- - Same-row edges arc into the gap below the row (or above, for the last row).
- - Cross-row edges run vertically from the node, laterally along a lane y that is
-   UNIQUE to that edge within each row-gap it crosses, and vertically into the
-   target; multi-row edges cross intermediate rows through corridors between the
-   node boxes, never through them.
- - Arrowheads point at the dependency (from USES to); hover an edge for its ends.
+Edge routing (PI requests 2026-09-02, "circuit" revision):
+ - BUS TRUNKS: all edges from one source to targets in one row share a single
+   trunk wire — one drop per source, one lateral run on a lane unique to the
+   trunk within each row-gap, then arrowed drops into each target ("one wire per
+   voltage", as the PI put it).
+ - PORTS: connection points are spread along a node's top/bottom edge (sorted by
+   the far end's x), so verticals leaving/entering one node never stack.
+ - Corridor crossings are deduplicated per row (min 8 px apart), so long trunks
+   crossing the same corridor don't overlap.
+ - Node status: colour = label; a DASHED node outline means "blocked_only" —
+   the node's own work is done, it waits only on open dependencies.
 """
 import json, os, html
 
@@ -29,7 +32,6 @@ COLORS = {
     "open": "#c62828",                  # red
 }
 
-# layers top->bottom
 LAYERS = [
     ["TOP"],
     ["A.D1", "A.PARAM", "A.LB382", "A.S3", "A.UBshat", "A.UNIQ", "A.SBRIDGE", "A.THMU"],
@@ -55,14 +57,11 @@ unplaced = [nid for nid in nodes if nid not in placed]
 if unplaced:
     LAYERS.append(unplaced)
     LAYER_TITLES.append("new / unplaced (assign a layer in render_depgraph.py)")
-# drop ids named in LAYERS but absent from the json (renamed/retired nodes)
 LAYERS = [[nid for nid in layer if nid in nodes] for layer in LAYERS]
 
 W, ROW_H, NH = 1720, 150, 54
 H = ROW_H * len(LAYERS) + 130
-pos = {}
-width = {}
-rowof = {}
+pos, width, rowof = {}, {}, {}
 for r, layer in enumerate(LAYERS):
     n = max(1, len(layer))
     gap = W / (n + 1)
@@ -76,20 +75,16 @@ counts = {}
 for n in G["nodes"]:
     counts[n["label"]] = counts.get(n["label"], 0) + 1
 
-# ---------- edge routing ----------
-GAP_TOP_PAD, GAP_BOT_PAD = 10, 10
+# ---------- geometry helpers ----------
+GAP_PAD = 10
 
 def row_y(r):
     return 70 + r * ROW_H
 
 def gap_bounds(g):
-    """Free vertical band between row g and row g+1."""
-    top = row_y(g) + NH / 2 + GAP_TOP_PAD
-    bot = row_y(g + 1) - NH / 2 - GAP_BOT_PAD
-    return top, bot
+    return (row_y(g) + NH / 2 + GAP_PAD, row_y(g + 1) - NH / 2 - GAP_PAD)
 
 def corridors(r):
-    """Free x-intervals between node boxes of row r (margins included)."""
     iv = sorted((pos[nid][0] - width[nid] / 2 - 8, pos[nid][0] + width[nid] / 2 + 8)
                 for nid in LAYERS[r])
     out, cur = [], 8
@@ -101,46 +96,92 @@ def corridors(r):
         out.append((cur, W - 8))
     return out
 
+used_crossings = []  # x already used by ANY row crossing (global: adjacent-row
+                     # crossings at one x share vertical space in their common gap)
+
 def corridor_x(r, want):
-    """Nearest usable crossing x in row r's corridors to `want`."""
-    best, bd = want, float("inf")
+    """Nearest usable crossing x in row r to `want`, >=8px from ALL prior crossings."""
+    cands = []
     for lo, hi in corridors(r):
-        x = min(max(want, lo + 6), hi - 6)
-        d = abs(x - want)
-        if d < bd:
-            best, bd = x, d
-    return best
+        base = min(max(want, lo + 6), hi - 6)
+        for off in range(0, 400, 8):
+            for x in (base + off, base - off):
+                if lo + 6 <= x <= hi - 6:
+                    cands.append((abs(x - want), x))
+                    if all(abs(x - u) >= 8 for u in used_crossings):
+                        used_crossings.append(x)
+                        return x
+    # every slot taken: pick the candidate farthest from existing crossings
+    if cands:
+        x = max(cands, key=lambda c: min((abs(c[1] - u) for u in used_crossings), default=1e9))[1]
+    else:
+        x = want
+    used_crossings.append(x)
+    return x
 
+# ---------- group edges into trunks ----------
 edges = [e for e in G["edges"] if e["from"] in pos and e["to"] in pos]
-
-# lane allocation: every cross-row edge gets its own lane index in each gap it crosses
-gap_edges = {}
-for i, e in enumerate(edges):
+trunks = {}   # (from, target_row, kind) -> list of targets
+arcs = []     # same-row edges, kept individual
+for e in edges:
     r1, r2 = rowof[e["from"]], rowof[e["to"]]
     if r1 == r2:
-        continue
+        arcs.append(e)
+    else:
+        trunks.setdefault((e["from"], r2, e["kind"]), []).append(e["to"])
+trunk_list = sorted(trunks.items(), key=lambda kv: (rowof[kv[0][0]], pos[kv[0][0]][0]))
+
+# lane allocation: one lane per trunk per gap it crosses
+gap_members = {}
+for ti, ((src, r2, kind), tgts) in enumerate(trunk_list):
+    r1 = rowof[src]
     for g in range(min(r1, r2), max(r1, r2)):
-        gap_edges.setdefault(g, []).append(i)
-lane_y = {}  # (edge_index, gap) -> y
-for g, eis in gap_edges.items():
-    eis.sort(key=lambda i: min(pos[edges[i]["from"]][0], pos[edges[i]["to"]][0]))
+        gap_members.setdefault(g, []).append(ti)
+lane_y = {}
+for g, tis in gap_members.items():
+    tis.sort(key=lambda ti: min([pos[trunk_list[ti][0][0]][0]] +
+                                [pos[t][0] for t in trunk_list[ti][1]]))
     top, bot = gap_bounds(g)
-    n = len(eis)
-    for k, i in enumerate(eis):
-        lane_y[(i, g)] = top + (k + 1) * (bot - top) / (n + 1)
+    for k, ti in enumerate(tis):
+        lane_y[(ti, g)] = top + (k + 1) * (bot - top) / (len(tis) + 1)
 
-# same-row arcs: rank per row by span so nested arcs don't coincide
-row_arcs = {}
-for i, e in enumerate(edges):
-    r1, r2 = rowof[e["from"]], rowof[e["to"]]
-    if r1 == r2:
-        row_arcs.setdefault(r1, []).append(i)
+# ---------- ports: spread stubs along node top/bottom edges ----------
+stubs = {}  # (nid, 'top'|'bot') -> list of (sort_x, key)
+
+def reg_stub(nid, side, sort_x, key):
+    stubs.setdefault((nid, side), []).append((sort_x, key))
+
+for ti, ((src, r2, kind), tgts) in enumerate(trunk_list):
+    down = r2 > rowof[src]
+    med = sorted(pos[t][0] for t in tgts)[len(tgts) // 2]
+    reg_stub(src, "bot" if down else "top", med, ("T", ti))
+    for t in tgts:
+        reg_stub(t, "top" if down else "bot", pos[src][0], ("D", ti, t))
+for ai, e in enumerate(arcs):
+    r = rowof[e["from"]]
+    side = "top" if r == len(LAYERS) - 1 else "bot"
+    reg_stub(e["from"], side, pos[e["to"]][0], ("A", ai, "f"))
+    reg_stub(e["to"], side, pos[e["from"]][0], ("A", ai, "t"))
+
+port_x = {}
+for (nid, side), lst in stubs.items():
+    lst.sort()
+    x, nw = pos[nid][0], width[nid]
+    n = len(lst)
+    for k, (_, key) in enumerate(lst):
+        port_x[(nid, side) + (key,)] = x - nw / 2 + (k + 1) * nw / (n + 1)
+
+# same-row arc depths (nested by span)
 arc_depth = {}
-for r, eis in row_arcs.items():
-    eis.sort(key=lambda i: abs(pos[edges[i]["from"]][0] - pos[edges[i]["to"]][0]))
-    for k, i in enumerate(eis):
-        arc_depth[i] = 16 + 12 * k
+by_row = {}
+for ai, e in enumerate(arcs):
+    by_row.setdefault(rowof[e["from"]], []).append(ai)
+for r, ais in by_row.items():
+    ais.sort(key=lambda ai: abs(pos[arcs[ai]["from"]][0] - pos[arcs[ai]["to"]][0]))
+    for k, ai in enumerate(ais):
+        arc_depth[ai] = 16 + 12 * k
 
+# ---------- render ----------
 out = []
 out.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
            f'font-family="Segoe UI, sans-serif" font-size="11">')
@@ -153,7 +194,6 @@ out.append('<defs>'
 out.append(f'<rect width="{W}" height="{H}" fill="white"/>')
 out.append(f'<text x="12" y="22" font-size="15" font-weight="bold">s(11) optimality — lemma dependency graph '
            f'(live; base commit {G["meta"]["commit"][:8]}, updated {G["meta"]["date"]})</text>')
-# legend with live counts
 lx = 12
 for lab, col in COLORS.items():
     c = counts.get(lab, 0)
@@ -161,70 +201,88 @@ for lab, col in COLORS.items():
     out.append(f'<rect x="{lx}" y="32" width="12" height="12" fill="{col}" rx="2"/>')
     out.append(f'<text x="{lx+16}" y="42">{txt}</text>')
     lx += 30 + 7 * len(txt)
-out.append(f'<text x="{lx+10}" y="42">arrow points at the dependency &#183; solid = uses &#183; dashed = motivation &#183; hover an edge for its ends</text>')
+out.append(f'<rect x="{lx+10}" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>')
+out.append(f'<text x="{lx+26}" y="42">dashed outline = own work done, waiting only on dependencies &#183; '
+           f'one wire per source&#8594;row, arrows at each dependency &#183; hover for details</text>')
 
-# layer titles
 for r, t in enumerate(LAYER_TITLES):
-    y = row_y(r) - NH / 2 - 8
-    out.append(f'<text x="8" y="{y}" font-size="10" fill="#888" font-style="italic">{html.escape(t)}</text>')
+    out.append(f'<text x="8" y="{row_y(r) - NH/2 - 8}" font-size="10" fill="#888" font-style="italic">{html.escape(t)}</text>')
 
-# ---------- edges (under nodes) ----------
 def fmt(p):
     return f'{p[0]:.0f} {p[1]:.0f}'
 
-for i, e in enumerate(edges):
-    a, b = e["from"], e["to"]
-    (x1, y1), (x2, y2) = pos[a], pos[b]
-    r1, r2 = rowof[a], rowof[b]
+# trunks
+for ti, ((src, r2, kind), tgts) in enumerate(trunk_list):
+    r1 = rowof[src]
+    down = r2 > r1
+    step = 1 if down else -1
+    dash = ' stroke-dasharray="5,4"' if kind == "motivation" else ""
+    col = "#bbb" if kind == "motivation" else "#666"
+    marker = "arrm" if kind == "motivation" else "arr"
+    sx = port_x[(src, "bot" if down else "top", ("T", ti))]
+    sy = pos[src][1] + (NH / 2 if down else -NH / 2)
+    pts = [(sx, sy)]
+    cx, r = sx, r1
+    # travel to the gap adjacent to the target row
+    while True:
+        g = r if down else r - 1
+        ly = lane_y[(ti, g)]
+        nxt = r + step
+        if nxt == r2:
+            pts.append((cx, ly))
+            final_ly = ly
+            break
+        nx = corridor_x(nxt, sorted(pos[t][0] for t in tgts)[len(tgts) // 2])
+        pts.append((cx, ly))
+        pts.append((nx, ly))
+        cx, r = nx, nxt
+    # bus span on the final lane
+    drop_xs = [port_x[(t, "top" if down else "bot", ("D", ti, t))] for t in tgts]
+    lo, hi = min(drop_xs + [cx]), max(drop_xs + [cx])
+    tip = f'{html.escape(src)} &#8594; {", ".join(html.escape(t) for t in sorted(tgts))} ({kind})'
+    trunk_path = 'M ' + ' L '.join(fmt(p) for p in pts)
+    trunk_path += f' M {lo:.0f} {final_ly:.0f} L {hi:.0f} {final_ly:.0f}'
+    out.append(f'<g><title>{tip}</title>')
+    out.append(f'<path d="{trunk_path}" fill="none" stroke="{col}" stroke-width="1.2"{dash} '
+               f'opacity="0.7" stroke-linejoin="round"/>')
+    for t, dx in zip(tgts, drop_xs):
+        ty = pos[t][1] - (NH / 2 if down else -NH / 2)
+        out.append(f'<path d="M {dx:.0f} {final_ly:.0f} L {dx:.0f} {ty:.0f}" fill="none" '
+                   f'stroke="{col}" stroke-width="1.2"{dash} opacity="0.7" marker-end="url(#{marker})"/>')
+    out.append('</g>')
+
+# same-row arcs
+for ai, e in enumerate(arcs):
+    r = rowof[e["from"]]
     dash = ' stroke-dasharray="5,4"' if e["kind"] == "motivation" else ""
     col = "#bbb" if e["kind"] == "motivation" else "#666"
     marker = "arrm" if e["kind"] == "motivation" else "arr"
-    tip = f'{html.escape(a)} &#8594; {html.escape(b)} ({e["kind"]})'
-    if r1 == r2:
-        # arc through the gap below (above, for the bottom row)
-        d = arc_depth[i]
-        if r1 == len(LAYERS) - 1:
-            ya = y1 - NH / 2
-            yc = ya - d - GAP_TOP_PAD
-        else:
-            ya = y1 + NH / 2
-            yc = ya + d + GAP_TOP_PAD
-        path = f'M {x1:.0f} {ya:.0f} C {x1:.0f} {yc:.0f} {x2:.0f} {yc:.0f} {x2:.0f} {ya:.0f}'
-    else:
-        down = r2 > r1
-        step = 1 if down else -1
-        pts = [(x1, y1 + (NH / 2 if down else -NH / 2))]
-        cx = x1
-        r = r1
-        while r != r2:
-            g = r if down else r - 1
-            ly = lane_y[(i, g)]
-            nxt = r + step
-            nx = x2 if nxt == r2 else corridor_x(nxt, x2)
-            pts.append((cx, ly))
-            pts.append((nx, ly))
-            cx = nx
-            r = nxt
-        pts.append((x2, y2 - (NH / 2 if down else -NH / 2)))
-        path = 'M ' + ' L '.join(fmt(p) for p in pts)
+    last = r == len(LAYERS) - 1
+    side = "top" if last else "bot"
+    x1 = port_x[(e["from"], side, ("A", ai, "f"))]
+    x2 = port_x[(e["to"], side, ("A", ai, "t"))]
+    ya = pos[e["from"]][1] + (-NH / 2 if last else NH / 2)
+    yc = ya + (-1 if last else 1) * (arc_depth[ai] + GAP_PAD)
+    tip = f'{html.escape(e["from"])} &#8594; {html.escape(e["to"])} ({e["kind"]})'
     out.append(f'<g><title>{tip}</title>'
-               f'<path d="{path}" fill="none" stroke="{col}" stroke-width="1.2"{dash} '
-               f'opacity="0.7" stroke-linejoin="round" marker-end="url(#{marker})"/></g>')
+               f'<path d="M {x1:.0f} {ya:.0f} C {x1:.0f} {yc:.0f} {x2:.0f} {yc:.0f} {x2:.0f} {ya:.0f}" '
+               f'fill="none" stroke="{col}" stroke-width="1.2"{dash} opacity="0.7" marker-end="url(#{marker})"/></g>')
 
-# ---------- nodes ----------
+# nodes
 for nid, (x, y) in pos.items():
     n = nodes[nid]
     NW = width[nid]
     col = COLORS[n["label"]]
+    blocked = n.get("blocked_only", False)
+    node_dash = ' stroke-dasharray="7,4"' if blocked else ""
     title = html.escape(n["title"])
     note = html.escape(n.get("note", ""))
-    out.append(f'<g><title>{html.escape(nid)} — {title}&#10;[{n["label"]}]&#10;{note}</title>')
+    status = n["label"] + (" — own work done; waiting on dependencies" if blocked else "")
+    out.append(f'<g><title>{html.escape(nid)} — {title}&#10;[{status}]&#10;{note}</title>')
+    out.append(f'<rect x="{x-NW/2:.0f}" y="{y-NH/2:.0f}" width="{NW:.0f}" height="{NH}" rx="7" fill="white"/>')
     out.append(f'<rect x="{x-NW/2:.0f}" y="{y-NH/2:.0f}" width="{NW:.0f}" height="{NH}" rx="7" '
-               f'fill="white"/>')
-    out.append(f'<rect x="{x-NW/2:.0f}" y="{y-NH/2:.0f}" width="{NW:.0f}" height="{NH}" rx="7" '
-               f'fill="{col}" fill-opacity="0.13" stroke="{col}" stroke-width="1.6"/>')
+               f'fill="{col}" fill-opacity="0.13" stroke="{col}" stroke-width="1.6"{node_dash}/>')
     out.append(f'<text x="{x:.0f}" y="{y-NH/2+15:.0f}" text-anchor="middle" font-weight="bold" fill="{col}">{html.escape(nid)}</text>')
-    # wrap the title into <=2 lines scaled to the node width
     maxc = max(16, int(NW / 5.9))
     words, lines, cur = n["title"].split(), [], ""
     for w_ in words:
@@ -241,4 +299,5 @@ for nid, (x, y) in pos.items():
 
 out.append('</svg>')
 open(os.path.join(HERE, "depgraph.svg"), "w", encoding="utf-8").write("\n".join(out))
-print("wrote", os.path.join(HERE, "depgraph.svg"))
+print("wrote", os.path.join(HERE, "depgraph.svg"),
+      f"({len(trunk_list)} trunks for {len(edges)-len(arcs)} cross-row edges, {len(arcs)} arcs)")
