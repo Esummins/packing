@@ -259,11 +259,86 @@ and, by the same ghost mechanism, k4_11 (floors one pair-incidence short): pair 
 stuckness boost β (margin β) + basin discount γ ≈ 0.1 near ŝ (≈ +0.4); (iii) subcritical
 classes (floors 2–3 short per crowdfam): plain pair + β with 2β–3β windows, untested.
 
+## 6.5 [T+M] Lemma W (the margin wall) and the A71 emission verdict (2026-09-02)
+
+A71 ran the emission oracle loop (BRIEF T1) against the frozen verifier. Verdict: **no
+full-quantifier certificate emitted; the obstruction is a quantified verification wall**,
+recorded here because it binds every future emission attempt in v1 semantics.
+
+**Lemma W (margin wall).** Let η > 0 and let Q_1 … Q_K be unit squares in [0, s″]², each
+core-free against class S's slack cores, whose η-cores (concentric squares of side 1 − 2η,
+same orientation) are pairwise disjoint. Let D = the set of interior-disjoint pairs among
+them and V = |D| + β·Σ_{D} m₂. For any atomic pair measure μ write μ₂^η for collection
+counting only atoms whose endpoints are ≥ η deep in their squares. Then
+Σ_{(i,j)∈D} μ₂^η{Q_i, Q_j} ≤ W₂ (an η-deep endpoint lies in the pairwise-disjoint η-cores,
+so each atom serves at most one pair at margin η). Hence if V ≥ C(N,2) + βm, every
+P1′-valid certificate carries ≥ V − W₂ units of its coverage of these rows on atoms less
+than η deep — and any `verify_pair.py` run must refine the corresponding pair boxes to the
+~η scale before COVERED can fire (certain membership over a box is depth against every
+placement in it). *Proof: the two sentences above.* ∎
+
+**Measured instantiation (k4_08, β = 1, s″ = s0, δ = 1/1000, ε_box = 1/833) [M exact].**
+K = 11 mixed-tilt squares with pairwise-disjoint 0.15-cores, exact rationals, D = 35,
+Σm₂ = 4: V = 39 ≥ 28 (`attempts/A71-pair-emission/results/wall_witness2_k4_08.json`,
+pure-Fraction verification of every constraint). So every valid certificate rides ≥ 11
+units of family coverage on sub-0.15-margin atoms. Fractional probes (η-shrunk membership
+LPs) show the adversary value already ≥ 28-trending at η ≈ 0.03–0.10 but did not converge
+in budget (`results/etaprobe_*.json`, honest per-η state). Companion negative: k4_08's
+pins block the CHEAPEST wall families — an axis-aligned 4-row of shrunk cores needs the
+empty y-band [2.499, 2.378] at s0 (`code/wallwit.py`) — the naive (4 − s″)/6 ≈ 0.02 wall
+does not apply; the pins protect at the exploit level too.
+
+**Fixed point and demonstration [M/F].** The A71 loop's empirical fixed point: with
+adversarial continuum row-hunting + mock-witness feedback the covering LP climbs from the
+restricted 27 to W₂ ≈ 30.0 ≥ 28 (P1′ violated) — the wall priced on the covering side; the
+rescaled P1′-valid candidate was judged by the FROZEN verifier end to end: FAIL at depth 12
+with concrete deficit witnesses (`attempts/A71-pair-emission/certs/pair_k4_08_s0_b1_v1s.report.json`).
+corners4 carries the same wall in β = 0 form: exact witness K = 9, D = 22 ≥ 21 at η = 0.15
+(`results/wall_witness2_k4_13.json`) — though with the smallest shortfall (1 unit), making
+corners4 the natural v2 pilot. **A71 T3 broke the solver wall [M]**: inclusion-maximal
+point reduction (265k raw → 1375 maximal patterns) + IPM-no-crossover + row purging turn
+A66's stalled 17k×10k simplex into ~8-min converged cut loops; the support-catalog β = 0
+value CONVERGED at 20.528144 (viol 0/0, Lmax = 1.000000037) with an exact certified lower
+bound 4103377/200000 = 20.516885 (exact Lmax 62499/62500 on cell-representative points,
+support exact-audited; completeness caveat recorded in
+`attempts/A71-pair-emission/results/k4_13_cert_lower.json`). Dual pricing exposed the
+A66 support catalog as NOT pair-adequate (40% of the 1.74M enriched pair columns
+under-priced), so the run GROWS the catalog by pricing: grow-0 = 20.528144 converged,
+grow-1 (304 placements / 20.4k pairs) = 20.542 at budget (Lmax 1.12), further grows in
+flight at session close — every measurement ≥ 0.45 BELOW the line 21 and the value moves
+by ~1e-2 per grow: A66's bracket [14.89, 21.32] is effectively [20.52, ~20.6], and the
+Corollary P0 emptiness route for corners4 is OPEN at restricted strength (not refuted;
+final adequacy-clean value = the A71 T3 artifact set, `results/pairlp_k4_13_a71cg.json`).
+
+**Cost identity [M].** Frozen-verifier throughput at realistic atom counts (3000 atoms,
+exact Fractions): 57 pair-boxes/s (17.5 ms/node; A71 `results/calib_verify.json`); the
+A71 float mock replays the identical discharge rules at 72k nodes/s (1250×). Leaf-count
+geometry ~0.8·((2.877/2r_c)²/(2r_t))²/2 at cell radii (r_c, r_t) ≈ (m/4, m/8) for margin m:
+all-margins-0.15 (ruled out by Lemma W) ≈ 6e8 leaves ≈ 125 days single-core; 0.10 ≈ 7e9 ≈ 4 y;
+0.05 ≈ 4.5e11 ≈ 250 y — v1 verification is decades-to-centuries at the actually-forced margins. The wall is the verifier's uniform
+certain-membership COVERED discharge (spec §5's warning, now priced), NOT the certificate's
+existence: restricted τ₂ = 27 < 28 with zero fractional excess on every audited catalog.
+
+**Consequences.** (i) v1 emission for the k4-tier is CLOSED as infeasible-at-scale; the
+constructive residue is a v2 design: margin-aware splitting, placement-dependent membership
+accounting, a compiled second implementation (wanted for the TCB anyway), and/or an
+analytic coverage clause — spec revision to be VERSIONED (pair-certificate-v2), never an
+edit of v1. (ii) The measure-existence question (a proof that a W₂ < 28 measure exists,
+not an atom list) is the open mathematical half [C]. (iii) Canary: Lemma W is
+adversary-side (a lower bound on W₂) — it strengthens nothing against trump5; the A71
+run-level canary re-verified the dilated 60-digit Trump family as an exact death witness
+under the A71 parameters (min SAT gap = λ − 1 = 1.06e-7 exactly, Σm₂ = 6;
+`results/canary_trump.json`).
+
 ## 7 What remains open for a certified pair kill (the honest ledger)
 
 * [M, pilot] the fractional pair-LP verdict per class — A66 measures k4_08 (boosted) and
   corners4 (β = 0 and boosted) at restricted-LP strength; a restricted value above threshold
   refutes the route for that class (restricted rows lower-bound every certificate's W₂).
+  A71 (2026-09-02): k4_11 = 21 + 6β and k4_03 = 21 + 4β EXACTLY (margin −β, zero fractional
+  excess, adequacy τ_f = 7.000000 per class) — the whole one-short critical tier shares the
+  k4_08 signature; stuckness-row soundness now standalone in `stuck_rows.md` (SR-1/SR-2),
+  with exact P-B image sets G_S = {id, diag}/{id}/{diag}/∅ for k4_08/k4_11/k4_03/corners4.
 * [S] the verifier: `verify_pair.py` is NEW trusted code (C3-scale trust investment; the
   clean-room spec is `docs/specs/pair_certificate_v1.md` §3). Not in the TCB until a second
   implementation or a Lean port exists.

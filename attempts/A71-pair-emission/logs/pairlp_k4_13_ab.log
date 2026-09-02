@@ -1,0 +1,30 @@
+[02:36:24] A71 pair-LP (k4_13 wall-breaker): class=k4_13 betas=0
+[02:36:24] headroom low: 5.27 GB <= 6.0 GB, waiting...
+[02:36:34] headroom OK: ullAvailPageFile=6.96 GB, ullAvailPhys=12.01 GB (need > 6.0 GB)
+[02:36:34] class k4_13: k=4 N=7 m=8  threshold = 21 + beta*8
+[02:36:34] catalog IMPORTED from C:/Users/esumm/code/packing/attempts/A66-corners4-pair/results/catalog_k4_13_supportonly_v2.json: {"n_placements": 204, "imported": 204, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 0.0, "m_histogram": {"0": 9, "1": 39, "2": 149, "3": 7}}
+[02:36:34] catalog: |S|=204  stats={"n_placements": 204, "imported": 204, "dropped_not_core_free": 0, "dropped_not_contained": 0, "min_containment_margin": 0.0, "min_containment_margin_kept": 0.0, "min_core_margin": 0.0, "m_histogram": {"0": 9, "1": 39, "2": 149, "3": 7}}
+[02:36:34] disjoint pairs: 10318 of 20706 (m2>0: 812, m2 max 1)
+[02:36:39] A71 point family: raw=265459 distinct-pattern=24541 inclusion-maximal=1375 (edge-int=27353 skipped=False) depth mean 34.9 max 48 (4.7s)
+[02:36:39] headroom OK: ullAvailPageFile=6.02 GB, ullAvailPhys=11.69 GB (need > 6.0 GB)
+[02:36:39] beta=0: seed rows=3277 nnz=784834 cols=10318 (pts=1375, depth mean 34.9 max 48)
+[02:36:40] beta=0 p0 r1: value=1399.338508 Lmax=486.000000 viol=1500 supz=558 rows=3277 nnz=784834 (lp 1.3s, tot 1s)
+[02:36:53] beta=0 p0 r2: value=92.437988 Lmax=65.216834 viol=1500 supz=667 rows=4777 nnz=1658326 (lp 12.2s, tot 14s)
+[02:37:17] beta=0 p0 r3: value=27.115489 Lmax=2.487488 viol=1500 supz=728 rows=6265 nnz=2520313 (lp 23.8s, tot 38s)
+[02:37:25] AB r3: simplex  xover=on  rows=6265 nnz=2520313 -> HighsModelStatus.kOptimal          value=27.115489 (7.8s)
+[02:37:48] AB r3: ipm      xover=off rows=6265 nnz=2520313 -> HighsModelStatus.kUnknown          value=27.115489 (23.7s)
+[02:38:12] AB r3: ipm      xover=on  rows=6265 nnz=2520313 -> HighsModelStatus.kOptimal          value=27.115489 (23.0s)
+[02:38:14] AB r3: pdlp     xover=off rows=6265 nnz=2520313 -> HighsModelStatus.kTimeLimit        value=0.000000 (1.8s)
+[02:38:46] beta=0 p0 r4: value=23.483224 Lmax=2.011714 viol=1500 supz=974 rows=7759 nnz=3269118 (lp 32.2s, tot 127s)
+[02:39:36] beta=0 p0 r5: value=22.104292 Lmax=1.687026 viol=1500 supz=1343 rows=9223 nnz=4019515 (lp 49.8s, tot 177s)
+[02:40:40] beta=0 p0 r6: value=21.307825 Lmax=1.544056 viol=1500 supz=1883 rows=10721 nnz=4811816 (lp 64.2s, tot 241s)
+[02:42:07] beta=0 p0 r7: value=20.865014 Lmax=1.369663 viol=1500 supz=2025 rows=12189 nnz=5591290 (lp 87.1s, tot 329s)
+[02:44:08] AB r7: simplex  xover=on  rows=12189 nnz=5591290 -> HighsModelStatus.kTimeLimit        value=-21.043651 (120.0s)
+[02:45:25] AB r7: ipm      xover=off rows=12189 nnz=5591290 -> HighsModelStatus.kUnknown          value=20.865014 (76.5s)
+[02:46:08] AB r7: ipm      xover=on  rows=12189 nnz=5591290 -> HighsModelStatus.kTimeLimit        value=0.000000 (43.5s)
+[02:46:08] AB r7: budget spent, skipping pdlp/off
+[02:46:38] beta=0: non-optimal LP status HighsModelStatus.kTimeLimit at round 8 (primal_status=0)
+[02:46:38] beta=0 p0: FINAL ipm/xover=on -> HighsModelStatus.kTimeLimit value=0.000000 (0s)
+[02:46:38] beta=0 p0: fine Lmax=1.868479 (violators 1500)
+[02:46:38] RESULT beta=0: value=0.000000 Lmax_fine=1.868479 scaled=0.000000 thr=21.0000 margin=-21.000000 mbar2=0.0866 ctrl=None converged=False (599.3s)
+[02:46:38] wrote C:\Users\esumm\code\packing\attempts\A71-pair-emission\results\pairlp_k4_13_ab.json (614.1s total)

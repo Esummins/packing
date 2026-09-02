@@ -1,0 +1,655 @@
+{
+ "cls": "k4_13",
+ "k": 4,
+ "N": 7,
+ "m": 8,
+ "s0": 3.877084,
+ "threshold_formula": "21 + beta*8",
+ "catalog": {
+  "n_placements": 264,
+  "imported": 264,
+  "dropped_not_core_free": 0,
+  "dropped_not_contained": 0,
+  "min_containment_margin": 0.0,
+  "min_containment_margin_kept": 0.0,
+  "min_core_margin": 0.0,
+  "m_histogram": {
+   "0": 9,
+   "1": 39,
+   "2": 202,
+   "3": 14
+  }
+ },
+ "n_placements": 264,
+ "n_pairs_disjoint": 18864,
+ "n_cut_points": 1704,
+ "point_family": {
+  "n_raw": 360064,
+  "n_distinct_pattern": 37796,
+  "n_used": 1704,
+  "reduction": "inclusion-maximal",
+  "edge_intersections_total": 42491,
+  "edge_intersections_kept": 38944,
+  "edge_intersections_skipped": false,
+  "nudge_dirs": 8,
+  "probe_eps": 1e-05,
+  "base_cap": 40000,
+  "depth_mean": 40.64847417840375,
+  "depth_max": 69
+ },
+ "colgen": [
+  {
+   "grow": 0,
+   "n_placements": 204,
+   "value": 21.84372092804354,
+   "converged": false,
+   "max_reduced_cost": 0.921125270560785,
+   "n_positive": 431742,
+   "n_priced_pairs": 1743050,
+   "frac_positive": 0.24769341097501507
+  }
+ ],
+ "control": null,
+ "betas": {
+  "0.0": {
+   "beta": 0.0,
+   "value": 22.176662054892113,
+   "Lmax_fine": 1.5448311631546785,
+   "scaled_value": 14.355395323334529,
+   "threshold": 21.0,
+   "margin": -6.644604676665471,
+   "mbar2": 0.2369546644332102,
+   "converged": false,
+   "tau2_bracket": [
+    14.355395323334529,
+    22.176662054892113
+   ],
+   "bracket_note": "scaled_value is a VALID lower bound on tau2; value is the restricted-LP optimum on the rows found so far and is an upper bound on what this catalog can give",
+   "control_value": null,
+   "value_ge_control": null,
+   "n_support_pairs": 376,
+   "n_support_squares": 159,
+   "rounds": 12,
+   "n_rows": 1796,
+   "nnz": 1785537,
+   "Lmax_cut": 1.5727204417778864,
+   "n_z_at_ub": 0,
+   "lp_status": "HighsModelStatus.kOptimal",
+   "note": "round cap 12 reached",
+   "n_tight_rows": 683,
+   "solver_times": [
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 1,
+     "rows": 2393,
+     "nnz": 2033634,
+     "seconds": 1.774719476699829,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 26
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 2,
+     "rows": 2555,
+     "nnz": 2322151,
+     "seconds": 11.265865802764893,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 1.5057510793781148e-11,
+     "ipm_iters": 43
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 3,
+     "rows": 2823,
+     "nnz": 2525287,
+     "seconds": 15.173496961593628,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 43
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 4,
+     "rows": 3030,
+     "nnz": 2761593,
+     "seconds": 16.266761302947998,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 8.419931418757187e-13,
+     "ipm_iters": 44
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 5,
+     "rows": 930,
+     "nnz": 969473,
+     "seconds": 2.5371532440185547,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 38
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 6,
+     "rows": 1234,
+     "nnz": 1265278,
+     "seconds": 4.662675142288208,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 42
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 7,
+     "rows": 1654,
+     "nnz": 1691431,
+     "seconds": 7.682284832000732,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 40
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 8,
+     "rows": 2042,
+     "nnz": 2065599,
+     "seconds": 11.08589220046997,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 42
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 9,
+     "rows": 1584,
+     "nnz": 1607529,
+     "seconds": 6.958362817764282,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 1.1721734693992403e-12,
+     "ipm_iters": 42
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 10,
+     "rows": 2082,
+     "nnz": 2100991,
+     "seconds": 10.903987407684326,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 7.783107491832197e-12,
+     "ipm_iters": 41
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 11,
+     "rows": 2489,
+     "nnz": 2474559,
+     "seconds": 16.217463731765747,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 45
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 12,
+     "rows": 2922,
+     "nnz": 2930408,
+     "seconds": 19.88177490234375,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 44
+    },
+    {
+     "kind": "final:p0",
+     "solver": "ipm",
+     "crossover": "on",
+     "rows": 1796,
+     "seconds": 9.980446338653564,
+     "status": "HighsModelStatus.kOptimal",
+     "value": 22.176662054892113
+    }
+   ],
+   "headline_solve": null,
+   "n_active_rows": 1796,
+   "seconds": 136.44559049606323,
+   "fine": {
+    "point_family": "A71 global inclusion-maximal membership patterns",
+    "n_points": 1704,
+    "depth_mean": 40.64847417840375,
+    "depth_max": 69,
+    "Lmax_final": 1.5448311631546785
+   },
+   "top10": [
+    {
+     "pair": 206,
+     "z": 0.32444982431547126,
+     "m2": 0,
+     "a": {
+      "t": 0.0,
+      "cx": 3.377084,
+      "cy": 2.31
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 0.5,
+      "cy": 1.5
+     }
+    },
+    {
+     "pair": 5797,
+     "z": 0.31027990385713233,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 0.5,
+      "cy": 1.5
+     },
+     "b": {
+      "t": 0.02,
+      "cx": 1.55,
+      "cy": 0.55
+     }
+    },
+    {
+     "pair": 6214,
+     "z": 0.30625196375248515,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 3.35,
+      "cy": 1.5
+     },
+     "b": {
+      "t": 0.52,
+      "cx": 2.5500000000000003,
+      "cy": 2.45
+     }
+    },
+    {
+     "pair": 5850,
+     "z": 0.296577768763586,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 0.5,
+      "cy": 1.5
+     },
+     "b": {
+      "t": 0.32,
+      "cx": 1.3,
+      "cy": 2.45
+     }
+    },
+    {
+     "pair": 5820,
+     "z": 0.2669433808453958,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 0.5,
+      "cy": 1.5
+     },
+     "b": {
+      "t": 0.02,
+      "cx": 2.35,
+      "cy": 3.35
+     }
+    },
+    {
+     "pair": 7219,
+     "z": 0.2510315450435347,
+     "m2": 0,
+     "a": {
+      "t": 0.96,
+      "cx": 3.35,
+      "cy": 2.35
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     }
+    },
+    {
+     "pair": 17849,
+     "z": 0.23424550420568047,
+     "m2": 0,
+     "a": {
+      "t": 0.28,
+      "cx": 2.25,
+      "cy": 1.85
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 0.55,
+      "cy": 1.5
+     }
+    },
+    {
+     "pair": 9764,
+     "z": 0.2289005998259586,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.28,
+      "cx": 2.5500000000000003,
+      "cy": 1.4000000000000001
+     }
+    },
+    {
+     "pair": 1031,
+     "z": 0.2270822180968982,
+     "m2": 0,
+     "a": {
+      "t": 0.0,
+      "cx": 2.2,
+      "cy": 3.377084
+     },
+     "b": {
+      "t": 0.0,
+      "cx": 0.5,
+      "cy": 1.6
+     }
+    },
+    {
+     "pair": 2793,
+     "z": 0.22635402414187827,
+     "m2": 0,
+     "a": {
+      "t": 0.96,
+      "cx": 2.35,
+      "cy": 0.55
+     },
+     "b": {
+      "t": 0.0,
+      "cx": 0.5,
+      "cy": 2.35
+     }
+    },
+    {
+     "pair": 8035,
+     "z": 0.22125212192209093,
+     "m2": 1,
+     "a": {
+      "t": 0.0,
+      "cx": 0.5,
+      "cy": 2.35
+     },
+     "b": {
+      "t": 0.54,
+      "cx": 1.6,
+      "cy": 1.85
+     }
+    },
+    {
+     "pair": 3437,
+     "z": 0.21831572678249817,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 2.35,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.02,
+      "cx": 2.35,
+      "cy": 3.35
+     }
+    },
+    {
+     "pair": 226,
+     "z": 0.21490550533221325,
+     "m2": 0,
+     "a": {
+      "t": 0.0,
+      "cx": 3.377084,
+      "cy": 2.31
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     }
+    },
+    {
+     "pair": 8930,
+     "z": 0.20469312127323575,
+     "m2": 0,
+     "a": {
+      "t": 0.02,
+      "cx": 0.55,
+      "cy": 2.35
+     },
+     "b": {
+      "t": 0.96,
+      "cx": 1.55,
+      "cy": 3.35
+     }
+    },
+    {
+     "pair": 3449,
+     "z": 0.20109713589162426,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 2.35,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.46,
+      "cx": 2.6,
+      "cy": 2.45
+     }
+    },
+    {
+     "pair": 3496,
+     "z": 0.20109121919002368,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 2.35,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.6,
+      "cx": 1.35,
+      "cy": 1.4000000000000001
+     }
+    },
+    {
+     "pair": 9772,
+     "z": 0.20040125647686047,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.3,
+      "cx": 1.6,
+      "cy": 2.0
+     }
+    },
+    {
+     "pair": 7615,
+     "z": 0.1953340136218371,
+     "m2": 0,
+     "a": {
+      "t": 0.02,
+      "cx": 3.3000000000000003,
+      "cy": 1.55
+     },
+     "b": {
+      "t": 0.0,
+      "cx": 0.5,
+      "cy": 2.35
+     }
+    },
+    {
+     "pair": 2011,
+     "z": 0.18815054089230943,
+     "m2": 0,
+     "a": {
+      "t": 0.9,
+      "cx": 2.3000000000000003,
+      "cy": 0.55
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 3.35,
+      "cy": 1.5
+     }
+    },
+    {
+     "pair": 9815,
+     "z": 0.1856800486490256,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.96,
+      "cx": 2.35,
+      "cy": 3.35
+     }
+    }
+   ]
+  }
+ },
+ "deviations": [
+  "A71: the working point family is the FULL catalog arrangement's cell representatives reduced to inclusion-MAXIMAL membership patterns.  Sound because the (P2') load is monotone in the membership sets for z >= 0, so a dominated point's row is implied and the load maximum over the family is attained on maximal patterns; the cut loop and the validity check are therefore the same exact test on this family (no random subsampling, unlike A66's --fine_cap truncation).",
+  "A71: cut-loop LPs are solved by HiGHS interior point with crossover OFF; every outer pass ends with a clean ipm solve (crossover=on) whose basic solution and row duals are what gets reported.",
+  "A71: cell-representative point sets are HEURISTICALLY COMPLETE.  Each evaluated load is exact for its point, but maximality of the load over all of [0,s0]^2 rests on the representative construction (vertices + pairwise edge intersections nudged by 1e-05), not on a proof.",
+  "core-free test uses the FULL unit pin (delta = 0), i.e. the strongest core; margin EPS_CORE = 1e-07 applied as |proj| >= (1+w)/2 - EPS_CORE (spec's literal reading)",
+  "cutting-plane point set is augmented each round with arrangement-cell representatives (vertices + pairwise edge intersections of the CURRENT support squares, nudged by 1e-05 in the four diagonal directions); a plain 0.12/0.3 grid leaves Lmax >> 1 because the load is constant on arrangement cells that the grid never samples",
+  "rows are deduplicated by their support set (not by point index), so the working point set may change between rounds without losing rows",
+  "z has an upper bound 30 purely to keep intermediate LPs bounded; n_z_at_ub is reported"
+ ],
+ "settings": {
+  "cls": "k4_13",
+  "betas": "0",
+  "cap_total": 300,
+  "cap_m2": 200,
+  "cap_m1": 60,
+  "cap_coarse": 40,
+  "min_sep": 0.35,
+  "max_rounds": 12,
+  "max_cuts": 1500,
+  "max_rows": 25000,
+  "outer_passes": 2,
+  "cut_tol": 1e-06,
+  "fine_tol": 1.05,
+  "probe_squares": 200,
+  "probe_cap": 4000,
+  "seg_cap": 8000000,
+  "probe_eps": 1e-05,
+  "max_nnz": 25000000,
+  "n_seed_random": 2000,
+  "lp_time": 300.0,
+  "cls_budget": 200.0,
+  "zub": 30.0,
+  "chunk": 384,
+  "fine_global": 0.05,
+  "fine_local": 0.02,
+  "fine_radius": 1.2,
+  "fine_cap": 9000,
+  "seed": 20260901,
+  "headroom": 6.0,
+  "headroom_wait": 300.0,
+  "no_control_cols": false,
+  "catalog": "C:/Users/esumm/code/packing/attempts/A66-corners4-pair/results/catalog_k4_13_supportonly_v2.json",
+  "tag": "_cgsmoke",
+  "dump_primal": null,
+  "lp_solver": "ipm",
+  "loop_crossover": "off",
+  "final_solver": "ipm",
+  "final_crossover": "on",
+  "final_lp_time": 1800.0,
+  "ab_rounds": "",
+  "ab_budget": 300.0,
+  "ab_each": 150.0,
+  "seed_deep": 60,
+  "top_k": 20,
+  "nudge8": true,
+  "no_maximal": false,
+  "dump_support": null,
+  "price_catalog": "C:/Users/esumm/code/packing/attempts/A66-corners4-pair/results/catalog_k4_13_enriched_v2.json",
+  "grow_rounds": 1,
+  "grow_add": 60,
+  "grow_tol": 1e-06,
+  "grow_min_sep": 0.1,
+  "base_cap": 40000,
+  "total_budget": 1000000000.0,
+  "dump_dual": null,
+  "purge_every": 4,
+  "purge_slack": 0.02,
+  "purge_age": 3,
+  "purge_min": 200,
+  "purge_max": 4,
+  "purge_stop_lmax": 1.05,
+  "cut_pool": 6,
+  "cuts_per_point": 3,
+  "headline_solver": "none",
+  "headline_crossover": "on",
+  "headline_time": 3600.0,
+  "n_boxpts": 0
+ },
+ "grow_history": [
+  {
+   "grow": 0,
+   "n_placements": 204,
+   "n_pairs": 10318,
+   "n_points": 1375,
+   "value": 21.84372092804354,
+   "converged": false,
+   "Lmax_fine": 1.4810580546186558,
+   "rounds": 12,
+   "seconds": 66.97790241241455
+  },
+  {
+   "grow": 1,
+   "n_placements": 264,
+   "n_pairs": 18864,
+   "n_points": 1704,
+   "value": 22.176662054892113,
+   "converged": false,
+   "Lmax_fine": 1.5448311631546785,
+   "rounds": 12,
+   "seconds": 136.44559049606323
+  }
+ ],
+ "rowstore_rows": 6477,
+ "rowstore_nnz": 6159723,
+ "catalog_pair_adequate": false,
+ "total_seconds": 220.63386225700378
+}

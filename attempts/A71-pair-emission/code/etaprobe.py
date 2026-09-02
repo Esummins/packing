@@ -25,9 +25,55 @@ import emitlib as el
 from fractions import Fraction as Fr
 
 
+def _shrunk_vertex_fns(eta):
+    """arrangement-cell probes must follow the ETA-SHRUNK squares: with membership counted
+    eta-deep, the load is piecewise-constant on the arrangement of the SHRUNK boundaries."""
+    import math as _m
+
+    def square_vertices(cat, idx):
+        V = []
+        h = 0.5 - eta
+        for i in idx:
+            cx, cy, th = cat["C"][i, 0], cat["C"][i, 1], cat["th"][i]
+            c, s = _m.cos(th), _m.sin(th)
+            for su in (-h, h):
+                for sv in (-h, h):
+                    V.append((cx + su * c - sv * s, cy + su * s + sv * c))
+        return np.array(V) if V else np.zeros((0, 2))
+
+    def seg_intersections(cat, idx, cap=400000):
+        A, B = [], []
+        h = 0.5 - eta
+        for i in idx:
+            cx, cy, th = cat["C"][i, 0], cat["C"][i, 1], cat["th"][i]
+            c, s = _m.cos(th), _m.sin(th)
+            v = [(cx + su * c - sv * s, cy + su * s + sv * c)
+                 for (su, sv) in ((-h, -h), (h, -h), (h, h), (-h, h))]
+            for k in range(4):
+                A.append(v[k]); B.append(v[(k + 1) % 4])
+        A = np.array(A); B = np.array(B)
+        n = len(A)
+        if n == 0 or n * n // 2 > cap:
+            return np.zeros((0, 2)), (n * n // 2 > cap)
+        iu = np.triu_indices(n, 1)
+        p, r = A[iu[0]], B[iu[0]] - A[iu[0]]
+        q, sv = A[iu[1]], B[iu[1]] - A[iu[1]]
+        den = r[:, 0] * sv[:, 1] - r[:, 1] * sv[:, 0]
+        good = np.abs(den) > 1e-12
+        qp = q - p
+        tt = np.where(good, (qp[:, 0] * sv[:, 1] - qp[:, 1] * sv[:, 0]) / np.where(good, den, 1.0), -1.0)
+        uu = np.where(good, (qp[:, 0] * r[:, 1] - qp[:, 1] * r[:, 0]) / np.where(good, den, 1.0), -1.0)
+        ok = good & (tt >= 0) & (tt <= 1) & (uu >= 0) & (uu <= 1)
+        X = p[ok] + tt[ok, None] * r[ok]
+        return X, False
+
+    return square_vertices, seg_intersections
+
+
 def run_eta(eta, delta, args, fh):
     pl.EPS_IN = eta                      # membership counted eta-deep
     pl.EPS_CORE = delta                  # slack cores (strict-side approx, see notes)
+    pl.square_vertices, pl.seg_intersections = _shrunk_vertex_fns(eta)
     cd = el.ClassData("k4_08", delta=Fr(delta).limit_denominator(10**6))
 
     spec = json.load(open(pl.BOXSPEC))

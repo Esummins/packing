@@ -1,0 +1,977 @@
+{
+ "cls": "k4_13",
+ "k": 4,
+ "N": 7,
+ "m": 8,
+ "s0": 3.877084,
+ "threshold_formula": "21 + beta*8",
+ "catalog": {
+  "n_placements": 304,
+  "imported": 304,
+  "dropped_not_core_free": 0,
+  "dropped_not_contained": 0,
+  "min_containment_margin": 0.0,
+  "min_containment_margin_kept": 0.0,
+  "min_core_margin": 0.0,
+  "m_histogram": {
+   "0": 10,
+   "1": 48,
+   "2": 203,
+   "3": 43
+  }
+ },
+ "n_placements": 304,
+ "n_pairs_disjoint": 20449,
+ "n_cut_points": 2718,
+ "point_family": {
+  "n_raw": 360157,
+  "n_distinct_pattern": 59262,
+  "n_used": 2718,
+  "reduction": "inclusion-maximal",
+  "edge_intersections_total": 67726,
+  "edge_intersections_kept": 38784,
+  "edge_intersections_skipped": false,
+  "nudge_dirs": 8,
+  "probe_eps": 1e-05,
+  "base_cap": 40000,
+  "depth_mean": 61.17586460632818,
+  "depth_max": 97
+ },
+ "colgen": [
+  {
+   "grow": 0,
+   "n_placements": 204,
+   "value": 20.52814378038428,
+   "converged": true,
+   "max_reduced_cost": 0.9572001167104748,
+   "n_positive": 703807,
+   "n_priced_pairs": 1743050,
+   "frac_positive": 0.4037790080605835
+  }
+ ],
+ "control": null,
+ "betas": {
+  "0.0": {
+   "beta": 0.0,
+   "value": 20.54238840423048,
+   "Lmax_fine": 1.1237242869324369,
+   "scaled_value": 18.280630438545977,
+   "threshold": 21.0,
+   "margin": -2.719369561454023,
+   "mbar2": 0.22930448578012919,
+   "converged": false,
+   "tau2_bracket": [
+    18.280630438545977,
+    20.54238840423048
+   ],
+   "bracket_note": "scaled_value is a VALID lower bound on tau2; value is the restricted-LP optimum on the rows found so far and is an upper bound on what this catalog can give",
+   "control_value": null,
+   "value_ge_control": null,
+   "n_support_pairs": 568,
+   "n_support_squares": 187,
+   "rounds": 38,
+   "n_rows": 2867,
+   "nnz": 3587591,
+   "Lmax_cut": 1.516385001850366,
+   "n_z_at_ub": 0,
+   "lp_status": "HighsModelStatus.kOptimal",
+   "note": "non-optimal LP status HighsModelStatus.kTimeLimit at round 38",
+   "n_tight_rows": 1135,
+   "solver_times": [
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 1,
+     "rows": 2961,
+     "nnz": 1924894,
+     "seconds": 1.3596606254577637,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 22
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 2,
+     "rows": 3141,
+     "nnz": 2071431,
+     "seconds": 1.9201836585998535,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 26
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 3,
+     "rows": 3346,
+     "nnz": 2354082,
+     "seconds": 8.302028894424438,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 39
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 4,
+     "rows": 3608,
+     "nnz": 2682605,
+     "seconds": 14.595747709274292,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 43
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 5,
+     "rows": 1000,
+     "nnz": 1213214,
+     "seconds": 3.6009914875030518,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 38
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 6,
+     "rows": 1238,
+     "nnz": 1508618,
+     "seconds": 5.1670098304748535,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 40
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 7,
+     "rows": 1859,
+     "nnz": 2513231,
+     "seconds": 13.322801351547241,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 5.1958437552457326e-14,
+     "ipm_iters": 42
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 8,
+     "rows": 2506,
+     "nnz": 3285120,
+     "seconds": 18.006240367889404,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 46
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 9,
+     "rows": 2370,
+     "nnz": 3173551,
+     "seconds": 19.347158670425415,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 49
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 10,
+     "rows": 2989,
+     "nnz": 4117024,
+     "seconds": 23.912118911743164,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 3.481659405224491e-13,
+     "ipm_iters": 46
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 11,
+     "rows": 3490,
+     "nnz": 4739111,
+     "seconds": 36.814308166503906,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 43
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 12,
+     "rows": 4114,
+     "nnz": 5543342,
+     "seconds": 46.25595426559448,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 43
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 13,
+     "rows": 2474,
+     "nnz": 3081326,
+     "seconds": 19.5899817943573,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 46
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 14,
+     "rows": 3063,
+     "nnz": 3863425,
+     "seconds": 25.90459895133972,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 47
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 15,
+     "rows": 3769,
+     "nnz": 4787707,
+     "seconds": 41.6333167552948,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 45
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 16,
+     "rows": 4384,
+     "nnz": 5550606,
+     "seconds": 53.972591161727905,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 47
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 17,
+     "rows": 2912,
+     "nnz": 3687263,
+     "seconds": 24.233404636383057,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 49
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 18,
+     "rows": 3639,
+     "nnz": 4705260,
+     "seconds": 40.83834218978882,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 1.0658141036401503e-14,
+     "ipm_iters": 46
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 19,
+     "rows": 4279,
+     "nnz": 5532711,
+     "seconds": 57.20112919807434,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 49
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 20,
+     "rows": 4965,
+     "nnz": 6403848,
+     "seconds": 70.54545450210571,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 50
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 21,
+     "rows": 3061,
+     "nnz": 3734579,
+     "seconds": 27.530157566070557,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 49
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 22,
+     "rows": 3819,
+     "nnz": 4726976,
+     "seconds": 40.71509575843811,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 53
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 23,
+     "rows": 4529,
+     "nnz": 5681017,
+     "seconds": 61.57909297943115,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 53
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 24,
+     "rows": 5068,
+     "nnz": 6445853,
+     "seconds": 70.41913747787476,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 54
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 25,
+     "rows": 3015,
+     "nnz": 3994092,
+     "seconds": 29.013410806655884,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 54
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 26,
+     "rows": 3678,
+     "nnz": 4778976,
+     "seconds": 41.44325041770935,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 51
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 27,
+     "rows": 4040,
+     "nnz": 5193297,
+     "seconds": 46.59867286682129,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 51
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 28,
+     "rows": 4358,
+     "nnz": 5610439,
+     "seconds": 59.494935035705566,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 50
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 29,
+     "rows": 2537,
+     "nnz": 3155024,
+     "seconds": 23.035949230194092,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 49
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 30,
+     "rows": 3170,
+     "nnz": 3936392,
+     "seconds": 34.50799250602722,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 48
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 31,
+     "rows": 3481,
+     "nnz": 4352648,
+     "seconds": 35.3608717918396,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 56
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 32,
+     "rows": 3795,
+     "nnz": 4788308,
+     "seconds": 43.65344953536987,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 50
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 33,
+     "rows": 2624,
+     "nnz": 3285195,
+     "seconds": 22.645516633987427,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 54
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 34,
+     "rows": 2886,
+     "nnz": 3643430,
+     "seconds": 26.734623670578003,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 52
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 35,
+     "rows": 3224,
+     "nnz": 4054558,
+     "seconds": 29.176400661468506,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 51
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 36,
+     "rows": 3434,
+     "nnz": 4329439,
+     "seconds": 36.061628341674805,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 53
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 37,
+     "rows": 2591,
+     "nnz": 3286052,
+     "seconds": 22.819469451904297,
+     "status": "HighsModelStatus.kUnknown",
+     "primal_inf": 0.0,
+     "ipm_iters": 52
+    },
+    {
+     "kind": "loop",
+     "solver": "ipm",
+     "crossover": "off",
+     "round": 38,
+     "rows": 2867,
+     "nnz": 3587591,
+     "seconds": 22.872155904769897,
+     "status": "HighsModelStatus.kTimeLimit"
+    },
+    {
+     "kind": "final:p0",
+     "solver": "ipm",
+     "crossover": "on",
+     "rows": 2867,
+     "seconds": 31.632095098495483,
+     "status": "HighsModelStatus.kOptimal",
+     "value": 20.54238840423048
+    },
+    {
+     "kind": "final:headline",
+     "solver": "simplex",
+     "crossover": "on",
+     "rows": 2867,
+     "seconds": 0.0514681339263916,
+     "status": "HighsModelStatus.kOptimal",
+     "value": 20.54238840423048
+    }
+   ],
+   "headline_solve": {
+    "solver": "simplex",
+    "crossover": "on",
+    "value": 20.54238840423048,
+    "status": "HighsModelStatus.kOptimal"
+   },
+   "n_active_rows": 2867,
+   "seconds": 1242.159879207611,
+   "fine": {
+    "point_family": "A71 global inclusion-maximal membership patterns",
+    "n_points": 2718,
+    "depth_mean": 61.17586460632818,
+    "depth_max": 97,
+    "Lmax_final": 1.1237242869324369
+   },
+   "top10": [
+    {
+     "pair": 3829,
+     "z": 0.25936046820371994,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 2.35,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.0,
+      "cx": 0.5,
+      "cy": 2.35
+     }
+    },
+    {
+     "pair": 11008,
+     "z": 0.21308922427209662,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.54,
+      "cx": 2.0,
+      "cy": 1.6
+     }
+    },
+    {
+     "pair": 3807,
+     "z": 0.20118660709083452,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 2.35,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 3.35
+     }
+    },
+    {
+     "pair": 2281,
+     "z": 0.19898967035628096,
+     "m2": 0,
+     "a": {
+      "t": 0.9,
+      "cx": 2.3000000000000003,
+      "cy": 0.55
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 3.35,
+      "cy": 1.5
+     }
+    },
+    {
+     "pair": 6307,
+     "z": 0.1829194240476246,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 0.5,
+      "cy": 1.5
+     },
+     "b": {
+      "t": 0.02,
+      "cx": 1.55,
+      "cy": 0.55
+     }
+    },
+    {
+     "pair": 3912,
+     "z": 0.17358923195543619,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 2.35,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.24,
+      "cx": 1.4000000000000001,
+      "cy": 1.35
+     }
+    },
+    {
+     "pair": 10979,
+     "z": 0.1692691044971959,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.28,
+      "cx": 2.5500000000000003,
+      "cy": 1.4000000000000001
+     }
+    },
+    {
+     "pair": 10976,
+     "z": 0.16690394095100403,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.96,
+      "cx": 1.55,
+      "cy": 3.35
+     }
+    },
+    {
+     "pair": 5086,
+     "z": 0.16347173425626763,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 3.35
+     },
+     "b": {
+      "t": 0.26,
+      "cx": 2.0500000000000003,
+      "cy": 2.3000000000000003
+     }
+    },
+    {
+     "pair": 5905,
+     "z": 0.15937184545641706,
+     "m2": 0,
+     "a": {
+      "t": 0.56,
+      "cx": 1.4000000000000001,
+      "cy": 2.5500000000000003
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 3.35,
+      "cy": 1.5
+     }
+    },
+    {
+     "pair": 7222,
+     "z": 0.15555100320797519,
+     "m2": 0,
+     "a": {
+      "t": 0.02,
+      "cx": 3.35,
+      "cy": 2.35
+     },
+     "b": {
+      "t": 0.02,
+      "cx": 0.55,
+      "cy": 2.35
+     }
+    },
+    {
+     "pair": 8906,
+     "z": 0.1533468986107884,
+     "m2": 1,
+     "a": {
+      "t": 0.0,
+      "cx": 0.5,
+      "cy": 2.35
+     },
+     "b": {
+      "t": 0.5,
+      "cx": 1.3,
+      "cy": 1.4000000000000001
+     }
+    },
+    {
+     "pair": 16336,
+     "z": 0.1470651274284758,
+     "m2": 0,
+     "a": {
+      "t": 0.54,
+      "cx": 2.0,
+      "cy": 1.6
+     },
+     "b": {
+      "t": 0.54,
+      "cx": 2.5500000000000003,
+      "cy": 2.45
+     }
+    },
+    {
+     "pair": 10987,
+     "z": 0.14155648145061814,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.3,
+      "cx": 1.6,
+      "cy": 2.0
+     }
+    },
+    {
+     "pair": 7932,
+     "z": 0.1400576557607589,
+     "m2": 0,
+     "a": {
+      "t": 0.96,
+      "cx": 3.35,
+      "cy": 2.35
+     },
+     "b": {
+      "t": 0.0,
+      "cx": 2.35,
+      "cy": 3.35
+     }
+    },
+    {
+     "pair": 6346,
+     "z": 0.13380630553183387,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 0.5,
+      "cy": 1.5
+     },
+     "b": {
+      "t": 0.3,
+      "cx": 1.85,
+      "cy": 1.6
+     }
+    },
+    {
+     "pair": 6278,
+     "z": 0.1314051819266082,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 0.5,
+      "cy": 1.5
+     },
+     "b": {
+      "t": 1.0,
+      "cx": 3.35,
+      "cy": 1.5
+     }
+    },
+    {
+     "pair": 6823,
+     "z": 0.12868181326979242,
+     "m2": 1,
+     "a": {
+      "t": 1.0,
+      "cx": 3.35,
+      "cy": 1.5
+     },
+     "b": {
+      "t": 0.6,
+      "cx": 2.3000000000000003,
+      "cy": 2.0500000000000003
+     }
+    },
+    {
+     "pair": 1100,
+     "z": 0.12778772831317867,
+     "m2": 0,
+     "a": {
+      "t": 0.0,
+      "cx": 2.2,
+      "cy": 3.377084
+     },
+     "b": {
+      "t": 0.0,
+      "cx": 2.35,
+      "cy": 2.35
+     }
+    },
+    {
+     "pair": 11020,
+     "z": 0.12774675840200325,
+     "m2": 0,
+     "a": {
+      "t": 1.0,
+      "cx": 1.5,
+      "cy": 0.5
+     },
+     "b": {
+      "t": 0.54,
+      "cx": 2.5500000000000003,
+      "cy": 2.45
+     }
+    }
+   ]
+  }
+ },
+ "deviations": [
+  "A71: the working point family is the FULL catalog arrangement's cell representatives reduced to inclusion-MAXIMAL membership patterns.  Sound because the (P2') load is monotone in the membership sets for z >= 0, so a dominated point's row is implied and the load maximum over the family is attained on maximal patterns; the cut loop and the validity check are therefore the same exact test on this family (no random subsampling, unlike A66's --fine_cap truncation).",
+  "A71: cut-loop LPs are solved by HiGHS interior point with crossover OFF; every outer pass ends with a clean ipm solve (crossover=on) whose basic solution and row duals are what gets reported.",
+  "A71: cell-representative point sets are HEURISTICALLY COMPLETE.  Each evaluated load is exact for its point, but maximality of the load over all of [0,s0]^2 rests on the representative construction (vertices + pairwise edge intersections nudged by 1e-05), not on a proof.",
+  "core-free test uses the FULL unit pin (delta = 0), i.e. the strongest core; margin EPS_CORE = 1e-07 applied as |proj| >= (1+w)/2 - EPS_CORE (spec's literal reading)",
+  "cutting-plane point set is augmented each round with arrangement-cell representatives (vertices + pairwise edge intersections of the CURRENT support squares, nudged by 1e-05 in the four diagonal directions); a plain 0.12/0.3 grid leaves Lmax >> 1 because the load is constant on arrangement cells that the grid never samples",
+  "rows are deduplicated by their support set (not by point index), so the working point set may change between rounds without losing rows",
+  "z has an upper bound 30 purely to keep intermediate LPs bounded; n_z_at_ub is reported"
+ ],
+ "settings": {
+  "cls": "k4_13",
+  "betas": "0",
+  "cap_total": 300,
+  "cap_m2": 200,
+  "cap_m1": 60,
+  "cap_coarse": 40,
+  "min_sep": 0.35,
+  "max_rounds": 3000,
+  "max_cuts": 1200,
+  "max_rows": 60000,
+  "outer_passes": 8,
+  "cut_tol": 1e-06,
+  "fine_tol": 1.000001,
+  "probe_squares": 200,
+  "probe_cap": 4000,
+  "seg_cap": 8000000,
+  "probe_eps": 1e-05,
+  "max_nnz": 30000000,
+  "n_seed_random": 2000,
+  "lp_time": 1200.0,
+  "cls_budget": 2400.0,
+  "zub": 30.0,
+  "chunk": 384,
+  "fine_global": 0.05,
+  "fine_local": 0.02,
+  "fine_radius": 1.2,
+  "fine_cap": 9000,
+  "seed": 20260901,
+  "headroom": 6.0,
+  "headroom_wait": 300.0,
+  "no_control_cols": false,
+  "catalog": "C:/Users/esumm/code/packing/attempts/A66-corners4-pair/results/catalog_k4_13_supportonly_v2.json",
+  "tag": "_a71cg",
+  "dump_primal": null,
+  "lp_solver": "ipm",
+  "loop_crossover": "off",
+  "final_solver": "ipm",
+  "final_crossover": "on",
+  "final_lp_time": 1800.0,
+  "ab_rounds": "",
+  "ab_budget": 300.0,
+  "ab_each": 150.0,
+  "seed_deep": 60,
+  "top_k": 20,
+  "nudge8": true,
+  "no_maximal": false,
+  "dump_support": "0",
+  "price_catalog": "C:/Users/esumm/code/packing/attempts/A66-corners4-pair/results/catalog_k4_13_enriched_v2.json",
+  "grow_rounds": 8,
+  "grow_add": 100,
+  "grow_tol": 1e-06,
+  "grow_min_sep": 0.1,
+  "base_cap": 40000,
+  "total_budget": 11000.0,
+  "dump_dual": "0",
+  "purge_every": 4,
+  "purge_slack": 0.02,
+  "purge_age": 3,
+  "purge_min": 200,
+  "purge_max": 6,
+  "purge_stop_lmax": 1.05,
+  "cut_pool": 6,
+  "cuts_per_point": 5,
+  "headline_solver": "simplex",
+  "headline_crossover": "on",
+  "headline_time": 600.0,
+  "n_boxpts": 0
+ },
+ "grow_history": [
+  {
+   "grow": 0,
+   "n_placements": 204,
+   "n_pairs": 10318,
+   "n_points": 1375,
+   "value": 20.52814378038428,
+   "converged": true,
+   "Lmax_fine": 1.0000000367156985,
+   "rounds": 40,
+   "seconds": 493.4577679634094
+  },
+  {
+   "grow": 1,
+   "n_placements": 304,
+   "n_pairs": 20449,
+   "n_points": 2718,
+   "value": 20.54238840423048,
+   "converged": false,
+   "Lmax_fine": 1.1237242869324369,
+   "rounds": 38,
+   "seconds": 1242.159879207611
+  }
+ ],
+ "rowstore_rows": 19195,
+ "rowstore_nnz": 23001448
+}

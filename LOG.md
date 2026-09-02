@@ -1771,3 +1771,51 @@ affordable cost estimate for closing 3.84.
   `lean/depgraph.{json,svg}` (B.CENSUS note + source; label stays `certificate+verifier` — now two
   verifiers). Constraints honoured: one process, stdlib + Fractions only, no LP solvers, thread env pinned;
   A53/A67 read-only (imported, never written); A57/A60/A61/A29 untouched.
+
+## 2026-09-02 - A71-pair-emission (theory lead Fable + 2 Opus chores) - done-mixed
+- T1 (k4_08 emission oracle loop, beta=1, s0, delta=1/1000, eps_box=1/833): NO full-quantifier
+  certificate - a quantified three-layer VERIFICATION WALL, recorded as pair_kill.md sect 6.5
+  (Lemma W): (a) restricted feasibility UNREFUTED (tau_2 = 21+6beta = 27 < 28, zero fractional
+  excess - the wall is verification complexity, NOT certificate non-existence); (b) margin wall
+  [T+M exact]: K=11 mixed-tilt family with pairwise-disjoint 0.15-cores, D=35 disjoint pair rows
+  + Sigma m2 = 4, V=39 >= 28 (pure-Fraction verified) => EVERY valid certificate carries >= 11
+  coverage units on sub-0.15-margin atoms; greedy wall curve V(eta) = 17/19/20/22/39 at
+  0.10/0.11/0.12/0.13/0.15; (c) cost identity [M]: frozen verify_pair.py throughput 57 nodes/s
+  (17.5 ms/node, exact Fractions, 3000 atoms; A71 float mock replays identical rules at 72k/s);
+  leaf table: all-margins-0.15 ~ 6e8 leaves ~ 125 days, 0.10 ~ 4 y, 0.05 ~ 250 y single-core.
+  Loop empirics: covering LP fixed point W2 = 30.000171 >= 28 under continuum row-hunting +
+  mock-witness feedback (P1' violated); rescaled P1'-valid candidate judged END TO END by the
+  FROZEN verifier: FAIL at depth 12 with deficit witnesses (certs/pair_k4_08_s0_b1_v1s.report.json).
+  v1 emission for the k4 tier CLOSED as infeasible-at-scale; residue = pair-certificate-v2 design
+  (margin-aware splitting, compiled second implementation - wanted for the TCB anyway - and/or an
+  analytic coverage clause; to be a VERSIONED spec, v1 untouched) + the measure-existence question.
+  Window pricing (moot until wall broken): ~38 sides at delta=1e-3.
+- T2: docs/proofs/stuck_rows.md [T] - SR-1/SR-2 at drain-v3 rigor (exact LP-row form of the CC-2'
+  2-crowds: unclipped census boundary, InStratum-exact R1 exclusion, double-counting-safe tally
+  Sigma m2 >= m, eps_box bookkeeping, canary saturation identity = standing design constraint);
+  exact P-B compatible-image sets G_S = {id,diag}/{id}/{diag}/empty for k4_08/k4_11/k4_03/corners4
+  (k4_08 has TWO images - A66 pilot declared one). Runs (Opus chore, 2.5 min): k4_11 tau_2 =
+  21+6beta and k4_03 = 21+4beta EXACTLY (margin -beta, zero excess, adequacy tau_f = 7.000000
+  each, value_ge_control everywhere): the whole one-short critical tier shares the k4_08
+  signature.
+- T3 (corners4 solve wall; Opus chore): BROKEN - solver switch collapses A66's 17k x 10k simplex
+  stall to a converged ~8-min cut loop: beta=0 restricted value = 20.528144 (viol 0/0, Lmax
+  1.000000) + EXACT certified lower bound tau_2(0) >= 4103377/200000 = 20.516885 (support
+  exact-audited: 50 pairs/1 square dropped, min SAT gap 439/2372500; exact Lmax 62499/62500 on
+  1271 cell-representative points; completeness caveat recorded). Dual pricing exposed the A66 support
+  catalog as NOT pair-adequate (40% of 1.74M enriched pair columns under-priced) -> the run grows
+  the catalog by pricing: grow-0 converged 20.528, grow-1 20.542 at budget, later grows in flight
+  at session close -- every measurement >= 0.45 below 21 (~1e-2 per grow): bracket effectively
+  [20.52, ~20.6], the Corollary P0 corners4-emptiness route OPEN at restricted strength. corners4 = the least-walled class (wall-witness
+  shortfall 1 unit; exact witness V=22>=21 at eta=0.15) and the natural v2 pilot; restricted
+  covering primal (616 atoms, W2 = 20.325) dumped as emission seed.
+- Canary at every step: dilated 60-digit Trump free family re-verified as exact death witness
+  under A71 parameters (min SAT gap = lambda-1 = 1.06e-7 EXACTLY per B.0(a), Sigma m2 = 6);
+  all LP runs value_ge_control; wall/probe statements adversary-side (can only strengthen
+  trump5's protection). SAFE.
+- Discipline: <= 2 LP slots enforced (one own overrun killed), BLAS pinned, headroom gate held
+  (one own 22.8-GB process spike caught and killed same minute; A57/A60/A61 untouched); frozen
+  verifiers untouched (verify_pair.py sha d9b7a24a re-verified; interface note: its parser
+  rejects float literals even inside the spec-ignored provenance block - emitters must
+  stringify). Files: attempts/A71-pair-emission/*, docs/proofs/stuck_rows.md, pair_kill.md
+  sect 6.5 + ledger updates, depgraph C.K4TIER note + svg, REGISTRY row.

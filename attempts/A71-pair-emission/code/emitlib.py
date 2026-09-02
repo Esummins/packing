@@ -314,19 +314,25 @@ class AtomSet(object):
         return len(self.px)
 
 
-def coverage_matrix(rows, atoms, margin):
+def coverage_matrix(rows, atoms, margin, chunk=800):
     """sparse boolean coverage: atom i covers row r iff (p in Q_A, q in Q_B at depth>margin)
-    or the swap (either orientation of the atom against either row side).
-    Returns CSR-ish (list of np arrays of atom indices per row)."""
+    or the swap.  Returns scipy.sparse.csr_matrix (nrow, natom), dtype float64 (0/1)."""
+    from scipy import sparse
     tA, xA, yA, tB, xB, yB, m2 = rows.arrays()
     px, py, qx, qy = atoms.arrays()
-    # depth of p-endpoints in the A-side placements etc.
-    dPA = point_depth(tA, xA, yA, px, py) > margin      # (nrow, natom)
-    dQA = point_depth(tA, xA, yA, qx, qy) > margin
-    dPB = point_depth(tB, xB, yB, px, py) > margin
-    dQB = point_depth(tB, xB, yB, qx, qy) > margin
-    cov = (dPA & dQB) | (dQA & dPB)
-    return cov            # dense bool (nrow, natom); caller keeps sizes sane
+    nr = len(tA)
+    blocks = []
+    for r0 in range(0, nr, chunk):
+        r1 = min(nr, r0 + chunk)
+        sl = slice(r0, r1)
+        dPA = point_depth(tA[sl], xA[sl], yA[sl], px, py) > margin
+        dQA = point_depth(tA[sl], xA[sl], yA[sl], qx, qy) > margin
+        dPB = point_depth(tB[sl], xB[sl], yB[sl], px, py) > margin
+        dQB = point_depth(tB[sl], xB[sl], yB[sl], qx, qy) > margin
+        cov = (dPA & dQB) | (dQA & dPB)
+        blocks.append(sparse.csr_matrix(cov, dtype=np.float64))
+    return sparse.vstack(blocks, format="csr") if blocks else \
+        sparse.csr_matrix((0, len(px)))
 
 
 def solve_cover_lp(cov, rhs, w_ub=30.0, time_limit=600.0):
@@ -340,15 +346,9 @@ def solve_cover_lp(cov, rhs, w_ub=30.0, time_limit=600.0):
     h.changeObjectiveSense(highspy.ObjSense.kMinimize)
     h.addCols(na, np.ones(na), np.zeros(na), np.full(na, w_ub),
               0, np.zeros(0, dtype=np.int32), np.zeros(0, dtype=np.int32), np.zeros(0))
-    starts, inds = [], []
-    run = 0
-    for r in range(nr):
-        starts.append(run)
-        ii = np.nonzero(cov[r])[0]
-        inds.append(ii)
-        run += len(ii)
-    ind = np.concatenate(inds).astype(np.int32) if inds else np.zeros(0, np.int32)
-    st = np.array(starts, dtype=np.int32)
+    csr = cov.tocsr()
+    st = csr.indptr[:-1].astype(np.int32)
+    ind = csr.indices.astype(np.int32)
     h.addRows(nr, np.asarray(rhs, float), np.full(nr, 1e30),
               len(ind), st, ind, np.ones(len(ind)))
     h.run()
