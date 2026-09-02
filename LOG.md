@@ -1973,3 +1973,28 @@ affordable cost estimate for closing 3.84.
   0 sorryAx; full default target green; Measure382Check cache hit throughout; A57/A60/A61/A76/A77/A79 untouched.
   Docs: instratum_bridge.md E.5, unique_transfer.md 6, d4_reduction_s0.md D4.5, attainment_ub.md 7.6;
   lean/README.md; depgraph json+svg (corpus_replayed accent added to the renderer); REGISTRY row.
+
+## 2026-09-02 A80-u-ladder (Fable lead + Opus chores, 1 LP slot) -- done-mixed
+- T2 VERDICT FIRST: the U_k counting row is a RESERVE-PLUS, not a lever. k4_08 pair LP (A66 rig copied, beta=1, thr 28,
+  r_z=1e-3, converged cells): plain -1.00; rung 0 (= Lemma P-B optimised over gamma, one hard row with dual gamma*=0.088)
+  -1.412; rung 1 ('<= 9 within delta') -2.000 (gamma* = 1/8): +0.59 over P-B, +1.00 over plain; rung 2 -2.564; rung 4 -3.722;
+  linear ~0.55-0.58 per rung (rungs 3/5 hit the HiGHS time limit; long re-runs queued). Dodge witness = A12's mechanism
+  quantified: rung-1 optimum 26 = 21+5 EXACTLY on 35 pairs - four ghost members at weight 1 (6 in-zone pairs = the cap),
+  three split 2/3:1/3 with 3e-3-displaced variants keeping every box incidence; the row counts SQUARES, the adversary pays
+  in pair mass parked outside the zones at gamma* per pair; zone radius irrelevant (A76 saturation law).
+- T1: U_1 certifies at every delta (1e-3, 3e-3, 1e-2; sub-3 s each) but the composition's REACH collapses below 1e-3: the
+  pocket of square 6 (top wall + flush 9 + point 4 = A76's hinge) is (5.6, 5.8) delta in (c, t) vs 1-2.8 delta elsewhere,
+  exactly linear in delta; basin landing binds at delta <= 2.6e-4 (Lean 3/2000) / 3.2e-4 (A36 per coord) / 5.7e-4 (A40).
+  U_1 has no pins, so A76's pinned rigid radius (1e-2) does not transfer. Packaged certs/uladder/u1_d1_4000 (all three
+  basins) + u1_d1_2000 (A40); NEW stdlib checker certs/verify_uladder.py (structure vs the tight certificate, frozen-verifier
+  reports, Lemma U-C margins, zone -> basin landing, counting-row radius; 5 corruption gates FAIL as required).
+- Theory (docs/proofs/u_ladder.md): U_R statements + C0/C1 certificate forms + peeling (Lemma U-R), Lemma U-C (a square within
+  (r_c, r_t) of a slot contains the slack core iff delta >= r_t + sqrt2(r_c + rho_B)), Lemma BR (bridging dichotomy: the
+  'component shortcut' is a census, not a lemma - direct C0 certificates are cheaper than any separation argument), Lemma
+  U-ROW (sound on the EXACT stratum only; the hypothesis enters once, at 'g.z-hat has five simple squares'), LP encoding by
+  duality (hard row <=> discount form), composition unchanged from P-B.
+- T3 probe (climb NOT run - lever threshold not met): rung-2 C0 census 41/55 PASS; 14 merged pockets = Trump's contact
+  edges with (3,4) for (1,3) fail at every zone size -> atom certificates + peeling ((0,1) PASSes with one atom of weight 1;
+  (3,4) needs a covering LP); priced ~hours emission per rung for ~0.55 slack. Canary SAFE throughout. Discipline held.
+  Files: attempts/A80-u-ladder/{code,certs,results,logs}, certs/uladder/, certs/verify_uladder.py, docs/proofs/u_ladder.md,
+  depgraph C.K4TIER note + svg (chip stays A77), REGISTRY row.

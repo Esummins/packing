@@ -186,6 +186,109 @@ the composed conclusion is z = g·ẑ. The counting row asserts nothing that ẑ
 The LP measurements are adversary-side. SAFE by construction; per-run ledger in
 `attempts/A80-u-ladder/notes/findings.md`.
 
-## 6 [M] Measurements
+## 6 [M] Measurements (A80, 2026-09-02)
 
-(filled by A80 T1/T2; see `attempts/A80-u-ladder/notes/findings.md` for the tables)
+### 6.1 T1 — U_1 at fat slack: the reach collapses below 10⁻³ (the hinge pocket of square 6)
+
+Per-square MINIMAL passing pocket zones (bisection to 2⁻⁷ of the start, frozen verifier at depth
+60, every run sub-second; `attempts/A80-u-ladder/results/u1_zones_d*.json`, 829 verification runs
+in `results/u1_runs.jsonl`). The half-widths scale LINEARLY in δ (identical ratios at δ = 10⁻⁴,
+3·10⁻⁴, 10⁻³, 3·10⁻³, 10⁻²):
+
+| square | hw_c/δ | hw_t/δ | what holds it |
+|---|---|---|---|
+| 0 | 1.09 | 0.62 | corner: two walls + 1 + 3 |
+| 1, 3 | 2.8, 2.2 | 1.41 | wall + flush 0 + one point contact (8 / 7) |
+| 2, 5 | 1.6 | 0.8–0.9 | corner uprights |
+| 4 | 1.7–1.9 | 1.7–1.9 | wall + point contacts 6, 7 |
+| 7, 9, 10 | 1.9–2.2 | 1.4–2.2 | strip flush pairs |
+| 8 | 2.5 | 2.66 | strip + two point contacts |
+| **6** | **5.6** | **5.8** | top wall + flush 9 + point contact 4 — the HINGE (`grain_discharge.md` §4) |
+
+Reach = the largest δ whose zones land in the basin (binding: square 6's tilt): **Lean/A36 uniform
+rBasin = 3/2000: δ ≤ 2.6·10⁻⁴; A36 per coordinate: 3.2·10⁻⁴; A40 per coordinate: 5.7·10⁻⁴.** At the
+BRIEF's δ ∈ {10⁻³, 3·10⁻³, 10⁻²} all 11 certificates PASS (0.4–2.7 s each, 400–6 000 boxes) with
+zones up to (5.5·10⁻³, 5.8·10⁻³) / (1.7·10⁻², 1.7·10⁻²) / (5.3·10⁻², 6.1·10⁻²), but square 6's pocket
+is outside every basin, so the COMPOSITION does not close there. The premise "rigid to δ ~ 10⁻²
+with pins" (A76 Lemma K) does not transfer to U_1: U_1 has no pins — its hypothesis is ten SLACK
+cores, and a slack flush contact is exactly the hinge degradation A76 measured (ratio 5.8 here vs
+10.7 at (10⁻³, 10⁻³) there — the same nearly-dependent triple top-wall / flush-9 / point-4).
+Packaged, verified, gated: `certs/uladder/u1_d1_4000/` (δ = 1/4000, zones = the δ = 10⁻⁴ minima
+× 1.03 δ/10⁻⁴; lands in all three basins, headroom 3.4 % in centres, 0.8 % in tilt) and
+`certs/uladder/u1_d1_2000/` (δ = 1/2000, A40 only); `certs/verify_uladder.py` PASS on both, all five
+corruption gates FAIL as required. Counting-row zone via Lemma U-C: r ≤ 1.04·10⁻⁴ (δ = 1/4000),
+2.07·10⁻⁴ (δ = 1/2000) at ρ_B = 0 — irrelevant to the LP (saturation law), relevant to the B&B only.
+
+### 6.2 T2 — the ladder in the pair LP: RESERVE-PLUS, ≈ +0.55 per rung, not a lever
+
+k4_08, β = 1, threshold 28, A66 rig unchanged (catalog 293 placements: the 7 crowdfam zone centres
++ 48 perturbation columns at 0.3 r_z / 3 r_z + the A66 grid, 21 059 disjoint pairs, 285 ghost
+pairs), r_z = 10⁻³, one image (A66's convention; `diag` is k4_08's own symmetry). Fresh row store
+per rung (45M-nnz / 45k-row caps not hit); every cell CONVERGED (fine Lmax = 1.000000, 0 violators).
+`attempts/A80-u-ladder/results/ladderlp_k4_08_rz1e-3_img1_k*.json`, `logs/`.
+
+| rung k | cap C(6−k,2) | V_k | margin V_k − 28 | γ* | gain vs previous rung | LP time |
+|---|---|---|---|---|---|---|
+| plain pair LP (no row) | — | 27.000000 | −1.000 | — | — | 29 s |
+| 0 = Lemma P-B optimised over γ | 15 | 26.588235 | −1.412 | 0.0882 | +0.41 | 148 s |
+| **1 (BRIEF's decisive row: ≤ 9 within δ)** | 10 | **26.000000** | **−2.000** | 0.1250 | **+0.59** | 204 s |
+| 2 | 6 | 25.435705 | −2.564 | 0.1610 | +0.56 | 5 min |
+| 3 | 3 | 24.889964 (UNCONVERGED: HiGHS time limit at round 19, fine Lmax 14.3 — not a verdict; long re-run RUNG3L) | | 0.2389 | | 626 s |
+| 4 | 1 | 24.277778 | −3.722 | 0.4464 | +0.58 per rung over rung 2 | 461 s |
+| 5 | 0 | 23.785896 (UNCONVERGED: time limit at round 14, fine Lmax 7.8; long re-run RUNG5L) | | 1.1048 | | 616 s |
+
+Against the BRIEF's thresholds the k = 1 row gains **+0.59 over P-B's optimum (−1.41; A66's
+hand-tuned γ = 0.1 was −1.40) and +1.00 over the plain pair LP** — above "~0.1 = reserve", below
+"≥ 1 = lever": a reserve-plus. The ladder is LINEAR in k at ≈ −0.55 per rung, not the (k + 1)-unit
+jump hoped for. Rung 1 re-measured at the ladder's real zone r_z = 10⁻⁴ (§6.1): RZ1E4.
+
+**The dodge witness (A12's mechanism, quantified).** The rung-1 optimum is 26 = 21 + 5 EXACTLY on a
+35-pair support: the LP keeps FOUR members of the ghost family (the trump-sym4 image at zones 1, 2,
+3, 5) at weight 1 — their C(4,2) = 6 in-zone pairs — and splits the other three members 2/3 : 1/3
+between the in-zone pose and its 3·10⁻³-displaced variant (weight-1 pairs all in-zone; weight-2/3
+pairs mix zone members with the variants at cy = 0.503, cx = 1.5333, 2.6208, …); Σ z bz = 10.000
+(cap tight), Σ z = 19.33, mean m₂ = 0.345. The displaced variants keep every box incidence (A58's
+meeter margins 1.6·10⁻² ≫ 3 r_z) and lose only the discount, so each unit of in-zone-pair budget the
+row removes costs the adversary γ* ≈ 0.09–0.16, and the rungs (5, 4, 3, 2, 1 pairs removed) cost
+≈ 0.6, 0.55, 0.5, … — the linear law. This is exactly the A12 signature: the row counts SQUARES in
+zones, the fractional adversary pays in pair-mass parked just outside them, and (A76's saturation
+law) the zone radius does not change the price. The row is sound and bites integrally (no
+7-family with ≥ 6 in-zone members exists, by U_1); its fractional price is ≈ 0.55 per rung.
+Full support of the dodge: `results/ladderlp_k4_08_rz1e-3_img1_k1_dodge.json` (`support`,
+`support_class_mass`).
+
+### 6.3 T3 probe — what the climb would cost (census only; the climb was NOT run)
+
+Lemma BR census at rung 2, δ = 10⁻⁴, zones = the per-square minima × 1.1
+(`logs/uR_census_k2_d1e-4.log`, `results/uR_census_k2_*`): **41 of 55 pairs PASS in the Σw = 0 form**
+(sub-second, 150–6 400 boxes) and **14 FAIL, and stay FAIL with zones ×2, ×4, ×8** — the merged
+pockets: the 7 flush pairs (0,1), (0,3), (6,9), (7,8), (7,9), (8,10), (9,10); the 6 point contacts
+(1,8), (2,8), (3,7), (4,6), (4,7), (5,9) (removing the point-contact neighbour frees a slide: 1 rises
+into 8's vacated space, 4 drops 0.03 toward 3, …); and (3,4) (the two left uprights, gap 0.033, whose
+removal opens a 1 × 2.03 channel). The corner–corner pair (1,3) PASSes — the pocket graph is
+Trump's contact graph with (3,4) in place of (1,3). Atom form C¹: (0,1) PASSes with ONE atom of
+weight 1 at the shared-edge midpoint once the zones are widened ×3 (Σw = 1 < 2; 3 032 boxes, 1.6 s);
+(3,4) needs a measure, not a point (a 37°-tilted placement at (0.75, 2.51) sits in 4's freed corner
+and misses the channel atom) — the A60-style covering LP (η ≤ −1 law) per merged pocket. Priced:
+rung 2 = 41 direct + 14 emitted C¹ certificates + peeling to rung 1 at δ₁ ≥ √2 hw₂c + hw₂t (≈ 2.4×
+the rung-2 zone, itself 2–6 δ₂), i.e. δ₂ ≈ 1.8·10⁻⁵ when square 6 ∈ R (B&B depth fine; the hinge
+amplification compounds per level); rung 3 = 165 sets, ≈ 40 % with atoms. Cost = emission (hours),
+gain ≈ 0.55 of restricted slack per rung. Not run: the lever threshold was not met.
+
+### 6.4 Canary ledger
+
+(1) U_1 sets at δ = 1/4000, 1/2000: the control form (zones deleted) FAILs with holes exactly at
+Trump's pockets (`certs/u1_probe_d1e-3_control_00`: (0.500001, 0.500001), θ = 5·10⁻⁵°); the PASSes
+assert only "the free space supports unit squares only in the pockets"; composed conclusion
+z = g·ẑ. SAFE. (2) Lemma U-ROW reaches z = g·ẑ and contradicts only the exact-k4_08 skeleton
+(§3). SAFE by theorem. (3) LP cells are adversary-side; the plain cell reproduces A66's 27.000000
+(adequacy) and the crowdfam control (min gap 1.098·10⁻⁷, Σm₂ = 6). SAFE. (4) The rung-2 census
+identifies Trump's merged pockets, excludes nothing. SAFE.
+
+### 6.5 Discipline
+
+One LP slot at a time (the first shared-store ladder run was killed by A80 when it hit the 25M-nnz
+cap before rung 0 converged; rerun per rung with fresh stores at 45M/45k); BLAS pinned; the 6 GB
+headroom gate held at every LP start (one dip at 12:06 waited out); B&B runs are ~50 MB processes.
+A57/A60/A61/A77/A78/A79 untouched; frozen verifiers untouched (A66 rig copied, A65 verifier copied
+byte-identical); certs/ new files only.

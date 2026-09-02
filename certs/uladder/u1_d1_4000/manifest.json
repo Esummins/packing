@@ -1,0 +1,126 @@
+{
+ "format": "u-ladder-manifest-v1",
+ "rung": 1,
+ "delta": "1/4000",
+ "s2": "3877083591023/1000000000000",
+ "rho_B": "0",
+ "tight_certificate": "../../trump11_certificate_tight.json",
+ "krawczyk": "../../../attempts/A22-local-rigidity/results/krawczyk_cert.json",
+ "dtheta_tilt_bound": "1/10000000000000",
+ "dt_tilt_bound": "1/10000000000000",
+ "basins": [
+  "lean_A36_uniform",
+  "A36_percoord",
+  "A40_percoord"
+ ],
+ "zones": {
+  "0": {
+   "hw_c": "721/2560000",
+   "hw_t": "103/640000"
+  },
+  "1": {
+   "hw_c": "927/1280000",
+   "hw_t": "927/2560000"
+  },
+  "2": {
+   "hw_c": "1133/2560000",
+   "hw_t": "309/1280000"
+  },
+  "3": {
+   "hw_c": "309/512000",
+   "hw_t": "927/2560000"
+  },
+  "4": {
+   "hw_c": "309/640000",
+   "hw_t": "1133/2560000"
+  },
+  "5": {
+   "hw_c": "1133/2560000",
+   "hw_t": "309/1280000"
+  },
+  "6": {
+   "hw_c": "927/640000",
+   "hw_t": "3811/2560000"
+  },
+  "7": {
+   "hw_c": "721/1280000",
+   "hw_t": "103/256000"
+  },
+  "8": {
+   "hw_c": "103/160000",
+   "hw_t": "1751/2560000"
+  },
+  "9": {
+   "hw_c": "309/640000",
+   "hw_t": "721/1280000"
+  },
+  "10": {
+   "hw_c": "1133/2560000",
+   "hw_t": "927/2560000"
+  }
+ },
+ "certs": [
+  {
+   "i": 0,
+   "file": "u1_final_d2.5e-4_00.json",
+   "report": "u1_final_d2.5e-4_00.report.json"
+  },
+  {
+   "i": 1,
+   "file": "u1_final_d2.5e-4_01.json",
+   "report": "u1_final_d2.5e-4_01.report.json"
+  },
+  {
+   "i": 2,
+   "file": "u1_final_d2.5e-4_02.json",
+   "report": "u1_final_d2.5e-4_02.report.json"
+  },
+  {
+   "i": 3,
+   "file": "u1_final_d2.5e-4_03.json",
+   "report": "u1_final_d2.5e-4_03.report.json"
+  },
+  {
+   "i": 4,
+   "file": "u1_final_d2.5e-4_04.json",
+   "report": "u1_final_d2.5e-4_04.report.json"
+  },
+  {
+   "i": 5,
+   "file": "u1_final_d2.5e-4_05.json",
+   "report": "u1_final_d2.5e-4_05.report.json"
+  },
+  {
+   "i": 6,
+   "file": "u1_final_d2.5e-4_06.json",
+   "report": "u1_final_d2.5e-4_06.report.json"
+  },
+  {
+   "i": 7,
+   "file": "u1_final_d2.5e-4_07.json",
+   "report": "u1_final_d2.5e-4_07.report.json"
+  },
+  {
+   "i": 8,
+   "file": "u1_final_d2.5e-4_08.json",
+   "report": "u1_final_d2.5e-4_08.report.json"
+  },
+  {
+   "i": 9,
+   "file": "u1_final_d2.5e-4_09.json",
+   "report": "u1_final_d2.5e-4_09.report.json"
+  },
+  {
+   "i": 10,
+   "file": "u1_final_d2.5e-4_10.json",
+   "report": "u1_final_d2.5e-4_10.report.json"
+  }
+ ],
+ "provenance": {
+  "attempt": "A80-u-ladder",
+  "emitter": "attempts/A80-u-ladder/code/emit_u1.py",
+  "verifier": "attempts/A80-u-ladder/code/verify_case.py (byte-identical A65/A53 copy, sha256 521cb01f...bef7af), --depth 60 --split 3 --jobs 1",
+  "zones": "per-square minimal passing zones at delta=1e-4 (results/u1_zones_d1_10000.json) scaled linearly to delta x 1.03",
+  "note": "U_1 at core slack delta with pocket zones landing in the named basin boxes (docs/proofs/u_ladder.md sect. 1, 6)"
+ }
+}
