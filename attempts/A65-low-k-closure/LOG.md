@@ -67,5 +67,13 @@ attempts/A65-low-k-closure/, docs/proofs/, lean/depgraph.json (labels/notes), RE
   (chord half-length 0.6203 vs pin-corner clearance 0.613: the tilt window (80.4, 81.3) deg
   needed for the pin dodge vs (>= 81.3 or <= 8.7) for the reach — empty by 0.9 deg);
   L_eff = 3 for certification levels.
-* (beta = 0.5 / 1.0 confirmation tails: see results/boost_k4_13.json, boost_k4_08.json —
-  verdict already fixed by the beta = 0.25 refutation + convexity.)
+* Final scan tails (both slots complete, processes exited): k4_13 tau = 7.2545 / 12.581 /
+  18.000 / 29.000 at beta = 0 / .25 / .5 / 1 vs thresholds 7 / 11 / 15 / 23 — margins
+  +0.25 / +1.58 / +3.00 / +6.00, LINEAR in beta; k4_08 tau = 7.000000 / 11.138 / 15.584 /
+  24.682 vs 7 / 10.5 / 14 / 21 — margins +0 / +0.64 / +1.58 / +3.68. Measured law:
+  tau_boost(beta) = tau(0) * (1 + mbar*beta), mbar = dual-average incidence = 3.00 exactly
+  (corners4) / 2.53 (k4_08); kill needed mbar < 2m/N = 2.29 / 2.00. Note: a grid scan finds
+  m=4 placements for corners4's boxes (axis square at (1.38,1.38)) but they penetrate a pin
+  by ~0.12 and are LP-exempt — the pin filter caps the dual at mbar = 3, consistent with the
+  hand analysis. Route (b') dead at every beta on both pilots; docs/proofs/h10_stuck.md
+  sect. 8 finalised.
