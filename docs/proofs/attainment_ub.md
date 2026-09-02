@@ -1,4 +1,12 @@
-# The upper bound AT ŝ: route decision and the attainment lemma (A63, 2026-09-01)
+# The upper bound AT ŝ: route decision and the attainment lemma (A63, 2026-09-01; §7 A69, 2026-09-01)
+
+> **STATUS UPDATE (A69).** The (c-idl) certificate of §6 has been FOUND and exactly
+> verified: `certs/cidl_identity.json` + `certs/verify_cidl.py` (PASS, 0.7 s, stdlib
+> rationals). The identity ŝ_A22 = ŝ_octic is now certificate-backed at the same TCB
+> tier as the rest of the Python layer; only the Lean replay (named obligation
+> CIDL-LEAN, §7.5) keeps `shatA22_eq_shat` an axiom. §7 has the construction. The
+> §4 (c-alg) "compositum degree 56" obstacle is VOID — based on spurious A03 minpoly
+> data (§7.4): every coordinate of ẑ lies in ℚ(t̂), degree 8.
 
 Target: A62 finding F2 / Lean axioms `zhat`, `trump_packs_at_shat` — the equality claim's UB
 half. A62 named two routes: (a) A22's Krawczyk existence + feasibility; (b) closedness of
@@ -160,3 +168,95 @@ with `trump_packs_at_shat` recovered as a theorem. `#print axioms` on the compos
 theorems now separates the certified feasibility from the open identity; discharging
 (c-idl) later = replacing one axiom by a theorem, touching nothing else. The published
 restatement s(11) = ŝ_A22 (§5) remains available by flipping which constant is primitive.
+
+## 7 [T/M] (c-idl) EXECUTED: the saturated ideal-membership certificate (A69, 2026-09-01)
+
+### 7.1 The reduction (theory; each step certified by A22)
+
+A22's second Krawczyk system F~ (notes.md §3) pins the EXACT structure of ẑ: squares
+0–5 axis-parallel with c0=(½,½), c1=(3/2,½), c2=(S−½,½), c3=(½,3/2), c4=(½,y4),
+c5=(S−½,S−½), and squares 6–10 sharing exactly one angle θ̂. Substituting this
+structure and the Weierstrass parametrisation t = tan(θ/2) (exact at θ̂ since
+|θ̂| < π) into the 38 curated rows — ALL of which vanish at ẑ (A22 §3) — and clearing
+the positive denominators (1+t²)^k row-wise: 20 rows vanish identically, and the 18
+survivors collapse (each flush-tilted pair's two corner rows become rational multiples
+of one another once the angles are equal) to **13 distinct generators**
+G₀..G₁₂ ∈ ℚ[t, y4, x6..y10, S], each LINEAR in the 12 non-t variables with ℚ[t]
+coefficients of degree ≤ 4:
+
+    6 upright–tilted edge rows   E1c2-8e3, E2c3-8e0, E3c2-7e3, E4c1-7e2, E4c2-6e3, E5c0-9e1
+    5 flush-tilted rows          E6c1-9e2, E7c1-8e2, E7c2-9e3, E8c2-10e3, E9c1-10e2
+    2 tilted wall rows           W6c2[y=s], W10c1[x=s]
+
+Every G_j vanishes at the A22 point P̂ = (t̂, ŷ4, x̂6..ŷ10, ŝ_A22).
+
+### 7.2 The certificate (found by exact linear elimination — no Gröbner basis needed)
+
+Take the 12 rows ≠ E1c2-8e3 as A(t)·x = b(t) (x the 12 unknowns, S last). With
+Δ := det A (degree 34) and adjugate cofactors, Cramer gives polynomial identities
+Δ·x_m − N_m = Σ_j adj_{mj}·G_j. The left-out row yields the consistency determinant
+D(t) := Σ_m a₀_m N_m − Δ·b₀ (degree 35) with D = Δ·G₀ − Σ_j c_j G_j ∈ (G).
+Factoring D over ℚ: exactly one irreducible factor vanishes at t̂,
+
+    m(t) = 5t⁸ − 10t⁷ − 2t⁶ + 14t⁵ + 12t⁴ − 6t³ + 2t² + 2t − 1,
+
+i.e. A03's PSLQ tan-half polynomial p(−t) — now DERIVED, not fitted; e := D/m has
+degree 27 and gcd(e, m) = gcd(Δ, m) = 1. Setting G_oct := Σ_k a_k N_S^k Δ^{8−k}
+(octic = Σ a_k s^k, deg G_oct = 272), exact division gives **m | G_oct** — the heart
+of the matter — with g := G_oct/m, and the telescoped assembly
+
+    e·Δ⁸·octic(S) = Σ_{j≠0} [ e·W_tel·adj_{S,j} − g·c_j ]·G_j + [ g·Δ ]·G₀ ,
+
+W_tel the telescoping cofactor of ΔS − N_S in Δ⁸octic(S) − G_oct. Saturation factor
+h = e·Δ⁸; cofactors are bivariate in (t, S). Certificate: `certs/cidl_identity.json`
+(301 KB); the sizes are tame (no doubly-exponential wall — the §6 height-bound
+pessimism applied to a-priori bounds, not to this structured system).
+
+### 7.3 Verification and composition
+
+`certs/verify_cidl.py` (stdlib fractions only) REBUILDS the 13 generators from the
+A22 conventions (HALF/NHAT/eval_g), then checks exactly: [O] the octic is canonical;
+[I] the polynomial identity above in ℚ[t,y4,x6..y10,S]; [G] Sturm: e and Δ have no
+root in [3/10, 2/5]. PASS in 0.7 s; corruption gates qcoeff/e/rowspec/octic all FAIL
+loudly. Composition to ŝ_A22 = ŝ_octic:
+
+* G_j(P̂) = 0 (§7.1) and t̂ ∈ [3/10, 2/5] (A22 encloses θ̂ within 1e-50 of A03's
+  rational angle, so θ̂/2 ∈ [0.35, 0.36]; x ≤ tan x ≤ x + x³/(3(1−x²)) on [0, 0.36]
+  gives t̂ ∈ [0.35, 0.368] ⊂ [3/10, 2/5]);
+* evaluating the identity at P̂: e(t̂)·Δ(t̂)⁸·octic(ŝ_A22) = 0, and [G] gives
+  e(t̂)Δ(t̂) ≠ 0, so **octic(ŝ_A22) = 0**;
+* ŝ_A22 ∈ (3.877083, 3.877084) (A22's 1e-50 enclosure, 4.1e-7 clearance), and the
+  octic has exactly ONE root there (T1/`shat_spec`; its other real root lies in
+  (−2,−1)), so **ŝ_A22 = ŝ = the octic's second real root**. ∎
+
+TCB: exactly verify_sturm-class (stdlib rationals) for the new checker, PLUS the
+already-trusted A22 certificate (mpmath.iv) for "G_j(P̂) = 0, enclosures". No new
+trust items.
+
+### 7.4 [F] Correction: the "degree-7 coordinate" does not exist
+
+Since Δ(t̂) ≠ 0, the kept 12×12 system is nonsingular at t̂ and x̂ = A(t̂)⁻¹b(t̂):
+**every coordinate of ẑ lies in ℚ(t̂), a degree-8 field.** A53 L4's obstacle (cy4 of
+degree 7, hence 7 ∤ 8 and a compositum of degree up to 56 for (c-alg)) came from
+A03's per-square `minpoly_cx/cy` JSON fields, which are findpoly ARTIFACTS: the
+recorded degree-7 polynomial for cy4 evaluates to −8.0e8 at the true ŷ4 (250 dps) —
+not small at all (same for cx2 = S − ½, which must have degree 8, yet carries an
+8-coefficient entry). The true minimal polynomial of ŷ4, derived as the factor of
+Res_t(m, Δ·Y − N_{y4}) vanishing at ŷ4 (residual 6e-255):
+
+    256Y⁸ − 4608Y⁷ + 37376Y⁶ − 167040Y⁵ + 440352Y⁴ − 674912Y³ + 437376Y² + 327464Y − 599659.
+
+A03's 60-digit coordinate STRINGS are fine (all 13 generators vanish to ≤ 6.7e-60 at
+the A03 point); only the minpoly annotations are junk. (c-alg) would have been a
+plain ℚ[t]/(m) verification after all — moot now.
+
+### 7.5 [C] Named obligation CIDL-LEAN (the only remaining gap for `shatA22_eq_shat`)
+
+Discharge = (i) reify the 13 generators, the cofactors, e, Δ in Lean and replay [O]/
+[I]/[G] by `native_decide` over ℚ (A64's Measure382Check isolation pattern; the
+cross-toolchain elaboration recipe applies verbatim); (ii) refine the A22 interface:
+replace the opaque `shatA22` axiom pair by axioms asserting exactly A22's certified
+content — ∃ (t̂, ŷ4, …, ŝ_A22) with all G_j = 0, t̂ ∈ [3/10, 2/5],
+ŝ_A22 ∈ [3.877083, 3.877084], and `CfgPacking shatA22 zhat` — then `shatA22_eq_shat`
+becomes a THEOREM via `shat_spec`. Zero new mathematics; pure engineering. Until
+then the axiom stands with this certificate as its documented backing.

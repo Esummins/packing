@@ -88,3 +88,20 @@ Files (A07, all PASS `verify_measure.py`): `measure_certificate_3.80.json` (s = 
 10.801639), `measure_certificate_3.81.json` (s = 381/100, 980 atoms, total 10.9852), `measure_certificate_3.82.json`
 (s = 191/50, 1769 atoms, total 10.985474)  ==>  s(11) >= 3.82.  Producer: `attempts/A07-lp-dual/` (LP with
 row+column generation; see its notes.md for the construction recipe and the verifier witness -> LP row loop).
+
+## 3. Algebraic-identity certificates: `verify_sturm.py` (A63), `verify_cidl.py` (A69)
+
+`verify_sturm.py certs/octic_root_isolation.json` — exact Sturm root isolation for the Trump
+octic: exactly two real roots, exactly one in `[3.877083, 3.877084]` (the second), and the
+all-positive Taylor shift at the left endpoint (the calculus-free monotonicity used by Lean's
+`shat_spec`).  Stdlib fractions only.
+
+`verify_cidl.py certs/cidl_identity.json` — the (c-idl) saturated ideal-membership certificate
+closing `s-hat_A22 = s-hat_octic` (TopLevel axiom `shatA22_eq_shat`; construction and composition
+in `docs/proofs/attainment_ub.md` §7).  The checker itself REBUILDS the 13 reduced A22 contact
+generators from the A22 corner/edge conventions, then verifies exactly over Q: the canonical
+octic, the polynomial identity `e(t)*Delta(t)^8*octic(S) = sum_j q_j(t,S)*G_j`, and the Sturm
+sign gate (`e`, `Delta` root-free on `[3/10, 2/5]`, which contains `t-hat = tan(theta-hat/2)`).
+PASS in 0.7 s.  Corruption gates (must FAIL): `--corrupt qcoeff|e|rowspec|octic`.
+Exit codes: 0 PASS, 1 FAIL, 2 malformed.  Producer: `attempts/A69-cidl-identity/assemble.py`
+(exact linear elimination; untrusted search — only the shipped identity matters).

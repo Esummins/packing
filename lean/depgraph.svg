@@ -7,13 +7,13 @@
 <rect x="147" y="32" width="12" height="12" fill="#2e7d32" rx="2"/>
 <text x="163" y="42">proved-prose (13)</text>
 <rect x="296" y="32" width="12" height="12" fill="#1565c0" rx="2"/>
-<text x="312" y="42">certificate+verifier (11)</text>
+<text x="312" y="42">certificate+verifier (12)</text>
 <rect x="501" y="32" width="12" height="12" fill="#6a1b9a" rx="2"/>
 <text x="517" y="42">cited (1)</text>
 <rect x="594" y="32" width="12" height="12" fill="#e65100" rx="2"/>
 <text x="610" y="42">conjecture (6)</text>
 <rect x="722" y="32" width="12" height="12" fill="#c62828" rx="2"/>
-<text x="738" y="42">open (9)</text>
+<text x="738" y="42">open (8)</text>
 <rect x="818" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>
 <text x="834" y="42">dashed = waiting only on dependencies (outline color = tier of its own finished work)</text>
 <rect x="1439" y="31" width="30" height="14" rx="7" fill="#37474f"/>
@@ -198,14 +198,12 @@
 <text x="764" y="222" text-anchor="middle" fill="#222">s-hat is THE octic root</text>
 <text x="764" y="234" text-anchor="middle" fill="#222">(isolation certificate)</text>
 </g>
-<g><title>A.UBshat — Upper bound AT s-hat exactly (Trump&#x27;s packing exists at s-hat)&#10;[open]&#10;ROUTE DECIDED (A63, docs/proofs/attainment_ub.md): route (b) (Fits-closed + certificate sequence) REFUTED as a finite route (scaling breaks unit squares; rational curves have rational sigma-limits). Route (a) already certifies Fits(s_A22) (A22 feasibility, Python-interval TCB); residue = the algebraic identity s_A22 = s-hat, pinned to 2.1e-47 by T1&#x27;s Taylor bound; closure specs: exact number-field verification (compositum deg &lt;= 56 - a coordinate has a degree-7 minimal polynomial, so the field is NOT Q(s-hat)) or the S3-fallback restatement with s-hat := s_A22. || A64: axiom SPLIT executed in TopLevel.lean - shatA22 + trump_packs_at_shatA22 (certified, Python-interval TCB) + shatA22_eq_shat (THE open identity, single axiom); trump_packs_at_shat now a theorem. Sign/interval route to the identity REFUTED (no separation gap without a height bound - attainment_ub.md section 6); NEW cheaper closure spec (c-idl): saturated ideal-membership cofactor certificate, verification = rational polynomial identities + one sign gate, no number-field arithmetic; search = bounded Groebner/Macaulay campaign.</title>
+<g><title>A.UBshat — Upper bound AT s-hat exactly (Trump&#x27;s packing exists at s-hat)&#10;[certificate+verifier]&#10;ROUTE DECIDED (A63, docs/proofs/attainment_ub.md): route (b) (Fits-closed + certificate sequence) REFUTED as a finite route (scaling breaks unit squares; rational curves have rational sigma-limits). Route (a) already certifies Fits(s_A22) (A22 feasibility, Python-interval TCB); residue = the algebraic identity s_A22 = s-hat, pinned to 2.1e-47 by T1&#x27;s Taylor bound; closure specs: exact number-field verification (compositum deg &lt;= 56 - a coordinate has a degree-7 minimal polynomial, so the field is NOT Q(s-hat)) or the S3-fallback restatement with s-hat := s_A22. || A64: axiom SPLIT executed in TopLevel.lean - shatA22 + trump_packs_at_shatA22 (certified, Python-interval TCB) + shatA22_eq_shat (THE open identity, single axiom); trump_packs_at_shat now a theorem. Sign/interval route to the identity REFUTED (no separation gap without a height bound - attainment_ub.md section 6); NEW cheaper closure spec (c-idl): saturated ideal-membership cofactor certificate, verification = rational polynomial identities + one sign gate, no number-field arithmetic; search = bounded Groebner/Macaulay campaign. || A69: (c-idl) EXECUTED - certs/cidl_identity.json + certs/verify_cidl.py (PASS 0.7 s, stdlib rationals; corruption gates OK): e(t)*Delta^8*octic(S) = sum q_j G_j over the 13 reduced contact rows, sign gate via exact Sturm on [3/10,2/5]; found by exact linear elimination (no Groebner) - deg Delta 34, deg D 35, m(t) = the tan-half octic DERIVED, m | G_oct. shatA22 = shat now certificate-backed (attainment_ub.md sec 7); the A53 L4 degree-7/compositum-56 obstacle VOID (spurious A03 minpoly annotations; all coordinates lie in Q(t-hat), degree 8). Lean residue = named obligation CIDL-LEAN (sec 7.5): native_decide replay + refined A22-interface axioms; then shatA22_eq_shat becomes a theorem via shat_spec.</title>
 <rect x="866" y="193" width="180" height="54" rx="7" fill="white"/>
-<rect x="866" y="193" width="180" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
-<text x="956" y="208" text-anchor="middle" font-weight="bold" fill="#c62828">A.UBshat</text>
+<rect x="866" y="193" width="180" height="54" rx="7" fill="#1565c0" fill-opacity="0.13" stroke="#1565c0" stroke-width="1.6"/>
+<text x="956" y="208" text-anchor="middle" font-weight="bold" fill="#1565c0">A.UBshat</text>
 <text x="956" y="222" text-anchor="middle" fill="#222">Upper bound AT s-hat exactly</text>
 <text x="956" y="234" text-anchor="middle" fill="#222">(Trump&#x27;s packing exists at…</text>
-<rect x="1018" y="186" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="1034" y="196" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A69</text>
 </g>
 <g><title>A.UNIQ — Uniqueness transfer: EVERY packing at s-hat reaches a stratified representative mod G&#10;[open — own work done; waiting on dependencies]&#10;RE-DIAGNOSED (A63, docs/proofs/unique_transfer.md): the axiom AS STATED follows from census exhaustiveness (A53 L3); the hole moved into stratum_kill&#x27;s forall-packings quantifier at the K1-protected classes. Full architecture on file: CC-2 teleport chain to a stuck packing + stuck-kills (H10-stuck) + residual/basin + COLLAPSE back via Theorem U (node A.THMU). Obligations U-O1..U-O4. A65: U-O1 DISCHARGED (Theorem U certified, docs/proofs/theorem_u.md); remaining: U-O2 (=H10-stuck, see C.K4TIER / docs/proofs/h10_stuck.md), U-O3 (A57 G1), U-O4 (D/E nodes as axiomatised). [own_tier proved-prose: the reduction is prose (unique_transfer.md); formalising the derivation in Lean is still owed even after dependencies close]</title>
 <rect x="1057" y="193" width="180" height="54" rx="7" fill="white"/>

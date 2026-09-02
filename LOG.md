@@ -1630,3 +1630,40 @@ affordable cost estimate for closing 3.84.
   logs,notes}`, depgraph `D.D4` open → **certificate+verifier** (+ re-render), REGISTRY row.
   A57/A60/A61/A29 untouched. Note for schedulers: commit headroom oscillated 2.9–6.6 GB
   during the run (the live campaigns), so the launcher polls and waits for the >6 GB gate.
+
+## 2026-09-01 — A69: shatA22_eq_shat CLOSED at the certificate tier — (c-idl) found by exact elimination
+
+- **The single open algebraic identity of the upper bound at ŝ is now certificate-backed.**
+  `certs/cidl_identity.json` (301 KB) + `certs/verify_cidl.py` (stdlib fractions, PASS 0.7 s,
+  corruption gates qcoeff/e/rowspec/octic all fail loudly): the saturated ideal-membership
+  identity e(t)·Δ(t)⁸·octic(S) = Σ q_j(t,S)·G_j over the 13 reduced A22 contact rows, sign
+  gate = exact Sturm root-freeness of e·Δ on [3/10, 2/5] ∋ t̂. Evaluated at the A22 point:
+  octic(ŝ_A22) = 0; with the 1e-50 enclosure and shat_spec: **ŝ_A22 = ŝ (the octic's second
+  real root)**. Construction + composition: docs/proofs/attainment_ub.md §7.
+- **No Gröbner campaign was needed** (the A64 (c-idl) spec priced it as one): A22's certified
+  exact structure (uprights pinned, one common tilt angle, Weierstrass t) makes the reduced
+  system LINEAR in the 12 non-t unknowns over ℚ[t]; the certificate is Cramer/adjugate algebra
+  plus two exact univariate divisions. Measured sizes: deg Δ 34, deg D 35, deg e 27,
+  deg G_oct 272; coefficients a few hundred bits; search ≈ 2 min in plain Fractions.
+  En route the tan-half minimal polynomial 5t⁸−10t⁷−2t⁶+14t⁵+12t⁴−6t³+2t²+2t−1 is DERIVED
+  from the contact system (upgrades A22 §7 gap 2 from PSLQ-found to derived).
+- **Finding: A53 L4's "degree-7 coordinate" never existed.** A03's per-square minpoly_cx/cy
+  JSON fields are findpoly artifacts (the deg-7 poly for cy4 evaluates to −8.0e8 at the true
+  ŷ4; cx2 = S−1/2 carries a deg-7 entry though it must have degree 8). Δ(t̂) ≠ 0 puts EVERY
+  ẑ-coordinate in ℚ(t̂) (degree 8); true ŷ4 minpoly derived (findings.md). The (c-alg)
+  compositum-56 obstacle is void; A03 minpoly annotations should not be used for anything.
+- Lean: TopLevel `shatA22_eq_shat` docstring updated (axiom retained); residue = named
+  obligation CIDL-LEAN (attainment_ub.md §7.5): native_decide replay of [O]/[I]/[G] + refined
+  A22-interface axioms, then the axiom becomes a theorem via shat_spec — engineering only.
+  Depgraph A.UBshat open → **certificate+verifier** (re-rendered). REGISTRY row added.
+- Ops incident (honesty note): the first sympy-Expr assembly blew past 10 GB RSS and pushed
+  commit headroom to 0.49 GB; while triaging under pressure, PID 24700 (~50 MB transient
+  python, most likely a campaign certify worker) was force-killed by MISTAKE before the two
+  A69 sympy processes were identified and killed. A57/A60/A61 main processes verified alive
+  afterwards (schedulers requeue certify workers). Lesson recorded in findings.md: check
+  command lines before killing; and sympy Expr is the wrong tool above degree ~100 — the
+  lean Fraction rewrite (assemble.py) used < 100 MB.
+- Files: certs/{cidl_identity.json, verify_cidl.py}, certs/README.md §3,
+  docs/proofs/attainment_ub.md (§7 + status banner), attempts/A69-cidl-identity/{BRIEF.md,
+  derive.py, assemble.py, eliminate.py, build_cert.py, notes/findings.md, results/},
+  lean/TopLevel.lean (comment only), lean/depgraph.{json,svg}, REGISTRY. A29 untouched.

@@ -7,6 +7,8 @@ import Mathlib.Tactic
 import PackingCertMathlib.Bridge
 import PackingCertMathlib.Parametrize
 import PackingCertMathlib.Measure382
+import PackingCertMathlib.Attain
+import PackingCertMathlib.ThetaT
 
 /-!
 # The composed optimality theorem for s(11) — formal STATEMENT (A62, checklist item F3)
@@ -29,7 +31,8 @@ definition/theorem without changing any statement that mentions it.  Discharged 
 so `s(11) ≥ 3.82` is an end-to-end Lean theorem whose only extra axiom is
 the `native_decide` evaluation axiom); `trump_packs_at_shat` (A64) is now a theorem
 from the finer split `shatA22` + `trump_packs_at_shatA22` (certified) +
-`shatA22_eq_shat` (the open identity).  13 named axioms remain, but only
+`shatA22_eq_shat` (the open identity); `attained` (A68, `Attain.lean` — drain lemma D1,
+compactness in coordinates).  12 named axioms remain, but only
 `shatA22_eq_shat` and the genuinely-open leaf families carry open mathematics.
 
 The point of the file (per `docs/publication_checklist.md` F3) is to force the definition of
@@ -207,10 +210,15 @@ def wnd : Set ℝ := Icc (191 / 50 : ℝ) shat
 
 /-! ## The named hypotheses (the leaf families of the proof plan) -/
 
-/-- **[D1 — attainment]** `{s | Fits 11 s}` has a least element.  STATUS: PROVED in prose
-(`docs/proofs/drain_lemma.md` D1, compactness); not yet formalised (needs `Fits` closed:
-Hausdorff-limit argument on the configuration representation). -/
-axiom attained : ∃ m, IsLeast {s : ℝ | Fits 11 s} m
+/-- **[D1 — attainment]** `{s | Fits 11 s}` has a least element.  DISCHARGED (A68): was an
+axiom; now the theorem `attained_thm` of `PackingCertMathlib/Attain.lean`
+(`docs/proofs/drain_lemma.md` D1).  No Hausdorff limits: the coordinate feasible region
+(33 square coordinates + the side, cut out by `t ∈ [0,1]`, the `set_subset_container_iff`
+containment inequalities and pairwise non-overlap) is closed and bounded, the side
+projection continuous; non-overlap is closed because the interior of a parametrised
+square is EXACTLY the open `u/v` box (`mem_interior_iff_uv`).  Axioms: `propext,
+Classical.choice, Quot.sound` only. -/
+theorem attained : ∃ m, IsLeast {s : ℝ | Fits 11 s} m := attained_thm
 
 /-!
 **[parametrisation]** — every set-level packing is represented by a configuration
@@ -250,19 +258,26 @@ Certified (Python-interval TCB; exact flush/coincidence arguments + interval SAT
 min margins 0.0249/0.549). -/
 axiom trump_packs_at_shatA22 : CfgPacking shatA22 zhat
 
-/-- **[UB at ŝ — THE open algebraic identity]** `ŝ_A22 = ŝ_octic`.  This axiom is the
-ENTIRE algebraically-open content of the upper-bound-at-ŝ obligation (A64 assessment,
-`docs/proofs/attainment_ub.md` §4–§6):
-* pinned to `|ŝ_A22 − ŝ| ≤ 2.1e-47` (A22's octic enclosure ±3.1e-45 / the T1 Taylor
-  bound `octic′ ≥ 152.37`) — but NO interval/sign computation can close it: equality of
-  two algebraic numbers needs an exact algebraic input, and the Liouville separation gap
-  for the (degree ≤ 56, unknown height) compositum is far below reachable precision;
-* closure specs: (c-alg) exact verification of a recovered algebraic point in the
-  compositum (degree ≤ 56 — a coordinate has a degree-7 minimal polynomial, A53 L4), or
-  the CHEAPER (c-idl, NEW in A64): a saturated ideal-membership certificate
-  `h·octic(s) = Σ q_k·F_k + Σ r_i·(cᵢ²+sᵢ²−1)` with `h(ẑ) ≠ 0` — verification is pure
-  ℚ-polynomial identity checking + one interval sign gate, no number-field arithmetic;
-  the cofactor search (Gröbner/Macaulay, untrusted) is a bounded compute campaign;
+/-- **[UB at ŝ — the algebraic identity, now CERTIFICATE-BACKED]** `ŝ_A22 = ŝ_octic`.
+CLOSED at the Python-certificate tier by A69 (`docs/proofs/attainment_ub.md` §7): the
+(c-idl) saturated ideal-membership certificate `certs/cidl_identity.json`, checker
+`certs/verify_cidl.py` (stdlib rationals; PASS 0.7 s; corruption gates fail loudly):
+
+    e(t)·Δ(t)⁸·octic(S) = Σ_j q_j(t,S)·G_j
+
+over the 13 reduced A22 contact rows on the certified exact-structure slice, with the
+sign gate "e·Δ has no root in [3/10, 2/5] ∋ t̂" (exact Sturm).  Evaluating at the A22
+point gives `octic ŝ_A22 = 0`; with A22's 1e-50 enclosure (`ŝ_A22 ∈ Icc 3.877083
+3.877084`) and `shat_spec`'s uniqueness this yields `shatA22 = shat` (the octic's
+SECOND real root; the other lies in `(-2,-1)`).  En route the tan-half minimal
+polynomial `5t⁸−10t⁷−2t⁶+14t⁵+12t⁴−6t³+2t²+2t−1` is DERIVED (upgrading A22 §7 gap 2),
+and A53 L4's "degree-7 coordinate / compositum 56" obstacle is VOID (spurious A03
+minpoly annotations; every ẑ-coordinate lies in ℚ(t̂), degree 8).
+* Still an AXIOM pending the named obligation CIDL-LEAN (attainment_ub.md §7.5):
+  (i) `native_decide` replay of the identity + Sturm gates (Measure382Check isolation
+  pattern), (ii) refined A22-interface axioms carrying "the generators vanish at ẑ,
+  t̂ ∈ [3/10,2/5], ŝ_A22 ∈ Icc 3.877083 3.877084" in place of the opaque `shatA22` —
+  then this becomes a theorem via `shat_spec`.  No new mathematics remains.
 * S3-fallback: WITHOUT this axiom the remaining axioms still support the restated
   theorem `s(11) = ŝ_A22` (attainment_ub.md §5) — this decomposition is the Lean-side
   preparation for that restatement, keeping `shat`/`shat_spec` (A63) intact. -/
