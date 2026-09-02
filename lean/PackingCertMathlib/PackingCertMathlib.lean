@@ -3,6 +3,11 @@ import PackingCertMathlib.Checker
 import PackingCertMathlib.Data
 import PackingCertMathlib.Bridge
 import PackingCertMathlib.Parametrize
+import PackingCertMathlib.MeasureChecker
+import PackingCertMathlib.MeasureBridge
+import PackingCertMathlib.MeasureData382
+import PackingCertMathlib.Measure382Check
+import PackingCertMathlib.Measure382
 import PackingCertMathlib.Band
 import PackingCertMathlib.Trump11
 import PackingCertMathlib.TopLevel

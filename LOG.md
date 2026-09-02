@@ -1541,3 +1541,44 @@ affordable cost estimate for closing 3.84.
   gaps: make_param anchor rule, verify_param affine-nofam exemption (intersect over the
   s-cell), C-check driver. Route (a) unblocked as theory: 2 tool changes + C-check + one 4D
   pass, vs ~8 desktop-days for the delta=1e-2 grid; routes compose per leaf.
+
+## 2026-09-02 — A64 (Lean wave 2) closed: s(11) ≥ 3.82 is an end-to-end Lean theorem; parametrization discharged; the UB residue is one axiom
+
+- T1 CLOSED (A.PARAM → lean-proved): the `parametrize` axiom is a THEOREM
+  (docs/proofs/parametrization.md + lean/PackingCertMathlib/.../Parametrize.lean). The
+  square's own 90° symmetry (sqSet_rot) puts the edge vector in the closed first
+  quadrant; t = e₂/(1+e₁) then satisfies cosT t = e₁, sinT t = e₂ by polynomial algebra
+  mod e₁²+e₂²=1 — no transcendental function anywhere. Only the `unit` field of
+  IsPacking is used. Bonus: u/v-membership, w-containment, w ≥ 1 and w-quasiconcavity
+  lemmas, consumed by T2.
+- T2 CLOSED (A.F2 + A.LB382 → lean-proved): MeasureBridge.lean formalises the FULL
+  soundness of checkMeasureI (byte-identical copy, A28 pattern): interval products,
+  floor-div bounds, exact rational grid trig with monotonicity, clip via
+  quasiconcavity, sift/split/branch-and-bound induction, coverage, and the
+  scaling+counting argument done in configuration space (strict-u/v pullback ⇒
+  interior ⇒ shrunk squares fully disjoint; finite double-sum swap; no measure
+  theory). Composed with native_decide on the 3.82 certificate (2380 s, isolated in
+  Measure382Check.lean so edits never re-run it): `s_eleven_ge_382 : ∀ s, Fits 11 s →
+  191/50 ≤ s`, axioms propext/Choice/Quot.sound + the native_decide axiom. TopLevel's
+  lb_382 axiom := this theorem. The A28 estimate "3–5 days" was wrong in bottleneck,
+  not size: the cost is CROSS-TOOLCHAIN ELABORATION — checker ites carry core
+  OfNat/Decidable instances that Mathlib-written rw/simp patterns never match
+  syntactically; recipe that works: hypothesis copy + `split at` + `dsimp only at` +
+  full-unification exact/exact_mod_cast (recorded for the A22 Krawczyk replay).
+- T3 ASSESSED + EXECUTED (A.UBshat stays open, residue = ONE axiom): the
+  interval/sign route to ŝ_A22 = ŝ_octic is REFUTED (separation gaps need a height
+  bound; arithmetic-Bézout heights through the 34-variable system are doubly
+  exponential — no reachable precision wins). NEW closure spec (c-idl), cheaper than
+  the degree-≤56 compositum: saturated ideal-membership cofactor certificate,
+  verification = rational polynomial identity + one sign gate (verify_sturm-class
+  TCB); search = bounded Gröbner/Macaulay campaign. Lean side: trump_packs_at_shat is
+  now a THEOREM from shatA22 (intrinsic side) + trump_packs_at_shatA22 (certified,
+  Python-interval TCB) + shatA22_eq_shat (the open identity) — discharging (c-idl)
+  later replaces one axiom and touches nothing else; shat_spec (A63) untouched.
+  attainment_ub.md §6 written; side-finding: `basin`'s certification is intrinsic too
+  (the identity axiom is the single carrier).
+- T4: gold `lean-proved` tier on the live depgraph (+renderer COLORS);
+  A.PARAM/A.F2/A.LB382/A.S3 recoloured; open nodes 13 → 12; README matrix + axiom
+  audit updated (no sorryAx; kernel theorems still axiom-free). CI note: the mathlib
+  job now includes the ~40 min native_decide module (cached; .github out of A64 scope —
+  gate it like PackingCertSlow382 if Actions minutes hurt). A57/A60/A61 untouched.

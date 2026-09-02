@@ -11,18 +11,37 @@ Two projects:
 ## The formal top-level STATEMENT (A62, checklist F3)
 
 `PackingCertMathlib/TopLevel.lean` defines packings over ℝ² (closed unit squares, pairwise
-disjoint **interiors**, container `[0,s]²`, tan-half configuration layer), `s(11)` as an
-infimum, and **states** the composed optimality theorem `s(11) = ŝ` + uniqueness with every
-leaf family of the live proof plan as a NAMED `axiom` (13 of them after A63: attainment,
-parametrisation, Theorem 1, UB-at-ŝ ×2, stratification, per-stratum kills with
-the window fused in, trump5 residual, A22/A36 basin, uniqueness transfer, plus the opaque
-census layer ×3). The three theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved
-from exactly those axioms (`scratch/Axioms.lean` prints them; CI asserts no `sorryAx`).
+disjoint **interiors**, container `[0,s]²`, tan-half configuration layer — the set-level and
+configuration definitions live in `Parametrize.lean` since A64, same namespace), `s(11)` as
+an infimum, and **states** the composed optimality theorem `s(11) = ŝ` + uniqueness with
+every leaf family of the live proof plan as a NAMED `axiom` (13 after A64: attainment,
+UB-at-ŝ ×3 — configuration, certified intrinsic-side feasibility, and the OPEN identity
+`shatA22_eq_shat` —, stratification, per-stratum kills with the window fused in, trump5
+residual, A22/A36 basin, uniqueness transfer, plus the opaque census layer ×3). The three
+theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved from exactly those axioms
+(`scratch/Axioms.lean` prints them; CI asserts no `sorryAx`).
 **Discharged by A63 (2026-09-01): `shat` is now a definition and `shat_spec` a THEOREM
 (root isolation — certificate `certs/octic_root_isolation.json`, checker
 `certs/verify_sturm.py`, all-positive Taylor shift inside Lean; depends only on
 `propext, Classical.choice, Quot.sound`), and `rBasin` is a definition (`3/2000`,
 `docs/proofs/theta_t_transfer.md`).**
+**Discharged by A64 (2026-09-02):**
+* **`parametrize` is a THEOREM** (`Parametrize.lean`; prose
+  `docs/proofs/parametrization.md`): every closed unit square is `PSq.set (cx, cy, t)`
+  with `t = tan(θ/2) ∈ [0,1]` — the square's own 90° symmetry + the half-angle
+  substitution, all polynomial algebra; axioms `propext, Classical.choice, Quot.sound`.
+* **`lb_382` is a THEOREM — `s(11) ≥ 3.82` end to end** (`MeasureBridge.lean` +
+  `Measure382.lean`): the measure-checker soundness bridge (A28 §7 item 4, the
+  "3–5 day item") is fully formalised — exact `Int`-interval arithmetic, rational grid
+  trigonometry, clip (via quasiconcavity of `w = cos + sin`), sift/split/branch-and-bound
+  induction, coverage, and the scaling/shrinking + counting argument — and composed with
+  the `native_decide` evaluation of `checkMeasureI` on the 3.82 certificate
+  (`s_eleven_ge_382`; axioms `propext, Classical.choice, Quot.sound` + the `native_decide` axiom).
+* **`trump_packs_at_shat` is a theorem** from the A64 split of the UB-at-ŝ obligation:
+  `shatA22` (intrinsic side) + `trump_packs_at_shatA22` (A22 feasibility, certified
+  modulo the Python-interval TCB) + `shatA22_eq_shat` (THE open algebraic identity —
+  closure specs incl. the new ideal-membership route (c-idl) in
+  `docs/proofs/attainment_ub.md` §6).
 Each axiom's docstring records the lab artefact meant to discharge it and its status; the
 ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, updated by
 `attempts/A63-hole-closure/notes/findings.md` (bridge lemmas now in `docs/proofs/`).
@@ -38,6 +57,9 @@ ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, u
 | `PackingCert.two_unit_squares_side_ge` | `PackingCertMathlib/Band.lean` | two unit squares in `[lo,lo+B]²` admitting a separating direction ⇒ `B ≥ 1 + √2/2` | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.band_96_25` | `PackingCertMathlib/Band.lean` | at `s = 96/25`: at most one square avoids the width-`27/25` boundary band (⇒ ≥ 10 of 11 meet it) | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.trump11_ccw_ok_kernel` | `PackingCertMathlib/Trump11.lean` | `checkPackingCCW Data.trump11 = true`, kernel `decide` | **none** |
+| `PackingCert.S11.parametrize` | `PackingCertMathlib/Parametrize.lean` | **every packing is a configuration** `(cxᵢ, cyᵢ, tᵢ)`, `t ∈ [0,1]` (A.PARAM; was the `parametrize` axiom) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.checkMeasureI_no_packing` | `PackingCertMathlib/MeasureBridge.lean` | **the measure bridge (A.F2)**: `checkMeasureI c = true` ⇒ `s(c.n) ≥ c.sNum/c.sDen` over ℝ² | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.s_eleven_ge_382` | `PackingCertMathlib/Measure382.lean` | **`s(11) ≥ 3.82` end to end**: `∀ s, Fits 11 s → 191/50 ≤ s` | + the `native_decide` axiom (`check_3_82._native.native_decide.ax_1_1`; ≈ 40 min build) |
 
 `Band.lean` proves the A26.1 family with an *arbitrary* separating direction, hence band width
 `27/25 = 1.08` rather than A26's `1`; see `attempts/A28-lean-batch/notes.md` §3, which also records
@@ -56,9 +78,12 @@ the single unformalised two-vector inequality (A28.★) that would upgrade the c
 
 Both checkers are `Bool`-valued functions; Lean proves *that the checker returns `true` on the
 data*.  The bridge lemma connecting `= true` to the geometric statement over ℝ² is **proved** for
-the **upper bound** (A28, `lean/PackingCertMathlib`, table at the top of this file) and still
-**assumed** for the **lower bound** (measure) checker — see `attempts/A06-lean-setup/notes.md` and
-`attempts/A28-lean-batch/notes.md` §7.
+the **upper bound** (A28, `lean/PackingCertMathlib`, table at the top of this file) and — since
+A64 — **also for the lower-bound (measure) checker**: `PackingCertMathlib/MeasureBridge.lean`
+proves the soundness of a byte-identical copy of `checkMeasureI`
+(`PackingCertMathlib/MeasureChecker.lean`), so the theorems in this project are end-to-end;
+the `lean/PackingCert` theorems below remain evaluation-only (their bridge is the same
+statement, proved in the sibling project).
 
 ## Toolchain / build
 

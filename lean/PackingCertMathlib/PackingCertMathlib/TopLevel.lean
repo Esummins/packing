@@ -6,6 +6,7 @@ import Mathlib.Topology.Instances.Real.Lemmas
 import Mathlib.Tactic
 import PackingCertMathlib.Bridge
 import PackingCertMathlib.Parametrize
+import PackingCertMathlib.Measure382
 
 /-!
 # The composed optimality theorem for s(11) — formal STATEMENT (A62, checklist item F3)
@@ -21,8 +22,15 @@ with every leaf family of the current proof plan as a NAMED `axiom`.  Nothing be
 composition glue is proved here; `#print axioms` on the three theorems at the bottom lists
 exactly the declared hypotheses (plus `propext, Classical.choice, Quot.sound` from Mathlib).
 Each axiom carries, in its docstring, the lab artefact that is supposed to discharge it and
-its status as of 2026-09-01.  Discharging an axiom = replacing it by a definition/theorem
-without changing any statement that mentions it.
+its status as of 2026-09-02 (A64).  Discharging an axiom = replacing it by a
+definition/theorem without changing any statement that mentions it.  Discharged so far:
+`shat`/`shat_spec` and `rBasin` (A63); `parametrize` (A64, `Parametrize.lean`) and
+`lb_382` (A64, `MeasureBridge.lean` + `Measure382.lean` — the measure bridge formalised,
+so `s(11) ≥ 3.82` is an end-to-end Lean theorem whose only extra axiom is
+the `native_decide` evaluation axiom); `trump_packs_at_shat` (A64) is now a theorem
+from the finer split `shatA22` + `trump_packs_at_shatA22` (certified) +
+`shatA22_eq_shat` (the open identity).  13 named axioms remain, but only
+`shatA22_eq_shat` and the genuinely-open leaf families carry open mathematics.
 
 The point of the file (per `docs/publication_checklist.md` F3) is to force the definition of
 "packing", the quantifier order, and the exact form of each leaf obligation.  Every ambiguity
@@ -213,28 +221,57 @@ edge vector into the closed first quadrant, then the half-angle substitution
 Prose: `docs/proofs/parametrization.md`.
 -/
 
-/-- **[Theorem 1 — s(11) ≥ 3.82]** STATUS: certificate
-`certs/measure_certificate_3.82.json` + two independent exact verifiers; Lean proves the
-checker returns `true` (`s11_ge_3_82`, `native_decide`); the bridge "checker = true ⇒ every
-unit square has mass ≥ 1 ⇒ no 11-packing" is prose (checklist F2, A28 §7 item 4). -/
-axiom lb_382 : ∀ s : ℝ, Fits 11 s → (191 / 50 : ℝ) ≤ s
+/-- **[Theorem 1 — s(11) ≥ 3.82]** DISCHARGED (A64): was an axiom; now the end-to-end
+theorem `s_eleven_ge_382` (`Measure382.lean`): the `native_decide` evaluation of
+`checkMeasureI` on `certs/measure_certificate_3.82.json` composed with the FORMALISED
+measure bridge (`MeasureBridge.lean` — checker soundness: interval arithmetic, grid
+trigonometry, clip/sift/split/branch-and-bound, coverage, and the scaling/counting
+argument; was the A28 §7 item 4 prose, checklist F2).  Axioms: `propext,
+Classical.choice, Quot.sound, Lean.ofReduceBool`. -/
+theorem lb_382 : ∀ s : ℝ, Fits 11 s → (191 / 50 : ℝ) ≤ s := s_eleven_ge_382
 
-/-- **[UB at ŝ exactly]** Trump's configuration and the fact that it is a packing at side
-ŝ.  STATUS: OPEN; route DECIDED by A63 (`docs/proofs/attainment_ub.md`):
-* route (b) — `Fits` closed + certificate sequence ↓ ŝ — is REFUTED as a finite route
-  (scaling breaks unit squares; finite certificate sets have min side > ŝ; rational
-  parametric curves have rational σ-limits ≠ ŝ).  Struck.
-* route (a) — A22 Krawczyk existence + FEASIBILITY — already certifies `Fits ŝ_A22` for
-  the INTRINSIC side ŝ_A22 of the contact solution (Python-interval TCB).  The residue is
-  the statement identity ŝ_A22 = ŝ (the octic root): now pinned to |ŝ_A22 − ŝ| ≤ 2.1e-47
-  (A22's octic enclosure ± 3.1e-45 divided by the T1 Taylor bound octic′ ≥ 152.37), with
-  equality still an OPEN algebraic identity — closure specs (c-alg: exact number-field
-  verification, compositum degree ≤ 56; or the S3-fallback restatement with ŝ := ŝ_A22)
-  in `attainment_ub.md` §4. -/
+/-- **[UB at ŝ exactly]** Trump's configuration.  STATUS: OPEN as a whole, but SPLIT by
+A64 into its certified and open parts (the A63 route decision, executed Lean-side):
+route (a) — A22 Krawczyk existence + FEASIBILITY — certifies `Fits ŝ_A22` for the
+INTRINSIC side `shatA22` of the contact solution (Python-interval TCB;
+`trump_packs_at_shatA22` below); the whole algebraically-open residue is the single
+identity axiom `shatA22_eq_shat`.  Route (b) remains REFUTED as a finite route
+(`docs/proofs/attainment_ub.md` §2). -/
 axiom zhat : Cfg
 
-/-- See `zhat`. -/
-axiom trump_packs_at_shat : CfgPacking shat zhat
+/-- **[UB at ŝ — intrinsic side]** The side of A22's unique contact solution ẑ in the
+Krawczyk box `N = box(z0, 5e-4)`: `‖ẑ − z0‖∞ ≤ 1e-50`, and ẑ IS a packing at its own
+side (A22 §4 feasibility).  Certified TODAY modulo the mpmath.iv trust item (TCB T3);
+Lean replay = the t-reparametrised Krawczyk checker (A28 §4 / checklist F6). -/
+axiom shatA22 : ℝ
+
+/-- See `shatA22`: A22 feasibility, i.e. `Fits 11 shatA22` in configuration form.
+Certified (Python-interval TCB; exact flush/coincidence arguments + interval SAT with
+min margins 0.0249/0.549). -/
+axiom trump_packs_at_shatA22 : CfgPacking shatA22 zhat
+
+/-- **[UB at ŝ — THE open algebraic identity]** `ŝ_A22 = ŝ_octic`.  This axiom is the
+ENTIRE algebraically-open content of the upper-bound-at-ŝ obligation (A64 assessment,
+`docs/proofs/attainment_ub.md` §4–§6):
+* pinned to `|ŝ_A22 − ŝ| ≤ 2.1e-47` (A22's octic enclosure ±3.1e-45 / the T1 Taylor
+  bound `octic′ ≥ 152.37`) — but NO interval/sign computation can close it: equality of
+  two algebraic numbers needs an exact algebraic input, and the Liouville separation gap
+  for the (degree ≤ 56, unknown height) compositum is far below reachable precision;
+* closure specs: (c-alg) exact verification of a recovered algebraic point in the
+  compositum (degree ≤ 56 — a coordinate has a degree-7 minimal polynomial, A53 L4), or
+  the CHEAPER (c-idl, NEW in A64): a saturated ideal-membership certificate
+  `h·octic(s) = Σ q_k·F_k + Σ r_i·(cᵢ²+sᵢ²−1)` with `h(ẑ) ≠ 0` — verification is pure
+  ℚ-polynomial identity checking + one interval sign gate, no number-field arithmetic;
+  the cofactor search (Gröbner/Macaulay, untrusted) is a bounded compute campaign;
+* S3-fallback: WITHOUT this axiom the remaining axioms still support the restated
+  theorem `s(11) = ŝ_A22` (attainment_ub.md §5) — this decomposition is the Lean-side
+  preparation for that restatement, keeping `shat`/`shat_spec` (A63) intact. -/
+axiom shatA22_eq_shat : shatA22 = shat
+
+/-- The composed upper-bound-at-ŝ statement — a THEOREM from the split (A64); its
+`#print axioms` separates the certified feasibility from the open identity. -/
+theorem trump_packs_at_shat : CfgPacking shat zhat :=
+  shatA22_eq_shat ▸ trump_packs_at_shatA22
 
 /-- **[census — definitional debt]** Index type of the stratification (intended: the 163
 D4 classes of the A53 Young-form census; kept opaque until the census definition is

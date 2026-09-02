@@ -14,6 +14,9 @@ import PackingCertMathlib.TopLevel
 #print axioms PackingCert.isUnitSquare_csqSet
 #print axioms PackingCert.S11.isUnitSquare_exists_psq
 #print axioms PackingCert.S11.parametrize
+#print axioms PackingCert.S11.checkMeasureI_no_packing
+#print axioms PackingCert.S11.check_3_82
+#print axioms PackingCert.S11.s_eleven_ge_382
 #print axioms PackingCert.S11.s_eleven_ge
 #print axioms PackingCert.S11.s_eleven_eq
 #print axioms PackingCert.S11.s_eleven_unique

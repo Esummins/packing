@@ -9,7 +9,7 @@
   ],
   "scope": "The LIVE proof plan (A53-A60 stratification composition), i.e. exactly the axiom roster of lean/PackingCertMathlib/PackingCertMathlib/TopLevel.lean. The superseded A38/T0 far-field composition is represented only by its off-tree remnants (X.* nodes). Each node's `lean_axiom` field names the axiom in TopLevel.lean it feeds, when one exists. UPDATED BY A63: labels/notes after the hole-closure pass (shat_spec discharged in Lean; S4/F9 bridge, InStratum bridge, theta-t transfer written; UB route decided; uniqueness re-architected). Base: A62 depgraph at c9980bf.",
   "labels": {
-   "lean-proved": "a Lean THEOREM in lean/ (statement and proof formal; axioms at most propext/Classical.choice/Quot.sound + Lean.ofReduceBool)",
+   "lean-proved": "a Lean THEOREM in lean/ (statement and proof formal; axioms at most propext/Classical.choice/Quot.sound + the native_decide axiom)",
    "proved-prose": "a human-readable proof exists in the repo (docs/proofs/ or attempt notes); not formalised",
    "certificate+verifier": "established by exact certificate(s) checked by a named verifier",
    "cited": "external result or trusted third-party component",
@@ -54,7 +54,7 @@
    "label": "lean-proved",
    "lean_axiom": "lb_382 (DISCHARGED A64 - now a theorem)",
    "source": "certs/measure_certificate_3.82.json",
-   "note": "Two independent exact verifiers (verify_measure.py; Lean checkMeasureI via native_decide) AND, since A64, the END-TO-END Lean theorem s_eleven_ge_382 (Measure382.lean): native_decide evaluation + the formalised bridge A.F2; axioms propext/Choice/Quot.sound + Lean.ofReduceBool. 'Lean proves s(11) >= 3.82', not just 'Lean checks the checker'."
+   "note": "Two independent exact verifiers (verify_measure.py; Lean checkMeasureI via native_decide) AND, since A64, the END-TO-END Lean theorem s_eleven_ge_382 (Measure382.lean): native_decide evaluation + the formalised bridge A.F2; axioms propext/Choice/Quot.sound + the native_decide axiom. 'Lean proves s(11) >= 3.82', not just 'Lean checks the checker'."
   },
   {
    "id": "A.F2",

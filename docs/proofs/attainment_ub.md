@@ -109,3 +109,54 @@ PSLQ-found, enclosure-consistent, never derived).
   lower-bound axioms, with |s(11) − ŝ_octic| ≤ 2.1e-47 unconditionally-on-the-same-axioms.
 * Interval-only honest form (no A22 feasibility accepted): ŝ ≤ s(11) ≤ 3.877083591023,
   unchanged from A62.
+
+## 6 [F/C] A64 assessment: can a resultant/interval sign argument beat the compositum?
+
+Asked (A64 brief): does "agreement within 2.1e-47 + an interval enclosure of
+octic(ŝ_A22)" support a SIGN argument, entirely in rationals, closing the identity?
+
+**[F] No — and not for lack of precision.** A sign argument certifies strict
+inequalities; equality of two algebraic numbers can follow from a finite computation
+only via an exact algebraic input that supplies a SEPARATION GAP ("if ŝ_A22 ≠ ŝ_octic
+then |ŝ_A22 − ŝ_octic| ≥ γ"), after which |diff| ≤ 2.1e-47 < γ would finish. A
+Liouville/resultant gap for ŝ_A22 needs a degree AND height bound for its minimal
+polynomial. Degree ≤ 56 is known (compositum), but the height is exactly what we do not
+have without doing the elimination: a-priori arithmetic-Bézout height bounds through the
+34-variable curated system are doubly exponential in the system size, giving γ far below
+any reachable interval precision (tightening 2.1e-47 by re-running A22 at higher
+precision changes nothing — the gap estimate loses by orders of magnitude of orders of
+magnitude). The pure interval/sign route is closed off, not merely unexecuted; the 2018-
+style "verify to 10^-k and wave at PSLQ" shortcut does not exist here.
+
+**[C] (c-idl) — a THIRD closure spec, cheaper than (c-alg).** The identity follows from
+a *saturated ideal-membership certificate*: polynomials q_k, r_i, h over ℚ (in the
+t-parametrised variables, so every constraint row F_k is polynomial) with
+
+    h · octic(s) = Σ_k q_k · F_k + Σ_i r_i · (c_i² + s_i² − 1),      h(ẑ) ≠ 0.
+
+Evaluating at ẑ (where every F_k and every trig relation vanishes) gives
+octic(ŝ_A22) = 0, and T1's isolation converts that to ŝ_A22 = ŝ_octic (ŝ_A22 lies in
+the isolating interval by the 1e-50 enclosure). VERIFICATION is pure rational polynomial
+identity checking plus ONE interval sign gate h(ẑ) ≠ 0 — same TCB profile as
+`verify_sturm.py`, stdlib rationals, no number-field arithmetic, no recovery of exact
+coordinates. The saturation factor h is necessary because the global variety of the
+curated system has other components on which the octic need not vanish; h kills them.
+The SEARCH for (q, r, h) (Gröbner basis / numerically-guided Macaulay linear algebra —
+untrusted, only the printed certificate matters) is a bounded compute campaign — a
+future attempt, not a today-task. (c-alg) remains valid but strictly costlier in TCB
+(compositum arithmetic) and in recovery risk.
+
+**[T] Lean-side execution (the fallback clause, without regressing A63).** Rather than
+reverting `shat` to an opaque constant (the literal S3-fallback restatement would undo
+A63's `shat_spec` theorem), `TopLevel.lean` now SPLITS the old `trump_packs_at_shat`
+axiom into
+
+* `shatA22 : ℝ` + `trump_packs_at_shatA22 : CfgPacking shatA22 zhat` — certified today
+  (Python-interval TCB), and
+* `shatA22_eq_shat : shatA22 = shat` — THE open identity, isolated as a single named
+  axiom carrying the 2.1e-47 pin and the closure specs (c-alg)/(c-idl),
+
+with `trump_packs_at_shat` recovered as a theorem. `#print axioms` on the composed
+theorems now separates the certified feasibility from the open identity; discharging
+(c-idl) later = replacing one axiom by a theorem, touching nothing else. The published
+restatement s(11) = ŝ_A22 (§5) remains available by flipping which constant is primitive.

@@ -481,9 +481,54 @@ theorem clipI_sound {sVal : ℝ} {b : IBox} {q : PSq}
     ring
   have hwd0 : (0 : Int) < ctx.P4 + b.T0 * b.T0 := by exact_mod_cast hdn0
   have hwd1 : (0 : Int) < ctx.P4 + b.T1 * b.T1 := by exact_mod_cast hdn1
-  by_cases hsel : (ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * (ctx.P4 + b.T1 * b.T1)
-      ≤ (ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * (ctx.P4 + b.T0 * b.T0)
-  · -- min at the left endpoint: wLo = wn0/dn0
+  -- one axis of the clip bound, packaged for both selection branches
+  have core : ∀ wn wd : Int, 0 < wd → (wn : ℝ) / (wd : ℝ) ≤ wT q.t →
+      ((max b.X0 (wn * ctx.D / (2 * wd)) : Int) : ℝ) ≤ q.cx * ctx.D ∧
+      q.cx * ctx.D ≤ ((min b.X1 (-(-(2 * ctx.SD * wd - wn * ctx.D) / (2 * wd))) : Int) : ℝ) ∧
+      ((max b.Y0 (wn * ctx.D / (2 * wd)) : Int) : ℝ) ≤ q.cy * ctx.D ∧
+      q.cy * ctx.D ≤ ((min b.Y1 (-(-(2 * ctx.SD * wd - wn * ctx.D) / (2 * wd))) : Int) : ℝ) ∧
+      max b.X0 (wn * ctx.D / (2 * wd))
+        ≤ min b.X1 (-(-(2 * ctx.SD * wd - wn * ctx.D) / (2 * wd))) ∧
+      max b.Y0 (wn * ctx.D / (2 * wd))
+        ≤ min b.Y1 (-(-(2 * ctx.SD * wd - wn * ctx.D) / (2 * wd))) := by
+    intro wn wd hwd hwlo
+    obtain ⟨hX0c, hX1c⟩ := clip_core hD hSD hwd hwlo ha1 ha2
+    obtain ⟨hY0c, hY1c⟩ := clip_core hD hSD hwd hwlo ha3 ha4
+    have p1 : ((max b.X0 (wn * ctx.D / (2 * wd)) : Int) : ℝ) ≤ q.cx * ctx.D := by
+      push_cast [Int.cast_max]
+      exact max_le hqX0 (by exact_mod_cast hX0c)
+    have p2 : q.cx * ctx.D
+        ≤ ((min b.X1 (-(-(2 * ctx.SD * wd - wn * ctx.D) / (2 * wd))) : Int) : ℝ) := by
+      push_cast [Int.cast_min]
+      exact le_min hqX1 (by exact_mod_cast hX1c)
+    have p3 : ((max b.Y0 (wn * ctx.D / (2 * wd)) : Int) : ℝ) ≤ q.cy * ctx.D := by
+      push_cast [Int.cast_max]
+      exact max_le hqY0 (by exact_mod_cast hY0c)
+    have p4 : q.cy * ctx.D
+        ≤ ((min b.Y1 (-(-(2 * ctx.SD * wd - wn * ctx.D) / (2 * wd))) : Int) : ℝ) := by
+      push_cast [Int.cast_min]
+      exact le_min hqY1 (by exact_mod_cast hY1c)
+    exact ⟨p1, p2, p3, p4, by exact_mod_cast le_trans p1 p2,
+      by exact_mod_cast le_trans p3 p4⟩
+  -- evaluate `clipI` by case-splitting a hypothesis copy (the checker was compiled
+  -- without Mathlib, so goal-side rewriting with Mathlib-elaborated lemmas does not
+  -- match syntactically; `split at` + full-unification `exact` does)
+  obtain ⟨res, hres⟩ : ∃ r, clipI ctx b = r := ⟨_, rfl⟩
+  have hres0 : clipI ctx b = res := hres
+  rw [clipI] at hres
+  split at hres
+  next cn0 sn0 dn0 heq0 =>
+  split at hres
+  next cn1 sn1 dn1 heq1 =>
+  simp only [trig, Prod.mk.injEq] at heq0 heq1
+  obtain ⟨e1, e2, e3⟩ := heq0
+  obtain ⟨f1, f2, f3⟩ := heq1
+  subst e1; subst e2; subst e3; subst f1; subst f2; subst f3
+  dsimp only at hres
+  split at hres
+  · -- selection: min at the left endpoint, (wn, wd) = (wn0, dn0)
+    next hsel =>
+    dsimp only at hres
     have hle : wT ((b.T0 : ℝ) / (ctx.TROOT : ℝ)) ≤ wT ((b.T1 : ℝ) / (ctx.TROOT : ℝ)) := by
       rw [hw0, hw1, div_le_div_iff₀ hdn0 hdn1]
       exact_mod_cast hsel
@@ -491,60 +536,18 @@ theorem clipI_sound {sVal : ℝ} {b : IBox} {q : PSq}
         / ((ctx.P4 + b.T0 * b.T0 : Int) : ℝ) ≤ wT q.t := by
       rw [← hw0]
       exact le_trans (le_of_eq (min_eq_left hle).symm) hmin
-    obtain ⟨hX0c, hX1c⟩ := clip_core hD hSD hwd0 hwlo ha1 ha2
-    obtain ⟨hY0c, hY1c⟩ := clip_core hD hSD hwd0 hwlo ha3 ha4
-    have hXlo : ((max b.X0 ((ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T0 * b.T0))) : Int) : ℝ) ≤ q.cx * ctx.D := by
-      push_cast [Int.cast_max]
-      exact max_le hqX0 (by exact_mod_cast hX0c)
-    have hXhi : q.cx * ctx.D ≤ ((min b.X1
-        (-(-(2 * ctx.SD * (ctx.P4 + b.T0 * b.T0)
-          - (ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T0 * b.T0)))) : Int) : ℝ) := by
-      push_cast [Int.cast_min]
-      exact le_min hqX1 (by exact_mod_cast hX1c)
-    have hYlo : ((max b.Y0 ((ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T0 * b.T0))) : Int) : ℝ) ≤ q.cy * ctx.D := by
-      push_cast [Int.cast_max]
-      exact max_le hqY0 (by exact_mod_cast hY0c)
-    have hYhi : q.cy * ctx.D ≤ ((min b.Y1
-        (-(-(2 * ctx.SD * (ctx.P4 + b.T0 * b.T0)
-          - (ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T0 * b.T0)))) : Int) : ℝ) := by
-      push_cast [Int.cast_min]
-      exact le_min hqY1 (by exact_mod_cast hY1c)
-    have hXint : max b.X0 ((ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T0 * b.T0)))
-        ≤ min b.X1 (-(-(2 * ctx.SD * (ctx.P4 + b.T0 * b.T0)
-          - (ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T0 * b.T0)))) := by
-      exact_mod_cast le_trans hXlo hXhi
-    have hYint : max b.Y0 ((ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T0 * b.T0)))
-        ≤ min b.Y1 (-(-(2 * ctx.SD * (ctx.P4 + b.T0 * b.T0)
-          - (ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T0 * b.T0)))) := by
-      exact_mod_cast le_trans hYlo hYhi
-    refine ⟨⟨b.T0, b.T1,
-      max b.X0 ((ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T0 * b.T0))),
-      min b.X1 (-(-(2 * ctx.SD * (ctx.P4 + b.T0 * b.T0)
-          - (ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T0 * b.T0)))),
-      max b.Y0 ((ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T0 * b.T0))),
-      min b.Y1 (-(-(2 * ctx.SD * (ctx.P4 + b.T0 * b.T0)
-          - (ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T0 * b.T0))))⟩,
-      ?_, ⟨hqT0, hqT1, hXlo, hXhi, hYlo, hYhi⟩, rfl, rfl⟩
-    simp only [clipI, trig]
-    split_ifs with hs1 hs2
-    · rfl
-    · refine absurd ?_ hs2
-      simp only [Bool.and_eq_true, decide_eq_true_eq]
-      exact ⟨hXint, hYint⟩
-    · exact absurd hsel hs1
-  · -- min at the right endpoint: wLo = wn1/dn1
+    obtain ⟨p1, p2, p3, p4, pX, pY⟩ :=
+      core (ctx.P4 - b.T0 * b.T0 + 2 * b.T0 * ctx.TROOT) (ctx.P4 + b.T0 * b.T0) hwd0 hwlo
+    split at hres
+    · next hcond =>
+      exact ⟨_, hres0.trans hres.symm, ⟨hqT0, hqT1, p1, p2, p3, p4⟩, rfl, rfl⟩
+    · next hcond =>
+      refine absurd ?_ hcond
+      rw [Bool.and_eq_true]
+      exact ⟨decide_eq_true pX, decide_eq_true pY⟩
+  · -- selection: min at the right endpoint, (wn, wd) = (wn1, dn1)
+    next hsel =>
+    dsimp only at hres
     rw [not_le] at hsel
     have hle : wT ((b.T1 : ℝ) / (ctx.TROOT : ℝ)) ≤ wT ((b.T0 : ℝ) / (ctx.TROOT : ℝ)) := by
       rw [hw0, hw1, div_le_div_iff₀ hdn1 hdn0]
@@ -553,61 +556,509 @@ theorem clipI_sound {sVal : ℝ} {b : IBox} {q : PSq}
         / ((ctx.P4 + b.T1 * b.T1 : Int) : ℝ) ≤ wT q.t := by
       rw [← hw1]
       exact le_trans (le_of_eq (min_eq_right hle).symm) hmin
-    obtain ⟨hX0c, hX1c⟩ := clip_core hD hSD hwd1 hwlo ha1 ha2
-    obtain ⟨hY0c, hY1c⟩ := clip_core hD hSD hwd1 hwlo ha3 ha4
-    have hXlo : ((max b.X0 ((ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T1 * b.T1))) : Int) : ℝ) ≤ q.cx * ctx.D := by
-      push_cast [Int.cast_max]
-      exact max_le hqX0 (by exact_mod_cast hX0c)
-    have hXhi : q.cx * ctx.D ≤ ((min b.X1
-        (-(-(2 * ctx.SD * (ctx.P4 + b.T1 * b.T1)
-          - (ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T1 * b.T1)))) : Int) : ℝ) := by
-      push_cast [Int.cast_min]
-      exact le_min hqX1 (by exact_mod_cast hX1c)
-    have hYlo : ((max b.Y0 ((ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T1 * b.T1))) : Int) : ℝ) ≤ q.cy * ctx.D := by
-      push_cast [Int.cast_max]
-      exact max_le hqY0 (by exact_mod_cast hY0c)
-    have hYhi : q.cy * ctx.D ≤ ((min b.Y1
-        (-(-(2 * ctx.SD * (ctx.P4 + b.T1 * b.T1)
-          - (ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T1 * b.T1)))) : Int) : ℝ) := by
-      push_cast [Int.cast_min]
-      exact le_min hqY1 (by exact_mod_cast hY1c)
-    have hXint : max b.X0 ((ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T1 * b.T1)))
-        ≤ min b.X1 (-(-(2 * ctx.SD * (ctx.P4 + b.T1 * b.T1)
-          - (ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T1 * b.T1)))) := by
-      exact_mod_cast le_trans hXlo hXhi
-    have hYint : max b.Y0 ((ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T1 * b.T1)))
-        ≤ min b.Y1 (-(-(2 * ctx.SD * (ctx.P4 + b.T1 * b.T1)
-          - (ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T1 * b.T1)))) := by
-      exact_mod_cast le_trans hYlo hYhi
-    refine ⟨⟨b.T0, b.T1,
-      max b.X0 ((ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T1 * b.T1))),
-      min b.X1 (-(-(2 * ctx.SD * (ctx.P4 + b.T1 * b.T1)
-          - (ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T1 * b.T1)))),
-      max b.Y0 ((ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D
-        / (2 * (ctx.P4 + b.T1 * b.T1))),
-      min b.Y1 (-(-(2 * ctx.SD * (ctx.P4 + b.T1 * b.T1)
-          - (ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) * ctx.D)
-            / (2 * (ctx.P4 + b.T1 * b.T1))))⟩,
-      ?_, ⟨hqT0, hqT1, hXlo, hXhi, hYlo, hYhi⟩, rfl, rfl⟩
-    simp only [clipI, trig]
-    split_ifs with hs1 hs2
-    · exact absurd hs1 (not_le.mpr hsel)
-    · rfl
-    · refine absurd ?_ hs2
-      simp only [Bool.and_eq_true, decide_eq_true_eq]
-      exact ⟨hXint, hYint⟩
+    obtain ⟨p1, p2, p3, p4, pX, pY⟩ :=
+      core (ctx.P4 - b.T1 * b.T1 + 2 * b.T1 * ctx.TROOT) (ctx.P4 + b.T1 * b.T1) hwd1 hwlo
+    split at hres
+    · next hcond =>
+      exact ⟨_, hres0.trans hres.symm, ⟨hqT0, hqT1, p1, p2, p3, p4⟩, rfl, rfl⟩
+    · next hcond =>
+      refine absurd ?_ hcond
+      rw [Bool.and_eq_true]
+      exact ⟨decide_eq_true pX, decide_eq_true pY⟩
+
+/-! ## Split soundness -/
+
+/-- Bisection covers the box, and preserves the `t`-range invariants. -/
+theorem splitI_sound {b : IBox} {q : PSq} (hq : inBox ctx b q) (hT0 : 0 ≤ b.T0)
+    (hT1 : b.T1 ≤ ctx.TROOT) :
+    (inBox ctx (splitI ctx b).1 q ∧ 0 ≤ (splitI ctx b).1.T0 ∧
+        (splitI ctx b).1.T1 ≤ ctx.TROOT) ∨
+    (inBox ctx (splitI ctx b).2 q ∧ 0 ≤ (splitI ctx b).2.T0 ∧
+        (splitI ctx b).2.T1 ≤ ctx.TROOT) := by
+  obtain ⟨h1, h2, h3, h4, h5, h6⟩ := hq
+  have hTle : b.T0 ≤ b.T1 := by exact_mod_cast le_trans h1 h2
+  have hXle : b.X0 ≤ b.X1 := by exact_mod_cast le_trans h3 h4
+  have hYle : b.Y0 ≤ b.Y1 := by exact_mod_cast le_trans h5 h6
+  obtain ⟨res, hres⟩ : ∃ r, splitI ctx b = r := ⟨_, rfl⟩
+  have hres0 : splitI ctx b = res := hres
+  rw [splitI] at hres
+  rw [hres0]
+  split at hres
+  · -- X split
+    have hm1 : b.X0 ≤ (b.X0 + b.X1) / 2 := by omega
+    have hm2 : (b.X0 + b.X1) / 2 ≤ b.X1 := by omega
+    rw [← hres]
+    dsimp only
+    rcases le_total (q.cx * (ctx.D : ℝ)) (((b.X0 + b.X1) / 2 : Int) : ℝ) with hc | hc
+    · exact Or.inl ⟨⟨h1, h2, h3, hc, h5, h6⟩, hT0, hT1⟩
+    · exact Or.inr ⟨⟨h1, h2, hc, h4, h5, h6⟩, hT0, hT1⟩
+  · split at hres
+    · -- Y split
+      have hm1 : b.Y0 ≤ (b.Y0 + b.Y1) / 2 := by omega
+      have hm2 : (b.Y0 + b.Y1) / 2 ≤ b.Y1 := by omega
+      rw [← hres]
+      dsimp only
+      rcases le_total (q.cy * (ctx.D : ℝ)) (((b.Y0 + b.Y1) / 2 : Int) : ℝ) with hc | hc
+      · exact Or.inl ⟨⟨h1, h2, h3, h4, h5, hc⟩, hT0, hT1⟩
+      · exact Or.inr ⟨⟨h1, h2, h3, h4, hc, h6⟩, hT0, hT1⟩
+    · -- T split
+      have hm1 : b.T0 ≤ (b.T0 + b.T1) / 2 := by omega
+      have hm2 : (b.T0 + b.T1) / 2 ≤ b.T1 := by omega
+      rw [← hres]
+      dsimp only
+      rcases le_total (q.t * (ctx.TROOT : ℝ)) (((b.T0 + b.T1) / 2 : Int) : ℝ) with hc | hc
+      · exact Or.inl ⟨⟨h1, hc, h3, h4, h5, h6⟩, hT0, le_trans hm2 hT1⟩
+      · exact Or.inr ⟨⟨hc, h2, h3, h4, h5, h6⟩, le_trans hT0 hm1, hT1⟩
+
+/-! ## Sift soundness -/
+
+/-- The atom sift is sound: the certified mass plus the mass of the kept atoms never
+exceeds the incoming certified mass plus the mass of all processed atoms; a `covered`
+verdict means the certified mass alone reaches `NEED`; kept atoms stay valid. -/
+theorem sift_sound {Clo Chi Slo Shi E : Int} {b : IBox} {q : PSq}
+    (hD : 0 < ctx.D) (hE : 0 < (E : ℝ))
+    (hcos1 : (Clo : ℝ) ≤ cosT q.t * E) (hcos2 : cosT q.t * E ≤ (Chi : ℝ))
+    (hsin1 : (Slo : ℝ) ≤ sinT q.t * E) (hsin2 : sinT q.t * E ≤ (Shi : ℝ))
+    (hX0 : (b.X0 : ℝ) ≤ q.cx * ctx.D) (hX1 : q.cx * ctx.D ≤ (b.X1 : ℝ))
+    (hY0 : (b.Y0 : ℝ) ≤ q.cy * ctx.D) (hY1 : q.cy * ctx.D ≤ (b.Y1 : ℝ)) :
+    ∀ (l : List IAtom) (sure : Int) (acc : List IAtom) (cov : Bool) (sure' : Int)
+      (rest : List IAtom),
+      (∀ a ∈ l, 0 < a.pd ∧ 0 ≤ a.w) → (∀ a ∈ acc, 0 < a.pd ∧ 0 ≤ a.w) →
+      sift ctx Clo Chi Slo Shi E b l sure acc = (cov, sure', rest) →
+      ((sure' : ℝ) + massIn rest q.set
+          ≤ (sure : ℝ) + massIn l q.set + massIn acc q.set) ∧
+      (cov = true → ctx.NEED ≤ sure') ∧
+      (∀ a ∈ rest, 0 < a.pd ∧ 0 ≤ a.w) := by
+  intro l
+  induction l with
+  | nil =>
+    intro sure acc cov sure' rest hl hacc hs
+    rw [sift] at hs
+    simp only [Prod.mk.injEq] at hs
+    obtain ⟨hc, hsu, hre⟩ := hs
+    subst hsu
+    subst hre
+    refine ⟨by simp, ?_, hacc⟩
+    intro hcov
+    rw [← hc] at hcov
+    exact of_decide_eq_true hcov
+  | cons a as ih =>
+    intro sure acc cov sure' rest hl hacc hs
+    have hva := hl a (List.mem_cons_self ..)
+    have hvas : ∀ x ∈ as, 0 < x.pd ∧ 0 ≤ x.w := fun x hx => hl x (List.mem_cons_of_mem a hx)
+    rw [sift] at hs
+    split at hs
+    · next hstop =>
+      simp only [Prod.mk.injEq] at hs
+      obtain ⟨hc, hsu, hre⟩ := hs
+      subst hsu
+      subst hre
+      have hnn : 0 ≤ massIn (a :: as) q.set :=
+        massIn_nonneg (fun x hx => (hl x hx).2) _
+      exact ⟨by linarith, fun _ => hstop, hacc⟩
+    · next hstop =>
+      rcases hp : projI ctx Clo Chi Slo Shi E b a with ⟨u0, u1, v0, v1, lim⟩
+      rw [hp] at hs
+      dsimp only at hs
+      obtain ⟨hin, hout⟩ :=
+        projI_sound hD hE hcos1 hcos2 hsin1 hsin2 hX0 hX1 hY0 hY1 hva.1 hp
+      split at hs
+      · next hins =>
+        obtain ⟨q1, q2, q3⟩ := ih (sure + a.w) acc cov sure' rest hvas hacc hs
+        refine ⟨?_, q2, q3⟩
+        have hmem := hin hins
+        have hml : massIn (a :: as) q.set = (a.w : ℝ) + massIn as q.set := by
+          rw [massIn_cons, Set.indicator_of_mem hmem]
+        rw [hml]
+        push_cast at q1
+        linarith
+      · split at hs
+        · next houts =>
+          obtain ⟨q1, q2, q3⟩ := ih sure acc cov sure' rest hvas hacc hs
+          refine ⟨?_, q2, q3⟩
+          have hnot := hout houts
+          have hml : massIn (a :: as) q.set = 0 + massIn as q.set := by
+            rw [massIn_cons, Set.indicator_of_notMem hnot]
+          rw [hml]
+          linarith
+        · next houts =>
+          have hacc' : ∀ x ∈ a :: acc, 0 < x.pd ∧ 0 ≤ x.w := by
+            intro x hx
+            rcases List.mem_cons.mp hx with rfl | hx
+            · exact hva
+            · exact hacc x hx
+          obtain ⟨q1, q2, q3⟩ := ih sure (a :: acc) cov sure' rest hvas hacc' hs
+          refine ⟨?_, q2, q3⟩
+          rw [massIn_cons] at q1
+          rw [massIn_cons]
+          linarith
+
+/-! ## Branch-and-bound soundness -/
+
+/-- The recursion is sound: if `go` succeeds on a box, then for every admissible
+parameter point of that box the certified mass plus the mass of the atoms inside the
+denoted square reaches `NEED`. -/
+theorem go_sound {sVal : ℝ}
+    (hP4 : (ctx.P4 : ℝ) = (ctx.TROOT : ℝ) ^ 2) (hR : 0 < (ctx.TROOT : ℝ))
+    (hD : 0 < ctx.D) (hSD : (ctx.SD : ℝ) = sVal * ctx.D) :
+    ∀ (fuel : Nat) (b : IBox) (l : List IAtom) (sure : Int),
+      (∀ a ∈ l, 0 < a.pd ∧ 0 ≤ a.w) → 0 ≤ b.T0 → b.T1 ≤ ctx.TROOT →
+      go ctx fuel b l sure = true →
+      ∀ q : PSq, 0 ≤ q.t → q.t ≤ 1 → inBox ctx b q → Adm sVal q →
+      (ctx.NEED : ℝ) ≤ (sure : ℝ) + massIn l q.set := by
+  intro fuel
+  induction fuel with
+  | zero =>
+    intro b l sure hl hbT0 hbT1 hgo q hq0 hq1 hbox hadm
+    obtain ⟨b', hclip, hbox', hT0eq, hT1eq⟩ := clipI_sound hP4 hR hD hSD hbT0 hbox hadm
+    rw [go, hclip] at hgo
+    dsimp only at hgo
+    rcases hbt : boxTrig ctx b'.T0 b'.T1 with ⟨Clo, Chi, Slo, Shi, E⟩
+    rw [hbt] at hgo
+    dsimp only at hgo
+    simp only [boxTrig, trig, Prod.mk.injEq] at hbt
+    obtain ⟨hClo, hChi, hSlo, hShi, hE⟩ := hbt
+    have hT0' : 0 ≤ b'.T0 := hT0eq ▸ hbT0
+    have hT1' : (b'.T1 : ℝ) ≤ (ctx.TROOT : ℝ) := by
+      rw [hT1eq]; exact_mod_cast hbT1
+    obtain ⟨hbt0, hbt1, hbx0, hbx1, hby0, hby1⟩ := hbox'
+    have henc := trig_enclosure hP4 hR hT0' hT1' hbt0 hbt1
+    have hEpos : 0 < (E : ℝ) := by rw [← hE]; exact_mod_cast henc.1
+    have hc1 : (Clo : ℝ) ≤ cosT q.t * E := by
+      rw [← hClo, ← hE]; exact_mod_cast henc.2.1
+    have hc2 : cosT q.t * E ≤ (Chi : ℝ) := by
+      rw [← hChi, ← hE]; exact_mod_cast henc.2.2.1
+    have hs1 : (Slo : ℝ) ≤ sinT q.t * E := by
+      rw [← hSlo, ← hE]; exact_mod_cast henc.2.2.2.1
+    have hs2 : sinT q.t * E ≤ (Shi : ℝ) := by
+      rw [← hShi, ← hE]; exact_mod_cast henc.2.2.2.2
+    rcases hsift : sift ctx Clo Chi Slo Shi E b' l sure [] with ⟨cov, sure', rest⟩
+    obtain ⟨p1, p2, p3⟩ := sift_sound hD hEpos hc1 hc2 hs1 hs2 hbx0 hbx1 hby0 hby1
+      l sure [] cov sure' rest hl (by simp) hsift
+    rw [hsift] at hgo
+    dsimp only at hgo
+    have hneed : (ctx.NEED : ℝ) ≤ (sure' : ℝ) := by exact_mod_cast p2 hgo
+    have hrest0 : 0 ≤ massIn rest q.set := massIn_nonneg (fun x hx => (p3 x hx).2) _
+    have hnil : massIn ([] : List IAtom) q.set = 0 := rfl
+    linarith
+  | succ f ih =>
+    intro b l sure hl hbT0 hbT1 hgo q hq0 hq1 hbox hadm
+    obtain ⟨b', hclip, hbox', hT0eq, hT1eq⟩ := clipI_sound hP4 hR hD hSD hbT0 hbox hadm
+    rw [go, hclip] at hgo
+    dsimp only at hgo
+    rcases hbt : boxTrig ctx b'.T0 b'.T1 with ⟨Clo, Chi, Slo, Shi, E⟩
+    rw [hbt] at hgo
+    dsimp only at hgo
+    simp only [boxTrig, trig, Prod.mk.injEq] at hbt
+    obtain ⟨hClo, hChi, hSlo, hShi, hE⟩ := hbt
+    have hT0' : 0 ≤ b'.T0 := hT0eq ▸ hbT0
+    have hT1i : b'.T1 ≤ ctx.TROOT := hT1eq ▸ hbT1
+    have hT1' : (b'.T1 : ℝ) ≤ (ctx.TROOT : ℝ) := by exact_mod_cast hT1i
+    obtain ⟨hbt0, hbt1, hbx0, hbx1, hby0, hby1⟩ := hbox'
+    have henc := trig_enclosure hP4 hR hT0' hT1' hbt0 hbt1
+    have hEpos : 0 < (E : ℝ) := by rw [← hE]; exact_mod_cast henc.1
+    have hc1 : (Clo : ℝ) ≤ cosT q.t * E := by
+      rw [← hClo, ← hE]; exact_mod_cast henc.2.1
+    have hc2 : cosT q.t * E ≤ (Chi : ℝ) := by
+      rw [← hChi, ← hE]; exact_mod_cast henc.2.2.1
+    have hs1 : (Slo : ℝ) ≤ sinT q.t * E := by
+      rw [← hSlo, ← hE]; exact_mod_cast henc.2.2.2.1
+    have hs2 : sinT q.t * E ≤ (Shi : ℝ) := by
+      rw [← hShi, ← hE]; exact_mod_cast henc.2.2.2.2
+    rcases hsift : sift ctx Clo Chi Slo Shi E b' l sure [] with ⟨cov, sure', rest⟩
+    obtain ⟨p1, p2, p3⟩ := sift_sound hD hEpos hc1 hc2 hs1 hs2 hbx0 hbx1 hby0 hby1
+      l sure [] cov sure' rest hl (by simp) hsift
+    rw [hsift] at hgo
+    dsimp only at hgo
+    have hrest0 : 0 ≤ massIn rest q.set := massIn_nonneg (fun x hx => (p3 x hx).2) _
+    have hnil : massIn ([] : List IAtom) q.set = 0 := rfl
+    split at hgo
+    · next hcov =>
+      have hneed : (ctx.NEED : ℝ) ≤ (sure' : ℝ) := by exact_mod_cast p2 hcov
+      linarith
+    · next hcov =>
+      rw [Bool.and_eq_true] at hgo
+      obtain ⟨hg1, hg2⟩ := hgo
+      have hbox'' : inBox ctx b' q := ⟨hbt0, hbt1, hbx0, hbx1, hby0, hby1⟩
+      rcases splitI_sound hbox'' hT0' hT1i with ⟨hin1, hi0, hi1⟩ | ⟨hin2, hi0, hi1⟩
+      · have := ih (splitI ctx b').1 rest sure' p3 hi0 hi1 hg1 q hq0 hq1 hin1 hadm
+        linarith
+      · have := ih (splitI ctx b').2 rest sure' p3 hi0 hi1 hg2 q hq0 hq1 hin2 hadm
+        linarith
 
 end CtxFacts
+
+/-! ## The top-level checker gates -/
+
+theorem checkMeasureI_facts {c : MCertI} (h : checkMeasureI c = true) :
+    0 < c.sDen ∧ 0 < c.wd ∧ (∀ a ∈ c.atoms, 0 < a.pd ∧ 0 ≤ a.w) ∧
+    (c.atoms.foldl (fun acc a => acc + a.w) 0 < (c.n : Int) * c.wd) ∧
+    go (mkCtx c) c.depth (rootBox (mkCtx c)) c.atoms 0 = true := by
+  rw [checkMeasureI] at h
+  rw [Bool.and_eq_true, Bool.and_eq_true, Bool.and_eq_true, Bool.and_eq_true] at h
+  obtain ⟨⟨⟨⟨h1, h2⟩, h3⟩, h4⟩, h5⟩ := h
+  refine ⟨of_decide_eq_true h1, of_decide_eq_true h2, ?_, of_decide_eq_true h4, h5⟩
+  intro a ha
+  have hpa := List.all_eq_true.mp h3 a ha
+  rw [Bool.and_eq_true] at hpa
+  exact ⟨of_decide_eq_true hpa.1, of_decide_eq_true hpa.2⟩
+
+/-- The coverage theorem: a passing checker certifies that EVERY parametrised unit
+square inside the container carries mass ≥ `wd` (i.e. `μ(Q) ≥ 1`). -/
+theorem checkMeasureI_coverage {c : MCertI} (h : checkMeasureI c = true) :
+    ∀ q : PSq, 0 ≤ q.t → q.t ≤ 1 →
+      q.set ⊆ container ((c.sNum : ℝ) / (c.sDen : ℝ)) →
+      (c.wd : ℝ) ≤ massIn c.atoms q.set := by
+  obtain ⟨hsd, hwd, hat, htot, hgo⟩ := checkMeasureI_facts h
+  intro q hq0 hq1 hsub
+  have hTR : (mkCtx c).TROOT = (2 : Int) ^ (c.depth + 1) := rfl
+  have hR : (0 : ℝ) < ((mkCtx c).TROOT : ℝ) := by
+    rw [hTR]; push_cast; positivity
+  have hP4' : (mkCtx c).P4 = (mkCtx c).TROOT * (mkCtx c).TROOT := by
+    show (4 : Int) ^ (c.depth + 1) = (2 : Int) ^ (c.depth + 1) * (2 : Int) ^ (c.depth + 1)
+    rw [← mul_pow]
+    norm_num
+  have hP4 : ((mkCtx c).P4 : ℝ) = ((mkCtx c).TROOT : ℝ) ^ 2 := by
+    rw [hP4']; push_cast; ring
+  have hD : 0 < (mkCtx c).D := by
+    show 0 < c.sDen * (2 : Int) ^ (c.depth + 2)
+    positivity
+  have hDR : (0 : ℝ) < ((mkCtx c).D : ℝ) := by exact_mod_cast hD
+  have hsdR : (0 : ℝ) < (c.sDen : ℝ) := by exact_mod_cast hsd
+  have hSD : ((mkCtx c).SD : ℝ) = ((c.sNum : ℝ) / (c.sDen : ℝ)) * ((mkCtx c).D : ℝ) := by
+    show ((c.sNum * (2 : Int) ^ (c.depth + 2) : Int) : ℝ)
+        = ((c.sNum : ℝ) / (c.sDen : ℝ)) * ((c.sDen * (2 : Int) ^ (c.depth + 2) : Int) : ℝ)
+    push_cast
+    field_simp
+  obtain ⟨a1, a2, a3, a4⟩ :=
+    (set_subset_container_iff hq0 hq1 ((c.sNum : ℝ) / (c.sDen : ℝ))).mp hsub
+  have hadm : Adm ((c.sNum : ℝ) / (c.sDen : ℝ)) q := ⟨a1, a2, a3, a4⟩
+  have hw1 := wT_ge_one hq0 hq1
+  have hlo : (((mkCtx c).D / 2 : Int) : ℝ) ≤ ((mkCtx c).D : ℝ) / 2 :=
+    cast_ediv_le (by norm_num)
+  have hroot : inBox (mkCtx c) (rootBox (mkCtx c)) q := by
+    refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+    · show ((0 : Int) : ℝ) ≤ q.t * ((mkCtx c).TROOT : ℝ)
+      push_cast
+      exact mul_nonneg hq0 hR.le
+    · show q.t * ((mkCtx c).TROOT : ℝ) ≤ (((mkCtx c).TROOT : Int) : ℝ)
+      nlinarith
+    · show (((mkCtx c).D / 2 : Int) : ℝ) ≤ q.cx * ((mkCtx c).D : ℝ)
+      nlinarith [a1, hw1]
+    · show q.cx * ((mkCtx c).D : ℝ) ≤ (((mkCtx c).SD - (mkCtx c).D / 2 : Int) : ℝ)
+      push_cast
+      nlinarith [a2, hw1, hSD, hlo]
+    · show (((mkCtx c).D / 2 : Int) : ℝ) ≤ q.cy * ((mkCtx c).D : ℝ)
+      nlinarith [a3, hw1]
+    · show q.cy * ((mkCtx c).D : ℝ) ≤ (((mkCtx c).SD - (mkCtx c).D / 2 : Int) : ℝ)
+      push_cast
+      nlinarith [a4, hw1, hSD, hlo]
+  have hmain := go_sound (ctx := mkCtx c) hP4 hR hD hSD c.depth (rootBox (mkCtx c))
+    c.atoms 0 hat (le_refl _) (le_refl _) hgo q hq0 hq1 hroot hadm
+  have hne : ((mkCtx c).NEED : ℝ) = (c.wd : ℝ) := rfl
+  rw [hne] at hmain
+  simpa using hmain
+
+/-! ## The scaling/shrinking construction and the counting argument -/
+
+/-- Strictly-interior `u/v` coordinates put a point in the interior of the square. -/
+theorem strict_uv_mem_interior (q : PSq) (p : RP)
+    (hu : |rdot (p.1 - q.cx, p.2 - q.cy) (edir q)| < 1 / 2)
+    (hv : |rdot (p.1 - q.cx, p.2 - q.cy) (perpV (edir q))| < 1 / 2) :
+    p ∈ interior q.set := by
+  refine mem_interior.mpr
+    ⟨{x : RP | |rdot (x.1 - q.cx, x.2 - q.cy) (edir q)| < 1 / 2} ∩
+      {x : RP | |rdot (x.1 - q.cx, x.2 - q.cy) (perpV (edir q))| < 1 / 2}, ?_, ?_, hu, hv⟩
+  · intro x hx
+    rw [mem_set_iff_uv]
+    exact ⟨le_of_lt hx.1, le_of_lt hx.2⟩
+  · have hf : Continuous fun x : RP => rdot (x.1 - q.cx, x.2 - q.cy) (edir q) := by
+      simp only [rdot]
+      fun_prop
+    have hg : Continuous fun x : RP => rdot (x.1 - q.cx, x.2 - q.cy) (perpV (edir q)) := by
+      simp only [rdot]
+      fun_prop
+    exact IsOpen.inter (isOpen_lt hf.abs continuous_const)
+      (isOpen_lt hg.abs continuous_const)
+
+/-- Centre dilation by `lam`, keeping the unit size and the orientation. -/
+def scaleC (lam : ℝ) (q : PSq) : PSq := ⟨lam * q.cx, lam * q.cy, q.t⟩
+
+/-- A point of the shrunk square, pulled back by `1/lam`, is strictly inside the
+original square (`lam > 1`). -/
+theorem scaleC_mem_interior {lam : ℝ} (hlam : 1 < lam) {q : PSq} {p : RP}
+    (hp : p ∈ (scaleC lam q).set) : (p.1 / lam, p.2 / lam) ∈ interior q.set := by
+  have hl0 : (0 : ℝ) < lam := lt_trans one_pos hlam
+  have hlne : lam ≠ 0 := hl0.ne'
+  rw [mem_set_iff_uv] at hp
+  obtain ⟨hu, hv⟩ := hp
+  have hfrac : (0 : ℝ) < 1 / lam := by positivity
+  have hfrac2 : (1 / lam) * (1 / 2 : ℝ) < 1 / 2 := by
+    have hinv : 1 / lam < 1 := by
+      rw [div_lt_one hl0]
+      exact hlam
+    nlinarith
+  apply strict_uv_mem_interior
+  · have key : rdot ((p.1 / lam, p.2 / lam).1 - q.cx, (p.1 / lam, p.2 / lam).2 - q.cy)
+        (edir q)
+        = (1 / lam) * rdot (p.1 - (scaleC lam q).cx, p.2 - (scaleC lam q).cy)
+            (edir (scaleC lam q)) := by
+      simp only [rdot, scaleC, edir]
+      field_simp
+    rw [key, abs_mul, abs_of_pos hfrac]
+    have h1 : (1 / lam) * |rdot (p.1 - (scaleC lam q).cx, p.2 - (scaleC lam q).cy)
+        (edir (scaleC lam q))| ≤ (1 / lam) * (1 / 2) :=
+      mul_le_mul_of_nonneg_left hu hfrac.le
+    nlinarith
+  · have key : rdot ((p.1 / lam, p.2 / lam).1 - q.cx, (p.1 / lam, p.2 / lam).2 - q.cy)
+        (perpV (edir q))
+        = (1 / lam) * rdot (p.1 - (scaleC lam q).cx, p.2 - (scaleC lam q).cy)
+            (perpV (edir (scaleC lam q))) := by
+      simp only [rdot, scaleC, edir, perpV]
+      field_simp
+    rw [key, abs_mul, abs_of_pos hfrac]
+    have h1 : (1 / lam) * |rdot (p.1 - (scaleC lam q).cx, p.2 - (scaleC lam q).cy)
+        (perpV (edir (scaleC lam q)))| ≤ (1 / lam) * (1 / 2) :=
+      mul_le_mul_of_nonneg_left hv hfrac.le
+    nlinarith
+
+/-- The shrunk square lives in the enlarged container. -/
+theorem scaleC_subset {lam s : ℝ} (hlam : 1 ≤ lam) {q : PSq} (h0 : 0 ≤ q.t)
+    (h1 : q.t ≤ 1) (hsub : q.set ⊆ container s) :
+    (scaleC lam q).set ⊆ container (lam * s) := by
+  obtain ⟨b1, b2, b3, b4⟩ := (set_subset_container_iff h0 h1 s).mp hsub
+  have hw1 := wT_ge_one h0 h1
+  have hl0 : (0 : ℝ) ≤ lam := le_trans zero_le_one hlam
+  have m2 := mul_le_mul_of_nonneg_left b2 hl0
+  have m4 := mul_le_mul_of_nonneg_left b4 hl0
+  refine (set_subset_container_iff (q := scaleC lam q) h0 h1 (lam * s)).mpr ?_
+  simp only [scaleC]
+  refine ⟨?_, ?_, ?_, ?_⟩ <;> nlinarith
+
+/-- Swap a `Fin`-sum with the atom-list sum. -/
+theorem massIn_sum_comm {n : ℕ} (atoms : List IAtom) (f : Fin n → Set RP) :
+    ∑ i, massIn atoms (f i)
+      = (atoms.map fun a =>
+          ∑ i, (f i).indicator (fun _ => (a.w : ℝ)) (atomPt a)).sum := by
+  induction atoms with
+  | nil => simp [massIn]
+  | cons a as ihl =>
+    simp only [massIn_cons, List.map_cons, List.sum_cons, Finset.sum_add_distrib, ihl]
+
+/-- An atom lands in at most one of a pairwise-disjoint family. -/
+theorem indicator_sum_le {n : ℕ} {f : Fin n → Set RP}
+    (hdis : ∀ i j, i ≠ j → Disjoint (f i) (f j)) {w : ℝ} (hw : 0 ≤ w) (pt : RP) :
+    ∑ i, (f i).indicator (fun _ => w) pt ≤ w := by
+  by_cases hex : ∃ i, pt ∈ f i
+  · obtain ⟨i0, hi0⟩ := hex
+    have hle : ∀ i ∈ Finset.univ, (f i).indicator (fun _ => w) pt
+        ≤ if i = i0 then w else 0 := by
+      intro i _
+      by_cases hii : i = i0
+      · subst hii
+        simp [Set.indicator_of_mem hi0]
+      · have hnot : pt ∉ f i := fun hmem =>
+          (Set.disjoint_left.mp (hdis i i0 hii)) hmem hi0
+        simp [Set.indicator_of_notMem hnot, hii]
+    calc ∑ i, (f i).indicator (fun _ => w) pt
+        ≤ ∑ i, if i = i0 then w else 0 := Finset.sum_le_sum hle
+      _ = w := by simp
+  · have hall : ∀ i, pt ∉ f i := fun i hi => hex ⟨i, hi⟩
+    have hz : ∀ i ∈ Finset.univ, (f i).indicator (fun _ => w) pt = 0 := fun i _ =>
+      Set.indicator_of_notMem (hall i) _
+    rw [Finset.sum_congr rfl hz]
+    simpa using hw
+
+theorem foldl_add_eq (l : List IAtom) : ∀ i : Int,
+    l.foldl (fun acc a => acc + a.w) i = i + (l.map (fun a => a.w)).sum := by
+  induction l with
+  | nil => intro i; simp
+  | cons a as ihl =>
+    intro i
+    rw [List.foldl_cons, ihl, List.map_cons, List.sum_cons]
+    ring
+
+/-- **The counting/scaling argument** (the "two-line proof" of the verifier headers):
+coverage at side `S` plus total mass `< n` excludes packings at EVERY side `< S`. -/
+theorem coverage_no_packing {n : ℕ} {S NEEDR : ℝ} {atoms : List IAtom}
+    (hw : ∀ a ∈ atoms, 0 ≤ a.w)
+    (hcover : ∀ q : PSq, 0 ≤ q.t → q.t ≤ 1 → q.set ⊆ container S →
+      NEEDR ≤ massIn atoms q.set)
+    (htot : (atoms.map fun a => ((a.w : ℝ))).sum < n * NEEDR) :
+    ∀ s : ℝ, Fits n s → S ≤ s := by
+  intro s hFits
+  by_contra hcon
+  rw [not_le] at hcon
+  obtain ⟨Q, hP⟩ := hFits
+  obtain ⟨z, hzt, hzQ⟩ := parametrize Q hP
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · subst hn
+    have h0 : (0 : ℝ) ≤ (atoms.map fun a => ((a.w : ℝ))).sum := by
+      refine List.sum_nonneg ?_
+      intro x hx
+      simp only [List.mem_map] at hx
+      obtain ⟨a, ha, rfl⟩ := hx
+      exact_mod_cast hw a ha
+    simp only [Nat.cast_zero, zero_mul] at htot
+    linarith
+  · have hzsub : ∀ i, (z i).set ⊆ container s := fun i => (hzQ i) ▸ hP.contained i
+    have hi0 : (0 : ℕ) < n := hn
+    obtain ⟨b1, b2, b3, b4⟩ :=
+      (set_subset_container_iff (hzt ⟨0, hi0⟩).1 (hzt ⟨0, hi0⟩).2 s).mp (hzsub ⟨0, hi0⟩)
+    have hwi0 := wT_ge_one (hzt ⟨0, hi0⟩).1 (hzt ⟨0, hi0⟩).2
+    have hs1 : (1 : ℝ) ≤ s := by linarith
+    have hspos : (0 : ℝ) < s := by linarith
+    have hlam1 : 1 < S / s := (one_lt_div hspos).mpr hcon
+    have hlamS : (S / s) * s = S := div_mul_cancel₀ S hspos.ne'
+    have hcov : ∀ i, NEEDR ≤ massIn atoms ((scaleC (S / s) (z i)).set) := by
+      intro i
+      refine hcover (scaleC (S / s) (z i)) (hzt i).1 (hzt i).2 ?_
+      have hsc := scaleC_subset (le_of_lt hlam1) (hzt i).1 (hzt i).2 (hzsub i)
+      rwa [hlamS] at hsc
+    have hdis : ∀ i j, i ≠ j →
+        Disjoint ((scaleC (S / s) (z i)).set) ((scaleC (S / s) (z j)).set) := by
+      intro i j hij
+      rw [Set.disjoint_left]
+      intro p hpi hpj
+      have h1 := scaleC_mem_interior hlam1 hpi
+      have h2 := scaleC_mem_interior hlam1 hpj
+      have hd := hP.interiorDisjoint i j hij
+      rw [hzQ i, hzQ j] at hd
+      exact Set.disjoint_left.mp hd h1 h2
+    have e1 : (n : ℝ) * NEEDR = ∑ _i : Fin n, NEEDR := by
+      rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+    have e2 : ∑ _i : Fin n, NEEDR ≤ ∑ i, massIn atoms ((scaleC (S / s) (z i)).set) :=
+      Finset.sum_le_sum (fun i _ => hcov i)
+    have e3 := massIn_sum_comm atoms (fun i => (scaleC (S / s) (z i)).set)
+    have e4 : (atoms.map fun a => ∑ i, ((scaleC (S / s) (z i)).set).indicator
+        (fun _ => (a.w : ℝ)) (atomPt a)).sum ≤ (atoms.map fun a => ((a.w : ℝ))).sum := by
+      refine List.sum_le_sum ?_
+      intro a ha
+      exact indicator_sum_le hdis (by exact_mod_cast hw a ha) (atomPt a)
+    have : (n : ℝ) * NEEDR ≤ (atoms.map fun a => ((a.w : ℝ))).sum := by
+      rw [e1]
+      calc ∑ _i : Fin n, NEEDR ≤ ∑ i, massIn atoms ((scaleC (S / s) (z i)).set) := e2
+        _ = _ := e3
+        _ ≤ _ := e4
+    linarith
+
+/-- **The measure bridge, end form** (A.F2): a passing `checkMeasureI` certificate at
+side `s = sNum/sDen` proves `s(n) ≥ s`. -/
+theorem checkMeasureI_no_packing {c : MCertI} (h : checkMeasureI c = true) :
+    ∀ s : ℝ, Fits c.n s → (c.sNum : ℝ) / (c.sDen : ℝ) ≤ s := by
+  obtain ⟨hsd, hwd, hat, htot, hgo⟩ := checkMeasureI_facts h
+  refine coverage_no_packing (NEEDR := (c.wd : ℝ)) (fun a ha => (hat a ha).2)
+    (fun q h0 h1 hsub => checkMeasureI_coverage h q h0 h1 hsub) ?_
+  rw [foldl_add_eq c.atoms 0, zero_add] at htot
+  have h2 : (((c.atoms.map fun a => a.w).sum : Int) : ℝ) < (c.n : ℝ) * (c.wd : ℝ) := by
+    exact_mod_cast htot
+  have h3 : (((c.atoms.map fun a => a.w).sum : Int) : ℝ)
+      = (c.atoms.map fun a => ((a.w : ℝ))).sum := by
+    push_cast
+    rw [List.map_map]
+    rfl
+  rw [h3] at h2
+  exact h2
 
 end
 
