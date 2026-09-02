@@ -1,0 +1,54 @@
+{
+ "n_certs": 1,
+ "n_checks": 24,
+ "n_failures": 3,
+ "failure_lines": [
+  "  [FAIL] slot_T4.5e-2_landing [V] A22 edge rows valid on the tube box tangential -0.050712 (E3c2-7e3), depth+1/2 0.914204",
+  "  [FAIL] slot_T4.5e-2_landing [K] beta(B) < 1 beta = 1.906103",
+  "  [FAIL] slot_T4.5e-2_landing [P] monotone iteration reaches x_n + r0 <= r_N (A22 handover) stopped at x = 5.7800e-02 after 0 steps (r_N = 5.0e-04)"
+ ],
+ "exact": true,
+ "PREC": 330,
+ "wall_seconds": 1.6,
+ "verdict": "corruption r-big: checker FAILED as required => PASS",
+ "corrupt": "r-big",
+ "a22_sha256": "f82689e754a198c7f67611874c2ece889a5a08d90cac3c39352649fdef6f8f36",
+ "certificates": [
+  {
+   "name": "slot_T4.5e-2_landing",
+   "sum_omega_gamma": [
+    1.0,
+    1.0
+   ],
+   "canary_wall_rows": [
+    "W4c0[x=0]",
+    "W4c3[x=0]",
+    "W6c2[y=s]",
+    "W10c1[x=s]"
+   ],
+   "min_gamma_loaded": 0.0,
+   "n_strict": 20,
+   "min_tangential": -0.050711819201790576,
+   "min_tangential_row": "E3c2-7e3",
+   "min_depth_plus_half": 0.914204356247207,
+   "eps_0": 1.3829081415262348e-49,
+   "eps_w": 7.776774456131024e-45,
+   "g_max": 4.286503490566729e-50,
+   "Hbar": 8.109873504598072,
+   "q_vv": 0.0,
+   "Hv_l1": 0.14653164320887502,
+   "Hv_l1_tilts": 0.14653164320887502,
+   "beta": 1.9061026977828786,
+   "kappa": 20.29226152130338,
+   "kappa_eff": 19.315664098324593,
+   "X_max": 0.0578,
+   "psi_Xmax": 1.0578,
+   "psi_over_Xmax": 18.301038062283737,
+   "x_star": 0.0578,
+   "n_iter": 0,
+   "reached": false,
+   "seconds": 1.6,
+   "claims_max_rel_dev": 788.3231952223623
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "n_certs": 1,
+ "n_checks": 24,
+ "n_failures": 5,
+ "failure_lines": [
+  "  [FAIL] slot_T4.5e-2_landing direction v >= 0 ",
+  "  [FAIL] slot_T4.5e-2_landing direction matches spec slot(pins=[0, 1, 2, 3, 5]) ",
+  "  [FAIL] slot_T4.5e-2_landing [C] gamma_k >= 0 on every loaded row min lo -6.895e-01",
+  "  [FAIL] slot_T4.5e-2_landing [C] declared strictly compressed rows have gamma > 0 bad: [6, 11, 13, 15, 16, 17]",
+  "  [FAIL] slot_T4.5e-2_landing [C] strictly compressed rows negative at z-hat - T v max hi 3.103e-02"
+ ],
+ "exact": true,
+ "PREC": 330,
+ "wall_seconds": 1.6,
+ "verdict": "corruption wrong-ray: checker FAILED as required => PASS",
+ "corrupt": "wrong-ray",
+ "a22_sha256": "f82689e754a198c7f67611874c2ece889a5a08d90cac3c39352649fdef6f8f36",
+ "certificates": [
+  {
+   "name": "slot_T4.5e-2_landing",
+   "sum_omega_gamma": [
+    1.0,
+    1.0
+   ],
+   "canary_wall_rows": [
+    "W2c1[x=s]",
+    "W2c2[x=s]",
+    "W5c1[x=s]",
+    "W5c2[x=s]",
+    "W5c2[y=s]",
+    "W5c3[y=s]",
+    "W6c2[y=s]",
+    "W10c1[x=s]"
+   ],
+   "min_gamma_loaded": -0.689491405405648,
+   "n_strict": 20,
+   "min_tangential": 0.003411097916531553,
+   "min_tangential_row": "E4c1-7e2",
+   "min_depth_plus_half": 0.9924064108159194,
+   "eps_0": 1.3829081415262348e-49,
+   "eps_w": 7.776774456131024e-45,
+   "g_max": 4.286503490566729e-50,
+   "Hbar": 7.897250539862816,
+   "q_vv": 0.0,
+   "Hv_l1": 0.10034394856787988,
+   "Hv_l1_tilts": 0.10034394856787988,
+   "beta": 0.32805121542907234,
+   "kappa": 20.29226152130338,
+   "kappa_eff": 19.315664098324593,
+   "X_max": 0.0466,
+   "psi_Xmax": 0.0010826666984174484,
+   "psi_over_Xmax": 0.02323319095316413,
+   "x_star": 0.00031730121399319104,
+   "n_iter": 2,
+   "reached": true,
+   "seconds": 1.6,
+   "claims_max_rel_dev": 10.144550908841628
+  }
+ ]
+}

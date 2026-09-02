@@ -2033,3 +2033,37 @@ affordable cost estimate for closing 3.84.
 - Discipline: 1 LP at a time (BLAS pinned, headroom gate waited out two dips to 0.26 GB), builder 4-6 procs, Rust jobs <= 6; A57/A60/A61/A76
   untouched; frozen verifiers untouched (import-only). Hinted certs (73 MB each) NOT committed (certs/.gitignore; regenerate with hintbatch.py).
   Files: attempts/A77-corners4-close/*, docs/proofs/pair_kill.md 6.9, depgraph C.K4TIER note (owner A77 closed), REGISTRY row.
+
+## 2026-09-03 A83-contraction-tube (Fable lead + 1 Opus reviewer, <= 2 light slots) -- done-success
+- T1 TUBE THEOREM CERTIFIED (docs/proofs/contraction_tube.md; certs/verify_tube.py stdlib-exact, 10 corruption gates; 12 certs
+  certs/tube_*.json incl. the A36 box as a T = 0 regression, 289 checks, 0 failures; Opus clean-room review SOUND): every packing in Tube_v(T, r) = {z-hat - t v + w : t in [0,T], |w_i| <= r_i} has
+  sigma >= s-hat, equality only at z-hat. A36's (V') chain re-based: pair-relative enclosures (edge/dist rows are translation
+  invariant; on the hull box the pair centres vary independently -> interval-dependency artifact walled the tube at T ~ 0.02),
+  split Taylor remainder d = -t v + w (q_vv = 0 on the slot ray: contraction is AFFINE on every wall/edge row), max-form
+  pinning, monotone iteration in place of quad_pin, direct A22 handover. Reproduces G3_UNIVERSAL's constants at T = 0.
+- NUMBERS (theta-frame, r_s = 0): slot ray (trump5 pins on their slot lines, free squares scaled = the exact pull-back of a
+  (D) leaf): T = 0.045 at A60's landing radii (1.6e-3, 2.1e-3) [wall 0.0457], T = 0.0571 = s-hat - 3.82 at r = 6.5e-4,
+  T = 0.0621 at r = 2e-4; scale ray (pure dilation pull-back): T = 0.13 at the landing radii. Isotropic r_max 3.68e-3 (= A36)
+  at T = 0, 3.49e-3 at T = 0.02. psi/X = 0.023 at the landing point (A36: 0.998); beta never binds (0.33 / 0.55).
+  WALL NAMED: tangential validity of A22 pin row E3c2-7e3 (pin square 3's corner on free square 7's left edge; slot ray,
+  0.39 per unit T) / E7c2-9e3 (7-9 flush pair; scale ray, 0.10 per unit T). Both are pin rows (13, 27 in S): a different
+  pin basis or an L1-style branch is the only lever beyond; not needed.
+- COMPRESSION LEMMA [T]: scale ray - all 38 rows strictly compressed (gamma = c/s-hat on walls, n.(c_p - c_o)/s-hat >= 1/(2 s-hat)
+  on edges, 2/s-hat on dists; min 0.12896); slot ray - gamma >= 0 with 18 pin-block rows exactly 0; Farkas identity
+  sum omega gamma = 1 +- eps_w. Not load-bearing (the chain ignores the sign of v); it is why no contact breaks along the ray
+  (branch-free, no L1) and the canary (z-hat - T v violates a strictly compressed wall row at every certified T).
+- LEMMA SEAM [T]: t = s-hat - m EXACTLY; pins at slots(m) have w = 0 on the slot ray; free squares w <= r_land + 3.6e-7
+  (the s0 - s-hat factor); tilts w = r_land,theta (1.771 r_t locally); dilation commutes with D4 at the respective sides.
+  NO B.2'' widening anywhere (all tree logic is applied to the dilated family at s0); only the pin slack enters:
+  T_K(delta_pin) = ((2/3) delta s-hat - (s0 - s-hat))/(1 + (2/3) delta) [A = 3/2 for trump5] = 0.0257 / 2.57e-3 / 2.5e-4 at
+  delta = 1e-2 / 1e-3 / 1e-4 -> delta_basin(trump5) = min(T_tube, T_K) = 0.0257 at delta_pin = 1e-2 (0.0457 at >= 1.8e-2).
+  => A60's (K) leaves must be re-emitted at delta_pin = 1e-2 (its planned 1e-4 caps the route at 2.5e-4); D.S6's 4.9%
+  overshoot is void in the tube route. SEAM AS TWO NUMBERS: delta_basin 0.0257 vs delta_LP = A82 near-s-hat extrapolations
+  1.7e-3 (k4_08) / 5e-3 (k4_11) [x5-15], BUT A82's deep point (k4_08 at s-hat - 0.044: eta -0.38, unconverged) says the
+  protected crossovers lie deeper; trump5's own crossover UNSCANNED (named obligation). Protected classes: s0-Theorem-U caps
+  T' ~ 3e-4 (pin drift (lambda-1)*5/2 enters U's cores, square-6 pocket x5.8) -> U-slab obligation (A80 owner) written.
+- LEAN NOTE lean/tube_obligation_A83.md: tubeBox + InTube, split remainder lemma (no Hessian symmetry assumed: column and row
+  sums both enclosed), iter_pin (monotone iteration), checkTube = checkA36 with the box swapped; ~400 lines on A79's files.
+- Discipline: two light python processes max, no LP; A57/A60/A61/A81/A82 untouched; frozen verifiers untouched; certs/ new
+  files only; depgraph notes on D.SLAB + E.A36 (owners unchanged), svg re-rendered. Files: attempts/A83-contraction-tube/*,
+  certs/verify_tube.py, certs/tube_*.json, docs/proofs/contraction_tube.md, lean/tube_obligation_A83.md, REGISTRY row.

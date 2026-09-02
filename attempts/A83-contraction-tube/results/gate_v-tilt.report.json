@@ -1,0 +1,56 @@
+{
+ "n_certs": 1,
+ "n_checks": 24,
+ "n_failures": 3,
+ "failure_lines": [
+  "  [FAIL] slot_T4.5e-2_landing direction centre-only (v_theta = 0, v_s = 1) ",
+  "  [FAIL] slot_T4.5e-2_landing direction matches spec slot(pins=[0, 1, 2, 3, 5]) ",
+  "  [FAIL] slot_T4.5e-2_landing [C] gamma_k >= 0 on every loaded row min lo -5.000e-04"
+ ],
+ "exact": true,
+ "PREC": 330,
+ "wall_seconds": 1.6,
+ "verdict": "corruption v-tilt: checker FAILED as required => PASS",
+ "corrupt": "v-tilt",
+ "a22_sha256": "f82689e754a198c7f67611874c2ece889a5a08d90cac3c39352649fdef6f8f36",
+ "certificates": [
+  {
+   "name": "slot_T4.5e-2_landing",
+   "sum_omega_gamma": [
+    1.0,
+    1.0
+   ],
+   "canary_wall_rows": [
+    "W0c0[x=0]",
+    "W0c1[y=0]",
+    "W4c0[x=0]",
+    "W4c3[x=0]",
+    "W6c2[y=s]",
+    "W10c1[x=s]"
+   ],
+   "min_gamma_loaded": -0.0005,
+   "n_strict": 20,
+   "min_tangential": 0.00030607764677402375,
+   "min_tangential_row": "E3c2-7e3",
+   "min_depth_plus_half": 0.9620450794758556,
+   "eps_0": 1.3829081415262348e-49,
+   "eps_w": 7.776774456131024e-45,
+   "g_max": 4.286503490566729e-50,
+   "Hbar": 7.883656818693182,
+   "q_vv": 1.6561094877524308e-07,
+   "Hv_l1": 0.10050955951665513,
+   "Hv_l1_tilts": 0.10050955951665513,
+   "beta": 0.3277699482483605,
+   "kappa": 20.29226152130338,
+   "kappa_eff": 19.315664098324593,
+   "X_max": 0.0466,
+   "psi_Xmax": 0.0010809456707933862,
+   "psi_over_Xmax": 0.023196259029900988,
+   "x_star": 0.0003159065790378808,
+   "n_iter": 2,
+   "reached": true,
+   "seconds": 1.6,
+   "claims_max_rel_dev": 0.0008038494265783725
+  }
+ ]
+}
