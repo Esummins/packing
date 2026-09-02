@@ -363,6 +363,18 @@ A DEFINITION since A63 (was an opaque axiom, findings F5).  Derivation
 34-dim box.  The A60 residual tree's landing radius 4.45e-4 sits at 0.30 × this value. -/
 noncomputable def rBasin : ℝ := 3 / 2000
 
+/-- **X.3(a), machine-checked (A68)**: the tilt-transfer gate `2·rBasin ≤ h_A36`.
+With `theta_lipschitz` (`ThetaT.lean`), a `t`-deviation ≤ `rBasin` is a θ-deviation
+≤ `2·rBasin ≤ 37/10000`, inside A36's box radius. -/
+theorem rBasin_gate_tilt : 2 * rBasin ≤ 37 / 10000 := gate_tilt
+
+/-- **X.3(b), machine-checked (A68)**: the slab gate `rBasin·(1+√2) < h_A36` (the binding
+condition of `docs/proofs/theta_t_transfer.md` X.3).  With `corner_perturb`
+(`ThetaT.lean`, sharp constant `r_c + √2·r_t`), every corner coordinate of a
+configuration inside the `rBasin` box moves by `< 37/10000`, which closes the `∀ s` slab
+of the `basin` axiom against A36's certified box. -/
+theorem rBasin_gate_slab : rBasin * (1 + Real.sqrt 2) < 37 / 10000 := gate_slab
+
 /-- `z` lies in the certified rigidity box around Trump's configuration. -/
 def InBasin (z : Cfg) : Prop := ∀ i,
   |(z i).cx - (zhat i).cx| ≤ rBasin ∧ |(z i).cy - (zhat i).cy| ≤ rBasin ∧

@@ -1,6 +1,8 @@
 import PackingCertMathlib.Trump11
 import PackingCertMathlib.Band
 import PackingCertMathlib.TopLevel
+import PackingCertMathlib.Dilation
+import PackingCertMathlib.Skeleton
 #print axioms PackingCert.disjoint_of_strictlyBelow
 #print axioms PackingCert.checkPackingCCW_sound
 #print axioms PackingCert.aff_sqdist
@@ -20,3 +22,17 @@ import PackingCertMathlib.TopLevel
 #print axioms PackingCert.S11.s_eleven_ge
 #print axioms PackingCert.S11.s_eleven_eq
 #print axioms PackingCert.S11.s_eleven_unique
+#print axioms PackingCert.S11.attained
+#print axioms PackingCert.S11.mem_interior_iff_uv
+#print axioms PackingCert.S11.dilation_bridge
+#print axioms PackingCert.S11.lemma_B
+#print axioms PackingCert.S11.priced_dichotomy
+#print axioms PackingCert.S11.hcert_of_priced
+#print axioms PackingCert.S11.bprime_containment
+#print axioms PackingCert.S11.containsPins_mono
+#print axioms PackingCert.S11.monotone_to_exact
+#print axioms PackingCert.S11.theta_lipschitz
+#print axioms PackingCert.S11.sub_le_theta
+#print axioms PackingCert.S11.corner_perturb
+#print axioms PackingCert.S11.rBasin_gate_tilt
+#print axioms PackingCert.S11.rBasin_gate_slab

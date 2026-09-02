@@ -56,7 +56,21 @@ By the ledger (A55 `results/cap.json`, rebuilt from PASS files; A55/k3_ext E4) a
   exists, its scope is exactly the certified part, and the residue is H10, not a missing
   lemma.
 
-## E.4 Formalisation note
+## E.4 Formalisation note — E.1(i) LEAN-PROVED, E.2 skeleton landed (A68, 2026-09-01)
+
+`lean/PackingCertMathlib/PackingCertMathlib/Skeleton.lean`: slot model (`Slot` = container
+corner + Young cell; `slotCentre` affine `α + β·s`, β ∈ {0,1}, matching A56 P1),
+`ContainsPins` (injective slot assignment, the certificate-native monotone predicate), and
+E.1(i) as `containsPins_mono` / `kill_mono` — in the indexed slot model the prose step
+"sub-diagram cells keep their (i,j) offsets, so slots_S(s) ⊆ slots_{S′}(s)" IS the pin-set
+inclusion, and K1(i) is restriction of the assignment. Finding: the residual mathematical
+content of K1 lives entirely in the census's identification of slot indices with plane
+positions, i.e. in F11/H2 — K1(i) itself carries none. E.2 is `monotone_to_exact`, with the
+census interface as an explicit hypothesis `hface` ("exact class membership ⟹ ContainsPins of
+the D4-normalised class tuple"); `hface` becomes a theorem only when the census is a Lean
+definition (the D4 equivariance it needs is machine-checked computationally by A67 R8).
+E.1(ii) (aliveness descends) is deliberately NOT formalised: it is a statement about LP values
+τ* — which certificates CAN exist — i.e. completeness, never load-bearing in the composition.
 
 `InStratum` stays opaque in `TopLevel.lean` until the Young-form census is a Lean definition
 (F11/H2). When it lands, E.2 is the lemma that converts each certificate PASS into a

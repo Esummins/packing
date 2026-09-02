@@ -61,6 +61,22 @@ clean margin. The A60 residual tree's landing radius (conditioning radius 4.45e-
 boxes) sits at 0.30·rBasin — the containment obligation D.S6 is unchanged in kind but now has
 a CONCRETE target box: all 33 coordinates within 3/2000 of ẑ (t-world), mod G.
 
+## X.3½ LEAN-PROVED (A68, 2026-09-01)
+
+`lean/PackingCertMathlib/PackingCertMathlib/ThetaT.lean` (axioms propext/Choice/Quot.sound):
+`cosT_eq_cos` / `sinT_eq_sin` (the rational parametrisation IS the trigonometry of
+θ(t) = 2·arctan t — the formal tie between the lab's t-world and the certificates' θ-world);
+X.1 both directions (`theta_lipschitz`: |Δθ| ≤ 2|Δt| for ALL reals, arctan 1-Lipschitz by MVT;
+`sub_le_theta`: |Δt| ≤ |Δθ| on [0,1], tan 2-Lipschitz on [0, π/4]); the circle bound
+(Δcos)² + (Δsin)² ≤ (Δθ)² via 2 − 2cos x ≤ x²; X.2 as `corner_perturb` with the SHARP constant
+r_c + (√2)·r_t — the formalisation confirms sharpness is load-bearing: the naive per-component
+estimate r_c + 2·r_t gives 3r = 4.5e-3 > 3.7e-3 and does NOT close (b); and the two X.3 gates
+as `TopLevel.lean` theorems `rBasin_gate_tilt` (2·rBasin ≤ 37/10000) and `rBasin_gate_slab`
+(rBasin·(1+√2) < 37/10000; note (3/2000)·(1 + 22/15) = 37/10000 EXACTLY, so the gate is
+equivalent to √2 < 22/15). The wall-touching step of X.3(b) (s ≥ ŝ − r(1+√2) for containers of
+perturbed configurations) consumes properties of the opaque `zhat` and stays inside the `basin`
+axiom's justification, its arithmetic now machine-checked.
+
 ## X.4 What this does NOT discharge (E.COORD residue, checklist F6)
 
 * The mpmath.iv trust item: the transfer constants are exact, but A22/A36's own interval

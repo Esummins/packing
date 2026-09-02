@@ -14,7 +14,7 @@ Two projects:
 disjoint **interiors**, container `[0,s]²`, tan-half configuration layer — the set-level and
 configuration definitions live in `Parametrize.lean` since A64, same namespace), `s(11)` as
 an infimum, and **states** the composed optimality theorem `s(11) = ŝ` + uniqueness with
-every leaf family of the live proof plan as a NAMED `axiom` (13 after A64: attainment,
+every leaf family of the live proof plan as a NAMED `axiom` (12 after A68:
 UB-at-ŝ ×3 — configuration, certified intrinsic-side feasibility, and the OPEN identity
 `shatA22_eq_shat` —, stratification, per-stratum kills with the window fused in, trump5
 residual, A22/A36 basin, uniqueness transfer, plus the opaque census layer ×3). The three
@@ -42,6 +42,26 @@ theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved from exactly t
   modulo the Python-interval TCB) + `shatA22_eq_shat` (THE open algebraic identity —
   closure specs incl. the new ideal-membership route (c-idl) in
   `docs/proofs/attainment_ub.md` §6).
+**Discharged by A68 (2026-09-01):**
+* **`attained` is a THEOREM** (`Attain.lean`; drain lemma D1, depgraph A.D1): `{s | Fits 11 s}`
+  has a least element — compactness of the coordinate feasible region (33 coordinates + the
+  side in `[0,11]`; non-overlap closed via the exact interior formula `mem_interior_iff_uv`:
+  interior of a parametrised square = the OPEN `u/v` box) + continuity of the side
+  projection; no Hausdorff limits. Axioms `propext, Classical.choice, Quot.sound`.
+  TopLevel roster 13 → 12.
+* **The λ-dilation bridge (Lemma B, A.SBRIDGE) is Lean** (`Dilation.lean`): `scaleC_disjoint`
+  (B.0(a)), `slot_tracking` (B.0(c)), `dilation_bridge` (interior-disjoint packing ⟹ strict
+  closed-disjoint family at `λm`), `lemma_B`, the pricing pigeonhole `priced_dichotomy` /
+  `hcert_of_priced` ((P1)+(P2) ⟹ the bridged claim; `Exempt`-aware, so Lemma B-NO is the
+  same theorem), `bprime_containment` ((H′) ⟹ (H)) and `pullback_mem_Icc` (B.2″ widening).
+  Producing (P2) from a PASS file remains the case-LP verifier soundness (V.CASE).
+* **K1(i) is Lean** (`Skeleton.lean`, depgraph B.K1): slot model + `ContainsPins` +
+  `containsPins_mono` / `kill_mono`; M→E as `monotone_to_exact`, conditional on the census
+  interface hypothesis `hface` (F11/H2 — the census is not yet a Lean definition).
+* **The θ↔t transfer is Lean** (`ThetaT.lean`, depgraph E.COORD): `cosT_eq_cos` /
+  `sinT_eq_sin` tie the rational parametrisation to `θ(t) = 2·arctan t`; X.1 both directions
+  (`|Δt| ≤ |Δθ| ≤ 2|Δt|`); X.2 with the sharp constant `r_c + √2·r_t`; the two rBasin gates
+  are TopLevel theorems (`rBasin_gate_tilt`, `rBasin_gate_slab`).
 Each axiom's docstring records the lab artefact meant to discharge it and its status; the
 ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, updated by
 `attempts/A63-hole-closure/notes/findings.md` (bridge lemmas now in `docs/proofs/`).
@@ -60,6 +80,11 @@ ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, u
 | `PackingCert.S11.parametrize` | `PackingCertMathlib/Parametrize.lean` | **every packing is a configuration** `(cxᵢ, cyᵢ, tᵢ)`, `t ∈ [0,1]` (A.PARAM; was the `parametrize` axiom) | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.checkMeasureI_no_packing` | `PackingCertMathlib/MeasureBridge.lean` | **the measure bridge (A.F2)**: `checkMeasureI c = true` ⇒ `s(c.n) ≥ c.sNum/c.sDen` over ℝ² | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.s_eleven_ge_382` | `PackingCertMathlib/Measure382.lean` | **`s(11) ≥ 3.82` end to end**: `∀ s, Fits 11 s → 191/50 ≤ s` | + the `native_decide` axiom (`check_3_82._native.native_decide.ax_1_1`; ≈ 40 min build) |
+| `PackingCert.S11.attained` | `PackingCertMathlib/Attain.lean` (+ `TopLevel.lean`) | **attainment (A.D1)**: `{s | Fits 11 s}` has a least element (drain lemma D1; was the `attained` axiom) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.mem_interior_iff_uv` | `PackingCertMathlib/Attain.lean` | the interior of a parametrised square is exactly the open `u/v` box | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.dilation_bridge`, `lemma_B`, `priced_dichotomy` | `PackingCertMathlib/Dilation.lean` | **the λ-dilation bridge (A.SBRIDGE)**: interior-disjoint packing ⟹ closed-disjoint family at `λm`; Lemma B / B-NO from the frozen (P1)+(P2) claims; B′ margin condition (H′) ⟹ (H) | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.containsPins_mono`, `kill_mono`, `monotone_to_exact` | `PackingCertMathlib/Skeleton.lean` | **K1(i) (B.K1)**: kills climb the pin-set containment order; M→E conditional on the census interface `hface` | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.theta_lipschitz`, `sub_le_theta`, `corner_perturb`, `rBasin_gate_*` | `PackingCertMathlib/ThetaT.lean` (+ `TopLevel.lean`) | **θ↔t transfer (E.COORD)**: `|Δt| ≤ |Δθ| ≤ 2|Δt|`; corner motion ≤ `r_c + √2·r_t`; the two rBasin gates | `propext, Classical.choice, Quot.sound` |
 
 `Band.lean` proves the A26.1 family with an *arbitrary* separating direction, hence band width
 `27/25 = 1.08` rather than A26's `1`; see `attempts/A28-lean-batch/notes.md` §3, which also records

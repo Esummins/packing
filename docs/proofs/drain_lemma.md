@@ -20,10 +20,25 @@ min corner at the origin, contained in [0,4]²} — closed, bounded, SEMI-ALGEBR
 polynomial description of interior-disjointness). σ(z) = side of the minimal enclosing axis-aligned
 square = max of finitely many polynomial coordinate functions; continuous, piecewise-polynomial.
 
-## Lemma D1 (attainment) — PROVED
+## Lemma D1 (attainment) — PROVED; LEAN-PROVED (A68, 2026-09-01)
 If some z ∈ D₀ has σ(z) ≤ s₀ ≤ 4, then m := min{σ(z) : z ∈ D₀} ≤ s₀ is ATTAINED. Proof: {σ ≤ s₀} ∩ D₀
 is closed (σ continuous, D₀ closed) and bounded, hence compact; σ continuous. ∎
 Consequently s(11) = m, and "no minimiser of σ with value ≤ s₀ exists" ⟹ s(11) > s₀.
+
+FORMAL (A68): `lean/PackingCertMathlib/PackingCertMathlib/Attain.lean`, theorem `attained_thm` —
+the `attained` axiom of `TopLevel.lean` is DISCHARGED (roster 13 → 12; axioms
+propext/Choice/Quot.sound only). The Lean statement is the equivalent epigraph form "the set
+{s : Fits 11 s} has a least element" (side minimised directly, no σ or normalisation needed).
+Two notes the formalisation surfaced, neither a gap in the mathematics:
+(i) the one non-obvious ingredient of "D₀ closed" is that pairwise INTERIOR-disjointness is a
+closed condition on the coordinates; the formal route is the exact interior formula
+interior(square(c,t)) = the OPEN u/v box (`mem_interior_iff_uv` — ⊇ was A64's
+`strict_uv_mem_interior`, ⊆ is a push along the edge direction), which makes overlap an open
+condition (a witness point with four strict inequalities) and its negation closed;
+(ii) no Hausdorff-limit / Blaschke argument is needed anywhere (contrary to the cost estimate
+in the old TopLevel docstring): compactness happens in the 33+1 coordinates, with containment
+expressed by A64's `set_subset_container_iff` inequalities and boundedness forced by the
+containment rows themselves (wT ≥ 1). Nonemptiness: an explicit 11-in-a-row packing at s = 11.
 
 ## Lemma D2 (gap-squeeze; slack cells are free) — PROVED (v3 form; v2's was vacuous)
 If z ∈ D₀ with σ = σ(z) ≥ 3 has every pairwise SAT-gap ≥ δ > 0, then σ can be strictly decreased, so

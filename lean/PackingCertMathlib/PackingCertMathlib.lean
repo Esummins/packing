@@ -3,6 +3,10 @@ import PackingCertMathlib.Checker
 import PackingCertMathlib.Data
 import PackingCertMathlib.Bridge
 import PackingCertMathlib.Parametrize
+import PackingCertMathlib.Attain
+import PackingCertMathlib.Dilation
+import PackingCertMathlib.ThetaT
+import PackingCertMathlib.Skeleton
 import PackingCertMathlib.MeasureChecker
 import PackingCertMathlib.MeasureBridge
 import PackingCertMathlib.MeasureData382

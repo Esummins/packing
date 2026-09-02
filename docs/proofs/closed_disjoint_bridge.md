@@ -227,6 +227,27 @@ That is exactly depgraph node D.SLAB, unchanged by this file.
 
 ## B.5 Status
 
+LEAN-PROVED (A68, 2026-09-01): `lean/PackingCertMathlib/PackingCertMathlib/Dilation.lean` —
+B.0(a) `scaleC_disjoint`, B.0(b) = A64's `scaleC_subset`, B.0(c) `slot_tracking` (the identity
+λ(α+βm) − (α+βλm) = (λ−1)α holds for EVERY β, not only β ∈ {0,1}), `dilation_bridge`
+(interior-disjoint packing at m ⟹ strictly-disjoint closed family at λm, `IsStrictFamily`),
+`lemma_B`, the pricing pigeonhole `priced_dichotomy` / `hcert_of_priced` ((P1)+(P2) ⟹ the
+bridged claim; stated with an abstract `Exempt` predicate, so Lemma B-NO's occupancy dichotomy
+is the SAME theorem — empty `nofams` = `Exempt := False`), `bprime_containment` (the (H′)
+margin condition ⟹ hypothesis (H), core in the interior of the dilated pin square), and
+`pullback_mem_Icc` (the B.2″ outward widening). All axiom-clean (propext/Choice/Quot.sound).
+Two findings from the formalisation:
+* the SAT citation in B.0(a) is unnecessary — A64's pull-back trick (`scaleC_mem_interior`:
+  a common point of the dilates pulls back by 1/λ to a common interior point) proves strict
+  disjointness with no separation theorem at all;
+* hypothesis (H)'s "open interior" clause is not needed for Lemma B's conclusion — closed
+  containment K_j ⊆ Δ_λQ_{i_j} suffices both for "meets no core" (closed-set disjointness)
+  and for the pricing step; interior containment matters only if a certificate's own
+  exemption semantics requires it (kept in the Lean statements since B′ delivers it free).
+NOT Lean: producing (P2) from a concrete PASS file (case-LP verifier soundness, depgraph
+V.CASE); the B.2′ owner-frame criterion for tilted cores (prose below stands); and the corpus
+margin ρ ≈ 1.0000009e-9, which remains a [M] computation.
+
 Lemma B, Corollary B′, B.2′ (owner-frame criterion), B.2″ (Lemma B-NO), and the corpus margin
 computation: proved/computed here (A63; B.2′/B.2″ added after the A60 feedback round —
 `attempts/A60-trump5-campaign/notes/ledger.md`). Cross-checks: A60 independently reproduced

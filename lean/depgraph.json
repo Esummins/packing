@@ -1,7 +1,7 @@
 {
  "meta": {
-  "attempt": "A63-hole-closure (promoted to lean/ as the LIVE monitoring copy, 2026-09-02: the advisor updates labels/notes here as milestones land and re-renders depgraph.svg via lean/render_depgraph.py; the A62/A63 results/ copies are frozen provenance) || A64 lean-wave updates: lean-proved (gold) tier added; A.PARAM + A.F2 + A.LB382 -> lean-proved; A.S3 -> lean-proved; A.UBshat split (identity axiom isolated, (c-idl) closure spec added)",
-  "date": "2026-09-02",
+  "attempt": "A63-hole-closure (promoted to lean/ as the LIVE monitoring copy, 2026-09-02: the advisor updates labels/notes here as milestones land and re-renders depgraph.svg via lean/render_depgraph.py; the A62/A63 results/ copies are frozen provenance) || A64 lean-wave updates: lean-proved (gold) tier added; A.PARAM + A.F2 + A.LB382 -> lean-proved; A.S3 -> lean-proved; A.UBshat split (identity axiom isolated, (c-idl) closure spec added) || A68 lean-wave3: A.D1 (attained) DISCHARGED -> lean-proved (roster 13 -> 12); A.SBRIDGE, B.K1(i), E.COORD -> lean-proved (Dilation.lean, Skeleton.lean, ThetaT.lean); B.EXACT Lean skeleton conditional on census interface (hface)",
+  "date": "2026-09-01",
   "commit": "c9980bfcda1582d1e1a20126927a8a7d34ca1bb6",
   "checklist_items": [
    "H13",
@@ -37,11 +37,10 @@
   {
    "id": "A.D1",
    "title": "Attainment: s(11) is a minimum (D1)",
-   "label": "proved-prose",
-   "lean_axiom": "attained",
-   "source": "docs/proofs/drain_lemma.md D1",
-   "note": "Compactness; two paragraphs. Formalisation cost: closedness of Fits.",
-   "owner": "A68"
+   "label": "lean-proved",
+   "lean_axiom": "attained (DISCHARGED A68 - now a theorem)",
+   "source": "docs/proofs/drain_lemma.md D1 + lean/PackingCertMathlib/PackingCertMathlib/Attain.lean",
+   "note": "DISCHARGED (A68): Lean theorem attained_thm (axioms propext/Choice/Quot.sound only). No Hausdorff limits: compactness of the coordinate feasible region (33 coords + side in [0,11]; containment = the set_subset_container_iff inequalities, non-overlap closed because interior(PSq.set) = the OPEN u/v box, mem_interior_iff_uv) + continuity of the side projection; explicit 11-in-a-row packing for nonemptiness; parametrize (A64) maps set-level packings in. TopLevel roster 13 -> 12 named axioms."
   },
   {
    "id": "A.PARAM",
@@ -110,15 +109,15 @@
   {
    "id": "B.K1",
    "title": "K1: kills climb containment, aliveness descends (H3)",
-   "label": "proved-prose",
-   "source": "docs/proofs/instratum_bridge.md E.1 (A63; was: A55 registry row only)",
-   "note": "Now has a docs/proofs home with both directions proved (kills climb, aliveness descends via witness adjunction)."
+   "label": "lean-proved",
+   "source": "docs/proofs/instratum_bridge.md E.1 + lean/PackingCertMathlib/PackingCertMathlib/Skeleton.lean (A68)",
+   "note": "E.1(i) LEAN-PROVED (A68, Skeleton.lean): slot model (corner + Young cell, affine slotCentre), ContainsPins (injective slot assignment), containsPins_mono + kill_mono - in the indexed slot model the prose slot-inclusion step is the Finset inclusion itself. E.1(ii) aliveness-descends stays prose: it is an LP-value (tau*) statement about which certificates CAN exist - completeness, never load-bearing in the composition."
   },
   {
    "id": "B.EXACT",
    "title": "Exact-skeleton vs pin-monotone bridge",
    "label": "proved-prose",
-   "note": "CLOSED for the certified part (A63): exactly => contains is reflexivity + D4 bookkeeping; the certificate's monotone form is strictly stronger. The K1-protected tier is deliberately out of scope - that is H10, target form H10-stuck.",
+   "note": "CLOSED for the certified part (A63): exactly => contains is reflexivity + D4 bookkeeping; the certificate's monotone form is strictly stronger. A68: Lean skeleton landed (monotone_to_exact, Skeleton.lean) with the census interface as an explicit hypothesis hface (\"exact class membership => ContainsPins of the class tuple\"); hface becomes a theorem only when the Young census is a Lean definition (F11/H2; D4 equivariance machine-checked computationally by A67 R8). The K1-protected tier is deliberately out of scope - that is H10, target form H10-stuck.",
    "source": "docs/proofs/instratum_bridge.md (A63): K1 (E.1) + Lemma M->E (E.2) + exact coverage table (E.3)"
   },
   {
@@ -281,9 +280,9 @@
   {
    "id": "E.COORD",
    "title": "Basin box in t-coordinates (theta -> t re-emission)",
-   "label": "proved-prose",
-   "note": "HALF-CLOSED (A63): exact Lipschitz constants |dt| <= |dtheta| <= 2|dt|; rBasin = 3/2000 now a Lean DEFINITION, justified including the forall-s slab via the corner-perturbation bound r(1+sqrt2) < 37/10000. Residue: the t-reparametrised re-emission of the A22/A36 certificates (trust-chain item, = checklist F6 / E.IV), not a radius question any more.",
-   "source": "docs/proofs/theta_t_transfer.md (A63)"
+   "label": "lean-proved",
+   "note": "LEAN-PROVED (A68, ThetaT.lean): cosT/sinT ARE cos/sin of theta(t) = 2*arctan t (the formal t<->theta tie); X.1 both directions (|dt| <= |dtheta| <= 2|dt|, arctan 1-Lipschitz / tan 2-Lipschitz on [0,pi/4] via MVT); X.2 with the SHARP constant r_c + sqrt2*r_t (the naive r_c + 2*r_t does NOT close gate (b)); X.3 gates rBasin_gate_tilt (2*rBasin <= 37/10000) and rBasin_gate_slab (rBasin*(1+sqrt2) < 37/10000, binding) now TopLevel theorems. Residue unchanged: the t-reparametrised re-emission of A22/A36 (trust-chain item, = checklist F6 / E.IV) and the wall-touching step of X.3(b), which consumes the opaque zhat and lives inside the basin axiom.",
+   "source": "docs/proofs/theta_t_transfer.md (A63) + lean/PackingCertMathlib/PackingCertMathlib/ThetaT.lean (A68)"
   },
   {
    "id": "V.MEAS",
@@ -339,9 +338,9 @@
   {
    "id": "A.SBRIDGE",
    "title": "Lemma B: interior-disjoint packings vs closed-disjoint certificate families (lambda-dilation with pin slack, S4/F9)",
-   "label": "proved-prose",
-   "source": "docs/proofs/closed_disjoint_bridge.md (A63)",
-   "note": "The bridge applied at EVERY kill use; corpus containment margin rho = 73787046228886605157/73786980692884783104003906250 ~ 1.0000009e-9, exactly positive, uniform over all 68 kill certificates. Also closes the same gap for lb_382 (r = 0 case). A60 feedback round: Lemma B-NO (B.2'') added for nofams certificates (A60 confinement leaves) - occupancy transfers with the zone contracted by 1/lambda, consumers widen outward; owner-frame (H) criterion (B.2') codifies the tilted-core rho false alarm; rho independently reproduced by A60 on 49 leaves."
+   "label": "lean-proved",
+   "source": "docs/proofs/closed_disjoint_bridge.md (A63) + lean/PackingCertMathlib/PackingCertMathlib/Dilation.lean (A68)",
+   "note": "LEAN-PROVED (A68, Dilation.lean): B.0(a) scaleC_disjoint (A64 pull-back trick replaces the SAT citation), B.0(b) = A64 scaleC_subset, B.0(c) slot_tracking ((lambda-1)*alpha exact, any beta), dilation_bridge (packing -> IsStrictFamily at lambda*m), lemma_B, AND the pricing pigeonhole priced_dichotomy/hcert_of_priced ((P1)+(P2) => bridged claim, Exempt-aware so B-NO = the same theorem), bprime_containment ((H') => (H)), pullback_mem_Icc (B.2'' widening). All axioms propext/Choice/Quot.sound. RESIDUES: producing (P2) from a PASS file is V.CASE; B.2' owner-frame (tilted-core) criterion remains prose; corpus margin rho ~ 1.0000009e-9 remains a [M] computation (A63 scan, reproduced by A60 on 49 leaves)."
   },
   {
    "id": "A.THMU",

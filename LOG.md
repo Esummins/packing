@@ -1667,3 +1667,50 @@ affordable cost estimate for closing 3.84.
   docs/proofs/attainment_ub.md (§7 + status banner), attempts/A69-cidl-identity/{BRIEF.md,
   derive.py, assemble.py, eliminate.py, build_cert.py, notes/findings.md, results/},
   lean/TopLevel.lean (comment only), lean/depgraph.{json,svg}, REGISTRY. A29 untouched.
+
+## 2026-09-01 — A68 (Lean wave 3) closed: attainment DISCHARGED (roster 13 → 12); Lemma B, K1(i), θ↔t transfer lean-proved
+
+- **T1 / A.D1 — `attained` is now a Lean THEOREM** (`Attain.lean`; TopLevel roster 13 → 12
+  named axioms, audit clean). Compactness done in the 33+1 COORDINATES — no Hausdorff
+  limits anywhere (the old docstring's cost estimate was wrong in kind): the feasible
+  region (t ∈ [0,1], A64's containment inequalities, pairwise non-overlap, s ∈ [0,11]) is
+  closed + bounded, side projection continuous, `parametrize` maps set-level packings in,
+  explicit 11-in-a-row packing for nonemptiness. Load-bearing new lemma:
+  `mem_interior_iff_uv` — interior of a parametrised square = the OPEN u/v box (⊆ by an
+  ε/2-push along the edge direction; ⊇ was A64's) — which makes interior-disjointness a
+  CLOSED condition (overlap = open, witnessed by 4 strict inequalities).
+- **T2 / A.SBRIDGE — the λ-dilation bridge lean-proved** (`Dilation.lean`), stated the way
+  `stratum_kill` producers consume it: `dilation_bridge` (interior-disjoint packing at m ⟹
+  `IsStrictFamily` at λm), `lemma_B`, and the PRICING PIGEONHOLE `priced_dichotomy` /
+  `hcert_of_priced` — (P1) Σw < b plus (P2) per-placement μ ≥ 1 refute any strict family
+  with cores in the owners (A64 `massIn` machinery reused); the `Exempt` parameter makes
+  Lemma B-NO the same theorem. Plus `bprime_containment` ((H′) ⟹ (H)) and
+  `pullback_mem_Icc` (B.2″ widening). Findings: B.0(a)'s SAT citation unnecessary (the
+  scaleC pull-back suffices); (H)'s open-interior clause not needed for the conclusion;
+  B.0(c) exact for EVERY β. Residues named: V.CASE ((P2) from a concrete PASS — the next
+  MeasureChecker-style replay), B.2′ owner-frame clause, ρ stays [M].
+- **T3 / B.K1 — K1(i) lean-proved; M→E conditional** (`Skeleton.lean`): slot model +
+  `ContainsPins` + `containsPins_mono`/`kill_mono`; in the indexed slot model the prose
+  slot-inclusion step IS the Finset inclusion — K1's residual content sits ENTIRELY in the
+  census definition (F11/H2). `monotone_to_exact` lands E.2 with the census interface as
+  explicit hypothesis `hface` (named obligation; A67 R8 is its computational cross-check).
+  E.1(ii) aliveness deliberately unformalised: τ*-completeness, not soundness.
+- **T4 / E.COORD — θ↔t transfer lean-proved** (`ThetaT.lean`): `cosT`/`sinT` ARE
+  cos/sin(2·arctan t) — the first formal tie between the lab's t-world and the θ-world
+  certificates; X.1 both directions; X.2 with the SHARP constant r_c + √2·r_t (the naive
+  per-component constant FAILS gate (b) — sharpness is machine-checked as load-bearing);
+  X.3 gates now TopLevel theorems `rBasin_gate_tilt`/`rBasin_gate_slab` (slab gate is
+  exactly √2 < 22/15: (3/2000)(1+22/15) = 37/10000 on the nose). `basin` stays an axiom by
+  design (mpmath.iv trust item, F6).
+- Hygiene: full `lake build` green; all new theorems axioms = propext/Choice/Quot.sound;
+  `scratch/Axioms.lean` extended (14 new prints); the 2380 s `native_decide` module
+  untouched (cache hit); A57/A60/A61 untouched; light CPU only.
+- Toolchain renames vs A64's recipes (for the next wave): `le_or_gt`, `abs_add_le`,
+  `Set.mem_ofPred_eq`, `push Not`, `IsCompact.exists_isMinOn`; `@[fun_prop]` on
+  `continuous_cosT/sinT/wT` trivialises configuration-space continuity goals.
+- Files: `lean/PackingCertMathlib/PackingCertMathlib/{Attain,Dilation,Skeleton,ThetaT}.lean`
+  (new), `TopLevel.lean` (attained → theorem; rBasin gates; header), root import list,
+  `scratch/Axioms.lean`, `lean/README.md`, `lean/depgraph.{json,svg}` (A.D1/A.SBRIDGE/
+  B.K1/E.COORD → lean-proved; A.D1 owner chip removed), prose annotations in
+  `docs/proofs/{drain_lemma,closed_disjoint_bridge,instratum_bridge,theta_t_transfer}.md`,
+  `attempts/A68-lean-wave3/notes/findings.md`, REGISTRY row.
