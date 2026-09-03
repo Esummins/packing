@@ -43,8 +43,13 @@ file is the record of truth for claims, LOG.md is the record of events.
     are exactly the sub-skeletons of trump5 and are PROVABLY unkillable by single-square certificates
     (A55 sharpness + K1): Trump is a feasible point of each monotone hypothesis.
 16. LEAN  Verifier soundness: measure checker + driver, case-LP checker, 4-D parametric checker,
-    alivewitness, D4 reduction — all Lean theorems. Corpus replays: measure (3.82), Theorem U, P1, K61
-    (in progress), TRAP (in progress); A57/A60 corpora priced multi-day.
+    alivewitness, D4 reduction — all Lean theorems. Corpus replays COMPLETE for the fixed corpora
+    (A78 T5, 2026-09-03): measure (3.82), Theorem U (11/11), P1 (1/1), K61 (61/61), TRAP (6/6) — 73
+    certificates by native_decide, 9.79 h Lean wall, axiom audit clean; A57/A60 corpora priced multi-day.
+16a. CAVEAT (A88, 2026-09-03): A31's contact-type menu omits same-class corner-corner point kisses (Trump
+    has one); planarity (L4) is FALSE on the ACTIVE contact graph when squares kiss at a point. Counts over
+    the kiss-free SUPPORT graph stand; no proof step may assume planarity of the active graph. The
+    flush-ruler cap (Lemma R) is side-dependent: apply the cap for the side in question, not s0's.
 
 ## D. Structure of minimisers
 17. LEAN  Attainment: s(11) is a minimum.
