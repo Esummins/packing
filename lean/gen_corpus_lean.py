@@ -265,7 +265,11 @@ def emit_aggregate(corpus: str, members: list[tuple[str, dict]], home: str) -> P
     for i, (name, _) in enumerate(members):
         tail = " \u2227" if i + 1 < len(members) else " :="
         L.append("    checkCaseI Data.%s = true%s" % (lean_name(name), tail))
-    L.append("  \u27e8" + ", ".join("check_%s" % lean_name(nm) for nm, _ in members) + "\u27e9")
+    if len(members) == 1:
+        # a one-certificate corpus theorem is not a conjunction -- no anonymous constructor
+        L.append("  check_%s" % lean_name(members[0][0]))
+    else:
+        L.append("  \u27e8" + ", ".join("check_%s" % lean_name(nm) for nm, _ in members) + "\u27e9")
     L.append("")
     L.append("end S11")
     L.append("end PackingCert")

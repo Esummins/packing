@@ -18,7 +18,7 @@ open CaseI
 /-- **Corpus P1**: `checkCaseI` PASSes on all 1 certificates. -/
 theorem corpus_P1 :
     checkCaseI Data.m3_trump5_interior_NO = true :=
-  ⟨check_m3_trump5_interior_NO⟩
+  check_m3_trump5_interior_NO
 
 end S11
 end PackingCert

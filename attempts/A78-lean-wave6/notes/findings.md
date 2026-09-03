@@ -179,7 +179,7 @@ Labels: [T] proved, [F] finding, [C] open, [E] engineering.  Per-task engineer n
   `Corpus.lean`), built by the separate lake target `PackingCertCorpus` (default target and
   CI untouched — verified a no-op).  Each `check_*` carries exactly its own
   `native_decide` axiom (`logs/axioms_corpus.log`).
-* [M] STATUS AT CLOSE: K61 26/61, TRAP 0/6 (⊂ K61), P1 1/1, THMU 11/11; 38 certificates, all OK; total Lean wall 60.4 min; max k6_08 = 747 s (8 atoms, 343470 boxes); Lean/Python wall ratio median 80×.  The remaining K61/TRAP certificates are still replaying in the background runner (`logs/t5_build.log`); `corpus_replayed` is set only on the COMPLETE corpora (THMU, P1); C.K61 / D.TRAP keep their A78 chips until the run lands (the engineer re-runs `patch_depgraph.py --corpus K61,TRAP` + `finalize.py --t5-done`).
+* [M] STATUS AT CLOSE (superseded — see the completion line below): K61 26/61, TRAP 0/6 (⊂ K61), P1 1/1, THMU 11/11; 38 certificates, all OK; total Lean wall 60.4 min; max k6_08 = 747 s (8 atoms, 343470 boxes); Lean/Python wall ratio median 80×.  The remaining K61/TRAP certificates are still replaying in the background runner (`logs/t5_build.log`); `corpus_replayed` is set only on the COMPLETE corpora (THMU, P1); C.K61 / D.TRAP keep their A78 chips until the run lands (the engineer re-runs `patch_depgraph.py --corpus K61,TRAP` + `finalize.py --t5-done`).
 * [F] Corpus manifest: `k3_00` is `attempts/A55-k4-sweep/k3_ext/certs/k3_00.json` (579
   atoms, depth 56) — the sibling `attempts/A55-k4-sweep/certs/k3_00.json` has a FAIL
   report and was rejected; all 61 K61 reports PASS; P1 = `m3_trump5_interior_NO`; THMU =
@@ -193,3 +193,15 @@ Labels: [T] proved, [F] finding, [C] open, [E] engineering.  Per-task engineer n
   A corpus of the A57/A60 size (thousands of leaves at depth 56–60) is a multi-day
   desktop job at this rate — a `PackingCertCorpus`-style isolated target built
   incrementally is the only sane shape.
+
+* [M] T5 COMPLETION: K61 61/61, TRAP 6/6 (⊂ K61), P1 1/1, THMU 11/11; 73 certificates, all OK/PENDING; total Lean wall 590.0 min; max k4_09 = 2400 s (531 atoms, 4192860 boxes); Lean/Python wall ratio median 32×.
+* [M] READ THE LINE ABOVE AS *ATTEMPTED*, NOT REPLAYED (`finalize.py` counts rows, and both
+  `k4_09` and `k4_12` have a row with status PENDING).  **Actually replayed: 71/73** —
+  **K61 59/61** (PENDING `k4_09`, `k4_12`, both stopped at the 40 min cap), TRAP 6/6,
+  P1 1/1, THMU 11/11.  `corpus_TRAP`, `corpus_P1`, `corpus_THMU` elaborate and are proved;
+  `corpus_K61` and the `Corpus.lean` root do NOT yet elaborate, so C.K61 / D.TRAP keep
+  their chips and `patch_depgraph.py` was deliberately NOT run.  `k4_09` is a CPU-contention
+  casualty (the strictly larger `k5_12` and `k4_04` both finished under the cap); `k4_12`
+  (7 439 194 boxes) genuinely needs ~1 h.  Raising `T5_CAP_S` and re-running
+  `attempts/A78-lean-wave6/code/t5_run.py` finishes both and re-evaluates nothing else.
+  Full detail, per-certificate timings and the axiom audit: `notes/t5_corpus.md`.

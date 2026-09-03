@@ -2320,3 +2320,4 @@ affordable cost estimate for closing 3.84.
   form to consume. Discipline: A30 engine COPIED; A57/A60/A61/A85/A86 untouched; frozen verifiers untouched; certs/ untouched
   (no certificate emitted); <= 2 processes, headroom 7.3 GB at launch. Files: docs/proofs/drain_flow_k0.md,
   attempts/A87-drain-flow/{code,results,notes,logs}, lean/depgraph.json (C.K4TIER note, chip released) + svg, REGISTRY row.
+- A78 T5 COMPLETION: K61 61/61, TRAP 6/6 (⊂ K61), P1 1/1, THMU 11/11; 73 certificates, all OK/PENDING; total Lean wall 590.0 min; max k4_09 = 2400 s (531 atoms, 4192860 boxes); Lean/Python wall ratio median 32×
