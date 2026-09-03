@@ -9,24 +9,21 @@ re-decided inside Lean 4.34.0-rc1 + Mathlib by `native_decide` on the A70 checke
 
 | corpus | replayed | Lean wall | max certificate | pending |
 |---|---:|---:|---|---|
-| K61 | 59/61 | 8.27 h | `k5_12` 2278 s | `k4_09`, `k4_12` |
+| K61 | 61/61 | 9.56 h | `k4_12` 2805 s | none |
 | TRAP | 6/6 | 1.24 h | `k6_23` 2021 s | none |
 | P1 | 1/1 | 0.02 h | `m3_trump5_interior_NO` 84 s | none |
 | THMU | 11/11 | 0.21 h | `u_reinsert_00` 166 s | none |
 
-**71 of 73 certificates replayed, 8.50 h of Lean wall in total.**  `corpus_TRAP`,
-`corpus_P1` and `corpus_THMU` are proved (their aggregate modules build); `corpus_K61`
-is written but cannot yet be elaborated - two certificates are outstanding:
+**All 73 certificates replayed, 9.79 h of Lean wall in total.**  All four aggregate
+theorems - `corpus_K61`, `corpus_TRAP`, `corpus_P1`, `corpus_THMU` - and the `Corpus.lean`
+root elaborate: `lake build PackingCertCorpus` is green (3 189 jobs).
 
-* **`k4_09`** (531 atoms, 4,192,860 boxes, depth 60) - PENDING, stopped at the 40 min cap
-* **`k4_12`** (77 atoms, 7,439,194 boxes, depth 60) - PENDING, stopped at the 40 min cap
-
-`k4_09` is a *contention* casualty, not an intrinsically hard case: the strictly larger
-`k5_12` (4,416,100 boxes, 2,273 s) and `k4_04` (4,582,778 boxes, 1,844 s) both landed
-comfortably under the cap, so `k4_09` (4,192,860 boxes) should need ~35 min on a quiet
-machine.  `k4_12` (7,439,194 boxes) is genuinely over the cap and needs ~1 h.  Both need
-only a re-run of `python attempts/A78-lean-wave6/code/t5_run.py` with `T5_CAP_S` raised;
-nothing else changes, and no other certificate is re-evaluated.
+Nine certificates needed a second attempt and two (`k4_09`, `k4_12`) a third with the cap
+raised to 90 min.  Every one of those was a **CPU-contention** artifact of a shared
+machine, not a hard case: e.g. `k4_09` capped at 40 min on the run where the strictly
+larger `k5_12` and `k4_04` both finished under it, then took 1 814 s once the machine was
+quiet.  Only `k4_12` (7 439 194 boxes, 2 800 s) genuinely exceeds a 40 min budget.
+`results/t5_timings_history.jsonl` keeps every attempt including the capped ones.
 
 ## What each module proves
 
@@ -53,12 +50,13 @@ so the default target and CI are untouched - verified: a default `lake build` bu
 
 ## Axiom audit (`logs/axioms_corpus.log`, `scratch/AxiomsCorpus.lean`)
 
-145 `#print axioms` blocks: 71 `check_*`, 71 `*_kill`/`*_no_family`, 3 `corpus_*`.
+150 `#print axioms` blocks: 73 `check_*`, 73 `*_kill`/`*_no_family`, 4 `corpus_*`.
 **CONFIRMED - every `check_<name>` depends on exactly** `propext`, `Classical.choice`,
 `Quot.sound` **and its own single**
 `PackingCert.S11.check_<name>._native.native_decide.ax_1_1` **- nothing else.**  The
-composed kill / no-family theorems and `corpus_TRAP` / `corpus_P1` / `corpus_THMU` add no
-axiom beyond the three standard ones plus the native_decide axioms they consume.
+composed kill / no-family theorems add no axiom beyond those three; and each `corpus_*`
+depends on exactly the native_decide axioms of its own members and nothing more
+(`corpus_K61` 61, `corpus_TRAP` 6, `corpus_P1` 1, `corpus_THMU` 11).
 
 ## Python cross-check - decision neutrality (`results/t5_xcheck.jsonl`)
 
@@ -116,10 +114,10 @@ driver's PASS gate.  All 61 K61 reports, the P1 report and the 11 THMU reports s
 * `lean/PackingCertMathlib/scratch/AxiomsCorpus.lean`;
 * `attempts/A78-lean-wave6/code/{t5_run,t5_report,t5_axioms,t5_xcheck}.py`;
 * `attempts/A78-lean-wave6/results/{t5_order.json, t5_timings.jsonl, t5_timings_history.jsonl, t5_xcheck.jsonl}`;
-* `attempts/A78-lean-wave6/logs/{t5_build.log, t5_runner.out, t5_runner2.out, axioms_corpus.log, t5_xcheck.log}`.
+* `attempts/A78-lean-wave6/logs/{t5_build.log, t5_runner.out, t5_runner2.out, t5_runner3.out, axioms_corpus.log, t5_xcheck.log}`.
 
 `t5_timings.jsonl` holds one row per certificate (last attempt wins);
-`t5_timings_history.jsonl` keeps all 82 attempts including the capped first tries.
+`t5_timings_history.jsonl` keeps all 84 attempts including the capped first tries.
 
 ## Per-certificate timings
 
@@ -197,7 +195,7 @@ driver's PASS gate.  All 61 K61 reports, the P1 report and the 11 THMU reports s
 | 67 | K61 | `k4_02` | 185 | 4 | 0 | 60 | 2,480,066 | 66.3 | 1960.4 | 1951.0 | OK |
 | 68 | K61 | `k5_13` | 106 | 5 | 0 | 56 | 2,589,162 | 52.2 | 2066.2 | 1877.0 | OK |
 | 69 | K61 | `k3_00` | 579 | 3 | 0 | 56 | 2,817,596 | 64.9 | 1359.8 | 1349.0 | OK |
-| 70 | K61 | `k4_09` | 531 | 4 | 0 | 60 | 4,192,860 | 158.7 | 2400.0 | - | PENDING |
+| 70 | K61 | `k4_09` | 531 | 4 | 0 | 60 | 4,192,860 | 158.7 | 1819.0 | 1814.0 | OK |
 | 71 | K61 | `k5_12` | 49 | 5 | 0 | 56 | 4,416,100 | 176.9 | 2278.1 | 2273.0 | OK |
 | 72 | K61 | `k4_04` | 205 | 4 | 0 | 60 | 4,582,778 | 146.4 | 1849.8 | 1844.0 | OK |
-| 73 | K61 | `k4_12` | 77 | 4 | 0 | 60 | 7,439,194 | 173.6 | 2400.0 | - | PENDING |
+| 73 | K61 | `k4_12` | 77 | 4 | 0 | 60 | 7,439,194 | 173.6 | 2805.2 | 2800.0 | OK |

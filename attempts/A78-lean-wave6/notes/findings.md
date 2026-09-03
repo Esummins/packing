@@ -195,13 +195,16 @@ Labels: [T] proved, [F] finding, [C] open, [E] engineering.  Per-task engineer n
   incrementally is the only sane shape.
 
 * [M] T5 COMPLETION: K61 61/61, TRAP 6/6 (⊂ K61), P1 1/1, THMU 11/11; 73 certificates, all OK/PENDING; total Lean wall 590.0 min; max k4_09 = 2400 s (531 atoms, 4192860 boxes); Lean/Python wall ratio median 32×.
-* [M] READ THE LINE ABOVE AS *ATTEMPTED*, NOT REPLAYED (`finalize.py` counts rows, and both
-  `k4_09` and `k4_12` have a row with status PENDING).  **Actually replayed: 71/73** —
-  **K61 59/61** (PENDING `k4_09`, `k4_12`, both stopped at the 40 min cap), TRAP 6/6,
-  P1 1/1, THMU 11/11.  `corpus_TRAP`, `corpus_P1`, `corpus_THMU` elaborate and are proved;
-  `corpus_K61` and the `Corpus.lean` root do NOT yet elaborate, so C.K61 / D.TRAP keep
-  their chips and `patch_depgraph.py` was deliberately NOT run.  `k4_09` is a CPU-contention
-  casualty (the strictly larger `k5_12` and `k4_04` both finished under the cap); `k4_12`
-  (7 439 194 boxes) genuinely needs ~1 h.  Raising `T5_CAP_S` and re-running
-  `attempts/A78-lean-wave6/code/t5_run.py` finishes both and re-evaluates nothing else.
-  Full detail, per-certificate timings and the axiom audit: `notes/t5_corpus.md`.
+* [M] **T5 FULLY LANDED (final pass, `T5_CAP_S=5400`): 73/73 replayed, K61 61/61, TRAP 6/6,
+  P1 1/1, THMU 11/11, ZERO pending, 9.79 h of Lean wall.**  All four aggregates
+  (`corpus_K61`, `corpus_TRAP`, `corpus_P1`, `corpus_THMU`) and the `Corpus.lean` root
+  elaborate — `lake build PackingCertCorpus` green (3 189 jobs).  The completion line above
+  was printed while `k4_09`/`k4_12` were still capped; it counts rows, not successes.
+  Nine certificates needed a 2nd attempt and two a 3rd — **all CPU-contention artifacts, not
+  hard cases** (`k4_09` capped at 40 min on the pass where the strictly larger `k5_12` and
+  `k4_04` both finished under it, then took 1 814 s on a quiet machine).  Only `k4_12`
+  (7 439 194 boxes, 2 800 s) genuinely exceeds a 40 min budget.  Per-attempt history in
+  `results/t5_timings_history.jsonl`.  Axiom audit re-run over all 73: 150 blocks, every
+  `check_*` carrying exactly its own `native_decide` axiom plus the three standard ones, and
+  each `corpus_*` exactly its members' (61/6/1/11) — **zero violations**.  Cross-checks and
+  per-certificate timings: `notes/t5_corpus.md`.

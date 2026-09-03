@@ -7,7 +7,9 @@ import PackingCertMathlib.Corpus.K61.Check_k4_01
 import PackingCertMathlib.Corpus.K61.Check_k4_02
 import PackingCertMathlib.Corpus.K61.Check_k4_04
 import PackingCertMathlib.Corpus.K61.Check_k4_07
+import PackingCertMathlib.Corpus.K61.Check_k4_09
 import PackingCertMathlib.Corpus.K61.Check_k4_10
+import PackingCertMathlib.Corpus.K61.Check_k4_12
 import PackingCertMathlib.Corpus.K61.Check_k5_00
 import PackingCertMathlib.Corpus.K61.Check_k5_01
 import PackingCertMathlib.Corpus.K61.Check_k5_02
@@ -72,6 +74,7 @@ import PackingCertMathlib.Corpus.THMU.Check_u_reinsert_07
 import PackingCertMathlib.Corpus.THMU.Check_u_reinsert_08
 import PackingCertMathlib.Corpus.THMU.Check_u_reinsert_09
 import PackingCertMathlib.Corpus.THMU.Check_u_reinsert_10
+import PackingCertMathlib.Corpus.K61
 import PackingCertMathlib.Corpus.TRAP
 import PackingCertMathlib.Corpus.P1
 import PackingCertMathlib.Corpus.THMU
@@ -88,8 +91,12 @@ import PackingCertMathlib.Corpus.THMU
 #print axioms PackingCert.S11.k4_04_kill
 #print axioms PackingCert.S11.check_k4_07
 #print axioms PackingCert.S11.k4_07_kill
+#print axioms PackingCert.S11.check_k4_09
+#print axioms PackingCert.S11.k4_09_kill
 #print axioms PackingCert.S11.check_k4_10
 #print axioms PackingCert.S11.k4_10_kill
+#print axioms PackingCert.S11.check_k4_12
+#print axioms PackingCert.S11.k4_12_kill
 #print axioms PackingCert.S11.check_k5_00
 #print axioms PackingCert.S11.k5_00_kill
 #print axioms PackingCert.S11.check_k5_01
@@ -219,7 +226,7 @@ import PackingCertMathlib.Corpus.THMU
 #print axioms PackingCert.S11.check_u_reinsert_10
 #print axioms PackingCert.S11.u_reinsert_10_no_family
 
--- corpus_K61: NOT complete (some certificates PENDING) -- not imported
+#print axioms PackingCert.S11.corpus_K61
 #print axioms PackingCert.S11.corpus_TRAP
 #print axioms PackingCert.S11.corpus_P1
 #print axioms PackingCert.S11.corpus_THMU
