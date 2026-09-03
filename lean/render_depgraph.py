@@ -38,6 +38,7 @@ LAYERS = [
     ["B.SEL", "B.CENSUS", "B.K1", "B.EXACT", "C.WIN"],
     ["C.K61", "C.A57", "C.K4TIER", "C.CC2", "C.T5T11", "C.M1", "C.A61"],
     ["D.TREE", "D.N1", "D.TRAP", "D.P1", "D.LADDER", "D.ALIVE", "D.SLAB", "D.D4", "D.S6", "D.TAUK"],
+    ["K0.FREE", "K0.NOCRIT", "K0.RES4", "K0.PLATEAU", "K0.TFU", "K0.ID", "K0.DFK0", "K0.TREE"],
     ["A.F2", "V.MEAS", "V.CASE", "V.PARAM", "E.A36", "E.A22", "E.COORD", "E.IV"],
     ["X.IL19", "X.S3BDBFS", "X.ATLAS", "X.CSTAR", "X.GA531"],
 ]
@@ -47,6 +48,7 @@ LAYER_TITLES = [
     "stratification layer",
     "per-stratum kills + window transfer",
     "trump5 residual (A59/A60)",
+    "k0_00 residue reduction (A85-A91): teleport -> selected minimiser -> the frame",
     "verifier soundness + rigidity trust chain",
     "off-tree (motivation only; H11 sweep)",
 ]
