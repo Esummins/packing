@@ -1,0 +1,820 @@
+{
+ "cls": "k0_00",
+ "generated": "2026-09-02 21:43:36",
+ "object": {
+  "k_s": 0,
+  "N": 11,
+  "pins": [],
+  "images": 8,
+  "s_rat": "969271/250000",
+  "witness_min_pairwise_gap": 7.455778280034674e-08,
+  "all_families_ok": true
+ },
+ "R1": {
+  "corner": "BL",
+  "w_widen": 0.026,
+  "a": 1.026,
+  "rect": [
+   0.5,
+   1.75,
+   0.5,
+   1.75
+  ],
+  "w_box": 0.15,
+  "a_min": 0.34,
+  "t_partition_sigma_closed": true,
+  "variants": {
+   "sigma_closed_7": {
+    "counts": {
+     "cover": 678,
+     "uncoverable": 0,
+     "sound": 644,
+     "sound_w0": 610,
+     "witnessed": 586
+    },
+    "grid": [
+     9,
+     9,
+     7
+    ],
+    "box_set_sigma_closed": true,
+    "sound_by_sense": {
+     "P": 226,
+     "M": 226,
+     "S": 64,
+     "A": 128
+    },
+    "t_edges": [
+     "0",
+     "1/8",
+     "1/4",
+     "3/8",
+     "5/11",
+     "3/5",
+     "7/9",
+     "1"
+    ]
+   },
+   "tree57_sigma7": {
+    "counts": {
+     "cover": 597,
+     "uncoverable": 0,
+     "sound": 580,
+     "sound_w0": 546,
+     "witnessed": 522
+    },
+    "grid": [
+     9,
+     9,
+     7
+    ],
+    "box_set_sigma_closed": false,
+    "sound_by_sense": {
+     "A": 145,
+     "P": 145,
+     "M": 226,
+     "S": 64
+    },
+    "t_edges": [
+     "0",
+     "1/8",
+     "1/4",
+     "3/8",
+     "5/11",
+     "3/5",
+     "7/9",
+     "1"
+    ]
+   },
+   "tree57_uniform8": {
+    "counts": {
+     "cover": 597,
+     "uncoverable": 0,
+     "sound": 580,
+     "sound_w0": 563,
+     "witnessed": 523
+    },
+    "grid": [
+     9,
+     9,
+     8
+    ],
+    "box_set_sigma_closed": false,
+    "sound_by_sense": {
+     "A": 145,
+     "P": 145,
+     "M": 226,
+     "S": 64
+    },
+    "t_edges": [
+     "0",
+     "1/8",
+     "1/4",
+     "3/8",
+     "1/2",
+     "5/8",
+     "3/4",
+     "7/8",
+     "1"
+    ]
+   }
+  },
+  "seconds": 3.1
+ },
+ "R2": {
+  "variant": "sigma_closed_7",
+  "n_sound_boxes": 644,
+  "n_pair": {
+   "level0": 44516,
+   "level1": 37788,
+   "level2": 33656,
+   "all_unordered": 207046
+  },
+  "sense_table": {
+   "level0": {
+    "PP": 6140,
+    "MP": 11262,
+    "PS": 2616,
+    "AP": 5707,
+    "MM": 6610,
+    "MS": 2933,
+    "AM": 6228,
+    "SS": 388,
+    "AS": 1254,
+    "AA": 1378
+   },
+   "level1": {
+    "PP": 5831,
+    "MP": 9190,
+    "PS": 2335,
+    "AP": 4654,
+    "MM": 5883,
+    "MS": 2400,
+    "AM": 4763,
+    "SS": 388,
+    "AS": 1014,
+    "AA": 1330
+   },
+   "level2": {
+    "PP": 5402,
+    "MP": 7835,
+    "PS": 1959,
+    "AP": 4172,
+    "MM": 5507,
+    "MS": 2082,
+    "AM": 4197,
+    "SS": 388,
+    "AS": 814,
+    "AA": 1300
+   }
+  },
+  "seconds": 388.9
+ },
+ "R3": {
+  "pair_gate_budget9": {
+   "attemptable": [
+    27702,
+    0.8231
+   ],
+   "unkillable": [
+    5954,
+    0.1769
+   ]
+  },
+  "image_compatible_pairs": {
+   "g0": 12,
+   "g1": 2,
+   "g2": 2,
+   "g3": 2,
+   "g4": 12,
+   "g5": 2,
+   "g6": 2,
+   "g7": 2
+  },
+  "canary_images_without_a_compatible_BL_pair": [],
+  "fast_gate_validation": {
+   "n": 200,
+   "disagreements": 0
+  },
+  "corner_map_check": {
+   "BL": {
+    "theta_bins_preserved": true,
+    "n_bad": 0
+   },
+   "BR": {
+    "theta_bins_preserved": true,
+    "n_bad": 0
+   },
+   "TR": {
+    "theta_bins_preserved": true,
+    "n_bad": 0
+   },
+   "TL": {
+    "theta_bins_preserved": true,
+    "n_bad": 0
+   }
+  },
+  "surviving_pairs_sigma_closed": {
+   "n": 33656,
+   "sigma_image_also_surviving": 33290,
+   "fraction": 0.9891,
+   "max_core_a_asymmetry": 0.018607129241807352,
+   "why": "the cover box set is sigma-closed, but the rational core a = (1/2 - hd)/(1 + (t1 - t0)) is t-grid based and mirrored t-bins have different t-widths, so core(sigma b) != sigma core(b); the prune is sound either way, but the surviving set is not exactly sigma-closed"
+  },
+  "sample_2corner": {
+   "corners": [
+    "BL",
+    "TR"
+   ],
+   "budget": 7,
+   "n": 300,
+   "counts": {
+    "attemptable": [
+     292,
+     0.9733
+    ],
+    "unkillable": [
+     3,
+     0.01
+    ],
+    "contradictory": [
+     5,
+     0.0167
+    ]
+   }
+  },
+  "sample_3corner": {
+   "corners": [
+    "BL",
+    "BR",
+    "TR"
+   ],
+   "budget": 5,
+   "n": 300,
+   "counts": {
+    "attemptable": [
+     130,
+     0.4333
+    ],
+    "unkillable": [
+     3,
+     0.01
+    ],
+    "contradictory": [
+     167,
+     0.5567
+    ]
+   }
+  },
+  "sample_4corner": {
+   "corners": [
+    "BL",
+    "BR",
+    "TR",
+    "TL"
+   ],
+   "budget": 3,
+   "n": 1000,
+   "counts": {
+    "attemptable": [
+     179,
+     0.179
+    ],
+    "unkillable": [
+     2,
+     0.002
+    ],
+    "contradictory": [
+     819,
+     0.819
+    ]
+   },
+   "d4_canonical": 120,
+   "d4_canonical_fraction": 0.12,
+   "orbit_size_histogram": {
+    "8": 1000
+   }
+  },
+  "seconds": 45.2
+ },
+ "R4": {
+  "scoreboard": {
+   "planned": 26,
+   "run": 7,
+   "PASS": 1,
+   "FAIL": 6,
+   "refused": 0,
+   "eta_le_m015": 6,
+   "lp_seconds_total": 7029.4,
+   "cert_seconds_total": 4882.1
+  },
+  "rows": [
+   {
+    "tag": "s1int_l1_043",
+    "group": "S1-INT",
+    "level": "A38-l1",
+    "budget": 10,
+    "n_cores": 1,
+    "near_far": "a38",
+    "ghost": 0.30861,
+    "a38_tau": 9.581395348837253,
+    "tau": 9.777909270216648,
+    "eta": -0.22209072978335165,
+    "converged": false,
+    "lp_s": 1010.0,
+    "cert_s": 691.9,
+    "verdict": "FAIL(eps_geo retries exhausted) -> deepen",
+    "eps_geo": [
+     {
+      "eps_geo": 0.002,
+      "rc": 3,
+      "seconds": 415.7
+     },
+     {
+      "eps_geo": 0.004,
+      "rc": 3,
+      "seconds": 568.1
+     }
+    ],
+    "canary_images": null
+   },
+   {
+    "tag": "s1int_l1_008",
+    "group": "S1-INT",
+    "level": "A38-l1",
+    "budget": 10,
+    "n_cores": 1,
+    "near_far": "a38",
+    "ghost": 0.09276,
+    "a38_tau": 9.633102890731877,
+    "tau": 9.875504919511073,
+    "eta": -0.1244950804889271,
+    "converged": false,
+    "lp_s": 949.3,
+    "cert_s": 660.9,
+    "verdict": "FAIL(eps_geo retries exhausted) -> deepen",
+    "eps_geo": [
+     {
+      "eps_geo": 0.002,
+      "rc": 3,
+      "seconds": 800.8
+     },
+     {
+      "eps_geo": 0.004,
+      "rc": 3,
+      "seconds": 1167.9
+     }
+    ],
+    "canary_images": null
+   },
+   {
+    "tag": "s1int_l1_053",
+    "group": "S1-INT",
+    "level": "A38-l1",
+    "budget": 10,
+    "n_cores": 1,
+    "near_far": "a38",
+    "ghost": 0.57041,
+    "a38_tau": 9.582995951417093,
+    "tau": 9.664070039983184,
+    "eta": -0.3359299600168164,
+    "converged": false,
+    "lp_s": 1014.1,
+    "cert_s": 643.8,
+    "verdict": "FAIL(eps_geo retries exhausted) -> deepen",
+    "eps_geo": [
+     {
+      "eps_geo": 0.002,
+      "rc": 1,
+      "seconds": 1051.5
+     },
+     {
+      "eps_geo": 0.004,
+      "rc": 3,
+      "seconds": 832.0
+     }
+    ],
+    "canary_images": null
+   },
+   {
+    "tag": "s1int_l2_l2_p114_010",
+    "group": "S1-INT",
+    "level": "A38-l2",
+    "budget": 10,
+    "n_cores": 1,
+    "near_far": "a38",
+    "ghost": 0.63586,
+    "a38_tau": 8.568965517242233,
+    "tau": 8.99999999999994,
+    "eta": -1.0000000000000604,
+    "converged": false,
+    "lp_s": 1066.0,
+    "cert_s": 631.6,
+    "verdict": "PASS",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s1int_l2_l2_p210_001",
+    "group": "S1-INT",
+    "level": "A38-l2",
+    "budget": 10,
+    "n_cores": 1,
+    "near_far": "a38",
+    "ghost": 0.50496,
+    "a38_tau": 8.600000000001337,
+    "tau": 8.727154792386784,
+    "eta": -1.2728452076132157,
+    "converged": false,
+    "lp_s": 1042.5,
+    "cert_s": 859.5,
+    "verdict": "FAIL(rc=1)",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s1int_l2_l2_p215_011",
+    "group": "S1-INT",
+    "level": "A38-l2",
+    "budget": 10,
+    "n_cores": 1,
+    "near_far": "a38",
+    "ghost": 0.6262,
+    "a38_tau": 8.622377622380288,
+    "tau": 8.80592800768378,
+    "eta": -1.1940719923162195,
+    "converged": false,
+    "lp_s": 994.7,
+    "cert_s": 709.0,
+    "verdict": "FAIL(rc=1)",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s1cor_near_b178",
+    "group": "S1-COR",
+    "level": "BL-single",
+    "budget": 10,
+    "n_cores": 1,
+    "near_far": "near",
+    "ghost": 0.12825,
+    "a38_tau": null,
+    "tau": 9.548387096769885,
+    "eta": -0.4516129032301155,
+    "converged": false,
+    "lp_s": 952.8,
+    "cert_s": 685.4,
+    "verdict": "FAIL(rc=1)",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s1cor_far_b595",
+    "group": "S1-COR",
+    "level": "BL-single",
+    "budget": 10,
+    "n_cores": 1,
+    "near_far": "far",
+    "ghost": 0.63913,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s2_near_046_473",
+    "group": "S2",
+    "level": "BL-pair",
+    "budget": 9,
+    "n_cores": 2,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s2_near_046_619",
+    "group": "S2",
+    "level": "BL-pair",
+    "budget": 9,
+    "n_cores": 2,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s2_far_022_631",
+    "group": "S2",
+    "level": "BL-pair",
+    "budget": 9,
+    "n_cores": 2,
+    "near_far": "far",
+    "ghost": 0.63913,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s2_far_022_633",
+    "group": "S2",
+    "level": "BL-pair",
+    "budget": 9,
+    "n_cores": 2,
+    "near_far": "far",
+    "ghost": 0.63913,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s3_near_BL619642_TR023305",
+    "group": "S3",
+    "level": "BL+TR",
+    "budget": 7,
+    "n_cores": 4,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s3_near_BL368440_TR135473",
+    "group": "S3",
+    "level": "BL+TR",
+    "budget": 7,
+    "n_cores": 4,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s3_near_BL281514_TR528641",
+    "group": "S3",
+    "level": "BL+TR",
+    "budget": 7,
+    "n_cores": 4,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s3_far_BL389484_TR018470",
+    "group": "S3",
+    "level": "BL+TR",
+    "budget": 7,
+    "n_cores": 4,
+    "near_far": "far",
+    "ghost": 0.34722,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s3_far_BL066471_TR504617",
+    "group": "S3",
+    "level": "BL+TR",
+    "budget": 7,
+    "n_cores": 4,
+    "near_far": "far",
+    "ghost": 0.34722,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s3_far_BL504630_TR486533",
+    "group": "S3",
+    "level": "BL+TR",
+    "budget": 7,
+    "n_cores": 4,
+    "near_far": "far",
+    "ghost": 0.34722,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s4_near_BL357619_BR004483_TR191404",
+    "group": "S4",
+    "level": "BL+BR+TR",
+    "budget": 5,
+    "n_cores": 6,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s4_near_BL283514_BR306371_TR017518",
+    "group": "S4",
+    "level": "BL+BR+TR",
+    "budget": 5,
+    "n_cores": 6,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s4_far_BL485522_BR024614_TR103437",
+    "group": "S4",
+    "level": "BL+BR+TR",
+    "budget": 5,
+    "n_cores": 6,
+    "near_far": "far",
+    "ghost": 0.35841,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s4_far_BL000453_BR020628_TR013481",
+    "group": "S4",
+    "level": "BL+BR+TR",
+    "budget": 5,
+    "n_cores": 6,
+    "near_far": "far",
+    "ghost": 0.36933,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s5_near_BL514601_BR091318_TR024269_TL022178",
+    "group": "S5",
+    "level": "BL+BR+TR+TL",
+    "budget": 3,
+    "n_cores": 8,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s5_near_BL104223_BR004619_TR108262_TL002330",
+    "group": "S5",
+    "level": "BL+BR+TR+TL",
+    "budget": 3,
+    "n_cores": 8,
+    "near_far": "near",
+    "ghost": 0.06944,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s5_far_BL072642_BR376404_TR018301_TL040270",
+    "group": "S5",
+    "level": "BL+BR+TR+TL",
+    "budget": 3,
+    "n_cores": 8,
+    "near_far": "far",
+    "ghost": 0.33197,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   },
+   {
+    "tag": "s5_far_BL003487_BR014571_TR012478_TL016022",
+    "group": "S5",
+    "level": "BL+BR+TR+TL",
+    "budget": 3,
+    "n_cores": 8,
+    "near_far": "far",
+    "ghost": 0.33197,
+    "a38_tau": null,
+    "tau": null,
+    "eta": null,
+    "converged": null,
+    "lp_s": null,
+    "cert_s": null,
+    "verdict": "not-run",
+    "eps_geo": null,
+    "canary_images": null
+   }
+  ],
+  "deferred": []
+ },
+ "waits": {
+  "n": 0,
+  "events": []
+ }
+}

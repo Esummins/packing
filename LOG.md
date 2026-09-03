@@ -2203,3 +2203,31 @@ affordable cost estimate for closing 3.84.
   invoked only; certs/ new files only; A83 emitter imported read-only. notes/findings.md blocked by the harness -> sect 10.
   Files: docs/proofs/protected_trees.md, attempts/A84-protected-trees/{code,results,notes,logs,certs}, certs/tube_*,
   lean/depgraph.json (C.K4TIER note, owner released) + svg, REGISTRY row.
+
+## 2026-09-02 A85-k0-route (Fable lead + 2 Opus chores, <= 3 LP slots) -- done-mixed (lemmas hold; the price does NOT drop an order of magnitude)
+- T [docs/proofs/k0_route.md]: LEMMA K0-FREE holds in the FORALL-PACKINGS form: a corner box met by <= 1 square teleports the
+  packing (teleport_packing) into k1_00's MONOTONE hypothesis at the same side; k1_00's P-TREE (tube 0.1305 >= the window) kills
+  it at every m < s-hat and Theorem U closes m = s-hat. The corner seed is therefore NOT stuck-only (A84's caveat void) and the
+  exact-class question is moot (K1 climbs). LEMMA K0-D4: equivariant quotient /8 with mod-G transport of every leaf verdict
+  (Theorem A38.1 + d4_wlog at the root; orbit representatives on the seed, canonical fraction measured 0.120). LEMMA K0-PAIR:
+  NO finite case list - the corner 2-crowd space has interior and contains same-sense tilted pairs (explicit exhibit; 32 % of
+  the surviving pair boxes), the advisor's 'mixed-sign V' prune is unsound locally. K0-WIDEN (w = 0.0255), K0-ATLAS ((D') leaves,
+  no dilation, no window obligation), K0-REUSE (near-slot pocket = k1_00's tree), K0-ROT (rotation stationarity with the exact
+  centre-height term; Trump V-profile D+-sigma = 3.877; rotational ghosts at side <= s0 within 2.2e-7 of an image; selected-form
+  (C) rule only, no price effect).
+- M [attempts/A85-k0-route]: the seed as a COVER is dead - 644 reach boxes, 33 656 pair boxes per corner, 2.9e16 four-corner nodes
+  after exact prunes and /8. A38-G7 closed with the A60 engine on A38's own cells: level 1 undecided (0/3, eta -0.12..-0.34, all
+  eps_geo repairs fail), depth 2 decided (tau = budget - 1.0..1.27, 3/3; first cold PASS of a no-pin node at s0:
+  certs/k0_00/s1int_l2_l2_p114_010; ~1 000 s LP + 630-860 s cert). k0 landscape: 262 k0 optima from 516 targeted runs, none below
+  s-hat, best at s0 + 0.0101; 12 ghosts within 0.02 of s0 near atlas families 9/8/7/11, all outside the atlas -> drain boxes
+  centred at the ghosts (A37 3S, h = s_g - s0 >= 6x the landing radius, ~1 desktop-hour for all 12); family-centred basins
+  (radius 0.07-0.09) are not the route.
+- PRICE: k0_00 = 3 200-7 000 CPU-h (45-100 desktop-days at 3 slots) if depth-2 certifications repair at ~85 %, >= 3e4 CPU-h if
+  only first-pass certifications count: 3-30x below A38's floor, not below A84's plain >= 100 desktop-days; A84's 25-30-day
+  seeded figure was unfounded. The deciding constant is certification reliability at eta ~ -1 - engineering, not geometry.
+- T4: the seed does not force the selected form; stratum_kill_all / stratum_kill_min split (attainment hypothesis from B.SEL,
+  and from the bound itself at s-hat) needed only for K0-ROT leaves -> lean/k0_readiness_A85.md (no lean/ edits).
+- Discipline: A84 engine COPIED; A57/A60/A61/A82/A84 untouched; frozen verifier invoked only; certs/ new files only; <= 3 LP
+  processes; free commit 1-3 GB under the other campaigns for the whole LP phase (S2-S5 not run). Files: docs/proofs/k0_route.md,
+  attempts/A85-k0-route/{code,results,notes,logs,certs}, lean/k0_readiness_A85.md, lean/depgraph.json (C.K4TIER note, chip
+  released) + svg, REGISTRY row.
