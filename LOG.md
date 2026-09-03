@@ -2231,3 +2231,92 @@ affordable cost estimate for closing 3.84.
   processes; free commit 1-3 GB under the other campaigns for the whole LP phase (S2-S5 not run). Files: docs/proofs/k0_route.md,
   attempts/A85-k0-route/{code,results,notes,logs,certs}, lean/k0_readiness_A85.md, lean/depgraph.json (C.K4TIER note, chip
   released) + svg, REGISTRY row.
+
+## 2026-09-03 A86-lean-wave7 (Fable lead + 2 Opus chores, light CPU) -- done-success (T1+T3 landed clean; T2, T4 landed; replay priced)
+- T1 TUBE CHECKER LEAN-SOUND (A83's obligation): RigidTubeKernel.lean (checkTube = verify_tube.py: hull box + PAIR-RELATIVE boxes
+  for edge/dist rows, split Taylor remainder E(x), monotone iteration iterT) and RigidTube.lean (tube_basin: checkA22 & checkTube
+  PASS => every feasible point of Tube_v(T,r) has s >= s(z-hat), equality only at z-hat; axioms propext/choice/Quot.sound). The one
+  new analytic fact: translation invariance of the pair rows AND their symbolic derivatives (shift_inv_D from hasDerivAt_eval +
+  HasDerivAt.unique) - no new induction over the expression language. quad_pin replaced by iterT_sound (E monotone on [0,inf)).
+  TubeSeam.lean: t-frame form tube_tframe, per-coordinate inTube_mkVec, Lemma SEAM's map seam_inTube (pins w=0 up to the slot
+  residual, free squares |w| <= r_land*(m/s0) + T*eps_v), the certificate-data residuals vfree_bound / pin_slot_bound from
+  |z-hat - z0| <= r0. Data RigidTubeData.lean (54 certs, gen_tube_lean.py), isolated RigidTubeCheck.lean (3 load-bearing
+  directions, 79 s), per-cert Corpus/Tube/Check_* (target PackingCertCorpus). REPLAY: native_decide agrees with verify_tube.py on
+  every replayed certificate; ~29 s Lean per certificate vs ~1.7 s Python (regress_a36 29 s; three load-bearing 79 s together);
+  full table in lean/lean_wave7_A86.md.
+- T2 ATLAS BOX CHECKER LEAN-SOUND: AtlasKernel.lean (checkAtlas, trivial-reach/extent form in (cx,cy,t): witness corner pairs,
+  rational cosT/sinT enclosures) + AtlasBridge.lean (atlas_kill; atlas_dilated_kill_fold = Lemma K0-ATLAS: L >= s0 discharges
+  EVERY side m < s0 at once, the dilate's extent is <= s0 - (lambda-1) exactly). [F] the boxes must be tilt-FOLDED into [0,pi/4]
+  (319/539 squares of the naive mod-pi/2 box wrap): foldT t = min t (tRefl t) preserves per-axis corner-coordinate sets hence
+  extents (cornerPt_fold_x/y). Chore: 37 A37 entries + 12 A85 ghost drains re-emitted (emit_atlas_lean.py, gen_atlas_lean.py):
+  48/49 reach L >= s0 (fam00 = Trump cannot, s-hat < s0); L(h) = s - 2.003 h, h_max ~ (s_min - s0)/2 = 0.499 x A37's radius;
+  ghost drains 5.06e-3..5.80e-3 = 3.2-3.6x the landing radius (A85 sect 4.6 met at half the nominal). AtlasCheck native_decide 2.9 s.
+- T3 ZONE-TREE COMPOSITION LEAN (ZoneTree.lean): ClosedTree s0 tc Root = leaves (K)/(N) checkCaseI PASS at s0 with NodeHypC
+  (cores in owners, NO-zones avoided set-wise; nonempty nofams handled by the SAME clause via checkCaseI_no_family - no B.2 widening),
+  (C), (D) = the SEAM landing after g and a relabelling, (D') = folded atlas box, plus cover (the tree's complete disjunction =
+  the producer's obligation); tree_kill = Lemma P-TREE (a)+(b). Step 1 root_of_containsPins (occupiesSlot_params +
+  bprime_containment under the drift budget). Rule library: zone_dichotomy, grid_cover (CI-1), slot_outside_zone (CI-3),
+  pd_convex + pd_rule (Lemma PD), psq_set_convex, d4_dil_comm (D.S6 mod-G). Composition.lean: ClassKilledAt (every packing of
+  class i at m has m >= s-hat, at s-hat is a D4-image of z-hat); s_eleven_ge_of_classes / s_eleven_unique_of_classes consume NEITHER
+  stratum_kill NOR trump_residual NOR basin (old axioms imply the new hypothesis); classKilledAt_of_tree (D4 normalisation as in
+  class_kill, exact hypothesis used nowhere on the bound); classKilledAt_of_slabs (regime 1/2 seam); the stratum_kill re-split of
+  lean/k0_readiness_A85.md (StratumKillAll/StratumKillMin) with both consumers proved. TopLevel roster note added (docstring):
+  stratum_kill + trump_residual -> certificate-file facts (checkCaseI/checkAtlas/checkTube PASS + cover + SEAM data + Step 1);
+  a22_exact_structure unchanged.
+- T4 WINDOW ROWS LEAN (WindowRows.lean): SlabKill S lo hi (half-open top: Lemma B needs lambda > 1); slabKill_of_param (a V.PARAM
+  row covers its whole window: at every real side a specialisation side s2 in (m, s_hi] with (s2/m - 1) A < rho exists),
+  slabKill_of_case (slack-core grid, (s2/lo - 1) A < rho), slabKill_of_M1 (no budget); slabKill_union; windowKilled_of_slab ->
+  the stratum_kill instance via class_kill; k5_06_slab instantiated on the replayed pilot (rho = 1e-9 <= 1/2 - a(cosT+sinT) by
+  norm_num). The 9 converting C.A61 rows enter as checkParamI = true hypotheses of that shape.
+- Axiom audit (scratch/A86Axioms.lean): all new soundness theorems propext/choice/Quot.sound; composed statements add exactly the
+  evaluation axioms of the certificates consumed. s_eleven_ge / s_eleven_unique untouched. Default target builds; frozen isolated
+  modules cache hits.
+- [E] rfl on a let-heavy structure projection ((tubeStats c tc).qvv) times out at whnf; delta then rfl is instant. Array.getElem_ofFn
+  under a heavy function needs a generic getD_ofFn lemma. A foreign K61 corpus runner held the repo lock for hours; single-module
+  builds went through lakeb --nolock (below-normal priority, no collision).
+- Residues [C]: the tree-file -> cover emitter + CI-2 (replay tooling); the per-class (D)-leaf landing data and the
+  ClosedTree instances for trump5/k4_08/k0_00 (await the campaigns' corpora); corpus-wide parametric replay (~200 s/cert).
+- Files: lean/PackingCertMathlib/PackingCertMathlib/{RigidTubeKernel,RigidTube,TubeSeam,RigidTubeData,RigidTubeCheck,AtlasKernel,
+  AtlasBridge,AtlasData,AtlasCheck,ZoneTree,Composition,WindowRows}.lean, Corpus/Tube/, lean/gen_tube_lean.py, lean/gen_atlas_lean.py,
+  lean/lean_wave7_A86.md, lean/README.md, TopLevel.lean roster note, docs/proofs annotations (contraction_tube, protected_trees,
+  k0_route, cover_invariance), attempts/A86-lean-wave7/{code,results,notes,logs}, certs/atlas_lean/, lean/depgraph.json notes on
+  C.K4TIER/C.A61/D.TREE/D.LADDER/D.SLAB/D.S6 (owner chips unchanged) + svg, REGISTRY row.
+
+## 2026-09-03 A87-drain-flow (Fable lead + 1 Opus pilot chore, <= 2 slots) -- done-success (DF-K0 HOLDS in two lines; H1 = T3|k0, MEASURED dead as a cover; k0_00 stays on A85's tree)
+- T [docs/proofs/drain_flow_k0.md]: THEOREM DF-K0 holds in the selected (MinForm) form of stratum_kill that A85 sect 9 wrote and A86
+  composed (StratumKillMin, Composition.lean 159-204): H1(s-hat) ("no k0 FJ point with sigma <= s-hat, for every consistent
+  selection") => the k0_00 instance of StratumKillMin, by D1 (attained_thm) + D3' (FJ necessity at a global minimiser for every
+  consistent selection). No hypothesis on the other strata, no induction on 11-k, no selection, whole window at once (s is a
+  variable of the FJ system). Obligations: (a) drain step holds in first-order form (Lemma DS: Gordan direction gives a packing
+  at side sigma - eps|y_s|) and is NOT NEEDED - attainment is the terminal point of every drain; the quantitative form ("a
+  contact forms within bounded motion") is false as a mechanism (feasible-direction flows jam) and unnecessary. (b) VOID: the
+  k>=1 strata are codimension-3 (a square EXACTLY on a corner slot), a drain from k0 never reaches them; the only k-raising
+  mechanism is the discrete teleport (CC-2), whose well-founded induction is unique_via_chain (Lean) and serves uniqueness, not
+  the bound. (c) VOID: a global minimiser is FJ for EVERY consistent selection, stuck or not; B.SEL enters only the uniqueness
+  clause, replaced in the split composition by "every packing at s-hat is a minimiser". The exists-selection weakening of H1 is
+  a no-op on cells (flush ties). Lemma F-LEAF: minimiser-only leaves ((F) Farkas, (B) D2 slack, (R) K0-ROT, (S) stuck rows,
+  flagged) are admissible in the k0_00 zone-tree under StratumKillMin - the honest partial; no price effect (dominated by
+  (D)/(D') value boxes at the residue; niche = a residue landing on an unknown structure below s0 + 1.6e-3).
+- F: H1 IS drain_lemma.md's T3 restricted to k0, and the restriction prunes NOTHING at cell level (k0 open+dense). The
+  measure-zero critical set is the wrong complexity measure: Gordan is exact for the GRADIENT HULL of a cell, so the test fires
+  only at the discharge scale set by the configuration's slack (zero at s*), and the count is the 33-dim volume at that scale.
+  "forall z exists descent direction" != "exists one direction feasible on all of B". The certificate must be stated at
+  sigma <= s-hat (algebraic enclosure), not s0: at s0 the rotational ghosts are genuine k0 packings 2e-7 from z-hat.
+- M [attempts/A87-drain-flow, A30 engine copied, selftest 7/7]: 1 448 cells over the 262 k0 optima + Trump rotated by 1e-3 /
+  5e-8, h = 0.05..1e-4 (1e-8 for the ghost), s clipped to s0. EVERY exclusion was a-sigma (sigma_min(cell) > s0), 1 351/1 448;
+  (a)/(a-menu)/(b)/(c1-union) fired 0 times; of the 74 cells with sigma_min <= s0, 0 (0.0 %) excluded by any test at any h;
+  114 000 per-selection Farkas tests, 0 kills (menus 2^16-2^34); h*/Delta = 0.465 (uncensored median; h* = Delta/2.15, a pure
+  s-clip law); the rotational ghost (sigma = s0 - 2.2e-7) alive down to h = 1e-8 (x-wall rows straddle). Cost 0.81 s per
+  sigma-feasible cell (A30 0.50), 2.5 ms/selection, 1 LP node = 2 100 cells per cell but 10^60 x more cells: uniform cover
+  10^39.6 / 10^62.7 / 10^95.7 cells at h = 0.05 / 1e-2 / 1e-3 after /8*11!; one A85 landing box = 10^6.7 cells = 10^3 CPU-h at
+  h = 1e-3 WITHOUT being discharged. Verdict: H1 is its own astronomically more expensive tree.
+- F [J3]: at 13 of the 14 k0 "optima" below 3.9 (and at rotated Trump) the FJ multiplier LP is INFEASIBLE (19-27 active rows,
+  rank 17-23, flat dim 10-16, 0-4 rattlers; lambda0 = 0 branch infeasible too): with the sampled selections these are NOT
+  Fritz-John points - A04/A85's optimiser stops at first-order points of the penalised problem; under-contacted BECAUSE
+  non-critical. The premise "k0 critical set = under-contacted manifolds at s >= s-hat + 0.0101" is unsupported by its own
+  census; the genuine k0 FJ points are unknown (caveat: one tie selection sampled per contact pair). [C] FJ-polish re-run of
+  the CP search, ~1 desktop-hour. Does not touch DF-K0.
+- Route: k0_00 = A85's tree (45-100 desktop-days at f2 ~ 0.85), optionally with Lemma F-LEAF leaves; MinForm re-split is the
+  form to consume. Discipline: A30 engine COPIED; A57/A60/A61/A85/A86 untouched; frozen verifiers untouched; certs/ untouched
+  (no certificate emitted); <= 2 processes, headroom 7.3 GB at launch. Files: docs/proofs/drain_flow_k0.md,
+  attempts/A87-drain-flow/{code,results,notes,logs}, lean/depgraph.json (C.K4TIER note, chip released) + svg, REGISTRY row.

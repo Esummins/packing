@@ -1,0 +1,108 @@
+{
+ "h_star_median_from_J2": 0.05,
+ "h_star_censored_at_ladder_top": 245,
+ "h_star_n": 262,
+ "h_star_over_Delta_median": 0.4067818507899207,
+ "cheap_path_mean_secs_all_cells": 0.05749735642170561,
+ "cheap_path_mean_secs_sigma_ok_cells": 0.8126555745666092,
+ "sweep_secs_per_selection_median": 0.0024779908657073975,
+ "sweep_cell_total_secs_median": 8.218551874160767,
+ "symmetry_divisor": 319334400,
+ "i_uniform_cover_log10": {
+  "h=0.05": 39.60018757181652,
+  "h=0.01": 62.66619771490514,
+  "h=0.001": 95.66619771490514
+ },
+ "ii_A85_landing_box_r1.6e-3": {
+  "radius": 0.0016,
+  "grid": {
+   "h=0.05": {
+    "n_cells_log10": 0.0,
+    "cpu_hours_cheap_log10": -3.646395981937224,
+    "cpu_hours_sweep_log10": -2.6415072000722146,
+    "covering_cell_excluded_by_T3": false
+   },
+   "h=0.001": {
+    "n_cells_log10": 6.735959427645518,
+    "cpu_hours_cheap_log10": 3.0895634457082948,
+    "cpu_hours_sweep_log10": 4.094452227573304,
+    "covering_cell_excluded_by_T3": false
+   },
+   "h=0.000175": {
+    "n_cells_log10": 31.715703820997803,
+    "cpu_hours_cheap_log10": 28.069307839060578,
+    "cpu_hours_sweep_log10": 29.074196620925587,
+    "covering_cell_excluded_by_T3": false
+   },
+   "h=0.0001": {
+    "n_cells_log10": 39.73595942764552,
+    "cpu_hours_cheap_log10": 36.08956344570829,
+    "cpu_hours_sweep_log10": 37.094452227573306,
+    "covering_cell_excluded_by_T3": false
+   }
+  },
+  "note": "h*=0.05 exceeds the box radius, so one cell covers the box; but NO measured h excludes a cell whose sigma_min <= s0, so the box is not discharged at any h in the ladder"
+ },
+ "iii_ghost_drain_box_r5e-3": {
+  "radius": 0.005,
+  "grid": {
+   "h=0.05": {
+    "n_cells_log10": 0.0,
+    "cpu_hours_cheap_log10": -3.646395981937224,
+    "cpu_hours_sweep_log10": -2.6415072000722146,
+    "covering_cell_excluded_by_T3": false
+   },
+   "h=0.001": {
+    "n_cells_log10": 23.066010143088622,
+    "cpu_hours_cheap_log10": 19.419614161151397,
+    "cpu_hours_sweep_log10": 20.424502943016407,
+    "covering_cell_excluded_by_T3": false
+   },
+   "h=0.000175": {
+    "n_cells_log10": 48.0457545364409,
+    "cpu_hours_cheap_log10": 44.39935855450368,
+    "cpu_hours_sweep_log10": 45.40424733636869,
+    "covering_cell_excluded_by_T3": false
+   },
+   "h=0.0001": {
+    "n_cells_log10": 56.06601014308862,
+    "cpu_hours_cheap_log10": 52.419614161151394,
+    "cpu_hours_sweep_log10": 53.42450294301641,
+    "covering_cell_excluded_by_T3": false
+   }
+  },
+  "note": "h*=0.05 exceeds the box radius, so one cell covers the box; but NO measured h excludes a cell whose sigma_min <= s0, so the box is not discharged at any h in the ladder"
+ },
+ "v_ratio_cheap_cell_to_A85_LP_node": 0.0004780326909215348,
+ "A85_LP_node_secs": 1700.0,
+ "A30_reference": {
+  "cost_per_cell_secs": {
+   "a_and_b": 0.08,
+   "menu_build": 0.44,
+   "union_farkas_lp": 0.037,
+   "union_farkas_verify": 0.03,
+   "cheap_path_total": 0.5,
+   "per_selection_farkas": 0.0019,
+   "fj_multiplier_lp": 0.0022,
+   "vertex_search_34": 0.032,
+   "active_set_krawczyk_n69": 0.204
+  },
+  "cell_count_model": {
+   "dimension": 33,
+   "symmetry_group_order": 319334400,
+   "uniform_cover": {
+    "h=0.1": "1e30",
+    "h=0.01": "1e63",
+    "h=5e-4": "1e106",
+    "h=1.75e-4": "1e121"
+   },
+   "bnb": "delta_kill/h measured scale-invariant over a 50x range of h and two s0 values: min 1.15, median 1.86, max 3.75. Surviving cells per critical point ~ c^33 = 1.1e2 / 7.8e8 / 8.8e18, INDEPENDENT of h.",
+   "endgame_shell": "T3 cannot close alone (a minimiser exists at s0 >= s*); it must be composed with A22's local certificate (r_N = 5e-4). Refinement must reach 1.86h + h <= 5e-4, i.e. h <= 1.75e-4, and the shell then holds ~1.86^33 = 7.8e8 cells (x8 unreduced D4 copies).",
+   "floor_cpu_hours": {
+    "cheap_path_only_optimistic": 110000.0,
+    "realistic_per_selection_sweep": 49000000.0
+   },
+   "caveat": "A floor, not an estimate: it counts only the shell around Trump and excludes the rest of D_0, the other 35 A04 local optima, and all C(42,34)-style active-set branches."
+  }
+ }
+}
