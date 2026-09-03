@@ -39,11 +39,37 @@ sys.path.insert(0, HERE)
 import caselp
 from caselp import Box, NoFam, Hyp, solve_node
 from run_skel import S0F
+from fractions import Fraction as _F
 from substrat import zones, trump_realizes
 from pinguard import classify
 from warm57 import merged_warm
 
 S_RAT = "969271/250000"
+
+
+# ------------------------------------------------------------------ the grid side (T29)
+def slots_at(slots_s0, s):
+    """Move a class's slots from s0 to another side.  Slot coordinates are affine with
+    beta in {0,1} (A56 P1): L-anchored c = alpha (1/2, 3/2, 5/2), R-anchored c = s - alpha.
+    Anything else is not a slot and is refused rather than guessed at."""
+    L = (_F(1, 2), _F(3, 2), _F(5, 2))
+    S0 = _F(969271, 250000)
+    out = []
+    for (x, y) in slots_s0:
+        row = []
+        for c in (x, y):
+            cf = _F(round(c * 10 ** 9), 10 ** 9)
+            hit = None
+            for a in L:
+                if abs(cf - a) < _F(1, 10 ** 6):
+                    hit = float(a); break
+                if abs(cf - (S0 - a)) < _F(1, 10 ** 6):
+                    hit = float(s - a); break
+            if hit is None:
+                raise ValueError(f"slot coordinate {c} is neither L- nor R-anchored")
+            row.append(hit)
+        out.append((row[0], row[1]))
+    return out
 
 # T19: every extra Python process costs ~628 MB of COMMIT before it does any work (measured:
 # bare `python -c "import numpy"` = 27 MB working set, 628 MB commit).  verify_case.py spawns an
@@ -112,7 +138,7 @@ def ghost_dist(b, G):
 
 
 # ------------------------------------------------------------------ children
-def build_children(name, zone, w, nth, cw, a_min, pin_delta=0.0):
+def build_children(name, zone, w, nth, cw, a_min, pin_delta=0.0, side=None):
     """pin_delta > 0 emits SLACK pin cores (A63 route (b) / T21): a square pin box of half-width
     delta/sqrt(2) gives core half-side a = 1/2 - delta and hence rho = delta, so one fixed-side
     certificate transfers to a slab of relative width delta/(5/2) instead of ~4e-10.  It also
@@ -120,11 +146,14 @@ def build_children(name, zone, w, nth, cw, a_min, pin_delta=0.0):
     which ENLARGES the stratum -- sound, and a strictly stronger kill.  Gate re-checked (T23):
     min slot separation is 1.0, 2h = 1.41e-2 and 2a = 0.98 are both below it, so the h-balls and
     the fattened cores stay pairwise disjoint and no centre can lie in two pin boxes."""
+    SF = S0F if side is None else float(_F(side))
     slots = [tuple(p) for p in json.load(open(os.path.join(A53, "results", "name_to_slots.json")))[name]]
+    if side is not None and abs(SF - S0F) > 1e-12:
+        slots = slots_at(slots, _F(side))
     hh = 0.0 if pin_delta <= 0 else pin_delta / math.sqrt(2.0)
     pins = [Box(x - hh, x + hh, y - hh, y + hh, 0.0, 0.0) for (x, y) in slots]
-    rect = zones(S0F, cw)[zone]
-    boxes, bad, grid = cover(rect, S0F, w, nth, a_min)
+    rect = zones(SF, cw)[zone]
+    boxes, bad, grid = cover(rect, SF, w, nth, a_min)
     G = ghost_placements()
     kids = [dict(id=f"{name}_{zone}_NO", kind="NO", box=None, score=1e9,
                  hyp=Hyp(pins, [NoFam(rect[0], rect[1], rect[2], rect[3], [(0.0, 90.0)])]),
@@ -174,7 +203,8 @@ def run_eps_geo(node_path, kid, a, certdir, log, margins=None):
         return out
     for m in margins:
         cert_out = os.path.join(certdir, f"{kid['id']}_epsgeo{m:g}.json")
-        cmd = [sys.executable, os.path.join(HERE, "certify.py"), node_path, "--s_rat", S_RAT,
+        cmd = [sys.executable, os.path.join(HERE, "certify.py"), node_path,
+               "--s_rat", str(_F(getattr(a, "side", S_RAT))),
                "--eps_geo", f"{m:g}", "--rounds", "1", "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)),
                "--depth", str(a.depth), "--time_limit", str(a.cert_time),
                "--resolve_time", str(a.cert_time), "--out", cert_out, "--scale", "0",
@@ -206,7 +236,8 @@ def run_eps_ladder(node_path, kid, a, certdir, log, eps=(5e-4, 2e-4, 5e-5)):
         for e in eps:
             caselp.EPS_CORE = e
             t0 = time.time()
-            r = solve_node(S0F, kid["hyp"], kid["budget"], sym_kind="C1", warm=warm2,
+            r = solve_node(float(_F(getattr(a, "side", S_RAT))), kid["hyp"], kid["budget"],
+                           sym_kind="C1", warm=warm2,
                            time_limit=a.time_limit, max_iter=900, out=None, log=log,
                            prune=0, prune_cols=3, col_stop_iter=10 ** 6, col_stop_cov=1.002,
                            max_cols_add=400, max_rows_add=2000, fine_slack=0.05, alternate=True)
@@ -217,7 +248,8 @@ def run_eps_ladder(node_path, kid, a, certdir, log, eps=(5e-4, 2e-4, 5e-5)):
                 np2 = node_path.replace(".json", f"_eps{e:g}.json")
                 json.dump(r, open(np2, "w"))
                 cert_out = os.path.join(certdir, f"{kid['id']}_eps{e:g}.json")
-                cmd = [sys.executable, os.path.join(HERE, "certify.py"), np2, "--s_rat", S_RAT,
+                cmd = [sys.executable, os.path.join(HERE, "certify.py"), np2,
+                       "--s_rat", str(_F(getattr(a, "side", S_RAT))),
                        "--rounds", str(a.rounds), "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)), "--depth", str(a.depth),
                        "--time_limit", str(a.cert_time), "--out", cert_out, "--scale", "0",
                        "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "64", "--loop_cols"]
@@ -273,6 +305,10 @@ def main():
     ap.add_argument("--w", type=float, default=0.15, help="centre-cell width")
     ap.add_argument("--nth", type=int, default=8, help="theta cells, uniform in t")
     ap.add_argument("--a_min", type=float, default=0.34)
+    ap.add_argument("--side", default="969271/250000",
+                    help="the grid side s to certify at (rational).  A57 runs a slack-core GRID "
+                         "(T23): each side's PASS transfers to a slab of relative width "
+                         "pin_delta/2.5 below it, and four sides cover [3.82, s0].")
     ap.add_argument("--pin_delta", type=float, default=1e-2,
                     help="slack pin cores: core half-side 1/2 - delta, so rho = delta and one "
                          "certified side covers a slab of relative width delta/2.5 (A63 B'). "
@@ -304,7 +340,11 @@ def main():
     ap.add_argument("--lp_only", action="store_true")
     a = ap.parse_args()
 
-    kids, bad, slots, rect, grid = build_children(a.name, a.zone, a.w, a.nth, a.cw, a.a_min, a.pin_delta)
+    SIDE = _F(a.side)
+    SF = float(SIDE)
+    S_RAT_SIDE = str(SIDE)
+    kids, bad, slots, rect, grid = build_children(a.name, a.zone, a.w, a.nth, a.cw, a.a_min,
+                                                  a.pin_delta, side=a.side)
     si, sn = map(int, a.shard.split("/"))
     key = f"{a.name}_{a.zone}_{a.tag}"
     outdir = os.path.join(BASE, "results", "tree", key)
@@ -401,7 +441,7 @@ def main():
         node_path = os.path.join(outdir, f"{kid['id']}.json")
         rec = dict(id=kid["id"], kind=kid["kind"], budget=kid["budget"], zone=a.zone,
                    a=kid["a"], ghost_dist=round(kid["score"], 5), pin_delta=a.pin_delta,
-                   side=str(S0F))
+                   side=S_RAT_SIDE, side_float=SF)
         if kid["kind"] == "YES":
             rec["box"] = kid["box"].to_json()
         canary = trump_realizes(kid["hyp"], slots)
@@ -436,7 +476,7 @@ def main():
                 tl = a.no_time_limit if kid["kind"] == "NO" else a.time_limit
                 log(f"[{time.strftime('%H:%M:%S')}] LP {kid['id']} budget={kid['budget']} "
                     f"a={kid['a']} gd={kid['score']:.3f} pool={len(pool)}")
-                res = solve_node(S0F, kid["hyp"], kid["budget"], sym_kind="C1",
+                res = solve_node(SF, kid["hyp"], kid["budget"], sym_kind="C1",
                                  warm=dict(atoms=pool, rows=warm["rows"]),
                                  time_limit=tl, max_iter=900, out=None, log=log,
                                  prune=0, prune_cols=3, col_stop_iter=10 ** 6, col_stop_cov=1.002,
@@ -476,7 +516,7 @@ def main():
                 stats["cert_fail"] += 1
         else:
             cert_out = os.path.join(certdir, f"{kid['id']}.json")
-            cmd = [sys.executable, os.path.join(HERE, "certify.py"), node_path, "--s_rat", S_RAT,
+            cmd = [sys.executable, os.path.join(HERE, "certify.py"), node_path, "--s_rat", S_RAT_SIDE,
                    "--rounds", str(a.rounds), "--jobs", str(min(a.jobs, VERIFY_JOBS_CAP)), "--depth", str(a.depth),
                    "--time_limit", str(a.cert_time), "--out", cert_out, "--scale", "0",
                    "--scale_cap", f"{a.scale_cap:.5f}", "--max_w", "64", "--loop_cols"]

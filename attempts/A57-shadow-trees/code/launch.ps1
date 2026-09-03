@@ -5,6 +5,7 @@ param(
   [string]$Zone = "interior",
   [string]$Shard = "0/6",
   [string]$Tag = "L1",
+  [string]$Side = "969271/250000",
   [double]$TimeLimit = 240,
   [double]$CertTime = 240,
   [int]$Rounds = 2,
@@ -29,7 +30,7 @@ $stamp = "$($Name)_$($Zone)_$($Tag)_s$si"
 $py = "C:\Users\esumm\AppData\Local\Python\bin\python.exe"
 if (-not (Test-Path $py)) { $py = "python" }
 $argl = @("$base\code\tree57.py","--name",$Name,"--zone",$Zone,"--tag",$Tag,"--shard",$Shard,
-          "--time_limit",$TimeLimit,"--cert_time",$CertTime,"--rounds",$Rounds,"--jobs",$Jobs,
+          "--side",$Side,"--time_limit",$TimeLimit,"--cert_time",$CertTime,"--rounds",$Rounds,"--jobs",$Jobs,
           "--wall_seconds",$Wall,"--fold_cap",$FoldCap,"--max_rows",$MaxRows)
 $p = Start-Process -FilePath $py -ArgumentList $argl -WorkingDirectory $base `
      -RedirectStandardOutput "$base\logs\$stamp.out" -RedirectStandardError "$base\logs\$stamp.err" `

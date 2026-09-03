@@ -1046,3 +1046,48 @@ is nothing to retract in the notes, only a pointer to add.
 **A78 for the ledger:** `alive_sound` proved in Lean in core-monotone form; Python's obstacles are
 full pin squares rather than certificate cores, admissibility is hard-wired at s0, and
 `nofams = []` is implicit — **no soundness bug in the tool**, just the one bad artefact.
+
+
+## T29 — grid sides run BOTTOM-UP: each one is a standalone record bound
+
+Advisor/PI ordering change.  After side 1, run the remaining sides **4, 3, 2** rather than
+2, 3, 4.
+
+**Why the order matters** (it is not cosmetic).  A side's PASS rules out every packing in the
+slab *below* it, and the standing lower bound is s(11) >= 3.82 (the measure certificate).  So:
+
+| completed | rules out | new bound |
+|---|---|---|
+| side 1 = 3.877084 | (3.861637, 3.877084] | **none** — the gap [3.82, 3.861637] is untouched |
+| side 4 = 3.833212 | (3.817940, 3.833212] | **s(11) > 3.833212** |
+| then side 3 = 3.847780 | (3.832450, 3.847780] | **s(11) > 3.847780** |
+| then side 2 = 3.862404 | (3.847016, 3.862404] | **s(11) > 3.862404** |
+
+Bottom-up therefore yields a publishable record bound after each side and a hedge if the s-hat
+seam runs long; top-down yields nothing until all four land.  Zero extra cost — all four sides
+are needed either way.  (Each bound is conditional on the protected classes and trump5 being
+killed at the same side; A82 is being extended to emit those.)
+
+**`tree57.py --side` implemented.**  Slots are affine with beta in {0,1}, so `slots_at()` moves a
+class from s0 to any side: L-anchored coordinates (1/2, 3/2, 5/2) are fixed, R-anchored ones track
+s.  It refuses rather than guesses on a coordinate that is neither.  Verified at side 4:
+
+    k5_11 at s0 : (0.5,0.5) (0.5,1.5) (0.5,3.377084) (1.5,0.5) (3.377084,0.5)
+    k5_11 at s4 : (0.5,0.5) (0.5,1.5) (0.5,3.333212) (1.5,0.5) (3.333212,0.5)   [s4 - 1/2 = 3.333212]
+
+and the cover rebuilds correctly — 969 children (11x11x8, a = 0.35112, still above a_min) against
+1153 at s0 (12x12x8, a = 0.35660), the zone shrinking with s.  **Cross-validation:** the pinguard
+census at side 4 computed through `tree57.build_children` gives 273 contradictory / 695 ok,
+matching `grid.py`'s independent C-check for that side exactly.
+
+**Queue order confirmed** in `scaleup.ps1`: 46 entries, `G1 -> G4 -> G3 -> G2`, each carrying its
+own `--side`; `launch.ps1` gained `-Side`.  Side 1 shard 0/6 of each stratum stays hand-launched
+(it is deliberately not in the queue).
+
+**Warm-start folding across sides is kept, and is sound.**  `warm57.merged_warm` globs by class
+name, not by side, so columns generated at s0 seed the LPs at 3.833212.  That is a completeness
+choice and never a soundness one: atoms are only *candidate* support points for the measure, and
+a badly placed candidate can only make the LP worse, never make a certificate wrong — the arbiter
+is `verify_case.py` on the emitted measure at that side.  Logic kills do NOT carry across sides
+automatically; they are recomputed per side by the C-check (T23), which is why the free counts
+differ side to side (331/336/264/273 for k5_11).

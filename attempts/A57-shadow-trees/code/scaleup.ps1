@@ -86,13 +86,26 @@ function A56Running {
 }
 
 # shards to add, in priority order, once the cap rises to 5
-$queue = @(
-  @{n='k5_11'; s='1/6'}, @{n='k5_16'; s='1/6'},
-  @{n='k5_11'; s='2/6'}, @{n='k5_16'; s='2/6'},
-  @{n='k5_11'; s='3/6'}, @{n='k5_16'; s='3/6'},
-  @{n='k5_11'; s='4/6'}, @{n='k5_16'; s='4/6'},
-  @{n='k5_11'; s='5/6'}, @{n='k5_16'; s='5/6'}
+$queue = @()
+# T29 (advisor/PI): after side 1, run the remaining grid sides BOTTOM-UP -- 4, then 3, then 2.
+# Each completed side is a standalone record lower bound (s(11) > 3.833212, then > 3.847780,
+# then > 3.862404) once the protected classes and trump5 are killed at the same side, because a
+# side's PASS rules out every packing in the slab below it.  Top-down would yield nothing until
+# all four landed.  Zero extra cost: all four sides are needed either way.
+# side 1 shard 0/6 of each stratum is launched by hand (it is not in this queue).
+$sides = @(
+  @{tag='G1'; s='969271/250000'; shards=@('1/6','2/6','3/6','4/6','5/6')},   # 3.877084  (top slab)
+  @{tag='G4'; s='958303/250000'; shards=@('0/6','1/6','2/6','3/6','4/6','5/6')},  # 3.833212 -> s(11) > 3.833212
+  @{tag='G3'; s='192389/50000';  shards=@('0/6','1/6','2/6','3/6','4/6','5/6')},  # 3.847780 -> s(11) > 3.847780
+  @{tag='G2'; s='965601/250000'; shards=@('0/6','1/6','2/6','3/6','4/6','5/6')}   # 3.862404 -> s(11) > 3.862404
 )
+foreach ($sd in $sides) {
+  foreach ($sh in $sd.shards) {
+    foreach ($nm in @('k5_11','k5_16')) {
+      $queue += @{n=$nm; s=$sh; tag=$sd.tag; side=$sd.s}
+    }
+  }
+}
 $qi = 0
 Note "scaleup started; A57=$(A57Count) A56running=$(A56Running)"
 for ($i = 0; $i -lt 5000; $i++) {
@@ -113,8 +126,8 @@ for ($i = 0; $i -lt 5000; $i++) {
   if ($now -lt $cap -and $qi -lt $queue.Count) {
     $j = $queue[$qi]; $qi++
     & powershell -ExecutionPolicy Bypass -File "$base\code\launch.ps1" -Name $j.n -Shard $j.s `
-        -Tag G1 -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000 | Out-Null
-    Note "cap=$cap running=$now -> launched $($j.n) shard $($j.s)"
+        -Tag $j.tag -Side $j.side -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000 | Out-Null
+    Note "cap=$cap running=$now -> launched $($j.n) $($j.tag) side=$($j.side) shard $($j.s)"
     Start-Sleep -Seconds 45
   } elseif ($now -lt $cap) {
     # L1 queue exhausted: keep freed slots on depth 2.  deepen.py owns every ALIVE-at-LP /

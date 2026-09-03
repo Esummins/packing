@@ -258,16 +258,35 @@ flight).
 
 | `conf60_sq10_a0.3_tw` | 3 | 1.500000 | **−1.5** | 300 (unconverged) | 23.3 | **PASS** |
 
-**The law is sharp: a node certifies iff η = τ − budget reaches −1.**  Every η ≤ −1 node PASSed
-(including the confinement node at η = −1.5 whose LP never even converged); every η = 0 node was
-refused; both fractional-η nodes (−0.33, −0.50) FAILed certification (rc = 3 = the A57 T11 knife
-edge, rc = 1 = the A57 T14 `--eps_geo` case).  Cheap and useful as a campaign pre-filter:
-**−1 < η ≤ 0 predicts a wasted certification**, so route those straight to `deepen` instead of
-`certify` — the two fractional-η nodes above burnt 176 s of certifier time between them for
-nothing.  (This is A56's slack gate `budget − τ0 ≥ 0.5` seen from the trump5 side, and it is
-sharper here: the threshold is 1, not 0.5.)
+**[RETRACTED 2026-09-02 — the "law" below was an overfit to n = 16.]**  On the full corpus
+(n = 735 records with an η and a verdict) certification succeeds far above η = −1:
 
-Wall-clock per node: **LP 18–303 s** (mean ≈ 120 s at budget 5, ≈ 130 s at budget 4); **cert
+| η band | n | outcome |
+|---|---|---|
+| η < −1 | 184 | **184 PASS**, 0 fail |
+| η = −1 (±1e-4) | 289 | **289 PASS**, 0 fail |
+| −1 < η ≤ −0.7 | 21 | **21 PASS**, 0 fail |
+| −0.7 < η ≤ −0.4 | 70 | 65 PASS, 5 FAIL |
+| −0.4 < η ≤ −0.05 | 19 | 13 PASS, 6 FAIL |
+| η > −0.05 (≈ 0) | 152 | **0 PASS**, 61 FAIL, 91 refused |
+
+So: **η ≲ −0.7 certifies essentially always; η ≈ 0 never; in between it is mixed (78/89 ≈ 88 %
+pass).**  There are 33 PASSes at exactly η = −0.5 and several below −0.3 — the two fractional-η
+failures the original note cited were a minority, not the rule.
+
+**The operational advice that followed from the bad law was wrong and is withdrawn.**  I proposed
+routing every η > −1 node "straight to `deepen` instead of `certify`"; on this corpus that would
+have discarded **~100 genuine PASSes**, including 33 at η = −0.5.  Do not pre-filter on η.  The
+only safe reading is the extreme: η ≈ 0 is not worth certifying (0/152), which is what the
+existing `tau >= budget` refusal already handles.
+
+*Why it looked sharp:* the first 16 records came from the earliest, hardest children solved with a
+cold 249-atom warm pool, where the LP genuinely sat at τ = budget or τ = budget − 1.  The
+intermediate η band only appears once the pool grows.  A second small-sample law from this
+attempt (the δ = 1e-3 "slack cores fail certification") was also wrong, for an unrelated reason.
+**Two overfits in one attempt: treat any A60 "law" derived from < 100 records as a hypothesis.**
+
+Wall-clock per node:Wall-clock per node: **LP 18–303 s** (mean ≈ 120 s at budget 5, ≈ 130 s at budget 4); **cert
 1–19 s on a PASS**.  A refused node costs only its LP.  That is why the deepen loop — which turns
 refusals into smaller boxes with larger rational cores — is where the campaign's compute goes.
 

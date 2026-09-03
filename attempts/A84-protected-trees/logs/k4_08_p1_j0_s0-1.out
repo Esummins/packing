@@ -1,0 +1,42 @@
+warm pool: 2743 atoms (columns only) from ['k4_08.json', 'k4_08_state.json']
+A84 k4_08 P1 zone=interior rect=[1.1, 2.777084, 1.1, 2.777084] budget=7 gate: k=4 state=attemptable per_image={"g0": 4, "g4": 4} canary=[]
+  COMMIT-WAIT p1_interior: free commit 1630 MB < 6144 MB; sleeping 60s (wait #1)
+  COMMIT-WAIT p1_interior: free commit 1374 MB < 6144 MB; sleeping 60s (wait #2)
+  COMMIT-WAIT p1_interior: free commit 1347 MB < 6144 MB; sleeping 60s (wait #3)
+  COMMIT-WAIT p1_interior: free commit 986 MB < 6144 MB; sleeping 60s (wait #4)
+  COMMIT-WAIT p1_interior: free commit 591 MB < 6144 MB; sleeping 60s (wait #5)
+  COMMIT-WAIT p1_interior: free commit 2982 MB < 6144 MB; sleeping 60s (wait #6)
+  COMMIT-WAIT p1_interior: free commit 2028 MB < 6144 MB; sleeping 60s (wait #7)
+  COMMIT-WAIT p1_interior: free commit 2226 MB < 6144 MB; sleeping 60s (wait #8)
+  COMMIT-WAIT p1_interior: free commit 4230 MB < 6144 MB; sleeping 60s (wait #9)
+  COMMIT-WAIT p1_interior: free commit 4444 MB < 6144 MB; sleeping 60s (wait #10)
+  COMMIT-WAIT p1_interior: free commit 4821 MB < 6144 MB; sleeping 60s (wait #11)
+[LP] p1_interior budget=7 cols=2743 tl=900.0s
+  {"tag": "p1_interior", "budget": 7, "tau": 3.999999999999999, "eta": -3.000000000000001, "converged": true, "lp_s": 51.8, "cert_s": 5.0, "verdict": "PASS"}
+{
+ "cls": "k4_08",
+ "zone": "interior",
+ "rect": [
+  1.1,
+  2.777084,
+  1.1,
+  2.777084
+ ],
+ "budget": 7,
+ "gate_k": 4,
+ "gate_state": "attemptable",
+ "per_image": {
+  "g0": 4,
+  "g4": 4
+ },
+ "canary_images": [],
+ "delta_pin": 0.02,
+ "rho": "1475739687644739269526605157/73786980692884783104003906250",
+ "A": "3/2",
+ "verdict": "PASS",
+ "tau": 3.999999999999999,
+ "eta": -3.000000000000001,
+ "lp_s": 51.8,
+ "cert_s": 5.0,
+ "lemma": "A84-P1(k4_08): every packing whose squares realise the 4 slack pins of k4_08 has a square with centre in [1.100000, 2.777084]^2"
+}

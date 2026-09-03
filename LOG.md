@@ -2091,3 +2091,74 @@ affordable cost estimate for closing 3.84.
 - Discipline: one LP at a time, BLAS pinned, 6 GB gate held (rung 5 waited 23 min); builder 4 procs; A57/A60/A61 untouched; hinted 70+ MB
   certs gitignored. Files: attempts/A81-slack-verify/{code,results,certs,logs}, docs/proofs/pair_kill.md 6.10, docs/proofs/u_ladder.md 6.2
   addendum, depgraph C.K4TIER (A81 note, owner closed) + svg, REGISTRY row. notes/findings.md blocked by the harness (findings in 6.10).
+
+## 2026-09-02 A82-side-scan (Opus lead) -- done-mixed (crossover measured; 1 verified kill at 3.833212; 2 headline non-kills)
+- SCOPE: PI side scan (alive gate + conditioned case-LP tau(m) + dtau/ds + crossovers, 12-side ladder) THEN the advisor's
+  mid-run extension (17 classes x the 3 A57 grid sides, certificates + slab shells). Discipline held throughout: <= 2 LP
+  slots (two detached BLAS-pinned chains, code/launch82.ps1), a commit-headroom gate that waited out every dip below 6 GB,
+  A57/A60/A61/A81 state+files+processes untouched, frozen verifiers invoked-never-edited, certs/ new files only
+  (certs/a82/). Solver of record copied into the attempt so no other tree's __pycache__ is touched.
+- MACHINERY (attempts/A82-side-scan/code): sides82.py (exact L/R slot rebasing per A56 P0/P1; the 17-class spec incl.
+  trump5; commit-headroom gate), alive82.py (side-parametric A57 alivewitness: Trump-image seeds relocated by the A56 P3
+  gap-anchor rule + blind multistart + a MONOTONE CARRY from the next smaller side; every family re-verified EXACTLY in
+  Fractions), scan82.py (node guard LP at side m, descending column-only warm starts, --delta slack cores + shell()
+  reproducing A57 grid.py's slab arithmetic), emit82.py (A54 certify -> cold frozen verify at depth 60 -> 4 corruption
+  gates), table82.py, chain82.py.
+- F0 [T, exact] THE ALIVENESS CLIFF IS A STEP OF EXACTLY ONE, AT s-hat. k4_08/k4_11/k4_03 are ALIVE (m_fam = budget = 7,
+  gaps 1.15e-7 / 8.97e-8 / 1.20e-7, exact at 1e8) at s0 and ONLY at s0; at every measured m < s-hat, m_fam = 6, exactly
+  verified at 1e6. s_fit = 3.877083619 / 3.877083600 / 3.877083623 vs s-hat = 3.877083590022814 (agreement 3e-8): the
+  class stops being an LP-unkillable stratum exactly when Trump's packing stops fitting. corners4 is never alive.
+- F1 [T] THE A60 LAW eta <= -1 IS UNREACHABLE ON THE k=4 TIER ANYWHERE IN W. The exactly-verified 6-families give
+  tau* >= 6 = budget - 1 at every side in [3.82, s0] for k4_08, k4_11, k4_03, k4_13 (and at all three grid sides for
+  k4_03/k4_08/k4_13 + k3_01 + trump5), so eta >= -1 with equality the only possibility. Do not price a k<=4 window
+  campaign off eta <= -1: it is geometrically excluded, not merely expensive.
+- F2 [M, headline] A PROTECTED CLASS DOES KILL AT 3.833212, WITH eta = -0.38 (not -1).
+  certs/a82/k4_08_958303_250000.json: 24 atoms, total 693001/100000 = 6.930010 < budget 7, side 958303/250000, 4 cores.
+  Cold PASS by the FROZEN verify_case.py (md5 b1b825d918b21c1d2952d96bfce720b6) at --depth 60 (461204 boxes, 144789
+  covered, 85845 exempt, 0 vacuous, 29 s); 4/4 corruption gates REJECTED (drop_heaviest / halve_weights / shift_atoms as
+  coverage HOLES; overfull as "total >= budget"). => a fixed-side stratum kill does NOT need eta <= -1; the A60 law is a
+  property of A60's zone-tree/4-D route, not of fixed-s case-measure certificates.
+- F3 [M] THE REAL GATE IS eps_geo AFFORDABILITY. The same class at the FIRST A39-passing side, m = 3877/1000 with
+  eta = -0.050, FAILED after 4 witness-feedback rounds; every witness a coverage HOLE of exact mass 0.963-0.988, i.e. the
+  A56 P6(v) POSITIONAL deficit (~1.5e-3) whose repair costs dtau/d(eps_geo) ~ 1.1-1.7e2, i.e. ~0.21 of budget. Law:
+  a protected class certifies at side m iff budget - tau(m) >~ 0.21. A56's 0.5-slack rule re-measured at 0.21 for k<=4.
+- F4 [M, reported immediately per the extension] k0_00 AND corners4 DO NOT KILL AT 3.833212.
+  k0_00 (root, budget 11): tau = 11.000000, eta = -0.000000, A39 FAILS -- the root LP has NO slack there, while the
+  existing record bound rests on certs/measure_certificate_3.82.json (root tau = 10.716662 at 191/50). So there is NO
+  record lower bound s(11) >= 3.833212 from a root measure certificate, and since a composed claim needs every stratum,
+  k0_00's own eta = 0 is a hard stop for "each completed grid side yields a record lower bound" as stated.
+  corners4 = k4_13: tau = 7.010638, eta = +0.010638, A39 FAILS -- ABOVE budget (coherent with A65's 7.2545 at s0).
+- F5 [M] HYGIENE: an unconverged case-LP reads BELOW budget where the class is provably alive. At s0, where tau* = budget
+  exactly by F0, the 600 s LP gave 7.000000 for k4_08 but 6.987500 for k4_11 (eta = -0.0125 of pure non-convergence;
+  minmass 0.5-0.9 throughout). The canary caught it and WARNED rather than failing, because the LP had not converged.
+  Reading rule banked: |eta| < ~0.02 is noise, eta <~ -0.2 is evidence, only an emitted certificate is proof.
+- F6 dtau/ds ~ 7.3-8.0 per unit side on the k=4 tier (k4_08 OLS 8.02 / local 7.47; k4_11 s0-to-3.833212 chord 7.31),
+  i.e. ~0.044 of budget slack per 1e-2 of side. The fitted eta = -1 crossover m* = 3.7556 lies OUTSIDE W, consistent with
+  F1 (a fit predicting a crossover inside W is an artefact of the fit).
+- F7 [M] SLAB SHELL PRICE (the extension's requirement, UNPAID here): scan82.shell() reproduces A57 grid.py -- delta-cores
+  give rho ~ delta - tm and cover (s''/(1+rho/2.5), s'']. Reaching 3.833212 from 3.847780 needs rho >= 9.50e-3, i.e.
+  delta ~ 1e-2 (A57's own choice; delta = 1e-2 covers (3.832450, 3.847780]). The certificate of F2 uses A53 DEGENERATE
+  pins (delta ~ 3e-8), so its shell is ~1e-8 wide: it certifies the side 3.833212 and essentially nothing else. Re-emitting
+  at delta = 1e-2 shrinks the exempt region and raises tau; with 0.377 of headroom minus 0.21 for eps_geo the budget is
+  ~0.17. UNMEASURED -- one LP (scan82.py --delta 0.01) prices it and is successor task 1.
+- GRID LP RESULTS at 958303/250000 = 3.833212 (600 s conditioned case-LP, delta = 0): k4_03 6.600000 (-0.400, A39 PASS),
+  k4_05 6.642857 (-0.357, PASS), k4_08 6.622642 (-0.377, PASS, CERTIFIED), k4_11 6.666667 (-0.333, PASS, emission in
+  flight at handover), k4_13 7.010638 (+0.011, no), k0_00 11.000000 (-0.000, no). Exact alive bounds for all 17 classes
+  at all three grid sides are in results/alive_gate_grid.json (trump5: m_fam 5/6 at every grid side -- Trump's family does
+  NOT fit there, canary as expected).
+- TRUMP CANARY CLEAN: family fits at s0 (only ladder side >= s-hat) for every Trump-realised class, exact at 1e8; nowhere
+  below. LP saturates at s0 (k4_08 exactly 7.000000; k4_11 flagged per F5). corners4 exempt (no Trump image). The single
+  emitted certificate is at 3.833212, far below Trump's own side.
+- Files: attempts/A82-side-scan/{code,results,notes,logs,certs}, certs/a82/k4_08_958303_250000.json(+report),
+  notes/method.md + notes/side_scan.md (the crossover table + the grid table), results/side_scan.json,
+  depgraph C.K4TIER note (chip unchanged, stays A81), REGISTRY row.
+- ADDENDUM (same session, after the entry above was written): SECOND VERIFIED KILL --
+  certs/a82/k4_11_958303_250000.json (58 atoms, total 6.956292 < budget 7, side 958303/250000), cold PASS by the frozen
+  verify_case.py at --depth 60 (33 s), 4/4 corruption gates rejected. Emitted at eta = -0.333 with eps_geo = 1.5e-3 and
+  3 witness-feedback rounds. So TWO of the six k=4 protected classes are now killed at 3.833212 by exactly verified
+  fixed-side certificates, both at eta ~ -0.35, i.e. an order of magnitude short of the A60 law -- which F1 shows can
+  never be met there anyway. k4_06 measured at 3.833212: tau = 6.615385, eta = -0.384615, A39 PASS. All five non-corners4
+  k=4 classes pass the A39 gate at 3.833212 (k4_03 -0.400, k4_06 -0.385, k4_08 -0.377, k4_05 -0.357, k4_11 -0.333);
+  corners4 alone does not (+0.011). Emissions for k4_03/k4_06/k4_05 and the LP sweep of trump5 + the five k3 classes at
+  3.833212 were left RUNNING at handover (code/emitchain82.py and chain B; both resume from results/, both under the
+  headroom gate) -- results land in attempts/A82-side-scan/{results,certs} and certs/a82/.

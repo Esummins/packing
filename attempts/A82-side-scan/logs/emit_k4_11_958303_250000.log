@@ -1,0 +1,64 @@
+=== A82 emit k4_11 at side 958303/250000 (tau=6.666667, budget=7, eta=-0.333333)
+    headroom 4.24 GB <= 6.0 GB; waiting 60s
+    headroom 3.34 GB <= 6.0 GB; waiting 60s
+    headroom 4.10 GB <= 6.0 GB; waiting 60s
+    headroom 4.97 GB <= 6.0 GB; waiting 60s
+    headroom 4.68 GB <= 6.0 GB; waiting 60s
+    headroom 4.57 GB <= 6.0 GB; waiting 60s
+    headroom 5.32 GB <= 6.0 GB; waiting 60s
+    headroom 4.84 GB <= 6.0 GB; waiting 60s
+    headroom 3.77 GB <= 6.0 GB; waiting 60s
+    C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A54-stragglers\code\certify.py C:\Users\esumm\code\packing\attempts\A82-side-scan\results\nodes\k4_11_958303_250000.json --s_rat 958303/250000 --rounds 5 --jobs 1 --depth 56 --time_limit 420.0 --out C:\Users\esumm\code\packing\attempts\A82-side-scan\certs\k4_11_958303_250000.json --scale 0 --scale_cap 1.05000 --max_w 48 --loop_cols --eps_geo 0.0015
+ass=0.865217 maxcov=1.586957 +rows=334 -rows=0 +cols=0 -cols=0 t=52s [lp 1s row 15s +r 1s col 1s +c 0s]
+  it   3 tau=6.642857 rows=4581 orbs=2352 atoms>0=47 minmass=0.880952 maxcov=1.714286 +rows=0 -rows=0 +cols=999 -cols=368 t=68s [lp 0s row 14s +r 0s col 1s +c 0s]
+  it   4 tau=6.633028 rows=5300 orbs=2338 atoms>0=61 minmass=0.908257 maxcov=1.362385 +rows=719 -rows=0 +cols=0 -cols=14 t=89s [lp 2s row 14s +r 4s col 1s +c 0s]
+  it   5 tau=6.647059 rows=3946 orbs=2546 atoms>0=37 minmass=0.882353 maxcov=1.411765 +rows=0 -rows=1354 +cols=1000 -cols=792 t=106s [lp 1s row 14s +r 0s col 1s +c 0s]
+  it   6 tau=6.636364 rows=3809 orbs=2501 atoms>0=36 minmass=0.909091 maxcov=1.288132 +rows=324 -rows=461 +cols=0 -cols=45 t=141s [lp 16s row 15s +r 2s col 2s +c 0s]
+  it   7 tau=6.636364 rows=3806 orbs=2745 atoms>0=34 minmass=0.818182 maxcov=1.288132 +rows=0 -rows=3 +cols=1000 -cols=756 t=160s [lp 1s row 17s +r 0s col 2s +c 0s]
+  it   8 tau=6.625000 rows=4608 orbs=2745 atoms>0=43 minmass=0.875000 maxcov=1.312500 +rows=803 -rows=1 +cols=0 -cols=0 t=206s [lp 25s row 15s +r 5s col 1s +c 0s]
+  it   9 tau=6.640000 rows=4608 orbs=3214 atoms>0=60 minmass=0.928000 maxcov=1.277733 +rows=0 -rows=0 +cols=1000 -cols=531 t=231s [lp 9s row 15s +r 0s col 2s +c 0s]
+  it  10 tau=6.629630 rows=5640 orbs=2828 atoms>0=63 minmass=0.933333 maxcov=1.224540 +rows=1065 -rows=33 +cols=0 -cols=386 t=283s [lp 28s row 15s +r 7s col 2s +c 0s]
+  it  11 tau=6.629630 rows=5595 orbs=2976 atoms>0=52 minmass=0.944444 maxcov=1.224540 +rows=0 -rows=45 +cols=1000 -cols=852 t=303s [lp 4s row 14s +r 0s col 2s +c 0s]
+  it  12 tau=6.628319 rows=6398 orbs=2976 atoms>0=71 minmass=0.920354 maxcov=1.099874 +rows=1034 -rows=231 +cols=0 -cols=0 t=367s [lp 35s row 17s +r 9s col 3s +c 0s]
+  it  13 tau=6.631579 rows=6319 orbs=3298 atoms>0=58 minmass=0.929825 maxcov=1.111838 +rows=0 -rows=79 +cols=1000 -cols=678 t=424s [lp 22s row 32s +r 0s col 2s +c 0s]
+  time limit
+DONE s=3.833212 n=7 sym=C1 tau=6.625000 nu=6.625000 conv=False minmass=0.929825 maxcov=1.111838 rows=6319 orbits=3298 atoms_nz=27 packing_support=177 time=485s
+[round 2] tau=6.62500 conv=False scale=1.0500 cert total=6.95627 budget=7 atoms=27
+    boxes = 384480  covered = 130951  vacuous = 0  exempt = 61300 (core 61300, nofam 0)  split = 192221  exact atom checks = 149091  max depth = 56  time = 33.1s
+    FAIL: 8 witness boxes at depth 56: 1 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 7 undecided at this depth
+      worst witness: theta = 4.273388 deg, centre = (1.535864497, 1.469542149), exact mass = 28711/31250 (~0.918752000000)
+    feeding back 168 witness rows (total extra 1512), re-solving (rows only)
+[s=3.833212 n=7 sym=C1 box=[0,90]x1] init orbits=651 points=651 rows=3309 (rejected 1370)
+  it   0 tau=6.666667 rows=3313 orbs=651 atoms>0=15 minmass=0.666667 maxcov=1.666667 +rows=4 -rows=0 +cols=0 -cols=0 t=3s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it   1 tau=6.666667 rows=3313 orbs=1651 atoms>0=15 minmass=0.666667 maxcov=1.666667 +rows=0 -rows=0 +cols=1000 -cols=0 t=4s [lp 0s row 1s +r 0s col 0s +c 0s]
+  it   2 tau=6.666667 rows=3315 orbs=1651 atoms>0=15 minmass=0.666667 maxcov=1.500000 +rows=2 -rows=0 +cols=0 -cols=0 t=7s [lp 2s row 1s +r 0s col 0s +c 0s]
+  it   3 tau=6.666667 rows=3315 orbs=2344 atoms>0=30 minmass=0.833333 maxcov=1.500000 +rows=0 -rows=0 +cols=1000 -cols=307 t=21s [lp 0s row 13s +r 0s col 0s +c 0s]
+  it   4 tau=6.647059 rows=3705 orbs=2344 atoms>0=32 minmass=0.823529 maxcov=1.352941 +rows=390 -rows=0 +cols=0 -cols=0 t=45s [lp 7s row 15s +r 1s col 1s +c 0s]
+  it   5 tau=6.670051 rows=3174 orbs=2592 atoms>0=42 minmass=0.908629 maxcov=1.338210 +rows=0 -rows=531 +cols=1000 -cols=752 t=64s [lp 2s row 15s +r 0s col 2s +c 0s]
+  it   6 tau=6.626984 rows=4117 orbs=2416 atoms>0=61 minmass=0.916667 maxcov=1.214286 +rows=1002 -rows=59 +cols=0 -cols=176 t=102s [lp 17s row 14s +r 6s col 1s +c 0s]
+  it   7 tau=6.653846 rows=4117 orbs=2835 atoms>0=40 minmass=0.961538 maxcov=1.224176 +rows=0 -rows=0 +cols=1000 -cols=581 t=123s [lp 5s row 15s +r 0s col 2s +c 0s]
+  it   8 tau=6.636364 rows=4764 orbs=2734 atoms>0=39 minmass=0.954545 maxcov=1.267677 +rows=871 -rows=224 +cols=0 -cols=101 t=162s [lp 12s row 19s +r 6s col 1s +c 0s]
+  it   9 tau=6.636364 rows=4724 orbs=2980 atoms>0=31 minmass=0.909091 maxcov=1.267677 +rows=0 -rows=40 +cols=1000 -cols=754 t=181s [lp 1s row 17s +r 0s col 1s +c 0s]
+  it  10 tau=6.625000 rows=5145 orbs=2980 atoms>0=30 minmass=0.875000 maxcov=1.171887 +rows=471 -rows=50 +cols=0 -cols=0 t=219s [lp 17s row 15s +r 4s col 2s +c 0s]
+  it  11 tau=6.625000 rows=5125 orbs=3132 atoms>0=47 minmass=0.875000 maxcov=1.171887 +rows=0 -rows=20 +cols=1000 -cols=848 t=243s [lp 4s row 18s +r 0s col 2s +c 0s]
+  it  12 tau=6.625000 rows=6080 orbs=3132 atoms>0=159 minmass=0.875000 maxcov=1.141215 +rows=966 -rows=11 +cols=0 -cols=0 t=298s [lp 17s row 27s +r 9s col 2s +c 0s]
+  it  13 tau=6.636364 rows=6078 orbs=3438 atoms>0=32 minmass=0.909091 maxcov=1.192953 +rows=0 -rows=2 +cols=1000 -cols=694 t=345s [lp 20s row 25s +r 0s col 2s +c 0s]
+  it  14 tau=6.625000 rows=6654 orbs=3300 atoms>0=26 minmass=0.875000 maxcov=1.157296 +rows=677 -rows=101 +cols=0 -cols=138 t=437s [lp 51s row 32s +r 7s col 2s +c 0s]
+  time limit
+DONE s=3.833212 n=7 sym=C1 tau=6.625000 nu=6.625000 conv=False minmass=0.875000 maxcov=1.157296 rows=6654 orbits=3300 atoms_nz=58 packing_support=173 time=448s
+[round 3] tau=6.62500 conv=False scale=1.0500 cert total=6.95629 budget=7 atoms=58
+    boxes = 379324  covered = 118120  vacuous = 0  exempt = 71574 (core 71574, nofam 0)  split = 189630  exact atom checks = 158854  max depth = 34  time = 32.3s
+    PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 1739073/250000 < budget 7  ==>  no packing of 11 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+CERTIFIED: C:\Users\esumm\code\packing\attempts\A82-side-scan\certs\k4_11_958303_250000.json
+
+    certificate: 58 atoms, total 6.956292 < budget 7 (margin 0.043708)
+    cold verify --depth 60: rc=0 (33s)
+      hypotheses: 4 cores, 0 NO-families, budget = 7
+      boxes = 379312  covered = 118114  vacuous = 0  exempt = 71574 (core 71574, nofam 0)  split = 189624  exact atom checks = 158847  max depth = 34  time = 32.5s
+      PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 1739073/250000 < budget 7  ==>  no packing of 11 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    gate drop_heaviest  rc=1 REJECTED (good)  FAIL: 8 witness boxes at depth 44: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    gate halve_weights  rc=1 REJECTED (good)  FAIL: 8 witness boxes at depth 44: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    gate shift_atoms    rc=1 REJECTED (good)  FAIL: 8 witness boxes at depth 44: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    gate overfull       rc=2 REJECTED (good)  FAIL: total mass 7.001000 >= budget = 7: certificate proves nothing
+    published C:\Users\esumm\code\packing\certs\a82\k4_11_958303_250000.json
+    VERIFIED (cold PASS at depth 60, 4/4 corruption gates rejected)

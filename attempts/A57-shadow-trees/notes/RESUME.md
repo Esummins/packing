@@ -222,8 +222,10 @@ Relaunch in this order, and check the resume header of each shard (`grep '=== A5
 
     powershell -File code\launch.ps1  -Name k5_11 -Shard 0/6 -Tag L1 -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000
     powershell -File code\launch.ps1  -Name k5_16 -Shard 0/6 -Tag L1 -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000
-    powershell -File codeun_job.ps1 -Script deepen.py     -JobArgs "--key k5_11_interior_L1 --levels 3 --time_limit 240 --cert_time 240" -Tag deepen_k5_11
-    powershell -File codeun_job.ps1 -Script sweepfails.py -JobArgs "--watch 600 --rounds 1 --jobs 2 --depth 60 --cert_time 300" -Tag sweepfails
+    powershell -File code
+un_job.ps1 -Script deepen.py     -JobArgs "--key k5_11_interior_L1 --levels 3 --time_limit 240 --cert_time 240" -Tag deepen_k5_11
+    powershell -File code
+un_job.ps1 -Script sweepfails.py -JobArgs "--watch 600 --rounds 1 --jobs 2 --depth 60 --cert_time 300" -Tag sweepfails
     Start-Process powershell -ArgumentList '-ExecutionPolicy','Bypass','-File','code\scaleup.ps1' -WindowStyle Hidden
 
 Shards 0/6 are NOT in the scaler's queue (it starts at 1/6), so they must be started by hand; the
@@ -244,3 +246,25 @@ may be A54's copy, the data and the `--out` target A61's.  Attribute by the **`-
 (fallback: the data/node argument; script path only as a flagged last resort).  Getting this wrong
 put 11.5 GB on the wrong campaign in T27, and the error was invisible until a single extra tag was
 added to the match list.
+
+
+## grid side order — BOTTOM-UP (T29)
+
+    side 1  G1  969271/250000 = 3.877084   (running; shard 0/6 hand-launched)
+    side 4  G4  958303/250000 = 3.833212   -> completing it gives s(11) > 3.833212
+    side 3  G3  192389/50000  = 3.847780   -> then s(11) > 3.847780
+    side 2  G2  965601/250000 = 3.862404   -> then s(11) > 3.862404
+
+Run the remaining sides 4, 3, 2 in that order: each completed side is a standalone record lower
+bound, because a side's PASS rules out the slab below it and the standing bound is 3.82.
+Top-down would produce no bound at all until every side landed.  `scaleup.ps1`'s queue is already
+in this order (46 entries, G1 -> G4 -> G3 -> G2), each entry carrying its own `--side`.
+
+To launch a side's shard 0/6 by hand (the queue starts at 1/6 only for G1):
+
+    powershell -File code\launch.ps1 -Name k5_11 -Shard 0/6 -Tag G4 -Side 958303/250000 `
+        -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000
+
+Warm-start folding is shared across sides on purpose (atoms are candidate columns only — a
+completeness choice, never soundness).  Logic kills are NOT shared: they are recomputed per side
+by the C-check, so the free-kill counts differ side to side.

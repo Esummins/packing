@@ -1,0 +1,69 @@
+{
+ "cls": "k4_11",
+ "side": "958303/250000",
+ "side_float": 3.833212,
+ "budget": 7,
+ "lp_tau": 6.6666666667811985,
+ "node": "C:\\Users\\esumm\\code\\packing\\attempts\\A82-side-scan\\results\\nodes\\k4_11_958303_250000.json",
+ "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A82-side-scan\\certs\\k4_11_958303_250000.json",
+ "depth": 60,
+ "verifier": "A54/A53 verify_case.py (frozen, md5 b1b825d918b21c1d2952d96bfce720b6)",
+ "started": "2026-09-02T16:59:43",
+ "eps_geo": 0.0015,
+ "certify_rc": 0,
+ "certify_seconds": 3246.9,
+ "certify": "PASS",
+ "cert_summary": {
+  "atoms": 58,
+  "total": "1739073/250000",
+  "total_float": 6.956292,
+  "budget": 7,
+  "s": "958303/250000",
+  "margin": 0.043707999999999636,
+  "cores": 4
+ },
+ "cold_verify": {
+  "depth": 60,
+  "rc": 0,
+  "result": "PASS",
+  "seconds": 33.0,
+  "lines": [
+   "hypotheses: 4 cores, 0 NO-families, budget = 7",
+   "boxes = 379312  covered = 118114  vacuous = 0  exempt = 71574 (core 71574, nofam 0)  split = 189624  exact atom checks = 158847  max depth = 34  time = 32.5s",
+   "PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 1739073/250000 < budget 7  ==>  no packing of 11 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)"
+  ]
+ },
+ "corruption_gates": [
+  {
+   "mode": "drop_heaviest",
+   "rc": 1,
+   "rejected": true,
+   "seconds": 3.6,
+   "line": "FAIL: 8 witness boxes at depth 44: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]"
+  },
+  {
+   "mode": "halve_weights",
+   "rc": 1,
+   "rejected": true,
+   "seconds": 0.5,
+   "line": "FAIL: 8 witness boxes at depth 44: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]"
+  },
+  {
+   "mode": "shift_atoms",
+   "rc": 1,
+   "rejected": true,
+   "seconds": 0.5,
+   "line": "FAIL: 8 witness boxes at depth 44: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]"
+  },
+  {
+   "mode": "overfull",
+   "rc": 2,
+   "rejected": true,
+   "seconds": 0.5,
+   "line": "FAIL: total mass 7.001000 >= budget = 7: certificate proves nothing"
+  }
+ ],
+ "gates_all_rejected": true,
+ "verdict": "VERIFIED (cold PASS at depth 60, 4/4 corruption gates rejected)",
+ "published": "C:\\Users\\esumm\\code\\packing\\certs\\a82\\k4_11_958303_250000.json"
+}

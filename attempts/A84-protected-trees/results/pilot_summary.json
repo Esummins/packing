@@ -1,0 +1,3971 @@
+{
+ "attempt": "A84-protected-trees",
+ "pilot": "R1-R9 (pilot_design.md)",
+ "generated": "2026-09-02 17:31:51",
+ "engine_corrections": [
+  "parent tolerance = delta_pin + 1e-9 (slack pins)",
+  "mod-90 identification in contain_t / sup_containment / sup_gap",
+  "Lemma PD (pin drift) logic kill -- without it the residue floor equals delta_pin (see ladder_pre_PD)"
+ ],
+ "classes": {
+  "k4_08": {
+   "cls": "k4_08",
+   "class_constants": {
+    "k_s": 4,
+    "N": 7,
+    "delta_pin": 0.02,
+    "pin_core_a": 0.47999997038977227,
+    "rho": "1475739687644739269526605157/73786980692884783104003906250",
+    "rho_f": 0.020000001000000853,
+    "A": "3/2",
+    "images": [
+     "g0",
+     "g4"
+    ],
+    "witness_summary": {
+     "g0": {
+      "m": 7,
+      "min_pairwise_gap_f": 1.0979035454520246e-07,
+      "min_gap_to_pins_f": 0.028184488852312787,
+      "ok": true,
+      "problems": [],
+      "source": "exact transpose of crowdfam trump-sym4"
+     },
+     "g4": {
+      "m": 7,
+      "min_pairwise_gap_f": 1.0979035454520246e-07,
+      "min_gap_to_pins_f": 0.028184482055531118,
+      "ok": true,
+      "problems": [],
+      "source": "crowdfam trump-sym4"
+     }
+    },
+    "lemma_PD": null
+   },
+   "P1": {
+    "verdict": null,
+    "tau": null,
+    "eta": null,
+    "gate_k": null,
+    "per_image": null,
+    "budget": null,
+    "rect": null,
+    "lp_s": null,
+    "cert_s": null,
+    "lemma": null
+   },
+   "census": {
+    "counts": {
+     "cover": 1152,
+     "uncoverable": 0,
+     "contradictory": 316,
+     "parent": 0,
+     "shared": 0,
+     "nocore": 0,
+     "attemptable": 752,
+     "unkillable": 84
+    },
+    "contradictory_by_rule": {
+     "slack-core": 280,
+     "PD": 36
+    },
+    "counts_pre_PD": {
+     "cover": 1152,
+     "uncoverable": 0,
+     "contradictory": 280,
+     "parent": 0,
+     "shared": 0,
+     "nocore": 0,
+     "attemptable": 772,
+     "unkillable": 100
+    },
+    "corner_TR": null
+   },
+   "cover": {
+    "records": 0,
+    "verdicts": {},
+    "kill_rate": null,
+    "kill_rate_denominator": 0,
+    "lp_s": null,
+    "cert_s": null,
+    "eta_histogram": {},
+    "eta_le_minus1_fraction": null,
+    "tau": null
+   },
+   "deepen": {
+    "records": 0,
+    "verdicts": {},
+    "kill_rate": null,
+    "kill_rate_denominator": 0,
+    "lp_s": null,
+    "cert_s": null,
+    "eta_histogram": {},
+    "eta_le_minus1_fraction": null,
+    "tau": null
+   },
+   "resisters": {
+    "cover": [],
+    "deepen_yield": {
+     "free": 0,
+     "residue": 0,
+     "passed": 0,
+     "still_resisting": 0
+    }
+   },
+   "ladder": {
+    "levels": 25,
+    "terminated": true,
+    "residue_boxes": {
+     "min": 53,
+     "mean": 74.9,
+     "max": 118,
+     "final": 59
+    },
+    "contraction_ratio": {
+     "min": 2.39,
+     "median": 3.91,
+     "mean": 5.04,
+     "max": 12.91,
+     "last": 3.59
+    },
+    "landing_level_rbasin": 24,
+    "landing_level_tube_profile": 24,
+    "final": {
+     "max_box_radius": 0.00044450002790515997,
+     "max_containment_t": 0.001219108917382472,
+     "max_containment_c": 0.0011427382566266964,
+     "max_containment_theta": 0.0020102341020368742,
+     "rbasin": 0.0015,
+     "r_c_tube": 0.0016,
+     "r_theta_tube": 0.0021
+    },
+    "kill_queue_total": 1299,
+    "per_level": [
+     {
+      "level": 0,
+      "boxes": 84,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219678,
+      "max_containment_t": 0.6342306923953217,
+      "max_containment_c": 0.30904487888162646,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945706,
+      "kill_queue": 42
+     },
+     {
+      "level": 1,
+      "boxes": 118,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219678,
+      "max_containment_t": 0.6342306923953217,
+      "max_containment_c": 0.30904487888162646,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945706,
+      "kill_queue": 94
+     },
+     {
+      "level": 2,
+      "boxes": 107,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219677,
+      "max_containment_t": 0.6342306923953217,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945705,
+      "kill_queue": 94
+     },
+     {
+      "level": 3,
+      "boxes": 84,
+      "max_box_radius": 0.06217749727338072,
+      "max_gap_to_image": 0.7696369755850171,
+      "max_containment_t": 0.6342306923953217,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.37806295420823,
+      "kill_queue": 50
+     },
+     {
+      "level": 4,
+      "boxes": 97,
+      "max_box_radius": 0.06217749727338072,
+      "max_gap_to_image": 0.7696369755850171,
+      "max_containment_t": 0.6342306923953217,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.37806295420823,
+      "kill_queue": 83
+     },
+     {
+      "level": 5,
+      "boxes": 92,
+      "max_box_radius": 0.05689600357185402,
+      "max_gap_to_image": 0.7345911874340558,
+      "max_containment_t": 0.6342306923953217,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7678752693219677,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.911121015843229,
+      "kill_queue": 81
+     },
+     {
+      "level": 6,
+      "boxes": 62,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.12901977650992671,
+      "max_containment_t": 0.09645846754273102,
+      "max_containment_c": 0.08374671489149654,
+      "max_containment_theta": 0.15445377572056157,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 4.535284322632169,
+      "kill_queue": 39
+     },
+     {
+      "level": 7,
+      "boxes": 76,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.12600577393463455,
+      "max_containment_t": 0.08531852479038121,
+      "max_containment_c": 0.05601028510850292,
+      "max_containment_theta": 0.15445377572056157,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 4.429336544718883,
+      "kill_queue": 54
+     },
+     {
+      "level": 8,
+      "boxes": 77,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.08154392333854864,
+      "max_containment_t": 0.06565837887341652,
+      "max_containment_c": 0.04880746489149668,
+      "max_containment_theta": 0.10528184992423774,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 2.866420072389328,
+      "kill_queue": 71
+     },
+     {
+      "level": 9,
+      "boxes": 56,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.055563087018838046,
+      "max_containment_t": 0.039440963761678105,
+      "max_containment_c": 0.0324970305768415,
+      "max_containment_theta": 0.06867270436011731,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.9062910243716757,
+      "kill_queue": 26
+     },
+     {
+      "level": 10,
+      "boxes": 74,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.055563087018838046,
+      "max_containment_t": 0.039440963761678105,
+      "max_containment_c": 0.0324970305768415,
+      "max_containment_theta": 0.06867270436011731,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.9062910243716757,
+      "kill_queue": 59
+     },
+     {
+      "level": 11,
+      "boxes": 70,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.03396132463609493,
+      "max_containment_t": 0.028306637197091977,
+      "max_containment_c": 0.023762218076841535,
+      "max_containment_theta": 0.04707094197737419,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 2.387607037686233,
+      "kill_queue": 61
+     },
+     {
+      "level": 12,
+      "boxes": 58,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.027406515965455295,
+      "max_containment_t": 0.02048291325770424,
+      "max_containment_c": 0.015027405576841568,
+      "max_containment_theta": 0.03396132463609493,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.8535593707693128,
+      "kill_queue": 30
+     },
+     {
+      "level": 13,
+      "boxes": 71,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.027406515965455295,
+      "max_containment_t": 0.02048291325770424,
+      "max_containment_c": 0.015027405576841568,
+      "max_containment_theta": 0.03396132463609493,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.8535593707693128,
+      "kill_queue": 45
+     },
+     {
+      "level": 14,
+      "boxes": 78,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.02278904366563989,
+      "max_containment_t": 0.016725801757263625,
+      "max_containment_c": 0.010659999326841474,
+      "max_containment_theta": 0.029343852336279518,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.2043085257275874,
+      "kill_queue": 68
+     },
+     {
+      "level": 15,
+      "boxes": 57,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.012678234771759472,
+      "max_containment_t": 0.009230692395321649,
+      "max_containment_c": 0.007968816358503217,
+      "max_containment_theta": 0.01623423499500038,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.565307642248863,
+      "kill_queue": 34
+     },
+     {
+      "level": 16,
+      "boxes": 68,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.012678234771759472,
+      "max_containment_t": 0.009230692395321649,
+      "max_containment_c": 0.007693847631626394,
+      "max_containment_theta": 0.01623423499500038,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.565307642248863,
+      "kill_queue": 43
+     },
+     {
+      "level": 17,
+      "boxes": 70,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.011019494288856214,
+      "max_containment_t": 0.008661373656408455,
+      "max_containment_c": 0.00629259307684138,
+      "max_containment_theta": 0.014296898624176031,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.0988452185228335,
+      "kill_queue": 54
+     },
+     {
+      "level": 18,
+      "boxes": 60,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.007344234436898298,
+      "max_containment_t": 0.005180014146662304,
+      "max_containment_c": 0.004108889951841332,
+      "max_containment_theta": 0.009122234548518689,
+      "inside_A36_basin": 2,
+      "inside_tube_profile": 2,
+      "contraction_ratio": 4.130615284497832,
+      "kill_queue": 23
+     },
+     {
+      "level": 19,
+      "boxes": 79,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.007344234436898298,
+      "max_containment_t": 0.005180014146662304,
+      "max_containment_c": 0.004108889951841332,
+      "max_containment_theta": 0.009122234548518689,
+      "inside_A36_basin": 5,
+      "inside_tube_profile": 5,
+      "contraction_ratio": 4.130615284497832,
+      "kill_queue": 54
+     },
+     {
+      "level": 20,
+      "boxes": 75,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.006103387785876491,
+      "max_containment_t": 0.004697396602326542,
+      "max_containment_c": 0.003017038389341309,
+      "max_containment_theta": 0.007742089953536399,
+      "inside_A36_basin": 24,
+      "inside_tube_profile": 24,
+      "contraction_ratio": 3.432726323236232,
+      "kill_queue": 63
+     },
+     {
+      "level": 21,
+      "boxes": 53,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.0036453345343866912,
+      "max_containment_t": 0.0027109310646255547,
+      "max_containment_c": 0.002234589819126498,
+      "max_containment_theta": 0.004464685618216583,
+      "inside_A36_basin": 36,
+      "inside_tube_profile": 36,
+      "contraction_ratio": 4.100488532662957,
+      "kill_queue": 28
+     },
+     {
+      "level": 22,
+      "boxes": 68,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.0036453345343866912,
+      "max_containment_t": 0.0027109310646255547,
+      "max_containment_c": 0.0019251868268412853,
+      "max_containment_theta": 0.004464685618216583,
+      "inside_A36_basin": 57,
+      "inside_tube_profile": 57,
+      "contraction_ratio": 4.100488532662957,
+      "kill_queue": 41
+     },
+     {
+      "level": 23,
+      "boxes": 79,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.0028992341578470697,
+      "max_containment_t": 0.002149017135584297,
+      "max_containment_c": 0.0013792610455911625,
+      "max_containment_theta": 0.0037882342136572656,
+      "inside_A36_basin": 72,
+      "inside_tube_profile": 72,
+      "contraction_ratio": 3.261230568995445,
+      "kill_queue": 62
+     },
+     {
+      "level": 24,
+      "boxes": 59,
+      "max_box_radius": 0.00044450002790515997,
+      "max_gap_to_image": 0.0015969568248117131,
+      "max_containment_t": 0.001219108917382472,
+      "max_containment_c": 0.0011427382566266964,
+      "max_containment_theta": 0.0020102341020368742,
+      "inside_A36_basin": 59,
+      "inside_tube_profile": 59,
+      "contraction_ratio": 3.59270354230989,
+      "kill_queue": null
+     }
+    ]
+   },
+   "ladder_pre_PD": null,
+   "ladder_kills": {
+    "records": 0,
+    "verdicts": {},
+    "kill_rate": null,
+    "kill_rate_denominator": 0,
+    "lp_s": null,
+    "cert_s": null,
+    "eta_histogram": {},
+    "eta_le_minus1_fraction": null,
+    "tau": null
+   },
+   "r_kill": {
+    "passes": 0,
+    "non_passes": 0,
+    "r_kill": null,
+    "largest_non_pass_gap": null,
+    "by_level": {}
+   },
+   "canary": {
+    "images_in_zone": {
+     "g0_sq2": false,
+     "g0_sq4": false,
+     "g0_sq6": false,
+     "g0_sq7": true,
+     "g0_sq8": true,
+     "g0_sq9": true,
+     "g0_sq10": false,
+     "g4_sq2": false,
+     "g4_sq4": false,
+     "g4_sq6": false,
+     "g4_sq7": true,
+     "g4_sq8": true,
+     "g4_sq9": true,
+     "g4_sq10": false
+    },
+    "level0_boxes": {
+     "g0_sq2": [],
+     "g0_sq4": [],
+     "g0_sq6": [],
+     "g0_sq7": [
+      [
+       434,
+       "unkillable"
+      ]
+     ],
+     "g0_sq8": [
+      [
+       874,
+       "unkillable"
+      ]
+     ],
+     "g0_sq9": [
+      [
+       946,
+       "unkillable"
+      ]
+     ],
+     "g0_sq10": [],
+     "g4_sq2": [],
+     "g4_sq4": [],
+     "g4_sq6": [],
+     "g4_sq7": [
+      [
+       611,
+       "unkillable"
+      ]
+     ],
+     "g4_sq8": [
+      [
+       171,
+       "unkillable"
+      ]
+     ],
+     "g4_sq9": [
+      [
+       1035,
+       "unkillable"
+      ]
+     ],
+     "g4_sq10": []
+    },
+    "census_canary_violations": [],
+    "census_PD_canary_violations": [],
+    "ladder_canary_bugs": [],
+    "ladder_PD_canary_violations": [],
+    "chain": {
+     "g0_sq7": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11868596489149685
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11868596489149685
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11576930760467818
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05437781222382454
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05437781222382454
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05437781222382454
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02953087888162642
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.022883875200592152
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.022883875200592152
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.01386821489149681
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.01386821489149681
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00923069239532176
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.006908560301650879
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.006908560301650879
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.006908560301650879
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0036014101085031225
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0033264413816265215
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0028894689468988433
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0014177069835030753
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0014177069835030753
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0011400083309303644
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010409648683733508
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320500586
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320500586
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.000495039087123228
+      }
+     ],
+     "g0_sq8": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046783
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046783
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046783
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06671267243745849
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06671267243745849
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05437781222382465
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0324970305768415
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.03177342243745862
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.022883875200592263
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.015027405576841568
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.014303797437458687
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.009230692395321649
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00690856030165099
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00690856030165099
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00690856030165099
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0031658275625412458
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0028894689468989543
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0028894689468989543
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0019251868268412853
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0019251868268412853
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0011400083309302533
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0009821244375411986
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0009821244375411986
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320501696
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0004361986562910758
+      }
+     ],
+     "g0_sq9": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.12626410309923575
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.12626410309923575
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046783
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06106103792547124
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05638560309923557
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05437781222382465
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02612178792547093
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.022883875200592263
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.022883875200592263
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.013492896900764162
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.013492896900764162
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.009230692395321649
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.008652162925470996
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00690856030165099
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00690856030165099
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004284756675471346
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003976728099235771
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0028894689468989543
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.002101053550471299
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.001793024974235724
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0011400083309302533
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010092019879714975
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320501696
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320501696
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0004632762067213747
+      }
+     ],
+     "g4_sq7": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11868596489149685
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11022612111837349
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443502
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.04880746489149668
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.04880746489149668
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.03562385033556503
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02953087888162642
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02953087888162642
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197092088
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.01386821489149681
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012613527439257144
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012613527439257144
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.005408371118373445
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.005408371118373445
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004697396602326653
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0036014101085031225
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0033264413816265215
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475452
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0014177069835030753
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012710413379780627
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012710413379780627
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010409648683733508
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010409648683733508
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007214575999640593
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.000495039087123228
+      }
+     ],
+     "g4_sq8": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.10725996942315863
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443491
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443491
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06671267243745849
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06671267243745849
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.035623850335565144
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0324970305768415
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.03177342243745862
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197091977
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.015027405576841568
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.014303797437458687
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012613527439257033
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00629259307684138
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00629259307684138
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004697396602326542
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475563
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475563
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475563
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0019251868268412853
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012710413379781738
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012710413379781738
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0009821244375411986
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0009821244375411986
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007214575999639483
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0004361986562910758
+      }
+     ],
+     "g4_sq9": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.12626410309923575
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443491
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443491
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06106103792547124
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05638560309923557
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.035623850335565144
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197091977
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197091977
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197091977
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.013492896900764162
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012613527439257033
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012613527439257033
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.008652162925470996
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.008652162925470996
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004697396602326542
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004284756675471346
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003976728099235771
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475563
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.002101053550471299
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.001793024974235724
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012710413379781738
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010092019879714975
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007214575999639483
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007214575999639483
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0004632762067213747
+      }
+     ]
+    },
+    "chain_unbroken": true,
+    "certified_image_nodes": [],
+    "canary_refusals": 0,
+    "ASSERT_no_image_node_certified": true
+   },
+   "waits": [],
+   "defers": [],
+   "total_lp_cpu_s": 0
+  },
+  "k3_05": {
+   "cls": "k3_05",
+   "class_constants": {
+    "k_s": 3,
+    "N": 8,
+    "delta_pin": 0.02,
+    "pin_core_a": 0.47999997038977227,
+    "rho": "1475739687644739269526605157/73786980692884783104003906250",
+    "rho_f": 0.020000001000000853,
+    "A": "1/2",
+    "images": [
+     "g1",
+     "g5"
+    ],
+    "witness_summary": {
+     "g1": {
+      "m": 8,
+      "min_pairwise_gap_f": 9.72863329003578e-08,
+      "min_gap_to_pins_f": 0.020000112000000854,
+      "ok": true,
+      "problems": [],
+      "source": "crowdfam trump-sym1"
+     },
+     "g5": {
+      "m": 8,
+      "min_pairwise_gap_f": 9.72863329003578e-08,
+      "min_gap_to_pins_f": 0.020000112000000854,
+      "ok": true,
+      "problems": [],
+      "source": "exact transpose of crowdfam trump-sym1"
+     }
+    },
+    "lemma_PD": null
+   },
+   "P1": {
+    "verdict": null,
+    "tau": null,
+    "eta": null,
+    "gate_k": null,
+    "per_image": null,
+    "budget": null,
+    "rect": null,
+    "lp_s": null,
+    "cert_s": null,
+    "lemma": null
+   },
+   "census": {
+    "counts": {
+     "cover": 1152,
+     "uncoverable": 0,
+     "contradictory": 84,
+     "parent": 0,
+     "shared": 0,
+     "nocore": 0,
+     "attemptable": 984,
+     "unkillable": 84
+    },
+    "contradictory_by_rule": {
+     "slack-core": 54,
+     "PD": 30
+    },
+    "counts_pre_PD": {
+     "cover": 1152,
+     "uncoverable": 0,
+     "contradictory": 54,
+     "parent": 0,
+     "shared": 0,
+     "nocore": 0,
+     "attemptable": 1002,
+     "unkillable": 96
+    },
+    "corner_TR": {
+     "cover": 173,
+     "uncoverable": 0,
+     "contradictory": 0,
+     "parent": 0,
+     "shared": 0,
+     "nocore": 0,
+     "attemptable": 171,
+     "unkillable": 2
+    }
+   },
+   "cover": {
+    "records": 0,
+    "verdicts": {},
+    "kill_rate": null,
+    "kill_rate_denominator": 0,
+    "lp_s": null,
+    "cert_s": null,
+    "eta_histogram": {},
+    "eta_le_minus1_fraction": null,
+    "tau": null
+   },
+   "deepen": {
+    "records": 0,
+    "verdicts": {},
+    "kill_rate": null,
+    "kill_rate_denominator": 0,
+    "lp_s": null,
+    "cert_s": null,
+    "eta_histogram": {},
+    "eta_le_minus1_fraction": null,
+    "tau": null
+   },
+   "resisters": {
+    "cover": [],
+    "deepen_yield": {
+     "free": 0,
+     "residue": 0,
+     "passed": 0,
+     "still_resisting": 0
+    }
+   },
+   "ladder": {
+    "levels": 25,
+    "terminated": true,
+    "residue_boxes": {
+     "min": 53,
+     "mean": 74.8,
+     "max": 117,
+     "final": 59
+    },
+    "contraction_ratio": {
+     "min": 2.39,
+     "median": 3.85,
+     "mean": 4.97,
+     "max": 12.91,
+     "last": 3.59
+    },
+    "landing_level_rbasin": 24,
+    "landing_level_tube_profile": 24,
+    "final": {
+     "max_box_radius": 0.00044450002790515997,
+     "max_containment_t": 0.001219108917382472,
+     "max_containment_c": 0.0011427382566266964,
+     "max_containment_theta": 0.00201023410203675,
+     "rbasin": 0.0015,
+     "r_c_tube": 0.0016,
+     "r_theta_tube": 0.0021
+    },
+    "kill_queue_total": 1542,
+    "per_level": [
+     {
+      "level": 0,
+      "boxes": 84,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219679,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.3090448788816267,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945707,
+      "kill_queue": 47
+     },
+     {
+      "level": 1,
+      "boxes": 117,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219679,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.3090448788816267,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945707,
+      "kill_queue": 116
+     },
+     {
+      "level": 2,
+      "boxes": 107,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219676,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945704,
+      "kill_queue": 120
+     },
+     {
+      "level": 3,
+      "boxes": 84,
+      "max_box_radius": 0.06217749727338072,
+      "max_gap_to_image": 0.7696369755850172,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.378062954208232,
+      "kill_queue": 64
+     },
+     {
+      "level": 4,
+      "boxes": 98,
+      "max_box_radius": 0.06217749727338072,
+      "max_gap_to_image": 0.7696369755850172,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.378062954208232,
+      "kill_queue": 92
+     },
+     {
+      "level": 5,
+      "boxes": 92,
+      "max_box_radius": 0.05689600357185402,
+      "max_gap_to_image": 0.7345911874340556,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7678752693219676,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.911121015843223,
+      "kill_queue": 105
+     },
+     {
+      "level": 6,
+      "boxes": 62,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.12901977650992671,
+      "max_containment_t": 0.09645846754273102,
+      "max_containment_c": 0.08374671489149654,
+      "max_containment_theta": 0.15445377572056143,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 4.535284322632169,
+      "kill_queue": 42
+     },
+     {
+      "level": 7,
+      "boxes": 74,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.0948919390426757,
+      "max_containment_t": 0.07030020486266447,
+      "max_containment_c": 0.06627708989149661,
+      "max_containment_theta": 0.12111117372523424,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.335627569090563,
+      "kill_queue": 58
+     },
+     {
+      "level": 8,
+      "boxes": 77,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.08154392333854864,
+      "max_containment_t": 0.06565837887341652,
+      "max_containment_c": 0.04880746489149668,
+      "max_containment_theta": 0.10528184992423774,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 2.866420072389328,
+      "kill_queue": 85
+     },
+     {
+      "level": 9,
+      "boxes": 56,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.05556308701883792,
+      "max_containment_t": 0.039440963761677994,
+      "max_containment_c": 0.0324970305768415,
+      "max_containment_theta": 0.06867270436011719,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.9062910243716673,
+      "kill_queue": 30
+     },
+     {
+      "level": 10,
+      "boxes": 72,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.0446963794115804,
+      "max_containment_t": 0.035623850335565144,
+      "max_containment_c": 0.031337839891496744,
+      "max_containment_theta": 0.05780599675285967,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.1423211899326673,
+      "kill_queue": 64
+     },
+     {
+      "level": 11,
+      "boxes": 70,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.03396132463609493,
+      "max_containment_t": 0.028306637197091977,
+      "max_containment_c": 0.023762218076841535,
+      "max_containment_theta": 0.04707094197737419,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 2.387607037686233,
+      "kill_queue": 62
+     },
+     {
+      "level": 12,
+      "boxes": 58,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.027406515965455295,
+      "max_containment_t": 0.02048291325770424,
+      "max_containment_c": 0.015027405576841568,
+      "max_containment_theta": 0.03396132463609493,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.8535593707693128,
+      "kill_queue": 33
+     },
+     {
+      "level": 13,
+      "boxes": 74,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.027406515965455295,
+      "max_containment_t": 0.02048291325770424,
+      "max_containment_c": 0.01386821489149681,
+      "max_containment_theta": 0.03396132463609493,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.8535593707693128,
+      "kill_queue": 60
+     },
+     {
+      "level": 14,
+      "boxes": 78,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.022789043665639764,
+      "max_containment_t": 0.016725801757263514,
+      "max_containment_c": 0.010659999326841474,
+      "max_containment_theta": 0.029343852336279397,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.2043085257275696,
+      "kill_queue": 79
+     },
+     {
+      "level": 15,
+      "boxes": 57,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.01267823477175935,
+      "max_containment_t": 0.009230692395321538,
+      "max_containment_c": 0.007968816358503217,
+      "max_containment_theta": 0.016234234995000256,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.5653076422488286,
+      "kill_queue": 43
+     },
+     {
+      "level": 16,
+      "boxes": 66,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.01267823477175935,
+      "max_containment_t": 0.009230692395321538,
+      "max_containment_c": 0.007693847631626838,
+      "max_containment_theta": 0.016234234995000256,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.5653076422488286,
+      "kill_queue": 51
+     },
+     {
+      "level": 17,
+      "boxes": 70,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.011019494288856214,
+      "max_containment_t": 0.008661373656408455,
+      "max_containment_c": 0.00629259307684138,
+      "max_containment_theta": 0.014296898624176031,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.0988452185228335,
+      "kill_queue": 62
+     },
+     {
+      "level": 18,
+      "boxes": 60,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.007344234436898174,
+      "max_containment_t": 0.005180014146662193,
+      "max_containment_c": 0.004108889951841332,
+      "max_containment_theta": 0.009122234548518566,
+      "inside_A36_basin": 2,
+      "inside_tube_profile": 2,
+      "contraction_ratio": 4.130615284497762,
+      "kill_queue": 36
+     },
+     {
+      "level": 19,
+      "boxes": 76,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.007344234436898174,
+      "max_containment_t": 0.005180014146662193,
+      "max_containment_c": 0.004108889951841332,
+      "max_containment_theta": 0.009122234548518566,
+      "inside_A36_basin": 5,
+      "inside_tube_profile": 5,
+      "contraction_ratio": 4.130615284497762,
+      "kill_queue": 65
+     },
+     {
+      "level": 20,
+      "boxes": 75,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.006103387785876491,
+      "max_containment_t": 0.004697396602326542,
+      "max_containment_c": 0.003017038389341309,
+      "max_containment_theta": 0.007742089953536399,
+      "inside_A36_basin": 24,
+      "inside_tube_profile": 24,
+      "contraction_ratio": 3.432726323236232,
+      "kill_queue": 75
+     },
+     {
+      "level": 21,
+      "boxes": 53,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.0036453345343866912,
+      "max_containment_t": 0.0027109310646255547,
+      "max_containment_c": 0.002234589819126498,
+      "max_containment_theta": 0.004464685618216583,
+      "inside_A36_basin": 36,
+      "inside_tube_profile": 36,
+      "contraction_ratio": 4.100488532662957,
+      "kill_queue": 24
+     },
+     {
+      "level": 22,
+      "boxes": 72,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.0036453345343866912,
+      "max_containment_t": 0.0027109310646255547,
+      "max_containment_c": 0.0019251868268412853,
+      "max_containment_theta": 0.004464685618216583,
+      "inside_A36_basin": 58,
+      "inside_tube_profile": 60,
+      "contraction_ratio": 4.100488532662957,
+      "kill_queue": 51
+     },
+     {
+      "level": 23,
+      "boxes": 79,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.0028992341578469457,
+      "max_containment_t": 0.002149017135584186,
+      "max_containment_c": 0.0013792610455911625,
+      "max_containment_theta": 0.0037882342136571416,
+      "inside_A36_basin": 72,
+      "inside_tube_profile": 72,
+      "contraction_ratio": 3.2612305689953054,
+      "kill_queue": 78
+     },
+     {
+      "level": 24,
+      "boxes": 59,
+      "max_box_radius": 0.00044450002790515997,
+      "max_gap_to_image": 0.0015969568248117131,
+      "max_containment_t": 0.001219108917382472,
+      "max_containment_c": 0.0011427382566266964,
+      "max_containment_theta": 0.00201023410203675,
+      "inside_A36_basin": 59,
+      "inside_tube_profile": 59,
+      "contraction_ratio": 3.59270354230989,
+      "kill_queue": null
+     }
+    ]
+   },
+   "ladder_pre_PD": {
+    "levels": 29,
+    "terminated": false,
+    "residue_boxes": {
+     "min": 80,
+     "mean": 678.6,
+     "max": 3862,
+     "final": 3862
+    },
+    "contraction_ratio": {
+     "min": 2.87,
+     "median": 7.3,
+     "mean": 20.16,
+     "max": 98.93,
+     "last": 98.63
+    },
+    "landing_level_rbasin": null,
+    "landing_level_tube_profile": null,
+    "final": {
+     "max_box_radius": 0.00022225001395257999,
+     "max_containment_t": 0.02198795928777897,
+     "max_containment_c": 0.02198795928777897,
+     "max_containment_theta": 0.0015457661212041575,
+     "rbasin": 0.0015,
+     "r_c_tube": 0.0016,
+     "r_theta_tube": 0.0021
+    },
+    "kill_queue_total": 11646,
+    "per_level": [
+     {
+      "level": 0,
+      "boxes": 96,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219679,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.3090448788816267,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945707,
+      "kill_queue": 48
+     },
+     {
+      "level": 1,
+      "boxes": 131,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219679,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.3090448788816267,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945707,
+      "kill_queue": 123
+     },
+     {
+      "level": 2,
+      "boxes": 119,
+      "max_box_radius": 0.12435499454676144,
+      "max_gap_to_image": 0.7678752693219676,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 6.174864725945704,
+      "kill_queue": 127
+     },
+     {
+      "level": 3,
+      "boxes": 94,
+      "max_box_radius": 0.06217749727338072,
+      "max_gap_to_image": 0.7696369755850172,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.378062954208232,
+      "kill_queue": 68
+     },
+     {
+      "level": 4,
+      "boxes": 113,
+      "max_box_radius": 0.06217749727338072,
+      "max_gap_to_image": 0.7696369755850172,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7853981633974483,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.378062954208232,
+      "kill_queue": 104
+     },
+     {
+      "level": 5,
+      "boxes": 110,
+      "max_box_radius": 0.05689600357185402,
+      "max_gap_to_image": 0.7345911874340556,
+      "max_containment_t": 0.6342306923953218,
+      "max_containment_c": 0.2391663788816265,
+      "max_containment_theta": 0.7678752693219676,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 12.911121015843223,
+      "kill_queue": 120
+     },
+     {
+      "level": 6,
+      "boxes": 80,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.12901977650992685,
+      "max_containment_t": 0.09645846754273113,
+      "max_containment_c": 0.08374671489149654,
+      "max_containment_theta": 0.15445377572056182,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 4.535284322632173,
+      "kill_queue": 51
+     },
+     {
+      "level": 7,
+      "boxes": 103,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.1260057739346348,
+      "max_containment_t": 0.08531852479038143,
+      "max_containment_c": 0.0730443275625412,
+      "max_containment_theta": 0.15445377572056182,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 4.4293365447188915,
+      "kill_queue": 77
+     },
+     {
+      "level": 8,
+      "boxes": 115,
+      "max_box_radius": 0.02844800178592701,
+      "max_gap_to_image": 0.08154392333854876,
+      "max_containment_t": 0.06743628057684137,
+      "max_containment_c": 0.06743628057684137,
+      "max_containment_theta": 0.10528184992423786,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 2.8664200723893325,
+      "kill_queue": 117
+     },
+     {
+      "level": 9,
+      "boxes": 94,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.06967496004570416,
+      "max_containment_t": 0.05054933030733888,
+      "max_containment_c": 0.049966655576841434,
+      "max_containment_theta": 0.08154392333854876,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 4.898408019657238,
+      "kill_queue": 52
+     },
+     {
+      "level": 10,
+      "boxes": 131,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.06967496004570416,
+      "max_containment_t": 0.05054933030733888,
+      "max_containment_c": 0.049966655576841434,
+      "max_containment_theta": 0.08154392333854876,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 4.898408019657238,
+      "kill_queue": 100
+     },
+     {
+      "level": 11,
+      "boxes": 147,
+      "max_box_radius": 0.014224000892963506,
+      "max_gap_to_image": 0.054885769469817276,
+      "max_containment_t": 0.04359141292547086,
+      "max_containment_c": 0.04359141292547086,
+      "max_containment_theta": 0.06910977036278078,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 3.858673089437783,
+      "kill_queue": 135
+     },
+     {
+      "level": 12,
+      "boxes": 133,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.038141570740940774,
+      "max_containment_t": 0.034856600425470896,
+      "max_containment_c": 0.034856600425470896,
+      "max_containment_theta": 0.0446963794115804,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 5.362987675262182,
+      "kill_queue": 71
+     },
+     {
+      "level": 13,
+      "boxes": 190,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.038141570740940774,
+      "max_containment_t": 0.034856600425470896,
+      "max_containment_c": 0.034856600425470896,
+      "max_containment_theta": 0.0446963794115804,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 5.362987675262182,
+      "kill_queue": 139
+     },
+     {
+      "level": 14,
+      "boxes": 225,
+      "max_box_radius": 0.007112000446481753,
+      "max_gap_to_image": 0.033549768130372075,
+      "max_containment_t": 0.0324970305768415,
+      "max_containment_c": 0.0324970305768415,
+      "max_containment_theta": 0.04066176857685377,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 4.717346178875574,
+      "kill_queue": 218
+     },
+     {
+      "level": 15,
+      "boxes": 210,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.02594592120184136,
+      "max_containment_t": 0.028129624326841407,
+      "max_containment_c": 0.028129624326841407,
+      "max_containment_theta": 0.02643776768389026,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 7.296377832674732,
+      "kill_queue": 119
+     },
+     {
+      "level": 16,
+      "boxes": 296,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.02594592120184136,
+      "max_containment_t": 0.028129624326841407,
+      "max_containment_c": 0.028129624326841407,
+      "max_containment_theta": 0.019325767237408448,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 7.296377832674732,
+      "kill_queue": 209
+     },
+     {
+      "level": 17,
+      "boxes": 371,
+      "max_box_radius": 0.0035560002232409077,
+      "max_gap_to_image": 0.025029936362970906,
+      "max_containment_t": 0.02612178792547093,
+      "max_containment_c": 0.02612178792547093,
+      "max_containment_theta": 0.019325767237408448,
+      "inside_A36_basin": 0,
+      "inside_tube_profile": 0,
+      "contraction_ratio": 7.03878931148065,
+      "kill_queue": 340
+     },
+     {
+      "level": 18,
+      "boxes": 378,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.02485406963934156,
+      "max_containment_t": 0.02594592120184136,
+      "max_containment_c": 0.02594592120184136,
+      "max_containment_theta": 0.012213766790926756,
+      "inside_A36_basin": 2,
+      "inside_tube_profile": 2,
+      "contraction_ratio": 13.97866596121289,
+      "kill_queue": 195
+     },
+     {
+      "level": 19,
+      "boxes": 557,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.02485406963934156,
+      "max_containment_t": 0.02594592120184136,
+      "max_containment_c": 0.02594592120184136,
+      "max_containment_theta": 0.012213766790926756,
+      "inside_A36_basin": 5,
+      "inside_tube_profile": 5,
+      "contraction_ratio": 13.97866596121289,
+      "kill_queue": 409
+     },
+     {
+      "level": 20,
+      "boxes": 692,
+      "max_box_radius": 0.0017780001116204538,
+      "max_gap_to_image": 0.02339215901922076,
+      "max_containment_t": 0.023938084800470882,
+      "max_containment_c": 0.023938084800470882,
+      "max_containment_theta": 0.008657766567685849,
+      "inside_A36_basin": 24,
+      "inside_tube_profile": 24,
+      "contraction_ratio": 13.156444066756189,
+      "kill_queue": 684
+     },
+     {
+      "level": 21,
+      "boxes": 671,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.023216292295591634,
+      "max_containment_t": 0.023762218076841535,
+      "max_containment_c": 0.023762218076841535,
+      "max_containment_theta": 0.00536752738774274,
+      "inside_A36_basin": 36,
+      "inside_tube_profile": 36,
+      "contraction_ratio": 26.115062810014898,
+      "kill_queue": 334
+     },
+     {
+      "level": 22,
+      "boxes": 1004,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.023216292295591634,
+      "max_containment_t": 0.023762218076841535,
+      "max_containment_c": 0.023762218076841535,
+      "max_containment_theta": 0.00536752738774274,
+      "inside_A36_basin": 61,
+      "inside_tube_profile": 63,
+      "contraction_ratio": 26.115062810014898,
+      "kill_queue": 689
+     },
+     {
+      "level": 23,
+      "boxes": 1304,
+      "max_box_radius": 0.0008890000558102579,
+      "max_gap_to_image": 0.022573270347345797,
+      "max_containment_t": 0.02284623323797086,
+      "max_containment_c": 0.02284623323797086,
+      "max_containment_theta": 0.005101766344445065,
+      "inside_A36_basin": 88,
+      "inside_tube_profile": 101,
+      "contraction_ratio": 25.391753577306503,
+      "kill_queue": 1247
+     },
+     {
+      "level": 24,
+      "boxes": 1334,
+      "max_box_radius": 0.00044450002790515997,
+      "max_gap_to_image": 0.022397403623716672,
+      "max_containment_t": 0.02267036651434151,
+      "max_containment_c": 0.02267036651434151,
+      "max_containment_theta": 0.0033237662328246733,
+      "inside_A36_basin": 95,
+      "inside_tube_profile": 110,
+      "contraction_ratio": 50.38785650761637,
+      "kill_queue": 682
+     },
+     {
+      "level": 25,
+      "boxes": 1979,
+      "max_box_radius": 0.00044450002790515997,
+      "max_gap_to_image": 0.02216382601140854,
+      "max_containment_t": 0.022300307456720958,
+      "max_containment_c": 0.022300307456720958,
+      "max_containment_theta": 0.0029094741362529404,
+      "inside_A36_basin": 137,
+      "inside_tube_profile": 154,
+      "contraction_ratio": 49.862372598405074,
+      "kill_queue": 1420
+     },
+     {
+      "level": 26,
+      "boxes": 2523,
+      "max_box_radius": 0.00044450002790515997,
+      "max_gap_to_image": 0.02198795928777897,
+      "max_containment_t": 0.02212444073309161,
+      "max_containment_c": 0.02212444073309161,
+      "max_containment_theta": 0.0024347661770143534,
+      "inside_A36_basin": 180,
+      "inside_tube_profile": 191,
+      "contraction_ratio": 49.466721951410975,
+      "kill_queue": 2401
+     },
+     {
+      "level": 27,
+      "boxes": 2618,
+      "max_box_radius": 0.00022225001395257999,
+      "max_gap_to_image": 0.02198795928777897,
+      "max_containment_t": 0.02212444073309161,
+      "max_containment_c": 0.02212444073309161,
+      "max_containment_theta": 0.0016804475105081026,
+      "inside_A36_basin": 183,
+      "inside_tube_profile": 198,
+      "contraction_ratio": 98.93344390282195,
+      "kill_queue": 1367
+     },
+     {
+      "level": 28,
+      "boxes": 3862,
+      "max_box_radius": 0.00022225001395257999,
+      "max_gap_to_image": 0.02191971856512276,
+      "max_containment_t": 0.02198795928777897,
+      "max_containment_c": 0.02198795928777897,
+      "max_containment_theta": 0.0015457661212041575,
+      "inside_A36_basin": 271,
+      "inside_tube_profile": 293,
+      "contraction_ratio": 98.62639905075382,
+      "kill_queue": null
+     }
+    ]
+   },
+   "ladder_kills": {
+    "records": 0,
+    "verdicts": {},
+    "kill_rate": null,
+    "kill_rate_denominator": 0,
+    "lp_s": null,
+    "cert_s": null,
+    "eta_histogram": {},
+    "eta_le_minus1_fraction": null,
+    "tau": null
+   },
+   "r_kill": {
+    "passes": 0,
+    "non_passes": 0,
+    "r_kill": null,
+    "largest_non_pass_gap": null,
+    "by_level": {}
+   },
+   "canary": {
+    "images_in_zone": {
+     "g1_sq1": false,
+     "g1_sq3": false,
+     "g1_sq4": false,
+     "g1_sq6": false,
+     "g1_sq7": true,
+     "g1_sq8": true,
+     "g1_sq9": true,
+     "g1_sq10": false,
+     "g5_sq1": false,
+     "g5_sq3": false,
+     "g5_sq4": false,
+     "g5_sq6": false,
+     "g5_sq7": true,
+     "g5_sq8": true,
+     "g5_sq9": true,
+     "g5_sq10": false
+    },
+    "level0_boxes": {
+     "g1_sq1": [],
+     "g1_sq3": [],
+     "g1_sq4": [],
+     "g1_sq6": [],
+     "g1_sq7": [
+      [
+       723,
+       "unkillable"
+      ]
+     ],
+     "g1_sq8": [
+      [
+       203,
+       "unkillable"
+      ]
+     ],
+     "g1_sq9": [
+      [
+       275,
+       "unkillable"
+      ]
+     ],
+     "g1_sq10": [],
+     "g5_sq1": [],
+     "g5_sq3": [],
+     "g5_sq4": [],
+     "g5_sq6": [],
+     "g5_sq7": [
+      [
+       634,
+       "unkillable"
+      ]
+     ],
+     "g5_sq8": [
+      [
+       114,
+       "unkillable"
+      ]
+     ],
+     "g5_sq9": [
+      [
+       978,
+       "unkillable"
+      ]
+     ],
+     "g5_sq10": []
+    },
+    "census_canary_violations": [],
+    "census_PD_canary_violations": [],
+    "ladder_canary_bugs": [],
+    "ladder_PD_canary_violations": [],
+    "chain": {
+     "g1_sq7": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11868596489149685
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11868596489149685
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443502
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.04880746489149668
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.04880746489149668
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.03562385033556503
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02953087888162642
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197092088
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197092088
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.01386821489149681
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.01386821489149681
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012613527439257144
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.005408371118373445
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.005133402391496844
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004697396602326653
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0036014101085031225
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0036014101085031225
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475452
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0014177069835030753
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0014177069835030753
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012710413379780627
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010409648683733508
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007659961414969718
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007214575999640593
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.000495039087123228
+      }
+     ],
+     "g1_sq8": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.10725996942315863
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443491
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443491
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06671267243745871
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06671267243745871
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.035623850335565144
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0324970305768415
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.03177342243745862
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197091977
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.015027405576841568
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.014303797437458687
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012613527439257033
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00629259307684138
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.00629259307684138
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004697396602326542
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475563
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475563
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475563
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0019251868268412853
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0019251868268412853
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012710413379781738
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0009821244375411986
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008333352643412617
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007214575999639483
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0004361986562910758
+      }
+     ],
+     "g1_sq9": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.12626410309923575
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.12626410309923575
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.08937614966443491
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06106103792547102
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05638560309923557
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.035623850335565144
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197091977
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197091977
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.028306637197091977
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.013492896900764162
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.013492896900764162
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012613527439257033
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.008652162925470996
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004758084400763973
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004697396602326542
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004284756675470902
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003976728099235771
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003266583381475563
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.002101053550470855
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.001793024974235724
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012710413379781738
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010092019879710534
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007214575999639483
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0007214575999639483
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0004632762067209306
+      }
+     ],
+     "g5_sq7": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11868596489149685
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11576930760467813
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.11576930760467813
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.054377812223824484
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.054377812223824484
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.054377812223824484
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02953087888162642
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02953087888162642
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.022883875200592096
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.01386821489149681
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.012061253881626488
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.009230692395321816
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0069085603016508235
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0069085603016508235
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0069085603016508235
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0036014101085031225
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0033264413816267435
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0028894689468987877
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0014177069835030753
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0011427382566266964
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0011400083309304199
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010409648683733508
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320500031
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320500031
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.000495039087123228
+      }
+     ],
+     "g5_sq8": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046784
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046784
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046784
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06671267243745871
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06671267243745871
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05437781222382476
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0324970305768415
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.03177342243745862
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.022883875200592374
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.015027405576841568
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.014303797437458687
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.009230692395321538
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.006908560301651101
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.006908560301651101
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.006908560301651101
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0031658275625412458
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0028894689468990653
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0028894689468990653
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0019251868268412853
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0012015786874588485
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0011400083309301423
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0009821244375411986
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0009821244375411986
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320502806
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0004361986562910758
+      }
+     ],
+     "g5_sq9": [
+      {
+       "level": 0,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.12626410309923575
+      },
+      {
+       "level": 1,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046784
+      },
+      {
+       "level": 2,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.1157693076046784
+      },
+      {
+       "level": 3,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.06106103792547102
+      },
+      {
+       "level": 4,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05638560309923557
+      },
+      {
+       "level": 5,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.05437781222382476
+      },
+      {
+       "level": 6,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02612178792547093
+      },
+      {
+       "level": 7,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.02612178792547093
+      },
+      {
+       "level": 8,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.022883875200592374
+      },
+      {
+       "level": 9,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.013492896900764162
+      },
+      {
+       "level": 10,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.009230692395321538
+      },
+      {
+       "level": 11,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.009230692395321538
+      },
+      {
+       "level": 12,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.008652162925470996
+      },
+      {
+       "level": 13,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.006908560301651101
+      },
+      {
+       "level": 14,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.006908560301651101
+      },
+      {
+       "level": 15,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.004284756675470902
+      },
+      {
+       "level": 16,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.003976728099235771
+      },
+      {
+       "level": 17,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0028894689468990653
+      },
+      {
+       "level": 18,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.002101053550470855
+      },
+      {
+       "level": 19,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.001793024974235724
+      },
+      {
+       "level": 20,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0011400083309301423
+      },
+      {
+       "level": 21,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0010092019879710534
+      },
+      {
+       "level": 22,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320502806
+      },
+      {
+       "level": 23,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0008760374320502806
+      },
+      {
+       "level": 24,
+       "boxes": 1,
+       "kinds": [
+        "residue"
+       ],
+       "min_contain_t": 0.0004632762067209306
+      }
+     ]
+    },
+    "chain_unbroken": true,
+    "certified_image_nodes": [],
+    "canary_refusals": 0,
+    "ASSERT_no_image_node_certified": true
+   },
+   "waits": [],
+   "defers": [],
+   "total_lp_cpu_s": 0
+  }
+ },
+ "total_lp_cpu_s": 0
+}

@@ -440,3 +440,111 @@ spending one ladder level.  Reported so the decision is on the record rather tha
 the side is not in the shell, gate (b) returns, and that is exactly **D.SLAB** — unchanged, still
 open, still A60's (§4).  If D.SLAB is ever discharged by relocating (D) leaves to other sides, the
 s-slab gate and this budget must both be re-derived at those sides.
+
+---
+
+## 10. δ_pin = 1e-2 qualification (the tube route) and the re-emission price
+
+**Context (A83 relay, `docs/proofs/contraction_tube.md`).**  In the tube route every node
+hypothesis acts on the dilated family F at s0, so **no B.2″ widening enters** and §8.3's 4.9 %
+overshoot is void; pins ride the slot ray with w = 0.  Lemma SEAM gives
+`δ_basin(trump5) = min(T_tube, T_K(δ_pin))` with
+`T_K = ((2/3)·δ_pin·ŝ − (s0 − ŝ))/(1 + (2/3)·δ_pin)` and `T_tube = 0.0457` at A60's landings.
+
+### 10.1 Qualification result — δ_pin = 1e-2 PASSES 2/2
+
+| leaf | ε-fat original | δ_pin = 1e-2 |
+|---|---|---|
+| `c0_Y0081` | τ = 4.0, η = −1.0, LP 126 s, cert 5.2 s, PASS | τ = 4.112245, η = **−0.887755**, LP **961.1 s**, cert **540.8 s**, **PASS** |
+| `c0_Y0083` | τ = 4.0, η = −1.0, LP 144 s, cert 10.1 s, PASS | τ = 4.000000, η = −1.0, LP **319.3 s**, cert **127.1 s**, **PASS** |
+
+A57's G1 experience (whole grid at pin δ = 1e-2, V9/E4 clean) transfers to trump5.
+
+### 10.2 But δ_pin = 1e-2 is NOT cost-neutral, unlike 1e-3/1e-4
+
+This is the correction to my earlier expectation.  At δ = 1e-3 and 1e-4 the slack cores were a
+drop-in (LP 66–557 s against originals 126–144 s, cert 3.8–10.0 s).  At δ = 1e-2 both LP and
+certification blow up:
+
+| leaf | original LP+cert | δ=1e-2 LP+cert | multiplier |
+|---|---|---|---|
+| `c0_Y0081` | 131 s | 1502 s | **11.5×** |
+| `c0_Y0083` | 154 s | 446 s | **2.9×** |
+| combined | 285 s | 1948 s | **6.8×** |
+
+The certification side is the worse half (5.2 → 540.8 s, ×104 on `c0_Y0081`): a 1e-2 pin core
+shrinks the exempt region enough that the verifier has to work materially harder.
+
+**Re-emission price for the cover (K) leaves**, from the campaign's own measured costs:
+
+    (K) leaves to re-emit         560 measured, ~599 projected at 767 attemptable
+    their original cost           LP 67 532 s + cert 23 650 s = 25.3 CPU-hours
+                                  (mean 120.6 s LP + 42.2 s cert; LP p50 58 s, p90 334 s)
+    at the 6.8x multiplier        ~172 CPU-hours  ~=  43 h wall at 4 shards  ~=  1.8 desktop-days
+
+**Caveat, stated because I have already been burned twice by small samples in this attempt:**
+the 6.8× is from **n = 2**, and those two leaves disagree by 4× (2.9× vs 11.5×).  Treat ~170 CPU-h
+as an order-of-magnitude estimate, not a budget.  The honest way to firm it up is to re-emit the
+first ~30 leaves at δ = 1e-2 and read the multiplier off that batch; that is cheap and I would
+recommend it before committing the full 599.
+
+### 10.3 δ_pin = 2e-2 is worth having and is being qualified
+
+`T_K` crosses `T_tube` at **δ_pin ≥ 0.0179**, so:
+
+| δ_pin | T_K | δ_basin | binding |
+|---|---|---|---|
+| 1e-4 (A60's earlier plan) | 0.00026 | 0.00026 | slack |
+| 1e-3 | 0.00258 | 0.00258 | slack |
+| **1e-2** | 0.02568 | **0.0257** | slack |
+| **2e-2** | 0.04597 | **0.0457** | **tube** |
+
+Against the near-ŝ extrapolations (1.7e-3 / 5e-3) 0.0257 is already 5–15× clear; against the one
+deep point (k4_08, η = −0.38 at ŝ − m = 0.044) it is **not** enough and 0.0457 is.  Since
+trump5's own crossover is exactly what A82 has not scanned, qualifying 2e-2 now avoids a
+re-qualification later if trump5 turns out k4_08-like.  First leaf already **PASSES** at
+δ = 2e-2 (`c0_Y0081`, τ = 4.1875, η = −0.8125, LP 1000.4 s unconverged, cert 8.0 s); second in
+flight.  Regime 1 is one plain certificate either way (slab width 0.051 at δ=1e-2 against 0.031
+needed).
+
+### 10.4 DECISION: δ_pin = 2e-2 adopted everywhere
+
+δ = 2e-2 qualified **2/2** (`c0_Y0081` τ=4.1875 η=−0.8125 LP 1000.4 s cert 8.0 s; `c0_Y0083`
+τ=4.25 η=−0.75 LP 945.5 s cert 5.1 s), combined LP+cert **1959 s = 6.9×** the ε-fat originals —
+statistically identical to δ=1e-2's 6.8×, well inside the 1.5× adoption criterion.  Per the
+advisor's rule, **2e-2 is adopted everywhere**; the tube binds, δ_basin = **0.0457**, and A84
+measures the same T = 0.0457 law across all protected pin sets containing BL(0,1), so this is the
+tier-wide standard.
+
+The cost *profile* differs between the two even though the total does not: δ=1e-2 is
+certification-heavy (cert 540.8 s on `c0_Y0081`), δ=2e-2 is LP-heavy (LP ~1000 s, cert 5–8 s).
+Worth knowing for scheduling — 2e-2's cost sits in the LP, which parallelises across shards,
+rather than in the verifier subprocess.
+
+Not-yet-emitted leaves (deepen / ladder / confinement) are set to 2e-2 now, at zero cost.
+A **30-leaf pricing batch at 2e-2** is running, **stratified over the original lp_s distribution**
+(min 0 / p50 56 / max 582 s) rather than sampled from the cheap end — the bias that produced two
+bad small-sample laws in this attempt already.
+
+### 10.5 Shard-3 tail: NOT pathological, and there is no per-child cap
+
+The advisor asked whether the last ~50 cover children are hitting the 600 s LP cap or the cert
+cap.  **Neither — and the premise needs correcting: there is no per-child wall-clock cap at all.**
+`--lp_time` is the limit handed to each individual LP solve *inside* `solve_node`'s
+column-generation loop (`max_iter=900`), not a bound on the child.  Evidence: **161 of 718**
+recorded children have `lp_s > 300` with `--lp_time 300` set.
+
+Tail verdicts (last 25 shard-3 children): **18 PASS, 3 refused, 4 cert-FAIL** — a ~72 % kill rate,
+i.e. the tail is *productive*, not a pathological residue.  Cert times 0.3–16 s; only 1 of 25 came
+near the LP setting.
+
+The night was eaten by exactly **one** child: `c0_Y0790` at **52 699 s (14.6 h)**, against a next-worst
+of 582 s — a 90× outlier, and plausibly a symptom of the duplicate-process contention on that
+child (§ the duplicate incident) rather than intrinsic hardness.
+
+**So the remaining 49 were NOT routed to deepen.**  Two reasons: they are *unattempted*, not
+resisters, and `phase_deepen` operates on resisters (an unattempted child has no box record to
+bisect); and at a 72 % kill rate routing them would discard ~35 genuine kills and hand deepen work
+it cannot do.  Instead the tail was **de-serialised**: shard `3/4` was split into `3/8` + `7/8`
+(which partition `i % 4 == 3`), so a single pathological child can now block at most half the tail.
+
