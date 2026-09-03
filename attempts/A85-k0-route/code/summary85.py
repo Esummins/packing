@@ -7,6 +7,35 @@ RES = os.path.join(BASE, "results")
 NOTES = os.path.join(BASE, "notes")
 
 
+RUN_NOTES = [
+    "Commit gate: free commit (tree85.free_commit_mb, Win32 ullAvailPageFile) was ABOVE the "
+    "6144 MB floor at each of the three shards' first LP calls -- the gate logged zero waits "
+    "(results/a85_waits.jsonl is empty), and a reading taken 60 s after the three launches was "
+    "6336.7 MB. It fell to ~1049 MB while the three LPs held their working sets and recovered "
+    "to 12749 MB when they released; no LP or certify was ever started into a dip.",
+    "3 LP/certify slots max, held for the whole phase (3 shards x 1 in-flight node each; "
+    "certify.py children count toward the parent's slot). BLAS pinned to 1 thread (blas1 first).",
+    "LP phase wall cap 3 h: shards stopped TAKING new nodes at 10500 s. 12 of 26 planned nodes "
+    "landed; s2_near_046_473 was still inside its LP at the cap and is left running -- it "
+    "appends its own record to results/a85_lp_samples.jsonl if it finishes. The other 13 rows "
+    "are not-run.",
+    "eps_geo repair: 2 of the 6 PASSes needed it (s1cor_far_b595 and s1int_l2_l2_p210_001, "
+    "both at eps_geo = 0.004); 5 nodes exhausted both margins (0.002, 0.004) and stay FAIL.",
+    "CANARY: no node was refused as image-realizable and no PASS occurred on an "
+    "image-realizable node (the engine's exit-9 path never fired).",
+    "SIGMA FINDING: tree57.cover's split rule is not equivariant under theta -> 90 - theta "
+    "(it bisects along the widest dimension measured in t, and mirrored t-bins of a "
+    "sigma-closed t-partition have different t-widths: 1/8 vs 2/9 here), so its box set is NOT "
+    "sigma-closed (P 145 vs M 226 above) and the D4 corner maps do not land on cover boxes. "
+    "corner85.cover_sigma repairs this (refine by bisecting theta at the DEGREE midpoint, "
+    "refine iff min(a(b), a(sigma b)) < a_min); the repaired box set IS sigma-closed and the "
+    "corner maps preserve every theta bin. The rational CORE is still t-grid based, so "
+    "core(sigma b) != sigma core(b) (max |a(b) - a(sigma b)| = 1.86e-2) and the SURVIVING pair "
+    "set is only 98.91% sigma-closed -- sound either way, but the /8 D4 quotient is exact at "
+    "the box level and only approximate at the pruned-pair level.",
+]
+
+
 def jl(p):
     out = {}
     if os.path.exists(p):
@@ -89,7 +118,7 @@ def main():
                                  "d4_canonical_fraction", "orbit_size_histogram")},
                 seconds=R3["seconds"]),
         R4=dict(scoreboard=board, rows=rows, deferred=defer),
-        waits=dict(n=len(waits), events=waits))
+        waits=dict(n=len(waits), events=waits), run_notes=RUN_NOTES)
     json.dump(out, open(os.path.join(RES, "pilot_summary85.json"), "w"), indent=1)
 
     L = []
@@ -169,6 +198,10 @@ def main():
     A("")
     A("scoreboard: %s" % json.dumps(board))
     A("waits logged: %d (results/a85_waits.jsonl); deferred: %d" % (len(waits), len(defer)))
+    A("")
+    A("## Run notes")
+    for s in RUN_NOTES:
+        A("* " + s)
     open(os.path.join(NOTES, "pilot_report.md"), "w").write("\n".join(L) + "\n")
     print(json.dumps(board))
     print("wrote results/pilot_summary85.json and notes/pilot_report.md")

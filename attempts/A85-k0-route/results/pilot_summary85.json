@@ -1,6 +1,6 @@
 {
  "cls": "k0_00",
- "generated": "2026-09-02 21:43:36",
+ "generated": "2026-09-02 23:33:06",
  "object": {
   "k_s": 0,
   "N": 11,
@@ -300,13 +300,13 @@
  "R4": {
   "scoreboard": {
    "planned": 26,
-   "run": 7,
-   "PASS": 1,
-   "FAIL": 6,
-   "refused": 0,
-   "eta_le_m015": 6,
-   "lp_seconds_total": 7029.4,
-   "cert_seconds_total": 4882.1
+   "run": 12,
+   "PASS": 6,
+   "FAIL": 5,
+   "refused": 1,
+   "eta_le_m015": 10,
+   "lp_seconds_total": 10363.0,
+   "cert_seconds_total": 5813.4
   },
   "rows": [
    {
@@ -428,8 +428,19 @@
     "converged": false,
     "lp_s": 1042.5,
     "cert_s": 859.5,
-    "verdict": "FAIL(rc=1)",
-    "eps_geo": null,
+    "verdict": "PASS",
+    "eps_geo": [
+     {
+      "eps_geo": 0.002,
+      "rc": 1,
+      "seconds": 1311.5
+     },
+     {
+      "eps_geo": 0.004,
+      "rc": 0,
+      "seconds": 1670.2
+     }
+    ],
     "canary_images": null
    },
    {
@@ -446,8 +457,19 @@
     "converged": false,
     "lp_s": 994.7,
     "cert_s": 709.0,
-    "verdict": "FAIL(rc=1)",
-    "eps_geo": null,
+    "verdict": "FAIL(eps_geo retries exhausted) -> deepen",
+    "eps_geo": [
+     {
+      "eps_geo": 0.002,
+      "rc": 1,
+      "seconds": 1191.7
+     },
+     {
+      "eps_geo": 0.004,
+      "rc": 1,
+      "seconds": 1627.2
+     }
+    ],
     "canary_images": null
    },
    {
@@ -464,8 +486,19 @@
     "converged": false,
     "lp_s": 952.8,
     "cert_s": 685.4,
-    "verdict": "FAIL(rc=1)",
-    "eps_geo": null,
+    "verdict": "FAIL(eps_geo retries exhausted) -> deepen",
+    "eps_geo": [
+     {
+      "eps_geo": 0.002,
+      "rc": 3,
+      "seconds": 1616.0
+     },
+     {
+      "eps_geo": 0.004,
+      "rc": 3,
+      "seconds": 1255.8
+     }
+    ],
     "canary_images": null
    },
    {
@@ -477,13 +510,24 @@
     "near_far": "far",
     "ghost": 0.63913,
     "a38_tau": null,
-    "tau": null,
-    "eta": null,
-    "converged": null,
-    "lp_s": null,
-    "cert_s": null,
-    "verdict": "not-run",
-    "eps_geo": null,
+    "tau": 8.75485964661241,
+    "eta": -1.2451403533875904,
+    "converged": false,
+    "lp_s": 1023.2,
+    "cert_s": 742.5,
+    "verdict": "PASS",
+    "eps_geo": [
+     {
+      "eps_geo": 0.002,
+      "rc": 1,
+      "seconds": 1366.7
+     },
+     {
+      "eps_geo": 0.004,
+      "rc": 0,
+      "seconds": 2029.2
+     }
+    ],
     "canary_images": null
    },
    {
@@ -513,12 +557,12 @@
     "near_far": "near",
     "ghost": 0.06944,
     "a38_tau": null,
-    "tau": null,
-    "eta": null,
-    "converged": null,
-    "lp_s": null,
-    "cert_s": null,
-    "verdict": "not-run",
+    "tau": 7.999999999991748,
+    "eta": -1.000000000008252,
+    "converged": false,
+    "lp_s": 1112.1,
+    "cert_s": 175.8,
+    "verdict": "PASS",
     "eps_geo": null,
     "canary_images": null
    },
@@ -567,12 +611,12 @@
     "near_far": "near",
     "ghost": 0.06944,
     "a38_tau": null,
-    "tau": null,
-    "eta": null,
-    "converged": null,
-    "lp_s": null,
-    "cert_s": null,
-    "verdict": "not-run",
+    "tau": 5.999999999999995,
+    "eta": -1.0000000000000053,
+    "converged": true,
+    "lp_s": 63.0,
+    "cert_s": 4.3,
+    "verdict": "PASS",
     "eps_geo": null,
     "canary_images": null
    },
@@ -621,12 +665,12 @@
     "near_far": "far",
     "ghost": 0.34722,
     "a38_tau": null,
-    "tau": null,
-    "eta": null,
-    "converged": null,
-    "lp_s": null,
-    "cert_s": null,
-    "verdict": "not-run",
+    "tau": 7.000000000000002,
+    "eta": 1.7763568394002505e-15,
+    "converged": true,
+    "lp_s": 127.4,
+    "cert_s": 0.0,
+    "verdict": "refused (tau 7.000000 >= budget 7)",
     "eps_geo": null,
     "canary_images": null
    },
@@ -675,12 +719,12 @@
     "near_far": "near",
     "ghost": 0.06944,
     "a38_tau": null,
-    "tau": null,
-    "eta": null,
-    "converged": null,
-    "lp_s": null,
-    "cert_s": null,
-    "verdict": "not-run",
+    "tau": 4.333333333242646,
+    "eta": -0.6666666667573544,
+    "converged": false,
+    "lp_s": 1007.9,
+    "cert_s": 8.7,
+    "verdict": "PASS",
     "eps_geo": null,
     "canary_images": null
    },
@@ -816,5 +860,13 @@
  "waits": {
   "n": 0,
   "events": []
- }
+ },
+ "run_notes": [
+  "Commit gate: free commit (tree85.free_commit_mb, Win32 ullAvailPageFile) was ABOVE the 6144 MB floor at each of the three shards' first LP calls -- the gate logged zero waits (results/a85_waits.jsonl is empty), and a reading taken 60 s after the three launches was 6336.7 MB. It fell to ~1049 MB while the three LPs held their working sets and recovered to 12749 MB when they released; no LP or certify was ever started into a dip.",
+  "3 LP/certify slots max, held for the whole phase (3 shards x 1 in-flight node each; certify.py children count toward the parent's slot). BLAS pinned to 1 thread (blas1 first).",
+  "LP phase wall cap 3 h: shards stopped TAKING new nodes at 10500 s. 12 of 26 planned nodes landed; s2_near_046_473 was still inside its LP at the cap and is left running -- it appends its own record to results/a85_lp_samples.jsonl if it finishes. The other 13 rows are not-run.",
+  "eps_geo repair: 2 of the 6 PASSes needed it (s1cor_far_b595 and s1int_l2_l2_p210_001, both at eps_geo = 0.004); 5 nodes exhausted both margins (0.002, 0.004) and stay FAIL.",
+  "CANARY: no node was refused as image-realizable and no PASS occurred on an image-realizable node (the engine's exit-9 path never fired).",
+  "SIGMA FINDING: tree57.cover's split rule is not equivariant under theta -> 90 - theta (it bisects along the widest dimension measured in t, and mirrored t-bins of a sigma-closed t-partition have different t-widths: 1/8 vs 2/9 here), so its box set is NOT sigma-closed (P 145 vs M 226 above) and the D4 corner maps do not land on cover boxes. corner85.cover_sigma repairs this (refine by bisecting theta at the DEGREE midpoint, refine iff min(a(b), a(sigma b)) < a_min); the repaired box set IS sigma-closed and the corner maps preserve every theta bin. The rational CORE is still t-grid based, so core(sigma b) != sigma core(b) (max |a(b) - a(sigma b)| = 1.86e-2) and the SURVIVING pair set is only 98.91% sigma-closed -- sound either way, but the /8 D4 quotient is exact at the box level and only approximate at the pruned-pair level."
+ ]
 }

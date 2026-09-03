@@ -38,21 +38,21 @@ D4-canonical 4-tuples: 120/1000 = 0.1200 (1/8 = 0.125); orbit sizes {"8": 1000}
 | s1int_l1_008 | S1-INT | 10 | 1 | a38 | 0.0928 | 9.6331 | 9.875505 | -0.124495 | False | 949.3 | 660.9 | FAIL(eps_geo retries exhausted) -> deepen |
 | s1int_l1_053 | S1-INT | 10 | 1 | a38 | 0.5704 | 9.5830 | 9.664070 | -0.335930 | False | 1014.1 | 643.8 | FAIL(eps_geo retries exhausted) -> deepen |
 | s1int_l2_l2_p114_010 | S1-INT | 10 | 1 | a38 | 0.6359 | 8.5690 | 9.000000 | -1.000000 | False | 1066.0 | 631.6 | PASS |
-| s1int_l2_l2_p210_001 | S1-INT | 10 | 1 | a38 | 0.5050 | 8.6000 | 8.727155 | -1.272845 | False | 1042.5 | 859.5 | FAIL(rc=1) |
-| s1int_l2_l2_p215_011 | S1-INT | 10 | 1 | a38 | 0.6262 | 8.6224 | 8.805928 | -1.194072 | False | 994.7 | 709.0 | FAIL(rc=1) |
-| s1cor_near_b178 | S1-COR | 10 | 1 | near | 0.1283 | - | 9.548387 | -0.451613 | False | 952.8 | 685.4 | FAIL(rc=1) |
-| s1cor_far_b595 | S1-COR | 10 | 1 | far | 0.6391 | - | - | - | None | None | None | not-run |
+| s1int_l2_l2_p210_001 | S1-INT | 10 | 1 | a38 | 0.5050 | 8.6000 | 8.727155 | -1.272845 | False | 1042.5 | 859.5 | PASS |
+| s1int_l2_l2_p215_011 | S1-INT | 10 | 1 | a38 | 0.6262 | 8.6224 | 8.805928 | -1.194072 | False | 994.7 | 709.0 | FAIL(eps_geo retries exhausted) -> deepen |
+| s1cor_near_b178 | S1-COR | 10 | 1 | near | 0.1283 | - | 9.548387 | -0.451613 | False | 952.8 | 685.4 | FAIL(eps_geo retries exhausted) -> deepen |
+| s1cor_far_b595 | S1-COR | 10 | 1 | far | 0.6391 | - | 8.754860 | -1.245140 | False | 1023.2 | 742.5 | PASS |
 | s2_near_046_473 | S2 | 9 | 2 | near | 0.0694 | - | - | - | None | None | None | not-run |
-| s2_near_046_619 | S2 | 9 | 2 | near | 0.0694 | - | - | - | None | None | None | not-run |
+| s2_near_046_619 | S2 | 9 | 2 | near | 0.0694 | - | 8.000000 | -1.000000 | False | 1112.1 | 175.8 | PASS |
 | s2_far_022_631 | S2 | 9 | 2 | far | 0.6391 | - | - | - | None | None | None | not-run |
 | s2_far_022_633 | S2 | 9 | 2 | far | 0.6391 | - | - | - | None | None | None | not-run |
-| s3_near_BL619642_TR023305 | S3 | 7 | 4 | near | 0.0694 | - | - | - | None | None | None | not-run |
+| s3_near_BL619642_TR023305 | S3 | 7 | 4 | near | 0.0694 | - | 6.000000 | -1.000000 | True | 63.0 | 4.3 | PASS |
 | s3_near_BL368440_TR135473 | S3 | 7 | 4 | near | 0.0694 | - | - | - | None | None | None | not-run |
 | s3_near_BL281514_TR528641 | S3 | 7 | 4 | near | 0.0694 | - | - | - | None | None | None | not-run |
-| s3_far_BL389484_TR018470 | S3 | 7 | 4 | far | 0.3472 | - | - | - | None | None | None | not-run |
+| s3_far_BL389484_TR018470 | S3 | 7 | 4 | far | 0.3472 | - | 7.000000 | +0.000000 | True | 127.4 | 0.0 | refused (tau 7.000000 >= budget 7) |
 | s3_far_BL066471_TR504617 | S3 | 7 | 4 | far | 0.3472 | - | - | - | None | None | None | not-run |
 | s3_far_BL504630_TR486533 | S3 | 7 | 4 | far | 0.3472 | - | - | - | None | None | None | not-run |
-| s4_near_BL357619_BR004483_TR191404 | S4 | 5 | 6 | near | 0.0694 | - | - | - | None | None | None | not-run |
+| s4_near_BL357619_BR004483_TR191404 | S4 | 5 | 6 | near | 0.0694 | - | 4.333333 | -0.666667 | False | 1007.9 | 8.7 | PASS |
 | s4_near_BL283514_BR306371_TR017518 | S4 | 5 | 6 | near | 0.0694 | - | - | - | None | None | None | not-run |
 | s4_far_BL485522_BR024614_TR103437 | S4 | 5 | 6 | far | 0.3584 | - | - | - | None | None | None | not-run |
 | s4_far_BL000453_BR020628_TR013481 | S4 | 5 | 6 | far | 0.3693 | - | - | - | None | None | None | not-run |
@@ -61,5 +61,13 @@ D4-canonical 4-tuples: 120/1000 = 0.1200 (1/8 = 0.125); orbit sizes {"8": 1000}
 | s5_far_BL072642_BR376404_TR018301_TL040270 | S5 | 3 | 8 | far | 0.3320 | - | - | - | None | None | None | not-run |
 | s5_far_BL003487_BR014571_TR012478_TL016022 | S5 | 3 | 8 | far | 0.3320 | - | - | - | None | None | None | not-run |
 
-scoreboard: {"planned": 26, "run": 7, "PASS": 1, "FAIL": 6, "refused": 0, "eta_le_m015": 6, "lp_seconds_total": 7029.4, "cert_seconds_total": 4882.1}
+scoreboard: {"planned": 26, "run": 12, "PASS": 6, "FAIL": 5, "refused": 1, "eta_le_m015": 10, "lp_seconds_total": 10363.0, "cert_seconds_total": 5813.4}
 waits logged: 0 (results/a85_waits.jsonl); deferred: 0
+
+## Run notes
+* Commit gate: free commit (tree85.free_commit_mb, Win32 ullAvailPageFile) was ABOVE the 6144 MB floor at each of the three shards' first LP calls -- the gate logged zero waits (results/a85_waits.jsonl is empty), and a reading taken 60 s after the three launches was 6336.7 MB. It fell to ~1049 MB while the three LPs held their working sets and recovered to 12749 MB when they released; no LP or certify was ever started into a dip.
+* 3 LP/certify slots max, held for the whole phase (3 shards x 1 in-flight node each; certify.py children count toward the parent's slot). BLAS pinned to 1 thread (blas1 first).
+* LP phase wall cap 3 h: shards stopped TAKING new nodes at 10500 s. 12 of 26 planned nodes landed; s2_near_046_473 was still inside its LP at the cap and is left running -- it appends its own record to results/a85_lp_samples.jsonl if it finishes. The other 13 rows are not-run.
+* eps_geo repair: 2 of the 6 PASSes needed it (s1cor_far_b595 and s1int_l2_l2_p210_001, both at eps_geo = 0.004); 5 nodes exhausted both margins (0.002, 0.004) and stay FAIL.
+* CANARY: no node was refused as image-realizable and no PASS occurred on an image-realizable node (the engine's exit-9 path never fired).
+* SIGMA FINDING: tree57.cover's split rule is not equivariant under theta -> 90 - theta (it bisects along the widest dimension measured in t, and mirrored t-bins of a sigma-closed t-partition have different t-widths: 1/8 vs 2/9 here), so its box set is NOT sigma-closed (P 145 vs M 226 above) and the D4 corner maps do not land on cover boxes. corner85.cover_sigma repairs this (refine by bisecting theta at the DEGREE midpoint, refine iff min(a(b), a(sigma b)) < a_min); the repaired box set IS sigma-closed and the corner maps preserve every theta bin. The rational CORE is still t-grid based, so core(sigma b) != sigma core(b) (max |a(b) - a(sigma b)| = 1.86e-2) and the SURVIVING pair set is only 98.91% sigma-closed -- sound either way, but the /8 D4 quotient is exact at the box level and only approximate at the pruned-pair level.
