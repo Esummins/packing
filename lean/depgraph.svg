@@ -5,7 +5,7 @@
 <rect x="12" y="32" width="12" height="12" fill="#b8860b" rx="2"/>
 <text x="28" y="42">lean-proved (21)</text>
 <rect x="154" y="32" width="12" height="12" fill="#2e7d32" rx="2"/>
-<text x="170" y="42">proved-prose (4)</text>
+<text x="170" y="42">proved-prose (5)</text>
 <rect x="296" y="32" width="12" height="12" fill="#1565c0" rx="2"/>
 <text x="312" y="42">certificate+verifier (9)</text>
 <rect x="494" y="32" width="12" height="12" fill="#6a1b9a" rx="2"/>
@@ -13,7 +13,7 @@
 <rect x="587" y="32" width="12" height="12" fill="#e65100" rx="2"/>
 <text x="603" y="42">conjecture (6)</text>
 <rect x="715" y="32" width="12" height="12" fill="#c62828" rx="2"/>
-<text x="731" y="42">open (11)</text>
+<text x="731" y="42">open (10)</text>
 <rect x="818" y="32" width="12" height="12" fill="none" stroke="#c62828" stroke-width="1.6" stroke-dasharray="4,3" rx="2"/>
 <text x="834" y="42">dashed = waiting only on dependencies (outline color = tier of its own finished work)</text>
 <rect x="1439" y="31" width="30" height="14" rx="7" fill="#37474f"/>
@@ -462,23 +462,22 @@
 <text x="382" y="822" text-anchor="middle" fill="#222">NOCRIT-SEL (A90): at the</text>
 <text x="382" y="834" text-anchor="middle" fill="#222">Psi-minimal minimiser every…</text>
 </g>
-<g><title>K0.RES4 — not-RES(4): no K0-BLOCKED Psi-minimal minimiser is a frame (&gt;= 3-square wall-to-wall columns in both axes through 8 intruders + 3 free)&#10;[open]&#10;A90-G1, the exact k0 residue after NOCRIT-SEL. Evidence: 0 K0-BLOCKED FJ points in 167 certified + 520 directed seeds; lowest K0-BLOCKED packing found 3.985 (s-hat + 0.108); RES fails at 2 of the 4 stuck endpoints (a genuine extra hypothesis). Routes: (a) Lemma PLATEAU (K0.PLATEAU) refutes the archetype family; (b) the frame CENSUS is DEAD (A91: L1 = 5.7e28 orbits exact, realisable ~1e38, 28 orders above the tree; combinatorics constrain nothing, geometry kills 99.7% at 4 ms; mismatch law, 4th face); (c) fallback = the A85 tree (K0.TREE) with the anchoring rows as per-node prunes (design pending, A91).</title>
+<g><title>K0.RES4 — not-RES(4): no K0-BLOCKED Psi-minimal minimiser is a frame (&gt;= 3-square wall-to-wall columns in both axes through 8 intruders + 3 free)&#10;[open]&#10;A90-G1, the exact k0 residue after NOCRIT-SEL. Evidence: 0 K0-BLOCKED FJ points in 167 certified + 520 directed seeds; lowest K0-BLOCKED packing found 3.985 (s-hat + 0.108); RES fails at 2 of the 4 stuck endpoints (a genuine extra hypothesis). Routes: (a) Lemma PLATEAU (K0.PLATEAU) refutes the archetype family; (b) the frame CENSUS is DEAD (A91: L1 = 5.7e28 orbits exact, realisable ~1e38, 28 orders above the tree; combinatorics constrain nothing, geometry kills 99.7% at 4 ms; mismatch law, 4th face); (c) fallback = the A85 tree (K0.TREE) with the anchoring rows as per-node prunes (design pending, A91). || A91 close-out: the residue is WALL-ANCHORED frames (Trump archetype included), which no combinatorial or box-level linear row excludes — they die only by geometry, i.e. the A85 tree; not-RES(4) stays a SelForm (C) leaf of the tree (A90 6(i)); frame census DEAD (1.3e32 CPU-h, 28 orders). Design (frame_census.md 9): anchoring rows as (C-sel) per-node tests in the tree (roles from reach boxes, retreat types from argmin-side rows, anchoring existence as a graph search over touch-capable boxes); sound, expected silent at the frontier (existential-filter law); pricing = a 1-desktop-hour chore on A85&#x27;s stored gate samples + 12 LP nodes, named, not run.</title>
 <rect x="484" y="793" width="180" height="54" rx="7" fill="white"/>
 <rect x="484" y="793" width="180" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
 <text x="573" y="808" text-anchor="middle" font-weight="bold" fill="#c62828">K0.RES4</text>
 <text x="573" y="822" text-anchor="middle" fill="#222">not-RES(4): no K0-BLOCKED</text>
 <text x="573" y="834" text-anchor="middle" fill="#222">Psi-minimal minimiser is a…</text>
-<rect x="636" y="786" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="652" y="796" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A91</text>
 </g>
-<g><title>K0.PLATEAU — Lemma PLATEAU: rate-matched mutual (I)-anchorings slide at constant Psi to K0-FREE / a wall / a new contact&#10;[open]&#10;Stated by A90 [S], NOT proved. A91 measured that the Trump archetype (slot squares replaced by tilted 2-crowds) is 100% (I)-anchored with 2-member columns, all 13 anchorings mutual, so Lemma COL never applies and no box-level linear row excludes it: refuting RES(4) rests on PLATEAU becoming a theorem.</title>
+<g><title>K0.PLATEAU — Lemma PLATEAU / W-GEN: mutual (I)-anchorings (A90 [S] -&gt; A91 W-GEN [T]); NOT load-bearing&#10;[proved-prose]&#10;CORRECTION (A91 close-out, 2026-09-03): the &quot;archetype is 100% (I)-anchored&quot; measurement was a minimal-chain artefact; recomputed with A90&#x27;s full cluster every archetype cluster is WALL-anchored, so PLATEAU is not what the archetype needs. Lemma W-GEN [T] (frame_census.md 8.2): with Q-independent corner weights Psi^(w), NOCRIT-SEL holds verbatim and every rate-1 non-wall-anchored cluster is strictly anchored; mutual rate-1 columns have a wall-anchored end. Residual gap A91-G1 (termination of the slide iteration for tilted-D rate ties, codim &gt;= 1) is NOT load-bearing: even closed, wall-anchored frames remain and die only by geometry. Kept as an audit record.</title>
+<g opacity="0.5">
 <rect x="675" y="793" width="180" height="54" rx="7" fill="white"/>
-<rect x="675" y="793" width="180" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
-<text x="764" y="808" text-anchor="middle" font-weight="bold" fill="#c62828">K0.PLATEAU</text>
-<text x="764" y="822" text-anchor="middle" fill="#222">Lemma PLATEAU: rate-matched</text>
-<text x="764" y="834" text-anchor="middle" fill="#222">mutual (I)-anchorings slide at…</text>
-<rect x="827" y="786" width="31" height="14" rx="7" fill="#37474f"/>
-<text x="843" y="796" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A91</text>
+<rect x="675" y="793" width="180" height="54" rx="7" fill="#2e7d32" fill-opacity="0.13" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="845" y="806" text-anchor="middle" fill="#2e7d32" font-size="13" font-weight="bold">&#10003;</text>
+<text x="764" y="808" text-anchor="middle" font-weight="bold" fill="#2e7d32">K0.PLATEAU</text>
+<text x="764" y="822" text-anchor="middle" fill="#222">Lemma PLATEAU / W-GEN: mutual</text>
+<text x="764" y="834" text-anchor="middle" fill="#222">(I)-anchorings (A90 [S] -&gt; A91…</text>
+</g>
 </g>
 <g><title>K0.TFU — TF-U + LOCK / MENU / JAM-0 (A89): selected-minimiser tilt structure&#10;[proved-prose]&#10;A89 [T]: at the Phi-minimal sigma-minimiser every non-flush-locked square has tilt exactly 0 (TF-U); LOCK (Gordan), MENU (a wall blocker is locked only by far-side contacts), JAM-0 (axis-aligned offset blocker pins its partner). GAP A89-G1: the loaded tilt floor theta_0 &gt; 0 is NOT provable locally (near-flush jam is loaded-consistent); empirical floor 23.9 deg. Measured: near-flush zone is NOT where the tree cost is; self-jammed pairs 1.9%, jammed reach 2.386 ~ max.</title>
 <rect x="866" y="793" width="180" height="54" rx="7" fill="white"/>
@@ -502,7 +501,7 @@
 <text x="1338" y="822" text-anchor="middle" fill="#222">DF-K0: drain-flow reduction of</text>
 <text x="1338" y="834" text-anchor="middle" fill="#222">k0_00 to H1 (no k0 FJ point &lt;=…</text>
 </g>
-<g><title>K0.TREE — A85 zone tree over k0_00 (fallback): 3,200-7,000 CPU-h&#10;[open]&#10;A85 pilot: object built (8 exact D4 images), sigma-equivariant reach cover, BL pair census 33,656 L2 pairs, alive gate 0.82 attemptable / 82% of 4-corner combos contradictory exactly; 12 LP rows: 6 PASS 5 FAIL 1 refused (~1,350-1,700 s per budget-10 node, 8-130 s at 3-4 corners deep). Every count-based alternative priced and dead: A88 contact structures (1e36 decorated / 1e11 graphs, 0.78 s each, loses on the count; graph-fixed Krawczyk closes 0/20), A91 frames (28 orders). Prunes available: K0.ID (4-shallow, depth pair prune), TF-U leaves, anchoring rows (A91 design). Compute-scale decision with the PI.</title>
+<g><title>K0.TREE — A85 zone tree over k0_00 (fallback): 3,200-7,000 CPU-h&#10;[open]&#10;A85 pilot: object built (8 exact D4 images), sigma-equivariant reach cover, BL pair census 33,656 L2 pairs, alive gate 0.82 attemptable / 82% of 4-corner combos contradictory exactly; 12 LP rows: 6 PASS 5 FAIL 1 refused (~1,350-1,700 s per budget-10 node, 8-130 s at 3-4 corners deep). Every count-based alternative priced and dead: A88 contact structures (1e36 decorated / 1e11 graphs, 0.78 s each, loses on the count; graph-fixed Krawczyk closes 0/20), A91 frames (28 orders). Prunes available: K0.ID (4-shallow, depth pair prune), TF-U leaves, anchoring rows (A91 design). Compute-scale decision with the PI. || A91: k0_00 route = this tree, with not-RES(4) as a (C-sel) leaf and anchoring rows as optional per-node prunes; price unchanged.</title>
 <rect x="1439" y="793" width="180" height="54" rx="7" fill="white"/>
 <rect x="1439" y="793" width="180" height="54" rx="7" fill="#c62828" fill-opacity="0.13" stroke="#c62828" stroke-width="1.6"/>
 <text x="1529" y="808" text-anchor="middle" font-weight="bold" fill="#c62828">K0.TREE</text>
