@@ -1,0 +1,17 @@
+--- validation: contraction vs brute force ---
+  (2, 2, 2, 2) (0, 0, 0, 0) nf=3 L0: contraction 1.1761556967e+10 brute 1.1761556967e+10  rel 0.00e+00 OK
+  (2, 2, 2, 2) (0, 0, 0, 0) nf=3 L1: contraction 3.4725239478e+19 brute 3.4725239478e+19  rel 2.97e-13 OK
+  (2, 2, 2, 2) (1, 0, 1, 0) nf=1 L0: contraction 5.9891452083e+10 brute 5.9891452083e+10  rel 0.00e+00 OK
+  (2, 2, 2, 2) (1, 0, 1, 0) nf=1 L1: contraction 8.2663642831e+20 brute 8.2663642832e+20  rel 1.97e-11 MISMATCH
+  (3, 2, 2, 2) (0, 1, 0, 0) nf=1 L0: contraction 6.6489941637e+10 brute 6.6489941637e+10  rel 0.00e+00 OK
+  (3, 2, 2, 2) (0, 1, 0, 0) nf=1 L1: contraction 2.0669193191e+22 brute 2.0669193191e+22  rel 1.31e-11 MISMATCH
+  (2, 3, 2, 2) (0, 0, 0, 0) nf=2 L0: contraction 3.1646681694e+10 brute 3.1646681694e+10  rel 0.00e+00 OK
+  (2, 3, 2, 2) (0, 0, 0, 0) nf=2 L1: contraction 4.4077815633e+21 brute 4.4077815633e+21  rel 6.99e-12 OK
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A91-frame-census\code\census91.py", line 342, in <module>
+  File "C:\Users\esumm\code\packing\attempts\A91-frame-census\code\census91.py", line 289, in main
+    log('  validation OK')
+           ^^^^^^^^^^^^^^^
+AssertionError: contraction validation FAILED
+
+[exited with code 0]

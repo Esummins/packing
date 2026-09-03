@@ -2414,3 +2414,41 @@ affordable cost estimate for closing 3.84.
   A87/A89 code imported, not modified; no certificate emitted. Chip C.K4TIER still owned by A89 (not released) - note added only.
   Files: docs/proofs/nocrit_k0_blocked.md, attempts/A90-nocrit-blocked/{code,results,notes,logs}, lean/depgraph.json + svg,
   REGISTRY row.
+
+## 2026-09-03 A91-frame-census (Fable lead + 1 Opus chore, <= 2 processes) -- done-success (RES(4) census PRICED: finite, 5.7e28 at L1, ~1e37 at L2, realisable ~1.2e38; loses to A85's tree by ~28 orders; not-RES(4) stays a SelForm (C) leaf)
+- T [docs/proofs/frame_census.md]: the FRAME defined exactly from A90's RES(4) at four levels (L0 roles/types/masks; L1 + one terminal per slot;
+  L2 + first links; L3 full sign-consistent columns). Lemmas F1-F8 [T]: n_c <= 5 home squares per corner (area), nine K0-BLOCKED role patterns
+  mod D4; a square touching two adjacent walls intrudes that corner with depth >= 1/2 (segment argument) => free squares touch <= 1 wall and
+  (A89 exact depth-pair census) <= 1 both-walls square per corner; CHORD LEMMA (the chord of a unit square at distance 1/2 from its extreme point
+  is >= 1, all tilts) => per wall <= 3 (N1 re-proved) and <= 1 free square per wall; terminal sets ((W): <= 3 far-wall squares; (I): far-corner
+  home squares whose type contains the axis) with MUTUALITY and the RATE ROW (retreating corners {c, c_cross}, deepening {c_e, c_op}: disjoint);
+  Lemma F6 link box rows; F7: Lemma COL's >= 3-member clause is VACUOUS at L1 (the far wall's two corners carry >= 4 home squares, the wall <= 3);
+  F8: an X/Y retreater anchored only by one tilted D-type deepener is NOT anchored (rho_D < 1). Bound before enumeration: finite at every level,
+  L1 <= 4.5e36 labelled by the 7-per-slot product (exact value by the product formula), ghost regime <= x2 per slot, D4 by Burnside.
+- M [T2, attempts/A91-frame-census/notes/t2_report.md; product formula validated vs brute force 8/8 shapes]: L0 = 1.040e19 labelled EXACT
+  (>= 1.25e16 orbits, MC 1.9e16); L1 = 1.558e32 labelled EXACT, >= 5.726e28 orbits (MC 1.28e29 +- 1.3e28, 97 % trivial stabilisers);
+  ablation EXACT: roles only 4.5e36 -> F2(ii) 9.3e32 -> per-wall rows 1.56e32 (the whole combinatorial filter buys x3.3 at L0, x2.9e4 at L1);
+  L2 ~3.8e40 labelled [MC bracket 1e39-1e41], ~1e37 orbits; L3 <= 1.56e59 EXACT UB, sign-consistency 0/20 on the median frame (~5e50, one digit).
+  R6 (interval-linear LP: containment, masks, intrusion, Lemma K argmin-side type rows, F6 link rows): kill 315/316 = 0.9968 +- 0.0062 at ~4 ms
+  => realisable at L2 ~1.2e38 labelled [EXTRAPOLATED, bracket 1e36-1e39]. Sharing: every R6 survivor shares column members across all six corner
+  pairs, mean 0.33 free squares as middles, mean 6 squares serving two corners (A90 sect 4.4 quantified). CANARIES 3/3 PASS: C1 archetype
+  (Trump with sq1/sq9 promoted; sq8 tangent too) is a member at every level, untouched by R1-R5 and by R6 (margin +0.104); C2 Trump absent
+  ((1,1,2,1)); C3 four k0dir87 K0-BLOCKED endpoints satisfy every sect-2 constraint on their real geometry (6-11 of 12 slots anchored).
+- M [T3, notes/t3_report.md, no certificate]: 20/20 uniform frames close at the ROOT LP in 3.8 ms (the generic frame's certificate is one LP);
+  the archetype stays OPEN at tilt-bin depth 10 (111 boxes, 0 kills). PRICE 1.2e38 x 3.8 ms ~ 1.3e32 CPU-h vs 3 200-7 000: LOSES by ~28 orders,
+  and loses twice (count + the survivors are exactly the unclosable ones); at L0 still 2e10 CPU-h.
+- F [T, check with A90's cluster code]: the archetype's CLUSTERS are ALL WALL-ANCHORED (C_{+x}(1) = {1,2,8,10} at x = s, C_{-x}(8) = {0,1,3,4,7,8}
+  at x = 0, ...); the chore's "100 % (I)-anchored, 2-member columns" is the minimal-chain extraction stopping at the first admissible (I)-terminal.
+  Lemma PLATEAU is NOT what the archetype needs. Lemma W-GEN [T, sect 8.2]: with Psi^(w) = sum_c w_c Psi_c, weights Q-linearly independent,
+  NOCRIT-SEL holds verbatim and every non-wall-anchored cluster with rate-1 members is STRICTLY anchored (D = Z-combination of weights with
+  disjoint corner supports != 0); mutual rate-1 columns have at least one wall-anchored end; plateaus need a tilted-D rate tie (codim >= 1).
+  A91-G1 [C]: termination of the slide iteration for tilted-D ties (no direction-independent monotone potential found: Psi_c lex, moments,
+  sum d^2, active-row counts all fail) - not load-bearing for the archetype; even closed, the wall-anchored frames remain and die only by geometry.
+- Design [sect 9, not run]: NOCRIT-SEL's rows as (C-sel) node tests in A85's tree - roles from reach boxes, type set T(B) from the argmin-side rows,
+  forced retreats when T(B) c {X,D} or {Y,D}, anchoring EXISTENCE as a graph search over touch-capable boxes to far-wall-/(I)-capable boxes with
+  the rate row on rate bins; sound, consumes Psi^(w)-minimality only (StratumKillSel). Expected effect = the existential-filter law (silent at the
+  frontier); pricing = a 1-desktop-hour Opus chore on A85's stored 1 000/300/300 multi-corner gate samples + 12 LP nodes, measuring the kill on top
+  of the 81.9 % exact contradictory gate. Verdict: k0_00 = A85's tree (3 200-7 000 CPU-h), not-RES(4) as its SelForm (C) leaf, A90 sect 6(i).
+- Discipline: 2 processes, BLAS pinned, headroom 12 GB at launch; A57/A60/A61/A86 untouched; A85/A87/A88/A90 imported only; frozen verifiers
+  untouched; no certificate emitted. Files: docs/proofs/frame_census.md, attempts/A91-frame-census/{code,results,notes,logs}, lean/depgraph.json
+  (C.K4TIER note, chip released) + svg, REGISTRY row.

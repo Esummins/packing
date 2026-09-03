@@ -1,0 +1,57 @@
+--- C1  Trump-with-2-crowds (the archetype) ---
+  side s = 3.877083590022814   (frame_census window [3.82, s-hat])
+  sq0  BL  mu=0.000000000000   tau=D  mask=['B', 'L']  ladder={'1e-11': 'D', '1e-09': 'D', '1e-07': 'D', '1e-05': 'D', '1e-03': 'D'}
+  sq1  BL  mu=1.000000000000 (TANGENT)  tau=X  mask=['B']  ladder={'1e-11': 'X', '1e-09': 'X', '1e-07': 'X', '1e-05': 'X', '1e-03': 'X'}
+  sq2  BR  mu=0.000000000000   tau=D  mask=['B', 'R']  ladder={'1e-11': 'D', '1e-09': 'D', '1e-07': 'D', '1e-05': 'D', '1e-03': 'D'}
+  sq4  TL  mu=0.844525275673   tau=Y  mask=['L']  ladder={'1e-11': 'Y', '1e-09': 'Y', '1e-07': 'Y', '1e-05': 'Y', '1e-03': 'Y'}
+  sq5  TR  mu=0.000000000000   tau=D  mask=['R', 'T']  ladder={'1e-11': 'D', '1e-09': 'D', '1e-07': 'D', '1e-05': 'D', '1e-03': 'D'}
+  sq6  TL  mu=0.831679010450   tau=X  mask=['T']  ladder={'1e-11': 'X', '1e-09': 'X', '1e-07': 'X', '1e-05': 'X', '1e-03': 'X'}
+  sq8  BR  mu=1.000000000000 (TANGENT)  tau=D  mask=[]  ladder={'1e-11': 'D', '1e-09': 'D', '1e-07': 'D', '1e-05': 'D', '1e-03': 'D'}
+  sq9  TR  mu=1.000000000000 (TANGENT)  tau=D  mask=[]  ladder={'1e-11': 'D', '1e-09': 'D', '1e-07': 'D', '1e-05': 'D', '1e-03': 'D'}
+  sq3  FREE  mask=['L']
+  sq7  FREE  mask=[]
+  sq10 FREE  mask=['R']
+  role pattern (BL,BR,TR,TL) = (2, 2, 2, 2) ; free = 3
+  13 slots: ['0x', '0y', '1x', '2x', '2y', '4y', '5x', '5y', '6x', '8x', '8y', '9x', '9y']
+  slot 0x e=(1, 0): column [0, 1, 8] terminal 8I  (cluster [0, 1, 2, 3, 5, 7, 8, 9, 10], 7 cands)
+  slot 0y e=(0, 1): column [0, 3, 7, 4] terminal 4I  (cluster [0, 3, 4, 5, 6, 7, 9], 5 cands)
+  slot 1x e=(1, 0): column [1, 8] terminal 8I  (cluster [1, 2, 8, 10], 7 cands)
+  slot 2x e=(-1, 0): column [2, 8, 1] terminal 1I  (cluster [0, 1, 2, 3, 4, 7, 8], 6 cands)
+  slot 2y e=(0, 1): column [2, 8, 7, 9] terminal 9I  (cluster [2, 4, 5, 6, 7, 8, 9, 10], 5 cands)
+  slot 4y e=(0, -1): column [4, 7, 8] terminal 8I  (cluster [0, 1, 2, 3, 4, 7, 8], 6 cands)
+  slot 5x e=(-1, 0): column [5, 9, 6] terminal 6I  (cluster [0, 3, 4, 5, 6, 7, 9], 6 cands)
+  slot 5y e=(0, -1): column [5, 9, 7, 8] terminal 8I  (cluster [0, 1, 2, 3, 5, 7, 8, 9, 10], 6 cands)
+  slot 6x e=(1, 0): column [6, 9] terminal 9I  (cluster [5, 6, 9, 10], 7 cands)
+  slot 8x e=(-1, 0): column [8, 1] terminal 1I  (cluster [0, 1, 3, 4, 7, 8], 6 cands)
+  slot 8y e=(0, 1): column [8, 7, 9] terminal 9I  (cluster [4, 5, 6, 7, 8, 9, 10], 5 cands)
+  slot 9x e=(-1, 0): column [9, 6] terminal 6I  (cluster [0, 3, 4, 6, 7, 9], 6 cands)
+  slot 9y e=(0, -1): column [9, 7, 8] terminal 8I  (cluster [0, 1, 2, 3, 7, 8, 9, 10], 6 cands)
+  R1 : PASS
+  R2 : PASS
+  R3 : PASS
+  R5 : PASS
+  sign-consistency (L3): PASS
+  R4 mutuality rows: 13 I-terminals, 13 with the mutual slot present, 0 PLATEAU-flagged
+  C1 verdict: PASS (survives R1-R5)
+C1 archetype: {'verdict': 'OPEN', 'boxes': 111, 'killed': 0, 'seconds': 0.3014223575592041, 'depth': 10, 'reason': 'bin_floor', 'tag': 'C1_archetype', 'margin_root': 0.10355339059327373}
+1 CLOSED R6ok False boxes 1 0.004s
+2 CLOSED R6ok False boxes 1 0.004s
+3 CLOSED R6ok False boxes 1 0.004s
+4 CLOSED R6ok False boxes 1 0.004s
+5 CLOSED R6ok False boxes 1 0.003s
+6 CLOSED R6ok False boxes 1 0.004s
+7 CLOSED R6ok False boxes 1 0.003s
+8 CLOSED R6ok False boxes 1 0.004s
+9 CLOSED R6ok False boxes 1 0.003s
+10 CLOSED R6ok False boxes 1 0.003s
+11 CLOSED R6ok False boxes 1 0.004s
+12 CLOSED R6ok False boxes 1 0.003s
+13 CLOSED R6ok False boxes 1 0.003s
+14 CLOSED R6ok False boxes 1 0.004s
+15 CLOSED R6ok False boxes 1 0.004s
+16 CLOSED R6ok False boxes 1 0.004s
+17 CLOSED R6ok False boxes 1 0.004s
+18 CLOSED R6ok False boxes 1 0.004s
+19 CLOSED R6ok False boxes 1 0.004s
+20 CLOSED R6ok False boxes 1 0.005s
+PILOT: 20 frames, 20 CLOSED (100.0%), mean 0.0038 s/frame, max 0.005

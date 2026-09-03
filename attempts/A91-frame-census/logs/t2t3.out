@@ -1,0 +1,30 @@
+exact labelled: L0 1.040303e+19  L1 1.557786e+32
+shape weights built (165 shapes, L0 check 1.040303e+19 vs 1.040303e+19)
+  100/400 samples 5s
+  200/400 samples 9s
+  300/400 samples 13s
+  400/400 samples 18s
+400 L0 samples (0 rejected shapes)
+MC orbit counts (unbiased, orbits = N * E[1/|orbit|]):
+  L0 orbits = 1.877007e+16 +- 5.2e+14   (labelled/|G| = 1.248822e+16; trivial-stabiliser share 0.6100)
+  L1 orbits = 1.274841e+29 +- 1.3e+28   (labelled/|G| = 5.725857e+28; trivial-stabiliser share 0.9700)
+mean #L1 per L0 = 952519722557.9600  -> L1/L0 check 9.9091e+30 (exact 1.5578e+32)
+E[#L2 | L1] = 244302579.9870 +- 270402901.0050   ->  L2 labelled = 3.8057e+40 +- 4.2e+40
+E[#full column systems | L1] = 1.0035e+27 +- 1.3e+27 ; sign-consistent share 0.0000  -> L3 labelled point 5.3801e+50, UB 1.5632e+59
+R6: 316 frames triaged, 315 killed  kill rate 0.9968 +- 0.0062
+corner-sharing: #shared corner pairs distribution {'6': 316} ; mean #free squares acting as middles 0.332
+--- T3 pilot ---
+1 realisable-at-R6 frames available; piloting 1
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A91-frame-census\code\run_t2t3.py", line 233, in <module>
+    main(n, p)
+    ~~~~^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A91-frame-census\code\run_t2t3.py", line 191, in main
+    R.sample_terminals(f, rng2)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A91-frame-census\code\real91.py", line 114, in sample_terminals
+    f.terminal[s] = rng.choice(cand)
+                    ~~~~~~~~~~^^^^^^
+  File "C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\Lib\random.py", line 353, in choice
+    raise IndexError('Cannot choose from an empty sequence')
+IndexError: Cannot choose from an empty sequence

@@ -1,0 +1,42 @@
+# A91 T2/T3 spec (theory lead -> Opus chore). Definitions are docs/proofs/frame_census.md §1–§2; read it first.
+
+## Objects (container coordinates; corners BL, BR, TR, TL; walls L, R, B, T; directions +x, -x, +y, -y)
+
+Square data (11 squares, labelled 0..10 in the enumeration, quotiented later):
+* role: home corner c (open intruder or tangent) or FREE. Open intruders per corner n_c >= 2 (patterns of Lemma F1(iii)). Tangent squares are only needed as (I)-terminals; enumerate them as an optional flag on FREE squares: `tangent_at = c` (a free square with mu_c = 1), with an argmin type.
+* type tau in {X, Y, D} for home squares. Retreat directions in container coords: for corner c with "away" signs (sx, sy) (BL: (+,+), BR: (-,+), TR: (-,-), TL: (+,-)): X -> {sx*x}, Y -> {sy*y}, D -> both.
+* mask omega subset of {L,R,B,T}: home squares of c only c's two walls; FREE: <= 1 wall.
+* slots: (Q, e) for Q open intruder, e in retreat set.
+* column per slot: sequence Q=N0,...,Nk (distinct), terminal W (Nk has the far wall of e in its mask) or I (Nk home square of c_e or c_op with type containing the axis of e), minimal.
+* link sign class: unordered pair {M,N} with sigma(M,N) in {-,0,+}^2 \ {(0,0)}; N presses M against e iff n_M . e < 0 where sigma gives the signs of n_M. All columns' links must be sign-consistent (one sigma per pair).
+
+Levels: L0 (roles, tau, omega); L1 = L0 + terminal per slot; L2 = L1 + first link N1 per slot; L3 = full columns.
+
+Group: G = (prod_c S_{n_c} x S_f) x D4; D4 acts on corners/walls/directions; types transform as directions. Report orbit counts (Burnside, exact) AND labelled counts.
+
+## Necessary conditions (exact, cheap first; every one is a theorem in frame_census.md §2 or cited)
+R1 masks: per wall <= 3 squares; <= 1 FREE per wall; <= 1 home square per corner with both walls; a both-walls square is an open intruder with depth >= 1/2.
+R2 slots: every open intruder has >= 1 slot; per slot the terminal is admissible (F3 a/b).
+R3 COL: for m >= m0 = 1+2*sqrt2 every W-column has >= 3 members (first link != terminal); I-columns >= 2. Ghost regime (m in [3.82, m0)): W-columns of 2 allowed only with the diamond flags (both tilts within 6.3 deg of 45 and d_c(Q) <= 0.0084; the terminal is then the far-corner home square adjacent along e) — enumerate the ghost census separately with a flag.
+R4 mutuality (F3 c): if N is an I-terminal of (Q, e) and N is an open intruder, then (N, -e) is a slot and its column must be consistent with Q in C_{-e}(N) (Q deepens under -e automatically). Rate condition: report as a geometric row (types give rates: X/Y rate 1; D rate < 1 unless axis-aligned); balanced mutual columns are flagged PLATEAU, NOT excluded.
+R5 boxes (F6 + A88 label boxes): centre boxes: home square of c: c + [1/2, 1+sqrt2/2)^2 (open intruder: strict); FREE: outside every c + [1/2, 3/2)^2 (plus shape) — use the bounding box, as A88 did, and flag it; wall in mask: centre within [1/2, sqrt2/2] of that wall. Link (M -> N, e): box distance <= sqrt2 and (c_N - c_M).e > -1 realisable on the boxes; terminal of a 3-column within 2*sqrt2 of Q. Side m ranges over [3.82, s-hat]: use the sound value per constraint (as A88 did with S_LO/S_HI).
+R6 (samples only) realisability: adapt A88's interval-linear triage (attempts/A88-fj-census/code/p88_triage.py, a88lib.py) to a frame's rows: containment, wall rows for masks, contact rows (|c_N - c_M| in [1, sqrt2] linearised over tilt bins as A88 does) for links, the type rows (argmin side: X => the square's leftmost point is below the diagonal of c's frame etc. — encode at least the necessary centre-side condition: X-type at BL => c_y - c_x <= something derived from Lemma K: the argmin lies on {x = mu} strictly below the diagonal; a sufficient necessary condition is that the square's lowest point has y-coordinate < its leftmost point's x-coordinate... derive and state what you encode), and the intrusion rows (some point of Q in (0,1)^2: A85's reach set, `attempts/A85-k0-route/code/corner85.py` boxes). Kill rate and ms/frame.
+
+## Canaries (run FIRST; all must pass before counting)
+C1 Trump-with-2-crowds (the archetype): from attempts/A03-upper-reconstruct/trump11_exact.json (60-digit) build the frame by code with attempts/A90-nocrit-blocked/code/t3_90.py (import it; corner_state, all_pair_contacts, wall_contacts, cluster, wall_anchored, intruder_anchored, depth_arg): roles = the exact open intruders {0: BL, 2: BR, 8: BR, 4: TL, 6: TL, 5: TR} plus the tangent squares promoted to home squares: 1 -> BL (choose 1 over 3; both are tangent, gaps +1.6e-7) and 9 -> TR; types from depth_arg's argmin set at mu = 1 (use the tolerance ladder; state what you get: expect sq1 X-type, sq9 per its argmin); masks from wall_contacts; columns = the cluster chains for every slot of all 8 home squares, extracted as minimal chains from the cluster edges (BFS from Q over blocking edges to the first terminal). Assert: the resulting object is a valid L0/L1/L2/L3 frame (all of R1–R5 pass) and its canonical form is a member of the enumerated census at every level. It must NOT be killed by R1–R5; it may be killed by R6/T3 only.
+C2 Trump itself: roles [1,1,2,1] open intruders (A90 t3_trump.json) -> not K0-BLOCKED -> not a frame. Assert absence.
+C3 the four K0-BLOCKED endpoints: attempts/A87-drain-flow/results/k0dir87.polish.jsonl rows with exact_K0_BLOCKED true (tags s0380 x2, s0076, s0259; z_polished is the 34-vector: unpack with t3_90.unpack_z). For each: compute roles/types/masks/contacts/clusters with t3_90 (tol 1e-6; their side is 4.0000, so run the geometry at their own side), report which slots are anchored (W/I) and extract the frame of the anchored slots; assert that every constraint R1–R5 that applies HOLDS on the real geometry (a violation = a bug in the constraint or the code, report it, do not patch the constraint) and that the extracted partial frame extends to a census member. (They are not Psi-minimal minimisers, so unanchored slots are expected; say how many.)
+
+## Counting deliverables (results/census91.json + notes/t2_report.md)
+1. L0 exact: labelled and orbit counts per role pattern, before/after R1.
+2. L1 exact: product formula sum_{tau,omega} prod_slots A(slot) with R2/R3 admissibility; orbit count by Burnside over G (Fix(g) by the same product restricted to g-invariant data); ghost census separately. Report the dominant constraint (ablation: raw -> R1 -> R2 -> R3 -> R4 -> R5).
+3. L2: exact if <= 1e7 orbits after R5, else Burnside + MC bracket (uniform MC over L1 survivors, count admissible first-link vectors per survivor with R5 box tests).
+4. L3 bracket: MC over L2 survivors: number of sign-consistent chain systems per survivor (DFS with a node cap; report capped fraction), giving [exact lower family, point estimate +- , exact upper bound].
+5. Realisable count: R6 on a uniform sample of >= 500 L2 survivors (and on the C1 canary): kill rate with CI, ms/frame, and the extrapolated realisable count at L2.
+6. Corner-sharing pattern distribution over R6 survivors: for each frame, which corner pairs share column members (a square that is a member of columns of two different corners), and how many free squares are middles.
+
+## T3 pilot (after T2; <= 20 frames; write notes/t3_report.md)
+Per realisable L2/L3 frame from the sample, the exclusion certificate: build the frame's rows (roles -> A85 reach boxes; masks -> wall rows; links -> contact rows; types -> the encoded rows) and run the A88 core-box B&B realisability (p88_fj.py-style: HC4 + a-structure + I_overlap + containment, NO FJ rows — we are excluding packings, not critical points) with side s <= s-hat, box cap 20 000, time cap 600 s: closure rate and s/frame. This is a COST measurement (float intervals), no certificate is emitted. Also measure: at what depth (number of bisections) the archetype C1 closes or fails.
+
+## Constraints
+<= 2 processes total, BLAS pinned (set OMP/OPENBLAS/MKL threads = 1 before numpy import), commit headroom > 6 GB (check Win32 available page file before launching anything heavy; wait out dips). Never touch A57/A60/A61/A86 files or processes; never modify anything under attempts/A85, A87, A88, A90 or lean/ or certs/ — import only. Frozen verifiers untouched. All writes under attempts/A91-frame-census/{code,results,notes,logs}. Report tersely: L1 orbit count (exact) first, L2/L3 bracket second, realisable count third, T3 cost fourth, canary verdicts, dominant constraint, pointers.
