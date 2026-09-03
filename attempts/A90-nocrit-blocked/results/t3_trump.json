@@ -1,0 +1,1106 @@
+{
+ "sigma": 3.877083590022815,
+ "n_block": [
+  1,
+  1,
+  2,
+  1
+ ],
+ "intruders": {
+  "BL": [
+   0
+  ],
+  "BR": [
+   2
+  ],
+  "TL": [
+   4,
+   6
+  ],
+  "TR": [
+   5
+  ]
+ },
+ "depths": {
+  "BL": {
+   "0": 0.9999999999999993
+  },
+  "BR": {
+   "2": 1.0
+  },
+  "TL": {
+   "4": 0.15547472432679665,
+   "6": 0.16832098954974595
+  },
+  "TR": {
+   "5": 1.0
+  }
+ },
+ "TL": {
+  "4": {
+   "sq": 4,
+   "corner": "TL",
+   "depth": 0.15547472432679665,
+   "tilt": 0.0,
+   "theta": 0.0,
+   "center": [
+    0.4999999999999994,
+    2.532558314349611
+   ],
+   "non_deepest": true,
+   "depth_max_other": 0.16832098954974595,
+   "n_intruders_at_corner": 2,
+   "argmin": [
+    [
+     0.0,
+     0.8445252756732033
+    ],
+    [
+     0.8445252756732033,
+     0.8445252756732033
+    ]
+   ],
+   "K": {
+    "e_x": false,
+    "e_y": true,
+    "(1,1)": true
+   },
+   "cardinals": [
+    "e_y"
+   ],
+   "contacts": [
+    {
+     "kind": "pair",
+     "other": 6,
+     "n": [
+      -0.763999473636485,
+      -0.6452168660870342
+     ],
+     "pt": [
+      0.9999999999999993,
+      3.032558314349611
+     ],
+     "gap": 4.440892098500626e-16,
+     "type": "vertex",
+     "n_admissible": 1
+    },
+    {
+     "kind": "pair",
+     "other": 7,
+     "n": [
+      -0.6452168660870339,
+      0.7639994736364853
+     ],
+     "pt": [
+      0.9999999999999993,
+      2.032558314349611
+     ],
+     "gap": -4.440892098500626e-16,
+     "type": "vertex",
+     "n_admissible": 1
+    },
+    {
+     "kind": "wall",
+     "other": "x=0",
+     "n": [
+      1.0,
+      0.0
+     ],
+     "pt": [
+      -6.106226635438361e-16,
+      2.032558314349611
+     ],
+     "gap": -6.106226635438361e-16,
+     "type": "wall",
+     "n_admissible": 1
+    },
+    {
+     "kind": "wall",
+     "other": "x=0",
+     "n": [
+      1.0,
+      0.0
+     ],
+     "pt": [
+      -6.106226635438361e-16,
+      3.032558314349611
+     ],
+     "gap": -6.106226635438361e-16,
+     "type": "wall",
+     "n_admissible": 1
+    }
+   ],
+   "n_contacts": 4,
+   "lock": {
+    "m": 4,
+    "plus": true,
+    "plus_mass": 3.153426701010839,
+    "minus": true,
+    "minus_mass": 3.153426701010839,
+    "selfstress": true
+   },
+   "menu": {
+    "applies": false,
+    "reason": "flush",
+    "tilt": 0.0
+   },
+   "lock_away_from_flush": null,
+   "LOCKED": true,
+   "clusters": {
+    "e_y": {
+     "e_world": [
+      0.0,
+      -1.0
+     ],
+     "members": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      8
+     ],
+     "size": 7,
+     "edges": [
+      [
+       4,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       3,
+       0
+      ]
+     ],
+     "wall_anchored": true,
+     "wall_hits": [
+      [
+       0,
+       "y=0"
+      ],
+      [
+       0,
+       "y=0"
+      ],
+      [
+       1,
+       "y=0"
+      ],
+      [
+       1,
+       "y=0"
+      ],
+      [
+       2,
+       "y=0"
+      ],
+      [
+       2,
+       "y=0"
+      ]
+     ],
+     "intruder_anchored": false,
+     "intruder_hits": [],
+     "free": false,
+     "sides": [
+      {
+       "other": 6,
+       "kind": "pair",
+       "ndote": 0.6452168660870342,
+       "blocking": false
+      },
+      {
+       "other": 7,
+       "kind": "pair",
+       "ndote": -0.7639994736364853,
+       "blocking": true
+      },
+      {
+       "other": "x=0",
+       "kind": "wall",
+       "ndote": 0.0,
+       "blocking": false
+      },
+      {
+       "other": "x=0",
+       "kind": "wall",
+       "ndote": 0.0,
+       "blocking": false
+      }
+     ]
+    },
+    "(1,1)": {
+     "e_world": [
+      1.0,
+      -1.0
+     ],
+     "members": [
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "size": 8,
+     "edges": [
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       8,
+       10
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "wall_anchored": true,
+     "wall_hits": [
+      [
+       2,
+       "x=s"
+      ],
+      [
+       2,
+       "y=0"
+      ],
+      [
+       2,
+       "x=s"
+      ],
+      [
+       2,
+       "y=0"
+      ],
+      [
+       5,
+       "x=s"
+      ],
+      [
+       5,
+       "x=s"
+      ],
+      [
+       10,
+       "x=s"
+      ]
+     ],
+     "intruder_anchored": true,
+     "intruder_hits": [
+      {
+       "sq": 2,
+       "corner": "BR",
+       "depth": 1.0,
+       "rate": 1.0,
+       "fd": 0.9999999983634211
+      }
+     ],
+     "free": false,
+     "sides": [
+      {
+       "other": 6,
+       "kind": "pair",
+       "ndote": -0.1187826075494508,
+       "blocking": true
+      },
+      {
+       "other": 7,
+       "kind": "pair",
+       "ndote": -1.4092163397235193,
+       "blocking": true
+      },
+      {
+       "other": "x=0",
+       "kind": "wall",
+       "ndote": 1.0,
+       "blocking": false
+      },
+      {
+       "other": "x=0",
+       "kind": "wall",
+       "ndote": 1.0,
+       "blocking": false
+      }
+     ]
+    }
+   },
+   "RETREATABLE": false,
+   "diag_free": false,
+   "cluster_diag": {
+    "e_world": [
+     1.0,
+     -1.0
+    ],
+    "members": [
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "size": 8,
+    "wall_anchored": true,
+    "wall_hits": [
+     [
+      2,
+      "x=s"
+     ],
+     [
+      2,
+      "y=0"
+     ],
+     [
+      2,
+      "x=s"
+     ],
+     [
+      2,
+      "y=0"
+     ],
+     [
+      5,
+      "x=s"
+     ],
+     [
+      5,
+      "x=s"
+     ],
+     [
+      10,
+      "x=s"
+     ]
+    ],
+    "intruder_anchored": true,
+    "intruder_hits": [
+     {
+      "sq": 2,
+      "corner": "BR",
+      "depth": 1.0,
+      "rate": 1.0,
+      "fd": 0.9999999983634211
+     }
+    ],
+    "free": false
+   }
+  },
+  "6": {
+   "sq": 6,
+   "corner": "TL",
+   "depth": 0.16832098954974595,
+   "tilt": 0.701307105546144,
+   "theta": 0.701307105546144,
+   "center": [
+    1.536287180312013,
+    3.172475420161054
+   ],
+   "non_deepest": false,
+   "depth_max_other": 0.15547472432679665,
+   "n_intruders_at_corner": 2,
+   "argmin": [
+    [
+     0.831679010450254,
+     0.6452168660870354
+    ]
+   ],
+   "K": {
+    "e_x": true,
+    "e_y": false,
+    "(1,1)": true
+   },
+   "cardinals": [
+    "e_x"
+   ],
+   "contacts": [
+    {
+     "kind": "pair",
+     "other": 4,
+     "n": [
+      0.763999473636485,
+      0.6452168660870342
+     ],
+     "pt": [
+      0.9999999999999993,
+      3.032558314349611
+     ],
+     "gap": 4.440892098500626e-16,
+     "type": "vertex",
+     "n_admissible": 1
+    },
+    {
+     "kind": "pair",
+     "other": 9,
+     "n": [
+      -0.6452168660870342,
+      0.763999473636485
+     ],
+     "pt": [
+      2.2408953501737727,
+      3.1130841163863288
+     ],
+     "gap": 4.440892098500626e-16,
+     "type": "kiss",
+     "n_admissible": 2
+    },
+    {
+     "kind": "pair",
+     "other": 9,
+     "n": [
+      -0.6452168660870342,
+      0.763999473636485
+     ],
+     "pt": [
+      1.4768958765372875,
+      2.467867250299294
+     ],
+     "gap": 4.440892098500626e-16,
+     "type": "kiss",
+     "n_admissible": 2
+    },
+    {
+     "kind": "wall",
+     "other": "y=s",
+     "n": [
+      0.0,
+      -1.0
+     ],
+     "pt": [
+      1.5956784840867386,
+      3.8770835900228136
+     ],
+     "gap": 0.0,
+     "type": "wall",
+     "n_admissible": 1
+    }
+   ],
+   "n_contacts": 4,
+   "lock": {
+    "m": 4,
+    "plus": true,
+    "plus_mass": 2.4092163397235193,
+    "minus": true,
+    "minus_mass": 2.4092163397235193,
+    "selfstress": true
+   },
+   "menu": {
+    "applies": true,
+    "tilt": 0.701307105546144,
+    "pivots": [
+     {
+      "wall": "y=s",
+      "O": [
+       1.5956784840867386,
+       3.8770835900228136
+      ],
+      "omega": -1.0,
+      "n_far": 1,
+      "far": [
+       {
+        "k": 0,
+        "kind": "pair",
+        "other": 4,
+        "rate": -0.26087506138911287
+       }
+      ]
+     }
+    ],
+    "MENU_LOCKED": true
+   },
+   "lock_away_from_flush": true,
+   "LOCKED": true,
+   "clusters": {
+    "e_x": {
+     "e_world": [
+      1.0,
+      -0.0
+     ],
+     "members": [
+      5,
+      6,
+      9,
+      10
+     ],
+     "size": 4,
+     "edges": [
+      [
+       6,
+       9
+      ],
+      [
+       9,
+       10
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "wall_anchored": true,
+     "wall_hits": [
+      [
+       5,
+       "x=s"
+      ],
+      [
+       5,
+       "x=s"
+      ],
+      [
+       10,
+       "x=s"
+      ]
+     ],
+     "intruder_anchored": false,
+     "intruder_hits": [],
+     "free": false,
+     "sides": [
+      {
+       "other": 4,
+       "kind": "pair",
+       "ndote": 0.763999473636485,
+       "blocking": false
+      },
+      {
+       "other": 9,
+       "kind": "pair",
+       "ndote": -0.6452168660870342,
+       "blocking": true
+      },
+      {
+       "other": 9,
+       "kind": "pair",
+       "ndote": -0.6452168660870342,
+       "blocking": true
+      },
+      {
+       "other": "y=s",
+       "kind": "wall",
+       "ndote": 0.0,
+       "blocking": false
+      }
+     ]
+    },
+    "(1,1)": {
+     "e_world": [
+      1.0,
+      -1.0
+     ],
+     "members": [
+      5,
+      6,
+      9,
+      10
+     ],
+     "size": 4,
+     "edges": [
+      [
+       6,
+       9
+      ],
+      [
+       9,
+       10
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "wall_anchored": true,
+     "wall_hits": [
+      [
+       5,
+       "x=s"
+      ],
+      [
+       5,
+       "x=s"
+      ],
+      [
+       10,
+       "x=s"
+      ]
+     ],
+     "intruder_anchored": false,
+     "intruder_hits": [],
+     "free": false,
+     "sides": [
+      {
+       "other": 4,
+       "kind": "pair",
+       "ndote": 0.1187826075494508,
+       "blocking": false
+      },
+      {
+       "other": 9,
+       "kind": "pair",
+       "ndote": -1.4092163397235193,
+       "blocking": true
+      },
+      {
+       "other": 9,
+       "kind": "pair",
+       "ndote": -1.4092163397235193,
+       "blocking": true
+      },
+      {
+       "other": "y=s",
+       "kind": "wall",
+       "ndote": 1.0,
+       "blocking": false
+      }
+     ]
+    }
+   },
+   "RETREATABLE": false,
+   "diag_free": false,
+   "cluster_diag": {
+    "e_world": [
+     1.0,
+     -1.0
+    ],
+    "members": [
+     5,
+     6,
+     9,
+     10
+    ],
+    "size": 4,
+    "wall_anchored": true,
+    "wall_hits": [
+     [
+      5,
+      "x=s"
+     ],
+     [
+      5,
+      "x=s"
+     ],
+     [
+      10,
+      "x=s"
+     ]
+    ],
+    "intruder_anchored": false,
+    "intruder_hits": [],
+    "free": false
+   }
+  }
+ },
+ "RES": true,
+ "res_items": [
+  {
+   "sq": 4,
+   "corner": "TL",
+   "depth": 0.15547472432679665,
+   "tilt": 0.0,
+   "theta": 0.0,
+   "center": [
+    0.4999999999999994,
+    2.532558314349611
+   ],
+   "non_deepest": true,
+   "depth_max_other": 0.16832098954974595,
+   "n_intruders_at_corner": 2,
+   "argmin": [
+    [
+     0.0,
+     0.8445252756732033
+    ],
+    [
+     0.8445252756732033,
+     0.8445252756732033
+    ]
+   ],
+   "K": {
+    "e_x": false,
+    "e_y": true,
+    "(1,1)": true
+   },
+   "cardinals": [
+    "e_y"
+   ],
+   "contacts": [
+    {
+     "kind": "pair",
+     "other": 6,
+     "n": [
+      -0.763999473636485,
+      -0.6452168660870342
+     ],
+     "pt": [
+      0.9999999999999993,
+      3.032558314349611
+     ],
+     "gap": 4.440892098500626e-16,
+     "type": "vertex",
+     "n_admissible": 1
+    },
+    {
+     "kind": "pair",
+     "other": 7,
+     "n": [
+      -0.6452168660870339,
+      0.7639994736364853
+     ],
+     "pt": [
+      0.9999999999999993,
+      2.032558314349611
+     ],
+     "gap": -4.440892098500626e-16,
+     "type": "vertex",
+     "n_admissible": 1
+    },
+    {
+     "kind": "wall",
+     "other": "x=0",
+     "n": [
+      1.0,
+      0.0
+     ],
+     "pt": [
+      -6.106226635438361e-16,
+      2.032558314349611
+     ],
+     "gap": -6.106226635438361e-16,
+     "type": "wall",
+     "n_admissible": 1
+    },
+    {
+     "kind": "wall",
+     "other": "x=0",
+     "n": [
+      1.0,
+      0.0
+     ],
+     "pt": [
+      -6.106226635438361e-16,
+      3.032558314349611
+     ],
+     "gap": -6.106226635438361e-16,
+     "type": "wall",
+     "n_admissible": 1
+    }
+   ],
+   "n_contacts": 4,
+   "lock": {
+    "m": 4,
+    "plus": true,
+    "plus_mass": 3.153426701010839,
+    "minus": true,
+    "minus_mass": 3.153426701010839,
+    "selfstress": true
+   },
+   "menu": {
+    "applies": false,
+    "reason": "flush",
+    "tilt": 0.0
+   },
+   "lock_away_from_flush": null,
+   "LOCKED": true,
+   "clusters": {
+    "e_y": {
+     "e_world": [
+      0.0,
+      -1.0
+     ],
+     "members": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      8
+     ],
+     "size": 7,
+     "edges": [
+      [
+       4,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       3,
+       0
+      ]
+     ],
+     "wall_anchored": true,
+     "wall_hits": [
+      [
+       0,
+       "y=0"
+      ],
+      [
+       0,
+       "y=0"
+      ],
+      [
+       1,
+       "y=0"
+      ],
+      [
+       1,
+       "y=0"
+      ],
+      [
+       2,
+       "y=0"
+      ],
+      [
+       2,
+       "y=0"
+      ]
+     ],
+     "intruder_anchored": false,
+     "intruder_hits": [],
+     "free": false,
+     "sides": [
+      {
+       "other": 6,
+       "kind": "pair",
+       "ndote": 0.6452168660870342,
+       "blocking": false
+      },
+      {
+       "other": 7,
+       "kind": "pair",
+       "ndote": -0.7639994736364853,
+       "blocking": true
+      },
+      {
+       "other": "x=0",
+       "kind": "wall",
+       "ndote": 0.0,
+       "blocking": false
+      },
+      {
+       "other": "x=0",
+       "kind": "wall",
+       "ndote": 0.0,
+       "blocking": false
+      }
+     ]
+    },
+    "(1,1)": {
+     "e_world": [
+      1.0,
+      -1.0
+     ],
+     "members": [
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "size": 8,
+     "edges": [
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       8,
+       10
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "wall_anchored": true,
+     "wall_hits": [
+      [
+       2,
+       "x=s"
+      ],
+      [
+       2,
+       "y=0"
+      ],
+      [
+       2,
+       "x=s"
+      ],
+      [
+       2,
+       "y=0"
+      ],
+      [
+       5,
+       "x=s"
+      ],
+      [
+       5,
+       "x=s"
+      ],
+      [
+       10,
+       "x=s"
+      ]
+     ],
+     "intruder_anchored": true,
+     "intruder_hits": [
+      {
+       "sq": 2,
+       "corner": "BR",
+       "depth": 1.0,
+       "rate": 1.0,
+       "fd": 0.9999999983634211
+      }
+     ],
+     "free": false,
+     "sides": [
+      {
+       "other": 6,
+       "kind": "pair",
+       "ndote": -0.1187826075494508,
+       "blocking": true
+      },
+      {
+       "other": 7,
+       "kind": "pair",
+       "ndote": -1.4092163397235193,
+       "blocking": true
+      },
+      {
+       "other": "x=0",
+       "kind": "wall",
+       "ndote": 1.0,
+       "blocking": false
+      },
+      {
+       "other": "x=0",
+       "kind": "wall",
+       "ndote": 1.0,
+       "blocking": false
+      }
+     ]
+    }
+   },
+   "RETREATABLE": false,
+   "diag_free": false
+  }
+ ],
+ "fj": {
+  "sigma": 3.8770835900515914,
+  "fj_at_tight_tol": true,
+  "fj_feasible_any_tol": true,
+  "ladder": [
+   {
+    "tol": 1e-06,
+    "m_active": 42,
+    "cone_residual": 0.0,
+    "fj_feasible": true,
+    "support": 32,
+    "rank": 34,
+    "rank33": 33,
+    "n_rattlers": 0
+   },
+   {
+    "tol": 1e-05,
+    "m_active": 42,
+    "cone_residual": 0.0,
+    "fj_feasible": true,
+    "support": 32,
+    "rank": 34,
+    "rank33": 33,
+    "n_rattlers": 0
+   },
+   {
+    "tol": 0.0001,
+    "m_active": 42,
+    "cone_residual": 0.0,
+    "fj_feasible": true,
+    "support": 32,
+    "rank": 34,
+    "rank33": 33,
+    "n_rattlers": 0
+   },
+   {
+    "tol": 0.001,
+    "m_active": 42,
+    "cone_residual": 0.0,
+    "fj_feasible": true,
+    "support": 32,
+    "rank": 34,
+    "rank33": 33,
+    "n_rattlers": 0
+   }
+  ]
+ }
+}

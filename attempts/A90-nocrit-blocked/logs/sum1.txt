@@ -1,0 +1,245 @@
+exit events           : 520
+reproduce stored      : 520  (|d sigma_exit| < 1e-9 and same corner)
+sliding blockers      : 520
+events with 1 blocker : 520
+corners freed         : {'TR': 68, 'TL': 190, 'BL': 30, 'BR': 232}
+modes                 : {'blocker_slid_away': 520}
+
+non-deepest at its corner                     520/520  1.0000
+RETREATABLE (cardinal translation test)       508/520  0.9769
+C_(1,1) free (diagonal retreat)               511/520  0.9827
+retreatable by SOME e in K                    511/520  0.9827
+NOT flush-locked (Lemma LOCK (b) LP)          515/520  0.9904
+rattler (0 active contacts)                   398/520  0.7654
+MENU applies (tilted + wall contact)          108/520  0.2077
+MENU-LOCKED                                     8/520  0.0154
+MENU-UNLOCKED (menu applies, no far side)     100/520  0.1923
+both cardinals in K                            27/520  0.0519
+no cardinal in K                                0/520  0.0000
+(1,1) in K                                    520/520  1.0000
+
+depth of the sliding blocker at x_ok  : min 9.230e-10 median 1.000e-09 max 4.257e-03
+MENU reason breakdown                 : {'no_wall_contact': 412, 'applies': 108}
+n active contacts histogram           : {0: 398, 1: 106, 2: 4, 3: 7, 4: 2, 5: 3}
+
+CARDINAL cluster size histogram (one entry per (blocker, cardinal e in K)):
+  size  1 :  534
+  size  3 :    2
+  size  4 :   11
+  total 547 cardinal clusters
+  wall-anchored     : 12
+  intruder-anchored : 5
+  free (neither)    : 535
+DIAGONAL cluster size histogram: {1: 506, 2: 4, 3: 2, 4: 6, 5: 2}
+
+exit motion (x_ok -> x_bad, the two bisection endpoints):
+  Q is the SOLE moving square         : 0/520
+  n squares moving histogram          : {3: 1, 4: 1, 5: 19, 6: 43, 7: 60, 8: 58, 9: 93, 10: 61, 11: 184}
+  Q rotation exceeds Q translation    : 47/520
+  Q carries the largest displacement  : 46/520
+
+==============================================================================
+NOT RETREATABLE by the cardinal translation test, yet the flow exited: 12
+==============================================================================
+--- s0083  sq6 at TR   depth 1.000e-09  tilt 4.327e-08 rad  contacts 3  LOCKED False  MENU no_wall_contact  C_(1,1) free True
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [7]   n_intruders 2
+    C_e_y e_world [-0.0, -1.0] size 4 members [2, 3, 6, 9]
+        wall_anchored True [[3, 'y=0']]
+        intruder_anchored True [(2, 'BR', 0.113426, 1.0, 1.0)]
+        blocking contacts of Q for this e: [('pair', 9, -0.775791)]
+        corner-side contacts of Q:         [('pair', 7, 1.0), ('pair', 7, 1.0)]
+        cluster growth edges (member -> outsider): [[6, 9], [9, 2], [2, 3]]
+    C_(1,1) size 2 members [6, 9] wall False intruder False free True
+    contact pair  7    n=(+0.000000,-1.000000) pt=(4.602561,3.602568) gap=7.73e-09 kiss  admissible axes 2
+    contact pair  7    n=(+0.000000,-1.000000) pt=(3.602561,3.602568) gap=7.73e-09 kiss  admissible axes 2
+    contact pair  9    n=(+0.630990,+0.775791) pt=(3.602561,2.602568) gap=4.75e-09 vertex
+    exit motion: ds -4.441e-15  linf 7.161e-15  moving squares [2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 6.405e-15 = 0.89 of max, Q dth 4.233e-15)
+                 per-square |dc|: 0:2.22e-16 1:2.48e-16 2:3.48e-15 3:6.22e-15 4:4.91e-15 5:5.55e-15 6:6.40e-15 7:4.44e-15 8:6.28e-16 9:7.16e-15 10:4.19e-15
+                 per-square |dth|: 2:6.83e-15 3:2.18e-16 4:2.00e-15 5:8.88e-16 6:4.23e-15 7:4.25e-15 9:3.66e-15 10:2.11e-15
+                 rotation dominates Q: False   Q sole mover: False
+--- s0121  sq2 at BR   depth 1.000e-09  tilt 1.143e-08 rad  contacts 5  LOCKED True  MENU True  C_(1,1) free False
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [3]   n_intruders 2
+    C_e_y e_world [-0.0, 1.0] size 4 members [2, 5, 8, 9]
+        wall_anchored True [[5, 'y=s']]
+        intruder_anchored False []
+        blocking contacts of Q for this e: [('pair', 9, -0.500893)]
+        corner-side contacts of Q:         [('pair', 3, 1.0), ('pair', 3, 1.0), ('wall', 'x=s', 0.0), ('wall', 'x=s', 0.0)]
+        cluster growth edges (member -> outsider): [[2, 9], [9, 8], [8, 5]]
+    C_(1,1) size 5 members [2, 4, 5, 8, 9] wall True intruder True free False
+    contact pair  3    n=(+0.000000,+1.000000) pt=(4.707887,1.000000) gap=2.62e-09 kiss  admissible axes 2
+    contact pair  3    n=(+0.000000,+1.000000) pt=(3.707887,1.000000) gap=2.62e-09 kiss  admissible axes 2
+    contact pair  9    n=(+0.865509,-0.500893) pt=(3.707887,2.000000) gap=6.29e-10 vertex
+    contact wall  x=s  n=(-1.000000,+0.000000) pt=(4.707887,2.000000) gap=1.00e-09 wall
+    contact wall  x=s  n=(-1.000000,+0.000000) pt=(4.707887,1.000000) gap=1.24e-08 wall
+    exit motion: ds -6.217e-15  linf 6.908e-15  moving squares [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 5.371e-15 = 0.78 of max, Q dth 1.499e-15)
+                 per-square |dc|: 0:9.93e-16 1:4.00e-16 2:5.37e-15 3:7.77e-16 4:4.45e-15 5:4.72e-15 6:6.78e-15 7:5.62e-15 8:6.91e-15 9:6.31e-15 10:9.93e-16
+                 per-square |dth|: 2:1.50e-15 3:1.61e-15 4:6.88e-15 5:6.44e-15 6:6.66e-16 7:4.22e-15 8:6.83e-15 9:6.88e-15 10:3.33e-16
+                 rotation dominates Q: False   Q sole mover: False
+--- s0243  sq6 at TR   depth 1.000e-09  tilt 1.020e-07 rad  contacts 3  LOCKED False  MENU no_wall_contact  C_(1,1) free False
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [7]   n_intruders 2
+    C_e_y e_world [-0.0, -1.0] size 3 members [2, 3, 6]
+        wall_anchored True [[3, 'y=0']]
+        intruder_anchored True [(2, 'BR', 0.128588, 1.0, 1.0)]
+        blocking contacts of Q for this e: [('pair', 2, -1.0)]
+        corner-side contacts of Q:         [('pair', 7, 1.0), ('pair', 7, 1.0)]
+        cluster growth edges (member -> outsider): [[6, 2], [2, 3]]
+    C_(1,1) size 3 members [2, 3, 6] wall True intruder True free False
+    contact pair  2    n=(-0.000000,+1.000000) pt=(3.343922,2.225247) gap=8.57e-08 vertex
+    contact pair  7    n=(+0.000000,-1.000000) pt=(4.207333,3.225247) gap=4.27e-08 kiss  admissible axes 2
+    contact pair  7    n=(+0.000000,-1.000000) pt=(3.207333,3.225247) gap=4.27e-08 kiss  admissible axes 2
+    exit motion: ds -4.441e-15  linf 8.815e-15  moving squares [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 6.312e-15 = 0.72 of max, Q dth 3.213e-15)
+                 per-square |dc|: 0:6.22e-15 1:4.44e-15 2:5.18e-15 3:6.82e-15 4:5.92e-15 5:5.88e-15 6:6.31e-15 7:3.14e-15 8:5.40e-15 9:2.22e-15 10:8.81e-15
+                 per-square |dth|: 0:1.22e-15 1:1.33e-15 2:6.83e-15 3:6.83e-15 4:4.12e-16 5:3.03e-15 6:3.21e-15 7:3.21e-15 8:4.44e-16 9:2.82e-15 10:6.22e-15
+                 rotation dominates Q: False   Q sole mover: False
+--- s0259  sq2 at BR   depth 1.000e-09  tilt 5.763e-07 rad  contacts 3  LOCKED False  MENU no_wall_contact  C_(1,1) free False
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [3]   n_intruders 2
+    C_e_y e_world [-0.0, 1.0] size 4 members [2, 6, 7, 10]
+        wall_anchored True [[6, 'y=s']]
+        intruder_anchored False []
+        blocking contacts of Q for this e: [('pair', 10, -0.572367)]
+        corner-side contacts of Q:         [('pair', 3, 1.0), ('pair', 3, 1.0)]
+        cluster growth edges (member -> outsider): [[2, 10], [10, 7], [7, 6]]
+    C_(1,1) size 4 members [2, 6, 7, 10] wall True intruder False free False
+    contact pair  3    n=(+0.000001,+1.000000) pt=(3.877515,1.000000) gap=2.63e-07 kiss  admissible axes 2
+    contact pair  3    n=(+0.000001,+1.000000) pt=(2.877515,1.000001) gap=2.63e-07 kiss  admissible axes 2
+    contact pair  10   n=(+0.819998,-0.572367) pt=(3.335573,2.000001) gap=2.69e-07 vertex
+    exit motion: ds +1.776e-15  linf 6.439e-15  moving squares [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 5.691e-15 = 0.88 of max, Q dth 6.037e-15)
+                 per-square |dc|: 0:6.75e-16 1:2.00e-15 2:5.69e-15 3:6.11e-15 4:1.40e-15 5:3.58e-15 6:2.81e-15 7:2.84e-15 8:3.55e-15 9:2.98e-15 10:1.26e-15
+                 per-square |dth|: 0:2.22e-16 2:6.04e-15 3:6.04e-15 4:6.00e-15 5:6.44e-15 6:1.67e-15 7:1.67e-15 8:2.78e-15 9:1.55e-15 10:1.67e-15
+                 rotation dominates Q: True   Q sole mover: False
+--- s0285  sq6 at TR   depth 1.000e-09  tilt 1.328e-06 rad  contacts 4  LOCKED True  MENU True  C_(1,1) free False
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [7]   n_intruders 2
+    C_e_y e_world [-0.0, -1.0] size 4 members [2, 3, 6, 9]
+        wall_anchored True [[3, 'y=0']]
+        intruder_anchored False []
+        blocking contacts of Q for this e: [('pair', 9, -0.66434)]
+        corner-side contacts of Q:         [('pair', 7, 1.0), ('pair', 7, 1.0), ('wall', 'x=s', 0.0)]
+        cluster growth edges (member -> outsider): [[6, 9], [9, 2], [2, 3]]
+    C_(1,1) size 4 members [2, 3, 6, 9] wall True intruder False free False
+    contact pair  7    n=(+0.000001,-1.000000) pt=(3.820817,3.519198) gap=9.26e-07 kiss  admissible axes 2
+    contact pair  7    n=(+0.000001,-1.000000) pt=(2.820817,3.519198) gap=9.26e-07 kiss  admissible axes 2
+    contact pair  9    n=(+0.747430,+0.664340) pt=(3.519198,2.519197) gap=6.27e-07 vertex
+    contact wall  x=s  n=(-1.000000,+0.000000) pt=(4.519198,2.519198) gap=1.27e-07 wall
+    exit motion: ds +1.776e-15  linf 6.772e-15  moving squares [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 2.391e-15 = 0.35 of max, Q dth 1.700e-15)
+                 per-square |dc|: 0:1.11e-15 1:1.13e-15 2:6.28e-16 3:2.23e-15 4:2.32e-15 5:4.44e-16 6:2.39e-15 7:5.20e-15 8:6.04e-15 9:2.59e-15 10:3.20e-15
+                 per-square |dth|: 2:6.77e-15 3:6.66e-15 4:1.42e-15 5:1.75e-15 6:1.70e-15 8:4.44e-16 9:6.77e-15 10:2.00e-15
+                 rotation dominates Q: False   Q sole mover: False
+--- s0302  sq6 at TR   depth 1.000e-09  tilt 6.094e-08 rad  contacts 3  LOCKED False  MENU no_wall_contact  C_(1,1) free True
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [7]   n_intruders 2
+    C_e_y e_world [-0.0, -1.0] size 4 members [2, 3, 6, 9]
+        wall_anchored True [[3, 'y=0'], [3, 'y=0']]
+        intruder_anchored True [(2, 'BR', 0.151979, 1.0, 1.0)]
+        blocking contacts of Q for this e: [('pair', 9, -0.901389)]
+        corner-side contacts of Q:         [('pair', 7, 1.0), ('pair', 7, 1.0)]
+        cluster growth edges (member -> outsider): [[6, 9], [9, 2], [2, 3]]
+    C_(1,1) size 2 members [6, 9] wall False intruder False free True
+    contact pair  7    n=(+0.000000,-1.000000) pt=(3.802130,3.438181) gap=3.78e-08 kiss  admissible axes 2
+    contact pair  7    n=(+0.000000,-1.000000) pt=(2.802130,3.438181) gap=3.78e-08 kiss  admissible axes 2
+    contact pair  9    n=(+0.433011,+0.901389) pt=(3.438159,2.438181) gap=1.08e-07 vertex
+    exit motion: ds -8.882e-16  linf 6.661e-15  moving squares [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 2.264e-15 = 0.34 of max, Q dth 1.920e-20)
+                 per-square |dc|: 0:1.55e-15 1:3.48e-15 2:6.28e-16 3:3.11e-15 4:2.26e-15 5:3.66e-15 6:2.26e-15 7:4.21e-15 8:4.44e-15 9:5.69e-15 10:2.89e-15
+                 per-square |dth|: 1:4.44e-15 2:6.27e-15 4:4.44e-15 5:6.66e-15 8:3.66e-15 9:6.22e-15 10:1.33e-15
+                 rotation dominates Q: False   Q sole mover: False
+--- s0435  sq6 at TR   depth 2.917e-08  tilt 2.815e-07 rad  contacts 5  LOCKED True  MENU True  C_(1,1) free False
+    K: {'e_x': True, 'e_y': False, '(1,1)': True}   cardinals ['e_x']   kept at corner [7]   n_intruders 2
+    C_e_x e_world [-1.0, -0.0] size 4 members [4, 5, 6, 8]
+        wall_anchored True [[5, 'x=0']]
+        intruder_anchored True [(4, 'TL', 0.249782, 1.0, 1.0)]
+        blocking contacts of Q for this e: [('pair', 8, -0.665304)]
+        corner-side contacts of Q:         [('pair', 7, 1.0), ('pair', 7, 1.0), ('wall', 'y=s', 0.0), ('wall', 'y=s', 0.0)]
+        cluster growth edges (member -> outsider): [[6, 8], [8, 4], [4, 5]]
+    C_(1,1) size 4 members [4, 5, 6, 8] wall True intruder True free False
+    contact pair  7    n=(-1.000000,+0.000000) pt=(3.365320,2.929835) gap=1.00e-11 kiss  admissible axes 2
+    contact pair  7    n=(-1.000000,+0.000000) pt=(3.365320,3.929835) gap=1.00e-11 kiss  admissible axes 2
+    contact pair  8    n=(+0.665304,+0.746572) pt=(2.365320,3.365321) gap=1.99e-07 vertex
+    contact wall  y=s  n=(+0.000000,-1.000000) pt=(2.365321,4.365321) gap=1.00e-09 wall
+    contact wall  y=s  n=(+0.000000,-1.000000) pt=(3.365321,4.365320) gap=2.83e-07 wall
+    exit motion: ds +5.604e-07  linf 7.376e-07  moving squares [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 6.774e-07 = 0.92 of max, Q dth 5.551e-15)
+                 per-square |dc|: 0:1.36e-07 1:1.45e-07 2:3.88e-07 3:5.71e-07 4:5.43e-07 5:3.78e-07 6:6.77e-07 7:7.38e-07 8:4.62e-07 9:2.81e-07 10:5.32e-07
+                 per-square |dth|: 
+                 rotation dominates Q: False   Q sole mover: False
+--- s0451  sq5 at TL   depth 2.612e-07  tilt 2.481e-06 rad  contacts 3  LOCKED False  MENU no_wall_contact  C_(1,1) free False
+    K: {'e_x': True, 'e_y': False, '(1,1)': True}   cardinals ['e_x']   kept at corner [4]   n_intruders 2
+    C_e_x e_world [1.0, -0.0] size 4 members [5, 6, 7, 10]
+        wall_anchored True [[7, 'x=s']]
+        intruder_anchored False []
+        blocking contacts of Q for this e: [('pair', 10, -1.0)]
+        corner-side contacts of Q:         [('pair', 4, 1.0), ('pair', 4, 1.0)]
+        cluster growth edges (member -> outsider): [[5, 10], [10, 6], [6, 7]]
+    C_(1,1) size 4 members [5, 6, 7, 10] wall True intruder False free False
+    contact pair  4    n=(+1.000000,+0.000003) pt=(1.000002,3.701683) gap=8.53e-07 kiss  admissible axes 2
+    contact pair  4    n=(+1.000000,+0.000003) pt=(1.000000,4.701683) gap=8.53e-07 kiss  admissible axes 2
+    contact pair  10   n=(-1.000000,-0.000001) pt=(2.000002,3.701685) gap=1.00e-11 kiss  admissible axes 2
+    exit motion: ds +3.337e-06  linf 4.268e-06  moving squares [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 3.378e-06 = 0.79 of max, Q dth 3.331e-15)
+                 per-square |dc|: 0:9.21e-07 1:1.07e-06 2:3.01e-06 3:3.38e-06 4:2.83e-06 5:3.38e-06 6:4.27e-06 7:4.09e-06 8:2.21e-06 9:2.33e-06 10:3.40e-06
+                 per-square |dth|: 
+                 rotation dominates Q: False   Q sole mover: False
+--- s0456  sq6 at TR   depth 1.000e-09  tilt 9.507e-07 rad  contacts 4  LOCKED True  MENU True  C_(1,1) free False
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [7]   n_intruders 2
+    C_e_y e_world [-0.0, -1.0] size 4 members [2, 3, 6, 10]
+        wall_anchored True [[3, 'y=0']]
+        intruder_anchored False []
+        blocking contacts of Q for this e: [('pair', 10, -0.5843)]
+        corner-side contacts of Q:         [('pair', 7, 1.0), ('pair', 7, 1.0), ('wall', 'x=s', 0.0)]
+        cluster growth edges (member -> outsider): [[6, 10], [10, 2], [2, 3]]
+    C_(1,1) size 4 members [2, 3, 6, 10] wall True intruder False free False
+    contact pair  7    n=(+0.000001,-1.000000) pt=(4.043834,3.479646) gap=4.13e-07 kiss  admissible axes 2
+    contact pair  7    n=(+0.000001,-1.000000) pt=(3.043834,3.479646) gap=4.13e-07 kiss  admissible axes 2
+    contact pair  10   n=(+0.811538,+0.584300) pt=(3.479646,2.479645) gap=6.73e-07 vertex
+    contact wall  x=s  n=(-1.000000,+0.000000) pt=(4.479646,2.479646) gap=5.24e-08 wall
+    exit motion: ds +2.665e-15  linf 8.623e-15  moving squares [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 4.021e-15 = 0.47 of max, Q dth 3.705e-15)
+                 per-square |dc|: 0:2.22e-15 1:1.55e-15 2:1.60e-15 3:1.81e-15 4:2.23e-15 5:1.11e-15 6:4.02e-15 7:8.62e-15 8:5.56e-15 9:6.60e-15 10:8.88e-16
+                 per-square |dth|: 0:2.22e-16 2:2.55e-15 3:2.44e-15 4:1.61e-15 5:1.50e-15 6:3.71e-15 8:2.22e-16 9:1.28e-15 10:2.44e-15
+                 rotation dominates Q: False   Q sole mover: False
+--- s0470  sq2 at BR   depth 1.000e-09  tilt 2.390e-06 rad  contacts 3  LOCKED False  MENU True  C_(1,1) free False
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [3]   n_intruders 2
+    C_e_y e_world [-0.0, 1.0] size 3 members [2, 6, 10]
+        wall_anchored True [[6, 'y=s']]
+        intruder_anchored False []
+        blocking contacts of Q for this e: [('pair', 10, -0.630656)]
+        corner-side contacts of Q:         [('pair', 3, 1.0), ('wall', 'x=s', 0.0)]
+        cluster growth edges (member -> outsider): [[2, 10], [10, 6]]
+    C_(1,1) size 3 members [2, 6, 10] wall True intruder False free False
+    contact pair  3    n=(+0.000002,+1.000000) pt=(3.656196,1.000001) gap=7.32e-07 vertex
+    contact pair  10   n=(+0.776062,-0.630656) pt=(3.373310,2.000002) gap=8.92e-07 vertex
+    contact wall  x=s  n=(-1.000000,+0.000000) pt=(4.373310,2.000000) gap=9.82e-07 wall
+    exit motion: ds -8.882e-16  linf 5.338e-15  moving squares [0, 1, 2, 4, 5, 6, 7, 8, 9, 10]  (Q dc 1.110e-15 = 0.21 of max, Q dth 1.549e-18)
+                 per-square |dc|: 0:1.12e-15 1:5.34e-15 2:1.11e-15 4:2.92e-15 5:4.04e-15 6:4.64e-15 7:1.40e-15 8:4.19e-15 9:4.09e-15 10:4.09e-15
+                 per-square |dth|: 0:1.33e-15 1:2.33e-15 4:3.55e-15 5:3.55e-15 6:4.66e-15 7:1.80e-17 8:3.55e-15 9:2.89e-15 10:2.33e-15
+                 rotation dominates Q: False   Q sole mover: False
+--- s0502  sq3 at BR   depth 1.000e-09  tilt 5.209e-08 rad  contacts 5  LOCKED True  MENU True  C_(1,1) free False
+    K: {'e_x': False, 'e_y': True, '(1,1)': True}   cardinals ['e_y']   kept at corner [2]   n_intruders 2
+    C_e_y e_world [-0.0, 1.0] size 4 members [3, 4, 9, 10]
+        wall_anchored True [[4, 'y=s']]
+        intruder_anchored False []
+        blocking contacts of Q for this e: [('pair', 9, -0.70727)]
+        corner-side contacts of Q:         [('pair', 2, 1.0), ('pair', 2, 1.0), ('wall', 'x=s', 0.0), ('wall', 'x=s', 0.0)]
+        cluster growth edges (member -> outsider): [[3, 9], [9, 10], [10, 4]]
+    C_(1,1) size 5 members [3, 4, 5, 9, 10] wall True intruder True free False
+    contact pair  2    n=(+0.000000,+1.000000) pt=(4.414476,1.000000) gap=3.20e-08 kiss  admissible axes 2
+    contact pair  2    n=(+0.000000,+1.000000) pt=(3.414476,1.000000) gap=3.20e-08 kiss  admissible axes 2
+    contact pair  9    n=(+0.706943,-0.707270) pt=(3.414476,2.000000) gap=7.65e-08 vertex
+    contact wall  x=s  n=(-1.000000,+0.000000) pt=(4.414476,2.000000) gap=2.24e-08 wall
+    contact wall  x=s  n=(-1.000000,+0.000000) pt=(4.414476,1.000000) gap=7.45e-08 wall
+    exit motion: ds +0.000e+00  linf 6.883e-15  moving squares [2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 1.110e-15 = 0.16 of max, Q dth 3.157e-15)
+                 per-square |dc|: 0:2.48e-16 1:3.14e-16 2:2.43e-15 3:1.11e-15 4:3.70e-15 5:5.77e-15 6:4.44e-16 7:9.93e-16 9:6.28e-16 10:4.44e-16
+                 per-square |dth|: 2:3.16e-15 3:3.16e-15 4:6.88e-15 8:7.77e-16 9:3.33e-16 10:3.33e-16
+                 rotation dominates Q: True   Q sole mover: False
+--- s0518  sq4 at TL   depth 1.000e-09  tilt 2.627e-07 rad  contacts 3  LOCKED False  MENU no_wall_contact  C_(1,1) free True
+    K: {'e_x': True, 'e_y': False, '(1,1)': True}   cardinals ['e_x']   kept at corner [5]   n_intruders 2
+    C_e_x e_world [1.0, -0.0] size 4 members [4, 6, 7, 9]
+        wall_anchored True [[7, 'x=s'], [7, 'x=s']]
+        intruder_anchored True [(6, 'TR', 0.213736, 1.0, 1.0)]
+        blocking contacts of Q for this e: [('pair', 9, -0.796922)]
+        corner-side contacts of Q:         [('pair', 5, 1.0), ('pair', 5, 1.0)]
+        cluster growth edges (member -> outsider): [[4, 9], [9, 6], [6, 7]]
+    C_(1,1) size 2 members [4, 9] wall False intruder False free True
+    contact pair  5    n=(+1.000000,+0.000000) pt=(1.000000,2.949199) gap=3.67e-09 kiss  admissible axes 2
+    contact pair  5    n=(+1.000000,+0.000000) pt=(1.000000,3.949199) gap=3.67e-09 kiss  admissible axes 2
+    contact pair  9    n=(-0.796922,+0.604082) pt=(2.000000,3.476699) gap=1.37e-09 vertex
+    exit motion: ds -6.217e-15  linf 1.013e-14  moving squares [2, 3, 4, 5, 6, 7, 8, 9, 10]  (Q dc 4.463e-15 = 0.44 of max, Q dth 4.219e-15)
+                 per-square |dc|: 0:4.00e-16 1:4.44e-16 2:7.05e-15 3:7.55e-15 4:4.46e-15 5:3.11e-15 6:8.26e-15 7:1.01e-14 8:1.01e-14 9:8.58e-15 10:9.74e-15
+                 per-square |dth|: 2:1.67e-15 3:2.11e-15 4:4.22e-15 6:7.77e-16 8:1.94e-16 9:7.77e-16 10:1.55e-15
+                 rotation dominates Q: False   Q sole mover: False
+
+sliding blocker was the DEEPEST at its corner: 0

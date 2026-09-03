@@ -2370,3 +2370,47 @@ affordable cost estimate for closing 3.84.
   BLAS pinned, headroom > 6 GB, A57/A60/A61/A86 untouched, frozen verifiers untouched, no certificate emitted. Files:
   docs/proofs/fj_census_k0.md, attempts/A88-fj-census/{code,results,notes,logs}, lean/depgraph.json (C.K4TIER note, chip released)
   + svg, REGISTRY row.
+
+## 2026-09-03 A90-nocrit-blocked (Fable lead + 1 Opus chore, <= 2 processes) -- done-mixed (NOCRIT in SELECTED form with exact residue RES(4); FJ form is the wrong statement; Trump canary PASS)
+
+- T [docs/proofs/nocrit_k0_blocked.md]: Lemma BLIND - an FJ certificate ignores every square carrying no positive multiplier
+  (rattlers, unloaded touchers): moving them at the same side keeps the certificate verbatim. So "K0-BLOCKED => not FJ at any s"
+  can only be a ROOM statement FJ does not see, and the brief's route (Lemma MENU far-side locks counted against L1/L6/per-wall
+  caps/H-LOC) cannot close: LOCK (b)/MENU are about contacts that EXIST, not multipliers that are positive (A89-G1's wall).
+- T: Theorem NOCRIT-SEL. Psi = total corner intrusion (depth d_c = 1 - min_Q max(p_x,p_y), tangency 0, tolerance-exact); a
+  Psi-minimal sigma-minimiser z* exists (compact M(m)). Lemma K: every intruder is x-side / y-side / corner-type and retreats
+  along e_x / e_y / both with exact positive rates. Lemma CLUSTER: all rows are affine in the centres (fjsecond87's zero
+  centre-centre Hessian), so translating the retreat cluster C_e(Q) (squares pressing Q against e, transitively) is an EXACT
+  packing at side m unless a member touches the far wall. Hence at z* every intruder of every corner is ANCHORED in each cardinal
+  retreat direction: (W) cluster reaches the far wall, or (I) contains another corner's intruder that deepens. No FJ, no
+  criticality, no second order (flat strata irrelevant) - TF-U's shape. Closed: rattler intruders impossible at z*; every intruder
+  pressed on its far side; JAM-0 partner y-side, its presser column needs >= 4 squares to reach the top wall; Lemma COL: anchoring
+  columns have >= 3 squares for m >= 1+2sqrt2 = 3.8284 (diamond-ghost regime below: tilts within 6.3 deg of 45, depth < 0.0084);
+  Lemma PLATEAU [S]: rate-matched mutual anchoring slides at constant Psi to a K0-FREE point / wall / new contact.
+- RESIDUE [OPEN, A90-G1] RES(4): a K0-BLOCKED Psi-minimal minimiser at which all >= 8 intruders are anchored - a FRAME of >= 3-square
+  wall-to-wall monotone contact columns in both axes through the corner crowds (8 intruders + 3 free squares; Trump's skeleton
+  with every slot square replaced by a tilted 2-crowd). Counting alone (11 squares, four >= 3-chains sharing members) does not close.
+- T+M: where "all four corners blocked" enters - ONLY in refuting the residue, nowhere in the reduction (proved corner by corner).
+  Trump: TL's shallow intruder sq4 = [0,1]x[0.8445,1.8445] (TL frame) is y-side (retreat = down only), its downward cluster
+  {0,1,2,3,4,7,8} reaches the floor; sq6 is x-side, cluster {5,6,9,10} on x = s; RES(1) HOLDS at Trump's TL, so any refutation
+  of RES(4) must use >= 2 blocked corners through Lemma COL's chain count. Canary [M]: Trump critical (cone residual 0.0,
+  m_active 42, rank 34), TL 2-crowd locked (sq4 self-stress, sq6 MENU-locked by sq4 at rate -0.261), not excluded. PASS.
+- M [T3, attempts/A90-nocrit-blocked/notes/t3_report.md]: A87's 520 exits re-run BITWISE (seed stream needs selftest()'s pool
+  priming): the freeing square is the NON-DEEPEST intruder 520/520; retreatable by a single-square cardinal translation 508/520
+  (511 with (1,1)), 507 with the singleton cluster; not flush-locked 515/520 (LOCK (b) LP), MENU-unlocked 100/108; LOCK and
+  RETREATABLE never both hold. The 12 exceptions: one blocking vertex-on-edge contact, 3-4-square cluster wall-anchored, and the
+  flow's actual exit is a coordinated 9-11-square SQP motion (Q sole mover 0/520) - a MOTION-CLASS gap of the translation test,
+  not a lock (A90-G2: rotations / cluster motions would shrink RES). The 4 K0-BLOCKED non-FJ endpoints: RES holds at 2 (both
+  s0380), fails at 2; the certified Gordan direction decreases a shallow intruder's depth 4/4 (s0380-2nd sheds all four second
+  intruders at once). BLIND hunt: 0/167 K0-BLOCKED FJ points by repositioning unloadable squares; 70/167 points have fewer
+  unloadable squares than deficient corners outright (hard count), the other 97 never yield a feasible doubling (heuristic);
+  the 17 k0dir87 FJ endpoints have no stored z (data gap, ~50 min replay).
+- Composition / Lean-readiness (T2): k0_00 = SEL-Psi + NOCRIT-SEL + [not RES(4)] + Lemma K0-FREE (k1_00 tree, Theorem U at s-hat),
+  in the SELECTED form StratumKillSel Psi (A89 sect. 9.3 with Psi for Phi; s-hat clause via Psi-min over non-image packings, E.A36);
+  DF-K0 / H1 NOT consumed; new Lean obligations N1-N5 (affine rows, CLUSTER, Lemma K rates, depth <=> interior meets slot, the
+  residue). Price: not RES(4) as a SelForm (C) leaf is silent at A85's frontier -> A85's 3 200-7 000 CPU-h stands; a direct frame
+  census is unpriced [C]. PI conjecture (n = 11) is exactly "not RES(4)".
+- Discipline: 1 compute process, BLAS pinned, headroom > 12 GB throughout; A57/A60/A61/A86 untouched; frozen verifiers untouched;
+  A87/A89 code imported, not modified; no certificate emitted. Chip C.K4TIER still owned by A89 (not released) - note added only.
+  Files: docs/proofs/nocrit_k0_blocked.md, attempts/A90-nocrit-blocked/{code,results,notes,logs}, lean/depgraph.json + svg,
+  REGISTRY row.

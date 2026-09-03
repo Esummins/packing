@@ -1,0 +1,4741 @@
+[
+ {
+  "tag": "s0380",
+  "sigma": 4.000000117651969,
+  "exact_n_block": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "n_block_float": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "cone_residual": 0.00020952745776215876,
+  "m_active": 29,
+  "gordan_min_Ay": -5.126649972597708e-16,
+  "gordan_ds": -4.390175567525745e-08,
+  "RES": true,
+  "n_nondeepest": 4,
+  "n_retreatable": 0,
+  "items": [
+   {
+    "sq": 1,
+    "corner": "BL",
+    "depth": 4.6427254529746165e-07,
+    "tilt": 5.055331711224548e-07,
+    "theta": 5.055331711224548e-07,
+    "center": [
+     0.50000098609722,
+     1.4999997894939765
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.06788899254796776,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      1.2378638694874706e-06,
+      0.9999995357274547
+     ]
+    ],
+    "K": {
+     "e_x": false,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 0,
+      "n": [
+       -6.021810334209277e-07,
+       0.9999999999998187
+      ],
+      "pt": [
+       1.0000012388637418,
+       1.000000042260626
+      ],
+      "gap": 3.785736168993026e-10,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 0,
+      "n": [
+       -6.021810334209277e-07,
+       0.9999999999998187
+      ],
+      "pt": [
+       1.2388638694449856e-06,
+       0.9999995367274548
+      ],
+      "gap": 3.785736168993026e-10,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 5,
+      "n": [
+       5.055331710411031e-07,
+       -0.9999999999998722
+      ],
+      "pt": [
+       0.9999999391294511,
+       2.0000000461977554
+      ],
+      "gap": 3.9376584215489174e-09,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 8,
+      "n": [
+       -0.0003517679543360471,
+       -0.9999999381296513
+      ],
+      "pt": [
+       1.0000007333305705,
+       2.000000042260498
+      ],
+      "gap": 1.3322360103984465e-07,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "wall",
+      "other": "x=0",
+      "n": [
+       1.0,
+       0.0
+      ],
+      "pt": [
+       7.333306983225523e-07,
+       1.9999995367273269
+      ],
+      "gap": 7.333306983225523e-07,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 5,
+    "lock": {
+     "m": 5,
+     "plus": true,
+     "plus_mass": 2.0003096250851953,
+     "minus": true,
+     "minus_mass": 4.000352466783232,
+     "selfstress": true
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 5.055331711224548e-07,
+     "pivots": [
+      {
+       "wall": "x=0",
+       "O": [
+        7.333306983225523e-07,
+        1.9999995367273269
+       ],
+       "omega": -1.0,
+       "n_far": 1,
+       "far": [
+        {
+         "k": 0,
+         "kind": "pair",
+         "other": 0,
+         "rate": -0.9999999033521331
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_y": {
+      "e_world": [
+       0.0,
+       1.0
+      ],
+      "members": [
+       1,
+       4,
+       5,
+       7,
+       8
+      ],
+      "size": 5,
+      "edges": [
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        8,
+        7
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "y=s"
+       ],
+       [
+        4,
+        "y=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.00035163419807959784,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9999999999998187,
+        "blocking": false
+       },
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9999999999998187,
+        "blocking": false
+       },
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": -0.9999999999998722,
+        "blocking": true
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -0.9999999381296513,
+        "blocking": true
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       1.0,
+       1.0
+      ],
+      "members": [
+       1,
+       2,
+       4,
+       5,
+       6,
+       7,
+       8,
+       10
+      ],
+      "size": 8,
+      "edges": [
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        10
+       ],
+       [
+        10,
+        2
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        2,
+        "x=s"
+       ],
+       [
+        4,
+        "y=s"
+       ],
+       [
+        4,
+        "y=s"
+       ],
+       [
+        6,
+        "x=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.00035163419807959784,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 6,
+        "corner": "TR",
+        "depth": 0.81765719277774,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 7,
+        "corner": "TR",
+        "depth": 6.561852508468746e-06,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9999993978187853,
+        "blocking": false
+       },
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9999993978187853,
+        "blocking": false
+       },
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": -0.9999994944667012,
+        "blocking": true
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -1.0003517060839873,
+        "blocking": true
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 2,
+    "corner": "BR",
+    "depth": 1.9793147149949064e-05,
+    "tilt": 0.00035176900266753464,
+    "theta": -0.0003517690026676095,
+    "center": [
+     3.499824264893371,
+     1.500156061415199
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.9432244420569046,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.0003517689954124492,
+      0.99998020685285
+     ]
+    ],
+    "K": {
+     "e_x": false,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 3,
+      "n": [
+       0.00035176899541342917,
+       0.999999938129285
+      ],
+      "pt": [
+       2.9435564192153487,
+       1.0003517079406665
+      ],
+      "gap": 3.449063257221496e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 3,
+      "n": [
+       0.00035176899541342917,
+       0.999999938129285
+      ],
+      "pt": [
+       3.9435563573447387,
+       0.999999939243297
+      ],
+      "gap": 3.449063257221496e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 10,
+      "n": [
+       0.9999999381292451,
+       -0.00035176910879834044
+      ],
+      "pt": [
+       2.9996484113310222,
+       1.0003319768482628
+      ],
+      "gap": 1.1938894317609083e-10,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 10,
+      "n": [
+       0.9999999381292451,
+       -0.00035176910879834044
+      ],
+      "pt": [
+       3.0000001803264347,
+       2.000331914977548
+      ],
+      "gap": 1.1938894317609083e-10,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "wall",
+      "other": "x=s",
+      "n": [
+       -1.0,
+       0.0
+      ],
+      "pt": [
+       4.00000011845572,
+       1.9999801459821351
+      ],
+      "gap": 1.1962493218220516e-09,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 5,
+    "lock": {
+     "m": 5,
+     "plus": true,
+     "plus_mass": 2.0003517072380834,
+     "minus": true,
+     "minus_mass": 2.0003517072380834,
+     "selfstress": true
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.0003517690026676095,
+     "pivots": [
+      {
+       "wall": "x=s",
+       "O": [
+        4.00000011845572,
+        1.9999801459821351
+       ],
+       "omega": 1.0,
+       "n_far": 2,
+       "far": [
+        {
+         "k": 0,
+         "kind": "pair",
+         "other": 3,
+         "rate": -1.0560919955860075
+        },
+        {
+         "k": 1,
+         "kind": "pair",
+         "other": 3,
+         "rate": -0.056091995586007456
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_y": {
+      "e_world": [
+       -0.0,
+       1.0
+      ],
+      "members": [
+       2,
+       4,
+       5,
+       7,
+       8,
+       10
+      ],
+      "size": 6,
+      "edges": [
+       [
+        2,
+        10
+       ],
+       [
+        10,
+        8
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        7
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "y=s"
+       ],
+       [
+        4,
+        "y=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.00035163419807959784,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 3,
+        "kind": "pair",
+        "ndote": 0.999999938129285,
+        "blocking": false
+       },
+       {
+        "other": 3,
+        "kind": "pair",
+        "ndote": 0.999999938129285,
+        "blocking": false
+       },
+       {
+        "other": 10,
+        "kind": "pair",
+        "ndote": -0.00035176910879834044,
+        "blocking": true
+       },
+       {
+        "other": 10,
+        "kind": "pair",
+        "ndote": -0.00035176910879834044,
+        "blocking": true
+       },
+       {
+        "other": "x=s",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       -1.0,
+       1.0
+      ],
+      "members": [
+       2,
+       4,
+       5,
+       7,
+       8,
+       10
+      ],
+      "size": 6,
+      "edges": [
+       [
+        2,
+        10
+       ],
+       [
+        10,
+        8
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        7
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "y=s"
+       ],
+       [
+        4,
+        "y=s"
+       ],
+       [
+        5,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 4,
+        "corner": "TL",
+        "depth": 2.981036500637746e-05,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       },
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.00035163419807959784,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 3,
+        "kind": "pair",
+        "ndote": 0.9996481691338716,
+        "blocking": false
+       },
+       {
+        "other": 3,
+        "kind": "pair",
+        "ndote": 0.9996481691338716,
+        "blocking": false
+       },
+       {
+        "other": 10,
+        "kind": "pair",
+        "ndote": -1.0003517072380435,
+        "blocking": true
+       },
+       {
+        "other": 10,
+        "kind": "pair",
+        "ndote": -1.0003517072380435,
+        "blocking": true
+       },
+       {
+        "other": "x=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 4,
+    "corner": "TL",
+    "depth": 2.981036500637746e-05,
+    "tilt": 8.400858508839093e-07,
+    "theta": -8.400858507771114e-07,
+    "center": [
+     1.4999706106526993,
+     3.4999996986092206
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.00035163419807959784,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.9999701896349936,
+      0.9999701896349936
+     ]
+    ],
+    "K": {
+     "e_x": true,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_x",
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 5,
+      "n": [
+       0.00035176852284179847,
+       0.9999999381294512
+      ],
+      "pt": [
+       0.9999701906099503,
+       3.000000118652322
+      ],
+      "gap": 1.1942091759920004e-10,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "pair",
+      "other": 7,
+      "n": [
+       -0.9999999993382089,
+       3.6381069746218054e-05
+      ],
+      "pt": [
+       1.9999701906095977,
+       2.9999992785664715
+      ],
+      "gap": 1.220412013669403e-07,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 8,
+      "n": [
+       8.400858508454629e-07,
+       0.9999999999996472
+      ],
+      "pt": [
+       1.0003517077142494,
+       3.000000113892911
+      ],
+      "gap": 4.438904355197337e-09,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "wall",
+      "other": "y=s",
+      "n": [
+       0.0,
+       -1.0
+      ],
+      "pt": [
+       1.9999710306954483,
+       3.999999278566119
+      ],
+      "gap": 8.410858503005159e-07,
+      "type": "wall",
+      "n_admissible": 1
+     },
+     {
+      "kind": "wall",
+      "other": "y=s",
+      "n": [
+       0.0,
+       -1.0
+      ],
+      "pt": [
+       0.9999710306958012,
+       4.000000118651969
+      ],
+      "gap": 1.000000082740371e-09,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 5,
+    "lock": {
+     "m": 5,
+     "plus": true,
+     "plus_mass": 2.000762327450946,
+     "minus": true,
+     "minus_mass": 4.000352608608926,
+     "selfstress": true
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 8.400858507771114e-07,
+     "pivots": [
+      {
+       "wall": "y=s",
+       "O": [
+        1.9999710306954483,
+        3.999999278566119
+       ],
+       "omega": 1.0,
+       "n_far": 3,
+       "far": [
+        {
+         "k": 0,
+         "kind": "pair",
+         "other": 5,
+         "rate": -0.9996490099875712
+        },
+        {
+         "k": 1,
+         "kind": "pair",
+         "other": 7,
+         "rate": -0.9999999993684195
+        },
+        {
+         "k": 2,
+         "kind": "pair",
+         "other": 8,
+         "rate": -0.9996184828956971
+        }
+       ]
+      },
+      {
+       "wall": "y=s",
+       "O": [
+        0.9999710306958012,
+        4.000000118651969
+       ],
+       "omega": 1.0,
+       "n_far": 2,
+       "far": [
+        {
+         "k": 1,
+         "kind": "pair",
+         "other": 7,
+         "rate": -0.9999644583845229
+        },
+        {
+         "k": 3,
+         "kind": "wall",
+         "other": "y=s",
+         "rate": -0.9999999999996472
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_x": {
+      "e_world": [
+       1.0,
+       -0.0
+      ],
+      "members": [
+       4,
+       6,
+       7
+      ],
+      "size": 3,
+      "edges": [
+       [
+        4,
+        7
+       ],
+       [
+        7,
+        6
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        6,
+        "x=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 7,
+        "corner": "TR",
+        "depth": 6.561852508468746e-06,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": 0.00035176852284179847,
+        "blocking": false
+       },
+       {
+        "other": 7,
+        "kind": "pair",
+        "ndote": -0.9999999993382089,
+        "blocking": true
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": 8.400858508454629e-07,
+        "blocking": false
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "e_y": {
+      "e_world": [
+       0.0,
+       -1.0
+      ],
+      "members": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       10
+      ],
+      "size": 10,
+      "edges": [
+       [
+        4,
+        5
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        10
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        10,
+        2
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        2,
+        3
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        0,
+        "y=0"
+       ],
+       [
+        0,
+        "y=0"
+       ],
+       [
+        3,
+        "y=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 1,
+        "corner": "BL",
+        "depth": 4.6427254529746165e-07,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 2,
+        "corner": "BR",
+        "depth": 1.9793147149949064e-05,
+        "rate": 1.0,
+        "fd": 1.0000000005838672
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": -0.9999999381294512,
+        "blocking": true
+       },
+       {
+        "other": 7,
+        "kind": "pair",
+        "ndote": -3.6381069746218054e-05,
+        "blocking": true
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -0.9999999999996472,
+        "blocking": true
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       1.0,
+       -1.0
+      ],
+      "members": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "size": 11,
+      "edges": [
+       [
+        4,
+        5
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        10
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        10,
+        2
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        0,
+        9
+       ],
+       [
+        2,
+        3
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        0,
+        "y=0"
+       ],
+       [
+        0,
+        "y=0"
+       ],
+       [
+        2,
+        "x=s"
+       ],
+       [
+        3,
+        "y=0"
+       ],
+       [
+        6,
+        "x=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 1,
+        "corner": "BL",
+        "depth": 4.6427254529746165e-07,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 2,
+        "corner": "BR",
+        "depth": 1.9793147149949064e-05,
+        "rate": 1.0,
+        "fd": 1.0000000005838672
+       },
+       {
+        "sq": 3,
+        "corner": "BR",
+        "depth": 0.9432244420569046,
+        "rate": 1.0,
+        "fd": 0.9999999972531981
+       },
+       {
+        "sq": 7,
+        "corner": "TR",
+        "depth": 6.561852508468746e-06,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": -0.9996481696066094,
+        "blocking": true
+       },
+       {
+        "other": 7,
+        "kind": "pair",
+        "ndote": -1.000036380407955,
+        "blocking": true
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -0.9999991599137963,
+        "blocking": true
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 7,
+    "corner": "TR",
+    "depth": 6.561852508468746e-06,
+    "tilt": 3.63810697538991e-05,
+    "theta": 1.5707599457251427,
+    "center": [
+     2.499988490104251,
+     3.4996306162805317
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.81765719277774,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.9999934381474915,
+      0.0003876932372062214
+     ]
+    ],
+    "K": {
+     "e_x": true,
+     "e_y": false,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_x"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 4,
+      "n": [
+       0.9999999993382089,
+       -3.6381069746218054e-05
+      ],
+      "pt": [
+       1.9999701906095977,
+       2.9999992785664715
+      ],
+      "gap": 1.220412013669403e-07,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 6,
+      "n": [
+       -0.9999999993382089,
+       3.6381069746340515e-05
+      ],
+      "pt": [
+       3.0000001190923173,
+       3.81768692319816
+      ],
+      "gap": 5.742847752898683e-08,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 6,
+      "n": [
+       -0.9999999993382089,
+       3.6381069746340515e-05
+      ],
+      "pt": [
+       2.99996390370925,
+       2.8176869238539366
+      ],
+      "gap": 5.742847752898683e-08,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 8,
+      "n": [
+       0.0003517679543361467,
+       0.9999999381296513
+      ],
+      "pt": [
+       1.9999702999002735,
+       2.9996488071463006
+      ],
+      "gap": 3.270624144846579e-07,
+      "type": "vertex",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 4,
+    "lock": {
+     "m": 4,
+     "plus": true,
+     "plus_mass": 2.0,
+     "minus": true,
+     "minus_mass": 2.0,
+     "selfstress": true
+    },
+    "menu": {
+     "applies": false,
+     "reason": "no_wall_contact",
+     "tilt": 3.63810697538991e-05
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_x": {
+      "e_world": [
+       -1.0,
+       -0.0
+      ],
+      "members": [
+       1,
+       4,
+       5,
+       7,
+       8
+      ],
+      "size": 5,
+      "edges": [
+       [
+        7,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        1,
+        "x=0"
+       ],
+       [
+        5,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": false,
+      "sides": [
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": -0.9999999993382089,
+        "blocking": true
+       },
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": 0.9999999993382089,
+        "blocking": false
+       },
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": 0.9999999993382089,
+        "blocking": false
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -0.0003517679543361467,
+        "blocking": true
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       -1.0,
+       -1.0
+      ],
+      "members": [
+       0,
+       1,
+       4,
+       5,
+       7,
+       8
+      ],
+      "size": 6,
+      "edges": [
+       [
+        7,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        1,
+        0
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        0,
+        "y=0"
+       ],
+       [
+        0,
+        "y=0"
+       ],
+       [
+        1,
+        "x=0"
+       ],
+       [
+        5,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 0,
+        "corner": "BL",
+        "depth": 0.06788899254796776,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       },
+       {
+        "sq": 1,
+        "corner": "BL",
+        "depth": 4.6427254529746165e-07,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": -0.9999636182684627,
+        "blocking": true
+       },
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": 0.9999636182684626,
+        "blocking": false
+       },
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": 0.9999636182684626,
+        "blocking": false
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -1.0003517060839875,
+        "blocking": true
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   }
+  ],
+  "gordan_moves": [
+   {
+    "sq": 1,
+    "corner": "BL",
+    "d0": 4.6427254529746165e-07,
+    "dd_dt": 0.0,
+    "decreases": false,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 2,
+    "corner": "BR",
+    "d0": 1.9793147149949064e-05,
+    "dd_dt": -1.1086687123906813e-05,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 4,
+    "corner": "TL",
+    "d0": 2.981036500637746e-05,
+    "dd_dt": -4.899192163065891e-05,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 7,
+    "corner": "TR",
+    "d0": 6.561852508468746e-06,
+    "dd_dt": -1.0946799022804043e-05,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   }
+  ],
+  "gordan_decreases_some_nondeepest": true
+ },
+ {
+  "tag": "s0076",
+  "sigma": 4.000004058461398,
+  "exact_n_block": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "n_block_float": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "cone_residual": 0.01207687557004318,
+  "m_active": 20,
+  "gordan_min_Ay": -8.417745667177456e-16,
+  "gordan_ds": -0.000145850923534252,
+  "RES": false,
+  "n_nondeepest": 4,
+  "n_retreatable": 2,
+  "items": [
+   {
+    "sq": 1,
+    "corner": "BL",
+    "depth": 9.999997993093146e-05,
+    "tilt": 0.008152918078075501,
+    "theta": 0.008152918078075501,
+    "center": [
+     0.5040597993152671,
+     1.5039597974725853
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.9756984936947158,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.008152829620283021,
+      0.9999000000200691
+     ]
+    ],
+    "K": {
+     "e_x": false,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 0,
+      "n": [
+       -0.008152827757532162,
+       0.9999667651475003
+      ],
+      "pt": [
+       0.016352123790917966,
+       0.999966811454154
+      ],
+      "gap": 3.9211303870523295e-08,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "wall",
+      "other": "x=0",
+      "n": [
+       1.0,
+       0.0
+      ],
+      "pt": [
+       2.862750923468549e-09,
+       1.9998667661675693
+      ],
+      "gap": 2.862750923468549e-09,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 2,
+    "lock": {
+     "m": 2,
+     "plus": false,
+     "plus_mass": -0.0,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.008152918078075501,
+     "pivots": [
+      {
+       "wall": "x=0",
+       "O": [
+        2.862750923468549e-09,
+        1.9998667661675693
+       ],
+       "omega": -1.0,
+       "n_far": 1,
+       "far": [
+        {
+         "k": 0,
+         "kind": "pair",
+         "other": 0,
+         "rate": -0.008199565362297252
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": false,
+    "LOCKED": false,
+    "clusters": {
+     "e_y": {
+      "e_world": [
+       0.0,
+       1.0
+      ],
+      "members": [
+       1
+      ],
+      "size": 1,
+      "edges": [],
+      "wall_anchored": false,
+      "wall_hits": [],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": true,
+      "sides": [
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9999667651475003,
+        "blocking": false
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       1.0,
+       1.0
+      ],
+      "members": [
+       1
+      ],
+      "size": 1,
+      "edges": [],
+      "wall_anchored": false,
+      "wall_hits": [],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": true,
+      "sides": [
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9918139373899681,
+        "blocking": false
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": true,
+    "diag_free": true
+   },
+   {
+    "sq": 3,
+    "corner": "BR",
+    "depth": 9.999998978038604e-05,
+    "tilt": 0.0020266351897271218,
+    "theta": -1.5687696916051694,
+    "center": [
+     2.4990917693621695,
+     0.501012291089009
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.9477231904547572,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.9999000000102196,
+      0.002026633802411172
+     ]
+    ],
+    "K": {
+     "e_x": true,
+     "e_y": false,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_x"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 2,
+      "n": [
+       -0.9999979463756068,
+       -0.0020266338024111114
+      ],
+      "pt": [
+       3.000006113085623,
+       0.05035612298830925
+      ],
+      "gap": 1.000044491661356e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 2,
+      "n": [
+       -0.9999979463756068,
+       -0.0020266338024111114
+      ],
+      "pt": [
+       2.9979794793661445,
+       1.050354069364084
+      ],
+      "gap": 1.000044491661356e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 8,
+      "n": [
+       0.002026633803384591,
+       -0.9999979463756048
+      ],
+      "pt": [
+       1.9980794792731604,
+       0.999997947375607
+      ],
+      "gap": 1.6063039787184152e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 8,
+      "n": [
+       0.002026633803384591,
+       -0.9999979463756048
+      ],
+      "pt": [
+       2.9980774256487672,
+       1.0020245811780182
+      ],
+      "gap": 1.6063039787184152e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "wall",
+      "other": "y=0",
+      "n": [
+       0.0,
+       1.0
+      ],
+      "pt": [
+       2.0001061130755717,
+       1.0000000374207202e-09
+      ],
+      "gap": 1.0000000374207202e-09,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 5,
+    "lock": {
+     "m": 5,
+     "plus": true,
+     "plus_mass": 2.0020245801789915,
+     "minus": true,
+     "minus_mass": 2.0020245801789915,
+     "selfstress": true
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.0020266351897271218,
+     "pivots": [
+      {
+       "wall": "y=0",
+       "O": [
+        2.0001061130755717,
+        1.0000000374207202e-09
+       ],
+       "omega": -1.0,
+       "n_far": 2,
+       "far": [
+        {
+         "k": 0,
+         "kind": "pair",
+         "other": 2,
+         "rate": -0.04832958743669752
+        },
+        {
+         "k": 1,
+         "kind": "pair",
+         "other": 2,
+         "rate": -1.0483295874366976
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_x": {
+      "e_world": [
+       -1.0,
+       0.0
+      ],
+      "members": [
+       3,
+       4,
+       5,
+       8,
+       9
+      ],
+      "size": 5,
+      "edges": [
+       [
+        3,
+        8
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        5
+       ],
+       [
+        5,
+        4
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.0019424991225724941,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 2,
+        "kind": "pair",
+        "ndote": 0.9999979463756068,
+        "blocking": false
+       },
+       {
+        "other": 2,
+        "kind": "pair",
+        "ndote": 0.9999979463756068,
+        "blocking": false
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -0.002026633803384591,
+        "blocking": true
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -0.002026633803384591,
+        "blocking": true
+       },
+       {
+        "other": "y=0",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       -1.0,
+       1.0
+      ],
+      "members": [
+       3,
+       4,
+       5,
+       8,
+       9
+      ],
+      "size": 5,
+      "edges": [
+       [
+        3,
+        8
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        5
+       ],
+       [
+        5,
+        4
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "x=0"
+       ],
+       [
+        5,
+        "y=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 4,
+        "corner": "TL",
+        "depth": 0.009296956662196987,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       },
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.0019424991225724941,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 2,
+        "kind": "pair",
+        "ndote": 0.9979713125731957,
+        "blocking": false
+       },
+       {
+        "other": 2,
+        "kind": "pair",
+        "ndote": 0.9979713125731957,
+        "blocking": false
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -1.0020245801789893,
+        "blocking": true
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -1.0020245801789893,
+        "blocking": true
+       },
+       {
+        "other": "y=0",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 5,
+    "corner": "TL",
+    "depth": 0.0019424991225724941,
+    "tilt": 0.0020048204833666983,
+    "theta": -1.5687915063115299,
+    "center": [
+     1.4990589066216564,
+     3.499002654716236
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.009296956662196987,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.9980575008774275,
+      0.0020048191403696514
+     ]
+    ],
+    "K": {
+     "e_x": true,
+     "e_y": false,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_x"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 4,
+      "n": [
+       0.9999580983099243,
+       0.009154322716600488
+      ],
+      "pt": [
+       1.0000623210177972,
+       2.9980012499720075
+      ],
+      "gap": 1.3701595413806444e-11,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "pair",
+      "other": 9,
+      "n": [
+       -0.002026633804627717,
+       0.9999979463756022
+      ],
+      "pt": [
+       2.000060311365885,
+       3.0000060691123767
+      ],
+      "gap": 1.5189183244501692e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "wall",
+      "other": "y=s",
+      "n": [
+       0.0,
+       -1.0
+      ],
+      "pt": [
+       1.9980554922255156,
+       4.000004059460465
+      ],
+      "gap": 1.0009335582594758e-09,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 3,
+    "lock": {
+     "m": 3,
+     "plus": true,
+     "plus_mass": 2.0020101859473876,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.0020048204833666983,
+     "pivots": [
+      {
+       "wall": "y=s",
+       "O": [
+        1.9980554922255156,
+        4.000004059460465
+       ],
+       "omega": -1.0,
+       "n_far": 1,
+       "far": [
+        {
+         "k": 0,
+         "kind": "pair",
+         "other": 4,
+         "rate": -0.99282487231908
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_x": {
+      "e_world": [
+       1.0,
+       -0.0
+      ],
+      "members": [
+       2,
+       3,
+       5,
+       8,
+       9
+      ],
+      "size": 5,
+      "edges": [
+       [
+        5,
+        9
+       ],
+       [
+        9,
+        8
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        3,
+        2
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        2,
+        "x=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 3,
+        "corner": "BR",
+        "depth": 9.999998978038604e-05,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": 0.9999580983099243,
+        "blocking": false
+       },
+       {
+        "other": 9,
+        "kind": "pair",
+        "ndote": -0.002026633804627717,
+        "blocking": true
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       1.0,
+       -1.0
+      ],
+      "members": [
+       2,
+       3,
+       5,
+       8,
+       9
+      ],
+      "size": 5,
+      "edges": [
+       [
+        5,
+        9
+       ],
+       [
+        9,
+        8
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        3,
+        2
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        2,
+        "x=s"
+       ],
+       [
+        3,
+        "y=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 2,
+        "corner": "BR",
+        "depth": 0.9477231904547572,
+        "rate": 1.0,
+        "fd": 1.0000000005838672
+       },
+       {
+        "sq": 3,
+        "corner": "BR",
+        "depth": 9.999998978038604e-05,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": 0.9908037755933239,
+        "blocking": false
+       },
+       {
+        "other": 9,
+        "kind": "pair",
+        "ndote": -1.0020245801802299,
+        "blocking": true
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 7,
+    "corner": "TR",
+    "depth": 0.051135427486357465,
+    "tilt": 0.05667401790097914,
+    "theta": 0.05667401790097914,
+    "center": [
+     2.526430488835455,
+     3.4724848867285543
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.2014403047443043,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.9488645725136424,
+      0.9488645725136425
+     ]
+    ],
+    "K": {
+     "e_x": true,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_x",
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 6,
+      "n": [
+       -0.29233543474584134,
+       0.9563158440556969
+      ],
+      "pt": [
+       3.0539495595691246,
+       3.0016094998030045
+      ],
+      "gap": 2.16320295010064e-11,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "wall",
+      "other": "y=s",
+      "n": [
+       0.0,
+       -1.0
+      ],
+      "pt": [
+       2.997305875761005,
+       4.000003957462224
+      ],
+      "gap": 1.0299917452272211e-07,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 2,
+    "lock": {
+     "m": 2,
+     "plus": false,
+     "plus_mass": -0.0,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.05667401790097914,
+     "pivots": [
+      {
+       "wall": "y=s",
+       "O": [
+        2.997305875761005,
+        4.000003957462224
+       ],
+       "omega": -1.0,
+       "n_far": 0,
+       "far": []
+      }
+     ],
+     "MENU_LOCKED": false
+    },
+    "lock_away_from_flush": false,
+    "LOCKED": false,
+    "clusters": {
+     "e_x": {
+      "e_world": [
+       -1.0,
+       -0.0
+      ],
+      "members": [
+       7
+      ],
+      "size": 1,
+      "edges": [],
+      "wall_anchored": false,
+      "wall_hits": [],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": true,
+      "sides": [
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": 0.29233543474584134,
+        "blocking": false
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "e_y": {
+      "e_world": [
+       -0.0,
+       -1.0
+      ],
+      "members": [
+       2,
+       3,
+       6,
+       7,
+       10
+      ],
+      "size": 5,
+      "edges": [
+       [
+        7,
+        6
+       ],
+       [
+        6,
+        10
+       ],
+       [
+        10,
+        2
+       ],
+       [
+        2,
+        3
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        3,
+        "y=0"
+       ]
+      ],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": false,
+      "sides": [
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": -0.9563158440556969,
+        "blocking": true
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       -1.0,
+       -1.0
+      ],
+      "members": [
+       2,
+       3,
+       6,
+       7,
+       10
+      ],
+      "size": 5,
+      "edges": [
+       [
+        7,
+        6
+       ],
+       [
+        6,
+        10
+       ],
+       [
+        10,
+        2
+       ],
+       [
+        2,
+        3
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        3,
+        "y=0"
+       ]
+      ],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": false,
+      "sides": [
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": -0.6639804093098556,
+        "blocking": true
+       },
+       {
+        "other": "y=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": true,
+    "diag_free": false
+   }
+  ],
+  "gordan_moves": [
+   {
+    "sq": 1,
+    "corner": "BL",
+    "d0": 9.999997993093146e-05,
+    "dd_dt": 0.0,
+    "decreases": false,
+    "RETREATABLE": true,
+    "non_deepest": true
+   },
+   {
+    "sq": 3,
+    "corner": "BR",
+    "d0": 9.999998978038604e-05,
+    "dd_dt": -0.0005785416590242676,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 5,
+    "corner": "TL",
+    "d0": 0.0019424991225724941,
+    "dd_dt": 0.006300775456935526,
+    "decreases": false,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 7,
+    "corner": "TR",
+    "d0": 0.051135427486357465,
+    "dd_dt": -0.00010288658813806251,
+    "decreases": true,
+    "RETREATABLE": true,
+    "non_deepest": true
+   }
+  ],
+  "gordan_decreases_some_nondeepest": true
+ },
+ {
+  "tag": "s0380",
+  "sigma": 4.000007451494226,
+  "exact_n_block": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "n_block_float": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "cone_residual": 0.04293471333338297,
+  "m_active": 18,
+  "gordan_min_Ay": -4.440892098500626e-16,
+  "gordan_ds": -0.0018433896090198632,
+  "RES": true,
+  "n_nondeepest": 4,
+  "n_retreatable": 0,
+  "items": [
+   {
+    "sq": 1,
+    "corner": "BL",
+    "depth": 9.999999000109838e-05,
+    "tilt": 0.00010741175585765764,
+    "theta": 0.00010741175585765764,
+    "center": [
+     0.5000537039935042,
+     1.4999537040035031
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.06894209172145516,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.00010741175565111763,
+      0.9999000000099989
+     ]
+    ],
+    "K": {
+     "e_x": false,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 0,
+      "n": [
+       -0.00010741175565098775,
+       0.9999999942313573
+      ],
+      "pt": [
+       1.9310504983208077,
+       1.0001074069661757
+      ],
+      "gap": 1.1067480265580798e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 0,
+      "n": [
+       -0.00010741175565098775,
+       0.9999999942313573
+      ],
+      "pt": [
+       0.9310505040894481,
+       0.9999999952313595
+      ],
+      "gap": 1.1067480265580798e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 5,
+      "n": [
+       -0.0001000504823338777,
+       -0.9999999949949505
+      ],
+      "pt": [
+       0.9999999952313574,
+       2.0000074069970073
+      ],
+      "gap": 1.000133309503326e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "wall",
+      "other": "x=0",
+      "n": [
+       1.0,
+       0.0
+      ],
+      "pt": [
+       1.0000000178915286e-09,
+       1.999899995241356
+      ],
+      "gap": 1.0000000178915286e-09,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 4,
+    "lock": {
+     "m": 4,
+     "plus": true,
+     "plus_mass": 2.00020746300166,
+     "minus": true,
+     "minus_mass": 2.00020746300166,
+     "selfstress": true
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.00010741175585765764,
+     "pivots": [
+      {
+       "wall": "x=0",
+       "O": [
+        1.0000000178915286e-09,
+        1.999899995241356
+       ],
+       "omega": -1.0,
+       "n_far": 2,
+       "far": [
+        {
+         "k": 0,
+         "kind": "pair",
+         "other": 0,
+         "rate": -1.9309430967040737
+        },
+        {
+         "k": 1,
+         "kind": "pair",
+         "other": 0,
+         "rate": -0.930943096704074
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_y": {
+      "e_world": [
+       0.0,
+       1.0
+      ],
+      "members": [
+       1,
+       4,
+       5
+      ],
+      "size": 3,
+      "edges": [
+       [
+        1,
+        5
+       ],
+       [
+        5,
+        4
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "y=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.00010000018052336301,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9999999942313573,
+        "blocking": false
+       },
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9999999942313573,
+        "blocking": false
+       },
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": -0.9999999949949505,
+        "blocking": true
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       1.0,
+       1.0
+      ],
+      "members": [
+       1,
+       2,
+       4,
+       5,
+       6,
+       7,
+       8,
+       10
+      ],
+      "size": 8,
+      "edges": [
+       [
+        1,
+        5
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        10
+       ],
+       [
+        10,
+        2
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        2,
+        "x=s"
+       ],
+       [
+        4,
+        "y=s"
+       ],
+       [
+        6,
+        "x=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.00010000018052336301,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 6,
+        "corner": "TR",
+        "depth": 0.8182517934855231,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 7,
+        "corner": "TR",
+        "depth": 9.999998999798976e-05,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9998925824757063,
+        "blocking": false
+       },
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9998925824757063,
+        "blocking": false
+       },
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": -1.0001000454772844,
+        "blocking": true
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 2,
+    "corner": "BR",
+    "depth": 0.00010973428878136016,
+    "tilt": 0.0022271138809164537,
+    "theta": -0.0022271138809164225,
+    "center": [
+     3.498895049388831,
+     1.5010025827225828
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.9407115498977966,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.002227199133853386,
+      0.9998902657112186
+     ]
+    ],
+    "K": {
+     "e_x": false,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 10,
+      "n": [
+       0.9999975140099743,
+       -0.002229792338160976
+      ],
+      "pt": [
+       3.000009845417289,
+       2.002114898733947
+      ],
+      "gap": 6.254423645657425e-10,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "wall",
+      "other": "x=s",
+      "n": [
+       -1.0,
+       0.0
+      ],
+      "pt": [
+       4.0000073654001955,
+       1.9998877866941243
+      ],
+      "gap": 8.809403073684052e-08,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 2,
+    "lock": {
+     "m": 2,
+     "plus": false,
+     "plus_mass": -0.0,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.0022271138809164225,
+     "pivots": [
+      {
+       "wall": "x=s",
+       "O": [
+        4.0000073654001955,
+        1.9998877866941243
+       ],
+       "omega": 1.0,
+       "n_far": 0,
+       "far": []
+      }
+     ],
+     "MENU_LOCKED": false
+    },
+    "lock_away_from_flush": false,
+    "LOCKED": false,
+    "clusters": {
+     "e_y": {
+      "e_world": [
+       -0.0,
+       1.0
+      ],
+      "members": [
+       2,
+       4,
+       5,
+       8,
+       10
+      ],
+      "size": 5,
+      "edges": [
+       [
+        2,
+        10
+       ],
+       [
+        10,
+        8
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        5
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "y=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.00010000018052336301,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 10,
+        "kind": "pair",
+        "ndote": -0.002229792338160976,
+        "blocking": true
+       },
+       {
+        "other": "x=s",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       -1.0,
+       1.0
+      ],
+      "members": [
+       2,
+       4,
+       5,
+       8,
+       10
+      ],
+      "size": 5,
+      "edges": [
+       [
+        2,
+        10
+       ],
+       [
+        10,
+        8
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        5
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "y=s"
+       ],
+       [
+        5,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 4,
+        "corner": "TL",
+        "depth": 0.0004451510697377481,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       },
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 0.00010000018052336301,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 10,
+        "kind": "pair",
+        "ndote": -1.0022273063481353,
+        "blocking": true
+       },
+       {
+        "other": "x=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 5,
+    "corner": "TL",
+    "depth": 0.00010000018052336301,
+    "tilt": 0.00010005048250061321,
+    "theta": -0.00010005048250062399,
+    "center": [
+     0.5000500237386518,
+     2.5000574297455747
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.0004451510697377481,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.00010005048234339402,
+      0.9998999998194766
+     ]
+    ],
+    "K": {
+     "e_x": false,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 1,
+      "n": [
+       0.0001000504823338777,
+       0.9999999949949505
+      ],
+      "pt": [
+       0.9999999952313574,
+       2.0000074069970073
+      ],
+      "gap": 1.000133309503326e-11,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 4,
+      "n": [
+       -0.00010005048233375524,
+       -0.9999999949949505
+      ],
+      "pt": [
+       0.9995548079346744,
+       3.0000074567538078
+      ],
+      "gap": 2.0054535809777008e-10,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "pair",
+      "other": 8,
+      "n": [
+       -0.9999999949949505,
+       0.00010005048233370478
+      ],
+      "pt": [
+       1.0000000532799993,
+       2.0000096617121383
+      ],
+      "gap": 5.7059454494634565e-08,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "wall",
+      "other": "x=0",
+      "n": [
+       1.0,
+       0.0
+      ],
+      "pt": [
+       1.0000097071285173e-09,
+       2.0001074574892663
+      ],
+      "gap": 1.0000097071285173e-09,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 4,
+    "lock": {
+     "m": 4,
+     "plus": true,
+     "plus_mass": 3.9998999495171654,
+     "minus": true,
+     "minus_mass": 2.3586270094063444,
+     "selfstress": true
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.00010005048250062399,
+     "pivots": [
+      {
+       "wall": "x=0",
+       "O": [
+        1.0000097071285173e-09,
+        2.0001074574892663
+       ],
+       "omega": 1.0,
+       "n_far": 1,
+       "far": [
+        {
+         "k": 1,
+         "kind": "pair",
+         "other": 4,
+         "rate": -0.9994547614546315
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_y": {
+      "e_world": [
+       0.0,
+       -1.0
+      ],
+      "members": [
+       0,
+       1,
+       2,
+       5,
+       8,
+       10
+      ],
+      "size": 6,
+      "edges": [
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        8,
+        10
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        10,
+        2
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        0,
+        "y=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 1,
+        "corner": "BL",
+        "depth": 9.999999000109838e-05,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       },
+       {
+        "sq": 2,
+        "corner": "BR",
+        "depth": 0.00010973428878136016,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 1,
+        "kind": "pair",
+        "ndote": -0.9999999949949505,
+        "blocking": true
+       },
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": 0.9999999949949505,
+        "blocking": false
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -0.00010005048233370478,
+        "blocking": true
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       1.0,
+       -1.0
+      ],
+      "members": [
+       0,
+       1,
+       2,
+       5,
+       8,
+       10
+      ],
+      "size": 6,
+      "edges": [
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        8,
+        10
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        10,
+        2
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        0,
+        "y=0"
+       ],
+       [
+        2,
+        "x=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 1,
+        "corner": "BL",
+        "depth": 9.999999000109838e-05,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       },
+       {
+        "sq": 2,
+        "corner": "BR",
+        "depth": 0.00010973428878136016,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 1,
+        "kind": "pair",
+        "ndote": -0.9998999445126167,
+        "blocking": true
+       },
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": 0.9998999445126168,
+        "blocking": false
+       },
+       {
+        "other": 8,
+        "kind": "pair",
+        "ndote": -1.0001000454772841,
+        "blocking": true
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 7,
+    "corner": "TR",
+    "depth": 9.999998999798976e-05,
+    "tilt": 0.000552934459940424,
+    "theta": 1.5702433923349561,
+    "center": [
+     2.4998310617024693,
+     3.499396463057413
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.8182517934855231,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.999900000010002,
+      0.0008875328962902884
+     ]
+    ],
+    "K": {
+     "e_x": true,
+     "e_y": false,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_x"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 4,
+      "n": [
+       0.9999998471317454,
+       -0.000552934431765171
+      ],
+      "pt": [
+       1.99955480348456,
+       2.9999131157306658
+      ],
+      "gap": 2.0072055129105593e-10,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 6,
+      "n": [
+       -0.9999998471317454,
+       0.0005529344317652934
+      ],
+      "pt": [
+       3.000007452536317,
+       3.8182667532871086
+      ],
+      "gap": 1.0020873020266663e-11,
+      "type": "vertex",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 2,
+    "lock": {
+     "m": 2,
+     "plus": true,
+     "plus_mass": 2.0,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": false,
+     "reason": "no_wall_contact",
+     "tilt": 0.000552934459940424
+    },
+    "lock_away_from_flush": false,
+    "LOCKED": false,
+    "clusters": {
+     "e_x": {
+      "e_world": [
+       -1.0,
+       -0.0
+      ],
+      "members": [
+       4,
+       5,
+       7,
+       8
+      ],
+      "size": 4,
+      "edges": [
+       [
+        7,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        8,
+        5
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        5,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": false,
+      "sides": [
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": -0.9999998471317454,
+        "blocking": true
+       },
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": 0.9999998471317454,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       -1.0,
+       -1.0
+      ],
+      "members": [
+       0,
+       1,
+       4,
+       5,
+       7,
+       8
+      ],
+      "size": 6,
+      "edges": [
+       [
+        7,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        1,
+        0
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        0,
+        "y=0"
+       ],
+       [
+        1,
+        "x=0"
+       ],
+       [
+        5,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 0,
+        "corner": "BL",
+        "depth": 0.06894209172145516,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       },
+       {
+        "sq": 1,
+        "corner": "BL",
+        "depth": 9.999999000109838e-05,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": -0.9994469126999802,
+        "blocking": true
+       },
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": 0.9994469126999801,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   }
+  ],
+  "gordan_moves": [
+   {
+    "sq": 1,
+    "corner": "BL",
+    "d0": 9.999999000109838e-05,
+    "dd_dt": -0.024873022530513822,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 2,
+    "corner": "BR",
+    "d0": 0.00010973428878136016,
+    "dd_dt": -0.0002542344113010131,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 5,
+    "corner": "TL",
+    "d0": 0.00010000018052336301,
+    "dd_dt": -0.0015699441746619414,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 7,
+    "corner": "TR",
+    "d0": 9.999998999798976e-05,
+    "dd_dt": -0.002077396032973411,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   }
+  ],
+  "gordan_decreases_some_nondeepest": true
+ },
+ {
+  "tag": "s0259",
+  "sigma": 4.000011859830166,
+  "exact_n_block": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "n_block_float": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "cone_residual": 0.0746565380951336,
+  "m_active": 18,
+  "gordan_min_Ay": -3.2612801348363973e-16,
+  "gordan_ds": -0.0055735986803501225,
+  "RES": false,
+  "n_nondeepest": 4,
+  "n_retreatable": 2,
+  "items": [
+   {
+    "sq": 1,
+    "corner": "BL",
+    "depth": 0.07849336035933963,
+    "tilt": 0.14721563956871112,
+    "theta": 0.14721563956871112,
+    "center": [
+     0.5679339138343311,
+     1.489440538597618
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.3143274943664853,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.14668447657189976,
+      0.9215066396406604
+     ]
+    ],
+    "K": {
+     "e_x": false,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 0,
+      "n": [
+       -0.1604538383879399,
+       0.9870433454243926
+      ],
+      "pt": [
+       1.1358678117912886,
+       1.0681911023351867
+      ],
+      "gap": 5.83716297519743e-10,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "pair",
+      "other": 4,
+      "n": [
+       9.1126277867401e-05,
+       -0.9999999958480007
+      ],
+      "pt": [
+       0.9891833500967624,
+       2.0573744365545754
+      ],
+      "gap": 9.779949738941696e-08,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "wall",
+      "other": "x=0",
+      "n": [
+       1.0,
+       0.0
+      ],
+      "pt": [
+       1.587737363806241e-08,
+       1.9106899748600492
+      ],
+      "gap": 1.587737363806241e-08,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 3,
+    "lock": {
+     "m": 3,
+     "plus": true,
+     "plus_mass": 2.1474072423240003,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.14721563956871112,
+     "pivots": [
+      {
+       "wall": "x=0",
+       "O": [
+        1.587737363806241e-08,
+        1.9106899748600492
+       ],
+       "omega": -1.0,
+       "n_far": 1,
+       "far": [
+        {
+         "k": 0,
+         "kind": "pair",
+         "other": 0,
+         "rate": -0.9859685713045759
+        }
+       ]
+      }
+     ],
+     "MENU_LOCKED": true
+    },
+    "lock_away_from_flush": true,
+    "LOCKED": true,
+    "clusters": {
+     "e_y": {
+      "e_world": [
+       0.0,
+       1.0
+      ],
+      "members": [
+       1,
+       4,
+       5
+      ],
+      "size": 3,
+      "edges": [
+       [
+        1,
+        4
+       ],
+       [
+        4,
+        5
+       ]
+      ],
+      "wall_anchored": false,
+      "wall_hits": [],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": true,
+      "sides": [
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.9870433454243926,
+        "blocking": false
+       },
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": -0.9999999958480007,
+        "blocking": true
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       1.0,
+       1.0
+      ],
+      "members": [
+       1,
+       2,
+       4,
+       5,
+       6,
+       7,
+       9,
+       10
+      ],
+      "size": 8,
+      "edges": [
+       [
+        1,
+        4
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        9,
+        10
+       ],
+       [
+        10,
+        2
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        2,
+        "x=s"
+       ],
+       [
+        7,
+        "x=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 6,
+        "corner": "TR",
+        "depth": 9.057150835323213e-05,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 7,
+        "corner": "TR",
+        "depth": 0.06272221846467185,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 0,
+        "kind": "pair",
+        "ndote": 0.8265895070364527,
+        "blocking": false
+       },
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": -0.9999088695701333,
+        "blocking": true
+       },
+       {
+        "other": "x=0",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": true,
+    "diag_free": false
+   },
+   {
+    "sq": 2,
+    "corner": "BR",
+    "depth": 0.003425372315349451,
+    "tilt": 0.0192910506131041,
+    "theta": -0.019291050613104207,
+    "center": [
+     3.490459965216891,
+     1.506126522474021
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.7968230508817911,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.019289855949111256,
+      0.9965746276846505
+     ]
+    ],
+    "K": {
+     "e_x": false,
+     "e_y": true,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_y"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 10,
+      "n": [
+       0.9990276470104479,
+       -0.04408809940072179
+      ],
+      "pt": [
+       3.000197925552727,
+       2.0156784162633916
+      ],
+      "gap": 8.052607869402095e-08,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "wall",
+      "other": "x=s",
+      "n": [
+       -1.0,
+       0.0
+      ],
+      "pt": [
+       4.000011859006261,
+       1.996388562138185
+      ],
+      "gap": 2.823904665660848e-09,
+      "type": "wall",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 2,
+    "lock": {
+     "m": 2,
+     "plus": false,
+     "plus_mass": -0.0,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": true,
+     "tilt": 0.019291050613104207,
+     "pivots": [
+      {
+       "wall": "x=s",
+       "O": [
+        4.000011859006261,
+        1.996388562138185
+       ],
+       "omega": 1.0,
+       "n_far": 0,
+       "far": []
+      }
+     ],
+     "MENU_LOCKED": false
+    },
+    "lock_away_from_flush": false,
+    "LOCKED": false,
+    "clusters": {
+     "e_y": {
+      "e_world": [
+       -0.0,
+       1.0
+      ],
+      "members": [
+       2,
+       4,
+       5,
+       6,
+       7,
+       9,
+       10
+      ],
+      "size": 7,
+      "edges": [
+       [
+        2,
+        10
+       ],
+       [
+        10,
+        7
+       ],
+       [
+        10,
+        9
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        4,
+        5
+       ]
+      ],
+      "wall_anchored": false,
+      "wall_hits": [],
+      "intruder_anchored": false,
+      "intruder_hits": [],
+      "free": true,
+      "sides": [
+       {
+        "other": 10,
+        "kind": "pair",
+        "ndote": -0.04408809940072179,
+        "blocking": true
+       },
+       {
+        "other": "x=s",
+        "kind": "wall",
+        "ndote": 0.0,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       -1.0,
+       1.0
+      ],
+      "members": [
+       2,
+       4,
+       5,
+       6,
+       7,
+       9,
+       10
+      ],
+      "size": 7,
+      "edges": [
+       [
+        2,
+        10
+       ],
+       [
+        10,
+        7
+       ],
+       [
+        10,
+        9
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        6,
+        5
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 4,
+        "corner": "TL",
+        "depth": 0.0573620137471621,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 9.097032485960721e-05,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 10,
+        "kind": "pair",
+        "ndote": -1.0431157464111698,
+        "blocking": true
+       },
+       {
+        "other": "x=s",
+        "kind": "wall",
+        "ndote": 1.0,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": true,
+    "diag_free": false
+   },
+   {
+    "sq": 5,
+    "corner": "TL",
+    "depth": 9.097032485960721e-05,
+    "tilt": 9.660010677725595e-05,
+    "theta": -1.5706997266881193,
+    "center": [
+     1.4999573283955587,
+     3.4999599855328065
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.0573620137471621,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.9999090296751404,
+      9.66001066267097e-05
+     ]
+    ],
+    "K": {
+     "e_x": true,
+     "e_y": false,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_x"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 4,
+      "n": [
+       0.9999999953342097,
+       9.660010662689487e-05
+      ],
+      "pt": [
+       0.9999999968480007,
+       3.057375524186834
+      ],
+      "gap": 8.292101938423002e-08,
+      "type": "vertex",
+      "n_admissible": 1
+     },
+     {
+      "kind": "pair",
+      "other": 6,
+      "n": [
+       -0.9999999953218521,
+       9.672794729748072e-05
+      ],
+      "pt": [
+       2.000005626115977,
+       3.000008287919015
+      ],
+      "gap": 8.297269982193711e-08,
+      "type": "kiss",
+      "n_admissible": 2
+     }
+    ],
+    "n_contacts": 2,
+    "lock": {
+     "m": 2,
+     "plus": false,
+     "plus_mass": -0.0,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": false,
+     "reason": "no_wall_contact",
+     "tilt": 9.660010677725595e-05
+    },
+    "lock_away_from_flush": false,
+    "LOCKED": false,
+    "clusters": {
+     "e_x": {
+      "e_world": [
+       1.0,
+       -0.0
+      ],
+      "members": [
+       5,
+       6,
+       7
+      ],
+      "size": 3,
+      "edges": [
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        7
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        7,
+        "x=s"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 6,
+        "corner": "TR",
+        "depth": 9.057150835323213e-05,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": 0.9999999953342097,
+        "blocking": false
+       },
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": -0.9999999953218521,
+        "blocking": true
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       1.0,
+       -1.0
+      ],
+      "members": [
+       2,
+       5,
+       6,
+       7,
+       8,
+       10
+      ],
+      "size": 6,
+      "edges": [
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        7,
+        10
+       ],
+       [
+        10,
+        8
+       ],
+       [
+        10,
+        2
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        2,
+        "x=s"
+       ],
+       [
+        7,
+        "x=s"
+       ],
+       [
+        8,
+        "y=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 2,
+        "corner": "BR",
+        "depth": 0.003425372315349451,
+        "rate": 1.0,
+        "fd": 1.0000000005838672
+       },
+       {
+        "sq": 6,
+        "corner": "TR",
+        "depth": 9.057150835323213e-05,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 4,
+        "kind": "pair",
+        "ndote": 0.9999033952275828,
+        "blocking": false
+       },
+       {
+        "other": 6,
+        "kind": "pair",
+        "ndote": -1.0000967232691496,
+        "blocking": true
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   },
+   {
+    "sq": 6,
+    "corner": "TR",
+    "depth": 9.057150835323213e-05,
+    "tilt": 9.672794744819413e-05,
+    "theta": 1.5706995988474484,
+    "center": [
+     2.5000540707039445,
+     3.4999597219998746
+    ],
+    "non_deepest": true,
+    "depth_max_other": 0.06272221846467185,
+    "n_intruders_at_corner": 2,
+    "argmin": [
+     [
+      0.9999094284916468,
+      9.692756607249109e-05
+     ]
+    ],
+    "K": {
+     "e_x": true,
+     "e_y": false,
+     "(1,1)": true
+    },
+    "cardinals": [
+     "e_x"
+    ],
+    "contacts": [
+     {
+      "kind": "pair",
+      "other": 5,
+      "n": [
+       0.9999999953218521,
+       -9.672794729748072e-05
+      ],
+      "pt": [
+       2.000005626115977,
+       3.000008287919015
+      ],
+      "gap": 8.297269982193711e-08,
+      "type": "kiss",
+      "n_admissible": 2
+     },
+     {
+      "kind": "pair",
+      "other": 7,
+      "n": [
+       -0.9999999953218521,
+       9.672794729760318e-05
+      ],
+      "pt": [
+       3.0000118641772078,
+       3.062735633484823
+      ],
+      "gap": 8.292297781764546e-08,
+      "type": "vertex",
+      "n_admissible": 1
+     }
+    ],
+    "n_contacts": 2,
+    "lock": {
+     "m": 2,
+     "plus": true,
+     "plus_mass": 2.0,
+     "minus": false,
+     "minus_mass": -0.0,
+     "selfstress": false
+    },
+    "menu": {
+     "applies": false,
+     "reason": "no_wall_contact",
+     "tilt": 9.672794744819413e-05
+    },
+    "lock_away_from_flush": false,
+    "LOCKED": false,
+    "clusters": {
+     "e_x": {
+      "e_world": [
+       -1.0,
+       -0.0
+      ],
+      "members": [
+       4,
+       5,
+       6
+      ],
+      "size": 3,
+      "edges": [
+       [
+        6,
+        5
+       ],
+       [
+        5,
+        4
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        4,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 9.097032485960721e-05,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": -0.9999999953218521,
+        "blocking": true
+       },
+       {
+        "other": 7,
+        "kind": "pair",
+        "ndote": 0.9999999953218521,
+        "blocking": false
+       }
+      ]
+     },
+     "(1,1)": {
+      "e_world": [
+       -1.0,
+       -1.0
+      ],
+      "members": [
+       0,
+       1,
+       4,
+       5,
+       6
+      ],
+      "size": 5,
+      "edges": [
+       [
+        6,
+        5
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        1,
+        0
+       ]
+      ],
+      "wall_anchored": true,
+      "wall_hits": [
+       [
+        0,
+        "y=0"
+       ],
+       [
+        1,
+        "x=0"
+       ],
+       [
+        4,
+        "x=0"
+       ]
+      ],
+      "intruder_anchored": true,
+      "intruder_hits": [
+       {
+        "sq": 0,
+        "corner": "BL",
+        "depth": 0.3143274943664853,
+        "rate": 1.0,
+        "fd": 1.0000000005838672
+       },
+       {
+        "sq": 1,
+        "corner": "BL",
+        "depth": 0.07849336035933963,
+        "rate": 1.0,
+        "fd": 0.9999999983634211
+       },
+       {
+        "sq": 5,
+        "corner": "TL",
+        "depth": 9.097032485960721e-05,
+        "rate": 1.0,
+        "fd": 0.9999999994736442
+       }
+      ],
+      "free": false,
+      "sides": [
+       {
+        "other": 5,
+        "kind": "pair",
+        "ndote": -0.9999032673745547,
+        "blocking": true
+       },
+       {
+        "other": 7,
+        "kind": "pair",
+        "ndote": 0.9999032673745545,
+        "blocking": false
+       }
+      ]
+     }
+    },
+    "RETREATABLE": false,
+    "diag_free": false
+   }
+  ],
+  "gordan_moves": [
+   {
+    "sq": 1,
+    "corner": "BL",
+    "d0": 0.07849336035933963,
+    "dd_dt": 0.0002561684198099101,
+    "decreases": false,
+    "RETREATABLE": true,
+    "non_deepest": true
+   },
+   {
+    "sq": 2,
+    "corner": "BR",
+    "d0": 0.003425372315349451,
+    "dd_dt": -0.0002755995431868996,
+    "decreases": true,
+    "RETREATABLE": true,
+    "non_deepest": true
+   },
+   {
+    "sq": 5,
+    "corner": "TL",
+    "d0": 9.097032485960721e-05,
+    "dd_dt": -0.0425852109131597,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   },
+   {
+    "sq": 6,
+    "corner": "TR",
+    "d0": 9.057150835323213e-05,
+    "dd_dt": -0.050060799949847024,
+    "decreases": true,
+    "RETREATABLE": false,
+    "non_deepest": true
+   }
+  ],
+  "gordan_decreases_some_nondeepest": true
+ }
+]
