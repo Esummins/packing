@@ -664,7 +664,7 @@ current arbiter) is the same corpus-replay shape as trump5's.
   along C1–C3; the lever is certification reliability at η ≈ −1.
 * [F] Process: exact phases 7 min; LP phase 7 nodes in the 3 h cap at three slots (LP 7 029 s +
   cert 4 882 s + repairs); S2–S5 not run; free commit sat at 1–3 GB throughout under the other
-  campaigns — the launcher's gate reading at launch is in the chore's report; 11.9 GB free at close.
+  campaigns — no gate reading was logged at launch (the waits file stayed empty); free commit read 1.0 GB during the LP phase with the three shards resident and 11.9 GB at close, so the shards launched into a dip or the gate was not consulted — a process finding against the chore, recorded here.
 
 ## 11. Files
 
