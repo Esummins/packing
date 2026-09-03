@@ -1,0 +1,85 @@
+--- validation: A31 rows R0 / R2 by Burnside ---
+k=3  R0=1072 (A31 1072)   R2=192 (A31 192)
+k=4  R0=28796 (A31 28796)   R2=2979 (A31 2979)
+--- validation: weighted Burnside vs brute force ---
+k=3 factorable: burnside=95 brute=95  OK
+k=4 factorable: burnside=818 brute=818  OK
+--- k = 11 factorable Burnside (exact UPPER bound) ---
+  lam=(11,)                  size 3628800   Zsum=512  (0.0s)
+  lam=(10, 1)                size 3991680   Zsum=5504  (0.0s)
+  lam=(9, 2)                 size 2217600   Zsum=4736  (0.0s)
+  lam=(9, 1, 1)              size 2217600   Zsum=37248  (0.0s)
+  lam=(8, 3)                 size 1663200   Zsum=3840  (0.0s)
+  lam=(8, 2, 1)              size 2494800   Zsum=185088  (0.0s)
+  lam=(8, 1, 1, 1)           size 831600    Zsum=1432320  (0.0s)
+  lam=(7, 4)                 size 1425600   Zsum=4224  (0.0s)
+  lam=(7, 3, 1)              size 1900800   Zsum=26368  (0.0s)
+  lam=(7, 2, 2)              size 712800    Zsum=149760  (0.0s)
+  lam=(7, 2, 1, 1)           size 1425600   Zsum=1137664  (0.0s)
+  lam=(7, 1, 1, 1, 1)        size 237600    Zsum=45973504  (0.1s)
+  lam=(6, 5)                 size 1330560   Zsum=3584  (0.1s)
+  lam=(6, 4, 1)              size 1663200   Zsum=166912  (0.1s)
+  lam=(6, 3, 2)              size 1108800   Zsum=466176  (0.1s)
+  lam=(6, 3, 1, 1)           size 1108800   Zsum=4025344  (0.1s)
+  lam=(6, 2, 2, 1)           size 831600    Zsum=20715520  (0.1s)
+  lam=(6, 2, 1, 1, 1)        size 554400    Zsum=154896384  (0.1s)
+  lam=(6, 1, 1, 1, 1, 1)     size 55440     Zsum=5876076544  (0.1s)
+  lam=(5, 5, 1)              size 798336    Zsum=391168  (0.1s)
+  lam=(5, 4, 2)              size 997920    Zsum=133120  (0.1s)
+  lam=(5, 4, 1, 1)           size 997920    Zsum=1084160  (0.1s)
+  lam=(5, 3, 3)              size 443520    Zsum=68096  (0.1s)
+  lam=(5, 3, 2, 1)           size 1330560   Zsum=836352  (0.1s)
+  lam=(5, 3, 1, 1, 1)        size 443520    Zsum=35514368  (0.2s)
+  lam=(5, 2, 2, 2)           size 166320    Zsum=16600064  (0.2s)
+  lam=(5, 2, 2, 1, 1)        size 498960    Zsum=125001728  (0.2s)
+  lam=(5, 2, 1, 1, 1, 1)     size 166320    Zsum=4792725504  (0.2s)
+  lam=(5, 1, 1, 1, 1, 1, 1)  size 11088     Zsum=689961279488  (0.2s)
+  lam=(4, 4, 3)              size 415800    Zsum=461824  (0.2s)
+  lam=(4, 4, 2, 1)           size 623700    Zsum=77277184  (0.2s)
+  lam=(4, 4, 1, 1, 1)        size 207900    Zsum=595056640  (0.3s)
+  lam=(4, 3, 3, 1)           size 554400    Zsum=2975744  (0.3s)
+  lam=(4, 3, 2, 2)           size 415800    Zsum=15128576  (0.3s)
+  lam=(4, 3, 2, 1, 1)        size 831600    Zsum=120307712  (0.3s)
+  lam=(4, 3, 1, 1, 1, 1)     size 138600    Zsum=4736380928  (0.3s)
+  lam=(4, 2, 2, 2, 1)        size 207900    Zsum=8809332736  (0.4s)
+  lam=(4, 2, 2, 1, 1, 1)     size 207900    Zsum=63331033088  (0.4s)
+  lam=(4, 2, 1, 1, 1, 1, 1)  size 41580     Zsum=2286246133760  (0.5s)
+  lam=(4, 1, 1, 1, 1, 1, 1, 1) size 1980      Zsum=310338021294080  (0.5s)
+  lam=(3, 3, 3, 2)           size 123200    Zsum=32660480  (0.5s)
+  lam=(3, 3, 3, 1, 1)        size 123200    Zsum=1495001088  (0.6s)
+  lam=(3, 3, 2, 2, 1)        size 277200    Zsum=358797312  (0.6s)
+  lam=(3, 3, 2, 1, 1, 1)     size 184800    Zsum=14510833664  (0.6s)
+  lam=(3, 3, 1, 1, 1, 1, 1)  size 18480     Zsum=2196790542336  (0.6s)
+  lam=(3, 2, 2, 2, 2)        size 34650     Zsum=6714851328  (0.6s)
+  lam=(3, 2, 2, 2, 1, 1)     size 138600    Zsum=50783469568  (0.7s)
+  lam=(3, 2, 2, 1, 1, 1, 1)  size 69300     Zsum=1880575574016  (0.8s)
+  lam=(3, 2, 1, 1, 1, 1, 1, 1) size 9240      Zsum=263131695153152  (0.9s)
+  lam=(3, 1, 1, 1, 1, 1, 1, 1, 1) size 330       Zsum=132499382571368448  (1.0s)
+  lam=(2, 2, 2, 2, 2, 1)     size 10395     Zsum=14109329588224  (1.0s)
+  lam=(2, 2, 2, 2, 1, 1, 1)  size 17325     Zsum=98581604990976  (1.0s)
+  lam=(2, 2, 2, 1, 1, 1, 1, 1) size 6930      Zsum=3419827450937344  (1.1s)
+  lam=(2, 2, 1, 1, 1, 1, 1, 1, 1) size 990       Zsum=452744470308323328  (1.1s)
+  lam=(2, 1, 1, 1, 1, 1, 1, 1, 1, 1) size 55        Zsum=219482999692841713664  (1.2s)
+  lam=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) size 1         Zsum=394446674554097403691008  (1.5s)
+k=11 factorable orbits (EXACT UB) = 1274648400859932   (1.5 s)
+--- exact cumulative ablation of the factorable filters (k=11) ---
+  F1 mask admissibility (L5b)        -> 3583640604893516408
+  F2 + pairwise coexistence          -> 449398584426993952
+  F3 + touching window on edges      -> 1274648400859932
+labelled factorable structures Z = 394033862250204216950784  (3.9403e+23)
+{
+ "R0_k3": 1072,
+ "R2_k3": 192,
+ "R0_k4": 28796,
+ "R2_k4": 2979,
+ "R0_R2_match_A31": true,
+ "fact_k3_burnside": 95,
+ "fact_k3_brute": 95,
+ "fact_k4_burnside": 818,
+ "fact_k4_brute": 818,
+ "brute_match": true,
+ "k11_factorable_orbits_UB": 1274648400859932,
+ "k11_burnside_raw_sum": "407039082299565869260800",
+ "k11_seconds": 1.5,
+ "k11_labelled_Z": "394033862250204216950784"
+}

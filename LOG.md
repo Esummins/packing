@@ -2322,3 +2322,51 @@ affordable cost estimate for closing 3.84.
   attempts/A87-drain-flow/{code,results,notes,logs}, lean/depgraph.json (C.K4TIER note, chip released) + svg, REGISTRY row.
 - A78 T5 COMPLETION: K61 61/61, TRAP 6/6 (⊂ K61), P1 1/1, THMU 11/11; 73 certificates, all OK/PENDING; total Lean wall 590.0 min; max k4_09 = 2400 s (531 atoms, 4192860 boxes); Lean/Python wall ratio median 32×
 - A87 FOLLOW-UP CLOSED [C] (FJ-polish re-run of A85's k0 CP search, notes/fj_polish.md, code/fjpolish87.py, results/cp87_fj_polished.{json,jsonl} + cp87_below_shat_verify.json): HEADLINE = NO genuine k0 Fritz-John point at or below s-hat = 3.877083590022814 (0 of 179 survivors, 0 of 167 at tight tol 1e-6); A04's 702-optimum search NOT contradicted. Method: NNLS cone test (no LP) whose residual r = A^T lam* - e_s is itself the certified Gordan descent direction (A r >= 0, e_s.r = -||r||^2), eps-active feasible-descent flow + damped Newton on the active-set FJ system (t3lib fj_eval mode=active), tolerance ladder 1e-6..1e-3; 269 seeds (262 A85 optima + 7 rotated-Trump phi 5e-8..1e-2), ONE process BLAS-pinned, 1928 s. Seed census extends J3 from 15 points to all 262: 115/262 (44%) have NO FJ multipliers at ANY ladder tol -> that fraction of A85's "optima" are penalty/SLSQP artefacts, not critical points. After polish 167/262 are genuine FJ points at tol 1e-6; LOWEST is o012 at sigma = 3.897230787 (s-hat + 2.015e-2) - the same single point J3 found, polish adds nothing below it; next four 3.98284, 3.98284, 3.99692, 4.00000; ZERO tight survivors in [3.87,3.88). Lowest FEASIBLE k0 packing any drain reaches: 3.877140815 = s-hat + 5.72e-5 (Trump rotated 1e-4), re-verified exactly (80 dps, all 55 SAT gaps >= 9.86e-11 > 0, side <= 3.877140815) -> strictly ABOVE s-hat. CONTROL PASSES: rotational ghosts phi <= 1e-5 all drain back to sigma = 3.877083590 = s-hat to 2.9e-11 and are then correctly rejected as NOT k0 (k_flush = 3). Of J3's 14 low landings only o012 survives; the other 13 drain 1e-4..1.7e-3 and NONE converges in the 14 s/seed budget (2 leave the k0 stratum). CAVEATS: 98/269 flows truncated at the budget, so the claim is "no drain reached s-hat", not "no k0 FJ point below s-hat exists"; the 12 loose survivors pass only at tol 1e-4/1e-3 (mid-drain points look jammed when everything within 1e-4 is called a contact) and are NOT certificates; one tie selection per contact pair still sampled. A57/A60/A61/A85 untouched, no certificate emitted, headroom 8.3 GB at launch.
+
+## 2026-09-03 A88-fj-census (Fable lead + 2 Opus chores, <= 2 processes) -- done-success (H1-by-structure PRICED: census ~1e36, >= 1e12 rigorously; loses on the count, not the price; k0_00 stays on A85's tree)
+- T [docs/proofs/fj_census_k0.md]: THEOREM T1 (k0 FJ contact floor): m_H = 3k_H+1+sigma_H-d_H (A44 L8), so m_min(d_H) = 3k_H+1-d_H
+  (+1 in the lambda0=0 branch); support conditions = L6 wall-to-wall chain on >= 3 loaded squares + L1 degree >= 2 (+ L11 non-thin
+  row-degree >= 3 => m_H >= 6, 2E_H >= 3k_H+2); absolute floor k_H >= 3, m_H >= 4. Flat directions: flexes are s-neutral (L10), FJ
+  points generically isolated in the core, d_crit <= d_H + 3(11-k_H) with d_H UNBOUNDED by first/second-order necessity (A44 frame):
+  worst case k_H = 3, eight rattlers, d_crit <= 30 - the chain/L1 bound m from below, never d from above. The FJ side adds NO bulk
+  filter: "enough contacts to support the multipliers" = L1 + L6 = A31's hard set; A44's rigid/flex split labels, does not kill.
+  k0 filters: K0-1 slot exclusion (no wall-degree-2 square with a wall-flush edge; decoration level, inert at Level 0), K0-2 A58
+  crowding as an existential zone CSP (S-flagged: k-maximal minimiser via stratify), K0-3 A45 ruler cap (WINDOW-DEPENDENT - Caveat
+  R), K0-4 A50 tilt rules inert at census level. LEMMA H-LOC: the per-structure certificate is local to the loaded core (Gordan on
+  H's rows refutes every FJ point with support in H whatever the unloaded squares do; Krawczyk on a rigid core lands on a
+  sub-packing problem when the root is below s-hat).
+- M [T2 census, attempts/A88-fj-census/notes/census_report.md; A59's method lifted to S_11 x D4, counter reproduces A31 R0/R2 and
+  brute-force orbit counts exactly, divisibility by 11!*8 asserted]: Level-0 k_H = 11 support graphs 9.5e10 +- 2.5e9 [MC] in the
+  rigorous bracket [57 232 EXACT, 1.27e15 EXACT] - inside A31's EXTRAPOLATED band, now measured; dominant filter L4(b) planarity
+  x1380, then N1 x4.25; L5(a) nearly inert at k = 11. Decorations per graph median 1.3e21 (mean 2e25; A31's extrapolated 6.5e18 was
+  2.4 orders low). DECORATED census 1.86e36 [MC, +-1/2 order] in [3.9e26 EXACT (one explicit graph's all-corner sub-menu
+  8^24 * AO(G)/2), 4.4e52 EXACT crude]. Ablation: K0-1 x0.9895, K0-3 x0.99999, K0-2 x1.000 (1493/1493) - the whole k0 hypothesis
+  buys x1.011; A58 dropped / A50 dropped: unchanged. Rigid-possible share 1.2e-5 (weighted); FLEX-ONLY >= 99.9988 %. Dominant
+  multiplier = the contact-type decoration fan-out, ten orders above the graph count. CANARY PASS 9/9: Trump's structure derived by
+  code (tol 1e-6), passes F0 on G and H, per-wall 3/3/3/2, EXCLUDED by K0-1 (slot squares {0,2,5}), INCLUDED with K0-1 dropped.
+  D6: A87's 167 certified k0 FJ points satisfy T1 with 0 violations (k_H 4..11, m_H 7..32, d_H 2..9, chi in [-9,-2]: ZERO rigid)
+  and are census members 167/167 (tilt-feasible, K0-1, L5(a)/N1 narrow and widened window).
+- F [G-A88-4, two independent witnesses]: A31/A43/A44's gauge-fixed 20-type menu OMITS the same-class corner-corner kiss (Trump's
+  (1,3) pair; 4 of the 167 certified points); the census undercounts by that family (verdict direction unaffected), and L4
+  planarity is FALSE on the ACTIVE graph when squares kiss at a point (o124/o154 at sigma = 4) - L4 holds on the kiss-free
+  support, the only object any existing count enumerated, so those counts stand. Caveat R: Lemma R's ruler cap grows with s
+  (147 spurious kills from applying the s0 cap at sigma = 4).
+- M [T3 pilot, notes/pilot_report.md; float intervals cross-checked to 1.2e-14 vs t3lib mpmath, no certificate emitted]: TRIAGE
+  (interval-linear realisability LP over tilt-class bins, sound outer relaxation) on 720 uniform census structures: kill 0.225
+  [0.210, 0.241] at 13.6 ms/structure - CONTAINMENT-type 0.222, s-hat-type 0.003 (2 of 720): A59's diagnosis re-derived, the s-hat
+  bound is nearly free at Tier 1; no realised structure ever containment-killed; Trump survives. FJ TIER (core-box B&B: HC4
+  propagation, a-structure, dominance side rows, a-sigma, Gordan/Farkas with the FIXED row set, Krawczyk for chi >= 0): 95.3 %
+  [93.3, 96.8] of census survivors CLOSE in ~33 boxes / 50 ms; leaf kills = dominance rows 0.67, HC4 0.19, a-structure 0.09,
+  F 0.053 (Gordan DOES fire once the selection menu is gone - A87's menu was part of the problem); Krawczyk reached 0 times by the
+  search; HC4 is load-bearing (root box uncontracted without it, free with it). The 13 A87/Trump structures never close (20 000
+  boxes) - correctly, they contain genuine FJ points. CANARY PASS: descending into the child containing z-hat, no leaf ever excluded
+  it; eps-inflated Krawczyk contracts (ratio 0.25, cond 15.5), one root, s-enclosure [3.877083590022812, 3.877083590022816] contains
+  s-hat. COST: 0.78 s/structure all-in (c_triage 0.0136 s, f_surv 0.775, c_FJ >= 0.994 s censored); break-even N = 3.2e7
+  (triage-only ceiling 1.85e9); at N = 1e11 graphs 2.2e7 CPU-h = x3100 A85's 7 000; at the measured 1e36 x1e29. A85 baseline
+  ~1350 s/node (6 PASS/5 FAIL/1 refused of 12), 63 s LP at 4 corners deep.
+- Verdict: H1-by-structure LOSES on the count (>= 1e12 rigorously; 1e36 measured; break-even 3e7), not on the price; dominant
+  multiplier named = decoration fan-out; k0_00 = A85's tree. Usable residue: Lemma H-LOC, the fixed-row Farkas + HC4 leaf (50 ms
+  per closed structure) as (F)-type leaves for Lemma F-LEAF's zone-tree, the measured k = 11 growth laws. Discipline: 2 processes,
+  BLAS pinned, headroom > 6 GB, A57/A60/A61/A86 untouched, frozen verifiers untouched, no certificate emitted. Files:
+  docs/proofs/fj_census_k0.md, attempts/A88-fj-census/{code,results,notes,logs}, lean/depgraph.json (C.K4TIER note, chip released)
+  + svg, REGISTRY row.

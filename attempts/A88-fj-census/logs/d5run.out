@@ -1,0 +1,83 @@
+A88 run3: 20000000 plain-uniform draws from the factorable set (chunk 1000000)
+  1000000 / 20000000 draws, 68 survivors, rate 6.8000e-05 +- 8.2e-06, 58s
+  2000000 / 20000000 draws, 141 survivors, rate 7.0500e-05 +- 5.9e-06, 120s
+  3000000 / 20000000 draws, 221 survivors, rate 7.3667e-05 +- 5.0e-06, 177s
+  4000000 / 20000000 draws, 297 survivors, rate 7.4250e-05 +- 4.3e-06, 222s
+  5000000 / 20000000 draws, 372 survivors, rate 7.4400e-05 +- 3.9e-06, 271s
+  6000000 / 20000000 draws, 437 survivors, rate 7.2833e-05 +- 3.5e-06, 321s
+  7000000 / 20000000 draws, 514 survivors, rate 7.3429e-05 +- 3.2e-06, 370s
+  8000000 / 20000000 draws, 588 survivors, rate 7.3500e-05 +- 3.0e-06, 421s
+  9000000 / 20000000 draws, 660 survivors, rate 7.3333e-05 +- 2.9e-06, 472s
+  10000000 / 20000000 draws, 737 survivors, rate 7.3700e-05 +- 2.7e-06, 523s
+  11000000 / 20000000 draws, 824 survivors, rate 7.4909e-05 +- 2.6e-06, 572s
+  12000000 / 20000000 draws, 902 survivors, rate 7.5167e-05 +- 2.5e-06, 624s
+  13000000 / 20000000 draws, 980 survivors, rate 7.5385e-05 +- 2.4e-06, 674s
+  14000000 / 20000000 draws, 1061 survivors, rate 7.5786e-05 +- 2.3e-06, 721s
+  15000000 / 20000000 draws, 1142 survivors, rate 7.6133e-05 +- 2.3e-06, 770s
+  16000000 / 20000000 draws, 1197 survivors, rate 7.4812e-05 +- 2.2e-06, 820s
+  17000000 / 20000000 draws, 1275 survivors, rate 7.5000e-05 +- 2.1e-06, 869s
+  18000000 / 20000000 draws, 1345 survivors, rate 7.4722e-05 +- 2.0e-06, 915s
+  19000000 / 20000000 draws, 1416 survivors, rate 7.4526e-05 +- 2.0e-06, 965s
+  20000000 / 20000000 draws, 1493 survivors, rate 7.4650e-05 +- 1.9e-06, 1015s
+wrote 1493 uniform F0 survivors
+cross-check: importance-sampled ablation (run2, 3e5 draws)
+   run2 200000 / 300000, 11.9s, F0 survivors 289, uniform 0
+{
+ "n": 300000,
+ "seed": 4242,
+ "proposal": "uniform-edge-count",
+ "stage_names": [
+  "factorable&euler",
+  "L1_deg2",
+  "L5d_deg12",
+  "L4a_euler",
+  "L5a_metric",
+  "L3_nofloat",
+  "L6_span",
+  "L7",
+  "N1_wallcap3",
+  "L4b_planar"
+ ],
+ "stage_counts": [
+  300000,
+  118653,
+  118653,
+  118653,
+  114298,
+  114296,
+  79727,
+  79727,
+  16967,
+  420
+ ],
+ "stage_rate": [
+  0.5922079433079704,
+  0.5452468657432774,
+  0.5452468657432774,
+  0.5452468657432774,
+  0.5151535406820534,
+  0.5151535286692065,
+  0.38822314922079104,
+  0.38822314922079104,
+  0.10489623010215392,
+  6.22274559532762e-05
+ ],
+ "stage_sigma": [
+  0.001821729738251167,
+  0.0018028654567914856,
+  0.0018028654567914856,
+  0.0018028654567914856,
+  0.001760443063232091,
+  0.0017604430749109275,
+  0.001605078312446493,
+  0.001605078312446493,
+  0.000932244033025053,
+  7.098230280889326e-06
+ ],
+ "wmax_seen": 3.608994775609279,
+ "WCAP": 4.0,
+ "n_uniform": 0,
+ "seconds": 17.7,
+ "ess_survivors": 76.83386500619547
+}
+total 1032.6 s
