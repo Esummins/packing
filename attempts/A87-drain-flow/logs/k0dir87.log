@@ -1,0 +1,102 @@
+selftest: slot_rows gradients OK
+selftest: SAT gap sign == open-slot meet on 4000 samples OK
+selftest: seed builder 40/40 K0-BLOCKED feasible
+selftest: random seed exact certified n_block [2, 2, 2, 2] (unknown [0, 0, 0, 0]) vs float [2, 2, 2, 2]
+selftest: PASS
+canary: Trump s = 3.877083590023
+   BL n_block=1 blockers=[0] m1=1.000000 m2=0.000000
+   BR n_block=1 blockers=[2] m1=1.000000 m2=-0.000000
+   TL n_block=2 blockers=[4, 6] m1=0.168321 m2=0.155475
+   TR n_block=1 blockers=[5] m1=1.000000 m2=-0.000000
+   TL 2-crowd depths 0.168321 / 0.155475  (expected 0.168 / 0.155)  OK
+   Trump is NOT K0-BLOCKED (BL/BR/TR each hold one square)  OK
+canary: nicked Trump amp=3e-03  sigma 3.916993050  overlap 6.89e-03 -> -6.83e-03  n_block [1, 1, 2, 1]  blocked False
+     BL blockers=[0] m1=0.998418 m2=-0.013785
+     BR blockers=[2] m1=0.998482 m2=-0.016766
+     TL blockers=[4, 6] m1=0.154035 m2=0.144193
+     TR blockers=[5] m1=0.999978 m2=-0.016563
+canary: nicked Trump amp=1e-02  sigma 4.009380311  overlap 2.29e-02 -> -2.23e-02  n_block [1, 1, 2, 1]  blocked False
+     BL blockers=[0] m1=0.994091 m2=-0.045837
+     BR blockers=[2] m1=0.994800 m2=-0.055486
+     TL blockers=[4, 6] m1=0.120821 m2=0.118436
+     TR blockers=[5] m1=0.999763 m2=-0.054458
+canary: nicked Trump amp=3e-02  sigma 4.267643821  overlap 6.83e-02 -> -6.25e-02  n_block [1, 1, 2, 1]  blocked False
+     BL blockers=[0] m1=0.976754 m2=-0.136516
+     BR blockers=[2] m1=0.983117 m2=-0.163024
+     TL blockers=[4, 6] m1=0.049211 m2=0.026851
+     TR blockers=[5] m1=0.997966 m2=-0.156937
+canary: nicked Trump amp=1e-01  sigma 5.104043206  overlap 2.21e-01 -> -1.59e-01  n_block [1, 1, 0, 1]  blocked False
+     BL blockers=[0] m1=0.856866 m2=-0.442873
+     BR blockers=[2] m1=0.925972 m2=-0.503019
+     TL blockers=[] m1=-0.142462 m2=-0.290623
+     TR blockers=[5] m1=0.981157 m2=-0.448321
+   perturbation undone -> verdict restored exactly  OK
+   EXACT interval test: certified n_block = [1, 1, 2, 1], UNKNOWN = [0, 0, 0, 0] (float [1, 1, 2, 1])
+canary: PASS
+    25 seeds, 104s, best K0-BLOCKED sigma = 4.000020271
+    50 seeds, 210s, best K0-BLOCKED sigma = 4.000000155
+    75 seeds, 305s, best K0-BLOCKED sigma = 4.000000155
+   100 seeds, 414s, best K0-BLOCKED sigma = 4.000000155
+   125 seeds, 523s, best K0-BLOCKED sigma = 3.987168384
+   150 seeds, 664s, best K0-BLOCKED sigma = 3.987168384
+   175 seeds, 799s, best K0-BLOCKED sigma = 3.987168384
+   200 seeds, 933s, best K0-BLOCKED sigma = 3.987168384
+   225 seeds, 1083s, best K0-BLOCKED sigma = 3.987168384
+   250 seeds, 1234s, best K0-BLOCKED sigma = 3.987168384
+   275 seeds, 1345s, best K0-BLOCKED sigma = 3.987168384
+   300 seeds, 1453s, best K0-BLOCKED sigma = 3.987168384
+   325 seeds, 1569s, best K0-BLOCKED sigma = 3.987168384
+   350 seeds, 1684s, best K0-BLOCKED sigma = 3.987168384
+   375 seeds, 1794s, best K0-BLOCKED sigma = 3.987168384
+   400 seeds, 1897s, best K0-BLOCKED sigma = 3.987168384
+   425 seeds, 2005s, best K0-BLOCKED sigma = 3.987168384
+   450 seeds, 2110s, best K0-BLOCKED sigma = 3.987168384
+   475 seeds, 2220s, best K0-BLOCKED sigma = 3.987168384
+   500 seeds, 2323s, best K0-BLOCKED sigma = 3.987168384
+descent phase: 520 seeds in 2408s
+  deep s0115 3.987168 -> 3.985483725 (57 steps) [1e-04:3.9871684 1e-05:3.9860046 1e-06:3.9856370 1e-07:3.9855206 1e-08:3.9854837], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0038 4.000000 -> 4.000000155 (0 steps) [1e-04:4.0000002 1e-05:4.0000002 1e-06:4.0000002 1e-07:4.0000002 1e-08:4.0000002], release drop 0.00e+00 (0 steps), min k0 row 1.95e-09
+  deep s0088 4.000001 -> 4.000000939 (0 steps) [1e-04:4.0000009 1e-05:4.0000009 1e-06:4.0000009 1e-07:4.0000009 1e-08:4.0000009], release drop 0.00e+00 (0 steps), min k0 row -1.04e-09
+  deep s0029 4.000002 -> 4.000001626 (3 steps) [1e-04:4.0000016 1e-05:4.0000016 1e-06:4.0000016 1e-07:4.0000016 1e-08:4.0000016], release drop 0.00e+00 (0 steps), min k0 row 1.04e-05
+  deep s0076 4.000004 -> 4.000004058 (1 steps) [1e-04:4.0000041 1e-05:4.0000041 1e-06:4.0000041 1e-07:4.0000041 1e-08:4.0000041], release drop 0.00e+00 (0 steps), min k0 row -1.02e-09
+  deep s0191 4.000007 -> 4.000000000 (51 steps) [1e-04:4.0000063 1e-05:4.0000005 1e-06:4.0000000 1e-07:4.0000000 1e-08:4.0000000], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0380 4.000007 -> 4.000000229 (132 steps) [1e-04:4.0000074 1e-05:4.0000007 1e-06:4.0000004 1e-07:4.0000003 1e-08:4.0000002], release drop 0.00e+00 (0 steps), min k0 row -9.76e-05
+  deep s0479 4.000009 -> 4.000000000 (73 steps) [1e-04:4.0000040 1e-05:4.0000004 1e-06:4.0000000 1e-07:4.0000000 1e-08:4.0000000], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0046 4.000010 -> 4.000000064 (29 steps) [1e-04:4.0000052 1e-05:4.0000005 1e-06:4.0000001 1e-07:4.0000001 1e-08:4.0000001], release drop 0.00e+00 (0 steps), min k0 row -9.91e-05
+  deep s0259 4.000013 -> 4.000000001 (55 steps) [1e-04:4.0000103 1e-05:4.0000009 1e-06:4.0000001 1e-07:4.0000000 1e-08:4.0000000], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0295 4.000018 -> 4.000000001 (38 steps) [1e-04:4.0000151 1e-05:4.0000014 1e-06:4.0000001 1e-07:4.0000000 1e-08:4.0000000], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0145 4.000018 -> 4.000000001 (156 steps) [1e-04:4.0000083 1e-05:4.0000007 1e-06:4.0000001 1e-07:4.0000000 1e-08:4.0000000], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0461 4.000019 -> 4.000000002 (37 steps) [1e-04:4.0000170 1e-05:4.0000017 1e-06:4.0000002 1e-07:4.0000000 1e-08:4.0000000], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0006 4.000020 -> 4.000000010 (95 steps) [1e-04:4.0000201 1e-05:4.0000019 1e-06:4.0000002 1e-07:4.0000000 1e-08:4.0000000], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0200 4.000020 -> 4.000000000 (89 steps) [1e-04:4.0000028 1e-05:4.0000002 1e-06:4.0000000 1e-07:4.0000000 1e-08:4.0000000], release drop 7.01e-11 (1 steps), min k0 row -1.00e-04
+  deep s0075 4.000021 -> 4.000000000 (59 steps) [1e-04:4.0000040 1e-05:4.0000001 1e-06:4.0000000 1e-07:4.0000000 1e-08:4.0000000], release drop 0.00e+00 (0 steps), min k0 row -1.00e-04
+  deep s0335 4.000024 -> 4.000023594 (4 steps) [1e-04:4.0000236 1e-05:4.0000236 1e-06:4.0000236 1e-07:4.0000236 1e-08:4.0000236], release drop 0.00e+00 (0 steps), min k0 row -1.01e-09
+  deep s0237 4.000024 -> 4.000023971 (1 steps) [1e-04:4.0000240 1e-05:4.0000240 1e-06:4.0000240 1e-07:4.0000240 1e-08:4.0000240], release drop 0.00e+00 (0 steps), min k0 row 8.86e-05
+FJ polish on 26 candidates (3 with slack K0 rows)
+  s0115 sigma_in 3.985484 -> polished 3.985471954  FJ(1e-6) False  exact_min_n_block 1
+  s0075 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 0
+  s0200 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 0
+  s0479 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 0
+  s0191 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0145 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 0
+  s0259 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0295 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0461 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 0
+  s0006 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0046 sigma_in 4.000000 -> polished 4.000000062  FJ(1e-6) False  exact_min_n_block 1
+  s0038 sigma_in 4.000000 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0380 sigma_in 4.000000 -> polished 4.000000118  FJ(1e-6) False  exact_min_n_block 2
+  s0088 sigma_in 4.000001 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0029 sigma_in 4.000002 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0076 sigma_in 4.000004 -> polished 4.000004058  FJ(1e-6) False  exact_min_n_block 2
+  s0335 sigma_in 4.000024 -> polished 4.000022414  FJ(1e-6) False  exact_min_n_block 1
+  s0237 sigma_in 4.000024 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0115 sigma_in 3.987168 -> polished 3.985466721  FJ(1e-6) True  exact_min_n_block 1
+  s0029 sigma_in 4.000002 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0191 sigma_in 4.000007 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0380 sigma_in 4.000007 -> polished 4.000007451  FJ(1e-6) False  exact_min_n_block 2
+  s0479 sigma_in 4.000009 -> polished 4.000000000  FJ(1e-6) True  exact_min_n_block 1
+  s0046 sigma_in 4.000010 -> polished 4.000007261  FJ(1e-6) False  exact_min_n_block 1
+  s0259 sigma_in 4.000013 -> polished 4.000011860  FJ(1e-6) False  exact_min_n_block 2
+  s0295 sigma_in 4.000018 -> polished 4.000014843  FJ(1e-6) False  exact_min_n_block 1
+lowest K0-BLOCKED packing: sigma 3.985483724948 (tag s0115), exact n_block [2, 2, 2, 2], disjoint_certified True, side_upper 3.985483724948
