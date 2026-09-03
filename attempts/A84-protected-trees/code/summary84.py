@@ -214,6 +214,10 @@ def per_class(cls):
                                                           + dee["verdicts"].get("cert-FAIL", 0)))),
         ladder=ladder_laws(scan), ladder_pre_PD=ladder_laws(scan_pre),
         ladder_kills=phase_summary(ladder), r_kill=r_kill(ladder, scan),
+        ladder_alive_search=jf("a84_%s_ladder_alive.json" % cls),
+        progress={p: jf(os.path.join("..", "progress", p))
+                  for p in sorted(os.listdir(os.path.join(BASE, "progress")))
+                  if p.startswith(cls) and p.endswith(".json")},
         canary=canary_ledger(cls, cen, scan, allr),
         waits=waits, defers=defers,
         total_lp_cpu_s=round(sum((r.get("lp_s") or 0) + (r.get("cert_s") or 0)
@@ -225,6 +229,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cls", default="k4_08,k3_05")
     ap.add_argument("--out", default="pilot_summary.json")
+    ap.add_argument("--status", default=None, help="path to a json status block to embed")
     a = ap.parse_args()
     classes = [c for c in a.cls.split(",") if c]
     res = dict(attempt="A84-protected-trees", pilot="R1-R9 (pilot_design.md)",
@@ -234,6 +239,7 @@ def main():
                    "mod-90 identification in contain_t / sup_containment / sup_gap",
                    "Lemma PD (pin drift) logic kill -- without it the residue floor equals "
                    "delta_pin (see ladder_pre_PD)"],
+               run_status=(json.load(open(a.status)) if a.status else None),
                classes={c: per_class(c) for c in classes})
     res["total_lp_cpu_s"] = round(sum(res["classes"][c]["total_lp_cpu_s"] for c in classes), 1)
     json.dump(res, open(os.path.join(RES, a.out), "w"), indent=1)

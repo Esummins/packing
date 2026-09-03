@@ -332,17 +332,32 @@ For class S the window [3.82, ŝ] splits at ŝ − δ_basin(S):
 * regime 1, [3.82, ŝ − δ_basin(S)]: plain slack-core kills of M_S at grid sides (A82's scan;
   each fixed-side certificate at δ covers a slab of relative width δ/A_S below its side).
 
-A82's measurements (`attempts/A82-side-scan/results/`): k4_08 η = −0.027/−0.050/−0.377 at
-ŝ − m = 6·10⁻⁷/8.4·10⁻⁵/0.0439 (all unconverged 600 s LPs, so optimistic), and the exact alive
-gate finds a strictly separated 6-family at m = 3.8332 (τ* ≥ 6, η ≥ −1) — the certification
-law η ≤ −1 is at best marginal there. So for the A_S = 3/2 classes at A60's landing radii
-(δ_basin = 0.0457, regime 1 = [3.82, 3.8314]) the seam is NOT known to close; at the tighter
-landing (6.5·10⁻⁴, one more ladder level on every chain) regime 2 covers the whole window
-(T = 0.0574 ≥ 0.0571) and **no plain kill is needed at all**. For the corner-only classes
-(k3_05, k2_01, k2_02, k1_00; corners4 has no (D) leaves) T = 0.130 covers the window at the
-landing radii with margin 2.3. **Recommendation: land every chain at r ≤ 6.5·10⁻⁴ and drop
-regime 1 for the protected tier** — the extra level is far cheaper than a per-class side scan
-whose η law is unmeasured below 3.833.
+**A82 closed while this attempt ran (2026-09-02; `attempts/A82-side-scan`, LOG entry), and it
+settles regime 1 for the k4 tier.** (F0) the aliveness cliff is a step of exactly one at ŝ
+(m_fam 7 → 6 the instant Trump stops fitting, s_fit = ŝ to 3·10⁻⁸); (F1) η ≤ −1 is
+geometrically impossible on the k4 tier at every side (exact 6-families give τ* ≥ 6 =
+budget − 1 everywhere in W) — A60's η ≤ −1 law is a property of its zone-tree route, not of
+fixed-side kills; (F2) the FIRST protected-class kills exist: k4_08 and k4_11 cold-verified at
+m = 3.833212 with η ≈ −0.38 / −0.33 (`certs/a82/k4_08_958303_250000.json`,
+`k4_11_958303_250000.json`, frozen verifier, 4/4 gates); (F3) the operative gate is eps_geo
+affordability, budget − τ(m) ≳ 0.21; (F6) dτ/ds ≈ 7.3–8.0 on the k4 tier, so plain kills
+reach up to m ≈ ŝ − 0.025 (0.21/8 ≈ 0.026 of slack needed); (F7) A82's certificates use
+degenerate pins (shell ~10⁻⁸): each grid side must be re-emitted at δ = 10⁻² (slab
+(s″/(1 + δ/2.5), s″] ≈ 0.015 wide), with ≈ 0.17 of headroom left after eps_geo — unmeasured.
+
+Consequently, **for the four image-bearing k4 classes the seam OVERLAPS at A60's landing
+radii**: regime 1 = plain slack-core kills on [3.82, ŝ − 0.025] (≈ 3 grid sides at δ = 10⁻²,
+if the 0.17 headroom survives the slack), regime 2 = the tree on (ŝ − 0.025, s0] with
+δ_basin(S) = 0.0457 ≥ 0.025 — a 0.02 overlap, no extra ladder level, and the tree's (K)
+leaves transfer with δ_pin = 2·10⁻² (T_K = 0.051). For k4_06 (I_g ∌ 3, T = 0.130) the tree
+alone covers the window. For the corner-only k ≤ 3 classes (k3_05, k2_01, k2_02, k1_00)
+T = 0.130 also covers the window at the landing radii; for the BL(0,1)-pinned k ≤ 3 classes
+(k3_02, k3_03, k3_04, k2_00) A82 has no crossover data (dτ/ds at budgets 8–9 unmeasured): either
+the tighter landing (≈ level 29, whole window) or an A82-style scan per class. **The two
+classes A82 flags as genuinely hard are k0_00 (η = 0.000 at 3.833212: the root LP has no
+slack — k0_00 IS the unstratified problem) and corners4 (η = +0.011 there, never alive,
+ghost-saturated by non-Trump families, orientation-coupled per A66)** — for them regime 1 is
+empty and the tube is irrelevant to the (K) side; see §7.1.
 
 **Obligation table (the last `stratum_kill` pieces), per class S:**
 
@@ -417,10 +432,33 @@ pins (η = −1 → −3 → −3 for 5 → 4 → 3 pins): squares that cannot u
 nowhere to go, so the interior-zone cover is the whole tree for every class whose images
 keep three interior squares (all 14 image-bearing classes) — no whole-free-region cover.
 
-**6.4 Cover kill rate, LP cost, resisters, deepen, r_kill (R5–R7)** — see the chore's
-`results/pilot_summary.json` / `notes/pilot_report.md` (LPs gated on the 6 GB commit-headroom
-rule; free commit sat at 0.8–6 GB during the pilot because A57 G1, A60 (cover + slack tests),
-A61, A82, A78's Lean corpus builds and a 12 GB foreign process were all resident).
+**6.4 Cover kill rate, LP cost, ladder-queue kills (R5–R6; PARTIAL — the LPs sat at the
+6 GB commit gate for most of the attempt: free commit 0.8–6 GB with A57 G1, A60 (cover +
+slack tests), A61, A82, A78's Lean corpus builds and a 12 GB foreign process resident; 26 +
+9 + 12 + 11 gate waits logged; the shards keep running to their 3 h caps and append to
+`results/a84_k4_08_{cover,ladder,deepen}_j0*.jsonl`).**
+
+| sample (k4_08, budget 6, lp_time 600, cert_time 300 + eps_geo) | n | PASS | LP-alive | cert-FAIL | η | LP s | cert s |
+|---|---|---|---|---|---|---|---|
+| cover boxes (nearest-to-image stratum first) | 3 | 2 | 0 | 1 | −0.83, −0.88, −0.78 (all unconverged at the cap) | 744, 679, 691 | 372, 676, 826 |
+| ladder-queue boxes, levels 6–9 | 4 | 0 | 3 | 1 | 0.000, 0.000, 0.000 (unconverged at 600–710 s), **0.000 converged (L9)** | 601, 710, 643, 559 | — |
+
+Laws, as far as three + four points allow: (i) cover kills at budget 6 exist and PASS at
+fractional η ≈ −0.8 (A82 F1/F3: η ≤ −1 is unreachable on the k4 tier, the gate is eps_geo
+affordability), at **≈ 700 s LP + 400–800 s certification per box — ×3 A60's mean LP (214 s)
+and ×15 its certification (42 s)**; the one FAIL is the fractional-η certification failure
+mode with a 676 s eps_geo repair. (ii) **The ladder queue is NOT a kill queue at this budget:
+0/4 at levels 6–9, three at τ = 6.000 = budget after the cap and one CONVERGED at
+τ = 6.000000 exactly.** The image gate says k = 5 (two witnesses dropped) but the LP finds
+τ* = budget; an exact search for a 6th square (A57 alivewitness on the 5 kept image squares +
+grid × tilt, `results/a84_k4_08_ladder_alive.json`) found NO integral witness — so this is
+A82's k4-tier wall one level down (τ* ≥ budget − 0 fractionally, no 6-family on the grid),
+not the vacated-spot family. These boxes are exactly A57 T11 / A60 G-A60-3 resisters: they
+must be bisected at the same budget (deepen) or carried into conditioning depth j = 1 as
+chain boxes, and their cost is the unmeasured item of the tier (A60 never ran its ladder
+kills either: `progress/ladder_j0_s0.json` done 0 of 540). (iii) The census-level
+attemptable/unkillable split (§6.1) is therefore an UPPER bound on what j = 0 kills; the true
+j = 0 kill fraction on the queue is the deepen yield, to be measured (R7 did not start).
 
 ## 7. Tier price and composition
 
@@ -438,8 +476,10 @@ Measured inputs: A60 trump5 cover j0 — 767 LP attempts, kill rate 0.781 first 
 93–97 % of the level-1 cover free, residues 18 → 7 → 0; confinement O(10) certificates per
 square at 1–540 s. Pilot inputs (§6): k4_08 census 752 attempts at budget 6 (A60: 767 at
 budget 5), unkillable 84 (2×), ladder queue 1299 (2.4×), landing level 24 (=), residue 75
-(2.2×); k3_05: 1002 attempts at budget 7, ladder (post-PD) pending; LP-cost multiplier at
-budget 6/7 vs 5: pending (§6.3).
+(2.2×); k3_05: 984 attempts at budget 7, ladder identical to k4_08's (queue 1542); LP-cost
+multiplier at budget 6 vs 5: ×3 on the LP and ×15 on certification (§6.4, three boxes); the
+ladder queue is a resister queue at j = 0 (0/4 kills), so its cost is the deepen/conditioning
+term, unmeasured.
 
 **Provisional price (before §6.3 lands; A60 unit costs, ×(1 + 0.5·(budget − 5)) for the LP
 size, two images where G_S has two):**
@@ -466,6 +506,95 @@ replay at 30–170 s per certificate (A78 T5) adds ≈ 1–2 days per class.
   of attemptable boxes (k3_05: 1002 of 1152 vs 752 — fewer pins means fewer free logic kills
   and, per Lemma PD, fewer pin-drift kills), and the per-LP cost with the budget (§6.3
   measures the multiplier at 6 and 7).
+* **k0_00 (A82 F4: η = 0.000 at 3.833212).** No pins, eight compatible images (I_g = ∅, pure
+  scale tube T = 0.130), no logic kills at all (Lemma PD is vacuous; pinguard has nothing to
+  meet): its tree is the zone-tree of the WHOLE problem, root budget 11, cover children at
+  budget 10 whose LPs are the root LP of the unstratified problem (A82: 11.000 at 3.833, no
+  slack; A08's record root certificate 10.72 at 3.82). Alive gate: 8 images × 11 witnesses; a
+  cover box is attemptable only if it drops ≥ 2 witnesses of EVERY image — in the interior that
+  is the same crowding as for the other classes, but the (K) leaves are budget-10 LPs with no
+  pins, i.e. ≥ 10× A60's per-LP cost and no free kills. Estimated ≥ 2 000 LPs × ≥ 10³ s ≈
+  ≥ 25 desktop-days at 1 slot for the cover alone, plus 8 image chains of 11 squares each —
+  **the class that dominates the tier**, ≥ 100 desktop-days by itself. The A58 clear-corner seed
+  (all four corners clear ⇒ ≥ 2 non-simple meeters in every corner box ⇒ ≥ 8 of 11 squares
+  in the corner boxes, CC-2′ + A71's stuck rows SR-1/SR-2 as branching) would start the residual
+  at budget 3 after eight YES conditionings — but it is STUCK-ONLY (next bullet), so the k0_00
+  instance of `stratum_kill` would have to be re-split into the selected form (A78's chain at
+  every side): a Lean restructuring, no new mathematics. Priced as a seeded tree: 4 corners ×
+  a 2-square conditioning (a cover of the corner box's reach set ≈ 1 100 boxes per square,
+  alive-gated against 8 images), then a budget-3 residual — the conditioning covers are ≈ 8 ×
+  1 100 LPs at budgets 10…3, dominated by the first two (≥ 10³ s each): ≈ 25–30 desktop-days
+  at 1 slot, still the largest single item.
+* **corners4 (A82: η = +0.011 at 3.833212, τ(0) = 7.25 at s0; A66: emptiness orientation-
+  coupled).** G_S = ∅: no (D) target — every leaf must be (K) or (C), and A58's clear-corner
+  bridge is silent (no clear corner). What replaces it (PI + advisor framing, 2026-09-02): with
+  four corner pins the free region is a CROSS — the centre block [1, m−1]² of side m − 2
+  (1.82–1.877 on W) and four arms (m − 2) × 1. Every dimension is < 2 = s(2), so [T, one
+  paragraph]: a square confined to an arm has height 1 available, hence is axis-aligned with
+  cy = 1/2 (a tilt gives extent cos θ + sin θ > 1), and each arm holds ≤ 1; the centre holds
+  ≤ 1 square of any orientation (two unit squares need side 2); so at most 5 of the 7 free
+  squares lie entirely in one part and **≥ 2 are straddlers** (crossing from an arm into the
+  centre, necessarily tilted or off-axis). Under the EXACT hypothesis an arm square cannot
+  touch its corner pin flush (that puts it at the slot BL(1,0)/BR(1,0)/…, i.e. simple), so
+  exact-corners4 arm squares FLOAT with gaps on both sides, and a slide-stuck minimiser needs
+  every floating arm square slide-blocked — only a straddler's intrusion into the arm can do
+  it (another arm square cannot: the arm is < 2 wide). So a selected exact-corners4 minimiser
+  is a FINITE case list: (occupied arms) × (centre occupied?) × (straddler ↦ arm, with a contact
+  blocking that arm's square) — A66's orientation coupling made explicit, and the reason
+  point-count witnesses (A66's exact 7-point families) cannot see it: they ignore the forced
+  θ = 0 and the forced contacts. ∀-packings form (no stuckness): an arm square at its slot puts
+  the packing in a k = 5 superclass (corners4 + one arm cell: certified-killed classes, or
+  k5_16 via A57 G1) — the K1 climb — so the tree needs only the floating positions, and
+  blocking is replaced by the LP seeing the position box. **Route:** a tilt-box zone tree
+  seeded by the cross partition (per free square: arm i / centre / straddler of arm i, with
+  arm squares as degenerate cores θ = 0, cy = 1/2, cx in ≤ 1-wide cells so the core is
+  non-empty) with A71's stuck rows SR-1/SR-2 as case splits; the per-node LP sees the
+  orientation coupling that the root LP (η = +0.011) cannot. **Price:** occupancy patterns
+  ≤ 2⁴ × 2, straddlers 2–3 each with 4 arms × 8 t-cells × O(4) position cells ≈ 10²
+  cells, most pairs geometrically contradictory ⇒ ≈ 10³–10⁴ node LPs at budgets ≤ 5 with
+  strong cores (fast, ~10²–10³ s) ≈ **2–10 desktop-days**, plus the written cross lemma;
+  if the case list is as small as the framing suggests, a hand proof + per-case exact
+  certificates beats the tree. Canary: none needed (no Trump image). This is the corners4 line
+  of the tier; it stays [C] until the cross lemma is written and one case is certified.
+
+  **Lemma CC4 (the 8-slot argument; PI + advisor, superseding the sliding seed; CC-2 is
+  Lean-proved).** [T at s0; window via C.A57] Each arm of the cross carries the two
+  corner-adjacent completable slots of corners4 (bottom arm: BL(1,0) = [1,2]×[0,1] and
+  BR(1,0) = [m−2, m−1]×[0,1], overlapping in the middle strip [m−2, 2]×[0,1] since m − 2 < 2):
+  8 slot boxes, one D4-orbit. corners4's only k = 5 superclass is **k5_16** = corners4 +
+  BL(0,1) (`attempts/A55-k4-sweep/results/k4_lattice.json`: `sup_k5 = ['k5_16']`; all eight
+  one-cell completions are D4-images of it), killed at s0 by A57's shadow tree (C.A57,
+  `k5_16_interior_NO` + YES children; window form = A57 G1, in flight). Hence, for EVERY
+  packing at side m containing corners4's pins (∀-packings, no stuckness — this is A58's CC-3
+  mechanism with a killed superclass): if a slot box were met (open interiors) by no square or
+  by exactly one non-pin square, teleport a non-pin square into the slot (CC-2 / CC-2′: the
+  slot square is inside the container and interior-disjoint from the corner pin) — the result
+  is a packing at the same side whose skeleton contains k5_16's pins, contradicting the kill.
+  So **every one of the 8 slot boxes is met by ≥ 2 non-pin squares**, empty arms included, and
+  this holds at s0 unconditionally.
+
+  Intrusion geometry [M, exact, and a CORRECTION to the framing]: an arm square (axis-aligned,
+  cy = 1/2) meets BOTH slot boxes of its arm (its x-range [cx − 1/2, cx + 1/2] with
+  cx ∈ (3/2, m − 3/2) always meets [1, 2] and [m−2, m−1]), contributing one meeter to each;
+  an axis-aligned non-arm square dipping below y = 1 must have x0 ≥ 1 (the pin) so it meets
+  ≤ 2 slots, both of one arm; **a tilted square can meet THREE slot boxes while feasible** —
+  exact witness: the unit square with vertices (0.95, 1.25), (1.91, 0.97), (2.19, 1.93),
+  (1.23, 2.21) (edge (24/25, −7/25)) is inside [0, s0]², interior-disjoint from all four pins,
+  and meets bottom-BL, bottom-BR (through the middle strip) and left-BL (checked in
+  Fractions). So the incidence count alone does not close: with a arm squares the 7 free
+  squares supply ≤ 2a + 3(7 − a) = 21 − a ≥ 16 = the requirement, whereas "≤ 2 per square"
+  would have given 14 < 16 and emptiness outright. The claim "≥ 4 straddlers, one per block
+  corner" therefore needs the middle-strip triple excluded by the case analysis (a triple
+  intruder dips ≥ 0.03 into the middle strip AND ≥ 0.05 into the adjacent arm; whether two such
+  squares plus the rest fit is exactly the per-case LP/Krawczyk question), not by counting.
+  Corrected finite structure: exact-corners4 = 4 pins + a ≤ 4 floating arm squares (θ = 0,
+  cy = 1/2, cx off both slots) + (7 − a) squares in the centre block or straddling, meeting
+  the 8 slot boxes with multiplicity ≥ 2 each, ≤ 3 per square (≤ 2 if axis-aligned). Deliver:
+  Lemma CC4 as written (cite k5_16's certificates by id), the intrusion lemma (≤ 3, with the
+  middle-strip characterisation), the case list by (a, the slot-incidence pattern), and
+  per-case exact certificates (tilt-box case-LPs with SR-1/SR-2 rows at the stuck endpoint,
+  or the ∀-form without them) — or the precise surviving case. Price unchanged
+  (≈ 10³–10⁴ small LPs, 2–10 desktop-days) with the case list now explicit.
 * The A58 clear-corner seed is available ONLY under the teleport-stuck hypothesis (CC-2′ binds
   selected minimisers; CC-3's certificate route is K1-blocked at clear-corner roots) — it would
   turn the k ≤ 3 trees into stuck-only statements, which suffice for the bound through the

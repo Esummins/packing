@@ -24,11 +24,18 @@ NOTE = (" || A84 (2026-09-02, docs/proofs/protected_trees.md): LEMMA P-TREE HOLD
         "else 0.1305 / 0.1680 (wall E7c2-9e3): whole-window seam for the BL(0,1)-pinned classes needs one more ladder "
         "level than A60 and delta_pin = 2.5e-2; the rest get the window x2.3 at A60 landings; regime-1 plain kills "
         "can be dropped. PILOT (k4_08, k3_05; A60 engine copied, both images' exact witnesses): census 752 / 984 "
-        "attemptable at budget 6 / 7, 84 unkillable each (2 x 41), ladders land L24; LP laws: see the doc sect 6.3 "
-        "(the pilot's LPs sat at the 6 GB commit gate behind A78 lean builds + a 12 GB foreign process). PRICE: "
-        "k4 image-bearing classes ~110-160 CPU-h each, k3 ~200-300, k <= 2 extrapolated >= 100 desktop-days total "
-        "(LP budget 8-10, 2-8 images); shadow pair unpriced. Owner A84 closed; the tier is a compute campaign per "
-        "class (obligation table sect 5).")
+        "attemptable at budget 6 / 7, 84 unkillable each (2 x 41), ladders land L24; P1 analogue PASS for both (eta -3): "
+        "the interior zone is the whole cover; LP sample PARTIAL (6 GB commit gate behind A78 lean builds + a 12 GB "
+        "foreign process): cover 2 PASS / 1 FAIL at eta ~ -0.8, ~700 s LP + 400-800 s cert per box (x3 / x15 A60); "
+        "LADDER QUEUE 0/4 at L6-9 (tau = budget, one converged, no exact 6-family found on the grid) => the j = 0 "
+        "queue is a deepen/conditioning queue, not a kill queue - the unmeasured price term (A60 never ran its ladder "
+        "kills either). PRICE (sect 7): k4 image-bearing ~110-160 CPU-h each + the resister term; k3 ~200-300; "
+        "k0_00 dominates (root eta = 0 at 3.833 per A82, no pins/logic kills, 8 images; >= 100 desktop-days plain, "
+        "~25-30 with the stuck-only A58 corner seed); corners4: Lemma CC4 [T at s0] - every one of its 8 arm slot "
+        "boxes is met by >= 2 non-pin squares (CC-2 teleport into k5_16 = its only k5 superclass, killed by A57) - "
+        "plus an EXACT feasible square meeting 3 slot boxes (refutes the '<= 2 per square' count), so a finite case "
+        "analysis is required (~2-10 desktop-days). Owner A84 closed; the tier is a compute campaign per class "
+        "(obligation table sect 5) with two theory items still open: the ladder-resister law and corners4's cases.")
 hit = 0
 for n in d['nodes']:
     if n['id'] == 'C.K4TIER':

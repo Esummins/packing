@@ -2162,3 +2162,44 @@ affordable cost estimate for closing 3.84.
   corners4 alone does not (+0.011). Emissions for k4_03/k4_06/k4_05 and the LP sweep of trump5 + the five k3 classes at
   3.833212 were left RUNNING at handover (code/emitchain82.py and chain B; both resume from results/, both under the
   headroom gate) -- results land in attempts/A82-side-scan/{results,certs} and certs/a82/.
+
+## 2026-09-02 A84-protected-trees (Fable lead + 1 Opus compute chore, <= 3 LP slots) -- done-mixed (Lemma P-TREE HOLDS; Lemma PD found; tube law for the tier; pilot exact laws complete, LP laws partial)
+- T1 LEMMA P-TREE HOLDS [T] (docs/proofs/protected_trees.md sect 2): an s0 zone-tree over the MONOTONE pin hypothesis (slack
+  cores delta_pin) with (K) Lemma-B kills, (C) logic kills, (D) full localisations of the N = 11-k free squares near a compatible
+  Trump image, composed with the contraction tube in the class's OWN direction (v = beta on the Trump-frame pin set I_g,
+  c-hat/s-hat elsewhere; D4 commutes with dilation), excludes every packing containing S's pins at every side in
+  [s-hat - delta_basin(S), s-hat) and makes every such packing at s-hat a Trump image g.z-hat. The exact-stratum hypothesis is
+  used NOWHERE on the bound and only optionally at equality (Simp(g.z-hat) != S; P = g.z-hat IS the uniqueness conclusion).
+  H10-stuck (U-O2) becomes a corollary; Theorem U is not consumed (A83 4.3's T' ~ 3e-4 cap is void for this route).
+  Per class [M, tier84.py]: G_S, I_g, A_S, T_K; k4_05 and corners4 have NO compatible Trump image (G_S empty) -> no (D) leaves.
+- LEMMA PD (pin-drift logic kill) [T+M, sect 2.1] -- found by the pilot: with slack pin cores the residue ladder has a FLOOR =
+  delta_pin (k3_05 pre-PD: gap stalls at 0.0219, residue 96 -> 3862 by L28, 293/3862 landed). The dilated family's pin is the
+  FULL square Sigma_p + (lambda-1) alpha_p (drift always into the container), the set of drifts meeting a convex core is convex,
+  so "core meets Sigma_p at lambda = 1 AND at lambda_max" is a (C) leaf on the whole side range. With PD both pilot classes
+  contract exactly like A60 (ratio 3.6-4.5 = A59's 4.55 law; landing L24, 59 boxes, containment 1.1427e-3 / 2.0102e-3 rad =
+  A60's square-1 numbers to four digits; canary ok at every level). A60's own delta_pin = 1e-2 re-emission needs PD too
+  (sq7/sq8/sq9 all touch pin corners). Whole-window trees at A_S = 3/2 need delta_pin = 2.5e-2 (T_K).
+- TUBE LAW FOR THE TIER [M, 19 Trump-frame pin sets, 42 certificates certs/tube_{k4_08,k3_05,I_*}_*.json, cold re-verified
+  1008 checks / 0 failures]: T_max depends on the pin set ONLY through square 3 = BL(0,1): pinned -> 0.0457 (A60 landing
+  radii) / 0.0574 (r = 6.5e-4, >= the window) with trump5's wall E3c2-7e3; free -> 0.1305 / 0.1680 (wall E7c2-9e3, the
+  scale ray's). Anisotropic: (6.5e-4, 2.1e-3) gives 0.0525 -> the whole window needs the TILT landing tightened too (~L29).
+  SEAM (with A82 closed): k4 image-bearing classes OVERLAP at A60 landings (plain kills to s-hat - 0.025 by A82 F3/F6, tube
+  0.0457, delta_pin 2e-2 => T_K 0.051); k4_06 / k3_05 / k2_01 / k2_02 / k1_00 / k0_00 covered by the tube alone; BL(0,1)-pinned
+  k<=3 classes need the tighter landing or a scan.
+- PILOT (Opus chore; A60 engine COPIED to attempts/A84-protected-trees/code, class84/alive84/tree84 + launch84 with a
+  commit-headroom gate; both images' exact witness families verified, min gap ~1e-7): census j0 k4_08 316 contradictory (280
+  slack-core + 36 PD) / 752 attemptable at budget 6 / 84 unkillable (2 x 41); k3_05 84 / 984 at budget 7 / 84; P1 analogue
+  PASS for both (k4_08 eta = -3.0 at budget 7, 52 s; k3_05 eta = -3.0 at budget 8, 17 s) -> the interior zone is the whole
+  cover. LP SAMPLE PARTIAL (LPs sat at the 6 GB gate; free commit 0.8-6 GB behind A78 lean builds + a 12 GB foreign process):
+  cover 3 boxes -> 2 PASS / 1 cert-FAIL at eta ~ -0.8, ~700 s LP + 400-800 s cert each (x3 / x15 A60); LADDER QUEUE 0/4 at
+  levels 6-9 (tau = 6.000 = budget, one CONVERGED; no exact 6-family found on the grid): the queue is a deepen/conditioning
+  queue, not a kill queue -- the unmeasured item of the price. Shards keep running to their 3 h caps.
+- PRICE (sect 7): k4 image-bearing ~110-160 CPU-h each before the ladder-resister term; k3 ~200-300; k0_00 dominates
+  (root eta = 0 at 3.833, no pins/logic kills, 8 images: >= 100 desktop-days plain, ~25-30 with the stuck-only A58 corner
+  seed); corners4: Lemma CC4 [T at s0] (every one of the 8 arm slot boxes met by >= 2 non-pin squares, via CC-2 teleport into
+  k5_16 = corners4's only k5 superclass, killed by A57) + an EXACT counterexample to the '<= 2 slots per square' count (a
+  feasible tilted square meets 3 slot boxes through the middle strip) -> finite case analysis required, ~2-10 desktop-days.
+- Discipline: <= 3 LP slots, BLAS pinned, 6 GB gate honoured (58 waits logged); A57/A60/A61/A82 untouched; frozen verifiers
+  invoked only; certs/ new files only; A83 emitter imported read-only. notes/findings.md blocked by the harness -> sect 10.
+  Files: docs/proofs/protected_trees.md, attempts/A84-protected-trees/{code,results,notes,logs,certs}, certs/tube_*,
+  lean/depgraph.json (C.K4TIER note, owner released) + svg, REGISTRY row.
