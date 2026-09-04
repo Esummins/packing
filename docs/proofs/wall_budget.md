@@ -36,9 +36,18 @@ E(m) = m² − 11 ≤ 4.03178, h₀ := 1/√2.
 > (k0dir87 s0380 BR ×2, s0076 BR, all at σ = 4.000) has its slot square pressed by a square
 > FLOATING 0.76–0.94 above the pusher wall with footprint 0. The corpus premise of the brief ("the
 > on-wall pusher in every deep jam") is refuted; the residue is the floating-pusher POCKET
-> (§2.4), the same object as the brief's "above-wall lock" (d).
+> (§2.4), the same object as the brief's "above-wall lock" (d). **Lemma FLOAT [T] (PI follow-up)
+> prices the pocket exactly: the strip P = (a+1, a+2) × (0, h₀) beside the slot square on the
+> pusher wall strands area ≥ h₀ (1 − L), where L is the WALL-F chord length spent in (a+1, a+2)
+> by the other squares (Lemma SHADOW: a square's points below h₀ lie within its chord's
+> x-range). So every jam pays 0.7071 (1 − L) in area plus L in wall length — a floating pusher
+> with an empty pocket strands exactly 0.7071, which is what the three corpus jams do (stranded
+> 0.7071 / 0.7071 / 0.7064, L = 0 / 0 / 0.021).**
 >
-> **Composition verdict.** [T+M] NOT dead by area for j = 0, 1, 2 (nor 3), and NO offset cap:
+> **Composition verdict.** [T+M] NOT dead by area for j = 0, 1, 2 (nor 3) — with Lemma FLOAT
+> the jams contribute ≥ 0.707 (1 − L) each, i.e. ≤ 2.12 for j = 3 with floating pushers, against
+> E(m) ≥ 3.83 and non-jam corners with charge-0 pairs; max jam count stays 3 (2 opposite when
+> every pusher is on-wall) — and NO offset cap:
 > the wall budget forces at most ONE unit-footprint member of the adjacent crowd onto a jam's nick
 > wall (exact inequality in the member's tilt and wall distance, Lemma WALL-S), but a corner pair
 > with one floating member sits in the charge-zero strata (BLOCK/WEDGE pairs with certified pair
@@ -219,19 +228,58 @@ toward −e_x (a square T′ with an edge over the corner, inward normal n_x > 0
 sense of §2.2; its footprint is φ(h₀ − y_min(T′), θ′), zero iff y_min(T′) ≥ h₀. So the vertex
 presser EVADES the budget exactly when it floats above h₀ — the same residue as E1.
 
-### 2.4 [T] The residue when P-ON fails: the pocket
+### 2.4 [T] Lemma FLOAT — the pocket pays in area what it saves in wall length (PI follow-up)
 
-Let S be x-side with every S-pusher floating (y_min > h₀). The pocket B := (a+1, a+2) × (0, h₀)
-meets no square that has a point with x ≤ a + 1: S covers {a+1} × [b, b+1] ⊃ {a+1} × [0.1, h₀],
-and the strip below S ((a, a+1) × (0, b), height ≤ 0.1) holds no square. So B is met only by
-squares entering from x ≥ a + 2 (wall-touchers further along the wall leaning left by ≤ sin θ,
-or floaters), and the bottom line's footprint in (a+1, a+2) is contributed only by them. A pocket
-square Q′ with a chord in (a+1, a+2) has its left chord end ≥ a + 2 − (chord length) and, if it
-touches the wall at x_O, x_O ≥ a + 2 − sin θ + h₀ tan θ − … — in every case the area of B left of
-Q′'s left edge is stranded; its size is not bounded below by anything here [C] (Q′ may sit at
-x = a + 1 + ε detached from S while a floater presses S's upper right edge). This pocket is the
-exact escape of the brief's wall mechanism; it is an A47-type charge (a zone occupant parked next
-to the jam), priced by the pair-charge chore, not by a lemma.
+**Lemma SHADOW.** Let Q be a square in {y ≥ 0} with y_min(Q) < h₀ and chord [c_L, c_R] on the
+line y = h₀ (nonempty: y_max ≥ y_min + 1 > h₀). Then every point of Q with x < c_L or x > c_R has
+y > h₀; i.e. Q ∩ {y ≤ h₀} ⊂ [c_L, c_R] × [0, h₀].
+*Proof.* Upright: the chord spans Q's full width. Tilt θ ∈ (0, 45°], lowest vertex (x_v, y_v),
+t = h₀ − y_v ∈ (0, h₀] ⊂ (0, cos θ] (y_v ≥ 0): the line meets Q's left edge (direction
+(−sin θ, cos θ) from the lowest vertex, length 1, rising to height y_v + cos θ ≥ h₀) at
+c_L = x_v − t tan θ. Q lies on the right/upper side of its left-edge line, so a point of Q with
+x < c_L has y ≥ y_v + (x_v − x) cot θ > y_v + t = h₀, and Q has no points left of the edge's
+x-range at all. The right side is the mirror (the line meets the right edge or the edge R→TR,
+in both cases at a point below which Q has nothing to the right: for t ≤ sin θ the right edge
+rises from the lowest vertex at slope tan θ and Q lies above it; for t ∈ [sin θ, cos θ] the
+points of Q right of c_R lie above the edge R→TR, which has height ≥ h₀ there). ∎
+
+**Lemma FLOAT.** Let c carry a jam nicked on the left wall (S = [a, a+1] × [b, b+1], nick
+partner N in the left strip), and let P := (a+1, a+2) × (0, h₀) — the strip beside S on the
+pusher wall, area h₀ = 0.7071. Let L := Σ_{Q ≠ S} |chord_{h₀}(Q) ∩ (a+1, a+2)| ∈ [0, 1] be the
+wall-line length spent in (a+1, a+2) by the other squares (WALL-F: the chords are disjoint).
+Then the area of P covered by no square's interior is ≥ h₀ (1 − L). In particular EITHER the
+bottom line carries S plus a chord budget L in (a+1, a+2) (an on-wall or near-wall pusher, or
+any wall toucher under the floating pusher: L = 1 exactly when that square has a unit chord
+there — case (b), P-ON) OR the pocket strands area ≥ h₀ (1 − L) (case (a)); a floating pusher
+with an empty pocket strands exactly h₀ = 0.7071.
+*Proof.* A square Q meeting P has a point p ∈ P with p_y < h₀, so y_min(Q) < h₀ and Q's chord
+at h₀ exists; by Lemma SHADOW p_x ∈ [c_L(Q), c_R(Q)], so Q ∩ P ⊂ ([c_L, c_R] ∩ (a+1, a+2)) ×
+(0, h₀) and area(Q ∩ P) ≤ |chord_Q ∩ (a+1, a+2)| · h₀. Q ≠ S (S ⊂ {x ≤ a+1}), and any pusher R
+with y_min ≥ h₀ does not meet P. Summing over the squares meeting P: covered area ≤ h₀ L. ∎
+Remarks. (i) No hypothesis on the pusher is needed: for an on-wall pusher L = 1 and the bound is
+vacuous, which is right — the wall is spent instead. (ii) The same holds for y-side and corner-
+type jams: the presser T of S sits at y ≥ b + 1 > h₀ and never meets P, N is in the left strip
+at y ≥ 1 − ν > h₀; so EVERY jam carries the pocket on its pusher wall. (iii) The trade-off is
+exactly linear: area ≥ h₀ (1 − L), wall length L; the pocket cannot be bought for less than
+h₀ (1 − L) + L·(a wall unit) — the PI's "the floating pusher escapes WALL-F but pays in area".
+(iv) The pocket is disjoint from every corner box (P ⊂ {x > 1} ∩ {y < h₀}, and a + 2 ≤ 2.1 <
+m − 1) and from the jam's own corner; for the four-corner composition it is clipped to the BL
+quadrant, w := min(1, m/2 − a − 1) ≥ 0.81 (≥ 0.8385 at ŝ with a = 0.1), giving ≥ h₀ (w − L_w) with
+L_w the chord length spent in (a+1, a+1+w) — clipping only matters when both corners of the
+pusher wall are jams pocketed on it (WALL-J4 (c)).
+(v) [M, `results/corpusjam97.json`, grid 400 × 280] On the three corpus jams: s0380 BR
+(x-side, pusher sq9 floating at 0.764): L = 0, NOTHING meets P, stranded 0.7071 = h₀ exactly;
+s0380@4.000007 BR (x-side): L = 0, stranded 0.7071; s0076 BR (y-side, presser sq10 at 0.942,
+diagonally reflected so the nick is on the left): L = 0.0214 (sq6's chord just enters), stranded
+0.7064 ≥ h₀(1 − L) = 0.6920. Lemma FLOAT is sharp on the corpus: the floating-pusher jams strand
+the whole pocket.
+
+**Consequence for WALL-S (case (b)).** If a wall toucher (or any square with a unit chord in
+(a+1, a+2)) sits under the pusher, the pusher wall carries S + 1 = 2 in (a, a+2) and Lemma
+WALL-S applies to the far corner of that wall with 1 + L in place of 1 + 1/cos α: its crowd
+keeps ≤ 1 unit-footprint member there, and for a unit-footprint D the partner satisfies
+dist_w(P) ≥ h₀ − (m − 2 − L)·sin 2θ_P / 2 ≥ L/2 − 0.2314 — a floor as soon as L > 0.4629,
+reaching 0.2686 at L = 1.
 
 ### 2.5 [T] Two jams on one wall; the maximum count
 
@@ -312,9 +360,31 @@ are dead by area, no OTHER bin is fully dead beside three minimal non-jam corner
 qualitative reading — near-zero minima in JAM/BLOCK/WEDGE, growth with g in OTHER — is A47's
 zero-cell law and Trump's TL at 0.69.)
 
-### 3.2 [T+M] Dead by area? No, for every j
+### 3.2 [T+M] Dead by area? No, for every j — also with Lemma FLOAT
 
-j jams charge ≈ 0 each (JAM stratum). The 4 − j remaining corners are squeezed by Lemma WALL-S
+**Composition rerun with the pocket (PI follow-up).** By Lemma FLOAT every jam corner carries
+min over L ∈ [0, 1] of {area h₀ (w − L) in its pocket, plus wall length L on its pusher wall}
+with w ≥ 0.8385 (quadrant clip; w = 1 when the pusher wall's other corner is not pocketed on
+it). Since the area term is ≤ h₀ w ≤ 0.7071 per jam and j ≤ 3, the jams contribute ≤ 3 × 0.7071 =
+2.12 of area in the best case for the prover (all pushers floating, L = 0: exactly the corpus
+picture), and the 4 − j non-jam corners contribute ≥ their charge85 sample minima (0 / 0 / 0.023
+/ 0.121 for BLOCK / JAM / WEDGE / OTHER[0.1, 0.3)), so
+  j = 0: ≥ 0;  j = 1: ≥ 0.707 (+ 0);  j = 2: ≥ 1.414;  j = 3: ≥ 2.121  — all < E(m) ≥ 3.83.
+At the other end (L = 1 at every jam) the area term is 0 but P-ON holds at every jam, so j ≤ 2
+at opposite corners and each pusher wall is loaded by 2 (WALL-J4 (d)); the far corners keep ≤ 1
+unit-footprint member per wall and get the WALL-S floor — still no area kill, since a corner
+with one wall member and one floating member is a charge-0 BLOCK pair. Mixed L interpolate
+linearly. **Verdict: the four-corner sum never exceeds 4.0318 for any j ∈ {0, 1, 2, 3}; the
+maximum jam count stays 3 unconditionally (2 opposite under L = 1 everywhere, i.e. P-ON), with
+j = 3 now costing ≥ 2.12 of the ≤ 4.03 budget in area when all three pushers float and ≥ 3 wall
+units (one per pusher wall) when they do not; the offset floor on an OTHER neighbour is 0.2686
+on a nick wall and L/2 − 0.2314 (for L > 0.4629) on a pusher wall.** What Lemma FLOAT changes
+is the accounting, not the verdict: a jam is no longer "area-free" — it is worth h₀(1 − L) of
+area — so a certificate that prices the three corners around a jam by their pair charges may add
+0.707(1 − L) for the jam; whether that closes anything is a question for the crowd certificate
+(A92 Lemma CW with the pocket as an exempt box, priced by an LP, not here [C]).
+
+The pre-FLOAT accounting, kept for the record: j jams charge ≈ 0 each (JAM stratum). The 4 − j remaining corners are squeezed by Lemma WALL-S
 only on the wall lines they share with a jam (nick wall; pusher wall under P-ON): the constraint is
 "Σφ_w(pair) ≤ m − 2 − …", which [M, `results/wallcensus97.json`, sound box-level lower bounds
 φ_lb over the 644 boxes and 7 044 realisable pairs] is violated by only 378 / 7 044 = 5.4 % of the
@@ -364,7 +434,9 @@ reading "the ghost zone is not where the cost is" stands.
 ### 4.2 The escape list, with corpus frequency
 
  E1 Floating pusher / above-wall lock (P-ON false): corpus 3 / 3 jams (§2.3); Trump: no jam.
-    Residue = the pocket (§2.4), an A47-type charge, unmeasured [C].
+    PRICED by Lemma FLOAT (§2.4): the pocket strands ≥ h₀ (1 − L) — 0.7071 on every corpus
+    jam — so E1 is no longer an escape from the accounting, only from the wall count; the
+    sum of pockets (≤ 2.12) still does not reach E(m).
  E2 Crowd members with zero wall footprint: 27.4 % of realisable pairs have no unit-footprint
     member on a given line; [T] such a member has depth ≤ 0.2929 (§1.4), so E2 is exactly the
     shallow (CEIL-side) intruder — the object Lemma SLIDE bounds from below by ŝ − m and A92's
@@ -417,12 +489,12 @@ reproduced by `code/corpusjam97.py` (intruders {4, 6}, no jam).
 | A97-O1 | Lemma WALL-F (footprint budget at h₀ = 1/√2), chord formula, WALL-3 (≤ 3 per wall, tilt slack, 1 + 2√2 threshold) | [T] §1.1–1.2 |
 | A97-O2 | Lemma WALL-NP: projection widths are not a budget (counterexample; correction to the brief and to any consumer using cos t + sin t) | [T] §1.3 |
 | A97-O3 | Jam footprints WALL-J1; pusher free WALL-J2; j ≤ 3 WALL-J3; two-jams-per-wall WALL-J4 (a)–(e); j ≤ 2 opposite under P-ON | [T] §2 |
-| A97-G1 | P-ON (unit-footprint pusher) — the residue is the pocket §2.4; corpus 3/3 against | **OPEN**, [M] refuted as a corpus law |
+| A97-G1 | P-ON (unit-footprint pusher) — corpus 3/3 against; RESOLVED into the dichotomy of Lemma FLOAT (area h₀(1 − L) or wall length L) | [T] §2.4 (Lemma SHADOW + FLOAT); [M] sharp on the corpus (0.7071 stranded) |
 | A97-O4 | Lemma WALL-S (the squeeze; zero-footprint ⇒ depth ≤ 0.2929; offset FLOOR ≥ 0.2686 for adjacent OTHER corners) | [T] §2.7, §1.4 |
 | A97-O5 | Composition: not dead by area for any j; no offset cap; cells left to the adversary | [T+M] §3 |
 | A97-O6 | (C-wall) leaf rule + census (7.3 % / 10.8 % of pairs; JAM patterns ≈ 0.06 % of 4-tuples) | [T+M] §4.1 |
 | A97-O7 | Trump canary on every wall, exact | [M] §5 PASS |
-| A97-C1 | pocket charge (turn E1 into an A47-type certificate) | [C] §4.3 |
+| A97-C1 | pocket charge (turn E1 into an A47-type certificate) | DISCHARGED by Lemma FLOAT (exact, no certificate needed); the remaining [C] is whether a crowd certificate (A92 CW) with the pocket as an exempt box closes anything |
 
 Runs (`attempts/A97-wall-budget/code/`, one process each, seconds, no BLAS): `wallcanary97.py`
 (exact Trump, 70 dps) → `results/trump_wall_canary.{json,md}`; `wallcensus97.py` (box-level φ_lb

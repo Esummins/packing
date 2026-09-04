@@ -2621,3 +2621,10 @@ affordable cost estimate for closing 3.84.
 - Discipline: theory only (three second-scale scripts, one process, no BLAS); A57/A60/A61/A96 untouched; frozen verifiers untouched; git fetch + plain
   merge + push own paths. Files: docs/proofs/wall_budget.md, attempts/A97-wall-budget/{code,results}, lean/depgraph.json+svg (K0.RESN note, chip A97),
   REGISTRY row.
+- PI FOLLOW-UP (same day) Lemma FLOAT [T, wall_budget.md 2.4]: Lemma SHADOW (a square's points below h0 = 1/sqrt2 lie within the x-range of its chord
+  at h0) => the strip P = (a+1, a+2) x (0, h0) beside the slot square on the pusher wall strands area >= h0 (1 - L), L = the WALL-F chord length spent in
+  (a+1, a+2) by the other squares. Every jam (x-side, y-side or corner-type) pays 0.7071 (1 - L) in AREA plus L in WALL LENGTH; a floating pusher with an
+  empty pocket strands exactly 0.7071 - SHARP on the corpus (s0380 BR x2: L = 0, stranded 0.7071, nothing meets P; s0076 BR: L = 0.021, stranded 0.7064).
+  P-ON resolved into this dichotomy (A97-G1 closed, A97-C1 discharged). Composition rerun: jams contribute <= 3 x 0.7071 = 2.12 (j = 3, all floating) or wall
+  units instead (P-ON => j <= 2 opposite); with charge85 minima 0/0/0.023/0.121 for the other corners the four-corner sum never exceeds 4.0318 for any j;
+  max jam count stays 3 unconditionally; offset floor 0.2686 on nick walls, L/2 - 0.2314 on pusher walls (L > 0.463). Trump canary unchanged (no jam).

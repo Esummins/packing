@@ -151,10 +151,67 @@ def analyse(tag, sq, s):
             info['pushers'] = pushers
             info['P_ON'] = any(p['phi'] >= 1 - 1e-9 for p in pushers)
             npon += info['P_ON']
+            # nick side: does the partner have a vertex in the left strip (x < a, 0 < y < 1)?
+            nick_left = any((p[0] < a and 0 < p[1] < 1) for j in partners for p in cp[j])
+            info['nick_left'] = bool(nick_left)
+            info['pocket'] = pocket_eval(cp, i, a, b, nick_left, s)
             break
         rec['corners'][cname] = info
     rec['n_jam'] = njam; rec['n_jam_P_ON'] = npon
     return rec
+
+
+# ---------------------------------------------------------------- Lemma FLOAT evaluation (PI follow-up)
+def point_in_poly(pt, poly):
+    x, y = pt
+    inside = False
+    n = len(poly)
+    for k in range(n):
+        (x1, y1), (x2, y2) = poly[k], poly[(k + 1) % n]
+        if (y1 > y) != (y2 > y):
+            xi = x1 + (y - y1) * (x2 - x1) / (y2 - y1)
+            if x < xi:
+                inside = not inside
+    return inside
+
+
+def pocket_eval(cp, i_S, a, b, nick_left, s, grid=(400, 280)):
+    """In the corner frame with the nick on the LEFT (diagonal-reflect if it is on the bottom):
+    P = (a+1, a+2) x (0, h0); L = sum over Q != S of |chord_{h0}(Q) meet (a+1, a+2)|; stranded area
+    of P by grid count; the squares meeting P."""
+    if not nick_left:
+        cp = [[(y, x) for x, y in Q] for Q in cp]
+        a, b = b, a
+    x_lo, x_hi = a + 1, a + 2
+    L = 0.0; meets = []
+    for j, Q in enumerate(cp):
+        if j == i_S:
+            continue
+        xs = []
+        n = len(Q)
+        for k in range(n):
+            (x1, y1), (x2, y2) = Q[k], Q[(k + 1) % n]
+            if (y1 - H0) * (y2 - H0) < 0:
+                xs.append(x1 + (H0 - y1) / (y2 - y1) * (x2 - x1))
+        if len(xs) >= 2:
+            cl, cr = min(xs), max(xs)
+            L += max(0.0, min(cr, x_hi) - max(cl, x_lo))
+    nx, ny = grid
+    covered = 0; tot = 0
+    for ix in range(nx):
+        x = x_lo + (ix + 0.5) / nx
+        for iy in range(ny):
+            y = (iy + 0.5) * H0 / ny
+            tot += 1
+            for j, Q in enumerate(cp):
+                if j != i_S and point_in_poly((x, y), Q):
+                    covered += 1
+                    if j not in meets:
+                        meets.append(j)
+                    break
+    stranded = H0 * (1 - covered / tot)
+    return dict(L=L, stranded_area_grid=stranded, bound_h0_1_minus_L=H0 * (1 - L), squares_meeting_P=meets,
+                grid=grid, nick_reflected=(not nick_left))
 
 
 def main():
