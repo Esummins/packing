@@ -2573,3 +2573,24 @@ affordable cost estimate for closing 3.84.
   DEPLOYED pin slack, since A95's 216.4 s/child came from delta=0 rows): 7 children of one parent, 4/7 free logic kills, 332.8 s/child =
   1.54x A95's number -- reported as a sensitivity (level 2 -> 17.21 days 1-proc), NOT folded into the headline. The pass is currently
   parked on its own 6144 MB commit gate (free commit ~4.8 GB under A57 G1 + A61 + A92 + A94); it self-resumes, no supervision needed.
+
+## 2026-09-04 A94-slot-crowds (Fable lead + 1 Opus chore, <= 2 processes) -- closed done-mixed: theory lands, no certified PASS
+- T [docs/proofs/slot_crowds.md]: SLOT-CROWD [T] forall-packings and UNCONDITIONAL for pinned classes - every usable unclipped completable slot of S is met by >= 2 non-pin
+  squares, else teleport onto the slot lands in the k6 extension that A56/A61 kill on the window (k5_11: BL(1,1)->k6_18, BR(0,1)/TL(1,0)->k6_20, TR(0,0)->k6_23 to 3877/1000;
+  k5_16: BR(0,1)->k6_29, TR(0,1)->k6_30, TR(1,0)->k6_28, BL(1,0)->k6_23; BR(1,0)/TL(1,0)->k6_27 OPEN). Exact census: 8 completable slots each, 4/6 unclipped, 4 usable each.
+  SLOT-SLIDE [T]: retreat along the slot-frame diagonal away from the backed sides; pin blocks translate WITH their anchoring walls (stay at their slots in the grown container)
+  and never obstruct (Lemma SWEEP: every relative motion is away from a Young down-set's walls) - no (C) contact; d2 >= s-hat' - m at every usable slot. CORRECTION to A92 3.1:
+  the d2 form needs the JOINT translation of all shallow intruders (the sequential proof gives only the sum bound); A93 T2 should formalise the joint form.
+  Lemma CW-S [T]: slack pin cores rho >= (lambda-1)A_S, slot pad (lambda-1)(a+1/sqrt2+max(i,j)) (ratio 0.698 vs 0.440), INCIDENCE budget N + 2 m_u e with r_max runs B_r.
+  Theorem N-S: chain + A57 G1 shell; G2/G3/G4 retired iff delta_inf <= 0.0154, G3/G4 iff <= 0.0300, G4 iff <= 0.0446. Lemma CEIL-T (exact Trump): k4_03/k4_06/k4_08 crowd
+  ceilings 3.72/3.72/3.61 < 3.82 - the chain is VOID for them on the window (P-TREE stays); k4_11 3.861; k4_05/corners4 eligible only after k5_11/k5_16 die on the window;
+  k <= 3 tier blocked on k4 window kills. Exact-Trump canary PASS (all 6 unclipped trump5 slots doubly met; d2 = 0.016049 ... 0.305293; A58 reproduced exactly).
+- M [chore, notes/slotcrowd94_report.md, 397 min, 23 LPs, 4 cert chains, canaries PASS incl. e=0 regression]: on (s0, G2] the LP passes only at delta >= 0.2 for both classes
+  and fails at delta <= 0.1 (k5_11 delta 0.1 e 1/8: tau 7.007 vs budget 7) => delta_inf >= 0.2 at the s0 side: THE CHAIN REMOVES NO A57 SIDE. On (G4, 3.82] k5_11 passes at
+  0.1/0.04/0.02 (eta -0.25/-0.22/-0.21), k5_16 at 0.1, but no certificate closes: close-out certification of the converged delta 0.1 node (minmass 1.0, 39 atoms, 1794 s) =
+  run A PASS, B1 PASS, B2-B4 FAIL with 30-32 exact HOLES - the incidence (r >= 2) rows are not priced by the row oracle (A94-G4, engine gap; eps_geo cannot cure real holes).
+  A certified delta 0.1 would not kill the slab anyway (needs delta <= 0.0438 = the unconverged 0.04 pass, minmass 0.88, predicted to fail identically); the slab is A96's job.
+  m_u = 4 (incl. the k6_23 slot) folded into Theorem N-S honestly: s-hat' = 3877/1000, sliver to G1. Verdict: mechanism sound, LP-live at the low side, dead at the s0 side.
+- Discipline: <= 2 processes (driver + one certify), BLAS pinned, 6144 MB commit gate x2 readings; A57/A60/A61/A86/A92/A93 untouched; frozen verifiers untouched; git: fetch +
+  plain merge (already up to date) + push own paths. Files: docs/proofs/slot_crowds.md, attempts/A94-slot-crowds/{code,results,certs,logs,notes}, lean/depgraph.json+svg
+  (C.A57 note + chip -> A96, C.K4TIER CEIL-T note, K0.SLIDE joint-translation note, K0.CW slot-form note), REGISTRY row.

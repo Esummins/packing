@@ -1,0 +1,29 @@
+[1] slot frames and the r_G multiplier (k5_11 s0_G2 delta=0.05)
+  the grid reaches r = m_u = 4 somewhere               OK r_max_grid=4
+  a deepest-cell pose meets all 4 widened slot boxes   OK r_G=4 at (2.440, 2.440, 7.4 deg)
+  RHS_MAX = 1 + m_u e                                  OK 3.0
+  mult at that pose = 1 + m_u e                        OK 3.0
+  a pose ON each slot is in that slot's own family     OK [1, 1, 1, 1]
+  r_G is not saturated at the BL container corner      OK 1
+[2] the rhs hook in lpbox94.Model.add_row
+  row at that pose has rhs 1 + m_u e                   OK 3.0
+[3] the E_r <-> r_G soundness bridge (2000 random poses, undilated G)
+  every non-exempt sample has r_G >= r, for every r    OK {1: 0, 2: 0, 3: 0, 4: 0}
+[4] the pin cores
+  cores: 5, tm = 0, a = 1/2 - rho exactly              OK 12357/25000
+  LP core a' <= 1/2 - rho (LP sees >= the rows the certificate exempts) OK h=0.00404465079
+[5] the (1 + r_max)-run certificate through the frozen verifier's loader
+  budget = n - #cores = 10                             OK 10
+  run B1: same atoms, weights exactly w/(1 + 1 e), 63 nofams OK 
+  run B2: same atoms, weights exactly w/(1 + 2 e), 438 nofams OK 
+  run B3: same atoms, weights exactly w/(1 + 3 e), 272 nofams OK 
+  run B4: same atoms, weights exactly w/(1 + 4 e), 254 nofams OK 
+  verifier loads runA_smoke.json (not MALFORMED)       OK s = 969271/250000 (~3.8770840000), n = 15, atoms = 100, total mass = 5 (~5.0000000000), margin = 0 | hypotheses: 5 cores, 0 NO-families, budget = 10
+  verifier loads runB1_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 10/3 (~3.3333333333), margin = 0 | hypotheses: 5 cores, 63 NO-families, budget = 995
+  verifier loads runB2_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 5/2 (~2.5000000000), margin = 0 | hypotheses: 5 cores, 438 NO-families, budget = 995
+  verifier loads runB3_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 2 (~2.0000000000), margin = 0 | hypotheses: 5 cores, 272 NO-families, budget = 995
+  verifier loads runB4_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 5/3 (~1.6666666667), margin = 0 | hypotheses: 5 cores, 254 NO-families, budget = 995
+
+SMOKE PASS
+
+---

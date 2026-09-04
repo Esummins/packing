@@ -1,0 +1,78 @@
+[round 0] tau=6.78676 conv=False scale=1.0287 totalA=6.98149 (< budget 7) atoms=128 nofams={1: 30, 2: 394, 3: 375, 4: 283}
+    A| boxes = 707120  covered = 315607  vacuous = 0  exempt = 37985 (core 37985, nofam 0)  split = 353528  exact atom checks = 383149  max depth = 41  time = 26.7s
+    A| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 436343/62500 < budget 7  ==>  no packing of 12 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B1| boxes = 1127132  covered = 450296  vacuous = 0  exempt = 113302 (core 113302, nofam 0)  split = 563534  exact atom checks = 562484  max depth = 42  time = 62.8s
+    B1| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 872686/140625 < budget 995  ==>  no packing of 1000 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B2| boxes = 706603  covered = 245375  vacuous = 0  exempt = 107862 (core 107341, nofam 521)  split = 353334  exact atom checks = 325772  max depth = 56  time = 182.8s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 3997  covered = 344  vacuous = 0  exempt = 1585 (core 917, nofam 668)  split = 2036  exact atom checks = 2094  max depth = 56  time = 1.3s
+    B3| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 4240  covered = 271  vacuous = 0  exempt = 1783 (core 1028, nofam 755)  split = 2154  exact atom checks = 1677  max depth = 56  time = 1.2s
+    B4| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    feeding back 2016 witness rows (total extra 2016), re-solving
+[s=3.833212 n=7 sym=C1 box=[0,90]x1] init orbits=733 points=733 rows=7336 (rejected 1612)
+  it   0 tau=6.786765 rows=7534 orbs=733 atoms>0=58 minmass=0.586471 maxcov=1.411765 +rows=198 -rows=0 +cols=0 -cols=0 t=14s [lp 0s row 10s +r 0s col 0s +c 0s]
+  it   1 tau=6.789474 rows=7534 orbs=1733 atoms>0=61 minmass=0.906433 maxcov=1.368421 +rows=0 -rows=0 +cols=1000 -cols=0 t=24s [lp 0s row 10s +r 0s col 0s +c 0s]
+  it   2 tau=6.781250 rows=7797 orbs=1733 atoms>0=67 minmass=0.900000 maxcov=1.500000 +rows=263 -rows=0 +cols=0 -cols=0 t=44s [lp 1s row 18s +r 1s col 0s +c 0s]
+  it   3 tau=6.781250 rows=7797 orbs=2114 atoms>0=65 minmass=0.909091 maxcov=1.500000 +rows=0 -rows=0 +cols=781 -cols=400 t=55s [lp 0s row 10s +r 0s col 0s +c 0s]
+  it   4 tau=6.781250 rows=8537 orbs=2114 atoms>0=65 minmass=0.909091 maxcov=1.250000 +rows=740 -rows=0 +cols=0 -cols=0 t=79s [lp 1s row 20s +r 3s col 0s +c 0s]
+  it   5 tau=6.781250 rows=3267 orbs=1850 atoms>0=52 minmass=0.900000 maxcov=1.250000 +rows=0 -rows=5270 +cols=69 -cols=333 t=102s [lp 1s row 22s +r 0s col 0s +c 0s]
+  it   6 tau=6.780000 rows=3707 orbs=1850 atoms>0=72 minmass=0.899394 maxcov=1.280000 +rows=603 -rows=163 +cols=0 -cols=0 t=114s [lp 1s row 10s +r 1s col 0s +c 0s]
+  it   7 tau=6.800000 rows=3679 orbs=2076 atoms>0=61 minmass=0.922222 maxcov=1.400000 +rows=0 -rows=28 +cols=622 -cols=396 t=126s [lp 0s row 11s +r 0s col 0s +c 0s]
+  it   8 tau=6.786765 rows=4409 orbs=1952 atoms>0=66 minmass=0.864706 maxcov=1.352941 +rows=873 -rows=143 +cols=0 -cols=124 t=164s [lp 2s row 34s +r 2s col 0s +c 0s]
+  it   9 tau=6.788462 rows=4409 orbs=2185 atoms>0=73 minmass=0.914530 maxcov=1.307692 +rows=0 -rows=0 +cols=613 -cols=380 t=196s [lp 1s row 31s +r 0s col 0s +c 0s]
+  it  10 tau=6.781250 rows=4772 orbs=2176 atoms>0=55 minmass=0.800000 maxcov=1.200820 +rows=399 -rows=36 +cols=0 -cols=9 t=241s [lp 4s row 40s +r 1s col 1s +c 0s]
+  it  11 tau=6.781250 rows=4581 orbs=2548 atoms>0=52 minmass=0.875000 maxcov=1.200820 +rows=0 -rows=191 +cols=1000 -cols=628 t=250s [lp 0s row 9s +r 0s col 0s +c 0s]
+  it  12 tau=6.781250 rows=5231 orbs=2548 atoms>0=52 minmass=0.916667 maxcov=1.250000 +rows=744 -rows=94 +cols=0 -cols=0 t=264s [lp 2s row 10s +r 2s col 0s +c 0s]
+  it  13 tau=6.781250 rows=5187 orbs=2311 atoms>0=72 minmass=0.903409 maxcov=1.250000 +rows=0 -rows=44 +cols=32 -cols=269 t=276s [lp 1s row 10s +r 0s col 0s +c 0s]
+  it  14 tau=6.781250 rows=5267 orbs=2311 atoms>0=72 minmass=0.903409 maxcov=1.250000 +rows=631 -rows=551 +cols=0 -cols=0 t=289s [lp 1s row 10s +r 2s col 0s +c 0s]
+  it  15 tau=6.784091 rows=5225 orbs=2547 atoms>0=72 minmass=0.948052 maxcov=1.181818 +rows=0 -rows=42 +cols=264 -cols=28 t=325s [lp 3s row 33s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.833212 n=7 sym=C1 tau=6.784091 nu=6.784091 conv=False minmass=0.948052 maxcov=1.181818 rows=5225 orbits=2547 atoms_nz=72 packing_support=66 time=328s
+[round 1] tau=6.78409 conv=False scale=1.0291 totalA=6.98146 (< budget 7) atoms=72 nofams={1: 30, 2: 394, 3: 375, 4: 283}
+    A| boxes = 167410  covered = 54640  vacuous = 0  exempt = 29097 (core 29097, nofam 0)  split = 83673  exact atom checks = 74193  max depth = 42  time = 6.8s
+    A| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 872683/125000 < budget 7  ==>  no packing of 12 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B1| boxes = 608666  covered = 166129  vacuous = 0  exempt = 138236 (core 138236, nofam 0)  split = 304301  exact atom checks = 220714  max depth = 42  time = 38.4s
+    B1| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 872683/140625 < budget 995  ==>  no packing of 1000 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B2| boxes = 321446  covered = 67649  vacuous = 0  exempt = 93008 (core 92055, nofam 953)  split = 160757  exact atom checks = 96053  max depth = 56  time = 86.0s
+    B2| FAIL: 32 witness boxes at depth 56: 28 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 5498  covered = 539  vacuous = 0  exempt = 2135 (core 1177, nofam 958)  split = 2792  exact atom checks = 2125  max depth = 56  time = 1.6s
+    B3| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 4303  covered = 215  vacuous = 0  exempt = 1869 (core 1160, nofam 709)  split = 2187  exact atom checks = 1122  max depth = 56  time = 1.3s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    feeding back 2016 witness rows (total extra 4032), re-solving
+[s=3.833212 n=7 sym=C1 box=[0,90]x1] init orbits=689 points=689 rows=3078 (rejected 1943)
+  it   0 tau=6.784091 rows=3441 orbs=689 atoms>0=49 minmass=0.863636 maxcov=1.636364 +rows=363 -rows=0 +cols=0 -cols=0 t=11s [lp 0s row 9s +r 0s col 0s +c 0s]
+  it   1 tau=6.812500 rows=3441 orbs=1476 atoms>0=44 minmass=0.915000 maxcov=1.500000 +rows=0 -rows=0 +cols=787 -cols=0 t=20s [lp 0s row 8s +r 0s col 0s +c 0s]
+  it   2 tau=6.791667 rows=4199 orbs=1476 atoms>0=52 minmass=0.925926 maxcov=1.500000 +rows=758 -rows=0 +cols=0 -cols=0 t=30s [lp 0s row 9s +r 1s col 0s +c 0s]
+  it   3 tau=6.797414 rows=4199 orbs=2195 atoms>0=55 minmass=0.958621 maxcov=1.655172 +rows=0 -rows=0 +cols=1000 -cols=281 t=33s [lp 0s row 2s +r 0s col 0s +c 0s]
+  it   4 tau=6.781250 rows=4609 orbs=2110 atoms>0=54 minmass=0.954167 maxcov=1.333333 +rows=410 -rows=0 +cols=0 -cols=85 t=43s [lp 1s row 9s +r 1s col 0s +c 0s]
+  it   5 tau=6.791667 rows=3415 orbs=2582 atoms>0=48 minmass=0.939394 maxcov=1.300000 +rows=0 -rows=1194 +cols=1000 -cols=528 t=48s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   6 tau=6.791667 rows=3168 orbs=2490 atoms>0=48 minmass=0.966667 maxcov=1.333333 +rows=94 -rows=341 +cols=0 -cols=92 t=60s [lp 1s row 9s +r 0s col 0s +c 0s]
+  it   7 tau=6.791667 rows=3024 orbs=2608 atoms>0=56 minmass=0.966667 maxcov=1.333333 +rows=0 -rows=144 +cols=864 -cols=746 t=64s [lp 0s row 4s +r 0s col 0s +c 0s]
+  it   8 tau=6.791667 rows=2871 orbs=2608 atoms>0=56 minmass=0.966667 maxcov=1.181818 +rows=45 -rows=198 +cols=0 -cols=0 t=69s [lp 1s row 4s +r 0s col 0s +c 0s]
+  it   9 tau=6.791667 rows=2855 orbs=2637 atoms>0=54 minmass=0.983333 maxcov=1.181818 +rows=0 -rows=16 +cols=436 -cols=407 t=73s [lp 0s row 3s +r 0s col 0s +c 0s]
+  it  10 tau=6.781250 rows=2809 orbs=2781 atoms>0=48 minmass=1.000000 maxcov=1.125000 +rows=0 -rows=46 +cols=144 -cols=0 t=108s [lp 2s row 34s +r 0s col 0s +c 0s]
+  it  11 tau=6.781250 rows=2809 orbs=2777 atoms>0=48 minmass=1.000000 maxcov=1.100000 +rows=0 -rows=0 +cols=151 -cols=155 t=138s [lp 1s row 29s +r 0s col 0s +c 0s]
+  it  12 tau=6.781250 rows=2819 orbs=2681 atoms>0=48 minmass=0.950000 maxcov=1.041667 +rows=79 -rows=69 +cols=0 -cols=96 t=143s [lp 1s row 4s +r 0s col 0s +c 0s]
+  it  13 tau=6.781250 rows=2819 orbs=2557 atoms>0=50 minmass=0.950000 maxcov=1.041667 +rows=0 -rows=0 +cols=31 -cols=155 t=180s [lp 0s row 37s +r 0s col 0s +c 0s]
+  it  14 tau=6.781250 rows=2835 orbs=2557 atoms>0=113 minmass=0.950000 maxcov=1.083333 +rows=22 -rows=6 +cols=0 -cols=0 t=240s [lp 0s row 59s +r 0s col 0s +c 0s]
+  it  15 tau=6.781250 rows=2831 orbs=2548 atoms>0=50 minmass=0.950000 maxcov=1.083333 +rows=0 -rows=4 +cols=4 -cols=13 t=243s [lp 0s row 2s +r 0s col 0s +c 0s]
+  it  16 tau=6.781250 rows=2831 orbs=2573 atoms>0=50 minmass=1.000000 maxcov=1.083333 +rows=0 -rows=0 +cols=25 -cols=0 t=307s [lp 1s row 64s +r 0s col 0s +c 0s]
+  time limit
+DONE s=3.833212 n=7 sym=C1 tau=6.781250 nu=6.781250 conv=False minmass=1.000000 maxcov=1.083333 rows=2831 orbits=2573 atoms_nz=50 packing_support=38 time=308s
+[round 2] tau=6.78125 conv=False scale=1.0295 totalA=6.98147 (< budget 7) atoms=50 nofams={1: 30, 2: 394, 3: 375, 4: 283}
+    A| boxes = 202746  covered = 62722  vacuous = 0  exempt = 38683 (core 38683, nofam 0)  split = 101341  exact atom checks = 76451  max depth = 42  time = 8.7s
+    A| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 6981473/1000000 < budget 7  ==>  no packing of 12 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B1| boxes = 630360  covered = 164466  vacuous = 0  exempt = 150746 (core 150746, nofam 0)  split = 315148  exact atom checks = 218331  max depth = 42  time = 38.8s
+    B1| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 6981473/1125000 < budget 995  ==>  no packing of 1000 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B2| boxes = 401189  covered = 74235  vacuous = 0  exempt = 126295 (core 125765, nofam 530)  split = 200627  exact atom checks = 87685  max depth = 56  time = 101.7s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 5582  covered = 561  vacuous = 0  exempt = 2155 (core 1177, nofam 978)  split = 2834  exact atom checks = 1509  max depth = 56  time = 1.6s
+    B3| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 11484  covered = 1174  vacuous = 0  exempt = 4493 (core 2536, nofam 1957)  split = 5785  exact atom checks = 2880  max depth = 56  time = 3.3s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+NOT certified
+
+---stderr---
+

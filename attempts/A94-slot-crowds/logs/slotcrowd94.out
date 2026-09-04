@@ -1,0 +1,629 @@
+====================================================================================================
+A94 slotcrowd94 campaign start; wall budget 480 min; reserve 150 min
+A56 scoreboard mtime 2026-09-01 19:37:10 ; k6_27 = OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8770840] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)
+U_S per chore sec 2 (m_u = 4 for both classes): k5_11 ['k6_18/FULL', 'k6_20/FULL', 'k6_20/FULL', 'k6_23/PARTIAL<=3877/1000'] ; k5_16 ['k6_23/PARTIAL<=3877/1000', 'k6_29/FULL', 'k6_30/FULL', 'k6_28/FULL']
+SCOPE: every certificate here speaks about ONE side s and, via Lemma B/CW-S, about sides m in [m_lo, s); NOTHING here claims anything at any side > s.  A57's G1 records are s0 slack-core tree kills of the same classes and are neither read nor contradicted.
+k6_23's window top is 3877/1000 = s-hat - 8.4e-5: for the two windows with s = s0 the slot BL(1,0)/TR(0,0) is certified usable only up to 3877/1000 (see the report).
+    BL(0,2)   meeters=2 (ref 2)  d1=0.967441686 d2=0.016049470  |err|=0.00e+00 
+    BL(1,1)   meeters=2 (ref 2)  d1=0.542144916 d2=0.280082754  |err|=0.00e+00 
+    BL(2,0)   meeters=1 (ref 1)  d1=0.432354274 d2=0.000000000  |err|=0.00e+00 [pin-clipped]
+    BR(0,1)   meeters=2 (ref 2)  d1=0.524493591 d2=0.252049996  |err|=0.00e+00 
+    BR(1,0)   meeters=1 (ref 1)  d1=0.432354274 d2=0.000000000  |err|=0.00e+00 [pin-clipped]
+    TR(0,1)   meeters=2 (ref 2)  d1=0.542144916 d2=0.264033284  |err|=0.00e+00 
+    TR(1,0)   meeters=2 (ref 2)  d1=0.451358405 d2=0.305292737  |err|=0.00e+00 
+    TL(0,0)   meeters=2 (ref 2)  d1=0.168320990 d2=0.155474724  |err|=0.00e+00 
+    TRUMP SLOT CANARY OK (max deviation 0.000e+00, tol 1e-09)
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+    IMAGE GATE k5_11 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+    IMAGE GATE k5_11 at s=3.877084 h=0.015860: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+    IMAGE GATE k5_11 at s=3.847780 h=0.004045: pin-hit counts g0:2;g1:3;g2:2;g3:2;g4:2;g5:3;g6:2;g7:2 -> realising=NONE
+    IMAGE GATE k5_11 at s=3.862404 h=0.004045: pin-hit counts g0:2;g1:3;g2:2;g3:2;g4:2;g5:3;g6:2;g7:2 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.877084 h=0.015860: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.847780 h=0.004045: pin-hit counts g0:3;g1:3;g2:3;g3:3;g4:3;g5:3;g6:3;g7:3 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.862404 h=0.004045: pin-hit counts g0:3;g1:3;g2:3;g3:3;g4:3;g5:3;g6:3;g7:3 -> realising=NONE
+  commit 10959 MB (need > 6144 x2): sleep 60 s (reg_k5_11_e0)
+  commit OK 10973 MB (2 consecutive) after 1 x 60 s wait (reg_k5_11_e0)
+  warm pool k5_11 @ s=3.877084: 786 columns, 6000 rows from 3 source(s)
+  REGRESSION k5_11 (e=0, rho=0, s0, budget 6): tau=5.874007 (target ~5.9064, |d|=0.0324) OK
+  commit 9344 MB (need > 6144 x2): sleep 60 s (reg_k5_16_e0)
+  commit OK 8282 MB (2 consecutive) after 1 x 60 s wait (reg_k5_16_e0)
+  warm pool k5_16 @ s=3.877084: 642 columns, 6000 rows from 3 source(s)
+  REGRESSION k5_16 (e=0, rho=0, s0, budget 6): tau=5.959885 (target ~5.9731, |d|=0.0132) OK
+  fams reused fam_k5_11_s0_G2_d0.05.json: a_w=['9601/10000', '9601/10000', '9601/10000', '9563/10000'] rho=143/25000 E={1: 63, 2: 438, 3: 272, 4: 254}
+  [1] slot frames and the r_G multiplier (k5_11 s0_G2 delta=0.05)
+    the grid reaches r = m_u = 4 somewhere               OK r_max_grid=4
+    a deepest-cell pose meets all 4 widened slot boxes   OK r_G=4 at (2.440, 2.440, 7.4 deg)
+    RHS_MAX = 1 + m_u e                                  OK 3.0
+    mult at that pose = 1 + m_u e                        OK 3.0
+    a pose ON each slot is in that slot's own family     OK [1, 1, 1, 1]
+    r_G is not saturated at the BL container corner      OK 1
+  [2] the rhs hook in lpbox94.Model.add_row
+    row at that pose has rhs 1 + m_u e                   OK 3.0
+  [3] the E_r <-> r_G soundness bridge (2000 random poses, undilated G)
+    every non-exempt sample has r_G >= r, for every r    OK {1: 0, 2: 0, 3: 0, 4: 0}
+  [4] the pin cores
+    cores: 5, tm = 0, a = 1/2 - rho exactly              OK 12357/25000
+    LP core a' <= 1/2 - rho (LP sees >= the rows the certificate exempts) OK h=0.00404465079
+  [5] the (1 + r_max)-run certificate through the frozen verifier's loader
+    budget = n - #cores = 10                             OK 10
+    run B1: same atoms, weights exactly w/(1 + 1 e), 63 nofams OK 
+    run B2: same atoms, weights exactly w/(1 + 2 e), 438 nofams OK 
+    run B3: same atoms, weights exactly w/(1 + 3 e), 272 nofams OK 
+    run B4: same atoms, weights exactly w/(1 + 4 e), 254 nofams OK 
+    verifier loads runA_smoke.json (not MALFORMED)       OK s = 969271/250000 (~3.8770840000), n = 15, atoms = 100, total mass = 5 (~5.0000000000), margin = 0 | hypotheses: 5 cores, 0 NO-families, budget = 10
+    verifier loads runB1_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 10/3 (~3.3333333333), margin = 0 | hypotheses: 5 cores, 63 NO-families, budget = 995
+    verifier loads runB2_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 5/2 (~2.5000000000), margin = 0 | hypotheses: 5 cores, 438 NO-families, budget = 995
+    verifier loads runB3_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 2 (~2.0000000000), margin = 0 | hypotheses: 5 cores, 272 NO-families, budget = 995
+    verifier loads runB4_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 5/3 (~1.6666666667), margin = 0 | hypotheses: 5 cores, 254 NO-families, budget = 995
+  
+  SMOKE PASS
+[RUN] k5_11_s0_G2_d0.05_e1o2 n=15 budget=10 rho=0.005720 a_w=['0.96010', '0.96010', '0.96010', '0.95630'] r_max_grid=4 E={1: 63, 2: 438, 3: 272, 4: 254}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 8851 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.05_e1o2)
+  commit fell back to 5461 MB after 1 good reading(s) (k5_11_s0_G2_d0.05_e1o2)
+  commit OK 9548 MB (2 consecutive) after 3 x 60 s wait (k5_11_s0_G2_d0.05_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.004044651
+    probe: tau=10.847700 conv=False minmass=0.5946436678156897 rows=8575 (337 s)
+  tau=10.847700 eta=+0.847700 conv=False minmass=0.5946436678156897 maxcov=1.2467090331238635 rows=8575 atoms=121 lp_s=337
+    e-model: c = dtau/de ~ 9.883 (break-even 8); remaining e order ['1/8', '1/4', '1']
+[RUN] k5_11_s0_G2_d0.05_e1o8 n=12 budget=7 rho=0.005720 a_w=['0.96010', '0.96010', '0.96010', '0.95630'] r_max_grid=4 E={1: 63, 2: 438, 3: 272, 4: 254}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 9660 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.05_e1o8)
+  commit OK 10791 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.05_e1o8)
+  [LP] sym=C1 probe=300s full=900s rhs_max=1.5000 h=0.004044651
+    probe: tau=7.084300 conv=False minmass=0.8100386100385888 rows=8619 (318 s)
+  tau=7.084300 eta=+0.084300 conv=False minmass=0.8100386100385888 maxcov=1.2406277244986605 rows=8619 atoms=124 lp_s=318
+    e-model: c = dtau/de ~ 9.423 (break-even 8); remaining e order ['1/4', '1']
+[RUN] k5_11_s0_G2_d0.05_e1o4 n=13 budget=8 rho=0.005720 a_w=['0.96010', '0.96010', '0.96010', '0.95630'] r_max_grid=4 E={1: 63, 2: 438, 3: 272, 4: 254}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 11205 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.05_e1o4)
+  commit OK 10859 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.05_e1o4)
+  [LP] sym=C1 probe=300s full=900s rhs_max=2.0000 h=0.004044651
+    probe: tau=8.431688 conv=False minmass=0.6880597015642049 rows=9011 (337 s)
+  tau=8.431688 eta=+0.431688 conv=False minmass=0.6880597015642049 maxcov=1.176119402982335 rows=9011 atoms=146 lp_s=337
+    e-model: c = dtau/de ~ 10.101 (break-even 8); remaining e order ['1']
+  fams k5_11 s0_G2 delta=0.02: lam=1.003800742 rho=143/25000 a_w=['49511/50000', '49511/50000', '49511/50000', '49321/50000'] grid 149x149  G cells/slot=[83323, 44662, 44662, 23057]  max r on the grid=4  g-table=5742
+    pin cores: h=0.004044651  LP a_max=16196566974464/32768001953125 (0.494279969) <= emitted a = 1/2 - rho = 12357/25000 (0.494280000)
+    E boxes: {1: 41, 2: 406, 3: 337, 4: 271}
+  fams built k5_11 s0_G2 delta=0.02 in 90s; overshoot=[('BL(1,1)', 0.0262), ('BR(0,1)', 0.0579), ('TL(1,0)', 0.0531), ('TR(0,0)', 0.0612)]
+[RUN] k5_11_s0_G2_d0.02_e1o2 n=15 budget=10 rho=0.005720 a_w=['0.99022', '0.99022', '0.99022', '0.98642'] r_max_grid=4 E={1: 41, 2: 406, 3: 337, 4: 271}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 7116 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.02_e1o2)
+  commit OK 7102 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.02_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.004044651
+    probe: tau=11.000000 conv=False minmass=0.7754690198896971 rows=10574 (357 s)
+  tau=11.000000 eta=+1.000000 conv=False minmass=0.7754690198896971 maxcov=1.1834692935198583 rows=10574 atoms=144 lp_s=357
+    e-model: c = dtau/de ~ 10.187 (break-even 8); remaining e order ['1/8', '1/4', '1']
+[RUN] k5_11_s0_G2_d0.02_e1o8 n=12 budget=7 rho=0.005720 a_w=['0.99022', '0.99022', '0.99022', '0.98642'] r_max_grid=4 E={1: 41, 2: 406, 3: 337, 4: 271}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 9571 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.02_e1o8)
+  commit OK 8779 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.02_e1o8)
+  [LP] sym=C1 probe=300s full=900s rhs_max=1.5000 h=0.004044651
+    probe: tau=7.115700 conv=False minmass=0.8534423994551046 rows=9037 (319 s)
+  tau=7.115700 eta=+0.115700 conv=False minmass=0.8534423994551046 maxcov=1.4360210341805337 rows=9037 atoms=186 lp_s=320
+    e-model: c = dtau/de ~ 9.674 (break-even 8); remaining e order ['1/4', '1']
+[RUN] k5_11_s0_G2_d0.02_e1o4 n=13 budget=8 rho=0.005720 a_w=['0.99022', '0.99022', '0.99022', '0.98642'] r_max_grid=4 E={1: 41, 2: 406, 3: 337, 4: 271}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 6690 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.02_e1o4)
+  commit OK 7314 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.02_e1o4)
+  [LP] sym=C1 probe=300s full=900s rhs_max=2.0000 h=0.004044651
+====================================================================================================
+A94 slotcrowd94 campaign start; wall budget 380 min; reserve 130 min
+A56 scoreboard mtime 2026-09-01 19:37:10 ; k6_27 = OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8770840] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)
+U_S per chore sec 2 (m_u = 4 for both classes): k5_11 ['k6_18/FULL', 'k6_20/FULL', 'k6_20/FULL', 'k6_23/PARTIAL<=3877/1000'] ; k5_16 ['k6_23/PARTIAL<=3877/1000', 'k6_29/FULL', 'k6_30/FULL', 'k6_28/FULL']
+SCOPE: every certificate here speaks about ONE side s and, via Lemma B/CW-S, about sides m in [m_lo, s); NOTHING here claims anything at any side > s.  A57's G1 records are s0 slack-core tree kills of the same classes and are neither read nor contradicted.
+k6_23's window top is 3877/1000 = s-hat - 8.4e-5: for the two windows with s = s0 the slot BL(1,0)/TR(0,0) is certified usable only up to 3877/1000 (see the report).
+    BL(0,2)   meeters=2 (ref 2)  d1=0.967441686 d2=0.016049470  |err|=0.00e+00 
+    BL(1,1)   meeters=2 (ref 2)  d1=0.542144916 d2=0.280082754  |err|=0.00e+00 
+    BL(2,0)   meeters=1 (ref 1)  d1=0.432354274 d2=0.000000000  |err|=0.00e+00 [pin-clipped]
+    BR(0,1)   meeters=2 (ref 2)  d1=0.524493591 d2=0.252049996  |err|=0.00e+00 
+    BR(1,0)   meeters=1 (ref 1)  d1=0.432354274 d2=0.000000000  |err|=0.00e+00 [pin-clipped]
+    TR(0,1)   meeters=2 (ref 2)  d1=0.542144916 d2=0.264033284  |err|=0.00e+00 
+    TR(1,0)   meeters=2 (ref 2)  d1=0.451358405 d2=0.305292737  |err|=0.00e+00 
+    TL(0,0)   meeters=2 (ref 2)  d1=0.168320990 d2=0.155474724  |err|=0.00e+00 
+    TRUMP SLOT CANARY OK (max deviation 0.000e+00, tol 1e-09)
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+    IMAGE GATE k5_11 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+    IMAGE GATE k5_11 at s=3.877084 h=0.015860: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+    IMAGE GATE k5_11 at s=3.847780 h=0.004045: pin-hit counts g0:2;g1:3;g2:2;g3:2;g4:2;g5:3;g6:2;g7:2 -> realising=NONE
+    IMAGE GATE k5_11 at s=3.862404 h=0.004045: pin-hit counts g0:2;g1:3;g2:2;g3:2;g4:2;g5:3;g6:2;g7:2 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.877084 h=0.015860: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.847780 h=0.004045: pin-hit counts g0:3;g1:3;g2:3;g3:3;g4:3;g5:3;g6:3;g7:3 -> realising=NONE
+    IMAGE GATE k5_16 at s=3.862404 h=0.004045: pin-hit counts g0:3;g1:3;g2:3;g3:3;g4:3;g5:3;g6:3;g7:3 -> realising=NONE
+  regression k5_11 reused: tau=5.874007
+  REGRESSION k5_11 (e=0, rho=0, s0, budget 6): tau=5.874007 (target ~5.9064, |d|=0.0324) OK
+  regression k5_16 reused: tau=5.959885
+  REGRESSION k5_16 (e=0, rho=0, s0, budget 6): tau=5.959885 (target ~5.9731, |d|=0.0132) OK
+  fams reused fam_k5_11_s0_G2_d0.05.json: a_w=['9601/10000', '9601/10000', '9601/10000', '9563/10000'] rho=143/25000 E={1: 63, 2: 438, 3: 272, 4: 254}
+  [1] slot frames and the r_G multiplier (k5_11 s0_G2 delta=0.05)
+    the grid reaches r = m_u = 4 somewhere               OK r_max_grid=4
+    a deepest-cell pose meets all 4 widened slot boxes   OK r_G=4 at (2.440, 2.440, 7.4 deg)
+    RHS_MAX = 1 + m_u e                                  OK 3.0
+    mult at that pose = 1 + m_u e                        OK 3.0
+    a pose ON each slot is in that slot's own family     OK [1, 1, 1, 1]
+    r_G is not saturated at the BL container corner      OK 1
+  [2] the rhs hook in lpbox94.Model.add_row
+    row at that pose has rhs 1 + m_u e                   OK 3.0
+  [3] the E_r <-> r_G soundness bridge (2000 random poses, undilated G)
+    every non-exempt sample has r_G >= r, for every r    OK {1: 0, 2: 0, 3: 0, 4: 0}
+  [4] the pin cores
+    cores: 5, tm = 0, a = 1/2 - rho exactly              OK 12357/25000
+    LP core a' <= 1/2 - rho (LP sees >= the rows the certificate exempts) OK h=0.00404465079
+  [5] the (1 + r_max)-run certificate through the frozen verifier's loader
+    budget = n - #cores = 10                             OK 10
+    run B1: same atoms, weights exactly w/(1 + 1 e), 63 nofams OK 
+    run B2: same atoms, weights exactly w/(1 + 2 e), 438 nofams OK 
+    run B3: same atoms, weights exactly w/(1 + 3 e), 272 nofams OK 
+    run B4: same atoms, weights exactly w/(1 + 4 e), 254 nofams OK 
+    verifier loads runA_smoke.json (not MALFORMED)       OK s = 969271/250000 (~3.8770840000), n = 15, atoms = 100, total mass = 5 (~5.0000000000), margin = 0 | hypotheses: 5 cores, 0 NO-families, budget = 10
+    verifier loads runB1_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 10/3 (~3.3333333333), margin = 0 | hypotheses: 5 cores, 63 NO-families, budget = 995
+    verifier loads runB2_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 5/2 (~2.5000000000), margin = 0 | hypotheses: 5 cores, 438 NO-families, budget = 995
+    verifier loads runB3_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 2 (~2.0000000000), margin = 0 | hypotheses: 5 cores, 272 NO-families, budget = 995
+    verifier loads runB4_smoke.json (not MALFORMED)      OK s = 969271/250000 (~3.8770840000), n = 1000, atoms = 100, total mass = 5/3 (~1.6666666667), margin = 0 | hypotheses: 5 cores, 254 NO-families, budget = 995
+  
+  SMOKE PASS
+  fams k5_11 s0_G2 delta=0.3: lam=1.003800742 rho=143/25000 a_w=['14183/20000', '14183/20000', '14183/20000', '14107/20000'] grid 149x149  G cells/slot=[62871, 29102, 29102, 12461]  max r on the grid=1  g-table=5547
+    pin cores: h=0.004044651  LP a_max=16196566974464/32768001953125 (0.494279969) <= emitted a = 1/2 - rho = 12357/25000 (0.494280000)
+    E boxes: {1: 417, 2: 597, 3: 14, 4: 14}
+  fams built k5_11 s0_G2 delta=0.3 in 87s; overshoot=[('BL(1,1)', 0.0549), ('BR(0,1)', 0.0893), ('TL(1,0)', 0.0686), ('TR(0,0)', 0.1127)]
+[RUN] k5_11_s0_G2_d0.3_e1o2 n=15 budget=10 rho=0.005720 a_w=['0.70915', '0.70915', '0.70915', '0.70535'] r_max_grid=1 E={1: 417, 2: 597, 3: 14, 4: 14}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 6542 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.3_e1o2)
+  commit OK 12179 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.3_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.004044651
+  warm pool k5_11 @ s=3.877084: 984 columns, 6000 rows from 8 source(s)
+    probe: tau=9.206897 conv=False minmass=0.712068965442918 rows=12937 (363 s)
+  tau=9.198135 eta=-0.801865 conv=False minmass=0.9457904019299984 maxcov=1.1243850366656338 rows=13593 atoms=211 lp_s=1021
+  k5_11 s0_G2 delta=0.3 PASSES the LP at e=1/2 (eta=-0.801865); skipping the remaining e
+  fams k5_11 s0_G2 delta=0.2: lam=1.003800742 rho=143/25000 a_w=['80953/100000', '80953/100000', '80953/100000', '80573/100000'] grid 149x149  G cells/slot=[69888, 34356, 34356, 15928]  max r on the grid=2  g-table=5724
+    pin cores: h=0.004044651  LP a_max=16196566974464/32768001953125 (0.494279969) <= emitted a = 1/2 - rho = 12357/25000 (0.494280000)
+    E boxes: {1: 297, 2: 546, 3: 72, 4: 88}
+  fams built k5_11 s0_G2 delta=0.2 in 4s; overshoot=[('BL(1,1)', 0.0367), ('BR(0,1)', 0.0701), ('TL(1,0)', 0.0665), ('TR(0,0)', 0.0693)]
+[RUN] k5_11_s0_G2_d0.2_e1o2 n=15 budget=10 rho=0.005720 a_w=['0.80953', '0.80953', '0.80953', '0.80573'] r_max_grid=2 E={1: 297, 2: 546, 3: 72, 4: 88}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 9643 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.2_e1o2)
+  commit OK 10902 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.2_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.004044651
+    probe: tau=9.592063 conv=False minmass=0.6138771186820435 rows=10163 (340 s)
+  tau=9.750000 eta=-0.250000 conv=False minmass=0.6182017543860818 maxcov=1.1789473684212424 rows=11595 atoms=185 lp_s=997
+  k5_11 s0_G2 delta=0.2 PASSES the LP at e=1/2 (eta=-0.250000); skipping the remaining e
+  fams k5_11 s0_G2 delta=0.1: lam=1.003800742 rho=143/25000 a_w=['90991/100000', '90991/100000', '90991/100000', '90611/100000'] grid 149x149  G cells/slot=[77211, 39941, 39942, 19749]  max r on the grid=2  g-table=5871
+    pin cores: h=0.004044651  LP a_max=16196566974464/32768001953125 (0.494279969) <= emitted a = 1/2 - rho = 12357/25000 (0.494280000)
+    E boxes: {1: 111, 2: 470, 3: 160, 4: 212}
+  fams built k5_11 s0_G2 delta=0.1 in 5s; overshoot=[('BL(1,1)', 0.0479), ('BR(0,1)', 0.065), ('TL(1,0)', 0.0511), ('TR(0,0)', 0.0661)]
+[RUN] k5_11_s0_G2_d0.1_e1o2 n=15 budget=10 rho=0.005720 a_w=['0.90991', '0.90991', '0.90991', '0.90611'] r_max_grid=2 E={1: 111, 2: 470, 3: 160, 4: 212}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 10294 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.1_e1o2)
+  commit OK 11682 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.1_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.004044651
+    probe: tau=10.596091 conv=False minmass=0.683006536073478 rows=11325 (368 s)
+  tau=10.596091 eta=+0.596091 conv=False minmass=0.683006536073478 maxcov=1.130718954244389 rows=11325 atoms=89 lp_s=368
+    e-model: c = dtau/de ~ 9.379 (break-even 8); remaining e order ['1/8', '1/4', '1']
+[RUN] k5_11_s0_G2_d0.1_e1o8 n=12 budget=7 rho=0.005720 a_w=['0.90991', '0.90991', '0.90991', '0.90611'] r_max_grid=2 E={1: 111, 2: 470, 3: 160, 4: 212}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 12668 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.1_e1o8)
+  commit OK 11550 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.1_e1o8)
+  [LP] sym=C1 probe=300s full=900s rhs_max=1.5000 h=0.004044651
+    probe: tau=6.921541 conv=False minmass=0.805198305432762 rows=8652 (391 s)
+  tau=7.007122 eta=+0.007122 conv=False minmass=0.9081039669384587 maxcov=1.1893351169531314 rows=10039 atoms=157 lp_s=1010
+    e-model: c = dtau/de ~ 8.806 (break-even 8); remaining e order ['1/4', '1']
+[RUN] k5_11_s0_G2_d0.1_e1o4 n=13 budget=8 rho=0.005720 a_w=['0.90991', '0.90991', '0.90991', '0.90611'] r_max_grid=2 E={1: 111, 2: 470, 3: 160, 4: 212}
+    IMAGE GATE k5_11 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:2;g3:2;g4:4;g5:3;g6:2;g7:2 -> realising=NONE
+  commit 9143 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.1_e1o4)
+  commit OK 8882 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.1_e1o4)
+  [LP] sym=C1 probe=300s full=900s rhs_max=2.0000 h=0.004044651
+    probe: tau=8.061735 conv=False minmass=0.7647006731129323 rows=9138 (362 s)
+  tau=8.061735 eta=+0.061735 conv=False minmass=0.7647006731129323 maxcov=1.1640307557675267 rows=9138 atoms=133 lp_s=362
+    e-model: c = dtau/de ~ 8.621 (break-even 8); remaining e order ['1']
+  k5_11 s0_G2 delta=0.1 does NOT pass; every SMALLER delta has a strictly larger a_w, hence a larger tau and a larger eta -- the rest of this window's delta list is skipped (monotonicity).
+  fams k5_16 s0_G2 delta=0.3: lam=1.003800742 rho=143/25000 a_w=['14183/20000', '14183/20000', '14183/20000', '14183/20000'] grid 149x149  G cells/slot=[28923, 29102, 29189, 29189]  max r on the grid=2  g-table=6580
+    pin cores: h=0.004044651  LP a_max=16196566974464/32768001953125 (0.494279969) <= emitted a = 1/2 - rho = 12357/25000 (0.494280000)
+    E boxes: {1: 387, 2: 236, 3: 21, 4: 14}
+  fams built k5_16 s0_G2 delta=0.3 in 14s; overshoot=[('BL(1,0)', 0.0734), ('BR(0,1)', 0.0893), ('TR(0,1)', 0.0665), ('TR(1,0)', 0.0699)]
+[RUN] k5_16_s0_G2_d0.3_e1o2 n=15 budget=10 rho=0.005720 a_w=['0.70915', '0.70915', '0.70915', '0.70915'] r_max_grid=2 E={1: 387, 2: 236, 3: 21, 4: 14}
+    IMAGE GATE k5_16 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+  commit 8336 MB (need > 6144 x2): sleep 60 s (k5_16_s0_G2_d0.3_e1o2)
+  commit OK 7613 MB (2 consecutive) after 1 x 60 s wait (k5_16_s0_G2_d0.3_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.004044651
+  warm pool k5_16 @ s=3.877084: 642 columns, 6000 rows from 3 source(s)
+    probe: tau=8.965922 conv=False minmass=0.7493169398907117 rows=9910 (323 s)
+  tau=9.050586 eta=-0.949414 conv=False minmass=0.8320872700086486 maxcov=1.1676443833368992 rows=12540 atoms=180 lp_s=976
+  k5_16 s0_G2 delta=0.3 PASSES the LP at e=1/2 (eta=-0.949414); skipping the remaining e
+  fams k5_16 s0_G2 delta=0.2: lam=1.003800742 rho=143/25000 a_w=['80953/100000', '80953/100000', '80953/100000', '80953/100000'] grid 149x149  G cells/slot=[34188, 34356, 34428, 34428]  max r on the grid=3  g-table=6649
+    pin cores: h=0.004044651  LP a_max=16196566974464/32768001953125 (0.494279969) <= emitted a = 1/2 - rho = 12357/25000 (0.494280000)
+    E boxes: {1: 301, 2: 280, 3: 121, 4: 14}
+  fams built k5_16 s0_G2 delta=0.2 in 2s; overshoot=[('BL(1,0)', 0.0751), ('BR(0,1)', 0.0701), ('TR(0,1)', 0.0512), ('TR(1,0)', 0.0618)]
+[RUN] k5_16_s0_G2_d0.2_e1o2 n=15 budget=10 rho=0.005720 a_w=['0.80953', '0.80953', '0.80953', '0.80953'] r_max_grid=3 E={1: 301, 2: 280, 3: 121, 4: 14}
+    IMAGE GATE k5_16 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+  commit 7852 MB (need > 6144 x2): sleep 60 s (k5_16_s0_G2_d0.2_e1o2)
+  commit OK 6889 MB (2 consecutive) after 1 x 60 s wait (k5_16_s0_G2_d0.2_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.004044651
+    probe: tau=9.335357 conv=False minmass=0.81941773697088 rows=9645 (329 s)
+  tau=9.423534 eta=-0.576466 conv=False minmass=0.9417713157025572 maxcov=1.1905785835332217 rows=10497 atoms=225 lp_s=1001
+  k5_16 s0_G2 delta=0.2 PASSES the LP at e=1/2 (eta=-0.576466); skipping the remaining e
+  fams k5_16 s0_G2 delta=0.1: lam=1.003800742 rho=143/25000 a_w=['90991/100000', '90991/100000', '90991/100000', '90991/100000'] grid 149x149  G cells/slot=[39761, 39941, 40027, 40027]  max r on the grid=3  g-table=6667
+    pin cores: h=0.004044651  LP a_max=16196566974464/32768001953125 (0.494279969) <= emitted a = 1/2 - rho = 12357/25000 (0.494280000)
+    E boxes: {1: 218, 2: 292, 3: 272, 4: 14}
+  fams built k5_16 s0_G2 delta=0.1 in 2s; overshoot=[('BL(1,0)', 0.0609), ('BR(0,1)', 0.065), ('TR(0,1)', 0.0666), ('TR(1,0)', 0.061)]
+[RUN] k5_16_s0_G2_d0.1_e1o2 n=15 budget=10 rho=0.005720 a_w=['0.90991', '0.90991', '0.90991', '0.90991'] r_max_grid=3 E={1: 218, 2: 292, 3: 272, 4: 14}
+    IMAGE GATE k5_16 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+  commit 4631 MB (need > 6144 x2): sleep 60 s (k5_16_s0_G2_d0.1_e1o2)
+  commit OK 7535 MB (2 consecutive) after 3 x 60 s wait (k5_16_s0_G2_d0.1_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.004044651
+    probe: tau=10.644197 conv=False minmass=0.739474875627718 rows=12363 (384 s)
+  tau=10.644197 eta=+0.644197 conv=False minmass=0.739474875627718 maxcov=1.2021276595374784 rows=12363 atoms=126 lp_s=384
+    e-model: c = dtau/de ~ 9.342 (break-even 8); remaining e order ['1/8', '1/4', '1']
+[RUN] k5_16_s0_G2_d0.1_e1o8 n=12 budget=7 rho=0.005720 a_w=['0.90991', '0.90991', '0.90991', '0.90991'] r_max_grid=3 E={1: 218, 2: 292, 3: 272, 4: 14}
+    IMAGE GATE k5_16 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+  commit 7401 MB (need > 6144 x2): sleep 60 s (k5_16_s0_G2_d0.1_e1o8)
+  commit OK 12086 MB (2 consecutive) after 1 x 60 s wait (k5_16_s0_G2_d0.1_e1o8)
+  [LP] sym=C1 probe=300s full=900s rhs_max=1.5000 h=0.004044651
+    probe: tau=7.145716 conv=False minmass=0.8318773929498272 rows=10768 (348 s)
+  tau=7.145716 eta=+0.145716 conv=False minmass=0.8318773929498272 maxcov=1.2248275861566729 rows=10768 atoms=135 lp_s=348
+    e-model: c = dtau/de ~ 9.381 (break-even 8); remaining e order ['1/4', '1']
+[RUN] k5_16_s0_G2_d0.1_e1o4 n=13 budget=8 rho=0.005720 a_w=['0.90991', '0.90991', '0.90991', '0.90991'] r_max_grid=3 E={1: 218, 2: 292, 3: 272, 4: 14}
+    IMAGE GATE k5_16 at s=3.877084 h=0.004045: pin-hit counts g0:4;g1:3;g2:3;g3:3;g4:4;g5:3;g6:3;g7:3 -> realising=NONE
+  commit 10434 MB (need > 6144 x2): sleep 60 s (k5_16_s0_G2_d0.1_e1o4)
+  commit OK 10746 MB (2 consecutive) after 1 x 60 s wait (k5_16_s0_G2_d0.1_e1o4)
+  [LP] sym=C1 probe=300s full=900s rhs_max=2.0000 h=0.004044651
+    probe: tau=8.312968 conv=False minmass=0.7683036302616998 rows=12213 (356 s)
+  tau=8.312968 eta=+0.312968 conv=False minmass=0.7683036302616998 maxcov=1.4117647058896585 rows=12213 atoms=133 lp_s=356
+    e-model: c = dtau/de ~ 9.359 (break-even 8); remaining e order ['1']
+  k5_16 s0_G2 delta=0.1 does NOT pass; every SMALLER delta has a strictly larger a_w, hence a larger tau and a larger eta -- the rest of this window's delta list is skipped (monotonicity).
+Phase 1 done: {'k5_11/s0_G2': [0.2, 0.3], 'k5_16/s0_G2': [0.2, 0.3]}
+[CERT] k5_11_s0_G2_d0.2_e1o2 (delta=0.2 e=1/2)
+  commit 11394 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.2_e1o2:cert)
+  commit OK 11357 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.2_e1o2:cert)
+    [round 0] tau=9.75000 conv=False scale=1.0231 totalA=9.97559 (< budget 10) atoms=185 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 19389  covered = 5303  vacuous = 0  exempt = 4360 (core 4360, nofam 0)  split = 9702  exact atom checks = 17327  max depth = 56  time = 1.0s
+    A| FAIL: 24 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 19 undecided at this depth
+    B1| boxes = 53999  covered = 16207  vacuous = 0  exempt = 10727 (core 10677, nofam 50)  split = 27033  exact atom checks = 40581  max depth = 56  time = 10.7s
+    B1| FAIL: 32 witness boxes at depth 56: 16 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 16 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 2746  covered = 171  vacuous = 0  exempt = 1142 (core 753, nofam 389)  split = 1401  exact atom checks = 957  max depth = 56  time = 1.4s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 7019  covered = 282  vacuous = 0  exempt = 3162 (core 514, nofam 2648)  split = 3543  exact atom checks = 7510  max depth = 56  time = 0.9s
+    B3| FAIL: 32 witness boxes at depth 56: 23 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6579  covered = 23  vacuous = 0  exempt = 3185 (core 519, nofam 2666)  split = 3339  exact atom checks = 7278  max depth = 56  time = 0.9s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=9.67647 conv=False scale=1.0309 totalA=9.97572 (< budget 10) atoms=141 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 44562  covered = 17048  vacuous = 0  exempt = 5245 (core 5245, nofam 0)  split = 22261  exact atom checks = 29516  max depth = 56  time = 1.8s
+    A| FAIL: 8 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+    B1| boxes = 308791  covered = 130718  vacuous = 0  exempt = 23624 (core 23624, nofam 0)  split = 154417  exact atom checks = 168291  max depth = 56  time = 64.8s
+    B1| FAIL: 32 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 19 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 104138  covered = 14942  vacuous = 0  exempt = 37068 (core 28132, nofam 8936)  split = 52096  exact atom checks = 24730  max depth = 56  time = 48.8s
+    B2| FAIL: 32 witness boxes at depth 56: 22 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 10 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 6730  covered = 125  vacuous = 0  exempt = 3168 (core 514, nofam 2654)  split = 3405  exact atom checks = 5564  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6635  covered = 7  vacuous = 0  exempt = 3229 (core 519, nofam 2710)  split = 3367  exact atom checks = 5463  max depth = 56  time = 0.9s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=9.72759 conv=False scale=1.0255 totalA=9.97561 (< budget 10) atoms=120 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 21984  covered = 6061  vacuous = 0  exempt = 4923 (core 4923, nofam 0)  split = 10984  exact atom checks = 14559  max depth = 56  time = 1.0s
+    A| FAIL: 16 witness boxes at depth 56: 4 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 12 undecided at this depth
+    B1| boxes = 172579  covered = 60270  vacuous = 0  exempt = 25969 (core 24947, nofam 1022)  split = 86308  exact atom checks = 91563  max depth = 56  time = 46.0s
+    B1| FAIL: 32 witness boxes at depth 56: 9 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 23 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 8436  covered = 863  vacuous = 0  exempt = 3299 (core 2533, nofam 766)  split = 4242  exact atom checks = 2945  max depth = 56  time = 3.9s
+    B2| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 6864  covered = 194  vacuous = 0  exempt = 3171 (core 514, nofam 2657)  split = 3467  exact atom checks = 4761  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 28 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 8758  covered = 487  vacuous = 0  exempt = 3813 (core 519, nofam 3294)  split = 4426  exact atom checks = 4995  max depth = 56  time = 1.0s
+    B4| FAIL: 32 witness boxes at depth 56: 24 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth  [stopped at --max-witnesses]
+    NOT certified
+[CERT] eps_geo repair 0.002 -> k5_11_s0_G2_d0.2_e1o2_epsgeo0.002
+  commit 10043 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.2_e1o2_epsgeo0.002:cert)
+  commit OK 9036 MB (2 consecutive) after 1 x 60 s wait (k5_11_s0_G2_d0.2_e1o2_epsgeo0.002:cert)
+    [round 0] tau=9.78182 conv=False scale=1.0198 totalA=9.97555 (< budget 10) atoms=188 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 27024  covered = 9519  vacuous = 0  exempt = 3963 (core 3963, nofam 0)  split = 13518  exact atom checks = 26416  max depth = 56  time = 1.3s
+    A| FAIL: 24 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 24 undecided at this depth
+    B1| boxes = 70214  covered = 24996  vacuous = 0  exempt = 10062 (core 10062, nofam 0)  split = 35124  exact atom checks = 54319  max depth = 56  time = 13.2s
+    B1| FAIL: 32 witness boxes at depth 56: 22 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 10 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 51344  covered = 7674  vacuous = 0  exempt = 17936 (core 13070, nofam 4866)  split = 25702  exact atom checks = 27321  max depth = 56  time = 25.1s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 6661  covered = 130  vacuous = 0  exempt = 3128 (core 514, nofam 2614)  split = 3371  exact atom checks = 8190  max depth = 56  time = 0.9s
+    B3| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6609  covered = 16  vacuous = 0  exempt = 3207 (core 519, nofam 2688)  split = 3354  exact atom checks = 7955  max depth = 56  time = 1.0s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=9.76892 conv=False scale=1.0211 totalA=9.97553 (< budget 10) atoms=151 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 23517  covered = 7070  vacuous = 0  exempt = 4704 (core 4704, nofam 0)  split = 11735  exact atom checks = 20293  max depth = 56  time = 1.1s
+    A| FAIL: 8 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+    B1| boxes = 124147  covered = 28501  vacuous = 0  exempt = 33514 (core 33101, nofam 413)  split = 62100  exact atom checks = 74231  max depth = 56  time = 28.5s
+    B1| FAIL: 32 witness boxes at depth 56: 15 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 17 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 6404  covered = 601  vacuous = 0  exempt = 2542 (core 1645, nofam 897)  split = 3229  exact atom checks = 2470  max depth = 56  time = 2.7s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 7100  covered = 242  vacuous = 0  exempt = 3237 (core 514, nofam 2723)  split = 3589  exact atom checks = 6175  max depth = 56  time = 0.9s
+    B3| FAIL: 32 witness boxes at depth 56: 26 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 6 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6631  covered = 11  vacuous = 0  exempt = 3223 (core 519, nofam 2704)  split = 3365  exact atom checks = 5872  max depth = 56  time = 0.8s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=9.74613 conv=False scale=1.0235 totalA=9.97560 (< budget 10) atoms=158 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 30637  covered = 8661  vacuous = 0  exempt = 6655 (core 6655, nofam 0)  split = 15305  exact atom checks = 24993  max depth = 56  time = 1.5s
+    A| FAIL: 16 witness boxes at depth 56: 7 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undecided at this depth
+    B1| boxes = 217599  covered = 58869  vacuous = 0  exempt = 49876 (core 49231, nofam 645)  split = 108822  exact atom checks = 113593  max depth = 56  time = 48.9s
+    B1| FAIL: 32 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 19 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 51145  covered = 6884  vacuous = 0  exempt = 18629 (core 14001, nofam 4628)  split = 25600  exact atom checks = 25145  max depth = 56  time = 22.9s
+    B2| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 6769  covered = 158  vacuous = 0  exempt = 3156 (core 514, nofam 2642)  split = 3423  exact atom checks = 6686  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6613  covered = 16  vacuous = 0  exempt = 3209 (core 519, nofam 2690)  split = 3356  exact atom checks = 6572  max depth = 56  time = 0.9s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    NOT certified
+[CERT] eps_geo repair 0.004 -> k5_11_s0_G2_d0.2_e1o2_epsgeo0.004
+  commit 4608 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.2_e1o2_epsgeo0.004:cert)
+  commit 3017 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.2_e1o2_epsgeo0.004:cert)
+  commit 2963 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.2_e1o2_epsgeo0.004:cert)
+  commit 2138 MB (need > 6144 x2): sleep 60 s (k5_11_s0_G2_d0.2_e1o2_epsgeo0.004:cert)
+  commit OK 11805 MB (2 consecutive) after 34 x 60 s wait (k5_11_s0_G2_d0.2_e1o2_epsgeo0.004:cert)
+    [round 0] tau=9.94427 conv=False scale=1.0050 totalA=9.99409 (< budget 10) atoms=207 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 18465  covered = 6489  vacuous = 0  exempt = 2732 (core 2732, nofam 0)  split = 9228  exact atom checks = 20930  max depth = 56  time = 0.9s
+    A| FAIL: 16 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 16 undecided at this depth
+    B1| boxes = 104176  covered = 27539  vacuous = 0  exempt = 24499 (core 24460, nofam 39)  split = 52106  exact atom checks = 57338  max depth = 56  time = 19.9s
+    B1| FAIL: 32 witness boxes at depth 56: 15 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 17 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 53953  covered = 8784  vacuous = 0  exempt = 18133 (core 13532, nofam 4601)  split = 27004  exact atom checks = 25302  max depth = 56  time = 27.1s
+    B2| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 6654  covered = 95  vacuous = 0  exempt = 3158 (core 514, nofam 2644)  split = 3369  exact atom checks = 8016  max depth = 56  time = 0.9s
+    B3| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6661  covered = 4  vacuous = 0  exempt = 3245 (core 519, nofam 2726)  split = 3380  exact atom checks = 8022  max depth = 56  time = 0.9s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=9.89904 conv=False scale=1.0077 totalA=9.97529 (< budget 10) atoms=173 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 19202  covered = 6450  vacuous = 0  exempt = 3164 (core 3164, nofam 0)  split = 9580  exact atom checks = 19266  max depth = 56  time = 0.9s
+    A| FAIL: 8 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+    B1| boxes = 69824  covered = 14684  vacuous = 0  exempt = 20171 (core 20171, nofam 0)  split = 34937  exact atom checks = 30532  max depth = 56  time = 12.0s
+    B1| FAIL: 32 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 19 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 3208  covered = 196  vacuous = 0  exempt = 1346 (core 994, nofam 352)  split = 1634  exact atom checks = 1223  max depth = 56  time = 1.5s
+    B2| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 6588  covered = 112  vacuous = 0  exempt = 3105 (core 514, nofam 2591)  split = 3339  exact atom checks = 6380  max depth = 56  time = 0.7s
+    B3| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6649  covered = 4  vacuous = 0  exempt = 3239 (core 519, nofam 2720)  split = 3374  exact atom checks = 6449  max depth = 56  time = 0.8s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=9.86052 conv=False scale=1.0116 totalA=9.97536 (< budget 10) atoms=146 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 19558  covered = 6193  vacuous = 0  exempt = 3597 (core 3597, nofam 0)  split = 9760  exact atom checks = 17116  max depth = 56  time = 0.9s
+    A| FAIL: 8 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+    B1| boxes = 91030  covered = 21166  vacuous = 0  exempt = 24301 (core 24207, nofam 94)  split = 45531  exact atom checks = 39333  max depth = 56  time = 16.6s
+    B1| FAIL: 32 witness boxes at depth 56: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 24 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 5619  covered = 502  vacuous = 0  exempt = 2250 (core 1502, nofam 748)  split = 2835  exact atom checks = 1636  max depth = 56  time = 2.3s
+    B2| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 7227  covered = 286  vacuous = 0  exempt = 3264 (core 514, nofam 2750)  split = 3645  exact atom checks = 6018  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 22 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 10 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6633  covered = 10  vacuous = 0  exempt = 3225 (core 519, nofam 2706)  split = 3366  exact atom checks = 5577  max depth = 56  time = 0.9s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    NOT certified
+  verdict=FAIL(eps_geo 0.004) (A=FAIL B={'1': 'FAIL', '2': 'FAIL', '3': 'FAIL', '4': 'FAIL'}) cert_s=3725
+[CERT] k5_16_s0_G2_d0.2_e1o2 (delta=0.2 e=1/2)
+  commit 13486 MB (need > 6144 x2): sleep 60 s (k5_16_s0_G2_d0.2_e1o2:cert)
+  commit OK 12814 MB (2 consecutive) after 1 x 60 s wait (k5_16_s0_G2_d0.2_e1o2:cert)
+    [round 0] tau=9.42353 conv=False scale=1.0586 totalA=9.97629 (< budget 10) atoms=225 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 143835  covered = 37145  vacuous = 0  exempt = 34753 (core 34753, nofam 0)  split = 71913  exact atom checks = 105576  max depth = 56  time = 6.8s
+    A| FAIL: 24 witness boxes at depth 56: 20 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth
+    B1| boxes = 21685  covered = 6660  vacuous = 0  exempt = 4127 (core 3821, nofam 306)  split = 10866  exact atom checks = 17825  max depth = 56  time = 6.2s
+    B1| FAIL: 32 witness boxes at depth 56: 24 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 3034  covered = 258  vacuous = 0  exempt = 1189 (core 614, nofam 575)  split = 1555  exact atom checks = 1705  max depth = 56  time = 1.1s
+    B2| FAIL: 32 witness boxes at depth 56: 28 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 3335  covered = 4  vacuous = 0  exempt = 1579 (core 459, nofam 1120)  split = 1720  exact atom checks = 3944  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 9014  covered = 148  vacuous = 0  exempt = 4284 (core 385, nofam 3899)  split = 4550  exact atom checks = 13988  max depth = 56  time = 0.8s
+    B4| FAIL: 32 witness boxes at depth 56: 16 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 16 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=9.42696 conv=False scale=1.0583 totalA=9.97625 (< budget 10) atoms=196 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 201758  covered = 53585  vacuous = 0  exempt = 47307 (core 47307, nofam 0)  split = 100858  exact atom checks = 133493  max depth = 56  time = 9.0s
+    A| FAIL: 8 witness boxes at depth 56: 6 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth
+    B1| boxes = 18498  covered = 6013  vacuous = 0  exempt = 3182 (core 2695, nofam 487)  split = 9271  exact atom checks = 19611  max depth = 56  time = 5.3s
+    B1| FAIL: 32 witness boxes at depth 56: 24 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 2496  covered = 148  vacuous = 0  exempt = 1030 (core 582, nofam 448)  split = 1286  exact atom checks = 1139  max depth = 56  time = 1.0s
+    B2| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 5554  covered = 514  vacuous = 0  exempt = 2187 (core 498, nofam 1689)  split = 2821  exact atom checks = 4418  max depth = 56  time = 1.0s
+    B3| FAIL: 32 witness boxes at depth 56: 20 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 12 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 9132  covered = 194  vacuous = 0  exempt = 4301 (core 385, nofam 3916)  split = 4605  exact atom checks = 11714  max depth = 56  time = 0.7s
+    B4| FAIL: 32 witness boxes at depth 56: 28 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=9.38166 conv=False scale=1.0634 totalA=9.97635 (< budget 10) atoms=222 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 202410  covered = 57853  vacuous = 0  exempt = 43346 (core 43346, nofam 0)  split = 101195  exact atom checks = 142012  max depth = 56  time = 9.2s
+    A| FAIL: 16 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 3 undecided at this depth
+    B1| boxes = 16883  covered = 5050  vacuous = 0  exempt = 3337 (core 3036, nofam 301)  split = 8464  exact atom checks = 8809  max depth = 56  time = 4.8s
+    B1| FAIL: 32 witness boxes at depth 56: 24 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 2551  covered = 148  vacuous = 0  exempt = 1060 (core 613, nofam 447)  split = 1311  exact atom checks = 1313  max depth = 56  time = 1.0s
+    B2| FAIL: 32 witness boxes at depth 56: 29 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 3 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 3863  covered = 140  vacuous = 0  exempt = 1709 (core 459, nofam 1250)  split = 1982  exact atom checks = 4011  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 29 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 3 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 8787  covered = 121  vacuous = 0  exempt = 4199 (core 385, nofam 3814)  split = 4435  exact atom checks = 13758  max depth = 56  time = 0.8s
+    B4| FAIL: 32 witness boxes at depth 56: 22 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 10 undecided at this depth  [stopped at --max-witnesses]
+    NOT certified
+[CERT] eps_geo repair 0.002 -> k5_16_s0_G2_d0.2_e1o2_epsgeo0.002
+  commit 12728 MB (need > 6144 x2): sleep 60 s (k5_16_s0_G2_d0.2_e1o2_epsgeo0.002:cert)
+  commit OK 12590 MB (2 consecutive) after 1 x 60 s wait (k5_16_s0_G2_d0.2_e1o2_epsgeo0.002:cert)
+    [round 0] tau=9.50000 conv=False scale=1.0501 totalA=9.97604 (< budget 10) atoms=98 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 45186  covered = 19875  vacuous = 0  exempt = 2652 (core 2652, nofam 0)  split = 22627  exact atom checks = 24558  max depth = 56  time = 1.7s
+    A| FAIL: 32 witness boxes at depth 56: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 24 undecided at this depth  [stopped at --max-witnesses]
+    B1| boxes = 6866  covered = 1228  vacuous = 0  exempt = 2150 (core 1481, nofam 669)  split = 3456  exact atom checks = 2553  max depth = 56  time = 1.9s
+    B1| FAIL: 32 witness boxes at depth 56: 27 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 5 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 1867  covered = 0  vacuous = 0  exempt = 859 (core 556, nofam 303)  split = 976  exact atom checks = 323  max depth = 56  time = 0.6s
+    B2| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 3287  covered = 11  vacuous = 0  exempt = 1548 (core 459, nofam 1089)  split = 1696  exact atom checks = 1664  max depth = 56  time = 0.6s
+    B3| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 8513  covered = 22  vacuous = 0  exempt = 4156 (core 385, nofam 3771)  split = 4303  exact atom checks = 5847  max depth = 56  time = 0.5s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=9.49388 conv=False scale=1.0508 totalA=9.97608 (< budget 10) atoms=140 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 84112  covered = 18823  vacuous = 0  exempt = 23265 (core 23265, nofam 0)  split = 42024  exact atom checks = 51680  max depth = 33  time = 3.8s
+    A| PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 9976083/1000000 < budget 10  ==>  no packing of 15 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+    B1| boxes = 7747  covered = 1426  vacuous = 0  exempt = 2391 (core 1685, nofam 706)  split = 3898  exact atom checks = 2768  max depth = 56  time = 2.2s
+    B1| FAIL: 32 witness boxes at depth 56: 27 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 5 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 1928  covered = 13  vacuous = 0  exempt = 879 (core 563, nofam 316)  split = 1004  exact atom checks = 449  max depth = 56  time = 0.7s
+    B2| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 4917  covered = 395  vacuous = 0  exempt = 1983 (core 459, nofam 1524)  split = 2507  exact atom checks = 2386  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 23 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 8914  covered = 129  vacuous = 0  exempt = 4258 (core 385, nofam 3873)  split = 4495  exact atom checks = 8087  max depth = 56  time = 0.6s
+    B4| FAIL: 32 witness boxes at depth 56: 27 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 5 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=9.50944 conv=False scale=1.0491 totalA=9.97606 (< budget 10) atoms=163 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 239900  covered = 51317  vacuous = 0  exempt = 68573 (core 68573, nofam 0)  split = 119978  exact atom checks = 91844  max depth = 56  time = 11.4s
+    A| FAIL: 32 witness boxes at depth 56: 16 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 16 undecided at this depth  [stopped at --max-witnesses]
+    B1| boxes = 6084  covered = 1001  vacuous = 0  exempt = 1984 (core 1655, nofam 329)  split = 3067  exact atom checks = 3016  max depth = 56  time = 1.8s
+    B1| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 2250  covered = 80  vacuous = 0  exempt = 976 (core 585, nofam 391)  split = 1162  exact atom checks = 705  max depth = 56  time = 0.9s
+    B2| FAIL: 32 witness boxes at depth 56: 25 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 7 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 5074  covered = 422  vacuous = 0  exempt = 2034 (core 459, nofam 1575)  split = 2586  exact atom checks = 3191  max depth = 56  time = 0.9s
+    B3| FAIL: 32 witness boxes at depth 56: 23 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 8685  covered = 98  vacuous = 0  exempt = 4174 (core 385, nofam 3789)  split = 4381  exact atom checks = 9860  max depth = 56  time = 0.7s
+    B4| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    NOT certified
+[CERT] eps_geo repair 0.004 -> k5_16_s0_G2_d0.2_e1o2_epsgeo0.004
+  commit 8526 MB (need > 6144 x2): sleep 60 s (k5_16_s0_G2_d0.2_e1o2_epsgeo0.004:cert)
+  commit OK 8445 MB (2 consecutive) after 1 x 60 s wait (k5_16_s0_G2_d0.2_e1o2_epsgeo0.004:cert)
+    [round 0] tau=9.62953 conv=False scale=1.0360 totalA=9.97581 (< budget 10) atoms=135 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 78038  covered = 28398  vacuous = 0  exempt = 10564 (core 10564, nofam 0)  split = 39044  exact atom checks = 48219  max depth = 56  time = 3.4s
+    A| FAIL: 32 witness boxes at depth 56: 8 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 24 undecided at this depth  [stopped at --max-witnesses]
+    B1| boxes = 4510  covered = 607  vacuous = 0  exempt = 1593 (core 1340, nofam 253)  split = 2278  exact atom checks = 2108  max depth = 56  time = 1.3s
+    B1| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 2384  covered = 109  vacuous = 0  exempt = 1012 (core 571, nofam 441)  split = 1231  exact atom checks = 557  max depth = 56  time = 0.8s
+    B2| FAIL: 32 witness boxes at depth 56: 29 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 3 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 3857  covered = 121  vacuous = 0  exempt = 1725 (core 459, nofam 1266)  split = 1979  exact atom checks = 2204  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 28 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 9090  covered = 180  vacuous = 0  exempt = 4293 (core 385, nofam 3908)  split = 4585  exact atom checks = 7612  max depth = 56  time = 0.6s
+    B4| FAIL: 32 witness boxes at depth 56: 27 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 5 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=9.51311 conv=False scale=1.0487 totalA=9.97607 (< budget 10) atoms=189 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 57495  covered = 11527  vacuous = 0  exempt = 17199 (core 17199, nofam 0)  split = 28745  exact atom checks = 36921  max depth = 56  time = 2.9s
+    A| FAIL: 24 witness boxes at depth 56: 14 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 10 undecided at this depth
+    B1| boxes = 4386  covered = 576  vacuous = 0  exempt = 1562 (core 1298, nofam 264)  split = 2216  exact atom checks = 2247  max depth = 56  time = 1.4s
+    B1| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 2254  covered = 84  vacuous = 0  exempt = 974 (core 576, nofam 398)  split = 1164  exact atom checks = 744  max depth = 56  time = 0.8s
+    B2| FAIL: 32 witness boxes at depth 56: 28 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 3658  covered = 95  vacuous = 0  exempt = 1654 (core 459, nofam 1195)  split = 1877  exact atom checks = 3047  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 29 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 3 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 8494  covered = 13  vacuous = 0  exempt = 4155 (core 385, nofam 3770)  split = 4294  exact atom checks = 10857  max depth = 56  time = 0.7s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=9.50000 conv=False scale=1.0501 totalA=9.97605 (< budget 10) atoms=63 nofams={1: 301, 2: 280, 3: 121, 4: 14}
+    A| boxes = 23522  covered = 7304  vacuous = 0  exempt = 4457 (core 4457, nofam 0)  split = 11745  exact atom checks = 13456  max depth = 56  time = 1.1s
+    A| FAIL: 16 witness boxes at depth 56: 11 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 5 undecided at this depth
+    B1| boxes = 6554  covered = 1119  vacuous = 0  exempt = 2105 (core 1388, nofam 717)  split = 3298  exact atom checks = 2017  max depth = 56  time = 1.8s
+    B1| FAIL: 32 witness boxes at depth 56: 27 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 5 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 1867  covered = 0  vacuous = 0  exempt = 859 (core 556, nofam 303)  split = 976  exact atom checks = 170  max depth = 56  time = 0.6s
+    B2| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 4178  covered = 238  vacuous = 0  exempt = 1770 (core 459, nofam 1311)  split = 2138  exact atom checks = 1153  max depth = 56  time = 0.6s
+    B3| FAIL: 32 witness boxes at depth 56: 28 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 8929  covered = 141  vacuous = 0  exempt = 4257 (core 385, nofam 3872)  split = 4499  exact atom checks = 3761  max depth = 56  time = 0.5s
+    B4| FAIL: 32 witness boxes at depth 56: 25 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 7 undecided at this depth  [stopped at --max-witnesses]
+    NOT certified
+  verdict=FAIL(eps_geo 0.004) (A=FAIL B={'1': 'FAIL', '2': 'FAIL', '3': 'FAIL', '4': 'FAIL'}) cert_s=3110
+  fams k5_11 G4_lo delta=0.1: lam=1.003458639 rho=13/2500 a_w=['45451/50000', '45451/50000', '45451/50000', '22639/25000'] grid 147x147  G cells/slot=[77149, 39940, 39940, 19961]  max r on the grid=2  g-table=10236
+    pin cores: h=0.003676955  LP a_max=16213606334464/32768001953125 (0.494799969) <= emitted a = 1/2 - rho = 1237/2500 (0.494800000)
+    E boxes: {1: 90, 2: 458, 3: 212, 4: 232}
+  fams built k5_11 G4_lo delta=0.1 in 50s; overshoot=[('BL(1,1)', 0.041), ('BR(0,1)', 0.0592), ('TL(1,0)', 0.0639), ('TR(0,0)', 0.0676)]
+[RUN] k5_11_G4_lo_d0.1_e1o2 n=15 budget=10 rho=0.005200 a_w=['0.90902', '0.90902', '0.90902', '0.90556'] r_max_grid=2 E={1: 90, 2: 458, 3: 212, 4: 232}
+    IMAGE GATE k5_11 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+  commit 8627 MB (need > 6144 x2): sleep 60 s (k5_11_G4_lo_d0.1_e1o2)
+  commit OK 8452 MB (2 consecutive) after 1 x 60 s wait (k5_11_G4_lo_d0.1_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.003676955
+  warm pool k5_11 @ s=3.833212: 1406 columns, 6000 rows from 13 source(s)
+    probe: tau=10.433333 conv=False minmass=0.7666666666743805 rows=11557 (322 s)
+  tau=10.433333 eta=+0.433333 conv=False minmass=0.7666666666743805 maxcov=1.5000000000002116 rows=11557 atoms=142 lp_s=322
+    e-model: c = dtau/de ~ 9.054 (break-even 8); remaining e order ['1/8', '1/4', '1']
+[RUN] k5_11_G4_lo_d0.1_e1o8 n=12 budget=7 rho=0.005200 a_w=['0.90902', '0.90902', '0.90902', '0.90556'] r_max_grid=2 E={1: 90, 2: 458, 3: 212, 4: 232}
+    IMAGE GATE k5_11 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+  commit 8550 MB (need > 6144 x2): sleep 60 s (k5_11_G4_lo_d0.1_e1o8)
+  commit OK 8646 MB (2 consecutive) after 1 x 60 s wait (k5_11_G4_lo_d0.1_e1o8)
+  [LP] sym=C1 probe=300s full=900s rhs_max=1.5000 h=0.003676955
+    probe: tau=6.750000 conv=False minmass=0.7500000000071145 rows=9991 (307 s)
+  tau=6.750000 eta=-0.250000 conv=False minmass=1.0 maxcov=1.0312500000314633 rows=12111 atoms=39 lp_s=1006
+  k5_11 G4_lo delta=0.1 PASSES the LP at e=1/8 (eta=-0.250000); skipping the remaining e
+  fams k5_11 G4_lo delta=0.04: lam=1.003458639 rho=13/2500 a_w=['96923/100000', '96923/100000', '96923/100000', '96577/100000'] grid 147x147  G cells/slot=[81708, 43455, 43455, 22438]  max r on the grid=4  g-table=10325
+    pin cores: h=0.003676955  LP a_max=16213606334464/32768001953125 (0.494799969) <= emitted a = 1/2 - rho = 1237/2500 (0.494800000)
+    E boxes: {1: 38, 2: 405, 3: 336, 4: 273}
+  fams built k5_11 G4_lo delta=0.04 in 3s; overshoot=[('BL(1,1)', 0.033), ('BR(0,1)', 0.063), ('TL(1,0)', 0.0556), ('TR(0,0)', 0.0781)]
+[RUN] k5_11_G4_lo_d0.04_e1o2 n=15 budget=10 rho=0.005200 a_w=['0.96923', '0.96923', '0.96923', '0.96577'] r_max_grid=4 E={1: 38, 2: 405, 3: 336, 4: 273}
+    IMAGE GATE k5_11 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+  commit 8591 MB (need > 6144 x2): sleep 60 s (k5_11_G4_lo_d0.04_e1o2)
+  commit OK 8650 MB (2 consecutive) after 1 x 60 s wait (k5_11_G4_lo_d0.04_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.003676955
+    probe: tau=10.265625 conv=False minmass=0.6966019419118205 rows=8871 (308 s)
+  tau=10.265625 eta=+0.265625 conv=False minmass=0.6966019419118205 maxcov=1.3333333332890507 rows=8871 atoms=55 lp_s=308
+    e-model: c = dtau/de ~ 8.718 (break-even 8); remaining e order ['1/8', '1/4', '1']
+[RUN] k5_11_G4_lo_d0.04_e1o8 n=12 budget=7 rho=0.005200 a_w=['0.96923', '0.96923', '0.96923', '0.96577'] r_max_grid=4 E={1: 38, 2: 405, 3: 336, 4: 273}
+    IMAGE GATE k5_11 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+  commit 8649 MB (need > 6144 x2): sleep 60 s (k5_11_G4_lo_d0.04_e1o8)
+  commit OK 8658 MB (2 consecutive) after 1 x 60 s wait (k5_11_G4_lo_d0.04_e1o8)
+  [LP] sym=C1 probe=300s full=900s rhs_max=1.5000 h=0.003676955
+    probe: tau=6.595588 conv=False minmass=0.7500000000001771 rows=8473 (332 s)
+  tau=6.777778 eta=-0.222222 conv=False minmass=0.880000000222887 maxcov=1.2000000000624058 rows=13760 atoms=86 lp_s=942
+  k5_11 G4_lo delta=0.04 PASSES the LP at e=1/8 (eta=-0.222222); skipping the remaining e
+  fams k5_11 G4_lo delta=0.02: lam=1.003458639 rho=13/2500 a_w=['9893/10000', '9893/10000', '9893/10000', '12323/12500'] grid 147x147  G cells/slot=[83257, 44656, 44656, 23291]  max r on the grid=4  g-table=10363
+    pin cores: h=0.003676955  LP a_max=16213606334464/32768001953125 (0.494799969) <= emitted a = 1/2 - rho = 1237/2500 (0.494800000)
+    E boxes: {1: 30, 2: 394, 3: 375, 4: 283}
+  fams built k5_11 G4_lo delta=0.02 in 2s; overshoot=[('BL(1,1)', 0.0406), ('BR(0,1)', 0.0661), ('TL(1,0)', 0.048), ('TR(0,0)', 0.0821)]
+[RUN] k5_11_G4_lo_d0.02_e1o2 n=15 budget=10 rho=0.005200 a_w=['0.98930', '0.98930', '0.98930', '0.98584'] r_max_grid=4 E={1: 30, 2: 394, 3: 375, 4: 283}
+    IMAGE GATE k5_11 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+  commit 8574 MB (need > 6144 x2): sleep 60 s (k5_11_G4_lo_d0.02_e1o2)
+  commit OK 8572 MB (2 consecutive) after 1 x 60 s wait (k5_11_G4_lo_d0.02_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.003676955
+    probe: tau=10.545455 conv=False minmass=0.7500000000621263 rows=10440 (341 s)
+  tau=10.545455 eta=+0.545455 conv=False minmass=0.7500000000621263 maxcov=1.369142857132517 rows=10440 atoms=77 lp_s=341
+    e-model: c = dtau/de ~ 9.278 (break-even 8); remaining e order ['1/8', '1/4', '1']
+[RUN] k5_11_G4_lo_d0.02_e1o8 n=12 budget=7 rho=0.005200 a_w=['0.98930', '0.98930', '0.98930', '0.98584'] r_max_grid=4 E={1: 30, 2: 394, 3: 375, 4: 283}
+    IMAGE GATE k5_11 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+  commit 8574 MB (need > 6144 x2): sleep 60 s (k5_11_G4_lo_d0.02_e1o8)
+  commit OK 8571 MB (2 consecutive) after 1 x 60 s wait (k5_11_G4_lo_d0.02_e1o8)
+  [LP] sym=C1 probe=300s full=900s rhs_max=1.5000 h=0.003676955
+    probe: tau=6.642045 conv=False minmass=0.6181998517318681 rows=8535 (310 s)
+  tau=6.786765 eta=-0.213235 conv=False minmass=0.9023201870920701 maxcov=1.1176470588249456 rows=14901 atoms=128 lp_s=976
+  k5_11 G4_lo delta=0.02 PASSES the LP at e=1/8 (eta=-0.213235); skipping the remaining e
+  fams k5_16 G4_lo delta=0.1: lam=1.003458639 rho=13/2500 a_w=['45451/50000', '45451/50000', '45451/50000', '45451/50000'] grid 147x147  G cells/slot=[39699, 39940, 40080, 40080]  max r on the grid=3  g-table=10720
+    pin cores: h=0.003676955  LP a_max=16213606334464/32768001953125 (0.494799969) <= emitted a = 1/2 - rho = 1237/2500 (0.494800000)
+    E boxes: {1: 209, 2: 284, 3: 301, 4: 14}
+  fams built k5_16 G4_lo delta=0.1 in 6s; overshoot=[('BL(1,0)', 0.0605), ('BR(0,1)', 0.0592), ('TR(0,1)', 0.0575), ('TR(1,0)', 0.0435)]
+[RUN] k5_16_G4_lo_d0.1_e1o2 n=15 budget=10 rho=0.005200 a_w=['0.90902', '0.90902', '0.90902', '0.90902'] r_max_grid=3 E={1: 209, 2: 284, 3: 301, 4: 14}
+    IMAGE GATE k5_16 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+  commit 8578 MB (need > 6144 x2): sleep 60 s (k5_16_G4_lo_d0.1_e1o2)
+  commit OK 8625 MB (2 consecutive) after 1 x 60 s wait (k5_16_G4_lo_d0.1_e1o2)
+  [LP] sym=C1 probe=300s full=900s rhs_max=3.0000 h=0.003676955
+  warm pool k5_16 @ s=3.833212: 1062 columns, 6000 rows from 8 source(s)
+    probe: tau=10.785714 conv=False minmass=0.6666666853096647 rows=11063 (327 s)
+  tau=10.785714 eta=+0.785714 conv=False minmass=0.6666666853096647 maxcov=1.2382812533577263 rows=11063 atoms=86 lp_s=327
+    e-model: c = dtau/de ~ 9.625 (break-even 8); remaining e order ['1/8', '1/4', '1']
+[RUN] k5_16_G4_lo_d0.1_e1o8 n=12 budget=7 rho=0.005200 a_w=['0.90902', '0.90902', '0.90902', '0.90902'] r_max_grid=3 E={1: 209, 2: 284, 3: 301, 4: 14}
+    IMAGE GATE k5_16 at s=3.833212 h=0.003677: pin-hit counts g0:0;g1:0;g2:0;g3:0;g4:0;g5:0;g6:0;g7:0 -> realising=NONE
+  commit 8633 MB (need > 6144 x2): sleep 60 s (k5_16_G4_lo_d0.1_e1o8)
+  commit OK 8645 MB (2 consecutive) after 1 x 60 s wait (k5_16_G4_lo_d0.1_e1o8)
+  [LP] sym=C1 probe=300s full=900s rhs_max=1.5000 h=0.003676955
+    probe: tau=6.750000 conv=False minmass=0.6666666912679614 rows=11027 (335 s)
+  tau=6.839286 eta=-0.160714 conv=False minmass=0.9155844155838928 maxcov=1.1428571428573322 rows=15607 atoms=322 lp_s=964
+  k5_16 G4_lo delta=0.1 PASSES the LP at e=1/8 (eta=-0.160714); skipping the remaining e
+LP sweep stops before k5_16 G4_lo delta=0.04 (certification reserve)
+[CERT] k5_11_G4_lo_d0.02_e1o8 (delta=0.02 e=1/8)
+  commit 8648 MB (need > 6144 x2): sleep 60 s (k5_11_G4_lo_d0.02_e1o8:cert)
+  commit OK 8629 MB (2 consecutive) after 1 x 60 s wait (k5_11_G4_lo_d0.02_e1o8:cert)
+    [round 0] tau=6.78676 conv=False scale=1.0287 totalA=6.98149 (< budget 7) atoms=128 nofams={1: 30, 2: 394, 3: 375, 4: 283}
+    A| boxes = 707120  covered = 315607  vacuous = 0  exempt = 37985 (core 37985, nofam 0)  split = 353528  exact atom checks = 383149  max depth = 41  time = 26.7s
+    A| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 436343/62500 < budget 7  ==>  no packing of 12 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B1| boxes = 1127132  covered = 450296  vacuous = 0  exempt = 113302 (core 113302, nofam 0)  split = 563534  exact atom checks = 562484  max depth = 42  time = 62.8s
+    B1| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 872686/140625 < budget 995  ==>  no packing of 1000 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B2| boxes = 706603  covered = 245375  vacuous = 0  exempt = 107862 (core 107341, nofam 521)  split = 353334  exact atom checks = 325772  max depth = 56  time = 182.8s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 3997  covered = 344  vacuous = 0  exempt = 1585 (core 917, nofam 668)  split = 2036  exact atom checks = 2094  max depth = 56  time = 1.3s
+    B3| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 4240  covered = 271  vacuous = 0  exempt = 1783 (core 1028, nofam 755)  split = 2154  exact atom checks = 1677  max depth = 56  time = 1.2s
+    B4| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=6.78409 conv=False scale=1.0291 totalA=6.98146 (< budget 7) atoms=72 nofams={1: 30, 2: 394, 3: 375, 4: 283}
+    A| boxes = 167410  covered = 54640  vacuous = 0  exempt = 29097 (core 29097, nofam 0)  split = 83673  exact atom checks = 74193  max depth = 42  time = 6.8s
+    A| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 872683/125000 < budget 7  ==>  no packing of 12 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B1| boxes = 608666  covered = 166129  vacuous = 0  exempt = 138236 (core 138236, nofam 0)  split = 304301  exact atom checks = 220714  max depth = 42  time = 38.4s
+    B1| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 872683/140625 < budget 995  ==>  no packing of 1000 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B2| boxes = 321446  covered = 67649  vacuous = 0  exempt = 93008 (core 92055, nofam 953)  split = 160757  exact atom checks = 96053  max depth = 56  time = 86.0s
+    B2| FAIL: 32 witness boxes at depth 56: 28 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 4 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 5498  covered = 539  vacuous = 0  exempt = 2135 (core 1177, nofam 958)  split = 2792  exact atom checks = 2125  max depth = 56  time = 1.6s
+    B3| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 4303  covered = 215  vacuous = 0  exempt = 1869 (core 1160, nofam 709)  split = 2187  exact atom checks = 1122  max depth = 56  time = 1.3s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=6.78125 conv=False scale=1.0295 totalA=6.98147 (< budget 7) atoms=50 nofams={1: 30, 2: 394, 3: 375, 4: 283}
+    A| boxes = 202746  covered = 62722  vacuous = 0  exempt = 38683 (core 38683, nofam 0)  split = 101341  exact atom checks = 76451  max depth = 42  time = 8.7s
+    A| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 6981473/1000000 < budget 7  ==>  no packing of 12 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B1| boxes = 630360  covered = 164466  vacuous = 0  exempt = 150746 (core 150746, nofam 0)  split = 315148  exact atom checks = 218331  max depth = 42  time = 38.8s
+    B1| PASS: every NON-EXEMPT closed unit square in [0,958303/250000]^2 has mass >= 1 ; total 6981473/1125000 < budget 995  ==>  no packing of 1000 unit squares in side <= 958303/250000 (~3.8332120000) satisfies the hypotheses (node DEAD)
+    B2| boxes = 401189  covered = 74235  vacuous = 0  exempt = 126295 (core 125765, nofam 530)  split = 200627  exact atom checks = 87685  max depth = 56  time = 101.7s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 5582  covered = 561  vacuous = 0  exempt = 2155 (core 1177, nofam 978)  split = 2834  exact atom checks = 1509  max depth = 56  time = 1.6s
+    B3| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 11484  covered = 1174  vacuous = 0  exempt = 4493 (core 2536, nofam 1957)  split = 5785  exact atom checks = 2880  max depth = 56  time = 3.3s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    NOT certified
+  verdict=FAIL(rc=1) (A=PASS B={'1': 'PASS', '2': 'FAIL', '3': 'FAIL', '4': 'FAIL'}) cert_s=1203
+LP sweep stops before k5_11 s0_lo delta=0.1 (certification reserve)
+campaign done; -17.1 min left of the budget; certification used 134.0 min
+report written: notes/slotcrowd94_report.md
+MARKER written: C:\Users\esumm\code\packing\attempts\A94-slot-crowds\results\CAMPAIGN_DONE (status=done)

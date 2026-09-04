@@ -1,0 +1,72 @@
+re-solving node LP with EPS_GEO=0.002 (slot-crowd rhs)
+[s=3.877084 n=10 sym=C1 box=[0,90]x1] init orbits=788 points=788 rows=6395 (rejected 1280)
+  it   0 tau=10.073027 rows=6928 orbs=1188 atoms>0=82 minmass=0.290418 maxcov=1.379063 +rows=533 -rows=0 +cols=400 -cols=0 t=23s [lp 0s row 19s +r 1s col 0s +c 0s]
+  it   1 tau=10.131579 rows=7592 orbs=1588 atoms>0=72 minmass=0.807018 maxcov=1.383459 +rows=664 -rows=0 +cols=400 -cols=0 t=44s [lp 2s row 18s +r 1s col 0s +c 0s]
+  it   2 tau=9.997615 rows=8238 orbs=1988 atoms>0=104 minmass=0.751987 maxcov=1.300477 +rows=646 -rows=0 +cols=400 -cols=0 t=94s [lp 15s row 32s +r 2s col 0s +c 0s]
+  it   3 tau=9.938894 rows=9207 orbs=2388 atoms>0=133 minmass=0.785208 maxcov=1.289794 +rows=969 -rows=0 +cols=400 -cols=0 t=188s [lp 51s row 40s +r 3s col 1s +c 0s]
+  it   4 tau=9.877531 rows=9616 orbs=2788 atoms>0=166 minmass=0.832967 maxcov=1.188827 +rows=409 -rows=0 +cols=400 -cols=0 t=281s [lp 42s row 48s +r 2s col 1s +c 0s]
+  it   5 tau=9.826605 rows=10434 orbs=3188 atoms>0=202 minmass=0.823454 maxcov=1.192804 +rows=818 -rows=0 +cols=400 -cols=0 t=601s [lp 221s row 92s +r 5s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=10 sym=C1 tau=9.781818 nu=9.781818 conv=False minmass=0.823454 maxcov=1.192804 rows=10434 orbits=3188 atoms_nz=188 packing_support=143 time=919s
+   tau=9.78182 conv=False minmass=0.8235
+[round 0] tau=9.78182 conv=False scale=1.0198 totalA=9.97555 (< budget 10) atoms=188 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 27024  covered = 9519  vacuous = 0  exempt = 3963 (core 3963, nofam 0)  split = 13518  exact atom checks = 26416  max depth = 56  time = 1.3s
+    A| FAIL: 24 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 24 undecided at this depth
+    B1| boxes = 70214  covered = 24996  vacuous = 0  exempt = 10062 (core 10062, nofam 0)  split = 35124  exact atom checks = 54319  max depth = 56  time = 13.2s
+    B1| FAIL: 32 witness boxes at depth 56: 22 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 10 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 51344  covered = 7674  vacuous = 0  exempt = 17936 (core 13070, nofam 4866)  split = 25702  exact atom checks = 27321  max depth = 56  time = 25.1s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 6661  covered = 130  vacuous = 0  exempt = 3128 (core 514, nofam 2614)  split = 3371  exact atom checks = 8190  max depth = 56  time = 0.9s
+    B3| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6609  covered = 16  vacuous = 0  exempt = 3207 (core 519, nofam 2688)  split = 3354  exact atom checks = 7955  max depth = 56  time = 1.0s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    feeding back 3192 witness rows (total extra 3192), re-solving
+[s=3.877084 n=10 sym=C1 box=[0,90]x1] init orbits=799 points=799 rows=7113 (rejected 1714)
+  it   0 tau=9.783079 rows=7550 orbs=799 atoms>0=122 minmass=0.720102 maxcov=1.458270 +rows=437 -rows=0 +cols=0 -cols=0 t=42s [lp 0s row 38s +r 1s col 1s +c 0s]
+  it   1 tau=9.905660 rows=7550 orbs=1799 atoms>0=90 minmass=0.821698 maxcov=1.396226 +rows=0 -rows=0 +cols=1000 -cols=0 t=66s [lp 0s row 23s +r 0s col 0s +c 0s]
+  it   2 tau=9.719411 rows=8008 orbs=1799 atoms>0=146 minmass=0.557883 maxcov=1.192216 +rows=458 -rows=0 +cols=0 -cols=0 t=116s [lp 6s row 42s +r 2s col 1s +c 0s]
+  it   3 tau=9.846372 rows=8008 orbs=2141 atoms>0=120 minmass=0.873428 maxcov=1.252314 +rows=0 -rows=0 +cols=1000 -cols=658 t=150s [lp 1s row 33s +r 0s col 1s +c 0s]
+  it   4 tau=9.799026 rows=8440 orbs=2068 atoms>0=136 minmass=0.874173 maxcov=1.178475 +rows=432 -rows=0 +cols=0 -cols=73 t=193s [lp 3s row 37s +r 2s col 1s +c 0s]
+  it   5 tau=9.822154 rows=3046 orbs=2447 atoms>0=124 minmass=0.819106 maxcov=1.173780 +rows=0 -rows=5394 +cols=1000 -cols=621 t=230s [lp 1s row 35s +r 0s col 1s +c 0s]
+  it   6 tau=9.778261 rows=3636 orbs=2288 atoms>0=146 minmass=0.765217 maxcov=1.160870 +rows=849 -rows=259 +cols=0 -cols=159 t=275s [lp 1s row 41s +r 2s col 1s +c 0s]
+  it   7 tau=9.794697 rows=3406 orbs=2881 atoms>0=140 minmass=0.858460 maxcov=1.184848 +rows=0 -rows=230 +cols=1000 -cols=407 t=324s [lp 1s row 47s +r 0s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=10 sym=C1 tau=9.768918 nu=9.768918 conv=False minmass=0.858460 maxcov=1.184848 rows=3406 orbits=2881 atoms_nz=151 packing_support=170 time=326s
+[round 1] tau=9.76892 conv=False scale=1.0211 totalA=9.97553 (< budget 10) atoms=151 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 23517  covered = 7070  vacuous = 0  exempt = 4704 (core 4704, nofam 0)  split = 11735  exact atom checks = 20293  max depth = 56  time = 1.1s
+    A| FAIL: 8 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth
+    B1| boxes = 124147  covered = 28501  vacuous = 0  exempt = 33514 (core 33101, nofam 413)  split = 62100  exact atom checks = 74231  max depth = 56  time = 28.5s
+    B1| FAIL: 32 witness boxes at depth 56: 15 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 17 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 6404  covered = 601  vacuous = 0  exempt = 2542 (core 1645, nofam 897)  split = 3229  exact atom checks = 2470  max depth = 56  time = 2.7s
+    B2| FAIL: 32 witness boxes at depth 56: 31 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 1 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 7100  covered = 242  vacuous = 0  exempt = 3237 (core 514, nofam 2723)  split = 3589  exact atom checks = 6175  max depth = 56  time = 0.9s
+    B3| FAIL: 32 witness boxes at depth 56: 26 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 6 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6631  covered = 11  vacuous = 0  exempt = 3223 (core 519, nofam 2704)  split = 3365  exact atom checks = 5872  max depth = 56  time = 0.8s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    feeding back 2856 witness rows (total extra 6048), re-solving
+[s=3.877084 n=10 sym=C1 box=[0,90]x1] init orbits=770 points=770 rows=2895 (rejected 2011)
+  it   0 tau=9.770175 rows=3248 orbs=770 atoms>0=120 minmass=0.781140 maxcov=1.410526 +rows=353 -rows=0 +cols=0 -cols=0 t=37s [lp 0s row 35s +r 0s col 0s +c 0s]
+  it   1 tau=9.788262 rows=3248 orbs=1770 atoms>0=114 minmass=0.842074 maxcov=1.467004 +rows=0 -rows=0 +cols=1000 -cols=0 t=71s [lp 0s row 33s +r 0s col 1s +c 0s]
+  it   2 tau=9.748279 rows=3863 orbs=1770 atoms>0=116 minmass=0.766634 maxcov=1.289086 +rows=615 -rows=0 +cols=0 -cols=0 t=107s [lp 1s row 33s +r 1s col 1s +c 0s]
+  it   3 tau=9.808398 rows=3863 orbs=2192 atoms>0=107 minmass=0.824920 maxcov=1.283502 +rows=0 -rows=0 +cols=1000 -cols=578 t=137s [lp 0s row 29s +r 0s col 1s +c 0s]
+  it   4 tau=9.773684 rows=4608 orbs=2109 atoms>0=120 minmass=0.812281 maxcov=1.176316 +rows=745 -rows=0 +cols=0 -cols=83 t=177s [lp 2s row 35s +r 2s col 1s +c 0s]
+  it   5 tau=9.789795 rows=3024 orbs=2514 atoms>0=134 minmass=0.840822 maxcov=1.199615 +rows=0 -rows=1584 +cols=1000 -cols=595 t=219s [lp 1s row 40s +r 0s col 1s +c 0s]
+  it   6 tau=9.756661 rows=3236 orbs=2339 atoms>0=141 minmass=0.772659 maxcov=1.192616 +rows=415 -rows=203 +cols=0 -cols=175 t=267s [lp 2s row 44s +r 1s col 1s +c 0s]
+  it   7 tau=9.767252 rows=3215 orbs=2731 atoms>0=152 minmass=0.932905 maxcov=1.206791 +rows=0 -rows=21 +cols=1000 -cols=608 t=311s [lp 0s row 42s +r 0s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=10 sym=C1 tau=9.746125 nu=9.746125 conv=False minmass=0.932905 maxcov=1.206791 rows=3215 orbits=2731 atoms_nz=158 packing_support=186 time=313s
+[round 2] tau=9.74613 conv=False scale=1.0235 totalA=9.97560 (< budget 10) atoms=158 nofams={1: 297, 2: 546, 3: 72, 4: 88}
+    A| boxes = 30637  covered = 8661  vacuous = 0  exempt = 6655 (core 6655, nofam 0)  split = 15305  exact atom checks = 24993  max depth = 56  time = 1.5s
+    A| FAIL: 16 witness boxes at depth 56: 7 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undecided at this depth
+    B1| boxes = 217599  covered = 58869  vacuous = 0  exempt = 49876 (core 49231, nofam 645)  split = 108822  exact atom checks = 113593  max depth = 56  time = 48.9s
+    B1| FAIL: 32 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 19 undecided at this depth  [stopped at --max-witnesses]
+    B2| boxes = 51145  covered = 6884  vacuous = 0  exempt = 18629 (core 14001, nofam 4628)  split = 25600  exact atom checks = 25145  max depth = 56  time = 22.9s
+    B2| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+    B3| boxes = 6769  covered = 158  vacuous = 0  exempt = 3156 (core 514, nofam 2642)  split = 3423  exact atom checks = 6686  max depth = 56  time = 0.8s
+    B3| FAIL: 32 witness boxes at depth 56: 30 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 2 undecided at this depth  [stopped at --max-witnesses]
+    B4| boxes = 6613  covered = 16  vacuous = 0  exempt = 3209 (core 519, nofam 2690)  split = 3356  exact atom checks = 6572  max depth = 56  time = 0.9s
+    B4| FAIL: 32 witness boxes at depth 56: 32 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 0 undecided at this depth  [stopped at --max-witnesses]
+NOT certified
+
+---stderr---
+
