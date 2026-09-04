@@ -2628,3 +2628,18 @@ affordable cost estimate for closing 3.84.
   P-ON resolved into this dichotomy (A97-G1 closed, A97-C1 discharged). Composition rerun: jams contribute <= 3 x 0.7071 = 2.12 (j = 3, all floating) or wall
   units instead (P-ON => j <= 2 opposite); with charge85 minima 0/0/0.023/0.121 for the other corners the four-corner sum never exceeds 4.0318 for any j;
   max jam count stays 3 unconditionally; offset floor 0.2686 on nick walls, L/2 - 0.2314 on pusher walls (L > 0.463). Trump canary unchanged (no jam).
+- A96 concurrency leg (2026-09-04 13:46-14:45): NO USABLE CONTENTION NUMBER, and the reason is the measurement, not the hardware.
+  The concurrency raise did not happen: A57 stayed at 3 shards for the whole hour (neighbours96 timeline, 104 samples: busy
+  distribution 6:7 7:67 8:18 9:12, mean 7.34, NEVER 10; A57 slot share 2.95). Cause: the restarted scaler made exactly ONE launch
+  (k5_16 G1 s2, 13:46:28) and thereafter spawned launch.ps1 children that never produced a tree57 process or a pidfile (live ones
+  observed at 14:46:45 and 14:47:28; scaler CPU 0.5 s over the hour, i.e. sleeping, not spinning). launch.ps1 invoked DIRECTLY with
+  the same arguments works first time (k5_11 G1 s3 = pid 43044), so the fault is in the scaler's invocation context, not the script
+  -- A57 infrastructure, left for A57's owner rather than patched blind mid-run.
+  What the numbers would have said, and why they are not reportable: A57 s2 shard per-node wall 372.3 s median before (n=111) vs
+  741.8 s after (n=6) -- but n=6, p25 51.9 / p75 1468.1, and every one of those rows is stamped busy=7, i.e. the SAME concurrency as
+  before. A96's 12.5x median jump is queue composition, not contention: the pass is sorted by ascending atom count, so later rows are
+  intrinsically dearer. Controlling for that (8 rows before vs 6 after, all 'easy', atoms 6-7) still gives 127 -> 450 s median, but the
+  within-bucket spread is 10 s to 1500 s at IDENTICAL atom count, and the neighbour stamps invert the effect (busy=6 median 1116 s,
+  busy=7 558 s, busy=8 342 s). That is noise with a sample size, not a memory-bandwidth signal on the 12700K.
+  Now at 4 A57 shards + 2 A96 verifiers (deepen held back: the coordinator's allocation summed to 11 against a cap of 10). Fresh
+  baseline snapshotted (results/contention_before_4shard.json) so the next window measures the concurrency it claims to.
