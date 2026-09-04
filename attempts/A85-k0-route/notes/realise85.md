@@ -150,3 +150,70 @@ The sound residue of C3 is unchanged (Lemma K0-REUSE, the (C) prunes at fine box
   a result.  `d2_ub(i,j) = min(depth_ub(i), depth_ub(j))` uses the wall-aware `depth_ub`.
 * The 4-corner per-node cost is extrapolated (S5 never ran); the frontier, not the constant, is
   what decides the verdict here.
+
+---
+
+# Addendum — does the census cut touch the INTERIOR-FIRST tree (the 3 200–7 000 CPU-h figure)?
+
+**No. The interior-first tree never branches on corner pairs; multiplicity zero.  The census cut
+cannot move its price.**  `k0_route.md` prices two DIFFERENT tree instances (§2):
+
+* **Instance (i), interior-first — the one priced at 3 200–7 000 CPU-h (§8.1–8.3).**  Root =
+  Theorem A38.1 + `d4_wlog` ⇒ A27's **216 level-1 cells of `T(s0) × [0°, 90°]`**,
+  `T(s0) = {s0/2 ≤ y ≤ x ≤ s0 − 1.1} = {1.938542 ≤ y ≤ x ≤ 2.777084}`
+  (`A38-root-power/results/cover_l1.json`: 8 x-cuts × 6 θ-cuts, 216 nodes).  Below that:
+  bisection `b = 8` per level on the **(centre, tilt) box of a SINGLE conditioned interior
+  square**, LP + certification at every node of depth ≥ 2, then A60 conditioning depths
+  `j = 1, 2` on the interior triple and confinement of the outer squares.  The branching set at
+  every frontier node is a sub-box of `T(s0) × [0°,90°]` — never a corner reach-cover box, never
+  a pair.
+* **Instance (ii), the corner seed `T_B` (§2 instance (ii), §4.2) — the C3 route, priced at
+  2.9·10¹⁶ nodes and declared DEAD.**  THIS is the tree that consumes the blocker-pair census:
+  per corner `c` it branches `YES_i` (over the reach-cover boxes: 644, now **560**) then `YES_j`,
+  `j ≠ i`, with `cores_meet(K(B_i), K(B_j))` a (C) leaf — i.e. the level-2 branching set per
+  corner is the surviving pair census (33 656, now **7 044**), and the four corners multiply:
+  `N_pair⁴/8`.  Everything in parts (1)–(4) above is a cut on instance (ii) only.
+
+**The only contact between the census and instance (i)** is Lemma K0-WIDEN + K0-FREE (§4.4 note,
+§8.4 C2): `H_B` is usable inside the interior-first tree as free **(T) leaves wherever a corner
+NO-family occurs**.  That is a leaf TYPE, not a branching set — it fires in the outer-square
+confinement phase, is priced inside the `(D)+(D′)` term (150 CPU-h) at ≤ 10 % (§8.4 C2), i.e.
+**≤ 15 CPU-h ≈ 0.5 % of the total**, and its firing rate is not a function of how many pairs the
+census retains.
+
+**A geometric near-miss, stated so it is not mistaken for a lever.**  `T(s0)` does overlap the TR
+corner cover rect `[s0−1.75, s0−0.5]² = [2.127084, 3.377084]²` — over **60.1 %** of `T(s0)`'s
+area, and **168 of the 216 level-1 cells** meet it (126 lie entirely inside).  It buys nothing:
+(a) a centre inside a corner cover rect does not make the square a blocker — a DROPPED box only
+says "no pose in this box meets the open slot", which removes the square from the blocker role
+rather than excluding the packing; (b) a frontier node conditions ONE square, so no corner PAIR
+— hence no (C) leaf and no realisability test — is ever determined there.  (`T(s0)` misses the
+BL, BR and TL cover rects outright: `min y = 1.938542 > 1.75` and `min x = 1.938542 > 1.75`.)
+
+## Re-price of the interior-first tree
+
+`N₂ = 216 · 8 = 1 728`;  `N₃ = 8·N₂(1 − f₂)`;  `N₄ = 8·N₃(1 − f₃)`;  `c = 0.47–1.1` CPU-h/node.
+
+| scenario | f₂ = f₃ | N₂+N₃+N₄ | LP/cert CPU-h | (D)+(D′) | total |
+|---|---|---|---|---|---|
+| §8.3 as published | 0.85 | 1 728 + 2 074 + 2 488 = 6 290 | 2 957 – 6 919 | 150 | **3 200 – 7 000** |
+| **(i) + realisability-sound pair set** (560 boxes / 7 044 pairs) | 0.85 | 6 290 (unchanged) | 2 957 – 6 919 | ≤ 150 | **3 200 – 7 000** (−0 to −15) |
+| **(ii) + `d2 ≥ 0.10` at all four corners, as HYPOTHESIS** | 0.85 | 6 290 (unchanged) | 2 957 – 6 919 | ≤ 150 | **3 200 – 7 000** (−0 to −15) |
+| first-pass only (measured f₂) | 0.33 | 1 728 + 9 216 + 49 152 → deeper | 2.8·10⁴ – 6.6·10⁴ | 150 | **≥ 3·10⁴** (all three rows alike) |
+
+**What dominates.**  `N₂ + N₃ + N₄ = 6 290` single-conditioned-square LP+certification nodes at
+depth 2–4 — 94–99 % of the price.  Per §7.3 each is ≈ 1 000 s LP + 630–860 s certification
+(+ 800–1 200 s per eps_geo repair round) at budget 10 with one conditioned square; level 1 is
+pure branching (undecidable at any cap tried, 0/3).  The whole spread between 3·10³ and 3·10⁴
+CPU-h is **`f₂`, the certified-kill fraction at `η ≈ −1`** (measured 1/3 first-pass; 0.85 is the
+scenario where the two hole-FAILs, certificate totals 9.977 < 10, close with deeper
+certification / witness feedback).  That is eps_geo / oracle engineering, not geometry — the
+corner census is not on the critical path of instance (i) at all.
+
+**Assumptions.**  (A1) `f₂ = f₃`, unmeasured, taken from §8.2/§8.3.  (A2) `b = 8` per level,
+`N₂ = 216 · 8`.  (A3) `c = 0.47–1.1` CPU-h from the S1 rows (depth 2, single core, budget 10,
+warm pool 697 columns); the S1 rows are the only measured node class — S2–S5 never ran.
+(A4) `(D)+(D′) = 150` CPU-h (≤ 3 image chains at 30–60 CPU-h + ≈ 1 desktop-hour of ghost
+drains).  (A5) the tree bottoms out by depth 4 into image/ghost-bound residue.  (A6) `H_B` is
+available free at every node (Lemma K0-FREE, dependency: k1_00's own tree, 200–300 CPU-h, not
+counted here).  (A7) a desktop-day = 72 CPU-h at three slots ⇒ 45–100 desktop-days, unchanged.
