@@ -1,10 +1,10 @@
 {
  "measured": {
-  "n_param_runs": 25,
-  "mean_param_wall_s": 270.4,
-  "median_param_wall_s": 138.3,
-  "mean_fixed_wall_s": 1358.5,
-  "ratio_param_over_one_fixed_side": 0.199
+  "n_param_runs": 28,
+  "mean_param_wall_s": 289.2,
+  "median_param_wall_s": 188.0,
+  "mean_fixed_wall_s": 1374.8,
+  "ratio_param_over_one_fixed_side": 0.2104
  },
  "baseline_four_fixed_sides": {
   "level1_days_3w": 11.94,
@@ -16,27 +16,38 @@
   "per_class": {
    "k5_11": {
     "level1_lp_days": 4.3,
-    "level1_param_days": 2.57,
+    "level1_param_days": 2.75,
     "level2_lp_days": 5.11,
-    "level2_param_days": 6.68
+    "level2_param_days": 7.15
    },
    "k5_16": {
     "level1_lp_days": 3.26,
-    "level1_param_days": 2.86,
+    "level1_param_days": 3.06,
     "level2_lp_days": 6.08,
-    "level2_param_days": 7.74
+    "level2_param_days": 8.27
    }
   },
-  "total_days_1proc": 38.6,
-  "wall_days_3workers": 12.87,
-  "wall_days_5workers": 7.72,
-  "with_sigma_ladder_days_1proc": 35.95,
-  "with_sigma_ladder_wall_days_3workers": 11.98,
-  "with_sigma_ladder_wall_days_5workers": 7.19,
+  "total_days_1proc": 39.98,
+  "wall_days_3workers": 13.33,
+  "wall_days_5workers": 8.0,
+  "with_sigma_ladder_days_1proc": 37.26,
+  "with_sigma_ladder_wall_days_3workers": 12.42,
+  "with_sigma_ladder_wall_days_5workers": 7.45,
   "sigma_lp_children_side1_k5_11": [
    821,
    505
   ],
   "assumption": "level-1 and level-2 nodes are EMITTED once at side 1 (A57's own measured LP+certify wall) and each is verified over the whole window once at the measured mean parametric wall; sides 2/3/4 do not run at all"
+ },
+ "level2_delta1e2_probe": {
+  "rows": 7,
+  "parents": 1,
+  "logic_kill_frac": 0.571,
+  "mean_wall_solved_s": 776.6,
+  "mean_wall_per_child_s": 332.8,
+  "a95_delta0_per_child_s": 216.4,
+  "cost_scale_vs_a95": 1.538,
+  "level2_days_1proc_rescaled": 17.21,
+  "caveat": "one parent, 7 children -- a supply-limited probe, not the 200-child measurement; the headline projection still uses A95's delta=0 number"
  }
 }

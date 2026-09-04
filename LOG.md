@@ -2557,3 +2557,9 @@ affordable cost estimate for closing 3.84.
 - Discipline: frozen verifiers copied byte-identical and never edited (code/frozen.sha256); BLAS pinned; 6144 MB commit gate in the
   launcher itself (param96 self-gates on GlobalMemoryStatusEx AvailPageFile); <= 2 verifier processes throughout -- one duplicate runner
   that a failed background launch had left behind was found by process attribution and killed. A60/A61/A92/A93/A94 untouched.
+- A96 leg 1 close (2026-09-04): parametric pass 28 nodes (k5_11_G1 27: 22 full-window + 5 partial, class intersection 0.98438; k5_16_G1 1);
+  cost 0.21 of ONE fixed side over 28 runs. Slivers CLOSED on the three single-sliver nodes (0.6-3.0 s each, upgraded to full window);
+  three multi-gap nodes (Y0540/Y0101/Y0840, 6 witness cells each) queued with bisection. LEVEL-2 delta=1e-2 PROBE (one deepen shard at the
+  DEPLOYED pin slack, since A95's 216.4 s/child came from delta=0 rows): 7 children of one parent, 4/7 free logic kills, 332.8 s/child =
+  1.54x A95's number -- reported as a sensitivity (level 2 -> 17.21 days 1-proc), NOT folded into the headline. The pass is currently
+  parked on its own 6144 MB commit gate (free commit ~4.8 GB under A57 G1 + A61 + A92 + A94); it self-resumes, no supervision needed.

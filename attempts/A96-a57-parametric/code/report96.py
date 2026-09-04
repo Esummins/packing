@@ -242,6 +242,31 @@ def main():
         assumption=("level-1 and level-2 nodes are EMITTED once at side 1 (A57's own measured "
                     "LP+certify wall) and each is verified over the whole window once at the "
                     "measured mean parametric wall; sides 2/3/4 do not run at all"))
+    # Level-2 sensitivity at the DEPLOYED pin slack.  A95's level-2 cost (216.4 s/child) comes
+    # from the L1_D2 rows, which were produced at delta = 0.  A96 ran one deepen shard at
+    # delta = 1e-2 (the deployed value) to see whether that number transfers.  Small sample --
+    # reported as a sensitivity, never folded into the headline.
+    d2 = os.path.join(BASE, "..", "A57-shadow-trees", "results",
+                      "tree_k5_11_interior_G1_D2.jsonl")
+    if os.path.exists(d2):
+        R = load(d2)
+        solved = [r for r in R if (r.get("lp_seconds") or 0) > 0]
+        w = [(r.get("lp_seconds") or 0) + (r.get("cert_seconds") or 0) for r in solved]
+        lk = sum(1 for r in R if (r.get("cert") or "").startswith("KILL-BY-LOGIC"))
+        if R:
+            scale = (statistics.mean(w) * len(solved) / len(R)) / 216.4 if w else None
+            proj["level2_delta1e2_probe"] = dict(
+                rows=len(R), parents=len({r["id"].rsplit("_D", 1)[0] for r in R}),
+                logic_kill_frac=round(lk / len(R), 3),
+                mean_wall_solved_s=round(statistics.mean(w), 1) if w else None,
+                mean_wall_per_child_s=round(statistics.mean(w) * len(solved) / len(R), 1) if w else None,
+                a95_delta0_per_child_s=216.4,
+                cost_scale_vs_a95=round(scale, 3) if scale else None,
+                level2_days_1proc_rescaled=round(
+                    (per_class["k5_11"]["level2_lp_days"] + per_class["k5_16"]["level2_lp_days"])
+                    * (scale or 1), 2),
+                caveat=("one parent, 7 children -- a supply-limited probe, not the 200-child "
+                        "measurement; the headline projection still uses A95's delta=0 number"))
     json.dump(proj, open(os.path.join(OUT, "projection96.json"), "w"), indent=1)
     json.dump(board, open(os.path.join(OUT, "scoreboard96.json"), "w"), indent=1)
     for cls, rows in allrows.items():
