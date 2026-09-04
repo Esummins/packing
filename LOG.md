@@ -2594,3 +2594,30 @@ affordable cost estimate for closing 3.84.
 - Discipline: <= 2 processes (driver + one certify), BLAS pinned, 6144 MB commit gate x2 readings; A57/A60/A61/A86/A92/A93 untouched; frozen verifiers untouched; git: fetch +
   plain merge (already up to date) + push own paths. Files: docs/proofs/slot_crowds.md, attempts/A94-slot-crowds/{code,results,certs,logs,notes}, lean/depgraph.json+svg
   (C.A57 note + chip -> A96, C.K4TIER CEIL-T note, K0.SLIDE joint-translation note, K0.CW slot-form note), REGISTRY row.
+
+## 2026-09-04 A97-wall-budget (Fable lead, theory; no chores of its own) -- closed done-mixed: the budget is a theorem, the mechanism does not close
+- T [docs/proofs/wall_budget.md]: Lemma WALL-F [T] - the sound 1-D wall budget is sum over ALL squares of the interior chord on the line at distance
+  1/sqrt2 from the wall (a wall-toucher's chord is EXACTLY 1/cos(tilt) in [1, sqrt2]); WALL-3: <= 3 touchers per wall, tilt slack sum(1/cos - 1) <= m - 3
+  (< 0.877084; upright + two diamonds needs m >= 1 + 2 sqrt2 = A47's s* / Lemma COL's ghost threshold). Lemma WALL-NP [T]: the brief's projection width
+  cos t + sin t is NOT a budget (interior-disjoint touchers with overlapping projections, overlap 0.0847 at 20 deg vs a diamond; up to 0.092) - the sound
+  width is 1/cos t. JAM pair (JAM-0 form, g <= 0.1): footprint 1 (S) on both walls + 1/cos(alpha) (N) on the NICK wall only. WALL-J2/J3 [T]: the slot
+  square's pusher (NOCRIT-SEL Cor. 2) is a FREE square, distinct per jam => j <= 3 jams (JAM^4 dead = cases85's free-square kill); WALL-J4 [T]: two jams
+  nicked on one wall impossible (>= 4 > m); two jams on one wall with the nicks on the perpendicular walls are NOT excluded by the budget; j <= 2 at
+  OPPOSITE corners only under hypothesis P-ON (pusher with unit footprint on the pusher wall, e.g. touching it). P-ON is not a theorem and the exact
+  K0-BLOCKED corpus REFUTES it 3/3 (k0dir87 s0380 BR x2, s0076 BR at sigma 4.000: pusher floating 0.76-0.94 above the wall, footprint 0) - the residue is
+  the floating-pusher POCKET (= the brief's above-wall lock (d)). Lemma WALL-S [T]: a jam's nick-wall neighbour keeps <= 1 unit-footprint member (exact
+  inequality in tilt and wall distance); a zero-footprint intruder has depth <= 1 - 1/sqrt2 = 0.2929 (CEIL's constant); an OFFSET-UPRIGHT neighbour gets an
+  offset FLOOR >= 0.2686 (Trump-safe), not a cap. SLIDE confines jams to m >= s-hat - g^2/sqrt(1-g^2) >= s-hat - 0.01005.
+- COMPOSITION (T2): NOT dead by area for j = 0, 1, 2, 3 and NO offset cap: charge85 (200 pairs, exact lower bounds) has stratum minima JAM 0 / BLOCK 0 /
+  WEDGE 0.023 / OTHER[0.1,0.3) 0.121 rising to 0.45 at g in [0.5,0.7); 89 % of the 7 044 realisable pairs pass the wall squeeze, including the charge-0
+  ones (A47's flush-parking zero, one level up); forced sum ~ 0 << 4.03 in every pattern.
+- T3: (C-wall) leaf rule = box-level phi_lb (exact, LP-free, monotone); census [M, results/wallcensus97.json]: 178/644 boxes unit-footprint per line,
+  7.3 % of pairs have both members unit on a line, 10.8 % exceed s0 - 2 on either line; JAM patterns are ~0.06 % of the 4-tuple census; under P-ON 6/21
+  patterns (25/81 labelled) die. Escapes: E1 floating pusher (corpus 3/3), E2 zero-footprint shallow member (27 % of pairs per line; depth <= 0.2929),
+  E3 tilted on-wall pushers (allowed, cost >= 1: tighten only), E4 y-side/corner-type jams (S floating, presser over its far corner), E5 the SLIDE shell.
+- CANARY [M, exact 70 dps, results/trump_wall_canary.*]: Trump PASSES WALL-F on all four walls: bottom 3.282914 / left 3.000000 / right 3.308901 / top
+  2.630367 <= s-hat, touchers 3/3/3/2; the LEFT wall is tight at exactly three flush units (slack s-hat - 3 = 0.877084); no wall carries two diamonds;
+  no jam corner (TL is OTHER, g = 0.8445, partner left-wall distance 0.8317 >= 0.2686).
+- Discipline: theory only (three second-scale scripts, one process, no BLAS); A57/A60/A61/A96 untouched; frozen verifiers untouched; git fetch + plain
+  merge + push own paths. Files: docs/proofs/wall_budget.md, attempts/A97-wall-budget/{code,results}, lean/depgraph.json+svg (K0.RESN note, chip A97),
+  REGISTRY row.

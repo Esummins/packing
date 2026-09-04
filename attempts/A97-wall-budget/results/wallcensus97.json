@@ -1,0 +1,76 @@
+{
+ "attempt": "A97 wallcensus97 -- Lemma WALL-F footprint lower bounds on the A85 census",
+ "s0": 3.877084,
+ "h0": 0.7071067811865475,
+ "threshold_adjacent_to_jam": 1.877084,
+ "n_boxes": 644,
+ "n_pairs": 7044,
+ "boxes": {
+  "unit_footprint_left": 178,
+  "unit_footprint_bottom": 178,
+  "zero_footprint_left": 264
+ },
+ "pairs": {
+  "sum_x_gt_thr": 378,
+  "sum_y_gt_thr": 380,
+  "either_gt_thr": 758,
+  "both_lines_gt_thr": 0,
+  "sum_x_ge2": 255,
+  "sum_y_ge2": 256,
+  "either_ge2": 511,
+  "any_member_unit_x": 5113,
+  "any_member_unit_y": 5116,
+  "sum_x_plus_y_gt": 0
+ },
+ "pairs_frac": {
+  "sum_x_gt_thr": 0.05366269165247019,
+  "sum_y_gt_thr": 0.05394662123793299,
+  "either_gt_thr": 0.10760931289040318,
+  "both_lines_gt_thr": 0.0,
+  "sum_x_ge2": 0.036201022146507666,
+  "sum_y_ge2": 0.03634298693923907,
+  "either_ge2": 0.07254400908574674,
+  "any_member_unit_x": 0.7258659852356616,
+  "any_member_unit_y": 0.7262918796138558,
+  "sum_x_plus_y_gt": 0.0
+ },
+ "per_label": {
+  "WEDGE": {
+   "n": 2135,
+   "either_gt_thr": 55,
+   "either_ge2": 22,
+   "min_sx": 0.0,
+   "min_sy": 0.0,
+   "max_sx": 2.092168916827687,
+   "max_sy": 2.092168916827687
+  },
+  "BLOCK": {
+   "n": 2836,
+   "either_gt_thr": 304,
+   "either_ge2": 216,
+   "min_sx": 0.0,
+   "min_sy": 0.0,
+   "max_sx": 2.0634920634920637,
+   "max_sy": 2.0634920634920637
+  },
+  "OTHER": {
+   "n": 2005,
+   "either_gt_thr": 367,
+   "either_ge2": 241,
+   "min_sx": 0.0,
+   "min_sy": 0.0,
+   "max_sx": 2.2696169109271285,
+   "max_sy": 2.2696169109271285
+  },
+  "JAM": {
+   "n": 68,
+   "either_gt_thr": 32,
+   "either_ge2": 32,
+   "min_sx": 1.0,
+   "min_sy": 1.0,
+   "max_sx": 2.0,
+   "max_sy": 2.0
+  }
+ },
+ "note": "phi_lb is a SOUND lower bound (uniform over the box) on the interior chord at distance 1/sqrt2 from the wall; a pair with sum > s0-2 on a line cannot be the crowd of the corner adjacent (along that line) to a JAM corner nicked on that wall (footprint 2 + 1/cos(alpha) - 1 + sum > s0), nor, under P-ON, adjacent along the pusher wall.  Labels from cases85.pairs.jsonl (priority partition)."
+}
