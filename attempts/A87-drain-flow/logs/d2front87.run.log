@@ -1,0 +1,114 @@
+=== d2front87 nodes  2026-09-03 17:49:19
+c4 nodes: {'attemptable': 179, 'unkillable': 2, 'contradictory': 819} ; 179 attemptable (30 of them among the 200 stored); 20s
+=== d2front87 selftest  2026-09-03 17:49:44
+644 sound BL boxes                                   ok 644
+pair (i,j) address the SOUND box list                ok 0,14
+depth_ub finite, <= 1                                ok max 1.000000
+depth_ub sound vs 24000 in-box samples               ok worst excess -1.214e-03
+max-d2 witnesses valid and <= the box bound          ok 12 witnesses, 0 bad
+a node seed is feasible + K0-BLOCKED                 FAIL 
+one-corner ceiling constant                          ok 
+selftest: 7 checks, 1 FAIL
+=== d2front87 all  2026-09-03 18:08:11
+c4 nodes: {'attemptable': 179, 'unkillable': 2, 'contradictory': 819} ; 179 attemptable (30 of them among the 200 stored); 20s
+realize: 856 / 6000 scanned pairs realizable (>= 0.1427 of the census); witness d2 median 0.0683; 194s
+644 sound BL boxes                                   ok 644
+pair (i,j) address the SOUND box list                ok 0,14
+depth_ub finite, <= 1                                ok max 1.000000
+depth_ub sound vs 24000 in-box samples               ok worst excess -1.214e-03
+max-d2 witnesses valid and <= the box bound          ok 12 witnesses, 0 bad
+a cover-node seed is feasible + K0-BLOCKED           ok mode wit, s=4.80, D2=4.427e-02
+node seed n_block >= 2 at all four corners           ok [2, 2, 2, 2]
+1 - G is a lower bound on the true D2                ok 1-G = 0.044247001 <= D2 = 0.044265417
+one-corner ceiling constant                          ok 
+selftest: 9 checks, 0 FAIL
+canary Trump TL: d1 0.168320990 (err 2.53e-13), d2 0.155474724 (err 2.76e-07); located True; d2_ub 0.22484495538308413 sound True
+census: boxes n=644 frac depth_ub < ['0.05', '0.10', '0.20'] = [0.18788819875776397, 0.3027950310559006, 0.41304347826086957]
+census: pairs n=33656 frac d2_ub < ['0.05', '0.10', '0.20'] = [0.5588602329450915, 0.8193189921559306, 0.9120216306156406]
+arm 1: 0 / 179 sampled attemptable nodes are realizable at ALL FOUR corners; per-node realizable-corner histogram {'0': 96, '1': 71, '2': 11, '3': 1, '4': 0}
+pool nodes: 150 attemptable found in 3864 draws from 856 realizable pairs; draw states {'attemptable': 150, 'unkillable': 23, 'contradictory': 3691}
+run: 150 attemptable nodes, caps ['4.600000', '4.400000', '4.200000', '4.100000', '4.050000', '4.000000', '3.950000', '3.900000', '3.877084'], wall 4000s
+=== d2front87 run  2026-09-03 18:15:30
+arm 1: 0 / 179 sampled attemptable nodes are realizable at ALL FOUR corners; per-node realizable-corner histogram {'0': 96, '1': 71, '2': 11, '3': 1, '4': 0}
+gate masks built (19s)
+pool nodes: 150 attemptable found in 3864 draws from 856 realizable pairs; draw states {'attemptable': 150, 'unkillable': 23, 'contradictory': 3691}
+run: 150 attemptable nodes, caps ['4.600000', '4.400000', '4.200000', '4.100000', '4.050000', '4.000000', '3.950000', '3.900000', '3.877084'], wall 2500s
+  p112 wit    seed s=4.800 -> min_side 4.000558  D2 0.000120  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (42s)
+  p042 wit    seed s=5.200 -> min_side 4.000510  D2 0.006861  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (48s)
+  p121 wit    seed s=4.800 -> min_side 4.000849  D2 0.184244  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (53s)
+  p032 wit    seed s=4.800 -> min_side 4.000096  D2 0.086956  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (54s)
+  p065 wit    seed s=4.800 -> min_side 4.000056  D2 0.081929  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (56s)
+  p083 wit    seed s=4.800 -> min_side 4.051108  D2 0.000100  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (45s)
+  p038 wit    seed s=5.200 -> min_side 4.000067  D2 0.000289  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (47s)
+  p079 wit    seed s=5.200 -> min_side 4.000002  D2 0.033436  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (55s)
+  p082 wit    seed s=4.800 -> min_side 4.020025  D2 0.001835  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (65s)
+  p140 wit    seed s=4.800 -> min_side 4.107107  D2 0.000184  caps ['4.6000', '4.4000', '4.2000']  (41s)
+[  554s] 10/150 nodes; min_side min 4.000002; per-cap n {'4.6000': 10, '4.4000': 10, '4.2000': 10, '4.1000': 9, '4.0500': 9, '4.0000': 0, '3.9500': 0, '3.9000': 0, '3.8771': 0}
+  p080 wit    seed s=5.200 -> min_side 5.000152  D2 0.000100  caps []  (13s)
+  p093 wit    seed s=5.200 -> min_side 4.000870  D2 0.060633  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (58s)
+  p005 wit    seed s=4.800 -> min_side 4.000109  D2 0.000324  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (46s)
+  p102 wit    seed s=5.200 -> min_side 4.000131  D2 0.000100  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (46s)
+  p124 wit    seed s=5.200 -> min_side 4.000016  D2 0.000592  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (50s)
+  p053 wit    seed s=5.200 -> min_side 4.000298  D2 0.184244  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (53s)
+  p057 wit    seed s=4.800 -> min_side 4.000134  D2 0.009941  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (55s)
+  p049 wit    seed s=5.200 -> min_side 4.020108  D2 0.072423  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (44s)
+  p018 wit    seed s=5.200 -> min_side 4.019487  D2 0.000101  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (49s)
+  p071 wit    seed s=4.800 -> min_side 4.000373  D2 0.000159  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (40s)
+[ 1008s] 20/150 nodes; min_side min 4.000002; per-cap n {'4.6000': 19, '4.4000': 19, '4.2000': 19, '4.1000': 18, '4.0500': 18, '4.0000': 0, '3.9500': 0, '3.9000': 0, '3.8771': 0}
+  p090 wit    seed s=4.800 -> min_side 4.000296  D2 0.006434  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (45s)
+  p095 wit    seed s=5.200 -> min_side 4.156667  D2 0.000657  caps ['4.6000', '4.4000', '4.2000']  (45s)
+  p020 wit    seed s=4.500 -> min_side 4.000022  D2 0.147665  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500', '4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (101s)
+  p096 wit    seed s=4.800 -> min_side 4.040761  D2 0.000107  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (37s)
+  p001 wit    seed s=5.200 -> min_side 4.000002  D2 0.077085  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (59s)
+  p012 wit    seed s=5.200 -> min_side 4.000492  D2 0.188386  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (57s)
+  p025 wit    seed s=4.800 -> min_side 4.249885  D2 0.292893  caps ['4.6000', '4.4000']  (33s)
+  p008 wit    seed s=4.800 -> min_side 4.001501  D2 0.000100  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (45s)
+  p015 wit    seed s=5.200 -> min_side 4.000866  D2 0.090562  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (61s)
+  p061 wit    seed s=4.800 -> min_side 4.000196  D2 0.000100  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (41s)
+[ 1532s] 30/150 nodes; min_side min 4.000002; per-cap n {'4.6000': 30, '4.4000': 30, '4.2000': 29, '4.1000': 27, '4.0500': 27, '4.0000': 0, '3.9500': 0, '3.9000': 0, '3.8771': 0}
+  p048 wit    seed s=5.200 -> min_side 4.000191  D2 0.000590  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (53s)
+  p051 wit    seed s=5.200 -> min_side 4.013494  D2 0.000100  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (43s)
+  p141 wit    seed s=5.200 -> min_side 4.021694  D2 0.000536  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (38s)
+  p066 wit    seed s=4.800 -> min_side 4.000937  D2 0.008505  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (42s)
+  p073 wit    seed s=4.800 -> min_side 4.130606  D2 0.000100  caps ['4.6000', '4.4000', '4.2000']  (39s)
+  p094 wit    seed s=4.800 -> min_side 4.083735  D2 0.000100  caps ['4.6000', '4.4000', '4.2000', '4.1000']  (37s)
+  p136 wit    seed s=5.200 -> min_side 4.000133  D2 0.082700  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (70s)
+  p036 wit    seed s=5.200 -> min_side 5.194238  D2 0.184244  caps []  (12s)
+  p035 wit    seed s=5.200 -> min_side 4.000032  D2 0.069414  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (57s)
+  p101 wit    seed s=5.200 -> min_side 4.000327  D2 0.156011  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (67s)
+[ 1990s] 40/150 nodes; min_side min 4.000002; per-cap n {'4.6000': 40, '4.4000': 39, '4.2000': 38, '4.1000': 35, '4.0500': 34, '4.0000': 0, '3.9500': 0, '3.9000': 0, '3.8771': 0}
+  p142 wit    seed s=5.200 -> min_side 4.000692  D2 0.000607  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (60s)
+  p114 wit    seed s=4.800 -> min_side 4.000883  D2 0.067877  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (58s)
+  p000 wit    seed s=5.200 -> min_side 4.000014  D2 0.004380  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (51s)
+  p056 wit    seed s=4.800 -> min_side 4.793572  D2 0.153311  caps []  (15s)
+  p011 wit    seed s=5.200 -> min_side 4.000002  D2 0.069235  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (45s)
+  p007 wit    seed s=5.200 -> min_side 4.000030  D2 0.121685  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (67s)
+  p047 wit    seed s=5.200 -> min_side 4.000003  D2 0.001391  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (44s)
+  p146 wit    seed s=5.200 -> min_side 4.000135  D2 0.001054  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (52s)
+  p046 wit    seed s=4.800 -> min_side 4.000167  D2 0.129682  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (60s)
+  p086 wit    seed s=5.200 -> min_side 4.000131  D2 0.000138  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (54s)
+[ 2496s] 50/150 nodes; min_side min 4.000002; per-cap n {'4.6000': 49, '4.4000': 48, '4.2000': 47, '4.1000': 44, '4.0500': 43, '4.0000': 0, '3.9500': 0, '3.9000': 0, '3.8771': 0}
+  p111 wit    seed s=4.800 -> min_side 4.000158  D2 0.000383  caps ['4.6000', '4.4000', '4.2000', '4.1000', '4.0500']  (47s)
+wall reached after 51 nodes
+  cap 4.6000 p025 D2_float 0.262173 -> certified D2 in [0.26217338959224845, 0.2621733895922485], side <= 4.354390297132183, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  cap 4.6000 p020 D2_float 0.147665 -> certified D2 in [0.14766474727852344, 0.14766474727852347], side <= 4.599999998999999, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  ANCH cap 4.6000 p094 D2_float 0.000100 -> certified D2 in [0.00010047149243561661, 0.00010047149243561662], side <= 4.083735886243449, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED True
+  ANCH cap 4.6000 p094 D2_float 0.000100 -> certified D2 in [9.99957914742625e-05, 9.999579147426252e-05], side <= 4.083735459840951, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED True
+  cap 4.4000 p025 D2_float 0.292893 -> certified D2 in [0.29289295523438735, 0.2928929552343874], side <= 4.357401801798346, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  cap 4.4000 p012 D2_float 0.188386 -> certified D2 in [0.18838593987203764, 0.18838593987203767], side <= 4.361312849918496, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  ANCH cap 4.4000 p094 D2_float 0.000100 -> certified D2 in [9.99957914742625e-05, 9.999579147426252e-05], side <= 4.083735459840951, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED True
+  cap 4.2000 p012 D2_float 0.153937 -> certified D2 in [0.15393736037864225, 0.15393736037864228], side <= 4.193714813209461, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  cap 4.2000 p101 D2_float 0.150205 -> certified D2 in [0.15020498840729266, 0.15020498840729268], side <= 4.199999998995152, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  ANCH cap 4.2000 p094 D2_float 0.000100 -> certified D2 in [9.99957914742625e-05, 9.999579147426252e-05], side <= 4.083735459840951, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED True
+  cap 4.1000 p101 D2_float 0.077756 -> certified D2 in [0.07775607978638921, 0.07775607978638922], side <= 4.09999999899874, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  cap 4.1000 p007 D2_float 0.076106 -> certified D2 in [0.0761064872528131, 0.07610648725281312], side <= 4.099999998999992, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  ANCH cap 4.1000 p094 D2_float 0.000100 -> certified D2 in [9.99957914742625e-05, 9.999579147426252e-05], side <= 4.083735459840951, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED True
+  cap 4.0500 p011 D2_float 0.034241 -> certified D2 in [0.03424100025836049, 0.0342410002583605], side <= 4.037927708990091, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  cap 4.0500 p035 D2_float 0.032929 -> certified D2 in [0.032928684759262535, 0.03292868475926254], side <= 4.049999999, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  own-side p036 D2_float 0.184244 -> certified D2 in [0.18424390152412656, 0.1842439015241266], side <= 5.197732463175858, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  own-side p056 D2_float 0.153311 -> certified D2 in [0.15331052408608895, 0.15331052408608897], side <= 4.799999999000001, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED False
+  ANCH own-side p140 D2_float 0.000100 -> certified D2 in [0.00010000049999992377, 0.00010000049999992378], side <= 4.107107414606331, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED True
+  ANCH own-side p094 D2_float 0.000100 -> certified D2 in [9.99957914742625e-05, 9.999579147426252e-05], side <= 4.083735459840951, n_block [2, 2, 2, 2], VERIFIED True, ANCHORED True
+wrote C:\Users\esumm\code\packing\attempts\A87-drain-flow\results\d2front87.json (2556 s)
+=== d2front87 report  2026-09-03 18:58:29
+wrote C:\Users\esumm\code\packing\attempts\A87-drain-flow\notes\d2front87.md (202 lines)
