@@ -83,6 +83,18 @@ def main():
         for k, v in snap.items():
             print(k, "rows", len(v), "walled", stats(v.values()))
         return
+    # neighbour stamps (code/neighbours96.py): rows that appeared while the sampler ran carry the
+    # busy-process count at the moment they landed, so "after" can be split by actual concurrency
+    # instead of assuming the intended one held for the whole window.
+    nb = {}
+    nbp = os.path.join(BASE, "results", "neighbours96.jsonl")
+    if os.path.exists(nbp):
+        for ln in open(nbp):
+            try:
+                r = json.loads(ln)
+                nb[r["file"] + "|" + r["id"]] = r["busy"]
+            except Exception:
+                pass
     before = json.load(open(a.inp))
     out = dict(before_when=before["when"], after_when=time.strftime("%Y-%m-%d %H:%M:%S"),
                elapsed_h=round((time.time() - before["t"]) / 3600, 2), per_source={})
@@ -90,10 +102,25 @@ def main():
         now = rows(k)
         old = before["data"].get(k, {})
         new_keys = [x for x in now if x not in old]
+        # Per FILE as well as per source.  A shard that was already running before the change and
+        # kept running through it is the cleanest probe: same code, same stratum, same shard, only
+        # the number of neighbours changed.  The aggregate "before" mixes in rows produced days
+        # ago at whatever concurrency was live then, so it is the weaker comparison of the two.
+        per_file = {}
+        for x in now:
+            f = x.split("|", 1)[0]
+            d = per_file.setdefault(f, dict(before=[], after=[]))
+            d["after" if x not in old else "before"].append(now[x])
         out["per_source"][k] = dict(
             before=stats(old.values()),
             after=stats([now[x] for x in new_keys]),
-            new_rows=len(new_keys))
+            new_rows=len(new_keys),
+            per_file={f: dict(before=stats(d["before"]), after=stats(d["after"]))
+                      for f, d in sorted(per_file.items()) if any(v for v in d["after"])},
+            after_by_busy={str(b): stats(v) for b, v in sorted(
+                {bb: [now[x] for x in new_keys if nb.get(x) == bb]
+                 for bb in {nb.get(x) for x in new_keys if nb.get(x)}}.items())},
+            after_unstamped=len([x for x in new_keys if x not in nb]))
         b, af = out["per_source"][k]["before"], out["per_source"][k]["after"]
         if b.get("n") and af.get("n"):
             out["per_source"][k]["median_ratio_after_over_before"] = round(
