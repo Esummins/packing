@@ -125,9 +125,16 @@ foreach ($sd in $sides) {
 }
 Note "queue built: $($queue.Count) shard(s); frozen tags = $($frozenTags -join ',')"
 $qi = 0
+$attempts = @{}          # "name|tag|shard" -> launch attempts, so a failing entry retries once
+$launchTimeout = 90      # seconds to wait for launch.ps1 itself; it only spawns and returns
 Note "scaleup started; A57=$(A57Count) A56running=$(A56Running)"
 for ($i = 0; $i -lt 5000; $i++) {
-  $cap = if (A56Running) { 3 } else { 5 }
+  # A96 2026-09-04: 5 -> 6 after the PI's pagefile raise (commit limit 132 GB, free 82 GB; the
+  # box is working-set bound now, summed WS ~6 GB against a 26 GB budget on 20 threads).
+  # NB A57Count counts the IDLE sweepfails watcher and any deepen.py, not just tree shards, so
+  # cap 6 means 4 concurrent tree shards while sweepfails + one deepen are up -- which is the
+  # agreed configuration.  Raise this only together with the machine-wide heavy-process cap.
+  $cap = if (A56Running) { 3 } else { 6 }
   $now = A57Count
   # Commit gate.  The PI moved the pagefile to F:\pagefile.sys at 25 GB initial / 100 GB max, so
   # the commit limit now GROWS ON DEMAND to ~130 GB and commit is no longer the binding
@@ -143,9 +150,55 @@ for ($i = 0; $i -lt 5000; $i++) {
   }
   if ($now -lt $cap -and $qi -lt $queue.Count) {
     $j = $queue[$qi]; $qi++
-    & powershell -ExecutionPolicy Bypass -File "$base\code\launch.ps1" -Name $j.n -Shard $j.s `
-        -Tag $j.tag -Side $j.side -TimeLimit 240 -CertTime 240 -Rounds 2 -Jobs 2 -FoldCap 9000 | Out-Null
-    Note "cap=$cap running=$now -> launched $($j.n) $($j.tag) side=$($j.side) shard $($j.s)"
+    # A96 2026-09-04.  The old line was
+    #     & powershell -ExecutionPolicy Bypass -File launch.ps1 ... | Out-Null
+    #     Note "... -> launched ..."
+    # and it had TWO faults that between them cost an hour of idle slots and were invisible:
+    #   (1) `&` with a pipeline BLOCKS FOREVER if the child does not exit.  Observed: launch.ps1
+    #       children alive with no tree57 process and no pidfile behind them, while the scaler
+    #       slept (0.5 s CPU/hour).  Now the child is started with -PassThru and killed if it
+    #       has not exited within $launchTimeout seconds.
+    #   (2) the Note claimed "launched" unconditionally -- it never checked that a shard had in
+    #       fact started, so a failing launch looked identical to a working one in scaleup.log.
+    #       Now the pidfile is read back and the pid confirmed to be a live tree57 before the
+    #       success line is written; a failure logs the child's own stdout/stderr and re-queues
+    #       the entry ONCE.
+    # -NonInteractive is added to the child: without it PowerShell can wait on host input.
+    $si0 = ($j.s -split '/')[0]
+    $stamp = "$($j.n)_interior_$($j.tag)_s$si0"
+    $pf = "$base\logs\$stamp.pid"
+    $lo = "$base\logs\launch_$stamp.out"
+    $le = "$base\logs\launch_$stamp.err"
+    if (Test-Path $pf) { Remove-Item $pf -Force -ErrorAction SilentlyContinue }
+    $lp = Start-Process -FilePath "powershell" -ArgumentList @('-NonInteractive','-ExecutionPolicy','Bypass',
+            '-File',"$base\code\launch.ps1",'-Name',$j.n,'-Shard',$j.s,'-Tag',$j.tag,'-Side',$j.side,
+            '-TimeLimit','240','-CertTime','240','-Rounds','2','-Jobs','2','-FoldCap','9000') `
+            -WorkingDirectory $base -RedirectStandardOutput $lo -RedirectStandardError $le `
+            -WindowStyle Hidden -PassThru
+    if (-not $lp.WaitForExit($launchTimeout * 1000)) {
+      Note "LAUNCH HUNG (> $launchTimeout s): $($j.n) $($j.tag) shard $($j.s) -- killing launcher pid $($lp.Id)"
+      try { Stop-Process -Id $lp.Id -Force -ErrorAction Stop } catch {}
+    }
+    Start-Sleep -Seconds 3
+    $ok = $false
+    if (Test-Path $pf) {
+      $sp = (Get-Content $pf -ErrorAction SilentlyContinue | Select-Object -First 1) -as [int]
+      if ($sp) {
+        $sq = Get-CimInstance Win32_Process -Filter "ProcessId=$sp" -ErrorAction SilentlyContinue
+        $ok = ($sq -and $sq.CommandLine -like '*tree57.py*')
+      }
+    }
+    if ($ok) {
+      Note "cap=$cap running=$now -> launched $($j.n) $($j.tag) side=$($j.side) shard $($j.s)"
+    } else {
+      $txt = ((Get-Content $lo -ErrorAction SilentlyContinue) + (Get-Content $le -ErrorAction SilentlyContinue)) -join ' | '
+      Note "LAUNCH FAILED: $($j.n) $($j.tag) shard $($j.s) -- no live tree57 behind $pf; child said: $txt"
+      $key = "$($j.n)|$($j.tag)|$($j.s)"
+      if (-not $attempts.ContainsKey($key)) { $attempts[$key] = 0 }
+      $attempts[$key]++
+      if ($attempts[$key] -lt 2) { $queue += $j; Note "  re-queued $key (attempt $($attempts[$key]))" }
+      else { Note "  giving up on $key after $($attempts[$key]) attempts -- launch by hand via code\launch.ps1" }
+    }
     Start-Sleep -Seconds 45
   } elseif ($now -lt $cap) {
     # L1 queue exhausted: keep freed slots on depth 2.  deepen.py owns every ALIVE-at-LP /

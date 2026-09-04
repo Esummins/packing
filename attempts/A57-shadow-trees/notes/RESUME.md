@@ -1,5 +1,49 @@
 # A57 — how to resume
 
+## 2026-09-04: the scaler could not fill slots — FIXED (A96, who now owns A57)
+
+**Symptom.** The scaler launched one shard and then sat idle for an hour with 0.5 s of CPU while
+three slots stood empty, and `scaleup.log` showed nothing wrong: the old code wrote
+`-> launched ...` unconditionally, so a launch that started no shard was indistinguishable from
+one that did.
+
+**Cause.** The launch line was
+
+    & powershell -ExecutionPolicy Bypass -File launch.ps1 ... | Out-Null
+
+`| Out-Null` keeps the pipeline open until every handle on the child's stdout is closed — and
+`launch.ps1` spawns `tree57.py`, which **inherits that handle**. So the scaler blocked not until
+the launcher returned (0.4 s) but until the *shard itself* exited, i.e. hours. One launch per
+wake-up, three idle slots, and no error anywhere. (`launch.ps1` invoked directly always worked,
+which is what made this look like an execution-policy or working-directory problem; it is
+neither — the script is fine, the plumbing around it was not.)
+
+**Fix** (`code/scaleup.ps1`, launch block):
+* the launcher is started with `Start-Process -PassThru` redirecting to **files**, not a pipe, so
+  no handle is shared with the shard, and waited on with `WaitForExit($launchTimeout * 1000)`
+  (90 s) — a hung launcher is killed and logged instead of blocking the scaler forever;
+* after the wait the pidfile is read back and the pid confirmed to be a **live `tree57.py`**
+  before any success line is written.  A failure logs the launcher's own stdout/stderr
+  (`logs/launch_<stamp>.{out,err}`) and re-queues the entry once, then gives up loudly;
+* `-NonInteractive` added to the child;
+* cap raised 5 → 6.  **`A57Count` counts the idle `sweepfails` watcher and any `deepen.py`, not
+  just tree shards**, so cap 6 = 4 concurrent tree shards while sweepfails + one deepen are up.
+  Raise it only together with the machine-wide heavy-process budget.
+
+Tested on a frozen tag (launcher exits without starting a shard): the wait returns in 0.4 s, the
+verification reports `shard verified live: False`, and the log carries the child's own words.
+
+**Start the scaler with its output captured** — the old invocation discarded it, which is half of
+why this took an hour to see:
+
+    Start-Process powershell -ArgumentList '-NonInteractive','-ExecutionPolicy','Bypass',
+        '-File','code\scaleup.ps1' -WorkingDirectory <A57 base> `
+        -RedirectStandardOutput logs\scaleup.out -RedirectStandardError logs\scaleup.err -WindowStyle Hidden
+
+Hand-launch only through `code\launch.ps1` (never `tree57.py` directly): the pidfile it writes is
+what the queue's idempotence gate reads, and bypassing it risks a duplicate shard racing a live
+one on the same jsonl.
+
 ## 2026-09-04: SIDES 4/3/2 ARE FROZEN (A96) — read this before restarting the scaler
 
 `code/FREEZE_TAGS.txt` lists G4, G3, G2. Two independent gates honour it:
