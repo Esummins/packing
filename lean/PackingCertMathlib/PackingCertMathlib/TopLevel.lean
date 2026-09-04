@@ -77,6 +77,75 @@ load-bearing ones are repeated in the docstrings below.
   ŝ_A22 = ŝ identification gap remains `shatA22_eq_shat` (A78, `docs/proofs/attainment_ub.md`).
 * `rBasin` — DISCHARGED (A63): a definition, 3/2000, justified by the exact θ↔t transfer
   constants (`docs/proofs/theta_t_transfer.md`).
+
+## A86 roster note (Lean wave 7, 2026-09-03): what each remaining axiom now reduces to
+
+The three named axioms are UNCHANGED here (no statement that mentions them moves), but
+`Composition.lean` re-bases both consumers on the tree/tube conclusions, so that:
+
+* `stratum_kill` (non-Trump classes) and `trump_residual` (the Trump class) are together
+  REPLACED, for `s_eleven_ge_of_classes` / `s_eleven_unique_of_classes`, by the single
+  per-class window obligation `ClassKilledAt i m` ("every packing of class `i` at side `m`
+  has `m ≥ ŝ`, and at `m = ŝ` is a `D4`-image of `ẑ`"); the old axioms imply it
+  (`classKilledAt_of_stratum_kill`, `classKilledAt_trump_of_residual`).  Each instance
+  reduces (`classKilledAt_of_tree` + `classKilledAt_of_slabs`) to CERTIFICATE-FILE facts:
+  a closed zone-tree (`ZoneTree.ClosedTree`: (K)/(N) leaves = `checkCaseI … = true` at
+  `s0` with the node cores/NO-families, (C) leaves, (D) leaves = the landing bookkeeping
+  of Lemma SEAM (`TubeSeam.seam_inTube`), (D′) leaves = `checkAtlas … = true` with
+  `L ≥ s0`, and the tree's `cover` from the rule library), one tube certificate per
+  direction (`RigidTube.tube_basin`, `checkTube … = true`), Step 1's slot/drift budget
+  (`root_of_containsPins`), and, below the tube's reach, plain slab kills
+  (`WindowRows.SlabKill`: `checkParamI` / slack-core `checkCaseI` / M1 rows).
+  `basin` is no longer consumed on this route (the tube hands over to `a22_optimal'`).
+* `a22_exact_structure` is untouched (A78's A22 interface; `shatR = shat` via CIDL).
+* The `stratum_kill` re-split of `lean/k0_readiness_A85.md` (`StratumKillAll` /
+  `StratumKillMin`) is stated and both consumers are proved from it
+  (`s_eleven_ge_of_split`, `s_eleven_unique_of_split`) — needed only if minimality-based
+  (K0-ROT) leaves are used.
+
+## A93 roster note (Lean wave 8, 2026-09-04): the k0 chain — what the axioms reduce to now
+
+The three named axioms are again UNCHANGED.  `Composition.lean` (Theorem N, A92's re-based
+k0_00 plan, `docs/proofs/k0_blocked_side.md` §3.3) adds a CLASS-BLIND route below a shell:
+
+* **Lemma SLIDE is a theorem** (`Slide.slide_crowd`): under K0-O1 alone, EVERY packing at side
+  `m ∈ [3.82, ŝ)` has, at every corner, two distinct squares meeting the closed box
+  `[0, 1 − (ŝ − m)]²` (second intruder at depth `≥ ŝ − m`).  K0-O1 (`Composition.K0O1`) is
+  k1_00's monotone slab kill `SlabKill {corner slot} 3.82 ŝ` at each corner — delivered by
+  k1_00's closed tree (`slabKill_of_tree`, the tube slab) + its regime-1 slab kills
+  (`WindowRows.SlabKill`).  Lemma K0-FREE (`Slide.k0free_kill`) is the `T = 0` case.
+* **Lemma CW is a theorem** (`Crowd.crowd_sound`, `crowd_cert_kill`): a crowd certificate
+  `C(δ, m_lo)` is FOUR Bool facts about two files — `checkCaseI` run A (`n ≤ 11 + 8e`, no
+  cores, no NO-families), `checkCaseI` run B (no cores), `sameMeasure` (one measure, weights
+  in the exact ratio `1 + e`), `crowdZones` (run B's NO-families avoid the crowd family
+  `[0, a_w]²` at every corner; `CrowdZone.lean`) — plus rational side conditions (the pad
+  `a_w ≥ (s0/m_lo)(1−δ) + (s0/m_lo − 1)·0.7072`, Lemma B-YES `scaleC_meets_cornerBox`; the
+  separation `(s0 − 2a_w)² > 2`).  `crowdKill_of_files` packages them into
+  `CrowdKill δ m_lo s0`; `lean/gen_crowd_lean.py` emits the isolated replay module per
+  certificate (`Corpus/Crowd/Check_<tag>.lean`, `native_decide`).
+* **Theorem N** (`theoremN_slab`, `chain_cover`, `no_packing_of_chain`): K0-O1 + a chain
+  `(δ_k, m_k)`, `m_0 ≤ 3.82`, `m_{k+1} ≤ ŝ − δ_k`, exclude EVERY packing at every side
+  `m ∈ [3.82, ŝ − δ_K]`; hence `s_eleven_ge_of_chain : s(11) ≥ ŝ − δ_K`, and
+  `classKilledAt_below_of_chain : ClassKilledAt i m` for EVERY class `i` there.
+* So `stratum_kill` now reduces to: (i) K0-O1 (k1_00's tree, A84 O1–O5 — the one tree the
+  route needs); (ii) the chain's certificate replays; (iii) `ShellKill i δ_K` per class on
+  the SHELL `(ŝ − δ_K, ŝ]` (`classKilledAt_of_chain`): for the certified classes and the
+  K1-protected `k ≤ 4` tier, their A86-T3 trees/slabs restricted to the shell (the tube
+  slab `[ŝ − 0.1305, ŝ]` contains it); for k0_00 it is RES-N(δ_K) — the named open residue
+  (depgraph K0.RESN): a packing in the shell with two squares at depth `≥ ŝ − m` at every
+  corner but not two at depth `≥ δ_K` at some corner, plus the non-crowded non-images at `ŝ`.
+* `trump_residual` reduces to `ClassKilledAt trumpStratum m` on the shell only (A60's tree
+  through `classKilledAt_of_tree`; below `ŝ − δ_K` the chain kills the Trump class too, so
+  A60's regime-1 slab kills are no longer load-bearing).
+* Replay obligations and the T5 cost law (A78 `t5_timings.jsonl`: 0.4–0.6 ms per box;
+  K61 median 452 k boxes → 268 s, max 7.4 M boxes → 2 800 s): per crowd certificate two
+  `checkCaseI` evaluations at depth 56 with ≤ 1 600 D4-expanded atoms (box counts from the
+  chore's `.report.json`; expect minutes to ~1 h each), `sameMeasure` (< 1 s),
+  `crowdZones` (≈ 420 zones × 4 corners × ≤ 2^fuel pose boxes, fuel 10: ≲ 1 min); a chain
+  from δ = 0.05 to 0.005 is 3 certificates, to 0.001 is 5 (ratio 0.4403).  No certificate
+  has been delivered by the A92 chore at this commit (LP sweep parked on the commit gate), so
+  no replay module exists yet; the generator and the smoke tests
+  (`scratch/A93CheckerTest.lean`) are in place.
 -/
 
 namespace PackingCert

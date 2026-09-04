@@ -137,6 +137,77 @@ theorems `s_eleven_ge / s_eleven_eq / s_eleven_unique` are proved from exactly t
   the 16 variant certificates are replayed but not load-bearing.  mpmath.iv (E.IV) is out of
   the rigidity chain at both tiers.  TopLevel roster: 3 named axioms
   (`stratum_kill`, `trump_residual`, `a22_exact_structure`).
+**Built by A86 (2026-09-03, Lean wave 7 — the last theorems the compute nodes need):**
+* **The contraction-tube checker is Lean-sound (A83's obligation, T1)**: `RigidTubeKernel.lean`
+  (`checkTube`, the port of `certs/verify_tube.py`: hull box + PAIR-RELATIVE boxes for the
+  edge/dist rows, the split Taylor remainder `E(x)`, the monotone iteration `iterT`) and
+  `RigidTube.lean` (`tube_basin`: `checkA22 = true`, `checkTube = true` ⟹ every feasible
+  point of `Tube_v(T, r) = {ẑ − t·v + w}` has `s ≥ ŝ`, equality only at `ẑ`).  The one new
+  analytic ingredient is translation invariance of the pair rows AND their symbolic
+  derivatives (`shift_inv_D`: an invariant expression has invariant derivatives because
+  `D` is the derivative along the coordinate segment, `hasDerivAt_eval`, and derivatives
+  are unique).  `TubeSeam.lean`: the `t`-frame form `tube_tframe` and Lemma SEAM's
+  per-coordinate map `seam_inTube` (pins `w = 0` up to the slot residual, free squares
+  `|w| ≤ r_land·(m/s0) + T·|v − ẑ/ŝ|`).  Data `RigidTubeData.lean` (54 certificates,
+  `lean/gen_tube_lean.py`), isolated `RigidTubeCheck.lean` (3 load-bearing directions),
+  per-certificate replays `Corpus/Tube/` (target `PackingCertCorpus`).
+* **The atlas-value box checker (T2)**: `AtlasKernel.lean` (`checkAtlas`, trivial-reach /
+  extent form in `(cx, cy, t)`: witness corner pairs, rational `cosT`/`sinT` enclosures) +
+  `AtlasBridge.lean` (`atlas_kill`: `L ≤` every container side; `atlas_dilated_kill_fold` =
+  Lemma K0-ATLAS, the (D′) leaf: with `L ≥ s0` no packing at ANY side `< s0` has its dilate
+  in the box — every window side at once, no dilation bookkeeping).  Boxes are emitted with
+  the tilts folded into `[0, π/4]` (`foldSq`, corner-coordinate sets invariant); 48 of 49
+  A37/A85 boxes reach `L ≥ s0` at about half of A37's radius (`AtlasData.lean`, isolated
+  `AtlasCheck.lean`, `attempts/A86-lean-wave7/notes/t2_atlas.md`).
+* **The zone-tree composition theorem (T3)**: `ZoneTree.lean` — `ClosedTree s0 tc Root`
+  (leaves (K)/(N) `checkCaseI` with node cores + NO-zones, (C), (D) landing, (D′) atlas;
+  `cover` = the tree's complete disjunction, the producer's obligation) and `tree_kill`
+  (Lemma P-TREE (a)+(b) / Lemma SEAM: every packing at `m ∈ [ŝ − T, ŝ]` whose dilate
+  satisfies the root has `m ≥ ŝ`, and at `ŝ` is a `D4`-image of `ẑ`); Step 1
+  `root_of_containsPins` (slack pin cores inside the dilated pins under the drift budget);
+  the rule library `zone_dichotomy`, `grid_cover` (CI-1), `slot_outside_zone` (CI-3),
+  `pd_convex`/`pd_rule` (Lemma PD), `d4_dil_comm` (D.S6's mod-`G` clause).
+  `Composition.lean`: `ClassKilledAt`, `s_eleven_ge_of_classes` / `s_eleven_unique_of_classes`
+  (the consumers from the per-class obligation alone — `stratum_kill`, `trump_residual`
+  and `basin` are not consumed on this route), `classKilledAt_of_tree`,
+  `classKilledAt_of_slabs`, and the `stratum_kill` re-split (`s_eleven_ge_of_split`).
+* **Window composition for the scoreboard rows (T4)**: `WindowRows.lean` — `SlabKill` with
+  the three constructors `slabKill_of_param` (V.PARAM row ⟹ its whole window),
+  `slabKill_of_case` (slack-core grid, `(s″/lo − 1)·A < ρ`), `slabKill_of_M1`;
+  `windowKilled_of_slab` (⟹ the `stratum_kill` instance via `class_kill`); `k5_06_slab`
+  instantiated on the replayed pilot (margin `ρ = 10⁻⁹`, cores at slots, `norm_num`).
+  Axioms: all new soundness theorems `propext, Classical.choice, Quot.sound` (+ the
+  `checkA22` evaluation where `ẑ` is consumed); see `attempts/A86-lean-wave7/notes/findings.md`.
+**Built by A93 (2026-09-04, Lean wave 8 — the k0 chain of `docs/proofs/k0_blocked_side.md`):**
+* **Lemma CW / B-YES / Theorem S(δ) are Lean** (`Crowd.lean`): `cframe`/`cornerBox`/`muC`
+  (A90's `μ_c`, attained, `meets_cornerBox_iff_muC_le`), `scaleC_meets_cornerBox` (B-YES with
+  the pad `(λ−1)·r`, `r ≥ wT/2`), `not_meets_two_corners`, `crowd_sound` (the weight
+  arithmetic of two `checkCaseI` PASSes on one measure), `crowd_cert_kill` (window form);
+  the two file-level clauses are DECIDABLE: `sameMeasure` (one measure) and, in
+  `CrowdZone.lean`, `crowdZones` (run B's NO-families avoid the crowd family at every corner;
+  separating-axis tests + bisection) with `crowdZones_sound`; `crowdKill_of_files` packages
+  4 Bool facts + rational side conditions into `CrowdKill δ m_lo s0`.  **Lemma CW-S**
+  (A94's incidence form: `1 + r_max` runs, pin cores, budget `11 + 2 m_u e`) is
+  `crowd_sound_incidence`.  Replay generator `lean/gen_crowd_lean.py` (isolated
+  `Corpus/Crowd/Check_<tag>.lean`); no crowd certificate exists yet (A92 chore parked).
+* **Lemma SLIDE and K0-FREE are Lean** (`Slide.lean`): `slide_crowd` — under K0-O1
+  (`Composition.K0O1`, k1_00's monotone slab kill on `[3.82, ŝ)`) EVERY packing at side `m < ŝ`
+  has two distinct squares at depth `≥ ŝ − m` at every corner; proved by translating the whole
+  packing away from the corner (no clusters, no Lemma CLUSTER — see the A93 findings);
+  `k0free_kill` = `teleport_packing` + K0-O1.  `PinnedSlide.lean` (A94's slot version):
+  Lemma SWEEP (`sweep_core`, `sweep_packing`) and the cluster-free Lemma MOVE
+  `pinnedShift_packing` (pin blocks translate with their anchoring walls, non-pins away from
+  the corner: a packing containing the same pins at side `m + τ` for every `τ ≥ 0`).
+* **Theorem CEIL is Lean** (`Ceil.lean`): `ceil` / `ceil_packing` — `max(μ_BL A, μ_BL B) ≥ 1/√2`
+  for interior-disjoint unit squares in `[0,s]²`; `exists_sep_line` (Hahn–Banach), the Wedge
+  Lemma `wedge_x`/`wedge_y` with its concavity step as the factorisation `wedge_core`.
+* **Theorem N is Lean** (`Composition.lean`): `slabKill_of_tree` (K0-O1's consumer),
+  `theoremN_slab`, `chain_cover`, `no_packing_of_chain`, **`s_eleven_ge_of_chain`**
+  (`s(11) ≥ ŝ − δ_K` from K0-O1 + a chain of crowd certificates — class-blind),
+  `classKilledAt_below_of_chain`, the named residue `ShellKill i δ` (RES-N), and
+  `classKilledAt_of_chain` (the k0_00 instance of `stratum_kill` — and every class's — on
+  the whole window).  Roster note in `TopLevel.lean`.  Axioms: all `propext,
+  Classical.choice, Quot.sound` (`scratch/AxiomsA93.lean`).
 Each axiom's docstring records the lab artefact meant to discharge it and its status; the
 ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, updated by
 `attempts/A63-hole-closure/notes/findings.md` (bridge lemmas now in `docs/proofs/`).
@@ -178,6 +249,10 @@ ambiguities the file forced are `attempts/A62-trust-ledger/notes/findings.md`, u
 | `PackingCert.S11.stratify`, `unique_transfer` | `PackingCertMathlib/TopLevel.lean` | **were axioms**: from census exhaustiveness (`exists_stratum`) | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.S11.unique_via_chain`, `s_eleven_unique_of_chain` | `PackingCertMathlib/UniqueChain.lean` | **the uniqueness clause via CC-2 chain + Theorem U** (H10-stuck, Theorem U as hypotheses) | `+ basin, trump_residual, zhat` |
 | `PackingCert.S11.d4_cover_zone`, `d4_wlog` | `PackingCertMathlib/D4Wlog.lean` | **the D4 reduction (D.D4)** at every side, conditional on root occupancy | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.crowd_sound`, `crowd_cert_kill`, `crowd_sound_incidence`, `crowdKill_of_files` | `PackingCertMathlib/Crowd.lean`, `CrowdZone.lean` | **Lemma CW / CW-S (K0.CW)**: two (resp. `1 + r_max`) `checkCaseI` PASSes on one measure + `sameMeasure` + `crowdZones` ⇒ no packing at any side of `[m_lo, s0)` has two squares at depth `≥ δ` at every corner | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.slide_crowd`, `k0free_kill`, `pinnedShift_packing` | `PackingCertMathlib/Slide.lean`, `PinnedSlide.lean` | **Lemma SLIDE / K0-FREE (K0.SLIDE, K0.FREE)** modulo K0-O1 as a hypothesis; Lemma SWEEP + the cluster-free Lemma MOVE | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.ceil`, `ceil_packing` | `PackingCertMathlib/Ceil.lean` | **Theorem CEIL (K0.CEIL)**: `max(μ_BL A, μ_BL B) ≥ 1/√2` | `propext, Classical.choice, Quot.sound` |
+| `PackingCert.S11.s_eleven_ge_of_chain`, `classKilledAt_of_chain` | `PackingCertMathlib/Composition.lean` | **Theorem N**: K0-O1 + a chain of crowd certificates ⇒ `s(11) ≥ ŝ − δ_K`; + `ShellKill` ⇒ `ClassKilledAt` on the window | `propext, Classical.choice, Quot.sound` |
 | `PackingCert.Cidl.cidl_identity`, `octic_zero_of_generators`; `PackingCert.S11.shatA22_eq_shat` | `PackingCertMathlib/Cidl{Check,Bridge}.lean`, `TopLevel.lean` | **CIDL-LEAN**: the (c-idl) identity + sign gates replayed; `ŝ_A22 = ŝ` a theorem from `a22_exact_structure` | + the three CIDL `native_decide` axioms (+ `a22_exact_structure, shatA22, zhat`) |
 
 `Band.lean` proves the A26.1 family with an *arbitrary* separating direction, hence band width

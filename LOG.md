@@ -2452,3 +2452,68 @@ affordable cost estimate for closing 3.84.
 - Discipline: 2 processes, BLAS pinned, headroom 12 GB at launch; A57/A60/A61/A86 untouched; A85/A87/A88/A90 imported only; frozen verifiers
   untouched; no certificate emitted. Files: docs/proofs/frame_census.md, attempts/A91-frame-census/{code,results,notes,logs}, lean/depgraph.json
   (C.K4TIER note, chip released) + svg, REGISTRY row.
+
+## 2026-09-03 A92-blocked-side (Fable lead + 1 Opus chore, <= 2 processes) -- running (theory delivered; crowd certificate chore parked on the 6144 MB commit gate)
+- T [docs/proofs/k0_blocked_side.md]: the PI target "K0-BLOCKED => side >= s-hat" split by DEPTH. (S) substantive (every corner's 2nd intruder depth >= delta):
+  the brief's route-3 object (a root K-leaf with 8 depth-capable cores) does NOT exist - the depth-delta pose set has EMPTY core for delta < 0.134 (two
+  60-deg wall-hanging squares share no point); replaced by the CROWD-WEIGHTED certificate, Lemma CW: mu >= 1 on every admissible square, mu >= 1+e on
+  every square meeting the widened corner box [0,a_w]^2, total < 11+8e, verified by TWO runs of the frozen verify_case.py on ONE measure (run A n = 11+8e
+  plain; run B weights/(1+e) with the exact complement of the crowd family as NO-families); Lemma B-YES transfers the hypothesis to s0 with pad
+  (lambda-1)(a + 1/sqrt2), a_w < 1 iff delta > 0.4403 (s0 - m_lo). Boundary of (S) where it passes: s0 = 3.877084 (window [3.82, s0)).
+  Theorem CEIL [T] (Wedge Lemma: a unit square in {y >= 0, y <= (x-x0) tan a} has min x >= x0 + cos^2 a / sin a; separating line): two disjoint unit
+  squares in a quadrant have max(mu_A, mu_B) >= 1/(cos a + sin a) >= 1/sqrt2 => per-corner min(d1,d2) <= 1 - 1/sqrt2 = 0.292893, equality only at the
+  diagonal 45-deg pair (deepfront87's conjectured ceiling PROVED; d2front87's certified 0.292893 at 4.357 is the maximum possible D2 at any side).
+  Routes 1-2 CLOSED (negative): pair charge <= 1 at every delta (the diagonal pair strands exactly the triangle x+y <= sqrt2, area 1, no third square),
+  4 x 1 < E(s-hat) = 4.0318; wall strips have the same ceiling (pinwheel fits eight crowd squares).
+- T (N): Lemma SLIDE [forall-packings, no selection, modulo K0-O1 = k1_00's tree, the dependency K0-FREE already has]: slide the shallow intruders'
+  diagonal retreat clusters (depth rate exactly 1/sqrt2 per 1/sqrt2 of side; Lemma CLUSTER affine feasibility with the container growing at the far
+  walls; clusters only enlarge, <= 10 times), then teleport (K0-FREE) => a k1 packing at side m + sum(depths); (k1-a) kills it below s-hat. Hence every
+  K0-BLOCKED packing at side m < s-hat has d2(c) >= s-hat - m at EVERY corner (nicks are bounded below by the distance to s-hat). Theorem N: a crowd
+  certificate C(delta, m_lo) + SLIDE + K0-FREE kill every side in [m_lo, s-hat - delta]; a chain of certificates converges with ratio 0.4403 < 1 and
+  gives s(11) >= s-hat - delta_inf, delta_inf = the depth where the crowd LP stops passing. EXACT RESIDUE RES-N(delta_inf): K0-BLOCKED packings at side
+  m in (s-hat - delta_inf, s-hat) with some corner's 2nd intruder at depth in [s-hat - m, delta_inf) (+ nicked non-images at s-hat for uniqueness);
+  inside it NOCRIT-SEL anchoring, JAM-0 (axis-aligned deep partner >= sqrt(s-hat - m) off the slot), K0-REUSE (no square containing K_p) hold and none
+  empties it. Canaries: Trump K0-FREE (untouched; TL crowd satisfies CEIL), d2front87's 4.03-4.36 packings and s0115 outside every window (PASS).
+- M [chore, attempts/A92-blocked-side/notes/crowd92_report.md]: engine copied from A89 (verify_case.py byte-identical, sha256 521cb01f...), one change
+  in lpbox92.py (per-pose rhs, two-pass row oracle), certify92 two-run emitter; families built EXACTLY for delta = 0.3/0.2/0.1/0.05 (G outer cover
+  145-151 boxes/corner, overshoot 7.6-11 %, E complement 413-425 boxes certified disjoint from F at all corners, D4 defect 2e-16); CANARY PASS at all four
+  a_w (no image has 2 placements below a_w at every corner). LP runs: PARKED on the commit gate (free commit 2.9-3.6 GB, holders = PI processes);
+  results to be appended here when they land.
+- Discipline: 1 driver process + <= 1 LP/certify subprocess, BLAS pinned, gate 6144 MB; A57/A60/A61/A86 untouched; frozen verifiers untouched;
+  writes: docs/proofs/k0_blocked_side.md, attempts/A92-blocked-side/{code,results,notes,logs,certs}, lean/depgraph.json+svg (K0.RES4 chip -> A92,
+  nodes K0.CEIL/K0.CROWD/K0.SLIDE), REGISTRY row.
+
+## 2026-09-04 A93-lean-wave8 (Fable lead, Lean only) -- done-success (T1, T2, T3, T4 all Lean theorems; replays pending the chore)
+- T1 [lean/PackingCertMathlib/PackingCertMathlib/Crowd.lean, CrowdZone.lean]: Lemma B-YES (scaleC_meets_cornerBox, pad (lambda-1) r for r >= wT/2),
+  the distinctness step (not_meets_two_corners), Lemma CW (crowd_sound: 8 crowd members priced >= (1+e) wd by run B, 3 by run A, total < n wd),
+  Theorem S(delta) window form (crowd_cert_kill), mu_c attained + "depth >= delta <=> closed meeting" (muC, meets_cornerBox_iff_muC_le). The
+  two clauses of Lemma CW that are NOT in verify_case.py are DECIDABLE checkers with soundness: sameMeasure (run B = run A / (1+e), exact
+  integers) and crowdZones (run B's NO-families miss the crowd family [0,a_w]^2 at every corner: eight separating-axis tests with the
+  ratCosSin/rmul4 enclosures, bisection). crowdKill_of_files: 2 x checkCaseI + sameMeasure + crowdZones + rational side conditions =>
+  CrowdKill delta m_lo s0. A94 correction absorbed: crowd_sound_incidence = Lemma CW-S (1 + r_max runs, pin cores, budget 11 + 2 m_u e,
+  incidence double count). Generator lean/gen_crowd_lean.py (isolated Corpus/Crowd/Check_<tag>.lean); smoke tests scratch/A93CheckerTest.lean.
+  NO crowd certificate exists yet (A92 chore parked on the commit gate) => no replay module.
+- T2 [Slide.lean]: Lemma SLIDE is a THEOREM modulo K0-O1 (K0O1 := forall c, SlabKill {corner slot c} 3.82 s-hat): slide_crowd - EVERY packing
+  at side m in [3.82, s-hat) has, at every corner, two distinct squares meeting the closed box [0, 1-(s-hat-m)]^2. PROOF SIMPLIFICATION: no
+  retreat clusters, no Lemma CLUSTER/Fact A, no enlargement rounds - translate the WHOLE packing away from the corner with the container
+  growing at the far walls (a rigid motion is a packing; mu_c rises by exactly tau); attained minima give tau < s-hat - m; K0-FREE
+  (k0free_kill = teleport_packing + K0-O1) closes. Finding: A92's sequential Step 2 only proves sum_{i>=1} d_i >= s-hat - m; the stated
+  d_2 form needs the simultaneous motion (A94 sect 3.4 says the same) - the Lean statement is the d_2 form. A94 addendum [PinnedSlide.lean]:
+  Lemma SWEEP (sweep_core: floor argument on a Young down-set) and the cluster-free Lemma MOVE (pinnedShift_packing: pin blocks translate
+  with their anchoring walls, non-pins away from the corner; packing + ContainsPins at side m+tau for every tau >= 0). slot_slide (the
+  teleport composition with the clip census / Lemma CONT) = named obligation.
+- T3 [Ceil.lean]: Theorem CEIL is a THEOREM: ceil / ceil_packing, max(mu_BL A, mu_BL B) >= 1/sqrt2 for interior-disjoint unit squares in
+  [0,s]^2; separating line from geometric_hahn_banach_open on the open convex interiors + interior combos; corner-cut case (mu >= 0.853);
+  Wedge Lemma wedge_x/wedge_y with the concavity step as ONE factorisation (aS)^2 - (a^2-(a-b)C)^2 = (a-C)((a^2+(a-b)^2)C + a b^2).
+- T4 [Composition.lean, TopLevel.lean roster note]: K0O1, slabKill_of_tree (K0-O1 from a closed tree), theoremN_slab, chain_cover,
+  no_packing_of_chain, s_eleven_ge_of_chain (s(11) >= s-hat - delta_K from K0-O1 + a chain - CLASS-BLIND), classKilledAt_below_of_chain,
+  ShellKill i delta (RES-N as the named hypothesis), classKilledAt_of_chain (ClassKilledAt i m on the whole window for EVERY class).
+  Roster: stratum_kill -> K0-O1 + chain replays + ShellKill per class on the shell (s-hat - delta_K, s-hat] (trees/slabs restricted to the
+  shell; k0_00 = RES-N open); trump_residual -> A60's tree on the shell only. T5 cost law: 2 x checkCaseI per certificate (0.4-0.6 ms/box),
+  sameMeasure < 1 s, crowdZones <~ 1 min.
+- Axioms (scratch/AxiomsA93.lean): propext/Classical.choice/Quot.sound only for every new theorem. Build: default target green (one lake
+  build at a time, isolated native_decide modules cache-hit). Git: A86's Lean wave is UNCOMMITTED; A93 sits on top - commit together.
+- Discipline: no compute campaigns touched (A57/A60/A61/A92 untouched); depgraph note-only on K0.CW/K0.SLIDE/K0.CEIL/K0.RESN/K0.FREE (+ V.CASE
+  consumer note), chips stay with A92; writes: lean/PackingCertMathlib/{Crowd,CrowdZone,Slide,PinnedSlide,Ceil,Composition,TopLevel}.lean,
+  PackingCertMathlib.lean, scratch/{AxiomsA93,A93CheckerTest,A93Probe,A93Probe2}.lean, lean/gen_crowd_lean.py, lean/README.md,
+  lean/depgraph.json+svg, attempts/A93-lean-wave8/code/depgraph_note93.py, REGISTRY row.
