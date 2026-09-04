@@ -174,3 +174,17 @@ At sigma = 4.00 exactly D = 1 is only an INFIMUM, not attained: four corner slot
 * Files: `results/deepfront87.{json,jsonl}`, `.d2.json`, `.corpus.json`, `.floors.json`, `.pilot.json`; log `logs/deepfront87.run.log`.
 * Selftest: depth_table vs the exact interval depth of `depthdist87` on Trump, 44 rows, max |diff| 3.3e-16; analytic vs finite-difference gradients, max rel err 3.2e-9; the smooth objective verified to be an UPPER bound on `f_min_max` (0 violations); the 8-candidate set verified complete against a 401-point-per-edge brute-force boundary scan.
 
+
+## Coordinator note (2026-09-03, after PI review)
+
+The "PI conjecture is false as stated" verdict above is a statement about PACKINGS, not about the
+proof residue. The maximisers found are the near-slot gadget (square parked eps off its slot, partner
+dipping a vertex into the sliver). That gadget is not a Psi-minimal sigma-minimiser: the partner can
+rotate back to flush and lift out of the slot at constant side (A89 near-slot canary), and at
+sigma ~ 4.03 the near-slot square has slack to retreat, so NOCRIT-SEL's anchoring fails and the
+selection discards it. The measurement asked the wrong set: the objective omitted the selection /
+anchoring condition. Four eps-off corner squares are the ghost of corners4 (still open), covered by
+Lemma PD's pin slack once the class is killed and drained into k >= 1 along flats (A87 plateau ends).
+The conjecture in the residue-relevant form is: at a Psi-minimal K0-BLOCKED minimiser at side <= s-hat,
+some corner has its SECOND intruder shallower than delta. Re-measured with the anchoring/retreat filter
+in d2front87.
