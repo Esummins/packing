@@ -1,0 +1,131 @@
+====================================================================================================
+A92 pin1crowd92 start; wall 100 min; lp_time 40 s; s0 = 969271/250000; free commit 8066 MB
+A85 census: 644 sound BL reach boxes, 7044 realisable surviving pairs
+  fam delta=0.1 reused from pin1crowd92.fam_d0.1.json
+  CANARY delta=0.1 a_w=46201/50000 (0.924020): per-image [BL|BR TL TR] g0[1|121];g1[1|112];g2[2|111];g3[1|211];g4[1|211];g5[1|112];g6[2|111];g7[1|121] -> realising=NONE
+  fam delta=0.1: G/corner=151, E_3 = 576 (E_4 425 + dilated BL 151), all exactly disjoint from F_{BR,TL,TR}
+  fam delta=0.05 reused from pin1crowd92.fam_d0.05.json
+  CANARY delta=0.05 a_w=97477/100000 (0.974770): per-image [BL|BR TL TR] g0[1|121];g1[1|112];g2[2|111];g3[1|211];g4[1|211];g5[1|112];g6[2|111];g7[1|121] -> realising=NONE
+  fam delta=0.05: G/corner=148, E_3 = 567 (E_4 419 + dilated BL 148), all exactly disjoint from F_{BR,TL,TR}
+  canary warm start from A85 s2_near_046_619.json: 98 cols, 17577 rows
+  CANARY plain LP (46,619) budget 9: tau=8.000000000 (A85 8.000000000, delta 3.18e-10) conv=False minmass=1.0000 rows=11689 362s
+  CANARY PASS (|dtau| <= 1e-4)
+sampled 20 nodes: mid(55,601,d2=0.065), mid(59,486,d2=0.065), mid(12,314,d2=0.065), mid(100,286,d2=0.094), mid(231,369,d2=0.114), mid(372,631,d2=0.086), mid(323,512,d2=0.065), mid(95,314,d2=0.065), mid(140,277,d2=0.094), mid(146,513,d2=0.136), hi(285,384,d2=0.219), hi(50,273,d2=0.204), hi(84,275,d2=0.233), hi(94,601,d2=0.225), hi(84,274,d2=0.235), lo(313,354,d2=0.028), lo(366,481,d2=0.028), lo(176,312,d2=0.028), lo(313,383,d2=0.028), lo(487,619,d2=0.028)
+  warm pool: 1915 columns from 33 files (A85 lp85.warm85 replica; node_000.json, node_001.json, node_002.json, node_003.json ...)
+[ 1/20] p1c_mid_055_601 d2=0.0654  PLAIN tau=8.20161 thr=9 LP-PASS conv=False mm=0.4418 48s
+        d0.1_e1o8  tau=8.69408 thr=9.7500 LP-PASS conv=False mm=0.1981 44s
+        d0.1_e1o4  tau=9.75000 thr=10.5000 LP-PASS conv=False mm=0.5501 41s
+        d0.05_e1o8 tau=8.87500 thr=9.7500 LP-PASS conv=False mm=0.2573 43s
+        d0.05_e1o4 tau=9.74163 thr=10.5000 LP-PASS conv=False mm=0.4000 43s
+[ 2/20] p1c_mid_059_486 d2=0.0654  PLAIN tau=9.00000 thr=9 refused conv=False mm=0.5376 49s
+        d0.1_e1o8  tau=9.75000 thr=9.7500 refused conv=False mm=0.4085 52s
+        d0.1_e1o4  tau=10.50000 thr=10.5000 LP-PASS conv=False mm=0.4097 55s
+        d0.05_e1o8 tau=9.59375 thr=9.7500 LP-PASS conv=False mm=0.4887 44s
+        d0.05_e1o4 tau=10.40000 thr=10.5000 LP-PASS conv=False mm=0.3811 49s
+[ 3/20] p1c_mid_012_314 d2=0.0654  PLAIN tau=8.38095 thr=9 LP-PASS conv=False mm=0.3498 43s
+        d0.1_e1o8  tau=9.06074 thr=9.7500 LP-PASS conv=False mm=0.4127 54s
+        d0.1_e1o4  tau=9.84840 thr=10.5000 LP-PASS conv=False mm=0.4079 48s
+        d0.05_e1o8 tau=9.09923 thr=9.7500 LP-PASS conv=False mm=0.4281 46s
+        d0.05_e1o4 tau=9.99373 thr=10.5000 LP-PASS conv=False mm=0.3060 45s
+[ 4/20] p1c_mid_100_286 d2=0.0944  PLAIN tau=8.30000 thr=9 LP-PASS conv=False mm=0.6154 57s
+        d0.1_e1o8  tau=9.01017 thr=9.7500 LP-PASS conv=False mm=0.1417 44s
+        d0.1_e1o4  tau=9.74057 thr=10.5000 LP-PASS conv=False mm=0.2019 43s
+        d0.05_e1o8 tau=9.02500 thr=9.7500 LP-PASS conv=False mm=0.4167 50s
+        d0.05_e1o4 tau=9.90385 thr=10.5000 LP-PASS conv=False mm=0.5729 43s
+[ 5/20] p1c_mid_231_369 d2=0.1143  PLAIN tau=8.24289 thr=9 LP-PASS conv=False mm=0.6143 54s
+        d0.1_e1o8  tau=8.93180 thr=9.7500 LP-PASS conv=False mm=0.4460 47s
+        d0.1_e1o4  tau=9.76049 thr=10.5000 LP-PASS conv=False mm=0.3808 47s
+        d0.05_e1o8 tau=9.04001 thr=9.7500 LP-PASS conv=False mm=0.4594 44s
+        d0.05_e1o4 tau=9.90981 thr=10.5000 LP-PASS conv=False mm=0.4708 42s
+[ 6/20] p1c_mid_372_631 d2=0.0860  PLAIN tau=9.12482 thr=9 refused conv=False mm=0.2042 50s
+        d0.1_e1o8  tau=9.75000 thr=9.7500 refused conv=False mm=0.5360 43s
+        d0.1_e1o4  tau=10.53117 thr=10.5000 refused conv=False mm=0.3535 51s
+        d0.05_e1o8 tau=9.92325 thr=9.7500 refused conv=False mm=0.4298 49s
+        d0.05_e1o4 tau=10.75000 thr=10.5000 refused conv=False mm=0.2892 46s
+[ 7/20] p1c_mid_323_512 d2=0.0654  PLAIN tau=9.23216 thr=9 refused conv=False mm=0.3093 51s
+        d0.1_e1o8  tau=9.66667 thr=9.7500 LP-PASS conv=False mm=0.5171 46s
+        d0.1_e1o4  tau=10.58621 thr=10.5000 refused conv=False mm=0.4789 42s
+        d0.05_e1o8 tau=9.79893 thr=9.7500 refused conv=False mm=0.4227 44s
+        d0.05_e1o4 tau=10.86276 thr=10.5000 refused conv=False mm=0.4438 47s
+[ 8/20] p1c_mid_095_314 d2=0.0654  PLAIN tau=8.71875 thr=9 LP-PASS conv=False mm=0.4028 44s
+        d0.1_e1o8  tau=9.13068 thr=9.7500 LP-PASS conv=False mm=0.4586 49s
+        d0.1_e1o4  tau=9.92405 thr=10.5000 LP-PASS conv=False mm=0.3457 49s
+        d0.05_e1o8 tau=9.34204 thr=9.7500 LP-PASS conv=False mm=0.5074 44s
+        d0.05_e1o4 tau=10.10714 thr=10.5000 LP-PASS conv=False mm=0.3750 45s
+[ 9/20] p1c_mid_140_277 d2=0.0944  PLAIN tau=8.00000 thr=9 LP-PASS conv=False mm=0.2857 45s
+        d0.1_e1o8  tau=8.78934 thr=9.7500 LP-PASS conv=False mm=0.4194 45s
+        d0.1_e1o4  tau=9.50000 thr=10.5000 LP-PASS conv=False mm=0.4498 43s
+        d0.05_e1o8 tau=9.10000 thr=9.7500 LP-PASS conv=False mm=0.2601 44s
+        d0.05_e1o4 tau=10.01398 thr=10.5000 LP-PASS conv=False mm=0.0946 49s
+[10/20] p1c_mid_146_513 d2=0.1355  PLAIN tau=8.71205 thr=9 LP-PASS conv=False mm=0.5350 50s
+        d0.1_e1o8  tau=9.07006 thr=9.7500 LP-PASS conv=False mm=0.4767 44s
+        d0.1_e1o4  tau=10.07143 thr=10.5000 LP-PASS conv=False mm=0.2884 52s
+        d0.05_e1o8 tau=9.40996 thr=9.7500 LP-PASS conv=False mm=0.2438 44s
+        d0.05_e1o4 tau=10.20332 thr=10.5000 LP-PASS conv=False mm=0.2578 43s
+[11/20] p1c_hi_285_384 d2=0.2187  PLAIN tau=8.10117 thr=9 LP-PASS conv=False mm=0.6190 44s
+        d0.1_e1o8  tau=8.82585 thr=9.7500 LP-PASS conv=False mm=0.5691 56s
+        d0.1_e1o4  tau=9.52225 thr=10.5000 LP-PASS conv=False mm=0.5508 44s
+        d0.05_e1o8 tau=8.85807 thr=9.7500 LP-PASS conv=False mm=0.1644 45s
+        d0.05_e1o4 tau=9.75000 thr=10.5000 LP-PASS conv=False mm=0.2500 53s
+  commit 5905 MB (need > 6144): sleep 60 s (p1c_hi_050_273)
+  commit 5166 MB (need > 6144): sleep 60 s (p1c_hi_050_273)
+  commit 4661 MB (need > 6144): sleep 60 s (p1c_hi_050_273)
+  commit 4960 MB (need > 6144): sleep 60 s (p1c_hi_050_273)
+  commit 5129 MB (need > 6144): sleep 60 s (p1c_hi_050_273)
+  commit OK 7186 MB after 5 x 60 s (p1c_hi_050_273)
+[12/20] p1c_hi_050_273 d2=0.2043  PLAIN tau=8.79032 thr=9 LP-PASS conv=False mm=0.5000 50s
+  commit 3142 MB (need > 6144): sleep 60 s (p1c_hi_050_273_d0.1_e1o8)
+  commit 3180 MB (need > 6144): sleep 60 s (p1c_hi_050_273_d0.1_e1o8)
+  commit 2549 MB (need > 6144): sleep 60 s (p1c_hi_050_273_d0.1_e1o8)
+  commit 2424 MB (need > 6144): sleep 60 s (p1c_hi_050_273_d0.1_e1o8)
+  commit 1885 MB (need > 6144): sleep 60 s (p1c_hi_050_273_d0.1_e1o8)
+  commit 2356 MB (need > 6144): sleep 60 s (p1c_hi_050_273_d0.1_e1o8)
+  commit 1627 MB (need > 6144): sleep 60 s (p1c_hi_050_273_d0.1_e1o8)
+  commit OK 7453 MB after 7 x 60 s (p1c_hi_050_273_d0.1_e1o8)
+        d0.1_e1o8  tau=9.24790 thr=9.7500 LP-PASS conv=False mm=0.3074 44s
+        d0.1_e1o4  tau=10.16667 thr=10.5000 LP-PASS conv=False mm=0.4009 47s
+        d0.05_e1o8 tau=9.78750 thr=9.7500 refused conv=False mm=0.4074 43s
+        d0.05_e1o4 tau=10.24354 thr=10.5000 LP-PASS conv=False mm=0.5329 47s
+[13/20] p1c_hi_084_275 d2=0.2333  PLAIN tau=8.56838 thr=9 LP-PASS conv=False mm=0.3590 47s
+        d0.1_e1o8  tau=9.25483 thr=9.7500 LP-PASS conv=False mm=0.1002 50s
+        d0.1_e1o4  tau=10.03479 thr=10.5000 LP-PASS conv=False mm=0.4165 47s
+        d0.05_e1o8 tau=9.31944 thr=9.7500 LP-PASS conv=False mm=0.3623 51s
+        d0.05_e1o4 tau=9.93478 thr=10.5000 LP-PASS conv=False mm=0.2286 46s
+[14/20] p1c_hi_094_601 d2=0.2251  PLAIN tau=8.50000 thr=9 LP-PASS conv=False mm=0.5429 50s
+        d0.1_e1o8  tau=9.03908 thr=9.7500 LP-PASS conv=False mm=0.2899 53s
+        d0.1_e1o4  tau=9.64103 thr=10.5000 LP-PASS conv=False mm=0.4612 54s
+        d0.05_e1o8 tau=8.94398 thr=9.7500 LP-PASS conv=False mm=0.3919 47s
+        d0.05_e1o4 tau=10.05186 thr=10.5000 LP-PASS conv=False mm=0.4072 51s
+[15/20] p1c_hi_084_274 d2=0.2349  PLAIN tau=8.31089 thr=9 LP-PASS conv=False mm=0.4167 50s
+        d0.1_e1o8  tau=8.80769 thr=9.7500 LP-PASS conv=False mm=0.3388 42s
+        d0.1_e1o4  tau=9.88040 thr=10.5000 LP-PASS conv=False mm=0.4193 46s
+        d0.05_e1o8 tau=9.50000 thr=9.7500 LP-PASS conv=False mm=0.2103 51s
+        d0.05_e1o4 tau=9.75000 thr=10.5000 LP-PASS conv=False mm=0.2844 46s
+[16/20] p1c_lo_313_354 d2=0.0278  PLAIN tau=8.73057 thr=9 LP-PASS conv=False mm=0.3348 51s
+        d0.1_e1o8  tau=9.33414 thr=9.7500 LP-PASS conv=False mm=0.2697 42s
+        d0.1_e1o4  tau=10.13743 thr=10.5000 LP-PASS conv=False mm=0.3454 52s
+        d0.05_e1o8 tau=9.35213 thr=9.7500 LP-PASS conv=False mm=0.3518 47s
+        d0.05_e1o4 tau=10.20093 thr=10.5000 LP-PASS conv=False mm=0.3574 49s
+[17/20] p1c_lo_366_481 d2=0.0278  PLAIN tau=9.00000 thr=9 LP-PASS conv=False mm=0.5688 42s
+        d0.1_e1o8  tau=9.54237 thr=9.7500 LP-PASS conv=False mm=0.4797 42s
+        d0.1_e1o4  tau=10.39406 thr=10.5000 LP-PASS conv=False mm=0.3494 50s
+        d0.05_e1o8 tau=9.87500 thr=9.7500 refused conv=False mm=0.5390 52s
+        d0.05_e1o4 tau=10.75000 thr=10.5000 refused conv=False mm=0.4816 45s
+[18/20] p1c_lo_176_312 d2=0.0278  PLAIN tau=9.00000 thr=9 LP-PASS conv=False mm=0.2735 45s
+        d0.1_e1o8  tau=9.75000 thr=9.7500 LP-PASS conv=False mm=0.5201 44s
+        d0.1_e1o4  tau=10.35156 thr=10.5000 LP-PASS conv=False mm=0.4072 46s
+        d0.05_e1o8 tau=9.75000 thr=9.7500 LP-PASS conv=False mm=0.4944 47s
+        d0.05_e1o4 tau=10.71000 thr=10.5000 refused conv=False mm=0.2592 41s
+[19/20] p1c_lo_313_383 d2=0.0278  PLAIN tau=9.30233 thr=9 refused conv=False mm=0.5362 51s
+        d0.1_e1o8  tau=9.79215 thr=9.7500 refused conv=False mm=0.3639 50s
+        d0.1_e1o4  tau=10.42017 thr=10.5000 LP-PASS conv=False mm=0.4118 41s
+        d0.05_e1o8 tau=9.87500 thr=9.7500 refused conv=False mm=0.1550 52s
+        d0.05_e1o4 tau=11.09127 thr=10.5000 refused conv=False mm=0.1434 47s
+[20/20] p1c_lo_487_619 d2=0.0278  PLAIN tau=8.39456 thr=9 LP-PASS conv=False mm=0.3114 46s
+        d0.1_e1o8  tau=8.86549 thr=9.7500 LP-PASS conv=False mm=0.2788 45s
+        d0.1_e1o4  tau=9.64354 thr=10.5000 LP-PASS conv=False mm=0.1095 48s
+        d0.05_e1o8 tau=9.18750 thr=9.7500 LP-PASS conv=False mm=0.3636 46s
+        d0.05_e1o4 tau=9.79310 thr=10.5000 LP-PASS conv=False mm=0.1667 46s
+certification candidates: 65 crowd LP-PASS (5 of them where the plain LP refuses)
+WALL: no time for certification of p1c_mid_059_486_d0.05_e1o8
+DONE: 20 nodes, 0 certification attempts
