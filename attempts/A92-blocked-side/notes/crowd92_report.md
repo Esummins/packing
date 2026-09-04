@@ -112,17 +112,126 @@ PASS criterion: tau < n = 11 + 8e; eta = tau - n.
 
 ## 5. Phase 1 — certification (two frozen-verifier runs per node)
 
-`certify92.py`, depth 56, jobs 1, 2 witness-feedback rounds (witnesses of BOTH runs fed back into
-the same crowd-weighted re-solve), auto scale capped at 1.4, A85 eps_geo 0.002 / 0.004 repair on a
-FAIL. `<tag>.PASS` is written only if BOTH runs pass.
+`certify92.py`, depth 56, jobs 1, witness-feedback rounds (witnesses of BOTH runs fed back into the
+same crowd-weighted re-solve), auto scale capped at 1.4, A85 eps_geo 0.002 / 0.004 repair on a FAIL.
+`<tag>.PASS` is written only if BOTH runs pass.
+
+### 5.1 First campaign (02:00–03:47) — both nodes FAILED
 
 | tag | delta | e | n | verdict | run A | run B | cert s | sha256 A (16) | sha256 B (16) |
 |---|---|---|---|---|---|---|---|---|---|
-| S_d0.3_e1 | 0.30 | 1 | 19 | **FAIL(eps_geo 0.004)** | PASS | FAIL | 2678 | `9e240dadbfa24783` | `e1143f244e1356c9` |
-| S_d0.2_e1 | 0.20 | 1 | 19 | **FAIL(eps_geo 0.004)** | FAIL | FAIL | 3409 | `c804d414e1abca54` | `340839c90c0ca09b` |
-| S_d0.3_e1_v2 | 0.30 | 1 | 19 | **PASS** | PASS | PASS | 845 | `257f267bfd9d50a2` | `bd78ce089f7a0978` |
+| S_d0.3_e1 | 0.30 | 1 | 19 | **FAIL(eps_geo 0.004)** | PASS | FAIL (23 holes) | 2678 | `9e240dadbfa24783` | `e1143f244e1356c9` |
+| S_d0.2_e1 | 0.20 | 1 | 19 | **FAIL(eps_geo 0.004)** | FAIL | FAIL (27 holes) | 3409 | `c804d414e1abca54` | `340839c90c0ca09b` |
 
-### 5.1 The E-seam bug found by the first campaign, and the fix (`_v2` tags)
+### 5.2 Root cause of the first campaign — a STALE FAMILY CACHE, not geometry and not the LP
+
+Every run-B hole of the first campaign was a verifier box sitting **exactly on a shared y-edge of
+two complement-cover strips**. Diagnosis on the last d0.3 measure (17 atoms of weight
+`1115353/1000000`), all 23 holes, exact rationals:
+
+| hole centre (cx, cy) | theta | mass_B | LP rhs there | pose inside an E box? | whole BOX inside one E box? |
+|---|---|---|---|---|---|
+| (1.493544, 0.529998) | 0.0002 | 0.5576765 | 1 (not in G) | yes, E[2] `y=[0.47,0.53]` | **no** — box `cy=[0.5299952, 0.5300007]` straddles `y = 0.53` |
+| (1.488998, 1.090002) | 1.1765 | 0.5576765 | 1 (not in G) | yes, E[12] `y=[1.09,1.13]` | **no** — straddles `y = 1.09` |
+| (1.219271, 1.390001) | 37.5880 | 0.5576765 | 1 (not in G) | yes, E[170] `y=[1.39,1.41]` | **no** — straddles `y = 1.39` |
+| (1.207942, 2.447084) | 12.3454 | 0.5576765 | 1 (not in G) | yes, E[36] `y=[1.43,2.447084]` | **no** — straddles `y = s0 - 1.43` |
+
+The mechanism, in one line: `verify_case`'s NO-family exemption is a **per-family containment**
+test, so a box that straddles two ABUTTING families is inside neither and is never exempted — and
+such a seam sits deep inside `E`, where the measure only carries mass 1 (rhs 1, not 1+e), so the
+box can never be covered either. It is a permanent, depth-proof failure: bisecting it forever only
+produces smaller boxes that still straddle the same line. (Section 5.5 is the parallel `_v2`
+chore's independent write-up of the same mechanism, with its before/after box counts.)
+
+The part that is specific to this follow-up: `crowdfam92.build()` already contained the fix (`k2 = min(k + 2, NY)`, "extend the strip ONE grid
+cell further in y", with the comment naming this exact failure mode), **but the four
+`results/fam_d<delta>.json` caches were written at 22:04 and `crowdfam92.py` was edited at 22:19**.
+`crowdfam92.to_json` / `from_json` persist `E` itself, and `crowd92.get_fam` / `certify92` reuse the
+cache unconditionally, so the fix never reached a single certification run. The emitted covers were
+strictly abutting — bin (0, 14.75): `y = [0.45,0.47], [0.47,0.53], [0.53,0.61], [0.61,0.69], ...` —
+instead of overlapping by one cell — `[0.45,0.49], [0.47,0.55], [0.53,0.63], [0.61,0.71], ...`.
+
+**Confirmation, before touching anything else:** the *unchanged* first-campaign d0.3 measure was
+re-verified with only its `hypotheses.nofams` list replaced by the rebuilt cover. Run B went from
+`FAIL: 23 holes, 2477–2796 exempt` to **`PASS`** (`rc = 0`, 307020 boxes, 139524 exempt, max depth
+23, 150 s). Nothing about the LP, the rhs hook, `EPS_GEO`, the scale, the witness feedback or the
+17-atom degeneracy was involved.
+
+### 5.3 What was changed
+
+| file | change | size |
+|---|---|---|
+| `results/fam_d0.3.json`, `results/fam_d0.2.json` | **rebuilt** with the overlapping-strip builder (413 E boxes each, unchanged count, each strip one cell taller in y; `E-sound = True`, i.e. every box still exactly certified disjoint from `F_c(a_w)` at all four corners). Pre-fix copies kept as `*.preoverlap`. | data |
+| `code/crowdfam92.py` | new `FAM_BUILD = 2` cache-format stamp (1 = abutting strips, 2 = one-cell y-overlap), written by `to_json` / `build`, read by `from_json` | +9 lines, 4 hunks |
+| `code/certify92.py` | (a) hard `assert fam["fam_build"] == CF.FAM_BUILD` — a stale cache is now a loud failure, not silent holes; (b) new `--resolve_time` (default 1500) so the `eps_geo` re-solve is no longer capped by the per-round `--time_limit`; (c) `--max_w` default 32 -> 256 so the feedback is not truncated; (d) the accumulated feedback pool is deduped | +19 lines / 4 changed, 4 hunks |
+| `code/crowd92.py` | `get_fam` rebuilds instead of reusing a cache whose `fam_build` is not current | 1 line |
+| `code/fixup92.py` | new follow-up driver (commit gate, one certify92 subprocess, run record, `<tag>.PASS`) | new, 138 lines |
+
+`lpbox92.py`, `caselp92.py`, `verify_case.py`, `lpbox.py`, `caselp.py`, `certify.py` are **unchanged**.
+
+`results/fam_d0.1.json`, `results/fam_d0.05.json` and `results/crowd92_fams.json` were NOT rebuilt
+(their deltas are refused by the LP, so no certification touches them). They are safe to leave:
+they carry no `fam_build` field, so `crowd92.get_fam` now rebuilds them on use and `certify92`
+refuses them outright.
+
+Three premises of the follow-up brief turned out not to hold, and are recorded rather than "fixed":
+
+1. **`certify92` was never doing a cold re-solve.** It already passes
+   `warm=warm_from_result(res)` — the node's stored `atoms_all` + `rows_all`. The only thing it
+   cannot restore is the node's zero-weight columns, which `results/nodes/<tag>.json` never stored.
+   What *was* missing is that the re-solve reused the per-round `--time_limit` (300 s); that is now
+   the separate `--resolve_time`.
+2. **The fed-back rows already carry the crowd rhs.** `extra_rows` are installed through
+   `lpbox92.Model.add_row`, which applies `RHS_MULT`, so a witness whose centre is in the dilated G
+   gets `rhs = alpha*(1+e)` and one outside gets `rhs = alpha`. This is true of run A's witnesses as
+   well as run B's, deliberately: the LP holds ONE measure with ONE rhs function, and giving a
+   run-A witness inside G the weaker rhs 1 would re-open exactly the holes run B hunts.
+3. **The "degenerate" round 2 was not a bug.** `tau = 17.000000, minmass = 1.000000, atoms_nz = 3`
+   is a genuinely CONVERGED crowd LP: 17 unit atoms that pierce every admissible unit square and
+   carry 1+e on all of G, with `tau = 17 < 19`. It is a perfectly good (and very cheap to verify)
+   certificate; it failed only on the stale cover.
+
+### 5.4 Second campaign — certification with the rebuilt cover
+
+| tag | delta | e | n | verdict | run A | run B | cert s | sha256 A (16) | sha256 B (16) |
+|---|---|---|---|---|---|---|---|---|---|
+| S_d0.3_e1_v2 | 0.30 | 1 | 19 | **PASS** | PASS | PASS | 845 | `257f267bfd9d50a2` | `bd78ce089f7a0978` |
+| S_d0.2_e1_fix_epsgeo0.004 | 0.20 | 1 | 19 | **FAIL** (round 0; the round-1 feedback re-solve was cut off by the wall clock) | FAIL, 13 holes / 51 undecided | FAIL, 65 holes / 63 undecided | 3600 | `7224e23318d9d0d5` | `4c7e5345703a1a36` |
+
+**delta = 0.30 CERTIFIES** (`certs/S_d0.3_e1_v2.PASS`; round 1, tau 16.45361, scale 1.1525, run A
+PASS at 252116 boxes, run B PASS at 629840 boxes with 265016 exempt). This is the headline result.
+
+**delta = 0.20 does NOT certify, and the reason is now geometric, not an engineering artifact.**
+With the rebuilt cover the run-B exemption count went from 2477 to **288867** and — checked exactly
+on all 65 holes — **65 of 65 lie inside the dilated G and 0 are seam holes**: they are genuine
+`1+e` mass deficits, not unexemptable boxes. Run A holes as well (13 holes, worst exact mass
+`0.998419`), which pins the arithmetic: certification needs `minmass x scale >= 1`, and
+
+    scale = (n - 0.005)/tau - 0.002 ,   so   minmass >= tau/(19 - 0.005 - 0.002 tau) ~ tau/19 .
+
+At delta 0.2 that means `minmass >= 0.970`. The longest LP run of the chore (warm from the stored
+node, `EPS_GEO = 0.004`, 2926 s, 18273 rows, 4100 orbits) reached only `minmass = 0.9388` at
+`tau = 18.4174`, i.e. `minmass x scale = 0.9663`. The four separate attempts land in a band:
+
+| attempt | LP s | rows | tau | minmass | scale | minmass x scale | run A |
+|---|---|---|---|---|---|---|---|
+| phase-1 node LP (eps_geo 1e-4) | 983 | 13232 | 18.1042 | 0.9005 | 1.0472 | 0.943 | FAIL |
+| eps_geo 0.002, round 1 | 360 | 9692 | 18.3174 | 0.9278 | 1.0350 | 0.960 | FAIL (0 holes, 32 undecided) |
+| eps_geo 0.004, round 1 | 373 | 9901 | 18.4481 | 0.9219 | 1.0276 | 0.947 | FAIL |
+| **this follow-up, eps_geo 0.004** | **2926** | **18273** | **18.4174** | **0.9388** | **1.0294** | **0.966** | FAIL |
+
+Tripling the LP time bought `minmass` 0.922 -> 0.939 while `tau` did not fall (18.45 -> 18.42), so
+the gap to 0.970 is not a compute artifact that a few more minutes closes. Note also that `tau`
+RISES as rows are added (18.104 at 13232 rows -> 18.42 at 18273 rows, still unconverged): the
+section-4 entry "delta 0.20 tau 18.104 < 19 = LP-PASS" is a **non-converged lower bound**, and the
+true crowd-LP optimum at delta 0.2, e = 1 may well exceed n = 19. The honest reading is that
+delta = 0.20 at e = 1 is at or past the edge of the (S) pattern's crowd budget.
+
+By the same interpolation (`tau` = 18.10 at delta 0.2 and 21.05 at delta 0.1, both lower bounds),
+**delta = 0.15 is predicted to land near tau ~ 19.5 > 19 and be refused**, so it was not attempted;
+delta 0.3 remains the largest certified crowd weight.
+
+### 5.5 The same finding, as written up by the parallel `_v2` chore
 
 The first campaign certified run A but never run B. Every run-B hole sat EXACTLY on a shared
 y-edge of two ABUTTING E strips (delta 0.3 witnesses at y = 0.530, 1.090, 1.430, 2.447084), deep
@@ -247,8 +356,10 @@ is the deliverable, an extra LP row is not.
 | run records | `results/crowd92_runs.jsonl` |
 | node LPs (resumable) | `results/nodes/<tag>.json` |
 | certificates | `certs/runA_<tag>.json`, `certs/runB_<tag>.json` (+ `.report.json`, `.witnesses.json`, `<tag>.certify.json`, `<tag>.PASS`) |
-| logs | `logs/crowd92.log`, `logs/crowd92.out`, `logs/fams.out`, `logs/cert_<tag>.log` |
-| terminal marker | `results/CAMPAIGN_DONE` |
+| follow-up driver (rebuilt-cover re-certification) | `code/fixup92.py` |
+| pre-fix (abutting-strip) family caches, kept for the record | `results/fam_d0.3.json.preoverlap`, `results/fam_d0.2.json.preoverlap` (`fam_build` absent = 1) |
+| logs | `logs/crowd92.log`, `logs/crowd92.out`, `logs/fams.out`, `logs/cert_<tag>.log`, `logs/fixup_<tag>.out` |
+| terminal markers | `results/CAMPAIGN_DONE` (first campaign), `results/CAMPAIGN2_DONE` (this follow-up) |
 
 ## 10. Resuming
 

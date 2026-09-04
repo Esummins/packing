@@ -2453,7 +2453,7 @@ affordable cost estimate for closing 3.84.
   untouched; no certificate emitted. Files: docs/proofs/frame_census.md, attempts/A91-frame-census/{code,results,notes,logs}, lean/depgraph.json
   (C.K4TIER note, chip released) + svg, REGISTRY row.
 
-## 2026-09-03/04 A92-blocked-side (Fable lead + 2 Opus chores, <= 2 processes) -- done-success ((S) CERTIFIED at delta = 0.3 with boundary s0; CEIL + SLIDE proved; (N) residue = the slab below s-hat)
+## 2026-09-03/04 A92-blocked-side (Fable lead + 2 Opus chores, <= 2 processes) -- done-success ((S) CERTIFIED at delta = 0.3 with boundary s0, delta = 0.2 open; CEIL + SLIDE proved; (N) residue = the slab below s-hat)
 - T [docs/proofs/k0_blocked_side.md]: the PI target "K0-BLOCKED => side >= s-hat" split by DEPTH. (S) substantive (every corner's 2nd intruder depth >= delta):
   the brief's route-3 object (a root K-leaf with 8 depth-capable cores) does NOT exist - the depth-delta pose set has EMPTY core for delta < 0.134 (two
   60-deg wall-hanging squares share no point); replaced by the CROWD-WEIGHTED certificate, Lemma CW: mu >= 1 on every admissible square, mu >= 1+e on
@@ -2477,14 +2477,18 @@ affordable cost estimate for closing 3.84.
 - M [chore, attempts/A92-blocked-side/notes/crowd92_report.md]: engine copied from A89 (verify_case.py byte-identical, sha256 521cb01f...), one change
   in lpbox92.py (per-pose rhs 1+e on the crowd family, two-pass row oracle), certify92 two-run emitter; families EXACT for delta = 0.3/0.2/0.1/0.05
   (G outer cover 145-151 boxes/corner, overshoot 7.6-11 %; E complement 413-425 boxes each certified disjoint from F at all corners; D4 defect 2e-16);
-  CANARY PASS at all four a_w. LP sweep (D4, 900 s, n = 11+8e): delta 0.3 e=1 tau 16.446 (eta -2.55) PASS; 0.2 e=1 tau 18.104 (eta -0.90) PASS;
+  CANARY PASS at all four a_w. LP sweep (D4, 900 s, n = 11+8e): delta 0.3 e=1 tau 16.446 (eta -2.55) PASS; 0.2 e=1 tau 18.104 at 900 s (a NON-converged lower bound: 18.42 after 2926 s more, rising with rows; certificate needs minmass >= 0.970, got 0.94-0.97) OPEN;
   0.1 refused at every e (eta +0.59..+4.06, converged); 0.05 refused at every e with tau = 11(1+e) EXACTLY (all eleven squares fit in the dilated crowd
   family fractionally). CERTIFIED: delta = 0.3, e = 1 -- certs/runA_S_d0.3_e1_v2.json (n 19, total 18.962684, 1148 atoms) + runB_S_d0.3_e1_v2.json
   (weights halved, 413 exempt boxes, 0 holes), both PASS under the frozen verifier at depth 56, re-verified independently by the lead (rc 0/0).
   => THEOREM S(0.3): no K0-BLOCKED packing at any side in [3.82, s0) has every corner's 2nd intruder at depth >= 0.3 (boundary s0 = 3.877084).
   Engine finding (load-bearing for any NO-family cover of a REGION): verify_case.nofam_exempt is per-family containment, so a cover built from
   ABUTTING boxes leaves every seam un-exemptable -> 23-26 holes in run B; one-cell OVERLAPPING strips -> 0 holes on the same measure. delta = 0.2
-  re-certification with the overlapping E: follow-up chore at close-out (result below if landed). Phase 2 (mixed patterns) not reached.
+  re-certified with the overlapping E by the follow-up chore: run A 13 holes, run B 65 holes all inside the crowd family (0 seam holes) -> geometric
+  refusal at present LP convergence, NOT certified (delta_S = 0.3 stands; 0.15 not attempted, interpolated tau 19.5 > 19). Phase 2 (mixed patterns) not reached.
+  OPS INCIDENT: a `git pull --rebase --autostash` on the shared dirty tree failed its reset --hard on a locked A57 log and clobbered 48 live tracked files of
+  other campaigns for ~2 min; all restored byte-exact from the autostash commit 0966f2aa (kept, plus a stash entry). RULE (coordinator): no rebase /
+  autostash / reset on the shared tree while campaigns run - git fetch, plain merge if needed, push own paths only, hand a non-clean merge to the coordinator.
 - Discipline: 1 driver process + <= 1 LP/certify subprocess, BLAS pinned, gate 6144 MB; A57/A60/A61/A86 untouched; frozen verifiers untouched;
   writes: docs/proofs/k0_blocked_side.md, attempts/A92-blocked-side/{code,results,notes,logs,certs}, lean/depgraph.json+svg (K0.RES4 chip -> A92,
   nodes K0.CEIL/K0.CROWD/K0.SLIDE), REGISTRY row.

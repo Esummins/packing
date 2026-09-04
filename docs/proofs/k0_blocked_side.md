@@ -23,13 +23,15 @@ header). s0 = 969271/250000 = ŝ + 4.1·10⁻⁷; λ_max = s0/3.82 = 969271/9550
 > halved, 413 exempt boxes, 0 holes), both PASS under the frozen `verify_case.py` at depth 56,
 > re-verified independently by the lead (rc 0, 15 s / 299 s; verifier sha256 521cb01f… =
 > A89's). Hence Theorem S(0.3): no K0-BLOCKED packing at any side m ∈ [3.82, s0) has every
-> corner's second intruder at depth ≥ 0.3; boundary s0 = 3.877084.** The LP also passes at
-> δ = 0.2 (τ = 18.104 < 19, η = −0.90; certification of that node in progress at close-out) and
-> is dead at δ ≤ 0.1 (η > 0 for every e; at δ = 0.05 the fractional adversary puts all eleven
-> squares in the crowd family), so this certificate's (S)/(N) boundary is δ_LP ∈ (0.1, 0.2].
-> Together with Theorem CEIL the substantive band that (S) covers is δ ∈ [0.3, 0.2929] — i.e.
-> the certificate at 0.3 kills exactly the near-diagonal crowds (Corollary CEIL-2: α ∈ [41°,
-> 49°] at all four corners); δ = 0.2 would widen it to α ∈ [17°, 73°].**
+> corner's second intruder at depth ≥ 0.3; boundary s0 = 3.877084.** At δ = 0.2 the LP is
+> UNDECIDED: its 900-s value 18.104 < 19 was a non-converged LOWER bound that rises with rows
+> (18.42 at 18 273 rows, minmass 0.94–0.97 < the 0.970 a certificate needs), and the two-run
+> certificate FAILS on geometry (65/65 run-B holes inside the crowd family after the cover fix);
+> δ ≤ 0.1 is dead outright (η > 0 for every e; at 0.05 the fractional adversary puts all eleven
+> squares in the crowd family). So this certificate's (S)/(N) boundary is δ_S = 0.3 (certified),
+> with 0.2 open and ≤ 0.1 impossible for the weighted root LP. With Theorem CEIL the substantive
+> band (S) covers is δ ∈ [0.3, 0.2929]: the certificate kills exactly the near-diagonal crowds
+> (Corollary CEIL-2: α ∈ [41°, 49°] at all four corners).**
 >
 > **Theorem CEIL [T] (§2.1): two interior-disjoint unit squares in a quadrant satisfy
 > max(μ(A), μ(B)) ≥ 1/(cos α + sin α) ≥ 1/√2, α the angle of a separating line; so every corner
@@ -241,9 +243,9 @@ puts all eleven squares inside the (dilated) crowd family — at a_w = 0.975 the
 region reaches 1.70 from each corner and the four regions cover the container up to a thin cross;
 the certificate is structurally dead there, as predicted by the pad discussion. At δ = 0.1 the
 crowd mass of the best fractional packing is ≈ 10 (η ≈ +2 at e = 1): dead too. (ii) At δ = 0.3
-and 0.2 the LP passes with room (η = −2.55, −0.90): **the fractional relaxation confirms (S) at
-δ ≥ 0.2 — no fractional packing at s0 has crowd mass 8 at total 11.** So the LP boundary of (S)
-is δ_LP ∈ (0.1, 0.2]. (iii) CERTIFICATION. First pass: both LP-passing nodes FAILED run B
+the LP passes with room (η = −2.55, converged enough to certify); at 0.2 the 900-s value
+(η = −0.90) is a non-converged lower bound (18.42 after 2 926 s more, still rising). So the LP boundary of (S)
+is δ_S = 0.3 certified, 0.2 open (its 900-s τ is a non-converged lower bound), ≤ 0.1 dead. (iii) CERTIFICATION. First pass: both LP-passing nodes FAILED run B
 (26 / 23 holes) although run A passed. Root cause [M, found by the chore]: the complement cover
 E was emitted as ABUTTING strips, and `verify_case.nofam_exempt` is a per-family containment
 test — a box straddling two abutting families is never exempt, and those seams lie deep inside
@@ -255,9 +257,13 @@ Lemma CW) the SAME node certifies: **`certs/runA_S_d0.3_e1_v2.json` PASS (n = 19
 `certs/runB_S_d0.3_e1_v2.json` PASS (n = 1000 dummy, total 9.481342, 413 NO-families, 629 840
 boxes, 265 016 exempt, 0 holes, max depth 39); sha256 257f267b… / bd78ce08…; independently
 re-run by the lead with the byte-identical frozen verifier (sha256 521cb01f… = A89's = A85's):
-rc 0 / rc 0.** So **δ_S = 0.3: Theorem S(0.3) holds on the whole window, boundary s0.** δ = 0.2
-(LP η = −0.90) is being re-certified with the overlapping E at close-out (appended below if it
-lands); δ ≤ 0.1 is dead at the LP level. The certified frontier from the other side
+rc 0 / rc 0.** So **δ_S = 0.3: Theorem S(0.3) holds on the whole window, boundary s0.** δ = 0.2, re-run with
+the overlapping E (warm re-solve 2 926 s, 18 273 rows): τ = 18.417 (NOT converged; τ rises with
+rows, so the sweep's 18.104 was a lower bound and the true optimum may exceed 19), minmass 0.939
+(four attempts 0.943–0.966 against the 0.970 the certificate scale needs); run A 13 holes, run B 65
+holes all INSIDE the crowd family (0 seam holes) — a geometric refusal at the LP's present
+convergence, not an engineering one; δ = 0.2 is OPEN, δ = 0.15 not attempted (interpolated τ ≈
+19.5 > 19), δ ≤ 0.1 dead at the LP level. The certified frontier from the other side
 (`d2front87`, side 4.038 at D2 = 0.034; 4.10 at 0.078; 4.19 at 0.154; 4.357 at 0.293) is
 consistent: no K0-BLOCKED packing with D2 ≥ 0.2 is known below side 4.19, and Theorem S(0.3)
 says none exists below s0.
