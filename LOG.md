@@ -2643,3 +2643,15 @@ affordable cost estimate for closing 3.84.
   busy=7 558 s, busy=8 342 s). That is noise with a sample size, not a memory-bandwidth signal on the 12700K.
   Now at 4 A57 shards + 2 A96 verifiers (deepen held back: the coordinator's allocation summed to 11 against a cap of 10). Fresh
   baseline snapshotted (results/contention_before_4shard.json) so the next window measures the concurrency it claims to.
+- A96 contention leg 2 (2026-09-04 14:56-15:57, 4 tree shards + deepen + 2 verifiers, 9-12 busy): NO CONTENTION DETECTABLE.
+  Controlled read (k5_11 s2, the one shard that ran through both regimes): baseline busy~7 median 386.0 s (n=119) vs busy 9-12
+  median 379.8 s (n=7) -- 2% apart, i.e. flat. Pooled A57 rows by stamped neighbour count: busy=11 median 285.0 s (n=18),
+  busy=12 292.5 s (n=5), both AT OR BELOW the 351.4 s all-time baseline; the two small buckets that look bad (busy=9 551 s n=3,
+  busy=10 906 s n=2) move the wrong way, which is the noise floor showing. Honest bound: with the s2 wall distribution spanning
+  7 s to 12787 s, n=7 excludes only a large effect (order 2x); a 10-20% penalty is invisible at this n and is NOT ruled out.
+  Throughput is where the raise paid: 41 A57 rows in the hour at 4 shards vs 16 in the previous hour at 3 (the scaler wedge).
+  Working set 5.9 GB against the 26 GB budget; the 12700K is not memory-bandwidth limited at this concurrency.
+- A96 pass at 225 nodes: k5_11_G1 92 (55 full-window, 37 partial), class intersection 0.97754; k5_16_G1 133 (85 full, 48 partial),
+  0.99219. Re-projection improves to 10.46 / 6.28 wall-days at 3 / 5 workers (9.70 / 5.82 with the sigma ladder). Level-2 delta=1e-2
+  probe now 13 rows / 2 parents: 30.8% free logic kills, 597.4 s per child = 2.76x A95's delta=0 figure -- still a sensitivity, not
+  the headline. 85 partial nodes are queued for resolve96 (paused: the box is at the 11-process cap).

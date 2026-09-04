@@ -265,8 +265,8 @@ def main():
                 level2_days_1proc_rescaled=round(
                     (per_class["k5_11"]["level2_lp_days"] + per_class["k5_16"]["level2_lp_days"])
                     * (scale or 1), 2),
-                caveat=("one parent, 7 children -- a supply-limited probe, not the 200-child "
-                        "measurement; the headline projection still uses A95's delta=0 number"))
+                caveat=("supply-limited probe, not the 200-child measurement; the headline "
+                        "projection still uses A95's delta=0 number"))
     json.dump(proj, open(os.path.join(OUT, "projection96.json"), "w"), indent=1)
     json.dump(board, open(os.path.join(OUT, "scoreboard96.json"), "w"), indent=1)
     for cls, rows in allrows.items():
