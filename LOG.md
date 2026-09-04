@@ -2655,3 +2655,50 @@ affordable cost estimate for closing 3.84.
   0.99219. Re-projection improves to 10.46 / 6.28 wall-days at 3 / 5 workers (9.70 / 5.82 with the sigma ladder). Level-2 delta=1e-2
   probe now 13 rows / 2 parents: 30.8% free logic kills, 597.4 s per child = 2.76x A95's delta=0 figure -- still a sensitivity, not
   the headline. 85 partial nodes are queued for resolve96 (paused: the box is at the 11-process cap).
+
+## 2026-09-04 — A98-exchange-lemma (Fable, theory lead) — done-mixed: EXCHANGE not proved, not refuted; framework + residue exact
+- PI mechanism: remove a corner's two intruders, place the slot square, re-fit one square at the SAME side (A87: 21/33 corners, 8/8 packings
+  convert somewhere, Trump fails); refined mid-attempt to the recursive YOUNG FLOOD (grow a Young diagram of exact cells; free / single /
+  double cells; rigid slide-ins; RELEASE via the pinning graph). Deliverable: docs/proofs/exchange_lemma.md.
+- [T] Lemma TWO: some corner has EXACTLY two intruders (sum n(c) <= 11) and the slot square is disjoint from every non-intruder by definition
+  (third-meeter closed; A87's 33/33 is a tautology). Lemma FLOOD-D: a Young diagram D at c with N(D) = #squares meeting int D <= |D| gives a
+  k >= 1 packing at the same side - forall-packings, no selection, no criticality; the flood is a strategy for finding such a D. Lemma X: the
+  excess X(D) = N(D) - |D| = (overhang of the displaced squares beyond D) - (free area inside D); K0-BLOCKED means X(slot) >= 1 at every
+  corner. Lemma CAP: at side < 4 EVERY square meets the 3x3 block (separating line + the largest square in the corner triangle has side m - 3),
+  so X(3x3) = 2 and a win needs <= 8 cells with >= 3 untouched squares outside D. Lemma RELEASE-CL: an untouched square leaves a cell iff its
+  retreat cluster in the reduced packing is not WALL-anchored (Lemma CLUSTER verbatim; NOCRIT-SEL's (I)-anchoring is irrelevant at one corner);
+  removing a corner intruder breaks only chains it presses ACROSS (its partner, Lemma CROSS) - the PI's RELEASE lemma is the definition of
+  the stall, not a smaller residue.
+- [T] Lemma EXPOSE: a re-fit Q0 is valid iff no untouched square meets the EXPOSURE int Q0 \ (A u B). Lemma FLUSH-JAM: at a JAM corner the
+  flush cell of the nick partner has an exposure of five explicit slivers; the wall-side and S-side ones are SEALED; the top sliver (width
+  <= g - sin(alpha) + tan(alpha/2), height <= g tan(alpha)) can be entered only by a wall-hugging square tilted >= the partner's tilt (A89
+  5.2's "presser within r of u", exact), which at side < 4 INTRUDES THE ADJACENT CORNER (depth >= 4 - m + beta - delta): a JAM stall is an
+  interlocked wall column, and the stall propagates to the corner above through B's top vertex. Lemma CROSS/ARM: after A's removal the
+  partner's retreat across the separating line is free of A; B + (d, d) has mu = 1 exactly (SLIDE's identity).
+- [M] static_flood98 (exact census over EVERY Young diagram at every corner, 8 corpus packings + Trump, 2.4 s): on the only sub-4 corpus packing
+  (record_s0115, 3.9855) the 2-cell static flood REPRODUCES A87's depth-1 verdict corner by corner - nick corners (d2 = 1e-8) win with the
+  partner's own cell (A87's verified placements ARE those cells), substantive corners (d2 = 0.0145) stall at all 20 diagrams (min X = 1;
+  BL's arm cells are met by the column presser sq10 and by BR's deep intruder sq2 + pusher sq9, and symmetrically: adjacent crowds interlock
+  through the 4 - m = 0.015 overlap of their arm cells); at side >= 4 the static flood is VACUOUS (16-cell grid, min X = -5), so the seven
+  corpus packings at 4.00-4.11 measure nothing about the window. exposure98: all 21 verified A87 placements are B re-placed inside its own
+  footprint (area in B >= 0.71, >= 0.99 in 15; exposure min 2e-6, median 0.0016, max 0.25) - the self-contained exchange never occurs;
+  translation re-fits (ARM) certify 2/33, the pressed square blocking at distance = depth in 20 of 31 failures.
+- CANARY Trump: min X = 1 over all 20 TL Young diagrams (cell below the slot met by sq3, sq4, sq7; cell to its right by sq6, sq9); K0-FREE
+  corners X = 0 trivially. PASS. flood87 (A87 chore, PI measurement, second pass with the tangency fix, 23/33 rows at close-out): 21
+  FLOOD_SUCCESS (17 at depth 1, 4 at depth 2-3 by a free cell after slide-ins, all exactly verified), 2 stalls (record BL/BR: no completable
+  slot at shape [3,3,3], deficit 2 = Lemma CAP; releases = slide-ins only, 5 and 7); first pass had Trump TL at deficit 2 after two pay-2
+  steps (the stall path); the terminal canary row lands with A87's notes/flood87.md.
+- RESIDUE RES-X = INTERLOCK: every corner has X(D) >= 1 for every reachable Young D and every frontier square wall-anchored; subset of A91's
+  wall-anchored frames plus the removal budget; realised at two corners (record) and at Trump's TL; NO four-corner INTERLOCK packing known
+  or constructed (a JAM pinwheel needs, on every wall, two near-flush wall-huggers with the upper tilted >= the lower - the A47 I-L19
+  recursion closed around the boundary - at margins ~ alpha g below any scanner-level certifier) [C]. In the window SLIDE puts the jam's
+  sliver height >= s-hat - m; nothing empties RES-X.
+- T2 leaf EX = Lemma EXPOSE at box level (cores of the pair boxes, shadows of the others; exact, LP-free, monotone, forall-packings (T)-type):
+  neighbour-free yield 0 % (a core containing a cell is the single-pose K0-REUSE pocket), silent at the pair frontier, free once the column
+  above B and the row right of A are localised - A85's price unchanged (existential-filter law). T3: if the lemma lands forall-packings on the
+  window it discharges stratum_kill (k0_00) in the PLAIN form modulo K0-O1-ALL (every nonempty-skeleton class dead on the window); the
+  uniqueness clause at s-hat needs flood displacement < r_B (true at nick corners only). Lean: one leaf exchange_flood or EX in the A85 tree;
+  replay certificate = the final configuration under sat_squares (exchange87's certifier is that checker).
+- Discipline: theory only (two second-scale scripts, one process, no BLAS); A57/A60/A61/A96 untouched; frozen verifiers untouched; git fetch +
+  plain merge + push own paths. Files: docs/proofs/exchange_lemma.md, attempts/A98-exchange-lemma/{code,results,notes}, lean/depgraph.json+svg
+  (K0.RESN note, chip A98 released), REGISTRY row.
