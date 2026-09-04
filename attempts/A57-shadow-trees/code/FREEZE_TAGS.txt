@@ -1,0 +1,16 @@
+# A57 frozen side tags (A96, 2026-09-04).
+#
+# One tag per line (blank lines and #-comments ignored).  code\launch.ps1 refuses to start any
+# shard whose -Tag appears here, and code\scaleup.ps1 leaves those sides out of its queue.
+#
+# WHY.  A95 measured that re-emitting a finished A57 level-1 leaf as a parametric
+# (parametric-kill-certificate-v1) certificate and verifying it over the WHOLE window
+# [191/50, s0] with the frozen 4-D verifier costs 0.062 of the four fixed sides it replaces.
+# Sides G4/G3/G2 are therefore not run as fixed-side trees; A96 covers the same window
+# parametrically.  G1 is NOT frozen: it is already running and its fixed-side certificates
+# stay as the fallback (and as the source certificates the parametric pass converts).
+#
+# To unfreeze a side, delete its line.  Nothing else needs changing.
+G4
+G3
+G2

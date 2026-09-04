@@ -2517,3 +2517,43 @@ affordable cost estimate for closing 3.84.
   consumer note), chips stay with A92; writes: lean/PackingCertMathlib/{Crowd,CrowdZone,Slide,PinnedSlide,Ceil,Composition,TopLevel}.lean,
   PackingCertMathlib.lean, scratch/{AxiomsA93,A93CheckerTest,A93Probe,A93Probe2}.lean, lean/gen_crowd_lean.py, lean/README.md,
   lean/depgraph.json+svg, attempts/A93-lean-wave8/code/depgraph_note93.py, REGISTRY row.
+
+## 2026-09-04 A96-a57-parametric (Opus lead, engineering, <= 2 verifier processes) -- running (A57 sides 4/3/2 FROZEN; parametric pass running; slivers CLOSED; sigma ladder discharged)
+- T1 FREEZE [A57 code/FREEZE_TAGS.txt (G4,G3,G2), code/launch.ps1, code/scaleup.ps1]: sides 4/3/2 can no longer start. TWO gates because
+  the running scaler (pid 8252) holds its 46-entry queue IN MEMORY: launch.ps1 refuses a frozen -Tag (logs to scaleup.log, exit 0 so the
+  entry counts as consumed) and binds immediately; scaleup.ps1 drops frozen tags from the queue AND skips shards whose pidfile exists, so a
+  restart is idempotent instead of relaunching G1 from the top. Restarting the scaler was rejected as the fix for exactly that reason.
+  Verified live (launch.ps1 -Tag G4 -> "FROZEN k5_11 G4 0/6", nothing started). G1 shards untouched; A60/A61/A92/A93/A94 untouched.
+- T2 PARAMETRIC PASS [A96 code/{select96,to_param96,param96,run96.ps1}, frozen verify_param.py + verify_case.py copied byte-identical,
+  code/frozen.sha256]: 373 candidates (k5_11_G1 153, k5_16_G1 197, level-2 23). to_param96 widens A57's core_affine from the 12 level-1
+  column centres to the whole (P-aff) family e_q(s)=c0+q(s-2c0), q in Q_dy -- exactly what cover_invariance.md CI-1..CI-3 proves, and what
+  A57's emitter refuses on every level-2 child; the exact reconstruction assert is kept, so an off-family coordinate is rejected not
+  re-anchored. Level 1 is G1 ONLY (L1 is the delta=0 emission: same stratum, different pin hypothesis, so it buys no G1 coverage).
+  Logic kills stay per-side (CI-4, grid.py --ccheck) and are never re-emitted. MEASURED over 21 runs: mean parametric wall 266.3 s vs mean
+  fixed-side 1332.7 s = 0.20 of ONE side (0.05 of the four it replaces); median 119.1 s.
+- T3 SLIVERS -- CLOSED, and both proposed routes were the wrong diagnosis [code/{sliver96,endpoint96,resolve96}.py]. The two recurring cells
+  A=[191/50, 977934271/256000000] and B=[979732417/256000000, 7654271/2000000] are ONE s-cell each (W/1024) and are an s-RESOLUTION
+  artifact of the single global pass, not a fixed-s degeneracy: every witness is at a t-extreme with sample mass 4987/4000 > 1 and
+  kind="undecided". More depth / t-biased splitting on the FULL window does NOT help; re-running the SAME certificate on the sliver
+  SUB-window does, because verify_param splits the widest axis and the restricted window makes the s-cells ~1000x finer at once.
+  Y0192 (sliver A) PASS 2.5 s, Y0271 (B) PASS 0.6 s, Y0067 (A+B) PASS 3.0 s -- all upgraded to FULL WINDOW, no new LP, no new document.
+  (3a) A.LB382 does NOT close sliver A: s_eleven_ge_382 kills side exactly 3.82 and (by dilation) every m <= 3.82; monotonicity runs the
+  other way, so it gives nothing on (3.82, 3.8200557] -- the open-endpoint form would have left an interval of the same width. Moot now.
+  (3b) A fresh fixed-side slack-core certificate at 3.8271 is not worth buying: LP+certify per node (A57's measured 23-3800 s) vs 0.6-3.0 s.
+- T4 SIGMA LADDER [code/{ladder96,mirror96}.py]: sigma-symmetric nth=10 ladder built at all four sides; 720/720/605/605 orbits; a_min gate
+  holds everywhere (0.362009 vs deployed 0.356602 at side 1, and above the 0.34 floor at every side); 1177 LP children removed over four
+  sides, 861 over sides 2-4 -- A95's counts reproduced from an independent build. TWO things done properly rather than assumed: (i) the
+  representative's core is TRANSPORTED to its partner (sigma K_rep, not the partner's natively-computed core) -- a=(1/2-hd)/(1+width_t)
+  depends on the t-width and sigma does not preserve t-widths, which is the whole source of A95's 19/720 native disagreements; (ii) the tree
+  obligation "every square with (centre,t) in sigma B contains sigma K_B" is re-derived by A57's own pinguard.classify on the mirrored box
+  carrying the transported core: 2650/2650 orbits agree, ZERO failures. mirror96 rewrites both certificate formats (atoms x<->y; cores
+  swapped, tm -> (1-tm)/(1+tm)) and asserts sigma o sigma = id field-for-field. Deploying the ladder (720 orbit reps) is a fresh tree run,
+  NOT executed here.
+- T5/T6 [results/{scoreboard96,projection96,window_rows_*}.json]: class coverage is an INTERSECTION over the cover's boxes, never a mean.
+  RE-PROJECTION: four-fixed-side baseline 25.74 / 15.44 wall-days (3 / 5 workers) -> parametric route 12.76 / 7.66, and 11.89 / 7.13 with
+  the sigma ladder on k5_11. Level 2 is emitted once at side 1 and verified over the window (no per-side fanout left to remove); the
+  first-200 measurement is supply-limited, not budget-limited -- only 31 level-2 rows exist today (L1_D2), no G1_D2 until the scaler's G1
+  queue empties and deepen starts.
+- Discipline: frozen verifiers copied byte-identical and never edited (code/frozen.sha256); BLAS pinned; 6144 MB commit gate in the
+  launcher itself (param96 self-gates on GlobalMemoryStatusEx AvailPageFile); <= 2 verifier processes throughout -- one duplicate runner
+  that a failed background launch had left behind was found by process attribution and killed. A60/A61/A92/A93/A94 untouched.

@@ -1,5 +1,27 @@
 # A57 — how to resume
 
+## 2026-09-04: SIDES 4/3/2 ARE FROZEN (A96) — read this before restarting the scaler
+
+`code/FREEZE_TAGS.txt` lists G4, G3, G2. Two independent gates honour it:
+
+* `code/launch.ps1` refuses to launch a shard whose `-Tag` is listed (logs the refusal to
+  `logs/scaleup.log`, exits 0 so the scaler treats the entry as consumed). This gate binds the
+  **already-running** scaler, which holds its 46-entry queue in memory.
+* `code/scaleup.ps1` leaves frozen tags out of the queue, and now skips any shard whose pidfile
+  exists — so restarting the scaler no longer relaunches G1 shards from the top of the queue.
+
+G1 is deliberately NOT frozen: it is running, and its fixed-side certificates are both the
+fallback and the source documents the parametric route converts. When the G1 shard queue empties
+the scaler falls through to `deepen.py` at G1, which is now the only producer of level-2
+children (level 2 is emitted once at side 1 and verified over the whole window, no per-side
+fanout).
+
+Why: A96 (`attempts/A96-a57-parametric`) replaces sides 4/3/2 with parametric certificates over
+the whole window [191/50, s0] — 0.20 of ONE fixed side per node measured over 21 nodes, and the
+four-fixed-side plan's 25.7 / 15.4 wall-days (3 / 5 workers) drops to 12.8 / 7.7 (11.9 / 7.1
+with the σ ladder on k5_11). To unfreeze a side, delete its line from `code/FREEZE_TAGS.txt`;
+nothing else needs changing.
+
 All A57 code lives in `code/` (A54 code copied unmodified + five A57 files).  Nothing outside
 `attempts/A57-shadow-trees/` is ever written.  `trump5` is refused as a certification target by
 `ladder57.py`; every child is checked with `substrat.trump_realizes` before certification.

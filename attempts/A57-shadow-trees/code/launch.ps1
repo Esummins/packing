@@ -25,6 +25,26 @@ $env:OPENBLAS_NUM_THREADS = "1"
 $env:OMP_NUM_THREADS = "1"
 $env:MKL_NUM_THREADS = "1"
 $env:NUMEXPR_NUM_THREADS = "1"
+# --- A96 side freeze -------------------------------------------------------
+# Sides 4/3/2 are not run as fixed-side trees any more (A96: parametric certificates cover the
+# whole window at 0.062 of their cost).  The gate lives HERE, not only in scaleup.ps1's queue,
+# because the scaler holds its queue in memory: a scaler started before the freeze would still
+# walk into G4.  It re-invokes THIS script per launch, so the gate binds immediately and without
+# restarting anything (restarting the scaler would reset its queue index and relaunch G1 shards).
+# Exit 0, not 1: the scaler must treat a frozen entry as consumed and move on to the next one.
+$freezeFile = "$PSScriptRoot\FREEZE_TAGS.txt"
+if (Test-Path $freezeFile) {
+  $frozen = @(Get-Content $freezeFile | ForEach-Object { $_.Trim() } |
+              Where-Object { $_ -ne '' -and -not $_.StartsWith('#') })
+  if ($frozen -contains $Tag) {
+    $msg = "$([DateTime]::Now.ToString('yyyy-MM-dd HH:mm:ss')) FROZEN: refusing to launch $Name $Tag side=$Side shard $Shard (code\FREEZE_TAGS.txt; A96 covers this side parametrically)"
+    for ($k = 0; $k -lt 5; $k++) {
+      try { Add-Content -Path "$base\logs\scaleup.log" -Value $msg -ErrorAction Stop; break } catch { Start-Sleep -Milliseconds 200 }
+    }
+    Write-Output "FROZEN $Name $Tag $Shard"
+    exit 0
+  }
+}
 $si = ($Shard -split "/")[0]
 $stamp = "$($Name)_$($Zone)_$($Tag)_s$si"
 $py = "C:\Users\esumm\AppData\Local\Python\bin\python.exe"

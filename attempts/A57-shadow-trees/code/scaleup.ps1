@@ -99,13 +99,31 @@ $sides = @(
   @{tag='G3'; s='192389/50000';  shards=@('0/6','1/6','2/6','3/6','4/6','5/6')},  # 3.847780 -> s(11) > 3.847780
   @{tag='G2'; s='965601/250000'; shards=@('0/6','1/6','2/6','3/6','4/6','5/6')}   # 3.862404 -> s(11) > 3.862404
 )
+# A96 FREEZE.  Sides listed in code\FREEZE_TAGS.txt are dropped from the queue outright: A96
+# replaces them with parametric certificates over the whole window [191/50, s0] (A95 measured
+# 0.062 of the four fixed sides).  G1 stays -- it is running and is the fixed-side fallback.
+# launch.ps1 carries the same gate independently, so a scaler that predates this edit (its queue
+# is in memory) still cannot start a frozen side.
+$frozenTags = @()
+$freezeFile = "$base\code\FREEZE_TAGS.txt"
+if (Test-Path $freezeFile) {
+  $frozenTags = @(Get-Content $freezeFile | ForEach-Object { $_.Trim() } |
+                  Where-Object { $_ -ne '' -and -not $_.StartsWith('#') })
+}
 foreach ($sd in $sides) {
+  if ($frozenTags -contains $sd.tag) { Note "queue: side $($sd.tag) is FROZEN, skipped"; continue }
   foreach ($sh in $sd.shards) {
     foreach ($nm in @('k5_11','k5_16')) {
+      # Idempotent restart: a shard that was already launched once has its pidfile on disk.  The
+      # queue index $qi is in memory only, so without this a restarted scaler would relaunch every
+      # shard from the top of the queue and race the running tree57 on its jsonl.
+      $si0 = ($sh -split '/')[0]
+      if (Test-Path "$base\logs\$($nm)_interior_$($sd.tag)_s$si0.pid") { continue }
       $queue += @{n=$nm; s=$sh; tag=$sd.tag; side=$sd.s}
     }
   }
 }
+Note "queue built: $($queue.Count) shard(s); frozen tags = $($frozenTags -join ',')"
 $qi = 0
 Note "scaleup started; A57=$(A57Count) A56running=$(A56Running)"
 for ($i = 0; $i -lt 5000; $i++) {
