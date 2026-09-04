@@ -1,0 +1,291 @@
+{
+ "attempt": "A85 chore realise85: exact realisability of the k0 blocker-pair census",
+ "s_window": [
+  3.82,
+  3.877084
+ ],
+ "depth_min": 1e-09,
+ "free_commit_mb_at_start": 9672.41015625,
+ "part1_boxes": {
+  "n_boxes": 644,
+  "n_realisable": 560,
+  "far_wall_max_x_extent": 2.4571067811875476,
+  "far_wall_max_y_extent": 2.4571067811875476,
+  "far_wall_binds_at_s_lo": false,
+  "s_window": [
+   3.82,
+   3.877084
+  ],
+  "depth_min": 1e-09,
+  "cell_deg": 0.01,
+  "atom_deg": 0.5,
+  "n_atoms_total": 10794,
+  "n_atoms_max": 28,
+  "dropped": [
+   185,
+   222,
+   225,
+   226,
+   227,
+   261,
+   262,
+   263,
+   264,
+   266,
+   267,
+   268,
+   269,
+   292,
+   297,
+   298,
+   299,
+   300,
+   302,
+   303,
+   304,
+   305,
+   306,
+   307,
+   308,
+   309,
+   310,
+   311,
+   329,
+   334,
+   335,
+   336,
+   339,
+   340,
+   341,
+   342,
+   344,
+   345,
+   346,
+   347,
+   348,
+   349,
+   350,
+   351,
+   352,
+   353,
+   370,
+   387,
+   404,
+   421,
+   438,
+   455,
+   471,
+   472,
+   488,
+   489,
+   490,
+   491,
+   492,
+   493,
+   494,
+   495,
+   496,
+   497,
+   498,
+   515,
+   532,
+   549,
+   566,
+   583,
+   600,
+   617,
+   630,
+   632,
+   634,
+   635,
+   636,
+   637,
+   638,
+   639,
+   640,
+   641,
+   642,
+   643
+  ],
+  "secs": 0.501645565032959
+ },
+ "part2_pairs": {
+  "box_index_check": true,
+  "first_pair": [
+   0,
+   14
+  ],
+  "n_pairs": 33656,
+  "n_pairs_both_boxes_realisable": 18787,
+  "n_pairs_surviving": 7044,
+  "secs": 6.161375999450684
+ },
+ "canary_axis_aligned_pair": {
+  "box_realisable": true,
+  "n_atoms": 1,
+  "depth_ub_wall": 1.000000000000001,
+  "atom_x": [
+   0.5,
+   1.499999999001001
+  ],
+  "atom_y": [
+   0.5,
+   1.499999999001001
+  ],
+  "max_gap_ub": -9.979960191586201e-10,
+  "pair_survives": false,
+  "PASS": true,
+  "claim": "one axis-aligned blocker is realisable; a PAIR of them at one corner is not (c_x, c_y in [1/2, 3/2) forces max|dC| < 1)"
+ },
+ "canary_trump_TL_2crowd": {
+  "squares": [
+   {
+    "square": 4,
+    "cx_BL": 0.5,
+    "cy_BL": 1.3445252756731993,
+    "theta_BL_deg": 0.0,
+    "f_minmax_exact": "0.84452527567319939024528075978621660286",
+    "depth": 0.15547472432680062,
+    "min_x": -9.99785531347349e-110,
+    "min_y": 0.8445252756731993,
+    "in_quadrant": true,
+    "meets_open_slot_depth_gt_tol": true
+   },
+   {
+    "square": 6,
+    "cx_BL": 1.5362871803120153,
+    "cy_BL": 0.7046081698617594,
+    "theta_BL_deg": 49.818062709670286,
+    "f_minmax_exact": "0.83167901045025569673435798725896716678",
+    "depth": 0.1683209895497443,
+    "min_x": 0.8316790104502557,
+    "min_y": 5e-60,
+    "in_quadrant": true,
+    "meets_open_slot_depth_gt_tol": true
+   }
+  ],
+  "sat_gap_BL_frame": 2.220446049250313e-16,
+  "cover_boxes": [
+   [
+    366
+   ],
+   [
+    275
+   ]
+  ],
+  "census_pairs": [
+   {
+    "i": 366,
+    "j": 275,
+    "in_A85_census": true,
+    "box_i_realisable": true,
+    "box_j_realisable": true,
+    "pair_survives": true
+   }
+  ],
+  "tiny_box_test": [
+   {
+    "n_atoms": 1,
+    "realisable": true,
+    "depth_ub_wall": 0.1554747263802011
+   },
+   {
+    "n_atoms": 1,
+    "realisable": true,
+    "depth_ub_wall": 0.16832099178387938
+   }
+  ],
+  "PASS": true
+ },
+ "canary_A89_grid_witnesses": {
+  "available": true,
+  "n_exact_slot_witnessed": 4365,
+  "n_with_both_boxes_kept": 4365,
+  "n_pairs_kept": 4365,
+  "n_not_in_census": 0,
+  "n_box_soundness_violations": 0,
+  "n_pair_soundness_violations": 0,
+  "examples": [],
+  "PASS": true
+ },
+ "part3_gate": {
+  "n_surviving_pairs": 7044,
+  "n_surviving_pairs_d2ge": 2441,
+  "d2_delta": 0.1,
+  "budget": 3,
+  "n_sampled": 1000,
+  "seed": 20260903,
+  "counts": {
+   "attemptable": 128,
+   "unkillable": 5,
+   "contradictory": 867
+  },
+  "d4_canonical": 125,
+  "d4_canonical_fraction": 0.125,
+  "counts_d2": {
+   "attemptable": 362,
+   "unkillable": 32,
+   "contradictory": 606
+  },
+  "d4_canonical_d2": 140,
+  "d2ub_stats": {
+   "min": 3.83944002969594e-05,
+   "max": 0.3700221382724319,
+   "median": 0.09442585920753399
+  }
+ },
+ "part4_price": {
+  "reference": {
+   "a85_pairs": 33656,
+   "a85_attemptable_frac_4corner": 0.179,
+   "a85_frontier": 2.870866780699616e+16,
+   "a85_interior_first_tree_CPU_h": [
+    3200,
+    7000
+   ],
+   "per_node_CPU_h": [
+    0.47,
+    1.1
+   ],
+   "per_attempt_CPU_h": 0.4722222222222222
+  },
+  "a85_baseline": {
+   "tag": "A85 as published",
+   "n_pairs": 33656,
+   "D4_canonical_4tuples": 1.603836190334981e+17,
+   "attemptable_fraction": 0.179,
+   "frontier_nodes": 2.870866780699616e+16,
+   "CPU_h_at_0.47": 1.3493073869288194e+16,
+   "CPU_h_at_1.1": 3.157953458769578e+16,
+   "CPU_h_at_1700s_per_attempt": 1.3556870908859298e+16,
+   "ratio_to_3200_CPU_h": 4216585584152.5605,
+   "ratio_to_7000_CPU_h": 4511362083956.54
+  },
+  "realisable": {
+   "tag": "realisability-sound",
+   "n_pairs": 7044,
+   "D4_canonical_4tuples": 307742446612512.0,
+   "attemptable_fraction": 0.128,
+   "frontier_nodes": 39391033166401.54,
+   "CPU_h_at_0.47": 18513785588208.723,
+   "CPU_h_at_1.1": 43330136483041.695,
+   "CPU_h_at_1700s_per_attempt": 18601321217467.395,
+   "ratio_to_3200_CPU_h": 5785557996.315226,
+   "ratio_to_7000_CPU_h": 6190019497.577385
+  },
+  "realisable_d2_hypothesis": {
+   "tag": "realisable + d2 >= 0.1 at all four corners",
+   "n_pairs": 2441,
+   "D4_canonical_4tuples": 4437936978420.125,
+   "attemptable_fraction": 0.362,
+   "frontier_nodes": 1606533186188.0852,
+   "CPU_h_at_0.47": 755070597508.4,
+   "CPU_h_at_1.1": 1767186504806.8938,
+   "CPU_h_at_1700s_per_attempt": 758640671255.4846,
+   "ratio_to_3200_CPU_h": 235959561.72137502,
+   "ratio_to_7000_CPU_h": 252455214.9724134
+  }
+ },
+ "secs": 31.752607345581055,
+ "free_commit_mb_at_end": 9707.859375
+}
