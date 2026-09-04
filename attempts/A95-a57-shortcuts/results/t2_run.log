@@ -1,0 +1,540 @@
+{
+ "stabilisers": {
+  "k5_11": {
+   "fixed_by": [
+    "e",
+    "sigma_d"
+   ],
+   "all_ops": {
+    "e": true,
+    "r90": false,
+    "r180": false,
+    "r270": false,
+    "sigma_d": true,
+    "sigma_ad": false,
+    "sigma_v": false,
+    "sigma_h": false
+   },
+   "slots_affine": [
+    [
+     "-1/2",
+     "1",
+     "1/2",
+     "0"
+    ],
+    [
+     "1/2",
+     "0",
+     "-1/2",
+     "1"
+    ],
+    [
+     "1/2",
+     "0",
+     "1/2",
+     "0"
+    ],
+    [
+     "1/2",
+     "0",
+     "3/2",
+     "0"
+    ],
+    [
+     "3/2",
+     "0",
+     "1/2",
+     "0"
+    ]
+   ]
+  },
+  "k5_16": {
+   "fixed_by": [
+    "e"
+   ],
+   "all_ops": {
+    "e": true,
+    "r90": false,
+    "r180": false,
+    "r270": false,
+    "sigma_d": false,
+    "sigma_ad": false,
+    "sigma_v": false,
+    "sigma_h": false
+   },
+   "slots_affine": [
+    [
+     "-1/2",
+     "1",
+     "-1/2",
+     "1"
+    ],
+    [
+     "-1/2",
+     "1",
+     "1/2",
+     "0"
+    ],
+    [
+     "1/2",
+     "0",
+     "-1/2",
+     "1"
+    ],
+    [
+     "1/2",
+     "0",
+     "1/2",
+     "0"
+    ],
+    [
+     "1/2",
+     "0",
+     "3/2",
+     "0"
+    ]
+   ]
+  }
+ },
+ "tree57": {
+  "sym_kind_calls": [
+   "sym_kind=\"C1\", warm=warm2,",
+   "res = solve_node(SF, kid[\"hyp\"], kid[\"budget\"], sym_kind=\"C1\","
+  ],
+  "mentions_orbit": false,
+  "caselp_has_D4": true,
+  "verdict": "tree57 enumerates the FULL 12x12xnth cover and solves every child with sym_kind='C1'; caselp's D4 machinery is only the per-node LP oracle reduction and requires the NODE's own hypotheses to be D4-invariant, which a single-core YES child never is.  No stabiliser is exploited at the zone level."
+ },
+ "covers": [
+  {
+   "label": "deployed t-uniform nth=8",
+   "side": "969271/250000",
+   "grid": [
+    12,
+    12,
+    8
+   ],
+   "boxes": 1152,
+   "sigma_closed_ladder": false,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.356602,
+   "a_max": 0.356602,
+   "below_a_min_gate": 0,
+   "ok": 821,
+   "contradictory": 331,
+   "parent": 0,
+   "mirror_in_cover": 0,
+   "orbits": null,
+   "note": "theta ladder is NOT sigma-closed: mirror of cell k is not a cell, so no box of the cover has its mirror in the cover; orbit reduction inapplicable"
+  },
+  {
+   "label": "sigma-symmetric nth=8",
+   "side": "969271/250000",
+   "grid": [
+    12,
+    12,
+    8
+   ],
+   "boxes": 1152,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.349931,
+   "a_max": 0.371801,
+   "below_a_min_gate": 0,
+   "ok": 830,
+   "contradictory": 322,
+   "parent": 0,
+   "mirror_in_cover": 1152,
+   "orbits": 576,
+   "self_mirror": 0,
+   "removed": 576,
+   "removed_frac": 0.5,
+   "rep_ok": 412,
+   "rep_contradictory": 164,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 570,
+   "pairs": 576
+  },
+  {
+   "label": "sigma-symmetric nth=10",
+   "side": "969271/250000",
+   "grid": [
+    12,
+    12,
+    10
+   ],
+   "boxes": 1440,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.359105,
+   "a_max": 0.377676,
+   "below_a_min_gate": 0,
+   "ok": 1029,
+   "contradictory": 411,
+   "parent": 0,
+   "mirror_in_cover": 1440,
+   "orbits": 720,
+   "self_mirror": 0,
+   "removed": 720,
+   "removed_frac": 0.5,
+   "rep_ok": 505,
+   "rep_contradictory": 215,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 701,
+   "pairs": 720
+  },
+  {
+   "label": "sigma-symmetric nth=12",
+   "side": "969271/250000",
+   "grid": [
+    12,
+    12,
+    12
+   ],
+   "boxes": 1728,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.365493,
+   "a_max": 0.381593,
+   "below_a_min_gate": 0,
+   "ok": 1214,
+   "contradictory": 514,
+   "parent": 0,
+   "mirror_in_cover": 1728,
+   "orbits": 864,
+   "self_mirror": 0,
+   "removed": 864,
+   "removed_frac": 0.5,
+   "rep_ok": 599,
+   "rep_contradictory": 265,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 848,
+   "pairs": 864
+  },
+  {
+   "label": "union-symmetrised deployed ladder",
+   "side": "969271/250000",
+   "grid": [
+    12,
+    12,
+    15
+   ],
+   "boxes": 2160,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.356602,
+   "a_max": 0.394139,
+   "below_a_min_gate": 0,
+   "ok": 1493,
+   "contradictory": 667,
+   "parent": 0,
+   "mirror_in_cover": 2160,
+   "orbits": 1086,
+   "self_mirror": 12,
+   "removed": 1074,
+   "removed_frac": 0.4972,
+   "rep_ok": 746,
+   "rep_contradictory": 340,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 1064,
+   "pairs": 1074
+  },
+  {
+   "label": "sigma-symmetric nth=8 side 2",
+   "side": "965601/250000",
+   "grid": [
+    12,
+    12,
+    8
+   ],
+   "boxes": 1152,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.350685,
+   "a_max": 0.372603,
+   "below_a_min_gate": 0,
+   "ok": 828,
+   "contradictory": 324,
+   "parent": 0,
+   "mirror_in_cover": 1152,
+   "orbits": 576,
+   "self_mirror": 0,
+   "removed": 576,
+   "removed_frac": 0.5,
+   "rep_ok": 410,
+   "rep_contradictory": 166,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 568,
+   "pairs": 576
+  },
+  {
+   "label": "sigma-symmetric nth=10 side 2",
+   "side": "965601/250000",
+   "grid": [
+    12,
+    12,
+    10
+   ],
+   "boxes": 1440,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.359879,
+   "a_max": 0.378491,
+   "below_a_min_gate": 0,
+   "ok": 1009,
+   "contradictory": 431,
+   "parent": 0,
+   "mirror_in_cover": 1440,
+   "orbits": 720,
+   "self_mirror": 0,
+   "removed": 720,
+   "removed_frac": 0.5,
+   "rep_ok": 501,
+   "rep_contradictory": 219,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 713,
+   "pairs": 720
+  },
+  {
+   "label": "deployed ladder side 2",
+   "side": "965601/250000",
+   "grid": [
+    12,
+    12,
+    8
+   ],
+   "boxes": 1152,
+   "sigma_closed_ladder": false,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.357371,
+   "a_max": 0.357371,
+   "below_a_min_gate": 0,
+   "ok": 816,
+   "contradictory": 336,
+   "parent": 0,
+   "mirror_in_cover": 0,
+   "orbits": null,
+   "note": "theta ladder is NOT sigma-closed: mirror of cell k is not a cell, so no box of the cover has its mirror in the cover; orbit reduction inapplicable"
+  },
+  {
+   "label": "sigma-symmetric nth=8 side 3",
+   "side": "192389/50000",
+   "grid": [
+    11,
+    11,
+    8
+   ],
+   "boxes": 968,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.343737,
+   "a_max": 0.365221,
+   "below_a_min_gate": 0,
+   "ok": 710,
+   "contradictory": 258,
+   "parent": 0,
+   "mirror_in_cover": 968,
+   "orbits": 484,
+   "self_mirror": 0,
+   "removed": 484,
+   "removed_frac": 0.5,
+   "rep_ok": 347,
+   "rep_contradictory": 137,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 468,
+   "pairs": 484
+  },
+  {
+   "label": "sigma-symmetric nth=10 side 3",
+   "side": "192389/50000",
+   "grid": [
+    11,
+    11,
+    10
+   ],
+   "boxes": 1210,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.352749,
+   "a_max": 0.370992,
+   "below_a_min_gate": 0,
+   "ok": 869,
+   "contradictory": 341,
+   "parent": 0,
+   "mirror_in_cover": 1210,
+   "orbits": 605,
+   "self_mirror": 0,
+   "removed": 605,
+   "removed_frac": 0.5,
+   "rep_ok": 428,
+   "rep_contradictory": 177,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 592,
+   "pairs": 605
+  },
+  {
+   "label": "deployed ladder side 3",
+   "side": "192389/50000",
+   "grid": [
+    11,
+    11,
+    8
+   ],
+   "boxes": 968,
+   "sigma_closed_ladder": false,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.35029,
+   "a_max": 0.35029,
+   "below_a_min_gate": 0,
+   "ok": 704,
+   "contradictory": 264,
+   "parent": 0,
+   "mirror_in_cover": 0,
+   "orbits": null,
+   "note": "theta ladder is NOT sigma-closed: mirror of cell k is not a cell, so no box of the cover has its mirror in the cover; orbit reduction inapplicable"
+  },
+  {
+   "label": "sigma-symmetric nth=8 side 4",
+   "side": "958303/250000",
+   "grid": [
+    11,
+    11,
+    8
+   ],
+   "boxes": 968,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.344554,
+   "a_max": 0.366089,
+   "below_a_min_gate": 0,
+   "ok": 701,
+   "contradictory": 267,
+   "parent": 0,
+   "mirror_in_cover": 968,
+   "orbits": 484,
+   "self_mirror": 0,
+   "removed": 484,
+   "removed_frac": 0.5,
+   "rep_ok": 347,
+   "rep_contradictory": 137,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 477,
+   "pairs": 484
+  },
+  {
+   "label": "sigma-symmetric nth=10 side 4",
+   "side": "958303/250000",
+   "grid": [
+    11,
+    11,
+    10
+   ],
+   "boxes": 1210,
+   "sigma_closed_ladder": true,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.353588,
+   "a_max": 0.371874,
+   "below_a_min_gate": 0,
+   "ok": 861,
+   "contradictory": 349,
+   "parent": 0,
+   "mirror_in_cover": 1210,
+   "orbits": 605,
+   "self_mirror": 0,
+   "removed": 605,
+   "removed_frac": 0.5,
+   "rep_ok": 425,
+   "rep_contradictory": 180,
+   "rep_parent": 0,
+   "native_class_agrees_on_pairs": 594,
+   "pairs": 605
+  },
+  {
+   "label": "deployed ladder side 4",
+   "side": "958303/250000",
+   "grid": [
+    11,
+    11,
+    8
+   ],
+   "boxes": 968,
+   "sigma_closed_ladder": false,
+   "vacuous": 0,
+   "nocore": 0,
+   "a_min": 0.351123,
+   "a_max": 0.351123,
+   "below_a_min_gate": 0,
+   "ok": 695,
+   "contradictory": 273,
+   "parent": 0,
+   "mirror_in_cover": 0,
+   "orbits": null,
+   "note": "theta ladder is NOT sigma-closed: mirror of cell k is not a cell, so no box of the cover has its mirror in the cover; orbit reduction inapplicable"
+  }
+ ],
+ "ladders": {
+  "symmetric_nth8": [
+   0.0,
+   0.079008574,
+   0.171572875,
+   0.281508964,
+   0.414213562,
+   0.560660172,
+   0.707106781,
+   0.853553391,
+   1.0
+  ],
+  "symmetric_nth10": [
+   0.0,
+   0.062223619,
+   0.132704598,
+   0.213203436,
+   0.306019375,
+   0.414213562,
+   0.53137085,
+   0.648528137,
+   0.765685425,
+   0.882842712,
+   1.0
+  ],
+  "symmetric_nth12": [
+   0.0,
+   0.051320788,
+   0.108194188,
+   0.171572875,
+   0.242640687,
+   0.322887255,
+   0.414213562,
+   0.511844635,
+   0.609475708,
+   0.707106781,
+   0.804737854,
+   0.902368927,
+   1.0
+  ],
+  "deployed_nth8": [
+   0.0,
+   0.125,
+   0.25,
+   0.375,
+   0.5,
+   0.625,
+   0.75,
+   0.875,
+   1.0
+  ]
+ }
+}
