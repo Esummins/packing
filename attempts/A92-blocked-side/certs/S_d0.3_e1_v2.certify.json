@@ -1,0 +1,40 @@
+{
+ "node": "../results/nodes/S_d0.3_e1.json",
+ "certA": "../certs\\runA_S_d0.3_e1_v2.json",
+ "certB": "../certs\\runB_S_d0.3_e1_v2.json",
+ "rounds": [
+  {
+   "round": 0,
+   "tau": 16.445919069135048,
+   "scale": 1.1529977790933528,
+   "totalA": 18.962676,
+   "rcA": 1,
+   "rcB": 0,
+   "verifierA": [
+    "boxes = 113448  covered = 56665  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 56751  exact atom checks = 402926  max depth = 56  time = 7.0s",
+    "FAIL: 32 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 27 undecided at this depth  [stopped at --max-witnesses]"
+   ],
+   "verifierB": [
+    "boxes = 596274  covered = 32295  vacuous = 0  exempt = 265874 (core 0, nofam 265874)  split = 298105  exact atom checks = 1202123  max depth = 36  time = 288.8s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4740669/500000 < budget 1000  ==>  no packing of 1000 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ]
+  },
+  {
+   "round": 1,
+   "tau": 16.453605372665372,
+   "scale": 1.1524582217558643,
+   "totalA": 18.962684,
+   "rcA": 0,
+   "rcB": 0,
+   "verifierA": [
+    "boxes = 252116  covered = 126090  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 126026  exact atom checks = 1433712  max depth = 33  time = 15.4s",
+    "PASS: every closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4740671/250000 < 19  ==>  s(19) >= 969271/250000 (~3.8770840000)"
+   ],
+   "verifierB": [
+    "boxes = 629840  covered = 49936  vacuous = 0  exempt = 265016 (core 0, nofam 265016)  split = 314888  exact atom checks = 1266802  max depth = 39  time = 303.1s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4740671/500000 < budget 1000  ==>  no packing of 1000 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ]
+  }
+ ],
+ "result": "PASS"
+}

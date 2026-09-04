@@ -1,0 +1,18 @@
+[round 0] tau=16.44592 conv=False scale=1.1530 totalA=18.96268 (< 19) totalB=9.48134 atoms=1088 nofamsB=413
+    A| boxes = 113448  covered = 56665  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 56751  exact atom checks = 402926  max depth = 56  time = 7.0s
+    A| FAIL: 32 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 27 undecided at this depth  [stopped at --max-witnesses]
+    B| boxes = 596274  covered = 32295  vacuous = 0  exempt = 265874 (core 0, nofam 265874)  split = 298105  exact atom checks = 1202123  max depth = 36  time = 288.8s
+    B| PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4740669/500000 < budget 1000  ==>  no packing of 1000 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+    feeding back 672 witness rows (total extra 672), re-solving
+[s=3.877084 n=19 sym=D4 box=[0,45]x1] init orbits=349 points=2597 rows=5601 (rejected 0)
+  it   0 tau=16.465752 rows=6009 orbs=349 atoms>0=808 minmass=0.865330 maxcov=1.088986 +rows=408 -rows=0 +cols=0 -cols=0 t=63s [lp 1s row 58s +r 0s col 2s +c 0s]
+  it   1 tau=16.519691 rows=6009 orbs=1349 atoms>0=713 minmass=0.861145 maxcov=1.113338 +rows=0 -rows=0 +cols=1000 -cols=0 t=101s [lp 0s row 34s +r 0s col 2s +c 1s]
+  it   2 tau=16.434835 rows=6284 orbs=1349 atoms>0=1073 minmass=0.868909 maxcov=1.048485 +rows=275 -rows=0 +cols=0 -cols=0 t=254s [lp 7s row 142s +r 2s col 3s +c 0s]
+  time limit
+DONE s=3.877084 n=19 sym=D4 tau=16.453605 nu=16.453605 conv=False minmass=0.868909 maxcov=1.048485 rows=6284 orbits=1349 atoms_nz=146 packing_support=130 time=256s
+[round 1] tau=16.45361 conv=False scale=1.1525 totalA=18.96268 (< 19) totalB=9.48134 atoms=1148 nofamsB=413
+    A| boxes = 252116  covered = 126090  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 126026  exact atom checks = 1433712  max depth = 33  time = 15.4s
+    A| PASS: every closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4740671/250000 < 19  ==>  s(19) >= 969271/250000 (~3.8770840000)
+    B| boxes = 629840  covered = 49936  vacuous = 0  exempt = 265016 (core 0, nofam 265016)  split = 314888  exact atom checks = 1266802  max depth = 39  time = 303.1s
+    B| PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4740671/500000 < budget 1000  ==>  no packing of 1000 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+CERTIFIED (both runs): ../certs\runA_S_d0.3_e1_v2.json , ../certs\runB_S_d0.3_e1_v2.json

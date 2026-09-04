@@ -1,0 +1,48 @@
+re-solving node LP with EPS_GEO=0.004 (crowd rhs)
+[s=3.877084 n=19 sym=D4 box=[0,45]x1] init orbits=348 points=2609 rows=6429 (rejected 0)
+  it   0 tau=19.134409 rows=7064 orbs=748 atoms>0=292 minmass=0.845501 maxcov=1.355521 +rows=635 -rows=0 +cols=400 -cols=0 t=8s [lp 1s row 4s +r 1s col 1s +c 0s]
+  it   1 tau=18.975369 rows=7616 orbs=1148 atoms>0=292 minmass=0.836207 maxcov=1.268473 +rows=552 -rows=0 +cols=400 -cols=0 t=14s [lp 1s row 3s +r 1s col 1s +c 0s]
+  it   2 tau=18.551484 rows=8581 orbs=1548 atoms>0=512 minmass=0.877161 maxcov=1.196059 +rows=965 -rows=0 +cols=400 -cols=0 t=36s [lp 7s row 10s +r 4s col 1s +c 0s]
+  it   3 tau=18.472922 rows=9647 orbs=1948 atoms>0=684 minmass=0.878948 maxcov=1.088692 +rows=1066 -rows=0 +cols=400 -cols=0 t=86s [lp 13s row 26s +r 8s col 2s +c 0s]
+  it   4 tau=18.517260 rows=10764 orbs=2348 atoms>0=844 minmass=0.893232 maxcov=1.235432 +rows=1117 -rows=0 +cols=400 -cols=0 t=190s [lp 49s row 41s +r 11s col 3s +c 1s]
+  it   5 tau=18.444792 rows=11779 orbs=2748 atoms>0=1149 minmass=0.878268 maxcov=1.082527 +rows=1015 -rows=0 +cols=400 -cols=0 t=350s [lp 52s row 85s +r 19s col 3s +c 1s]
+  time limit
+DONE s=3.877084 n=19 sym=D4 tau=18.399527 nu=18.399527 conv=False minmass=0.878268 maxcov=1.082527 rows=11779 orbits=2748 atoms_nz=164 packing_support=170 time=437s
+   tau=18.39953 conv=False minmass=0.8783
+[round 0] tau=18.39953 conv=False scale=1.0304 totalA=18.95885 (< 19) totalB=9.47943 atoms=1264 nofamsB=413
+    A| boxes = 27775  covered = 13830  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 13913  exact atom checks = 86662  max depth = 56  time = 2.4s
+    A| FAIL: 32 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 27 undecided at this depth  [stopped at --max-witnesses]
+    B| boxes = 3296  covered = 1294  vacuous = 0  exempt = 262 (core 0, nofam 262)  split = 1708  exact atom checks = 9390  max depth = 56  time = 1.2s
+    B| FAIL: 32 witness boxes at depth 56: 17 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 15 undecided at this depth  [stopped at --max-witnesses]
+    feeding back 1344 witness rows (total extra 1344), re-solving
+[s=3.877084 n=19 sym=D4 box=[0,45]x1] init orbits=371 points=2773 rows=7845 (rejected 256)
+  it   0 tau=18.445103 rows=8169 orbs=371 atoms>0=784 minmass=0.854784 maxcov=1.199679 +rows=324 -rows=0 +cols=0 -cols=0 t=27s [lp 2s row 22s +r 1s col 2s +c 0s]
+  it   1 tau=18.468048 rows=8169 orbs=1371 atoms>0=700 minmass=0.918965 maxcov=1.175499 +rows=0 -rows=0 +cols=1000 -cols=0 t=46s [lp 0s row 16s +r 0s col 1s +c 1s]
+  it   2 tau=18.411526 rows=8967 orbs=1371 atoms>0=1220 minmass=0.916381 maxcov=1.044426 +rows=798 -rows=0 +cols=0 -cols=0 t=146s [lp 5s row 86s +r 5s col 4s +c 0s]
+  it   3 tau=18.529119 rows=8967 orbs=1504 atoms>0=880 minmass=0.884472 maxcov=1.186486 +rows=0 -rows=0 +cols=1000 -cols=867 t=195s [lp 4s row 42s +r 0s col 3s +c 1s]
+  it   4 tau=18.405566 rows=9901 orbs=1481 atoms>0=1548 minmass=0.921901 maxcov=1.047213 +rows=934 -rows=0 +cols=0 -cols=23 t=365s [lp 31s row 127s +r 7s col 4s +c 0s]
+  time limit
+DONE s=3.877084 n=19 sym=D4 tau=18.448061 nu=18.448061 conv=False minmass=0.921901 maxcov=1.047213 rows=9901 orbits=1481 atoms_nz=187 packing_support=168 time=373s
+[round 1] tau=18.44806 conv=False scale=1.0276 totalA=18.95879 (< 19) totalB=9.47940 atoms=1437 nofamsB=413
+    A| boxes = 77225  covered = 38554  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 38639  exact atom checks = 301141  max depth = 56  time = 5.8s
+    A| FAIL: 32 witness boxes at depth 56: 11 HOLES (a placement with exact mass < 1), 1 tight (mass ok at samples but an atom on the boundary of Q), 20 undecided at this depth  [stopped at --max-witnesses]
+    B| boxes = 3732  covered = 1515  vacuous = 0  exempt = 262 (core 0, nofam 262)  split = 1923  exact atom checks = 10490  max depth = 56  time = 1.3s
+    B| FAIL: 32 witness boxes at depth 56: 18 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 14 undecided at this depth  [stopped at --max-witnesses]
+    feeding back 1344 witness rows (total extra 2688), re-solving
+[s=3.877084 n=19 sym=D4 box=[0,45]x1] init orbits=393 points=2945 rows=8201 (rejected 512)
+  it   0 tau=18.475365 rows=8774 orbs=393 atoms>0=928 minmass=0.903071 maxcov=1.227702 +rows=573 -rows=0 +cols=0 -cols=0 t=38s [lp 2s row 31s +r 1s col 2s +c 0s]
+  it   1 tau=18.577087 rows=8774 orbs=1393 atoms>0=861 minmass=0.917460 maxcov=1.222627 +rows=0 -rows=0 +cols=1000 -cols=0 t=64s [lp 1s row 23s +r 0s col 2s +c 1s]
+  it   2 tau=18.454749 rows=9816 orbs=1393 atoms>0=1101 minmass=0.925445 maxcov=1.059530 +rows=1042 -rows=0 +cols=0 -cols=0 t=124s [lp 8s row 41s +r 9s col 3s +c 0s]
+  it   3 tau=18.490131 rows=9816 orbs=1443 atoms>0=1064 minmass=0.938746 maxcov=1.108860 +rows=0 -rows=0 +cols=1000 -cols=950 t=176s [lp 2s row 46s +r 0s col 3s +c 1s]
+  it   4 tau=18.427718 rows=10742 orbs=1427 atoms>0=1381 minmass=0.931232 maxcov=1.040853 +rows=926 -rows=0 +cols=0 -cols=16 t=321s [lp 24s row 108s +r 9s col 4s +c 0s]
+  time limit
+DONE s=3.877084 n=19 sym=D4 tau=18.450099 nu=18.450099 conv=False minmass=0.931232 maxcov=1.040853 rows=10742 orbits=1427 atoms_nz=182 packing_support=171 time=327s
+[round 2] tau=18.45010 conv=False scale=1.0275 totalA=18.95880 (< 19) totalB=9.47940 atoms=1400 nofamsB=413
+    A| boxes = 170317  covered = 85102  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 85183  exact atom checks = 610419  max depth = 56  time = 11.0s
+    A| FAIL: 32 witness boxes at depth 56: 7 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 25 undecided at this depth  [stopped at --max-witnesses]
+    B| boxes = 7744  covered = 3114  vacuous = 0  exempt = 654 (core 0, nofam 654)  split = 3944  exact atom checks = 30661  max depth = 56  time = 2.5s
+    B| FAIL: 32 witness boxes at depth 56: 27 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 5 undecided at this depth  [stopped at --max-witnesses]
+NOT certified
+
+---stderr---
+
