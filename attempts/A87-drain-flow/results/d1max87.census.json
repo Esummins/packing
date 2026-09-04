@@ -1,0 +1,112 @@
+{
+ "n_sound_boxes": 644,
+ "n_realisable_surviving_pairs": 7044,
+ "D1_STAR": 0.9,
+ "G_STAR": 0.09999999999999998,
+ "jam0_tilt_bound_deg": 5.739170477266785,
+ "jam0_depth_bound": 0.010050378152592116,
+ "n_boxes_theta_range_entirely_within_jam0_tilt": 0,
+ "n_boxes_theta_range_meeting_jam0_tilt_band": 128,
+ "theta_cells": [
+  [
+   0.0,
+   7.125
+  ],
+  [
+   7.125,
+   14.25
+  ],
+  [
+   14.25,
+   28.0725
+  ],
+  [
+   28.0725,
+   41.1121
+  ],
+  [
+   41.1121,
+   48.8879
+  ],
+  [
+   48.8879,
+   61.9275
+  ],
+  [
+   61.9275,
+   75.75
+  ],
+  [
+   75.75,
+   82.875
+  ],
+  [
+   82.875,
+   90.0
+  ]
+ ],
+ "finest_theta_cell_width_deg": 7.125016348901795,
+ "note_granularity": "the cover s finest theta cell is 7.125 deg wide, WIDER than JAM-0 s bound arcsin(0.1) = 5.7392 deg, so NO cell can lie entirely inside the band: the \"entirely within\" count is 0 by cell granularity, not by geometry.  One bisection of the two extreme cells [0,7.125] and [82.875,90] would make the clause able to bite.",
+ "depth_ub_plain": {
+  "max": 1.0000219830649797,
+  "n_ge_0.9": 10
+ },
+ "depth_lb_plain": {
+  "max": 0.8089923362849399,
+  "n_ge_0.9": 0
+ },
+ "depth_ub_wall_A85": {
+  "max": 1.0000180665463578,
+  "n_ge_0.9": 4,
+  "n_None": 84
+ },
+ "census_plain_ub": {
+  "bound": "t2b_depth plain depth_ub",
+  "n_boxes_can_host_d1_ge_0.9": 10,
+  "frac_boxes": 0.015527950310559006,
+  "n_pairs": 7044,
+  "n_pairs_with_a_deep_capable_member": 704,
+  "frac_pairs_with_a_deep_capable_member": 0.09994321408290743,
+  "n_pairs_deep_member_and_partner_box_inside_jam0_tilt": 0,
+  "frac_pairs": 0.0,
+  "n_pairs_also_partner_box_inside_jam0_depth": 0,
+  "frac_pairs_depth": 0.0,
+  "n_pairs_killed_by_jam0_tilt_clause_alone": 556,
+  "n_pairs_killed_by_jam0_depth_clause_alone": 0,
+  "theta_measure_shaved_from_partner_cells_pair_equivalents": 584.7919604019808,
+  "frac_of_census_shaved": 0.0830198694494578
+ },
+ "census_wall_ub": {
+  "bound": "A85 realise85 depth_ub_wall",
+  "n_boxes_can_host_d1_ge_0.9": 4,
+  "frac_boxes": 0.006211180124223602,
+  "n_pairs": 7044,
+  "n_pairs_with_a_deep_capable_member": 501,
+  "frac_pairs_with_a_deep_capable_member": 0.07112436115843271,
+  "n_pairs_deep_member_and_partner_box_inside_jam0_tilt": 0,
+  "frac_pairs": 0.0,
+  "n_pairs_also_partner_box_inside_jam0_depth": 0,
+  "frac_pairs_depth": 0.0,
+  "n_pairs_killed_by_jam0_tilt_clause_alone": 393,
+  "n_pairs_killed_by_jam0_depth_clause_alone": 0,
+  "theta_measure_shaved_from_partner_cells_pair_equivalents": 414.0103494825237,
+  "frac_of_census_shaved": 0.05877489345294203
+ },
+ "census_forced_lb": {
+  "bound": "depth_LB (box FORCED to d1>=0.9)",
+  "n_boxes_can_host_d1_ge_0.9": 0,
+  "frac_boxes": 0.0,
+  "n_pairs": 7044,
+  "n_pairs_with_a_deep_capable_member": 0,
+  "frac_pairs_with_a_deep_capable_member": 0.0,
+  "n_pairs_deep_member_and_partner_box_inside_jam0_tilt": 0,
+  "frac_pairs": 0.0,
+  "n_pairs_also_partner_box_inside_jam0_depth": 0,
+  "frac_pairs_depth": 0.0,
+  "n_pairs_killed_by_jam0_tilt_clause_alone": 0,
+  "n_pairs_killed_by_jam0_depth_clause_alone": 0,
+  "theta_measure_shaved_from_partner_cells_pair_equivalents": 0.0,
+  "frac_of_census_shaved": 0.0
+ },
+ "secs": 4.411575794219971
+}
