@@ -2813,3 +2813,53 @@ affordable cost estimate for closing 3.84.
     SAVING = 0.0% of the certify+eps_geo wall (0 s of 171818 s) and 0.0% of total node wall. A57 ALREADY does this: tree57.py
       (~line 504) refuses certification outright when tau >= budget, i.e. exactly eta >= 0, so all 15 eta == 0 nodes carry
       cert_seconds 0 and eps_geo 0. The optimisation is implemented; there is no remaining wall to remove.
+
+## 2026-09-05 — A101-flood-lemma (Fable, theory lead) — done-mixed: SNAP proved (destination form + SHELL), FLOOD not proved, stall exact (CELL-INTERLOCK), Trump rigid
+- Brief: T1 Lemma SNAP (eta-disturbance drain; swept region; simultaneous snaps; (T) leaf + yield on A57's holes), T2 Theorem FLOOD
+  under the strict convention with the simultaneous move set or the exact stall + the k0dir2_87 side threshold, T3 composition +
+  Lean. Deliverable docs/proofs/flood_lemma.md; two read-only second-scale chores in attempts/A101-flood-lemma/{code,results,logs,notes}.
+- [T] Lemma SNAP-D: the sound form is the DESTINATION form = teleport_packing at the cell (a square within eta of a lattice cell snaps
+  at the same side iff no OTHER square meets the open cell); the swept region is unnecessary for soundness (FLOOD-M; the physical
+  rotate-then-slide can dig into a backing pin to second order), given explicitly and contained in the eta-ball C + (eta + (cos t +
+  sin t - 1)/2) (SNAP-SWEEP). Lemma MULTI: simultaneous snaps are valid iff the target cells are pairwise interior-disjoint (NOT
+  automatic across lattices below side 4) and no UNTOUCHED square meets any target - the movers may crowd each other's cells, which is
+  exactly why one-at-a-time stalls (record sq4/sq5, 1e-4) and the joint move certifies. Lemma SHELL (the dichotomy sharpened): a
+  crowder R of a disturbed square's cell has SAT depth <= sqrt2 eps and, under Lemma CONT (corner cell / unclipped completable slot),
+  corner-frame depth <= (1+sqrt2) eps, eps = eta + 1/2 - 1/(2(cos t + sin t)) <= eta + t/2 - the A87 tangency law as a theorem
+  (numerical check 2e5 pairs: ratios 0.77 / 0.41). Lemma SNAP-SIDE (SHELL + SLIDE/SLOT-SLIDE): an eta-disturbed square at a k0
+  corner (mod K0-O1) or a usable slot at side m forces m >= s-hat' - (1+sqrt2) eps - near-flush ghosts live only within
+  (1+sqrt2)(eta + t/2) of the extension window's top. Corollary OFFSET: K0-BLOCKED(delta) has no disturbed corner square with
+  (1+sqrt2)(eta + t/2) < delta.
+- [T]+[M] Leaf SNAP-T (destination form = box-level SLOT-CROWD; the eta-ball box is optional; simultaneous version for stacks) and its
+  yield: snap_yield101 (read-only, 488 witness files, 13,688 boxes = 5,500 holes + 8,185 undecided, ALL 36 lattice cells): eta-ball
+  (0.01, 1 deg) 73 holes / 31 at usable cells (pocket96 population: 53 / 16), all at k5_16 BR(1,0) [k6_27 OPEN] / BL(1,0) / BL(1,1)
+  = pocket96's pockets; the dominant near-lattice pattern is FLUSH against a pin row/column (k5_11: 160 holes; k5_16: 97 against
+  usable cells) displaced ALONG the pin, for which the destination test is the same; condition (2) (every other non-pin shadow
+  misses int C) fails at EVERY A57 node (>= 4 unlocalised free squares): 0 nodes flip. SNAP removes pocket96's need for a
+  delta_pin re-emission (the snap lands EXACTLY on the cell, the 3e-8 k6 certificates apply) - the obstruction was never the
+  tolerance. Existential-filter law; A57/A96 prices unchanged.
+- [T] Lemma FLOOD-T: every static move of the simultaneous set (ALIGN, cell TELEPORT, TELEPORT_FREE, full WALL-SLIDE, static Young
+  flood at any corner, combinations) is ONE multi-teleport onto a pairwise-disjoint set T of lattice cells of ANY of the four corner
+  lattices, feasible iff X(T) = N(T) - |T| <= 0 (FLOOD-D with "Young at one corner" -> "any disjoint cell set across lattices");
+  k >= 1 iff some T containing a corner cell has X(T) <= 0. Lemma NINE: |T| <= 9 below side 4 (three points k(1-delta)); with CAP
+  the census is finite. Exact stall = CELL-INTERLOCK (X(T) >= 1 for every disjoint T containing a corner cell) => A98's INTERLOCK;
+  residue RES-CI subset of RES-X. Dynamic moves (partial slides, RELEASE retreats, rigid re-fits) outside the census [C]; degen87
+  found none firing at the record's BL/BR.
+- [M] cellflood101 (exact interval "meets" at tol 1e-9 and 1e-6, X_min by 2^11 movable sets x max independent cell set, 11 s):
+  record_s0115 (3.98548) is CELL-INTERLOCKED at BL and BR - X_min = 1 over ALL disjoint cell sets of all four lattices, no free
+  cell anywhere, no single-meeter cell at 1e-9 - and converts at the nicked TR/TL (X = 0: {TR(0,0),TR(0,1)} moving sq6/sq7,
+  {TL(0,0),TL(1,0)} moving sq4/sq5; at 1e-6 the corner cells are singly met = strict85). TRUMP: X_min = 1 over EVERY nonempty set
+  of non-exact cells (argmin BR(2,0), two meeters) - no multi-teleport of any kind; the one disturbed square (upright sq4, eta =
+  0.0326 at BL(0,2)) is crowded by sq7 at 0.016 <= (1+sqrt2) 0.0326 = 0.079, extension k6_07 open at s-hat: CANARY PASS.
+- Side threshold [M, A87 k0dir2_87 floor sweep, in flight]: lowest strictly K0-BLOCKED side 4.0000016 at floor 1e-6 (300 seeds),
+  4.000023 at 1e-4 (291 seeds), floors 1e-3/1e-2 queued; vs the exact record 3.98548 at floor <= 1.7e-8: m*(delta) is FLOOR-
+  DEPENDENT, every value >= s-hat + 0.108. THEOREM FLOOD NOT PROVED (A101-G1): CELL-INTERLOCK is realised at two corners below 4;
+  no four-corner instance known; the sweep supports "strictly blocked below 4 needs a nick", not a theorem.
+- T3: if CELL-INTERLOCK exclusion held below s-hat, k0_00 = FLOOD-T + K0-FREE + k >= 1 kills in the PLAIN StratumKill form modulo
+  K0-O1-ALL (A98 s.8 with RES-X -> RES-CI); uniqueness clause not delivered by the teleport form; nothing removed today from the
+  protected tier (A100 3,500-4,200 CPU-h) or A57. Lean: SNAP-D = teleport_packing (Selection.lean); MULTI = Finset fold + rational
+  cell-cell SAT gap max(|dx|-1, |dy|-1); SHELL (a) = finite u/v lemma (mem_interior_iff_uv + SAT separation), (b) the chord
+  argument as obligation shell_mu; SNAP-SIDE via slot_slide + ShellKill (Composition.lean). Depgraph: K0.RESN note appended, chip
+  A101 released; registry row added.
+- Pointers: docs/proofs/flood_lemma.md; attempts/A101-flood-lemma/notes/a101_report.md; code/{cellflood101,snap_yield101}.py;
+  results/{cellflood101,snap_yield101}.json; logs/. No campaign file touched (A57 witnesses read only).
