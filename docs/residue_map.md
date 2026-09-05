@@ -215,8 +215,17 @@ Ordered by what it would remove. Each is stated so that it is checkable against 
    certification holes (near-flush against pin squares, i.e. η-disturbed stacked cells, which pocket96 did not test),
    and as a base case it is what the flood theorem (item 1 restated under the strict convention) stands on.
 
-The honest assessment: 1 is the theorem, now being attempted a second time (A101) with the strict convention and the
-simultaneous move set, and it is the only item whose empirical boundary (side 4, no counterexample) has been measured;
+*A101 outcome (2026-09-05):* SNAP is proved in its destination form (a disturbed square snaps iff no other square meets
+the open cell: it is teleport at the cell; simultaneous snaps need pairwise-disjoint targets; any crowder of a disturbed
+square's cell is a grazer of depth ≤ (1+√2)ε), and its certificate yield on A57 is zero: the near-lattice holes are
+squares flush *along* pin rows, and ≥ 4 unlocalised squares at every node defeat the destination test. The flood is not
+proved; its exact stall is CELL-INTERLOCK (no disjoint set of cells containing a corner cell has overhang ≤ free area,
+over all four lattices, at most nine cells below side 4). The 3.985 record is cell-interlocked at BL/BR; Trump admits no
+move. The floor sweep so far: lowest strictly K0-BLOCKED side 4.0000016 at depth floor 10⁻⁶, 4.000023 at 10⁻⁴, none
+below 4. Dynamic moves (partial slides, releases) are outside this census.
+
+The honest assessment: 1 is the theorem, attempted twice (A98, A101) with the framework now exact and the stall named
+(cell-interlock), and it is the only item whose empirical boundary (side 4, no counterexample) has been measured;
 3 is the most likely to be provable and is worth roughly the factor the PI asked for on the corner-first route; 2 is
 the same theorem as 1 in easier clothing; 4 is unexplored; 5 is the only lever on the protected tier that does not
 require a theorem; 6 is a lemma with a consumer either way.
