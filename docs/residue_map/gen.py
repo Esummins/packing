@@ -56,6 +56,7 @@ def container(ox, oy, side, label=None):
     if label: out.append(text(ox, oy - side * S - 8, label, 13, bold=True))
     return out
 def svg(w, h, body, name):
+    w = max(w, 980)
     doc = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" font-family="Segoe UI, sans-serif" style="background:#fff">'] + body + ['</svg>']
     open(os.path.join(HERE, name), 'w', encoding='utf-8').write('\n'.join(doc)); print('wrote', name)
 
@@ -184,8 +185,8 @@ svg(60 + side * S + 40, oy + 66, body, 'tree_root.svg')
 
 # ---------- fig 6: Young flood ----------
 ox, oy = 40, 330
-body = [text(ox, 30, 'The Young flood from a corner: cells placed (blue), completable cells (dashed), intruders removed (red outline)', 13, bold=True),
-        f'<line x1="{ox}" y1="{oy}" x2="{ox+3.2*S}" y2="{oy}" stroke="#000" stroke-width="3"/>', f'<line x1="{ox}" y1="{oy}" x2="{ox}" y2="{oy-2.6*S}" stroke="#000" stroke-width="3"/>']
+body = [text(ox, oy - 2.2 * S - 14, 'The Young flood from a corner: cells placed (blue), completable cells (dashed), intruders removed (red outline)', 13, bold=True),
+        f'<line x1="{ox}" y1="{oy}" x2="{ox+3.2*S}" y2="{oy}" stroke="#000" stroke-width="3"/>', f'<line x1="{ox}" y1="{oy}" x2="{ox}" y2="{oy-2.2*S}" stroke="#000" stroke-width="3"/>']
 cells = [(0, 0), (1, 0), (0, 1)]
 for cx, cy in cells: body.append(f'<rect x="{ox+cx*S}" y="{oy-(cy+1)*S}" width="{S}" height="{S}" fill="#90caf9" fill-opacity="0.6" stroke="#1565c0" stroke-width="1.5"/>')
 for cx, cy in [(2, 0), (1, 1), (0, 2)]: body.append(f'<rect x="{ox+cx*S}" y="{oy-(cy+1)*S}" width="{S}" height="{S}" fill="none" stroke="#444" stroke-width="1.2" stroke-dasharray="5,3"/>')
