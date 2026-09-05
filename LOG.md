@@ -2755,3 +2755,50 @@ affordable cost estimate for closing 3.84.
   (ladder96/mirror96 already provide the ladder, orbits, reps, C-check and the rewrite; what is missing is a tree57 custom-ladder
   option and a deployment driver), but the cover swap is the highest-risk change available on a live campaign, so it is being
   surfaced for a decision rather than done unilaterally.
+
+## 2026-09-05 — A100 (engineering pilot, Opus) — the protected tier priced from real runs
+- Two classes end to end on the A96 pipeline with the A84 P-TREE engine copied into
+  `attempts/A100-protected-pilot/code`: **k4_11** (image-bearing, budget 6, |G_S| = 1) and **k3_02**
+  (budget 7, |G_S| = 2), the latter picked as the cheapest k <= 3 class by measured level-1 cell
+  count (780 attemptable vs k3_05's 984). Engine change: `class84` asserted |G_S| = 2 and k4_11 has
+  exactly ONE compatible Trump image (sym 0); widened to 1 <= |G_S| <= 2. T_PRIME extended with both
+  classes at 457/10000 (A_S = 3/2, T_K(2e-2) = 0.0510, exactly k4_08's situation).
+- **CANARIES CLEAN.** 0 census / Lemma-PD / ladder canary violations on either class, 0 certified
+  image-realizable node; every in-zone Trump image square lands in a (D) leaf inside both the A36
+  basin and the A83 tube profile. Frozen verifiers byte-identical to A96's `frozen.sha256`
+  (`verify_param.py` 0c58485c..., `verify_case.py` 521cb01f...); `to_param96.py` used unmodified.
+- **THE ETA LAW IS EXACT ON PROTECTED CLASSES: 54 of 54 cover nodes, eta < 0 <=> a certificate
+  exists.** 25 nodes at eta < 0 all PASS; 29 nodes at eta = 0 (tau = budget exactly) all resist.
+  A84 called the law "broken in our favour" from 3 nodes; with 54 it is sharper than A60's. Since
+  the LP produces eta before certification is attempted, certification + the two eps_geo rounds on
+  eta = 0 cells are pure loss: **8 615 s of k4_11's 21 795 s leg (39.5%) and 1 925 s of k3_02's
+  9 695 s (19.9%), for 0 kills in 14 attempts.** Gating on eta cuts the per-node cover wall
+  558.8 -> 337.9 s (k4_11) and 484.8 -> 388.5 s (k3_02). This is the run's one free lever.
+- **The parametric route works on protected classes.** A84's interior cover is the same 12-column
+  (P-aff) grid A57 uses and the class pins are slot coordinates, so A96's emitter accepts the
+  certificates verbatim (pre-flight: 28/28 of A84's own cover certs). Measured: k4_11 mean 126.2 s
+  per leaf, 4/15 full-window first time; k3_02 mean 268.2 s, 5/15. **Resolver 20/20 CLOSED**
+  (43 exact window rows, 0 residual, mean 18.5 s / 121.5 s), so 30 of 30 emitted leaves are
+  window-valid. Two node kinds do NOT emit: NO-family nodes (no `nofams` in verify_param) and every
+  ladder/residue node (box centres outside Q_dy) — **the (K) cover side goes parametric, the ladder
+  side does not.**
+- **Level-2 descent at delta_pin = 1e-2 does not close the resister branch: 1 kill in 16 children**
+  (k4_11 1/11, k3_02 0/5); tau stays pinned at the budget on parent and both children, and 0
+  sub-boxes were logic-killed by the gate. This is A84's item-12 finding one level down.
+- **(D) side measured and cheap.** Both ladders land at level 24, all_inside and all_in_tube true:
+  k4_11 28 (D) leaves (one image), k3_02 59 (two images), contraction ratio ~3.6, max contain_t
+  1.14e-3 / 1.22e-3 <= rBasin 1.5e-3 — identical to A84's k4_08/k3_05 to four digits. The ladders
+  shed 619 / 1 437 (K) queue boxes, and A84 measured those to be a conditioning queue, not kills.
+- **Price.** Per class, terms that CLOSE (level-1 emission + parametric verify + resolver):
+  k4_11 96.0 CPU-h, k3_02 141.0 CPU-h. Plus ONE round of the non-closing level-2 branch: +107.1 /
+  +149.2 CPU-h. Fractions actually run: 39/882 and 20/780 level-1 cells; downstream legs complete on
+  those samples; the (D) side complete (exact). Protected tier, 15 classes excluding k0_00:
+  **3 500-4 200 CPU-h** central (band 2 900-6 300 on the level-2 child wall, the weakest
+  coefficient), against A84's 1 800 CPU-h model — **~2x**. All layers: **4 900-12 900 CPU-h**
+  (k0_00 dominates the upper end and is A99's to close), against the ~400 CPU-h PI target.
+- Files: `attempts/A100-protected-pilot/{code,results,logs,progress,certs}`,
+  `results/a100_report.json` (every measured term), `results/a100_projection.json` (tier +
+  all-layers with the sensitivity band). Latent bug found in A96's `resolve96.py`: `done` is keyed
+  on the bare node id, so a node whose id recurs in another class is silently skipped (k4_11's
+  c0_Y1119 was); fixed to (cls, id) in `code/resolve100.py` — worth porting back before A96 runs a
+  second class.

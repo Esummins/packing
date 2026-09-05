@@ -25,8 +25,8 @@ either killed a piece of (iii) or priced a route to it; none deleted it. It is k
 | k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric; class coverage 0.980 / 0.992 | **~1,925** (80 CPU-days: level 1 11.6, level 2 44.4, level 3 24.3; 16 wall-days at 5 workers; four fixed sides would be 136 CPU-days) | measured (A96, 2026-09-04 evening): level-2 verify 506 s/child (n = 15, censored), level-2 LP 1.55× level 1, level-3 descent 6.8% |
 | trump5 (Trump's own class) | 1 | A60 residual tree, cover done, deepen + tube | 300–500 | running |
 | stragglers (s0-only rows) | 6 left | A61 converting | small | running |
-| protected k4 | 6 (incl. corners4) | P-TREE trees; k4_08/k4_11 killed at 3.833 (A82) | **~390 per class (interim, k4_11)**: first-pass certification 0.26 because τ pins exactly to the budget on 74% of level-1 cells at s0 (the image fits at s0, so the LP's adversary keeps the class alive); 2.4–3.5× A84's model | A100 interim (3% of cells run) |
-| protected k ≤ 3 | 10 | P-TREE trees | **~225 per class (interim, k3_02)**: certification 0.75, resolver 9/9, ladder lands at level 24 in the tube (59 (D) leaves) — bottom of A84's model | A100 interim |
+| protected k4 | 6 (incl. corners4) | P-TREE trees; k4_08/k4_11 killed at 3.833 (A82) | **161–277 per class → 966–1,662 group** (k4_11: closing terms 96.0 CPU-h + one non-closing level-2 round 107.1). First-pass certification **0.385**: τ pins exactly to the budget on 61% of level-1 cells (η = 0), and those cells resist certification, ε_geo *and* level-2 bisection | A100 **measured** (39/882 cells; downstream + (D) complete) |
+| protected k ≤ 3 (excl. k0_00) | 9 | P-TREE trees | **2,541 group** (k3_02 242, k2 313, k1 392 per class; k3_02 closing terms 141.0 CPU-h + level-2 round 149.2). Certification 0.75, resolver 9/9, ladder lands at level 24 in the tube (59 (D) leaves) | A100 **measured** (20/780 cells) + budget scaling ×1.149/step |
 | k0_00 | 1 | interior-first tree unrun | 3,200–7,000 at s0 → 400–700 if A99 lands | A85 model; A99 measuring |
 
 The protected tier and k0_00 are the two blocks where a theorem could delete work; the rest is engineering.
@@ -140,7 +140,17 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   the resolver in 3–11 s each; the σ ladder propagates to level 2 and would save 2 wall-days net but requires
   resetting k5_11's live coverage, so it is recorded, not deployed.
 - A99: the three k0 tree reductions, stacked, at s0 and window-valid.
-- A100: the protected tier from real runs (k4_11 and one k ≤ 3 class), tier projection, all-layers total.
+- A100 (landed 2026-09-05): k4_11 and k3_02 run end to end. **The η law is exact on 54/54 cover nodes** —
+  η < 0 ⇔ a certificate exists — so the LP decides killability before certification is attempted, and
+  certification + ε_geo on the η = 0 cells is pure loss (39.5% of k4_11's cover leg, 0 kills in 12 attempts);
+  η-gating cuts the per-node wall 558.8 → 337.9 s. The **parametric route carries to protected classes**
+  (A96's emitter accepts cover certificates verbatim, 28/28; **resolver 20/20 CLOSED**, 43 window rows, 0
+  residual) but **not to ladder or NO-family nodes**. **Level-2 at δ_pin = 1e-2 killed 1 of 16 children** —
+  the resister branch has no measured closing mechanism, and it is the whole gap to A84's model. (D) side is
+  cheap and identical to A84's (both ladders land at level 24, all_in_tube; 28 leaves for |G_S| = 1, 59 for 2).
+  **Protected tier, 15 classes excl. k0_00: 3,500–4,200 CPU-h** central, band 2,900–6,300 on the level-2
+  child wall, vs A84's 1,800 model. **All layers: 5,900–13,700 CPU-h** against the ~400 CPU-h PI target;
+  k0_00 alone is 400–7,000 of it. Detail: `attempts/A100-protected-pilot/results/a100_{report,projection}.json`.
 
 ## 8. What would delete the residue — candidate theorems, with the effect each would have
 

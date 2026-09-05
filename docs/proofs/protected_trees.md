@@ -656,3 +656,56 @@ sets), `code/tier84.py` → `results/tier84_classes.json` (G_S, I_g, A_S, T_K pe
 (the engine spec), `code/class84.py`, `alive84.py`, `tree84.py`, `launch84.ps1` (the engine),
 `results/pilot_summary.json`, `notes/pilot_report.md`; `certs/tube_k4_08_*.json`,
 `certs/tube_k3_05_*.json`, `certs/tube_I_*.json` (new files).
+
+
+## 11. Lean status (A86, 2026-09-03)
+
+Lemma P-TREE (a)+(b) is the Lean theorem `PackingCert.S11.tree_kill` (`ZoneTree.lean`) for an abstract `ClosedTree`
+(leaves (K)/(N) = `checkCaseI` PASS at `s0` with node cores + NO-zones, (C), (D) = the SEAM landing, (D') = a folded atlas
+box; `cover` = the complete disjunction — the producer's obligation, supported by the rule library `zone_dichotomy`,
+`grid_cover` (CI-1), `slot_outside_zone` (CI-3), `pd_convex`/`pd_rule` (Lemma PD, §2.1), `d4_dil_comm` (the mod-G
+commutation of Step 4)).  Step 1 is `root_of_containsPins`; §3's "exact hypothesis nowhere on the bound" is literal:
+`classKilledAt_of_tree` (`Composition.lean`) normalises by `D4` into `ContainsPins` and reads the equality case as
+`IsTrumpImage`.  The composition with TopLevel is `s_eleven_ge_of_classes` / `s_eleven_unique_of_classes`.
+See `lean/lean_wave7_A86.md`.
+
+## 12. Depgraph C.K4TIER note — A100's measurement (2026-09-05, chip → A100)
+
+§7's tier price was a model. A100 (`attempts/A100-protected-pilot`) ran **k4_11** and **k3_02** end
+to end on the A96 pipeline (this document's engine, copied; A96's emitter, resolver and frozen 4-D
+verifier, unmodified) and measured every term. Four things change:
+
+1. **|G_S| = 1 is real.** `class84` asserted two compatible Trump images. **k4_11 has exactly one**
+   (sym 0), so the assert is widened to 1 ≤ |G_S| ≤ 2. Nothing else in the engine needs two: the
+   alive gate, the canary and the (D) targets are per-image. Its (D) side is correspondingly half:
+   28 leaves against k3_02's 59, both landing at level 24, `all_in_tube` true.
+2. **The η law of §6.4 is exact, and it is an oracle.** Over **54 cover nodes on two classes,
+   η < 0 ⇔ a certificate exists** (25/25 PASS at η < 0; 29/29 resist at η = 0, i.e. τ = budget
+   exactly). §6's "η ≈ −0.8 certifies" reading came from three nodes; the sharp statement is that
+   the LP decides killability before certification is attempted. Certification and the two ε_geo
+   rounds on η = 0 cells are therefore pure loss — measured at 39.5 % of k4_11's cover leg and
+   19.9 % of k3_02's, for 0 kills in 14 attempts.
+3. **The parametric route reaches the (K) cover side and stops there.** The interior cover is the
+   same (P-aff) 12-column grid A57 uses and the pins are slot coordinates, so `to_param96` accepts
+   protected-class cover certificates verbatim (28/28 on A84's own corpus). The **resolver closed
+   20/20** completed partials (43 exact window rows, 0 residual). But **ladder/residue nodes do not
+   emit** — their centres are outside Q_dy — and neither do NO-family nodes. §5's per-class seam
+   obligation is unchanged for those; it is discharged for the cover leaves by the window
+   certificate instead.
+4. **§7's cost model is optimistic by ~2×, and the reason is the resister branch.** Level-2 descent
+   at δ_pin = 1e-2 killed **1 of 16 children**; τ stays at the budget on parent and both children
+   and no sub-box is logic-killed. §7's "deepen rounds on the cover resisters" therefore has no
+   measured closing mechanism; the only one that exists is the ladder, which terminates (24 levels,
+   residue bounded 53–118 per level) but sheds 619 / 1 437 LP-bearing (K) boxes that §6.5 already
+   measured not to kill at j = 0.
+
+**Revised price.** Per class, the terms that close (level-1 emission at s0 + parametric verify over
+W + resolver): **96.0 CPU-h (k4_11), 141.0 CPU-h (k3_02)**, plus one round of the non-closing
+level-2 branch at +107.1 / +149.2 CPU-h. Tier, 15 classes excluding k0_00: **3 500–4 200 CPU-h**
+central, band 2 900–6 300 on the level-2 child wall (the weakest coefficient, 16 children), against
+§7's 1 800 CPU-h. Numbers and the sensitivity are in
+`attempts/A100-protected-pilot/results/a100_projection.json`; every measured term is in
+`results/a100_report.json`.
+
+C.K4TIER stays open; the chip moves to A100. What would move the price is a theorem that removes
+the η = 0 cells (they are the cells where the class LP has no budget slack at all), not more compute.
