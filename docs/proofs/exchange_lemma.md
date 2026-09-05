@@ -486,16 +486,17 @@ vacuous, min X = −5 = 11 − 16: those seven packings say nothing about the wi
 5/8 on Trump's four corners — Trump's exact tangencies, decided as non-intrusions by the tolerance
 law (`k0dir87.md`), consistent with A87.
 
-### 6.2 The dynamic flood (A87 chore, `flood87.py`; PI's measurement, running at close-out)
+### 6.2 The dynamic flood (A87 chore, `flood87.py`, final pass, 1 253 s; `notes/flood87.md`)
 
-First pass (29 (packing, corner) rows before the chore's restart on Trump's tangency handling):
-depth-1 wins 17, depth-2/3 wins by a free cell after slide-ins 9 (reported
-`success_but_exact_verify_failed`: the slid squares' destination cells overlap a neighbour at the
-10⁻⁹ tolerance — the same tolerance law that declares them non-intruders; a real placement at the
-10⁻⁹ level, to be re-decided by the chore's exact pass), stalls 2 (record BL, BR: no completable
-slot, shape [3,3,3], deficit 2 = Lemma CAP), TRUMP TL running (d1 pay 2, d2 pay 2 at the cell
-below, deficit 2 at depth 2 — the stall path). Releases: only slide-ins fired (0–6 per run); no
-retreat of an untouched square out of a cell. The final report is `notes/flood87.md` (A87).
+33 (packing, corner) rows: **FLOOD_SUCCESS 30, all exactly verified** — 21 at depth 1 (= A87's
+depth-1 exchange), 8 at depth 2 and 1 at depth 3 (a free cell after 1–6 slide-ins; the 9 "rescued
+beyond exchange87" corners are polish12 TR/TL, polish15 TR/TL, polish24 BL, anchored0 BR/TL,
+anchored1 BR, anchored2 BR — all at side ≥ 4, where the static flood is vacuous); **stalls 3**:
+record_s0115 BL and BR (no completable slot at shape [3,3,3], deficit 2 = Lemma CAP, 5 and 7
+slide-ins, 0 anywhere-fits) and **TRUMP TL (canary: d1 pay 2, d2 pay 2 at the cell below, d3 free
+cell (1,1), d4 pay 2, then no completable slot at [3,3,3], deficit 2; canary_OK = True)**. Releases:
+only slide-ins fired; no untouched square retreated out of a cell in any run. Every sub-4 stall is
+the CAP value; every sub-4 win is a nick corner's 2-cell diagram (§6.1).
 
 ### 6.3 Exposure of the 21 verified placements (`code/exposure98.py`, `results/exposure98.json`)
 

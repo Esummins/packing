@@ -2702,3 +2702,6 @@ affordable cost estimate for closing 3.84.
 - Discipline: theory only (two second-scale scripts, one process, no BLAS); A57/A60/A61/A96 untouched; frozen verifiers untouched; git fetch +
   plain merge + push own paths. Files: docs/proofs/exchange_lemma.md, attempts/A98-exchange-lemma/{code,results,notes}, lean/depgraph.json+svg
   (K0.RESN note, chip A98 released), REGISTRY row.
+- A98 addendum (flood87 final, 1253 s, A87 notes/flood87.md): 30/33 floods succeed, all exactly verified (21 depth 1 = exchange87, 8 depth 2, 1
+  depth 3: 9 corners rescued beyond the depth-1 exchange, all at side >= 4); 3 stalls = record_s0115 BL/BR + TRUMP TL, each at the full
+  block [3,3,3] with deficit 2 = Lemma CAP; canary_OK = True; releases were slide-ins only. Consistent with the static census corner by corner.
