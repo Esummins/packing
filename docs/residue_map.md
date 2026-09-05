@@ -110,6 +110,17 @@ below 4. The exchange and the Young flood both stall there. This is the structur
 substantive crowds, one interior grain, columns to the walls around them. Trump's TL corner is the same object with
 three slot corners beside it.
 
+**PI correction (2026-09-05): the whole packing degenerates anyway, by a move the corner-local flood does not make.**
+Squares 4 and 5 are on their TL cells to 10⁻⁴ and square 6 is exactly on the cell below TR; the "nick" at TR is a
+10⁻⁸ tangency of 6, not a block. Align 4, 5, 6 (moves of 10⁻⁴), slide 10 left into the cell below TL (0.38) and 7
+right into the TR corner (0.39, now unblocked): a valid packing at the same side (checked exactly), with five simple
+squares, TL staircase [2,1] plus TR column [1,1] — the class **k5_10** (canonical BL [2,1] + TL [2]), which A61
+converted to the full window (PASS, margin 0.016). k5_10 contains no Trump image, so its minimum side is above ŝ and
+at most 3.985. Two lessons: a tangency-level "intruder" must not count as a block (the certifier bar is gap ≥ 0), and
+the degeneration move set must include sliding along a wall into a corner cell freed by aligning its tangent
+neighbour, which is K0-FREE applied at the *cell* level — the interlock at BL/BR is not an obstruction to global
+degeneration; only to the corner-local flood.
+
 ![flood](residue_map/flood.svg)
 
 The flood potential makes the stall quantitative: X(D) = overhang − free area inside the diagram D; the flood wins at
