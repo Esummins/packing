@@ -362,6 +362,38 @@ def main():
                 wall_days_5workers=round(tot_r / 5, 2),
                 with_sigma_ladder_wall_days_5workers=round(
                     (tot_r - sigma_saved_s / day) / 5, 2))
+            # ---- sigma ladder applied to the D2 cover (brief follow-up) --------------------
+            # The orbit reduction does NOT need a separate level-2 ladder: if k5_11's level-1
+            # cover is sigma-symmetric and only orbit representatives are expanded, the partner
+            # box's entire level-2 subtree is the sigma-image of the representative's and is
+            # discharged by the rewrite.  So the level-2 (and level-3) child count for k5_11
+            # halves for free -- but ONLY if the level-1 cover is rebuilt at nth = 10, which is
+            # a fresh tree and discards the nth = 8 work already done.
+            v_used = v2 or mean_param or 0.0
+            per_child = sc * 216.4 + v_used
+            k11_l2 = t3["k5_11"]["level2_by_side"]["1"]["children"]
+            k11_l3 = k11_l2 * desc3 * 8
+            save_s = (k11_l2 / 2.0) * per_child + (k11_l3 / 2.0) * per_child
+            # cost: k5_11's level-1 cover re-emitted as 505 orbit reps (ladder96 measured it)
+            reps = [g for g in lad["a_min_gate"] if g["side"] == 1][0]["sigma_lp_children"]
+            k11_node_s = t3["k5_11"]["mean_wall_solved_s"] + (mean_param or 0)
+            cost_s = reps * k11_node_s
+            # and it throws away the k5_11 nodes already verified on the nth = 8 cover
+            k11_done = board["k5_11_G1"]["parametric_done"]
+            proj["sigma_ladder_on_d2"] = dict(
+                mechanism=("orbit reduction at level 1 propagates: the partner's level-2 subtree "
+                           "is the sigma-image of the representative's, so no separate D2 ladder "
+                           "is built -- but the level-1 cover must be rebuilt at nth=10"),
+                k5_11_level2_children=k11_l2, k5_11_level3_children=round(k11_l3),
+                per_child_s=round(per_child, 1),
+                saving_days_1proc=round(save_s / day, 2),
+                saving_wall_days_5workers=round(save_s / day / 5, 2),
+                rebuild_cost_days_1proc=round(cost_s / day, 2),
+                rebuild_orbit_reps=reps,
+                nodes_invalidated=k11_done,
+                invalidated_work_days_1proc=round(k11_done * k11_node_s / day, 2),
+                net_days_1proc=round((save_s - cost_s) / day, 2),
+                net_wall_days_5workers=round((save_s - cost_s) / day / 5, 2))
     json.dump(proj, open(os.path.join(OUT, "projection96.json"), "w"), indent=1)
     json.dump(board, open(os.path.join(OUT, "scoreboard96.json"), "w"), indent=1)
     for cls, rows in allrows.items():

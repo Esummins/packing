@@ -2733,3 +2733,25 @@ affordable cost estimate for closing 3.84.
       fixed-side  level1 35.81 + level2 64.29 + level3 35.84 = 135.95 d 1-proc -> 27.19 wall-days at 5 workers
       => parametric still wins 1.69x, but the honest schedule is 16 wall-days at 5 workers, not the 6.55 d the delta=0
          level-2 numbers implied. Level 2+3 is 85.6% of the remaining wall.
+- A96 follow-ups (sigma-on-D2 priced; level-2 verify term bounded; level-2 partials MEASURED).
+- LEVEL-2 PARTIALS CLOSE EXACTLY AS AT LEVEL 1 -- measured, not assumed. resolve96 extended to read the level-2 results file
+  (the level-2 param certs already live in the same certs/param/<cls> tree, so only the results file differed). The level-2 FAILs
+  close in 3.1-10.7 s each, 1-2 witness cells apiece, zero residual -- same mechanism, same price as level 1.
+- LEVEL-2 VERIFY TERM, bounded three ways (n=14 after dropping one abnormal exit for re-run): median 400.1 s, mean 458.6 s,
+  censored mean 505.9 s (the censored one includes a TIMEOUT counted at its 1500 s cap, so it is a lower bound on that node).
+  Schedules at 5 workers: 14.31 / 15.27 / 16.05 wall-days. The honest range is 14-16; 16.05 was the pessimistic end.
+- TIMEOUT TAIL: ONE node of 14 (k5_11_interior_Y0059_D02, 88 atoms) is 23.4% of the whole level-2 verify wall. The tail is a few
+  nodes, as suspected -- but the resolver-first strategy CANNOT be built on a lower cap: a TIMEOUT produces no witness file and
+  no partial coverage, so it is worth nothing, whereas a completed FAIL yields 0.988-0.999 coverage plus witness cells that
+  resolve in seconds. The correct move on the tail is therefore to RAISE the cap for high-atom children so they land as FAIL and
+  then resolve, not to lower it. Cheap test queued: re-run Y0059_D02 at a 3000 s cap and see whether it completes as FAIL.
+- SIGMA LADDER ON THE D2 COVER -- PRICED, NOT DEPLOYED (needs an explicit decision, see below). There is no separate D2 ladder
+  to build: the orbit reduction PROPAGATES, because the partner box's entire level-2 subtree is the sigma-image of the
+  representative's and is discharged by the same rewrite. So k5_11's level-2 (2136) and level-3 (1139) children both halve.
+  At 794.6 s per child that is 15.06 d 1-proc saved = 3.01 wall-days at 5 workers, against a 4.90 d 1-proc rebuild of k5_11's
+  level-1 cover as 505 orbit reps: NET +10.16 d 1-proc = +2.03 wall-days at 5 workers (16.05 -> ~14.0).
+  THE CATCH, which is not build time: deploying it discards the 130 k5_11 nodes already verified on the nth=8 cover (1.26 d of
+  work) and resets k5_11's class coverage from 0.98047 to 0 until the new tree catches up. The code build is under a day
+  (ladder96/mirror96 already provide the ladder, orbits, reps, C-check and the rewrite; what is missing is a tree57 custom-ladder
+  option and a deployment driver), but the cover swap is the highest-risk change available on a live campaign, so it is being
+  surfaced for a decision rather than done unilaterally.

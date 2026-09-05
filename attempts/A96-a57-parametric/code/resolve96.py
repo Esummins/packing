@@ -93,7 +93,10 @@ def sources():
     out = []
     for src, pdir, cls_default in (
             (os.path.join(A95, "t1_param.jsonl"), os.path.join(A95, "param"), "k5_11_G1"),
-            (os.path.join(OUT, "param96.jsonl"), None, None)):
+            (os.path.join(OUT, "param96.jsonl"), None, None),
+            # the level-2 batch writes its param certs into the same certs/param/<cls> tree, so
+            # only the results file differs; level-2 partials resolve by the identical mechanism
+            (os.path.join(OUT, "param96_level2.jsonl"), None, None)):
         if not os.path.exists(src):
             continue
         for ln in open(src):
