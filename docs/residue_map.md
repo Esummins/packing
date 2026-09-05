@@ -208,6 +208,15 @@ Ordered by what it would remove. Each is stated so that it is checkable against 
    packing of an image-bearing class lies in the image's tube — a class-level basin — which would replace the
    resister branch by (D) leaves. (b) is the theorem restricted to the class, so it is not free either.
 
-The honest assessment: 1 is the theorem; 3 is the most likely to be provable and is worth roughly the factor the PI
-asked for on the corner-first route; 2 is the same theorem as 1 in easier clothing and A100 will say how much it is
-worth; 4 is unexplored; 5 is the only lever on the protected tier that does not require a theorem.
+6. **Lemma SNAP, the η-disturbance drain** (A101, in progress). The recurring pattern of the week: a square within η
+   of a lattice cell in position and tilt (near-flush ghost, nick, tangency) looks like an obstruction and then drains.
+   The lemma: such a square snaps into its cell at the same side unless the cell is *strictly* crowded, so "snap or
+   crowded" is a dichotomy; snaps on distinct cells are simultaneous. As a box-level leaf it targets exactly A57's
+   certification holes (near-flush against pin squares, i.e. η-disturbed stacked cells, which pocket96 did not test),
+   and as a base case it is what the flood theorem (item 1 restated under the strict convention) stands on.
+
+The honest assessment: 1 is the theorem, now being attempted a second time (A101) with the strict convention and the
+simultaneous move set, and it is the only item whose empirical boundary (side 4, no counterexample) has been measured;
+3 is the most likely to be provable and is worth roughly the factor the PI asked for on the corner-first route; 2 is
+the same theorem as 1 in easier clothing; 4 is unexplored; 5 is the only lever on the protected tier that does not
+require a theorem; 6 is a lemma with a consumer either way.
