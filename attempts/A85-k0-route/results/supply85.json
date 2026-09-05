@@ -1,0 +1,147 @@
+{
+ "attempt": "A85 chore supply85: A91 s.9 supply gate on the attemptable four-corner samples",
+ "seconds": 97.4,
+ "sample": {
+  "attemptable": 128,
+  "unkillable": 5,
+  "contradictory": 867
+ },
+ "n_attemptable_used": 128,
+ "headline": {
+  "n_zero_assignment": 0,
+  "fraction_zero": 0.0,
+  "a85_attemptable_fraction_sound": 0.128
+ },
+ "count_distribution": {
+  "histogram_by_decade": {
+   "1e6": 55,
+   "1e5": 40,
+   "1e7": 26,
+   "1e4": 4,
+   "1e8": 2,
+   "1e9": 1
+  },
+  "min": 63750.0,
+  "max": 2488320000.0,
+  "median_log10": 6.277485189345813
+ },
+ "n_zones_histogram": {
+  "10": 41,
+  "9": 47,
+  "8": 23,
+  "11": 14,
+  "12": 2,
+  "13": 1
+ },
+ "lemma_K_type_multiset": {
+  "YD": 209,
+  "XD": 214,
+  "D": 184,
+  "Y": 151,
+  "X": 149,
+  "XYD": 117
+ },
+ "zones_without_intruder_supplier": {
+  "n_nodes_with_any": 0,
+  "total": 0
+ },
+ "min_intruder_supplier_count_histogram": {
+  "1": 101,
+  "2": 27
+ },
+ "free_square_stats": {
+  "median_allowed_grid_cells": 2680.5,
+  "n_nodes_with_no_allowed_free_cell": 0,
+  "median_free_feasible_subsets": 260.0
+ },
+ "n_option_tuples_histogram": {
+  "1": 44,
+  "2": 58,
+  "4": 21,
+  "8": 3,
+  "16": 2
+ },
+ "box_resolution_sensitivity": {
+  "note": "DIAGNOSTIC ONLY -- lambda < 1 shrinks each pose box about its centre and is NOT a sound cover; it measures how much of the gate's vacuity is A85 box width (0.15 in x,y, 7-14 deg in theta) rather than geometry.  Counted: nodes with a required zone that NO other intruder can reach, minimised over option tuples.",
+  "data": {
+   "lambda=1.00": {
+    "n_nodes_with_an_unsuppliable_zone": 0,
+    "fraction": 0.0,
+    "total_unsuppliable_zones": 0
+   },
+   "lambda=0.50": {
+    "n_nodes_with_an_unsuppliable_zone": 5,
+    "fraction": 0.0390625,
+    "total_unsuppliable_zones": 5
+   },
+   "lambda=0.25": {
+    "n_nodes_with_an_unsuppliable_zone": 6,
+    "fraction": 0.046875,
+    "total_unsuppliable_zones": 6
+   },
+   "lambda=0.00": {
+    "n_nodes_with_an_unsuppliable_zone": 8,
+    "fraction": 0.0625,
+    "total_unsuppliable_zones": 8
+   }
+  }
+ },
+ "canary_trump_TL": {
+  "s": 3.8770835900228136,
+  "squares": [
+   {
+    "sq": 4,
+    "TL_frame_centre": [
+     0.4999999999999994,
+     1.3445252756732025
+    ],
+    "TL_frame_tilt_deg": 0.0,
+    "lemma_K_type": "Y",
+    "required_dirs": [
+     "y"
+    ]
+   },
+   {
+    "sq": 6,
+    "TL_frame_centre": [
+     1.536287180312013,
+     0.7046081698617597
+    ],
+    "TL_frame_tilt_deg": 49.81806270967018,
+    "lemma_K_type": "X",
+    "required_dirs": [
+     "x"
+    ]
+   }
+  ],
+  "suppliers": {
+   "4_y": [
+    3,
+    7,
+    6
+   ],
+   "6_x": [
+    7,
+    9
+   ]
+  },
+  "expected_lockers_3_7_8_present": {
+   "4_y": [
+    3,
+    7
+   ],
+   "6_x": [
+    7
+   ]
+  },
+  "n_assignments_at_least_one": true,
+  "PASS": true
+ },
+ "model": {
+  "reach_radius": 0.7071067811865476,
+  "sub": 4,
+  "ngrid": 241,
+  "grid_delta": 0.00847669002684717,
+  "seed": 20260903
+ }
+}
