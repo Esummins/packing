@@ -10,7 +10,9 @@ Reading guide for the figures: blue = the class's pins (slot squares); dashed gr
 dashed = the conditioned square's box at the node (where present); orange = the witness box (the placement of a free
 square where the measure is short), drawn as its centre rectangle plus the two extreme-tilt outlines; red = one
 concrete square inside the witness box. A witness box is a *placement the certificate could not price*, i.e. a place
-where, as far as the certificate knows, an eleventh square might sit.
+where, as far as the certificate knows, an eleventh square might sit. Pins are drawn full size; the certificates use
+pin *cores* shrunk by the slack (0.01), so a sample square may overlap a drawn pin by up to that amount (the D example
+does, by 0.014 against a level-2 core) without being illegal for the certificate.
 
 ## 0. The table
 
