@@ -292,20 +292,71 @@ def main():
                     cost_scale_vs_a95=round((tot_s / tot_c) / 216.4, 3),
                     per_child_spread_s=[min(v["per_child_s"] for v in done_p.values()),
                                         max(v["per_child_s"] for v in done_p.values())])
-            # The level-2-dominated schedule: rescale ONLY the level-2 LP term (the parametric
-            # verify per child is measured directly and needs no scaling).
+            # Level-3 descent, MEASURED.  The schedule inherited from A95 stops at level 2, i.e.
+            # it silently assumed a 0% descent rate.  The D2 corpus says otherwise.
+            alive2 = sum(1 for r in R if (r.get("cert") or "").startswith("ALIVE"))
+            desc3 = alive2 / len(R)
+            proj["level3_descent"] = dict(
+                measured_rate=round(desc3, 4), alive_children=alive2, of_rows=len(R),
+                note=("A95's model has no level-3 term at all, i.e. an unstated 0% descent. "
+                      "This is the measured rate at level 2 on the deployed delta=1e-2 tree."))
+            # The schedule: level-2 LP rescaled by the measured per-child cost, level-2 VERIFY
+            # replaced by the directly measured level-2 verify wall (not the level-1 mean), and a
+            # level-3 term at the measured descent rate.
             sc = (proj["level2_delta1e2_probe"].get("complete_parents_only") or
                   proj["level2_delta1e2_probe"])["cost_scale_vs_a95"]
             l1 = sum(per_class[n]["level1_lp_days"] + per_class[n]["level1_param_days"]
                      for n in per_class)
             l2lp = sum(per_class[n]["level2_lp_days"] for n in per_class)
             l2pa = sum(per_class[n]["level2_param_days"] for n in per_class)
-            tot_r = l1 + l2lp * sc + l2pa
+            l2_children = sum(t3[n]["level2_by_side"]["1"]["children"] for n in ("k5_11", "k5_16"))
+            v2 = None
+            vp = os.path.join(OUT, "param96_level2.jsonl")
+            if os.path.exists(vp):
+                V = [r for r in load(vp) if r.get("param_wall_s")]
+                if V:
+                    v2 = statistics.mean([r["param_wall_s"] for r in V])
+                    proj["level2_verify_measured"] = dict(
+                        n=len(V), mean_wall_s=round(v2, 1),
+                        median_wall_s=round(statistics.median(
+                            [r["param_wall_s"] for r in V]), 1),
+                        level1_mean_used_before_s=mean_param,
+                        ratio_level2_over_level1=round(v2 / mean_param, 3) if mean_param else None,
+                        verdicts={k: sum(1 for r in V if r["verdict"] == k)
+                                  for k in {r["verdict"] for r in V}})
+                    l2pa = l2_children * v2 / day          # replaces the level-1-mean estimate
+            l3 = (l2_children * desc3 * 8 * (sc * 216.4 + (v2 or mean_param or 0))) / day
+            tot_r = l1 + l2lp * sc + l2pa + l3
+            # LIKE-FOR-LIKE BASELINE.  A95's four-fixed-side figure carries the SAME two defects
+            # this section just fixed in the parametric route: it prices level 2 at the delta=0
+            # 216.4 s/child and it has no level-3 term.  Comparing a corrected parametric number
+            # against an uncorrected baseline would be an apples-to-oranges error -- and in this
+            # case one that makes the parametric route look worse than it is.  The baseline pays
+            # both corrections on ALL FOUR sides.
+            b_l1 = t3["TOTAL_level1_remaining_days_1proc"]
+            b_l2 = t3["TOTAL_level2_days_1proc"]
+            b_children = sum(t3[n]["level2_by_side"][str(s)]["children"]
+                             for n in ("k5_11", "k5_16") for s in (1, 2, 3, 4))
+            b_l3 = (b_children * desc3 * 8 * sc * 216.4) / day
+            b_tot = b_l1 + b_l2 * sc + b_l3
+            proj["baseline_four_fixed_sides_corrected"] = dict(
+                level1_days_1proc=round(b_l1, 2),
+                level2_days_1proc=round(b_l2 * sc, 2),
+                level3_days_1proc=round(b_l3, 2),
+                level2_children_all_sides=b_children,
+                total_days_1proc=round(b_tot, 2),
+                wall_days_3workers=round(b_tot / 3, 2),
+                wall_days_5workers=round(b_tot / 5, 2),
+                note=("same level-2 per-child cost and same level-3 descent rate as the "
+                      "parametric schedule, applied to all four sides; no parametric verify term "
+                      "because the fixed-side route does not have one"))
             proj["schedule_rescaled_level2"] = dict(
                 level2_scale_used=sc,
+                level2_verify_wall_used_s=round(v2, 1) if v2 else mean_param,
                 level1_days_1proc=round(l1, 2),
                 level2_days_1proc=round(l2lp * sc + l2pa, 2),
-                level2_share_of_remaining=round((l2lp * sc + l2pa) / tot_r, 3),
+                level3_days_1proc=round(l3, 2),
+                level2_plus_3_share_of_remaining=round((l2lp * sc + l2pa + l3) / tot_r, 3),
                 total_days_1proc=round(tot_r, 2),
                 wall_days_3workers=round(tot_r / 3, 2),
                 wall_days_5workers=round(tot_r / 5, 2),

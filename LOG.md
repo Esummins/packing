@@ -2716,3 +2716,20 @@ affordable cost estimate for closing 3.84.
   15.44 / 25.74 d. So the parametric route still wins by ~1.6x, but the win is smaller than the delta=0 level-2 number implied
   (6.55 d at 5 workers), and the whole remaining schedule is now a level-2 question, not a level-1 one.
 - Resolver sweep complete: 82/82 partial nodes closed to full window, zero residual, median 4.1 s, 1718 s total.
+- A96 level-2 re-projection (both least-supported terms replaced with measurements). THE 2.76x DOES NOT HOLD: at 8 complete
+  parents / 70 children the delta=1e-2 level-2 LP cost is 336.1 s/child = 1.553x A95's delta=0 216.4 s. The scale walked
+  1.54 -> 2.76 -> 2.43 -> 2.36 -> 1.55 as parents landed; the high readings were one outlier parent (Y0059, 841 s/child) in a
+  3-parent sample. Per-parent spread is still 126.8-841.0 s, so 1.55x is the number to use and it remains soft.
+- LEVEL-2 PARAMETRIC VERIFY, MEASURED on 15 real delta=1e-2 children (replacing the level-1 mean): mean 505.9 s, median 424.1 s
+  vs the 200.5 s level-1 mean previously assumed = 2.52x. This is the term that now dominates: 4608 level-2 children x 505.9 s
+  = 27.0 d 1-proc. Caveats: n=15, one TIMEOUT counted at its 1500 s cap (censored, so the true mean is >= 505.9) and one
+  abnormal exit (rc=-1) to re-run; sample atoms range 4-88, so it is not a clean median-node sample.
+- LEVEL-3 DESCENT, MEASURED: 5/74 ALIVE at depth 2 = 6.8%. A95's schedule has NO level-3 term at all -- an unstated 0% descent.
+  At 6.8% this adds 24.27 d 1-proc to the parametric route and 35.84 d to the fixed-side baseline.
+- SCHEDULE, like-for-like (the SAME level-2 per-child cost and level-3 rate applied to both routes -- comparing a corrected
+  parametric number against A95's uncorrected baseline would have been apples-to-oranges, and would have made the parametric
+  route look WORSE than the fixed-side plan):
+      parametric  level1 11.59 + level2 44.36 + level3 24.27 = 80.22 d 1-proc -> 16.04 wall-days at 5 workers (15.57 w/ sigma)
+      fixed-side  level1 35.81 + level2 64.29 + level3 35.84 = 135.95 d 1-proc -> 27.19 wall-days at 5 workers
+      => parametric still wins 1.69x, but the honest schedule is 16 wall-days at 5 workers, not the 6.55 d the delta=0
+         level-2 numbers implied. Level 2+3 is 85.6% of the remaining wall.
