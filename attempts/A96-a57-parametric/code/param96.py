@@ -116,6 +116,11 @@ def main():
     ap.add_argument("--depth", type=int, default=48)
     ap.add_argument("--max-witnesses", type=int, default=2000)
     ap.add_argument("--groups", default="", help="comma list; default = all, in selection order")
+    ap.add_argument("--tag", default="", help="restrict to one A57 tag (G1 / L1)")
+    ap.add_argument("--level", type=int, default=0, help="restrict to one tree level")
+    ap.add_argument("--out", default="", help="results file; default results/param96.jsonl. Use a "
+                    "separate file when running a second instance alongside the main pass, so the "
+                    "two do not interleave in one append-only log or redo each other's nodes.")
     ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args()
 
@@ -123,9 +128,15 @@ def main():
     if a.groups:
         want = set(a.groups.split(","))
         sel = [s for s in sel if s["group"] in want]
+    if a.tag:
+        sel = [s for s in sel if s["tag"] == a.tag]
+    if a.level:
+        sel = [s for s in sel if s["level"] == a.level]
     if a.limit:
         sel = sel[:a.limit]
-    res_path = os.path.join(OUT, "param96.jsonl")
+    res_path = a.out if a.out else os.path.join(OUT, "param96.jsonl")
+    if a.out and not os.path.isabs(res_path):
+        res_path = os.path.join(BASE, res_path)
     done = set()
     if os.path.exists(res_path):
         for ln in open(res_path):
