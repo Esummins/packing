@@ -25,8 +25,8 @@ either killed a piece of (iii) or priced a route to it; none deleted it. It is k
 | k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric; class coverage 0.980 / 0.992 | **~1,925** (80 CPU-days: level 1 11.6, level 2 44.4, level 3 24.3; 16 wall-days at 5 workers; four fixed sides would be 136 CPU-days) | measured (A96, 2026-09-04 evening): level-2 verify 506 s/child (n = 15, censored), level-2 LP 1.55× level 1, level-3 descent 6.8% |
 | trump5 (Trump's own class) | 1 | A60 residual tree, cover done, deepen + tube | 300–500 | running |
 | stragglers (s0-only rows) | 6 left | A61 converting | small | running |
-| protected k4 | 6 (incl. corners4) | P-TREE trees unrun; k4_08/k4_11 killed at 3.833 (A82) | 800 (model) | A100 measuring |
-| protected k ≤ 3 | 10 | P-TREE trees unrun | 1,000 (model) | A100 measuring |
+| protected k4 | 6 (incl. corners4) | P-TREE trees; k4_08/k4_11 killed at 3.833 (A82) | **~390 per class (interim, k4_11)**: first-pass certification 0.26 because τ pins exactly to the budget on 74% of level-1 cells at s0 (the image fits at s0, so the LP's adversary keeps the class alive); 2.4–3.5× A84's model | A100 interim (3% of cells run) |
+| protected k ≤ 3 | 10 | P-TREE trees | **~225 per class (interim, k3_02)**: certification 0.75, resolver 9/9, ladder lands at level 24 in the tube (59 (D) leaves) — bottom of A84's model | A100 interim |
 | k0_00 | 1 | interior-first tree unrun | 3,200–7,000 at s0 → 400–700 if A99 lands | A85 model; A99 measuring |
 
 The protected tier and k0_00 are the two blocks where a theorem could delete work; the rest is engineering.
@@ -169,6 +169,14 @@ Ordered by what it would remove. Each is stated so that it is checkable against 
    axes at side < 3.9 has a finite list of shapes (A50-style quantisation). If that list is short, the residue is a
    finite case analysis, which is what every other route failed to reach.
 
+5. **The seam, for the protected tier** (this is where A100's k4_11 cost comes from). Below ŝ − 0.025 every protected
+   class dies by a plain certificate (A82: the aliveness cliff is a step of exactly one *at* ŝ, and dτ/ds ≈ 8 on k4);
+   at s₀ the image fits and τ pins to the budget on most cells. The protected tier's whole cost is therefore the slab
+   (ŝ − 0.025, ŝ), and 0.025 is set by one number: the certifier's ε-geometry affordability gate, ≈ 0.21 of slack
+   below which a certificate cannot be verified. Halving that gate halves the seam width and the number of top-slab
+   tree levels; a certifier that verifies at η = −0.05 would shrink the tier's cost by roughly 4×. This is engineering
+   with a structural reason behind it, not a theorem, and it applies to every image-bearing class at once.
+
 The honest assessment: 1 is the theorem; 3 is the most likely to be provable and is worth roughly the factor the PI
 asked for on the corner-first route; 2 is the same theorem as 1 in easier clothing and A100 will say how much it is
-worth; 4 is unexplored.
+worth; 4 is unexplored; 5 is the only lever on the protected tier that does not require a theorem.
