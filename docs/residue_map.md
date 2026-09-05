@@ -186,8 +186,10 @@ Ordered by what it would remove. Each is stated so that it is checkable against 
    a step of exactly one *at* ŝ, dτ/ds ≈ 8), and the class dies by plain certificates from ŝ − 0.025 down, the 0.025
    being the certifier's slack gate (≈ 0.21) divided by dτ/ds. So the tier's residue is the slab (ŝ − 0.025, ŝ) of
    each image-bearing class, and inside it the tree cannot decide by LP at s₀ at all. Two levers, one engineering and
-   one theorem: (a) η-gating, free (skip certification and ε-geometry on η = 0 cells: 25–40% of the cover leg), and a
-   certifier that verifies at smaller slack (narrows the slab from below); (b) the statement that in the top slab a
+   one theorem: (a) η-gating, free — skip certification and ε-geometry on η = 0 cells (25–40% of A84's cover leg;
+   A57's engine already does this, and on A57's 1,206 rows the other half of the law fails: η < 0 certifies only 79%
+   of the time, so the rule is "η = 0 never certifies", not "η < 0 always does"), and a certifier that verifies at
+   smaller slack (narrows the slab from below); (b) the statement that in the top slab a
    packing of an image-bearing class lies in the image's tube — a class-level basin — which would replace the
    resister branch by (D) leaves. (b) is the theorem restricted to the class, so it is not free either.
 
