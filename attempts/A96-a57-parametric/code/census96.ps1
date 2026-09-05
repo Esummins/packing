@@ -39,8 +39,18 @@ foreach ($p in $procs) {
   elseif ($cl -like '*slotcrowd94*')    { $owner = 'A94' }
   $script = 'python'
   if ($cl -match '([A-Za-z0-9_]+\.py)') { $script = $Matches[1] }
+  # A96's own drivers are started with -WorkingDirectory and a RELATIVE script path, so their
+  # command line does not contain the attempt directory and the path match above misses them.
+  if ($owner -eq 'other' -and $script -match '^(param96|resolve96|sliver96|endpoint96|neighbours96|contention96)\.py$') { $owner = 'A96' }
+  if ($owner -eq 'other' -and $script -eq 'deepen.py') { $owner = 'A57' }
+  # Detail MUST carry --name as well as --shard: two different strata running their own shard 3/6
+  # render identically without it, which reads as one duplicated shard (it is not).
+  $detail = ''
+  if ($cl -match '--name (\S+)') { $detail = $Matches[1] }
+  if ($cl -match '--shard (\S+)') { $detail = ($detail + ' shard ' + $Matches[1]).Trim() }
+  if ($cl -match '--key (\S+)') { $detail = 'key ' + $Matches[1] }
   $rows += [pscustomobject]@{ PID = $p.ProcessId; Owner = $owner; Script = $script;
-                              CPUpct = $cpu; WS_MB = $ws }
+                              Detail = $detail; CPUpct = $cpu; WS_MB = $ws }
 }
 $rows | Sort-Object CPUpct -Descending | Format-Table -AutoSize
 $busy = @($rows | Where-Object { $_.CPUpct -ge 20 })
