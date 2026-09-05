@@ -179,13 +179,17 @@ Ordered by what it would remove. Each is stated so that it is checkable against 
    axes at side < 3.9 has a finite list of shapes (A50-style quantisation). If that list is short, the residue is a
    finite case analysis, which is what every other route failed to reach.
 
-5. **The seam, for the protected tier** (this is where A100's k4_11 cost comes from). Below ŝ − 0.025 every protected
-   class dies by a plain certificate (A82: the aliveness cliff is a step of exactly one *at* ŝ, and dτ/ds ≈ 8 on k4);
-   at s₀ the image fits and τ pins to the budget on most cells. The protected tier's whole cost is therefore the slab
-   (ŝ − 0.025, ŝ), and 0.025 is set by one number: the certifier's ε-geometry affordability gate, ≈ 0.21 of slack
-   below which a certificate cannot be verified. Halving that gate halves the seam width and the number of top-slab
-   tree levels; a certifier that verifies at η = −0.05 would shrink the tier's cost by roughly 4×. This is engineering
-   with a structural reason behind it, not a theorem, and it applies to every image-bearing class at once.
+5. **The seam, for the protected tier** (this is where A100's k4_11 cost comes from). A100 measured the η law to be
+   exact on 54 cover nodes: η < 0 always certifies, η = 0 (τ equal to the budget to the last digit) never does, and
+   bisecting an η = 0 cell gives η = 0 children (1 kill in 16). Those cells are the ones where Trump's image, or its
+   fractional shadow, is feasible for the class LP at s₀; below ŝ the image does not fit (A82: the aliveness cliff is
+   a step of exactly one *at* ŝ, dτ/ds ≈ 8), and the class dies by plain certificates from ŝ − 0.025 down, the 0.025
+   being the certifier's slack gate (≈ 0.21) divided by dτ/ds. So the tier's residue is the slab (ŝ − 0.025, ŝ) of
+   each image-bearing class, and inside it the tree cannot decide by LP at s₀ at all. Two levers, one engineering and
+   one theorem: (a) η-gating, free (skip certification and ε-geometry on η = 0 cells: 25–40% of the cover leg), and a
+   certifier that verifies at smaller slack (narrows the slab from below); (b) the statement that in the top slab a
+   packing of an image-bearing class lies in the image's tube — a class-level basin — which would replace the
+   resister branch by (D) leaves. (b) is the theorem restricted to the class, so it is not free either.
 
 The honest assessment: 1 is the theorem; 3 is the most likely to be provable and is worth roughly the factor the PI
 asked for on the corner-first route; 2 is the same theorem as 1 in easier clothing and A100 will say how much it is
