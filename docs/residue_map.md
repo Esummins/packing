@@ -77,6 +77,7 @@ What the week's other results did to this residue:
 | pin supply (supply85) | every required lock/anchor zone has an intruder supplier; free squares never needed; **vacuous** |
 | exchange / Young flood (A98) | 30/33 corners convert at the same side; the stalls are **interlocks** |
 | pocket exemption (pocket96) | 0.3–0.6% of A57 holes; **yield zero** |
+| global degeneration with the wider move set (degen87, after the PI's correction) | tangency-tolerant intruders (depth > 10⁻⁶), simultaneous align + cell-level teleport + wall-slides + exchange: **6 of 8 K0-BLOCKED packings reach a dead class at the same side**, all 8 degenerate (k 0 → 6…11), the 3.985 record to k = 7; Trump makes zero moves. The two failures are at side 4.0000 and stop at a tuple not realisable at s₀. Eight points, not a lemma; but the corner-local "interlock" was an artefact of counting tangencies as blocks |
 
 ## 4. The corner cases — the object in pictures
 
