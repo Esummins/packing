@@ -1,10 +1,10 @@
 {
  "measured": {
-  "n_param_runs": 238,
-  "mean_param_wall_s": 190.0,
+  "n_param_runs": 239,
+  "mean_param_wall_s": 190.9,
   "median_param_wall_s": 62.0,
-  "mean_fixed_wall_s": 376.8,
-  "ratio_param_over_one_fixed_side": 0.5043
+  "mean_fixed_wall_s": 377.0,
+  "ratio_param_over_one_fixed_side": 0.5063
  },
  "baseline_four_fixed_sides": {
   "level1_days_3w": 11.94,
@@ -18,21 +18,21 @@
     "level1_lp_days": 4.3,
     "level1_param_days": 1.81,
     "level2_lp_days": 5.11,
-    "level2_param_days": 4.7
+    "level2_param_days": 4.72
    },
    "k5_16": {
     "level1_lp_days": 3.26,
-    "level1_param_days": 2.01,
+    "level1_param_days": 2.02,
     "level2_lp_days": 6.08,
-    "level2_param_days": 5.44
+    "level2_param_days": 5.46
    }
   },
-  "total_days_1proc": 32.69,
-  "wall_days_3workers": 10.9,
-  "wall_days_5workers": 6.54,
-  "with_sigma_ladder_days_1proc": 30.34,
-  "with_sigma_ladder_wall_days_3workers": 10.11,
-  "with_sigma_ladder_wall_days_5workers": 6.07,
+  "total_days_1proc": 32.76,
+  "wall_days_3workers": 10.92,
+  "wall_days_5workers": 6.55,
+  "with_sigma_ladder_days_1proc": 30.41,
+  "with_sigma_ladder_wall_days_3workers": 10.14,
+  "with_sigma_ladder_wall_days_5workers": 6.08,
   "sigma_lp_children_side1_k5_11": [
    821,
    505
@@ -40,14 +40,60 @@
   "assumption": "level-1 and level-2 nodes are EMITTED once at side 1 (A57's own measured LP+certify wall) and each is verified over the whole window once at the measured mean parametric wall; sides 2/3/4 do not run at all"
  },
  "level2_delta1e2_probe": {
-  "rows": 28,
-  "parents": 3,
-  "logic_kill_frac": 0.143,
-  "mean_wall_solved_s": 639.6,
-  "mean_wall_per_child_s": 525.4,
+  "rows": 31,
+  "parents": 4,
+  "logic_kill_frac": 0.194,
+  "mean_wall_solved_s": 617.9,
+  "mean_wall_per_child_s": 478.4,
   "a95_delta0_per_child_s": 216.4,
-  "cost_scale_vs_a95": 2.428,
-  "level2_days_1proc_rescaled": 27.17,
-  "caveat": "supply-limited probe, not the 200-child measurement; the headline projection still uses A95's delta=0 number"
+  "cost_scale_vs_a95": 2.211,
+  "level2_days_1proc_rescaled": 24.74,
+  "caveat": "supply-limited probe, not the 200-child measurement; the headline projection still uses A95's delta=0 number",
+  "per_parent": {
+   "k5_11_interior_Y0041": {
+    "children": 9,
+    "solved": 4,
+    "logic_kills": 4,
+    "per_child_s": 351.2
+   },
+   "k5_11_interior_Y0059": {
+    "children": 12,
+    "solved": 12,
+    "logic_kills": 0,
+    "per_child_s": 841.0
+   },
+   "k5_11_interior_Y0083": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 197.2
+   },
+   "k5_11_interior_Y0101": {
+    "children": 2,
+    "solved": 0,
+    "logic_kills": 2,
+    "per_child_s": 0.0
+   }
+  },
+  "complete_parents_only": {
+   "parents": 3,
+   "children": 29,
+   "per_child_s": 511.4,
+   "cost_scale_vs_a95": 2.363,
+   "per_child_spread_s": [
+    197.2,
+    841.0
+   ]
+  }
+ },
+ "schedule_rescaled_level2": {
+  "level2_scale_used": 2.363,
+  "level1_days_1proc": 11.39,
+  "level2_days_1proc": 36.62,
+  "level2_share_of_remaining": 0.763,
+  "total_days_1proc": 48.01,
+  "wall_days_3workers": 16.0,
+  "wall_days_5workers": 9.6,
+  "with_sigma_ladder_wall_days_5workers": 9.13
  }
 }

@@ -2705,3 +2705,14 @@ affordable cost estimate for closing 3.84.
 - A98 addendum (flood87 final, 1253 s, A87 notes/flood87.md): 30/33 floods succeed, all exactly verified (21 depth 1 = exchange87, 8 depth 2, 1
   depth 3: 9 corners rescued beyond the depth-1 exchange, all at side >= 4); 3 stalls = record_s0115 BL/BR + TRUMP TL, each at the full
   block [3,3,3] with deficit 2 = Lemma CAP; canary_OK = True; releases were slide-ins only. Consistent with the static census corner by corner.
+- A96 level-2 gate (31 rows / 4 parents, delta=1e-2): the 2.76x does NOT hold -- it was small-sample drift. The per-child scale
+  vs A95's delta=0 216.4 s has fallen monotonically as parents landed: 1.54x (7 rows/1 parent) -> 2.76x (13/2) -> 2.43x (28/3)
+  -> 2.21x (31/4) pooled, 2.36x over COMPLETE parents only (3 parents, 29 children, 511.4 s/child; the 4th parent is still being
+  expanded by deepen and its children arrive logic-kills-first, which biases the pooled figure low). Per-parent per-child cost is
+  197.2 / 351.2 / 841.0 s -- a 4.3x spread across three parents, so no single scale factor is yet determined; 2.36x is the number
+  to use and it is soft. Logic-kill fraction settled at 19.4% (it read 57% at one parent).
+- LEVEL 2 DOMINATES: at scale 2.36x the remaining wall is level1 11.39 d + level2 36.62 d = 48.01 d 1-proc, level 2 = 76.3% of it.
+  Schedule at 5 workers 9.60 d (9.13 d with the sigma ladder), at 3 workers 16.00 d -- against the four-fixed-side baseline of
+  15.44 / 25.74 d. So the parametric route still wins by ~1.6x, but the win is smaller than the delta=0 level-2 number implied
+  (6.55 d at 5 workers), and the whole remaining schedule is now a level-2 question, not a level-1 one.
+- Resolver sweep complete: 82/82 partial nodes closed to full window, zero residual, median 4.1 s, 1718 s total.

@@ -267,6 +267,50 @@ def main():
                     * (scale or 1), 2),
                 caveat=("supply-limited probe, not the 200-child measurement; the headline "
                         "projection still uses A95's delta=0 number"))
+            # Per-parent, because the pooled figure hides the spread and is dragged by a parent
+            # deepen has not finished expanding (its children arrive logic-kills-first).
+            byp = {}
+            for r in R:
+                byp.setdefault(r["id"].rsplit("_D", 1)[0], []).append(r)
+            pp = {}
+            for k, v in byp.items():
+                ws = [(x.get("lp_seconds") or 0) + (x.get("cert_seconds") or 0)
+                      for x in v if (x.get("lp_seconds") or 0) > 0]
+                pp[k] = dict(children=len(v), solved=len(ws),
+                             logic_kills=sum(1 for x in v
+                                             if (x.get("cert") or "").startswith("KILL-BY-LOGIC")),
+                             per_child_s=round(sum(ws) / len(v), 1))
+            proj["level2_delta1e2_probe"]["per_parent"] = pp
+            # A parent whose children are still arriving understates cost: exclude it.
+            done_p = {k: v for k, v in pp.items() if v["solved"] > 0 and v["children"] >= 8}
+            if done_p:
+                tot_c = sum(v["children"] for v in done_p.values())
+                tot_s = sum(v["per_child_s"] * v["children"] for v in done_p.values())
+                proj["level2_delta1e2_probe"]["complete_parents_only"] = dict(
+                    parents=len(done_p), children=tot_c,
+                    per_child_s=round(tot_s / tot_c, 1),
+                    cost_scale_vs_a95=round((tot_s / tot_c) / 216.4, 3),
+                    per_child_spread_s=[min(v["per_child_s"] for v in done_p.values()),
+                                        max(v["per_child_s"] for v in done_p.values())])
+            # The level-2-dominated schedule: rescale ONLY the level-2 LP term (the parametric
+            # verify per child is measured directly and needs no scaling).
+            sc = (proj["level2_delta1e2_probe"].get("complete_parents_only") or
+                  proj["level2_delta1e2_probe"])["cost_scale_vs_a95"]
+            l1 = sum(per_class[n]["level1_lp_days"] + per_class[n]["level1_param_days"]
+                     for n in per_class)
+            l2lp = sum(per_class[n]["level2_lp_days"] for n in per_class)
+            l2pa = sum(per_class[n]["level2_param_days"] for n in per_class)
+            tot_r = l1 + l2lp * sc + l2pa
+            proj["schedule_rescaled_level2"] = dict(
+                level2_scale_used=sc,
+                level1_days_1proc=round(l1, 2),
+                level2_days_1proc=round(l2lp * sc + l2pa, 2),
+                level2_share_of_remaining=round((l2lp * sc + l2pa) / tot_r, 3),
+                total_days_1proc=round(tot_r, 2),
+                wall_days_3workers=round(tot_r / 3, 2),
+                wall_days_5workers=round(tot_r / 5, 2),
+                with_sigma_ladder_wall_days_5workers=round(
+                    (tot_r - sigma_saved_s / day) / 5, 2))
     json.dump(proj, open(os.path.join(OUT, "projection96.json"), "w"), indent=1)
     json.dump(board, open(os.path.join(OUT, "scoreboard96.json"), "w"), indent=1)
     for cls, rows in allrows.items():
