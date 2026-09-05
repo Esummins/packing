@@ -46,6 +46,7 @@ def poly(pts, ox, oy, col, fill, dash=False, op=0.55, w=1.6):
     da = ' stroke-dasharray="5,3"' if dash else ''
     return f'<polygon points="{d}" fill="{fill}" fill-opacity="{op}" stroke="{col}" stroke-width="{w}"{da}/>'
 def text(x, y, s, size=11, col='#222', bold=False, anchor='start'):
+    s = s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
     b = ' font-weight="bold"' if bold else ''
     return f'<text x="{x}" y="{y}" font-size="{size}" fill="{col}" text-anchor="{anchor}"{b}>{s}</text>'
 def container(ox, oy, side, label=None):
