@@ -134,8 +134,11 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
 - A96 (landed): level-2 parametric verify 506 s/child (2.5× the level-1 mean; n = 15, censored by one timeout),
   level-2 LP 1.55× level 1 (70 children, 8 parents; the earlier 2.76× was one outlier parent), level-3 descent 6.8%
   (was an unstated zero). A57 = 80 CPU-days, 16 wall-days at 5 workers; the parametric route still beats four fixed
-  sides by 1.7×. Levels 2+3 are 86% of it; the σ ladder on the level-2 cover and resolver closure of level-2
-  partials are the two levers, both being priced.
+  sides by 1.7×. Levels 2+3 are 86% of it. Follow-ups measured: the honest range is 14–16 wall-days (median vs
+  censored-mean verify wall); one 88-atom child is 23% of the level-2 verify wall (a completed FAIL plus resolver
+  beats a timeout, so the cap is being raised for high-atom children, not lowered); level-2 partials close through
+  the resolver in 3–11 s each; the σ ladder propagates to level 2 and would save 2 wall-days net but requires
+  resetting k5_11's live coverage, so it is recorded, not deployed.
 - A99: the three k0 tree reductions, stacked, at s0 and window-valid.
 - A100: the protected tier from real runs (k4_11 and one k ≤ 3 class), tier projection, all-layers total.
 
