@@ -2802,3 +2802,14 @@ affordable cost estimate for closing 3.84.
   on the bare node id, so a node whose id recurs in another class is silently skipped (k4_11's
   c0_Y1119 was); fixed to (cls, id) in `code/resolve100.py` — worth porting back before A96 runs a
   second class.
+- A96 <- A100 items (2026-09-05). (1) resolve96.py done-set BUG PORTED: now keyed on (cls, id), never the bare id. Re-scan of
+  this campaign's 377 ids across param96 / param96_level2 / resolve96 / A95 t1_param found ZERO genuine cross-class collisions --
+  A57 node ids embed their stratum name ("k5_11_interior_Y0295"), so nothing was skipped here. The fix stands anyway: the
+  invariant must not rest on a naming convention other campaigns (k4_11's bare "c0_Y1119") do not share.
+- (2) THE ETA LAW ON A57's OWN CORPUS (1206 G1 rows, levels 1+2) -- one half holds, the other does not, and the saving is ZERO:
+    eta == 0 => resister: HOLDS, 15/15 (all ALIVE-at-LP).
+    eta <  0 => certificate: DOES NOT HOLD. 576/730 PASS = 78.9%; 74 FAIL and 80 ALIVE-at-LP also have eta < 0. A100's 25/25 was
+      54 k4_11 cover nodes; it does not transfer to A57, and anything that skipped work for eta < 0 here would be wrong on 21%.
+    SAVING = 0.0% of the certify+eps_geo wall (0 s of 171818 s) and 0.0% of total node wall. A57 ALREADY does this: tree57.py
+      (~line 504) refuses certification outright when tau >= budget, i.e. exactly eta >= 0, so all 15 eta == 0 nodes carry
+      cert_seconds 0 and eps_geo 0. The optimisation is implemented; there is no remaining wall to remove.

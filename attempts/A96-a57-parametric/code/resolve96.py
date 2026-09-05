@@ -127,14 +127,20 @@ def main():
     env = dict(os.environ, OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1",
                MKL_NUM_THREADS="1", NUMEXPR_NUM_THREADS="1")
     res = os.path.join(OUT, "resolve96.jsonl")
+    # Key the done-set on (cls, id), NEVER on the bare id (A100 bug report, 2026-09-05: k4_11's
+    # c0_Y1119 was silently skipped because the same node id existed in another class).  A57's own
+    # ids happen to embed their stratum name ("k5_11_interior_Y0295"), so a re-scan of this
+    # campaign's 377 ids found zero genuine cross-class collisions and no work was lost here --
+    # but the invariant must not depend on a naming convention that other campaigns do not share.
     done = set()
     if os.path.exists(res):
         for ln in open(res):
             try:
-                done.add(json.loads(ln)["id"])
+                r = json.loads(ln)
+                done.add((r.get("cls"), r["id"]))
             except Exception:
                 pass
-    S = [s for s in sources() if s["id"] not in done]
+    S = [s for s in sources() if (s["cls"], s["id"]) not in done]
     # Fewest gaps first.  A node whose only misses are the two recurring slivers closes in
     # seconds; a node with a long witness list (k5_11_interior_Y0540 has six) can absorb the
     # whole budget in bisection, and it must not block the cheap ones.
