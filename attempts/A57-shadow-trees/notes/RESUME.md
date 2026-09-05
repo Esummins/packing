@@ -1,5 +1,43 @@
 # A57 — how to resume
 
+## PRICED, NOT DEPLOYED: the σ-symmetric ladder for k5_11 (A96, 2026-09-04)
+
+**Take this off the shelf if k5_11's level-1 tree ever has to restart anyway.** It was declined
+in September 2026 only because deploying it mid-campaign resets a live class's coverage — the
+arithmetic itself is favourable, and everything except the `tree57` glue is already built and
+tested.
+
+The saving is at level 2/3, not level 1. The orbit reduction **propagates**: with a σ-symmetric
+cover and only orbit representatives expanded, a partner box's entire level-2 subtree is the
+σ-image of the representative's and is discharged by the same certificate rewrite. So k5_11's
+level-2 (2136) and level-3 (~1139) children both halve. There is no separate D2 ladder to build.
+
+| | days, 1 process |
+|---|---|
+| saving: half of k5_11's level-2 + level-3 children at 794.6 s each | **15.06** |
+| cost: rebuild k5_11's level-1 cover as 505 orbit representatives (nth = 10) | −4.90 |
+| **net** | **+10.16** (≈ +2 wall-days at 5 workers) |
+
+**Why it was declined:** a cover is one complete disjunction, so the finished nth = 8 boxes
+cannot be kept while orbit-reducing the remainder (the leftover region is not σ-closed).
+Deploying discards every k5_11 node already verified on the nth = 8 cover — 130 of them,
+1.26 days of work — and resets k5_11's window coverage to 0 until the new tree catches up. On a
+restart that cost is already being paid, so the net becomes free.
+
+**Already built and validated** (`attempts/A96-a57-parametric/code/`): `ladder96.py` (the
+σ-symmetric nth = 10 ladder, orbits, representative selection, and the a_min gate — effective
+a_min 0.362009 vs the deployed 0.356602 at side 1, above the deployed value at all four sides)
+and `mirror96.py` (the certificate rewrite for both formats, with σ∘σ = id asserted field by
+field). The mirrored-box tree obligation is **C-checked, not assumed**: A57's own
+`pinguard.classify` on the mirrored box carrying the *transported* core, 2650/2650 orbits clean
+at all four sides. Transporting the representative's core rather than recomputing the partner's
+is essential — `a = (1/2 − hd)/(1 + width_t)` depends on the t-cell width and σ does not preserve
+t-widths, which is the entire source of the 19/720 native classification disagreements A95 saw.
+
+**Still to build:** a `tree57.py` option for a custom θ ladder plus a representative list, and a
+deployment driver that emits each partner's mirrored certificate and re-verifies it with the
+frozen verifier. Estimated well under a day; the mathematical content is done.
+
 ## 2026-09-04: the scaler could not fill slots — FIXED (A96, who now owns A57)
 
 **Symptom.** The scaler launched one shard and then sat idle for an hour with 0.5 s of CPU while

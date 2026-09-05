@@ -37,15 +37,28 @@ class _MEMSTAT(ctypes.Structure):
                 ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
 
 
+def _memstat():
+    m = _MEMSTAT()
+    m.dwLength = ctypes.sizeof(_MEMSTAT)
+    ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(m))
+    return m
+
+
 def commit_free_mb():
-    """Available COMMIT (RAM + pagefile), in MB -- the binding constraint on this box, not RAM."""
+    """Available COMMIT (RAM + pagefile), in MB."""
     try:
-        m = _MEMSTAT()
-        m.dwLength = ctypes.sizeof(_MEMSTAT)
-        ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(m))
-        return m.ullAvailPageFile / (1024.0 * 1024.0)
+        return _memstat().ullAvailPageFile / (1024.0 * 1024.0)
     except Exception:
         return 1e9      # non-Windows / no ctypes: do not gate
+
+
+def phys_free_mb():
+    """Available PHYSICAL memory, in MB.  After the pagefile raise the commit gate went slack and
+    RAM became the binding constraint, so this is the gate that now actually fires."""
+    try:
+        return _memstat().ullAvailPhys / (1024.0 * 1024.0)
+    except Exception:
+        return 1e9
 
 
 def covered_window(witfile, complete):
@@ -111,6 +124,18 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--procs", type=int, default=2)
     ap.add_argument("--node-cap", type=float, default=1500.0)
+    # A TIMEOUT is worth NOTHING: it writes no witness file, so there is no partial coverage and
+    # nothing for resolve96 to close.  A completed FAIL yields 0.988-0.999 coverage plus witness
+    # cells that resolve in seconds.  So the tail is fixed by RAISING the cap on the few expensive
+    # (high-atom) children, never by lowering it.  One 88-atom child was 23.4% of the whole
+    # level-2 verify wall purely because it hit the cap.
+    ap.add_argument("--node-cap-high", type=float, default=0.0,
+                    help="cap for nodes with >= --atoms-high atoms (0 = same as --node-cap)")
+    ap.add_argument("--atoms-high", type=int, default=32)
+    ap.add_argument("--min-free-phys-mb", type=float, default=0.0,
+                    help="hold off launching while free PHYSICAL memory is below this (0 = off). "
+                         "After the pagefile raise the commit gate is slack and RAM is the "
+                         "binding constraint.")
     ap.add_argument("--global-cap", type=float, default=1e9)
     ap.add_argument("--commit-gate", type=float, default=6144.0, help="MB of free commit")
     ap.add_argument("--depth", type=int, default=48)
@@ -170,6 +195,10 @@ def main():
                 print(f"commit {commit_free_mb():.0f} MB < {a.commit_gate:.0f}: holding "
                       f"(running={len(running)})", flush=True)
                 break
+            if a.min_free_phys_mb and phys_free_mb() < a.min_free_phys_mb:
+                print(f"free physical {phys_free_mb():.0f} MB < {a.min_free_phys_mb:.0f}: holding "
+                      f"(running={len(running)})", flush=True)
+                break
             s = todo[i]; i += 1
             od = os.path.join(PARAM, s["cls"])
             os.makedirs(od, exist_ok=True)
@@ -198,7 +227,10 @@ def main():
             p = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                                  env=env, cwd=BASE)
             running.append(dict(p=p, sel=s, rec=rec, t0=time.time(), rp=rp, wf=wf,
-                                cap=a.node_cap, maxwit=a.max_witnesses))
+                                cap=(a.node_cap_high if (a.node_cap_high and
+                                                         s["atoms"] >= a.atoms_high)
+                                     else a.node_cap),
+                                maxwit=a.max_witnesses))
         time.sleep(2.0)
     for job in list(running):          # global cap hit: let the in-flight ones finish cleanly
         try:
