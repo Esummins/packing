@@ -120,7 +120,10 @@ converted to the full window (PASS, margin 0.016). k5_10 contains no Trump image
 at most 3.985. Two lessons: a tangency-level "intruder" must not count as a block (the certifier bar is gap ≥ 0), and
 the degeneration move set must include sliding along a wall into a corner cell freed by aligning its tangent
 neighbour, which is K0-FREE applied at the *cell* level — the interlock at BL/BR is not an obstruction to global
-degeneration; only to the corner-local flood.
+degeneration; only to the corner-local flood. Under the strict convention (depth > 10⁻⁶) this packing is not
+K0-BLOCKED at all: TR and TL drop to one meeter, so K0-FREE applies directly. Under that convention **no K0-BLOCKED
+packing below side 4.000004 is known**; the six that remain sit at the search's own depth floor of 10⁻⁴ (strict85).
+The pair census is invariant under the convention (its shallowest pair depth is 3.8·10⁻⁵), so the tree is unchanged.
 
 ![flood](residue_map/flood.svg)
 
