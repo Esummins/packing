@@ -22,7 +22,7 @@ either killed a piece of (iii) or priced a route to it; none deleted it. It is k
 | block | classes | status | price (CPU-h) | source of price |
 |---|---|---|---|---|
 | k ≥ 6 | 33 | dead, window-converted (A54/A61) | 0 | done |
-| k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric; class coverage 0.982 / 0.995 | ~1,150 → 500–700 | measured (A96) |
+| k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric; class coverage 0.980 / 0.992 | **~1,925** (80 CPU-days: level 1 11.6, level 2 44.4, level 3 24.3; 16 wall-days at 5 workers; four fixed sides would be 136 CPU-days) | measured (A96, 2026-09-04 evening): level-2 verify 506 s/child (n = 15, censored), level-2 LP 1.55× level 1, level-3 descent 6.8% |
 | trump5 (Trump's own class) | 1 | A60 residual tree, cover done, deepen + tube | 300–500 | running |
 | stragglers (s0-only rows) | 6 left | A61 converting | small | running |
 | protected k4 | 6 (incl. corners4) | P-TREE trees unrun; k4_08/k4_11 killed at 3.833 (A82) | 800 (model) | A100 measuring |
@@ -131,7 +131,11 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
 
 ## 7. Pending measurements (folded in as they land)
 
-- A96: level-2 parametric verify wall on real level-2 children; six-parent re-projection of A57.
+- A96 (landed): level-2 parametric verify 506 s/child (2.5× the level-1 mean; n = 15, censored by one timeout),
+  level-2 LP 1.55× level 1 (70 children, 8 parents; the earlier 2.76× was one outlier parent), level-3 descent 6.8%
+  (was an unstated zero). A57 = 80 CPU-days, 16 wall-days at 5 workers; the parametric route still beats four fixed
+  sides by 1.7×. Levels 2+3 are 86% of it; the σ ladder on the level-2 cover and resolver closure of level-2
+  partials are the two levers, both being priced.
 - A99: the three k0 tree reductions, stacked, at s0 and window-valid.
 - A100: the protected tier from real runs (k4_11 and one k ≤ 3 class), tier projection, all-layers total.
 
