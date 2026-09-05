@@ -129,12 +129,15 @@ $attempts = @{}          # "name|tag|shard" -> launch attempts, so a failing ent
 $launchTimeout = 90      # seconds to wait for launch.ps1 itself; it only spawns and returns
 Note "scaleup started; A57=$(A57Count) A56running=$(A56Running)"
 for ($i = 0; $i -lt 5000; $i++) {
-  # A96 2026-09-04: 5 -> 6 after the PI's pagefile raise (commit limit 132 GB, free 82 GB; the
-  # box is working-set bound now, summed WS ~6 GB against a 26 GB budget on 20 threads).
-  # NB A57Count counts the IDLE sweepfails watcher and any deepen.py, not just tree shards, so
-  # cap 6 means 4 concurrent tree shards while sweepfails + one deepen are up -- which is the
-  # agreed configuration.  Raise this only together with the machine-wide heavy-process cap.
-  $cap = if (A56Running) { 3 } else { 6 }
+  # A96 2026-09-05: 6 -> 10, to run SIX concurrent tree shards (CPU 47%, free physical 10.5 GB,
+  # free commit 77 GB).
+  # The number is 10 and not 8 because A57Count counts certify.py too, and every tree57 (--jobs 2)
+  # spawns certify children: 6 shards + ~2 certify + sweepfails + deepen = 10.  Capping at 8 with
+  # the existing count would settle at about FOUR shards, not six.  Excluding certify.py from the
+  # count instead would make the cap read cleanly as "shards + watcher + deepen" but would hide
+  # ~1.5x of real core usage behind it, so the count keeps its honest semantics and the cap
+  # absorbs the children.  Raise only together with the machine-wide heavy-process budget.
+  $cap = if (A56Running) { 3 } else { 10 }
   $now = A57Count
   # Commit gate.  The PI moved the pagefile to F:\pagefile.sys at 25 GB initial / 100 GB max, so
   # the commit limit now GROWS ON DEMAND to ~130 GB and commit is no longer the binding
