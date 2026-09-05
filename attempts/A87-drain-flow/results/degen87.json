@@ -1,0 +1,985 @@
+{
+ "n_packings": 9,
+ "tol_intruder": 1e-06,
+ "tol_sensitivity": 0.0001,
+ "headline": {
+  "n_K0_BLOCKED": 8,
+  "n_reaching_a_dead_class_at_the_same_side": 6,
+  "which": [
+   "record_s0115",
+   "polish15_s0076",
+   "polish24_s0259",
+   "anchored0_p140",
+   "anchored1_p094",
+   "anchored2_p094"
+  ],
+  "n_degenerated_at_all": 8,
+  "all_final_configs_certified_valid": true,
+  "sides": {
+   "record_s0115": 3.985483726948471,
+   "polish12_s0380": 4.000000119651969,
+   "polish15_s0076": 4.000004060461398,
+   "polish21_s0380": 4.000007453494226,
+   "polish24_s0259": 4.000011861830166,
+   "anchored0_p140": 4.107107415606332,
+   "anchored1_p094": 4.083735461840952,
+   "anchored2_p094": 4.08373588724345
+  },
+  "note_on_sides": "only record_s0115 (3.98548) is BELOW 4; the four polish rows sit at 4.0000001 and the three anchored rows at 4.08-4.11, where the unit lattice is roomy -- their degeneration is geometrically easy and says little about the window [3.82, s0)"
+ },
+ "trump_input_certificate_note": "Trump's own squares TOUCH, so an interval SAT gap on its exact decimal poses straddles 0 (min pair gap lb -6.4e-40) and the gap >= 0 certifier reports interior_disjoint_certified = False on the INPUT.  flood87 documents the same artefact.  It is not a degeneration: the canary made zero moves, so its output IS its input.",
+ "canary": {
+  "packing": "TRUMP_canary",
+  "k_simple_in": 5,
+  "k_simple_out": 5,
+  "class_in": "trump5",
+  "class_out": "trump5",
+  "n_moves": 0,
+  "moves": [
+   {
+    "move": "FLOOD",
+    "corner": "BL",
+    "status": "no_completable_slot",
+    "depth": 2,
+    "terminal_deficit": 2,
+    "diagram_shape": [
+     3,
+     3,
+     3
+    ],
+    "VERIFIED": false
+   },
+   {
+    "move": "FLOOD",
+    "corner": "BR",
+    "status": "no_completable_slot",
+    "depth": 2,
+    "terminal_deficit": 2,
+    "diagram_shape": [
+     3,
+     3,
+     3
+    ],
+    "VERIFIED": false
+   },
+   {
+    "move": "FLOOD",
+    "corner": "TR",
+    "status": "no_completable_slot",
+    "depth": 2,
+    "terminal_deficit": 2,
+    "diagram_shape": [
+     3,
+     3,
+     3
+    ],
+    "VERIFIED": false
+   },
+   {
+    "move": "FLOOD",
+    "corner": "TL",
+    "status": "no_completable_slot",
+    "depth": 4,
+    "terminal_deficit": 2,
+    "diagram_shape": [
+     3,
+     3,
+     3
+    ],
+    "VERIFIED": false
+   }
+  ],
+  "degenerated": false,
+  "PASS": true
+ },
+ "per_packing": [
+  {
+   "packing": "record_s0115",
+   "src": "k0dir87.json",
+   "side": 3.985483726948471,
+   "k_in": 0,
+   "k_out": 7,
+   "class_in": "k0_00",
+   "class_out": "k7 unnamed {'TR': [1, 1, 1], 'TL': [2, 1, 1]}",
+   "shapes_out": {
+    "TR": [
+     1,
+     1,
+     1
+    ],
+    "TL": [
+     2,
+     1,
+     1
+    ]
+   },
+   "dead": true,
+   "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: k6_06 (k=6, {'TR': [1, 1], 'TL': [2, 1, 1]}) -- DEAD on [3.82, s0): FULL [191/50, 969271/250000] [A56 scoreboard]]",
+   "dead_witness": {
+    "witness_class": "k6_06",
+    "witness_k": 6,
+    "witness_shapes": {
+     "TR": [
+      1,
+      1
+     ],
+     "TL": [
+      2,
+      1,
+      1
+     ]
+    },
+    "witness_why": "DEAD on [3.82, s0): FULL [191/50, 969271/250000] [A56 scoreboard]"
+   },
+   "first_dead_class_reached": {
+    "k_simple": 5,
+    "shapes": {
+     "TR": [
+      1,
+      1,
+      1
+     ],
+     "TL": [
+      1,
+      1
+     ]
+    },
+    "class": "k5_06",
+    "why": "DEAD on [3.82, s0): FULL [191/50, 969271/250000] [A56 scoreboard]",
+    "after_n_moves": 4
+   },
+   "valid": true,
+   "min_pair_gap_lb": 0.0,
+   "n_moves": 6,
+   "move_sequence": [
+    "ALIGN:sq6->TR0,1",
+    "TELEPORT:sq7->TR0,0",
+    "ALIGN:sq3->TR0,2",
+    "TELEPORT:sq8->TL0,1",
+    "ALIGN:sq0->TL0,2",
+    "ALIGN:sq10->TL1,0"
+   ],
+   "flood": [
+    {
+     "move": "FLOOD",
+     "corner": "BL",
+     "status": "no_completable_slot",
+     "depth": 4,
+     "terminal_deficit": 2,
+     "diagram_shape": [
+      3,
+      3,
+      3
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "BR",
+     "status": "no_completable_slot",
+     "depth": 2,
+     "terminal_deficit": 2,
+     "diagram_shape": [
+      3,
+      3,
+      3
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "TR",
+     "status": "no_completable_slot",
+     "depth": 2,
+     "terminal_deficit": 2,
+     "diagram_shape": [
+      3,
+      3,
+      3
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "TL",
+     "status": "FLOOD_SUCCESS",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      1
+     ],
+     "VERIFIED": true,
+     "adopted": true
+    }
+   ],
+   "sensitivity_1e-4": {
+    "k_out": 7,
+    "class_out": null,
+    "dead": true,
+    "n_moves": 7,
+    "same_as_primary": true
+   }
+  },
+  {
+   "packing": "polish12_s0380",
+   "src": "k0dir87.polish.jsonl#12",
+   "side": 4.000000119651969,
+   "k_in": 0,
+   "k_out": 6,
+   "class_in": "k0_00",
+   "class_out": "k6 unnamed {'BL': [2], 'BR': [2], 'TR': [1, 1]}",
+   "shapes_out": {
+    "BL": [
+     2
+    ],
+    "BR": [
+     2
+    ],
+    "TR": [
+     1,
+     1
+    ]
+   },
+   "dead": false,
+   "why": "unnamed class (no window certificate on record)",
+   "dead_witness": null,
+   "first_dead_class_reached": null,
+   "valid": true,
+   "min_pair_gap_lb": 0.0,
+   "n_moves": 11,
+   "move_sequence": [
+    "TELEPORT:sq0->BL0,0",
+    "ALIGN:sq1->BR3,1",
+    "ALIGN:sq2->BL3,1",
+    "TELEPORT:sq3->BR0,0",
+    "TELEPORT:sq6->TR0,0",
+    "ALIGN:sq7->BL2,3",
+    "TELEPORT:sq9->BL1,0",
+    "TELEPORT:sq10->TR0,1",
+    "TELEPORT_FREE:sq8->BR1,0",
+    "TELEPORT_FREE:sq4->BR1,2",
+    "ALIGN:sq5->TR3,1"
+   ],
+   "flood": [
+    {
+     "move": "FLOOD",
+     "corner": "BL",
+     "status": "corner_already_free_no_debt",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      4,
+      1,
+      1
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "BR",
+     "status": "corner_already_free_no_debt",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      4,
+      1,
+      1,
+      1
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "TR",
+     "status": "corner_already_free_no_debt",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      2,
+      2,
+      1,
+      1
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "TL",
+     "status": "corner_already_free_no_debt",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [],
+     "VERIFIED": false
+    }
+   ],
+   "sensitivity_1e-4": {
+    "k_out": 6,
+    "class_out": null,
+    "dead": false,
+    "n_moves": 11,
+    "same_as_primary": true
+   }
+  },
+  {
+   "packing": "polish15_s0076",
+   "src": "k0dir87.polish.jsonl#15",
+   "side": 4.000004060461398,
+   "k_in": 0,
+   "k_out": 10,
+   "class_in": "k0_00",
+   "class_out": "k10 unnamed {'BL': [3, 3, 2, 2]}",
+   "shapes_out": {
+    "BL": [
+     3,
+     3,
+     2,
+     2
+    ]
+   },
+   "dead": true,
+   "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: None (k=9, {'BL': [3, 2, 2, 2]}) -- k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)]",
+   "dead_witness": {
+    "witness_class": null,
+    "witness_k": 9,
+    "witness_shapes": {
+     "BL": [
+      3,
+      2,
+      2,
+      2
+     ]
+    },
+    "witness_why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)"
+   },
+   "first_dead_class_reached": {
+    "k_simple": 9,
+    "shapes": {
+     "BL": [
+      3,
+      3,
+      2,
+      1
+     ]
+    },
+    "class": "k9 unnamed {'BL': [3, 3, 2, 1]}",
+    "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: None (k=8, {'BL': [3, 3, 1, 1]}) -- k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)]",
+    "after_n_moves": 3
+   },
+   "valid": true,
+   "min_pair_gap_lb": 0.0,
+   "n_moves": 5,
+   "move_sequence": [
+    "TELEPORT:sq0->BL0,0",
+    "ALIGN:sq1->BR3,1",
+    "ALIGN:sq4->TR3,1",
+    "TELEPORT:sq0->BR0,1",
+    "TELEPORT:sq1->BL1,3"
+   ],
+   "flood": [
+    {
+     "move": "FLOOD",
+     "corner": "BL",
+     "status": "FLOOD_SUCCESS",
+     "depth": 2,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      3,
+      3,
+      2,
+      1
+     ],
+     "VERIFIED": true,
+     "adopted": true
+    }
+   ],
+   "sensitivity_1e-4": {
+    "k_out": 3,
+    "class_out": null,
+    "dead": false,
+    "n_moves": 6,
+    "same_as_primary": false
+   }
+  },
+  {
+   "packing": "polish21_s0380",
+   "src": "k0dir87.polish.jsonl#21",
+   "side": 4.000007453494226,
+   "k_in": 0,
+   "k_out": 6,
+   "class_in": "k0_00",
+   "class_out": "k6 unnamed {'BL': [2], 'BR': [2], 'TR': [1, 1]}",
+   "shapes_out": {
+    "BL": [
+     2
+    ],
+    "BR": [
+     2
+    ],
+    "TR": [
+     1,
+     1
+    ]
+   },
+   "dead": false,
+   "why": "unnamed class (no window certificate on record)",
+   "dead_witness": null,
+   "first_dead_class_reached": null,
+   "valid": true,
+   "min_pair_gap_lb": 0.0,
+   "n_moves": 11,
+   "move_sequence": [
+    "TELEPORT:sq0->BL0,0",
+    "ALIGN:sq1->BR3,1",
+    "TELEPORT:sq6->TR0,0",
+    "ALIGN:sq7->BL2,3",
+    "TELEPORT:sq9->BL1,0",
+    "ALIGN:sq2->BL3,1",
+    "TELEPORT:sq3->BR0,0",
+    "TELEPORT:sq10->TR0,1",
+    "TELEPORT_FREE:sq8->BR1,0",
+    "TELEPORT_FREE:sq4->BR1,2",
+    "ALIGN:sq5->TR3,1"
+   ],
+   "flood": [
+    {
+     "move": "FLOOD",
+     "corner": "BL",
+     "status": "corner_already_free_no_debt",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      4,
+      1,
+      1
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "BR",
+     "status": "corner_already_free_no_debt",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      4,
+      1,
+      1,
+      1
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "TR",
+     "status": "corner_already_free_no_debt",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      2,
+      2,
+      1,
+      1
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "TL",
+     "status": "corner_already_free_no_debt",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [],
+     "VERIFIED": false
+    }
+   ],
+   "sensitivity_1e-4": {
+    "k_out": 6,
+    "class_out": null,
+    "dead": false,
+    "n_moves": 11,
+    "same_as_primary": true
+   }
+  },
+  {
+   "packing": "polish24_s0259",
+   "src": "k0dir87.polish.jsonl#24",
+   "side": 4.000011861830166,
+   "k_in": 0,
+   "k_out": 9,
+   "class_in": "k0_00",
+   "class_out": "k9 unnamed {'BL': [4, 1], 'TR': [1, 1], 'TL': [1, 1]}",
+   "shapes_out": {
+    "BL": [
+     4,
+     1
+    ],
+    "TR": [
+     1,
+     1
+    ],
+    "TL": [
+     1,
+     1
+    ]
+   },
+   "dead": true,
+   "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: None (k=8, {'BL': [4], 'TR': [1, 1], 'TL': [1, 1]}) -- k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)]",
+   "dead_witness": {
+    "witness_class": null,
+    "witness_k": 8,
+    "witness_shapes": {
+     "BL": [
+      4
+     ],
+     "TR": [
+      1,
+      1
+     ],
+     "TL": [
+      1,
+      1
+     ]
+    },
+    "witness_why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)"
+   },
+   "first_dead_class_reached": {
+    "k_simple": 7,
+    "shapes": {
+     "BL": [
+      4,
+      1
+     ],
+     "TR": [
+      1
+     ],
+     "TL": [
+      1
+     ]
+    },
+    "class": "k7 unnamed {'BL': [4, 1], 'TR': [1], 'TL': [1]}",
+    "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: k5_07 (k=5, {'BL': [3], 'TR': [1], 'TL': [1]}) -- DEAD on [3.82, s0): FULL [191/50, 969271/250000] [A56 scoreboard]]",
+    "after_n_moves": 4
+   },
+   "valid": true,
+   "min_pair_gap_lb": 0.0,
+   "n_moves": 6,
+   "move_sequence": [
+    "TELEPORT:sq4->TL0,0",
+    "ALIGN:sq5->BL1,3",
+    "ALIGN:sq6->BR1,3",
+    "TELEPORT:sq7->TR0,0",
+    "TELEPORT:sq4->TL0,1",
+    "TELEPORT:sq5->TR0,1"
+   ],
+   "flood": [
+    {
+     "move": "FLOOD",
+     "corner": "BL",
+     "status": "FLOOD_SUCCESS",
+     "depth": 2,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      4,
+      1
+     ],
+     "VERIFIED": true,
+     "adopted": true
+    }
+   ],
+   "sensitivity_1e-4": {
+    "k_out": 2,
+    "class_out": null,
+    "dead": false,
+    "n_moves": 4,
+    "same_as_primary": false
+   }
+  },
+  {
+   "packing": "anchored0_p140",
+   "src": "d2front87.json:own_side_anchored",
+   "side": 4.107107415606332,
+   "k_in": 0,
+   "k_out": 10,
+   "class_in": "k0_00",
+   "class_out": "k10 unnamed {'BL': [2, 2, 1], 'BR': [2, 1], 'TL': [2]}",
+   "shapes_out": {
+    "BL": [
+     2,
+     2,
+     1
+    ],
+    "BR": [
+     2,
+     1
+    ],
+    "TL": [
+     2
+    ]
+   },
+   "dead": true,
+   "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: None (k=9, {'BL': [2, 2], 'BR': [2, 1], 'TL': [2]}) -- k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)]",
+   "dead_witness": {
+    "witness_class": null,
+    "witness_k": 9,
+    "witness_shapes": {
+     "BL": [
+      2,
+      2
+     ],
+     "BR": [
+      2,
+      1
+     ],
+     "TL": [
+      2
+     ]
+    },
+    "witness_why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)"
+   },
+   "first_dead_class_reached": {
+    "k_simple": 7,
+    "shapes": {
+     "BL": [
+      2,
+      1,
+      1
+     ],
+     "BR": [
+      2
+     ],
+     "TL": [
+      1
+     ]
+    },
+    "class": "k7 unnamed {'BL': [2, 1, 1], 'BR': [2], 'TL': [1]}",
+    "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: k5_04 (k=5, {'BL': [1, 1, 1], 'BR': [2]}) -- DEAD on [3.82, s0): FULL [191/50, 969271/250000] (re-solved base certificate) [A56 scoreboard]]",
+    "after_n_moves": 6
+   },
+   "valid": true,
+   "min_pair_gap_lb": 0.0,
+   "n_moves": 10,
+   "move_sequence": [
+    "ALIGN:sq0->BR1,0",
+    "TELEPORT:sq1->BR0,0",
+    "TELEPORT:sq2->BL0,2",
+    "TELEPORT:sq3->TL0,0",
+    "TELEPORT:sq7->BL0,1",
+    "TELEPORT:sq10->BL1,0",
+    "TELEPORT:sq4->TR1,0",
+    "TELEPORT:sq5->BR0,1",
+    "TELEPORT:sq6->BL1,1",
+    "TELEPORT:sq8->TL1,0"
+   ],
+   "flood": [
+    {
+     "move": "FLOOD",
+     "corner": "BL",
+     "status": "FLOOD_SUCCESS",
+     "depth": 1,
+     "terminal_deficit": 0,
+     "diagram_shape": [
+      1
+     ],
+     "VERIFIED": true,
+     "adopted": true
+    }
+   ],
+   "sensitivity_1e-4": {
+    "k_out": 0,
+    "class_out": "k0_00",
+    "dead": false,
+    "n_moves": 0,
+    "same_as_primary": false
+   }
+  },
+  {
+   "packing": "anchored1_p094",
+   "src": "d2front87.json:own_side_anchored",
+   "side": 4.083735461840952,
+   "k_in": 0,
+   "k_out": 11,
+   "class_in": "k0_00",
+   "class_out": "k11 unnamed {'BL': [2, 2], 'BR': [2, 1], 'TR': [1], 'TL': [2, 1]}",
+   "shapes_out": {
+    "BL": [
+     2,
+     2
+    ],
+    "BR": [
+     2,
+     1
+    ],
+    "TR": [
+     1
+    ],
+    "TL": [
+     2,
+     1
+    ]
+   },
+   "dead": true,
+   "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: None (k=10, {'BL': [2, 1], 'BR': [2, 1], 'TR': [1], 'TL': [2, 1]}) -- k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)]",
+   "dead_witness": {
+    "witness_class": null,
+    "witness_k": 10,
+    "witness_shapes": {
+     "BL": [
+      2,
+      1
+     ],
+     "BR": [
+      2,
+      1
+     ],
+     "TR": [
+      1
+     ],
+     "TL": [
+      2,
+      1
+     ]
+    },
+    "witness_why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)"
+   },
+   "first_dead_class_reached": {
+    "k_simple": 9,
+    "shapes": {
+     "BL": [
+      2,
+      2
+     ],
+     "BR": [
+      2
+     ],
+     "TL": [
+      2,
+      1
+     ]
+    },
+    "class": "k9 unnamed {'BL': [2, 2], 'BR': [2], 'TL': [2, 1]}",
+    "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: None (k=8, {'BL': [2, 1], 'BR': [2], 'TL': [2, 1]}) -- k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)]",
+    "after_n_moves": 9
+   },
+   "valid": true,
+   "min_pair_gap_lb": 0.0,
+   "n_moves": 11,
+   "move_sequence": [
+    "TELEPORT:sq0->BL0,0",
+    "TELEPORT:sq1->BL0,1",
+    "ALIGN:sq4->TL0,1",
+    "TELEPORT:sq5->TL0,0",
+    "TELEPORT:sq2->BR1,0",
+    "TELEPORT:sq3->BR0,0",
+    "TELEPORT:sq7->TL1,0",
+    "TELEPORT:sq8->BL1,1",
+    "TELEPORT:sq9->BL1,0",
+    "TELEPORT:sq6->TR0,0",
+    "TELEPORT:sq10->BR0,1"
+   ],
+   "flood": [],
+   "sensitivity_1e-4": {
+    "k_out": 11,
+    "class_out": null,
+    "dead": true,
+    "n_moves": 11,
+    "same_as_primary": true
+   }
+  },
+  {
+   "packing": "anchored2_p094",
+   "src": "d2front87.json:cap4.600000",
+   "side": 4.08373588724345,
+   "k_in": 0,
+   "k_out": 11,
+   "class_in": "k0_00",
+   "class_out": "k11 unnamed {'BL': [2, 2], 'BR': [2, 1], 'TR': [1], 'TL': [2, 1]}",
+   "shapes_out": {
+    "BL": [
+     2,
+     2
+    ],
+    "BR": [
+     2,
+     1
+    ],
+    "TR": [
+     1
+    ],
+    "TL": [
+     2,
+     1
+    ]
+   },
+   "dead": true,
+   "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: None (k=10, {'BL': [2, 1], 'BR': [2, 1], 'TR': [1], 'TL': [2, 1]}) -- k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)]",
+   "dead_witness": {
+    "witness_class": null,
+    "witness_k": 10,
+    "witness_shapes": {
+     "BL": [
+      2,
+      1
+     ],
+     "BR": [
+      2,
+      1
+     ],
+     "TR": [
+      1
+     ],
+     "TL": [
+      2,
+      1
+     ]
+    },
+    "witness_why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)"
+   },
+   "first_dead_class_reached": {
+    "k_simple": 9,
+    "shapes": {
+     "BL": [
+      2,
+      2
+     ],
+     "BR": [
+      2
+     ],
+     "TL": [
+      2,
+      1
+     ]
+    },
+    "class": "k9 unnamed {'BL': [2, 2], 'BR': [2], 'TL': [2, 1]}",
+    "why": "k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)  [explicit sub-tuple witness: None (k=8, {'BL': [2, 1], 'BR': [2], 'TL': [2, 1]}) -- k >= 7: certifiably empty (A53 tier-1 cap -- every k >= 7 Young tuple contains a certified k6 sub-tuple)]",
+    "after_n_moves": 9
+   },
+   "valid": true,
+   "min_pair_gap_lb": 0.0,
+   "n_moves": 11,
+   "move_sequence": [
+    "TELEPORT:sq0->BL0,0",
+    "TELEPORT:sq1->BL0,1",
+    "ALIGN:sq4->TL0,1",
+    "TELEPORT:sq5->TL0,0",
+    "TELEPORT:sq2->BR1,0",
+    "TELEPORT:sq3->BR0,0",
+    "TELEPORT:sq7->TL1,0",
+    "TELEPORT:sq8->BL1,1",
+    "TELEPORT:sq9->BL1,0",
+    "TELEPORT:sq6->TR0,0",
+    "TELEPORT:sq10->BR0,1"
+   ],
+   "flood": [],
+   "sensitivity_1e-4": {
+    "k_out": 11,
+    "class_out": null,
+    "dead": true,
+    "n_moves": 11,
+    "same_as_primary": true
+   }
+  },
+  {
+   "packing": "TRUMP_canary",
+   "src": "A03/trump11_exact.json",
+   "side": 3.877083590022814,
+   "k_in": 5,
+   "k_out": 5,
+   "class_in": "trump5",
+   "class_out": "trump5",
+   "shapes_out": {
+    "BL": [
+     2,
+     1
+    ],
+    "BR": [
+     1
+    ],
+    "TR": [
+     1
+    ]
+   },
+   "dead": false,
+   "why": "PROTECTED (contains a Trump image); no single-square kill",
+   "dead_witness": null,
+   "first_dead_class_reached": null,
+   "valid": false,
+   "min_pair_gap_lb": -6.428484731059385e-40,
+   "n_moves": 0,
+   "move_sequence": [],
+   "flood": [
+    {
+     "move": "FLOOD",
+     "corner": "BL",
+     "status": "no_completable_slot",
+     "depth": 2,
+     "terminal_deficit": 2,
+     "diagram_shape": [
+      3,
+      3,
+      3
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "BR",
+     "status": "no_completable_slot",
+     "depth": 2,
+     "terminal_deficit": 2,
+     "diagram_shape": [
+      3,
+      3,
+      3
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "TR",
+     "status": "no_completable_slot",
+     "depth": 2,
+     "terminal_deficit": 2,
+     "diagram_shape": [
+      3,
+      3,
+      3
+     ],
+     "VERIFIED": false
+    },
+    {
+     "move": "FLOOD",
+     "corner": "TL",
+     "status": "no_completable_slot",
+     "depth": 4,
+     "terminal_deficit": 2,
+     "diagram_shape": [
+      3,
+      3,
+      3
+     ],
+     "VERIFIED": false
+    }
+   ],
+   "sensitivity_1e-4": {
+    "k_out": 5,
+    "class_out": "trump5",
+    "dead": false,
+    "n_moves": 0,
+    "same_as_primary": true
+   }
+  }
+ ],
+ "class_status_sources": {
+  "window": "A56 scoreboard.json window_coverage, overlaid with A61 campaign61_progress verdicts",
+  "alive": [
+   "k5_11",
+   "k5_16",
+   "trump5",
+   "corners4",
+   "protected k <= 4",
+   "k0_00"
+  ],
+  "k_ge_7": "certifiably empty (A53 tier-1 cap)"
+ },
+ "secs": 525.1155908107758
+}
