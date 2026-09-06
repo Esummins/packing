@@ -2931,3 +2931,34 @@ affordable cost estimate for closing 3.84.
 - Discipline: <= 2 compute slots throughout, BLAS pinned to 1 thread, tree85's 6144 MB commit gate before
   every LP (free commit 66.7-79.6 GB at all 52 launches, zero waits), detached drivers, frozen verifiers
   copied byte-identical (code/frozen.sha256). Nothing under A57/A60/A61/A85/A89/A96 was written.
+
+## 2026-09-05 — A102-rigidity-drain (Opus chore) — done-success
+- The PI's by-eye drain of the 3.9907 record is now a tool (`attempts/A102-rigidity-drain/code/rigid102.py`,
+  self-test reproduces `pi_drain_3p9907.py` exactly: square 3's three contacts, torques +0.455/+0.488/+0.225
+  all CCW, the 1.309 deg rotation collision-free, seven simultaneous snaps, k = 7). Run on all 12 strictly
+  K0-BLOCKED packings on disk (4 k0dir2_87 floor records + the 8 A87/strict85 packings; the confined-descent
+  endpoints of k0dir2_87.jsonl carry only scalars, no poses, so they are not recoverable without re-running
+  descents) plus Trump, at both meet bars, one process, ~12 min.
+- T3 RULE: the brief's candidate ("every floor-depth d2 <= 1e-2 second meeter is FREE-ROT or FREE-TRANS") is
+  FALSE — 21 of the 31 floor-depth second meeters are PINNED and 12 are RIGID for the FULL first-order motion
+  cone. What holds is a ROOM dichotomy: a second meeter either retracts COMPLETELY out of its corner cell
+  under one rigid-body motion (10 of 12 packings, retraction fraction 1.000) or hardly moves (polish12 0.22,
+  floor-1e-4 0.022, Trump 0.000) — nothing in between; and every full retraction is followed by a valid
+  simultaneous snap to k >= 2 at the same side.
+- Both sub-4 packings drain to k = 7 at the same side: record_s0115 (3.985484) and the 1e-3 floor record
+  (3.990749). Caveat: the record's freeing move is tangency-scale (its TR/TL "crowds" are 1.6e-8 / 7.0e-9
+  nicks); at the 1e-6 census bar the record is not K0-BLOCKED and the second meeters of its two real crowds
+  (BL sq0 0.0147, BR sq3 0.0145) are first-order RIGID, so it does not drain there. Largest d2 that drained:
+  1.02e-2 (floor-1e-2 record, TR sq6, 1.279 deg about its own centre, then 11 snaps to k = 5).
+- Residue for theory (notes/rigid102.md s.4, full contact sets with points, edge normals and torques): the two
+  non-drainers (floor_1e-04 at 4.0000044, polish12 at 4.0000001) and Trump. Pins are square-square — 32 of the
+  33 PINNED second meeters are pinned by >= 2 squares, exactly 1 by a wall + one square. OBSTRUCTION NAMED:
+  the contact set at a fixed tolerance does not determine the finite motion — both non-drainers have
+  first-order-free second meeters that are stopped after ~1e-4 deg by a square whose gap is just above the
+  1e-7 contact bar (1.4e-6 and 3.1e-5), so any theorem needs a finite-motion (second-order) criterion.
+- CANARY PASS: Trump's TL crowd {4, 6} at depth 0.155/0.168 is first-order RIGID (no rotation about any point,
+  no translation), zero moves, k stays 5. The stronger screw-cone test frees the three anchored packings that
+  the centre-torque test could not, and still does not move Trump.
+- Discipline: 1 process, OMP/MKL/OPENBLAS = 1, pure geometry (no LP, no descents re-run), commit headroom
+  65 GB / 7.1 GB free physical throughout. Nothing under A57/A60/A61/A96 written; frozen verifiers untouched.
+  Chip on K0.RESN (owner A102, released at close); depgraph re-rendered.
