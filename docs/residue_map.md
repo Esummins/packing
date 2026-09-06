@@ -157,6 +157,22 @@ lands in the same cell; (ii) the mechanical test the PI used —
 decided this packing in one look where the depth filter called it blocked. It should become a tool: for each
 floor-depth second meeter, compute the contact normals and ask whether any rigid motion (rotation about the centre, or
 about a contact vertex) is unopposed; if so the corner is not strictly crowded in any robust sense.
+
+*A102 outcome (2026-09-06, `attempts/A102-rigidity-drain/notes/rigid102.md`, commit `3e4929db`): the test was run on all
+12 strictly K0-BLOCKED packings on disk plus Trump.* **10 of 12 drain** to k ≥ 2 at the same side by one rigid-body
+motion of a second meeter followed by simultaneous snaps, and **both sub-4 packings drain to k = 7** (record_s0115 at
+3.98548 by a tangency-scale nick, floor-1e-3 at 3.99075 by the 1.31° rotation above). The largest second-meeter depth
+that drained is 1.02·10⁻² (the floor-1e-2 record, a 1.28° rotation). Trump does not move: both TL meeters are
+first-order rigid (canary PASS). **But the contact-torque sign test is not the rule.** Of 31 floor-depth second
+meeters, 21 are pinned and 12 are rigid over the full first-order motion cone, and first-order freedom does not predict
+the drain: the two non-drainers (floor-1e-4 at 4.0000044, polish12 at 4.0000001) have screw-free second meeters that
+jam after ~10⁻⁴ degrees on a square whose gap sits just above the contact bar (1.4·10⁻⁶, 3.1·10⁻⁵). The true rule is
+all-or-nothing about *room*: a second meeter either retracts completely out of its cell (retraction fraction 1.000,
+ten cases) or hardly moves (0.22, 0.02, 0.00). Pins are square–square (32 of 33), not wall-and-square. Obstruction for
+the theorem, named: the contact set at any fixed tolerance does not determine the finite motion, so the criterion has
+to be finite-motion (second order, or a room count), not a torque-sign filter on the contact graph. Empirical
+threshold for the PI's "blocked and rigid is impossible" conjecture: the two rigid blocked packings sit at 4.0000001
+and 4.0000044, every blocked packing below 4 drains, and every one found is ≥ ŝ + 0.108.
 The pair census is invariant under the convention (its shallowest pair depth is 3.8·10⁻⁵), so the tree is unchanged.
 
 ![flood](residue_map/flood.svg)
@@ -212,6 +228,10 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   E) one level down. **No pinwheel signature**: de-duplicated, 2/14 witness-bearing nodes have same-tilt pairs, none a
   triple; mid-tilt bins are all free logic kills — a mid-tilt 2×2 block does not fit beside the k5_11 pins. Price 98–231
   s per node, additive on A57's route; the no-block branch is uncovered. projection96 unchanged.
+- A102 (landed 2026-09-06): rigidity drain on all 12 strictly K0-BLOCKED packings — 10 drain (both sub-4 ones to
+  k = 7), 2 rigid non-drainers at 4.0000001/4.0000044, Trump rigid (canary); the torque-sign test is not the rule,
+  finite-motion room is (§5). Depth-3 probe interim (A96): 19 level-3 children, 16 PASS / 3 logic / 0 ALIVE — if it
+  holds at n = 40 the level-3 expansion factor is ≈ 0 and the 18.5-day A57 schedule is close to final.
 - A101 (landed 2026-09-05): SNAP proved, leaf yield 0, FLOOD open with the stall named (§8 item 6); floor sweep
   1e-3 found strictly K0-BLOCKED packings at 3.9907 (§5); floor 1e-2 running (best 4.00046 at 215 seeds).
 - A100 (landed 2026-09-05): k4_11 and k3_02 run end to end. **The η law is exact on 54/54 cover nodes** —
