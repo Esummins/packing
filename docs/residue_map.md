@@ -241,6 +241,19 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   E) one level down. **No pinwheel signature**: de-duplicated, 2/14 witness-bearing nodes have same-tilt pairs, none a
   triple; mid-tilt bins are all free logic kills — a mid-tilt 2×2 block does not fit beside the k5_11 pins. Price 98–231
   s per node, additive on A57's route; the no-block branch is uncovered. projection96 unchanged.
+- A106 (landed 2026-09-06, `66c62e1e`): the basin switch does not apply to A57, and a 24% prune fell out. Both
+  classes' shadow floor is the PI's k7 pinwheel, s* = 3.886746 = s0 + 0.009662 (certified interval endpoint, three
+  independent seed families); basin radius 0.035 at the certified Hessian bound, and level-3/4 boxes are already 2–4×
+  smaller than it — but **none of the 145 open level-2–4 boxes contains a local minimum**: the box-constrained minimum
+  sits on the boundary and the released flow leaves the box (median distance to the nearest shadow square 0.32 ≈ 9
+  basin radii; best side attainable with a square in an alive box s0 + 0.013, median s0 + 0.061). The boxes are alive
+  because the LP relaxation (inscribed cores a = 0.36–0.48, pin slack δ = 10⁻²) cannot see the slack, not because they
+  hold near-solutions. Shadow table: 3.8867 (18 open nodes flow to it), 3.9027, 3.9115, 3.9122, 3.9142, 3.9240, 3.9428,
+  4.0. **The lever**: pinguard tests the inscribed cores, not the unit squares; testing whether any pose in a box is
+  separable from a class pin over the pin's slack core kills **122 of 516 open boxes (23.6%)** at 0.6 s each, including
+  all four open level-4 nodes — worth ~9–13 CPU-days of the tail (2–2.6 wall-days at 5) if made sound as a leaf
+  (A96 asked to evaluate). It also explains part of the clustering: sterile parents are often those whose children are
+  void. Box shrink 2× per coordinate per level. `attempts/A106-shadow-diameter/notes/measurements.md`.
 - A103 (landed 2026-09-06, `f7730e98`, done-mixed): NOROOM at 3.9 open; DRAIN(W) reduced exactly to Conjecture
   LOCK-FREE(< 4) with Lemma ROT proved (§8 item 7); NOROOM-LOCAL near Trump proved (m* > ŝ, ε unquantified).
 - A102 (landed 2026-09-06): rigidity drain on all 12 strictly K0-BLOCKED packings — 10 drain (both sub-4 ones to
