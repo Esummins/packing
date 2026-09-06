@@ -3376,3 +3376,4 @@ Writes: `attempts/A108-s07-certify/{code,results,notes}`, `docs/residue_map/s07_
 registry row, this line. Corrections of record to A107's S07 row (s\*, the 44.879° common tilt, the
 8 flexes, the "convergence caveat" on the KKT residual) are in
 `attempts/A108-s07-certify/notes/method.md`; `docs/shadows.md` itself was left untouched.
+- 2026-09-06 01:55 RESUME A61 stragglers (PI): campaign61 pid 45764, heavy 2 / jobs 3, BLAS pinned; A57/A96 remain paused.

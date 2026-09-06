@@ -11,3 +11,5 @@ Progress file rows at pause: 4; started 2026-09-01T19:37:25.
 Resume: `cd attempts/A61-window-stragglers/code; python -u campaign61.py --heavy 2 --jobs 3 --max_atoms 3500
 --max_cols_add 800 --cert_rounds 6 --cert_time 420 --gate 0.30` (WITHOUT --restart, so it resumes), and the two
 resolve61 commands as logged in logs/. Do not resume until the PI lifts the pause.
+
+RESUMED 2026-09-06 01:55:18 on PI directive (A57 stays paused): campaign61.py pid 45764, same flags, no --restart (resumes off RECORD files); log logs/campaign61_pass5.out
