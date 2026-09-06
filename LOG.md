@@ -3292,3 +3292,15 @@ explained, with drawings, contact graphs, tilt sweeps and drain hints, in `docs/
   `docs/shadows.md`, `docs/shadows/*.svg`, registry row, this entry, one note line on `C.A57`.
   Every drawn square containment-checked; the minimised panels also overlap-checked; overlaps
   appear only in the raw LP panel and are printed as numbers. Wall 2 h of the 3 h cap (compute: extract 44 s, structure minimisation 868 s, gallery 2760 s).
+- A57 T5-prime DEPLOYED 2026-09-05 23:25 (pinguard.kill_core, classify() only; Box.core() untouched so the LP hypothesis and the
+  emitted certificate corpus are unchanged). Control re-run against the DEPLOYED module, not A96's shim: 583/583 known logic-kill
+  boxes still killed, none lost; same 70 new kills at the same level split. Workers restarted through launch.ps1 (pidfile gate
+  held) because Python caches imports -- without that the six shards and both deepens would have kept emitting unfiltered.
+  Recorded as T5-prime in notes/lemmas.md next to T5 (certificate UNCHANGED, only the core half-side grew); the 70 superseded
+  boxes are in results/superseded_by_tight_core.jsonl with prior verdicts RETAINED, nothing overwritten.
+- FIRST WINDOW (1 h, not a day -- the wait was stopped): 85 children emitted (38 L1, 47 L2), 28 recorded KILL-BY-LOGIC
+  (14 L1, 14 L2). ATTRIBUTABLE to T5-prime by direct re-classification with TIGHT_CORE off vs on: 5 of the 28 (1 at L1,
+  4 at L2) are kills the OLD core would NOT have made. That is the honest incremental number; the other 23 the old rule would
+  have caught anyway. 5/85 = 5.9% of emitted children, against the offline prediction of ~4-5 on this L1/L2 mix -- consistent.
+  The filter is confirmed live in the restarted workers, which is what this window was actually able to establish; the hour's
+  raw kill RATE is not evidence either way, since an hour's boxes are not a random sample of the cover.
