@@ -25,6 +25,7 @@ $env:OPENBLAS_NUM_THREADS = "1"
 $env:OMP_NUM_THREADS = "1"
 $env:MKL_NUM_THREADS = "1"
 $env:NUMEXPR_NUM_THREADS = "1"
+$env:PYTHONDONTWRITEBYTECODE = "1"   # no __pycache__ writes from campaign workers
 # --- A96 side freeze -------------------------------------------------------
 # Sides 4/3/2 are not run as fixed-side trees any more (A96: parametric certificates cover the
 # whole window at 0.062 of their cost).  The gate lives HERE, not only in scaleup.ps1's queue,

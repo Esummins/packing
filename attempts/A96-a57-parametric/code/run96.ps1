@@ -8,6 +8,7 @@ $env:OPENBLAS_NUM_THREADS = "1"
 $env:OMP_NUM_THREADS = "1"
 $env:MKL_NUM_THREADS = "1"
 $env:NUMEXPR_NUM_THREADS = "1"
+$env:PYTHONDONTWRITEBYTECODE = "1"
 $py = "C:\Users\esumm\AppData\Local\Python\bin\python.exe"
 if (-not (Test-Path $py)) { $py = "python" }
 $pidFile = "$base\logs\param96.pid"

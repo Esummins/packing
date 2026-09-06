@@ -83,7 +83,8 @@ Note: with trimming on, a bin that survives in more than one piece emits suffixe
 
 ## Resume commands
 
-Run from `attempts/A57-shadow-trees`. **The tight core (T5′) and tilt trimming (T5″) are both on
+Set `PYTHONDONTWRITEBYTECODE=1` in the shell first (the launchers `launch.ps1`, `scaleup.ps1`
+and `run96.ps1` already set it for their children). Run from `attempts/A57-shadow-trees`. **The tight core (T5′) and tilt trimming (T5″) are both on
 by default** — `pinguard.TIGHT_CORE = True`, `trim57.TRIM = True`; nothing needs setting, and
 setting either to `False` is the only way to turn it off. Before resuming, clear any sentinel
 (`del PAUSE`) and optionally run `python code\pausegate.py --reap --dry-run`.

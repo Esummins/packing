@@ -3707,3 +3707,14 @@ writes a `_k0`-suffixed result file).
   A99/A104/A105/A106/A111/A113 or `lean/`; frozen verifiers untouched; git fetch + plain merge +
   push of A107's own paths only. Follow-up compute: k0 extract 4 min, structure pass 303 s,
   gallery 1628 s.
+- A96 housekeeping (2026-09-06 no-deletion rule): audited every file A96 wrote or edited for deletions. Exactly ONE existed --
+  scaleup.ps1 deleted the shard pidfile before a launch so the post-launch verification would read a fresh one. REPLACED with a
+  non-deleting check: record the pidfile's contents BEFORE the launch and require the value to CHANGE, which catches the same
+  failure (launch.ps1 never wrote a pidfile) without removing anything. No rm -r, Remove-Item -Recurse, shutil.rmtree, os.remove
+  or os.unlink remains anywhere in A96's code or in the A57 files A96 touched. pausegate --reap uses taskkill on orphan
+  PROCESSES only and touches no files.
+  PYTHONDONTWRITEBYTECODE=1 now set by launch.ps1, scaleup.ps1 and run96.ps1 for every child they start, and noted at the top of
+  PAUSED.md's resume block for hand-run commands.
+  NOTHING NEEDS DELETING. No node dumps, caches or __pycache__ trees are in A96's way; the probe INPUT files
+  (tree_*_D2_s0.jsonl, tree_*_D2_D2_s0.jsonl) are deliberately kept -- they are the parent lists the level-3 and level-4 probes
+  were run from and are needed to reproduce those measurements.

@@ -13,6 +13,7 @@ $env:OPENBLAS_NUM_THREADS = "1"
 $env:OMP_NUM_THREADS = "1"
 $env:MKL_NUM_THREADS = "1"
 $env:NUMEXPR_NUM_THREADS = "1"
+$env:PYTHONDONTWRITEBYTECODE = "1"   # no __pycache__ writes from campaign workers
 function Note($m) {
   # Add-Content can lose a line to file-lock contention when two processes write at once,
   # which is how the "launched ..." entries went missing during the scaler outage.  Retry.
@@ -172,7 +173,12 @@ for ($i = 0; $i -lt 5000; $i++) {
     $pf = "$base\logs\$stamp.pid"
     $lo = "$base\logs\launch_$stamp.out"
     $le = "$base\logs\launch_$stamp.err"
-    if (Test-Path $pf) { Remove-Item $pf -Force -ErrorAction SilentlyContinue }
+    # Do NOT delete the pidfile to force a fresh one (2026-09-06 rule: no deletions from a
+    # launcher path).  Record what it says BEFORE the launch instead and require the value to
+    # change; an unchanged pidfile means launch.ps1 never wrote one, which is the failure this
+    # check exists to catch.
+    $pfBefore = $null
+    if (Test-Path $pf) { $pfBefore = (Get-Content $pf -ErrorAction SilentlyContinue | Select-Object -First 1) }
     $lp = Start-Process -FilePath "powershell" -ArgumentList @('-NonInteractive','-ExecutionPolicy','Bypass',
             '-File',"$base\code\launch.ps1",'-Name',$j.n,'-Shard',$j.s,'-Tag',$j.tag,'-Side',$j.side,
             '-TimeLimit','240','-CertTime','240','-Rounds','2','-Jobs','2','-FoldCap','9000') `
@@ -185,8 +191,9 @@ for ($i = 0; $i -lt 5000; $i++) {
     Start-Sleep -Seconds 3
     $ok = $false
     if (Test-Path $pf) {
-      $sp = (Get-Content $pf -ErrorAction SilentlyContinue | Select-Object -First 1) -as [int]
-      if ($sp) {
+      $raw = (Get-Content $pf -ErrorAction SilentlyContinue | Select-Object -First 1)
+      $sp = $raw -as [int]
+      if ($sp -and $raw -ne $pfBefore) {
         $sq = Get-CimInstance Win32_Process -Filter "ProcessId=$sp" -ErrorAction SilentlyContinue
         $ok = ($sq -and $sq.CommandLine -like '*tree57.py*')
       }
