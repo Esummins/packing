@@ -3063,3 +3063,72 @@ affordable cost estimate for closing 3.84.
 - Discipline: two chores, one process each, BLAS pinned, seconds; A103's loader copied, not imported; nothing
   under A57/A60/A61/A96/A104 touched; frozen verifiers untouched; A104 has no report on disk (BRIEF only). Chip on
   K0.RESN (owner A105, released at close); depgraph re-rendered; registry row.
+
+## 2026-09-06 — A106-shadow-diameter (Opus chore, read-only measurement) — done-negative on the switch, done-success on a free prune
+
+**Verdict first (T3). There is no basin switch to make on k5_11 / k5_16, because the premise
+fails: A57's alive boxes do not contain shadows.** What the measurement did find is a 24 % prune
+of the open tree that costs 0.6 s a box.
+
+* **Both classes' shadow floor is the PI's k7 pinwheel, s\* = 3.886746 = s0 + 0.009662**
+  (ŝ + 0.009662). k5_11's and k5_16's five pins are each a subset of that configuration's seven
+  slot squares, so it is a configuration of both. A106's independent minimiser reaches it to
+  7 digits from three unrelated seed families (the k7 seed, Trump transports, uniform random),
+  and its exact interval endpoint certificate (mpmath iv, 250-bit, rationals at 1e-12) passes at
+  ε = 1e-8. Spectrum above it: 3.902674, 3.911481, 3.912232, 3.914214, 3.924003, 3.942809, 4.0 —
+  the same ladder the PI's 301-start k7 search produced.
+* **r_basin.** A36/A70/A79's certified H̄ = 7.9079 (`contraction_tube.md` §1.5) gives, around a
+  strict local minimum, side ≥ s\* − H̄x², hence a ball of radius √(slack/H̄) on which the side
+  provably stays above s0: **r_basin = 0.034955** for the 3.886746 shadow (0.0246–0.0492 for
+  H̄ ∈ [4,16]); 0.0569 for 3.902674.
+* **Box radius vs basin radius** (half the median major diameter in pose space): k5_11 L1 0.0849
+  (2.43 r_basin), L2 0.0475 (1.36), L3 0.0175 (0.50), L4 0.0087 (0.25); k5_16 L1 0.0950 (2.72),
+  L2 0.0349 (1.00). So on size alone one further bisection puts a level-2 box inside the basin and
+  the level-3/4 boxes are already 2–4× inside it — the brief's "is the diameter already small
+  enough" is **yes, from level 2–3 down**.
+* **But size is not the binding constraint.** Of 145 open nodes at levels 2–4, **zero** contains a
+  local minimum: for all 62 that admit any configuration the box-constrained minimum sits on the
+  box *boundary* (`interior = 0`), and releasing the box lets the configuration flow out of it to
+  a class shadow — median ∞-gap from the box to the nearest square of that shadow **0.3166**,
+  about 9 r_basin. The best side attainable with a square in an alive box is s0 + 0.0130 at best,
+  median s0 + 0.0612, q3 + 0.1054, max + 0.656: the live boxes are 1.3–68× *further* from
+  feasibility than the shadow is. A ball around a shadow would discharge configurations no live
+  box contains, so the tree/basin seam of A63/A83 has nothing to bite on here.
+* **τ is integral, so there is no η route either.** Every alive node sits at τ = budget exactly
+  (|η| ≤ 2e-11) and every killed one a full unit below (τ = 4.000000, η = −1.000000, or
+  4.2/4.33/4.5). The LP verdict flips; it does not converge. Extrapolating a closing depth from η
+  is not available; the descent is the per-level event rate A96 already measured (11.3 % at
+  level 2, 9.5 % at level 3, clustered), i.e. 5–9 further levels and **23–26 wall-days at
+  5 workers** stands as the unaided cost.
+
+**The lever that is actually there: 122 of A57's 516 open boxes (23.6 %) are EMPTY on geometry
+alone.** `pinguard.classify` decides "core meets pin core" on the rational *inscribed* cores
+(half-side a = 0.36–0.48); the true unit square is larger, so a box can be incompatible with a
+pin while the cores are compatible. Asking the sharper question directly — *is there any pose in
+B and any pin position in its δ = 1e-2 slack core for which the true unit squares are separated?*
+— kills, at ~0.6 s a box (`code/t2b_pinclash.py`):
+
+| | k5_11 L1 | k5_11 L2 | k5_11 L3 | k5_11 L4 | k5_16 L1 | k5_16 L2 |
+|---|---|---|---|---|---|---|
+| open boxes | 158 | 122 | 10 | 4 | 213 | 9 |
+| **empty by box-vs-pin** | **25** | **51** | **6** | **4** | **33** | **3** |
+
+61 of the 64 at levels 2–4 have clash depth > 1e-3 (robust; median 0.0145, max 0.0506); 3 sit
+within grid noise and want an exact rational check before being claimed. The clashing pin is
+(3/2, 1/2) 27×, (1/2, 3/2) 23×, (1/2, ŝ−1/2) and (ŝ−1/2, 1/2) 7× each — never the corner pin.
+These nodes need no LP and no certificate, and their whole subtrees vanish with them: ~3.3
+CPU-days of the immediately next level (122 × 8 children × 292 s) and, at A96's expansion
+factors, **~9–13 CPU-days of the 38–53 CPU-day tail, ≈ 2–2.6 wall-days at 5 workers**. It also
+explains part of the clustering A96 saw: a sterile parent is often one whose children are simply
+void.
+
+Secondary: 19 further open nodes admit no feasible landing at all with clash just below zero
+(−5e-4 to −0.93, residual median 8e-4) — thin slivers that are probably also empty and are worth
+an exact pass. One free-release landing returned 3.851577 and is flagged `free_feasible = False`:
+an infeasible penalty artefact, not a packing, and excluded.
+
+Discipline: one BLAS-pinned process at a time, wall-capped; A57/A96 state read only, snapshotted
+with a sha256 manifest into `attempts/A106-shadow-diameter/results/snapshot/`; no A57/A96 process
+started, stopped or re-niced; frozen verifiers untouched. Engine `code/shadow11.py` validated
+against Trump (ŝ recovered to 3.4e-9 from a perturbed start under trump5's own pins).
+Detail: `attempts/A106-shadow-diameter/notes/measurements.md`, `results/t3_switch.json`.
