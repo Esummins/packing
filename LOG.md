@@ -3718,3 +3718,35 @@ writes a `_k0`-suffixed result file).
   NOTHING NEEDS DELETING. No node dumps, caches or __pycache__ trees are in A96's way; the probe INPUT files
   (tree_*_D2_s0.jsonl, tree_*_D2_D2_s0.jsonl) are deliberately kept -- they are the parent lists the level-3 and level-4 probes
   were run from and are needed to reproduce those measurements.
+
+## 2026-09-06 — A114-window-closers (Opus chore) — done-success
+- Target: docs/residue_ledger.md section 2's cheap window fragments and stragglers, on top of A61 pass 5.
+- **k6_23 (sliver, 8.4e-5 wide): CLOSED.** A96's resolver — the SAME A56 parametric certificate re-verified
+  on [3877/1000, s0] alone at depth 56, sscale 1 — PASSes in 181.8 s. With A56's [191/50, 3877/1000] the
+  501-atom certificate now covers the whole window. C2 3/3 PASS; the A56-convention depth-44 canary is
+  UNDECIDED (2 undecided boxes, 0 holes) at the slab midpoint, so the canary was run at the depth the
+  certificate itself needs (56) — canary depth is a budget, not part of the claim (notes/lemmas.md L2).
+- **k6_07 (0.050-wide band): CLOSED — this is the BL(0,2)/S07 slot the trump5 crowd rows need.** The open
+  band [956767/250000, s0] is covered by 18 PASSing slabs of ~0.0029 each (~190 s apiece), C2 3/3.
+  Method note (L4): the same band as ONE slab TIMEOUTs at 1800 s and both halves FAIL at ~1550 s — grid it,
+  do not bisect from the top, and cap each slab's witnesses (only the exit code is used).
+- **k6_27: CLOSED** — 14 slabs over the whole window, 1826 s, C2 3/3. The last whole-window k6 class.
+- **Resolver-first diagnostic (brief item 4): 13/13 recorded 4-D witness cells close on the SAME
+  certificate** (k6_27 3/3, k5_02 2/2, k5_03 8/8, seconds each). So those 4-D FAILs are the verifier
+  starving the s-axis (A96's finding), not node hardness. The follow-up slab sweep then separated them:
+  k6_27 closed outright; k5_02 and k5_03 fail on the BULK slabs, away from every recorded witness —
+  k5_03 banks [3.82, 3.823345] (5.9% of the window, C2 3/3), k5_02 banks [3.82, 3.820223] (0.4%, C2 3/3).
+  Cost law measured at depth 48, jobs 1: k6_27 ~11 s, k6_07 ~65 s, k5_03 ~340 s per 1e-3 of s.
+- **k5_12 (gate 0.03 -> 0.02): still OPEN.** The re-run cleared both gates but certify aborted: stage B
+  landed at slack 0.05041 this time (pass 5: 0.02646 — both LP stages are time-capped and unconverged, so
+  tau varies run to run), certify built a round-0 certificate (total 5.98317 < 6), the exact verifier
+  FAILed it at depth 56, and the witness-feedback re-solve drove tau to exactly the budget 6.000000.
+  At eps_geo 0.003 this stratum has no certifiable measure with this column pool (L3). 4210 s.
+- Scoreboard (attempts/A56-sparametric/results/scoreboard.json, ONE atomic write, backup
+  .bak_pre_a114): **48/52 rows full-window** (4 M1 + 24 TRANSFERRED + 20 TRANSFERRED-resolved),
+  2 partial (k5_02, k5_03), 2 OPEN (k5_12; k5_13 still running under A61 and untouched). A61 pass 5's
+  four conversions (k5_05, k5_10, k5_14, k6_21) were folded in the same write.
+- Discipline: <= 2 processes, BLAS pinned, 6144 MB commit + 3 GB free-physical gate before every verifier,
+  frozen verifiers byte-identical (sha256 in every record file), A57/A96 paused and untouched, A61's
+  campaign (k5_13), A111 and A107 untouched. Records are resumable per class: attempts/A114-window-closers/
+  results/<class>.json (stage cache), notes/lemmas.md L1-L5.

@@ -1,0 +1,144 @@
+{
+ "class": "k6_23",
+ "attempt": "A114",
+ "mechanism": "resolver (A96 step 3c) on the A56 parametric certificate: enumerate the EXACT uncovered s-intervals at jobs=1 with an unbounded per-box witness cap, then re-verify the SAME certificate on each one",
+ "band": [
+  "3877/1000",
+  "969271/250000"
+ ],
+ "band_float": [
+  3.877,
+  3.877084
+ ],
+ "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_23.param.json",
+ "cert_sha256": "bf5e77f41e7b4fc84d051335fbb87b529e3ba61bdbdea657ea011c86e3f8db08",
+ "verifier": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\code\\verify_param.py",
+ "verifier_sha256": "0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec",
+ "verify_case": "C:\\Users\\esumm\\code\\packing\\attempts\\A53-simple-strata\\code\\verify_case.py",
+ "verify_case_sha256": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+ "started": "2026-09-06T12:49:00",
+ "stages": {
+  "R.enum": {
+   "slo": "3877/1000",
+   "shi": "969271/250000",
+   "slo_f": 3.877,
+   "shi_f": 3.877084,
+   "depth": 56,
+   "sscale": "1",
+   "jobs": 1,
+   "max_witnesses": 2000,
+   "seconds": 181.8,
+   "result": "PASS",
+   "report": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\certs\\k6_23\\R.enum.report.json",
+   "gate": {
+    "free_commit_mb": 78210,
+    "free_phys_mb": 10797,
+    "waits": 1
+   },
+   "stats": {
+    "boxes": 3036390,
+    "covered": 1083388,
+    "exempt": 434839,
+    "vacuous": 0,
+    "s_splits": 7,
+    "s_cells": 3,
+    "max_depth": 49,
+    "max_s_depth": 1,
+    "witnesses": 0
+   },
+   "witness_s_range": null,
+   "done": true,
+   "finished": "2026-09-06T12:53:02"
+  },
+  "c2.band.d44_DEPTH_LIMITED": {
+   "result": "done",
+   "c2": [
+    {
+     "s": "3877/1000",
+     "s_float": 3.877,
+     "time_s": 127.7,
+     "result": "PASS"
+    },
+    {
+     "s": "1938521/500000",
+     "s_float": 3.877042,
+     "time_s": 133.7,
+     "result": "FAIL"
+    }
+   ],
+   "done": true,
+   "finished": "2026-09-06T12:59:23"
+  },
+  "c2.band.d56": {
+   "result": "done",
+   "c2": [
+    {
+     "s": "3877/1000",
+     "s_float": 3.877,
+     "time_s": 131.0,
+     "depth": "56",
+     "result": "PASS"
+    },
+    {
+     "s": "1938521/500000",
+     "s_float": 3.877042,
+     "time_s": 136.9,
+     "depth": "56",
+     "result": "PASS"
+    },
+    {
+     "s": "969271/250000",
+     "s_float": 3.877084,
+     "time_s": 153.5,
+     "depth": "56",
+     "result": "PASS"
+    }
+   ],
+   "done": true,
+   "finished": "2026-09-06T13:11:31"
+  }
+ },
+ "wall_s": 181.8,
+ "rows": [
+  [
+   "3877/1000",
+   "969271/250000",
+   3.877,
+   3.877084,
+   181.8
+  ]
+ ],
+ "residual": [],
+ "gained": [
+  [
+   "3877/1000",
+   "969271/250000"
+  ]
+ ],
+ "finished": "2026-09-06T13:11:31",
+ "c2_depth44_note": "the A56-convention depth-44 canary is UNDECIDED (0 holes, 2 undecided boxes) at the slab midpoint: k6_23 is the 501-atom certificate whose own parametric run needed depth 56, so the canary is re-run at depth 56",
+ "c2": [
+  {
+   "s": "3877/1000",
+   "s_float": 3.877,
+   "time_s": 131.0,
+   "depth": "56",
+   "result": "PASS"
+  },
+  {
+   "s": "1938521/500000",
+   "s_float": 3.877042,
+   "time_s": 136.9,
+   "depth": "56",
+   "result": "PASS"
+  },
+  {
+   "s": "969271/250000",
+   "s_float": 3.877084,
+   "time_s": 153.5,
+   "depth": "56",
+   "result": "PASS"
+  }
+ ],
+ "verdict": "A114 CLOSES THE SLIVER: [3877/1000, 969271/250000] PASS in 181.8 s on the SAME certificate (A96 resolver), C2 3/3 at depth 56 -- with A56's [191/50, 3877/1000] this is the FULL window"
+}

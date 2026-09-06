@@ -2581,21 +2581,24 @@
      ]
     }
    },
-   "result": "OPEN",
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "result": "TRANSFERRED-resolved",
+   "s_ranges": [
     [
      "191/50",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8770840] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] via an A61 re-solved base certificate (enriched column pool -> tau0 5.000000, eps_geo 0.003, anchoring gap); P7 ledger rule: the A53/A54 certificate remains the s0 witness",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_05.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_05.param.json",
-    "carries_the_window_claim": null,
-    "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
+    "carries_the_window_claim": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_05.gp.param.json",
+    "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)",
+    "a61_base_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_05.json",
+    "a61_parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_05.gp.param.json",
+    "provenance": "P7 ledger rule (certificate substitution): the stratum claim is certificate-fungible. s0 endpoint witness = original_s0_cert (A53/A54); window claim = a61_parametric_cert (A61 resolve61). Both verified, both kept."
    },
    "resolve": {
     "verdict": "recipe did NOT convert (4D still open)",
@@ -2622,7 +2625,65 @@
     }
    },
    "resolve_failed_because": "recipe did NOT convert (4D still open)",
-   "note": "resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6)"
+   "note": "resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6) resolve_margin at eps_geo=0.002948: recipe did NOT convert (4D still open) (tau 4.999999999991133 vs budget 6)",
+   "a61": {
+    "attempt": "A61",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 3500,
+    "warm_rows": 11758,
+    "tau0_enriched": 5.000000000439992,
+    "slack0": 0.999999999560008,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 4.99999999984469,
+    "dtau_deps": -2.052767151663547e-07,
+    "certify": "PASS",
+    "new_cert": {
+     "path": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_05.json",
+     "atoms": 127,
+     "total": "5301963/1000000",
+     "margin": 0.6980370000000002
+    },
+    "anchoring_tried": [
+     {
+      "anchoring": "gap",
+      "seconds": 49.4,
+      "result": "PASS",
+      "stats": {
+       "boxes": 2799754,
+       "s_splits": 268608,
+       "s_cells": 972,
+       "max_depth": 39,
+       "max_s_depth": 8
+      },
+      "witness_s_range": null,
+      "n_witnesses": 0
+     }
+    ],
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 1.3,
+      "result": "PASS"
+     },
+     {
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 1.5,
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 3.3,
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A61 CONVERTS (full window)",
+    "seconds": 5432.7,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k5_05.json"
+   }
   },
   "k6_32": {
    "name": "k6_32",
@@ -4208,7 +4269,7 @@
      ]
     }
    },
-   "result": "partial",
+   "result": "TRANSFERRED",
    "subwindow_attempts": [
     {
      "window": [
@@ -4260,29 +4321,70 @@
    "s_ranges": [
     [
      "191/50",
-     "956767/250000"
+     "969271/250000"
     ]
    ],
    "s_ranges_float": [
     [
      3.82,
-     3.827068
+     3.877084
     ]
    ],
-   "window_coverage": 0.123818,
-   "open_band": [
-    [
-     "956767/250000",
-     "969271/250000"
-    ]
-   ],
+   "window_coverage": 1.0,
+   "open_band": [],
    "note": "PARTIAL TRANSFER by sub-window bisection: certified on the listed s-ranges (each with its own C2); open only on the listed band(s), which strictly contain every recorded FAIL witness.",
-   "status": "PARTIAL: [191/50, 956767/250000]; open [956767/250000, 969271/250000]",
+   "status": "FULL [191/50, 969271/250000] -- A114 closed the residue with the SAME parametric certificate re-verified on the sub-window(s) [['956767/250000', '969271/250000']] (A96 resolver / A56 sub-window bisection; full C2 canary)",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k6_07.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_07.param.json",
     "carries_the_window_claim": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_07.param.json",
     "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
+   },
+   "a114": {
+    "attempt": "A114",
+    "mechanism": "A56 sub-window bisection of the open band with the frozen parametric certificate, then the A96 resolver on every residual slab",
+    "band_attacked": [
+     "956767/250000",
+     "969271/250000"
+    ],
+    "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_07.param.json",
+    "cert_sha256": "d77d2ba51bc1fc437caef749bfc7f7d955b71776cac4e5ef296bc77bf2fbecc6",
+    "verifier_sha256": "0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec",
+    "rows": null,
+    "residual": null,
+    "gained": [
+     [
+      "956767/250000",
+      "969271/250000"
+     ]
+    ],
+    "still_open": [],
+    "c2": [
+     {
+      "s": "956767/250000",
+      "s_float": 3.827068,
+      "time_s": 11.3,
+      "depth": "48",
+      "result": "PASS"
+     },
+     {
+      "s": "963019/250000",
+      "s_float": 3.852076,
+      "time_s": 12.4,
+      "depth": "48",
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 23.1,
+      "depth": "48",
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A114 CLOSES THE BAND: [956767/250000, 969271/250000] covered by 18 PASSing slabs, C2 3/3 -- with A56's [191/50, 956767/250000] this is the FULL window",
+    "seconds": 8295.4,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k6_07.json"
    }
   },
   "k5_07": {
@@ -4444,22 +4546,164 @@
      ]
     }
    },
-   "result": "OPEN",
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "result": "partial",
+   "s_ranges": [
     [
      "191/50",
+     "48938813/12800000"
+    ]
+   ],
+   "window_coverage": 0.058594,
+   "open_band": [
+    [
+     "48938813/12800000",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8201115, 3.8388422] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "status": "PARTIAL after A114: certified [['191/50', '48938813/12800000']], open [['48938813/12800000', '969271/250000']]",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_03.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_03.param.json",
     "carries_the_window_claim": null,
     "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
-   }
+   },
+   "a61": {
+    "attempt": "A61",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 2995,
+    "warm_rows": 14336,
+    "tau0_enriched": 5.653025949762605,
+    "slack0": 0.346974050237395,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 5.999999999999967,
+    "dtau_deps": 119.64622421978005,
+    "certify": null,
+    "new_cert": null,
+    "anchoring_tried": null,
+    "c2": null,
+    "verdict": "POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = 0.00000 < 0.03",
+    "seconds": 2585.7,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k5_03.json"
+   },
+   "a61_outcome": "POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = 0.00000 < 0.03",
+   "a114": {
+    "attempt": "A114",
+    "mechanism": "resolver (A96 step 3c) on the A56 parametric certificate: enumerate the EXACT uncovered s-intervals at jobs=1 with an unbounded per-box witness cap, then re-verify the SAME certificate on each one",
+    "band_attacked": [
+     "191/50",
+     "48938813/12800000"
+    ],
+    "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_03.param.json",
+    "cert_sha256": "40cca45c274698ba7702a04be23455d4e22f883bda5ea5c5e8390f491a0b6553",
+    "verifier_sha256": "0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec",
+    "rows": [
+     [
+      "488974271/128000000",
+      "977962813/256000000",
+      3.8201114921875,
+      3.82016723828125,
+      "PASS",
+      34.2
+     ],
+     [
+      "122254271/32000000",
+      "97806271/25600000",
+      3.82044596875,
+      3.8205574609375,
+      "PASS",
+      47.8
+     ],
+     [
+      "489059897/128000000",
+      "61134271/16000000",
+      3.8207804453125,
+      3.8208919375,
+      "PASS",
+      48.1
+     ],
+     [
+      "19572671/5120000",
+      "978647821/256000000",
+      3.8227873046875,
+      3.82284305078125,
+      "PASS",
+      35.8
+     ],
+     [
+      "978676363/256000000",
+      "489345317/128000000",
+      3.82295454296875,
+      3.8230102890625,
+      "PASS",
+      35.3
+     ],
+     [
+      "122339897/32000000",
+      "978733447/256000000",
+      3.82312178125,
+      3.82317752734375,
+      "PASS",
+      34.4
+     ],
+     [
+      "978761989/256000000",
+      "48938813/12800000",
+      3.82328901953125,
+      3.823344765625,
+      "PASS",
+      35.2
+     ],
+     [
+      "982643701/256000000",
+      "491371799/128000000",
+      3.83845195703125,
+      3.8388421796875,
+      "PASS",
+      128.4
+     ]
+    ],
+    "residual": [],
+    "gained": [
+     [
+      "191/50",
+      "48938813/12800000"
+     ]
+    ],
+    "still_open": [],
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 23.9,
+      "depth": "44",
+      "result": "PASS"
+     },
+     {
+      "s": "97834813/25600000",
+      "s_float": 3.8216723828125,
+      "time_s": 25.9,
+      "depth": "44",
+      "result": "PASS"
+     },
+     {
+      "s": "48938813/12800000",
+      "s_float": 3.823344765625,
+      "time_s": 26.5,
+      "depth": "44",
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A114 PARTIAL: certified [191/50, 48938813/12800000] (5.86% of the window, C2 3/3); the remaining 0.0537 of s costs ~5 CPU-h at this certificate's rate, outside budget",
+    "seconds": 3480.0,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k5_03.json"
+   },
+   "s_ranges_float": [
+    [
+     3.82,
+     3.823344765625
+    ]
+   ]
   },
   "k5_12": {
    "name": "k5_12",
@@ -4556,7 +4800,47 @@
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_12.param.json",
     "carries_the_window_claim": null,
     "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
-   }
+   },
+   "a61": {
+    "attempt": "A61",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 3500,
+    "warm_rows": 14476,
+    "tau0_enriched": 5.625000000000046,
+    "slack0": 0.3749999999999538,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 5.94958677685847,
+    "dtau_deps": 111.92647477876683,
+    "certify": "FAIL(rc=3)",
+    "new_cert": null,
+    "anchoring_tried": null,
+    "c2": null,
+    "verdict": "fixed-s re-certification failed; no base certificate produced",
+    "seconds": 4210.3,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k5_12.json"
+   },
+   "a61_outcome": "fixed-s re-certification failed; no base certificate produced",
+   "a114": {
+    "attempt": "A114",
+    "mechanism": "A61's resolve61 route re-run with the post-shrink gate lowered from 0.03 to 0.02 (--gate_b 0.02), same eps_geo 0.003 and same --cert_rounds 6 --cert_time 420 as A61 pass 5; the LP caps were pass 5's (--lp_time 1200 --lp_time_b 900)",
+    "band_attacked": [
+     "191/50",
+     "969271/250000"
+    ],
+    "cert": null,
+    "cert_sha256": null,
+    "verifier_sha256": null,
+    "rows": null,
+    "residual": null,
+    "gained": [],
+    "still_open": null,
+    "c2": null,
+    "verdict": "A114 ran the gate-0.02 route: certify FAILED (rc 3, no base certificate) -- k5_12 stays OPEN over the window; its s0 kill is untouched",
+    "seconds": 4210.3,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k5_12.json"
+   },
+   "a114_outcome": "A114 ran the gate-0.02 route: certify FAILED (rc 3, no base certificate) -- k5_12 stays OPEN over the window; its s0 kill is untouched"
   },
   "k5_14": {
    "name": "k5_14",
@@ -4638,7 +4922,7 @@
      ]
     }
    },
-   "result": "OPEN",
+   "result": "TRANSFERRED-resolved",
    "subwindow_attempts": [
     {
      "window": [
@@ -4654,20 +4938,81 @@
      "report": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_14.sub0.report.json"
     }
    ],
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "s_ranges": [
     [
      "191/50",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8202230] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] via an A61 re-solved base certificate (enriched column pool -> tau0 5.574463, eps_geo 0.003, anchoring gap); P7 ledger rule: the A53/A54 certificate remains the s0 witness",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_14.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_14.param.json",
-    "carries_the_window_claim": null,
-    "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
+    "carries_the_window_claim": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_14.gp.param.json",
+    "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)",
+    "a61_base_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_14.json",
+    "a61_parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_14.gp.param.json",
+    "provenance": "P7 ledger rule (certificate substitution): the stratum claim is certificate-fungible. s0 endpoint witness = original_s0_cert (A53/A54); window claim = a61_parametric_cert (A61 resolve61). Both verified, both kept."
+   },
+   "a61": {
+    "attempt": "A61",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 3228,
+    "warm_rows": 17108,
+    "tau0_enriched": 5.574463022435227,
+    "slack0": 0.42553697756477327,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 5.698499305929398,
+    "dtau_deps": 42.77113223936948,
+    "certify": "PASS",
+    "new_cert": {
+     "path": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_14.json",
+     "atoms": 362,
+     "total": "5983779/1000000",
+     "margin": 0.01622099999999982
+    },
+    "anchoring_tried": [
+     {
+      "anchoring": "gap",
+      "seconds": 333.1,
+      "result": "PASS",
+      "stats": {
+       "boxes": 8919414,
+       "s_splits": 776836,
+       "s_cells": 1680,
+       "max_depth": 40,
+       "max_s_depth": 8
+      },
+      "witness_s_range": null,
+      "n_witnesses": 0
+     }
+    ],
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 2.7,
+      "result": "PASS"
+     },
+     {
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 3.5,
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 7.5,
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A61 CONVERTS (full window)",
+    "seconds": 8901.5,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k5_14.json"
    }
   },
   "k6_21": {
@@ -4750,21 +5095,24 @@
      ]
     }
    },
-   "result": "OPEN",
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "result": "TRANSFERRED-resolved",
+   "s_ranges": [
     [
      "191/50",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8270798, 3.8768053] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] via an A61 re-solved base certificate (enriched column pool -> tau0 4.500000, eps_geo 0.003, anchoring gap); P7 ledger rule: the A53/A54 certificate remains the s0 witness",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k6_21.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_21.param.json",
-    "carries_the_window_claim": null,
-    "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
+    "carries_the_window_claim": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k6_21.gp.param.json",
+    "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)",
+    "a61_base_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k6_21.json",
+    "a61_parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k6_21.gp.param.json",
+    "provenance": "P7 ledger rule (certificate substitution): the stratum claim is certificate-fungible. s0 endpoint witness = original_s0_cert (A53/A54); window claim = a61_parametric_cert (A61 resolve61). Both verified, both kept."
    },
    "resolve": {
     "verdict": "recipe did NOT convert (4D still open)",
@@ -4791,7 +5139,65 @@
     }
    },
    "resolve_failed_because": "recipe did NOT convert (4D still open)",
-   "note": "resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5)"
+   "note": "resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5) resolve_margin at eps_geo=0.001286: recipe did NOT convert (4D still open) (tau 4.600000000000063 vs budget 5)",
+   "a61": {
+    "attempt": "A61",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 3500,
+    "warm_rows": 12036,
+    "tau0_enriched": 4.500000000050189,
+    "slack0": 0.4999999999498108,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 4.693877551020348,
+    "dtau_deps": 66.85432792074444,
+    "certify": "PASS",
+    "new_cert": {
+     "path": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k6_21.json",
+     "atoms": 223,
+     "total": "2492861/500000",
+     "margin": 0.014278000000000013
+    },
+    "anchoring_tried": [
+     {
+      "anchoring": "gap",
+      "seconds": 90.0,
+      "result": "PASS",
+      "stats": {
+       "boxes": 4905068,
+       "s_splits": 432820,
+       "s_cells": 1557,
+       "max_depth": 39,
+       "max_s_depth": 8
+      },
+      "witness_s_range": null,
+      "n_witnesses": 0
+     }
+    ],
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 1.5,
+      "result": "PASS"
+     },
+     {
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 1.8,
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 7.3,
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A61 CONVERTS (full window)",
+    "seconds": 7500.3,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k6_21.json"
+   }
   },
   "k6_20": {
    "name": "k6_20",
@@ -5061,16 +5467,16 @@
      ]
     }
    },
-   "result": "OPEN",
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "result": "TRANSFERRED",
+   "s_ranges": [
     [
      "191/50",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8770840] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] -- A114 closed the residue with the SAME parametric certificate re-verified on the sub-window(s) [['191/50', '969271/250000']] (A96 resolver / A56 sub-window bisection; full C2 canary)",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k6_27.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_27.param.json",
@@ -5102,7 +5508,104 @@
     }
    },
    "resolve_failed_because": "recipe did NOT convert (4D still open)",
-   "note": "resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5)"
+   "note": "resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 4.670979667278662 vs budget 5)",
+   "a61": {
+    "attempt": "A61",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 3500,
+    "warm_rows": 12215,
+    "tau0_enriched": 4.618421052426652,
+    "slack0": 0.381578947573348,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 4.880070546739238,
+    "dtau_deps": 90.22396355606405,
+    "certify": "FAIL(rc=3)",
+    "new_cert": null,
+    "anchoring_tried": null,
+    "c2": null,
+    "verdict": "fixed-s re-certification failed; no base certificate produced",
+    "seconds": 4660.0,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k6_27.json"
+   },
+   "a61_outcome": "fixed-s re-certification failed; no base certificate produced",
+   "a114": {
+    "attempt": "A114",
+    "mechanism": "resolver (A96 step 3c) on the A56 parametric certificate: enumerate the EXACT uncovered s-intervals at jobs=1 with an unbounded per-box witness cap, then re-verify the SAME certificate on each one",
+    "band_attacked": [
+     "191/50",
+     "969271/250000"
+    ],
+    "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_27.param.json",
+    "cert_sha256": "f70b1bde0e911fe3658b69e053fbb439aca479eb3d2af4da2165b5f3373513ba",
+    "verifier_sha256": "0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec",
+    "rows": [
+     [
+      "191/50",
+      "244494271/64000000",
+      3.82,
+      3.820222984375,
+      "PASS",
+      7.2
+     ],
+     [
+      "496223939/128000000",
+      "49623821/12800000",
+      3.8767495234375,
+      3.876861015625,
+      "PASS",
+      53.7
+     ],
+     [
+      "992519233/256000000",
+      "969271/250000",
+      3.87702825390625,
+      3.877084,
+      "PASS",
+      88.9
+     ]
+    ],
+    "residual": [],
+    "gained": [
+     [
+      "191/50",
+      "969271/250000"
+     ]
+    ],
+    "still_open": [],
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 2.9,
+      "depth": "44",
+      "result": "PASS"
+     },
+     {
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 3.9,
+      "depth": "44",
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 78.5,
+      "depth": "44",
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A114 CLOSES THE WINDOW: [191/50, 969271/250000] covered by 14 PASSing slabs, C2 3/3",
+    "seconds": 1826.4,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k6_27.json"
+   },
+   "s_ranges_float": [
+    [
+     3.82,
+     3.877084
+    ]
+   ]
   },
   "k5_10": {
    "name": "k5_10",
@@ -5180,21 +5683,24 @@
      ]
     }
    },
-   "result": "OPEN",
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "result": "TRANSFERRED-resolved",
+   "s_ranges": [
     [
      "191/50",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8271355] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] via an A61 re-solved base certificate (enriched column pool -> tau0 5.500000, eps_geo 0.003, anchoring gap); P7 ledger rule: the A53/A54 certificate remains the s0 witness",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_10.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_10.param.json",
-    "carries_the_window_claim": null,
-    "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
+    "carries_the_window_claim": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_10.gp.param.json",
+    "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)",
+    "a61_base_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_10.json",
+    "a61_parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_10.gp.param.json",
+    "provenance": "P7 ledger rule (certificate substitution): the stratum claim is certificate-fungible. s0 endpoint witness = original_s0_cert (A53/A54); window claim = a61_parametric_cert (A61 resolve61). Both verified, both kept."
    },
    "resolve": {
     "verdict": "recipe did NOT convert (4D still open)",
@@ -5221,7 +5727,65 @@
     }
    },
    "resolve_failed_because": "recipe did NOT convert (4D still open)",
-   "note": "resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6)"
+   "note": "resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6) resolve_margin at eps_geo=0.001: recipe did NOT convert (4D still open) (tau 5.588235293246485 vs budget 6)",
+   "a61": {
+    "attempt": "A61",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 3500,
+    "warm_rows": 12412,
+    "tau0_enriched": 5.500000000000003,
+    "slack0": 0.49999999999999734,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 5.681818181792903,
+    "dtau_deps": 62.695924756172595,
+    "certify": "PASS",
+    "new_cert": {
+     "path": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\certs\\k5_10.json",
+     "atoms": 182,
+     "total": "93496/15625",
+     "margin": 0.01625600000000027
+    },
+    "anchoring_tried": [
+     {
+      "anchoring": "gap",
+      "seconds": 137.5,
+      "result": "PASS",
+      "stats": {
+       "boxes": 5396038,
+       "s_splits": 450930,
+       "s_cells": 1613,
+       "max_depth": 40,
+       "max_s_depth": 8
+      },
+      "witness_s_range": null,
+      "n_witnesses": 0
+     }
+    ],
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 2.2,
+      "result": "PASS"
+     },
+     {
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 2.7,
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 11.5,
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A61 CONVERTS (full window)",
+    "seconds": 9271.8,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k5_10.json"
+   }
   },
   "k5_13": {
    "name": "k5_13",
@@ -5396,7 +5960,7 @@
      ]
     }
    },
-   "result": "OPEN",
+   "result": "partial",
    "resolve": {
     "verdict": "fixed-s re-certification failed; recipe did not produce a base cert",
     "eps_geo": 0.001011,
@@ -5412,22 +5976,116 @@
     "param_stats": null
    },
    "note": "resolve_margin at eps_geo=0.003 is INFEASIBLE: tau rose to 6.000000000001022 = budget 6. This certificate's total margin (0.00055) cannot pay for 0.003 of positional slack; a smaller eps_geo is needed. resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.003: LP infeasible for a kill (tau >= budget) (tau 6.000000000001022 vs budget 6) resolve_margin at eps_geo=0.001011: fixed-s re-certification failed; recipe did not produce a base cert (tau 5.668256852945585 vs budget 6) resolve_margin at eps_geo=0.001011: fixed-s re-certification failed; recipe did not produce a base cert (tau 5.668256852945585 vs budget 6) resolve_margin at eps_geo=0.001011: fixed-s re-certification failed; recipe did not produce a base cert (tau 5.668256852945585 vs budget 6) resolve_margin at eps_geo=0.001011: fixed-s re-certification failed; recipe did not produce a base cert (tau 5.668256852945585 vs budget 6)",
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "s_ranges": [
     [
      "191/50",
+     "244494271/64000000"
+    ]
+   ],
+   "window_coverage": 0.003906,
+   "open_band": [
+    [
+     "244494271/64000000",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8770840] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "status": "PARTIAL after A114: certified [['191/50', '244494271/64000000']], open [['244494271/64000000', '969271/250000']]",
    "resolve_failed_because": "fixed-s re-certification failed; recipe did not produce a base cert",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_02.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_02.param.json",
     "carries_the_window_claim": null,
     "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
-   }
+   },
+   "a61": {
+    "attempt": "A61",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 3500,
+    "warm_rows": 12690,
+    "tau0_enriched": 5.600000000128485,
+    "slack0": 0.3999999998715147,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 6.000000000001713,
+    "dtau_deps": 137.9310344390441,
+    "certify": null,
+    "new_cert": null,
+    "anchoring_tried": null,
+    "c2": null,
+    "verdict": "POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = -0.00000 < 0.03",
+    "seconds": 2957.6,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k5_02.json"
+   },
+   "a61_outcome": "POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = -0.00000 < 0.03",
+   "a114": {
+    "attempt": "A114",
+    "mechanism": "resolver (A96 step 3c) on the A56 parametric certificate: enumerate the EXACT uncovered s-intervals at jobs=1 with an unbounded per-box witness cap, then re-verify the SAME certificate on each one",
+    "band_attacked": [
+     "191/50",
+     "244494271/64000000"
+    ],
+    "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_02.param.json",
+    "cert_sha256": "a799c22ef6b2e5ac42d7a8b6e4dd4cee811ca63b027d3d6efc98823666dd5026",
+    "verifier_sha256": "0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec",
+    "rows": [
+     [
+      "191/50",
+      "244494271/64000000",
+      3.82,
+      3.820222984375,
+      "PASS",
+      76.3
+     ],
+     [
+      "496252481/128000000",
+      "969271/250000",
+      3.8769725078125,
+      3.877084,
+      "PASS",
+      56.2
+     ]
+    ],
+    "residual": [],
+    "gained": [
+     [
+      "191/50",
+      "244494271/64000000"
+     ]
+    ],
+    "still_open": [],
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 4.0,
+      "depth": "44",
+      "result": "PASS"
+     },
+     {
+      "s": "488974271/128000000",
+      "s_float": 3.8201114921875,
+      "time_s": 4.3,
+      "depth": "44",
+      "result": "PASS"
+     },
+     {
+      "s": "244494271/64000000",
+      "s_float": 3.820222984375,
+      "time_s": 4.2,
+      "depth": "44",
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A114 PARTIAL: certified [191/50, 244494271/64000000] (0.39% of the window, C2 3/3); the bulk slabs FAIL at depth 48 -- node/margin hardness, not s-resolution",
+    "seconds": 616.6,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k5_02.json"
+   },
+   "s_ranges_float": [
+    [
+     3.82,
+     3.820222984375
+    ]
+   ]
   },
   "k5_15": {
    "name": "k5_15",
@@ -5585,7 +6243,7 @@
      ]
     }
    },
-   "result": "partial",
+   "result": "TRANSFERRED",
    "note": "PARTIAL TRANSFER: certified for every s in [3.82, 3.877]; at s = s0 the A54 fixed-s certificate holds; open only on the half-open sliver (3.877, 3.877084), width 8.4e-5.",
    "s_range": [
     "191/50",
@@ -5631,28 +6289,77 @@
    "s_ranges": [
     [
      "191/50",
-     "3877/1000"
+     "969271/250000"
     ]
    ],
    "s_ranges_float": [
     [
      3.82,
-     3.877
+     3.877084
     ]
    ],
-   "window_coverage": 0.998528,
-   "open_band": [
-    [
-     "3877/1000",
-     "969271/250000"
-    ]
-   ],
-   "status": "PARTIAL: parametric PASS on [191/50, 3877/1000]; the A54 fixed-s certificate holds AT s0 = 969271/250000 itself; open = the OPEN interval (3877/1000, 969271/250000), width 84/1000000 = 8.4e-5",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] -- A114 closed the residue with the SAME parametric certificate re-verified on the sub-window(s) [['3877/1000', '969271/250000']] (A96 resolver / A56 sub-window bisection; full C2 canary)",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A54-stragglers/certs/k6_23.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_23.param.json",
     "carries_the_window_claim": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_23.param.json",
     "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
+   },
+   "a114": {
+    "attempt": "A114",
+    "mechanism": "resolver (A96 step 3c) on the A56 parametric certificate: enumerate the EXACT uncovered s-intervals at jobs=1 with an unbounded per-box witness cap, then re-verify the SAME certificate on each one",
+    "band_attacked": [
+     "3877/1000",
+     "969271/250000"
+    ],
+    "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k6_23.param.json",
+    "cert_sha256": "bf5e77f41e7b4fc84d051335fbb87b529e3ba61bdbdea657ea011c86e3f8db08",
+    "verifier_sha256": "0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec",
+    "rows": [
+     [
+      "3877/1000",
+      "969271/250000",
+      3.877,
+      3.877084,
+      181.8
+     ]
+    ],
+    "residual": [],
+    "gained": [
+     [
+      "3877/1000",
+      "969271/250000"
+     ]
+    ],
+    "still_open": null,
+    "c2": [
+     {
+      "s": "3877/1000",
+      "s_float": 3.877,
+      "time_s": 131.0,
+      "depth": "56",
+      "result": "PASS"
+     },
+     {
+      "s": "1938521/500000",
+      "s_float": 3.877042,
+      "time_s": 136.9,
+      "depth": "56",
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 153.5,
+      "depth": "56",
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A114 CLOSES THE SLIVER: [3877/1000, 969271/250000] PASS in 181.8 s on the SAME certificate (A96 resolver), C2 3/3 at depth 56 -- with A56's [191/50, 3877/1000] this is the FULL window",
+    "seconds": 181.8,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k6_23.json"
    }
   }
  },
@@ -5661,27 +6368,26 @@
   "total": 52,
   "by_result": {
    "M1": 4,
-   "TRANSFERRED": 21,
-   "TRANSFERRED-resolved": 16,
-   "OPEN": 9,
-   "partial": 2
+   "TRANSFERRED": 24,
+   "TRANSFERRED-resolved": 20,
+   "partial": 2,
+   "OPEN": 2
   },
   "by_k": {
    "k6": {
     "M1": 2,
-    "TRANSFERRED": 15,
-    "TRANSFERRED-resolved": 12,
-    "partial": 2,
-    "OPEN": 2
+    "TRANSFERRED": 18,
+    "TRANSFERRED-resolved": 13
    },
    "k5": {
     "TRANSFERRED": 6,
     "M1": 2,
-    "TRANSFERRED-resolved": 4,
-    "OPEN": 7
+    "TRANSFERRED-resolved": 7,
+    "partial": 2,
+    "OPEN": 2
    }
   },
-  "full_window_rows": 41
+  "full_window_rows": 48
  },
  "wall_time_this_run_s": 3249.7,
  "legend": {
@@ -5707,5 +6413,37 @@
   ],
   "ledger_rule": "soundness.md P7 (certificate substitution)",
   "notes": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\notes\\lemmas.md"
+ },
+ "a114": {
+  "updated": "2026-09-06T16:03:34",
+  "rows_touched": [
+   "k5_02",
+   "k5_03",
+   "k5_05",
+   "k5_10",
+   "k5_12",
+   "k5_14",
+   "k5_17",
+   "k6_07",
+   "k6_20",
+   "k6_21",
+   "k6_23",
+   "k6_27",
+   "k6_29"
+  ],
+  "rows_converted_to_full_window": [
+   "k5_05",
+   "k5_10",
+   "k5_14",
+   "k5_17",
+   "k6_07",
+   "k6_20",
+   "k6_21",
+   "k6_23",
+   "k6_27",
+   "k6_29"
+  ],
+  "records": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results",
+  "ledger_rule": "soundness.md P7 (certificate substitution) + A86 T4 WindowRows disjunction for the sub-window unions"
  }
 }

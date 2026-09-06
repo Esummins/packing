@@ -1,0 +1,49 @@
+{
+ "name": "k5_12",
+ "k": 5,
+ "budget": 6,
+ "eps_geo": 0.003,
+ "gate": 0.3,
+ "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+ "started": "2026-09-06T04:49:29",
+ "warm_atoms": 3463,
+ "warm_pool": 3463,
+ "warm_base": 80,
+ "max_atoms": 3500,
+ "warm_rows": 14476,
+ "warm_rows_from_a53": 13828,
+ "n_4d_witnesses": 24,
+ "warm_sources": [
+  "k5_12.json",
+  "k5_12.resolve1.json",
+  "k5_12.resolve2.json",
+  "k5_12.stageA.json",
+  "k5_12_A_state.json",
+  "k5_12.param.wit.json"
+ ],
+ "stageA": {
+  "eps_geo": 0.0001,
+  "tau0": 5.621621621621173,
+  "slack0": 0.3783783783788266,
+  "converged": false,
+  "n_orbits": 4946,
+  "n_rows": 16854,
+  "seconds": 1576.2,
+  "minmass": 0.8359039766667661,
+  "maxcov": 1.3749999999967213
+ },
+ "stageB": {
+  "eps_geo": 0.003,
+  "tau": 5.973544973578524,
+  "slack": 0.026455026421476013,
+  "converged": false,
+  "n_orbits": 3890,
+  "n_rows": 15983,
+  "seconds": 1281.9,
+  "minmass": 0.7475927972546677,
+  "maxcov": 1.4731959639074028
+ },
+ "dtau_deps": 121.3528799852933,
+ "verdict": "POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = 0.02646 < 0.03",
+ "total_seconds": 2858.2
+}

@@ -1,0 +1,40 @@
+{
+ "class": "k5_12",
+ "attempt": "A114",
+ "mechanism": "A61's resolve61 route re-run with the post-shrink gate lowered from 0.03 to 0.02 (--gate_b 0.02), same eps_geo 0.003 and same --cert_rounds 6 --cert_time 420 as A61 pass 5; the LP caps were pass 5's (--lp_time 1200 --lp_time_b 900)",
+ "command": "python attempts/A61-window-stragglers/code/resolve61.py --name k5_12 --eps_geo 0.003 --gate 0.30 --gate_b 0.02 --lp_time 1200 --lp_time_b 900 --cert_time 420 --cert_rounds 6 --depth 48 --jobs 3 --param_timeout 900 --max_atoms 3500 --max_cols_add 800",
+ "band": [
+  "191/50",
+  "969271/250000"
+ ],
+ "band_float": [
+  3.82,
+  3.877084
+ ],
+ "record_a61": "attempts/A61-window-stragglers/results/resolve61_k5_12.json",
+ "pass5_snapshot": "attempts/A114-window-closers/results/_pre_a114_resolve61_k5_12.json",
+ "pass5": {
+  "tau0": 5.621621621621173,
+  "slack0": 0.3783783783788266,
+  "tau_eps": 5.973544973578524,
+  "slack_eps": 0.026455026421476013,
+  "verdict": "POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = 0.02646 < 0.03",
+  "seconds": 2858.2
+ },
+ "a114": {
+  "tau0": 5.625000000000046,
+  "slack0": 0.3749999999999538,
+  "tau_eps": 5.94958677685847,
+  "slack_eps": 0.05041322314152996,
+  "dtau_deps": 111.92647477876683,
+  "certify": "FAIL(rc=3)",
+  "certify_seconds": 1105.0,
+  "verdict": "fixed-s re-certification failed; no base certificate produced"
+ },
+ "gate_change_effect": "the 0.02 gate did let the row reach certify, but it was not what decided the run: this pass's stage B landed at slack 0.05041 (pass 5: 0.02646), i.e. it would have cleared the ORIGINAL 0.03 gate too -- the two LP stages are time-capped and unconverged, so tau varies run to run.  certify then built a certificate at round 0 (scale 1.0056, total 5.98317 < budget 6, 146 atoms), the exact verifier FAILed it at depth 56, and the witness-feedback re-solve drove tau to exactly the budget (6.00000), so round 1's total 6.03001 >= 6 and certify aborted (rc 3).  At eps_geo 0.003 this stratum has no certifiable measure; the blocker is the LP, not the gate.",
+ "next_lever": "dtau/d eps_geo = 111.9 measured here (121.4 in pass 5): eps_geo ~ 0.0029 keeps the scale floor's requirement budget - tau > 0.005*tau satisfied with headroom and stays far above the P6(v) conversion threshold 0.0015 -- but the round-0 exact FAIL suggests the row needs a richer column pool, not a smaller shrink.",
+ "verdict": "A114 ran the gate-0.02 route: certify FAILED (rc 3, no base certificate) -- k5_12 stays OPEN over the window; its s0 kill is untouched",
+ "gained": [],
+ "wall_s": 4210.3,
+ "verifier": "C:/Users/esumm/code/packing/attempts/A54-stragglers/code/certify.py (frozen, unmodified)"
+}
