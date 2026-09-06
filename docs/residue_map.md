@@ -22,7 +22,7 @@ either killed a piece of (iii) or priced a route to it; none deleted it. It is k
 | block | classes | status | price (CPU-h) | source of price |
 |---|---|---|---|---|
 | k ≥ 6 | 33 | dead, window-converted (A54/A61) | 0 | done |
-| k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric at 6 shards; class coverage 0.978 / 0.994 | **~2,200** (92 CPU-days; 18.5 wall-days at 5 workers; fixed sides 125 CPU-days) | measured (A96, 2026-09-05): level-2 LP cost settled at **1.11×** (529 children, 53 parents; every earlier high reading was small-sample noise), level-2 verify 545 s/child (n = 26), level-2 descent **11.3%** → expansion factor 0.91 per level, so level 3 is 41% of the wall and the level-3 descent rate is the campaign's highest-value unknown (deepen probe at depth 3 running); 6 shards give +14% throughput for +50% shards (first hint of contention) |
+| k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric at 6 shards; class coverage 0.978 / 0.994 | **~2,200** (92 CPU-days; 23–26 wall-days at 5 workers with the level-3 tail fitted, 34 if the expansion factor stalls; fixed sides 125 CPU-days) | measured (A96, 2026-09-05): level-2 LP cost settled at **1.11×** (529 children, 53 parents; every earlier high reading was small-sample noise), level-2 verify 545 s/child (n = 26), level-2 descent **11.3%** → expansion factor 0.91 per level, so level 3 is 41% of the wall and the level-3 descent rate is the campaign's highest-value unknown (deepen probe at depth 3 running); 6 shards give +14% throughput for +50% shards (first hint of contention) |
 | trump5 (Trump's own class) | 1 | A60 residual tree, cover done, deepen + tube | 300–500 | running |
 | stragglers (s0-only rows) | 6 left | A61 converting | small | running |
 | protected k4 | 6 (incl. corners4) | P-TREE trees; k4_08/k4_11 killed at 3.833 (A82) | **161–277 per class → 966–1,662 group** (k4_11: closing terms 96.0 CPU-h + one non-closing level-2 round 107.1). First-pass certification **0.385**: τ pins exactly to the budget on 61% of level-1 cells (η = 0), and those cells resist certification, ε_geo *and* level-2 bisection | A100 **measured** (39/882 cells; downstream + (D) complete) |
@@ -210,10 +210,13 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   1.55×–2.8× readings were small-sample noise; a per-child cost is not a number below ~50 parents); level-2
   parametric verify 545 s/child (n = 26, 2.06× level 1); level-2 descent **11.3%** → expansion factor 0.91 per level
   (level 1 was 1.44), so level 3 is 41% of the wall. A57 = 92 CPU-days, **18.5 wall-days at 5 workers**; parametric
-  beats four fixed sides by 1.35×. Six shards give +14% throughput for +50% shards (held at six). The level-3 descent
-  rate is the campaign's highest-value unknown: a depth-3 probe on the 46 level-2 ALIVE children (≤ 368 level-3
-  children) is running; if the factor stays near 0.9 the geometric tail is ~10× the level-2 term and the campaign
-  needs a different plan, if it halves again the 18.5-day figure is close to final. Earlier follow-ups stand: a
+  beats four fixed sides by 1.35×. Six shards give +14% throughput for +50% shards (held at six). **Level 3 measured
+  (2026-09-06, `c7155224`)**: 42 children over 6 parents, descent 9.5%, expansion factor 0.76, per-child cost 292 s (no
+  escalation with depth). Descent is clustered: four parents gave 0 alive children, one gave 3 of 8. Fitting the tail
+  instead of truncating at level 3 (factors 1.44 → 0.91 → 0.76, decay ratio ρ): **23–26 wall-days at 5 workers**
+  centrally (ρ 0.63–0.86, 5–9 more levels), 34 if the factor stalls at ρ = 1; the tree terminates in every case, so
+  the 10× divergence scenario is ruled out. The dominant unknown is now whether fertile nodes beget fertile nodes;
+  a fertility probe on the four alive level-3 children is running. Earlier follow-ups stand: a
   completed FAIL plus resolver (3–11 s) beats a timeout, so the verify cap is atom-dependent; the σ ladder to level 2
   would save 2 wall-days but needs a coverage reset, so it is recorded, not deployed.
 - A99 (landed 2026-09-06, `99985b76`): the three k0 tree reductions, measured. **R1 (resolver on A85's FAILs): 0 of
