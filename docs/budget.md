@@ -60,6 +60,13 @@ merely unconverged at the LP time cap.
 2. **The alive population.** Re-run unconverged alive nodes with a longer LP cap before splitting them (A109's 28/46);
    branch on the load path instead of the rattler (A112); both are about not paying eight children for a node that
    was never alive or whose slack sits in squares it does not condition on.
+   *Row-dropping by the all-poses test (2026-09-06, A96 `d016209b`):* the closed-form tilt-coherence screen alone
+   removes a median 44% of a node's warm rows (13k of 30k); the exact all-poses test removes more. It is the
+   strongest LP lever measured, and it is not free: it widens the frozen verifier's admissibility clause from
+   "disjoint from every core" to "disjoint from some pose of the box", i.e. a new frozen verifier version with a Lean
+   theorem parallel to T5. Kill yield at 900 s being measured; spec for the clause requested. *Caution banked with
+   it:* trimmed-bin re-solves at the 240 s cap moved the LP without deciding it (29 solved, 2 converged, 19 on the
+   knife edge) — no kill count from a re-solve counts before the 900 s re-check.
 3. **Verification wall.** Atom-dependent verify caps (in), resolver over timeouts (in), σ ladder to level 2 (recorded,
    not deployed: −2 wall-days, needs a coverage reset), 4-D verify sharing across siblings (untested).
 4. **The protected tier.** No lever of this week has been applied there; the same box/pin geometry suggests the same
