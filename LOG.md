@@ -3516,3 +3516,25 @@ notes only), frozen verifiers untouched, git fetch + plain merge + push own path
   octagon 159 -- a 4.8x gap. The 4 boxes TC wins are ones where it uses the TRUE unit square (half-side 1/2, centre uncertain by
   delta) while the octagon test uses the 0.49 guaranteed core, so running BOTH is marginally better than either. Conclusion: keep
   TC as the O(1) pre-screen the PI proposes, but the exact interval SAT test must be what decides.
+- A96 item (4): TRIMMING'S EFFECT ON THE 13.31-WALL-DAY SCHEDULE. The 159 trimming kills decompose EXACTLY as the 70 T5' already
+  makes (20/32/7/11 -- perfect match, an independent confirmation that trimming subsumes T5') plus 89 INCREMENTAL.
+  Incremental rate against post-T5' open denominators: L1 31/1106 = 2.80%, L2 54/393 = 13.74%, L3 3/32 = 9.38%, L4 1/3 = 33.3%.
+  The L3 and L4 denominators (32 and 3 boxes) are NOT measurements -- L4 in particular is one box out of three.
+  Direct saving (node cost only): with the measured rates 16.21 d 1-proc = 3.24 wall-days @5w, 13.31 -> 10.06. With the L4 rate
+  replaced by the L3 rate (the honest version, since n=3 decides nothing) 10.31 d = 2.06 wall-days, 13.31 -> 11.24.
+  Subtree removal on top: 24 of the 89 incremental kills were ALIVE at L1, 12 at L2, 1 at L3, and an ALIVE kill removes its whole
+  descendant cone (~20.8 nodes at L1, ~14.1 at L2, 8 at L3 under the measured f2 = 0.906, f3 = 0.762, f4 = 0). Scaled to the
+  population that is ~29.5 d, but it PARTIALLY DOUBLE-COUNTS the deeper direct terms, so it must not simply be added: the honest
+  read is 13.31 -> 10-11 wall-days from the direct effect, with the subtree effect making that a conservative upper bound rather
+  than a further subtraction.
+  Where it pays: L2 (4.52 d) and L3 (3.03 d) carry the credible saving; L1 contributes 0.44 d and is not worth the emission-time
+  cost on its own.
+- DEPLOYMENT SHAPE (recorded for when it is authorised): a node becomes [trimmed child] + [k excluded tilt intervals]. The
+  trimmed child is a SUB-BOX, so its certificate is the ORDINARY one -- verify_case / verify_param untouched, no new leaf kind,
+  no new Lean. Each excluded interval [th_a, th_b] is one T5 instance with a tilt RANGE: "for all (c,theta) in box x [th_a,th_b],
+  Q(c,theta) meets K_Pj", certified by interval arithmetic over the four SAT axes (max |d.n| over the interval against min
+  (h_Q + h_K), evaluated at the four box corners since the octagon is convex). Lean shape = core_meet_same_square parameterised
+  by the tilt range. To be recorded in notes/lemmas.md exactly as T5' was, with its own positive control (618/618).
+- Row-dropping stays SHELVED with route (A): it is a different soundness proposition, because it changes the verifier's
+  admissibility clause from "disjoint from every core" to "disjoint from SOME pose of the box", which touches the frozen chain --
+  unlike trimming, which does not.
