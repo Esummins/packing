@@ -3494,3 +3494,25 @@ notes only), frozen verifiers untouched, git fetch + plain merge + push own path
   no campaign process started, stopped or re-niced; at most 2 A109 processes, BLAS pinned, free commit > 6144 MB
   and free physical > 3072 MB gated before every LP. `rows_all`/`packing_images` were emptied from A109's own
   node jsons after the run (flagged `a109_trimmed`) to keep the attempt directory at 9.5 MB.
+- A96 TILT-BIN TRIMMING measured offline (code/trim96.py; campaign stays paused, nothing deployed).
+  Geometry: a pin contributes an axis-aligned guaranteed core of half-side 1/2 - delta; Q(c,theta) overlaps it iff c lies in an
+  OCTAGON about the slot (the Minkowski sum), |d_x|,|d_y| <= w/2 + a_P and |d.u|,|d.v| <= 1/2 + a_P*w, w = |cos|+|sin|. A tilt
+  sub-interval is CERTIFIED DEAD when the whole centre box lies inside ONE pin's octagon for every theta in it -- exactly T5's
+  contradiction, restricted to a tilt range. Only the dead side is certified, so the trimmed fraction is a LOWER bound.
+  POSITIVE CONTROL CLEAN: 618/618 existing T5/T5' kills come out fully dead, zero violations.
+  YIELD (2222 boxes): 159 boxes have an EMPTY surviving bin = new T5-style kills -- L1 51/1126, L2 86/425, L3 10/39, L4 12/14.
+  That is 2.3x T5' alone (70). Partial trims: 155 boxes with 0 < surviving < 1 (L1 97, L2 55, L3 1, L4 2), median surviving
+  fraction 0.46 at L1 and 0.66 at L2.
+  a_tight ENLARGEMENT from trimming is SMALL, contrary to expectation: over all boxes the median gain is 1.000, and even among
+  the 155 partially-trimmed boxes it is min 1.0002 / median 1.0459 / max 1.1455. Trimming pays through the 159 outright kills,
+  NOT through the core it enlarges.
+- LEMMA TC IS EXACT, not a numerical observation. min over directions alpha of (h1+h2) for two unit squares at tilt difference D
+  is attained at alpha = 0 and equals (1 + cos D + sin D)/2; verified against a dense alpha search to 2.2e-16 (machine epsilon)
+  over D in [0,45]. Inverting: c <= 1.05 => |D| <= 6.061 deg, c <= 1.10 => 13.052, c <= 1.15 => 21.815, c <= 1.2071 => 44.749 --
+  reproducing the PI's figures.
+- TC AS THE PIN-TRIMMING RULE (item c): TC IS the closed form of the trimming observation for axis-aligned pins, but it is
+  STRICTLY WEAKER than the exact interval test, because it keeps only the centre DISTANCE and discards the direction. Head to
+  head on 1604 boxes: identical on 1321, the octagon test trims MORE on 279, TC trims more on only 4. Full kills: TC 33 vs
+  octagon 159 -- a 4.8x gap. The 4 boxes TC wins are ones where it uses the TRUE unit square (half-side 1/2, centre uncertain by
+  delta) while the octagon test uses the 0.49 guaranteed core, so running BOTH is marginally better than either. Conclusion: keep
+  TC as the O(1) pre-screen the PI proposes, but the exact interval SAT test must be what decides.
