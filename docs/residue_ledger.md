@@ -17,7 +17,7 @@ needs every class dead on W, and only Trump's class alive there with Trump uniqu
 | | S02 the k7 pinwheel | boxes whose support is the 3.8867 pinwheel | 252 (184 + 68), carries the deep tree | tight core (in), deeper levels terminate (f₄ = 0) | grain kill (§6) or just time |
 | | S03–S06, S08–S53 | 45 smaller shadows, mostly level 1 | ~250 | as S01/S02 by type | PI review of the gallery |
 | | fractional | no integral support at all | 264 (151 + 113) | tree only | the genuine tail |
-| Window stragglers | k5_02/03/05/12/13/14, k6_21, k6_27 | whole-window certificate margin | 8 classes (A61 running) | A61 re-solve + certify | crowd rows at the root; A96 resolver |
+| Window stragglers | k5_02, k5_03, k5_12 (k5_13 running), k6_27 | whole-window certificate margin | 4–5 classes (A61 converted k5_05, k5_14, k6_21 overnight) | A61 re-solve + certify | resolver on the 4-D witnesses; gate 0.02 for k5_12 |
 | | k6_07 band, k6_23 sliver | partial windows | 2 fragments | bisection + resolver | hours |
 | Protected tier | trump5 cover/slackcore | residual tree ending in Trump's basin | 325 alive nodes in A107's input (S01 196, S07 18, S02 12 …) | A60 route, paused | S01 crowd rows; k6_07 window for the S07 slot |
 | | the other 15 protected classes | conditioning trees per exact stratum | 3,500–4,200 CPU-h priced (A100) | A84/A100 model | same levers as A57 |
@@ -84,17 +84,23 @@ to draw. These are what the tree is for, and they are mostly level 1 (110 + 106)
 
 ---
 
-## 2. The window stragglers (A56 scoreboard; A61 running on them since 01:00)
+## 2. The window stragglers (A56 scoreboard; A61 pass 5 ran 01:00–08:00 on 2026-09-06)
 
 | class | window status | why | next |
 |---|---|---|---|
-| k5_02 | open, whole W | certificate margin 0.0005; ε_geo re-solve infeasible (τ = budget) | crowd rows at the root, else bisection |
-| k5_03, k5_12, k5_13, k5_14 | open, whole W | untouched by A61 so far | A61 queue |
-| k5_05 | open | τ = 5.000 vs 6 at ε_geo 0.003 | in A61's hands |
-| k5_10 | converted by A61 (PASS, margin 0.016) | scoreboard update pending | run update_scoreboard61 |
-| k6_21, k6_27 | open, whole W | τ 4.60 / 4.67 vs 5 | crowd rows at the root (their usable slots' extensions are full-window) |
+| k5_05 | **CONVERTED by A61 (PASS, margin 0.698)** | | scoreboard update |
+| k5_14 | **CONVERTED by A61 (PASS, margin 0.016)** | | scoreboard update |
+| k5_10 | converted by A61 (PASS, margin 0.016) | | scoreboard update |
+| k6_21 | **CONVERTED by A61 (PASS, margin 0.014)** | | scoreboard update |
+| k5_02, k5_03 | open, whole W | post-shrink gate-fail: budget − τ = 0.000 at ε_geo 0.003 (no margin at all) | resolver on the 4-D witnesses; bisection |
+| k5_12 | open, whole W | gate-fail by a hair: budget − τ = 0.0265 < the 0.03 gate | lower the gate to 0.02 and certify (cheapest item on the list) |
+| k5_13 | A61 running (τ 5.62 vs 6 at iteration 6) | | wait |
+| k6_27 | open, whole W | fixed-s re-certification failed, no base certificate produced | resolver; else bisection |
 | k6_07 | certified [3.82, 3.827068] + s0; open (3.827068, s0] | 50 ms-wide band | bisection + resolver; **this band is the S07 slot for trump5 crowd rows** |
 | k6_23 | certified [3.82, 3.877] + s0; open (3.877, s0) | 8.4·10⁻⁵ sliver | resolver |
+
+**k6 and up: one whole-window class left (k6_27) plus the two fragments.** k5 (outside A57): k5_02, k5_03, k5_12
+open, k5_13 in progress.
 
 Techniques that apply (from this week): (1) SLOT-CROWD rows at the root add budget 2e per usable slot, exactly the
 few tenths these are short — but A109's node-level result (the multiplicity runs fail on exact holes even for small
