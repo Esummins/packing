@@ -121,8 +121,12 @@ at most 3.985. Two lessons: a tangency-level "intruder" must not count as a bloc
 the degeneration move set must include sliding along a wall into a corner cell freed by aligning its tangent
 neighbour, which is K0-FREE applied at the *cell* level — the interlock at BL/BR is not an obstruction to global
 degeneration; only to the corner-local flood. Under the strict convention (depth > 10⁻⁶) this packing is not
-K0-BLOCKED at all: TR and TL drop to one meeter, so K0-FREE applies directly. Under that convention **no K0-BLOCKED
-packing below side 4.000004 is known**; the six that remain sit at the search's own depth floor of 10⁻⁴ (strict85).
+K0-BLOCKED at all: TR and TL drop to one meeter, so K0-FREE applies directly. Under that convention the record moved
+on 2026-09-05: the directed floor sweep (k0dir2_87) found packings that are **strictly K0-BLOCKED at side 3.9907**
+(every corner met by two squares at certified depth ≥ 10⁻³, exact SAT, 0.8% of its seeds end below 4); three of the
+four second meeters sit at exactly the floor depth, i.e. this is an η-disturbance of a K0-FREE packing, blocked by
+grazers. So the empirical threshold m*(δ) is floor-dependent and sits below 4 for δ = 10⁻³, though every value found is
+still ≥ ŝ + 0.11. Coordinates and figure pending the sweep's final report (§7).
 The pair census is invariant under the convention (its shallowest pair depth is 3.8·10⁻⁵), so the tree is unchanged.
 
 ![flood](residue_map/flood.svg)
@@ -221,11 +225,15 @@ square's cell is a grazer of depth ≤ (1+√2)ε), and its certificate yield on
 squares flush *along* pin rows, and ≥ 4 unlocalised squares at every node defeat the destination test. The flood is not
 proved; its exact stall is CELL-INTERLOCK (no disjoint set of cells containing a corner cell has overhang ≤ free area,
 over all four lattices, at most nine cells below side 4). The 3.985 record is cell-interlocked at BL/BR; Trump admits no
-move. The floor sweep so far: lowest strictly K0-BLOCKED side 4.0000016 at depth floor 10⁻⁶, 4.000023 at 10⁻⁴, none
-below 4. Dynamic moves (partial slides, releases) are outside this census.
+move. The floor sweep: lowest strictly K0-BLOCKED side 4.0000016 at depth floor 10⁻⁶ (300 seeds), 4.000023 at 10⁻⁴
+(300), **3.9907 at 10⁻³** (257 seeds, 0.8% below 4; §5), 10⁻² running (best 4.00046 at 215 seeds). The 10⁻³ result
+shows the sub-4 blocked packings the earlier floors missed exist and are grazer-blocked; the FLOOD threshold, if the
+theorem is provable at all, is not "side 4" but a floor-dependent m*(δ) ≥ ŝ + 0.11. Dynamic moves (partial slides,
+releases) are outside this census.
 
 The honest assessment: 1 is the theorem, attempted twice (A98, A101) with the framework now exact and the stall named
-(cell-interlock), and it is the only item whose empirical boundary (side 4, no counterexample) has been measured;
+(cell-interlock), and it is the only item whose empirical boundary has been measured (strictly blocked packings exist
+at 3.9907 for floor 10⁻³, all found so far ≥ ŝ + 0.11);
 3 is the most likely to be provable and is worth roughly the factor the PI asked for on the corner-first route; 2 is
 the same theorem as 1 in easier clothing; 4 is unexplored; 5 is the only lever on the protected tier that does not
 require a theorem; 6 is a lemma with a consumer either way.
