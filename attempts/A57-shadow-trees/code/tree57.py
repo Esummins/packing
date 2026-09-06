@@ -41,6 +41,8 @@ from caselp import Box, NoFam, Hyp, solve_node
 from run_skel import S0F
 from fractions import Fraction as _F
 from substrat import zones, trump_realizes
+import trim57
+from pausegate import paused as _paused, reason as _pause_reason
 from pinguard import classify
 from warm57 import merged_warm
 
@@ -161,9 +163,28 @@ def build_children(name, zone, w, nth, cw, a_min, pin_delta=0.0, side=None):
     scored = sorted(boxes, key=lambda b: -ghost_dist(b, G))     # easiest (farthest) first
     for i, b in enumerate(scored):
         st, info = classify(b, pins, slots)
-        kids.append(dict(id=f"{name}_{zone}_Y{i:04d}", kind="YES", box=b,
-                         score=ghost_dist(b, G), a=float(b.core().a), pin=st, pin_info=info,
-                         hyp=Hyp(pins + [b], []), budget=11 - len(slots) - 1))
+        bid = f"{name}_{zone}_Y{i:04d}"
+        # T5'' (A96): trim tilt sub-intervals that are dead by logic before the node is ever
+        # solved.  node = trimmed child(ren) + excluded intervals.  A trimmed child is a SUB-BOX,
+        # so its certificate is the ordinary one; each excluded interval is a T5-with-range
+        # instance (trim57.split_bin returns the witness pin for each).  Suffixed ids (…a, …b)
+        # appear only when a bin survives in more than one piece; plain ids are unchanged, so
+        # nothing already recorded is renamed.
+        subs, excl = ([b], []) if (st != "ok" or not trim57.TRIM) else trim57.trim_box(b, slots)
+        if st == "ok" and not subs:
+            kids.append(dict(id=bid, kind="YES", box=b, score=ghost_dist(b, G),
+                             a=float(b.core().a), pin="contradictory", pin_info="trim",
+                             trim_excluded=excl, hyp=Hyp(pins + [b], []),
+                             budget=11 - len(slots) - 1))
+            continue
+        for k, sb in enumerate(subs):
+            kid_id = bid if len(subs) == 1 else f"{bid}{chr(97 + k)}"
+            kids.append(dict(id=kid_id, kind="YES", box=sb, score=ghost_dist(sb, G),
+                             a=float(sb.core().a), pin=st, pin_info=info,
+                             trim_excluded=(excl if k == 0 else []),
+                             trim_from=(None if (len(subs) == 1 and not excl) else
+                                        dict(th0=b.th0, th1=b.th1)),
+                             hyp=Hyp(pins + [sb], []), budget=11 - len(slots) - 1))
     return kids, bad, slots, rect, grid
 
 
@@ -434,6 +455,13 @@ def main():
 
     flush()
     for kid in mine:
+        # Pause sentinel, checked BETWEEN children: the child in flight finishes and its
+        # jsonl row is written before the shard exits, so a pause costs nothing.  Killing
+        # the driver instead (2026-09-06) discarded every in-flight node.
+        if _paused():
+            log(f"PAUSE sentinel set ({_pause_reason()}); shard stopping cleanly, "
+                f"every finished child recorded")
+            break
         if kid["id"] in done:
             continue
         if time.time() - t_start > a.wall_seconds:

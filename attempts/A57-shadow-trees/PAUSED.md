@@ -68,11 +68,25 @@ A96: `param96.jsonl` 636, `param96_level2.jsonl` 108, `resolve96.jsonl` 194, `sl
 Scoreboard at the pause: k5_11_G1 206 done / 186 full-window / 19 partial / 71 not-run, class
 window fraction **0.978027**; k5_16_G1 311 / 280 / 30 / 94, **0.991211**.
 
+## What is new since the pause (prepared 2026-09-06, nothing launched)
+
+| lever | where | default | notes |
+|---|---|---|---|
+| **T5″ tilt trimming at emission** | `code/trim57.py`, wired in `tree57.build_children` | **ON** (`trim57.TRIM = True`) | node = trimmed child(ren) + excluded tilt intervals. A trimmed child is a **sub-box**, so its certificate is the ordinary one — frozen chain untouched, no new leaf, no new Lean. Each excluded interval is a T5-with-range instance and is carried on the child record as `trim_excluded` (with its witness pin), so the ledger supersedes rather than overwrites. Control re-run against the deployed module: **618/618** known logic kills still fully dead, zero lost; 159 boxes gain an empty surviving bin (89 incremental over T5′). `trim57.TRIM = False` restores the previous behaviour exactly. |
+| **Shadow-slack scheduling** | `code/shadow_sched.py` | **OFF** (`ENABLED = False`) | reads A107 `shadow_nodes.json`; slack = budget − τ. Predicted-dead nodes get LP cap ×3.75 (240 → 900 s) and verify depth +8; predicted-alive are split without more LP. Moves budget between nodes only — never a hypothesis, certificate or verdict, so it cannot affect soundness. |
+| **ALIVE re-check at 900 s** | `attempts/A96-a57-parametric/code/recheck96.py` | available | A109 saw 28/46 ALIVE were merely unconverged at 240 s. Resumable on `(cls, id)`; `--trimmed` re-solves on the T5″-trimmed bin, which is the combination worth pricing. |
+| **Sentinel pause** | `code/pausegate.py`, wired into `tree57`, `param96`, `resolve96`, `recheck96` | active | create `attempts/A57-shadow-trees/PAUSE` (or `.../A96-a57-parametric/PAUSE`) with a reason; drivers check it **between** nodes, so the in-flight node finishes and is recorded. Delete the file to resume. **This is the fix for the 2026-09-06 pause, which killed drivers and discarded every in-flight result.** |
+| **Orphan reaper** | `python code\pausegate.py --reap` | manual | kills `certify.py` children whose `tree57` parent is gone. One had run 11.3 h unattributed. `--dry-run` to look first. |
+
+Note: with trimming on, a bin that survives in more than one piece emits suffixed ids
+(`…Y0007a`, `…Y0007b`). Plain ids are unchanged, so nothing already recorded is renamed.
+
 ## Resume commands
 
-Run from `attempts/A57-shadow-trees`. **The tight core (T5′) is on by default** —
-`pinguard.TIGHT_CORE = True`; nothing needs setting, and `TIGHT_CORE = False` is the only way to
-turn it off.
+Run from `attempts/A57-shadow-trees`. **The tight core (T5′) and tilt trimming (T5″) are both on
+by default** — `pinguard.TIGHT_CORE = True`, `trim57.TRIM = True`; nothing needs setting, and
+setting either to `False` is the only way to turn it off. Before resuming, clear any sentinel
+(`del PAUSE`) and optionally run `python code\pausegate.py --reap --dry-run`.
 
 Six shards, same assignments, through `launch.ps1` so the pidfile gate holds and nothing is
 duplicated:
@@ -110,6 +124,17 @@ duplicate the hand-launched six):
 
 ```
 Start-Process powershell -ArgumentList '-NonInteractive','-ExecutionPolicy','Bypass','-File','code\scaleup.ps1' -WorkingDirectory <A57 base> -RedirectStandardOutput logs\scaleup.out -RedirectStandardError logs\scaleup.err -WindowStyle Hidden
+```
+
+Optional levers, only if wanted (both default to off / not-run):
+
+```
+# shadow-slack scheduling: edit code\shadow_sched.py, ENABLED = True (inspect first)
+python code\shadow_sched.py
+
+# ALIVE re-check at a 900 s cap, from attempts\A96-a57-parametric (add --trimmed to combine
+# the longer cap with the T5'' trimmed bin)
+python -u code\recheck96.py --cap 900
 ```
 
 Sides G4/G3/G2 stay frozen (`code\FREEZE_TAGS.txt`); nothing about the pause changes that.

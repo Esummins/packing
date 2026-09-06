@@ -3587,3 +3587,26 @@ notes only), frozen verifiers untouched, git fetch + plain merge + push own path
   LP time" question (A89-O3) is untouched; 82 of 216 level-1 and 41 of 104 level-2/3 cells were never run and the notrun ones
   are systematically the far-from-centre = near-manifold ones; the shadow match is STRUCTURAL (slot sets modulo D4), not
   A107's flow -- no minimisation was run from a k0 support.
+- A96 item (2)/(a): TRIMMED-BIN LP RE-SOLVE, 29 of 32 ALIVE nodes done (one process, 240 s cap, 13036 s total, median 384 s).
+  READ IT WITH THE CONVERGENCE COLUMN: only 2 of 29 CONVERGED, so tau is an unconverged bound and the naive "17 with eta < 0"
+  is NOT 17 kills. Strictly: 4 nodes reach eta < -1e-6 (etas -1.0, -1.0, -0.0556, -0.0179), 19 sit on the T11 KNIFE EDGE
+  (|eta| <= 1e-6, i.e. tau = budget to 6 places) and 6 have eta > 0. So trimming moves the LP but at a 240 s cap it does not
+  DECIDE it -- which is exactly A109's finding (28/46 unconverged) reproduced on the trimmed hypothesis, and is the argument for
+  running the 900 s re-check (item 3) BEFORE reading any kill count off a trimmed re-solve.
+  TC ROW SCREEN on the same nodes: the closed form alone removes a median of 13153 of 30000 warm rows = 43.8% (min 7486, max
+  21977). That is a large, cheap reduction in LP size, and it is the strongest argument for row-dropping -- but row-dropping stays
+  SHELVED with route (A), because it changes the verifier's admissibility clause from "disjoint from every core" to "disjoint
+  from SOME pose of the box" and therefore touches the frozen chain, unlike trimming.
+- A96 PREPARED FOR RESUME (nothing launched; PAUSED.md resume block updated):
+  (1) T5'' at emission -- code/trim57.py + tree57.build_children, trim57.TRIM = True by default, TRIM = False restores the old
+      behaviour exactly. node = trimmed child(ren) + excluded intervals carried on the child record as trim_excluded with the
+      witness pin, so the ledger supersedes rather than overwrites. A bin surviving in >1 piece emits suffixed ids (Y0007a/b);
+      plain ids are never renamed. Control re-run against the DEPLOYED module: 618/618 still fully dead, zero lost, 159 kills.
+  (2) code/shadow_sched.py -- OFF by default. A107's 1191-node table; at the current thresholds it calls 564 dead, 8 alive,
+      619 unknown. Predicted-dead get LP cap x3.75 (240 -> 900 s) and verify depth +8; predicted-alive split without more LP.
+      Scheduling only: it cannot touch a hypothesis, certificate or verdict, so it cannot affect soundness.
+  (3) A96 code/recheck96.py -- ALIVE re-check at 900 s, resumable on (cls, id), --trimmed combines the longer cap with the
+      trimmed bin.
+  (4) code/pausegate.py -- sentinel file checked BETWEEN nodes by tree57, param96, resolve96 and recheck96, so a pause preserves
+      in-flight results (the 2026-09-06 pause could not); plus an orphan reaper for certify children whose tree57 parent is gone
+      (one had run 11.3 h unattributed).

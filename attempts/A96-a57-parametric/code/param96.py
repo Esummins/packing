@@ -26,6 +26,8 @@ PARAM = os.path.join(BASE, "certs", "param")
 SLO, SHI = "191/50", "969271/250000"
 SLO_F, SHI_F = 3.82, 3.877084
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(BASE, '..', 'A57-shadow-trees', 'code'))
+from pausegate import paused, reason
 import to_param96
 
 
@@ -194,6 +196,14 @@ def main():
             if commit_free_mb() < a.commit_gate:
                 print(f"commit {commit_free_mb():.0f} MB < {a.commit_gate:.0f}: holding "
                       f"(running={len(running)})", flush=True)
+                break
+            if paused():
+                # Sentinel checked BETWEEN launches, never mid-node: the running verifiers
+                # finish and their rows are written, which is exactly what the 2026-09-06
+                # kill-the-driver pause could not do.
+                print(f"pause sentinel set ({reason()}); launching no more nodes, "
+                      f"draining {len(running)} in flight", flush=True)
+                i = len(todo)
                 break
             if a.min_free_phys_mb and phys_free_mb() < a.min_free_phys_mb:
                 print(f"free physical {phys_free_mb():.0f} MB < {a.min_free_phys_mb:.0f}: holding "

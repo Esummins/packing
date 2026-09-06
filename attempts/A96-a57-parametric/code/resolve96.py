@@ -32,6 +32,8 @@ from fractions import Fraction as F
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, ".."))
 VP = os.path.join(HERE, "verify_param.py")
+sys.path.insert(0, os.path.join(BASE, '..', 'A57-shadow-trees', 'code'))
+from pausegate import paused, reason
 OUT = os.path.join(BASE, "results")
 A95 = os.path.abspath(os.path.join(BASE, "..", "A95-a57-shortcuts", "results"))
 SLO, SHI = F(191, 50), F(969271, 250000)
@@ -150,6 +152,9 @@ def main():
     print(f"{len(S)} FAIL node(s) to resolve; gap counts "
           f"{[len(s['_gaps']) for s in S]}", flush=True)
     for s in S:
+        if paused():
+            print(f"pause sentinel set ({reason()}); stopping with every finished node recorded", flush=True)
+            break
         gaps = s.pop("_gaps")
         rows, residual, wall = resolve(s["cert"], gaps, a.depth, a.max_bisect, env, a.cap, s["id"])
         gw = sum(float(b) - float(a_) for a_, b in gaps)
