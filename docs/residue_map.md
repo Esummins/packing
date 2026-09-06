@@ -182,7 +182,11 @@ on nicks.** polish12 is eleven squares at grid centres to within 10⁻⁴ (tilts
 0.12° tilts and 4.4·10⁻⁶ of play. Their second meeters are free at first order because the contact set at a 10⁻⁷ bar
 does not include the grid neighbour 10⁻⁶ away, and pinned in fact because that neighbour is where the motion ends.
 So rigid blocked packings exist exactly where the side allows a jammed grid, at 4 + ε; below 4 the grid does not
-exist and every blocked packing found so far has room to drain.
+exist and every blocked packing found so far has room to drain. *Corrected by A104 (2026-09-06): these two are not
+rigid either.* Following the contact manifold instead of a straight line (step to the first collision, pin the new
+row, re-polish, repeat), each frees a corner: polish12 by TR square 7 rotating 10⁻⁵, floor-1e-4 by BR square 3
+translating 10⁻⁵. The exact grid has one meeter per corner, so the ε-grid is blocked only by an ε poke, and the poke
+comes back out. Genuinely locked blocked packings first appear at 4.000237 (§8 item 7).
 The pair census is invariant under the convention (its shallowest pair depth is 3.8·10⁻⁵), so the tree is unchanged.
 
 ![flood](residue_map/flood.svg)
@@ -384,6 +388,21 @@ releases) are outside this census.
    one-wall obstruction (`attempts/A105-lockfree/results/hookwall105.svg`); Lemma HOOK-W: its β carrier needs a third
    contact on its upper-right edge (the record has sq9 there at gap 2·10⁻⁷). Residue named: the four-corner PUSH-LINE
    count. Canaries all pass (Trump one hook only; grid = the shell's equality case).
+   *A104 outcome (2026-09-06, `af6456e1`, `attempts/A104-grid-lock/notes/lock104.md`): the empirical boundary.*
+   **Below side 4 the closing iteration always frees a corner**: 443 descent endpoints at floors 10⁻³/10⁻² plus all
+   12 corpus packings, zero fully-held blocked packings below 4 (85% of blocked endpoints free a corner, 11–15% close
+   to fully held, all of those above 4). **Fully-held K0-BLOCKED packings first appear at m_lock = 4.000237** (exact
+   certified; 4.001525 with an explicit Gordan certificate at all eight intruders). **Even the grid is LOCK-FREE**:
+   closing the near-contacts of polish12 and floor-1e-4 (step to the first collision, pin the new rows, re-polish,
+   repeat) frees a corner 12/12 — the exact 4×4 grid has ONE meeter per corner, so the ε-grid is blocked only by an
+   O(ε) poke that Lemma ROT's step takes back out; and A103's "jams on a near-contact" was a straight-line artefact —
+   following the contact manifold the square rolls past it (polish12's TR nick retracts 100%, not 6%). So the
+   conjecture's failure point is not at 4 + ε but at 4.00024, where genuine square–square locks exist. **Anatomy of a
+   lock** (464 intruders): 4.25 contacts each, **3.3 square–square rows + 1 wall row per intruder**, depths up to 0.92 —
+   locks are held by squares, not walls, so a wall-length budget cannot deliver LOCK-FREE by itself; the missing step
+   is that at side < 4 the crowd arms cannot supply three or more square rows to all eight corner members at once.
+   Limits: the closing iteration is a descent, not a decision procedure (22 of 465 endpoints undecided); m_lock is an
+   upper bound on the true threshold. Figure: `attempts/A104-grid-lock/results/lock104.svg`.
 
 The honest assessment: 1 is the theorem, attempted twice (A98, A101) with the framework now exact and the stall named
 (cell-interlock), and it is the only item whose empirical boundary has been measured (strictly blocked packings exist
