@@ -1,10 +1,10 @@
 {
  "measured": {
-  "n_param_runs": 282,
-  "mean_param_wall_s": 203.6,
-  "median_param_wall_s": 64.0,
-  "mean_fixed_wall_s": 402.0,
-  "ratio_param_over_one_fixed_side": 0.5066
+  "n_param_runs": 432,
+  "mean_param_wall_s": 264.6,
+  "median_param_wall_s": 85.0,
+  "mean_fixed_wall_s": 399.5,
+  "ratio_param_over_one_fixed_side": 0.6622
  },
  "baseline_four_fixed_sides": {
   "level1_days_3w": 11.94,
@@ -16,23 +16,23 @@
   "per_class": {
    "k5_11": {
     "level1_lp_days": 4.3,
-    "level1_param_days": 1.93,
+    "level1_param_days": 2.51,
     "level2_lp_days": 5.11,
-    "level2_param_days": 5.03
+    "level2_param_days": 6.54
    },
    "k5_16": {
     "level1_lp_days": 3.26,
-    "level1_param_days": 2.15,
+    "level1_param_days": 2.8,
     "level2_lp_days": 6.08,
-    "level2_param_days": 5.83
+    "level2_param_days": 7.57
    }
   },
-  "total_days_1proc": 33.69,
-  "wall_days_3workers": 11.23,
-  "wall_days_5workers": 6.74,
-  "with_sigma_ladder_days_1proc": 31.29,
-  "with_sigma_ladder_wall_days_3workers": 10.43,
-  "with_sigma_ladder_wall_days_5workers": 6.26,
+  "total_days_1proc": 38.17,
+  "wall_days_3workers": 12.72,
+  "wall_days_5workers": 7.63,
+  "with_sigma_ladder_days_1proc": 35.55,
+  "with_sigma_ladder_wall_days_3workers": 11.85,
+  "with_sigma_ladder_wall_days_5workers": 7.11,
   "sigma_lp_children_side1_k5_11": [
    821,
    505
@@ -40,14 +40,14 @@
   "assumption": "level-1 and level-2 nodes are EMITTED once at side 1 (A57's own measured LP+certify wall) and each is verified over the whole window once at the measured mean parametric wall; sides 2/3/4 do not run at all"
  },
  "level2_delta1e2_probe": {
-  "rows": 75,
-  "parents": 9,
-  "logic_kill_frac": 0.32,
-  "mean_wall_solved_s": 488.1,
-  "mean_wall_per_child_s": 325.4,
+  "rows": 529,
+  "parents": 53,
+  "logic_kill_frac": 0.323,
+  "mean_wall_solved_s": 382.9,
+  "mean_wall_per_child_s": 220.0,
   "a95_delta0_per_child_s": 216.4,
-  "cost_scale_vs_a95": 1.504,
-  "level2_days_1proc_rescaled": 16.83,
+  "cost_scale_vs_a95": 1.017,
+  "level2_days_1proc_rescaled": 11.38,
   "caveat": "supply-limited probe, not the 200-child measurement; the headline projection still uses A95's delta=0 number",
   "per_parent": {
    "k5_11_interior_Y0041": {
@@ -99,75 +99,339 @@
     "per_child_s": 148.8
    },
    "k5_11_interior_Y0108": {
-    "children": 5,
-    "solved": 1,
+    "children": 9,
+    "solved": 5,
     "logic_kills": 4,
-    "per_child_s": 175.4
+    "per_child_s": 379.5
+   },
+   "k5_11_interior_Y0126": {
+    "children": 8,
+    "solved": 4,
+    "logic_kills": 4,
+    "per_child_s": 219.1
+   },
+   "k5_11_interior_Y0144": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 294.3
+   },
+   "k5_11_interior_Y0150": {
+    "children": 12,
+    "solved": 8,
+    "logic_kills": 4,
+    "per_child_s": 769.6
+   },
+   "k5_11_interior_Y0186": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 367.8
+   },
+   "k5_11_interior_Y0276": {
+    "children": 8,
+    "solved": 2,
+    "logic_kills": 6,
+    "per_child_s": 132.3
+   },
+   "k5_11_interior_Y0300": {
+    "children": 8,
+    "solved": 1,
+    "logic_kills": 7,
+    "per_child_s": 30.3
+   },
+   "k5_11_interior_Y0306": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 205.8
+   },
+   "k5_11_interior_Y0360": {
+    "children": 10,
+    "solved": 5,
+    "logic_kills": 5,
+    "per_child_s": 400.7
+   },
+   "k5_11_interior_Y0384": {
+    "children": 9,
+    "solved": 9,
+    "logic_kills": 0,
+    "per_child_s": 391.2
+   },
+   "k5_11_interior_Y0402": {
+    "children": 9,
+    "solved": 3,
+    "logic_kills": 6,
+    "per_child_s": 148.2
+   },
+   "k5_11_interior_Y0414": {
+    "children": 8,
+    "solved": 4,
+    "logic_kills": 4,
+    "per_child_s": 116.2
+   },
+   "k5_11_interior_Y0486": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 163.2
+   },
+   "k5_11_interior_Y0540": {
+    "children": 11,
+    "solved": 9,
+    "logic_kills": 2,
+    "per_child_s": 489.1
+   },
+   "k5_11_interior_Y0546": {
+    "children": 8,
+    "solved": 2,
+    "logic_kills": 6,
+    "per_child_s": 63.7
+   },
+   "k5_11_interior_Y0570": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 202.0
+   },
+   "k5_11_interior_Y0588": {
+    "children": 9,
+    "solved": 9,
+    "logic_kills": 0,
+    "per_child_s": 296.5
+   },
+   "k5_11_interior_Y0636": {
+    "children": 8,
+    "solved": 4,
+    "logic_kills": 4,
+    "per_child_s": 154.3
+   },
+   "k5_11_interior_Y0642": {
+    "children": 10,
+    "solved": 8,
+    "logic_kills": 2,
+    "per_child_s": 551.5
+   },
+   "k5_11_interior_Y0654": {
+    "children": 8,
+    "solved": 0,
+    "logic_kills": 8,
+    "per_child_s": 0.0
+   },
+   "k5_11_interior_Y0660": {
+    "children": 8,
+    "solved": 2,
+    "logic_kills": 6,
+    "per_child_s": 90.2
+   },
+   "k5_11_interior_Y0672": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 68.2
+   },
+   "k5_11_interior_Y0726": {
+    "children": 9,
+    "solved": 4,
+    "logic_kills": 5,
+    "per_child_s": 281.3
+   },
+   "k5_11_interior_Y0738": {
+    "children": 11,
+    "solved": 11,
+    "logic_kills": 0,
+    "per_child_s": 670.5
+   },
+   "k5_11_interior_Y0828": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 248.9
+   },
+   "k5_11_interior_Y0840": {
+    "children": 9,
+    "solved": 9,
+    "logic_kills": 0,
+    "per_child_s": 315.1
+   },
+   "k5_11_interior_Y0864": {
+    "children": 8,
+    "solved": 5,
+    "logic_kills": 3,
+    "per_child_s": 224.3
+   },
+   "k5_11_interior_Y0930": {
+    "children": 8,
+    "solved": 4,
+    "logic_kills": 4,
+    "per_child_s": 170.3
+   },
+   "k5_11_interior_Y0954": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 290.1
+   },
+   "k5_11_interior_Y0978": {
+    "children": 8,
+    "solved": 4,
+    "logic_kills": 4,
+    "per_child_s": 130.0
+   },
+   "k5_11_interior_Y0996": {
+    "children": 8,
+    "solved": 4,
+    "logic_kills": 4,
+    "per_child_s": 219.0
+   },
+   "k5_11_interior_Y1002": {
+    "children": 8,
+    "solved": 4,
+    "logic_kills": 4,
+    "per_child_s": 99.4
+   },
+   "k5_11_interior_Y1038": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 226.6
+   },
+   "k5_11_interior_Y1056": {
+    "children": 8,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 219.4
+   },
+   "k5_11_interior_Y1080": {
+    "children": 16,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 124.9
+   },
+   "k5_11_interior_Y1086": {
+    "children": 16,
+    "solved": 0,
+    "logic_kills": 16,
+    "per_child_s": 0.0
+   },
+   "k5_11_interior_Y1092": {
+    "children": 16,
+    "solved": 4,
+    "logic_kills": 8,
+    "per_child_s": 94.3
+   },
+   "k5_11_interior_Y1104": {
+    "children": 16,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 66.2
+   },
+   "k5_11_interior_Y1110": {
+    "children": 16,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 12.0
+   },
+   "k5_11_interior_Y1116": {
+    "children": 16,
+    "solved": 0,
+    "logic_kills": 16,
+    "per_child_s": 0.0
+   },
+   "k5_11_interior_Y1122": {
+    "children": 16,
+    "solved": 8,
+    "logic_kills": 0,
+    "per_child_s": 81.5
+   },
+   "k5_11_interior_Y1128": {
+    "children": 16,
+    "solved": 6,
+    "logic_kills": 4,
+    "per_child_s": 101.4
+   },
+   "k5_11_interior_Y1134": {
+    "children": 16,
+    "solved": 6,
+    "logic_kills": 4,
+    "per_child_s": 232.9
+   },
+   "k5_11_interior_Y1140": {
+    "children": 16,
+    "solved": 5,
+    "logic_kills": 6,
+    "per_child_s": 98.9
+   },
+   "k5_11_interior_Y1146": {
+    "children": 7,
+    "solved": 2,
+    "logic_kills": 5,
+    "per_child_s": 82.4
    }
   },
   "complete_parents_only": {
-   "parents": 8,
-   "children": 70,
-   "per_child_s": 336.1,
-   "cost_scale_vs_a95": 1.553,
+   "parents": 49,
+   "children": 482,
+   "per_child_s": 240.3,
+   "cost_scale_vs_a95": 1.11,
    "per_child_spread_s": [
-    126.8,
+    12.0,
     841.0
    ]
   }
  },
  "level3_descent": {
-  "measured_rate": 0.0667,
-  "alive_children": 5,
-  "of_rows": 75,
+  "measured_rate": 0.1134,
+  "alive_children": 60,
+  "of_rows": 529,
   "note": "A95's model has no level-3 term at all, i.e. an unstated 0% descent. This is the measured rate at level 2 on the deployed delta=1e-2 tree."
  },
  "level2_verify_measured": {
-  "n": 14,
-  "mean_wall_s": 458.6,
+  "n": 26,
+  "mean_wall_s": 544.6,
   "median_wall_s": 400.1,
-  "level1_mean_used_before_s": 203.6,
-  "ratio_level2_over_level1": 2.252,
+  "level1_mean_used_before_s": 264.6,
+  "ratio_level2_over_level1": 2.058,
   "verdicts": {
-   "FAIL": 9,
-   "TIMEOUT": 1,
-   "PASS": 4
+   "PASS": 6,
+   "FAIL": 18,
+   "TIMEOUT": 2
   }
  },
  "baseline_four_fixed_sides_corrected": {
   "level1_days_1proc": 35.81,
-  "level2_days_1proc": 64.29,
-  "level3_days_1proc": 35.37,
+  "level2_days_1proc": 45.95,
+  "level3_days_1proc": 43.01,
   "level2_children_all_sides": 17048,
-  "total_days_1proc": 135.47,
-  "wall_days_3workers": 45.16,
-  "wall_days_5workers": 27.09,
+  "total_days_1proc": 124.77,
+  "wall_days_3workers": 41.59,
+  "wall_days_5workers": 24.95,
   "note": "same level-2 per-child cost and same level-3 descent rate as the parametric schedule, applied to all four sides; no parametric verify term because the fixed-side route does not have one"
  },
  "schedule_rescaled_level2": {
-  "level2_scale_used": 1.553,
-  "level2_verify_wall_used_s": 458.6,
-  "level1_days_1proc": 11.64,
-  "level2_days_1proc": 41.84,
-  "level3_days_1proc": 22.6,
-  "level2_plus_3_share_of_remaining": 0.847,
-  "total_days_1proc": 76.08,
-  "wall_days_3workers": 25.36,
-  "wall_days_5workers": 15.22,
-  "with_sigma_ladder_wall_days_5workers": 14.74
+  "level2_scale_used": 1.11,
+  "level2_verify_wall_used_s": 544.6,
+  "level1_days_1proc": 12.87,
+  "level2_days_1proc": 41.47,
+  "level3_days_1proc": 37.98,
+  "level2_plus_3_share_of_remaining": 0.861,
+  "total_days_1proc": 92.32,
+  "wall_days_3workers": 30.77,
+  "wall_days_5workers": 18.46,
+  "with_sigma_ladder_wall_days_5workers": 17.94
  },
  "sigma_ladder_on_d2": {
   "mechanism": "orbit reduction at level 1 propagates: the partner's level-2 subtree is the sigma-image of the representative's, so no separate D2 ladder is built -- but the level-1 cover must be rebuilt at nth=10",
   "k5_11_level2_children": 2136,
-  "k5_11_level3_children": 1139,
-  "per_child_s": 794.6,
-  "saving_days_1proc": 15.06,
-  "saving_wall_days_5workers": 3.01,
-  "rebuild_cost_days_1proc": 4.9,
+  "k5_11_level3_children": 1938,
+  "per_child_s": 784.8,
+  "saving_days_1proc": 18.5,
+  "saving_wall_days_5workers": 3.7,
+  "rebuild_cost_days_1proc": 5.26,
   "rebuild_orbit_reps": 505,
-  "nodes_invalidated": 130,
-  "invalidated_work_days_1proc": 1.26,
-  "net_days_1proc": 10.16,
-  "net_wall_days_5workers": 2.03
+  "nodes_invalidated": 182,
+  "invalidated_work_days_1proc": 1.9,
+  "net_days_1proc": 13.24,
+  "net_wall_days_5workers": 2.65
  }
 }

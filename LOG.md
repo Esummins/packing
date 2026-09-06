@@ -2863,3 +2863,23 @@ affordable cost estimate for closing 3.84.
   A101 released; registry row added.
 - Pointers: docs/proofs/flood_lemma.md; attempts/A101-flood-lemma/notes/a101_report.md; code/{cellflood101,snap_yield101}.py;
   results/{cellflood101,snap_yield101}.json; logs/. No campaign file touched (A57 witnesses read only).
+- A96 six-shard leg (2026-09-05 16:13-17:16, 1.05 h, busy 15-18). THROUGHPUT: A57 completed 13,046 s of node-wall per hour at
+  6 shards vs 11,423 s/h at 4 shards -- +14% for +50% shards, i.e. strongly sub-linear. Per-node wall by stamped neighbour count:
+  busy=16 median 352.7 s (n=7) BELOW the 364.5 s baseline, busy=17 median 439.3 s (n=10) 20% ABOVE it, busy=15 562.8 (n=2),
+  busy=18 505.8 (n=1). D2 rows at busy=16 median 90.0 (n=10) and busy=17 258.7 (n=5), both at or below their 265.1 baseline.
+  Verdict: the first hint of real contention (sub-linear throughput + busy=17 running 20% high), but per-node spread is still
+  p25 231 / p75 1774 at n=10, so it is a hint and not a measurement. 6 shards is not obviously wrong; 8 would need a real test.
+- LEVEL-2 COST SETTLED at n=529 rows / 53 parents (49 complete, 482 children): per-child 240.3 s = 1.11x A95's delta=0 216.4 s.
+  The scale walked 1.54 -> 2.76 -> 2.43 -> 2.36 -> 1.55 -> 1.11 as parents landed; every high reading was small-sample noise and
+  A95's original number was right all along. Level-2 VERIFY at n=26: mean 544.6 s, median 400.1 s = 2.06x the level-1 mean.
+- **LEVEL-3 DESCENT IS THE SCHEDULE RISK, AND IT GREW**: 60/529 = 11.34% (was 6.8% at n=74). With fanout 8 that is an expansion
+  factor of 0.907 PER LEVEL -- the tree is barely contracting. Level-1 descent is 0.1798 (factor 1.439), so the factor IS falling
+  (1.439 -> 0.907) and contraction is plausible; but if it stalled at 0.907 the series sums to 10.8x the level-2 term and the
+  schedule diverges. My model still stops at level 3, which is now the SAME unstated assumption one level down, and level 3 is
+  41% of the projected wall. Measuring level-3 descent is now the highest-value unknown in the campaign.
+- SCHEDULE (level-2 scale 1.11, verify 544.6 s, level-3 at 11.34%, nothing beyond level 3):
+      parametric  level1 12.87 + level2 41.47 + level3 37.98 = 92.32 d 1-proc -> 18.46 wall-days at 5 workers (17.94 w/ sigma)
+      fixed-side (same corrections, four sides)                = 124.77 d 1-proc -> 24.95 wall-days at 5 workers
+      => parametric wins 1.35x (was 1.69x); the gap narrows because level 3 is paid by both routes.
+- Pass state: 458 nodes verified; k5_11_G1 182 done (171 full-window) frac 0.97803, k5_16_G1 220 done (212 full) frac 0.99414.
+  Corpus grew to 898 candidates (602 easy, 218 level-2, 50 fail, 28 epsgeo); main pass restarted on the full selection.
