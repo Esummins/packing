@@ -72,6 +72,9 @@ def main():
     a('shards, levels 1-4), A60 (trump5) and A61 (window stragglers), the LP dual support was loaded,')
     a('turned into a candidate near-packing, snapped to named slot cells, and minimised directly over')
     a('the side.  Distinct shadows are listed once, ordered by the number of alive nodes they explain.\n')
+    a('Part I below is the pinned classes (A57 k5_11 / k5_16, A60 trump5, A61 window stragglers).')
+    a('**Part II, at the end of this file, is the k0_00 cells** of A38-root-power, A85-k0-route and')
+    a('A99-k0-tree-v2, which have no pins and so are de-duplicated over the full D4.\n')
     a('## Method\n')
     a('1. **Alive-at-LP** = `dead == False` in the node json (the LP did not certify the case).')
     a(f'   {len(nodes)} such nodes on disk: ' +
@@ -218,9 +221,8 @@ def main():
         for c in an['contacts']:
             f = forces.get((c['a'], c['b']), 0.0)
             a(f"| `{c['a']}` - `{c['b']}` | {c['kind']} | {c['gap']:+.1e} | {f:.4f} |")
-        for w in an['walls']:
-            f = forces.get((w['a'], w['b']), 0.0)
-            a(f"| `{w['a']}` - {w['b']} | wall | 0 | {f:.4f} |")
+        for w in sorted({(w['a'], w['b']) for w in an['walls']}):
+            a(f"| `{w[0]}` - {w[1]} | wall | 0 | {forces.get(w, 0.0):.4f} |")
         a('')
         bind = sorted(((v, k) for k, v in forces.items() if v > 1e-6), reverse=True)
         if bind:

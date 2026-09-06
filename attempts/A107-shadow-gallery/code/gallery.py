@@ -11,6 +11,11 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
 RES = os.path.join(ROOT, 'attempts', 'A107-shadow-gallery', 'results')
 DOCS = os.path.join(ROOT, 'docs')
 SVGD = os.path.join(DOCS, 'shadows')
+SET = os.environ.get('A107_SET', 'main')
+EX_NAME = 'extract.json' if SET == 'main' else f'extract_{SET}.json'
+MN_NAME = 'minima.json' if SET == 'main' else f'minima_{SET}.json'
+SH_NAME = 'shadows.json' if SET == 'main' else f'shadows_{SET}.json'
+IDPFX = 'S' if SET == 'main' else 'K'
 S0 = L.S0
 SHAT = L.SHAT
 
@@ -38,8 +43,8 @@ def same_shadow(a, b, dtol=0.05, atol=3.0):
 
 def main():
     t0 = time.time()
-    ex = json.load(open(os.path.join(RES, 'extract.json')))
-    mn = json.load(open(os.path.join(RES, 'minima.json')))
+    ex = json.load(open(os.path.join(RES, EX_NAME)))
+    mn = json.load(open(os.path.join(RES, MN_NAME)))
     nodes = ex['nodes']
 
     # ---------- one candidate per (structure, LANDING): each alive node's own LP seed is followed
@@ -139,7 +144,7 @@ def main():
         common = (max(tilts) - min(tilts) < 0.5) if tilts else False
         rat = A.rattler_test(slots, nf, z)
         sweep = A.tilt_sweep(slots, nf, z) if common and nf >= 2 else None
-        rec = dict(id=f'S{si+1:02d}', s=s, ds=s - SHAT, nnodes=sh['nnodes'], slots=list(slots), nfree=nf,
+        rec = dict(id=f'{IDPFX}{si+1:02d}', s=s, ds=s - SHAT, nnodes=sh['nnodes'], slots=list(slots), nfree=nf,
                    free=[list(map(float, f)) for f in free], nsquares=nf + len(slots),
                    common_tilt=(sum(tilts) / len(tilts)) if common else None, tilts=tilts,
                    analysis=an, rattlers=rat, sweep=sweep, nconfigs=sh['nconfigs'],
@@ -156,8 +161,8 @@ def main():
               f"free={nf} nodes={sh['nnodes']} landings={len(sh['structs'])} cfgs={sh['nconfigs']} "
               f"flex={an.get('flexes_fixed_s')} common_tilt={rec['common_tilt']} "
               f"{round(time.time()-t0)}s", flush=True)
-    json.dump(out, open(os.path.join(RES, 'shadows.json'), 'w'), indent=1)
-    print('wrote results/shadows.json', round(time.time() - t0, 1), 's')
+    json.dump(out, open(os.path.join(RES, SH_NAME), 'w'), indent=1)
+    print('wrote results/' + SH_NAME, round(time.time() - t0, 1), 's')
 
 if __name__ == '__main__':
     main()

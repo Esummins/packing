@@ -60,6 +60,26 @@ gaps; a genuine flex leaves them unchanged to `O(t^3)`, a second-order block sho
 * A106's finding that **no** open A57 box contains a shadow is reused, not re-derived: "explains"
   in this gallery means the node's dual support flows to that shadow, not that its box holds it.
 
+## Follow-up: Part II, the k0_00 cells (A38 / A85 / A99)
+
+A113 pointed out that the k0 LP jsons sit one directory deeper than the pinned campaigns'
+(`results/nodes/k0_00/*.json`, not `results/nodes/*.json`) and that A38-root-power was not in
+`SOURCES` at all.  Fixed: `extract.py` now carries two disjoint source sets, selected by
+`A107_SET` (`main` = A57/A60/A61, `k0` = A85 + A99 + A38's `l1_nodes`/`l2_nodes`/`l3_nodes`), and
+the alive test is `dead == False` **or** `tau >= budget`.  Every stage writes a `_k0`-suffixed
+result file, so Part I's numbers are untouched.
+
+Two differences from Part I, both forced by the class:
+
+* **No pins.**  A k0 node's only hypothesis core is the conditioned square, so the skeleton slot
+  set is empty and `stabiliser([], s)` returns all 8 elements of D4 — every de-duplication and
+  every coincidence check in Part II runs over the full group.
+* **Bigger free blocks.**  Budget is 10 on 214 of the 217 alive cells, so after snapping the two
+  to six near-simple placements a k0 shadow has 5-10 free squares (22-31 variables).  SLSQP
+  converges less tightly there, so the feasibility gate was relaxed to 2e-6 (`A107_FEAS`) and the
+  achieved worst gap and containment excursion are printed on every drawing; entries whose KKT
+  residual exceeds 1e-6 carry the same convergence caveat as Part I.
+
 ## The one value below A106's census floor
 
 A107 finds a k11 shadow at **s\* = 3.8856180554 = s-hat + 0.008534**, *below* the k7 pinwheel's

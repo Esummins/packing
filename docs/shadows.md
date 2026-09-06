@@ -5,6 +5,10 @@ shards, levels 1-4), A60 (trump5) and A61 (window stragglers), the LP dual suppo
 turned into a candidate near-packing, snapped to named slot cells, and minimised directly over
 the side.  Distinct shadows are listed once, ordered by the number of alive nodes they explain.
 
+Part I below is the pinned classes (A57 k5_11 / k5_16, A60 trump5, A61 window stragglers).
+**Part II, at the end of this file, is the k0_00 cells** of A38-root-power, A85-k0-route and
+A99-k0-tree-v2, which have no pins and so are de-duplicated over the full D4.
+
 ## Method
 
 1. **Alive-at-LP** = `dead == False` in the node json (the LP did not certify the case).
@@ -195,7 +199,6 @@ Total alive nodes explained by an integral shadow: **1260** of **1566**.  Not ex
 | `f5` - `TR(0,0)` | vertex-on-edge | -8.3e-10 | 0.0000 |
 | `f2` - top wall | wall | 0 | 0.0000 |
 | `f4` - right wall | wall | 0 | 0.0000 |
-| `f4` - right wall | wall | 0 | 0.0000 |
 
 **Binding** (largest Fritz-John resultant first): `f3`-`BR(0,0)` (1.500), `f3`-`BL(1,0)` (1.118).  KKT residual 1.1e-16.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f4`-`BR(0,0)`.
 **Rank**: 23 contact rows, 19 variables (s + 3 per free square); rank 14; at fixed s rank 13 of 18, so **5 flat direction(s)**.
@@ -322,8 +325,6 @@ Load-bearing free squares: `f1`, `f2`, `f3`.  Rattlers/struts (removal leaves s\
 | `f3` - `BR(0,0)` | vertex-on-edge | -8.4e-11 | 0.0028 |
 | `f4` - `TL(1,0)` | vertex-on-edge | -8.8e-11 | 0.5798 |
 | `f1` - bottom wall | wall | 0 | 0.3375 |
-| `f1` - bottom wall | wall | 0 | 0.3375 |
-| `f2` - right wall | wall | 0 | 0.4715 |
 | `f2` - right wall | wall | 0 | 0.4715 |
 
 **Binding** (largest Fritz-John resultant first): `f2`-`f4` (0.938), `f0`-`f4` (0.668), `f4`-`TL(1,0)` (0.580), `f2`-`TR(0,0)` (0.527), `f0`-`f1` (0.501), `f2`-`right wall` (0.472).  KKT residual 1.2e-07.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f0`-`BL(0,0)`, `f0`-`BL(0,1)`, `f2`-`TR(0,0)`.
@@ -379,7 +380,6 @@ Load-bearing free squares: `f0`, `f2`.  Rattlers/struts (removal leaves s\* unch
 | `f3` - `f4` | vertex-on-edge | -1.8e-09 | 0.0001 |
 | `f3` - `BL(0,1)` | vertex-on-edge | +3.0e-11 | 0.7791 |
 | `f3` - `TL(0,0)` | vertex-on-edge | -1.3e-12 | 0.0001 |
-| `f2` - bottom wall | wall | 0 | 0.0001 |
 | `f2` - bottom wall | wall | 0 | 0.0001 |
 
 **Binding** (largest Fritz-John resultant first): `f1`-`TR(0,0)` (1.254), `f1`-`f3` (1.086), `f3`-`BL(0,1)` (0.779), `f3`-`f4` (0.000), `f2`-`f4` (0.000), `f3`-`TL(0,0)` (0.000).  KKT residual 3.5e-05.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f2`-`BR(0,0)`.
@@ -440,7 +440,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f3` - `TL(1,0)` | vertex-on-edge | -4.4e-16 | 0.3302 |
 | `f3` - `TR(0,0)` | vertex-on-edge | -1.3e-15 | 0.2237 |
 | `f2` - right wall | wall | 0 | 0.8969 |
-| `f2` - right wall | wall | 0 | 0.8969 |
 
 **Binding** (largest Fritz-John resultant first): `f2`-`right wall` (0.897), `f1`-`f2` (0.686), `f1`-`BL(1,0)` (0.480), `f2`-`f3` (0.391), `f3`-`TL(1,0)` (0.330), `f3`-`TR(0,0)` (0.224).  KKT residual 6.5e-09.
 **Rank**: 9 contact rows, 13 variables (s + 3 per free square); rank 9; at fixed s rank 9 of 12, so **3 flat direction(s)**.
@@ -498,10 +497,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 | `f4` - `BL(1,0)` | vertex-on-edge | +2.3e-09 | 0.7071 |
 | `f4` - `BR(0,0)` | vertex-on-edge | -1.8e-15 | 0.0000 |
 | `f1` - top wall | wall | 0 | 0.0000 |
-| `f1` - top wall | wall | 0 | 0.0000 |
 | `f2` - top wall | wall | 0 | 0.7500 |
-| `f2` - top wall | wall | 0 | 0.7500 |
-| `f3` - right wall | wall | 0 | 0.7079 |
 | `f3` - right wall | wall | 0 | 0.7079 |
 
 **Binding** (largest Fritz-John resultant first): `f3`-`f4` (1.000), `f2`-`f3` (0.751), `f2`-`top wall` (0.750), `f3`-`right wall` (0.708), `f4`-`BL(1,0)` (0.707).  KKT residual 2.9e-05.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f0`-`TL(0,0)`.
@@ -629,8 +625,6 @@ Load-bearing free squares: `f0`, `f2`, `f3`, `f4`.  Rattlers/struts (removal lea
 | `f4` - `TR(0,0)` | vertex-on-edge | -1.7e-14 | 0.7155 |
 | `f5` - `BL(1,0)` | vertex-on-edge | +2.2e-15 | 0.3611 |
 | `f2` - top wall | wall | 0 | 0.2978 |
-| `f2` - top wall | wall | 0 | 0.2978 |
-| `f3` - right wall | wall | 0 | 0.2957 |
 | `f3` - right wall | wall | 0 | 0.2957 |
 
 **Binding** (largest Fritz-John resultant first): `f4`-`TR(0,0)` (0.716), `f0`-`BL(0,1)` (0.361), `f5`-`BL(1,0)` (0.361), `f0`-`f4` (0.326), `f0`-`f2` (0.298), `f2`-`top wall` (0.298).  KKT residual 2.4e-09.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f0`-`f5`.
@@ -692,7 +686,6 @@ Load-bearing free squares: `f0`, `f2`, `f3`, `f4`, `f5`.  Rattlers/struts (remov
 | `f2` - `TR(0,0)` | vertex-on-edge | +3.1e-15 | 0.2319 |
 | `f3` - `BL(1,0)` | vertex-on-edge | -7.8e-16 | 0.3310 |
 | `f3` - `BR(0,0)` | vertex-on-edge | -2.1e-15 | 0.1618 |
-| `f1` - right wall | wall | 0 | 0.7163 |
 | `f1` - right wall | wall | 0 | 0.7163 |
 
 **Binding** (largest Fritz-John resultant first): `f1`-`right wall` (0.716), `f1`-`f2` (0.480), `f1`-`f3` (0.480), `f2`-`TL(1,0)` (0.396), `f3`-`BL(1,0)` (0.331), `f2`-`TR(0,0)` (0.232).  KKT residual 8.4e-10.
@@ -916,7 +909,6 @@ Load-bearing free squares: none.  Rattlers/struts (removal leaves s\* unchanged)
 | `f3` - `f4` | vertex-on-edge | -4.3e-09 | 0.0000 |
 | `f4` - `BR(0,0)` | vertex-on-edge | +1.0e-15 | 0.0509 |
 | `f1` - left wall | wall | 0 | 0.0000 |
-| `f1` - left wall | wall | 0 | 0.0000 |
 | `f4` - right wall | wall | 0 | 0.2786 |
 
 **Binding** (largest Fritz-John resultant first): `f0`-`TL(1,0)` (1.182), `f0`-`BL(0,1)` (0.848), `f2`-`f4` (0.294), `f0`-`f2` (0.283), `f4`-`right wall` (0.279), `f4`-`BR(0,0)` (0.051).  KKT residual 3.2e-06.
@@ -973,7 +965,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f2` - `TL(0,0)` | exactly-opposite | -1.3e-08 | 0.5589 |
 | `f3` - `f4` | vertex-on-edge | -1.6e-08 | 1.0004 |
 | `f3` - `BR(0,0)` | vertex-on-edge | -2.2e-16 | 0.5001 |
-| `f2` - top wall | wall | 0 | 0.7501 |
 | `f2` - top wall | wall | 0 | 0.7501 |
 | `f3` - right wall | wall | 0 | 0.7070 |
 
@@ -1041,8 +1032,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f4` - `BL(1,0)` | vertex-on-edge | +2.9e-11 | 0.0851 |
 | `f4` - `BR(0,0)` | vertex-on-edge | -4.2e-10 | 0.7872 |
 | `f1` - top wall | wall | 0 | 0.0000 |
-| `f1` - top wall | wall | 0 | 0.0000 |
-| `f2` - top wall | wall | 0 | 0.2624 |
 | `f2` - top wall | wall | 0 | 0.2624 |
 
 **Binding** (largest Fritz-John resultant first): `f4`-`BR(0,0)` (0.787), `f3`-`f4` (0.753), `f3`-`BL(0,1)` (0.732), `f0`-`TR(0,1)` (0.397), `f0`-`f3` (0.374), `f0`-`f2` (0.291).  KKT residual 1.0e-06.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f2`-`TL(0,0)`.
@@ -1102,7 +1091,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f2` - `TL(0,0)` | exactly-opposite | +1.8e-09 | 0.0132 |
 | `f3` - `TR(0,0)` | vertex-on-edge | +1.1e-11 | 1.2050 |
 | `f1` - right wall | wall | 0 | 0.0114 |
-| `f2` - top wall | wall | 0 | 0.0011 |
 | `f2` - top wall | wall | 0 | 0.0011 |
 
 **Binding** (largest Fritz-John resultant first): `f3`-`TR(0,0)` (1.205), `f0`-`f3` (0.985), `f0`-`BL(0,1)` (0.514), `f0`-`BL(1,0)` (0.470), `f1`-`f3` (0.018), `f2`-`f3` (0.016).  KKT residual 9.1e-03.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f1`-`f3`, `f2`-`TL(0,0)`.
@@ -1275,7 +1263,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f2` - `BR(0,0)` | vertex-on-edge | +1.4e-09 | 0.2423 |
 | `f3` - `f4` | vertex-on-edge | -1.3e-08 | 0.8244 |
 | `f4` - `BL(0,1)` | vertex-on-edge | -5.7e-13 | 0.5658 |
-| `f1` - right wall | wall | 0 | 0.4765 |
 | `f1` - right wall | wall | 0 | 0.4765 |
 | `f3` - top wall | wall | 0 | 0.9690 |
 
@@ -1557,7 +1544,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 | `f2` - `f3` | vertex-on-edge | -5.2e-08 | 0.5930 |
 | `f2` - `TL(1,0)` | vertex-on-edge | -1.4e-14 | 0.4500 |
 | `f1` - bottom wall | wall | 0 | 0.0000 |
-| `f1` - bottom wall | wall | 0 | 0.0000 |
 | `f3` - right wall | wall | 0 | 0.6517 |
 
 **Binding** (largest Fritz-John resultant first): `f3`-`right wall` (0.652), `f2`-`f3` (0.593), `f0`-`BR(0,0)` (0.582), `f0`-`BL(1,1)` (0.469), `f2`-`TL(1,0)` (0.450), `f0`-`f3` (0.262).  KKT residual 1.4e-04.
@@ -1614,7 +1600,6 @@ Load-bearing free squares: `f0`, `f2`, `f3`.  Rattlers/struts (removal leaves s\
 | `f2` - `TL(0,0)` | vertex-on-edge | -1.7e-08 | 0.2380 |
 | `f3` - `f4` | vertex-on-edge | +2.4e-15 | 0.8275 |
 | `f4` - `BL(1,0)` | vertex-on-edge | +1.8e-15 | 0.5672 |
-| `f0` - top wall | wall | 0 | 0.4758 |
 | `f0` - top wall | wall | 0 | 0.4758 |
 | `f3` - right wall | wall | 0 | 0.9700 |
 
@@ -1972,7 +1957,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f3` - `BR(0,0)` | vertex-on-edge | +1.1e-16 | 0.1235 |
 | `f4` - `TR(0,0)` | vertex-on-edge | -1.1e-14 | 0.1686 |
 | `f1` - right wall | wall | 0 | 0.5786 |
-| `f1` - right wall | wall | 0 | 0.5786 |
 | `f2` - top wall | wall | 0 | 0.5479 |
 
 **Binding** (largest Fritz-John resultant first): `f1`-`right wall` (0.579), `f2`-`top wall` (0.548), `f1`-`f3` (0.412), `f2`-`f4` (0.385), `f1`-`f4` (0.384), `f3`-`BL(1,0)` (0.284).  KKT residual 3.5e-04.
@@ -2032,7 +2016,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f4` - `TL(1,0)` | vertex-on-edge | +2.2e-16 | 0.3302 |
 | `f4` - `TR(0,0)` | vertex-on-edge | +2.2e-16 | 0.2236 |
 | `f0` - bottom wall | wall | 0 | 2365.1253 |
-| `f1` - right wall | wall | 0 | 0.8970 |
 | `f1` - right wall | wall | 0 | 0.8970 |
 
 **Binding** (largest Fritz-John resultant first): `f0`-`bottom wall` (2365.125), `f0`-`BL(0,0)` (2364.897), `f1`-`right wall` (0.897), `f0`-`f2` (0.689), `f1`-`f2` (0.689), `f1`-`f4` (0.391).  KKT residual 9.0e-09.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f0`-`BL(0,0)`, `f0`-`BL(0,1)`.
@@ -2649,7 +2632,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f4` - `TR(0,0)` | vertex-on-edge | +5.4e-11 | 0.2315 |
 | `f0` - top wall | wall | 0 | 0.2812 |
 | `f1` - right wall | wall | 0 | 0.7429 |
-| `f1` - right wall | wall | 0 | 0.7429 |
 
 **Binding** (largest Fritz-John resultant first): `f1`-`right wall` (0.743), `f1`-`f4` (0.508), `f0`-`f4` (0.471), `f1`-`f2` (0.445), `f2`-`BL(1,0)` (0.313), `f0`-`top wall` (0.281).  KKT residual 1.2e-05.
 **Convergence caveat**: KKT residual 1.2e-05 (> 1e-6).  The residual measures how far e_s is from the cone of the active CONTACT rows; it is nonzero when the landing also leans on a variable BOUND (s in [3.4, 4.6], centres in [0, 4.6]), which is not a contact and so is not in the Jacobian, or when SLSQP stopped short of a stationary point.  Either way s* = 3.952692 is an upper bound on this shadow's true value and the contact set may be mis-counted at the 1e-7 threshold.
@@ -2768,10 +2750,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f4` - `f5` | vertex-on-edge | -8.1e-08 | 0.5876 |
 | `f4` - `BL(1,0)` | vertex-on-edge | +1.6e-14 | 0.4154 |
 | `f1` - right wall | wall | 0 | 0.0656 |
-| `f1` - right wall | wall | 0 | 0.0656 |
 | `f1` - top wall | wall | 0 | 0.0367 |
-| `f1` - top wall | wall | 0 | 0.0367 |
-| `f2` - top wall | wall | 0 | 0.6352 |
 | `f2` - top wall | wall | 0 | 0.6352 |
 | `f5` - right wall | wall | 0 | 0.6689 |
 
@@ -2828,8 +2807,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers/struts 
 | `f3` - `TL(1,0)` | vertex-on-edge | +4.9e-13 | 0.3586 |
 | `f4` - `BL(1,0)` | vertex-on-edge | +2.2e-16 | 0.7733 |
 | `f1` - left wall | wall | 0 | 0.0000 |
-| `f1` - left wall | wall | 0 | 0.0000 |
-| `f2` - right wall | wall | 0 | 1.1064 |
 | `f2` - right wall | wall | 0 | 1.1064 |
 
 **Binding** (largest Fritz-John resultant first): `f2`-`f4` (1.132), `f2`-`right wall` (1.106), `f4`-`BL(1,0)` (0.773), `f3`-`f4` (0.369), `f3`-`TL(1,0)` (0.359).  KKT residual 1.9e-04.
@@ -2888,7 +2865,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 | `f2` - `BL(0,1)` | vertex-on-edge | +3.0e-12 | 0.2736 |
 | `f3` - `BR(0,1)` | vertex-on-edge | -4.6e-15 | 0.8049 |
 | `f3` - `TR(1,0)` | vertex-on-edge | +2.6e-15 | 1.1032 |
-| `f1` - bottom wall | wall | 0 | 0.0000 |
 | `f1` - bottom wall | wall | 0 | 0.0000 |
 
 **Binding** (largest Fritz-John resultant first): `f3`-`TR(1,0)` (1.103), `f3`-`BR(0,1)` (0.805), `f2`-`f3` (0.373), `f2`-`BL(0,1)` (0.274).  KKT residual 2.5e-03.
@@ -3222,7 +3198,6 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 | `f2` - `TR(0,0)` | exactly-opposite | -2.2e-10 | 0.0491 |
 | `f3` - `BL(0,2)` | vertex-on-edge | +2.7e-13 | 0.0151 |
 | `f2` - top wall | wall | 0 | 1.4394 |
-| `f2` - top wall | wall | 0 | 1.4394 |
 
 **Binding** (largest Fritz-John resultant first): `f2`-`f3` (1.540), `f1`-`f3` (1.494), `f2`-`top wall` (1.439), `f1`-`BL(1,0)` (1.029), `f2`-`TR(0,0)` (0.049), `f3`-`BL(0,2)` (0.015).  KKT residual 1.6e-02.  Exactly-opposite (vertex-vertex) contacts, whose normal is a cone and whose individual multipliers are therefore ill-conditioned: `f2`-`TR(0,0)`.
 **Convergence caveat**: KKT residual 1.6e-02 (> 1e-6).  The residual measures how far e_s is from the cone of the active CONTACT rows; it is nonzero when the landing also leans on a variable BOUND (s in [3.4, 4.6], centres in [0, 4.6]), which is not a contact and so is not in the Jacobian, or when SLSQP stopped short of a stationary point.  Either way s* = 4.000197 is an upper bound on this shadow's true value and the contact set may be mis-counted at the 1e-7 threshold.
@@ -3317,3 +3292,1873 @@ near-packing, so there is no drawing to hand back.
 | A60 | trump5 | L1 | 42 | 4/5 x40, 3/5 x1, 2/3 x1 |
 
 Full list: `attempts/A107-shadow-gallery/results/unexplained.json`.
+
+# Part II - the k0_00 cells (A38 / A85 / A99)
+
+The k0_00 class has **no pins**: a node's only hypothesis core is the conditioned square, so
+the class symmetry group is the **full D4** (8 elements), not the stabiliser of a pin set, and
+every de-duplication below runs over all 8.  Everything else is the Part I pipeline unchanged:
+the near-simple placements of the dual support are snapped to named slot cells and fixed as
+affine functions of s, the rest are free, and s is minimised.
+
+Sources and the alive test.  A38-root-power `results/{l1,l2,l3}_nodes/*.json` (134 + 49 + 11
+with an LP support), A85-k0-route `results/nodes/k0_00/*.json` (12) and A99-k0-tree-v2
+`results/nodes/k0_00/*.json` (54) - 260 node jsons in the same format as Part I (tau, budget,
+`hyp.cores`, `packing` with y, `rows_all`).  A node counts as alive when the LP did not certify
+it (`dead == False`) **or** its LP value already reaches the budget (tau >= budget); on this
+corpus the second condition is contained in the first.  **217 alive k0 cells**: A38 153, A99 53, A85 11; 43 of them sit at tau >= budget.
+Budget is 10 (n = 10) on 214 of them, so a k0 shadow is a k11 packing when the support is full
+and shorter otherwise.  All are at the certified side s0 = 3.877084.
+
+**30 distinct k0 shadow values explain 161 of the 217 alive cells**; 56 are explained by no integral shadow.
+
+| shadow | sources | k of the shadow | s* | s* - s-hat | k0 cells | #cfg | levels | free sq | common tilt | flexes | coincides with |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **K01** | A38 x65, A99 x12, A85 x7 | k11 (6 slot + 5 free) | 4.000000 | +0.122916 | 84 | 45 | L1:65, L2:15, L3:4 | 5 | no | 14 | - |
+| **K02** | A38 x10 | k11 (4 slot + 7 free) | 3.942809 | +0.065725 | 10 | 7 | L1:8, L2:1, L3:1 | 7 | no | 11 | - |
+| **K03** | A38 x9 | k11 (4 slot + 7 free) | 3.925149 | +0.048065 | 9 | 5 | L1:4, L2:4, L3:1 | 7 | no | 3 | S37 (0.57) |
+| **K04** | A38 x8, A99 x1 | k11 (2 slot + 9 free) | 3.914214 | +0.037130 | 9 | 8 | L1:9 | 9 | no | 5 | S32 (0.57); S05 (0.57) |
+| **K05** | A38 x8 | k11 (4 slot + 7 free) | 3.912232 | +0.035148 | 8 | 3 | L1:3, L2:3, L3:2 | 7 | no | 4 | S05 (0.83); S32 (0.69) |
+| **K06** | A99 x3, A38 x3 | k11 (5 slot + 6 free) | 3.886745 | +0.009662 | 6 | 5 | L1:4, L2:1, L3:1 | 6 | no | 5 | S29 (0.83); S02 (0.83) |
+| **K07** | A99 x5 | k9 (0 slot + 9 free) | 3.400000 | -0.477084 | 5 | 2 | L1:5 | 9 | no | 20 | - |
+| **K08** | A38 x5 | k10 (0 slot + 10 free) | 3.828427 | -0.048656 | 5 | 3 | L1:4, L2:1 | 10 | no | 18 | - |
+| **K09** | A38 x3 | k10 (1 slot + 9 free) | 3.788222 | -0.088862 | 3 | 1 | L1:1, L2:2 | 9 | no | 1 | - |
+| **K10** | A38 x2 | k10 (2 slot + 8 free) | 3.822876 | -0.054208 | 2 | 2 | L2:2 | 8 | no | 15 | - |
+| **K11** | A99 x1 | k10 (1 slot + 9 free) | 3.728581 | -0.148503 | 1 | 1 | L1:1 | 9 | no | 12 | S25 (0.67); S19 (0.54) |
+| **K12** | A38 x1 | k10 (2 slot + 8 free) | 3.768117 | -0.108966 | 1 | 1 | L1:1 | 8 | no | 11 | - |
+| **K13** | A38 x1 | k10 (1 slot + 9 free) | 3.803539 | -0.073544 | 1 | 1 | L1:1 | 9 | no | 5 | - |
+| **K14** | A99 x1 | k10 (2 slot + 8 free) | 3.804138 | -0.072946 | 1 | 1 | L1:1 | 8 | no | 6 | - |
+| **K15** | A38 x1 | k10 (1 slot + 9 free) | 3.828944 | -0.048139 | 1 | 1 | L2:1 | 9 | 33.811 deg | 5 | - |
+| **K16** | A38 x1 | k10 (3 slot + 7 free) | 3.898863 | +0.021779 | 1 | 1 | L3:1 | 7 | no | 3 | S29 (0.50); S02 (0.50) |
+| **K17** | A38 x1 | k11 (4 slot + 7 free) | 3.912259 | +0.035176 | 1 | 1 | L1:1 | 7 | no | 8 | S32 (0.83); S05 (0.69) |
+| **K18** | A38 x1 | k11 (4 slot + 7 free) | 3.915298 | +0.038214 | 1 | 1 | L2:1 | 7 | no | 2 | - |
+| **K19** | A38 x1 | k11 (5 slot + 6 free) | 3.916931 | +0.039847 | 1 | 1 | L1:1 | 6 | no | 1 | S33 (1.00, exact); S34 (0.83) |
+| **K20** | A38 x1 | k11 (2 slot + 9 free) | 3.924402 | +0.047319 | 1 | 1 | L2:1 | 9 | no | 6 | S40 (0.50) |
+| **K21** | A85 x1 | k11 (5 slot + 6 free) | 3.925275 | +0.048192 | 1 | 1 | L1:1 | 6 | no | 3 | S39 (0.69); S41 (0.57) |
+| **K22** | A38 x1 | k11 (1 slot + 10 free) | 3.943894 | +0.066811 | 1 | 1 | L1:1 | 10 | no | 8 | - |
+| **K23** | A38 x1 | k11 (2 slot + 9 free) | 3.948781 | +0.071698 | 1 | 1 | L1:1 | 9 | no | 13 | - |
+| **K24** | A38 x1 | k11 (4 slot + 7 free) | 3.967522 | +0.090438 | 1 | 1 | L1:1 | 7 | no | 6 | S49 (0.57) |
+| **K25** | A38 x1 | k11 (5 slot + 6 free) | 3.977041 | +0.099957 | 1 | 1 | L3:1 | 6 | no | 5 | S44 (0.57) |
+| **K26** | A85 x1 | k11 (3 slot + 8 free) | 3.985467 | +0.108383 | 1 | 1 | L1:1 | 8 | no | 12 | - |
+| **K27** | A38 x1 | k11 (5 slot + 6 free) | 3.989264 | +0.112181 | 1 | 1 | L1:1 | 6 | no | 8 | S47 (0.57) |
+| **K28** | A99 x1 | k11 (4 slot + 7 free) | 4.000023 | +0.122940 | 1 | 1 | L1:1 | 7 | no | 13 | - |
+| **K29** | A38 x1 | k11 (4 slot + 7 free) | 4.000145 | +0.123061 | 1 | 1 | L2:1 | 7 | no | 11 | - |
+| **K30** | A38 x1 | k11 (2 slot + 9 free) | 4.020670 | +0.143586 | 1 | 1 | L1:1 | 9 | no | 8 | - |
+
+## Coincidences with Part I
+
+Each k0 shadow's minimised packing was aligned against every Part I S-entry over the full D4
+of the container, matching squares at 0.05 in position and 3 deg in tilt; the score is the
+Jaccard index (matched / (|A| + |B| - matched)).  Two different comparisons are reported and
+they do not agree, which is the point:
+
+* **packing Jaccard** - the whole MINIMISED packing, free squares included.  This is the
+  strong claim: 1.000 means the two shadows are the same 11-square configuration.
+* **slot-set Jaccard** - only which named slot CELLS the LP filled, compared modulo D4.  This
+  is A113's comparison (`attempts/A113-k0-manifold-distance/results/t2_supports.md`, column
+  "best shadow (Jaccard @ s\*)"), and it is much coarser: one slot skeleton carries different
+  free-square arrangements with different s*.  A113 read cell `l1_100` (= A38
+  `l1_nodes/node_100.json`) as S38 at 1.00 on slot sets; here that cell lands in **K04** and
+  minimises to 3.914214 while S38 minimises to 3.928915 - the slot skeleton is shared, the
+  packing is not.  Likewise A113's `s1int_l1_043` -> S07 at 0.83 on slot sets: that cell is in
+  **K01** here and minimises to 4.000000, packing Jaccard against S07 0.29.
+
+Rows are listed when either score is high (packing Jaccard >= 0.5, or slot-set Jaccard 1.0).
+
+| k0 shadow | s* | Part I entry | its s* | s* difference | D4 map | squares matched | packing Jaccard | slot-set Jaccard |
+|---|---|---|---|---|---|---|---|---|
+| K19 | 3.916931 | S33 | 3.916931 | -0.000000010 | `e` | 11 of 11 vs 11 | 1.000 | 0.833 (`e`) |
+| K06 | 3.886745 | S29 | 3.886761 | -0.000015036 | `mx` | 10 of 11 vs 11 | 0.833 | 0.833 (`e`) |
+| K19 | 3.916931 | S34 | 3.917360 | -0.000429197 | `e` | 10 of 11 vs 11 | 0.833 | 0.833 (`e`) |
+| K19 | 3.916931 | S35 | 3.917433 | -0.000501810 | `e` | 10 of 11 vs 11 | 0.833 | 0.833 (`e`) |
+| K06 | 3.886745 | S02 | 3.886746 | -0.000000545 | `e` | 10 of 11 vs 11 | 0.833 | 0.714 (`e`) |
+| K17 | 3.912259 | S32 | 3.912250 | +0.000009344 | `e` | 10 of 11 vs 11 | 0.833 | 0.667 (`e`) |
+| K05 | 3.912232 | S05 | 3.912232 | -0.000000002 | `e` | 10 of 11 vs 11 | 0.833 | 0.571 (`e`) |
+| K21 | 3.925275 | S39 | 3.932425 | -0.007149508 | `my` | 9 of 11 vs 11 | 0.692 | 0.833 (`e`) |
+| K06 | 3.886745 | S10 | 3.902674 | -0.015928489 | `e` | 9 of 11 vs 11 | 0.692 | 0.714 (`e`) |
+| K05 | 3.912232 | S32 | 3.912250 | -0.000017962 | `e` | 9 of 11 vs 11 | 0.692 | 0.667 (`e`) |
+| K17 | 3.912259 | S05 | 3.912232 | +0.000027304 | `e` | 9 of 11 vs 11 | 0.692 | 0.571 (`e`) |
+| K11 | 3.728581 | S25 | 3.728606 | -0.000025324 | `r90` | 8 of 10 vs 10 | 0.667 | 0.200 (`e`) |
+| K21 | 3.925275 | S41 | 3.940838 | -0.015562943 | `e` | 8 of 11 vs 11 | 0.571 | 0.833 (`e`) |
+| K25 | 3.977041 | S44 | 3.958425 | +0.018616122 | `e` | 8 of 11 vs 11 | 0.571 | 0.667 (`e`) |
+| K27 | 3.989264 | S47 | 3.989280 | -0.000015288 | `anti` | 8 of 11 vs 11 | 0.571 | 0.625 (`mx`) |
+| K03 | 3.925149 | S37 | 3.925470 | -0.000321298 | `e` | 8 of 11 vs 11 | 0.571 | 0.571 (`e`) |
+| K17 | 3.912259 | S10 | 3.902674 | +0.009585371 | `diag` | 8 of 11 vs 11 | 0.571 | 0.571 (`diag`) |
+| K24 | 3.967522 | S49 | 3.996724 | -0.029202677 | `e` | 8 of 11 vs 11 | 0.571 | 0.571 (`e`) |
+| K04 | 3.914214 | S32 | 3.912250 | +0.001963571 | `r180` | 8 of 11 vs 11 | 0.571 | 0.333 (`e`) |
+| K04 | 3.914214 | S05 | 3.912232 | +0.001981530 | `r180` | 8 of 11 vs 11 | 0.571 | 0.286 (`e`) |
+| K04 | 3.914214 | S10 | 3.902674 | +0.011539598 | `anti` | 8 of 11 vs 11 | 0.571 | 0.286 (`e`) |
+| K11 | 3.728581 | S19 | 3.728581 | -0.000000383 | `mx` | 7 of 10 vs 10 | 0.538 | 0.200 (`e`) |
+| K16 | 3.898863 | S29 | 3.886761 | +0.012102066 | `r180` | 7 of 10 vs 11 | 0.500 | 0.500 (`r180`) |
+| K16 | 3.898863 | S02 | 3.886746 | +0.012116558 | `my` | 7 of 10 vs 11 | 0.500 | 0.429 (`r180`) |
+| K20 | 3.924402 | S40 | 3.940518 | -0.016115364 | `my` | 7 of 11 vs 10 | 0.500 | 0.286 (`e`) |
+| K21 | 3.925275 | S04 | 3.822876 | +0.102399693 | `e` | 2 of 11 vs 10 | 0.105 | 1.000 (`e`) |
+| K21 | 3.925275 | S14 | 3.767767 | +0.157508408 | `e` | 2 of 11 vs 10 | 0.105 | 1.000 (`e`) |
+| K25 | 3.977041 | S04 | 3.822876 | +0.154165231 | `e` | 2 of 11 vs 10 | 0.105 | 1.000 (`e`) |
+| K25 | 3.977041 | S14 | 3.767767 | +0.209273946 | `e` | 2 of 11 vs 10 | 0.105 | 1.000 (`e`) |
+| K25 | 3.977041 | S17 | 3.858216 | +0.118824572 | `e` | 2 of 11 vs 10 | 0.105 | 1.000 (`e`) |
+
+1 exact coincidence(s) (Jaccard 1.000): K19 = S33.
+
+## K01 - a k11 packing at s* = 4.000000 on the boundary of class k0_00
+
+![K01](shadows/K01.svg)
+
+* **s\*** = 4.000000000 = s-hat +0.122916410  (s0 = 3.877084, s\* - s0 = +0.122916)
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) TL(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **explains** 84 alive k0 cells: A38 x65, A99 x12, A85 x7; levels L1:65, L2:15, L3:4; component 75, integral 9 support; 19 at tau >= budget.
+* **load-bearing squares**: `BL(0,2)` `TL(0,0)` (2 of 11); **45 distinct minimised configuration(s)** share this s*.
+* **restarts**: 86 feasible of 103; distinct minima [4.0, 4.00001, 4.00003, 4.00029].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.668999 | 2.121665 | 26.1032 |
+| f1 | 3.249676 | 0.678407 | 28.6196 |
+| f2 | 2.380673 | 1.344011 | 29.1366 |
+| f3 | 2.551031 | 2.704671 | 32.2969 |
+| f4 | 3.219514 | 1.916960 | 30.6772 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f2` - `BL(1,0)` | vertex-on-edge | +8.3e-08 | 0.0000 |
+| `BL(0,2)` - `TL(0,0)` | exactly-opposite | +4.4e-15 | 1.0000 |
+
+**Binding**: `BL(0,2)`-`TL(0,0)` (1.000).  KKT residual 0.0e+00.  Exactly-opposite (cone-degenerate) contacts: `BL(0,2)`-`TL(0,0)`.
+**Rank**: 5 contact rows, 16 variables; rank 2; at fixed s rank 1 of 15, so **14 flat direction(s)**: free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 4.000000 | +0.000000 | rattler |
+| `f1` | 4.000000 | +0.000000 | rattler |
+| `f2` | 4.000000 | +0.000000 | rattler |
+| `f3` | 4.000000 | +0.000000 | rattler |
+| `f4` | 4.000000 | +0.000000 | rattler |
+
+Load-bearing: none.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`.
+
+**k0 cells explained** (84): `A85/k0_00/s1cor_far_b595(L1)` `A85/k0_00/s1cor_near_b178(L1)` `A85/k0_00/s1int_l1_043(L1)` `A85/k0_00/s1int_l1_053(L1)` `A85/k0_00/s1int_l2_l2_p210_001(L1)` `A85/k0_00/s1int_l2_l2_p215_011(L1)` `A85/k0_00/s4_near_BL357619_BR004483_TR191404(L1)` `A99/k0_00/l1_038_plain_warm(L1)` `A99/k0_00/l1_049_sh1_warm(L1)` `A99/k0_00/l1_060_plain_warm(L1)` `A99/k0_00/l1_071_plain_warm(L1)` `A99/k0_00/l1_082_sh3_warm(L1)` `A99/k0_00/l1_148_plain_warm(L1)` `A99/k0_00/l1_148_sh3_warm(L1)` `A99/k0_00/l1_192_plain_warm(L1)` `A99/k0_00/l1_203_plain_warm(L1)` `A99/k0_00/l1_214_plain_warm(L1)` `A99/k0_00/l1_214_sh1_warm(L1)` `A99/k0_00/l1_214_sh2dia_warm(L1)` `A38/l1_nodes/node_008(L1)` `A38/l1_nodes/node_009(L1)` `A38/l1_nodes/node_020(L1)` `A38/l1_nodes/node_021(L1)` `A38/l1_nodes/node_022(L1)` `A38/l1_nodes/node_027(L1)` `A38/l1_nodes/node_028(L1)` `A38/l1_nodes/node_034(L1)` `A38/l1_nodes/node_036(L1)` `A38/l1_nodes/node_037(L1)` `A38/l1_nodes/node_038(L1)` `A38/l1_nodes/node_039(L1)` `A38/l1_nodes/node_040(L1)` `A38/l1_nodes/node_041(L1)` `A38/l1_nodes/node_045(L1)` `A38/l1_nodes/node_046(L1)` `A38/l1_nodes/node_047(L1)` `A38/l1_nodes/node_052(L1)` `A38/l1_nodes/node_055(L1)` `A38/l1_nodes/node_056(L1)` `A38/l1_nodes/node_057(L1)` `A38/l1_nodes/node_058(L1)` `A38/l1_nodes/node_059(L1)` `A38/l1_nodes/node_060(L1)` `A38/l1_nodes/node_061(L1)` `A38/l1_nodes/node_065(L1)` `A38/l1_nodes/node_066(L1)` `A38/l1_nodes/node_067(L1)` `A38/l1_nodes/node_068(L1)` `A38/l1_nodes/node_070(L1)` `A38/l1_nodes/node_071(L1)` `A38/l1_nodes/node_073(L1)` `A38/l1_nodes/node_077(L1)` `A38/l1_nodes/node_083(L1)` `A38/l1_nodes/node_086(L1)` `A38/l1_nodes/node_089(L1)` `A38/l1_nodes/node_095(L1)` `A38/l1_nodes/node_101(L1)` `A38/l1_nodes/node_104(L1)` `A38/l1_nodes/node_106(L1)` `A38/l1_nodes/node_107(L1)` `A38/l1_nodes/node_109(L1)` `A38/l1_nodes/node_113(L1)` `A38/l1_nodes/node_114(L1)` `A38/l1_nodes/node_141(L1)` `A38/l1_nodes/node_142(L1)` `A38/l2_nodes/l2_p100_010(L2)` `A38/l2_nodes/l2_p114_010(L2)` `A38/l2_nodes/l2_p210_000(L2)` `A38/l2_nodes/l2_p210_010(L2)` `A38/l2_nodes/l2_p215_000(L2)` `A38/l2_nodes/l2_p215_010(L2)` `A38/l2_nodes/l2_p215_011(L2)` `A38/l2_nodes/l2_p61_000(L2)` `A38/l2_nodes/l2_p65_010(L2)` `A38/l2_nodes/l2_p65_101(L2)` `A38/l2_nodes/l2_p65_110(L2)` `A38/l2_nodes/l2_p70_000(L2)` `A38/l2_nodes/l2_p70_011(L2)` `A38/l2_nodes/l2_p74_000(L2)` `A38/l2_nodes/l2_p95_001(L2)` `A38/l3_nodes/l3_pp215_000_000(L3)` `A38/l3_nodes/l3_pp215_000_001(L3)` `A38/l3_nodes/l3_pp215_000_011(L3)` `A38/l3_nodes/l3_pp65_111_000(L3)`
+
+## K02 - a k11 packing at s* = 3.942809 on the boundary of class k0_00
+
+![K02](shadows/K02.svg)
+
+* **s\*** = 3.942809044 = s-hat +0.065725454  (s0 = 3.877084, s\* - s0 = +0.065725)
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,1)` + 7 free squares f0..f6; a k11 packing.
+* **explains** 10 alive k0 cells: A38 x10; levels L1:8, L2:1, L3:1; component 9, integral 1 support; 5 at tau >= budget.
+* **load-bearing squares**: `f5` `f6` `BL(0,1)` `BR(0,0)` `TR(0,1)` (5 of 11); **7 distinct minimised configuration(s)** share this s*.
+* **restarts**: 79 feasible of 102; distinct minima [3.94281, 4.0, 4.00001, 4.00006, 4.32623].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.252349 | 2.539990 | 32.4613 |
+| f1 | 3.243874 | 3.442809 | 90.0000 |
+| f2 | 0.503301 | 2.518485 | 0.3796 |
+| f3 | 1.432347 | 3.281034 | 24.3727 |
+| f4 | 1.657471 | 0.501307 | 0.1021 |
+| f5 | 2.707107 | 1.471405 | 45.0000 |
+| f6 | 1.500000 | 1.503588 | 90.0000 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f3` | vertex-on-edge | +1.3e-08 | 0.0000 |
+| `f1` - `TR(0,1)` | vertex-on-edge | -2.8e-14 | 0.0000 |
+| `f5` - `f6` | vertex-on-edge | -5.9e-14 | 0.9431 |
+| `f5` - `BR(0,0)` | vertex-on-edge | +7.1e-14 | 0.5827 |
+| `f5` - `TR(0,1)` | vertex-on-edge | +7.2e-14 | 0.8203 |
+| `f6` - `BL(0,1)` | vertex-on-edge | +6.4e-13 | 0.6670 |
+| `f1` - top wall | wall | 0 | 0.0000 |
+| `f2` - left wall | wall | 0 | 0.0000 |
+| `f3` - top wall | wall | 0 | 0.0000 |
+
+**Binding**: `f5`-`f6` (0.943), `f5`-`TR(0,1)` (0.820), `f6`-`BL(0,1)` (0.667), `f5`-`BR(0,0)` (0.583).  KKT residual 8.8e-09.
+**Rank**: 12 contact rows, 22 variables; rank 10; at fixed s rank 10 of 21, so **11 flat direction(s)**: blocked at second order, blocked at second order, free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at second order, blocked (order unclear), blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.942809 | +0.000000 | rattler |
+| `f1` | 3.942809 | +0.000000 | rattler |
+| `f2` | 3.942809 | +0.000000 | rattler |
+| `f3` | 3.942809 | +0.000000 | rattler |
+| `f4` | 3.942809 | +0.000000 | rattler |
+| `f5` | 4.000000 | -0.057191 | rattler |
+| `f6` | 3.806721 | +0.136088 | load-bearing |
+
+Load-bearing: `f6`.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.
+
+**k0 cells explained** (10): `A38/l1_nodes/node_054(L1)` `A38/l1_nodes/node_072(L1)` `A38/l1_nodes/node_076(L1)` `A38/l1_nodes/node_082(L1)` `A38/l1_nodes/node_088(L1)` `A38/l1_nodes/node_094(L1)` `A38/l1_nodes/node_108(L1)` `A38/l1_nodes/node_112(L1)` `A38/l2_nodes/l2_p100_011(L2)` `A38/l3_nodes/l3_pp65_111_011(L3)`
+
+## K03 - a k11 packing at s* = 3.925149 on the boundary of class k0_00
+
+![K03](shadows/K03.svg)
+
+* **s\*** = 3.925148806 = s-hat +0.048065216  (s0 = 3.877084, s\* - s0 = +0.048065)
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) TL(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **explains** 9 alive k0 cells: A38 x9; levels L1:4, L2:4, L3:1; component 9 support; 2 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f6` `BL(0,1)` `TL(0,0)` `TR(0,0)` (10 of 11); **5 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S37` (s* 3.925470, D4 map `e`, 8 squares matched, Jaccard 0.571).
+* **restarts**: 75 feasible of 104; distinct minima [3.89432, 3.90747, 3.92515, 3.92528, 3.94281, 3.95842, 4.0, 4.00484].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.962577 | 1.500000 | 0.0000 |
+| f1 | 1.604981 | 0.500000 | 90.0000 |
+| f2 | 2.632194 | 0.500000 | 90.0000 |
+| f3 | 3.425149 | 1.500000 | 90.0000 |
+| f4 | 1.246819 | 2.476253 | 41.3723 |
+| f5 | 2.678328 | 2.476256 | 48.6285 |
+| f6 | 1.962579 | 3.218042 | 45.0011 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f1` | vertex-on-edge | -1.4e-08 | 0.3816 |
+| `f0` - `f2` | vertex-on-edge | -6.9e-09 | 0.3823 |
+| `f0` - `f4` | vertex-on-edge | +1.2e-11 | 0.4803 |
+| `f0` - `f5` | vertex-on-edge | +1.2e-11 | 0.4803 |
+| `f2` - `f3` | vertex-on-edge | -3.3e-10 | 0.1344 |
+| `f3` - `f5` | vertex-on-edge | -1.7e-11 | 0.1903 |
+| `f4` - `f6` | vertex-on-edge | +5.9e-12 | 0.2076 |
+| `f4` - `BL(0,1)` | vertex-on-edge | -1.7e-11 | 0.1357 |
+| `f4` - `TL(0,0)` | vertex-on-edge | -2.1e-11 | 0.4130 |
+| `f5` - `f6` | vertex-on-edge | +5.9e-12 | 0.2076 |
+| `f5` - `TR(0,0)` | vertex-on-edge | -2.1e-11 | 0.5703 |
+| `f1` - bottom wall | wall | 0 | 0.2558 |
+| `f2` - bottom wall | wall | 0 | 0.3417 |
+| `f3` - right wall | wall | 0 | 0.1496 |
+| `f6` - top wall | wall | 0 | 0.2670 |
+
+**Binding**: `f5`-`TR(0,0)` (0.570), `f0`-`f5` (0.480), `f0`-`f4` (0.480), `f4`-`TL(0,0)` (0.413), `f0`-`f2` (0.382), `f0`-`f1` (0.382).  KKT residual 3.9e-06.
+**Convergence caveat**: KKT residual 3.9e-06 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.925149 is an upper bound.
+**Rank**: 21 contact rows, 22 variables; rank 18; at fixed s rank 18 of 21, so **3 flat direction(s)**: blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.886746 | +0.038403 | load-bearing |
+| `f1` | 3.886746 | +0.038403 | load-bearing |
+| `f2` | 3.822876 | +0.102273 | load-bearing |
+| `f3` | 3.767767 | +0.157382 | load-bearing |
+| `f4` | infeasible | - | load-bearing |
+| `f5` | 3.767767 | +0.157382 | load-bearing |
+| `f6` | 3.899873 | +0.025276 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
+
+**k0 cells explained** (9): `A38/l1_nodes/node_043(L1)` `A38/l1_nodes/node_044(L1)` `A38/l1_nodes/node_051(L1)` `A38/l1_nodes/node_087(L1)` `A38/l2_nodes/l2_p65_000(L2)` `A38/l2_nodes/l2_p65_001(L2)` `A38/l2_nodes/l2_p65_011(L2)` `A38/l2_nodes/l2_p65_111(L2)` `A38/l3_nodes/l3_pp114_001_000(L3)`
+
+## K04 - a k11 packing at s* = 3.914214 on the boundary of class k0_00
+
+![K04](shadows/K04.svg)
+
+* **s\*** = 3.914213572 = s-hat +0.037129982  (s0 = 3.877084, s\* - s0 = +0.037130)
+* **shadow** = 2 slot squares `BL(0,0) BR(0,0)` + 9 free squares f0..f8; a k11 packing.
+* **explains** 9 alive k0 cells: A38 x8, A99 x1; levels L1:9; integral 5, component 4 support; 6 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f7` `f8` `BL(0,0)` (9 of 11); **8 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S32` (s* 3.912250, D4 map `r180`, 8 squares matched, Jaccard 0.571); `S05` (s* 3.912232, D4 map `r180`, 8 squares matched, Jaccard 0.571); `S10` (s* 3.902674, D4 map `anti`, 8 squares matched, Jaccard 0.571).
+* **restarts**: 82 feasible of 102; distinct minima [3.88675, 3.91421, 3.92515, 3.93028, 3.93722, 3.93993, 3.94281, 3.95072].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.707107 | 2.414214 | 45.0000 |
+| f1 | 3.414214 | 2.414214 | 90.0000 |
+| f2 | 2.414214 | 1.707107 | 45.0000 |
+| f3 | 2.405090 | 0.500000 | 90.0000 |
+| f4 | 3.414214 | 3.414214 | 90.0000 |
+| f5 | 2.414214 | 3.414214 | 90.0000 |
+| f6 | 0.837458 | 3.292251 | 0.2345 |
+| f7 | 0.500000 | 2.039248 | 90.0000 |
+| f8 | 1.448602 | 1.258505 | 45.0000 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f2` | exactly-opposite | -9.1e-11 | 0.3844 |
+| `f0` - `f5` | vertex-on-edge | -4.9e-15 | 0.5053 |
+| `f0` - `f7` | vertex-on-edge | +3.3e-15 | 0.5030 |
+| `f0` - `f8` | vertex-on-edge | -1.4e-10 | 0.1650 |
+| `f1` - `f2` | vertex-on-edge | +7.8e-16 | 0.5053 |
+| `f1` - `f4` | exactly-opposite | -2.7e-11 | 0.3953 |
+| `f1` - `f5` | exactly-opposite | +1.4e-08 | 0.0000 |
+| `f2` - `f3` | vertex-on-edge | +1.5e-14 | 0.4862 |
+| `f2` - `f8` | vertex-on-edge | +9.6e-10 | 0.1637 |
+| `f4` - `f5` | exactly-opposite | +1.2e-10 | 0.3953 |
+| `f8` - `BL(0,0)` | vertex-on-edge | -5.6e-15 | 0.2229 |
+| `f1` - right wall | wall | 0 | 0.3750 |
+| `f3` - bottom wall | wall | 0 | 0.3438 |
+| `f4` - right wall | wall | 0 | 0.3750 |
+| `f4` - top wall | wall | 0 | 0.3750 |
+| `f5` - top wall | wall | 0 | 0.3750 |
+| `f7` - left wall | wall | 0 | 0.3672 |
+
+**Binding**: `f1`-`f2` (0.505), `f0`-`f5` (0.505), `f0`-`f7` (0.503), `f2`-`f3` (0.486), `f4`-`f5` (0.395), `f1`-`f4` (0.395).  KKT residual 2.7e-09.  Exactly-opposite (cone-degenerate) contacts: `f0`-`f2`, `f1`-`f4`, `f1`-`f5`, `f4`-`f5`.
+**Rank**: 35 contact rows, 28 variables; rank 23; at fixed s rank 22 of 27, so **5 flat direction(s)**: blocked at first order (rank tolerance artefact), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.822876 | +0.091338 | load-bearing |
+| `f1` | 3.822876 | +0.091338 | load-bearing |
+| `f2` | 3.822876 | +0.091338 | load-bearing |
+| `f3` | 3.822876 | +0.091338 | load-bearing |
+| `f4` | 3.822876 | +0.091338 | load-bearing |
+| `f5` | 3.822876 | +0.091338 | load-bearing |
+| `f6` | 3.912232 | +0.001982 | load-bearing |
+| `f7` | 3.885094 | +0.029119 | load-bearing |
+| `f8` | 3.728581 | +0.185632 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: none.
+
+**k0 cells explained** (9): `A99/k0_00/l1_104_plain_warm(L1)` `A38/l1_nodes/node_050(L1)` `A38/l1_nodes/node_074(L1)` `A38/l1_nodes/node_075(L1)` `A38/l1_nodes/node_078(L1)` `A38/l1_nodes/node_080(L1)` `A38/l1_nodes/node_100(L1)` `A38/l1_nodes/node_105(L1)` `A38/l1_nodes/node_110(L1)`
+
+## K05 - a k11 packing at s* = 3.912232 on the boundary of class k0_00
+
+![K05](shadows/K05.svg)
+
+* **s\*** = 3.912232040 = s-hat +0.035148450  (s0 = 3.877084, s\* - s0 = +0.035148)
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **explains** 8 alive k0 cells: A38 x8; levels L1:3, L2:3, L3:2; component 8 support; 2 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f6` `BL(0,0)` `BL(0,1)` `TR(0,0)` (10 of 11); **3 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S05` (s* 3.912232, D4 map `e`, 10 squares matched, Jaccard 0.833); `S32` (s* 3.912250, D4 map `e`, 9 squares matched, Jaccard 0.692).
+* **restarts**: 75 feasible of 106; distinct minima [3.91223, 3.93028, 3.94518, 3.99946, 4.0, 4.00002, 4.00025, 4.05178].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.552381 | 2.130013 | 41.4697 |
+| f1 | 0.500000 | 2.837318 | 90.0000 |
+| f2 | 1.500000 | 0.500000 | 0.0000 |
+| f3 | 3.412232 | 1.909674 | 90.0000 |
+| f4 | 2.456404 | 2.661240 | 44.9196 |
+| f5 | 1.500000 | 3.412232 | 90.0000 |
+| f6 | 2.389094 | 1.354075 | 24.1845 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f4` | vertex-on-edge | -9.2e-10 | 0.1952 |
+| `f0` - `BL(0,1)` | vertex-on-edge | -1.1e-09 | 0.1335 |
+| `f1` - `f5` | vertex-on-edge | -2.8e-09 | 0.2838 |
+| `f2` - `f6` | vertex-on-edge | -9.6e-11 | 0.6880 |
+| `f2` - `BL(0,0)` | exactly-opposite | +5.6e-16 | 0.4854 |
+| `f2` - `BL(0,1)` | exactly-opposite | +5.6e-16 | 0.0000 |
+| `f3` - `f4` | vertex-on-edge | +3.4e-14 | 0.3914 |
+| `f3` - `f6` | vertex-on-edge | -8.9e-11 | 0.6880 |
+| `f4` - `f5` | vertex-on-edge | -8.0e-14 | 0.3804 |
+| `f4` - `TR(0,0)` | vertex-on-edge | -6.0e-14 | 0.2237 |
+| `f1` - left wall | wall | 0 | 0.1895 |
+| `f2` - bottom wall | wall | 0 | 0.2180 |
+| `f3` - right wall | wall | 0 | 0.8969 |
+| `f5` - top wall | wall | 0 | 0.2842 |
+
+**Binding**: `f3`-`right wall` (0.897), `f2`-`f6` (0.688), `f3`-`f6` (0.688), `f2`-`BL(0,0)` (0.485), `f3`-`f4` (0.391), `f4`-`f5` (0.380).  KKT residual 1.8e-06.  Exactly-opposite (cone-degenerate) contacts: `f2`-`BL(0,0)`, `f2`-`BL(0,1)`.
+**Convergence caveat**: KKT residual 1.8e-06 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.912232 is an upper bound.
+**Rank**: 23 contact rows, 22 variables; rank 17; at fixed s rank 17 of 21, so **4 flat direction(s)**: blocked at first order (rank tolerance artefact), blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.899873 | +0.012359 | load-bearing |
+| `f1` | 3.767767 | +0.144465 | load-bearing |
+| `f2` | 3.822876 | +0.089356 | load-bearing |
+| `f3` | 3.822876 | +0.089356 | load-bearing |
+| `f4` | 3.728581 | +0.183651 | load-bearing |
+| `f5` | 3.707107 | +0.205125 | load-bearing |
+| `f6` | 3.822876 | +0.089356 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
+
+**k0 cells explained** (8): `A38/l1_nodes/node_063(L1)` `A38/l1_nodes/node_085(L1)` `A38/l1_nodes/node_111(L1)` `A38/l2_nodes/l2_p114_011(L2)` `A38/l2_nodes/l2_p70_010(L2)` `A38/l2_nodes/l2_p74_001(L2)` `A38/l3_nodes/l3_pp114_001_011(L3)` `A38/l3_nodes/l3_pp65_111_010(L3)`
+
+## K06 - a k11 packing at s* = 3.886745 on the boundary of class k0_00
+
+![K06](shadows/K06.svg)
+
+* **s\*** = 3.886745485 = s-hat +0.009661895  (s0 = 3.877084, s\* - s0 = +0.009661)
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,1) TL(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **explains** 6 alive k0 cells: A99 x3, A38 x3; levels L1:4, L2:1, L3:1; component 5, integral 1 support; 1 at tau >= budget.
+* **load-bearing squares**: `f1` `f3` `f4` `f5` `BL(0,1)` `BR(0,1)` (6 of 11); **5 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S29` (s* 3.886761, D4 map `mx`, 10 squares matched, Jaccard 0.833); `S02` (s* 3.886746, D4 map `e`, 10 squares matched, Jaccard 0.833); `S10` (s* 3.902674, D4 map `e`, 9 squares matched, Jaccard 0.692).
+* **restarts**: 77 feasible of 101; distinct minima [3.88675, 4.0, 4.00001, 4.00069, 4.10159].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.173112 | 1.514760 | 48.4355 |
+| f1 | 2.993069 | 0.500000 | 90.0000 |
+| f2 | 1.500002 | 0.500001 | 89.9999 |
+| f3 | 1.929113 | 3.180909 | 48.4355 |
+| f4 | 2.621098 | 2.454042 | 48.4355 |
+| f5 | 1.265648 | 2.432703 | 48.4355 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f2` | vertex-on-edge | -1.7e-08 | 0.0000 |
+| `f1` - `BR(0,1)` | vertex-on-edge | -1.7e-08 | 6486.3966 |
+| `f3` - `f4` | vertex-on-edge | -4.6e-07 | 0.6436 |
+| `f3` - `f5` | exactly-opposite | -1.1e-06 | 0.7105 |
+| `f4` - `BR(0,1)` | vertex-on-edge | -2.1e-13 | 0.5617 |
+| `f5` - `BL(0,1)` | vertex-on-edge | -9.1e-13 | 0.5017 |
+| `f1` - bottom wall | wall | 0 | 6486.3966 |
+| `f2` - bottom wall | wall | 0 | 0.0000 |
+| `f3` - top wall | wall | 0 | 0.9417 |
+
+**Binding**: `f1`-`BR(0,1)` (6486.397), `f1`-`bottom wall` (6486.397), `f3`-`top wall` (0.942), `f3`-`f5` (0.710), `f3`-`f4` (0.644), `f4`-`BR(0,1)` (0.562).  KKT residual 2.0e-02.  Exactly-opposite (cone-degenerate) contacts: `f3`-`f5`.
+**Convergence caveat**: KKT residual 2.0e-02 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.886745 is an upper bound.
+**Rank**: 15 contact rows, 19 variables; rank 13; at fixed s rank 13 of 18, so **5 flat direction(s)**: blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.886746 | -0.000001 | rattler |
+| `f1` | 3.886746 | -0.000000 | rattler |
+| `f2` | 3.886746 | -0.000001 | rattler |
+| `f3` | 3.822876 | +0.063870 | load-bearing |
+| `f4` | 3.767767 | +0.118979 | load-bearing |
+| `f5` | 3.767767 | +0.118979 | load-bearing |
+
+Load-bearing: `f3`, `f4`, `f5`.  Rattlers: `f0`, `f1`, `f2`.
+
+**k0 cells explained** (6): `A99/k0_00/l1_027_plain_warm(L1)` `A99/k0_00/l1_115_plain_warm(L1)` `A99/k0_00/l1_159_plain_warm(L1)` `A38/l1_nodes/node_069(L1)` `A38/l2_nodes/l2_p70_001(L2)` `A38/l3_nodes/l3_pp114_001_010(L3)`
+
+## K07 - a k9 packing at s* = 3.400000 on the boundary of class k0_00
+
+![K07](shadows/K07.svg)
+
+* **s\*** = 3.400000000 = s-hat -0.477083590  (s0 = 3.877084, s\* - s0 = -0.477084)
+* **shadow** = 0 slot squares `(none)` + 9 free squares f0..f8; a k9 packing.
+* **explains** 5 alive k0 cells: A99 x5; levels L1:5; integral 5 support; 0 at tau >= budget.
+* **load-bearing squares**: `f1` `f2` `f7` (3 of 9); **2 distinct minimised configuration(s)** share this s*.
+* **restarts**: 95 feasible of 104; distinct minima [3.4, 3.62132, 3.68199, 3.69375, 3.69905, 3.70711, 3.72858, 3.76777].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.816588 | 1.807349 | 79.1609 |
+| f1 | 0.765850 | 2.806490 | 77.9284 |
+| f2 | 1.833731 | 2.860473 | 85.2700 |
+| f3 | 0.598543 | 0.736059 | 77.1705 |
+| f4 | 0.776269 | 1.761214 | 81.8288 |
+| f5 | 1.669715 | 0.762468 | 72.5996 |
+| f6 | 2.699300 | 0.596632 | 77.4601 |
+| f7 | 2.828415 | 1.621630 | 81.0656 |
+| f8 | 2.882459 | 2.732649 | 2.0151 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f5` | vertex-on-edge | +2.1e-09 | 0.0000 |
+| `f1` - `f2` | vertex-on-edge | +1.2e-08 | 0.0000 |
+| `f1` - top wall | wall | 0 | 0.3596 |
+| `f2` - top wall | wall | 0 | 0.3462 |
+| `f3` - left wall | wall | 0 | 0.0000 |
+| `f6` - bottom wall | wall | 0 | 0.0000 |
+| `f7` - right wall | wall | 0 | 0.3539 |
+
+**Binding**: `f1`-`top wall` (0.360), `f7`-`right wall` (0.354), `f2`-`top wall` (0.346).  KKT residual 5.3e-01.
+**Convergence caveat**: KKT residual 5.3e-01 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.400000 is an upper bound.
+**Rank**: 7 contact rows, 28 variables; rank 7; at fixed s rank 7 of 27, so **20 flat direction(s)**: free (flex to at least third order), free (flex to at least third order), blocked at second order, free (flex to at least third order), blocked at second order, free (flex to at least third order), free (flex to at least third order), free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.400000 | +0.000000 | rattler |
+| `f1` | 3.400000 | +0.000000 | rattler |
+| `f2` | 3.400000 | +0.000000 | rattler |
+| `f3` | 3.400000 | +0.000000 | rattler |
+| `f4` | 3.400000 | +0.000000 | rattler |
+| `f5` | 3.400000 | +0.000000 | rattler |
+| `f6` | 3.400000 | +0.000000 | rattler |
+| `f7` | 3.400000 | +0.000000 | rattler |
+| `f8` | 3.400000 | +0.000000 | rattler |
+
+Load-bearing: none.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.
+
+**k0 cells explained** (5): `A99/k0_00/l1_005_sh2dia_warm(L1)` `A99/k0_00/l1_005_sh3_warm(L1)` `A99/k0_00/l1_203_sh3_warm(L1)` `A99/k0_00/l1_214_sh2adj_warm(L1)` `A99/k0_00/l1_214_sh3_warm(L1)`
+
+## K08 - a k10 packing at s* = 3.828427 on the boundary of class k0_00
+
+![K08](shadows/K08.svg)
+
+* **s\*** = 3.828427125 = s-hat -0.048656465  (s0 = 3.877084, s\* - s0 = -0.048657)
+* **shadow** = 0 slot squares `(none)` + 10 free squares f0..f9; a k10 packing.
+* **explains** 5 alive k0 cells: A38 x5; levels L1:4, L2:1; integral 5 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f5` `f6` `f7` `f9` (5 of 10); **3 distinct minimised configuration(s)** share this s*.
+* **restarts**: 88 feasible of 102; distinct minima [3.70711, 3.72858, 3.76777, 3.76812, 3.77119, 3.78801, 3.80316, 3.80673].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.121330 | 2.121330 | 44.6989 |
+| f1 | 0.515621 | 2.215340 | 89.6456 |
+| f2 | 3.299774 | 0.811164 | 0.6070 |
+| f3 | 3.274447 | 3.186462 | 89.7994 |
+| f4 | 2.271774 | 0.553349 | 6.4873 |
+| f5 | 0.707097 | 0.707097 | 44.6989 |
+| f6 | 1.419555 | 1.408815 | 44.6989 |
+| f7 | 3.328427 | 1.823915 | 90.0000 |
+| f8 | 0.788299 | 3.237869 | 85.0122 |
+| f9 | 2.241982 | 3.328427 | 90.0000 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f6` | vertex-on-edge | -2.1e-10 | 1.0000 |
+| `f0` - `f7` | vertex-on-edge | +3.3e-13 | 0.7260 |
+| `f0` - `f9` | vertex-on-edge | -2.0e-13 | 0.7058 |
+| `f5` - `f6` | vertex-on-edge | -6.5e-09 | 1.0000 |
+| `f5` - bottom wall | wall | 0 | 0.4974 |
+| `f5` - left wall | wall | 0 | 0.5026 |
+| `f7` - right wall | wall | 0 | 0.7260 |
+| `f9` - top wall | wall | 0 | 0.7058 |
+
+**Binding**: `f5`-`f6` (1.000), `f0`-`f6` (1.000), `f0`-`f7` (0.726), `f7`-`right wall` (0.726), `f0`-`f9` (0.706), `f9`-`top wall` (0.706).  KKT residual 1.2e-07.
+**Rank**: 12 contact rows, 31 variables; rank 12; at fixed s rank 12 of 30, so **18 flat direction(s)**: free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.707107 | +0.121320 | load-bearing |
+| `f1` | 3.771189 | +0.057238 | load-bearing |
+| `f2` | 3.707107 | +0.121320 | load-bearing |
+| `f3` | 3.707107 | +0.121320 | load-bearing |
+| `f4` | 3.400000 | +0.428427 | load-bearing |
+| `f5` | 3.707107 | +0.121321 | load-bearing |
+| `f6` | 3.400000 | +0.428427 | load-bearing |
+| `f7` | 3.707107 | +0.121320 | load-bearing |
+| `f8` | 3.400000 | +0.428427 | load-bearing |
+| `f9` | 3.707107 | +0.121320 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`, `f9`.  Rattlers: none.
+
+**k0 cells explained** (5): `A38/l1_nodes/node_017(L1)` `A38/l1_nodes/node_030(L1)` `A38/l1_nodes/node_032(L1)` `A38/l1_nodes/node_098(L1)` `A38/l2_nodes/l2_p74_010(L2)`
+
+## K09 - a k10 packing at s* = 3.788222 on the boundary of class k0_00
+
+![K09](shadows/K09.svg)
+
+* **s\*** = 3.788221847 = s-hat -0.088861743  (s0 = 3.877084, s\* - s0 = -0.088862)
+* **shadow** = 1 slot squares `BL(0,0)` + 9 free squares f0..f8; a k10 packing.
+* **explains** 3 alive k0 cells: A38 x3; levels L1:1, L2:2; integral 3 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f6` `f7` `f8` `BL(0,0)` (10 of 10); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 80 feasible of 103; distinct minima [3.70711, 3.72858, 3.76777, 3.76812, 3.77226, 3.78822, 3.79249, 3.79547].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.193465 | 2.189704 | 12.8256 |
+| f1 | 2.500000 | 3.288222 | 0.0000 |
+| f2 | 0.500000 | 3.288222 | 90.0000 |
+| f3 | 1.500000 | 3.160826 | 90.0000 |
+| f4 | 3.189704 | 2.318617 | 12.8256 |
+| f5 | 0.677951 | 2.110271 | 28.4894 |
+| f6 | 3.110271 | 1.155538 | 28.4894 |
+| f7 | 2.231686 | 0.677951 | 28.4894 |
+| f8 | 1.377711 | 1.352263 | 28.4894 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f1` | vertex-on-edge | +2.5e-11 | 0.0301 |
+| `f0` - `f4` | vertex-on-edge | +2.3e-10 | 0.0970 |
+| `f0` - `f8` | vertex-on-edge | +9.4e-08 | 0.1081 |
+| `f1` - `f3` | vertex-on-edge | +2.4e-11 | 0.0500 |
+| `f1` - `f4` | vertex-on-edge | +1.3e-15 | 0.2306 |
+| `f2` - `f3` | vertex-on-edge | -1.7e-09 | 0.0500 |
+| `f2` - `f5` | vertex-on-edge | +2.0e-14 | 0.6953 |
+| `f4` - `f6` | vertex-on-edge | -6.7e-16 | 0.2069 |
+| `f5` - `f8` | vertex-on-edge | -1.0e-08 | 0.7711 |
+| `f6` - `f7` | vertex-on-edge | -1.7e-08 | 0.4378 |
+| `f7` - `f8` | vertex-on-edge | -1.7e-08 | 0.7910 |
+| `f8` - `BL(0,0)` | vertex-on-edge | +4.5e-08 | 0.0748 |
+| `f1` - top wall | wall | 0 | 0.2552 |
+| `f2` - left wall | wall | 0 | 0.0391 |
+| `f2` - top wall | wall | 0 | 0.6916 |
+| `f4` - right wall | wall | 0 | 0.1004 |
+| `f5` - left wall | wall | 0 | 0.2605 |
+| `f6` - right wall | wall | 0 | 0.4098 |
+| `f7` - bottom wall | wall | 0 | 0.6213 |
+
+**Binding**: `f7`-`f8` (0.791), `f5`-`f8` (0.771), `f2`-`f5` (0.695), `f2`-`top wall` (0.692), `f7`-`bottom wall` (0.621), `f6`-`f7` (0.438).  KKT residual 1.2e-05.
+**Convergence caveat**: KKT residual 1.2e-05 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.788222 is an upper bound.
+**Rank**: 28 contact rows, 28 variables; rank 26; at fixed s rank 26 of 27, so **1 flat direction(s)**: blocked at first order (rank tolerance artefact)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.400000 | +0.388222 | load-bearing |
+| `f1` | 3.621320 | +0.166901 | load-bearing |
+| `f2` | 3.707107 | +0.081115 | load-bearing |
+| `f3` | 3.650035 | +0.138187 | load-bearing |
+| `f4` | 3.650035 | +0.138187 | load-bearing |
+| `f5` | 3.707107 | +0.081115 | load-bearing |
+| `f6` | 3.707107 | +0.081115 | load-bearing |
+| `f7` | 3.707107 | +0.081115 | load-bearing |
+| `f8` | 3.400000 | +0.388222 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: none.
+
+**k0 cells explained** (3): `A38/l1_nodes/node_018(L1)` `A38/l2_nodes/l2_p61_010(L2)` `A38/l2_nodes/l2_p74_011(L2)`
+
+## K10 - a k10 packing at s* = 3.822876 on the boundary of class k0_00
+
+![K10](shadows/K10.svg)
+
+* **s\*** = 3.822875659 = s-hat -0.054207931  (s0 = 3.877084, s\* - s0 = -0.054208)
+* **shadow** = 2 slot squares `BL(0,0) TR(0,1)` + 8 free squares f0..f7; a k10 packing.
+* **explains** 2 alive k0 cells: A38 x2; levels L2:2; integral 2 support; 0 at tau >= budget.
+* **load-bearing squares**: `f6` `f7` `BL(0,0)` `TR(0,1)` (4 of 10); **2 distinct minimised configuration(s)** share this s*.
+* **restarts**: 72 feasible of 101; distinct minima [3.82288, 3.87029, 3.87618, 3.91421, 3.94281, 3.97662, 4.0, 4.00002].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.915124 | 2.601084 | 26.9321 |
+| f1 | 2.118076 | 0.502381 | 0.2731 |
+| f2 | 3.185272 | 3.322876 | 90.0000 |
+| f3 | 3.219199 | 0.637125 | 13.6158 |
+| f4 | 0.743344 | 3.322701 | 0.0195 |
+| f5 | 0.502234 | 2.321412 | 89.7531 |
+| f6 | 2.343801 | 1.668898 | 24.2940 |
+| f7 | 1.354233 | 1.430547 | 24.2940 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f1` - `f7` | vertex-on-edge | +6.6e-11 | 0.0000 |
+| `f2` - `TR(0,1)` | vertex-on-edge | -7.8e-13 | 0.0000 |
+| `f4` - `f5` | vertex-on-edge | +2.9e-10 | 0.0000 |
+| `f5` - `f7` | vertex-on-edge | +2.1e-10 | 0.0000 |
+| `f6` - `f7` | vertex-on-edge | +6.7e-10 | 1.0860 |
+| `f6` - `TR(0,1)` | vertex-on-edge | -2.1e-15 | 1.2543 |
+| `f7` - `BL(0,0)` | vertex-on-edge | -1.6e-15 | 0.7786 |
+| `f2` - top wall | wall | 0 | 0.0000 |
+
+**Binding**: `f6`-`TR(0,1)` (1.254), `f6`-`f7` (1.086), `f7`-`BL(0,0)` (0.779).  KKT residual 2.1e-05.
+**Convergence caveat**: KKT residual 2.1e-05 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.822876 is an upper bound.
+**Rank**: 11 contact rows, 25 variables; rank 9; at fixed s rank 9 of 24, so **15 flat direction(s)**: free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at second order, blocked (order unclear), blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.707107 | +0.115769 | load-bearing |
+| `f1` | 3.822876 | +0.000000 | rattler |
+| `f2` | 3.822876 | +0.000000 | rattler |
+| `f3` | infeasible | - | load-bearing |
+| `f4` | 3.400000 | +0.422876 | load-bearing |
+| `f5` | 3.400000 | +0.422876 | load-bearing |
+| `f6` | 3.707107 | +0.115769 | load-bearing |
+| `f7` | 3.400000 | +0.422876 | load-bearing |
+
+Load-bearing: `f0`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: `f1`, `f2`.
+
+**k0 cells explained** (2): `A38/l2_nodes/l2_p61_111(L2)` `A38/l2_nodes/l2_p95_000(L2)`
+
+## K11 - a k10 packing at s* = 3.728581 on the boundary of class k0_00
+
+![K11](shadows/K11.svg)
+
+* **s\*** = 3.728580909 = s-hat -0.148502681  (s0 = 3.877084, s\* - s0 = -0.148503)
+* **shadow** = 1 slot squares `BL(0,1)` + 9 free squares f0..f8; a k10 packing.
+* **explains** 1 alive k0 cells: A99 x1; levels L1:1; integral 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f2` `f4` `f5` `f7` `f8` `BL(0,1)` (6 of 10); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S25` (s* 3.728606, D4 map `r90`, 8 squares matched, Jaccard 0.667); `S19` (s* 3.728581, D4 map `mx`, 7 squares matched, Jaccard 0.538).
+* **restarts**: 77 feasible of 101; distinct minima [3.70711, 3.72858, 3.76777, 3.80672, 3.82288, 3.83098, 3.88675, 3.88795].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.504222 | 1.504287 | 0.4806 |
+| f1 | 3.225612 | 3.221146 | 89.8782 |
+| f2 | 3.214572 | 0.500000 | 90.0000 |
+| f3 | 0.878226 | 0.500000 | 90.0000 |
+| f4 | 0.500000 | 2.500000 | 0.0000 |
+| f5 | 3.228581 | 1.500000 | 0.0000 |
+| f6 | 2.042731 | 0.505073 | 0.5738 |
+| f7 | 2.367275 | 2.358747 | 34.3203 |
+| f8 | 1.582380 | 3.033722 | 34.3203 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f2` - `f5` | vertex-on-edge | -1.4e-07 | 0.6710 |
+| `f3` - `BL(0,1)` | vertex-on-edge | -1.2e-09 | 0.0000 |
+| `f4` - `f8` | vertex-on-edge | -1.4e-09 | 0.5585 |
+| `f4` - `BL(0,1)` | exactly-opposite | -3.9e-07 | 0.2425 |
+| `f5` - `f7` | vertex-on-edge | -1.0e-09 | 0.8022 |
+| `f7` - `f8` | vertex-on-edge | -1.2e-07 | 0.8246 |
+| `f2` - bottom wall | wall | 0 | 0.4739 |
+| `f3` - bottom wall | wall | 0 | 0.0000 |
+| `f4` - left wall | wall | 0 | 0.3552 |
+| `f5` - right wall | wall | 0 | 0.4498 |
+| `f8` - top wall | wall | 0 | 0.9690 |
+
+**Binding**: `f8`-`top wall` (0.969), `f7`-`f8` (0.825), `f5`-`f7` (0.802), `f2`-`f5` (0.671), `f4`-`f8` (0.558), `f2`-`bottom wall` (0.474).  KKT residual 1.0e-06.  Exactly-opposite (cone-degenerate) contacts: `f4`-`BL(0,1)`.
+**Convergence caveat**: KKT residual 1.0e-06 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.728581 is an upper bound.
+**Rank**: 21 contact rows, 28 variables; rank 15; at fixed s rank 15 of 27, so **12 flat direction(s)**: blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at second order, blocked at second order, blocked at second order, blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.728581 | -0.000000 | rattler |
+| `f1` | 3.400000 | +0.328581 | load-bearing |
+| `f2` | 3.707107 | +0.021474 | load-bearing |
+| `f3` | 3.728581 | -0.000000 | rattler |
+| `f4` | 3.707107 | +0.021474 | load-bearing |
+| `f5` | 3.707107 | +0.021474 | load-bearing |
+| `f6` | 3.728581 | -0.000000 | rattler |
+| `f7` | 3.400000 | +0.328581 | load-bearing |
+| `f8` | 3.707107 | +0.021474 | load-bearing |
+
+Load-bearing: `f1`, `f2`, `f4`, `f5`, `f7`, `f8`.  Rattlers: `f0`, `f3`, `f6`.
+
+**k0 cells explained** (1): `A99/k0_00/l1_049_sh2adj_warm(L1)`
+
+## K12 - a k10 packing at s* = 3.768117 on the boundary of class k0_00
+
+![K12](shadows/K12.svg)
+
+* **s\*** = 3.768117120 = s-hat -0.108966470  (s0 = 3.877084, s\* - s0 = -0.108967)
+* **shadow** = 2 slot squares `BL(0,0) BL(0,1)` + 8 free squares f0..f7; a k10 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; integral 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f3` `f4` `f6` `f7` `BL(0,0)` (7 of 10); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 74 feasible of 101; distinct minima [3.70711, 3.72858, 3.76777, 3.76811, 3.76812, 3.77119, 3.79077, 3.82288].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.511018 | 3.268117 | 90.0000 |
+| f1 | 1.706408 | 0.706408 | 47.5473 |
+| f2 | 3.268117 | 0.500000 | 90.0000 |
+| f3 | 1.509122 | 3.268117 | 0.0000 |
+| f4 | 3.268117 | 2.268117 | 90.0000 |
+| f5 | 0.506800 | 2.599614 | 89.8425 |
+| f6 | 2.444250 | 1.386737 | 47.5473 |
+| f7 | 1.704040 | 2.061828 | 47.7570 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f4` | vertex-on-edge | -6.6e-09 | 0.7946 |
+| `f1` - `f6` | vertex-on-edge | -3.2e-07 | 1.0013 |
+| `f1` - `f7` | vertex-on-edge | +9.8e-09 | 0.0075 |
+| `f1` - `BL(0,0)` | vertex-on-edge | -2.2e-10 | 0.4811 |
+| `f3` - `f7` | vertex-on-edge | +8.3e-09 | 0.0037 |
+| `f4` - `f6` | vertex-on-edge | -5.4e-11 | 1.0009 |
+| `f6` - `f7` | vertex-on-edge | +7.1e-08 | 0.0040 |
+| `f0` - top wall | wall | 0 | 0.7507 |
+| `f1` - bottom wall | wall | 0 | 0.5259 |
+| `f4` - right wall | wall | 0 | 0.7165 |
+
+**Binding**: `f1`-`f6` (1.001), `f4`-`f6` (1.001), `f0`-`f4` (0.795), `f0`-`top wall` (0.751), `f4`-`right wall` (0.717), `f1`-`bottom wall` (0.526).  KKT residual 9.7e-03.
+**Convergence caveat**: KKT residual 9.7e-03 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.768117 is an upper bound.
+**Rank**: 14 contact rows, 25 variables; rank 13; at fixed s rank 13 of 24, so **11 flat direction(s)**: blocked at first order (rank tolerance artefact), blocked at second order, free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.400000 | +0.368117 | load-bearing |
+| `f1` | 3.400000 | +0.368117 | load-bearing |
+| `f2` | 3.400000 | +0.368117 | load-bearing |
+| `f3` | 3.707107 | +0.061010 | load-bearing |
+| `f4` | 3.400000 | +0.368117 | load-bearing |
+| `f5` | 3.693750 | +0.074367 | load-bearing |
+| `f6` | 3.400000 | +0.368117 | load-bearing |
+| `f7` | 3.400000 | +0.368117 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_031(L1)`
+
+## K13 - a k10 packing at s* = 3.803539 on the boundary of class k0_00
+
+![K13](shadows/K13.svg)
+
+* **s\*** = 3.803539311 = s-hat -0.073544279  (s0 = 3.877084, s\* - s0 = -0.073545)
+* **shadow** = 1 slot squares `BL(0,0)` + 9 free squares f0..f8; a k10 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; integral 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f4` `f5` `f6` `f7` `f8` `BL(0,0)` (9 of 10); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 71 feasible of 101; distinct minima [3.70711, 3.72858, 3.75534, 3.76777, 3.77119, 3.79547, 3.80354, 3.82288].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.500000 | 2.553541 | 90.0000 |
+| f1 | 0.500000 | 3.297072 | 90.0000 |
+| f2 | 2.233426 | 0.500000 | 0.0000 |
+| f3 | 3.254575 | 0.825267 | 5.7154 |
+| f4 | 3.141720 | 2.330581 | 24.3828 |
+| f5 | 1.373769 | 1.386523 | 24.3828 |
+| f6 | 2.508995 | 3.141720 | 24.3827 |
+| f7 | 2.346915 | 1.661819 | 24.3828 |
+| f8 | 0.500000 | 2.280432 | 0.0000 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f1` | vertex-on-edge | +8.7e-10 | 0.0808 |
+| `f0` - `f6` | vertex-on-edge | +5.6e-15 | 0.1857 |
+| `f0` - `f7` | vertex-on-edge | +5.0e-15 | 0.0843 |
+| `f0` - `f8` | vertex-on-edge | -2.2e-08 | 0.1338 |
+| `f2` - `f7` | vertex-on-edge | +3.9e-13 | 0.0924 |
+| `f4` - `f6` | vertex-on-edge | -1.1e-15 | 0.4135 |
+| `f4` - `f7` | vertex-on-edge | -2.8e-11 | 0.9082 |
+| `f5` - `f7` | vertex-on-edge | -1.8e-08 | 0.8576 |
+| `f5` - `BL(0,0)` | vertex-on-edge | -2.3e-12 | 0.6119 |
+| `f1` - left wall | wall | 0 | 0.0547 |
+| `f2` - bottom wall | wall | 0 | 0.0647 |
+| `f4` - right wall | wall | 0 | 0.9881 |
+| `f6` - top wall | wall | 0 | 0.4479 |
+| `f8` - left wall | wall | 0 | 0.0986 |
+
+**Binding**: `f4`-`right wall` (0.988), `f4`-`f7` (0.908), `f5`-`f7` (0.858), `f5`-`BL(0,0)` (0.612), `f6`-`top wall` (0.448), `f4`-`f6` (0.413).  KKT residual 4.6e-05.
+**Convergence caveat**: KKT residual 4.6e-05 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.803539 is an upper bound.
+**Rank**: 22 contact rows, 28 variables; rank 22; at fixed s rank 22 of 27, so **5 flat direction(s)**: blocked at second order, blocked at second order, blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.707107 | +0.096433 | load-bearing |
+| `f1` | 3.787914 | +0.015625 | load-bearing |
+| `f2` | 3.721306 | +0.082233 | load-bearing |
+| `f3` | 3.803539 | +0.000000 | rattler |
+| `f4` | 3.400000 | +0.403539 | load-bearing |
+| `f5` | 3.400000 | +0.403539 | load-bearing |
+| `f6` | 3.400000 | +0.403539 | load-bearing |
+| `f7` | 3.707107 | +0.096433 | load-bearing |
+| `f8` | 3.803539 | +0.000000 | rattler |
+
+Load-bearing: `f0`, `f1`, `f2`, `f4`, `f5`, `f6`, `f7`.  Rattlers: `f3`, `f8`.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_143(L1)`
+
+## K14 - a k10 packing at s* = 3.804138 on the boundary of class k0_00
+
+![K14](shadows/K14.svg)
+
+* **s\*** = 3.804137638 = s-hat -0.072945952  (s0 = 3.877084, s\* - s0 = -0.072946)
+* **shadow** = 2 slot squares `BL(0,0) BR(0,0)` + 8 free squares f0..f7; a k10 packing.
+* **explains** 1 alive k0 cells: A99 x1; levels L1:1; integral 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f2` `f3` `f4` `f5` `f6` `f7` `BL(0,0)` `BR(0,0)` (9 of 10); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 72 feasible of 101; distinct minima [3.70711, 3.72858, 3.76777, 3.76812, 3.76929, 3.77119, 3.78754, 3.79547].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.246650 | 1.651641 | 22.1552 |
+| f1 | 1.538982 | 0.527718 | 0.1382 |
+| f2 | 3.304136 | 2.304137 | 0.0002 |
+| f3 | 2.936007 | 3.304136 | 0.0002 |
+| f4 | 1.461234 | 3.152497 | 22.1552 |
+| f5 | 0.651641 | 2.489085 | 22.1552 |
+| f6 | 2.433359 | 1.388886 | 22.1552 |
+| f7 | 2.082233 | 2.325635 | 22.1552 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f5` | vertex-on-edge | -7.6e-09 | 0.1701 |
+| `f0` - `f6` | vertex-on-edge | -3.4e-09 | 0.0791 |
+| `f0` - `BL(0,0)` | vertex-on-edge | -2.2e-16 | 0.1310 |
+| `f2` - `f3` | vertex-on-edge | -5.3e-09 | 0.0270 |
+| `f2` - `f6` | vertex-on-edge | +8.8e-14 | 0.0722 |
+| `f4` - `f5` | vertex-on-edge | -1.2e-08 | 0.3939 |
+| `f4` - `f7` | vertex-on-edge | -1.6e-08 | 0.9414 |
+| `f6` - `f7` | vertex-on-edge | -3.1e-08 | 0.9145 |
+| `f6` - `BR(0,0)` | vertex-on-edge | -7.8e-16 | 0.6935 |
+| `f2` - right wall | wall | 0 | 0.0660 |
+| `f3` - top wall | wall | 0 | 0.0255 |
+| `f4` - top wall | wall | 0 | 1.0049 |
+| `f5` - left wall | wall | 0 | 0.3004 |
+
+**Binding**: `f4`-`top wall` (1.005), `f4`-`f7` (0.941), `f6`-`f7` (0.914), `f6`-`BR(0,0)` (0.694), `f4`-`f5` (0.394), `f5`-`left wall` (0.300).  KKT residual 2.8e-02.
+**Convergence caveat**: KKT residual 2.8e-02 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.804138 is an upper bound.
+**Rank**: 19 contact rows, 25 variables; rank 19; at fixed s rank 18 of 24, so **6 flat direction(s)**: blocked at first order (rank tolerance artefact), blocked at second order, blocked (order unclear), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.400000 | +0.404138 | load-bearing |
+| `f1` | 3.400000 | +0.404138 | load-bearing |
+| `f2` | 3.650035 | +0.154103 | load-bearing |
+| `f3` | 3.650065 | +0.154072 | load-bearing |
+| `f4` | 3.650065 | +0.154072 | load-bearing |
+| `f5` | 3.707107 | +0.097031 | load-bearing |
+| `f6` | 3.400000 | +0.404138 | load-bearing |
+| `f7` | 3.707107 | +0.097031 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
+
+**k0 cells explained** (1): `A99/k0_00/l1_181_plain_warm(L1)`
+
+## K15 - a k10 packing at s* = 3.828944 on the boundary of class k0_00
+
+![K15](shadows/K15.svg)
+
+* **s\*** = 3.828944345 = s-hat -0.048139245  (s0 = 3.877084, s\* - s0 = -0.048140)
+* **shadow** = 1 slot squares `BL(0,0)` + 9 free squares f0..f8; a k10 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L2:1; integral 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f2` `f4` `f5` `f6` `f7` `f8` `BL(0,0)` (8 of 10); **1 distinct minimised configuration(s)** share this s*.
+* the free squares share one tilt: 33.8113 deg.
+* **restarts**: 80 feasible of 101; distinct minima [3.70711, 3.72858, 3.75534, 3.76777, 3.76812, 3.77119, 3.79547, 3.79548].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.933346 | 2.301660 | 33.8302 |
+| f1 | 3.134691 | 0.693322 | 33.6602 |
+| f2 | 2.578499 | 3.135232 | 33.8302 |
+| f3 | 1.807176 | 0.693712 | 33.8300 |
+| f4 | 1.375677 | 3.133747 | 33.8303 |
+| f5 | 1.250446 | 1.524410 | 33.8302 |
+| f6 | 3.135232 | 2.304541 | 33.8302 |
+| f7 | 2.491601 | 1.468699 | 33.8302 |
+| f8 | 0.693712 | 2.355100 | 33.8302 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f2` | vertex-on-edge | -4.6e-12 | 0.2059 |
+| `f0` - `f5` | vertex-on-edge | -5.4e-08 | 0.2171 |
+| `f2` - `f4` | vertex-on-edge | +6.0e-11 | 0.0111 |
+| `f2` - `f6` | exactly-opposite | -9.7e-08 | 0.4851 |
+| `f4` - `f8` | vertex-on-edge | -1.9e-12 | 0.0095 |
+| `f5` - `f7` | vertex-on-edge | -1.5e-12 | 0.8657 |
+| `f5` - `f8` | exactly-opposite | +6.3e-14 | 0.0049 |
+| `f5` - `BL(0,0)` | vertex-on-edge | -2.0e-13 | 0.7465 |
+| `f6` - `f7` | vertex-on-edge | -1.1e-08 | 0.8191 |
+| `f2` - top wall | wall | 0 | 0.5697 |
+| `f3` - bottom wall | wall | 0 | 0.0000 |
+| `f6` - right wall | wall | 0 | 0.8511 |
+| `f8` - left wall | wall | 0 | 0.0038 |
+
+**Binding**: `f5`-`f7` (0.866), `f6`-`right wall` (0.851), `f6`-`f7` (0.819), `f5`-`BL(0,0)` (0.747), `f2`-`top wall` (0.570), `f2`-`f6` (0.485).  KKT residual 2.3e-03.  Exactly-opposite (cone-degenerate) contacts: `f2`-`f6`, `f5`-`f8`.
+**Convergence caveat**: KKT residual 2.3e-03 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.828944 is an upper bound.
+**Rank**: 25 contact rows, 28 variables; rank 23; at fixed s rank 22 of 27, so **5 flat direction(s)**: free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.804243 | +0.024702 | load-bearing |
+| `f1` | 3.400000 | +0.428944 | load-bearing |
+| `f2` | 3.800851 | +0.028094 | load-bearing |
+| `f3` | 3.400000 | +0.428944 | load-bearing |
+| `f4` | 3.400000 | +0.428944 | load-bearing |
+| `f5` | 3.681981 | +0.146964 | load-bearing |
+| `f6` | 3.621320 | +0.207624 | load-bearing |
+| `f7` | 3.400000 | +0.428944 | load-bearing |
+| `f8` | 3.681980 | +0.146964 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: none.
+
+**Common-tilt sweep**
+
+| tilt (deg) | 24.83 | 27.83 | 29.83 | 31.83 | 32.83 | 33.43 | 33.83 | 34.23 | 34.83 | 35.83 | 37.83 | 39.83 | 42.83 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| s* | 3.834093 | 3.831367 | 3.830206 | 3.829432 | 3.829158 | 3.829023 | 3.828944 | 3.833151 | 3.839183 | 3.848481 | 3.864228 | 3.876149 | 3.904350 |
+
+**k0 cells explained** (1): `A38/l2_nodes/l2_p61_001(L2)`
+
+## K16 - a k10 packing at s* = 3.898863 on the boundary of class k0_00
+
+![K16](shadows/K16.svg)
+
+* **s\*** = 3.898862588 = s-hat +0.021778998  (s0 = 3.877084, s\* - s0 = +0.021779)
+* **shadow** = 3 slot squares `BL(0,0) BR(0,0) TL(0,1)` + 7 free squares f0..f6; a k10 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L3:1; integral 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f6` `BL(0,0)` `TL(0,1)` (9 of 10); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S29` (s* 3.886761, D4 map `r180`, 7 squares matched, Jaccard 0.500); `S02` (s* 3.886746, D4 map `my`, 7 squares matched, Jaccard 0.500).
+* **restarts**: 77 feasible of 101; distinct minima [3.88562, 3.89704, 3.94767, 3.94977, 3.97662, 3.98415, 4.0, 4.18187].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.260811 | 1.463782 | 40.6491 |
+| f1 | 2.601759 | 1.437080 | 40.6491 |
+| f2 | 3.398863 | 2.358592 | 90.0000 |
+| f3 | 2.519092 | 3.225409 | 27.2523 |
+| f4 | 1.394270 | 3.225334 | 27.2523 |
+| f5 | 1.934315 | 2.214450 | 40.6491 |
+| f6 | 1.912236 | 0.705069 | 40.6491 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f5` | vertex-on-edge | -1.1e-08 | 0.3085 |
+| `f0` - `f6` | exactly-opposite | -5.4e-09 | 0.5095 |
+| `f0` - `BL(0,0)` | vertex-on-edge | +1.7e-10 | 0.5360 |
+| `f0` - `TL(0,1)` | vertex-on-edge | +7.2e-13 | 0.1123 |
+| `f1` - `f2` | vertex-on-edge | -7.3e-14 | 0.6143 |
+| `f1` - `f6` | vertex-on-edge | -8.4e-09 | 0.6013 |
+| `f2` - `f3` | vertex-on-edge | +4.5e-14 | 0.4839 |
+| `f3` - `f4` | vertex-on-edge | -1.9e-12 | 0.0323 |
+| `f3` - `f5` | vertex-on-edge | -9.6e-13 | 0.2889 |
+| `f4` - `TL(0,1)` | vertex-on-edge | +2.8e-10 | 0.0207 |
+| `f2` - right wall | wall | 0 | 0.6959 |
+| `f3` - top wall | wall | 0 | 0.6405 |
+| `f6` - bottom wall | wall | 0 | 0.1358 |
+
+**Binding**: `f2`-`right wall` (0.696), `f3`-`top wall` (0.641), `f1`-`f2` (0.614), `f1`-`f6` (0.601), `f0`-`BL(0,0)` (0.536), `f0`-`f6` (0.510).  KKT residual 7.5e-02.  Exactly-opposite (cone-degenerate) contacts: `f0`-`f6`.
+**Convergence caveat**: KKT residual 7.5e-02 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.898863 is an upper bound.
+**Rank**: 20 contact rows, 22 variables; rank 18; at fixed s rank 18 of 21, so **3 flat direction(s)**: blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.776106 | +0.122757 | load-bearing |
+| `f1` | 3.767792 | +0.131071 | load-bearing |
+| `f2` | 3.773447 | +0.125415 | load-bearing |
+| `f3` | 3.773447 | +0.125415 | load-bearing |
+| `f4` | 3.820075 | +0.078788 | load-bearing |
+| `f5` | 3.883357 | +0.015506 | load-bearing |
+| `f6` | 3.822876 | +0.075987 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l3_nodes/l3_pp114_001_001(L3)`
+
+## K17 - a k11 packing at s* = 3.912259 on the boundary of class k0_00
+
+![K17](shadows/K17.svg)
+
+* **s\*** = 3.912259346 = s-hat +0.035175756  (s0 = 3.877084, s\* - s0 = +0.035175)
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) TL(1,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; integral 1 support; 1 at tau >= budget.
+* **load-bearing squares**: `f0` `f3` `f4` `f5` `f6` `BL(0,0)` `BL(0,1)` `TL(1,0)` `TR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S32` (s* 3.912250, D4 map `e`, 10 squares matched, Jaccard 0.833); `S05` (s* 3.912232, D4 map `e`, 9 squares matched, Jaccard 0.692); `S10` (s* 3.902674, D4 map `diag`, 8 squares matched, Jaccard 0.571).
+* **restarts**: 78 feasible of 101; distinct minima [3.91226, 4.0, 4.08342].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.395758 | 1.339403 | 24.1804 |
+| f1 | 0.500000 | 3.185273 | 90.0000 |
+| f2 | 3.389124 | 0.510459 | 89.7582 |
+| f3 | 3.412259 | 1.909753 | 90.0000 |
+| f4 | 2.456405 | 2.661281 | 44.9230 |
+| f5 | 1.500070 | 0.500070 | 0.0080 |
+| f6 | 1.496270 | 2.193507 | 41.4706 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f3` | vertex-on-edge | -2.6e-12 | 0.6872 |
+| `f0` - `f5` | vertex-on-edge | +2.2e-12 | 0.6872 |
+| `f1` - `TL(1,0)` | vertex-on-edge | -1.6e-10 | 0.0000 |
+| `f3` - `f4` | vertex-on-edge | +1.0e-13 | 0.3914 |
+| `f4` - `f6` | vertex-on-edge | +3.9e-12 | 0.1935 |
+| `f4` - `TL(1,0)` | vertex-on-edge | -4.4e-14 | 0.3302 |
+| `f4` - `TR(0,0)` | vertex-on-edge | +5.0e-13 | 0.2236 |
+| `f5` - `BL(0,0)` | exactly-opposite | +6.5e-13 | 0.2675 |
+| `f5` - `BL(0,1)` | exactly-opposite | +9.8e-09 | 1555.1622 |
+| `f6` - `BL(0,1)` | vertex-on-edge | -4.5e-12 | 0.1311 |
+| `f1` - left wall | wall | 0 | 0.0000 |
+| `f3` - right wall | wall | 0 | 0.8970 |
+| `f5` - bottom wall | wall | 0 | 1555.3365 |
+
+**Binding**: `f5`-`bottom wall` (1555.337), `f5`-`BL(0,1)` (1555.162), `f3`-`right wall` (0.897), `f0`-`f5` (0.687), `f0`-`f3` (0.687), `f3`-`f4` (0.391).  KKT residual 1.0e-06.  Exactly-opposite (cone-degenerate) contacts: `f5`-`BL(0,0)`, `f5`-`BL(0,1)`.
+**Convergence caveat**: KKT residual 1.0e-06 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.912259 is an upper bound.
+**Rank**: 18 contact rows, 22 variables; rank 14; at fixed s rank 13 of 21, so **8 flat direction(s)**: blocked at second order, blocked at first order (rank tolerance artefact), blocked at second order, blocked at second order, blocked at second order, blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.822876 | +0.089384 | load-bearing |
+| `f1` | 3.912232 | +0.000027 | load-bearing |
+| `f2` | 3.912232 | +0.000027 | load-bearing |
+| `f3` | 3.822876 | +0.089384 | load-bearing |
+| `f4` | 3.707107 | +0.205153 | load-bearing |
+| `f5` | 3.822876 | +0.089384 | load-bearing |
+| `f6` | 3.899873 | +0.012386 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_079(L1)`
+
+## K18 - a k11 packing at s* = 3.915298 on the boundary of class k0_00
+
+![K18](shadows/K18.svg)
+
+* **s\*** = 3.915297623 = s-hat +0.038214033  (s0 = 3.877084, s\* - s0 = +0.038214)
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L2:1; component 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `BL(0,0)` `BL(0,1)` `BR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 73 feasible of 101; distinct minima [3.91223, 3.91421, 3.9153, 3.99885, 4.0, 4.00001, 4.00148].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.450782 | 2.596311 | 50.7865 |
+| f1 | 3.211794 | 1.947206 | 50.7865 |
+| f2 | 1.500000 | 0.500000 | 90.0000 |
+| f3 | 1.662337 | 3.211794 | 50.7865 |
+| f4 | 2.478167 | 1.255158 | 50.7859 |
+| f5 | 1.703504 | 1.887533 | 50.7859 |
+| f6 | 0.703504 | 2.703505 | 50.7861 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f1` | vertex-on-edge | +8.9e-13 | 0.3930 |
+| `f0` - `f3` | vertex-on-edge | -1.9e-07 | 0.3675 |
+| `f1` - `f4` | vertex-on-edge | +9.1e-14 | 0.3713 |
+| `f2` - `f4` | vertex-on-edge | +2.2e-13 | 0.3881 |
+| `f2` - `BL(0,0)` | exactly-opposite | +5.3e-09 | 0.1916 |
+| `f3` - `f5` | vertex-on-edge | -8.5e-12 | 0.3699 |
+| `f4` - `f5` | vertex-on-edge | +8.3e-11 | 0.4555 |
+| `f4` - `BR(0,0)` | vertex-on-edge | +1.2e-12 | 0.3959 |
+| `f5` - `BL(0,1)` | vertex-on-edge | +5.3e-15 | 0.3857 |
+| `f1` - right wall | wall | 0 | 0.5527 |
+| `f2` - bottom wall | wall | 0 | 0.2349 |
+| `f3` - top wall | wall | 0 | 0.5012 |
+| `f6` - left wall | wall | 0 | 0.0000 |
+
+**Binding**: `f1`-`right wall` (0.553), `f3`-`top wall` (0.501), `f4`-`f5` (0.455), `f4`-`BR(0,0)` (0.396), `f0`-`f1` (0.393), `f2`-`f4` (0.388).  KKT residual 1.2e-01.  Exactly-opposite (cone-degenerate) contacts: `f2`-`BL(0,0)`.
+**Convergence caveat**: KKT residual 1.2e-01 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.915298 is an upper bound.
+**Rank**: 21 contact rows, 22 variables; rank 19; at fixed s rank 19 of 21, so **2 flat direction(s)**: free (flex to at least third order), free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.767768 | +0.147529 | load-bearing |
+| `f1` | 3.822876 | +0.092422 | load-bearing |
+| `f2` | 3.787987 | +0.127311 | load-bearing |
+| `f3` | 3.885621 | +0.029677 | load-bearing |
+| `f4` | 3.795474 | +0.119823 | load-bearing |
+| `f5` | 3.903986 | +0.011312 | load-bearing |
+| `f6` | 3.885629 | +0.029669 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l2_nodes/l2_p114_000(L2)`
+
+## K19 - a k11 packing at s* = 3.916931 on the boundary of class k0_00
+
+![K19](shadows/K19.svg)
+
+* **s\*** = 3.916930857 = s-hat +0.039847267  (s0 = 3.877084, s\* - s0 = +0.039847)
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(0,2) BR(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `BL(0,0)` `BL(0,1)` `BL(0,2)` `BR(0,0)` `TR(0,0)` (11 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S33` (s* 3.916931, D4 map `e`, 11 squares matched, Jaccard 1.000); `S34` (s* 3.917360, D4 map `e`, 10 squares matched, Jaccard 0.833); `S35` (s* 3.917433, D4 map `e`, 10 squares matched, Jaccard 0.833).
+* **restarts**: 81 feasible of 101; distinct minima [3.90924, 3.91693, 3.92731, 3.94281, 3.96236, 3.99968, 4.0, 4.03429].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.500000 | 1.953982 | 90.0000 |
+| f1 | 3.210293 | 1.993346 | 47.0877 |
+| f2 | 2.481367 | 1.255725 | 51.4448 |
+| f3 | 1.500000 | 0.500000 | 90.0000 |
+| f4 | 2.435137 | 2.713261 | 39.9969 |
+| f5 | 1.474370 | 3.212518 | 39.9969 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f2` | vertex-on-edge | +6.7e-15 | 0.4782 |
+| `f0` - `f4` | vertex-on-edge | +8.9e-15 | 0.4617 |
+| `f0` - `BL(0,1)` | vertex-on-edge | +8.7e-10 | 0.2936 |
+| `f0` - `BL(0,2)` | vertex-on-edge | +2.0e-09 | 0.2789 |
+| `f1` - `f2` | vertex-on-edge | -2.4e-10 | 0.1649 |
+| `f1` - `f4` | vertex-on-edge | -2.4e-10 | 0.1766 |
+| `f2` - `f3` | vertex-on-edge | -6.0e-15 | 0.1522 |
+| `f2` - `BR(0,0)` | vertex-on-edge | -1.5e-14 | 0.4167 |
+| `f3` - `BL(0,0)` | exactly-opposite | +1.6e-09 | 0.0740 |
+| `f3` - `BL(0,1)` | exactly-opposite | +7.8e-09 | 0.0000 |
+| `f4` - `f5` | vertex-on-edge | -9.5e-08 | 0.1642 |
+| `f4` - `TR(0,0)` | vertex-on-edge | -9.8e-15 | 0.5403 |
+| `f5` - `BL(0,2)` | vertex-on-edge | -7.8e-15 | 0.0964 |
+| `f1` - right wall | wall | 0 | 0.2213 |
+| `f3` - bottom wall | wall | 0 | 0.0929 |
+| `f5` - top wall | wall | 0 | 0.2101 |
+
+**Binding**: `f4`-`TR(0,0)` (0.540), `f0`-`f2` (0.478), `f0`-`f4` (0.462), `f2`-`BR(0,0)` (0.417), `f0`-`BL(0,1)` (0.294), `f0`-`BL(0,2)` (0.279).  KKT residual 1.2e-05.  Exactly-opposite (cone-degenerate) contacts: `f3`-`BL(0,0)`, `f3`-`BL(0,1)`.
+**Convergence caveat**: KKT residual 1.2e-05 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.916931 is an upper bound.
+**Rank**: 24 contact rows, 19 variables; rank 17; at fixed s rank 17 of 18, so **1 flat direction(s)**: blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.870287 | +0.046643 | load-bearing |
+| `f1` | 3.895284 | +0.021647 | load-bearing |
+| `f2` | 3.771189 | +0.145742 | load-bearing |
+| `f3` | 3.894427 | +0.022504 | load-bearing |
+| `f4` | 3.707107 | +0.209824 | load-bearing |
+| `f5` | 3.707107 | +0.209824 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_053(L1)`
+
+## K20 - a k11 packing at s* = 3.924402 on the boundary of class k0_00
+
+![K20](shadows/K20.svg)
+
+* **s\*** = 3.924402484 = s-hat +0.047318894  (s0 = 3.877084, s\* - s0 = +0.047318)
+* **shadow** = 2 slot squares `BL(0,0) TR(0,0)` + 9 free squares f0..f8; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L2:1; component 1 support; 1 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f4` `f5` `f6` `f7` `f8` `BL(0,0)` `TR(0,0)` (10 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S40` (s* 3.940518, D4 map `my`, 7 squares matched, Jaccard 0.500).
+* **restarts**: 74 feasible of 101; distinct minima [3.88675, 3.90267, 3.91223, 3.91728, 3.9244, 3.92862, 3.92891, 3.93794].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.549711 | 2.521606 | 22.4216 |
+| f1 | 2.424402 | 3.424402 | 90.0000 |
+| f2 | 3.424402 | 0.873655 | 90.0000 |
+| f3 | 0.509690 | 3.396864 | 0.4592 |
+| f4 | 2.424402 | 0.500000 | 90.0000 |
+| f5 | 0.500000 | 2.042984 | 90.0000 |
+| f6 | 2.356587 | 1.703633 | 38.4409 |
+| f7 | 3.221924 | 2.221924 | 38.4409 |
+| f8 | 1.438071 | 1.252339 | 38.4409 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f1` | vertex-on-edge | +2.2e-15 | 0.2774 |
+| `f0` - `f5` | vertex-on-edge | -5.6e-16 | 0.2970 |
+| `f1` - `TR(0,0)` | exactly-opposite | -5.5e-10 | 0.2388 |
+| `f2` - `f4` | vertex-on-edge | -2.4e-10 | 0.1840 |
+| `f4` - `f8` | vertex-on-edge | -6.7e-16 | 0.2409 |
+| `f5` - `f8` | vertex-on-edge | +8.9e-16 | 0.2089 |
+| `f6` - `f7` | vertex-on-edge | -3.1e-10 | 0.5358 |
+| `f6` - `f8` | vertex-on-edge | +8.9e-15 | 0.5207 |
+| `f7` - `TR(0,0)` | vertex-on-edge | +1.1e-15 | 0.3522 |
+| `f8` - `BL(0,0)` | vertex-on-edge | +2.2e-16 | 0.3612 |
+| `f1` - top wall | wall | 0 | 0.1872 |
+| `f2` - right wall | wall | 0 | 0.2073 |
+| `f4` - bottom wall | wall | 0 | 0.1316 |
+| `f5` - left wall | wall | 0 | 0.2873 |
+| `f7` - right wall | wall | 0 | 0.4385 |
+
+**Binding**: `f6`-`f7` (0.536), `f6`-`f8` (0.521), `f7`-`right wall` (0.438), `f8`-`BL(0,0)` (0.361), `f7`-`TR(0,0)` (0.352), `f0`-`f5` (0.297).  KKT residual 1.3e-01.  Exactly-opposite (cone-degenerate) contacts: `f1`-`TR(0,0)`.
+**Convergence caveat**: KKT residual 1.3e-01 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.924402 is an upper bound.
+**Rank**: 25 contact rows, 28 variables; rank 21; at fixed s rank 21 of 27, so **6 flat direction(s)**: blocked at first order (rank tolerance artefact), blocked at second order, blocked at second order, blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.822876 | +0.101527 | load-bearing |
+| `f1` | 3.858216 | +0.066186 | load-bearing |
+| `f2` | 3.707107 | +0.217296 | load-bearing |
+| `f3` | 3.924402 | +0.000000 | rattler |
+| `f4` | 3.707107 | +0.217296 | load-bearing |
+| `f5` | 3.858216 | +0.066186 | load-bearing |
+| `f6` | 3.822876 | +0.101527 | load-bearing |
+| `f7` | 3.899873 | +0.024530 | load-bearing |
+| `f8` | 3.728581 | +0.195821 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: `f3`.
+
+**k0 cells explained** (1): `A38/l2_nodes/l2_p114_001(L2)`
+
+## K21 - a k11 packing at s* = 3.925275 on the boundary of class k0_00
+
+![K21](shadows/K21.svg)
+
+* **s\*** = 3.925275351 = s-hat +0.048191761  (s0 = 3.877084, s\* - s0 = +0.048191)
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **explains** 1 alive k0 cells: A85 x1; levels L1:1; component 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f2` `f3` `f4` `f5` `BL(0,0)` `BR(0,0)` `TL(0,0)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S39` (s* 3.932425, D4 map `my`, 9 squares matched, Jaccard 0.692); `S41` (s* 3.940838, D4 map `e`, 8 squares matched, Jaccard 0.571); `S04` (s* 3.822876, D4 map `e`, 2 squares matched, Jaccard 0.105); `S14` (s* 3.767767, D4 map `e`, 2 squares matched, Jaccard 0.105).
+* **restarts**: 81 feasible of 101; distinct minima [3.89723, 3.91223, 3.92529, 3.95842, 3.96583, 4.0, 4.00001, 4.12132].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.526567 | 1.306583 | 46.2301 |
+| f1 | 1.625965 | 2.030828 | 39.7254 |
+| f2 | 1.500000 | 3.425275 | 90.0000 |
+| f3 | 2.457105 | 2.679651 | 46.2300 |
+| f4 | 1.706944 | 0.706944 | 46.2301 |
+| f5 | 3.218332 | 2.028707 | 46.2300 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f3` | vertex-on-edge | -1.1e-08 | 0.0637 |
+| `f0` - `f4` | vertex-on-edge | -1.7e-08 | 0.6186 |
+| `f0` - `f5` | exactly-opposite | -1.5e-07 | 0.6267 |
+| `f0` - `BR(0,0)` | vertex-on-edge | +6.4e-15 | 0.0503 |
+| `f2` - `f3` | vertex-on-edge | -5.1e-11 | 0.7028 |
+| `f2` - `TL(0,0)` | exactly-opposite | -6.6e-09 | 0.3928 |
+| `f3` - `f5` | vertex-on-edge | -2.4e-07 | 0.6483 |
+| `f4` - `BL(0,0)` | vertex-on-edge | +1.4e-15 | 0.3008 |
+| `f2` - top wall | wall | 0 | 0.5132 |
+| `f4` - bottom wall | wall | 0 | 0.3140 |
+| `f5` - right wall | wall | 0 | 0.8888 |
+
+**Binding**: `f5`-`right wall` (0.889), `f2`-`f3` (0.703), `f3`-`f5` (0.648), `f0`-`f5` (0.627), `f0`-`f4` (0.619), `f2`-`top wall` (0.513).  KKT residual 1.1e-08.  Exactly-opposite (cone-degenerate) contacts: `f0`-`f5`, `f2`-`TL(0,0)`.
+**Rank**: 21 contact rows, 19 variables; rank 16; at fixed s rank 15 of 18, so **3 flat direction(s)**: free (flex to at least third order), free (flex to at least third order), free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.767767 | +0.157508 | load-bearing |
+| `f1` | 3.924003 | +0.001272 | load-bearing |
+| `f2` | 3.828427 | +0.096848 | load-bearing |
+| `f3` | infeasible | - | load-bearing |
+| `f4` | 3.822876 | +0.102400 | load-bearing |
+| `f5` | 3.767774 | +0.157501 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
+
+**k0 cells explained** (1): `A85/k0_00/s1int_l1_008(L1)`
+
+## K22 - a k11 packing at s* = 3.943894 on the boundary of class k0_00
+
+![K22](shadows/K22.svg)
+
+* **s\*** = 3.943894303 = s-hat +0.066810713  (s0 = 3.877084, s\* - s0 = +0.066810)
+* **shadow** = 1 slot squares `BL(0,0)` + 10 free squares f0..f9; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 1 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f3` `f4` `f6` `f7` `f8` `f9` `BL(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 69 feasible of 101; distinct minima [3.90267, 3.91223, 3.92471, 3.92627, 3.94281, 3.94389, 3.95636, 3.97117].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.705540 | 2.375800 | 48.8146 |
+| f1 | 2.388556 | 0.500000 | 90.0000 |
+| f2 | 0.777076 | 3.443894 | 90.0000 |
+| f3 | 2.238354 | 3.238354 | 48.8146 |
+| f4 | 3.443894 | 3.443894 | 90.0000 |
+| f5 | 3.435814 | 0.756134 | 89.3951 |
+| f6 | 0.500000 | 2.443893 | 90.0000 |
+| f7 | 3.443894 | 2.443894 | 90.0000 |
+| f8 | 2.462500 | 1.706379 | 47.5999 |
+| f9 | 1.237772 | 1.456332 | 48.8146 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f3` | vertex-on-edge | -6.2e-09 | 0.4863 |
+| `f0` - `f6` | vertex-on-edge | +1.1e-14 | 0.3793 |
+| `f0` - `f8` | vertex-on-edge | -2.3e-14 | 0.3169 |
+| `f0` - `f9` | vertex-on-edge | -4.2e-08 | 0.2330 |
+| `f1` - `f8` | vertex-on-edge | +3.7e-14 | 0.4229 |
+| `f3` - `f4` | vertex-on-edge | +2.0e-13 | 0.3178 |
+| `f4` - `f7` | exactly-opposite | -1.3e-11 | 0.4116 |
+| `f7` - `f8` | vertex-on-edge | +1.8e-14 | 0.5273 |
+| `f8` - `f9` | vertex-on-edge | +2.5e-09 | 0.2197 |
+| `f9` - `BL(0,0)` | vertex-on-edge | -7.0e-14 | 0.3100 |
+| `f1` - bottom wall | wall | 0 | 0.2998 |
+| `f3` - top wall | wall | 0 | 0.3609 |
+| `f4` - right wall | wall | 0 | 0.4291 |
+| `f4` - top wall | wall | 0 | 0.4091 |
+| `f6` - left wall | wall | 0 | 0.2689 |
+| `f7` - right wall | wall | 0 | 0.2792 |
+
+**Binding**: `f7`-`f8` (0.527), `f0`-`f3` (0.486), `f4`-`right wall` (0.429), `f1`-`f8` (0.423), `f4`-`f7` (0.412), `f4`-`top wall` (0.409).  KKT residual 3.1e-03.  Exactly-opposite (cone-degenerate) contacts: `f4`-`f7`.
+**Convergence caveat**: KKT residual 3.1e-03 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.943894 is an upper bound.
+**Rank**: 26 contact rows, 31 variables; rank 22; at fixed s rank 22 of 30, so **8 flat direction(s)**: free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.886746 | +0.057148 | load-bearing |
+| `f1` | 3.902411 | +0.041483 | load-bearing |
+| `f2` | 3.828427 | +0.115467 | load-bearing |
+| `f3` | 3.822876 | +0.121019 | load-bearing |
+| `f4` | 3.834314 | +0.109580 | load-bearing |
+| `f5` | 3.943894 | -0.000000 | rattler |
+| `f6` | 3.858216 | +0.085678 | load-bearing |
+| `f7` | 3.822876 | +0.121019 | load-bearing |
+| `f8` | 3.707107 | +0.236788 | load-bearing |
+| `f9` | 3.940518 | +0.003377 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f6`, `f7`, `f8`, `f9`.  Rattlers: `f5`.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_081(L1)`
+
+## K23 - a k11 packing at s* = 3.948781 on the boundary of class k0_00
+
+![K23](shadows/K23.svg)
+
+* **s\*** = 3.948781318 = s-hat +0.071697728  (s0 = 3.877084, s\* - s0 = +0.071697)
+* **shadow** = 2 slot squares `BL(0,0) TR(0,0)` + 9 free squares f0..f8; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 1 at tau >= budget.
+* **load-bearing squares**: `f0` `f2` `f3` `f6` `f7` `f8` `TR(0,0)` (7 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 73 feasible of 101; distinct minima [3.88675, 3.90267, 3.91223, 3.91748, 3.9244, 3.94281, 3.94444, 3.94878].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.518190 | 2.518903 | 14.2635 |
+| f1 | 0.515986 | 3.410772 | 89.4431 |
+| f2 | 0.607777 | 2.041380 | 14.2635 |
+| f3 | 2.341004 | 3.341004 | 14.2635 |
+| f4 | 3.440343 | 2.440300 | 0.3525 |
+| f5 | 2.447641 | 1.772461 | 35.1195 |
+| f6 | 2.448781 | 0.500000 | 90.0000 |
+| f7 | 1.486913 | 1.237292 | 47.1538 |
+| f8 | 3.448781 | 1.013508 | 90.0000 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f2` | vertex-on-edge | -7.4e-10 | 0.9963 |
+| `f0` - `f3` | vertex-on-edge | -9.9e-10 | 1.0051 |
+| `f2` - `f7` | vertex-on-edge | -1.6e-08 | 0.3495 |
+| `f3` - `TR(0,0)` | vertex-on-edge | +9.0e-15 | 0.9550 |
+| `f6` - `f7` | vertex-on-edge | -1.4e-08 | 0.3477 |
+| `f6` - `f8` | vertex-on-edge | -5.3e-08 | 0.2690 |
+| `f2` - left wall | wall | 0 | 0.8864 |
+| `f3` - top wall | wall | 0 | 0.2428 |
+| `f6` - bottom wall | wall | 0 | 0.1860 |
+| `f8` - right wall | wall | 0 | 0.2536 |
+
+**Binding**: `f0`-`f3` (1.005), `f0`-`f2` (0.996), `f3`-`TR(0,0)` (0.955), `f2`-`left wall` (0.886), `f2`-`f7` (0.350), `f6`-`f7` (0.348).  KKT residual 2.6e-04.
+**Convergence caveat**: KKT residual 2.6e-04 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.948781 is an upper bound.
+**Rank**: 15 contact rows, 28 variables; rank 14; at fixed s rank 14 of 27, so **13 flat direction(s)**: blocked at first order (rank tolerance artefact), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at second order, blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.822876 | +0.125906 | load-bearing |
+| `f1` | 3.885619 | +0.063162 | load-bearing |
+| `f2` | 3.822876 | +0.125906 | load-bearing |
+| `f3` | 3.822876 | +0.125906 | load-bearing |
+| `f4` | 3.886746 | +0.062035 | load-bearing |
+| `f5` | 3.899873 | +0.048908 | load-bearing |
+| `f6` | 3.707107 | +0.241675 | load-bearing |
+| `f7` | 3.728581 | +0.220200 | load-bearing |
+| `f8` | 3.767767 | +0.181014 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_115(L1)`
+
+## K24 - a k11 packing at s* = 3.967522 on the boundary of class k0_00
+
+![K24](shadows/K24.svg)
+
+* **s\*** = 3.967521745 = s-hat +0.090438155  (s0 = 3.877084, s\* - s0 = +0.090438)
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 1 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f3` `f5` `f6` `BL(0,1)` `BR(0,0)` `TR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S49` (s* 3.996724, D4 map `e`, 8 squares matched, Jaccard 0.571).
+* **restarts**: 82 feasible of 101; distinct minima [3.9061, 3.91223, 3.93794, 3.96752, 4.0, 4.00011, 4.00023, 4.01596].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.533298 | 1.500814 | 3.9553 |
+| f1 | 2.038799 | 0.500000 | 89.9999 |
+| f2 | 0.500005 | 3.467517 | 0.0006 |
+| f3 | 3.467522 | 2.467522 | 0.0000 |
+| f4 | 2.462047 | 3.325267 | 0.3501 |
+| f5 | 2.743427 | 1.492837 | 47.0018 |
+| f6 | 1.477782 | 2.499363 | 3.9553 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f1` | vertex-on-edge | -1.2e-09 | 0.1293 |
+| `f0` - `f5` | vertex-on-edge | +8.9e-09 | 0.4862 |
+| `f0` - `f6` | vertex-on-edge | +1.9e-09 | 0.2296 |
+| `f0` - `BL(0,1)` | vertex-on-edge | +5.6e-11 | 0.3261 |
+| `f1` - `f5` | vertex-on-edge | +7.9e-09 | 0.0766 |
+| `f2` - `f6` | vertex-on-edge | -1.2e-08 | 0.2750 |
+| `f3` - `f5` | vertex-on-edge | -1.1e-08 | 0.5040 |
+| `f3` - `TR(0,0)` | exactly-opposite | -1.7e-07 | 0.7000 |
+| `f5` - `BR(0,0)` | vertex-on-edge | -9.5e-09 | 0.3281 |
+| `f1` - bottom wall | wall | 0 | 0.0952 |
+| `f2` - left wall | wall | 0 | 0.0025 |
+| `f2` - top wall | wall | 0 | 0.3031 |
+| `f3` - right wall | wall | 0 | 0.0000 |
+
+**Binding**: `f3`-`TR(0,0)` (0.700), `f3`-`f5` (0.504), `f0`-`f5` (0.486), `f5`-`BR(0,0)` (0.328), `f0`-`BL(0,1)` (0.326), `f2`-`top wall` (0.303).  KKT residual 1.9e-01.  Exactly-opposite (cone-degenerate) contacts: `f3`-`TR(0,0)`.
+**Convergence caveat**: KKT residual 1.9e-01 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.967522 is an upper bound.
+**Rank**: 17 contact rows, 22 variables; rank 15; at fixed s rank 15 of 21, so **6 flat direction(s)**: blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.707107 | +0.260415 | load-bearing |
+| `f1` | 3.942809 | +0.024713 | load-bearing |
+| `f2` | 3.942809 | +0.024713 | load-bearing |
+| `f3` | 3.822876 | +0.144646 | load-bearing |
+| `f4` | 3.942809 | +0.024713 | load-bearing |
+| `f5` | 3.822876 | +0.144646 | load-bearing |
+| `f6` | 3.942809 | +0.024713 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_084(L1)`
+
+## K25 - a k11 packing at s* = 3.977041 on the boundary of class k0_00
+
+![K25](shadows/K25.svg)
+
+* **s\*** = 3.977040890 = s-hat +0.099957300  (s0 = 3.877084, s\* - s0 = +0.099957)
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L3:1; component 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f1` `f2` `f3` `f4` `f5` `BL(0,0)` `TL(0,0)` `TR(0,0)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S44` (s* 3.958425, D4 map `e`, 8 squares matched, Jaccard 0.571); `S04` (s* 3.822876, D4 map `e`, 2 squares matched, Jaccard 0.105); `S14` (s* 3.767767, D4 map `e`, 2 squares matched, Jaccard 0.105); `S17` (s* 3.858216, D4 map `e`, 2 squares matched, Jaccard 0.105).
+* **restarts**: 83 feasible of 101; distinct minima [3.88675, 3.91421, 3.924, 3.97662, 3.97704, 4.0].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.496000 | 2.111008 | 2.4294 |
+| f1 | 1.584266 | 3.239811 | 75.5195 |
+| f2 | 2.650376 | 2.540768 | 29.7248 |
+| f3 | 2.426498 | 1.261421 | 29.7248 |
+| f4 | 3.294915 | 1.757256 | 29.7248 |
+| f5 | 1.500000 | 0.500000 | 90.0000 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f1` - `f2` | vertex-on-edge | -8.2e-10 | 0.5585 |
+| `f1` - `TL(0,0)` | vertex-on-edge | +6.9e-10 | 0.4202 |
+| `f2` - `f3` | vertex-on-edge | +2.8e-08 | 0.2851 |
+| `f2` - `f4` | vertex-on-edge | -1.7e-08 | 0.1225 |
+| `f2` - `TR(0,0)` | vertex-on-edge | -4.0e-15 | 0.4637 |
+| `f3` - `f4` | exactly-opposite | -2.4e-08 | 0.7193 |
+| `f3` - `f5` | vertex-on-edge | -2.2e-16 | 0.6614 |
+| `f5` - `BL(0,0)` | exactly-opposite | -6.8e-10 | 0.4502 |
+| `f5` - `BL(0,1)` | exactly-opposite | +8.8e-10 | 0.0000 |
+| `f4` - right wall | wall | 0 | 0.7617 |
+| `f5` - bottom wall | wall | 0 | 0.2570 |
+
+**Binding**: `f4`-`right wall` (0.762), `f3`-`f4` (0.719), `f3`-`f5` (0.661), `f1`-`f2` (0.559), `f2`-`TR(0,0)` (0.464), `f5`-`BL(0,0)` (0.450).  KKT residual 4.4e-03.  Exactly-opposite (cone-degenerate) contacts: `f3`-`f4`, `f5`-`BL(0,0)`, `f5`-`BL(0,1)`.
+**Convergence caveat**: KKT residual 4.4e-03 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.977041 is an upper bound.
+**Rank**: 21 contact rows, 19 variables; rank 13; at fixed s rank 13 of 18, so **5 flat direction(s)**: blocked at second order, blocked at second order, blocked at second order, blocked at second order, free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.886746 | +0.090295 | load-bearing |
+| `f1` | 3.767768 | +0.209273 | load-bearing |
+| `f2` | 3.707107 | +0.269934 | load-bearing |
+| `f3` | 3.822876 | +0.154165 | load-bearing |
+| `f4` | 3.822876 | +0.154165 | load-bearing |
+| `f5` | 3.822876 | +0.154165 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l3_nodes/l3_pp65_111_001(L3)`
+
+## K26 - a k11 packing at s* = 3.985467 on the boundary of class k0_00
+
+![K26](shadows/K26.svg)
+
+* **s\*** = 3.985466708 = s-hat +0.108383118  (s0 = 3.877084, s\* - s0 = +0.108383)
+* **shadow** = 3 slot squares `BL(0,0) BL(0,1) TL(1,0)` + 8 free squares f0..f7; a k11 packing.
+* **explains** 1 alive k0 cells: A85 x1; levels L1:1; integral 1 support; 1 at tau >= budget.
+* **load-bearing squares**: `f1` `f2` `f4` `f7` `BL(0,1)` `TL(1,0)` (6 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 73 feasible of 101; distinct minima [3.98547, 4.0, 4.00001, 4.00002].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 0.500000 | 3.289624 | 90.0000 |
+| f1 | 1.519798 | 2.350250 | 71.0602 |
+| f2 | 3.289429 | 0.500000 | 90.0000 |
+| f3 | 2.335833 | 1.470017 | 75.2091 |
+| f4 | 3.485467 | 1.500000 | 90.0000 |
+| f5 | 1.586189 | 0.511484 | 0.8427 |
+| f6 | 3.340810 | 3.336928 | 69.8634 |
+| f7 | 2.621807 | 2.480719 | 71.0602 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `TL(1,0)` | vertex-on-edge | -7.5e-11 | 0.0000 |
+| `f1` - `f7` | vertex-on-edge | -6.0e-08 | 0.3628 |
+| `f1` - `BL(0,1)` | vertex-on-edge | +2.2e-10 | 0.7737 |
+| `f1` - `TL(1,0)` | vertex-on-edge | +1.5e-14 | 1.1078 |
+| `f2` - `f4` | vertex-on-edge | +7.2e-09 | 0.1234 |
+| `f4` - `f7` | vertex-on-edge | +1.3e-14 | 0.3692 |
+| `f0` - left wall | wall | 0 | 0.0000 |
+| `f2` - bottom wall | wall | 0 | 0.0842 |
+| `f4` - right wall | wall | 0 | 0.3523 |
+
+**Binding**: `f1`-`TL(1,0)` (1.108), `f1`-`BL(0,1)` (0.774), `f4`-`f7` (0.369), `f1`-`f7` (0.363), `f4`-`right wall` (0.352), `f2`-`f4` (0.123).  KKT residual 5.5e-06.
+**Convergence caveat**: KKT residual 5.5e-06 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.985467 is an upper bound.
+**Rank**: 15 contact rows, 25 variables; rank 12; at fixed s rank 12 of 24, so **12 flat direction(s)**: blocked at first order (rank tolerance artefact), blocked at first order (rank tolerance artefact), blocked at second order, free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.941299 | +0.044167 | load-bearing |
+| `f1` | 3.822876 | +0.162591 | load-bearing |
+| `f2` | 3.728581 | +0.256885 | load-bearing |
+| `f3` | 3.942809 | +0.042658 | load-bearing |
+| `f4` | 3.707107 | +0.278360 | load-bearing |
+| `f5` | 3.822876 | +0.162591 | load-bearing |
+| `f6` | infeasible | - | load-bearing |
+| `f7` | 3.771189 | +0.214278 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
+
+**k0 cells explained** (1): `A85/k0_00/s3_far_BL389484_TR018470(L1)`
+
+## K27 - a k11 packing at s* = 3.989264 on the boundary of class k0_00
+
+![K27](shadows/K27.svg)
+
+* **s\*** = 3.989264329 = s-hat +0.112180739  (s0 = 3.877084, s\* - s0 = +0.112180)
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f2` `f3` `f5` `BL(0,1)` `BR(1,0)` `TL(0,0)` (7 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **coincides with Part I**: `S47` (s* 3.989280, D4 map `anti`, 8 squares matched, Jaccard 0.571).
+* **restarts**: 88 feasible of 101; distinct minima [3.89723, 3.89725, 3.93535, 3.94281, 3.98547, 3.98926, 4.0, 4.00003].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.333144 | 2.291582 | 66.8912 |
+| f1 | 2.518951 | 3.346898 | 71.3627 |
+| f2 | 1.414044 | 2.685609 | 66.8912 |
+| f3 | 3.489264 | 2.604192 | 90.0000 |
+| f4 | 3.376239 | 1.592331 | 89.8649 |
+| f5 | 1.656120 | 1.493241 | 66.8912 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f2` | vertex-on-edge | -1.6e-11 | 0.5935 |
+| `f0` - `f3` | vertex-on-edge | +1.1e-15 | 0.6522 |
+| `f0` - `f5` | vertex-on-edge | +2.4e-11 | 0.2615 |
+| `f2` - `TL(0,0)` | vertex-on-edge | +4.4e-16 | 0.4504 |
+| `f5` - `BL(0,1)` | vertex-on-edge | +2.0e-15 | 0.4686 |
+| `f5` - `BR(1,0)` | vertex-on-edge | +4.4e-16 | 0.5820 |
+| `f3` - right wall | wall | 0 | 0.6412 |
+
+**Binding**: `f0`-`f3` (0.652), `f3`-`right wall` (0.641), `f0`-`f2` (0.593), `f5`-`BR(1,0)` (0.582), `f5`-`BL(0,1)` (0.469), `f2`-`TL(0,0)` (0.450).  KKT residual 2.6e-05.
+**Convergence caveat**: KKT residual 2.6e-05 - the landing leans on a variable bound or SLSQP stopped short, so s* = 3.989264 is an upper bound.
+**Rank**: 10 contact rows, 19 variables; rank 10; at fixed s rank 10 of 18, so **8 flat direction(s)**: blocked at second order, blocked at second order, free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at second order, blocked at second order, blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.968230 | +0.021035 | load-bearing |
+| `f1` | 3.989264 | +0.000000 | rattler |
+| `f2` | 3.942809 | +0.046455 | load-bearing |
+| `f3` | 3.787780 | +0.201485 | load-bearing |
+| `f4` | 3.989265 | -0.000001 | rattler |
+| `f5` | 3.707107 | +0.282158 | load-bearing |
+
+Load-bearing: `f0`, `f2`, `f3`, `f5`.  Rattlers: `f1`, `f4`.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_064(L1)`
+
+## K28 - a k11 packing at s* = 4.000023 on the boundary of class k0_00
+
+![K28](shadows/K28.svg)
+
+* **s\*** = 4.000023424 = s-hat +0.122939834  (s0 = 3.877084, s\* - s0 = +0.122939)
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **explains** 1 alive k0 cells: A99 x1; levels L1:1; component 1 support; 1 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f2` `f5` `BL(0,1)` (5 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 77 feasible of 101; distinct minima [3.88675, 3.98071, 3.99202, 4.0, 4.00002, 4.47487].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.495360 | 2.502164 | 0.5369 |
+| f1 | 1.764612 | 3.500022 | 0.0001 |
+| f2 | 3.500023 | 2.246154 | 90.0000 |
+| f3 | 0.595724 | 3.372650 | 12.1125 |
+| f4 | 1.609030 | 0.648333 | 14.4620 |
+| f5 | 1.496934 | 2.329536 | 0.5369 |
+| f6 | 2.481317 | 1.416994 | 11.3557 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f1` | vertex-on-edge | +3.8e-14 | 0.0148 |
+| `f0` - `f2` | vertex-on-edge | -3.1e-14 | 1.5026 |
+| `f0` - `f5` | vertex-on-edge | -1.1e-10 | 1.5187 |
+| `f5` - `BL(0,1)` | vertex-on-edge | -1.7e-14 | 1.0429 |
+| `f1` - top wall | wall | 0 | 0.0146 |
+| `f2` - right wall | wall | 0 | 1.4203 |
+
+**Binding**: `f0`-`f5` (1.519), `f0`-`f2` (1.503), `f2`-`right wall` (1.420), `f5`-`BL(0,1)` (1.043), `f0`-`f1` (0.015), `f1`-`top wall` (0.015).  KKT residual 3.2e-03.
+**Convergence caveat**: KKT residual 3.2e-03 - the landing leans on a variable bound or SLSQP stopped short, so s* = 4.000023 is an upper bound.
+**Rank**: 8 contact rows, 22 variables; rank 8; at fixed s rank 8 of 21, so **13 flat direction(s)**: blocked at first order (rank tolerance artefact), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at first order (rank tolerance artefact)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.707107 | +0.292917 | load-bearing |
+| `f1` | 3.707107 | +0.292917 | load-bearing |
+| `f2` | 3.822876 | +0.177148 | load-bearing |
+| `f3` | 4.000000 | +0.000023 | load-bearing |
+| `f4` | 4.000000 | +0.000023 | load-bearing |
+| `f5` | 3.728581 | +0.271442 | load-bearing |
+| `f6` | 4.000000 | +0.000023 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
+
+**k0 cells explained** (1): `A99/k0_00/l1_082_plain_warm(L1)`
+
+## K29 - a k11 packing at s* = 4.000145 on the boundary of class k0_00
+
+![K29](shadows/K29.svg)
+
+* **s\*** = 4.000144630 = s-hat +0.123061040  (s0 = 3.877084, s\* - s0 = +0.123061)
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(1,0)` + 7 free squares f0..f6; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L2:1; component 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f4` `f5` `BL(0,1)` `TL(1,0)` (5 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 67 feasible of 101; distinct minima [4.0, 4.00001, 4.00002, 4.00014, 4.03295, 4.07193, 4.41421].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 1.498446 | 2.039793 | 3.9203 |
+| f1 | 0.500000 | 3.185214 | 90.0000 |
+| f2 | 3.453595 | 3.459897 | 4.6504 |
+| f3 | 2.512469 | 1.294768 | 34.7070 |
+| f4 | 3.500145 | 2.420963 | 90.0000 |
+| f5 | 2.467130 | 2.530984 | 3.9203 |
+| f6 | 1.597849 | 0.512291 | 89.2762 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f5` | vertex-on-edge | -1.5e-09 | 1.3812 |
+| `f0` - `BL(0,1)` | vertex-on-edge | +2.6e-12 | 0.9340 |
+| `f1` - `TL(1,0)` | vertex-on-edge | -3.3e-08 | 0.0000 |
+| `f4` - `f5` | vertex-on-edge | +7.2e-12 | 1.4309 |
+| `f5` - `TL(1,0)` | vertex-on-edge | -7.5e-15 | 0.0961 |
+| `f1` - left wall | wall | 0 | 0.0000 |
+| `f4` - right wall | wall | 0 | 1.3633 |
+
+**Binding**: `f4`-`f5` (1.431), `f0`-`f5` (1.381), `f4`-`right wall` (1.363), `f0`-`BL(0,1)` (0.934), `f5`-`TL(1,0)` (0.096).  KKT residual 4.0e-03.
+**Convergence caveat**: KKT residual 4.0e-03 - the landing leans on a variable bound or SLSQP stopped short, so s* = 4.000145 is an upper bound.
+**Rank**: 11 contact rows, 22 variables; rank 10; at fixed s rank 10 of 21, so **11 flat direction(s)**: free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), blocked at second order, free (flex to at least third order), blocked at second order
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 3.822876 | +0.177269 | load-bearing |
+| `f1` | 4.000000 | +0.000144 | load-bearing |
+| `f2` | 4.000000 | +0.000145 | load-bearing |
+| `f3` | 4.000000 | +0.000145 | load-bearing |
+| `f4` | 3.822876 | +0.177269 | load-bearing |
+| `f5` | 3.707107 | +0.293038 | load-bearing |
+| `f6` | 4.000000 | +0.000145 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l2_nodes/l2_p65_100(L2)`
+
+## K30 - a k11 packing at s* = 4.020670 on the boundary of class k0_00
+
+![K30](shadows/K30.svg)
+
+* **s\*** = 4.020669624 = s-hat +0.143586034  (s0 = 3.877084, s\* - s0 = +0.143586)
+* **shadow** = 2 slot squares `BL(0,0) BL(0,1)` + 9 free squares f0..f8; a k11 packing.
+* **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 0 at tau >= budget.
+* **load-bearing squares**: `f0` `f1` `f4` `f5` `f6` `f7` `f8` `BL(0,1)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
+* **restarts**: 80 feasible of 101; distinct minima [3.924, 3.93354, 3.94281, 3.96752, 3.97662, 4.0, 4.00001, 4.00003].
+
+| square | cx | cy | tilt (deg) |
+|---|---|---|---|
+| f0 | 2.587836 | 1.984155 | 31.0087 |
+| f1 | 2.477452 | 3.334541 | 31.0087 |
+| f2 | 3.235168 | 1.199460 | 31.5856 |
+| f3 | 0.538518 | 3.516108 | 89.9737 |
+| f4 | 3.334541 | 2.682969 | 31.0087 |
+| f5 | 2.201297 | 0.686129 | 31.0087 |
+| f6 | 0.500000 | 2.500124 | 0.0000 |
+| f7 | 1.686129 | 1.543218 | 31.0087 |
+| f8 | 1.686129 | 2.709958 | 31.0087 |
+
+**Contact graph at s\*** (gap < 1e-7; force = Fritz-John resultant, rows unit-normalised)
+
+| contact | type | gap | force |
+|---|---|---|---|
+| `f0` - `f4` | vertex-on-edge | -4.5e-09 | 0.7628 |
+| `f0` - `f5` | vertex-on-edge | -4.1e-15 | 0.2977 |
+| `f0` - `f7` | vertex-on-edge | -6.4e-15 | 0.5121 |
+| `f1` - `f4` | vertex-on-edge | +2.9e-15 | 0.4646 |
+| `f1` - `f8` | vertex-on-edge | -1.9e-08 | 0.2740 |
+| `f5` - `f7` | exactly-opposite | -5.4e-09 | 0.4542 |
+| `f6` - `f8` | vertex-on-edge | +6.7e-16 | 0.3219 |
+| `f7` - `f8` | vertex-on-edge | -7.3e-12 | 0.1693 |
+| `f7` - `BL(0,1)` | vertex-on-edge | +2.2e-16 | 0.4082 |
+| `f1` - top wall | wall | 0 | 0.5324 |
+| `f4` - right wall | wall | 0 | 0.8913 |
+| `f5` - bottom wall | wall | 0 | 0.3780 |
+| `f6` - left wall | wall | 0 | 0.2324 |
+
+**Binding**: `f4`-`right wall` (0.891), `f0`-`f4` (0.763), `f1`-`top wall` (0.532), `f0`-`f7` (0.512), `f1`-`f4` (0.465), `f5`-`f7` (0.454).  KKT residual 2.4e-02.  Exactly-opposite (cone-degenerate) contacts: `f5`-`f7`.
+**Convergence caveat**: KKT residual 2.4e-02 - the landing leans on a variable bound or SLSQP stopped short, so s* = 4.020670 is an upper bound.
+**Rank**: 22 contact rows, 28 variables; rank 19; at fixed s rank 19 of 27, so **8 flat direction(s)**: blocked at first order (rank tolerance artefact), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order), free (flex to at least third order)
+
+**T2 drain hint - the load-bearing subgraph**
+
+| removed | s* without it | drop | role |
+|---|---|---|---|
+| `f0` | 4.000000 | +0.020670 | load-bearing |
+| `f1` | 4.000000 | +0.020670 | load-bearing |
+| `f2` | 4.000000 | +0.020670 | load-bearing |
+| `f3` | 3.966373 | +0.054297 | load-bearing |
+| `f4` | 4.000000 | +0.020670 | load-bearing |
+| `f5` | 4.000000 | +0.020670 | load-bearing |
+| `f6` | 3.828427 | +0.192242 | load-bearing |
+| `f7` | 4.000000 | +0.020670 | load-bearing |
+| `f8` | 4.000000 | +0.020670 | load-bearing |
+
+Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: none.
+
+**k0 cells explained** (1): `A38/l1_nodes/node_062(L1)`
+
+## k0 cells not explained by any integral shadow
+
+56 of 217.  Their dual supports are fractional and contain no budget-many
+pairwise cell-disjoint placements among those with y > 0.02.
+
+| source | level | count | largest independent set found (of budget) |
+|---|---|---|---|
+| A38 | L1 | 9 | 9/10 x9 |
+| A38 | L2 | 16 | 9/10 x15, 8/10 x1 |
+| A85 | L1 | 2 | 9/10 x1, 8/9 x1 |
+| A99 | L1 | 29 | 9/10 x16, 8/10 x13 |
+
+Full list: `attempts/A107-shadow-gallery/results/unexplained_k0.json`.

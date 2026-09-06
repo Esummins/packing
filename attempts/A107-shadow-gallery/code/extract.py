@@ -10,15 +10,33 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
 OUT = os.path.join(ROOT, 'attempts', 'A107-shadow-gallery', 'results')
 S = L.S0
 
-SOURCES = [
-    ('A57', 'attempts/A57-shadow-trees/results/tree/*/*.json'),
-    ('A60', 'attempts/A60-trump5-campaign/results/nodes/*.json'),
-    ('A61', 'attempts/A61-window-stragglers/results/nodes/*.json'),
-    ('A85', 'attempts/A85-k0-route/results/nodes/*.json'),
-    ('A99', 'attempts/A99-k0-tree-v2/results/nodes/*.json'),
-]
+# Two disjoint source sets.  'main' = the pinned classes (A57 k5_11/k5_16, A60 trump5, A61 window
+# stragglers).  'k0' = the k0_00 cells, whose LP jsons live one level deeper than the pinned
+# campaigns' (results/nodes/k0_00/) and, for A38, in three per-level directories.  The k0 class has
+# NO pins - a node's only hypothesis core is the conditioned square - so its symmetry group is the
+# full D4, not the stabiliser of a pin set.
+SETS = {
+    'main': [
+        ('A57', 'attempts/A57-shadow-trees/results/tree/*/*.json'),
+        ('A60', 'attempts/A60-trump5-campaign/results/nodes/*.json'),
+        ('A61', 'attempts/A61-window-stragglers/results/nodes/*.json'),
+    ],
+    'k0': [
+        ('A85', 'attempts/A85-k0-route/results/nodes/*/*.json'),
+        ('A99', 'attempts/A99-k0-tree-v2/results/nodes/*/*.json'),
+        ('A38', 'attempts/A38-root-power/results/l1_nodes/*.json'),
+        ('A38', 'attempts/A38-root-power/results/l2_nodes/*.json'),
+        ('A38', 'attempts/A38-root-power/results/l3_nodes/*.json'),
+    ],
+}
+SET = os.environ.get('A107_SET', 'main')
+SOURCES = SETS[SET]
+OUTNAME = 'extract.json' if SET == 'main' else f'extract_{SET}.json'
 
-def level_of(nid):
+def level_of(nid, shard=''):
+    for k, v in (('l1', 1), ('l2', 2), ('l3', 3)):
+        if nid.startswith(k + '_') or shard.startswith(k + '_'):
+            return v
     tail = nid.split('_interior_', 1)[-1]
     n = len([t for t in tail.split('_') if t and t[0] in 'YD' and t[1:].isdigit()])
     return max(n, 1)
@@ -47,7 +65,11 @@ def collect():
                 continue
             if 'packing' not in d or 'hyp' not in d:
                 continue
-            if d.get('dead', True):
+            # ALIVE-at-LP = the LP did not certify the case (dead == False), OR the LP value already
+            # reaches the budget (tau >= budget), which is the k0 campaigns' own alive test.
+            tau, bud = d.get('tau'), d.get('budget')
+            at_budget = (tau is not None and bud is not None and float(tau) >= float(bud) - 1e-9)
+            if d.get('dead', True) and not at_budget:
                 continue
             cs = core_squares(d)
             if not cs:
@@ -59,7 +81,8 @@ def collect():
                     for q in d.get('packing', []) if float(q.get('y', 0.0)) > 0.02]
             integral = all(y < 1e-6 or y > 1 - 1e-6 for y in ys)
             nodes.append(dict(src=tag, path=os.path.relpath(p, ROOT).replace('\\', '/'), shard=shard,
-                              nid=nid, level=level_of(nid), budget=d.get('budget'), tau=d.get('tau'),
+                              nid=nid, level=level_of(nid, shard), budget=d.get('budget'), tau=d.get('tau'),
+                              at_budget=at_budget,
                               converged=d.get('converged'), cores=cs, sup=sup, frac=frac,
                               integral=integral, npl=len(ys), nsig=len(frac),
                               skeleton=d.get('skeleton_name')))
@@ -200,11 +223,11 @@ def main():
         if 'struct' in n:
             m['struct'] = [list(n['struct'][0]), n['struct'][1]]
         ser.append(m)
-    json.dump(dict(nodes=ser,
+    json.dump(dict(set=SET, nodes=ser,
                    groups={json.dumps([g[0], list(g[1]), [list(g[2][0]), g[2][1]]]): v for g, v in groups.items()},
                    unexplained=unexp),
-              open(os.path.join(OUT, 'extract.json'), 'w'), indent=1)
-    print('wrote results/extract.json')
+              open(os.path.join(OUT, OUTNAME), 'w'), indent=1)
+    print('wrote results/' + OUTNAME)
 
 if __name__ == '__main__':
     main()

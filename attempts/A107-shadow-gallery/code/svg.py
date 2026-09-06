@@ -61,7 +61,8 @@ def panel_pack(ox, oy, sc, title, sub, s, free, slots, ring=True):
     allsq = [(f[0], f[1], f[2]) for f in free] + [(p[0], p[1], 0.0) for p in fx]
     names = [f'f{i}' for i in range(len(free))] + list(slots)
     polys = [L.corners(*q) for q in allsq]
-    assert all(-1e-6 <= x <= s + 1e-6 and -1e-6 <= y <= s + 1e-6 for P in polys for x, y in P), 'containment'
+    exc = max([max(-x, x - s, -y, y - s) for P in polys for x, y in P] or [0.0])
+    assert exc <= 1e-5, f'containment violated by {exc:.2e}'
     m = min([L.sat_gap(allsq[i][:2], allsq[i][2], allsq[j][:2], allsq[j][2])
              for i in range(len(allsq)) for j in range(i + 1, len(allsq))] or [0.0])
     for i, P in enumerate(polys):
@@ -92,7 +93,8 @@ def panel_pack(ox, oy, sc, title, sub, s, free, slots, ring=True):
                                     best = (dd, f)
                     f = best[1]
                     out.append(f'<circle cx="{ox + f[0] * sc:.1f}" cy="{oy - f[1] * sc:.1f}" r="4.5" fill="none" stroke="#2e7d32" stroke-width="2"/>')
-    out.append(text(ox, oy + 16, f'min pairwise SAT separation {m:+.2e}; container side {s:.6f}', 8.5, '#444'))
+    out.append(text(ox, oy + 16, f'min pairwise SAT separation {m:+.2e}; worst containment excursion '
+                                 f'{exc:+.2e}; container side {s:.6f}', 8.5, '#444'))
     return out, m
 
 def tilt_panel(ox, oy, w, h, curve, s_star, th_star):

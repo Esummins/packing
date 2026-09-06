@@ -3664,3 +3664,46 @@ notes only), frozen verifiers untouched, git fetch + plain merge + push own path
       core: 0 violations. Both rules confirmed at >= 10^4 pairs.
       Incidental: pinguard._TightCore exposes cm/sm but not tm, so any consumer reading .tm off a kill core would break --
       harmless today (cores_meet reads only kx/ky/a/cm/sm) but worth knowing.
+
+## 2026-09-06 — A107 follow-up (Opus chore, read-only) — Part II: the k0_00 cells
+
+A113 found a glob bug in `extract.py`: the k0 LP jsons live one directory deeper than the pinned
+campaigns' (`results/nodes/k0_00/*.json`, not `results/nodes/*.json`), so A85-k0-route (12) and
+A99-k0-tree-v2 (54) were silently reading zero files, and **A38-root-power was not a source at
+all** (`results/{l1,l2,l3}_nodes/*.json`: 134 + 49 + 11 with an LP support). Fixed, and the alive
+test widened to `dead == False` **or** `tau >= budget`. `docs/shadows.md` now has a **Part II**
+with 30 k0 entries and `docs/shadows/K01..K30.svg`; Part I's numbers are untouched (every k0 stage
+writes a `_k0`-suffixed result file).
+
+* **217 alive k0 cells** (A38 153, A99 53, A85 11; 43 at τ ≥ budget). **30 distinct k0 shadow
+  values explain 161**; **56 have no integral shadow** — their supports are fractional and the
+  largest cell-disjoint set is 9 of budget 10 in 41 of them.
+* **k0 has no pins**, so a node's only hypothesis core is the conditioned square and the class
+  symmetry is the **full D4**. Every de-duplication and every coincidence check in Part II runs
+  over all 8 elements.
+* **K01 (s\* = 4.000000, 45 distinct configurations) alone takes 84 of the 161** — the same
+  verdict as Part I's S01: for half the alive cells the LP's integral support is a side-4
+  arrangement, not a near-critical packing. Below it the k0 spectrum reproduces Part I's:
+  3.942809 (K02), 3.925149 (K03), 3.914214 (K04), 3.912232 (K05), **3.886745 (K06 — the k7
+  pinwheel, reached from k0 with the same three free squares at 48.4355°)**.
+* **Coincidences with Part I. K19 = S33 is EXACT**: 11 of 11 squares matched under the identity,
+  s\* agreeing to 1e-8 (3.916931). Then six pairs at Jaccard 0.833 (10 of 11): K06–S02, K06–S29,
+  K05–S05, K17–S32, K19–S34, K19–S35.
+* **A113's numbers are a different comparison and I could not reproduce them as stated.** Their
+  Jaccard is computed on **slot sets** — which named cells the LP filled — while mine is on the
+  whole **minimised packing**. Both are now in the table, and they disagree in the way that
+  matters: A113's cell `l1_100` (= A38 `l1_nodes/node_100.json`) is slot-set-identical to S38
+  (1.000) but lands in **K04**, which minimises to 3.914214 against S38's 3.928915; their
+  `s1int_l1_043 → S07 at 0.83` is in **K01**, minimising to 4.000000, with packing Jaccard 0.29
+  against S07. K21 and K25 reach slot-set Jaccard 1.000 against S04/S14/S17 at packing Jaccard
+  0.105. **One slot skeleton carries several different packings**, so a slot-set match is not a
+  shadow match.
+* Method deltas, both forced by the class: budget is 10 on 214 of the 217 cells, so after snapping
+  the two to six near-simple placements a k0 shadow has 5–10 free squares (22–31 variables); SLSQP
+  converges less tightly there, so the feasibility gate was relaxed to 2e-6 and every drawing now
+  prints the achieved worst SAT gap **and** the worst containment excursion. Entries with KKT
+  residual > 1e-6 carry the Part I convergence caveat.
+* Discipline unchanged: one BLAS-pinned process; nothing written under A38/A57/A60/A61/A85/A96/
+  A99/A104/A105/A106/A111/A113 or `lean/`; frozen verifiers untouched; git fetch + plain merge +
+  push of A107's own paths only. Follow-up compute: k0 extract 4 min, structure pass 303 s,
+  gallery 1628 s.

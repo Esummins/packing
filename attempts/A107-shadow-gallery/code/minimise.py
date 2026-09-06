@@ -10,6 +10,12 @@ import shadowlib as L
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
 RES = os.path.join(ROOT, 'attempts', 'A107-shadow-gallery', 'results')
+SET = os.environ.get('A107_SET', 'main')
+IN_NAME = 'extract.json' if SET == 'main' else f'extract_{SET}.json'
+OUT_NAME = 'minima.json' if SET == 'main' else f'minima_{SET}.json'
+# SLSQP converges less tightly with 7-10 free squares (k0 has no pins, so almost every square is
+# free); the gate is relaxed there and the achieved worst gap is reported per shadow.
+FEAS = float(os.environ.get('A107_FEAS', '1e-7'))
 S = L.S0
 SHAT = L.SHAT
 
@@ -97,7 +103,7 @@ def run_structure(slots, nf, seeds, nrand=100, rng=None, tlim=1e9):
             z, sv, feas = solve(cons, z0, nf)
         except Exception:
             continue
-        if feas < -1e-7 or not np.isfinite(sv):
+        if feas < -FEAS or not np.isfinite(sv):
             continue
         sols.append((sv, z.tolist(), kind, k))
         if best is None or sv < best[0]:
@@ -113,7 +119,7 @@ def run_structure(slots, nf, seeds, nrand=100, rng=None, tlim=1e9):
 
 def main():
     t0 = time.time()
-    ex = json.load(open(os.path.join(RES, 'extract.json')))
+    ex = json.load(open(os.path.join(RES, IN_NAME)))
     nodes = ex['nodes']
     groups = {k: v for k, v in ex['groups'].items()}
     order = sorted(groups.items(), key=lambda kv: -len(kv[1]))
@@ -124,7 +130,7 @@ def main():
         src, skel, (slots, nf) = json.loads(gk)
         slots = tuple(slots)
         seeds, seed_nodes = [], []
-        for idx in mem[:(20 if len(mem) >= 8 else 6)]:
+        for idx in mem[:int(os.environ.get('A107_SEEDCAP', 20 if len(mem) >= 8 else 6))]:
             n = nodes[idx]
             F = canon_free(n['cfg'], n['struct_op'], S)
             if len(F) == nf:
@@ -139,8 +145,8 @@ def main():
               f"feas={r['nfeas']}/{r['nstart']} s*={b[0]:.6f} (shat{b[0]-SHAT:+.6f}) {r['seconds']}s"
               if b else f"[{gi+1}] {src} nodes={len(mem)} slots={len(slots)} free={nf} INFEASIBLE {r['seconds']}s",
               flush=True)
-    json.dump(out, open(os.path.join(RES, 'minima.json'), 'w'), indent=1)
-    print('total', round(time.time() - t0, 1), 's -> results/minima.json')
+    json.dump(out, open(os.path.join(RES, OUT_NAME), 'w'), indent=1)
+    print('total', round(time.time() - t0, 1), 's -> results/' + OUT_NAME)
 
 if __name__ == '__main__':
     main()
