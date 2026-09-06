@@ -20,8 +20,7 @@ lists what is left; that file prices it.**
 | | S02 the k7 pinwheel | boxes whose support is the 3.8867 pinwheel | 252 (184 + 68), carries the deep tree | tight core (in), deeper levels terminate (f₄ = 0) | grain kill (§6) or just time |
 | | S03–S06, S08–S53 | 45 smaller shadows, mostly level 1 | ~250 | as S01/S02 by type | PI review of the gallery |
 | | fractional | no integral support at all | 264 (151 + 113) | tree only | the genuine tail |
-| Window stragglers | k5_02, k5_03, k5_12 (k5_13 running), k6_27 | whole-window certificate margin | 4–5 classes (A61 converted k5_05, k5_14, k6_21 overnight) | A61 re-solve + certify | resolver on the 4-D witnesses; gate 0.02 for k5_12 |
-| | k6_07 band, k6_23 sliver | partial windows | 2 fragments | bisection + resolver | hours |
+| Window stragglers | k5_02, k5_03 (partial), k5_12 (k5_13 running) | thin whole-window certificates | 3–4 k5 classes; **k6 and up all full** (A114 closed k6_07, k6_23, k6_27) | slab sweeps, resumable | ~5–15 CPU-h |
 | Protected tier | trump5 cover/slackcore | residual tree ending in Trump's basin | 325 alive nodes in A107's input (S01 196, S07 18, S02 12 …) | A60 route, paused | S01 crowd rows; k6_07 window for the S07 slot |
 | | the other 15 protected classes | conditioning trees per exact stratum | 3,500–4,200 CPU-h priced (A100) | A84/A100 model | same levers as A57 |
 | k0_00 | the frame residue | K0-BLOCKED packings in W with every intruder locked | conjecturally empty (LOCK-FREE⁺) | tree priced 9,300–21,700 CPU-h (A99) | one theorem: LOCK-FREE⁺(< 4) |
@@ -107,23 +106,23 @@ to draw. These are what the tree is for, and they are mostly level 1 (110 + 106)
 
 ---
 
-## 2. The window stragglers (A56 scoreboard; A61 pass 5 ran 01:00–08:00 on 2026-09-06)
+## 2. The window stragglers (A56 scoreboard **48/52 full-window** after A114, 2026-09-06 `9ef80bfa`)
 
-| class | window status | why | next |
+| class | window status | note | next |
 |---|---|---|---|
-| k5_05 | **CONVERTED by A61 (PASS, margin 0.698)** | | scoreboard update |
-| k5_14 | **CONVERTED by A61 (PASS, margin 0.016)** | | scoreboard update |
-| k5_10 | converted by A61 (PASS, margin 0.016) | | scoreboard update |
-| k6_21 | **CONVERTED by A61 (PASS, margin 0.014)** | | scoreboard update |
-| k5_02, k5_03 | open, whole W | post-shrink gate-fail: budget − τ = 0.000 at ε_geo 0.003 (no margin at all) | resolver on the 4-D witnesses; bisection |
-| k5_12 | open, whole W | gate-fail by a hair: budget − τ = 0.0265 < the 0.03 gate | lower the gate to 0.02 and certify (cheapest item on the list) |
-| k5_13 | A61 running (τ 5.62 vs 6 at iteration 6) | | wait |
-| k6_27 | open, whole W | fixed-s re-certification failed, no base certificate produced | resolver; else bisection |
-| k6_07 | certified [3.82, 3.827068] + s0; open (3.827068, s0] | 50 ms-wide band | bisection + resolver; **this band is the S07 slot for trump5 crowd rows** |
-| k6_23 | certified [3.82, 3.877] + s0; open (3.877, s0) | 8.4·10⁻⁵ sliver | resolver |
+| k6_23 | **FULL** (A114: resolver on the same certificate closed the 8.4·10⁻⁵ sliver in 0.17 CPU-h) | | done |
+| k6_07 | **FULL** (A114: 16-piece slab grid + bisection, 2.3 CPU-h) — **the BL(0,2)/S07 slot is now a full-window kill** | | done |
+| k6_27 | **FULL** (A114: resolver-first showed the 4-D failure was s-axis starvation; 14-slab sweep, 0.55 CPU-h) — **the last whole-window k6 class** | | done |
+| k5_05, k5_14, k6_21, k5_10 | FULL (A61 pass 5) | folded into the scoreboard | done |
+| k5_03 | PARTIAL: [3.82, 3.823345] banked (5.9%) | resolver closes every recorded witness cell but bulk slabs fail: genuinely thin | slab sweep of the rest, ~5 CPU-h (A114 continuing) |
+| k5_02 | PARTIAL: [3.82, 3.820223] banked (0.4%) | same | slab sweep, cost projected first (cap 8 CPU-h) |
+| k5_12 | OPEN | the gate was never the issue: both LP stages unconverged, certify FAILs at depth 56 and witness feedback drives τ to exactly the budget — no certifiable measure at ε_geo 0.003 with this column pool | slab sweep, projected first |
+| k5_13 | A61 running | | wait |
 
-**k6 and up: one whole-window class left (k6_27) plus the two fragments.** k5 (outside A57): k5_02, k5_03, k5_12
-open, k5_13 in progress.
+**k6 and up: nothing open.** Method lessons banked (A114 notes L1–L5): grid a band rather than bisect from the top
+(k6_07 as one slab timed out at 1,800 s and both halves failed; as 16 pieces every slab passed at ~190 s); A56's
+witness files are truncated and are diagnostics, not gap lists — every closure rests on complete slab PASSes; measured
+cost per 10⁻³ of side at depth 48: k6_27 11 s, k6_07 65 s, k5_03 340 s.
 
 Techniques that apply (from this week): (1) SLOT-CROWD rows at the root add budget 2e per usable slot, exactly the
 few tenths these are short — but A109's node-level result (the multiplicity runs fail on exact holes even for small
