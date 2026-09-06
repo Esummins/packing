@@ -9,6 +9,9 @@ Frozen facts: ŝ = 3.877083590022814 (Trump), s0 = 969271/250000 = ŝ + 4·10⁻
 packing: S07 at 2 + 4√2/3 = 3.885618 (known_results 26a). Every k ≥ 5 class is dead at the fixed side s0; the proof
 needs every class dead on W, and only Trump's class alive there with Trump unique.
 
+**Totals and time estimates live in `budget.md` (the one fixed home; updated on every landed measurement). This file
+lists what is left; that file prices it.**
+
 ## 0. The one-table version
 
 | layer | family | what is left | count | technique now | needs |
