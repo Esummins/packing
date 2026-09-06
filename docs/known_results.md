@@ -71,6 +71,16 @@ file is the record of truth for claims, LOG.md is the record of events.
     protection.
 26. LEAN  lambda-dilation bridge (interior-disjoint minimisers vs closed-disjoint certificate families) incl.
     the NO-family clause; theta<->t transfer with sharp constant; cover invariance (PROSE, A63).
+26a. EXACT The second-best known packing (A108, 2026-09-06): 11 unit squares fit in side exactly
+    s* = 2 + 4*sqrt(2)/3 = (6 + 4*sqrt(2))/3 = 3.885618083164 = s-hat + 0.0085345, with every coordinate in
+    Q(sqrt 2) and all five tilted squares at exactly 45 deg; class k6_07 = trump5 + BL(0,2) (Trump with its
+    disturbed upright placed in its slot). Proof: 99 SAT/containment gaps as a + b*sqrt2, 0 violations, 24 exact
+    zeros; interval endpoint certificate (250-bit, eps 1e-9). Separate local minimum from Trump (straight-segment
+    barrier +0.032; best common-tilt path crests at 41.60 deg, +0.0011 over s*); not first-order rigid (one
+    rattler, 3 flexes); Fritz-John fails at first order structurally (a 45-deg square on a wall has zero
+    first-order torque) so minimality is second order. Found by drawing the LP dual support at A57/A60's alive
+    nodes (docs/shadows.md S07). Not in the window: irrelevant to the proof, relevant to the paper and to
+    higher n (a closed-form 45-degree grain family). Figure docs/residue_map/s07_vs_trump.svg.
 
 ## E. What cannot work (proved or measured)
 27. PROSE Collapse theorem (A34): any sparse SDP relaxation whose cliques carry <= m squares is capped at

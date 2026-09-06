@@ -46,6 +46,19 @@ protected tier. Their kill has to say "only Trump survives", which is a residual
 (Lemma P-TREE, A84), not a plain kill. k0_00 is protected for the same reason in the extreme: no pins at all, so
 all eight Trump images sit inside it.
 
+![S07 vs Trump](residue_map/s07_vs_trump.svg)
+
+**Trump's nearest neighbour (A108, 2026-09-06).** Put Trump's disturbed upright into its slot BL(0,2) and let everything
+relax: the five tilted squares go to exactly 45°, every coordinate lands in Q(√2), and the side is exactly
+**2 + 4√2/3 = 3.885618**, ŝ + 0.0085 (known_results 26a). It is a separate local minimum, class k6_07: the straight
+segment to Trump crests at +0.032, the best common-tilt path at 41.60° crests +0.0011 above it, then falls to ŝ. The
+mechanism swap is visible in the contacts: in Trump the wedged square on the right wall carries load and the BL column
+is open; in S07 the column closes, a new tilted-tilted contact appears, and that square drops out of the load path
+as a rattler. A 45° square touching a wall has zero first-order torque, so S07's minimality is second-order, which is
+why first-order tools (Fritz-John, the LP's tangent tests) find it soft. Found by drawing the LP dual support at the
+alive nodes (§7, A107 shadow S07). Not in the window, so nothing for the proof; the first closed-form member of the
+45° grain family for the paper and for higher n.
+
 ## 3. k0_00: the chain of reductions and the residue
 
 Everything below is for a packing z at side m ∈ [3.82, ŝ) with no simple square. Status tags: **T** theorem (prose,
