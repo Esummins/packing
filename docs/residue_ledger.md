@@ -39,9 +39,12 @@ them (20/32/7/11 by level) with the certificate unchanged. Level-4 descent measu
 **Schedule if simply resumed: 13.3 wall-days at 5 workers** (19.6 without T5′; 27 at the 95% upper bound on the tail).
 **Tilt trimming (PI, 2026-09-06; A96 `155a3c5b`, measured, not deployed):** certify dead every tilt sub-interval of a
 box for which the whole centre box lies inside one pin's octagon (Minkowski sum of the pin core and the reflected
-square) — T5 with a tilt-range parameter, no new verifier. On 2,222 boxes: **159 boxes' surviving bin is empty (new
-kills, 2.3× T5′'s 70: 51 L1, 86 L2, 10 L3, 12 of 14 at L4)** and 155 more are partially trimmed (median surviving
-fraction 0.46–0.66); positive control 618/618. The value is the outright kills, not the core enlargement (median
+square) — T5 with a tilt-range parameter, no new verifier. On 2,222 boxes: 159 boxes' surviving bin is empty (51 L1, 86 L2, 10 L3, 12 of 14 at
+L4), of which **70 are exactly T5′'s kills (trimming subsumes the tight core) and 89 are new** (31 L1, 54 L2, 3 L3,
+1 of the 3 post-T5′ L4 boxes); 155 more are partially trimmed; positive control 618/618. **Schedule 13.3 → 10–11
+wall-days at 5 workers** (the credible saving is levels 2–3; the L4 rate rests on three boxes; ALIVE kills also remove
+their subtrees, which the direct figure does not count, so 10–11 is a conservative upper bound). Deployment shape:
+node = trimmed child (ordinary certificate) + k excluded tilt intervals (T5 with a range, "T5″"); not yet deployed. The value is the outright kills, not the core enlargement (median
 a_tight gain 1.000). Lemma TC (tilt coherence) is exact to machine epsilon as a support-function identity but as a
 kill test is 4.8× weaker than the octagon interval test (33 vs 159) because it discards direction; it stays as the
 O(1) pre-screen. LP re-solves on trimmed bins and the schedule effect pending.
