@@ -204,6 +204,14 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   3,200–7,000, because that figure rested on the 0.85 rate. With R2 on, 138,000–323,000. The ×10 from stacking was
   never there; the one real lever is the parametric window (3.8× vs a side grid). Detail:
   `attempts/A99-k0-tree-v2/notes/report99.md`.
+- block96 (landed 2026-09-06, block-first pilot on 20 k5_11 level-1 nodes): pinning the 2×2 grain as one rigid object
+  is cheap and worth nothing. 1,056 block boxes; 74% die by logic against the pins, and of the rest 93% die by logic per
+  node; 120 LPs, 79 dead → 79/79 certified, 41 alive; **0 of 20 nodes closed** (every node keeps 5–61 alive block boxes,
+  all near-axis-aligned, 0–5° or 85–90°). τ is integral in every LP (0 for kills, 1–2 for survivors): the block-first LP
+  degenerates to "does an 11th square still fit", and the τ = 1 survivors are the η = 0 stratum (cert_failures category
+  E) one level down. **No pinwheel signature**: de-duplicated, 2/14 witness-bearing nodes have same-tilt pairs, none a
+  triple; mid-tilt bins are all free logic kills — a mid-tilt 2×2 block does not fit beside the k5_11 pins. Price 98–231
+  s per node, additive on A57's route; the no-block branch is uncovered. projection96 unchanged.
 - A101 (landed 2026-09-05): SNAP proved, leaf yield 0, FLOOD open with the stall named (§8 item 6); floor sweep
   1e-3 found strictly K0-BLOCKED packings at 3.9907 (§5); floor 1e-2 running (best 4.00046 at 215 seeds).
 - A100 (landed 2026-09-05): k4_11 and k3_02 run end to end. **The η law is exact on 54/54 cover nodes** —
