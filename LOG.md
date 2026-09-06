@@ -3377,3 +3377,39 @@ registry row, this line. Corrections of record to A107's S07 row (s\*, the 44.87
 8 flexes, the "convergence caveat" on the KKT residual) are in
 `attempts/A108-s07-certify/notes/method.md`; `docs/shadows.md` itself was left untouched.
 - 2026-09-06 01:55 RESUME A61 stragglers (PI): campaign61 pid 45764, heavy 2 / jobs 3, BLAS pinned; A57/A96 remain paused.
+
+## 2026-09-06 — A110-grain-flood (Fable, theory lead) — done-mixed: grains are exact and unify Trump/S07/S02; the box-to-grain map has no certificate short of the class kill
+
+**T3 first.** Theorem GRAIN-FLOOD in the ledger's form is TRUE and EMPTY: a packing of the class at side ≤ s0
+makes the global minimum over the compact class phase space a local minimum ≤ s0, so "every local minimum ≤ s0 is in
+Trump's grain" IS the class kill. The flow route (a monotone quantity from a box) is the node's own bound; the
+enumeration route is the selection census (≈ 8⁴⁵ separating-axis choices for an A57 node with five free squares),
+which the tree prunes by localisation — the existential-filter law again. Obstruction drawn
+(`attempts/A110-grain-flood/results/box_to_grain_110.svg`): node c0_Y0324's box holds the RATTLER of its LP support,
+no load-bearing square of the S07 family at any tilt is in the box; A106's boxes flow to eight shadow values. What
+is sound: Lemma GRAIN-LP (at fixed tilts and selection the side minimum is an LP whose dual is a balanced force
+system = a load path), Lemma INHERIT (the formula survives every unloaded contact change), Theorem CONT (s_min is
+continuous in the tilts, n-general — the PI's dichotomy is about loaded rows, not continuity), GRAIN-ROW (a conflict
+row on the support's cells: kills the support, not the node).
+**T1/T2.** [T] S07 = the crossing at 45° of the ladder Λ(θ) = 2 + 2(cos θ + sin θ)/(1 + sin θ cos θ) (minimum
+2 + 4√2/3 only at 45°) with the column chain Y(θ), Y − Λ = (sin θ − cos θ)(cos θ + sin θ − 1)/(1 + sin θ cos θ):
+s_min = max(Λ, Y), the first-order blindness of A108 is Λ′(45°) = 0. S02 = the triple point sin θ cos θ = 2 sin θ − 1
+(θ* = 48.43512°) of the same Λ with the diagonal chain D(θ) = 2 + (2 + cos θ)/(cos θ + sin θ) (and the wedge A);
+s* = Λ(θ*) = 3.886746029, S02 − S07 = 0.001128 because the diagonal forces the ladder off 45°. The Trump boundary of
+S07's family: f0's vertex reaches BL(0,1)'s corner (1,2) and enters the gap under the lifted BL(0,2); the basis
+changes to the gap chain F_T(θ) = 2 + (2 + sin θ)/(cos θ + sin θ) = D(90° − θ) at sin θ cos θ = 2 cos θ − 1 (41.56488°,
+crest value 3.886746029 = S02's exactly — the "mirror minimum"), and F_T falls to ŝ: **TRUMP-GAP: ŝ = 2 + (2 + sin
+θ_T)/(cos θ_T + sin θ_T) to 40 digits** (A03 data); Trump, S07, S02 are three kink minima of one menu {Λ, Y, F_T (=
+mirror D), A}. [M] sweeps (all eleven free, common tilt pinned, 0.1–0.25°): s = Λ on [41.6°, 45°) to 1.9e-8 and Y on
+(45°, 53.75°] to 2e-7 with ONE loaded set per side (13 contacts flicker unloaded, the formula never moves); the gap
+grain to 2.8e-8 from both sides on [40.45°, 41.55°]; S02: Λ on [48.5°, 62°] to 1e-6, D on [44.9°, 48.4°] to 2.6e-7,
+one loaded set per side; minimum of every sweep = the shadow's value; the grid is Λ(0) = 4.
+**T4.** S07 0/19 inside the family (13 have the centres, none the tilts: the six f1_* nodes are Trump's grain at
+39°–41° — canary; the twelve cover nodes draw S07's skeleton at 21°–44°/58°–69°); S02 56/267 (37 L1 + 19 L2 of A57;
+0 of the 14 deep L3/L4 nodes, 0 of A60's 12, 0 of A61's 3). Price: two one-variable inequalities per family vs
+290–336 s per A57 child / ~1 100 s per A60 leaf — but the sound consumer kills support patterns, not nodes.
+Canaries: Trump alive (its grain minimum is ŝ; different selection; TRUMP-GAP identifies it), S07 dead at
+2 + 4√2/3, S02 dead at 3.886746029, grid a grain of side exactly 4. Files: `docs/proofs/grain_flood.md`,
+`attempts/A110-grain-flood/{code,results,logs,notes}`; depgraph notes on C.A57/K0.RESN + node GRAIN (owner A110).
+Constraints honoured: one process, BLAS pinned, read-only on A57/A60/A61/A96/A109 and `lean/` sources (depgraph.json
+notes only), frozen verifiers untouched, git fetch + plain merge + push own paths.
