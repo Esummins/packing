@@ -337,6 +337,21 @@ releases) are outside this census.
    corner-region count is vacuous below side 4.83 (one free square, Trump's sq7, braces all four corners);
    NOROOM holds locally near Trump (m* > ŝ strictly, ε unquantified). Figure:
    `attempts/A103-noroom/results/lockmap103.svg`.
+   *A105 outcome (2026-09-06, `docs/proofs/lockfree.md`, `6ff1d3a9`): the one-wall lemma is **false** as stated — two
+   packings on disk have a wall of length < 4 with both corners blocked and all four intruders held (the 3.985 record's
+   bottom wall, the 3.9907 record's left wall), and at 4.08–4.11 two adjacent walls sharing a corner are fully locked.
+   What stands is Conjecture LOCK-FREE⁺(< 4): some intruder is not LOCKED (held and wall-held), which is exactly what
+   RES-LOCK = ∅ needs. Proved on the way: Lemma ROT-W (no single-square translation with weak active rows decreases a
+   depth), Lemma LINE / PUSH-LINE (held-and-pushed ⇔ the contacts' resultant is the corner-ward force along a line
+   through the argmin set — the exact form of "a far-side contact on the wall side"; the 3.9907 record's BR/TR nicks
+   violate it, which is the PI's torque drain), and the **hook family**: a wall-hugging nick plus a tilted carrier
+   through its inner corner, kinds α (shallow edge) and β (steep edge); Trump's TL crowd is a β-hook to six digits.
+   **Theorems HOOK-α/β**: two hooks of the same kind on one wall need m > 4 (the tilted-grid shell has side exactly
+   2(1+s)(1+c)/(s+c) ≥ 4, equality at the grid). **Proposition HOOK-βα**: the mixed pair fits at m = 2 + (2−s)/c +
+   tan(θ/2) + ε-terms, below 4 for θ in (0°, 30°) — this reproduces the 3.985 record's side to six decimals and is the
+   one-wall obstruction (`attempts/A105-lockfree/results/hookwall105.svg`); Lemma HOOK-W: its β carrier needs a third
+   contact on its upper-right edge (the record has sq9 there at gap 2·10⁻⁷). Residue named: the four-corner PUSH-LINE
+   count. Canaries all pass (Trump one hook only; grid = the shell's equality case).
 
 The honest assessment: 1 is the theorem, attempted twice (A98, A101) with the framework now exact and the stall named
 (cell-interlock), and it is the only item whose empirical boundary has been measured (strictly blocked packings exist
