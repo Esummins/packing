@@ -22,7 +22,7 @@ either killed a piece of (iii) or priced a route to it; none deleted it. It is k
 | block | classes | status | price (CPU-h) | source of price |
 |---|---|---|---|---|
 | k ≥ 6 | 33 | dead, window-converted (A54/A61) | 0 | done |
-| k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric at 6 shards; class coverage 0.978 / 0.994 | **~2,200** (92 CPU-days; 23–26 wall-days at 5 workers with the level-3 tail fitted, 34 if the expansion factor stalls; fixed sides 125 CPU-days) | measured (A96, 2026-09-05): level-2 LP cost settled at **1.11×** (529 children, 53 parents; every earlier high reading was small-sample noise), level-2 verify 545 s/child (n = 26), level-2 descent **11.3%** → expansion factor 0.91 per level, so level 3 is 41% of the wall and the level-3 descent rate is the campaign's highest-value unknown (deepen probe at depth 3 running); 6 shards give +14% throughput for +50% shards (first hint of contention) |
+| k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric at 6 shards; class coverage 0.978 / 0.994 | **~2,200** (92 CPU-days; **~20 wall-days at 5 workers** with the tail measured to termination (level-4 descent 0 of 30), 27 at the 95% upper bound; fixed sides 125 CPU-days) | measured (A96, 2026-09-05): level-2 LP cost settled at **1.11×** (529 children, 53 parents; every earlier high reading was small-sample noise), level-2 verify 545 s/child (n = 26), level-2 descent **11.3%** → expansion factor 0.91 per level, so level 3 is 41% of the wall and the level-3 descent rate is the campaign's highest-value unknown (deepen probe at depth 3 running); 6 shards give +14% throughput for +50% shards (first hint of contention) |
 | trump5 (Trump's own class) | 1 | A60 residual tree, cover done, deepen + tube | 300–500 | running |
 | stragglers (s0-only rows) | 6 left | A61 converting | small | running |
 | protected k4 | 6 (incl. corners4) | P-TREE trees; k4_08/k4_11 killed at 3.833 (A82) | **161–277 per class → 966–1,662 group** (k4_11: closing terms 96.0 CPU-h + one non-closing level-2 round 107.1). First-pass certification **0.385**: τ pins exactly to the budget on 61% of level-1 cells (η = 0), and those cells resist certification, ε_geo *and* level-2 bisection | A100 **measured** (39/882 cells; downstream + (D) complete) |
@@ -215,8 +215,12 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   escalation with depth). Descent is clustered: four parents gave 0 alive children, one gave 3 of 8. Fitting the tail
   instead of truncating at level 3 (factors 1.44 → 0.91 → 0.76, decay ratio ρ): **23–26 wall-days at 5 workers**
   centrally (ρ 0.63–0.86, 5–9 more levels), 34 if the factor stalls at ρ = 1; the tree terminates in every case, so
-  the 10× divergence scenario is ruled out. The dominant unknown is now whether fertile nodes beget fertile nodes;
-  a fertility probe on the four alive level-3 children is running. Earlier follow-ups stand: a
+  the 10× divergence scenario is ruled out. **Fertility probe (2026-09-06, `5fd0e287`): 0 of 4 parents fertile, 0
+  alive of 30 children, f₄ = 0** — fertility is not heritable (three of the four parents were siblings of the one
+  fertile level-3 node, all three died). Mechanism: the logic-kill share rises with depth, 32% at level 2 → 60% at
+  level 4, because smaller boxes clash with the pins; per-child cost flat (240 → 292 s). Factor sequence 1.44 → 0.91
+  → 0.76 → 0.00. **Schedule: ~20 wall-days at 5 workers measured, 21 at f₄ = 0.3, 27 at the 95% upper bound f₄ =
+  0.8** — the tree terminates by measurement, not assumption. Earlier follow-ups stand: a
   completed FAIL plus resolver (3–11 s) beats a timeout, so the verify cap is atom-dependent; the σ ladder to level 2
   would save 2 wall-days but needs a coverage reset, so it is recorded, not deployed.
 - A99 (landed 2026-09-06, `99985b76`): the three k0 tree reductions, measured. **R1 (resolver on A85's FAILs): 0 of
@@ -251,8 +255,15 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   hold near-solutions. Shadow table: 3.8867 (18 open nodes flow to it), 3.9027, 3.9115, 3.9122, 3.9142, 3.9240, 3.9428,
   4.0. **The lever**: pinguard tests the inscribed cores, not the unit squares; testing whether any pose in a box is
   separable from a class pin over the pin's slack core kills **122 of 516 open boxes (23.6%)** at 0.6 s each, including
-  all four open level-4 nodes — worth ~9–13 CPU-days of the tail (2–2.6 wall-days at 5) if made sound as a leaf
-  (A96 asked to evaluate). It also explains part of the clustering: sterile parents are often those whose children are
+  all four open level-4 nodes — worth ~9–13 CPU-days of the tail (2–2.6 wall-days at 5) if made sound as a leaf.
+  *A96's evaluation (`5fd0e287`): not sound as written* — the test takes a sampled minimum of the overlap over a pose
+  grid plus a local descent, and a sampled minimum is an upper bound on the true minimum, so a positive sample does
+  not prove the box empty (the docstring's "a grid can only under-estimate the clash" is backwards). 122/516 is an
+  upper bound on any sound yield. Sound routes: (B) the same KILL-BY-LOGIC leaf with a tightly computed common
+  inscribed core over the box's pose range (larger a, zero new Lean, hours) — approved, with a positive control on
+  the 601 known logic kills first; (A) an interval-SAT leaf over the whole box and pin slack core (new leaf + Lean
+  theorem parallel to T5) — shelved. Honest yield predictor is margin/diameter: median 0.20, 4 of 122 above 0.5, so
+  most flagged boxes need subdivision before an interval bound decides them. It also explains part of the clustering: sterile parents are often those whose children are
   void. Box shrink 2× per coordinate per level. `attempts/A106-shadow-diameter/notes/measurements.md`.
 - A103 (landed 2026-09-06, `f7730e98`, done-mixed): NOROOM at 3.9 open; DRAIN(W) reduced exactly to Conjecture
   LOCK-FREE(< 4) with Lemma ROT proved (§8 item 7); NOROOM-LOCAL near Trump proved (m* > ŝ, ε unquantified).
