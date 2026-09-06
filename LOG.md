@@ -2962,3 +2962,42 @@ affordable cost estimate for closing 3.84.
 - Discipline: 1 process, OMP/MKL/OPENBLAS = 1, pure geometry (no LP, no descents re-run), commit headroom
   65 GB / 7.1 GB free physical throughout. Nothing under A57/A60/A61/A96 written; frozen verifiers untouched.
   Chip on K0.RESN (owner A102, released at close); depgraph re-rendered.
+
+## 2026-09-06 — A103-noroom (Fable, theory lead) — done-mixed: NOROOM local only, DRAIN(W) open, exact obstruction delivered
+- Deliverable `docs/proofs/noroom.md`. (A) closed LOCALLY: Lemma TRUMP-LOCAL [T] — no packing within eta0
+  of a Trump image at side <= s-hat + eps0 is K0-BLOCKED (BR/TR cells are reachable only by the slot square
+  and the 40.18-deg square resting on its corner, and every admissible slot-square pose — axis-aligned,
+  CCW-tilted, CW-tilted, with the floor and the wall as the only constraints — covers the corner region the
+  tilted square would have to enter; exact inequalities f(a) >= 1, h(a) < 0). With the uniqueness clause
+  and compactness: Theorem NOROOM-LOCAL, m* > s-hat strictly; eps0 unquantified and the argument is circular
+  for the window, so (A) at 3.9 stays OPEN. [M] trumplocal103: 29,254 admissible poses all cover, 0 of
+  11,000 valid (sq2, sq8) neighbours doubly meet BR up to s-hat + 0.1.
+- Ingredient 1 delivered as a theorem: Lemma ROT-GRAD (the depth gradient in (v, w) is the row of a virtual
+  contact at the argmin point pushing the square away from the corner; rates explicit; the brief's "toward
+  axis" sense is the vertex-argmin case, an edge-argmin D-type with c_x ~ c_y decreases depth toward the
+  DIAMOND) + Lemma ROT (Gordan: at the Psi^(w)-minimiser every intruder is HELD — no single-square rigid
+  motion strictly opens its active rows and strictly decreases its depth; exact, first order, no second
+  order needed) + Corollary ROT-TORQUE (the PI's one-signed-torque rule). [M] lock103 on A102's 12 strictly
+  K0-BLOCKED packings + Trump (3 s): ZERO packings held at all eight intruders; 37 unheld (17 translation,
+  13 rotation, 7 screw); every packing has an unheld SECOND meeter (22), 9 with full room (= A102's
+  drainers recovered from the first-order test alone), 13 stopped by a near-contact at gap 1e-7..1e-3 (=
+  A102's obstruction, now the second-order case of an exact lemma); record 3.98548 held 7/8 (the 7e-9 TL
+  nick translates out); TRUMP 5/5 HELD — canary PASS.
+- Ingredients 2 and 3 do not bite: [T] Lemma CHAIN-AX (axis-aligned edge-to-edge column exact: near end
+  intrudes by 4 - m in its coordinate, far end at [m-1, m]); [F] a general link makes x-progress > -1 only
+  and Trump's own anchoring column sq4 -> sq7 -> sq8 -> sq1 has tilted middles and a far end that is
+  neither a slot square nor an intruder (the brief's dichotomy has a third case); [F] the home regions
+  [0, 1+sqrt2]^2 pairwise overlap for m < 4.83, adjacent centre regions are 0.41-0.46 apart, one free
+  square braces all four corners (Trump's sq7) — the count is vacuous (A91 F5 in numbers).
+- (B) DRAIN(W) reduces to RES-LOCK(m) = empty on W (RES-LOCK = K0-BLOCKED + every intruder held +
+  NOCRIT-SEL/W-GEN anchoring + SLIDE/CEIL). (C) delivered: the family RES-LOCK, no realisation on disk at
+  any side, candidate realisation = the jammed 4x4 grid at 4 + eps with its near-contacts closed (where the
+  theorem must fail); drawing `attempts/A103-noroom/results/lockmap103.svg` (the two sub-4 packings,
+  intruders labelled HELD/UNHELD with the unheld motions, geometry-checked). THE ONE FACT: Conjecture
+  LOCK-FREE(< 4) — every K0-BLOCKED packing at side < 4 has an unheld intruder; true 12/12 on the corpus,
+  needs two blocked corners (Trump is held everywhere), proof shape = the eight contact cones jointly along
+  one wall of length < 4 with WALL-3. Composition if it lands: StratumKillSel Psi^(w) with LOCK-FREE as
+  the leaf, k0_00 = window kills of k >= 1 + LOCK-FREE, no criticality, no tree; Lean shapes in s.8.
+- Discipline: three chores, one process each, BLAS pinned, seconds, pure geometry; nothing under
+  A57/A60/A61/A96 or A102 written (A102's loader copied, not imported); frozen verifiers untouched.
+  Chip on K0.RESN (owner A103, released at close); depgraph re-rendered.
