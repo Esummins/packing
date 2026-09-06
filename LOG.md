@@ -3222,3 +3222,73 @@ Detail: `attempts/A106-shadow-diameter/notes/measurements.md`, `results/t3_switc
 - Files: attempts/A104-grid-lock/{code/close104.py,code/report104.py,code/gen_lock104.py,code/depgraph_note104.py,
   notes/lock104.md,results/*}; chip on depgraph K0.RESN (owner A104); REGISTRY row. One process, BLAS pinned,
   ~90 min wall. A57/A60/A61/A96/A102/A103 files and the frozen verifiers untouched.
+
+## 2026-09-06 — A107-shadow-gallery (Opus chore, read-only) — done-success: the gallery is `docs/shadows.md`
+
+**53 distinct shadows explain 1260 of the 1566 ALIVE-at-LP nodes on disk** (A57 1227 across both
+classes, all shards, levels 1–4; A60 trump5 325; A61 14. A85-k0-route and A99-k0-tree-v2 have no
+LP node jsons in this format, so the k0_00 level-1 cells could not be included). Ordered by nodes
+explained, with drawings, contact graphs, tilt sweeps and drain hints, in `docs/shadows.md` +
+`docs/shadows/S01..S53.svg`.
+
+* **S02 is the PI's k7 pinwheel and its mechanism reproduces exactly.** s\* = 3.886746030 =
+  ŝ + 0.009662, seven slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` plus
+  four free squares sharing one tilt 48.4351° (spread 1.7e-5°). Fritz-John resultants:
+  **f–top wall 0.867 is the binding contact**, then the mirror pair (0.654 / 0.584) and
+  f–`BR(0,1)` 0.586; the fourth free square is an **idle strut** (forces 5e-4 and 3e-4) and the
+  configuration's single flat direction at fixed s is blocked **only at second order**, curvature
+  −3.9e-7 (ratios 8.99 / 99.9 across |t| = 1e-3, 3e-3, 1e-2 — the quadratic signature). It
+  explains **267** alive nodes across six skeletons (k5_11 184, k5_16 68, trump5 12, k5_02, k5_03,
+  k6_29) and carries the deep tree: 10 of the 19 explained level-3 and 4 of the 9 level-4 nodes,
+  and 97 of the 232 level-2.
+* **Half the explained nodes are not near anything.** 620 of 1260 sit on **S01, whose shadow
+  minimises to a side of exactly 4.000000** = ŝ + 0.1229 — thirteen times the pinwheel's slack —
+  and 62 combinatorially distinct configurations share that value. For those branches the LP's
+  integral support is a side-4 arrangement: it is saying *this has room*, not *this is nearly
+  feasible*.
+* **One value below A106's census floor. S07: s\* = 3.8856180554 = ŝ + 0.008534**, a k11 packing
+  on the trump5 skeleton `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` with five free squares
+  near 44.88°, explaining 19 alive nodes (trump5 18, k5_16 1). Containment exact, worst pairwise
+  SAT −9.5e-8 (inside SLSQP's own tolerance), and feasibility restoration at s = s\* + 1e-7
+  reaches a configuration with every non-degenerate gap ≥ 0. **No exact interval endpoint
+  certificate** in A106's style has been produced, so treat it as numerically verified only. It
+  touches no bound (it is above ŝ), but A106 §2.1's floor of 3.886746 for these classes was not
+  the true floor.
+* **306 alive nodes are explained by NO integral shadow.** Their dual supports are genuinely
+  fractional *and* contain no budget-many pairwise cell-disjoint placements among those with
+  y > 0.02 — 303 of the 306 top out at 4 of 5. There is no near-packing to draw for them; the LP
+  is stalling on a fractional object. Breakdown: k5_11 151 (L1 110, L2 35, L3 4, L4 2), k5_16 113,
+  trump5 42. Full list in `attempts/A107-shadow-gallery/results/unexplained.json`.
+* **Method points that mattered.** (i) *The LP rows are configuration-space cells*, pitch 0.1918
+  in x/y and 5° in tilt, so the drawn representatives overlap by up to a pitch — the verified
+  integral solutions in this corpus have worst pairwise SAT gap **−0.2045** — and the honest
+  disjointness test is gap ≥ −0.21. Testing at ≥ 0 would have called every shadow an overlap and
+  found zero integral components in 1122 fractional supports; at −0.21 it finds 818. (ii) *Flex
+  counts use exact incidence Jacobians*: one row per incident vertex, the analytic derivative of
+  n·(V−P) including the rotation lever term and the dc/ds term for slot squares — never a finite
+  difference of a SAT gap, which is wrong at flush contacts and at exactly-opposite vertex-vertex
+  contacts (whose normal is a cone; 15 entries carry one, and their individual multipliers blow
+  up while the per-contact resultant stays finite). Every flat direction is probed at second order
+  against the exact gaps. (iii) *A shadow is a value of s\*, not a point*: the k7 family's five
+  landings share the same three-square 48.435° core and differ only in where the loose fourth
+  square sits along its flat direction (0.15 in x), so the brief's 0.05/3° point rule splits one
+  shadow into five. A106 reached the same conclusion independently. The gallery groups by s\* and
+  reports, per entry, how many distinct minimised configurations (0.05/3° modulo D4 on the
+  **load-bearing** squares) share it.
+* **Totals.** 173 distinct snapped structures → 305 landings → 53 shadow values / 207
+  configurations. 38 k11 shadows (1132 nodes); 15 k9/k10 ones (128 nodes) from LP runs that never
+  converged and whose integral support is short of budget — their s\* below ŝ means nothing.
+  160 flat directions: 71 genuine flexes, 80 blocked at second order, 9 rank-tolerance artefacts.
+  20 of 238 free squares are rattlers (removal leaves s\* unchanged). 13 of the 53 entries are
+  clean KKT points (residual ≤ 1e-6, 1065 nodes); the other 40 lean on a variable bound or stopped
+  short and their s\* is an upper bound — flagged in each section.
+* **What this does not say.** "Explains" means the node's own LP dual support, snapped and
+  released, minimises to that shadow. It does **not** mean the node's pose box contains it —
+  A106 §2.2 measured that and found zero of 62 landed open boxes does, median ∞-gap 0.3166 ≈ 9
+  r_basin. That finding is reused, not re-derived.
+* **Discipline.** One BLAS-pinned process; nothing under A57/A60/A61/A85/A96/A99/A104/A105/A106 or
+  `lean/` written and no campaign process touched (the single taskkill in the session targeted
+  A107's own PID); frozen verifiers untouched. Writes: `attempts/A107-shadow-gallery/**`,
+  `docs/shadows.md`, `docs/shadows/*.svg`, registry row, this entry, one note line on `C.A57`.
+  Every drawn square containment-checked; the minimised panels also overlap-checked; overlaps
+  appear only in the raw LP panel and are printed as numbers. Wall 1 h 45 min of the 3 h cap.
