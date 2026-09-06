@@ -1,0 +1,797 @@
+{
+ "generated_by": "attempts/A96-a57-parametric/code/holes.py",
+ "inputs": {
+  "census": "attempts/A96-a57-parametric/results/certfail.json",
+  "midtilt": "results/holes.midtilt.jsonl",
+  "eta0": "results/holes.eta0.jsonl"
+ },
+ "definitions": {
+  "midtilt": "witness box whose tilt interval lies in [15,45] deg (census band 'midtilt15-45': tilt_hi>10 and tilt_lo>=15)",
+  "gap": "edge-to-edge distance between the witness square at its emitted placement and the object; pin gaps are to the pin CORE (half-side a from the certificate) unless '_full' is said; negative = overlap",
+  "contact": "gap < 0.02",
+  "cluster": "tilts within 3 deg AND centres within 1.5",
+  "T_s0": "the campaign's 'interior' zone [1.1, s-1.1]^2 (substrat.zones, cw=0.6)"
+ },
+ "midtilt": {
+  "n_boxes": 5695,
+  "n_boxes_census": 5725,
+  "by_campaign": {
+   "A57-tree": 3800,
+   "A60": 840,
+   "A85": 296,
+   "A94": 216,
+   "A92": 200,
+   "A57-epsgeo": 160,
+   "A96-param": 100,
+   "A89-O3": 80,
+   "A100": 3
+  },
+  "by_class": {
+   "k5_11": 3451,
+   "A60-trump5-c0": 840,
+   "k5_16": 825,
+   "k0_00": 376,
+   "A92-blocked-S": 200,
+   "k3_02": 3
+  },
+  "by_certfail_category": {
+   "D": 3741,
+   "H": 1890,
+   "C": 56,
+   "E": 8
+  },
+  "wall_gap_hist": {
+   "<0.02": 1330,
+   "[0.02,0.05)": 16,
+   "[0.05,0.1)": 11,
+   "[0.1,0.2)": 85,
+   "[0.2,0.35)": 51,
+   "[0.35,0.5)": 467,
+   "[0.5,0.75)": 2713,
+   "[0.75,1)": 965,
+   ">=1": 57
+  },
+  "pin_core_gap_hist": {
+   "<0.02": 1494,
+   "[0.02,0.05)": 68,
+   "[0.05,0.1)": 104,
+   "[0.1,0.2)": 327,
+   "[0.2,0.35)": 745,
+   "[0.35,0.5)": 194,
+   "[0.5,0.75)": 1312,
+   "[0.75,1)": 819,
+   ">=1": 56
+  },
+  "pin_full_gap_hist": {
+   "<0.02": 1520,
+   "[0.02,0.05)": 52,
+   "[0.05,0.1)": 94,
+   "[0.1,0.2)": 401,
+   "[0.2,0.35)": 687,
+   "[0.35,0.5)": 186,
+   "[0.5,0.75)": 1388,
+   "[0.75,1)": 743,
+   ">=1": 48
+  },
+  "tilt_hist": {
+   "<20": 529,
+   "[20,25)": 682,
+   "[25,30)": 946,
+   "[30,35)": 815,
+   "[35,40)": 1009,
+   "[40,43)": 897,
+   "[43,45)": 817
+  },
+  "cond_centre_dist_hist": {
+   "[0.5,1)": 1201,
+   "[1,1.5)": 2423,
+   "[1.5,2)": 1439,
+   "[2,3)": 112
+  },
+  "cond_core_gap_hist": {
+   "<0.02": 1276,
+   "[0.02,0.05)": 256,
+   "[0.05,0.1)": 217,
+   "[0.1,0.2)": 714,
+   "[0.2,0.35)": 615,
+   "[0.35,0.5)": 545,
+   "[0.5,0.75)": 991,
+   "[0.75,1)": 457,
+   ">=1": 104
+  },
+  "boxes_with_no_conditioned_square": 520,
+  "pin_overlap_full_square": 1290,
+  "pin_overlap_core": 908,
+  "max_core_overlap": 0.03723509821679816,
+  "whole_box_wall_flush": 1330,
+  "whole_box_pin_flush": 1494,
+  "box_width_xy_max": 0.0004174744254599183,
+  "box_width_tilt_max": 0.027248468163012518,
+  "joint_histogram_wall_x_pin_x_tilt": {
+   "0.5-1.0|pin<0.02|42-45": 414,
+   "0.5-1.0|pin<0.02|25-35": 399,
+   "0.5-1.0|pin<0.02|35-42": 331,
+   "0.5-1.0|0.5-1.0|35-42": 301,
+   "0.5-1.0|0.5-1.0|25-35": 264,
+   "wall<0.02|0.5-1.0|15-25": 241,
+   "0.5-1.0|0.2-0.5|25-35": 235,
+   "0.5-1.0|0.02-0.2|25-35": 213,
+   "0.5-1.0|0.5-1.0|42-45": 211,
+   "0.5-1.0|0.2-0.5|35-42": 201,
+   "wall<0.02|0.5-1.0|35-42": 201,
+   "0.5-1.0|0.5-1.0|15-25": 194,
+   "wall<0.02|0.5-1.0|25-35": 193,
+   "0.5-1.0|pin<0.02|15-25": 180,
+   "0.5-1.0|0.02-0.2|15-25": 177,
+   "wall<0.02|0.5-1.0|42-45": 177,
+   "0.2-0.5|0.5-1.0|35-42": 161,
+   "0.5-1.0|0.2-0.5|42-45": 161,
+   "0.5-1.0|>=1.0|15-25": 120,
+   "wall<0.02|0.2-0.5|25-35": 104,
+   "0.2-0.5|0.5-1.0|25-35": 89,
+   "0.5-1.0|>=1.0|25-35": 80,
+   "wall<0.02|0.2-0.5|35-42": 75,
+   "wall<0.02|>=1.0|25-35": 72,
+   "wall<0.02|>=1.0|35-42": 64,
+   "0.5-1.0|>=1.0|35-42": 64,
+   "0.2-0.5|pin<0.02|35-42": 56,
+   "wall<0.02|>=1.0|15-25": 56,
+   "0.5-1.0|0.2-0.5|15-25": 49,
+   "wall<0.02|0.2-0.5|15-25": 49,
+   "0.5-1.0|0.02-0.2|42-45": 41,
+   "0.2-0.5|>=1.0|35-42": 40,
+   "0.02-0.2|pin<0.02|15-25": 33,
+   "0.2-0.5|0.5-1.0|42-45": 32,
+   "0.02-0.2|pin<0.02|25-35": 32,
+   "0.2-0.5|0.5-1.0|15-25": 28,
+   "wall<0.02|0.2-0.5|42-45": 25,
+   "0.2-0.5|>=1.0|25-35": 24,
+   "wall<0.02|>=1.0|42-45": 24,
+   "0.2-0.5|>=1.0|15-25": 24,
+   "0.5-1.0|>=1.0|42-45": 24,
+   "0.2-0.5|>=1.0|42-45": 24,
+   "0.5-1.0|0.02-0.2|35-42": 19,
+   ">=1.0|0.2-0.5|15-25": 16,
+   "wall<0.02|0.02-0.2|35-42": 16,
+   "wall<0.02|0.02-0.2|25-35": 16,
+   ">=1.0|0.2-0.5|25-35": 16,
+   "0.2-0.5|pin<0.02|42-45": 16,
+   "0.02-0.2|0.5-1.0|15-25": 12,
+   "0.02-0.2|0.5-1.0|35-42": 11,
+   "wall<0.02|pin<0.02|15-25": 8,
+   "0.02-0.2|0.5-1.0|42-45": 8,
+   "0.02-0.2|>=1.0|15-25": 8,
+   ">=1.0|0.2-0.5|42-45": 8,
+   "0.2-0.5|pin<0.02|15-25": 8,
+   "0.02-0.2|0.5-1.0|25-35": 8,
+   "wall<0.02|pin<0.02|35-42": 8,
+   "0.2-0.5|pin<0.02|25-35": 8,
+   ">=1.0|0.02-0.2|15-25": 8,
+   ">=1.0|>=1.0|25-35": 8,
+   "0.2-0.5|0.02-0.2|42-45": 8,
+   ">=1.0|pin<0.02|35-42": 1,
+   "wall<0.02|0.02-0.2|42-45": 1
+  },
+  "contact_multiset": {
+   "none": 2023,
+   "P": 1203,
+   "W": 1185,
+   "C": 864,
+   "P+C": 275,
+   "W+C": 129,
+   "P+W+C": 8,
+   "P+W": 8
+  },
+  "motifs": {
+   "D-motif-4:free-floating": 2023,
+   "D-motif-1:pin-flush": 1494,
+   "D-motif-2:wall-flush": 1314,
+   "D-motif-3:cond-flush": 864
+  },
+  "motifs_by_campaign": {
+   "A100": {
+    "D-motif-1:pin-flush": 2,
+    "D-motif-4:free-floating": 1
+   },
+   "A57-epsgeo": {
+    "D-motif-4:free-floating": 80,
+    "D-motif-3:cond-flush": 40,
+    "D-motif-1:pin-flush": 24,
+    "D-motif-2:wall-flush": 16
+   },
+   "A57-tree": {
+    "D-motif-4:free-floating": 1152,
+    "D-motif-1:pin-flush": 1032,
+    "D-motif-2:wall-flush": 928,
+    "D-motif-3:cond-flush": 688
+   },
+   "A60": {
+    "D-motif-1:pin-flush": 320,
+    "D-motif-4:free-floating": 248,
+    "D-motif-2:wall-flush": 192,
+    "D-motif-3:cond-flush": 80
+   },
+   "A85": {
+    "D-motif-4:free-floating": 160,
+    "D-motif-2:wall-flush": 104,
+    "D-motif-3:cond-flush": 32
+   },
+   "A89-O3": {
+    "D-motif-2:wall-flush": 48,
+    "D-motif-4:free-floating": 32
+   },
+   "A92": {
+    "D-motif-4:free-floating": 184,
+    "D-motif-2:wall-flush": 16
+   },
+   "A94": {
+    "D-motif-4:free-floating": 120,
+    "D-motif-1:pin-flush": 96
+   },
+   "A96-param": {
+    "D-motif-4:free-floating": 46,
+    "D-motif-3:cond-flush": 24,
+    "D-motif-1:pin-flush": 20,
+    "D-motif-2:wall-flush": 10
+   }
+  },
+  "motifs_tilt_hist": {
+   "D-motif-1:pin-flush": {
+    "<20": 114,
+    "[20,25)": 115,
+    "[25,30)": 223,
+    "[30,35)": 216,
+    "[35,40)": 203,
+    "[40,43)": 283,
+    "[43,45)": 340
+   },
+   "D-motif-2:wall-flush": {
+    "<20": 169,
+    "[20,25)": 177,
+    "[25,30)": 144,
+    "[30,35)": 241,
+    "[35,40)": 242,
+    "[40,43)": 163,
+    "[43,45)": 178
+   },
+   "D-motif-3:cond-flush": {
+    "<20": 90,
+    "[20,25)": 142,
+    "[25,30)": 175,
+    "[30,35)": 138,
+    "[35,40)": 170,
+    "[40,43)": 75,
+    "[43,45)": 74
+   },
+   "D-motif-4:free-floating": {
+    "<20": 156,
+    "[20,25)": 248,
+    "[25,30)": 404,
+    "[30,35)": 220,
+    "[35,40)": 394,
+    "[40,43)": 376,
+    "[43,45)": 225
+   }
+  },
+  "free_floating_nearest_object_gap_hist": {
+   "[0.02,0.05)": 219,
+   "[0.05,0.1)": 183,
+   "[0.1,0.2)": 646,
+   "[0.2,0.35)": 509,
+   "[0.35,0.5)": 186,
+   "[0.5,0.75)": 184,
+   "[0.75,1)": 96
+  },
+  "cond_core_touch": {
+   "False": 4448,
+   "True": 727,
+   "None": 520
+  },
+  "cond_core_within_0p02": 1276,
+  "clusters": {
+   "n_clusters": 564,
+   "n_nodes": 309,
+   "clusters_per_node": {
+    "1": 145,
+    "2": 99,
+    "3": 45,
+    "4": 14,
+    "5": 6
+   },
+   "cluster_size_hist": {
+    "1": 43,
+    "2": 22,
+    "3": 4,
+    "4": 1,
+    "8": 349,
+    "16": 107,
+    "24": 26,
+    "32": 6,
+    "40": 4,
+    "48": 1,
+    "64": 1
+   },
+   "boxes_in_clusters_ge2": 5652,
+   "singleton_boxes": 43,
+   "tight_clusters_diam_lt_0p1_dt_lt_1deg": 374,
+   "cluster_diameter_hist": {
+    "<0.001": 392,
+    "[0.001,0.05)": 22,
+    "[0.05,0.2)": 27,
+    "[0.2,0.5)": 37,
+    "[0.5,1)": 47,
+    ">=1": 39
+   },
+   "cluster_tilt_spread_hist": {
+    "<0.01": 407,
+    "[0.01,0.5)": 53,
+    "[0.5,1)": 13,
+    "[1,3)": 82,
+    ">=3": 9
+   },
+   "pure_motif_clusters": 454,
+   "cluster_motifs": {
+    "D-motif-4:free-floating": 183,
+    "D-motif-1:pin-flush": 163,
+    "D-motif-2:wall-flush": 132,
+    "D-motif-3:cond-flush": 86
+   },
+   "nodes_with_2plus_clusters": 164,
+   "nodes_with_same_tilt_separated_clusters": 4
+  }
+ },
+ "eta0": {
+  "n_nodes": 480,
+  "n_nodes_census": 479,
+  "by_campaign_class": {
+   "A57-tree/k5_11": 159,
+   "A60/A60-trump5-c0": 148,
+   "A57-tree/k5_16": 134,
+   "A100/?": 38,
+   "A85/?": 1
+  },
+  "by_budget": {
+   "A57-tree budget=5": 293,
+   "A60 budget=5": 148,
+   "A100 budget=6": 31,
+   "A100 budget=7": 7,
+   "A85 budget=7": 1
+  },
+  "all_have_conditioned_box": true,
+  "wall_seconds": 205966.5,
+  "compatible_images_per_class": {
+   "k5_11": [],
+   "k5_16": [],
+   "k3_02": [
+    0,
+    4
+   ],
+   "k4_11": [
+    0
+   ],
+   "A60-trump5-c0": [
+    0
+   ]
+  },
+  "zone": {
+   "T(s0) interior": 480
+  },
+  "zone_by_campaign": {
+   "A100": {
+    "T(s0) interior": 38
+   },
+   "A57-tree": {
+    "T(s0) interior": 293
+   },
+   "A60": {
+    "T(s0) interior": 148
+   },
+   "A85": {
+    "T(s0) interior": 1
+   }
+  },
+  "tilt_hist": {
+   "<20": 167,
+   "[20,25)": 94,
+   "[25,30)": 5,
+   "[30,35)": 137,
+   "[35,40)": 17,
+   "[40,43)": 55,
+   "[43,45)": 5
+  },
+  "tilt_hist_by_campaign": {
+   "A100": {
+    "<20": 3,
+    "[20,25)": 4,
+    "[30,35)": 17,
+    "[40,43)": 14
+   },
+   "A57-tree": {
+    "<20": 101,
+    "[20,25)": 59,
+    "[25,30)": 5,
+    "[30,35)": 80,
+    "[35,40)": 17,
+    "[40,43)": 26,
+    "[43,45)": 5
+   },
+   "A60": {
+    "<20": 62,
+    "[20,25)": 31,
+    "[30,35)": 40,
+    "[40,43)": 15
+   },
+   "A85": {
+    "<20": 1
+   }
+  },
+  "wall_gap_hist": {
+   "[0.35,0.5)": 24,
+   "[0.5,0.75)": 204,
+   "[0.75,1)": 235,
+   ">=1": 17
+  },
+  "centre_dist_hist": {
+   "<0.25": 9,
+   "[0.25,0.5)": 106,
+   "[0.5,0.75)": 222,
+   "[0.75,1)": 143
+  },
+  "pin_gap_hist": {
+   "<0.02": 288,
+   "[0.02,0.05)": 30,
+   "[0.05,0.1)": 20,
+   "[0.1,0.2)": 35,
+   "[0.2,0.35)": 24,
+   "[0.35,0.5)": 8,
+   "[0.5,0.75)": 14,
+   "[0.75,1)": 22
+  },
+  "image_dist_hist": {
+   "A100": {},
+   "A57-tree": {},
+   "A60": {
+    "[0.02,0.1)": 12,
+    "[0.1,0.25)": 50,
+    "[0.25,0.5)": 51,
+    "[0.5,1)": 35
+   },
+   "A85": {}
+  },
+  "image_tilt_diff_hist": {
+   "A100": {},
+   "A57-tree": {},
+   "A60": {
+    "[1,3)": 14,
+    "[3,5)": 1,
+    "[5,10)": 39,
+    "[10,20)": 32,
+    "[20,30)": 21,
+    ">=30": 41
+   },
+   "A85": {}
+  },
+  "no_image_classes": [
+   "k5_11",
+   "k5_16"
+  ],
+  "rate_controls": {
+   "A60/A60-trump5-c0": {
+    "n_rows": 763,
+    "n_eta0": 148,
+    "rate_overall": "19.4%",
+    "all_rows_in_T": true,
+    "compatible_images": [
+     0
+    ],
+    "by_tilt": {
+     "<15": "62/299 = 21%",
+     "[15,25)": "31/188 = 16%",
+     "[25,35)": "40/186 = 22%",
+     "[35,45)": "15/90 = 17%"
+    },
+    "by_pin_gap": {
+     "<0.02": "114/186 = 61%",
+     "[0.02,0.1)": "22/113 = 19%",
+     "[0.1,0.3)": "12/273 = 4%",
+     "[0.3,0.6)": "0/191 = 0%"
+    },
+    "by_pin_gap_best_in_box": {
+     "<0.02": "51/76 = 67%",
+     "[0.02,0.1)": "54/89 = 61%",
+     "[0.1,0.3)": "41/265 = 15%",
+     "[0.3,0.6)": "2/333 = 1%"
+    },
+    "by_centre_dist": {
+     "<0.25": "2/92 = 2%",
+     "[0.25,0.5)": "23/220 = 10%",
+     "[0.5,0.75)": "76/238 = 32%",
+     "[0.75,1.0)": "47/205 = 23%",
+     "[1.0,1.5)": "0/8 = 0%"
+    },
+    "by_wall_gap": {
+     ">=1.0": "3/161 = 2%",
+     "[0.2,0.5)": "6/57 = 11%",
+     "[0.5,0.75)": "57/244 = 23%",
+     "[0.75,1.0)": "82/301 = 27%"
+    },
+    "by_image_dist": {
+     "<0.05": "2/4 = 50%",
+     "[0.05,0.15)": "25/41 = 61%",
+     "[0.15,0.3)": "39/138 = 28%",
+     "[0.3,0.6)": "66/486 = 14%",
+     "[0.6,1.0)": "16/94 = 17%"
+    }
+   },
+   "A100/k4_11": {
+    "n_rows": 49,
+    "n_eta0": 31,
+    "rate_overall": "63.3%",
+    "all_rows_in_T": true,
+    "compatible_images": [
+     0
+    ],
+    "by_tilt": {
+     "<15": "2/12 = 17%",
+     "[15,25)": "4/6 = 67%",
+     "[25,35)": "15/18 = 83%",
+     "[35,45)": "10/13 = 77%"
+    },
+    "by_pin_gap": {
+     "<0.02": "15/18 = 83%",
+     "[0.02,0.1)": "9/14 = 64%",
+     "[0.1,0.3)": "7/13 = 54%",
+     "[0.3,0.6)": "0/4 = 0%"
+    },
+    "by_pin_gap_best_in_box": {
+     "<0.02": "7/8 = 88%",
+     "[0.02,0.1)": "8/10 = 80%",
+     "[0.1,0.3)": "13/22 = 59%",
+     "[0.3,0.6)": "3/9 = 33%"
+    },
+    "by_centre_dist": {
+     "[0.25,0.5)": "2/5 = 40%",
+     "[0.5,0.75)": "15/20 = 75%",
+     "[0.75,1.0)": "14/24 = 58%"
+    },
+    "by_wall_gap": {
+     "[0.2,0.5)": "6/10 = 60%",
+     "[0.5,0.75)": "14/21 = 67%",
+     "[0.75,1.0)": "11/18 = 61%"
+    },
+    "by_image_dist": {
+     "[0.05,0.15)": "6/6 = 100%",
+     "[0.15,0.3)": "7/9 = 78%",
+     "[0.3,0.6)": "12/24 = 50%",
+     "[0.6,1.0)": "6/10 = 60%"
+    }
+   },
+   "A100/k3_02": {
+    "n_rows": 25,
+    "n_eta0": 10,
+    "rate_overall": "40.0%",
+    "all_rows_in_T": true,
+    "compatible_images": [
+     0,
+     4
+    ],
+    "by_tilt": {
+     "<15": "1/6 = 17%",
+     "[15,25)": "0/3 = 0%",
+     "[25,35)": "4/7 = 57%",
+     "[35,45)": "5/9 = 56%"
+    },
+    "by_pin_gap": {
+     "<0.02": "5/5 = 100%",
+     ">=1.0": "0/5 = 0%",
+     "[0.02,0.1)": "0/1 = 0%",
+     "[0.1,0.3)": "3/3 = 100%",
+     "[0.3,0.6)": "0/7 = 0%",
+     "[0.6,1.0)": "2/4 = 50%"
+    },
+    "by_pin_gap_best_in_box": {
+     "<0.02": "5/5 = 100%",
+     ">=1.0": "2/7 = 29%",
+     "[0.1,0.3)": "3/4 = 75%",
+     "[0.3,0.6)": "0/5 = 0%",
+     "[0.6,1.0)": "0/4 = 0%"
+    },
+    "by_centre_dist": {
+     "<0.25": "0/1 = 0%",
+     "[0.25,0.5)": "0/5 = 0%",
+     "[0.5,0.75)": "5/5 = 100%",
+     "[0.75,1.0)": "5/13 = 38%",
+     "[1.0,1.5)": "0/1 = 0%"
+    },
+    "by_wall_gap": {
+     ">=1.0": "0/6 = 0%",
+     "[0.2,0.5)": "0/4 = 0%",
+     "[0.5,0.75)": "10/15 = 67%"
+    },
+    "by_image_dist": {
+     "[0.05,0.15)": "7/7 = 100%",
+     "[0.15,0.3)": "3/10 = 30%",
+     "[0.3,0.6)": "0/8 = 0%"
+    }
+   },
+   "A57-tree/k5_11": {
+    "n_rows": 730,
+    "n_eta0": 160,
+    "rate_overall": "21.9%",
+    "all_rows_in_T": true,
+    "compatible_images": [],
+    "by_tilt": {
+     "<15": "56/363 = 15%",
+     "[15,25)": "32/147 = 22%",
+     "[25,35)": "39/128 = 30%",
+     "[35,45)": "33/92 = 36%"
+    },
+    "by_pin_gap": {
+     "<0.02": "110/266 = 41%",
+     ">=1.0": "0/10 = 0%",
+     "[0.02,0.1)": "13/77 = 17%",
+     "[0.1,0.3)": "1/113 = 1%",
+     "[0.3,0.6)": "0/118 = 0%",
+     "[0.6,1.0)": "36/146 = 25%"
+    },
+    "by_pin_gap_best_in_box": {
+     "<0.02": "81/184 = 44%",
+     ">=1.0": "0/22 = 0%",
+     "[0.02,0.1)": "36/98 = 37%",
+     "[0.1,0.3)": "7/135 = 5%",
+     "[0.3,0.6)": "0/132 = 0%",
+     "[0.6,1.0)": "36/159 = 23%"
+    },
+    "by_centre_dist": {
+     "<0.25": "2/43 = 5%",
+     "[0.25,0.5)": "50/210 = 24%",
+     "[0.5,0.75)": "66/252 = 26%",
+     "[0.75,1.0)": "42/213 = 20%",
+     "[1.0,1.5)": "0/12 = 0%"
+    },
+    "by_wall_gap": {
+     ">=1.0": "7/120 = 6%",
+     "[0.2,0.5)": "5/31 = 16%",
+     "[0.5,0.75)": "70/290 = 24%",
+     "[0.75,1.0)": "78/289 = 27%"
+    },
+    "by_image_dist": "no compatible Trump image for this class"
+   },
+   "A57-tree/k5_16": {
+    "n_rows": 581,
+    "n_eta0": 134,
+    "rate_overall": "23.1%",
+    "all_rows_in_T": true,
+    "compatible_images": [],
+    "by_tilt": {
+     "<15": "39/231 = 17%",
+     "[15,25)": "33/149 = 22%",
+     "[25,35)": "46/140 = 33%",
+     "[35,45)": "16/61 = 26%"
+    },
+    "by_pin_gap": {
+     "<0.02": "65/142 = 46%",
+     "[0.02,0.1)": "15/87 = 17%",
+     "[0.1,0.3)": "34/191 = 18%",
+     "[0.3,0.6)": "20/161 = 12%"
+    },
+    "by_pin_gap_best_in_box": {
+     "<0.02": "32/64 = 50%",
+     "[0.02,0.1)": "27/67 = 40%",
+     "[0.1,0.3)": "45/192 = 23%",
+     "[0.3,0.6)": "30/258 = 12%"
+    },
+    "by_centre_dist": {
+     "<0.25": "5/57 = 9%",
+     "[0.25,0.5)": "32/163 = 20%",
+     "[0.5,0.75)": "61/189 = 32%",
+     "[0.75,1.0)": "36/172 = 21%"
+    },
+    "by_wall_gap": {
+     ">=1.0": "7/111 = 6%",
+     "[0.2,0.5)": "7/48 = 15%",
+     "[0.5,0.75)": "56/207 = 27%",
+     "[0.75,1.0)": "64/215 = 30%"
+    },
+    "by_image_dist": "no compatible Trump image for this class"
+   }
+  },
+  "rate_controls_note": "the eta = 0 rate against ALL rows the campaign emitted for that class (deduped by tag, last row wins -- the same dedup certfail.py uses).  A100's two classes share the tag namespace, so certfail.json's 38 'A100' eta=0 nodes are a collision of k4_11 (31) and k3_02 (10).",
+  "eta0_by_class_resolved": {
+   "A60/A60-trump5-c0": 148,
+   "A100/k4_11": 31,
+   "A100/k3_02": 10,
+   "A57-tree/k5_11": 160,
+   "A57-tree/k5_16": 134
+  },
+  "children": {
+   "stat": {
+    "no level-2 rows": 437,
+    "has level-2 rows": 43,
+    "children with eta": 42,
+    "at least one child eta=0": 29,
+    "ALL children eta=0": 13
+   },
+   "n_parents_examined": 43,
+   "children_with_eta": 255,
+   "children_eta0": 82,
+   "fraction_children_eta0": 0.3216,
+   "note": "A60 emits no level-2 rows (a60_cover_j0 is depth 0 only); A57 depth-2 children come from tree_*_D2.jsonl via the 'parent' field"
+  }
+ },
+ "canary": {
+  "D_rep_k5_11_interior_Y0049": [
+   {
+    "node": "k5_11_interior_Y0049",
+    "motif": "D-motif-1:pin-flush",
+    "tilt": 34.49626198653341,
+    "wall_gap": 0.5424213573074019,
+    "pin_core_gap": -8.990494328897647e-06
+   },
+   {
+    "node": "k5_11_interior_Y0049",
+    "motif": "D-motif-1:pin-flush",
+    "tilt": 34.496660686240965,
+    "wall_gap": 0.5424259479228866,
+    "pin_core_gap": -6.1822258589083745e-06
+   },
+   {
+    "node": "k5_11_interior_Y0049",
+    "motif": "D-motif-1:pin-flush",
+    "tilt": 34.496660686240965,
+    "wall_gap": 0.5424177165195361,
+    "pin_core_gap": -1.3105477608132965e-05
+   },
+   {
+    "node": "k5_11_interior_Y0049",
+    "motif": "D-motif-1:pin-flush",
+    "tilt": 34.496660686240965,
+    "wall_gap": 0.5424122289173021,
+    "pin_core_gap": -1.1690768295991028e-05
+   },
+   {
+    "node": "k5_11_interior_Y0049",
+    "motif": "D-motif-1:pin-flush",
+    "tilt": 34.49686003577173,
+    "wall_gap": 0.5424227556417471,
+    "pin_core_gap": -1.0147364661317049e-05
+   },
+   {
+    "node": "k5_11_interior_Y0049",
+    "motif": "D-motif-1:pin-flush",
+    "tilt": 34.49705938508714,
+    "wall_gap": 0.5424195633695086,
+    "pin_core_gap": -9.589878045113132e-06
+   },
+   {
+    "node": "k5_11_interior_Y0049",
+    "motif": "D-motif-1:pin-flush",
+    "tilt": 34.49705938508714,
+    "wall_gap": 0.5424168195683916,
+    "pin_core_gap": -8.882549938138418e-06
+   }
+  ],
+  "E_rep_k5_11_interior_Y0083_D02": [
+   {
+    "node": "k5_11_interior_Y0083_D02",
+    "eta": 1.468158927764307e-12,
+    "zone": "T(s0) interior",
+    "tilt": 5.721112251435528
+   }
+  ],
+  "E_tube_rep_not_eta0_by_construction": "k5_11_interior_Y0041_D02 (eta=-0.571): tube hit, not an eta=0 node",
+  "ok": true
+ },
+ "n_figures_appended": 12,
+ "summary": [
+  "mid-tilt: 5695 boxes over 309 nodes are only 564 DISTINCT placements (a cluster is one placement resolved into 8/16/24 terminal boxes; median box width 4e-4 in x and tilt); 1-5 placements per node.",
+  "mid-tilt motifs (boxes): {\"D-motif-4:free-floating\": 2023, \"D-motif-1:pin-flush\": 1494, \"D-motif-2:wall-flush\": 1314, \"D-motif-3:cond-flush\": 864}",
+  "mid-tilt motifs (distinct placements): {\"D-motif-4:free-floating\": 183, \"D-motif-1:pin-flush\": 163, \"D-motif-2:wall-flush\": 132, \"D-motif-3:cond-flush\": 86}",
+  "3672 of 5695 boxes rest on something (pin core, wall or conditioned core, gap < 0.02); the pin contact is FLUSH (modal core gap 0.000, i.e. inside the drawn unit pin by the 0.01 slack) and the wall contact is exact (gap 0.000).",
+  "the same-tilt-different-place pinwheel signature is ABSENT: only 4 of 164 nodes with >= 2 placements have two placements within 3 deg of each other.",
+  "eta = 0: every node's conditioned box is in T(s0) -- but so is every row those campaigns emitted, so position in T is not the discriminator.",
+  "eta = 0 IS a pin-contact phenomenon: the rate is 42-100% for conditioned boxes whose square touches a pin and 0-15% for boxes 0.3-0.6 from every pin (see rate_controls).",
+  "for the classes that HAVE a compatible Trump image (A60-trump5-c0, k4_11, k3_02) the eta = 0 rate also concentrates within 0.15 of a free image square (61%, 100%, 100%); k5_11 and k5_16 have NO compatible image, and there the second eta = 0 population sits in the far pocket of T(s0) (x, y ~ 2.3-2.7) away from every pin.",
+  "eta = 0 propagates: 0.3216 of the level-2 children that were re-solved are again eta = 0, and 13 of 42 re-solved parents have ALL children at eta = 0."
+ ]
+}

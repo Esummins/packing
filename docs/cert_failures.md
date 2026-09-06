@@ -121,6 +121,58 @@ The dominant sub-band is a 26.75° square 0.67 from the top wall and 2 from the 
 a corner pose. With D it makes mid-tilt about 60% of all witness boxes. The other H sub-bands (flush or low-tilt
 squares in the interior or against a wall, and "spanning" squares whose box crosses the 1.2 line) are each small.
 
+## 1b. The two holes characterised (holes chore, 2026-09-05)
+
+**Mid-tilt: 5,695 boxes are 564 placements, and they lean.** A witness "cluster" (tilts within 3°, centres within
+1.5) is one placement resolved into 8 to 24 terminal boxes of width ~4·10⁻⁴; there are 1 to 5 placements per node.
+So a drain has to kill about 564 placements, not 5,700 boxes. Their motifs, by contact:
+
+| motif | boxes | placements | what the square is doing |
+|---|---|---|---|
+| pin-flush | 1,494 | 163 | resting edge-on-edge on a **pin core**, inside the drawn pin by exactly the slack (0.014 = 0.01·√2); 0.5–0.65 from the nearest wall |
+| free-floating | 2,023 | 183 | touching nothing; the nearest object is the conditioned square's core at ~0.2 |
+| wall-flush | 1,314 | 132 | resting exactly on a wall, ≥ 0.2 from any pin |
+| cond-flush | 864 | 86 | resting on the conditioned square's core: the two free squares leaning on each other |
+
+![pin-flush](cert_failures/fig_D_16.svg)
+![wall-flush](cert_failures/fig_D_17.svg)
+![cond-flush](cert_failures/fig_D_18.svg)
+![free-floating](cert_failures/fig_D_19.svg)
+
+Two negatives that matter. **There is no fractional-pinwheel signature**: only 4 of 164 multi-placement nodes have two
+placements at the same tilt in different positions; the placements in a node differ in tilt, not in position. The LP's
+unpriceable mass is single leaning squares, not a quarter-weight 2×2 block. And the contact is a whole-box property:
+every pin-flush and wall-flush box is flush at all eight of its corner placements. The pin-flush overlap of exactly the
+slack is what the window transfer costs: the core is the pin shrunk by 0.01, so a placement that overlaps the true pin
+by 0.014 is legal for the certificate and is a real placement at another side of the slab.
+
+**η = 0 is the pin-contact stratum.** All 480 η = 0 nodes have conditioned boxes inside T(s₀), but so does every row
+those campaigns emitted (the cover forces it); against that control the discriminator is whether the conditioned box
+touches a pin:
+
+| class | η = 0 rate overall | with pin gap < 0.02 | 0.1–0.3 | ≥ 0.3 |
+|---|---|---|---|---|
+| k5_11 (A57) | 22% | **42%** | 1% | 0% |
+| k5_16 (A57) | 23% | **46%** | 18% | 12% |
+| trump5 (A60) | 19% | **61%** | 4% | 0% |
+| k4_11 (A100) | 63% | **83%** | 54% | 0% |
+| k3_02 (A100) | 40% | **100%** | 100% | 0% |
+
+![eta0 pin-touching k5_11](cert_failures/fig_E_20.svg)
+![eta0 k5_16](cert_failures/fig_E_22.svg)
+![eta0 trump5](cert_failures/fig_E_24.svg)
+![eta0 k4_11](cert_failures/fig_E_26.svg)
+
+Where a class has a Trump image the η = 0 nodes also concentrate on it (61% / 100% / 100% within 0.15 of a free image
+square for trump5 / k4_11 / k3_02); k5_11 and k5_16 have no image and their second η = 0 population sits in the far
+pocket of T(s₀) diagonally opposite the pins. η = 0 propagates: of 255 re-solved children of η = 0 parents, 82 (32%)
+are again η = 0, and 13 of 42 parents have every child at η = 0. Deepening is not reliably curative on this stratum.
+
+**The unification.** Both holes are the same object seen twice: a tilted square in contact with an axis-aligned pin, a
+wall, or the one other localised square. The certificate's slack cores make that contact cheap for the adversary, and
+the exact charge tables (A45) say its local wastage is small (≤ 0.22 at a wall vertex, ≤ 0.007 at an interior
+corner-on-edge), so nothing local prices it. A drain for the leaning square is the target for both holes at once.
+
 ## 2. What plugging each class is worth
 
 | target | wall it holds | what a drain would need to say | status |
