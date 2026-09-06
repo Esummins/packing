@@ -3001,3 +3001,23 @@ affordable cost estimate for closing 3.84.
 - Discipline: three chores, one process each, BLAS pinned, seconds, pure geometry; nothing under
   A57/A60/A61/A96 or A102 written (A102's loader copied, not imported); frozen verifiers untouched.
   Chip on K0.RESN (owner A103, released at close); depgraph re-rendered.
+- A96 LEVEL-3 PROBE LANDED (42 children, 6 parents, delta=1e-2, ALIVE-only parents). Descent 4/42 = 9.52% -> expansion factor
+  f3 = 0.762. Per-child 291.8 s (close to level 2's 240.3 s -- cost does NOT escalate with depth). Outcomes PASS 29 / FAIL 5 /
+  KILL-BY-LOGIC 3 / ALIVE 4.
+- **DESCENT IS CLUSTERED, NOT UNIFORM** -- the single most important qualifier on every number below. Per parent: four of the six
+  complete parents contributed ZERO alive children (0/8 each); ONE parent (Y0036_D07) contributed 3 of 8; the sixth (Y0186_D00)
+  is 1 of 2 and incomplete. So the pooled 9.52% is dominated by which parents were sampled, and a branching process with a few
+  fertile nodes is the right picture, not a uniform geometric. n=42 with 4 events is a wide interval (roughly 3-24% Poisson,
+  f3 in 0.2-1.9).
+- THE FACTOR TREND AND THE TAIL. f1 = 1.439 (level-1 ALIVE fraction), f2 = 0.906, f3 = 0.762. The factor IS falling, but its
+  DECAY IS SLOWING: f2/f1 = 0.63, f3/f2 = 0.841. Extrapolating f_{k+1} = rho * f_k instead of truncating at level 3:
+      rho = 0.63 (decay continues as level1->2)   tail  5267 children,  5 levels, 37.79 d -> TOTAL 112.89 d -> 22.58 wall-days @5w
+      rho = 0.736 (geometric mean, central)       tail  5982 children,  6 levels, 42.91 d -> TOTAL 118.01 d -> 23.60 wall-days @5w
+      rho = 0.86 (decay as level2->3)             tail  7365 children,  9 levels, 52.83 d -> TOTAL 127.93 d -> 25.59 wall-days @5w
+      rho = 1.0  (factor stalls at 0.762)         tail 13355 children, 30 levels, 95.80 d -> TOTAL 170.90 d -> 34.18 wall-days @5w
+  Truncating at level 3 gave 75.10 d -> 15.02 wall-days @5w, so THE TAIL IS 50-130% ON TOP: the honest schedule is 23-26
+  wall-days at 5 workers on the central cases, 34 if the factor stalls. The tree does terminate in every case examined (rho < 1
+  gives 5-9 further levels), so this is a cost, not a divergence.
+- The dominant uncertainty has moved AGAIN: it is no longer per-child cost (settled: level-2 LP 1.11x, level-3 291.8 s) nor the
+  level-3 rate itself, but the CLUSTERING -- whether the fertile-parent fraction stays near 1-in-6 or itself decays. That is
+  measurable by deepening the four ALIVE level-3 children and seeing how many are fertile.

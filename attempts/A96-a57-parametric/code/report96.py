@@ -362,6 +362,59 @@ def main():
                 wall_days_5workers=round(tot_r / 5, 2),
                 with_sigma_ladder_wall_days_5workers=round(
                     (tot_r - sigma_saved_s / day) / 5, 2))
+            # ---- the geometric tail, instead of truncating at level 3 ----------------------
+            # Measured expansion factor f_k = (descent rate at level k) x fanout 8:
+            #   f1 = 1.439 (level-1 ALIVE fraction), f2 = 0.907, f3 from the depth-3 probe.
+            # The factor is falling but the DECAY IS SLOWING (f2/f1 = 0.63, f3/f2 = 0.86), so the
+            # tail is extrapolated as f_{k+1} = rho * f_k over a range of rho rather than assumed
+            # to stop.  rho = 1 is "the factor stalls" (worst), rho = 0.63 is "it keeps decaying
+            # as it did from level 1 to 2" (best); the geometric mean 0.736 is the central case.
+            l3p = os.path.join(BASE, "..", "A57-shadow-trees", "results",
+                               "tree_k5_11_interior_G1_D2_D2.jsonl")
+            if os.path.exists(l3p):
+                L3 = load(l3p)
+                byp3 = {}
+                for r in L3:
+                    byp3.setdefault(r["id"].rsplit("_D", 1)[0], []).append(r)
+                a3 = sum(1 for r in L3 if (r.get("cert") or "").startswith("ALIVE"))
+                f3 = a3 / len(L3) * 8
+                w3 = [(r.get("lp_seconds") or 0) + (r.get("cert_seconds") or 0) for r in L3
+                      if (r.get("lp_seconds") or 0) > 0]
+                # descent is CLUSTERED: report per-parent so the pooled rate is not mistaken for
+                # a uniform one.
+                pp3 = {k: dict(children=len(v),
+                               alive=sum(1 for r in v
+                                         if (r.get("cert") or "").startswith("ALIVE")))
+                       for k, v in byp3.items()}
+                f1 = 8 * sum(sel["stats"][c]["alive"] for c in CLASSES) / \
+                     sum(sel["stats"][c]["total"] for c in CLASSES)
+                f2 = desc3 * 8
+                N3 = l2_children * f2
+                per_child_all = (sc * 216.4) + (v2 or mean_param or 0.0)
+                tails = {}
+                for rho in (0.63, 0.736, 0.86, 1.0):
+                    n, f, tot, lvl = N3, f3, 0.0, 0
+                    while lvl < 40 and n * f > 1.0:
+                        n = n * f
+                        tot += n
+                        f *= rho
+                        lvl += 1
+                    tails[str(rho)] = dict(levels=lvl, children=round(tot),
+                                           days_1proc=round(tot * per_child_all / day, 2))
+                proj["level3_probe"] = dict(
+                    children=len(L3), parents=len(byp3), alive=a3,
+                    descent_rate=round(a3 / len(L3), 4), expansion_factor=round(f3, 3),
+                    per_child_s=round(sum(w3) / len(L3), 1),
+                    per_parent=pp3,
+                    clustering_note=("descent is CLUSTERED, not uniform: most parents contribute "
+                                     "zero and a minority contribute several, so the pooled rate "
+                                     "is dominated by which parents were sampled"))
+                proj["geometric_tail"] = dict(
+                    factors=dict(level1=round(f1, 3), level2=round(f2, 3), level3=round(f3, 3)),
+                    factor_decay=dict(f2_over_f1=round(f2 / f1, 3), f3_over_f2=round(f3 / f2, 3)),
+                    per_child_s=round(per_child_all, 1),
+                    tail_beyond_level3=tails,
+                    note=("tail = levels 4+ only; levels 1-3 are already in the schedule below"))
             # ---- sigma ladder applied to the D2 cover (brief follow-up) --------------------
             # The orbit reduction does NOT need a separate level-2 ladder: if k5_11's level-1
             # cover is sigma-symmetric and only orbit representatives are expanded, the partner
