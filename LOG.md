@@ -3305,3 +3305,74 @@ explained, with drawings, contact graphs, tilt sweeps and drain hints, in `docs/
   The filter is confirmed live in the restarted workers, which is what this window was actually able to establish; the hour's
   raw kill RATE is not evidence either way, since an hour's boxes are not a random sample of the cover.
 - 2026-09-06 00:37 PAUSE (PI directive): A61 campaign61 + resolve61 (k5_05, k6_21) stopped, resumable (attempts/A61-window-stragglers/PAUSED.md); A57/A96 workers being paused by A96 (attempts/A57-shadow-trees/PAUSED.md). Reason: A108/A109 may change the tree's economics (node-level SLOT-CROWD rows, shadow basins). Chores A108/A109 continue.
+
+
+## 2026-09-06 — A108-s07-certify (Opus chore, read-only) — done-success: S07 is exact, and it is NOT Trump's basin
+
+**s\* = 2 + 4√2/3 = (6 + 4√2)/3 = 3.885618083164127 exactly** (s\* − ŝ = +0.008534493141313).
+Released with all eleven squares free (A106's `shadow11` at zero pins, cross-checked against A107's
+engine) A107's S07 landing polishes to a configuration with every coordinate in **Q(√2)** and every
+tilted square at **exactly 45°**; the six active contacts close by hand into 3s = 6 + 8·(√2/2). It is
+a **quadratic** irrational — ŝ is degree 8. A107's gallery value 3.885618055 is **2.8e-8 low**: that
+landing overlapped by 9.5e-8, so its true side is 3.8856184245.
+
+* **Exact packing proof, no tolerance in the decision**: 55 pairwise SAT gaps and 44 containment gaps
+  computed as a + b√2 with a, b ∈ ℚ (sign by comparing a² with 2b²) — **0 violations**, 24 rows
+  exactly 0. A106's mpmath-iv `certify_endpoint` also PASSes at the first rung, **ε = 1e-9**
+  (s_cert = 971404521041/250000000000, margin 2.20e-10), from the polished landing and from the exact
+  configuration alike.
+* **Contact graph** (exact supporting faces, not a tolerance test): 14 pair + 10 wall rows —
+  `f0`–`f2` and the three BL column pairs are **full-edge flush**, `f0`–`f1` / `f0`–`f4` / `f1`–`f2` /
+  `f2`–`f4` partial flush, `f0`–`BL(0,1)`, `f1`–`BL(0,2)`, `f2`–`TR(0,0)`, `f4`–`BL(1,0)`,
+  `f4`–`BR(0,0)` vertex-on-edge, and `BL(0,1)`–`BL(1,0)` a **corner-corner point kiss** (the type
+  known_results 16a records A31's menu as omitting — Trump has one in the same place).
+* **NOT first-order rigid**: rank 30 of 33 at fixed s, **3 two-sided flexes**, which are exactly
+  `f3`'s three degrees of freedom (free to at least third order; its slack is 0.0118). The one-sided
+  cone {v : Jv ≥ 0} is bigger still — `f4` slides along its shared 45° edge.
+* **Fritz-John fails at first order for a geometric, not numerical, reason**: nnls residual 0.152,
+  concentrated on `f1.θ` and `f2.θ`. A unit square at *exactly* 45° touching a wall has **zero
+  first-order torque** from that wall — its touching vertex sits at the top of its rotation circle, so
+  the containment gap is quadratic in θ (half-width loss 3.54e-7 at dθ = 1e-3, 3.54e-5 at 1e-2). Local
+  minimality is therefore established at second order: minimising s inside an L∞ trust region of
+  radius ρ returns s\* for every ρ ≤ 0.03 (worst excess 3.1e-7). **METHOD WARNING, general**: the
+  naive "perturb and re-minimise" without a trust region reports a spurious descent to ŝ from
+  perturbations as small as 0.002, because SLSQP repairs the infeasibility by walking out of the basin.
+* **Load-bearing**: force-bearing `f0 f1 f2 f4` and slot squares `BL(0,0) BL(0,1) BL(0,2)` (their
+  stacked height 3 is what enters the s equation), `BR(0,0)` (stops `f4`), `TR(0,0)` (stops `f2`,
+  though its contact is *implied* by the others for every s). `BL(1,0)` carries no contact force but
+  removing it drops the ten-square optimum to 3.788 — a space filler, not a strut. `f3` is the only
+  rattler in both senses (removing it changes s\* by +1e-5).
+
+**vs Trump** (`docs/residue_map/s07_vs_trump.svg`, both panels containment- and overlap-checked,
+worst SAT −4.4e-16). Same eleven-square skeleton in the **same D4 frame** (best of the eight
+alignments is the identity); `BL(0,0)`, `BL(0,1)`, `BL(1,0)` are identical to 0. Exactly two things
+differ: the tilt (**45° vs 40.1819°, a gap of 4.8181°**) and Trump's `BL(0,2)`, **lifted 0.03256 off
+its slot** — the TL two-crowd. L∞ pose distance 0.0841. The mechanism swap is visible in the contacts:
+in Trump `f3` is wedged on the right wall between `f2` and `f4` and `BL(0,1)`–`BL(0,2)` is open;
+in S07 the column closes, `f0`–`f1` appears, and **`f3` falls out of the load path entirely**.
+
+**They are separate local minima.** Along the straight segment in normalised pose space the exact side
+function σ rises to **3.917542707 at t = 0.692**, +0.031925 over S07 and +0.040459 over Trump. The most
+generous path measured — hold the five tilted squares at a common tilt and re-minimise all eleven
+centres, the six upright tilts and s, on a 0.05° grid warm-started from both ends — still crests at
+**3.886723119 at 41.60°, +0.001105 over S07** (below the crest the branch flips and s falls
+monotonically to ŝ). Read the other way: **S07 is what Trump becomes if its one disturbed upright is
+put into the `BL(0,2)` slot, and the price is exactly +0.0085345 of side** — A101's cellflood named
+that square and its extension class k6_07; A108 puts the number on it.
+
+**Class and kill.** Six simple squares ⇒ **k = 6**; Young diagram BL (3,1) by columns, BR (1), TR (1),
+TL ∅; the slot set matches census class **k6_07** under the identity of D4 (trump5 + `BL(0,2)`). The
+covering kill is the A53/A54 k6_07 stratum certificate (PASS at s0, 11 atoms, total 4.806673) with
+A56's parametric transfer **PARTIAL**: certified on [191/50, 956767/250000] = [3.82, 3.827068],
+window coverage **12.38 %**, open band (3.827068, s0] — A61's **G-A56-3**, currently paused. But
+s\* = 3.885618 sits **0.0085 above the window's right endpoint**, so no S07-shaped packing exists
+anywhere in W = [3.82, s0] and that open band is not about this configuration. What S07 is about is
+the trump5 tree's slowness: it is the shadow of 19 alive-at-LP nodes (A107: trump5 ×18, k5_16 ×1, all
+level 1) and 0.0085 of slack is exactly the scale a δ = 1e-2 emission cannot resolve.
+
+Constraints honoured: read-only on A22/A53/A56/A57/A60/A61/A106/A107 and `lean/` (their modules are
+imported, never written); one BLAS-pinned process; git fetch + plain merge + push own paths only.
+Writes: `attempts/A108-s07-certify/{code,results,notes}`, `docs/residue_map/s07_vs_trump.svg`,
+registry row, this line. Corrections of record to A107's S07 row (s\*, the 44.879° common tilt, the
+8 flexes, the "convergence caveat" on the KKT residual) are in
+`attempts/A108-s07-certify/notes/method.md`; `docs/shadows.md` itself was left untouched.
