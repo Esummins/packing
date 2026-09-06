@@ -27,7 +27,7 @@ either killed a piece of (iii) or priced a route to it; none deleted it. It is k
 | stragglers (s0-only rows) | 6 left | A61 converting | small | running |
 | protected k4 | 6 (incl. corners4) | P-TREE trees; k4_08/k4_11 killed at 3.833 (A82) | **161–277 per class → 966–1,662 group** (k4_11: closing terms 96.0 CPU-h + one non-closing level-2 round 107.1). First-pass certification **0.385**: τ pins exactly to the budget on 61% of level-1 cells (η = 0), and those cells resist certification, ε_geo *and* level-2 bisection | A100 **measured** (39/882 cells; downstream + (D) complete) |
 | protected k ≤ 3 (excl. k0_00) | 9 | P-TREE trees | **2,541 group** (k3_02 242, k2 313, k1 392 per class; k3_02 closing terms 141.0 CPU-h + level-2 round 149.2). Certification 0.75, resolver 9/9, ladder lands at level 24 in the tube (59 (D) leaves) | A100 **measured** (20/780 cells) + budget scaling ×1.149/step |
-| k0_00 | 1 | interior-first tree unrun | 3,200–7,000 at s0 → 400–700 if A99 lands | A85 model; A99 measuring |
+| k0_00 | 1 | interior-first tree unrun | **9,300–21,700 window-valid** (A99 stacked, 2026-09-06); A85's 3,200–7,000 at s0 assumed a 0.85 certification rate, measured 2/3 | A85 model with A99's measured f2, R1 = 0, R2 off, parametric window +5% |
 
 The protected tier and k0_00 are the two blocks where a theorem could delete work; the rest is engineering.
 
@@ -171,10 +171,20 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   needs a different plan, if it halves again the 18.5-day figure is close to final. Earlier follow-ups stand: a
   completed FAIL plus resolver (3–11 s) beats a timeout, so the verify cap is atom-dependent; the σ ladder to level 2
   would save 2 wall-days but needs a coverage reset, so it is recorded, not deployed.
-- A99 (partial; supervisor died after R2, report requested): R2's branching of the root on the corner shallow/deep
-  pattern costs ×15 in level-1 cells (3,240 vs 216, exact D4 stabiliser count); the shallow-pattern cells die at
-  level 1 (η ≈ −1 to −2 at δ = 0.3) but the all-deep branch keeps A85's tree verbatim, so R2 cannot price the k0
-  tree below A85's 3,200–7,000 CPU-h. R1 (resolver) and R3 (per-node exempt boxes) numbers pending the report.
+- A99 (landed 2026-09-06, `99985b76`): the three k0 tree reductions, measured. **R1 (resolver on A85's FAILs): 0 of
+  12 close** — re-verifying the same certificate at depth 56 → 64 → 88 *raises* the hole counts (b178: 42 → 45 → 47),
+  because the case verifier bisects uniformly (no s-axis starvation to exploit, unlike A57's parametric resolver);
+  A85's FAILs are LP row-generation failures, so the first-pass certification rate stays 1/3, 2/3 with ε_geo — A85's
+  published 0.85 was optimistic. **R2 (shallow/deep branching): ×15 in level-1 cells** (3,240 vs 216, exact D4
+  stabiliser count); τ drops by ~1.06 on the shallow branches but minmass halves, i.e. the LP is *less* converged,
+  not the node deader — zero kills claimed; the all-deep branch keeps A85's tree verbatim. **R3(c) parametric
+  emission works**: A85's interior cell grid is already in A96's affine family, and one node passes the frozen 4-D
+  verifier over the whole window in 123 s (+5–7% per node vs ×4 for four fixed sides; n = 1, a 53-atom sibling timed
+  out; the four corner-crowd nodes have t-grid cores and cannot be emitted; cover-invariance transport to the A38
+  cover is an open obligation). **Stacked, window-valid: 9,300–21,700 CPU-h** — 2.9–3.1× *worse* than the published
+  3,200–7,000, because that figure rested on the 0.85 rate. With R2 on, 138,000–323,000. The ×10 from stacking was
+  never there; the one real lever is the parametric window (3.8× vs a side grid). Detail:
+  `attempts/A99-k0-tree-v2/notes/report99.md`.
 - A101 (landed 2026-09-05): SNAP proved, leaf yield 0, FLOOD open with the stall named (§8 item 6); floor sweep
   1e-3 found strictly K0-BLOCKED packings at 3.9907 (§5); floor 1e-2 running (best 4.00046 at 215 seeds).
 - A100 (landed 2026-09-05): k4_11 and k3_02 run end to end. **The η law is exact on 54/54 cover nodes** —
@@ -186,8 +196,10 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   the resister branch has no measured closing mechanism, and it is the whole gap to A84's model. (D) side is
   cheap and identical to A84's (both ladders land at level 24, all_in_tube; 28 leaves for |G_S| = 1, 59 for 2).
   **Protected tier, 15 classes excl. k0_00: 3,500–4,200 CPU-h** central, band 2,900–6,300 on the level-2
-  child wall, vs A84's 1,800 model. **All layers: 5,900–13,700 CPU-h** against the ~400 CPU-h PI target;
-  k0_00 alone is 400–7,000 of it. Detail: `attempts/A100-protected-pilot/results/a100_{report,projection}.json`.
+  child wall, vs A84's 1,800 model. All layers as A100 priced them: 5,900–13,700 CPU-h with k0_00 at 400–7,000;
+  **with A99's measured k0_00 (9,300–21,700) the all-layers figure is ~15,000–28,000 CPU-h** against the ~400 CPU-h
+  PI target, and k0_00 is now the largest single layer, ahead of A57 (2,200) and the protected tier (3,500–4,200).
+  Detail: `attempts/A100-protected-pilot/results/a100_{report,projection}.json`.
 
 ## 8. What would delete the residue — candidate theorems, with the effect each would have
 
