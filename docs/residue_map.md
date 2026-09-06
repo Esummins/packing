@@ -22,7 +22,7 @@ either killed a piece of (iii) or priced a route to it; none deleted it. It is k
 | block | classes | status | price (CPU-h) | source of price |
 |---|---|---|---|---|
 | k ≥ 6 | 33 | dead, window-converted (A54/A61) | 0 | done |
-| k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric at 6 shards; class coverage 0.978 / 0.994 | **~2,200** (92 CPU-days; **~20 wall-days at 5 workers** with the tail measured to termination (level-4 descent 0 of 30), 27 at the 95% upper bound; fixed sides 125 CPU-days) | measured (A96, 2026-09-05): level-2 LP cost settled at **1.11×** (529 children, 53 parents; every earlier high reading was small-sample noise), level-2 verify 545 s/child (n = 26), level-2 descent **11.3%** → expansion factor 0.91 per level, so level 3 is 41% of the wall and the level-3 descent rate is the campaign's highest-value unknown (deepen probe at depth 3 running); 6 shards give +14% throughput for +50% shards (first hint of contention) |
+| k = 5 unprotected | k5_11, k5_16 | A57 → A96 parametric at 6 shards; class coverage 0.978 / 0.994 | **~2,200** (92 CPU-days; **~13.3 wall-days at 5 workers** with the tail measured to termination (level-4 descent 0 of 30) and the tight-core pre-filter (−32%); 19.6 without the pre-filter, 27 at the 95% upper bound on the tail; fixed sides 125 CPU-days) | measured (A96, 2026-09-05): level-2 LP cost settled at **1.11×** (529 children, 53 parents; every earlier high reading was small-sample noise), level-2 verify 545 s/child (n = 26), level-2 descent **11.3%** → expansion factor 0.91 per level, so level 3 is 41% of the wall and the level-3 descent rate is the campaign's highest-value unknown (deepen probe at depth 3 running); 6 shards give +14% throughput for +50% shards (first hint of contention) |
 | trump5 (Trump's own class) | 1 | A60 residual tree, cover done, deepen + tube | 300–500 | running |
 | stragglers (s0-only rows) | 6 left | A61 converting | small | running |
 | protected k4 | 6 (incl. corners4) | P-TREE trees; k4_08/k4_11 killed at 3.833 (A82) | **161–277 per class → 966–1,662 group** (k4_11: closing terms 96.0 CPU-h + one non-closing level-2 round 107.1). First-pass certification **0.385**: τ pins exactly to the budget on 61% of level-1 cells (η = 0), and those cells resist certification, ε_geo *and* level-2 bisection | A100 **measured** (39/882 cells; downstream + (D) complete) |
@@ -263,7 +263,15 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   inscribed core over the box's pose range (larger a, zero new Lean, hours) — approved, with a positive control on
   the 601 known logic kills first; (A) an interval-SAT leaf over the whole box and pin slack core (new leaf + Lean
   theorem parallel to T5) — shelved. Honest yield predictor is margin/diameter: median 0.20, 4 of 122 above 0.5, so
-  most flagged boxes need subdivision before an interval bound decides them. It also explains part of the clustering: sterile parents are often those whose children are
+  most flagged boxes need subdivision before an interval bound decides them.
+  *Route (B) built and controlled (`761513f5`)*: the old bound a = (1/2 − h√2)/(1 + Δt) assumed 45° in every tilt
+  range; the tight form a = (1/2 − h·M_c)/M_t (M_c, M_t the maxima of |cos| + |sin| over the box's tilt range and
+  relative to its centre) enlarges every core by 0.7–10.9% (median 4.2%), contains the old one by construction, and
+  the positive control is **583/583** known logic kills retained. Yield on the 1,536 open boxes: **70 new certified
+  kills**, rate rising with depth — 1.8% at level 1, 8.2% at level 2, 17.9% at level 3, **11 of 12 at level 4**.
+  Removes 31 CPU-days = **6.3 wall-days at 5 workers**, a 32% cut: **A57 schedule 19.6 → 13.3 wall-days**, a lower
+  bound since a killed ALIVE box also removes its subtree. 72% of the benefit sits at level 4, so it is contingent on
+  the level-3/4 population estimates. Deployed as a pre-filter on newly emitted children only; T5 unchanged. It also explains part of the clustering: sterile parents are often those whose children are
   void. Box shrink 2× per coordinate per level. `attempts/A106-shadow-diameter/notes/measurements.md`.
 - A103 (landed 2026-09-06, `f7730e98`, done-mixed): NOROOM at 3.9 open; DRAIN(W) reduced exactly to Conjecture
   LOCK-FREE(< 4) with Lemma ROT proved (§8 item 7); NOROOM-LOCAL near Trump proved (m* > ŝ, ε unquantified).
