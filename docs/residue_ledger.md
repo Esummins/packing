@@ -81,7 +81,16 @@ Seven slot squares (BL L-shape 3, BR stacked 2, TL 1, TR 1) + three load-bearing
 strut/rattler; s* = 3.886746 = s0 + 0.0097 (certified endpoint). Binding contact: f1 on the top wall (Fritz-John 0.87);
 the mirror pair f0/f2 next; f3 idle, flat direction blocked at second order. **No open box contains it** (A106): boxes
 are alive because the relaxed core cannot see 0.0097 of slack. Techniques: the tight core (in); the tree terminates at
-level 4 by pin clashes; or the grain kill of §6. Generalises as: *a class-boundary shadow — a dead class's minimiser
+level 4 by pin clashes; or the grain kill of §6. **A111 (2026-09-06, `4c6ace6e`), load-path branching measured:** sound
+on 146 of the 286 shadow-explained nodes; ≈ 35 kills at a 2/3 certify rate (n = 3), worth about one wall-day; two
+nodes killed end to end. The chain YES kill certifies only for r < s* − s0, i.e. level-4 box widths, because the
+fixed-tilt bound is exactly s* − r. The octagon and TC tests kill nothing between load-path boxes at s0 (genuine room:
+side-blind rules cannot make a side statement) but fire constantly between a node's own bin and a load-path box — the
+**free pair kill**, 113 of 264 S02 nodes at level 1 rising to 200 of 264 at level 4, 19 of 19 S07 nodes from level 2,
+confirmed on 57,840 sampled pose pairs. The NO side is a convergence-time problem (dead-unconverged at 80 s, converged
+dead at 900 s), 8 of 22 nodes had every NO child LP-dead, certificates 14 PASS / 4 FAIL, fixed-side only until
+verify_param supports NO-families. The S07 branch is unsound at level 1 (Trump sits inside the YES region at A57's
+level-1 tilt half-width) and usable from level 2. A112 is running the region tree with three branching orders. Generalises as: *a class-boundary shadow — a dead class's minimiser
 sitting on a live class's box; the basin/grain lemma is the transfer.*
 
 ### 1c. Families S03–S06 (PI-read) and S08–S53
