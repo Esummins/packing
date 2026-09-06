@@ -176,8 +176,15 @@ every tilt bin), tilt distance predicts nothing, LP wall is flat in η. Conseque
 cell on the slot its support keeps occupying, readable only after the LP — the k0 face of A112's dual-guided
 branching, with the YES side handled by K0-FREE/teleport plus crowd rows (licensed at depth 0 at fixed s0, since
 every k ≥ 1 class is dead there) and the NO side by the LP without its support. Also: the k0 tree has zero logic
-kills (it never branches on corners), and A107's gallery missed the 264 k0 LP jsons through a glob bug; fixing it
-adds ~146 alive k0 nodes to the shadow map. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
+kills (it never branches on corners), and A107's gallery missed the 264 k0 LP jsons through a glob bug. **Fixed
+(A107 Part II, `87ed93bb`): 217 alive k0 cells, 30 shadow values explain 161, 56 have no integral support.** The
+dominant one is **K01, "room at side 4.000", 84 cells** — the k0 twin of S01; below it the k0 spectrum reproduces the
+A57 one down to K06 = the k7 pinwheel at 3.886745 reached independently from k0. One correction to the A113 reading
+above: a slot-set match is not a packing match — A113's S38 "exact" cell minimises to 3.914 (K04), and its S07 cell
+to 4.000 (K01) — so the un-killable k0 cells are mostly room, not near-critical grains. Since a k0 packing with a
+singly-met corner is K0-FREE (teleport, Lean), K01's configurations are dead by theorem and the tree's LP does not
+know it; unlike A94's slot rows, the four corner cells are far apart so a square meets at most one — no multiplicity
+re-pricing. A115 is testing Lemma CW's corner rows at the node level on the K01 cells. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
 has an unlocked intruder — the drain theorem; the hook/chain formulas are one-wall tools with 4 → ⌈√n⌉.*
 
 ---
