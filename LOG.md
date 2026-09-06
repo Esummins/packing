@@ -3168,3 +3168,25 @@ Detail: `attempts/A106-shadow-diameter/notes/measurements.md`, `results/t3_switc
   The 122 also split 58 at L1 / 54 at L2 / 6 at L3 / 4 at L4 and 64 alive_lp / 58 cert_fail. No positive control is available in
   the sweep: it covers only open boxes, so it contains ZERO known logic-kills to check recall against -- adding the 601 known
   logic-kill boxes as a control is the first thing any sound implementation should do.
+- A96 ROUTE (B) MEASURED (attempts/A96-a57-parametric/code/core96.py; measurement only, NOT deployed).
+  Tight common-inscribed-square core for the EXISTING KILL-BY-LOGIC leaf: keep (kx, ky, theta_m) exactly as now and enlarge only
+  the half-side, from a_old = (1/2 - hd)/(1 + (t1-t0)) to a_tight = (1/2 - h*M_c)/M_t with h the centre-box half-WIDTH,
+  M_c = max(|cos|+|sin|) over the box's tilt range and M_t = max(|cos|+|sin|) over the tilt range relative to theta_m. The old
+  bound is loose twice: hd = h*sqrt(2) assumes 45 deg is in the tilt range, and 1 + (t1-t0) over-states M_t since
+  cos(x)+sin(x) <= 1+x. Because the centre and tilt are unchanged and a_tight >= a_old, the new core CONTAINS the old one, so the
+  positive control holds BY CONSTRUCTION -- and was still executed.
+  (1) POSITIVE CONTROL CLEAN: 583/583 known logic-kill boxes still killed, zero lost. (The 601 in cover_invariance.md counts a
+      different snapshot; 583 is what the current G1 corpus contains.) a_new/a_old: min 1.0072, median 1.0423, max 1.1085, and
+      NONE below 1.
+  (2) YIELD on the open set (1536 open boxes, all levels): 70 new certified kills -- L1 20/1096 = 1.8%, L2 32/389 = 8.2%,
+      L3 7/39 = 17.9%, L4 11/12 = 91.7%. THE RATE RISES STEEPLY WITH DEPTH, which is the same mechanism the fertility probe found
+      (logic kills 32% at L2 -> 60% at L4): deeper boxes are smaller and clash with the pins. Margin a_new/a_old - 1 on the new
+      kills: min 0.0089, median 0.0468 -- comfortably clear of float slop (the sweep also shrinks a_tight by 1e-9 first).
+      Prior A57 status of the 70: FAIL 31, PASS 19, ALIVE 20. Split k5_11 52 / k5_16 18.
+  (3) CPU-DAYS REMOVED (direct node cost only; excludes the subtree a killed ALIVE box also removes, so it is a LOWER bound):
+      L1 0.29 + L2 2.71 + L3 5.80 + L4 22.59 = 31.39 d 1-proc = 6.28 wall-days at 5 workers.
+      Schedule 97.92 d (19.58 wall-days @5w) -> 66.53 d (13.31 wall-days @5w), a 32% cut. Essentially ALL of it is at levels 3-4,
+      which is exactly where the remaining wall lives -- the pre-filter is nearly worthless at level 1 (0.29 d) and decisive at
+      level 4 (22.59 d).
+  NOT DEPLOYED pending the go-ahead; when deployed it is a pre-filter on newly emitted children only, existing verdicts untouched.
+  Route (A) (interval SAT, new leaf + new Lean) stays on the shelf.
