@@ -92,6 +92,16 @@ file is the record of truth for claims, LOG.md is the record of events.
     (formula survives unloaded contact changes), CONT (s_min continuous in the tilts). GRAIN-FLOOD as a box kill is
     circular (the hypothesis is the class kill); the sound consumer is a conflict row (GRAIN-ROW) inside the node LP.
 
+26c. PROSE Lemma TC, tilt coherence (PI, 2026-09-06; verified numerically to 1e-4 over 0-45 deg): two interior-
+    disjoint unit squares with centre distance c and tilt difference D (mod 90 deg) satisfy (1 + cos D + sin D)/2
+    <= c, i.e. centres within 1.05 force |D| <= 6.06 deg, within 1.10 force |D| <= 13.05 deg, within 1.207 force
+    |D| <= 44 deg; equality is edge-to-edge flush at D = 0. Consequences: (i) a grain's touching members share a
+    tilt to within D(c) — the common-tilt structure of Trump, S02, S07 is forced, not incidental; (ii) an LP row
+    within c of every pose of a conditioned box with tilt outside the box's bin +- D(c) overlaps every pose and is
+    inadmissible (a strictly stronger row filter than the inscribed-core test); (iii) a mid-tilt conditioned box
+    within 1.2 of an axis-aligned pin is dead at every tilt outside D(c) (tilt trimming in closed form).
+    n-general and elementary. Measurement of (ii)/(iii) on A57's open boxes in progress (A96).
+
 ## E. What cannot work (proved or measured)
 27. PROSE Collapse theorem (A34): any sparse SDP relaxation whose cliques carry <= m squares is capped at
     s(m) <= 3.71.
