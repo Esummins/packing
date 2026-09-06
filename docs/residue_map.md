@@ -238,6 +238,8 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   E) one level down. **No pinwheel signature**: de-duplicated, 2/14 witness-bearing nodes have same-tilt pairs, none a
   triple; mid-tilt bins are all free logic kills — a mid-tilt 2×2 block does not fit beside the k5_11 pins. Price 98–231
   s per node, additive on A57's route; the no-block branch is uncovered. projection96 unchanged.
+- A103 (landed 2026-09-06, `f7730e98`, done-mixed): NOROOM at 3.9 open; DRAIN(W) reduced exactly to Conjecture
+  LOCK-FREE(< 4) with Lemma ROT proved (§8 item 7); NOROOM-LOCAL near Trump proved (m* > ŝ, ε unquantified).
 - A102 (landed 2026-09-06): rigidity drain on all 12 strictly K0-BLOCKED packings — 10 drain (both sub-4 ones to
   k = 7), 2 rigid non-drainers at 4.0000001/4.0000044, Trump rigid (canary); the torque-sign test is not the rule,
   finite-motion room is (§5). Depth-3 probe interim (A96): 19 level-3 children, 16 PASS / 3 logic / 0 ALIVE — if it
@@ -317,6 +319,21 @@ move. The floor sweep: lowest strictly K0-BLOCKED side 4.0000016 at depth floor 
 shows the sub-4 blocked packings the earlier floors missed exist and are grazer-blocked; the FLOOD threshold, if the
 theorem is provable at all, is not "side 4" but a floor-dependent m*(δ) ≥ ŝ + 0.11. Dynamic moves (partial slides,
 releases) are outside this census.
+
+7. **Conjecture LOCK-FREE(< 4)** (A103, 2026-09-06, `docs/proofs/noroom.md`) — the residue in one sentence: *every
+   K0-BLOCKED packing at side < 4 has an intruder that is not held.* "Held" is exact and first-order (Lemma ROT, Gordan
+   form): no rigid motion of that one square, translation or rotation, opens its active contact rows and decreases its
+   corner depth. Lemma ROT proves that at the weighted-Ψ minimiser every intruder is held, so LOCK-FREE(< 4) on the
+   window gives DRAIN(W) directly: k0_00 = window kills of k ≥ 1 + this leaf, no criticality, no tree, Lean shapes
+   written against Composition.lean/Slide.lean. Status: true 12/12 on the corpus (zero packings held at all eight
+   intruders; 37 unheld; every packing has an unheld *second* meeter), must use ≥ 2 blocked corners (Trump is held at
+   all five of its intruders), must fail at 4 + ε (the jammed grid with its near-contacts closed is the candidate
+   realisation). Proof shape named: the eight contact cones jointly along one wall of length < 4 with WALL-3. Also
+   settled by A103: CHAIN-AX is exact only for axis-aligned edge-to-edge columns (Trump's own anchoring column has
+   tilted middles and a far end that is neither slot square nor intruder, so no depth is forced in general); the
+   corner-region count is vacuous below side 4.83 (one free square, Trump's sq7, braces all four corners);
+   NOROOM holds locally near Trump (m* > ŝ strictly, ε unquantified). Figure:
+   `attempts/A103-noroom/results/lockmap103.svg`.
 
 The honest assessment: 1 is the theorem, attempted twice (A98, A101) with the framework now exact and the stall named
 (cell-interlock), and it is the only item whose empirical boundary has been measured (strictly blocked packings exist
