@@ -13,7 +13,7 @@ needs every class dead on W, and only Trump's class alive there with Trump uniqu
 
 | layer | family | what is left | count | technique now | needs |
 |---|---|---|---|---|---|
-| A57 window trees (k5_11, k5_16) | S01 "room at side 4" | boxes whose LP support leaves a slot empty/singly met | ~420 alive-at-LP (k5_11 238 + k5_16 178) | teleport lemma as LP rows (SLOT-CROWD), A109 testing | crowd rows sound at node level |
+| A57 window trees (k5_11, k5_16) | S01 "room at side 4" | boxes whose LP support leaves a slot empty/singly met | ~420 alive-at-LP (k5_11 238 + k5_16 178) | crowd rows tried (A109): 0 kills at licensed depth | splitting (tree terminates); or a depth lemma above s0 |
 | | S02 the k7 pinwheel | boxes whose support is the 3.8867 pinwheel | 252 (184 + 68), carries the deep tree | tight core (in), deeper levels terminate (f₄ = 0) | grain kill (§6) or just time |
 | | S03–S06, S08–S53 | 45 smaller shadows, mostly level 1 | ~250 | as S01/S02 by type | PI review of the gallery |
 | | fractional | no integral support at all | 264 (151 + 113) | tree only | the genuine tail |
@@ -45,10 +45,19 @@ them (20/32/7/11 by level) with the certificate unchanged. Level-4 descent measu
 ### 1a. Family S01 — "room at side 4" (k5_11 238, k5_16 178, trump5 196)
 ![S01](shadows/S01.svg)
 The support minimises to side exactly 4.000 in 62 combinatorial variants: a slot left empty or singly met. Every such
-configuration teleports into a higher-k class that is dead on W. **The LP does not know the teleport lemma.** Technique:
-SLOT-CROWD incidence rows (A94's Lemma CW-S, verified by 1 + r_max frozen-verifier runs) at the node level — A109 is
-measuring the kill rate and the certification on ~40 nodes. If it certifies, this family dies without splitting.
-Generalises as: *usable-slot crowding rows are part of every class LP at every n.*
+configuration teleports into a higher-k class that is dead on W. **The LP does not know the teleport lemma.** Technique tried:
+SLOT-CROWD incidence rows at the node level — **A109 (2026-09-06, `7daabe6f`): 0 of 18 genuinely-alive nodes killed at
+every depth the window licenses, 18 of 18 at the unlicensed depth 0.3, and 0 of 10 LP-dead nodes certified** (the
+multiplicity runs fail on 5–32 exact holes at r = 1 already). Two exact facts behind the zero: (i) on a window ending
+at side s, SLOT-SLIDE's depth margin and the dilation pad cancel exactly, so the only licensed row is "two non-pin
+squares MEET the open slot" (depth 0), and the fourth slot of k5_11 carries no hypothesis above 3.877; (ii) 94% of
+the supports do violate SLOT-CROWD, but the rows re-price rather than forbid — the slot boxes are 0.877 apart while a
+45° square spans 1.414, so one placement meets two or three slots at once and the incidence budget pays for it
+(c = 6.2 vs B = 4.4). Depth breaks the multiplicity and only depth; the prize if a lemma ever licenses depth 0.3 on
+this window is the entire remainder (+12.7 wall-days). Until then this family dies by splitting, which the measured
+tail says terminates. Side finding: 28 of the 46 sampled "alive" nodes were not genuinely alive (τ < budget, LP
+unconverged at the time limit) — a longer LP time on unconverged alive nodes is a cheap re-check when A57 resumes.
+Generalises as: *crowding rows need certified depth; depth needs the extension classes dead ABOVE the target side.*
 
 ### 1b. Family S02 — the k7 pinwheel (k5_11 184, k5_16 68, trump5 12; carries the deep tree)
 ![S02](shadows/S02.svg)
@@ -88,7 +97,8 @@ to draw. These are what the tree is for, and they are mostly level 1 (110 + 106)
 | k6_23 | certified [3.82, 3.877] + s0; open (3.877, s0) | 8.4·10⁻⁵ sliver | resolver |
 
 Techniques that apply (from this week): (1) SLOT-CROWD rows at the root add budget 2e per usable slot, exactly the
-few tenths these are short; (2) A96's resolver re-verifies the same certificate on the 4-D witness cells (closed 20/20
+few tenths these are short — but A109's node-level result (the multiplicity runs fail on exact holes even for small
+boxes) and A94's own root failure make this unlikely to certify; try only after the resolver; (2) A96's resolver re-verifies the same certificate on the 4-D witness cells (closed 20/20
 in A100) instead of re-solving the LP; (3) bisection of the side window for the two fragments. The tight core does not
 apply (no boxes).
 
