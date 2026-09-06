@@ -173,6 +173,16 @@ the theorem, named: the contact set at any fixed tolerance does not determine th
 to be finite-motion (second order, or a room count), not a torque-sign filter on the contact graph. Empirical
 threshold for the PI's "blocked and rigid is impossible" conjecture: the two rigid blocked packings sit at 4.0000001
 and 4.0000044, every blocked packing below 4 drains, and every one found is ≥ ŝ + 0.108.
+
+![the two non-drainers](residue_map/nondrainers.svg)
+
+What the two non-drainers are (`docs/residue_map/gen_nondrainers.py`, exact poses): **the 4×4 grid with its slack spent
+on nicks.** polish12 is eleven squares at grid centres to within 10⁻⁴ (tilts ≤ 0.02° except one at 3.1°), side
+4.0000001, so the whole packing has 10⁻⁷ of play and every motion jams within it; floor-1e-4 is the same grid with
+0.12° tilts and 4.4·10⁻⁶ of play. Their second meeters are free at first order because the contact set at a 10⁻⁷ bar
+does not include the grid neighbour 10⁻⁶ away, and pinned in fact because that neighbour is where the motion ends.
+So rigid blocked packings exist exactly where the side allows a jammed grid, at 4 + ε; below 4 the grid does not
+exist and every blocked packing found so far has room to drain.
 The pair census is invariant under the convention (its shallowest pair depth is 3.8·10⁻⁵), so the tree is unchanged.
 
 ![flood](residue_map/flood.svg)
