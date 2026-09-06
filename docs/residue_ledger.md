@@ -154,7 +154,21 @@ manifold) frees a corner every time below 4; the first fully-held packing is at 
 LOCK-FREE. What a lock is made of: 3.3 square–square rows + 1 wall row per intruder, so the proof is a supply count
 (the crowd arms cannot furnish three square rows to all eight corner members at side < 4), not a wall budget. The
 one-wall lemma is false (two held walls below 4 exist: the mixed hook pair, closed form 2 + (2−s)/c + tan(θ/2)). The
-tree alternative: 9,300–21,700 CPU-h (A99). Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
+tree alternative: 9,300–21,700 CPU-h (A99). **A113 (2026-09-06, `6409396b`): where that cost sits.** Measured on the
+cell's own box, only 1.4% / 4.6% / 18% of the projected cost is within η = 0.05 / 0.1 / 0.2 of the k ≥ 1 manifold, and
+the five alive level-1 cells sit at η 0.23–0.37 — but that is the wrong object: the tree conditions on an interior
+square, and Trump's interior squares are the tilted ones (its cells sit at η = 0.366). On the right object, the LP's
+dual support, the PI's hypothesis holds exactly: cells the LP kills have supports with ≤ 1 simple placement matching
+only S01 (room); the un-killable cells (0 of 26 with position distance ≤ 0.05 ever killed; the six most resistant,
+τ up to 10.5, all at distance ≤ 0.02, and τ climbs under row generation so more LP time cannot kill them) have
+supports that are 2–6-slot partial skeletons of near-critical shadows — one alive cell matches S38 (trump5 boundary,
+3.9289) slot for slot, an A85 FAIL matches S07 at Jaccard 0.83. Position distance predicts τ (Spearman −0.44 inside
+every tilt bin), tilt distance predicts nothing, LP wall is flat in η. Consequence: a *re-branching* rule — branch a
+cell on the slot its support keeps occupying, readable only after the LP — the k0 face of A112's dual-guided
+branching, with the YES side handled by K0-FREE/teleport plus crowd rows (licensed at depth 0 at fixed s0, since
+every k ≥ 1 class is dead there) and the NO side by the LP without its support. Also: the k0 tree has zero logic
+kills (it never branches on corners), and A107's gallery missed the 264 k0 LP jsons through a glob bug; fixing it
+adds ~146 alive k0 nodes to the shadow map. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
 has an unlocked intruder — the drain theorem; the hook/chain formulas are one-wall tools with 4 → ⌈√n⌉.*
 
 ---
