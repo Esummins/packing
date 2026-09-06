@@ -76,6 +76,53 @@ and the row oracle rebuilds the child's own row set, which differs from the pare
 because the new core deletes rows.  A57 uses **columns-only warm starts** for children —
 A55/k3_ext E3's "atoms are the progress variable", now also the cheap option.)
 
+## T5′ [M] — the TIGHT common-inscribed core (A96, 2026-09-05, deployed)
+
+**The kill certificate is unchanged.** T5 below is the rule, and its Lean form
+(`core_meet_same_square`, node C.T5T11) is untouched: if the box's core K_B meets a pin's core
+K_P then every square with (centre, tilt) in B overlaps that pinned square and is not it, so the
+node is empty by logic. What changed is only **the half-side of the core the rule is applied
+to**. No new leaf kind, no new Lean obligation, nothing in the frozen verifier chain.
+
+`caselp.Box.core()` uses
+
+    a_old = (1/2 − hd) / (1 + (t1 − t0)),      hd = centre-box half-DIAGONAL
+
+which is sound but loose twice over. K ⊆ Q(c, θ) for every (c, θ) ∈ B iff every corner of K lies
+in Q, i.e. |R(−θ)d + a·R(φ)s|∞ ≤ 1/2 for d = k − c, φ = θ_m − θ and the four sign vectors s.
+Bounding the two terms separately gives the tight value
+
+    a_tight = (1/2 − h·M_c) / M_t
+        h   = centre-box half-WIDTH
+        M_c = max(|cos θ| + |sin θ|) over the box's tilt range
+        M_t = max(|cos φ| + |sin φ|) over the tilt range about θ_m
+
+a_old is this bound with hd = h·√2 — i.e. assuming 45° always lies in the tilt range — and with
+1 + (t1 − t0) ≥ M_t, since cos x + sin x ≤ 1 + x. On the deployed cover a_tight/a_old runs
+1.007–1.109 (median 1.042) and is **never** below 1.
+
+**Why no kill can be lost.** The core's centre (kx, ky) and tilt θ_m are unchanged and only `a`
+grows, so the new core *contains* the old one: any box the old rule killed, the new rule kills.
+**Control executed, not merely argued: 583/583** known logic-kill boxes still killed, none lost
+(`attempts/A96-a57-parametric/results/core96.json`).
+
+**Where it is wired in.** `pinguard.kill_core()`, used by `pinguard.classify()` **only** — the
+KILL-BY-LOGIC decision. It is deliberately *not* wired into `Box.core()`, because that core is
+the LP's hypothesis and appears in every emitted certificate; changing it would change the
+certificate corpus. `TIGHT_CORE = False` restores the old behaviour exactly. The value is shrunk
+by `TIGHT_EPS = 1e-9` before use so float slop cannot manufacture a kill; a fully rational
+version would round M_c and M_t up and the numerator down.
+
+**Yield on the open set** (1536 open boxes at deployment): 70 new certified kills — L1 20/1096
+(1.8%), L2 32/389 (8.2%), L3 7/39 (17.9%), L4 11/12 (91.7%). The rate rises steeply with depth,
+the same mechanism that terminates the tree (logic kills 32% at L2 → 60% at L4): deeper boxes are
+smaller and clash with the pins. Worth ≈31.4 CPU-days, ~72% of it at level 4.
+
+**Deployment is a pre-filter on newly emitted children only.** Existing verdicts are not
+recomputed or overwritten; the 70 boxes whose recorded FAIL/ALIVE verdicts this rule supersedes
+are listed in `results/superseded_by_tight_core.jsonl` (and A96's copy), with their prior verdict
+retained.
+
 ## T5 [M] — SOUNDNESS FIX: a YES box may not be witnessed by a pin (`code/pinguard.py`)
 
 A YES child adds a core box B and drops the budget from 11−k to 11−k−1.  That is sound only if
