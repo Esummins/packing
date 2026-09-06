@@ -3538,3 +3538,52 @@ notes only), frozen verifiers untouched, git fetch + plain merge + push own path
 - Row-dropping stays SHELVED with route (A): it is a different soundness proposition, because it changes the verifier's
   admissibility clause from "disjoint from every core" to "disjoint from SOME pose of the box", which touches the frozen chain --
   unlike trimming, which does not.
+
+## 2026-09-06 — A113-k0-manifold-distance (Opus chore) — done-mixed
+- Question: is the k0_00 tree's alive/expensive population concentrated near the k >= 1 manifold?
+  Measure: eta(cell) = max(L-inf distance from the cell's position box to the nearest of the 36 corner-lattice cell centres at
+  s0 (four corners x depths i,j in {0,1,2}; depth 3 is not containable), sqrt(2) sin(tilt-gap/2)), tilt gap = distance of the
+  cell's theta interval to 0 mod 90. Pure geometry, no LP, one BLAS-pinned process, read-only on every campaign.
+- **T3 (the number asked for): only 1.4% / 4.6% / 17.6% of A99's 9,341-21,661 CPU-h projection lies within eta = 0.05 / 0.1 /
+  0.2 of the manifold** (measured-cost-weighted 1.5 / 5.1 / 18.9%; by parent level-1 cell 5.6 / 9.3 / 38.9%). Enumerated
+  box-by-box over all 1728 + 13824 + 110592 nodes of A85 s.8.3 as re-parametrised by A99; the reconstructed total is
+  18,624 weighted nodes = A99's figure exactly. **And the far region is not cheap: all five alive(LP) level-1 cells sit at
+  eta 0.229-0.366**, as do 17 of the 33 cells whose tau is already >= budget.
+- CANARY, two readings, and they disagree. As packings the eight Trump images are ON the manifold (each has exactly 5 simple
+  squares at eta = 1e-7). As cells they are not: the three level-1 cells holding a Trump image's conditioned placement sit at
+  eta = 0.3660, because the tree conditions on an INTERIOR square and Trump's interior squares are the tilted ones (40.18 and
+  49.82 deg; the poses themselves have eta 0.4858). Same for S07 (44.88 deg) and the k7 pinwheel (48.44 deg). Guiding on the
+  conditioned square's distance to the corner lattice is guiding on the wrong coordinate; only 2 of the 6 level-1 tilt bins
+  touch 0 mod 90 at all.
+- T1. The POSITION term alone does predict, in the direction the PI wants: **0 of the 26 processed level-1 cells with
+  d_pos <= 0.05 was ever killed by the LP, against 45% at d_pos >= 0.2**; Spearman(d_pos, tau) = -0.438 overall and
+  -0.460/-0.466/-0.464 inside each of the three tilt bins separately, while d_tilt vs tau = +0.028 and the combined eta washes
+  the signal out to -0.145. The six most LP-resistant cells in the whole root (tau 10.06-10.500 > budget 10 -- un-killable,
+  since a kill needs a converged tau < budget and tau climbs under row generation) are at d_pos <= 0.02. Those 36 root cells
+  carry 16.7% of the projected cost and have produced zero kills. LP wall time is FLAT in eta (rho = +0.053, median 496-504 s
+  in every bin): cost is carried by un-killability, not by per-node price. dist_centre (A38's own ordering key) vs tau = +0.307
+  and eta vs dist_centre = -0.234, so this is not the interior-first processing-order confound.
+- T1 note: the k0_00 tree has **zero logic kills** -- `hyp.nofams = []` in all 264 node jsons, because Lemma ID fires only at a
+  SHALLOW corner and the k0 root does not branch on corners. A85's own 12 rows run the other way (PASSes at eta 0.000-0.172,
+  FAILs at 0.124-0.497) but that is a selection effect: A85 only ran nodes whose LP already had slack, and inside that sample
+  PASS/FAIL tracks eta_LP (-1.00...-1.27 vs -0.12...-1.19), not eta. A38 level-2 (80) and level-3 (24) have no decided cells.
+- **T2 -- the signal is in the LP dual support, not in the box.** Mean simple placements (eta(pose) < 1e-2) in cores + integral
+  support: ALIVE 3.40 (5/5 with >= 2), UNDECIDED 2.01, FAIL 1.86, PASS 1.00, LP-killed **0.81** (only 6 of 36 with >= 2).
+  Classified by A107's method (shadowlib.snap over the full D4 orbit, matched to the 53-shadow gallery): the killed cells'
+  supports match nothing better than **S01, A107's s* = 4.000000 "this branch has room" shadow** (median Jaccard 0.20), while
+  the survivors are partial skeletons of near-critical shadows (median 0.75 at median s* 3.9920). Named: l1_100 (ALIVE) is an
+  **exact slot-set match to S38** (trump5 boundary, s* = 3.928915, common tilt 41.75 deg) with 6 simple placements of 10;
+  s1int_l1_043 (A85 FAIL) is **Jaccard 0.83 to S07** (s* = 3.885618 = s-hat + 0.0085, A107's sub-pinwheel shadow), l1_071 0.50
+  to S07; l1_088 (tau 10.206) is 0.80 to S04 with one square in each corner. Trump-skeleton Jaccard reaches 0.71. The five ALIVE
+  supports are integral, 11 squares, all contained, worst pairwise SAT gap -0.130...-0.205, i.e. inside A107's one-cell-pitch
+  bar (-0.21) -- genuine near-packings. Drawing: attempts/A113-k0-manifold-distance/results/svg/k0_alive_fail_supports.svg.
+  So the expensive k0 residue IS near the k >= 1 manifold -- in the ten squares the LP places, not in the one the tree
+  conditions on. That prices a RE-branching rule (branch on the slot the support keeps occupying), not a pre-branching one.
+- Correction to A107: "A85/A99 had no LP jsons in this format" is a glob bug, not a fact. 264 k0_00 node jsons in exactly that
+  format are on disk (134 A38 l1_nodes, 51 l2_nodes, 13 l3_nodes, 12 A85 results/nodes/k0_00, 54 A99 results/nodes/k0_00);
+  A107's extract.py globs `results/nodes/*.json` while the k0 files live at `results/nodes/k0_00/*.json`, and A38 is not in its
+  SOURCES at all. Fixing the two globs would add ~146 alive-at-LP k0 nodes to the gallery corpus.
+- Open: no LP run, so every kill rate is A38's at its own settings and the "do the d_pos <= 0.05 cells stay un-killable at 5-10x
+  LP time" question (A89-O3) is untouched; 82 of 216 level-1 and 41 of 104 level-2/3 cells were never run and the notrun ones
+  are systematically the far-from-centre = near-manifold ones; the shadow match is STRUCTURAL (slot sets modulo D4), not
+  A107's flow -- no minimisation was run from a k0 support.
