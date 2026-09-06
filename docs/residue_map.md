@@ -150,15 +150,22 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
 
 ## 7. Pending measurements (folded in as they land)
 
-- A96 (landed): level-2 parametric verify 506 s/child (2.5× the level-1 mean; n = 15, censored by one timeout),
-  level-2 LP 1.55× level 1 (70 children, 8 parents; the earlier 2.76× was one outlier parent), level-3 descent 6.8%
-  (was an unstated zero). A57 = 80 CPU-days, 16 wall-days at 5 workers; the parametric route still beats four fixed
-  sides by 1.7×. Levels 2+3 are 86% of it. Follow-ups measured: the honest range is 14–16 wall-days (median vs
-  censored-mean verify wall); one 88-atom child is 23% of the level-2 verify wall (a completed FAIL plus resolver
-  beats a timeout, so the cap is being raised for high-atom children, not lowered); level-2 partials close through
-  the resolver in 3–11 s each; the σ ladder propagates to level 2 and would save 2 wall-days net but requires
-  resetting k5_11's live coverage, so it is recorded, not deployed.
-- A99: the three k0 tree reductions, stacked, at s0 and window-valid.
+- A96 (settled 2026-09-05, six-shard read): level-2 LP cost **1.11×** level 1 on 529 children / 53 parents (the
+  1.55×–2.8× readings were small-sample noise; a per-child cost is not a number below ~50 parents); level-2
+  parametric verify 545 s/child (n = 26, 2.06× level 1); level-2 descent **11.3%** → expansion factor 0.91 per level
+  (level 1 was 1.44), so level 3 is 41% of the wall. A57 = 92 CPU-days, **18.5 wall-days at 5 workers**; parametric
+  beats four fixed sides by 1.35×. Six shards give +14% throughput for +50% shards (held at six). The level-3 descent
+  rate is the campaign's highest-value unknown: a depth-3 probe on the 46 level-2 ALIVE children (≤ 368 level-3
+  children) is running; if the factor stays near 0.9 the geometric tail is ~10× the level-2 term and the campaign
+  needs a different plan, if it halves again the 18.5-day figure is close to final. Earlier follow-ups stand: a
+  completed FAIL plus resolver (3–11 s) beats a timeout, so the verify cap is atom-dependent; the σ ladder to level 2
+  would save 2 wall-days but needs a coverage reset, so it is recorded, not deployed.
+- A99 (partial; supervisor died after R2, report requested): R2's branching of the root on the corner shallow/deep
+  pattern costs ×15 in level-1 cells (3,240 vs 216, exact D4 stabiliser count); the shallow-pattern cells die at
+  level 1 (η ≈ −1 to −2 at δ = 0.3) but the all-deep branch keeps A85's tree verbatim, so R2 cannot price the k0
+  tree below A85's 3,200–7,000 CPU-h. R1 (resolver) and R3 (per-node exempt boxes) numbers pending the report.
+- A101 (landed 2026-09-05): SNAP proved, leaf yield 0, FLOOD open with the stall named (§8 item 6); floor sweep
+  1e-3 found strictly K0-BLOCKED packings at 3.9907 (§5); floor 1e-2 running (best 4.00046 at 215 seeds).
 - A100 (landed 2026-09-05): k4_11 and k3_02 run end to end. **The η law is exact on 54/54 cover nodes** —
   η < 0 ⇔ a certificate exists — so the LP decides killability before certification is attempted, and
   certification + ε_geo on the η = 0 cells is pure loss (39.5% of k4_11's cover leg, 0 kills in 12 attempts);
