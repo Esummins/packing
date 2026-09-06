@@ -138,6 +138,25 @@ and it fails the 10⁻² floor ([2,1,1,1]). Two further facts from the sweep: K0
 certifies at every floor ≤ 10⁻³ and the 10⁻⁶/10⁻⁴ runs (300 seeds each) simply never found its basin; and of 1,072
 unconstrained descents **none left the strictly blocked region below side 4** — every exit (4.0027–5.4) was a blocker
 sliding away, never a slot rearrangement. Trump is K0-FREE ([1,1,2,1]) at all four floors.
+
+![drain of the strict record](residue_map/strict_3p9907_drain.svg)
+
+**The PI drained it by eye (2026-09-06), and the drain verifies exactly** (`attempts/A87-drain-flow/code/pi_drain_3p9907.py`).
+Square 3 is tilted 1.31° clockwise of axis and its three contacts — square 2 below, the right wall, and square 8's 25°
+edge at its top-left vertex — all torque it counter-clockwise (+0.67, +0.49, +0.23 about its centre), so nothing
+resists the rotation: rotating 3 about its centre to axis-aligned is collision-free along the whole path (2,000-step
+SAT sweep at the certification tolerance), and it lifts 3's vertex out of the BR cell. BR is then met by square 2 alone,
+K0-FREE applies, and the simultaneous snaps 2 → BR(0,0), 3 → BR(0,1), 9 → BR(1,0), 1 → BR(2,0), 7 → TR(0,0),
+6 → TR(1,0), 5 → TR(2,0) give a valid packing at the same side with **k = 7** (BR staircase [3,1] + TR row [3]; the
+four 16°/25° squares 0, 4, 8, 10 remain). So the first strictly K0-BLOCKED packing below 4 is a k7 packing wearing a
+1.3° tilt on one square. Two lessons for the theorem: (i) the η-disturbance that blocks a corner can be a *rotation*,
+not a displacement — the strict census measures depth, and a square 0.010 above a cell tilted 1.3° dips 0.5·sin θ ≈
+0.011, i.e. exactly floor-depth intrusion; SNAP's destination form covers it, since the rotated-then-teleported square
+lands in the same cell; (ii) the mechanical test the PI used —
+*do all contact torques on the intruder have one sign?* — is a rigidity check that the census does not make, and it
+decided this packing in one look where the depth filter called it blocked. It should become a tool: for each
+floor-depth second meeter, compute the contact normals and ask whether any rigid motion (rotation about the centre, or
+about a contact vertex) is unopposed; if so the corner is not strictly crowded in any robust sense.
 The pair census is invariant under the convention (its shallowest pair depth is 3.8·10⁻⁵), so the tree is unchanged.
 
 ![flood](residue_map/flood.svg)
