@@ -249,6 +249,18 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   E) one level down. **No pinwheel signature**: de-duplicated, 2/14 witness-bearing nodes have same-tilt pairs, none a
   triple; mid-tilt bins are all free logic kills — a mid-tilt 2×2 block does not fit beside the k5_11 pins. Price 98–231
   s per node, additive on A57's route; the no-block branch is uncovered. projection96 unchanged.
+- A107 (landed 2026-09-06, `2faaa1a1`, `docs/shadows.md` + 53 SVGs): the LP dual support drawn at every alive node
+  of A57, A60 and A61 (1,566 nodes; A85/A99 have no LP jsons in this format) and de-duplicated into **53 distinct
+  shadows explaining 1,260 nodes**; 306 are fractional with no integral component and have no near-packing to draw.
+  **S01: side exactly 4.000, 620 nodes** in 62 combinatorial variants — the LP saying "this branch has room", not
+  "nearly feasible" (13× the pinwheel's slack). **S02: the PI's pinwheel, 267 nodes across six skeletons**, and it
+  carries the deep tree (10 of 19 explained level-3 nodes, 4 of 9 level-4); Fritz-John: f1–top wall binding (0.87),
+  the mirror pair next, the fourth square an idle strut whose flat direction is blocked only at second order
+  (curvature −3.9·10⁻⁷). **S07: a new value below A106's floor, 3.885618 = ŝ + 0.0085**, on trump5's skeleton with six
+  slot squares (Trump's own six) and five free squares at 44.88°, numerically verified only (A108 certifying it
+  exactly and comparing with Trump). Lesson written into the method: a shadow is a value of s*, not a point — the
+  pinwheel family lands in five configurations differing only in where the idle strut sits; and the LP rows are
+  configuration cells of pitch 0.19, so the honest disjointness test for integral components is ≥ −0.21, not ≥ 0.
 - A106 (landed 2026-09-06, `66c62e1e`): the basin switch does not apply to A57, and a 24% prune fell out. Both
   classes' shadow floor is the PI's k7 pinwheel, s* = 3.886746 = s0 + 0.009662 (certified interval endpoint, three
   independent seed families); basin radius 0.035 at the certified Hessian bound, and level-3/4 boxes are already 2–4×
