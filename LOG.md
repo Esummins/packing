@@ -2883,3 +2883,51 @@ affordable cost estimate for closing 3.84.
       => parametric wins 1.35x (was 1.69x); the gap narrows because level 3 is paid by both routes.
 - Pass state: 458 nodes verified; k5_11_G1 182 done (171 full-window) frac 0.97803, k5_16_G1 220 done (212 full) frac 0.99414.
   Corpus grew to 898 candidates (602 easy, 218 level-2, 50 fail, 28 epsgeo); main pass restarted on the full selection.
+
+## 2026-09-05 - A99 - the k0_00 tree, next generation (engineering pilot, Opus)
+- Measured the three PI reductions on A85's own k0_00 nodes. Net: a PRICE INCREASE, not the ~10x asked for.
+  One real reduction found, and it is the window, not the tree.
+- R1 DEAD, 0 of 12. Every FAILed A85 k0_00 certificate re-run through the frozen verify_case at depth 56 -> 64
+  -> 88 (same certificate, no new LP) still FAILs, and the hole counts RISE with depth (b595 10->11->17,
+  b178 42->45->47, p210_001 8->11->19, p215_011_eps0.004 5->17->26). Structural reason, established rather
+  than assumed: verify_param splits the widest axis of a 4-D cell so a wide window starves the s-axis -- which
+  is why A96's resolve96 sub-window re-run works -- but verify_case's --depth budget is UNIFORM over the root
+  split, so "every witness box closes with k more bisections" IS "the global run at depth 56+k passes". There
+  is no resolution artefact to harvest. A85's k0_00 FAILs are LP ROW-GENERATION failures (holes = admissible
+  placements of exact mass < 1), the same diagnosis A89-O3 reached for the 3-shallow root node. Consequence:
+  f2 ~ 0.85 has no measured support at all; A85's own depth-2 rate is 1/3 first pass, 2/3 with eps_geo repairs.
+- Artefact defect in A85: certs/k0_00/s1cor_near_b178_epsgeo0.002.json on disk has exact total 10.050003 >=
+  budget 10 (verifier rc = 2, "proves nothing") -- a later certify.py round overwrote the certificate that its
+  .report.json describes. R1's denominator is 12, not 13.
+- R2 is a COST MULTIPLIER of exactly x15, LP-free and exact: D4 quotients each shallow/deep branch only by the
+  STABILISER of its corner pattern, 1728/|stab| = 216*|orbit|, so the level-1 cell count over orbit
+  representatives is 216*16 = 3456, i.e. 3240 = 15 x 216 once the 4-shallow class (A89's window-valid root
+  kill) is deleted. And the ALL-DEEP branch keeps its 216 cells with NO exempt box at all (Lemma ID fires only
+  at a shallow corner), so R2 can never price the frontier below A85's figure whatever the other branches do.
+- R2 LP screen (20 level-1 cells stratified over T(s0)x[0,90), plain vs 3-shallow at delta = 0.3 window-valid
+  a_win = 0.6896936, 136 NoFams/corner from A89's o3fam, 300 s LP each, 52 launches, zero commit waits, zero
+  canary refusals): median tau(plain) - tau(sh3) = +1.0567, eta <= -1.0 on 19/20 cells vs 6/20 plain -- but
+  minmass HALVES, 0.5093 -> 0.2396. That is A89-O3's delta-sweep signature exactly: a larger exempt region
+  gives the measure more freedom, so the same row-generation budget covers proportionally less and tau falls
+  because the LP is LESS converged. ZERO kills claimed; the arbiter (certification) leg did not run.
+- R3(c) IS the win. A85's interior cell grid already lies in A96's (P-aff) family -- the A38/T(s0) column step
+  is exactly (s0 - 2*c0)/16 with c0 = 11/10, so every cell edge and core centre is e_q(s0) with 12q dyadic --
+  so to_param96 emits with NO new anchoring rule. certs/param/s1int_l2_l2_p210_001_epsgeo0.004.param.json
+  (241 atoms, total 9.97707 < 10) PASSes the frozen 4-D verifier over the WHOLE window [3.82, s0] in 123.2 s:
+  1 847 066 boxes, 0 witnesses, coverage 1.00000. A NEW WINDOW-VALID KILL of a node A85 killed only at s0.
+  The window therefore costs +119 s on a 1 630-1 860 s node (+5-7 %) instead of x4 for a 4-side grid: a 3.8x
+  cut. Caveats: n = 1 (the other emitted node, 53 atoms, timed out at 600 s, >= x77), the four CORNER-CROWD
+  nodes cannot be emitted at all (cores at 17/24, 91/72, 37/24, 41/72 are t-grid, not affine in s0), and
+  transporting cover-invariance from A57's 12-column cover to the A38 cover is an OPEN obligation.
+- STACKED PROJECTION (results/projection99.json; A85 s.8.3 model with only f2, branch count and window
+  multiplier replaced): f2 = 2/3 at s0 gives 8 903-20 636 CPU-h; window-valid with parametric re-emission and
+  R2 off gives 9 341-21 661 CPU-h = 130-301 desktop-days at three slots. That is 2.9-3.1x WORSE than the
+  published 3 200-7 000, which was the f2 = 0.85 row R1 has now removed. With R2's branching: 138 000-323 000.
+  The 4-side-grid alternative to R3(c) is 35 163-82 096.
+- NOT MEASURED (queued behind the R2 screen; the supervisor chain died before launching them): R3(a)
+  certification --jobs 4 vs 1, R3(b) LP cold vs warm (the 1 915-column sibling pool was built and used by all
+  52 R2 LPs, but no cold control ran), and the R2 arbiter certification. Also still open: the level-2 descent
+  rate at delta_pin = 1e-2 (A96's 2.36x), untouched here.
+- Discipline: <= 2 compute slots throughout, BLAS pinned to 1 thread, tree85's 6144 MB commit gate before
+  every LP (free commit 66.7-79.6 GB at all 52 launches, zero waits), detached drivers, frozen verifiers
+  copied byte-identical (code/frozen.sha256). Nothing under A57/A60/A61/A85/A89/A96 was written.
