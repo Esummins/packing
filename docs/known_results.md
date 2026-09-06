@@ -81,6 +81,16 @@ file is the record of truth for claims, LOG.md is the record of events.
     first-order torque) so minimality is second order. Found by drawing the LP dual support at A57/A60's alive
     nodes (docs/shadows.md S07). Not in the window: irrelevant to the proof, relevant to the paper and to
     higher n (a closed-form 45-degree grain family). Figure docs/residue_map/s07_vs_trump.svg.
+26b. PROSE+EXACT The chain menu (A110, docs/proofs/grain_flood.md): with u = cos(theta) + sin(theta), the four
+    wall-to-wall chain formulas Lambda = 2 + 4u/(u^2+1) (ladder), Y (column), D = 2 + (2 + cos theta)/u (diagonal),
+    F_T = 2 + (2 + sin theta)/u (gap) give the side of the corresponding grain as a function of the common tilt.
+    Trump, S07 and S02 are kink minima of this menu: S07 = Lambda meets Y at 45 deg (2 + 4 sqrt2/3); S02 = Lambda
+    meets D at sin cos = 2 sin - 1 (48.43512 deg, 3.886746029); Trump = the gap chain, Corollary TRUMP-GAP:
+    s-hat = 2 + (2 + sin theta_T)/(cos theta_T + sin theta_T) at Trump's tilt, verified to 40 digits against A22's
+    exact data. S07's boundary into Trump's grain is at sin cos = 2 cos - 1 (41.56488 deg), crest exactly S02's
+    value. Lemmas GRAIN-LP (side minimum at fixed tilts/selection is an LP whose dual is a load path), INHERIT
+    (formula survives unloaded contact changes), CONT (s_min continuous in the tilts). GRAIN-FLOOD as a box kill is
+    circular (the hypothesis is the class kill); the sound consumer is a conflict row (GRAIN-ROW) inside the node LP.
 
 ## E. What cannot work (proved or measured)
 27. PROSE Collapse theorem (A34): any sparse SDP relaxation whose cliques carry <= m squares is capped at

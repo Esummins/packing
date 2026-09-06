@@ -176,3 +176,41 @@ wall-to-wall chain and a chain's length depends only on its members' tilts and c
 
 Generalises as: *the bottom-up side of the search is a flood over the grain adjacency graph; the top-down tree only
 has to reach grains, not points.*
+
+### 6.1 A110's verdict (2026-09-06, `docs/proofs/grain_flood.md`, `411cc79d`)
+
+![the box-to-grain obstruction](../attempts/A110-grain-flood/results/box_to_grain_110.svg)
+
+**GRAIN-FLOOD as stated is true and empty.** A packing at side ≤ s0 makes the global minimum over the class's compact
+phase space a local minimum ≤ s0, so "every local minimum ≤ s0 lies in Trump's grain" is the class kill itself. Both
+certificate shapes reduce to it: the only quantity monotone along a flow from a box is the side, which is the node's
+own bound; and the grains reachable from a box are the selection census (≈ 8⁴⁵ separating-axis choices for five free
+squares), which is what the tree prunes by localising — the existential-filter law again. The obstruction, drawn:
+node c0_Y0324's box holds its LP support's rattler (tilt 53–64°) and no load-bearing S07-family square at any tilt;
+the nearest is 0.21 away against a half-width of 0.07.
+
+**What is proved and n-general.** Lemma GRAIN-LP: at fixed tilts and a fixed separating-axis selection, the side
+minimum is an LP whose dual is a balanced force system, i.e. a load path — the same object as the leaf certificate's
+dual. Lemma INHERIT: the chain formula survives every unloaded contact change. Theorem CONT: s_min is continuous in
+the tilts; the PI's dichotomy is about which rows are loaded, not about continuity. GRAIN-ROW: a conflict row on the
+support's cells, sound, kills the support pattern, not the node (yield open).
+
+**The menu.** Trump, S07 and S02 are three kink minima of one family of chain formulas in the common tilt θ, with
+u = cos θ + sin θ: the ladder Λ(θ) = 2 + 4u/(u² + 1) (minimum 2 + 4√2/3 at 45° only; = 4 at 0° and 90°, the grid), the
+column chain Y(θ), the diagonal chain D(θ) = 2 + (2 + cos θ)/u, and the gap chain F_T(θ) = 2 + (2 + sin θ)/u = D(90° − θ).
+S07 = Λ crossing Y at 45°. S02 = the triple point sin θ cos θ = 2 sin θ − 1 of Λ with D, θ* = 48.43512°, s* = Λ(θ*) =
+3.886746029. **S07's Trump boundary** is at sin θ cos θ = 2 cos θ − 1, θ = 41.56488°, where f0's vertex reaches
+BL(0,1)'s corner and the basis changes to F_T; the crest there is exactly S02's value 3.886746029, and F_T then falls to
+ŝ. **Corollary TRUMP-GAP: ŝ = 2 + (2 + sin θ_T)/(cos θ_T + sin θ_T) at Trump's tilt, to 40 digits.** So on the S07
+sweep exactly two load-path changes matter: 45° (both formulas ≥ 2 + 4√2/3, the flood crosses) and 41.565° (the
+formula drops toward ŝ, the flood stops). Sweeps with all eleven squares free confirm each formula to 10⁻⁷ with one
+loaded set per side while thirteen contacts flicker unloaded. S02's family never touches Trump's grain.
+
+**T4 counts.** S07 family: 0 of 19 supports inside it (the six f1 nodes match Trump's grain at 39–41°, the canary;
+the cover nodes draw the skeleton at 21–44° or 58–69°). S02 family: 56 of 267 (37 level 1 + 19 level 2 of A57; none of
+the 14 deep nodes, none of A60's or A61's). Price of the sound consumer: two one-variable inequalities per family —
+but it kills support patterns, not nodes, so the tree price is unchanged.
+
+**What this leaves of the idea.** The grain menu is real, exact, and three-for-three on the known minima; it is the
+right language for the paper's "why Trump" and for higher n (the same four chain formulas with ⌈√n⌉ in place of 4).
+As a kill it needs the localisation the tree provides; the honest form is GRAIN-ROW inside the node LP, priced next.

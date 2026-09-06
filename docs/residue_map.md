@@ -262,6 +262,11 @@ exempt boxes (does a level-1 cell ever decide; effect ≥ 2×), and per-node eng
   E) one level down. **No pinwheel signature**: de-duplicated, 2/14 witness-bearing nodes have same-tilt pairs, none a
   triple; mid-tilt bins are all free logic kills — a mid-tilt 2×2 block does not fit beside the k5_11 pins. Price 98–231
   s per node, additive on A57's route; the no-block branch is uncovered. projection96 unchanged.
+- A110 (landed 2026-09-06, `411cc79d`, `docs/proofs/grain_flood.md`; ledger §6.1): GRAIN-FLOOD as a box kill is
+  circular (the hypothesis is the class kill); box-to-grain map obstruction drawn. Proved: GRAIN-LP, INHERIT, CONT,
+  GRAIN-ROW (kills support patterns, not nodes). **The chain menu**: Λ, Y, D, F_T as functions of the common tilt;
+  Trump, S07, S02 are kink minima of it; **TRUMP-GAP: ŝ = 2 + (2 + sin θ_T)/(cos θ_T + sin θ_T)** to 40 digits; S07's
+  Trump boundary at 41.565° with crest exactly S02's value. T4: S07 family covers 0/19 supports, S02 family 56/267.
 - A107 (landed 2026-09-06, `2faaa1a1`, `docs/shadows.md` + 53 SVGs): the LP dual support drawn at every alive node
   of A57, A60 and A61 (1,566 nodes; A85/A99 have no LP jsons in this format) and de-duplicated into **53 distinct
   shadows explaining 1,260 nodes**; 306 are fractional with no integral component and have no near-packing to draw.
