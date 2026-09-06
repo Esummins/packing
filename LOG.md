@@ -3610,3 +3610,39 @@ notes only), frozen verifiers untouched, git fetch + plain merge + push own path
   (4) code/pausegate.py -- sentinel file checked BETWEEN nodes by tree57, param96, resolve96 and recheck96, so a pause preserves
       in-flight results (the 2026-09-06 pause could not); plus an orphan reaper for certify children whose tree57 parent is gone
       (one had run 11.3 h unattributed).
+
+## 2026-09-06 — A111-loadpath-branch (Opus chore, <= 2 BLAS-pinned processes, read-only on A57/A60/A61/A96/A107/A110) — done-mixed: the load path is Trump's, but branching on it kills nodes and pays
+
+**Verdict.** Route (a) — branch every shadow-explained node on its load path — is **worth about +1 wall-day at 5 workers**, and it works for a reason the brief did not anticipate: the YES cell is killed not by the chain LP but *for free, by logic*, on about half the nodes. Two nodes were killed end to end with the frozen verifier.
+
+**T1 — the radius of the chain kill on the YES side.**
+- The fixed-tilt LP of Lemma GRAIN-LP obeys `grid_lb = s* − r` **exactly** at every cell tested, so it certifies the YES cell precisely while `r < s* − s0` = **0.0097** (S02, s* = 3.886746030) / **0.0085** (S07, s* = 2 + 4√2/3 = 3.885618083). A57's level-4 half-width 0.0087 is just inside for S02 (CERTIFIED at L4) and just outside for S07. Above level 4 the LP route does not exist.
+- Selection is the other limit: only 4/8 (S02/lpa) and 4–5/11 (S07/lpa) loaded pairs have their separating axis forced at ρ = 2°, and **0** at ρ = 20°. The B&B never completes above L4.
+- With anchors (`lpa`) the box-constrained minimiser returns `direct_min = s*` at every radius up to (0.2, 20°) for S02 — measured-dead everywhere, certified nowhere above L4.
+- **Canary, and it bites:** the S07 YES region **contains Trump's exact packing** from ρ_T = 4.8181°, r_T = 0.0326 — and A57's own level-1 tilt half-width is **4.87°**, 0.05° over the line. The S07 branch is unsound at L1 *by construction*; the minimiser agrees independently (`direct_min` = 3.876736 < s0 at L1, ≥ s* at L2). S02's canary is clean at every radius: no D4 image of Trump satisfies the k5_11 or k5_16 pin set.
+- **S02's load path IS Trump's**: its three load-bearing squares match Trump's three tilted squares under `diag` to r_T = 0.017532 and ρ_T = 1.383° — the quantitative form of A110's mirror identity D(θ) = F_T(90−θ). What separates a killable grain from Trump's is the SLOT skeleton (S02 carries BR(0,1), Trump's image BL(2,0)), not the load path. Hence the sound leaf must condition on the anchors.
+
+**T1 second instrument (octagon / Lemma TC) — the structural split.**
+- Against the class pins at the node's own side s0 the common-inscribed-core test and Lemma TC kill **nothing**, at any (r, ρ), for either shadow or either variant. The minimum core gap is **+0.0138 to +0.22** and the minimum TC slack **+0.0100 to +0.21**, both strictly positive and *increasing* in r. That is **genuine room, not a weak bound**.
+- Why, structurally: both rules are **side-blind** — they see only pairs of boxes — while the grain kill is a *side* statement (the chain forces s ≥ s* > s0 with every pair of squares still strictly disjoint). No pairwise-overlap test can ever carry it. At the window floor s = 3.82 they do kill, up to (0.05, 5°) for S02/k5_16 and (0.035, 2.43°) for S07, because the right/top-anchored pins have moved in.
+- **But against the node's own conditioned bin they fire constantly, and that is the free kill.** Yield over the alive nodes the shadows explain, at A57's own half-widths:
+
+  | level | r, ρ | S02 | S07 |
+  |---|---|---|---|
+  | L1 | 0.0699, 4.87° | 113/264 (42.8 %) | 13/19 (68.4 %) |
+  | L2 | 0.035, 2.43° | 152/264 (57.6 %) | 19/19 (100 %) |
+  | L3 | 0.0175, 1.22° | 186/264 (70.5 %) | 19/19 (100 %) |
+  | L4 | 0.0087, 0.61° | 200/264 (75.8 %) | 19/19 (100 %) |
+
+  Verified by dense sampling: **723 fires, 57 840 pose pairs, worst SAT gap −0.0513, zero counterexamples**. Figure `results/free_kill.svg` (geometry-checked) draws both halves of the split.
+
+**T2 — the NO side.** 22 nodes × 4–6 children at r = 0.1, ρ = 10°, warm from the parent's own atoms. **8 of 22 nodes had every NO child LP-dead**; the rest split into "some children alive" and "τ unchanged at budget". Re-pricing landings when a child survives: S02 20, S01 13, S05 7, S09 5, S03 3, S07 2.
+- The coordinator's two questions: **(a) the octagon TRIM of the conditioned bin is a no-op** — over all 102 bins of the 22 nodes at 6×6×12 cells, 5 bins lose any cell, 3 shrink at all, mean volume ratio 0.971, none is emptied. `pinguard.classify` already applies that rule at branch time, so a bin that reaches an open node is by construction one it does not kill. **(b) The NO side is a convergence-time problem, not a re-pricing problem**: at a 900 s cap one child went 4.9865 → 4.7500 **converged DEAD** where 80 s left it unconverged, another went 4.9524 → 4.7500 still unconverged — and the instrument that actually decides is the certifier.
+- **Certification (frozen `verify_case.py`, sha 521cb01f…, byte-identical): 14 PASS / 4 FAIL, and TWO WHOLE NODES DIED** — `k5_11_interior_Y0054_D00` (S02, level 2, **5/5**) and `k5_16_interior_Y0984` (S07, level 1, **6/6**). Failures cluster exactly where they should: every FAIL had |η| ≤ 0.33; every child with η ≤ −0.5 passed; Y0984's six children (all η = −1.0) certified in 1–132 s.
+- `verify_param.py` raises `nofams unsupported` and every NO child is a NoFam, so all 18 certificates are **fixed-side** objects at s0 — the NO side must be re-certified per side of A57's four-side grid, and that is the only reason the branch cannot be emitted parametrically over the window in one pass.
+
+**T3 — price.** The branch's population is not the 1536 open boxes: it is the **286 shadow-explained nodes**, and it is sound only where the YES cell dies, i.e. on **146 (51 %)** of them at their own level. Cost = 5 NO LPs at 82 s on all 146, plus certification at 151 s only on the 36 % whose children are all LP-dead = **1.07 CPU-days**. At the measured node-certify rate 2/3 that kills **35 nodes**, worth **6.43 CPU-days** at A96's measured per-kill value (16.21 d / 89 kills, subtree included) — **net +1.07 wall-days at 5 workers**. Sensitivity: +1.72 at a perfect child pass rate, +0.93 at 0.90, −0.15 at 0.50. *n = 3 fully-certified nodes, so 2/3 is a weak estimate and the honest read is "positive, order one wall-day".*
+
+**The sound leaf.** `notes/leaf_shape.md` gives two: the Farkas leaf (obligations O1 selection census by interval arithmetic, O2 tilt subdivision, O3 affine relaxation, O4 one Farkas certificate per cell — *the Farkas vector IS the load path*), narrow but exact; and the free-kill leaf (`core_meet_kill` + `tilt_coupling`), wide, side-blind, and already inside the TCB because A57 discharges the same predicate 583 times on the deployed cover.
+
+**Two bugs, both caught by sampling, both recorded in `notes/method.md`.** (i) Containment rows used the cell MAXIMUM half-width, which over-constrains the LP so an infeasibility proves nothing — the whole T1 grid was discarded and re-run with the cell minimum. (ii) `pinguard.tight_a` is stated for 0 ≤ θ0 ≤ θ1 ≤ 90 and a D4 **reflection** produces a negative tilt interval; fed that raw it returned a core of half-side **0.7840 > 1/2**, a "core" larger than the square it is inscribed in. `octagon.normalised` + `safe_kill_core` fix it (a claim must hold for every tilt branch). The census fell 166 → 113 at L1; the T1 verdict was unchanged. **B(ii) was invisible to every internal consistency check and visible immediately to sampling** — hence the standing rule: no number derived from an LP-free geometric rule is reported before dense random pose sampling confirms it.
