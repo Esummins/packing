@@ -3413,3 +3413,84 @@ Canaries: Trump alive (its grain minimum is ŝ; different selection; TRUMP-GAP i
 `attempts/A110-grain-flood/{code,results,logs,notes}`; depgraph notes on C.A57/K0.RESN + node GRAIN (owner A110).
 Constraints honoured: one process, BLAS pinned, read-only on A57/A60/A61/A96/A109 and `lean/` sources (depgraph.json
 notes only), frozen verifiers untouched, git fetch + plain merge + push own paths.
+
+## 2026-09-06 — A109-node-crowd (Opus chore, 2 BLAS-pinned processes, read-only on A57/A60/A61/A94/A96/A107) — done-negative
+- **T3 (one line): node-level SLOT-CROWD rows kill 0 of 18 genuinely-alive A57 nodes at every depth the window
+  licenses (delta = 0 sound, 0.05, 0.1) and 18 of 18 at delta = 0.3, certify 0 of 10, cost 128 s per node per
+  delta, and are worth -0.4 wall-days at 5 workers.** The mechanism is real; its threshold sits at delta ~ 0.2-0.3
+  and Theorem N-S licenses a delta certificate only for sides m <= s-hat' - delta = 3.577, i.e. **0.24 below the
+  window floor 3.82**. Notes `attempts/A109-node-crowd/notes/report.md` and `notes/method.md`.
+- **NEW, REUSABLE, EXACT (`code/aw_check.py`): the SLOT-SLIDE margin and the Lemma B-YES-S dilation pad cancel.**
+  On any window [m_lo, s] and any usable slot whose extension is dead on the FULL window,
+  sup over m of [lambda(m)(1 - (s - m)) + (lambda(m) - 1)(1/sqrt2 + max(i,j))] = 1 exactly, attained at m = s,
+  independently of the cell. So the ONLY sound crowd family on A57's G1 slab (m_lo = 3.8616374951330865,
+  lambda_max = 1.004) is a_w = 1 — "two non-pin squares MEET the open slot box", delta = 0. A94 refused
+  a_w >= 1 only because its CHAIN needed delta > delta_pad; at the node level that refusal was the wrong call
+  and a_w = 1 is the right family. A109 used a_w = 1 + 1e-5 as a strict outer pad.
+- **m_u = 3, not 4, on a SLAB.** The fourth usable slot of each class extends to k6_23, certified on
+  [3.82, 3877/1000] plus the A54 fixed-s0 certificate; the sub-interval (3877/1000, s0) of A57's G1 slab
+  therefore carries NO crowd hypothesis there. At a FIXED side s0 (A60's exact-pin nodes) it does, so m_u = 4
+  is right there and A94's own choice stands for its own certificates.
+- **The node-level incidence budget (new bookkeeping).** budget = budget_node + floor(eB),
+  B = 2 m_u - (sum over the BRANCHED cores of r_max), because the branched square is a non-pin square that is
+  exempt from the LP rows and may carry crowd incidences the LP cannot then collect. r_max bounded two ways:
+  over B+ = every unit square CONTAINING the core (|c-k| <= sqrt2(1/2-a), |dtheta| <= arcsin(min(1,1/(2a sqrt2))) - 45 deg)
+  and, tighter and equally sound given tree57.build_children's "some square has its pose in b", over the branch
+  box itself. Measured B in {3..6} at m_u = 3 and {5..8} at m_u = 4; the tighter B changes no verdict.
+- **One LP decides a node.** tau(e) is an LP optimum with rhs affine in e, hence convex increasing, so
+  c(e) = (tau(e) - tau0)/e is non-decreasing and eta(e) = eta0 + c(e) e - floor(eB): if the smallest e that
+  buys any bonus returns c >= B, no larger e can kill. Implemented as `t2.py --e auto`.
+- **T1 (the mechanism check on the shadows).** Over the 552 A57 alive nodes A107 explains by S01/S03/S04/S05
+  (k5_11 x263, k5_16 x289; levels 1-4), the dual support leaves a usable slot empty or singly met in **93.7 %**
+  of nodes (mean 1.89 of 3 slots violated, mean total incidence 4.81 against the 6 Lemma SLOT-CROWD requires);
+  per shadow 94.3 / 94.7 / 96.5 / 79.4 %. Slot ranking: k5_11 BL(1,1) 214, k5_11 BR(0,1) 189, k5_16 TR(1,0) 185,
+  k5_11 TL(1,0) 175, k5_16 BR(0,1) 168, k5_16 TR(0,1) 107.
+- **T2 (the kill).** 46 stratified nodes (S01 15, S03 8, S04 8, S05 5, 10 unexplained controls; levels 1-2;
+  every one is 5 pin boxes + ONE branched box), 4 configurations, e ladder by the convexity rule. Only 18 of the
+  45 solved were genuinely alive at the LP (eta0 >= 0) — the other 27 were already tau < budget pending
+  convergence in A57, which is worth knowing about the "alive-at-LP" population itself.
+
+  | cfg | a_w | m_u | mean B | mean c = dtau/de | c >= B | ATTRIBUTABLE kills | mean eta - eta0 |
+  |---|---|---|---|---|---|---|---|
+  | sound | 1+1e-5 | 3 | 4.37 | **6.23** | 42/45 | **0 of 18** | +0.77 |
+  | delta = 0.05 | 0.96063 | 4 | 6.22 | 7.69 | 39/44 | **0 of 18** | +0.90 |
+  | delta = 0.1 | 0.91043 | 4 | 6.35 | 7.03 | 37/44 | **0 of 18** | +0.67 |
+  | delta = 0.3 | 0.70963 | 4 | 6.71 | **4.83** | 2/44 | **18 of 18** (11 converged) | -1.05 |
+
+  **T1's 94 % upper bound collapses to a 0 % kill rate because the crowd rows do not forbid A57's dual support,
+  they re-price it, and the LP moves.** The usable slot boxes are 0.877 apart per axis at s0 while a 45-degree
+  unit square spans 1.414, so one fractional placement sits in two or three boxes at once — exactly the
+  multiplicity Lemma CW-S pays for with the incidence budget N + 2 m_u e, and at the licensed pad it is a wash.
+  Depth breaks the multiplicity, and only depth.
+- **Certification: node-level boxes do NOT escape A94-G4.** 10 LP-dead nodes (5 at a_w = 1, 5 at delta = 0.3)
+  through the frozen `verify_case.py` (sha 521cb01f..., depth 56, one witness-feedback round) in A94's
+  1 + r_max form with the NODE's own cores: **0 of 10 certified**; run A PASSes 9/10, and the multiplicity runs
+  B_r fail on 5-32 exact HOLES each — **at B_1 already**, whereas A94's G4 node passed B_1 and failed B_2-B_4.
+  The incidence rows remain the unpriced part of the certificate (A94-G4), and small boxes make it worse.
+- **Trump canary PASS.** Exact Trump slot depths reproduced in A109's own frames to 4.7e-7 (all six unclipped
+  cells of trump5). The trump5 CLASS ROOT with A57's slack pins (rho = 1e-2), a hypothesis the exact Trump
+  satisfies, carries the crowd rows and survives at sound / 0.05 / 0.1 (eta = +1.33 / +1.20 / +1.04) and only
+  dies at delta = 0.3 (eta = -0.51) — just past Lemma CEIL-T's delta_T(trump5) = 0.1555, exactly as the ceiling
+  predicts. Nothing false was killed.
+- **Price and composition.** 128 s mean per node per configuration (median 92, max 392) against the same nodes'
+  original A57 LP wall of 396 s (median 321) and A57's measured 581 s LP+certify per level-1 node; certification
+  72 s mean for the whole 1 + r_max chain. Over the 1536 open boxes: route (a) "re-solve alive nodes only" costs
+  2.1 CPU-days and returns nothing at every licensed delta = **-0.4 wall-days at 5 workers**; route (b) "rows in
+  every node LP" is never cheaper at the same kill rate. At delta = 0.3 the same route would return the whole
+  66.53-CPU-day remainder (+12.7 wall-days at 5w) — that is the size of the prize if a lemma ever licenses depth
+  on this window.
+  **Parametric compatibility:** run A rides `A96/code/verify_param.py` unchanged (n = 11 + eB, the budget clause
+  is s-free, and --strict-margin r e is exactly B_r's inequality); runs B_r do NOT — the file raises
+  "nofams unsupported" and E_r is a NO-family cover. The slot frame is corner-anchored, so F_p(a_w) is
+  s-INDEPENDENT in the frame and every E_r box is an affine alpha + beta s rectangle with beta in {0,1} per side,
+  the same affine form the verifier already uses for atoms and cores — the extension is small, but it does not
+  exist today and **crowd rows are fixed-s0-only as things stand.**
+- **A109-O1 (stated dependency, not discharged here).** SLOT-CROWD at the slab's top endpoint m = s0 needs the
+  extension classes dead AT s0, not merely on [3.82, s0); the FULL k6 rows carry A54/A56/A61 fixed-s0 base
+  certificates and `A96/notes/pocket96.md` sec 2 leans on the same reading. If it is wrong, the a_w = 1
+  configuration covers (m_lo, s0) and leaves the single side s0 to A57's own leaf.
+- Discipline: A94's engine and the frozen verifier COPIED into `attempts/A109-node-crowd/code/`; every campaign
+  node json COPIED into `results/nodes/*.src.json` before use; nothing written under A57/A60/A61/A94/A96/A107;
+  no campaign process started, stopped or re-niced; at most 2 A109 processes, BLAS pinned, free commit > 6144 MB
+  and free physical > 3072 MB gated before every LP. `rows_all`/`packing_images` were emptied from A109's own
+  node jsons after the run (flagged `a109_trimmed`) to keep the attempt directory at 9.5 MB.
