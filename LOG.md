@@ -3291,4 +3291,4 @@ explained, with drawings, contact graphs, tilt sweeps and drain hints, in `docs/
   A107's own PID); frozen verifiers untouched. Writes: `attempts/A107-shadow-gallery/**`,
   `docs/shadows.md`, `docs/shadows/*.svg`, registry row, this entry, one note line on `C.A57`.
   Every drawn square containment-checked; the minimised panels also overlap-checked; overlaps
-  appear only in the raw LP panel and are printed as numbers. Wall 1 h 45 min of the 3 h cap.
+  appear only in the raw LP panel and are printed as numbers. Wall 2 h of the 3 h cap (compute: extract 44 s, structure minimisation 868 s, gallery 2760 s).
