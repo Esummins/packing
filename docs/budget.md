@@ -5,7 +5,7 @@ its provenance, and the date; nothing else in the repo quotes a total without po
 (the PI's convention). Machine: i7-12700K, 6 usable LP slots with BLAS pinned; "wall-days at 5" assumes five
 workers.
 
-Last updated: **2026-09-06 12:30**.
+Last updated: **2026-09-06 15:00**.
 
 ## A. The total
 
@@ -14,7 +14,7 @@ Last updated: **2026-09-06 12:30**.
 | A57 window trees, k5_11 + k5_16 | ~1,400 open boxes across levels 1–4, tail measured to termination (level-4 descent 0 of 30) | **1,250 CPU-h** (≈ 52 CPU-days) | 1,150–1,600 | **10–11** (13.3 without trimming; 19.6 without the tight core; 27 at the 95% tail bound) | A96 `e68d8dbc` (trimming projection), `5fd0e287` (tail), `761513f5` (tight core) | LP-time re-check of unconverged "alive" nodes (28/46 were not alive); load-path branching (A111/A112); trimmed-bin LP strength (A96 re-solves running) |
 | Window stragglers | k5_02, k5_03, k5_12, k5_13 (running), k6_27; k6_07 band; k6_23 sliver | **30 CPU-h** | 15–60 | 0.3 | A61 pass 5 (`campaign61_progress.json`); per-class 0.7–2.5 h | k5_12 needs only a gate change; resolver on 4-D witnesses untried |
 | Protected tier, 15 classes excl. k0_00 | conditioning trees per exact stratum; trump5's residual tree | **3,800 CPU-h** | 2,900–6,300 | 32 | A100 `a100_projection.json` (2026-09-05) | tight core + trimming untested here (same box/pin geometry, expect a similar fraction); η-gating already in the number |
-| k0_00 | the frame residue; tree at 9,300–21,700 CPU-h, or one theorem | **theorem route: 0** / tree route **15,000 CPU-h** | 9,300–21,700 | 0 / 125 | A99 `99985b76`; LOCK-FREE⁺ evidence A104 `af6456e1` | LOCK-FREE⁺(< 4) is the only lever that matters here |
+| k0_00 | the frame residue; tree at 9,300–21,700 CPU-h, or one theorem | **theorem route: 0** / tree route **15,000 CPU-h** | 9,300–21,700 | 0 / 125 | A99 `99985b76`; LOCK-FREE⁺ evidence A104 `af6456e1`; A113 `6409396b` | LOCK-FREE⁺(< 4); dual-guided re-branching on the slot the support keeps occupying (A113: the un-killable cells' supports are 2–6-slot partial skeletons of near-critical shadows; the cell's own box distance to the manifold predicts nothing, the support does); the k0 tree has zero logic kills today |
 | **Total, theorem route** | | **≈ 5,100 CPU-h** | 4,100–8,000 | **≈ 42** | | |
 | **Total, tree route** | | **≈ 20,000 CPU-h** | 13,000–30,000 | **≈ 170** | | |
 | PI target | | 400 CPU-h | | 3 | | |
