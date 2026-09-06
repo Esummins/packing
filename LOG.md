@@ -3304,3 +3304,4 @@ explained, with drawings, contact graphs, tilt sweeps and drain hints, in `docs/
   have caught anyway. 5/85 = 5.9% of emitted children, against the offline prediction of ~4-5 on this L1/L2 mix -- consistent.
   The filter is confirmed live in the restarted workers, which is what this window was actually able to establish; the hour's
   raw kill RATE is not evidence either way, since an hour's boxes are not a random sample of the cover.
+- 2026-09-06 00:37 PAUSE (PI directive): A61 campaign61 + resolve61 (k5_05, k6_21) stopped, resumable (attempts/A61-window-stragglers/PAUSED.md); A57/A96 workers being paused by A96 (attempts/A57-shadow-trees/PAUSED.md). Reason: A108/A109 may change the tree's economics (node-level SLOT-CROWD rows, shadow basins). Chores A108/A109 continue.
