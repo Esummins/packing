@@ -3190,3 +3190,35 @@ Detail: `attempts/A106-shadow-diameter/notes/measurements.md`, `results/t3_switc
       level 4 (22.59 d).
   NOT DEPLOYED pending the go-ahead; when deployed it is a pre-filter on newly emitted children only, existing verdicts untouched.
   Route (A) (interval SAT, new leaf + new Lean) stays on the shelf.
+
+## 2026-09-05 — A104-grid-lock (Opus chore) — done-success
+- **T3 (one line): fully-held K0-BLOCKED packings first appear at side m_lock = 4.0002374 (4.0015246 with a
+  Gordan certificate at all eight intruders); below 4 the closing iteration always frees a corner.** No
+  counterexample to Conjecture LOCK-FREE(< 4); its failure point is NOT the jammed grid.
+- **T1 — the grid drains too.** The closing iteration of Lemma ROT (lock103 reused verbatim for the HELD test;
+  move the unheld intruder along its unheld motion, pin the new contact rows at gap 1e-11, least-norm re-polish
+  of that square's three coordinates, re-polish the configuration at fixed side, repeat) run on all 12 strictly
+  K0-BLOCKED packings on disk: **12/12 free a corner**, including both candidates of docs/proofs/noroom.md §7 —
+  polish12 (4.0000001, TR sq7 rotates out after travel 1e-5) and floor-1e-4 (4.0000044, BR sq3 translates out
+  after 1e-5). Every endpoint exactly certified (fjpolish87.verify_exact: disjoint, min pair gap >= 1e-11, side
+  UB within 2e-9; exact_blocked_test_d: the freed corner has ONE certified meeter, zero unknowns). §7's
+  "the grid's rigidity makes it plausible that this packing is held at all eight intruders" is measured FALSE:
+  the exact grid at side 4 has one meeter per corner, so the eps-grid is blocked only by an O(eps) poke that
+  Lemma ROT's own step takes straight back out. A103's "jams at a near-contact at 1.2e-7" was an artefact of
+  straight-line travel — following the contact manifold the nick rolls past it and retracts 100 %.
+- **T2 — m_lock.** k0dir2_87's confined descent (verbatim), 220 fresh seeds per floor + the 12 corpus packings,
+  floors 1e-3 and 1e-2, closing iteration at every blocked endpoint: **443 endpoints, 58 fully held** (11.3 % at
+  1e-3, 14.9 % at 1e-2) **against 363 corner-freed** (85.1 % / 78.7 %; 22 timeouts, 21 seeds gave no blocked
+  endpoint). m_lock = 4.000237417 (floor 1e-3); the lowest with a clean Gordan certificate at all eight is
+  4.001524573. **Zero fully-held packings below side 4** — the lowest endpoint the descent reached at all was
+  3.9907484 and it freed a corner. So RES-LOCK is realised after all, just not by the grid and not below 4.
+- **The lock's contact structure** (464 intruders of the 58 held packings): 4.25 contacts per intruder,
+  **77.2 % square-square vs 22.8 % wall** (3.28 square + 0.97 wall rows each); 145/464 wedged with lambda = 0
+  (contacts alone), 319 needing the virtual corner row; depths 2.4e-4 / median 0.135 / 0.924. Consequence for
+  the proof target of noroom.md §7: the lock is carried by the square-square rows, so a wall-length budget
+  (WALL-F) alone cannot deliver LOCK-FREE — the missing step is that at side < 4 the crowd arms cannot supply
+  3+ square rows to all eight corner members at once.
+- Canary: Trump 5/5 intruders held, K0-FREE, side 3.877083590023 — unchanged before and after both campaigns.
+- Files: attempts/A104-grid-lock/{code/close104.py,code/report104.py,code/gen_lock104.py,code/depgraph_note104.py,
+  notes/lock104.md,results/*}; chip on depgraph K0.RESN (owner A104); REGISTRY row. One process, BLAS pinned,
+  ~90 min wall. A57/A60/A61/A96/A102/A103 files and the frozen verifiers untouched.
