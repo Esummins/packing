@@ -37,6 +37,14 @@ squares free and seen only through the LP. Levels halve each box coordinate. Ali
 before the tight core: k5_11 L1 158 / L2 122 / L3 10 / L4 4; k5_16 L1 213 / L2 9. The tight core (T5′) removes 70 of
 them (20/32/7/11 by level) with the certificate unchanged. Level-4 descent measured 0 of 30: the tree terminates.
 **Schedule if simply resumed: 13.3 wall-days at 5 workers** (19.6 without T5′; 27 at the 95% upper bound on the tail).
+**Tilt trimming (PI, 2026-09-06; A96 `155a3c5b`, measured, not deployed):** certify dead every tilt sub-interval of a
+box for which the whole centre box lies inside one pin's octagon (Minkowski sum of the pin core and the reflected
+square) — T5 with a tilt-range parameter, no new verifier. On 2,222 boxes: **159 boxes' surviving bin is empty (new
+kills, 2.3× T5′'s 70: 51 L1, 86 L2, 10 L3, 12 of 14 at L4)** and 155 more are partially trimmed (median surviving
+fraction 0.46–0.66); positive control 618/618. The value is the outright kills, not the core enlargement (median
+a_tight gain 1.000). Lemma TC (tilt coherence) is exact to machine epsilon as a support-function identity but as a
+kill test is 4.8× weaker than the octagon interval test (33 vs 159) because it discards direction; it stays as the
+O(1) pre-screen. LP re-solves on trimmed bins and the schedule effect pending.
 
 **What the alive nodes are** (A107, LP dual support drawn directly — the PI's rule):
 
