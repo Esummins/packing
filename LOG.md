@@ -3646,3 +3646,21 @@ notes only), frozen verifiers untouched, git fetch + plain merge + push own path
 **The sound leaf.** `notes/leaf_shape.md` gives two: the Farkas leaf (obligations O1 selection census by interval arithmetic, O2 tilt subdivision, O3 affine relaxation, O4 one Farkas certificate per cell — *the Farkas vector IS the load path*), narrow but exact; and the free-kill leaf (`core_meet_kill` + `tilt_coupling`), wide, side-blind, and already inside the TCB because A57 discharges the same predicate 583 times on the deployed cover.
 
 **Two bugs, both caught by sampling, both recorded in `notes/method.md`.** (i) Containment rows used the cell MAXIMUM half-width, which over-constrains the LP so an infeasibility proves nothing — the whole T1 grid was discarded and re-run with the cell minimum. (ii) `pinguard.tight_a` is stated for 0 ≤ θ0 ≤ θ1 ≤ 90 and a D4 **reflection** produces a negative tilt interval; fed that raw it returned a core of half-side **0.7840 > 1/2**, a "core" larger than the square it is inscribed in. `octagon.normalised` + `safe_kill_core` fix it (a claim must hold for every tilt branch). The census fell 166 → 113 at L1; the T1 verdict was unchanged. **B(ii) was invisible to every internal consistency check and visible immediately to sampling** — hence the standing rule: no number derived from an LP-free geometric rule is reported before dense random pose sampling confirms it.
+- A96 SAFETY ITEM from A111 bug (ii) (pinguard.tight_a stated for 0 <= theta <= 90 returned a = 0.7840 > 1/2 on a NEGATIVE tilt
+  interval -- an unsound core, since no unit square contains a square of half-side > 1/2).
+  (2) SCAN FIRST, and it is CLEAN. Over all 2222 boxes in the deployed corpus (all levels, both classes, every recorded verdict,
+      including the 618 logic-kill and 159 trim-kill sets): th0 < 0 in ZERO boxes, th1 > 90 in ZERO, th0 > th1 in ZERO,
+      kill_core a >= 1/2 in ZERO. Max half-side actually produced = 0.487068 (k5_11_interior_Y0036_D07_D05_D01), comfortably
+      under 1/2; the global tilt range across the corpus is exactly [0, 90]. Nothing already emitted is affected -- A57's cover
+      builds bins from theta_edges on [0,90] and never reflects them, which is why the bug could not fire here. It WOULD fire the
+      moment a D4 reflection or an unnormalised bin reached these functions.
+  (1) HARD ASSERTIONS ADDED: pinguard.tight_a and trim57.dead_by_pin / split_bin now raise ValueError unless
+      0 <= th0 <= th1 <= 90, and tight_a additionally raises if the computed a >= 1/2 - 1e-12. Verified: [-45,0] and [0,120] are
+      both refused, a negative bin is refused by trim57, and valid bins are unaffected. Callers must normalise mod 90 first
+      (A111's octagon.normalised); the functions no longer trust them.
+  (3) A111's STANDING RULE ADOPTED -- dense pose sampling confirms a geometric rule before its count is reported. Run now:
+      T5' core containment, 12000 random (box, pose) draws with all four core corners tested against the unit square: 0
+      violations. T5'' dead tilts, 12000 random (pose, certified-dead tilt) pairs tested for actual overlap with the witness pin
+      core: 0 violations. Both rules confirmed at >= 10^4 pairs.
+      Incidental: pinguard._TightCore exposes cm/sm but not tm, so any consumer reading .tm off a kill core would break --
+      harmless today (cores_meet reads only kx/ky/a/cm/sm) but worth knowing.

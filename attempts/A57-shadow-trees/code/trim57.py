@@ -67,7 +67,13 @@ def _max_proj(dx, dy, d0, d1, off):
 
 def dead_by_pin(box, slot, d0, d1, a_pin=None):
     """True if EVERY centre in `box` overlaps this pin's core for EVERY tilt in [d0, d1]."""
+    # A111 bug (ii): the |cos| + |sin| envelopes below are stated for tilts in [0, 90].  A
+    # reflected or unnormalised bin silently breaks them, so refuse it.
+    if not (0.0 <= d0 <= d1 <= 90.0):
+        raise ValueError(f"dead_by_pin: tilt interval [{d0}, {d1}] outside [0, 90]")
     aP = (0.5 - DELTA) if a_pin is None else a_pin
+    if not (0.0 < aP < 0.5):
+        raise ValueError(f"dead_by_pin: pin core half-side {aP} outside (0, 1/2)")
     wm = _w_min(d0, d1)
     A = wm / 2.0 + aP - MARGIN
     B = 0.5 + aP * wm - MARGIN
@@ -87,6 +93,8 @@ def split_bin(box, slots, nsub=NSUB):
     """-> (surviving intervals, excluded intervals-with-witness-pin).
 
     Each excluded entry is (lo, hi, pin_index): the T5-with-range instance to certify."""
+    if not (0.0 <= box.th0 <= box.th1 <= 90.0):
+        raise ValueError(f"split_bin: tilt interval [{box.th0}, {box.th1}] outside [0, 90]")
     lo, hi = box.th0, box.th1
     if not TRIM or hi <= lo:
         return [[lo, hi]], []

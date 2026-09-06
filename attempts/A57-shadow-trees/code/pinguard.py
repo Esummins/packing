@@ -110,12 +110,23 @@ def tight_a(box, tm_deg):
     old one, so no previously-valid kill can be lost.  Control: 583/583 known logic-kill boxes
     still killed (attempts/A96-a57-parametric/results/core96.json).
     """
+    # A111 bug (ii), 2026-09-06: this formula is stated for 0 <= theta <= 90.  Fed a NEGATIVE
+    # tilt interval -- e.g. a D4 reflection of a bin -- it returned a = 0.7840 > 1/2, an UNSOUND
+    # core (no unit square contains a square of half-side > 1/2).  Callers must normalise mod 90
+    # first; this refuses rather than trusting them.  A96's scan of the deployed corpus found
+    # zero such bins (max a observed 0.487068), so nothing already emitted is affected.
+    if not (0.0 <= box.th0 <= box.th1 <= 90.0):
+        raise ValueError(f"tight_a: tilt interval [{box.th0}, {box.th1}] outside [0, 90]; "
+                         f"normalise mod 90 before calling")
     h = max(0.5 * (box.x1 - box.x0), 0.5 * (box.y1 - box.y0))
     Mc = _max_cs(box.th0, box.th1)
     phi0, phi1 = box.th0 - tm_deg, box.th1 - tm_deg
     lo, hi = min(phi0, phi1), max(phi0, phi1)
     Mt = max(_cs(lo), _cs(hi), 1.0 if lo <= 0.0 <= hi else 0.0)
-    return (0.5 - h * Mc) / Mt
+    a = (0.5 - h * Mc) / Mt
+    if a >= 0.5 - 1e-12:
+        raise ValueError(f"tight_a: computed a = {a} >= 1/2, which no unit square contains")
+    return a
 
 
 TIGHT_CORE = True          # set False to fall back to caselp.Box.core() exactly
