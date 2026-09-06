@@ -1,0 +1,132 @@
+selftest: slot_rows gradients OK
+selftest: SAT gap sign == open-slot meet on 4000 samples OK
+selftest: seed builder 40/40 K0-BLOCKED feasible
+selftest: random seed exact certified n_block [2, 2, 2, 2] (unknown [0, 0, 0, 0]) vs float [2, 2, 2, 2]
+selftest: PASS
+pair pool: 300 pairs in 6s; min-depth quantiles 0.0028 0.0133 0.0318 0.0582 0.1162
+selftest: strict n_block monotone in the floor OK ([2, 2, 2, 2] at 1e-2)
+selftest: floor 1e-06 exact [2, 2, 2, 2] (unknown [0, 0, 0, 0]) vs float [2, 2, 2, 2]
+selftest: floor 1e-04 exact [2, 2, 2, 2] (unknown [0, 0, 0, 0]) vs float [2, 2, 2, 2]
+selftest: floor 1e-02 exact [2, 2, 2, 2] (unknown [0, 0, 0, 0]) vs float [2, 2, 2, 2]
+selftest: 1e-2 seed blocked at every floor OK
+selftest: PASS
+canary: Trump s = 3.877083590023
+   floor 1e-06: float n_block [1, 1, 2, 1]  exact certified [1, 1, 2, 1]  unknown [0, 0, 0, 0]  blocked False  TL depths 0.168321/0.155475
+   floor 1e-04: float n_block [1, 1, 2, 1]  exact certified [1, 1, 2, 1]  unknown [0, 0, 0, 0]  blocked False  TL depths 0.168321/0.155475
+   floor 1e-03: float n_block [1, 1, 2, 1]  exact certified [1, 1, 2, 1]  unknown [0, 0, 0, 0]  blocked False  TL depths 0.168321/0.155475
+   floor 1e-02: float n_block [1, 1, 2, 1]  exact certified [1, 1, 2, 1]  unknown [0, 0, 0, 0]  blocked False  TL depths 0.168321/0.155475
+   TL crowd depths 0.168321 / 0.155475 pass the 1e-2 floor  OK
+canary: PASS
+=== floor delta = 1e-06 ===
+pair pool: 3000 pairs in 52s; min-depth quantiles 0.0026 0.0139 0.0320 0.0597 0.1157
+floor 1e-06: 3000/3000 census pairs survive the depth filter (>= 2.0e-06)
+  [1e-06]   50 seeds, 293s, best sigma = 4.000120650
+  [1e-06]  100 seeds, 519s, best sigma = 4.000120650
+  [1e-06]  150 seeds, 773s, best sigma = 4.000003020
+  [1e-06]  200 seeds, 1032s, best sigma = 4.000003020
+  [1e-06]  250 seeds, 1292s, best sigma = 4.000001599
+  [1e-06]  300 seeds, 1548s, best sigma = 4.000001599
+  [1e-06] descent: 300 seeds in 1548s
+  [1e-06] deep d1em06_s0230 4.0000016 -> 4.000001571  n_block [2, 2, 2, 2]  m2 1.02e-06 1.02e-06 2.78e-02 7.78e-04
+  [1e-06] deep d1em06_s0261 4.0000030 -> 4.000002397  n_block [2, 2, 2, 2]  m2 1.02e-06 1.02e-06 1.15e-03 1.65e-03
+  [1e-06] deep d1em06_s0131 4.0000030 -> 4.000002510  n_block [2, 2, 2, 2]  m2 4.22e-06 1.02e-06 5.33e-02 1.02e-06
+  [1e-06] deep d1em06_s0212 4.0000067 -> 4.000006602  n_block [2, 2, 2, 2]  m2 1.02e-06 1.02e-06 1.19e-03 1.02e-06
+  [1e-06] deep d1em06_s0293 4.0000125 -> 4.000010095  n_block [2, 2, 2, 2]  m2 3.10e-03 1.02e-06 1.02e-06 4.23e-06
+  [1e-06] deep d1em06_s0022 4.0001206 -> 4.000000486  n_block [2, 2, 2, 2]  m2 1.02e-06 1.05e-06 1.02e-06 1.41e-01
+  [1e-06] deep d1em06_s0101 4.0002376 -> 4.000022181  n_block [2, 2, 2, 2]  m2 1.30e-06 1.30e-06 6.23e-03 1.30e-06
+  [1e-06] deep d1em06_s0104 4.0003676 -> 4.000366339  n_block [2, 2, 2, 2]  m2 1.84e-02 1.07e-01 8.14e-05 1.84e-04
+  [1e-06] deep d1em06_s0021 4.0004275 -> 4.000000015  n_block [2, 2, 2, 2]  m2 2.00e-06 4.97e-02 3.36e-05 1.23e-04
+  [1e-06] deep d1em06_s0211 4.0004755 -> 4.000000615  n_block [2, 2, 2, 2]  m2 1.20e-01 1.02e-06 1.02e-06 1.02e-06
+  [1e-06] deep d1em06_s0228 4.0008364 -> 4.000135472  n_block [2, 2, 2, 2]  m2 1.02e-06 1.02e-06 1.02e-06 5.84e-02
+  [1e-06] deep d1em06_s0245 4.0011726 -> 4.000027116  n_block [2, 2, 2, 2]  m2 1.26e-06 1.34e-05 5.14e-03 1.02e-06
+  [1e-06] verify d1em06_s0021: side_upper 4.000000015228  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-06] verify d1em06_s0022: side_upper 4.000000485878  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-06] verify d1em06_s0211: side_upper 4.000000614597  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-06] verify d1em06_s0230: side_upper 4.000001570918  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-06] verify d1em06_s0230: side_upper 4.000001599475  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-06] verify d1em06_s0261: side_upper 4.000002396674  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+=== floor 1e-06 done: lowest verified side 4.000000015228, frac below 4.0 = 0.0
+=== floor delta = 1e-04 ===
+floor 1e-04: 2990/3000 census pairs survive the depth filter (>= 2.0e-04)
+  [1e-04]   50 seeds, 255s, best sigma = 4.000023402
+  [1e-04]  100 seeds, 510s, best sigma = 4.000023402
+  [1e-04]  150 seeds, 768s, best sigma = 4.000023402
+  [1e-04]  200 seeds, 1003s, best sigma = 4.000023402
+  [1e-04]  250 seeds, 1237s, best sigma = 4.000023402
+  [1e-04]  300 seeds, 1526s, best sigma = 4.000023402
+  [1e-04] descent: 300 seeds in 1526s
+  [1e-04] deep d1em04_s0036 4.0000234 -> 4.000008748  n_block [2, 2, 2, 2]  m2 1.02e-04 6.40e-03 1.02e-04 1.02e-04
+  [1e-04] deep d1em04_s0211 4.0000525 -> 4.000025042  n_block [2, 2, 2, 2]  m2 1.02e-04 1.02e-04 1.63e-02 1.02e-04
+  [1e-04] deep d1em04_s0225 4.0000873 -> 4.000073284  n_block [2, 2, 2, 2]  m2 1.02e-04 1.02e-04 1.45e-03 1.34e-01
+  [1e-04] deep d1em04_s0130 4.0001409 -> 4.000140596  n_block [2, 2, 2, 2]  m2 1.02e-04 1.02e-04 1.04e-04 1.02e-04
+  [1e-04] deep d1em04_s0202 4.0001597 -> 4.000004386  n_block [2, 2, 2, 2]  m2 2.13e-03 1.31e-04 6.66e-02 1.30e-04
+  [1e-04] deep d1em04_s0136 4.0001700 -> 4.000152754  n_block [2, 2, 2, 2]  m2 1.00e-04 1.00e-04 1.02e-04 1.04e-04
+  [1e-04] deep d1em04_s0022 4.0001771 -> 4.000139141  n_block [2, 2, 2, 2]  m2 5.15e-02 1.02e-04 1.02e-04 1.02e-04
+  [1e-04] deep d1em04_s0069 4.0001852 -> 4.000128509  n_block [2, 2, 2, 2]  m2 1.02e-04 1.02e-04 1.02e-04 1.02e-04
+  [1e-04] deep d1em04_s0159 4.0001888 -> 4.000157644  n_block [2, 2, 2, 2]  m2 1.02e-04 1.02e-04 1.02e-04 1.90e-02
+  [1e-04] deep d1em04_s0060 4.0002609 -> 4.000247659  n_block [2, 2, 2, 2]  m2 1.55e-01 1.02e-04 1.02e-04 1.02e-04
+  [1e-04] deep d1em04_s0140 4.0002769 -> 4.000194738  n_block [2, 2, 2, 2]  m2 1.02e-04 1.02e-04 1.02e-04 1.02e-04
+  [1e-04] deep d1em04_s0221 4.0003397 -> 4.000136898  n_block [2, 2, 2, 2]  m2 1.31e-04 5.70e-02 1.02e-04 1.02e-04
+  [1e-04] verify d1em04_s0202: side_upper 4.000004386387  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-04] verify d1em04_s0036: side_upper 4.000008747518  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-04] verify d1em04_s0036: side_upper 4.000023401877  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-04] verify d1em04_s0211: side_upper 4.000025041643  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-04] verify d1em04_s0211: side_upper 4.000052512359  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-04] verify d1em04_s0225: side_upper 4.000073284083  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+=== floor 1e-04 done: lowest verified side 4.000004386387, frac below 4.0 = 0.0
+=== floor delta = 1e-03 ===
+floor 1e-03: 2887/3000 census pairs survive the depth filter (>= 2.0e-03)
+  [1e-03]   50 seeds, 325s, best sigma = 4.000185963
+  [1e-03]  100 seeds, 681s, best sigma = 3.999041804
+  [1e-03]  150 seeds, 1016s, best sigma = 3.995000249
+  [1e-03]  200 seeds, 1333s, best sigma = 3.995000249
+  [1e-03]  250 seeds, 1664s, best sigma = 3.995000249
+  [1e-03] wall cap after 257 seeds
+  [1e-03] descent: 257 seeds in 1703s
+  [1e-03] deep d1em03_s0119 3.9950002 -> 3.991202128  n_block [2, 2, 2, 2]  m2 8.40e-02 1.02e-03 9.38e-03 1.02e-03
+  [1e-03] deep d1em03_s0050 3.9990418 -> 3.990748515  n_block [2, 2, 2, 2]  m2 7.67e-02 1.02e-03 9.88e-03 1.02e-03
+  [1e-03] deep d1em03_s0083 4.0000375 -> 4.000037280  n_block [2, 2, 2, 2]  m2 1.02e-03 1.02e-03 4.12e-02 1.02e-03
+  [1e-03] deep d1em03_s0094 4.0001416 -> 4.000140803  n_block [2, 2, 2, 2]  m2 1.02e-03 1.02e-03 1.02e-03 1.02e-03
+  [1e-03] deep d1em03_s0171 4.0001456 -> 4.000144857  n_block [2, 2, 2, 2]  m2 1.02e-03 1.02e-03 1.13e-03 1.02e-03
+  [1e-03] deep d1em03_s0179 4.0001710 -> 4.000170868  n_block [2, 2, 2, 2]  m2 1.02e-03 1.02e-03 1.02e-03 1.02e-03
+  [1e-03] deep d1em03_s0034 4.0001860 -> 4.000052551  n_block [2, 2, 2, 2]  m2 1.05e-01 1.02e-03 1.02e-03 1.02e-03
+  [1e-03] deep d1em03_s0187 4.0001946 -> 4.000127596  n_block [2, 2, 2, 2]  m2 8.07e-02 1.02e-03 1.60e-03 1.02e-03
+  [1e-03] deep d1em03_s0084 4.0002004 -> 4.000090212  n_block [2, 2, 2, 2]  m2 1.02e-03 1.02e-03 6.91e-02 1.02e-03
+  [1e-03] deep d1em03_s0223 4.0002864 -> 4.000143658  n_block [2, 2, 2, 2]  m2 1.02e-03 1.02e-03 1.02e-03 1.65e-03
+  [1e-03] deep d1em03_s0099 4.0003248 -> 4.000196780  n_block [2, 2, 2, 2]  m2 1.02e-03 1.05e-01 1.02e-03 1.02e-03
+  [1e-03] deep d1em03_s0196 4.0003651 -> 4.000066423  n_block [2, 2, 2, 2]  m2 8.12e-03 1.02e-03 1.02e-03 1.02e-03
+  [1e-03] verify d1em03_s0050: side_upper 3.990748514985  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-03] verify d1em03_s0119: side_upper 3.991202127787  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-03] verify d1em03_s0119: side_upper 3.995000248712  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-03] verify d1em03_s0050: side_upper 3.999041804199  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-03] verify d1em03_s0083: side_upper 4.000037280261  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-03] verify d1em03_s0083: side_upper 4.000037459806  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+=== floor 1e-03 done: lowest verified side 3.990748514985, frac below 4.0 = 0.007782101167315175
+=== floor delta = 1e-02 ===
+floor 1e-02: 1947/3000 census pairs survive the depth filter (>= 2.0e-02)
+  [1e-02]   50 seeds, 326s, best sigma = 4.000775463
+  [1e-02]  100 seeds, 650s, best sigma = 4.000479714
+  [1e-02]  150 seeds, 987s, best sigma = 4.000479714
+  [1e-02]  200 seeds, 1538s, best sigma = 4.000479714
+  [1e-02] wall cap after 215 seeds
+  [1e-02] descent: 215 seeds in 1703s
+  [1e-02] deep d1em02_s0076 4.0004797 -> 4.000457173  n_block [2, 2, 2, 2]  m2 1.02e-02 1.60e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0024 4.0007755 -> 4.000775463  n_block [2, 2, 2, 2]  m2 1.82e-02 1.02e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0095 4.0008912 -> 4.000699041  n_block [2, 2, 2, 2]  m2 1.02e-02 1.02e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0066 4.0009581 -> 4.000908026  n_block [2, 2, 2, 2]  m2 1.02e-02 1.02e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0156 4.0013559 -> 4.001316677  n_block [2, 2, 2, 2]  m2 1.02e-02 1.02e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0009 4.0014552 -> 4.000788746  n_block [2, 2, 2, 2]  m2 1.02e-02 1.02e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0161 4.0016573 -> 4.001647990  n_block [2, 2, 2, 2]  m2 1.02e-02 2.57e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0111 4.0022308 -> 4.001622501  n_block [2, 2, 2, 2]  m2 1.02e-02 1.02e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0158 4.0027585 -> 4.002758474  n_block [2, 2, 2, 2]  m2 9.48e-02 1.02e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0179 4.0028084 -> 4.002808403  n_block [2, 2, 2, 2]  m2 1.02e-02 4.18e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0134 4.0032059 -> 4.003205918  n_block [2, 2, 2, 2]  m2 1.02e-02 3.97e-02 1.02e-02 1.02e-02
+  [1e-02] deep d1em02_s0054 4.0033246 -> 4.002669050  n_block [2, 2, 2, 2]  m2 1.02e-02 1.02e-02 2.89e-02 1.02e-02
+  [1e-02] verify d1em02_s0076: side_upper 4.000457173185  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-02] verify d1em02_s0076: side_upper 4.000479713657  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-02] verify d1em02_s0095: side_upper 4.000699041129  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-02] verify d1em02_s0024: side_upper 4.000775463434  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-02] verify d1em02_s0024: side_upper 4.000775463470  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+  [1e-02] verify d1em02_s0009: side_upper 4.000788745675  exact n_meet [2, 2, 2, 2]  unknown [0, 0, 0, 0]  disjoint True  BLOCKED True
+=== floor 1e-02 done: lowest verified side 4.000457173185, frac below 4.0 = 0.0
+DONE

@@ -126,7 +126,18 @@ on 2026-09-05: the directed floor sweep (k0dir2_87) found packings that are **st
 (every corner met by two squares at certified depth ≥ 10⁻³, exact SAT, 0.8% of its seeds end below 4); three of the
 four second meeters sit at exactly the floor depth, i.e. this is an η-disturbance of a K0-FREE packing, blocked by
 grazers. So the empirical threshold m*(δ) is floor-dependent and sits below 4 for δ = 10⁻³, though every value found is
-still ≥ ŝ + 0.11. Coordinates and figure pending the sweep's final report (§7).
+still ≥ ŝ + 0.11.
+
+![strict record](residue_map/strict_3p9907.svg)
+
+The record's anatomy (k0dir2_87 final report, exact poses in `attempts/A87-drain-flow/results/k0dir2_87.records.json`):
+BL is a genuine two-crowd (second meeter at depth 0.077); BR and TR are held by second meeters at exactly the floor
+(1.02·10⁻³) and TL at 9.9·10⁻³, so three corners are one η ≈ 10⁻³ nudge from K0-FREE. Squares 1 and 2 are axis-aligned
+on the bottom wall, square 2 displaced 0.067 from the BR slot — this is a k5_10-shaped packing wearing η-disturbances,
+and it fails the 10⁻² floor ([2,1,1,1]). Two further facts from the sweep: K0-BLOCKED(δ) is nested, so the record
+certifies at every floor ≤ 10⁻³ and the 10⁻⁶/10⁻⁴ runs (300 seeds each) simply never found its basin; and of 1,072
+unconstrained descents **none left the strictly blocked region below side 4** — every exit (4.0027–5.4) was a blocker
+sliding away, never a slot rearrangement. Trump is K0-FREE ([1,1,2,1]) at all four floors.
 The pair census is invariant under the convention (its shallowest pair depth is 3.8·10⁻⁵), so the tree is unchanged.
 
 ![flood](residue_map/flood.svg)
