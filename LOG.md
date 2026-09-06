@@ -3132,3 +3132,39 @@ with a sha256 manifest into `attempts/A106-shadow-diameter/results/snapshot/`; n
 started, stopped or re-niced; frozen verifiers untouched. Engine `code/shadow11.py` validated
 against Trump (ŝ recovered to 3.4e-9 from a perturbed start under trump5's own pins).
 Detail: `attempts/A106-shadow-diameter/notes/measurements.md`, `results/t3_switch.json`.
+- A96 FERTILITY PROBE (level 4, 30 children from the 4 ALIVE level-3 children, delta=1e-2): **0 of 4 parents fertile, 0 alive of
+  30 children, f4 = 0.000.** Fertility is NOT heritable -- three of the four parents were siblings under the one fertile level-3
+  node Y0036_D07, exactly the case where heritability would have shown, and all three died. Outcomes KILL-BY-LOGIC 18 / PASS 6 /
+  FAIL 6: the logic-kill share rises from 32% at level 2 to 60% at level 4, which IS the termination mechanism -- deeper boxes are
+  smaller and clash with the pins. Per-child 292.6 s, flat with depth (level 2: 240.3, level 3: 291.8).
+- FACTOR SEQUENCE 1.439 -> 0.906 -> 0.762 -> 0.000. With 0 events in n=30 the rule of three puts the 95% upper bound on the
+  level-4 rate at 3/30, i.e. f4 <= 0.80, so the point estimate is 0 and the honest schedule is a range:
+      f4 = 0.00 (measured)                tail 3181 children,  0 extra levels, 22.82 d => 97.92 d 1-proc -> 19.58 wall-days @5w
+      f4 = 0.30                           tail 4385 children,  4 extra levels, 31.45 d => 106.55 d      -> 21.31 wall-days @5w
+      f4 = 0.80 (95% upper bound)         tail 8139 children,  7 extra levels, 58.39 d => 133.49 d      -> 26.70 wall-days @5w
+  So the campaign is ~20 wall-days at 5 workers, 27 in the pessimistic tail case -- and the tree TERMINATES; the divergence
+  scenario (factor stalling near 1) is now excluded by measurement, not assumption.
+- A106 pin-clash test EVALUATED (not deployed). NOT SOUND as a certificate as written: code/t2b_pinclash.py takes the MINIMUM of
+  `overlap` over a 5x5x5 pose grid x 3x3 pin offsets and then a Powell local descent, and reports "empty" when that minimum stays
+  positive. Both steps are float finders. A sampled minimum is an UPPER bound on the true minimum over the continuum, so a
+  positive sample minimum does not prove the true minimum is positive -- the error direction is precisely the dangerous one
+  (claiming emptiness because a search failed to find a separating pose). The docstring's "a grid can only UNDER-estimate the
+  clash" is backwards. The 122/516 is therefore an UPPER BOUND on the yield of any sound version, not a yield.
+- It CAN be made sound, two ways, and the cheap one needs no new leaf at all:
+    (B) SAME leaf, bigger core [preferred first step]: A57's existing KILL-BY-LOGIC proves K_B subset every square with params in
+        B, K_P subset the pinned square, K_B meets K_P => overlap. The core formula a = (1/2 - hd)/(1 + (t1-t0)) is conservative;
+        a tightly computed common-inscribed-square over the pose range gives a larger a and strictly more kills with ZERO new Lean
+        (T5 core_meet_same_square unchanged), ZERO new leaf kind, and nothing in the frozen verifier chain touched. Pure geometry
+        function, hours not days.
+    (A) NEW leaf, interval SAT [strictly stronger]: by the separating-axis theorem two squares are disjoint iff one of the 4
+        edge-normal axes separates them, so it suffices to bound, over the WHOLE box and the WHOLE pin slack core, the separation
+        gap ABOVE on each of the 4 axis families and require all four < 0. That is exactly the shape of A53 verify_case's
+        core_exempt_frac (rational cos/sin via cos_sin_t, outward intervals, float pre-filter as shortlist only), so the primitives
+        exist. Needs a new leaf kind + a new Lean theorem structurally parallel to T5; the frozen verifier chain is untouched
+        because this is a tree-level logic kill, not a measure certificate.
+- YIELD, honestly bounded: the margin data says the sound version will NOT recover all 122 cheaply. clash/dmax (margin relative to
+  box diameter, which is what an interval bound over a whole box loses) has median 0.199 and only 4 of 122 exceed 0.5; NONE exceed
+  1. So most flagged boxes need subdivision before an interval bound can decide them, and the 0.6 s/box figure will not survive.
+  The 122 also split 58 at L1 / 54 at L2 / 6 at L3 / 4 at L4 and 64 alive_lp / 58 cert_fail. No positive control is available in
+  the sweep: it covers only open boxes, so it contains ZERO known logic-kills to check recall against -- adding the 601 known
+  logic-kill boxes as a control is the first thing any sound implementation should do.
