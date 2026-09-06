@@ -76,7 +76,7 @@ sitting on a live class's box; the basin/grain lemma is the transfer.*
 S03: f0/f1/f2 essentially simple (SNAP → higher k). S04: f0 teleports to BR(0,1). S05: the S07 pinwheel inverted. S06:
 the optimal five-square packing (2 + 1/√2) with a unit band = the s(10) optimum 3 + 1/√2, a ten-square shadow (the LP
 found room for ten and only fractional room for the eleventh). S08–S53: 1–17 nodes each, mostly level 1, the gallery
-has each drawn. All die by the S01 mechanism (crowd rows) where a slot is singly met, or by splitting.
+has each drawn. With crowd rows out (1a), all of these die by splitting; the measured tail says that terminates.
 
 ### 1d. The fractional tail (k5_11 151, k5_16 113)
 No integral component in the dual support; 303 of 306 top out at four disjoint placements of the five needed. Nothing
