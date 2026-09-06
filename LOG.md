@@ -3021,3 +3021,45 @@ affordable cost estimate for closing 3.84.
 - The dominant uncertainty has moved AGAIN: it is no longer per-child cost (settled: level-2 LP 1.11x, level-3 291.8 s) nor the
   level-3 rate itself, but the CLUSTERING -- whether the fertile-parent fraction stays near 1-in-6 or itself decays. That is
   measurable by deepening the four ALIVE level-3 children and seeing how many are fertile.
+
+## 2026-09-06 — A105-lockfree (Fable, theory lead) — done-mixed: the wall lemma is exact and FALSE on one wall; no theorem range; hooks classified
+- Deliverable `docs/proofs/lockfree.md`. Target: Conjecture LOCK-FREE(< 4) via the brief's wall lemma. Result: NO m
+  range proved. The one-wall statement (both corners of a wall of length < 4 blocked => an intruder of those two
+  corners is unheld) is refuted by two exact packings on disk: record_s0115's bottom wall (3.98548, all four intruders
+  HELD at the 1e-7 bar; sq1 a wedge with strict LP value 1.3e-8) and the floor-1e-3 record's left wall (3.99075, all
+  four LOCKED with explicit cone certificates). Two ADJACENT locked walls sharing a blocked corner exist at 4.08-4.11
+  (anchored0: right+top; anchored1/2: bottom+right), so route 3 (two walls) is not a side-free statement either.
+- Proved [T]: Lemma ROT-W -- at the Psi^(w)-minimiser no single-square TRANSLATION with weak active rows (exact for
+  translations, Fact A) decreases a depth; Farkas: -e in cone{n_k} over the contact force directions (walls never
+  help). Independent of Lemma ROT in vivo (record sq1: ROT-held wedge, ROT-W-unheld; floor-1e-3 sq3: ROT-W-held,
+  ROT-unheld by rotation). LOCKED := held and W-held; Conjecture LOCK-FREE+(< 4) (some intruder not LOCKED) is the
+  exact consumer statement (RES-LOCK contains both locks) and is weaker than A103's. Lemma LINE: held and pushed iff
+  the contact forces' resultant is the corner-ward force along a LINE through the argmin set (wedged otherwise);
+  PUSH-LINE: for a wall-hugging Y-type nick the SQUARE contacts' resultant passes through (v_x, y_w), v_x < 1 - d --
+  the brief's "far-side contact on the wall side of the argmin point", exact; it is what the 3.9907 record's BR sq3 /
+  TR sq6 violate (the PI's one-signed-torque drain).
+- The HOOK family [T]: wall-hugging axis-aligned nick N = [0,1]x[1-eps,2-eps] + tilted floor carrier T through N's
+  inner corner; kind alpha (corner on T's shallow edge, v_x = 1 + tan(t/2) + (c/s) eps) and kind beta (steep edge,
+  v_x = 1 + (1-s)/c + (s/c) eps, depth (s/c)(1-s-eps)). Trump's TL crowd IS a beta-hook (sq6 depth 0.168321 and
+  top-wall vertex 1.595678 reproduced to six digits); record_s0115's BL is beta, BR is alpha. Theorem HOOK-alpha
+  (m >= 2 + Phi + eps1 + eps2, Phi >= 2: [T] equal tilts, [M] 91x91 grid, [S] general) and HOOK-beta (m >= 4 +
+  tan t (eps1+eps2), the identity (1-s)/c + s >= 1): two SAME-kind hooks on one wall need m > 4; the four-alpha-hook
+  shell (tilted grid) has side exactly 2(1+s)(1+c)/(s+c) >= 4, equality = the grid (never K0-BLOCKED). Proposition
+  HOOK-beta-alpha: the MIXED flush pair (steep edge against shallow edge, same tilt) has m = 2 + f(t) + (s/c)eps1 +
+  (c/s)eps2, f = (2-s)/c + tan(t/2) < 2 exactly on (0, 30 deg) (min 1.9342 at 15.25 deg; f(30) = 2): the record's
+  bottom wall reproduced to six decimals (3.985484). Lemma HOOK-W: the beta carrier of a flush pair has contact
+  directions +-n and the floor only, cone = a half-plane missing -e_x: never W-held without a third contact on its
+  upper-right edge -- the record has sq9 there at gap 2.1e-7 (A102's near-contact, in its exact place).
+- [M] lockw105 (3 s): 0/12 corpus packings LOCKED at all eight; ROT-W adds 9 unlocked squares (wedges) beyond ROT
+  and ROT adds the rotation drains ROT-W misses; locked both-blocked walls: floor-1e-3 left (3.9907, the only
+  sub-4 one), polish12 bottom, anchored0 right+top, anchored1/2 bottom+right; Trump 5/5 LOCKED, all PUSHED.
+  hook105 (2 s): D formula vs SAT to 7e-10, min Phi = 2 at the origin, shells built and geometry-checked, drawing
+  results/hookwall105.svg (record bottom wall, floor-1e-3 left wall, the alpha-shell at 18.93 deg / 4.0575).
+- Canaries PASS: Trump (one hook; two-hook statements silent; LOCKED 5/5); grid at 4+eps (the shell's equality
+  case; the blocked grids are JAM-0 dips, outside the hook family; polish12's bottom wall LOCKED 4/4); records
+  (unlocked = lockmap103's squares plus the ROT-W wedges, all on the non-hook walls). Residue named [C]: the
+  four-corner PUSH-LINE count -- a locked hook wall is paid for on the opposite wall. Routes: FLOAT/CLUSTER silent
+  (no floating pusher in either instance); two-wall route open below 4.
+- Discipline: two chores, one process each, BLAS pinned, seconds; A103's loader copied, not imported; nothing
+  under A57/A60/A61/A96/A104 touched; frozen verifiers untouched; A104 has no report on disk (BRIEF only). Chip on
+  K0.RESN (owner A105, released at close); depgraph re-rendered; registry row.
