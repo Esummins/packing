@@ -95,16 +95,16 @@ For every cell whose CORNER-ROW certificate passed: does the same cell certify W
 
 | tag | result | rounds | run A | run B | wall s |
 |---|---|---|---|---|---|
-| `l2_p210_000__d0.05__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 330 |
-| `l2_p210_000__d0.1__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 641 |
-| `l2_p210_010__d0.05__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 415 |
-| `l2_p215_000__d0.1__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 796 |
+| `l2_p210_000__d0.05__e1o7` | FAIL | 2 | FAIL(3) | FAIL(10) | 330 |
+| `l2_p210_000__d0.1__e1o7` | FAIL | 2 | FAIL(5) | FAIL(16) | 641 |
+| `l2_p210_010__d0.05__e1o7` | FAIL | 2 | FAIL(2) | FAIL(13) | 415 |
+| `l2_p215_000__d0.1__e1o7` | FAIL | 2 | FAIL(5) | FAIL(3) | 796 |
 | `l2_p95_001__d0.1__e1o8` | PASS | 1 | PASS | PASS | 44 |
-| `l3_pp215_000_000__d0.1__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 499 |
+| `l3_pp215_000_000__d0.1__e1o7` | FAIL | 2 | FAIL(7) | FAIL(11) | 499 |
 | `l3_pp215_000_000__d0__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 397 |
-| `l3_pp215_000_001__d0.05__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 370 |
-| `l3_pp215_000_001__d0__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 329 |
-| `l3_pp215_000_011__d0__e1o7` | FAIL | 2 | FAIL(?) | FAIL(?) | 455 |
+| `l3_pp215_000_001__d0.05__e1o7` | FAIL | 2 | FAIL(4) | FAIL(13) | 370 |
+| `l3_pp215_000_001__d0__e1o7` | FAIL | 2 | FAIL(4) | FAIL(6) | 329 |
+| `l3_pp215_000_011__d0__e1o7` | FAIL | 2 | FAIL(2) | FAIL(8) | 455 |
 | `l3_pp65_111_000__d0__e1o8` | PASS | 1 | PASS | PASS | 229 |
 
 ### Trump canary
