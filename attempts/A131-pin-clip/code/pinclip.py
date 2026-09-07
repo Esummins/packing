@@ -264,10 +264,17 @@ def _bisect_boundary(dead_lo, lo, hi, pred_f, pred_q, stats):
     return lo
 
 
-def _clip_one_pin(rect, slot, o, stats):
-    """clip `rect` against ONE pin's dead set D_i.  -> rect or None (EMPTY)."""
+def _clip_one_pin(rect, slot, o, stats, pin=None, trace=None):
+    """clip `rect` against ONE pin's dead set D_i.  -> rect or None (EMPTY).
+
+    With `trace` a list, every removal is recorded as a replayable step:
+      {"op": "slab",  "pin": i, "side": "x0"|"x1"|"y0"|"y1", "from": q, "to": q, "rect": [...]}
+      {"op": "empty", "pin": i, "rect": [...]}
+    A checker replays a slab step by verifying the FOUR corner points (from/to) x (y0/y1) are all
+    dead against pin i over the sub-bin; D_i is convex, so that proves the whole slab dead."""
     sx, sy = slot
     x0, x1, y0, y1 = rect
+    rect_in = rect
 
     def dq(px, py):
         return dead_q(px - sx, py - sy, o)
@@ -275,52 +282,73 @@ def _clip_one_pin(rect, slot, o, stats):
     def df(px, py):
         return dead_f(px - float(sx), py - float(sy), o)
 
+    def rec(side, frm, to):
+        if trace is not None and to != frm:
+            trace.append(dict(op="slab", pin=pin, side=side, **{"from": str(frm)}, to=str(to)))
+
     stats["exact_calls"] += 4
     if dq(x0, y0) and dq(x1, y0) and dq(x0, y1) and dq(x1, y1):
+        if trace is not None:
+            trace.append(dict(op="empty", pin=pin,
+                              rect=[str(v) for v in rect_in]))
         return None                                             # whole rect dead: T5''-style kill
 
     # left / right: a vertical segment {x} x [y0,y1] is in D_i iff both endpoints are (convexity)
     if dq(x0, y0) and dq(x0, y1):
-        x0 = _bisect_boundary(True, x0, x1,
+        nx = _bisect_boundary(True, x0, x1,
                               lambda v: df(v, float(y0)) and df(v, float(y1)),
                               lambda v: dq(v, y0) and dq(v, y1), stats)
+        rec("x0", x0, nx)
+        x0 = nx
     if dq(x1, y0) and dq(x1, y1):
         neg = _bisect_boundary(True, -x1, -x0,
                                lambda v: df(-v, float(y0)) and df(-v, float(y1)),
                                lambda v: dq(-v, y0) and dq(-v, y1), stats)
+        rec("x1", x1, -neg)
         x1 = -neg
     if x1 <= x0:
+        if trace is not None:
+            trace.append(dict(op="collapse", pin=pin, axis="x"))
         return None
     # bottom / top on the (possibly narrowed) rect
     if dq(x0, y0) and dq(x1, y0):
-        y0 = _bisect_boundary(True, y0, y1,
+        ny = _bisect_boundary(True, y0, y1,
                               lambda v: df(float(x0), v) and df(float(x1), v),
                               lambda v: dq(x0, v) and dq(x1, v), stats)
+        rec("y0", y0, ny)
+        y0 = ny
     if dq(x0, y1) and dq(x1, y1):
         neg = _bisect_boundary(True, -y1, -y0,
                                lambda v: df(float(x0), -v) and df(float(x1), -v),
                                lambda v: dq(x0, -v) and dq(x1, -v), stats)
+        rec("y1", y1, -neg)
         y1 = -neg
     if x1 <= x0 or y1 <= y0:
+        if trace is not None:
+            trace.append(dict(op="collapse", pin=pin, axis="y"))
         return None
     return (x0, x1, y0, y1)
 
 
-def clip_rect(rect, slots, o, s_rat=S_RAT, passes=3, stats=None):
+def clip_rect(rect, slots, o, s_rat=S_RAT, passes=3, stats=None, trace=None):
     """clip a rational rect against every pin and the container, for one tilt sub-bin."""
     if stats is None:
         stats = {"exact_calls": 0, "backoffs": 0}
     half = o.wmin / 2
     x0, x1, y0, y1 = rect
-    x0, y0 = max(x0, half), max(y0, half)
-    x1, y1 = min(x1, s_rat - half), min(y1, s_rat - half)
+    nx0, ny0 = max(x0, half), max(y0, half)
+    nx1, ny1 = min(x1, s_rat - half), min(y1, s_rat - half)
+    if trace is not None and (nx0, nx1, ny0, ny1) != (x0, x1, y0, y1):
+        trace.append(dict(op="container", w_min=str(o.wmin), s=str(s_rat),
+                          rect=[str(v) for v in (nx0, nx1, ny0, ny1)]))
+    x0, x1, y0, y1 = nx0, nx1, ny0, ny1
     if x1 <= x0 or y1 <= y0:
         return None, stats
     rect = (x0, x1, y0, y1)
     for _ in range(passes):
         before = rect
-        for sl in slots:
-            rect = _clip_one_pin(rect, sl, o, stats)
+        for i, sl in enumerate(slots):
+            rect = _clip_one_pin(rect, sl, o, stats, pin=i, trace=trace)
             if rect is None:
                 return None, stats
         if rect == before:
@@ -339,11 +367,13 @@ def realizes_pin(box, slots, tol=1e-9):
     return None
 
 
-def clip_node(box, slots, nsub=1, s_rat=S_RAT, a_pin=A_PIN):
+def clip_node(box, slots, nsub=1, s_rat=S_RAT, a_pin=A_PIN, traces=None):
     """PIN-CLIP one node at one sub-bin resolution.
 
     -> dict(refused, reason, bins=[(t0,t1,rect|None)], kept_vol, kept_union, union_rect, empty,
             n_empty, stats)
+
+    `traces`, if a list, receives one replayable step list per sub-bin (see _clip_one_pin).
 
     kept_vol   : fraction of the (centre x tilt) volume kept, summed over sub-bins
     kept_union : area(bounding box of the union of the clipped rects) / area(original), i.e. what
@@ -363,7 +393,10 @@ def clip_node(box, slots, nsub=1, s_rat=S_RAT, a_pin=A_PIN):
     ux0 = ux1 = uy0 = uy1 = None
     for (t0, t1) in bins:
         o = Oct(t0, t1, a_pin)
-        r, _ = clip_rect(rect0, slots_q, o, s_rat, stats=stats)
+        tr = [] if traces is not None else None
+        r, _ = clip_rect(rect0, slots_q, o, s_rat, stats=stats, trace=tr)
+        if traces is not None:
+            traces.append(tr)
         out.append((t0, t1, r))
         wgt = (t1 - t0) / Ttot if Ttot > 0 else Fr(1, len(bins))
         if r is None:

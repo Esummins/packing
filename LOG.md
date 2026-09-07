@@ -5321,3 +5321,135 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   printed (red dashed, because Y0036's box centre is itself infeasible — it overlaps the pin bl10
   by 0.0097), the clipped rectangle drawn inside the original box, plus a ×6 inset because the clip
   is a few 10⁻² and invisible at container scale.
+
+## 2026-09-07 — A133-tan-half-emission (Opus, Lean + generator) — done-mixed
+- **The idea, and it worked.** A126 left `LocalDead` for a concrete `N` with ONE named hypothesis,
+  `LocalCert.CertCover`, whose entire residue was "a certified rational-interval kernel for `cos`,
+  `sin` and `π` — A119's `exactiv.py`, in Lean" — and recommended removing the need for it instead
+  of formalising it, by re-emitting the certificate in Lean's own tilt parameter `t = tan(θ/2)`,
+  where `cos θ = (1−t²)/(1+t²)` and `sin θ = 2t/(1+t²)` are RATIONAL. That is what this attempt
+  did. Every enclosure a local certificate needs is now the exact range of a rational function
+  over a rational cell: no `π`, no Taylor series, no dyadic interval kernel, nowhere in the
+  pipeline. The step that had made a rigorous `π` unavoidable — `exactiv.kink_in`, locating the
+  `π/2` kink of `w = |cos Δ| + |sin Δ|` before taking its affine lower bound — is **retired**:
+  in `t`, `w ≥ cos Δ + sin Δ` and `w ≥ cos Δ − sin Δ` hold on the WHOLE cell, both are rational
+  functions of the two tilt parameters, and their maximum IS `w`, so the generator emits both and
+  the kink is never located. `h(t) = (1+2t−t²)/(2(1+t²))` is concave on `[0,1]`, so its affine
+  lower bound is the exact chord through two exact endpoint values, with no rounding at all.
+- **T1, measured — and the relaxation in `t` is not weaker, it is SHARPER.** That was the risk
+  A126 flagged ("measure it on one cell before anything is rebuilt"). All SEVEN of A119's
+  neighbourhoods and THREE of A125's S33 re-emit **DEAD** and re-check **VALID**:
+  S07 (0.1, 40°) **2 140 leaves against A119's 2 302** with the certified minimum RISING
+  3.877092331 → 3.877108392 (margin over `s0` ×3), S07 (0.2, 10°) 2 920 vs 3 168,
+  S02 (0.2, 10°) **16 406 vs 32 570**, S02 (0.1, 10°) 3 808 vs 6 878. Ten certificates, 36 986
+  leaves, 569 449 rows, **24.5 MB**, **8.5 min** of generation and **3.1 min** of independent
+  checking, zero unresolved nodes. Envelope tightness measured second order: the
+  `sin(θ(t) − θ(t*))` enclosure is `≤ 0.23 h²` wide and the better of the two `w` branches within
+  `2.3 h²` of `w`. Where a cell straddles `θ = 0` (S02's `BR(0,1)`, S33's `f0`) part of the leaf
+  reduction is the clip to the fundamental domain — which makes `N` smaller, the sound direction,
+  and is the same clip A126's Lean boxes already carried; A126's finding E3 therefore never arises
+  downstream, because the clip happens at the DEFINITION of `N`.
+- **The checker is independent and has no early return.** `check_local_t.py` imports nothing of the
+  generator's. It does not re-derive the affine envelopes (a re-derivation is only as sharp as its
+  own method, and mine came out `4·10⁻⁷` looser than the generator's, which would have rejected
+  valid rows); it **verifies** the ones the certificate records — the two univariate families
+  EXACTLY by Sturm's theorem on the square-free part, the bivariate one by its own subdivided
+  Bernstein test — and then requires every emitted row to be IMPLIED by a row it built itself out
+  of those verified envelopes (`min over the leaf's box of (own − emitted) ≥ 0`). All 569 449 rows
+  pass. A126's finding E2 cannot recur: ONE code path records a leaf whether its Farkas vector is
+  a side bound or an infeasibility ray, the emitted count is asserted against the tree's own
+  counter before the file is written, and the checker independently requires every emitted leaf to
+  be referenced by the tree exactly once.
+- **T2 is PARTIAL, and is reported as partial.** `localDead_s07_t` / `localDead_s02_t` with no
+  hypothesis beyond the certificate data are **NOT** obtained. What `LocalCertT.lean` does deliver
+  (12 theorems, `lake build` 18.5 s, axiom roster `[propext, Classical.choice, Quot.sound]` on
+  every one — no `native_decide`, no project axiom, no `sorry`; audit
+  `lean/PackingCertMathlib/scratch/A133Axioms.lean`) is the whole arithmetic base the obligation
+  was waiting on: the exact `cosT`/`sinT` cell enclosures (`cosT_anti`, `sinT_mono`, `cosT_mem`,
+  `sinT_mem`), the kink-free `w` branches (`wrel_ge_add`, `wrel_ge_sub`,
+  `wrel_eq_max_of_cos_nonneg`), a decidable **positivity certificate**
+  (`p = Σ c_k (X−a)^k (b−X)^{n−k}` with `c_k ≥ 0`, `posCheck` / `posCheck_sound`) that replaces the
+  trigonometric kernel outright, and **(C1) of `CertCover` — the tilt cover — DISCHARGED**
+  (`splitOk_sound`, `coverOk_sound`: every point of the root cell lies in the recorded cell of some
+  leaf, decided on the certificate's own bisection tree). (C2) the selection cover, (C3) Lemma
+  RELAX and (C4) the variable map remain; they are now pure reflection over rational data with no
+  transcendental content, and `attempts/A133-tan-half-emission/notes/lean.md` prices them at
+  ≈ 250 + 600 + 120 + 80 lines and names the one extra thing the generator must emit (the
+  positivity certificates themselves; the envelope TABLE is already emitted and is small — 378
+  entries for S07 (0.1, 40°)'s 2 140 leaves, 1 044 for S02 (0.2, 10°)'s 16 406, because envelopes
+  are shared across leaves by cell).
+- **The effect that is easy to miss.** A119's LP tilt variable is the ANGLE; `Local.Box`'s is
+  `t`. Relating them needs `arctan`. So even a perfect Lean `exactiv.py` would have left a
+  transcendental step between `LocalHyp` and a θ-certificate. In `t` that step is the identity —
+  which is the real reason A126's Route A could not have finished the job on its own.
+- **T3 (write only).** `notes/fcover.md`: the outward rounding is in
+  `attempts/A112-dual-branching/code/caselp.py`, `make_certificate`, the `nofams=` clause —
+  `t_lo`/`t_hi` at `TDEN = 2²⁴` with floor/ceil ± one extra unit (hence the `9.0·10⁻⁸…1.10·10⁻⁷`
+  A126 measured) and `q` at `XDEN = 10⁹` NEAREST (hence the `≤ 4.71·10⁻¹⁰`), reached from
+  `a120lib.certify_leaf_capped` → A112's `certify.py`. The fix is one clause: round the NO zone
+  INWARD on every bound (lower up, upper down, tilt narrowed) so `ZONE ⊆ BOX` holds by
+  construction, keeping the YES box's outward rounding. Priced: the narrowest `t_interval` in all
+  22 of A120's PASSing NO certificates is `8.75·10⁻²` against a `1.19·10⁻⁷` change, so no interval
+  can collapse and the re-certification should be a formality. The Lean check that catches it is
+  `LocalCompose.yes_or_no`'s NO side, whose bridge hypothesis is the decidable rational test
+  `ZONE ⊆ BOX` — and it must be run **at emission, on the WRITTEN rationals**, which is precisely
+  why A120's own `A6_nofam_is_the_same_box` guard passed while none of the 22 emitted certificates
+  satisfied the containment.
+- **Discipline.** READ-ONLY on every campaign and on A116/A119/A120/A126: A119's and A125's
+  certificate files are read, A119's `fastlp.py` is imported, nothing of theirs is edited, and
+  `Local.lean` / `LocalCert.lean` / A126's `LocalCertS07`/`S02` are untouched. Frozen verifiers
+  never invoked. New files only: `attempts/A133-tan-half-emission/{code,notes,results,certs,logs}`,
+  `lean/…/LocalCertT.lean`, `lean/PackingCertMathlib/scratch/A133Axioms.lean`. One `lake build` at
+  a time through `lakeb.py` (repo lock, BelowNormal); at most two Python processes;
+  `PYTHONDONTWRITEBYTECODE=1`; no recursive deletes; git fetch + plain merge + push of own paths.
+  Writes outside the attempt: `docs/known_results.md` 16b′, `lean/depgraph.json` GRAIN, the
+  registry row, this entry.
+
+## 2026-09-07 — A131 follow-up (coordinator's ranked item 1): the retrospective backlog sweep landed as 132 verified certificates, and eps_geo after a pin-clip is a dead end
+
+- **132 recorded-open A57 nodes killed by T5‴ geometry alone, in 4.1 s of CPU.** One
+  `pin-clip-kill-certificate-v1` per node under `attempts/A131-pin-clip/certs/backlog/`, carrying
+  the class pins, the recorded box, the rational outer box, the 8 tilt sub-bins as exact
+  `t = tan(θ/2)` endpoints, the **replayable clip trace** (each slab removal with its pin, side and
+  exact rational from/to), the witness pins, the prior verdict/τ/η and the sample confirmation;
+  ledger in `results/backlog_kills.jsonl`. 63/57/6/6 by level, 93 k5_11 / 39 k5_16, prior verdict
+  74 ALIVE / 58 FAIL. Sampling **1,584,000 drawn → 1,584,000 tested → 0 hits**, ≥ 12,000 tested per
+  node (the whole box × bin is discarded, so drawn = tested).
+- **A57/A96 state untouched.** Their jsonl, progress and cert trees were not written to. The only
+  A57 file appended to is `PAUSED.md` — one line in the §8 resume block saying the campaign's owner
+  folds these rows in, keeping the prior verdict as `superseded_by_tight_core.jsonl` does.
+- **112 of the 132 need only the already-deployed T5″; 20 need the clip** (`results/backlog_clip_only.jsonl`):
+  17 L1 + 3 L2, 14 k5_11 / 6 k5_16, 17 prior ALIVE / 3 prior FAIL. **21 nodes need two pins
+  jointly**, and every clip-only node is one of them — T5″ only ever asks whether ONE pin dominates
+  the whole box, so a box carved by two pins from opposite sides is invisible to it. The 21st
+  (`k5_11_interior_Y0360_D06`) goes the other way: two pins for the whole-bin clip, but T5″ empties
+  it by using *different* single pins on different tilt sub-intervals. **Neither rule contains the
+  other in general** — the clip contains T5″ *on this corpus* (159/159 plus 21), which is a
+  measurement, not a theorem. `k5_11_interior_Y0546` is in the clip-only list and is the 900 s
+  re-check's most expensive kill (2,179 s).
+- **The independent checker earned its keep.** `checkclip131.py` re-derives the dead test in the
+  `t` parametrisation (`f(t) = (P(1−t²)+2Qt)/(1+t²)`, `f' = −2g/(1+t²)²`, `g = Qt² + 2Pt − Q`)
+  rather than the θ-sinusoid one, and shares no decision code with `pinclip.py`. Its first version
+  treated every interior extremum as a maximum and **rejected 23 of 132 sound certificates**; a
+  40,001-point brute-force SAT grid on one of them found 0 separating tilts, so the clipper was
+  right and the checker was over-strict. The fix falls straight out of `f' = −2g/(1+t²)²`: an
+  interior maximum is `g` going − → +, while `g` going + → − is a minimum and the max stays at an
+  endpoint. Re-validated: 30,000 random (offset, sub-bin) pairs against both `dead_q` and a
+  1,201-point grid — **0 disagreements, 0 unsound, 0 missed** either way. All 132 then PASS.
+- **eps_geo after a pin-clip is a dead end, and the mechanism is clean.** 0.56 CPU-h of the 1
+  allowed, 2 BelowNormal BLAS-pinned processes, on the three T3 nodes that reached η ≤ −0.5 with a
+  failing certificate. Ladder used: the row-shrink `certify.py --eps_geo`, a plain CLI with
+  `--out` — exactly what `tree57.run_eps_geo` shells out to — at `tree57.eps_geo_margins`' own
+  (0.002, 0.004), all three having scale ceiling ≥ 1.05. **`epsladder.py` (the EPS_CORE ladder) was
+  SKIPPED**: it hardcodes its certificate directory to A57's `certs/epsladder` and writes
+  `results/epsladder_<id>.json` into A57's tree with no flag to redirect, so it is a driver by the
+  test that matters. Result: **all three fail, all three the same way — the row-shrink re-solve
+  pushes τ from 4.0 / 4.5 straight back to exactly 5.0 = budget at both margins**, so there is
+  nothing to certify. On a clipped box the LP's entire slack IS the 2·10⁻³ shell around the pinned
+  squares that eps_geo re-imposes: the clip and the row-shrink are antagonistic and the clip's gain
+  is exactly the size of the shell. **Deployment consequence: never chain eps_geo after a
+  pin-clip** — send a clipped node with a holed certificate to the resolver or to depth instead.
+- Notes: `attempts/A131-pin-clip/notes/backlog_sweep.md`. New code: `backlog_certs131.py`,
+  `checkclip131.py`, `epsgeo131.py`; `pinclip.clip_node` gained an optional `traces=` argument
+  (certificate emission only — the clip decision is unchanged, and the 674/674 and corpus numbers
+  were re-run identical).

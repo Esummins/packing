@@ -138,6 +138,34 @@ Free physical never dropped below **10.4 GB** (gate is 3 GB); the box ran 14–2
 recorded their in-flight node and exited cleanly. The only unrecorded work is `Y0381`'s
 (never completable) and whatever node `recheck96` was on at 08:00.
 
+**(e) `Y0381` DIAGNOSED (A124, 2026-09-07) — it is inside HiGHS, and it is not a T5″ artefact.**
+Reproduced exactly on a copy (`attempts/A124-recheck-day/code/repro_y0381.py`; same 3,827-atom
+folded pool, same `init orbits=3827 rows=16602` line, same iteration trace; nothing written into
+A57). All 11 `faulthandler` dumps, including the one at the 600 s wall, give one stack:
+`lpbox.py:417 self.h.run()` ← `lpbox.py:846 M.solve()` ← `caselp.py:337 solve_node`. A single
+`h.run()` ran 380 s and never returned, and never printed the non-optimal-status diagnostic — so
+it is not column generation, not the certifier, not `pinguard`. **Cause:** `LPModel.__init__`
+sets `output_flag=False` and `threads=1` and **never sets `time_limit`** (`grep setOptionValue
+lpbox.py` returns only those two plus `simplex_strategy`), while `solve_node`'s `time_limit` is
+checked only *between* iterations at `:906` — hence one thread at 100 %, zero output, no bound.
+The 00:48 run died in the final unconditioned solve at `:908`, the 03:02 run in the in-loop solve
+at `:846`; same call, so the post-time-limit path is not special. **Not T5″-introduced:** the bin
+width 10.880664 is a canonical cover width and `pin="ok"`, so trimming examined this bin and
+removed nothing — the hang is pre-existing. Full diagnosis, the one-line guard and its soundness
+caveat, and the recommended per-node process wall:
+`attempts/A124-recheck-day/notes/y0381_hang.md`.
+
+**(f) The re-check's "kills" are LP verdicts, not certificates (A131 + A124, 2026-09-07).**
+`recheck96.py:116` sets `kills = (tau < budget)` and never calls `certify.py`, and it runs
+`solve_node(out=None)` so the node json a certificate would need is not even written. Worse,
+graded by the campaign's own strict rule (`eta < −0.005·tau`, PAUSED.md §5b), **§9's "11
+certified kills from 23 nodes" is 1 strict kill, 2 weak and 8 knife edges** at |eta| ≤ 1e-9.
+A124's own day of re-checking produced 2 strict kills from 43 nodes and ~15 CPU-h, and both
+(`Y1002`, `Y1099`) were already in arm C's strict-kill set in §5b. **Read §9 accordingly**, and
+see `attempts/A124-recheck-day/notes/recheck_kills.md`. The day's real yield was geometric: 54
+zero-cost T5″ full kills banked out of the ALIVE queue, and a scan showing **55 of the 193 FAIL
+rows (28.5 %) are dead by the deployed trim** — see `notes/trim_empty_alive.md`.
+
 ## 6. MUST-FIX before the next resume — T5″ exclusions are not persisted
 
 `trim_excluded` and `trim_from` are constructed in `tree57.build_children` (lines 177, 184–185)
@@ -276,6 +304,8 @@ python code\shadow_sched.py
 # the longer cap with the T5'' trimmed bin)
 python -u code\recheck96.py --cap 900
 ```
+
+**T5‴ pin-clip backlog, waiting to be folded in at resume (A131, 2026-09-07):** 132 recorded-open nodes (74 ALIVE + 58 FAIL; 63/57/6/6 by level; 93 k5_11 / 39 k5_16) are dead by pin-clip geometry alone — 112 by the already-deployed T5″ and 20 that need the two-pin joint clip — with one `pin-clip-kill-certificate-v1` each under `attempts/A131-pin-clip/certs/backlog/`, all 132 re-verified by an independent checker and sample-confirmed (1 584 000 drawn → tested → 0 hits, ≥ 12 000 per node); A131 wrote NOTHING into A57/A96 state, so the ledger rows in `attempts/A131-pin-clip/results/backlog_kills.jsonl` (clip-only subset: `backlog_clip_only.jsonl`) must be folded in by this campaign's owner, keeping the prior verdict as `superseded_by_tight_core.jsonl` does.
 
 Sides G4/G3/G2 stay frozen (`code\FREEZE_TAGS.txt`); nothing about the pause changes that.
 
