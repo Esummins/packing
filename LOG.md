@@ -4766,3 +4766,74 @@ each cell, so the final cell of each shard overruns (36,963 s = 10.27 CPU-h agai
 cap); frozen `verify_case.py` byte-identical; nothing deleted anywhere - when the queue had to be
 re-ordered for A121's cells the two running shards were stopped and relaunched, and every completed
 record was kept. Report: `attempts/A115-k0-corner-rows/notes/t5_report.md`.
+
+## 2026-09-07 — A120-no-side-runner (Opus chore, soundness-adjacent) — done-mixed: the runner is built, controlled and sound; 4 nodes closed; the bottleneck is the CERTIFIER, not the LP
+- The piece A96 left unwritten. For an A57 node whose support lies inside A116's certified neighbourhood N, the cover
+  `node = YES u NO_1 u NO_2 u NO_3 u NO_4` with `YES = node & (for every i, some square's pose in F_i)` and
+  `NO_i = node & (no square's pose in F_i)` is a TAUTOLOGY, and the YES leaf needs **no LP at all**: it is contained in
+  N's hypothesis, which Theorem LOCAL kills. `attempts/A120-no-side-runner/code/{a120lib,noside120,control120,recert120,
+  report120}.py`; notes/runner.md. A112's regiontree / caselp / octagon / pinguard / trim57 / certify / verify_case are
+  **imported, never copied**, with A112's writable dirs redirected into A120, so the two-stage protocol and the frozen
+  verifier are byte-identical by construction.
+- **THE SOUNDNESS-ADJACENT PART, and it is settled for all 35 targets** (`results/soundness_all35.json`, 1.6 s, no LP).
+  A1 the node's five pin boxes ARE N's pins carried into the node frame (centres to 1e-9, tilt 0, half-width exactly
+  A57's PIN_SLACK = 1e-2/sqrt2); A2 the four mapped boxes are pairwise POSE-DISJOINT, which is what makes "a square in
+  each" give the |L| DISTINCT squares N's hypothesis names; A3 each is pose-disjoint from every pin (pinguard's 'parent'
+  case); A4 the D4 map is exactly invertible (max round-trip error 0.0) with a dense pose sample; A5 the node's own A107
+  configuration lies in the mapped boxes -- A116's `consumer116.inside` recomputed in the NODE frame, reproducing its
+  dmax/tmax per node exactly; A6 every NO family IS the YES box, clamped only to the admissible strip [1/2, s-1/2]
+  (which discards no pose a unit square could have, so the two children still cover the parent exactly) and reduced mod
+  90; A7 tilt in [0,90] and core half-side <= 1/2 (A111 bug B5). **35/35 ok; YES and NO sides use the SAME boxes in the
+  SAME frame on every child, asserted at construction time, and 70,000 frame round-trip samples miss 0 times.** The
+  direction of the map is the thing that could have gone silently wrong: A116's consumer carries the NODE's config
+  FORWARD by struct_op into the class frame, so the boxes come back by struct_op^-1 (`e` x 15, `diag` x 20 over the 35 --
+  the stabiliser of the k5_11 pin set, which is why `N_boxes.json`'s frame_ops has only those two).
+- **T2, all green, BEFORE any run** (730 s). (i) A112's two end-to-end kills `k5_11_interior_Y0036_D07_D01` and
+  `k5_11_interior_Y0276_D05` (both T5'' root kills, TRIM-EMPTY) replayed through this runner's own `logic_kill` in all
+  four A112 orderings: **8/8 `logic` records byte-identical** (SHA-256 of canonical JSON). (ii) A112's 35 PASSing NO
+  certificates REPLAYED (never re-emitted -- `certify.py --loop_cols` re-solves before emitting, so the EMISSION is
+  wall-clock dependent while the VERIFIER is deterministic) through `certify.run_verifier` -> frozen `verify_case.py`
+  sha256 521cb01f...: **35/35 PASS, every report field identical** but the certificate path and `time_s`; 9,819,930
+  boxes in 545.2 s. (iii) Covering assertion in the NODE frame on 3 targets, A116's own sample_check procedure at 30
+  sides spanning [3.82, s0]: **2,996,097 / 3,003,131 / 2,988,914 drawn -> 100,000 tested (free-pair-disjoint survivors)
+  -> 0 hits** each; at the brief's 10^4 bar, 302,460 / 301,445 / 297,951 -> 10,000 -> 0. Best packing margin over every
+  survivor at every side -0.051 to -0.067, so nothing is near the boundary.
+- **T3, 14.4 CPU-h against the 15 CPU-h cap, 9 of 35 targets** (cone-value order: level 1 first, since a closure removes
+  ~20.8 A57 descendants at L1 against ~14.1 at L2 and 8 at L3). **4 CLOSED -- `k5_11_interior_Y0230`, `Y0637`, `Y0709`,
+  `Y0997`, all level 1**: YES leaf dead by local certificate A116 S02_k5_11_r0.20_rho10 (PENDING A119's rational/Lean
+  form, never counted with the frozen-verifier kills), all four NO children dead by the frozen verify_case.py. 5 OPEN,
+  26 not run -- **the cap, not a verdict**; every record is resumable on (cls, id). Cones removed: 4 x 20.77 = **83.1 A57
+  nodes = 5.6-6.7 CPU-h** at A96's own per-child cost (240.3 s at L2 / 291.8 s at L3), i.e. 0.046-0.056 wall-days at 5
+  workers off the 10-11 wall-day schedule. Timeout protocol saving on this workload: 10,354 s of LP against 28,401 s
+  under a flat 900 s cap, a factor **2.74**.
+- **THE FINDING: 31 of 36 NO children are clearly below budget at the LP, but only 19 certify.** Just **5** children
+  survive the node LP at all (converged, eta = 0, tau = 5 = budget) and **4 of those 5 are the single node `Y0345`**;
+  the other 12 alive children are CERTIFIER SHORTFALL, not survivors. The reason is arithmetic: `certify.py`'s auto
+  scale is max(1.005, min(1.4, (budget-0.005)/tau - 0.002)) = 1.03-1.11 here, so the emitted measure covers the LP's own
+  rows only where minmass >= 1/scale ~ 0.90-0.97, while the 240 s stage-1 minmass on these children is 0.43-1.00
+  (median ~0.70) and the certificate margin is 0.3% (total 4.9855 vs budget 5). **A112's `--rounds 1` is not enough at
+  eta ~ -0.25**: 11 first-attempt PASSes took 4-680 s, and 8 children that FAILed/CAPped at rounds 1-3 PASSed at rounds
+  6 (690, 855, 963, 1207, 1273, 1788, 1832, 2470 s). **All four closures needed the rounds-6 pass.** This bounds
+  A111/A112's datum "waiting for column generation buys nothing": it holds when eta is deeply below budget, and fails
+  where the margin is 0.3%.
+- CANARY: Trump's grain realizes **none** of the 19 hypotheses declared dead (`trump_realizes = False` on every one;
+  must be 0 and is). Every NO certificate is tagged `s0-only, pending window re-verification (v2 available)` -- A117's
+  `verify_param_v2.py` (sha 153029ba...) would discharge a NO family over the whole window but costs ~10x the four fixed
+  sides, which does not fit this cap, so no v2 run was made and no closure is claimed window-valid.
+- TWO ADDITIONS, both recorded where they can only abort. `a120lib.certify_leaf_capped` is `regiontree.certify_leaf`
+  argument-for-argument plus a HARD WALL on the certification subprocess (the witness-feedback loop has no bound of its
+  own: `--time_limit` caps each LP re-solve, not the run, and one child burned 1895 s and another 3600 s without
+  certifying); a capped run is recorded as **CAP, never a verdict**, is treated exactly like FAIL, and the whole process
+  tree is killed so no `verify_case.py` is orphaned -- A117's rule. `recert120.py` retries only children with
+  eta <= -1e-3 whose certificate FAILed, with more rounds, and promotes only on a PASS from the frozen verifier.
+- PROCESS LESSON, banked because it cost a promotion: **two processes must never write the same node record.** A
+  re-certification pass running against a node a worker was still inside had its promotion clobbered by the worker's
+  next save (`Y0637/NO0`, 00:54). Fixed: `recert120.candidates()` takes only records already at status OPEN, and the
+  pass is sharded by NODE, never by candidate.
+- Discipline: <= 2 BLAS-pinned processes throughout, PYTHONDONTWRITEBYTECODE=1, commit 6144 MB / free physical 3072 MB
+  gate before every LP and every certificate, nothing deleted, READ-ONLY on A53/A57/A96/A107/A112/A116/A119 (every
+  campaign node json COPIED into results/nodes/<nid>.src.json before it was opened, every A112 certificate copied before
+  the verifier was pointed at it). **A57/A96 stay paused and no campaign driver was launched**; `pausegate.paused()` is
+  checked between nodes. Writes: `attempts/A120-no-side-runner/**`, the NEW file
+  `attempts/A96-a57-parametric/results/a120_closures.jsonl` (35 rows, one per target), one clause on `C.A57` in
+  `lean/depgraph.json`, the registry row and this entry.
