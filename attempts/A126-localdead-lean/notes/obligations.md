@@ -50,7 +50,10 @@ recorded interior point and its two children carry `[lo, mid]`, `[mid, hi]`; the
 parent by `Local.cover_bisect` (`le_total`).  The tree's structural well-formedness (the
 recorded `lo`/`mid`/`hi` really are the parent cell and `lo ≤ mid ≤ hi`) is a decidable check on
 rational data.  S07 (0.1, 40°): 2 410 bisections, no `qsplit` node anywhere in any of A119's
-seven certificates.
+seven certificates.  Measured on the EMITTED leaves (`code/control126.py` section (c)): only the
+tilt coordinates differ between leaves (3 of 20 for S07 (0.1, 40°), 4 of 23 for S02 (0.2, 10°)),
+the root box they span is the certificate's own tilt range exactly, and 20 000 random points of
+it land in a leaf cell every time.
 
 **(C2) the selection cover — needs one enclosure.**  A `branch` node on a near pair keeps a
 sublist of the eight signed selections and asserts that every OTHER one is impossible on the
