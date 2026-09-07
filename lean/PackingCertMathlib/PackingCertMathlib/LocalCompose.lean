@@ -22,9 +22,12 @@ This file states and proves that split in Lean and composes it with `LocalDead`:
   dead is dead;
 * `classKilledAt_of_yes_no` — the same in the `ClassKilledAt` shape `Composition.lean` consumes;
 * `centre_in_slab` — a packed square's centre is at least `1/2` from every wall.  This is the
-  fact behind A120's clamp of a NO zone to `[1/2, s − 1/2]`: `boxZone_of_clamped` turns
-  "no square in the CLAMPED zone" into `NoneIn` for the unclamped box, so the YES and NO sides
-  really do use the same boxes.
+  fact behind A120's clamp of a NO zone to `[1/2, s − 1/2]`: `noneIn_of_clamped` turns
+  "no square in the CLAMPED zone" into `NoneIn` for the unclamped box, so the CLAMP costs
+  nothing.  What is NOT free is the ROUNDING with which the zone reaches the certificate file:
+  measured on all four of A120's closed nodes it goes OUTWARD by up to `1.1·10⁻⁷` in tilt,
+  which is the direction that breaks the tautology — finding F-COVER,
+  `attempts/A126-localdead-lean/notes/obligations.md` §4.
 
 The A120 instantiation (`k5_11_interior_Y0230`, its four NO children) is `y0230_dead`, whose
 hypotheses are exactly the obligations that remain — see
@@ -133,8 +136,11 @@ theorem centre_in_slab {s : ℝ} {z : Cfg} (hz : CfgPacking s z) (i : Fin 11) :
 
 /-- **The clamp is free.**  If the clamped box `B'` is `B` intersected with the wall slab, then
 `NoneIn B' z` implies `NoneIn B z` for every packing `z` — so a NO child certified against the
-CLAMPED zone kills the branch of the UNCLAMPED box, and the YES and NO sides of A120's split
-really do use the same boxes. -/
+CLAMPED zone kills the branch of the UNCLAMPED box.  That settles the clamp, which is what A120
+flagged; what it does not settle is the ROUNDING with which the zone is written into the
+certificate file, and that one goes the wrong way — see finding F-COVER in
+`attempts/A126-localdead-lean/notes/obligations.md` §4, and note that the hypotheses below are
+stated with `≤` in the direction a zone rounded INWARD satisfies. -/
 theorem noneIn_of_clamped {s : ℝ} {z : Cfg} {B B' : Box} (hz : CfgPacking s z)
     (hcx0 : B'.cx0 ≤ max B.cx0 (1 / 2)) (hcx1 : min B.cx1 (s - 1 / 2) ≤ B'.cx1)
     (hcy0 : B'.cy0 ≤ max B.cy0 (1 / 2)) (hcy1 : min B.cy1 (s - 1 / 2) ≤ B'.cy1)
@@ -178,7 +184,10 @@ What is NOT yet in Lean, per hypothesis:
   notes/obligations.md` §3 records the four files and their Python walls), and
   `checkCaseI_no_family` speaks of an `IsStrictFamily` (pairwise disjoint CLOSED squares) while
   `CfgPacking` gives interior-disjointness, so `Dilation.lean`'s Lemma B has to be applied
-  first.  Both are pre-existing gaps of the frozen fixed-side route, not new ones. -/
+  first.  Both are pre-existing gaps of the frozen fixed-side route, not new ones.
+  A third is NEW and is finding F-COVER: the zone the certificate is proved about is the
+  box rounded OUTWARD (by `≤ 1.1·10⁻⁷` in tilt), while the split needs it rounded INWARD,
+  so `hno` as certified is about a slightly LARGER zone than `NoneIn (Ls.get i)` names. -/
 theorem y0230_dead {Ls : List Box} {Ps : List Pin} {s0 : ℝ} {H : ℝ → Cfg → Prop}
     (hD : LocalDead Ls Ps s0)
     (hdisj : ∀ i j : Fin Ls.length, i ≠ j → ∀ q : PSq, (Ls.get i).mem q → ¬ (Ls.get j).mem q)

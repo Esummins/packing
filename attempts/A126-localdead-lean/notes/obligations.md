@@ -125,7 +125,7 @@ The NO side, in detail.  A120's four PASSing certificates for `Y0230` are `NO0`,
 class pins plus its own conditioned square) and **one NO-family zone** (the corresponding box of
 `N`, mapped into the node frame and clamped to the wall slab).  `lean/gen_case_lean.py` converts
 them and `LocalCertY0230.check_y0230_no{0,1,2,3}` replays all four by `native_decide` — the A78
-route, and the harness exists.  Two steps still separate that from `hno`:
+route, and the harness exists.  THREE steps still separate that from `hno`:
 
 1. **`checkCaseI_no_family`, not `checkCaseI_kill`.**  The zone list is NONEMPTY, so the PASS
    proves "SOME non-owner square of the family lies in the zone", which is exactly the negation
@@ -136,6 +136,10 @@ route, and the harness exists.  Two steps still separate that from `hno`:
    speaks of the pose `z k`.  `q.set = (z k).set` does not force `q = z k` (`t = 0` and `t = 1`
    denote the same square — Parametrize's findings F8), so the last step needs the pose
    normalisation that `Census.mem_interior_d4Sq_set_iff` and `exists_nonneg_dir` already carry.
+3. **the zone is not the box** — finding F-COVER, §4.  The certificate is proved about the box
+   rounded OUTWARD (`≤ 1.1·10⁻⁷` in tilt), while `NoneIn (Ls.get i)` names the box itself and the
+   split needs the zone rounded INWARD.  This one is NEW, and unlike the other two it is fixed
+   on the generator side, not in Lean.
 
 `LocalCompose.centre_in_slab` and `LocalCompose.noneIn_of_clamped` close the third gap A120
 worried about: a NO child certified against the CLAMPED zone kills the branch of the UNCLAMPED
