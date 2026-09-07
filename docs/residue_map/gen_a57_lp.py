@@ -103,19 +103,24 @@ def panel(ox, oy, nid, node, row):
             return best
         th0, th1 = float(box.get('th0', 0.0)), float(box.get('th1', 0.0))
         thm = 0.5*(th0+th1)
-        for th_deg, fill_op, stroke_w, label in ((th0, 0.10, 1.0, ''), (th1, 0.10, 1.0, ''), (thm, 0.35, 2.5, 'H')):
+        # the extremal-tilt shadows are OUTLINES only (no fill), so they never read as a second filled square
+        # under the H when all three share the box centre.
+        for th_deg, fill_op, stroke_w, label in ((th0, 0.0, 1.0, ''), (th1, 0.0, 1.0, ''), (thm, 0.35, 2.5, 'H')):
             th = math.radians(th_deg); nf = nearest_feasible(th)
             if nf is None:
                 hx, hy = 0.5*(box['x0']+box['x1']), 0.5*(box['y0']+box['y1']); dash = ' stroke-dasharray="5,4"'; note = ' (no feasible centre in box)'
             else:
                 _, hx, hy = nf; dash = ''; note = ''
             Ph = sq(hx, hy, th); pts = ' '.join(f'{ox+x*S:.1f},{oy-y*S:.1f}' for x, y in Ph)
-            out.append(f'<polygon points="{pts}" fill="#00e5ff" fill-opacity="{fill_op}" stroke="#000" stroke-width="{stroke_w}"{dash}/>')
+            col = '#000' if label else '#006064'
+            out.append(f'<polygon points="{pts}" fill="#00e5ff" fill-opacity="{fill_op}" stroke="{col}" stroke-width="{stroke_w}"{dash}/>')
             if label:
                 out.append(text(ox+hx*S, oy-hy*S+4, label, 11, '#000', True, 'middle'))
                 out.append(text(ox+hx*S, oy-hy*S+16, f'{th_deg:.1f}°{note}', 8, '#000', False, 'middle'))
             else:
-                out.append(text(ox+hx*S, oy-hy*S-14, f'{th_deg:.1f}°{note}', 7, '#006064', False, 'middle'))
+                # label the outline at its top-left vertex so the three labels never overprint
+                vx, vy = min(Ph, key=lambda v: v[0]-v[1])
+                out.append(text(ox+vx*S+2, oy-vy*S-3, f'{th_deg:.1f}°{" (none feasible)" if nf is None else ""}', 7, '#006064', False, 'start'))
         cfeas = feasible(0.5*(box['x0']+box['x1']), 0.5*(box['y0']+box['y1']), math.radians(thm))
         out.append(text(ox, oy + 40, f'H = example hypothesis square at the mid-tilt {thm:.1f}°, at the feasible centre nearest the box centre '
                                      f'(box centre itself {"feasible" if cfeas else "INFEASIBLE: overlaps a pin"}); faint = the extremal tilts {th0:.1f}° / {th1:.1f}°', 8.5, '#006064'))
