@@ -59,6 +59,24 @@ Soundness clean across all 296 (max core half-side 0.398, every bin inside [0, 9
 One shard hangs deterministically on `k5_16_interior_Y0381` (diagnosis in A124); trim records are never persisted
 (must-fix before a full resume).
 
+**Two geometric leaks found by the PI reading the LP-support drawings (2026-09-07).** (1) **Pin-clip (A131,
+`32d63560`).** Most of a tilt bin is unrealisable at most centres of a box next to a pin (Y0036 vs bl10: only a top
+sliver under the clockwise lean survives). Clipping the centre box to the exactly pin-feasible region per tilt sub-bin
+(four sinusoids in θ, rational in t = tan(θ/2), no epsilon) strictly dominates T5′ and T5″ (all 674 logic kills and
+all 159 T5″ empties reproduced, plus 21 more needing two pins jointly). The decisive number: of the 607 unclosed nodes
+(414 ALIVE + 193 FAIL), **132 clip to EMPTY**, 112 of them by the trim already deployed — they are open only because
+T5′/T5″ run as pre-filters on newly emitted children, never on stored nodes; a pure-geometry backlog sweep collects
+them in minutes (running). On ten alive nodes the LP on the clipped box moved five from η ≈ 0 to η ≤ −0.5, two
+certified dead through the frozen verifier (Y0036_D02, Y0186_D00_D00), three cert-FAIL with real holes (resolver
+path); on the other five only the columns collapse (support 1041 → 5). The re-check's kills, by contrast, are LP
+verdicts: recheck96 never certifies. (2) **The axis-aligned core leaks (A132 running).** In each of the four alive
+level-3 nodes, two of the 5–8 weight-1 support columns overlap the hypothesis square at every pose of the box (SAT gap
+−0.005 to −0.029) yet clear the axis-aligned core K(a) by +0.003 to +0.045: a 75°-tilted square protrudes ~0.21 beyond
+K(a) along each diagonal. The polygon core K′(B) = ⋂ over poses of the square (certified vertex-wise by pinguard's
+interval formula) prunes those columns, strengthens the certificate hypothesis, and kills against pin cores; it needs a
+v3 verifier clause and one Lean lemma. Both leaks are the same lesson: *use the exact pose set, not its axis-aligned
+shadow*, and both apply to every conditioning tree (protected tier, k0).
+
 **What the alive nodes are** (A107, LP dual support drawn directly — the PI's rule):
 
 ![the LP support at the four alive level-3 nodes](residue_map/a57_lp_support.svg)
