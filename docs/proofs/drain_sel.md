@@ -592,3 +592,85 @@ Runs (`attempts/A128-coupled-moves/code/`, one process each, BLAS pinned, BelowN
 differences + lock103 comparison; `lock103_copy.py` is A103's file copied, not imported). Read-only on every campaign
 and attempt; frozen verifiers untouched; no `lean/` edits beyond the depgraph note; git fetch + plain merge + push of
 own paths.
+
+## 7. Addendum (A130, 2026-09-07) — the FLUSH case: non-rigid fields, the depth-2 exchange, and what a flush hold is
+
+Files: `attempts/A130-flush-exchange/{notes/lemmas130.md (the lemmas, proofs, Lean shapes), notes/report130.md
+(T1–T4), results/table130.md, results/moves130.jsonl, results/flush130.svg, results/shells130_K03_BR.json,
+code/flush130.py}`. Labels as above.
+
+### 7.1 [T] The moves (lemmas130.md §1–6)
+
+* **Lemma BOX-FIELD-W** (§1): Lemma BOX-MOVE for a NON-rigid field (one exact screw per member of any set C, every
+  pair with a member a row family, the flush kink charged through the exact rotation difference u = ω_{B′} − ω_A)
+  with WEAK pair and wall rows (≥ 0 on the padded box; sound for r > 0 by the Dini-derivative argument, not at
+  r = 0 where ROT's strict rows are the right statement) and Q's depth rows strict. The column-straighten +
+  row-slide field of the brief is a point of its feasible set; the LP over all 33 variables finds the best field.
+  Dual BOX-GORDAN-F (Motzkin with the equality rows for u).
+* **Lemma MODE** (§2): a pair with ≥ 2 possibly-separating axes is, at every packing of the box, separated by its
+  largest axis; on the piece where axis k is largest only row k is needed; a piece whose defining inequality is
+  violated on the whole box is vacuous. **[F]** at a flush contact the pieces are the two contact modes (which
+  square's corner rests on which edge), their common boundary is the exactly-flush stratum, and the slide that
+  preserves the separating contact differs between the modes — a fixed field certified by intervals over a box
+  fails by a sign of the order of the tilt uncertainty at EVERY radius: A128's "flush placement has no
+  neighbourhood" is a MODE ACCUMULATION, not a lock. **Lemma SHELL-SCALE**: away from the stratum (tilt ∈ [a, 2a])
+  a screw with rotation ∝ a certifies every dyadic shell, all coefficients affine in a, so one parametric
+  certificate covers (0, r] except the stratum itself, where the slide is exact (Fact A). [M] K03 BR: shells
+  a = 5·10⁻⁵ … 1.6·10⁻⁶ certified, failing exactly below the fixed pad 10⁻⁶.
+* **Lemma EXCHANGE-2** (§3): A128's exchange whose re-fit Q₀ is flush against untouched squares F, plus a finite
+  exact motion of a cluster C ⊇ F (weak rows everywhere, one strict opening axis per U ∈ F with sep ≥ −ρ_U on B
+  and rate ≥ δ_U on the padded box, ε* = max ρ_U/δ_U inside the pad): every packing in B yields a k ≥ 1 packing at
+  the same side. ∀-packings, no selection.
+* **Lemma TWO-INTRUDER** (§4): with exactly two possible meeters A, Q on B, the field certificate for Q need only
+  hold where A ALSO intrudes; the K03-type corner (slot-like deep meeter on the floor + flush tangent hugging the
+  wall + an interior presser on the tangent's inner corner) is decided by hand on the box: two-intruder packings
+  exist only with the tangent leaning toward the wall, and there the deep meeter's slide away from the corner is
+  exact — every selected minimiser in the box is K0-FREE at that corner (a theorem; its interval form needs the
+  contractor of Lemma MODE).
+* **Lemma FLUSH-SLIDE** (§5, the point statement, n-general): at the Ψ^(w)-minimiser a floor (wall) intruder whose
+  active contacts are the floor and squares on its top edge only is pressed on its FAR edge — a flush square with a
+  free far edge slides (Lemma ROT-W with Fact A). **Lemma ISOLATED**: if the weak cone {rows ≥ 0, depth rate ≥ 0} is
+  {0}, z is an isolated point of {packings, d_c(Q) ≤ d_c(Q)(z)} (curve selection). **Lemma KINK** (§6): the exact
+  second-order condition at a parallel-edge contact (Δ̇ = 0 ⇒ the kink is second-order, −|w_A − w_{B′}|ε²/4; the
+  Farkas/prestress form; the 2 × 2 determinant when dim K = 1) and its box form (only structurally-zero rows admit
+  a second-order box certificate).
+
+### 7.2 [M] T3 — the bounded experiment (table130.md; 10⁴ → 10⁴ → 0 hits on every certificate)
+
+| hold | FIELD (all 11 squares, tilt-sign × mode pieces) | ROT-W | EXCHANGE-2 | point |
+|---|---|---|---|---|
+| K03 (l2_p65_111, 3.925149) | held on 10⁻³…10⁻⁶ (BR sq6 = f2: 10 of 32 pieces certified at 10⁻⁴, rate 1.000 each; every other subject 0 pieces) | held | not certified at any corner (flush blockers f4 / f5 / {f0, f3, f6} / {sq1, f0, f6} wedged in every sub-box and mode) | f2's exact slide toward f1 (rate 1.000): K03 is not Ψ^(w)-minimal; other rates at the residual |
+| K06 (l1_159, 3.886745) | held (BR f1: 4 of 8 pieces) | held | not certified (blockers f4 / the 48.4° grain) | void (the landing overlaps by 1.1·10⁻⁶) |
+| cell_l1_124 (3.942810) | held (TL sq3: 1 of 4 pieces; TL sq4 0/64) | held | not certified (blockers sq4/sq7, sq4/sq5, {sq0, sq1, sq6, sq8}) | sq3 slides down the wall (rate 1.000); [T] TL has no two-intruder packing at all |
+| control 4.001525 | **CERTIFIED at all eight intruders on the 10⁻⁴ box** (min strict 0.052–0.319, every square moves, 0 hits) | held | BR 10⁻⁵ (= A128's depth-1) | weak-cone rates 0.11–0.32 at every intruder |
+| 4.000237 / K01 (regression) | all eight at 10⁻⁴ / BR sq7, TR sq5 at 10⁻³ | BR sq2 10⁻⁶ (= A128) | as A128 (F = ∅) | 0.22–1.00 / 1.00 |
+| Trump (canary) | held on every box | held | no re-fit at any corner | 0, ISOLATED at all nine subjects — PASS |
+
+Reading. [F] The three window holds survive every move on every box, exactly because (i) at a (slot-like deep
+meeter, flush tangent) corner the deep meeter's exact slide (Lemma FLUSH-SLIDE; weak-cone rate 1.000) is
+certifiable by a fixed field only on the pieces where every flush partner leans toward the wall — Lemma MODE's
+accumulation at the flush stratum, closed by hand (Lemma TWO-INTRUDER + SHELL-SCALE + the stratum) and not by
+the plain leaf; and (ii) every re-fit's flush blocker is the interior grain, wedged. [F] The control falls: the
+frame that was Gordan-certified locked at all eight intruders under single-square motions, and held under every
+rigid cluster screw (A128), has a strictly Ψ-decreasing NON-rigid first-order field at every intruder (rates
+0.11–0.32) certified on the 10⁻⁴ box — RES-MENU's only known member above 4 is not in RES-MENU⁺ (the residue with
+the field added).
+
+### 7.3 T4 — consequence for DRAIN-SEL(W)
+
+The case analysis of §4.2 with FLUSH inserted (details `report130.md` T4, `lemmas130.md` §7):
+ 1–3 theorems (unchanged). **F [T] Lemma FLUSH-SLIDE**: at z* every flush floor/wall intruder is pressed on its
+ FAR edge (a top-edge presser slides). **F′ [T modulo K0-O1] SLOT-GRAZER**: on W at m ≤ ŝ − δ no packing has a
+ corner with an intruder of μ_c ≤ δ/(1 + √2) (Lemma SHELL + Lemma SLIDE) — the K03/K06/l1_124-type corners occur
+ only in the slab (ŝ − (1 + √2)ρ, ŝ], where they are Lemma TRUMP-LOCAL's geometry. **FIELD [T at the point]**:
+ BOX-FIELD-W at r = 0 with strict rows is CLUSTER-ROT for a non-rigid field (same proof); a strictly feasible
+ field decreasing an intruder's depth contradicts Ψ^(w)-minimality. **Case 4 [C]**, the residue RES-MENU⁺(m):
+ K0-BLOCKED, LOCKED, cluster-held, flush re-fits, flush intruders pressed on their far edges, NO strictly feasible
+ field — realised by NOTHING on disk at any side (the two A104 locks fall to the field). Lean: one more disjunct
+ `¬ fieldHeld z i c` (Motzkin over 33 + kink variables) in `drain_sel`'s conclusion, consumed as `¬ clusterHeld`.
+ Cost of a menu certificate over the k0 root cells: the field leaf fires at radius 10⁻⁴ (locks) / 10⁻³ (rattlers,
+ slots) and the level-1 cells are 0.1 wide — silent at the root, the K0-ROT/TF-U/EX verdict again; at flush stacks
+ it is not a box leaf at all (mode contractor + parametric shells + the stratum statement). `budget.md` k0 row
+ unchanged (12,000 / 0). A hold at a non-packing support costs DRAIN-SEL(W) nothing (the three holds are k ≥ 1
+ packings above ŝ; their boxes' K0-BLOCKED packings are grazer-blocked slot corners, SLIDE-excluded on W outside
+ the slab); it costs the TREE leaf, which is blind at every flush stack.
