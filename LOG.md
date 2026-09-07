@@ -5068,8 +5068,24 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   `LocalHyp` demands**, which is the reason they had to be asserted — `node_dead_of_yes_no`,
   `classKilledAt_of_yes_no` in `Composition.lean`'s shape. It also closes one gap A120 flagged: `centre_in_slab`
   (a packed square's centre is at least `1/2` from every wall, from `wT_ge_one` + `set_subset_container_iff`) gives
-  `noneIn_of_clamped`, so a NO child certified against the CLAMPED zone kills the branch of the UNCLAMPED box and
-  the two sides provably use the same boxes.
+  `noneIn_of_clamped`, so a NO child certified against the CLAMPED zone kills the branch of the UNCLAMPED box —
+  the CLAMP itself costs nothing. The ROUNDING does; see the next bullet.
+- **F-COVER — the emitted NO zone is the YES box rounded the WRONG WAY** (`code/zonecheck126.py`, measured on all
+  four of `Y0230`'s PASSing certificates against A119's own boxes for `N`). The split is a tautology **iff
+  `ZONE_i ⊆ BOX_i`**: a configuration that fails the YES side fails it because NO square is in `BOX_i`, and to land
+  in `NO_i` it must then have no square in `ZONE_i` either. A120's runner builds the zone EXACTLY — its node record
+  carries the box's own θ-cell and the centre rectangle in full precision, and `box_identical_to_yes` checks
+  precisely that — but the `case-measure-certificate-v1` file emits it rounded **OUTWARD**: the tilt interval
+  converted to `t = tan(θ/2)` and rounded out to `2⁻²⁰`/`2⁻²³` (`NO0`: `2924103/8388608 = 0.348580241` against
+  `tan(38.4351°/2) = 0.348580331`), the centre rectangle to 9 decimals by NEAREST. Outward is the right direction
+  for the VERIFIER — a wider NO zone exempts more boxes, justified because the hypothesis it is proved under is
+  correspondingly stronger — and the wrong one for the COVER. Measured: `≤ 1.07·10⁻⁷` in tilt on all four,
+  `≤ 4.71·10⁻¹⁰` on the upper centre bounds of three (`NO3`'s rectangle is the clamped one and is strictly
+  inside). **So the node's cover as certified leaves a sliver — a configuration whose only square near `F_i` sits
+  in `ZONE_i \ BOX_i` — in NEITHER branch.** Nothing in A120's LP or measure work is wrong; the tautology is, and
+  the fix is one rounding direction (emit the zone INWARD) plus a re-certification at amounts orders of magnitude
+  below the resolution at which those certificates pass. `NO3` also confirms A120 handles E3 correctly on its own
+  side: its zone carries TWO `t`-intervals, `[tan 40°, 1]` and `[0, tan 5°]` — it is `Local.Box` that cannot.
   `y0230_dead` is A120's closed node `k5_11_interior_Y0230` as a Lean statement whose five hypotheses ARE the
   residue: `LocalDead` for S02 (0.2, 10°) modulo `CertCover`; A2/A3 as decidable rational tests (not written);
   the node's class hypothesis through the `D4` frame map (A120's A1/A4, the step

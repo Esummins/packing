@@ -125,8 +125,50 @@ route, and the harness exists.  Two steps still separate that from `hno`:
 `LocalCompose.centre_in_slab` and `LocalCompose.noneIn_of_clamped` close the third gap A120
 worried about: a NO child certified against the CLAMPED zone kills the branch of the UNCLAMPED
 box, because a packed square's centre is at least `1/2` from every wall
-(`wT_ge_one` + `set_subset_container_iff`).  So the YES and NO sides provably use the same
-boxes.
+(`wT_ge_one` + `set_subset_container_iff`).  So the CLAMP costs nothing.
 
 Both remaining NO-side steps are pre-existing properties of the frozen fixed-side route
 (every `checkCaseI` consumer in the repo has them), not new debts of this attempt.
+
+## 4. Finding F-COVER — the emitted NO zone is the YES box rounded the WRONG WAY
+
+Measured on all four of `k5_11_interior_Y0230`'s NO certificates against A119's own boxes for
+`N = S02_k5_11_r0.20_rho10` (`code/` has no script for this; the numbers below are from the
+certificate files and the certificate of `N` directly).
+
+The split `H = YES ∪ ⋃_i NO_i` is a tautology **iff `ZONE_i ⊆ BOX_i` as pose sets**: a
+configuration that fails the YES side fails it because NO square is in `BOX_i`, and to land in
+`NO_i` it must then have no square in `ZONE_i` either.  A120's runner builds the zone EXACTLY
+(its record carries `thetas [38.4351, 58.4351]`, the box's own θ-cell, and the centre rectangle
+in full double precision, and its `box_identical_to_yes` guard checks precisely that).  The
+rounding happens when the `case-measure-certificate-v1` file is written, and it is OUTWARD:
+
+| child | box | centre bound outside the box | tilt ends outside the box |
+|---|---|---|---|
+| `NO0` | `f1` | `x1` by 4.71·10⁻¹⁰, `y1` by 3.58·10⁻¹⁰ | 9.0·10⁻⁸ and 9.9·10⁻⁸ |
+| `NO1_r6` | `f2` | `x1` by 1.18·10⁻¹⁰, `y1` by 1.63·10⁻¹¹ | 9.0·10⁻⁸ and 9.9·10⁻⁸ |
+| `NO2` | `f3` | `x1` by 4.54·10⁻¹⁰, `y1` by 3.45·10⁻¹⁰ | 9.0·10⁻⁸ and 9.9·10⁻⁸ |
+| `NO3` | `BR(0,1)` | none (the zone is the CLAMPED rectangle, strictly inside) | 1.05·10⁻⁷ and 1.07·10⁻⁷ |
+
+The tilt intervals are the θ-cell converted to `t = tan(θ/2)` and rounded outward to `2⁻²⁰` /
+`2⁻²³` (`NO0`: `2924103/8388608 = 0.348580241` against `tan(38.4351°/2) = 0.348580331`); the
+centre bounds are 9-decimal NEAREST roundings, which happens to move `x0`/`y0` inward and
+`x1`/`y1` outward.  Outward is the right direction for the VERIFIER — a wider NO zone exempts
+more boxes, and that is justified because the hypothesis it is proved under is correspondingly
+stronger — and it is the wrong direction for the COVER.
+
+Consequence, stated exactly: a configuration whose only square near `F_i` sits in
+`ZONE_i \ BOX_i` satisfies neither the YES side nor `NO_i`, so the node's cover as certified has
+a sliver of width `≲ 10⁻⁷` in tilt and `≲ 5·10⁻¹⁰` in each centre coordinate that is in no
+branch.  Nothing in A120's LP or measure work is wrong; the tautology is.
+
+**The fix is one rounding direction, and it is cheap.**  Emit the NO zone INWARD (lower bounds
+up, upper bounds down, tilt interval narrowed).  That makes the NO hypothesis WEAKER, so the
+four children have to be re-certified — but by `10⁻⁷` in tilt, which is orders of magnitude
+below the resolution at which those certificates pass, so a re-run should be a formality.
+Widening the YES box instead is NOT an option: the YES kill is A119's certificate for `N`, and
+`N`'s boxes are what they are.
+
+`NO3` also confirms that A120 handles finding E3 correctly on its side: its zone carries TWO
+`t`-intervals, `[tan 40°, 1]` and `[0, tan 5°]`, i.e. the `θ ∈ [−10°, +10°]` cell folded into
+the fundamental domain.  It is `Local.Box`, with its single interval, that cannot say this.
