@@ -66,6 +66,20 @@ def panel(ox, oy, nid, node, row):
         P = sq(cx, cy, 0.0); pts = ' '.join(f'{ox+x*S:.1f},{oy-y*S:.1f}' for x, y in P)
         out.append(f'<polygon points="{pts}" fill="#90caf9" fill-opacity="0.6" stroke="#1565c0" stroke-width="1.5"/>')
     bad = 0
+    # PI (2026-09-07): a support column that overlaps the hypothesis square at EVERY pose of the box is impossible
+    # under the node's own hypothesis (it survives only because the LP prunes against the axis-aligned core);
+    # such columns get a red hatched outline and their max-over-poses SAT gap printed.
+    def gap_to_hypothesis(P):
+        if not box: return 9.0
+        g = -9.0
+        for i1 in range(7):
+            for j1 in range(7):
+                for k1 in range(7):
+                    hx = box['x0'] + (box['x1']-box['x0'])*i1/6; hy = box['y0'] + (box['y1']-box['y0'])*j1/6
+                    ht = math.radians(float(box.get('th0', 0)) + (float(box.get('th1', 0))-float(box.get('th0', 0)))*k1/6)
+                    g = max(g, sat(P, sq(hx, hy, ht)))
+        return g
+    n_impossible = 0
     # colour by tilt bin so distinct squares of the shadow separate visually
     for p in sorted(pk, key=lambda p: float(p.get('y', 0))):
         cx, cy, th, y = float(p['cx']), float(p['cy']), float(p['theta']), float(p.get('y', 0))
@@ -75,6 +89,11 @@ def panel(ox, oy, nid, node, row):
         pts = ' '.join(f'{ox+x*S:.1f},{oy-yy*S:.1f}' for x, yy in P)
         op = 0.15 + 0.6 * (y / ymax if ymax > 0 else 0)
         out.append(f'<polygon points="{pts}" fill="hsl({hue},70%,45%)" fill-opacity="{op:.2f}" stroke="hsl({hue},70%,30%)" stroke-width="0.8"/>')
+        g = gap_to_hypothesis(P)
+        if g < -1e-9:
+            n_impossible += 1
+            out.append(f'<polygon points="{pts}" fill="none" stroke="#d50000" stroke-width="2.5" stroke-dasharray="7,3"/>')
+            out.append(text(ox+cx*S, oy-cy*S-6, f'impossible under H: overlap {-g:.3f} at every pose', 7.5, '#d50000', True, 'middle'))
     if box:
         out.append(f'<rect x="{ox+box["x0"]*S:.1f}" y="{oy-box["y1"]*S:.1f}" width="{(box["x1"]-box["x0"])*S:.1f}" height="{(box["y1"]-box["y0"])*S:.1f}" fill="none" stroke="#000" stroke-width="2"/>')
         # PI (2026-09-07): draw one example hypothesis square at the CENTRE of the box and the CENTRE of the tilt
@@ -133,7 +152,8 @@ def panel(ox, oy, nid, node, row):
     # weight table: top placements
     top = sorted(pk, key=lambda p: -float(p.get('y', 0)))[:8]
     out.append(text(ox, oy + 16, 'top weights: ' + '; '.join(f'({float(p["cx"]):.2f},{float(p["cy"]):.2f},{math.degrees(float(p["theta"]))%90:.0f}°) {float(p.get("y",0)):.2f}' for p in top), 8.5, '#333'))
-    out.append(text(ox, oy + 28, f'placements outside the container skipped: {bad}; colour hue = tilt mod 90° (0° red … 90° magenta)', 8.5, '#666'))
+    out.append(text(ox, oy + 28, f'placements outside the container skipped: {bad}; colour hue = tilt mod 90° (0° red … 90° magenta); '
+                                 f'red dashed = {n_impossible} column(s) overlapping the hypothesis square at every pose of the box (pass the axis-aligned core only)', 8.5, '#666'))
     return out
 ids = sys.argv[1:] or ['k5_11_interior_Y0036_D07_D00', 'k5_11_interior_Y0036_D07_D04', 'k5_11_interior_Y0036_D07_D05', 'k5_11_interior_Y0186_D00_D00']
 PW = int(S0*S + 50); oy = 60 + S0*S
