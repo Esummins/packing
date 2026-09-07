@@ -1,0 +1,36 @@
+    cert k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO0 PASS (113s)
+    cert k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO1 FAIL (327s)
+    cert k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO2 PASS (73s)
+    cert k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO3 PASS (203s)
+    cert k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO4 PASS (157s)
+  canary k5_11_interior_Y0054_D00: 4/5 children PASS -> node dies = False
+    cert k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO0  PASS (5s)
+    cert k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO1  PASS (2s)
+    cert k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO2  PASS (2s)
+    cert k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO3  PASS (251s)
+    cert k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO4  PASS (2s)
+    cert k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO5  PASS (26s)
+  canary k5_16_interior_Y0984: 6/6 children PASS -> node dies = True
+canaries: trump ok=True, resample 10 fires / 20000 pairs / 0 counterexamples
+{
+ "a111_reproduction": [
+  {
+   "node": "k5_11_interior_Y0054_D00",
+   "passed": 4,
+   "of": 5,
+   "dies": false
+  },
+  {
+   "node": "k5_16_interior_Y0984",
+   "passed": 6,
+   "of": 6,
+   "dies": true
+  }
+ ],
+ "trump": {
+  "dead_hypotheses_checked": 79,
+  "violations": [],
+  "ok": true
+ },
+ "seconds": 1326.9
+}

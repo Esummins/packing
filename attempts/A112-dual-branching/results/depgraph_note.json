@@ -1,0 +1,131 @@
+{
+ "s02": {
+  "rset": "s02",
+  "per_ordering": "wastage 77 nodes / 59 LP / 2905 s LP / 1330 s cert / 12 certified kills (8 logic, 0 chain); stranded 77 nodes / 60 LP / 4014 s LP / 1807 s cert / 8 certified kills (7 logic, 0 chain); loadpath 77 nodes / 56 LP / 2439 s LP / 631 s cert / 12 certified kills (11 logic, 0 chain); hybrid 73 nodes / 55 LP / 3252 s LP / 1638 s cert / 13 certified kills (8 logic, 0 chain)",
+  "old_tree": "old tree projected 671 nodes / 671 LP / 194602 s",
+  "wins": {
+   "stranded": 3.0,
+   "wastage": 1.0,
+   "hybrid": 4.0,
+   "loadpath": 2.0
+  },
+  "informative": 10,
+  "regions": 17
+ },
+ "k0": {
+  "rset": "k0",
+  "per_ordering": "wastage 28 nodes / 22 LP / 2854 s LP / 0 s cert / 0 certified kills (0 logic, 0 chain); stranded 18 nodes / 12 LP / 3856 s LP / 0 s cert / 0 certified kills (0 logic, 0 chain); loadpath 17 nodes / 11 LP / 3938 s LP / 0 s cert / 0 certified kills (0 logic, 0 chain); hybrid 21 nodes / 15 LP / 3664 s LP / 0 s cert / 0 certified kills (0 logic, 0 chain)",
+  "old_tree": "old tree projected 2522 nodes / 2522 LP / 731390 s",
+  "wins": {
+   "stranded": 2.0,
+   "hybrid": 3.0,
+   "loadpath": 1.0
+  },
+  "informative": 6,
+  "regions": 6
+ },
+ "wastage_vs_rowmass": {
+  "s02": {
+   "n": 45,
+   "mean": 0.4145,
+   "median": 0.4678,
+   "min": -0.4082,
+   "max": 0.8839,
+   "frac_positive": 0.844
+  },
+  "k0": {
+   "n": 34,
+   "mean": 0.3402,
+   "median": 0.4246,
+   "min": -0.3698,
+   "max": 0.8308,
+   "frac_positive": 0.824
+  }
+ },
+ "canaries": {
+  "trump_ok": true,
+  "resample": {
+   "fires": 10,
+   "sampled_pose_pairs": 20000,
+   "counterexamples": 0,
+   "worst_sat_gap": -0.006565,
+   "rule_met": true,
+   "violations": []
+  },
+  "a111": [
+   {
+    "node": "k5_11_interior_Y0054_D00",
+    "children": 5,
+    "passed": 4,
+    "node_dies": false,
+    "children_detail": [
+     {
+      "child": "k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO0",
+      "result": "PASS",
+      "seconds": 113.0
+     },
+     {
+      "child": "k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO1",
+      "result": "FAIL",
+      "seconds": 327.3
+     },
+     {
+      "child": "k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO2",
+      "result": "PASS",
+      "seconds": 73.0
+     },
+     {
+      "child": "k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO3",
+      "result": "PASS",
+      "seconds": 202.6
+     },
+     {
+      "child": "k5_11_interior_Y0054_D00__S02__lpa__r0.1_p10__NO4",
+      "result": "PASS",
+      "seconds": 157.4
+     }
+    ]
+   },
+   {
+    "node": "k5_16_interior_Y0984",
+    "children": 6,
+    "passed": 6,
+    "node_dies": true,
+    "children_detail": [
+     {
+      "child": "k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO0",
+      "result": "PASS",
+      "seconds": 4.7
+     },
+     {
+      "child": "k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO1",
+      "result": "PASS",
+      "seconds": 2.3
+     },
+     {
+      "child": "k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO2",
+      "result": "PASS",
+      "seconds": 2.3
+     },
+     {
+      "child": "k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO3",
+      "result": "PASS",
+      "seconds": 250.7
+     },
+     {
+      "child": "k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO4",
+      "result": "PASS",
+      "seconds": 2.3
+     },
+     {
+      "child": "k5_16_interior_Y0984__S07__lpa__r0.1_p10__NO5",
+      "result": "PASS",
+      "seconds": 25.6
+     }
+    ]
+   }
+  ]
+ },
+ "GRAIN": "A112 (dual-guided REGION TREE, four branching orders measured on 17 S02-explained A57 level-2/3 nodes and 6 un-killable k0 level-1 cells; every kill a CERTIFIED pass of the frozen verify_case.py, never an LP verdict): the second cover WORKS and the ORDER barely matters. (1) THE ORDER IS A TIE-BREAK, NOT A LEVER: over the 10 S02 regions where the four orders differ at all the wins split hybrid 4 / stranded 3 / loadpath 2 / pin-wastage 1, and nodes-to-termination over the whole set spans only 73-77; loadpath / wastage / hybrid kill the same 9 old boxes, stranded 8. (2) WHAT KILLS IS THE CERTIFIER ON THE *NO* SIDE AND LOGIC ON THE *YES* SIDE, exactly as A111 predicted, now measured inside a tree: 116 of 126 YES-child LPs land at eta = 0 to the last digit (the branch box sits on the parent's own support) while 44 of 104 NO children go below budget, down to eta = -1.0; 45 certificates PASS (35 NO, 10 YES) against 9 FAIL. (3) TWO OLD BOXES DIE IN THREE NODES: k5_11_interior_Y0108_D07 and k5_11_interior_Y0084_D03, root + YES + NO with 2 certificates each, 603 s and 302-567 s against the old tree's projected 56.6 children / 16,426 s -- a 27-54x wall reduction on the regions it does kill, on 2 of 11 non-trivial regions; a third, k5_11_interior_Y0041_D02, dies FREE at the root. Containment C1/C2/C3 (root hypothesis byte-identical to the campaign's, every split tautologous with the same box F, every leaf dead) holds with ZERO failures on every killed region. (4) THE FREE KILL THAT FIRES IS LEMMA TC, NOT CORE-MEET: all 10 fires are TC, 4 of them bin-vs-bin between boxes the region tree itself introduced at depths 2-4 -- the second conditioned square A112 was built to produce -- and 4 bin-vs-pin at a root, killing a whole A57 open box with a rule A57 does not apply at emission. Deploying them needs Lemma TC as a CERTIFIED leaf (today it is only the O(1) pre-screen): one new named obligation, a two-line nlinarith. (5) THE CHAIN KILL NEVER FIRED at tree depth: its controls are clean (fires at r = 0.005/0.002, refuses r >= 0.0097, refuses Trump at every radius, reproducing A111's r < s* - s0 = 0.0097 from the other side) but the trees only reached depth 3 (r = 0.0125) inside their wall. (6) THE k0 FACE IS STRUCTURALLY DIFFERENT AND THE REGION TREE DOES NOT BITE THERE: 0 kills, 0 certificates, 0 logic kills in 17-28 nodes per cell, because ALL 60 k0 LPs land at eta = 0 exactly (none <= -1e-3) -- removing a support placement from a k0 cell does not move tau, so the certifier is never invoked; and branching on corners does NOT by itself produce A113's missing logic kills. The brief's k0 YES-side shortcut is UNSOUND as a box containment (A53's k counts GRID-LOCKED squares, not squares whose centre lies in a corner cell); recorded, not taken, and worth at most 6 of the 37 opportunities even before the grid-lock obligation. (7) THE PI's TIMEOUT PROTOCOL IS WORTH 2.26x ON THE LP WALL where it applies (S02: 12,609 s vs 28,518 s under a flat 900 s cap on the same nodes; 55 s vs 124 s per LP) and 1.06x on k0 where nothing is ever below budget; certification adds 631-1,807 s and is CHEAPER than the LP time it replaces. eta does NOT predict the certificate here: PASSes span [-1.0, -0.25], FAILs [-0.71, -0.16]. (8) PIN WASTAGE vs ROW MASS: Spearman per branching node, median +0.47 (S02, n = 45) and +0.43 (k0, n = 34), positive in 82-84% of nodes -- a genuinely different ranking, not a proxy, and neither better nor worse as an order at this sample size. Canaries: Trump's grain killed in ZERO of the dead hypotheses; 10 free-kill fires re-checked at 20,000 sampled pose pairs with 0 counterexamples (worst SAT gap -0.0066); A111's two end-to-end kills reproduced 11/11 by replaying their certificates through A112's byte-identical frozen verifier. Banked: certify.py --loop_cols RE-SOLVES the node LP under a time limit before emitting, so the certificate's atom set is wall-clock dependent (A111's PASSing NO1 has 76 atoms, a 900 s re-run produced 100 and did not verify) -- the frozen verifier is deterministic, the emission pipeline is not, so a kill is reproduced by REPLAYING its certificate, never by re-emitting it.",
+ "GRAIN_auto": "A112 (dual-guided branching, region tree, four orderings measured): [s02, 10 of 17 regions informative] wastage 77 nodes / 59 LP / 2905 s LP / 1330 s cert / 12 certified kills (8 logic, 0 chain); stranded 77 nodes / 60 LP / 4014 s LP / 1807 s cert / 8 certified kills (7 logic, 0 chain); loadpath 77 nodes / 56 LP / 2439 s LP / 631 s cert / 12 certified kills (11 logic, 0 chain); hybrid 73 nodes / 55 LP / 3252 s LP / 1638 s cert / 13 certified kills (8 logic, 0 chain); old tree projected 671 nodes / 671 LP / 194602 s; wins {'stranded': 3.0, 'wastage': 1.0, 'hybrid': 4.0, 'loadpath': 2.0} || [k0, 6 of 6 regions informative] wastage 28 nodes / 22 LP / 2854 s LP / 0 s cert / 0 certified kills (0 logic, 0 chain); stranded 18 nodes / 12 LP / 3856 s LP / 0 s cert / 0 certified kills (0 logic, 0 chain); loadpath 17 nodes / 11 LP / 3938 s LP / 0 s cert / 0 certified kills (0 logic, 0 chain); hybrid 21 nodes / 15 LP / 3664 s LP / 0 s cert / 0 certified kills (0 logic, 0 chain); old tree projected 2522 nodes / 2522 LP / 731390 s; wins {'stranded': 2.0, 'hybrid': 3.0, 'loadpath': 1.0}"
+}

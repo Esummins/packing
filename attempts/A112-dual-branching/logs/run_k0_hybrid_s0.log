@@ -1,0 +1,82 @@
+[16:49:26] A112 k0 / hybrid : 3 regions (shard 0/2), wall 600s each, LP cap 900s
+[16:49:26] == k0_l1_100 (L1 k0_00 tau0=10.000000 conv=True)
+[16:49:27]   ERROR k0_l1_100: attempts\A112-dual-branching\code\run112.py", line 139, in main
+    out = run_region(pl, A.ordering, A, log)
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\run112.py", line 57, in run_region
+    leaves, internal = r.run(res0, lp_boxes=lp_boxes, lp_rank=lp_rank)
+                       ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\regiontree.py", line 415, in run
+    rec, kids = self.node(nd, pins, slots, lp_boxes)
+                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\regiontree.py", line 616, in node
+    ("  slot=" + slot_hit) if slot_hit else ""))
+     ~~~~~~~~~~^~~~~~~~~~
+TypeError: can only concatenate str (not "dict") to str
+
+[16:49:27]   -> nodes=None lps=None lp_wall=Nones (flat-900 Nones) cert=Nones NoneP/NoneF logic=None chain=None killed=None open=0
+[16:49:27] == k0_l1_105 (L1 k0_00 tau0=10.000000 conv=False)
+[16:49:27]   ERROR k0_l1_105: attempts\A112-dual-branching\code\run112.py", line 139, in main
+    out = run_region(pl, A.ordering, A, log)
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\run112.py", line 57, in run_region
+    leaves, internal = r.run(res0, lp_boxes=lp_boxes, lp_rank=lp_rank)
+                       ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\regiontree.py", line 415, in run
+    rec, kids = self.node(nd, pins, slots, lp_boxes)
+                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\regiontree.py", line 616, in node
+    ("  slot=" + slot_hit) if slot_hit else ""))
+     ~~~~~~~~~~^~~~~~~~~~
+TypeError: can only concatenate str (not "dict") to str
+
+[16:49:27]   -> nodes=None lps=None lp_wall=Nones (flat-900 Nones) cert=Nones NoneP/NoneF logic=None chain=None killed=None open=0
+[16:49:27] == k0_l1_088 (L1 k0_00 tau0=10.206035 conv=False)
+[16:49:27]   ERROR k0_l1_088: attempts\A112-dual-branching\code\run112.py", line 139, in main
+    out = run_region(pl, A.ordering, A, log)
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\run112.py", line 57, in run_region
+    leaves, internal = r.run(res0, lp_boxes=lp_boxes, lp_rank=lp_rank)
+                       ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\regiontree.py", line 415, in run
+    rec, kids = self.node(nd, pins, slots, lp_boxes)
+                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A112-dual-branching\code\regiontree.py", line 616, in node
+    ("  slot=" + slot_hit) if slot_hit else ""))
+     ~~~~~~~~~~^~~~~~~~~~
+TypeError: can only concatenate str (not "dict") to str
+
+[16:49:27]   -> nodes=None lps=None lp_wall=Nones (flat-900 Nones) cert=Nones NoneP/NoneF logic=None chain=None killed=None open=0
+[16:49:27] A112 k0/hybrid shard 0/2 done
+[18:47:28] A112 k0 / hybrid : 3 regions (shard 0/2), wall 600s each, LP cap 900s
+[18:47:28] == k0_l1_100 (L1 k0_00 tau0=10.000000 conv=True)
+[18:47:29]   R              root  d0  SPLIT on (1.4821, 2.5419, 26.25 deg) r=0.1000 rho=10.00  stranded=2.000 lp=None  slot=TL(1,1) (non-simple tilt)
+[18:48:46]   RY             YES   d1  LP stage2 tau=9.000000 eta=+0.000000 conv=True (62s = 35+27; flat-900 would be 35s)
+[18:48:46]   RY             YES   d1  ALIVE (knife edge)
+[18:48:46]   RY             YES   d1  SPLIT on (1.6074, 0.5129, 1.50 deg) r=0.0500 rho=5.00  stranded=2.000 lp=None  slot=BL(1,0) (non-simple tilt)
+[18:56:28]   RN             NO    d1  LP stage2 tau=10.000000 eta=+0.000000 conv=True (447s = 201+246; flat-900 would be 201s)
+[18:56:28]   RN             NO    d1  ALIVE (knife edge)
+[18:56:28]   RN             NO    d1  SPLIT on (1.3546, 1.4099, 66.75 deg) r=0.0500 rho=5.00  stranded=3.000 lp=None  slot=BL(1,1) (non-simple tilt)
+[18:57:15]   RYY            YES   d2  LP stage1 tau=8.000000 eta=+0.000000 conv=True (33s = 33+0; flat-900 would be 33s)
+[18:57:15]   RYY            YES   d2  ALIVE (knife edge)
+[18:57:15]   RYY            YES   d2  SPLIT on (0.5377, 2.3002, 85.50 deg) r=0.0250 rho=2.50  stranded=2.000 lp=None  slot=TL(0,1)
+[18:58:17]   RYN            NO    d2  LP stage1 tau=9.000000 eta=+0.000000 conv=True (46s = 46+0; flat-900 would be 46s)
+[18:58:17]   RYN            NO    d2  ALIVE (knife edge)
+[18:58:17]   RYN            NO    d2  SPLIT on (1.6024, 0.5619, 0.00 deg) r=0.0250 rho=2.50  stranded=2.000 lp=None  slot=BL(1,0)
+[18:58:17]   -> nodes=5 lps=4 lp_wall=587.2s (flat-900 314.3s) cert=0s 0P/0F logic=0 chain=0 killed=False open=6
+[18:58:17] == k0_l1_105 (L1 k0_00 tau0=10.000000 conv=False)
+[18:58:17]   R              root  d0  SPLIT on (1.4714, 2.5359, 28.50 deg) r=0.1000 rho=10.00  stranded=2.000 lp=None  slot=TL(1,1) (non-simple tilt)
+[19:06:16]   RY             YES   d1  LP stage2 tau=9.000000 eta=+0.000000 conv=True (464s = 260+204; flat-900 would be 464s)
+[19:06:16]   RY             YES   d1  ALIVE (knife edge)
+[19:06:16]   RY             YES   d1  SPLIT on (1.4730, 1.5925, 82.50 deg) r=0.0500 rho=5.00  stranded=2.000 lp=None  slot=BL(1,1) (non-simple tilt)
+[19:10:41]   RN             NO    d1  LP stage1 tau=10.000000 eta=-0.000000 conv=False (250s = 250+0; flat-900 would be 900s)
+[19:10:41]   RN             NO    d1  ALIVE (knife edge)
+[19:10:41]   RN             NO    d1  SPLIT on (1.3210, 1.4110, 58.50 deg) r=0.0500 rho=5.00  stranded=3.000 lp=None  slot=BL(1,1) (non-simple tilt)
+[19:10:41]   -> nodes=3 lps=2 lp_wall=714.3s (flat-900 1364.0s) cert=0s 0P/0F logic=0 chain=0 killed=False open=4
+[19:10:41] == k0_l1_088 (L1 k0_00 tau0=10.206035 conv=False)
+[19:10:42]   R              root  d0  SPLIT on (1.4001, 1.3981, 65.25 deg) r=0.1000 rho=10.00  stranded=2.859 lp=None  slot=BL(1,1) (non-simple tilt)
+[19:13:13]   RY             YES   d1  LP stage2 tau=10.000000 eta=+1.000000 conv=True (136s = 115+21; flat-900 would be 115s)
+[19:13:13]   RY             YES   d1  ALIVE
+[19:13:13]   RY             YES   d1  SPLIT on (1.3523, 2.5214, 42.75 deg) r=0.0500 rho=5.00  stranded=2.000 lp=None  slot=TL(1,1) (non-simple tilt)
+[19:20:56]   RN             NO    d1  LP stage2 tau=10.333333 eta=+0.333333 conv=False (447s = 255+192; flat-900 would be 447s)
+[19:20:56]   RN             NO    d1  ALIVE
+[19:20:56]   RN             NO    d1  SPLIT on (1.4362, 1.4158, 75.00 deg) r=0.0500 rho=5.00  stranded=3.667 lp=None  slot=BL(1,1) (non-simple tilt)
+[19:20:56]   -> nodes=3 lps=2 lp_wall=583.4s (flat-900 562.5s) cert=0s 0P/0F logic=0 chain=0 killed=False open=4
+[19:20:56] A112 k0/hybrid shard 0/2 done

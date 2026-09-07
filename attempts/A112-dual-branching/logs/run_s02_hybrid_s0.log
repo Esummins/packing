@@ -1,0 +1,113 @@
+[16:08:38] A112 s02 / hybrid : 9 regions (shard 0/2), wall 900s each, LP cap 900s
+[16:08:38] == k5_11_interior_Y0054_D00 (L2 k5_11 tau0=5.000000 conv=False)
+[16:08:39]   R              root  d0  SPLIT on (2.6072, 2.4462, 50.44 deg) r=0.1000 rho=10.00  stranded=2.000 lp=f3
+[16:10:19]   RY             YES   d1  LP stage2 tau=4.000000 eta=-0.000000 conv=True (85s = 81+3; flat-900 would be 81s)
+[16:10:19]   RY             YES   d1  ALIVE (knife edge)
+[16:10:19]   RY             YES   d1  SPLIT on (1.3219, 2.5109, 36.75 deg) r=0.0500 rho=5.00  stranded=2.000 lp=f1
+[16:12:25]   RN             NO    d1  LP stage1 tau=4.000000 eta=-1.000000 conv=True (112s = 112+0; flat-900 would be 112s)
+[16:12:42]     cert RN                                             PASS (2s)
+[16:13:02]   RYY            YES   d2  LP stage2 tau=3.000000 eta=+0.000000 conv=True (6s = 4+2; flat-900 would be 4s)
+[16:13:02]   RYY            YES   d2  ALIVE (knife edge)
+[16:13:02]   RYY            YES   d2  SPLIT on (3.3771, 1.6508, 0.00 deg) r=0.0250 rho=2.50  stranded=2.000 lp=BR(0,1)
+[16:13:46]   RYN            NO    d2  LP stage2 tau=4.000000 eta=-0.000000 conv=True (29s = 26+3; flat-900 would be 26s)
+[16:13:46]   RYN            NO    d2  ALIVE (knife edge)
+[16:13:46]   RYN            NO    d2  SPLIT on (2.0084, 3.1700, 44.25 deg) r=0.0250 rho=2.50  stranded=2.000 lp=f2
+[16:14:06]   RYYY           YES   d3  LP stage2 tau=2.000000 eta=+0.000000 conv=True (5s = 2+2; flat-900 would be 2s)
+[16:14:06]   RYYY           YES   d3  ALIVE (knife edge)
+[16:14:06]   RYYY           YES   d3  SPLIT on (3.3771, 3.1853, 0.00 deg) r=0.0125 rho=1.25  stranded=2.000 lp=TR(0,0)
+[16:14:39]   RYYN           NO    d3  LP stage2 tau=3.000000 eta=+0.000000 conv=True (18s = 15+3; flat-900 would be 15s)
+[16:14:39]   RYYN           NO    d3  ALIVE (knife edge)
+[16:14:39]   RYYN           NO    d3  SPLIT on (3.1936, 1.4900, 0.00 deg) r=0.0125 rho=1.25  stranded=2.000 lp=BR(0,1)
+[16:14:57]   RYNY           YES   d3  LP stage2 tau=3.000000 eta=+0.000000 conv=True (3s = 2+1; flat-900 would be 2s)
+[16:14:57]   RYNY           YES   d3  ALIVE (knife edge)
+[16:14:57]   RYNY           YES   d3  SPLIT on (3.2190, 1.4979, 1.50 deg) r=0.0125 rho=1.25  stranded=2.000 lp=BR(0,1)
+[16:14:57]   -> nodes=8 lps=7 lp_wall=255.9s (flat-900 242.0s) cert=1.5s 1P/0F logic=0 chain=0 killed=False open=7
+[16:14:57] == k5_11_interior_Y0738_D00 (L2 k5_11 tau0=4.818182 conv=False)
+[16:14:57]   R              root  d0  SPLIT on (3.1853, 1.6508, 0.00 deg) r=0.1000 rho=10.00  stranded=2.432 lp=BR(0,1)
+[16:19:26]   RY             YES   d1  LP stage1 tau=3.750000 eta=-0.250000 conv=False (254s = 254+0; flat-900 would be 900s)
+[16:20:28]     cert RY                                             PASS (47s)
+[16:25:21]   RN             NO    d1  LP stage1 tau=4.818182 eta=-0.181818 conv=False (279s = 279+0; flat-900 would be 900s)
+[16:30:44]     cert RN                                             FAIL (308s)
+[16:30:44]   RN             NO    d1  ALIVE (certificate FAILed)
+[16:30:45]   RN             NO    d1  SPLIT on (2.6110, 2.4362, 45.00 deg) r=0.0500 rho=5.00  stranded=2.661 lp=f3
+[16:30:45]   -> nodes=3 lps=2 lp_wall=532.2s (flat-900 1800.0s) cert=355.1s 1P/1F logic=0 chain=0 killed=False open=2
+[16:30:45] == k5_11_interior_Y0036_D03_D04 (L3 k5_11 tau0=4.611111 conv=False)
+[16:30:45]   R              root  d0  DEAD-LOGIC (TRIM-EMPTY)
+[16:30:45]   -> nodes=1 lps=0 lp_wall=0.0s (flat-900 0.0s) cert=0s 0P/0F logic=1 chain=0 killed=True open=0
+[16:30:45] == k5_16_interior_Y0155_D03 (L2 k5_16 tau0=5.000000 conv=True)
+[16:30:45]   R              root  d0  DEAD-LOGIC (TRIM-EMPTY)
+[16:30:45]   -> nodes=1 lps=0 lp_wall=0.0s (flat-900 0.0s) cert=0s 0P/0F logic=1 chain=0 killed=True open=0
+[16:30:45] == k5_11_interior_Y0276_D05 (L2 k5_11 tau0=4.920000 conv=False)
+[16:30:45]   R              root  d0  DEAD-LOGIC (TRIM-EMPTY)
+[16:30:45]   -> nodes=1 lps=0 lp_wall=0.0s (flat-900 0.0s) cert=0s 0P/0F logic=1 chain=0 killed=True open=0
+[16:30:45] == k5_11_interior_Y0186_D00_D00 (L3 k5_11 tau0=5.000000 conv=False)
+[16:30:45]   R              root  d0  SPLIT on (2.5917, 2.4374, 49.50 deg) r=0.1000 rho=10.00  stranded=2.000 lp=f3
+[16:31:05]   RY             YES   d1  LP stage2 tau=4.000000 eta=+0.000000 conv=True (5s = 2+3; flat-900 would be 2s)
+[16:31:05]   RY             YES   d1  ALIVE (knife edge)
+[16:31:05]   RY             YES   d1  SPLIT on (3.3394, 1.6168, 4.50 deg) r=0.0500 rho=5.00  stranded=2.000 lp=BR(0,1)
+[16:35:22]   RN             NO    d1  LP stage1 tau=4.500000 eta=-0.500000 conv=False (242s = 242+0; flat-900 would be 900s)
+[16:35:46]     cert RN                                             PASS (9s)
+[16:36:17]   RYY            YES   d2  LP stage2 tau=3.000000 eta=+0.000000 conv=True (16s = 14+2; flat-900 would be 14s)
+[16:36:17]   RYY            YES   d2  ALIVE (knife edge)
+[16:36:17]   RYY            YES   d2  SPLIT on (3.1037, 3.2979, 80.00 deg) r=0.0250 rho=2.50  stranded=2.000 lp=TR(0,0)
+[16:36:49]   RYN            NO    d2  LP stage2 tau=4.000000 eta=+0.000000 conv=True (17s = 3+14; flat-900 would be 3s)
+[16:36:49]   RYN            NO    d2  ALIVE (knife edge)
+[16:36:49]   RYN            NO    d2  SPLIT on (3.3706, 1.4971, 0.75 deg) r=0.0250 rho=2.50  stranded=2.000 lp=BR(0,1)
+[16:37:07]   RYYY           YES   d3  LP stage2 tau=2.000000 eta=+0.000000 conv=True (3s = 1+1; flat-900 would be 1s)
+[16:37:07]   RYYY           YES   d3  ALIVE (knife edge)
+[16:37:07]   RYYY           YES   d3  SPLIT on (1.8126, 3.2601, 74.25 deg) r=0.0125 rho=1.25  stranded=2.000 lp=f2
+[16:37:39]   RYYN           NO    d3  LP stage2 tau=3.000000 eta=+0.000000 conv=True (17s = 3+15; flat-900 would be 3s)
+[16:37:39]   RYYN           NO    d3  ALIVE (knife edge)
+[16:37:39]   RYYN           NO    d3  SPLIT on (1.8386, 3.2694, 75.75 deg) r=0.0125 rho=1.25  stranded=2.000 lp=f2
+[16:38:10]   RYNY           YES   d3  LP stage2 tau=3.000000 eta=+0.000000 conv=True (16s = 2+14; flat-900 would be 2s)
+[16:38:10]   RYNY           YES   d3  ALIVE (knife edge)
+[16:38:10]   RYNY           YES   d3  SPLIT on (3.1037, 3.2979, 80.00 deg) r=0.0125 rho=1.25  stranded=2.000 lp=TR(0,0)
+[16:38:10]   -> nodes=8 lps=7 lp_wall=316.3s (flat-900 925.1s) cert=8.9s 1P/0F logic=0 chain=0 killed=False open=7
+[16:38:10] == k5_11_interior_Y0041_D02 (L2 k5_11 tau0=4.428571 conv=False)
+[16:38:10]   R              root  d0  DEAD-LOGIC (TC)
+[16:38:10]   -> nodes=1 lps=0 lp_wall=0.0s (flat-900 0.0s) cert=0s 0P/0F logic=1 chain=0 killed=True open=0
+[16:38:10] == k5_16_interior_Y0083_D03 (L2 k5_16 tau0=5.000000 conv=False)
+[16:38:10]   R              root  d0  SPLIT on (1.9445, 3.1709, 42.00 deg) r=0.1000 rho=10.00  stranded=2.000 lp=f2
+[16:38:30]   RY             YES   d1  LP stage2 tau=4.000000 eta=+0.000000 conv=True (5s = 3+2; flat-900 would be 3s)
+[16:38:30]   RY             YES   d1  ALIVE (knife edge)
+[16:38:30]   RY             YES   d1  SPLIT on (3.2193, 1.4965, 89.25 deg) r=0.0500 rho=5.00  stranded=2.000 lp=BR(0,1)
+[16:42:37]   RN             NO    d1  LP stage1 tau=4.500000 eta=-0.500000 conv=True (232s = 232+0; flat-900 would be 232s)
+[16:43:29]     cert RN                                             PASS (38s)
+[16:43:47]   RYY            YES   d2  LP stage2 tau=3.000000 eta=+0.000000 conv=True (3s = 1+1; flat-900 would be 1s)
+[16:43:47]   RYY            YES   d2  ALIVE (knife edge)
+[16:43:47]   RYY            YES   d2  SPLIT on (2.6049, 2.4203, 41.25 deg) r=0.0250 rho=2.50  stranded=2.000 lp=f3
+[16:44:07]   RYN            NO    d2  LP stage2 tau=4.000000 eta=+0.000000 conv=True (4s = 2+2; flat-900 would be 2s)
+[16:44:07]   RYN            NO    d2  ALIVE (knife edge)
+[16:44:07]   RYN            NO    d2  SPLIT on (3.3706, 1.5001, 89.25 deg) r=0.0250 rho=2.50  stranded=2.000 lp=BR(0,1)
+[16:44:07]   RYYY           YES   d3  DEAD-LOGIC (TC)
+[16:44:26]   RYYN           NO    d3  LP stage2 tau=3.000000 eta=+0.000000 conv=True (4s = 2+2; flat-900 would be 2s)
+[16:44:26]   RYYN           NO    d3  ALIVE (knife edge)
+[16:44:26]   RYYN           NO    d3  SPLIT on (1.2976, 2.4913, 33.75 deg) r=0.0125 rho=1.25  stranded=2.000 lp=f1
+[16:44:45]   RYNY           YES   d3  LP stage2 tau=3.000000 eta=+0.000000 conv=True (4s = 2+2; flat-900 would be 2s)
+[16:44:45]   RYNY           YES   d3  ALIVE (knife edge)
+[16:44:46]   RYNY           YES   d3  SPLIT on (2.6146, 2.4214, 60.00 deg) r=0.0125 rho=1.25  stranded=2.000 lp=f3
+[16:44:46]   -> nodes=8 lps=6 lp_wall=252.2s (flat-900 242.8s) cert=37.8s 1P/0F logic=1 chain=0 killed=False open=5
+[16:44:46] == k5_11_interior_Y0036_D07_D03 (L3 k5_11 tau0=4.166667 conv=False)
+[16:44:46]   R              root  d0  SPLIT on (2.6313, 2.4133, 38.25 deg) r=0.1000 rho=10.00  stranded=2.167 lp=f3
+[16:45:29]   RY             YES   d1  LP stage2 tau=4.000000 eta=+0.000000 conv=True (29s = 15+14; flat-900 would be 15s)
+[16:45:29]   RY             YES   d1  ALIVE (knife edge)
+[16:45:29]   RY             YES   d1  SPLIT on (1.3424, 2.4894, 21.75 deg) r=0.0500 rho=5.00  stranded=1.500 lp=f1
+[16:47:13]   RN             NO    d1  LP stage1 tau=4.000000 eta=-1.000000 conv=True (89s = 89+0; flat-900 would be 89s)
+[16:47:30]     cert RN                                             PASS (2s)
+[16:47:49]   RYY            YES   d2  LP stage2 tau=3.000000 eta=+0.000000 conv=True (4s = 2+2; flat-900 would be 2s)
+[16:47:49]   RYY            YES   d2  ALIVE (knife edge)
+[16:47:49]   RYY            YES   d2  SPLIT on (2.0384, 3.2362, 20.00 deg) r=0.0250 rho=2.50  stranded=2.000 lp=f2
+[16:48:09]   RYN            NO    d2  LP stage2 tau=4.000000 eta=-0.000000 conv=True (6s = 2+4; flat-900 would be 2s)
+[16:48:09]   RYN            NO    d2  ALIVE (knife edge)
+[16:48:09]   RYN            NO    d2  SPLIT on (1.3209, 2.5120, 37.50 deg) r=0.0250 rho=2.50  stranded=2.000 lp=f1
+[16:48:27]   RYYY           YES   d3  LP stage2 tau=2.000000 eta=+0.000000 conv=True (3s = 2+2; flat-900 would be 2s)
+[16:48:27]   RYYY           YES   d3  ALIVE (knife edge)
+[16:48:28]   RYYY           YES   d3  SPLIT on (3.3771, 1.6508, 0.00 deg) r=0.0125 rho=1.25  stranded=2.000 lp=BR(0,1)
+[16:48:48]   RYYN           NO    d3  LP stage2 tau=3.000000 eta=+0.000000 conv=True (5s = 3+2; flat-900 would be 3s)
+[16:48:48]   RYYN           NO    d3  ALIVE (knife edge)
+[16:48:48]   RYYN           NO    d3  SPLIT on (3.3771, 3.1853, 0.00 deg) r=0.0125 rho=1.25  stranded=2.000 lp=TR(0,0)
+[16:49:21]   RYNY           YES   d3  LP stage2 tau=3.000000 eta=+0.000000 conv=True (18s = 16+3; flat-900 would be 16s)
+[16:49:21]   RYNY           YES   d3  ALIVE (knife edge)
+[16:49:21]   RYNY           YES   d3  SPLIT on (3.1853, 3.3771, 0.00 deg) r=0.0125 rho=1.25  stranded=2.333 lp=TR(0,0)
+[16:49:21]   -> nodes=8 lps=7 lp_wall=153.4s (flat-900 128.1s) cert=1.6s 1P/0F logic=0 chain=0 killed=False open=7
+[16:49:21] A112 s02/hybrid shard 0/2 done
