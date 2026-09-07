@@ -3750,3 +3750,61 @@ writes a `_k0`-suffixed result file).
   frozen verifiers byte-identical (sha256 in every record file), A57/A96 paused and untouched, A61's
   campaign (k5_13), A111 and A107 untouched. Records are resumable per class: attempts/A114-window-closers/
   results/<class>.json (stage cache), notes/lemmas.md L1-L5.
+
+## 2026-09-06 — A115-k0-corner-rows (Opus chore) — done-negative
+
+**Question (BRIEF).** A107 Part II found that K01 — "a corner or slot left empty or singly met" — explains
+84 of the 217 alive k0_00 cells. A92 built the crowd certificate (Lemma CW) for the ROOT and it refused at
+δ ≤ 0.1. Do Lemma CW's corner incidence rows, added to the NODE LP where the box is small, kill those cells?
+
+**Verdict.** No. Over 36 K01 cells (32 stratified over the four corners × levels 1–3, plus 4) × δ ∈ {0, 0.05,
+0.1} = 108 LPs, the two-run frozen certificate passes on **2** of the 11 cells it was attempted on, and the
+attribution control (same cell, same 240 s LP wall, rows removed) shows only **one** of those is the rows'
+doing — `l3_pp65_111_000` at δ = 0, a level-3 cell worth 0.7–1.6 CPU-h. **Zero** of the cells genuinely alive
+at the LP (η₀ = τ₀ − budget₀ ≥ 0) died at any δ.
+
+**Why, and it is not A109's reason.** A109's slot rows died of multiplicity (one placement meeting two or
+three slot boxes at once). That is *impossible* here: the four widened corner boxes are s0 − 2a_w = 1.826 >
+√2 apart, so a unit square carries at most ONE corner incidence, r_max ∈ {0,1}, and the node budget
+B = 8 − Σ r_max ∈ {7,8} is exact. The rows fail for the opposite reason — **the guaranteed budget 8 is below
+what a packing at s0 achieves for free**:
+
+* EXACT (`results/trump_family_counts.json`): every D4 image of Trump realises **nine** corner incidences at
+  a_w(0) = 1.025520, per-corner counts 3/2/2/2 — its tangent squares sit at μ_c = 1 exactly, inside the
+  K0-WIDEN box. So at δ = 0 the achievable crowd mass is ≥ 9 > 8 = B and **the ROOT crowd LP can never pass
+  at δ = 0**; the node level is the only level at which the question is even askable. At δ = 0.05 / 0.1 no
+  image realises it (counts 1/1/2/1, total 5), so the canary is vacuous there and the refusal is the LP's.
+* MEASURED: the LP's own fractional packing realises c = (τ − τ₀)/e ≥ B in **100 of 101** runs (mean c =
+  9.60 / 9.23 / 8.68 at δ = 0 / 0.05 / 0.1 against mean B = 7.21). τ(e) is the optimum of an LP whose rhs is
+  affine in e, hence convex, so c(e) is non-decreasing and a kill needs c(e) < B — **no e can kill them**.
+
+**T1 (the "room" is not empty).** All four corner cells of all 84 K01 shadows are met; the room is always a
+single DEEP meeter, never an empty corner: TL singly met in 70 of 84, BL 57, TR 50, BR 35, and the meeter
+that is there has depth ≥ 0.30 in 296 of 486 incidences (< 0.05 in only 88). That is exactly the K0-FREE
+teleport hypothesis (a corner met by ≤ 1 square ⇒ the packing teleports into k1_00), and it is *not*
+something a crowd-weighted row can price: the crowd rows charge the SECOND meeter, and the K01 supports have
+none at three or four corners.
+
+**Trump canary PASS.** All three A38 Trump-image cells (l1 idx 21/152/153) survive at δ = 0 — the only δ at
+which Trump realises the corner-crowd hypothesis — and at δ = 0.05. node_021 is an uncertified LP kill
+candidate at δ = 0.1, where Trump does *not* realise the hypothesis, so a kill there would be sound.
+
+**Price.** 224 s per (cell, δ) corner-row re-solve (median 254, max 1241), 410 s per two-run certification,
+against a 469 s mean for the same cell's original k0 node LP. One corner-row pass over all 216 level-1 cells
+at one δ = 13.4 CPU-h; a certified level-1 kill would be worth 43–100 CPU-h, but none occurred. Net **−13
+CPU-h** on A99's 9,341–21,661 CPU-h frontier. Lean shape, had it worked: nothing new — a certified node is
+the ordinary A92 two-run certificate of `k0_blocked_side.md` §2.4 with the node's own cores written into both
+files and n = 11 + eB, budget = n − #cores; the only mathematics on top of the two frozen-verifier PASSes is
+Lemma CW's one paragraph, already Lean-proved as `crowd_sound` (A93, `Crowd.lean`).
+
+**Incidental (positive).** For `l2_p95_001` the corner-row certificate passed AND the plain control passed —
+i.e. A99's own node certificate closes that cell after a 280 s warm re-solve, without any new mathematics.
+Two of the 36 cells behave that way; a plain warm-re-solve pass over A99's open cells is a cheaper thing to
+try than corner rows.
+
+**Discipline.** READ-ONLY on A38/A85/A92/A99/A107/A113 and on A61/A96/A112/A114 (every node json copied to
+`results/nodes/<nid>.src.json` first); A92 engine copied verbatim; `verify_case.py` byte-identical
+(sha256 521cb01f…); ≤ 2 BLAS-pinned processes with the 6144 MB commit / 3 GB physical gate before every LP
+and certification; one resumable record per (cell, δ, e); nothing deleted (no `rm`/`rmtree` anywhere);
+`PYTHONDONTWRITEBYTECODE=1` after the first pass. Writes: `attempts/A115-k0-corner-rows/**`, the registry
+row, this entry, one note on depgraph `K0.CW`.

@@ -1,0 +1,12 @@
+[17:56:11] [control] l2_p95_001 (from l2_p95_001__d0.1__e1o8): tau0=9.00000 budget0=10 conv0=False
+[17:58:24]   ctrlA l2_p95_001 tau=9.00000 conv=False total=9.97700 (< 10) -> rc=1
+[17:58:24]     | boxes = 2547986  covered = 1272999  vacuous = 0  exempt = 931 (core 931, nofam 0)  split = 1274024  exact atom checks = 1273896  max depth = 56  time = 113.1s ; FAIL: 32 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 19 undecided at this depth  [stopped at --max-witnesses]
+[18:03:05]   ctrlB l2_p95_001 tau=9.00000 conv=False total=9.97700 (< 10) -> rc=0
+[18:03:05]     | boxes = 24494  covered = 11661  vacuous = 0  exempt = 618 (core 618, nofam 0)  split = 12215  exact atom checks = 11661  max depth = 28  time = 0.8s ; PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 2494251/250000 < budget 10  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+[18:03:05]   => l2_p95_001 ctrlA=FAIL ctrlB=PASS (plain re-solve tau=9.00000 conv=False, 280 s)
+[18:03:05] [control] l3_pp65_111_000 (from l3_pp65_111_000__d0__e1o8): tau0=9.00000 budget0=10 conv0=False
+[18:03:26]   ctrlA l3_pp65_111_000 tau=9.00000 conv=False total=9.97701 (< 10) -> rc=1
+[18:03:26]     | boxes = 7661  covered = 3742  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 3887  exact atom checks = 4067  max depth = 56  time = 0.3s ; FAIL: 32 witness boxes at depth 56: 11 HOLES (a placement with exact mass < 1), 8 tight (mass ok at samples but an atom on the boundary of Q), 13 undecided at this depth  [stopped at --max-witnesses]
+[18:07:45]   ctrlB l3_pp65_111_000 tau=9.00000 conv=False total=9.97702 (< 10) -> rc=1
+[18:07:45]     | boxes = 92995  covered = 46417  vacuous = 0  exempt = 0 (core 0, nofam 0)  split = 46546  exact atom checks = 50154  max depth = 56  time = 3.4s ; FAIL: 32 witness boxes at depth 56: 7 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 25 undecided at this depth  [stopped at --max-witnesses]
+[18:07:45]   => l3_pp65_111_000 ctrlA=FAIL ctrlB=FAIL (plain re-solve tau=9.00000 conv=False, 256 s)

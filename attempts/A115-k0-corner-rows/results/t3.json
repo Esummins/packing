@@ -1,0 +1,138 @@
+{
+ "n_runs": 108,
+ "n_cells": 36,
+ "n_in_plan": 32,
+ "canary": [
+  "node_021",
+  "node_152",
+  "node_153"
+ ],
+ "cfg": {
+  "d0": {
+   "n": 36,
+   "a_w": 1.02552,
+   "mean_B": 7.138888888888889,
+   "mean_c": 9.595741084716085,
+   "c_ge_B": 34,
+   "c_known": 34,
+   "mean_eta": -0.35523898237608703,
+   "mean_eta0": -0.7342310675277217,
+   "kill_cand": 20,
+   "knife": 0,
+   "alive": 16,
+   "attributable_cand": 0,
+   "converged": 1,
+   "mean_lp_s": 199.23611111111111,
+   "median_lp_s": 257.85,
+   "max_lp_s": 416.0,
+   "certified": 1,
+   "cert_attempted": 4,
+   "mean_cert_s": 352.475
+  },
+  "d0.05": {
+   "n": 36,
+   "a_w": 0.97477,
+   "mean_B": 7.222222222222222,
+   "mean_c": 9.228916773846084,
+   "c_ge_B": 34,
+   "c_known": 34,
+   "mean_eta": -0.41911241768365837,
+   "mean_eta0": -0.7342310675277217,
+   "kill_cand": 20,
+   "knife": 0,
+   "alive": 16,
+   "attributable_cand": 0,
+   "converged": 0,
+   "mean_lp_s": 200.1,
+   "median_lp_s": 254.0,
+   "max_lp_s": 414.3,
+   "certified": 0,
+   "cert_attempted": 3,
+   "mean_cert_s": 371.8666666666667
+  },
+  "d0.1": {
+   "n": 35,
+   "a_w": 0.92402,
+   "mean_B": 7.257142857142857,
+   "mean_c": 8.67665029384216,
+   "c_ge_B": 32,
+   "c_known": 33,
+   "mean_eta": -0.48832595770281595,
+   "mean_eta0": -0.7187489679562106,
+   "kill_cand": 23,
+   "knife": 0,
+   "alive": 12,
+   "attributable_cand": 0,
+   "converged": 2,
+   "mean_lp_s": 273.95714285714286,
+   "median_lp_s": 254.4,
+   "max_lp_s": 1240.7,
+   "certified": 1,
+   "cert_attempted": 4,
+   "mean_cert_s": 495.1
+  }
+ },
+ "price": {
+  "mean_lp_s_per_cell_cfg": 224.0,
+  "median_lp_s": 254.3,
+  "mean_cert_s": 409.6,
+  "n_cert": 11,
+  "certified": 2,
+  "cert_rate": 0.182,
+  "root_deploy_one_cfg_cpu_h": 13.44,
+  "root_deploy_all_cfg_cpu_h": 40.31
+ },
+ "projection": {
+  "n_level1": 216,
+  "frontier_cpu_h": [
+   9341.0,
+   21661.0
+  ],
+  "gain_per_certified_level1_kill_cpu_h": [
+   43.2,
+   100.3
+  ],
+  "certified_level1_kills": 0,
+  "net_cpu_h": [
+   -13.4,
+   -13.4
+  ],
+  "gain_per_certified_kill_cpu_h_by_level": {
+   "1": [
+    43.25,
+    100.28
+   ],
+   "2": [
+    5.41,
+    12.54
+   ],
+   "3": [
+    0.68,
+    1.57
+   ]
+  },
+  "net_cpu_h_attributable": [
+   -12.76,
+   -11.87
+  ]
+ },
+ "certified": [
+  {
+   "tag": "l2_p95_001__d0.1__e1o8",
+   "nid": "l2_p95_001",
+   "level": 2,
+   "ctrlA": "FAIL",
+   "ctrlB": "PASS",
+   "attributable": false
+  },
+  {
+   "tag": "l3_pp65_111_000__d0__e1o8",
+   "nid": "l3_pp65_111_000",
+   "level": 3,
+   "ctrlA": "FAIL",
+   "ctrlB": "FAIL",
+   "attributable": true
+  }
+ ],
+ "attributable_certified": 1
+}
