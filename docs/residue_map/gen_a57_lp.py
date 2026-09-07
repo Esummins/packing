@@ -72,6 +72,14 @@ def panel(ox, oy, nid, node, row):
         out.append(f'<polygon points="{pts}" fill="hsl({hue},70%,45%)" fill-opacity="{op:.2f}" stroke="hsl({hue},70%,30%)" stroke-width="0.8"/>')
     if box:
         out.append(f'<rect x="{ox+box["x0"]*S:.1f}" y="{oy-box["y1"]*S:.1f}" width="{(box["x1"]-box["x0"])*S:.1f}" height="{(box["y1"]-box["y0"])*S:.1f}" fill="none" stroke="#000" stroke-width="2"/>')
+        # PI (2026-09-07): draw one example hypothesis square at the CENTRE of the box and the CENTRE of the tilt
+        # window being checked (cyan, heavy outline, 'H'), so the drawn tilt is the one the node actually tests.
+        hx, hy = 0.5*(box['x0']+box['x1']), 0.5*(box['y0']+box['y1'])
+        hth = math.radians(0.5*(float(box.get('th0', 0.0)) + float(box.get('th1', 0.0))))
+        Ph = sq(hx, hy, hth); pts = ' '.join(f'{ox+x*S:.1f},{oy-y*S:.1f}' for x, y in Ph)
+        out.append(f'<polygon points="{pts}" fill="#00e5ff" fill-opacity="0.35" stroke="#000" stroke-width="2.5"/>')
+        out.append(text(ox+hx*S, oy-hy*S+4, 'H', 11, '#000', True, 'middle'))
+        out.append(text(ox+hx*S, oy-hy*S+16, f'{math.degrees(hth):.1f}°', 8, '#000', False, 'middle'))
     # weight table: top placements
     top = sorted(pk, key=lambda p: -float(p.get('y', 0)))[:8]
     out.append(text(ox, oy + 16, 'top weights: ' + '; '.join(f'({float(p["cx"]):.2f},{float(p["cy"]):.2f},{math.degrees(float(p["theta"]))%90:.0f}°) {float(p.get("y",0)):.2f}' for p in top), 8.5, '#333'))
