@@ -135,6 +135,18 @@ the optimal five-square packing (2 + 1/√2) with a unit band = the s(10) optimu
 found room for ten and only fractional room for the eleventh). S08–S53: 1–17 nodes each, mostly level 1, the gallery
 has each drawn. With crowd rows out (1a), all of these die by splitting; the measured tail says that terminates.
 
+### 1c′. The PI's first pass over the gallery (review.csv, validated by A121 `4a3b0078`)
+83 rows, 219 items, 1,487 (node, cut) rows: **9 node kills, none new** (all A118's lane-count kills; corner cells take
+all nine). All 18 `r` readings exactly right; of 64 `ns` items 6 are genuine uncrowded near-snaps, 24 sit on their cell
+already (the gallery under-count, fixed in the v2 re-render), 28 are flush along a wall (A101's population), and the
+cell names are the identity fit over 784 relabellings. The `st4` token (four flush squares on one wall ⇒ side ≥ 4) is
+sound and kills S50/S52/S53 as configurations, not nodes. S34 is the same minimum as S33 (A122: ds 6·10⁻¹⁵), S35 is
+not (tilt 6.9° apart), S09 is not S05, S21 is a related near-Trump packing rather than S07. Seven grain rows have
+Fritz-John residuals above 10⁻³: nnls fits, not certified load paths. **The structural fact**: 81 of 83 right panels are
+rearrangements of their node's support, not snaps (two are tilt-only: S02, S07) — a reading is a pointer to a cell,
+never a fact about the node, and a node kill needs the lane test, which the node's own conditioned square blocks in
+every close case (6 misses at LANE ≤ 1, M = 1: S37/S38 TL(0,0), S40 BR(0,1), S42 TL(1,0)).
+
 ### 1d. The fractional tail (k5_11 151, k5_16 113)
 No integral component in the dual support; 303 of 306 top out at four disjoint placements of the five needed. Nothing
 to draw. These are what the tree is for, and they are mostly level 1 (110 + 106), i.e. cheap.
