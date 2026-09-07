@@ -215,3 +215,628 @@ hypotheses: 5 cores, 0 NO-families, budget = 6
 boxes = 671228  covered = 291422  vacuous = 0  exempt = 44224 (core 44224, nofam 0)  split = 335582  exact atom checks = 370812  max depth = 42  time = 26.3s
 PASS: every NON-EXEMPT closed unit square in [0,48938813/12800000]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 48938813/12800000 (~3.8233447656) satisfies the hypotheses (node DEAD)
   report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.gained0.d44.c2.hi.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 48938813/12800000 --shi 2448087087/640000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s1_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s1_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [48938813/12800000, 2448087087/640000000]  (~[3.823344766, 3.825136073], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 2448087087/640000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 2448087087/640000000 --shi 612308381/160000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s2_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s2_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [2448087087/640000000, 612308381/160000000]  (~[3.825136073, 3.826927381], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 2448087087/640000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 612308381/160000000 --shi 2450379961/640000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s3_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s3_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [612308381/160000000, 2450379961/640000000]  (~[3.826927381, 3.828718689], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 612308381/160000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 2450379961/640000000 --shi 1225763199/320000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s4_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s4_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [2450379961/640000000, 1225763199/320000000]  (~[3.828718689, 3.830509997], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 2450379961/640000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 1225763199/320000000 --shi 490534567/128000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s5_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s5_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [1225763199/320000000, 490534567/128000000]  (~[3.830509997, 3.832301305], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 1225763199/320000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 490534567/128000000 --shi 306727409/80000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s6_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s6_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [490534567/128000000, 306727409/80000000]  (~[3.832301305, 3.834092613], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 306727409/80000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 306727409/80000000 --shi 2454965709/640000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s7_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s7_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [306727409/80000000, 2454965709/640000000]  (~[3.834092613, 3.835883920], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 306727409/80000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 2454965709/640000000 --shi 1228056073/320000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s8_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s8_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [2454965709/640000000, 1228056073/320000000]  (~[3.835883920, 3.837675228], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 2454965709/640000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 1228056073/320000000 --shi 2457258583/640000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s9_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s9_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [1228056073/320000000, 2457258583/640000000]  (~[3.837675228, 3.839466536], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 1228056073/320000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 2457258583/640000000 --shi 122920251/32000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s10_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s10_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [2457258583/640000000, 122920251/32000000]  (~[3.839466536, 3.841257844], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 2457258583/640000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 122920251/32000000 --shi 2459551457/640000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s11_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s11_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [122920251/32000000, 2459551457/640000000]  (~[3.841257844, 3.843049152], width 0.001791308), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 793, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 716, in main
+    v0 = PVerifier(aff, weights, cores, slo, shi, margin=margin, depth=a.depth,
+                   tscale=F(a.tscale), sscale=F(a.sscale), use_float=use_float,
+                   max_witnesses=a.max_witnesses, verbose=verbose)
+  File "C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py", line 257, in __init__
+    raise ValueError(f"s endpoint {q} not on the grid")
+ValueError: s endpoint 2459551457/640000000 not on the grid
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 2459551457/640000000 --shi 1230348947/320000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s12_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G.s12_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 48938813/12800000 --shi 195846967/51200000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s1_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s1_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [48938813/12800000, 195846967/51200000]  (~[3.823344766, 3.825136074], width 0.001791309), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 15916976  covered = 7666595  vacuous = 5  exempt = 291920  split = 7958456  s-splits = 1436373  s-cells = 127  max depth = 48  max s-depth = 6  time = 639.8s
+PASS: for EVERY s in [48938813/12800000, 195846967/51200000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s1_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 195846967/51200000 --shi 97969341/25600000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s2_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s2_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [195846967/51200000, 97969341/25600000]  (~[3.825136074, 3.826927383], width 0.001791309), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 16079670  covered = 7737925  vacuous = 5  exempt = 301937  split = 8039803  s-splits = 1452148  s-cells = 127  max depth = 48  max s-depth = 6  time = 633.3s
+PASS: for EVERY s in [195846967/51200000, 97969341/25600000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s2_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 97969341/25600000 --shi 61259499/16000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s3_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s3_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [97969341/25600000, 61259499/16000000]  (~[3.826927383, 3.828718687], width 0.001791305), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 16252074  covered = 7813253  vacuous = 6  exempt = 312810  split = 8126005  s-splits = 1468237  s-cells = 127  max depth = 48  max s-depth = 6  time = 623.2s
+PASS: for EVERY s in [97969341/25600000, 61259499/16000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s3_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 61259499/16000000 --shi 980610559/256000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s4_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s4_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [61259499/16000000, 980610559/256000000]  (~[3.828718687, 3.830509996], width 0.001791309), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 16444432  covered = 7893015  vacuous = 6  exempt = 329227  split = 8222184  s-splits = 1489514  s-cells = 127  max depth = 48  max s-depth = 6  time = 632.2s
+PASS: for EVERY s in [61259499/16000000, 980610559/256000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s4_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 980610559/256000000 --shi 490534567/128000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s5_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s5_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [980610559/256000000, 490534567/128000000]  (~[3.830509996, 3.832301305], width 0.001791309), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 16582596  covered = 7958934  vacuous = 6  exempt = 332390  split = 8291266  s-splits = 1502132  s-cells = 127  max depth = 48  max s-depth = 6  time = 593.0s
+PASS: for EVERY s in [980610559/256000000, 490534567/128000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s5_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 490534567/128000000 --shi 981527709/256000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s6_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s6_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [490534567/128000000, 981527709/256000000]  (~[3.832301305, 3.834092613], width 0.001791309), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 16706162  covered = 8017963  vacuous = 6  exempt = 335144  split = 8353049  s-splits = 1516934  s-cells = 127  max depth = 48  max s-depth = 6  time = 574.5s
+PASS: for EVERY s in [490534567/128000000, 981527709/256000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s6_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 981527709/256000000 --shi 245496571/64000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s7_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s7_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [981527709/256000000, 245496571/64000000]  (~[3.834092613, 3.835883922], width 0.001791309), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 16879382  covered = 8095002  vacuous = 16  exempt = 344705  split = 8439659  s-splits = 1534988  s-cells = 127  max depth = 48  max s-depth = 6  time = 676.7s
+PASS: for EVERY s in [981527709/256000000, 245496571/64000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s7_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 245496571/64000000 --shi 491222429/128000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s8_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s8_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [245496571/64000000, 491222429/128000000]  (~[3.835883922, 3.837675227], width 0.001791305), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17064836  covered = 8176742  vacuous = 15  exempt = 355693  split = 8532386  s-splits = 1553479  s-cells = 127  max depth = 48  max s-depth = 6  time = 721.3s
+PASS: for EVERY s in [245496571/64000000, 491222429/128000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s8_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 491222429/128000000 --shi 982903433/256000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s9_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s9_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [491222429/128000000, 982903433/256000000]  (~[3.837675227, 3.839466535], width 0.001791309), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17218084  covered = 8250252  vacuous = 15  exempt = 358807  split = 8609010  s-splits = 1568437  s-cells = 127  max depth = 48  max s-depth = 6  time = 821.0s
+PASS: for EVERY s in [491222429/128000000, 982903433/256000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s9_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 982903433/256000000 --shi 122920251/32000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s10_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s10_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [982903433/256000000, 122920251/32000000]  (~[3.839466535, 3.841257844], width 0.001791309), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17362508  covered = 8320797  vacuous = 22  exempt = 360467  split = 8681222  s-splits = 1581351  s-cells = 127  max depth = 48  max s-depth = 6  time = 930.4s
+PASS: for EVERY s in [982903433/256000000, 122920251/32000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s10_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 122920251/32000000 --shi 983820583/256000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s11_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G2.s11_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 7753/2000 --shi 3877/1000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\P2.s1_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\P2.s1_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [7753/2000, 3877/1000]  (~[3.876500000, 3.877000000], width 0.000500000), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 8072010  covered = 3689544  vacuous = 0  exempt = 346493  split = 4035973  s-splits = 749549  s-cells = 63  max depth = 47  max s-depth = 5  time = 439.1s
+PASS: for EVERY s in [7753/2000, 3877/1000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\P2.s1_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.lo.json
+specialised k5_03 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.lo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.lo.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.lo.report.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.lo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 653310  covered = 284534  vacuous = 0  exempt = 42153 (core 42153, nofam 0)  split = 326623  exact atom checks = 362224  max depth = 42  time = 33.8s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.lo.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --s 97834813/25600000 -o C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.mid.json
+specialised k5_03 at s = 97834813/25600000 (~3.821672383) -> C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.mid.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.mid.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.mid.report.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.mid.json
+s = 97834813/25600000 (~3.8216723828), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 665004  covered = 288391  vacuous = 0  exempt = 44143 (core 44143, nofam 0)  split = 332470  exact atom checks = 367597  max depth = 42  time = 34.7s
+PASS: every NON-EXEMPT closed unit square in [0,97834813/25600000]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 97834813/25600000 (~3.8216723828) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.mid.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 122920251/32000000 --shi 491870941/128000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s1_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s1_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [122920251/32000000, 491870941/128000000]  (~[3.841257844, 3.842741727], width 0.001483883), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 16732500  covered = 8016816  vacuous = 2  exempt = 349464  split = 8366218  s-splits = 1484170  s-cells = 127  max depth = 48  max s-depth = 6  time = 922.4s
+PASS: for EVERY s in [122920251/32000000, 491870941/128000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s1_d48.report.json
+7656), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 671228  covered = 291422  vacuous = 0  exempt = 44224 (core 44224, nofam 0)  split = 335582  exact atom checks = 370812  max depth = 42  time = 36.0s
+PASS: every NON-EXEMPT closed unit square in [0,48938813/12800000]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 48938813/12800000 (~3.8233447656) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.823345.d44.c2.hi.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --s 7753/2000 -o C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.lo.json
+specialised k5_03 at s = 7753/2000 (~3.876500000) -> C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.lo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.lo.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.lo.report.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.lo.json
+s = 7753/2000 (~3.8765000000), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 1301380  covered = 517895  vacuous = 0  exempt = 132827 (core 132827, nofam 0)  split = 650658  exact atom checks = 655503  max depth = 42  time = 74.2s
+PASS: every NON-EXEMPT closed unit square in [0,7753/2000]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 7753/2000 (~3.8765000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.lo.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --s 15507/4000 -o C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.mid.json
+specialised k5_03 at s = 15507/4000 (~3.876750000) -> C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.mid.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.mid.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.mid.report.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.mid.json
+s = 15507/4000 (~3.8767500000), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 1390984  covered = 555093  vacuous = 0  exempt = 140431 (core 140431, nofam 0)  split = 695460  exact atom checks = 694901  max depth = 42  time = 79.9s
+PASS: every NON-EXEMPT closed unit square in [0,15507/4000]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 15507/4000 (~3.8767500000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.mid.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --s 3877/1000 -o C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.hi.json
+specialised k5_03 at s = 3877/1000 (~3.877000000) -> C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.hi.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.hi.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.hi.report.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.hi.json
+s = 3877/1000 (~3.8770000000), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 1522656  covered = 612813  vacuous = 0  exempt = 148547 (core 148547, nofam 0)  split = 761296  exact atom checks = 755491  max depth = 42  time = 87.3s
+PASS: every NON-EXEMPT closed unit square in [0,3877/1000]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 3877/1000 (~3.8770000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.876500_3.877000.d44.c2.hi.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 491870941/128000000 --shi 984121757/256000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s2_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s2_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [491870941/128000000, 984121757/256000000]  (~[3.842741727, 3.844225613], width 0.001483887), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 16855784  covered = 8077117  vacuous = 1  exempt = 350806  split = 8427860  s-splits = 1495642  s-cells = 127  max depth = 48  max s-depth = 6  time = 1010.7s
+PASS: for EVERY s in [491870941/128000000, 984121757/256000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s2_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 984121757/256000000 --shi 7691419/2000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s3_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s3_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [984121757/256000000, 7691419/2000000]  (~[3.844225613, 3.845709500], width 0.001483887), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17013816  covered = 8141479  vacuous = 1  exempt = 365460  split = 8506876  s-splits = 1510682  s-cells = 127  max depth = 48  max s-depth = 6  time = 1277.1s
+PASS: for EVERY s in [984121757/256000000, 7691419/2000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s3_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 7691419/2000000 --shi 492440753/128000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s4_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s4_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [7691419/2000000, 492440753/128000000]  (~[3.845709500, 3.847193383], width 0.001483883), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17138148  covered = 8204035  vacuous = 1  exempt = 365070  split = 8569042  s-splits = 1522845  s-cells = 127  max depth = 48  max s-depth = 6  time = 1219.2s
+PASS: for EVERY s in [7691419/2000000, 492440753/128000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s4_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 492440753/128000000 --shi 49263069/12800000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s5_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s5_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [492440753/128000000, 49263069/12800000]  (~[3.847193383, 3.848677266], width 0.001483883), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17275138  covered = 8269011  vacuous = 1  exempt = 368589  split = 8637537  s-splits = 1536080  s-cells = 127  max depth = 48  max s-depth = 6  time = 1208.8s
+PASS: for EVERY s in [492440753/128000000, 49263069/12800000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s5_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 49263069/12800000 --shi 197128251/51200000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s6_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s6_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [49263069/12800000, 197128251/51200000]  (~[3.848677266, 3.850161152], width 0.001483887), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17400090  covered = 8326430  vacuous = 1  exempt = 373646  split = 8700013  s-splits = 1547390  s-cells = 127  max depth = 48  max s-depth = 6  time = 1239.0s
+PASS: for EVERY s in [49263069/12800000, 197128251/51200000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s6_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 197128251/51200000 --shi 98602113/25600000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s7_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s7_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [197128251/51200000, 98602113/25600000]  (~[3.850161152, 3.851645039], width 0.001483887), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17532886  covered = 8389980  vacuous = 1  exempt = 376494  split = 8766411  s-splits = 1560465  s-cells = 127  max depth = 48  max s-depth = 6  time = 821.2s
+PASS: for EVERY s in [197128251/51200000, 98602113/25600000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s7_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 98602113/25600000 --shi 246600251/64000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s8_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s8_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [98602113/25600000, 246600251/64000000]  (~[3.851645039, 3.853128922], width 0.001483883), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17685728  covered = 8456067  vacuous = 1  exempt = 386828  split = 8842832  s-splits = 1575547  s-cells = 127  max depth = 48  max s-depth = 6  time = 904.2s
+PASS: for EVERY s in [98602113/25600000, 246600251/64000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s8_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 246600251/64000000 --shi 493390439/128000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s9_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s9_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [246600251/64000000, 493390439/128000000]  (~[3.853128922, 3.854612805], width 0.001483883), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17801838  covered = 8512651  vacuous = 1  exempt = 388299  split = 8900887  s-splits = 1586255  s-cells = 127  max depth = 48  max s-depth = 6  time = 851.8s
+PASS: for EVERY s in [246600251/64000000, 493390439/128000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s9_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 493390439/128000000 --shi 987160753/256000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s10_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s10_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [493390439/128000000, 987160753/256000000]  (~[3.854612805, 3.856096691], width 0.001483887), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 17939308  covered = 8577740  vacuous = 1  exempt = 391945  split = 8969622  s-splits = 1599425  s-cells = 127  max depth = 48  max s-depth = 6  time = 852.5s
+PASS: for EVERY s in [493390439/128000000, 987160753/256000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s10_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 987160753/256000000 --shi 246885157/64000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s11_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s11_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [987160753/256000000, 246885157/64000000]  (~[3.856096691, 3.857580578], width 0.001483887), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 18046032  covered = 8631369  vacuous = 1  exempt = 391678  split = 9022984  s-splits = 1608826  s-cells = 127  max depth = 48  max s-depth = 6  time = 836.7s
+PASS: for EVERY s in [987160753/256000000, 246885157/64000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s11_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 246885157/64000000 --shi 493960251/128000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s12_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s12_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [246885157/64000000, 493960251/128000000]  (~[3.857580578, 3.859064461], width 0.001483883), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 18171450  covered = 8689230  vacuous = 1  exempt = 396526  split = 9085693  s-splits = 1620972  s-cells = 127  max depth = 48  max s-depth = 6  time = 832.5s
+PASS: for EVERY s in [246885157/64000000, 493960251/128000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s12_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 493960251/128000000 --shi 123537547/32000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s13_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s13_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [493960251/128000000, 123537547/32000000]  (~[3.859064461, 3.860548344], width 0.001483883), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 18324756  covered = 8753651  vacuous = 1  exempt = 408758  split = 9162346  s-splits = 1635936  s-cells = 127  max depth = 48  max s-depth = 6  time = 862.0s
+PASS: for EVERY s in [493960251/128000000, 123537547/32000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s13_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 123537547/32000000 --shi 988680251/256000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s14_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s14_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [123537547/32000000, 988680251/256000000]  (~[3.860548344, 3.862032230], width 0.001483887), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 18471986  covered = 8820309  vacuous = 1  exempt = 415715  split = 9235961  s-splits = 1650970  s-cells = 127  max depth = 48  max s-depth = 6  time = 879.8s
+PASS: for EVERY s in [123537547/32000000, 988680251/256000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s14_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 988680251/256000000 --shi 494530063/128000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s15_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s15_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [988680251/256000000, 494530063/128000000]  (~[3.862032230, 3.863516117], width 0.001483887), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 18592178  covered = 8877281  vacuous = 1  exempt = 418839  split = 9296057  s-splits = 1661475  s-cells = 127  max depth = 48  max s-depth = 6  time = 867.8s
+PASS: for EVERY s in [988680251/256000000, 494530063/128000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s15_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 494530063/128000000 --shi 773/200 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s16_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s16_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [494530063/128000000, 773/200]  (~[3.863516117, 3.865000000], width 0.001483883), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 18710314  covered = 8935916  vacuous = 1  exempt = 419272  split = 9355125  s-splits = 1672256  s-cells = 127  max depth = 48  max s-depth = 6  time = 810.3s
+PASS: for EVERY s in [494530063/128000000, 773/200], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s16_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 773/200 --shi 15463021/4000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s17_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s17_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [773/200, 15463021/4000000]  (~[3.865000000, 3.865755250], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9484242  covered = 4524278  vacuous = 0  exempt = 217875  split = 4742089  s-splits = 841153  s-cells = 63  max depth = 47  max s-depth = 5  time = 402.6s
+PASS: for EVERY s in [773/200, 15463021/4000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s17_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 15463021/4000000 --shi 7733021/2000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s18_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s18_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [15463021/4000000, 7733021/2000000]  (~[3.865755250, 3.866510500], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9525320  covered = 4540511  vacuous = 0  exempt = 222181  split = 4762628  s-splits = 844755  s-cells = 63  max depth = 47  max s-depth = 5  time = 402.5s
+PASS: for EVERY s in [15463021/4000000, 7733021/2000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s18_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 7733021/2000000 --shi 15469063/4000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s19_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s19_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [7733021/2000000, 15469063/4000000]  (~[3.866510500, 3.867265750], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9550528  covered = 4551810  vacuous = 0  exempt = 223486  split = 4775232  s-splits = 846132  s-cells = 63  max depth = 47  max s-depth = 5  time = 418.3s
+PASS: for EVERY s in [7733021/2000000, 15469063/4000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s19_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 15469063/4000000 --shi 3868021/1000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s20_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s20_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [15469063/4000000, 3868021/1000000]  (~[3.867265750, 3.868021000], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9596988  covered = 4572813  vacuous = 0  exempt = 225713  split = 4798462  s-splits = 850911  s-cells = 63  max depth = 47  max s-depth = 5  time = 403.8s
+PASS: for EVERY s in [15469063/4000000, 3868021/1000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s20_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 3868021/1000000 --shi 3095021/800000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s21_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s21_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [3868021/1000000, 3095021/800000]  (~[3.868021000, 3.868776250], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9649760  covered = 4592537  vacuous = 0  exempt = 232375  split = 4824848  s-splits = 855854  s-cells = 63  max depth = 47  max s-depth = 5  time = 415.9s
+PASS: for EVERY s in [3868021/1000000, 3095021/800000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s21_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 3095021/800000 --shi 7739063/2000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s22_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s22_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [3095021/800000, 7739063/2000000]  (~[3.868776250, 3.869531500], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9685924  covered = 4608570  vacuous = 0  exempt = 234424  split = 4842930  s-splits = 858895  s-cells = 63  max depth = 47  max s-depth = 5  time = 456.1s
+PASS: for EVERY s in [3095021/800000, 7739063/2000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s22_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 7739063/2000000 --shi 15481147/4000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s23_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s23_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [7739063/2000000, 15481147/4000000]  (~[3.869531500, 3.870286750], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9741516  covered = 4634017  vacuous = 0  exempt = 236773  split = 4870726  s-splits = 864861  s-cells = 63  max depth = 47  max s-depth = 5  time = 455.4s
+PASS: for EVERY s in [7739063/2000000, 15481147/4000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s23_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 15481147/4000000 --shi 1935521/500000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s24_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s24_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [15481147/4000000, 1935521/500000]  (~[3.870286750, 3.871042000], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9780756  covered = 4652546  vacuous = 0  exempt = 237864  split = 4890346  s-splits = 867722  s-cells = 63  max depth = 47  max s-depth = 5  time = 488.1s
+PASS: for EVERY s in [15481147/4000000, 1935521/500000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s24_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 1935521/500000 --shi 15487189/4000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s25_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s25_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [1935521/500000, 15487189/4000000]  (~[3.871042000, 3.871797250], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9825032  covered = 4668093  vacuous = 0  exempt = 244455  split = 4912484  s-splits = 870494  s-cells = 63  max depth = 47  max s-depth = 5  time = 522.8s
+PASS: for EVERY s in [1935521/500000, 15487189/4000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s25_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 15487189/4000000 --shi 1549021/400000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s26_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s26_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [15487189/4000000, 1549021/400000]  (~[3.871797250, 3.872552500], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9885966  covered = 4691586  vacuous = 0  exempt = 251429  split = 4942951  s-splits = 875502  s-cells = 63  max depth = 47  max s-depth = 5  time = 523.5s
+PASS: for EVERY s in [15487189/4000000, 1549021/400000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s26_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 1549021/400000 --shi 15493231/4000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s27_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s27_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [1549021/400000, 15493231/4000000]  (~[3.872552500, 3.873307750], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 9951832  covered = 4716900  vacuous = 0  exempt = 259048  split = 4975884  s-splits = 880846  s-cells = 63  max depth = 47  max s-depth = 5  time = 466.1s
+PASS: for EVERY s in [1549021/400000, 15493231/4000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s27_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 15493231/4000000 --shi 3874063/1000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s28_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s28_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [15493231/4000000, 3874063/1000000]  (~[3.873307750, 3.874063000], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 10040472  covered = 4749592  vacuous = 0  exempt = 270676  split = 5020204  s-splits = 889054  s-cells = 63  max depth = 47  max s-depth = 5  time = 488.4s
+PASS: for EVERY s in [15493231/4000000, 3874063/1000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s28_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 3874063/1000000 --shi 15499273/4000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s29_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s29_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [3874063/1000000, 15499273/4000000]  (~[3.874063000, 3.874818250], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 10170818  covered = 4801247  vacuous = 0  exempt = 284194  split = 5085377  s-splits = 902860  s-cells = 63  max depth = 47  max s-depth = 5  time = 500.7s
+PASS: for EVERY s in [3874063/1000000, 15499273/4000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s29_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 15499273/4000000 --shi 7751147/2000000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s30_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s30_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [15499273/4000000, 7751147/2000000]  (~[3.874818250, 3.875573500], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 10369464  covered = 4878483  vacuous = 0  exempt = 306281  split = 5184700  s-splits = 921607  s-cells = 63  max depth = 47  max s-depth = 5  time = 515.4s
+PASS: for EVERY s in [15499273/4000000, 7751147/2000000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s30_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 7751147/2000000 --shi 3101063/800000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s31_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s31_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [7751147/2000000, 3101063/800000]  (~[3.875573500, 3.876328750], width 0.000755250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 10789038  covered = 5036287  vacuous = 0  exempt = 358264  split = 5394487  s-splits = 961077  s-cells = 63  max depth = 47  max s-depth = 5  time = 535.1s
+PASS: for EVERY s in [7751147/2000000, 3101063/800000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s31_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 3101063/800000 --shi 7753/2000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s32_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s32_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [3101063/800000, 7753/2000]  (~[3.876328750, 3.876500000], width 0.000171250), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 2381272  covered = 1048060  vacuous = 0  exempt = 142608  split = 1190604  s-splits = 149848  s-cells = 15  max depth = 45  max s-depth = 3  time = 109.4s
+PASS: for EVERY s in [3101063/800000, 7753/2000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s32_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --slo 3877/1000 --shi 969271/250000 --depth 48 --sscale 8 --jobs 1 --split 3 --strict-margin 0 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s34_d48.report.json --witness-file C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s34_d48.wit.json --max-witnesses 8 --max-witnesses-per-box 8 --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json  (k5_03)
+s in [3877/1000, 969271/250000]  (~[3.877000000, 3.877084000], width 0.000084000), n = 11, atoms = 40, cores = 5, budget = 6, total = 583669/100000 (~5.836690000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '1038437/500000', 'threshold_y': '4193523/2000000', 'threshold_x_float': 2.076874, 'threshold_y_float': 2.0967615, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 1900258  covered = 793604  vacuous = 0  exempt = 156557  split = 950097  s-splits = 47409  s-cells = 7  max depth = 44  max s-depth = 2  time = 89.3s
+PASS: for EVERY s in [3877/1000, 969271/250000], every admissible closed unit square in [0,s]^2 disjoint from all 5 cores has mu_s >= 1; total 583669/100000 < budget 6  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\G3.s34_d48.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.lo.json
+specialised k5_03 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.lo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.lo.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.lo.report.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.lo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 653310  covered = 284534  vacuous = 0  exempt = 42153 (core 42153, nofam 0)  split = 326623  exact atom checks = 362224  max depth = 42  time = 28.6s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.lo.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --s 1924271/500000 -o C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.mid.json
+specialised k5_03 at s = 1924271/500000 (~3.848542000) -> C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.mid.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.mid.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.mid.report.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.mid.json
+s = 1924271/500000 (~3.8485420000), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 783626  covered = 334139  vacuous = 0  exempt = 57706 (core 57706, nofam 0)  split = 391781  exact atom checks = 425389  max depth = 42  time = 37.0s
+PASS: every NON-EXEMPT closed unit square in [0,1924271/500000]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 1924271/500000 (~3.8485420000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.mid.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A56-sparametric\certs\k5_03.param.json --s 969271/250000 -o C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.hi.json
+specialised k5_03 at s = 969271/250000 (~3.877084000) -> C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.hi.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.hi.json --depth 44 --jobs 1 --report C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.hi.report.json --max-witnesses 20 --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.hi.json
+s = 969271/250000 (~3.8770840000), n = 11, atoms = 40, total mass = 583669/100000 (~5.8366900000), margin = 0
+hypotheses: 5 cores, 0 NO-families, budget = 6
+boxes = 1586604  covered = 641412  vacuous = 0  exempt = 151922 (core 151922, nofam 0)  split = 793270  exact atom checks = 785267  max depth = 42  time = 76.8s
+PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 583669/100000 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A114-window-closers\certs\k5_03\c2.3.820000_3.877084.d44.c2.hi.report.json

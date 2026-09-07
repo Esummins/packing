@@ -204,6 +204,25 @@ def vparam(cert, lo, hi, depth, tag, log, timeout, sscale="8", maxw=2000, perbox
     return rc, r
 
 
+S_DEN = 250000
+
+
+def on_grid(q, depth):
+    """verify_param builds one integer grid with D = 250000 << (depth+2) and REFUSES an s
+    endpoint whose denominator does not divide D (verify_param.py: "s endpoint ... not on the
+    grid").  Denominators must be 2^a * 5^b with b <= 6.  Checked before anything is launched:
+    a refused endpoint makes the verifier exit non-zero, which the sweep would otherwise record
+    as a FAIL verdict -- A114 lost a 30-slab grid to exactly that (every slab "FAIL" in 0.3 s)."""
+    return ((S_DEN << (depth + 2)) % q.denominator) == 0
+
+
+def check_grid(points, depths, where):
+    bad = [(str(q), d) for q in points for d in depths if not on_grid(q, d)]
+    if bad:
+        raise SystemExit(f"{where}: s endpoint(s) not on the verifier's grid (denominator must "
+                         f"be 2^a * 5^b with b <= 6): {bad[:6]}")
+
+
 def merge(iv):
     out = []
     for a, b in sorted(iv):
@@ -329,6 +348,7 @@ def cmd_resolve(a):
         "verify_case": VC, "verify_case_sha256": sha(VC),
         "started": time.strftime("%Y-%m-%dT%H:%M:%S"), "stages": {}, "wall_s": 0.0}
     rec["stages"] = rec.get("stages", {})
+    check_grid(list(band), [a.depth, a.gap_depth], "resolve")
     save(rec)
 
     closed, rows, residual = resolver(rec, cert, band, log, a, "R")
@@ -396,17 +416,39 @@ def cmd_band(a):
     # --cuts: explicit slab boundaries.  A cut point is a HINT (it may come from a truncated
     # witness file); it can only cost time, never soundness -- every PASS is on a closed
     # sub-window, and whatever does not pass is handed on.
-    edges = [lo] + [F(x) for x in a.cuts.split(",") if x.strip()] + [hi] if a.cuts else [lo, hi]
-    gained, open_slabs = [], []
+    edges = [lo] + sorted(F(x) for x in a.cuts.split(",") if x.strip()) + [hi] if a.cuts \
+        else [lo, hi]
+    check_grid(edges, [int(x) for x in a.depths.split(",")] + [a.gap_depth], "band")
+    # A previously banked range STAYS banked: a slab PASS is a standing fact about the
+    # certificate, independent of the grid that produced it.
+    gained = [(F(x), F(y)) for x, y in (rec.get("gained") or [])]
+    # Rebuild the banked set from the stage cache as well: EVERY cached PASS is a standing
+    # partial transfer, whichever grid produced it, so a record that was killed mid-sweep (or
+    # whose grid was replaced) keeps everything its verifier runs earned.
+    for k, st in rec["stages"].items():
+        if st.get("done") and st.get("result") == "PASS" and st.get("slo") and st.get("shi"):
+            gained.append((F(st["slo"]), F(st["shi"])))
+    gained = list(merge(gained))
+    open_slabs = []
     slabs = [(edges[i], edges[i + 1], 0) for i in range(len(edges) - 1)]
-    slabs = [(x, y, 0) for x, y, _ in slabs]
     n = 0
     while slabs:
         s0_, s1_, d = slabs.pop(0)
         n += 1
+        if any(x <= s0_ and s1_ <= y for x, y in gained):
+            print(f"  slab {n} [{float(s0_):.6f}, {float(s1_):.6f}]: already banked", flush=True)
+            continue
         got = False
         for depth in [int(x) for x in a.depths.split(",")]:
-            t = f"B.s{n}_d{depth}"
+            t = f"{a.tag_prefix}.s{n}_d{depth}"
+            # a stage key does not encode its window, so a cached entry is only reusable when
+            # its recorded bounds are the ones being asked about (A114 hit this when k6_07's
+            # band was re-gridded: B.s3 meant a different slab in each grid)
+            old = rec["stages"].get(t)
+            if old and (old.get("slo") != str(s0_) or old.get("shi") != str(s1_)):
+                rec["stages"]["OLDGRID_%s_%s_%s" % (t, old.get("slo_f"), old.get("shi_f"))] = \
+                    rec["stages"].pop(t)
+                save(rec)
             # a bisection slab only needs its EXIT CODE, so the witness cap is small: a full
             # enumeration on a wide slab that is going to fail anyway is pure cost (measured:
             # > 20 min on k6_07's 0.05-wide band at depth 48, vs 87 s for A56's capped probe)
@@ -419,21 +461,24 @@ def cmd_band(a):
                 gained.append((s0_, s1_))
                 got = True
                 break
-        if got:
-            continue
-        if d < a.max_bisect:
-            m = (s0_ + s1_) / 2
-            slabs.append((s0_, m, d + 1))
-            slabs.append((m, s1_, d + 1))
-        else:
-            open_slabs.append((s0_, s1_))
+        if not got:
+            if d < a.max_bisect:
+                m = (s0_ + s1_) / 2
+                slabs.append((s0_, m, d + 1))
+                slabs.append((m, s1_, d + 1))
+            else:
+                open_slabs.append((s0_, s1_))
+        # persist after EVERY slab, pass or fail: a killed sweep must not lose the ranges it
+        # banked (A114 killed k5_03's sweep after ten PASSes and the record still showed only
+        # the pre-sweep range, because the success branch used to `continue` past this save)
         rec["gained"] = [[str(x), str(y)] for x, y in merge(gained)]
         rec["still_open"] = [[str(x), str(y)] for x, y in open_slabs]
         save(rec)
 
     # resolver on every slab bisection could not close
     for i, (s0_, s1_) in enumerate(list(open_slabs)):
-        closed, rows, residual = resolver(rec, cert, (s0_, s1_), log, a, f"R{i}")
+        closed, rows, residual = resolver(rec, cert, (s0_, s1_), log, a,
+                                          f"{a.tag_prefix}R{i}")
         if closed:
             gained.append((s0_, s1_))
             open_slabs.remove((s0_, s1_))
@@ -449,7 +494,7 @@ def cmd_band(a):
     rec["band_width_closed"] = round(sum(float(y - x) for x, y in g), 9)
     rec["c2"] = []
     for i, (x, y) in enumerate(g):
-        ck = f"c2.gained{i}.d{a.c2_depth}"
+        ck = f"c2.{float(x):.6f}_{float(y):.6f}.d{a.c2_depth}"
         rec["c2"] += stage(rec, ck, lambda x=x, y=y, ck=ck: {
             "result": "done",
             "c2": c2(name, cert, x, y, log, ck, depth=str(a.c2_depth))})["c2"]
@@ -486,6 +531,9 @@ def main(argv=None):
         p.add_argument("--depths", default="48,56")
         p.add_argument("--cuts", default=None,
                        help="explicit slab boundaries inside the band (exact rationals)")
+        p.add_argument("--tag_prefix", default="B",
+                       help="stage-key prefix for this sweep's slabs (use a fresh one when "
+                            "re-gridding a band, so the two grids' caches cannot mix)")
         p.add_argument("--slab_jobs", type=int, default=1,
                        help="workers for a bisection slab; only its exit code is used, so >1 is "
                             "sound here (it is NOT for the enumeration pass -- see L1)")

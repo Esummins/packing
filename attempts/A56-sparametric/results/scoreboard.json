@@ -4546,21 +4546,16 @@
      ]
     }
    },
-   "result": "partial",
+   "result": "TRANSFERRED",
    "s_ranges": [
     [
      "191/50",
-     "48938813/12800000"
-    ]
-   ],
-   "window_coverage": 0.058594,
-   "open_band": [
-    [
-     "48938813/12800000",
      "969271/250000"
     ]
    ],
-   "status": "PARTIAL after A114: certified [['191/50', '48938813/12800000']], open [['48938813/12800000', '969271/250000']]",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] -- A114 closed the residue with the SAME parametric certificate re-verified on the sub-window(s) [['191/50', '969271/250000']] (A96 resolver / A56 sub-window bisection; full C2 canary)",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_03.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_03.param.json",
@@ -4591,8 +4586,8 @@
     "attempt": "A114",
     "mechanism": "resolver (A96 step 3c) on the A56 parametric certificate: enumerate the EXACT uncovered s-intervals at jobs=1 with an unbounded per-box witness cap, then re-verify the SAME certificate on each one",
     "band_attacked": [
-     "191/50",
-     "48938813/12800000"
+     "122920251/32000000",
+     "969271/250000"
     ],
     "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_03.param.json",
     "cert_sha256": "40cca45c274698ba7702a04be23455d4e22f883bda5ea5c5e8390f491a0b6553",
@@ -4667,7 +4662,7 @@
     "gained": [
      [
       "191/50",
-      "48938813/12800000"
+      "969271/250000"
      ]
     ],
     "still_open": [],
@@ -4675,33 +4670,33 @@
      {
       "s": "191/50",
       "s_float": 3.82,
-      "time_s": 23.9,
+      "time_s": 29.0,
       "depth": "44",
       "result": "PASS"
      },
      {
-      "s": "97834813/25600000",
-      "s_float": 3.8216723828125,
-      "time_s": 25.9,
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 37.3,
       "depth": "44",
       "result": "PASS"
      },
      {
-      "s": "48938813/12800000",
-      "s_float": 3.823344765625,
-      "time_s": 26.5,
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 77.1,
       "depth": "44",
       "result": "PASS"
      }
     ],
-    "verdict": "A114 PARTIAL: certified [191/50, 48938813/12800000] (5.86% of the window, C2 3/3); the remaining 0.0537 of s costs ~5 CPU-h at this certificate's rate, outside budget",
-    "seconds": 3480.0,
+    "verdict": "A114 CLOSES THE WINDOW by the slab sweep: [191/50, 969271/250000] covered by PASSing slabs (0.00179 to s = 3.8233, then 0.00149 to s = 3.865, then 0.000755 to s0 -- L6 width_max is 0.00179 low and 0.00100 at s_top 3.877), C2 3/3, on the SAME s0 certificate",
+    "seconds": 33371.6,
     "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k5_03.json"
    },
    "s_ranges_float": [
     [
      3.82,
-     3.823344765625
+     3.877084
     ]
    ]
   },
@@ -4785,16 +4780,16 @@
      ]
     }
    },
-   "result": "OPEN",
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "result": "TRANSFERRED",
+   "s_ranges": [
     [
      "191/50",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8770840] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] -- A114 closed the residue with the SAME parametric certificate re-verified on the sub-window(s) [['191/50', '969271/250000']] (A96 resolver / A56 sub-window bisection; full C2 canary)",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_12.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_12.param.json",
@@ -4833,14 +4828,47 @@
     "verifier_sha256": null,
     "rows": null,
     "residual": null,
-    "gained": [],
-    "still_open": null,
-    "c2": null,
-    "verdict": "A114 ran the gate-0.02 route: certify FAILED (rc 3, no base certificate) -- k5_12 stays OPEN over the window; its s0 kill is untouched",
-    "seconds": 4210.3,
+    "gained": [
+     [
+      "191/50",
+      "969271/250000"
+     ]
+    ],
+    "still_open": [],
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 7.0,
+      "depth": "44",
+      "result": "PASS"
+     },
+     {
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 9.6,
+      "depth": "44",
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 213.0,
+      "depth": "44",
+      "result": "PASS"
+     }
+    ],
+    "verdict": "A114 CLOSES THE WINDOW by the slab sweep: [191/50, 969271/250000] covered by 85 PASSing slabs (0.000794 below s = 3.87, 0.000394 above it -- L6 width_max is 0.00100 at s_top 3.8405 and 0.00050 at s_top 3.877), C2 3/3.  NOTE: this used the ORIGINAL A53/A54 s0 certificate re-expressed parametrically (A56's k5_12.param.json) -- the A61 LP route that failed was never needed",
+    "seconds": 15359.0,
     "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k5_12.json"
    },
-   "a114_outcome": "A114 ran the gate-0.02 route: certify FAILED (rc 3, no base certificate) -- k5_12 stays OPEN over the window; its s0 kill is untouched"
+   "a114_outcome": "A114 ran the gate-0.02 route: certify FAILED (rc 3, no base certificate) -- k5_12 stays OPEN over the window; its s0 kill is untouched",
+   "s_ranges_float": [
+    [
+     3.82,
+     3.877084
+    ]
+   ]
   },
   "k5_14": {
    "name": "k5_14",
@@ -5960,7 +5988,7 @@
      ]
     }
    },
-   "result": "partial",
+   "result": "TRANSFERRED",
    "resolve": {
     "verdict": "fixed-s re-certification failed; recipe did not produce a base cert",
     "eps_geo": 0.001011,
@@ -5979,17 +6007,12 @@
    "s_ranges": [
     [
      "191/50",
-     "244494271/64000000"
-    ]
-   ],
-   "window_coverage": 0.003906,
-   "open_band": [
-    [
-     "244494271/64000000",
      "969271/250000"
     ]
    ],
-   "status": "PARTIAL after A114: certified [['191/50', '244494271/64000000']], open [['244494271/64000000', '969271/250000']]",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] -- A114 closed the residue with the SAME parametric certificate re-verified on the sub-window(s) [['191/50', '969271/250000']] (A96 resolver / A56 sub-window bisection; full C2 canary)",
    "resolve_failed_because": "fixed-s re-certification failed; recipe did not produce a base cert",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A53-simple-strata/certs_wip/k5_02.json",
@@ -6021,8 +6044,8 @@
     "attempt": "A114",
     "mechanism": "resolver (A96 step 3c) on the A56 parametric certificate: enumerate the EXACT uncovered s-intervals at jobs=1 with an unbounded per-box witness cap, then re-verify the SAME certificate on each one",
     "band_attacked": [
-     "191/50",
-     "244494271/64000000"
+     "244494271/64000000",
+     "969271/250000"
     ],
     "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_02.param.json",
     "cert_sha256": "a799c22ef6b2e5ac42d7a8b6e4dd4cee811ca63b027d3d6efc98823666dd5026",
@@ -6049,7 +6072,7 @@
     "gained": [
      [
       "191/50",
-      "244494271/64000000"
+      "969271/250000"
      ]
     ],
     "still_open": [],
@@ -6057,33 +6080,33 @@
      {
       "s": "191/50",
       "s_float": 3.82,
-      "time_s": 4.0,
+      "time_s": 4.5,
       "depth": "44",
       "result": "PASS"
      },
      {
-      "s": "488974271/128000000",
-      "s_float": 3.8201114921875,
-      "time_s": 4.3,
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 6.0,
       "depth": "44",
       "result": "PASS"
      },
      {
-      "s": "244494271/64000000",
-      "s_float": 3.820222984375,
-      "time_s": 4.2,
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 30.7,
       "depth": "44",
       "result": "PASS"
      }
     ],
-    "verdict": "A114 PARTIAL: certified [191/50, 244494271/64000000] (0.39% of the window, C2 3/3); the bulk slabs FAIL at depth 48 -- node/margin hardness, not s-resolution",
-    "seconds": 616.6,
+    "verdict": "A114 CLOSES THE WINDOW: [191/50, 969271/250000] covered by 35 PASSing slabs of <= 0.001777 (the L6 width_max for this certificate), C2 3/3 -- the SAME s0 certificate, no re-solve; the earlier 0.0071-wide FAILs were 4x over width_max, not node hardness",
+    "seconds": 5552.7,
     "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results\\k5_02.json"
    },
    "s_ranges_float": [
     [
      3.82,
-     3.820222984375
+     3.877084
     ]
    ]
   },
@@ -6368,10 +6391,9 @@
   "total": 52,
   "by_result": {
    "M1": 4,
-   "TRANSFERRED": 24,
+   "TRANSFERRED": 27,
    "TRANSFERRED-resolved": 20,
-   "partial": 2,
-   "OPEN": 2
+   "OPEN": 1
   },
   "by_k": {
    "k6": {
@@ -6380,14 +6402,13 @@
     "TRANSFERRED-resolved": 13
    },
    "k5": {
-    "TRANSFERRED": 6,
+    "TRANSFERRED": 9,
     "M1": 2,
     "TRANSFERRED-resolved": 7,
-    "partial": 2,
-    "OPEN": 2
+    "OPEN": 1
    }
   },
-  "full_window_rows": 48
+  "full_window_rows": 51
  },
  "wall_time_this_run_s": 3249.7,
  "legend": {
@@ -6415,7 +6436,7 @@
   "notes": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\notes\\lemmas.md"
  },
  "a114": {
-  "updated": "2026-09-06T16:03:34",
+  "updated": "2026-09-07T00:41:01",
   "rows_touched": [
    "k5_02",
    "k5_03",
@@ -6432,8 +6453,11 @@
    "k6_29"
   ],
   "rows_converted_to_full_window": [
+   "k5_02",
+   "k5_03",
    "k5_05",
    "k5_10",
+   "k5_12",
    "k5_14",
    "k5_17",
    "k6_07",

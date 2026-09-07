@@ -4448,3 +4448,38 @@ a correct `r` reading look like a crowd; over all 83 entries only 4 meeters sit 
 its cell. Canaries re-run, all PASS (C1 161/161, C2 72/72, C3 30/30, C4 235 contacts at max
 |diff| 0.0). Discipline unchanged: read-only outside A121 + this ledger + the registry row, one
 BLAS-pinned process, no LP, no lane recomputation.
+
+## 2026-09-07 — A114-window-closers (Opus chore) — continuation: the slab sweep closes the last three
+- **k5_02, k5_12, k5_03: ALL THREE CLOSED over the whole window** with the SAME s0 certificate
+  (A56's parametric re-expression of the original A53/A54 kill), no LP re-solve anywhere:
+  k5_02 by 35 slabs of 0.001777 (1.54 CPU-h), k5_12 by 85 slabs (0.000794 below s = 3.87, 0.000394
+  above; 3.09 CPU-h), k5_03 by 14 + 34 slabs (0.00179 / 0.00149 / 0.000755 in three zones;
+  8.76 CPU-h). C2 3/3 PASS at s_lo, midpoint and s0 for each. **A56 scoreboard: 51/52 full-window
+  rows** (4 M1 + 27 TRANSFERRED + 20 TRANSFERRED-resolved); only k5_13 is open, and that is A61's
+  campaign, untouched. Scoreboard written atomically after each closure.
+- **L6, the width predictor (advisor's, verified).** One probe slab gives w_min = width /
+  2^max_s_depth and d_pose = max_depth - max_s_depth; a slab passes iff width <= w_min * 2^(48 -
+  d_pose). Measured: k6_07 0.0117 (A114 used 0.0029 — 5 slabs would have done instead of 18),
+  k6_27 0.0141, k5_02 0.00178, k5_03 0.00179 low and 0.00100 at the top, k5_12 0.00100 low and
+  0.00050 at the top. `max_depth == 48` in a PASS is the "no headroom, do not widen" flag. Every
+  earlier bulk FAIL was a slab over its width_max (k5_02's were 4x over), never node hardness.
+- **L7, cost along s (224 verifier runs, results/cost_profile.json).** Seconds per 1e-3 of s, first
+  slab -> the slab ending at s0: k6_27 19.9 -> 1589, k6_07 53.3 -> 91.0, k5_02 88.7 -> 501.6,
+  k5_03 412.3 -> 1063.6, k5_12 129.2 -> 4181.4. The cost concentrates in the last 1e-4 to 5e-4
+  below s0, where w_min shrinks (k5_12: 1.74M boxes for a 5e-4 slab at s_top 3.8405 vs 12.7M for
+  the same width at 3.877) and, for k6_27, d_pose itself climbs 39 -> 43. That is the S02 pinwheel
+  shadow (s* = s0 + 0.0097) measured directly in verification cost — the first such measurement.
+  It does NOT mean the s0 certificate must be replaced near s0: the advisor's per-slab re-solve
+  route was not run because (i) make_param.py is anchored to the s0 census and would have to be
+  edited — a frozen builder, (ii) 30-85 k5-class base LPs at 1200-1900 s each is 10-45 CPU-h
+  against a 15 CPU-h cap, and (iii) the premise was refuted by the data: every slab closes with
+  the s0 certificate once it respects width_max, including the slabs that touch s0.
+- Bug found and fixed in A114's own driver: verify_param builds one integer grid with
+  D = 250000 << (depth+2) and REFUSES an s endpoint whose denominator does not divide it, so cut
+  points must be 2^a * 5^b with b <= 6; a 30-slab k5_03 grid on k/640000000 came back "FAIL in
+  0.3 s" for every slab — a crash recorded as a verdict. close114 now checks every endpoint before
+  launching, keys a resumed stage only when its recorded bounds match, and persists the banked
+  ranges after EVERY slab.
+- Cost: 12.5 CPU-h for this continuation (17.94 CPU-h for all of A114), under the 15 CPU-h cap.
+  <= 2 processes throughout, BLAS pinned, commit/physical gate before every verifier, frozen
+  verifiers byte-identical, A61's k5_13 / A57 / A96 / A111 / A107 untouched.
