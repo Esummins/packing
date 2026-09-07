@@ -57,9 +57,11 @@ merely unconverged at the LP time cap.
    pair kills once a node carries two boxes (core–core overlap; Lemma TC between bins — free after re-conditioning);
    box–pin octagon tests at emission (already what trimming does); box-vs-forced-neighbour kills, which need a
    second conditioned square and are the reason A112 (load-path branching) exists.
-   *A111 (`4c6ace6e`):* load-path branching ≈ +1 wall-day (35 kills projected, n = 3 certified); the free pair kill
-   between a node's bin and a load-path box fires on 43–76% of S02 nodes by level; the chain kill only at level-4
-   widths. A112 is measuring the region tree with three orderings.
+   *A111 (`4c6ace6e`), A112 (`e6690215`):* the region tree kills 3 of 11 non-trivial stalled S02 regions at 27–54×
+   less wall than the old tree on those boxes (two certificates per kill), ordering is a tie-break, the free kills
+   are all Lemma TC, the k0 cells do not move (η = 0 exactly). As a scheduler option for stalled nodes with
+   fall-through it is worth of order a wall-day on A57; it needs NO-families in the 4-D verifier and TC as a
+   certified leaf to claim window validity (A117).
 2. **The alive population.** Re-run unconverged alive nodes with a longer LP cap before splitting them (A109's 28/46);
    branch on the load path instead of the rattler (A112); both are about not paying eight children for a node that
    was never alive or whose slack sits in squares it does not condition on.

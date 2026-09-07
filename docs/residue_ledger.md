@@ -89,7 +89,23 @@ side-blind rules cannot make a side statement) but fire constantly between a nod
 confirmed on 57,840 sampled pose pairs. The NO side is a convergence-time problem (dead-unconverged at 80 s, converged
 dead at 900 s), 8 of 22 nodes had every NO child LP-dead, certificates 14 PASS / 4 FAIL, fixed-side only until
 verify_param supports NO-families. The S07 branch is unsound at level 1 (Trump sits inside the YES region at A57's
-level-1 tilt half-width) and usable from level 2. A112 is running the region tree with three branching orders. Generalises as: *a class-boundary shadow — a dead class's minimiser
+level-1 tilt half-width) and usable from level 2. **A112 (`e6690215`), the region tree measured:** on 17 S02-explained
+level-2/3 nodes the tree terminates in 77 nodes / 56 LPs / 51 minutes against the old tree's projected 671 nodes and
+54 hours for the same region, and kills 9 of 17 — 6 of them already dead by the T5″ root trim, so the tree's own
+score is **3 of 11 non-trivial regions**: one free at the root by Lemma TC (bin against pin, a rule A57 does not
+apply at emission), two by a certified three-node tree (root, YES, NO; two certificates each; 27–54× less wall than
+the old tree on the boxes it kills). Containment checks hold with zero failures. **The branching order is a
+tie-break, not a lever**: all four orders land within 73–77 nodes and kill the same set. The two-stage protocol
+priced: 2.26× cheaper than a flat 900 s cap. All ten free pair kills are Lemma TC, four of them between boxes the
+tree itself introduced — the second conditioned square the tree exists to produce — and none are core–core; the
+chain kill never fired at tree depth (its controls are clean; the trees reached only r = 0.0125). On the k0 cells:
+0 kills under every order, every LP at η = 0 exactly — removing a support placement from a k0 cell does not move τ,
+so branching on corners does not by itself supply the missing logic kills. Corrections of record: η does not predict
+the certificate (PASS ∈ [−1.0, −0.25], FAIL ∈ [−0.71, −0.16]); the k0 YES shortcut "a square in a slot box ⇒ k ≥ 1"
+is unsound as box containment (A53 stratifies by grid-locked squares) and was never taken. Integration: a resumable
+`--region-tree` option in A96's scheduler for nodes alive twice or unconverged at 900 s, falling through to the split
+on a wall cap. Certificate accounting: NO-side certificates are fixed-side until the 4-D verifier supports
+NO-families (≈ 100 lines + one Lean lemma, A117 running), and Lemma TC must become a certified leaf (A117). Generalises as: *a class-boundary shadow — a dead class's minimiser
 sitting on a live class's box; the basin/grain lemma is the transfer.*
 
 ### 1c. Families S03–S06 (PI-read) and S08–S53
