@@ -5033,6 +5033,11 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   26 788 = 32 570 − 5 782) — halving a Farkas RAY halves a positive bound and it stays positive, halving a side
   bound pulls it to the box's `s_lo = 3.82 < s0`. That the count lands on the ray count on the nose is an
   independent confirmation that the two branches of `checkLeaf` are attached to the leaves the generator meant.
+  A third section is a Monte-Carlo smoke test of the COVER half: only the TILT coordinates differ between leaves
+  (3 of 20 and 4 of 23; every other coordinate is the global box), the root box recovered from the emitted data
+  is the certificate's own tilt range on the nose (`[0.725446, 1.483530]³`, `[0.670819, 1.019885]³ ×
+  `[−0.174533, 0.174533]`), and **20 000 random points of each land in a leaf cell every time**. Necessary, not
+  sufficient — but it would catch a bisection tree emitted with a hole in it.
 - **What that hypothesis is, and what discharging it needs — ONE primitive, and it is not in Lean.**
   `CertCover leaves Ls Ps slo shi` = "every packing satisfying `N` at a side in the CERTIFICATE'S OWN WINDOW
   `[3.82, 3.897084]` has an LP variable vector inside ONE recorded leaf's box, satisfying that leaf's rows".
