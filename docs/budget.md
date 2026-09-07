@@ -5,14 +5,14 @@ its provenance, and the date; nothing else in the repo quotes a total without po
 (the PI's convention). Machine: i7-12700K, 6 usable LP slots with BLAS pinned; "wall-days at 5" assumes five
 workers.
 
-Last updated: **2026-09-07 00:30**.
+Last updated: **2026-09-07 06:30**.
 
 ## A. The total
 
 | layer | remaining | central | range | wall-days at 5 | provenance | levers not yet in the number |
 |---|---|---|---|---|---|---|
 | A57 window trees, k5_11 + k5_16 | ~1,400 open boxes across levels 1–4, tail measured to termination (level-4 descent 0 of 30) | **1,250 CPU-h** (≈ 52 CPU-days) | 1,150–1,600 | **10–11** (13.3 without trimming; 19.6 without the tight core; 27 at the 95% tail bound) | A96 `e68d8dbc` (trimming projection), `5fd0e287` (tail), `761513f5` (tight core) | LP-time re-check of unconverged "alive" nodes (28/46 were not alive); load-path branching (A111/A112); trimmed-bin LP strength (A96 re-solves running) |
-| Window stragglers | k5_02, k5_03 (partial), k5_12, k5_13 (running); **k6 and up all full-window** | **15 CPU-h** | 8–25 | 0.15 | A114 `9ef80bfa` (k6_07, k6_23, k6_27 closed for 3 CPU-h; slab cost 340 s per 10⁻³ of side for k5_03), A61 pass 5 | slab sweeps running (cap 15 CPU-h) |
+| Window stragglers | **k5_13 only** (A61 running); every other k5/k6 class full-window — A114 closed k5_02, k5_03, k5_12 overnight with the original s0 certificates (12.5 CPU-h) | **≤ 3 CPU-h** | 0–5 | 0.03 | A114 `ee0c18d5`; scoreboard 51/52 | none needed |
 | Protected tier, 15 classes excl. k0_00 | conditioning trees per exact stratum; trump5's residual tree | **3,800 CPU-h** | 2,900–6,300 | 32 | A100 `a100_projection.json` (2026-09-05) | tight core + trimming untested here (same box/pin geometry, expect a similar fraction); η-gating already in the number |
 | k0_00 | the frame residue; tree at 9,300–21,700 CPU-h, or one theorem — **first real reduction: a 5 CPU-h warm re-solve pass (A115 T4 `71a5b20b`) certified 7 of A99's level-1 cells, removing 300–700 CPU-h (59–138× return); continuation running** | **theorem route: 0** / tree route **14,500 CPU-h** | 8,600–21,400 | 0 / 120 | A99 `99985b76`; LOCK-FREE⁺ evidence A104 `af6456e1`; A113 `6409396b` | LOCK-FREE⁺(< 4); dual-guided re-branching on the slot the support keeps occupying (A113: the un-killable cells' supports are 2–6-slot partial skeletons of near-critical shadows; the cell's own box distance to the manifold predicts nothing, the support does); the k0 tree has zero logic kills today |
 | **Total, theorem route** | | **≈ 5,100 CPU-h** | 4,100–8,000 | **≈ 42** | | |
@@ -105,6 +105,15 @@ with 8 undecided boxes and 0 holes, and cost 1,500 s each for nothing. Predictor
 = width / 2^(max s-depth) and d_pose = max depth − max s-depth; width_max = w_min · 2^(48 − d_pose) (k6_07: 0.012, five
 pieces would have done). Once slabs fit, total cost is ≈ linear in band width (k6_27 11 s, k6_07 65 s, k5_03 340 s
 per 10⁻³ of side); over-splitting costs percent, under-splitting costs a failed slab.
+
+**Measured cost profile along the side (A114 L7, 224 verifier runs):** seconds per 10⁻³ of side from the bottom of
+the window to the slab ending at s0 — k6_07 53 → 91, k6_27 20 → 1,589, k5_02 89 → 502, k5_03 412 → 1,064, k5_12
+129 → 4,181. The bulk trend is mild (+38% to +59% across the window); the blow-up is confined to the last 10⁻⁴ to
+5·10⁻⁴ below s0, where w_min shrinks (k5_12: 1.7M boxes for a 5·10⁻⁴ slab at 3.8405 vs 12.7M at 3.877) and d_pose
+climbs. That is the S02 shadow in the arithmetic, and it says the per-slab re-solve I proposed is unnecessary: the s0
+certificate closes every class, including the top slabs, once the slab width is set by the law (every earlier bulk
+FAIL was a slab over its width_max, k5_02's by 4×, never node hardness). Measured width_max: k6_27 0.014, k6_07
+0.012, k5_02 0.0018, k5_03 0.0018 → 0.0010 at the top, k5_12 0.0010 → 0.0005 at the top.
 
 **Near a solution the law stops being linear.** w_min and d_pose are set by the certificate's slack, and a class whose
 boundary carries a shadow at side s* has slack ≈ (s* − s) at side s: k5_02's s0 certificate has margin 0.0006 and
