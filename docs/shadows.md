@@ -48,6 +48,18 @@ A99-k0-tree-v2, which have no pins and so are de-duplicated over the full D4.
    contacts.  Contact forces are the Fritz-John multipliers from nnls(J^T, e_s), rows unit-
    normalised.  Every flat direction is then tested at SECOND order along the exact gaps.
 
+8. **Gallery v2 drawings (PI, 2026-09-07).**  The left panel no longer encodes tilt at all: every
+   dual-support placement is filled on ONE sequential scale by its dual weight y (pale yellow at
+   y -> 0, dark orange at y = 1), with the number printed inside the faint squares, and the
+   hypothesis square(s) are bright cyan with a heavy black outline and an **H** - a colour used
+   nowhere else.  In the right panel, a free square whose pose sits within **1e-3** of a lattice
+   cell centre and **0.05 deg** of axis is drawn blue like the other snapped slot squares and
+   carries its cell name: A121 found the v1 gallery drawing these red as if they were free.  The
+   `gallery v1 split` column keeps the old counts so A121's audit stays reproducible, the
+   f-indices are unchanged everywhere (contact graph, forces, flat directions, rattler table),
+   and the v1 SVGs are kept byte-for-byte under `docs/shadows/v1/`.  Every SVG carries a
+   one-line legend.
+
 ### What "explains" means, and what it does not
 
 A shadow explains a node when that node's own LP dual support, snapped and then released,
@@ -70,61 +82,61 @@ the last square, not a near-solution.
 
 ## Gallery table
 
-| shadow | class(es) of the alive nodes | k of the shadow | s* | s* - s-hat | alive nodes | #cfg | levels | free sq | common tilt | flexes at fixed s |
-|---|---|---|---|---|---|---|---|---|---|---|
-| **S01** | k5_11 x238, trump5 x196, k5_16 x178, k5_05 x2, k5_10 x2, k5_12 x1, k5_17 x1, k6_20 x1, k6_29 x1 | k11 (5 slot + 6 free) | 4.000000 | +0.122916 | 620 | 62 | L1:532, L2:84, L3:1, L4:3 | 6 | no | 5 |
-| **S02** | k5_11 x184, k5_16 x68, trump5 x12, k5_02 x1, k5_03 x1, k6_29 x1 | k11 (7 slot + 4 free) | 3.886746 | +0.009662 | 267 | 15 | L1:156, L2:97, L3:10, L4:4 | 4 | 48.435 deg | 1 |
-| **S03** | k5_16 x50, k5_11 x30, trump5 x16 | k11 (6 slot + 5 free) | 3.942809 | +0.065725 | 96 | 31 | L1:78, L2:18 | 5 | no | 1 |
-| **S04** | k5_16 x48, k5_11 x10, trump5 x1 | k10 (5 slot + 5 free) | 3.822876 | -0.054208 | 59 | 5 | L1:53, L2:4, L3:1, L4:1 | 5 | no | 5 |
-| **S05** | k5_16 x32, trump5 x7, k5_11 x3, k6_20 x1, k6_27 x1 | k11 (7 slot + 4 free) | 3.912232 | +0.035148 | 44 | 8 | L1:39, L2:5 | 4 | no | 3 |
-| **S06** | k5_11 x28, k5_16 x5, trump5 x3 | k10 (5 slot + 5 free) | 3.707107 | -0.169977 | 36 | 9 | L1:18, L2:13, L3:5 | 5 | no | 1 |
-| **S07** | trump5 x18, k5_16 x1 | k11 (6 slot + 5 free) | 3.885618 | +0.008534 | 19 | 2 | L1:19 | 5 | 44.879 deg | 8 |
-| **S08** | k5_16 x6, k5_11 x5, trump5 x5, k6_21 x1 | k11 (5 slot + 6 free) | 3.914214 | +0.037130 | 17 | 8 | L1:16, L2:1 | 6 | no | 5 |
-| **S09** | k5_16 x9, trump5 x2, k5_11 x1 | k11 (7 slot + 4 free) | 3.925149 | +0.048065 | 12 | 6 | L1:12 | 4 | no | 2 |
-| **S10** | k5_16 x8, k5_11 x1, trump5 x1 | k11 (7 slot + 4 free) | 3.902674 | +0.025590 | 10 | 4 | L1:10 | 4 | no | 0 |
-| **S11** | k5_11 x4, trump5 x2, k5_16 x1 | k11 (8 slot + 3 free) | 3.976620 | +0.099536 | 7 | 3 | L1:5, L2:2 | 3 | no | 3 |
-| **S12** | k5_11 x3, k5_16 x2, trump5 x1 | k9 (5 slot + 4 free) | 3.400000 | -0.477084 | 6 | 2 | L1:6 | 4 | no | 11 |
-| **S13** | trump5 x4, k5_16 x1 | k11 (6 slot + 5 free) | 3.991994 | +0.114911 | 5 | 2 | L1:5 | 5 | no | 2 |
-| **S14** | k5_16 x3, k5_11 x2 | k10 (5 slot + 5 free) | 3.767767 | -0.109317 | 5 | 3 | L1:3, L2:1, L3:1 | 5 | no | 7 |
-| **S15** | k5_11 x2, trump5 x2, k5_16 x1 | k11 (6 slot + 5 free) | 3.996117 | +0.119033 | 5 | 5 | L1:4, L2:1 | 5 | no | 0 |
-| **S16** | k5_11 x3, k5_16 x1 | k10 (6 slot + 4 free) | 3.768118 | -0.108966 | 4 | 2 | L1:2, L3:1, L4:1 | 4 | no | 0 |
-| **S17** | k5_11 x2, k5_16 x2 | k10 (5 slot + 5 free) | 3.858216 | -0.018867 | 4 | 2 | L1:3, L2:1 | 5 | no | 8 |
-| **S18** | k5_11 x3 | k10 (5 slot + 5 free) | 3.755342 | -0.121742 | 3 | 1 | L1:2, L2:1 | 5 | no | 5 |
-| **S19** | k5_11 x2 | k10 (5 slot + 5 free) | 3.728581 | -0.148502 | 2 | 1 | L1:2 | 5 | no | 5 |
-| **S20** | trump5 x2 | k10 (6 slot + 4 free) | 3.806721 | -0.070363 | 2 | 1 | L1:2 | 4 | no | 5 |
-| **S21** | trump5 x2 | k11 (6 slot + 5 free) | 3.894322 | +0.017238 | 2 | 1 | L1:2 | 5 | no | 0 |
-| **S22** | k5_11 x2 | k11 (8 slot + 3 free) | 3.998111 | +0.121027 | 2 | 1 | L1:2 | 3 | no | 1 |
-| **S23** | k5_11 x2 | k10 (6 slot + 4 free) | 3.894653 | +0.017569 | 2 | 2 | L2:2 | 4 | no | 0 |
-| **S24** | k5_11 x1, k5_16 x1 | k11 (7 slot + 4 free) | 3.989264 | +0.112181 | 2 | 2 | L1:2 | 4 | no | 2 |
-| **S25** | k5_11 x1 | k10 (5 slot + 5 free) | 3.728606 | -0.148477 | 1 | 1 | L1:1 | 5 | no | 4 |
-| **S26** | k5_16 x1 | k10 (6 slot + 4 free) | 3.822889 | -0.054195 | 1 | 1 | L1:1 | 4 | no | 5 |
-| **S27** | k5_16 x1 | k10 (6 slot + 4 free) | 3.823521 | -0.053562 | 1 | 1 | L1:1 | 4 | no | 8 |
-| **S28** | k5_16 x1 | k10 (6 slot + 4 free) | 3.825844 | -0.051239 | 1 | 1 | L1:1 | 4 | no | 6 |
-| **S29** | k5_16 x1 | k11 (6 slot + 5 free) | 3.886761 | +0.009677 | 1 | 1 | L1:1 | 5 | no | 5 |
-| **S30** | k5_11 x1 | k11 (6 slot + 5 free) | 3.897231 | +0.020147 | 1 | 1 | L1:1 | 5 | 56.104 deg | 2 |
-| **S31** | trump5 x1 | k11 (6 slot + 5 free) | 3.907472 | +0.030388 | 1 | 1 | L1:1 | 5 | no | 0 |
-| **S32** | k5_16 x1 | k11 (6 slot + 5 free) | 3.912250 | +0.035166 | 1 | 1 | L1:1 | 5 | no | 4 |
-| **S33** | trump5 x1 | k11 (6 slot + 5 free) | 3.916931 | +0.039847 | 1 | 1 | L1:1 | 5 | no | 1 |
-| **S34** | trump5 x1 | k11 (6 slot + 5 free) | 3.917360 | +0.040276 | 1 | 1 | L1:1 | 5 | no | 0 |
-| **S35** | trump5 x1 | k11 (6 slot + 5 free) | 3.917433 | +0.040349 | 1 | 1 | L1:1 | 5 | no | 0 |
-| **S36** | k5_11 x1 | k11 (5 slot + 6 free) | 3.924003 | +0.046919 | 1 | 1 | L1:1 | 6 | no | 3 |
-| **S37** | trump5 x1 | k11 (7 slot + 4 free) | 3.925470 | +0.048387 | 1 | 1 | L1:1 | 4 | no | 0 |
-| **S38** | trump5 x1 | k11 (6 slot + 5 free) | 3.928915 | +0.051831 | 1 | 1 | L1:1 | 5 | 41.754 deg | 1 |
-| **S39** | k5_16 x1 | k11 (6 slot + 5 free) | 3.932425 | +0.055341 | 1 | 1 | L1:1 | 5 | no | 0 |
-| **S40** | k5_16 x1 | k10 (7 slot + 3 free) | 3.940518 | +0.063434 | 1 | 1 | L1:1 | 3 | 52.315 deg | 0 |
-| **S41** | k5_16 x1 | k11 (6 slot + 5 free) | 3.940838 | +0.063755 | 1 | 1 | L1:1 | 5 | no | 2 |
-| **S42** | k5_16 x1 | k11 (6 slot + 5 free) | 3.952692 | +0.075608 | 1 | 1 | L1:1 | 5 | no | 0 |
-| **S43** | k5_11 x1 | k11 (6 slot + 5 free) | 3.956360 | +0.079277 | 1 | 1 | L2:1 | 5 | no | 2 |
-| **S44** | k5_11 x1 | k11 (5 slot + 6 free) | 3.958425 | +0.081341 | 1 | 1 | L1:1 | 6 | no | 1 |
-| **S45** | trump5 x1 | k11 (6 slot + 5 free) | 3.985467 | +0.108383 | 1 | 1 | L1:1 | 5 | no | 5 |
-| **S46** | k5_16 x1 | k11 (7 slot + 4 free) | 3.985478 | +0.108394 | 1 | 1 | L1:1 | 4 | no | 5 |
-| **S47** | k5_11 x1 | k11 (8 slot + 3 free) | 3.989280 | +0.112196 | 1 | 1 | L1:1 | 3 | 22.551 deg | 1 |
-| **S48** | k5_16 x1 | k11 (6 slot + 5 free) | 3.996435 | +0.119351 | 1 | 1 | L1:1 | 5 | no | 7 |
-| **S49** | k5_11 x1 | k11 (7 slot + 4 free) | 3.996724 | +0.119641 | 1 | 1 | L1:1 | 4 | no | 5 |
-| **S50** | trump5 x1 | k11 (8 slot + 3 free) | 4.000027 | +0.122944 | 1 | 1 | L1:1 | 3 | no | 4 |
-| **S51** | k5_11 x1 | k11 (8 slot + 3 free) | 4.000052 | +0.122968 | 1 | 1 | L2:1 | 3 | no | 4 |
-| **S52** | trump5 x1 | k11 (7 slot + 4 free) | 4.000197 | +0.123113 | 1 | 1 | L1:1 | 4 | no | 4 |
-| **S53** | k5_11 x1 | k11 (9 slot + 2 free) | 4.000261 | +0.123177 | 1 | 1 | L1:1 | 2 | 85.192 deg | 1 |
+| shadow | class(es) of the alive nodes | k of the shadow | gallery v1 split | s* | s* - s-hat | alive nodes | #cfg | levels | free sq | common tilt | flexes at fixed s |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **S01** | k5_11 x238, trump5 x196, k5_16 x178, k5_05 x2, k5_10 x2, k5_12 x1, k5_17 x1, k6_20 x1, k6_29 x1 | k11 (7 slot + 4 free) | 5 slot + 6 free | 4.000000 | +0.122916 | 620 | 62 | L1:532, L2:84, L3:1, L4:3 | 4 | no | 5 |
+| **S02** | k5_11 x184, k5_16 x68, trump5 x12, k5_02 x1, k5_03 x1, k6_29 x1 | k11 (7 slot + 4 free) | 7 slot + 4 free | 3.886746 | +0.009662 | 267 | 15 | L1:156, L2:97, L3:10, L4:4 | 4 | 48.435 deg | 1 |
+| **S03** | k5_16 x50, k5_11 x30, trump5 x16 | k11 (8 slot + 3 free) | 6 slot + 5 free | 3.942809 | +0.065725 | 96 | 31 | L1:78, L2:18 | 3 | no | 1 |
+| **S04** | k5_16 x48, k5_11 x10, trump5 x1 | k10 (6 slot + 4 free) | 5 slot + 5 free | 3.822876 | -0.054208 | 59 | 5 | L1:53, L2:4, L3:1, L4:1 | 4 | no | 5 |
+| **S05** | k5_16 x32, trump5 x7, k5_11 x3, k6_20 x1, k6_27 x1 | k11 (7 slot + 4 free) | 7 slot + 4 free | 3.912232 | +0.035148 | 44 | 8 | L1:39, L2:5 | 4 | no | 3 |
+| **S06** | k5_11 x28, k5_16 x5, trump5 x3 | k10 (7 slot + 3 free) | 5 slot + 5 free | 3.707107 | -0.169977 | 36 | 9 | L1:18, L2:13, L3:5 | 3 | no | 1 |
+| **S07** | trump5 x18, k5_16 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.885618 | +0.008534 | 19 | 2 | L1:19 | 5 | 44.879 deg | 8 |
+| **S08** | k5_16 x6, k5_11 x5, trump5 x5, k6_21 x1 | k11 (5 slot + 6 free) | 5 slot + 6 free | 3.914214 | +0.037130 | 17 | 8 | L1:16, L2:1 | 6 | no | 5 |
+| **S09** | k5_16 x9, trump5 x2, k5_11 x1 | k11 (7 slot + 4 free) | 7 slot + 4 free | 3.925149 | +0.048065 | 12 | 6 | L1:12 | 4 | no | 2 |
+| **S10** | k5_16 x8, k5_11 x1, trump5 x1 | k11 (7 slot + 4 free) | 7 slot + 4 free | 3.902674 | +0.025590 | 10 | 4 | L1:10 | 4 | no | 0 |
+| **S11** | k5_11 x4, trump5 x2, k5_16 x1 | k11 (8 slot + 3 free) | 8 slot + 3 free | 3.976620 | +0.099536 | 7 | 3 | L1:5, L2:2 | 3 | no | 3 |
+| **S12** | k5_11 x3, k5_16 x2, trump5 x1 | k9 (5 slot + 4 free) | 5 slot + 4 free | 3.400000 | -0.477084 | 6 | 2 | L1:6 | 4 | no | 11 |
+| **S13** | trump5 x4, k5_16 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.991994 | +0.114911 | 5 | 2 | L1:5 | 5 | no | 2 |
+| **S14** | k5_16 x3, k5_11 x2 | k10 (6 slot + 4 free) | 5 slot + 5 free | 3.767767 | -0.109317 | 5 | 3 | L1:3, L2:1, L3:1 | 4 | no | 7 |
+| **S15** | k5_11 x2, trump5 x2, k5_16 x1 | k11 (7 slot + 4 free) | 6 slot + 5 free | 3.996117 | +0.119033 | 5 | 5 | L1:4, L2:1 | 4 | no | 0 |
+| **S16** | k5_11 x3, k5_16 x1 | k10 (7 slot + 3 free) | 6 slot + 4 free | 3.768118 | -0.108966 | 4 | 2 | L1:2, L3:1, L4:1 | 3 | no | 0 |
+| **S17** | k5_11 x2, k5_16 x2 | k10 (5 slot + 5 free) | 5 slot + 5 free | 3.858216 | -0.018867 | 4 | 2 | L1:3, L2:1 | 5 | no | 8 |
+| **S18** | k5_11 x3 | k10 (5 slot + 5 free) | 5 slot + 5 free | 3.755342 | -0.121742 | 3 | 1 | L1:2, L2:1 | 5 | no | 5 |
+| **S19** | k5_11 x2 | k10 (7 slot + 3 free) | 5 slot + 5 free | 3.728581 | -0.148502 | 2 | 1 | L1:2 | 3 | no | 5 |
+| **S20** | trump5 x2 | k10 (6 slot + 4 free) | 6 slot + 4 free | 3.806721 | -0.070363 | 2 | 1 | L1:2 | 4 | no | 5 |
+| **S21** | trump5 x2 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.894322 | +0.017238 | 2 | 1 | L1:2 | 5 | no | 0 |
+| **S22** | k5_11 x2 | k11 (8 slot + 3 free) | 8 slot + 3 free | 3.998111 | +0.121027 | 2 | 1 | L1:2 | 3 | no | 1 |
+| **S23** | k5_11 x2 | k10 (7 slot + 3 free) | 6 slot + 4 free | 3.894653 | +0.017569 | 2 | 2 | L2:2 | 3 | no | 0 |
+| **S24** | k5_11 x1, k5_16 x1 | k11 (7 slot + 4 free) | 7 slot + 4 free | 3.989264 | +0.112181 | 2 | 2 | L1:2 | 4 | no | 2 |
+| **S25** | k5_11 x1 | k10 (6 slot + 4 free) | 5 slot + 5 free | 3.728606 | -0.148477 | 1 | 1 | L1:1 | 4 | no | 4 |
+| **S26** | k5_16 x1 | k10 (6 slot + 4 free) | 6 slot + 4 free | 3.822889 | -0.054195 | 1 | 1 | L1:1 | 4 | no | 5 |
+| **S27** | k5_16 x1 | k10 (6 slot + 4 free) | 6 slot + 4 free | 3.823521 | -0.053562 | 1 | 1 | L1:1 | 4 | no | 8 |
+| **S28** | k5_16 x1 | k10 (6 slot + 4 free) | 6 slot + 4 free | 3.825844 | -0.051239 | 1 | 1 | L1:1 | 4 | no | 6 |
+| **S29** | k5_16 x1 | k11 (7 slot + 4 free) | 6 slot + 5 free | 3.886761 | +0.009677 | 1 | 1 | L1:1 | 4 | no | 5 |
+| **S30** | k5_11 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.897231 | +0.020147 | 1 | 1 | L1:1 | 5 | 56.104 deg | 2 |
+| **S31** | trump5 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.907472 | +0.030388 | 1 | 1 | L1:1 | 5 | no | 0 |
+| **S32** | k5_16 x1 | k11 (7 slot + 4 free) | 6 slot + 5 free | 3.912250 | +0.035166 | 1 | 1 | L1:1 | 4 | no | 4 |
+| **S33** | trump5 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.916931 | +0.039847 | 1 | 1 | L1:1 | 5 | no | 1 |
+| **S34** | trump5 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.917360 | +0.040276 | 1 | 1 | L1:1 | 5 | no | 0 |
+| **S35** | trump5 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.917433 | +0.040349 | 1 | 1 | L1:1 | 5 | no | 0 |
+| **S36** | k5_11 x1 | k11 (5 slot + 6 free) | 5 slot + 6 free | 3.924003 | +0.046919 | 1 | 1 | L1:1 | 6 | no | 3 |
+| **S37** | trump5 x1 | k11 (7 slot + 4 free) | 7 slot + 4 free | 3.925470 | +0.048387 | 1 | 1 | L1:1 | 4 | no | 0 |
+| **S38** | trump5 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.928915 | +0.051831 | 1 | 1 | L1:1 | 5 | 41.754 deg | 1 |
+| **S39** | k5_16 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.932425 | +0.055341 | 1 | 1 | L1:1 | 5 | no | 0 |
+| **S40** | k5_16 x1 | k10 (7 slot + 3 free) | 7 slot + 3 free | 3.940518 | +0.063434 | 1 | 1 | L1:1 | 3 | 52.315 deg | 0 |
+| **S41** | k5_16 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.940838 | +0.063755 | 1 | 1 | L1:1 | 5 | no | 2 |
+| **S42** | k5_16 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.952692 | +0.075608 | 1 | 1 | L1:1 | 5 | no | 0 |
+| **S43** | k5_11 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.956360 | +0.079277 | 1 | 1 | L2:1 | 5 | no | 2 |
+| **S44** | k5_11 x1 | k11 (6 slot + 5 free) | 5 slot + 6 free | 3.958425 | +0.081341 | 1 | 1 | L1:1 | 5 | no | 1 |
+| **S45** | trump5 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.985467 | +0.108383 | 1 | 1 | L1:1 | 5 | no | 5 |
+| **S46** | k5_16 x1 | k11 (7 slot + 4 free) | 7 slot + 4 free | 3.985478 | +0.108394 | 1 | 1 | L1:1 | 4 | no | 5 |
+| **S47** | k5_11 x1 | k11 (8 slot + 3 free) | 8 slot + 3 free | 3.989280 | +0.112196 | 1 | 1 | L1:1 | 3 | 22.551 deg | 1 |
+| **S48** | k5_16 x1 | k11 (6 slot + 5 free) | 6 slot + 5 free | 3.996435 | +0.119351 | 1 | 1 | L1:1 | 5 | no | 7 |
+| **S49** | k5_11 x1 | k11 (7 slot + 4 free) | 7 slot + 4 free | 3.996724 | +0.119641 | 1 | 1 | L1:1 | 4 | no | 5 |
+| **S50** | trump5 x1 | k11 (8 slot + 3 free) | 8 slot + 3 free | 4.000027 | +0.122944 | 1 | 1 | L1:1 | 3 | no | 4 |
+| **S51** | k5_11 x1 | k11 (8 slot + 3 free) | 8 slot + 3 free | 4.000052 | +0.122968 | 1 | 1 | L2:1 | 3 | no | 4 |
+| **S52** | trump5 x1 | k11 (8 slot + 3 free) | 7 slot + 4 free | 4.000197 | +0.123113 | 1 | 1 | L1:1 | 3 | no | 4 |
+| **S53** | k5_11 x1 | k11 (9 slot + 2 free) | 9 slot + 2 free | 4.000261 | +0.123177 | 1 | 1 | L1:1 | 2 | 85.192 deg | 1 |
 
 Total alive nodes explained by an integral shadow: **1260** of **1566**.  Not explained: **306** (see the last section).
 
@@ -166,7 +178,8 @@ Total alive nodes explained by an integral shadow: **1260** of **1566**.  Not ex
 ![S01](shadows/S01.svg)
 
 * **s\*** = 4.000000000 = s-hat +0.122916410  (s0 = 3.877084, s\* - s0 = +0.122916)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TR(0,0)` `BR(1,1) (=f3)` `BR(0,1) (=f4)` + 4 free squares; a k11 packing.
+  * **gallery v1 counted this as 5 slot + 6 free** (A121): `f3` sits on `BR(1,1)`, `f4` sits on `BR(0,1)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 620 alive-at-LP nodes: k5_11 x238, trump5 x196, k5_16 x178, k5_05 x2, k5_10 x2, k5_12 x1, k5_17 x1, k6_20 x1, k6_29 x1; levels L1:532, L2:84, L3:1, L4:3; component 490, integral 130 support.
 * **load-bearing squares at this landing**: `f3` `BL(1,0)` `BR(0,0)` (3 of 11); **62 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 132 landings / slot-free splittings (5 slot + 6 free (71 nodes); 5 slot + 6 free (48 nodes); 6 slot + 5 free (45 nodes); 6 slot + 5 free (37 nodes); 5 slot + 6 free (29 nodes); 6 slot + 5 free (29 nodes); +126 more).
@@ -232,7 +245,7 @@ Load-bearing free squares: `f1`, `f3`, `f4`.  Rattlers/struts (removal leaves s\
 ![S02](shadows/S02.svg)
 
 * **s\*** = 3.886746030 = s-hat +0.009662440  (s0 = 3.877084, s\* - s0 = +0.009662)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares; a k11 packing.
 * **explains** 267 alive-at-LP nodes: k5_11 x184, k5_16 x68, trump5 x12, k5_02 x1, k5_03 x1, k6_29 x1; levels L1:156, L2:97, L3:10, L4:4; component 155, integral 112 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `BL(0,1)` `BL(1,0)` `BR(0,1)` `TL(0,0)` `TR(0,0)` (9 of 11); **15 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 19 landings / slot-free splittings (7 slot + 4 free (177 nodes); 6 slot + 5 free (32 nodes); 6 slot + 5 free (18 nodes); 7 slot + 4 free (15 nodes); 6 slot + 5 free (4 nodes); 7 slot + 4 free (3 nodes); +13 more).
@@ -293,7 +306,8 @@ Load-bearing free squares: `f1`, `f2`, `f3`.  Rattlers/struts (removal leaves s\
 ![S03](shadows/S03.svg)
 
 * **s\*** = 3.942809044 = s-hat +0.065725454  (s0 = 3.877084, s\* - s0 = +0.065725)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` `BL(1,1) (=f0)` `TR(0,1) (=f2)` + 3 free squares; a k11 packing.
+  * **gallery v1 counted this as 6 slot + 5 free** (A121): `f0` sits on `BL(1,1)`, `f2` sits on `TR(0,1)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 96 alive-at-LP nodes: k5_16 x50, k5_11 x30, trump5 x16; levels L1:78, L2:18; component 76, integral 20 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,0)` `BL(0,1)` `BR(0,0)` `TL(1,0)` `TR(0,0)` (10 of 11); **31 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 37 landings / slot-free splittings (6 slot + 5 free (22 nodes); 7 slot + 4 free (9 nodes); 7 slot + 4 free (7 nodes); 5 slot + 6 free (4 nodes); 8 slot + 3 free (4 nodes); 6 slot + 5 free (4 nodes); +31 more).
@@ -352,7 +366,8 @@ Load-bearing free squares: `f0`, `f2`.  Rattlers/struts (removal leaves s\* unch
 ![S04](shadows/S04.svg)
 
 * **s\*** = 3.822875659 = s-hat -0.054207931  (s0 = 3.877084, s\* - s0 = -0.054208)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares f0..f4; a k10 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` `BR(1,0) (=f2)` + 4 free squares; a k10 packing.
+  * **gallery v1 counted this as 5 slot + 5 free** (A121): `f2` sits on `BR(1,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 59 alive-at-LP nodes: k5_16 x48, k5_11 x10, trump5 x1; levels L1:53, L2:4, L3:1, L4:1; integral 59 support.
 * **load-bearing squares at this landing**: `f1` `f2` `f3` `f4` `BL(0,1)` `BR(0,0)` `TL(0,0)` `TR(0,0)` (8 of 10); **5 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 7 landings / slot-free splittings (5 slot + 5 free (16 nodes); 6 slot + 4 free (12 nodes); 7 slot + 3 free (10 nodes); 6 slot + 4 free (9 nodes); 6 slot + 4 free (9 nodes); 7 slot + 3 free (2 nodes); +1 more).
@@ -412,7 +427,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S05](shadows/S05.svg)
 
 * **s\*** = 3.912232042 = s-hat +0.035148452  (s0 = 3.877084, s\* - s0 = +0.035148)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares; a k11 packing.
 * **explains** 44 alive-at-LP nodes: k5_16 x32, trump5 x7, k5_11 x3, k6_20 x1, k6_27 x1; levels L1:39, L2:5; component 34, integral 10 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `BL(0,1)` `BL(1,0)` `TL(1,0)` `TR(0,0)` (8 of 11); **8 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 12 landings / slot-free splittings (7 slot + 4 free (27 nodes); 7 slot + 4 free (4 nodes); 5 slot + 6 free (2 nodes); 7 slot + 4 free (2 nodes); 7 slot + 4 free (2 nodes); 6 slot + 5 free (1 nodes); +6 more).
@@ -467,7 +482,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S06](shadows/S06.svg)
 
 * **s\*** = 3.707106786 = s-hat -0.169976804  (s0 = 3.877084, s\* - s0 = -0.169977)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 5 free squares f0..f4; a k10 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` `TL(1,1) (=f0)` `TR(0,1) (=f3)` + 3 free squares; a k10 packing.
+  * **gallery v1 counted this as 5 slot + 5 free** (A121): `f0` sits on `TL(1,1)`, `f3` sits on `TR(0,1)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 36 alive-at-LP nodes: k5_11 x28, k5_16 x5, trump5 x3; levels L1:18, L2:13, L3:5; integral 36 support.
 * **load-bearing squares at this landing**: `f2` `f3` `f4` `BL(1,0)` (4 of 10); **9 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 9 landings / slot-free splittings (5 slot + 5 free (21 nodes); 6 slot + 4 free (4 nodes); 6 slot + 4 free (3 nodes); 6 slot + 4 free (2 nodes); 5 slot + 5 free (2 nodes); 8 slot + 2 free (1 nodes); +3 more).
@@ -528,7 +544,7 @@ Load-bearing free squares: `f4`.  Rattlers/struts (removal leaves s\* unchanged)
 ![S07](shadows/S07.svg)
 
 * **s\*** = 3.885618055 = s-hat +0.008534465  (s0 = 3.877084, s\* - s0 = +0.008534)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 19 alive-at-LP nodes: trump5 x18, k5_16 x1; levels L1:19; integral 12, component 7 support.
 * **load-bearing squares at this landing**: `f0` `f2` `f4` `BL(0,1)` `BR(0,0)` `TR(0,0)` (6 of 11); **2 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 2 landings / slot-free splittings (6 slot + 5 free (18 nodes); 5 slot + 5 free (1 nodes)).
@@ -594,7 +610,7 @@ Load-bearing free squares: `f0`, `f2`, `f3`, `f4`.  Rattlers/struts (removal lea
 ![S08](shadows/S08.svg)
 
 * **s\*** = 3.914213562 = s-hat +0.037129972  (s0 = 3.877084, s\* - s0 = +0.037130)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TR(0,0)` + 6 free squares; a k11 packing.
 * **explains** 17 alive-at-LP nodes: k5_16 x6, k5_11 x5, trump5 x5, k6_21 x1; levels L1:16, L2:1; integral 9, component 8 support.
 * **load-bearing squares at this landing**: `f0` `f2` `f3` `f4` `f5` `BL(0,1)` `BL(1,0)` `TR(0,0)` (8 of 11); **8 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 11 landings / slot-free splittings (5 slot + 6 free (4 nodes); 7 slot + 4 free (2 nodes); 8 slot + 3 free (2 nodes); 6 slot + 5 free (2 nodes); 6 slot + 5 free (1 nodes); 7 slot + 4 free (1 nodes); +5 more).
@@ -657,7 +673,7 @@ Load-bearing free squares: `f0`, `f2`, `f3`, `f4`, `f5`.  Rattlers/struts (remov
 ![S09](shadows/S09.svg)
 
 * **s\*** = 3.925148814 = s-hat +0.048065224  (s0 = 3.877084, s\* - s0 = +0.048065)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares; a k11 packing.
 * **explains** 12 alive-at-LP nodes: k5_16 x9, trump5 x2, k5_11 x1; levels L1:12; component 10, integral 2 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `BL(0,1)` `BL(1,0)` `BR(0,0)` `TL(1,0)` `TR(0,0)` (9 of 11); **6 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 7 landings / slot-free splittings (7 slot + 4 free (5 nodes); 6 slot + 5 free (2 nodes); 5 slot + 6 free (1 nodes); 7 slot + 4 free (1 nodes); 6 slot + 5 free (1 nodes); 7 slot + 4 free (1 nodes); +1 more).
@@ -713,7 +729,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S10](shadows/S10.svg)
 
 * **s\*** = 3.902673975 = s-hat +0.025590385  (s0 = 3.877084, s\* - s0 = +0.025590)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares; a k11 packing.
 * **explains** 10 alive-at-LP nodes: k5_16 x8, k5_11 x1, trump5 x1; levels L1:10; integral 5, component 5 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `BL(0,1)` `BL(1,0)` `BR(0,1)` `TR(0,0)` (8 of 11); **4 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 7 landings / slot-free splittings (7 slot + 4 free (4 nodes); 7 slot + 4 free (1 nodes); 6 slot + 5 free (1 nodes); 5 slot + 6 free (1 nodes); 6 slot + 5 free (1 nodes); 5 slot + 6 free (1 nodes); +1 more).
@@ -770,7 +786,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S11](shadows/S11.svg)
 
 * **s\*** = 3.976619590 = s-hat +0.099536000  (s0 = 3.877084, s\* - s0 = +0.099536)
-* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) TL(0,0) TR(0,0) TR(0,1)` + 3 free squares f0..f2; a k11 packing.
+* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) TL(0,0) TR(0,0) TR(0,1)` + 3 free squares; a k11 packing.
 * **explains** 7 alive-at-LP nodes: k5_11 x4, trump5 x2, k5_16 x1; levels L1:5, L2:2; component 6, integral 1 support.
 * **load-bearing squares at this landing**: `f1` `f2` `BL(1,1)` `TL(0,0)` `TR(0,0)` (5 of 11); **3 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 5 landings / slot-free splittings (8 slot + 3 free (3 nodes); 7 slot + 4 free (1 nodes); 6 slot + 5 free (1 nodes); 6 slot + 5 free (1 nodes); 6 slot + 5 free (1 nodes)).
@@ -821,7 +837,7 @@ Load-bearing free squares: `f1`, `f2`.  Rattlers/struts (removal leaves s\* unch
 ![S12](shadows/S12.svg)
 
 * **s\*** = 3.400000000 = s-hat -0.477083590  (s0 = 3.877084, s\* - s0 = -0.477084)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 4 free squares f0..f3; a k9 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 4 free squares; a k9 packing.
 * **explains** 6 alive-at-LP nodes: k5_11 x3, k5_16 x2, trump5 x1; levels L1:6; integral 6 support.
 * **load-bearing squares at this landing**: `` (0 of 9); **2 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 4 landings / slot-free splittings (5 slot + 4 free (3 nodes); 6 slot + 3 free (1 nodes); 5 slot + 4 free (1 nodes); 5 slot + 4 free (1 nodes)).
@@ -879,7 +895,7 @@ Load-bearing free squares: none.  Rattlers/struts (removal leaves s\* unchanged)
 ![S13](shadows/S13.svg)
 
 * **s\*** = 3.991994282 = s-hat +0.114910692  (s0 = 3.877084, s\* - s0 = +0.114910)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(1,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(1,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 5 alive-at-LP nodes: trump5 x4, k5_16 x1; levels L1:5; integral 4, component 1 support.
 * **load-bearing squares at this landing**: `f0` `f2` `f3` `f4` `BL(0,1)` `BR(0,0)` `TL(1,0)` (7 of 11); **2 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 2 landings / slot-free splittings (6 slot + 5 free (4 nodes); 7 slot + 4 free (1 nodes)).
@@ -940,7 +956,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S14](shadows/S14.svg)
 
 * **s\*** = 3.767766944 = s-hat -0.109316646  (s0 = 3.877084, s\* - s0 = -0.109317)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares f0..f4; a k10 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` `TL(1,0) (=f2)` + 4 free squares; a k10 packing.
+  * **gallery v1 counted this as 5 slot + 5 free** (A121): `f2` sits on `TL(1,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 5 alive-at-LP nodes: k5_16 x3, k5_11 x2; levels L1:3, L2:1, L3:1; integral 5 support.
 * **load-bearing squares at this landing**: `f2` `f3` `f4` `BR(0,0)` `TL(0,0)` (5 of 10); **3 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 4 landings / slot-free splittings (5 slot + 5 free (2 nodes); 7 slot + 3 free (1 nodes); 6 slot + 4 free (1 nodes); 5 slot + 5 free (1 nodes)).
@@ -1000,7 +1017,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S15](shadows/S15.svg)
 
 * **s\*** = 3.996117051 = s-hat +0.119033461  (s0 = 3.877084, s\* - s0 = +0.119033)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,1)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,1)` `TL(1,0) (=f2)` + 4 free squares; a k11 packing.
+  * **gallery v1 counted this as 6 slot + 5 free** (A121): `f2` sits on `TL(1,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 5 alive-at-LP nodes: k5_11 x2, trump5 x2, k5_16 x1; levels L1:4, L2:1; component 5 support.
 * **load-bearing squares at this landing**: `f0` `f2` `f3` `f4` `BL(0,1)` `BL(1,0)` `BR(0,0)` `TL(0,0)` `TR(0,1)` (9 of 11); **5 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 5 landings / slot-free splittings (6 slot + 5 free (1 nodes); 6 slot + 5 free (1 nodes); 6 slot + 5 free (1 nodes); 7 slot + 4 free (1 nodes); 8 slot + 3 free (1 nodes)).
@@ -1062,7 +1080,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S16](shadows/S16.svg)
 
 * **s\*** = 3.768117767 = s-hat -0.108965823  (s0 = 3.877084, s\* - s0 = -0.108966)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` + 4 free squares f0..f3; a k10 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` `TL(1,0) (=f2)` + 3 free squares; a k10 packing.
+  * **gallery v1 counted this as 6 slot + 4 free** (A121): `f2` sits on `TL(1,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 4 alive-at-LP nodes: k5_11 x3, k5_16 x1; levels L1:2, L3:1, L4:1; integral 4 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `BL(0,1)` `BL(1,0)` `BR(0,0)` `TL(0,0)` `TR(0,0)` (9 of 10); **2 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 2 landings / slot-free splittings (6 slot + 4 free (3 nodes); 6 slot + 4 free (1 nodes)).
@@ -1118,7 +1137,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S17](shadows/S17.svg)
 
 * **s\*** = 3.858216318 = s-hat -0.018867272  (s0 = 3.877084, s\* - s0 = -0.018868)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares f0..f4; a k10 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares; a k10 packing.
 * **explains** 4 alive-at-LP nodes: k5_11 x2, k5_16 x2; levels L1:3, L2:1; integral 4 support.
 * **load-bearing squares at this landing**: `f1` `f3` `f4` `BR(0,0)` `TL(0,0)` (5 of 10); **2 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 2 landings / slot-free splittings (5 slot + 5 free (2 nodes); 6 slot + 4 free (2 nodes)).
@@ -1178,7 +1197,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S18](shadows/S18.svg)
 
 * **s\*** = 3.755342035 = s-hat -0.121741555  (s0 = 3.877084, s\* - s0 = -0.121742)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 5 free squares f0..f4; a k10 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 5 free squares; a k10 packing.
 * **explains** 3 alive-at-LP nodes: k5_11 x3; levels L1:2, L2:1; integral 3 support.
 * **load-bearing squares at this landing**: `f1` `f2` `f3` `f4` `BL(1,0)` `TL(0,0)` (6 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (5 slot + 5 free (3 nodes)).
@@ -1237,7 +1256,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S19](shadows/S19.svg)
 
 * **s\*** = 3.728581293 = s-hat -0.148502297  (s0 = 3.877084, s\* - s0 = -0.148503)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 5 free squares f0..f4; a k10 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` `BR(0,2) (=f1)` `BR(0,1) (=f2)` + 3 free squares; a k10 packing.
+  * **gallery v1 counted this as 5 slot + 5 free** (A121): `f1` sits on `BR(0,2)`, `f2` sits on `BR(0,1)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 2 alive-at-LP nodes: k5_11 x2; levels L1:2; integral 2 support.
 * **load-bearing squares at this landing**: `f1` `f2` `f3` `f4` `BL(0,1)` `BR(0,0)` (6 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (5 slot + 5 free (2 nodes)).
@@ -1295,7 +1315,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S20](shadows/S20.svg)
 
 * **s\*** = 3.806720615 = s-hat -0.070362975  (s0 = 3.877084, s\* - s0 = -0.070363)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 4 free squares f0..f3; a k10 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 4 free squares; a k10 packing.
 * **explains** 2 alive-at-LP nodes: trump5 x2; levels L1:2; integral 2 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f3` `BL(0,2)` `BR(0,0)` (5 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 4 free (2 nodes)).
@@ -1350,7 +1370,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S21](shadows/S21.svg)
 
 * **s\*** = 3.894321926 = s-hat +0.017238336  (s0 = 3.877084, s\* - s0 = +0.017238)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 2 alive-at-LP nodes: trump5 x2; levels L1:2; integral 2 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(0,2)` `BL(1,0)` `BR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (2 nodes)).
@@ -1410,7 +1430,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S22](shadows/S22.svg)
 
 * **s\*** = 3.998110682 = s-hat +0.121027092  (s0 = 3.877084, s\* - s0 = +0.121027)
-* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares f0..f2; a k11 packing.
+* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares; a k11 packing.
 * **explains** 2 alive-at-LP nodes: k5_11 x2; levels L1:2; component 2 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `BL(0,1)` `BL(1,0)` `BR(0,1)` `TL(0,0)` `TR(1,0)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (8 slot + 3 free (2 nodes)).
@@ -1461,7 +1481,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 ![S23](shadows/S23.svg)
 
 * **s\*** = 3.894653059 = s-hat +0.017569469  (s0 = 3.877084, s\* - s0 = +0.017569)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) TL(0,0)` + 4 free squares f0..f3; a k10 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) TL(0,0)` `BL(2,1) (=f0)` + 3 free squares; a k10 packing.
+  * **gallery v1 counted this as 6 slot + 4 free** (A121): `f0` sits on `BL(2,1)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 2 alive-at-LP nodes: k5_11 x2; levels L2:2; integral 2 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `BL(1,0)` `BL(1,1)` `BR(0,0)` `TL(0,0)` (8 of 10); **2 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 2 landings / slot-free splittings (6 slot + 4 free (1 nodes); 7 slot + 3 free (1 nodes)).
@@ -1517,7 +1538,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S24](shadows/S24.svg)
 
 * **s\*** = 3.989264411 = s-hat +0.112180821  (s0 = 3.877084, s\* - s0 = +0.112180)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares; a k11 packing.
 * **explains** 2 alive-at-LP nodes: k5_11 x1, k5_16 x1; levels L1:2; integral 1, component 1 support.
 * **load-bearing squares at this landing**: `f0` `f2` `f3` `BL(1,1)` `BR(0,0)` `TL(1,0)` (6 of 11); **2 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 2 landings / slot-free splittings (7 slot + 4 free (1 nodes); 7 slot + 4 free (1 nodes)).
@@ -1574,7 +1595,8 @@ Load-bearing free squares: `f0`, `f2`, `f3`.  Rattlers/struts (removal leaves s\
 ![S25](shadows/S25.svg)
 
 * **s\*** = 3.728606234 = s-hat -0.148477356  (s0 = 3.877084, s\* - s0 = -0.148478)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 5 free squares f0..f4; a k10 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` `TL(2,0) (=f0)` + 4 free squares; a k10 packing.
+  * **gallery v1 counted this as 5 slot + 5 free** (A121): `f0` sits on `TL(2,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f0` `f2` `f3` `f4` `BL(1,0)` `TL(0,0)` (6 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (5 slot + 5 free (1 nodes)).
@@ -1632,7 +1654,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S26](shadows/S26.svg)
 
 * **s\*** = 3.822888964 = s-hat -0.054194626  (s0 = 3.877084, s\* - s0 = -0.054195)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0) TR(0,0)` + 4 free squares f0..f3; a k10 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0) TR(0,0)` + 4 free squares; a k10 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f1` `f2` `f3` `BL(0,1)` `BR(1,0)` `TL(0,0)` `TR(0,0)` (7 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 4 free (1 nodes)).
@@ -1688,7 +1710,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S27](shadows/S27.svg)
 
 * **s\*** = 3.823521494 = s-hat -0.053562096  (s0 = 3.877084, s\* - s0 = -0.053563)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares f0..f3; a k10 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares; a k10 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f0` `f3` `BR(0,1)` `TL(0,0)` (4 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 4 free (1 nodes)).
@@ -1744,7 +1766,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S28](shadows/S28.svg)
 
 * **s\*** = 3.825844092 = s-hat -0.051239498  (s0 = 3.877084, s\* - s0 = -0.051240)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares f0..f3; a k10 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares; a k10 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f2` `f3` `BL(0,1)` `TR(0,0)` (4 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 4 free (1 nodes)).
@@ -1802,7 +1824,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S29](shadows/S29.svg)
 
 * **s\*** = 3.886760521 = s-hat +0.009676931  (s0 = 3.877084, s\* - s0 = +0.009677)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` `BR(1,0) (=f2)` + 4 free squares; a k11 packing.
+  * **gallery v1 counted this as 6 slot + 5 free** (A121): `f2` sits on `BR(1,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f3` `f4` `BL(0,1)` `BR(0,1)` (6 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -1860,7 +1883,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S30](shadows/S30.svg)
 
 * **s\*** = 3.897230788 = s-hat +0.020147198  (s0 = 3.877084, s\* - s0 = +0.020147)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(1,0)` `BR(0,1)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -1924,7 +1947,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S31](shadows/S31.svg)
 
 * **s\*** = 3.907471834 = s-hat +0.030388244  (s0 = 3.877084, s\* - s0 = +0.030388)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(0,2)` `BL(1,0)` `BR(0,0)` `TR(0,0)` (10 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -1985,7 +2008,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S32](shadows/S32.svg)
 
 * **s\*** = 3.912250002 = s-hat +0.035166412  (s0 = 3.877084, s\* - s0 = +0.035166)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` `BL(1,0) (=f0)` + 4 free squares; a k11 packing.
+  * **gallery v1 counted this as 6 slot + 5 free** (A121): `f0` sits on `BL(1,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,0)` `BL(0,1)` `TL(1,0)` `TR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2048,7 +2072,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S33](shadows/S33.svg)
 
 * **s\*** = 3.916930867 = s-hat +0.039847277  (s0 = 3.877084, s\* - s0 = +0.039847)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(0,2)` `BL(1,0)` `BR(0,0)` `TR(0,0)` (10 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2111,7 +2135,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S34](shadows/S34.svg)
 
 * **s\*** = 3.917360053 = s-hat +0.040276463  (s0 = 3.877084, s\* - s0 = +0.040276)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(0,2)` `BL(1,0)` `BR(0,0)` `TR(0,0)` (10 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2174,7 +2198,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S35](shadows/S35.svg)
 
 * **s\*** = 3.917432667 = s-hat +0.040349077  (s0 = 3.877084, s\* - s0 = +0.040349)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(0,2)` `BL(1,0)` `BR(0,0)` `TR(0,0)` (10 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2235,7 +2259,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S36](shadows/S36.svg)
 
 * **s\*** = 3.924003080 = s-hat +0.046919490  (s0 = 3.877084, s\* - s0 = +0.046919)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 6 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f0` `f2` `f3` `f4` `f5` `BL(0,1)` `BR(0,0)` `TL(0,0)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (5 slot + 6 free (1 nodes)).
@@ -2297,7 +2321,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers/struts 
 ![S37](shadows/S37.svg)
 
 * **s\*** = 3.925470104 = s-hat +0.048386514  (s0 = 3.877084, s\* - s0 = +0.048386)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `BL(0,1)` `BL(1,0)` `BR(0,1)` `TL(0,0)` `TR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (7 slot + 4 free (1 nodes)).
@@ -2353,7 +2377,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S38](shadows/S38.svg)
 
 * **s\*** = 3.928914695 = s-hat +0.051831105  (s0 = 3.877084, s\* - s0 = +0.051831)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(1,0)` `BR(0,1)` `TR(0,0)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2417,7 +2441,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S39](shadows/S39.svg)
 
 * **s\*** = 3.932424859 = s-hat +0.055341269  (s0 = 3.877084, s\* - s0 = +0.055341)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(1,0)` `TL(0,0)` `TR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2480,7 +2504,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S40](shadows/S40.svg)
 
 * **s\*** = 3.940517848 = s-hat +0.063434258  (s0 = 3.877084, s\* - s0 = +0.063434)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares f0..f2; a k10 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares; a k10 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `BL(0,1)` `BR(0,0)` `BR(1,0)` `TR(1,0)` (7 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (7 slot + 3 free (1 nodes)).
@@ -2537,7 +2561,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 ![S41](shadows/S41.svg)
 
 * **s\*** = 3.940838294 = s-hat +0.063754704  (s0 = 3.877084, s\* - s0 = +0.063754)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,0)` `BL(0,1)` `BR(0,0)` `TL(1,0)` `TR(0,0)` (10 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2598,7 +2622,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S42](shadows/S42.svg)
 
 * **s\*** = 3.952691881 = s-hat +0.075608291  (s0 = 3.877084, s\* - s0 = +0.075608)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(1,0)` `BR(0,0)` `TL(0,0)` `TR(0,0)` (10 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2659,7 +2683,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S43](shadows/S43.svg)
 
 * **s\*** = 3.956360153 = s-hat +0.079276563  (s0 = 3.877084, s\* - s0 = +0.079276)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L2:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `BL(0,1)` `BL(1,0)` `TL(0,0)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2718,7 +2742,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S44](shadows/S44.svg)
 
 * **s\*** = 3.958424767 = s-hat +0.081341177  (s0 = 3.877084, s\* - s0 = +0.081341)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` `TR(0,0) (=f1)` + 5 free squares; a k11 packing.
+  * **gallery v1 counted this as 5 slot + 6 free** (A121): `f1` sits on `TR(0,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `f3` `f4` `f5` `BL(0,1)` `BL(1,0)` `TL(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (5 slot + 6 free (1 nodes)).
@@ -2780,7 +2805,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers/struts 
 ![S45](shadows/S45.svg)
 
 * **s\*** = 3.985466789 = s-hat +0.108383199  (s0 = 3.877084, s\* - s0 = +0.108383)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(1,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(1,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; integral 1 support.
 * **load-bearing squares at this landing**: `f2` `f3` `f4` `BL(1,0)` `TL(1,0)` (5 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -2841,7 +2866,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S46](shadows/S46.svg)
 
 * **s\*** = 3.985477651 = s-hat +0.108394061  (s0 = 3.877084, s\* - s0 = +0.108394)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 4 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f2` `f3` `BL(0,1)` `BR(0,1)` `TR(1,0)` (5 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (7 slot + 4 free (1 nodes)).
@@ -2898,7 +2923,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S47](shadows/S47.svg)
 
 * **s\*** = 3.989279618 = s-hat +0.112196028  (s0 = 3.877084, s\* - s0 = +0.112196)
-* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares f0..f2; a k11 packing.
+* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f2` `BL(1,0)` `BR(0,1)` `TL(0,0)` `TR(1,0)` (7 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (8 slot + 3 free (1 nodes)).
@@ -2954,7 +2979,7 @@ Load-bearing free squares: `f1`, `f2`.  Rattlers/struts (removal leaves s\* unch
 ![S48](shadows/S48.svg)
 
 * **s\*** = 3.996434529 = s-hat +0.119350939  (s0 = 3.877084, s\* - s0 = +0.119351)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0) TR(1,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0) TR(1,0)` + 5 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_16 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f4` `BL(0,1)` `BR(0,0)` `TL(0,0)` `TR(1,0)` (7 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (6 slot + 5 free (1 nodes)).
@@ -3014,7 +3039,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 ![S49](shadows/S49.svg)
 
 * **s\*** = 3.996724423 = s-hat +0.119640833  (s0 = 3.877084, s\* - s0 = +0.119640)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0) TR(0,1)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0) TR(0,1)` + 4 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `f3` `BL(1,0)` `BR(0,0)` `TL(0,0)` `TR(0,1)` (7 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (7 slot + 4 free (1 nodes)).
@@ -3070,7 +3095,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S50](shadows/S50.svg)
 
 * **s\*** = 4.000027330 = s-hat +0.122943740  (s0 = 3.877084, s\* - s0 = +0.122943)
-* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BL(1,1) BR(0,0) TL(0,0) TR(0,0)` + 3 free squares f0..f2; a k11 packing.
+* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BL(1,1) BR(0,0) TL(0,0) TR(0,0)` + 3 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f1` `f2` `BL(1,1)` `TR(0,0)` (4 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (8 slot + 3 free (1 nodes)).
@@ -3121,7 +3146,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 ![S51](shadows/S51.svg)
 
 * **s\*** = 4.000051836 = s-hat +0.122968246  (s0 = 3.877084, s\* - s0 = +0.122968)
-* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares f0..f2; a k11 packing.
+* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L2:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `BL(1,0)` `BR(0,1)` `TR(1,0)` (5 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (8 slot + 3 free (1 nodes)).
@@ -3172,7 +3197,8 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 ![S52](shadows/S52.svg)
 
 * **s\*** = 4.000196613 = s-hat +0.123113023  (s0 = 3.877084, s\* - s0 = +0.123113)
-* **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` + 4 free squares f0..f3; a k11 packing.
+* **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` `TR(1,0) (=f2)` + 3 free squares; a k11 packing.
+  * **gallery v1 counted this as 7 slot + 4 free** (A121): `f2` sits on `TR(1,0)` to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free ones.  The f-indices are kept everywhere below (contact graph, forces, flat directions, rattler table) so A121's review rows stay valid.
 * **explains** 1 alive-at-LP nodes: trump5 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f1` `f2` `f3` `BL(0,2)` `BL(1,0)` `TR(0,0)` (6 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (7 slot + 4 free (1 nodes)).
@@ -3227,7 +3253,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 ![S53](shadows/S53.svg)
 
 * **s\*** = 4.000260741 = s-hat +0.123177150  (s0 = 3.877084, s\* - s0 = +0.123177)
-* **shadow** = 9 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) BR(0,1) BR(0,2) TL(0,0) TR(0,0)` + 2 free squares f0..f1; a k11 packing.
+* **shadow** = 9 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) BR(0,1) BR(0,2) TL(0,0) TR(0,0)` + 2 free squares; a k11 packing.
 * **explains** 1 alive-at-LP nodes: k5_11 x1; levels L1:1; component 1 support.
 * **load-bearing squares at this landing**: `f0` `f1` `BL(1,1)` `BR(0,2)` `TL(0,0)` (5 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **multiplicity**: 1 landings / slot-free splittings (9 slot + 2 free (1 nodes)).
@@ -3312,38 +3338,38 @@ and shorter otherwise.  All are at the certified side s0 = 3.877084.
 
 **30 distinct k0 shadow values explain 161 of the 217 alive cells**; 56 are explained by no integral shadow.
 
-| shadow | sources | k of the shadow | s* | s* - s-hat | k0 cells | #cfg | levels | free sq | common tilt | flexes | coincides with |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| **K01** | A38 x65, A99 x12, A85 x7 | k11 (6 slot + 5 free) | 4.000000 | +0.122916 | 84 | 45 | L1:65, L2:15, L3:4 | 5 | no | 14 | - |
-| **K02** | A38 x10 | k11 (4 slot + 7 free) | 3.942809 | +0.065725 | 10 | 7 | L1:8, L2:1, L3:1 | 7 | no | 11 | - |
-| **K03** | A38 x9 | k11 (4 slot + 7 free) | 3.925149 | +0.048065 | 9 | 5 | L1:4, L2:4, L3:1 | 7 | no | 3 | S37 (0.57) |
-| **K04** | A38 x8, A99 x1 | k11 (2 slot + 9 free) | 3.914214 | +0.037130 | 9 | 8 | L1:9 | 9 | no | 5 | S32 (0.57); S05 (0.57) |
-| **K05** | A38 x8 | k11 (4 slot + 7 free) | 3.912232 | +0.035148 | 8 | 3 | L1:3, L2:3, L3:2 | 7 | no | 4 | S05 (0.83); S32 (0.69) |
-| **K06** | A99 x3, A38 x3 | k11 (5 slot + 6 free) | 3.886745 | +0.009662 | 6 | 5 | L1:4, L2:1, L3:1 | 6 | no | 5 | S29 (0.83); S02 (0.83) |
-| **K07** | A99 x5 | k9 (0 slot + 9 free) | 3.400000 | -0.477084 | 5 | 2 | L1:5 | 9 | no | 20 | - |
-| **K08** | A38 x5 | k10 (0 slot + 10 free) | 3.828427 | -0.048656 | 5 | 3 | L1:4, L2:1 | 10 | no | 18 | - |
-| **K09** | A38 x3 | k10 (1 slot + 9 free) | 3.788222 | -0.088862 | 3 | 1 | L1:1, L2:2 | 9 | no | 1 | - |
-| **K10** | A38 x2 | k10 (2 slot + 8 free) | 3.822876 | -0.054208 | 2 | 2 | L2:2 | 8 | no | 15 | - |
-| **K11** | A99 x1 | k10 (1 slot + 9 free) | 3.728581 | -0.148503 | 1 | 1 | L1:1 | 9 | no | 12 | S25 (0.67); S19 (0.54) |
-| **K12** | A38 x1 | k10 (2 slot + 8 free) | 3.768117 | -0.108966 | 1 | 1 | L1:1 | 8 | no | 11 | - |
-| **K13** | A38 x1 | k10 (1 slot + 9 free) | 3.803539 | -0.073544 | 1 | 1 | L1:1 | 9 | no | 5 | - |
-| **K14** | A99 x1 | k10 (2 slot + 8 free) | 3.804138 | -0.072946 | 1 | 1 | L1:1 | 8 | no | 6 | - |
-| **K15** | A38 x1 | k10 (1 slot + 9 free) | 3.828944 | -0.048139 | 1 | 1 | L2:1 | 9 | 33.811 deg | 5 | - |
-| **K16** | A38 x1 | k10 (3 slot + 7 free) | 3.898863 | +0.021779 | 1 | 1 | L3:1 | 7 | no | 3 | S29 (0.50); S02 (0.50) |
-| **K17** | A38 x1 | k11 (4 slot + 7 free) | 3.912259 | +0.035176 | 1 | 1 | L1:1 | 7 | no | 8 | S32 (0.83); S05 (0.69) |
-| **K18** | A38 x1 | k11 (4 slot + 7 free) | 3.915298 | +0.038214 | 1 | 1 | L2:1 | 7 | no | 2 | - |
-| **K19** | A38 x1 | k11 (5 slot + 6 free) | 3.916931 | +0.039847 | 1 | 1 | L1:1 | 6 | no | 1 | S33 (1.00, exact); S34 (0.83) |
-| **K20** | A38 x1 | k11 (2 slot + 9 free) | 3.924402 | +0.047319 | 1 | 1 | L2:1 | 9 | no | 6 | S40 (0.50) |
-| **K21** | A85 x1 | k11 (5 slot + 6 free) | 3.925275 | +0.048192 | 1 | 1 | L1:1 | 6 | no | 3 | S39 (0.69); S41 (0.57) |
-| **K22** | A38 x1 | k11 (1 slot + 10 free) | 3.943894 | +0.066811 | 1 | 1 | L1:1 | 10 | no | 8 | - |
-| **K23** | A38 x1 | k11 (2 slot + 9 free) | 3.948781 | +0.071698 | 1 | 1 | L1:1 | 9 | no | 13 | - |
-| **K24** | A38 x1 | k11 (4 slot + 7 free) | 3.967522 | +0.090438 | 1 | 1 | L1:1 | 7 | no | 6 | S49 (0.57) |
-| **K25** | A38 x1 | k11 (5 slot + 6 free) | 3.977041 | +0.099957 | 1 | 1 | L3:1 | 6 | no | 5 | S44 (0.57) |
-| **K26** | A85 x1 | k11 (3 slot + 8 free) | 3.985467 | +0.108383 | 1 | 1 | L1:1 | 8 | no | 12 | - |
-| **K27** | A38 x1 | k11 (5 slot + 6 free) | 3.989264 | +0.112181 | 1 | 1 | L1:1 | 6 | no | 8 | S47 (0.57) |
-| **K28** | A99 x1 | k11 (4 slot + 7 free) | 4.000023 | +0.122940 | 1 | 1 | L1:1 | 7 | no | 13 | - |
-| **K29** | A38 x1 | k11 (4 slot + 7 free) | 4.000145 | +0.123061 | 1 | 1 | L2:1 | 7 | no | 11 | - |
-| **K30** | A38 x1 | k11 (2 slot + 9 free) | 4.020670 | +0.143586 | 1 | 1 | L1:1 | 9 | no | 8 | - |
+| shadow | sources | k of the shadow | gallery v1 split | s* | s* - s-hat | k0 cells | #cfg | levels | free sq | common tilt | flexes | coincides with |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **K01** | A38 x65, A99 x12, A85 x7 | k11 (6 slot + 5 free) | 6 slot + 5 free | 4.000000 | +0.122916 | 84 | 45 | L1:65, L2:15, L3:4 | 5 | no | 14 | - |
+| **K02** | A38 x10 | k11 (4 slot + 7 free) | 4 slot + 7 free | 3.942809 | +0.065725 | 10 | 7 | L1:8, L2:1, L3:1 | 7 | no | 11 | - |
+| **K03** | A38 x9 | k11 (5 slot + 6 free) | 4 slot + 7 free | 3.925149 | +0.048065 | 9 | 5 | L1:4, L2:4, L3:1 | 6 | no | 3 | S37 (0.57) |
+| **K04** | A38 x8, A99 x1 | k11 (5 slot + 6 free) | 2 slot + 9 free | 3.914214 | +0.037130 | 9 | 8 | L1:9 | 6 | no | 5 | S32 (0.57); S05 (0.57) |
+| **K05** | A38 x8 | k11 (6 slot + 5 free) | 4 slot + 7 free | 3.912232 | +0.035148 | 8 | 3 | L1:3, L2:3, L3:2 | 5 | no | 4 | S05 (0.83); S32 (0.69) |
+| **K06** | A99 x3, A38 x3 | k11 (6 slot + 5 free) | 5 slot + 6 free | 3.886745 | +0.009662 | 6 | 5 | L1:4, L2:1, L3:1 | 5 | no | 5 | S29 (0.83); S02 (0.83) |
+| **K07** | A99 x5 | k9 (0 slot + 9 free) | 0 slot + 9 free | 3.400000 | -0.477084 | 5 | 2 | L1:5 | 9 | no | 20 | - |
+| **K08** | A38 x5 | k10 (0 slot + 10 free) | 0 slot + 10 free | 3.828427 | -0.048656 | 5 | 3 | L1:4, L2:1 | 10 | no | 18 | - |
+| **K09** | A38 x3 | k10 (3 slot + 7 free) | 1 slot + 9 free | 3.788222 | -0.088862 | 3 | 1 | L1:1, L2:2 | 7 | no | 1 | - |
+| **K10** | A38 x2 | k10 (2 slot + 8 free) | 2 slot + 8 free | 3.822876 | -0.054208 | 2 | 2 | L2:2 | 8 | no | 15 | - |
+| **K11** | A99 x1 | k10 (3 slot + 7 free) | 1 slot + 9 free | 3.728581 | -0.148503 | 1 | 1 | L1:1 | 7 | no | 12 | S25 (0.67); S19 (0.54) |
+| **K12** | A38 x1 | k10 (4 slot + 6 free) | 2 slot + 8 free | 3.768117 | -0.108966 | 1 | 1 | L1:1 | 6 | no | 11 | - |
+| **K13** | A38 x1 | k10 (1 slot + 9 free) | 1 slot + 9 free | 3.803539 | -0.073544 | 1 | 1 | L1:1 | 9 | no | 5 | - |
+| **K14** | A99 x1 | k10 (3 slot + 7 free) | 2 slot + 8 free | 3.804138 | -0.072946 | 1 | 1 | L1:1 | 7 | no | 6 | - |
+| **K15** | A38 x1 | k10 (1 slot + 9 free) | 1 slot + 9 free | 3.828944 | -0.048139 | 1 | 1 | L2:1 | 9 | 33.811 deg | 5 | - |
+| **K16** | A38 x1 | k10 (3 slot + 7 free) | 3 slot + 7 free | 3.898863 | +0.021779 | 1 | 1 | L3:1 | 7 | no | 3 | S29 (0.50); S02 (0.50) |
+| **K17** | A38 x1 | k11 (5 slot + 6 free) | 4 slot + 7 free | 3.912259 | +0.035176 | 1 | 1 | L1:1 | 6 | no | 8 | S32 (0.83); S05 (0.69) |
+| **K18** | A38 x1 | k11 (5 slot + 6 free) | 4 slot + 7 free | 3.915298 | +0.038214 | 1 | 1 | L2:1 | 6 | no | 2 | - |
+| **K19** | A38 x1 | k11 (6 slot + 5 free) | 5 slot + 6 free | 3.916931 | +0.039847 | 1 | 1 | L1:1 | 5 | no | 1 | S33 (1.00, exact); S34 (0.83) |
+| **K20** | A38 x1 | k11 (4 slot + 7 free) | 2 slot + 9 free | 3.924402 | +0.047319 | 1 | 1 | L2:1 | 7 | no | 6 | S40 (0.50) |
+| **K21** | A85 x1 | k11 (6 slot + 5 free) | 5 slot + 6 free | 3.925275 | +0.048192 | 1 | 1 | L1:1 | 5 | no | 3 | S39 (0.69); S41 (0.57) |
+| **K22** | A38 x1 | k11 (4 slot + 7 free) | 1 slot + 10 free | 3.943894 | +0.066811 | 1 | 1 | L1:1 | 7 | no | 8 | - |
+| **K23** | A38 x1 | k11 (3 slot + 8 free) | 2 slot + 9 free | 3.948781 | +0.071698 | 1 | 1 | L1:1 | 8 | no | 13 | - |
+| **K24** | A38 x1 | k11 (6 slot + 5 free) | 4 slot + 7 free | 3.967522 | +0.090438 | 1 | 1 | L1:1 | 5 | no | 6 | S49 (0.57) |
+| **K25** | A38 x1 | k11 (6 slot + 5 free) | 5 slot + 6 free | 3.977041 | +0.099957 | 1 | 1 | L3:1 | 5 | no | 5 | S44 (0.57) |
+| **K26** | A85 x1 | k11 (4 slot + 7 free) | 3 slot + 8 free | 3.985467 | +0.108383 | 1 | 1 | L1:1 | 7 | no | 12 | - |
+| **K27** | A38 x1 | k11 (5 slot + 6 free) | 5 slot + 6 free | 3.989264 | +0.112181 | 1 | 1 | L1:1 | 6 | no | 8 | S47 (0.57) |
+| **K28** | A99 x1 | k11 (4 slot + 7 free) | 4 slot + 7 free | 4.000023 | +0.122940 | 1 | 1 | L1:1 | 7 | no | 13 | - |
+| **K29** | A38 x1 | k11 (4 slot + 7 free) | 4 slot + 7 free | 4.000145 | +0.123061 | 1 | 1 | L2:1 | 7 | no | 11 | - |
+| **K30** | A38 x1 | k11 (3 slot + 8 free) | 2 slot + 9 free | 4.020670 | +0.143586 | 1 | 1 | L1:1 | 8 | no | 8 | - |
 
 ## Coincidences with Part I
 
@@ -3405,7 +3431,7 @@ Rows are listed when either score is high (packing Jaccard >= 0.5, or slot-set J
 ![K01](shadows/K01.svg)
 
 * **s\*** = 4.000000000 = s-hat +0.122916410  (s0 = 3.877084, s\* - s0 = +0.122916)
-* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) TL(0,0) TR(0,0)` + 5 free squares f0..f4; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) TL(0,0) TR(0,0)` + 5 free squares; a k11 packing.
 * **explains** 84 alive k0 cells: A38 x65, A99 x12, A85 x7; levels L1:65, L2:15, L3:4; component 75, integral 9 support; 19 at tau >= budget.
 * **load-bearing squares**: `BL(0,2)` `TL(0,0)` (2 of 11); **45 distinct minimised configuration(s)** share this s*.
 * **restarts**: 86 feasible of 103; distinct minima [4.0, 4.00001, 4.00003, 4.00029].
@@ -3447,7 +3473,7 @@ Load-bearing: none.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`.
 ![K02](shadows/K02.svg)
 
 * **s\*** = 3.942809044 = s-hat +0.065725454  (s0 = 3.877084, s\* - s0 = +0.065725)
-* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,1)` + 7 free squares f0..f6; a k11 packing.
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,1)` + 7 free squares; a k11 packing.
 * **explains** 10 alive k0 cells: A38 x10; levels L1:8, L2:1, L3:1; component 9, integral 1 support; 5 at tau >= budget.
 * **load-bearing squares**: `f5` `f6` `BL(0,1)` `BR(0,0)` `TR(0,1)` (5 of 11); **7 distinct minimised configuration(s)** share this s*.
 * **restarts**: 79 feasible of 102; distinct minima [3.94281, 4.0, 4.00001, 4.00006, 4.32623].
@@ -3500,7 +3526,8 @@ Load-bearing: `f6`.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.
 ![K03](shadows/K03.svg)
 
 * **s\*** = 3.925148806 = s-hat +0.048065216  (s0 = 3.877084, s\* - s0 = +0.048065)
-* **shadow** = 4 slot squares `BL(0,0) BL(0,1) TL(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) TL(0,0) TR(0,0)` `BR(0,1) (=f3)` + 6 free squares; a k11 packing.
+  * **gallery v1 counted this as 4 slot + 7 free** (A121): `f3` sits on `BR(0,1)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 9 alive k0 cells: A38 x9; levels L1:4, L2:4, L3:1; component 9 support; 2 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f6` `BL(0,1)` `TL(0,0)` `TR(0,0)` (10 of 11); **5 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S37` (s* 3.925470, D4 map `e`, 8 squares matched, Jaccard 0.571).
@@ -3561,7 +3588,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 ![K04](shadows/K04.svg)
 
 * **s\*** = 3.914213572 = s-hat +0.037129982  (s0 = 3.877084, s\* - s0 = +0.037130)
-* **shadow** = 2 slot squares `BL(0,0) BR(0,0)` + 9 free squares f0..f8; a k11 packing.
+* **shadow** = 5 slot squares `BL(0,0) BR(0,0)` `TR(0,1) (=f1)` `TR(0,0) (=f4)` `TR(1,0) (=f5)` + 6 free squares; a k11 packing.
+  * **gallery v1 counted this as 2 slot + 9 free** (A121): `f1` sits on `TR(0,1)`, `f4` sits on `TR(0,0)`, `f5` sits on `TR(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 9 alive k0 cells: A38 x8, A99 x1; levels L1:9; integral 5, component 4 support; 6 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f7` `f8` `BL(0,0)` (9 of 11); **8 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S32` (s* 3.912250, D4 map `r180`, 8 squares matched, Jaccard 0.571); `S05` (s* 3.912232, D4 map `r180`, 8 squares matched, Jaccard 0.571); `S10` (s* 3.902674, D4 map `anti`, 8 squares matched, Jaccard 0.571).
@@ -3627,7 +3655,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: n
 ![K05](shadows/K05.svg)
 
 * **s\*** = 3.912232040 = s-hat +0.035148450  (s0 = 3.877084, s\* - s0 = +0.035148)
-* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` `BL(1,0) (=f2)` `TL(1,0) (=f5)` + 5 free squares; a k11 packing.
+  * **gallery v1 counted this as 4 slot + 7 free** (A121): `f2` sits on `BL(1,0)`, `f5` sits on `TL(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 8 alive k0 cells: A38 x8; levels L1:3, L2:3, L3:2; component 8 support; 2 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f6` `BL(0,0)` `BL(0,1)` `TR(0,0)` (10 of 11); **3 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S05` (s* 3.912232, D4 map `e`, 10 squares matched, Jaccard 0.833); `S32` (s* 3.912250, D4 map `e`, 9 squares matched, Jaccard 0.692).
@@ -3687,7 +3716,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 ![K06](shadows/K06.svg)
 
 * **s\*** = 3.886745485 = s-hat +0.009661895  (s0 = 3.877084, s\* - s0 = +0.009661)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,1) TL(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,1) TL(0,0) TR(0,0)` `BL(1,0) (=f2)` + 5 free squares; a k11 packing.
+  * **gallery v1 counted this as 5 slot + 6 free** (A121): `f2` sits on `BL(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 6 alive k0 cells: A99 x3, A38 x3; levels L1:4, L2:1, L3:1; component 5, integral 1 support; 1 at tau >= budget.
 * **load-bearing squares**: `f1` `f3` `f4` `f5` `BL(0,1)` `BR(0,1)` (6 of 11); **5 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S29` (s* 3.886761, D4 map `mx`, 10 squares matched, Jaccard 0.833); `S02` (s* 3.886746, D4 map `e`, 10 squares matched, Jaccard 0.833); `S10` (s* 3.902674, D4 map `e`, 9 squares matched, Jaccard 0.692).
@@ -3740,7 +3770,7 @@ Load-bearing: `f3`, `f4`, `f5`.  Rattlers: `f0`, `f1`, `f2`.
 ![K07](shadows/K07.svg)
 
 * **s\*** = 3.400000000 = s-hat -0.477083590  (s0 = 3.877084, s\* - s0 = -0.477084)
-* **shadow** = 0 slot squares `(none)` + 9 free squares f0..f8; a k9 packing.
+* **shadow** = 0 slot squares `(none)` + 9 free squares; a k9 packing.
 * **explains** 5 alive k0 cells: A99 x5; levels L1:5; integral 5 support; 0 at tau >= budget.
 * **load-bearing squares**: `f1` `f2` `f7` (3 of 9); **2 distinct minimised configuration(s)** share this s*.
 * **restarts**: 95 feasible of 104; distinct minima [3.4, 3.62132, 3.68199, 3.69375, 3.69905, 3.70711, 3.72858, 3.76777].
@@ -3796,7 +3826,7 @@ Load-bearing: none.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `
 ![K08](shadows/K08.svg)
 
 * **s\*** = 3.828427125 = s-hat -0.048656465  (s0 = 3.877084, s\* - s0 = -0.048657)
-* **shadow** = 0 slot squares `(none)` + 10 free squares f0..f9; a k10 packing.
+* **shadow** = 0 slot squares `(none)` + 10 free squares; a k10 packing.
 * **explains** 5 alive k0 cells: A38 x5; levels L1:4, L2:1; integral 5 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f5` `f6` `f7` `f9` (5 of 10); **3 distinct minimised configuration(s)** share this s*.
 * **restarts**: 88 feasible of 102; distinct minima [3.70711, 3.72858, 3.76777, 3.76812, 3.77119, 3.78801, 3.80316, 3.80673].
@@ -3854,7 +3884,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`, `f9`.  Rattl
 ![K09](shadows/K09.svg)
 
 * **s\*** = 3.788221847 = s-hat -0.088861743  (s0 = 3.877084, s\* - s0 = -0.088862)
-* **shadow** = 1 slot squares `BL(0,0)` + 9 free squares f0..f8; a k10 packing.
+* **shadow** = 3 slot squares `BL(0,0)` `TL(2,0) (=f1)` `TL(0,0) (=f2)` + 7 free squares; a k10 packing.
+  * **gallery v1 counted this as 1 slot + 9 free** (A121): `f1` sits on `TL(2,0)`, `f2` sits on `TL(0,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 3 alive k0 cells: A38 x3; levels L1:1, L2:2; integral 3 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f6` `f7` `f8` `BL(0,0)` (10 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 80 feasible of 103; distinct minima [3.70711, 3.72858, 3.76777, 3.76812, 3.77226, 3.78822, 3.79249, 3.79547].
@@ -3922,7 +3953,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: n
 ![K10](shadows/K10.svg)
 
 * **s\*** = 3.822875659 = s-hat -0.054207931  (s0 = 3.877084, s\* - s0 = -0.054208)
-* **shadow** = 2 slot squares `BL(0,0) TR(0,1)` + 8 free squares f0..f7; a k10 packing.
+* **shadow** = 2 slot squares `BL(0,0) TR(0,1)` + 8 free squares; a k10 packing.
 * **explains** 2 alive k0 cells: A38 x2; levels L2:2; integral 2 support; 0 at tau >= budget.
 * **load-bearing squares**: `f6` `f7` `BL(0,0)` `TR(0,1)` (4 of 10); **2 distinct minimised configuration(s)** share this s*.
 * **restarts**: 72 feasible of 101; distinct minima [3.82288, 3.87029, 3.87618, 3.91421, 3.94281, 3.97662, 4.0, 4.00002].
@@ -3977,7 +4008,8 @@ Load-bearing: `f0`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: `f1`, `f2`.
 ![K11](shadows/K11.svg)
 
 * **s\*** = 3.728580909 = s-hat -0.148502681  (s0 = 3.877084, s\* - s0 = -0.148503)
-* **shadow** = 1 slot squares `BL(0,1)` + 9 free squares f0..f8; a k10 packing.
+* **shadow** = 3 slot squares `BL(0,1)` `BL(0,2) (=f4)` `BR(0,1) (=f5)` + 7 free squares; a k10 packing.
+  * **gallery v1 counted this as 1 slot + 9 free** (A121): `f4` sits on `BL(0,2)`, `f5` sits on `BR(0,1)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A99 x1; levels L1:1; integral 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f2` `f4` `f5` `f7` `f8` `BL(0,1)` (6 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S25` (s* 3.728606, D4 map `r90`, 8 squares matched, Jaccard 0.667); `S19` (s* 3.728581, D4 map `mx`, 7 squares matched, Jaccard 0.538).
@@ -4038,7 +4070,8 @@ Load-bearing: `f1`, `f2`, `f4`, `f5`, `f7`, `f8`.  Rattlers: `f0`, `f3`, `f6`.
 ![K12](shadows/K12.svg)
 
 * **s\*** = 3.768117120 = s-hat -0.108966470  (s0 = 3.877084, s\* - s0 = -0.108967)
-* **shadow** = 2 slot squares `BL(0,0) BL(0,1)` + 8 free squares f0..f7; a k10 packing.
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1)` `BR(0,0) (=f2)` `TR(0,1) (=f4)` + 6 free squares; a k10 packing.
+  * **gallery v1 counted this as 2 slot + 8 free** (A121): `f2` sits on `BR(0,0)`, `f4` sits on `TR(0,1)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; integral 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f3` `f4` `f6` `f7` `BL(0,0)` (7 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 74 feasible of 101; distinct minima [3.70711, 3.72858, 3.76777, 3.76811, 3.76812, 3.77119, 3.79077, 3.82288].
@@ -4095,7 +4128,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
 ![K13](shadows/K13.svg)
 
 * **s\*** = 3.803539311 = s-hat -0.073544279  (s0 = 3.877084, s\* - s0 = -0.073545)
-* **shadow** = 1 slot squares `BL(0,0)` + 9 free squares f0..f8; a k10 packing.
+* **shadow** = 1 slot squares `BL(0,0)` + 9 free squares; a k10 packing.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; integral 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f4` `f5` `f6` `f7` `f8` `BL(0,0)` (9 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 71 feasible of 101; distinct minima [3.70711, 3.72858, 3.75534, 3.76777, 3.77119, 3.79547, 3.80354, 3.82288].
@@ -4158,7 +4191,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f4`, `f5`, `f6`, `f7`.  Rattlers: `f3`, `f8`.
 ![K14](shadows/K14.svg)
 
 * **s\*** = 3.804137638 = s-hat -0.072945952  (s0 = 3.877084, s\* - s0 = -0.072946)
-* **shadow** = 2 slot squares `BL(0,0) BR(0,0)` + 8 free squares f0..f7; a k10 packing.
+* **shadow** = 3 slot squares `BL(0,0) BR(0,0)` `TR(0,1) (=f2)` + 7 free squares; a k10 packing.
+  * **gallery v1 counted this as 2 slot + 8 free** (A121): `f2` sits on `TR(0,1)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A99 x1; levels L1:1; integral 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f2` `f3` `f4` `f5` `f6` `f7` `BL(0,0)` `BR(0,0)` (9 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 72 feasible of 101; distinct minima [3.70711, 3.72858, 3.76777, 3.76812, 3.76929, 3.77119, 3.78754, 3.79547].
@@ -4218,7 +4252,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
 ![K15](shadows/K15.svg)
 
 * **s\*** = 3.828944345 = s-hat -0.048139245  (s0 = 3.877084, s\* - s0 = -0.048140)
-* **shadow** = 1 slot squares `BL(0,0)` + 9 free squares f0..f8; a k10 packing.
+* **shadow** = 1 slot squares `BL(0,0)` + 9 free squares; a k10 packing.
 * **explains** 1 alive k0 cells: A38 x1; levels L2:1; integral 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f2` `f4` `f5` `f6` `f7` `f8` `BL(0,0)` (8 of 10); **1 distinct minimised configuration(s)** share this s*.
 * the free squares share one tilt: 33.8113 deg.
@@ -4287,7 +4321,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: n
 ![K16](shadows/K16.svg)
 
 * **s\*** = 3.898862588 = s-hat +0.021778998  (s0 = 3.877084, s\* - s0 = +0.021779)
-* **shadow** = 3 slot squares `BL(0,0) BR(0,0) TL(0,1)` + 7 free squares f0..f6; a k10 packing.
+* **shadow** = 3 slot squares `BL(0,0) BR(0,0) TL(0,1)` + 7 free squares; a k10 packing.
 * **explains** 1 alive k0 cells: A38 x1; levels L3:1; integral 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `f6` `BL(0,0)` `TL(0,1)` (9 of 10); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S29` (s* 3.886761, D4 map `r180`, 7 squares matched, Jaccard 0.500); `S02` (s* 3.886746, D4 map `my`, 7 squares matched, Jaccard 0.500).
@@ -4346,7 +4380,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 ![K17](shadows/K17.svg)
 
 * **s\*** = 3.912259346 = s-hat +0.035175756  (s0 = 3.877084, s\* - s0 = +0.035175)
-* **shadow** = 4 slot squares `BL(0,0) BL(0,1) TL(1,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) TL(1,0) TR(0,0)` `BL(1,0) (=f5)` + 6 free squares; a k11 packing.
+  * **gallery v1 counted this as 4 slot + 7 free** (A121): `f5` sits on `BL(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; integral 1 support; 1 at tau >= budget.
 * **load-bearing squares**: `f0` `f3` `f4` `f5` `f6` `BL(0,0)` `BL(0,1)` `TL(1,0)` `TR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S32` (s* 3.912250, D4 map `e`, 10 squares matched, Jaccard 0.833); `S05` (s* 3.912232, D4 map `e`, 9 squares matched, Jaccard 0.692); `S10` (s* 3.902674, D4 map `diag`, 8 squares matched, Jaccard 0.571).
@@ -4405,7 +4440,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 ![K18](shadows/K18.svg)
 
 * **s\*** = 3.915297623 = s-hat +0.038214033  (s0 = 3.877084, s\* - s0 = +0.038214)
-* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` `BL(1,0) (=f2)` + 6 free squares; a k11 packing.
+  * **gallery v1 counted this as 4 slot + 7 free** (A121): `f2` sits on `BL(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L2:1; component 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `BL(0,0)` `BL(0,1)` `BR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 73 feasible of 101; distinct minima [3.91223, 3.91421, 3.9153, 3.99885, 4.0, 4.00001, 4.00148].
@@ -4463,7 +4499,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 ![K19](shadows/K19.svg)
 
 * **s\*** = 3.916930857 = s-hat +0.039847267  (s0 = 3.877084, s\* - s0 = +0.039847)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(0,2) BR(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BR(0,0) TR(0,0)` `BL(1,0) (=f3)` + 5 free squares; a k11 packing.
+  * **gallery v1 counted this as 5 slot + 6 free** (A121): `f3` sits on `BL(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f3` `f4` `f5` `BL(0,0)` `BL(0,1)` `BL(0,2)` `BR(0,0)` `TR(0,0)` (11 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S33` (s* 3.916931, D4 map `e`, 11 squares matched, Jaccard 1.000); `S34` (s* 3.917360, D4 map `e`, 10 squares matched, Jaccard 0.833); `S35` (s* 3.917433, D4 map `e`, 10 squares matched, Jaccard 0.833).
@@ -4523,7 +4560,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
 ![K20](shadows/K20.svg)
 
 * **s\*** = 3.924402484 = s-hat +0.047318894  (s0 = 3.877084, s\* - s0 = +0.047318)
-* **shadow** = 2 slot squares `BL(0,0) TR(0,0)` + 9 free squares f0..f8; a k11 packing.
+* **shadow** = 4 slot squares `BL(0,0) TR(0,0)` `TR(1,0) (=f1)` `BR(1,0) (=f4)` + 7 free squares; a k11 packing.
+  * **gallery v1 counted this as 2 slot + 9 free** (A121): `f1` sits on `TR(1,0)`, `f4` sits on `BR(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L2:1; component 1 support; 1 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f4` `f5` `f6` `f7` `f8` `BL(0,0)` `TR(0,0)` (10 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S40` (s* 3.940518, D4 map `my`, 7 squares matched, Jaccard 0.500).
@@ -4588,7 +4626,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: `f3`.
 ![K21](shadows/K21.svg)
 
 * **s\*** = 3.925275351 = s-hat +0.048191761  (s0 = 3.877084, s\* - s0 = +0.048191)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` `TL(1,0) (=f2)` + 5 free squares; a k11 packing.
+  * **gallery v1 counted this as 5 slot + 6 free** (A121): `f2` sits on `TL(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A85 x1; levels L1:1; component 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f2` `f3` `f4` `f5` `BL(0,0)` `BR(0,0)` `TL(0,0)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S39` (s* 3.932425, D4 map `my`, 9 squares matched, Jaccard 0.692); `S41` (s* 3.940838, D4 map `e`, 8 squares matched, Jaccard 0.571); `S04` (s* 3.822876, D4 map `e`, 2 squares matched, Jaccard 0.105); `S14` (s* 3.767767, D4 map `e`, 2 squares matched, Jaccard 0.105).
@@ -4642,7 +4681,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
 ![K22](shadows/K22.svg)
 
 * **s\*** = 3.943894303 = s-hat +0.066810713  (s0 = 3.877084, s\* - s0 = +0.066810)
-* **shadow** = 1 slot squares `BL(0,0)` + 10 free squares f0..f9; a k11 packing.
+* **shadow** = 4 slot squares `BL(0,0)` `TR(0,0) (=f4)` `TL(0,1) (=f6)` `TR(0,1) (=f7)` + 7 free squares; a k11 packing.
+  * **gallery v1 counted this as 1 slot + 10 free** (A121): `f4` sits on `TR(0,0)`, `f6` sits on `TL(0,1)`, `f7` sits on `TR(0,1)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 1 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f3` `f4` `f6` `f7` `f8` `f9` `BL(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 69 feasible of 101; distinct minima [3.90267, 3.91223, 3.92471, 3.92627, 3.94281, 3.94389, 3.95636, 3.97117].
@@ -4709,7 +4749,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f6`, `f7`, `f8`, `f9`.  Rattlers: `
 ![K23](shadows/K23.svg)
 
 * **s\*** = 3.948781318 = s-hat +0.071697728  (s0 = 3.877084, s\* - s0 = +0.071697)
-* **shadow** = 2 slot squares `BL(0,0) TR(0,0)` + 9 free squares f0..f8; a k11 packing.
+* **shadow** = 3 slot squares `BL(0,0) TR(0,0)` `BR(1,0) (=f6)` + 8 free squares; a k11 packing.
+  * **gallery v1 counted this as 2 slot + 9 free** (A121): `f6` sits on `BR(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 1 at tau >= budget.
 * **load-bearing squares**: `f0` `f2` `f3` `f6` `f7` `f8` `TR(0,0)` (7 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 73 feasible of 101; distinct minima [3.88675, 3.90267, 3.91223, 3.91748, 3.9244, 3.94281, 3.94444, 3.94878].
@@ -4768,7 +4809,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: n
 ![K24](shadows/K24.svg)
 
 * **s\*** = 3.967521745 = s-hat +0.090438155  (s0 = 3.877084, s\* - s0 = +0.090438)
-* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` `TL(0,0) (=f2)` `TR(0,1) (=f3)` + 5 free squares; a k11 packing.
+  * **gallery v1 counted this as 4 slot + 7 free** (A121): `f2` sits on `TL(0,0)`, `f3` sits on `TR(0,1)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 1 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f3` `f5` `f6` `BL(0,1)` `BR(0,0)` `TR(0,0)` (9 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S49` (s* 3.996724, D4 map `e`, 8 squares matched, Jaccard 0.571).
@@ -4827,7 +4869,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 ![K25](shadows/K25.svg)
 
 * **s\*** = 3.977040890 = s-hat +0.099957300  (s0 = 3.877084, s\* - s0 = +0.099957)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` `BL(1,0) (=f5)` + 5 free squares; a k11 packing.
+  * **gallery v1 counted this as 5 slot + 6 free** (A121): `f5` sits on `BL(1,0)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L3:1; component 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f1` `f2` `f3` `f4` `f5` `BL(0,0)` `TL(0,0)` `TR(0,0)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S44` (s* 3.958425, D4 map `e`, 8 squares matched, Jaccard 0.571); `S04` (s* 3.822876, D4 map `e`, 2 squares matched, Jaccard 0.105); `S14` (s* 3.767767, D4 map `e`, 2 squares matched, Jaccard 0.105); `S17` (s* 3.858216, D4 map `e`, 2 squares matched, Jaccard 0.105).
@@ -4882,7 +4925,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
 ![K26](shadows/K26.svg)
 
 * **s\*** = 3.985466708 = s-hat +0.108383118  (s0 = 3.877084, s\* - s0 = +0.108383)
-* **shadow** = 3 slot squares `BL(0,0) BL(0,1) TL(1,0)` + 8 free squares f0..f7; a k11 packing.
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) TL(1,0)` `BR(0,1) (=f4)` + 7 free squares; a k11 packing.
+  * **gallery v1 counted this as 3 slot + 8 free** (A121): `f4` sits on `BR(0,1)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A85 x1; levels L1:1; integral 1 support; 1 at tau >= budget.
 * **load-bearing squares**: `f1` `f2` `f4` `f7` `BL(0,1)` `TL(1,0)` (6 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 73 feasible of 101; distinct minima [3.98547, 4.0, 4.00001, 4.00002].
@@ -4938,7 +4982,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
 ![K27](shadows/K27.svg)
 
 * **s\*** = 3.989264329 = s-hat +0.112180739  (s0 = 3.877084, s\* - s0 = +0.112180)
-* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0)` + 6 free squares f0..f5; a k11 packing.
+* **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0)` + 6 free squares; a k11 packing.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f2` `f3` `f5` `BL(0,1)` `BR(1,0)` `TL(0,0)` (7 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **coincides with Part I**: `S47` (s* 3.989280, D4 map `anti`, 8 squares matched, Jaccard 0.571).
@@ -4989,7 +5033,7 @@ Load-bearing: `f0`, `f2`, `f3`, `f5`.  Rattlers: `f1`, `f4`.
 ![K28](shadows/K28.svg)
 
 * **s\*** = 4.000023424 = s-hat +0.122939834  (s0 = 3.877084, s\* - s0 = +0.122939)
-* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares f0..f6; a k11 packing.
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares; a k11 packing.
 * **explains** 1 alive k0 cells: A99 x1; levels L1:1; component 1 support; 1 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f2` `f5` `BL(0,1)` (5 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 77 feasible of 101; distinct minima [3.88675, 3.98071, 3.99202, 4.0, 4.00002, 4.47487].
@@ -5040,7 +5084,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 ![K29](shadows/K29.svg)
 
 * **s\*** = 4.000144630 = s-hat +0.123061040  (s0 = 3.877084, s\* - s0 = +0.123061)
-* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(1,0)` + 7 free squares f0..f6; a k11 packing.
+* **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(1,0)` + 7 free squares; a k11 packing.
 * **explains** 1 alive k0 cells: A38 x1; levels L2:1; component 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f4` `f5` `BL(0,1)` `TL(1,0)` (5 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 67 feasible of 101; distinct minima [4.0, 4.00001, 4.00002, 4.00014, 4.03295, 4.07193, 4.41421].
@@ -5092,7 +5136,8 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 ![K30](shadows/K30.svg)
 
 * **s\*** = 4.020669624 = s-hat +0.143586034  (s0 = 3.877084, s\* - s0 = +0.143586)
-* **shadow** = 2 slot squares `BL(0,0) BL(0,1)` + 9 free squares f0..f8; a k11 packing.
+* **shadow** = 3 slot squares `BL(0,0) BL(0,1)` `BL(0,2) (=f6)` + 8 free squares; a k11 packing.
+  * **gallery v1 counted this as 2 slot + 9 free** (A121): `f6` sits on `BL(0,2)` to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged everywhere below so A121's review rows stay valid.
 * **explains** 1 alive k0 cells: A38 x1; levels L1:1; component 1 support; 0 at tau >= budget.
 * **load-bearing squares**: `f0` `f1` `f4` `f5` `f6` `f7` `f8` `BL(0,1)` (8 of 11); **1 distinct minimised configuration(s)** share this s*.
 * **restarts**: 80 feasible of 101; distinct minima [3.924, 3.93354, 3.94281, 3.96752, 3.97662, 4.0, 4.00001, 4.00003].

@@ -28,28 +28,54 @@ def frame(ox, oy, sc, s):
         out.append(f'<rect x="{ox + x0 * sc:.1f}" y="{oy - (y0 + 1) * sc:.1f}" width="{sc}" height="{sc}" fill="none" stroke="#bbb" stroke-width="1" stroke-dasharray="4,3"/>')
     return out
 
+# gallery v2 (PI, 2026-09-07): the left panel no longer encodes tilt.  One sequential scale carries
+# the dual weight y and nothing else - pale yellow at y -> 0, dark orange at y = 1 - and the
+# hypothesis squares get a colour used nowhere else in the gallery.
+HYP_FILL, HYP_STROKE = '#00e5ff', '#000000'
+
+def wcol(y, dark=False):
+    """Sequential yellow->orange ramp on the dual weight y."""
+    y = 0.0 if y is None else max(0.0, min(1.0, float(y)))
+    h = 46.0 - 22.0 * y
+    l = (88.0 - 46.0 * y) - (22.0 if dark else 0.0)
+    return f'hsl({h:.0f},92%,{max(l,12.0):.0f}%)'
+
+def lattice_free(free, s, dtol=1e-3, atol=0.05):
+    """Free squares that sit ON a lattice cell (within dtol of its centre and atol degrees of axis).
+    A121 found the gallery drawing these red as if they were free; they are snapped slot squares."""
+    out = {}
+    for i, (cx, cy, th) in enumerate(free):
+        nm = L.snap(cx, cy, th, s, dtol=dtol, atol=atol)
+        if nm:
+            out[i] = nm
+    return out
+
 def panel_lp(ox, oy, sc, title, cores, sup, weights=None):
-    """Raw LP dual support: cores in blue, support coloured by tilt with opacity ~ weight."""
+    """Raw LP dual support: hypothesis squares bright cyan with a heavy black outline and an 'H';
+    every dual-support placement on ONE sequential scale by its weight y."""
     out = [text(ox, oy - S0 * sc - 26, title, 12, bold=True)]
     out += frame(ox, oy, sc, S0)
     bad = 0
-    for (cx, cy, th) in cores:
-        P = L.corners(cx, cy, th)
-        out.append(poly(ox, oy, sc, P, '#90caf9', '#1565c0', 0.6))
     for k, (cx, cy, th) in enumerate(sup):
         P = L.corners(cx, cy, th)
         if not all(-1e-6 <= x <= S0 + 1e-6 and -1e-6 <= y <= S0 + 1e-6 for x, y in P):
             bad += 1
             continue
-        hue = int((math.degrees(L.tmod(th))) / 90 * 300)
-        w = 1.0 if weights is None else weights[k]
-        out.append(poly(ox, oy, sc, P, f'hsl({hue},70%,45%)', f'hsl({hue},70%,30%)', 0.2 + 0.55 * w))
+        w = 1.0 if weights is None else float(weights[k])
+        out.append(poly(ox, oy, sc, P, wcol(w), wcol(w, True), 0.85, 1.0))
+        if w < 0.95:                       # print y inside the faint squares only
+            out.append(text(ox + cx * sc, oy - cy * sc + 3, f'{w:.2f}', 8, '#5d4037', False, 'middle'))
+    for (cx, cy, th) in cores:             # drawn last so the hypothesis is never buried
+        P = L.corners(cx, cy, th)
+        out.append(poly(ox, oy, sc, P, HYP_FILL, HYP_STROKE, 0.75, 3.0))
+        out.append(text(ox + cx * sc, oy - cy * sc + 4, 'H', 11, '#000', True, 'middle'))
     allsq = list(cores) + list(sup)
     g = min([L.sat_gap(allsq[i][:2], allsq[i][2], allsq[j][:2], allsq[j][2])
              for i in range(len(allsq)) for j in range(i + 1, len(allsq))] or [0.0])
-    out.append(text(ox, oy + 16, f'{len(cores)} hypothesis cores (blue) + {len(sup)} dual-support placements; '
-                                 f'worst pairwise SAT gap {g:+.4f} (LP rows are grid cells of pitch 0.192, so '
-                                 f'representatives overlap); outside container: {bad}', 8.5, '#444'))
+    out.append(text(ox, oy + 16, f'{len(cores)} hypothesis square(s) H (cyan) + {len(sup)} dual-support '
+                                 f'placements, fill = dual weight y; worst pairwise SAT gap {g:+.4f} '
+                                 f'(LP rows are grid cells of pitch 0.192, so representatives overlap); '
+                                 f'outside container: {bad}', 8.5, '#444'))
     return out, g
 
 def panel_pack(ox, oy, sc, title, sub, s, free, slots, ring=True):
@@ -65,12 +91,20 @@ def panel_pack(ox, oy, sc, title, sub, s, free, slots, ring=True):
     assert exc <= 1e-5, f'containment violated by {exc:.2e}'
     m = min([L.sat_gap(allsq[i][:2], allsq[i][2], allsq[j][:2], allsq[j][2])
              for i in range(len(allsq)) for j in range(i + 1, len(allsq))] or [0.0])
+    latt = lattice_free(free, s)
     for i, P in enumerate(polys):
         isf = i < len(free)
-        out.append(poly(ox, oy, sc, P, '#ef9a9a' if isf else '#90caf9', '#c62828' if isf else '#1565c0', 0.6))
+        onlat = isf and i in latt
+        # a free square sitting ON a lattice cell is a snapped slot square: draw it blue like the
+        # others and give it its cell name.  Its f-index is kept so review.csv rows stay valid.
+        fill = '#90caf9' if (not isf or onlat) else '#ef9a9a'
+        stroke = '#1565c0' if (not isf or onlat) else '#c62828'
+        out.append(poly(ox, oy, sc, P, fill, stroke, 0.6))
         cx, cy, th = allsq[i]
         out.append(text(ox + cx * sc, oy - cy * sc + 4, names[i], 9.5, '#000', True, 'middle'))
-        if isf:
+        if onlat:
+            out.append(text(ox + cx * sc, oy - cy * sc + 15, latt[i], 8, '#0d47a1', True, 'middle'))
+        elif isf:
             out.append(text(ox + cx * sc, oy - cy * sc + 15, f'{math.degrees(L.tmod(th)):.2f}°', 8, '#333', False, 'middle'))
     if ring:
         for i in range(len(allsq)):
@@ -94,8 +128,20 @@ def panel_pack(ox, oy, sc, title, sub, s, free, slots, ring=True):
                     f = best[1]
                     out.append(f'<circle cx="{ox + f[0] * sc:.1f}" cy="{oy - f[1] * sc:.1f}" r="4.5" fill="none" stroke="#2e7d32" stroke-width="2"/>')
     out.append(text(ox, oy + 16, f'min pairwise SAT separation {m:+.2e}; worst containment excursion '
-                                 f'{exc:+.2e}; container side {s:.6f}', 8.5, '#444'))
-    return out, m
+                                 f'{exc:+.2e}; container side {s:.6f}'
+                                 + (f'; {len(latt)} free square(s) sit ON a lattice cell and are drawn as '
+                                    f'slot squares: ' + ', '.join(f'f{i}={n}' for i, n in sorted(latt.items()))
+                                    if latt else ''), 8.5, '#444'))
+    return out, m, latt
+
+LEGEND = ('LEGEND  |  LEFT panel = the raw LP dual support: fill = dual weight y on one scale '
+          '(pale yellow y->0, dark orange y=1; the number is printed inside faint squares), '
+          'bright cyan + heavy black outline + H = a hypothesis square, overlaps are LP grid-cell '
+          'representatives.  |  RIGHT panel = the minimised packing at s*: blue = slot square '
+          '(named cell), red = free square (f-index + tilt), green ring = contact at gap < 1e-6.')
+
+def legend(x, y):
+    return [text(x, y, LEGEND, 9, '#333')]
 
 def tilt_panel(ox, oy, w, h, curve, s_star, th_star):
     pts = [(d['tilt_deg'], d['s']) for d in curve if d['s'] is not None]

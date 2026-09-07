@@ -14,6 +14,31 @@ CLASS = {
     ('A57', 'k5_11'): 'k5_11', ('A57', 'k5_16'): 'k5_16', ('A60', ''): 'trump5',
 }
 
+_WCACHE = {}
+
+def dual_weights(rep, drawn, tol=1e-9):
+    """The LP dual weight y of each drawn placement, read back from the node's own json (read-only).
+    The drawn placements came verbatim from `packing`, so the match is exact up to float noise."""
+    path = os.path.join(ROOT, rep['path'])
+    if path not in _WCACHE:
+        try:
+            with open(path, encoding='utf-8') as f:
+                d = json.load(f)
+            _WCACHE[path] = [(float(q['cx']), float(q['cy']), float(q['theta']), float(q.get('y', 0.0)))
+                             for q in d.get('packing', [])]
+        except Exception:
+            _WCACHE[path] = []
+    pk = _WCACHE[path]
+    out = []
+    for (cx, cy, th) in drawn:
+        best, bd = 1.0, 1e9
+        for (qx, qy, qt, y) in pk:
+            dd = abs(qx - cx) + abs(qy - cy) + abs(qt - th)
+            if dd < bd:
+                best, bd = y, dd
+        out.append(best if bd <= 1e-6 else 1.0)
+    return out
+
 def class_of(node):
     if node['src'] == 'A57':
         return 'k5_11' if node['shard'].startswith('k5_11') else 'k5_16'
@@ -42,15 +67,19 @@ def main():
         rep = nodes[prim['members'][0]] if prim['members'] else nodes[sh['members'][0]]
         sc = 118
         oy = 56 + S0 * sc
-        body = []
+        body = SV.legend(30, 14)
+        drawn = [q for q in rep['cfg'][len(rep['cores']):]]
         p1, gap = SV.panel_lp(30, oy, sc, f"{sh['id']} panel 1 - raw LP dual support of {rep['nid']}",
-                              rep['cores'], [q for q in rep['cfg'][len(rep['cores']):]])
+                              rep['cores'], drawn, weights=dual_weights(rep, drawn))
         body += p1
         W1 = S0 * sc + 60
-        p2, _ = SV.panel_pack(30 + W1, oy, sc, f"{sh['id']} panel 2 - the shadow at s* = {sh['s']:.6f}",
-                              f"{len(sh['slots'])} snapped slot squares + {sh['nfree']} free squares; "
-                              f"s* - s-hat = {sh['ds']:+.6f}", sh['s'], sh['free'], sh['slots'])
+        p2, _, latt = SV.panel_pack(30 + W1, oy, sc, f"{sh['id']} panel 2 - the shadow at s* = {sh['s']:.6f}",
+                                    f"{len(sh['slots']) + len(SV.lattice_free(sh['free'], sh['s']))} snapped "
+                                    f"slot squares + {sh['nfree'] - len(SV.lattice_free(sh['free'], sh['s']))} "
+                                    f"free squares; s* - s-hat = {sh['ds']:+.6f}",
+                                    sh['s'], sh['free'], sh['slots'])
         body += p2
+        sh['latt'] = latt
         W = 2 * W1 + 60
         H = int(oy + 40)
         if sh.get('sweep'):
@@ -113,6 +142,17 @@ def main():
     a('   rotation) - never a finite difference of a SAT gap, which is wrong at flush and opposite')
     a('   contacts.  Contact forces are the Fritz-John multipliers from nnls(J^T, e_s), rows unit-')
     a('   normalised.  Every flat direction is then tested at SECOND order along the exact gaps.\n')
+    a('8. **Gallery v2 drawings (PI, 2026-09-07).**  The left panel no longer encodes tilt at all: every')
+    a('   dual-support placement is filled on ONE sequential scale by its dual weight y (pale yellow at')
+    a('   y -> 0, dark orange at y = 1), with the number printed inside the faint squares, and the')
+    a('   hypothesis square(s) are bright cyan with a heavy black outline and an **H** - a colour used')
+    a('   nowhere else.  In the right panel, a free square whose pose sits within **1e-3** of a lattice')
+    a('   cell centre and **0.05 deg** of axis is drawn blue like the other snapped slot squares and')
+    a('   carries its cell name: A121 found the v1 gallery drawing these red as if they were free.  The')
+    a("   `gallery v1 split` column keeps the old counts so A121's audit stays reproducible, the")
+    a('   f-indices are unchanged everywhere (contact graph, forces, flat directions, rattler table),')
+    a('   and the v1 SVGs are kept byte-for-byte under `docs/shadows/v1/`.  Every SVG carries a')
+    a('   one-line legend.\n')
     a('### What "explains" means, and what it does not\n')
     a("A shadow explains a node when that node's own LP dual support, snapped and then released,")
     a("minimises to it.  It does **not** mean the node's pose box contains the shadow: A106")
@@ -130,15 +170,18 @@ def main():
     a('a k9 or k10 packing has room to spare.  Those entries are the LP telling you it never found')
     a('the last square, not a near-solution.\n')
     a('## Gallery table\n')
-    a('| shadow | class(es) of the alive nodes | k of the shadow | s* | s* - s-hat | alive nodes | #cfg | levels | free sq | common tilt | flexes at fixed s |')
-    a('|---|---|---|---|---|---|---|---|---|---|---|')
+    a('| shadow | class(es) of the alive nodes | k of the shadow | gallery v1 split | s* | s* - s-hat | alive nodes | #cfg | levels | free sq | common tilt | flexes at fixed s |')
+    a('|---|---|---|---|---|---|---|---|---|---|---|---|')
     for sh in shs:
         an = sh['analysis']
         cls = ', '.join(f'{k} x{v}' for k, v in sh['classes'].most_common())
         lv = ', '.join(f'L{k}:{v}' for k, v in sorted(sh['levels'].items()))
         ct = f"{sh['common_tilt']:.3f} deg" if sh['common_tilt'] is not None else 'no'
-        a(f"| **{sh['id']}** | {cls} | k{sh['nsquares']} ({len(sh['slots'])} slot + {sh['nfree']} free) | "
-          f"{sh['s']:.6f} | {sh['ds']:+.6f} | {sh['nnodes']} | {sh.get('nconfigs', 1)} | {lv} | {sh['nfree']} | {ct} | "
+        nl = len(sh.get('latt') or {})
+        ns, nf = len(sh['slots']) + nl, sh['nfree'] - nl
+        a(f"| **{sh['id']}** | {cls} | k{sh['nsquares']} ({ns} slot + {nf} free) | "
+          f"{len(sh['slots'])} slot + {sh['nfree']} free | "
+          f"{sh['s']:.6f} | {sh['ds']:+.6f} | {sh['nnodes']} | {sh.get('nconfigs', 1)} | {lv} | {nf} | {ct} | "
           f"{an.get('flexes_fixed_s')} |")
     a('')
     a(f"Total alive nodes explained by an integral shadow: **{sum(sh['nnodes'] for sh in shs)}** of "
@@ -181,8 +224,16 @@ def main():
           f"{', '.join(sh['classes'])}\n")
         a(f"![{sh['id']}](shadows/{sh['id']}.svg)\n")
         a(f"* **s\\*** = {sh['s']:.9f} = s-hat {sh['ds']:+.9f}  (s0 = {S0:.6f}, s\\* - s0 = {sh['s']-S0:+.6f})")
-        a(f"* **shadow** = {len(sh['slots'])} slot squares `{' '.join(sh['slots'])}` + {sh['nfree']} free "
-          f"squares f0..f{sh['nfree']-1}; a k{sh['nsquares']} packing.")
+        latt = sh.get('latt') or {}
+        a(f"* **shadow** = {len(sh['slots']) + len(latt)} slot squares `{' '.join(sh['slots'])}`"
+          + (' `' + '` `'.join(f'{v} (=f{k})' for k, v in sorted(latt.items())) + '`' if latt else '')
+          + f" + {sh['nfree'] - len(latt)} free squares; a k{sh['nsquares']} packing.")
+        if latt:
+            a(f"  * **gallery v1 counted this as {len(sh['slots'])} slot + {sh['nfree']} free** (A121): "
+              + ', '.join(f'`f{k}` sits on `{v}`' for k, v in sorted(latt.items())) +
+              ' to within 1e-3 in position and 0.05 deg of axis - snapped slot squares, not free'
+              ' ones.  The f-indices are kept everywhere below (contact graph, forces, flat'
+              " directions, rattler table) so A121's review rows stay valid.")
         a(f"* **explains** {sh['nnodes']} alive-at-LP nodes: " +
           ', '.join(f'{k} x{v}' for k, v in sh['classes'].most_common()) + '; levels ' +
           ', '.join(f'L{k}:{v}' for k, v in sorted(sh['levels'].items())) + '; ' +

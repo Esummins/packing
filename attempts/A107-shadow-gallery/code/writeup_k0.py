@@ -7,6 +7,7 @@ import os, sys, json, math, collections
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import shadowlib as L, minimise as M, svg as SV
+import writeup as WU
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
 RES = os.path.join(ROOT, 'attempts', 'A107-shadow-gallery', 'results')
@@ -100,15 +101,19 @@ def main():
         rep = nodes[prim['members'][0]] if prim['members'] else nodes[sh['members'][0]]
         sc = 118
         oy = 56 + S0 * sc
-        body = []
+        body = SV.legend(30, 14)
+        drawn = [q for q in rep['cfg'][len(rep['cores']):]]
         p1, _ = SV.panel_lp(30, oy, sc, f"{sh['id']} panel 1 - raw LP dual support of {rep['nid']}",
-                            rep['cores'], [q for q in rep['cfg'][len(rep['cores']):]])
+                            rep['cores'], drawn, weights=WU.dual_weights(rep, drawn))
         body += p1
         W1 = S0 * sc + 60
-        p2, _ = SV.panel_pack(30 + W1, oy, sc, f"{sh['id']} panel 2 - the k0 shadow at s* = {sh['s']:.6f}",
-                              f"{len(sh['slots'])} snapped slot squares + {sh['nfree']} free squares; "
-                              f"s* - s-hat = {sh['ds']:+.6f}", sh['s'], sh['free'], sh['slots'])
+        nl0 = len(SV.lattice_free(sh['free'], sh['s']))
+        p2, _, latt = SV.panel_pack(30 + W1, oy, sc, f"{sh['id']} panel 2 - the k0 shadow at s* = {sh['s']:.6f}",
+                                    f"{len(sh['slots']) + nl0} snapped slot squares + {sh['nfree'] - nl0} "
+                                    f"free squares; s* - s-hat = {sh['ds']:+.6f}",
+                                    sh['s'], sh['free'], sh['slots'])
         body += p2
+        sh['latt'] = latt
         W = 2 * W1 + 60
         if sh.get('sweep'):
             body += SV.tilt_panel(30 + 2 * W1, oy - 60, 300, 190, sh['sweep'], sh['s'], sh['common_tilt'] or 0.0)
@@ -138,8 +143,8 @@ def main():
     ncov = sum(sh['nnodes'] for sh in ks)
     a(f'**{len(ks)} distinct k0 shadow values explain {ncov} of the {len(nodes)} alive cells**; '
       f'{len(ex["unexplained"])} are explained by no integral shadow.\n')
-    a('| shadow | sources | k of the shadow | s* | s* - s-hat | k0 cells | #cfg | levels | free sq | common tilt | flexes | coincides with |')
-    a('|---|---|---|---|---|---|---|---|---|---|---|---|')
+    a('| shadow | sources | k of the shadow | gallery v1 split | s* | s* - s-hat | k0 cells | #cfg | levels | free sq | common tilt | flexes | coincides with |')
+    a('|---|---|---|---|---|---|---|---|---|---|---|---|---|')
     for sh in ks:
         an = sh['analysis']
         src = ', '.join(f'{k} x{v}' for k, v in sh['srcs'].most_common())
@@ -147,9 +152,12 @@ def main():
         ct = f"{sh['common_tilt']:.3f} deg" if sh['common_tilt'] is not None else 'no'
         co = '; '.join(f"{r['sid']} ({r['jaccard']:.2f}{', exact' if r['jaccard'] >= 0.999 else ''})"
                        for r in sh['coincide'][:2] if r['jaccard'] >= 0.5) or '-'
-        a(f"| **{sh['id']}** | {src} | k{sh['nsquares']} ({len(sh['slots'])} slot + {sh['nfree']} free) | "
+        nl = len(sh.get('latt') or {})
+        ns, nf = len(sh['slots']) + nl, sh['nfree'] - nl
+        a(f"| **{sh['id']}** | {src} | k{sh['nsquares']} ({ns} slot + {nf} free) | "
+          f"{len(sh['slots'])} slot + {sh['nfree']} free | "
           f"{sh['s']:.6f} | {sh['ds']:+.6f} | {sh['nnodes']} | {sh.get('nconfigs', 1)} | {lv} | "
-          f"{sh['nfree']} | {ct} | {an.get('flexes_fixed_s')} | {co} |")
+          f"{nf} | {ct} | {an.get('flexes_fixed_s')} | {co} |")
     a('')
     hits = [(sh, r) for sh in ks for r in sh['coincide']]
     exact = [(sh, r) for sh, r in hits if r['jaccard'] >= 0.999]
@@ -188,8 +196,15 @@ def main():
         a(f"## {sh['id']} - a k{sh['nsquares']} packing at s* = {sh['s']:.6f} on the boundary of class k0_00\n")
         a(f"![{sh['id']}](shadows/{sh['id']}.svg)\n")
         a(f"* **s\\*** = {sh['s']:.9f} = s-hat {sh['ds']:+.9f}  (s0 = {S0:.6f}, s\\* - s0 = {sh['s']-S0:+.6f})")
-        a(f"* **shadow** = {len(sh['slots'])} slot squares `{' '.join(sh['slots']) or '(none)'}` + "
-          f"{sh['nfree']} free squares f0..f{sh['nfree']-1}; a k{sh['nsquares']} packing.")
+        latt = sh.get('latt') or {}
+        a(f"* **shadow** = {len(sh['slots']) + len(latt)} slot squares `{' '.join(sh['slots']) or '(none)'}`"
+          + (' `' + '` `'.join(f'{v} (=f{k})' for k, v in sorted(latt.items())) + '`' if latt else '')
+          + f" + {sh['nfree'] - len(latt)} free squares; a k{sh['nsquares']} packing.")
+        if latt:
+            a(f"  * **gallery v1 counted this as {len(sh['slots'])} slot + {sh['nfree']} free** (A121): "
+              + ', '.join(f'`f{k}` sits on `{v}`' for k, v in sorted(latt.items())) +
+              ' to within 1e-3 in position and 0.05 deg of axis.  The f-indices are unchanged'
+              " everywhere below so A121's review rows stay valid.")
         a(f"* **explains** {sh['nnodes']} alive k0 cells: " +
           ', '.join(f'{k} x{v}' for k, v in sh['srcs'].most_common()) + '; levels ' +
           ', '.join(f'L{k}:{v}' for k, v in sorted(sh['levels'].items())) + '; ' +

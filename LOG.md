@@ -4344,3 +4344,39 @@ entry whose cuts fell to zero (S11, whose reading is `-`) kept its stale rows fo
 touched set is now `todo`. Canaries re-run and all PASS (C1 161/161, C2 72/72, C3 30/30, C4 235
 contacts at max |diff| 0.0). Discipline unchanged: read-only outside A121 + this ledger + the
 registry row, 1 BLAS-pinned process, no LP, no lane recomputation.
+
+## 2026-09-07 — A107 gallery v2 panels (Opus chore, read-only) — PI's rendering feedback applied
+
+All 83 SVGs in `docs/shadows/` re-rendered in place; **v1 kept byte-for-byte under
+`docs/shadows/v1/`** (no deletes). Frames, canvas sizes, right-panel polygon geometry, contact
+rings and every f-index / cell label are identical to v1 — checked mechanically, 0 regressions
+across all 83 files — so the PI's `review.csv` rows stay valid.
+
+* **Left panel: tilt hue removed.** Every dual-support placement is now filled on ONE sequential
+  ramp by its dual weight y (pale yellow at y → 0, dark orange at y = 1), with the number printed
+  inside the square only when y < 0.95 — 283 such labels across 45 of the 83 panels. The weights
+  are read back from each representative node's own json (read-only; the drawn placements came
+  verbatim from `packing`, so the match is exact). Hypothesis squares are bright cyan `#00e5ff`
+  with a 3 px black outline and an **H**, a colour used nowhere else, drawn last so they are never
+  buried.
+* **Right panel: 47 mis-coloured squares fixed in 33 entries.** A free square within 1e-3 of a
+  lattice cell centre and 0.05° of axis is a snapped slot square; v1 drew it red as if it were
+  free (A121's finding). It is now blue with its cell name on the second label line, and the
+  entry's slot/free split is corrected in `docs/shadows.md` with the old split kept in a new
+  **`gallery v1 split`** column so A121's audit stays reproducible. The f-indices are unchanged
+  everywhere — contact graph, forces, flat directions, rattler table — and the cell name is added
+  alongside, not in place of, the index.
+* **Entries whose slot count changed** (v1 → v2): S01 5+6→7+4, S03 6+5→8+3, S04 5+5→6+4,
+  S06 5+5→7+3, S14 5+5→6+4, S15 6+5→7+4, S16 6+4→7+3, S19 5+5→7+3, S23 6+4→7+3, S25 5+5→6+4,
+  S29 6+5→7+4, S32 6+5→7+4, S44 5+6→6+5, S52 7+4→8+3; K03 4+7→5+6, K04 2+9→5+6, K05 4+7→6+5,
+  K06 5+6→6+5, K09 1+9→3+7, K11 1+9→3+7, K12 2+8→4+6, K14 2+8→3+7, K17 4+7→5+6, K18 4+7→5+6,
+  K19 5+6→6+5, K20 2+9→4+7, K21 5+6→6+5, K22 1+10→4+7, K23 2+9→3+8, K24 4+7→6+5, K25 5+6→6+5,
+  K26 3+8→4+7, K30 2+9→3+8.
+* Note on the count: the brief said A121 found **11** such entries; applying the stated criterion
+  (1e-3 in position, 0.05° of axis) uniformly across all 83 gallery entries gives **33 entries and
+  47 squares**. The larger set includes the k0 Part II entries, where free blocks are big and
+  lattice landings are common (K04 and K22 each gain three slot squares).
+* **One-line legend** added at the top of every SVG, inside the existing top margin, so no
+  geometry moved.
+* Discipline: read-only everywhere else, one BLAS-pinned process, no deletes, git fetch + plain
+  merge + push of A107's own paths.

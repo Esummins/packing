@@ -60,6 +60,28 @@ gaps; a genuine flex leaves them unchanged to `O(t^3)`, a second-order block sho
 * A106's finding that **no** open A57 box contains a shadow is reused, not re-derived: "explains"
   in this gallery means the node's dual support flows to that shadow, not that its box holds it.
 
+## Follow-up: gallery v2 panels (PI, 2026-09-07)
+
+All 83 SVGs re-rendered in place; the v1 files are kept byte-for-byte under `docs/shadows/v1/`.
+Frames, canvas sizes, right-panel polygon geometry, contact rings and every `f`-index and cell
+label are **identical** to v1 (checked mechanically: 0 regressions across all 83 files), so the
+PI's `review.csv` rows stay valid.
+
+* **Left panel.**  Tilt hue is gone.  Every dual-support placement is filled on one sequential
+  ramp by its dual weight `y` (pale yellow at `y -> 0`, dark orange at `y = 1`), and the value is
+  printed inside the square only when `y < 0.95` — 283 such labels across 45 of the 83 panels.
+  The weights are read back from each representative node's own json (`dual_weights`, read-only);
+  the drawn placements came verbatim from `packing`, so the match is exact.  Hypothesis squares
+  are `#00e5ff` with a 3px black outline and an **H**, a colour used nowhere else in the gallery,
+  and they are drawn last so the hypothesis is never buried.
+* **Right panel.**  `svg.lattice_free` flags any free square within **1e-3** of a lattice cell
+  centre and **0.05 deg** of axis; those are drawn blue like the other snapped slot squares and
+  carry their cell name on the second label line (where the tilt would be — it is 0 for these).
+  **33 of the 83 entries have such squares, 47 in total**; their slot/free splits are corrected in
+  `docs/shadows.md`, with the old split kept in a `gallery v1 split` column.
+* **Legend.**  One line at the top of every SVG, above the panel titles, inside the existing
+  margin so no geometry moved.
+
 ## Follow-up: Part II, the k0_00 cells (A38 / A85 / A99)
 
 A113 pointed out that the k0 LP jsons sit one directory deeper than the pinned campaigns'
