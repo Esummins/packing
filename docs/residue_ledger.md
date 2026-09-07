@@ -306,6 +306,18 @@ replay of every class certificate on W), `trump_residual` (the protected tier + 
 with no sorries and one project axiom, `sat_selection` (separating axis for open interiors; the closed form is
 proved). Not yet in Lean: `LocalDead` for a concrete neighbourhood (the cover is checked in Python) and its
 composition with the YES/NO branches — both are A126's deliverable (running, after the external review).
+**A126 landed (2026-09-07, known_results 16b):** `sat_selection` is a THEOREM (`SatInterior.sat_selection_thm`, no
+limit argument: λ = (M/B+1)/2 written down); `LocalDead` for S07 (0.1, 40°) and S02 (0.2, 10°) is derived in the
+kernel from the certificates through a reflected checker (`LocalCert.localDead_of_cert`, soundness proved) run by
+`native_decide` (19 s and 67 s); the region-tree step `LocalCompose.node_dead_of_yes_no` and
+`classKilledAt_of_yes_no` are proved, and Y0230's four NO certificates replay (156–872 s each, 11× the frozen
+verifier). Remaining: (a) one named hypothesis `CertCover` on the certificate's window [3.82, 3.897084] whose only
+residue is a certified rational cos/sin interval kernel — cheaper: re-emit certificates in t = tan(θ/2), where cos and
+sin are rational (a generator change); (b) **F-COVER, a systemic bug in A120's certificate files**: the NO zone is
+rounded OUTWARD (tilt to 2⁻²⁰, centre to 9 decimals), so ZONE ⊄ BOX by ~10⁻⁷ on all 22 PASSing NO certificates and the
+YES ∪ NO = H tautology fails at that level — nothing in the LP or measure is wrong; fix = one rounding direction and
+re-certification far below those certificates' resolution (queued with the A120 resume); (c) `Local.Box` cannot carry a
+tilt cell leaving [0°, 90°] (S02's BR(0,1) box keeps the inside part, sound, marked; fix = a list of t-intervals).
 `ParamNoFam.lean` (A117) proves the NO-family verifier's exemption clause.
 
 ---
