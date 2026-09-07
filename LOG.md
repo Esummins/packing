@@ -3907,3 +3907,22 @@ first) and **A57's drivers were never launched**; frozen verifiers byte-identica
 `trim57.py` 649fc37d…, `pinguard.py` 5e45aec0… = A57's current file with A96's range assertions,
 `verify_param.py` 0c58485c…); `PYTHONDONTWRITEBYTECODE=1` and nothing deleted after the no-`rm` rule landed.
 Writes: `attempts/A112-dual-branching/**`, the registry row, this entry, one note on depgraph `GRAIN`.
+- A96 <- A112 (e6690215) INTEGRATION, wired and controlled, NOT launched: code/regionopt96.py, an off-by-default (ENABLED=False)
+  --region-tree option. Trigger: a node ALIVE-at-LP twice, or unconverged at the 900 s re-check. Ordering 'loadpath' when the
+  node has a matched shadow in A107's shadow_nodes.json, else 'hybrid'. A112's Runner gets wall cap W=1800 s; if it does not
+  return transfers=True inside W the node falls through to the ordinary 8-way split, so nothing is lost -- and the failure mode
+  is inert by construction, since a capped run leaves CAP-UNPROCESSED leaves which fail C3 and therefore simply do not transfer.
+  A transfer is recorded as "old box X dead by region tree" with the whole containment record (C1 root-is-old-hypothesis,
+  C2 tautologous-split, C3 all-leaves-dead) written beside it, and carries
+  no_side_window = "s0-only, pending A117 verify_param_v2" so the scoreboard cannot count it as full-window.
+  CONTROL PASSES: replaying A112's stored region trees through this option's code path gives 123 region/ordering pairs,
+  37 transferring pairs, and **9 DISTINCT REGIONS -- exactly A112's 9 kills**: Y0036_D02_D05, Y0036_D03_D04, Y0036_D07_D01,
+  Y0041_D02, Y0084_D03, Y0101_D02, Y0108_D07, Y0276_D05 (k5_11) and Y0155_D03 (k5_16). Each transfers under 3-4 INDEPENDENT
+  orderings (hybrid / loadpath / stranded / wastage), so the kills are not artifacts of one branch order. C1 holds on all 123
+  replayed pairs; the non-transferring pairs fail on C3 (capped leaves) and in some cases C2, which is expected for partially
+  explored trees but means C2 is NOT automatic and must stay a checked obligation rather than an assumption.
+- EMISSION NONDETERMINISM recorded in A57 notes/lemmas.md: certify.py --loop_cols re-solves the node LP under a TIME LIMIT
+  before emitting, so a certificate's atom set is wall-clock dependent -- emitting the same node twice can give two different
+  valid certificates, and a re-emission can fail on a loaded box. The frozen verifiers are exact and deterministic. Reproduce
+  kills by REPLAYING certificates, never by re-emitting; and note this is a confound in any concurrency benchmark (A96's own
+  contention legs varied worker counts, which varies emission outcomes as a side effect).
