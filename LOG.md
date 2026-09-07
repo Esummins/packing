@@ -3999,3 +3999,19 @@ recorded. Report: `attempts/A115-k0-corner-rows/notes/t4_report.md`.
   every node inside it, vs 290–336 s per A57 child / 1 100 s per A60 leaf; the NO side is what remains.
 - Canaries PASS: S02 at r → 0 gives 3.886745, S07 3.885617; Trump outside every certified S07 N and inside every uncut
   N that turned alive. Discipline: ≤ 2 BLAS-pinned processes, read-only on every campaign, no deletes.
+- A96 <- A116 (74a34f96) INTEGRATION into the --region-tree option, wired and replayed, NOT launched. When a stalled node's
+  support lies inside a CERTIFIED neighbourhood N of the S02 or S07 minimum, the YES region is taken to BE N: A116 has already
+  certified no packing exists there, so the YES child needs no LP and only the NO children go to the solver. Headline Ns wired:
+  S02 in k5_11's frame (L = f1 f2 f3 BR(0,1)) at (r, rho) = (0.2, 10 deg), and S07 in trump5's frame (L = f0 f2 f4, cut
+  F_T(theta) > s0) at (0.1, 40 deg) and (0.2, 10 deg). The YES kill is recorded as "dead by local certificate A116 <N id>
+  (pending A119 rational/Lean form)" and is TAGGED, not counted with frozen-verifier kills -- it is prose+numeric today, not
+  replayable. NO side stays fixed-side until A117's verify_param_v2, then re-verify parametrically.
+  REPLAY THROUGH A112's REGIONS (wall 0.5 s, read-only, no LP): A116's consumer table has 74 nodes inside a headline N.
+  A112 has 23 regions, 17 of them A57 nodes -- the 17 stalled nodes. Of those 17, **4 lie inside a certified N**
+  (Y0036_D07_D01, Y0036_D07_D06, Y0054_D00, Y0276_D05, all S02/k5_11/r0.2/rho10). Of those 4, **2 CLOSE COMPLETELY**
+  (YES free by A116 + NO side already dead in A112's tree): Y0036_D07_D01 and Y0276_D05. The other 2 (Y0036_D07_D06,
+  Y0054_D00) get a free YES side but their NO side is still open.
+  So the honest headline is 2 of 17 stalled nodes close outright, not 72 -- the 72/184 figure is the fraction of S02-EXPLAINED
+  ALIVE nodes inside N across the whole corpus, and only 4 of them are among the nodes A112 actually stalled on. The lever is
+  real but its overlap with the current stall set is small; its value would rise if the region tree were pointed at the other
+  70 in-N nodes, which is a different targeting decision.

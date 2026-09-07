@@ -183,6 +183,68 @@ def control_replay(log=print):
     return out
 
 
+# ---------------------------------------------------------------- A116 local certificates
+# When a stalled node's support lies inside a CERTIFIED neighbourhood N of the S02 or S07 minimum
+# (docs/proofs/local_certificate.md, 74a34f96), the YES region can be taken to BE N: A116 has
+# already certified that no packing exists in N, so the YES child needs no LP at all and only the
+# NO children go through the solver.  Off by default with everything else here.
+#
+#   S02  k5_11 frame,   L = f1 f2 f3 BR(0,1),  (r, rho) = (0.2, 10 deg)      72/184 nodes inside
+#   S07  trump5 frame,  L = f0 f2 f4, cut F_T(theta) > s0,
+#                                          (0.1, 40 deg) and (0.2, 10 deg)    2/18 nodes inside
+# 10^4-sample confirmed by A116, Trump outside every N.
+#
+# The YES kill is recorded as "dead by local certificate A116 <N id>" and is PENDING A119's
+# rational/Lean form -- it is a prose+numeric certificate today, not a replayable one, so it is
+# tagged and must not be counted with the frozen-verifier kills.
+A116 = os.path.abspath(os.path.join(BASE, "..", "A116-local-selection-tree"))
+HEADLINE_N = (("S02", 0.2, 10.0), ("S07", 0.1, 40.0), ("S07", 0.2, 10.0))
+_A116 = None
+
+
+def n_id(N):
+    return "%s/%s/r%g/rho%g%s" % (N["tag"], N["cls"], N["r"], N["rho"],
+                                  "/cut" if N.get("cut") else "")
+
+
+def a116_table():
+    """{node id: N record} for nodes whose support is inside a headline certified N."""
+    global _A116
+    if _A116 is None:
+        _A116 = {}
+        p = os.path.join(A116, "results", "t3_consumer.json")
+        if os.path.exists(p):
+            try:
+                d = json.load(open(p))
+                for e in d.get("per_N", []):
+                    N = e["N"]
+                    if (N["tag"], N["r"], N["rho"]) not in HEADLINE_N:
+                        continue
+                    for n in e.get("nodes", []):
+                        if n.get("inside"):
+                            _A116.setdefault(n["nid"], N)
+            except Exception:
+                pass
+    return _A116
+
+
+def local_certificate(node_id):
+    """-> (N record, claim string) when the YES side is free, else (None, None)."""
+    N = a116_table().get(node_id)
+    if N is None:
+        return None, None
+    return N, ("dead by local certificate A116 %s (pending A119 rational/Lean form)" % n_id(N))
+
+
+def plan_node(node_id):
+    """What the --region-tree option would do with this node, without running anything."""
+    N, claim = local_certificate(node_id)
+    return dict(id=node_id, ordering=ordering_for(node_id), shadow=shadow_match(node_id),
+                yes_side=("A116 local certificate" if N else "LP"),
+                local_N=(n_id(N) if N else None), yes_claim=claim,
+                no_side="LP (fixed-side certificates until A117 verify_param_v2)")
+
+
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()
