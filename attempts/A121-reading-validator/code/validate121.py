@@ -64,6 +64,7 @@ EXACT_D = 1e-5      # "already exactly on the cell": position, and
 EXACT_A = 1e-3      #   tilt in degrees (the minimiser's own convergence scale)
 NODE_COST_S = 850.0             # A118 price model: the tree's per-node decision cost
 A99_L1_CPUH = (43.2, 100.3)     # A115 t4_report: A99 k0 frontier, per level-1 cell
+KKT_TOL = 1e-3      # above this the Fritz-John fit is a real rank failure, not nnls noise
 
 D4_INV = {"e": "e", "r90": "r270", "r180": "r180", "r270": "r90",
           "mx": "mx", "my": "my", "diag": "diag", "anti": "anti"}
@@ -209,7 +210,21 @@ def load_a115():
 
 # ------------------------------------------------------------------ the shorthand
 def parse_reading(txt):
-    """-> [dict(type, sq, cell, star, text)]; `;`-separated items inherit the last type."""
+    """-> [dict(type, sq, cell, star, text)]; `;`-separated items inherit the last type.
+
+    `g` swallows the REST of the string (a grain description is prose and may contain `;`);
+    `-` is an explicit "no reading of this kind" marker.
+    """
+    txt = txt.strip()
+    if txt == "-":
+        return [dict(type="-", sq=None, cell=None, star=False, text="-")]
+    head, sep, tail = txt.partition(" g ")
+    if txt.startswith("g "):
+        return [dict(type="g", sq=None, cell=None, star=False, text=txt[2:].strip())]
+    grain = None
+    if sep:
+        grain = tail.strip()
+        txt = head.rstrip().rstrip(";")
     items, typ = [], None
     for part in txt.split(";"):
         w = part.strip().split()
@@ -235,6 +250,8 @@ def parse_reading(txt):
         star = "*" in sq
         items.append(dict(type=typ, sq=sq.replace("*", ""), cell=cellname(w[1]),
                           star=star, text=part.strip()))
+    if grain is not None:
+        items.append(dict(type="g", sq=None, cell=None, star=False, text=grain))
     return items
 
 
@@ -335,6 +352,11 @@ def validate_item(e, P, s, it, cls):
         rec["flags"].append("? parse: " + it["parse_error"])
         return rec
 
+    if it["type"] == "-":
+        rec["note"] = ("explicit 'no reading of this kind' -- the entry's blue snaps carry the "
+                       "row; no cut is derived and nothing is flagged")
+        return rec
+
     if it["type"] == "i":
         k = e["nsquares"]
         rec.update(k=k, nslot=len(e["slots"]), nfree=e["nfree"], s=s)
@@ -385,7 +407,7 @@ def validate_item(e, P, s, it, cls):
         rec["rank"] = an.get("rank")
         rec["nrows"] = an.get("nrows")
         rec["flexes_fixed_s"] = an.get("flexes_fixed_s")
-        if (an.get("kkt_residual") or 0.0) > 1e-6:
+        if (an.get("kkt_residual") or 0.0) > KKT_TOL:
             rec["flags"].append("? this entry's Fritz-John decomposition does NOT close "
                                 "(kkt_residual = %.4g, rank %s of %s rows): the multipliers "
                                 "below are an nnls least-squares fit, not a certified load path"
@@ -395,8 +417,30 @@ def validate_item(e, P, s, it, cls):
                 rec["flags"].append("  (but the rattler test calls %s LOAD-BEARING: removing it "
                                     "drops s by %.5f -- FJ and the rattler test disagree on %s)"
                                     % (nm, rat[nm]["drop"], nm))
-        rec["a116_stability"] = ("not applicable (A116's stability radii cover S02/S07 only; "
-                                 "this is %s)" % e["id"])
+        rec["a116_stability"] = a116_for(e["id"])
+        # a grain description need not name squares ("a common-tilt grain", "4 stacked on the
+        # left"): give the PI the entry's tilt clusters and its flush columns unconditionally.
+        allt = sorted(((tmod90(t), nm) for nm, x, y, t in P), key=lambda z: z[0])
+        clusters, cur = [], []
+        for v, nm in allt:
+            if cur and v - cur[0][0] > 0.5:
+                clusters.append(cur)
+                cur = []
+            cur.append((v, nm))
+        if cur:
+            clusters.append(cur)
+        rec["tilt_clusters"] = [dict(n=len(c), lo=c[0][0], hi=c[-1][0],
+                                     spread=c[-1][0] - c[0][0],
+                                     squares=[nm for _, nm in c]) for c in clusters]
+        walls = {"left": [], "right": [], "bottom": [], "top": []}
+        for nm, x, y, t in P:
+            hw = 0.5 * (abs(math.cos(t)) + abs(math.sin(t)))
+            for k, g in (("left", x - hw), ("right", s - hw - x),
+                         ("bottom", y - hw), ("top", s - hw - y)):
+                if g <= SNAP_D:
+                    walls[k].append([nm, g])
+        rec["flush_on_wall"] = {k: sorted(v, key=lambda z: z[1]) for k, v in walls.items() if v}
+        rec["s_star"] = s
         return rec
 
     # r / ns -------------------------------------------------------------------------
@@ -416,8 +460,13 @@ def validate_item(e, P, s, it, cls):
                linf=linf, tilt_mod90_deg=tilt, mu=mu, depth=max(0.0, 1.0 - mu),
                met=met, grazers=graze,
                corner=is_corner(it["cell"]),
-               usable=it["cell"] in CP.CLASSES.get(cls, {}).get("usable", {}),
-               extension=CP.CLASSES.get(cls, {}).get("usable", {}).get(it["cell"]))
+               entry_classes=cls,
+               # usability is per NODE (the cell must be usable in the node's own frame, for the
+               # node's own class); at entry level report it per class present in the entry.
+               usable_by_class={c: (it["cell"] in CP.CLASSES.get(c, {}).get("usable", {}))
+                                for c in cls},
+               extension_by_class={c: CP.CLASSES.get(c, {}).get("usable", {}).get(it["cell"])
+                                   for c in cls})
     others = [m for m in met if m["sq"] != it["sq"]]
     rec["others"] = others
     rec["cell_singly_met"] = (len(met) == 1 and met[0]["sq"] == it["sq"])
@@ -465,9 +514,58 @@ def validate_item(e, P, s, it, cls):
 
 
 # ------------------------------------------------------------------ T2
+def node_class(nd, lane):
+    """The Young class of an explained node: A118's own label where it has one, else the class
+    prefix of the nid (A61's window stragglers), else the campaign default."""
+    lr = lane.get((nd["src"], nd["nid"]))
+    if lr and lr.get("cls"):
+        return lr["cls"]
+    nid = nd["nid"]
+    for c in ("k5_11", "k5_16"):
+        if nid.startswith(c):
+            return c
+    if nd["src"] == "A60":
+        return "trump5"
+    if nd["src"] in ("A38", "A85", "A99"):
+        return "k0_00"
+    if nd["src"] == "A61":
+        # A61's window stragglers are named by their class; `.stageA` is a run stage, not a class
+        return nid.split(".")[0]
+    head = nid.split("_interior")[0].split("__")[0]
+    if head[:2] in ("k5", "k6", "k4", "k7") and len(head) >= 4:
+        return head
+    return None
+
+
+def a116_for(sid):
+    """A116's stability radii, for the two entries it covers (S02, S07)."""
+    p = os.path.join(ROOT, "attempts", "A116-local-selection-tree", "results", "stability.json")
+    if not os.path.exists(p):
+        return "A116 stability.json not on disk"
+    d = json.load(open(p))
+    if sid not in d:
+        return ("not applicable (A116's stability radii cover %s only; this is %s)"
+                % ("/".join(sorted(d)), sid))
+    out = {}
+    for rho, blk in sorted(d[sid].items()):
+        rows = blk.get("rows", [])
+        rad = [(r["pair"], r.get("forced_radius"), r.get("estimate"))
+               for r in rows if r.get("contact") and r.get("forced_radius") is not None]
+        rad.sort(key=lambda z: z[1])
+        out["rho_%s_deg" % rho] = dict(
+            n_pairs=len(rows), n_contact=len(rad),
+            min_forced_radius=(rad[0][1] if rad else None),
+            limiter=(rad[0][0] if rad else None),
+            next_limiters=[[a, b] for a, b, _ in rad[1:4]])
+    return out
+
+
 def cut_kind(cls, cell, typ, star, corner):
     if typ == "i":
         return "d", "warm re-solve (< 11 squares)"
+    if cls not in CP.CLASSES:
+        return "none", ("class %s has no usable-slot table (not in A118's corpus: no certified "
+                        "extension, so no teleport lemma applies)" % cls)
     usable = CP.CLASSES.get(cls, {}).get("usable", {})
     if cls == "k0_00":
         if corner:
@@ -567,7 +665,13 @@ def main():
         if e is None:
             readings.append(dict(entry=sid, error="no A107 gallery entry"))
             continue
-        cls = "k0_00" if e["kind"] == "k0" else None
+        cls = []
+        for nd in nodes_of.get(sid, []):
+            c = node_class(nd, lane)
+            if c and c not in cls:
+                cls.append(c)
+        if not cls:
+            cls = ["k0_00"] if e["kind"] == "k0" else []
         s, P = packing_of(e)
         items = parse_reading(filled[sid])
         ns = nodes_of.get(sid, [])
@@ -590,16 +694,20 @@ def main():
             v = validate_item(e, P, s, it, cls)
             v.update(entry=sid, s_star=s, nodes_explained=len(ns), reading=filled[sid])
             readings.append(v)
-            if it["type"] == "g":
-                continue
+            if it["type"] in ("g", "-"):
+                continue    # a grain description and an explicit "no reading" carry no cut
 
-            kind, why = cut_kind(cls, it["cell"] or "", it["type"], it["star"],
-                                 v.get("corner", False))
             for nd in ns:
                 key = (nd["src"], nd["nid"])
                 so = sops.get(key)
                 op = so.get("struct_op") if so else None
                 ncell = cell_map(it["cell"], D4_INV[op]) if (op and it["cell"]) else None
+                # usability is a property of the cell IN THE NODE's frame -- that is where the
+                # class pins live -- and of the NODE's class, which for a shared shadow varies
+                # from node to node.
+                ncls = node_class(nd, lane)
+                kind, why = cut_kind(ncls, ncell or (it["cell"] or ""), it["type"], it["star"],
+                                     is_corner(ncell) if ncell else v.get("corner", False))
                 lr = lane.get(key)
                 lc = lane_at(lr, ncell) if ncell else None
                 lane_ub = lc.get("lane_ub") if lc else None
@@ -609,7 +717,11 @@ def main():
                 row = dict(entry=sid, reading_type=it["type"], reading=it["text"],
                            shadow_cell=it["cell"], shadow_square=it["sq"], star=it["star"],
                            src=nd["src"], nid=nd["nid"], shard=nd.get("shard"),
-                           level=nd.get("level"), cls=cls, tau=nd.get("tau"),
+                           level=nd.get("level"), cls=ncls, tau=nd.get("tau"),
+                           node_cell_usable=(ncell in CP.CLASSES.get(ncls, {})
+                                             .get("usable", {})) if ncell else None,
+                           node_cell_extension=CP.CLASSES.get(ncls, {})
+                                                 .get("usable", {}).get(ncell),
                            budget=nd.get("budget"),
                            struct_op=op, node_cell=ncell,
                            in_primary_struct=(key in prim_members)
@@ -621,7 +733,7 @@ def main():
                            lane_ub=lane_ub, M=M,
                            node_kill=node_kill,
                            lane_at_other_corners=None, a115=None)
-                if lr and cls == "k0_00":
+                if lr and ncls == "k0_00":
                     row["lane_at_other_corners"] = {
                         c["cell"]: dict(verdict=c["verdict"], M=c["ncond_pot"],
                                         kill=bool(c.get("lane_ub") is not None
@@ -646,6 +758,12 @@ def main():
 
     # ---- merge into the jsonl outputs (replace every row of a re-processed entry) --------
     def merge(path, new, keyf):
+        """Replace every stored row of a RE-PROCESSED entry.
+
+        The touched set is `todo`, not the entries appearing in `new`: a row whose reading
+        becomes `-` (or otherwise stops producing cuts) must have its stale rows dropped, and
+        deriving the set from `new` would silently keep them.
+        """
         old = []
         if os.path.exists(path):
             for ln in open(path, encoding="utf-8"):
@@ -653,7 +771,7 @@ def main():
                     old.append(json.loads(ln))
                 except Exception:
                     pass
-        touched = set(keyf(r) for r in new)
+        touched = set(todo)
         keep = [r for r in old if keyf(r) not in touched]
         with open(path, "w", encoding="utf-8") as fh:
             for r in keep + new:
@@ -665,6 +783,7 @@ def main():
     json.dump(state, open(statep, "w"), indent=1)
 
     summary = summarise(allread, allcuts, entries, nodes_of)
+    summary["calibration"] = calibrate(allread, entries, nodes_of, sops, lane)
     json.dump(summary, open(os.path.join(RES, "summary.json"), "w"), indent=1)
     write_report(allread, allcuts, summary)
     print(json.dumps(summary["headline"], indent=1))
@@ -759,6 +878,135 @@ def summarise(readings, cuts, entries, nodes_of):
         killed_elsewhere=sorted("%s/%s" % k for k in already))
 
 
+def calibrate(readings, entries, nodes_of, sops, lane):
+    """The PI's calibration pass on the `ns` items flagged as far from their named cell.
+
+    Three questions: (1) where is each far square really; (2) does ANY consistent relabelling of
+    the cell names -- a D4 element, an index transpose, an index shift, or any composition --
+    bring them home; (3) what IS the true near-snap set of each entry, so the PI can calibrate.
+    """
+    named = {}
+    for r in readings:
+        if not r.get("entry"):
+            continue
+        named.setdefault(r["entry"], set())
+        if r.get("sq") and r.get("cell"):
+            named[r["entry"]].add((r["sq"], r["cell"]))
+    far = [r for r in readings
+           if r.get("type") == "ns" and r.get("linf") is not None and r["linf"] > SNAP_D]
+    far.sort(key=lambda r: (r["entry"], r["sq"]))
+
+    items = []
+    for r in far:
+        e = entries.get(r["entry"])
+        if e is None:
+            continue
+        s, P = packing_of(e)
+        x, y, t = dict((n, (a, b, c)) for n, a, b, c in P)[r["sq"]]
+        c, i, j = L.parse_cell(r["cell"])
+        cx, cy = L.cell_centre(c, i, j, s)
+        cells = slot_cells(s)
+        nn, nd = min(((k, max(abs(x - p[0]), abs(y - p[1]))) for k, p in cells.items()),
+                     key=lambda kv: kv[1])
+        items.append(dict(entry=r["entry"], sq=r["sq"], named=r["cell"], s=s,
+                          pose=[x, y], tilt_mod90_deg=tmod90(t),
+                          named_centre=[cx, cy], dx=x - cx, dy=y - cy,
+                          flush_residual=min(abs(x - cx), abs(y - cy)),
+                          along_wall=max(abs(x - cx), abs(y - cy)),
+                          nearest_cell=nn, nearest_linf=nd,
+                          any_cell_within_snap=bool(nd <= SNAP_D)))
+
+    # ---- (2) the relabelling search -------------------------------------------------------
+    rules = []
+    for op in D4_INV:
+        for tr in (False, True):
+            for di in range(-3, 4):
+                for dj in range(-3, 4):
+                    hits, tot = 0, 0.0
+                    for it in items:
+                        e = entries[it["entry"]]
+                        s, P = packing_of(e)
+                        x, y = it["pose"]
+                        c, i, j = L.parse_cell(cell_map(it["named"], op))
+                        if tr:
+                            i, j = j, i
+                        i, j = i + di, j + dj
+                        if not (0 <= i <= 3 and 0 <= j <= 3):
+                            tot += 2.0
+                            continue
+                        cx, cy = L.cell_centre(c, i, j, s)
+                        d = max(abs(x - cx), abs(y - cy))
+                        tot += min(2.0, d)
+                        if d <= SNAP_D:
+                            hits += 1
+                    rules.append(dict(op=op, transpose=tr, shift=[di, dj], hits=hits,
+                                      total_linf=tot))
+    n = max(1, len(items))
+    by_hits = sorted(rules, key=lambda r: (-r["hits"], r["total_linf"]))
+    by_dist = sorted(rules, key=lambda r: r["total_linf"])
+    ceiling = sum(1 for it in items if it["any_cell_within_snap"])
+    identity = [r for r in rules if r["op"] == "e" and not r["transpose"]
+                and r["shift"] == [0, 0]][0]
+
+    # ---- (3) the true near-snap set --------------------------------------------------------
+    truesnap = {}
+    for sid in sorted(named):
+        e = entries.get(sid)
+        if e is None:
+            continue
+        s, P = packing_of(e)
+        rows = []
+        for nm, x, y, t in P:
+            if not nm.startswith("f"):
+                continue
+            tilt = tmod90(t)
+            cells = slot_cells(s)
+            cn, cd = min(((k, max(abs(x - p[0]), abs(y - p[1]))) for k, p in cells.items()),
+                         key=lambda kv: kv[1])
+            if cd > SNAP_D or tilt > SNAP_A:
+                continue
+            _, met, gz = occupancy(P, s, cn)
+            others = [m["sq"] for m in met if m["sq"] != nm]
+            row = dict(sq=nm, cell=cn, linf=cd, tilt_deg=tilt, corner=is_corner(cn),
+                       others=others, read=bool((nm, cn) in named[sid]))
+            if not row["read"] and row["corner"] and not others:
+                row["cuts"] = []
+                for nd_ in nodes_of.get(sid, []):
+                    so = sops.get((nd_["src"], nd_["nid"]))
+                    if not so:
+                        continue
+                    ncell = cell_map(cn, D4_INV[so["struct_op"]])
+                    lc = lane_at(lane.get((nd_["src"], nd_["nid"])), ncell)
+                    row["cuts"].append(dict(
+                        src=nd_["src"], nid=nd_["nid"], level=nd_.get("level"),
+                        node_cell=ncell, verdict=(lc or {}).get("verdict"),
+                        M=(lc or {}).get("ncond_pot"),
+                        kill=bool(lc and lc.get("lane_ub") is not None
+                                  and lc.get("ncond_pot") is not None
+                                  and lc["lane_ub"] + lc["ncond_pot"] <= 1)))
+            rows.append(row)
+        truesnap[sid] = sorted(rows, key=lambda r: r["linf"])
+
+    FLUSH_TOL = 0.01           # A101's own flush threshold (flood_lemma.md sec 1)
+    flush = [it for it in items if it["flush_residual"] <= FLUSH_TOL]
+    notflush = [it for it in items if it["flush_residual"] > FLUSH_TOL]
+    for it in items:
+        it["flush"] = bool(it["flush_residual"] <= FLUSH_TOL)
+    return dict(far_items=items, n_far=len(items),
+                flush_tol=FLUSH_TOL, n_flush=len(flush),
+                flush_residual_max_among_flush=max([it["flush_residual"] for it in flush],
+                                                   default=None),
+                not_flush=[dict(entry=it["entry"], sq=it["sq"], named=it["named"],
+                                flush_residual=it["flush_residual"],
+                                tilt=it["tilt_mod90_deg"]) for it in notflush],
+                flush_residual_max=max([it["flush_residual"] for it in items], default=None),
+                relabel_ceiling=ceiling, relabel_ceiling_frac=ceiling / n,
+                identity_rule=identity, n_rules=len(rules),
+                best_by_hits=by_hits[:3], best_by_distance=by_dist[:3],
+                relabelling_found=bool(by_hits[0]["hits"] >= 0.8 * n),
+                true_near_snap=truesnap)
+
+
 def write_report(readings, cuts, summary):
     L_ = []
     h = summary["headline"]
@@ -796,19 +1044,115 @@ def write_report(readings, cuts, summary):
         for r in readings:
             if r.get("type") == "i":
                 kof[r["entry"]] = r.get("k")
+        # nodes A115 actually has a record for are listed one by one; the rest are summarised
+        # per (entry, campaign), since "not in A115's queue" is one fact repeated.
+        noq = collections.Counter()
         for c in sorted(irows, key=lambda c: (c["entry"], c["nid"])):
             a = c.get("a115") or {}
+            v = a.get("verdict", "-")
+            if a.get("eta") is None and "not in A115" in str(v):
+                noq[(c["entry"], c["src"])] += 1
+                continue
             L_.append("| %s | %s | `%s` | %s | L%s | %s | %s | %s |"
-                      % (c["entry"], kof.get(c["entry"]), c["nid"], c["src"], c["level"],
-                         a.get("verdict", "-"),
+                      % (c["entry"], kof.get(c["entry"]), c["nid"], c["src"], c["level"], v,
                          ("%+.4g" % a["eta"]) if a.get("eta") is not None else "-",
                          ("%.3f" % a["minmass"]) if a.get("minmass") is not None else "-"))
+        for (ent, src), n in sorted(noq.items()):
+            L_.append("| %s | %s | *(%d nodes)* | %s | - | never queued by A115 (%s campaign) "
+                      "| - | - |" % (ent, kof.get(ent), n, src, src))
 
     L_.append("\n## T1 - disagreements (`?` rows the PI wants re-drawn)\n")
     for d in summary["disagreements"]:
         L_.append("* **%s** `%s` (%s)" % (d["entry"], d["item"], d["type"]))
         for f in d["flags"]:
             L_.append("  * %s" % f)
+    cal = summary.get("calibration")
+    if cal and cal["far_items"]:
+        L_.append("\n## T1b - calibration: the `ns` items far from their named cell\n")
+        L_.append("**%d of the %d far items are FLUSH in one axis** with the centre of the cell "
+                  "the PI named (residual on the matching axis <= %.2f, A101's own threshold; "
+                  "the largest is %.2e) and displaced only ALONG that wall. The cell names are "
+                  "not offset; the shorthand is. This is A101's flush population "
+                  "(`flood_lemma.md` §1: \"within 0.01 of a lattice coordinate in ONE axis at "
+                  "tilt <= 1 deg ... squares resting against a pin and displaced ALONG it\"), "
+                  "not the eta-disturbed population `ns` describes.%s\n"
+                  % (cal["n_flush"], cal["n_far"], cal["flush_tol"],
+                     cal["flush_residual_max_among_flush"],
+                     ("" if not cal["not_flush"] else
+                      " The %d exception(s) are off the named cell in BOTH axes: %s -- "
+                      "genuinely loose squares, neither flush nor near-snapped."
+                      % (len(cal["not_flush"]),
+                         "; ".join("%s `%s`@`%s` (residual %.4f, tilt %.2f deg)"
+                                   % (x["entry"], x["sq"], x["named"], x["flush_residual"],
+                                      x["tilt"]) for x in cal["not_flush"])))))
+        L_.append("| entry | sq | named cell | pose (cx, cy) | tilt mod 90 | dx | dy | flush "
+                  "residual | along wall | nearest cell | its L-inf | any cell <= 0.05 |")
+        L_.append("|---|---|---|---|---|---|---|---|---|---|---|---|")
+        for it in cal["far_items"]:
+            L_.append("| %s | `%s` | `%s` | (%.4f, %.4f) | %.3f | %+.4f | %+.4f | %.2e | %.4f | "
+                      "`%s` | %.4f | %s |"
+                      % (it["entry"], it["sq"], it["named"], it["pose"][0], it["pose"][1],
+                         it["tilt_mod90_deg"], it["dx"], it["dy"], it["flush_residual"],
+                         it["along_wall"], it["nearest_cell"], it["nearest_linf"],
+                         "yes" if it["any_cell_within_snap"] else "**no**"))
+        b, d = cal["best_by_hits"][0], cal["best_by_distance"][0]
+        L_.append("\n**Relabelling test - NEGATIVE, and it cannot be otherwise.** Searched all "
+                  "%d rules (8 D4 name maps x {identity, index transpose} x index shifts "
+                  "[-3..3]^2). Best by hits: `op=%s transpose=%s shift=(%d,%d)` at **%d of %d** "
+                  "within 0.05 - far below the 80%% asked for. The ceiling is **%d of %d "
+                  "(%.0f%%)**: %d of the far squares have **no lattice cell of any name** within "
+                  "0.05, so no bijective relabelling can reach 80%%. And the best rule by total "
+                  "L-inf is the **identity** (`op=e, no transpose, shift=(0,0)`, sum %.4f vs "
+                  "%.4f for the runner-up `op=%s shift=(%d,%d)`): the PI's own cell names are "
+                  "already the closest assignment available. Nothing is mis-named; `ns` is the "
+                  "wrong token for a flush square.\n"
+                  % (cal["n_rules"], b["op"], b["transpose"], b["shift"][0], b["shift"][1],
+                     b["hits"], cal["n_far"], cal["relabel_ceiling"], cal["n_far"],
+                     100.0 * cal["relabel_ceiling_frac"],
+                     cal["n_far"] - cal["relabel_ceiling"], cal["identity_rule"]["total_linf"],
+                     d["total_linf"] if d is not cal["identity_rule"]
+                     else cal["best_by_distance"][1]["total_linf"],
+                     (d if d is not cal["identity_rule"] else cal["best_by_distance"][1])["op"],
+                     (d if d is not cal["identity_rule"]
+                      else cal["best_by_distance"][1])["shift"][0],
+                     (d if d is not cal["identity_rule"]
+                      else cal["best_by_distance"][1])["shift"][1]))
+        L_.append("\n### The TRUE near-snap set (every free square within 0.05 of a lattice cell "
+                  "AND within 3 deg of axis)\n")
+        L_.append("`read` = the PI already names this (sq, cell) pair. `others` = the other "
+                  "squares meeting the open cell (empty => Lemma SNAP-D applies).\n")
+        L_.append("| entry | sq | cell | L-inf | tilt | corner | others meeting the cell | in the "
+                  "reading? |")
+        L_.append("|---|---|---|---|---|---|---|---|")
+        misses = []
+        for sid in sorted(cal["true_near_snap"]):
+            rows = cal["true_near_snap"][sid]
+            if not rows:
+                L_.append("| %s | *(none)* | | | | | | |" % sid)
+            for r in rows:
+                L_.append("| %s | `%s` | `%s` | %.2e | %.3f | %s | %s | %s |"
+                          % (sid, r["sq"], r["cell"], r["linf"], r["tilt_deg"],
+                             "**yes**" if r["corner"] else "no",
+                             ", ".join("`%s`" % o for o in r["others"]) or "*none*",
+                             "yes" if r["read"] else "**NO**"))
+                if r.get("cuts"):
+                    misses.append((sid, r))
+        if misses:
+            L_.append("\n**Corner-cell near-snaps the reading does not name** (singly met, so "
+                      "Lemma SNAP-D applies and each is a K0-FREE cut candidate). The lane test "
+                      "was run on every node of each entry at the mapped cell:\n")
+            L_.append("| entry | sq | cell | L-inf | node | level | node cell | lane | M | node "
+                      "kill? |")
+            L_.append("|---|---|---|---|---|---|---|---|---|---|")
+            for sid, r in misses:
+                for c in r["cuts"]:
+                    L_.append("| %s | `%s` | `%s` | %.2e | `%s/%s` | L%s | `%s` | %s | %s | %s |"
+                              % (sid, r["sq"], r["cell"], r["linf"], c["src"], c["nid"],
+                                 c["level"], c["node_cell"], c["verdict"], c["M"],
+                                 "**YES**" if c["kill"] else "no"))
+            nk = sum(1 for _, r in misses for c in r["cuts"] if c["kill"])
+            L_.append("\n%d missed corner near-snap(s); **%d** of the resulting cuts is a node "
+                      "kill.\n" % (len(misses), nk))
     open(os.path.join(NOTES, "report.md"), "w", encoding="utf-8").write("\n".join(L_) + "\n")
 
 

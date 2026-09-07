@@ -79,3 +79,36 @@ entry id, so re-processing one row rewrites only that row's records.
 * The drawn packing is the entry's PRIMARY structure's minimum.  Nodes of an entry's secondary
   structures share only the value `s*`; `cuts.jsonl` carries `in_primary_struct` per node.
 * Every k0 kill is conditional on `k1_00` (A118-O2).
+
+## 6. Batch 2: the pinned classes (S rows)
+
+An S entry's nodes do not share a class (S01 spans k5_11, k5_16, trump5, four A61 stragglers and
+two k6 classes), and usability is a property of the cell **in the node's own frame**, where the
+class pins live.  So the cut kind is decided per NODE, not per entry:
+
+1. `node_class(nd)` = A118's own `cls` where it has a lane record; else the nid prefix (A61's
+   window stragglers are named by their class, `.stageA` being a run stage, not a class); else
+   the campaign default.
+2. the cell is mapped to the node frame through `struct_op^{-1}` FIRST, and only then tested
+   against that class's usable set (`corpus.CLASSES`, A118 `notes/method.md` §3).
+3. a class with no usable-slot table (k5_05, k5_10, k5_12, k5_17, k6_20, k6_21, k6_29 - A61's
+   stragglers) yields `cut_kind = none`: no certified extension, so no teleport lemma.
+
+The table used is A118's own `corpus.CLASSES`, which for **k5_16 has six usable cells including
+`BL(1,0)` (extension k6_23)**; a five-cell version of that list omitting `BL(1,0)` is in
+circulation.  Sensitivity: 50 cut rows depend on `BL(1,0)` being usable and **none of them is a
+node kill**, so nothing in this report turns on the discrepancy.
+
+Two more shorthand tokens are handled: `g` swallows the REST of the string (a grain description
+is prose and may contain `;`), and `-` is an explicit "no reading of this kind" that yields no
+cut and no flag.  A `g` row now also carries the entry's tilt clusters (0.5 deg linkage) and its
+flush-on-wall lists, so a description that names no squares ("a common-tilt grain", "4 stacked on
+the left") can still be checked; and for S02/S07 it carries A116's stability radii.
+
+Two thresholds were re-set on batch-2 evidence: the Fritz-John closure test is `kkt_residual >
+1e-3` (1e-6 flagged nnls noise - S07 1.3e-4 at full rank 7 of 7), and the "flush" verdict uses
+A101's own 0.01.
+
+**A merge bug found and fixed here:** `merge()` derived the set of entries to replace from the
+NEW rows, so an entry whose cuts fell to zero (S11's `-`) kept its stale rows forever.  The
+touched set is now `todo` - the entries actually re-processed.

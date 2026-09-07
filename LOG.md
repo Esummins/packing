@@ -4282,3 +4282,65 @@ registry row; 1 process, BLAS pinned (`blas1` before numpy); `PYTHONDONTWRITEBYT
 deletes; no LP and no lane recomputation — A118's verdicts are read, never re-derived. Re-runs
 incrementally on new rows: `python code/validate121.py [--since <commit>|--all|--only K01]`.
 Report: `attempts/A121-reading-validator/notes/{report.md,method.md}`.
+
+## 2026-09-07 — A121-reading-validator (Opus chore) — batch 2 (K22–K30, S01–S15) + the PI's calibration pass
+
+**CUMULATIVE: 45 rows, 138 reading items, 1,453 (node, cut) rows, 9 node kills, STILL 0 NEW.**
+Batch 2 adds 3 kills, all already booked by A118: **S01** `r f0 tl00` → A60 `c0_Y0088`, `c0_Y0094`
+(trump5, TL(0,0), extension k6_23, `LANE ≤ 0, M = 1`) and **S06** `ns f2 tr00` →
+`k5_11_interior_Y1080` (k5_11, TR(0,0), k6_23) — the latter being A118's own headline new kill,
+recovered independently from the PI's reading. 9 kills × 850 s = **2.13 CPU-h**, 0 of it new;
+no A99 level-1 cell, so still 0 CPU-h off A99's frontier. A118 kills **14** of this batch's
+nodes; the readings name the killing cell for **9** and a non-killing cell for 5
+(`k5_16_interior_Y0224`, `l2_p210_000/010`, `l2_p215_011`, `l3_pp215_000_011`).
+
+**Pinned classes (T2 for the S rows).** Usability is a property of the cell IN THE NODE'S FRAME
+and of the NODE's class, and an S entry does not have one class (S01 spans k5_11, k5_16, trump5,
+four A61 stragglers and two k6 classes). So the cell is mapped through `struct_op⁻¹` first and
+only then tested against that class's usable set. Result: **736 of 1,453 cut rows are
+`cut_kind = none`** — S01's `r f0 tl00` is a SLOT-CROWD cut for its 196 trump5 nodes (TL(0,0),
+k6_23) and NO cut for its 238 k5_11 and 178 k5_16 nodes, since TL(0,0) is usable for neither; and
+A61's window stragglers (k5_05, k5_10, k5_12, k5_17, k6_20, k6_21, k6_29) have no usable-slot
+table at all. The table used is A118's own `corpus.CLASSES`, in which **k5_16 has six usable
+cells including `BL(1,0)` (k6_23)**; 50 cut rows depend on that cell and **none is a kill**, so
+nothing here turns on the five-vs-six-cell discrepancy.
+
+**T1 across all 60 `ns` items: 5 are genuine uncrowded near-snaps.** 24 are far (L∞ > 0.05), 22
+name a square already EXACTLY on its cell, 6 are far AND crowded, 2 are near-snapped but crowded,
+1 is on-cell and crowded. The slot/free under-count now stands at **23 of the 45 entries**. All
+**12 `r` items are exactly right** (singly met, no grazer) — the reading type that works.
+
+**T1b — CALIBRATION (the PI's question: are the cell names offset?). NO, AND THEY CANNOT BE.**
+Over the 30 far items, **26 are FLUSH in one axis** with the named cell's centre (residual ≤ 0.01,
+A101's own threshold; largest 5.5·10⁻³) and displaced only ALONG that wall — A101's flush
+population (`flood_lemma.md` §1), not the η-disturbed population `ns` names. Searched **all 784**
+relabelling rules (8 D4 name maps × {identity, index transpose} × index shifts [−3..3]²): the best
+hits **1 of 30** within 0.05, and the ceiling is **1 of 30 (3 %)** because **29 of the far squares
+have no lattice cell of ANY name within 0.05**. The best rule by total L∞ is the **identity**
+(8.9565 vs 18.6363 for the runner-up): the PI's own cell names are already the closest assignment
+available. The 4 non-flush exceptions are off in both axes — K25 `f1`@TL(1,0) (residual 0.084 at
+tilt 14.48°), K27 `f4`@BR(0,1) (0.092), K26 `f5`@BL(1,0) (0.012), K29 `f6`@BL(1,0) (0.012).
+**The fix is a new token (`fl <sq> <cell> <along>`), not a re-drawn frame.** The report also
+carries the TRUE near-snap set (every free square within 0.05 AND 3° of a cell) per entry: it
+names **5 corner-cell, singly-met candidates the reading misses** (K09 `f2`@TL(0,0), K11
+`f1`@TR(0,0), K12 `f2`@BR(0,0), K13 `f1`@TL(0,0), K17 `f2`@BR(0,0)); the lane test was run on all
+of them and **none is a node kill** (LANE ≥ 2, or UNDECIDED with M = 1).
+
+**The `g` rows check out; the data behind two of them does not.** K18 `f0/1/3/4/5/6` share a tilt
+to **5.5·10⁻⁴ °**; S13 `f0/2/3/4` to **4.6·10⁻⁷ °**; S05's "f2 flush on the side" is exact (right
+wall gap 4.9·10⁻¹⁴); K30's "side > 4" is right (s\* = 4.020670) and "4 stacked on the left" is
+right (BL(0,0), BL(0,1), f6 at left gap ≤ 3.3·10⁻¹⁶ and f3 at 0.038), with "the rest a
+common-tilt grain" = 6 squares at 31.009° plus one outlier at 31.586°. But **K18's Fritz-John
+decomposition does not close** (kkt_residual 0.117, rank 19 of 21; `f6` carries zero force while
+the rattler test calls it load-bearing) and **K30's does not either** (0.024, rank 19 of 22).
+S07's 1.3·10⁻⁴ at full rank is nnls noise, so the closure threshold is now 10⁻³. `g` rows now
+also carry the entry's tilt clusters and flush-on-wall lists (so a description naming no squares
+is still checkable) and, for S02/S07, A116's stability radii (S02 min forced radius 0.0315 at
+ρ = 0 / 0.0191 at ρ = 100, limiter `f1|f3`; S07 0.0144 / 0.0082, limiter `f2|f4` — matching
+A116's own 0.024 / 0.019 headline for the single-leaf N).
+
+**One bug found and fixed:** `merge()` derived the entries to replace from the NEW rows, so an
+entry whose cuts fell to zero (S11, whose reading is `-`) kept its stale rows forever. The
+touched set is now `todo`. Canaries re-run and all PASS (C1 161/161, C2 72/72, C3 30/30, C4 235
+contacts at max |diff| 0.0). Discipline unchanged: read-only outside A121 + this ledger + the
+registry row, 1 BLAS-pinned process, no LP, no lane recomputation.
