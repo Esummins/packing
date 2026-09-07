@@ -1,0 +1,1529 @@
+{
+ "generated": "2026-09-07T01:21:46",
+ "source": "attempts/A116-local-selection-tree/results/t2_*.jsonl (read-only) + attempts/A119-local-cert-lean/results/t3_*.jsonl",
+ "s0": 3.877084,
+ "shat": 3.877083590022814,
+ "s_lo": 3.82,
+ "s_hi": 3.897084,
+ "pin_slack": 0.0070710678118654745,
+ "note": "attempts/A119-local-cert-lean/notes/n_boxes.md (DROP/COVER: 'a square in each box' + pins => inside N)",
+ "d4_ops": {
+  "e": "(x, y, t)",
+  "r90": "(s - y, x, t)",
+  "r180": "(s - x, s - y, t)",
+  "r270": "(y, s - x, t)",
+  "mx": "(s - x, y, -t)",
+  "my": "(x, s - y, -t)",
+  "diag": "(y, x, -t)",
+  "anti": "(s - y, s - x, -t)"
+ },
+ "d4_ops_note": "apply at s = s0 = 3.877084; A107's struct_op per node, then test the boxes",
+ "N": [
+  {
+   "id": "S02_k5_11_r0.20_rho10",
+   "tag": "S02",
+   "cls": "k5_11",
+   "r": 0.2,
+   "rho_deg": 10.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "L": [
+    "f1",
+    "f2",
+    "f3",
+    "BR(0,1)"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "TL(0,0)",
+    "BL(1,0)",
+    "BR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f1",
+     "cx": [
+      1.0625007385285734,
+      1.4625007385285733
+     ],
+     "cy": [
+      2.2266575586416693,
+      2.6266575586416696
+     ],
+     "theta_deg": [
+      38.4351,
+      58.43509999999999
+     ],
+     "anchor": [
+      1.2625007385285734,
+      2.4266575586416694,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.19999999999999996,
+      0.20000000000000018,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.7243194288822623,
+      2.1243194288822624
+     ],
+     "cy": [
+      2.9730026019837474,
+      3.373002601983748
+     ],
+     "theta_deg": [
+      38.4351,
+      58.43509999999999
+     ],
+     "anchor": [
+      1.9243194288822623,
+      3.1730026019837476,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000007,
+      0.20000000000000018,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.4145832315460036,
+      2.814583231546004
+     ],
+     "cy": [
+      2.2479405196546893,
+      2.6479405196546897
+     ],
+     "theta_deg": [
+      38.4351,
+      58.43509999999999
+     ],
+     "anchor": [
+      2.614583231546004,
+      2.4479405196546895,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.20000000000000018,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "BR(0,1)",
+     "cx": [
+      3.177084,
+      3.577084
+     ],
+     "cy": [
+      1.3,
+      1.7
+     ],
+     "theta_deg": [
+      -10.0,
+      10.0
+     ],
+     "anchor": [
+      3.377084,
+      1.5,
+      0.0
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.20000000000000018,
+      0.19999999999999996,
+      10.0
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "TL(0,0)",
+     "alpha": [
+      0.5,
+      -0.5
+     ],
+     "beta": [
+      0.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      3.377084
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8771047010280113,
+    "measured_min": 3.8856181051115355,
+    "sample_hits": 0,
+    "trump_inside": false,
+    "seconds": 445.3
+   },
+   "sample_check": {
+    "n_samples": 12000,
+    "hits": 0,
+    "free_pairs_disjoint": 420,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "worst_free_overlap_of_rejects": -0.00012550617452899981
+   },
+   "frame_ops": {
+    "diag": {
+     "count": 175,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 360,
+     "example": "k5_11_interior_Y0017"
+    }
+   }
+  },
+  {
+   "id": "S02_k5_11_r0.05_rho20",
+   "tag": "S02",
+   "cls": "k5_11",
+   "r": 0.05,
+   "rho_deg": 20.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "L": [
+    "f1",
+    "f2",
+    "f3",
+    "BR(0,1)"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "TL(0,0)",
+    "BL(1,0)",
+    "BR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f1",
+     "cx": [
+      1.2125007385285733,
+      1.3125007385285734
+     ],
+     "cy": [
+      2.3766575586416696,
+      2.4766575586416693
+     ],
+     "theta_deg": [
+      28.4351,
+      68.43509999999999
+     ],
+     "anchor": [
+      1.2625007385285734,
+      2.4266575586416694,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.050000000000000044,
+      0.04999999999999982,
+      19.999999999999996
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.8743194288822622,
+      1.9743194288822623
+     ],
+     "cy": [
+      3.123002601983748,
+      3.2230026019837474
+     ],
+     "theta_deg": [
+      28.4351,
+      68.43509999999999
+     ],
+     "anchor": [
+      1.9243194288822623,
+      3.1730026019837476,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.050000000000000044,
+      0.04999999999999982,
+      19.999999999999996
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.564583231546004,
+      2.6645832315460036
+     ],
+     "cy": [
+      2.3979405196546897,
+      2.4979405196546893
+     ],
+     "theta_deg": [
+      28.4351,
+      68.43509999999999
+     ],
+     "anchor": [
+      2.614583231546004,
+      2.4479405196546895,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.04999999999999982,
+      0.04999999999999982,
+      19.999999999999996
+     ]
+    },
+    {
+     "name": "BR(0,1)",
+     "cx": [
+      3.327084,
+      3.427084
+     ],
+     "cy": [
+      1.45,
+      1.55
+     ],
+     "theta_deg": [
+      -20.0,
+      20.0
+     ],
+     "anchor": [
+      3.377084,
+      1.5,
+      0.0
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.04999999999999982,
+      0.050000000000000044,
+      20.0
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "TL(0,0)",
+     "alpha": [
+      0.5,
+      -0.5
+     ],
+     "beta": [
+      0.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      3.377084
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8771479138523266,
+    "measured_min": 3.8856238880537446,
+    "sample_hits": 0,
+    "trump_inside": false,
+    "seconds": 119.0
+   },
+   "sample_check": {
+    "n_samples": 12000,
+    "hits": 0,
+    "free_pairs_disjoint": 19,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "worst_free_overlap_of_rejects": -0.0005500880975612965
+   },
+   "frame_ops": {
+    "diag": {
+     "count": 175,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 360,
+     "example": "k5_11_interior_Y0017"
+    }
+   }
+  },
+  {
+   "id": "S02_k5_11_r0.10_rho10",
+   "tag": "S02",
+   "cls": "k5_11",
+   "r": 0.1,
+   "rho_deg": 10.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "L": [
+    "f1",
+    "f2",
+    "f3",
+    "BR(0,1)"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "TL(0,0)",
+    "BL(1,0)",
+    "BR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f1",
+     "cx": [
+      1.1625007385285733,
+      1.3625007385285735
+     ],
+     "cy": [
+      2.3266575586416693,
+      2.5266575586416695
+     ],
+     "theta_deg": [
+      38.4351,
+      58.43509999999999
+     ],
+     "anchor": [
+      1.2625007385285734,
+      2.4266575586416694,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.8243194288822622,
+      2.0243194288822624
+     ],
+     "cy": [
+      3.0730026019837475,
+      3.2730026019837477
+     ],
+     "theta_deg": [
+      38.4351,
+      58.43509999999999
+     ],
+     "anchor": [
+      1.9243194288822623,
+      3.1730026019837476,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.5145832315460037,
+      2.714583231546004
+     ],
+     "cy": [
+      2.3479405196546894,
+      2.5479405196546896
+     ],
+     "theta_deg": [
+      38.4351,
+      58.43509999999999
+     ],
+     "anchor": [
+      2.614583231546004,
+      2.4479405196546895,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "BR(0,1)",
+     "cx": [
+      3.277084,
+      3.477084
+     ],
+     "cy": [
+      1.4,
+      1.6
+     ],
+     "theta_deg": [
+      -10.0,
+      10.0
+     ],
+     "anchor": [
+      3.377084,
+      1.5,
+      0.0
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.0
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "TL(0,0)",
+     "alpha": [
+      0.5,
+      -0.5
+     ],
+     "beta": [
+      0.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      3.377084
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.877302647145592,
+    "measured_min": 3.885618114790304,
+    "sample_hits": 0,
+    "trump_inside": false,
+    "seconds": 108.6
+   },
+   "sample_check": {
+    "n_samples": 12000,
+    "hits": 0,
+    "free_pairs_disjoint": 174,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "worst_free_overlap_of_rejects": -0.00017324108836713759
+   },
+   "frame_ops": {
+    "diag": {
+     "count": 175,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 360,
+     "example": "k5_11_interior_Y0017"
+    }
+   }
+  },
+  {
+   "id": "S07_trump5_r0.10_rho40",
+   "tag": "S07",
+   "cls": "trump5",
+   "r": 0.1,
+   "rho_deg": 40.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "L": [
+    "f0",
+    "f2",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(1,0)",
+    "BL(0,1)",
+    "BR(0,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      1.603357418555203,
+      1.8033574185552033
+     ],
+     "cy": [
+      1.838542,
+      2.038542
+     ],
+     "theta_deg": [
+      41.565,
+      85.0
+     ],
+     "anchor": [
+      1.7033574185552032,
+      1.938542,
+      45.0
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      21.717500000000005
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      2.308911162889593,
+      2.5089111628895933
+     ],
+     "cy": [
+      2.5440957443343892,
+      2.7440957443343894
+     ],
+     "theta_deg": [
+      41.565,
+      85.0
+     ],
+     "anchor": [
+      2.408911162889593,
+      2.6440957443343893,
+      45.0
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      21.717500000000005
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      2.3374438371104067,
+      2.537443837110407
+     ],
+     "cy": [
+      1.1615209298864233,
+      1.3615209298864235
+     ],
+     "theta_deg": [
+      41.565,
+      85.0
+     ],
+     "anchor": [
+      2.437443837110407,
+      1.2615209298864234,
+      45.0
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      21.717500000000005
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": {
+    "kind": "tilt_floor_deg",
+    "value": 41.565,
+    "applies_to": [
+     "f0",
+     "f2",
+     "f4"
+    ],
+    "inequality": "theta_l (mod 90 deg) >= 41.565000 for every l in ['f0', 'f2', 'f4']",
+    "reason": "A110 grain boundary; F_T(theta) > s0 for theta > theta_T + 6.1e-5 deg (theta_T = 40.181937)"
+   },
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval and theta_l (mod 90 deg) >= 41.565000 for every l in ['f0', 'f2', 'f4']; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8786220679829535,
+    "measured_min": 3.8867459503299964,
+    "sample_hits": 0,
+    "trump_inside": false,
+    "seconds": 51.9
+   },
+   "sample_check": {
+    "n_samples": 12000,
+    "hits": 0,
+    "free_pairs_disjoint": 119,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "worst_free_overlap_of_rejects": -0.0004108019121840112
+   },
+   "frame_ops": {
+    "e": {
+     "count": 283,
+     "example": "c0_Y0072"
+    }
+   }
+  },
+  {
+   "id": "S07_trump5_r0.20_rho10",
+   "tag": "S07",
+   "cls": "trump5",
+   "r": 0.2,
+   "rho_deg": 10.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "L": [
+    "f0",
+    "f2",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(1,0)",
+    "BL(0,1)",
+    "BR(0,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      1.5033574185552032,
+      1.9033574185552031
+     ],
+     "cy": [
+      1.738542,
+      2.138542
+     ],
+     "theta_deg": [
+      41.565,
+      55.0
+     ],
+     "anchor": [
+      1.7033574185552032,
+      1.938542,
+      45.0
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.19999999999999996,
+      0.20000000000000007,
+      6.717500000000002
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      2.208911162889593,
+      2.6089111628895933
+     ],
+     "cy": [
+      2.444095744334389,
+      2.8440957443343895
+     ],
+     "theta_deg": [
+      41.565,
+      55.0
+     ],
+     "anchor": [
+      2.408911162889593,
+      2.6440957443343893,
+      45.0
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.20000000000000018,
+      6.717500000000002
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      2.2374438371104066,
+      2.637443837110407
+     ],
+     "cy": [
+      1.0615209298864234,
+      1.4615209298864233
+     ],
+     "theta_deg": [
+      41.565,
+      55.0
+     ],
+     "anchor": [
+      2.437443837110407,
+      1.2615209298864234,
+      45.0
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.19999999999999996,
+      6.717500000000002
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": {
+    "kind": "tilt_floor_deg",
+    "value": 41.565,
+    "applies_to": [
+     "f0",
+     "f2",
+     "f4"
+    ],
+    "inequality": "theta_l (mod 90 deg) >= 41.565000 for every l in ['f0', 'f2', 'f4']",
+    "reason": "A110 grain boundary; F_T(theta) > s0 for theta > theta_T + 6.1e-5 deg (theta_T = 40.181937)"
+   },
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval and theta_l (mod 90 deg) >= 41.565000 for every l in ['f0', 'f2', 'f4']; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8773799465452394,
+    "measured_min": 3.8856435987575213,
+    "sample_hits": 0,
+    "trump_inside": false,
+    "seconds": 58.3
+   },
+   "sample_check": {
+    "n_samples": 12000,
+    "hits": 0,
+    "free_pairs_disjoint": 1812,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "worst_free_overlap_of_rejects": -3.665713012457328e-05
+   },
+   "frame_ops": {
+    "e": {
+     "count": 283,
+     "example": "c0_Y0072"
+    }
+   }
+  },
+  {
+   "id": "S02_k5_11_r0.10_rho5_block",
+   "tag": "S02",
+   "cls": "k5_11",
+   "r": 0.1,
+   "rho_deg": 5.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "L": [
+    "f1",
+    "f2",
+    "f3",
+    "f0",
+    "TR(0,0)",
+    "BR(0,1)"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "TL(0,0)",
+    "BL(1,0)",
+    "BR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f1",
+     "cx": [
+      1.1625007385285733,
+      1.3625007385285735
+     ],
+     "cy": [
+      2.3266575586416693,
+      2.5266575586416695
+     ],
+     "theta_deg": [
+      43.4351,
+      53.4351
+     ],
+     "anchor": [
+      1.2625007385285734,
+      2.4266575586416694,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.8243194288822622,
+      2.0243194288822624
+     ],
+     "cy": [
+      3.0730026019837475,
+      3.2730026019837477
+     ],
+     "theta_deg": [
+      43.4351,
+      53.4351
+     ],
+     "anchor": [
+      1.9243194288822623,
+      3.1730026019837476,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.5145832315460037,
+      2.714583231546004
+     ],
+     "cy": [
+      2.3479405196546894,
+      2.5479405196546896
+     ],
+     "theta_deg": [
+      43.4351,
+      53.4351
+     ],
+     "anchor": [
+      2.614583231546004,
+      2.4479405196546895,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f0",
+     "cx": [
+      2.0623681906965246,
+      2.2623681906965247
+     ],
+     "cy": [
+      1.415730667555863,
+      1.6157306675558631
+     ],
+     "theta_deg": [
+      43.4351,
+      53.4351
+     ],
+     "anchor": [
+      2.1623681906965246,
+      1.515730667555863,
+      48.4351
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "cx": [
+      3.277084,
+      3.477084
+     ],
+     "cy": [
+      3.277084,
+      3.477084
+     ],
+     "theta_deg": [
+      -5.0,
+      5.0
+     ],
+     "anchor": [
+      3.377084,
+      3.377084,
+      0.0
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.0
+     ]
+    },
+    {
+     "name": "BR(0,1)",
+     "cx": [
+      3.277084,
+      3.477084
+     ],
+     "cy": [
+      1.4,
+      1.6
+     ],
+     "theta_deg": [
+      -5.0,
+      5.0
+     ],
+     "anchor": [
+      3.377084,
+      1.5,
+      0.0
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.0
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "TL(0,0)",
+     "alpha": [
+      0.5,
+      -0.5
+     ],
+     "beta": [
+      0.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      3.377084
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8771009221535224,
+    "measured_min": 3.8867460328878876,
+    "sample_hits": 0,
+    "trump_inside": false,
+    "seconds": 120.9
+   },
+   "sample_check": {
+    "n_samples": 12000,
+    "hits": 0,
+    "free_pairs_disjoint": 22,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "worst_free_overlap_of_rejects": -0.00021666091215655214
+   },
+   "frame_ops": {
+    "diag": {
+     "count": 175,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 360,
+     "example": "k5_11_interior_Y0017"
+    }
+   }
+  }
+ ]
+}

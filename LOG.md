@@ -4483,3 +4483,114 @@ BLAS-pinned process, no LP, no lane recomputation.
 - Cost: 12.5 CPU-h for this continuation (17.94 CPU-h for all of A114), under the 15 CPU-h cap.
   <= 2 processes throughout, BLAS pinned, commit/physical gate before every verifier, frozen
   verifiers byte-identical, A61's k5_13 / A57 / A96 / A111 / A107 untouched.
+
+## 2026-09-07 — A119-local-cert-lean (Opus engineer, ≤ 2 BLAS-pinned processes, Lean builds through A78's serialised low-priority `lakeb.py`, read-only on every campaign and on A116/A117) — done-success: the local certificate is a frozen, independently checked object; Local.lean builds clean with ONE project axiom and no sorry; the blocking-box route does NOT extend the radius, and three of A116's four "capped" ρ ≥ 20° cells are ALIVE
+
+**T3 first, because it changes a published table.** The ρ ≥ 20° frontier at r = 0.2 is not a time
+cap: it is ALIVE. With the ORIGINAL L the tree produces CHECKED packings of L ∪ P below s0 inside
+N at **S07 (0.2, 20°) side 3.873374** (f0, f2, f4 all at 65° — the ladder shears; found at node
+917, 2 s), **S07 (0.2, 40°) side 3.869626** (68.7°, 4 769 nodes) and **S02 (0.2, 40°) side
+3.876703** (f3 turns to 88.3°, f1 to 12.2°, f2 to 8.4°; 392 144 nodes, 559 s). For the two S07
+cells **A116's own results file already contained the refutation** — `t2_S07.jsonl` records 4 128
+witnesses at (0.2, 20°), the first with `witness_valid: true`, worst pair gap −4.4·10⁻¹⁶, worst
+wall gap 0 — while the row's verdict field says `capped` and `notes/t2_table.md` prints CAP; the
+same mislabelling affects S07 (0.2, 40°), S07/S02 (0.3, 20°/40°). `a116lib.Tree._loop` as it
+stands today returns at the FIRST checked witness and so cannot record 4 128 of them: those rows
+predate that return. Re-running A116's own tree today with A116's own parameters gives ALIVE with
+the same witness in 25 s (`code/f1probe.py`, `results/f1_probe.json`). **So `docs/proofs/local_certificate.md`
+§5's "no witness and no dip were found there, so those cells are open, not dead" must be
+corrected: they are dead the other way.** S02 (0.2, 40°) is A119's own new result (A116's record
+there has `n_witnesses = 0`). Only **S02 (0.2, 20°) remains genuinely open** — and A119 pushes it
+to 633 660 nodes in 900 s, **4.6× A116's node count in the same wall**, still without resolving it.
+
+**The blocking squares as boxes do not extend the radius.** S02 gets `f0` + `TR(0,0)`, S07 gets
+`f1` + `f3` + `BL(0,2)`; that is 6 free bodies (6 tilt dimensions, 16–23 near pairs) instead of
+3–4. **Exactly one blocking-box N closes: S02 (0.1, 5°) — DEAD, 58 447 nodes, 121 s of tree,
+certified 3.877101 / measured 3.886746, 0 hits in 10⁴ samples, Trump outside** — and it is
+strictly LARGER than A116's own six-box run, which had to confine the slot square `BR(0,1)` to a
+0.05 box. Every other blocking-box cell (r ≥ 0.2 or ρ ≥ 10°, either shadow) caps at 900–1200 s
+with 320 000–460 000 nodes; for S07 no blocking-box N closes at all. **A116's (0.2, 10°) and
+(0.1, 40°) with the original L remain the largest certified neighbourhoods.** The blockers ARE
+the right objects, though: re-running the three ALIVE cells with them finds NO witness in 900 s
+(verdict CAP, not ALIVE) and lifts S02 (0.2, 40°)'s certified minimum over the closed part from
+3.877567 to **3.881900**. What stops the proof is the tilt-cell count of a six-body tree, not the
+geometry. **Consumer, re-run with a bipartite MATCHING instead of A116's 11 P |L| brute force
+(same answers, and it terminates for |L| = 6): unchanged — 72 of 184 k5_11 + 23 of 68 k5_16 = 95
+of the 252 S02-explained alive nodes, 2 of 18 for S07; the blocking-box N catches 1 of 184**, so
+the blocking squares are a device for the certificate, not for the node cut.
+
+**T2 — `lean/PackingCertMathlib/PackingCertMathlib/Local.lean`, `lake build` clean (and part of
+the default target).** It states `Box` / `Pin` / `LocalHyp` / `LocalDead` and proves: Lemma
+RELAX's algebra (`axis_decomp` — the exact `d·a(θ*+φ) = p cos φ + q sin φ` that makes the
+relaxation second order; `mccormick_hi` / `mccormick_lo`; `abs_chord`; `chord_of_concave`;
+`abs_sin_le_sin`; `cos_ge_of_abs_le`), Lemma COVER's primitives (`cover_bisect`, `cover_qsplit`,
+`cover_selection`, and `cover_pair`, which consumes the SAT axiom), `localDead_of_contradiction`,
+**three generated `leaf_*` theorems that are actual leaves of an actual certificate** (the
+relaxed rows written out with rational coefficients, the box bounds, and the kill `s0 < s` closed
+by `linarith`, the Farkas multipliers — all of the form k/2⁴⁰ — listed row by row in each
+docstring), and the composition `classKilledAt_of_localDead` into `Composition.lean`'s
+`ClassKilledAt`. **Axioms: 0 sorries and exactly ONE project axiom, `sat_selection`** — Lemma SAT
+for INTERIORS, exact statement in `notes/lean_status.md`; `CaseSat.sat_squares` gives the
+closed-square form and the open work is the shrink argument's choice of λ. It reaches only
+`cover_pair`; `classKilledAt_of_localDead` additionally inherits A22's `native_decide` axiom
+through `shat`. Audit: `lean/PackingCertMathlib/scratch/A119Axioms.lean`. What Lean does NOT yet
+do is derive `LocalDead` for a concrete N — that is the recorded cover, and it is done and
+re-verified outside Lean by `check_local.py`; the next step is the A78/A93 route (a Lean-side
+checker with `native_decide`).
+
+**T1 — seven certificate files, ALL VALID under an independent pure-rational checker.**
+`code/exact119.py` writes `certs/<id>.cert.json.gz` + a sha256 manifest: the whole proof object
+per N — the tilt-cell bisection cover, the selection case split with the excluded selections, one
+rational Farkas vector (denominator 2⁴⁰) per closed leaf, and a Farkas RAY per infeasible cell.
+`code/check_local.py` re-checks them with **no numpy, no scipy, no tree code** — dyadic interval
+arithmetic on Python integers at scale 2⁻⁹⁶ (`code/exactiv.py`, with rigorous π, cos, sin and the
+EXACT range of |cos| + |sin|) — rebuilding every row of Lemma RELAX itself and re-deriving every
+bound. Sizes and walls (`notes/t1_table.md`): S02 (0.2, 10°) 32 426 cells / 63 branches / 5 782
+infeasible / 32 570 dead leaves / **504 404 multipliers**, 5.6 MB, generated in 91 s, **checked in
+679 s**, checker's min bound 3.877084098 > s0 = 3.877084; S02 (0.1, 10°) 6 878 leaves, 134 s;
+S02 (0.05, 20°) 7 692 leaves, 117 s; S07 (0.1, 40°) 2 302 leaves, 28 s; S07 (0.2, 10°) 3 168
+leaves, 74 s; plus two small regression certificates. **53 094 dead leaves and 769 440 rational
+multipliers checked in 1 041 s.**
+
+**Also, ahead of T1 (coordinator's request):** `results/N_boxes.json` — every certified N written
+the way A96's `caselp` / NO-family machinery quantifies over it: ONE axis-aligned box
+`(cx, cy, θ-interval)` per square of L in the class frame at s0, the pin slack cores
+`α + βs + [−h, h]²`, the cut as a single scalar inequality on the tilted squares' common tilt,
+and the per-class D4 frame ops (A107's `struct_op`). The point of the note (`notes/n_boxes.md`) is
+that A116 states TWO box-shaped objects and only one is consumable: Lemma STAB's 6-dimensional
+PAIR-pose boxes with a forced selection are the PI's single-leaf route and name a pair and a
+separating axis, which do not occur in A96's node LP at all; the certificate's hypothesis N is
+already a PRODUCT of per-square boxes, and that is what Theorem LOCAL kills. The DROP/COVER
+composition is spelled out (DROP forgets the other squares; COVER's covering family is the leaf
+polyhedra of the per-square boxes, and the pair boxes never enter it). 12 000 independent uniform
+draws per N, at 30 sides spanning [3.82, s0]: **0 hits, all six**.
+
+**Engineering.** Profiling A116's tree showed **66 % of the wall inside `scipy.optimize.linprog`,
+most of it scipy's own option validation and sparse-matrix construction, not HiGHS**;
+`code/fastlp.py` passes the model to one reused `highspy.Highs` instance (**1.64 → 0.46 ms per
+solve, 3.57×**), and the witness-search gate was loosened. Verdicts and node counts are IDENTICAL
+to A116's (`code/xcheck119.py` checks rows bit-for-bit and trees node-for-node): 2.6–3.4× end to
+end. A dual-inheritance idea (close a child with its parent's or the last leaf's Farkas vector)
+was implemented, measured at 8–15 % of nodes closed with no LP, and REJECTED — the sparse rebuild
+costs more than the LP it saves once HiGHS is called directly.
+
+**Five findings on A116's implementation** (`notes/method.md`): **F1** a q-range case split is
+measured on the OWNER's midpoint-axis functional and does not survive a later tilt bisection, so
+the two branches stop covering — but every q-split A116 ever made was in its phase-2 cosmetic
+tightening (phase 1 re-run here produces none, even with `qsplit_min` forced to 10⁻⁷), no KILL
+depends on one, and a three-way probe finds the same witness with the carry-over on and off; A119
+drops the affected q-ranges at every bisection and its checker enforces the same discipline.
+**F2** a node must be closed on its Farkas VECTOR, not on the LP's optimal value (a HiGHS dual is
+only approximately optimal). **F3** an infeasible cell needs an exported Farkas RAY — A116 wrote
+none, and 5 782 of the 32 570 leaves of S02 (0.2, 10°) are of that kind. **F4** a certificate
+checker must reproduce the generator's interval SHARPNESS, not merely its soundness: a
+second-order but non-exact `cos`/`sin`/`w` enclosure made the checker reject a `branch` node of
+S07 (0.1, 40°) whose root cell is 80° wide. **F5** the CAP/ALIVE mislabelling above.
+
+**Discipline.** ≤ 2 BLAS-pinned compute processes throughout (`blas1` imported before numpy via
+`a116lib`), Lean through `attempts/A78-lean-wave6/code/lakeb.py` (repo-wide lock, BELOW_NORMAL),
+`PYTHONDONTWRITEBYTECODE=1`, nothing deleted, READ-ONLY on every campaign and on A116/A117 (their
+libraries imported, their results read). Writes: `attempts/A119-local-cert-lean/**`,
+`lean/PackingCertMathlib/PackingCertMathlib/Local.lean` (new) + its import line,
+`lean/PackingCertMathlib/scratch/A119Axioms.lean` (new), one clause on the depgraph GRAIN node
+(+ re-rendered svg), the registry row and this entry.
