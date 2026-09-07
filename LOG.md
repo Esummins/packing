@@ -4220,3 +4220,65 @@ half-sides asserted `≤ 1/2`; every tolerance in the KEEP direction (`R(C)` onl
 frozen `verify_case.py` byte-identical
 (`sha256 521cb01f…`); one resumable record per node. Report:
 `attempts/A118-lane-count/notes/method.md` + `notes/t3_lean.md`.
+
+## 2026-09-07 — A121-reading-validator (Opus chore) — done-mixed (batch 1: K01–K21)
+
+**THE READINGS ARE ACCURATE WHERE THEY ARE `r`, WRONG-BY-CATEGORY WHERE THEY ARE `ns`, AND WORTH
+ZERO NEW NODE KILLS — because A118 already swept all four corners of every k0 node.** 21 filled
+rows → 58 validated items → 261 (node, cut) rows (`results/cuts.jsonl`).
+
+**T3.** 6 node kills follow from the readings alone (no LP) = 1.42 CPU-h at 850 s/node, **0 of
+them new**: all six are A38/A85 `p215`-family nodes already booked by A118's blanket 4-corner
+sweep (`report118.json`), all at `LANE ≤ 0, M = 1` at `TR(0,0)`. No A99 level-1 cell is among
+them, so **0 CPU-h off A99's 9,341–21,661 CPU-h k0 frontier** and 0 off the A57 schedule (this
+batch is entirely k0_00). Every k0 verdict stays conditional on `k1_00` (A118-O2). The readings'
+measured value is as a POINTER, and the pointer is 60 % accurate: A118 kills 10 of the nodes in
+this batch, the reading names the killing corner for 6 and a `LANE ≥ 2` corner for 4.
+
+**T1 — 34 disagreements, in four kinds.** (i) **All three `r` readings are exactly right**
+(K01 `f1`/BR(0,0), K04 `f6`/TL(0,0), K20 `f3`/TL(0,0)): singly met, no second meeter, no grazer,
+depths 0.665 / 0.665 / 0.969, all corner cells (always usable, extension `k1_00`, OPEN).
+(ii) **11 of the 23 `ns` items name a square that is ALREADY EXACTLY ON its cell** (L∞ ≤ 2·10⁻⁶,
+tilt ≤ 8·10⁻⁵ °) — the SNAP move is the identity, and A107's slot/free split under-counts the
+slot squares in **11 of the 21 entries** (K03 4+7→5+6, K04 2+9→5+6, K05 4+7→6+5, K06 5+6→6+5,
+K09 1+9→3+7, K11 1+9→3+7, K12 2+8→4+6, K14 2+8→3+7, K18 4+7→5+6, K19 5+6→6+5, K20 2+9→4+7,
+K21 5+6→6+5). The minimiser slides free squares onto lattice cells and nothing re-snaps them.
+(iii) **9 `ns` items are not "a hair" off**: L∞ 0.105 / 0.158 / 0.199 / 0.227 / 0.374 / 0.394 /
+0.575 / 0.793 / 0.912 against A107's own 0.05 snap window. (iv) **2 are crowd cases, not room**:
+K02 BL(1,1) is also met by `f4` (SAT penetration 0.0019) and K05 BR(1,0) also by `f6` (0.3069) —
+Lemma SNAP-D fails at both. Only **2 `ns` items are genuine uncrowded near-snaps** (K02 `f2`@BL(0,2)
+at 0.0185/0.38°, K02 `f6`@BL(1,1) at 0.0036 — and that one is the crowded one).
+
+**T1 — the `g` row (K18) is right and the data behind it is not.** `f0/1/3/4/5/6` do share a
+tilt: 39.2135–39.2141° (spread **5.5·10⁻⁴ °**), with `f2` alone axis-aligned at BL(1,0) — a
+genuine refinement of the gallery's `common_tilt = no`. But K18's Fritz–John decomposition does
+**not close** (`kkt_residual = 0.1171`, rank 19 of 21), and `f6` carries **zero** FJ force at its
+only contact (left wall) while the rattler test calls it load-bearing (removing it drops `s` by
+0.0297). The shared-tilt grain is 6 squares wide; the certified load path through it is 5.
+
+**T2 — the structural finding: 16 of 23 `ns` items name a cell that k0_00 cannot teleport into.**
+k0_00 has no pins, so only the four CORNER cells have an extension class (`k1_00`); `BL(1,0)`,
+`BL(1,1)`, `BL(0,2)`, `BR(0,1)`, `BR(1,0)`, `TR(0,1)`, `TR(1,0)`, `TL(1,0)` are licensed by no
+lemma — 102 of the 261 cut rows are `cut_kind = none` for that reason, and K18/K19/K21 yield no
+cut at all. Of the corner-cell cuts: `r` 94 nodes (6 kills, 4 blocked by `M ≥ 1` at `LANE ≤ 1`,
+79 `LANE ≥ 2`, 5 UNDECIDED); `ns` 44 nodes (0 kills, 1 blocked by M, 37 `LANE ≥ 2`, 6 UNDECIDED).
+
+**T2(d) — the 10 `i` rows are confirmed** (K07 k9, K08–K16 k10; every `k < 11` entry is an `i`
+row and every `i` row is a `k < 11` entry) and cross-referenced to A115's T4 queue: 21 nodes, of
+which **2 are already CERTIFIED DEAD** (`l1_005_sh3_warm` for K07, `l1_181_plain_warm` for K14),
+2 are `kill-candidate (cert FAIL)` (K07 `l1_214_sh2adj_warm` η −1.5, K11 `l1_049_sh2adj_warm`
+η −1.0), 3 are in A115's **not-reached** list (K07), and **14 are A38 nodes that were never in
+A115's queue at all** — the obvious next warm-re-solve batch.
+
+**Canaries (`results/canary121.json`, all PASS).** C1 the frame map: applying each node's stored
+`struct_op` to its own `cfg` reproduces its canonical `struct` on **161/161** K-entry nodes, which
+pins the direction (shadow = `f`(node), so a shadow cell pulls back through `f⁻¹`). C2 `cell_map`
+is a D4 action on cell names and permutes the four corners (72 checks). C3 every K entry's drawn
+packing is its primary structure's minimum (30/30). C4 all **235** contacts A107 books for the K
+entries are reproduced by this module's SAT gap with **max |difference| = 0.0**.
+
+**Discipline.** READ-ONLY outside `attempts/A121-reading-validator/**` + this ledger + the
+registry row; 1 process, BLAS pinned (`blas1` before numpy); `PYTHONDONTWRITEBYTECODE=1`; no
+deletes; no LP and no lane recomputation — A118's verdicts are read, never re-derived. Re-runs
+incrementally on new rows: `python code/validate121.py [--since <commit>|--all|--only K01]`.
+Report: `attempts/A121-reading-validator/notes/{report.md,method.md}`.

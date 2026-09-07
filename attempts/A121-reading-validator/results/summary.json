@@ -1,0 +1,435 @@
+{
+ "headline": {
+  "rows": 21,
+  "reading_items": 58,
+  "node_cuts": 261,
+  "node_kills_from_readings": 6,
+  "node_kills_by_class_level": {
+   "k0_00/L3": 2,
+   "k0_00/L1": 2,
+   "k0_00/L2": 2
+  },
+  "cpu_h_at_850s": 1.417,
+  "a99_level1_kills": 0,
+  "a99_frontier_cpu_h": [
+   0.0,
+   0.0
+  ],
+  "nodes_killed_elsewhere_by_A118": 4,
+  "new_node_kills": 0,
+  "new_cpu_h": 0.0,
+  "a118_kills_among_these_nodes": 10,
+  "disagreements": 34
+ },
+ "per_type": {
+  "audit": {
+   "items": 21,
+   "entries": [
+    "K01",
+    "K02",
+    "K03",
+    "K04",
+    "K05",
+    "K06",
+    "K07",
+    "K08",
+    "K09",
+    "K10",
+    "K11",
+    "K12",
+    "K13",
+    "K14",
+    "K15",
+    "K16",
+    "K17",
+    "K18",
+    "K19",
+    "K20",
+    "K21"
+   ],
+   "nodes_explained": 0,
+   "nodes_with_a_cut": 0,
+   "nodes_no_cut": 0,
+   "node_kills": 0,
+   "lane_le1_blocked_by_M": 0,
+   "lane_ge2_or_undecided": 0,
+   "disagreements": 12
+  },
+  "r": {
+   "items": 3,
+   "entries": [
+    "K01",
+    "K04",
+    "K20"
+   ],
+   "nodes_explained": 94,
+   "nodes_with_a_cut": 94,
+   "nodes_no_cut": 0,
+   "node_kills": 6,
+   "lane_le1_blocked_by_M": 4,
+   "lane_ge2_or_undecided": 84,
+   "disagreements": 0
+  },
+  "ns": {
+   "items": 23,
+   "entries": [
+    "K02",
+    "K03",
+    "K04",
+    "K05",
+    "K06",
+    "K17",
+    "K18",
+    "K19",
+    "K20",
+    "K21"
+   ],
+   "nodes_explained": 47,
+   "nodes_with_a_cut": 44,
+   "nodes_no_cut": 46,
+   "node_kills": 0,
+   "lane_le1_blocked_by_M": 1,
+   "lane_ge2_or_undecided": 43,
+   "disagreements": 22
+  },
+  "i": {
+   "items": 10,
+   "entries": [
+    "K07",
+    "K08",
+    "K09",
+    "K10",
+    "K11",
+    "K12",
+    "K13",
+    "K14",
+    "K15",
+    "K16"
+   ],
+   "nodes_explained": 21,
+   "nodes_with_a_cut": 21,
+   "nodes_no_cut": 0,
+   "node_kills": 0,
+   "lane_le1_blocked_by_M": 0,
+   "lane_ge2_or_undecided": 0,
+   "disagreements": 0
+  },
+  "g": {
+   "items": 1,
+   "entries": [
+    "K18"
+   ],
+   "nodes_explained": 0,
+   "nodes_with_a_cut": 0,
+   "nodes_no_cut": 0,
+   "node_kills": 0,
+   "lane_le1_blocked_by_M": 0,
+   "lane_ge2_or_undecided": 0,
+   "disagreements": 2
+  }
+ },
+ "disagreements": [
+  {
+   "entry": "K02",
+   "type": "ns",
+   "item": "ns f1 tr00",
+   "flags": [
+    "? f1 is 0.1989 from the centre of TR(0,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K02",
+   "type": "ns",
+   "item": "f6 bl11",
+   "flags": [
+    "? BL(1,1) is ALSO met by f4 (SAT penetration 0.0019, corner-frame depth 0.8434 NOT a slot depth here (Lemma CONT does not hold: f4 sits in the arm R_p)) -- crowd, not room"
+   ]
+  },
+  {
+   "entry": "K02",
+   "type": "ns",
+   "item": "f4 bl10",
+   "flags": [
+    "? f4 is 0.1575 from the centre of BL(1,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K03",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 4 slot + 7 free, but 1 of the free squares sit exactly on named cells (f3@BR(0,1)): the true split is 5 slot + 6 free"
+   ]
+  },
+  {
+   "entry": "K03",
+   "type": "ns",
+   "item": "ns f2 br00",
+   "flags": [
+    "? f2 is 0.7930 from the centre of BR(0,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K03",
+   "type": "ns",
+   "item": "f3 br01",
+   "flags": [
+    "? f3 sits EXACTLY on BR(0,1) (L-inf 4.39e-09, tilt 1.57e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K03",
+   "type": "ns",
+   "item": "f1 bl10",
+   "flags": [
+    "? f1 is 0.1050 from the centre of BL(1,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K04",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 2 slot + 9 free, but 3 of the free squares sit exactly on named cells (f1@TR(0,1), f4@TR(0,0), f5@TR(1,0)): the true split is 5 slot + 6 free"
+   ]
+  },
+  {
+   "entry": "K04",
+   "type": "ns",
+   "item": "ns f4 tr00",
+   "flags": [
+    "? f4 sits EXACTLY on TR(0,0) (L-inf 6.78e-09, tilt 7.83e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K04",
+   "type": "ns",
+   "item": "f5 tr10",
+   "flags": [
+    "? f5 sits EXACTLY on TR(1,0) (L-inf 7.24e-09, tilt 8.22e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K04",
+   "type": "ns",
+   "item": "f1 tr01",
+   "flags": [
+    "? f1 sits EXACTLY on TR(0,1) (L-inf 7.51e-09, tilt 8.61e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K05",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 4 slot + 7 free, but 2 of the free squares sit exactly on named cells (f2@BL(1,0), f5@TL(1,0)): the true split is 6 slot + 5 free"
+   ]
+  },
+  {
+   "entry": "K05",
+   "type": "ns",
+   "item": "ns f1 tl00",
+   "flags": [
+    "? f1 is 0.5749 from the centre of TL(0,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K05",
+   "type": "ns",
+   "item": "f5 tl10",
+   "flags": [
+    "? f5 sits EXACTLY on TL(1,0) (L-inf 1.93e-09, tilt 1.09e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K05",
+   "type": "ns",
+   "item": "f2 br10",
+   "flags": [
+    "? BR(1,0) is ALSO met by f6 (SAT penetration 0.3069, corner-frame depth 0.2817 NOT a slot depth here (Lemma CONT does not hold: f6 sits in the arm R_p)) -- crowd, not room",
+    "? f2 is 0.9122 from the centre of BR(1,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K06",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 5 slot + 6 free, but 1 of the free squares sit exactly on named cells (f2@BL(1,0)): the true split is 6 slot + 5 free"
+   ]
+  },
+  {
+   "entry": "K06",
+   "type": "ns",
+   "item": "ns f2 bl10",
+   "flags": [
+    "? f2 sits EXACTLY on BL(1,0) (L-inf 1.99e-06, tilt 7.88e-05 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K06",
+   "type": "ns",
+   "item": "f1 br00",
+   "flags": [
+    "? f1 is 0.3937 from the centre of BR(0,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K09",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 1 slot + 9 free, but 2 of the free squares sit exactly on named cells (f1@TL(2,0), f2@TL(0,0)): the true split is 3 slot + 7 free"
+   ]
+  },
+  {
+   "entry": "K11",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 1 slot + 9 free, but 2 of the free squares sit exactly on named cells (f4@BL(0,2), f5@BR(0,1)): the true split is 3 slot + 7 free"
+   ]
+  },
+  {
+   "entry": "K12",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 2 slot + 8 free, but 2 of the free squares sit exactly on named cells (f2@BR(0,0), f4@TR(0,1)): the true split is 4 slot + 6 free"
+   ]
+  },
+  {
+   "entry": "K14",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 2 slot + 8 free, but 1 of the free squares sit exactly on named cells (f2@TR(0,1)): the true split is 3 slot + 7 free"
+   ]
+  },
+  {
+   "entry": "K17",
+   "type": "ns",
+   "item": "ns f1 tl00",
+   "flags": [
+    "? f1 is 0.2270 from the centre of TL(0,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K18",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 4 slot + 7 free, but 1 of the free squares sit exactly on named cells (f2@BL(1,0)): the true split is 5 slot + 6 free"
+   ]
+  },
+  {
+   "entry": "K18",
+   "type": "ns",
+   "item": "ns f2 bl10",
+   "flags": [
+    "? f2 sits EXACTLY on BL(1,0) (L-inf 4.41e-07, tilt 5.00e-05 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K18",
+   "type": "g",
+   "item": "f0/1/3/4/5/6 shared-tilt grain",
+   "flags": [
+    "? f6 carry NO Fritz-John force (resultant 0) -- in the grain but not on the load path",
+    "? this entry's Fritz-John decomposition does NOT close (kkt_residual = 0.1171, rank 19 of 21 rows): the multipliers below are an nnls least-squares fit, not a certified load path",
+    "  (but the rattler test calls f6 LOAD-BEARING: removing it drops s by 0.02967 -- FJ and the rattler test disagree on f6)"
+   ]
+  },
+  {
+   "entry": "K19",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 5 slot + 6 free, but 1 of the free squares sit exactly on named cells (f3@BL(1,0)): the true split is 6 slot + 5 free"
+   ]
+  },
+  {
+   "entry": "K19",
+   "type": "ns",
+   "item": "ns f3 bl10",
+   "flags": [
+    "? f3 sits EXACTLY on BL(1,0) (L-inf 4.70e-09, tilt 3.50e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K20",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 2 slot + 9 free, but 2 of the free squares sit exactly on named cells (f1@TR(1,0), f4@BR(1,0)): the true split is 4 slot + 7 free"
+   ]
+  },
+  {
+   "entry": "K20",
+   "type": "ns",
+   "item": "ns f1 tr10",
+   "flags": [
+    "? f1 sits EXACTLY on TR(1,0) (L-inf 2.99e-09, tilt 4.05e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K20",
+   "type": "ns",
+   "item": "f2 br00",
+   "flags": [
+    "? f2 is 0.3737 from the centre of BR(0,0) (L-inf), not 'a hair' (A107 snap tolerance 0.05)"
+   ]
+  },
+  {
+   "entry": "K20",
+   "type": "ns",
+   "item": "f4 br10",
+   "flags": [
+    "? f4 sits EXACTLY on BR(1,0) (L-inf 2.52e-09, tilt 3.20e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  },
+  {
+   "entry": "K21",
+   "type": "audit",
+   "item": "(entry audit)",
+   "flags": [
+    "? the gallery calls this 5 slot + 6 free, but 1 of the free squares sit exactly on named cells (f2@TL(1,0)): the true split is 6 slot + 5 free"
+   ]
+  },
+  {
+   "entry": "K21",
+   "type": "ns",
+   "item": "ns f2 tl10",
+   "flags": [
+    "? f2 sits EXACTLY on TL(1,0) (L-inf 2.99e-09, tilt 4.18e-07 deg): already snapped, not near-snapped -- the SNAP move is the identity and the entry's slot/free split under-counts the slot squares"
+   ]
+  }
+ ],
+ "kills": [
+  "A38/l2_p215_000",
+  "A38/l2_p215_010",
+  "A38/l3_pp215_000_000",
+  "A38/l3_pp215_000_001",
+  "A85/s1int_l2_l2_p210_001",
+  "A85/s1int_l2_l2_p215_011"
+ ],
+ "new_kills": [],
+ "a118_kills_among_these_nodes": [
+  "A38/l2_p210_000",
+  "A38/l2_p210_010",
+  "A38/l2_p215_000",
+  "A38/l2_p215_010",
+  "A38/l2_p215_011",
+  "A38/l3_pp215_000_000",
+  "A38/l3_pp215_000_001",
+  "A38/l3_pp215_000_011",
+  "A85/s1int_l2_l2_p210_001",
+  "A85/s1int_l2_l2_p215_011"
+ ],
+ "killed_elsewhere": [
+  "A38/l2_p210_000",
+  "A38/l2_p210_010",
+  "A38/l2_p215_011",
+  "A38/l3_pp215_000_011"
+ ]
+}
