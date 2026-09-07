@@ -4136,3 +4136,87 @@ recorded. Report: `attempts/A115-k0-corner-rows/notes/t4_report.md`.
   replaces** (`results/no_reverify_probe.jsonl`). So the 32 caps are very likely window-valid too, and the wall
   ratio is WORSE than the 9.8x the finished set shows -- the certificates that cap are exactly the ones whose
   fixed side was cheapest.
+
+
+## 2026-09-06 — A118-lane-count (Opus chore, ≤ 2 BLAS-pinned processes, pure geometry, read-only on A38/A56/A57/A60/A61/A85/A96/A99/A107/A113/A114) — done-mixed: the leaf is sound, cheap and 2,300× faster than the LP it replaces, and it fires on 1.7 % of nodes
+
+**THE LEAF.** LANE-COUNT: for a class `S`, a usable cell `p` (an unclipped completable slot whose
+extension `T = S ∪ {p}` is window-certified; for k0, a corner cell with `T = k1_00`) and a tree
+node, work in `p`'s CORNER FRAME (where the cell is `[i,i+1]×[j,j+1]` at every side) and let
+`R(C)` = the poses of a unit square that lie in the container, meet `int C`, obey Lemma CONT and
+are interior-disjoint from every hypothesis core; `LANE(C)` = the largest number of pairwise
+interior-disjoint squares with poses in `R(C)`, `M(C)` = the number of conditioned squares that
+can meet `int C`. **`LANE(C) + M(C) ≤ 1` ⇒ the node is empty** (SLOT-CROWD / K0-FREE force two
+non-pin meeters and there is no room). Certified by a box cover with four discharge inequalities
+plus one octagon inequality per box pair — no measure, no LP, no certificate replay, the Lean
+shape is `teleport_packing` under the T5 pattern (`attempts/A118-lane-count/notes/t3_lean.md`).
+
+**THE ONE THING THAT HAD TO BE GOT RIGHT.** The count must be run on the ORIGINAL packing at
+side `m`, not on A57's dilated family at `s0`. On the slab the licensed crowd pad is `a_w = 1`
+EXACTLY (SLOT-SLIDE's depth credit and Lemma B-YES-S's dilation pad cancel — A109's `aw_check`),
+and `F_p(1)` contains the whole GRAZING STAIRCASE (`mu_p = 1` squares sitting in the arm beyond
+the backing pins), which is disjoint from anything inside the cell: `LANE ≥ 2` at every node, for
+structural reasons. Pulling the hypothesis back instead costs only interval widening — every
+position is affine in `m`, so the hull over `[m_lo, s0]` is the hull of two endpoints — and gives
+a leaf with teeth. **A118-O1:** a lane-count leaf then excludes class-`S` images, not A57's whole
+`δ = 10⁻²` slack family; A57's composition is unaffected but `lemmas.md` T23's broader slack
+statement may not re-use such a leaf. **A118-O2:** every k0 verdict is conditional on k1_00.
+**A109-O1 is DISCHARGED** (A114 made every extension FULL on the CLOSED window), and
+`slot_crowds.md` §1.2's usable-slot table is superseded: k5_16 gains BR(1,0)+TL(1,0) (m_u 4→6)
+and trump5 gains BR(0,1)+BL(0,2) (m_u 4→6).
+
+**YIELD (3,580 records, 18,086 (node, cell) verdicts, 1.84 CPU-h, 55 min wall).** 61.4 % of cells
+return `LANE ≥ 2` with two explicit interior-disjoint witness poses, 30.9 % UNDECIDED at the box
+budget, 7.4 % `LANE ≤ 1`, 0.26 % `LANE = 0`. **62 nodes have a usable cell at `LANE + M ≤ 1`**;
+38 are alive-at-LP by A107's test, but matching each kill's own BOX against the campaign ledgers
+shows **21 A57 + 3 A60 + 1 A85 of them are boxes the campaign has ALREADY certified dead** (a
+positive control: the leaf never contradicts a certificate and is 2,300× cheaper), 24 more are
+dead-at-LP, and **13 are new**: `k5_11_interior_Y1080` (the one A57 box whose tree row is FAIL,
+together with all eight of its children) and 12 of the 217 alive k0 cells (11 A113-`UNDECIDED`
+A38 level-2/3 nodes + 1 A85 `FAIL`), the k0 ones conditional on k1_00. Zero overlap with A96's
+70 T5′ tight-core kills, A57's 663 T5/T5″ logic kills, or A112's 3 region-tree kills.
+Fire rate 1.7 % ⇒ **≈ 0.05 wall-days at 5 workers** off A57's remaining 66.53 CPU-days, and
+**0 wall-days** on A60/A100's protected tier. **Deployment: at EMISSION as a 1.85 s/node
+pre-screen, never as a re-solve.**
+
+**WHERE IT STOPS, EXACTLY.** `TR(0,0)` (27), `BL(1,0)` (15), `TL(0,0)` (9) dominate — CORNER
+cells, backed by two walls, which one well-placed conditioned core can close; `BL(1,1)`, the cell
+A94/A109's crowd LPs leaned on, fires ONCE in 3,580 nodes. And **1,323 cells sit at `LANE ≤ 1`
+and are saved from being a kill only by `M = 1`** — the node's own conditioned square is allowed
+to be the second meeter. That is 36× the kill count and is the whole failure mode: A57's tree
+localises exactly one square. This also says how A118 differs from A85's k0 reach work ("at the
+root reach never separates"): reach separates only once a conditioned square is present, and only
+when it sits ON the corner diagonal at distance ≈ 1.15–1.18, where its core spans the entire
+approach — which is exactly the 12 new k0 cells.
+
+**T4 (PI generalisation) — THE REVERSED LEAF IS SOUND AND UNAFFORDABLE.** Branching on the two
+meeters is tautologous and its "≤ 1 meeter" half is FREE (it is the T1 leaf). The other half is a
+pair-box cover: at `nx=8,nth=6` a cell has 23–354 boxes and 276–44,850 unordered pair-children
+after symmetry, of which Lemma TC (core–core) kills 60.4 % and the octagon PAIR test another
+8.3 % — leaving **26–14,099** children per (node, cell) at `budget − 2`. Sampled LPs (24 + the
+canary, two-stage 240/900 s): **2 die and both certify with the frozen verifier**
+(`τ = 2.000, η = −1.000, minmass 1.000`, certificates PASS in 0.9–1.3 s), the other 22 land at
+`η ∈ {0, +0.5, +1.0}`; 122 s mean per child. At a 9 % per-child kill rate the expected cost of
+killing one node this way is 2–500 CPU-h against 850 s for its own LP — `k0_route.md` §0's C3
+reproduced at the pinned classes, and quantitatively consistent with A85's 644 boxes / 207,046
+pairs at the k0 root. The octagon pair test is worth 8–19 pp over Lemma TC alone and subsumes
+A112's "Lemma TC as a certified leaf" obligation.
+
+**CANARIES — ALL PASS.** The corner/slot frames reproduce `slot_crowds.md` §7's exact Trump
+depths at all six unclipped trump5 slots to `< 5·10⁻⁷` with the same witnesses; at the **trump5
+ROOT** the leaf returns `LANE ≥ 2` at all six usable cells — `BL(0,2)` (sq4 0.967 / sq7 0.016) and
+`TL(0,0)` (sq6 0.168 / sq4 0.155) included — with Trump's own pair in `R(C)` and interior-disjoint;
+the T4 pair-box CONTAINING Trump's TL 2-crowd survives (`τ = 5.000, η = +1.000`); and a
+machinery control (a cell boxed in by eight blockers certifies `LANE ≤ 1`, 12,561 confirmation
+pairs, `max_gap = −0.903`; the same cell unblocked returns `LANE ≥ 2`). Every kill is
+sample-confirmed: `LANE ≤ 1` kills carry 171,405–719,400 pose pairs from `R(C)` with
+`max_gap ∈ [−0.94, −0.11]`; `LANE = 0` kills carry ≥ 24,000 ambient draws with 0 accepted, and
+the strongest was re-checked on a 2.8 M-pose dense grid with worst overlap 0.253.
+
+**Discipline.** READ-ONLY on every campaign (nothing written outside `attempts/A118-lane-count/**`,
+this ledger, the registry and one note on the C.A57 depgraph node); ≤ 2 BLAS-pinned processes;
+`PYTHONDONTWRITEBYTECODE=1`; no deletes; tilt intervals asserted normalised to `[0,90]` and core
+half-sides asserted `≤ 1/2`; every tolerance in the KEEP direction (`R(C)` only ever enlarged);
+frozen `verify_case.py` byte-identical
+(`sha256 521cb01f…`); one resumable record per node. Report:
+`attempts/A118-lane-count/notes/method.md` + `notes/t3_lean.md`.
