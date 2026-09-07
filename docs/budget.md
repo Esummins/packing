@@ -96,6 +96,38 @@ merely unconverged at the LP time cap.
    nine incidences against a budget of eight at depth 0). What the k0 room needs is the teleport hypothesis itself as
    a node cut, i.e. re-branching on the singly-met corner (A112's k0 face), not a weighted row.
 
+6. **The net-orientation verifier is a cross-check, not a lever — REJECTED as a replay verifier and as a
+   certificate simplifier (A129 `[pending]`, 2026-09-07).** Burns–Massaccesi (Aug 2026, blog not arXiv) turns out
+   to certify with *the same object we do* — an atomic measure with total weight < n — and to differ only in the
+   verifier: a finite net of orientations, an "almost-unit" test square, and an exact per-orientation translation
+   sweep. A129 built it sharply (`σ(δ) = 1/(cos δ + sin δ)` exactly, adaptive net, and — the change without which
+   it replays nothing — the exemption clause decided for the *unit* square over the whole net cell rather than the
+   shrunk one) plus an independent `Fraction`-only checker that imports the frozen exemption predicates.
+   **As a replay verifier for A57's PASS leaves: no.** On 60 stratified PASS leaves it reproduced 26 inside a
+   120 s budget at a **median 15× the frozen verifier's wall** (10.8× on the totals); an exact second pass on 12
+   of the 34 that ran out of budget resolved 96 of 96 sampled tilt positions at levels 5–12 and put their cost at a
+   **median 26.7× (up to 234×)**. It cannot replace any of the ~850 s: it multiplies the 100 s exact-verify half by
+   10–30. **The failure mode is not the reviewer's predicted margin — 0 of 60 leaves lost the shrink.** The shrink
+   consumed at the level that works is 6e−5 to 5e−2 in side and every certificate absorbed it, because a leaf
+   certificate is a *measure*: the shrink comes out of its mass slack, not its side slack. What kills it is
+   architectural — the frozen 3-D `(t, c_x, c_y)` tree discharges a whole band of orientations against the six
+   cores with one `t`-box, while the net re-resolves the same exempt boundary at every one of a median 185 net
+   orientations. Optimising the predicate moves this by ~2×, not by 10×.
+   **As a certificate simplifier: no.** There are no Farkas vectors and no separating-axis selections to be had —
+   the certificate stays the same atoms and weights, and the net certificate merely adds a tilt tiling (1,950 exact
+   rationals for 3.82) and a σ per cell. The Lean shape is *worse* than A119's `leaf_*` lemmas, not better: it
+   replaces one 3-D `native_decide` by one per net cell.
+   **As a cross-check: yes, and it earns that outright.** Both whole-problem certificates were run to completion and
+   both PASS: `s(11) ≥ 3.82` at 1,950 net orientations (deepest level 14, shrink 3.81e−3, 3.96e10 arrangement cells)
+   in **2,148 s** against the frozen verifier's **587 s** (3.66×), and `s(12) ≥ 3.90` at 987 orientations in
+   **802 s** against **232 s** (3.45×). Unconditional measure certificates are exactly where the method is cheap —
+   no exemptions, so no bisection at all (the mass is constant on an arrangement cell, so the correct bisection
+   depth is 0). That is a genuinely structurally independent decision procedure for the two headline theorems, for
+   36 and 13 single-core minutes, sharing no code, no data structure and no search order with A07/A08; a fully
+   exact `netcheck` replay of the same two would cost 19 h and 9.5 h (16 cells of each were run: both CHECKED).
+   Take it for W7 and for the paper's "two verifiers" paragraph; do not schedule it against the A57 row.
+   *Files:* `attempts/A129-net-verifier/{code,notes,results}`, notes `method.md` (Lemmas N1–N4) and `benchmark.md`.
+
 ## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
 
 The 4-D verifier bisects tilt, position and side to a cap of 48 levels per path. Two constants belong to the

@@ -5141,3 +5141,69 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
 - T2 [T] (`lemmas130.md`, n-general, Lean shapes): Lemma BOX-FIELD-W (a non-rigid field with WEAK pair/wall rows on a box — sound for r > 0 by the Dini-derivative argument, strict at r = 0; the flush kink charged through the exact rotation difference u = ω_B − ω_A; the brief's column-straighten + row-slide field is a point of its LP), BOX-GORDAN-F; Lemma MODE (contact-mode split, vacuous pieces) and Lemma SHELL-SCALE (dyadic shells of the deep meeter's tilt certify with rotation ∝ a — one parametric certificate covers (0, r] except the stratum, where the slide is exact; [M] K03 BR shells 5e-5..1.6e-6 certified, failing only below the fixed pad); Lemma EXCHANGE-2 (the depth-2 exchange: re-fit + finite opening motion ε* of the flush blockers inside the pad, ∀-packings); Lemma TWO-INTRUDER (the certificate need only hold where both meeters intrude; the K03-type corner decided by hand: every selected minimiser in the box is K0-FREE there); Lemma FLUSH-SLIDE (at z* every flush floor/wall intruder is pressed on its FAR edge); Lemma ISOLATED (weak cone {0} ⇒ isolated, curve selection); Lemma KINK (the exact second-order condition at a parallel-edge contact — the kink is second order when Δ̇ = 0, Farkas/prestress form, 2 × 2 determinant for dim K = 1 — and its box form: only structurally-zero rows admit a second-order box certificate).
 - T4: FLUSH enters DRAIN-SEL(W)'s case analysis as two theorems — F (FLUSH-SLIDE) and F′ (SLOT-GRAZER: on W at m ≤ ŝ − δ no packing has a corner with an intruder of μ_c ≤ δ/(1+√2), by SHELL + SLIDE modulo K0-O1; the K03/K06/l1_124-type corners live only in the slab (ŝ − 2.4e-3·ρ/1e-3, ŝ]) — plus the field case (a theorem at the point, CLUSTER-ROT for a non-rigid field); the residue RES-MENU⁺ (LOCKED + cluster-held + flush re-fits + far-edge-pressed + no feasible field) is realised by NOTHING on disk at any side (both A104 locks fall to the field). The tree leaf at a flush stack is semi-algebraic (mode contractor + parametric shells + the stratum statement), not a box leaf; the field leaf fires at radius 1e-4 / 1e-3 and is silent at the 0.1-wide root cells — `budget.md` k0 row unchanged (12,000 / 0). A hold at a non-packing support costs DRAIN-SEL(W) nothing (the holds are k ≥ 1 packings above ŝ; their boxes' K0-BLOCKED packings are grazer-blocked slot corners, SLIDE-excluded on W outside the slab); it costs the tree leaf.
 - Discipline: one process for the runs (+ one seconds-long second process for piece counts / shells), BLAS pinned, BelowNormal, PYTHONDONTWRITEBYTECODE=1; pure geometry / interval arithmetic (LPs for the direction search only); read-only on every campaign and attempt (A128's coupled128.py copied to geom130.py, its results read); frozen verifiers untouched; nothing deleted; git fetch + plain merge + push of own paths. Chip K0.RESN → A130 (released at close); depgraph re-rendered; registry row.
+
+## 2026-09-07 — A129-net-verifier (Opus engineer) — done-success
+
+- **The Burns–Massaccesi paper does not exist as a paper.** It is two blog posts on n = 17, Aug 2026:
+  Sam Burns (`sam-burns.com/posts/n17-square-packing-problem-intro/`, the idea) and Gustavo
+  Massaccesi (`gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html`, the LP-tuned
+  certificate: 168 weighted points on a 29×29 grid, `L = 45058/10000`, total ≈ 16.9166 < 17,
+  `WEIGHT_SCALE = 576`). Searched arXiv by author, by abstract and by date range — nothing.
+- **Their certificate is our certificate.** An atomic measure with total weight < n and the claim
+  that every unit square in the container carries weight ≥ 1 — the A08/A33 object, and the A57 leaf
+  object. What is new is the *verifier*: a finite net of 181 orientations uniform in
+  `t = tan(θ/2)`, an "almost-unit" square of side `B = 0.9973` justified by `B(1+D) < 1`, and an
+  exact per-orientation 2-D translation sweep (event coordinates, integer difference array, two
+  cumulative sums). So the brief's premise — that their "sweep" would be over separating-axis
+  selections and would produce Farkas witnesses against our box trees — was wrong in both halves:
+  there is no LP anywhere in the method, and A57's kills are measures, not box trees. W7 updated
+  accordingly (`docs/publication_checklist.md`): they must be cited as an independent rediscovery of
+  the weighting method, and our differences named (unshrunk continuum verifiers, Lean-checked).
+- **T1.** `attempts/A129-net-verifier/code/netverify.py` + `netcheck.py`, soundness note
+  `notes/method.md` (Lemma N1 the σ inclusion with the exact rational form
+  `B = (1+m²)/(1+2m−m²)`; N2 the reduction, stated n-general; N3 the exemption clause; N4 exactness
+  of the sweep). `netcheck.py` re-decides by a pure-`Fraction` 2-D branch and bound with no numpy and
+  no floats, and imports the FROZEN `verify_case` exemption predicates rather than re-implementing
+  them. On the A57 leaf `k5_11_interior_NO`: netverify PASS (364 orientations, 38.8 s), netcheck
+  CHECKED all 364 cells (133,788 nodes, 28.8 s), frozen verifier 1.02 s.
+- **The one design finding that decides the whole project.** Exempting on the *shrunk* square — the
+  naive port of their construction to a conditional certificate — fails at EVERY refinement level
+  with live minimum exactly `0`, because it strips a rim of width `Θ(1−B)` off every core's exempt
+  region and the LP never put mass inside an exempt region. The exemption must be decided for the
+  UNIT square, uniformly over the net cell (Lemma N3). The shrink is for the mass, never for the
+  hypotheses.
+- **T2, 60 stratified A57 PASS leaves** (`notes/benchmark.md`). 26 reproduced inside a 120 s budget
+  at a **median 15× the frozen wall** (10.8× on totals; 93 % reproduced at ≤ 5 atoms, 53 % at 6–30,
+  0 % at > 30). An exact second pass on 12 of the 34 over-budget leaves resolved **96 of 96** sampled
+  tilt positions at levels 5–12 and priced them at a **median 26.7×, up to 234×**. **The failure mode
+  is BLOW-UP, never MARGIN: 0 of 60.** The reviewer's predicted margin death does not happen — a leaf
+  certificate is a measure, so the shrink comes out of its MASS slack, not its side slack, and every
+  certificate absorbed a shrink of 6e−5 to 5e−2 in side. What kills it is architectural: the frozen
+  3-D `(t,c_x,c_y)` tree discharges a band of orientations against the six cores with a single
+  `t`-box; the net re-resolves the same exempt boundary at each of a median 185 net orientations.
+  *Stratification caveat:* no A57 PASS leaf has a tilt sub-cell (all 1,029 with a node record carry
+  `theta_box = [[0,90,1.0]]`, one piece) — the case-measure certificate never sub-divides tilt. A96's
+  parametric `s_cells > 1` was used as the nearest analogue (33 of the 60), and atom count as the
+  axis that actually separates the population.
+- **T3, the two whole-problem certificates — both RUN, both PASS.** They are unconditional measures,
+  which is exactly where the method is cheap (no exemptions ⇒ the mass is constant on an arrangement
+  cell ⇒ the correct bisection depth is 0). `s(11) ≥ 3.82`: 1,950 net orientations, deepest level 14,
+  shrink 3.81e−3, 3.96e10 arrangement cells, **2,148 s** against the frozen verifier's **587 s**
+  (3.66×). `s(12) ≥ 3.90`: 987 orientations, deepest level 14, shrink 3.57e−3, **802 s** against
+  **232 s** (3.45×). `netcheck` CHECKED 16 net cells of each (563 s / 557 s); a full exact replay
+  would cost ≈ 19 h and ≈ 9.5 h. The refinement profile (`code/ladder.py`, 24 exact per-cell
+  decisions across `[0,1]`): 3.82 needs level 8–13, median 10, hardest at θ ≈ 7.15°, where at level 8
+  the live minimum is **0.999757** — the 3.82 certificate misses by 2.4e−4 of mass under a 3.9e−3
+  shrink, and that number is its entire margin against this method. The brief's estimate (δ < 0.0150
+  rad, ≈ 105 orientations) came from a rescaling argument that does not apply to a measure
+  certificate; the measured binding half-width is 7.4e−4 rad and the net is **19× larger**.
+- **Verdict (`docs/budget.md` §D.6).** Cross-check: EARNED — a structurally independent decision
+  procedure for both headline theorems for 36 and 13 single-core minutes, sharing no code, no data
+  structure and no search order with A07/A08. Replay verifier for A57's PASS leaves: REJECTED — it
+  multiplies the 100 s exact-verify half of the 850 s node by 10–30, it does not replace it.
+  Certificate simplifier: REJECTED — there are no Farkas vectors in this method, the certificate is
+  unchanged, the net adds a 1,950-cell tilt tiling, and the Lean shape (one `native_decide` per net
+  cell) is worse than A119's `leaf_*` lemmas. A19 untouched, and note that Burns–Massaccesi sit under
+  the same ceiling, their certificate being a measure too.
+- Files: `attempts/A129-net-verifier/{code,notes,results,logs}`, `docs/budget.md` §D.6,
+  `docs/publication_checklist.md` W7, `attempts/REGISTRY.md`. ≈ 7.5 CPU-h, ≤ 2 BelowNormal processes.

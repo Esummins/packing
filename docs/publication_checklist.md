@@ -371,7 +371,32 @@ machine, and what was merely searched.
   certificate; the stratification tree with kill types is not drawn.
 
 - [ ] **W7 `[A]` — Place the 3.82 method against Burns and Massaccesi (August 2026).**
-  Status: **OPEN**.
+  Status: **DRAFTED** (A129, 2026-09-07; `attempts/A129-net-verifier/notes/method.md` §0). There is
+  **no arXiv paper**: the work is two blog posts on n = 17 — Sam Burns, *The n=17 Square Packing
+  Problem* (sam-burns.com, Aug 2026), and Gustavo Massaccesi, *Another Better Lower Bound for n=17
+  Square Packing* (`gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html`,
+  Aug 2026), which cites Burns's idea and tunes it by LP. **Their certificate is the same object as
+  ours** — a finite non-negative atomic measure with total weight < n and the claim that every unit
+  square in the container carries weight ≥ 1 (Massaccesi's: 168 weighted points on a 29×29 grid,
+  `L = 45058/10000`, total ≈ 16.9166 < 17, `WEIGHT_SCALE = 576`). So the paper must cite them as an
+  **independent rediscovery of the measure/weighting method for the same problem family**, not as a
+  different bound technique, and our Theorem 1 bridge (`docs/results.md`) is the same bridge.
+  What is genuinely theirs and new is the **verifier**: a finite net of 181 orientations
+  (`t_k = T k/180`, `T = 207107/500000`, uniform in `t = tan(θ/2)`), an "almost-unit" test square of
+  side `B = 9973/10000` justified by `B(1 + D) < 1` with `D` the tangent of the angular gap, and an
+  exact per-orientation 2-D translation sweep (event coordinates, integer difference array, two
+  cumulative sums) that reads off the minimum weight over all admissible centres.
+  **What ours differs in**, and must be said in the same paragraph: (i) our verifiers decide the
+  continuum directly — A08's exact-integer 3-D branch and bound over `(t, c_x, c_y)` and A07's
+  float-interval one — so no shrink and no net enter our proof at all, and the Lean statement
+  (`checkMeasureI`) is of the unshrunk claim; (ii) where we do use their route (A129) the shrink is
+  the **sharp** `σ(δ) = 1/(cos δ + sin δ)` rather than their `1 + D`, the net is **adaptive** rather
+  than uniform, and it is extended to **conditional** certificates (cores / NO-families) by deciding
+  the exemption for the unit square rather than the shrunk one; (iii) our certificates are
+  additionally **Lean-checked** (`s11_ge_3_82` by `native_decide`, `Measure382Check` 1787 s), which
+  no blog certificate is. A129 also reports the cost of their route on our objects: it reproduces
+  s(11) ≥ 3.82 and s(12) ≥ 3.90 exactly, and is far worse on the conditional stratification
+  certificates — see `docs/budget.md` §D.6.
 
 - [ ] **W8 — Disclose the agent workflow per venue policy.**
   Status: **OPEN**.
