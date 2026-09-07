@@ -259,24 +259,39 @@ def parseLeaf (nv : Nat) (den : ℚ) (s : String) : CLeaf :=
 /-! ## 4. The cover obligation and Theorem LOCAL
 
 `CertCover` is what Lemma COVER + Lemma RELAX deliver and the checker consumes: for every
-packing that satisfies the neighbourhood hypothesis there is ONE recorded leaf whose box
-contains the configuration's LP variable vector and whose rows hold there.  The variable vector
-is existentially quantified with its first coordinate pinned to the side, which is exactly the
-freedom the certificate's own body-to-variable numbering uses. -/
-def CertCover (leaves : List CLeaf) (Ls : List Box) (Ps : List Pin) (s0 : ℝ) : Prop :=
-  ∀ s : ℝ, ∀ z : Cfg, s ≤ s0 → CfgPacking s z → LocalHyp Ls Ps s z →
+packing that satisfies the neighbourhood hypothesis **at any side in the certificate's own
+window** there is ONE recorded leaf whose box contains the configuration's LP variable vector
+and whose rows hold there.  The variable vector is existentially quantified with its first
+coordinate pinned to the side, which is exactly the freedom the certificate's own
+body-to-variable numbering uses.
+
+The window `[slo, shi]` matters, and not only because the leaves' boxes carry `s ∈ [slo, shi]`.
+If the quantifier were restricted to `s ≤ s0` instead, `CertCover` would be a CONSEQUENCE of
+`LocalDead` (vacuously: there would be no such `s`, `z`), and the factorisation would be
+circular — the "one named obligation" would be equivalent to the conclusion.  The certificate's
+window reaches ABOVE `s0` (`[3.82, 3.897084]` against `s0 = 3.877084`), the cover argument never
+looks at `s0`, and the packings the obligation quantifies over at `s ∈ (s0, shi]` are exactly
+the ones a `LocalDead` proof says nothing about.  So this form is a genuinely weaker statement
+than `LocalDead`, and it is the one Lemmas COVER and RELAX actually establish. -/
+def CertCover (leaves : List CLeaf) (Ls : List Box) (Ps : List Pin) (slo shi : ℝ) : Prop :=
+  ∀ s : ℝ, ∀ z : Cfg, slo ≤ s → s ≤ shi → CfgPacking s z → LocalHyp Ls Ps s z →
     ∃ x : Nat → ℝ, x 0 = s ∧ ∃ L ∈ leaves, LeafHolds L x
 
 /-- **Theorem LOCAL from a checked certificate.**  If every recorded leaf passes the reflected
-weak-duality check and the recorded leaves cover the neighbourhood, then `N` is dead at `s0`. -/
+weak-duality check and the recorded leaves cover the neighbourhood on the certificate's window,
+then `N` is dead at `s0`.  The lower end of the window is free: `lb_382` (Theorem 1) puts every
+packing's side at or above `3.82`. -/
 theorem localDead_of_cert {leaves : List CLeaf} {Ls : List Box} {Ps : List Pin} {s0 : ℚ}
+    {slo shi : ℝ} (hlo : slo ≤ 191 / 50) (hhi : (s0 : ℝ) ≤ shi)
     (hchk : leaves.all (checkLeaf s0) = true)
-    (hcov : CertCover leaves Ls Ps (s0 : ℝ)) :
+    (hcov : CertCover leaves Ls Ps slo shi) :
     LocalDead Ls Ps (s0 : ℝ) := by
   intro s z hz hN
   by_contra hle
   push Not at hle
-  obtain ⟨x, hx0, L, hLmem, hLh⟩ := hcov s z hle hz hN
+  have h382 : (191 / 50 : ℝ) ≤ s := lb_382 s ⟨fun i => (z i).set, hz.2⟩
+  obtain ⟨x, hx0, L, hLmem, hLh⟩ :=
+    hcov s z (le_trans hlo h382) (le_trans hle hhi) hz hN
   rw [List.all_eq_true] at hchk
   have := checkLeaf_sound hLh (hchk L hLmem)
   rw [hx0] at this

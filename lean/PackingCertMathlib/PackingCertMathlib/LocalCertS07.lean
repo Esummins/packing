@@ -75,16 +75,20 @@ noncomputable def s07Pins : List Pin := [
 /-- **`LocalDead` for `S07_trump5_r0.10_rho40`** — Theorem LOCAL for a concrete `N`, from the kernel-checked
 certificate plus the cover obligation.  Everything ARITHMETIC in the certificate (every leaf's
 Farkas vector, every box minimisation, 27363 rows) is discharged by `check_s07`; the
-hypothesis `hcov` is Lemma COVER + Lemma RELAX, i.e. "the recorded leaves cover `N`". -/
+hypothesis `hcov` is Lemma COVER + Lemma RELAX, i.e. "the recorded leaves cover `N` on the
+certificate's own window `[191/50, 974271/250000] = [3.82, 3.897084]`".  That window reaches
+ABOVE `s0`, so `hcov` is NOT a consequence of the conclusion — see `LocalCert.CertCover`. -/
 theorem localDead_s07
-    (hcov : CertCover s07Leaves s07Boxes s07Pins (((969271 : ℚ) / 250000 : ℚ) : ℝ)) :
+    (hcov : CertCover s07Leaves s07Boxes s07Pins
+      ((191 : ℝ) / 50) ((974271 : ℝ) / 250000)) :
     LocalDead s07Boxes s07Pins (((969271 : ℚ) / 250000 : ℚ) : ℝ) :=
-  localDead_of_cert check_s07 hcov
+  localDead_of_cert (by norm_num) (by push_cast; norm_num) check_s07 hcov
 
 /-- The same at `ŝ`, the shape `Local.classKilledAt_of_localDead` consumes
 (`ŝ ≤ 3877084/1000000 = s0` by `shat_spec`). -/
 theorem localDead_s07_shat
-    (hcov : CertCover s07Leaves s07Boxes s07Pins (((969271 : ℚ) / 250000 : ℚ) : ℝ)) :
+    (hcov : CertCover s07Leaves s07Boxes s07Pins
+      ((191 : ℝ) / 50) ((974271 : ℝ) / 250000)) :
     LocalDead s07Boxes s07Pins shat := by
   have h := localDead_s07 hcov
   intro s z hz hN

@@ -303,16 +303,20 @@ noncomputable def %(tagl)sPins : List Pin := [
 /-- **`LocalDead` for `%(id)s`** — Theorem LOCAL for a concrete `N`, from the kernel-checked
 certificate plus the cover obligation.  Everything ARITHMETIC in the certificate (every leaf's
 Farkas vector, every box minimisation, %(nrows)d rows) is discharged by `check_%(tagl)s`; the
-hypothesis `hcov` is Lemma COVER + Lemma RELAX, i.e. "the recorded leaves cover `N`". -/
+hypothesis `hcov` is Lemma COVER + Lemma RELAX, i.e. "the recorded leaves cover `N` on the
+certificate's own window `[191/50, 974271/250000] = [3.82, 3.897084]`".  That window reaches
+ABOVE `s0`, so `hcov` is NOT a consequence of the conclusion — see `LocalCert.CertCover`. -/
 theorem localDead_%(tagl)s
-    (hcov : CertCover %(tagl)sLeaves %(tagl)sBoxes %(tagl)sPins (((969271 : ℚ) / 250000 : ℚ) : ℝ)) :
+    (hcov : CertCover %(tagl)sLeaves %(tagl)sBoxes %(tagl)sPins
+      ((191 : ℝ) / 50) ((974271 : ℝ) / 250000)) :
     LocalDead %(tagl)sBoxes %(tagl)sPins (((969271 : ℚ) / 250000 : ℚ) : ℝ) :=
-  localDead_of_cert check_%(tagl)s hcov
+  localDead_of_cert (by norm_num) (by push_cast; norm_num) check_%(tagl)s hcov
 
 /-- The same at `ŝ`, the shape `Local.classKilledAt_of_localDead` consumes
 (`ŝ ≤ 3877084/1000000 = s0` by `shat_spec`). -/
 theorem localDead_%(tagl)s_shat
-    (hcov : CertCover %(tagl)sLeaves %(tagl)sBoxes %(tagl)sPins (((969271 : ℚ) / 250000 : ℚ) : ℝ)) :
+    (hcov : CertCover %(tagl)sLeaves %(tagl)sBoxes %(tagl)sPins
+      ((191 : ℝ) / 50) ((974271 : ℝ) / 250000)) :
     LocalDead %(tagl)sBoxes %(tagl)sPins shat := by
   have h := localDead_%(tagl)s hcov
   intro s z hz hN

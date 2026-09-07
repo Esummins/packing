@@ -23,15 +23,27 @@ strictly inside, and `Attain.mem_interior_iff_uv` turns that into a common INTER
 ## 2. The one obligation of T1 — `LocalCert.CertCover`
 
 ```lean
-def CertCover (leaves : List CLeaf) (Ls : List Box) (Ps : List Pin) (s0 : ℝ) : Prop :=
-  ∀ s : ℝ, ∀ z : Cfg, s ≤ s0 → CfgPacking s z → LocalHyp Ls Ps s z →
+def CertCover (leaves : List CLeaf) (Ls : List Box) (Ps : List Pin) (slo shi : ℝ) : Prop :=
+  ∀ s : ℝ, ∀ z : Cfg, slo ≤ s → s ≤ shi → CfgPacking s z → LocalHyp Ls Ps s z →
     ∃ x : Nat → ℝ, x 0 = s ∧ ∃ L ∈ leaves, LeafHolds L x
 ```
 
-"every packing that satisfies `N` at a side `≤ s0` has an LP variable vector that lies in the
-box of ONE recorded leaf and satisfies that leaf's rows".  Given it, `localDead_of_cert` is four
-lines.  It factors into four pieces; the first is proved, the fourth is bookkeeping, and the two
-in the middle share ONE missing primitive.
+"every packing that satisfies `N` at a side in the certificate's own window lies, as an LP
+variable vector, in the box of ONE recorded leaf and satisfies that leaf's rows".  Given it,
+`localDead_of_cert` is six lines.
+
+**The window is load-bearing, and not only because the leaves' boxes carry `s ∈ [slo, shi]`.**
+Restricted to `s ≤ s0` instead — the first form this attempt wrote — `CertCover` would be a
+CONSEQUENCE of `LocalDead`, vacuously: if `N` is dead there is no such `s`, `z` at all.  The
+factorisation would then be circular, the "one named obligation" equivalent to the conclusion,
+and `localDead_of_cert` a true but empty theorem.  With the certificate's own window
+`[3.82, 3.897084]`, which reaches ABOVE `s0 = 3.877084`, the obligation quantifies over packings
+a `LocalDead` proof says nothing about, the cover argument never looks at `s0`, and the
+statement is strictly weaker than the conclusion.  The lower end costs nothing: `lb_382`
+(Theorem 1) puts every packing's side at or above `3.82`, and `localDead_of_cert` uses it.
+
+`CertCover` factors into four pieces; the first is proved, the fourth is bookkeeping, and the
+two in the middle share ONE missing primitive.
 
 **(C1) the tilt cover — PROVED in shape.**  A `bisect` node splits one body's tilt interval at a
 recorded interior point and its two children carry `[lo, mid]`, `[mid, hi]`; their union is the

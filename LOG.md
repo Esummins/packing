@@ -5034,8 +5034,14 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   bound pulls it to the box's `s_lo = 3.82 < s0`. That the count lands on the ray count on the nose is an
   independent confirmation that the two branches of `checkLeaf` are attached to the leaves the generator meant.
 - **What that hypothesis is, and what discharging it needs — ONE primitive, and it is not in Lean.**
-  `CertCover leaves Ls Ps s0` = "every packing satisfying `N` at a side `≤ s0` has an LP variable vector inside
-  ONE recorded leaf's box, satisfying that leaf's rows". It factors into four: the tilt cover (PROVED in shape —
+  `CertCover leaves Ls Ps slo shi` = "every packing satisfying `N` at a side in the CERTIFICATE'S OWN WINDOW
+  `[3.82, 3.897084]` has an LP variable vector inside ONE recorded leaf's box, satisfying that leaf's rows".
+  **The window is load-bearing.** Restricted to `s ≤ s0` instead — the first form this attempt wrote — the
+  obligation would be a CONSEQUENCE of `LocalDead`, vacuously (if `N` is dead there is no such `s`, `z`), the
+  factorisation would be circular and `localDead_of_cert` a true but empty theorem. The certificate's window
+  reaches ABOVE `s0 = 3.877084`, so the obligation quantifies over packings a `LocalDead` proof says nothing
+  about, and the cover argument never looks at `s0`; the lower end is free, `lb_382` puts every packing's side
+  at or above `3.82`. It factors into four: the tilt cover (PROVED in shape —
   `cover_bisect` plus a decidable structural check; and not one of A119's seven certificates contains a `qsplit`
   node, so that branch of the cover is dead code), the selection cover (its LOGIC is now discharged by T2 —
   `sat_selection_thm` + `cover_selection`), Lemma RELAX (its algebra is already proved in `Local.lean`), and the
