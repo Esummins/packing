@@ -7,13 +7,13 @@ arithmetic on Python ints at scale 2^-96, `code/exactiv.py`).  `s0 = 969271/2500
 
 | certificate | cells (bisections) | selection branches | infeasible cells | dead leaves | multipliers | file | sha256 | gen wall | checker wall | checker's min bound | verdict |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| `S02_k5_11_r0.02_rho2` | 0 | 7 | 0 | 8 | 128 | 0.0 MB | `d09f94031eca93d1` | 0.0 s | 0.2 s | 3.880152397 | **VALID** |
-| `S02_k5_11_r0.05_rho20` | 8512 | 63 | 4420 | 7692 | 82593 | 0.8 MB | `dfedcf40d3d9f46c` | 26.4 s | 117.4 s | 3.877094349 | **VALID** |
-| `S02_k5_11_r0.10_rho10` | 6782 | 47 | 1012 | 6878 | 100056 | 1.1 MB | `baa2fe8a9aedd4dc` | 18.3 s | 134.5 s | 3.877094910 | **VALID** |
-| `S02_k5_11_r0.20_rho10` | 32426 | 63 | 5782 | 32570 | 504404 | 5.6 MB | `41fa6e5a9da74c76` | 91.0 s | 679.4 s | 3.877084098 | **VALID** |
-| `S07_trump5_r0.05_rho10` | 412 | 31 | 48 | 476 | 6186 | 0.0 MB | `825253afaf56aa57` | 1.0 s | 8.2 s | 3.877445286 | **VALID** |
-| `S07_trump5_r0.10_rho40` | 2410 | 87 | 1038 | 2302 | 27363 | 0.3 MB | `1b06f5e0dece0fa9` | 7.6 s | 27.9 s | 3.877097589 | **VALID** |
-| `S07_trump5_r0.20_rho10` | 3104 | 31 | 272 | 3168 | 48710 | 0.6 MB | `ddef2e30d807122f` | 8.7 s | 73.6 s | 3.877084433 | **VALID** |
+| `S02_k5_11_r0.02_rho2` | 0 | 7 | 0 | 8 | 128 | 0.0 MB | `d09f94031eca93d1` | 0.0 s | 0.3 s | 3.880152397 | **VALID** |
+| `S02_k5_11_r0.05_rho20` | 8512 | 63 | 4420 | 7692 | 82593 | 0.8 MB | `dfedcf40d3d9f46c` | 26.4 s | 125.7 s | 3.877094349 | **VALID** |
+| `S02_k5_11_r0.10_rho10` | 6782 | 47 | 1012 | 6878 | 100056 | 1.1 MB | `baa2fe8a9aedd4dc` | 18.3 s | 139.4 s | 3.877094910 | **VALID** |
+| `S02_k5_11_r0.20_rho10` | 32426 | 63 | 5782 | 32570 | 504404 | 5.6 MB | `41fa6e5a9da74c76` | 91.0 s | 694.9 s | 3.877084098 | **VALID** |
+| `S07_trump5_r0.05_rho10` | 412 | 31 | 48 | 476 | 6186 | 0.0 MB | `825253afaf56aa57` | 1.0 s | 9.6 s | 3.877445286 | **VALID** |
+| `S07_trump5_r0.10_rho40` | 2410 | 87 | 1038 | 2302 | 27363 | 0.3 MB | `1b06f5e0dece0fa9` | 7.6 s | 27.7 s | 3.877097589 | **VALID** |
+| `S07_trump5_r0.20_rho10` | 3104 | 31 | 272 | 3168 | 48710 | 0.6 MB | `ddef2e30d807122f` | 8.7 s | 74.8 s | 3.877084433 | **VALID** |
 
 ## What one certificate contains
 

@@ -50,6 +50,15 @@ bisection later).  Measured, verdicts and node counts IDENTICAL to A116's:
 | S02 (0.1, 10°) | 46.4 s | 18.1 s | 2.6× |
 | S07 (0.2, 10°) | 20.9 s | 6.2 s | 3.4× |
 
+**Cell sharing, measured — and it is not where the time goes.**  The interval census depends on
+the tilt cell ALONE, never on the selections, so one census per cell serves every leaf that meets
+it (`stats["census_calls"]` vs `stats["census_hits"]`, cache unbounded here; A116 capped it at
+2·10⁵ entries).  On the T3 runs the hit rate is **99.4 – 100 %**: S02 (0.2, 20°) computes 3 735
+censuses for 633 660 nodes, S02 (0.2, 40°) computes 92 for 392 144, S07 (0.2, 40°) computes 11
+for 435 927.  So the brief's "one tilt-cell census per N, leaves reference cells" is already
+achieved and it buys nothing further — **the census is essentially free and the LP is the whole
+cost**, which is why the HiGHS change above is what actually moved the frontier.
+
 A third change was tried and REJECTED: inheriting the parent's (or the last closed leaf's)
 Farkas vector and closing a child with it before solving its LP.  It closes 8–15 % of nodes with
 no LP call, but the sparse row rebuild costs more than the LP it saves once HiGHS is called
