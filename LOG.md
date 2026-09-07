@@ -5025,6 +5025,14 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   (the second is the `N` A120's node cover uses, which is why it was worth the 49 MB). `localDead_s07` /
   `localDead_s02` are Theorem LOCAL for those `N` modulo ONE named hypothesis. Axiom roster exactly as targeted:
   the standard three everywhere, plus one `native_decide` axiom per replay.
+- **The control (`code/control126.py`), because a checker that accepts everything proves nothing.** The leaf
+  records are read back out of the EMITTED `.lean` file — not out of the JSON they were written from — decoded
+  exactly as `parseLeaf` decodes them, and re-checked: **2 302/2 302 and 32 570/32 570 pass**. Mutated:
+  `zero-y` and `negate-y` fail EVERY leaf; `drop-row` 708 / 30 726; `widen-box` 638 / 29 412; and `halve-y`
+  fails **exactly the feasible leaves** in both certificates (1 556 = 2 302 − 746 rays,
+  26 788 = 32 570 − 5 782) — halving a Farkas RAY halves a positive bound and it stays positive, halving a side
+  bound pulls it to the box's `s_lo = 3.82 < s0`. That the count lands on the ray count on the nose is an
+  independent confirmation that the two branches of `checkLeaf` are attached to the leaves the generator meant.
 - **What that hypothesis is, and what discharging it needs — ONE primitive, and it is not in Lean.**
   `CertCover leaves Ls Ps s0` = "every packing satisfying `N` at a side `≤ s0` has an LP variable vector inside
   ONE recorded leaf's box, satisfying that leaf's rows". It factors into four: the tilt cover (PROVED in shape —
