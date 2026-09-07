@@ -30,7 +30,9 @@
 | `lean/…/SatInterior.lean` | T2: Lemma SAT for interiors, a theorem |
 | `lean/…/LocalCert.lean` | T1: the reflected leaf checker, its soundness, the decoder, `CertCover`, `localDead_of_cert` |
 | `lean/…/LocalCompose.lean` | T3: the YES/NO split, `localHyp_of_yes`, `node_dead_of_yes_no`, the clamp lemmas |
-| `lean/…/LocalCertY0230(Data).lean` | T3: A120's four NO certificates for `k5_11_interior_Y0230`, converted by `lean/gen_case_lean.py` and replayed by `native_decide` |
+| `lean/…/LocalCertY0230Data.lean` | T3: A120's four PASSing NO certificates for `k5_11_interior_Y0230`, converted by `lean/gen_case_lean.py` |
+| `lean/…/LocalCertY0230N{3,2,1,0}.lean` | T3: one `native_decide` replay each, smallest first — ONE per module because a `native_decide` is not cached until its module finishes |
+| `lean/…/LocalCertY0230.lean` | T3: the four gathered |
 
 ## Finding E1 — the data has to be a STRING, not a list literal
 

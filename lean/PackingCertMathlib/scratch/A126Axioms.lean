@@ -1,3 +1,4 @@
+import PackingCertMathlib.LocalCertY0230
 import PackingCertMathlib.LocalCertS02
 import PackingCertMathlib.LocalCompose
 import PackingCertMathlib.LocalCertS07
@@ -36,3 +37,12 @@ Expected: the three standard Lean axioms (propext, Classical.choice, Quot.sound)
 #print axioms PackingCert.S11.LocalCert.check_s02
 #print axioms PackingCert.S11.LocalCert.localDead_s02
 #check @PackingCert.S11.LocalCert.localDead_s02
+
+-- A126 T3 — A120's four NO certificates for k5_11_interior_Y0230, replayed.
+-- (build PackingCertMathlib.LocalCertY0230 first; not in the default target)
+#print axioms PackingCert.S11.check_y0230_no3
+#print axioms PackingCert.S11.check_y0230_no2
+#print axioms PackingCert.S11.check_y0230_no1
+#print axioms PackingCert.S11.check_y0230_no0
+#print axioms PackingCert.S11.y0230_no0_forces
+#check @PackingCert.S11.y0230_no0_forces

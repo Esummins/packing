@@ -125,8 +125,20 @@ The NO side, in detail.  A120's four PASSing certificates for `Y0230` are `NO0`,
 `case-measure-certificate-v1` at `s = 969271/250000`, depth 56, with **6 cores** (the node's five
 class pins plus its own conditioned square) and **one NO-family zone** (the corresponding box of
 `N`, mapped into the node frame and clamped to the wall slab).  `lean/gen_case_lean.py` converts
-them and `LocalCertY0230.check_y0230_no{0,1,2,3}` replays all four by `native_decide` — the A78
-route, and the harness exists.  THREE steps still separate that from `hno`:
+them and `LocalCertY0230N{0,1,2,3}.check_y0230_no{0,1,2,3}` replay all four by `native_decide` —
+the A78 route.  **DONE**: all four PASS in the kernel, at
+
+| module | certificate | boxes | Python (frozen `verify_case.py`) | Lean `native_decide` |
+|---|---|---|---|---|
+| `LocalCertY0230N3` | `NO3` | 230 914 | 14.3 s | 156 s |
+| `LocalCertY0230N2` | `NO2` | 492 190 | 27.6 s | 324 s |
+| `LocalCertY0230N1` | `NO1_r6` | 820 808 | 34.5 s | 688 s |
+| `LocalCertY0230N0` | `NO0` | 1 207 184 | 54.4 s | 872 s |
+
+(ONE certificate per module deliberately: a `native_decide` is not cached until its module
+finishes, so four in one file means an interrupted build banks nothing — which is exactly what
+happened twice before the split.  Axiom roster: the standard three plus that certificate's own
+`native_decide` axiom, nothing else.)  THREE steps still separate the four PASSes from `hno`:
 
 1. **`checkCaseI_no_family`, not `checkCaseI_kill`.**  The zone list is NONEMPTY, so the PASS
    proves "SOME non-owner square of the family lies in the zone", which is exactly the negation

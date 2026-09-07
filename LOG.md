@@ -5112,15 +5112,21 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   residue: `LocalDead` for S02 (0.2, 10°) modulo `CertCover`; A2/A3 as decidable rational tests (not written);
   the node's class hypothesis through the `D4` frame map (A120's A1/A4, the step
   `Composition.classKilledAt_of_tree` already performs for the tree route); and the four NO children. On the last
-  of these: the replay harness DOES exist — `lean/gen_case_lean.py` converts A120's four PASSing
+  of these: **all four are now REPLAYED IN THE KERNEL.** `lean/gen_case_lean.py` converts A120's four PASSing
   `case-measure-certificate-v1` files (`NO0`, `NO1_r6`, `NO2`, `NO3`; depth 56, 6 cores = five class pins plus the
-  node's own conditioned square, ONE NO-family zone each) and `LocalCertY0230.lean` replays them by
-  `native_decide` — but two steps still separate a PASS from `hno`, and both are pre-existing properties of the
-  frozen fixed-side route: the consumer is `checkCaseI_no_family` (the zone list is NONEMPTY, so a PASS forces
-  SOME non-owner square into the zone) and not `checkCaseI_kill`, and it speaks of an `IsStrictFamily` (pairwise
-  disjoint CLOSED squares) where `CfgPacking` gives interior-disjointness, so `Dilation.lean`'s Lemma B has to be
-  applied first; and `CaseExempt` names a POSE `q` with `q.set = Q i`, which does not force `q = z k`
-  (`t = 0` and `t = 1` denote the same square).
+  node's own conditioned square, ONE NO-family zone each) and `LocalCertY0230N{3,2,1,0}.lean` re-run `checkCaseI`
+  on them by `native_decide`: **156 s / 324 s / 688 s / 872 s** on 230 914 / 492 190 / 820 808 / 1 207 184 boxes,
+  against the frozen verifier's 14.3 / 27.6 / 34.5 / 54.4 s — **about 11× and linear in the box count**, which is
+  the number A78's corpus replays priced. ONE certificate per module deliberately: a `native_decide` is not cached
+  until its module finishes, so four in one file means an interrupted build banks NOTHING, which is exactly what
+  happened twice before the split. Axiom roster per replay: the standard three plus that certificate's own
+  `native_decide` axiom.
+  Three steps still separate the four PASSes from `hno`. Two are pre-existing properties of the frozen fixed-side
+  route: the consumer is `checkCaseI_no_family` (the zone list is NONEMPTY, so a PASS forces SOME non-owner square
+  into the zone) and not `checkCaseI_kill`, and it speaks of an `IsStrictFamily` (pairwise disjoint CLOSED squares)
+  where `CfgPacking` gives interior-disjointness, so `Dilation.lean`'s Lemma B has to be applied first; and
+  `CaseExempt` names a POSE `q` with `q.set = Q i`, which does not force `q = z k` (`t = 0` and `t = 1` denote the
+  same square). The third is NEW and is F-COVER above.
 - Discipline: `Local.lean`, A116/A119/A120 and every campaign untouched (A119's `check_local.py` / `exactiv.py`
   IMPORTED, its certificates and A120's records READ); one `lake build` at a time through `lakeb.py` at
   BELOW-NORMAL priority — the one build killed mid-run left a stale lock, which was cleared only after confirming
