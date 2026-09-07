@@ -334,7 +334,7 @@ sin are rational (a generator change); (b) **F-COVER, a systemic bug in A120's c
 rounded OUTWARD (tilt to 2⁻²⁰, centre to 9 decimals), so ZONE ⊄ BOX by ~10⁻⁷ on all 22 PASSing NO certificates and the
 YES ∪ NO = H tautology fails at that level — nothing in the LP or measure is wrong; fix = one rounding direction and
 re-certification far below those certificates' resolution (queued with the A120 resume); (c) `Local.Box` cannot carry a
-tilt cell leaving [0°, 90°] (S02's BR(0,1) box keeps the inside part, sound, marked; fix = a list of t-intervals).
+tilt cell leaving [0°, 90°] (S02's BR(0,1) box keeps the inside part, sound, marked; fix = a list of t-intervals). **A133 (`4a7e5821`):** all ten local certificates re-emitted in t = tan(θ/2) and SHARPER (S07 2,302 → 2,140 leaves, S02 32,570 → 16,406; certified minimum 3.877108 vs 3.877092), independent checker 569,449/569,449 rows with no early return; `LocalCertT.lean`: twelve theorems with roster propext / Classical.choice / Quot.sound — exact endpoint enclosures of cos/sin on a t-cell, the w-bounds that retire the π kernel, a decidable Bernstein positivity certificate, and (C1) the cell cover. Remaining for a hypothesis-free `localDead_s07_t`: (C2) selection cover, (C3) Lemma RELAX, (C4) the variable map — pure reflection over ℚ (A134 running). The F-COVER rounding lives in A112's `caselp.make_certificate` (nofams clause), not A120's runner; fix = round the NO zone inward and run the ZONE ⊆ BOX test at emission on the written rationals.
 `ParamNoFam.lean` (A117) proves the NO-family verifier's exemption clause.
 
 ---
