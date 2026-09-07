@@ -206,8 +206,12 @@ of all 84 supports is met, by a single DEEP meeter (depth ≥ 0.30 in 296 of 486
 K0-FREE teleport hypothesis exactly, and no crowd-weighted row can price it. Worse, at depth 0 every Trump image
 realises nine corner incidences against a guaranteed budget of eight (its tangent squares count), so the root crowd
 LP can never pass at depth 0, and at depths 0.05–0.1 the measured incidence rate c ≥ B in 100 of 101 runs — no
-weight e can kill. Incidental positive: a plain warm re-solve certified a cell A99 had left open; a warm re-solve
-pass over A99's open cells is running. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
+weight e can kill. **The cheap control beats the mechanism (A115 T4, `71a5b20b`): a plain 240 s warm re-solve from each cell's
+stored rows and atoms, no rows added, certifies 10 of the 55 open k0 cells reached — 7 of A99's plain level-1 cells,
+two of them never run before — for 5.1 CPU-h, removing 300–700 CPU-h from A99's frontier.** The stored node results
+were simply row-generation-incomplete. Four cells are CONVERGED-alive (τ = budget, minmass 1, converged): no LP time
+kills them, they need a different hypothesis — the two-meeter cover (A118 T4) is the candidate. A 900 s stage with
+witness feedback on the 36 remaining kill-candidates and the never-run level-1 cells is running. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
 has an unlocked intruder — the drain theorem; the hook/chain formulas are one-wall tools with 4 → ⌈√n⌉.*
 
 ---

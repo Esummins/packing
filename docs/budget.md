@@ -5,7 +5,7 @@ its provenance, and the date; nothing else in the repo quotes a total without po
 (the PI's convention). Machine: i7-12700K, 6 usable LP slots with BLAS pinned; "wall-days at 5" assumes five
 workers.
 
-Last updated: **2026-09-06 21:30**.
+Last updated: **2026-09-07 00:30**.
 
 ## A. The total
 
@@ -14,7 +14,7 @@ Last updated: **2026-09-06 21:30**.
 | A57 window trees, k5_11 + k5_16 | ~1,400 open boxes across levels 1–4, tail measured to termination (level-4 descent 0 of 30) | **1,250 CPU-h** (≈ 52 CPU-days) | 1,150–1,600 | **10–11** (13.3 without trimming; 19.6 without the tight core; 27 at the 95% tail bound) | A96 `e68d8dbc` (trimming projection), `5fd0e287` (tail), `761513f5` (tight core) | LP-time re-check of unconverged "alive" nodes (28/46 were not alive); load-path branching (A111/A112); trimmed-bin LP strength (A96 re-solves running) |
 | Window stragglers | k5_02, k5_03 (partial), k5_12, k5_13 (running); **k6 and up all full-window** | **15 CPU-h** | 8–25 | 0.15 | A114 `9ef80bfa` (k6_07, k6_23, k6_27 closed for 3 CPU-h; slab cost 340 s per 10⁻³ of side for k5_03), A61 pass 5 | slab sweeps running (cap 15 CPU-h) |
 | Protected tier, 15 classes excl. k0_00 | conditioning trees per exact stratum; trump5's residual tree | **3,800 CPU-h** | 2,900–6,300 | 32 | A100 `a100_projection.json` (2026-09-05) | tight core + trimming untested here (same box/pin geometry, expect a similar fraction); η-gating already in the number |
-| k0_00 | the frame residue; tree at 9,300–21,700 CPU-h, or one theorem | **theorem route: 0** / tree route **15,000 CPU-h** | 9,300–21,700 | 0 / 125 | A99 `99985b76`; LOCK-FREE⁺ evidence A104 `af6456e1`; A113 `6409396b` | LOCK-FREE⁺(< 4); dual-guided re-branching on the slot the support keeps occupying (A113: the un-killable cells' supports are 2–6-slot partial skeletons of near-critical shadows; the cell's own box distance to the manifold predicts nothing, the support does); the k0 tree has zero logic kills today |
+| k0_00 | the frame residue; tree at 9,300–21,700 CPU-h, or one theorem — **first real reduction: a 5 CPU-h warm re-solve pass (A115 T4 `71a5b20b`) certified 7 of A99's level-1 cells, removing 300–700 CPU-h (59–138× return); continuation running** | **theorem route: 0** / tree route **14,500 CPU-h** | 8,600–21,400 | 0 / 120 | A99 `99985b76`; LOCK-FREE⁺ evidence A104 `af6456e1`; A113 `6409396b` | LOCK-FREE⁺(< 4); dual-guided re-branching on the slot the support keeps occupying (A113: the un-killable cells' supports are 2–6-slot partial skeletons of near-critical shadows; the cell's own box distance to the manifold predicts nothing, the support does); the k0 tree has zero logic kills today |
 | **Total, theorem route** | | **≈ 5,100 CPU-h** | 4,100–8,000 | **≈ 42** | | |
 | **Total, tree route** | | **≈ 20,000 CPU-h** | 13,000–30,000 | **≈ 170** | | |
 | PI target | | 400 CPU-h | | 3 | | |
