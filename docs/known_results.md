@@ -58,6 +58,25 @@ file is the record of truth for claims, LOG.md is the record of events.
     `exactiv.py` in Lean — or, cheaper, a certificate re-emitted in `t = tan(θ/2)`, where cos and sin are
     RATIONAL. The leaf data is emitted as ONE STRING PER LEAF: at 10⁵–10⁶ coefficients the ELABORATOR, not the
     kernel, is the wall.
+16b'. LEAN  ADDENDUM to 16b (A133, 2026-09-07): the local certificate RE-EMITTED with the tilt in
+    `t = tan(θ/2)`, Lean's own tilt parameter — A126's Route B, carried out. `cos θ = (1−t²)/(1+t²)` and
+    `sin θ = 2t/(1+t²)` are RATIONAL, so every enclosure a local certificate needs is the exact range of a
+    rational function over a rational cell: **no π, no Taylor series, no dyadic interval kernel anywhere in
+    the pipeline**, and `w = |cos Δ| + |sin Δ|` is bounded below by its two SMOOTH branches `cos Δ ± sin Δ`
+    on the whole cell, which retires the one step (`exactiv.kink_in`, locating the `π/2` kink) where a
+    rigorous `π` was unavoidable. All SEVEN of A119's neighbourhoods and THREE of A125's S33 re-emit DEAD and
+    re-check VALID under an independent rational checker with no early return — S07 (0.1, 40°) 2 140 leaves
+    against A119's 2 302, S02 (0.2, 10°) 16 406 against 32 570; 10 certificates, 25.4 MB, 8.5 min of
+    generation, and every one of the 610 000 emitted rows verified IMPLIED by a row the checker derived
+    itself. The Lean side (`LocalCertT.lean`, axiom-clean, `lake build` 18.5 s) has the exact `cosT`/`sinT`
+    enclosures, the kink-free `w` branches, a decidable POSITIVITY CERTIFICATE
+    (`p = Σ c_k (X−a)^k (b−X)^{n−k}`, `c_k ≥ 0`) that replaces the trigonometric kernel outright, and (C1)
+    of `CertCover` — the tilt cover — DISCHARGED. `CertCover` itself is NOT yet discharged: (C2) the
+    selection cover, (C3) Lemma RELAX and (C4) the variable map remain, but they are now pure reflection over
+    rational data with no transcendental content, priced in
+    `attempts/A133-tan-half-emission/notes/lean.md`. Second effect, easy to miss: the certificate's LP tilt
+    variable is now Lean's own `t`, so the `arctan` step that would have sat between `LocalHyp` and any
+    θ-certificate — whatever the quality of the trig kernel — is gone.
 16a. CAVEAT (A88, 2026-09-03): A31's contact-type menu omits same-class corner-corner point kisses (Trump
     has one); planarity (L4) is FALSE on the ACTIVE contact graph when squares kiss at a point. Counts over
     the kiss-free SUPPORT graph stand; no proof step may assume planarity of the active graph. The

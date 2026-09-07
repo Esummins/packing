@@ -5343,7 +5343,12 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   3.877092331 → 3.877108392 (margin over `s0` ×3), S07 (0.2, 10°) 2 920 vs 3 168,
   S02 (0.2, 10°) **16 406 vs 32 570**, S02 (0.1, 10°) 3 808 vs 6 878. Ten certificates, 36 986
   leaves, 569 449 rows, **24.5 MB**, **8.5 min** of generation and **3.1 min** of independent
-  checking, zero unresolved nodes. Envelope tightness measured second order: the
+  checking, zero unresolved nodes. Control (`control133.py`, 4 leaves per certificate per
+  mutation): `zero-y` 40/40, `halve-y` 28/28 (rays skipped — halving a positive ray bound keeps it
+  positive), `negate-y` 40/40, `widen-box` 40/40, `bump-k` 40/40, `env-h` 40/40, `env-w` 40/40,
+  `drop-leaf` 40/40 rejected, `drop-row` 21/40 (informational: a leaf with slack survives losing a
+  row), and **100 000 drawn → 100 000 tested → 0 hits** on the survivor count. Envelope tightness
+  measured second order: the
   `sin(θ(t) − θ(t*))` enclosure is `≤ 0.23 h²` wide and the better of the two `w` branches within
   `2.3 h²` of `w`. Where a cell straddles `θ = 0` (S02's `BR(0,1)`, S33's `f0`) part of the leaf
   reduction is the clip to the fundamental domain — which makes `N` smaller, the sound direction,
