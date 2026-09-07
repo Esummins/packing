@@ -4876,3 +4876,39 @@ record was kept. Report: `attempts/A115-k0-corner-rows/notes/t5_report.md`.
   the SENTINEL path, so unlike 2026-09-06 no in-flight work was discarded. Writes: attempts/A57-shadow-trees/** (results,
   logs, certs, PAUSED.md v2), attempts/A96-a57-parametric/results/recheck96.jsonl + its logs, the registry row and this
   entry.
+
+## 2026-09-07 — A120-no-side-runner, continuation (Opus chore) — stopped by A123's pause sentinel, not by the cap; certifier default measured
+- Coordinator's continuation: the 26 unprocessed in-N targets in cone-value order with **certification at rounds 6 from
+  the start** (A120's own finding: at a 0.3% certificate margin `--rounds 1` is not enough), then the open NO children of
+  the partial nodes at rounds 6; fresh 15 CPU-h cap, controls not repeated, same tags, ledger appended.
+- **IT RAN 2.06 CPU-h AND STOPPED ITSELF.** At 07:57 the A123 owner wrote `attempts/A57-shadow-trees/PAUSE` ("A123 night
+  shift ended 2026-09-07 08:00 PDT ... scheduled end of the night's compute window"). `pausegate.paused()` checks BOTH
+  A57's and A96's sentinels, so both A120 workers stopped **between nodes** with every finished node recorded -- the
+  sentinel path working as designed, not a kill. **The sentinel is another owner's control file: left in place, nothing
+  deleted or bypassed**, and the second phase (the open NO children at rounds 6) was NOT launched because it would stop
+  on the same check. Net: 2 more targets (`Y1099`, `Y1116`, both level 1) -> **11 of 35 processed, still 4 CLOSED, 7
+  OPEN, 24 not run**, all resumable on (cls, id). Cones removed unchanged: 4 x 20.77 = 83.1 A57 nodes = 5.6-6.7 CPU-h
+  off the 10-11 wall-day schedule.
+- **THE CERTIFIER DEFAULT, MEASURED — the number the next owner asked for.** `certify.py` returns on the FIRST PASS, so
+  extra rounds are free on a child that certifies at once and are the only thing that converts one whose first emission
+  is not coverable. Over all 43 certification attempts (21 PASS / 9 FAIL / 13 CAP), the round the certificate actually
+  came out at (0-based, 0 = the very first emission): **0:5, 1:6, 2:4, 3:2, 4:3, 5:1, 6+:0**; cumulative fraction of
+  passes 0.24 / 0.52 / 0.71 / 0.81 / 0.95 / 1.00. Wall seconds PASS n=21 min 3.6 p50 568 p75 1207 p90 1832 **max 2470**
+  total 15,646; FAIL n=9 p50 375 max 3385; CAP n=13 p50 420 max 3600 (right-censored, never a verdict).
+  **RECOMMENDED DEFAULT: `--rounds 6`, hard wall 2600 s, `--time_limit 420`** -- nothing observed passed later than
+  round 5 or later than 2470 s, so that wall censors nothing seen, while `--rounds 1` would have taken only 52% of the
+  passes and `--rounds 3` 81%. The generosity is bounded by the wall and every capped attempt is recorded as CAP.
+- **A NEGATIVE WORTH RECORDING: survivor count does NOT track distance from the S02 minimum.** Across the 11 processed
+  nodes `Y0345` at dmax = 0.0116 has all four NO children as GENUINE survivors (converged, eta = 0) while `Y0637`,
+  `Y0997`, `Y0709` at dmax = 0.0127 have none and close outright. 11 of 44 children are now genuine survivors,
+  concentrated in four nodes (`Y0345` 4, `Y1116` 4, `Y1099` 2, `Y0973` 1); those cannot be closed by this cover at s0 at
+  any certifier budget, and `Y1116/NO1` is the first child with eta strictly POSITIVE (+0.1176). So the residue this
+  cover leaves is a property of the node, not of its distance to the anchor -- guiding on dmax would not have helped.
+- LEDGER `attempts/A96-a57-parametric/results/a120_closures.jsonl` is now **append-with-revision**: every row carries
+  `revision` and `generated`, only rows that actually changed are appended (rev 2 added the two changed rows; a re-run
+  that changes nothing appends nothing), and **the reader takes the LAST row for each id**. 37 rows, 35 ids.
+- Cumulative over both sessions: 16.4 CPU-h of process wall (14.36 in run 1 under its own 15 CPU-h cap, 2.06 in the
+  continuation under a fresh one), 15,080 s of LP against 34,155 s under a flat 900 s cap (factor 2.26), 41,443 s of
+  certifier. Discipline unchanged: <= 2 BLAS-pinned processes, PYTHONDONTWRITEBYTECODE=1, memory gate before every LP
+  and certificate, nothing deleted, READ-ONLY on every campaign, no campaign driver launched, no sentinel created or
+  removed.

@@ -198,3 +198,48 @@ inside the class boxes** (0 misses, max round-trip error 0.0). A107's `struct_op
 set), and A5 reproduces A116's `t3_consumer` `dmax`/`tmax` per node exactly. So the construction —
 the soundness-adjacent half of this attempt — is settled for all 35; only the LP/certifier half is
 capped at 9.
+
+## 9. Continuation (2026-09-07 07:05–08:09): stopped by the sentinel, not by the cap
+
+Coordinator's continuation: the 26 unprocessed targets in cone-value order with **certification at
+rounds 6 from the start**, then the open NO children of the partial nodes at rounds 6; fresh
+15 CPU-h cap, controls not repeated, same tags, ledger appended.
+
+**It ran for 2.06 CPU-h and then stopped itself.** At 07:57 the owner of A123 wrote
+`attempts/A57-shadow-trees/PAUSE` ("A123 night shift ended 2026-09-07 08:00 PDT … scheduled end of
+the night's compute window"). `pausegate.paused()` checks **both** A57's and A96's sentinels, so
+both A120 workers stopped **between nodes** with every finished node recorded — the sentinel path
+working exactly as designed, not a kill. The sentinel is another owner's control file: it was left
+in place, nothing was deleted or bypassed, and the second phase (the open NO children at rounds 6)
+was **not launched**, because it would stop on the same check.
+
+Net: 2 more targets (`Y1099`, `Y1116`, both level 1) → **11 of 35 processed, still 4 CLOSED, 7
+OPEN, 24 not run**, all resumable on `(cls, id)`. Ledger `a120_closures.jsonl` is now
+append-with-revision (rev 2 added the two changed rows; a re-run that changes nothing appends
+nothing; **the reader takes the last row for each id**).
+
+**The rounds-6-from-the-start change paid, and here is the distribution the next owner needs.**
+`certify.py` returns on the FIRST PASS, so extra rounds are free on a child that certifies at once
+and are the only thing that converts one whose first emission is not coverable. Over all 43
+certification attempts (21 PASS, 9 FAIL, 13 CAP), the **round the certificate actually came out at**
+(0-based, 0 = the very first emission):
+
+| passing round | 0 | 1 | 2 | 3 | 4 | 5 | 6+ |
+|---|---|---|---|---|---|---|---|
+| passes | 5 | 6 | 4 | 2 | 3 | 1 | **0** |
+| cumulative fraction | 0.24 | 0.52 | 0.71 | 0.81 | 0.95 | 1.00 | 1.00 |
+
+Wall seconds: PASS n = 21, min 3.6, p50 568, p75 1207, p90 1832, **max 2470**, total 15 646 s;
+FAIL n = 9, p50 375, max 3385; CAP n = 13, p50 420, max 3600 (right-censored, never a verdict).
+
+**Recommended default:** `--rounds 6` with a hard wall of **2600 s** and `--time_limit 420`.
+Nothing observed passed later than round 5 or later than 2470 s, so that wall censors nothing seen;
+`--rounds 1` would have taken only 52 % of the passes and `--rounds 3` 81 %. The cost of the
+generosity is bounded by the wall, and every capped attempt is recorded as CAP.
+
+**A negative worth recording: survivor count does not track distance from the S02 minimum.**
+Across the 11 processed nodes, `Y0345` at `dmax = 0.0116` has all four NO children as genuine
+survivors (converged, η = 0) while `Y0637`, `Y0997` and `Y0709` at `dmax = 0.0127` have none and
+close outright. 11 of 44 children are now genuine survivors, concentrated in three nodes
+(`Y0345` 4, `Y1116` 4, `Y1099` 2, `Y0973` 1) — those nodes cannot be closed by this cover at s₀ at
+any certifier budget, and `Y1116/NO1` is the first child with η **positive** (+0.1176).

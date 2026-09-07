@@ -1,0 +1,23 @@
+A120 shard 0/2: 18 nodes, N = S02_k5_11_r0.20_rho10, cpu_cap 16200 s
+  [cache] k5_11_interior_Y0230             CLOSED
+  [cache] k5_11_interior_Y0345             OPEN
+  [cache] k5_11_interior_Y0709             CLOSED
+  [cache] k5_11_interior_Y0997             CLOSED
+  [cache] k5_11_interior_Y1075             OPEN
+  k5_11_interior_Y1116             NO0 LP stage2 tau=5.000000 eta=+0.000000 conv=False (1009s; flat-900 1009s)
+  k5_11_interior_Y1116             NO0 ALIVE
+  k5_11_interior_Y1116             NO1 LP stage2 tau=5.101124 eta=+0.101124 conv=False (1080s; flat-900 1080s)
+  k5_11_interior_Y1116             NO1 ALIVE
+  k5_11_interior_Y1116             NO2 LP stage2 tau=5.117647 eta=+0.117647 conv=False (1137s; flat-900 1137s)
+  k5_11_interior_Y1116             NO2 ALIVE
+  k5_11_interior_Y1116             NO3 LP stage2 tau=5.000000 eta=-0.000000 conv=True (478s; flat-900 478s)
+  k5_11_interior_Y1116             NO3 ALIVE
+  k5_11_interior_Y1116             OPEN  (LP 3704 s, cert 0 s)  children=['ALIVE', 'ALIVE', 'ALIVE', 'ALIVE']
+PAUSE sentinel set (A123 night shift ended 2026-09-07 08:00 PDT (Opus owner, one-night campaign).
+
+Scheduled end of the night's compute window. Drivers stop BETWEEN nodes, so the in-flight
+node of each worker finishes and is recorded -- this is the sentinel path, not a kill.
+
+Stopped: tree57 shards k5_11 s0, k5_11 s1, k5_16 s1, and recheck96 --trimmed.
+(k5_16 s0 was already stopped at 04:01 -- deterministic wedge on ) -- stopping cleanly between nodes
+shard 0 done: 3764 s, 6 nodes: [["k5_11_interior_Y0230", "CLOSED"], ["k5_11_interior_Y0345", "OPEN"], ["k5_11_interior_Y0709", "CLOSED"], ["k5_11_interior_Y0997", "CLOSED"], ["k5_11_interior_Y1075", "OPEN"], ["k5_11_interior_Y1116", "OPEN"]]

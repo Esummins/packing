@@ -86,6 +86,19 @@ def main():
     t0 = time.time()
     promoted = 0
     for (r, k, c, eta) in cands:
+        # Do not redo work a first attempt has already settled.  A FAIL at >= these rounds is a
+        # real refusal of the frozen verifier and more of the same loop will not change it; a CAP
+        # is right-censored, so it is retried only when this pass offers a STRICTLY larger wall.
+        first = c.get("cert") or {}
+        fr = first.get("rounds") or 0
+        if first.get("result") == "FAIL" and fr >= a.rounds:
+            log("  %-32s %s skip: FAIL already at rounds %d" % (r["id"], k, fr))
+            continue
+        if (first.get("result") == "CAP" and fr >= a.rounds
+                and (first.get("wall_cap_s") or 0) >= a.cert_wall):
+            log("  %-32s %s skip: CAP at rounds %d with wall %.0f s (no larger wall offered)"
+                % (r["id"], k, fr, first.get("wall_cap_s") or 0))
+            continue
         if A.pausegate.paused():
             log("PAUSE sentinel set -- stopping cleanly")
             break

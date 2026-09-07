@@ -60,6 +60,8 @@ def main():
                     help="measured wall of every A120 process (the true CPU-h against the cap; "
                          "the per-node LP/cert seconds do not include node setup, the soundness "
                          "sampling, warm-start loading, or work lost when a run was restarted)")
+    ap.add_argument("--sessions", default="",
+                    help="label:wall_s pairs, comma-separated -- each session has its own CPU cap")
     ap.add_argument("--extra_cpu_s", type=float, default=0.0,
                     help="CPU seconds spent outside the node records (T2 controls etc.)")
     a = ap.parse_args()
@@ -159,6 +161,83 @@ def main():
               "budget and no certifier time can change that; a child with eta <= -1e-3 whose "
               "certificate FAILed or was CAPped is a certifier shortfall, not a survivor"))
 
+    # ---- THE CERTIFIER ROUNDS/TIME DISTRIBUTION (what the next owner needs to set a default).
+    # `certify.py` writes <tag>.certify.json with one entry per witness-feedback round and returns
+    # on the FIRST PASS, so the length of that list IS the round the certificate came out at
+    # (0-based), and extra rounds cost nothing on a child that certifies at once.
+    cert_rows = []
+    for r in recs:
+        for k, c in sorted(r["children"].items()):
+            for which in ("cert", "cert_retry"):
+                cc = c.get(which)
+                if not cc:
+                    continue
+                tag = cc.get("tag")
+                passing = used = None
+                cj = os.path.join(A.CERTS, (tag or "") + ".certify.json")
+                if tag and os.path.exists(cj):
+                    try:
+                        rl = A.jload(cj).get("rounds") or []
+                        used = len(rl)
+                        if cc.get("result") == "PASS" and rl:
+                            passing = rl[-1].get("round")
+                    except Exception:
+                        pass
+                cert_rows.append(dict(
+                    node=r["id"], child=k, attempt=which, tag=tag,
+                    rounds_allowed=cc.get("rounds"), wall_cap_s=cc.get("wall_cap_s"),
+                    result=cc.get("result"), seconds=cc.get("seconds"),
+                    rounds_run=used, passing_round=passing,
+                    eta=(c.get("lp") or {}).get("eta"),
+                    minmass=(c.get("lp") or {}).get("minmass"),
+                    converged=(c.get("lp") or {}).get("converged")))
+    passes = [x for x in cert_rows if x["result"] == "PASS"]
+    fails = [x for x in cert_rows if x["result"] == "FAIL"]
+    caps = [x for x in cert_rows if x["result"] == "CAP"]
+
+    def hist(xs, key):
+        h = {}
+        for x in xs:
+            h[str(x.get(key))] = h.get(str(x.get(key)), 0) + 1
+        return dict(sorted(h.items()))
+
+    def quant(vs):
+        v = sorted(z for z in vs if z is not None)
+        if not v:
+            return None
+        def q(p):
+            return round(v[min(len(v) - 1, int(p * (len(v) - 1) + 0.5))], 1)
+        return dict(n=len(v), min=round(v[0], 1), p50=q(0.5), p75=q(0.75), p90=q(0.9),
+                    max=round(v[-1], 1), total=round(sum(v), 1))
+    by_round = {}
+    for x in passes:
+        b = by_round.setdefault(str(x["passing_round"]), dict(n=0, seconds=[]))
+        b["n"] += 1
+        b["seconds"].append(x["seconds"])
+    for b in by_round.values():
+        b["seconds"] = quant(b["seconds"])
+    cum, tot = 0, len(passes)
+    cumulative = {}
+    for rr_ in sorted((int(k) for k in by_round if k != "None")):
+        cum += by_round[str(rr_)]["n"]
+        cumulative[str(rr_)] = dict(passes_at_or_below=cum,
+                                    fraction=(round(cum / tot, 3) if tot else None))
+    certifier = dict(
+        attempts=len(cert_rows), passes=len(passes), fails=len(fails), caps=len(caps),
+        passing_round_histogram=hist(passes, "passing_round"),
+        passes_by_round=by_round,
+        cumulative_passes_by_round=cumulative,
+        seconds=dict(pass_=quant([x["seconds"] for x in passes]),
+                     fail=quant([x["seconds"] for x in fails]),
+                     cap=quant([x["seconds"] for x in caps])),
+        rounds_allowed_histogram=hist(cert_rows, "rounds_allowed"),
+        wall_cap_histogram=hist(cert_rows, "wall_cap_s"),
+        rows=cert_rows,
+        note=("certify.py returns on the FIRST PASS, so a higher --rounds is free on a child that "
+              "certifies at once and is the only thing that converts one whose first emission is "
+              "not coverable; `passing_round` is 0-based (0 = the very first emission).  A CAP is "
+              "a right-censored observation, never a verdict."))
+
     # ---- soundness roll-up
     snd = dict(nodes=len(recs), all_ok=all(r["soundness"]["ok"] for r in recs),
                failed=[r["id"] for r in recs if not r["soundness"]["ok"]],
@@ -197,9 +276,16 @@ def main():
                  total_s=round(cpu_s, 1), total_cpu_h=round(cpu_s / 3600.0, 2),
                  process_wall_s=round(a.process_wall_s, 1),
                  process_wall_cpu_h=round(a.process_wall_s / 3600.0, 2),
+                 sessions=[dict(label=x.split(":")[0],
+                                wall_s=float(x.split(":")[1]),
+                                cpu_h=round(float(x.split(":")[1]) / 3600.0, 2),
+                                cap_cpu_h=15.0)
+                           for x in a.sessions.split(",") if ":" in x],
+                 cap_note=("each session had its own 15 CPU-h cap; total_cpu_h and "
+                           "process_wall_cpu_h below are CUMULATIVE over the sessions"),
                  flat900_counterfactual_s=round(flat, 1),
                  protocol_saving_factor=(round(flat / lp, 2) if lp else None),
-                 cap_cpu_h=15.0),
+                 cap_cpu_h_per_session=15.0),
         cones=dict(model=dict(f2=F2, f3=F3, f4=F4, C1=round(CONE[1], 2), C2=round(CONE[2], 2),
                               C3=CONE[3],
                               per_child_seconds=[COST_LO, COST_HI],
@@ -215,7 +301,8 @@ def main():
                    note=("the cone is the A57 subtree the closure removes; it is priced at A96's "
                          "own per-child cost and is a DIRECT saving on the 10-11 wall-day "
                          "schedule, not a re-derivation of it")),
-        children=children, reprice=reprice, soundness=snd, trump_violations=trump)
+        children=children, certifier=certifier, reprice=reprice, soundness=snd,
+        trump_violations=trump)
 
     A.jdump(os.path.join(A.RES, "t3_report.json"), out)
 
@@ -244,15 +331,46 @@ def main():
             no_side_window=A.NO_TAG,
             claim=r.get("claim"),
             source="attempts/A120-no-side-runner (T1 runner, A112 protocol, frozen verify_case.py)"))
-    tmp = led + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as f:
-        for r in rows:
-            f.write(json.dumps(r) + "\n")
-    os.replace(tmp, led)
+    # APPEND, never rewrite: the ledger keeps its history.  Every row carries `revision` and
+    # `generated`; a reader takes the LAST row for each id.  Only rows that actually changed since
+    # the previous revision are appended, so a re-run that changes nothing appends nothing.
+    prev, rev = {}, 0
+    if os.path.exists(led):
+        with open(led, encoding="utf-8") as fh:
+            for ln in fh:
+                ln = ln.strip()
+                if not ln:
+                    continue
+                try:
+                    q = json.loads(ln)
+                except Exception:
+                    continue
+                prev[q.get("id")] = q
+                rev = max(rev, int(q.get("revision", 1)))
+    rev += 1
+    stamp = time.strftime("%Y-%m-%dT%H:%M:%S")
+    changed = []
+    for r in rows:
+        r["revision"] = rev
+        r["generated"] = stamp
+        old_r = {k: v for k, v in (prev.get(r["id"]) or {}).items()
+                 if k not in ("revision", "generated")}
+        new_r = {k: v for k, v in r.items() if k not in ("revision", "generated")}
+        if json.dumps(old_r, sort_keys=True) != json.dumps(new_r, sort_keys=True):
+            changed.append(r)
+    if changed:
+        with open(led, "a", encoding="utf-8") as fh:
+            for r in changed:
+                fh.write(json.dumps(r) + "\n")
+    out["ledger"] = dict(path=os.path.relpath(led, A.ROOT), revision=rev,
+                         rows_appended=len(changed), rows_unchanged=len(rows) - len(changed),
+                         reader_rule="the LAST row for each id is current")
+    A.jdump(os.path.join(A.RES, "t3_report.json"), out)
 
     print(json.dumps(dict(counts=out["counts"], cpu=out["cpu"], cones=out["cones"],
                           children={k: v for k, v in children.items()
                                     if not k.endswith("_detail")},
+                          certifier={k: v for k, v in certifier.items() if k != "rows"},
                           reprice={k: v for k, v in reprice.items() if k != "by_group"},
                           soundness={k: v for k, v in snd.items() if k != "checks"},
                           trump_violations=trump), indent=1))

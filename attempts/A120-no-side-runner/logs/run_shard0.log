@@ -78,3 +78,26 @@
 [03:33:28]     cert NO3                                            CAP (420s)
 [03:33:28]   k5_11_interior_Y1075             NO3 ALIVE
 [03:33:28]   k5_11_interior_Y1075             OPEN  (LP 1050 s, cert 1681 s)  children=['ALIVE', 'ALIVE', 'ALIVE', 'ALIVE']
+[07:05:53] A120 shard 0/2: 18 nodes, N = S02_k5_11_r0.20_rho10, cpu_cap 16200 s
+[07:05:53]   [cache] k5_11_interior_Y0230             CLOSED
+[07:05:53]   [cache] k5_11_interior_Y0345             OPEN
+[07:05:53]   [cache] k5_11_interior_Y0709             CLOSED
+[07:05:53]   [cache] k5_11_interior_Y0997             CLOSED
+[07:05:53]   [cache] k5_11_interior_Y1075             OPEN
+[07:22:57]   k5_11_interior_Y1116             NO0 LP stage2 tau=5.000000 eta=+0.000000 conv=False (1009s; flat-900 1009s)
+[07:22:57]   k5_11_interior_Y1116             NO0 ALIVE
+[07:41:12]   k5_11_interior_Y1116             NO1 LP stage2 tau=5.101124 eta=+0.101124 conv=False (1080s; flat-900 1080s)
+[07:41:12]   k5_11_interior_Y1116             NO1 ALIVE
+[08:00:24]   k5_11_interior_Y1116             NO2 LP stage2 tau=5.117647 eta=+0.117647 conv=False (1137s; flat-900 1137s)
+[08:00:24]   k5_11_interior_Y1116             NO2 ALIVE
+[08:08:37]   k5_11_interior_Y1116             NO3 LP stage2 tau=5.000000 eta=-0.000000 conv=True (478s; flat-900 478s)
+[08:08:37]   k5_11_interior_Y1116             NO3 ALIVE
+[08:08:37]   k5_11_interior_Y1116             OPEN  (LP 3704 s, cert 0 s)  children=['ALIVE', 'ALIVE', 'ALIVE', 'ALIVE']
+[08:08:37] PAUSE sentinel set (A123 night shift ended 2026-09-07 08:00 PDT (Opus owner, one-night campaign).
+
+Scheduled end of the night's compute window. Drivers stop BETWEEN nodes, so the in-flight
+node of each worker finishes and is recorded -- this is the sentinel path, not a kill.
+
+Stopped: tree57 shards k5_11 s0, k5_11 s1, k5_16 s1, and recheck96 --trimmed.
+(k5_16 s0 was already stopped at 04:01 -- deterministic wedge on ) -- stopping cleanly between nodes
+[08:08:37] shard 0 done: 3764 s, 6 nodes: [["k5_11_interior_Y0230", "CLOSED"], ["k5_11_interior_Y0345", "OPEN"], ["k5_11_interior_Y0709", "CLOSED"], ["k5_11_interior_Y0997", "CLOSED"], ["k5_11_interior_Y1075", "OPEN"], ["k5_11_interior_Y1116", "OPEN"]]
