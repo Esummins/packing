@@ -262,7 +262,26 @@ level-3 and 4 A85 nodes, for 15.4 CPU-h in all — 770–1,780 CPU-h off A99's f
 `i` readings from the gallery review certified 14 of 14, seven of them level-1 cells no queue would have reached.**
 Seven cells are converged-alive (τ = budget, minmass 1, converged; one is a Trump-image cell that must be alive): no
 LP time kills them; they are the two-meeter-cover candidates. 34 never-run level-1 cells and most open level-2/3
-cells remain; the pass continues. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
+cells remain; the pass continues. **Complete (A115 T6, `0d4c79fd`, 2026-09-07): 22 of the 216 level-1 cells, 13 level-2, 2
+level-3 and 10 A85/A99 nodes certified for 29.8 CPU-h in all — 1,023–2,372 CPU-h off the frontier; the last five kills
+all came from the 900 s continuation on cells whose 240 s certificate had failed (71 such candidates remain unrun).
+Twelve cells are converged-alive: l1_071/104/124/148/153/158/159, l2_p114_001, l2_p65_101/111, l2_p74_001, s3_far.**
+
+![A128: the residue held under the whole coupled-move menu](../attempts/A128-coupled-moves/results/residue128.svg)
+
+**The coupled-move experiment (A128, `c91ce1a4`, `docs/proofs/drain_sel.md`, after the external review).** Target
+restated as DRAIN-SEL(W): the weighted-Ψ minimiser at each side in W, not every packing below 4, has an intruder with
+a menu move admissible; uniqueness stays with Trump's basin. Box-lemmas proved: a rigid cluster screw and its Gordan
+dual on a neighbourhood, the exchange on a box for all packings, and the two-wall coupling (exact only in the hook
+family, not a box leaf). Measured on the twelve converged-alive supports as near-packings, the K01–K06 supports, the two
+fully-held boundary packings and Trump as canary, on boxes of radius 10⁻³ down to 10⁻⁶, 35 exact interval
+certificates each re-sampled 10⁴ → 10⁴ → 0: the cluster screw certifies nothing that a single square does not at any
+radius; **the exchange is the only coupled move that works where every single-square move fails** (nine corners,
+five at 10⁻³ including the 4.000237 lock's 9° pair and K01's TL); the supply count is vacuous by planarity. Held under
+the whole menu on every box: the 4.001525 lock (above 4), K03, K06 (the S02 pinwheel support), l1_124, and Trump. Below
+4 every hold is a **flush re-fit with margin ≈ 0** — the flush population of A98/A101/A121 seen from the box side — so
+the missing move is not a screw but a non-rigid column-straightening with row-slide, or a depth-2 exchange with
+margin. Not composed; the k0 budget row is unchanged. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
 has an unlocked intruder — the drain theorem; the hook/chain formulas are one-wall tools with 4 → ⌈√n⌉.*
 
 ---
