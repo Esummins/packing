@@ -76,6 +76,32 @@ and the row oracle rebuilds the child's own row set, which differs from the pare
 because the new core deletes rows.  A57 uses **columns-only warm starts** for children —
 A55/k3_ext E3's "atoms are the progress variable", now also the cheap option.)
 
+## SAMPLED CHECKS: REPORT THE SURVIVOR COUNT, NOT THE DRAW COUNT (A96, 2026-09-06; lab-wide)
+
+Any sampled check with an acceptance filter must report **how many samples survived the filter
+and were actually tested**, never how many were drawn. A draw that is rejected before the
+predicate is evaluated is not evidence.
+
+How this was found. A96 checked A119's certified neighbourhoods by drawing configurations from
+the exported boxes and looking for one that is pairwise-disjoint at a side ≤ s0. The first run
+reported **20 000 samples, 0 hits** — and was worthless: the containment filter rejected 99.97 %
+of draws, so roughly **30** configurations were ever tested. The number was true and meaningless.
+(The filter itself was wrong too: a pin's slack box can push a pinned square a hair outside
+`[0,s]²`, and a pinned square is inside the container by assumption, so the slack must be
+intersected with containment rather than used to reject the draw.)
+
+Corrected, the same check tested 13 289 configurations across five neighbourhoods with zero hits,
+and the neighbourhood actually deployed against was re-run alone to clear the bar on its own:
+`S02_k5_11_r0.20_rho10`, **73 642 drawn → 10 500 tested → 0 hits**.
+
+Rules:
+* quote `drawn → tested → hits`, all three;
+* a per-N (per-case) bar must be met by the case you rely on, not only in aggregate — an
+  aggregate that clears 10⁴ can hide a case with 55;
+* if the acceptance rate is low, say so: it is a fact about the sampler, and usually a sign the
+  filter is mis-modelling the hypothesis;
+* this applies retrospectively to any "10⁴-sample confirmed" claim quoted as a draw count.
+
 ## EMISSION IS NONDETERMINISTIC; VERIFICATION IS NOT (A112, recorded by A96 2026-09-06)
 
 `certify.py --loop_cols` re-solves the node LP under a **time limit** before emitting, so which
