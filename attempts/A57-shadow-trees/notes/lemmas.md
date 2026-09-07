@@ -76,6 +76,24 @@ and the row oracle rebuilds the child's own row set, which differs from the pare
 because the new core deletes rows.  A57 uses **columns-only warm starts** for children —
 A55/k3_ext E3's "atoms are the progress variable", now also the cheap option.)
 
+## EMISSION IS NONDETERMINISTIC; VERIFICATION IS NOT (A112, recorded by A96 2026-09-06)
+
+`certify.py --loop_cols` re-solves the node LP under a **time limit** before emitting, so which
+columns are in the LP when the clock runs out depends on wall time, machine load and the number
+of concurrent workers. **A certificate's atom set is therefore wall-clock dependent**: emitting
+the same node twice can produce two different (both valid) certificates, and an emission that
+succeeded once may fail on a loaded box, or vice versa.
+
+The frozen verifiers are the opposite: `verify_case.py` / `verify_param.py` are exact and
+deterministic — the same certificate file always yields the same verdict.
+
+**Consequence: reproduce kills by replaying certificates, never by re-emitting.** A kill is
+reproduced by running the frozen verifier over the stored certificate. Re-running the emitter is
+not a reproduction, and a re-emission that fails is not evidence that the recorded kill was
+wrong. Anything comparing two campaigns must compare certificate files, not emitter outcomes —
+and any benchmark that varies concurrency (as A96's contention legs did) changes emission
+outcomes as a side effect, which is a confound to control for, not a signal.
+
 ## T5′ [M] — the TIGHT common-inscribed core (A96, 2026-09-05, deployed)
 
 **The kill certificate is unchanged.** T5 below is the rule, and its Lean form
