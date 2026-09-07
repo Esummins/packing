@@ -4837,3 +4837,42 @@ record was kept. Report: `attempts/A115-k0-corner-rows/notes/t5_report.md`.
   checked between nodes. Writes: `attempts/A120-no-side-runner/**`, the NEW file
   `attempts/A96-a57-parametric/results/a120_closures.jsonl` (35 rows, one per target), one clause on `C.A57` in
   `lean/depgraph.json`, the registry row and this entry.
+- A123 NIGHT SHIFT (A57/A96 resumed 2026-09-07 00:42-08:00; T5''s FIRST LIVE TEST AT EMISSION). The brief's block (6
+  shards + 2 deepens + the A96 drivers) did not fit: the box already floated at 17-20 python processes from 8 other
+  campaigns against a <= 16 cap, so the night ran re-scoped at ~24 with 3 (+1) tree57 G1 shards and recheck96 --trimmed
+  at one process. No deepens, no param96/resolve96/neighbours96, no select96, no scaler; shadow scheduling and the
+  region-tree option stayed OFF. 296 new level-1 children: 149 PASS, 90 T5' logic kills, 45 ALIVE-at-LP, 9 FAIL, 0
+  parent-box. Soundness checks clean (max core half-side 0.398, theta strictly in [0,90], no stored verdict contradicted).
+- T5'' LIVE FIRE RATE = 19/296 = 6.42% (3 full kills + 16 trimmed bins, 1 a two-piece split). The offline control
+  projected 159/2403 = 6.62% "boxes gain an empty surviving bin"; the TOUCH rate matches, but only 1.01% (3/296) were
+  fully emptied, so the offline figure most likely counted boxes touched rather than emptied -- re-run the v1 control with
+  the two categories separated. The useful finding is the shape: 15 of the 16 trimmed bins came out ALIVE-at-LP anyway and
+  12 of 16 trims bite at the tilt extremes (theta anchored at 0 or 90). **T5'' buys LP tractability, not kills.**
+  LP/certify walls tonight are CONTENDED (8 other campaigns, ~70-100% CPU) and must not be compared with offline figures;
+  the fire rate is geometry, computed in build_children before any LP, so it is unaffected.
+- MUST-FIX BEFORE THE NEXT RESUME: trim_excluded / trim_from are built in tree57.build_children (:177, :184-185) and are
+  NEVER written to disk -- absent from every .jsonl, node .json, .report.json and .certify.json. So (a) the witness ledger
+  for each excluded tilt interval never reaches disk and the node's coverage claim is not auditable from the results, and
+  (b) a single-piece trim keeps its plain id and pin="ok", leaving NO marker at all: tonight's 16 trims had to be recovered
+  geometrically by flagging theta widths outside the 8 canonical cover widths. NOT a soundness error (a trimmed child is a
+  sub-box, its certificate is the ordinary one, frozen chain untouched, v1 control 618/618) -- an auditability gap.
+- BEST YIELD OF THE NIGHT: recheck96 --trimmed certified 11 KILLS FROM 23 previously-ALIVE nodes (47.8%) at a 900 s cap on
+  the trimmed bin, 7.28 CPU-h total, 6 converged. Against 149 certified kills from 296 fresh emissions across three shards
+  over the same window, the re-check is far and away the better use of a constrained process budget. 360 of 383 queued
+  ALIVE nodes remain un-rechecked; run this before opening new shards.
+- Incidents: k5_16 shard 0 wedged on k5_16_interior_Y0381 (single-thread 100% spin, no output for 2h08m after the LP hit
+  its cap, where 101 of 102 prior "time limit" events emitted DONE within 758 s); relaunched via launch.ps1, it re-picked
+  the same node and reproduced the hang exactly, so the shard was stopped at 04:01 -- Y0381 needs a debugger before that
+  shard is resumed. arms96 --arm C was reported a stray but was NOT: it had 31/32 rows and no done marker, and the
+  three-arm report (37eae961) covers only n=26 with Y1135 flagged "not yet reached"; it finished on its own at 00:44:42
+  with 32/32, and on the complete arm C's strict kills {Y1002, Y0817, Y1099} are ALL killed by B while Y0183 is a kill in
+  B and a knife in C -- ZERO C-only kills, so the verifier_v2_rowfilter gate is not met and verifier-v2 stays shelved.
+- Launcher corrections recorded in PAUSED.md v2 so they are not inherited again: launch.ps1 has NO pidfile gate (it
+  Start-Process's unconditionally then writes the pidfile, so a second call double-launches; the gate is in scaleup.ps1);
+  all 21 A57 pidfiles were stale; pausegate.py exists only under A57's code dir, not A96's.
+- Discipline: PYTHONDONTWRITEBYTECODE=1, BLAS pinned by the launchers, frozen verifiers untouched, no recursive deletes,
+  no pidfile deleted, no other campaign's state touched (the reaper is scoped by owner_marker="A57-shadow-trees" and left
+  A112's certify child alone), free physical never below 10.4 GB, 8 hourly reaps with zero orphans found. The pause used
+  the SENTINEL path, so unlike 2026-09-06 no in-flight work was discarded. Writes: attempts/A57-shadow-trees/** (results,
+  logs, certs, PAUSED.md v2), attempts/A96-a57-parametric/results/recheck96.jsonl + its logs, the registry row and this
+  entry.
