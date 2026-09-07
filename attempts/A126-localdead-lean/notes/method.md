@@ -1,4 +1,4 @@
-# A126 — method (what the code does, and the two engineering findings)
+# A126 — method (what the code does, and the four findings)
 
 ## Discipline
 
@@ -12,7 +12,9 @@
   consumed it is re-derived there (`cover_pair'`).
 * One `lake build` at a time, through A119's `lakeb.py` route (repo-wide lock, BELOW-NORMAL
   priority); at most two Python processes; `PYTHONDONTWRITEBYTECODE=1`; nothing deleted
-  recursively.
+  recursively.  One build was killed mid-run (a change to `LocalCert.lean` had invalidated
+  its trace anyway); its lock file was cleared only after confirming that no `lake` or `lean`
+  process remained.
 * Every number that reaches Lean is re-verified in exact rational arithmetic on the way out
   (`extract126.py`) and again after encoding (`gen_lean126.py`'s round trip), by code that does
   not share the generator's arithmetic.
