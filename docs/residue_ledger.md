@@ -249,8 +249,12 @@ weight e can kill. **The cheap control beats the mechanism (A115 T4, `71a5b20b`)
 stored rows and atoms, no rows added, certifies 10 of the 55 open k0 cells reached — 7 of A99's plain level-1 cells,
 two of them never run before — for 5.1 CPU-h, removing 300–700 CPU-h from A99's frontier.** The stored node results
 were simply row-generation-incomplete. Four cells are CONVERGED-alive (τ = budget, minmass 1, converged): no LP time
-kills them, they need a different hypothesis — the two-meeter cover (A118 T4) is the candidate. A 900 s stage with
-witness feedback on the 36 remaining kill-candidates and the never-run level-1 cells is running. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
+kills them, they need a different hypothesis — the two-meeter cover (A118 T4) is the candidate. **Continued (A115 T5, `e7a53299`): 17 of the 216 level-1 root cells are now certified dead (16 new), plus 6 level-2, 1
+level-3 and 4 A85 nodes, for 15.4 CPU-h in all — 770–1,780 CPU-h off A99's frontier, a 48–111× return; the PI's 14
+`i` readings from the gallery review certified 14 of 14, seven of them level-1 cells no queue would have reached.**
+Seven cells are converged-alive (τ = budget, minmass 1, converged; one is a Trump-image cell that must be alive): no
+LP time kills them; they are the two-meeter-cover candidates. 34 never-run level-1 cells and most open level-2/3
+cells remain; the pass continues. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
 has an unlocked intruder — the drain theorem; the hook/chain formulas are one-wall tools with 4 → ⌈√n⌉.*
 
 ---
