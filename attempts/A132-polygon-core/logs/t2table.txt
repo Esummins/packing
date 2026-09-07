@@ -1,0 +1,25 @@
+node                            L       cls    w+ |  tau_axis c     s |  tau_poly c     s |  tau_pbox c | verdict                   
+------------------------------------------------------------------------------------------------------------------------------------
+k5_11_interior_Y0036_D07_D00    3  k5_11_G1  2.00 |  5.000000 n   252 |  4.000000 n   246 |             | dead by T5-poly LOGIC     
+k5_11_interior_Y0036_D07_D04    3  k5_11_G1  3.00 |  5.000000 n   339 |  4.200000 n   265 |             | dead by T5-poly LOGIC     
+k5_11_interior_Y0036_D07_D05    3  k5_11_G1  2.00 |  5.000000 n   255 |  4.200000 n   276 |             | dead by T5-poly LOGIC     
+k5_11_interior_Y0186_D00_D00    3  k5_11_G1  3.00 |  5.000000 Y   197 |  4.600000 n   971 |             | no verdict (unconverged)  
+k5_11_interior_Y0588_D06        2  k5_11_G1  5.00 |  5.000000 Y   261 |  4.500000 n   980 |             | no verdict (unconverged)  
+k5_11_interior_Y1110            1  k5_11_G1  5.00 |  5.000000 Y   353 |  4.833333 n   944 |             | no verdict (unconverged)  
+k5_11_interior_Y0871            1  k5_11_G1  4.00 |  5.000000 Y    96 |  4.000000 Y    99 |  4.384615 n | LP-DEAD under K' (cert pend)
+k5_11_interior_Y1038            1  k5_11_G1  4.00 |  5.000000 Y    73 |  4.500000 Y   234 |  5.000000 Y | LP-DEAD under K' (cert pend)
+k5_16_interior_Y0133            1  k5_16_G1  4.00 |  5.000000 n   265 |  5.000000 n   272 |             | no verdict (unconverged)  
+k5_16_interior_Y0281_D03        2  k5_16_G1  4.00 |  5.000000 Y   815 |  4.000000 Y   203 |  4.000000 Y | LP-DEAD under K' (cert pend)
+------------------------------------------------------------------------------------------------------------------------------------
+c = converged (Y/n); s = wall seconds; tau_pbox = polygon core on the CONDITIONED BOX only (pins keep K(a)) -- the attribution arm
+
+verdicts over 10 nodes: {'logic': 3, 'undecided': 4, 'kill': 3}
+pairs where BOTH arms converged: 3  ->  LP-dead under the polygon core: 3  (k5_11_interior_Y0871, k5_11_interior_Y1038, k5_16_interior_Y0281_D03)
+Every such kill is 'LP-dead under polygon core, CERTIFICATE PENDING': the frozen verifier knows only K(a).
+
+attribution (polygon core on the conditioned box only):
+  k5_11_interior_Y0871           tau_pbox 4.384615 conv=False -> inconclusive (unconverged)
+  k5_11_interior_Y1038           tau_pbox 5.000000 conv=True -> kill NEEDS the pin polygon cores (box alone converges back to budget)
+  k5_16_interior_Y0281_D03       tau_pbox 4.000000 conv=True -> the conditioned box ALONE suffices
+
+total in-vitro CPU: 2.61 CPU-h over 28 solves

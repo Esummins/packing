@@ -1339,3 +1339,65 @@ need only be a set contained in every admissible pose, so the rule applies verba
 conditioning tree in the protected tier, to trump5's residual tree, and — with `a_P` replaced by
 the other box's core half-side — to a second conditioned square, which is budget.md §D item 1's
 box-vs-forced-neighbour kill.
+
+## T5⁗ [M] — the POLYGON core (A132, 2026-09-07; measured, not deployed)
+
+**The kill certificate is unchanged, again.** T5's Lean form `core_meet_same_square` takes two
+arbitrary SETS `K ⊆ int Q_i`, `K' ⊆ int Q_j` and concludes `i = j` — nothing in it is about
+squares. T5′ grew the half-side of the square the rule is applied to; T5⁗ drops squareness
+altogether and applies the rule to the largest sound set there is:
+
+    K′(B) = ⋂ over (c, θ) ∈ B of Q(c, θ),
+
+the intersection of the unit square over the whole parameter box. It is convex; it contains
+`K(a_old)` and `K(a_tight)` by definition (both are squares lying in that intersection); for a
+narrow tilt bin it is nearly the whole tilted square. Measured over the 506 alive nodes:
+`area(K′)/area(K(a))` median **1.225**, up to 1.53, and the gain is largest where the tilt bin is
+widest, i.e. at level 1 where the axis core is weakest.
+
+**Certification is by VERTEX, exactly, in rationals.** `K′` is convex, so if every vertex `v` of a
+candidate polygon lies in `Q(c,θ)` for all `(c,θ) ∈ B` then the hull is inside `K′` — *however the
+polygon was found*. With `d = v − c` and `t = tan(θ/2)`, that is
+
+    for each of the 4 corners c of the centre rectangle, and (u,w) = (dx,dy) and (dy,−dx):
+      (1/2 + u)t² − 2wt + (1/2 − u) ≥ 0   and   (1/2 − u)t² + 2wt + (1/2 + u) ≥ 0   on [t0,t1]
+
+— two rational quadratics, decided exactly by their endpoints plus `4AC − B² ≥ 0` when `A > 0` and
+the stationary point is interior. `t0 = t_lo(θ0)`, `t1 = t_hi(θ1)` are the corpus's own
+outward-rounded bounds, so the certified tilt range CONTAINS the box's. Cost 0.07 s per box.
+`attempts/A132-polygon-core/code/polycore.py`; the clipping / shrink / hull that *finds* the
+polygon is unaudited, the vertex test is the proof.
+
+**And for the logic kill Lean never sees a polygon.** The `Nonempty` hypothesis needs one point in
+both cores. That point is rational, and the same vertex test certifies it against BOTH boxes; take
+`K = K' = {w}` in `core_meet_same_square` and the hull, the convexity lemma and the polygon–polygon
+SAT all vanish. The kill certificate is **one rational point and two vertex checks**; the polygon is
+only the search device that finds the point. One new Lean obligation (`checkVertexInPBox_sound`),
+≈1 day. Witness found and exactly certified for **64/64** firing nodes.
+
+**Why no kill can be lost.** `K(a_tight)` is a square contained in every pose of `B`, hence
+contained in `K′(B)`: every T5/T5′ kill is a T5⁗ kill. Control executed, not merely argued:
+**854/854** recorded `KILL-BY-LOGIC` boxes still killed, 0 lost, 0 build errors
+(`attempts/A132-polygon-core/results/control132.json`).
+
+**Yield on the alive population** (506 nodes = A57's 414 ALIVE + A60's 92 refused): fires on **64**,
+of which the deployed T5′ already kills 27 (20 of them recorded in
+`results/superseded_by_tight_core.jsonl`; the other **7 are A60 nodes, where T5′ has never been
+applied at all**) — so **37 new**. Against T5″: 28 of the 34 new A57 kills are boxes whose T5″
+surviving bin is empty in `trim96.json`, 6 are not, and 29 trim96-empties are not T5⁗ kills. The two
+rules are different tests (T5″ subdivides the tilt bin, T5⁗ enlarges the core) and a deployment
+should run both.
+
+**It also moves the LP — which the file predicted it would not.** A placement meeting `int K′(B)`
+overlaps every pose of `B`, i.e. it is *dominated* in A96's sense, so `K′`-pruning of the
+CONDITIONED box is a strict special case of the all-poses row filter A96 measured at zero kills
+(`τ_C − τ_B` median 3.3e−13). But the polygon core also upgrades the **PIN** cores, which that
+filter never covered: for a pin box `K′(P)` is the axis square of half-side 0.49293 against
+`K(a) = 0.48999…`, and pinned squares nearly touch. In vitro (10 alive nodes, both arms, identical
+warm start and oracle, `recheck96`'s node path), **three pairs converged in both arms and all three
+are LP-dead under the polygon core and alive under `K(a)`**: `Y0871` 5.000 → 4.000, `Y1038`
+5.000 → 4.500, `k5_16 Y0281_D03` 5.000 → 4.000. Re-running with the polygon core on the conditioned
+box ONLY, `Y1038` converges back to 5.000 — **that kill lives entirely in the pin cores.** These are
+"LP-dead under polygon core, CERTIFICATE PENDING": the frozen verifier knows only `K(a)`, and the v3
+clause that would close them is specified in `attempts/A132-polygon-core/notes/spec.md`. Caveat of
+record: three converged pairs on nodes selected for the largest offending weight is not a rate.

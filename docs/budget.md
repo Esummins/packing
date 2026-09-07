@@ -96,6 +96,38 @@ merely unconverged at the LP time cap.
    resolver. On the other 5 only the columns move (support 107→5, 1041→5), and which of the two
    happens is **not** predicted by how much is clipped. List, notes and the deployment shape:
    `attempts/A131-pin-clip/notes/{measurement.md, lp_effect.md, deploy.md}`, lemmas.md T5‴.
+   *A132 (`polygon core`, 2026-09-07):* the same move on the OTHER side of the hypothesis — replace
+   the box's inscribed square `K(a)` by `K′(B) = ⋂_{(c,θ)∈B} Q(c,θ)`, the exact intersection of the
+   hypothesis square over the box (convex, certified vertex-by-vertex in exact rationals at 0.07 s
+   per box; median area gain **1.225**, up to 1.53 at level 1). Over all 506 alive nodes (A57's 414
+   + A60's 92) it excludes **22.3% of dual-support columns carrying 35.7% of τ** and **20.5% of the
+   5.7 M-row pool**. Two levers, and BOTH pay. (i) **T5⁗ logic kill** — `K′(B)` meets a pin's
+   `K′(P)` ⇒ node empty, no LP, no certificate, ~850 s plus eight children saved: fires on **64/506**,
+   **37 new** on top of the deployed T5′ (27 the tight core already kills — 20 already recorded, and
+   **7 A60 nodes where T5′ has never been applied**, a free kill for the protected tier). At 34/414 =
+   8.2% on A57, and ASSUMING the alive population's box/pin geometry is representative and each
+   killed alive node would otherwise have been split into eight children at ~850 s, that is ≈**64
+   CPU-h ≈ 1.3 wall-days** on the A57 queue, plus the same fraction on the protected tier, whose
+   box/pin geometry is identical. Cost: **no verifier change and no certificate change** — the kill
+   certificate is one rational point plus two rational vertex checks, `Zones.core_meet_same_square`
+   already takes arbitrary sets, so the only Lean obligation is the decidable vertex test (≈1 day);
+   re-verification of the existing tree: none; positive control 854/854 known logic kills preserved.
+   (ii) **The LP**, which the file predicted was worthless here (a `K′(B)` row drop is a strict
+   special case of A96's all-poses filter, measured at zero kills above): **refuted.** In vitro (10
+   alive nodes, both arms, identical warm start and oracle, recheck96's node path, 2.7 CPU-h) three
+   pairs converged in BOTH arms and **all three are LP-dead under the polygon core and alive under
+   `K(a)`** — `Y0871` 5.000 → 4.000, `Y1038` 5.000 → 4.500, `k5_16 Y0281_D03` 5.000 → 4.000. The
+   attribution arm says why the prediction failed: with `K′` on the CONDITIONED BOX ONLY (A96's
+   scope) `Y1038` converges back to 5.000 — that kill lives entirely in the **pin** polygon cores,
+   which the all-poses filter never covered (T1: 21% of the excluded support weight). These are
+   "LP-dead, CERTIFICATE PENDING"; the v3 clause that would close them (rational polygon–square SAT
+   in the exemption test, ~140 lines + Lean bridge, 4–6 days) is specified in
+   `attempts/A132-polygon-core/notes/spec.md`. **Do not price it off three pairs on nodes selected
+   for the lever** — measure the rate on ~30 unselected alive nodes at a cap both arms converge
+   under (~10 CPU-h) first. Composes with A131's pin-clip in the obvious direction: clip the centre
+   box against the pins, then take `K′` of each surviving sub-box — `B′ ⊆ B ⇒ K′(B) ⊆ K′(B′)`, so
+   the clip strictly enlarges the polygon core, and both are logic-level levers that touch no
+   certificate. `attempts/A132-polygon-core/notes/{measurement.md, spec.md}`, lemmas.md T5⁗.
 2. **The alive population.** Re-run unconverged alive nodes with a longer LP cap before splitting them (A109's 28/46);
    branch on the load path instead of the rattler (A112); both are about not paying eight children for a node that
    was never alive or whose slack sits in squares it does not condition on.

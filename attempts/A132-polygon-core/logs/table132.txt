@@ -1,0 +1,38 @@
+506 nodes
+
+class          lvl    n   areaK   areaP   P/K   sup  sup+     %     w+ w+/tau    pool  pool+     % kill_b kill_t  T5p
+---------------------------------------------------------------------------------------------------------------------
+k5_11_G1         1  137  0.5087  0.6421 1.262  8265  1875  22.7 232.84  0.336 2033293 355439  17.5    105    133   15
+k5_11_G1         2   55  0.7197  0.7840 1.093  1063   526  49.5 136.32  0.496  351251 133253  37.9     52     55   17
+k5_11_G1         3    4  0.8489  0.9131 1.076    23    12  52.2  10.00  0.500   24089   9088  37.7      4      4    3
+k5_16_G1         1  212  0.5087  0.6232 1.225 24546  4903  20.0 351.67  0.329 2844776 552566  19.4    156    206   18
+k5_16_G1         2    4  0.7169  0.8208 1.141    20    13  65.0  13.00  0.650   21493  11847  55.1      4      4    1
+trump5_j0        1   90  0.5087  0.6232 1.225  1965   652  33.2 158.47  0.351  433580 106112  24.5     77     90    9
+trump5_j1        2    4  0.9635  0.9747 1.012    16     7  43.8   7.00  0.438    4116    138   3.4      3      3    1
+---------------------------------------------------------------------------------------------------------------------
+ALL                 506                 1.225 35898  7988  22.3 909.29  0.357 5712598 1168443  20.5    401    495   64
+
+legend: sup = dual-support columns, sup+ = those meeting K' but not K(a); w+ = their weight; pool = rows_all; kill_b = w+ >= tau-(budget-1); kill_t = w+ > tau-budget; T5p = K'(B) meets a pin K'(P)
+
+nodes with ZERO offending support columns: 17 / 506
+offending weight / tau: median 0.400, p90 0.600, max 1.000
+
+the level-3 A57 nodes:
+  k5_11_interior_Y0036_D07_D00   P/K 1.076  support 2/5 w+ 2.000 of tau 5.000  pool 2581/7139
+  k5_11_interior_Y0036_D07_D04   P/K 1.076  support 3/5 w+ 3.000 of tau 5.000  pool 2695/6793
+  k5_11_interior_Y0036_D07_D05   P/K 1.080  support 2/5 w+ 2.000 of tau 5.000  pool 1783/5706
+  k5_11_interior_Y0186_D00_D00   P/K 1.056  support 5/8 w+ 3.000 of tau 5.000  pool 2029/4451
+
+T5-polygon: 64 nodes fire, of which 37 are NEW (pinguard says 'ok' today) and 27 are already killed by the deployed tight-core rule
+  exact rational witness found for 64 / 64 firing nodes
+
+trim96 (2222 boxes): 159 empties, 155 trimmed-not-empty
+  alive A57 nodes also in trim96's corpus: 381
+  alive & trim96-empty (the queued survivors of T5''): 57
+  T5-polygon kills among the alive: 34
+    of those also trim96-empty: 28
+    NEW (not trim96-empty):      6
+  trim96-empty but NOT T5-polygon: 29
+  ids: ['k5_11_interior_Y0036_D07_D05', 'k5_11_interior_Y0154', 'k5_11_interior_Y0178', 'k5_11_interior_Y0188', 'k5_11_interior_Y0220', 'k5_11_interior_Y0231', 'k5_11_interior_Y0253', 'k5_11_interior_Y0262', 'k5_11_interior_Y0273', 'k5_11_interior_Y0276', 'k5_11_interior_Y0345', 'k5_11_interior_Y0373', 'k5_11_interior_Y0546_D06', 'k5_11_interior_Y0642_D00', 'k5_11_interior_Y0642_D01', 'k5_11_interior_Y0864_D02', 'k5_11_interior_Y0864_D03', 'k5_11_interior_Y0864_D05', 'k5_11_interior_Y0996_D03', 'k5_11_interior_Y1128_D02', 'k5_11_interior_Y1128_D04', 'k5_11_interior_Y1128_D05', 'k5_16_interior_Y0082', 'k5_16_interior_Y0154', 'k5_16_interior_Y0155', 'k5_16_interior_Y0178', 'k5_16_interior_Y0220', 'k5_16_interior_Y0231', 'k5_16_interior_Y0251', 'k5_16_interior_Y0253', 'k5_16_interior_Y0262', 'k5_16_interior_Y0273', 'k5_16_interior_Y0306', 'k5_16_interior_Y0373']
+
+pinguard.classify on the same boxes today: {'ok': 479, 'contradictory': 27}

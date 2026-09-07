@@ -5458,3 +5458,44 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   `checkclip131.py`, `epsgeo131.py`; `pinclip.clip_node` gained an optional `traces=` argument
   (certificate emission only — the clip decision is unchanged, and the 674/674 and corpus numbers
   were re-run identical).
+
+## A132 — the polygon core K′(B) (Opus; measurement, in-vitro LP, verifier/Lean spec)
+
+- **The object.** For a parameter box `B`, `K′(B) = ⋂_{(c,θ)∈B} Q(c,θ)` — the intersection of the
+  hypothesis square over the whole box; a convex polygon that CONTAINS both `Box.core()`'s `K(a)`
+  and A96's tight core, since both are squares lying in that intersection. Built numerically (clip
+  on a θ grid, shrink 1e-6, delete negligible vertices, exact rational hull) and then CERTIFIED
+  vertex by vertex: `v ∈ Q(c,θ)` for all `(c,θ) ∈ B` is two rational quadratics in `t = tan(θ/2)`
+  over the four corners of the centre rectangle, decided by endpoints plus `4AC − B² ≥ 0`. The
+  builder is unaudited; the vertex test is the proof. `code/polycore.py`, 0.07 s per box.
+- **T1, all 506 alive nodes** (A57's 414 ALIVE + A60's 92 refused): `area(K′)/area(K(a))` median
+  **1.225** (max 1.53, largest where the tilt bin is widest). **22.3%** of dual-support columns,
+  carrying **35.7%** of τ, meet `K′` but not `K(a)`; **20.5%** of the 5.7 M-row pool; only 17/506
+  nodes have no offending column. Split: on A57 three quarters of the excluded weight is the
+  conditioned box's and a quarter the **pins'**.
+- **T5⁗ logic kill** (`K′(B)` meets a pin's `K′(P)` ⇒ node empty, no LP, no certificate): fires on
+  **64/506**, **37 NEW** on top of the deployed T5′ (27 the tight core already kills — 20 already
+  recorded, 7 A60 nodes where T5′ was never applied). Positive control **854/854** recorded
+  KILL-BY-LOGIC boxes preserved.
+- **The Lean collapse.** `Zones.core_meet_same_square` takes arbitrary SETS. Take `K = K' = {w}` for
+  the exact rational witness point (found and certified against both boxes, 64/64) and the hull, the
+  convexity lemma and the polygon–polygon SAT all vanish: the kill certificate is ONE rational point
+  plus TWO vertex checks, and the only new Lean obligation is the decidable vertex test. No verifier
+  change, no certificate change, no re-verification of the existing tree.
+- **The LP lever: predicted worthless, refuted.** A `K′(B)` row drop is a strict special case of
+  A96's all-poses filter, which was measured at zero kills — but the polygon core also upgrades the
+  **PIN** cores, which that filter never covered. In vitro (10 alive nodes, both arms, identical
+  warm start and oracle, recheck96's node path, 2.7 CPU-h): the three pairs that CONVERGED in both
+  arms are all LP-dead under `K′` and alive under `K(a)` (5.000→4.000, 5.000→4.500, 5.000→4.000),
+  every axis arm reproducing the campaign's stored verdict. The attribution arm (polygon core on the
+  conditioned box only) sends `Y1038` back to τ = 5.000 — that kill is entirely the pins'. Recorded
+  as "LP-dead under polygon core, CERTIFICATE PENDING"; caveat of record: three converged pairs on
+  nodes selected for the largest offending weight is not a rate.
+- **Discipline.** Read-only on every campaign and driver; new files only under
+  `attempts/A132-polygon-core/`; frozen verifiers byte-identical (the spec describes a v3, it does
+  not touch v1/v2); no shard launched; A57's PAUSE sentinel reported in every driver log and never
+  touched, the in-vitro driver honouring its own `attempts/A132-polygon-core/PAUSE` (A124's
+  sanctioned separate-sentinel pattern); ≤ 2 BLAS-pinned BelowNormal processes throughout, dropped
+  to a 9,000-row warm start when free physical memory fell under 1 GB (lemma T19); ~3.3 CPU-h total;
+  `PYTHONDONTWRITEBYTECODE=1`; no recursive deletes, no pidfile deleted; git fetch + plain merge +
+  push of own paths.
