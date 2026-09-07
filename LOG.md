@@ -4594,3 +4594,128 @@ libraries imported, their results read). Writes: `attempts/A119-local-cert-lean/
 `lean/PackingCertMathlib/PackingCertMathlib/Local.lean` (new) + its import line,
 `lean/PackingCertMathlib/scratch/A119Axioms.lean` (new), one clause on the depgraph GRAIN node
 (+ re-rendered svg), the registry row and this entry.
+
+## 2026-09-07 — A122-s33-certify (Opus chore, read-only) — done-success: S33 = S34 = K19 is ONE minimum, S35 is a SECOND one, and neither is a quadratic-field point
+
+**s\*(S33) = 3.9169308657139205630222903359985043624524966276682** (50 digits; ŝ + 0.039847276) and
+**s\*(S35) = 3.9174176578146106278280178960004740044013819558776** (ŝ + 0.040334). Released with all
+eleven squares free (A106's `shadow11` at zero pins, cross-checked against A107's engine), the four
+gallery landings the PI flagged collapse to **two** points, not one and not three: S33, S34 and K19
+all polish to the same configuration (max centre gap 4.3e-8, max tilt 0.0000°), while **S35 is a
+genuinely different local minimum** 4.868e-4 above it, 0.069 away in centre and 6.92° in tilt.
+S35's contact graph is isomorphic to S33's after relabelling but carries one extra flush incidence
+(three squares share a tilt instead of two). Both are strict local minima by trust region: S33min
+returns s\* for every ρ from 1e-5 to 1e-1; S35min for ρ ≤ 3e-2 and at ρ = 1e-1 escapes *downhill*
+into S33min's basin — a shallow secondary minimum sitting on S33's shoulder.
+
+* **No closed form, and the reason is structural.** A108 could close S07 in Q(√2) because its
+  sixteen active rows eliminate rationally. Here the same sixteen rows are **rank-deficient**
+  (rank 14 at S33min, 15 at S35min), so the contact graph leaves a 2- (resp. 1-) parameter family
+  of packings and the minimum is a **smooth interior critical point** of s on that family — the
+  exact opposite of S07's kink. Consequence: **Fritz-John SUCCEEDS at first order here** (residual
+  8.3e-9 at S33min, 4.6e-12 at S35min, 9.6e-15 at S38min) where at S07 it failed at 0.152; the
+  price is that the exact characterisation is the Lagrange system `g(x) = 0, J(x)ᵀλ = e_s`
+  (32 equations, 32 unknowns), solved by pseudo-inverse Gauss-Newton in mpmath with an analytic
+  forward-mode Jacobian — |F|∞ 4e-9 → 6e-81 in five steps, worst SAT and containment gap ±1e-61.
+  PSLQ at 170 correct digits, with the honest rule `degree × log10(maxcoeff) ≤ 100` and residual
+  < 1e-150, finds **no minimal polynomial** for either. (A loose PSLQ "finds" a quadratic for any
+  number at all; the rejected hits are recorded in `results/minpoly.json`.)
+* **Endpoint certificates**: A106's `certify_endpoint` PASSes at the **first rung, ε = 1e-9**, for
+  all three points (margin 2.2e-10), and again at 400 bits with denominator 1e15 — the same rung
+  A108 reached for S07.
+* **S33min's contact graph** (classified at the 80-digit solution, not at 1e-7): 15 pair + 11 wall
+  contacts. `f0` is **UPRIGHT** and **full-edge flush against the BL column's right face x = 1**
+  (partial overlaps 0.546 with `BL(0,1)` and 0.454 with `BL(0,2)`, summing to f0's whole left
+  edge) — that flush pins `cx_{f0} = 3/2` and `θ_{f0} = 0` exactly. From it two diagonal chains:
+  `f0`→`f1`→`TR(0,0)` upward (FJ 0.462, 0.444) and `f0`→`f3`→`BR(0,0)` downward (0.478, 0.465),
+  with `f1`–`f2` flush to the top wall against `BL(0,2)`'s corner (1,3) and `f4` wedged between
+  `f1` and `f3` on the right wall. Rank 32; **2 flexes at fixed s, both blocked at second order**
+  (curvature −0.180 and −0.507). Idle: `BL(0,0)`–`BL(0,1)` and `BL(0,0)`–bottom wall.
+  **Every one of the eleven squares is load-bearing** (remove-and-re-minimise drops 0.0225–0.1492);
+  no rattler, no room, no free rotation — the PI's reading of "fully loaded" is confirmed.
+
+**vs S07 and Trump** (`docs/residue_map/s33_vs_s07_trump.svg`, all three panels containment- and
+overlap-checked, worst SAT −1.0e-15). Identity frame in both. Against **S07** all four BL cells are
+identical to 0 — including `BL(0,2)`, which Trump lifts and S07 does not — and only the free block
+differs: **f0 by 45.000°**, f1/f2 by 5.000°, f3 by 6.449°, f4 by 2.089°. Against **Trump**: f1/f2
+within 0.181°, f3 by 11.267°, f4 by 6.907°, **f0 by 40.182°**, `BL(0,2)` lifted 0.0326.
+**One square is the whole story**: S33min is what S07/Trump become when the keystone rotates to 0°
+and jams flush on x = 1, and the price is +0.031313 over S07, +0.039847 over ŝ.
+**A third separate local minimum on the k6_07 skeleton**: the straight segment crests at 4.1413
+(vs Trump) / 4.1449 (vs S07), and the most generous path measured — five tilts pinned to the linear
+interpolation, all eleven centres, six upright tilts and s re-minimised, warm-started both ways —
+still crests at **3.955149 (+0.038218 over S33min, +0.078065 over ŝ)** and **3.957754 (+0.040824,
++0.072136)**; inside a 0.15 trust region, 3.978558 / 3.986556. A108 measured **+0.001105** between
+S07 and Trump: **S33min is a 35× deeper separation.**
+
+**S38 (added to scope): a kink minimum of two chain formulas that are NOT in A110's menu.**
+s\* = **3.9289146852229775266372995972** and it IS algebraic of low degree: the root of the
+irreducible **x⁹ − 16x⁸ + 105x⁷ − 360x⁶ + 663x⁵ − 518x⁴ − 297x³ + 1064x² − 992x + 358**
+(residual 1.4e-165; Trump is degree 8, S07 degree 2). Its five free squares are one flush grain at a
+common tilt **θ\* = 41.754062677271°** (sin θ\* a root of the irreducible
+`s⁹ − 2s⁸ − 3s⁷ + 4s⁶ + 12s⁵ − 6s⁴ − 13s³ + 6s² + 4s − 2`, tan θ\* of `x⁹ + 2x⁸ − 3x⁵ − 4x⁴ − x³ +
+2x + 2`). In strip coordinates the grain closes into **six** wall/corner rows in **five** unknowns —
+overdetermined by one, so the structure exists at exactly one tilt, like S07 (Λ ∧ Y) and S02 (Λ ∧ A).
+A continuation-TUBE sweep (each 0.02–0.05° step confined to ‖z − z_prev‖∞ ≤ ρ, ρ ∈ {0.01, 0.03}
+agreeing to 1e-8) identifies the two active branches:
+
+>  **C₃(θ) = (1 + 3cos θ + 3sin θ + cos θ sin θ + sin²θ − sin³θ)/(1 + cos θ sin θ)**  below θ\*
+>  (f3 leaves the top wall; BR(0,1)'s corner leaves f4 gives the same closed form), matched to 5e-8
+>  **C₂(θ) = (2 + 2cos θ + 2sin θ + cos θ sin θ + cos θ sin²θ − 3cos²θ sin²θ)/(1 + cos θ sin θ − cos²θ sin²θ)**
+>  above θ\* (f1 leaves the top wall), matched to 2e-7; they cross where
+>  **G(θ) = (sin θ − 1)(2sin²θ − 1)cos θ + sin⁵θ − sin⁴θ − 4sin³θ + 2sin²θ + 2sin θ − 1 = 0.**
+
+C₃ carries Λ's and Y's very denominator 1 + sin θ cos θ, so **A110's menu {Λ, Y, D, F_T, A} gains
+two members**; none of the four is S38's chain (at θ\*: Λ 3.886625, Y 3.864587, D 3.944843,
+F_T 3.888130, against s\* 3.928915).
+
+**There is no crest between S38 and Trump, and the descent is NOT the gap chain.** On the tracked
+branch the side rises *monotonically* as θ falls from θ\* (3.928915 → 3.930704 at Trump's 40.181937°
+→ 3.932819 at 38.50°, on down to 3.956679 at 25.25°, matching C₃ to 3e-9 at every step of a
+330-point sweep) and `s − F_T` GROWS from +0.0408 to +0.1336. It cannot be F_T: that chain runs
+through BL(0,1)'s corner (1,2) under a lifted `BL(0,2)`, and **S38's frame (k6_21) has no `BL(0,2)`
+cell at all**. Getting from S38 to Trump is a slot change, not a tilt motion. The crest the gallery's
+coarse tilt-sweep row shows is on the FAR side: the C₂ branch dies at **42.7941°, s = 3.934377915**
+(C₂ there to 5.1e-9), i.e. +0.005463 over S38 and +0.057294 over ŝ.
+
+**The two crests as points on Trump's basin boundary** (data for the tube):
+
+| family | crest tilt | crest side | over ŝ | on Trump's boundary? |
+|---|---|---|---|---|
+| S07, k6_07, Λ ∧ F_T | **41.564880625°** (`sin θ cos θ = 2 cos θ − 1`) | **3.886746028606** | **+0.009662** | **yes** — below it the branch is F_T and falls to ŝ |
+| S38, k6_21, C₃ ∧ C₂ | **42.7941°** | **3.934377915** | +0.057294 | **no** — it is on the side away from Trump |
+
+**METHOD WARNING (A108's trap, in its path form).** The same relaxed sweep run WITHOUT a tube —
+tilts pinned, everything else free, warm-started — reports **3.902308 at S38's own tilt, 0.0266
+BELOW s\***: SLSQP leaves the basin at the very first grid point, and the curve it then traces is
+the tilt-pinned *floor of the corridor*, not a barrier. Both versions are kept in
+`results/crest.json` so the contrast is auditable. A second, smaller trap: A108's `-1e-7` landing
+gate silently discards iteration-limited SLSQP landings, which is why `crest_refine.py` uses a
+`-1e-5` gate and reports σ(poses) — σ is exact for whatever poses come back.
+
+**Class and kill.** Slot cells at s0 ⇒ S33/S34/S35/K19 = census class **k6_07** under the identity
+of D4 (S07's own class, trump5 + `BL(0,2)`); S38 = **k6_21** under `diag`. **Both windows are now
+FULL on [191/50, 969271/250000] = [3.82, s0]** — k6_07 by A114's sub-window bisection of A108's open
+band with the frozen parametric certificate + full C2 canary, k6_21 by A61's re-solved base
+certificate. *This supersedes A108's note, which recorded k6_07 as PARTIAL at 12.38 % coverage with
+band (3.827068, s0] open.* All four points sit 0.040–0.052 ABOVE s0, so none is what those windows
+have to exclude.
+
+**A116 applies, and far better than at S07.** A116's canary needs one box of L to contain no Trump
+square. Position-only exclusion radius `r_max = max_{n∈L} min_j |c_n − c_j|` at the s0 anchor:
+**0.0342 for S07** (A116's own run — which is exactly why it needed the Trump-boundary cut as soon
+as r ≥ 0.033, ρ ≥ 4.82°), **0.2054 for S33min/S35min** (via the upright `f0`, which is 40.182° from
+Trump's tilt there), **0.6771 for S38min** (via `f1`). So an N of A116's headline size (r = 0.1,
+ρ = 40°) around S33min needs **no Trump-boundary cut at all**; the load path to hand it is
+`L = {f0, f1, f3}` with `{f2, f4}` and the six cells as pins. For S38 the only cut needed is the
+branch selection `G(θ) ≷ 0`, with floors C₃, C₂ ≥ 3.9289147 — **margin 0.051965 over s0**, six times
+S07's Λ margin of 0.008534.
+
+Constraints honoured: read-only on A03/A53/A56/A57/A60/A61/A106/A107/A108/A110/A114/A116 and `lean/`
+(their modules are imported, never written); BLAS pinned to one thread, `PYTHONDONTWRITEBYTECODE=1`,
+no deletes; git fetch + plain merge + push own paths only. Writes:
+`attempts/A122-s33-certify/{code,results,notes}`, `docs/residue_map/s33_vs_s07_trump.svg`, registry
+row, this line. Corrections of record to the A107 gallery (S34 is not a separate minimum; S35's s\*
+is 1.5e-5 high; S33's "1 flat direction" is 2 with all eleven free; the KKT convergence caveats
+clear to 8e-9 / 5e-12) are in `attempts/A122-s33-certify/notes/method.md`; `docs/shadows.md` itself
+was left untouched.
