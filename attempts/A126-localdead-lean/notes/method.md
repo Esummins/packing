@@ -109,6 +109,15 @@ mutated, because a checker that accepts everything proves nothing.
 | `drop-row` (one row deleted from the combination) fails | 708 | 30 726 |
 | `widen-box` (the last tilt coordinate widened by 1) fails | 638 | 29 412 |
 
+A third section (`c`) is a Monte-Carlo smoke test of the COVER half — part (C1) of
+`CertCover`.  Only the TILT coordinates differ between leaves (3 of 20 for S07 (0.1, 40°),
+4 of 23 for S02 (0.2, 10°); every other coordinate is the global box), so the cover question is
+whether the leaf CELLS cover the root tilt box.  The root box recovered from the emitted data is
+`[0.725446, 1.483530]³` for S07 (0.1, 40°) — the certificate's `θ ∈ [41.565°, 85°]` on the nose —
+and `[0.670819, 1.019885]³ × [−0.174533, 0.174533]` for S02 (0.2, 10°); **20 000 random points of
+each, 0 in no leaf cell**.  Necessary, not sufficient — the sufficient version is Lemma COVER —
+but it would catch a bisection tree emitted with a hole in it.
+
 `halve-y` fails on EXACTLY the feasible leaves in both cases (1 556 = 2 302 − 746 rays,
 26 788 = 32 570 − 5 782) — halving a Farkas RAY halves a positive bound and it stays positive,
 while halving a side bound pulls it down to the box's `s_lo = 3.82 < s0`.  That the count comes

@@ -102,6 +102,28 @@ def main(tag="S07"):
             if not check_leaf(inf, [tuple(p) for p in b2], r2, nv):
                 fails += 1
         print("  (b) mutation %-10s -> %d of %d leaves now FAIL" % (name, fails, len(leaves)))
+
+    # (c) a Monte-Carlo smoke test of the COVER half (part C1 of `CertCover`): the leaves'
+    # boxes differ only in the TILT coordinates -- every other coordinate is the global box --
+    # so the cover question is whether the leaf CELLS cover the root tilt box.  A necessary
+    # condition, checked on the emitted data; the sufficient version is Lemma COVER.
+    import random
+    varying = [j for j in range(nv)
+               if len({(box[j][0], box[j][1]) for _, box, _ in leaves}) > 1]
+    root = [(min(box[j][0] for _, box, _ in leaves),
+             max(box[j][1] for _, box, _ in leaves)) for j in varying]
+    print("  (c) %d of %d coordinates vary across leaves (the tilt cells); root box %s"
+          % (len(varying), nv, ", ".join("[%.6f, %.6f]" % (float(a), float(b)) for a, b in root)))
+    random.seed(20260907)
+    miss, NS = 0, 20000
+    cells = [tuple(box[j] for j in varying) for _, box, _ in leaves]
+    for _ in range(NS):
+        pt = [Q(random.randrange(int(a * 10 ** 9), int(b * 10 ** 9) + 1), 10 ** 9)
+              for a, b in root]
+        if not any(all(c[k][0] <= pt[k] <= c[k][1] for k in range(len(varying))) for c in cells):
+            miss += 1
+    print("      %d random points of the root tilt box, %d in NO leaf cell -> %s"
+          % (NS, miss, "cover OK" if miss == 0 else "GAP"))
     return 0
 
 
