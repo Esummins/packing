@@ -1,0 +1,46 @@
+A115-T5 shard 1/2: tasks=rest,cand,notrun caps={'rest': 1700.0, 'cand': 6400.0, 'notrun': 9900.0} cpu_cap=18000  (pools: cand 36, notrun 142, rest 9)
+[rest] 4 of 9 cells for this shard; task cap 1700 s
+    cert l1_004_plain_warm: tau=8.00000 scale=1.2474 total=9.97900 (< 10) rc=0 (4 s)
+      | PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 9979/1000 < budget 10  ==>  no packing of 11 unit squares in si
+  rest     l1_004_plain_warm          A99     tau=  8.0000 bud=10 eta= -2.0000 conv=True  mm=1.000  CERTIFIED DEAD                      12s
+    cert l1_005_sh2dia_warm: tau=8.00000 scale=1.2474 total=9.97901 (< 10) rc=0 (10 s)
+      | PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4989503/500000 < budget 10  ==>  no packing of 11 unit squares 
+  rest     l1_005_sh2dia_warm         A99     tau=  8.0000 bud=10 eta= -2.0000 conv=True  mm=1.000  CERTIFIED DEAD                      63s
+    cert l1_137_sh3_warm: tau=8.33333 scale=1.1974 total=9.97835 (< 10) rc=1 (3 s)
+      | FAIL: 32 witness boxes at depth 56: 20 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 12 unde
+  rest     l1_137_sh3_warm            A99     tau=  8.3333 bud=10 eta= -1.6667 conv=False mm=0.500  kill-candidate (cert FAIL)         284s
+    cert l1_203_sh3_warm: tau=8.38710 scale=1.1897 total=9.97824 (< 10) rc=1 (2 s)
+      | FAIL: 32 witness boxes at depth 56: 23 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undec
+  rest     l1_203_sh3_warm            A99     tau=  8.3871 bud=10 eta= -1.6129 conv=False mm=0.333  kill-candidate (cert FAIL)         283s
+[rest] done: 643 CPU-s
+[cand] 18 of 36 cells for this shard; task cap 6400 s
+    cert s1int_l2_l2_p215_011: tau=8.88001 scale=1.1236 total=9.97739 (< 10) rc=0 (58 s)
+      | PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 9977389/1000000 < budget 10  ==>  no packing of 11 unit squares
+  cand     s1int_l2_l2_p215_011       A85     tau=  8.8800 bud=10 eta= -1.1200 conv=False mm=0.900  CERTIFIED DEAD                    1021s
+    cert s1int_l2_l2_p210_001: tau=8.78256 scale=1.1361 total=9.97761 (< 10) rc=0 (28 s)
+      | PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1247201/125000 < budget 10  ==>  no packing of 11 unit squares 
+  cand     s1int_l2_l2_p210_001       A85     tau=  8.7826 bud=10 eta= -1.2174 conv=False mm=0.832  CERTIFIED DEAD                     978s
+    no witness rows to feed back; stop
+  cand     l1_027_plain_warm          A99     tau=  9.9669 bud=10 eta= -0.0331 conv=False mm=0.886  kill-candidate (cert FAIL)         938s
+    cert s1cor_near_b178: tau=9.62000 scale=1.0370 total=9.97586 (< 10) rc=1 (38 s)
+      | FAIL: 32 witness boxes at depth 56: 7 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 25 undec
+    feeding back 672 witness rows (pool 672), re-solving 240 s
+    cert s1cor_near_b178: tau=9.60000 scale=1.0391 total=9.97587 (< 10) rc=1 (7 s)
+      | FAIL: 32 witness boxes at depth 56: 13 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 19 unde
+    feeding back 672 witness rows (pool 1344), re-solving 240 s
+    cert s1cor_near_b178: tau=9.60000 scale=1.0391 total=9.97606 (< 10) rc=1 (22 s)
+      | FAIL: 32 witness boxes at depth 56: 6 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 26 undec
+  cand     s1cor_near_b178            A85     tau=  9.6200 bud=10 eta= -0.3800 conv=False mm=0.896  kill-candidate (cert FAIL)        1759s
+    no witness rows to feed back; stop
+  cand     s1int_l1_008               A85     tau=  9.9568 bud=10 eta= -0.0432 conv=False mm=0.863  kill-candidate (cert FAIL)         968s
+    cert s1cor_far_b595: tau=8.77958 scale=1.1364 total=9.97760 (< 10) rc=0 (45 s)
+      | PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 9977597/1000000 < budget 10  ==>  no packing of 11 unit squares
+  cand     s1cor_far_b595             A85     tau=  8.7796 bud=10 eta= -1.2204 conv=False mm=0.537  CERTIFIED DEAD                    1049s
+[cand] cap reached (6713 s task / 7356 s process) -- stopping task (resumable)
+[cand] done: 6713 CPU-s
+[notrun] 71 of 142 cells for this shard; task cap 9900 s
+  notrun   node_117                   A38-l1  tau=  9.9787 bud=10 eta= -0.0213 conv=False mm=0.606  kill-candidate (cert FAIL)         300s
+  notrun   node_119                   A38-l1  tau= 10.4089 bud=10 eta= +0.4089 conv=False mm=0.697  alive (tau >= budget)              260s
+    cert node_121: tau=9.93359 scale=1.0050 total=9.98332 (< 10) rc=1 (2 s)
+      | FAIL: 32 witness boxes at depth 56: 11 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 21 unde
+  notrun   node_121                   A38-l1  tau=  9.9336 bud=10 eta= -0.0664 conv=False mm=0.522  kill-candidate (cert FAIL)         293s

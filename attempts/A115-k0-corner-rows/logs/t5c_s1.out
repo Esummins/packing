@@ -1,0 +1,10 @@
+A115-T5 shard 1/2: tasks=notrun caps={'notrun': 1900.0} cpu_cap=1900  (pools: cand 36, notrun 142, rest 9)
+[notrun] 71 of 142 cells for this shard; task cap 1900 s
+  notrun   node_157                   A38-l1  tau= 10.0214 bud=10 eta= +0.0214 conv=False mm=0.469  alive (tau >= budget)              270s
+  notrun   node_159                   A38-l1  tau= 10.0000 bud=10 eta= +0.0000 conv=True  mm=1.000  alive (tau >= budget)              815s
+    cert node_161: tau=9.87392 scale=1.0103 total=9.97536 (< 10) rc=124 (300 s)
+      | TIMEOUT after 300.0s
+  notrun   node_161                   A38-l1  tau=  9.8739 bud=10 eta= -0.1261 conv=False mm=0.857  kill-candidate (cert FAIL)        1639s
+[notrun] cap reached (2725 s task / 2725 s process) -- stopping task (resumable)
+[notrun] done: 2725 CPU-s
+shard 1 done: 2725 CPU-s spent

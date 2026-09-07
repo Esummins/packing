@@ -1,0 +1,29 @@
+A115-T5 shard 0/2: tasks=rest,notrun caps={'rest': 1700.0, 'notrun': 16300.0} cpu_cap=18000  (pools: cand 36, notrun 142, rest 9)
+[rest] 5 of 9 cells for this shard; task cap 1700 s
+    cert l1_004_sh3_warm: tau=8.00000 scale=1.2474 total=9.97900 (< 10) rc=0 (36 s)
+      | PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 4989501/500000 < budget 10  ==>  no packing of 11 unit squares 
+  rest     l1_004_sh3_warm            A99     tau=  8.0000 bud=10 eta= -2.0000 conv=True  mm=1.000  CERTIFIED DEAD                     239s
+    cert l1_137_sh2dia_warm: tau=8.99771 scale=1.1088 total=9.97704 (< 10) rc=1 (2 s)
+      | FAIL: 32 witness boxes at depth 56: 16 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 16 unde
+  rest     l1_137_sh2dia_warm         A99     tau=  8.9977 bud=10 eta= -1.0023 conv=False mm=0.500  kill-candidate (cert FAIL)         292s
+    cert l1_181_sh3_warm: tau=8.76923 scale=1.1378 total=9.97748 (< 10) rc=1 (6 s)
+      | FAIL: 32 witness boxes at depth 56: 6 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 26 undec
+  rest     l1_181_sh3_warm            A99     tau=  8.7692 bud=10 eta= -1.2308 conv=False mm=0.326  kill-candidate (cert FAIL)         288s
+    cert l1_214_sh3_warm: tau=8.40000 scale=1.1879 total=9.97823 (< 10) rc=1 (10 s)
+      | FAIL: 32 witness boxes at depth 56: 9 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 23 undec
+  rest     l1_214_sh3_warm            A99     tau=  8.4000 bud=10 eta= -1.6000 conv=False mm=0.412  kill-candidate (cert FAIL)         297s
+[rest] done: 1115 CPU-s
+[notrun] 71 of 142 cells for this shard; task cap 16300 s
+  notrun   node_116                   A38-l1  tau=  9.9540 bud=10 eta= -0.0460 conv=False mm=0.598  kill-candidate (cert FAIL)         251s
+  notrun   node_118                   A38-l1  tau= 10.1377 bud=10 eta= +0.1377 conv=False mm=0.652  alive (tau >= budget)              280s
+    cert node_120: tau=9.79927 scale=1.0180 total=9.97547 (< 10) rc=1 (3 s)
+      | FAIL: 32 witness boxes at depth 56: 19 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 13 unde
+  notrun   node_120                   A38-l1  tau=  9.7993 bud=10 eta= -0.2007 conv=False mm=0.681  kill-candidate (cert FAIL)         318s
+  notrun   node_122                   A38-l1  tau= 10.0000 bud=10 eta= +0.0000 conv=False mm=0.676  alive (tau >= budget)             1260s
+  notrun   node_124                   A38-l1  tau=  9.9807 bud=10 eta= -0.0193 conv=False mm=0.679  kill-candidate (cert FAIL)        1522s
+    cert node_144: tau=9.33333 scale=1.0689 total=9.97643 (< 10) rc=1 (2 s)
+      | FAIL: 32 witness boxes at depth 56: 9 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 23 undec
+  notrun   node_144                   A38-l1  tau=  9.3333 bud=10 eta= -0.6667 conv=False mm=0.618  kill-candidate (cert FAIL)         274s
+  notrun   node_146                   A38-l1  tau= 10.0095 bud=10 eta= +0.0095 conv=False mm=0.582  alive (tau >= budget)             1250s
+  notrun   node_148                   A38-l1  tau= 10.0000 bud=10 eta= -0.0000 conv=True  mm=1.000  knife-edge                         881s
+  notrun   node_150                   A38-l1  tau= 10.0596 bud=10 eta= +0.0596 conv=False mm=0.667  alive (tau >= budget)              275s
