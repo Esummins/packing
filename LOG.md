@@ -4015,3 +4015,18 @@ recorded. Report: `attempts/A115-k0-corner-rows/notes/t4_report.md`.
   ALIVE nodes inside N across the whole corpus, and only 4 of them are among the nodes A112 actually stalled on. The lever is
   real but its overlap with the current stall set is small; its value would rise if the region tree were pointed at the other
   70 in-N nodes, which is a different targeting decision.
+- A96 targeting decision (A116 in-N alive nodes): TARGET LIST BUILT, RUN NOT LAUNCHED -- a soundness blocker, reported rather
+  than improvised around.
+  TARGETS: of A116's 74 in-N nodes only **35 are ALIVE in the current A57 corpus** (all k5_11; L1 13, L2 19, L3 3) -- the other
+  39 are already PASS/FAIL/logic-killed, so the "~70 remaining in-N nodes" is really 35. None overlap A112's regions, so these
+  are all new. Written to A96 results/a116_targets.json.
+  PRICE: one NO child each at the two-stage protocol = 35 x (900 s LP + ~545 s certify) = 14.0 CPU-h, which is OVER the 12 CPU-h
+  cap; at a 240 s LP cap it is 7.6 CPU-h and fits. Since A109/A96 both measured that 240 s leaves almost everything unconverged
+  (2/29), the honest options are a 12 CPU-h run at ~700 s that may still not converge, or a raised cap.
+  BLOCKER (why nothing was launched): "make the YES region the certified N" needs N expressed as boxes for L in the NODE's frame
+  plus the cut, and A116's N is not that shape. In a116lib it is a SIX-DIMENSIONAL PAIR-POSE box (two bodies x (x, y, t),
+  pair_box) on which forced_test proves that every disjoint configuration uses the minimum's SELECTION. That is a statement about
+  which separating axis is forced for a PAIR, not a (centre, tilt) region for one square, and turning it into a caselp NO-family
+  is a frame change I cannot do safely from outside A116. Getting it wrong is a SOUNDNESS error (it would silently declare a
+  region empty that is not), not a performance one, so it needs A116's own frame code or an A116 chore exporting N as
+  node-frame boxes. The wiring, target list, tagging and ledger are ready to consume that the moment it exists.
