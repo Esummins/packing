@@ -76,5 +76,25 @@ merely unconverged at the LP time cap.
    fractions, and trump5's alive nodes are the same S01/S07 families. Worth a pilot before the tier runs at all.
 5. **k0_00.** Not a compute question: LOCK-FREE⁺(< 4) or the 15,000 CPU-h tree.
 
+## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
+
+The 4-D verifier bisects tilt, position and side to a cap of 48 levels per path. Two constants belong to the
+certificate and the class, not to the slab: the leaf s-cell width it needs, w_min (k6_07: 2.3·10⁻⁵, set by the
+certificate's slack against the dilation sensitivity), and the pose depth it needs, d_pose (k6_07: ≈ 39). **A slab
+passes iff log₂(width / w_min) + d_pose ≤ 48.** k6_07: passing 0.0029 slabs reached s-depth 7 and max depth 46 at
+167–215 s each (rising gently toward s0 with the admissible area); the 0.0235 halves reached s-depth 10, hit the cap
+with 8 undecided boxes and 0 holes, and cost 1,500 s each for nothing. Predictor: one narrow probe slab gives w_min
+= width / 2^(max s-depth) and d_pose = max depth − max s-depth; width_max = w_min · 2^(48 − d_pose) (k6_07: 0.012, five
+pieces would have done). Once slabs fit, total cost is ≈ linear in band width (k6_27 11 s, k6_07 65 s, k5_03 340 s
+per 10⁻³ of side); over-splitting costs percent, under-splitting costs a failed slab.
+
+**Near a solution the law stops being linear.** w_min and d_pose are set by the certificate's slack, and a class whose
+boundary carries a shadow at side s* has slack ≈ (s* − s) at side s: k5_02's s0 certificate has margin 0.0006 and
+k5_03's fails on bulk slabs near s0 while both pass cheaply at the bottom of the window — and both are classes the k7
+pinwheel (s* = s0 + 0.0097, A107's S02 list) sits on. So the cost per unit of side is flat far below the shadow and
+rises steeply as s approaches s* − (s* − s0), diverging only if a class contains an actual minimum (Trump's classes,
+which is what the basin/tube machinery is for). Consequence for sweeps: anchor a fresh certificate at the top of each
+slab (its slack is then s* − s_top, not s* − s0) rather than reusing the s0 certificate across the band.
+
 What is *not* the cost driver: certificate-margin stragglers (hours each), exact endpoint certificates (seconds), the
 Lean replay (excluded).
