@@ -278,6 +278,13 @@ gives the same verdict and value with and without the ceiling).  k5_16 frame (ex
 and (0.1, 10°) 3.878207, CAP at (0.2, 20°).  Exact pins (h = 0): the same verdicts and values to 10⁻⁴ at (0.05, 5°),
 (0.1, 10°) — the slack cores cost nothing here because the chain pushes the pin corners against their walls.
 
+> **Correction (A119, 2026-09-07, `71d18eba`).** Three of the four ρ ≥ 20° cells tabulated as `capped` are ALIVE, not
+> open: a checked packing of L ∪ P below s0 exists inside N — S07 (0.2, 20°) at 3.873374 (f0, f2, f4 all at 65°, the
+> ladder shears), S07 (0.2, 40°) at 3.869626, S02 (0.2, 40°) at 3.876703. `t2_S07.jsonl` already recorded the first
+> witness with `witness_valid: true` under the `capped` verdict; re-running this attempt's own tree with its own
+> parameters returns ALIVE in 2–9 s. S02 (0.2, 20°) remains genuinely open (633,660 nodes at the cap). The certified
+> radii of §4 are unaffected. Adding the blocking squares as boxes does not widen them (A119 T3).
+
 **S07, trump5 frame, L = {f0, f2, f4}, tilt boxes of f0, f2, f4 cut at 41.565°** (near pairs 10–12; leaves 64–768):
 
 | r \ ρ | 2° | 5° | 10° | 20° | 40° |
