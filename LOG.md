@@ -3926,3 +3926,44 @@ Writes: `attempts/A112-dual-branching/**`, the registry row, this entry, one not
   valid certificates, and a re-emission can fail on a loaded box. The frozen verifiers are exact and deterministic. Reproduce
   kills by REPLAYING certificates, never by re-emitting; and note this is a confound in any concurrency benchmark (A96's own
   contention legs varied worker counts, which varies emission outcomes as a side effect).
+
+## 2026-09-06 — A115 follow-up (PI) — the PLAIN warm re-solve pass over A99/A85's open k0_00 cells
+
+**Question.** A115's attribution control found that a cell whose corner-row certificate passed also
+certified *without* the rows, after a 240 s warm re-solve. Does that generalise over A99's 53 open
+k0_00 cells and A85's 11?
+
+**Verdict — yes, and it is the cheapest thing in the k0 route so far.** A plain 240 s warm re-solve
+(no corner rows, no new mathematics) followed by A99/A85's ordinary first-pass node certificate under
+the frozen `verify_case.py` **certifies 10 of the 55 open cells reached, including 7 of A99's plain
+level-1 cells, for 5.09 CPU-h**. At A99's own price (9,341–21,661 CPU-h over the 216 level-1 cells =
+43.2–100.3 CPU-h each) that removes **303–702 CPU-h — a 59×–138× return.** A115's corner rows, by
+contrast, cost 13.4 CPU-h for the same pass and removed nothing.
+
+* **New:** `l1_170`, `l1_181` had no prior verdict at all (A38 `notrun`) — two previously unprocessed
+  level-1 cells, now certified dead.
+* **Upgraded:** `l1_005`, `l1_049`, `l1_093`, `l1_126`, `l1_137` were LP-killed by A38 but
+  **uncertified** (A113: `KILL(LP,uncertified)`; `l1_093` was an outright certification `FAIL`). A
+  frozen-verifier certificate is what the tree needs to actually remove them, and they now have one.
+  All five converged with minmass 1.000 in 46–222 s of warm continuation.
+* Also 2 cells of A99's R2 pattern-branched tree (`l1_005_sh2adj`, `l1_005_sh3` — an exact ×15 cost
+  multiplier, not the route, so no cost credit) and 1 A85 cell (`s4_near_BL357619_BR004483_TR191404`).
+
+**Hard negative (equally useful).** Four cells came back **converged ALIVE**: τ = budget exactly with
+minmass = 1.000 — `l1_071`, `l1_104`, `l1_159` (A99 plain level-1) and `s3_far_BL389484_TR018470`
+(A85). The case-LP has reached its optimum and it is not below budget, so **no amount of further LP
+time kills them**. This upgrades A113's "un-killable at the measured LP state" list from *measured* to
+*converged*: those cells need a different hypothesis, not a longer run.
+
+**What is left.** 36 cells are `kill-candidate` (η ≤ −10⁻³, first-pass certificate FAILs — still
+row-generation-incomplete), 4 knife-edge, 5 alive; 9 of the 64 open cells were not reached before the
+5 CPU-h cap. The obvious continuation is a 900 s second stage with A85's witness-feedback rounds on
+exactly the 36, plus the same pass over the level-1 cells A38 left `notrun`.
+
+**Discipline.** READ-ONLY on A85/A99 (each node json copied to `results/nodes/<nid>.src.json` before
+being touched); 2 BLAS-pinned processes; commit/physical gate before every LP and every verifier run;
+one resumable record per cell (`results/t4/<nid>.json`); hard per-process CPU-second cap (9,000 s each,
+checked before each cell, so the final cell of each shard overruns it — 18,318 s = 5.09 CPU-h total);
+frozen `verify_case.py` byte-identical; nothing deleted anywhere. Cells were processed in
+minmass-descending order so that the cap truncates the least promising tail, and the un-reached list is
+recorded. Report: `attempts/A115-k0-corner-rows/notes/t4_report.md`.
