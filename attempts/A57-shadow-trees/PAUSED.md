@@ -185,6 +185,36 @@ bands in a file with few prior rows).
 * **A process-name scan matches the checking shell itself.** Match on the *script* in the
   command line, as `run96.ps1` :22 does, or on pids.
 
+## 7a. Running ONE driver under this pause — the scoped-sentinel mechanism (A124, 2026-09-07)
+
+`pausegate.paused()` with no argument checks **both** bases (§7), so A123's `PAUSE` here stops
+far more than the A57 shards: it also stopped `recheck96` and A120's runner
+(`attempts/A120-no-side-runner`), neither of which is a shard and both of which are the highest
+value-per-CPU-hour items on the board. Deleting this file to free them would simultaneously
+un-gate six `tree57` shards and two `deepen` producers, and `launch.ps1` has no pidfile gate
+(§7), so that is the wrong lever.
+
+**The mechanism to use — scoped sentinel, no edit to `pausegate.py`, no deletion of this file.**
+`pausegate.paused(base=...)` already takes a base; a driver that passes **its own attempt
+directory** watches only its own sentinel and ignores this one, while every driver that calls the
+bare `paused()` — which is all six shards and both deepens — stays paused. So the change is one
+line at the *consumer's* call site, inside the consumer's own attempt, and nothing shared moves:
+
+```python
+from pausegate import paused, reason
+OWN = os.path.dirname(os.path.abspath(__file__ + "/.."))   # this attempt's base
+if paused(base=OWN): break                                 # NOT paused() -- that reads A57's
+```
+
+A124 used exactly this shape for its re-check driver
+(`attempts/A124-recheck-day/code/recheck124.py`, which watches
+`attempts/A124-recheck-day/PAUSE`) and left `attempts/A57-shadow-trees/PAUSE` untouched;
+`recheck96.py` itself was not modified. **A120 can resume the same way**: give `run_no.py` /
+`no_runner.py` the `base=` argument and create `attempts/A120-no-side-runner/PAUSE` as its own
+stop button. Do not add an env-var override to `pausegate.py`: a global escape hatch would also
+un-gate the shards, which is the thing this pause exists to prevent. Note the corollary — while
+scoped drivers run, **"the A57 PAUSE is set" no longer implies "nothing is running"**; check pids.
+
 ## 8. Resume commands — UNCHANGED
 
 Set `PYTHONDONTWRITEBYTECODE=1` in the shell first (the launchers `launch.ps1`, `scaleup.ps1`

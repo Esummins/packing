@@ -1,0 +1,53 @@
+{
+ "baseline_walldays": 13.3,
+ "expansion": 0.91,
+ "offline_rates": {
+  "1": 0.02722,
+  "2": 0.1374,
+  "3": 0.09375,
+  "4": 0.33333
+ },
+ "live_L1_rate": 0.01456,
+ "live_over_offline_L1": 0.535,
+ "scenarios": {
+  "no_T5pp (full kills count for nothing)": {
+   "walldays": 13.3,
+   "cut_pct": 0.0,
+   "rates": {},
+   "note": "the 13.3 baseline"
+  },
+  "offline rates, all levels": {
+   "walldays": 10.47,
+   "cut_pct": 21.3,
+   "rates": {
+    "1": 0.02722,
+    "2": 0.1374,
+    "3": 0.09375,
+    "4": 0.33333
+   },
+   "note": "control124, incremental over T5'"
+  },
+  "live L1, offline L2-L4": {
+   "walldays": 10.6,
+   "cut_pct": 20.3,
+   "rates": {
+    "1": 0.01456,
+    "2": 0.1374,
+    "3": 0.09375,
+    "4": 0.33333
+   },
+   "note": "the only level with live data replaced"
+  },
+  "live L1, L2-L4 discounted by the same ratio": {
+   "walldays": 11.7,
+   "cut_pct": 12.0,
+   "rates": {
+    "1": 0.01456,
+    "2": 0.07351,
+    "3": 0.05015,
+    "4": 0.17833
+   },
+   "note": "pessimistic: every level short by the live/offline factor 0.535"
+  }
+ }
+}
