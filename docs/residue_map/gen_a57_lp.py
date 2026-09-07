@@ -74,12 +74,51 @@ def panel(ox, oy, nid, node, row):
         out.append(f'<rect x="{ox+box["x0"]*S:.1f}" y="{oy-box["y1"]*S:.1f}" width="{(box["x1"]-box["x0"])*S:.1f}" height="{(box["y1"]-box["y0"])*S:.1f}" fill="none" stroke="#000" stroke-width="2"/>')
         # PI (2026-09-07): draw one example hypothesis square at the CENTRE of the box and the CENTRE of the tilt
         # window being checked (cyan, heavy outline, 'H'), so the drawn tilt is the one the node actually tests.
-        hx, hy = 0.5*(box['x0']+box['x1']), 0.5*(box['y0']+box['y1'])
-        hth = math.radians(0.5*(float(box.get('th0', 0.0)) + float(box.get('th1', 0.0))))
-        Ph = sq(hx, hy, hth); pts = ' '.join(f'{ox+x*S:.1f},{oy-y*S:.1f}' for x, y in Ph)
-        out.append(f'<polygon points="{pts}" fill="#00e5ff" fill-opacity="0.35" stroke="#000" stroke-width="2.5"/>')
-        out.append(text(ox+hx*S, oy-hy*S+4, 'H', 11, '#000', True, 'middle'))
-        out.append(text(ox+hx*S, oy-hy*S+16, f'{math.degrees(hth):.1f}°', 8, '#000', False, 'middle'))
+        # PI (2026-09-07, second note): the box CENTRE can itself be an infeasible centre (Y0036: the square at the
+        # box centre overlaps the pin bl10), so the example is drawn at the feasible centre NEAREST the box centre
+        # for its tilt — feasible = clear of every pin at every pin position in the pin's own box (the pin
+        # CORE: the pin shrunk by its box half-widths), and inside the container. Low-opacity shadows at the two
+        # extremal tilts of the window, each at its own nearest feasible centre; dashed at the box centre if the
+        # tilt admits no feasible centre in the box at all.
+        pin_rects = []
+        for c in cores[:5]:
+            b = c.get('box') or {}
+            # the pin CORE: the part of the pin square present at every pin position in its box (the tree's own
+            # "core meets pin core" object) — a centre is drawn as feasible iff the tilted square clears it
+            if 'x0' in b: pin_rects.append((b['x1']-0.5, b['x0']+0.5, b['y1']-0.5, b['y0']+0.5))
+        def rect_poly(r): return [(r[0], r[2]), (r[1], r[2]), (r[1], r[3]), (r[0], r[3])]
+        def feasible(cx, cy, th):
+            P = sq(cx, cy, th)
+            if not all(0 <= x <= S0 and 0 <= y <= S0 for x, y in P): return False
+            return all(sat(P, rect_poly(r)) >= -1e-12 for r in pin_rects)
+        def nearest_feasible(th, N=48):
+            cx0, cy0 = 0.5*(box['x0']+box['x1']), 0.5*(box['y0']+box['y1'])
+            best = None
+            for i in range(N+1):
+                for j in range(N+1):
+                    cx = box['x0'] + (box['x1']-box['x0'])*i/N; cy = box['y0'] + (box['y1']-box['y0'])*j/N
+                    if feasible(cx, cy, th):
+                        d = math.hypot(cx-cx0, cy-cy0)
+                        if best is None or d < best[0]: best = (d, cx, cy)
+            return best
+        th0, th1 = float(box.get('th0', 0.0)), float(box.get('th1', 0.0))
+        thm = 0.5*(th0+th1)
+        for th_deg, fill_op, stroke_w, label in ((th0, 0.10, 1.0, ''), (th1, 0.10, 1.0, ''), (thm, 0.35, 2.5, 'H')):
+            th = math.radians(th_deg); nf = nearest_feasible(th)
+            if nf is None:
+                hx, hy = 0.5*(box['x0']+box['x1']), 0.5*(box['y0']+box['y1']); dash = ' stroke-dasharray="5,4"'; note = ' (no feasible centre in box)'
+            else:
+                _, hx, hy = nf; dash = ''; note = ''
+            Ph = sq(hx, hy, th); pts = ' '.join(f'{ox+x*S:.1f},{oy-y*S:.1f}' for x, y in Ph)
+            out.append(f'<polygon points="{pts}" fill="#00e5ff" fill-opacity="{fill_op}" stroke="#000" stroke-width="{stroke_w}"{dash}/>')
+            if label:
+                out.append(text(ox+hx*S, oy-hy*S+4, label, 11, '#000', True, 'middle'))
+                out.append(text(ox+hx*S, oy-hy*S+16, f'{th_deg:.1f}°{note}', 8, '#000', False, 'middle'))
+            else:
+                out.append(text(ox+hx*S, oy-hy*S-14, f'{th_deg:.1f}°{note}', 7, '#006064', False, 'middle'))
+        cfeas = feasible(0.5*(box['x0']+box['x1']), 0.5*(box['y0']+box['y1']), math.radians(thm))
+        out.append(text(ox, oy + 40, f'H = example hypothesis square at the mid-tilt {thm:.1f}°, at the feasible centre nearest the box centre '
+                                     f'(box centre itself {"feasible" if cfeas else "INFEASIBLE: overlaps a pin"}); faint = the extremal tilts {th0:.1f}° / {th1:.1f}°', 8.5, '#006064'))
     # weight table: top placements
     top = sorted(pk, key=lambda p: -float(p.get('y', 0)))[:8]
     out.append(text(ox, oy + 16, 'top weights: ' + '; '.join(f'({float(p["cx"]):.2f},{float(p["cy"]):.2f},{math.degrees(float(p["theta"]))%90:.0f}°) {float(p.get("y",0)):.2f}' for p in top), 8.5, '#333'))
