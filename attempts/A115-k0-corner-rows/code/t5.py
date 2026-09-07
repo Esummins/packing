@@ -130,7 +130,30 @@ def cells_rest():
     return out
 
 
-TASKS = dict(cand=cells_cand, notrun=cells_notrun, rest=cells_rest, a121=cells_a121)
+def cells_tail2():
+    """PI follow-up 3, stage B: the NEW kill-candidates produced by the plain 240 s `notrun` pass
+    (task `notrun` records with a failing first-pass certificate) get the same treatment task
+    `cand` got -- a 900 s warm continuation of their own LP plus A85's witness-feedback rounds.
+    Explicitly EXCLUDED: the 32 persistent cert-FAIL cells of task `cand` (already given 900 s +
+    2 rounds and still failing) and the 7 converged-alive cells (handed to A118's successor)."""
+    out = []
+    d = os.path.join(L.RES, "t5")
+    for f in sorted(os.listdir(d)):
+        if not f.startswith("notrun__"):
+            continue
+        r = json.load(open(os.path.join(d, f)))
+        if not r["verdict"].startswith("kill-candidate"):
+            continue
+        if r.get("converged") and r.get("eta", -1) >= -1e-9:
+            continue
+        out.append(dict(r, task="tail2", tau0=r["tau"], eta0=r["eta"],
+                        minmass0=r.get("minmass") or 0.0, prior="t5 notrun kill-candidate"))
+    out.sort(key=lambda r: (r["level"] or 9, -r["minmass0"], r["nid"]))
+    return out
+
+
+TASKS = dict(cand=cells_cand, notrun=cells_notrun, rest=cells_rest, a121=cells_a121,
+             tail2=cells_tail2)
 
 
 # ---------------------------------------------------------------- one cell
@@ -190,8 +213,9 @@ def one(c, log, lp_time, rounds, resolve_time, deadline=None):
         rec.update(verdict="SKIPPED (headroom gate)")
         return rec, spent
     # warm start: task `cand` continues its OWN t4 LP; the others warm from the campaign result
-    prev = os.path.join(L.NODES, c["nid"] + ".t4.lp.json")
-    if c["task"] == "cand" and os.path.exists(prev):
+    prev = os.path.join(L.NODES, c["nid"] + (".t5.lp.json" if c["task"] == "tail2"
+                                             else ".t4.lp.json"))
+    if c["task"] in ("cand", "tail2") and os.path.exists(prev):
         warm = warm_from_result(json.load(open(prev)))
     elif res0 is not None:
         warm = warm_from_result(res0)
@@ -206,7 +230,7 @@ def one(c, log, lp_time, rounds, resolve_time, deadline=None):
     lp_s = round(time.time() - t0, 1)
     spent += lp_s
     eta = r["tau"] - budget
-    if abs(eta) < KNIFE and c["task"] != "cand":
+    if abs(eta) < KNIFE and c["task"] not in ("cand", "tail2"):
         t1 = time.time()
         r = solve_node(s, hyp, budget, warm=warm_from_result(r), time_limit=900.0, **t4.LPKW)
         spent += time.time() - t1
@@ -218,7 +242,7 @@ def one(c, log, lp_time, rounds, resolve_time, deadline=None):
     if eta <= -KILL:
         t2_ = time.time()
         result, rl, cert = certify_rounds(r, hyp, c["nid"], log,
-                                          rounds=(rounds if c["task"] == "cand" else 0),
+                                          rounds=(rounds if c["task"] in ("cand", "tail2") else 0),
                                           resolve_time=resolve_time, deadline=deadline)
         spent += time.time() - t2_
         rec["cert_rounds"] = rl
@@ -256,24 +280,26 @@ def main():
         k, v = kv.split("=")
         caps[k] = float(v)
     deadline = time.time() + 60 * A.minutes
-    plan = {t: TASKS[t]() for t in TASKS}
-    json.dump({t: dict(n=len(v), cells=v) for t, v in plan.items()},
-              open(os.path.join(L.RES, "t5_plan.json"), "w"), indent=1)
-    log("A115-T5 shard %d/%d: tasks=%s caps=%s cpu_cap=%.0f  (pools: cand %d, notrun %d, rest %d)"
-        % (i, n, A.tasks, caps, A.cpu_cap, len(plan["cand"]), len(plan["notrun"]),
-           len(plan["rest"])))
+    log("A115-T5 shard %d/%d: tasks=%s caps=%s cpu_cap=%.0f" % (i, n, A.tasks, caps, A.cpu_cap))
     spent = 0.0
     for t in A.tasks.split(","):
-        mine = [c for k, c in enumerate(plan[t]) if k % n == i]
+        pool = TASKS[t]()          # LAZY: tail2's pool depends on the notrun pass finishing
+        try:
+            plan = json.load(open(os.path.join(L.RES, "t5_plan.json")))
+        except Exception:
+            plan = {}
+        plan[t] = dict(n=len(pool), cells=pool)
+        json.dump(plan, open(os.path.join(L.RES, "t5_plan.json"), "w"), indent=1)
+        mine = [c for k, c in enumerate(pool) if k % n == i]
         tspent = 0.0
         cap_t = caps.get(t, A.cpu_cap)
-        log("[%s] %d of %d cells for this shard; task cap %.0f s" % (t, len(mine), len(plan[t]), cap_t))
+        log("[%s] %d of %d cells for this shard; task cap %.0f s" % (t, len(mine), len(pool), cap_t))
         for c in mine:
             if tspent >= cap_t or spent >= A.cpu_cap or time.time() > deadline:
                 log("[%s] cap reached (%.0f s task / %.0f s process) -- stopping task (resumable)"
                     % (t, tspent, spent))
                 break
-            _, s = one(c, log, A.cand_lp_time if t == "cand" else A.lp_time,
+            _, s = one(c, log, A.cand_lp_time if t in ("cand", "tail2") else A.lp_time,
                        A.rounds, A.resolve_time, deadline=deadline)
             tspent += s
             spent += s

@@ -4912,3 +4912,40 @@ record was kept. Report: `attempts/A115-k0-corner-rows/notes/t5_report.md`.
   certifier. Discipline unchanged: <= 2 BLAS-pinned processes, PYTHONDONTWRITEBYTECODE=1, memory gate before every LP
   and certificate, nothing deleted, READ-ONLY on every campaign, no campaign driver launched, no sentinel created or
   removed.
+
+## 2026-09-07 - A115 follow-up 3 (PI) - the plain warm re-solve pass, completed
+
+**The pass is now complete over every open k0_00 cell A115 could reach.** This round (15 CPU-h cap,
+14.16 used): the 34 never-run A38 level-1 cells and every open level-2/3 cell the previous cap had
+missed, plain 240 s first (level-1 first, minmass-descending), then a 900 s warm continuation plus
+A85's witness-feedback rounds on the NEW kill-candidates that pass produced. The 32 persistent
+cert-FAIL cells and the converged-alive cells were skipped, as instructed.
+
+**Cumulative result: 22 DISTINCT level-1 cells of the 216-cell k0_00 root split certified dead, plus
+13 level-2 and 2 level-3 cells and 10 A85/A99 nodes, for 29.83 CPU-h - 1,023-2,372 CPU-h off A99's
+9,341-21,661 CPU-h frontier, a 34x-80x return, with no new mathematics anywhere.** A115's own corner
+rows, for contrast, cost 13.4 CPU-h for one pass over the same 216 cells and removed nothing.
+
+* Stage A (plain 240 s) is COMPLETE over the whole 142-cell pool: 17 certified, 97 kill-candidate,
+  22 alive, 6 knife-edge.
+* Stage B (900 s + feedback) reached 26 of those 97 and certified 5 - and all five are level-1
+  (`l1_149`, `l1_168`, `l1_169`, `l1_173`, `l1_174`), i.e. cells whose plain 240 s certificate had
+  FAILed and which only the continuation closed. Stage B is the highest-yield thing left.
+* The certified level-1 set is now {4, 5, 17, 18, 30, 31, 32, 49, 93, 98, 126, 137, 143, 149, 168,
+  169, 170, 172, 173, 174, 176, 181} - 22 of 216 (10.2%).
+
+**Hand-off list for A118's successor has grown to 12 (nothing was run on them).** CONVERGED-ALIVE =
+tau = budget exactly, minmass = 1.000, converged: the case-LP has reached its optimum and it is not
+below budget, so no further LP time kills them. Seven level-1 cells - `l1_071`, `l1_104`, `l1_124`
+(new), `l1_148`, `l1_153`, `l1_158`, `l1_159` - four level-2 cells - `l2_p114_001`, `l2_p65_101`,
+`l2_p65_111`, `l2_p74_001` (all new) - and the A85 node `s3_far_BL389484_TR018470`. `l1_153` is a
+Trump-image cell, which must be alive, and the LP agrees; `l1_159` is confirmed twice independently.
+
+**What is left.** 71 of the 97 stage-A kill-candidates have not had the stage-B treatment (the pool
+was worked level-1 first, minmass-descending, so the remainder is the low-value tail); the 32
+persistent `cand` cert-FAIL cells remain untouched by instruction.
+
+**Discipline.** READ-ONLY on A38/A85/A99/A113/A121; <= 2 BLAS-pinned processes; commit/physical gate
+before every LP and verifier run; resumable per-cell records; hard per-task and per-process
+CPU-second caps checked before each cell; frozen `verify_case.py` byte-identical; nothing deleted.
+Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
