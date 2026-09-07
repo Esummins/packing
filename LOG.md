@@ -3967,3 +3967,35 @@ checked before each cell, so the final cell of each shard overruns it — 18,318
 frozen `verify_case.py` byte-identical; nothing deleted anywhere. Cells were processed in
 minmass-descending order so that the cap truncates the least promising tail, and the un-reached list is
 recorded. Report: `attempts/A115-k0-corner-rows/notes/t4_report.md`.
+
+## 2026-09-06 — A116-local-selection-tree (Fable lead) — done-success
+- **Theorem LOCAL [T], n-general** (`docs/proofs/local_certificate.md`): for a known minimum z* with load-bearing squares L
+  and class pins P, N = boxes [c ± r] × [θ ± ρ] in the class frame at s0; the selection tree over the NEAR pairs of L ∪ P
+  (eight signed separating axes per pair, IMPOSSIBLE ones by interval arithmetic) has leaves whose fixed-tilt polyhedra
+  are A110's GRAIN-LPs, and Dead_{L∪P}(N) ⟺ every possible leaf's minimum over every tilt cell exceeds s0 (Lemma COVER =
+  SAT per pair; Lemma LEAF = LP duality, the axis inequalities summed along the chain); dropping the other squares only
+  weakens the hypothesis. Lemma RELAX: an affine relaxation over a tilt cell with TILT VARIABLES (chords / V-lines of
+  |cos|+|sin|, p + |q| sin hw, McCormick on q·φ) whose loss is second order except the McCormick term (q-range × hw/2,
+  halved by q-range splits) — the fix of A111's first-order R·Δ chord bound; A111's r < s* − s0 law was the dropped
+  ambiguous rows letting the LP escape to the box rows.
+- **Lemma STAB (the PI's route) + tables** (`notes/stability_table.md`): a contact's selection is FORCED on a box until
+  its riding vertex reaches the end of its edge (slack 1/2 − |τ|) or the relative tilt crosses 90°·k; flush contacts
+  are a 2-way disjunction; decided rigorously by interval bisection over the pair's 6-D box. S07 chain contacts forced to
+  0.18–0.23 except f0–BL(0,1) (vertex 0.057 below the corner (1,2): 0.024 at ρ = 100δ°, 0.053 at ρ = 0) — the Trump
+  boundary; S02 forced to 0.08–0.23 except f1–f3 (overlap 0.085: 0.019 / 0.032). The single-leaf N at those radii is
+  DEAD (S07 3.884789, S02 3.885780, within 10 % of s*); the PI's f4–BR(0,0) "~0.25" is the ρ = 0 entry 0.254.
+- **Where the chain dips [T+M]**: the corner selection of f0–BL(0,1) realises the gap chain F_T and F_T ≤ s0 iff θ ≤ θ_T
+  + 6·10⁻⁵ °; the cut is the single inequality F_T(θ) > s0. Uncut S07 N is ALIVE from (0.05, 5°) with exact witnesses
+  at side F_T(40°) = 3.875871 and Trump inside; cut at 40.202° DEAD with measured minimum F_T(40.202°) = s0 + 1.3·10⁻⁴
+  (the slack cores cost nothing: the chain presses both pin corners against their walls). S02's mirror D(θ) < s0 for
+  θ > 49.818° (= 90° − θ_T, A111's 1.383° identity) does NOT materialise in the k5_11 frame.
+- **T2 grid** (`notes/t2_table.md`, `results/t2_*.jsonl`; 10⁴ samples + SLSQP + Trump canary on every DEAD): largest
+  certified S02/k5_11 **(0.2, 10°)** in 445 s (also (0.05, 20°)); S07/trump5 **(0.1, 40°)** in 52 s and (0.2, 10°).
+  Limiter at r = 0.3: a genuine rearrangement of L ∪ P (S02: BR(0,1) leaves its slot with f3 on top, side 3.8733; S07:
+  the ladder shears, 3.856) that the dropped squares would block; at ρ ≥ 20° with r ≥ 0.1 the tilt-cell count (900 s cap,
+  10⁵–2.5·10⁵ nodes, no witness). k5_16 frame DEAD to (0.1, 10°); exact pins same values; f1 added to S07 buys nothing.
+- **T3**: 72 of 184 k5_11 + 23 of 68 k5_16 S02-explained alive nodes have their whole load-path support inside a certified
+  N (YES leaf dead); 0–2 of 18 S07 nodes (their supports sit off the family's tilts, A110). Price 4–445 s per N shared by
+  every node inside it, vs 290–336 s per A57 child / 1 100 s per A60 leaf; the NO side is what remains.
+- Canaries PASS: S02 at r → 0 gives 3.886745, S07 3.885617; Trump outside every certified S07 N and inside every uncut
+  N that turned alive. Discipline: ≤ 2 BLAS-pinned processes, read-only on every campaign, no deletes.
