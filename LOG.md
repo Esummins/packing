@@ -4043,3 +4043,19 @@ recorded. Report: `attempts/A115-k0-corner-rows/notes/t4_report.md`.
   The 900 s cap remains worth it on its own: 4/30 and 7/26 converged versus 2/29 at 240 s.
 - A119 N_boxes.json not yet present; the 35-node in-N run stays blocked on it and on the independent >= 1e4-configuration
   sampled check, as instructed.
+- A96 INDEPENDENT VERIFICATION of A119's N_boxes.json (results/N_boxes.json, 5 neighbourhoods): PASS, but only after correcting
+  my own first attempt, which was nearly vacuous and would have passed for the wrong reason.
+  FIRST ATTEMPT (rejected as inconclusive): 20000 whole-configuration draws, 0 hits -- but a diagnostic showed the containment
+  filter rejected 99.97% of draws, so only ~30 configurations were ever tested for disjointness. Cause was MINE, not A119's: a
+  pin's slack box (halfwidth 0.00707) can put a pinned square a hair outside [0,s]^2, and my strict filter threw away the whole
+  draw. A pinned square belongs to a real packing and is inside by assumption, so the slack must be intersected with containment,
+  not used to reject.
+  CORRECTED CHECK (own SAT and containment code; A119's is not imported): pin centres clamped into the container, containment
+  filtering applied to the load-path squares only. 13289 configurations actually TESTED across the five N, ZERO pairwise-disjoint
+  at any side <= s0. Per-N coverage is uneven (S07 6000 each, S02 860 / 374 / 55), so the deployed neighbourhood was re-run on
+  its own: **S02_k5_11_r0.20_rho10 -- 73642 draws, 10500 TESTED, 0 hits**, clearing the >= 1e4 bar for the N that actually
+  carries the 4 A112 matches and the 35 targets. A119's own figures (0 hits / 12000 samples per N) are reproduced.
+  LESSON worth keeping: an acceptance-filtered sampled check must report how many samples SURVIVED the filter, not how many were
+  drawn. '20000 samples, 0 hits' was true and meaningless.
+  The 35-node run is NOT launched: the gate is now verified but the NO-side runner (N boxes -> caselp NO-family children, then
+  LP + frozen certifier at s0 with the s0-only/pending-A117 tags) is not yet written.
