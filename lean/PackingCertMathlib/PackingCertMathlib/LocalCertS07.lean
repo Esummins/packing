@@ -32,6 +32,13 @@ Theorem LOCAL for this `N`, modulo the single named cover obligation `CertCover`
   * `BR(0,0)`: centre (-1/2 + 1·s, 1/2 + 0·s) ± 0.007071067812, tilt 0
   * `TR(0,0)`: centre (-1/2 + 1·s, -1/2 + 1·s) ± 0.007071067812, tilt 0
 
+Every box above is CONTAINED in the certificate's own cell -- the centre bounds are the
+certificate's exact dyadic numbers, the tilt bounds are rounded INWARD, and a tilt cell that
+leaves the fundamental domain `theta in [0, 90 deg]` keeps only its inside part (`Box` carries
+one interval in `t = tan(theta/2)`, while such a cell is the union of two).  A smaller `N` makes
+`LocalHyp` harder to satisfy and `LocalDead` a weaker statement, so this direction is the sound
+one; the marked boxes are where it is strict.
+
 The certificate's own side window is `[3.82, 3.897084]`; the kill threshold is
 `s0 = 969271/250000 = 3.877084 ≥ ŝ`.
 -/

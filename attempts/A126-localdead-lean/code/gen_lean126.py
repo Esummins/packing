@@ -32,6 +32,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 LEAN = os.path.join(ROOT, "lean", "PackingCertMathlib", "PackingCertMathlib")
 S0 = Q(969271, 250000)
+GROUP = 2000                      # leaf records per emitted list literal
 
 
 def enc_leaf(lf, nv):
@@ -90,6 +91,19 @@ def tan_half_in(theta: float, up: bool, den: int = 10 ** 12) -> Q:
     return Q(math.floor(v * den) - 1, den)
 
 
+def straddles(t0: float, t1: float) -> bool:
+    """Does the certificate's tilt cell leave the fundamental domain theta in [0, 90 deg]?
+
+    `Box` carries ONE interval in the Lean parameter `t = tan(theta/2)`, and a packing's poses
+    are normalised to `t in [0, 1]` (theta in [0, 90 deg]).  A cell that reaches below 0 (or
+    above 90 deg) is the union of TWO t-intervals there, because the square's own 90 deg
+    symmetry folds the outside part back to the far end, and a single `Box` can only carry the
+    inside part.  The emitted box is then STRICTLY SMALLER than the certificate's cell -- still
+    sound (a smaller `N` gives a weaker `LocalDead`), but it must be said out loud.
+    """
+    return t0 < 0.0 or t1 > math.pi / 2
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("leaves")
@@ -132,9 +146,21 @@ def main():
         f.write(DATA_HEAD % dict(id=d["id"], n=len(chunks),
                                  rows=sum(len(l["rows"]) for l in d["leaves"]),
                                  nv=nv, den=den, tag=tag))
-        f.write("def %sChunks : List String := [\n" % tag.lower())
-        f.write(",\n".join('"%s"' % c for c in chunks))
-        f.write("\n]\n\n")
+        # Groups of GROUP: ONE list literal of 32 570 elements exceeds the elaborator's
+        # recursion depth (`maximum recursion depth has been reached` at the first element),
+        # while 2 000 elaborates in well under a second.
+        ngroups = (len(chunks) + GROUP - 1) // GROUP
+        for gi in range(ngroups):
+            part = chunks[gi * GROUP:(gi + 1) * GROUP]
+            f.write("private def %sChunks%d : List String := [\n" % (tag.lower(), gi))
+            f.write(",\n".join('"%s"' % c for c in part))
+            f.write("\n]\n\n")
+        f.write("/-- The %d leaf records, in %d groups of at most %d (one list literal of %d\n"
+                "elements exceeds the elaborator's recursion depth). -/\n"
+                % (len(chunks), ngroups, GROUP, len(chunks)))
+        f.write("def %sChunks : List String :=\n  %s\n\n"
+                % (tag.lower(),
+                   " ++\n  ".join("%sChunks%d" % (tag.lower(), gi) for gi in range(ngroups))))
         f.write(DATA_TAIL % dict(tag=tag, tagl=tag.lower(), nv=nv, D=D))
     print("wrote %s (%.2f MB)" % (data_path, os.path.getsize(data_path) / 1e6))
 
@@ -148,9 +174,16 @@ def main():
         for p in pins)
     boxdoc = "\n".join(
         "  * `%s`: centre in [%.9f, %.9f] × [%.9f, %.9f], tilt θ ∈ [%.6f, %.6f] rad,"
-        " i.e. t = tan(θ/2) ∈ [%s, %s] (rounded INWARD)"
+        " i.e. t = tan(θ/2) ∈ [%s, %s] (rounded INWARD)%s"
         % (b[6], float(b[0]), float(b[1]), float(b[2]), float(b[3]), b[7], b[8],
-           float(b[4]), float(b[5])) for b in boxes)
+           float(b[4]), float(b[5]),
+           "  **this cell leaves θ ∈ [0°, 90°]: the box carries only its inside part**"
+           if straddles(b[7], b[8]) else "") for b in boxes)
+    nstr = sum(1 for b in boxes if straddles(b[7], b[8]))
+    if nstr:
+        print("NOTE: %d of %d boxes have a tilt cell outside [0, 90 deg]; the emitted Box is "
+              "strictly smaller than the certificate's cell there (sound, weaker)"
+              % (nstr, len(boxes)))
     pindoc = "\n".join(
         "  * `%s`: centre (%s + %s·s, %s + %s·s) ± %.12f, tilt 0"
         % (p[5], p[0], p[1], p[2], p[3], float(p[4])) for p in pins)
@@ -232,6 +265,13 @@ Theorem LOCAL for this `N`, modulo the single named cover obligation `CertCover`
 `P` (%(nP)d class pins, A57 slack cores, tilt exactly 0):
 
 %(pindoc)s
+
+Every box above is CONTAINED in the certificate's own cell -- the centre bounds are the
+certificate's exact dyadic numbers, the tilt bounds are rounded INWARD, and a tilt cell that
+leaves the fundamental domain `theta in [0, 90 deg]` keeps only its inside part (`Box` carries
+one interval in `t = tan(theta/2)`, while such a cell is the union of two).  A smaller `N` makes
+`LocalHyp` harder to satisfy and `LocalDead` a weaker statement, so this direction is the sound
+one; the marked boxes are where it is strict.
 
 The certificate's own side window is `[%(s_lo)s, %(s_hi)s]`; the kill threshold is
 `s0 = 969271/250000 = 3.877084 ≥ ŝ`.

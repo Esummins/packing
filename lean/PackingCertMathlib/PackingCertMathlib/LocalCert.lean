@@ -142,22 +142,30 @@ structure CLeaf where
   rows : List CRow
 deriving Inhabited, Repr
 
-/-- `Σ_r y_r · row_r`, as an affine form. -/
-def accum : List CRow → List ℚ × ℚ
-  | [] => ([], 0)
-  | r :: t => (addL (smulL r.y r.co) (accum t).1, r.y * r.k + (accum t).2)
+/-- The linear part of `Σ_r y_r · row_r`.  Kept SEPARATE from the constant part: a single
+recursion returning a pair would be evaluated once per projection, and with up to 19 rows per
+leaf that is `2¹⁹` calls per leaf instead of 19. -/
+def accumL : List CRow → List ℚ
+  | [] => []
+  | r :: t => addL (smulL r.y r.co) (accumL t)
 
-/-- The accumulated form of a leaf: `e₀ + Σ y_r row_r`, or `Σ y_r row_r` for a ray. -/
-def leafForm (L : CLeaf) : List ℚ × ℚ :=
-  (if L.infeas then (accum L.rows).1 else addL [1] (accum L.rows).1, (accum L.rows).2)
+/-- The constant part of `Σ_r y_r · row_r`. -/
+def accumK : List CRow → ℚ
+  | [] => 0
+  | r :: t => r.y * r.k + accumK t
+
+/-- The linear part of a leaf's accumulated form: `e₀ + Σ y_r row_r`, or `Σ y_r row_r` for a
+ray (which carries no `s` column). -/
+def leafCo (L : CLeaf) : List ℚ :=
+  if L.infeas then accumL L.rows else addL [1] (accumL L.rows)
 
 /-- **The leaf check**: every multiplier is nonnegative, and the accumulated form's exact
 minimum over the box exceeds `s0` (a ray: exceeds `0`). -/
 def checkLeaf (s0 : ℚ) (L : CLeaf) : Bool :=
   L.rows.all (fun r => 0 ≤ r.y) &&
-    (match minL (leafForm L).1 L.box with
+    (match minL (leafCo L) L.box with
      | none => false
-     | some v => decide ((if L.infeas then 0 else s0) < v + (leafForm L).2))
+     | some v => decide ((if L.infeas then 0 else s0) < v + accumK L.rows))
 
 /-- The leaf's rows hold, and its box contains, the variable vector `x`. -/
 def LeafHolds (L : CLeaf) (x : Nat → ℝ) : Prop :=
@@ -165,16 +173,16 @@ def LeafHolds (L : CLeaf) (x : Nat → ℝ) : Prop :=
 
 theorem accum_le (rows : List CRow) (x : Nat → ℝ)
     (hy : ∀ r ∈ rows, 0 ≤ r.y) (hr : ∀ r ∈ rows, evalL r.co x 0 + (r.k : ℝ) ≤ 0) :
-    evalL (accum rows).1 x 0 + (((accum rows).2 : ℚ) : ℝ) ≤ 0 := by
+    evalL (accumL rows) x 0 + ((accumK rows : ℚ) : ℝ) ≤ 0 := by
   induction rows with
-  | nil => simp [accum, evalL]
+  | nil => simp [accumL, accumK, evalL]
   | cons r t ih =>
     have h1 := ih (fun q hq => hy q (List.mem_cons_of_mem _ hq))
       (fun q hq => hr q (List.mem_cons_of_mem _ hq))
     have h2 := hr r (List.mem_cons_self ..)
     have h3 : (0 : ℝ) ≤ (r.y : ℝ) := by exact_mod_cast hy r (List.mem_cons_self ..)
     have h4 : (r.y : ℝ) * (evalL r.co x 0 + (r.k : ℝ)) ≤ 0 := mul_nonpos_of_nonneg_of_nonpos h3 h2
-    simp only [accum, evalL_addL, evalL_smulL]
+    simp only [accumL, accumK, evalL_addL, evalL_smulL]
     push_cast
     push_cast at h1 h4
     linarith
@@ -192,31 +200,24 @@ theorem checkLeaf_sound {s0 : ℚ} {L : CLeaf} {x : Nat → ℝ}
     simpa using this
   have hacc := accum_le L.rows x hy' hr
   revert hm
-  cases hmin : minL (leafForm L).1 L.box with
+  cases hmin : minL (leafCo L) L.box with
   | none => intro hm; simp [hmin] at hm
   | some v =>
     intro hm
     simp only [hmin, decide_eq_true_eq] at hm
-    have hlow : (v : ℝ) ≤ evalL (leafForm L).1 x 0 := minL_le _ _ _ _ _ hmin hb
+    have hlow : (v : ℝ) ≤ evalL (leafCo L) x 0 := minL_le _ _ _ _ _ hmin hb
     by_cases hi : L.infeas
     · exfalso
-      have hform : (leafForm L).1 = (accum L.rows).1 := by simp [leafForm, hi]
+      have hform : leafCo L = accumL L.rows := by simp [leafCo, hi]
       rw [hform] at hlow
       simp only [hi, if_true] at hm
-      have : ((v + (accum L.rows).2 : ℚ) : ℝ) ≤ 0 := by
-        push_cast
-        have h2 : ((leafForm L).2 : ℚ) = (accum L.rows).2 := rfl
-        linarith
-      have hpos : (0 : ℝ) < ((v + (leafForm L).2 : ℚ) : ℝ) := by exact_mod_cast hm
-      have h2 : ((leafForm L).2 : ℚ) = (accum L.rows).2 := rfl
-      rw [h2] at hpos
+      have hpos : (0 : ℝ) < ((v + accumK L.rows : ℚ) : ℝ) := by exact_mod_cast hm
+      push_cast at hpos
       linarith
-    · have hform : (leafForm L).1 = addL [1] (accum L.rows).1 := by simp [leafForm, hi]
+    · have hform : leafCo L = addL [1] (accumL L.rows) := by simp [leafCo, hi]
       rw [hform, evalL_addL, evalL_one] at hlow
       simp only [hi, if_false] at hm
-      have hlt : ((s0 : ℚ) : ℝ) < ((v + (leafForm L).2 : ℚ) : ℝ) := by exact_mod_cast hm
-      have h2 : ((leafForm L).2 : ℚ) = (accum L.rows).2 := rfl
-      rw [h2] at hlt
+      have hlt : ((s0 : ℚ) : ℝ) < ((v + accumK L.rows : ℚ) : ℝ) := by exact_mod_cast hm
       push_cast at hlt ⊢
       linarith
 
