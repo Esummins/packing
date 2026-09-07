@@ -1,4 +1,4 @@
-# The residue ledger — everything still standing between us and s(11) = ŝ, as of 2026-09-06 02:00
+# The residue ledger — everything still standing between us and s(11) = ŝ, as of 2026-09-07 12:00
 
 Companion to `residue_map.md` (the narrative, kept as a log) and `shadows.md` (the gallery). This file is the
 **exhaustive list** of what is not yet killed, organised by node family, with a picture for each family, its current
@@ -20,11 +20,11 @@ lists what is left; that file prices it.**
 | | S02 the k7 pinwheel | boxes whose support is the 3.8867 pinwheel | 252 (184 + 68), carries the deep tree | tight core (in), deeper levels terminate (f₄ = 0) | grain kill (§6) or just time |
 | | S03–S06, S08–S53 | 45 smaller shadows, mostly level 1 | ~250 | as S01/S02 by type | PI review of the gallery |
 | | fractional | no integral support at all | 264 (151 + 113) | tree only | the genuine tail |
-| Window stragglers | k5_02, k5_03 (partial), k5_12 (k5_13 running) | thin whole-window certificates | 3–4 k5 classes; **k6 and up all full** (A114 closed k6_07, k6_23, k6_27) | slab sweeps, resumable | ~5–15 CPU-h |
-| Protected tier | trump5 cover/slackcore | residual tree ending in Trump's basin | 325 alive nodes in A107's input (S01 196, S07 18, S02 12 …) | A60 route, paused | S01 crowd rows; k6_07 window for the S07 slot |
+| Window stragglers | **k5_13 only** (A61 running) | one thin whole-window certificate | 1 class; scoreboard 51/52 — A114 closed k5_02, k5_03, k5_12 with the original s0 certificates once slabs were sized by the width law | slab sweep, resumable | ≤ 3 CPU-h |
+| Protected tier | trump5 cover/slackcore | residual tree ending in certified basins (Trump's, and now S07/S33/S38's local certificates: A116/A119/A122, A125 running on S33) | 325 alive nodes in A107's input (S01 196, S07 18, S02 12 …) | A60 route, paused | S01 crowd rows; the basins as YES leaves |
 | | the other 15 protected classes | conditioning trees per exact stratum | 3,500–4,200 CPU-h priced (A100) | A84/A100 model | same levers as A57 |
-| k0_00 | the frame residue | K0-BLOCKED packings in W with every intruder locked | conjecturally empty (LOCK-FREE⁺) | tree priced 9,300–21,700 CPU-h (A99) | one theorem: LOCK-FREE⁺(< 4) |
-| Lean | TopLevel axioms | `stratum_kill`, `trump_residual`, `a22_exact_structure` | 3 | replay of certificates + the above | the above |
+| k0_00 | the frame residue | 12 converged-alive cells (τ = budget, minmass 1) after A115's warm re-solves; theory: the selected minimiser on W (DRAIN-SEL, A128) | 12 cells; tree priced ~12,000 CPU-h after A115 | exchange move proved on a box (A128); the three window holds are flush re-fits (A130 running) | the flush-aware move, or the two-meeter cover |
+| Lean | TopLevel axioms + the local-certificate axiom | `stratum_kill`, `trump_residual`, `a22_exact_structure`; `sat_selection` in Local.lean | 3 + 1 | replay of certificates + the above; A126 running (LocalDead in the kernel, discharge `sat_selection`, YES/NO composition) | the above |
 
 ---
 
@@ -161,7 +161,7 @@ to draw. These are what the tree is for, and they are mostly level 1 (110 + 106)
 
 ---
 
-## 2. The window stragglers (A56 scoreboard **48/52 full-window** after A114, 2026-09-06 `9ef80bfa`)
+## 2. The window stragglers (A56 scoreboard **51/52 full-window** after A114 `ee0c18d5`, 2026-09-07; only k5_13 open — the rows below are the history)
 
 | class | window status | note | next |
 |---|---|---|---|
@@ -292,6 +292,11 @@ TopLevel roster: K0-O1 + chain replays + ShellKill (Crowd, CrowdZone, Slide, Pin
 teleport_packing, T5 (core_meet_same_square, unchanged by T5′), N1, M1, T11. Remaining axioms: `stratum_kill` (the
 replay of every class certificate on W), `trump_residual` (the protected tier + basin), `a22_exact_structure`
 (Trump's exact data). Every leaf above has a Lean shape written (noroom.md §8, lockfree.md §7, slot_crowds.md).
+**Local.lean (A119, `71d18eba`)**: the local certificate's constituent lemmas and three generated leaf kills build
+with no sorries and one project axiom, `sat_selection` (separating axis for open interiors; the closed form is
+proved). Not yet in Lean: `LocalDead` for a concrete neighbourhood (the cover is checked in Python) and its
+composition with the YES/NO branches — both are A126's deliverable (running, after the external review).
+`ParamNoFam.lean` (A117) proves the NO-family verifier's exemption clause.
 
 ---
 
