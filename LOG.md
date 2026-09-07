@@ -4030,3 +4030,16 @@ recorded. Report: `attempts/A115-k0-corner-rows/notes/t4_report.md`.
   is a frame change I cannot do safely from outside A116. Getting it wrong is a SOUNDNESS error (it would silently declare a
   region empty that is not), not a performance one, so it needs A116's own frame code or an A116 chore exporting N as
   node-frame boxes. The wiring, target list, tagging and ledger are ready to consume that the moment it exists.
+- A96 THREE-ARM ROW-FILTER RESULT (B=30 nodes, C=26 nodes, 900 s cap, 19.3 CPU-h): THE ROW FILTER ADDS NO KILLS.
+    arm B (trimmed, all rows)        n=30  converged 4  strict-kill 4  knife 19  alive 7   9.8 CPU-h
+    arm C (trimmed + row filter)     n=26  converged 7  strict-kill 3  knife 17  alive 6   9.5 CPU-h, median 53% of rows dropped
+  Kills in C that are not in B: **NONE**. Kills in B not in C: one (Y1135, not yet reached in C). So dropping a median 53% of
+  the LP rows produced ZERO additional kills. What it did buy is CONVERGENCE: 7/26 in C vs 4/30 in B, i.e. the smaller LP
+  finishes more often -- but the nodes it finishes are the ones that were going to be knife-edge or alive anyway.
+  VERDICT: the row filter does NOT justify the verifier clause change on this evidence. The spec
+  (notes/verifier_v2_rowfilter.md) explicitly gated the verifier-v2 chore on "arm C shows kills that arm B does not", and it does
+  not. Route (A) and row-dropping should stay shelved; the 43-53% row reduction is a real speedup with no demonstrated kill yield,
+  and a soundness-relevant clause change cannot be bought with a speedup.
+  The 900 s cap remains worth it on its own: 4/30 and 7/26 converged versus 2/29 at 240 s.
+- A119 N_boxes.json not yet present; the 35-node in-N run stays blocked on it and on the independent >= 1e4-configuration
+  sampled check, as instructed.
