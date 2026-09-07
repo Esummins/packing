@@ -301,3 +301,21 @@ but it kills support patterns, not nodes, so the tree price is unchanged.
 **What this leaves of the idea.** The grain menu is real, exact, and three-for-three on the known minima; it is the
 right language for the paper's "why Trump" and for higher n (the same four chain formulas with ⌈√n⌉ in place of 4).
 As a kill it needs the localisation the tree provides; the honest form is GRAIN-ROW inside the node LP, priced next.
+
+### 6.2 The local certificate (A116, 2026-09-07, `74a34f96`, `docs/proofs/local_certificate.md`)
+
+**Theorem LOCAL, proved and measured.** Around a known minimum with load-bearing squares L and class pins P, the
+selection tree over the near pairs (COVER: separating axes per pair, ≤ 8^k leaves, impossible ones by interval) has
+leaves whose minimum side is the chain formula (LEAF: LP duality = balanced force system); the neighbourhood N is
+dead iff every possible leaf's minimum over every tilt cell exceeds s0; nothing about the other squares is assumed
+(DROP). **Certified radii, 20× A111's: S02 dead at (r, ρ) = (0.2, 10°) and (0.05, 20°) in k5_11's frame; S07 dead at
+(0.1, 40°) and (0.2, 10°) in trump5's frame with the single cut F_T(θ) > s0 (θ > θ_T + 6·10⁻⁵°).** Every N confirmed by
+10⁴ samples, Trump outside. A111's r < s* − s0 law was the dropped ambiguous rows letting the LP escape into the box
+rows; none of (i)–(iii) remains. The PI's stability-radius route is confirmed pair by pair
+(`attempts/A116-local-selection-tree/notes/stability_table.md`): S07's chain contacts are forced to 0.18–0.23, f4 against
+BR(0,0) to 0.254 at fixed tilt — the PI's 0.25 — and the limiter is f0 against BL(0,1), whose vertex sits 0.057 below
+the corner: the Trump boundary. **Limiter at r = 0.3**: a genuine rearrangement of L ∪ P that the dropped squares
+would block (S02: BR(0,1) leaves its slot, f3 climbs onto it, 3.8733; S07: the ladder shears, 3.856) — adding the
+blockers as boxes extends it (A119). **Consumer: 72 of 184 k5_11 and 23 of 68 k5_16 S02-explained alive nodes have their
+support inside a certified N**, 4–445 s per N shared by every node inside it; the NO side is what remains. Open: the
+rational Farkas certificates and the Lean file (A119), the ρ ≥ 20° tilt-cell cap.

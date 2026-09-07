@@ -62,6 +62,10 @@ merely unconverged at the LP time cap.
    are all Lemma TC, the k0 cells do not move (η = 0 exactly). As a scheduler option for stalled nodes with
    fall-through it is worth of order a wall-day on A57; it needs NO-families in the 4-D verifier and TC as a
    certified leaf to claim window validity (A117).
+   *A116 (`74a34f96`):* the local certificate around a minimum is dead at (0.2, 10°) for S02 and (0.1, 40°) for S07
+   — the YES leaf of the region tree at 20× A111's radius, covering the supports of 95 of the 252 S02-explained
+   alive nodes; certified in seconds per neighbourhood, shared by every node inside it. Exact/Lean form and the
+   blocking-box extension are A119; wiring as the YES region is with A96.
 2. **The alive population.** Re-run unconverged alive nodes with a longer LP cap before splitting them (A109's 28/46);
    branch on the load path instead of the rattler (A112); both are about not paying eight children for a node that
    was never alive or whose slack sits in squares it does not condition on.
