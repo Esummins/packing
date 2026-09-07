@@ -281,7 +281,17 @@ five at 10⁻³ including the 4.000237 lock's 9° pair and K01's TL); the supply
 the whole menu on every box: the 4.001525 lock (above 4), K03, K06 (the S02 pinwheel support), l1_124, and Trump. Below
 4 every hold is a **flush re-fit with margin ≈ 0** — the flush population of A98/A101/A121 seen from the box side — so
 the missing move is not a screw but a non-rigid column-straightening with row-slide, or a depth-2 exchange with
-margin. Not composed; the k0 budget row is unchanged. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
+margin. Not composed; the k0 budget row is unchanged. **The flush follow-up (A130, `cd87ec6d`, drain_sel.md §7):** the
+non-rigid FIELD (one screw per square, flush kinks charged exactly, Lemma BOX-FIELD-W) is the move A128 named — it
+certifies the 4.001525 lock at all eight intruders on the 10⁻⁴ box, where every rigid move had failed. The three window
+holds (K03, K06, l1_124) survive it for two exact reasons: the deep meeter's retreat at a slot-like-square-plus-flush
+corner is an exact slide that an interval-certified fixed field sees only on pieces where every flush partner leans
+the same way (Lemma MODE: a mode accumulation at the flush stratum, not a lock), and every re-fit's flush blocker is a
+wedged interior grain. Trump is first-order ISOLATED (weak cone {0}) at all nine subjects. What it costs: nothing for
+DRAIN-SEL(W) — the three holds are k ≥ 1 packings above ŝ, not K0-BLOCKED packings in W, and Lemma SLOT-GRAZER (F′)
+puts the flush-type corners in a slab of width 2.4·10⁻³·ρ/10⁻³ below ŝ only — but a tree leaf at a flush stack must be
+semi-algebraic (mode contractor + parametric shells + stratum), not a box leaf, and the field leaf is silent at 0.1-
+wide root cells. New lemmas [T]: FLUSH-SLIDE, SLOT-GRAZER, TWO-INTRUDER, ISOLATED, KINK, SHELL-SCALE. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
 has an unlocked intruder — the drain theorem; the hook/chain formulas are one-wall tools with 4 → ⌈√n⌉.*
 
 ---
