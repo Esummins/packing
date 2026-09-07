@@ -4380,3 +4380,71 @@ across all 83 files — so the PI's `review.csv` rows stay valid.
   geometry moved.
 * Discipline: read-only everywhere else, one BLAS-pinned process, no deletes, git fetch + plain
   merge + push of A107's own paths.
+
+## 2026-09-07 — A121-reading-validator (Opus chore) — batch 3 (S16–S53): the first pass is complete, 83/83
+
+**CUMULATIVE OVER ALL 83 ROWS: 219 reading items, 1,487 (node, cut) rows, 9 node kills, 0 NEW,
+94 disagreements.** 9 × 850 s = **2.13 CPU-h**, every hour of it already booked by A118; no A99
+level-1 cell, so still **0 CPU-h off A99's k0 frontier and 0 off the A57 schedule**. Kills by
+type and class: `r`/k0_00 6, `r`/trump5 2, `ns`/k5_11 1 — and by cell, `TR(0,0)` ×7, `TL(0,0)`
+×2, reproducing A118's own "corner cells dominate the fires". A118 kills **15** of the 83 rows'
+nodes; the readings name the killing cell for **9** and a non-killing one for **6**
+(`l2_p210_000/010`, `l2_p215_011`, `l3_pp215_000_011`, `k5_11_interior_Y0138`,
+`k5_16_interior_Y0224`).
+
+**`st4` — all three are CONFIGURATION kills, not node cuts.** Four axis-aligned unit squares
+flush against one wall span that wall's unit strip, so they are pairwise disjoint in the
+perpendicular coordinate and the side is ≥ 4; the four need not be consecutive (S50's top square
+sits **2.7·10⁻⁵** above the third, which is exactly s\* − 4). Verified: S50 `left` = BL(0,0)
+BL(0,1) BL(0,2) TL(0,0), s\* = 4.000027; S52 `left`, same four, 4.000197; S53 `right` = BR(0,0)
+BR(0,1) BR(0,2) TR(0,0), 4.000261. **But the four are not forced by any of the three nodes**:
+S50/S52 (A60, trump5) have only BL(0,0), BL(0,1) as pins — BL(0,2) and TL(0,0) are free — and S53
+(`k5_11_interior_Y0672`, op `diag`) has only one, BR(0,0). So the stack kills the drawn packing
+and leaves all three nodes alive. **The token is sound and its yield here is zero.**
+
+**The `-` rows — the blue snaps DO give candidate cuts, and the lane test converts none.** The
+usable-cell scan (every usable cell of every node's class, pulled into the shadow frame, counting
+NON-PIN meeters as SLOT-CROWD requires) finds **48 under-crowded (node, cell) pairs across the 13
+`-` rows** — 1–19 per entry, mostly the snapped square sitting alone in its own usable cell —
+and **0 node kills**: LANE ≥ 2 at 21, UNDECIDED at 21, and LANE ≤ 1 blocked by M = 1 at 6
+(S37/S38 TL(0,0), S40 BR(0,1), S42 TL(1,0)). Those six are the closest misses in the whole
+corpus.
+
+**The `g` rows: two cross-entry claims settled, one refined, one refuted.** S34 "same minimum as
+S33" is RIGHT ABOUT THE MINIMUM and wrong about the panel: **A122** re-minimised both with all
+eleven squares free and gets ds = 6.2·10⁻¹⁵, max centre gap 1.5·10⁻⁸, max tilt 2.5·10⁻⁶ ° — the
+same minimum — while the GALLERY landings differ (10 of 11 matched, max centre gap 0.041, max
+tilt 4.70°); A122's polish drops S34's s by 4.29·10⁻⁴ onto S33's value, so the S34 panel is
+simply not converged. S35 "same minimum as S33" is **WRONG**, and A122 confirms it independently:
+ds = 4.87·10⁻⁴, max centre gap 0.069, max tilt **6.92°** after polishing both. S09 "same as S05"
+is **WRONG** by inspection — s\* differs by 1.29·10⁻² and only 7 of 11 squares align. S21's
+"S07-type" is a family claim, and measured it is exactly that: 6 of 11 squares align, max centre
+gap 0.065, max tilt 10.48°, ds +8.70·10⁻³ — a related near-Trump packing, not S07's. Tilt grains
+all check out (S16 f0/1/3, S24 f0/2/3, S29 f0/1/3/4, S30, S31 f0/2/4); the recurring problem is
+Fritz-John closure — **7 `g` rows now carry a kkt_residual above 10⁻³** (K18 0.117, S21 0.103,
+K30 0.024, S29 0.021, S16 0.0091, S35 0.0018, …), i.e. those load paths are nnls fits, not
+certified.
+
+**T1c — EVERY right panel is a rearrangement, not a snap.** Matching each drawn minimum over D4
+against the snapped dual support of its own primary seed node: **81 of 83 are `rearrangement`**
+(some square moved > 0.05; worst S40 0.944, K12 0.719, K16 0.703) and the other **2 are
+`tilt-only`** (S02 max centre move 0.044 but max tilt 10.1°; S07 0.030 / 5.2°) — **zero snaps**.
+This reproduces A106 §2.2 from the other side: the minimum is never where the LP put the support,
+which is exactly why a reading is a POINTER to a cell and never a fact about the node. The full
+ranked table is the PI's `?` list.
+
+**Across all 64 `ns` items, 6 are genuine uncrowded near-snaps** (26 far, 24 already exactly ON
+the cell, 6 far + crowded, 2 near + crowded). Calibration over the now-32 far items: **28 are
+FLUSH in one axis** (residual ≤ 0.01, largest 5.5·10⁻³); of 784 relabelling rules the best hits
+**1 of 32**, the ceiling is **1 of 32 (3 %)**, and the **identity is still the argmin** of total
+L∞ (9.5034 vs 19.1977). All **18 `r` items are exactly right**. The slot/free under-count is
+**41 squares in 29 entries** at A121's thresholds and **47 in 33 at A107 v2's own** — reproducing
+the v2 re-render's count exactly (v2 adopted this finding; A107's results JSONs are unchanged).
+
+**Threshold moved, with the reason:** the meet/graze boundary is now 10⁻⁶, not 10⁻⁷. At 10⁻⁷,
+S44's `f0` (SAT gap −1.24·10⁻⁷, corner-frame depth 9.2·10⁻⁸) counted as a second meeter and made
+a correct `r` reading look like a crowd; over all 83 entries only 4 meeters sit between 10⁻⁷ and
+10⁻⁴ and every one is a converged tangency. Grazers are never dropped — each is listed against
+its cell. Canaries re-run, all PASS (C1 161/161, C2 72/72, C3 30/30, C4 235 contacts at max
+|diff| 0.0). Discipline unchanged: read-only outside A121 + this ledger + the registry row, one
+BLAS-pinned process, no LP, no lane recomputation.

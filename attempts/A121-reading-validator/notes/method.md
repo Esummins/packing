@@ -112,3 +112,51 @@ A101's own 0.01.
 **A merge bug found and fixed here:** `merge()` derived the set of entries to replace from the
 NEW rows, so an entry whose cuts fell to zero (S11's `-`) kept its stale rows forever.  The
 touched set is now `todo` - the entries actually re-processed.
+
+## 7. Batch 3: `st4`, `fl`, the `-` scan, cross-entry claims, and panel provenance
+
+**`st4`.** Four axis-aligned unit squares flush against ONE wall all span that wall's unit strip,
+so they are pairwise disjoint in the perpendicular coordinate, each occupies a unit interval of
+it, and the side is `>= 4`. The four need not be consecutive: S50's top square sits `2.7e-5`
+above the third, which is exactly `s* - 4`. `wall_stacks()` therefore COUNTS flush axis-aligned
+squares per wall rather than looking for a run of unit steps. The cut is a NODE cut only when
+every one of the four is a PIN of the node's class or one of its CONDITIONED squares (then the
+node's own hypothesis forces `side >= 4 > s0` and the node is dead); otherwise the stack kills
+the drawn CONFIGURATION and says nothing about the node.
+
+**`fl <sq> <cell>`.** Flush-along-wall: the square shares ONE coordinate with the cell centre
+(residual `<= 0.01`, A101's threshold) and is displaced along that wall. It is NOT a snap
+candidate -- Lemma SNAP-D needs the square inside the cell's eta-ball -- so the only cut it can
+carry is the ROOM condition on the cell.
+
+**The `-` rows** are answered by `usable_scan()`: for every node, every USABLE cell of its class
+(named in the NODE's frame) is pulled into the shadow frame through `struct_op` and its occupancy
+read off the drawn packing. SLOT-CROWD / K0-FREE demand `>= 2` NON-PIN squares in the open cell,
+so a usable cell met by `<= 1` non-pin square is a candidate cut the reading did not have to
+name; A118's lane verdict at that cell is what converts it. Pins are identified by mapping the
+class's census pin slots into the shadow frame (`pin_cells`).
+
+**Cross-entry claims.** A `g` description naming another entry (`S07-type`, `same minimum as
+S33`, `same as S05`) is a checkable claim: `compare_packings` aligns the two minimised packings
+over the full D4 with a Hungarian matching on centre + tilt. `same` in the text makes it an
+IDENTITY claim (a failure is a `?`); anything else is a family claim and only gets the
+measurement. Where **A122** has re-minimised both with all eleven squares free, A122's pairwise
+numbers are the authority on whether two entries are the same MINIMUM, and the gallery landings
+can still differ -- that distinction is what settles S34.
+
+**Panel provenance (`seed_distance`).** Each entry's drawn minimum is matched over D4 against the
+snapped dual support of the primary structure's own seed node -- the packing the minimiser was
+started from. `snap` = max centre move `<= 0.05` AND max tilt move `<= 3 deg`; `tilt-only` =
+positions held, tilts moved; `rearrangement` = some square moved more than 0.05.
+
+**The meet/graze boundary moved to 1e-6.** At 1e-7, S44's `f0` (SAT gap `-1.24e-7`, corner-frame
+depth `9.2e-8`) counted as a second meeter and made a correct `r` reading look like a crowd. Over
+all 83 entries only 4 meeters sit between 1e-7 and 1e-4 and every one is a converged tangency, so
+the boundary is drawn at 1e-6 -- five orders below the LP pitch 0.192. Grazers are never silently
+dropped: every one is listed against its cell.
+
+**Cross-check against A107 gallery v2.** The v2 re-render adopted A121's slot/free finding and
+reports "47 such squares in 33 entries" at its own thresholds (1e-3 in position, 0.05 deg in
+tilt). This module reproduces exactly **47 in 33** at those thresholds, and **41 in 29** at its
+own stricter (1e-5, 1e-3 deg). A107's results JSONs are unchanged by v2, so the audit still
+reports against the stored splits.

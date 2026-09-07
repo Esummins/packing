@@ -30,6 +30,7 @@ import io
 import json
 import math
 import os
+import re
 import subprocess
 import sys
 
@@ -56,8 +57,12 @@ SHAT = 3.877083590022814
 S0 = CP.S0
 
 # ---- tolerances -----------------------------------------------------------------------
-MEET = -1e-7        # SAT gap below this = genuine open-interior meet
-GRAZE = 1e-7        # |gap| <= this = tangency/graze (A107 books contacts at gap < 1e-7)
+MEET = -1e-6        # SAT gap below this = genuine open-interior meet
+GRAZE = 1e-6        # |gap| <= this = tangency/graze.  A107 books contacts at 1e-7; over the 83
+                    # entries only 4 meeters sit between 1e-7 and 1e-4, and every one of them is
+                    # a converged tangency (S44's f0 at -1.24e-7, corner-frame depth 9.2e-8), so
+                    # the boundary is drawn at 1e-6 -- five orders below the LP pitch 0.192.
+                    # Grazers are never silently dropped: they are listed per cell.
 SNAP_D = 0.05       # A107's snap position tolerance (shadowlib.snap dtol)
 SNAP_A = 3.0        # A107's snap tilt tolerance, degrees (shadowlib.snap atol)
 EXACT_D = 1e-5      # "already exactly on the cell": position, and
@@ -137,6 +142,9 @@ def is_corner(name):
 
 
 # ------------------------------------------------------------------ the corpus
+ENTRIES = {}
+
+
 def load_entries():
     """id -> dict(kind, s, slots, free, analysis, ...) for both galleries."""
     out = {}
@@ -218,6 +226,8 @@ def parse_reading(txt):
     txt = txt.strip()
     if txt == "-":
         return [dict(type="-", sq=None, cell=None, star=False, text="-")]
+    if txt.lower().startswith("st4"):
+        return [dict(type="st4", sq=None, cell=None, star=False, text=txt)]
     head, sep, tail = txt.partition(" g ")
     if txt.startswith("g "):
         return [dict(type="g", sq=None, cell=None, star=False, text=txt[2:].strip())]
@@ -230,7 +240,7 @@ def parse_reading(txt):
         w = part.strip().split()
         if not w:
             continue
-        if w[0].lower() in ("r", "ns", "i", "g"):
+        if w[0].lower() in ("r", "ns", "i", "g", "st4", "fl"):
             typ = w[0].lower()
             w = w[1:]
         if typ is None:
@@ -238,6 +248,9 @@ def parse_reading(txt):
             continue
         if typ == "i":
             items.append(dict(type="i", sq=None, cell=None, star=False, text=part.strip()))
+            continue
+        if typ == "st4":
+            items.append(dict(type="st4", sq=None, cell=None, star=False, text=part.strip()))
             continue
         if typ == "g":
             items.append(dict(type="g", sq=None, cell=None, star=False, text=" ".join(w)))
@@ -310,7 +323,13 @@ def entry_audit(e, P, s):
         corners[cn_] = dict(met=[m["sq"] for m in met],
                             depths=[round(m["depth"], 6) for m in met],
                             grazers=[g["sq"] for g in gz])
+    on_v2 = 0
+    for (nm, x, y, tt) in P:
+        if nm.startswith("f") and tmod90(tt) <= 0.05:
+            if min(max(abs(x - q[0]), abs(y - q[1])) for q in cells.values()) <= 1e-3:
+                on_v2 += 1
     return dict(type="audit", text="(entry audit)", entry=e["id"], s_star=s, k=e["nsquares"],
+                free_on_cells_at_a107v2_tol=on_v2,
                 gallery_slots=e["slots"], gallery_nfree=e["nfree"],
                 free_squares_on_named_cells=on,
                 true_slot_count=len(e["slots"]) + len(on),
@@ -320,6 +339,75 @@ def entry_audit(e, P, s):
                      % (len(e["slots"]), e["nfree"], len(on),
                         ", ".join("%s@%s" % (o["sq"], o["cell"]) for o in on),
                         len(e["slots"]) + len(on), e["nfree"] - len(on))] if on else []))
+
+
+def wall_stacks(P, s, dtol=1e-6, atol=1e-3):
+    """Axis-aligned unit squares flush against each wall.
+
+    Four axis-aligned unit squares flush against the SAME wall all span that wall's unit strip,
+    so they are pairwise disjoint in the perpendicular coordinate and each occupies a unit
+    interval of it: the side is >= 4.  (The four need not be consecutive -- S50's top square sits
+    2.7e-5 above the third, which is exactly s* - 4.)
+    """
+    out = {}
+    for wall in ("left", "right", "bottom", "top"):
+        run = []
+        for nm, x, y, t in P:
+            if tmod90(t) > atol:
+                continue
+            hw = 0.5 * (abs(math.cos(t)) + abs(math.sin(t)))
+            g = {"left": x - hw, "right": s - hw - x,
+                 "bottom": y - hw, "top": s - hw - y}[wall]
+            if abs(g) <= dtol:
+                run.append((y if wall in ("left", "right") else x, nm, g))
+        run.sort()
+        out[wall] = [dict(sq=nm, along=u, wall_gap=g) for u, nm, g in run]
+    return out
+
+
+def pin_cells(cls, op):
+    """The class's pin cells, named in the SHADOW frame (node frame -> shadow frame is `op`)."""
+    out = []
+    for (px, py) in CP.CLASSES.get(cls, {}).get("pins", []):
+        best, bd = None, 1e9
+        for nm, (qx, qy) in slot_cells(S0).items():
+            d = max(abs(px - qx), abs(py - qy))
+            if d < bd:
+                best, bd = nm, d
+        if bd < 1e-6:
+            out.append(cell_map(best, op))
+    return out
+
+
+def compare_packings(eA, eB):
+    """Best D4 alignment of two minimised packings; per-square matching by centre + tilt."""
+    from scipy.optimize import linear_sum_assignment
+    sA, PA = packing_of(eA)
+    sB, PB = packing_of(eB)
+    if len(PA) != len(PB):
+        return dict(comparable=False, nA=len(PA), nB=len(PB), ds=sA - sB)
+    A = np.array([[q[1], q[2], q[3]] for q in PA])
+    best = None
+    for op, f in d4_ops(sB).items():
+        B = np.array([f(q[1], q[2], q[3]) for q in PB])
+        dc = np.maximum(np.abs(A[:, None, 0] - B[None, :, 0]),
+                        np.abs(A[:, None, 1] - B[None, :, 1]))
+        ta = np.array([tmod90(v) for v in A[:, 2]])
+        tb = np.array([tmod90(v) for v in B[:, 2]])
+        dt = np.abs(ta[:, None] - tb[None, :])
+        cost = dc + dt / 90.0
+        r, c = linear_sum_assignment(cost)
+        rec = dict(op=op, max_centre_gap=float(dc[r, c].max()),
+                   max_tilt_deg=float(dt[r, c].max()),
+                   matched=int(((dc[r, c] <= 0.05) & (dt[r, c] <= 3.0)).sum()),
+                   perm=[int(v) for v in c])
+        if best is None or (-rec["matched"], rec["max_centre_gap"]) <                 (-best["matched"], best["max_centre_gap"]):
+            best = rec
+    best.update(comparable=True, n=len(PA), ds=sA - sB, s_a=sA, s_b=sB,
+                same_minimum=bool(best["matched"] == len(PA)
+                                  and best["max_centre_gap"] <= 1e-4
+                                  and best["max_tilt_deg"] <= 1e-3))
+    return best
 
 
 def occupancy(P, s, cell):
@@ -362,6 +450,23 @@ def validate_item(e, P, s, it, cls):
         rec.update(k=k, nslot=len(e["slots"]), nfree=e["nfree"], s=s)
         if k >= 11:
             rec["flags"].append("? support is COMPLETE: k = %d squares, not < 11" % k)
+        return rec
+
+    if it["type"] == "st4":
+        st = wall_stacks(P, s)
+        walls = {w: v for w, v in st.items() if len(v) >= 4}
+        rec.update(s=s, s_star=s, side_ge_4=bool(s >= 4.0 - 1e-9),
+                   slack_over_4=s - 4.0,
+                   stacks={w: [q["sq"] for q in v] for w, v in st.items() if v},
+                   walls_with_4=list(walls),
+                   stack={w: [q["sq"] for q in v] for w, v in walls.items()})
+        if not walls:
+            best = max((len(v) for v in st.values()), default=0)
+            rec["flags"].append("? no wall carries FOUR axis-aligned flush unit squares "
+                                "(longest is %d); the side-4 argument does not apply here" % best)
+        if s < 4.0 - 1e-9:
+            rec["flags"].append("? s* = %.6f < 4: a four-stack forces side >= 4, so the "
+                                "minimised packing contradicts the reading" % s)
         return rec
 
     if it["type"] == "g":
@@ -418,6 +523,60 @@ def validate_item(e, P, s, it, cls):
                                     "drops s by %.5f -- FJ and the rattler test disagree on %s)"
                                     % (nm, rat[nm]["drop"], nm))
         rec["a116_stability"] = a116_for(e["id"])
+        rec["a122"] = a122_for(e["id"])
+        # a description that names another entry ("S07-type", "same minimum as S33", "same as
+        # S05") is a checkable claim: align the two minimised packings over D4.
+        rec["claimed_same_as"] = {}
+        for other in sorted(set(re.findall(r"(?<![A-Za-z0-9])([SK][0-9]{2})(?![0-9])", it["text"]))):
+            if other == e["id"] or other not in ENTRIES:
+                continue
+            rec["claimed_same_as"][other] = compare_packings(e, ENTRIES[other])
+        # "same as X" / "same minimum as X" is an IDENTITY claim and gets a `?` when it fails;
+        # "X-type" is a family claim and only gets the measurement.
+        asserts_same = "same" in it["text"].lower()
+        a122 = rec["a122"] or {}
+        for other, cp in rec["claimed_same_as"].items():
+            if not cp.get("comparable"):
+                rec["flags"].append("? %s has %d squares and %s has %d -- not the same packing"
+                                    % (e["id"], cp["nA"], other, cp["nB"]))
+                continue
+            pol = (a122.get("vs") or {}).get(other)
+            if pol is not None:
+                # A122 re-minimised both with all eleven squares free: that is the authority on
+                # whether the two are the same MINIMUM; the gallery landings can still differ.
+                same_pol = (abs(pol["ds"]) <= 1e-9 and pol["max_centre_gap"] <= 1e-4
+                            and pol["max_tilt_deg"] <= 1e-3)
+                cp["a122"] = dict(pol, same_after_polish=same_pol)
+                if same_pol and not cp["same_minimum"]:
+                    rec["flags"].append("  (%s and %s are the SAME MINIMUM after A122's polish "
+                                        "-- ds %.2e, max centre gap %.2e, max tilt %.2e deg -- "
+                                        "but the GALLERY landings differ: %d of %d squares "
+                                        "matched, max centre gap %.4f, max tilt %.3f deg. The "
+                                        "reading is right about the minimum; the panel is not "
+                                        "converged.)"
+                                        % (e["id"], other, pol["ds"], pol["max_centre_gap"],
+                                           pol["max_tilt_deg"], cp["matched"], cp["n"],
+                                           cp["max_centre_gap"], cp["max_tilt_deg"]))
+                elif not same_pol and asserts_same:
+                    rec["flags"].append("? NOT the same minimum as %s, and A122 confirms it "
+                                        "after re-minimising both with all eleven squares free: "
+                                        "ds %.3e, max centre gap %.4f, max tilt %.3f deg"
+                                        % (other, pol["ds"], pol["max_centre_gap"],
+                                           pol["max_tilt_deg"]))
+                continue
+            if asserts_same and not cp["same_minimum"]:
+                rec["flags"].append("? NOT the same minimum as %s: best D4 alignment (`%s`) "
+                                    "matches %d of %d squares, max centre gap %.4f, max tilt "
+                                    "%.3f deg, ds %+.3e (s* %.6f vs %.6f)"
+                                    % (other, cp["op"], cp["matched"], cp["n"],
+                                       cp["max_centre_gap"], cp["max_tilt_deg"], cp["ds"],
+                                       cp["s_a"], cp["s_b"]))
+            elif not cp["same_minimum"]:
+                rec["flags"].append("  (family claim, measured: vs %s the best D4 alignment "
+                                    "(`%s`) matches %d of %d squares, max centre gap %.4f, max "
+                                    "tilt %.3f deg, ds %+.3e -- a related packing, not the same "
+                                    "one)" % (other, cp["op"], cp["matched"], cp["n"],
+                                              cp["max_centre_gap"], cp["max_tilt_deg"], cp["ds"]))
         # a grain description need not name squares ("a common-tilt grain", "4 stacked on the
         # left"): give the PI the entry's tilt clusters and its flush columns unconditionally.
         allt = sorted(((tmod90(t), nm) for nm, x, y, t in P), key=lambda z: z[0])
@@ -469,6 +628,11 @@ def validate_item(e, P, s, it, cls):
                                    for c in cls})
     others = [m for m in met if m["sq"] != it["sq"]]
     rec["others"] = others
+    gz = [g for g in graze if g["sq"] != it["sq"]]
+    if gz:
+        rec["flags"].append("  (grazers on %s, not meeters: %s -- reported, not counted)"
+                            % (it["cell"],
+                               ", ".join("%s at %+.2e" % (g["sq"], g["gap"]) for g in gz)))
     rec["cell_singly_met"] = (len(met) == 1 and met[0]["sq"] == it["sq"])
     rec["cell_unmet_by_others"] = (len(others) == 0)
 
@@ -482,6 +646,21 @@ def validate_item(e, P, s, it, cls):
              "%s sits in the arm R_p)" % (m["depth"], m["sq"]))
         rec["flags"].append("? %s is ALSO met by %s (SAT penetration %.4f%s) -- crowd, not room"
                             % (it["cell"], m["sq"], m["penetration"], d))
+    if it["type"] == "fl":
+        # flush-along-wall: the square shares ONE coordinate with the cell centre and is
+        # displaced along that wall.  It is NOT a snap candidate (SNAP-D needs the square inside
+        # the cell's eta-ball); the cut, if any, is the ROOM condition on the cell.
+        rec["flush_residual"] = min(abs(x - cx), abs(y - cy))
+        rec["along_wall"] = max(abs(x - cx), abs(y - cy))
+        rec["flush"] = bool(rec["flush_residual"] <= 0.01)
+        if not rec["flush"]:
+            rec["flags"].append("? %s is not flush with %s: residual %.4f on the matching axis "
+                                "(A101's threshold is 0.01)"
+                                % (it["sq"], it["cell"], rec["flush_residual"]))
+        if tilt > SNAP_A:
+            rec["flags"].append("? %s tilt %.3f deg off axis (a flush square should be within "
+                                "%.1f deg)" % (it["sq"], tilt, SNAP_A))
+
     if it["type"] == "ns":
         # Lemma SNAP-D needs the cell otherwise unmet; the shell bound prices the grazers.
         eps = linf + 0.5 - 1.0 / (2.0 * (abs(math.cos(t)) + abs(math.sin(t))))
@@ -537,6 +716,113 @@ def node_class(nd, lane):
     return None
 
 
+def usable_scan(e, P, s, nodes, sops, lane):
+    """For every node, every USABLE cell of its class (named in the node's frame) is pulled into
+    the shadow frame and its occupancy read off the minimised packing.
+
+    SLOT-CROWD / K0-FREE demand >= 2 NON-PIN squares in the open cell; a usable cell met by <= 1
+    non-pin square in the drawn packing is a cut the reading did not have to name -- this is the
+    objective answer for the `-` rows ("the blue snaps carry the row").
+    """
+    rows = []
+    for nd in nodes:
+        so = sops.get((nd["src"], nd["nid"]))
+        if not so:
+            continue
+        op = so["struct_op"]                       # node frame -> shadow frame
+        cls = node_class(nd, lane)
+        usable = CP.CLASSES.get(cls, {}).get("usable", {})
+        if not usable:
+            continue
+        pins = set(pin_cells(cls, op))
+        pinsq = set()
+        for nm, x, y, tt in P:
+            if nm in pins:
+                pinsq.add(nm)
+        lr = lane.get((nd["src"], nd["nid"]))
+        for ncell, ext in sorted(usable.items()):
+            scell = cell_map(ncell, op)
+            _, met, gz = occupancy(P, s, scell)
+            nonpin = [m for m in met if m["sq"] not in pinsq]
+            if len(nonpin) > 1:
+                continue
+            lc = lane_at(lr, ncell)
+            rows.append(dict(src=nd["src"], nid=nd["nid"], level=nd.get("level"), cls=cls,
+                             node_cell=ncell, shadow_cell=scell, extension=ext, struct_op=op,
+                             n_nonpin=len(nonpin),
+                             nonpin=[m["sq"] for m in nonpin],
+                             all_meeters=[m["sq"] for m in met],
+                             grazers=[g["sq"] for g in gz],
+                             pins_in_frame=sorted(pinsq),
+                             lane_verdict=(lc or {}).get("verdict"),
+                             M=(lc or {}).get("ncond_pot"),
+                             node_kill=bool(lc and lc.get("lane_ub") is not None
+                                            and lc.get("ncond_pot") is not None
+                                            and lc["lane_ub"] + lc["ncond_pot"] <= 1)))
+    return rows
+
+
+def seed_distance(e, sops, nidx, setname):
+    """How far the drawn minimum is from the SNAPPED SUPPORT it was started from.
+
+    `snap` = the minimiser barely moved the support (the right panel IS the LP's own placement);
+    `rearrangement` = the minimiser moved it a long way, so the panel is a different packing.
+    """
+    from scipy.optimize import linear_sum_assignment
+    if not e.get("structs"):
+        return None
+    prim = max(e["structs"], key=lambda d: d["nnodes"])
+    s, P = packing_of(e)
+    A = np.array([[q[1], q[2], q[3]] for q in P])
+    best = None
+    for m in (prim.get("members") or [])[:20]:
+        key = nidx.get((setname, m))
+        rec = sops.get(key) if key else None
+        if not rec or "cfg" not in rec or len(rec["cfg"]) != len(P):
+            continue
+        f = d4_ops(S0)[rec["struct_op"]]
+        B = np.array([f(q[0], q[1], q[2]) for q in rec["cfg"]])
+        dc = np.maximum(np.abs(A[:, None, 0] - B[None, :, 0]),
+                        np.abs(A[:, None, 1] - B[None, :, 1]))
+        ta = np.array([tmod90(v) for v in A[:, 2]])
+        tb = np.array([tmod90(v) for v in B[:, 2]])
+        dt = np.abs(ta[:, None] - tb[None, :])
+        r, c = linear_sum_assignment(dc + dt / 90.0)
+        d = dict(nid=key[1], src=key[0], max_centre_gap=float(dc[r, c].max()),
+                 median_centre_gap=float(np.median(dc[r, c])),
+                 max_tilt_deg=float(dt[r, c].max()),
+                 moved_gt_005=int((dc[r, c] > 0.05).sum()))
+        if best is None or d["max_centre_gap"] < best["max_centre_gap"]:
+            best = d
+    if best is None:
+        return None
+    best["verdict"] = ("snap" if best["max_centre_gap"] <= 0.05 and best["max_tilt_deg"] <= 3.0
+                       else "tilt-only" if best["max_centre_gap"] <= 0.05
+                       else "rearrangement")
+    return best
+
+
+def a122_for(sid):
+    """A122's polish / same-minimum results, when they have landed."""
+    p = os.path.join(ROOT, "attempts", "A122-s33-certify", "results", "polish.json")
+    if not os.path.exists(p):
+        return None
+    d = json.load(open(p))
+    if sid not in d.get("entries", {}):
+        return None
+    e = d["entries"][sid]
+    out = dict(gallery_s=e["gallery"]["s"], best_sigma=e["best"]["sigma"],
+               via=e["best"]["via"], drop=e["gallery"]["s"] - e["best"]["sigma"])
+    pw = {}
+    for k, v in (d.get("pairwise") or {}).items():
+        a, b = k.split("|")
+        if sid in (a, b):
+            pw[b if a == sid else a] = dict(ds=v["ds"], max_centre_gap=v["max_centre_gap"],
+                                            max_tilt_deg=v["max_tilt_deg"])
+    out["vs"] = pw
+    return out
+
+
 def a116_for(sid):
     """A116's stability radii, for the two entries it covers (S02, S07)."""
     p = os.path.join(ROOT, "attempts", "A116-local-selection-tree", "results", "stability.json")
@@ -563,6 +849,8 @@ def a116_for(sid):
 def cut_kind(cls, cell, typ, star, corner):
     if typ == "i":
         return "d", "warm re-solve (< 11 squares)"
+    if typ == "st4":
+        return "e", "four axis-aligned squares flush on one wall force side >= 4"
     if cls not in CP.CLASSES:
         return "none", ("class %s has no usable-slot table (not in A118's corpus: no certified "
                         "extension, so no teleport lemma applies)" % cls)
@@ -653,6 +941,7 @@ def main():
     print("filled rows: %d;  to process: %d  %s" % (len(filled), len(todo), todo), flush=True)
 
     entries = load_entries()
+    ENTRIES.update(entries)
     nodes_of = load_nodes_of_entry()
     sops, nidx = load_struct_ops()
     lane = load_lane()
@@ -688,6 +977,14 @@ def main():
 
         aud = entry_audit(e, P, s)
         aud["reading"] = filled[sid]
+        aud["seed"] = seed_distance(e, sops, nidx, setname)
+        aud["panel_is"] = (aud["seed"] or {}).get("verdict")
+        aud["wall_stacks"] = {w: [q["sq"] for q in v]
+                              for w, v in wall_stacks(P, s).items() if len(v) >= 4}
+        scan = usable_scan(e, P, s, ns, sops, lane)
+        aud["usable_scan"] = scan
+        aud["usable_scan_kills"] = sorted(set("%s/%s" % (r["src"], r["nid"])
+                                              for r in scan if r["node_kill"]))
         readings.append(aud)
 
         for it in items:
@@ -697,6 +994,11 @@ def main():
             if it["type"] in ("g", "-"):
                 continue    # a grain description and an explicit "no reading" carry no cut
 
+            stack_sqs = None
+            if it["type"] == "st4":
+                st = wall_stacks(P, s)
+                w = max(st, key=lambda k: len(st[k]))
+                stack_sqs = [q["sq"] for q in st[w]] if len(st[w]) >= 4 else []
             for nd in ns:
                 key = (nd["src"], nd["nid"])
                 so = sops.get(key)
@@ -741,6 +1043,35 @@ def main():
                                                   and c["lane_ub"] + c["ncond_pot"] <= 1))
                         for c in lr.get("cells", []) if c["cell"] != ncell}
                     row["node_killed_at_some_corner"] = bool(lr.get("kill"))
+                if it["type"] == "st4":
+                    ncls2 = ncls
+                    pins = set(pin_cells(ncls2, op)) if op else set()
+                    cond = nd.get("conditioned") or []
+                    forced, free_sq = [], []
+                    for nm in (stack_sqs or []):
+                        if nm in pins:
+                            forced.append([nm, "pin"])
+                            continue
+                        hit = None
+                        q = dict((a, (b, c, dd)) for a, b, c, dd in P)[nm]
+                        for cq in cond:                       # conditioned cores, node frame
+                            f = d4_ops(S0)[op]
+                            cx2, cy2, ct = f(cq[0], cq[1], cq[2])
+                            if max(abs(q[0] - cx2), abs(q[1] - cy2)) < 0.05:
+                                hit = "conditioned"
+                                break
+                        (forced.append([nm, hit]) if hit else free_sq.append(nm))
+                    row.update(stack_wall=w, stack=stack_sqs,
+                               stack_forced=forced, stack_free=free_sq,
+                               n_forced=len(forced), n_stack=len(stack_sqs or []),
+                               node_kill=bool(stack_sqs and len(forced) == len(stack_sqs)),
+                               cut_why=("all %d stack squares are forced by the node's "
+                                        "hypothesis: side >= 4 > s0, NODE DEAD"
+                                        % len(forced)) if stack_sqs and
+                               len(forced) == len(stack_sqs) else
+                               ("only %d of %d stack squares are pins/conditioned (%s are free): "
+                                "the stack kills THIS CONFIGURATION, not the node"
+                                % (len(forced), len(stack_sqs or []), ",".join(free_sq))))
                 if it["type"] == "i":
                     r = a115.get(nd["nid"])
                     if r is not None:
@@ -846,12 +1177,28 @@ def summarise(readings, cuts, entries, nodes_of):
             a118_kills.add((k["key"].split("/")[0], k["key"].split("/")[-1]))
     new_kills = sorted("%s/%s" % (k[0], k[1]) for k in kills
                        if (k[0], k[1]) not in a118_kills)
+    mine = set((k[0], k[1]) for k in kills)
     entry_nodes = set()
     for c in cuts:
         entry_nodes.add((c["src"], c["nid"]))
     a118_in_batch = sorted("%s/%s" % k for k in a118_kills if k in entry_nodes)
+    # every node A118 kills that IS explained by a read entry but whose reading points elsewhere
+    missed = sorted("%s/%s" % k for k in (a118_kills & entry_nodes) - mine)
 
     by_cls_level = collections.Counter((k[3], "L%s" % k[2]) for k in kills)
+    by_type_cls = collections.Counter()
+    for c in cuts:
+        if c.get("node_kill"):
+            by_type_cls[(c["reading_type"], c["cls"] or "?")] += 1
+    kill_cells = collections.Counter(c["node_cell"] for c in cuts if c.get("node_kill"))
+    panels = collections.Counter()
+    for r in readings:
+        if r.get("type") == "audit" and r.get("panel_is"):
+            panels[r["panel_is"]] += 1
+    rearranged = sorted(r["entry"] for r in readings
+                        if r.get("type") == "audit" and r.get("panel_is") == "rearrangement")
+    undercount = sorted(r["entry"] for r in readings
+                        if r.get("type") == "audit" and r.get("free_squares_on_named_cells"))
     a99_l1 = len([k for k in kills if k[0] == "A99" and k[2] == 1])
     cpu_h = len(kills) * NODE_COST_S / 3600.0
     frontier = (a99_l1 * A99_L1_CPUH[0], a99_l1 * A99_L1_CPUH[1])
@@ -867,15 +1214,22 @@ def summarise(readings, cuts, entries, nodes_of):
         cpu_h_at_850s=round(cpu_h, 3),
         a99_level1_kills=a99_l1,
         a99_frontier_cpu_h=[round(frontier[0], 1), round(frontier[1], 1)],
-        nodes_killed_elsewhere_by_A118=len(already),
+        nodes_killed_elsewhere_by_A118=len(missed),
         new_node_kills=len(new_kills),
         new_cpu_h=round(len(new_kills) * NODE_COST_S / 3600.0, 3),
         a118_kills_among_these_nodes=len(a118_in_batch),
-        disagreements=len(disag)),
+        disagreements=len(disag),
+        kills_by_type_and_class={"%s/%s" % k: v for k, v in by_type_cls.items()},
+        kill_cells={k: v for k, v in kill_cells.items()},
+        panels={k: v for k, v in panels.items()},
+        n_rearranged=len(rearranged),
+        n_slotfree_undercount=len(undercount)),
         per_type=table, disagreements=disag,
+        rearranged=rearranged, slotfree_undercount=undercount,
         kills=sorted("%s/%s" % (k[0], k[1]) for k in kills),
         new_kills=new_kills, a118_kills_among_these_nodes=a118_in_batch,
-        killed_elsewhere=sorted("%s/%s" % k for k in already))
+        killed_elsewhere=missed, killed_elsewhere_same_node_other_corner=sorted(
+            "%s/%s" % k for k in already))
 
 
 def calibrate(readings, entries, nodes_of, sops, lane):
@@ -1024,6 +1378,13 @@ def write_report(readings, cuts, summary):
                  h["a99_level1_kills"], h["a99_frontier_cpu_h"][0], h["a99_frontier_cpu_h"][1],
                  h["a118_kills_among_these_nodes"], h["node_kills_from_readings"],
                  h["nodes_killed_elsewhere_by_A118"]))
+    L_.append("\n### Cumulative: node kills by reading type and class\n")
+    L_.append("| reading type | class | node kills |")
+    L_.append("|---|---|---|")
+    for k, v in sorted(h["kills_by_type_and_class"].items()):
+        L_.append("| `%s` | %s | %d |" % (k.split("/")[0], k.split("/")[1], v))
+    L_.append("| | **cells** | %s |"
+              % ", ".join("`%s` x%d" % (a, b) for a, b in sorted(h["kill_cells"].items())))
     L_.append("\n## T2 - per reading type\n")
     L_.append("| type | items | entries | nodes explained | nodes with a cut | node kills | "
               "LANE<=1 blocked by M | LANE>=2 / undecided | no cut | disagreements |")
@@ -1060,6 +1421,82 @@ def write_report(readings, cuts, summary):
         for (ent, src), n in sorted(noq.items()):
             L_.append("| %s | %s | *(%d nodes)* | %s | - | never queued by A115 (%s campaign) "
                       "| - | - |" % (ent, kof.get(ent), n, src, src))
+
+    aud = [r for r in readings if r.get("type") == "audit"]
+    st4 = [c for c in cuts if c["reading_type"] == "st4"]
+    if st4:
+        L_.append("\n## T2(e) - the `st4` rows: four flush squares force side >= 4\n")
+        L_.append("Four axis-aligned unit squares flush against ONE wall all span that wall's "
+                  "unit strip, so they are pairwise disjoint in the perpendicular coordinate and "
+                  "the side is >= 4. It is a NODE cut only if the four are PINS or CONDITIONED "
+                  "squares of the node; otherwise the stack kills the drawn CONFIGURATION and "
+                  "leaves the node alive.\n")
+        L_.append("| entry | s* | s* - 4 | wall | the four | node | class | forced | free | "
+                  "verdict |")
+        L_.append("|---|---|---|---|---|---|---|---|---|---|")
+        sm = {r["entry"]: r for r in readings if r.get("type") == "st4"}
+        for c in sorted(st4, key=lambda c: c["entry"]):
+            m = sm.get(c["entry"], {})
+            L_.append("| %s | %.6f | %+.2e | %s | %s | `%s/%s` | %s | %s | %s | %s |"
+                      % (c["entry"], m.get("s", 0.0), m.get("slack_over_4", 0.0),
+                         c.get("stack_wall"),
+                         " ".join("`%s`" % x for x in (c.get("stack") or [])),
+                         c["src"], c["nid"], c["cls"],
+                         " ".join("`%s`(%s)" % (a, b)
+                                  for a, b in (c.get("stack_forced") or [])) or "*none*",
+                         " ".join("`%s`" % x for x in (c.get("stack_free") or [])) or "*none*",
+                         "**NODE KILL**" if c["node_kill"] else "configuration kill only"))
+
+    dashes = sorted(set(r["entry"] for r in readings if r.get("type") == "-"))
+    if dashes:
+        L_.append("\n## T2(f) - the `-` rows: do the gallery's snapped squares alone give a cut?\n")
+        L_.append("For every node, every USABLE cell of its class (named in the NODE's frame) is "
+                  "pulled into the shadow frame and its occupancy read off the drawn packing. "
+                  "SLOT-CROWD needs **two** non-pin squares in the open cell, so a usable cell "
+                  "met by <= 1 non-pin square is a candidate cut the reading did not have to "
+                  "name; the lane test is what converts it.\n")
+        L_.append("| entry | node | class | usable cell | extension | non-pin meeters | lane | "
+                  "M | node kill? |")
+        L_.append("|---|---|---|---|---|---|---|---|---|")
+        nk = 0
+        for sid in dashes:
+            a = next((r for r in aud if r["entry"] == sid), None)
+            rows = (a or {}).get("usable_scan") or []
+            if not rows:
+                L_.append("| %s | *(no usable cell is under-crowded in the drawn packing)* | | | "
+                          "| | | | |" % sid)
+            for x in rows:
+                nk += 1 if x["node_kill"] else 0
+                L_.append("| %s | `%s/%s` | %s | `%s` | %s | %s | %s | %s | %s |"
+                          % (sid, x["src"], x["nid"], x["cls"], x["node_cell"], x["extension"],
+                             ", ".join("`%s`" % z for z in x["nonpin"]) or "*none*",
+                             x["lane_verdict"], x["M"],
+                             "**YES**" if x["node_kill"] else "no"))
+        L_.append("\n**%d node kill(s)** from the snapped squares alone over the %d `-` rows.\n"
+                  % (nk, len(dashes)))
+
+    seeds = [(r["entry"], r.get("seed")) for r in aud if r.get("seed")]
+    if seeds:
+        band = collections.Counter(s["verdict"] for _, s in seeds)
+        L_.append("\n## T1c - is the right panel a SNAP of the LP support, or a REARRANGEMENT?\n")
+        L_.append("Each entry's drawn minimum is matched (Hungarian, over the full D4) against "
+                  "the snapped dual support of the primary structure's own seed node - the "
+                  "packing the minimiser was started from. `snap` = max centre move <= 0.05 AND "
+                  "max tilt move <= 3 deg; `tilt-only` = positions held, tilts moved; "
+                  "`rearrangement` = some square moved more than 0.05.\n")
+        L_.append("**%s.** This reproduces A106 §2.2 from the other side: the minimum is never "
+                  "where the LP put the support.\n"
+                  % ", ".join("%d %s" % (v, k)
+                              for k, v in sorted(band.items(), key=lambda z: -z[1])))
+        L_.append("| entry | panel is | max centre move | median | max tilt move | squares moved "
+                  "> 0.05 | seed node |")
+        L_.append("|---|---|---|---|---|---|---|")
+        for sid, s in sorted(seeds, key=lambda z: -z[1]["max_centre_gap"]):
+            L_.append("| %s | %s | %.4f | %.4f | %.2f | %d of %s | `%s/%s` |"
+                      % (sid, s["verdict"], s["max_centre_gap"], s["median_centre_gap"],
+                         s["max_tilt_deg"], s["moved_gt_005"],
+                         next((r["k"] for r in aud if r["entry"] == sid), "?"),
+                         s["src"], s["nid"]))
 
     L_.append("\n## T1 - disagreements (`?` rows the PI wants re-drawn)\n")
     for d in summary["disagreements"]:
