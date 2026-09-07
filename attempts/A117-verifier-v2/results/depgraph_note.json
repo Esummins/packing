@@ -1,0 +1,51 @@
+{
+ "attempt": "A117-verifier-v2",
+ "date": "2026-09-06",
+ "nodes": {
+  "V.PARAM": {
+   "change": "NO-families added, as a NEW verifier version",
+   "v1_sha256": "0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec",
+   "v2_sha256": "153029baddfcb77a2fa5049fc29c4ed8042dc847262e3ecefd5636c77fce1806",
+   "v1_untouched": true,
+   "lean": "lean/PackingCertMathlib/PackingCertMathlib/ParamNoFam.lean: PNoFam, cellNoFam (= SCell.nofams_iv), nofamExemptIV (= CaseI.nofamExempt on the s-cell worst-case zone), exemptPN (= v2's PVerifier.exempt); exemptPN_nil (equivalence with v1) and nofamExemptIV_sound PROVED, axioms propext/Classical.choice/Quot.sound only",
+   "equivalence": {
+    "certificates": 30,
+    "identical": 30,
+    "contract": "verdict AND every statistic v1 reports (boxes, covered, vacuous, exempt, split, s_splits, exact_atom_checks, float_rejects, max_depth, max_s_depth, s_cells, s_cells_built, depth_hist_covered, witnesses); v2's only extra keys must be exempt_core/exempt_nofam, their sum must equal exempt, and exempt_nofam must be 0"
+   },
+   "reverification": {
+    "n": 48,
+    "by_result": {
+     "PASS": 16,
+     "CAP": 32
+    },
+    "window_valid_kills_gained": 16,
+    "fixed_PASS_now_window_FAIL": 0,
+    "capped": 32,
+    "window_wall_s": 8390.3,
+    "four_side_wall_s": 715.9,
+    "ratio_window_over_four_sides": 11.721
+   },
+   "open": "the YES side stays s0-only: a YES branch core is neither a slot nor a Q_dy cover coordinate, so A96's core_affine refuses it (3 of 77 certificates); a region-tree kill whose tree has a YES child cannot be claimed window-valid until a YES-core anchoring exists"
+  },
+  "C.T5T11": {
+   "change": "Lemma TC named as a leaf: exact rational check (attempts/A117-verifier-v2/code/tcleaf.py) + Lean STATEMENTS TCSupportMin / TCCentreDist / TCLeaf / TCLeaf_of_TCCentreDist as Props ([C], no new axioms)",
+   "replay": {
+    "n_fires": 170,
+    "n_exact_fires": 170,
+    "n_not_reproduced": 0,
+    "total_sampled_pairs": 1700000,
+    "samples_per_fire": 10000,
+    "counterexamples": 0,
+    "worst_sat_gap": -0.0008983488999740885,
+    "min_exact_slack": 3.360487971537651e-05,
+    "by_kind": {
+     "bin-vs-bin": 166,
+     "bin-vs-pin": 4
+    }
+   },
+   "open": "the Lean proof needs the separating-axis theorem for two interior-disjoint convex polygons, which Band.lean records as not formalised in this development -- so TC is [C] (exact machine check with a 10^4-sample control), not a Lean theorem"
+  }
+ },
+ "emission_nondeterminism": "certify.py --loop_cols re-solves the node LP under a time limit before emitting, so a certificate's atom set is wall-clock dependent -- the frozen VERIFIER is deterministic, the EMISSION is not; kills are reproduced by replaying certificates, never by re-emitting."
+}

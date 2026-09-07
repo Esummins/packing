@@ -4059,3 +4059,80 @@ recorded. Report: `attempts/A115-k0-corner-rows/notes/t4_report.md`.
   drawn. '20000 samples, 0 hits' was true and meaningless.
   The 35-node run is NOT launched: the gate is now verified but the NO-side runner (N boxes -> caselp NO-family children, then
   LP + frozen certifier at s0 with the s0-only/pending-A117 tags) is not yet written.
+
+- A117 (2026-09-06) FROZEN VERIFIER v2 + LEMMA TC AS A LEAF (attempts/A117-verifier-v2; done-success).
+  **HEADLINE 1: `verify_param_v2.py` is frozen (sha256 `153029ba...`), it is BYTE-IDENTICAL TO v1 on 30 existing
+  certificates (verdict AND every one of v1's fourteen statistics), and its NO-family clause is a PROVED Lean
+  theorem.** v1 (`0c58485c...`) was never edited -- hashed before and after. v2 = v1 plus one discharge rule (N):
+  a placement whose centre lies in an s-affine zone `Z(s)` and whose `t` lies in one of the family's closed
+  t-intervals is exempt. On an s-cell the zone is taken at its WORST CASE, the INTERSECTION over the cell (each
+  edge affine => extremes at the endpoints), so it exempts LESS than the true zone at any single side and cannot
+  turn a FAIL into a wrong PASS; it also covers the `s - 1/2` wall clamp with no special case. No new geometry in
+  the TCB: rule (N) is a containment of axis-aligned rationals -- literally the clause the frozen fixed-side
+  `verify_case.py` (`521cb01f...`) has discharged since A13, with `s` ranging over a slab. Equivalence corpus:
+  both classes, A57 sides G1 and L1, levels 1-3 (incl. A99's `s1int_l2_l2_*`), 16 PASS + 14 FAIL, A96's resolver
+  cells at depth 56, A100's protected classes k3_02/k4_11, A57/A95/A61 certificates; box counts 6 890 to
+  14 518 182; `exempt_nofam = 0` on every row, as it must be, since v1 RAISES on a NO-family and therefore no
+  certificate emitted before A117 contains one. Lean: `ParamNoFam.lean` -- `nofamExemptIV_sound` proved parallel
+  to `CaseHyp.nofamExempt_sound` (the one new inequality is `affine_le_max`/`min_le_affine`, "an affine function
+  on a cell lies between its endpoint values"), plus `exemptPN_nil` (with `nofams = []`, v2's dispatcher IS v1's).
+  Axioms `propext / Classical.choice / Quot.sound` only; `lake build` (whole library) clean, 0 errors; the project
+  axiom roster is UNCHANGED because Lemma TC is stated as `Prop` definitions, not axioms.
+  **HEADLINE 2, a refuted projection: the 4x wall cut does NOT exist.** A112's `verify_param_nofams.md` inferred
+  "a 4x cut of the NO-side certification wall" from A95's measurement that a re-emitted level-1 A57 leaf verifies
+  over the whole window for 0.062 of its four fixed sides. On the NO-side corpus the opposite holds: over 48
+  re-verified NO certificates the WINDOW pass costs about **10x the four fixed-side runs it replaces** (710 s vs
+  73 s on the 16 that PASS; 8 390 s vs 716 s over all 48) and **32 of 48 do not finish inside a 240 s cap**. The
+  reason is structural: a NO certificate is TINY at a fixed side (4-135 atoms, 0.6-5 s) precisely because the
+  NO-family exempts most of the container outright, while the 4-D pass must still resolve the whole s-slab. The
+  four-side grid was never the expensive part of a NO kill. **v2 buys window-VALIDITY, not wall** -- 16
+  window-valid NO kills gained, and 0 fixed-side PASS turned into a window FAIL.
+  **HEADLINE 3: Lemma TC is now a named leaf with an exact check -- 170/170 fires reproduced, 1 700 000 sampled
+  pose pairs, 0 counterexamples, worst SAT gap -0.000898, smallest exact slack +3.36e-5.** `code/tcleaf.py`:
+  tilt intervals normalised to [0,90] with the domain ASSERTED (A111 bug ii -- a D4 reflection's negative
+  interval fed to a bound stated only on [0,90]); a bin straddling a multiple of 90 becomes TWO bins and the leaf
+  fires only if it fires for every branch pair; `D_min` exact by the tent-function endpoint argument; centre
+  distance kept SQUARED so no root is taken; `(1 + cos D + sin D)/2` bounded from BELOW by truncated alternating
+  Taylor series evaluated at a rational enclosure of `D*pi/180` from a 50-digit pi TRUNCATION (cos at the upper
+  end, sin at the lower end -- valid since cos decreases and sin increases on [0, pi/2]); pose-disjointness exact,
+  because two bins sharing a pose may be the SAME square. Both slacks make the check UNDER-fire. Replayed: A112's
+  10 fires from their stored box pairs, A111's 160 from a deterministic rebuild whose census matches the stored
+  one fire-for-fire (160 = 160 TC; 1 403 CORE-MEET not replayed).
+  **What A112's region-tree option can now claim window-valid: exactly one thing, and it is the FREE kill.**
+  `k5_11_interior_Y0041_D02` -- a whole A57 open box killed at the root under all four branching orders with 0 LPs
+  and 0 certificates by a single TC fire -- is window-valid: all 10 of A112's TC fires have BOTH boxes
+  s-INDEPENDENT (6 are bin-vs-bin, the node's own support boxes; the other 4 are against class pin `pin3`, whose
+  core is `(3/2, 1/2)`, two slot anchors with beta = 0, so the pin box does not move with the side either --
+  `results/tc_sidecheck.json`). Its only obligation is Lemma TC, which stays [C]: the Lean proof needs the
+  separating-axis theorem for two interior-disjoint convex polygons, which `Band.lean` records as NOT formalised
+  in this development, so TC is an exact machine check with a 10^4-sample control and a frozen Lean statement,
+  not a Lean theorem.
+  **THE BLOCKER MOVED TO THE YES SIDE.** A 3-node region-tree kill is (YES certified) AND (NO certified). A117
+  makes the NO half one window certificate, but the YES child's branch box enters ITS certificate as a CORE, and
+  A96's `core_affine` refuses a branch-box coordinate outright -- it is neither a slot nor a `Q_dy` cover
+  coordinate. `to_param117.py` converts 74 of 77 NO-side certificates and refuses exactly the three whose tree
+  carries a YES child (`...Y0054_D00_m2__stranded__RNY`, `...Y0108_D07_m2__hybrid__RNY`,
+  `...Y0083_D02_m2__stranded__RYN`) with that message. Until a YES-core anchoring exists, NO (YES,NO) pair is
+  window-valid and A96's `regionopt96.py` should keep `no_side_window = "s0-only"` on its transfers.
+  **EMISSION NONDETERMINISM, recorded in the frozen-verifier note, in the v2 header itself and in A57's
+  `code/FREEZE_TAGS.txt`:** `certify.py --loop_cols` re-solves the node LP under a time limit before emitting, so
+  a certificate's atom set is wall-clock dependent -- the frozen VERIFIER is deterministic, the EMISSION is not;
+  kills are reproduced by REPLAYING certificates, never by re-emitting.
+  **Discipline.** <= 2 BLAS-pinned processes throughout, `PYTHONDONTWRITEBYTECODE=1`, nothing deleted, READ-ONLY
+  on A53/A57/A61/A95/A96/A99/A100/A111/A112 (their certificates opened for reading only). The A57 FREEZE_TAGS
+  entry is COMMENT-ONLY and the tag parser was re-run to confirm it still reads exactly `G4,G3,G2`. Two process
+  lessons banked in `notes/method.md`: (i) a selection must only take certificates with a stored report, or pass
+  a cap -- A95's `k5_11_interior_Y0048` had never been verified there and ran unbounded past 30 min per verifier,
+  holding the run's JSON hostage (the 28 finished rows were recovered from the run's own log lines and the tail
+  re-run; A95's `Y0049` then reproduced its stored 10 205 772 box count exactly); (ii) a comparison cap must be
+  by BOX COUNT, not wall clock, so both verifiers stop at the same box, and a verification cap must be checked
+  where it can only abort, never decide (a capped run reports CAP, never PASS or FAIL).
+  Writes: `attempts/A117-verifier-v2/**`, `attempts/A96-a57-parametric/code/verify_param_v2.py` (new),
+  `lean/PackingCertMathlib/PackingCertMathlib/ParamNoFam.lean` (new) + its import + `scratch/A117Axioms.lean`,
+  a comment block in A57 `code/FREEZE_TAGS.txt`, a section in A57 `notes/lemmas.md`, one clause on `V.PARAM` in
+  `lean/depgraph.json`, the registry row and this entry.
+  **Probe on a capped certificate.** `k5_11_interior_Y0036_D07_D06_m2__hybrid__RN` (fixed side 0.80 s, capped at
+  240 s in the main sweep) re-run with a 2 700 s cap: window **PASS in 302.7 s = 95x the four fixed-side runs it
+  replaces** (`results/no_reverify_probe.jsonl`). So the 32 caps are very likely window-valid too, and the wall
+  ratio is WORSE than the 9.8x the finished set shows -- the certificates that cap are exactly the ones whose
+  fixed side was cheapest.

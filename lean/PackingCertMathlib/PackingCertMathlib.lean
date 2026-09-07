@@ -23,6 +23,7 @@ import PackingCertMathlib.ParamChecker
 import PackingCertMathlib.ParamBridge
 import PackingCertMathlib.ParamData506
 import PackingCertMathlib.ParamK506
+import PackingCertMathlib.ParamNoFam
 import PackingCertMathlib.Selection
 import PackingCertMathlib.Zones
 import PackingCertMathlib.MeasureChecker

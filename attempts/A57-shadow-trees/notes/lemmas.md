@@ -1182,3 +1182,52 @@ a badly placed candidate can only make the LP worse, never make a certificate wr
 is `verify_case.py` on the emitted measure at that side.  Logic kills do NOT carry across sides
 automatically; they are recomputed per side by the C-check (T23), which is why the free counts
 differ side to side (331/336/264/273 for k5_11).
+
+
+---
+
+## FROZEN VERIFIER v2 -- NO-families in the 4-D parametric verifier (A117, 2026-09-06)
+
+`attempts/A96-a57-parametric/code/verify_param_v2.py`, sha256
+`153029baddfcb77a2fa5049fc29c4ed8042dc847262e3ecefd5636c77fce1806`.  A NEW file: the frozen v1
+(`verify_param.py`, sha256 `0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec`) is
+UNCHANGED and was hashed before and after.  Full note:
+`attempts/A117-verifier-v2/notes/frozen_verifier_v2.md`.
+
+**What v2 adds.**  One discharge rule (N).  A NO-family is the hypothesis "no square of the packing
+has its pose in the zone `Z(s) x T`", `Z(s)` a rectangle whose four edges are affine in `s` and `T`
+a finite list of closed rational `t`-intervals.  A PASS now certifies the covering inequality for
+every admissible `Q` that neither meets a core nor lies in a NO-family -- EXACTLY the clause the
+frozen fixed-side `verify_case.py` (sha256 `521cb01f...`) has discharged since A13, with `s` ranging
+over a slab.  On an s-cell the zone is taken at its WORST CASE, the intersection over the cell (each
+edge is affine, so its extremes are at the endpoints): the shrunken zone exempts LESS than the true
+zone at any single side, never more.  No new geometry enters the TCB -- rule (N) is a containment of
+axis-aligned rational intervals, no `imul4`, no trigonometry.
+
+**Equivalence with v1: 30/30 byte-identical** -- verdict AND every statistic v1 reports, on 30
+existing certificates spanning both classes, A57 sides G1 and L1, levels 1-3, PASS and FAIL, A96's
+resolver cells, A100's protected classes, A99's level-3 k0 nodes and A57/A95/A61's own certificates
+(`attempts/A117-verifier-v2/results/equivalence.json`).  Regression surface is nil by construction:
+v1 RAISES on a NO-family, so no certificate emitted before A117 contains one.
+
+**Lean.**  `lean/PackingCertMathlib/PackingCertMathlib/ParamNoFam.lean`: `nofamExemptIV_sound` is
+PROVED, parallel to `CaseHyp.nofamExempt_sound`, with the one new inequality being "an affine
+function on a cell lies between its endpoint values"; `exemptPN_nil` is the Lean form of the
+equivalence claim.  Axioms: `propext / Classical.choice / Quot.sound` only.  `lake build` clean.
+
+**Measured cost, against the projection.**  A112's `verify_param_nofams.md` inferred a 4x cut of the
+NO-side certification wall from A95's `0.062`-of-four-sides measurement on a level-1 A57 leaf.  That
+does NOT hold on the NO-side corpus: over 48 re-verified NO certificates the window pass costs about
+**10x the four fixed-side runs it replaces**, and 32 of 48 do not finish inside a 240 s cap (16
+window PASSes, 0 fixed-side PASS turning into a window FAIL).  A NO certificate is tiny at a fixed
+side because the NO-family exempts most of the container outright, while the 4-D pass must still
+resolve the whole `s`-slab.  **v2 buys window-VALIDITY, not wall.**
+
+**Still s0-only: the YES side.**  A branch box enters the YES child's certificate as a CORE, and
+A96's `core_affine` refuses a branch-box coordinate -- it is neither a slot nor a `Q_dy` cover
+coordinate (3 of 77 NO-side certificates are refused for exactly this reason).  Until a YES-core
+anchoring exists, no (YES, NO) region-tree pair can be claimed window-valid.
+
+**THE FROZEN VERIFIER IS DETERMINISTIC; THE EMISSION IS NOT.**  `certify.py --loop_cols` re-solves
+the node LP under a time limit before emitting, so a certificate's atom set is wall-clock dependent.
+Reproduce a kill by REPLAYING its certificate, never by re-emitting it.

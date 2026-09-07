@@ -14,3 +14,26 @@
 G4
 G3
 G2
+
+# ---------------------------------------------------------------------------------------------
+# A117 FROZEN VERIFIER v2 (2026-09-06).  Comment lines only: launch.ps1 and scaleup.ps1 both drop
+# blank and '#' lines before matching tags, so nothing below changes which sides are frozen.
+#
+#   verify_param.py     sha256 0c58485c1a662453188af5b0aaf42099cf41c15f82a6647404598a44e8a505ec
+#                       the frozen 4-D verifier, v1.  UNCHANGED by A117 (checked before and after).
+#   verify_param_v2.py  sha256 153029baddfcb77a2fa5049fc29c4ed8042dc847262e3ecefd5636c77fce1806
+#                       attempts/A96-a57-parametric/code/verify_param_v2.py -- v1 plus the A13
+#                       NO-family discharge rule (N), on the s-cell WORST-CASE (smallest) zone.
+#   verify_case.py      sha256 521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af
+#                       the fixed-side verifier whose nofam_exempt semantics v2 mirrors.
+#
+# v2 == v1 on every certificate with no NO-families: verdict AND every v1 statistic identical on
+# 30 existing certificates (attempts/A117-verifier-v2/results/equivalence.json).  v1 REFUSES a
+# NO-family, so no certificate emitted before A117 contains one: zero regression surface.
+#
+# THE FROZEN VERIFIER IS DETERMINISTIC; THE EMISSION IS NOT.  certify.py --loop_cols re-solves the
+# node LP under a time limit before emitting, so a certificate's atom set is wall-clock dependent.
+# Reproduce a kill by REPLAYING its certificate, never by re-emitting it.
+#
+# Note: attempts/A117-verifier-v2/notes/frozen_verifier_v2.md
+# ---------------------------------------------------------------------------------------------
