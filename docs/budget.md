@@ -74,7 +74,10 @@ merely unconverged at the LP time cap.
    not deployed: −2 wall-days, needs a coverage reset), 4-D verify sharing across siblings (untested).
 4. **The protected tier.** No lever of this week has been applied there; the same box/pin geometry suggests the same
    fractions, and trump5's alive nodes are the same S01/S07 families. Worth a pilot before the tier runs at all.
-5. **k0_00.** Not a compute question: LOCK-FREE⁺(< 4) or the 15,000 CPU-h tree.
+5. **k0_00.** Not a compute question: LOCK-FREE⁺(< 4) or the 15,000 CPU-h tree. Corner-crowd rows at the node
+   level are out (A115: the room supports have single deep meeters, nothing for a crowd row to charge; Trump realises
+   nine incidences against a budget of eight at depth 0). What the k0 room needs is the teleport hypothesis itself as
+   a node cut, i.e. re-branching on the singly-met corner (A112's k0 face), not a weighted row.
 
 ## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
 

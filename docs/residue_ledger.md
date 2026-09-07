@@ -183,7 +183,15 @@ above: a slot-set match is not a packing match — A113's S38 "exact" cell minim
 to 4.000 (K01) — so the un-killable k0 cells are mostly room, not near-critical grains. Since a k0 packing with a
 singly-met corner is K0-FREE (teleport, Lean), K01's configurations are dead by theorem and the tree's LP does not
 know it; unlike A94's slot rows, the four corner cells are far apart so a square meets at most one — no multiplicity
-re-pricing. A115 is testing Lemma CW's corner rows at the node level on the K01 cells. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
+re-pricing. **A115 (`f37487d3`): corner rows at the node level do not kill either** — 36 cells × 3 depths, 108 LPs,
+one attributable certified kill (a level-3 cell), zero of the genuinely alive cells. The failure mode is new, not
+A109's: the crowd certificate charges the SECOND meeter of each corner, and the K01 supports have none — every corner
+of all 84 supports is met, by a single DEEP meeter (depth ≥ 0.30 in 296 of 486 incidences), never empty; that is the
+K0-FREE teleport hypothesis exactly, and no crowd-weighted row can price it. Worse, at depth 0 every Trump image
+realises nine corner incidences against a guaranteed budget of eight (its tangent squares count), so the root crowd
+LP can never pass at depth 0, and at depths 0.05–0.1 the measured incidence rate c ≥ B in 100 of 101 runs — no
+weight e can kill. Incidental positive: a plain warm re-solve certified a cell A99 had left open; a warm re-solve
+pass over A99's open cells is running. Generalises as: *for any n, below the grid side ⌈√n⌉ every blocked packing
 has an unlocked intruder — the drain theorem; the hook/chain formulas are one-wall tools with 4 → ⌈√n⌉.*
 
 ---
