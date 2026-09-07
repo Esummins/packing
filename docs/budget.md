@@ -68,7 +68,8 @@ merely unconverged at the LP time cap.
    — the YES leaf of the region tree at 20× A111's radius, covering the supports of 95 of the 252 S02-explained
    alive nodes. A119 (`71d18eba`) made the five neighbourhoods exact (independent rational checker, 53k leaves) and
    Lean-backed (0 sorries, one axiom: interior SAT); blocking boxes do not widen them; three of A116's larger cells
-   are alive, not open. Deployment as the YES leaf is A120's run.
+   are alive, not open. A120 (`9fa13dfe`) deployed it: 4 of the first 9 in-N nodes closed outright (≈ 0.05
+   wall-days), the rest limited by certifier rounds at a 0.3% margin, not by the mathematics; 26 nodes continue.
    *A118 (`405b6522`):* the lane-count leaf is a 0.37 s/cell emission-time pre-screen worth ~1.7% of LPs (0.05
    wall-days) — deploy at resume; the two-meeter cover does not terminate (2–500 CPU-h per node); the octagon pair
    test supersedes Lemma TC as the pair leaf.

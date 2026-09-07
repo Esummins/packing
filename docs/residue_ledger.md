@@ -374,4 +374,11 @@ checked packing of L ∪ P below s0 exists inside N (S07 (0.2, 20°): the ladder
 blocking squares as boxes do NOT extend the radius (six free bodies, 16–23 near pairs; only S02 (0.1, 5°) closes),
 though they do lift the closed part's minimum, so the certified radii stand as listed. Tilt-cell sharing implemented
 (99.4–100% census hits; the LP is the whole cost). Consumer unchanged at 95 of 252. Open: `LocalDead` for a concrete N
-inside Lean (the recorded cover is checked outside), the interior-SAT axiom.
+inside Lean (the recorded cover is checked outside), the interior-SAT axiom. **Deployed as the YES leaf (A120,
+`9fa13dfe`)**: 9 of the 35 in-N alive A57 nodes processed at the 15 CPU-h cap; **4 closed outright** (YES by the local
+certificate, all four NO children by the frozen verifier; all level 1, removing 83 descendant nodes ≈ 0.05 wall-days),
+5 with NO children still open (17 children, two distinct structures); the finding is certifier shortfall, not
+survivors — 31 of 36 NO children are clearly below budget at the LP but at a 0.3% certificate margin only rounds-6
+certification passes (690–2,470 s), so A112's one-round default was the limiter; the timeout protocol saved 2.74× on
+the LP. Controls: A112's two kills and 35 certificates replayed byte-identically; covering check 3 × 10⁵ tested, 0
+hits; YES and NO sides asserted on the same boxes in the same frame for all 35. The remaining 26 continue.
