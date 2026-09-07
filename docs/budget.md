@@ -68,6 +68,9 @@ merely unconverged at the LP time cap.
    — the YES leaf of the region tree at 20× A111's radius, covering the supports of 95 of the 252 S02-explained
    alive nodes; certified in seconds per neighbourhood, shared by every node inside it. Exact/Lean form and the
    blocking-box extension are A119; wiring as the YES region is with A96.
+   *A118 (`405b6522`):* the lane-count leaf is a 0.37 s/cell emission-time pre-screen worth ~1.7% of LPs (0.05
+   wall-days) — deploy at resume; the two-meeter cover does not terminate (2–500 CPU-h per node); the octagon pair
+   test supersedes Lemma TC as the pair leaf.
 2. **The alive population.** Re-run unconverged alive nodes with a longer LP cap before splitting them (A109's 28/46);
    branch on the load path instead of the rattler (A112); both are about not paying eight children for a node that
    was never alive or whose slack sits in squares it does not condition on.

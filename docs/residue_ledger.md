@@ -70,6 +70,18 @@ the supports do violate SLOT-CROWD, but the rows re-price rather than forbid —
 this window is the entire remainder (+12.7 wall-days). Until then this family dies by splitting, which the measured
 tail says terminates. Side finding: 28 of the 46 sampled "alive" nodes were not genuinely alive (τ < budget, LP
 unconverged at the time limit) — a longer LP time on unconverged alive nodes is a cheap re-check when A57 resumes.
+**A118 (`405b6522`), the lane-count leaf** (a usable cell that at most one non-pin square can reach, given walls, pin
+cores and the conditioned core, is dead by teleport): sound, 0.37 s per cell, reproduces 25 kills the trees paid ~850 s
+each for, and finds **13 new** — 1 A57 box, 12 k0 cells conditional on k1_00 — worth 0.05 wall-days. The lane that
+stays open is always the same one: 1,323 cells reach LANE ≤ 1 and are saved only because the node's own conditioned
+square is allowed to be the second meeter. Corner cells dominate the fires (two walls behind them); BL(1,1), the cell
+the crowd LPs leaned on, fires once in 3,580 nodes. Deploy at emission as a pre-screen, never as a re-solve. The
+reversed leaf (branch on the two meeters, the complement free) is sound but does not terminate: 26–14,099 pair-children
+per node at a 9% per-child kill rate, 2–500 CPU-h to kill one node against 850 s for its own LP — k0_route's C3
+("K0-BLOCKED has no finite case list") reproduced at the pinned classes; its value is the free branch. Also from
+A118: the octagon PAIR inequality is strictly stronger than Lemma TC (fires at centre distance < 1 vs ~0.7) and
+subsumes the TC-leaf obligation; the usable-slot table gains BR(1,0), TL(1,0) for k5_16 and BR(0,1), BL(0,2) for
+trump5 after A114's closures; A109-O1 discharged.
 Generalises as: *crowding rows need certified depth; depth needs the extension classes dead ABOVE the target side.*
 
 ### 1b. Family S02 — the k7 pinwheel (k5_11 184, k5_16 68, trump5 12; carries the deep tree)
