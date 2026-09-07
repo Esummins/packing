@@ -4995,3 +4995,97 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   read-only on every campaign and attempt (A103's lock103.py copied, not imported); frozen verifiers untouched; nothing
   deleted; git fetch + plain merge + push of own paths. Chip on K0.RESN (owner A128, released at close); depgraph
   re-rendered; registry row.
+
+## 2026-09-07 — A126-localdead-lean (Opus Lean engineer, one `lake build` at a time through A78's serialised BelowNormal `lakeb.py`, ≤ 2 python processes, read-only on every campaign and on A116/A119/A120) — done-mixed: the interior-SAT axiom is gone, the arithmetic half of two concrete neighbourhoods is checked in the kernel, and what is left of Theorem LOCAL is ONE named primitive
+- The external review's three items, in the brief's order. **T2 first, because it is the one that finishes.**
+- **T2 — `sat_selection` IS NO LONGER AN AXIOM.** `lean/PackingCertMathlib/PackingCertMathlib/SatInterior.lean`:
+  `sat_selection_thm` has the EXACT statement of A119's one project axiom (Lemma SAT for INTERIORS) and is proved
+  from `CaseSat.sat_squares` with axioms `propext / Classical.choice / Quot.sound` only; `cover_pair'` re-derives
+  the single lemma of `Local.lean` that consumed the axiom. `Local.lean` itself is NOT edited (A119 is read-only);
+  retiring the axiom there is a one-line deletion for its owner.
+  **The shrink of `local_certificate.md` §1 needs no limit and no convergent subsequence.** With all eight gaps
+  `< 0` the four projection overlaps hold STRICTLY and — this is the point — with the SAME right-hand side
+  `B = 1/2 + (|cos Δ| + |sin Δ|)/2`. So with `M` = the max of the four left-hand sides (`M < B`) and
+  `λ = (M/B + 1)/2 ∈ (M/B, 1)` WRITTEN DOWN, `sat_squares` applies verbatim to the picture scaled by `1/λ`
+  (`a = 1/2`, offset `d/λ`) and its conclusion `d/λ = μ + b₁u + b₂u^⊥` scales back to `|λμᵢ|, |λbᵢ| ≤ λ/2 < 1/2`
+  — strictly inside BOTH squares, and `Attain.mem_interior_iff_uv` (the interior of a parametrised square is
+  exactly the open `u/v` box) turns that into the contradiction. The one case `sat_squares` does not cover
+  (`cos Δ < 0`) is the `u ↦ −u` representation of the same square set, and the conjunction of the two coordinate
+  bounds is invariant under it. 250 lines, `lake build` 24 s.
+- **T1 — the leaves of a real `N`, checked in the kernel.** `LocalCert.lean` is a reflected weak-duality checker
+  over a certificate leaf (rational rows, Farkas multipliers, box) proved sound ONCE (`checkLeaf_sound`), plus a
+  decoder; `LocalCertS07(Data).lean` and `LocalCertS02(Data).lean` are the generated data and one `native_decide`
+  each. Measured (BelowNormal, machine shared with the PI and three other attempts):
+
+  | neighbourhood | dead leaves | infeasibility rays | rows | nonzero coefficients | data file | data wall | check wall |
+  |---|---|---|---|---|---|---|---|
+  | `S07_trump5_r0.10_rho40` | 2 302 | 746 | 27 363 | 101 629 | 2.70 MB | 22 s | 19 s |
+  | `S02_k5_11_r0.20_rho10` | 32 570 | 5 782 | 504 404 | 1 977 332 | 49.05 MB | 40 s | 67 s |
+
+  (the second is the `N` A120's node cover uses, which is why it was worth the 49 MB). `localDead_s07` /
+  `localDead_s02` are Theorem LOCAL for those `N` modulo ONE named hypothesis. Axiom roster exactly as targeted:
+  the standard three everywhere, plus one `native_decide` axiom per replay.
+- **What that hypothesis is, and what discharging it needs — ONE primitive, and it is not in Lean.**
+  `CertCover leaves Ls Ps s0` = "every packing satisfying `N` at a side `≤ s0` has an LP variable vector inside
+  ONE recorded leaf's box, satisfying that leaf's rows". It factors into four: the tilt cover (PROVED in shape —
+  `cover_bisect` plus a decidable structural check; and not one of A119's seven certificates contains a `qsplit`
+  node, so that branch of the cover is dead code), the selection cover (its LOGIC is now discharged by T2 —
+  `sat_selection_thm` + `cover_selection`), Lemma RELAX (its algebra is already proved in `Local.lean`), and the
+  body-to-variable numbering (bookkeeping). What is missing in the middle two, and NOTHING else, is
+  **a certified rational-interval kernel for `cos`, `sin` and `π` — A119's `code/exactiv.py` in Lean**: the
+  enclosure `sup_cell g_σ < 0` behind every excluded selection (2 969 of them at 87 branch nodes for
+  S07 (0.1, 40°), plus 292 `imp_sel` leaves and 761 forced selections) and the rational constants of the relaxed
+  rows. Mathlib has `pi_gt_3141592` / `pi_lt_3141593` and the low-order `cos_bound` / `sin_bound`; the 10⁻⁹-level
+  sharpness these certificates need is real work, and A119's finding F4 is the warning that a checker must
+  reproduce the generator's SHARPNESS, not merely be sound.
+- **And the cheaper route is a GENERATOR change, not a Lean one.** The certificates are stated in the ANGLE `θ`.
+  Lean's own parametrisation is `t = tan(θ/2)`, in which `cos θ = (1−t²)/(1+t²)` and `sin θ = 2t/(1+t²)` are
+  RATIONAL functions (`Parametrize.cosT/sinT`, with `cosT_sq_add_sinT_sq` proved for EVERY real `t`). A certificate
+  emitted in `t` makes every enclosure exact rational arithmetic and takes the trig kernel out of the trusted base
+  entirely; the cost is redoing the relaxation in `t` (the axis components stop being affine in the cell parameter,
+  so `axis_decomp` + McCormick are replaced by a rational-function relaxation) and re-solving every LP. Recommended
+  for whoever wants `LocalDead` for a concrete `N` with NO named obligation.
+- **Three engineering findings (`notes/method.md`).** **E1: the ELABORATOR is the wall, not the kernel.** 10⁵–10⁶
+  rational coefficients as nested list literals is 10⁵–10⁶ numeric literals to elaborate; as ONE STRING PER LEAF it
+  is one token each, and the decoding moves into the same compiled evaluation that runs the check. Safe by
+  construction: `localDead_of_cert` quantifies BOTH the check and the cover obligation over the DECODED leaves, so
+  a wrong decode makes the obligation harder and never the conclusion cheaper. (Two smaller limits on the way: a
+  single list literal of 32 570 elements exceeds the elaborator's recursion depth — emitted in groups of 2 000 —
+  and a leaf accumulator returning a PAIR is evaluated once per projection, i.e. `2^rows` per leaf at up to 19
+  rows, so `accum` is split into `accumL`/`accumK`.) **E2: a quarter of the dead leaves are invisible to A119's
+  capture hook.** `check_local.Checker.dead` validates an infeasibility ray and RETURNS before the block that
+  records the leaf, so a generator that trusts the hook silently emits an INCOMPLETE cover — 746 of 2 302 (32 %)
+  for S07 (0.1, 40°), 5 782 of 32 570 (18 %) for S02 (0.2, 10°). `extract126.CapChecker` overrides `dead`, calls
+  the parent FIRST so its verdict stays authoritative, and rebuilds the ray's rows with A119's own `LeafRows`.
+  **E3: `Local.Box` cannot carry a tilt cell that leaves `θ ∈ [0°, 90°]`.** It holds one interval in `t`, and a
+  packing's poses are normalised to `t ∈ [0,1]`; S02 (0.2, 10°)'s `BR(0,1)` cell is `θ ∈ [−10°, +10°]`, which folds
+  to `t ∈ [0, tan 5°] ∪ [tan 40°, 1]`. The emitted box keeps the inside part — a SMALLER `N`, hence a weaker
+  `LocalDead`, the sound direction — and the generator prints the count and marks the box. The proper fix is a
+  tilt field that is a LIST of intervals, as `CNoFam.tivs` and `PNoFam.tivs` already are.
+- **T3 — the region-tree step, and what is left of A120's closed node.** `LocalCompose.lean`: `yes_or_no` (the
+  cover `H = YES ∪ NO_1 ∪ … ∪ NO_{|L|}` is a tautology), `localHyp_of_yes` — **A120's soundness clauses A2 (the
+  boxes are pairwise pose-disjoint) and A3 (each box is pose-disjoint from every pin) are exactly the INJECTIVITY
+  `LocalHyp` demands**, which is the reason they had to be asserted — `node_dead_of_yes_no`,
+  `classKilledAt_of_yes_no` in `Composition.lean`'s shape. It also closes one gap A120 flagged: `centre_in_slab`
+  (a packed square's centre is at least `1/2` from every wall, from `wT_ge_one` + `set_subset_container_iff`) gives
+  `noneIn_of_clamped`, so a NO child certified against the CLAMPED zone kills the branch of the UNCLAMPED box and
+  the two sides provably use the same boxes.
+  `y0230_dead` is A120's closed node `k5_11_interior_Y0230` as a Lean statement whose five hypotheses ARE the
+  residue: `LocalDead` for S02 (0.2, 10°) modulo `CertCover`; A2/A3 as decidable rational tests (not written);
+  the node's class hypothesis through the `D4` frame map (A120's A1/A4, the step
+  `Composition.classKilledAt_of_tree` already performs for the tree route); and the four NO children. On the last
+  of these: the replay harness DOES exist — `lean/gen_case_lean.py` converts A120's four PASSing
+  `case-measure-certificate-v1` files (`NO0`, `NO1_r6`, `NO2`, `NO3`; depth 56, 6 cores = five class pins plus the
+  node's own conditioned square, ONE NO-family zone each) and `LocalCertY0230.lean` replays them by
+  `native_decide` — but two steps still separate a PASS from `hno`, and both are pre-existing properties of the
+  frozen fixed-side route: the consumer is `checkCaseI_no_family` (the zone list is NONEMPTY, so a PASS forces
+  SOME non-owner square into the zone) and not `checkCaseI_kill`, and it speaks of an `IsStrictFamily` (pairwise
+  disjoint CLOSED squares) where `CfgPacking` gives interior-disjointness, so `Dilation.lean`'s Lemma B has to be
+  applied first; and `CaseExempt` names a POSE `q` with `q.set = Q i`, which does not force `q = z k`
+  (`t = 0` and `t = 1` denote the same square).
+- Discipline: `Local.lean`, A116/A119/A120 and every campaign untouched (A119's `check_local.py` / `exactiv.py`
+  IMPORTED, its certificates and A120's records READ); one `lake build` at a time through `lakeb.py` at
+  BELOW-NORMAL priority — the one build killed mid-run left a stale lock, which was cleared only after confirming
+  no `lake`/`lean` process remained; `PYTHONDONTWRITEBYTECODE=1`; nothing deleted except my own 83 MB intermediate
+  (regenerable by `extract126.py`); git fetch + plain merge + push of own paths. `docs/known_results.md` 16b,
+  depgraph GRAIN note, registry row.

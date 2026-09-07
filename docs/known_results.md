@@ -46,6 +46,18 @@ file is the record of truth for claims, LOG.md is the record of events.
     alivewitness, D4 reduction — all Lean theorems. Corpus replays COMPLETE for the fixed corpora
     (A78 T5, 2026-09-03): measure (3.82), Theorem U (11/11), P1 (1/1), K61 (61/61), TRAP (6/6) — 73
     certificates by native_decide, 9.79 h Lean wall, axiom audit clean; A57/A60 corpora priced multi-day.
+16b. LEAN  ADDENDUM (A126, 2026-09-07): the LOCAL certificate joins the replayed corpora, arithmetic half
+    first. `SatInterior.sat_selection_thm` retires A119's ONE project axiom (Lemma SAT for INTERIORS is now a
+    theorem from `CaseSat.sat_squares` by an EXPLICIT shrink `λ = (M/B+1)/2` — no limit, no subsequence);
+    `LocalCert.checkLeaf_sound` is a reflected weak-duality checker over a certificate leaf, proved once, and
+    `LocalCertS07`/`LocalCertS02` run it by ONE `native_decide` each on ALL the dead leaves of two of A119's
+    neighbourhoods — S07 (0.1, 40°): 2 302 leaves / 746 infeasibility rays / 27 363 rows / 101 629 nonzero
+    coefficients, 22 s + 19 s; S02 (0.2, 10°): 32 570 / 5 782 / 504 404 / 1 977 332, 40 s + 67 s. `localDead_s07`
+    / `localDead_s02` are Theorem LOCAL for those `N` modulo ONE named hypothesis, `CertCover` (Lemma COVER +
+    Lemma RELAX), whose whole residue is a certified rational-interval kernel for cos/sin/π — A119's
+    `exactiv.py` in Lean — or, cheaper, a certificate re-emitted in `t = tan(θ/2)`, where cos and sin are
+    RATIONAL. The leaf data is emitted as ONE STRING PER LEAF: at 10⁵–10⁶ coefficients the ELABORATOR, not the
+    kernel, is the wall.
 16a. CAVEAT (A88, 2026-09-03): A31's contact-type menu omits same-class corner-corner point kisses (Trump
     has one); planarity (L4) is FALSE on the ACTIVE contact graph when squares kiss at a point. Counts over
     the kiss-free SUPPORT graph stand; no proof step may assume planarity of the active graph. The
