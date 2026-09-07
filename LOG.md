@@ -5207,3 +5207,117 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   the same ceiling, their certificate being a measure too.
 - Files: `attempts/A129-net-verifier/{code,notes,results,logs}`, `docs/budget.md` §D.6,
   `docs/publication_checklist.md` W7, `attempts/REGISTRY.md`. ≈ 7.5 CPU-h, ≤ 2 BelowNormal processes.
+
+## 2026-09-07 — A131-pin-clip (Opus engineer, ≤ 2 BLAS-pinned BelowNormal processes, read-only on every campaign and driver, frozen verifiers untouched) — done-success: the pin-clip is exact, strictly dominates T5″, and the biggest prize is a 132-node backlog nobody has to deploy anything to collect
+
+- **T1 — the clipper is exact, not merely sound.** `attempts/A131-pin-clip/code/pinclip.py`. For a
+  tilt sub-bin, the four separating axes of the conditioned square against a pin's guaranteed core
+  fail simultaneously iff `|d_x|, |d_y| < w_min/2 + a_P` and each of four expressions
+  `(±d_x − a_P) cos θ + (±d_y − a_P) sin θ`, `(±d_y − a_P) cos θ + (∓d_x − a_P) sin θ` stays below
+  `1/2` over the sub-bin. Each is a SINGLE sinusoid, so its maximum is at an endpoint or the
+  interior critical point (`√(P²+Q²)`, compared as `P²+Q² < 1/4`) — the **exact** `⋂_θ Octagon(θ)`,
+  with no sub-bin worst case. Carrying tilts as `t = tan(θ/2)` (how A57's cover is built, lemmas.md
+  T2) makes `cos θ`, `sin θ` exact rationals, so the whole decision is `Fraction` arithmetic with
+  **no epsilon at all** — unlike T5′ (`TIGHT_EPS = 1e-9`) and T5″ (`MARGIN = 1e-9`). Floats appear
+  only in the bisection that *searches* for a slab boundary; every boundary is then certified by the
+  exact predicate (0 back-offs needed over the whole corpus). The conservative
+  envelope version — trim57's `A`, `B` at `w_min` against `max |d·n|` — **loses 34 of the 674**
+  existing "core meets pin core" kills at `nsub = 1`; the exact version keeps **674/674**. That was
+  the single largest correction of the day and it was caught by the positive control, not by review.
+- **Controls, all clean.** (a) 674/674 logic kills → EMPTY at `nsub = 1`. (b) 99,991 stored LP
+  support columns over 1,745 solved nodes are pin-free at their own tilt to within
+  **max depth 2.0000·10⁻³ = `caselp.EPS_CORE` exactly, 0 beyond** — and 0 of them lie inside their
+  own node's conditioned box, which is not luck: an admissible row must be disjoint from every core
+  including `K_B`, so the brief's "support atoms inside the clipped box" test is vacuous by
+  construction and the pin-freeness check is its non-vacuous form. *Trap recorded:* `lpbox` stores
+  row tilts in **radians**; reading them as degrees manufactures 31,316 false violations up to depth
+  0.146. (c) `dead_q` cross-checked against an independent direct SAT computation on a 2,001-point
+  tilt grid, 40,000 random (offset, sub-bin) pairs: **0 unsound, 0 missed**. (d) Sampling, quoted per
+  the SAMPLED-CHECKS rule across three sets (12 T1 nodes, 10 T3 nodes, all 21 incremental kills):
+  **1,140,000 drawn → 897,320 tested → 0 hits**, every node relied on clearing 10⁴ tested on its own.
+- **T2 — the corpus.** The corpus has grown to 2,418 rows (674 logic kills + 1,744 open) from A96's
+  2,222; the reconstruction is validated by T5″ recomputed here emptying exactly A96's **159** of
+  A96's frozen 1,604 open rows. Over the 1,744: **10.3 % clip to EMPTY, 26.1 % narrowed and alive,
+  63.6 % untouched** at `nsub = 8`; by level 5.4 / 21.2 / 25.6 / **85.7 %** emptied; by class k5_11
+  13.5 % vs k5_16 6.6 %, because k5_11 pins the interior-adjacent slot `(1.5, 0.5)` where k5_16 pins
+  the far corner. **Strict domination of T5″**: all 159 of its empties (0 lost) plus **21 more**, and
+  455 touched vs its 166. Refining the sub-bin buys touch, not kills (179 → 180 empties from
+  `nsub` 1 → 8, 349 → 455 touched) — at `nsub = 1` the exact intersection is already maximal against
+  a single pin. Median free levels among the narrowed: 0.71 (½·log₂ convention).
+- **The finding that decides something is the UNCLOSED slice.** 1,137 of the 1,744 already carry a
+  certified PASS. Of the **607 that do not** (414 ALIVE + 193 FAIL), the clip empties **132
+  (21.8 %)** and narrows **292 more (48.1 %)**; only 30 % are untouched. 112 of the 132 need only
+  the trim that is *already deployed* — they are open purely because T5′/T5″ are pre-filters on
+  newly emitted children (lemmas.md T5′: "existing verdicts are not recomputed or overwritten").
+  **So there is a backlog, and collecting it needs no deployment decision at all**: it is a
+  re-classification of recorded rows by pure geometry, minutes of CPU, against the 900 s re-check's
+  27 certified kills for 8.11 CPU-h — and the two sets overlap in exactly one node
+  (`k5_11_interior_Y0546`, which happens to be the single most expensive kill of the re-check at
+  2,179 s). The list is written out with prior verdict, τ/η, box and witness pins:
+  `attempts/A131-pin-clip/results/backlog131.jsonl` (132 rows, 93 k5_11 / 39 k5_16,
+  63/57/6/6 by level, **111 emptied by a single pin, 21 needing two pins jointly** — and the
+  two-pin cases are precisely where the clip beats T5″, which only ever tests single-pin
+  domination). It supersedes nothing; landing it is the campaign owner's call, and must keep the
+  prior verdict as `superseded_by_tight_core.jsonl` does.
+- **Schedule.** Under the stated (unmeasured) assumption that a box `f` levels smaller has the kill
+  rate of a node `f` levels deeper, §B's per-level logic-kill share gives a total gain of 12.10 %
+  (`nsub` 1) / 12.96 % (`nsub` 8) of open nodes — but only **1.20 % is new outright killing over
+  deployed T5′+T5″**, plus ~2.6 % of modelled promotion: ≈ 50 CPU-h, **≈ 0.4 wall-days** of the
+  A57 row's 11–13. A123's T5″ post-mortem (offline 3.70 % projected vs 1.01 % live) applies here
+  too and is quoted with the number. The domination result is the part that does not depend on the
+  population.
+- **T3 — in vitro, the answer is BOTH, and the kept fraction does not predict which.** Ten nodes
+  (Y0036's four depth-2 children D02/D03/D06/D07 plus six ALIVE boxes with kept < 0.5 at mixed
+  levels), each re-solved once on its clipped centre box over its OWN tilt bin (`nsub = 1`, so the
+  clip is the only variable), through the same `solve_node` call and warm start `recheck96` uses;
+  two-stage 240 s then certify at η ≤ −1e-3, 900 s for a knife edge; control = the STORED record,
+  never a re-emission. **2.85 CPU-h** of the 6 allowed, two BelowNormal BLAS-pinned processes, no
+  wall-cap fired. **Five of ten go from η ≈ 0 (τ pinned at the budget) to η = −0.5 or −1.0**, and
+  **two carry a certificate through the frozen verifier**: `k5_11_interior_Y0036_D02` (L2, η −1.0,
+  PASS in 11.2 s) and `k5_11_interior_Y0186_D00_D00` (L3, η −0.5, PASS in 219 s) — both previously
+  ALIVE. The other three decisive nodes FAIL certification with **real holes** (`Y0036_D03`: 8
+  witness boxes at depth 56, 5 holes, 0 tight, 3 undecided), which is the campaign's ordinary
+  FAIL → resolver path, not a refutation; the resolver is a campaign driver and was not run. On the
+  remaining five the clip moves only the COLUMNS, and hard: support 107 → 5 (`Y0036_D07`),
+  1041 → 5 (`Y1128`), 82 → 16 (`Y0996`); `k5_16_interior_Y0674` converges at minmass exactly 1 on a
+  box 92 % smaller and stays alive at η −2.5e-13. **Which of the two you get is not predicted by how
+  much the clip removes** — the five decisive nodes keep 0.09–0.42 of their area, the five inert
+  ones keep 0.08–0.42. *Caveat recorded in the campaign's favour:* `recheck96` counts a "kill" as
+  `τ < budget` at η as small as −1.4e-14 and never runs `certify.py`, so PAUSED.md v2 §9's 11-of-23
+  and the 27-of-63 now on the ledger are LP verdicts, not verified certificates, and are not
+  comparable with the 2 of 10 here; under the re-check's own criterion all ten clipped solves have
+  τ < budget. If this is deployed, send knife-edge nodes to the certifier anyway, as the tree does.
+- **T4 — deployment shape (`notes/deploy.md`), nothing deployed.** After T5″, before the LP;
+  `pinguard.classify` must stay FIRST (the parent case is the one exception to soundness, and
+  `clip_node` carries its own `realizes_pin` guard because the protected tier has zones containing
+  pins where A57's interior has none). Persist `clip_from`, `clip_kept`, `clip_nsub`, `clip_pins`,
+  `clip_delta` — the PAUSED.md v2 §6 `trim_excluded` gap must not be repeated. Emit
+  `clipped ∩ original` (the clipper works on the rational OUTER box, so its output can sit 10⁻⁹
+  outside an untouched side). Verifier implications: **none** — a clipped child is an ordinary
+  smaller box — but a kill on it is a TWO-PART argument (frozen certificate for the clipped part +
+  one T5‴ leaf per discarded slab), exactly as a T5″-trimmed kill is, and that is why the leaf must
+  be persisted and formalised. Measured second-order effect: the clipped box's `Box.core()` grows
+  by a median 4.5 % (max 24.5 %) but yields **0** extra T5′ kills — no second harvest. Lean shape:
+  a T5-type logic leaf with a tilt range and a centre sub-box, `decide` over ℚ, needing **none** of
+  A117's Taylor/π machinery because `t = tan(θ/2)` keeps the trigonometry rational. n-general: the
+  pin-clip is the class-pin analogue of the container clip, the obstacle need only be a set
+  contained in every admissible pose, so it applies verbatim to the protected tier, to trump5's
+  residual tree, and — with `a_P` replaced by another box's core half-side — it IS budget.md §D
+  item 1's box-vs-forced-neighbour kill.
+- **Discipline.** `attempts/A57-shadow-trees/PAUSE` left in place and untouched (every `tree57`
+  shard and both `deepen` producers stayed stopped); the driver watched its own sentinel through
+  `pausegate.paused(base=...)` — A124's scoped-sentinel mechanism, PAUSED.md v2 §7a — and no shard
+  was launched. Two processes, BLAS pinned in the supervisor, BelowNormal verified at start rather
+  than assumed. Frozen verifiers byte-identical against `attempts/A96-a57-parametric/code/frozen.sha256`
+  (`verify_case` 521cb01f…, `verify_param` 0c58485c…, `verify_param_v2` 153029ba…). READ-ONLY on
+  every campaign and on the A57/A96 drivers: `trim57`, `pinguard`, `caselp`, `warm57`, `recheck96`
+  and `pausegate` are IMPORTED, none edited; new files only under `attempts/A131-pin-clip`. No
+  recursive deletes (only my own `__pycache__/*.pyc`), no pidfile touched,
+  `PYTHONDONTWRITEBYTECODE=1`, git fetch + plain merge + push of own paths. Writes outside the
+  attempt: lemmas.md T5‴, `docs/budget.md` §D item 1 + the date, registry row, this entry.
+- **Figure** (PI's drawing rule, `gen_a57_lp.py` style): `attempts/A131-pin-clip/notes/pinclip_Y0036.svg`
+  — three panels (whole bin, sub-bins 1 and 8 of 8), the example hypothesis square H in cyan with a
+  heavy outline at the CENTRE of the centre box and the CENTRE of the tilt sub-bin with its tilt
+  printed (red dashed, because Y0036's box centre is itself infeasible — it overlaps the pin bl10
+  by 0.0097), the clipped rectangle drawn inside the original box, plus a ×6 inset because the clip
+  is a few 10⁻² and invisible at container scale.

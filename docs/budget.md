@@ -5,7 +5,7 @@ its provenance, and the date; nothing else in the repo quotes a total without po
 (the PI's convention). Machine: i7-12700K, 6 usable LP slots with BLAS pinned; "wall-days at 5" assumes five
 workers.
 
-Last updated: **2026-09-07 08:30**.
+Last updated: **2026-09-07 16:15**.
 
 ## A. The total
 
@@ -73,6 +73,29 @@ merely unconverged at the LP time cap.
    *A118 (`405b6522`):* the lane-count leaf is a 0.37 s/cell emission-time pre-screen worth ~1.7% of LPs (0.05
    wall-days) — deploy at resume; the two-meeter cover does not terminate (2–500 CPU-h per node); the octagon pair
    test supersedes Lemma TC as the pair leaf.
+   *A131 (`PENDING`) — the PIN-CLIP (T5‴), measured, not deployed:* shrink the centre box, not just
+   the tilt bin. For each tilt sub-bin, discard every centre at which the conditioned square meets
+   a pin core at EVERY tilt of the bin — the exact intersection over tilts of the forbidden
+   octagons, in rational arithmetic with no epsilon (tilts as `t = tan(θ/2)` make cos/sin rational).
+   Controls: 674/674 existing logic kills clip to EMPTY, 1,140,000 drawn → 897,320 tested → 0 hits,
+   and the predicate matches a direct SAT grid on 40,000 random cases with 0 unsound / 0 missed.
+   **It strictly dominates T5″** (all 159 of T5″'s empties, plus 21 more) and touches 2.7× as many
+   boxes (455 vs 166). On the 1,744-box corpus: 10.3% clip to EMPTY, 26.1% are narrowed and
+   survive, median 0.71 free levels among those narrowed; L4 85.7% emptied. **The decision-relevant
+   slice is the 607 recorded-UNCLOSED nodes (414 ALIVE + 193 FAIL): 132 (21.8%) clip to EMPTY and
+   292 more (48.1%) narrow** — 112 of the 132 need only the trim already deployed, and they are
+   open only because T5′/T5″ are pre-filters on newly emitted children. That backlog sweep is pure
+   geometry (minutes) against the 900 s re-check's 27 kills for 8.11 CPU-h, and the two sets
+   overlap in one node. At emission the incremental value over deployed T5′+T5″ is small — 1.2% new
+   outright kills plus ~2.6% of modelled level-promotion, ≈ 0.4 wall-days of the A57 row — so the
+   ranking is: **run the retrospective sweep first (`attempts/A131-pin-clip/results/backlog131.jsonl`),
+   deploy at emission second.** In vitro (10 nodes, 2.85 CPU-h, two-stage 240/900 s through
+   recheck96's node path): **5 of 10 go from η ≈ 0 to η = −0.5 or −1.0 on the clipped box and 2 are
+   certified dead through the frozen verifier** (`Y0036_D02` L2 PASS 11 s, `Y0186_D00_D00` L3 PASS
+   219 s, both previously ALIVE); 3 more reach η ≤ −0.5 but the certificate has real holes →
+   resolver. On the other 5 only the columns move (support 107→5, 1041→5), and which of the two
+   happens is **not** predicted by how much is clipped. List, notes and the deployment shape:
+   `attempts/A131-pin-clip/notes/{measurement.md, lp_effect.md, deploy.md}`, lemmas.md T5‴.
 2. **The alive population.** Re-run unconverged alive nodes with a longer LP cap before splitting them (A109's 28/46);
    branch on the load path instead of the rattler (A112); both are about not paying eight children for a node that
    was never alive or whose slack sits in squares it does not condition on.

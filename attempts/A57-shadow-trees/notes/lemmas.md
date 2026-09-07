@@ -1231,3 +1231,111 @@ anchoring exists, no (YES, NO) region-tree pair can be claimed window-valid.
 **THE FROZEN VERIFIER IS DETERMINISTIC; THE EMISSION IS NOT.**  `certify.py --loop_cols` re-solves
 the node LP under a time limit before emitting, so a certificate's atom set is wall-clock dependent.
 Reproduce a kill by REPLAYING its certificate, never by re-emitting it.
+
+## T5‴ [M] — the PIN-CLIP: shrink the centre box, not just the tilt bin (A131, 2026-09-07, MEASURED, NOT DEPLOYED)
+
+`attempts/A131-pin-clip/{code/pinclip.py, notes/measurement.md, notes/deploy.md}`. Recorded here
+as A96 recorded T5″, and by the same rule: nothing in A57 is edited, the clipper lives in A131.
+
+**The rule.** T5″ kills a tilt sub-interval when the WHOLE centre box lies inside ONE pin's
+octagon for every tilt in it. Applied POINTWISE instead of box-wise, the same geometry shrinks the
+box:
+
+> For pin `i` and a tilt sub-bin, let `D_i` be the set of centres `c` at which the unit square
+> `Q(c, θ)` meets the interior of the pin's guaranteed core `K_i` at EVERY `θ` in the sub-bin.
+> A centre in `⋃_i D_i` admits no tilt in the sub-bin, so it carries no packing under the node's
+> hypothesis and may be discarded. The child carries (clipped centre box, tilt sub-bin) — the same
+> object T5″ produces, with the centre box narrowed too.
+
+Sound for exactly T5's reason, and with exactly T5's one exception: the discarded square must not
+BE the pin, so **`pinguard.classify`'s `parent` case must be excluded first**. `pinclip.clip_node`
+carries its own `realizes_pin` guard and refuses such a node; A57's interior census has zero parent
+boxes, the protected tier will not.
+
+**The intersection over tilts is EXACT, and rational.** Writing `a = a_P = 1/2 − δ`,
+`w = cos θ + sin θ` (both non-negative on [0, 90]), the four separating axes fail simultaneously iff
+
+    |d_x| < w/2 + a,  |d_y| < w/2 + a,  |d·u| < 1/2 + a w,  |d·v| < 1/2 + a w
+
+and each of the last two splits into two branches that are SINGLE SINUSOIDS in θ:
+
+    (±d_x − a) cos θ + (±d_y − a) sin θ < 1/2        (u-axis)
+    (±d_y − a) cos θ + (∓d_x − a) sin θ < 1/2        (v-axis)
+
+whose maximum over a sub-bin is at an endpoint or at the interior critical point (value
+`√(P²+Q²)`, compared as `P²+Q² < 1/4`); the two axis-aligned tests use `w_min`, which on [0, 90]
+is at an endpoint. Carrying tilts as `t = tan(θ/2)` — how the cover is built, T2 above — makes
+`cos θ` and `sin θ` exact rationals, so the whole decision is exact Fraction arithmetic with **no
+epsilon**, unlike T5′ (`TIGHT_EPS`) and T5″ (`MARGIN`). This matters: the conservative
+sub-bin-worst-case form (trim57's envelope: `A`, `B` at `w_min` against `max |d·n|`) fails to empty
+**34 of the 674** boxes the tree already kills by "core meets pin core"; the exact form empties
+**674 of 674**.
+
+**Controls executed.**
+* 674/674 existing `KILL-BY-LOGIC (core meets pin core)` boxes clip to EMPTY at `nsub = 1`.
+* Sampled, 12 nodes at `nsub = 8`, quoted per the SAMPLED CHECKS rule: discarded region
+  **480 000 drawn → 287 017 tested → 0 hits** (per-node tested 22 319 – 40 000, so each node
+  relied on clears 10⁴ on its own); kept region 480 000 → 415 075 → 352 898 feasible (85 %).
+* 99 991 stored LP support columns over 1 745 solved nodes are pin-free at their own tilt up to
+  **max depth 2.0000·10⁻³ = `caselp.EPS_CORE` exactly, 0 beyond it**. (`lpbox` stores row tilts in
+  RADIANS; reading them as degrees manufactures 31 316 false violations.)
+
+**Yield, on the 1 744 open boxes of the current corpus** (2 418 rows = A96's 2 222 grown by A123's
+296; T5″ recomputed here empties exactly A96's 159 on A96's frozen 1 604, so the corpus
+reconstruction is right):
+
+| nsub | EMPTIED | touched, alive | untouched | mean kept | free levels (½ log₂), touched: med / mean |
+|---|---|---|---|---|---|
+| 1 | 179 (10.26 %) | 349 (20.0 %) | 1216 | 0.780 | 0.63 / 1.09 |
+| 8 | 180 (10.32 %) | 455 (26.1 %) | 1109 | 0.747 | 0.71 / 1.26 |
+
+By level at `nsub = 8`: L1 68/1266 (5.4 %) emptied, L2 90/425 (21.2 %), L3 10/39 (25.6 %),
+**L4 12/14 (85.7 %)** — the same steep rise with depth as T5′, and the two L4 survivors keep 1 % of
+their area. By class: k5_11 13.5 % emptied vs k5_16 6.6 %, because k5_11 pins the interior-adjacent
+slot `(1.5, 0.5)` where k5_16 pins the far corner `(3.377084, 3.377084)`.
+
+**Relation to T5″: strict domination.** T5″ empties 159 open boxes and touches 166; the pin-clip
+empties **all 159 plus 21 more** (17 at L1, 4 at L2) and touches 455. Refining the sub-bin buys
+touch, not kills (179 → 180 empties from `nsub` 1 → 8, 349 → 455 touched), because the exact
+intersection is already maximal against a single pin over the whole bin. The two are complementary
+and both should run — T5″ narrows the tilt bin, which the clip does not.
+
+**Schedule (assumption stated, not measured).** If the LP's kill rate on a clipped box equals the
+tree's rate at the corresponding smaller level, the §B per-level logic-kill share (29 % → 60 %)
+gives a total logic-kill gain of 12.10 % (`nsub` 1) / 12.96 % (`nsub` 8) of open nodes, of which
+only **1.20 % is new outright killing over deployed T5′+T5″** plus ~2.6 % of modelled promotion
+— ≈ 50 CPU-h, ≈ 0.4 wall-days of the A57 row's 11–13. The larger prize, if it is real, is the same
+one T5″ turned out to hold: LP tractability on the 26 % of nodes that are narrowed, realised
+through the 900 s re-check rather than at emission.
+
+**In vitro: does narrowing the box move the LP, or only the columns?  BOTH.**  Ten nodes (Y0036's
+four depth-2 children plus six more with a kept fraction < 0.5, mixed levels) re-solved on the
+clipped box over their OWN tilt bin, two-stage 240 s / 900 s, kills claimed only by replaying a
+certificate through the frozen verifier; 2.85 CPU-h, A57's PAUSE left in place (A124's scoped
+sentinel).  **Five of ten go from eta ~ 0 (tau pinned at the budget) to eta = -0.5 or -1.0**, and
+**two carry a certificate**: `k5_11_interior_Y0036_D02` (L2, eta -1.0, PASS in 11.2 s) and
+`k5_11_interior_Y0186_D00_D00` (L3, eta -0.5, PASS in 219 s), both previously ALIVE.  The other
+three decisive ones FAIL certification with **real holes** (D03: 5 holes at depth 56, 0 tight) --
+the ordinary FAIL -> resolver path, not a refutation.  On the remaining five the clip moves only
+the COLUMNS, and hard: support 107 -> 5 (`Y0036_D07`), 1041 -> 5 (`Y1128`), 82 -> 16 (`Y0996`);
+`k5_16_interior_Y0674` converges at minmass 1 on a box 92% smaller and stays alive at eta -2.5e-13.
+**Which of the two happens is NOT predicted by how much is clipped** -- the five decisive nodes keep
+0.09-0.42 of their area and the five inert ones keep 0.08-0.42.  Caveat on the count: this protocol
+certifies only at eta <= -1e-3, whereas `recheck96` records a "kill" as tau < budget at eta as small
+as -1.4e-14 and never runs `certify.py`, so its 11/23 and 27/63 are LP verdicts, not verified
+certificates, and are not comparable with the 2 of 10 here.  Details:
+`attempts/A131-pin-clip/notes/lp_effect.md`.
+
+**Deployment (not done).** After T5″, before the LP; persist `clip_from`, `clip_kept`, `clip_nsub`,
+`clip_pins`, `clip_delta` on the emitted record — the T5″ ledger gap of PAUSED.md v2 §6 must not be
+repeated. Frozen verifiers unchanged: a clipped child is an ordinary smaller box. Lean shape: a
+T5-type logic leaf carrying a tilt range and a centre sub-box, decidable over ℚ, needing none of
+A117's Taylor/π machinery because `t = tan(θ/2)` keeps the trigonometry rational.
+
+**n-general.** The pin-clip is the class-pin analogue of the container clip: the container clip
+discards centres at which the square leaves `[0,s]²` at every admissible tilt, the pin-clip
+discards centres at which it hits a fixed occupied obstacle at every admissible tilt. The obstacle
+need only be a set contained in every admissible pose, so the rule applies verbatim to every
+conditioning tree in the protected tier, to trump5's residual tree, and — with `a_P` replaced by
+the other box's core half-side — to a second conditioned square, which is budget.md §D item 1's
+box-vs-forced-neighbour kill.
