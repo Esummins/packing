@@ -155,11 +155,14 @@ independent of the node's `D4` frame map:
 zone exempts more boxes, and that is justified because the hypothesis it is proved under is
 correspondingly stronger — and it is the wrong direction for the COVER.
 
-Consequence, stated exactly: a configuration whose only square near `F_i` sits in
-`ZONE_i \ BOX_i` satisfies neither the YES side nor `NO_i`, so every one of A120's four closed
-nodes has a sliver of width `≤ 1.10·10⁻⁷` in tilt and `≤ 4.71·10⁻¹⁰` in the upper centre
-coordinates that is in no branch.  Nothing in A120's LP or measure work is wrong; the tautology
-is.
+Consequence, stated exactly and no more: the split is **not a tautology as certified**.  A
+configuration whose only square near `F_i` sits in `ZONE_i \ BOX_i` satisfies neither the YES
+side nor `NO_i`, and the argument places it in no branch — it might still happen to fail some
+other `A_j^ZONE`, but nothing shows it does.  The sliver is `≤ 1.10·10⁻⁷` wide in tilt and
+`≤ 4.71·10⁻¹⁰` in the upper centre coordinates, on every one of A120's four closed nodes.
+Whether any packing actually lives there is a separate question and is not checked here; what is
+established is that the COVER argument has a hole of that size.  Nothing in A120's LP or measure
+work is wrong; the tautology is.
 
 **The fix is one rounding direction, and it is cheap.**  Emit the NO zone INWARD (lower bounds
 up, upper bounds down, tilt interval narrowed).  That makes the NO hypothesis WEAKER, so the
