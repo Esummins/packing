@@ -4949,3 +4949,49 @@ persistent `cand` cert-FAIL cells remain untouched by instruction.
 before every LP and verifier run; resumable per-cell records; hard per-task and per-process
 CPU-second caps checked before each cell; frozen `verify_case.py` byte-identical; nothing deleted.
 Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
+
+## 2026-09-07 — A128-coupled-moves (Fable, theory lead) — done-mixed: the menu is exact on neighbourhoods, the exchange is the only coupled move that bites, the cluster screw adds nothing, the residue is drawn
+- Deliverable `docs/proofs/drain_sel.md`. T1: Theorem DRAIN-SEL(W) stated against `noroom.md` §6/§8 and `Composition.lean`
+  — for every m ∈ W the Ψ^(w)-minimal packing (one per side) has a MENU member admissible (ROT / CLUSTER-ROT / EXCHANGE /
+  TWO-WALL / SUPPLY); consumers `classKilledAt_of_kill` via `k0free_kill` or `teleport_packing` on [3.82, ŝ), `StratumKillSel`
+  at ŝ; uniqueness untouched except that the exchange branch at ŝ needs a two-square Theorem U [C]. Weaker than
+  LOCK-FREE⁺(< 4) in three ways (one packing per side; W only; a menu) and that is exactly what the composition consumes.
+- T2 [T]: Lemma BOX-MOVE — the neighbourhood certificate of a rigid cluster screw: on a pose box (radius r in every
+  coordinate and the side) every possibly-separating pair axis and possibly-active wall row of a member has separation
+  derivative > 0, Q's μ has right-derivative > 0 over every candidate argmin point, every other (member, corner) depth
+  nonincreasing ⇒ EVERY packing in the box at which Q intrudes has a Ψ^(w)-smaller packing at the same side for every
+  positive weight vector (weight-free; near-contacts inside the box are rows automatically; a parallel-edge kink within
+  the box charges the rotation in both senses — the exact form of A103's remark (2)). Lemma BOX-GORDAN: Motzkin dual with
+  interval rows (= ROT's Gordan at r = 0). Lemma CLUSTER-ROT (any cluster screw at the minimiser; NOCRIT-SEL = ω = 0,
+  ROT = C = {Q}). Lemma EXCHANGE-BOX (Lemma EXPOSE on a box: two possible meeters, slot square + re-fit fixed in the
+  corner frame, disjoint from the nine untouched squares over the box — ∀-packings). TWO-WALL: TW-BOX is trivial on a
+  neighbourhood (reads the side), TW-HOOK is the exact nick-depth coupling (gain cot θ / tan θ) in the hook family only —
+  not a box leaf. Lemma SUPPLY: ≥ 3 rows or an exact concurrency (LINE); the four-corner budget is vacuous by
+  planarity (≤ 54 square rows vs 24 needed). Fact D (all derivative formulas) checked by finite differences (300 poses).
+- T3 [M] (`coupled128.py`, ~2 min; `results/{table128.md,moves128.jsonl,summary128.json}`): sample = A107 near-packings
+  of the 12 converged-alive cells (K01 ⊃ l1_071/l2_p65_101, K03 ⊃ l2_p65_111, K04 ⊃ l1_104, K05 ⊃ l2_p74_001, K06 ⊃ l1_159,
+  K20 ⊃ l2_p114_001, K26 ⊃ s3_far; l1_124/l1_148/l1_158 polished from their A115 supports — they land on K02's 3.942810,
+  K01's 4.0 and S10's 3.902674; l1_153 = Trump), K02, the A104 locks 4.000237 / 4.001525, Trump, and the 3.9907 / 3.98548
+  records; radii 1e-3 → 1e-6; every subject = every square that can meet the corner on the box (intruders + tangents).
+  **35 exact certificates, every one re-sampled 10⁴ → 10⁴ → 0 hits. Trump: held under every move on every box (9
+  subjects, no exchange with non-negative margin) — canary PASS.** On the 1e-3 box the menu kills 10 of 15 non-Trump rows
+  (8 of 11 non-Trump cells), mostly by trivial reasons (corner rattlers, K0-FREE boxes); the CLUSTER SCREW certifies
+  nothing at r ≥ 1e-5 that the single square does not (3 cluster-only certificates, all at 1e-6); the EXCHANGE is the only
+  coupled move that works where every single-square move fails: 5 corners on 1e-3 boxes (the 4.000237 lock's BL crowd
+  — a 9° pair — straightened into two cells, margin 3.9e-3; K01 TL; K26 TL; cell_l1_148 TL; the 3.9907 record's BR) and 4 on
+  1e-4…1e-5 boxes (4.001525's BR at 1e-5, margin 1.5e-4). Held under the WHOLE menu on every box ≥ 1e-4: lock 4.001525
+  (Gordan-certified frame), K03, K06, cell_l1_124, Trump. Below 4 every failure is the same: the best re-fit is FLUSH
+  against an untouched square (margin ≈ 0) — A98's neighbour-free 0 %, A101/A121's flush population, from the box side.
+  lock103's point verdicts reproduced square by square at r = 1e-8 (`test128.py`); at the exact point 4.001525 has six
+  first-order directions, all blocked within 5e-9 by parallel-edge kinks.
+- T4: NOT composed. Residue RES-MENU(m) (LOCKED + every enumerated cluster screw held + flush re-fits) ⊊ RES-LOCK;
+  realised at r ≥ 1e-4 by the 4.001525 frame (drawn: `attempts/A128-coupled-moves/results/residue128.svg`) and below 4
+  by the flush corners of K03/K06/K02-type packings. The coupled move needed, named: a NON-rigid two-parameter field
+  (column straightening + row slide, the manifold motion A104 follows) at the 4.001525-type frame, or a depth-2
+  exchange with margin. `budget.md` k0 row unchanged (13,500 / 0): the box leaves fire at radius 1e-3, the tree's cells
+  are 100× wider (K0-ROT/TF-U/EX verdict again). New obligation A128-G1.
+- Discipline: one process at a time for the moves (plus the near-packing polish as the second), BLAS pinned, BelowNormal,
+  PYTHONDONTWRITEBYTECODE=1; pure geometry (3-variable linprogs for the direction search only, as lock103/lockw105);
+  read-only on every campaign and attempt (A103's lock103.py copied, not imported); frozen verifiers untouched; nothing
+  deleted; git fetch + plain merge + push of own paths. Chip on K0.RESN (owner A128, released at close); depgraph
+  re-rendered; registry row.
