@@ -29,6 +29,11 @@ def panel(ox, oy, nid, node, row):
     cores = (node.get('hyp') or {}).get('cores', [])
     pins = []
     for c in cores:
+        # a PIN is a core with a zero-width tilt window (an axis-aligned simple square); the conditioned
+        # square's core has a tilt bin and must NOT be drawn as a pin (PI, 2026-09-07: it appeared as a sixth
+        # light-blue square under the H).
+        b = c.get('box') or {}
+        if 'th0' in b and abs(float(b['th1']) - float(b['th0'])) > 1e-9: continue
         try: pins.append((float(Fraction(str(c['kx']))), float(Fraction(str(c['ky'])))))
         except Exception: pass
     pk = node.get('packing', [])
@@ -81,8 +86,9 @@ def panel(ox, oy, nid, node, row):
         # extremal tilts of the window, each at its own nearest feasible centre; dashed at the box centre if the
         # tilt admits no feasible centre in the box at all.
         pin_rects = []
-        for c in cores[:5]:
+        for c in cores:
             b = c.get('box') or {}
+            if 'th0' in b and abs(float(b['th1']) - float(b['th0'])) > 1e-9: continue   # not a pin
             # the pin CORE: the part of the pin square present at every pin position in its box (the tree's own
             # "core meets pin core" object) — a centre is drawn as feasible iff the tilted square clears it
             if 'x0' in b: pin_rects.append((b['x1']-0.5, b['x0']+0.5, b['y1']-0.5, b['y0']+0.5))
