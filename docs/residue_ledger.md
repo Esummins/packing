@@ -185,6 +185,13 @@ apply (no boxes).
 ![Trump](residue_map/trump.svg)
 ![S07 beside Trump](residue_map/s07_vs_trump.svg)
 
+![S33 beside S07 and Trump](residue_map/s33_vs_s07_trump.svg)
+
+Trump's skeleton carries at least four exact local minima now: Trump (ŝ), S07 (2 + 4√2/3), S33 = S34 = K19 (3.91693,
+smooth interior critical point, all eleven squares load-bearing), S35 (3.91742, distinct), plus S38 (3.92891, degree 9)
+on k6_21 (known_results 26d). All are separate basins: S07's crest toward Trump is +0.0011, S33's +0.038. The local
+certificate applies to S33 and S38 with no Trump cut out to r = 0.2 and 0.68.
+
 trump5 (BL[2,1] + BR[1] + TR[1]) contains Trump, so its kill is a residual tree ending in Trump's basin (rBasin =
 3/2000, A63). A60's cover ran at 0.781 kill rate; paused. Its 325 alive nodes are, by A107: S01 196 (room), S07 18
 (the exact 45° packing above — needs k6_07's band to make BL(0,2) a usable slot), S02 12, S03 16, S05 7, others small.

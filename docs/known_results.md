@@ -102,6 +102,19 @@ file is the record of truth for claims, LOG.md is the record of events.
     within 1.2 of an axis-aligned pin is dead at every tilt outside D(c) (tilt trimming in closed form).
     n-general and elementary. Measurement of (ii)/(iii) on A57's open boxes in progress (A96).
 
+26d. EXACT Three more local minima on Trump's skeleton (A122, 2026-09-07, `4e8eecc8`), each with an interval endpoint
+    certificate at eps 1e-9 (400-bit re-check): S33 = S34 = K19 at 3.916930865713920563..., S35 at 3.917417657814610628...
+    (a distinct minimum, +4.9e-4, 6.9 deg apart in one square), and S38 at 3.928914685222977527... whose side is
+    algebraic of degree 9 (root of x^9 - 16x^8 + 105x^7 - 360x^6 + 663x^5 - 518x^4 - 297x^3 + 1064x^2 - 992x + 358).
+    S33/S35 are SMOOTH interior critical points (16 active rows of rank 14/15: a 2-/1-parameter family; Fritz-John
+    closes at first order, unlike S07's kink) with no closed form found by PSLQ at 170 digits; all eleven squares
+    load-bearing, no rattler (the PI's "fully loaded" reading confirmed); two flexes at fixed side, both blocked at
+    second order. Same k6_07 skeleton as Trump and S07; differs from S07 in one square (f0 upright, flush against
+    the BL column at x = 3/2) and is a third separate minimum (relaxed tilt paths crest +0.038 over it toward both).
+    S38 (class k6_21) is a kink minimum of two chain formulas NOT in the A110 menu; its crest lies on the far side
+    (42.794 deg, 3.934378) and it contributes no wall to Trump's basin; S07's wall is at 41.5649 deg, 3.886746029.
+    The local certificate (A116) applies to S33 and S38 without any Trump cut out to r = 0.205 / 0.677.
+
 ## E. What cannot work (proved or measured)
 27. PROSE Collapse theorem (A34): any sparse SDP relaxation whose cliques carry <= m squares is capped at
     s(m) <= 3.71.
