@@ -35,8 +35,12 @@ Iteration trace (repro, uncontended box) against the shard's two wedged runs:
 | 2 | t = 217 s, +946 rows, **lp 126 s** | 261 s (lp 150 s) → `time limit` | 240 s (lp 137 s) |
 | 3 | **never returns** | — (broke out, then never returned) | never returns |
 
-`faulthandler.dump_traceback_later` every 60 s gives the same stack on every dump from the moment
-iteration 3 begins:
+`faulthandler.dump_traceback_later` every 60 s gives the same stack on **all 11 dumps**, including
+the final one taken at the 600 s wall. Iteration 3's `M.solve()` began at t ≈ 220 s and was still
+inside it at t = 600 s — **380 s in one `h.run()` that never returned**, against 1 s and 9 s for
+the same call at iterations 0 and 1 — and it never printed the non-optimal-status diagnostic, so
+HiGHS had not returned a status at all. With the shard's own 2 h 08 m and 55 min, that is the
+whole picture:
 
 ```
 Thread 0x0000bcd0 (most recent call first):
