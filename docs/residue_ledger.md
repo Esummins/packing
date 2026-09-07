@@ -49,7 +49,15 @@ their subtrees, which the direct figure does not count, so 10–11 is a conserva
 node = trimmed child (ordinary certificate) + k excluded tilt intervals (T5 with a range, "T5″"); not yet deployed. The value is the outright kills, not the core enlargement (median
 a_tight gain 1.000). Lemma TC (tilt coherence) is exact to machine epsilon as a support-function identity but as a
 kill test is 4.8× weaker than the octagon interval test (33 vs 159) because it discards direction; it stays as the
-O(1) pre-screen. LP re-solves on trimmed bins and the schedule effect pending.
+O(1) pre-screen. **Live (A123's night shift, `ad55f884`, 296 level-1 children over seven hours on three shards): T5″ touched 6.4% of
+children, matching the offline 6.6%, but fully emptied only 1.0% (3 of 296) against the 3.7% the projection assumed —
+15 of the 16 trimmed bins came out ALIVE-at-LP, and 12 of 16 trims bite at the tilt extremes. The likely reading is
+that the offline "159 empty surviving bins" mixed touched with emptied; A124 is separating them. Trimming is a
+tractability lever, not a kill lever. The night's real result was the 900 s re-check: 11 certified kills from 23
+previously-alive nodes in 7.3 CPU-h, better per budget than the shards; 360 remain and are running at low priority.
+Soundness clean across all 296 (max core half-side 0.398, every bin inside [0, 90], no stored verdict contradicted).
+One shard hangs deterministically on `k5_16_interior_Y0381` (diagnosis in A124); trim records are never persisted
+(must-fix before a full resume).
 
 **What the alive nodes are** (A107, LP dual support drawn directly — the PI's rule):
 
