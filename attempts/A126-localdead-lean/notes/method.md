@@ -23,6 +23,8 @@
 |---|---|
 | `code/extract126.py` | T1: subclasses A119's `Checker` so that EVERY accepted dead leaf is recorded (the parent records only the feasible ones — infeasibility rays return before its capture hook), rounds rows / boxes / multipliers onto one denominator `10⁻⁹`, and re-evaluates every Farkas bound exactly |
 | `code/gen_lean126.py` | T1: emits `LocalCert<TAG>Data.lean` (one string per leaf) and `LocalCert<TAG>.lean` (the `native_decide`, the boxes and pins of `N`, the theorem), with a Python round trip through the emitted text first |
+| `code/control126.py` | T1: the loop-closing control — reads the leaf records back out of the EMITTED `.lean` file, decodes them the way `parseLeaf` does, re-checks every one, and mutates |
+| `code/zonecheck126.py` | T3: finding F-COVER — is a node's NO zone inside its YES box? |
 | `lean/…/SatInterior.lean` | T2: Lemma SAT for interiors, a theorem |
 | `lean/…/LocalCert.lean` | T1: the reflected leaf checker, its soundness, the decoder, `CertCover`, `localDead_of_cert` |
 | `lean/…/LocalCompose.lean` | T3: the YES/NO split, `localHyp_of_yes`, `node_dead_of_yes_no`, the clamp lemmas |
@@ -88,3 +90,25 @@ Worst margins over all leaves: `S07 (0.1, 40°)` **1.358·10⁻⁵**, `S02 (0.2,
 **9.086·10⁻⁸** — the latter is tight because that certificate's own certified minimum is only
 9.8·10⁻⁸ above `s0`, and the rounding costs about 7·10⁻⁹ of it.  `10⁻⁹` is therefore the right
 denominator for this corpus: `10⁻⁸` would not clear `S02 (0.2, 10°)`, `10⁻¹⁵` triples the text.
+
+## The control (`code/control126.py`, `results/control.txt`)
+
+The numbers are read back out of the EMITTED `.lean` file — not out of the JSON they were
+written from — decoded exactly as `LocalCert.parseLeaf` decodes them, and re-checked; then
+mutated, because a checker that accepts everything proves nothing.
+
+| | S07 (0.1, 40°) | S02 (0.2, 10°) |
+|---|---|---|
+| leaf records read out of the `.lean` file | 2 302 | 32 570 |
+| pass as emitted | **2 302 / 2 302** | **32 570 / 32 570** |
+| `zero-y` (all multipliers → 0) fails | 2 302 | 32 570 |
+| `negate-y` (one multiplier's sign flipped) fails | 2 302 | 32 570 |
+| `halve-y` (all multipliers halved) fails | 1 556 | 26 788 |
+| `drop-row` (one row deleted from the combination) fails | 708 | 30 726 |
+| `widen-box` (the last tilt coordinate widened by 1) fails | 638 | 29 412 |
+
+`halve-y` fails on EXACTLY the feasible leaves in both cases (1 556 = 2 302 − 746 rays,
+26 788 = 32 570 − 5 782) — halving a Farkas RAY halves a positive bound and it stays positive,
+while halving a side bound pulls it down to the box's `s_lo = 3.82 < s0`.  That the count comes
+out at the ray count on the nose is an independent confirmation that the two branches of
+`checkLeaf` are attached to the leaves the generator meant.
