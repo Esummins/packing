@@ -5024,7 +5024,8 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
 
   (the second is the `N` A120's node cover uses, which is why it was worth the 49 MB). `localDead_s07` /
   `localDead_s02` are Theorem LOCAL for those `N` modulo ONE named hypothesis. Axiom roster exactly as targeted:
-  the standard three everywhere, plus one `native_decide` axiom per replay.
+  the standard three everywhere, plus one `native_decide` axiom per replay and, since `localDead_of_cert` uses
+  `lb_382` for the lower end of the window, A56's `check_3_82` — both pre-existing, neither introduced here.
 - **The control (`code/control126.py`), because a checker that accepts everything proves nothing.** The leaf
   records are read back out of the EMITTED `.lean` file — not out of the JSON they were written from — decoded
   exactly as `parseLeaf` decodes them, and re-checked: **2 302/2 302 and 32 570/32 570 pass**. Mutated:

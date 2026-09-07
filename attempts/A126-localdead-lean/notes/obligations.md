@@ -40,7 +40,8 @@ and `localDead_of_cert` a true but empty theorem.  With the certificate's own wi
 `[3.82, 3.897084]`, which reaches ABOVE `s0 = 3.877084`, the obligation quantifies over packings
 a `LocalDead` proof says nothing about, the cover argument never looks at `s0`, and the
 statement is strictly weaker than the conclusion.  The lower end costs nothing: `lb_382`
-(Theorem 1) puts every packing's side at or above `3.82`, and `localDead_of_cert` uses it.
+(Theorem 1) puts every packing's side at or above `3.82`, and `localDead_of_cert` uses it — which is why
+`localDead_s07` / `localDead_s02` inherit A56's `check_3_82` `native_decide` axiom alongside their own.
 
 `CertCover` factors into four pieces; the first is proved, the fourth is bookkeeping, and the
 two in the middle share ONE missing primitive.

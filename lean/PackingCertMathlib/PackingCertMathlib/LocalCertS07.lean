@@ -12,7 +12,7 @@ by `check_local.py`, has
 
 `check_s07` runs the reflected weak-duality checker of `LocalCert.lean` on ALL 2302 of
 them at once (`native_decide`), replacing 2302 `linarith` calls.  `localDead_s07` is
-Theorem LOCAL for this `N`, modulo the single named cover obligation `CertCover` — see §3 of
+Theorem LOCAL for this `N`, modulo the single named cover obligation `CertCover` — see §4 of
 `LocalCert.lean` and `attempts/A126-localdead-lean/notes/obligations.md`.
 
 ## The neighbourhood `N`

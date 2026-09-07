@@ -78,3 +78,6 @@ import PackingCertMathlib.PinnedSlide
 import PackingCertMathlib.Ceil
 
 import PackingCertMathlib.Local
+import PackingCertMathlib.SatInterior
+import PackingCertMathlib.LocalCert
+import PackingCertMathlib.LocalCompose

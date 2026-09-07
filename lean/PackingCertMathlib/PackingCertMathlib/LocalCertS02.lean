@@ -12,7 +12,7 @@ by `check_local.py`, has
 
 `check_s02` runs the reflected weak-duality checker of `LocalCert.lean` on ALL 32570 of
 them at once (`native_decide`), replacing 32570 `linarith` calls.  `localDead_s02` is
-Theorem LOCAL for this `N`, modulo the single named cover obligation `CertCover` — see §3 of
+Theorem LOCAL for this `N`, modulo the single named cover obligation `CertCover` — see §4 of
 `LocalCert.lean` and `attempts/A126-localdead-lean/notes/obligations.md`.
 
 ## The neighbourhood `N`
@@ -77,16 +77,20 @@ noncomputable def s02Pins : List Pin := [
 /-- **`LocalDead` for `S02_k5_11_r0.20_rho10`** — Theorem LOCAL for a concrete `N`, from the kernel-checked
 certificate plus the cover obligation.  Everything ARITHMETIC in the certificate (every leaf's
 Farkas vector, every box minimisation, 504404 rows) is discharged by `check_s02`; the
-hypothesis `hcov` is Lemma COVER + Lemma RELAX, i.e. "the recorded leaves cover `N`". -/
+hypothesis `hcov` is Lemma COVER + Lemma RELAX, i.e. "the recorded leaves cover `N` on the
+certificate's own window `[191/50, 974271/250000] = [3.82, 3.897084]`".  That window reaches
+ABOVE `s0`, so `hcov` is NOT a consequence of the conclusion — see `LocalCert.CertCover`. -/
 theorem localDead_s02
-    (hcov : CertCover s02Leaves s02Boxes s02Pins (((969271 : ℚ) / 250000 : ℚ) : ℝ)) :
+    (hcov : CertCover s02Leaves s02Boxes s02Pins
+      ((191 : ℝ) / 50) ((974271 : ℝ) / 250000)) :
     LocalDead s02Boxes s02Pins (((969271 : ℚ) / 250000 : ℚ) : ℝ) :=
-  localDead_of_cert check_s02 hcov
+  localDead_of_cert (by norm_num) (by push_cast; norm_num) check_s02 hcov
 
 /-- The same at `ŝ`, the shape `Local.classKilledAt_of_localDead` consumes
 (`ŝ ≤ 3877084/1000000 = s0` by `shat_spec`). -/
 theorem localDead_s02_shat
-    (hcov : CertCover s02Leaves s02Boxes s02Pins (((969271 : ℚ) / 250000 : ℚ) : ℝ)) :
+    (hcov : CertCover s02Leaves s02Boxes s02Pins
+      ((191 : ℝ) / 50) ((974271 : ℝ) / 250000)) :
     LocalDead s02Boxes s02Pins shat := by
   have h := localDead_s02 hcov
   intro s z hz hN
