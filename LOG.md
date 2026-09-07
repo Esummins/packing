@@ -5091,7 +5091,8 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   `noneIn_of_clamped`, so a NO child certified against the CLAMPED zone kills the branch of the UNCLAMPED box —
   the CLAMP itself costs nothing. The ROUNDING does; see the next bullet.
 - **F-COVER — the emitted NO zone is the YES box rounded the WRONG WAY** (`code/zonecheck126.py`, measured on all
-  four of A120's CLOSED nodes and all 17 of their PASSing NO certificates). The split is a tautology **iff
+  nine nodes A120 processed and all 22 of their PASSing NO certificates — not one zone is inside its box). The
+  split is a tautology **iff
   `ZONE_i ⊆ BOX_i`**: a configuration that fails the YES side fails it because NO square is in `BOX_i`, and to land
   in `NO_i` it must then have no square in `ZONE_i` either. A120's runner builds the zone EXACTLY — its node record
   carries the box's own θ-cell and the centre rectangle in full precision, and `box_identical_to_yes` checks
@@ -5100,9 +5101,9 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   `tan(38.4351°/2) = 0.348580331`), the centre rectangle to 9 decimals by NEAREST. Outward is the right direction
   for the VERIFIER — a wider NO zone exempts more boxes, justified because the hypothesis it is proved under is
   correspondingly stronger — and the wrong one for the COVER. Measured against A120's OWN full-precision record,
-  so the comparison is independent of the node's `D4` frame map: `9.0·10⁻⁸ … 1.10·10⁻⁷` in tilt on **all 17**,
-  `≤ 4.71·10⁻¹⁰` on the upper centre bounds of 13 of them, never on the lower ones. **So every one of A120's four
-  closed nodes has a sliver — a configuration whose only square near `F_i` sits
+  so the comparison is independent of the node's `D4` frame map: `9.0·10⁻⁸ … 1.10·10⁻⁷` in tilt on **all 22**,
+  `≤ 4.71·10⁻¹⁰` on the upper centre bounds of 16 of them, never on the lower ones. **So every node A120
+  processed has a sliver — a configuration whose only square near `F_i` sits
   in `ZONE_i \ BOX_i` — in NEITHER branch.** Nothing in A120's LP or measure work is wrong; the tautology is, and
   the fix is one rounding direction (emit the zone INWARD) plus a re-certification at amounts orders of magnitude
   below the resolution at which those certificates pass. `NO3` also confirms A120 handles E3 correctly on its own

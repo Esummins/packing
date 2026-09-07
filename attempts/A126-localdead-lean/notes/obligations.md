@@ -152,8 +152,8 @@ Both remaining NO-side steps are pre-existing properties of the frozen fixed-sid
 
 ## 4. Finding F-COVER — the emitted NO zone is the YES box rounded the WRONG WAY
 
-`code/zonecheck126.py`, run on **all four of A120's CLOSED nodes and all 17 of their PASSing NO
-certificates** (`results/zonecheck.txt`).
+`code/zonecheck126.py`, run on **all NINE nodes A120 processed and all 22 of their PASSing NO
+certificates** (`results/zonecheck.txt`).  Not one zone is inside its box.
 
 The split `H = YES ∪ ⋃_i NO_i` is a tautology **iff `ZONE_i ⊆ BOX_i` as pose sets**: a
 configuration that fails the YES side fails it because NO square is in `BOX_i`, and to land in
@@ -166,8 +166,8 @@ independent of the node's `D4` frame map:
 
 | | outside the recorded box by |
 |---|---|
-| tilt ends (`t = tan(θ/2)`, rounded out to `2⁻²⁰` / `2⁻²³`) | `9.0·10⁻⁸` … `1.10·10⁻⁷`, on EVERY one of the 17 |
-| upper centre bounds (9 decimals, NEAREST) | up to `4.71·10⁻¹⁰`, on 13 of the 17 |
+| tilt ends (`t = tan(θ/2)`, rounded out to `2⁻²⁰` / `2⁻²³`) | `9.0·10⁻⁸` … `1.10·10⁻⁷`, on EVERY one of the 22 |
+| upper centre bounds (9 decimals, NEAREST) | up to `4.71·10⁻¹⁰`, on 16 of the 22 |
 | lower centre bounds | never (nearest rounding happens to move them inward) |
 
 `NO0`'s tilt is the clearest instance: `2924103/8388608 = 0.348580241` against
@@ -179,7 +179,7 @@ Consequence, stated exactly and no more: the split is **not a tautology as certi
 configuration whose only square near `F_i` sits in `ZONE_i \ BOX_i` satisfies neither the YES
 side nor `NO_i`, and the argument places it in no branch — it might still happen to fail some
 other `A_j^ZONE`, but nothing shows it does.  The sliver is `≤ 1.10·10⁻⁷` wide in tilt and
-`≤ 4.71·10⁻¹⁰` in the upper centre coordinates, on every one of A120's four closed nodes.
+`≤ 4.71·10⁻¹⁰` in the upper centre coordinates, on every one of the nine nodes A120 processed.
 Whether any packing actually lives there is a separate question and is not checked here; what is
 established is that the COVER argument has a hole of that size.  Nothing in A120's LP or measure
 work is wrong; the tautology is.
