@@ -1,81 +1,104 @@
 """A126 T3 -- finding F-COVER: is a node's NO zone INSIDE its YES box?
 
-    python zonecheck126.py [node]        (default k5_11_interior_Y0230)
+    python zonecheck126.py [node ...]      (default: A120's four CLOSED nodes)
 
 A120's cover `H = YES u NO_1 u ... u NO_|L|` is a tautology **iff `ZONE_i` is contained in
 `BOX_i` as a set of poses**: a configuration that fails the YES side fails it because NO square
-is in `BOX_i`, and to land in `NO_i` it must then have no square in `ZONE_i` either.  A120's
-runner builds the zone exactly (its node record carries the box's own theta-cell and the centre
-rectangle in full precision) and asserts `box_identical_to_yes`; the rounding happens when the
-`case-measure-certificate-v1` file is written, and it is OUTWARD -- the right direction for the
-VERIFIER (a wider NO zone exempts more, justified by the correspondingly stronger hypothesis)
-and the wrong one for the COVER.
+is in `BOX_i`, and to land in `NO_i` it must then have no square in `ZONE_i` either.
 
-Read-only: A119's certificate of `N` and A120's certificate files.  Prints, per NO child, every
-bound of the zone that lies OUTSIDE the box, with the amount.  Exit 0 either way -- this is a
-measurement, not a gate.
+A120's runner builds the zone EXACTLY and records it at full precision in
+`results/nodes/<child>.json` (`hyp.nofams`, with the box's own theta interval in DEGREES); the
+`case-measure-certificate-v1` file then writes it as exact rationals, and THAT is where the
+rounding happens.  So the comparison that isolates the defect is CERTIFICATE against RECORD, and
+it works for every node whatever its `D4` frame map -- comparing against A119's unmapped boxes
+would only be meaningful for a node whose `struct_op` fixes them.
+
+Read-only on A120 and A119.  Prints, per NO child, every bound of the certificate's zone that
+lies OUTSIDE the recorded box, with the amount.  Exit 0 either way: this is a measurement.
 """
 from __future__ import annotations
 
-import glob, gzip, json, math, os, sys
+import glob, json, math, os, sys
 from fractions import Fraction as Q
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-A119 = os.path.join(ROOT, "attempts", "A119-local-cert-lean", "certs")
-A120 = os.path.join(ROOT, "attempts", "A120-no-side-runner", "certs")
-NCERT = "S02_k5_11_r0.20_rho10.cert.json.gz"          # the N A120's cover uses
+A120C = os.path.join(ROOT, "attempts", "A120-no-side-runner", "certs")
+A120N = os.path.join(ROOT, "attempts", "A120-no-side-runner", "results", "nodes")
+CLOSED = ["k5_11_interior_Y0230", "k5_11_interior_Y0637",
+          "k5_11_interior_Y0709", "k5_11_interior_Y0997"]
+TOL = 1e-12                       # a bound this close counts as "on the boundary", not outside
 
 
-def theta_of(t: float) -> float:
-    return math.degrees(2 * math.atan(t))
+def tanh2(deg):
+    return math.tan(math.radians(deg) / 2.0)
 
 
-def main(node="k5_11_interior_Y0230"):
-    cert = json.load(gzip.open(os.path.join(A119, NCERT), "rt", encoding="utf-8"))
-    boxes = {b["name"]: b for b in cert["meta"]["bodies"] if b["kind"] == "free"}
-    files = sorted(glob.glob(os.path.join(A120, "%s_a120__a116N__NO*.json" % node)))
+def record_for(child):
+    """the node record of a NO child; a re-priced child (`_r6`) reuses its base record."""
+    p = os.path.join(A120N, child + ".json")
+    if os.path.exists(p):
+        return json.load(open(p, encoding="utf-8"))
+    base = child.rsplit("_r", 1)[0]
+    p = os.path.join(A120N, base + ".json")
+    if os.path.exists(p):
+        return json.load(open(p, encoding="utf-8"))
+    return None
+
+
+def check_node(node):
+    files = sorted(glob.glob(os.path.join(A120C, "%s_a120__a116N__NO*.json" % node)))
     files = [f for f in files if os.path.exists(f[:-5] + ".report.json")
              and json.load(open(f[:-5] + ".report.json", encoding="utf-8")).get("result") == "PASS"]
-    print("N = %s ; node = %s ; %d PASSing NO certificates" % (cert["meta"]["id"], node, len(files)))
+    print("node %s : %d PASSing NO certificates" % (node, len(files)))
     worst = {}
     for f in files:
+        child = os.path.basename(f)[:-5]
+        rec = record_for(child)
+        if rec is None:
+            print("  %-46s -> NO RECORD, skipped" % child)
+            continue
+        b = rec["hyp"]["nofams"][0]
         c = json.load(open(f, encoding="utf-8"))
         z = c["hypotheses"]["nofams"][0]
-        zx0, zx1, zy0, zy1 = (float(Q(z["x0"])), float(Q(z["x1"])),
-                              float(Q(z["y0"])), float(Q(z["y1"])))
-        ivs = [(float(Q(a)), float(Q(b))) for a, b in z["t_intervals"]]
-        # the box: nearest centre rectangle among N's free bodies
-        nm, b = min(boxes.items(), key=lambda kv: abs(zx0 - kv[1]["x0"]) + abs(zy0 - kv[1]["y0"]))
-        bt0, bt1 = math.tan(b["t0"] / 2), math.tan(b["t1"] / 2)
         bad = []
-        # centre: the zone must be inside; the clamp (x1 = s0 - 1/2) only shrinks it
-        for k, zv, bv, sgn in (("x0", zx0, b["x0"], +1), ("x1", zx1, b["x1"], -1),
-                               ("y0", zy0, b["y0"], +1), ("y1", zy1, b["y1"], -1)):
-            if sgn * (zv - bv) < 0:
-                bad.append((k, abs(zv - bv)))
-        # tilt, in `t` and per emitted interval, against the certificate's cell FOLDED into the
-        # fundamental domain (a cell straddling 0 is two `t`-intervals, and A120 emits both)
-        folds = [(bt0, bt1)]
-        if b["t0"] < 0.0:                       # the straddling cell folds to the far end
-            folds.append((math.tan((b["t0"] + math.pi / 2) / 2), math.tan(math.pi / 4)))
-            folds[0] = (math.tan(0.0), bt1)
-        for (a, bb) in ivs:
-            fl = min(folds, key=lambda fv: abs(a - fv[0]) + abs(bb - fv[1]))
-            if a < fl[0]:
-                bad.append(("t-lo", fl[0] - a))
-            if bb > fl[1]:
-                bad.append(("t-hi", bb - fl[1]))
+        for k, sgn in (("x0", +1), ("x1", -1), ("y0", +1), ("y1", -1)):
+            d = sgn * (float(Q(z[k])) - b[k])
+            if d < -TOL:
+                bad.append((k, -d))
+        zt = [(float(Q(a)), float(Q(bb))) for a, bb in z["t_intervals"]]
+        bt = [(tanh2(lo), tanh2(hi)) for lo, hi in b["thetas"]]
+        if len(zt) != len(bt):
+            bad.append(("#t-intervals %d vs %d" % (len(zt), len(bt)), float("nan")))
+        else:
+            for (a, bb), (lo, hi) in zip(sorted(zt), sorted(bt)):
+                if a < lo - TOL:
+                    bad.append(("t-lo", lo - a))
+                if bb > hi + TOL:
+                    bad.append(("t-hi", bb - hi))
         for k, v in bad:
             worst[k] = max(worst.get(k, 0.0), v)
-        print("  %-46s -> box %-9s  zone OUTSIDE the box: %s"
-              % (os.path.basename(f)[:-5], nm,
-                 ", ".join("%s by %.2e" % kv for kv in bad) or "nowhere (zone is inside)"))
-    if worst:
-        print("F-COVER: the split is a tautology only up to %s"
-              % ", ".join("%s %.2e" % (k, v) for k, v in sorted(worst.items())))
-        print("         fix: emit the NO zone with INWARD rounding and re-certify (the amounts")
-        print("         above are far below the resolution at which these certificates pass)")
+        print("  %-46s zone OUTSIDE the recorded box: %s"
+              % (child, ", ".join("%s by %.2e" % kv for kv in bad) or "nowhere (zone is inside)"))
+    return worst
+
+
+def main(*nodes):
+    nodes = list(nodes) or CLOSED
+    allworst = {}
+    for n in nodes:
+        for k, v in check_node(n).items():
+            allworst[k] = max(allworst.get(k, 0.0), v)
+        print()
+    if allworst:
+        print("F-COVER over %d node(s): the split is a tautology only up to %s"
+              % (len(nodes), ", ".join("%s %.2e" % (k, v) for k, v in sorted(allworst.items()))))
+        print("  A120's runner builds the zone EXACTLY (the record above); the certificate FILE")
+        print("  emits it rounded OUTWARD -- the right direction for the verifier, the wrong one")
+        print("  for the cover.  Fix: emit the zone INWARD and re-certify (these amounts are far")
+        print("  below the resolution at which the certificates pass).")
+    else:
+        print("every zone is inside its box: the split is a tautology as certified")
     return 0
 
 

@@ -1,8 +1,30 @@
-N = S02_k5_11_r0.20_rho10 ; node = k5_11_interior_Y0230 ; 4 PASSing NO certificates
-  k5_11_interior_Y0230_a120__a116N__NO0          -> box f1         zone OUTSIDE the box: x1 by 4.71e-10, y1 by 3.58e-10, t-lo by 9.01e-08, t-hi by 9.89e-08
-  k5_11_interior_Y0230_a120__a116N__NO1_r6       -> box f2         zone OUTSIDE the box: x1 by 1.18e-10, y1 by 1.63e-11, t-lo by 9.01e-08, t-hi by 9.89e-08
-  k5_11_interior_Y0230_a120__a116N__NO2          -> box f3         zone OUTSIDE the box: x1 by 4.54e-10, y1 by 3.45e-10, t-lo by 9.01e-08, t-hi by 9.89e-08
-  k5_11_interior_Y0230_a120__a116N__NO3          -> box BR(0,1)    zone OUTSIDE the box: t-lo by 1.05e-07, t-hi by 1.11e-16, t-hi by 1.07e-07
-F-COVER: the split is a tautology only up to t-hi 1.07e-07, t-lo 1.05e-07, x1 4.71e-10, y1 3.58e-10
-         fix: emit the NO zone with INWARD rounding and re-certify (the amounts
-         above are far below the resolution at which these certificates pass)
+node k5_11_interior_Y0230 : 4 PASSing NO certificates
+  k5_11_interior_Y0230_a120__a116N__NO0          zone OUTSIDE the recorded box: x1 by 4.71e-10, y1 by 3.58e-10, t-lo by 9.01e-08, t-hi by 9.89e-08
+  k5_11_interior_Y0230_a120__a116N__NO1_r6       zone OUTSIDE the recorded box: x1 by 1.18e-10, y1 by 1.63e-11, t-lo by 9.01e-08, t-hi by 9.89e-08
+  k5_11_interior_Y0230_a120__a116N__NO2          zone OUTSIDE the recorded box: x1 by 4.54e-10, y1 by 3.45e-10, t-lo by 9.01e-08, t-hi by 9.89e-08
+  k5_11_interior_Y0230_a120__a116N__NO3          zone OUTSIDE the recorded box: t-hi by 1.07e-07, t-lo by 1.05e-07
+
+node k5_11_interior_Y0637 : 5 PASSing NO certificates
+  k5_11_interior_Y0637_a120__a116N__NO0_r3       zone OUTSIDE the recorded box: x1 by 3.58e-10, y1 by 4.71e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0637_a120__a116N__NO0_r6       zone OUTSIDE the recorded box: x1 by 3.58e-10, y1 by 4.71e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0637_a120__a116N__NO1          zone OUTSIDE the recorded box: x1 by 1.63e-11, y1 by 1.18e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0637_a120__a116N__NO2_r6       zone OUTSIDE the recorded box: x1 by 3.45e-10, y1 by 4.54e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0637_a120__a116N__NO3          zone OUTSIDE the recorded box: t-hi by 1.07e-07, t-lo by 1.05e-07
+
+node k5_11_interior_Y0709 : 4 PASSing NO certificates
+  k5_11_interior_Y0709_a120__a116N__NO0          zone OUTSIDE the recorded box: x1 by 3.58e-10, y1 by 4.71e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0709_a120__a116N__NO1          zone OUTSIDE the recorded box: x1 by 1.63e-11, y1 by 1.18e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0709_a120__a116N__NO2_r6       zone OUTSIDE the recorded box: x1 by 3.45e-10, y1 by 4.54e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0709_a120__a116N__NO3          zone OUTSIDE the recorded box: t-hi by 1.07e-07, t-lo by 1.05e-07
+
+node k5_11_interior_Y0997 : 4 PASSing NO certificates
+  k5_11_interior_Y0997_a120__a116N__NO0          zone OUTSIDE the recorded box: x1 by 3.58e-10, y1 by 4.71e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0997_a120__a116N__NO1_r6       zone OUTSIDE the recorded box: x1 by 1.63e-11, y1 by 1.18e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0997_a120__a116N__NO2_r6       zone OUTSIDE the recorded box: x1 by 3.45e-10, y1 by 4.54e-10, t-lo by 9.75e-08, t-hi by 1.10e-07
+  k5_11_interior_Y0997_a120__a116N__NO3_r6       zone OUTSIDE the recorded box: t-hi by 1.07e-07, t-lo by 1.05e-07
+
+F-COVER over 4 node(s): the split is a tautology only up to t-hi 1.10e-07, t-lo 1.05e-07, x1 4.71e-10, y1 4.71e-10
+  A120's runner builds the zone EXACTLY (the record above); the certificate FILE
+  emits it rounded OUTWARD -- the right direction for the verifier, the wrong one
+  for the cover.  Fix: emit the zone INWARD and re-certify (these amounts are far
+  below the resolution at which the certificates pass).

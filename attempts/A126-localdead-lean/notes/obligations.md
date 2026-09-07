@@ -132,42 +132,41 @@ Both remaining NO-side steps are pre-existing properties of the frozen fixed-sid
 
 ## 4. Finding F-COVER — the emitted NO zone is the YES box rounded the WRONG WAY
 
-Measured on all four of `k5_11_interior_Y0230`'s NO certificates against A119's own boxes for
-`N = S02_k5_11_r0.20_rho10` (`code/` has no script for this; the numbers below are from the
-certificate files and the certificate of `N` directly).
+`code/zonecheck126.py`, run on **all four of A120's CLOSED nodes and all 17 of their PASSing NO
+certificates** (`results/zonecheck.txt`).
 
 The split `H = YES ∪ ⋃_i NO_i` is a tautology **iff `ZONE_i ⊆ BOX_i` as pose sets**: a
 configuration that fails the YES side fails it because NO square is in `BOX_i`, and to land in
 `NO_i` it must then have no square in `ZONE_i` either.  A120's runner builds the zone EXACTLY
-(its record carries `thetas [38.4351, 58.4351]`, the box's own θ-cell, and the centre rectangle
-in full double precision, and its `box_identical_to_yes` guard checks precisely that).  The
-rounding happens when the `case-measure-certificate-v1` file is written, and it is OUTWARD:
+and records it at full precision in `results/nodes/<child>.json` (`hyp.nofams`, with the box's
+own θ-interval in degrees) — its `box_identical_to_yes` guard checks precisely that.  The
+rounding happens when the `case-measure-certificate-v1` file is written, and it is OUTWARD.
+Comparing the CERTIFICATE against A120's own RECORD isolates exactly that step and is
+independent of the node's `D4` frame map:
 
-| child | box | centre bound outside the box | tilt ends outside the box |
-|---|---|---|---|
-| `NO0` | `f1` | `x1` by 4.71·10⁻¹⁰, `y1` by 3.58·10⁻¹⁰ | 9.0·10⁻⁸ and 9.9·10⁻⁸ |
-| `NO1_r6` | `f2` | `x1` by 1.18·10⁻¹⁰, `y1` by 1.63·10⁻¹¹ | 9.0·10⁻⁸ and 9.9·10⁻⁸ |
-| `NO2` | `f3` | `x1` by 4.54·10⁻¹⁰, `y1` by 3.45·10⁻¹⁰ | 9.0·10⁻⁸ and 9.9·10⁻⁸ |
-| `NO3` | `BR(0,1)` | none (the zone is the CLAMPED rectangle, strictly inside) | 1.05·10⁻⁷ and 1.07·10⁻⁷ |
+| | outside the recorded box by |
+|---|---|
+| tilt ends (`t = tan(θ/2)`, rounded out to `2⁻²⁰` / `2⁻²³`) | `9.0·10⁻⁸` … `1.10·10⁻⁷`, on EVERY one of the 17 |
+| upper centre bounds (9 decimals, NEAREST) | up to `4.71·10⁻¹⁰`, on 13 of the 17 |
+| lower centre bounds | never (nearest rounding happens to move them inward) |
 
-The tilt intervals are the θ-cell converted to `t = tan(θ/2)` and rounded outward to `2⁻²⁰` /
-`2⁻²³` (`NO0`: `2924103/8388608 = 0.348580241` against `tan(38.4351°/2) = 0.348580331`); the
-centre bounds are 9-decimal NEAREST roundings, which happens to move `x0`/`y0` inward and
-`x1`/`y1` outward.  Outward is the right direction for the VERIFIER — a wider NO zone exempts
-more boxes, and that is justified because the hypothesis it is proved under is correspondingly
-stronger — and it is the wrong direction for the COVER.
+`NO0`'s tilt is the clearest instance: `2924103/8388608 = 0.348580241` against
+`tan(38.4351°/2) = 0.348580331`.  Outward is the right direction for the VERIFIER — a wider NO
+zone exempts more boxes, and that is justified because the hypothesis it is proved under is
+correspondingly stronger — and it is the wrong direction for the COVER.
 
 Consequence, stated exactly: a configuration whose only square near `F_i` sits in
-`ZONE_i \ BOX_i` satisfies neither the YES side nor `NO_i`, so the node's cover as certified has
-a sliver of width `≲ 10⁻⁷` in tilt and `≲ 5·10⁻¹⁰` in each centre coordinate that is in no
-branch.  Nothing in A120's LP or measure work is wrong; the tautology is.
+`ZONE_i \ BOX_i` satisfies neither the YES side nor `NO_i`, so every one of A120's four closed
+nodes has a sliver of width `≤ 1.10·10⁻⁷` in tilt and `≤ 4.71·10⁻¹⁰` in the upper centre
+coordinates that is in no branch.  Nothing in A120's LP or measure work is wrong; the tautology
+is.
 
 **The fix is one rounding direction, and it is cheap.**  Emit the NO zone INWARD (lower bounds
 up, upper bounds down, tilt interval narrowed).  That makes the NO hypothesis WEAKER, so the
-four children have to be re-certified — but by `10⁻⁷` in tilt, which is orders of magnitude
-below the resolution at which those certificates pass, so a re-run should be a formality.
-Widening the YES box instead is NOT an option: the YES kill is A119's certificate for `N`, and
-`N`'s boxes are what they are.
+children have to be re-certified — but by `10⁻⁷` in tilt, orders of magnitude below the
+resolution at which those certificates pass, so a re-run should be a formality.  Widening the
+YES box instead is NOT an option: the YES kill is A119's certificate for `N`, and `N`'s boxes
+are what they are.
 
 `NO3` also confirms that A120 handles finding E3 correctly on its side: its zone carries TWO
 `t`-intervals, `[tan 40°, 1]` and `[0, tan 5°]`, i.e. the `θ ∈ [−10°, +10°]` cell folded into
