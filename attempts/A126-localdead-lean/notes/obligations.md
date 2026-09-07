@@ -101,7 +101,7 @@ hypotheses, and their status:
 | `hD` | `LocalDead` for `N = S02_k5_11_r0.20_rho10` | `LocalCertS02.localDead_s02`, modulo `CertCover` (§2) |
 | `hdisj` | A120 **A2**: the four mapped boxes are pairwise pose-disjoint | a finite rational interval test; `decide`-able, not yet written |
 | `hsep` | A120 **A3**: each mapped box is pose-disjoint from every pin | same |
-| `hpins` | the node's own class hypothesis: the five pins are occupied by five distinct squares, in the node frame (A120 **A1** + **A4**, the `D4` map and its exact inverse) | not written; this is `ContainsPins` transported through `d4Cfg`, the same step `Composition.classKilledAt_of_tree` already performs for the tree route |
+| `hpins` | the node's own class hypothesis: the five pins are occupied by five distinct squares, in the node frame (A120 **A1** + **A4**, the `D4` map and its exact inverse) | not written; this is `ContainsPins` transported through `d4Cfg`, the same step `Composition.classKilledAt_of_tree` already performs for the tree route.  **A1 itself checks out exactly**: the six cores of every `Y0230` NO certificate are, as EXACT rationals at `s0`, `(1/2, 1/2)`, `(1/2, 3/2)`, `(1/2, 844271/250000)`, `(3/2, 1/2)`, `(844271/250000, 1/2)` — A119's five pins `BL(0,0)`, `BL(0,1)`, `TL(0,0)`, `BL(1,0)`, `BR(0,0)` — plus `(3737327/2000000, 3178299/2000000)` at tilt half-width `13/16`, the node's own conditioned square.  Core half-side `16056319934464/32768001953125 ≈ 0.48999 < 1/2 − δ/√2 = 0.49293`, so a square whose centre is inside the slack core does contain the core, which is `checkCaseI_no_family`'s `hown` |
 | `hno` | the four NO children are empty | see below |
 
 The NO side, in detail.  A120's four PASSing certificates for `Y0230` are `NO0`, `NO1_r6`,
