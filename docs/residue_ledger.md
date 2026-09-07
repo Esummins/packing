@@ -317,5 +317,9 @@ BR(0,0) to 0.254 at fixed tilt — the PI's 0.25 — and the limiter is f0 again
 the corner: the Trump boundary. **Limiter at r = 0.3**: a genuine rearrangement of L ∪ P that the dropped squares
 would block (S02: BR(0,1) leaves its slot, f3 climbs onto it, 3.8733; S07: the ladder shears, 3.856) — adding the
 blockers as boxes extends it (A119). **Consumer: 72 of 184 k5_11 and 23 of 68 k5_16 S02-explained alive nodes have their
-support inside a certified N**, 4–445 s per N shared by every node inside it; the NO side is what remains. Open: the
-rational Farkas certificates and the Lean file (A119), the ρ ≥ 20° tilt-cell cap.
+support inside a certified N**, 4–445 s per N shared by every node inside it; the NO side is what remains. Precision
+from A96's replay (`ef646f0f`): of A112's 17 stalled nodes only 4 lie inside a certified N and 2 close outright (YES
+free, NO already dead), so the overlap with the current stall set is thin; the value is in pointing the region tree at
+the ~70 other in-N alive nodes, which is running offline. YES kills by the local certificate are tagged, not counted
+with frozen-verifier kills, until A119's rational/Lean form lands. Open: the rational Farkas certificates and the Lean
+file (A119), the ρ ≥ 20° tilt-cell cap.
