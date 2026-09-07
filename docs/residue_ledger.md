@@ -1,4 +1,4 @@
-# The residue ledger — everything still standing between us and s(11) = ŝ, as of 2026-09-07 12:00
+﻿# The residue ledger — everything still standing between us and s(11) = ŝ, as of 2026-09-07 12:00
 
 Companion to `residue_map.md` (the narrative, kept as a log) and `shadows.md` (the gallery). This file is the
 **exhaustive list** of what is not yet killed, organised by node family, with a picture for each family, its current
@@ -65,8 +65,7 @@ sliver under the clockwise lean survives). Clipping the centre box to the exactl
 (four sinusoids in θ, rational in t = tan(θ/2), no epsilon) strictly dominates T5′ and T5″ (all 674 logic kills and
 all 159 T5″ empties reproduced, plus 21 more needing two pins jointly). The decisive number: of the 607 unclosed nodes
 (414 ALIVE + 193 FAIL), **132 clip to EMPTY**, 112 of them by the trim already deployed — they are open only because
-T5′/T5″ run as pre-filters on newly emitted children, never on stored nodes; a pure-geometry backlog sweep collects
-them in minutes (running). On ten alive nodes the LP on the clipped box moved five from η ≈ 0 to η ≤ −0.5, two
+T5′/T5″ run as pre-filters on newly emitted children, never on stored nodes; a pure-geometry backlog sweep collected all 132 in 4 s of CPU (A131 `43da8a3f`: one replayable clip certificate each, independent checker 132/132, 1.58M samples 0 hits; 20 need the two-pin clip, T5″ alone cannot empty them; eps_geo must never be chained after a clip — the row-shrink re-imposes exactly the shell the clip removed). On ten alive nodes the LP on the clipped box moved five from η ≈ 0 to η ≤ −0.5, two
 certified dead through the frozen verifier (Y0036_D02, Y0186_D00_D00), three cert-FAIL with real holes (resolver
 path); on the other five only the columns collapse (support 1041 → 5). The re-check's kills, by contrast, are LP
 verdicts: recheck96 never certifies. (2) **The axis-aligned core leaks (A132 running).** In each of the four alive
