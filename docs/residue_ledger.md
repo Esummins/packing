@@ -104,8 +104,15 @@ so branching on corners does not by itself supply the missing logic kills. Corre
 the certificate (PASS ∈ [−1.0, −0.25], FAIL ∈ [−0.71, −0.16]); the k0 YES shortcut "a square in a slot box ⇒ k ≥ 1"
 is unsound as box containment (A53 stratifies by grid-locked squares) and was never taken. Integration: a resumable
 `--region-tree` option in A96's scheduler for nodes alive twice or unconverged at 900 s, falling through to the split
-on a wall cap. Certificate accounting: NO-side certificates are fixed-side until the 4-D verifier supports
-NO-families (≈ 100 lines + one Lean lemma, A117 running), and Lemma TC must become a certified leaf (A117). Generalises as: *a class-boundary shadow — a dead class's minimiser
+on a wall cap. Certificate accounting: **A117 (`6f160858`) delivered verify_param_v2** (NO-families in the 4-D verifier; 30/30
+byte-identical to v1 without NO-families; Lean lemma `nofamExemptIV_sound` proved, axioms unchanged; v1 never
+edited) **and Lemma TC as a leaf** (170/170 stored fires reproduced, 1.7 million sampled pairs, 0 counterexamples;
+Lean statement frozen as a Prop, the separating-axis step [C]). What v2 buys is window VALIDITY, not wall: 16 of 48
+NO certificates re-verified over the window, none of the fixed-side passes became a window FAIL, but the 4-D pass
+costs 10× the four fixed sides it replaces (a NO certificate is tiny at a fixed side precisely because the NO-family
+exempts most of the container). And the blocker moved to the YES side: a branch box enters the YES certificate as a
+core that the parametric core-affine form refuses, so certificate-based region-tree kills stay s0-only; the one
+window-valid claim today is the free TC kill of `k5_11_interior_Y0041_D02`, whose boxes are s-independent. Generalises as: *a class-boundary shadow — a dead class's minimiser
 sitting on a live class's box; the basin/grain lemma is the transfer.*
 
 ### 1c. Families S03–S06 (PI-read) and S08–S53

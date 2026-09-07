@@ -60,8 +60,10 @@ merely unconverged at the LP time cap.
    *A111 (`4c6ace6e`), A112 (`e6690215`):* the region tree kills 3 of 11 non-trivial stalled S02 regions at 27–54×
    less wall than the old tree on those boxes (two certificates per kill), ordering is a tie-break, the free kills
    are all Lemma TC, the k0 cells do not move (η = 0 exactly). As a scheduler option for stalled nodes with
-   fall-through it is worth of order a wall-day on A57; it needs NO-families in the 4-D verifier and TC as a
-   certified leaf to claim window validity (A117).
+   fall-through it is worth of order a wall-day on A57. A117 (`6f160858`) delivered both prerequisites — verify_param_v2
+   with NO-families (Lean-proved exemption clause) and TC as a leaf (170/170 fires, 1.7M samples) — but v2 buys
+   validity, not wall (10× the four fixed sides), and YES-side boxes are refused as parametric cores, so
+   certificate-based region-tree kills remain s0-only for now.
    *A116 (`74a34f96`):* the local certificate around a minimum is dead at (0.2, 10°) for S02 and (0.1, 40°) for S07
    — the YES leaf of the region tree at 20× A111's radius, covering the supports of 95 of the 252 S02-explained
    alive nodes; certified in seconds per neighbourhood, shared by every node inside it. Exact/Lean form and the
