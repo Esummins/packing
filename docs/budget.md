@@ -73,7 +73,11 @@ merely unconverged at the LP time cap.
    removes a median 44% of a node's warm rows (13k of 30k); the exact all-poses test removes more. It is the
    strongest LP lever measured, and it is not free: it widens the frozen verifier's admissibility clause from
    "disjoint from every core" to "disjoint from some pose of the box", i.e. a new frozen verifier version with a Lean
-   theorem parallel to T5. Kill yield at 900 s being measured; spec for the clause requested. *Caution banked with
+   theorem parallel to T5. **Measured (A96 `37eae961`, three arms at 900 s): dropping a median 53% of rows produced
+   zero additional kills** (arm C 3 kills vs arm B 4, none new); it buys convergence (7/26 vs 4/30) on nodes that
+   land knife-edge or alive anyway. A speedup with no kill yield does not justify a soundness-relevant verifier
+   change: row-dropping is shelved, spec on file. The 900 s cap stands on its own (2/29 converged at 240 s vs 4/30
+   and 7/26 at 900 s). *Caution banked with
    it:* trimmed-bin re-solves at the 240 s cap moved the LP without deciding it (29 solved, 2 converged, 19 on the
    knife edge) — no kill count from a re-solve counts before the 900 s re-check.
 3. **Verification wall.** Atom-dependent verify caps (in), resolver over timeouts (in), σ ladder to level 2 (recorded,
