@@ -353,5 +353,14 @@ support inside a certified N**, 4–445 s per N shared by every node inside it; 
 from A96's replay (`ef646f0f`): of A112's 17 stalled nodes only 4 lie inside a certified N and 2 close outright (YES
 free, NO already dead), so the overlap with the current stall set is thin; the value is in pointing the region tree at
 the ~70 other in-N alive nodes, which is running offline. YES kills by the local certificate are tagged, not counted
-with frozen-verifier kills, until A119's rational/Lean form lands. Open: the rational Farkas certificates and the Lean
-file (A119), the ρ ≥ 20° tilt-cell cap.
+with frozen-verifier kills, until A119's rational/Lean form lands. **A119 (`e07f8808`, `71d18eba`) made it exact: five certificates (S02 at (0.2, 10°), (0.1, 10°), (0.05, 20°); S07 at
+(0.2, 10°), (0.1, 40°)) with 53,094 dead leaves and 769,440 rational multipliers, all VALID under an independent
+dyadic-interval checker that imports no numpy and rebuilds every relaxation row itself (1,072 s); `Local.lean` builds
+with 0 sorries and exactly one project axiom, Lemma SAT for interiors (`sat_selection`), the closed-square form being
+already proved in CaseSat.** Two corrections to A116: (i) three of its four "capped" ρ ≥ 20° cells are ALIVE — a
+checked packing of L ∪ P below s0 exists inside N (S07 (0.2, 20°): the ladder shears at 65°, 3.8734; S07 (0.2, 40°):
+3.8696; S02 (0.2, 40°): 3.8767) — A116's own witness files already contained it under a `capped` label; (ii) the
+blocking squares as boxes do NOT extend the radius (six free bodies, 16–23 near pairs; only S02 (0.1, 5°) closes),
+though they do lift the closed part's minimum, so the certified radii stand as listed. Tilt-cell sharing implemented
+(99.4–100% census hits; the LP is the whole cost). Consumer unchanged at 95 of 252. Open: `LocalDead` for a concrete N
+inside Lean (the recorded cover is checked outside), the interior-SAT axiom.
