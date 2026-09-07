@@ -53,6 +53,29 @@ exactly what already exists here — `checkLeaf` for the leaves plus a decidable
 in `t` turns out to be materially weaker than the relaxation in `θ`, which should be measured
 first, on one cell, before anything is rebuilt.
 
+## The rest of A119's corpus, priced
+
+Two of A119's seven certificates are replayed here.  The remaining five, from A119's
+`certs/manifest.json`, with the wall projected from the two measured points (extraction
+≈ 1.2 ms per Farkas row — it is dominated by A119's own tree walk, not by the rounding; emitted
+Lean text ≈ 97 bytes per row; Lean wall roughly linear in leaves):
+
+| certificate | dead leaves | multipliers | projected data file | projected extract + Lean wall |
+|---|---|---|---|---|
+| `S07_trump5_r0.05_rho10` | 476 | 6 186 | 0.6 MB | 10 s + 30 s |
+| `S07_trump5_r0.20_rho10` | 3 168 | 48 710 | 4.7 MB | 60 s + 45 s |
+| `S02_k5_11_r0.05_rho20` | 7 692 | 82 593 | 8.0 MB | 100 s + 55 s |
+| `S02_k5_11_r0.10_rho10` | 6 878 | 100 056 | 9.7 MB | 120 s + 55 s |
+| `S02_k5_11_r0.02_rho2` | 8 | 128 | 0.01 MB | 1 s + 20 s |
+| **the five together** | **18 222** | **237 673** | **23 MB** | **≈ 5 min + 4 min** |
+
+So the whole corpus is under twenty minutes of wall and about 75 MB of committed Lean data — the
+gating question is whether 75 MB belongs in the repository, not whether the replay is affordable.
+`S02 (0.2, 10°)`'s 49 MB is worth it because it is the `N` A120's node cover uses; the others are
+worth replaying only when something consumes them.  The data files compress well (they are
+decimal integers) and shrink by about a third if the emitter factors out the per-leaf box, whose
+non-tilt coordinates are identical across every leaf of a certificate.
+
 ## Two smaller items, both cheap
 
 * **`Local.Box` should carry a LIST of `t`-intervals** (finding E3), as `CaseChecker.CNoFam.tivs`
