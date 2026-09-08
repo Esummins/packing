@@ -112,3 +112,16 @@ smooth dose-response, it is a floor. Below ~0.3 the exact cores and the polygon 
 * The knife-edge rule fired on 3 of 18 nodes and cost 900 s twice. It earned its keep once
   (`Y0241`: 240 s gave τ = 3.250000000000027 unconverged, 900 s gave τ = 3.2500000000725695
   unconverged — the long cap did not move τ, it confirmed it was not about to climb back).
+
+## One incident, recorded
+
+A145's `git add` of its own paths (79 files, explicit pathspecs) was followed within seconds by a
+**concurrent `git commit` from another attempt sharing the same working tree**, which swept all 76
+A145 files plus the three fold-in lines (`LOG.md`, `attempts/REGISTRY.md`,
+`attempts/A57-shadow-trees/PAUSED.md`) into commit `37c6cb45` ("A148 T1: gallery v4 …"). A145's own
+`git commit` then exited 1 with an empty index. **Nothing was lost or overwritten** — all 79 paths
+are present and correct in `37c6cb45`, verified file by file, and A145's working tree is clean for
+every path it owns. The only casualty is the commit message: A145's content is on the record under
+A148's headline. The lesson for the next copy of this pattern: on a shared working tree, `git add`
++ `git commit` is not atomic, and staging early leaves your work available for someone else's
+commit. Stage and commit in one shell invocation, or accept that the message may not be yours.
