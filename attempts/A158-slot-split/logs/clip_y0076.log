@@ -1,0 +1,19 @@
+c0_Y0076 TL(0,0) (A60 trump5 L1) budget 5 -> YES budget 4
+   piece 0  S=B([0.500,0.600]x[3.277,3.377]x[0.00,10.00]deg)
+      K'(H) area 0.602072 verts 40 ; inscribed axis core a=0.287264 at (1.169879, 2.427691)
+      K'(S) area 0.736355 verts 40 ; inscribed axis core a=0.381608 at (0.550000, 3.327084)
+      clip H: kept_union 0.886511 (nsub=4 kept_vol 0.620916, 0 empty bins) ; clip S: kept_union 1.000000 (nsub=4 kept_vol 0.527269, 0 empty bins)
+      K'(H) area 0.602072 -> 0.618361 (x1.0271) ; K'(S) area 0.736355 -> 0.736355 (x1.0000)
+      LANE screen on the CLIPPED cores: 0/230656 meeting poses free (lane_lb 0), M_lb 0
+      LANE cover: LANE_K'<=1  M=0  ->  1+LANE+M = 2  no kill ; H sample line {"drawn": 20000, "admissible": 20000, "meeting_cell": 20000, "free_of_other_cores": 0}
+      LP unclipped tau 4  eta 0  conv=True  (3.7 s)  NO-KILL
+      LP clipped   tau 4  eta 0  conv=True  (17.8 s)  NO-KILL
+   piece 1  S=B([0.500,0.600]x[3.277,3.377]x[80.00,90.00]deg)
+      K'(H) area 0.602072 verts 40 ; inscribed axis core a=0.287264 at (1.169879, 2.427691)
+      K'(S) area 0.736355 verts 40 ; inscribed axis core a=0.381608 at (0.550000, 3.327084)
+      clip H: kept_union 0.886511 (nsub=4 kept_vol 0.620916, 0 empty bins) ; clip S: kept_union 1.000000 (nsub=4 kept_vol 0.539682, 0 empty bins)
+      K'(H) area 0.602072 -> 0.618361 (x1.0271) ; K'(S) area 0.736355 -> 0.736355 (x1.0000)
+      LANE screen on the CLIPPED cores: 0/231069 meeting poses free (lane_lb 0), M_lb 1
+      LANE >= 1 (or M >= 1) on the clipped cores -> falling back to the LP
+      LP unclipped tau 4  eta 0  conv=True  (3.2 s)  NO-KILL
+      LP clipped   tau 4  eta 0  conv=True  (23.5 s)  NO-KILL

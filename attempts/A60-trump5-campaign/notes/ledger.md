@@ -758,3 +758,36 @@ square with a pose in `S`. The repair -- partition `S` and apply the leaf per pi
 dual weight >= 0.5 in some usable slot's `S(0.10, 10 deg)` box (`trump5 TL(0,0)` 77, `BR(0,1)` 50,
 `BL(0,2)` 49, `TR(0,1)` 13, `BL(1,1)` 11, `TR(1,0)` 3). Nothing in A60 was written; the two
 certificates and every record live under `attempts/A158-slot-split/`.
+
+
+**A158b addendum (2026-09-08) -- the YES child is an LP node, and it lands exactly back on the
+knife edge.** `SomeIn S` is an ordinary case-LP hypothesis, so the YES child of the slot split is the
+node `pins + H + the slot box S` with `budget = 11 - #cores = 4` (A135 exact cores on all 7 boxes,
+`S` an ordinary second core in the frozen schema; `cores_pairwise_disjoint` re-run over ALL 7,
+because A135's `ExactHyp` gates only `cores[:n-1]` and an unchecked `K(S)` meeting `K(H)` would make
+the budget 5 rather than 4). **On all 12 sub-cases (6 cells x 2 tilt pieces of S), converged,
+`tau = 4.000000 = budget`, `eta = 0`** -- `c0_Y0076 TL(0,0)`, `c0_Y0787 BR(0,1)`,
+`c0_Y0959 TR(0,1)`, `k5_11_interior_Y0130/Y0147/Y1110 TR(0,0)`. **That is the general obstruction
+made exact: the slot square removes exactly ONE unit of dual packing AND exactly ONE unit of budget,
+so the YES child returns to the knife edge -- the same 1 the NO child removes from `tau` alone.** The
+dual weight in `S` is exactly 1 on 730 of the 1,238 selected records, so on that whole
+sub-population the split is structurally neutral and no amount of compute changes it.
+
+The PI's mutual clip (A131 pin-clip with each box's own core in the pin's role, the largest
+axis-aligned square inscribed in `K'` handed to A131 so the clip removes less than the truth) does
+bite: `H`'s box keeps **0.5003** of its area on `c0_Y0787` and `K'(H)` grows **x1.126**
+(0.590298 -> 0.664416); `c0_Y0076` keeps 0.8865 with `K'(H)` x1.027; `c0_Y0959` and
+`k5_11_interior_Y0147` lose two whole tilt sub-bins of `S` at `nsub = 4`. But what changed the lane
+test was the CLAMP, not the clip: writing `S` in the world frame clamped to `[1/2, s0-1/2]` halves
+the centre box at a corner slot (`c0_Y0076`: 0.2x0.2 -> 0.1x0.1) and fattens `K'(S)` from 0.566 to
+0.736. With that core `c0_Y0076 TL(0,0)` piece 0 has `lane_lb = 0, M_lb = 0`, but the cover still
+only certifies `LANE_K' <= 1` and its open set GROWS with depth (159 -> 270 -> 646 at
+`(22, 8k) -> (24, 30k) -> (26, 60k)`), while piece 1 has `M_lb = 1` outright -- so `c0_Y0076` is NOT
+dead by the split on either route, and no closure record is written. `c0_Y0787` and `c0_Y0959` stay
+refuted on the lane side even after the clip (free meeter realised at clearance 4.37e-2 and 1.23e-1).
+The one cell where the hard half closes is A57's `k5_11_interior_Y1110 TR(0,0)`:
+`LANE_K'(C | S, H_clipped) = 0` CERTIFIED on both tilt pieces (36 and 35 leaves, 0 open, ~36 s) --
+the first empty conditional lane cover obtained anywhere -- but its `M` cover discharges ZERO leaves
+(0 leaves / 5,001 open at depth 40; 0 / 40,001 at depth 42), because `box_misses_cell` can never fire
+for an interior `H` against a corner cell, and its NO child is alive, so it is YES-only at best.
+Cost ~0.7 CPU-h of a +2 CPU-h extension; nothing in A60 was written.

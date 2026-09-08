@@ -470,3 +470,41 @@ verifier PASS). The sharpest near-miss is `k5_11_interior_Y0130 TR(0,0)`, where 
 budget, the same value A149's polycore arm reached on that node independently (`poly149.jsonl`,
 2026-09-08 13:33, `tau 5.5 -> 5.0`, NO-KILL). Nothing in A57 was written; every record is under
 `attempts/A158-slot-split/`.
+
+
+**A158b addendum (2026-09-08) -- the YES child of the slot split is an LP node, and the split is
+STRUCTURALLY neutral on the knife-edge population.** `SomeIn S` is an ordinary case-LP hypothesis, so
+the YES child is `pins + H + the slot box S` at `budget = 11 - #cores = 4`. Run with A135 exact cores
+on all 7 boxes (and `cores_pairwise_disjoint` re-run over ALL 7 -- A135's `ExactHyp` gates only
+`cores[:n-1]`, and an unchecked `K(S)` meeting `K(H)` would make the budget 5, not 4; measured min
+gap 0.0141 on A57's `delta = 10^-2` pins, 0.0000 on A60's exact pins): **all 12 sub-cases (6 cells x
+2 tilt pieces) converge at `tau = 4.000000 = budget`, `eta = 0`** (`k5_11_interior_Y0130`,
+`Y0147`, `Y1110` at `TR(0,0)` among them, `Y0130` from `tau0 = 5.5`). **The slot square removes
+exactly ONE unit of dual packing and exactly ONE unit of budget, so the YES child lands back on the
+knife edge -- the same 1 the NO child removes from `tau` alone.** The dual weight in `S` is exactly 1
+on 730 of the 1,238 selected records, so on that sub-population the split cannot bite from either
+side, and the population run is not worth buying.
+
+The PI's mutual clip (A131 `pinclip` with each box's own core in the pin's role; the core handed to
+A131 is the largest AXIS-ALIGNED square inscribed in `K'`, strictly smaller, so the clip removes less
+than the truth and A131 is imported unchanged) does bite on A57: `k5_11_interior_Y0147`'s `H` box
+keeps **0.6273** of its area (0.4601 by volume at `nsub = 4`) and `K'(H)` grows **x1.066**
+(0.681579 -> 0.726393), with two whole tilt sub-bins of `S` emptied; `Y0130` and `Y1110` keep 1.0000
+(their `H` and `S` are already far apart). What actually moved the lane test, though, was the CLAMP
+of `S` to `[1/2, s0-1/2]` that the LP framing forces -- at a corner slot it halves the centre box and
+fattens `K'(S)` (0.566 -> 0.736 on the A60 example).
+
+**The first empty conditional lane cover ever obtained is on `k5_11_interior_Y1110 TR(0,0)`:
+`LANE_K'(C | S, H_clipped) = 0` CERTIFIED on BOTH tilt pieces, 36 and 35 leaves, 0 open, 36 s and
+37 s.** The kill then needs `M(C | S, H_clipped) = 0`, and that is where it stops -- and
+STRUCTURALLY, not for budget: the screen finds no meeting pose of the clipped `H` box clear of the
+other cores in 100,000 draws, but `cond_can_meet`'s cover discharges **ZERO** leaves (0 leaves /
+5,001 open at `max_depth 40`, 21.8 s; 0 / 40,001 at 42, 183.8 s), because `H_clipped` sits at frame
+`[1.374, 1.519]^2` with `hmax ~ 0.686`, so `box_misses_cell` needs `x0 >= 1 + hmax = 1.686` and can
+never fire, the container prune never fires on an interior box, and the shared-point discharge finds
+nothing -- the DFS fills its open budget in one corner. A third rung was stopped at 674 s rather than
+bought. `Y1110`'s NO child is alive (`tau = 5`), so even a closed `M` cover gives YES-only.
+**The lesson for the leaf: on an interior-`H` cell the `M` half of the conditional leaf has no prune
+that can fire, so the conditional lane leaf is only ever deployable where `H` is near enough to a
+wall or a pin for `box_misses_cell`/container to bite.** Cost ~0.7 CPU-h of a +2 CPU-h extension;
+nothing in A57 was written.
