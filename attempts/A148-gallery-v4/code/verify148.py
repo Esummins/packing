@@ -149,7 +149,17 @@ def main():
     bad = []
     for sm in summ:
         nid = sm["id"]
-        rec = recs[nid]
+        # The population is recomputed live, and the campaigns keep running, so a node drawn a few
+        # minutes ago may already have been killed and dropped out.  Verify the page as drawn: load
+        # the node's own record directly when it is no longer in the surviving population.
+        rec = recs.get(nid)
+        if rec is None:
+            import gallery142 as G142
+            d, path = G142.load_node(sm["camp"], nid)
+            rec = dict(id=nid, camp=sm["camp"], boxes=d["hyp"]["boxes"],
+                       packing=d.get("packing") or [])
+            print(f"  [{nid}: killed since the page was drawn; verified from its own record]",
+                  flush=True)
         obst, onames, kinds, _ = G.obstacles_of(rec["boxes"], rec.get("is_pin"))
         reg = G.feasible_region(G.S0, obst)
         bb = bboxes(obst)

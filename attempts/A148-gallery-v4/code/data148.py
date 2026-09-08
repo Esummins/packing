@@ -224,6 +224,13 @@ def night_kills():
             c = str(r.get("cert") or "")
             if r.get("id") and (c.startswith("KILL-BY-LOGIC") or c.startswith("CERTIFIED")):
                 out.setdefault(r["id"], f"A57 tree record: {c[:40]}")
+    # CLIP-KILL CERTIFICATES ON DISK.  A142's own A60 clip sweep (clipsweep142.py) wrote its kills
+    # as certificates only -- `attempts/A142-a57-review-gallery/certs/a60/<id>.clipkill.json` --
+    # with no jsonl result row anywhere, so a kill list built from *.jsonl alone misses them.  The
+    # certificate file IS the record; take the id from its name.
+    for f in glob.glob(os.path.join(ATT, "*", "certs", "**", "*.clipkill.json"), recursive=True):
+        out.setdefault(os.path.basename(f)[:-len(".clipkill.json")],
+                       f"pin-clip kill certificate on disk ({os.path.relpath(f, ROOT)})")
     for r in _jl(os.path.join(A144, "results", "offline144.jsonl")):
         for row in (r.get("top_rows") or []):
             if float(row.get("rhs", 1.0)) < 0.0:

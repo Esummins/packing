@@ -29,9 +29,11 @@ half-unit disks inside the container, and each centre lies in (green ∪ undecid
 which is a **sound upper bound on how many more squares the node can hold, read straight off the
 drawing**.  `n_max < budget` is a geometric kill with no LP at all.  The column is in the table.
 
-**Population and timestamp.**  The campaign records were read at **2026-09-08 06:05 -0700**, while A137's night shift was still running (it pauses at 07:00), so this set is the night's records AS THEY STOOD at that moment.  The base is A142's subtree-cost ranking (`population142.json`); on top of it `data148.night_kills()` removes every node killed since A142 built that file — **1 777 ids**: 798 from A137's own night records (`emit_lp*`, `exact_reemit*`, `clipkills137`), 515 from A57's tree rows now recorded KILL-BY-LOGIC / CERTIFIED, 173 certified dead by A145's and A137's exact-core re-solves (result PASS-V3 / PASS-FROZEN), and 291 by A141's K′ lane and slot-lane leaves — together with their descendants (a geometric kill is inherited).  What remains is re-ranked by A142's formula; this gallery is the **top 40 surviving A57 nodes and the top 20 surviving A60 nodes**.  The frozen population record is `attempts/A148-gallery-v4/results/population148_a57v4.json`.
+**Population and timestamp.**  The campaign records were read at **2026-09-08 06:35 -0700**, while A137's night shift was still running (it pauses at 07:00), so this set is the night's records AS THEY STOOD at that moment.  The base is A142's subtree-cost ranking (`population142.json`); on top of it `data148.night_kills()` removes every node killed since A142 built that file — **1 950 ids** and their descendants (a geometric kill is inherited): 798 from A137's night records (`emit_lp*`, `exact_reemit*`, `clipkills137`), 515 from A57 tree rows now recorded KILL-BY-LOGIC / CERTIFIED, 196 certified dead by A145's and A137's exact-core re-solves (`result` PASS-V3 / PASS-FROZEN), **150 from pin-clip kill CERTIFICATES that exist on disk with no jsonl row anywhere**, and 291 from A141's K′ lane and slot-lane leaves.  What remains is re-ranked by A142's formula; this gallery is the **top 40 surviving A57 nodes and the top 20 surviving A60 nodes**.  Frozen record: `attempts/A148-gallery-v4/results/population148_a57v4.json`.
 
-**Two of the sixty are DEAD.**  `c0_Y0254` and `c0_Y0168` carry a KILLED banner: their T5⁗ verdict fires, because the exact pin core at (0.5, 1.5) and the conditioned square's polygon core K′(B) OVERLAP (by 0.015346 and 0.002429). Both cores sit inside their squares at every admissible pose, so those two squares can never be interior-disjoint and the node hypothesis is unsatisfiable — dead by geometry, no LP. Sampled check: 0 of 10⁵ poses in each box give a square disjoint from the pinned one. Records: `attempts/A148-gallery-v4/results/t5_kills_a148.jsonl`; certificates are NOT emitted here.
+**A bookkeeping hole, found by drawing it.**  A142's A60 clip sweep wrote its kills as `attempts/A142-a57-review-gallery/certs/a60/<id>.clipkill.json` and **no result line in any `.jsonl`**, so a kill list built from `results/*.jsonl` misses them.  The first draft of this gallery drew three such nodes as alive — `c0_Y0254`, `c0_Y0168`, `c0_Y0878` — and the pages flagged all three anyway (the first two by the T5⁗ verdict: the exact pin core at (0.5, 1.5) overlaps K′(B) by +0.015346 and +0.002429, the same kill by a second route; the third by the tightest guard row measured anywhere, chord sum 3.868359 vs s0 = 3.877084, rhs 0.008725).  All three were already dead.  **For anyone building a kill list: `*.clipkill.json` under `attempts/*/certs/**` IS a kill record.**  `*__exall.json` is NOT — that file exists even when the run ended `LOST-KILL-ON-RESOLVE` / `TOO-TIGHT` / `FAIL`, and only its jsonl row says whether it verified (nine nodes here have one and are correctly alive).
+
+**No node in this set is killed by the drawing**: T5⁗ alive everywhere, no lane KILL, no guard line within 0.15 of s0, and the disk bound never falls below the budget.
 
 ## The table
 
@@ -78,7 +80,6 @@ drawing**.  `n_max < budget` is a geometric kill with no LP at all.  The column 
 | [`k5_16_interior_Y1022`](k5_16_interior_Y1022.svg) | 1 | 3.942809 | S03 | 1.291 | 1.814 | **9** (5) | `P3-H` 0.1531 | 6 | — | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`k5_16_interior_Y1039`](k5_16_interior_Y1039.svg) | 1 | 3.886746 | S02 | 0.919 | 1.591 | **10** (5) | `P3-H` 0.4420 | 5 | — | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`slack0.02_c0_Y0272`](slack0.02_c0_Y0272.svg) | 1 | 4.000000 | S01 | 1.090 | 1.671 | **10** (5) | `P2-H` 0.2094 | 3 | — | 0.8771 (`pin midline y`) | clip, T5⁗ alive, lane no kill, guard no kill |
-| [`c0_Y0254`](c0_Y0254.svg) | 1 | 4.000000 | S01 | 1.425 | 2.083 | **10** (5) | `P1-H` 0.6834 | 4 | — | 0.8771 (`pin core y0`) | clip, T5⁗ DEAD, lane no kill, guard no kill |
 | [`c0_Y0258`](c0_Y0258.svg) | 1 | 4.000000 | S01 | 1.265 | 1.914 | **9** (5) | `P2-H` 0.1306 | 5 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`c0_Y0787`](c0_Y0787.svg) | 1 | 4.000000 | S01 | 1.878 | 2.453 | **10** (5) | `P1-H` 0.1301 | 6 | — | 0.5156 (`pin core y1`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`c0_Y0939`](c0_Y0939.svg) | 1 | 4.000000 | S01 | 0.942 | 1.703 | **9** (5) | `P4-H` 0.2344 | 5 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
@@ -90,13 +91,14 @@ drawing**.  `n_max < budget` is a geometric kill with no LP at all.  The column 
 | [`c0_Y0952`](c0_Y0952.svg) | 1 | 4.000000 | S01 | 1.425 | 2.035 | **10** (5) | `P4-H` 0.0623 | 3 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`c0_Y0788`](c0_Y0788.svg) | 1 | 3.942809 | S03 | 1.853 | 2.414 | **9** (5) | `P1-H` 0.1306 | 6 | — | 0.5161 (`pin core y1`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`c0_Y0257`](c0_Y0257.svg) | 1 | 3.914214 | S08 | 1.266 | 1.887 | **10** (5) | `P2-H` 0.1266 | 5 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
-| [`c0_Y0878`](c0_Y0878.svg) | 1 | 4.000000 | S01 | 1.998 | 2.593 | **10** (5) | `P3-H` 0.1048 | 6 | — | 0.0087 (`pin core y1`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`c0_Y0695`](c0_Y0695.svg) | 1 | 3.886746 | S02 | 1.897 | 2.430 | **9** (5) | `P3-H` 0.3606 | 4 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`c0_Y0255`](c0_Y0255.svg) | 1 | 3.942809 | S03 | 1.356 | 2.026 | **10** (5) | `P1-H` 0.7181 | 3 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`c0_Y0076`](c0_Y0076.svg) | 1 | 3.886746 | S02 | 1.519 | 1.995 | **9** (5) | `P2-H` 0.0523 | 6 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
-| [`c0_Y0168`](c0_Y0168.svg) | 1 | 4.000000 | S01 | 1.210 | 1.863 | **10** (5) | `P1-P3` 0.8771 | 4 | — | 0.8771 (`pin core y0`) | clip, T5⁗ DEAD, lane no kill, guard no kill |
 | [`c0_Y0169`](c0_Y0169.svg) | 1 | 3.928915 | S38 | 1.256 | 1.891 | **10** (5) | `P2-H` 0.0690 | 6 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`c0_Y0171`](c0_Y0171.svg) | 1 | 4.000000 | S01 | 1.279 | 1.810 | **9** (5) | `P2-H` 0.1258 | 6 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
+| [`c0_Y0175`](c0_Y0175.svg) | 1 | 4.000000 | S01 | 1.165 | 1.749 | **10** (5) | `P1-P3` 0.8771 | 3 | — | 0.8771 (`pin core x1`) | clip, T5⁗ alive, lane no kill, guard no kill |
+| [`c0_Y0215`](c0_Y0215.svg) | 1 | 3.976620 | S11 | 2.502 | 3.048 | **10** (5) | `P0-H` 0.0840 | 2 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
+| [`c0_Y0223`](c0_Y0223.svg) | 1 | 3.942809 | S03 | 2.347 | 2.901 | **10** (5) | `P1-H` 0.1590 | 3 | — | 0.8771 (`pin core y0`) | clip, T5⁗ alive, lane no kill, guard no kill |
 
 ## What to look for, per node
 
@@ -141,7 +143,6 @@ drawing**.  `n_max < budget` is a geometric kill with no LP at all.  The column 
 * **`k5_16_interior_Y1022`** — pockets < 1: `P3-H` 0.153, `H->wall y=0` 0.799, `P1-P2` 0.891
 * **`k5_16_interior_Y1039`** — pockets < 1: `P3-H` 0.442, `P1-H` 0.778, `P1-P2` 0.891
 * **`slack0.02_c0_Y0272`** — pockets < 1: `P2-H` 0.209, `H->wall y=s` 0.880, `P1-P3` 0.905
-* **`c0_Y0254`** — pockets < 1: `P1-H` 0.683, `P0-H` 0.815, `P1-P3` 0.877; **T5⁗ DEAD**
 * **`c0_Y0258`** — pockets < 1: `P2-H` 0.131, `P1-H` 0.780, `P0-H` 0.859
 * **`c0_Y0787`** — pockets < 1: `P1-H` 0.130, `P3-H` 0.339, `P2-H` 0.771
 * **`c0_Y0939`** — pockets < 1: `P4-H` 0.234, `P1-P3` 0.877, `H->wall x=s` 0.933
@@ -153,13 +154,14 @@ drawing**.  `n_max < budget` is a geometric kill with no LP at all.  The column 
 * **`c0_Y0952`** — pockets < 1: `P4-H` 0.062, `H->wall y=s` 0.740, `P1-P3` 0.877
 * **`c0_Y0788`** — pockets < 1: `P1-H` 0.131, `P3-H` 0.339, `P2-H` 0.777
 * **`c0_Y0257`** — pockets < 1: `P2-H` 0.127, `P1-H` 0.808, `P0-H` 0.845
-* **`c0_Y0878`** — pockets < 1: `P3-H` 0.105, `H->wall y=0` 0.845, `P1-P3` 0.877; guard line `pin core y1` chord sum 3.8684 (rhs 0.0087)
 * **`c0_Y0695`** — pockets < 1: `P3-H` 0.361, `P2-H` 0.718, `P0-H` 0.723
 * **`c0_Y0255`** — pockets < 1: `P1-H` 0.718, `P0-H` 0.776, `P1-P3` 0.877
 * **`c0_Y0076`** — pockets < 1: `P2-H` 0.052, `H->wall x=0` 0.659, `P1-P3` 0.877
-* **`c0_Y0168`** — pockets < 1: `P1-P3` 0.877, `H->wall x=0` 0.880, `P0-H` 0.998; **T5⁗ DEAD**
 * **`c0_Y0169`** — pockets < 1: `P2-H` 0.069, `H->wall x=0` 0.830, `P1-P3` 0.877
 * **`c0_Y0171`** — pockets < 1: `P2-H` 0.126, `H->wall x=0` 0.793, `P1-P3` 0.877
+* **`c0_Y0175`** — pockets < 1: `P1-P3` 0.877, `H->wall x=0` 0.880, `P1-H` 0.998
+* **`c0_Y0215`** — pockets < 1: `P0-H` 0.084, `P1-P3` 0.877
+* **`c0_Y0223`** — pockets < 1: `P1-H` 0.159, `P0-H` 0.222, `P1-P3` 0.877
 
 ## Files
 

@@ -6238,3 +6238,35 @@ cores and the extremal-tilt schematics).
 - Files: `docs/shadows/a57v4/` (60 SVG + README.md + review_a57v4.csv), `docs/shadows.md` Part V
   addendum, `attempts/A148-gallery-v4/results/{gallery148_a57v4,verify148_a57v4,population148_a57v4,
   t5_kills_a148,t5_kill_check_a60}.json(l)`.
+
+## 2026-09-08 - A148-gallery-v4 (Opus engineer) - T2 correction: a kill list built from *.jsonl misses the clip-kill CERTIFICATES
+- The first a57v4 draft drew three A60 nodes as ALIVE that were already dead: `c0_Y0254`, `c0_Y0168`
+  and `c0_Y0878`.  **A142's own A60 clip sweep records its kills as certificates only** -
+  `attempts/A142-a57-review-gallery/certs/a60/<id>.clipkill.json` - and writes no result line to any
+  `.jsonl`, so a kill list assembled from `results/*.jsonl` (what every downstream consumer,
+  including A148's first cut, has been doing) misses **150** ids.
+- **The rule for anyone building a kill list**: `*.clipkill.json` under `attempts/*/certs/**` IS a
+  kill record and must be read.  `*__exall.json` is NOT - that certificate file exists even when the
+  run ended `LOST-KILL-ON-RESOLVE` / `TOO-TIGHT` / `FAIL`, and only its jsonl row says whether it
+  verified (nine nodes of the corrected set have one and are correctly still alive).
+  `data148.night_kills()` now reads both correctly: kills go 1 777 -> **1 950**.
+- Credit where it is due: the **drawing flagged all three anyway** before the bookkeeping was fixed.
+  Two had the T5'''' verdict firing - the exact pin core at (0.5, 1.5) overlapping K'(B) by
+  +0.015346 and +0.002429, sample-confirmed 0 of 10^5 poses disjoint - which is the same kill by a
+  second route; the third had the tightest guard row measured anywhere (chord sum 3.868359 against
+  s0 = 3.877084, rhs 0.008725).  The v4 page found in a picture what the kill list had lost.
+- **Corrected set** (records re-read 06:35, A137 still running): 60 pages, top 40 A57 + top 20 A60.
+  **No node in it is killed by the drawing** - T5'''' alive everywhere, no lane KILL, no guard line
+  within 0.15 of s0 (tightest `k5_11_interior_Y0738` `grid v 2/8`, chord sum 3.5960, rhs 0.2811),
+  disk bound n_max in {7, 9, 10, 11} against budgets 4-5.
+- Free centre region: green 0.0044 to 2.502, median 1.145 (k0's are 4.27-5.01); the extreme is
+  `k5_11_interior_Y0130` at **0.0044**, whose undecided band is still 0.96 - which is why the disk
+  bound stays loose.  **Shrinking the UNDECIDED band (finer grid, or an interval rather than sampled
+  tilt sweep) is the cheapest way to make the disk bound bite**, and is what this gallery points at.
+- Pockets bite everywhere: all sixty have >= 2 clearances below 1; narrowest are pin-core-to-K'
+  pinches of 0.05-0.11 (`c0_Y0076` 0.052, `c0_Y0952` 0.062, `c0_Y0169` 0.069, `c0_Y1033` 0.079,
+  `c0_Y0215` 0.084).  A141's K' lane test has **no row for a single one of these sixty**, so every
+  lane tag reads `n/a` - the other obvious next run.
+- One page (`k5_16_interior_Y1039`) was killed by A137 between drawing and verification; verify148
+  now falls back to the node's own record so a page is always verified as drawn.  Every page prints
+  the timestamp at which the campaign records were read.
