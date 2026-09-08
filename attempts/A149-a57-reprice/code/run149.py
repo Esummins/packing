@@ -113,7 +113,7 @@ def cpu_hours_spent(resdir):
     """Total node wall recorded by every A149 worker so far, in CPU-hours (one core per node)."""
     tot = 0.0
     for fn in os.listdir(resdir):
-        if fn.startswith("exact_reemit_") and fn.endswith(".jsonl"):
+        if fn.startswith(("exact_reemit_", "a60_reemit_")) and fn.endswith(".jsonl"):
             for ln in open(os.path.join(resdir, fn), encoding="utf-8"):
                 try:
                     tot += float(json.loads(ln).get("wall_total_s") or 0.0)
@@ -137,17 +137,28 @@ def main():
     ap.add_argument("--cpu_budget_h", type=float, default=30.0,
                     help="cumulative CPU-hours across ALL A149 workers; stop between nodes")
     ap.add_argument("--priority", default="Normal", choices=sorted(PRIORITY))
+    ap.add_argument("--lane", default="a57", choices=("a57", "a60"),
+                    help="a57: A137's node137.py -> A135's emit135.certify (exact cores on the "
+                         "pins and the conditioned box).  a60: this attempt's node_a60.py -> the "
+                         "same certificate emitter and the same FROZEN verify_case.py, with the "
+                         "hypothesis taken from A60's own node record and ONLY H's core made "
+                         "exact (A60's pins are exact boxes and their cores must stay just under "
+                         "1/2 or the slot cores touch).")
     ap.add_argument("--max_box_py", type=int, default=16,
                     help="ceiling on lab python processes for the WHOLE box, A156 included; the "
                          "worker holds rather than launch a node that would exceed it")
     ap.add_argument("--deadline", default=None, help="local HH:MM after which no node is launched")
     a = ap.parse_args()
 
-    out = a.out or os.path.join(BASE, "results", "exact_reemit_%s.jsonl" % a.worker)
+    a60 = a.lane == "a60"
+    if a60 and a.targets == os.path.join(BASE, "results", "targets149.json"):
+        a.targets = os.path.join(BASE, "results", "targets_a60.json")
+    out = a.out or os.path.join(BASE, "results", "%s_%s.jsonl"
+                                % ("a60_reemit" if a60 else "exact_reemit", a.worker))
     resdir = os.path.join(BASE, "results")
-    claims = os.path.join(BASE, "progress", "claims")
+    claims = os.path.join(BASE, "progress", "claims_a60" if a60 else "claims")
     tmp = os.path.join(BASE, "progress", "tmp")
-    certdir = os.path.join(BASE, "certs")
+    certdir = os.path.join(BASE, "certs", "a60") if a60 else os.path.join(BASE, "certs")
     for d in (claims, tmp, certdir, os.path.join(BASE, "logs")):
         os.makedirs(d, exist_ok=True)
     prog = os.path.join(BASE, "progress", "%s.json" % a.worker)
@@ -244,9 +255,10 @@ def main():
         jobf = os.path.join(tmp, j["id"] + ".job.json")
         resf = os.path.join(tmp, j["id"] + ".res.json")
         json.dump(j, open(jobf, "w"))
-        cmd = [sys.executable, os.path.join(A137, "code", "node137.py"), "--job", jobf,
-               "--out", resf, "--cap", str(a.cap), "--rounds", str(a.rounds),
-               "--jobs", str(a.jobs), "--certdir", certdir]
+        node = (os.path.join(HERE, "node_a60.py") if a60
+                else os.path.join(A137, "code", "node137.py"))
+        cmd = [sys.executable, node, "--job", jobf, "--out", resf, "--cap", str(a.cap),
+               "--rounds", str(a.rounds), "--jobs", str(a.jobs), "--certdir", certdir]
         t0 = time.time()
         flush(j["id"])
         print("[%s] %s START %s L%s frac_exact=%s eta_before=%s phys=%.0f MB"
