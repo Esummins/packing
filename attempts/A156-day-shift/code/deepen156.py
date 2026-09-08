@@ -174,13 +174,31 @@ def main():
 
     tag = a.key + "_D2"
     moved = []
-    for src, dst in ((os.path.join(A137, "results", f"emit_geo_{tag}.jsonl"),
-                      os.path.join(BASE, "results", f"emit_geo_{tag}.jsonl")),
-                     (os.path.join(A137, "results", f"emitq_{tag}.json"),
-                      os.path.join(BASE, "results", f"emitq_{tag}.json"))):
-        if os.path.exists(src):
-            shutil.move(src, dst)
-            moved.append(dst)
+    # A later deepen pass on the same key must EXTEND this attempt's rows, never overwrite them:
+    # the .jsonl is appended and the queue .json is merged by id (emit137 always writes a fresh
+    # queue file, so a plain move would drop the earlier pass's jobs).
+    gsrc = os.path.join(A137, "results", f"emit_geo_{tag}.jsonl")
+    gdst = os.path.join(BASE, "results", f"emit_geo_{tag}.jsonl")
+    if os.path.exists(gsrc):
+        if os.path.exists(gdst):
+            with open(gdst, "a", encoding="utf-8") as f:
+                f.write(open(gsrc, encoding="utf-8").read())
+            os.remove(gsrc)
+        else:
+            shutil.move(gsrc, gdst)
+        moved.append(gdst)
+    qsrc = os.path.join(A137, "results", f"emitq_{tag}.json")
+    qdst = os.path.join(BASE, "results", f"emitq_{tag}.json")
+    if os.path.exists(qsrc):
+        new = json.load(open(qsrc))
+        if os.path.exists(qdst):
+            old = json.load(open(qdst))
+            have = {j["id"] for j in old}
+            old += [j for j in new if j["id"] not in have]
+            new = old
+        json.dump(new, open(qdst, "w"), indent=0)
+        os.remove(qsrc)
+        moved.append(qdst)
     print("moved into A156: " + json.dumps(moved))
 
 

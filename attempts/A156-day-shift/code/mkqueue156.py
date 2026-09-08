@@ -16,6 +16,7 @@ the queue on the next rebuild rather than being lost.
 
 Prints the number of jobs written; the scaler uses that to decide whether to launch at all.
 """
+import argparse
 import glob
 import json
 import os
@@ -42,6 +43,18 @@ def _ids(pattern):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--levels", default=None,
+                    help="comma-separated levels to keep, e.g. 2,3 (default: all, level 1 first). "
+                         "A level-restricted queue is how the day measures the LEVEL-2 LP kill "
+                         "rate live: v3 measured 78.8 %% at level 1 and nothing at level 2, and a "
+                         "strictly level-1-first drain would never reach one.")
+    ap.add_argument("--out", default=OUT)
+    a = ap.parse_args()
+    keep = None
+    if a.levels:
+        keep = {int(x) for x in a.levels.split(",") if x.strip()}
+
     done = _ids(os.path.join(A137, "results", "emit_lp_*.jsonl"))
     done |= _ids(os.path.join(BASE, "results", "lp156_*.jsonl"))
     claimed = {os.path.basename(p)[:-6] for p in
@@ -58,10 +71,12 @@ def main():
         for j in rows:
             if j["id"] in done or j["id"] in claimed or j["id"] in seen:
                 continue
+            if keep is not None and (j.get("level") or 9) not in keep:
+                continue
             seen.add(j["id"])
             jobs.append(j)
     jobs.sort(key=lambda j: (j.get("level") or 9))          # level 1 first: 78.8 % of decided die
-    json.dump(jobs, open(OUT, "w"), indent=0)
+    json.dump(jobs, open(a.out, "w"), indent=0)
     print(len(jobs))
 
 

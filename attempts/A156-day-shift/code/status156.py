@@ -60,12 +60,23 @@ def main():
             leaf["CANARY (Trump-realizable)"] += 1
         elif c.startswith("SKIPPED"):
             leaf["SKIPPED (no rational core)"] += 1
+    # The emit_geo_*.jsonl files hold only the children that got a GEOMETRY verdict; the survivors
+    # are in this attempt's emitq_*.json queues.  The denominator of the rate is both.
     geo_lvl = collections.defaultdict(collections.Counter)
     for r in geo:
         lv = 1 + r["id"].count("_D")
-        geo_lvl[lv]["seen"] += 1
+        geo_lvl[lv]["screened"] += 1
         if (r.get("cert") or "").startswith("KILL-BY-LOGIC"):
             geo_lvl[lv]["dead"] += 1
+        elif (r.get("cert") or "").startswith(("UNSOUND", "CANARY", "SKIPPED")):
+            geo_lvl[lv]["other_geo"] += 1
+    for qp in glob.glob(os.path.join(BASE, "results", "emitq_*.json")):
+        try:
+            for j in json.load(open(qp)):
+                geo_lvl[1 + j["id"].count("_D")]["screened"] += 1
+                geo_lvl[1 + j["id"].count("_D")]["to_lp"] += 1
+        except Exception:
+            pass
 
     def rate(c):
         dec = sum(v for k, v in c.items() if k not in ("WALL-CAP", "NO-RESULT", "ERROR"))
@@ -101,8 +112,9 @@ def main():
             print(f"  {v:>5}  {kk}")
         print("\nGeometry death rate by level:")
         for lv, c in sorted(geo_lvl.items()):
-            print(f"  level {lv}: {c['dead']}/{c['seen']} = "
-                  f"{100.0 * c['dead'] / max(1, c['seen']):.1f} % dead before any LP")
+            print(f"  level {lv}: {c['dead']}/{c['screened']} = "
+                  f"{100.0 * c['dead'] / max(1, c['screened']):.1f} % dead before any LP "
+                  f"({c['to_lp']} to the LP)")
 
 
 if __name__ == "__main__":
