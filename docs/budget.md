@@ -128,6 +128,40 @@ merely unconverged at the LP time cap.
    box against the pins, then take `K′` of each surviving sub-box — `B′ ⊆ B ⇒ K′(B) ⊆ K′(B′)`, so
    the clip strictly enlarges the polygon core, and both are logic-level levers that touch no
    certificate. `attempts/A132-polygon-core/notes/{measurement.md, spec.md}`, lemmas.md T5⁗.
+   *A135 (`polycore verifier`, 2026-09-07) — A132's three pending kills are now CERTIFICATES, and
+   most of the lever is FREE.* **T1, the finding that reorders the work:** both frozen verifiers take
+   the core half-side `a` VERBATIM from the certificate and never recompute it — neither is given the
+   parameter box at all (`verify_case.py:707-710` and `verify_param.py:539-543` check only
+   `0 ≤ tm ≤ 1` and `a > 0`; `verify_case`'s `box` field is floats and its loader never reads it).
+   So a sound half-side is certifiable TODAY, with no verifier change and no schema change. For a
+   PIN box (tilt 0, half-width `h = δ/√2`) the exact intersection over the box IS the axis square of
+   half-side `1/2 − h`, while `Box.core()` bounds the offset by the circumscribed disc and returns
+   `1/2 − h√2 = 1/2 − δ`: **0.489999969 → 0.492928902 certified exact, +0.6 % per side, ×1.012 in
+   area**, and the T23 pin-core disjointness gate still holds (gap 0.020000 → 0.014142 > 0, min L∞
+   slot separation 1.000000). **T2: 3 of 3 certified** — `k5_11 Y0871` under the FROZEN verifier with
+   the exact **pin** cores alone (τ 4.1667, 656 s LP + 46 s verify), `k5_16 Y0281_D03` under the
+   FROZEN verifier with exact cores on every box (τ 4.000, 36 s + 0.5 s), and `k5_11 Y1038` only
+   under the new `verify_case_v3.py` (τ 4.500, 377 s + 20 s; the frozen verifier FAILS the same
+   certificate with 5 real holes, so this one genuinely needs the clause). The v3 clause is
+   **1,540 of 37,894 exempt boxes** on that node; v3 imports the frozen file rather than copying it
+   and is identical to it on 24/24 `polycores`-free certificates — verdict AND box-tree statistics;
+   `--replay` (no float pre-filter anywhere, one process) reproduces the PASS with a byte-identical
+   box tree in 153 s. Sampled controls: 20,000 poses → 320,000 vertex tests → 0 violations;
+   20,000 sub-boxes → 10,067 accepted → 201,340 pose tests by an independent SAT → **0 unsound
+   exemptions**. Lean: `PolyCoreT5.lean` compiles clean and axiom-free (`propext`,
+   `Classical.choice`, `Quot.sound` only) with `checkVertexInPBox_sound` **proved** — A132 sized it
+   at a day and it came in cheaper because clearing `1 + t²` reduces the whole question to rational
+   polynomial positivity, which A133's `LocalCertT.posCheck` already decides. **A132's caveat is
+   untouched: three pairs on nodes chosen for the lever is not a rate.** What is now priced is the
+   certificate side, and it is ~0 for the frozen path. **Next chore, and it is the cheap one:**
+   re-emit the ALIVE population with exact pin cores — 414 LP re-solves at 240 s ≈ **28 CPU-h**
+   (≈ 0.6 wall-days), no verifier change, no Lean change, no re-verification of anything already
+   emitted; every node that drops below budget is a kill the frozen chain accepts as it stands.
+   Run that before pricing v3 on 30 unselected nodes, because it is 3× cheaper and its yield is a
+   strict lower bound on the polygon's. Ledger `attempts/A135-polycore-verifier/results/polycore_kills.jsonl`
+   (64 T5‴ logic kills, 37 new, every witness re-certified closed AND strict against both boxes by an
+   independent implementation, 64/64; plus the 4 certified LP kills);
+   notes `{acceptance.md, certified.md, lean_bridge.md}`.
 2. **The alive population.** Re-run unconverged alive nodes with a longer LP cap before splitting them (A109's 28/46);
    branch on the load path instead of the rattler (A112); both are about not paying eight children for a node that
    was never alive or whose slack sits in squares it does not condition on.
