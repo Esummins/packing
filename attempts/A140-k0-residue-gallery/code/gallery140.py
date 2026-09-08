@@ -45,7 +45,7 @@ for p in (os.path.join(ROOT, "attempts", "A57-shadow-trees", "code"),
 
 import polycore                                              # noqa: E402
 import exactcore                                             # noqa: E402
-from caselp import Box                                       # noqa: E402
+from caselp import Box, EPS_CORE                             # noqa: E402
 import shadowlib as L                                        # noqa: E402
 import minimise as M                                         # noqa: E402
 import cells140 as C140                                      # noqa: E402
@@ -164,44 +164,72 @@ def slot_cell_poly(name, s):
     return [(x - 0.5, y - 0.5), (x + 0.5, y - 0.5), (x + 0.5, y + 0.5), (x - 0.5, y + 0.5)], (x, y)
 
 
+CENSUS_RULE = ("BIN RULE: every dual-support column is assigned to EXACTLY ONE bin — the named "
+               "slot cell whose CENTRE is nearest the column's centre (ties broken by name "
+               "order), over BL/BR/TL/TR (i,j), i,j < 3. So the bin weights PARTITION the "
+               "support's total dual weight; they do not double count. The separate 'met' counts "
+               "below are the geometric statement (a column can overlap several cells) and are "
+               "A113's singly/doubly-met census, not a partition. The conditioned square is NOT a "
+               "dual-support column — the node LP counts only the budget = 11 - #cores OTHER "
+               "squares — so no bin contains it; a bin a conditioned box can itself reach is "
+               "marked (H).")
+
+
 def slot_census(pk, boxes, s, imax=3, thr=1e-9):
-    """Which named slot cells the LP dual support occupies, and with what weight.  A slot is
-    'doubly met' when two or more support columns have positive-area overlap with it."""
+    """Two different objects, kept apart because they answer different questions.
+
+    * `n_met` / `w_met`  -- columns with positive-area overlap with the closed slot cell.  A
+      column can meet several cells, so these DO NOT partition the support; 'singly'/'doubly met'
+      is A113's census and this is what it means.
+    * `n_bin` / `w_bin`  -- each column assigned to exactly ONE bin, the nearest slot CENTRE.
+      These PARTITION the support: sum of w_bin over bins = sum of y over columns.
+    * `n_snap` / `w_snap` -- columns that actually snap onto the cell (axis-aligned, on centre).
+      This is the object A113's re-branching rule talks about.
+
+    The conditioned squares are not dual-support columns at all (the node LP counts the budget =
+    11 - #cores OTHER squares), so nothing here can be one; `cond_can_meet` records which
+    conditioned boxes could themselves reach the cell, and those bins are marked (H)."""
+    names = [f"{c}({i},{j})" for c in ("BL", "BR", "TL", "TR")
+             for i in range(imax) for j in range(imax)]
+    ctrs = {nm: slot_cell_poly(nm, s)[1] for nm in names}
+    # --- the partition: nearest slot centre, one bin per column
+    assign = {}
+    for k, p in enumerate(pk):
+        best = min(names, key=lambda nm: (math.hypot(p["cx"] - ctrs[nm][0],
+                                                     p["cy"] - ctrs[nm][1]), nm))
+        assign.setdefault(best, []).append(k)
     out = []
-    for c in ("BL", "BR", "TL", "TR"):
-        for i in range(imax):
-            for j in range(imax):
-                nm = f"{c}({i},{j})"
-                cell, ctr = slot_cell_poly(nm, s)
-                met, snapped = [], []
-                for k, p in enumerate(pk):
-                    P = sq(p["cx"], p["cy"], p["theta"])
-                    if sat_poly(P, cell) < -thr:
-                        met.append((k, float(p.get("y", 0.0))))
-                    if L.snap(p["cx"], p["cy"], p["theta"], s) == nm:
-                        snapped.append(k)
-                if not met:
-                    continue
-                cond = []
-                for bi, b in enumerate(boxes):
-                    hit = any(sat_poly(sq(hx, hy, ht), cell) < -thr
-                              for (hx, hy, ht) in box_poses(b, 5))
-                    if hit:
-                        cond.append(bi)
-                out.append(dict(slot=nm, centre=[ctr[0], ctr[1]], n=len(met),
-                                w=round(sum(w for _, w in met), 6),
-                                n_snap=len(snapped),
-                                w_snap=round(sum(float(pk[k].get("y", 0.0))
-                                                 for k in snapped), 6),
-                                cols=[k for k, _ in met][:12],
-                                cond_can_meet=cond,
-                                kind=("singly" if len(met) == 1 else "doubly")))
-    out.sort(key=lambda r: (-r["n_snap"], -r["w_snap"], -r["w"], r["slot"]))
+    for nm in names:
+        cell, ctr = slot_cell_poly(nm, s)
+        met, snapped = [], []
+        for k, p in enumerate(pk):
+            P = sq(p["cx"], p["cy"], p["theta"])
+            if sat_poly(P, cell) < -thr:
+                met.append((k, float(p.get("y", 0.0))))
+            if L.snap(p["cx"], p["cy"], p["theta"], s) == nm:
+                snapped.append(k)
+        binned = assign.get(nm, [])
+        if not met and not binned:
+            continue
+        cond = []
+        for bi, b in enumerate(boxes):
+            if any(sat_poly(sq(hx, hy, ht), cell) < -thr for (hx, hy, ht) in box_poses(b, 5)):
+                cond.append(bi)
+        out.append(dict(slot=nm, centre=[ctr[0], ctr[1]],
+                        n_met=len(met), w_met=round(sum(w for _, w in met), 6),
+                        n_bin=len(binned),
+                        w_bin=round(sum(float(pk[k].get("y", 0.0)) for k in binned), 6),
+                        n_snap=len(snapped),
+                        w_snap=round(sum(float(pk[k].get("y", 0.0)) for k in snapped), 6),
+                        cols=[k for k, _ in met][:12], bin_cols=binned[:12],
+                        cond_can_meet=cond,
+                        kind=("singly" if len(met) == 1 else "doubly")))
+    out.sort(key=lambda r: (-r["n_snap"], -r["w_snap"], -r["w_bin"], r["slot"]))
     return out
 
 
 # ------------------------------------------------------------------ panels
-def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, s):
+def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, sts, exs, s):
     """LEFT: the LP dual support with the 2026-09-07 drawing rules."""
     pk = d.get("packing", [])
     ys = [float(p.get("y", 0.0)) for p in pk]
@@ -261,14 +289,29 @@ def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, s):
             g = gap_over_box(P, b)
             if g < gmin:
                 gmin, bi = g, j
-        kp = bool(any(polycore.poly_square_depth(pc.P, [[cx, cy]], [th])[0] > 0.0 for pc in pcs))
+        # depth against each of the three cores of the box that fires (positive = meets)
+        d_st = max(float(polycore.core_depth_fast(c, [[cx, cy]], [th])[0]) for c in sts)
+        d_ex = max(float(polycore.core_depth_fast(c, [[cx, cy]], [th])[0]) for c in exs)
+        d_pl = max(float(polycore.poly_square_depth(pc.P, [[cx, cy]], [th])[0]) for pc in pcs)
+        kp = bool(d_pl > EPS_CORE)
         if gmin < -1e-9:
+            # the LP drops a row only when it penetrates a core by more than EPS_CORE = 2e-3,
+            # so "clears" here means "passes the LP's own filter at that core".
             imposs.append(dict(col=k, box=bi, overlap=-gmin, y=y, kprime=kp,
+                               d_stock=d_st, d_exact=d_ex, d_poly=d_pl, eps=EPS_CORE,
+                               clears_stock=bool(d_st <= EPS_CORE),
+                               clears_exact=bool(d_ex <= EPS_CORE),
                                pose=[cx, cy, math.degrees(th) % 90.0]))
+            lab = f"K(a) d={d_st:+.3f} clears (LP kept it)"
+            lab += (f"; K_exact d={d_ex:+.3f} " +
+                    ("DROPS it" if d_ex > EPS_CORE else "clears"))
+            lab += (f"; K' d={d_pl:+.3f} " + ("DROPS it" if d_pl > EPS_CORE else "clears"))
             out.append(poly(ox, oy, sc, P, "none", "#d50000", 0.0, 2.5, dash="7,3"))
-            out.append(text(ox + cx * sc, oy - cy * sc - 7,
-                            f"impossible under H: overlap {-gmin:.3f}"
-                            + ("  [K' certified]" if kp else ""), 7.0, "#d50000", True, "middle"))
+            out.append(text(ox + cx * sc, oy - cy * sc - 15,
+                            f"impossible under H: overlap {-gmin:.3f}", 7.0, "#d50000", True,
+                            "middle"))
+            out.append(text(ox + cx * sc, oy - cy * sc - 7, lab, 6.5, "#d50000", False,
+                            "middle"))
     # --- the conditioned squares: box, K', extremal-tilt outlines, the cyan H
     for j, (b, pc) in enumerate(zip(boxes, pcs)):
         out.append(f'<rect x="{ox + b["x0"] * sc:.1f}" y="{oy - b["y1"] * sc:.1f}" '
@@ -299,24 +342,49 @@ def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, s):
                 vx, vy = min(Ph, key=lambda v: v[0] - v[1])
                 out.append(text(ox + vx * sc + 2, oy - vy * sc - 3, f"{td:.1f}°", 6.5,
                                 "#006064"))
+        # PI (2026-09-07): THREE cores inside each H, distinct styles.
+        #   K'      the polygon core (A132)               -- purple, translucent fill
+        #   K_ex    A135's EXACT axis core                -- solid teal outline, no fill
+        #   K(a)    the STOCK axis core the LP pruned against (the record's a) -- solid black
         out.append(poly(ox, oy, sc, [tuple(v) for v in pc.P], "#7e57c2", "#4527a0", 0.42, 1.4))
+        out.append(poly(ox, oy, sc, [tuple(v) for v in polycore.core_verts(exs[j])],
+                        "none", "#00695c", 0.0, 1.8))
+        out.append(poly(ox, oy, sc, [tuple(v) for v in polycore.core_verts(sts[j])],
+                        "none", "#000000", 0.0, 1.8))
         kk = pc.P.mean(0)
         out.append(text(ox + kk[0] * sc, oy - kk[1] * sc - 4, "K'", 8.5, "#311b92", True,
                         "middle"))
     e, yy = wrap(ox, oy + 16,
                  f"{len(boxes)} conditioned square(s) H (cyan) + {len(pk)} dual-support "
                  f"placements, fill = dual weight y (pale yellow y→0, dark orange y=1); "
-                 f"purple = the certified polygon core K'(B); outside container: {bad}",
+                 f"outside container: {bad}",
                  S0 * sc, 8.5, "#444")
     out += e
-    e, _ = wrap(ox, yy + 2,
+    core_leg = "; ".join(
+        f"box {j}: a_stock {float(sts[j].a):.6f} (area {(2 * float(sts[j].a)) ** 2:.6f}), "
+        f"a_exact {float(exs[j].a):.6f} (area {(2 * float(exs[j].a)) ** 2:.6f}, "
+        f"{(float(exs[j].a) / float(sts[j].a)) ** 2:.3f}x), area K' {pcs[j].area():.6f} "
+        f"({pcs[j].area() / (2 * float(sts[j].a)) ** 2:.3f}x)"
+        for j in range(len(boxes)))
+    e, yy = wrap(ox, yy + 2,
+                 "THREE cores are drawn inside each H: SOLID BLACK = the STOCK axis core K(a) the "
+                 "LP actually pruned against (the record's own a); SOLID TEAL = A135's EXACT axis "
+                 "core (certifiable today — a square at the box's own tilt, so the frozen "
+                 "certificate schema is unchanged); PURPLE FILL = the polygon core K'(B), the "
+                 "full intersection of the square over the box. " + core_leg,
+                 S0 * sc, 8.0, "#333")
+    out += e
+    ncl = sum(1 for r in imposs if r["clears_exact"])
+    e, _y = wrap(ox, yy + 2,
                 f"red dashed = {len(imposs)} column(s) overlapping a hypothesis square at "
-                f"EVERY of the {NPOSE}³ = {NPOSE ** 3} sampled poses of its box "
-                f"(they pass the axis core K(a), which is why the LP kept them); "
-                f"{sum(1 for r in imposs if r['kprime'])} of them are certified by K'.",
+                f"EVERY of the {NPOSE}³ = {NPOSE ** 3} sampled poses of its box. All of them "
+                f"clear K(a) at the LP's own drop margin EPS_CORE = {EPS_CORE:g} — that is why "
+                f"the LP kept them. {len(imposs) - ncl} are DROPPED by the exact axis core (so an "
+                f"exact-core row filter deletes them with no verifier change); {ncl} clear the "
+                f"exact core too and are caught only by K'. Each label gives the three depths.",
                 S0 * sc, 8.5, "#d50000")
     out += e
-    return out, imposs, bad
+    return out, imposs, bad, _y
 
 
 def panel_pack(ox, oy, sc, title, sub, s, poses, ring=True):
@@ -370,14 +438,14 @@ def panel_pack(ox, oy, sc, title, sub, s, poses, ring=True):
                     f = best[1]
                     out.append(f'<circle cx="{ox + f[0] * sc:.1f}" cy="{oy - f[1] * sc:.1f}" '
                                f'r="4.5" fill="none" stroke="#2e7d32" stroke-width="2"/>')
-    e, _ = wrap(ox, oy + 16, f"{len(poses) - nf} slot squares + {nf} free squares; min "
-                             f"pairwise SAT separation {mg:+.2e}; worst containment excursion "
-                             f"{exc:+.2e}; side {s:.6f}", S0 * sc, 8.5, "#444")
+    e, _y = wrap(ox, oy + 16, f"{len(poses) - nf} slot squares + {nf} free squares; min "
+                              f"pairwise SAT separation {mg:+.2e}; worst containment excursion "
+                              f"{exc:+.2e}; side {s:.6f}", S0 * sc, 8.5, "#444")
     out += e
-    return out, names, exc, mg
+    return out, names, exc, mg, _y
 
 
-def panel_cover(ox, oy, sc, cov, boxes, pcs, s, census):
+def panel_cover(ox, oy, sc, cov, boxes, pcs, s, census, pk, budget):
     """THIRD: the candidate cover, drawn."""
     out = [text(ox, oy - S0 * sc - 52, "panel 3: the candidate cover", 12, bold=True)]
     e, _ = wrap(ox, oy - S0 * sc - 38, cov["headline"], S0 * sc, 8.5, "#444", lead=11.0)
@@ -393,19 +461,44 @@ def panel_cover(ox, oy, sc, cov, boxes, pcs, s, census):
     cell, ctr = slot_cell_poly(cellname, s)
     out.append(poly(ox, oy, sc, cell, "#ffd54f", "#f57f17", 0.55, 2.6))
     out.append(text(ox + ctr[0] * sc, oy - ctr[1] * sc + 4, cellname, 10, "#000", True, "middle"))
-    for r in census[:6]:
+    # PI (2026-09-07): the census bins are NOT squares of a packing.  Thin dashed outline, NO
+    # fill, and a label that says "slot bin".  Each column is in exactly one bin (nearest centre),
+    # so the printed weights partition the support's total dual weight.
+    allbins = [r for r in census if r["n_bin"] > 0]
+    shown = sorted(allbins, key=lambda r: -r["w_bin"])[:12]
+    for r in shown:
         c2, ct2 = slot_cell_poly(r["slot"], s)
         if r["slot"] == cellname:
             continue
-        out.append(poly(ox, oy, sc, c2, "#c8e6c9", "#388e3c", 0.30, 1.0, dash="3,3"))
-        out.append(text(ox + ct2[0] * sc, oy - ct2[1] * sc + 3,
-                        f"{r['slot']} w{r['w']:.2f} x{r['n']}", 6.5, "#1b5e20", False, "middle"))
+        out.append(poly(ox, oy, sc, c2, "none", "#2e7d32", 0.0, 1.0, dash="3,3"))
+        out.append(text(ox + ct2[0] * sc, oy - ct2[1] * sc - 2,
+                        f"slot bin {r['slot']}", 6.5, "#1b5e20", False, "middle"))
+        out.append(text(ox + ct2[0] * sc, oy - ct2[1] * sc + 7,
+                        f"w={r['w_bin']:.2f} n={r['n_bin']}"
+                        + (" (H)" if r["cond_can_meet"] else ""), 6.5, "#1b5e20", False,
+                        "middle"))
+    tot_bin = sum(r["w_bin"] for r in census)
+    tot_y = sum(float(p.get("y", 0.0)) for p in pk)
     y = oy + 16
+    e, y = wrap(ox, y, "LEGEND (this panel): green dashed = slot-census BINS (support columns "
+                       "grouped by nearest slot centre; NOT squares of a packing); amber = the "
+                       "cover corner; purple polygon = the conditioned square's K'; black "
+                       "rectangle = its parameter box.", S0 * sc, 8.0, "#1b5e20")
+    out += e
+    y += 2.0
+    e, y = wrap(ox, y, f"bin weights partition the support: sum over ALL {len(allbins)} bins "
+                       f"{tot_bin:.4f} = sum of dual weights {tot_y:.4f} (budget {budget}); every "
+                       f"column is in exactly one bin. {len(shown)} heaviest bins drawn; the full "
+                       f"list is under the panels. (H) = a conditioned square can itself reach "
+                       f"that cell. The conditioned square is not a dual-support column.",
+                S0 * sc, 8.0, "#555")
+    out += e
+    y += 3.0
     for ln in cov["lines"]:
         e, y = wrap(ox, y, ln, S0 * sc, 8.5, "#333")
         out += e
         y += 2.0
-    return out
+    return out, y
 
 
 # ------------------------------------------------------------------ candidate cover
@@ -440,11 +533,11 @@ def choose_cover(cell, lane, census, boxes):
         ncond_pot=None,
         headline=f"RE-BRANCH on {nm}: the support keeps occupying it "
                  f"({top['n_snap']} column(s) SNAP onto it, weight {top['w_snap']:.2f}; "
-                 f"{top['n']} column(s) meet it at all, weight {top['w']:.2f})"
+                 f"{top['n_met']} column(s) meet it at all, weight {top['w_met']:.2f})"
                  if top else "RE-BRANCH",
         words=(f"A113's re-branching rule: the dual support keeps occupying {nm} "
                f"({top['n_snap']} column(s) snapped onto the cell, weight {top['w_snap']:.2f}; "
-               f"{top['n']} column(s) meet it, weight {top['w']:.2f}), "
+               f"{top['n_met']} column(s) meet it, weight {top['w_met']:.2f}), "
                f"so branch on it. Cover: (a) some square has its centre in the box of {nm} -- add "
                f"that box as a second conditioned square and re-solve at budget-1; (b) no square "
                f"occupies {nm} -- add the NO-family for {nm}, which deletes exactly the columns "
@@ -519,7 +612,10 @@ def main():
     for (name, lvl, src, fn, lanekey, alias) in C140.CELLS:
         meta, d = C140.load_cell(name)
         boxes = d["hyp"]["boxes"]
-        pcs = [polycore.build(Box.from_json(b)) for b in boxes]
+        bxs = [Box.from_json(b) for b in boxes]
+        pcs = [polycore.build(b) for b in bxs]
+        sts = [b.core() for b in bxs]
+        exs = [exactcore.exact_core(b) for b in bxs]
         s = float(d.get("s") or S0)
         pk = d.get("packing", [])
         census = slot_census(pk, boxes, s)
@@ -535,18 +631,19 @@ def main():
         sub = (f"tau {tau:.9f} / budget {bud}  (eta {tau - bud:+.2e}), minmass "
                f"{float(d['minmass']):.3f}, converged {d['converged']}; record "
                f"{os.path.basename(meta['record'])}")
-        p1, imposs, bad = panel_lp(30, oy, SC, f"{name} — panel 1: LP dual support at s0 "
-                                               f"= {S0:.6f}", sub, d, boxes, pcs, s)
+        p1, imposs, bad, yb1 = panel_lp(30, oy, SC, f"{name} — panel 1: LP dual support at s0 "
+                                               f"= {S0:.6f}", sub, d, boxes, pcs, sts, exs, s)
         body += p1
         poses, s2, prov = right_poses(name, d, boxes)
-        p2, names2, exc, mg = panel_pack(30 + W1, oy, SC, f"{name} — panel 2: the "
+        p2, names2, exc, mg, yb2 = panel_pack(30 + W1, oy, SC, f"{name} — panel 2: the "
                                                           f"near-packing", prov, s2, poses)
         body += p2
         assert exc <= 1e-4, f"{name}: containment violated by {exc:.2e}"
-        body += panel_cover(30 + 2 * W1, oy, SC, cov, boxes, pcs, s, census)
+        p3, yb3 = panel_cover(30 + 2 * W1, oy, SC, cov, boxes, pcs, s, census, pk, bud)
+        body += p3
 
         # ---- the text block
-        y = oy + 120
+        y = max(yb1, yb2, yb3) + 22.0
         def add(t, size=9.5, col="#222", bold=False):
             nonlocal y
             e, y = wrap(30, y, t, 3 * W1 - 20, size, col, bold)
@@ -590,11 +687,20 @@ def main():
                     "tau still at budget: the LP replaces the excluded columns, so K' alone does "
                     "not kill this cell.")),
                 9.5, "#b71c1c" if iv.get("kills") else "#555", bool(iv.get("kills")))
-        met = [r for r in census if r["n"] >= 1]
-        add("slot census (A113): " + "; ".join(
-            f"{r['slot']} {r['kind']} by {r['n']} column(s) w {r['w']:.2f}"
-            + ("*" if r["cond_can_meet"] else "") for r in met[:12])
+        met = [r for r in census if r["n_met"] >= 1]
+        add("slot census (A113), MET (a column can meet several cells, so these do NOT "
+            "partition the support): " + "; ".join(
+                f"{r['slot']} {r['kind']} by {r['n_met']} column(s) w {r['w_met']:.2f}"
+                + ("*" if r["cond_can_meet"] else "") for r in met[:12])
             + f"   [{len(met)} named cells met; * = a conditioned square can reach it too]")
+        binned = [r for r in census if r["n_bin"] > 0]
+        add("slot census, BINNED (each column in exactly one bin — the nearest slot centre; these "
+            "DO partition): " + "; ".join(
+                f"{r['slot']} n={r['n_bin']} w={r['w_bin']:.2f}"
+                + ("(H)" if r["cond_can_meet"] else "") for r in binned)
+            + f"   [bin total {sum(r['w_bin'] for r in census):.4f} = support total "
+              f"{sum(float(q.get('y', 0.0)) for q in pk):.4f}]")
+        add(CENSUS_RULE, 9.0, "#555")
         lf = lane["fresh"]
         add("lane count (A118): " + "; ".join(
             f"{c} {v['verdict']}" + (f" (n_cond_pot {v['ncond_pot']})"
@@ -647,7 +753,10 @@ def main():
             minmass=f"{float(d['minmass']):.3f}", n_conditioned=len(boxes),
             n_support=len(pk), n_impossible=len(imposs),
             n_impossible_kprime=sum(1 for r in imposs if r["kprime"]),
-            slot_census="; ".join(f"{r['slot']}x{r['n']}(w{r['w']:.2f})" for r in met[:8]),
+            slot_census_met="; ".join(f"{r['slot']}x{r['n_met']}(w{r['w_met']:.2f})"
+                                      for r in met[:8]),
+            slot_census_binned="; ".join(f"{r['slot']}n{r['n_bin']}(w{r['w_bin']:.2f})"
+                                        for r in census if r["n_bin"] > 0),
             lane_count="; ".join(f"{c}:{v['verdict']}" for c, v in lf.items()),
             invitro_poly_lp=(f"tau {iv['tau']:.6f} / {bud} "
                              + ("LP-DEAD (converged)" if iv.get("kills_converged")
@@ -659,7 +768,7 @@ def main():
             PI_reading="", PI_load_path="", PI_binding_contact="", PI_drain_or_kill=""))
         summary.append(dict(cell=name, level=lvl, s_star=s2, shadow=sid, prov=prov,
                             panel2_min_sat=mg, panel2_is_packing=bool(mg > -1e-5),
-                            polycore=pstat, cover=cov, lane=lf, census=met[:8],
+                            polycore=pstat, cover=cov, lane=lf, census=census, census_met=met[:12],
                             n_impossible=len(imposs),
                             n_impossible_kprime=sum(1 for r in imposs if r["kprime"]),
                             width=int(W), height=H, tau=tau, budget=bud,

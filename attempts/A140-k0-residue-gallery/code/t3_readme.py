@@ -136,8 +136,23 @@ def main():
       "(named corner cell), red = free square (f-index + tilt), green ring = a contact at "
       "gap < 1e-6.  Source is stated in the subtitle: A107's minimised shadow, A128's polished "
       "near-packing, or the raw integral dual support at s0.\n")
-    a("* **THIRD** — the candidate cover.  Amber = the cell to branch on; faint green = the other "
-      "slots the support occupies, with their weight and multiplicity.\n")
+    a("* **Three cores are drawn inside each H**, and they are three different objects: SOLID "
+      "BLACK = the **stock axis core K(a)** the LP actually pruned against (the record's own "
+      "`a`); SOLID TEAL = **A135's exact axis core**, the largest half-side at the same "
+      "(kx, ky, tm) that passes the exact rational vertex test — still a square at the box's own "
+      "tilt, so the frozen certificate schema is unchanged and a kill from it is certifiable "
+      "today; PURPLE FILL = the **polygon core K'(B)**, the full intersection of the square over "
+      "the box, which needs a verifier change.  The panel caption prints `a_stock`, `a_exact` and "
+      "the area of K'.  Each red-dashed column's label gives its depth against all three and says "
+      "which core would drop it.\n")
+    a("* **THIRD** — the candidate cover.  Amber = the cell to branch on.  Thin green dashed "
+      "outlines are **slot-census BINS, not squares of a packing**: every dual-support column is "
+      "assigned to exactly one bin (the nearest slot centre), so the printed `w=` weights "
+      "**partition** the support's total dual weight and never double count.  `(H)` marks a bin a "
+      "conditioned square could itself reach; the conditioned square is never a dual-support "
+      "column, because the node LP counts only the budget = 11 − #cores other squares.  The "
+      "separate `met` census under the panels is the geometric statement (a column can overlap "
+      "several cells) — that one is A113's singly/doubly-met count and is *not* a partition.\n")
     a("* Under the panels: the box(es), tau / eta / minmass, the T1 polygon-core measurement, the "
       "slot census (A113), the lane count (A118), the cover in words with what it needs to be a "
       "certified leaf, and the geometry check.\n")
