@@ -649,3 +649,21 @@ kills nothing over any node's whole
 tilt window. Recommendation: none for A60 — the leaf is a free sanity number for the gallery pages
 (2–4 pieces tighter than A148's disk bound), not a lever. Statement, Lean shape, certificate format
 and independent checker: `attempts/A153-cover-number/notes/lemma.md`.
+
+
+**A152 (2026-09-08, `slot-lane shrunk`).** The PI's tolerance-shrunk refinement of A141's slot-lane leaf, tested
+over the alive trump5 population as part of a 71 %-coverage sweep (229 of the 325 trump5 records; the record order
+is a deterministic SHA-256 shuffle, so the covered part is a uniform sample). **Result: zero new kills.** The 20
+trump5 nodes A152 certifies at an admissible translate — BR(0,1) and TL(0,0) — are all already A141 kills. Three
+things specific to A60 are worth recording. (i) A60's pins are EXACT (`deepen.py` builds `Box(x, x, y, y, 0, 0)`),
+so the refinement costs A60 nothing on the obstacle side — unlike A57, where the pin core must shrink to
+`½ − h = 0.49293` and 5.9 % of A141's kills are lost; and A60's admissible translate set is the full
+`{0, h}²` corner set, `t = 0` included. (ii) It nevertheless buys nothing, because every usable slot of trump5 is
+backed on its two predecessor faces by a wall or a pin (BL(0,2), BL(1,1), BR(0,1), TR(0,1), TR(1,0) by a pin on at
+least one axis; TL(0,0) by two walls), so the tolerance can only move the slot square towards the two OPEN faces,
+which is where anything grazing the cell comes from. (iii) Whatever it did buy would be **conditional on a kill of
+the extension class with the sixth pin slack**, which does not exist: k6_07/19/21/22/23/24 carry their closed-window
+certificates with degenerate pin cores (`a = 16383999967232/32768001953125`, tolerance 3.08e-8). For A60 the
+slack re-certification is the cheaper of the two lanes — only ONE core shrinks per class, the other five pins stay
+exact — priced at **1–15 CPU-h** for the six classes (`attempts/A152-slot-lane-shrunk/notes/prereq.md`).
+**Nothing in A60 was written.**

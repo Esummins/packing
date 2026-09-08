@@ -1,0 +1,78 @@
+{
+ "h": "282842712474619/40000000000000000",
+ "h_float": 0.007071067811865475,
+ "cell": [
+  "0",
+  "1",
+  "0",
+  "1"
+ ],
+ "shrunk_cell": [
+  "282842712474619/40000000000000000",
+  "39717157287525381/40000000000000000",
+  "282842712474619/40000000000000000",
+  "39717157287525381/40000000000000000"
+ ],
+ "squares": {
+  "Q1_left": [
+   "-79717157287525381/80000000000000000",
+   "282842712474619/80000000000000000",
+   "-1/2",
+   "1/2"
+  ],
+  "Q2_right": [
+   "79717157287525381/80000000000000000",
+   "159717157287525381/80000000000000000",
+   "1/2",
+   "3/2"
+  ],
+  "Q3_top": [
+   "-1/2",
+   "1/2",
+   "79717157287525381/80000000000000000",
+   "159717157287525381/80000000000000000"
+  ],
+  "Q4_bottom": [
+   "1/2",
+   "3/2",
+   "-79717157287525381/80000000000000000",
+   "282842712474619/80000000000000000"
+  ]
+ },
+ "checks": {
+  "unit_Q1_left": true,
+  "unit_Q2_right": true,
+  "unit_Q3_top": true,
+  "unit_Q4_bottom": true,
+  "disjoint_Q1_left_Q2_right": true,
+  "disjoint_Q1_left_Q3_top": true,
+  "disjoint_Q1_left_Q4_bottom": true,
+  "disjoint_Q2_right_Q3_top": true,
+  "disjoint_Q2_right_Q4_bottom": true,
+  "disjoint_Q3_top_Q4_bottom": true,
+  "meets_cell_Q1_left": true,
+  "misses_shrunk_cell_Q1_left": true,
+  "meets_cell_Q2_right": true,
+  "misses_shrunk_cell_Q2_right": true,
+  "meets_cell_Q3_top": true,
+  "misses_shrunk_cell_Q3_top": true,
+  "meets_cell_Q4_bottom": true,
+  "misses_shrunk_cell_Q4_bottom": true,
+  "shrunk_cell_meeter_count": 0
+ },
+ "min_blockers_over_admissible_translates": {
+  "n": 2,
+  "tx": "-282842712474619/40000000000000000",
+  "ty": "-282842712474619/40000000000000000",
+  "grid_points": 16641
+ },
+ "blocking_rules": {
+  "Q1_left blocks iff tx < h/2": true,
+  "Q2_right blocks iff tx > -h/2": true,
+  "Q3_top blocks iff ty > -h/2": true,
+  "Q4_bottom blocks iff ty < h/2": true,
+  "so >=1 of {Q1,Q2} and >=1 of {Q3,Q4} always block": true
+ },
+ "verdict": "REFUTED: the shrunk-cell meeter count is 0 but every admissible translate is blocked by at least 2 squares, so deleting one leaves no free placement of the sixth pin",
+ "all_configuration_checks_pass": true
+}
