@@ -6270,3 +6270,39 @@ cores and the extremal-tilt schematics).
 - One page (`k5_16_interior_Y1039`) was killed by A137 between drawing and verification; verify148
   now falls back to the node's own record so a page is always verified as drawn.  Every page prints
   the timestamp at which the campaign records were read.
+
+
+## 2026-09-08 — A137 night shift 2 (A57 owner for the night): the backlog folded in, the exact pin core deployed at emission, and the two schedule numbers measured
+
+- **Work-owing A57 population 632 -> 406 (-35.8 %)**, and 1,161 new rows emitted, 947 of them already
+  dead. Full accounting: `attempts/A57-shadow-trees/PAUSED.md` v3 (v2 archived as `PAUSED_v2_archived.md`).
+- **The exact pin core is the lever, as a population rate now.** 163 of the 305 surviving-ALIVE nodes
+  re-solved with A135's exact certified-maximal cores: **46 certified dead under the FROZEN
+  `verify_case.py`, 28.6 % of the 161 decided**, 15.5 CPU-h, median 426 s. Nothing changed but the
+  half-side written into `cores` -- no verifier change, no Lean change.
+- **A145's `frac_exact` predictor gates at the top and not at the bottom**: >= 0.60 kills 25/66
+  (37.9 %), but 0.30-0.45 kills 15/63 (23.8 %), so A145's "0 of 7 below 0.45 moved at all" does not
+  survive n = 63. Rank by it; do not discard the middle band.
+- **Emission through the hooks kills a quarter of children before any LP**: 3,034 fresh children
+  screened through pinguard-at-the-exact-core -> T5'' -> T5''' clip -> T5'''' polygon, **798 (26.3 %)
+  dead by geometry** (639 T5', 159 clip, 0 polygon). **The level-2 rate the 10.5-11.7 wall-day
+  schedule rests on is 27.5 %, not the 13.74 % credited** (the comparable incremental-over-T5' figure
+  is 8.6 % at nsub = 1; the exact core moves boxes out of that bucket into T5'). Of the level-1
+  children that reached the LP, **149 of 189 (78.8 %) are certified dead**.
+- **An id is not a node.** The same child id names a different node in the L1 tree (eps-fat pins) and
+  the G1 tree (delta = 1e-2 slack pins), and a kill transfers only DOWNWARD in the pin core. The fold
+  is now tag-aware, and it caught two of A142's 17 exact-clip kills written at a_pin = 0.49999997
+  against the L1 tree's pins: correct certificates, but they do not kill the G1-tree nodes the live
+  campaign is descending.
+- **A141's slot-lane kills, folded: 187 A57 rows, 180 of them nodes already `PASS`, 7 new.** Its
+  "243 new" is new relative to the clip kills, not to the corpus's verdicts.
+- Every one of tonight's 159 clip kills carries a replayable `pin-clip-kill-certificate-v1` and passes
+  **A131's own independent checker, 159/159**, with 1,908,000 sampled poses and 0 pin-free hits.
+- Operations: the 1,500 s **process** wall fired 3 times and is recorded as `WALL-CAP`, never a verdict
+  -- which is what let `k5_16` shard 0 (the Y0381 wedge) be re-emitted at last. Two process bugs worth
+  not repeating are written up in PAUSED v3 D.6/D.7 (a scaler that counted a queue's remainder from its
+  out-file instead of its claims; and the shared git index swallowing a staged checkpoint into another
+  agent's commit -- use `git commit -- <pathspecs>`, never add-then-commit).
+- Files: `attempts/A137-night-shift-2/` (code, certs/clipkills, results, notes/method.md),
+  `attempts/A57-shadow-trees/results/superseded_by_{backlog,exactcore}_A137.jsonl`,
+  `attempts/A60-trump5-campaign/results/superseded_by_backlog_A137.jsonl`, `docs/budget.md` A57 row.

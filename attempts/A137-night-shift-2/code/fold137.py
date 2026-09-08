@@ -158,6 +158,32 @@ def main():
                 model=float(__import__("fractions").Fraction(r["a_pin"])) if r.get("a_pin") else None,
                 prior=r.get("prior_verdict"))
 
+    # EVERY `*.clipkill.json` under attempts/*/certs/** is a kill record in its own right
+    # (A148, 2026-09-08 06:50): A142's A60 sweep wrote the certificates and no ledger row, so a
+    # kill list built from results/*.jsonl alone misses them.  `*__exall.json` is NOT a kill
+    # record -- it exists on LOST-KILL / TOO-TIGHT / FAIL too -- and is deliberately not scanned.
+    # A137's own certs/clipkills/ are excluded: those are fresh children recorded dead AT
+    # emission, not supersessions of an existing verdict.
+    for cp in glob.glob(os.path.join(ROOT, "*", "certs", "**", "*.clipkill.json"),
+                        recursive=True):
+        if os.sep + "A137-night-shift-2" + os.sep in cp:
+            continue
+        try:
+            cj = json.load(open(cp, encoding="utf-8"))
+        except Exception:
+            continue
+        nid = cj.get("id")
+        if not nid:
+            continue
+        camp = "A60" if str(nid).startswith("c0_") else "A57"
+        try:
+            model = float(__import__("fractions").Fraction(cj["a_pin"]))
+        except Exception:
+            model = None
+        add(camp, nid, "T5''' pin-clip certificate (a_pin=%s)" % cj.get("a_pin"), cp,
+            os.path.relpath(cp, ROOT).split(os.sep)[0] + "/certs", model=model,
+            prior=cj.get("prior_verdict"))
+
     # A135 -- polygon-vs-pin-core logic kills and the LP-certified ones
     a135 = os.path.join(ROOT, "A135-polycore-verifier")
     for r in jl(os.path.join(a135, "results", "polycore_kills.jsonl")):
