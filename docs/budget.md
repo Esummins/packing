@@ -217,6 +217,34 @@ merely unconverged at the LP time cap.
    Take it for W7 and for the paper's "two verifiers" paragraph; do not schedule it against the A57 row.
    *Files:* `attempts/A129-net-verifier/{code,notes,results}`, notes `method.md` (Lemmas N1–N4) and `benchmark.md`.
 
+7. **GUARD-LINE rows: a real but narrow LP lever — and the exact-core chore is the bigger prize
+   (A144 `[pending]`, 2026-09-07).** For any line `l` inside `[0,s]^2` the chords of a packing are
+   interior-disjoint, so `SUM |l n Q| <= s`; splitting off the hypothesis squares turns the PI's
+   "a line crossing four squares through opposing sides forces side >= 4" into an LP **column** —
+   a measure of density `z` on `l` priced at `rhs(l) = s0 - SUM_pins minchord - minchord(H)`
+   instead of `s0`. `minchord` over a parameter box is FIVE exact rational evaluations (the chord
+   depends on the tilt only through `y = cos+sin`, `A(y)` is monotone and `B(y)` attains its
+   interval minimum at an endpoint), so the whole family is cheap: **all 448 surviving A57 nodes,
+   <= 40 lines each, 43.5 s with no LP** — and **86 of them (19.2 %) have a line their stored dual
+   support violates** (median depth 0.095, max 0.266; 15 of the top 40 by subtree cost). Sampled
+   confirmation 80,640,000 poses -> 0 hits. **In vitro on 20 nodes (2 arms, 240 s, A132's node
+   path, 2.34 CPU-h) the column is ACTIVE on exactly 2, and those 2 are exactly the 2 new kills**
+   (`k5_11_interior_Y0147` 5.000000 -> 4.877459, `k5_16_interior_Y0101` -> 4.922603); at 900 s
+   Y0147's control converges at 5.000000 while the guard arm holds 4.877459 with `minmass` 0.982 —
+   **eta stable, coverage not yet closed, so not yet an LP kill**. Price it as a narrow lever: ~5 %
+   of nodes (23 of 448 carry >= 4 unit chords on one line, all of them violating), ~0 s to screen,
+   and a v3/v4 certificate clause (`guardlines`; ~120 lines + 2 Lean theorems, 0 new axioms,
+   `attempts/A144-guard-lines/notes/spec.md`) that is needed at EMISSION as well as verification —
+   `certify.py` re-derives the measure from atoms alone and returns to tau = 5.000. **The by-product
+   is worth more than the lever:** the control arm is A135's EXACT cores and it kills **15 of the
+   20**, and a third arm with A57's DEPLOYED cores at identical settings kills **0 of 6** — so the
+   drop is the cores, not the re-solve. That is item 1's 28 CPU-h re-emission chore, now with a
+   20-node datum behind it (caveat: the twenty were selected for guard-line violation and are tight
+   by construction, so 15/20 is not a population rate).
+   *Files:* `attempts/A144-guard-lines/{code,notes,results,figs}`, notes `spec.md` (the cut, the
+   `guardlines` field, the v4 clause, `chord_sum_le_side` / `minchord_of_box`) and `measurement.md`;
+   figure `figs/k5_11_interior_Y0147_guardline.svg`.
+
 ## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
 
 The 4-D verifier bisects tilt, position and side to a cap of 48 levels per path. Two constants belong to the

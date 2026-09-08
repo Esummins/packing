@@ -6093,3 +6093,46 @@ cores and the extremal-tilt schematics).
   `attempts/A61-window-stragglers/{results/resolve61_k5_13.json, results/nodes/k5_13*.json, logs/}` (written
   by A61's driver); `docs/budget.md` (stragglers row + § E), `docs/residue_ledger.md` (§ 2 + the family
   table), REGISTRY row.
+
+## 2026-09-07/08 — A144-guard-lines (Opus engineer) — done-mixed
+- The PI's reading of `docs/shadows/a57v3/k5_11_interior_Y0147.svg` ("a horizontal line 0.99 below the top
+  crosses opposing sides of four squares; any realisation is at least side 4") is now an exact LP row.
+  **The cut:** for any line `l` inside `[0,s]^2` the chords of a packing are interior-disjoint, so
+  `SUM |l n Q| <= s`; over a node's `budget = n - #cores` free placements,
+  `SUM_p |l n Q_p| x_p <= rhs(l) = s0 - SUM_pins minchord(P_j,l) - minchord(H,l)`. In A57's covering LP that
+  is a new **column** — a measure of density `z` on `l` priced at `rhs(l)` rather than `s0` — so adding it can
+  only lower tau and can never invalidate a kill; the `-minchord(H,l)` term is the part no atom generator can
+  build, because H's position inside its box is unknown.
+- **The exact primitive.** The chord depends on the tilt only through `y = cos+sin in [1, sqrt2]`;
+  `A(y) = 2a/max(C,S)` is monotone and `B(y) = 2(ay-V)/(y^2-1)` has `q(y) = -a y^2 + 2Vy - a` whose roots
+  multiply to 1, so `B` is decreasing or increasing-then-decreasing and its minimum over a `y`-interval is at
+  an ENDPOINT. `minchord` over a parameter box is therefore FIVE rational evaluations, no search. Validated
+  before use: 600 chord cases vs a direct dense measurement (worst 1.4e-05 = the sampler's own resolution),
+  480 `minchord`-over-box cases vs a dense grid over 12 tilt regimes (worst exceedance +5.6e-16), and
+  **80,640,000 poses drawn -> 0 hits** across all 448 surviving A57 nodes.
+- **Offline, no LP: 43.5 s for all 448 survivors; 86 (19.2 %) have a guard line their stored dual support
+  violates** (median depth 0.095, max 0.266 on `k5_11_interior_Y0672_D00`; L1 83/355, L2 3/89; 15 of the top
+  40 by subtree cost). On `Y0147`: rhs 1.877084, charge 2.005508, **violation +0.128424** — pin P2 1, H 1,
+  and TWO of the LP's own columns 1 and 1.005508, summing to 4.005508 > 3.877084. **That is the case A121's
+  `st4` reading cannot express**, because `st4` needs all four squares to be pins or conditioned squares.
+- **In vitro (20 nodes x 2 arms, 240 s, A132's node path, 2.34 CPU-h): the guard column is ACTIVE on exactly
+  two nodes, and those two are exactly the two new kills** — `Y0147` 5.000000 -> 4.877459 and `Y0101` ->
+  4.922603. Read `z`, not delta-tau: two other nodes moved with `z = 0` and that was convergence noise. At the
+  900 s re-check Y0147's control CONVERGES at 5.000000 while the guard arm holds 4.877459 to nine significant
+  figures with minmass 0.899 -> 0.982 — **eta stable, coverage not yet closed, so not yet an LP kill**.
+- **The by-product is bigger than the lever.** The control arm is A135's EXACT cores and it kills **15 of the
+  20**; a third arm with A57's DEPLOYED cores at identical settings kills **0 of 6**. The drop is the cores,
+  not the re-solve — a 20-node datum for budget.md D.1's 28 CPU-h exact-core re-emission chore (caveat: the
+  twenty were selected for guard-line violation, so 15/20 is not a population rate).
+- **The frozen chain cannot even EMIT a guard-line certificate**: `certify.py`'s own re-solve loop rebuilds the
+  measure from atoms alone, returns to tau = 5.000 and refuses at "certificate total >= budget". So the
+  `guardlines` field is needed at emission as well as at verification, which A135's `polycores` was not.
+  Spec'd in `attempts/A144-guard-lines/notes/spec.md`: the field, the v4 clause (~120 lines, composes with
+  `polycores` by conjunction), and the Lean statements `chord_sum_le_side` and `minchord_of_box`
+  (2 theorems + 1 checker + 7 lemmas, 0 new axioms).
+- Injection audited independently (the wrapper reindexes HiGHS columns): objective identity to 2.7e-15 with the
+  split atom 3.000000 + line 1.877459, 300 row activities re-derived from `(w, z)` to 1.0e-12 with 0
+  mismatches, and the binding guard row at slack **exactly 0.0** on the final dual support.
+- 3.66 CPU-h of a 4 CPU-h cap, 2 BLAS-pinned BelowNormal processes; A57's PAUSE left in place and untouched
+  (own scoped sentinel); read-only on every campaign and attempt. Figure:
+  `attempts/A144-guard-lines/figs/k5_11_interior_Y0147_guardline.svg`.
