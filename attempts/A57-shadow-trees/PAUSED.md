@@ -355,42 +355,24 @@ every pin box, and the full per-sub-bin replay trace:
 A57 or A96 was written — at resume, retire these 17 (and their descendants; none is currently open) before any
 LP, and consider raising `pinclip.A_PIN` to the exact core at emission, which is the same change for free.
 
-**A141 (2026-09-07 night, `polycore lane`, pure geometry, nothing in A57/A96 written).** A118's LANE-COUNT leaf
-re-run with A132's POLYGON cores K′ — and, for the pins, A135's EXACT pin core (K′ of the pin's own zero-tilt box,
-half-side 1/2 − δ/√2, not `pinguard`'s 0.48999997) — at the USABLE SLOTS (a slot counts only where its extension
-class is certified dead on the closed window [191/50, 969271/250000]; all of k6_18/20/23 for k5_11 and
-k6_23/27/28/29/30 for k5_16 are, A56/A61/A114 scoreboard). Over the first **876 distinct alive A57 records swept
-(of 1,693; the pass is resumable and still running, `results/t2_a5760_s{0,1}.jsonl`)**, **135 (node, slot) pairs on
-135 distinct nodes have `LANE_K′ + M ≤ 1` — 96 k5_11 + 39 k5_16, 88 at level 1 and 47 at level 2, by slot
-BR(0,1) 45 / TL(1,0) 40 / TR(0,0) 27 / BL(1,0) 22 / BL(1,1) 1 — every one with `LANE_K′ = 0` and `M = 1`**, i.e.
-the slot is met by the conditioned square alone, SLOT-CROWD's two non-pin meeters are impossible, and the node is
-DEAD by teleport into the (dead) extension class. Each carries a replayable `polycore_slot_lane_v1` certificate
-(`attempts/A141-polycore-lane/certs/slot_*.json`) — a finite cover of the slot-meeting poses whose every leaf is
-discharged by the container, by a certified separating axis, or by ONE rational point proved (exactly, A132
-`vertex_ok` = Lean `checkVertexInPBox`) to lie in every pose of the leaf box AND of a pin's or the conditioned
-square's box — and the independent checker `code/check141.py` passes 185 of 185 A141 certificates. Sample line per
-kill: 200,000 poses drawn, ≈ 1.2·10⁵ meeting the slot cell, **0 free**. Caveat A118-O1 stands: a LANE kill excludes
-class-S packings with EXACT pins, not the δ = 10⁻² slack family. At resume, retire these 135 (and their descendants)
-before any LP; the overlap with A131/A142's pin-clip kills is NOT yet measured.
-
-### Resume-block addendum (A145, 2026-09-07, append-only — the A57 owner folds this in)
-
-**Nine more open A57 nodes now carry a PASSing certificate, and the ranking that found them is on disk for all 448
-survivors.** A145 measured, per node, the share of the LP's dual-support WEIGHT that sits on placements the node's own
-hypothesis forbids — columns meeting `K'(B)` (A132's certified polygon core) or an exact pin core
-(`a_pin = 33873816211/68719476736`) — over the 448 nodes that survive A142's 465 minus A142's 17 exact-pin-clip kills:
-mean 0.411, median 0.400, 14 nodes at zero, 2 at 1.000
-(`attempts/A145-impossible-weight/results/impossible_weight.jsonl`; controls: 384,000 independent SAT tests, 0 unsound;
-40/40 agreement with A142 on the grid count). Re-solved with the exact cores in the hypothesis and the pool pruned by
-`K'` (A135's pipeline, 240 s, 900 s only at a knife edge), **18 nodes gave 10 LP kills and 9 certificates — 3 under the
-FROZEN `verify_case.py` (sha `521cb01f…`, exact cores only, no verifier change) and 6 under A135's `verify_case_v3.py`**:
-frozen `k5_16_interior_Y0017_D04`, `k5_11_interior_Y0164`, `k5_16_interior_Y1014`; v3 `k5_11_interior_{Y0241, Y0588_D06,
-Y0186_D05, Y1056_D01, Y0041_D03, Y0572}`. Six of the nine were already LP-dead work-owing FAILs that were only missing a
-certificate; **three are new kills** (`Y0241` τ 5.000000000063 → **3.250000**, `Y0588_D06` → 4.500000, `Y0186_D05` →
-4.000000). Certificates + reports + witness files: `attempts/A145-impossible-weight/certs/<id>__{exact,poly}.json`,
-ledger `results/resolves145.jsonl`. **The fraction is a predictor with a threshold:** 0 of 7 alive nodes below frac 0.45
-moved τ at all (mean drop exactly 0.000000), 4 of 5 above frac 0.60 killed. At resume, retire these 9 (and their
-descendants) and run the same pipeline down the ranking: **98 survivors sit at frac ≥ 0.60 (92 un-re-solved, ≈ 9 CPU-h
-at the measured 350 s/node) and 164 at frac ≥ 0.45 (155 un-re-solved, ≈ 15 CPU-h)** — the cheapest LP-bearing work in
-the campaign, and the 118 nodes below frac 0.30 should be de-prioritised for it, because on them the exact cores and
-the polygon provably buy the LP nothing.
+**A141 (2026-09-08, `polycore lane`, pure geometry, nothing in A57/A96 written).** A118's LANE-COUNT leaf re-run
+with A132's POLYGON cores K' -- and, for the pins, A135's EXACT pin core (K' of the pin's own zero-tilt box,
+half-side 1/2 - delta/sqrt2 at A57's m-hulled pins, not `pinguard`'s 0.48999997) -- at the USABLE SLOTS (a slot
+counts only where its extension class is certified dead on the closed window [191/50, 969271/250000]; all of
+k6_18/20/23 for k5_11 and k6_23/27/28/29/30 for k5_16 are, A56/A61/A114 scoreboard). **Sweep COMPLETE over all
+1,693 alive A57 records (1,368 A57 + A57box; 1,590 distinct nodes with A60):
+188 distinct alive A57 nodes have `LANE_K' + M <= 1` at some usable slot -- 96 k5_11 + 92 k5_16 -- and EVERY ONE
+has `LANE_K' = 0` with `M = 1`**, i.e. the slot is met by the conditioned square alone, SLOT-CROWD's two non-pin
+meeters are impossible, and the node is DEAD by teleport into the (already dead) extension class. By slot:
+k5_11 = BR(0,1) 45, TR(0,0) 27, TL(1,0) 23, BL(1,1) 1; k5_16 = BL(1,0) 54, TL(1,0) 38. 194 of the 244 kills over
+A57+A60 are level-1 and 50 level-2. **Overlap with the clip kills is essentially nil: of the 183 nodes in A131's 132 +
+A142's 17 A57 + 34 A60 exact-pin-clip lists (all 183 were in the swept corpus), exactly ONE --
+`k5_16_interior_Y0281_D03` -- is also an A141 slot kill, so 187 of the 188 A57 nodes are NEW** (`results/t6_overlap.json`).
+Each kill carries a replayable `polycore_slot_lane_v1` certificate (`attempts/A141-polycore-lane/certs/slot_*.json`):
+a finite cover of the slot-meeting poses whose every leaf is discharged by the container, by a certified separating
+axis, or by ONE rational point proved exactly (A132 `vertex_ok` = Lean `checkVertexInPBox`) to lie in every pose of
+the leaf box AND of a pin's or the conditioned square's box -- so the Lean consumer is
+`shared_point_same_square`, no polygon. The independent checker `code/check141.py` passes **294 of 294** A141
+certificates. Sample line per kill: 200,000 poses drawn, ~1.2e5 meeting the slot cell, **0 free**. Caveat A118-O1
+stands: a LANE kill excludes class-S packings with EXACT pins, not the delta = 1e-2 slack family. At resume, retire
+these 188 (and their descendants) before any LP.

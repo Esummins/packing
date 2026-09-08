@@ -173,3 +173,22 @@ kind can kill those corners. Of the remaining 16, a deep cover (`code/t5_deep.py
 `max_open = 9000`) certifies `LANE = 0` on ONE (`node_161` TR — a new kill), and the joint split
 on the first of the rest (`l1_159` TR, 291 pieces to depth 11, 554 s) leaves 218 pieces open.
 Conclusion: the near-miss population is a real 2-crowd population, not a counting artefact.
+
+### 8.3 The completed slot sweep (2026-09-08)
+
+All **1,693** alive A57/A60 records (1,368 A57 + A57box, 325 A60 trump5; 1,590 distinct nodes)
+were swept: 6,859 (node, slot) verdicts — 4,750 `LANE ≥ 2`, 1,790 near-miss-or-worse, 1,655
+undecided, 163 near-miss, **256 KILL on 244 distinct nodes** (188 A57 = 96 k5_11 + 92 k5_16, and
+56 A60 trump5). **Every kill is `LANE_K′ = 0` with `M = 1`** — the slot is met by the conditioned
+square alone. By class and slot: k5_11 BR(0,1) 45, TR(0,0) 27, TL(1,0) 23, BL(1,1) 1; k5_16
+BL(1,0) 54, TL(1,0) 38; trump5 BR(0,1) 45, TL(0,0) 11. By level: 194 level-1, 50 level-2.
+
+**Incremental attribution** (`results/t6_overlap.json`): the exact-pin-clip lists — A131's 132
+(`backlog_kills.jsonl`) plus A142's 17 A57 and 34 A60 (`exactclip_kills_a{57,60}.jsonl`), 183
+distinct nodes, **all 183 present in the swept corpus** — intersect A141's 244 in exactly ONE
+node, `k5_16_interior_Y0281_D03`. So **243 of the 244 are new**, and the two leaves are
+essentially disjoint: a clip kill empties the hypothesis box, a lane kill says a usable slot is
+singly met.
+
+244 `polycore_slot_lane_v1` certificates; with the k0 corner set the attempt now has **294
+certificates, all PASS `check141.py`**.
