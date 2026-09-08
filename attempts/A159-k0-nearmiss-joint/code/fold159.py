@@ -37,6 +37,8 @@ def main():
                                                                  "twocrowd159.jsonl"))}
     uw = {(r["cell"], r["corner"]): r for r in load(os.path.join(BASE, "results",
                                                                  "unwiden159.jsonl"))}
+    sl = {(r["cell"], r["corner"]): r for r in load(os.path.join(BASE, "results",
+                                                                  "sampleline159.jsonl"))}
     sp = load(os.path.join(BASE, "results", "split159.jsonl"))
     spd = {(r["cell"], r["corner"]): r for r in sp}
     # the deeper pass supersedes the shallow record for the cells it re-ran
@@ -60,6 +62,11 @@ def main():
         w = xw.get(k)
         t = tc.get(k)
         s = spd.get(k)
+        q = sl.get(k)
+        # a uniform-draw hit is a realised two-crowd too (each was re-verified exactly); the
+        # cross-check between the optimiser and the uniform draws caught one the optimiser missed
+        hit_w = bool(q and q["widened"]["hits"] > 0)
+        hit_u = bool(q and q["unwidened"]["hits"] > 0)
         rec = dict(
             cell=cid, corner=corner, camp="k0", leaf="polycore_split_lane",
             attempt="A159", record=rows[cid].get("record"), level=rows[cid].get("level"),
@@ -87,12 +94,18 @@ def main():
             unwidened_lane_ub=(uw[k]["lane_ub"] if k in uw else None),
             unwidened_M=(uw[k]["M"] if k in uw else None),
             unwidened_kill_s0_only=(bool(uw[k]["kill"]) if k in uw else None),
-            twocrowd_exact_widened=bool((w and w["SURVIVES"])
+            twocrowd_exact_widened=bool((w and w["SURVIVES"]) or hit_w
                                         or (t and (t["widened"].get("exact") or {})
                                             .get("SURVIVES"))),
+            twocrowd_realised_unwidened=bool(hit_u
+                                             or (t and (t["unwidened"].get("exact") or {})
+                                                 .get("SURVIVES"))),
+            sample_line=(dict(widened=q["widened"], unwidened=q["unwidened"],
+                              consistent_with_optimiser=q["consistent_with_optimiser"])
+                         if q else None),
             verdict=("KILL" if (s and s["closed"]) else
                      ("REFUTED-BY-EXACT-TWO-CROWD"
-                      if ((w and w["SURVIVES"])
+                      if ((w and w["SURVIVES"]) or hit_w
                           or (t and (t["widened"].get("exact") or {}).get("SURVIVES")))
                       else "OPEN")),
         )
@@ -135,7 +148,7 @@ def main():
                             % (r["corner"], ("%.3e" % r["twocrowd_J_unwidened"])
                                if r["twocrowd_J_unwidened"] is not None else "n/a",
                                "two-crowd REALISED there too"
-                               if (r["twocrowd_J_unwidened"] or -1) > 0
+                               if r["twocrowd_realised_unwidened"]
                                else "mutually exclusive there, as the PI reads"))
             else:
                 bits.append("%s NEAR-MISS, joint split did NOT close (A159: %s pieces, %s open, "

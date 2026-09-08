@@ -125,17 +125,36 @@ the file says so in its own docstring, and no certificate is emitted from a nega
 
 | | widened box (`w = W0`) | unwidened cell (`w = 0`) |
 |---|---|---|
-| realised two-crowd (exact) | **30 of 44** | **8 of 44** |
+| realised two-crowd (exact) | **30 of 44** | **9 of 44** |
 | of those, new (A141 had no witness) | 2 (`node_117` TR, `s2_near_046_619` BL) | — |
-| no two-crowd found | 14 | 36 |
-| of those, joint optimum exactly tangent (`|J| < 10⁻⁹`) | — | **17** |
+| no two-crowd found | 14 | 35 |
+| of those, joint optimum exactly tangent (`|J| < 10⁻⁹`) | — | **16** |
 
-The eight corners where the PI's reading is **false** even at `TR(0,0)`: `l1_192_plain_warm`,
-`node_150`, `node_187`, `node_192`, `node_193`, `node_194`, `node_195` (TR) and
-`s2_near_046_619` (BL) — each with an exactly re-verified pair, `J` from `6.9·10⁻⁴` to
-`7.4·10⁻²`. On the other 36 the sup of `J` is `≤ 0`, and on 17 of them it is 0 to `10⁻⁹`: the two
+The nine corners where the PI's reading is **false** even at `TR(0,0)`: `l1_192_plain_warm`,
+`l1_192_sh3_warm`, `node_150`, `node_187`, `node_192`, `node_193`, `node_194`, `node_195` (TR) and
+`s2_near_046_619` (BL) — each with an exactly re-verified pair, `J` from `9.1·10⁻⁴` to
+`7.4·10⁻²`. On the other 35 the sup of `J` is `≤ 0`, and on 16 of them it is 0 to `10⁻⁹`: the two
 squares can reach the plain corner cell only in a mutually tangent, measure-zero configuration.
 That is the PI's reading, quantified — and tight.
+
+## 6d. The sample line, and the cross-check that earned its keep
+
+`code/sampleline159.py` gives the convention's *drawn → tested → hits* line, with the same
+from-scratch SAT `check159.py` uses: per corner and per width, **20,000** poses of `H` drawn
+uniformly in `B`, kept when inside the container and meeting `int` of the corner box (that is
+`B_meet` at pose level — the only region the joint split has to work in), and up to 400 of the
+survivors tested against ~40,000 free candidate squares that meet the same box.
+
+On the **14** corners with no realised two-crowd: `H_in_B_meet` between 16,584 and 20,000, and
+**0 hits at both widths** — the sampled counterpart of the split's failure to find anything to
+kill. (`s3_far` draws 0 poses meeting the box at all, consistent with its `deepest_H = −1.94`.)
+
+The two tests are cross-checked against each other (`consistent_with_optimiser`), and the check
+paid for itself: on **`l1_192_sh3_warm` TR at `w = 0`** the uniform draw found a hit where the
+optimiser had returned `J ≤ 0`. Re-verified exactly at 60 dps it is real — `H` penetrates the
+unwidened cell by `1.05·10⁻²`, the free square by `9.74·10⁻²`, separation `9.05·10⁻⁴` — so the
+unwidened count is **9**, not 8. Everything else agrees: 43 of 44 consistent, and no widened-box
+hit anywhere the optimiser found nothing.
 
 Two corners have **no pose of the conditioned square reaching `TR(0,0)` at all**
 (`deepest_H < 0`): `node_117` (`−1.20·10⁻²`) and `s3_far` (`−1.96`). `node_117` was therefore

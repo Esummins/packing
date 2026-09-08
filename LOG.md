@@ -6738,11 +6738,11 @@ it is the joint statement. Maximise `J = min(depth(Q_H, C), depth(Q_F, C), gap(Q
 slack_H, slack_F)` over `H ∈ B` and a free `F`; `J > 0` **is** a realised two-crowd. Staged
 multistart (deepest-H first, then best-F against it, then a 6-D polish), every positive hit
 re-verified exactly. At the widened box: **30 of 44** near-miss corners (2 that A141 never
-recorded — `node_117` TR, `s2_near_046_619` BL). At the unwidened cell: **8 of 44** —
-`l1_192_plain_warm`, `node_150`, `node_187`, `node_192`, `node_193`, `node_194`, `node_195` (TR)
-and `s2_near_046_619` (BL), `J` from 6.9·10⁻⁴ to 7.4·10⁻², so the reading is **false** on those
-eight. On the other 36 the supremum is `J ≤ 0`, and on **17** it is 0 to 10⁻⁹: the two squares can
-reach `TR(0,0)` only in a mutually tangent, measure-zero configuration. The reading is right on 36
+recorded — `node_117` TR, `s2_near_046_619` BL). At the unwidened cell: **9 of 44** —
+`l1_192_plain_warm`, `l1_192_sh3_warm`, `node_150`, `node_187`, `node_192`, `node_193`, `node_194`,
+`node_195` (TR) and `s2_near_046_619` (BL), `J` from 9.1·10⁻⁴ to 7.4·10⁻², so the reading is **false** on those
+nine. On the other 35 the supremum is `J ≤ 0`, and on **16** it is 0 to 10⁻⁹: the two squares can
+reach `TR(0,0)` only in a mutually tangent, measure-zero configuration. The reading is right on 35
 of 44, and **tight**.
 
 **Lemma A159-1 (why the joint split's target set is only 14 corners).** If some `H* ∈ B_j` and a
@@ -6778,6 +6778,18 @@ max_leaves 400,000`) still cannot *prove* the exclusion, so no certificate. `M =
 records means "not proved excluded", not "can meet". A `w = 0` kill would anyway be **s0-only**:
 `W0` is exactly the pad that makes one fixed corner box serve every side in `W = [3.82, s0]`.
 
+**The sample line, and the cross-check that earned its keep (`code/sampleline159.py`).** Per
+corner and per width: **20,000** poses of `H` drawn uniformly in `B`, kept when inside the
+container and meeting `int` of the corner box (that is `B_meet` at pose level), and up to 400 of
+the survivors tested against ~40,000 free candidates meeting the same box, with the from-scratch
+SAT. On the **14** corners with no realised two-crowd: 16,584-20,000 poses in `B_meet` and
+**0 hits at both widths** (`s3_far` draws none at all, matching `deepest_H = -1.94`). The uniform
+draws are cross-checked against the optimisation, and the check paid for itself: on
+**`l1_192_sh3_warm` TR at `w = 0`** a uniform hit turned up where the optimiser had returned
+`J <= 0`; re-verified exactly at 60 dps it is real (`H` into the unwidened cell 1.05e-2, free
+square 9.74e-2, separation 9.05e-4), which is why the unwidened count above is 9 and not 8.
+43 of 44 consistent, and no widened-box hit anywhere the optimiser found nothing.
+
 **Verification.** `code/check159.py` is A141's `check141.py` (attempt-local copy; A141 is
 read-only) extended with **C7** the `B_meet`/`B_miss` ledger and the burden each side carries,
 **C8** a contradiction guard that FAILS any kill certificate at a corner carrying a proved realised
@@ -6794,7 +6806,7 @@ from every lane leaf forever, for ~0.1 CPU-s, and should be screened before any 
 spent (A157 measured the same economics on the A57 slots: cheap sampling beats cover depth by ~17×
 in cells-decided-per-second); (b) the C8 guard, which makes that check mechanical for every future
 certificate; (c) the measurement that the k0 two-crowd is a **pad** phenomenon (0 of 28 recorded
-witnesses survive at `w = 0`; 17 of 44 corners are exactly tangent there), which is A155's pad
+witnesses survive at `w = 0`; 16 of 44 corners are exactly tangent there), which is A155's pad
 result reached from the other side and says where a pad-free (s0-only) leaf could bite.
 
 **Files.** `attempts/A159-k0-nearmiss-joint/` (`BRIEF.md`, `notes/method.md`; `code/xwitness159.py`,
