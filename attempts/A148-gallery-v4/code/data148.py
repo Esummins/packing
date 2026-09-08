@@ -117,6 +117,17 @@ def tbl(name):
         v = _j(os.path.join(A142, "results", "population142.json"), {}) or {}
     elif name == "a144":
         v = {r["id"]: r for r in _jl(os.path.join(A144, "results", "offline144.jsonl"))}
+    elif name == "a145":
+        v = {}
+        for f in sorted(glob.glob(os.path.join(ATT, "A145-impossible-weight", "results",
+                                               "resolves145*.jsonl"))):
+            for r in _jl(f):
+                v[r["id"]] = r
+        for f in sorted(glob.glob(os.path.join(ATT, "A137-night-shift-2", "results",
+                                               "resolve*.jsonl"))):
+            for r in _jl(f):
+                if r.get("id"):
+                    v[r["id"]] = r
     elif name == "corpus131":
         v = {r["id"]: r for r in _jl(os.path.join(A131, "results", "corpus131.jsonl"))}
     else:
@@ -190,6 +201,10 @@ def night_kills():
         for r in _jl(f):
             if str(r.get("verdict", "")).startswith("KILL") and r.get("nid"):
                 out.setdefault(r["nid"], f"A141 K' lane leaf on {r.get('corner', r.get('slot'))}")
+    for nid, r in tbl("a145").items():
+        if str(r.get("result", "")).startswith("PASS"):
+            out.setdefault(nid, f"A145/A137 exact-core re-solve certified dead ({r['result']}, "
+                                f"tau {r.get('tau')})")
     a137 = os.path.join(ATT, "A137-night-shift-2", "results")
     for f in sorted(glob.glob(os.path.join(a137, "*.jsonl"))):
         for r in _jl(f):
@@ -428,6 +443,16 @@ def finish(node):
                     f"(eta {ex['eta']:+.2e}), converged {ex['converged']}, "
                     f"{ex.get('support')} support columns"
                     + (" — KILL" if ex.get("kills") else " — no kill")
+                    + "; that run stored counts, not placements, so the support drawn here is "
+                      "still the stock one.")
+    a145 = tbl("a145").get(node["id"]) if node["camp"] != "k0" else None
+    if a145:
+        bits.append(f"A145/A137's EXACT-CORE re-solve of this node (a_used exact on "
+                    f"{a145.get('frac_exact')} of its cores, cap {a145.get('cap')} s) reached tau "
+                    f"{a145.get('tau')} (eta {a145.get('eta')}), converged "
+                    f"{a145.get('converged')}, {a145.get('support')} support columns — result "
+                    f"{a145.get('result')}"
+                    + (f", certificate {a145.get('verifier')}" if a145.get("verifier") else "")
                     + "; that run stored counts, not placements, so the support drawn here is "
                       "still the stock one.")
     if iv and iv.get("tau") is not None:
