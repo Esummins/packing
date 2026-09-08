@@ -6646,3 +6646,161 @@ of record is `attempts/A150-four-corner-product/notes/composition.md`.
   `no_k5_16_interior_Y1014__TL1_0__r0.1_tt10.json` (+ report); `BRIEF.md`, `notes/method.md`,
   `notes/leaf.md`), plus appends to `attempts/A57-shadow-trees/PAUSED.md`,
   `attempts/A60-trump5-campaign/notes/ledger.md` and `docs/residue_ledger.md` §1.
+
+## 2026-09-08 — A158b-slot-split addendum (Opus engineer) — the YES child as an LP node, and the mutual clip
+- **Two coordinator/PI corrections, both run.** (i) The YES child is an ordinary LP node, not a lane
+  leaf: `pins + H + the slot box S`, `budget = 11 − #cores = 4`, A135 exact cores on all 7 boxes,
+  `S` an ordinary second core in the frozen `case-measure-certificate-v1` schema. (ii) Before it,
+  the two conditioned boxes are mutually clipped with A131's pin-clip, each box's own core in the
+  pin's role, then `K'` rebuilt and the lane test re-run on the clipped cores.
+- **Extra soundness gate**: A135's `ExactHyp` only checks `cores[:n−1]` pairwise disjoint; with `S`
+  appended `K(S)` would go unchecked and, if it met `K(H)`, the two hypotheses could be witnessed by
+  the SAME square and the budget would be 5, not 4. `cores_pairwise_disjoint` is re-run over all 7
+  (min gap 0.0000 on A60's exact pins, 0.0141 on A57's `δ = 10⁻²` pins).
+- **The YES-child LP lands exactly back on the knife edge: 12 of 12 sub-cases (6 cells × 2 tilt
+  pieces), all converged, `τ = 4.000000 = budget`, `η = 0`** (3.4–80.4 s each). This is the general
+  obstruction stated exactly: adding the slot square removes **exactly one** unit of dual packing
+  *and* **exactly one** unit of budget, so the YES child returns to `τ = budget` — the same 1 the NO
+  child removes from `τ` alone. The dual weight in `S` is exactly 1 on **730 of the 1,238** selected
+  records, so on that whole sub-population **the split is structurally neutral** and no amount of
+  compute changes it.
+- **The mutual clip bites, and the PI's prediction about `K'(H)` is confirmed.** At `S(0.10, 10°)`:
+  `H`'s box keeps 0.5003 of its area on `c0_Y0787` (0.4714 by volume at `nsub = 4`), 0.6273 on
+  `Y0147`, 0.8865 on `c0_Y0076`, 1.0000 on `Y0130`/`Y1110`; `K'(H)` grows ×1.126 on `c0_Y0787`
+  (0.590298 → 0.664416), ×1.066 on `Y0147`, ×1.027 on `c0_Y0076`; `S`'s box keeps 0.7439/0.7265 on
+  `c0_Y0959`/`Y0147` with **two empty tilt sub-bins** at `nsub = 4`. (The core handed to A131 is the
+  largest axis-aligned square inscribed in `K'`, strictly smaller than `K'`, so the clip removes less
+  than the truth — sound, and A131 is imported unchanged.)
+- **What actually changed the lane test was the CLAMP, not the clip.** The LP framing writes `S` in
+  the world frame clamped to `[1/2, s0 − 1/2]`, which for a corner slot halves the centre box
+  (`c0_Y0076`: `0.2 × 0.2 → 0.1 × 0.1`) and fattens `K'(S)` from 0.566 to 0.736. With that core the
+  400,000-pose screen stops refuting on two cells.
+- **`k5_11_interior_Y1110 TR(0,0)`: `LANE_K'(C | S, H_clipped) = 0` is CERTIFIED on BOTH tilt pieces**
+  — 36 and 35 leaves, **0 open**, 36 s and 37 s. First empty conditional lane cover ever obtained.
+  The kill then needs `M(C | S, H_clipped) = 0`, and that is where it stops: the screen finds no
+  meeting pose of the clipped `H` box clear of the other cores in 100,000 draws, but
+  `cond_can_meet`'s cover discharges **ZERO** leaves — `(max_depth 40, max_open 5,000)` → 0 leaves /
+  5,001 open / 21.8 s; `(42, 40,000)` → 0 leaves / 40,001 open / 183.8 s. The reason is structural,
+  not budgetary: `H_clipped` sits at frame `[1.374, 1.519]²` with `hmax ≈ 0.686`, so
+  `box_misses_cell` needs `x0 ≥ 1.686` and can never fire, the container prune never fires on an
+  interior box, and the shared-point discharge finds nothing — the DFS fills its open budget in one
+  corner. A third rung was stopped at 674 s rather than bought.
+- **`c0_Y0076` is NOT dead by the split, on either route.** YES-by-LP `τ = 4 = budget` on both
+  pieces; YES-by-lane blocked with the open set GROWING with depth (159 → 270 → 646 at
+  `(22, 8k) → (24, 30k) → (26, 60k)`), and piece 1 has `M_lb = 1` outright. Its NO child stands
+  certified (frozen `verify_case` PASS), so no `A136 closures` record is written — there is no
+  closure. `c0_Y0787` and `c0_Y0959` are refuted on the lane side even after the clip (free meeter
+  realised at clearance 4.37·10⁻² and 1.23·10⁻¹); `Y0130`/`Y0147` have `lane_lb = M_lb = 1`.
+- **Verdict on the population**: do not run the split over the 1,238 records. The YES-child LP costs
+  4–80 s per sub-case and always returns `τ = budget` for the accounting reason above; the geometric
+  route needs an `M` cover whose prune set is empty by construction whenever `H` is interior.
+- **Cost** ≈ 0.7 CPU-h of the +2 CPU-h extension (12 YES-child LPs, 24 clip LPs, 12 clip+lane
+  screens at 400,000 poses, 7 lane-cover rungs, 2 M-cover rungs + 1 stopped). One A158 python at a
+  time throughout; the launcher waited for a slot (the box sat at 16 from the other campaigns for
+  much of the window and one launch was refused outright).
+- Files added under `attempts/A158-slot-split/`: code `yeslp158.py`, `clip158.py`,
+  `lanedeep158.py`, `mdeep158.py`, `run158g.ps1`; results `yeslp158.jsonl`, `clip158.jsonl`,
+  `lanedeep158.jsonl`, `mdeep158.jsonl`, `{y0076,y1110,five,deep}_job*.jsonl`;
+  `notes/addendum_b.md`. No certificate was emitted by either route.
+
+## 2026-09-08 — A159-k0-nearmiss-joint (Opus engineer) — done-negative
+
+**The question.** The PI, on `docs/shadows/k0v4/l1_124.svg`: *"TR(0,0) cannot be doubly met — two
+squares can each touch the corner cell but they are mutually exclusive."* A141 recorded that
+corner as NEAR-MISS with a *realised* two-crowd (`results/t5_twocrowd.json`); A148 drew the same
+witness and measured H reaching **−0.026 to −0.036** into the corner, and blamed a corner-frame
+transport bug. One of the two had to be wrong.
+
+**Neither was. The frame was never the problem, and the two measurements were taken against two
+different rectangles.** `polylane.corner_cell` / `centre_window` are CONTAINER-frame
+(TR = `[2.8515739257860595, 3.877084]²`), and A141's recorded H lies inside its own box `B` in
+that frame and in none of the other seven D4 images — so A141's poses need no transport, and the
+LOG's earlier "A141 and A157 run the lane test in the cell's corner frame" over-attributes
+**A157's** bug (A148's own `data148.py` gets A141 right and says so in its docstring). What A148's
+page drew is `depth_into_cell` against `cell_rect`, the **plain unit cell** `[s0−1, s0]²`, while
+the leaf is stated over the **widened** box of Lemma K0-WIDEN — and the two differ by exactly
+`W0 = (s0/3.82 − 1)(1 + 1/√2) = 0.0255100742139405`. `−0.026` against the unit cell is a hair on
+the *other* side of zero against the widened box.
+
+**T1 — exact re-examination (`code/xwitness159.py`, `mpmath.iv` at 60 dps, complete SAT over the
+4+4 edge normals; every reported sign from an enclosure that does not straddle 0):** **28 of 28**
+of A141's witnesses survive. Free square inside the container, H's pose inside `B`, both meeting
+`int` of the widened box, interior-disjoint. H penetrates the widened box by **1.84·10⁻⁵**
+(`l1_124`, the PI's own page) to **1.87·10⁻¹**; the free square by 8.6·10⁻⁴ to 1.02; separations
+1.8·10⁻³ to 9.7·10⁻². A141's gaps reproduce to nine digits. **No witness is bogus.**
+
+**And the PI is right about `TR(0,0)`.** In **0 of the 28** do *both* squares meet the unwidened
+cell: H misses it in 25 (by +0.0083 to +0.0360), the free square in the other 3 (+0.0138 to
++0.0246). Every recorded two-crowd lives entirely on the 0.0255-wide K0-WIDEN annulus.
+
+**T1c — the reading tested directly (`code/twocrowd159.py`).** The reading is not `LANE + M ≤ 1`;
+it is the joint statement. Maximise `J = min(depth(Q_H, C), depth(Q_F, C), gap(Q_F, Q_H),
+slack_H, slack_F)` over `H ∈ B` and a free `F`; `J > 0` **is** a realised two-crowd. Staged
+multistart (deepest-H first, then best-F against it, then a 6-D polish), every positive hit
+re-verified exactly. At the widened box: **30 of 44** near-miss corners (2 that A141 never
+recorded — `node_117` TR, `s2_near_046_619` BL). At the unwidened cell: **8 of 44** —
+`l1_192_plain_warm`, `node_150`, `node_187`, `node_192`, `node_193`, `node_194`, `node_195` (TR)
+and `s2_near_046_619` (BL), `J` from 6.9·10⁻⁴ to 7.4·10⁻², so the reading is **false** on those
+eight. On the other 36 the supremum is `J ≤ 0`, and on **17** it is 0 to 10⁻⁹: the two squares can
+reach `TR(0,0)` only in a mutually tangent, measure-zero configuration. The reading is right on 36
+of 44, and **tight**.
+
+**Lemma A159-1 (why the joint split's target set is only 14 corners).** If some `H* ∈ B_j` and a
+free `F` are interior-disjoint with both meeting `int C`, then `lane_corner_split(C, ·, j)` can
+never close: the piece `B_k ∋ H*` has `K'(B_k) ⊆ Q(H*)`, so `F` misses `K'(B_k)` and any sound
+`lane_ub` is `≥ 1`; and `H* ∈ B_k` meets `C`, so `m_j = 1`; total `≥ 2 > 1`. (All 30 cells carry
+exactly one conditioned box, so `F` misses *every* core.) Hence the split is dead on 30 of the 44
+by theorem, not by budget, and its whole target set is the other 14.
+
+**T3 — THE CANARY IS CLEAN.** `l1_153` is a Trump image (doubly met at every corner in the widened
+sense by construction, A143/A150), and T1 gives it an *exact* witness. Running the full split
+there starved at BelowNormal, so the canary was sharpened into its decisive form
+(`code/canary159.py`): walk the deterministic `split_box` chain that contains `H*` and run the
+ordinary leaf on each piece. Over **15 depths** the piece containing `H*` keeps `m_j = 1`,
+`lane_ub = 1`, `M_other = 0`, **total = 2**, and the exact free square stays clear of `K'(piece)`
+throughout (−0.0731 → −0.0088). Exactly as Lemma A159-1 requires. Nothing withdrawn.
+
+**T2 — the joint split closes 0 of 9 box classes, and it is geometry, not budget.** `l1_158`
+(depths 9 and 15), `l1_159` (= `l1_159_plain_warm` = `l1_159_sh3_warm` = `node_159`),
+`l2_p114_011`, `l3_pp114_001_000`, `node_120`, `node_125`, `node_151`, `node_160`. Every open
+piece has `open_reasons.no_lane_bound = 0` — it carries a **certified** `lane_ub ≥ 1`, i.e. a free
+meeter that provably survives `K'(piece)`, with `m_j = 1` on the same piece. `B_miss` is **empty**
+on every class: no sub-box of `B` can be certified to miss the widened corner box, so the split
+never gets the cheap half of its dichotomy. And refining makes it worse: `l1_158` goes 15 → **349**
+open pieces from depth 9 to depth 15 while closures only rise 23 → 146 — the same frontier
+doubling A157 measured on the A57 slot covers.
+
+**T1b — the unwidened leaf kills 0 of 44** (`code/unwiden159.py`; every record carries
+`scope: s0_only` and `cell_kind: k0_corner_unwidened` so nothing downstream can bank it as a window
+kill). Two corners have no pose of H reaching `TR(0,0)` at all (`node_117` −1.20·10⁻², `s3_far`
+−1.96); a 6×-budget retry on `node_117` (`depth0 24, max_depth 40, max_open 9,000,
+max_leaves 400,000`) still cannot *prove* the exclusion, so no certificate. `M = 1` in these
+records means "not proved excluded", not "can meet". A `w = 0` kill would anyway be **s0-only**:
+`W0` is exactly the pad that makes one fixed corner box serve every side in `W = [3.82, s0]`.
+
+**Verification.** `code/check159.py` is A141's `check141.py` (attempt-local copy; A141 is
+read-only) extended with **C7** the `B_meet`/`B_miss` ledger and the burden each side carries,
+**C8** a contradiction guard that FAILS any kill certificate at a corner carrying a proved realised
+two-crowd (30 such corners), and **C9** an independent sample line with a from-scratch SAT. It
+imports nothing from the emitter. Run over all **294** existing A141 certificates: **294 PASS,
+0 fail**.
+
+**Bottom line: 0 certificates, 0 cells removed, no budget row credited.** The eleven
+converged-alive k0 cells stay eleven. Cost ~**1.9 CPU-h** of a 3 CPU-h cap (wall, not CPU, was
+binding — 10 other lab processes; two processes at BelowNormal, affinity 0xFFFF, throughout).
+
+**What is deployable from this.** (a) Lemma A159-1 — one exact two-crowd witness retires a corner
+from every lane leaf forever, for ~0.1 CPU-s, and should be screened before any cover budget is
+spent (A157 measured the same economics on the A57 slots: cheap sampling beats cover depth by ~17×
+in cells-decided-per-second); (b) the C8 guard, which makes that check mechanical for every future
+certificate; (c) the measurement that the k0 two-crowd is a **pad** phenomenon (0 of 28 recorded
+witnesses survive at `w = 0`; 17 of 44 corners are exactly tangent there), which is A155's pad
+result reached from the other side and says where a pad-free (s0-only) leaf could bite.
+
+**Files.** `attempts/A159-k0-nearmiss-joint/` (`BRIEF.md`, `notes/method.md`; `code/xwitness159.py`,
+`twocrowd159.py`, `unwiden159.py`, `split159.py`, `canary159.py`, `check159.py`, `fold159.py`;
+`results/xwitness159.jsonl`, `twocrowd159.jsonl`, `unwiden159.jsonl`, `unwiden159_deep.jsonl`,
+`split159.jsonl`, `split159_deep.jsonl`, `canary159.jsonl`, `check159_audit.json`,
+`joint_kills159.jsonl`; `logs/`), plus the four named appends: A115 `notes/t6_report.md` hand-off
+list, `docs/budget.md` k0 row, `docs/residue_ledger.md` §4, and a new `polycore_status` column in
+`docs/shadows/k0v4/review_k0v4.csv`.
