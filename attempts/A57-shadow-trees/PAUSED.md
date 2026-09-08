@@ -335,3 +335,22 @@ This is the combination v1 called "worth pricing", and it priced well: **11 kill
 and 7.28 CPU-hours**, against 149 certified kills from 296 fresh emissions across three shards
 over the same window. 360 of the 383 queued ALIVE nodes remain un-rechecked. On a box with
 limited process budget, **spend it here before opening new shards.**
+
+### Resume-block addendum (A142, 2026-09-07, append-only — the A57 owner folds this in)
+
+**17 further open A57 nodes are dead by geometry alone, with replayable certificates already written.** A131's
+pin-clip is deployed at the STOCK pin core `a_pin = 1/2 − δ = 0.49`; A135's `exactcore` certifies the pin's
+guaranteed core to be `a_pin = 33873816211/68719476736 = 0.49292890196375083` (corner-by-corner rational vertex
+test; the frozen verifiers take the half-side VERBATIM, so no verifier or Lean change is needed). Re-run at that
+half-side the clip empties **17 of the 465 surviving work-owing nodes** that the deployed clip does **not** see —
+`k5_11_interior_{Y0930, Y0997, Y1002, Y1099, Y0041_D02, Y0414_D02, Y0978_D05, Y1002_D05, Y1134_D06, Y1134_D07}`
+and `k5_16_interior_{Y0449, Y0648, Y0809, Y0930, Y0997, Y1002, Y1099}` (L1 11, L2 6; k5_11 10, k5_16 7) — and
+narrows 272 more (mean kept volume 0.602 → 0.584). Certificates in A131's own
+`pin-clip-kill-certificate-v1` format, each carrying the exact `a_pin`, the A135 `exactcore` certification of
+every pin box, and the full per-sub-bin replay trace:
+`attempts/A142-a57-review-gallery/certs/a57/<id>.clipkill.json`, ledger
+`attempts/A142-a57-review-gallery/results/exactclip_kills_a57.jsonl`. **A131's independent checker
+`checkclip131.py` passes all 17 unchanged (0 FAIL)**; sampled confirmation 204,000 drawn poses, 0 pin-free hits;
+16 single-pin witnesses, 1 two-pin joint; 0 of the 17 are emptied by the deployed T5″ trim alone. Nothing in
+A57 or A96 was written — at resume, retire these 17 (and their descendants; none is currently open) before any
+LP, and consider raising `pinclip.A_PIN` to the exact core at emission, which is the same change for free.

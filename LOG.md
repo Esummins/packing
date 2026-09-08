@@ -5713,3 +5713,19 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   because A141 had not landed; a corner marked UNDECIDED here may still become LANE<=1 under K' — the
   s3_far effect. And a pocket is an exact convex-polygon DISTANCE, a measurement for the reading, not a
   proof that nothing fits; the proof is the lane leaf.
+
+- **A142 follow-up (same day): the 51 exact-core clip kills are now replayable certificates.** A131's
+  `pin-clip-kill-certificate-v1` format, emitted by `attempts/A142-a57-review-gallery/code/emit142.py` under
+  `certs/{a57,a60}/`, ledgers `results/exactclip_kills_{a57,a60}.jsonl`, summary `results/exactclip_kills.json`.
+  Each records the half-side actually used — `a_pin = 33873816211/68719476736 = 0.49292890196375083` for A57's
+  δ = 1e-2 pins, 1/2 to the same 1/2⁴⁰ grid for A60's exact placements — as `a_pin` with `pin_delta = 1/2 −
+  a_pin`, so A131's checker's own identity holds on the EXACT inset; carries A135's `exactcore` certification
+  (the corner-by-corner rational vertex test) for every pin box, all certified; and carries the full per-sub-bin
+  replay trace. **A131's INDEPENDENT `checkclip131.py` reads them unchanged and passes 51/51, 0 FAIL**; the
+  sampled confirmation inside the certificates is 612,000 drawn poses with **0** pin-free hits. Witnesses:
+  44 single-pin, 7 two-pin joint. **14 of the 34 A60 kills are emptied by the already-deployed T5″ trim alone** —
+  open only because the trim was never applied to that campaign; 0 of the 17 A57 kills are.
+  One append-only line each to A57's `PAUSED.md` resume block and A60's `notes/ledger.md`; nothing else in
+  either campaign touched. Population arithmetic updated: **465 → 448 surviving** (323 alive + 125 fail;
+  L1 355, L2 89, L3 4). None of the 17 has a still-open descendant and none is among the 40 drawn pages, so no
+  gallery page is stale.

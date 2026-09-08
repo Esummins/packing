@@ -13,9 +13,10 @@ Start from A131's corpus (`attempts/A131-pin-clip/results/corpus131.jsonl`): of 
 | A135 LP kills certified through the verifier | 3 | 3 | 2 | 140 |
 | A124 trim-empty ALIVE nodes (zero-LP sweep) | 54 | 54 | 0 | 140 |
 | descendants of anything killed (monotonicity) | 824 | 2 | 2 | 142 |
-| **surviving** | | | | **607 - 142 = 465** |
+| **A142 pin-clip at the EXACT pin core** (certificates below) | 17 | 17 | 17 | 159 |
+| **surviving** | | | | **607 - 159 = 448** |
 
-**465 nodes survive: 330 ALIVE + 135 FAIL**, by level L1 366, L2 95, L3 4, by class k5_11 243, k5_16 222. The four kill lists overlap heavily - the 54 A124 trim-empty nodes are ALL already inside the 132 pin-clip kills, and 54 of the 64 polygon kills are too, which is why 253 list entries remove only 142 nodes.
+**448 nodes survive: 323 ALIVE + 125 FAIL**, by level L1 355, L2 89, L3 4, by class k5_11 233, k5_16 215. The first four kill lists overlap heavily - the 54 A124 trim-empty nodes are ALL already inside the 132 pin-clip kills, and 54 of the 64 polygon kills are too, which is why 253 list entries remove only 142 nodes. The last row is this attempt's own: 17 further nodes die to the SAME clip re-run at A135's certified exact pin core (section 2b), taking the population from 465 to 448. None of the 17 has a still-open descendant in the population, and none of them is among the 40 pages drawn below, so no page here is stale.
 
 A60's alive population is the **283 nodes with an LP support** in A107's `shadow_nodes.json`; they are all at depth j = 0 (level 1) and none has emitted a child.
 
@@ -50,6 +51,8 @@ A131 deployed the clip with the STOCK pin core half-side `A_PIN = 1/2 - delta = 
 * **A57**: over all 465 surviving nodes the deployed stock-core clip empties **0** (the correct control - the 132 stock-clip kills were already removed from this population), and the exact-core clip empties **17**. Those **17 are NEW T5''' logic kills**, free, geometry only: `k5_11_interior_Y1002`, `k5_11_interior_Y0041_D02`, `k5_11_interior_Y0414_D02`, `k5_11_interior_Y0930`, `k5_11_interior_Y0978_D05`, `k5_11_interior_Y1002_D05`, `k5_11_interior_Y1134_D06`, `k5_11_interior_Y1134_D07`, `k5_16_interior_Y0930`, `k5_16_interior_Y0997`, `k5_16_interior_Y1002`, `k5_16_interior_Y0449`, `k5_16_interior_Y0648`, `k5_16_interior_Y0809`, `k5_11_interior_Y0997`, `k5_11_interior_Y1099`, `k5_16_interior_Y1099`.
 * **A60 has never been clipped at all.** Its pins are EXACT placements (box `x0 = x1`), so the guaranteed pin core is the whole unit square, `a_pin = 1/2`. Of the 283 A60 nodes with an LP support, **34 clip to EMPTY** - dead by pin geometry, no LP, no certificate change. 143 more are narrowed (mean kept volume 0.54392).
 * Across A57 the exact core also narrows **272 of 465** boxes strictly further than the stock core does (mean kept volume 0.60161 -> 0.58448).
+
+**Replayable certificates for all 51 of them** are emitted in A131's own `pin-clip-kill-certificate-v1` format under `attempts/A142-a57-review-gallery/certs/{a57,a60}/`, with ledgers `results/exactclip_kills_{a57,a60}.jsonl`. Each records `a_pin = 33873816211/68719476736 = 0.49292890196375083` (A60: 1/2 to the same grid) as the half-side actually used, carries A135's `exactcore` certification for every pin box (the corner-by-corner rational vertex test that licenses the larger core - all certified), and carries the full per-sub-bin replay trace. **A131's INDEPENDENT checker `checkclip131.py` reads them unchanged and passes all 51 (17 A57 + 34 A60, 0 FAIL)**; the sampled confirmation inside the certificates is 612,000 drawn poses with 0 pin-free hits. Witnesses: 44 single-pin, 7 two-pin joint. Of the A60 kills, 14 are emptied by the ALREADY-DEPLOYED T5'' trim alone - they are open only because the trim was never applied to A60. A57/A96/A60 state is untouched; one line is appended to A57's `PAUSED.md` resume block and to A60's `notes/ledger.md` so the owners fold them in.
 
 Independent control (`results/clipsweep142.json`, sampling, not the same code path): 4,000 uniform poses drawn in the box of each EMPTY node give **zero** pin-free poses, while non-empty controls give 75-2,126. Every page below draws BOTH clips - pale orange dotted = stock, heavy orange dashed = exact - so the difference is visible on the node.
 

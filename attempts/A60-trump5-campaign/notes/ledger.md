@@ -548,3 +548,75 @@ bisect); and at a 72 % kill rate routing them would discard ~35 genuine kills an
 it cannot do.  Instead the tail was **de-serialised**: shard `3/4` was split into `3/8` + `7/8`
 (which partition `i % 4 == 3`), so a single pathological child can now block at most half the tail.
 
+
+---
+
+## 11. Lemma PD adopted, and what it does / does not change
+
+**Implemented** (`tree60.pd_logic_kill`, wired into `classify_at` ahead of the slack-core test):
+Σ_p is the FULL axis-aligned unit square at slots(s0); d(λ) = (λ−1)·α_p with
+α = [(½,½), (3/2,½), (½,3/2), (−½,½), (−½,−½)]; the rule fires iff the child's rational core meets
+Σ_p at **both** λ = 1 and λ = λ_max.  λ_max − 1 = (s0 − ŝ + T′)/(ŝ − T′) = **0.01192791** at
+T′ = 0.0457, so the drift for max|α| = 3/2 is **0.017892 ≤ δ_pin = 2e-2** ✓ (matches A84's 1.79e-2).
+
+**Canary clean:** PD does **not** fire on any of the three Trump-containing cover boxes (sq7, sq8,
+sq9) — as A84 predicts, an image square's core misses Σ_p at λ = 1.  Selftests still 6/6.
+
+**Effect size, measured on A60's own j = 0 cover (1152 boxes):**
+
+| pin cores | logic kills |
+|---|---|
+| ε-fat (a ≈ ½ − 3.1e-8) — the baseline | **344** |
+| slack δ_pin = 2e-2, ordinary test | **298** |
+| slack δ_pin = 2e-2, **with Lemma PD** | **344** |
+
+So the slack pocket costs **46 logic kills** at level 0, and **PD recovers exactly those 46**,
+restoring the ε-fat baseline.  At ε-fat pins PD is a no-op (it fires on precisely the 344 already
+contradictory), which is why the selftest reproductions are unaffected.
+
+**What PD changes in the 30-leaf pricing batch: nothing directly, but it saves 46 jobs in the
+full re-emission.**  The batch re-emits leaves that were *attemptable → PASS*; no attemptable box
+fires PD (PD's 344 are exactly the contradictory set), so the batch's per-leaf cost is untouched.
+The saving is elsewhere: without PD, 46 boxes that are FREE logic kills at ε-fat would become
+attemptable at δ_pin = 2e-2 and need LP + certificate — ≈ **46 × ~980 s ≈ 12.5 CPU-hours** added
+to re-emission, plus they would seed the residue floor in every ladder below them.  PD is
+therefore mandatory for deepen/ladder (it is what prevents A84's 96 → 3862 blow-up) and a
+~12.5 CPU-h saving on re-emission.
+
+## 12. The anisotropic tube target is NOT reachable on A60's plan
+
+A84 asks whether the squares 2–3 re-landing reaches the anisotropic tube form
+(r_c, r_θ) = (6.5e-4, 2.1e-3) → T = 0.0525.  **Measured (square-2 ladder, stop disabled, to L34,
+`results/a60_sq2_deep_ladder.json`): no — and the blocker is the CENTRE, not the tilt.**
+
+| level | boxes | sup-containment (centre-dominated) | θ-containment |
+|---|---|---|---|
+| 24 | 35 | 1.7202e-3 | 2.4348e-3 |
+| **26** | 58 | 1.4472e-3 | **2.0102e-3** ✓ meets r_θ = 2.1e-3 |
+| 28 | 73 | 1.1742e-3 | 1.1742e-3 |
+| 30 | 70 | 1.0378e-3 | 1.0378e-3 |
+| 34 | 176 | **9.6952e-4** | 9.6952e-4 |
+
+The **tilt half is already satisfied from L26**; the centre half is at 9.70e-4 at L34 against a
+6.5e-4 target, decaying only ~1.77× per 10 levels, so it needs roughly **L39–L40** — not L29 —
+and the residue is 176 boxes at L34 and growing.  So the anisotropic 0.0525 is not cheaply
+available to A60: it buys 0.0457 → 0.0525 (+15 %) for ~6 further ladder levels on a growing
+residue.  **Recommend staying at the isotropic tube T = 0.0457**, which A60's *current* L26
+landings already certify, unless A82's trump5 crossover comes back needing more than 0.0457.
+
+## A142 addendum (2026-09-07, append-only — for the A60 owner): the pin-clip has never been run on A60, and it empties 34 nodes
+
+A131's T5‴ pin-clip (`attempts/A131-pin-clip/code/pinclip.py`) was measured on A57's corpus only. A60's pins are
+**exact placements** (`hyp.boxes[i]` has `x0 = x1`), so their guaranteed core is the whole unit square,
+`a_pin = 1/2` to the 1/2⁴⁰ grid (A135 `exactcore`, certified). Run at that half-side over the **283 A60 nodes
+with an LP support** (A107 `results/shadow_nodes.json`), the clip empties **34** — dead by pin geometry, no LP,
+no certificate or verifier change — and narrows **143** more (mean kept volume 0.544). **14 of the 34 are
+emptied by the already-deployed T5″ trim alone**: they are open only because the trim was never applied to this
+campaign. Replayable certificates in A131's `pin-clip-kill-certificate-v1` format (exact `a_pin`, the A135
+`exactcore` certification of every pin box, full per-sub-bin replay trace):
+`attempts/A142-a57-review-gallery/certs/a60/<tag>.clipkill.json`, ledger
+`attempts/A142-a57-review-gallery/results/exactclip_kills_a60.jsonl`, summary `results/exactclip_kills.json`.
+**A131's independent checker `checkclip131.py` passes all 34 unchanged (0 FAIL)**; sampled confirmation 408,000
+drawn poses, 0 pin-free hits; 28 single-pin witnesses, 6 two-pin joint. Three of them (`c0_Y0168`, `c0_Y0254`,
+`c0_Y0878`) are also drawn in `docs/shadows/a57v3/` and their pages say EMPTY. **Nothing in A60 was written**;
+the recommendation is to run `trim57` and `pinclip` over the A60 population before any further LP there.

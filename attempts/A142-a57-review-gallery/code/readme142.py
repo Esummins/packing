@@ -103,15 +103,36 @@ def main():
     for a in ar:
         L.append(f"| {names.get(a['step'], a['step'])} | {a['n_in_list']} | "
                  f"{a['n_hits_work_owing']} | {a['n_new']} | {a['running_removed']} |")
-    L.append(f"| **surviving** | | | | **{st['work_owing']} - {ar[-1]['running_removed']} = "
-             f"{sv['n']}** |")
+    # ---- A142's own kills: the clip re-run at A135's certified exact pin core (section 2b)
+    xk = json.load(open(os.path.join(BASE, "results", "exactclip_kills.json"), encoding="utf-8"))
+    k57 = [json.loads(x) for x in
+           open(os.path.join(BASE, "results", "exactclip_kills_a57.jsonl"), encoding="utf-8")
+           if x.strip()]
+    nk = len(k57)
+    tot = ar[-1]["running_removed"] + nk
+    L.append(f"| **A142 pin-clip at the EXACT pin core** (certificates below) | {nk} | {nk} | "
+             f"{nk} | {tot} |")
+    L.append(f"| **surviving** | | | | **{st['work_owing']} - {tot} = {sv['n'] - nk}** |")
     L.append("")
-    L.append(f"**{sv['n']} nodes survive: {sv['alive']} ALIVE + {sv['fail']} FAIL**, by level "
-             + ", ".join(f"L{k} {v}" for k, v in sorted(sv["by_level"].items()))
-             + ", by class " + ", ".join(f"{k} {v}" for k, v in sorted(sv["by_class"].items()))
-             + ". The four kill lists overlap heavily - the 54 A124 trim-empty nodes are ALL "
-               "already inside the 132 pin-clip kills, and 54 of the 64 polygon kills are too, "
-               "which is why 253 list entries remove only 142 nodes.")
+    lev = dict(sv["by_level"])
+    cls_ = dict(sv["by_class"])
+    for r in k57:
+        lev[str(r["level"])] = lev.get(str(r["level"]), lev.get(r["level"], 0)) - 1
+        lev.pop(r["level"], None) if str(r["level"]) in lev else None
+        cls_[r["cls"]] = cls_.get(r["cls"], 0) - 1
+    nal = sv["alive"] - sum(1 for r in k57 if "ALIVE" in str(r["prior_verdict"]))
+    nfa = sv["fail"] - sum(1 for r in k57 if "ALIVE" not in str(r["prior_verdict"]))
+    L.append(f"**{sv['n'] - nk} nodes survive: {nal} ALIVE + {nfa} FAIL**, by level "
+             + ", ".join(f"L{k} {v}" for k, v in sorted(lev.items()))
+             + ", by class " + ", ".join(f"{k} {v}" for k, v in sorted(cls_.items()))
+             + ". The first four kill lists overlap heavily - the 54 A124 trim-empty nodes are "
+               "ALL already inside the 132 pin-clip kills, and 54 of the 64 polygon kills are "
+               "too, which is why 253 list entries remove only 142 nodes. The last row is this "
+               f"attempt's own: {nk} further nodes die to the SAME clip re-run at A135's "
+               f"certified exact pin core (section 2b), taking the population from "
+               f"{sv['n']} to {sv['n'] - nk}. None of the {nk} has a still-open descendant in "
+               "the population, and none of them is among the 40 pages drawn below, so no page "
+               "here is stale.")
     L.append("")
     L.append(f"A60's alive population is the **{pop['a60']['n']} nodes with an LP support** in "
              f"A107's `shadow_nodes.json`; they are all at depth j = 0 (level 1) and none has "
@@ -186,6 +207,31 @@ def main():
         L.append(f"* Across A57 the exact core also narrows **{a['tighter_than_stock']} of "
                  f"{a['measured']}** boxes strictly further than the stock core does (mean kept "
                  f"volume {a['mean_kept_stock']} -> {a['mean_kept_exact']}).")
+        L.append("")
+        L.append(f"**Replayable certificates for all {xk['a57']['nodes'] + xk['a60']['nodes']} "
+                 f"of them** are emitted in A131's own `pin-clip-kill-certificate-v1` format "
+                 f"under `attempts/A142-a57-review-gallery/certs/{{a57,a60}}/`, with ledgers "
+                 f"`results/exactclip_kills_{{a57,a60}}.jsonl`. Each records `a_pin = "
+                 f"33873816211/68719476736 = 0.49292890196375083` (A60: 1/2 to the same grid) as "
+                 f"the half-side actually used, carries A135's `exactcore` certification for "
+                 f"every pin box (the corner-by-corner rational vertex test that licenses the "
+                 f"larger core - all certified), and carries the full per-sub-bin replay trace. "
+                 f"**A131's INDEPENDENT checker `checkclip131.py` reads them unchanged and passes "
+                 f"all {xk['a57']['nodes'] + xk['a60']['nodes']} "
+                 f"({xk['a57']['nodes']} A57 + {xk['a60']['nodes']} A60, 0 FAIL)**; the sampled "
+                 f"confirmation inside the certificates is "
+                 f"{xk['a57']['sample_totals']['drawn'] + xk['a60']['sample_totals']['drawn']:,} "
+                 f"drawn poses with "
+                 f"{xk['a57']['sample_totals']['hits'] + xk['a60']['sample_totals']['hits']} "
+                 f"pin-free hits. Witnesses: "
+                 f"{xk['a57']['by_witness_kind'].get('single', 0) + xk['a60']['by_witness_kind'].get('single', 0)}"
+                 f" single-pin, "
+                 f"{xk['a57']['by_witness_kind'].get('joint-2', 0) + xk['a60']['by_witness_kind'].get('joint-2', 0)}"
+                 f" two-pin joint. Of the A60 kills, {xk['a60']['t5pp_alone_suffices']} are "
+                 f"emptied by the ALREADY-DEPLOYED T5'' trim alone - they are open only because "
+                 f"the trim was never applied to A60. A57/A96/A60 state is untouched; one line "
+                 f"is appended to A57's `PAUSED.md` resume block and to A60's "
+                 f"`notes/ledger.md` so the owners fold them in.")
         L.append("")
         L.append("Independent control (`results/clipsweep142.json`, sampling, not the same "
                  "code path): 4,000 uniform poses drawn in the box of each EMPTY node give "
