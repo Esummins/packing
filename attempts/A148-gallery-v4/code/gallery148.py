@@ -155,6 +155,12 @@ DEFS = ('<defs>'
         '<pattern id="hatchr" width="6" height="6" patternTransform="rotate(-45)" '
         'patternUnits="userSpaceOnUse">'
         '<line x1="0" y1="0" x2="0" y2="6" stroke="#e57373" stroke-width="2.0"/></pattern>'
+        # UNDECIDED is a GREY STIPPLE and carries no green anywhere: on k5_11_interior_Y0275 the
+        # pale-green band of the first draft was read as a feasible strip, and it is not one.
+        '<pattern id="stipple" width="5" height="5" patternUnits="userSpaceOnUse">'
+        '<rect width="5" height="5" fill="#fafafa"/>'
+        '<circle cx="1.1" cy="1.1" r="0.8" fill="#9e9e9e"/>'
+        '<circle cx="3.6" cy="3.6" r="0.8" fill="#9e9e9e"/></pattern>'
         '</defs>')
 
 
@@ -178,7 +184,7 @@ def panel_geometry(pn, node, width_px):
     reg = node["region"]
     # --- the region, as horizontal runs (a compact, exact rendering of the grid)
     for (x0, x1, y0, y1) in reg.runs(reg.undecided):
-        out.append(pn.rect(x0, x1, y0, y1, GREENP, "none", 0.30, 0.0))
+        out.append(pn.rect(x0, x1, y0, y1, "url(#stipple)", "none", 0.90, 0.0))
     for (x0, x1, y0, y1) in reg.runs(reg.green):
         out.append(pn.rect(x0, x1, y0, y1, "#66bb6a", "none", 0.42, 0.0))
     out += pn.container(s)
@@ -248,20 +254,37 @@ def panel_geometry(pn, node, width_px):
                                         f"{r['rhs']:.4f} — nothing within 0.15 of s0", 7.4,
                        "#8d6e63"))
 
-    # --- corner / slot lane tags
+    # --- corner / slot lane tags, and the WITNESSED free meeters beside them
+    nwit = 0
     for tag in node["lane_tags"]:
         x, y = tag["centre"]
         col = ("#b71c1c" if tag["verdict"].startswith("KILL") else
                ("#e65100" if "NEAR-MISS" in tag["verdict"] or "LANE<=1" in tag["verdict"]
                 else "#455a64"))
+        cell = [(x - 0.5, y - 0.5), (x + 0.5, y - 0.5), (x + 0.5, y + 0.5), (x - 0.5, y + 0.5)]
         out.append(pn.rect(x - 0.5, x + 0.5, y - 0.5, y + 0.5, "none", col, 0.0, 1.2, "5,3"))
         out.append(pn.text(x, y, tag["cell"], 7.6, col, True, "middle", -4))
         out.append(pn.text(x, y, tag["verdict"], 7.0, col, False, "middle", 6))
+        dy = 16
+        for w in tag.get("witness", [])[:2]:
+            if not w.get("draw"):
+                continue
+            cx, cy, td = w["pose"]
+            P = G.sqpoly(cx, cy, math.radians(td))
+            depth = float(w.get("depth_into_cell", -G.sat_gap(P, cell)))
+            nwit += 1
+            out.append(pn.poly(P, "none", "#212121", 0.0, 1.1))
+            out.append(pn.text(x, y, f"{w['role']}: reaches {depth:+.4f} into the cell "
+                                     f"@{td:.2f}°", 6.4, "#212121", True, "middle", dy))
+            dy += 8
+    node["n_witness_drawn"] = nwit
 
     y = pn.oy + 15
-    e, y = wrap(pn.ox, y, "green = where another square's centre can still be; grey = pockets too "
-                          "narrow for any square; tags = how many squares can reach each "
-                          "corner/slot", width_px, 9.5, "#1b5e20", True)
+    e, y = wrap(pn.ox, y, "green = where another square's centre can still be; GREY STIPPLE = "
+                          "undecided (clearance within the margin), NOT feasible; grey DIAGONAL "
+                          "HATCH = pockets too narrow for any square; white = certified blocked; "
+                          "tags = how many squares can reach each corner/slot, with the witnessed "
+                          "free meeters drawn in thin black", width_px, 9.5, "#1b5e20", True)
     out += e
     y += 3
     reg = node["region"]
@@ -270,12 +293,29 @@ def panel_geometry(pn, node, width_px):
                 f"pitch {reg.pitch:.5f} (<= 0.02) x {reg.ntilt} tilts; both verdicts carry the "
                 f"Lipschitz margin m = {reg.margin:.5f} = pitch*sqrt2/2 + (sqrt2/2)*(dtheta/2), so "
                 f"GREEN is a CERTIFIED inner approximation (every point of a green cell admits a "
-                f"feasible tilt) and WHITE a CERTIFIED outer one (no point admits any tilt); the "
-                f"pale band between is undecided at this resolution. Area: green "
-                f"{reg.area_green():.4f}, green+undecided {reg.area_open():.4f}. Sampled "
-                f"confirmation, 10^4 each at {node['sample']['green'].get('tilts', 0)} tilts with "
-                f"an independent SAT: green hits {node['sample']['green']['hits']}, blocked hits "
+                f"feasible tilt) and WHITE a CERTIFIED outer one (no point admits any tilt). The "
+                f"GREY STIPPLE between them is UNDECIDED at this resolution -- the clearance falls "
+                f"within the margin, so those centres are NOT shown feasible and must not be read "
+                f"as free; a stippled strip beside H is exactly the case where the all-tilt map "
+                f"against H's actual poses may have no feasible centre at all. Certified-free "
+                f"(green) area {reg.area_green():.4f}; a further "
+                f"{reg.area_open() - reg.area_green():.4f} is undecided. Sampled confirmation, "
+                f"10^4 each at {node['sample']['green'].get('tilts', 0)} tilts with an independent "
+                f"SAT: green hits {node['sample']['green']['hits']}, blocked hits "
                 f"{node['sample']['blocked']['hits']}.", width_px, 8.4, "#33691e")
+    out += e
+    y += 3
+    e, y = wrap(pn.ox, y,
+                f"WITNESSED FREE MEETERS: {node.get('n_witness_drawn', 0)} drawn (thin black "
+                f"outlines beside the lane tag, with how far each reaches into the cell). These "
+                f"are SAMPLED poses from A157's screen of A141's UNDECIDED slot cells (a free pose, "
+                f"and a disjoint PAIR where the sample found one) and A141's T5 two-crowd witness "
+                f"on the k0 corners. A tag's lane line prints BOTH bounds: `ub` is the certified "
+                f"upper bound, `lb` the number of free meeters the sample actually found, `M` the "
+                f"conditioned meeters (`?` = not certified exactly). A hairline grazer -- a "
+                f"witnessed square reaching a few thousandths into the cell -- refutes a reading "
+                f"that the corner is unreachable, and is invisible unless it is drawn.",
+                width_px, 8.4, "#212121")
     out += e
     y += 3
     e, y = wrap(pn.ox, y,
@@ -348,15 +388,23 @@ def panel_support(pn, node, width_px):
         f = w / ymax if ymax > 0 else 0.0
         out.append(pn.poly(P, wcol(f), wcol(f, True), 0.82, 0.9))
         dep, owner = -9e9, None
+        pins = []
         for i, Q in enumerate(node["obstacles"]):
             d = float(polycore.poly_square_depth(Q, [[cx, cy]], [th])[0])
             if d > dep:
                 dep, owner = d, node["onames"][i]
+            if d > 0.0 and node["kinds"][i]["kind"] == "pin":
+                pins.append((node["onames"][i], d))
         if dep > 0.0:
             imposs.append(dict(col=k, owner=owner, depth=float(dep), y=w,
+                               also_pin_core=bool(pins),
+                               pin_cores=[[nm, float(d)] for nm, d in pins],
                                pose=[cx, cy, math.degrees(th) % 90.0]))
             out.append(pn.poly(P, "none", "#d50000", 0.0, 2.0, "6,3"))
-            out.append(pn.text(cx, cy, f"x{owner} {dep:.3f}", 6.6, "#d50000", True, "middle", -6))
+            lab = f"x{owner} {dep:.3f}"
+            lab += ("  +pin core " + ",".join(f"{nm} {d:.3f}" for nm, d in pins[:2])
+                    if pins else "  (no pin core)")
+            out.append(pn.text(cx, cy, lab, 6.4, "#d50000", True, "middle", -6))
     for i, k in enumerate(node["kinds"]):
         if k["kind"] == "pin":
             cx, cy = k["c"]
@@ -376,7 +424,13 @@ def panel_support(pn, node, width_px):
                 f"drawn. RED DASHED = {len(imposs)} column(s) whose square overlaps a certified "
                 f"core (K'(B) of a conditioned square, or a pin's exact core) — they are "
                 f"IMPOSSIBLE under the hypothesis and carry dual weight "
-                f"{sum(r['y'] for r in imposs):.4f}. " + node["support_note"],
+                f"{sum(r['y'] for r in imposs):.4f}; each is labelled with the core it meets most "
+                f"deeply and then with whether it ALSO overlaps an EXACT PIN CORE "
+                f"({sum(1 for r in imposs if r['also_pin_core'])} of {len(imposs)} do, weight "
+                f"{sum(r['y'] for r in imposs if r['also_pin_core']):.4f}) -- a column that meets "
+                f"a pin core is excluded by pin geometry alone, inside the frozen certificate "
+                f"schema, while one that meets only K'(B) needs the polygon-core clause. "
+                + node["support_note"],
                 width_px, 8.4, "#444")
     out += e
     return out, y, imposs, bad
@@ -448,8 +502,11 @@ FOOTER = [
     "CONVENTIONS — BODIES are filled; CERTIFIED CORES are filled purple (K'(B), A132) or outlined "
     "(a pin's exact core, A135); SCHEMATIC regions (centre boxes, the pin-clipped box, lane cells, "
     "guard lines) are THIN DASHED and are never square bodies. One style per object: the stock and "
-    "exact AXIS cores are captioned, not drawn. Green/pale-green/white in panel G = certified "
-    "free / undecided / certified blocked for a centre.",
+    "exact AXIS cores are captioned, not drawn. In panel G a centre is GREEN = certified free, "
+    "GREY STIPPLE = undecided (clearance within the margin, NOT feasible), WHITE = certified "
+    "blocked; the grey DIAGONAL HATCH is a separate object, a pocket too narrow for any "
+    "square. Thin black outlines beside a lane tag are WITNESSED free meeters (sampled "
+    "poses), with how far each reaches into the cell.",
 ]
 
 

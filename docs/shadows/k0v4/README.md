@@ -5,8 +5,8 @@ One page per node, in the **v4 three-panel form**.  Every page answers the same 
 
 | panel | what it is |
 |---|---|
-| **G — GEOMETRY: what is still free** (largest) | the container at s0, the hypothesis squares with their certified cores, and the **feasible-centre region**: the set of centres where one further unit square can still be placed at SOME tilt, interior-disjoint from every pin's exact core and from K'(B) of every conditioned square.  Green = certified free, pale = undecided at this resolution, white = certified blocked.  Pockets narrower than 1 are hatched grey with the width printed; A144 guard lines are drawn thin with their chord sum and rhs; each corner/slot carries A141's K' lane verdict; A131's exact pin-clip is the orange box inside the black centre box.  **Nothing in panel G comes from an LP.** |
-| **S — the LP support** (medium) | the dual support of the node's latest record, fill = dual weight on one sequential scale (A107 v2), the certified cores outlined, and every column whose square overlaps a core drawn **red dashed**: those are impossible under the hypothesis.  The squares here overlap each other — that is the relaxation's slack, not a packing. |
+| **G — GEOMETRY: what is still free** (largest) | the container at s0, the hypothesis squares with their certified cores, and the **feasible-centre region**: the set of centres where one further unit square can still be placed at SOME tilt, interior-disjoint from every pin's exact core and from K'(B) of every conditioned square.  **Green = certified free; grey STIPPLE = undecided (clearance within the Lipschitz margin) and NOT feasible; white = certified blocked.**  Pockets narrower than 1 are a separate object, hatched with grey DIAGONAL lines and the width printed; A144 guard lines are drawn thin with their chord sum and rhs; each corner/slot carries A141's K' lane verdict with BOTH bounds (`ub` certified, `lb` sampled) and `M`, plus the WITNESSED free meeters from A157's screen and A141's two-crowd witness drawn as thin black outlines with how far each reaches into the cell; A131's exact pin-clip is the orange box inside the black centre box.  **Nothing in panel G comes from an LP.** |
+| **S — the LP support** (medium) | the dual support of the node's latest record, fill = dual weight on one sequential scale (A107 v2), the certified cores outlined, and every column whose square overlaps a core drawn **red dashed**: those are impossible under the hypothesis, and each is labelled with whether it ALSO overlaps an exact pin core (pin geometry alone excludes it, inside the frozen certificate schema) or only K'(B) (which needs the polygon-core clause).  The squares here overlap each other — that is the relaxation's slack, not a packing. |
 | **N — nearest real packing** (small) | A107's minimised shadow or A128's polished near-packing, the container at its own s* with s0 overlaid dashed and a banner saying whether it is realisable at s0.  These are the square names used everywhere else. |
 
 **Soundness of the green region.**  The region is computed on a grid of pitch ≤ 0.02 × 36 tilts, and
@@ -37,12 +37,12 @@ drawing**.  `n_max < budget` is a geometric kill with no LP at all.  The column 
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | [`l1_071`](l1_071.svg) | 1 | 4.000000 | K01 | 4.547 | 5.618 | **18** (10) | `H->wall x=s` 1.0193 | 0 | — | 2.8771 (`K' xmid`) | clip vacuous, T5⁗ alive, lane no kill, guard no kill |
 | [`l1_104`](l1_104.svg) | 1 | 3.914214 | K04 | 4.743 | 5.687 | **17** (10) | `H->wall x=s` 0.8280 | 1 | — | 2.7224 (`K' xmid`) | clip vacuous, T5⁗ alive, lane no kill, guard no kill |
-| [`l1_124`](l1_124.svg) | 1 | 3.942810 | none | 4.843 | 5.634 | **17** (10) | `H->wall x=s` 0.8565 | 2 | `TR(0,0)` NEAR-MISS (LANE<=1, M=1) | 2.8418 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
+| [`l1_124`](l1_124.svg) | 1 | 3.942810 | none | 4.843 | 5.634 | **17** (10) | `H->wall x=s` 0.8565 | 2 | `TR(0,0)` NEAR-MISS (LANE ub 1, lb 1, M 1?) | 2.8418 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
 | [`l1_148`](l1_148.svg) | 1 | 4.000000 | K01 | 4.806 | 5.753 | **17** (10) | `H->wall x=s` 0.7517 | 1 | — | 2.8418 (`K' xmid`) | clip vacuous, T5⁗ alive, lane no kill, guard no kill |
-| [`l1_153`](l1_153.svg) | 1 | 3.877084 | none | 4.877 | 5.690 | **17** (10) | `H->wall x=s` 0.7232 | 2 | `TR(0,0)` NEAR-MISS (LANE<=1, M=1) | 2.7224 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
-| [`l1_158`](l1_158.svg) | 1 | 3.902674 | none | 5.012 | 5.755 | **17** (10) | `H->wall x=s` 0.7232 | 2 | `TR(0,0)` NEAR-MISS (LANE<=1, M=1) | 2.7224 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
-| [`l1_159`](l1_159.svg) | 1 | 3.886745 | K06 | 5.011 | 5.746 | **17** (10) | `H->wall x=s` 0.7232 | 2 | `TR(0,0)` NEAR-MISS (LANE<=1, M=1) | 2.7224 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
-| [`l2_p114_001`](l2_p114_001.svg) | 2 | 3.924402 | K20 | 4.422 | 5.302 | **17** (10) | `H->wall x=s` 0.8682 | 2 | `TR(0,0)` NEAR-MISS (LANE<=1, M=1) | 2.8685 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
+| [`l1_153`](l1_153.svg) | 1 | 3.877084 | none | 4.877 | 5.690 | **17** (10) | `H->wall x=s` 0.7232 | 2 | `TR(0,0)` NEAR-MISS (LANE ub 1, lb 1, M 1?) | 2.7224 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
+| [`l1_158`](l1_158.svg) | 1 | 3.902674 | none | 5.012 | 5.755 | **17** (10) | `H->wall x=s` 0.7232 | 2 | `TR(0,0)` NEAR-MISS (LANE ub 1, lb 0, M 1) | 2.7224 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
+| [`l1_159`](l1_159.svg) | 1 | 3.886745 | K06 | 5.011 | 5.746 | **17** (10) | `H->wall x=s` 0.7232 | 2 | `TR(0,0)` NEAR-MISS (LANE ub 1, lb 0, M 1) | 2.7224 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
+| [`l2_p114_001`](l2_p114_001.svg) | 2 | 3.924402 | K20 | 4.422 | 5.302 | **17** (10) | `H->wall x=s` 0.8682 | 2 | `TR(0,0)` NEAR-MISS (LANE ub 1, lb 1, M 1?) | 2.8685 (`K' xmid`) | clip vacuous, T5⁗ alive, lane near-miss, guard no kill |
 | [`l2_p65_101`](l2_p65_101.svg) | 2 | 4.000000 | K01 | 4.283 | 5.278 | **18** (10) | `H->wall x=s` 0.9669 | 1 | — | 2.8771 (`K' xmid`) | clip vacuous, T5⁗ alive, lane no kill, guard no kill |
 | [`l2_p65_111`](l2_p65_111.svg) | 2 | 3.925149 | K03 | 4.294 | 5.285 | **18** (10) | `H->wall x=s` 0.9669 | 1 | — | 2.8771 (`K' xmid`) | clip vacuous, T5⁗ alive, lane no kill, guard no kill |
 | [`l2_p74_001`](l2_p74_001.svg) | 2 | 3.912232 | K05 | 4.273 | 5.295 | **17** (10) | `H->wall x=s` 0.8784 | 1 | — | 2.6166 (`K' xmid`) | clip vacuous, T5⁗ alive, lane no kill, guard no kill |
@@ -51,12 +51,12 @@ drawing**.  `n_max < budget` is a geometric kill with no LP at all.  The column 
 
 * **`l1_071`** — nothing free: no pocket under 1, no lane ≤ 1, no tight guard line, disk bound 18 ≥ budget 10
 * **`l1_104`** — pockets < 1: `H->wall x=s` 0.828
-* **`l1_124`** — pockets < 1: `H->wall x=s` 0.857, `H->wall y=s` 0.857; lane: `TR(0,0)` NEAR-MISS (LANE<=1, M=1)
+* **`l1_124`** — pockets < 1: `H->wall x=s` 0.857, `H->wall y=s` 0.857; lane: `TR(0,0)` NEAR-MISS (LANE ub 1, lb 1, M 1?)
 * **`l1_148`** — pockets < 1: `H->wall x=s` 0.752
-* **`l1_153`** — pockets < 1: `H->wall x=s` 0.723, `H->wall y=s` 0.933; lane: `TR(0,0)` NEAR-MISS (LANE<=1, M=1)
-* **`l1_158`** — pockets < 1: `H->wall x=s` 0.723, `H->wall y=s` 0.828; lane: `TR(0,0)` NEAR-MISS (LANE<=1, M=1)
-* **`l1_159`** — pockets < 1: `H->wall x=s` 0.723, `H->wall y=s` 0.828; lane: `TR(0,0)` NEAR-MISS (LANE<=1, M=1)
-* **`l2_p114_001`** — pockets < 1: `H->wall x=s` 0.868, `H->wall y=s` 0.973; lane: `TR(0,0)` NEAR-MISS (LANE<=1, M=1)
+* **`l1_153`** — pockets < 1: `H->wall x=s` 0.723, `H->wall y=s` 0.933; lane: `TR(0,0)` NEAR-MISS (LANE ub 1, lb 1, M 1?)
+* **`l1_158`** — pockets < 1: `H->wall x=s` 0.723, `H->wall y=s` 0.828; lane: `TR(0,0)` NEAR-MISS (LANE ub 1, lb 0, M 1)
+* **`l1_159`** — pockets < 1: `H->wall x=s` 0.723, `H->wall y=s` 0.828; lane: `TR(0,0)` NEAR-MISS (LANE ub 1, lb 0, M 1)
+* **`l2_p114_001`** — pockets < 1: `H->wall x=s` 0.868, `H->wall y=s` 0.973; lane: `TR(0,0)` NEAR-MISS (LANE ub 1, lb 1, M 1?)
 * **`l2_p65_101`** — pockets < 1: `H->wall x=s` 0.967
 * **`l2_p65_111`** — pockets < 1: `H->wall x=s` 0.967
 * **`l2_p74_001`** — pockets < 1: `H->wall x=s` 0.878

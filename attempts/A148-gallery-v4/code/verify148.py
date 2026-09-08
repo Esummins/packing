@@ -17,7 +17,10 @@ bug in geo148's `sat_gap` / polycore's `poly_square_depth` cannot hide in both. 
   F  every RED-DASHED column of panel S really does meet the core it names; control: no column
      that was NOT flagged meets ANY core.
   G  every guard row's minchord is a true lower bound: 10^4 poses drawn uniformly in each
-     hypothesis box have chord >= minchord (A144's own sampled discipline, re-run here).
+     hypothesis box have chord >= minchord (A144's own sampled discipline, re-run here);
+  H  every WITNESSED free meeter drawn beside a lane tag really is one: its square overlaps the
+     named cell (so A141/A157's corner-frame pose was transported correctly), lies inside the
+     container, and -- when it is billed as FREE -- its interior misses every certified core.
 
     set PYTHONDONTWRITEBYTECODE=1 && python code/verify148.py --set k0v4
 """
@@ -145,7 +148,8 @@ def main():
     rng = np.random.default_rng(1481)
     tot = dict(pages=0, A_pts=0, A_fail=0, B_pts=0, B_fail=0, C_poses=0, C_fail=0,
                D_poses=0, D_fail=0, E_pockets=0, E_fail=0, F_flagged=0, F_fail=0,
-               F_control=0, F_control_fail=0, G_rows=0, G_draws=0, G_fail=0)
+               F_control=0, F_control_fail=0, G_rows=0, G_draws=0, G_fail=0,
+               H_wit=0, H_fail=0)
     bad = []
     for sm in summ:
         nid = sm["id"]
@@ -230,6 +234,33 @@ def main():
             if any(overlaps(P, Q) for P in obst):
                 tot["F_control_fail"] += 1
                 bad.append((nid, "F-control", kcol, None))
+
+        # --- H: every WITNESSED free meeter drawn really is a free meeter of its cell.  Two
+        # claims, both checked with the independent predicate: it OVERLAPS the named cell (so the
+        # corner-frame transport landed it in the right place), and its interior misses every
+        # certified core (so "free" is earned).  A hairline grazer is exactly the case where a
+        # reframing or sign error would look plausible on the page, so it is checked, not trusted.
+        for t in sm["lane_tags"]:
+            x0, x1, y0, y1 = D.cell_rect(t["cell"])
+            cellP = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+            for w in t.get("witness", []):
+                if not w.get("draw"):
+                    continue
+                tot["H_wit"] += 1
+                Q = G.sqpoly(w["pose"][0], w["pose"][1], math.radians(w["pose"][2]))
+                if not in_container(Q, G.S0, 1e-6):
+                    tot["H_fail"] += 1
+                    bad.append((nid, "H-container", t["cell"], w["role"]))
+                if not w.get("is_free_meeter"):
+                    continue          # the pair's other square: no cell or freeness claim is made
+                if not overlaps(cellP, Q):
+                    tot["H_fail"] += 1
+                    bad.append((nid, "H-cell", t["cell"], w["role"]))
+                for i, P in enumerate(obst):
+                    if overlaps(P, Q):
+                        tot["H_fail"] += 1
+                        bad.append((nid, "H-notfree", t["cell"], onames[i]))
+                        break
 
         # --- G: the guard rows' minchord is a lower bound
         bxs = [Box.from_json(b) for b in rec["boxes"]]

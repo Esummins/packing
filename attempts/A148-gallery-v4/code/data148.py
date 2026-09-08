@@ -97,10 +97,29 @@ def tbl(name):
                 _jl(os.path.join(A141, "results", "t4_y0460.jsonl")):
             v.setdefault(r["nid"], []).append(r)
     elif name == "a141_a5760":
+        # t2_a5760 is one row PER NODE with a nested `cells` list, not one row per cell.  The v4
+        # draft read it as one row per cell and so found no lane verdict at all on the A57/A60
+        # pages; flatten it here.
         v = {}
         for f in sorted(glob.glob(os.path.join(A141, "results", "t2_a5760_s*.jsonl"))):
             for r in _jl(f):
-                v.setdefault(r.get("nid") or r.get("id"), []).append(r)
+                nid = r.get("nid") or r.get("id")
+                for c in (r.get("cells") or []):
+                    v.setdefault(nid, []).append(dict(c, slot=c.get("cell"), nid=nid,
+                                                      src=r.get("src")))
+    elif name == "a157":
+        # A157's screen of A141's UNDECIDED slot cells: per (node, slot) a WITNESSED free pose and,
+        # where the sample found one, a witnessed DISJOINT PAIR of free meeters.  These are the
+        # hairline grazers a lane tag alone hides.
+        v = {}
+        for f in sorted(glob.glob(os.path.join(ATT, "A157-undecided-slots", "results",
+                                               "screen157*.jsonl"))):
+            for r in _jl(f):
+                v[(r["nid"], r["slot"])] = r
+    elif name == "a141_twocrowd":
+        v = {}
+        for r in (_j(os.path.join(A141, "results", "t5_twocrowd.json"), []) or []):
+            v.setdefault((r["cell"], r.get("corner")), r)
     elif name == "a141_deep":
         v = {}
         for f in ("t5_deep.jsonl", "t5_split.jsonl"):
@@ -280,6 +299,119 @@ def _a57_population(which):
 
 
 # ------------------------------------------------------------------ per-node completion
+def _lane_text(r):
+    """the tag's second line: the verdict with BOTH lane bounds and M, never just the verdict.
+
+    `lane_ub` alone hides the thing that refutes a reading: `lane_lb` is the number of free
+    meeters the SAMPLE actually found, so `lane_lb >= 1` means a witnessed square reaches the
+    cell however tight the certified upper bound looks."""
+    vd = r.get("verdict") or "n/a"
+    bits = []
+    if r.get("lane_ub") is not None:
+        bits.append(f"ub {r['lane_ub']}")
+    if r.get("lane_lb") is not None:
+        bits.append(f"lb {r['lane_lb']}")
+    if r.get("M") is not None:
+        bits.append(f"M {r['M']}" + ("" if r.get("M_exact") else "?"))
+    return vd + (" (LANE " + ", ".join(bits) + ")" if bits else "")
+
+
+def cell_rect(cell, s=S0):
+    """the closed unit cell of a slot name, in the CONTAINER frame."""
+    c = cell.split("(")[0]
+    i, j = (int(v) for v in cell.split("(")[1].rstrip(")").split(","))
+    if c == "BL":
+        return (i, i + 1.0, j, j + 1.0)
+    if c == "BR":
+        return (s - (i + 1.0), s - i, j, j + 1.0)
+    if c == "TR":
+        return (s - (i + 1.0), s - i, s - (j + 1.0), s - j)
+    if c == "TL":
+        return (i, i + 1.0, s - (j + 1.0), s - j)
+    raise ValueError(cell)
+
+
+def corner_to_container(cell, u, v, th_deg, s=S0):
+    """A141 and A157 run the lane test IN THE CELL'S CORNER FRAME (`polylane.centre_window` is
+    built from `cell_rect(i, j) = [i, i+1] x [j, j+1]` with the corner at the origin and the axes
+    pointing inward), so every pose in their records is a corner-frame pose.  This is the D4 map
+    back to the container frame; a reflection negates the tilt, and the tilt is 90-periodic for a
+    square.  The cell CENTRES happen to agree with `minimise.slot_centres` in both frames, which
+    is why a wrongly-framed pose is the only thing that shows the mistake -- the first draft drew
+    c0_Y0076's TL(0,0) witness at y = 0.686 instead of y = 3.191."""
+    c = cell.split("(")[0]
+    if c == "BL":
+        return (u, v, th_deg % 90.0)
+    if c == "BR":
+        return (s - u, v, (-th_deg) % 90.0)
+    if c == "TR":
+        return (s - u, s - v, th_deg % 90.0)
+    if c == "TL":
+        return (u, s - v, (-th_deg) % 90.0)
+    return (u, v, th_deg % 90.0)
+
+
+def _depth_into_cell(pose, cell):
+    x0, x1, y0, y1 = cell_rect(cell)
+    P = G.sqpoly(pose[0], pose[1], math.radians(pose[2]))
+    return -G.sat_gap(P, [(x0, y0), (x1, y0), (x1, y1), (x0, y1)])
+
+
+def _witness_poses(node, cell):
+    """The WITNESSED free meeters of a cell, as CONTAINER-frame poses to draw: A157's screen (a
+    free pose, and a disjoint PAIR where its sample found one) for the A57/A60 slots, A141's
+    two-crowd witness (a free square and the conditioned square, disjoint) for the k0 corners.
+
+    A157's poses are corner-frame and are transported; A141's two-crowd poses come from a
+    different code path that already works in the container frame and are left alone.  Every
+    witness is then CHECKED against the cell it claims to meet, and one that does not meet it is
+    kept but marked `meets_cell: false` and not drawn -- a silent reframing error would otherwise
+    put a square in the wrong place and look authoritative."""
+    out = []
+    if node["camp"] == "k0":
+        corner = cell.split("(")[0]
+        r = tbl("a141_twocrowd").get((node["id"], corner))
+        if r:
+            if r.get("free"):
+                out.append(dict(pose=[float(v) for v in r["free"]], role="free meeter",
+                                source="A141 T5 two-crowd", frame="container"))
+            if r.get("H"):
+                out.append(dict(pose=[float(v) for v in r["H"]], role="conditioned square H",
+                                source="A141 T5 two-crowd", frame="container",
+                                gap=float(r.get("gap", 0.0))))
+    else:
+        r = tbl("a157").get((node["id"], cell))
+        if r:
+            p = r.get("pair")
+            if p:
+                for nm, k in (("free meeter a", "a"), ("free meeter b", "b")):
+                    if p.get(k):
+                        out.append(dict(pose=list(corner_to_container(cell, *[float(v)
+                                                                              for v in p[k]])),
+                                        role=nm, source="A157 screen (disjoint pair)",
+                                        frame="corner->container",
+                                        gap=float(p.get("gap", 0.0))))
+            else:
+                w = r.get("witness")
+                if w and w.get("free") and w.get("c") is not None:
+                    out.append(dict(pose=list(corner_to_container(
+                        cell, float(w["c"][0]), float(w["c"][1]), float(w["theta_deg"]))),
+                        role="free meeter", source="A157 screen (witness)",
+                        frame="corner->container",
+                        margin=float(r.get("best_margin") or 0.0)))
+    for w in out:
+        d = _depth_into_cell(w["pose"], cell)
+        w["depth_into_cell"] = float(d)
+        # `meets_cell` is a truthful geometric fact, never a licence to draw: a FREE MEETER must
+        # meet the cell (if it does not, the pose was mis-framed and the page must not show it),
+        # while the conditioned square of a two-crowd pair is the pair's OTHER square and is drawn
+        # with its (possibly negative) reach printed, which is the informative part.
+        w["meets_cell"] = bool(d > 0.0)
+        w["is_free_meeter"] = bool(w["role"].startswith("free"))
+        w["draw"] = bool(w["meets_cell"] or not w["is_free_meeter"])
+    return out
+
+
 def _lane_tags(node):
     tags = []
     if node["camp"] == "k0":
@@ -290,42 +422,41 @@ def _lane_tags(node):
                 (x, y) = M.slot_centres([cell], S0)[0]
             except Exception:                                        # noqa: BLE001
                 continue
-            vd = v.get("verdict") or "n/a"
-            if v.get("lane_ub") is not None:
-                vd += f" (LANE<={v['lane_ub']}, M={v.get('M')})"
-            tags.append(dict(cell=cell, centre=[x, y], verdict=vd, source="A141 T2"))
+            tags.append(dict(cell=cell, centre=[x, y], verdict=_lane_text(v), source="A141 T2",
+                             lane_ub=v.get("lane_ub"), lane_lb=v.get("lane_lb"), M=v.get("M"),
+                             witness=_witness_poses(node, cell)))
         if not tags:
             for c, cell in CORNER_CELL.items():
                 (x, y) = M.slot_centres([cell], S0)[0]
-                tags.append(dict(cell=cell, centre=[x, y], verdict="n/a", source="none"))
+                tags.append(dict(cell=cell, centre=[x, y], verdict="n/a", source="none",
+                                 lane_ub=None, lane_lb=None, M=None,
+                                 witness=_witness_poses(node, cell)))
         return tags
     seen = set()
-    for r in tbl("a141_slots").get(node["id"], []):
-        try:
-            (x, y) = M.slot_centres([r["slot"]], S0)[0]
-        except Exception:                                            # noqa: BLE001
-            continue
-        vd = r["verdict"] + (f" (LANE<={r['lane_ub']}, M={r.get('M')})"
-                             if r.get("lane_ub") is not None else "")
-        tags.append(dict(cell=r["slot"], centre=[x, y], verdict=vd, source="A141 T4 slots"))
-        seen.add(r["slot"])
-    for r in tbl("a141_a5760").get(node["id"], []):
-        cell = r.get("slot") or CORNER_CELL.get(r.get("corner") or "", None)
-        if not cell or cell in seen:
-            continue
-        try:
-            (x, y) = M.slot_centres([cell], S0)[0]
-        except Exception:                                            # noqa: BLE001
-            continue
-        vd = r.get("verdict") or "n/a"
-        if r.get("lane_ub") is not None:
-            vd += f" (LANE<={r['lane_ub']}, M={r.get('M')})"
-        tags.append(dict(cell=cell, centre=[x, y], verdict=vd, source="A141 T2 (A57/A60)"))
-        seen.add(cell)
+    for src, rows in (("A141 T4 slots", tbl("a141_slots").get(node["id"], [])),
+                      ("A141 T2 (A57/A60)", tbl("a141_a5760").get(node["id"], []))):
+        for r in rows:
+            cell = r.get("slot") or CORNER_CELL.get(r.get("corner") or "", None)
+            if not cell or cell in seen:
+                continue
+            try:
+                (x, y) = M.slot_centres([cell], S0)[0]
+            except Exception:                                        # noqa: BLE001
+                continue
+            tags.append(dict(cell=cell, centre=[x, y], verdict=_lane_text(r), source=src,
+                             lane_ub=r.get("lane_ub"), lane_lb=r.get("lane_lb"), M=r.get("M"),
+                             witness=_witness_poses(node, cell)))
+            seen.add(cell)
     if not tags:
         for c, cell in CORNER_CELL.items():
             (x, y) = M.slot_centres([cell], S0)[0]
-            tags.append(dict(cell=cell, centre=[x, y], verdict="n/a", source="none"))
+            tags.append(dict(cell=cell, centre=[x, y], verdict="n/a", source="none",
+                             lane_ub=None, lane_lb=None, M=None,
+                             witness=_witness_poses(node, cell)))
+    # a tag with a WITNESSED meeter is the one that refutes a reading, so it is never dropped
+    tags.sort(key=lambda t: (0 if t["witness"] else 1,
+                             0 if str(t["verdict"]).startswith(("KILL", "NEAR-MISS")) else 1,
+                             t["cell"]))
     return tags[:8]
 
 
@@ -507,10 +638,12 @@ def finish(node):
         look.append(f"DISK BOUND KILLS IT: at most {disk['n_max']} more unit squares fit in the "
                     f"free centre region, budget is {node['budget']}")
     else:
-        look.append(f"free centre region: green {reg.area_green():.3f} + undecided "
-                    f"{reg.area_open() - reg.area_green():.3f} = {reg.area_open():.3f}, against "
-                    f"{node['budget']} remaining squares x 1 unit of area = {node['budget']}; "
-                    f"disk bound says at most {disk['n_max']} more squares fit")
+        look.append(f"CERTIFIED-FREE centre area (green) {reg.area_green():.3f}, plus "
+                    f"{reg.area_open() - reg.area_green():.3f} that is UNDECIDED (grey stipple = "
+                    f"clearance within the margin, NOT feasible - do not read a stippled strip as "
+                    f"free), against {node['budget']} remaining squares x 1 unit of area = "
+                    f"{node['budget']}; the disk bound over green+undecided says at most "
+                    f"{disk['n_max']} more squares fit")
     nn = [p for p in node["pockets"] if p["gap"] < 1.0]
     if nn:
         look.append(f"{len(nn)} pocket(s) narrower than 1 (nothing fits): "
@@ -525,6 +658,14 @@ def finish(node):
            or "LANE<=1" in t["verdict"] or "LANE<=0" in t["verdict"]]
     if hot:
         look.append("lane: " + ", ".join(f"{t['cell']} {t['verdict']}" for t in hot))
+    wit = [(t["cell"], w) for t in node["lane_tags"] for w in t.get("witness", [])]
+    if wit:
+        look.append(f"{len(wit)} WITNESSED free meeter(s) drawn (thin black): "
+                    + ", ".join(f"{c} {w['role']} reaches "
+                                + (f"{w['depth_into_cell']:+.4f}"
+                                   if w.get("depth_into_cell") is not None else "?")
+                                + " into the cell" for c, w in wit[:4])
+                    + " - a hairline grazer refutes 'nothing reaches this cell'")
     g = node["guard"][0] if node["guard"] else None
     if g and g["rhs"] <= 0.15:
         look.append(f"guard line {g['orient']}={g['off']:.4f} ({g['tag']}) has chord sum "
@@ -628,6 +769,17 @@ def csv_row(node, imposs, names, exc, mg):
         guard_within_015=("yes" if g and g.get("rhs", 9) <= 0.15 else "no"),
         n_support=len(node["packing"]), n_impossible=len(imposs),
         w_impossible=f"{sum(r['y'] for r in imposs):.4f}",
+        n_impossible_also_pin_core=sum(1 for r in imposs if r.get("also_pin_core")),
+        w_impossible_also_pin_core=f"{sum(r['y'] for r in imposs if r.get('also_pin_core')):.4f}",
+        n_witnessed_meeters=node.get("n_witness_drawn", 0),
+        witnessed_meeters="; ".join(
+            f"{t['cell']} {w['role']} depth "
+            + (f"{w['depth_into_cell']:+.5f}" if w.get("depth_into_cell") is not None else "?")
+            + f" @{w['pose'][2]:.2f}deg [{w['source']}]"
+            for t in node["lane_tags"] for w in t.get("witness", [])),
+        lane_bounds="; ".join(f"{t['cell']}:ub={t.get('lane_ub')},lb={t.get('lane_lb')},"
+                              f"M={t.get('M')}" for t in node["lane_tags"]),
+        area_undecided=f"{node['region'].area_open() - node['region'].area_green():.4f}",
         panelN_min_sat=f"{mg:+.2e}", panelN_excursion=f"{exc:+.2e}",
         killed_banner=node.get("banner", ""),
         what_to_look_for=node["look"],

@@ -6503,3 +6503,49 @@ of record is `attempts/A150-four-corner-product/notes/composition.md`.
   `slot_kills157.jsonl`; `BRIEF.md`, `notes/method.md`), plus appends to
   `attempts/A57-shadow-trees/PAUSED.md`, `attempts/A60-trump5-campaign/notes/ledger.md` and
   `docs/residue_ledger.md` §1.
+
+## 2026-09-08 - A148-gallery-v4 (Opus engineer) - two drawing fixes, both galleries regenerated
+- **(1) UNDECIDED is no longer green.**  The v4 draft painted the undecided band pale green
+  (`#a5d6a7` @0.30) and it read as feasible: on `k5_11_interior_Y0275` the PI took the pale band
+  left of H for a green strip, and the per-centre all-tilt map against H's actual poses has **no
+  feasible centre there**.  Undecided is now a **light grey stipple with no green in it**;
+  certified-feasible stays green, certified-blocked white, and the pocket hatch stays a grey
+  DIAGONAL hatch so the two greys cannot be confused.  The panel legend and the generated
+  WHAT-TO-LOOK-FOR line both say, verbatim, "grey stipple = undecided (clearance within the
+  margin), NOT feasible", and the look line now reports certified-free and undecided as TWO
+  numbers instead of their sum.  Undecided area is 0.73-1.07 on the eleven k0 cells and 0.41-0.96
+  on the sixty A57/A60 nodes, so painting it green overstated the free set by about a fifth.
+- **(2) The witnessed free meeters are drawn.**  Every usable slot / corner now carries, beside its
+  lane tag, the witnessed free meeters from A157's screen (a free pose, and the sampled DISJOINT
+  PAIR where one was found) and A141's T5 two-crowd witness on the k0 corners - thin black
+  outlines, with **how far each reaches into the cell printed**.  The tag itself prints BOTH bounds
+  and M (`ub` certified, `lb` sampled, `M` conditioned with `?` when not exact), because `ub` alone
+  hides what refutes a reading.
+- **What the witnesses show.**  Ten drawn on seven A57/A60 nodes, and **every one sits on a cell
+  A141 recorded UNDECIDED with `lane_lb = 0`** - its own sample found no free meeter - while A157's
+  denser screen found one: `c0_Y0076` TL(0,0) **+0.00045**, BL(0,2) **+0.00813**;
+  `k5_16_interior_Y0865` BR(1,0) and `slack0.02_c0_Y0272` BL(0,2) each a **DISJOINT PAIR**
+  (+0.00039 / +0.13998 and +0.00079 / +0.14411 - two free meeters that miss each other, so the lane
+  is >= 2 and "singly met" is dead); `k5_16_interior_Y0491` BR(0,1) +0.00058, `k5_16_interior_Y0839`
+  BR(0,1) +0.00064, `k5_16_interior_Y0275` TR(1,0) +0.00262, `c0_Y0175` BL(0,2) +0.12972.  On k0,
+  `l1_124` / `l1_153` / `l2_p114_001` TR(0,0) (tagged NEAR-MISS, ub 1, M 1) have a free meeter
+  reaching **+0.98 to +1.00** into the corner while the conditioned square H reaches **-0.026 to
+  -0.036** - H does NOT reach that corner in the witness.
+- **A framing bug the fix exposed.**  A141 and A157 run the lane test IN THE CELL'S CORNER FRAME
+  (`polylane.centre_window` from `cell_rect(i,j) = [i,i+1]x[j,j+1]`, corner at the origin, axes
+  inward), so every pose in their records is corner-frame.  The cell CENTRES coincide in both
+  frames, so nothing on the earlier pages could reveal it; the first witness draft put `c0_Y0076`'s
+  TL(0,0) witness at y = 0.686 instead of 3.191.  Poses are now transported by the corner's D4 map
+  (a reflection negates the tilt, 90-periodic), each witness is CHECKED against the cell it claims
+  to meet, and a free meeter that fails is recorded and not drawn.
+- **Also this pass**: (a) each red-dashed impossible column in panel S now says whether it ALSO
+  overlaps an EXACT PIN CORE - pin geometry alone excludes it, inside the frozen certificate schema
+  - or only K'(B), which needs the polygon-core clause: **356 of 966** columns over the sixty A57/A60
+  pages do, and **0 of 44** on k0 (which has no pins); (b) A141's `t2_a5760` sweep is one row PER
+  NODE with a nested `cells` list, which the draft read as one row per cell - that is why every
+  A57/A60 lane tag read `n/a`.  Fixed: **60 of 60** pages now carry A141's real per-slot verdicts.
+- **Verification** gains check H: every drawn witness is inside the container, and every one billed
+  as a FREE MEETER overlaps its named cell and has its interior clear of every certified core, under
+  the independent edge-crossing predicate.  k0v4: 11 pages, 6 witnesses, **0 failures**.  a57v4: 60
+  pages, 10 witnesses, 966 red-dashed columns + 2 192 controls, 24 000 region points, 10 830 000
+  guard-chord draws, **0 failures**; 0 hits in the generators' own 1 420 000 region draws.

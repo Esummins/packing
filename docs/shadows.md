@@ -5360,3 +5360,56 @@ conditioned square and **~9 900** checking each exact pin core inside its pinned
 pocket separations; every red-dashed column plus its controls; **180** guard rows x 10^4 chord draws
 per box.  **0 failures**, and 0 hits in the generator's own 10^4 + 10^4 per-page region sampling
 (1 200 000 draws over the set).
+
+### Part V drawing revision (A148, 2026-09-08 afternoon) - two fixes, both galleries regenerated
+
+**(1) UNDECIDED is no longer painted green.**  The first v4 draft filled the undecided band with
+pale green (`#a5d6a7` at 0.30) and it read as feasible: on `k5_11_interior_Y0275` the PI took the
+pale band left of H for a green strip, and the per-centre all-tilt map against H's actual poses has
+**no feasible centre there at all**.  Undecided is now a **light grey stipple with no green anywhere
+in it**, certified-feasible stays green, certified-blocked stays white, and the pocket hatch stays a
+grey DIAGONAL hatch so the two grey objects cannot be confused.  The panel legend and the generated
+WHAT-TO-LOOK-FOR line both now say, in those words, *"grey stipple = undecided (clearance within the
+margin), NOT feasible"*, and the WHAT-TO-LOOK-FOR line reports the certified-free area and the
+undecided area as two separate numbers instead of adding them.  Undecided area is 0.73-1.07 on the
+eleven k0 cells and 0.36-1.03 on the sixty A57/A60 nodes - i.e. it was never a small correction, and
+painting it green overstated the free set by roughly a fifth.
+
+**(2) The witnessed free meeters are drawn.**  Three PI readings today were refuted by hairline
+grazers invisible on the page, so every usable slot and corner now carries, beside its lane tag, the
+**witnessed free meeters** from A157's screen (a free pose, and the sampled DISJOINT PAIR where its
+sample found one) and A141's T5 two-crowd witness on the k0 corners: thin black outlines, with **how
+far each reaches into the cell printed**.  The lane tag itself now prints BOTH bounds and M -
+`ub` (certified upper bound), `lb` (free meeters the sample actually found), `M` (conditioned
+meeters, `?` when not certified exactly) - because `ub` alone hides the thing that refutes a
+reading.  Two examples now visible on the pages:
+
+| node | cell | tag | witness |
+|---|---|---|---|
+| `c0_Y0076` | `TL(0,0)` | UNDECIDED, lb 0, M 1 | a free meeter reaching **+0.00045** into the cell |
+| `c0_Y0076` | `BL(0,2)` | UNDECIDED, lb 0, M 1 | a free meeter reaching **+0.00813** into the cell |
+| `l1_124`, `l1_153`, `l2_p114_001` | `TR(0,0)` | NEAR-MISS, ub 1, M 1 | a free meeter reaching **+0.98 to +1.00** into the cell, while the conditioned square H reaches **-0.026 to -0.036** (it does NOT reach the corner) |
+
+A157's brief records the PI reading `c0_Y0076`'s `TL(0,0)` as singly met; the witness is a second,
+free square grazing 0.45 thousandths into that cell, and A141's own sample had reported `lane_lb = 0`
+for it.  That is the class of refutation this fix exists to make visible.
+
+**A framing bug the fix exposed.**  A141 and A157 run the lane test **in the cell's corner frame**
+(`polylane.centre_window` is built from `cell_rect(i,j) = [i,i+1] x [j,j+1]` with the corner at the
+origin and the axes pointing inward), so every pose in their records is a corner-frame pose.  The
+cell CENTRES happen to coincide in both frames, so nothing in the earlier pages could reveal it; the
+first witness draft put `c0_Y0076`'s `TL(0,0)` witness at y = 0.686 instead of y = 3.191.  Poses are
+now transported by the corner's D4 map (a reflection negates the tilt, which is 90-periodic), each
+witness is **checked against the cell it claims to meet**, and a free meeter that fails that check is
+recorded and NOT drawn.  `data148.corner_to_container` carries the derivation.
+
+**(3) Also added, same pass**: each red-dashed impossible column in panel S now says whether it
+**also overlaps an EXACT PIN CORE** - pin geometry alone excludes it, inside the frozen certificate
+schema - or only K'(B), which needs the polygon-core clause; the count and weight of each kind are in
+the panel caption and the review CSV.  And A141's `t2_a5760` sweep is one row PER NODE with a nested
+`cells` list, which the first draft read as one row per cell: that is why every A57/A60 lane tag read
+`n/a`.  Fixed - the sixty pages now carry A141's real per-slot verdicts.
+
+**Verification** gains check **H**: every drawn witness lies inside the container, and every one
+billed as a FREE MEETER overlaps its named cell and has its interior clear of every certified core,
+all under the independent edge-crossing predicate.
