@@ -22,6 +22,24 @@ S0 = C140.S0
 NOSHADOW = {"l1_124", "l1_153", "l1_158"}       # no A107 gallery entry under ANY alias
 
 
+def _exs(r):
+    """The exact-core arm's verdict for one cell, for the README table."""
+    e = r.get("exact") or {}
+    if not e or e.get("tau") is None:
+        return "not run"
+    c = e.get("cert") or {}
+    if c.get("result") == "PASS":
+        return ("**CERTIFIED DEAD** — tau %.4f of %d, converged, FROZEN verify_case PASS "
+                "(`certs/%s`)" % (e["tau"], e["budget"], c["cert"]))
+    if c.get("result"):
+        return "converged kill, certificate %s (`certs/%s`)" % (c["result"], c.get("cert"))
+    if e.get("kills"):
+        return ("kill candidate — tau %.4f of %d, unconverged after 240+900 s"
+                % (e["tau"], e["budget"]))
+    return "alive — tau %.4f = budget%s" % (e["tau"], ", converged" if e.get("converged") else
+                                            ", unconverged at cap")
+
+
 def pi_reading(g):
     """What the PI's reading would decide, for each cell."""
     iv = g.get("invitro") or {}
@@ -54,6 +72,15 @@ def pi_reading(g):
 
 def main():
     g = json.load(open(os.path.join(BASE, "results", "gallery140.json"), encoding="utf-8"))
+    ex = {}
+    exp = os.path.join(BASE, "results", "exactcore140.jsonl")
+    if os.path.exists(exp):
+        for ln in open(exp, encoding="utf-8"):
+            if ln.strip():
+                r = json.loads(ln)
+                ex[r["cell"]] = r
+    for r in g:
+        r["exact"] = ex.get(r["cell"], {})
     t1 = json.load(open(os.path.join(BASE, "results", "t1_polycore.json"), encoding="utf-8"))
     A = []
     a = A.append
@@ -96,7 +123,7 @@ def main():
           f"{r['level']} | {sst} | {fam} | "
           f"K' meets {sup['n_poly']} of {sup['n']} support columns (K(a) meets 0), weight "
           f"{sup['w_poly_only']:.3f} of {sup['w']:.1f} vs slack {r['slack']:+.1e}; exact-core "
-          f"part {sup['w_exact_only']:.3f} | {ivs} | {r['cover']['kind']} on "
+          f"part {sup['w_exact_only']:.3f} | {ivs} | {_exs(r)} | {r['cover']['kind']} on "
           f"{r['cover']['cell']} | {pi_reading(r)} |")
     a("")
     a("## The three cells that had no drawing before\n")
@@ -156,6 +183,55 @@ def main():
     a("* Under the panels: the box(es), tau / eta / minmass, the T1 polygon-core measurement, the "
       "slot census (A113), the lane count (A118), the cover in words with what it needs to be a "
       "certified leaf, and the geometry check.\n")
+    # ---------------------------------------------------------------- exact-core arm
+    cert = [r for r in g if ((r.get("exact") or {}).get("cert") or {}).get("result") == "PASS"]
+    cfail = [r for r in g if ((r.get("exact") or {}).get("cert") or {}).get("result")
+             not in (None, "PASS")]
+    cand = [r for r in g if (r.get("exact") or {}).get("kills")
+            and not ((r.get("exact") or {}).get("cert") or {}).get("result")]
+    alv = [r for r in g if (r.get("exact") or {}).get("tau") is not None
+           and not (r.get("exact") or {}).get("kills")]
+    cpu = sum((r.get("exact") or {}).get("wall_s", 0.0) for r in g)
+    a("## The exact-core arm — the only kill here that is certifiable TODAY\n")
+    a("A135's `exactcore.exact_a` returns the largest rational half-side `a` at the box's own "
+      "`(kx, ky, tm)` whose four corners pass A132's exact rational vertex test.  It is still a "
+      "**square at the box's own tilt**, so it fits the FROZEN certificate schema "
+      "`{kx, ky, tm, a}` verbatim — `verify_case.py` reads `a` straight out of the file and never "
+      "re-derives it from the box.  Unlike the polygon core, a kill from this arm needs **no "
+      "verifier change**.  One re-solve per cell with the exact cores as the row filter (240 s, "
+      "then a 900 s warm continuation where tau was below budget but unconverged); every "
+      f"converged kill certified through the frozen `verify_case.py`.  {cpu / 3600.0:.2f} CPU-h, "
+      "2 BelowNormal processes.\n")
+    a("| cell | a_stock → a_exact (area gain) | tau / budget | converged | verdict | certificate |")
+    a("|---|---|---|---|---|---|")
+    for r in sorted(g, key=lambda r: (not (r.get("exact") or {}).get("kills"), r["cell"])):
+        e = r.get("exact") or {}
+        if e.get("tau") is None:
+            a(f"| `{r['cell']}` | - | - | - | not run | - |")
+            continue
+        c = e.get("cert") or {}
+        ar = ", ".join(f"{a0:.6f} → {ax:.6f} ({rt:.3f}x)" for a0, ax, rt
+                       in zip(e["a_stock"], e["a_exact"], e["area_ratio"]))
+        vd = ("**CERTIFIED DEAD**" if c.get("result") == "PASS" else
+              ("converged kill, cert " + c["result"] if c.get("result") else
+               ("kill candidate (unconverged)" if e.get("kills") else "alive")))
+        cc = (f"`certs/{c['cert']}` — {c['result']}, total {c['total']:.6f} < {c['budget']}, "
+              f"verifier {c.get('verify_s')} s" if c.get("result") else "-")
+        a(f"| `{r['cell']}` | {ar} | {e['tau']:.6f} / {e['budget']} | {e['converged']} | {vd} | "
+          f"{cc} |")
+    a("")
+    a(f"**SURVIVOR COUNT.  {len(cert)} certified dead, {len(cfail)} cert-FAIL, {len(cand)} kill "
+      f"candidates (below budget, unconverged after 240 + 900 s), {len(alv)} alive.  The "
+      f"converged-alive k0_00 residue drops from {len(g)} to {len(g) - len(cert)} cells**"
+      + (" — `" + "`, `".join(r["cell"] for r in cert) + "` "
+         + ("is" if len(cert) == 1 else "are") + " now dead under the FROZEN verifier, with the "
+         "exact axis cores written into the certificate and nothing else changed."
+         if cert else ".") + "\n")
+    if cand:
+        a("The " + str(len(cand)) + " kill candidates (" +
+          ", ".join(f"`{r['cell']}`" for r in cand) + ") are below budget but the LP had not "
+          "converged at 240 + 900 s; a longer warm continuation is what would settle them, and "
+          "each would then certify the same way.\n")
     a("## The two levers, and how they split the twelve\n")
     kills = [r["cell"] for r in g if (r.get("invitro") or {}).get("kills")]
     conv = [r["cell"] for r in g if (r.get("invitro") or {}).get("kills_converged")]
@@ -178,9 +254,10 @@ def main():
           + " in neither — that is where a genuinely new reading is needed") if neither else
          "every one of the twelve is in at least one bucket, so none is without a concrete route")
       + ".\n")
-    a("* **The cheapest untried measurement** is an exact-core arm of the in-vitro LP: A135's "
-      "exact axis core needs no verifier change and already removes 50-100 % of K''s excluded "
-      "weight on nine of the twelve.  It was not run here (the brief allows one LP per cell).\n")
+    a(f"* **Exact core (certifiable today).**  {len(cert)} of {len(g)} certified dead through the "
+      f"FROZEN verifier, {len(cand)} more below budget but unconverged: "
+      + ", ".join(f"`{r['cell']}`" for r in cert + cand) + ".  This is the only lever of the "
+      "three whose kills need no change to `verify_case.py`.\n")
     a("## Provenance and soundness\n")
     a("* Every K' is A132's **certified** polygon (exact rational vertex test, "
       "`polycore.vertex_ok`); the half-side of the exact axis core is A135's `exactcore.exact_a`, "
@@ -237,6 +314,21 @@ def main():
       f"would settle.  The measurement, per cell and per box, is "
       f"`attempts/A140-k0-residue-gallery/results/t1_polycore.json`; the same scan over all 166 "
       f"OPEN k0 cells A115 lists finds K'-excluded dual weight on every one (median 2.02).\n")
+    b(f"**The one result here that is certifiable TODAY.**  A135's EXACT axis core "
+      f"(`exactcore.exact_a`) is still a square at the box's own tilt, so the frozen certificate "
+      f"schema `{{kx, ky, tm, a}}` is unchanged and `verify_case.py` reads `a` verbatim.  One "
+      f"re-solve per cell with the exact cores as the row filter (240 s, then 900 s warm where "
+      f"tau was below budget but unconverged), {cpu / 3600.0:.2f} CPU-h: **{len(cert)} certified "
+      f"dead, {len(cfail)} cert-FAIL, {len(cand)} kill candidates, {len(alv)} alive** -- the "
+      f"converged-alive k0_00 residue drops from {len(g)} to {len(g) - len(cert)} cells."
+      + (" `" + "`, `".join(r["cell"] for r in cert) + "` passed the FROZEN verifier "
+         + "(" + "; ".join("total %.6f < %d, %s s"
+                           % (((r["exact"]["cert"])["total"]), (r["exact"]["cert"])["budget"],
+                              (r["exact"]["cert"]).get("verify_s")) for r in cert)
+         + "); certificates in `attempts/A140-k0-residue-gallery/certs/`."
+         if cert else "") +
+      (" Kill candidates: `" + "`, `".join(r["cell"] for r in cand)
+       + "` -- below budget, LP not converged at 240 + 900 s." if cand else "") + "\n")
     n2 = sum(1 for r in g if r["cover"]["kind"].startswith("two-meeter"))
     b(f"Second result, independent of the LP: A118's lane count was never run on `l1_124`, "
       f"`l1_153` or `l1_158` (A38 has no node json for them, so they were not in A118's corpus).  "

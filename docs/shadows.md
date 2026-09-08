@@ -5232,62 +5232,6 @@ Part II above is the A107 K-gallery of the k0_00 class, built from the A38/A85/A
 
 The polygon core K'(B) meets dual-support columns the axis core K(a) misses on **all twelve** cells (A132's measurement, run on k0 for the first time); one in-vitro re-solve per cell (240 s cap) with the column pool pruned by K' drops tau below budget on **8 of 12**.  On **1** of those the LP also CONVERGED there, which is LP-dead under the polygon core with the certificate pending (the frozen verifier knows only K(a)); the other 7 are A57's `dead_unconverged` -- kill candidates a warm continuation would settle.  The measurement, per cell and per box, is `attempts/A140-k0-residue-gallery/results/t1_polycore.json`; the same scan over all 166 OPEN k0 cells A115 lists finds K'-excluded dual weight on every one (median 2.02).
 
+**The one result here that is certifiable TODAY.**  A135's EXACT axis core (`exactcore.exact_a`) is still a square at the box's own tilt, so the frozen certificate schema `{kx, ky, tm, a}` is unchanged and `verify_case.py` reads `a` verbatim.  One re-solve per cell with the exact cores as the row filter (240 s, then 900 s warm where tau was below budget but unconverged), 1.54 CPU-h: **1 certified dead, 0 cert-FAIL, 3 kill candidates, 8 alive** -- the converged-alive k0_00 residue drops from 12 to 11 cells. `s3_far_BL389484_TR018470` passed the FROZEN verifier (total 6.983004 < 7, 4.3 s); certificates in `attempts/A140-k0-residue-gallery/certs/`. Kill candidates: `l1_148`, `l2_p65_101`, `l2_p65_111` -- below budget, LP not converged at 240 + 900 s.
+
 Second result, independent of the LP: A118's lane count was never run on `l1_124`, `l1_153` or `l1_158` (A38 has no node json for them, so they were not in A118's corpus).  Re-running A118's own `lane.run_cell` unchanged gives **TR(0,0) LANE <= 1** on all three; with `l1_159`'s TR(0,0) and `s3_far`'s BL(0,0), **5 of 12** cells now carry a two-meeter cover whose geometric half is already certified.  None is a kill on its own (the conditioned square can itself reach the cell, so the meeter count is <= 2 and K0-FREE does not fire directly) -- each is a two-child cover: the conditioned square meets the cell (shrink its box, re-solve) or it does not (the cell is met by <= 1 square and K0-FREE teleports into k1).  Per-cell verdicts: `attempts/A140-k0-residue-gallery/results/lane140.json`.
-
-
-# Part IV - the A57 / A60 review gallery v3 (A142)
-
-Parts I-III are the k0_00 and pinned-class shadow galleries. Part IV is the **A57 / A60 review gallery**: one page per surviving alive node, drawn in the format the PI reviewed on 2026-09-07 (Part III / `docs/shadows/k0v3/`), carrying the objects the A57 figures had never shown - the **exact pin cores** (A135), the **polygon core K'(B)** (A132) and the **pin-clipped centre box** (A131) - and, per the PI's drawing rules of that evening, all THREE cores of every conditioned square in distinct styles (stock K(a) solid black, A135's exact axis core solid teal, K' filled purple, captioned `a_stock / a_exact / area K'`), both cores of every pin, each red-dashed column labelled with which core it clears and which it meets, and every schematic object (centre box, clipped box, lane cell) as a thin dashed outline with no fill.
-
-**Pages:** `docs/shadows/a57v3/<node>.svg` - 40 A57 + 20 A60. **Index and ranked table:** `docs/shadows/a57v3/README.md`. **Review sheet:** `docs/shadows/a57v3/review_a57v3.csv` (review.csv's columns + `polycore_status`, `clip_kept`, `lane_1_corners`, `narrowest_pocket`, PI columns empty). **Machine-readable:** `attempts/A142-a57-review-gallery/results/`.
-
-## IV.1 The population: which alive nodes survive today's kills
-
-Of A131's **607 work-owing nodes (414 ALIVE + 193 FAIL)**:
-
-| removed by | list | hits | NEW | running |
-|---|---|---|---|---|
-| pinclip_A131 | 132 | 132 | 132 | 132 |
-| polycore_A135 | 64 | 54 | 6 | 138 |
-| lp_certified_A135 | 3 | 3 | 2 | 140 |
-| trimempty_A124 | 54 | 54 | 0 | 140 |
-| descendants_of_killed (monotonicity) | 824 | 2 | 2 | 142 |
-
-**465 survive (330 alive + 135 fail; L1 366, L2 95, L3 4)**. The four kill lists overlap almost completely - all 54 A124 trim-empty nodes and 54 of the 64 polygon kills are already inside the 132 pin-clip kills - so 253 list entries remove 142 nodes. A60 adds 283 nodes with an LP support (A107 `shadow_nodes.json`), all at depth j = 0.
-
-## IV.2 The subtree-cost ranking
-
-From `docs/budget.md` section B, with the per-level verdict shares measured on A57's own 2,418-box corpus:
-
-```
-C(L) = p_K(L)*0 + p_L(L)*850 + p_A(L)*(300 + 8*C(L+1)),   C(5) = 0
-subtree(n) = residual(n) + SUM over still-open emitted descendants d of residual(d)
-residual(ALIVE frontier at L) = 8*C(L+1)*kept8(n)   [kept8 = A131's pin-clip kept volume]
-residual(FAIL) = 900 s
-```
-
-| L | C(L) | | L | C(L) |
-|---|---|---|---|---|
-| 1 | 2632 s | | 3 | 1020 s |
-| 2 | 1297 s | | 4 | 372 s |
-
-Top of the A57 list: `k5_11_interior_Y1104` 11.59 CPU-h (1.000 clip, 6 still-open emitted descendants), then `k5_11_interior_Y0672` and `k5_16_interior_Y0083` at 4.53. The model cannot see inside an un-descended box, so every level-1 ALIVE node with `kept8 = 1` and no emitted child ties at 2.88 CPU-h; ties break on the polygon core's measured bite on that node's own dual support (A132 `w_poly_only`).
-
-## IV.3 What the drawing found: the pin-clip at the EXACT pin core
-
-A131 deployed the clip with the stock pin core `a = 1/2 - delta = 0.49`; A135 certified the pin's guaranteed core to be `1/2 - delta/sqrt2 = 0.492928902` and that the frozen verifiers take the half-side verbatim. Enlarging `a_pin` in the clip is sound for the same reason it is sound in the verifier (the pin square contains K'(P) at every pose of the pin box), and it costs nothing. Run over the whole surviving population:
-
-* **A57: 0 boxes empty at the stock core** (the correct control - the 132 stock-clip kills are already out of this population) **and 17 at the exact core. Those 17 are NEW T5''' logic kills**, geometry only, no LP and no certificate change: `k5_11_interior_Y1002`, `k5_11_interior_Y0041_D02`, `k5_11_interior_Y0414_D02`, `k5_11_interior_Y0930`, `k5_11_interior_Y0978_D05`, `k5_11_interior_Y1002_D05`, `k5_11_interior_Y1134_D06`, `k5_11_interior_Y1134_D07`, `k5_16_interior_Y0930`, `k5_16_interior_Y0997`, `k5_16_interior_Y1002`, `k5_16_interior_Y0449`, `k5_16_interior_Y0648`, `k5_16_interior_Y0809`, `k5_11_interior_Y0997`, `k5_11_interior_Y1099`, `k5_16_interior_Y1099`.
-* **A60 had never been clipped at all.** Its pins are exact placements, so the guaranteed pin core is the whole unit square (`a_pin = 1/2`): of 283 A60 nodes with an LP support, **34 clip to EMPTY** and 143 more are narrowed.
-* The exact core also narrows **272 of 465** A57 boxes strictly further than the stock core (mean kept volume 0.60161 -> 0.58448).
-
-Independent control (sampling, a different code path): 4,000 uniform poses drawn in each EMPTY node's box give **zero** pin-free poses; non-empty controls give 75-2,126. Every page draws both clips (pale orange dotted = stock, heavy orange dashed = exact) so the difference is visible on the node.
-
-## IV.4 What the pages carry, and the geometry check
-
-Over the 60 pages: 1240 red-dashed columns (of which 211 are impossible against an EXACT PIN CORE rather than against the conditioned square - the pins' share A132's attribution predicted), 1068 of them carrying a core certificate; 11 pages with at least one A118 LANE<=1 corner; 58 pages whose narrowest measured pocket between K'(B) and its nearest neighbour is under 1.
-
-`code/verify142.py` re-checks all of it with a SECOND implementation (edge crossing + strict point-in-polygon; no separating axis anywhere in the file): 1240 red-dashed columns over 361906 poses (0 failures); 2088 non-flagged control columns, each shown disjoint at some pose of every box (0); 300 exact pin cores contained in their pin square over 9900 poses (0); 2384 K'(B) vertices contained over 20580 poses (0); 446 clipped rects inside the original box (0). **Total failures: 0.**
-
-Two caveats of record. (1) Lane counts on these pages are **A118's stored AXIS-CORE verdicts** (K(a), not K'): A141's K' lane run had not landed when the pages were drawn, so a corner marked UNDECIDED here may still become LANE<=1 under K' - exactly the s3_far effect the PI read on the Part III page. (2) A pocket is an exact convex-polygon DISTANCE, hence a measurement the reading can use, not a proof that nothing fits: the proof is the lane leaf.
-
