@@ -32,3 +32,11 @@ attempts/A112-dual-branching/results/nodes/
 attempts/A120-no-side-runner/results/nodes/
 attempts/A120-no-side-runner/certs/*.resolve*.json
 attempts/A120-no-side-runner/certs/*.witnesses.json
+
+# A125: the three large local certificates (34 + 21 + 19 MB of gzipped proof tree) are regenerable
+# byte-for-byte by code/exact125.py from the recorded (tag, r, rho); their sha256 and node counts
+# are in certs/manifest.json and their independent-checker verdicts in results/check_local.json,
+# both committed.  The three small ones are committed in full.
+attempts/A125-s33-local-cert/certs/S33_k6_07_r0.20_rho10.cert.json.gz
+attempts/A125-s33-local-cert/certs/S33_k6_07_r0.05_rho20.cert.json.gz
+attempts/A125-s33-local-cert/certs/S38_k6_21_r0.10_rho10.cert.json.gz

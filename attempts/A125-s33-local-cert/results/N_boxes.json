@@ -1,0 +1,2563 @@
+{
+ "generated": "2026-09-07T17:02:19",
+ "source": "attempts/A125-s33-local-cert/results/grid_*.jsonl (minima: attempts/A122-s33-certify/results/exact.json; machinery: A116 a116lib + A119 a119lib/check_local.py, read-only)",
+ "s0": 3.877084,
+ "shat": 3.877083590022814,
+ "s_lo": 3.82,
+ "s_hi": 3.897084,
+ "pin_slack": 0.0070710678118654745,
+ "note": "A119 attempts/A119-local-cert-lean/notes/n_boxes.md (DROP/COVER: 'a square in each box' + pins => inside N).  A125 adds the class frames k6_07 (S33, identity) and k6_21 (S38, D4 element `diag`).",
+ "d4_ops": {
+  "e": "(x, y, t)",
+  "r90": "(s - y, x, t)",
+  "r180": "(s - x, s - y, t)",
+  "r270": "(y, s - x, t)",
+  "mx": "(s - x, y, -t)",
+  "my": "(x, s - y, -t)",
+  "diag": "(y, x, -t)",
+  "anti": "(s - y, s - x, -t)"
+ },
+ "d4_ops_note": "apply at s = s0 = 3.877084; A107's struct_op per node, then test the boxes",
+ "N": [
+  {
+   "id": "S33_k6_07_r0.20_rho10",
+   "tag": "S33",
+   "cls": "k6_07",
+   "frame": "e",
+   "r": 0.2,
+   "rho_deg": 10.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "s_star": 3.9169308657139204,
+   "L": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "BL(0,2)",
+    "BL(1,0)",
+    "BR(0,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      1.284740527566093,
+      1.684740527566093
+     ],
+     "cy": [
+      1.7340819315508218,
+      2.134081931550822
+     ],
+     "theta_deg": [
+      -10.0,
+      10.0
+     ],
+     "anchor": [
+      1.484740527566093,
+      1.9340819315508218,
+      3.953409291468777e-80
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.19999999999999996,
+      0.20000000000000007,
+      10.0
+     ]
+    },
+    {
+     "name": "f1",
+     "cx": [
+      2.210348669615177,
+      2.610348669615177
+     ],
+     "cy": [
+      2.485663385371613,
+      2.8856633853716134
+     ],
+     "theta_deg": [
+      30.000496775347923,
+      50.000496775347926
+     ],
+     "anchor": [
+      2.410348669615177,
+      2.685663385371613,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.20000000000000018,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.2593856912403203,
+      1.6593856912403202
+     ],
+     "cy": [
+      2.979833456009657,
+      3.3798334560096572
+     ],
+     "theta_deg": [
+      30.000496775347923,
+      50.000496775347926
+     ],
+     "anchor": [
+      1.4593856912403202,
+      3.179833456009657,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.19999999999999996,
+      0.20000000000000018,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.2561363291692182,
+      2.6561363291692186
+     ],
+     "cy": [
+      1.0429589004701514,
+      1.4429589004701513
+     ],
+     "theta_deg": [
+      41.44852867103262,
+      61.44852867103261
+     ],
+     "anchor": [
+      2.4561363291692184,
+      1.2429589004701513,
+      51.44852867103262
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.19999999999999996,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      2.9776356267119497,
+      3.37763562671195
+     ],
+     "cy": [
+      1.7731172759792673,
+      2.1731172759792674
+     ],
+     "theta_deg": [
+      37.08870461508636,
+      57.08870461508636
+     ],
+     "anchor": [
+      3.17763562671195,
+      1.9731172759792672,
+      47.08870461508636
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.20000000000000007,
+      10.000000000000002
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "BL(0,2)",
+     "alpha": [
+      0.5,
+      2.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      2.5
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8770848611041986,
+    "measured_min": 3.9169308660688076,
+    "nodes": 420899,
+    "n_near": 19,
+    "leaves_after_interval": 248832,
+    "seconds": 1151.4
+   },
+   "trump_canary": {
+    "inside": false,
+    "ops": [],
+    "cut_applied": null,
+    "note": "A122 a116_input.json: at S33min the keystone f0 is upright while Trump's nearest square is at 40.182 deg, so f0's box excludes Trump on position alone out to r = 0.2054"
+   },
+   "sample_check": {
+    "drawn": 1325000,
+    "tested": 10146,
+    "hits": 0,
+    "worst_free_overlap_of_rejects": -4.385683503027593e-06,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "source": "results/grid_*.jsonl"
+   },
+   "exact_certificate": {
+    "bytes": 34268402,
+    "certified_min": 3.8770848611041986,
+    "file": "S33_k6_07_r0.20_rho10.cert.json.gz",
+    "generated": "2026-09-07T12:12:57",
+    "node_counts": {
+     "bisect": 197978,
+     "branch": 7017,
+     "dead": 215904,
+     "mult": 4385025
+    },
+    "seconds_tree": 1227.5,
+    "sha256": "ab2cfeae2ba37fe1b39c8e7b1d93f48fe796a0e7f320c3370c3778d12693a2e4"
+   },
+   "independent_check": {
+    "file": "S33_k6_07_r0.20_rho10.cert.json.gz",
+    "id": "S33_k6_07_r0.20_rho10",
+    "ok": true,
+    "checker": "attempts/A119-local-cert-lean/code/check_local.py (imported unmodified)",
+    "sha256": "ab2cfeae2ba37fe1b39c8e7b1d93f48fe796a0e7f320c3370c3778d12693a2e4",
+    "seconds": 5034.3,
+    "bytes": 34268402,
+    "counts": {
+     "dead": 215904,
+     "imp": 0,
+     "imp_sel": 0,
+     "bisect": 197978,
+     "qsplit": 0,
+     "branch": 7017,
+     "rows": 4385025,
+     "mult": 4385025,
+     "forced": 822603,
+     "excluded": 4349115,
+     "infeas": 33366
+    },
+    "certified_min": 3.8770850966458736,
+    "s0": 3.877084,
+    "errors": [],
+    "when": "2026-09-07T14:30:49"
+   },
+   "frame_ops": {
+    "anti": {
+     "count": 5,
+     "example": "s1cor_near_b178"
+    },
+    "diag": {
+     "count": 196,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 1107,
+     "example": "k5_11_interior_Y0017"
+    },
+    "mx": {
+     "count": 20,
+     "example": "s1int_l1_053"
+    },
+    "my": {
+     "count": 9,
+     "example": "s1int_l2_l2_p210_001"
+    },
+    "r180": {
+     "count": 21,
+     "example": "s1int_l1_043"
+    },
+    "r270": {
+     "count": 40,
+     "example": "s1int_l2_l2_p215_011"
+    },
+    "r90": {
+     "count": 23,
+     "example": "s1cor_far_b595"
+    }
+   }
+  },
+  {
+   "id": "S33_k6_07_r0.20_rho5",
+   "tag": "S33",
+   "cls": "k6_07",
+   "frame": "e",
+   "r": 0.2,
+   "rho_deg": 5.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "s_star": 3.9169308657139204,
+   "L": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "BL(0,2)",
+    "BL(1,0)",
+    "BR(0,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      1.284740527566093,
+      1.684740527566093
+     ],
+     "cy": [
+      1.7340819315508218,
+      2.134081931550822
+     ],
+     "theta_deg": [
+      -5.0,
+      5.0
+     ],
+     "anchor": [
+      1.484740527566093,
+      1.9340819315508218,
+      3.953409291468777e-80
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.19999999999999996,
+      0.20000000000000007,
+      5.0
+     ]
+    },
+    {
+     "name": "f1",
+     "cx": [
+      2.210348669615177,
+      2.610348669615177
+     ],
+     "cy": [
+      2.485663385371613,
+      2.8856633853716134
+     ],
+     "theta_deg": [
+      35.000496775347926,
+      45.000496775347926
+     ],
+     "anchor": [
+      2.410348669615177,
+      2.685663385371613,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.20000000000000018,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.2593856912403203,
+      1.6593856912403202
+     ],
+     "cy": [
+      2.979833456009657,
+      3.3798334560096572
+     ],
+     "theta_deg": [
+      35.000496775347926,
+      45.000496775347926
+     ],
+     "anchor": [
+      1.4593856912403202,
+      3.179833456009657,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.19999999999999996,
+      0.20000000000000018,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.2561363291692182,
+      2.6561363291692186
+     ],
+     "cy": [
+      1.0429589004701514,
+      1.4429589004701513
+     ],
+     "theta_deg": [
+      46.44852867103262,
+      56.44852867103262
+     ],
+     "anchor": [
+      2.4561363291692184,
+      1.2429589004701513,
+      51.44852867103262
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.19999999999999996,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      2.9776356267119497,
+      3.37763562671195
+     ],
+     "cy": [
+      1.7731172759792673,
+      2.1731172759792674
+     ],
+     "theta_deg": [
+      42.08870461508636,
+      52.08870461508636
+     ],
+     "anchor": [
+      3.17763562671195,
+      1.9731172759792672,
+      47.08870461508636
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.20000000000000018,
+      0.20000000000000007,
+      5.000000000000001
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "BL(0,2)",
+     "alpha": [
+      0.5,
+      2.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      2.5
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.877130280474695,
+    "measured_min": 3.9169308713385935,
+    "nodes": 7063,
+    "n_near": 18,
+    "leaves_after_interval": 41472,
+    "seconds": 20.8
+   },
+   "trump_canary": {
+    "inside": false,
+    "ops": [],
+    "cut_applied": null,
+    "note": "A122 a116_input.json: at S33min the keystone f0 is upright while Trump's nearest square is at 40.182 deg, so f0's box excludes Trump on position alone out to r = 0.2054"
+   },
+   "sample_check": {
+    "drawn": 1000000,
+    "tested": 10326,
+    "hits": 0,
+    "worst_free_overlap_of_rejects": -1.0449977316806525e-07,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "source": "results/grid_*.jsonl"
+   },
+   "exact_certificate": {
+    "bytes": 684908,
+    "certified_min": 3.877130280474695,
+    "file": "S33_k6_07_r0.20_rho5.cert.json.gz",
+    "generated": "2026-09-07T12:37:44",
+    "node_counts": {
+     "bisect": 2844,
+     "branch": 415,
+     "dead": 3804,
+     "mult": 81532
+    },
+    "seconds_tree": 25.2,
+    "sha256": "db805ee330ae9402599d26ff3c5e789bb7f4d718af5872eba907e9f9cb5472e6"
+   },
+   "independent_check": {
+    "file": "S33_k6_07_r0.20_rho5.cert.json.gz",
+    "id": "S33_k6_07_r0.20_rho5",
+    "ok": true,
+    "checker": "attempts/A119-local-cert-lean/code/check_local.py (imported unmodified)",
+    "sha256": "db805ee330ae9402599d26ff3c5e789bb7f4d718af5872eba907e9f9cb5472e6",
+    "seconds": 106.4,
+    "bytes": 684908,
+    "counts": {
+     "dead": 3804,
+     "imp": 0,
+     "imp_sel": 0,
+     "bisect": 2844,
+     "qsplit": 0,
+     "branch": 415,
+     "rows": 81532,
+     "mult": 81532,
+     "forced": 18673,
+     "excluded": 104765,
+     "infeas": 754
+    },
+    "certified_min": 3.877131332303475,
+    "s0": 3.877084,
+    "errors": [],
+    "when": "2026-09-07T13:05:24"
+   },
+   "frame_ops": {
+    "anti": {
+     "count": 5,
+     "example": "s1cor_near_b178"
+    },
+    "diag": {
+     "count": 196,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 1107,
+     "example": "k5_11_interior_Y0017"
+    },
+    "mx": {
+     "count": 20,
+     "example": "s1int_l1_053"
+    },
+    "my": {
+     "count": 9,
+     "example": "s1int_l2_l2_p210_001"
+    },
+    "r180": {
+     "count": 21,
+     "example": "s1int_l1_043"
+    },
+    "r270": {
+     "count": 40,
+     "example": "s1int_l2_l2_p215_011"
+    },
+    "r90": {
+     "count": 23,
+     "example": "s1cor_far_b595"
+    }
+   }
+  },
+  {
+   "id": "S33_k6_07_r0.10_rho10",
+   "tag": "S33",
+   "cls": "k6_07",
+   "frame": "e",
+   "r": 0.1,
+   "rho_deg": 10.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "s_star": 3.9169308657139204,
+   "L": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "BL(0,2)",
+    "BL(1,0)",
+    "BR(0,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      1.384740527566093,
+      1.584740527566093
+     ],
+     "cy": [
+      1.8340819315508217,
+      2.034081931550822
+     ],
+     "theta_deg": [
+      -10.0,
+      10.0
+     ],
+     "anchor": [
+      1.484740527566093,
+      1.9340819315508218,
+      3.953409291468777e-80
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.0
+     ]
+    },
+    {
+     "name": "f1",
+     "cx": [
+      2.310348669615177,
+      2.510348669615177
+     ],
+     "cy": [
+      2.585663385371613,
+      2.7856633853716133
+     ],
+     "theta_deg": [
+      30.000496775347923,
+      50.000496775347926
+     ],
+     "anchor": [
+      2.410348669615177,
+      2.685663385371613,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.3593856912403202,
+      1.5593856912403203
+     ],
+     "cy": [
+      3.079833456009657,
+      3.279833456009657
+     ],
+     "theta_deg": [
+      30.000496775347923,
+      50.000496775347926
+     ],
+     "anchor": [
+      1.4593856912403202,
+      3.179833456009657,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.3561363291692183,
+      2.5561363291692185
+     ],
+     "cy": [
+      1.1429589004701513,
+      1.3429589004701514
+     ],
+     "theta_deg": [
+      41.44852867103262,
+      61.44852867103261
+     ],
+     "anchor": [
+      2.4561363291692184,
+      1.2429589004701513,
+      51.44852867103262
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      3.07763562671195,
+      3.27763562671195
+     ],
+     "cy": [
+      1.8731172759792671,
+      2.0731172759792673
+     ],
+     "theta_deg": [
+      37.08870461508636,
+      57.08870461508636
+     ],
+     "anchor": [
+      3.17763562671195,
+      1.9731172759792672,
+      47.08870461508636
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.000000000000002
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "BL(0,2)",
+     "alpha": [
+      0.5,
+      2.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      2.5
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8770846258889193,
+    "measured_min": 3.916930865861949,
+    "nodes": 17131,
+    "n_near": 17,
+    "leaves_after_interval": 4608,
+    "seconds": 43.7
+   },
+   "trump_canary": {
+    "inside": false,
+    "ops": [],
+    "cut_applied": null,
+    "note": "A122 a116_input.json: at S33min the keystone f0 is upright while Trump's nearest square is at 40.182 deg, so f0's box excludes Trump on position alone out to r = 0.2054"
+   },
+   "sample_check": {
+    "drawn": 2600000,
+    "tested": 10815,
+    "hits": 0,
+    "worst_free_overlap_of_rejects": -5.8491010923589215e-09,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "source": "results/grid_*.jsonl"
+   },
+   "exact_certificate": {
+    "bytes": 1700171,
+    "certified_min": 3.8770846258889193,
+    "file": "S33_k6_07_r0.10_rho10.cert.json.gz",
+    "generated": "2026-09-07T12:37:17",
+    "node_counts": {
+     "bisect": 8052,
+     "branch": 321,
+     "dead": 8758,
+     "mult": 185809
+    },
+    "seconds_tree": 56.8,
+    "sha256": "7542df718c3839e475ab5afc14719be4e2a80d30f8388029312e2a279166cfa6"
+   },
+   "independent_check": {
+    "file": "S33_k6_07_r0.10_rho10.cert.json.gz",
+    "id": "S33_k6_07_r0.10_rho10",
+    "ok": true,
+    "checker": "attempts/A119-local-cert-lean/code/check_local.py (imported unmodified)",
+    "sha256": "7542df718c3839e475ab5afc14719be4e2a80d30f8388029312e2a279166cfa6",
+    "seconds": 245.2,
+    "bytes": 1700171,
+    "counts": {
+     "dead": 8758,
+     "imp": 0,
+     "imp_sel": 0,
+     "bisect": 8052,
+     "qsplit": 0,
+     "branch": 321,
+     "rows": 185809,
+     "mult": 185809,
+     "forced": 44425,
+     "excluded": 242457,
+     "infeas": 974
+    },
+    "certified_min": 3.8770846258982945,
+    "s0": 3.877084,
+    "errors": [],
+    "when": "2026-09-07T13:03:38"
+   },
+   "frame_ops": {
+    "anti": {
+     "count": 5,
+     "example": "s1cor_near_b178"
+    },
+    "diag": {
+     "count": 196,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 1107,
+     "example": "k5_11_interior_Y0017"
+    },
+    "mx": {
+     "count": 20,
+     "example": "s1int_l1_053"
+    },
+    "my": {
+     "count": 9,
+     "example": "s1int_l2_l2_p210_001"
+    },
+    "r180": {
+     "count": 21,
+     "example": "s1int_l1_043"
+    },
+    "r270": {
+     "count": 40,
+     "example": "s1int_l2_l2_p215_011"
+    },
+    "r90": {
+     "count": 23,
+     "example": "s1cor_far_b595"
+    }
+   }
+  },
+  {
+   "id": "S33_k6_07_r0.10_rho5",
+   "tag": "S33",
+   "cls": "k6_07",
+   "frame": "e",
+   "r": 0.1,
+   "rho_deg": 5.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "s_star": 3.9169308657139204,
+   "L": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "BL(0,2)",
+    "BL(1,0)",
+    "BR(0,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      1.384740527566093,
+      1.584740527566093
+     ],
+     "cy": [
+      1.8340819315508217,
+      2.034081931550822
+     ],
+     "theta_deg": [
+      -5.0,
+      5.0
+     ],
+     "anchor": [
+      1.484740527566093,
+      1.9340819315508218,
+      3.953409291468777e-80
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.0
+     ]
+    },
+    {
+     "name": "f1",
+     "cx": [
+      2.310348669615177,
+      2.510348669615177
+     ],
+     "cy": [
+      2.585663385371613,
+      2.7856633853716133
+     ],
+     "theta_deg": [
+      35.000496775347926,
+      45.000496775347926
+     ],
+     "anchor": [
+      2.410348669615177,
+      2.685663385371613,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.3593856912403202,
+      1.5593856912403203
+     ],
+     "cy": [
+      3.079833456009657,
+      3.279833456009657
+     ],
+     "theta_deg": [
+      35.000496775347926,
+      45.000496775347926
+     ],
+     "anchor": [
+      1.4593856912403202,
+      3.179833456009657,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.3561363291692183,
+      2.5561363291692185
+     ],
+     "cy": [
+      1.1429589004701513,
+      1.3429589004701514
+     ],
+     "theta_deg": [
+      46.44852867103262,
+      56.44852867103262
+     ],
+     "anchor": [
+      2.4561363291692184,
+      1.2429589004701513,
+      51.44852867103262
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.000000000000001
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      3.07763562671195,
+      3.27763562671195
+     ],
+     "cy": [
+      1.8731172759792671,
+      2.0731172759792673
+     ],
+     "theta_deg": [
+      42.08870461508636,
+      52.08870461508636
+     ],
+     "anchor": [
+      3.17763562671195,
+      1.9731172759792672,
+      47.08870461508636
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      5.000000000000001
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "BL(0,2)",
+     "alpha": [
+      0.5,
+      2.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      2.5
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.877764986396784,
+    "measured_min": 3.9169308690044047,
+    "nodes": 821,
+    "n_near": 17,
+    "leaves_after_interval": 2048,
+    "seconds": 2.3
+   },
+   "trump_canary": {
+    "inside": false,
+    "ops": [],
+    "cut_applied": null,
+    "note": "A122 a116_input.json: at S33min the keystone f0 is upright while Trump's nearest square is at 40.182 deg, so f0's box excludes Trump on position alone out to r = 0.2054"
+   },
+   "sample_check": {
+    "drawn": 1600000,
+    "tested": 11065,
+    "hits": 0,
+    "worst_free_overlap_of_rejects": -6.395257767799478e-08,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "source": "results/grid_*.jsonl"
+   },
+   "exact_certificate": null,
+   "independent_check": null,
+   "frame_ops": {
+    "anti": {
+     "count": 5,
+     "example": "s1cor_near_b178"
+    },
+    "diag": {
+     "count": 196,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 1107,
+     "example": "k5_11_interior_Y0017"
+    },
+    "mx": {
+     "count": 20,
+     "example": "s1int_l1_053"
+    },
+    "my": {
+     "count": 9,
+     "example": "s1int_l2_l2_p210_001"
+    },
+    "r180": {
+     "count": 21,
+     "example": "s1int_l1_043"
+    },
+    "r270": {
+     "count": 40,
+     "example": "s1int_l2_l2_p215_011"
+    },
+    "r90": {
+     "count": 23,
+     "example": "s1cor_far_b595"
+    }
+   }
+  },
+  {
+   "id": "S33_k6_07_r0.05_rho20",
+   "tag": "S33",
+   "cls": "k6_07",
+   "frame": "e",
+   "r": 0.05,
+   "rho_deg": 20.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "s_star": 3.9169308657139204,
+   "L": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "BL(0,2)",
+    "BL(1,0)",
+    "BR(0,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      1.434740527566093,
+      1.534740527566093
+     ],
+     "cy": [
+      1.8840819315508217,
+      1.9840819315508218
+     ],
+     "theta_deg": [
+      -20.0,
+      20.0
+     ],
+     "anchor": [
+      1.484740527566093,
+      1.9340819315508218,
+      3.953409291468777e-80
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.050000000000000044,
+      0.050000000000000044,
+      20.0
+     ]
+    },
+    {
+     "name": "f1",
+     "cx": [
+      2.360348669615177,
+      2.460348669615177
+     ],
+     "cy": [
+      2.6356633853716134,
+      2.735663385371613
+     ],
+     "theta_deg": [
+      20.000496775347926,
+      60.00049677534792
+     ],
+     "anchor": [
+      2.410348669615177,
+      2.685663385371613,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.04999999999999982,
+      0.04999999999999982,
+      19.999999999999996
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.4093856912403202,
+      1.5093856912403203
+     ],
+     "cy": [
+      3.1298334560096572,
+      3.229833456009657
+     ],
+     "theta_deg": [
+      20.000496775347926,
+      60.00049677534792
+     ],
+     "anchor": [
+      1.4593856912403202,
+      3.179833456009657,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.050000000000000044,
+      0.04999999999999982,
+      19.999999999999996
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.4061363291692186,
+      2.5061363291692182
+     ],
+     "cy": [
+      1.1929589004701513,
+      1.2929589004701514
+     ],
+     "theta_deg": [
+      31.448528671032623,
+      71.44852867103262
+     ],
+     "anchor": [
+      2.4561363291692184,
+      1.2429589004701513,
+      51.44852867103262
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.04999999999999982,
+      0.050000000000000044,
+      19.999999999999996
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      3.12763562671195,
+      3.2276356267119497
+     ],
+     "cy": [
+      1.9231172759792672,
+      2.023117275979267
+     ],
+     "theta_deg": [
+      27.088704615086357,
+      67.08870461508636
+     ],
+     "anchor": [
+      3.17763562671195,
+      1.9731172759792672,
+      47.08870461508636
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.04999999999999982,
+      0.04999999999999993,
+      19.999999999999996
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "BL(0,2)",
+     "alpha": [
+      0.5,
+      2.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      2.5
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8770856788040082,
+    "measured_min": 3.9169308663212656,
+    "nodes": 413215,
+    "n_near": 18,
+    "leaves_after_interval": 27648,
+    "seconds": 1027.1
+   },
+   "trump_canary": {
+    "inside": false,
+    "ops": [],
+    "cut_applied": null,
+    "note": "A122 a116_input.json: at S33min the keystone f0 is upright while Trump's nearest square is at 40.182 deg, so f0's box excludes Trump on position alone out to r = 0.2054"
+   },
+   "sample_check": {
+    "drawn": 14600000,
+    "tested": 10088,
+    "hits": 0,
+    "worst_free_overlap_of_rejects": -2.1661867855016226e-09,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "source": "results/grid_*.jsonl"
+   },
+   "exact_certificate": {
+    "bytes": 18947935,
+    "certified_min": 3.8770856788040082,
+    "file": "S33_k6_07_r0.05_rho20.cert.json.gz",
+    "generated": "2026-09-07T12:59:02",
+    "node_counts": {
+     "bisect": 194160,
+     "branch": 6399,
+     "dead": 196048,
+     "imp_sel": 16608,
+     "mult": 2935516
+    },
+    "seconds_tree": 1250.6,
+    "sha256": "2075f3181ced8328be199039cdc8cb0992ceafa2d2b2c7f9f35986d949440fd0"
+   },
+   "independent_check": {
+    "file": "S33_k6_07_r0.05_rho20.cert.json.gz",
+    "id": "S33_k6_07_r0.05_rho20",
+    "ok": true,
+    "checker": "attempts/A119-local-cert-lean/code/check_local.py (imported unmodified)",
+    "sha256": "2075f3181ced8328be199039cdc8cb0992ceafa2d2b2c7f9f35986d949440fd0",
+    "seconds": 4078.1,
+    "bytes": 18947935,
+    "counts": {
+     "dead": 196048,
+     "imp": 0,
+     "imp_sel": 16608,
+     "bisect": 194160,
+     "qsplit": 0,
+     "branch": 6399,
+     "rows": 2935516,
+     "mult": 2935516,
+     "forced": 757181,
+     "excluded": 4205121,
+     "infeas": 65016
+    },
+    "certified_min": 3.8770860956858093,
+    "s0": 3.877084,
+    "errors": [],
+    "when": "2026-09-07T17:01:09"
+   },
+   "frame_ops": {
+    "anti": {
+     "count": 5,
+     "example": "s1cor_near_b178"
+    },
+    "diag": {
+     "count": 196,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 1107,
+     "example": "k5_11_interior_Y0017"
+    },
+    "mx": {
+     "count": 20,
+     "example": "s1int_l1_053"
+    },
+    "my": {
+     "count": 9,
+     "example": "s1int_l2_l2_p210_001"
+    },
+    "r180": {
+     "count": 21,
+     "example": "s1int_l1_043"
+    },
+    "r270": {
+     "count": 40,
+     "example": "s1int_l2_l2_p215_011"
+    },
+    "r90": {
+     "count": 23,
+     "example": "s1cor_far_b595"
+    }
+   }
+  },
+  {
+   "id": "S33_k6_07_r0.05_rho10",
+   "tag": "S33",
+   "cls": "k6_07",
+   "frame": "e",
+   "r": 0.05,
+   "rho_deg": 10.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "s_star": 3.9169308657139204,
+   "L": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "BL(0,2)",
+    "BL(1,0)",
+    "BR(0,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      1.434740527566093,
+      1.534740527566093
+     ],
+     "cy": [
+      1.8840819315508217,
+      1.9840819315508218
+     ],
+     "theta_deg": [
+      -10.0,
+      10.0
+     ],
+     "anchor": [
+      1.484740527566093,
+      1.9340819315508218,
+      3.953409291468777e-80
+     ],
+     "tilted": false,
+     "half_extent": [
+      0.050000000000000044,
+      0.050000000000000044,
+      10.0
+     ]
+    },
+    {
+     "name": "f1",
+     "cx": [
+      2.360348669615177,
+      2.460348669615177
+     ],
+     "cy": [
+      2.6356633853716134,
+      2.735663385371613
+     ],
+     "theta_deg": [
+      30.000496775347923,
+      50.000496775347926
+     ],
+     "anchor": [
+      2.410348669615177,
+      2.685663385371613,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.04999999999999982,
+      0.04999999999999982,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.4093856912403202,
+      1.5093856912403203
+     ],
+     "cy": [
+      3.1298334560096572,
+      3.229833456009657
+     ],
+     "theta_deg": [
+      30.000496775347923,
+      50.000496775347926
+     ],
+     "anchor": [
+      1.4593856912403202,
+      3.179833456009657,
+      40.000496775347926
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.050000000000000044,
+      0.04999999999999982,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      2.4061363291692186,
+      2.5061363291692182
+     ],
+     "cy": [
+      1.1929589004701513,
+      1.2929589004701514
+     ],
+     "theta_deg": [
+      41.44852867103262,
+      61.44852867103261
+     ],
+     "anchor": [
+      2.4561363291692184,
+      1.2429589004701513,
+      51.44852867103262
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.04999999999999982,
+      0.050000000000000044,
+      9.999999999999998
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      3.12763562671195,
+      3.2276356267119497
+     ],
+     "cy": [
+      1.9231172759792672,
+      2.023117275979267
+     ],
+     "theta_deg": [
+      37.08870461508636,
+      57.08870461508636
+     ],
+     "anchor": [
+      3.17763562671195,
+      1.9731172759792672,
+      47.08870461508636
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.04999999999999982,
+      0.04999999999999993,
+      10.000000000000002
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "BL(0,2)",
+     "alpha": [
+      0.5,
+      2.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      2.5
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BR(0,0)",
+     "alpha": [
+      -0.5,
+      0.5
+     ],
+     "beta": [
+      1.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      0.5
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.877104393662041,
+    "measured_min": 3.916930866064547,
+    "nodes": 7749,
+    "n_near": 17,
+    "leaves_after_interval": 2048,
+    "seconds": 19.8
+   },
+   "trump_canary": {
+    "inside": false,
+    "ops": [],
+    "cut_applied": null,
+    "note": "A122 a116_input.json: at S33min the keystone f0 is upright while Trump's nearest square is at 40.182 deg, so f0's box excludes Trump on position alone out to r = 0.2054"
+   },
+   "sample_check": {
+    "drawn": 5600000,
+    "tested": 10037,
+    "hits": 0,
+    "worst_free_overlap_of_rejects": -2.19719020755349e-09,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "source": "results/grid_*.jsonl"
+   },
+   "exact_certificate": {
+    "bytes": 773050,
+    "certified_min": 3.877104393662041,
+    "file": "S33_k6_07_r0.05_rho10.cert.json.gz",
+    "generated": "2026-09-07T12:38:10",
+    "node_counts": {
+     "bisect": 3486,
+     "branch": 260,
+     "dead": 3747,
+     "imp_sel": 256,
+     "mult": 78768
+    },
+    "seconds_tree": 25.5,
+    "sha256": "552ca53ae3d4bd2e21434369abf30d2cd957d5df99e0cfb4ac5b03d3ffa55d6c"
+   },
+   "independent_check": {
+    "file": "S33_k6_07_r0.05_rho10.cert.json.gz",
+    "id": "S33_k6_07_r0.05_rho10",
+    "ok": true,
+    "checker": "attempts/A119-local-cert-lean/code/check_local.py (imported unmodified)",
+    "sha256": "552ca53ae3d4bd2e21434369abf30d2cd957d5df99e0cfb4ac5b03d3ffa55d6c",
+    "seconds": 90.3,
+    "bytes": 773050,
+    "counts": {
+     "dead": 3747,
+     "imp": 0,
+     "imp_sel": 256,
+     "bisect": 3486,
+     "qsplit": 0,
+     "branch": 260,
+     "rows": 78768,
+     "mult": 78768,
+     "forced": 20678,
+     "excluded": 111222,
+     "infeas": 393
+    },
+    "certified_min": 3.8771145094795654,
+    "s0": 3.877084,
+    "errors": [],
+    "when": "2026-09-07T13:06:54"
+   },
+   "frame_ops": {
+    "anti": {
+     "count": 5,
+     "example": "s1cor_near_b178"
+    },
+    "diag": {
+     "count": 196,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 1107,
+     "example": "k5_11_interior_Y0017"
+    },
+    "mx": {
+     "count": 20,
+     "example": "s1int_l1_053"
+    },
+    "my": {
+     "count": 9,
+     "example": "s1int_l2_l2_p210_001"
+    },
+    "r180": {
+     "count": 21,
+     "example": "s1int_l1_043"
+    },
+    "r270": {
+     "count": 40,
+     "example": "s1int_l2_l2_p215_011"
+    },
+    "r90": {
+     "count": 23,
+     "example": "s1cor_far_b595"
+    }
+   }
+  },
+  {
+   "id": "S38_k6_21_r0.10_rho10",
+   "tag": "S38",
+   "cls": "k6_21",
+   "frame": "diag",
+   "r": 0.1,
+   "rho_deg": 10.0,
+   "anchor_side": 3.877084,
+   "window": [
+    3.82,
+    3.897084
+   ],
+   "s_star": 3.9289146852229777,
+   "L": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "P": [
+    "BL(0,0)",
+    "BL(0,1)",
+    "TL(0,0)",
+    "BL(1,0)",
+    "TL(1,0)",
+    "TR(0,0)"
+   ],
+   "boxes": [
+    {
+     "name": "f0",
+     "cx": [
+      2.284616784986507,
+      2.4846167849865073
+     ],
+     "cy": [
+      1.186997795046698,
+      1.386997795046698
+     ],
+     "theta_deg": [
+      38.24593732272861,
+      58.245937322728615
+     ],
+     "anchor": [
+      2.384616784986507,
+      1.286997795046698,
+      48.24593732272861
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f1",
+     "cx": [
+      3.08042490566639,
+      3.2804249056663903
+     ],
+     "cy": [
+      0.5966590943336094,
+      0.7966590943336094
+     ],
+     "theta_deg": [
+      38.24593732272861,
+      58.245937322728615
+     ],
+     "anchor": [
+      3.1804249056663902,
+      0.6966590943336094,
+      48.24593732272861
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.09999999999999998,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f2",
+     "cx": [
+      1.5834669816573228,
+      1.783466981657323
+     ],
+     "cy": [
+      1.883377043785098,
+      2.0833770437850982
+     ],
+     "theta_deg": [
+      38.24593732272861,
+      58.245937322728615
+     ],
+     "anchor": [
+      1.683466981657323,
+      1.9833770437850982,
+      48.24593732272861
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f3",
+     "cx": [
+      3.08042490566639,
+      3.2804249056663903
+     ],
+     "cy": [
+      1.9194398600733789,
+      2.119439860073379
+     ],
+     "theta_deg": [
+      38.24593732272861,
+      58.245937322728615
+     ],
+     "anchor": [
+      3.1804249056663902,
+      2.019439860073379,
+      48.24593732272861
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.000000000000002
+     ]
+    },
+    {
+     "name": "f4",
+     "cx": [
+      2.319635689054347,
+      2.519635689054347
+     ],
+     "cy": [
+      2.5490083282546725,
+      2.7490083282546727
+     ],
+     "theta_deg": [
+      38.24593732272861,
+      58.245937322728615
+     ],
+     "anchor": [
+      2.419635689054347,
+      2.6490083282546726,
+      48.24593732272861
+     ],
+     "tilted": true,
+     "half_extent": [
+      0.10000000000000009,
+      0.10000000000000009,
+      10.000000000000002
+     ]
+    }
+   ],
+   "pins": [
+    {
+     "name": "BL(0,0)",
+     "alpha": [
+      0.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "BL(0,1)",
+     "alpha": [
+      0.5,
+      1.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      1.5
+     ]
+    },
+    {
+     "name": "TL(0,0)",
+     "alpha": [
+      0.5,
+      -0.5
+     ],
+     "beta": [
+      0.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      0.5,
+      3.377084
+     ]
+    },
+    {
+     "name": "BL(1,0)",
+     "alpha": [
+      1.5,
+      0.5
+     ],
+     "beta": [
+      0.0,
+      0.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      0.5
+     ]
+    },
+    {
+     "name": "TL(1,0)",
+     "alpha": [
+      1.5,
+      -0.5
+     ],
+     "beta": [
+      0.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      1.5,
+      3.377084
+     ]
+    },
+    {
+     "name": "TR(0,0)",
+     "alpha": [
+      -0.5,
+      -0.5
+     ],
+     "beta": [
+      1.0,
+      1.0
+     ],
+     "halfwidth": 0.0070710678118654745,
+     "theta_deg": 0.0,
+     "centre_at_s0": [
+      3.377084,
+      3.377084
+     ]
+    }
+   ],
+   "cut": null,
+   "hypothesis": "s in [3.82, 3.897084]; for each pin p: a square with tilt 0 and centre in (alpha_p + beta_p s) + [-0.0070710678118654745, 0.0070710678118654745]^2; for each l in L: a DISTINCT other square with centre in the box and tilt (mod 90 deg) in the interval; conclusion: no such configuration is a packing at side <= s0.",
+   "tree_verdict": {
+    "dead": true,
+    "certified_min": 3.8770933520449478,
+    "measured_min": 3.9092940360426,
+    "nodes": 337951,
+    "n_near": 17,
+    "leaves_after_interval": 16384,
+    "seconds": 1036.9
+   },
+   "trump_canary": {
+    "inside": false,
+    "ops": [],
+    "cut_applied": null,
+    "note": "A122 a116_input.json: at S33min the keystone f0 is upright while Trump's nearest square is at 40.182 deg, so f0's box excludes Trump on position alone out to r = 0.2054"
+   },
+   "sample_check": {
+    "drawn": 30000000,
+    "tested": 10013,
+    "hits": 0,
+    "worst_free_overlap_of_rejects": -1.505359392695027e-09,
+    "sides_tested": 30,
+    "side_range": [
+     3.82,
+     3.877084
+    ],
+    "source": "results/sampling.json"
+   },
+   "exact_certificate": {
+    "bytes": 21456155,
+    "certified_min": 3.8770933520449478,
+    "file": "S38_k6_21_r0.10_rho10.cert.json.gz",
+    "generated": "2026-09-07T12:31:40",
+    "node_counts": {
+     "bisect": 157776,
+     "branch": 6015,
+     "dead": 174160,
+     "mult": 3022417
+    },
+    "seconds_tree": 1085.4,
+    "sha256": "37de7c63e4bcb14d38fb8da77bd9051dbf582646ed078148c1df46ca6dbc9523"
+   },
+   "independent_check": {
+    "file": "S38_k6_21_r0.10_rho10.cert.json.gz",
+    "id": "S38_k6_21_r0.10_rho10",
+    "ok": true,
+    "checker": "attempts/A119-local-cert-lean/code/check_local.py (imported unmodified)",
+    "sha256": "37de7c63e4bcb14d38fb8da77bd9051dbf582646ed078148c1df46ca6dbc9523",
+    "seconds": 4942.3,
+    "bytes": 21456155,
+    "counts": {
+     "dead": 174160,
+     "imp": 0,
+     "imp_sel": 0,
+     "bisect": 157776,
+     "qsplit": 0,
+     "branch": 6015,
+     "rows": 3022417,
+     "mult": 3022417,
+     "forced": 513793,
+     "excluded": 2864117,
+     "infeas": 79519
+    },
+    "certified_min": 3.8771072983301056,
+    "s0": 3.877084,
+    "errors": [],
+    "when": "2026-09-07T15:53:11"
+   },
+   "frame_ops": {
+    "anti": {
+     "count": 5,
+     "example": "s1cor_near_b178"
+    },
+    "diag": {
+     "count": 196,
+     "example": "k5_11_interior_Y0009"
+    },
+    "e": {
+     "count": 1107,
+     "example": "k5_11_interior_Y0017"
+    },
+    "mx": {
+     "count": 20,
+     "example": "s1int_l1_053"
+    },
+    "my": {
+     "count": 9,
+     "example": "s1int_l2_l2_p210_001"
+    },
+    "r180": {
+     "count": 21,
+     "example": "s1int_l1_043"
+    },
+    "r270": {
+     "count": 40,
+     "example": "s1int_l2_l2_p215_011"
+    },
+    "r90": {
+     "count": 23,
+     "example": "s1cor_far_b595"
+    }
+   }
+  }
+ ]
+}
