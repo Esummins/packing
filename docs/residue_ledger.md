@@ -12,6 +12,8 @@ needs every class dead on W, and only Trump's class alive there with Trump uniqu
 **Totals and time estimates live in `budget.md` (the one fixed home; updated on every landed measurement). This file
 lists what is left; that file prices it.**
 
+**Pictures, current set (2026-09-08).** The per-node galleries are the live pictures of the residue: `docs/shadows/k0v4/` (the eleven converged-alive k0 cells, README + review_k0v4.csv) and `docs/shadows/a57v4/` (the sixty most expensive alive A57/A60 nodes, README + review_a57v4.csv), both in A148's three-panel form — GEOMETRY (certified feasible-centre region in green, undecided as grey stipple, pockets hatched, guard lines, lane tags with witnessed meeters drawn), the LP SUPPORT after the exact-core re-solve, and the NEAREST PACKING with s0 overlaid — drawn from the records of 14:20 on 2026-09-08 (A149's re-solves and A156's tree run since then are not in them; the next regeneration follows tonight's digest). The figures embedded below are the family pictures (A107's S-gallery, the exact minima, the drains, the locks) and are unchanged.
+
 ## 0. The one-table version
 
 | layer | family | what is left | count | technique now | needs |
