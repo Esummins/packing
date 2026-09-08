@@ -633,3 +633,19 @@ TR(0,1)->k6_22, TR(1,0)->k6_24, TL(0,0)->k6_23. Every kill carries a `polycore_s
 `code/check141.py` passes 294 of 294 A141 certificates; sample line 200,000 poses per kill, 0 free.
 **Nothing in A60 was written**; the recommendation is to retire these 56 (and their descendants) before any
 further LP there. Caveat A118-O1 (exact pins, not the delta = 1e-2 slack family) applies.
+
+**A153 (2026-09-08, `cover number`) — measured on trump5, NO kills, nothing written to A60.** The
+cover-number leaf (Lemma CN: interior-disjoint unit squares have centres ≥ 1 apart, so if A148's
+certified outer feasible-centre region `F_out` is covered by `k` axis-aligned squares of side
+0.699473918 — diameter < 1, exact test `2d² < 1` — then at most `k` more squares fit, and
+`k < budget` kills with no LP) was run on the **20 alive trump5 nodes A148 drew**
+(`attempts/A153-cover-number/results/cover153_a148.jsonl`, rows with `camp = A60`) as part of a
+322-node sweep. Every trump5 node needs **8 to 13** pieces against a budget of 5 (`f1_L10_0003`:
+5 against budget 4, the tightest in the whole sweep), so **zero kills**, and each of them already
+contains 4–6 points of `F_out` pairwise ≥ 1 apart — always at least its own budget, a floor that no
+grid refinement can lower, so the leaf will not bite on trump5 however it is sharpened. The
+tilt-coherent refinement (Lemma TC, sound only on a common-tilt branch) gives 4–12 pieces and also
+kills nothing over any node's whole
+tilt window. Recommendation: none for A60 — the leaf is a free sanity number for the gallery pages
+(2–4 pieces tighter than A148's disk bound), not a lever. Statement, Lean shape, certificate format
+and independent checker: `attempts/A153-cover-number/notes/lemma.md`.

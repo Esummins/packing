@@ -278,3 +278,41 @@ these 188 (and their descendants) before any LP.
 
 *A137's fold-in reading of that addendum: 187 of the 188 are in the corpus, and 180 of them were
 already `PASS`; 7 close open work (§C.4).*
+
+---
+
+## A153 addendum (2026-09-08, cover-number leaf) — MEASURED, ZERO KILLS, do not queue it
+
+**Leaf CN.** Two interior-disjoint unit squares have centres at Euclidean distance ≥ 1 (each
+contains the open disk of radius 1/2 about its centre). So the centres a node still has to place
+form a 1-separated subset of A148's certified outer feasible-centre region `F_out = GREEN ∪
+UNDECIDED`; if `F_out` is covered by `k` sets of diameter < 1 then at most `k` more squares fit, and
+`k < budget` is an LP-free kill. Pieces: axis-aligned squares of side `d` with the exact rational
+test `2d² < 1` — on A148's grid a 35×35 block of cells, side `6784897/9700000 = 0.699473918`, the
+PI's side-0.7 squares. Statement, Lean shape (one `CoverCert` structure + a decidable `check`,
+theorems `centre_sep` and `cover_bound`, **zero new axioms** — the analytic input REGION-OUTER is
+the one A148's white region already carries), certificate format and independent checker:
+`attempts/A153-cover-number/notes/lemma.md`, `code/{cover153,check153,test153}.py`.
+
+**Result over 322 nodes — 60 A57/A60 nodes A148 drew, the 11 k0 residue cells, and all 251 ALIVE
+A57 nodes of this file's v3 state (`results/cover153_{a148,k0,a137}.jsonl`): ZERO kills.** Exact
+minimum covers proved by branch and bound on 197 of the 322 (the greedy cover matches the
+independent-set lower bound); `cover − budget` runs +0 (1 node) to +12, median **+4**. The
+obstruction is structural, not a weakness of the covering relaxation: on **322 of 322** nodes
+`F_out` itself already contains ≥ budget points pairwise ≥ 1 apart (a *floor* on every cover number,
+whatever the piece shape), so no refinement can make the leaf bite. Confirmed directly: 18 of the
+tightest nodes re-priced at pitch 0.01 × 72 tilts (4× cells) lose 13–25 % of `F_out` area and at
+most **one** piece, and the closest node in the whole population, `k5_11_interior_Y1104_D01`, holds
+cover = 5 = budget at 1×, 4× **and 16×** (pitch 0.005 × 144 tilts, area 0.663 → 0.474).
+
+**Lemma TC (tilt-coherent branch, conditional).** Same-tilt interior-disjoint squares need
+‖Δ‖_∞ ≥ 1 in the `t`-frame, so pieces may be squares of side < 1 in that frame (side ≈ 0.999 at a
+single `t`; `d(1+δ) < 1` for a tilt bin of half-width `δ`). This cuts the number by ~2 but still
+kills nothing soundly: 0 of 322 over the node's whole tilt window. The single hit is knife-edge —
+`k5_16_interior_Y0083` at exactly `t ≡ 0 (mod 90°)` needs 4 < 5, but a tilt bin of half-width
+0.1° already needs 5 (`results/probe153_k5_16_interior_Y0083.json`), so no finite tilt branch makes
+it sound.
+
+**At resume: do not queue this leaf.** It is ~5 s/node and kills nothing, and the floor measurement
+says it never will. What it *is* good for is a free, sound sanity number on the pages — the
+A148 disk bound's combinatorial twin, 2–4 pieces tighter (Y1117: disk bound 10, cover number 8).
