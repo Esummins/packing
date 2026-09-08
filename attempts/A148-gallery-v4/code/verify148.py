@@ -90,20 +90,33 @@ def in_container(P, s, tol=0.0):
     return all(-tol <= x <= s + tol and -tol <= y <= s + tol for x, y in P)
 
 
-def feasible_at(c, th, obst, s):
+def bboxes(obst):
+    return [(min(v[0] for v in P), max(v[0] for v in P),
+             min(v[1] for v in P), max(v[1] for v in P)) for P in obst]
+
+
+def feasible_at(c, th, obst, s, bb=None):
     Q = G.sqpoly(c[0], c[1], th)
     if not in_container(Q, s):
         return False
-    for P in obst:
+    qx0 = min(v[0] for v in Q)
+    qx1 = max(v[0] for v in Q)
+    qy0 = min(v[1] for v in Q)
+    qy1 = max(v[1] for v in Q)
+    for i, P in enumerate(obst):
+        if bb is not None:                       # bounding-box rejection: disjoint boxes cannot
+            x0, x1, y0, y1 = bb[i]               # overlap, and this is not a separating-axis test
+            if qx1 <= x0 or x1 <= qx0 or qy1 <= y0 or y1 <= qy0:
+                continue
         if overlaps(P, Q):
             return False
     return True
 
 
-def any_feasible(c, obst, s, ntilt):
+def any_feasible(c, obst, s, ntilt, bb=None):
     for k in range(ntilt):
         th = (k + 0.5) * (math.pi / 2.0) / ntilt
-        if feasible_at(c, th, obst, s):
+        if feasible_at(c, th, obst, s, bb):
             return True
     return False
 
@@ -139,6 +152,7 @@ def main():
         rec = recs[nid]
         obst, onames, kinds, _ = G.obstacles_of(rec["boxes"], rec.get("is_pin"))
         reg = G.feasible_region(G.S0, obst)
+        bb = bboxes(obst)
         tot["pages"] += 1
         assert abs(reg.pitch - sm["grid"]["pitch"]) < 1e-12, f"{nid}: grid pitch differs"
 
@@ -151,7 +165,7 @@ def main():
             for k in range(a.nsample):
                 cx = reg.xs[ii[pick[k]]] + float(rng.uniform(-0.5, 0.5)) * reg.pitch
                 cy = reg.ys[jj[pick[k]]] + float(rng.uniform(-0.5, 0.5)) * reg.pitch
-                ok = any_feasible((cx, cy), obst, G.S0, a.ntilt)
+                ok = any_feasible((cx, cy), obst, G.S0, a.ntilt, bb)
                 tot[f"{tag}_pts"] += 1
                 if ok != want:
                     tot[f"{tag}_fail"] += 1
