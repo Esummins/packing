@@ -65,7 +65,10 @@ def main():
             body.append([r["nid"], r.get("level") or "—", r["B"], fmt(r["c_stored"], 3),
                          "yes" if r["screen"] == "PROVED-USELESS" else
                          ("cand" if r["screen"].startswith("CANDIDATE") else "diag"),
-                         fmt(r["tau0"]), fmt(r["eta0"], 6),
+                         # tau0/eta0 must be the MATCHED baseline: for the eleven the LP arm uses
+                         # A140's exact-core tau, not the A115 axis-core record the screen reads.
+                         fmt(lp["tau0"] if lp else r["tau0"]),
+                         fmt(lp["eta0"] if lp else r["eta0"], 6),
                          fmt(lp["budget"], 0) if lp else "—",
                          fmt(lp["tau"]) if lp else "—",
                          fmt(lp["eta"]) if lp else "—",
