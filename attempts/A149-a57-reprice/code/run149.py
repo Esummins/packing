@@ -7,8 +7,16 @@ never a verdict), same memory gates, same claim protocol, same BLAS pinning -- b
     every other prior attempt stay read-only;
   * the pause sentinel it watches is THIS attempt's (`attempts/A149-a57-reprice/PAUSE`);
     A57's own sentinel is reported at start and never touched;
-  * children are launched at BELOW_NORMAL priority (the PI has the machine from 07:30);
-  * a cumulative CPU-hour budget (`--cpu_budget_h`) stops the worker cleanly between nodes.
+  * a cumulative CPU-hour budget (`--cpu_budget_h`) stops the worker cleanly between nodes;
+  * PROCESSOR AFFINITY 0xFFFF (logical CPUs 0-15, the P-core threads) on this process and on every
+    child, re-applied on every loop pass -- the PI's E-cores 16-19 are reserved for the remote
+    session (coordinator, 2026-09-08);
+  * a BOX gate: the worker holds rather than launch a node if the number of lab python processes
+    on the machine would exceed `--max_box_py` (16).  A156 is draining `queue_bc.json` at the same
+    time and the two lanes coordinate ONLY through this ceiling.
+
+Priority is `--priority` (default `Normal`; the shift started at `BelowNormal` while the PI had
+the machine and was raised when it was released).
 
 The node itself is A137's `node137.py`, imported by path and UNCHANGED, which calls A135's
 `emit135.certify` (exact certified-maximal cores) and the FROZEN `verify_case.py`.
@@ -29,7 +37,38 @@ A137 = os.path.join(ROOT, "A137-night-shift-2")
 sys.path.insert(0, os.path.join(A57, "code"))
 from pausegate import paused, reason                                       # noqa: E402
 
-BELOW_NORMAL_PRIORITY_CLASS = 0x00004000
+PRIORITY = dict(Normal=0x00000020, BelowNormal=0x00004000, Idle=0x00000040)
+AFFINITY_PCORES = 0xFFFF          # logical CPUs 0-15; 16-19 are the PI's E-cores
+PROCESS_SET_INFORMATION = 0x0200
+PROCESS_QUERY_INFORMATION = 0x0400
+
+
+def set_affinity(pid, mask=AFFINITY_PCORES):
+    """SetProcessAffinityMask on one pid.  Returns True on success; never raises."""
+    try:
+        k = ctypes.windll.kernel32
+        h = k.OpenProcess(PROCESS_SET_INFORMATION | PROCESS_QUERY_INFORMATION, False, int(pid))
+        if not h:
+            return False
+        try:
+            return bool(k.SetProcessAffinityMask(h, ctypes.c_size_t(mask)))
+        finally:
+            k.CloseHandle(h)
+    except Exception:
+        return False
+
+
+def lab_python_count():
+    """python.exe processes running lab code, from the whole box (A156's workers included)."""
+    try:
+        out = subprocess.run(
+            ["powershell", "-NoProfile", "-NonInteractive", "-Command",
+             "@(Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" | "
+             "Where-Object { $_.CommandLine -like '*packing*attempts*' }).Count"],
+            capture_output=True, text=True, timeout=60)
+        return int((out.stdout or "0").strip() or 0)
+    except Exception:
+        return 0                      # a failed count must never block the queue
 
 
 class _MEMSTAT(ctypes.Structure):
@@ -95,8 +134,12 @@ def main():
     ap.add_argument("--jobs", type=int, default=1)
     ap.add_argument("--min_free_phys_mb", type=float, default=3072.0)
     ap.add_argument("--min_commit_mb", type=float, default=6144.0)
-    ap.add_argument("--cpu_budget_h", type=float, default=12.0,
+    ap.add_argument("--cpu_budget_h", type=float, default=30.0,
                     help="cumulative CPU-hours across ALL A149 workers; stop between nodes")
+    ap.add_argument("--priority", default="Normal", choices=sorted(PRIORITY))
+    ap.add_argument("--max_box_py", type=int, default=16,
+                    help="ceiling on lab python processes for the WHOLE box, A156 included; the "
+                         "worker holds rather than launch a node that would exceed it")
     ap.add_argument("--deadline", default=None, help="local HH:MM after which no node is launched")
     a = ap.parse_args()
 
@@ -110,6 +153,7 @@ def main():
     prog = os.path.join(BASE, "progress", "%s.json" % a.worker)
     with open(os.path.join(BASE, "progress", "%s.pid" % a.worker), "w") as f:
         f.write(str(os.getpid()))
+    set_affinity(os.getpid())
 
     T = json.load(open(a.targets))
     si, sn = map(int, a.shard.split("/"))
@@ -164,6 +208,19 @@ def main():
             break
         if j["id"] in done:
             continue
+        set_affinity(os.getpid())            # re-applied every pass, per the PI's box rule
+        nb = lab_python_count()
+        while nb >= a.max_box_py:
+            print("[%s] box gate: %d lab python processes (ceiling %d, A156 included); "
+                  "holding 120 s" % (a.worker, nb, a.max_box_py), flush=True)
+            stats["box_holds"] = stats.get("box_holds", 0) + 1
+            flush("BOX-HOLD " + j["id"])
+            time.sleep(120)
+            if paused(base=BASE):
+                break
+            nb = lab_python_count()
+        if paused(base=BASE):
+            break
         cl = os.path.join(claims, j["id"] + ".claim")
         try:
             fd = os.open(cl, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
@@ -200,7 +257,10 @@ def main():
             lg.write("\n===== %s %s\n" % (j["id"], time.strftime("%F %T")))
             lg.flush()
             p = subprocess.Popen(cmd, stdout=lg, stderr=subprocess.STDOUT, env=child_env(),
-                                 cwd=BASE, creationflags=BELOW_NORMAL_PRIORITY_CLASS)
+                                 cwd=BASE, creationflags=PRIORITY[a.priority])
+            if not set_affinity(p.pid):
+                lg.write("===== WARNING: could not set affinity 0x%X on child %d\n"
+                         % (AFFINITY_PCORES, p.pid))
             try:
                 rc = p.wait(timeout=a.wall)
             except subprocess.TimeoutExpired:

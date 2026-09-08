@@ -30,11 +30,18 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, ".."))
 ROOT = os.path.abspath(os.path.join(BASE, ".."))
 A137 = os.path.join(ROOT, "A137-night-shift-2")
+A57 = os.path.join(ROOT, "A57-shadow-trees", "results")
 OUT = os.path.join(BASE, "results", "targets149.json")
 
 
 def main():
-    T = json.load(open(os.path.join(A137, "results", "targets137.json")))
+    # `targets_base149.json` is A137's OWN `targets137.py --include_fail 1` run with `--out`
+    # pointed here (nothing under A137 written): the ALIVE population first, then the FAIL rows,
+    # both in A145's `frac_exact` descending order.  Falls back to A137's ALIVE-only queue.
+    base = os.path.join(BASE, "results", "targets_base149.json")
+    if not os.path.exists(base):
+        base = os.path.join(A137, "results", "targets137.json")
+    T = json.load(open(base))
     done = set()
     for w in ("w0", "w1"):
         p = os.path.join(A137, "results", "exact_reemit_%s.jsonl" % w)
@@ -73,9 +80,29 @@ def main():
                 inner["y0"] >= outer["y0"] - 1e-9 and inner["y1"] <= outer["y1"] + 1e-9 and
                 inner["th0"] >= outer["th0"] - 1e-9 and inner["th1"] <= outer["th1"] + 1e-9)
 
+    # (0) kills folded in AFTER A137 built its queue: its own exact-core ledger and A149's.
+    #     `targets137.py` filters on the backlog and tight-core ledgers only.
+    killed = set()
+    for p in [os.path.join(A57, "superseded_by_exactcore_A137.jsonl"),
+              os.path.join(BASE, "results", "superseded_by_exactcore_A149.jsonl"),
+              os.path.join(BASE, "results", "superseded_by_exactcore_v3_A149.jsonl")]:
+        if os.path.exists(p):
+            for ln in open(p, encoding="utf-8"):
+                try:
+                    killed.add(json.loads(ln)["id"])
+                except Exception:
+                    pass
+
+    def anc_killed(i):
+        parts = i.split("_D")
+        return i in killed or any("_D".join(parts[:k]) in killed for k in range(1, len(parts)))
+
     rem, dropped, swapped = [], [], 0
     for t in T:
         if t["id"] in done:
+            continue
+        if anc_killed(t["id"]):
+            dropped.append((t["id"], "already certified dead (exact-core ledger)"))
             continue
         if t["id"] in lane_b:
             dropped.append((t["id"], lane_b[t["id"]]))
@@ -87,7 +114,14 @@ def main():
             t = dict(t, box=j["box"], box_source="A137 lane (b) T5'''-clipped box",
                      supersedes_emission_job=True)
         rem.append(t)
-    rem.sort(key=lambda t: (-(t.get("frac_exact") or 0.0), t.get("level") or 9, t["id"]))
+
+    # ALIVE population first, then the FAILs (the coordinator's order, 2026-09-08); within each,
+    # A145's `frac_exact` descending, unmeasured nodes sorting at 0.45 as in `targets137.py`.
+    def key(t):
+        alive = 0 if str(t.get("prior", "")).startswith("ALIVE") else 1
+        fe = t.get("frac_exact")
+        return (alive, -(0.45 if fe is None else fe), t.get("level") or 9, t["id"])
+    rem.sort(key=key)
     json.dump(rem, open(OUT, "w"), indent=0)
     json.dump(dict(dropped_already_solved_in_lane_b=dropped, clipped_boxes_substituted=swapped),
               open(os.path.join(BASE, "results", "targets149_dedup.json"), "w"), indent=1)

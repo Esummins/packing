@@ -24,7 +24,11 @@ E_5 = 0                                          the tree terminates at level 4
 * `g_L` — the child dies at the geometry screen (T5 / T5′ at the **exact** pin core / T5″ trim /
   T5‴ pin-clip / T5⁗ polygon): no LP, no certificate, ~0 s.
 * `d_L` — a child that reaches the LP still owes a split afterwards (NO-KILL +
-  LOST-KILL-ON-RESOLVE + TOO-TIGHT; a PASS is closed, a WALL-CAP is not a verdict).
+  LOST-KILL-ON-RESOLVE + TOO-TIGHT + FAIL; a PASS is closed, a WALL-CAP is not a verdict).
+  Read against `emit135.certify`: NO-KILL is `tau >= budget`, TOO-TIGHT is a certificate whose
+  total reached the budget, LOST-KILL-ON-RESOLVE is `tau >= budget` after witness feedback.
+  Some of those are repairable by more rounds rather than by eight children, so `d_1 = 23.5 %`
+  is an **upper bound** on the true split rate and CENTRAL is conservative in this term.
 * `c` — one LP + s0 exact certificate + FROZEN `verify_case.py`.
 
 This is the same object as §B's per-level anatomy: §B's rows are `g` (KILL-BY-LOGIC), `1 − d`
@@ -91,6 +95,11 @@ the 415 queued level-1 jobs are re-solves of ids that already carry a verdict.
 | **ALIVE_U** — recorded ALIVE, children not emitted | **44** | L1 44 | `8 · E_2` |
 | **FAILN / FAILD** | **91 / 3** | L1 54, L2 40 | `F_L` / re-solve |
 | DEAD (PASS, logic kill, or superseded incl. inherited) | 3,052 | — | 0 |
+
+Scope: the **G1** trees only (`tree_k5_1*_interior_G1*.jsonl`) — grid side 1, δ = 1e-2 slack
+pins. The `L1` trees (eps-fat pins, core 1/2 − 2.98e-8) are a different hypothesis, are not what
+the live campaign descends (PAUSED v3 §C.3), and are not priced here; their pre-night work-owing
+rows were 21 (k5_11) + 15 (k5_16).
 
 **Total owing: 2,052 nodes.** PAUSED v3's "406" is the pre-night ALIVE+FAIL count on a per-tree
 view; the id-level count of still-open *recorded* nodes here is 295, and the other 1,757 are the
