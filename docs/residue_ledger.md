@@ -221,6 +221,8 @@ re-solved with `a = ½ − h` and re-verified over the window (one core per clas
 That re-certification is worth pricing on its own account — it is what makes A141's existing 244 kills usable for
 T23's broader slack statement — but not for the sake of this refinement.
 
+**The 196 UNDECIDED usable-slot cells are not a reservoir of kills either (A157, 2026-09-08; exact-pin form, class-S composition, A118-O1 stands):** re-screening all 179 distinct A57/A60 cells that A141 left `UNDECIDED, lane_lb = 0, M ≤ 1` at **400,000** poses instead of 8,000 realises a free pose on **86** of them (11 with an explicit interior-disjoint pair) — including both cells of the PI's example `c0_Y0076`, `TL(0,0)` at clearance 1.1026·10⁻² and `BL(0,2)` at 5.2398·10⁻³ — so `LANE_K′ + M ≥ 2` and no kill is available there, while on the 93 that survive the screen A141's own certifying cover re-run at `depth0 = 21, max_open = 4,000` gave **0 kills, 1 near-miss and 24 non-closures over 25 cells (all 16 of the `M = 0` cells, the only ones where a kill was structurally reachable, among them)**, the frontier roughly doubling per depth level rather than emptying (`attempts/A157-undecided-slots/notes/method.md`).
+
 ## 2. The window stragglers — **CLOSED. A56 scoreboard 52/52 full-window** (A146, 2026-09-07 night; the rows below are the history)
 
 Every one of the 52 stratum rows now carries a 4-D PASS over the whole window [191/50, 969271/250000]:

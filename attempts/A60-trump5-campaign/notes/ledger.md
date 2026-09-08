@@ -667,3 +667,28 @@ certificates with degenerate pin cores (`a = 16383999967232/32768001953125`, tol
 slack re-certification is the cheaper of the two lanes — only ONE core shrinks per class, the other five pins stay
 exact — priced at **1–15 CPU-h** for the six classes (`attempts/A152-slot-lane-shrunk/notes/prereq.md`).
 **Nothing in A60 was written.**
+
+
+**A157 (2026-09-08) -- the UNDECIDED trump5 slot cells, including the PI's `c0_Y0076`, are not
+kills (exact-pin form, class-S composition, A118-O1 stands).** Of A141's 196 UNDECIDED
+`lane_lb = 0, M <= 1` slot cells, **48 are A60 trump5** (all level 1: BR(0,1) 22, TR(0,1) 12,
+BL(0,2) 7, BL(1,1) 6, TL(0,0) 1), on **45 distinct nodes**. Re-screening them at 400,000 poses per
+cell instead of A141's 8,000 realises a free pose on **24 of the 48** (24 of the 86 cells retired
+corpus-wide are A60), which with their `M` gives `LANE_K' + M >= 2` and proves no kill is
+available by this leaf; the other 24 stay kill-possible. **The PI's example resolves
+against the kill.** `c0_Y0076` has exactly two non-`LANE>=2` cells, and they are the two named:
+`TL(0,0)` draws 400,000 poses, 231,041 meet the slot cell, **14 are free of every core**, the best
+clearing every pin core and the hypothesis square's `K'` by **1.1026e-2** at
+`c = (1.6807459, 0.6862003)`, `theta = 29.4420 deg`; `BL(0,2)` draws 400,000, 270,606 meet, **3 are
+free**, best clearance **5.2398e-3** at `c = (1.6636782, 3.1947477)`, `theta = 61.0252 deg`. In
+both the binding core is the conditioned square's, and the clearance is ten orders of magnitude
+above float64 geometry noise; the pose lies in the container and meets the closed cell, so it is in
+`R'(C)`. So the reading that `TL(0,0)` is singly met -- a second meeter having to be a corner
+intrusion that does not fit -- is not what the pose window says: a free square tilted 29.44 deg
+reaches the cell while clearing the hypothesis square by 1.1e-2, and `LANE_K'(TL(0,0)) >= 1` with
+`M = 1`. Of the 24 A60 cells that survive the screen, the certifying cover (A141's, at
+`depth0 = 21, max_open = 4,000`) closed on none of those reached; corpus-wide the pass produced
+**0 kills, 1 near-miss, 24 not closed** over 25 covered cells. **Nothing in A60 was written**, no
+certificate was emitted, and `attempts/A157-undecided-slots/results/slot_kills157.jsonl` is empty
+by construction. Cost ~0.7 CPU-h of a 3 CPU-h cap; the useful lever was the 50x pose draw
+(2 s/cell), not a deeper cover (35+ CPU-s/cell).

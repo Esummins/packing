@@ -6440,3 +6440,66 @@ of record is `attempts/A150-four-corner-product/notes/composition.md`.
   `notes/{row,tables}.md`, `results/{screen154,screenall154,lp154}.jsonl`,
   `results/{price154,classrow154,bandeep154,verify154,screenall154_summary}.json`, `logs/`).
   No certificate was emitted: there was no LP kill to certify.
+
+
+## 2026-09-08 — A157-undecided-slots (Opus engineer) — done-negative
+- **Task**: decide A141's 196 `UNDECIDED, lane_lb = 0, M <= 1` usable-slot cells (the PI read them as
+  probable `LANE_K' = 0, M <= 1` kills) by running A141's certifying cover on them and emitting
+  `polycore_slot_lane_v1` certificates. READ-ONLY on every campaign and on A118/A132/A141; new files
+  only under `attempts/A157-undecided-slots/**` plus three named appends.
+- **The premise was wrong on both halves.** (i) A141 did not skip those covers for speed:
+  `skipped_covers` is set only on the `LANE>=2` / `NEAR-MISS-OR-WORSE` rows (4,750 + 1,790), and every
+  one of the 1,655 UNDECIDED rows already carries `M_exact = true`. What returned `None` is the LANE
+  cover — `polylane.lane_cover` at `max_open = 1200, depth0 = 20` with
+  `reason = "open budget exhausted"`, a branch that also returns `open = []`, which is why 188 of the
+  196 target rows report the misleading `cover_open = 0`. (ii) `lane_lb = 0` at A141's 8,000-pose
+  screen means *no free pose was drawn*, not that none exists.
+- **The population (recomputed)**: 196 rows, 174 distinct nodes, **179 distinct (node, slot) cells**
+  (17 nid/slot pairs appear in two A57 shard trees). `M = 0` on 19 rows, `M = 1` on 177. By class and
+  slot: k5_16 BL(1,0) 40 / TL(1,0) 27 / BR(0,1) 16 / TR(0,1) 11 / TR(1,0) 10 / BR(1,0) 9; trump5
+  BR(0,1) 22 / TR(0,1) 12 / BL(0,2) 7 / BL(1,1) 6 / TL(0,0) 1; k5_11 BL(1,1) 23 / BR(0,1) 8 /
+  TL(1,0) 3 / TR(0,0) 1. By level: k5_16 L1 103 / L2 10, trump5 L1 48, k5_11 L1 23 / L2 7 / L3 5.
+- **The cheap half decides half the population.** Re-screening all 179 cells at **400,000** poses
+  (~2 s/cell) realises a free pose on **86**, 11 of them with an explicit interior-disjoint pair. A
+  realised free pose is a sound `LANE_K' >= 1`, so with their certified `M` those cells have
+  `LANE_K' + M >= 2` and **no kill by this leaf exists there** — 62 A57 (k5_16 47, k5_11 15) and 24
+  A60. Only 1 of the 86 has clearance below 1e-4.
+- **The PI's example resolves against the kill.** `c0_Y0076` (A60 trump5, L1, alive) has exactly two
+  non-`LANE>=2` cells and they are the two named. `TL(0,0)`: 400,000 drawn, 231,041 meet the slot cell,
+  **14 free**, best clearing every pin core AND the hypothesis square's `K'` by **1.1026e-2** at
+  `c = (1.6807459, 0.6862003)`, `theta = 29.4420 deg`. `BL(0,2)`: 400,000 drawn, 270,606 meet, **3 free**,
+  best clearance **5.2398e-3** at `c = (1.6636782, 3.1947477)`, `theta = 61.0252 deg`. The binding core
+  is the conditioned square's in both; every pin core is 0.5–1.75 away. So a free square tilted
+  29.44 deg does reach `TL(0,0)` while clearing the hypothesis square by 1.1e-2 — the cell is not
+  singly met.
+- **The covers**: A141's machinery verbatim (`lane_corner_generic`, `emit141.cert_dict`,
+  `check141.py`), budget ladder at `(depth0 = 21, max_open = 4,000)`. **25 cells covered, 0 kills, 1
+  near-miss, 24 not closed.** The near-miss is `k5_16_interior_Y0254 BL(1,0)`: `LANE_K' <= 1` certified
+  on 2,296 always-overlapping open boxes, `M = 1`. The 25 include **all 16** kill-possible cells with
+  `M = 0` — the only sub-population reachable at this budget, since `M = 0` needs only `LANE_K' <= 1`
+  (a NON-empty open set suffices) while `M = 1` needs `LANE_K' = 0`, i.e. an EMPTY cover. The 68 unrun
+  cells are all `M = 1`.
+- **Why the cover does not converge.** 21 of 25 never finish the DFS phase: the undischarged frontier
+  at depth 20–21 passes 4,000 (322–4,560 discharged leaves at the cut). On the largest clearance in
+  the corpus, `k5_16_interior_Y0410 BL(1,0)` (6-core clearance 1.36e-1), `depth0 = 20` gives 324 leaves
+  and `depth0 = 21` gives 799, both budget-cut — the frontier roughly doubles per level. On
+  `k5_16_interior_Y0149_D02 TR(1,0)` the DFS does finish (43 open at depth 21) and the 8 refinement
+  rounds then GROW the open set `43 -> 38 -> 55 -> 80 -> 122 -> 203 -> 306 -> 497 -> 873`
+  (`..._D00`: `51 -> ... -> 506`), i.e. the always-overlap screen keeps finding genuinely far-apart
+  open pairs. One cell at `(21, 30,000)` had not completed after 125 CPU-s (RSS 43 MB — wall, not
+  memory, binds at that rung); `depth0 >= 24` with `max_open >= 40,000` does blow memory (12 GB), since
+  `max_open` bounds only the frontier, not `lane_cover`'s discharged-leaf list.
+- **Result**: **0 `polycore_slot_lane_v1` certificates**, `results/slot_kills157.jsonl` empty by
+  construction, **nothing in A57 or A60 changes**. Checker control: `check141.py` PASSes A141's
+  `slot_slack0.02_c0_Y0281__TL0_0.json` in this environment, so the emit/check path was live.
+  Caveat A118-O1 stands throughout: exact-pin form, class-`S` composition only.
+- **Cost** ~0.7 CPU-h of a 3 CPU-h cap; 2 processes at BelowNormal / affinity `0xFFFF` throughout,
+  16 lab python processes on the box (A149 4, A137 5, A156 2, A136 2, A154 1, A157 2). The box was
+  saturated, so WALL was the binding limit, not CPU. **The measured lever**: extra sampling decides a
+  cell in ~2 s; extra cover depth costs 35+ CPU-s and decided none.
+- Files: `attempts/A157-undecided-slots/` (code `enum157.py`, `mkrecs157.py`, `screen157.py`,
+  `probe157.py`, `run157.py`, `fold157.py`; results `undecided_cells.jsonl`, `enum157.json`,
+  `screen157*.jsonl`, `cover_jobs*.jsonl`, `t157_cells*.jsonl`, `t157_deep.jsonl`, `summary157.json`,
+  `slot_kills157.jsonl`; `BRIEF.md`, `notes/method.md`), plus appends to
+  `attempts/A57-shadow-trees/PAUSED.md`, `attempts/A60-trump5-campaign/notes/ledger.md` and
+  `docs/residue_ledger.md` §1.

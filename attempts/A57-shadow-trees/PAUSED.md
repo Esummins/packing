@@ -366,3 +366,35 @@ slack-form extension kill. **None of them is a kill today, and none of A57's sta
 this addendum that would retire a node is conditional on the slack-form extension kill; the recommendation is
 NOT to buy that re-certification for the slot-lane refinement — it should be bought, if at all, to make A141's
 existing 244 kills slack-valid (A118 §2 / lemmas.md T23), which is a much better reason.*
+
+
+**The UNDECIDED slot cells are not a reservoir of kills (A157, 2026-09-08; exact-pin form,
+class-S composition, A118-O1 stands).** A141's slot sweep left 1,655 (node, slot) cells UNDECIDED;
+196 of them (174 distinct nodes, 179 distinct (node, slot) cells after the L1/G1 shard duplicates)
+carry `lane_lb = 0` with a certified `M <= 1` and were read as probable `LANE_K' = 0, M <= 1`
+kills. Two things came out of re-running them. First, a correction of record: those cells were
+NOT the ones whose covers A141 skipped — `skipped_covers` is set only on the `LANE>=2` /
+`NEAR-MISS-OR-WORSE` rows, and every UNDECIDED row already carries `M_exact = true`; what failed
+was the LANE cover, which returned `lane = None, reason = "open budget exhausted"` at
+`max_open = 1200, depth0 = 20` (that branch also zeroes the reported `cover_open`, which is why
+188 of the 196 rows misleadingly show `cover_open = 0`). Second, and decisively, `lane_lb = 0` at
+A141's 8,000-pose screen means *no free pose was drawn*, not that none exists: re-screening all
+179 cells at **400,000** poses realises a free pose on **86** of them (11 with an explicit
+interior-disjoint pair), which with their `M` gives `LANE_K' + M >= 2` and PROVES no kill is
+available by this leaf — 62 of the 86 are A57 cells (k5_16 47, k5_11 15; 52 at level 1, 8 at
+level 2, 2 at level 3). On
+the 93 that survive the screen, A141's certifying cover was re-run at `depth0 = 21,
+max_open = 4,000`: **25 cells covered, 0 kills, 1 near-miss** (`k5_16_interior_Y0254 BL(1,0)`,
+`LANE_K' <= 1` on 2,296 always-overlapping open boxes with `M = 1`), 24 not closed. The 25 include
+**all 16** cells where a kill was structurally reachable at this budget (`M = 0`, needing only
+`LANE_K' <= 1`, which a non-empty open set can certify); the 68 unrun cells all have `M = 1` and
+need `LANE_K' = 0`, i.e. an EMPTY cover, which nothing measured approached — 21 of the 25 never
+finish the DFS phase (the undischarged frontier roughly doubles per depth level: on the largest
+clearance in the corpus, `k5_16_interior_Y0410 BL(1,0)` at 1.36e-1, `depth0 = 20 -> 324` leaves and
+`depth0 = 21 -> 799` leaves, both budget-cut), and on `k5_16_interior_Y0149_D02/D00 TR(1,0)` the
+refinement rounds GROW the open set (43 -> 873, 51 -> 506) because the always-overlap screen keeps
+finding genuinely far-apart open pairs. **Zero certificates were emitted and nothing in A57
+changes**; `attempts/A157-undecided-slots/results/slot_kills157.jsonl` is empty by construction.
+The reading to carry forward is A141 sec 8.2's, extended: the UNDECIDED slot population is a real
+2-crowd population like the near-misses, not a budget artefact, and the cheap way to see it is a
+50x bigger pose draw, not a deeper cover (2 s/cell against 35 CPU-s/cell).
