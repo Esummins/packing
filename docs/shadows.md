@@ -5207,3 +5207,29 @@ pairwise cell-disjoint placements among those with y > 0.02.
 | A99 | L1 | 29 | 9/10 x16, 8/10 x13 |
 
 Full list: `attempts/A107-shadow-gallery/results/unexplained_k0.json`.
+
+# Part III - the k0 residue gallery v3 (A140)
+
+Part II above is the A107 K-gallery of the k0_00 class, built from the A38/A85/A99 records BEFORE A115's last pass.  A115 T6 has since reduced the k0_00 residue to **exactly twelve converged-alive cells** (tau = budget, minmass 1.000, converged - no LP time kills them):
+`l1_071`, `l1_104`, `l1_124`, `l1_148`, `l1_153` (a Trump image, must stay alive), `l1_158`, `l1_159`, `l2_p114_001`, `l2_p65_101`, `l2_p65_111`, `l2_p74_001`, `s3_far_BL389484_TR018470`.
+
+**[docs/shadows/k0v3/](shadows/k0v3/README.md)** is one page per cell in the reviewed two-panel form, redrawn with the 2026-09-07 drawing rules and carrying the polygon core K'(B) and the cell's candidate cover.  A fresh review sheet is `docs/shadows/k0v3/review_k0v3.csv`.
+
+| cell | level | s* of the right panel | Part II family | in-vitro LP under K' | candidate cover |
+|---|---|---|---|---|---|
+| [`l1_071`](shadows/k0v3/l1_071.svg) | 1 | 4.000000 | K01 | kill candidate (tau 9.8402, unconverged) | re-branch on the occupied slot (A113) on BL(0,1) |
+| [`l1_104`](shadows/k0v3/l1_104.svg) | 1 | 3.914214 | K04 | kill candidate (tau 9.6143, unconverged) | re-branch on the occupied slot (A113) on BR(0,0) |
+| [`l1_124`](shadows/k0v3/l1_124.svg) | 1 | 3.942810 | none | no kill (tau 10.0000) | two-meeter (A118 T4) on TR(0,0) |
+| [`l1_148`](shadows/k0v3/l1_148.svg) | 1 | 4.000000 | K01 | kill candidate (tau 9.6825, unconverged) | re-branch on the occupied slot (A113) on BL(0,0) |
+| [`l1_153`](shadows/k0v3/l1_153.svg) | 1 | s0 (raw support) | none | no kill (tau 10.0000) | two-meeter (A118 T4) on TR(0,0) |
+| [`l1_158`](shadows/k0v3/l1_158.svg) | 1 | 3.902674 | none | no kill (tau 10.0000) | two-meeter (A118 T4) on TR(0,0) |
+| [`l1_159`](shadows/k0v3/l1_159.svg) | 1 | 3.886745 | K06 | no kill (tau 10.0000) | two-meeter (A118 T4) on TR(0,0) |
+| [`l2_p114_001`](shadows/k0v3/l2_p114_001.svg) | 2 | 3.924402 | K20 | kill candidate (tau 9.9659, unconverged) | re-branch on the occupied slot (A113) on BR(0,0) |
+| [`l2_p65_101`](shadows/k0v3/l2_p65_101.svg) | 2 | 4.000000 | K01 | kill candidate (tau 8.7763, unconverged) | re-branch on the occupied slot (A113) on BL(0,0) |
+| [`l2_p65_111`](shadows/k0v3/l2_p65_111.svg) | 2 | 3.925149 | K03 | kill candidate (tau 8.8410, unconverged) | re-branch on the occupied slot (A113) on BL(0,1) |
+| [`l2_p74_001`](shadows/k0v3/l2_p74_001.svg) | 2 | 3.912232 | K05 | kill candidate (tau 9.9592, unconverged) | re-branch on the occupied slot (A113) on BR(0,0) |
+| [`s3_far_BL389484_TR018470`](shadows/k0v3/s3_far_BL389484_TR018470.svg) | 4 | 3.985467 | K26 | **dead (converged), cert pending** (tau 6.0000) | two-meeter (A118 T4) on BL(0,0) |
+
+The polygon core K'(B) meets dual-support columns the axis core K(a) misses on **all twelve** cells (A132's measurement, run on k0 for the first time); one in-vitro re-solve per cell (240 s cap) with the column pool pruned by K' drops tau below budget on **8 of 12**.  On **1** of those the LP also CONVERGED there, which is LP-dead under the polygon core with the certificate pending (the frozen verifier knows only K(a)); the other 7 are A57's `dead_unconverged` -- kill candidates a warm continuation would settle.  The measurement, per cell and per box, is `attempts/A140-k0-residue-gallery/results/t1_polycore.json`; the same scan over all 166 OPEN k0 cells A115 lists finds K'-excluded dual weight on every one (median 2.02).
+
+Second result, independent of the LP: A118's lane count was never run on `l1_124`, `l1_153` or `l1_158` (A38 has no node json for them, so they were not in A118's corpus).  Re-running A118's own `lane.run_cell` unchanged gives **TR(0,0) LANE <= 1** on all three; with `l1_159`'s TR(0,0) and `s3_far`'s BL(0,0), **5 of 12** cells now carry a two-meeter cover whose geometric half is already certified.  None is a kill on its own (the conditioned square can itself reach the cell, so the meeter count is <= 2 and K0-FREE does not fire directly) -- each is a two-child cover: the conditioned square meets the cell (shrink its box, re-solve) or it does not (the cell is met by <= 1 square and K0-FREE teleports into k1).  Per-cell verdicts: `attempts/A140-k0-residue-gallery/results/lane140.json`.
