@@ -6349,3 +6349,94 @@ cores and the extremal-tilt schematics).
 - Files: `attempts/A155-exact-cell-corner-band/` (code `cells155.py` (A143's cover with the pad a
   parameter), `geom155.py`, `band155.py`, `prod155.py`, `draw155.py`; `notes/composition.md`,
   `notes/tables.md`; `figs/band155_pad0_vs_padmax.svg`).
+
+## 2026-09-08 — A150 (four-corner product root for k0_00), log entry added retrospectively by A154
+
+A150 finished on 2026-09-08 (`d993979b`) under a brief that forbade writing outside its own
+directory, so it could not add its own REGISTRY row or LOG entry. Both are added here; the source
+of record is `attempts/A150-four-corner-product/notes/composition.md`.
+
+- **The four-corner mechanism is real and large.** Conditioning on all four corner intruders at
+  once moves the k0 level-1 LP by a **whole unit of η** (13 fine nodes: median −1.0, range −6.0 to
+  +1.08, **7 converged kills, 4 frozen-verifier PASS at 8.7–92 CPU-s**), against A143's −0.044 for
+  one square at one corner and −0.083 for two at the same corner. Random-survivor kill rate **63 %**
+  against A143's **0 %**. Canary clean: 192 of 192 Trump four-tuples survive every geometric kill.
+- **The PI's premise fails.** The admissible band is **206 of 216 cells** — the corner-meeting zone
+  loses no distance interval and no tilt window — the pairwise geometry (Q2/Q1/Q1s) cuts only
+  **15.6 %** of the product, and every counting leaf fires on nothing (guard lines `rhs_min` 1.377
+  against `s0` 3.877; disk bound `n_max` 10–14 against budget 7; a separation surrogate is worse).
+- **Priced out.** At the resolution where the LP decides (`area_open <= 2`, first reached at 6x6
+  positions x 3 tilt windows, N = 108) the product costs **>= 4.2e5 and realistically 5.3e6
+  CPU-h** against `docs/budget.md`'s 12,000 for the whole k0 tree; break-even needs N ~ 40, where
+  the LP does not decide. Adaptive refinement cannot rescue a 12-dimensional root.
+- **Banked negatives:** the separable disk surrogate `area_4 = area_0 - sum_c delta_c` is NOT a
+  theorem (refuted, errors to 1.73); the sound separable form gives `n_max >= 16`.
+
+## 2026-09-08 — A154: (R6) as an LP row is A115's row, it kills nothing, and the useful artefact is a free screen
+
+> **VERDICT. 0 attributable kills in 29 LP runs; η strictly WORSE on 26 of them (mean +0.65); the
+> Trump-image canary stays alive; and the reason is now a one-line test that costs nothing.**
+
+- **(R6) is not a new row.** A150 §6 item 1 proposes `sum_p [Q_p meets some widened corner box] x_p
+  >= 8` as "a single row of weight 8, **not** the four separate >= 2 rows A115 tried". Both halves
+  are wrong on the record: A115's `d0` configuration IS that aggregate row
+  (`attempts/A115-k0-corner-rows/notes/method.md`, "The node-level incidence budget":
+  `rhs = 1 + e*[Q in G(a_w(0))]`, `budget = budget0 + floor(eB)`, `B = 8 - sum_cores r_max`), and
+  four per-corner rows would **dominate** the aggregate (which is their diagonal `e_1 = ... = e_4`),
+  so (R6) is at best what was already measured. Statement, soundness, Lean shape and the verifier
+  analysis: `attempts/A154-r6-corner-row/notes/row.md`.
+- **Why it fails, exactly.** `tau(e)` is the value of an LP affine in the rhs, hence convex, and any
+  optimal dual at `e = 0` is a subgradient: `eta(e) >= eta0 + e(c - B)` with `c = dtau/de` the corner
+  incidence the fractional optimum realises. A kill needs `c < B`. Measured: **`c >= B` in 23 of 23
+  (R6) LP runs, minimum `c - B` exactly 0.000**; mean `c` 8.22 against mean `B` 5.96; on the eleven
+  converged-alive cells with A135 exact cores, `c = 9.0-10.2` against `B` in {7,8}.
+- **The geometric cause.** `a_w(0) = 12819/12500 = 1.025520` is bigger than 1; the four widened
+  corner boxes cover `4 a_w^2 / s0^2 = 28 %` of the container, and a covering measure is cheapest
+  exactly in the corners, where a placement is clipped by two walls. **The row prices what the LP
+  already wants to buy** — the corner incidence is not a rigid property of a cell, it is a price.
+  Four cells of the eleven have a stored dual with `c = 6.0-6.5 < B = 7`, and the re-optimised dual
+  at `e = 1/B` immediately buys `c = 9.2-10.0`.
+- **NOT A109's failure mode.** `s0 - 2 a_w = 456511/250000 = 1.826044 > sqrt2` **exactly**, so a
+  unit square carries at most one corner incidence and `B` is exact — independently re-verified on
+  **24,468 dual placements from 176 packings: max multiplicity 1, 0 disagreements** between the
+  `f_min_max` oracle and a from-scratch SAT test (`results/verify154.json`, `ALL_OK`).
+- **THE DELIVERABLE: the zero-cost screen.** For any node whose stored LP record is CONVERGED,
+  `c >= B` at its stored dual is a **proof** that (R6) cannot lower that node's eta at any `e > 0` —
+  read from the file, no LP. Over **all 166 open k0 cells the screen costs 5.2 CPU-s** and settles
+  **8 of the 13 converged** ones outright. Any future incidence-row proposal should be screened this
+  way before an LP slot is spent on it.
+- **Lemma ID (A89-O3) adds nothing, anywhere.** (i) The area form
+  `sum_c (1 - d_c)^2 <= m^2 - 11 < 4.0318` is vacuous by inspection at four corners
+  (`(1-d)^2 <= 1`, so the left side is `<= 4`), and is not expressible in the case-LP, which has no
+  variable for a corner's depth. (ii) The **certified** corollary "some corner has DEPTH >= 0.3" is
+  a weight-1 row of exactly (R6)'s shape at `a_w(0.3) = 72103/100000`: `c_ID >= B_ID` on **166 of
+  166** open cells (`B_ID = 0` on 87 — the conditioned square can itself be the deep one, so the
+  bonus floors to 0; mean `c_ID` 3.12 against `B_ID <= 1`). Because `B_ID = 1` forces `e2 = 1`
+  (mass >= 2 on every deep pose), the two measured joint runs pay **+3.84 and +4.70 of eta** for it.
+- **The protected tier gets nothing, and the reason is structural.** A corner is *simple* when a pin
+  sits in it (the pin IS the corner square, no teleport); at a *non-simple* corner the ">= 2 free
+  meeters" statement needs the extension class `S u {c(0,0)}` certified dead on the window
+  (`slot_crowds.md` §1.2). Census (`results/classrow154.json`): **k0_00** 4 non-simple corners,
+  `B = 8`, licensed modulo K0-O1 — this is (R6); **trump5** exactly **one** (TL; the pins hold
+  BL/BR/TR), `B = 2`, licensed at `s0` only (extension k6_23 is PARTIAL); **k5_11** one (TR), same;
+  **k5_16 and k4_13 have ZERO non-simple corners — the row is vacuous**; and **all 15 protected-tier
+  classes with k <= 4 have every corner extension a protected class**, so nothing licenses the row
+  there. In vitro on 10 A60 alive trump5 nodes: the screen settles 8, and the LP gives 2 alive at
+  eta +1.0 and 2 knife edges at eta = 0.0000 with **`c = 2.00 = B` exactly**, one of them CONVERGED
+  at the 900 s cap — a proof that no `e` kills it.
+- **Price.** A (R6) pass over the 216 level-1 k0 cells costs **9.5 CPU-h** at the measured 159 s per
+  cell and removes **0**, i.e. **net -9.5 CPU-h** against the k0 row's 12,000 (9,400-10,900 after
+  A141); over A115's 166 open cells, -7.3. The screen costs 0.0014 CPU-h. For trump5's residual tree
+  (inside the protected tier's 3,800 CPU-h) the row's whole reach is one unit of budget on one
+  corner at 287 s per node, and it is `s0`-only: **net negative there too**.
+- **Addendum for A150's price (PI's question).** By D4 a corner-first tree may name its root corner
+  to be a DEEPEST one, so Lemma ID lets that corner's meeter be taken with DEPTH >= 0.3
+  (`mu <= a_w(0.3) = 0.72103` at `s0`). That leaves **110 of A150's 206 band cells** (118 of the raw
+  216; 104 under the untransported `mu <= 0.7`), a factor **0.534 on ONE of the four corners**:
+  A150's fine product falls from 5.28e6 to **2.82e6 CPU-h — still 235x the k0 row**. ID narrows one
+  factor of the product, never four.
+- Cost 1.64 CPU-h of a 3 CPU-h cap (29 LPs, 1.50 CPU-h). Files: `attempts/A154-r6-corner-row/`
+  (`code/{a154lib,screen154,screenall154,lp154,classrow154,bandeep154,verify154,report154}.py`,
+  `notes/{row,tables}.md`, `results/{screen154,screenall154,lp154}.jsonl`,
+  `results/{price154,classrow154,bandeep154,verify154,screenall154_summary}.json`, `logs/`).
+  No certificate was emitted: there was no LP kill to certify.
