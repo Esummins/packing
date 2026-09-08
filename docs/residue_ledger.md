@@ -70,8 +70,7 @@ level-3 nodes, two of the 5–8 weight-1 support columns overlap the hypothesis 
 −0.005 to −0.029) yet clear the axis-aligned core K(a) by +0.003 to +0.045: a 75°-tilted square protrudes ~0.21 beyond
 K(a) along each diagonal. The polygon core K′(B) = ⋂ over poses of the square (certified vertex-wise by pinguard's
 interval formula) prunes those columns, strengthens the certificate hypothesis, and kills against pin cores; it needs a
-v3 verifier clause and one Lean lemma. Both leaks are the same lesson: *use the exact pose set, not its axis-aligned
-shadow*, and both apply to every conditioning tree (protected tier, k0).
+v3 verifier clause and one Lean lemma. Both leaks are the same lesson: *use the exact pose set, not its axis-aligned shadow*, and both apply to every conditioning tree (protected tier, k0). **(3) The slot lane kill (A141 `1f9de0ef`, after the PI's Y0460 reading):** with the polygon core of H and the exact pin cores as obstacles, a usable slot (its extension class dead on the closed window — every listed k6 extension is) that no free square can reach (LANE_K′ = 0) while H can (M = 1) is singly met, the near-simple meeter snaps to the slot, and the packing lands in a dead k6 class. Over the first 1,050 of 1,693 alive A57/A60 records: **155 (node, slot) kills on 145 distinct A57 nodes** (BR(0,1) 45, TL(1,0) 40, TR(0,0) 27, BL(1,0) 22, BL(1,1) 1; 88 level-1, 47 level-2), 200,000 poses per kill with 0 free, 135 certified by an independent checker; the sweep continues over A60. Not yet priced into the A57 row (overlap with the clip kills unmeasured). Y0460 itself is NOT among them: its BR(0,1) keeps 34,000 free poses and the cover cannot certify LANE ≤ 1.
 
 **What the alive nodes are** (A107, LP dual support drawn directly — the PI's rule):
 
