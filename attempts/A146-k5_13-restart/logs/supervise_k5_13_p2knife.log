@@ -1,0 +1,29 @@
+=== A146 supervisor: k5_13, per-LP wall 1500s, deadline 1.5h, up to 2 attempts
+--- attempt 1/2 (t+0s)
+    $ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A61-window-stragglers\code\resolve61.py --name k5_13 --eps_geo 0.003 --gate 0.3 --lp_time 900 --lp_time_b 900 --cert_time 420.0 --cert_rounds 6 --depth 48 --jobs 2 --param_timeout 900 --max_atoms 3500 --max_cols_add 800
+    | === k5_13: k=5 budget=6; enriched warm = 3500 columns (pool 3651, base 111, cap 3500), 19064 rows (15824 A53 + 120 4D witnesses x 27)
+    | [s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=3500 points=3500 rows=14994 (rejected 1811)
+    |   it   0 tau=5.617021 rows=15624 orbs=3500 atoms>0=128 minmass=0.723404 maxcov=1.233224 +rows=630 -rows=0 +cols=0 -cols=0 t=469s [lp 437s row 15s +r 12s col 1s +c 0s]
+    |   it   1 tau=5.617021 rows=15624 orbs=4300 atoms>0=130 minmass=0.827012 maxcov=1.233224 +rows=0 -rows=0 +cols=800 -cols=0 t=499s [lp 5s row 23s +r 0s col 1s +c 1s]
+    |   it   2 tau=5.616279 rows=16578 orbs=4300 atoms>0=134 minmass=0.830610 maxcov=1.076744 +rows=954 -rows=0 +cols=0 -cols=0 t=679s [lp 125s row 27s +r 27s col 1s +c 0s]
+    |   it   3 tau=5.616279 rows=16578 orbs=4761 atoms>0=130 minmass=0.843023 maxcov=1.076744 +rows=0 -rows=0 +cols=461 -cols=0 t=707s [lp 12s row 14s +r 0s col 1s +c 0s]
+    |   it   4 tau=5.616034 rows=17468 orbs=4341 atoms>0=145 minmass=0.804884 maxcov=1.059729 +rows=890 -rows=0 +cols=0 -cols=420 t=933s [lp 183s row 15s +r 26s col 2s +c 0s]
+    |   time limit
+    | DONE s=3.877084 n=6 sym=C1 tau=5.617045 nu=5.617045 conv=False minmass=0.804884 maxcov=1.059729 rows=17468 orbits=4341 atoms_nz=170 packing_support=279 time=1079s
+    |     [A] eps_geo=0.0001 tau=5.617045 budget=6 slack=0.3830 conv=False orbits=4341 rows=17468 (1079s)
+    | [s=3.877084 n=6 sym=C1 box=[0,90]x1] init orbits=3500 points=3500 rows=15886 (rejected 1319)
+    |   it   0 tau=5.906196 rows=16767 orbs=3500 atoms>0=143 minmass=0.603358 maxcov=1.724378 +rows=881 -rows=0 +cols=0 -cols=0 t=111s [lp 72s row 15s +r 19s col 1s +c 0s]
+    |   it   1 tau=5.970468 rows=16767 orbs=4300 atoms>0=173 minmass=0.614948 maxcov=1.776011 +rows=0 -rows=0 +cols=800 -cols=0 t=136s [lp 7s row 16s +r 0s col 1s +c 1s]
+    |   it   2 tau=5.894737 rows=17730 orbs=4300 atoms>0=60 minmass=0.736842 maxcov=1.426635 +rows=963 -rows=0 +cols=0 -cols=0 t=276s [lp 101s row 13s +r 24s col 1s +c 0s]
+    |   it   3 tau=6.000000 rows=17730 orbs=4305 atoms>0=336 minmass=0.888813 maxcov=2.000000 +rows=0 -rows=0 +cols=5 -cols=0 t=415s [lp 107s row 32s +r 0s col 0s +c 0s]
+    |   it   4 tau=5.967273 rows=18551 orbs=4235 atoms>0=165 minmass=0.829852 maxcov=1.305295 +rows=821 -rows=0 +cols=0 -cols=70 t=572s [lp 121s row 14s +r 21s col 1s +c 0s]
+    |   it   5 tau=6.000000 rows=18551 orbs=4240 atoms>0=263 minmass=0.882820 maxcov=1.500000 +rows=0 -rows=0 +cols=28 -cols=23 t=712s [lp 114s row 26s +r 0s col 0s +c 0s]
+    |   it   6 tau=6.000000 rows=19333 orbs=4232 atoms>0=306 minmass=0.889849 maxcov=1.500000 +rows=782 -rows=0 +cols=0 -cols=8 t=777s [lp 11s row 31s +r 22s col 0s +c 0s]
+    |   it   7 tau=6.000000 rows=19333 orbs=4275 atoms>0=253 minmass=0.916182 maxcov=1.500000 +rows=0 -rows=0 +cols=43 -cols=0 t=823s [lp 23s row 22s +r 0s col 0s +c 0s]
+    |   it   8 tau=5.989583 rows=20165 orbs=4001 atoms>0=141 minmass=0.807292 maxcov=1.265625 +rows=832 -rows=0 +cols=0 -cols=274 t=947s [lp 90s row 14s +r 20s col 1s +c 0s]
+    |   time limit
+    | DONE s=3.877084 n=6 sym=C1 tau=6.000000 nu=6.000000 conv=False minmass=0.807292 maxcov=1.265625 rows=20165 orbits=4001 atoms_nz=225 packing_support=46 time=989s
+    |     [B] eps_geo=0.003 tau=6.000000 budget=6 slack=-0.0000 conv=False orbits=4001 rows=20165 (989s)
+    |     POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = -0.00000 < 0.03; no certify round burnt.
+    driver exited rc=1 after 2069.1s
+=== done: EXIT:1 after 2069.1s

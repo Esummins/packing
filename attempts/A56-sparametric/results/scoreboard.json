@@ -5895,22 +5895,85 @@
      ]
     }
    },
-   "result": "OPEN",
-   "s_ranges": [],
-   "window_coverage": 0.0,
-   "open_band": [
+   "result": "TRANSFERRED",
+   "s_ranges": [
     [
      "191/50",
      "969271/250000"
     ]
    ],
-   "status": "OPEN over the whole window; recorded FAIL-witness s-range [3.8200000, 3.8770840] (TRUNCATED at the per-box witness cap unless the witness count is not a multiple of 8 -- see stage1_pricing.json)",
+   "window_coverage": 1.0,
+   "open_band": [],
+   "status": "FULL [191/50, 969271/250000] -- A146 closed the window with the SAME A56 parametric certificate re-verified slab by slab at width 1/1000 (A114 slab-width law; full C2 canary)",
    "certs": {
     "original_s0_cert": "C:/Users/esumm/code/packing/attempts/A54-stragglers/certs/k5_13.json",
     "parametric_cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_13.param.json",
-    "carries_the_window_claim": null,
+    "carries_the_window_claim": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_13.param.json",
     "note": "the parametric certificate is the SAME measure as the A53/A54 one, re-expressed with s-affine atom and core positions (C1 identity)"
-   }
+   },
+   "a61": {
+    "attempt": "A61 (restarted by A146 under a per-LP process wall)",
+    "recipe": "A61 resolve61: enriched column pool (warm57 + A56/A61 checkpoints) -> slack gate -> eps_geo re-solve -> certify WITH --eps_geo (A61 L1 leak fix) -> 4D depth 48 with the anchoring ladder",
+    "warm_atoms": 3500,
+    "warm_rows": 19064,
+    "tau0_enriched": 5.617045454545458,
+    "slack0": 0.3829545454545418,
+    "gate": 0.3,
+    "eps_geo": 0.003,
+    "tau_at_eps_geo": 6.000000000002375,
+    "dtau_deps": 132.05329153686785,
+    "certify": null,
+    "new_cert": null,
+    "anchoring_tried": null,
+    "c2": null,
+    "verdict": "POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = -0.00000 < 0.03",
+    "seconds": 2068.3,
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A61-window-stragglers\\results\\resolve61_k5_13.json"
+   },
+   "a61_outcome": "POST-SHRINK GATE-FAIL at eps_geo=0.003: budget - tau = -0.00000 < 0.03",
+   "a146": {
+    "attempt": "A146",
+    "mechanism": "A114 slab sweep (docs/budget.md section E width law) on the A56 parametric certificate",
+    "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A56-sparametric\\certs\\k5_13.param.json",
+    "slab_width": "1/1000",
+    "n_slabs": 58,
+    "depth": 48,
+    "gained": [
+     [
+      "191/50",
+      "969271/250000"
+     ]
+    ],
+    "failed": [],
+    "seconds": 1838.2,
+    "c2": [
+     {
+      "s": "191/50",
+      "s_float": 3.82,
+      "time_s": 3.6,
+      "result": "PASS"
+     },
+     {
+      "s": "1924271/500000",
+      "s_float": 3.848542,
+      "time_s": 4.6,
+      "result": "PASS"
+     },
+     {
+      "s": "969271/250000",
+      "s_float": 3.877084,
+      "time_s": 85.0,
+      "result": "PASS"
+     }
+    ],
+    "record": "C:\\Users\\esumm\\code\\packing\\attempts\\A146-k5_13-restart\\results\\slab146.json"
+   },
+   "s_ranges_float": [
+    [
+     3.82,
+     3.877084
+    ]
+   ]
   },
   "k5_02": {
    "name": "k5_02",
@@ -6391,9 +6454,8 @@
   "total": 52,
   "by_result": {
    "M1": 4,
-   "TRANSFERRED": 27,
-   "TRANSFERRED-resolved": 20,
-   "OPEN": 1
+   "TRANSFERRED": 28,
+   "TRANSFERRED-resolved": 20
   },
   "by_k": {
    "k6": {
@@ -6402,13 +6464,12 @@
     "TRANSFERRED-resolved": 13
    },
    "k5": {
-    "TRANSFERRED": 9,
+    "TRANSFERRED": 10,
     "M1": 2,
-    "TRANSFERRED-resolved": 7,
-    "OPEN": 1
+    "TRANSFERRED-resolved": 7
    }
   },
-  "full_window_rows": 51
+  "full_window_rows": 52
  },
  "wall_time_this_run_s": 3249.7,
  "legend": {
@@ -6468,6 +6529,17 @@
    "k6_29"
   ],
   "records": "C:\\Users\\esumm\\code\\packing\\attempts\\A114-window-closers\\results",
+  "ledger_rule": "soundness.md P7 (certificate substitution) + A86 T4 WindowRows disjunction for the sub-window unions"
+ },
+ "a146": {
+  "updated": "2026-09-07T23:36:17",
+  "rows_touched": [
+   "k5_13"
+  ],
+  "rows_converted_to_full_window": [
+   "k5_13"
+  ],
+  "records": "C:\\Users\\esumm\\code\\packing\\attempts\\A146-k5_13-restart\\results",
   "ledger_rule": "soundness.md P7 (certificate substitution) + A86 T4 WindowRows disjunction for the sub-window unions"
  }
 }

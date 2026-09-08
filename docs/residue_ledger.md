@@ -20,7 +20,7 @@ lists what is left; that file prices it.**
 | | S02 the k7 pinwheel | boxes whose support is the 3.8867 pinwheel | 252 (184 + 68), carries the deep tree | tight core (in), deeper levels terminate (f₄ = 0) | grain kill (§6) or just time |
 | | S03–S06, S08–S53 | 45 smaller shadows, mostly level 1 | ~250 | as S01/S02 by type | PI review of the gallery |
 | | fractional | no integral support at all | 264 (151 + 113) | tree only | the genuine tail |
-| Window stragglers | **k5_13 only** (A61 running) | one thin whole-window certificate | 1 class; scoreboard 51/52 — A114 closed k5_02, k5_03, k5_12 with the original s0 certificates once slabs were sized by the width law | slab sweep, resumable | ≤ 3 CPU-h |
+| Window stragglers | **NONE — closed** | — | 0 classes; scoreboard **52/52 full-window** — A146 closed k5_13 (the last row) with the original A56 certificate in 58 slabs of 10⁻³; A114 had closed k5_02, k5_03, k5_12, k6_07, k6_23, k6_27 the same way | — | **0** |
 | Protected tier | trump5 cover/slackcore | residual tree ending in certified basins (Trump's, and now S07/S33/S38's local certificates: A116/A119/A122, A125 running on S33) | 325 alive nodes in A107's input (S01 196, S07 18, S02 12 …) | A60 route, paused | S01 crowd rows; the basins as YES leaves |
 | | the other 15 protected classes | conditioning trees per exact stratum | 3,500–4,200 CPU-h priced (A100) | A84/A100 model | same levers as A57 |
 | k0_00 | the frame residue | 12 converged-alive cells (τ = budget, minmass 1) after A115's warm re-solves; theory: the selected minimiser on W (DRAIN-SEL, A128) | 12 cells; tree priced ~12,000 CPU-h after A115 | exchange move (A128) and the non-rigid field (A130) proved on boxes; the three window holds are mode accumulations at the flush stratum, not locks, and cost DRAIN-SEL nothing | a semi-algebraic tree leaf at flush stacks, or the two-meeter cover |
@@ -174,7 +174,10 @@ to draw. These are what the tree is for, and they are mostly level 1 (110 + 106)
 
 ---
 
-## 2. The window stragglers (A56 scoreboard **51/52 full-window** after A114 `ee0c18d5`, 2026-09-07; only k5_13 open — the rows below are the history)
+## 2. The window stragglers — **CLOSED. A56 scoreboard 52/52 full-window** (A146, 2026-09-07 night; the rows below are the history)
+
+Every one of the 52 stratum rows now carries a 4-D PASS over the whole window [191/50, 969271/250000]:
+4 M1 + 28 TRANSFERRED + 20 TRANSFERRED-resolved, no OPEN row and no partial row.
 
 | class | window status | note | next |
 |---|---|---|---|
@@ -185,7 +188,7 @@ to draw. These are what the tree is for, and they are mostly level 1 (110 + 106)
 | k5_03 | PARTIAL: [3.82, 3.823345] banked (5.9%) | resolver closes every recorded witness cell but bulk slabs fail: genuinely thin | slab sweep of the rest, ~5 CPU-h (A114 continuing) |
 | k5_02 | PARTIAL: [3.82, 3.820223] banked (0.4%) | same | slab sweep, cost projected first (cap 8 CPU-h) |
 | k5_12 | OPEN | the gate was never the issue: both LP stages unconverged, certify FAILs at depth 56 and witness feedback drives τ to exactly the budget — no certifiable measure at ε_geo 0.003 with this column pool | slab sweep, projected first |
-| k5_13 | A61 running — **the only open window row (scoreboard 51/52)** | | wait |
+| k5_13 | **FULL** (A146: 58 slabs of 10⁻³ on the ORIGINAL A56 parametric certificate, 58/58 PASS, 0 bisections, 1.5 CPU-h, C2 triple-PASS) — **the last open window row** | its A56 whole-window FAIL was an over-width slab (0.057084 vs a measured width_max of 0.002, 28×), 0 holes; the A61 re-solve route is dead for this node on its own numbers — dτ/dε = 119–132 vs 57–90 on every converted row, so ε_geo 0.003 costs 0.34–0.38 of a 0.38 slack and the 900 s stage B lands on τ = 6.000000 exactly. The ~40 CPU-h A61 lost to the A124 LP hang here was spent on a route that could not have converted | done |
 | k5_02, k5_03, k5_12 | **FULL** (A114 `ee0c18d5`: slab sweeps sized by the slab-width law with the ORIGINAL s0 certificates, 12.5 CPU-h; every earlier bulk FAIL was an over-width slab, never node hardness; k5_12's dead LP route was never needed) | | done |
 
 **k6 and up: nothing open.** Method lessons banked (A114 notes L1–L5): grid a band rather than bisect from the top

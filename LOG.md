@@ -6033,3 +6033,63 @@ cores and the extremal-tilt schematics).
   table145}.py, results/{impossible_weight,resolves145,resolves145_rank,resolves145_ctrl}.jsonl,
   results/{jobs145_rank,jobs145_ctrl,check145}.json, certs/ (49 files), notes/{measurement,resolves}.md,
   logs/}`; one appended paragraph in `attempts/A57-shadow-trees/PAUSED.md`'s resume block; REGISTRY row.
+
+## 2026-09-07 — A146: k5_13 closed. **The A56 window scoreboard is 52/52 full-window — the window layer is done.**
+
+- **HEADLINE.** `k5_13`, the last OPEN row and the node A61's campaign lost ~40 CPU-h to inside a wedged
+  HiGHS `h.run()`, is now a **FULL-window kill on the ORIGINAL A56 parametric certificate** — no new LP, no
+  new certificate. 58 slabs of 10⁻³ over [191/50, 969271/250000], **58/58 PASS, zero bisections, zero holes,
+  5,491 verifier-seconds**, exact tile of the window, C2 canary PASS under the unmodified A53
+  `verify_case.py` at s_lo / mid / s0 (3.6 / 4.6 / 85.0 s). Scoreboard: **52/52 full_window_rows**
+  (4 M1 + 28 TRANSFERRED + 20 TRANSFERRED-resolved), no OPEN and no partial row.
+- **THE ROW WAS NEVER HARD — IT WAS AN OVER-WIDTH SLAB (A114's law, third and cleanest confirmation).**
+  `resolve61.py` verifies the whole window as ONE slab (width 0.057084). One probe slab of 10⁻³ PASSed in
+  **74 s** and priced the class: w_min = 1.56·10⁻⁵, d_pose = 41, **width_max = 0.002** — the failing slab was
+  **28× over the law**. A56's FAIL had max_depth 48, max_s_depth 10, worst witness `undecided`, **0 holes**:
+  the exact signature. No certificate could have rescued it (a fatter measure raises w_min, not by 28×).
+  **Rule banked: when a parametric run FAILs with 0 holes and a depth-limited worst witness, price the slab —
+  one 75 s probe — before you price the certificate.**
+- **THE A61 RE-SOLVE ROUTE IS DEAD FOR k5_13, AND FOR A MEASURED REASON, NOT A RESOURCE ONE.** The restart was
+  run twice through the wrapper, at both stages of the PI's two-stage protocol. 240 s: τ₀ = 5.619048
+  (slack 0.3810 > gate 0.30), τ(ε_geo 0.003) = 5.963641 (slack 0.0364 > gate_b 0.03), certify round 0 gave
+  total 5.99354 at 149 atoms, witness feedback drove round 1 to τ = 6.00000 → *cannot certify*. Knife-edge
+  escalation to 900 s (stage-B slack 0.0364 vs the 0.03 gate is exactly the knife edge the protocol names):
+  τ₀ = 5.617045, and **τ(ε_geo 0.003) = 6.000000 exactly** → post-shrink GATE-FAIL, no certify round burnt.
+  **dτ/dε = 118.8 and 132.1 against 57–90 on every row A61 converted** (k5_17 57.5, k5_10 62.7, k6_20 65.3,
+  k6_21 65.6, k6_29 89.8): the 0.003 shrink costs k5_13 0.34–0.38 of a 0.38 slack. A61's L5 says a rich
+  column pool flattens the shrink curve by supplying alternative atoms for the shrunk square; k5_13 is the row
+  where it does not. **More LP time made it strictly worse** (a better-solved LP generates more demand rows).
+  So the 40 CPU-h the campaign lost here was spent on a route that could not have converted.
+- **THE HANG WALL WORKED BY NOT FIRING, AND THE PROTOCOL IS WHY.** `code/supervise146.py` runs A61's
+  **unmodified** driver as a child and kills the tree when it has emitted no stdout for 1,500 s **and** has no
+  live descendant process — silence *with* a descendant is a certifier or verifier and must not be disturbed,
+  silence *without* one is the driver inside a single `h.run()` (A124's mode: no `time_limit` on the Highs
+  object, `solve_node`'s limit checked only between iterations). `lpbox.py`/`resolve61.py`/`campaign61.py`
+  were never edited and never copied-with-edits; a CAP is recorded as a resource event, never a verdict. The
+  wall **never tripped**: the 240 s cap stops stage A at 3,500 orbits × 15,555 rows and the 900 s cap at
+  4,341 × 17,468, one iteration short of the wedged 4,332 × 18,326 geometry. **The two-stage protocol is
+  itself the hang mitigation; the wall is the cheap backstop.**
+- **The driver's resume is its column pool, and it is monotone.** `resolve61.py` has no stage resume:
+  `enriched_warm()` globs `attempts/{A56,A61}/results/nodes/<name>*.json` and folds every checkpoint the lab
+  ever wrote, so the killed run's own `k5_13_A_state.json` (1.4 MB, iteration 6) *was* the resume — the pool
+  went 3,996 → 4,332 → 4,341 orbits across the three launches. That is why killing a wedged A61 LP is safe,
+  and why a CAP must never be written as a verdict.
+- **Cost profile along the side (confirms A114 L7 and locates its cause).** 74 s per 10⁻³ at the bottom, flat
+  to ~80 s through the bulk, then 99 → 108 → 115 → 126 → 182 → **507 s** over the last five slabs, with
+  **d_pose stepping 41 → 42 and width_max halving to 0.001 in the slab ending at 3.877**. The top-of-window
+  blow-up is a step in d_pose, not a smooth drift — the S02 shadow arriving in the arithmetic exactly where
+  A114 measured it for k5_12. The final 8.4·10⁻⁵ sliver ending at s0 passed.
+- **Discipline.** ~2.8 CPU-h against the 6 CPU-h cap (track 1 the two supervised A61 runs 3,492 s; track 2
+  probe + 58 slabs + C2 5,659 s); ≤ 2 BLAS-pinned BelowNormal processes; ≤ 16 python processes on the box
+  with A136/A141/A144/A145 running and untouched; read-only on every other campaign; A61's state written only
+  by A61's own driver; frozen verifiers byte-identical; nothing deleted, no pidfile touched;
+  `PYTHONDONTWRITEBYTECODE=1`; scoreboard written in ONE atomic tmp+`os.replace` by A146's own copy of A114's
+  fold (backup `scoreboard.json.bak_pre_a146`), leaving A114's `a114` provenance block exactly as A114 wrote
+  it; git fetch + plain merge + push of own paths with explicit pathspecs.
+- **Files.** `attempts/A146-k5_13-restart/{BRIEF.md, code/{supervise146,slab146,update_scoreboard146}.py,
+  results/{slab146.json, supervisor_k5_13_p1.json, supervisor_k5_13_p2knife.json,
+  resolve61_k5_13.lp240.json, resolve61_k5_13.lp900.json}, certs/ (58 slab reports + 3 C2), notes/lemmas.md,
+  logs/}`; `attempts/A56-sparametric/results/scoreboard.json` (k5_13 row + summary);
+  `attempts/A61-window-stragglers/{results/resolve61_k5_13.json, results/nodes/k5_13*.json, logs/}` (written
+  by A61's driver); `docs/budget.md` (stragglers row + § E), `docs/residue_ledger.md` (§ 2 + the family
+  table), REGISTRY row.
