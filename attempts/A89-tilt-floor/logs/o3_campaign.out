@@ -1,0 +1,51 @@
+=== O3 campaign start, wall budget 185 min, 13 runs planned
+=== R4_1shallow_BL_d0.3  (185 min left)
+  fams: a=0.689694 (window) n_BL=108 all-sound=True min-margin=2.050e-04
+[RUN] R4_1shallow_BL_d0.3 pattern=BL delta=0.3 a=0.689694 boxes=108 sym=C1 canary=['g2', 'g6']
+  REFUSED (CANARY: realised by g2,g6)
+=== R1_4shallow_d0.3  (185 min left)
+[RUN] R1_4shallow_d0.3 pattern=BL+BR+TL+TR delta=0.3 a=0.689694 boxes=432 sym=D4 canary=none
+  commit dip 4904 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+  commit dip 4888 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+  commit dip 4906 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+  commit dip 4790 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+  commit dip 4772 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+  commit dip 4828 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+  commit OK 15445 MB after 6 x 60 s wait (R1_4shallow_d0.3)
+  [LP] sym=D4 tl=900s
+  warm pool: 1600 columns (A38 root_s0 + A07 3.82/3.83, rescaled)
+  tau=9.554681 eta=-1.445319 conv=False rows=5810 lp_s=1042
+    [round 0] tau=9.55468 conv=False scale=1.1487 cert total=10.97638 budget=11 atoms=848
+    FAIL: 32 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 32 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=9.62570 conv=False scale=1.1403 cert total=10.97606 budget=11 atoms=612
+    FAIL: 32 witness boxes at depth 56: 4 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 28 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=9.65780 conv=False scale=1.1365 cert total=10.97602 budget=11 atoms=732
+    PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1372003/125000 < budget 11  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+    CERTIFIED: C:\Users\esumm\code\packing\attempts\A89-tilt-floor\certs\k0_00\R1_4shallow_d0.3.json
+  verdict=PASS cert_s=1008
+=== R2_3shallow_d0.3  (145 min left)
+[RUN] R2_3shallow_d0.3 pattern=BL+BR+TR delta=0.3 a=0.689694 boxes=324 sym=C1 canary=none
+  [LP] sym=C1 tl=900s
+  tau=10.046056 eta=-0.953944 conv=False rows=7922 lp_s=994
+    [round 0] tau=10.04606 conv=False scale=1.0925 cert total=10.97501 budget=11 atoms=216
+    FAIL: 32 witness boxes at depth 56: 7 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 25 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=10.11066 conv=False scale=1.0855 cert total=10.97486 budget=11 atoms=180
+    FAIL: 32 witness boxes at depth 56: 16 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 16 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=10.20896 conv=False scale=1.0750 cert total=10.97466 budget=11 atoms=157
+    FAIL: 32 witness boxes at depth 56: 12 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 20 undecided at this depth  [stopped at --max-witnesses]
+    [round 0] tau=10.16651 conv=False scale=1.0795 cert total=10.97475 budget=11 atoms=170
+    FAIL: 32 witness boxes at depth 56: 12 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 20 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=10.27163 conv=False scale=1.0684 cert total=10.97454 budget=11 atoms=161
+    FAIL: 32 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 27 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=10.30080 conv=False scale=1.0654 cert total=10.97448 budget=11 atoms=152
+    FAIL: 32 witness boxes at depth 56: 19 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 13 undecided at this depth  [stopped at --max-witnesses]
+    [round 0] tau=10.35516 conv=False scale=1.0598 cert total=10.97440 budget=11 atoms=195
+    FAIL: 32 witness boxes at depth 56: 18 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 14 undecided at this depth  [stopped at --max-witnesses]
+    [round 1] tau=10.43554 conv=False scale=1.0516 cert total=10.97421 budget=11 atoms=186
+    FAIL: 32 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 27 undecided at this depth  [stopped at --max-witnesses]
+    [round 2] tau=10.43646 conv=False scale=1.0515 cert total=10.97421 budget=11 atoms=176
+    FAIL: 32 witness boxes at depth 56: 24 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth  [stopped at --max-witnesses]
+  verdict=FAIL(eps_geo 0.004 rc=1) cert_s=2566
+=== R3adj_2shallow_d0.3  (85 min left)
+[RUN] R3adj_2shallow_d0.3 pattern=BL+BR delta=0.3 a=0.689694 boxes=216 sym=C1 canary=none
+  [LP] sym=C1 tl=900s

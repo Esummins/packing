@@ -1,0 +1,594 @@
+{
+ "attempt": "A89 / T2 addendum add-on: intrusion depth",
+ "definition": "depth(Q) = 1 - inf{max(p_x,p_y) : p in int(Q) cap (0,1)^2} = 1 - f_min_max(Q) in the corner frame; DEPTH(corner) = max over its blockers",
+ "depth_bins": [
+  "<0 (box cannot reach the slot)",
+  "[0,0.05)",
+  "[0.05,0.1)",
+  "[0.1,0.2)",
+  "[0.2,0.3)",
+  "[0.3,0.5)",
+  "[0.5,1)",
+  ">=1 (slot square attainable)"
+ ],
+ "part1_BL_cover_boxes": {
+  "n_sound_boxes": 644,
+  "n_pairs": 33656,
+  "theta_scan_points": 2001,
+  "lipschitz_slack_deg_equiv": 2.198306497960956e-05,
+  "method": "depth_ub(box) = 1 - min_theta f_min_max(x0, y0, theta) + Lipschitz slack; exact in (c_x, c_y) by monotonicity",
+  "depth_ub": {
+   "max": 1.0000219830649797,
+   "min": -0.2567181880624805,
+   "mean": 0.28816322641062597
+  },
+  "depth_ub_hist": {
+   "<0 (box cannot reach the slot)": 84,
+   "[0,0.05)": 37,
+   "[0.05,0.1)": 74,
+   "[0.1,0.2)": 71,
+   "[0.2,0.3)": 89,
+   "[0.3,0.5)": 143,
+   "[0.5,1)": 144,
+   ">=1 (slot square attainable)": 2
+  },
+  "per_delta": {
+   "0.05": {
+    "n_deep_capable_boxes": 523,
+    "frac_deep_capable_boxes": 0.812111801242236,
+    "n_pairs_with_a_deep_capable_member": 33132,
+    "frac_pairs_with_a_deep_capable_member": 0.9844307107202281,
+    "n_pairs_with_both_deep_capable": 14847,
+    "frac_pairs_with_both_deep_capable": 0.4411397670549085
+   },
+   "0.1": {
+    "n_deep_capable_boxes": 449,
+    "frac_deep_capable_boxes": 0.6972049689440993,
+    "n_pairs_with_a_deep_capable_member": 30778,
+    "frac_pairs_with_a_deep_capable_member": 0.9144877584977419,
+    "n_pairs_with_both_deep_capable": 6081,
+    "frac_pairs_with_both_deep_capable": 0.1806810078440694
+   },
+   "0.2": {
+    "n_deep_capable_boxes": 378,
+    "frac_deep_capable_boxes": 0.5869565217391305,
+    "n_pairs_with_a_deep_capable_member": 28930,
+    "frac_pairs_with_a_deep_capable_member": 0.8595792726408367,
+    "n_pairs_with_both_deep_capable": 2961,
+    "frac_pairs_with_both_deep_capable": 0.0879783693843594
+   },
+   "0.3": {
+    "n_deep_capable_boxes": 289,
+    "frac_deep_capable_boxes": 0.44875776397515527,
+    "n_pairs_with_a_deep_capable_member": 24662,
+    "frac_pairs_with_a_deep_capable_member": 0.7327668172094128,
+    "n_pairs_with_both_deep_capable": 405,
+    "frac_pairs_with_both_deep_capable": 0.01203351556928928
+   },
+   "0.5": {
+    "n_deep_capable_boxes": 146,
+    "frac_deep_capable_boxes": 0.2267080745341615,
+    "n_pairs_with_a_deep_capable_member": 17228,
+    "frac_pairs_with_a_deep_capable_member": 0.5118849536486808,
+    "n_pairs_with_both_deep_capable": 0,
+    "frac_pairs_with_both_deep_capable": 0.0
+   }
+  },
+  "deepest_boxes": [
+   {
+    "k": 500,
+    "depth_ub": 1.0000219830649797,
+    "box": {
+     "x0": 0.5,
+     "x1": 0.6388888888888888,
+     "y0": 0.5,
+     "y1": 0.6388888888888888,
+     "th0": 82.8749836510982,
+     "th1": 90.0
+    }
+   },
+   {
+    "k": 354,
+    "depth_ub": 1.0000219830649797,
+    "box": {
+     "x0": 0.5,
+     "x1": 0.6388888888888888,
+     "y0": 0.5,
+     "y1": 0.6388888888888888,
+     "th0": 0.0,
+     "th1": 7.125016348901798
+    }
+   },
+   {
+    "k": 355,
+    "depth_ub": 0.9479251913037879,
+    "box": {
+     "x0": 0.5,
+     "x1": 0.6388888888888888,
+     "y0": 0.5,
+     "y1": 0.6388888888888888,
+     "th0": 75.7499673021964,
+     "th1": 82.8749836510982
+    }
+   },
+   {
+    "k": 499,
+    "depth_ub": 0.9479251913037879,
+    "box": {
+     "x0": 0.5,
+     "x1": 0.6388888888888888,
+     "y0": 0.5,
+     "y1": 0.6388888888888888,
+     "th0": 7.125016348901798,
+     "th1": 14.250032697803595
+    }
+   },
+   {
+    "k": 372,
+    "depth_ub": 0.9257313332171428,
+    "box": {
+     "x0": 0.6388888888888888,
+     "x1": 0.7777777777777778,
+     "y0": 0.5,
+     "y1": 0.6388888888888888,
+     "th0": 75.7499673021964,
+     "th1": 82.8749836510982
+    }
+   },
+   {
+    "k": 501,
+    "depth_ub": 0.9257313332171428,
+    "box": {
+     "x0": 0.5,
+     "x1": 0.6388888888888888,
+     "y0": 0.6388888888888888,
+     "y1": 0.7777777777777778,
+     "th0": 7.125016348901798,
+     "th1": 14.250032697803595
+    }
+   },
+   {
+    "k": 356,
+    "depth_ub": 0.9192893998275289,
+    "box": {
+     "x0": 0.5,
+     "x1": 0.6388888888888888,
+     "y0": 0.6388888888888888,
+     "y1": 0.7777777777777778,
+     "th0": 0.0,
+     "th1": 7.125016348901798
+    }
+   },
+   {
+    "k": 517,
+    "depth_ub": 0.9192893998275288,
+    "box": {
+     "x0": 0.6388888888888888,
+     "x1": 0.7777777777777778,
+     "y0": 0.5,
+     "y1": 0.6388888888888888,
+     "th0": 82.8749836510982,
+     "th1": 90.0
+    }
+   },
+   {
+    "k": 1,
+    "depth_ub": 0.9114350519703034,
+    "box": {
+     "x0": 0.5,
+     "x1": 0.6388888888888888,
+     "y0": 0.5,
+     "y1": 0.6388888888888888,
+     "th0": 61.92751306414704,
+     "th1": 75.7499673021964
+    }
+   },
+   {
+    "k": 0,
+    "depth_ub": 0.9114350519703034,
+    "box": {
+     "x0": 0.5,
+     "x1": 0.6388888888888888,
+     "y0": 0.5,
+     "y1": 0.6388888888888888,
+     "th0": 14.250032697803595,
+     "th1": 28.072486935852957
+    }
+   }
+  ]
+ },
+ "part2_A87_167": {
+  "source": "A87 167 certified k0 FJ points",
+  "n_blockers": 665,
+  "n_corners_with_a_blocker": 644,
+  "blocker_depth": {
+   "max": 0.9998283752733854,
+   "min": 0.0006289345252161738,
+   "mean": 0.605779390019566
+  },
+  "blocker_depth_hist": {
+   "<0 (box cannot reach the slot)": 0,
+   "[0,0.05)": 32,
+   "[0.05,0.1)": 25,
+   "[0.1,0.2)": 50,
+   "[0.2,0.3)": 29,
+   "[0.3,0.5)": 91,
+   "[0.5,1)": 438,
+   ">=1 (slot square attainable)": 0
+  },
+  "corner_DEPTH_hist": {
+   "<0 (box cannot reach the slot)": 0,
+   "[0,0.05)": 19,
+   "[0.05,0.1)": 21,
+   "[0.1,0.2)": 47,
+   "[0.2,0.3)": 28,
+   "[0.3,0.5)": 91,
+   "[0.5,1)": 438,
+   ">=1 (slot square attainable)": 0
+  },
+  "corner_DEPTH_by_corner": {
+   "BL": {
+    "n_corners": 165,
+    "max": 0.9998283752733854,
+    "min": 0.033549626786882225,
+    "mean": 0.6872189787553156,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 1,
+     "[0.05,0.1)": 3,
+     "[0.1,0.2)": 11,
+     "[0.2,0.3)": 8,
+     "[0.3,0.5)": 31,
+     "[0.5,1)": 111,
+     ">=1 (slot square attainable)": 0
+    }
+   },
+   "BR": {
+    "n_corners": 161,
+    "max": 0.9996860977349061,
+    "min": 0.0020158565204080325,
+    "mean": 0.6302893676190345,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 9,
+     "[0.05,0.1)": 4,
+     "[0.1,0.2)": 12,
+     "[0.2,0.3)": 3,
+     "[0.3,0.5)": 19,
+     "[0.5,1)": 114,
+     ">=1 (slot square attainable)": 0
+    }
+   },
+   "TL": {
+    "n_corners": 160,
+    "max": 0.9991610452974693,
+    "min": 0.004845738422851631,
+    "mean": 0.6503563958770149,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 3,
+     "[0.05,0.1)": 5,
+     "[0.1,0.2)": 8,
+     "[0.2,0.3)": 7,
+     "[0.3,0.5)": 16,
+     "[0.5,1)": 121,
+     ">=1 (slot square attainable)": 0
+    }
+   },
+   "TR": {
+    "n_corners": 158,
+    "max": 0.955037762561163,
+    "min": 0.0030794317203279853,
+    "mean": 0.5248947992921662,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 6,
+     "[0.05,0.1)": 9,
+     "[0.1,0.2)": 16,
+     "[0.2,0.3)": 10,
+     "[0.3,0.5)": 25,
+     "[0.5,1)": 92,
+     ">=1 (slot square attainable)": 0
+    }
+   }
+  },
+  "n_negative_depth_rows": 0
+ },
+ "part2_atlas_12": {
+  "source": "A46 12 atlas families",
+  "n_blockers": 51,
+  "n_corners_with_a_blocker": 48,
+  "blocker_depth": {
+   "max": 1.0,
+   "min": 0.11438191683587284,
+   "mean": 0.8320847190753583
+  },
+  "blocker_depth_hist": {
+   "<0 (box cannot reach the slot)": 0,
+   "[0,0.05)": 0,
+   "[0.05,0.1)": 0,
+   "[0.1,0.2)": 6,
+   "[0.2,0.3)": 0,
+   "[0.3,0.5)": 0,
+   "[0.5,1)": 22,
+   ">=1 (slot square attainable)": 23
+  },
+  "corner_DEPTH_hist": {
+   "<0 (box cannot reach the slot)": 0,
+   "[0,0.05)": 0,
+   "[0.05,0.1)": 0,
+   "[0.1,0.2)": 3,
+   "[0.2,0.3)": 0,
+   "[0.3,0.5)": 0,
+   "[0.5,1)": 22,
+   ">=1 (slot square attainable)": 23
+  },
+  "corner_DEPTH_by_corner": {
+   "BL": {
+    "n_corners": 12,
+    "max": 1.0,
+    "min": 0.6534042416900774,
+    "mean": 0.9252760009186723,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 0,
+     "[0.05,0.1)": 0,
+     "[0.1,0.2)": 0,
+     "[0.2,0.3)": 0,
+     "[0.3,0.5)": 0,
+     "[0.5,1)": 4,
+     ">=1 (slot square attainable)": 8
+    }
+   },
+   "BR": {
+    "n_corners": 12,
+    "max": 0.9999999999999996,
+    "min": 0.16832098954974417,
+    "mean": 0.8365409608776866,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 0,
+     "[0.05,0.1)": 0,
+     "[0.1,0.2)": 1,
+     "[0.2,0.3)": 0,
+     "[0.3,0.5)": 0,
+     "[0.5,1)": 9,
+     ">=1 (slot square attainable)": 2
+    }
+   },
+   "TL": {
+    "n_corners": 12,
+    "max": 1.0,
+    "min": 0.7548021372879815,
+    "mean": 0.9350333085326681,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 0,
+     "[0.05,0.1)": 0,
+     "[0.1,0.2)": 0,
+     "[0.2,0.3)": 0,
+     "[0.3,0.5)": 0,
+     "[0.5,1)": 7,
+     ">=1 (slot square attainable)": 5
+    }
+   },
+   "TR": {
+    "n_corners": 12,
+    "max": 1.0,
+    "min": 0.17851130197757925,
+    "mean": 0.8074899059080337,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 0,
+     "[0.05,0.1)": 0,
+     "[0.1,0.2)": 2,
+     "[0.2,0.3)": 0,
+     "[0.3,0.5)": 0,
+     "[0.5,1)": 2,
+     ">=1 (slot square attainable)": 8
+    }
+   }
+  },
+  "n_negative_depth_rows": 0
+ },
+ "part2_trump": {
+  "source": "Trump exact certificate",
+  "n_blockers": 5,
+  "n_corners_with_a_blocker": 4,
+  "blocker_depth": {
+   "max": 1.0,
+   "min": 0.1554747243268002,
+   "mean": 0.6647591427753088
+  },
+  "blocker_depth_hist": {
+   "<0 (box cannot reach the slot)": 0,
+   "[0,0.05)": 0,
+   "[0.05,0.1)": 0,
+   "[0.1,0.2)": 2,
+   "[0.2,0.3)": 0,
+   "[0.3,0.5)": 0,
+   "[0.5,1)": 0,
+   ">=1 (slot square attainable)": 3
+  },
+  "corner_DEPTH_hist": {
+   "<0 (box cannot reach the slot)": 0,
+   "[0,0.05)": 0,
+   "[0.05,0.1)": 0,
+   "[0.1,0.2)": 1,
+   "[0.2,0.3)": 0,
+   "[0.3,0.5)": 0,
+   "[0.5,1)": 0,
+   ">=1 (slot square attainable)": 3
+  },
+  "corner_DEPTH_by_corner": {
+   "BL": {
+    "n_corners": 1,
+    "max": 1.0,
+    "min": 1.0,
+    "mean": 1.0,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 0,
+     "[0.05,0.1)": 0,
+     "[0.1,0.2)": 0,
+     "[0.2,0.3)": 0,
+     "[0.3,0.5)": 0,
+     "[0.5,1)": 0,
+     ">=1 (slot square attainable)": 1
+    }
+   },
+   "BR": {
+    "n_corners": 1,
+    "max": 0.9999999999999996,
+    "min": 0.9999999999999996,
+    "mean": 0.9999999999999996,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 0,
+     "[0.05,0.1)": 0,
+     "[0.1,0.2)": 0,
+     "[0.2,0.3)": 0,
+     "[0.3,0.5)": 0,
+     "[0.5,1)": 0,
+     ">=1 (slot square attainable)": 1
+    }
+   },
+   "TL": {
+    "n_corners": 1,
+    "max": 0.16832098954974428,
+    "min": 0.16832098954974428,
+    "mean": 0.16832098954974428,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 0,
+     "[0.05,0.1)": 0,
+     "[0.1,0.2)": 1,
+     "[0.2,0.3)": 0,
+     "[0.3,0.5)": 0,
+     "[0.5,1)": 0,
+     ">=1 (slot square attainable)": 0
+    }
+   },
+   "TR": {
+    "n_corners": 1,
+    "max": 0.9999999999999996,
+    "min": 0.9999999999999996,
+    "mean": 0.9999999999999996,
+    "hist": {
+     "<0 (box cannot reach the slot)": 0,
+     "[0,0.05)": 0,
+     "[0.05,0.1)": 0,
+     "[0.1,0.2)": 0,
+     "[0.2,0.3)": 0,
+     "[0.3,0.5)": 0,
+     "[0.5,1)": 0,
+     ">=1 (slot square attainable)": 1
+    }
+   }
+  },
+  "n_negative_depth_rows": 0
+ },
+ "part2_trump_rows": [
+  {
+   "corner": "BL",
+   "square": 0,
+   "tilt_deg": 0.0,
+   "depth": 1.0,
+   "f_minmax": 0.0
+  },
+  {
+   "corner": "BR",
+   "square": 2,
+   "tilt_deg": 2.115946096193202e-70,
+   "depth": 0.9999999999999996,
+   "f_minmax": 4.440892098500626e-16
+  },
+  {
+   "corner": "TL",
+   "square": 4,
+   "tilt_deg": 1.1456698272889512e-107,
+   "depth": 0.1554747243268002,
+   "f_minmax": 0.8445252756731998
+  },
+  {
+   "corner": "TL",
+   "square": 6,
+   "tilt_deg": 40.181937290329714,
+   "depth": 0.16832098954974428,
+   "f_minmax": 0.8316790104502557
+  },
+  {
+   "corner": "TR",
+   "square": 5,
+   "tilt_deg": 1.8805598373768302e-69,
+   "depth": 0.9999999999999996,
+   "f_minmax": 4.440892098500626e-16
+  }
+ ],
+ "part2_trump_TL_exact": {
+  "corner": "TL",
+  "blockers": [
+   {
+    "square": 4,
+    "f_minmax_TL_frame": "0.8445252756731993902452807597862166028608246046465752150553",
+    "depth": "0.1554747243268006097547192402137833971391753953534247849446",
+    "depth_float": 0.15547472432680062
+   },
+   {
+    "square": 6,
+    "f_minmax_TL_frame": "0.8316790104502556967343579872589671667887481461276933773561",
+    "depth": "0.1683209895497443032656420127410328332112518538723066226438",
+    "depth_float": 0.1683209895497443
+   }
+  ],
+  "DEPTH_TL_exact": "0.1683209895497443032656420127410328332112518538723066226438",
+  "DEPTH_TL_float": 0.1683209895497443,
+  "note": "Decimal at 300 dps from the certificate; the upright sq4 uses cos = 1, sin = theta = O(1e-109) (exact to the certificate)."
+ },
+ "part3_A87_shallow_corners": {
+  "criterion": "corners (point, corner) whose DEPTH = max blocker depth is < 0.3",
+  "n_corners_total": 644,
+  "n_corners_shallow": 115,
+  "frac_corners_shallow": 0.17857142857142858,
+  "n_blockers_at_shallow_corners": 132,
+  "n_axis_aligned_tilt_lt_1e-7": 69,
+  "frac_axis_aligned": 0.5227272727272727,
+  "n_axis_aligned_theta_exactly_zero": 34,
+  "n_loaded_loadable_at_shallow_corners": 66,
+  "n_rattlers_at_shallow_corners": 33,
+  "DEPTH_hist_at_shallow_corners": {
+   "<0 (box cannot reach the slot)": 0,
+   "[0,0.05)": 19,
+   "[0.05,0.1)": 21,
+   "[0.1,0.2)": 47,
+   "[0.2,0.3)": 28,
+   "[0.3,0.5)": 0,
+   "[0.5,1)": 0,
+   ">=1 (slot square attainable)": 0
+  },
+  "blocker_depth_hist_at_shallow_corners": {
+   "<0 (box cannot reach the slot)": 0,
+   "[0,0.05)": 30,
+   "[0.05,0.1)": 23,
+   "[0.1,0.2)": 50,
+   "[0.2,0.3)": 29,
+   "[0.3,0.5)": 0,
+   "[0.5,1)": 0,
+   ">=1 (slot square attainable)": 0
+  },
+  "tilt_hist_of_blockers_at_shallow_corners": {
+   "0_exact_lt_1e-7": 69,
+   "(1e-7,0.5)": 16,
+   "[0.5,1)": 9,
+   "[1,1.7347)": 5,
+   "[1.7347,2)": 0,
+   "[2,5)": 7,
+   "[5,10)": 5,
+   "[10,20)": 8,
+   "[20,30)": 9,
+   "[30,40)": 3,
+   "[40,45]": 1
+  }
+ },
+ "secs": 0.5197789669036865
+}

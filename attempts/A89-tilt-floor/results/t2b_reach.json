@@ -1,0 +1,1115 @@
+{
+ "attempt": "A89-tilt-floor / T2 ADDENDUM: reach + self-jamming of BL 2-crowds",
+ "inputs": {
+  "pairs": "attempts/A85-k0-route/results/a85_pairs_BL.json (level 2)",
+  "boxes": "attempts/A85-k0-route/results/a85_reach_BL.json variant sigma_closed_7, 644 sound boxes",
+  "box_index_check_i_j_address_sound_list": true,
+  "n_pairs_in_file": 33656,
+  "n_pairs_processed": 33656,
+  "subsample": null
+ },
+ "definitions": {
+  "x_extent": "c_x + (|cos th| + |sin th|)/2 (= max x over the square)",
+  "REACH": "max(x-extent A, x-extent B, y-extent A, y-extent B)",
+  "X0": "max x-extent over the pair",
+  "Y0": "max y-extent over the pair",
+  "meets_slot": "f_min_max(Q) = min over Q of max(x,y) < 1 (corner85.meets_open_box with a = 1); EXACT for rational t",
+  "reach_ub": "box.x1 + h_max(box) per square, max over the pair; h_max = corner85.h_max_of (outward padded 1e-12)",
+  "witness": "rational grid pose strictly inside each box (5 x 5 centres x 7 t values), chosen to maximise the SAT gap among slot-meeting quadrant poses; re-verified exactly",
+  "self_jammed_H1": "no continuous motion of the pair (other nine squares absent) keeping X(t) <= X0 and Y(t) <= Y0 throughout and ending with the open slot met by at most one square",
+  "library": {
+   "tier1_translations": 8,
+   "tier2_simultaneous": 2,
+   "tier3_rotations": 20,
+   "tier4_compositions": 160,
+   "total_motions": 190,
+   "translation_range": 2.0,
+   "rotation_range_deg": 90.0,
+   "step_coarse": [
+    0.02,
+    0.5
+   ],
+   "step_fine": [
+    0.001,
+    0.05
+   ],
+   "soundness": "LIBRARY-JAMMED is an UPPER BOUND on the self-jammed set: the library is finite and the coarse scan can only miss an escape. Every coarse SUCCESS is re-verified at the fine step."
+  },
+  "H2": "tilt bins in {0} u [theta_0, 90-theta_0] u {90}; a box straddling the threshold counts as consistent (sound direction)",
+  "jam_types": {
+   "order": [
+    "near-slot",
+    "stacked-dipping-vertex",
+    "side-jam",
+    "floating",
+    "other"
+   ],
+   "tol_wall": 0.02,
+   "near-slot": "min over the two squares of d_slot(Q) < 0.05, where d_slot(Q) = max(|c_x - 0.5|, |c_y - 0.5|, tilt_deg / 90)",
+   "stacked-dipping-vertex": "there is a wall w in {x=0, y=0} and a labelling (Q1, Q2) with tilt(Q1) < 5 deg, dist(Q1, w) <= 0.02, Q2 beyond Q1 along w-normal (centre_normal(Q2) > centre_normal(Q1)), min_normal(Q2) <= max_normal(Q1) + 0.02, and min_tangential(Q2) < min_tangential(Q1) (a vertex of Q2 dips into the gap between Q1 and the OTHER wall)",
+   "side-jam": "both squares within 0.02 of the SAME wall w and |delta centre along w| > |delta centre across w|",
+   "floating": "some square touches no wall: min_x > 0.02 and min_y > 0.02",
+   "other": "none of the above",
+   "other_subtypes": {
+    "diamond-wedge": "both tilts in [35,45] deg, each square touches a wall (min(min_x, min_y) <= 0.02) and each reaches its cap (max(max_x, max_y) >= min(X0, Y0) - 0.02)",
+    "other-unclassified": "none of the above"
+   }
+  },
+  "theoretical_max_single_blocker_reach": 2.414213562373095
+ },
+ "H0_all_pairs": {
+  "reach_ub": {
+   "n": 33656,
+   "max": 2.4571067811875476,
+   "min": 1.8914896389857714,
+   "mean": 2.3434947076351813,
+   "hist": {
+    "[1,1.2)": 0,
+    "[1.2,1.4)": 0,
+    "[1.4,1.6)": 0,
+    "[1.6,1.8)": 0,
+    "[1.8,1.9)": 2,
+    "[1.9,2)": 20,
+    "[2,2.1)": 1091,
+    "[2.1,2.2)": 3731,
+    "[2.2,2.3)": 5284,
+    "[2.3,2.4)": 8954,
+    "[2.4,2.42)": 0,
+    "[2.42,3)": 14574
+   }
+  },
+  "X0_ub_max": 2.4571067811875476,
+  "Y0_ub_max": 2.4571067811875476,
+  "n_reach_ub_ge_2": 33634,
+  "n_reach_ub_ge_1_plus_sqrt2": 14574,
+  "n_witness_found": 7800,
+  "frac_witness_found": 0.23175659614927502,
+  "n_witness_kind_slot": 4365,
+  "n_witness_kind_widened": 3435,
+  "witness_rate_by_reach_ub_bin": {
+   "[1,1.2)": [
+    0,
+    0
+   ],
+   "[1.2,1.4)": [
+    0,
+    0
+   ],
+   "[1.4,1.6)": [
+    0,
+    0
+   ],
+   "[1.6,1.8)": [
+    0,
+    0
+   ],
+   "[1.8,1.9)": [
+    0,
+    2
+   ],
+   "[1.9,2)": [
+    0,
+    20
+   ],
+   "[2,2.1)": [
+    91,
+    1091
+   ],
+   "[2.1,2.2)": [
+    868,
+    3731
+   ],
+   "[2.2,2.3)": [
+    1632,
+    5284
+   ],
+   "[2.3,2.4)": [
+    1696,
+    8954
+   ],
+   "[2.4,2.42)": [
+    0,
+    0
+   ],
+   "[2.42,3)": [
+    3513,
+    14574
+   ]
+  },
+  "witness_rate_note": "a GRID LOWER BOUND on the realisable fraction: 5 x 5 centres x <= 8 t values per box, so a pair box with a thin 2-crowd sliver can be missed.  A85 reports 586 / 644 boxes individually witnessed against the WIDENED box (0, 1.026)^2, which is a weaker target than the slot and is not a pairwise statement.",
+  "n_witness_exact_verification_failed": 0,
+  "witness_reach": {
+   "n": 7800,
+   "max": 2.4223845591865474,
+   "min": 2.006944444,
+   "mean": 2.2666982271214913,
+   "hist": {
+    "[1,1.2)": 0,
+    "[1.2,1.4)": 0,
+    "[1.4,1.6)": 0,
+    "[1.6,1.8)": 0,
+    "[1.8,1.9)": 0,
+    "[1.9,2)": 0,
+    "[2,2.1)": 761,
+    "[2.1,2.2)": 726,
+    "[2.2,2.3)": 3013,
+    "[2.3,2.4)": 2705,
+    "[2.4,2.42)": 254,
+    "[2.42,3)": 341
+   }
+  },
+  "witness_X0_max": 2.4223845591865474,
+  "witness_Y0_max": 2.4223842371657183,
+  "n_witness_reach_ge_2": 7800,
+  "n_witness_X0_and_Y0_lt_2": 0
+ },
+ "H1_library_jamming": {
+  "n_with_witness": 7800,
+  "n_library_jammed": 151,
+  "n_library_unjammed": 7649,
+  "frac_library_jammed": 0.019358974358974358,
+  "frac_library_jammed_ci95": [
+   0.016301203260759567,
+   0.02241674545718915
+  ],
+  "max_reach_library_jammed": 2.386035008177613,
+  "max_X0_library_jammed": 2.386035008138863,
+  "max_Y0_library_jammed": 2.386035008177613,
+  "reach_distribution_library_jammed": {
+   "n": 151,
+   "max": 2.386035008177613,
+   "min": 2.1056086304012758,
+   "mean": 2.268506481990927,
+   "hist": {
+    "[1,1.2)": 0,
+    "[1.2,1.4)": 0,
+    "[1.4,1.6)": 0,
+    "[1.6,1.8)": 0,
+    "[1.8,1.9)": 0,
+    "[1.9,2)": 0,
+    "[2,2.1)": 0,
+    "[2.1,2.2)": 51,
+    "[2.2,2.3)": 2,
+    "[2.3,2.4)": 98,
+    "[2.4,2.42)": 0,
+    "[2.42,3)": 0
+   }
+  },
+  "reach_distribution_library_unjammed": {
+   "n": 7649,
+   "max": 2.4223845591865474,
+   "min": 2.006944444,
+   "mean": 2.2666625301041967,
+   "hist": {
+    "[1,1.2)": 0,
+    "[1.2,1.4)": 0,
+    "[1.4,1.6)": 0,
+    "[1.6,1.8)": 0,
+    "[1.8,1.9)": 0,
+    "[1.9,2)": 0,
+    "[2,2.1)": 761,
+    "[2.1,2.2)": 675,
+    "[2.2,2.3)": 3011,
+    "[2.3,2.4)": 2607,
+    "[2.4,2.42)": 254,
+    "[2.42,3)": 341
+   }
+  },
+  "jam_type_counts": {
+   "other": 47,
+   "floating": 88,
+   "stacked-dipping-vertex": 16
+  },
+  "other_subtype_counts": {
+   "other-unclassified": 16,
+   "diamond-wedge": 31
+  },
+  "unjamming_motion_counts": {
+   "T0x-": 3429,
+   "R0c-": 1020,
+   "R0c+": 739,
+   "T0x+": 565,
+   "R1c+": 405,
+   "T1y+": 351,
+   "R0v2-": 217,
+   "R1v1+": 185,
+   "R1c-": 174,
+   "T1x+": 78,
+   "T0x+>R03-": 51,
+   "R00->T0y+": 46,
+   "R1v2-": 34,
+   "T0y+": 34,
+   "T1y+>R12+": 32,
+   "R14->T1x+": 25,
+   "R10+>T1x+": 25,
+   "R01+>T0y+": 25,
+   "R0v2+": 24,
+   "R00+>T0y+": 22,
+   "R0v1+": 22,
+   "T0x->R00+": 17,
+   "R10->T1x+": 16,
+   "R00+>T0x+": 15,
+   "T0y->R00-": 13
+  },
+  "necessary_condition_X0_lt2_and_Y0_lt2": {
+   "n_jammed_with_both_lt_2": 0,
+   "n_jammed_with_an_axis_ge_2": 151,
+   "exceptions": [
+    {
+     "i": 11,
+     "j": 229,
+     "X0": 2.1056086304012758,
+     "Y0": 1.9667197414012756,
+     "reach": 2.1056086304012758,
+     "jam_type": "other"
+    },
+    {
+     "i": 11,
+     "j": 234,
+     "X0": 2.1056086304012758,
+     "Y0": 1.9667197414012756,
+     "reach": 2.1056086304012758,
+     "jam_type": "other"
+    },
+    {
+     "i": 12,
+     "j": 186,
+     "X0": 1.9684684683367422,
+     "Y0": 2.1073573573367423,
+     "reach": 2.1073573573367423,
+     "jam_type": "other"
+    },
+    {
+     "i": 12,
+     "j": 188,
+     "X0": 1.9684684683367422,
+     "Y0": 2.1073573573367423,
+     "reach": 2.1073573573367423,
+     "jam_type": "other"
+    },
+    {
+     "i": 12,
+     "j": 280,
+     "X0": 2.3165905629392007,
+     "Y0": 2.1073573573367423,
+     "reach": 2.3165905629392007,
+     "jam_type": "floating"
+    },
+    {
+     "i": 12,
+     "j": 439,
+     "X0": 1.833333333,
+     "Y0": 2.1073573573367423,
+     "reach": 2.1073573573367423,
+     "jam_type": "stacked-dipping-vertex"
+    },
+    {
+     "i": 12,
+     "j": 585,
+     "X0": 1.833333333,
+     "Y0": 2.1073573573367423,
+     "reach": 2.1073573573367423,
+     "jam_type": "stacked-dipping-vertex"
+    },
+    {
+     "i": 13,
+     "j": 233,
+     "X0": 2.1486928105380625,
+     "Y0": 2.1056086304012758,
+     "reach": 2.1486928105380625,
+     "jam_type": "floating"
+    },
+    {
+     "i": 36,
+     "j": 315,
+     "X0": 2.386035007886658,
+     "Y0": 1.899923895886658,
+     "reach": 2.386035007886658,
+     "jam_type": "other"
+    },
+    {
+     "i": 36,
+     "j": 316,
+     "X0": 2.386035008138863,
+     "Y0": 1.899923895886658,
+     "reach": 2.386035008138863,
+     "jam_type": "other"
+    },
+    {
+     "i": 37,
+     "j": 315,
+     "X0": 2.386035007886658,
+     "Y0": 1.899923896138863,
+     "reach": 2.386035007886658,
+     "jam_type": "other"
+    },
+    {
+     "i": 40,
+     "j": 272,
+     "X0": 2.278946162252023,
+     "Y0": 2.001168384252023,
+     "reach": 2.278946162252023,
+     "jam_type": "other"
+    },
+    {
+     "i": 41,
+     "j": 273,
+     "X0": 2.316590562886658,
+     "Y0": 2.038812784886658,
+     "reach": 2.316590562886658,
+     "jam_type": "other"
+    },
+    {
+     "i": 41,
+     "j": 274,
+     "X0": 2.316590563138863,
+     "Y0": 2.038812784886658,
+     "reach": 2.316590563138863,
+     "jam_type": "other"
+    },
+    {
+     "i": 41,
+     "j": 275,
+     "X0": 2.3165905629392007,
+     "Y0": 2.038812784886658,
+     "reach": 2.3165905629392007,
+     "jam_type": "other"
+    },
+    {
+     "i": 41,
+     "j": 278,
+     "X0": 2.316590562886658,
+     "Y0": 2.038812784886658,
+     "reach": 2.316590562886658,
+     "jam_type": "floating"
+    },
+    {
+     "i": 41,
+     "j": 279,
+     "X0": 2.316590563138863,
+     "Y0": 2.038812784886658,
+     "reach": 2.316590563138863,
+     "jam_type": "floating"
+    },
+    {
+     "i": 41,
+     "j": 314,
+     "X0": 2.313668384252023,
+     "Y0": 2.023733333,
+     "reach": 2.313668384252023,
+     "jam_type": "other"
+    },
+    {
+     "i": 42,
+     "j": 273,
+     "X0": 2.316590562886658,
+     "Y0": 2.038812785138863,
+     "reach": 2.316590562886658,
+     "jam_type": "other"
+    },
+    {
+     "i": 42,
+     "j": 274,
+     "X0": 2.316590563177613,
+     "Y0": 2.038812785177613,
+     "reach": 2.316590563177613,
+     "jam_type": "other"
+    },
+    {
+     "i": 42,
+     "j": 275,
+     "X0": 2.3165905629392007,
+     "Y0": 2.038812785177613,
+     "reach": 2.3165905629392007,
+     "jam_type": "other"
+    },
+    {
+     "i": 42,
+     "j": 278,
+     "X0": 2.316590562886658,
+     "Y0": 2.038812785138863,
+     "reach": 2.316590562886658,
+     "jam_type": "floating"
+    },
+    {
+     "i": 42,
+     "j": 279,
+     "X0": 2.316590563177613,
+     "Y0": 2.038812785177613,
+     "reach": 2.316590563177613,
+     "jam_type": "floating"
+    },
+    {
+     "i": 42,
+     "j": 280,
+     "X0": 2.3165905629392007,
+     "Y0": 2.038812785177613,
+     "reach": 2.3165905629392007,
+     "jam_type": "floating"
+    },
+    {
+     "i": 43,
+     "j": 273,
+     "X0": 2.316590562886658,
+     "Y0": 2.038812784939201,
+     "reach": 2.316590562886658,
+     "jam_type": "other"
+    },
+    {
+     "i": 43,
+     "j": 274,
+     "X0": 2.316590563177613,
+     "Y0": 2.038812784939201,
+     "reach": 2.316590563177613,
+     "jam_type": "other"
+    },
+    {
+     "i": 43,
+     "j": 279,
+     "X0": 2.316590563177613,
+     "Y0": 2.038812784939201,
+     "reach": 2.316590563177613,
+     "jam_type": "floating"
+    },
+    {
+     "i": 44,
+     "j": 229,
+     "X0": 2.1056086304012758,
+     "Y0": 1.9667197414012756,
+     "reach": 2.1056086304012758,
+     "jam_type": "other"
+    },
+    {
+     "i": 44,
+     "j": 234,
+     "X0": 2.1056086304012758,
+     "Y0": 1.9667197414012756,
+     "reach": 2.1056086304012758,
+     "jam_type": "other"
+    },
+    {
+     "i": 45,
+     "j": 186,
+     "X0": 1.9684684683367422,
+     "Y0": 2.1073573573367423,
+     "reach": 2.1073573573367423,
+     "jam_type": "other"
+    },
+    {
+     "i": 45,
+     "j": 188,
+     "X0": 1.9684684683367422,
+     "Y0": 2.1073573573367423,
+     "reach": 2.1073573573367423,
+     "jam_type": "other"
+    },
+    {
+     "i": 45,
+     "j": 231,
+     "X0": 2.1486928106228373,
+     "Y0": 2.1486928098477507,
+     "reach": 2.1486928106228373,
+     "jam_type": "floating"
+    },
+    {
+     "i": 45,
+     "j": 275,
+     "X0": 2.3165905629392007,
+     "Y0": 2.140057273252023,
+     "reach": 2.3165905629392007,
+     "jam_type": "other"
+    },
+    {
+     "i": 45,
+     "j": 280,
+     "X0": 2.3165905629392007,
+     "Y0": 2.140057273252023,
+     "reach": 2.3165905629392007,
+     "jam_type": "floating"
+    },
+    {
+     "i": 45,
+     "j": 439,
+     "X0": 1.833333333,
+     "Y0": 2.1073573573367423,
+     "reach": 2.1073573573367423,
+     "jam_type": "stacked-dipping-vertex"
+    },
+    {
+     "i": 45,
+     "j": 585,
+     "X0": 1.833333333,
+     "Y0": 2.1073573573367423,
+     "reach": 2.1073573573367423,
+     "jam_type": "stacked-dipping-vertex"
+    },
+    {
+     "i": 46,
+     "j": 228,
+     "X0": 2.1073573573367423,
+     "Y0": 2.1486928106228373,
+     "reach": 2.1486928106228373,
+     "jam_type": "floating"
+    },
+    {
+     "i": 46,
+     "j": 231,
+     "X0": 2.177701673886658,
+     "Y0": 2.177701673886658,
+     "reach": 2.177701673886658,
+     "jam_type": "other"
+    },
+    {
+     "i": 46,
+     "j": 232,
+     "X0": 2.177701674138863,
+     "Y0": 2.177701673886658,
+     "reach": 2.177701674138863,
+     "jam_type": "other"
+    },
+    {
+     "i": 46,
+     "j": 233,
+     "X0": 2.1777016739392008,
+     "Y0": 2.177701673886658,
+     "reach": 2.1777016739392008,
+     "jam_type": "other"
+    },
+    {
+     "i": 46,
+     "j": 236,
+     "X0": 2.177701673886658,
+     "Y0": 2.177701673886658,
+     "reach": 2.177701673886658,
+     "jam_type": "floating"
+    },
+    {
+     "i": 46,
+     "j": 237,
+     "X0": 2.177701674138863,
+     "Y0": 2.177701673886658,
+     "reach": 2.177701674138863,
+     "jam_type": "floating"
+    },
+    {
+     "i": 47,
+     "j": 231,
+     "X0": 2.177701673886658,
+     "Y0": 2.177701674138863,
+     "reach": 2.177701674138863,
+     "jam_type": "other"
+    },
+    {
+     "i": 47,
+     "j": 232,
+     "X0": 2.1793290031865475,
+     "Y0": 2.1793290031865475,
+     "reach": 2.1793290031865475,
+     "jam_type": "other"
+    },
+    {
+     "i": 47,
+     "j": 233,
+     "X0": 2.1777016739392008,
+     "Y0": 2.177701674177613,
+     "reach": 2.177701674177613,
+     "jam_type": "other"
+    },
+    {
+     "i": 47,
+     "j": 236,
+     "X0": 2.177701673886658,
+     "Y0": 2.177701674138863,
+     "reach": 2.177701674138863,
+     "jam_type": "floating"
+    },
+    {
+     "i": 47,
+     "j": 237,
+     "X0": 2.178588394041044,
+     "Y0": 2.178588394041044,
+     "reach": 2.178588394041044,
+     "jam_type": "floating"
+    },
+    {
+     "i": 47,
+     "j": 238,
+     "X0": 2.1777016739392008,
+     "Y0": 2.177701674177613,
+     "reach": 2.177701674177613,
+     "jam_type": "floating"
+    },
+    {
+     "i": 48,
+     "j": 231,
+     "X0": 2.177701673886658,
+     "Y0": 2.1777016739392008,
+     "reach": 2.1777016739392008,
+     "jam_type": "other"
+    },
+    {
+     "i": 48,
+     "j": 232,
+     "X0": 2.177701674177613,
+     "Y0": 2.1777016739392008,
+     "reach": 2.177701674177613,
+     "jam_type": "other"
+    }
+   ],
+   "claim": "if a reach is >= 2 the slot can be freed by sliding a square out along that axis; an exception is a library-jammed pair with X0 >= 2 or Y0 >= 2"
+  }
+ },
+ "sanity_by_witness_kind": {
+  "slot": {
+   "n": 4365,
+   "reach_min": 2.0303785265283345,
+   "reach_max": 2.3876623371865477,
+   "bound": 2.414213562373095,
+   "n_violations": 0,
+   "n_reach_lt_2": 0
+  },
+  "widened": {
+   "n": 3435,
+   "reach_min": 2.006944444,
+   "reach_max": 2.4223845591865474,
+   "bound": 2.440213562373095,
+   "n_violations": 0,
+   "n_reach_lt_2": 0
+  }
+ },
+ "sanity_note": "a single blocker meeting the OPEN SLOT has reach < 1 + sqrt2 = 2.414213562 (45-deg diamond on the wall with its left vertex at x < 1); against the WIDENED target (0, 1.026)^2 the bound is 1.026 + sqrt2 = 2.440213562.  An AXIS-ALIGNED blocker meeting the open slot has reach < 2 ([a,a+1] with a < 1).",
+ "theta0_sweep_of_jam_types": {
+  "0": {
+   "n_pairs": 33656,
+   "n_witness": 7800,
+   "n_jammed": 151,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 16,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "0.5": {
+   "n_pairs": 33656,
+   "n_witness": 7800,
+   "n_jammed": 151,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 16,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "1": {
+   "n_pairs": 33656,
+   "n_witness": 7800,
+   "n_jammed": 151,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 16,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "1.7347": {
+   "n_pairs": 33656,
+   "n_witness": 7800,
+   "n_jammed": 151,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 16,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "2": {
+   "n_pairs": 33656,
+   "n_witness": 7800,
+   "n_jammed": 151,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 16,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "5": {
+   "n_pairs": 33656,
+   "n_witness": 7800,
+   "n_jammed": 151,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 16,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "7.2": {
+   "n_pairs": 23173,
+   "n_witness": 4726,
+   "n_jammed": 135,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 0,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "10": {
+   "n_pairs": 23173,
+   "n_witness": 4726,
+   "n_jammed": 135,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 0,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "14.3": {
+   "n_pairs": 11026,
+   "n_witness": 2556,
+   "n_jammed": 133,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 0,
+    "side-jam": 0,
+    "floating": 86,
+    "other": 47
+   }
+  },
+  "15": {
+   "n_pairs": 11026,
+   "n_witness": 2556,
+   "n_jammed": 133,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 0,
+    "side-jam": 0,
+    "floating": 86,
+    "other": 47
+   }
+  },
+  "20": {
+   "n_pairs": 11026,
+   "n_witness": 2556,
+   "n_jammed": 133,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 0,
+    "side-jam": 0,
+    "floating": 86,
+    "other": 47
+   }
+  },
+  "23.891": {
+   "n_pairs": 11026,
+   "n_witness": 2556,
+   "n_jammed": 133,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 0,
+    "side-jam": 0,
+    "floating": 86,
+    "other": 47
+   }
+  },
+  "30": {
+   "n_pairs": 2910,
+   "n_witness": 906,
+   "n_jammed": 107,
+   "max_reach_jammed": 2.386035008177613,
+   "types": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 0,
+    "side-jam": 0,
+    "floating": 76,
+    "other": 31
+   }
+  }
+ },
+ "H2_tilt_floor_consistent": {
+  "theta0=1.7347": {
+   "n_pairs_consistent": 33656,
+   "frac_of_census": 1.0,
+   "reach_ub": {
+    "n": 33656,
+    "max": 2.4571067811875476,
+    "min": 1.8914896389857714,
+    "mean": 2.3434947076351813,
+    "hist": {
+     "[1,1.2)": 0,
+     "[1.2,1.4)": 0,
+     "[1.4,1.6)": 0,
+     "[1.6,1.8)": 0,
+     "[1.8,1.9)": 2,
+     "[1.9,2)": 20,
+     "[2,2.1)": 1091,
+     "[2.1,2.2)": 3731,
+     "[2.2,2.3)": 5284,
+     "[2.3,2.4)": 8954,
+     "[2.4,2.42)": 0,
+     "[2.42,3)": 14574
+    }
+   },
+   "n_with_witness": 7800,
+   "witness_reach": {
+    "n": 7800,
+    "max": 2.4223845591865474,
+    "min": 2.006944444,
+    "mean": 2.2666982271214913,
+    "hist": {
+     "[1,1.2)": 0,
+     "[1.2,1.4)": 0,
+     "[1.4,1.6)": 0,
+     "[1.6,1.8)": 0,
+     "[1.8,1.9)": 0,
+     "[1.9,2)": 0,
+     "[2,2.1)": 761,
+     "[2.1,2.2)": 726,
+     "[2.2,2.3)": 3013,
+     "[2.3,2.4)": 2705,
+     "[2.4,2.42)": 254,
+     "[2.42,3)": 341
+    }
+   },
+   "max_reach_ub": 2.4571067811875476,
+   "max_witness_reach": 2.4223845591865474,
+   "H1_cap_H2_n_library_jammed": 151,
+   "H1_cap_H2_frac_jammed": 0.019358974358974358,
+   "H1_cap_H2_frac_jammed_ci95": [
+    0.016301203260759567,
+    0.02241674545718915
+   ],
+   "H1_cap_H2_max_reach": 2.386035008177613,
+   "H1_cap_H2_jam_type_counts": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 16,
+    "side-jam": 0,
+    "floating": 88,
+    "other": 47
+   }
+  },
+  "theta0=23.891": {
+   "n_pairs_consistent": 11026,
+   "frac_of_census": 0.3276087473258854,
+   "reach_ub": {
+    "n": 11026,
+    "max": 2.4571067811875476,
+    "min": 2.0098039215696275,
+    "mean": 2.3890812307253095,
+    "hist": {
+     "[1,1.2)": 0,
+     "[1.2,1.4)": 0,
+     "[1.4,1.6)": 0,
+     "[1.6,1.8)": 0,
+     "[1.8,1.9)": 0,
+     "[1.9,2)": 0,
+     "[2,2.1)": 63,
+     "[2.1,2.2)": 651,
+     "[2.2,2.3)": 1180,
+     "[2.3,2.4)": 1682,
+     "[2.4,2.42)": 0,
+     "[2.42,3)": 7450
+    }
+   },
+   "n_with_witness": 2556,
+   "witness_reach": {
+    "n": 2556,
+    "max": 2.422216936803998,
+    "min": 2.1056086304012758,
+    "mean": 2.3342926051896637,
+    "hist": {
+     "[1,1.2)": 0,
+     "[1.2,1.4)": 0,
+     "[1.4,1.6)": 0,
+     "[1.6,1.8)": 0,
+     "[1.8,1.9)": 0,
+     "[1.9,2)": 0,
+     "[2,2.1)": 0,
+     "[2.1,2.2)": 53,
+     "[2.2,2.3)": 563,
+     "[2.3,2.4)": 1783,
+     "[2.4,2.42)": 44,
+     "[2.42,3)": 113
+    }
+   },
+   "max_reach_ub": 2.4571067811875476,
+   "max_witness_reach": 2.422216936803998,
+   "H1_cap_H2_n_library_jammed": 133,
+   "H1_cap_H2_frac_jammed": 0.05203442879499218,
+   "H1_cap_H2_frac_jammed_ci95": [
+    0.04342414780255836,
+    0.06064470978742599
+   ],
+   "H1_cap_H2_max_reach": 2.386035008177613,
+   "H1_cap_H2_jam_type_counts": {
+    "near-slot": 0,
+    "stacked-dipping-vertex": 0,
+    "side-jam": 0,
+    "floating": 86,
+    "other": 47
+   }
+  }
+ },
+ "headline": {
+  "1_max_reach_library_jammed": 2.386035008177613,
+  "1_max_reach_all_pairs_witness": 2.4223845591865474,
+  "1_max_reach_ub_all_pairs_boxes": 2.4571067811875476,
+  "1_theoretical_single_blocker_max": 2.414213562373095,
+  "2_two_times_max_reach_jammed": 4.772070016355226,
+  "2_adjacent_corner_contact_possible_s_3.82": true,
+  "2_adjacent_corner_contact_possible_s_3.877084": true,
+  "3_frac_library_jammed": 0.019358974358974358,
+  "3_frac_needs_third_square_or_far_structure": 0.9806410256410256,
+  "2_detail": {
+   "note": "BL and BR 2-crowds share the x axis: their reach envelopes overlap iff X0(BL) + X0(BR) >= s.  By D4 the BR statistics mirror the BL ones, so the extreme case is 2 * max X0.",
+   "max_X0_library_jammed": 2.386035008138863,
+   "two_times_max_X0_jammed": 4.772070016277726,
+   "n_jammed_with_X0_ge_half_s_3.82": 144,
+   "n_jammed_with_X0_ge_half_s_hat": 144,
+   "frac_jammed_with_X0_ge_half_s_hat": 0.9536423841059603,
+   "overlap_possible_at_s_3.82": true,
+   "overlap_possible_at_s_hat": true,
+   "interpretation": "X0(BL) + X0(BR) >= s is NECESSARY for the two corner 2-crowds to interfere, not sufficient (the envelopes are axis-aligned bounding constraints, not the squares).  A pair of jammed 2-crowds at opposite ends of the bottom wall therefore is NOT excluded by reach arithmetic alone."
+  }
+ },
+ "canaries": [
+  {
+   "name": "canary_a_k0route_4.4_exhibit",
+   "note": "docs/proofs/k0_route.md 4.4 exhibit rebuilt from its vertex lists (edge lengths 1.0001 / 1.0000 from the rounded print); doc reports SAT gap 0.0441; expected library-UNJAMMED (A floats, apex at 0.7)",
+   "A": {
+    "cx": 0.70455,
+    "cy": 1.4045,
+    "theta_deg": 40.01095772070597,
+    "tilt_deg": 40.01095772070597,
+    "minx": 0.00012220014941666246,
+    "miny": 0.7000722001494168
+   },
+   "B": {
+    "cx": 1.633,
+    "cy": 0.717,
+    "theta_deg": 30.000727780827372,
+    "tilt_deg": 30.000727780827372,
+    "minx": 0.9499849735041237,
+    "miny": 0.03398497350412383
+   },
+   "f_minmax_A": 0.7000722001494168,
+   "f_minmax_B": 0.9499849735041237,
+   "A_meets_slot": true,
+   "B_meets_slot": true,
+   "sat_gap": 0.04420282601418479,
+   "interior_disjoint": true,
+   "in_quadrant": true,
+   "X0": 2.316015026495876,
+   "Y0": 2.1089277998505835,
+   "reach": 2.316015026495876,
+   "library": {
+    "jammed": false,
+    "motion": "R10->T1x+",
+    "n_tried": 72,
+    "steps_to_free": 24,
+    "prefix": 27
+   },
+   "jam_type": null
+  },
+  {
+   "name": "canary_b_near_slot_pocket",
+   "note": "axis-aligned A offset 0.01 from the slot + flush partner rotated 0.3 deg about its BL vertex",
+   "A": {
+    "cx": 0.51,
+    "cy": 0.5,
+    "theta_deg": 0.0,
+    "tilt_deg": 0.0,
+    "minx": 0.010000000000000009,
+    "miny": 0.0
+   },
+   "B": {
+    "cx": 0.5073751642080035,
+    "cy": 1.502611128039423,
+    "theta_deg": 0.3,
+    "tilt_deg": 0.3,
+    "minx": 0.004764036168580387,
+    "miny": 0.9999999999999999
+   },
+   "f_minmax_A": 0.010000000000000009,
+   "f_minmax_B": 0.9999999999999999,
+   "A_meets_slot": true,
+   "B_meets_slot": true,
+   "sat_gap": -2.220446049250313e-16,
+   "interior_disjoint": false,
+   "in_quadrant": true,
+   "X0": 1.01,
+   "Y0": 2.005222256078846,
+   "reach": 2.005222256078846,
+   "library": {
+    "jammed": false,
+    "motion": "R1c-",
+    "n_tried": 21,
+    "steps_to_free": 1,
+    "prefix": 13
+   },
+   "jam_type": null
+  },
+  {
+   "name": "canary_c_trump_TL_crowd_in_BL_frame",
+   "note": "Trump is k5; sanity classification only. TL box mapped by y -> s - y, so sq6 tilt 40.1819 -> theta 49.8181 (tilt 40.1819), sq4 stays axis-aligned",
+   "A": {
+    "cx": 1.5362871813120151,
+    "cy": 0.7046081688617591,
+    "theta_deg": 49.818062709670286,
+    "tilt_deg": 40.181937290329714,
+    "minx": 0.8316790114502557,
+    "miny": -1.0000003602961272e-09
+   },
+   "B": {
+    "cx": 0.5,
+    "cy": 1.3445252746731993,
+    "theta_deg": 0.0,
+    "tilt_deg": 0.0,
+    "minx": 0.0,
+    "miny": 0.8445252746731993
+   },
+   "f_minmax_A": 0.8316790114502557,
+   "f_minmax_B": 0.8445252746731993,
+   "A_meets_slot": true,
+   "B_meets_slot": true,
+   "sat_gap": 7.639997523511965e-10,
+   "interior_disjoint": true,
+   "in_quadrant": false,
+   "X0": 2.2408953511737746,
+   "Y0": 1.8445252746731993,
+   "reach": 2.2408953511737746,
+   "library": {
+    "jammed": true,
+    "motion": null,
+    "n_tried": 190
+   },
+   "jam_type": "stacked-dipping-vertex"
+  }
+ ],
+ "secs": 60.073076248168945,
+ "secs_witness": 7.7381768226623535,
+ "secs_library": 48.09265160560608
+}

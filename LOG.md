@@ -5876,3 +5876,55 @@ cores and the extremal-tilt schematics).
   pages with no shadow family draw the raw dual support at s0 and are banner-marked NOT a packing. Review sheet
   gains `s_star`, `s_star_minus_s0`, `realisable_at_s0` and `reading_auto` (= `st4` on the 30 pages with
   s\* >= 4), all filled. verify142 re-run over the regenerated pages: 0 failures.
+
+## 2026-09-03 A89-tilt-floor (Fable lead + 2 Opus chores, <= 2 processes) -- done-mixed (loaded tilt floor = GAP, no local proof; unloaded half PROVED exactly in selection form; Lemma ID + one window-valid certificate; re-price unchanged)
+- T [docs/proofs/tilt_floor_k0.md]: THEOREM TF-U (tilt selection): the Phi-minimal sigma-minimiser (Phi = sum f(tilt_i), f strictly
+  increasing; selection = Phi-min over the compact minimiser set, composable with k-maximality; second selection for uniqueness =
+  Phi-min over the non-image packings at s-hat via the basin isolation) has EVERY square at tilt exactly 0 mod 90 or FLUSH-LOCKED
+  (Lemma LOCK, Gordan: its active contacts can exert a couple away from flush or a self-stress). Rattlers and unlocked squares are
+  flush there - case (i) resolved, no theta_0. LEMMA MENU: a wall-touching near-flush blocker is locked only by FAR-SIDE contacts
+  (far edge, support under its far-bottom vertex, down-left-facing contact at its far-top vertex, a contact at its near-top vertex
+  with normal m.(cos d, sin d) < 0); both corner walls, left neighbours and top pressers never lock it. LEMMA JAM-0: an axis-aligned
+  blocker at offset g = max(a,b) < 1/sqrt2 forces its partner to sin(tilt) <= g and depth <= g^2/sqrt(1-g^2) (case (ii) pinned; for
+  g < delta_pin = 0.02 the partner is within 1.15 deg of flush = the K0-REUSE pocket); the partner is never axis-aligned.
+  LEMMA ID: DEPTH(c) < delta => (0,1-delta)^2 at c meets no square interior => strands >= (1-delta)^2 of E(m) = m^2 - 11 <= 4.0318;
+  area alone never kills 4-shallow in the window (4(1-delta)^2 <= 4). Case (iii) (flush, offset) untouched everywhere, as required.
+- GAP A89-G1 (the deliverable's loaded half): "a flush-locked corner blocker at side <= s-hat has tilt >= theta_0" is OPEN for every
+  theta_0 > 0 and has NO local proof: the near-flush jam admits a nonnegative FJ multiplier solution (explicit: wall load G = K/cos a
+  needs the presser within r <= eps of the partner's wall vertex plus a right-side pusher; the flush stack above is locked by ANY top
+  presser, mid-tilt included) - the A46/A48-C5b wall again; the only conditional floor is A50 T2.1's theta* = 1.7347 deg for members of
+  the binding P-chain (H-P/H-MONO/H-L6CAP). Counterexample to the LOCAL strategy explicit (multipliers) and in vivo (A87 o170 at
+  sigma = 4.000, both jam members unloaded); one AT side <= s-hat would refute H1 and is not expected.
+- M [T2, attempts/A89-tilt-floor/notes/t2_report.md]: A87's 167 certified k0 FJ points (665 corner blockers, all at sigma >= 3.8972):
+  min loaded(forced) tilt 23.891 deg (o026); loaded blockers with tilt in (1e-7, theta_0): 0 forced for every theta_0 <= 20 (1
+  loadable = polish noise at 3.6e-7 deg); unloaded/rattler in the zone 69/93/110/135/161 at 0.5/1/1.7347/5/10 deg; 353 exact-0 blockers;
+  161 of 162 below 10 deg have no loadable wall contact. Atlas (12 families): min loaded tilt 33.896 deg (= A46 WC min), 0 loaded below
+  30. Trump canary PASS (3 slot squares |tilt| < 2.2e-69 deg; TL = axis-aligned upright sq4 at depth 0.1555 + sq6 at 40.18 deg -
+  correction to the brief: not two tilted squares). A85 rows: 5 FAILs = 4 A38-comparison interior cells + 1 corner node at 41-49 deg
+  -> 0 FAILed blocker nodes in the deleted zone at any theta_0 <= 15. BL census (644 boxes, 33 656 pairs): zone-touching boxes 19.9 %,
+  tilt volume deleted 3.43 % at theta* (deg), pairs killed by re-pruning 0 at theta_0 <= 2, 146 at 5, 10 483 (31 %) at 10 - nodes die
+  only when an end bin (7.125 deg) dies whole. T2b (pair-only reach-cap model): library-jammed 151/7800 witnessed (1.94 %), max jammed
+  reach 2.386 vs 2.414 theoretical (jamming costs nothing in reach; adjacent-corner envelopes can overlap, 2 x 2.386 >= s-hat); the
+  16 case-(ii) jams die exactly when theta_0 > 7.125; near-slot pocket canary UNJAMMED (rotating the partner to flush lifts its
+  vertex - TF-U's motion), Trump TL crowd JAMMED. Depth: no census pair has both members at depth >= 0.5 (1.2 % at 0.3) - a
+  tilt-free pair prune; A87 shallow corners (< 0.3) 115/644, 52 % of their blockers axis-aligned (case iii, not tilted ghosts);
+  Trump DEPTH(TL) = 0.168300 exactly, other corners 1.
+- CERT [A89-O3, certs/k0_00/R1_4shallow_d0.3.json + .PASS, frozen certify/verify_case chain, re-verified 0 holes]: NO 11-packing at
+  any side m in [3.82, s0] has all four corners SHALLOW(0.3) (exact total 1372003/125000 = 10.976024 < 11; NO-families = sound inner
+  unions of 432 pose boxes with a_win = (1-delta)/lambda_max; discharges delta = 0.1, 0.05 by monotonicity). Canary: every Trump image
+  has exactly one corner at depth 0.168300 and three at 1, so 1-shallow(delta >= 0.1683) was REFUSED as image-realisable, >= 2-shallow
+  attemptable. 3-shallow NOT certified (tau 10.05 at 0.3 climbing to 10.21 with feedback = genuine near-boundary; at 0.1 eta = -1.78
+  but C1 certification did not close at the 900 s cap, minmass 0.58 - LP-time artefact, resumable code/o3_campaign.py with lp_time
+  >= 5000); 2-shallow untried (tau nondecreasing). Hole diagnostic on A85's depth-2 FAILs (exact): 67 % of witness boxes are corner
+  poses, 11 % near-flush corner poses (two wall-flush uprights at 0.46 / 0.70 deg), 33 % interior/mid-tilt - the ghost zone is a
+  minority of what fails; p210_001 is in fact killed at eps_geo 0.004 (f2 at A60 defaults = 2/3 on the three depth-2 cells).
+- F re-price: UNCHANGED, 3 200-7 000 CPU-h (f2 ~ 0.85) / >= 3e4 (f2 = 1/3). The loaded floor is unavailable; had it been, theta* deletes
+  0 FAILs and 0 pair boxes; TF-U's (C-sel) leaves are deep-node rules (K0-ROT's status); Lemma ID gives a corner-first branching with
+  a free exempt row per shallow corner and one certified root kill. CAVEAT: "not where the cost is" rests on A85's 12 LP rows (4 of 5
+  FAILs are A38-comparison interior cells); a proper measurement = >= 20 S2-S4 crowd nodes with certification, stratified by tilt bin,
+  plus the hole census and one lower side (~10 CPU-h). Lean-readiness: StratumKillSel (Phi-selected minimiser) + obligations S1-S5,
+  no lean/ edits. Process: T2's small jobs (< 300 MB RSS, no LP) launched at 0.7-2 GB free commit under the other campaigns (gate
+  breached literally, nothing heavy); O3 gated every LP at > 6144 MB and waited out dips (hours). Discipline otherwise: <= 2
+  processes, BLAS pinned, A57/A60/A61/A86 untouched, frozen verifiers untouched, A85 engine COPIED not modified. Files:
+  docs/proofs/tilt_floor_k0.md, attempts/A89-tilt-floor/{code,results,certs,notes,logs}, lean/depgraph.json (C.K4TIER note, chip
+  released) + svg, REGISTRY row.

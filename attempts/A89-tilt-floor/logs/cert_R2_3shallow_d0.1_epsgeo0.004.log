@@ -1,0 +1,37 @@
+re-solving node LP with EPS_GEO=0.004 (rows + columns, fine oracle) ...
+[s=3.877084 n=11 sym=C1 box=[0,90]x1] init orbits=817 points=817 rows=2578 (rejected 618)
+  it   0 tau=9.921633 rows=2755 orbs=1217 atoms>0=108 minmass=0.553354 maxcov=1.575374 +rows=177 -rows=0 +cols=400 -cols=0 t=117s [lp 0s row 106s +r 2s col 1s +c 0s]
+  it   1 tau=10.019522 rows=3059 orbs=1617 atoms>0=98 minmass=0.417927 maxcov=1.681537 +rows=304 -rows=0 +cols=400 -cols=0 t=222s [lp 0s row 103s +r 2s col 1s +c 0s]
+  it   2 tau=10.128656 rows=3486 orbs=2017 atoms>0=135 minmass=0.589951 maxcov=1.554505 +rows=427 -rows=0 +cols=400 -cols=0 t=329s [lp 1s row 104s +r 2s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=11 sym=C1 tau=10.062102 nu=10.062102 conv=False minmass=0.589951 maxcov=1.554505 rows=3486 orbits=2017 atoms_nz=97 packing_support=124 time=332s
+   tau=10.06210 conv=False minmass=0.5900 maxcov=1.5545
+[round 0] tau=10.06210 conv=False scale=1.0907 cert total=10.97493 budget=11 atoms=97
+    boxes = 24017  covered = 11080  vacuous = 0  exempt = 849 (core 0, nofam 849)  split = 12056  exact atom checks = 12965  max depth = 56  time = 7.6s
+    FAIL: 32 witness boxes at depth 56: 18 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 14 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 62.249866 deg, centre = (0.675303256, 1.459872176), exact mass = 445069/500000 (~0.890138000000)
+    feeding back 672 witness rows (total extra 672), re-solving (rows only)
+[s=3.877084 n=11 sym=C1 box=[0,90]x1] init orbits=680 points=680 rows=2281 (rejected 794)
+  it   0 tau=10.082830 rows=2424 orbs=680 atoms>0=89 minmass=0.560234 maxcov=1.754366 +rows=143 -rows=0 +cols=0 -cols=0 t=108s [lp 0s row 99s +r 2s col 1s +c 0s]
+  it   1 tau=10.259366 rows=2424 orbs=1680 atoms>0=72 minmass=0.593660 maxcov=1.913545 +rows=0 -rows=0 +cols=1000 -cols=0 t=211s [lp 0s row 103s +r 0s col 0s +c 0s]
+  it   2 tau=10.097661 rows=2897 orbs=1680 atoms>0=116 minmass=0.676948 maxcov=1.718824 +rows=473 -rows=0 +cols=0 -cols=0 t=315s [lp 0s row 101s +r 2s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=11 sym=C1 tau=10.178421 nu=10.178421 conv=False minmass=0.676948 maxcov=1.718824 rows=2897 orbits=1680 atoms_nz=94 packing_support=84 time=315s
+[round 1] tau=10.17842 conv=False scale=1.0782 cert total=10.97469 budget=11 atoms=94
+    boxes = 5124  covered = 2252  vacuous = 0  exempt = 210 (core 0, nofam 210)  split = 2630  exact atom checks = 2547  max depth = 56  time = 1.8s
+    FAIL: 32 witness boxes at depth 56: 21 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 11 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 3.175880 deg, centre = (0.526934005, 2.253223063), exact mass = 913011/1000000 (~0.913011000000)
+    feeding back 672 witness rows (total extra 1344), re-solving (rows only)
+[s=3.877084 n=11 sym=C1 box=[0,90]x1] init orbits=663 points=663 rows=2395 (rejected 1074)
+  it   0 tau=10.248355 rows=2628 orbs=663 atoms>0=76 minmass=0.503290 maxcov=1.868956 +rows=233 -rows=0 +cols=0 -cols=0 t=107s [lp 0s row 98s +r 1s col 1s +c 0s]
+  it   1 tau=10.380580 rows=2628 orbs=1663 atoms>0=87 minmass=0.690503 maxcov=1.905710 +rows=0 -rows=0 +cols=1000 -cols=0 t=203s [lp 0s row 96s +r 0s col 0s +c 0s]
+  it   2 tau=10.084578 rows=2735 orbs=1663 atoms>0=115 minmass=0.645408 maxcov=1.574263 +rows=107 -rows=0 +cols=0 -cols=0 t=304s [lp 0s row 98s +r 1s col 1s +c 0s]
+  time limit
+DONE s=3.877084 n=11 sym=C1 tau=10.265174 nu=10.265174 conv=False minmass=0.645408 maxcov=1.574263 rows=2735 orbits=1663 atoms_nz=96 packing_support=100 time=304s
+[round 2] tau=10.26517 conv=False scale=1.0691 cert total=10.97452 budget=11 atoms=96
+    boxes = 5473  covered = 2125  vacuous = 0  exempt = 538 (core 0, nofam 538)  split = 2778  exact atom checks = 3239  max depth = 56  time = 1.6s
+    FAIL: 32 witness boxes at depth 56: 23 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undecided at this depth  [stopped at --max-witnesses]
+      worst witness: theta = 62.249946 deg, centre = (0.675303256, 1.484715923), exact mass = 945701/1000000 (~0.945701000000)
+NOT certified
+
+---stderr---

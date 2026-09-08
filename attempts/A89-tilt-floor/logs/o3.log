@@ -1,0 +1,119 @@
+[09:47:49] A89-O3 start (Opus chore 2): shallow-corner root kills + hole diagnostic
+[09:48:33] modules copied from A85 (26 files) + witnesses_k0_00.json; imports OK; free_commit=4669 MB (< 6144: NO LP yet). Starting DIAGNOSTIC D (LP-free).
+{"node": "s1int_l2_l2_p215_011", "result": "FAIL", "total_float": 9.977468, "n_witness": 32, "n_hole": 6, "n_undecided": 26, "n_corner_pose": 32, "n_corner_pose_ghost": 0, "n_ghost": 0, "n_interior": 0, "min_nearest_corner_dist": 1.6435854618741692, "max_nearest_corner_dist": 1.9370268888089222, "tilt_span": [30.79309772489267, 44.39709900693872], "min_reach_gap": -0.172745607883931}
+{"node": "s1int_l2_l2_p215_011_epsgeo0.002", "result": "FAIL", "total_float": 9.977311, "n_witness": 32, "n_hole": 8, "n_undecided": 24, "n_corner_pose": 24, "n_corner_pose_ghost": 0, "n_ghost": 0, "n_interior": 8, "min_nearest_corner_dist": 1.6752763303171263, "max_nearest_corner_dist": 2.129049410850251, "tilt_span": [28.142006100586293, 41.76926325215389], "min_reach_gap": -0.1867266947379489}
+{"node": "s1int_l2_l2_p215_011_epsgeo0.004", "result": "FAIL", "total_float": 9.977065, "n_witness": 32, "n_hole": 3, "n_undecided": 29, "n_corner_pose": 16, "n_corner_pose_ghost": 8, "n_ghost": 8, "n_interior": 16, "min_nearest_corner_dist": 1.445603183229453, "max_nearest_corner_dist": 2.2141712272672516, "tilt_span": [0.6987470124113137, 44.20989140534811], "min_reach_gap": -0.234416929190438}
+{"node": "s1int_l2_l2_p210_001", "result": "FAIL", "total_float": 9.97772, "n_witness": 40, "n_hole": 8, "n_undecided": 32, "n_corner_pose": 16, "n_corner_pose_ghost": 8, "n_ghost": 8, "n_interior": 24, "min_nearest_corner_dist": 1.57884866212378, "max_nearest_corner_dist": 2.2191530595597175, "tilt_span": [0.46039142319284565, 43.40333440404148], "min_reach_gap": -0.057738390777544835}
+{"node": "s1int_l2_l2_p210_001_epsgeo0.002", "result": "FAIL", "total_float": 9.977484, "n_witness": 16, "n_hole": 2, "n_undecided": 14, "n_corner_pose": 16, "n_corner_pose_ghost": 0, "n_ghost": 0, "n_interior": 0, "min_nearest_corner_dist": 1.745099698585723, "max_nearest_corner_dist": 1.7887161116779293, "tilt_span": [22.257074091979263, 43.68208374258909], "min_reach_gap": -0.22492828195031833}
+{"node": "s1int_l2_l2_p210_001_epsgeo0.004", "result": "PASS", "total_float": 9.97707, "n_witness": 32, "n_hole": 0, "n_undecided": 32, "n_corner_pose": 32, "n_corner_pose_ghost": 0, "n_ghost": 0, "n_interior": 0, "min_nearest_corner_dist": 1.5935875659377063, "max_nearest_corner_dist": 1.7527816726311376, "tilt_span": [25.97853835168129, 42.953724685644744], "min_reach_gap": -0.24727343923734368}
+BASE TOTAL {"n_witness": 72, "n_hole": 14, "n_undecided": 58, "n_corner_pose": 48, "n_corner_pose_ghost": 8, "n_ghost": 8, "n_interior_midtilt": 24}
+[09:51:43] DIAG D done -> results/o3_holes.json. base(2 nodes,72 wit): 14 hole/58 undecided; 48 corner-pose, 24 interior-midtilt, 8 near-flush ghost (tilt 0.46deg, TL, depth 0.0078, cx=0.5040 wall-flush). all 6 variants: 184 wit, 27 hole/157 und, 136 corner, 48 interior, 16 ghost.
+[09:59:12] image depth table -> results/o3_image_depths.json: each of the 8 D4 images has EXACTLY ONE corner at depth 0.168300 and three at depth 1.000000 (slot squares). => canary: 1-shallow(BL) at delta>=0.1683 is image-realisable (g2,g6) -> must REFUSE; every 2/3/4-shallow pattern is NOT image-realisable. free_commit=3410 MB, waiting.
+[10:00:24] o3_fams.json written (nsteps=8): all 6 (delta,window) family sets SOUND (exact Fraction test, Lipschitz-padded); sampled coverage of the true reach R_BL(a): d=0.3 89.7/90.4%, d=0.1 91.7/92.2%, d=0.05 93.0/93.5% (eroded/raw).
+[10:02:04]   fams: a=0.689694 (window) n_BL=108 all-sound=True min-margin=2.046e-04
+[10:03:49]   fams: a=0.689694 (window) n_BL=108 all-sound=True min-margin=2.050e-04
+[10:04:19] === O3 campaign start, wall budget 195 min, 13 runs planned
+[10:04:19] === R4_1shallow_BL_d0.3  (195 min left)
+[10:04:28]   fams: a=0.689694 (window) n_BL=108 all-sound=True min-margin=2.050e-04
+[10:04:28] [RUN] R4_1shallow_BL_d0.3 pattern=BL delta=0.3 a=0.689694 boxes=108 sym=C1 canary=['g2', 'g6']
+[10:04:28]   REFUSED (CANARY: realised by g2,g6)
+[10:04:28] === R1_4shallow_d0.3  (195 min left)
+[10:04:28] [RUN] R1_4shallow_d0.3 pattern=BL+BR+TL+TR delta=0.3 a=0.689694 boxes=432 sym=D4 canary=none
+[10:04:28]   commit dip 3174 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:05:28]   commit dip 2636 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:06:28]   commit dip 2641 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:07:28]   commit dip 2622 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:08:28]   commit dip 2634 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:09:28]   commit dip 5451 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:10:28]   commit dip 5079 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:11:00]   fams: a=0.689694 (window) n_BL=108 all-sound=True min-margin=2.050e-04
+[10:11:28]   commit dip 4941 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:12:28]   commit dip 4569 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:13:25]   warm pool: 4765 columns (A38 root_s0 + A07 3.82/3.83, rescaled)
+[10:13:28]   commit dip 4097 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:13:47] === O3 campaign start, wall budget 185 min, 13 runs planned
+[10:13:47] === R4_1shallow_BL_d0.3  (185 min left)
+[10:13:56]   fams: a=0.689694 (window) n_BL=108 all-sound=True min-margin=2.050e-04
+[10:13:57] [RUN] R4_1shallow_BL_d0.3 pattern=BL delta=0.3 a=0.689694 boxes=108 sym=C1 canary=['g2', 'g6']
+[10:13:57]   REFUSED (CANARY: realised by g2,g6)
+[10:13:57] === R1_4shallow_d0.3  (185 min left)
+[10:13:57] [RUN] R1_4shallow_d0.3 pattern=BL+BR+TL+TR delta=0.3 a=0.689694 boxes=432 sym=D4 canary=none
+[10:13:57]   commit dip 4904 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:14:57]   commit dip 4888 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:15:57]   commit dip 4906 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:16:57]   commit dip 4790 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:17:57]   commit dip 4772 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:18:57]   commit dip 4828 MB < 6144: sleep 60 s (R1_4shallow_d0.3)
+[10:19:57]   commit OK 15445 MB after 6 x 60 s wait (R1_4shallow_d0.3)
+[10:19:57]   [LP] sym=D4 tl=900s
+[10:19:57]   warm pool: 1600 columns (A38 root_s0 + A07 3.82/3.83, rescaled)
+[10:37:19]   tau=9.554681 eta=-1.445319 conv=False rows=5810 lp_s=1042
+[10:54:06]     [round 0] tau=9.55468 conv=False scale=1.1487 cert total=10.97638 budget=11 atoms=848
+[10:54:06]     FAIL: 32 witness boxes at depth 56: 0 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 32 undecided at this depth  [stopped at --max-witnesses]
+[10:54:06]     [round 1] tau=9.62570 conv=False scale=1.1403 cert total=10.97606 budget=11 atoms=612
+[10:54:06]     FAIL: 32 witness boxes at depth 56: 4 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 28 undecided at this depth  [stopped at --max-witnesses]
+[10:54:06]     [round 2] tau=9.65780 conv=False scale=1.1365 cert total=10.97602 budget=11 atoms=732
+[10:54:06]     PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1372003/125000 < budget 11  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+[10:54:06]     CERTIFIED: C:\Users\esumm\code\packing\attempts\A89-tilt-floor\certs\k0_00\R1_4shallow_d0.3.json
+[10:54:07]   verdict=PASS cert_s=1008
+[10:54:07] === R2_3shallow_d0.3  (145 min left)
+[10:54:07] [RUN] R2_3shallow_d0.3 pattern=BL+BR+TR delta=0.3 a=0.689694 boxes=324 sym=C1 canary=none
+[10:54:07]   [LP] sym=C1 tl=900s
+[11:10:41]   tau=10.046056 eta=-0.953944 conv=False rows=7922 lp_s=994
+[11:21:30]     [round 0] tau=10.04606 conv=False scale=1.0925 cert total=10.97501 budget=11 atoms=216
+[11:21:30]     FAIL: 32 witness boxes at depth 56: 7 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 25 undecided at this depth  [stopped at --max-witnesses]
+[11:21:30]     [round 1] tau=10.11066 conv=False scale=1.0855 cert total=10.97486 budget=11 atoms=180
+[11:21:30]     FAIL: 32 witness boxes at depth 56: 16 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 16 undecided at this depth  [stopped at --max-witnesses]
+[11:21:30]     [round 2] tau=10.20896 conv=False scale=1.0750 cert total=10.97466 budget=11 atoms=157
+[11:21:30]     FAIL: 32 witness boxes at depth 56: 12 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 20 undecided at this depth  [stopped at --max-witnesses]
+[11:37:34]     [round 0] tau=10.16651 conv=False scale=1.0795 cert total=10.97475 budget=11 atoms=170
+[11:37:34]     FAIL: 32 witness boxes at depth 56: 12 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 20 undecided at this depth  [stopped at --max-witnesses]
+[11:37:34]     [round 1] tau=10.27163 conv=False scale=1.0684 cert total=10.97454 budget=11 atoms=161
+[11:37:34]     FAIL: 32 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 27 undecided at this depth  [stopped at --max-witnesses]
+[11:37:34]     [round 2] tau=10.30080 conv=False scale=1.0654 cert total=10.97448 budget=11 atoms=152
+[11:37:34]     FAIL: 32 witness boxes at depth 56: 19 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 13 undecided at this depth  [stopped at --max-witnesses]
+[11:53:27]     [round 0] tau=10.35516 conv=False scale=1.0598 cert total=10.97440 budget=11 atoms=195
+[11:53:27]     FAIL: 32 witness boxes at depth 56: 18 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 14 undecided at this depth  [stopped at --max-witnesses]
+[11:53:27]     [round 1] tau=10.43554 conv=False scale=1.0516 cert total=10.97421 budget=11 atoms=186
+[11:53:27]     FAIL: 32 witness boxes at depth 56: 5 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 27 undecided at this depth  [stopped at --max-witnesses]
+[11:53:27]     [round 2] tau=10.43646 conv=False scale=1.0515 cert total=10.97421 budget=11 atoms=176
+[11:53:27]     FAIL: 32 witness boxes at depth 56: 24 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 8 undecided at this depth  [stopped at --max-witnesses]
+[11:53:27]   verdict=FAIL(eps_geo 0.004 rc=1) cert_s=2566
+[11:53:27] === R3adj_2shallow_d0.3  (85 min left)
+[11:53:27] [RUN] R3adj_2shallow_d0.3 pattern=BL+BR delta=0.3 a=0.689694 boxes=216 sym=C1 canary=none
+[11:53:27]   [LP] sym=C1 tl=900s
+[11:54:26] R2(3-shallow,d=0.3) FAIL: tau=10.046056 (LP), witness rounds pushed to 10.20896, cert total 10.9747 >= holes at every eps_geo (0/0.002/0.004). By monotonicity 2-shallow at d=0.3 is HARDER (tau nondecreasing as corners are removed) -> campaign stopped; re-prioritised to the EASIER direction: 3-shallow at smaller delta (bigger exempt box a=(1-delta)/lambda_max).
+[11:54:32] === O3 campaign start, wall budget 100 min, 4 runs planned
+[11:54:32] === R2_3shallow_d0.1  (100 min left)
+[11:54:41]   fams: a=0.886749 (window) n_BL=112 all-sound=True min-margin=2.053e-04
+[11:54:41] [RUN] R2_3shallow_d0.1 pattern=BL+BR+TR delta=0.1 a=0.886749 boxes=336 sym=C1 canary=none
+[11:54:41]   [LP] sym=C1 tl=900s
+[11:54:41]   warm pool: 1600 columns (A38 root_s0 + A07 3.82/3.83, rescaled)
+[12:10:17]   tau=9.222755 eta=-1.777245 conv=False rows=5684 lp_s=936
+[12:28:33]     [round 0] tau=9.22276 conv=False scale=1.1902 cert total=10.97666 budget=11 atoms=218
+[12:28:33]     FAIL: 32 witness boxes at depth 56: 11 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 21 undecided at this depth  [stopped at --max-witnesses]
+[12:28:33]     [round 1] tau=9.58336 conv=False scale=1.1453 cert total=10.97590 budget=11 atoms=132
+[12:28:33]     FAIL: 32 witness boxes at depth 56: 26 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 6 undecided at this depth  [stopped at --max-witnesses]
+[12:28:33]     [round 2] tau=9.83961 conv=False scale=1.1154 cert total=10.97539 budget=11 atoms=130
+[12:28:33]     FAIL: 32 witness boxes at depth 56: 18 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 14 undecided at this depth  [stopped at --max-witnesses]
+[12:47:37]     [round 0] tau=9.82990 conv=False scale=1.1165 cert total=10.97540 budget=11 atoms=122
+[12:47:37]     FAIL: 32 witness boxes at depth 56: 11 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 21 undecided at this depth  [stopped at --max-witnesses]
+[12:47:37]     [round 1] tau=10.09278 conv=False scale=1.0874 cert total=10.97486 budget=11 atoms=97
+[12:47:37]     FAIL: 32 witness boxes at depth 56: 22 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 10 undecided at this depth  [stopped at --max-witnesses]
+[12:47:37]     [round 2] tau=10.04489 conv=False scale=1.0926 cert total=10.97496 budget=11 atoms=117
+[12:47:37]     FAIL: 32 witness boxes at depth 56: 7 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 25 undecided at this depth  [stopped at --max-witnesses]
+[12:49:59] INDEPENDENT RE-VERIFY of certs/k0_00/R1_4shallow_d0.3.json with the frozen verify_case.py (jobs 1, depth 56): PASS, rc=0, 220140 boxes, 107574 covered, 2528 exempt-by-nofam, 0 holes, max depth 36, 85.9 s, total 1372003/125000 = 10.976024 < 11.
+[13:03:39]     [round 0] tau=10.06210 conv=False scale=1.0907 cert total=10.97493 budget=11 atoms=97
+[13:03:39]     FAIL: 32 witness boxes at depth 56: 18 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 14 undecided at this depth  [stopped at --max-witnesses]
+[13:03:39]     [round 1] tau=10.17842 conv=False scale=1.0782 cert total=10.97469 budget=11 atoms=94
+[13:03:39]     FAIL: 32 witness boxes at depth 56: 21 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 11 undecided at this depth  [stopped at --max-witnesses]
+[13:03:39]     [round 2] tau=10.26517 conv=False scale=1.0691 cert total=10.97452 budget=11 atoms=96
+[13:03:39]     FAIL: 32 witness boxes at depth 56: 23 HOLES (a placement with exact mass < 1), 0 tight (mass ok at samples but an atom on the boundary of Q), 9 undecided at this depth  [stopped at --max-witnesses]
+[13:03:39]   verdict=FAIL(eps_geo 0.004 rc=1) cert_s=3202
+[13:03:39] === R2_3shallow_d0.05  (31 min left)
+[13:03:48]   fams: a=0.936013 (window) n_BL=112 all-sound=True min-margin=2.052e-04
+[13:03:48] [RUN] R2_3shallow_d0.05 pattern=BL+BR+TR delta=0.05 a=0.936013 boxes=336 sym=C1 canary=none
+[13:03:48]   [LP] sym=C1 tl=900s
+[13:18:59]   tau=8.726420 eta=-2.273580 conv=False rows=5187 lp_s=910
+[13:19:33] R2 d0.05: tau=8.726420 eta=-2.273580 minmass=0.3767 (LP only; cert cut by wall budget). Delta sweep: tau falls 10.046 -> 9.223 -> 8.726 as a grows 0.690 -> 0.887 -> 0.936, but minmass DEGRADES 0.606 -> 0.577 -> 0.377 => shrinking delta does not rescue the 3-shallow kill; only more LP time does.
+[13:20:00] campaign stopped cleanly at the wall budget; all A89 processes terminated (0 remaining). FINAL: R1 4-shallow d=0.3 PASS (window-valid, discharges every delta<=0.3); R2 3-shallow FAIL at d=0.3/0.1, LP-only at d=0.05 -- blocked on C1 LP convergence (minmass 0.61/0.58/0.38 vs R1's D4 0.81), not geometry.
