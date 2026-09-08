@@ -274,7 +274,20 @@ def main():
              "core it clears and which it meets, so `clears K(a) stock, clears K exact, meets K'` "
              "is a column only the polygon core reaches, and `clears K(a) stock, meets K exact` "
              "is one the exact pin core alone reaches - the slop A132's attribution found.")
-    L.append("* **Panel 2** is the near-packing, and its names are the names to label from.")
+    n4 = sum(1 for s in summ if s.get("reading_auto") == "st4")
+    nnr = sum(1 for s in summ if s["shadow"] and s["s_star"] - 3.877084 > 1e-6)
+    L.append(f"* **Panel 2** is the near-packing, and its names are the names to label from. "
+             f"**It is drawn at the shadow's OWN side s\\*, not at s0**, because a minimised "
+             f"shadow closes only at its own s\\*; s0's container is overlaid as a heavy dashed "
+             f"square from the same origin, and the band between the two is the room the "
+             f"configuration needs and does not have at s0. A large-type banner says which case "
+             f"it is. **{nnr} of the {len([s for s in summ if s['shadow']])} pages with a shadow "
+             f"family have s\\* > s0 and are NOT realisable at s0** - the four squares that span "
+             f"the container in, e.g., `c0_Y0171` (S01, s\\* = 4.000000, s\\* - s0 = +0.122916) "
+             f"span it at s\\*, and that unit of room is exactly the S01 \"room at side 4\" "
+             f"structure. {n4} pages have s\\* >= 4 and are marked `st4` in the review sheet's "
+             f"new `reading_auto` column. The 5 pages with no shadow family draw the raw dual "
+             f"support at s0 and are banner-marked NOT a packing.")
     L.append("* **Panel 3** is the hypothesis alone: the three cores of H captioned with "
              "`a_stock / a_exact / area K'`, the pin-clipped centre box per tilt sub-bin, the "
              "A118 LANE<=1 corner cells, and the measured pockets.")

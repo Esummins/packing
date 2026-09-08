@@ -455,11 +455,41 @@ def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, pincores, hypcores, clip, s)
 
 
 # ------------------------------------------------------------------ panel 2
-def panel_pack(ox, oy, sc, title, sub, s, poses, ring=True):
+def panel_pack(ox, oy, sc, title, sub, s, poses, ring=True, is_packing=True):
+    """RIGHT panel.  The container is drawn at the panel's OWN side s (a minimised shadow closes
+    at its own s*, not at s0), and s0's container is overlaid as a heavy dashed square from the
+    SAME origin so the excess is visible; a large-type banner says whether the packing drawn is
+    realisable at s0."""
     out = [text(ox, oy - S0 * sc - 54, title, 12, bold=True)]
-    e, _ = wrap(ox, oy - S0 * sc - 40, sub, S0 * sc, 8.5, "#444", lead=11.0)
+    e, ysub = wrap(ox, oy - S0 * sc - 40, sub, S0 * sc, 8.5, "#444", lead=11.0)
     out += e
+    excess = s - S0
+    if not is_packing:
+        out.append(text(ox, ysub + 14, "raw dual support at s0 — NOT a packing", 15, "#d50000",
+                        True))
+        out.append(text(ox, ysub + 29, "(no A107 shadow family covers this node; the squares "
+                                       "OVERLAP — that is the impossible-column effect)",
+                        9.5, "#d50000"))
+    elif excess > 1e-6:
+        out.append(text(ox, ysub + 14, f"near-packing at s* = {s:.4f} > s0 — NOT realisable at "
+                                       f"s0", 15, "#d50000", True))
+        out.append(text(ox, ysub + 29, f"(S01 room: the support closes only with a unit of room; "
+                                       f"s* − s0 = +{excess:.6f}, and the four squares that span "
+                                       f"the container do so at s*, not at s0)",
+                        9.5, "#d50000"))
+    else:
+        out.append(text(ox, ysub + 14, f"realisable at s0 (s* = {s:.4f} ≤ s0)", 15, "#1b5e20",
+                        True))
+        out.append(text(ox, ysub + 29, f"s* − s0 = {excess:+.6f}", 9.5, "#1b5e20"))
     out += frame(ox, oy, sc, s)
+    # --- s0's container from the same origin, so the excess is visible on the drawing
+    out.append(rect(ox, oy, sc, 0.0, S0, 0.0, S0, "none", "#d50000" if excess > 1e-6 else "#777",
+                    0.0, 2.2, "9,5"))
+    out.append(text(ox + S0 * sc - 2, oy - S0 * sc - 4, f"s0 = {S0:.6f}", 8.5,
+                    "#d50000" if excess > 1e-6 else "#777", True, "end"))
+    if excess > 1e-6:
+        out.append(text(ox + s * sc + 2, oy - s * sc - 4, f"s* = {s:.6f}", 8.5, "#000", True,
+                        "end"))
     polys = [sq(*q) for q in poses]
     exc = max([max(-x, x - s, -y, y - s) for P in polys for x, y in P] or [0.0])
     mg = min([L.sat_gap(poses[i][:2], poses[i][2], poses[j][:2], poses[j][2])
@@ -504,8 +534,11 @@ def panel_pack(ox, oy, sc, title, sub, s, poses, ring=True):
                     out.append(f'<circle cx="{ox + f[0] * sc:.1f}" cy="{oy - f[1] * sc:.1f}" '
                                f'r="4.5" fill="none" stroke="#2e7d32" stroke-width="2"/>')
     e, _ = wrap(ox, oy + 16, f"{len(poses) - nf} slot squares + {nf} free squares; min pairwise "
-                             f"SAT separation {mg:+.2e}; worst containment excursion {exc:+.2e}; "
-                             f"side {s:.6f}", S0 * sc, 8.5, "#444")
+                             f"SAT separation {mg:+.2e}; worst containment excursion {exc:+.2e} "
+                             f"AGAINST THE PANEL'S OWN SIDE s = {s:.6f}. Heavy dashed square = "
+                             f"s0 = {S0:.6f} from the same origin; the band between the two is "
+                             f"the room this configuration needs and does not have at s0 "
+                             f"(s* - s0 = {s - S0:+.6f}).", S0 * sc, 8.5, "#444")
     out += e
     return out, names, exc, mg, oy + 16 + 11.5 * max(1, len(e))
 
@@ -758,7 +791,7 @@ def build_page(rec, camp):
                    if str(v.get("verdict", "")).startswith(("LANE<=1", "LANE<=0")))
 
     W1 = S0 * SC + 66
-    oy = 140 + S0 * SC
+    oy = 178 + S0 * SC
     body, _ = wrap(30, 16, LEGEND, 3 * W1 - 20, 8.5, "#333")
     tau = float(d.get("tau") or 0.0)
     bud = int(d.get("budget") or 5)
@@ -772,7 +805,8 @@ def build_page(rec, camp):
     poses, s2, sid, prov = right_poses(camp, nid, d, boxes, clip)
     p2, names2, exc, mg, yb2 = panel_pack(30 + W1, oy, SC,
                                      f"{nid} — panel 2: the near-packing"
-                                     + (f" ({sid})" if sid else " (raw support)"), prov, s2, poses)
+                                     + (f" ({sid})" if sid else " (raw support)"), prov, s2,
+                                     poses, is_packing=bool(sid))
     body += p2
     assert exc <= 1e-4, f"{nid}: panel 2 containment violated by {exc:.2e}"
     p3, yb3 = panel_hyp(30 + 2 * W1, oy, SC, boxes, pcs, pincores, hypcores, clip, pockets,
@@ -889,7 +923,10 @@ def build_page(rec, camp):
         file=f"{nid}.svg", shadow=(sid or "-"),
         classes_or_sources=f"{camp} {rec['cls']}; record {recpath}",
         k=f"k{len(poses)} ({len(poses) - nfree} slot + {nfree} free)",
-        s_star=(f"{s2:.6f}" if sid else f"n/a (raw support at s0, overlap {max(0.0, -mg):.3f})"),
+        s_star=f"{s2:.6f}", s_star_minus_s0=f"{s2 - S0:+.6f}",
+        realisable_at_s0=("no" if s2 - S0 > 1e-6 else ("yes" if sid else "n/a (raw support, "
+                                                               "not a packing)")),
+        reading_auto=("st4" if s2 >= 4.0 - 1e-9 else ""),
         s_star_minus_shat=(f"{s2 - SHAT:+.6f}" if sid else "n/a"),
         nodes_explained=(str(shadow_geom(sid)["nnodes"]) if sid else "1 (this node)"),
         levels=f"L{rec['level']}", n_free_squares=nfree,
@@ -923,7 +960,9 @@ def build_page(rec, camp):
     summ = dict(id=nid, camp=camp, cls=rec["cls"], level=rec["level"], rank=rec["rank"],
                 subtree_s=rec["subtree_s"], subtree_cpuh=rec["subtree_cpuh"],
                 verdict=rec["verdict"], shadow=sid, families=shadow_families(nid),
-                tau=tau, budget=bud, s_star=(s2 if sid else None),
+                tau=tau, budget=bud, s_star=s2, s_star_minus_s0=s2 - S0,
+                realisable_at_s0=bool(s2 - S0 <= 1e-6 and sid),
+                reading_auto=("st4" if s2 >= 4.0 - 1e-9 else ""),
                 n_support=len(d.get("packing") or []), n_impossible=len(imposs),
                 n_impossible_pin=sum(1 for r in imposs if r["box"] != npin),
                 n_impossible_certified=sum(1 for r in imposs if r["certified"]),

@@ -5864,3 +5864,15 @@ format: `figs/cover143_single.svg` (216 cells by verdict, Trump cells hatched, t
 drawn), `figs/cover143_pairs.svg` (36 tilt-blocks × a 36×36 verdict matrix, Trump pair cells ringed),
 `figs/pair_survivors.svg` (the Trump pair cell + three sampled survivors, both H's with all three
 cores and the extremal-tilt schematics).
+
+- **A142 follow-up 2 (PI feedback on `c0_Y0171.svg`): panel 2 was drawn at the shadow's s\*, said so only in small
+  type, and so showed four squares spanning the container — illegal at s0.** All 60 panels regenerated: the
+  container is still drawn at the panel's own s\*, but **s0's container is now overlaid as a heavy dashed square
+  from the same origin**, so the band of room is visible, and a **large-type banner** states the case —
+  "near-packing at s\* = 4.0000 > s0 — NOT realisable at s0 (S01 room: the support closes only with a unit of
+  room)" or "realisable at s0". The measurement that follows: **all 55 pages with an A107 shadow family have
+  s\* > s0** (min s\* 3.885618, max 4.000261; 30 of them at s\* >= 4), so **no near-packing in this gallery is
+  realisable at s0** — the right panel is a structure diagram, not a configuration at the certified side. The 5
+  pages with no shadow family draw the raw dual support at s0 and are banner-marked NOT a packing. Review sheet
+  gains `s_star`, `s_star_minus_s0`, `realisable_at_s0` and `reading_auto` (= `st4` on the 30 pages with
+  s\* >= 4), all filled. verify142 re-run over the regenerated pages: 0 failures.
