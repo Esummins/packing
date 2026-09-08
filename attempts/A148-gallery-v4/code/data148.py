@@ -124,7 +124,8 @@ def tbl(name):
             for r in _jl(f):
                 v[r["id"]] = r
         for f in sorted(glob.glob(os.path.join(ATT, "A137-night-shift-2", "results",
-                                               "resolve*.jsonl"))):
+                                               "emit_lp*.jsonl"))) +                 sorted(glob.glob(os.path.join(ATT, "A137-night-shift-2", "results",
+                                              "exact_reemit*.jsonl"))):
             for r in _jl(f):
                 if r.get("id"):
                     v[r["id"]] = r
@@ -210,9 +211,12 @@ def night_kills():
         for r in _jl(f):
             nid = r.get("id") or r.get("nid")
             v = str(r.get("verdict") or r.get("cert") or "")
+            res = str(r.get("result") or "")
             if nid and (v.upper().startswith(("CERTIFIED", "KILL", "DEAD"))
+                        or res.startswith("PASS")
                         or r.get("kills_converged") or r.get("emptied8")):
-                out.setdefault(nid, f"A137 night: {v or 'kill'} ({os.path.basename(f)})")
+                out.setdefault(nid, f"A137 night: {v or res or 'kill'} "
+                                    f"({os.path.basename(f)})")
     # A57's own tree rows: a node whose stored cert has since become a logic kill / PASS
     for f in sorted(glob.glob(os.path.join(ATT, "A57-shadow-trees", "results",
                                            "tree_k5_1*_interior_G1*.jsonl"))):
@@ -426,6 +430,19 @@ def finish(node):
     node["clip"], node["clip_note"] = _clip(node)
     node["t5"] = _t5(node)
     node["poses"], node["s_star"], node["is_packing"], node["prov"] = _near(node)
+    if node["t5"]["dead"] and not node.get("banner"):
+        t5 = node["t5"]
+        who = max(t5["pairs"], key=lambda p: p[2]) if t5["pairs"] else None
+        if who is not None and who[2] > 0.0:
+            node["banner"] = (f"KILLED — T5'''' : the certified cores of {who[0]} and {who[1]} "
+                              f"OVERLAP by {who[2]:.6f}, so those two squares can never be "
+                              f"interior-disjoint. Dead by geometry, no LP.")
+            node["leafkill"] = (f"T5'''' polygon core meets pin core: depth(K'({who[0]}), "
+                                f"K'({who[1]})) = {who[2]:.6f} > 0 at every admissible pose")
+        else:
+            node["banner"] = (f"KILLED — T5'''' : K' leaves the container by "
+                              f"{t5['excursion']:.6f}. Dead by geometry, no LP.")
+            node["leafkill"] = "T5'''' polygon core not contained in the container"
     node["family"] = _family(node)
     node["subtree_s"] = node.get("subtree_s") or subtree_cost(
         node["level"], node.get("kept8", 1.0), node.get("n_open_desc", 0))
@@ -549,7 +566,10 @@ def finish(node):
         lv.append("KILL LEAF: " + node["leafkill"])
     node["leaves"] = "  |  ".join(lv)
     node["provenance"] = (
-        f"A148 v4 page, generated {os.path.basename(__file__)} + gallery148.py + geo148.py. "
+        f"A148 v4 page, generated {os.path.basename(__file__)} + gallery148.py + geo148.py"
+        + (f"; campaign records READ AT {os.environ['A148_STAMP']} (A137 was still running and "
+           f"pauses at 07:00, so this page is the night's records AS THEY STOOD at that moment)"
+           if os.environ.get("A148_STAMP") else "") + ". "
         f"Region {node['region'].green.shape[0]}^2 grid x {node['region'].ntilt} tilts in "
         f"{node.get('region_s')} s. Sources: record {node['record']}; K' A132 polycore (certified "
         f"vertices); exact pin/axis cores A135; clip A131; lane A141; guard lines A144; subtree "

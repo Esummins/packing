@@ -124,6 +124,8 @@ def main():
                         if a.which == "k0v4" else
                         f"The A57 / A60 review gallery v4 ({len(summ)} nodes)")
     extra = ""
+    if a.which == "a57v4" and os.environ.get("A148_EXTRA"):
+        extra = os.environ["A148_EXTRA"] + "\n"
     if a.which == "k0v4":
         extra = ("**Population.**  A140's twelve converged-alive `k0_00` cells minus "
                  "`s3_far_BL389484_TR018470`, which A141's K' lane leaf killed on BL "

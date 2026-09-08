@@ -5296,3 +5296,68 @@ flush against that wall beside it - and on five of them the K' lane test leaves 
 NEAR-MISS (LANE <= 1 with M = 1: the conditioned square itself is the only other meeter).  Those two
 readings together are exactly the shape of the s3_far kill.  Full table, per-node "what to look for"
 and the review sheet: `docs/shadows/k0v4/README.md` and `docs/shadows/k0v4/review_k0v4.csv`.
+
+## Part V addendum - the A57 / A60 v4 set (A148 T2, records read 2026-09-08 06:05)
+
+**[docs/shadows/a57v4/](shadows/a57v4/README.md)** is the same three-panel v4 page on the surviving
+alive nodes of the two pin campaigns: the **top 40 A57 nodes and the top 20 A60 nodes** by A142's
+subtree cost, from the night's records AS THEY STOOD at 06:05 (A137 was still running and pauses at
+07:00, so the timestamp is on every page).
+
+**Population arithmetic.**  Base: A142's ranking (`population142.json`).  On top of it A148 removes
+every node killed SINCE A142 built that file - **1 777 ids** and their descendants (a geometric kill
+is inherited): 798 from A137's own night records (`emit_lp*`, `exact_reemit*`, `clipkills137`), 515
+from A57 tree rows now recorded KILL-BY-LOGIC / CERTIFIED, 173 certified dead by A145's and A137's
+exact-core re-solves (result PASS-V3 / PASS-FROZEN), 291 by A141's K' lane and slot-lane leaves.
+The frozen record is `attempts/A148-gallery-v4/results/population148_a57v4.json`.
+
+### TWO NEW GEOMETRIC KILLS, found by the drawing
+
+The pages carry the T5'''' leaf as a header verdict, and on two A60 nodes it FIRES:
+
+| node | pair | overlap depth of the two certified cores | sampled check |
+|---|---|---|---|
+| [`c0_Y0254`](shadows/a57v4/c0_Y0254.svg) | exact pin core at (0.5, 1.5) vs K'(B), B = [1.379514, 1.519271] x [2.078299, 2.218056] x [73.7398, 82.3719] | **+0.015346** | 0 of 10^5 poses in B give a square disjoint from the pinned square (best gap -0.0428) |
+| [`c0_Y0168`](shadows/a57v4/c0_Y0168.svg) | exact pin core at (0.5, 1.5) vs K'(B), B = [1.239757, 1.379514] x [2.357813, 2.497570] x [0, 14.2500] | **+0.002429** | 0 of 10^5 poses give a disjoint square (best gap -0.0029) |
+
+K'(B) (A132, certified vertex-wise) lies inside the conditioned square at EVERY pose of its box, and
+the exact pin core (A135, half-side 0.499999970 at a zero-width pin box) lies inside the pinned
+square at its single pose.  The two cores overlap with POSITIVE depth, so those two squares can
+never be interior-disjoint: **the node hypothesis is unsatisfiable and the node is dead by geometry,
+with no LP at all**.  Both were still ALIVE in the population after every kill list above, so this
+is the polygon-core-meets-pin-core leaf firing on A60 for the first time (A137's fold-in ran it on
+A57 only - 4 kills there, 0 on A60, where only the pin-clip leaf had been applied).  The overlap is
+re-confirmed by the independent edge-crossing predicate in `verify148.py`, and the records are
+`attempts/A148-gallery-v4/results/t5_kills_a148.jsonl`.  **Certificates are NOT emitted here** (this
+attempt is drawing and geometry only); each needs the two-core-overlap clause the T5'''' schema
+already has on the A57 side.
+
+### One near-kill worth a row of its own
+
+`c0_Y0878` has a guard line (A144) at `h y = 0.992928932` (a pin core's top edge) whose **chord sum
+is 3.868359 against s0 = 3.877084 - rhs = 0.008725**.  Three pins contribute a full unit chord each
+and the conditioned square 0.868 more, so the five remaining squares have **less than 0.009 of that
+line between them**.  Any one of them crossing it kills the node; it is the tightest guard row in
+either campaign and the closest thing to Y0147's four-chord line found so far.
+
+### What the set says as a whole
+
+* The **free centre region is small** on these nodes, as expected with five pins and a conditioned
+  square: green area 0.004 to 2.213, median 1.145 (against 4.27-5.01 on the k0 cells).  The extreme
+  is `k5_11_interior_Y0130`, where the certified-free set is **0.004** - four thousandths of a unit
+  square - though the undecided band around it is still 0.96, which is what keeps the disk bound
+  loose there.
+* The **disk bound** gives n_max in {7, 9, 10, 11} against budgets of 4-5, so it does not kill any
+  node in this set; it is now one printed number per page and it is the number that will fall first
+  when a node is split.  Tightening it means shrinking the UNDECIDED band, i.e. a finer grid or an
+  interval (rather than sampled) tilt sweep - the cheapest next step this gallery suggests.
+* **Pockets bite everywhere**: every node has at least two clearances below 1, and the narrowest
+  are pin-core-to-K' pinches of 0.05-0.13 (`c0_Y0076` P2-H 0.052, `c0_Y0952` P4-H 0.062,
+  `c0_Y0169` P2-H 0.069, `c0_Y1033` P4-H 0.079).  These are the Y0036-style pinches the PI read by
+  eye, now measured and printed on every page.
+* A141's K' lane test has **no row at all** for most of these 60 nodes (its slot run covered 145
+  A57 nodes, few of which survive in the top 40), so most lane tags read `n/a`.  That is the gap
+  the tags are there to show.
+
+**Verification** (`code/verify148.py`, the second implementation - edge crossing and strict
+point-in-polygon, no separating axis anywhere in it): 60 pages; **12 000** points drawn inside GREEN cells and **12 000** inside BLOCKED cells (200 per page, 360 tilts each) - every green point admits a feasible tilt and no blocked point admits any; **20 923** poses checking K'(B) inside the conditioned square and **9 900** checking each exact pin core inside its pinned square; **1 710** pocket separations; **1 127** red-dashed columns plus **2 728** controls; **180** guard rows x 10^4 chord draws per box = **10 830 000**.  **0 failures**, and 0 hits in the generator's own 10^4 + 10^4 per-page region sampling (1 200 000 draws over the set).

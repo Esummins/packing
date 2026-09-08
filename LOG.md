@@ -6200,3 +6200,41 @@ cores and the extremal-tilt schematics).
   read-only on every campaign and on A112/A119/A120/A126/A133 and on `lean/`; frozen verifiers byte-identical;
   no sentinel or pidfile deleted. `attempts/A96-a57-parametric/results/a120_closures.jsonl` at rev 3
   (append-only, last row per id wins): **15 CLOSED, 9 OPEN, 11 not run** of the 35 in-`N` targets.
+
+## 2026-09-08 - A148-gallery-v4 (Opus engineer) - T2 done: the A57/A60 v4 set, and TWO NEW GEOMETRIC KILLS
+- `docs/shadows/a57v4/`: the same three-panel v4 page on the **top 40 surviving A57 nodes and the
+  top 20 surviving A60 nodes** by A142's subtree cost, from the night's records as they stood at
+  **06:05** (A137 still running, pauses at 07:00; the timestamp is printed on every page).
+- Population: A142's ranking minus everything killed since it was built - **1 777 ids** and their
+  descendants (798 A137 night records, 515 A57 tree rows now KILL-BY-LOGIC/CERTIFIED, 173 A145/A137
+  exact-core re-solves PASS-V3/PASS-FROZEN, 291 A141 K' lane and slot-lane leaves).  Frozen in
+  `results/population148_a57v4.json`.
+- **TWO NEW KILLS the drawing found.**  On `c0_Y0254` and `c0_Y0168` (A60, both still alive after
+  every kill list above) the T5'''' verdict FIRES: the exact pin core at (0.5, 1.5) and the
+  conditioned square's polygon core K'(B) OVERLAP, by **+0.015346** and **+0.002429**.  K'(B) is
+  inside the conditioned square at every pose of its box and the pin core is inside the pinned
+  square at its single pose, so those two squares can never be interior-disjoint: the node
+  hypothesis is unsatisfiable and the node is dead by geometry with no LP.  Sampled check: **0 of
+  10^5** poses in each box give a square disjoint from the pinned one (best gap -0.0428, -0.0029).
+  Re-confirmed by verify148's independent edge-crossing predicate.  Records:
+  `results/t5_kills_a148.jsonl`; both pages carry a KILLED banner.  Certificates NOT emitted (this
+  attempt is drawing and geometry only) - each needs the two-core-overlap clause the T5'''' schema
+  already has on the A57 side.  A137's fold-in ran that leaf on A57 only (4 kills); A60 had had
+  only the pin-clip leaf, which is why these two survived.
+- **One near-kill**: `c0_Y0878` has a guard line at h y = 0.992928932 (a pin core's top edge) with
+  **chord sum 3.868359 vs s0 = 3.877084, rhs 0.008725** - three pins contribute a full unit chord
+  each and H another 0.868, leaving the five remaining squares less than 0.009 of that line.  The
+  tightest guard row in either campaign.
+- Free centre region on these nodes: green 0.004 to 2.213, median 1.145 (k0's are 4.27-5.01); the
+  extreme is `k5_11_interior_Y0130` at **0.004**.  The disk bound gives n_max in {7, 9, 10, 11}
+  against budgets 4-5, so it kills nothing here; tightening it means shrinking the UNDECIDED band
+  (finer grid or an interval tilt sweep) - the cheapest next step this gallery points at.
+- Pockets bite everywhere: every node has >= 2 clearances below 1, narrowest are pin-core-to-K'
+  pinches of 0.05-0.13 (`c0_Y0076` 0.052, `c0_Y0952` 0.062, `c0_Y0169` 0.069, `c0_Y1033` 0.079) -
+  the Y0036-style pinch, now measured on every page.
+- Verification: 60 pages, **0 failures** - 12 000 green + 12 000 blocked points at 360 tilts,
+  20 923 K' containment poses, 9 900 pin-core poses, 1 710 pockets, 1 127 red-dashed columns +
+  2 728 controls, 180 guard rows x 10^4 draws = 10 830 000; plus 1 200 000 generator draws, 0 hits.
+- Files: `docs/shadows/a57v4/` (60 SVG + README.md + review_a57v4.csv), `docs/shadows.md` Part V
+  addendum, `attempts/A148-gallery-v4/results/{gallery148_a57v4,verify148_a57v4,population148_a57v4,
+  t5_kills_a148,t5_kill_check_a60}.json(l)`.
