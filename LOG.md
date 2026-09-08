@@ -5729,3 +5729,42 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   either campaign touched. Population arithmetic updated: **465 → 448 surviving** (323 alive + 125 fail;
   L1 355, L2 89, L3 4). None of the 17 has a still-open descendant and none is among the 40 drawn pages, so no
   gallery page is stale.
+
+## 2026-09-07 — A139: (R4) closed — `localDead_s07_t` and `localDead_s02_t` are theorems
+
+- `lean/PackingCertMathlib/PackingCertMathlib/LocalCertS07T.lean` (5.79 MB) and `LocalCertS02T.lean`
+  (43.66 MB) carry two local certificates as `LocalCertT3.Cert` data and end in
+  `localDead_s07_t : LocalDead s07Boxes s07Pins 3.877084` and `localDead_s02_t` — `Ls`/`Ps` read off the
+  certificate's own `CMeta`, from `certOk` and `LocalCert.checkLeaf` by `native_decide` and nothing else.
+  `certCover_s07` / `certCover_s02` INSTANTIATE the obligation A126 opened and A138 closed abstractly.
+  Rosters: `[propext, Classical.choice, Quot.sound]` + the replays' own `native_decide` axioms +
+  `check_3_82`'s through `lb_382`; no `sorry`, `Local.sat_selection` unused
+  (`scratch/A139Axioms.lean`, 180 s).
+- **(R4) was NOT the data plumbing A138 specified.** `LocalCertT3.treeOk` re-runs the certificate's
+  selection EXCLUSIONS with `LocalCertT2.gapHi`, whose `w`-bound `wLoQ` is interval arithmetic on
+  `cosRel`/`sinRel` and can fall below `1`; A133's generator excludes with `a133lib.w_range_cell`, the
+  EXACT range of `w` over the cell product, which is `≥ 1` always. On A134's certificates the difference is
+  fatal: **246/246 of S07's `imp_sel` closures, 38/426 of its branch exclusions and 44/314 of S02's are not
+  reproducible in Lean** (`code/diag_gap.py`) — no re-encoding of them can pass `certOk`. A138's T2 audit
+  checked the row builder, the box walk and the envelope keys, and never checked this.
+- **The fix: re-emit with the Lean-faithful exclusion test** (`code/regen_t3.py` — A133's search with one
+  overridden method; LP, envelopes, rounding and A134's `pcert` unchanged; bodies byte-for-byte A119's, so
+  the statement is unchanged). Both searches close with ZERO unresolved cells: S07 2 140 → 2 923 leaves
+  (+37 %, 23.4 s), S02 16 406 → 16 732 (+2 %, 185 s), envelope tables the same size, Bernstein depth still
+  0. The branches the coarser enclosure cannot exclude are killed by the LP instead, as infeasibility rays
+  (S07 768 → 1 484): the relaxation carries a certified PLANE below `w`, sharper than the constant `wLoQ`.
+- Two further re-encodings, both invisible to the statement: A133's branch-free singleton fixes become
+  `sel1 σ · (impx i j [σ])` at the terminal that needs them (721 / 13 199); and each PIN-PIN selection is
+  emitted with the mirror `selectionOk` demands and the generator drops as a duplicate —
+  `gapHi (pb.swap) k e = gapHi pb k (−e)` exactly, the mirror builds the same rows, and a pin-pin enclosure
+  is CELL-INDEPENDENT, so the mirror shares the recorded branch's subtree (without that sharing S02's four
+  pin-pin branch pairs multiply the tree text by 2⁴).
+- Walls: `lake build` of both modules together **6 712 s** at BelowNormal (S07 571 s, S02 6 707 s in parallel,
+  1.8 GB steady), oleans 39.6 MB and 186.1 MB. `encode_t3.py` verifies in Python, before writing a line,
+  everything the Lean check re-runs (`layoutOk`, `rootOk`, `splitOk`, `selectionOk` at every `impx`,
+  `gapHi < 0` at every `impsel`, `L.box == cur`, every envelope key, and `checkLeaf` exactly on ALL leaves).
+- **Open, and the better buy: give `LocalCertT2` the exact `w` range as a decidable enclosure** (A133's
+  `w_range`: `w(|u|)` rises to `√2 − 1` and falls after — one variable, the polynomial machinery is already
+  there). Then A134's certificates replay unchanged and every future one is cheaper; the alternative is
+  four lines in the generator and +37 % leaves. Unchanged from A138: `node_dead_of_yes_no` still needs the
+  per-node YES bridge and A120/A136's NO certificates with the ZONE ⊆ BOX guard.

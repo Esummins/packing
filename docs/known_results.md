@@ -136,6 +136,40 @@ file is the record of truth for claims, LOG.md is the record of events.
     (`cellLo` / `cellHi` compute them, `splitOk` still checks the split) — 88 000 rational literals removed
     from the S07 data file, and the elaborator is the wall; and `certOk` is `native_decide`-able but kernel
     `decide` gets STUCK on it, so (R4) must budget `native_decide`.
+16b''''. LEAN  ADDENDUM to 16b''' (A139, 2026-09-07): **(R4) is closed and `localDead_s07_t` /
+    `localDead_s02_t` are THEOREMS** — `LocalDead Ls Ps 3.877084` for the two neighbourhoods, with `Ls` and
+    `Ps` read off the certificate's own `CMeta`, from `certOk` and `LocalCert.checkLeaf` by `native_decide`
+    and nothing else (`LocalCertS07T.lean` 5.79 MB, `LocalCertS02T.lean` 43.66 MB; rosters `[propext,
+    Classical.choice, Quot.sound]` + the replays' own `native_decide` axioms + `check_3_82`'s through
+    `lb_382`; no `sorry`, `Local.sat_selection` unused). `certCover_s07` / `certCover_s02` INSTANTIATE the
+    obligation A126 opened and A138 closed in the abstract. **But (R4) was not the data plumbing A138
+    specified.** `LocalCertT3.treeOk` re-runs the certificate's selection EXCLUSIONS with
+    `LocalCertT2.gapHi`, whose support-width bound `wLoQ` is interval arithmetic on `cosRel`/`sinRel` and
+    can fall below `1`, while A133's generator excludes with `a133lib.w_range_cell`, the EXACT range of
+    `w = |cos Δ| + |sin Δ|` over the cell product (which is `≥ 1` always). The two differ by up to 0.62 in
+    the threshold, and on A134's certificates that is fatal: **246/246 of S07's `imp_sel` closures and
+    38/426 of its branch exclusions, and 44/314 of S02's branch exclusions, are not reproducible in Lean**
+    (`attempts/A139-r4-replay/code/diag_gap.py`), so no re-encoding of them can pass `certOk`. A139
+    therefore RE-EMITS with the exclusion test computed the Lean way (`code/regen_t3.py`: A133's search
+    with one overridden method; LP, envelopes, rounding and A134's `pcert` unchanged; bodies byte-for-byte
+    A119's, so the neighbourhood and hence the STATEMENT is unchanged). Walls: re-emission 23.4 s / 185 s,
+    re-encoding 5.5 s / 44 s, `lake build` of both modules together **6 712 s** at BelowNormal (S07 571 s,
+    S02 6 707 s in parallel, 1.8 GB), axiom audit 180 s. The price is small and the search
+    still closes with ZERO unresolved cells: S07 2 140 → 2 923 leaves (+37 %, 23.4 s), S02 16 406 → 16 732
+    (+2 %, 185 s), envelope tables the same size, Bernstein depth still 0 — the branches the coarser
+    enclosure cannot exclude are killed by the LP instead, as infeasibility rays (768 → 1 484 for S07),
+    because the relaxation carries a certified PLANE below `w`, sharper than the constant `wLoQ`. Two
+    further re-encodings, both invisible to the statement: A133 fixes a selection with NO branch node when
+    the census leaves one possibility, and each such fix becomes `sel1 σ · (impx i j [σ])` at the terminal
+    that needs it (721 / 13 199 of them); and a PIN-PIN pair's four swapped selections, which the generator
+    drops as duplicates and `selectionOk` does not, are emitted with the recorded ones —
+    `gapHi (pb.swap) k e = gapHi pb k (−e)` exactly, the mirror builds the same rows, and a pin-pin
+    enclosure is CELL-INDEPENDENT, so the mirror shares the recorded branch's subtree (without the sharing
+    S02's four pin-pin branch pairs would have multiplied the tree text by 2⁴). **The permanent fix, and
+    the better buy, is to give `LocalCertT2` the exact `w` range as a decidable enclosure** (A133's
+    `w_range`: `w(|u|)` rises to `√2 − 1` and falls after — one variable, and the polynomial machinery is
+    already there); then A134's certificates replay unchanged and every future one is cheaper. The
+    alternative is four lines in the generator and +37 % leaves.
 16a. CAVEAT (A88, 2026-09-03): A31's contact-type menu omits same-class corner-corner point kisses (Trump
     has one); planarity (L4) is FALSE on the ACTIVE contact graph when squares kiss at a point. Counts over
     the kiss-free SUPPORT graph stand; no proof step may assume planarity of the active graph. The
