@@ -309,6 +309,8 @@ has an unlocked intruder — the drain theorem; the hook/chain formulas are one-
 
 ---
 
+**A143 (2026-09-07, corner-first root, `attempts/A143-corner-first-k0`):** canonicalising on the BL corner meeter instead of an interior square is a sound independent cover of the same K0-BLOCKED hypothesis (216 level-1 cells, /2 by the BL stabiliser, over the K0-WIDEN zone; proved plus 22,078 sampled poses with 0 misses, and 12,000 realised BL 2-crowds with 0 violations in the doubly-met form) but is not a cheaper tree — its single-intruder level-1 geometry kills 0 of 216 (the K′ lane leaf cannot fire when the conditioned square is itself a meeter of the corner tested, with A118 or with A141's polygon cores), its doubly-met form empties 81.9 % of 11,772 pair cells for 90 CPU-s but shows η ≈ −0.08 at budget 9 against A115's interior level-1 median of −0.729 at the same LP time, and Trump's own lineage in it can never die by K0-FREE (Δ_λẑ has ≥ 2 widened meeters at every corner; descended 3 levels, no kill), so its terminal mechanism is the (D) tube leaf — while two of the twelve converged-alive interior cells (`l2_p74_001`, `s3_far_BL389484_TR018470`) have no surviving BL pair in their LP support at all, which is the corner-crowd cut this row wants.
+
 ## 5. Lean / TCB
 
 TopLevel roster: K0-O1 + chain replays + ShellKill (Crowd, CrowdZone, Slide, PinnedSlide, Ceil, Composition);

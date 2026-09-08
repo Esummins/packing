@@ -5768,3 +5768,99 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   there). Then A134's certificates replay unchanged and every future one is cheaper; the alternative is
   four lines in the generator and +37 % leaves. Unchanged from A138: `node_dead_of_yes_no` still needs the
   per-node YES bridge and A120/A136's NO certificates with the ZONE ⊆ BOX guard.
+
+## A143 — the corner-first k0_00 root (Opus engineer, 2026-09-07 evening, cap 2 CPU-h)
+
+**Question.** Does canonicalising the k0_00 tree on the square that meets the BL corner box — rather
+than on an interior-zone square, as A24/A38/A99/A115 do — buy a cheaper tree? Measured at level 1
+against the interior root's 22 of 216, in the single-intruder form and in the PI's doubly-met form.
+
+**Answer: the cover is sound and cheap to state, the geometry is worth 82 % in the doubly-met form
+and nothing in the single form, and the LP kills the idea in both.**
+
+*The cover.* Under K0-BLOCKED the BL box is met, so some square has a pose in `R_BL`; admissibility
+plus meeting confine its centre to `[1/2, a_w + √2/2]² = [0.5, 1.7326162]²` with the mandatory
+K0-WIDEN pad `a_w = 1 + (λ_max−1)(1+1/√2) = 1.02551007`. Level 1 = a 6×6 position grid × 6 tilt
+windows of 15° = **216 cells**, **126** after quotienting by the BL stabiliser `{id, transpose}`
+(a `/2`, against the interior root's already-spent `/8`). Confirmed by 22,078 drawn admissible
+BL-meeting poses, **0 misses**, and in the pair form by 12,000 drawn, realised, interior-disjoint BL
+2-crowds, **0 violations** of the geometry prunes.
+
+*A correction to the brief's premise.* Both the brief and the extension assume "k0 means no simple
+square, so the BL intruder is tilted, θ ∈ (δ_simple, 90°−δ_simple)". **There is no δ_simple.** Lean's
+`Skeleton.lean` `OccupiesSlot` is exact — axis-aligned AND exactly on the slot centre — so
+`skeleton = ∅` removes from `R_BL` only the pose `(1/2, 1/2, 0°)` and its 90° twin. `M_{k0_00}` is
+the pin-free monotone hypothesis, true of every packing, which is why the whole k0_00 route is a
+∀-packings statement; a positive-measure tilt exclusion would need the exactness bridge that
+`k0_route.md` §3 deliberately does not consume. **The cover must run over the full tilt range**, and
+the k0 hypothesis buys no cell reduction at all.
+
+*Geometry, single-intruder root: 0 of 216.* The container clip (walls as pins, A131's
+per-tilt-sub-bin mechanism) empties no cell — and provably cannot on a single square, since a
+sub-bin dies only if `x1 < h_min(sub) ≤ √2/2` or `x0 > a_w + h_max(sub) ≥ 1.5` and no cell can meet
+the first in one sub-bin and the second in another; it does shrink 84 of the 216 centre boxes and
+delete 2 of 8 tilt sub-bins in 22 cells (a free level-2 narrowing). A132's certified polygon core
+never leaves the container (min wall margin 0.0888; `K′/K(a)` area ratio 1.18–1.60, median 1.32 —
+the largest measured in the lab, because these cells are wide in tilt). The K′ lane leaf kills
+nothing on any of the four corners, and **cannot**: at BL the conditioned square is itself a meeter,
+so `M = 1` and the K0-FREE threshold `LANE + M ≤ 1` needs `LANE(BL) = 0`, while at BR/TR/TL the
+hypothesis is entirely localised at BL and an explicit disjoint witness pair realises `LANE ≥ 2` on
+214/216/212 cells. Upgrading to A141's polygon-core lane — the upgrade that killed 26 further
+level-1 cells of the *interior* tree — gives 0 kills on 27 cells (16 near-misses at BL). **The lane
+leaf is a deep-node weapon on this tree: it can only fire once conditioned squares sit at more than
+one corner.**
+
+*Geometry, doubly-met root: 9,638 of 11,772 = 81.9 %, for 90 CPU-s.* 23,436 unordered pairs of
+level-1 cells, 11,772 canonical under the transpose; killed by three exact prunes — **7,919** by max
+centre distance < 1 (two interior-disjoint unit squares have centre distance ≥ 1, since any
+separating normal gives `|d·n| ≥ h₁(n)+h₂(n) ≥ 1`), **1,313** by `K′(A)` meeting `K′(B)` (a (C)
+leaf: every realisation of A overlaps every realisation of B), **406** by A131's per-tilt-sub-bin
+refinement of that test — the one place in A143 where sub-bin clipping produces an outright kill.
+2,134 survive. The lane leaf again kills nothing (BL has `M = 2`, so it is structurally out of
+reach; 1,322 tested).
+
+*The LP settles it.* With A135's certified EXACT axis cores in the hypothesis (a square at the box's
+own tilt, so the FROZEN `verify_case.py`, sha256 `521cb01f…`, needs no change) and a K′ audit
+column, at a 240 s cap: single-intruder root `η = −0.0442, −0.6328, −0.0000` (budget 10);
+doubly-met root `η = −0.0826, −0.0769` (budget 9). Against A115's own interior level-1 re-solves at
+the same median LP wall of 286 s (`src = A38-l1`, n = 89): **median η = −0.729, 20 % at ≤ −1, 14
+certified dead**. So the corner-first cells sit in the interior root's worst quartile, and — the
+finding that matters — **a second conditioned square at the SAME corner buys essentially no slack
+for a whole unit of budget**, so the 82 % geometric cut of the pair root does not convert into LP
+kills. Price: 3,800–8,900 CPU-h (single root, decision at depth 3 by the A38/A85 −0.5-per-level law)
+and 8,000–18,800 (pair root, depth 2), against the interior tree's 12,000. The one scenario in which
+the pair root would have been a 5–12× cut — deciding at level 1 on its 2,134 survivors — is measured
+and rejected.
+
+*The PI's Trump prediction, resolved.* On the UNWIDENED box every Trump image is K0-FREE at three
+corners and doubly met at exactly one: `g0` has BL 1, BR 1, TR 1, **TL 2** — so the PI's
+identification of trump5's single non-simple corner is **confirmed**, and after the D4 reduction it
+is BL for images `g2` and `g6`, at the level-1 pair cell **{(0,4,0), (5,0,3)}** (the axis-aligned
+NON-slot meeter at (0.5, 1.34453, 0°) with the 49.818° meeter at (1.53629, 0.70461)). Two
+corrections: (i) K0-WIDEN's pad, which the window makes mandatory, pulls in the flush neighbours and
+turns the canary into **5 single cells and 9 pair cells**, not one — the "one deep lineage" is a
+property of the unwidened geometry only; (ii) **that lineage can never die by K0-FREE, at any
+depth.** Descended three levels (geometry only): `P1`/`P2` never fire, BR/TR/TL stay `LANE ≥ 2`, BL
+has `M = 2`. The reason is a proof, not a budget — `Δ_λ ẑ` is a genuine 11-family satisfying the
+node's hypothesis with ≥ 2 widened meeters at every corner, so `LANE(c) + M(c) ≥ 2` forever. **The
+terminal mechanism of the Trump lineage is the (D) landing plus the scale-ray tube (K0-O3), exactly
+as in the interior tree; the corner-first canonicalisation only relocates that obligation (5 single
+/ 9 pair level-1 cells instead of A38's 3).** At depth 3 the node does reach `LANE(BL) = 0`, i.e. it
+forces exactly two BL meeters — a tightening, not a kill.
+
+*Composition.* `notes/composition.md` states the two-cover intersection as three rules (product node
+at budget `11 − |X| − |Y|`; a cell dies if every compatible cell of the other cover is dead; and a
+support cut needing no new node). Measured on A115 T6's twelve converged-alive interior cells: each
+has 1–20 support placements meeting the widened BL box in 1–8 corner-first cells; none has a meeter
+in a dead corner-first cell (there are none), but **`l2_p74_001` (one BL meeter in its whole
+support) and `s3_far_BL389484_TR018470` have NO surviving BL PAIR at all** — their LP optima cannot
+supply a K0-BLOCKED BL crowd, which is the dual-guided cut the k0 budget row has been asking for.
+
+*Cost and hygiene.* ≈ 1.0 CPU-h of the 2 CPU-h cap (0.85 exact geometry + five 240 s LP nodes at
+~275 CPU-s each); ≤ 2 BLAS-pinned BelowNormal processes for the LP, ≤ 16 python on the box;
+read-only on every campaign and attempt (A38/A85/A99/A115/A118/A131/A132/A135/A140/A141 imported,
+none written); the frozen `verify_case.py` copied byte-identical; new files only. Drawings in A140's
+format: `figs/cover143_single.svg` (216 cells by verdict, Trump cells hatched, the `x = y` mirror
+drawn), `figs/cover143_pairs.svg` (36 tilt-blocks × a 36×36 verdict matrix, Trump pair cells ringed),
+`figs/pair_survivors.svg` (the Trump pair cell + three sampled survivors, both H's with all three
+cores and the extremal-tilt schematics).
