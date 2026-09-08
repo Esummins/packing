@@ -40,3 +40,14 @@ attempts/A120-no-side-runner/certs/*.witnesses.json
 attempts/A125-s33-local-cert/certs/S33_k6_07_r0.20_rho10.cert.json.gz
 attempts/A125-s33-local-cert/certs/S33_k6_07_r0.05_rho20.cert.json.gz
 attempts/A125-s33-local-cert/certs/S38_k6_21_r0.10_rho10.cert.json.gz
+
+# A136: read-only copies of A57 campaign node jsons, the NO-child LP dumps and the per-node box
+# sidecars (38 MB) are regenerable from code/run136.py + the campaign; certify.py's per-round LP
+# dumps and witness files (38 MB) likewise.  The node RECORDS (rec__*.json), the CERTIFICATES and
+# results/closures136.jsonl -- the closure evidence -- are committed.
+attempts/A136-a120-resume/results/nodes/*.src.json
+attempts/A136-a120-resume/results/nodes/*_a136__*.json
+attempts/A136-a120-resume/results/nodes/*.a136box.json
+attempts/A136-a120-resume/certs/*.resolve*.json
+attempts/A136-a120-resume/certs/*.witnesses.json
+attempts/A136-a120-resume/results/*.jsonl.pass1

@@ -6136,3 +6136,67 @@ cores and the extremal-tilt schematics).
 - 3.66 CPU-h of a 4 CPU-h cap, 2 BLAS-pinned BelowNormal processes; A57's PAUSE left in place and untouched
   (own scoped sentinel); read-only on every campaign and attempt. Figure:
   `attempts/A144-guard-lines/figs/k5_11_interior_Y0147_guardline.svg`.
+
+## 2026-09-07/08 — A136-a120-resume (Opus engineer) — done-success: **F-COVER is fixed and A120's cover is a tautology on the written rationals; 4 CLOSED nodes → 15**
+
+- **T1 — the fix, and its positive control: 22 / 22.** `attempts/A136-a120-resume/code/a136lib.py`
+  post-processes the dict `caselp.make_certificate` returns, BEFORE it is written: every NO-zone bound is
+  re-derived from the node's own EXACT `hyp.nofams` and rounded **inward** (`ceil + 1` / `floor − 1` at the
+  same `TDEN = 2²⁴` / `XDEN = 10⁹`, A112's own helpers imported not re-typed), the mapped A119 box the YES
+  side names is written into the file as `hypotheses.nofam_boxes`, the zone is intersected with it, and the
+  decidable predicate `ZONE ⊆ BOX` is checked on the WRITTEN rationals and RAISES on failure. All 22 of
+  A120's PASSing certificates re-written: **22 / 22 `ZONE ⊆ BOX`**, and **22 / 22 re-certified PASS** under
+  the frozen `verify_case.py` (sha `521cb01f…`, checked byte-identical). Change per bound **≤ 8.88·10⁻⁸**
+  against the exact zone, **1.788·10⁻⁷** against A120's written one (outward and inward straddle the exact
+  value — hence larger than the brief's 1.2·10⁻⁷).
+- **The replay costs 997 s where the emission cost 16 462 s** (16×; min 3 s, p50 42 s, max 118 s). The
+  freeze discipline pays: a kill is reproduced by REPLAYING its certificate, which is also what Lean does.
+- **The finding that took two passes, and generalises past this attempt.** Rounding the CLAMPED bound inward
+  like every other bound made **every `NO3` certificate FAIL (7 / 7)** while every `NO0`/`NO1`/`NO2` PASSed
+  (15 / 15). `NO3` is `BR(0,1)`, the only box whose zone clamps to `[1/2, s − 1/2]`. The verifier's witnesses
+  are all holes at `t ∈ [0, 2⁻¹⁸]` with the centre in a band ending exactly at the wall `s₀ − 1/2 =
+  844271/250000` and mass `393593/500000 ≈ 0.787 < 1`: shaving `10⁻⁹` off the clamp took that band out of the
+  exemption, the measure has no mass to spare at the wall, and at depth 56 the smallest cell (2.8·10⁻⁶) still
+  straddles the new bound. **A bound that came from an exact geometric fact (a wall, a clamp, a symmetry axis)
+  must be written as that fact, not rounded** — `1/2` and `s₀ − 1/2` are exact rationals. With the clamp
+  written exactly all 7 re-certify. (`notes/fcover136.md` §3a.)
+- **One deliberate departure from the brief, on soundness grounds:** the brief said "the YES box bounds
+  outward"; the box is written **inward** instead. Shrinking `BOX_i` STRENGTHENS the YES hypothesis
+  ("some square's pose in `BOX_i`") so A116/A119's kill survives; widening it would admit poses outside
+  A119's certified box into the YES side and just move the 10⁻⁷ defect to where nothing checks it, and would
+  threaten A120's A2/A3 pose-disjointness. Price: one trivial Lean obligation (`LocalDead` antitone in the box
+  list — `Box.mem` monotonicity).
+- **T2 — the resume. 4 CLOSED → 15 CLOSED; 11 of 35 targets with a record → 24.** Two BelowNormal BLAS-pinned
+  processes, disjoint by node, under **this attempt's own scoped sentinel** (`pausegate.paused(base=…)`,
+  PAUSED.md v2 §7a); A123's `attempts/A57-shadow-trees/PAUSE` was left exactly where it is and every driver
+  calling the bare `paused()` stayed paused. Both shards stopped on their own CPU cap, between items.
+  New closures — L1: `Y0303`, `Y1075`; L2: `Y0036_D03`, `Y0054_D01`, `Y0217_D02`, `Y0414_D07`, `Y0636_D06`,
+  `Y0978_D04`; L3: `Y0036_D07_D00`, `Y0036_D07_D04`, `Y0036_D07_D05`. A120's four (`Y0230`, `Y0637`,
+  `Y0709`, `Y0997`) were **re-earned, not inherited** — all 16 of their certificates are T1
+  re-certifications.
+- **The certifier is no longer the binding constraint; the WALL is.** 60 certification attempts at
+  `--rounds 6`, wall 2 600 s, `--time_limit 420`: **54 PASS, 6 CAP, 0 FAIL.** PASS wall min 2 s, p50 452 s,
+  p90 1 828 s, max 2 314 s — below the wall, so the wall censored nothing it could have decided. A120's datum
+  ("only 19 of 31 clearly-dead children certified; certification is the constraint") does not survive rounds 6.
+  Of 96 children with a verdict: **75 DEAD-CERT, 15 genuine survivors, 6 CAP** (the whole remaining shortfall,
+  each one more wall away from a verdict).
+- **Cost of a closure, measured.** 13 new targets for 12.5 CPU-h → 9 closed at a mean **2 932 s** (745 s at
+  level 3 to 5 510 s at level 2); level 3 is the cheapest hour on the board (3 nodes for 5 025 s). The 12
+  re-tried open children cost 6.3 CPU-h for 2 further closures.
+- **The negative:** `Y1128` burned 1 396 s of LP and **zero** certifier time — all four NO children converge at
+  exactly τ = budget. With A120's `Y0345`, `Y1116`, `Y1099`, `Y0973/NO2` that is **15 genuine survivors in 5
+  nodes**, which no certifier budget touches; they need a different cover (finer `N`, or A131's PIN-CLIP).
+- **T3 — the Lean hand-off.** `results/closures136.jsonl`: 15 rows, one per closed node, each a filled-in
+  instantiation of `LocalCompose.y0230_dead` — `hD` (citing **A133's t-certificate** `local-cert-t-v1`
+  sha `a8d95682490e…` for `S02_k5_11_r0.20_rho10`, same `L`/`P`, sharper than A119's), `hdisj`/`hsep`/`hpins`
+  (A120's A2 / A3 / A1+A4 verdicts), and `hno` = the 4 certificates with their SHA-256, the frozen verifier's
+  SHA-256, `zone_sub_box: true`, the written zone and box, and the **generated `native_decide` fragment**
+  (`results/leanfrags/*.leanfrag`, 60 of them, via `lean/gen_case_lean.py`, `lean/` untouched).
+- Scope: everything is `s₀`-only (`verify_case.py` is fixed-side, A116's `N` is anchored at `s₀`). A125's `N`
+  is `k6` (`S33`/`S38`, consumer `c0_Y0335`) and is not in this `k5_11` queue. `verify_param_v2` could not be
+  used for T1 — it consumes `parametric-kill-certificate-v1`, A120's certificates are
+  `case-measure-certificate-v1`.
+- 19.9 CPU-h of a 20 CPU-h cap; ≤ 2 processes, BelowNormal, BLAS-pinned, ≤ 10 python processes on the box;
+  read-only on every campaign and on A112/A119/A120/A126/A133 and on `lean/`; frozen verifiers byte-identical;
+  no sentinel or pidfile deleted. `attempts/A96-a57-parametric/results/a120_closures.jsonl` at rev 3
+  (append-only, last row per id wins): **15 CLOSED, 9 OPEN, 11 not run** of the 35 in-`N` targets.
