@@ -111,8 +111,9 @@ def main():
         rows.append(
             f"| [`{r['id']}`]({r['id']}.svg) | {r['level']} | {r['s_star']:.6f} | "
             f"{r['family']} | {r['grid']['area_green']:.3f} | {r['grid']['area_open']:.3f} | "
-            f"**{r['disk']['n_max']}** ({r['budget']}) | `{r['pockets'][0]['to']}` "
-            f"{r['pockets'][0]['gap']:.4f} | {len(nn)} | "
+            f"**{r['disk']['n_max']}** ({r['budget']}) | "
+            + (f"`{r['pockets'][0]['to']}` {r['pockets'][0]['gap']:.4f}" if r["pockets"]
+               else "none") + f" | {len(nn)} | "
             + (", ".join(f"`{t['cell']}` {t['verdict']}" for t in hot) or "—") + " | "
             + (f"{g.get('rhs', 0):.4f} (`{g.get('tag')}`)" if g else "n/a") + " | "
             + ", ".join(leaves) + " |")

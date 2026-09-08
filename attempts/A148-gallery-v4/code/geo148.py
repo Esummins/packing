@@ -265,12 +265,23 @@ def disk_bound(reg):
 
 
 # ===================================================================== pockets
-def pockets(obstacles, names, s, walls=True):
-    """every obstacle-to-obstacle and obstacle-to-wall clearance, narrowest first."""
-    out = []
+FLUSH = 0.05
+
+
+def pockets(obstacles, names, s, walls=True, flush=FLUSH):
+    """Every obstacle-to-obstacle and obstacle-to-wall clearance, narrowest first.
+
+    A clearance below `flush` is NOT a pocket: it is two objects (or an object and a wall) in
+    contact.  Every A57 pin touches two walls and its lattice neighbours, so those five squares
+    would otherwise contribute ~20 uninformative 0.007-0.014 entries and bury the real pockets.
+    Contacts are counted in `n_flush` (carried on every returned row) and dropped from the list."""
+    out, nflush = [], 0
     for i in range(len(obstacles)):
         for j in range(i + 1, len(obstacles)):
             g = poly_dist(obstacles[i], obstacles[j])
+            if g < flush:
+                nflush += 1
+                continue
             a, b = closest_pair(obstacles[i], obstacles[j])
             out.append(dict(kind="core-core", to=f"{names[i]}-{names[j]}", gap=float(g),
                             seg=[list(a), list(b)]))
@@ -283,9 +294,14 @@ def pockets(obstacles, names, s, walls=True):
                                ("wall x=s", s - max(xs), [[max(xs), my], [s, my]]),
                                ("wall y=0", min(ys), [[mx, min(ys)], [mx, 0.0]]),
                                ("wall y=s", s - max(ys), [[mx, max(ys)], [mx, s]])):
+                if g < flush:
+                    nflush += 1
+                    continue
                 out.append(dict(kind="core-wall", to=f"{names[i]}->{nm}", gap=float(g),
                                 seg=seg))
     out.sort(key=lambda r: r["gap"])
+    for r in out:
+        r["n_flush"] = nflush
     return out
 
 

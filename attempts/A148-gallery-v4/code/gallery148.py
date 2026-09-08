@@ -186,9 +186,7 @@ def panel_geometry(pn, node, width_px):
         out.append(pn.rect(x0, x0 + 1, y0, y0 + 1, "none", "#bbb", 0.0, 0.9, "4,3"))
 
     # --- pockets narrower than 1, hatched
-    for p in node["pockets"]:
-        if p["gap"] >= 1.0:
-            continue
+    for p in [q for q in node["pockets"] if q["gap"] < 1.0][:8]:
         a, b = p["seg"][0], p["seg"][1]
         band = p.get("band")
         if band:
@@ -307,6 +305,20 @@ def panel_geometry(pn, node, width_px):
                        + (f", A135 exact {k['a_exact']:.6f}" if k["a_exact"] else ""))
     e, y = wrap(pn.ox, y, "CORES (captioned, one style on the drawing): " + "; ".join(cap) + ".",
                 width_px, 8.4, "#333")
+    out += e
+    y += 3
+    nn = [p for p in node["pockets"] if p["gap"] < 1.0]
+    e, y = wrap(pn.ox, y,
+                f"POCKETS (exact convex-polygon distance, so an upper bound as well as a lower "
+                f"one): {len(nn)} of {len(node['pockets'])} measured clearances are narrower than "
+                f"1 — no further unit square fits in those; the {min(8, len(nn))} narrowest are "
+                f"hatched. "
+                + ("; ".join(f"{p['to']} {p['gap']:.4f}" for p in nn[:6]) or "none")
+                + (f". {node['pockets'][0].get('n_flush', 0)} clearance(s) below 0.05 are "
+                   f"objects in CONTACT (a pin against its wall or its lattice neighbour) and are "
+                   f"not counted as pockets."
+                   if node["pockets"] and node["pockets"][0].get("n_flush") else ""),
+                width_px, 8.4, "#424242")
     out += e
     y += 3
     e, y = wrap(pn.ox, y, node["clip_note"], width_px, 8.4, "#e65100")
@@ -561,7 +573,9 @@ def main():
         summ.append(D.summary(node, imposs, bad, names, exc, mg, W, H))
         print(f"[{i + 1:3d}/{len(recs)}] {node['id']:32s} {W}x{H}  green "
               f"{node['region'].area_green():.3f} n_max {node['disk']['n_max']}/"
-              f"{node['budget']}  pocket {node['pockets'][0]['gap']:.3f}  imposs {len(imposs)}  "
+              f"{node['budget']}  pocket "
+              f"{(node['pockets'][0]['gap'] if node['pockets'] else float('nan')):.3f}  "
+              f"imposs {len(imposs)}  "
               f"{time.time() - t0:.1f}s", flush=True)
     with open(os.path.join(outdir, f"review_{a.which}.csv"), "w", newline="",
               encoding="utf-8") as fh:

@@ -31,7 +31,12 @@ A140 = os.path.join(ATT, "A140-k0-residue-gallery")
 A141 = os.path.join(ATT, "A141-polycore-lane")
 A142 = os.path.join(ATT, "A142-a57-review-gallery")
 A144 = os.path.join(ATT, "A144-guard-lines")
-for _p in (os.path.join(A140, "code"), os.path.join(A142, "code"), HERE):
+for _p in (os.path.join(ATT, "A57-shadow-trees", "code"),
+           os.path.join(ATT, "A132-polygon-core", "code"),
+           os.path.join(ATT, "A135-polycore-verifier", "code"),
+           os.path.join(A131, "code"), os.path.join(A144, "code"),
+           os.path.join(A107, "code"),
+           os.path.join(A140, "code"), os.path.join(A142, "code"), HERE):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
@@ -166,15 +171,60 @@ def _k0_population():
     return out
 
 
+def night_kills():
+    """Everything that has killed an A57/A60 node SINCE A142 built population142.json.
+
+    A142's own removals (A131 pin-clip, A135 polygon + LP-certified, A124 trim-empty, and the
+    descendants of all of those) are already baked into `rank_a57`, so this only has to add what
+    landed afterwards.  Read-only: A57's own tree records, A141's two lane-kill files, A137's
+    night records if the attempt has produced any, and A144's guard rows with a NEGATIVE rhs.
+    Returns {id: reason}."""
+    out = {}
+    for r in _jl(os.path.join(A141, "results", "polycore_lane_kills.jsonl")):
+        out.setdefault(r["nid"], f"A141 K' lane leaf on {r.get('corner')}")
+    for f in ("t4_slots.jsonl", "t4_y0460.jsonl"):
+        for r in _jl(os.path.join(A141, "results", f)):
+            if str(r.get("verdict", "")).startswith("KILL"):
+                out.setdefault(r["nid"], f"A141 K' slot lane leaf on {r.get('slot')}")
+    for f in sorted(glob.glob(os.path.join(A141, "results", "t2_a5760_s*.jsonl"))):
+        for r in _jl(f):
+            if str(r.get("verdict", "")).startswith("KILL") and r.get("nid"):
+                out.setdefault(r["nid"], f"A141 K' lane leaf on {r.get('corner', r.get('slot'))}")
+    a137 = os.path.join(ATT, "A137-night-shift-2", "results")
+    for f in sorted(glob.glob(os.path.join(a137, "*.jsonl"))):
+        for r in _jl(f):
+            nid = r.get("id") or r.get("nid")
+            v = str(r.get("verdict") or r.get("cert") or "")
+            if nid and (v.upper().startswith(("CERTIFIED", "KILL", "DEAD"))
+                        or r.get("kills_converged") or r.get("emptied8")):
+                out.setdefault(nid, f"A137 night: {v or 'kill'} ({os.path.basename(f)})")
+    # A57's own tree rows: a node whose stored cert has since become a logic kill / PASS
+    for f in sorted(glob.glob(os.path.join(ATT, "A57-shadow-trees", "results",
+                                           "tree_k5_1*_interior_G1*.jsonl"))):
+        for r in _jl(f):
+            c = str(r.get("cert") or "")
+            if r.get("id") and (c.startswith("KILL-BY-LOGIC") or c.startswith("CERTIFIED")):
+                out.setdefault(r["id"], f"A57 tree record: {c[:40]}")
+    for r in _jl(os.path.join(A144, "results", "offline144.jsonl")):
+        for row in (r.get("top_rows") or []):
+            if float(row.get("rhs", 1.0)) < 0.0:
+                out.setdefault(r["id"], "A144 guard line with rhs < 0 (contradiction)")
+    return out
+
+
 def _a57_population(which):
     """the A57/A60 pages: A142's subtree-cost ranking, refreshed against the night's records."""
     import gallery142 as G142
     pop = tbl("pop142")
+    kills = night_kills()
+    dead = set(kills)
     out = []
     for key, camp, n in (("rank_a57", "A57", 40), ("rank_a60", "A60", 20)):
         for i, r in enumerate(pop.get(key, [])):
             if len(([x for x in out if x["camp"] == camp])) >= n:
                 break
+            if r["id"] in dead or any(r["id"].startswith(k + "_D") for k in dead):
+                continue
             try:
                 d, path = G142.load_node(camp, r["id"])
             except Exception:                                        # noqa: BLE001
@@ -190,8 +240,16 @@ def _a57_population(which):
                             alias=None, banner="", leafkill="",
                             kept8=float(r.get("kept8") or 1.0),
                             n_open_desc=int(r.get("n_open_desc") or 0),
-                            rank=i + 1, subtree_s=float(r.get("subtree_s") or 0.0),
+                            rank_a142=i + 1, subtree_s=float(r.get("subtree_s") or 0.0),
                             verdict=r.get("verdict"), which=which))
+    for camp in ("A57", "A60"):
+        k = 0
+        for r in out:
+            if r["camp"] == camp:
+                k += 1
+                r["rank"] = k
+                r["n_pop"] = sum(1 for x in out if x["camp"] == camp)
+    _C["night_kills"] = kills
     return out
 
 
@@ -381,7 +439,10 @@ def finish(node):
     node["support_note"] = " ".join(bits)
 
     # ---- the header
-    node["headline"] = (f"{node['id']}  —  {node['cls']}, level {node['level']}  ({node['src']})")
+    node["headline"] = (f"{node['id']}  —  {node['cls']}, level {node['level']}  ({node['src']})"
+                        + (f", rank {node['rank']} of {node.get('n_pop')} by subtree cost"
+                           if node.get("rank") else "")
+                        + (f", recorded {node['verdict']}" if node.get("verdict") else ""))
     node["subline"] = (
         f"tau {node['tau']:.9f} / budget {node['budget']} = 11 - "
         f"{len(node['boxes'])} core(s)  (eta {node['tau'] - node['budget']:+.2e}), minmass "
@@ -405,9 +466,11 @@ def finish(node):
     if nn:
         look.append(f"{len(nn)} pocket(s) narrower than 1 (nothing fits): "
                     + ", ".join(f"{p['to']} {p['gap']:.3f}" for p in nn[:4]))
-    else:
+    elif node["pockets"]:
         look.append(f"no pocket narrower than 1 (narrowest {node['pockets'][0]['to']} "
                     f"{node['pockets'][0]['gap']:.3f})")
+    else:
+        look.append("no pocket at all: every measured clearance is a contact below 0.05")
     hot = [t for t in node["lane_tags"]
            if t["verdict"].startswith("KILL") or "NEAR-MISS" in t["verdict"]
            or "LANE<=1" in t["verdict"] or "LANE<=0" in t["verdict"]]
@@ -481,6 +544,8 @@ def csv_row(node, imposs, names, exc, mg):
         tau=f"{node['tau']:.9f}", budget=node["budget"],
         eta=f"{node['tau'] - node['budget']:+.3e}", minmass=f"{node['minmass']:.3f}",
         converged=node["converged"],
+        rank=node.get("rank", ""), rank_a142=node.get("rank_a142", ""),
+        verdict=node.get("verdict", ""),
         subtree_cost_s=f"{node['subtree_s']:.0f}",
         subtree_cost_cpuh=f"{node['subtree_s'] / 3600.0:.2f}",
         s_star=f"{node['s_star']:.6f}", s_star_minus_s0=f"{node['s_star'] - S0:+.6f}",
@@ -495,7 +560,9 @@ def csv_row(node, imposs, names, exc, mg):
                                                         else "no"),
         sample_green_hits=node["sample"]["green"]["hits"],
         sample_blocked_hits=node["sample"]["blocked"]["hits"],
-        narrowest_pocket=f"{node['pockets'][0]['to']} {node['pockets'][0]['gap']:.4f}",
+        narrowest_pocket=(f"{node['pockets'][0]['to']} {node['pockets'][0]['gap']:.4f}"
+                          if node["pockets"] else "none (all clearances are contacts)"),
+        n_contacts=(node["pockets"][0].get("n_flush", 0) if node["pockets"] else 0),
         n_pockets_lt1=len(nn),
         pockets_lt1="; ".join(f"{p['to']} {p['gap']:.3f}" for p in nn[:6]),
         lane_tags="; ".join(f"{t['cell']}:{t['verdict']}" for t in node["lane_tags"]),
