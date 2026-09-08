@@ -77,6 +77,34 @@ file is the record of truth for claims, LOG.md is the record of events.
     `attempts/A133-tan-half-emission/notes/lean.md`. Second effect, easy to miss: the certificate's LP tilt
     variable is now Lean's own `t`, so the `arctan` step that would have sat between `LocalHyp` and any
     θ-certificate — whatever the quality of the trig kernel — is gone.
+16b''. LEAN  ADDENDUM to 16b' (A134, 2026-09-07): **all three remaining pieces of `CertCover` are now
+    theorems**, and the certificate carries the positivity certificates the kernel needs.
+    `LocalCertT2.lean` (36 theorems, `lake build` 19.5 s, roster `[propext, Classical.choice, Quot.sound]`
+    on every one — no project axiom, no `native_decide`, no `sorry`) adds: **(C2)** `selectionOk_sound`, the
+    selection cover, decided by an exact rational interval enclosure of `g_σ` on the cell (in `t` the only
+    widening is one interval multiplication — `cosT`/`sinT` ranges are the ENDPOINT values, and `w` is
+    bounded below by the maximum of its two smooth branches, so the `π/2` kink and hence `π` never appear);
+    **(C3)** Lemma RELAX for both row families — `relax_wall` from `set_subset_container_iff` and
+    `relax_selection` from the chain `1/2 + W_lb/2 ≤ 1/2 + w/2 ≤ Proj = P·C + Q·S ≤ (P + corr) + U`, with
+    every ingredient proved (`axis_decomp_t` is in `t` an ALGEBRAIC IDENTITY, one `linear_combination`
+    against `cos²+sin²=1` — the angle, and any `arctan`, are gone from the derivation as well as from the
+    variable); **(C4)** `localHyp_bodies`, one square per body with box membership, container containment,
+    tilt range and PAIRWISE INTERIOR-DISJOINTNESS. On the generator side `gen_local_t2.py` emits format
+    `local-cert-t-v2` = A133's plus a `pcert` field: per envelope, the nonnegative Bernstein coefficient
+    lists `posCheck` consumes, as a CHAIN of pieces (`posChain` / `posGrid`, with `substX0`/`substY0` for a
+    pin's collapsed tilt cell). Measured cost of replacing the checker's Sturm argument by the same
+    Bernstein form the kernel can run: **zero** — every envelope of all four families certifies at depth 0,
+    one piece, on both re-emitted certificates, so trees, leaves, rows and certified minima are IDENTICAL to
+    A133's. One gap was found and closed on the CERTIFICATE side: Lemma RELAX also needs `S_lo`, `S_hi` (the
+    McCormick corners) and `K = max(1 − cos φ)`, which A133's Python checker recomputed and Lean cannot —
+    now emitted with certificates. Both re-emitted certificates are VALID under an independent checker that
+    runs A133's whole checker unchanged AND verifies the new field from the LEAN definitions (S07 (0.1, 40°)
+    7.2 s, S02 (0.2, 10°) 76 s), and Lean's own `posChain`/`posGrid` accept the emitted `pcert` by
+    `native_decide` (36 s and 81 s). **`certCover_s07` and hence `localDead_s07_t` are still NOT obtained**;
+    the residue is bookkeeping of four named kinds (the reflected tree walk, the reflected ROW BUILDER with
+    the outward-quantisation step, the variable INDEX map, the leaf data) and — the point of the audit —
+    **no missing library lemma**: `attempts/A134-certcover-close/notes/lean.md`. A126's elaborator wall
+    recurs verbatim (one 336-entry list literal times out at `isDefEq`) and A126's batching fixes it.
 16a. CAVEAT (A88, 2026-09-03): A31's contact-type menu omits same-class corner-corner point kisses (Trump
     has one); planarity (L4) is FALSE on the ACTIVE contact graph when squares kiss at a point. Counts over
     the kiss-free SUPPORT graph stand; no proof step may assume planarity of the active graph. The

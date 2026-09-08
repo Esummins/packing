@@ -5594,3 +5594,44 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
 - **One bug found and fixed in A124's own driver.** A worker's queue is built once at startup, so after
   a watchdog restart it re-solved `Y0726`, which the sibling shard had already wall-capped, for another
   1500 s. `recheck124.py` now re-reads both ledgers **per node**, not only at startup.
+
+## 2026-09-07 — A134-certcover-close (Opus Lean) — done-mixed
+- **The three named pieces of `CertCover` are all theorems now; the assembled `certCover_s07` is not.**
+  `lean/PackingCertMathlib/PackingCertMathlib/LocalCertT2.lean`: 36 theorems, axiom roster
+  `[propext, Classical.choice, Quot.sound]` on every one — no project axiom (`Local.sat_selection` is not
+  used; `SatInterior.sat_selection_thm` proves it), no `native_decide`, no `sorry`. `lake build` 19.5 s,
+  audit `scratch/A134Axioms.lean` 14.2 s.
+  - **(C2)** `selectionOk_sound`: the recorded selections of a near pair are exhaustive, decided by an exact
+    rational interval enclosure of `g_σ` on the cell. In `t` the `cosT`/`sinT` ranges are the ENDPOINT values
+    (zero enclosure error) and the only widening is one interval multiplication; `w` is bounded below by the
+    MAXIMUM of its two smooth branches, so the `π/2` kink — A119's one unavoidable `π` — never appears.
+  - **(C3)** Lemma RELAX, both row families. `relax_wall` from `Parametrize.set_subset_container_iff` plus the
+    certified chord; `relax_selection` is the chain `1/2 + W_lb/2 ≤ 1/2 + w/2 ≤ Proj = P·C + Q·S ≤ (P+corr)+U`
+    with all five ingredients proved. `axis_decomp_t` — `Local.axis_decomp` in the angle — is in `t` an
+    ALGEBRAIC IDENTITY: one `linear_combination` against `cos²+sin²=1`, no angle anywhere.
+  - **(C4)** `localHyp_bodies`: one square per body in the certificate's order, with box/slack-core
+    membership, container containment, tilt range and pairwise INTERIOR-DISJOINTNESS.
+- **T1.** `gen_local_t2.py` = A133's generator (imported read-only) + a `pcert` field: per envelope, the
+  nonnegative scaled Bernstein coefficient lists `posCheck` consumes, as a CHAIN of pieces (`posChain` /
+  `posGrid`), with `substX0`/`substY0` for a pin's collapsed tilt cell. S07 (0.1, 40°) and S02 (0.2, 10°)
+  re-emitted as `local-cert-t-v2`; trees, leaves, rows and certified minima IDENTICAL to A133's.
+  **Cost in leaves of replacing the checker's Sturm argument by the Bernstein form the kernel can run: ZERO** —
+  every envelope of all four families certifies at Bernstein DEPTH 0, one piece.
+- **A gap found and closed on the certificate side.** Lemma RELAX also needs `S_lo`, `S_hi` (the McCormick
+  corners, and the chord scale of envelope (A)) and `K = max(1 − cos φ)`; A133's Python checker recomputed
+  them from the cell and Lean cannot. Now emitted with their own certificates.
+- **Independent check.** `check_local_t2.py` runs A133's whole checker unchanged (`v2` ⊃ `v1`) AND verifies
+  the new field from the LEAN definitions, with a random-point MEANING check and a 3-way mutation control.
+  Both certificates VALID (A133 half 6.7 s / 74.6 s; pcert half 0.5 s / 1.6 s; bump and shrink REJECTED).
+- **T3.** The emitted `pcert` replayed by `native_decide` in Lean: 36.2 s (S07, 4 872 coefficients) and
+  81.2 s (S02, 14 936) — both PASS, ≈ 4.4 ms/coefficient, kernel not the wall. **A126's elaborator wall
+  recurs verbatim** (one 336-entry list literal → `(deterministic) timeout at isDefEq`) and A126's remedy
+  fixes it (32 entries per `private def`, linear `++`, `maxHeartbeats 2000000`). The remaining eight
+  certificates project at ≈ 3.5 min of `pcert` replay; not built, per the brief.
+- **What is still missing for `localDead_s07_t`**, named exactly and priced: (R1) the reflected tree walk
+  (~300 lines), (R2) the reflected ROW BUILDER plus the outward-quantisation step (~600), (R3) the variable
+  INDEX map (~120), (R4) the leaf data and the replay. **No missing library lemma** — every mathematical step
+  is now a theorem. `attempts/A134-certcover-close/notes/lean.md`.
+- Invisible until one writes the Lean, and worth remembering: `posCheck` compares LISTS, so a positivity
+  certificate is accepted only if it reproduces the polynomial with the exact trailing-zero shape `posAux`
+  produces. `code/leanpoly.py` mirrors the recursions for that reason.
