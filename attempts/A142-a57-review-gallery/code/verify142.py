@@ -126,11 +126,14 @@ def main():
 
             # --- C: the exact pin cores
             for i in range(npin):
+                if not sm["pin_is_pin"][i]:
+                    continue                       # a hypothesis box with a tilt window is not
+                    # a pin: it is a further conditioned square, drawn cyan and checked as such
                 b = boxes[i]
                 cx, cy = 0.5 * (b["x0"] + b["x1"]), 0.5 * (b["y0"] + b["y1"])
-                K = G.sq(cx, cy, 0.0, sm["pincore_a"])
+                K = G.sq(cx, cy, 0.0, sm["pincore_as"][i])
                 tot["C_pins"] += 1
-                if sm["pincore_a"] < sm["pincore_a_stock"] - 1e-15:
+                if sm["pincore_as"][i] < sm["pincore_a_stock"] - 1e-15:
                     tot["C_fail"] += 1
                     bad.append((nid, "C-shrunk", i, None))
                 for (hx, hy, ht) in G.box_poses(b, NP):

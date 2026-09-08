@@ -320,14 +320,29 @@ def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, pincores, hypcores, clip, s)
     out += e
     out += frame(ox, oy, sc, s)
 
-    # --- the pins, drawn as PINS: the unit square at the box centre, tilt 0, with its EXACT core
+    # --- the PINS (zero tilt width) drawn as pins, with BOTH inner cores; any hypothesis box
+    # that carries a TILT WINDOW is not a pin but a further conditioned square, drawn cyan.
     for i in range(npin):
         b = boxes[i]
         cx, cy = 0.5 * (b["x0"] + b["x1"]), 0.5 * (b["y0"] + b["y1"])
-        out.append(poly(ox, oy, sc, sq(cx, cy, 0.0), "#cfd8dc", "#455a64", 0.55, 1.4))
-        out.append(poly(ox, oy, sc, pincores[i]["P_stock"], "none", "#01579b", 0.0, 1.0))
-        out.append(poly(ox, oy, sc, pincores[i]["P"], "none", "#1a237e", 0.0, 1.2))
-        out.append(text(ox + cx * sc, oy - cy * sc + 4, f"P{i}", 9.5, "#263238", True, "middle"))
+        if pincores[i]["is_pin"]:
+            out.append(poly(ox, oy, sc, sq(cx, cy, 0.0), "#cfd8dc", "#455a64", 0.55, 1.4))
+            out.append(poly(ox, oy, sc, pincores[i]["P_stock"], "none", "#01579b", 0.0, 1.0))
+            out.append(poly(ox, oy, sc, pincores[i]["P"], "none", "#1a237e", 0.0, 1.2))
+            out.append(text(ox + cx * sc, oy - cy * sc + 4, f"P{i}", 9.5, "#263238", True,
+                            "middle"))
+        else:
+            thm = math.radians(0.5 * (b["th0"] + b["th1"]))
+            out.append(rect(ox, oy, sc, b["x0"], b["x1"], b["y0"], b["y1"], "none", "#000",
+                            0.0, 1.2, "5,3"))
+            out.append(poly(ox, oy, sc, sq(cx, cy, thm), HYP_FILL, "#000", 0.30, 2.0))
+            out.append(poly(ox, oy, sc, [tuple(v) for v in pcs[i].P], "#7e57c2", "#4527a0",
+                            0.35, 1.2))
+            out.append(poly(ox, oy, sc, pincores[i]["P_stock"], "none", "#000000", 0.0, 1.4))
+            out.append(poly(ox, oy, sc, pincores[i]["P"], "none", "#00695c", 0.0, 1.4))
+            out.append(text(ox + cx * sc, oy - cy * sc + 4, f"H{i}", 10, "#000", True, "middle"))
+            out.append(text(ox + cx * sc, oy - cy * sc + 15,
+                            f"{0.5 * (b['th0'] + b['th1']):.2f}°", 7.0, "#000", False, "middle"))
 
     # --- the dual support, drawn by weight; impossible columns red-dashed
     bad, imposs = 0, []
@@ -374,6 +389,9 @@ def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, pincores, hypcores, clip, s)
     b = boxes[-1]
     out.append(rect(ox, oy, sc, b["x0"], b["x1"], b["y0"], b["y1"], "none", "#000", 0.0, 1.4,
                     "5,3"))
+    if clip.get("stock", {}).get("union_rect_f"):
+        (sx0, sx1, sy0, sy1) = clip["stock"]["union_rect_f"]
+        out.append(rect(ox, oy, sc, sx0, sx1, sy0, sy1, "none", "#ffb74d", 0.0, 1.0, "2,3"))
     if clip.get("union_rect_f"):
         (ux0, ux1, uy0, uy1) = clip["union_rect_f"]
         out.append(rect(ox, oy, sc, ux0, ux1, uy0, uy1, "none", "#e65100", 0.0, 1.6, "4,2"))
@@ -398,11 +416,16 @@ def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, pincores, hypcores, clip, s)
     kk = pcs[-1].P.mean(0)
     out.append(text(ox + kk[0] * sc, oy - kk[1] * sc - 4, "K'(B)", 8.5, "#311b92", True, "middle"))
 
+    tp = [p for p in pincores if p["is_pin"]]
+    npin_true = len(tp)
     e, yy = wrap(ox, oy + 16,
-                 f"{npin} PINS (grey, P0..P{npin - 1}), each with BOTH inner cores: thin light "
-                 f"blue = the STOCK pin core (half-side {pincores[0]['a_stock']:.6f}, the one "
+                 f"{npin_true} PINS (grey), each with BOTH inner cores: thin light "
+                 f"blue = the STOCK pin core (half-side {tp[0]['a_stock']:.6f}, the one "
                  f"the LP pruned against), thin dark blue = A135's EXACT pin core (half-side "
-                 f"{pincores[0]['a']:.9f} = 1/2 - delta/sqrt2, certified). The conditioned square "
+                 f"{tp[0]['a']:.9f} = 1/2 - delta/sqrt2, certified)"
+                 + (f"; {npin - npin_true} further CONDITIONED square(s) H0.. carry a tilt "
+                    f"window, so they are drawn cyan with their own three cores, not as pins"
+                    if npin_true < npin else "") + ". The conditioned square "
                  f"H (cyan, at the centre of its clipped box and the mid-tilt, faint outlines at "
                  f"the extremal tilts) carries THREE cores: solid black = the STOCK axis core "
                  f"K(a), a_stock = {float(hypcores['stock'].a):.6f}; solid teal = A135's EXACT "
@@ -412,8 +435,11 @@ def panel_lp(ox, oy, sc, title, sub, d, boxes, pcs, pincores, hypcores, clip, s)
                  f"({pcs[-1].area() / (2.0 * float(hypcores['stock'].a)) ** 2:.3f}x area K(a)). "
                  f"{len(pk)} dual-support placements, fill = dual weight y (pale yellow y->0, "
                  f"dark orange y=1). SCHEMATIC (thin dashed, never filled): black dashed = the "
-                 f"original centre box B, orange dashed = the PIN-CLIPPED centre box (A131) — "
-                 f"these are regions of CENTRES, not square bodies. Outside container: {bad}",
+                 f"original centre box B; pale orange dotted = the pin-clipped centre box at the "
+                 f"STOCK pin core (A131 as deployed, kept {clip['stock']['kept_vol']:.4f}); "
+                 f"heavy orange dashed = the same clip at the EXACT pin core (kept "
+                 f"{clip['kept_vol']:.4f}) — these are regions of CENTRES, not square bodies. "
+                 f"Outside container: {bad}",
                  S0 * sc, 8.5, "#444")
     out += e
     e, _ = wrap(ox, yy + 2,
@@ -494,8 +520,9 @@ def panel_hyp(ox, oy, sc, boxes, pcs, pincores, hypcores, clip, pockets, lane1, 
                 "no fill): black = stock axis core K(a), teal = A135 exact axis core, purple = "
                 "polygon core K'; each pin carries its stock (light blue) and exact (dark blue) "
                 "core. SCHEMATIC (thin dashed, no fill): black = the original centre box, orange "
-                "= the pin-clipped centre box per tilt sub-bin and their union (A131 `pinclip`, "
-                "exact rationals), amber = a corner cell whose A118 lane count is <= 1. Red "
+                "= the pin-clipped centre box per tilt sub-bin and their union at the EXACT pin "
+                "core, pale orange dotted = the same clip at the STOCK pin core (A131 as "
+                "deployed), amber = a corner cell whose A118 lane count is <= 1. Red "
                 "dashed segments = a measured pocket between K'(B) and its nearest neighbour "
                 "narrower than 1, i.e. no further unit square fits in it.",
                 S0 * sc, 8.5, "#444", lead=11.0)
@@ -504,10 +531,17 @@ def panel_hyp(ox, oy, sc, boxes, pcs, pincores, hypcores, clip, pockets, lane1, 
     for i in range(npin):
         b = boxes[i]
         cx, cy = 0.5 * (b["x0"] + b["x1"]), 0.5 * (b["y0"] + b["y1"])
-        out.append(poly(ox, oy, sc, sq(cx, cy, 0.0), "#eceff1", "#90a4ae", 0.5, 1.0))
-        out.append(poly(ox, oy, sc, pincores[i]["P_stock"], "none", "#01579b", 0.0, 0.9))
-        out.append(poly(ox, oy, sc, pincores[i]["P"], "none", "#1a237e", 0.0, 1.2))
-        out.append(text(ox + cx * sc, oy - cy * sc + 4, f"P{i}", 9.0, "#263238", True, "middle"))
+        if pincores[i]["is_pin"]:
+            out.append(poly(ox, oy, sc, sq(cx, cy, 0.0), "#eceff1", "#90a4ae", 0.5, 1.0))
+            out.append(poly(ox, oy, sc, pincores[i]["P_stock"], "none", "#01579b", 0.0, 0.9))
+            out.append(poly(ox, oy, sc, pincores[i]["P"], "none", "#1a237e", 0.0, 1.2))
+            out.append(text(ox + cx * sc, oy - cy * sc + 4, f"P{i}", 9.0, "#263238", True,
+                            "middle"))
+        else:
+            out.append(rect(ox, oy, sc, b["x0"], b["x1"], b["y0"], b["y1"], "none", "#000",
+                            0.0, 1.2, "5,3"))
+            out.append(poly(ox, oy, sc, [tuple(v) for v in pcs[i].P], "none", "#4527a0", 0.0, 1.4))
+            out.append(text(ox + cx * sc, oy - cy * sc + 4, f"H{i}", 9.0, "#000", True, "middle"))
     for c in lane1:
         try:
             (x, y) = M.slot_centres([c], s)[0]
@@ -524,6 +558,9 @@ def panel_hyp(ox, oy, sc, boxes, pcs, pincores, hypcores, clip, pockets, lane1, 
         if r is None:
             continue
         out.append(rect(ox, oy, sc, r[0], r[1], r[2], r[3], "none", "#e65100", 0.0, 0.8, "2,2"))
+    if clip.get("stock", {}).get("union_rect_f"):
+        (sx0, sx1, sy0, sy1) = clip["stock"]["union_rect_f"]
+        out.append(rect(ox, oy, sc, sx0, sx1, sy0, sy1, "none", "#ffb74d", 0.0, 1.0, "2,3"))
     if clip.get("union_rect_f"):
         (ux0, ux1, uy0, uy1) = clip["union_rect_f"]
         out.append(rect(ox, oy, sc, ux0, ux1, uy0, uy1, "none", "#e65100", 0.0, 1.8, "4,2"))
@@ -548,11 +585,16 @@ def panel_hyp(ox, oy, sc, boxes, pcs, pincores, hypcores, clip, pockets, lane1, 
         out.append(text(ox + 0.5 * (ax + bx) * sc, oy - 0.5 * (ay + by) * sc - 3,
                         f"{pk_['to']} {pk_['gap']:.3f}", 7.0, "#d50000", True, "middle"))
     e, yy = wrap(ox, oy + 16,
-                 f"pin-clip: kept volume {clip['kept_vol']:.4f} over {clip['nsub']} tilt "
-                 f"sub-bins ({clip['n_empty']} of them EMPTY), union box "
-                 f"{clip['kept_union']:.4f} of the original area"
+                 f"pin-clip at the EXACT pin core a = {clip['a_pin_exact']:.9f}: kept volume "
+                 f"{clip['kept_vol']:.4f} over {clip['nsub']} tilt sub-bins ({clip['n_empty']} "
+                 f"of them EMPTY), union box {clip['kept_union']:.4f}. At the STOCK core a = "
+                 f"{clip['a_pin_stock']:.6f} (A131 as deployed) the clip keeps "
+                 f"{clip['stock']['kept_vol']:.4f}"
                  + ("  — the box is NOT emptied, so the clip is a shrink, not a kill."
-                    if not clip["empty"] else "  — EMPTY: this node is dead by pin geometry."),
+                    if not clip["empty"] else
+                    ("  — EMPTY AT THE EXACT CORE: this node is DEAD by pin geometry"
+                     + (", and the deployed stock-core clip does NOT see it."
+                        if not clip["stock"]["empty"] else "."))),
                  S0 * sc, 8.5, "#444")
     out += e
     nn = [p for p in pockets if p["gap"] < 1.0]
@@ -668,6 +710,7 @@ def build_page(rec, camp):
         cx, cy = 0.5 * (boxes[i]["x0"] + boxes[i]["x1"]), 0.5 * (boxes[i]["y0"] + boxes[i]["y1"])
         af = float(a) if a is not None else float(a0)
         pincores.append(dict(a=af, a_stock=float(a0), cert=bool(ok), c=(cx, cy),
+                             is_pin=(boxes[i]["th1"] <= boxes[i]["th0"] + 1e-12),
                              P=sq(cx, cy, 0.0, af), P_stock=sq(cx, cy, 0.0, float(a0)),
                              core_exact=(Core(ki.kx, ki.ky, ki.tm, a, Bi)
                                          if a is not None else None),
@@ -675,13 +718,24 @@ def build_page(rec, camp):
     # pin clip
     sl = slots_for(camp, nid)
     B = Box.from_json(boxes[-1])
-    a_pin = pinclip.Fr(str(round(min(p["a"] for p in pincores), 12))) \
-        if camp == "A60" else pinclip.A_PIN
-    try:
-        cl = pinclip.clip_node(B, sl, nsub=8, a_pin=a_pin)
-    except Exception as ex:                                   # A60's degenerate pins
-        cl = dict(refused=True, reason=str(ex)[:60], bins=[], kept_vol=1.0, kept_union=1.0,
-                  union_rect=None, empty=False, n_empty=0)
+    _tp = [p for p in pincores if p["is_pin"]] or pincores
+    a_ex_pin = pinclip.Fr(str(min(p["a"] for p in _tp))).limit_denominator(10 ** 14)
+    a_st_pin = (pinclip.Fr(str(min(p["a_stock"] for p in _tp))).limit_denominator(10 ** 14)
+                if camp == "A60" else pinclip.A_PIN)
+
+    def _clip(ap):
+        try:
+            return pinclip.clip_node(B, sl, nsub=8, a_pin=ap)
+        except Exception as ex:                               # degenerate pins
+            return dict(refused=True, reason=str(ex)[:60], bins=[], kept_vol=1.0,
+                        kept_union=1.0, union_rect=None, empty=False, n_empty=0)
+    cl_stock = _clip(a_st_pin)
+    cl = _clip(a_ex_pin)                       # the EXACT-core clip is the one drawn heavy
+    clip_stock = dict(kept_vol=float(cl_stock["kept_vol"]),
+                      kept_union=float(cl_stock["kept_union"]),
+                      n_empty=int(cl_stock["n_empty"]), empty=bool(cl_stock["empty"]),
+                      union_rect_f=([float(v) for v in cl_stock["union_rect"]]
+                                    if cl_stock.get("union_rect") else None))
     clip = dict(nsub=8, kept_vol=float(cl["kept_vol"]), kept_union=float(cl["kept_union"]),
                 n_empty=int(cl["n_empty"]), empty=bool(cl["empty"]),
                 refused=bool(cl.get("refused")), reason=cl.get("reason"),
@@ -689,14 +743,15 @@ def build_page(rec, camp):
                          ([float(v) for v in r] if r is not None else None))
                         for (t0, t1, r) in cl["bins"]],
                 union_rect_f=([float(v) for v in cl["union_rect"]]
-                              if cl.get("union_rect") else None))
+                              if cl.get("union_rect") else None),
+                a_pin_exact=float(a_ex_pin), a_pin_stock=float(a_st_pin), stock=clip_stock)
     if clip["union_rect_f"]:
         u = clip["union_rect_f"]
         clip["centre"] = (0.5 * (u[0] + u[1]), 0.5 * (u[2] + u[3]))
     else:
         clip["centre"] = (0.5 * (boxes[-1]["x0"] + boxes[-1]["x1"]),
                           0.5 * (boxes[-1]["y0"] + boxes[-1]["y1"]))
-    pockets = pockets_of(pcs[-1], pincores, s)
+    pockets = pockets_of(pcs[-1], [p for p in pincores if p['is_pin']], s)
     lane = lane_of(nid)
     lcells = {c["cell"]: c for c in (lane["cells"] if lane else [])}
     lane1 = sorted(c for c, v in lcells.items()
@@ -747,17 +802,24 @@ def build_page(rec, camp):
            f"half-side, certified {hypcores['cert']})" if a_ex is not None else "n/a")
         + f"; polygon core K'(B): {len(pcs[-1].verts)} certified vertices, area "
           f"{pcs[-1].area():.6f} = {pcs[-1].area() / ((2 * a_st) ** 2):.3f}x area K(a).")
-    add(f"PIN-CLIP (A131, exact rationals, 8 tilt sub-bins): kept volume {clip['kept_vol']:.4f}, "
-        f"union box {clip['kept_union']:.4f} of the original area, {clip['n_empty']} of 8 "
-        f"sub-bins EMPTY"
+    add(f"PIN-CLIP (A131 `pinclip`, exact rationals, 8 tilt sub-bins), run at BOTH pin cores: at "
+        f"the STOCK a = {clip['a_pin_stock']:.6f} it keeps {clip['stock']['kept_vol']:.4f} "
+        f"({clip['stock']['n_empty']}/8 sub-bins empty); at A135's EXACT a = "
+        f"{clip['a_pin_exact']:.9f} it keeps {clip['kept_vol']:.4f}, union box "
+        f"{clip['kept_union']:.4f} of the original area, {clip['n_empty']} of 8 sub-bins EMPTY"
         + ("; the clipped box is where H is drawn in panels 1 and 3."
            if clip["union_rect_f"] else "; the clip is REFUSED here (%s), so H is drawn at the "
-                                        "original box centre." % clip.get("reason")))
-    add(f"PIN CORES, both drawn: STOCK half-side {pincores[0]['a_stock']:.9f} (light blue) vs "
-        f"A135 EXACT half-side {pincores[0]['a']:.9f} (dark blue) = 1/2 - delta/sqrt2 — an "
-        f"enlargement of {100.0 * (pincores[0]['a'] / pincores[0]['a_stock'] - 1.0):.2f}% per "
-        f"side; all {npin} pins certified: {all(p['cert'] for p in pincores)}. A132's "
-        f"attribution found a quarter of the K'-excluded weight lives in exactly this slop.")
+                                        "original box centre." % clip.get("reason")),
+        9.5, "#b71c1c" if clip["empty"] else "#222", bool(clip["empty"]))
+    tp = [p for p in pincores if p["is_pin"]]
+    add(f"PIN CORES, both drawn: STOCK half-side {tp[0]['a_stock']:.9f} (light blue) vs "
+        f"A135 EXACT half-side {tp[0]['a']:.9f} (dark blue) = 1/2 - delta/sqrt2 — an "
+        f"enlargement of {100.0 * (tp[0]['a'] / tp[0]['a_stock'] - 1.0):.2f}% per "
+        f"side; all {len(tp)} pins certified: {all(p['cert'] for p in tp)}"
+        + (f"; {npin - len(tp)} further hypothesis box(es) carry a TILT WINDOW and are "
+           f"conditioned squares, not pins." if len(tp) < npin else ".")
+        + " A132's attribution found a quarter of the K'-excluded weight lives in exactly "
+          "this slop.")
     add(f"IMPOSSIBLE COLUMNS: {len(imposs)} of {len(d.get('packing') or [])} dual-support "
         f"columns overlap a hypothesis square at every one of the {NPOSE}^3 sampled poses — "
         f"{sum(1 for r in imposs if r['box'] == npin)} against H's box "
@@ -786,6 +848,12 @@ def build_page(rec, camp):
     else:
         add("LANE COUNT: A118 has no stored record for this node.")
     look = []
+    if clip["empty"]:
+        look.append("THE PIN-CLIP AT THE EXACT PIN CORE EMPTIES THIS BOX AT ALL 8 TILT SUB-BINS "
+                    "— the node is dead by pin geometry alone"
+                    + ("" if clip["stock"]["empty"] else
+                       ", and the deployed stock-core clip does not see it")
+                    + "; nothing below needs reading")
     if lane1:
         look.append("corners/slots with LANE <= 1 (a SECOND meeter is what the two-meeter cover "
                     "needs): " + ", ".join(lane1))
@@ -834,8 +902,10 @@ def build_page(rec, camp):
                          + (f"{a_ex:.6f}" if a_ex is not None else "n/a")
                          + f"; {rec.get('n_poly_only')} support column(s) K'-only, weight "
                            f"{rec.get('w_poly_only')}"),
-        clip_kept=(f"vol {clip['kept_vol']:.4f}, union {clip['kept_union']:.4f}, "
+        clip_kept=(f"exact-core vol {clip['kept_vol']:.4f} (stock-core "
+                   f"{clip['stock']['kept_vol']:.4f}), union {clip['kept_union']:.4f}, "
                    f"{clip['n_empty']}/8 sub-bins empty"
+                   + (" — EMPTY: DEAD by pin geometry" if clip["empty"] else "")
                    + (" [REFUSED: %s]" % clip.get("reason") if clip["refused"] else "")),
         lane_1_corners=(",".join(lane1) if lane1 else "none"),
         narrowest_pocket=f"{pockets[0]['to']} {pockets[0]['gap']:.4f}" if pockets else "-",
@@ -845,7 +915,9 @@ def build_page(rec, camp):
         n_impossible=len(imposs),
         n_impossible_pin=sum(1 for r in imposs if r["box"] != npin),
         n_impossible_certified=sum(1 for r in imposs if r["certified"]),
-        exact_pin_core=f"{pincores[0]['a']:.9f} (stock {pincores[0]['a_stock']:.6f})",
+        exact_pin_core=f"{tp[0]['a']:.9f} (stock {tp[0]['a_stock']:.6f}), {len(tp)} pin(s)"
+                       + (f" + {npin - len(tp)} extra conditioned box(es)"
+                          if len(tp) < npin else ""),
         right_panel=prov.split(";")[0][:120],
         PI_reading="", PI_load_path="", PI_binding_contact="", PI_drain_or_kill="")
     summ = dict(id=nid, camp=camp, cls=rec["cls"], level=rec["level"], rank=rec["rank"],
@@ -856,13 +928,17 @@ def build_page(rec, camp):
                 n_impossible_pin=sum(1 for r in imposs if r["box"] != npin),
                 n_impossible_certified=sum(1 for r in imposs if r["certified"]),
                 w_impossible=round(sum(r["y"] for r in imposs), 6),
-                impossible=imposs, clip=dict((k, v) for k, v in clip.items() if k != "bins_f"),
+                impossible=imposs, clip_empty=bool(clip["empty"]),
+                clip_empty_stock=bool(clip["stock"]["empty"]),
+                clip=dict((k, v) for k, v in clip.items() if k != "bins_f"),
                 clip_bins=clip["bins_f"], pockets=pockets, lane1=lane1,
                 lane_cells=[dict(cell=c["cell"], verdict=c["verdict"],
                                  ncond_pot=c.get("ncond_pot")) for c in (lane["cells"] if lane
                                                                          else [])],
-                pincore_a=pincores[0]["a"], pincore_a_stock=pincores[0]["a_stock"],
-                pincores_certified=all(p["cert"] for p in pincores),
+                pincore_a=tp[0]["a"], pincore_a_stock=tp[0]["a_stock"],
+                pincore_as=[p["a"] for p in pincores],
+                pin_is_pin=[bool(p["is_pin"]) for p in pincores],
+                pincores_certified=all(p["cert"] for p in tp),
                 a_stock=a_st, a_exact=a_ex, a_exact_certified=hypcores["cert"],
                 poly_verts=len(pcs[-1].verts), poly_area=pcs[-1].area(),
                 panel2_min_sat=mg, panel2_exc=exc, width=int(W), height=H,

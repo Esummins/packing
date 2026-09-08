@@ -5662,3 +5662,54 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
 - Banked for (R4): a bisection node need not record its children's cells (`cellLo`/`cellHi` compute them,
   `splitOk` still checks the split) — 88 000 rational literals off the S07 data file, and the elaborator is
   the wall; and `certOk` is `native_decide`-able but kernel `decide` gets STUCK on it.
+
+## 2026-09-07 — A142: the A57/A60 review gallery v3 (60 pages), the surviving-alive population, and a free kill found while drawing
+
+- **Population.** Of A131's **607 work-owing nodes (414 ALIVE + 193 FAIL)**: 132 pin-clip kills, then 6 NEW
+  polygon kills, 2 NEW certified LP kills, 0 new trim-empty (all 54 are already inside the pin-clip set) and
+  2 descendants of killed nodes — **142 removed, 465 survive (330 alive + 135 fail; L1 366, L2 95, L3 4;
+  k5_11 243, k5_16 222)**. The four kill lists overlap almost completely: 253 list entries remove 142 nodes.
+  A60 adds the **283** nodes with an LP support in A107's `shadow_nodes.json`, all at depth j = 0.
+- **Subtree cost, stated.** `C(L) = p_L(L)*850 + p_A(L)*(300 + 8*C(L+1))`, `C(5) = 0`, with `p` the measured
+  per-level verdict shares of A57's own 2,418-box corpus (C(1..4) = 2632 / 1297 / 1020 / 372 s);
+  `subtree(n) = residual(n) + sum over still-open emitted descendants`, `residual(ALIVE frontier at L) =
+  8*C(L+1)*kept8(n)` with kept8 A131's measured pin-clip kept volume, `residual(FAIL) = 900 s`. Top:
+  `k5_11_interior_Y1104` 11.59 CPU-h (6 still-open emitted descendants), `Y0672` / `k5_16_Y0083` 4.53,
+  `Y0738` 3.76. The model cannot see inside an un-descended box, so every L1 alive node with kept8 = 1 and
+  no emitted child ties at 2.88 CPU-h; ties break on the polygon core's bite on that node's own support.
+- **THE DAY'S FREE KILL, found by drawing: the pin-clip at the EXACT pin core.** A131 deployed the clip at
+  the stock `a_pin = 1/2 − delta = 0.49`; A135 certified the pin's guaranteed core to be
+  `1/2 − delta/sqrt2 = 0.492928902` and that the frozen verifiers take the half-side VERBATIM. Enlarging
+  `a_pin` in the clip is sound for exactly the verifier's reason (the pin square contains K'(P) at every
+  pose of the pin box) and costs nothing. Over the 465 survivors the stock clip empties **0** — the correct
+  control, since the 132 stock-clip kills are already out of the population — and the exact clip empties
+  **17: seventeen NEW T5‴ logic kills, geometry only, no LP, no verifier or certificate change**
+  (`Y1002`, `Y0041_D02`, `Y0414_D02`, `Y0930`, `Y0978_D05`, `Y1002_D05`, `Y1134_D06`, `Y1134_D07`,
+  `k5_16 Y0930/Y0997/Y1002/Y0449/Y0648/Y0809`, `Y0997`, `Y1099`, `k5_16 Y1099`), and it narrows 272 of 465
+  boxes strictly further than the stock core (mean kept volume 0.602 → 0.584).
+- **A60 had never been clipped at all.** Its pins are EXACT placements, so the guaranteed pin core is the
+  whole unit square: **34 of the 283 A60 nodes clip to EMPTY**, 143 more narrow. Three of them
+  (`c0_Y0168`, `c0_Y0254`, `c0_Y0878`) are inside the drawn top 20 and their pages say so.
+  Independent control (sampling, a different code path): 4,000 uniform poses in each EMPTY box give ZERO
+  pin-free poses; non-empty controls give 75–2,126.
+- **The pages.** `docs/shadows/a57v3/` — 40 A57 + 20 A60, `README.md` (ranked table), `review_a57v3.csv`,
+  `docs/shadows.md` Part IV. Drawn to the PI's rules of the evening: all THREE cores of every conditioned
+  square in distinct styles (stock K(a) solid black, A135 exact axis core solid teal, K' filled purple,
+  captioned `a_stock / a_exact / area K'`), BOTH cores on every pin, each red-dashed column labelled with
+  which core it clears and which it meets, and every schematic object (centre box, clipped box, lane cell)
+  a thin dashed outline with no fill. 1,240 red-dashed columns over the 60 pages, **376 of them impossible
+  against an EXACT PIN CORE** rather than against the conditioned square — the pins' share A132's
+  attribution predicted.
+- **Trap banked:** a hypothesis box is a PIN only when its tilt width is zero. A60's depth-2 nodes
+  (`f1_L10_0003`) carry a previously-conditioned square with a TILT WINDOW in the pin slots; drawing it as
+  a zero-tilt pin at its box centre is wrong, and the exact-core containment check is what caught it.
+  Slack pins (`slack0.02_*`, centre half-width 0.0141) are still pins — the test is `th1 == th0`, not
+  `x1 == x0`.
+- **Geometry check** (`code/verify142.py`, a second implementation: edge crossing + strict point-in-polygon,
+  no separating axis anywhere in the file): 1,240 red-dashed columns over 361,906 poses, 2,088 non-flagged
+  control columns each shown disjoint at some pose of every box, 300 exact pin cores over 9,900 poses,
+  2,384 K'(B) vertices over 20,580 poses, 446 clipped rects — **zero failures**.
+- **Caveat of record:** lane counts on these pages are A118's stored AXIS-CORE verdicts (K(a), not K'),
+  because A141 had not landed; a corner marked UNDECIDED here may still become LANE<=1 under K' — the
+  s3_far effect. And a pocket is an exact convex-polygon DISTANCE, a measurement for the reading, not a
+  proof that nothing fits; the proof is the lane leaf.

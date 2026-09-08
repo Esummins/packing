@@ -24,6 +24,10 @@ OUT = os.path.join(ROOT, "docs", "shadows", "a57v3")
 
 def look_for(sm):
     bits = []
+    if sm.get("clip_empty"):
+        bits.append("**DEAD**: the pin-clip at the EXACT pin core empties the box at all 8 tilt "
+                    "sub-bins" + ("" if sm.get("clip_empty_stock")
+                                  else " (the deployed stock-core clip does not see it)"))
     if sm["lane1"]:
         bits.append("LANE<=1 at " + ", ".join(sm["lane1"]) + " (a second meeter is the cover)")
     nn = [p for p in sm["pockets"] if p["gap"] < 1.0]
@@ -149,6 +153,47 @@ def main():
              "most likely to close. That is the order below.")
     L.append("")
 
+    cs = None
+    p = os.path.join(BASE, "results", "clipsweep142.json")
+    if os.path.exists(p):
+        cs = json.load(open(p, encoding="utf-8"))
+        L.append("## 2b. A free kill found while drawing: the pin-clip at the EXACT pin core")
+        L.append("")
+        L.append("A131 deployed the clip with the STOCK pin core half-side "
+                 "`A_PIN = 1/2 - delta = 0.49`. A135 certified the pin's guaranteed core to be "
+                 "the larger square of half-side `1/2 - delta/sqrt2 = 0.492928902`, and that the "
+                 "frozen verifiers take the half-side VERBATIM. Enlarging `a_pin` in the clip is "
+                 "sound for the same reason it is sound in the verifier: the conditioned square "
+                 "is interior-disjoint from the pin square, and the pin square CONTAINS K'(P) at "
+                 "every pose of the pin box. So the clip re-run at `a_pin = a_exact` is a "
+                 "strictly stronger geometric test at the same cost - and it is the composition "
+                 "of the day's two levers that nobody had run.")
+        L.append("")
+        a = cs["a57"]
+        b = cs["a60"]
+        L.append(f"* **A57**: over all {a['n']} surviving nodes the deployed stock-core clip "
+                 f"empties **{a['empty_stock']}** (the correct control - the 132 stock-clip "
+                 f"kills were already removed from this population), and the exact-core clip "
+                 f"empties **{a['empty_exact']}**. Those "
+                 f"**{a['n_new']} are NEW T5''' logic kills**, free, geometry only: "
+                 + ", ".join(f"`{x}`" for x in a["new_empty_under_exact"]) + ".")
+        L.append(f"* **A60 has never been clipped at all.** Its pins are EXACT placements "
+                 f"(box `x0 = x1`), so the guaranteed pin core is the whole unit square, "
+                 f"`a_pin = 1/2`. Of the {b['n']} A60 nodes with an LP support, "
+                 f"**{b['empty_exact']} clip to EMPTY** - dead by pin geometry, no LP, no "
+                 f"certificate change. {b['touched_exact']} more are narrowed (mean kept volume "
+                 f"{b['mean_kept_exact']}).")
+        L.append(f"* Across A57 the exact core also narrows **{a['tighter_than_stock']} of "
+                 f"{a['measured']}** boxes strictly further than the stock core does (mean kept "
+                 f"volume {a['mean_kept_stock']} -> {a['mean_kept_exact']}).")
+        L.append("")
+        L.append("Independent control (`results/clipsweep142.json`, sampling, not the same "
+                 "code path): 4,000 uniform poses drawn in the box of each EMPTY node give "
+                 "**zero** pin-free poses, while non-empty controls give 75-2,126. Every page "
+                 "below draws BOTH clips - pale orange dotted = stock, heavy orange dashed = "
+                 "exact - so the difference is visible on the node.")
+        L.append("")
+
     for camp, key, title in (("A57", "rank_a57", "3. A57 - the top 40 by subtree cost"),
                              ("A60", "rank_a60", "4. A60 - the top 20 by subtree cost")):
         drawn = [s for s in summ if s["camp"] == camp]
@@ -157,9 +202,9 @@ def main():
         L.append(f"## {title}")
         L.append("")
         L.append("| # | node | class | L | subtree cost | family | tau/budget | K'-only support "
-                 "(cols / weight) | impossible cols (pins) | LANE<=1 corners | narrowest pocket "
-                 "| what to look for |")
-        L.append("|---|---|---|---|---|---|---|---|---|---|---|---|")
+                 "(cols / weight) | impossible cols (pins) | clip kept (exact core) | LANE<=1 "
+                 "corners | narrowest pocket | what to look for |")
+        L.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
         rk = {r["id"]: r for r in pop[key]}
         for s in drawn:
             r = rk.get(s["id"], {})
@@ -168,7 +213,9 @@ def main():
                 f"{s['subtree_cpuh']:.2f} CPU-h | {s['shadow'] or '-'} | "
                 f"{s['tau']:.6f}/{s['budget']} | {r.get('n_poly_only', '-')} / "
                 f"{r.get('w_poly_only', '-')} | {s['n_impossible']} ({s['n_impossible_pin']}) | "
-                f"{', '.join(s['lane1']) or '-'} | {s['pockets'][0]['to']} "
+                + ("**EMPTY - dead**" if s.get("clip_empty")
+                   else f"{s['clip']['kept_vol']:.3f}")
+                + f" | {', '.join(s['lane1']) or '-'} | {s['pockets'][0]['to']} "
                 f"{s['pockets'][0]['gap']:.3f} | {look_for(s)} |")
         L.append("")
 
