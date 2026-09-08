@@ -1,4 +1,4 @@
-﻿# The residue ledger — everything still standing between us and s(11) = ŝ, as of 2026-09-07 12:00
+﻿# The residue ledger — everything still standing between us and s(11) = ŝ, as of 2026-09-08 07:05
 
 Companion to `residue_map.md` (the narrative, kept as a log) and `shadows.md` (the gallery). This file is the
 **exhaustive list** of what is not yet killed, organised by node family, with a picture for each family, its current
@@ -16,7 +16,7 @@ lists what is left; that file prices it.**
 
 | layer | family | what is left | count | technique now | needs |
 |---|---|---|---|---|---|
-| A57 window trees (k5_11, k5_16) | S01 "room at side 4" | boxes whose LP support leaves a slot empty/singly met | ~420 alive-at-LP (k5_11 238 + k5_16 178) | crowd rows tried (A109): 0 kills at licensed depth | splitting (tree terminates); or a depth lemma above s0 |
+| A57 window trees (k5_11, k5_16) | all families | **work-owing population 406 after the night of 2026-09-08 (was 632; 607 before the day's geometry)** — S01 room and S02 pinwheel still dominate the alive set | 406 (142 ALIVE un-re-solved + FAILs + queued children) | exact pin cores certified 28.6 % of the alive nodes re-solved; geometry (exact core, clip, polygon, slot-lane) kills 26 % of fresh children before any LP | the queue (2,184 LP jobs); the polygon/guard-line v3/v4 clauses for the FAIL population |
 | | S02 the k7 pinwheel | boxes whose support is the 3.8867 pinwheel | 252 (184 + 68), carries the deep tree | tight core (in), deeper levels terminate (f₄ = 0) | grain kill (§6) or just time |
 | | S03–S06, S08–S53 | 45 smaller shadows, mostly level 1 | ~250 | as S01/S02 by type | PI review of the gallery |
 | | fractional | no integral support at all | 264 (151 + 113) | tree only | the genuine tail |
