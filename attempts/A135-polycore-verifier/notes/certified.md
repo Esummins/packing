@@ -16,8 +16,8 @@ sentinel).
 
 **Every one of A132's three "LP-dead under polygon core, certificate pending" nodes now has a
 certificate, and two of the three are certified by the FROZEN verifier with nothing changed but
-the half-side written into the `cores` field.** 2.6 CPU-h across the six frozen-arm solves plus the
-v3 arm and its replay.
+the half-side written into the `cores` field.** 0.61 CPU-h across the six frozen-arm solves plus
+the v3 arm and its replay (see the CPU accounting at the end).
 
 `Y0871`'s two arms hit the 600 s LP cap unconverged, so their τ is a lower bound and A124's "CAP
 is never a verdict" applies — **to the LP**. It does not apply here, because the verdict is not the
