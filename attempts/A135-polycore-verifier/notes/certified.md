@@ -160,3 +160,26 @@ A132's caveat stands and A135 does not touch it: **three converged pairs, on nod
 largest offending weight, is not a rate.** What A135 adds is that the certificate cost of the
 lever is now known — the frozen path is free, and the v3 path costs 20 s of verification on a node
 whose LP already cost 377 s.
+
+## CPU accounting
+
+Recorded job wall (the six frozen arms + the v3 arm, summed from the `wall_s` fields of
+`results/emit135_s{0,1}.jsonl` and `results/emitpoly135.jsonl`): **2,185 s = 0.61 CPU-h**. Add the
+two regression sweeps (~2 min), the sampled controls (~90 s), the two ledger builds (~2 min),
+`t1probe` (5 s) and three Lean elaborations (~4 min) and the attempt cost **≈ 0.8 CPU-h**, against
+the brief's 8 CPU-h cap. Never more than 2 BelowNormal BLAS-pinned processes
+(`OMP/OPENBLAS/MKL/NUMEXPR_NUM_THREADS=1`, `PYTHONDONTWRITEBYTECODE=1`); no shard was launched.
+(The commit message's "~3.5 CPU-h" is a conservative over-estimate made before this tally; 0.8 is
+the measured figure.)
+
+## One incident, recorded
+
+`regress135.py`'s first run let the verifier write `<cert>.witnesses.json` next to each FAILing
+certificate, which put one file into another campaign's tree
+(`attempts/A57-shadow-trees/certs/k5_11.witnesses.json`, a derived artefact, 17:17:04). It was
+restored from git immediately (`git checkout --` that single path; A57's tracked tree verified
+clean) and the driver now passes `--witness-file` into A135's own `results/`, with the reason in a
+comment so the next copy of this pattern does not repeat it. The regression verdict is unaffected
+(that certificate is rc = 1 under BOTH v1 and v3, which is the datum). Nothing else outside
+`attempts/A135-polycore-verifier/` was written except the two files the brief asks for:
+`docs/budget.md` §D and one paragraph in A57's `PAUSED.md` resume block.
