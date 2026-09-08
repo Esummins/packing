@@ -176,6 +176,13 @@ def main():
             print(f"free physical {fm:.0f} MB < {a.min_free_mb:.0f} MB gate; stopping", flush=True)
             break
 
+        # Re-read the ledgers per node, not just at startup.  Observed 2026-09-07 10:10:
+        # shard 1/2 wall-capped Y0726, and shard 0/2 -- whose queue had been built before that
+        # row existed, and whose sibling's claim file had aged past the ttl -- solved it again
+        # for another 1500 s.  The startup done-set cannot see anything recorded after it.
+        if (r["_cls"], r["id"]) in ledger():
+            print(f"{r['id']:34s} recorded since this queue was built; skipping", flush=True)
+            continue
         if not claim(r["id"], a.node_wall + 300.0):
             print(f"{r['id']:34s} claimed by the sibling shard; skipping", flush=True)
             continue
@@ -225,16 +232,35 @@ def main():
 
         rec = dict(id=r["id"], cls=r["_cls"], budget=bud, cap=a.cap, trimmed=bool(a.trimmed),
                    note=note, tau_before=r.get("tau"), eta_before=r.get("eta"))
+        # Persist the LP result.  A131's point, confirmed: recheck96 decides a "kill" as
+        # tau < budget and never runs certify.py, so a re-check kill is an LP VERDICT, not a
+        # certificate -- and because solve_node ran with out=None the node json needed to
+        # certify it afterwards does not exist, so certifying costs a full ~900-1500 s re-solve.
+        # Writing it here (into A124, never into A57) makes every future re-check kill
+        # certifiable for the price of certify.py alone.
+        nodedir = os.path.join(BASE, "results", "nodes")
+        os.makedirs(nodedir, exist_ok=True)
+        node_out = os.path.join(nodedir, f"{r['id']}.json")
         try:
             s = solve_node(recheck96.S_RAT, Hyp(pins + [b], []), bud, sym_kind="C1",
                            warm=dict(atoms=list(W["atoms"]), rows=W["rows"]),
-                           time_limit=a.cap, max_iter=900, out=None, log=lambda *x: None,
+                           time_limit=a.cap, max_iter=900, out=node_out, log=lambda *x: None,
                            prune=0, prune_cols=3, col_stop_iter=10 ** 6, col_stop_cov=1.002,
                            max_cols_add=400, max_rows_add=2000, fine_slack=99.0, alternate=True)
             tau = s.get("tau")
-            rec.update(tau_after=tau, converged=s.get("converged"),
-                       eta_after=(tau - bud) if tau is not None else None,
-                       kills=(tau is not None and tau < bud))
+            eta = (tau - bud) if tau is not None else None
+            # kills=True means only tau < budget, which at |eta| ~ 1e-14 is float noise on
+            # tau = budget.  Record the campaign's own grading alongside it (A96 arm C /
+            # PAUSED.md 5b use eta < -0.005*tau for a STRICT kill) so the kill table cannot be
+            # read as 17 kills when it is 17 knife edges.
+            rec.update(tau_after=tau, converged=s.get("converged"), eta_after=eta,
+                       kills=(tau is not None and tau < bud),
+                       grade=(None if eta is None else
+                              ("STRICT" if eta < -0.005 * tau else
+                               ("KNIFE" if abs(eta) < 1e-9 else
+                                ("WEAK" if eta < 0 else "NO-KILL")))),
+                       node_json=node_out if os.path.exists(node_out) else None,
+                       certified=None, cert_note="LP verdict only; certify.py not run")
         except Exception as e:
             rec.update(error=repr(e)[:200])
         rec["wall_s"] = round(time.time() - t0, 1)

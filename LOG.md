@@ -5499,3 +5499,98 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
   to a 9,000-row warm start when free physical memory fell under 1 GB (lemma T19); ~3.3 CPU-h total;
   `PYTHONDONTWRITEBYTECODE=1`; no recursive deletes, no pidfile deleted; git fetch + plain merge +
   push of own paths.
+
+## 2026-09-07 — A124-recheck-day (Opus chore, ≤ 2 BLAS-pinned BelowNormal processes, READ-ONLY on every other attempt and on A57's drivers) — done-mixed: the trimming projection was never wrong, the re-check is not what the budget says it is, and Y0381 is a missing HiGHS option
+
+- **T2 — the touched-vs-emptied control (`code/control124.py`, 4.7 s over 2,418 boxes).** The v1
+  offline control never conflated the categories: `docs/residue_ledger.md` says "159 boxes' surviving
+  bin is empty ... 155 more are partially trimmed", and the re-run reproduces **EMPTIED = 159**
+  exactly (TRIMMED = 166, grown by the night's rows). **The conflation is in PAUSED.md v2 §4**, which
+  tabulated the 159 as "boxes touched by trimming, 6.62 %" and compared it against the live *touch*
+  rate. Corrected offline figures, n = 1744: **9.12 % emptied, 18.64 % touched**. Positive control
+  **741/741** recomputed T5′ kills fully emptied.
+- **The live run never contradicted the projection.** Denominator-matched and out of sample — the
+  night's 206 post-T5′ level-1 children against the 1,043 pre-night level-1 boxes — EMPTIED 1.46 % vs
+  2.97 % (**Fisher p = 0.35**), TRIMMED 7.77 % vs 9.01 % (**p = 0.69**). The apparent 3.7× collapse
+  was two artefacts stacked: 3.70 % is the *all-levels* incremental rate while the night emitted only
+  level-1 children (the least favourable level), and the live 1.01 % used 296 as its denominator
+  instead of the 206 T5′ had not already killed. Cross-check: the control independently classes
+  exactly the 3 `pin_info=="trim"` night rows as EMPTIED, **3 of 3** agreement with the deployed rule.
+- **Schedule re-derived on full kills only** (`code/schedule124.py`; trimmed-but-alive nodes pay the
+  same LP): **13.3 → 10.5 wall-days** offline, 10.6 with the live L1 rate, 11.7 if every level is
+  short by the live/offline factor. **The 10–11 figure was already full-kills-only and it survives.**
+  It rests almost entirely on the **level-2 rate of 13.7 %**, for which there is still no live data —
+  the first `deepen.py` after the resume settles it; nothing about level-1 emission will.
+- **THE DAY'S REAL RESULT, and it was sitting in the results files: T5″ applied RETROACTIVELY.**
+  Of the 414 ALIVE rows, **57 already have an empty surviving bin** under the deployed
+  `trim57.trim_box` (k5_11 L1 13 / L2 18 / L3 3, k5_16 L1 21 / L2 2 — the coordinator's count,
+  reproduced exactly, and a second positive control since `trim57` and `trim96` agree on all 57).
+  `recheck96 --trimmed` does *not* waste LP on them (the `not subs` branch precedes `solve_node`), but
+  it reaches them **in queue order**, so 54 free kills sat behind ~13 CPU-h of solving.
+  `code/trimsweep124.py` banked all **54 in seconds, 0.0 s of LP** (L1 31, L2 20, L3 3), writing the
+  actual `excluded_intervals` and `original_bin` — PAUSED.md §6's MUST-FIX, done for these rows.
+- **Scanning the whole population: 55 of the 193 FAIL rows (28.5 %) are dead by the deployed trim**,
+  and 112 of the 607 work-owing nodes (18.5 %) overall. All **674** stored KILL-BY-LOGIC rows come out
+  empty, 100 %. The resolver queue is the expensive tail (FAIL p50 375 s, max 3,385 s) and more than a
+  quarter of it carries no configuration. A124 is read-only on A57 so those 55 are a **recommendation**:
+  run the scan before the resolver restarts. Applied retroactively, trimming retires ~18 % of the
+  outstanding node count for the cost of a geometry scan — a different and **additive** saving to T2's
+  prospective 21 %.
+- **Monotonicity, checked not assumed.** The three trim-empty L3 nodes `Y0036_D07_D00/_D04/_D05` were
+  descended into *before* T5″ existed; all **24 of 24** L4 children are also trim-empty (a child's box
+  and bin are sub-objects, so the same pin octagon still contains them). Their recorded verdicts are
+  14 KILL-BY-LOGIC, 4 PASS, **6 FAIL** — six resolver items owed against a subtree that is dead at its
+  root.
+- **T1 — the re-check, and a correction to the headline that justified it.** 53 level-1 LP nodes at a
+  900 s cap and a hard 1,500 s process wall, 16.24 CPU-h of the 20 h cap, 8 wall-caps (never a
+  verdict). A131 is right that `recheck96.py:116` calls a kill `tau < budget` and **never runs
+  `certify.py`** — so no re-check kill has ever been certified. Graded by the campaign's *own* strict
+  rule (`eta < −0.005·tau`, PAUSED.md §5b): today **2 STRICT, 1 WEAK, 18 KNIFE** (|η| ≤ 1e-9), and
+  **§9's "11 certified kills from 23 nodes, 47.8 %" is 1 strict, 2 weak, 8 knife**. Both of today's
+  strict kills (`Y1099` η = −1.000, `Y1002` η = −3.4e-02) were **already in arm C's strict-kill set**
+  `{Y1002, Y0817, Y1099}`. Fifteen CPU-hours rediscovered two known nodes and found no third.
+- **So `docs/budget.md`'s ranking is backwards.** It lists the 900 s re-check as "the best per-budget
+  item on the board". Measured over a full day: **2 strict kills for ~15 CPU-h**, against **54 genuine
+  logic kills for zero** from the geometry sweep, with 55 more visible in the FAIL queue.
+- **Why no certificates today, and the fix.** `certify.py` takes a node json; `recheck96` runs
+  `solve_node(out=None)`, so certifying a re-check kill needs a full ~900–1500 s re-solve first, which
+  did not fit the clock. `recheck124.py` now writes `results/nodes/<id>.json` and records `grade`,
+  `node_json`, `certified: null`, `cert_note` — after which certifying costs only certify.py, ~240 s
+  each. **Next step, ~8 CPU-min:** certify `Y0054`, `Y1099`, `Y1002` (+ the weak band if wanted).
+  Do **not** attempt the knife-edge nodes — at η = −1e-14 the certifier is asked to prove a strict
+  inequality holding by less than its own arithmetic noise.
+- **T3 — `Y0381` diagnosed (`code/repro_y0381.py`).** Reproduced exactly (same 3,827-atom folded pool,
+  same `init orbits=3827 rows=16602`, same iteration trace), nothing written into A57. All **11**
+  faulthandler dumps, including the one at the 600 s wall, give one stack: **`lpbox.py:417
+  self.h.run()` ← `lpbox.py:846 M.solve()` ← `caselp.py:337 solve_node`** — one `h.run()` ran 380 s and
+  never returned, and never printed the non-optimal-status diagnostic. Not column generation, not the
+  certifier, not `pinguard`. **Cause: `LPModel.__init__` sets `output_flag=False` and `threads=1` and
+  never sets `time_limit`**, while `solve_node`'s limit is checked only *between* iterations — one
+  thread at 100 %, zero output, no bound. The 00:48 run died in the final unconditioned solve at
+  `:908`, the 03:02 run in the in-loop solve at `:846`; same call. **Not a T5″ artefact** — bin width
+  10.880664 is a canonical cover width, `pin="ok"`, untrimmed; pre-existing.
+- **Guard recommended, with its caveat.** `self.h.setOptionValue("time_limit", ...)` at `lpbox.py:266`
+  is the one line, **but it is not the whole fix**: on a time-limited exit HiGHS returns the incumbent,
+  `:419` re-solves cold, and `res["tau"]` is then set from a **non-optimal** LP — a τ below the true
+  optimum would manufacture a kill, so `kTimeLimit` must be propagated as CAP-not-a-verdict first.
+  Until then, prefer the per-node **process wall** A124 ran all day: a watchdog that records `WALL-CAP`
+  in the driver's own ledger only and `os._exit`s, with a supervisor that restarts. It fired 8 times
+  today, cost nothing, needs no edit to a frozen driver, and bounds *every* node rather than one.
+- **The scoped-sentinel mechanism (coordinator's request), now PAUSED.md v2 §7a.** `pausegate.paused()`
+  with no argument checks *both* bases, which is why A123's pause also stopped `recheck96` and A120's
+  runner. The fix is `paused(base=OWN_ATTEMPT_BASE)` — one line at the *consumer's* call site, no edit
+  to `pausegate.py`, no deletion of A123's sentinel, and every driver calling the bare `paused()` (all
+  six shards, both deepens) stays paused. A124 watched its own `attempts/A124-recheck-day/PAUSE`;
+  **A123's sentinel was never deleted and `recheck96.py` was never modified**. A120 can resume the same
+  way. Corollary: "the A57 PAUSE is set" no longer implies "nothing is running" — check pids.
+- **Discipline.** ≤ 2 BLAS-pinned BelowNormal processes, dropped to **one at 15:31** via the scoped
+  sentinel when the box hit 18 python processes and 4.5 GB free (both workers drained cleanly, nothing
+  lost; relaunched as a single `--shard 0/1`). Frozen verifiers byte-identical (`verify_param.py`,
+  `verify_case.py` — all four copies match `frozen.sha256`). Orphan reaper every 30 min, **zero orphans
+  all day**. Free physical never below 4.5 GB. `PYTHONDONTWRITEBYTECODE=1`. No recursive deletes, no
+  pidfile deleted, no shard launched, no A57 driver edited, no write into any other attempt except the
+  permitted appends to `recheck96.jsonl` and the PAUSED.md notes. Git: fetch + plain merge + push of
+  own paths.
+- **One bug found and fixed in A124's own driver.** A worker's queue is built once at startup, so after
+  a watchdog restart it re-solved `Y0726`, which the sibling shard had already wall-capped, for another
+  1500 s. `recheck124.py` now re-reads both ledgers **per node**, not only at startup.
