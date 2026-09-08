@@ -72,6 +72,33 @@ K(a) along each diagonal. The polygon core K′(B) = ⋂ over poses of the squar
 interval formula) prunes those columns, strengthens the certificate hypothesis, and kills against pin cores; it needs a
 v3 verifier clause and one Lean lemma. Both leaks are the same lesson: *use the exact pose set, not its axis-aligned shadow*, and both apply to every conditioning tree (protected tier, k0). **(3) The slot lane kill (A141 `1f9de0ef`, after the PI's Y0460 reading):** with the polygon core of H and the exact pin cores as obstacles, a usable slot (its extension class dead on the closed window — every listed k6 extension is) that no free square can reach (LANE_K′ = 0) while H can (M = 1) is singly met, the near-simple meeter snaps to the slot, and the packing lands in a dead k6 class. Final (A141 `c0578941`, all 1,693 records): **188 distinct A57 nodes (96 k5_11 + 92 k5_16) and 56 trump5 nodes killed**, 194 level-1 and 50 level-2, one slot each (k5_11: BR(0,1) 45, TR(0,0) 27, TL(1,0) 23; k5_16: BL(1,0) 54, TL(1,0) 38; trump5: BR(0,1) 45, TL(0,0) 11), 200,000 poses per kill with 0 free, 294 certificates all passing an independent checker; **243 of the 244 are new beyond the clip kills** (the two leaves are disjoint: a clip empties the box, a lane kill says a usable slot is singly met). Sound for A57's composition (A118-O1 only forbids the broader slack-pin reuse). Folded in by the night shift; priced in the morning digest. Y0460 itself is NOT among them: its BR(0,1) keeps 34,000 free poses and the cover cannot certify LANE ≤ 1. **(4) The impossible-weight gate (A145 `b250191b`, after the PI's Y0241 reading):** Y0241 is certified dead (τ 5.000 → 3.250 under exact cores + K′, verify_case_v3 PASS; the frozen verifier fails the same measure with 32 holes); over 18 re-solves ranked by the share of support weight impossible under the hypothesis, 10 LP kills and 9 certificates (3 under the frozen verifier with only the half-side changed); the share is a THRESHOLD predictor — 4 of 5 killed above 0.60, 0 of 7 moved below 0.45 — so the exact-core re-emission runs in descending order of it (98 survivors above 0.60 ≈ 9 CPU-h; the 118 below 0.30 are de-prioritised). **(5) Guard-line rows (A144 `093cc105`, after the PI's Y0147 reading):** chords of a packing's squares along any line sum to ≤ s; on Y0147 the PI's line carries a pin, H (minimum chord exactly 1 over the box) and two of the LP's own free columns for 4.0055 > s0, a violation of 0.128 the `st4` reading could not express; 86 of the 448 survivors violate some guard line offline (43 s, no LP). As an LP row it is active on 2 of 20 re-solves (Y0147 → η −0.12, Y0101) and unemittable under the frozen chain, so it needs a v4 clause (spec written, Lean shape 2 theorems + 1 checker, no new axiom). The by-product mattered more: on those 20 nodes the EXACT CORES alone kill 15, the deployed cores 0 of 6 — the drop is the cores, which is what the night's re-emission runs on.
 
+**(6) The cover-number leaf — MEASURED AND CLOSED, ZERO kills (A153 `attempts/A153-cover-number`, after the PI's
+Y1117 reading of A148's v4 pages).** *Lemma CN*: two interior-disjoint unit squares have centres at Euclidean distance
+≥ 1, because each contains the open disk of radius 1/2 about its centre and closer centres put their midpoint in both
+interiors. So the centres a node has still to place are a 1-separated subset of A148's certified OUTER feasible-centre
+region `F_out = GREEN ∪ UNDECIDED`, and *Leaf CN* follows: if `F_out` is covered by `k` sets of diameter < 1 then at most
+`k` more squares fit, so `k < budget` is a kill with **no LP**. Pieces are axis-aligned squares of side `d` with the
+exact rational test `2d² < 1` (on A148's 194² grid, a 35 × 35 block of cells: side `6784897/9700000 = 0.699473918`, the
+PI's side-0.7 squares); `F_out` is a union of grid cells, so "the pieces cover `F_out`" is a finite integer check, and
+each kill would carry a certificate (grid + obstacle polygons + rational pieces + a 10⁴-pose sample line) replayed by
+an independent checker (`code/check153.py`, its own SAT, five mutation tests). The Lean cost is **one structure, one
+decidable `check`, and the two theorems `centre_sep` / `cover_bound` — no new axiom** (the analytic input REGION-OUTER
+is the one A148's white region already carries). **Result over 322 nodes** — the 60 alive A57/A60 nodes A148 drew, the
+11 k0_00 residue cells, and all 251 ALIVE A57 nodes of `PAUSED.md` v3 — **is zero kills**: the exact minimum cover
+(branch and bound, optimum proved on 197 of the 322, greedy meeting the independent-set bound) runs from `budget + 0`
+(one node, `k5_11_interior_Y1104_D01`) to `budget + 12`, median **+4**; on k0 it is 18–22 against budget 10, so one
+conditioned square can never make it bite. And the failure is structural, not a slack in the covering relaxation: on
+**322 of 322** nodes `F_out` already contains ≥ budget points pairwise ≥ 1 apart, a *floor* under every cover number at
+any pitch and any piece shape. Re-pricing the 18 tightest nodes at 4× resolution (pitch 0.01 × 72 tilts) removes 13–25 %
+of the `F_out` area and at most **one** piece; `Y1104_D01` stays at cover = 5 = budget at 1×, 4× and 16×. The
+tilt-coherent refinement (*Lemma TC*: same-tilt interior-disjoint squares need ‖Δ‖_∞ ≥ 1 in the `t`-frame, so pieces may
+be squares of side < 1 there, `d(1+δ) < 1` over a tilt bin of half-width δ — sound only on a common-tilt branch of the
+region tree) roughly halves the count and still kills nothing over any node's whole tilt window; its one hit,
+`k5_16_interior_Y0083` at exactly `t ≡ 0 (mod 90°)` with 4 < 5, dies at a tilt bin of half-width 0.1°. Y1117 itself, the
+node that prompted this: green 0.993 + undecided 0.756 = 1.749 of area, **cover number exactly 8** against budget 5,
+tilt-coherent 6 at every tilt of H's window and 7 window-robust, floors 6 and 5. Keep the number on the pages — it is
+the disk bound's combinatorial twin and 2–4 pieces tighter (Y1117: disk 10, cover 8) — but do not queue the leaf.
+
 **What the alive nodes are** (A107, LP dual support drawn directly — the PI's rule):
 
 ![the LP support at the four alive level-3 nodes](residue_map/a57_lp_support.svg)
@@ -145,7 +172,7 @@ NO certificates re-verified over the window, none of the fixed-side passes becam
 costs 10× the four fixed sides it replaces (a NO certificate is tiny at a fixed side precisely because the NO-family
 exempts most of the container). And the blocker moved to the YES side: a branch box enters the YES certificate as a
 core that the parametric core-affine form refuses, so certificate-based region-tree kills stay s0-only; the one
-window-valid claim today is the free TC kill of `k5_11_interior_Y0041_D02`, whose boxes are s-independent. Generalises as: *a class-boundary shadow — a dead class's minimiser
+window-valid claim today is the free TC kill of `k5_11_interior_Y0041_D02`, whose boxes are s-independent. **A151 (`PENDING`, 2026-09-08):** with the exact pin core S02 is the best-yielding family on the stubborn ALIVE population (36.8% = 21 of 57, against 25.9% overall and S01's 25.5%) but only marginally — every S02 kill lands within 0.25 budget units of the threshold and 29.8% fall in the LOST-KILL/TOO-TIGHT band against S01's 5.2%, while the survivors sit at τ = 5.000000 exactly — and an ASYMMETRIC N giving f1 ten times A116's cell volume (x ±0.40, y ±0.25, θ ∈ [8.435°, 88.435°]; 72,138 leaves; 10⁵ drawn → 2,959 tested → 0 hits) raises the consumer count from 72 to 96 of the 184 k5_11-frame S02 nodes (42 still alive), every growth refusal being a wall cap with no real partial packing found inside any grown N. Generalises as: *a class-boundary shadow — a dead class's minimiser
 sitting on a live class's box; the basin/grain lemma is the transfer.*
 
 ### 1c. Families S03–S06 (PI-read) and S08–S53

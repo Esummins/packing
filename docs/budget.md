@@ -96,6 +96,38 @@ merely unconverged at the LP time cap.
    certifier ceiling A120 reported is a rounds-1 artefact: at `--rounds 6` with a 2 600 s wall the
    verifier REFUSED nothing (54 PASS, 6 CAP, 0 FAIL) and the max PASS was 2 314 s. Remaining
    obstruction is 15 genuine survivors concentrated in 5 nodes, which need a different cover.
+   *A151 (`PENDING`, 2026-09-08) — the pinwheel basin priced by family, and an ASYMMETRIC N:* the
+   night's kill records joined to A107's shadow families, with the three lanes kept apart (A137's
+   rows all carry `lane: exact-core re-emission`, including the first LP of the night's own
+   children; mixing them inflates S02's rate from 36.8% to 43.6%). On the stubborn ALIVE population
+   the exact pin core makes **S02 the best-yielding family — 36.8% (21 of 57) against the
+   population's 25.9% and S01's 25.5%** — but only marginally: every S02 kill lands within 0.25
+   budget units of the threshold (median τ 4.75 against S01's 4.00), **29.8% of S02 nodes fall in
+   the LOST-KILL-ON-RESOLVE / TOO-TIGHT band** against S01's 5.2%, and the S02 nodes that do not
+   fall sit at τ = 5.000000 exactly — A106's "no open box contains it", in the LP's own numbers.
+   K′ is NOT the lever it was priced as here: **T5⁗ fired zero times on all 3,034 children** emitted
+   that night (T5′ at the exact core already takes them) and the geometric lane kills S02 at the
+   population rate (27.4% vs 27.1%), only the pin-clip preferring it (enrichment 1.37 — 50 of the
+   159 clip kills on 22.9% of the pool). Growing A116's N coordinate by coordinate from (0.2, 10°)
+   under a 3 CPU-h cap: **f1 certifies at 10× A116's cell volume** (x ±0.40, y ±0.25,
+   θ ∈ [8.435°, 88.435°]; 72,138 leaves; 100,000 drawn → 2,959 tested → **0 hits**; box-constrained
+   SLSQP minimum 3.885618; Trump outside), f2 only to θ ±14°, and **every other refusal is a wall
+   cap with 0 witnesses and 0 unresolved leaves — no real partial packing was found inside any grown
+   N**, so at this budget the limit is compute, not geometry, and A116's forced radii (f2 0.215,
+   f1 0.019) rank the two squares backwards for this purpose. That N was re-emitted through A133's
+   own generator and independent rational checker (imported unchanged, writes redirected) as
+   `local-cert-t-v1` **`S02_k5_11_A151asym_f1.tcert.json.gz`, DEAD, 38,590 leaves, 555,068 rows all
+   implied, exact certified minimum 3.8770844581 > s₀, checker VALID / 0 errors** (595 s emit,
+   191 s check) — the same object and format as the YES-leaf citation A136 uses, so it is a drop-in
+   replacement subject to the Lean re-emission. Consumers: **96 of the 184 k5_11-frame
+   S02 nodes (42 alive) against the symmetric N's 72 (32)**, +33%. Priced at A136's measured
+   3,469 s per target attempted and 69% close rate (**1.39 CPU-h per closure**), the widening is
+   worth **6.9 closures for 9.6 CPU-h ≈ 0.08 wall-days at 5 workers** on its 10 new alive consumers;
+   the exact-core re-solve is **3.6× cheaper per kill (0.39 CPU-h)** but closes only 37%, and the two
+   compose — re-solve first, split what survives (~7.7 of 10 for ~7.2 CPU-h). **Widening N is not the
+   binding constraint:** the symmetric N already has 26 alive consumers the YES/NO runner has not
+   finished (21 that were never A120 targets, 3 NOT-RUN, 2 OPEN) — 25 CPU-h of exactly the same
+   work, at the same price. Notes: `attempts/A151-pinwheel-basin/notes/{method,results,t2_table}.md`.
    *A118 (`405b6522`):* the lane-count leaf is a 0.37 s/cell emission-time pre-screen worth ~1.7% of LPs (0.05
    wall-days) — deploy at resume; the two-meeter cover does not terminate (2–500 CPU-h per node); the octagon pair
    test supersedes Lemma TC as the pair leaf.
@@ -270,6 +302,28 @@ merely unconverged at the LP time cap.
    *Files:* `attempts/A144-guard-lines/{code,notes,results,figs}`, notes `spec.md` (the cut, the
    `guardlines` field, the v4 clause, `chord_sum_le_side` / `minchord_of_box`) and `measurement.md`;
    figure `figs/k5_11_interior_Y0147_guardline.svg`.
+
+8. **The COVER-NUMBER leaf: a sound, LP-free, ~5 s/node price — that kills nothing, and provably will not.
+   MEASURED AND CLOSED (A153, 2026-09-08, 2.5 CPU-h, 322 nodes).** Two interior-disjoint unit squares have centres
+   ≥ 1 apart (each contains the open disk of radius 1/2 about its centre), so the centres a node still has to place
+   are a 1-separated subset of A148's certified outer feasible-centre region `F_out`; if `F_out` is covered by `k`
+   pieces of diameter < 1 then at most `k` more squares fit, and `k < budget` is a kill with no LP. The pieces are
+   axis-aligned squares of side `6784897/9700000 = 0.699473918` (exact test `2d² < 1`), `F_out` is a union of A148
+   grid cells so the covering check is finite integer arithmetic, and the whole leaf costs **one Lean structure, one
+   decidable check and two Mathlib-level theorems — zero new axioms** (`attempts/A153-cover-number/notes/lemma.md`).
+   **Over the 60 A57/A60 nodes A148 drew, the 11 k0_00 residue cells and all 251 alive A57 nodes of `PAUSED.md` v3:
+   0 kills.** Exact minima by branch and bound on 197 of the 322; `cover − budget` median **+4**, best +0 (one node),
+   k0 18–22 against budget 10. **The obstruction is a floor, not slack:** on 322 of 322 nodes `F_out` itself already
+   holds ≥ budget points pairwise ≥ 1 apart, so no piece shape and no grid refinement can bring the count below the
+   budget — checked directly by re-pricing the 18 tightest nodes at 4× resolution (13–25 % less area, at most one
+   piece gained) and the tightest of all, `k5_11_interior_Y1104_D01`, at 16× (cover stays 5 = budget). The
+   tilt-coherent variant (Lemma TC, conditional on a common-tilt branch) roughly halves the count and still kills
+   nothing over any node's whole tilt window; its single hit dies at a tilt bin of half-width 0.1°. **Price it at
+   zero as a lever and keep it as a free assertion on the gallery pages** — it is the disk bound's combinatorial twin
+   and 2–4 pieces tighter (Y1117: disk bound 10, cover number 8), so it costs nothing to print and it bounds the
+   node honestly. *Files:* `attempts/A153-cover-number/{BRIEF.md,code,results,certs,notes/lemma.md}`; certificate
+   format and checker fixture `certs/k5_16_interior_Y1117.cover.json` (a demonstrator, not a kill: every clause of
+   `check153.py` passes on it except `#pieces < budget`).
 
 ## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
 
