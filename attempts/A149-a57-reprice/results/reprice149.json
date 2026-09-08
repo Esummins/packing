@@ -1,0 +1,383 @@
+{
+ "when": "2026-09-08",
+ "owner": "A149",
+ "decomposition": {
+  "standing_estimate_cpu_h": 768.0,
+  "standing_per_child_s": 431.0,
+  "measured_per_node_s": 282.9,
+  "same_count_at_measured_node_cost_cpu_h": 504.0,
+  "subtree_multiplier_F1_over_c": 3.76,
+  "note": "the standing figure counted one LP per level-1 ok child and no descent.  The node itself got CHEAPER (431 -> 283 s, exact cores); what the estimate never carried is the subtree, and at the measured level-1 descent one ok child costs 3.76 nodes."
+ },
+ "model": "E_L = (1-g_L)[c + 8 d_L E_{L+1}], E_5 = 0; F_L = E_L/(1-g_L)",
+ "workers": 5.0,
+ "rates": {
+  "g1_new": [
+   62,
+   276
+  ],
+  "g1_all": [
+   245,
+   849
+  ],
+  "g2": [
+   464,
+   1869
+  ],
+  "g3": [
+   82,
+   256
+  ],
+  "g4": [
+   7,
+   8
+  ],
+  "d1_new": [
+   20,
+   85
+  ],
+  "d1_all": [
+   39,
+   188
+  ],
+  "c_lane_b": 282.85714285714283,
+  "c_lane_a": 342.3312883435583,
+  "D2_a96": 0.113,
+  "exactcore_kill": [
+   46,
+   161
+  ],
+  "exactcore_band_030_045": [
+   15,
+   63
+  ],
+  "grid_ok": {
+   "side1": 1735,
+   "side2": 1723,
+   "side3": 1488,
+   "side4": 1472
+  }
+ },
+ "frontier": {
+  "counts": {
+   "ALIVE_D": {
+    "total": 157,
+    "by_level": {
+     "1": 133,
+     "2": 24
+    }
+   },
+   "ALIVE_U": {
+    "total": 44,
+    "by_level": {
+     "1": 44
+    }
+   },
+   "DEAD": {
+    "total": 3052,
+    "by_level": {
+     "1": 1552,
+     "2": 1313,
+     "3": 155,
+     "4": 32
+    }
+   },
+   "FAILD": {
+    "total": 3,
+    "by_level": {
+     "1": 3
+    }
+   },
+   "FAILN": {
+    "total": 91,
+    "by_level": {
+     "2": 40,
+     "1": 51
+    }
+   },
+   "NEW": {
+    "total": 325,
+    "by_level": {
+     "1": 325
+    }
+   },
+   "QUEUED": {
+    "total": 1432,
+    "by_level": {
+     "2": 1117,
+     "3": 101,
+     "1": 214
+    }
+   }
+  },
+  "cover_size": {
+   "k5_11": 1156,
+   "k5_16": 1157
+  },
+  "recorded": 3100,
+  "geo_dead": 798,
+  "queued": 2184,
+  "solved": 189,
+  "deepened_parents": 267,
+  "exactcore_targets_left": 117,
+  "orphaned_queue": 563,
+  "orphaned_queue_by_level": {
+   "2": 288,
+   "3": 73,
+   "4": 1,
+   "1": 201
+  },
+  "note": "side 1 (tag G1) only; DEAD absorbs PASS, logic kills and every supersession including inherited ones"
+ },
+ "scenarios": [
+  {
+   "scenario": "CENTRAL",
+   "note": "the night's rates on the population they were measured on: geometry at the NEW-id rate (22.5 %), descent at the NEW-id rate (23.5 %), node cost 283 s, A96's level-2 descent below, the 330 superseded queue jobs dropped, sides 2-4 credited with no geometry beyond the C-check",
+   "inputs": {
+    "g": {
+     "1": 0.2246,
+     "2": 0.2483,
+     "3": 0.3203,
+     "4": 0.875
+    },
+    "d": {
+     "1": 0.2353,
+     "2": 0.1503,
+     "3": 0.1663,
+     "4": 0.0
+    },
+    "c_s": 282.9,
+    "D2": 0.113,
+    "drop_orphans": true,
+    "grid_geo": 0.0
+   },
+   "per_child_s": {
+    "E1": 825.5,
+    "E2": 415.3,
+    "E3": 224.2,
+    "F1": 1064.6,
+    "F2": 552.5,
+    "F3": 329.9
+   },
+   "side1_cpu_h": {
+    "new_cover_children": 74.5,
+    "lp_queue": 244.0,
+    "exactcore_resolves": 11.1,
+    "alive_not_deepened": 40.6,
+    "open_fails": 21.5,
+    "total": 391.7
+   },
+   "sides234_cpu_h": 1384.9,
+   "total_cpu_h": 1776.7,
+   "walldays_at_5": 14.81
+  },
+  {
+   "scenario": "LOW",
+   "note": "optimistic and internally consistent: geometry at the all-ids rate (28.9 %), descent at the all-ids rate (20.7 %), node cost at the 240 s the campaign's LP cap implies, and the emission hooks credited on sides 2-4 at the measured 22.5 %",
+   "inputs": {
+    "g": {
+     "1": 0.2886,
+     "2": 0.2483,
+     "3": 0.3203,
+     "4": 0.875
+    },
+    "d": {
+     "1": 0.2074,
+     "2": 0.1503,
+     "3": 0.1663,
+     "4": 0.0
+    },
+    "c_s": 240.0,
+    "D2": 0.113,
+    "drop_orphans": true,
+    "grid_geo": 0.2246376811594203
+   },
+   "per_child_s": {
+    "E1": 586.8,
+    "E2": 352.4,
+    "E3": 190.2,
+    "F1": 824.8,
+    "F2": 468.8,
+    "F3": 279.9
+   },
+   "side1_cpu_h": {
+    "new_cover_children": 53.0,
+    "lp_queue": 202.3,
+    "exactcore_resolves": 11.1,
+    "alive_not_deepened": 34.5,
+    "open_fails": 17.2,
+    "total": 318.1
+   },
+   "sides234_cpu_h": 831.9,
+   "total_cpu_h": 1150.0,
+   "walldays_at_5": 9.58
+  },
+  {
+   "scenario": "HIGH",
+   "note": "pessimistic: node cost 400 s (the top of docs/budget.md B's LP band), descent below level 1 at docs/budget.md B's ALIVE share rather than A96's 11.3 %, and the 330 superseded queue jobs NOT dropped",
+   "inputs": {
+    "g": {
+     "1": 0.2246,
+     "2": 0.2483,
+     "3": 0.3203,
+     "4": 0.875
+    },
+    "d": {
+     "1": 0.2353,
+     "2": 0.2128,
+     "3": 0.2354,
+     "4": 0.0
+    },
+    "c_s": 400.0,
+    "D2": 0.16,
+    "drop_orphans": false,
+    "grid_geo": 0.0
+   },
+   "per_child_s": {
+    "E1": 1376.5,
+    "E2": 730.6,
+    "E3": 335.9,
+    "F1": 1775.3,
+    "F2": 971.9,
+    "F3": 494.2
+   },
+   "side1_cpu_h": {
+    "new_cover_children": 124.3,
+    "lp_queue": 421.0,
+    "exactcore_resolves": 11.1,
+    "alive_not_deepened": 71.4,
+    "open_fails": 36.2,
+    "total": 816.0
+   },
+   "sides234_cpu_h": 2309.3,
+   "total_cpu_h": 3125.4,
+   "walldays_at_5": 26.04
+  },
+  {
+   "scenario": "control: budget.md B anatomy",
+   "note": "the SAME frontier priced with docs/budget.md B's pre-night anatomy (29 % logic kills, ALIVE 19 % of all nodes = 26.8 % of those that reach the LP, ~850 s per node incl. the 4-D window verify): how much of the change is the rates and how much is the counted frontier",
+   "inputs": {
+    "g": {
+     "1": 0.29,
+     "2": 0.2483,
+     "3": 0.3203,
+     "4": 0.875
+    },
+    "d": {
+     "1": 0.2676,
+     "2": 0.1503,
+     "3": 0.1663,
+     "4": 0.0
+    },
+    "c_s": 850.0,
+    "D2": 0.113,
+    "drop_orphans": true,
+    "grid_geo": 0.0
+   },
+   "per_child_s": {
+    "E1": 2500.6,
+    "E2": 1248.1,
+    "E3": 673.8,
+    "F1": 3521.9,
+    "F2": 1660.3,
+    "F3": 991.3
+   },
+   "side1_cpu_h": {
+    "new_cover_children": 225.7,
+    "lp_queue": 752.3,
+    "exactcore_resolves": 11.1,
+    "alive_not_deepened": 122.0,
+    "open_fails": 68.6,
+    "total": 1179.8
+   },
+   "sides234_cpu_h": 4581.5,
+   "total_cpu_h": 5761.3,
+   "walldays_at_5": 48.01
+  },
+  {
+   "scenario": "control: no geometry screen",
+   "note": "the marginal value of the emission hooks on the part of the frontier that has NOT yet been screened (325 new cover children only -- the 1,432 queued jobs are past the screen already, so this is NOT the hooks' value on the campaign as a whole)",
+   "inputs": {
+    "g": {
+     "1": 0.0,
+     "2": 0.2483,
+     "3": 0.3203,
+     "4": 0.875
+    },
+    "d": {
+     "1": 0.2353,
+     "2": 0.1503,
+     "3": 0.1663,
+     "4": 0.0
+    },
+    "c_s": 282.9,
+    "D2": 0.113,
+    "drop_orphans": true,
+    "grid_geo": 0.0
+   },
+   "per_child_s": {
+    "E1": 1064.6,
+    "E2": 415.3,
+    "E3": 224.2,
+    "F1": 1064.6,
+    "F2": 552.5,
+    "F3": 329.9
+   },
+   "side1_cpu_h": {
+    "new_cover_children": 96.1,
+    "lp_queue": 244.0,
+    "exactcore_resolves": 11.1,
+    "alive_not_deepened": 40.6,
+    "open_fails": 21.5,
+    "total": 413.3
+   },
+   "sides234_cpu_h": 1384.9,
+   "total_cpu_h": 1798.3,
+   "walldays_at_5": 14.99
+  }
+ ],
+ "D2_sensitivity": [
+  {
+   "D2": 0.05,
+   "cpu_h": 1386.2,
+   "walldays_at_5": 11.55,
+   "children_per_emitted_L2": 0.4
+  },
+  {
+   "D2": 0.08,
+   "cpu_h": 1564.9,
+   "walldays_at_5": 13.04,
+   "children_per_emitted_L2": 0.64
+  },
+  {
+   "D2": 0.113,
+   "cpu_h": 1776.7,
+   "walldays_at_5": 14.81,
+   "children_per_emitted_L2": 0.904
+  },
+  {
+   "D2": 0.15,
+   "cpu_h": 2033.2,
+   "walldays_at_5": 16.94,
+   "children_per_emitted_L2": 1.2
+  },
+  {
+   "D2": 0.2,
+   "cpu_h": 2411.7,
+   "walldays_at_5": 20.1,
+   "children_per_emitted_L2": 1.6
+  },
+  {
+   "D2": 0.25,
+   "cpu_h": 2827.0,
+   "walldays_at_5": 23.56,
+   "children_per_emitted_L2": 2.0
+  },
+  {
+   "D2": 0.3,
+   "cpu_h": 3278.9,
+   "walldays_at_5": 27.32,
+   "children_per_emitted_L2": 2.4
+  }
+ ]
+}
