@@ -5928,3 +5928,108 @@ cores and the extremal-tilt schematics).
   processes, BLAS pinned, A57/A60/A61/A86 untouched, frozen verifiers untouched, A85 engine COPIED not modified. Files:
   docs/proofs/tilt_floor_k0.md, attempts/A89-tilt-floor/{code,results,certs,notes,logs}, lean/depgraph.json (C.K4TIER note, chip
   released) + svg, REGISTRY row.
+
+## 2026-09-07 - A148-gallery-v4 (Opus engineer) - T1 done: the k0v4 set
+- The v4 page is fixed at THREE panels, in reading order: **G GEOMETRY: what is still free**
+  (largest, no LP in it at all), **S the LP support** (medium, captioned "what the relaxation puts
+  where; overlaps are the relaxation's slack, not a packing"), **N nearest real packing** (small,
+  at its own s* with s0 overlaid and the realisability banner).  One style per object: K'(B) is the
+  only core DRAWN inside a conditioned square (the stock and A135 exact axis half-sides are
+  captioned), pins carry their exact core as a thin inner outline, and every schematic region
+  (centre box, A131 clip, lane cell, guard line) is thin dashed and never filled.  A generated
+  WHAT TO LOOK FOR line and the verdict of every geometric leaf already run (clip, T5'''', lane,
+  conditional lane, guard line) sit in the header; a four-line footer says what the panels ARE.
+- The new object is the FEASIBLE-CENTRE REGION: the centres where one further unit square can still
+  be placed at some tilt, clear of the container walls and of every certified core.  Grid pitch
+  0.01998 x 36 tilts with the Lipschitz margin m = pitch*sqrt2/2 + (sqrt2/2)*(dtheta/2) = 0.02956,
+  so GREEN is a certified INNER approximation and WHITE a certified OUTER one (the pale band is
+  what the resolution cannot decide).  10^4 + 10^4 draws per page at 360 tilts: 0 hits on 11 pages.
+- NEW SOUND SHORTCUT, the DISK BOUND: a unit square contains the disk of radius 1/2 about its
+  centre, so budget <= area( (green u undecided) (+) B(1/2) n [0,s0]^2 ) / (pi/4) -- an upper bound
+  on how many more squares the node can hold, read off the drawing with no LP.  n_max < budget is a
+  geometric kill.  On the eleven k0 cells n_max = 17-18 against budget 10 (one conditioned square
+  leaves far too much room), so it does not bite there; it is the number to read first on the
+  pin-heavy A57/A60 nodes.
+- What the eleven pages say uniformly: on TEN of them K'(H) comes within 1 of the RIGHT WALL
+  (H->wall x=s between 0.723 and 0.967, so no square sits flush there beside H), and on FIVE the K'
+  lane test leaves TR(0,0) a NEAR-MISS (LANE <= 1, M = 1).  Those two together are the shape of the
+  s3_far kill.
+- Population: A140's twelve minus s3_far_BL389484_TR018470 (killed by A141's K' lane leaf on BL);
+  A141's conditional-lane run closed none of the other eleven, so no KILLED banner on any page.
+- Verification (`code/verify148.py`, a SECOND implementation: edge crossing + strict
+  point-in-polygon, no separating axis anywhere in it): region green/blocked 4 400 + 4 400 points,
+  K' containment 3 773 poses, 44 pockets, 120 red-dashed columns + 196 controls, 33 guard rows x
+  10^4 chord draws = 330 000.  **0 failures.**
+- Files: `docs/shadows/k0v4/` (11 SVG + README.md + review_k0v4.csv), `docs/shadows.md` Part V
+  (appended), `attempts/A148-gallery-v4/code/{geo148,data148,gallery148,readme148,verify148}.py`,
+  `results/{gallery148_k0v4,verify148_k0v4}.json`, `notes/method.md`.
+- T2 (the A57/A60 v4 set from A137's night records) is scheduled for 06:00 tomorrow.
+
+## 2026-09-07 — A145: the impossible dual-support weight is a predictor with a threshold, and Y0241 (the PI's page) is certified dead
+
+- **The quantity.** For every one of the **448** surviving A57 nodes (A142's 465 minus A142's own 17
+  exact-pin-clip kills), the share of the LP's dual-support WEIGHT carried by columns that are impossible under
+  the node's own hypothesis: a placement overlapping one of the six hypothesis squares (5 pins + the
+  conditioned box H) at EVERY pose of that square's box. Since `w_total` is the sum of the dual weights, i.e.
+  the node's own τ, the fraction reads directly as *"this share of the LP objective sits on placements the
+  hypothesis forbids"*. `attempts/A145-impossible-weight/results/impossible_weight.jsonl`, 448 rows, 0 errors,
+  35,799 columns, 94 s.
+- **Two tests, one-sided in OPPOSITE directions — the thing to keep straight.** The PI's/A142's reading is the
+  7³ pose GRID (negative SAT gap at all 343 sampled poses): *necessary-ish, not sufficient* — 343 poses are
+  not all poses. The EXACT test is "the column meets `K'(B)` = ⋂ over all poses of `Q(c,θ)`" (A132's certified
+  polygon core; for a PIN box A135's exact axis square `a_pin = 33873816211/68719476736`, which for zero tilt
+  width IS the whole intersection): *sufficient, not necessary* — a column can overlap at every pose without
+  meeting the intersection of the poses. EXACT ⊆ GRID always, EXACT is the one that is a proof, and EXACT is
+  exactly the row set A135's `poly` arm prunes, which is what makes the fraction a prediction rather than a
+  description.
+- **Distribution (448 nodes).** `frac_exact` mean **0.4107**, median 0.4000, min 0, max 1; 14 nodes at zero,
+  2 at 1.000, 21 above 0.75. `frac_grid` mean 0.4466. Deciles: 19 / 16 / 83 / 55 / 133 / 44 / 72 / 7 / 17 / 2.
+- **Controls** (`code/check145.py`): (A) 40/40 agreement with A142's *different* implementation on `n_support`
+  and on the grid count; 36/40 on the exact count, and all four disagreements go one way with one cause
+  (A142 tests the certified flag only against the grid's minimum-gap box, A145 maximises `K'` depth over all
+  six — A145's set is a strict superset by construction). (B) 1,920 exact-impossible columns × 200 drawn poses
+  = **384,000 independent SAT tests → 0 unsound**. (C) of the 256 grid-only columns a genuinely DISJOINT pose
+  was found for exactly **1** — so the grid does over-claim, but the `frac_grid` − `frac_exact` gap is mostly
+  the EXACT test's own conservatism, not the grid's optimism.
+- **THE HEADLINE — `k5_11_interior_Y0241`, the node the PI read off `docs/shadows/a57v3/`.** 4 of its 5
+  dual-support columns overlap H at every pose (grid gaps 0.0153 / 0.0231 / 0.0351 / 0.0530) and 3 of the 4
+  meet `K'(B)`: **60 % of the objective is forbidden weight**. Re-solved with exact cores + `K'`-pruned pool:
+  **τ 5.000000000063 → 3.250000** (η −1.75), **`verify_case_v3.py` PASS**, total 3.43334 < budget 5, box tree
+  `boxes 187914, covered 65469, exempt 28520 (core 24984, nofam 0, poly 3536), max depth 39`. The FROZEN
+  `verify_case.py` on the same measure **FAILs with 32 HOLES**, so "this one needs the polygon clause" is a
+  measurement. The one grid-flagged column that `K'` does not confirm has depth −1.085e−4 at 129, 257 and 513
+  θ-samples and 16/40/120/300 vertices — the polygon is converged and that column really is a
+  "flagged-but-not-proved" case.
+- **9 certificates from 18 re-solves, and 3 of them need no verifier change.** FROZEN `verify_case.py`
+  (sha `521cb01f…`, exact cores only): `k5_16_interior_Y0017_D04` (τ 3.5 → 3.0), `k5_11_interior_Y0164`
+  (4.667 → 4.565), `k5_16_interior_Y1014` (4.538 → 4.000). A135 `verify_case_v3.py`: `Y0241` (5.000 → 3.250),
+  `Y0588_D06` (5.000 → 4.500), `Y0186_D05` (5.000 → 4.000), `Y1056_D01` (4.769 → 4.000), `Y0041_D03`
+  (4.333 → 4.222), `Y0572` (4.500 → 4.208); polygon-exempt boxes 892 – 168,451. **Six of the nine were already
+  LP-dead work-owing FAILs that were only ever missing a certificate; three are NEW kills** (`Y0241`,
+  `Y0588_D06`, `Y0186_D05`), all three at frac ≥ 0.60. One node LP-killed and then **lost the kill on the
+  witness-feedback re-solve** (`Y1110`, frac 1.000), two did not kill.
+- **IS THE PI'S READING A PREDICTOR? Yes — as a GATE with a threshold, not as a dose.** Kill rate by band over
+  all 18: [0,0.15) 0.00, [0.15,0.30) 0.00, [0.30,0.45) 0.67, [0.45,0.60) **1.00**, [0.60,0.75) **1.00**,
+  [0.75,1] 0.80. Restricted to nodes whose stored τ was AT the budget (the clean question): **0 of 7 below
+  frac 0.45 moved τ by so much as 1e−9, mean drop exactly 0.000000; 4 of 5 above frac 0.60 killed.** What it
+  does NOT predict: the size of the drop (frac 1.000 nodes dropped 0.148 and 0.500; frac 0.600 `Y0241` dropped
+  1.750 — the LP re-optimises onto columns the fraction never saw), nor which verifier is needed (that tracks
+  A132's pins-vs-conditioned-box attribution: 0.857 went frozen, 0.523 needed v3). A132's caveat transfers:
+  18 nodes is not a rate — but with a stratified control arm it does fix the sign and the location of the
+  threshold, which one node could not.
+- **The queue, priced.** 98 of the 448 sit at frac ≥ 0.60 (92 un-re-solved, ≈ 9 CPU-h at the measured
+  350 s/node) and 164 at frac ≥ 0.45 (155 un-re-solved, ≈ 15 CPU-h) — the cheapest LP-bearing work left in the
+  campaign. The 118 nodes below frac 0.30 should be de-prioritised: on them the exact cores and the polygon
+  provably buy the LP nothing, and the measurement says so before a single LP is run.
+- **Discipline.** 1.87 CPU-h against the 2 CPU-h cap (6,376 s of it recorded job wall over the re-solves);
+  never more than 2 BLAS-pinned BelowNormal processes; no shard launched; A57's PAUSE sentinel REPORTED and
+  A145's own scoped sentinel watched (PAUSED.md §7a); frozen verifiers byte-identical after the run
+  (`verify_case.py 521cb01f…`, `verify_param.py 0c58485c…`); read-only on every campaign and on
+  A131/A132/A135/A142; nothing deleted; `PYTHONDONTWRITEBYTECODE=1`; git fetch + plain merge + push of own
+  paths with explicit pathspecs. The knife-edge rule (900 s) fired on 3 of 18 and earned its keep once: on
+  `Y0241` the long cap did not move τ (3.2500000000000266 → 3.2500000000725695, both unconverged), it
+  confirmed τ was not about to climb back.
+- **Files.** `attempts/A145-impossible-weight/{BRIEF.md, code/{measure145,rank145,resolve145,check145,
+  table145}.py, results/{impossible_weight,resolves145,resolves145_rank,resolves145_ctrl}.jsonl,
+  results/{jobs145_rank,jobs145_ctrl,check145}.json, certs/ (49 files), notes/{measurement,resolves}.md,
+  logs/}`; one appended paragraph in `attempts/A57-shadow-trees/PAUSED.md`'s resume block; REGISTRY row.

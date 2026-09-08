@@ -372,3 +372,25 @@ square's box — and the independent checker `code/check141.py` passes 185 of 18
 kill: 200,000 poses drawn, ≈ 1.2·10⁵ meeting the slot cell, **0 free**. Caveat A118-O1 stands: a LANE kill excludes
 class-S packings with EXACT pins, not the δ = 10⁻² slack family. At resume, retire these 135 (and their descendants)
 before any LP; the overlap with A131/A142's pin-clip kills is NOT yet measured.
+
+### Resume-block addendum (A145, 2026-09-07, append-only — the A57 owner folds this in)
+
+**Nine more open A57 nodes now carry a PASSing certificate, and the ranking that found them is on disk for all 448
+survivors.** A145 measured, per node, the share of the LP's dual-support WEIGHT that sits on placements the node's own
+hypothesis forbids — columns meeting `K'(B)` (A132's certified polygon core) or an exact pin core
+(`a_pin = 33873816211/68719476736`) — over the 448 nodes that survive A142's 465 minus A142's 17 exact-pin-clip kills:
+mean 0.411, median 0.400, 14 nodes at zero, 2 at 1.000
+(`attempts/A145-impossible-weight/results/impossible_weight.jsonl`; controls: 384,000 independent SAT tests, 0 unsound;
+40/40 agreement with A142 on the grid count). Re-solved with the exact cores in the hypothesis and the pool pruned by
+`K'` (A135's pipeline, 240 s, 900 s only at a knife edge), **18 nodes gave 10 LP kills and 9 certificates — 3 under the
+FROZEN `verify_case.py` (sha `521cb01f…`, exact cores only, no verifier change) and 6 under A135's `verify_case_v3.py`**:
+frozen `k5_16_interior_Y0017_D04`, `k5_11_interior_Y0164`, `k5_16_interior_Y1014`; v3 `k5_11_interior_{Y0241, Y0588_D06,
+Y0186_D05, Y1056_D01, Y0041_D03, Y0572}`. Six of the nine were already LP-dead work-owing FAILs that were only missing a
+certificate; **three are new kills** (`Y0241` τ 5.000000000063 → **3.250000**, `Y0588_D06` → 4.500000, `Y0186_D05` →
+4.000000). Certificates + reports + witness files: `attempts/A145-impossible-weight/certs/<id>__{exact,poly}.json`,
+ledger `results/resolves145.jsonl`. **The fraction is a predictor with a threshold:** 0 of 7 alive nodes below frac 0.45
+moved τ at all (mean drop exactly 0.000000), 4 of 5 above frac 0.60 killed. At resume, retire these 9 (and their
+descendants) and run the same pipeline down the ranking: **98 survivors sit at frac ≥ 0.60 (92 un-re-solved, ≈ 9 CPU-h
+at the measured 350 s/node) and 164 at frac ≥ 0.45 (155 un-re-solved, ≈ 15 CPU-h)** — the cheapest LP-bearing work in
+the campaign, and the 118 nodes below frac 0.30 should be de-prioritised for it, because on them the exact cores and
+the polygon provably buy the LP nothing.

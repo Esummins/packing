@@ -5235,3 +5235,64 @@ The polygon core K'(B) meets dual-support columns the axis core K(a) misses on *
 **The one result here that is certifiable TODAY.**  A135's EXACT axis core (`exactcore.exact_a`) is still a square at the box's own tilt, so the frozen certificate schema `{kx, ky, tm, a}` is unchanged and `verify_case.py` reads `a` verbatim.  One re-solve per cell with the exact cores as the row filter (240 s, then 900 s warm where tau was below budget but unconverged), 1.54 CPU-h: **1 certified dead, 0 cert-FAIL, 3 kill candidates, 8 alive** -- the converged-alive k0_00 residue drops from 12 to 11 cells. `s3_far_BL389484_TR018470` passed the FROZEN verifier (total 6.983004 < 7, 4.3 s); certificates in `attempts/A140-k0-residue-gallery/certs/`. Kill candidates: `l1_148`, `l2_p65_101`, `l2_p65_111` -- below budget, LP not converged at 240 + 900 s.
 
 Second result, independent of the LP: A118's lane count was never run on `l1_124`, `l1_153` or `l1_158` (A38 has no node json for them, so they were not in A118's corpus).  Re-running A118's own `lane.run_cell` unchanged gives **TR(0,0) LANE <= 1** on all three; with `l1_159`'s TR(0,0) and `s3_far`'s BL(0,0), **5 of 12** cells now carry a two-meeter cover whose geometric half is already certified.  None is a kill on its own (the conditioned square can itself reach the cell, so the meeter count is <= 2 and K0-FREE does not fire directly) -- each is a two-child cover: the conditioned square meets the cell (shrink its box, re-solve) or it does not (the cell is met by <= 1 square and K0-FREE teleports into k1).  Per-cell verdicts: `attempts/A140-k0-residue-gallery/results/lane140.json`.
+
+# Part V - the v4 galleries (A148): pages built around the geometric shortcut question
+
+Part III above is the k0 residue gallery v3 (A140) and `docs/shadows/a57v3/README.md` is the A57/A60
+review gallery v3 (A142).  Reading them on 2026-09-07 the PI found **five** geometric kills the code
+did not have (the Y0036 pin pinch, the Y0186 support columns, the s3_far corner reachable only by
+h2, the Y0147 four-chord line, the Y0241 pockets and the Y0460 singly-met slot) and asked for pages
+that are **less busy, say what each plot IS, and put first the question a shortcut answers**:
+
+> *can the remaining squares fit in the white space?*
+
+**[docs/shadows/k0v4/](shadows/k0v4/README.md)** is the answer for the eleven converged-alive `k0_00`
+cells (A140's twelve minus `s3_far_BL389484_TR018470`, killed by A141's K' lane leaf on BL).  Three
+panels, fixed:
+
+* **PANEL G - "GEOMETRY: what is still free"** (the large one, and the only one that is not an LP).
+  The container at s0; the hypothesis squares cyan with their **polygon cores K'(B)** filled (the
+  stock and exact AXIS cores are captioned, never drawn - one style per object); the pins as
+  light-blue squares with their A135 exact cores as a thin inner outline; the **feasible-centre
+  region** shaded green - the set of centres `c` such that SOME tilt gives a unit square `Q(c,t)`
+  inside the container and interior-disjoint from every certified core; pockets narrower than 1
+  hatched grey with the width printed; A144's guard lines thin with the chord sum and rhs at the
+  margin; each corner/slot tagged with A141's K' lane verdict; A131's exact pin-clip inside the
+  original centre box.
+* **PANEL S - the LP support** (medium), captioned *"what the relaxation puts where; overlaps are
+  the relaxation's slack, not a packing"*, with every column that meets a certified core drawn red
+  dashed and counted.
+* **PANEL N - nearest real packing** (small), at its own `s*` with s0 overlaid and the banner
+  `s* = ... > s0: NOT realisable at s0`.
+
+plus a header carrying the id/class/level, tau/budget/eta, the A107 family, A142's subtree cost, a
+generated **WHAT TO LOOK FOR** line and the verdict of **every geometric leaf already run** on the
+node (clip, T5'''', lane, conditional lane, guard line), and a fixed footer saying what the three
+panels ARE.
+
+**The green region is certified, not sampled.**  It is computed on a grid of pitch <= 0.02 x 36
+tilts, and both verdicts carry the Lipschitz margin `m = pitch*sqrt2/2 + (sqrt2/2)*(dtheta/2)` (SAT
+depth between convex sets is 1-Lipschitz in the centre and (sqrt2/2)-Lipschitz in the tilt), so
+GREEN is a certified INNER approximation of the feasible-centre set and WHITE a certified OUTER one;
+the pale band between them is what the resolution cannot decide.  Sampled confirmation per page:
+10^4 centres drawn uniformly in the green cells and 10^4 in the blocked cells, tested at 360 tilts
+with an independent SAT - **0 hits on either side across all eleven pages**.
+
+**The new shortcut the pages carry: the DISK BOUND.**  A unit square contains the disk of radius 1/2
+about its centre, so the centres of the `budget` remaining squares carry pairwise disjoint half-unit
+disks inside the container, and every such centre lies in (green u undecided).  Hence
+
+    budget  <=  area( (green u undecided) (+) B(1/2)  n  [0,s0]^2 )  /  (pi/4),
+
+a sound upper bound on how many more unit squares the node can hold, **read straight off the drawing
+with no LP**.  `n_max < budget` is a geometric kill.  On the eleven k0 cells `n_max` is 17-18 against
+a budget of 10, so the bound does not bite there - a single conditioned square leaves far too much
+room - but it is one number per page and it is the number to look at first on the pin-heavy A57/A60
+nodes, where five pins and a conditioned square eat most of the container.
+
+What the eleven pages do say, uniformly: **on ten of the eleven the conditioned square's K' comes
+within 1 of the right wall** (`H->wall x=s` between 0.723 and 0.967) - so no further square can sit
+flush against that wall beside it - and on five of them the K' lane test leaves `TR(0,0)` a
+NEAR-MISS (LANE <= 1 with M = 1: the conditioned square itself is the only other meeter).  Those two
+readings together are exactly the shape of the s3_far kill.  Full table, per-node "what to look for"
+and the review sheet: `docs/shadows/k0v4/README.md` and `docs/shadows/k0v4/review_k0v4.csv`.

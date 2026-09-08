@@ -1,0 +1,42 @@
+﻿18 re-solved nodes -> results/resolves145.jsonl
+
+node                           tag                frac         tauB         tauA        eta  cnv  new? status                    LPs    wall
+--------------------------------------------------------------------------------------------------------------------------------------------
+k5_11_interior_Y0588_D06       rank              1.000     5.000000     4.500000  -0.500000    T   NEW CERT-V3                   204     244
+k5_11_interior_Y1110           rank              1.000     5.000000     4.851852  -0.148148    F   NEW LP-KILL-UNCERT (LOST-KILL-ON-RESOLVE)    286     331
+k5_16_interior_Y0017_D04       rank              0.857     3.500000     3.000000  -2.000000    T   was CERT-FROZEN                96      99
+k5_11_interior_Y0186_D01       rank              0.800     5.000000     5.000000   0.000000    F   NEW ALIVE                     258     259
+k5_11_interior_Y0186_D05       rank              0.800     5.000000     4.000000  -1.000000    T   NEW CERT-V3                   101     113
+k5_11_interior_Y0241           rank              0.600     5.000000     3.250000  -1.750000    F   NEW CERT-V3                  1336    1464
+k5_11_interior_Y1056_D01       ctrl[0.45,0.60)   0.525     4.769231     4.000000  -1.000000    T   was CERT-V3                    88     120
+k5_11_interior_Y0164           ctrl[0.45,0.60)   0.524     4.666667     4.565217  -0.434783    F   was CERT-FROZEN               320     353
+k5_11_interior_Y0041_D03       ctrl[0.45,0.60)   0.523     4.333333     4.222222  -0.777778    F   was CERT-V3                   430     489
+k5_16_interior_Y1014           ctrl[0.30,0.45)   0.376     4.538462     4.000000  -1.000000    T   was CERT-FROZEN                67      93
+k5_11_interior_Y0572           ctrl[0.30,0.45)   0.376     4.500000     4.208262  -0.791738    F   was CERT-V3                   425     946
+k5_16_interior_Y0656           ctrl[0.30,0.45)   0.375     5.000000     5.000000   0.000000    T   NEW ALIVE                     303     303
+k5_11_interior_Y0183           ctrl[0.15,0.30)   0.220     5.000000     5.000000  -0.000000    F   NEW ALIVE                     292     294
+k5_16_interior_Y0878           ctrl[0.15,0.30)   0.217     5.000000     5.000000  -0.000000    F   NEW ALIVE                     251     252
+k5_16_interior_Y0596           ctrl[0.15,0.30)   0.211     5.000000     5.000000   0.000000    T   NEW ALIVE                     280     280
+k5_16_interior_Y0726           ctrl[0.00,0.15)   0.094     5.000000     5.000000  -0.000000    F   NEW ALIVE                     276     276
+k5_16_interior_Y0559           ctrl[0.00,0.15)   0.067     5.000000     5.000000   0.000000    F   NEW ALIVE                     282     283
+k5_16_interior_Y0996           ctrl[0.00,0.15)   0.056     5.000000     5.000000   0.000000    T   NEW ALIVE                     177     178
+
+KILL RATE vs the impossible fraction
+band              n  LP kills  certified  frozen   v3  kill rate  mean drop in tau
+[0.00,0.15)     3         0          0       0    0       0.00          0.000000
+[0.15,0.30)     3         0          0       0    0       0.00         -0.000000
+[0.30,0.45)     3         2          2       1    1       0.67          0.276733
+[0.45,0.60)     3         3          3       1    2       1.00          0.327264
+[0.60,0.75)     1         1          1       0    1       1.00          1.750000
+[0.75,1.01)     5         4          3       1    2       0.80          0.429630
+TOTAL            18        10          9        rate 0.56
+
+SAME, restricted to nodes whose stored tau was AT the budget (kill genuinely new)
+band              n  LP kills  certified  kill rate
+[0.00,0.15)     3         0          0       0.00
+[0.15,0.30)     3         0          0       0.00
+[0.30,0.45)     1         0          0       0.00
+[0.60,0.75)     1         1          1       1.00
+[0.75,1.01)     4         3          2       0.75
+
+recorded job wall over the re-solves: 6376 s = 1.77 CPU-h
