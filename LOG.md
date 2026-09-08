@@ -5635,3 +5635,30 @@ Report: `attempts/A115-k0-corner-rows/notes/t6_report.md`.
 - Invisible until one writes the Lean, and worth remembering: `posCheck` compares LISTS, so a positivity
   certificate is accepted only if it reproduces the polynomial with the exact trailing-zero shape `posAux`
   produces. `code/leanpoly.py` mirrors the recursions for that reason.
+
+## 2026-09-07 — A138: the reflected plumbing of `CertCover` (T1 (R1)-(R3) + glue done, (R4) not)
+
+- `lean/PackingCertMathlib/PackingCertMathlib/LocalCertT3.lean` (1 856 lines, 130 declarations, `lake build`
+  25 s, no `sorry`) writes A134's residues (R1) the reflected tree walk, (R2) the reflected row builder with
+  the outward-quantisation step, (R3) the variable index map — and one A134 did not name, the ROOT CELL
+  bridge. It ends in `certCover_of_check : certOk C = true → CertCover C.leaves C.M.boxes C.M.pins slo shi`
+  and `localDead_of_certOk`: **`LocalDead` for a neighbourhood from TWO decidable checks and nothing else.**
+  Roster `[propext, Classical.choice, Quot.sound]` on every lemma; `localDead_of_certOk` adds only
+  `check_3_82`'s `native_decide` axiom through `lb_382`. `Local.sat_selection` is not used.
+- **A134's ≈600-line (R2) estimate collapses to one lemma.** Comparing the emitted row with the true row
+  through `LocalCert.minL` IS the invariant `gen_local_t.quantise_leaf` establishes, so `rowImplies_sound`
+  (12 lines) discharges the whole outward quantisation; nothing about the rounding is re-derived and a
+  generator that rounds differently — or not at all — is accepted by the same check.
+- **The n-ary selection branch has to become binary.** A Lean inductive with a `List CNode` field gives no
+  usable induction hypothesis. A branch re-encodes as a chain of binary `sel1` nodes, each of which is the
+  TAUTOLOGY `SelHolds σ ∨ ¬ SelHolds σ` and carries no certificate at all, closed by one `impx` node where
+  `selectionOk_sound` says the recorded selections are exhaustive and every one has already been refuted.
+  The walk then carries two selection lists (holds / does not hold) and `treeOk_sound` is five cases.
+- **T2: `local-cert-t-v2` needs no new field — (R4) is a pure RE-ENCODER.** `code/reencode_check.py` builds
+  the reflected shape from a v2 certificate and mirrors the LEAN row builder (not the generator) plus the
+  Lean `affImplies` test: the walk reproduces every leaf's recorded box (2 140 / 8 / 16 406) and **all
+  295 700 emitted rows of S07 and both S02 certificates are implied by a built row** (25 377 / 124 /
+  270 199; zero failures), with every envelope key present in `env` and `pcert`.
+- Banked for (R4): a bisection node need not record its children's cells (`cellLo`/`cellHi` compute them,
+  `splitOk` still checks the split) — 88 000 rational literals off the S07 data file, and the elaborator is
+  the wall; and `certOk` is `native_decide`-able but kernel `decide` gets STUCK on it.

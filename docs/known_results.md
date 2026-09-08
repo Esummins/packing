@@ -105,6 +105,37 @@ file is the record of truth for claims, LOG.md is the record of events.
     the outward-quantisation step, the variable INDEX map, the leaf data) and — the point of the audit —
     **no missing library lemma**: `attempts/A134-certcover-close/notes/lean.md`. A126's elaborator wall
     recurs verbatim (one 336-entry list literal times out at `isDefEq`) and A126's batching fixes it.
+16b'''. LEAN  ADDENDUM to 16b'' (A138, 2026-09-07): **the reflected PLUMBING is written and proved, and
+    `CertCover` is now DECIDED by a check on the certificate.** `LocalCertT3.lean` (1 856 lines, 130
+    declarations, `lake build` 25 s, no `sorry`, roster `[propext, Classical.choice, Quot.sound]` on every
+    lemma; `Local.sat_selection` NOT used) supplies A134's four named residues but (R4): **(R1)** the
+    reflected tree walk `treeOk` / `treeOk_sound`, with the n-ary selection branch re-encoded as a chain of
+    BINARY `sel1` nodes — each of which is the tautology `SelHolds σ ∨ ¬ SelHolds σ` and carries no
+    certificate — closed by one `impx` node where `selectionOk_sound` is consumed, so the walk is a plain
+    structural induction and no nested-inductive recursor is needed; **(R2)** the row builder `wallOf` /
+    `wallOf_sound` and `selCtx` / `selCtx_sound`, the latter wiring all five hypotheses of `relax_selection`
+    (`axis_decomp_t`, `one_sub_cosRel_le` + `corr_bound`, one of the three `Q·S` envelopes, `wrel_ge_plane`)
+    to the certificate's own recorded constants — and A134's ≈ 600-line outward-quantisation estimate
+    COLLAPSES TO ONE LEMMA, `rowImplies_sound`, because comparing the emitted row with the true row through
+    `LocalCert.minL` IS the invariant `quantise_leaf` establishes, so no rounding is ever re-derived and a
+    generator that rounds differently is accepted by the same check; **(R3)** the index map `certX` with
+    `layoutOk` DECIDING A119's layout `vi = 2i+1`, free bodies first, tilts at `2nb+1+i`; and one residue
+    A134's list did not name, the ROOT CELL bridge `rootOk` / `rootOk_sound`. The file ends in
+    `certCover_of_check : certOk C = true → CertCover C.leaves C.M.boxes C.M.pins slo shi` and
+    `localDead_of_certOk`, i.e. **`LocalDead` for a neighbourhood from TWO decidable checks and nothing
+    else** — no geometric side condition, no numeric hypothesis (`Ls` and `Ps` are read OFF the certificate,
+    so there is no matching obligation either); `localDead_of_certOk` adds only `check_3_82`'s
+    `native_decide` axiom, through `lb_382`, exactly where A126 needed it. **`certCover_s07` and
+    `localDead_s07_t` are still NOT obtained**: (R4), the DATA, is all that remains, and it is engineering.
+    A138's T2 measurement retires its risk: `local-cert-t-v2` needs **no new field** — a pure RE-ENCODER
+    suffices — and `code/reencode_check.py`, which mirrors the LEAN row builder (not the generator) and the
+    Lean `affImplies` test, finds the walk reproduces **every** leaf's recorded box (2 140 / 8 / 16 406) and
+    **all 295 700 emitted rows of the three certificates are implied by a built row** (S07 25 377, S02
+    (0.02,2°) 124, S02 (0.2,10°) 270 199; zero failures), with every envelope key present in `env` and
+    `pcert`. Two engineering findings for (R4): a bisection node need not record its children's cells
+    (`cellLo` / `cellHi` compute them, `splitOk` still checks the split) — 88 000 rational literals removed
+    from the S07 data file, and the elaborator is the wall; and `certOk` is `native_decide`-able but kernel
+    `decide` gets STUCK on it, so (R4) must budget `native_decide`.
 16a. CAVEAT (A88, 2026-09-03): A31's contact-type menu omits same-class corner-corner point kisses (Trump
     has one); planarity (L4) is FALSE on the ACTIVE contact graph when squares kiss at a point. Counts over
     the kiss-free SUPPORT graph stand; no proof step may assume planarity of the active graph. The
