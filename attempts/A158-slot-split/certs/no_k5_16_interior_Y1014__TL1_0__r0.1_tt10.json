@@ -1,0 +1,291 @@
+{
+"format": "case-measure-certificate-v1",
+"n": 11,
+"s": "1091302128605257/281474976710656",
+"budget": 5,
+"atoms": [
+[
+"99/50",
+"99/100"
+],
+[
+"397/200",
+"72/25"
+],
+[
+"1211589/500000",
+"1776997/1000000"
+],
+[
+"2907813/1000000",
+"969271/500000"
+]
+],
+"weights": [
+"1030001/1000000",
+"103/100",
+"1030001/1000000",
+"1030001/1000000"
+],
+"total": "4120003/1000000",
+"hypotheses": {
+"cores": [
+{
+"kx": "1/2",
+"ky": "1/2",
+"tm": "1/33554432",
+"a": "33873816211/68719476736",
+"box": {
+"x0": 0.49292893218813455,
+"x1": 0.5070710678118655,
+"y0": 0.49292893218813455,
+"y1": 0.5070710678118655,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "1/2",
+"ky": "3/2",
+"tm": "1/33554432",
+"a": "33873816211/68719476736",
+"box": {
+"x0": 0.49292893218813455,
+"x1": 0.5070710678118655,
+"y0": 1.4929289321881345,
+"y1": 1.5070710678118655,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "1/2",
+"ky": "844271/250000",
+"tm": "1/33554432",
+"a": "33873816211/68719476736",
+"box": {
+"x0": 0.49292893218813455,
+"x1": 0.5070710678118655,
+"y0": 3.3700129321881347,
+"y1": 3.3841550678118653,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "844271/250000",
+"ky": "1/2",
+"tm": "1/33554432",
+"a": "33873816211/68719476736",
+"box": {
+"x0": 3.3700129321881347,
+"x1": 3.3841550678118653,
+"y0": 0.49292893218813455,
+"y1": 0.5070710678118655,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "844271/250000",
+"ky": "844271/250000",
+"tm": "1/33554432",
+"a": "33873816211/68719476736",
+"box": {
+"x0": 3.3700129321881347,
+"x1": 3.3841550678118653,
+"y0": 3.3700129321881347,
+"y1": 3.3841550678118653,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "3457813/2000000",
+"ky": "4016841/2000000",
+"tm": "9/16",
+"a": "101180237753/274877906944",
+"box": {
+"x0": 1.6590280000000002,
+"x1": 1.798785,
+"y0": 1.938542,
+"y1": 2.078299,
+"th0": 53.13010235415598,
+"th1": 64.01076641616699
+}
+}
+],
+"nofams": [
+{
+"x0": "281119997/200000000",
+"x1": "1599999999/1000000000",
+"y0": "3277084001/1000000000",
+"y1": "950564640249929/281474976710656",
+"t_intervals": [
+[
+"0",
+"1467815/16777216"
+],
+[
+"14077757/16777216",
+"1"
+]
+]
+}
+],
+"nofam_boxes": [
+{
+"name": "S(k5_16_interior_Y1014,TL(1,0)) r=0.1 tt=10",
+"x0": "281119997/200000000",
+"x1": "1599999999/1000000000",
+"y0": "3277084001/1000000000",
+"y1": "3475484003/1000000000",
+"t_intervals": [
+[
+"0",
+"1467815/16777216"
+],
+[
+"14077757/16777216",
+"1"
+]
+]
+}
+]
+},
+"claim": "every admissible closed unit square Q in [0,1091302128605257/281474976710656]^2 that is not in a NO-family and is disjoint from every core has mu(Q) >= 1, and mu(total) = 4.120003 < budget 5 = 11 - #cores; hence no packing of 11 unit squares in side <= 1091302128605257/281474976710656 satisfies the hypotheses",
+"provenance": {
+"method": "A135 exact-core re-emission of the A13 case-LP node (caselp.solve_node); weights x 1.0300 rounded up to 1/1000000, atoms rounded to 1/1000000",
+"lp_tau": 4.0000000000001235,
+"eps_geo": 0.0001,
+"eps_core": 0.002,
+"eps_zone": 0.002,
+"eps_th": 0.3,
+"core_scope": "exall",
+"cores_exact": [
+{
+"i": 0,
+"a_stock": "16056319934464/32768001953125",
+"a_used": "33873816211/68719476736",
+"exact": true
+},
+{
+"i": 1,
+"a_stock": "16056319934464/32768001953125",
+"a_used": "33873816211/68719476736",
+"exact": true
+},
+{
+"i": 2,
+"a_stock": "16056319967232/32768001953125",
+"a_used": "33873816211/68719476736",
+"exact": true
+},
+{
+"i": 3,
+"a_stock": "16056319967232/32768001953125",
+"a_used": "33873816211/68719476736",
+"exact": true
+},
+{
+"i": 4,
+"a_stock": "16056319967232/32768001953125",
+"a_used": "33873816211/68719476736",
+"exact": true
+},
+{
+"i": 5,
+"a_stock": "6572881936384/18432001953125",
+"a_used": "101180237753/274877906944",
+"exact": true
+}
+],
+"core_soundness": "each core half-side certified by A132 polycore.vertex_ok on its four corners against the box's own outward-rounded tilt interval (exactcore.exact_a)",
+"a136_fcover": "F-COVER fixed: NO zone rounded INWARD and intersected with the written box; ZONE subset BOX verified on the written rationals (A136 a136lib.narrow)",
+"a158": "A158 NO child of the slot split: node LP re-solved with one NoFam(S), S = the near-simple poses of usable slot TL(1,0) (centre within 0.1 of the exact slot centre, tilt within 10 deg of 0/90), zone written in the world frame at s0 as the INTERSECTION over m in [m_lo, s0] of the pullbacks of the corner-frame box, then clamped to [1/2, s-1/2]"
+},
+"fcover": {
+"fix": "F-COVER fixed: NO zone rounded INWARD and intersected with the written box; ZONE subset BOX verified on the written rationals (A136 a136lib.narrow)",
+"zone_sub_box": true,
+"attempt": "A136",
+"boxes_rounded": "inward (subset of the mapped A119 box)",
+"zones_rounded": "inward, then intersected with the written box",
+"per_family": [
+{
+"index": 0,
+"box": "S(k5_16_interior_Y1014,TL(1,0)) r=0.1 tt=10",
+"delta_centre": {
+"x0": 1e-09,
+"x1": -1e-09,
+"y0": 1e-09,
+"y1": -2.523847797419876e-17
+},
+"delta_t": [
+[
+0.0,
+-1.7881393432617188e-07
+],
+[
+1.7881393432617188e-07,
+0.0
+]
+],
+"delta_vs_exact_centre": {
+"x0": 1.3555141453736042e-09,
+"x1": -1.000000082740371e-09,
+"y0": 1.000000082740371e-09,
+"y1": 0.0
+},
+"delta_vs_exact_t": [
+[
+0.0,
+-7.185493401673515e-08
+],
+[
+7.404198887339675e-08,
+1.1102230246251565e-16
+]
+],
+"max_abs_delta_vs_exact": 7.404198887339675e-08,
+"max_abs_delta": 1.7881393432617188e-07,
+"zone": {
+"x0": "281119997/200000000",
+"x1": "1599999999/1000000000",
+"y0": "3277084001/1000000000",
+"y1": "950564640249929/281474976710656",
+"t_intervals": [
+[
+"0",
+"1467815/16777216"
+],
+[
+"14077757/16777216",
+"1"
+]
+]
+},
+"box_written": {
+"x0": "281119997/200000000",
+"x1": "1599999999/1000000000",
+"y0": "3277084001/1000000000",
+"y1": "3475484003/1000000000",
+"t_intervals": [
+[
+"0",
+"1467815/16777216"
+],
+[
+"14077757/16777216",
+"1"
+]
+]
+},
+"zone_sub_box": true,
+"n_t_intervals": [
+2,
+2
+]
+}
+]
+}
+}

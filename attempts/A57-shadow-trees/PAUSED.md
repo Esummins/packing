@@ -398,3 +398,75 @@ changes**; `attempts/A157-undecided-slots/results/slot_kills157.jsonl` is empty 
 The reading to carry forward is A141 sec 8.2's, extended: the UNDECIDED slot population is a real
 2-crowd population like the near-misses, not a budget artefact, and the cheap way to see it is a
 50x bigger pose draw, not a deeper cover (2 s/cell against 35 CPU-s/cell).
+
+
+**The near-simple slot box is a usable NO-family but NOT a usable YES leaf (A158, 2026-09-08;
+exact-pin form for the leaf, A118-O1 stands -- and the A57 nodes carry `delta = 10^-2` slack pins,
+pin boxes of half-width `7.07e-3`, so their YES branch would additionally owe the A152 caveat).**
+A158 ran the PI's tautologous split `SomeIn S | NoneIn S` on the near-simple slot box `S(r, tt)` =
+{centre within `r` of the exact slot centre, tilt within `tt` of 0/90} -- YES by A141's lane leaf
+with `K'(S)` as an EXTRA obstacle (the discharge against `K'(S)` IDENTIFIES the pose with the
+S-square, so the count is `1 + LANE_K'(C|S) + M(C|S)`), NO by one `caselp` `NoFam(S)` plus an A135
+exact-core re-solve, A136's inward-rounding wrapper and the frozen `verify_case.py` (sha
+`521cb01f...`).
+
+**The population is large.** Of the **1,693 alive A57/A60 records (1,590 distinct nodes: k5_11 713,
+k5_16 552, trump5 325)**, **1,238 (73 %)** have LP DUAL support -- the node record's `packing` list,
+the maximum fractional packing of core-avoiding admissible squares, whose weight is what keeps
+`tau >= budget` -- with weight >= 0.5 inside some usable slot's `S(0.10, 10 deg)` box: A57 1,079
+(k5_11 575, k5_16 504) and A60 159, by level L1 962 / L2 243 / L3 19 / L4 14. Commonest:
+`k5_11 TR(0,0)` 420, `k5_11 BR(0,1)` 219, `k5_11 TL(1,0)` 205, `k5_16 BR(0,1)` 184,
+`k5_16 TL(1,0)` 166, `k5_16 BL(1,0)` 163. So the reading "these nodes are alive because the LP puts
+a square in a near-simple slot position" is right for three quarters of the board.
+
+**The YES child, however, does not exist.** Over **141 measured cells** -- the top 20 by that weight
+(all level 1), a uniform 120-cell sample of the remaining 1,218 (seed 158), and the two cells the
+screen did not refute -- a free second meeter of the slot cell that lies in the container, meets
+`int C` and clears every pin core, `K'(H)` AND `K'(S)` is REALISED at 400,000 draws on **139**, at
+`tt = 10 deg` **already at `r = 0`**; at `tt = 0` the largest closable radius is between `2.9e-6`
+and `2.2e-3` per cell, and three cells (`k5_11_interior_Y0130 TR(0,0)`, `Y0147 TR(0,0)`,
+`k5_16_interior_Y0881 BR(0,1)`) fail even at `r = 0, tt = 0`. A realised free pose is a sound
+`LANE_K'(C|S) >= 1`, so these are refutations, not budget failures -- 5 s per cell, no cover. On the
+two cells not refuted the certifying cover was bought and each closes only ONE half:
+`k5_11_interior_Y1110 TR(0,0)` certifies `LANE_K'(C|S) = 0` (the first time this cover has ever
+closed) but `M(C|S) = 1`; `k5_16_interior_Y1014 TL(1,0)` certifies `M(C|S) = 0` but `LANE = 1`.
+Both give `1 + LANE + M = 2`. **0 of 141 cells kill the YES child.**
+
+**The NO child is real, but needs a box two orders of magnitude bigger.** Run at `S(0.10, 10 deg)`
+on all 20 top cells (20-440 s each, A135 exact cores, warm-started from the node's own atoms and
+rows): `tau` drops below budget on 7, but **6 of those 7 also drop below budget with NO NoFam at
+all** -- the control run (`no158.py --radii -1`, the identical exact-core re-solve) -- so they are
+artefacts of the exact-core re-solve, not of the slot box. Five of the six
+(`k5_16_interior_Y0226/Y0078/Y0539/Y0589/Y0475`) are records with `converged = false,
+dead_unconverged = true` whose stored `tau ~ 4` was never a bound; the sixth,
+`k5_16_interior_Y1039 BR(0,1)` (stored `tau = 4.999999999`), goes to `tau = 4.000000` on the
+exact-core re-solve ALONE -- **that is A149's lane, not A158's, and is recorded here only as an
+observation**. The one attributable kill is `c0_Y0076 TL(0,0)` (A60): `tau 5.000000 -> 4.000000`
+with the NoFam, `tau = 5.000000` without it.
+
+**Why the two halves cannot meet -- and it is arithmetic before it is geometry.** `caselp` drops a
+row only if its centre is inside the zone by `EPS_ZONE = 2e-3` and its tilt inside a `t`-interval by
+`EPS_TH = 0.3 deg`; `S`'s tilt intervals `[0, tt]` and `[90-tt, 90]` have empty margined forms for
+`tt <= 0.3 deg`. So **an `S` narrow enough for the YES child exempts not one row** and the NO child
+is bit-for-bit the original LP. Measured: NO needs `r in (0.02, 0.03]` at `tt = 10 deg` and
+`tt in (1.5, 2] deg` at `r = 0.10` on `c0_Y0076`; YES needs `r <= 3.7e-4` with the tilt PINNED and
+is refuted at `tt = 0.31, 0.40, 0.49 deg`. The obstruction lives in the TILT variable alone, so it
+is independent of `r` and no anisotropic box helps.
+
+**The PI's geometry is not refuted -- the `K'`-based leaf is.** `pair158.py` searched 600,000 draws
+per cell for an explicit interior-disjoint pair (a pose IN `S` clearing every node core, and a free
+second meeter) on the six PI cells at `(r, tt)` in `{0.10, 0.01} x {10, 0.5} deg`: **none, with the
+maximum pair gap NEGATIVE everywhere** (-0.67 on `k5_11_interior_Y1110`). `K'(S)` is the
+intersection over the whole box, so the intruder clears it while still overlapping every individual
+square with a pose in `S`. The repair is A141's `lane_corner_split` shape -- partition `S`, apply the
+leaf per piece -- and it prices out: pieces of `<= 3.7e-4` in centre and `< 0.5 deg` in tilt means
+about `1.5e6` pieces for `S(0.10, 10 deg)`, roughly **400 CPU-h per cell**.
+
+**What to carry forward.** The slot split as a KILL is dead. The slot split as a NO-FAMILY is a new,
+cheap structural probe: one 20-70 s exact-core LP per node says whether the node FORCES a square
+into the near-simple slot box, and `c0_Y0076` is the first node proved to do so (`eta = 1`, frozen
+verifier PASS). The sharpest near-miss is `k5_11_interior_Y0130 TR(0,0)`, where `NoFam(S)` takes
+`tau` from 5.500000 to exactly 5.000000 -- it consumes the node's entire slack and stops at the
+budget, the same value A149's polycore arm reached on that node independently (`poly149.jsonl`,
+2026-09-08 13:33, `tau 5.5 -> 5.0`, NO-KILL). Nothing in A57 was written; every record is under
+`attempts/A158-slot-split/`.

@@ -692,3 +692,69 @@ reaches the cell while clearing the hypothesis square by 1.1e-2, and `LANE_K'(TL
 certificate was emitted, and `attempts/A157-undecided-slots/results/slot_kills157.jsonl` is empty
 by construction. Cost ~0.7 CPU-h of a 3 CPU-h cap; the useful lever was the 50x pose draw
 (2 s/cell), not a deeper cover (35+ CPU-s/cell).
+
+
+**A158 (2026-09-08) -- the slot split: the NO child is a real, certified narrowing on `c0_Y0076`;
+the YES child does not exist at any radius the LP can feel (exact-pin form, class-S composition,
+A118-O1 stands).** The leaf is the tautology `SomeIn S | NoneIn S` on the near-simple slot box
+`S(r, tt)` = {centre within `r` of the exact slot centre, tilt within `tt` of 0/90}: YES killed by
+A141's lane leaf with `K'(S)` as an EXTRA obstacle (the `find_witness` discharge against `K'(S)`
+IDENTIFIES the pose with the S-square, `PolyCoreT5.shared_point_same_square`, so the meeter count
+is `1 + LANE_K'(C|S) + M(C|S)`), NO by one `caselp` `NoFam(S)` and an A135 exact-core re-solve.
+
+**`c0_Y0076` `TL(0,0)` (extension `k6_23`, FULL window `[191/50, 969271/250000]` by A114): the NO
+child is DEAD, and the kill is the slot box's.** `NoFam(S(0.10, 10 deg))` -- zone
+`[0.4, 0.6] x [3.277084, 3.477084] x ([0,10] u [80,90]) deg`, clamped by `centre_in_slab` to
+`[1/2, 0.6] x [3.277084, 3.377084]`, a quarter of the nominal box -- takes the node LP from
+`tau = 5.000000` to `tau = 4.000000`, `eta = budget - tau = 1.000000` (20.6 s, converged).
+**Control**: the identical exact-core re-solve with NO NoFam gives `tau = 5.000000` (3.0 s), so the
+drop is not an artefact of the exact cores. Certificate
+`attempts/A158-slot-split/certs/no_c0_Y0076__TL0_0__r0.1_tt10.json` (4 atoms, total `103/25` =
+4.12 < 5), written through A136's `a136lib.narrow` (NO zone rounded INWARD, intersected with the
+written box, `ZONE subset BOX` decided on the written rationals, max inward shift 7.40e-8), and
+**PASS on the frozen `verify_case.py` (sha 521cb01f...) in 1.0 s** -- 7,262 boxes, 1,863 exempt
+(core 1,861, nofam 2), "node DEAD". (`verify_param.py` rejects it as MALFORMED: it consumes the
+PARAMETRIC schema, not a fixed-side `case-measure-certificate-v1`, so the second-verifier
+cross-check is unavailable for this certificate kind, exactly as in A136.) **So under `c0_Y0076`'s
+hypothesis SOME square must have its pose within 0.10 of the exact `TL(0,0)` slot centre with tilt
+within 10 deg of axis-aligned** -- a new structural constraint on the node, and the half of the
+PI's reading that holds.
+
+**The YES child is refuted on `c0_Y0076`, and at every radius.** With `K'(S)` among the obstacles a
+free pose that meets `int C`, lies in the container and clears every pin core, `K'(H)` AND `K'(S)`
+is REALISED at 400,000 draws for every `(r, tt)` tried: at `tt = 10 deg` already at `r = 0` (the
+corner-frame pose `(1.6913894, 0.6972960, 33.0398 deg)`), and at `tt = 0` for every
+`r > 3.662e-4`. A realised free pose is a sound `LANE_K'(C|S) >= 1`, so this is a refutation, not a
+budget failure. `M(C|S)` is the looser half (`H` is blocked out to `r ~ 3.6e-2` at `tt = 0`, but can
+meet at `r = 0` once `tt >= 10 deg`).
+
+**`c0_Y0787 BR(0,1)` and `c0_Y0959 TR(0,1)` are NEITHER.** Their NO child does not fire at
+`r = 0.10, tt = 10` (`tau = 5.000000` in 4.9 s and 72.7 s), nor at `r = 0.05`, `0.02`, nor at
+`tt = 0.4`, nor even at `r = 0.20, tt = 20` -- a 0.4 x 0.4 centre box with 40 deg of tilt: the LP
+simply moves the slot square just outside the box. Their YES child is refuted like `c0_Y0076`'s
+(`r_yes = 4.88e-5` and `2.92e-6` at `tt = 0`; refuted at `r = 0` for every `tt >= 0.31 deg`). So
+the coordinator's reading that forcing `BR(0,1)` doubly met strands the space right of `H` is not
+what the LP says.
+
+**Why the two halves cannot meet, and it is arithmetic before it is geometry.** `caselp` exempts an
+LP row only if its centre is inside the zone by `EPS_ZONE = 2e-3` and its tilt inside a
+`t`-interval by `EPS_TH = 0.3 deg`; the two tilt intervals of `S` are `[0, tt]` and `[90-tt, 90]`,
+whose margined forms are empty for `tt <= 0.3 deg`. So **any `S` the YES child could close on
+exempts not one row**, and on such an `S` the NO child IS the original LP. Measured on `c0_Y0076`:
+NO needs `r in (0.02, 0.03]` at `tt = 10 deg` and `tt in (1.5, 2] deg` at `r = 0.10`; YES closes
+only at `r <= 3.66e-4` with the tilt PINNED, and is refuted at `tt = 0.31, 0.40, 0.49 deg` too. The
+obstruction is in the TILT variable alone, hence independent of `r`, so no anisotropic box helps.
+
+**The PI's geometry is NOT refuted -- the `K'`-based leaf is.** `pair158.py` looked for an explicit
+interior-disjoint pair (a pose IN `S` clearing every node core, and a free second meeter) over the
+six PI cells at `(r, tt)` in `{0.10, 0.01} x {10, 0.5} deg`, 600,000 draws each: **none exists in
+the sample, the maximum pair gap is negative everywhere** (-6.1e-4 on `c0_Y0959`). `K'(S)` is the
+intersection over the WHOLE box, so the intruder clears it while still overlapping every individual
+square with a pose in `S`. The repair -- partition `S` and apply the leaf per piece (A141's
+`lane_corner_split` shape) -- needs pieces `<= 3.7e-4` in centre and `< 0.5 deg` in tilt, about
+1.5e6 pieces for `S(0.10, 10 deg)`, roughly 400 CPU-h per cell.
+
+**A60 population**: 325 of the 1,590 distinct alive nodes are A60 trump5, and **159 of them** have
+dual weight >= 0.5 in some usable slot's `S(0.10, 10 deg)` box (`trump5 TL(0,0)` 77, `BR(0,1)` 50,
+`BL(0,2)` 49, `TR(0,1)` 13, `BL(1,1)` 11, `TR(1,0)` 3). Nothing in A60 was written; the two
+certificates and every record live under `attempts/A158-slot-split/`.
