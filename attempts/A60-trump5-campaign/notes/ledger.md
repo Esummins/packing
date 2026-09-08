@@ -620,3 +620,12 @@ campaign. Replayable certificates in A131's `pin-clip-kill-certificate-v1` forma
 drawn poses, 0 pin-free hits; 28 single-pin witnesses, 6 two-pin joint. Three of them (`c0_Y0168`, `c0_Y0254`,
 `c0_Y0878`) are also drawn in `docs/shadows/a57v3/` and their pages say EMPTY. **Nothing in A60 was written**;
 the recommendation is to run `trim57` and `pinclip` over the A60 population before any further LP there.
+
+**A141 (2026-09-07 night, `polycore lane`).** The K′ lane leaf at the usable slots (A118's leaf with A132's polygon
+cores and A135's exact pin cores) was run over the A57/A60 alive population in one resumable sweep sorted by source;
+it has covered the 876 A57 records so far (135 slot kills, `attempts/A57-shadow-trees/PAUSED.md`) and **has NOT yet
+reached A60's alive nodes** — the shards are still running (`attempts/A141-polycore-lane/results/t2_a5760_s{0,1}.jsonl`,
+resume by re-running `code/t2_a5760.py --shard k/2`). Nothing in A60 was written. When it lands, trump5's six usable
+slots (BL(0,2)→k6_07, BL(1,1)→k6_19, BR(0,1)→k6_21, TR(0,1)→k6_22, TR(1,0)→k6_24, TL(0,0)→k6_23, all FULL on the
+closed window) are the cells to read; A60's pins are exact placements, so their K′ is the FULL unit square and the
+leaf is strictly stronger there than on A57's m-hulled pins.

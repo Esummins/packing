@@ -70,6 +70,8 @@ Plus 10 A85 nodes and A99 R2 pattern cells that carry no level-1 cost credit (`l
 | `l2_p74_001` | 2 (NEW this round) | `l2_p74_001` |  |
 | `s3_far_BL389484_TR018470` | A85 | `s3_far_BL389484_TR018470` | A85 node, not a level-1 cell |
 
+**A141 (2026-09-07), the K′ lane leaf on this list and on the wider open pool:** `s3_far_BL389484_TR018470` is DEAD — unconditionally, by a *pair* contradiction (its conditioned squares h0 and h1 share a certified rational point once h0's box is clipped to the container, `shared_point_same_square`), and separately at BL by `LANE_K′ + M ≤ 1`; the other eleven of the twelve survive (five are near-misses at TR with `LANE_K′ ≤ 1, M = 1`, i.e. one free square plus the conditioned one). Over A115's whole open k0 pool the leaf kills **26 further distinct level-1 cells** (A38 l1 idx 156, 157, 162–167, 198–215), 9 level-2 and 3 level-3 records — all DEAD BY POLYCORE LANE **pending Lean** (`LaneCoverSound`, `K0Widen`) and pending k1_00's tree (K0-O1); certificates and an independent checker in `attempts/A141-polycore-lane/{certs,code/check141.py}`, ledger `results/polycore_lane_kills.jsonl`.
+
 ## Price and cumulative projection
 
 | item | value |

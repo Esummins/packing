@@ -354,3 +354,21 @@ every pin box, and the full per-sub-bin replay trace:
 16 single-pin witnesses, 1 two-pin joint; 0 of the 17 are emptied by the deployed T5″ trim alone. Nothing in
 A57 or A96 was written — at resume, retire these 17 (and their descendants; none is currently open) before any
 LP, and consider raising `pinclip.A_PIN` to the exact core at emission, which is the same change for free.
+
+**A141 (2026-09-07 night, `polycore lane`, pure geometry, nothing in A57/A96 written).** A118's LANE-COUNT leaf
+re-run with A132's POLYGON cores K′ — and, for the pins, A135's EXACT pin core (K′ of the pin's own zero-tilt box,
+half-side 1/2 − δ/√2, not `pinguard`'s 0.48999997) — at the USABLE SLOTS (a slot counts only where its extension
+class is certified dead on the closed window [191/50, 969271/250000]; all of k6_18/20/23 for k5_11 and
+k6_23/27/28/29/30 for k5_16 are, A56/A61/A114 scoreboard). Over the first **876 distinct alive A57 records swept
+(of 1,693; the pass is resumable and still running, `results/t2_a5760_s{0,1}.jsonl`)**, **135 (node, slot) pairs on
+135 distinct nodes have `LANE_K′ + M ≤ 1` — 96 k5_11 + 39 k5_16, 88 at level 1 and 47 at level 2, by slot
+BR(0,1) 45 / TL(1,0) 40 / TR(0,0) 27 / BL(1,0) 22 / BL(1,1) 1 — every one with `LANE_K′ = 0` and `M = 1`**, i.e.
+the slot is met by the conditioned square alone, SLOT-CROWD's two non-pin meeters are impossible, and the node is
+DEAD by teleport into the (dead) extension class. Each carries a replayable `polycore_slot_lane_v1` certificate
+(`attempts/A141-polycore-lane/certs/slot_*.json`) — a finite cover of the slot-meeting poses whose every leaf is
+discharged by the container, by a certified separating axis, or by ONE rational point proved (exactly, A132
+`vertex_ok` = Lean `checkVertexInPBox`) to lie in every pose of the leaf box AND of a pin's or the conditioned
+square's box — and the independent checker `code/check141.py` passes 185 of 185 A141 certificates. Sample line per
+kill: 200,000 poses drawn, ≈ 1.2·10⁵ meeting the slot cell, **0 free**. Caveat A118-O1 stands: a LANE kill excludes
+class-S packings with EXACT pins, not the δ = 10⁻² slack family. At resume, retire these 135 (and their descendants)
+before any LP; the overlap with A131/A142's pin-clip kills is NOT yet measured.
