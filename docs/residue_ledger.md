@@ -214,8 +214,7 @@ apply (no boxes).
 
 Trump's skeleton carries at least four exact local minima now: Trump (ŝ), S07 (2 + 4√2/3), S33 = S34 = K19 (3.91693,
 smooth interior critical point, all eleven squares load-bearing), S35 (3.91742, distinct), plus S38 (3.92891, degree 9)
-on k6_21 (known_results 26d). All are separate basins: S07's crest toward Trump is +0.0011, S33's +0.038. The local
-certificate applies to S33 and S38 with no Trump cut out to r = 0.2 and 0.68.
+on k6_21 (known_results 26d). All are separate basins: S07's crest toward Trump is +0.0011, S33's +0.038. The local certificate applies to S33 and S38 with no Trump cut out to r = 0.2 and 0.68. **Certified (A125 `395549fe`, docs/proofs/local_certificate_s33.md): S33 at (0.2, 10°) and (0.05, 20°) with all five free squares and no cut (Trump never enters N), S38 at (0.1, 10°); six rational certificates valid under A119's checker (602k leaves, 10.7M multipliers), every N sampled ≥ 10⁴ → 0 hits; limiter = the tilt-cell count at ρ = 20°, r ≥ 0.1 (zero witnesses, just the cap). Consumer: exactly one alive node (trump5's c0_Y0335) — the sixth pin BL(0,2), which k6_07 has and trump5 lacks, is the binding body for 1,065 of the 1,421 alive supports, so the neighbourhood prunes only nodes already localised onto k6_07's skeleton; the lever is promoting BL(0,2) from pin to free box (the mirror of A116-G2), or ρ = 40°. The protected-tier row does not move.**
 
 trump5 (BL[2,1] + BR[1] + TR[1]) contains Trump, so its kill is a residual tree ending in Trump's basin (rBasin =
 3/2000, A63). A60's cover ran at 0.781 kill rate; paused. Its 325 alive nodes are, by A107: S01 196 (room), S07 18
