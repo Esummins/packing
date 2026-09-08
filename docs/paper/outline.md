@@ -114,6 +114,20 @@ redirected (N−), or negative that merely closed a door (N).
   drain flow DF-K0 (A87, CP); contact-structure census (A88, N−: every count-based route dies);
   tilt floor (A89, mixed: the loaded floor is a gap, TF-U/MENU/JAM-0/ID proved, four-shallow
   certificate); NOCRIT (A90, open at time of writing).
+- **Phase VI, the reading loop (Sep 4–8).** The LP's dual support drawn directly in the geometry's
+  coordinates (A107 gallery, v2–v4) and the PI's reading of 83 pages (review.csv, validated by A121);
+  exact minima on Trump's skeleton (S07, S33/S34/K19, S35, S38 — A108/A122) and the local certificate
+  around them (A116/A119/A125/A133/A139: Lean theorems from certificate data alone; A126 discharged
+  the interior-SAT axiom); the external review and its four items (A126/A128/A129/A130); then the
+  geometric leaves each born from one reading: the pin pinch → pin-clip (A131), the impossible
+  columns → the polygon core and exact cores (A132/A135), the four-chord line → guard-line rows
+  (A144), the singly-met slot → the slot lane and the slot split (A141/A158), the corner-rooted
+  tree and its death (A143/A150/A154/A155). The night shifts (A123/A137) and the day re-emission
+  (A149/A156) that cashed them: the window layer closed (A146, 52/52), A57's work-owing population
+  632 → 406 and falling, k0 residue 12 → 11 with 47 more cells dead. The negatives of the phase,
+  each measured to its floor: the covering number (A153), the shrunk cell (A152), the undecided
+  slots (A157), the R6 row (A154), the corner band (A155), the net-orientation verifier as a lever
+  (A129, kept as a cross-check).
 
 ## 5. The critical path, told plainly (L1), then precisely (L2)
 
@@ -186,6 +200,56 @@ to be corrected by the PI:
 chore, with the price feeding the next PI idea. The paper should show two or three of these loops
 end to end (stratification; drain flow; K0-BLOCKED).
 
+**Phase VI additions to the PI's list.** The rule that the relaxation's dual support should be
+drawn directly, overlaps and all, in the same coordinates as the geometry ("the LP approach is
+semi-Eulerian"); the readings that became leaves — the Y0036 pin pinch (pin-clip), the Y0186
+support columns inside the hypothesis square (polygon and exact cores; "things like the impossible
+overlaps shouldn't be possible at all"), the Y0147 four-chord line (guard-line rows), the singly-met
+slot and the slot split (Y0460, c0_Y0076 and its two children), the corner-rooted tree and the
+diagnosis of its pad; the drawing rules (hypothesis at box centre and mid-tilt, extremal-tilt
+outlines, schematic objects never drawn as bodies, undecided never green, witnessed meeters drawn);
+the standing question that organises the gallery — "is there a shortcut that geo-kills the node
+without running more LP". **Phase VI additions to the AI's list.** The leaves and their checkers
+(clip, polygon core, exact cores under the frozen schema, lane/slot lane/conditional lane, guard
+lines, cover number), the soundness arguments and the counter-examples that killed the unsound ones
+(the shrunk cell's four grazers; the quadrilateral-with-short-sides claim), the canary discipline
+(Trump images must survive every leaf), and the Lean closure of the local certificate.
+
+## 6a. The reading loop: drawings, readings, leaves (a theme of the experiment)
+
+The paper's second subject is the interaction, and Phase VI is its clearest specimen. State the
+loop as a method, with one worked example per step:
+
+1. **Draw the relaxation, not the packing.** The LP's dual support is a fractional object that
+   never converges to a configuration; drawn as squares at their centres and tilts with opacity by
+   weight, overlaps allowed, it becomes a picture a person can read. Every page carries the
+   hypothesis square at its box centre and mid-tilt, the pins at their exact cores, the certified
+   feasible-centre region, and the verdict of every leaf already run, so the reader never re-derives
+   a known kill.
+2. **Read for shortcuts.** The PI's question on every page is whether a geometric fact kills the
+   node without more LP. The readings are recorded in a shorthand (r, ns, i, g, st4, fl, ?) in a
+   review sheet with the automatic columns filled and the human ones empty.
+3. **Turn a reading into a leaf.** A reading names a mechanism (a pinch, an impossible column, a
+   chord sum, a singly-met slot). The AI states it for a class and a slot rather than a node, writes
+   the soundness argument, builds the certificate and an independent checker, and runs it on the
+   whole alive population with a sample line (drawn → tested → hits) and a canary.
+4. **Measure the negatives to their floor.** Roughly half the readings of the week failed on exact
+   tests — usually a hairline meeter invisible on the page (a clearance of 10⁻²) or a definition
+   subtlety ("met" is interior intersection at any depth). Each failure is written down with the
+   witness that refuted it, and the drawing rules change so the next page shows the witness.
+5. **Cash the leaves in the campaign.** Retrospective sweeps over stored nodes (a fifth of the open
+   tree died to a filter that had only ever run at emission), then deployment at emission, then the
+   night shift.
+
+What the loop produced that neither party had alone: a person with no formal training who, after
+enough pages, can say which family a node belongs to, where its nearest minimum sits, and which
+leaf will fire — an intuition for the set of local minima across the whole configuration space —
+and a code base in which that intuition is falsifiable in minutes. The failure modes are as
+instructive as the successes: the human sees structure the relaxation cannot express and misses
+sub-pixel meeters; the machine sees every meeter and none of the structure. The pages are the
+interface where the two correct each other, and the ledger keeps both the theorems and the refuted
+readings for the same reason.
+
 ## 7. The AI's characteristic tendencies (requested)
 
 Each documented with the exchange that exposed it and what changed afterwards.
@@ -220,7 +284,11 @@ Two tables. **Tools that transfer** (to other n, other shapes, other containers)
 exact verifier + Lean checker; stratification by simple squares (any n; the census grows but is
 mechanical); teleport/clear-corner selection; drain flow and the critical-point reduction;
 dilation/window transfer; rigidity+basin+tube around any rigid optimum; the campaign engineering
-(resumable trees, canaries, commit gates). **Facts specific to n = 11**: Trump's rigidity and
+(resumable trees, canaries, commit gates); the geometric leaves of Phase VI (pin-clip, polygon and
+exact cores, lane/slot/conditional lane, guard lines — each stated per class and slot, each with a
+checker); and the reading loop itself — the gallery generator with its drawing rules, the review
+sheet, and the leaf-from-reading pipeline, which is the part most likely to carry to other n and
+other shapes because it does not depend on the answer. **Facts specific to n = 11**: Trump's rigidity and
 uniqueness; the protected tier being exactly Trump's skeletons; the size of the k0 residue.
 
 Attribution of transferability: the PI's ideas (stratification, drain, teleport count, K0-BLOCKED
