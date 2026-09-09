@@ -2,7 +2,7 @@
 role HULLS (bounding box of each role's surviving pieces: a sound superset), A135 exact cores,
 certificate through A170's certwrap170.make_certificate_exact, checked by the FROZEN verify_case.py
 (sha 521cb01f...).  Budget = 11 - #roles.  Gates: every role hull must carry an exact core (else
-[P] "no core"), > 3 GB free physical and > 6144 MB available commit, box < 16 pythons before the
+[P] "no core"), > 3 GB free physical and > 6144 MB available commit, box < 12 pythons (A182) before the
 verifier is spawned.  Wall: LP cap + certificate cap + verifier timeout <= 1,500 s per node.
 """
 import ctypes
@@ -43,14 +43,17 @@ def mem_gate(min_phys_mb=3072, min_commit_mb=6144):
 
 
 def n_python():
+    """every python on the box, counted by IMAGE NAME (catches relative command lines: A182)."""
     try:
-        out = subprocess.run(["tasklist", "/FI", "IMAGENAME eq python.exe", "/NH"], capture_output=True, text=True).stdout
-        return sum(1 for l in out.splitlines() if l.strip().lower().startswith("python.exe"))
+        cmd = ["powershell", "-NoProfile", "-Command",
+               "(Get-CimInstance Win32_Process -Filter \"Name like 'python%'\" | Measure-Object).Count"]
+        out = subprocess.run(cmd, capture_output=True, text=True, timeout=60).stdout.strip()
+        return int(out.splitlines()[-1])
     except Exception:                                            # noqa: BLE001
         return 99
 
 
-def wait_box(ceiling=16, max_wait=1800, log=print):
+def wait_box(ceiling=12, max_wait=1800, log=print):
     t0 = time.time()
     while True:
         n = n_python()
