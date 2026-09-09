@@ -106,6 +106,7 @@ READ-ONLY IMPORTS
 A131 pinclip, A132 polycore, A135 exactcore, A141 polylane, A144 guardline, A161 chordlane, A57
 caselp.  Nothing in this module writes outside attempts/A171-multibox-invariant.
 """
+import itertools
 import math
 import os
 import sys
@@ -223,14 +224,18 @@ def t_of_deg(d):
 
 
 # ==================================================================== the obstacle
+_OBS_UID = itertools.count(1)               # unique, never-reused obstacle keys (A173 fix)
+
+
 class Obstacle:
     """A convex rational polygon K contained in every pose of some box, precompiled for the exact
     dead-set test.  `K` is A132's certified K'(B) (mode "poly") or the four corners of A135's exact
     axis core (mode "core"); either is a subset of every pose of B, which is all soundness needs."""
 
-    __slots__ = ("verts", "fV", "edges", "name", "kind")
+    __slots__ = ("verts", "fV", "edges", "name", "kind", "uid")
 
     def __init__(self, verts, name="", kind="poly"):
+        self.uid = next(_OBS_UID)           # NEVER reused; see Bin.radii (A173 fix)
         self.verts = [(_fr(a), _fr(b)) for (a, b) in verts]
         self.fV = np.array([[float(a), float(b)] for a, b in self.verts])
         self.name = name
@@ -297,8 +302,15 @@ class Bin:
         self._rlo = {}
 
     def radii(self, obs):
-        """per-edge rational lower radius bounds, cached per obstacle."""
-        key = id(obs)
+        """per-edge rational lower radius bounds, cached per obstacle.
+
+        KEYED BY `obs.uid`, NOT `id(obs)`.  A173 found the bug: `normalise` builds a FRESH obstacle
+        per box per pass and drops the previous pass's, so CPython reuses the freed address and a
+        long-lived `Bin` would answer the new obstacle with the OLD obstacle's radii -- wrong bounds
+        in the exact dead test, in either direction, i.e. UNSOUND.  It bit nondeterministically
+        (2 aliases in test (a) alone, which is why `a2.invariant_after` flickered).  `uid` comes
+        from a monotone counter, so a key is never reused."""
+        key = obs.uid
         r = self._rlo.get(key)
         if r is None:
             r = [_radius_lo(nx, ny, self.c0, self.s0, self.c1, self.s1)
@@ -487,6 +499,333 @@ def container_clip(rect, bn, s, strict=True, trace=None):
         trace.append(dict(op="container_sliver", w="max", w_val=str(bn.wmax),
                           sliver_area=str(sl), rect=[str(v) for v in strict_rect]))
     return strict_rect, sl
+
+
+# ==================================================================== THE LONELY CLIP  (A173)
+#
+# WHY (PI, 2026-09-09).  A169's Theorem B (`docs/proofs/sideband.md` sec 3, consumption row R3 in
+# sec 6) says that a corner meeter pose admitting NO second meeter of the widened corner box -- a
+# LONELY pose -- is IMPOSSIBLE in a K0-BLOCKED packing: if such a pose occurred, that corner would
+# be met by one square only at the widened box, and K0-WIDEN + K0-FREE kill the packing.  So the
+# lonely set L_{c'} is a NO-family at the root of the tree, hence at every node, and R3's stated
+# consumption is "(iii) a conditioned box B_H is clipped to B_H \ L_{c'}" -- a CLIP.
+#
+# A168 consumes it only as a whole-role KILL (`resume168.lonely_role`: every piece of the role must
+# be lonely).  A role that is 90 % lonely therefore keeps all of its poses, its K' never grows from
+# them, and the cascade into the other boxes is lost.  The coordinator's measurement on the TR
+# corner shows the granularity is much finer than a role: an axis-aligned D flush with the right
+# wall slid down any amount is NOT lonely (a partner exists in the top band left of it), while D at
+# tilt 15 deg slid 0.1, or D at tilt 30 deg pressed, IS lonely.  What Theorem B removes is TILT
+# SUB-BINS AND CENTRE SLABS.
+#
+# WHAT THIS CODE IS.  `lonely_local` is a PORT of `resume168.lonely_box` -- the maths copied, with
+# attribution, never imported at runtime (A168 is read-only, and a library must not depend on an
+# attempt).  `tests/test_multibox.py` case (f) cross-checks the port against `resume168.lonely_box`
+# on 500 random boxes and requires IDENTICAL verdicts.  The criterion, in BL-local coordinates of
+# the corner (a reflection; a single reflection also maps th -> 90 - th):
+#
+#   (W)  fails everywhere on the box  <=  for all z in [0, 90]:
+#        -x1 sin z + y0 cos z + g_min(z + 90) >= c cos z - sin^2 z
+#   (S)  the mirror image, with (y1, x0);
+#   (NE) fails everywhere            <=  for all a: x0 cos a + y0 sin a + g_min(a) >= c(cos a + sin a)
+#   (P)  fails                       <=  the pressed square [0,1]^2 is NOT a second meeter, i.e.
+#        EVERY pose of the box has interior meeting int [0,1]^2 -- decided by A131's exact clip of
+#        the centre rect against the axis core (1/2, 1/2, 1/2 - 1e-6) per tilt sub-bin: the clip
+#        returning EMPTY means every centre is dead against that core, i.e. every pose meets it.
+#
+# with g_min(n) >= 1/2 a lower bound of the half-width w(angle - th)/2 over the box's tilt range
+# (Lipschitz margin 1/sqrt2 in th), and the three one-parameter inequalities decided on a
+# 2001-point z-grid with a Lipschitz margin.  A168 tags the clause grid [S] (supported, not [T]);
+# THE CLIP INHERITS EXACTLY THAT GRADE -- no better and no worse than the R3 kills A168 has already
+# booked.  The (P) clause is exact (A131 rational arithmetic).
+#
+# WHY THE CLIP IS SOUND.  `lonely_rect` is a SUFFICIENT condition for "every pose of the piece is
+# lonely" (each clause is checked with the box corner that minimises it and a lower bound of g, so a
+# TRUE verdict certifies the whole piece).  Hence: a slab the test calls lonely contains only
+# impossible poses and may be removed; a slab it cannot certify is KEPT.  That is the sound
+# direction, and it is why the slab is tested DIRECTLY (unlike the mutual clip, which tests four
+# corner points and appeals to convexity of the dead set -- the lonely set is not convex).
+# Monotonicity, which is what makes the bisection legal: SHRINKING the rect raises every clause
+# function (x1, y1 decrease and x0, y0 increase, all with nonnegative coefficients) and NARROWING
+# the tilt bin raises g_min and enlarges (P)'s dead set, so every sub-rect and sub-bin of a
+# certified-lonely piece is itself certified lonely.
+#
+# The constant c: the K0-WIDEN box side 1 + w, reproduced here EXACTLY as A168's `cas168.W0_RAT`
+# (A141's float pad rounded up to a rational, so the box is never narrower than the float one).
+WLO_A168 = Fr(382, 100)                                   # cas168.WLO
+LAM_MAX_A168 = S_RAT / WLO_A168                           # cas168.LAM_MAX
+W0_RAT = (LAM_MAX_A168 - 1) * (1 + 1 / SQ2_LO)            # cas168.W0_RAT  = 0.0255100742139405...
+C_WIDEN = 1 + W0_RAT                                      # resume168.C_RAT
+C_UNIT = Fr(1)
+
+INV_SQ2 = 1.0 / math.sqrt(2.0)
+_ZGRID = np.linspace(0.0, 0.5 * math.pi, 2001)            # resume168.GRID
+_COSG, _SING = np.cos(_ZGRID), np.sin(_ZGRID)
+_HSTEP = float(_ZGRID[1] - _ZGRID[0])
+_GCACHE = {}
+PRESSED_CORE = (Fr(1, 2), Fr(1, 2), Fr(1, 2) - Fr(1, 10 ** 6))    # resume168's pressed-square pin
+CORNERS = ("BL", "BR", "TR", "TL")
+
+
+def _new_lonely_stats():
+    return dict(clause_calls=0, p_calls=0, drops=0, slabs=0, exact_calls=0, backoffs=0)
+
+
+def _clause_fails_everywhere(f, L):
+    """PORT of resume168._clause_fails_everywhere: f >= 0 on the whole interval, with the sound
+    Lipschitz margin L*h/2 for the 2001-point grid."""
+    return bool(np.all(f >= 0.5 * L * _HSTEP + 1e-9))
+
+
+def _gmin(angle_grid, th0, th1, nth=64):
+    """PORT of resume168._gmin: lower bound of g(n) = (|cos(alpha - th)| + |sin(alpha - th)|)/2 over
+    th in [th0, th1] (degrees), per grid angle alpha (radians) -- a th-grid minimum minus the
+    Lipschitz margin (|dg/dth| <= 1/sqrt2), never below 1/2."""
+    ths = np.radians(np.linspace(th0, th1, nth)) if th1 > th0 else np.radians(np.array([th0]))
+    ph = angle_grid[:, None] - ths[None, :]
+    g = 0.5 * (np.abs(np.cos(ph)) + np.abs(np.sin(ph))).min(axis=1)
+    hth = (ths[1] - ths[0]) if len(ths) > 1 else 0.0
+    return np.maximum(0.5, g - 0.5 * INV_SQ2 * hth)
+
+
+def _gtriple(th0, th1):
+    """(gW, gS, gN) for one local tilt range, cached (they depend on the tilt bin only)."""
+    key = (th0, th1)
+    v = _GCACHE.get(key)
+    if v is None:
+        v = (_gmin(_ZGRID + 0.5 * math.pi, th0, th1),           # n_W(z)  = (-sin z, cos z)
+             _gmin(-_ZGRID, th0, th1),                          # n_S(z)  = (cos z, -sin z)
+             _gmin(_ZGRID, th0, th1))                           # n_NE(a) = (cos a, sin a)
+        if len(_GCACHE) > 8192:
+            _GCACHE.clear()
+        _GCACHE[key] = v
+    return v
+
+
+def _pressed_not_a_meeter(x0, x1, y0, y1, th0, th1, nsub=4, s=None):
+    """clause (P) FAILS on the whole box: the pressed square [0,1]^2 is not a second meeter, i.e.
+    every pose of the box has interior meeting int [0,1]^2.  PORT of resume168.lonely_box's (P)
+    branch, which is `roles168.clip_piece(piece, [pressed core])` returning EMPTY on every tilt
+    sub-bin -- A131's exact rational clip against the axis core (1/2, 1/2, 1/2 - 1e-6).
+
+    A DEGENERATE rect (a slab boundary probe, zero width) is padded OUTWARD by 1e-12 first: A131's
+    clip reports an empty rect for a degenerate input, which would be read as 'dead' and would be
+    UNSOUND here.  The pad only ever enlarges the box, so the verdict stays sufficient, and it
+    leaves every non-degenerate box (every box the A168 cross-check sees) bit-identical."""
+    s = S_RAT if s is None else s
+    if x1 <= x0:
+        x1 = x0 + 1e-12
+    if y1 <= y0:
+        y1 = y0 + 1e-12
+    kx, ky, a = PRESSED_CORE
+    edges = ([th0 + (th1 - th0) * k / nsub for k in range(nsub + 1)] if th1 > th0
+             else [th0, th1])
+    for k in range(len(edges) - 1):
+        b = Box(x0, x1, y0, y1, edges[k], edges[k + 1])
+        t0, t1 = t_lo(b.th0), t_hi(b.th1)
+        o = PIN.Oct(t0, t1, a)
+        rect, _ = PIN.clip_rect(PIN.outer_rect(b), [(kx, ky)], o, s)
+        if rect is None:
+            continue
+        cx0, cx1 = max(b.x0, float(rect[0])), min(b.x1, float(rect[1]))
+        cy0, cy1 = max(b.y0, float(rect[2])), min(b.y1, float(rect[3]))
+        if cx1 > cx0 and cy1 > cy0:
+            return False                                       # a surviving centre => (P) may hold
+    return True
+
+
+def lonely_local(x0, x1, y0, y1, th0, th1, c=None, nsub=4, s=None, stats=None):
+    """SOUND: every pose with centre in [x0,x1] x [y0,y1] and tilt in [th0, th1] (DEGREES) is LONELY
+    at the widened box of side c, the box given in BL-LOCAL coordinates of its corner.
+
+    PORT of `attempts/A168-cascade-fable/code/resume168.py::lonely_box` (A169 Theorem B, clauses
+    (W), (S), (NE), (P)), identical in its arithmetic; the only differences are the degenerate pad
+    in (P) documented above and the cached g's.  Returns (bool, detail)."""
+    c = float(C_WIDEN if c is None else c)
+    if stats is not None:
+        stats["clause_calls"] += 1
+    gW, gS, gN = _gtriple(th0, th1)
+    det = {}
+    fW = -x1 * _SING + y0 * _COSG + gW - c * _COSG + _SING ** 2
+    det["W"] = _clause_fails_everywhere(fW, x1 + y0 + c + 1.0 + INV_SQ2)
+    fS = -y1 * _SING + x0 * _COSG + gS - c * _COSG + _SING ** 2
+    det["S"] = _clause_fails_everywhere(fS, y1 + x0 + c + 1.0 + INV_SQ2)
+    fN = x0 * _COSG + y0 * _SING + gN - c * (_COSG + _SING)
+    det["NE"] = _clause_fails_everywhere(fN, x0 + y0 + 2 * c + INV_SQ2)
+    if not (det["W"] and det["S"] and det["NE"]):
+        det["P"] = None
+        return False, det
+    if stats is not None:
+        stats["p_calls"] += 1
+    det["P"] = _pressed_not_a_meeter(x0, x1, y0, y1, th0, th1, nsub=nsub, s=s)
+    return bool(det["P"]), det
+
+
+def to_local(x0, x1, y0, y1, t0, t1, corner, s=S_RAT):
+    """the piece in BL-local coordinates of `corner` (distance from that corner's two walls), EXACT.
+    PORT of resume168.to_local; the tilt reflection th -> 90 - th is done on t = tan(th/2) by
+    t -> (1 - t)/(1 + t) (= tan(45 - th/2)), which is exact on the rationals."""
+    rx = corner in ("BR", "TR")
+    ry = corner in ("TL", "TR")
+    if rx:
+        x0, x1 = s - x1, s - x0
+    if ry:
+        y0, y1 = s - y1, s - y0
+    if rx != ry:
+        t0, t1 = (1 - t1) / (1 + t1), (1 - t0) / (1 + t0)
+    return x0, x1, y0, y1, t0, t1
+
+
+def lonely_rect(rect, bn, corner, c=None, s=S_RAT, nsub=4, stats=None):
+    """SOUND: every pose of the piece (rational centre rect x the t-sub-bin `bn`) is LONELY at
+    `corner`.  The rational piece is reflected into the corner's local frame EXACTLY and then
+    rounded OUTWARD into the floats `lonely_local` consumes: a larger rect and a wider tilt range
+    only make the criterion harder to satisfy, so a TRUE verdict still certifies the true piece."""
+    lx0, lx1, ly0, ly1, lt0, lt1 = to_local(_fr(rect[0]), _fr(rect[1]), _fr(rect[2]), _fr(rect[3]),
+                                            bn.t0, bn.t1, corner, s=s)
+    th0 = math.nextafter(deg_of_t(lt0), -math.inf)
+    th1 = math.nextafter(deg_of_t(lt1), math.inf)
+    ok, _det = lonely_local(_f_down(lx0), _f_up(lx1), _f_down(ly0), _f_up(ly1), th0, th1,
+                            c=c, nsub=nsub, s=s, stats=stats)
+    return ok
+
+
+def lonely_box(box, corner, c=None, nsub=4, s=S_RAT):
+    """the cross-check entry point: `resume168.lonely_box`'s signature on a caselp.Box in CONTAINER
+    coordinates and DEGREES.  Returns (bool, detail)."""
+    sr = _fr(s)
+    lx0, lx1, ly0, ly1, _t0, _t1 = to_local(_fr(box.x0), _fr(box.x1), _fr(box.y0), _fr(box.y1),
+                                            Fr(0), Fr(0), corner, s=sr)
+    if (corner in ("BR", "TL")):
+        th0, th1 = 90.0 - box.th1, 90.0 - box.th0
+    else:
+        th0, th1 = box.th0, box.th1
+    return lonely_local(float(lx0), float(lx1), float(ly0), float(ly1), th0, th1,
+                        c=c, nsub=nsub, s=sr)
+
+
+# -------------------------------------------------------------------- the slab clip
+def _clip_rect_lonely(rect, bn, corner, c, s, nsub, stats, trace=None):
+    """clip ONE piece's centre rect by the lonely set over its own tilt sub-bin.  -> rect or None.
+
+    Structurally A171's `_clip_rect_obstacle` / A131's `_clip_one_pin`, with the point-wise dead
+    test replaced by the RECT-WISE `lonely_rect` (the lonely set is not convex, so the slab must be
+    certified as a whole, not by its four corners).  `PIN._bisect_boundary` is reused verbatim: it
+    finds the largest v with the predicate true and CERTIFIES the returned value, so what is dropped
+    is always a slab the criterion has just proved lonely."""
+    x0, x1, y0, y1 = rect
+
+    def L(a, b, cc, dd):
+        return lonely_rect((a, b, cc, dd), bn, corner, c=c, s=s, nsub=nsub, stats=stats)
+
+    def rec(side, frm, to):
+        if trace is not None and to != frm:
+            stats["slabs"] += 1
+            trace.append(dict(op="lonely_slab", corner=corner, side=side,
+                              **{"from": str(frm)}, to=str(to)))
+
+    if L(x0, x1, y0, y1):
+        stats["drops"] += 1
+        if trace is not None:
+            trace.append(dict(op="lonely_empty", corner=corner,
+                              rect=[str(v) for v in rect]))
+        return None
+    if L(x0, x0, y0, y1):
+        nx = PIN._bisect_boundary(True, x0, x1, lambda v: L(x0, _fr(v), y0, y1),
+                                  lambda v: L(x0, v, y0, y1), stats)
+        rec("x0", x0, nx)
+        x0 = nx
+    if L(x1, x1, y0, y1):
+        neg = PIN._bisect_boundary(True, -x1, -x0, lambda v: L(_fr(-v), x1, y0, y1),
+                                   lambda v: L(-v, x1, y0, y1), stats)
+        rec("x1", x1, -neg)
+        x1 = -neg
+    if x1 <= x0:
+        if trace is not None:
+            trace.append(dict(op="lonely_collapse", corner=corner, axis="x"))
+        return None
+    if L(x0, x1, y0, y0):
+        ny = PIN._bisect_boundary(True, y0, y1, lambda v: L(x0, x1, y0, _fr(v)),
+                                  lambda v: L(x0, x1, y0, v), stats)
+        rec("y0", y0, ny)
+        y0 = ny
+    if L(x0, x1, y1, y1):
+        neg = PIN._bisect_boundary(True, -y1, -y0, lambda v: L(x0, x1, _fr(-v), y1),
+                                   lambda v: L(x0, x1, -v, y1), stats)
+        rec("y1", y1, -neg)
+        y1 = -neg
+    if x1 <= x0 or y1 <= y0:
+        if trace is not None:
+            trace.append(dict(op="lonely_collapse", corner=corner, axis="y"))
+        return None
+    return (x0, x1, y0, y1)
+
+
+def lonely_clip(mbox, corner, c=None, s=S_RAT, nsub=4, refine=0, max_pieces=192, stats=None,
+                pass_=None):
+    """THE LONELY CLIP.  Remove from `mbox`'s pieces every centre slab and tilt sub-bin that
+    Theorem B certifies LONELY at `corner` for the box of side `c` (default the K0-WIDEN 1 + w).
+
+    Every removal is justified by R3: a lonely pose is impossible in a K0-BLOCKED packing, so the
+    surviving pieces still contain every possible pose of the box -- the same soundness contract as
+    the container and mutual clips.  With `refine > 0` a piece that is only PARTLY lonely first has
+    its tilt sub-bin bisected (tautologous: the two halves cover the parent exactly), which is what
+    catches "lonely above 15 deg, not below".
+
+    Raises `EmptyBox(name)` if the box loses every piece -- that is A168's R3 KILL, recovered as the
+    limiting case of the clip.  Returns a report dict."""
+    c = C_WIDEN if c is None else c
+    st = _new_lonely_stats() if stats is None else stats
+    rep = dict(box=mbox.name, corner=corner, c=float(c),
+               area_before=float(sum(rect_area(r) * (b.t1 - b.t0) for (b, r) in mbox.pieces)),
+               n_before=len(mbox.pieces), dropped_pieces=0, split=0)
+    work = list(mbox.pieces)
+    # --- tautologous tilt refinement, dropping the halves that are wholly lonely
+    for _lvl in range(max(0, refine)):
+        if len(work) * 2 > max_pieces:
+            break
+        new = []
+        for (bn, r) in work:
+            m = (bn.t0 + bn.t1) / 2
+            for b2 in (Bin(bn.t0, m), Bin(m, bn.t1)):
+                if lonely_rect(r, b2, corner, c=c, s=s, nsub=nsub, stats=st):
+                    st["drops"] += 1
+                    rep["dropped_pieces"] += 1
+                    mbox.trace.append(dict(
+                        lonely=True, pass_=pass_, t=[str(b2.t0), str(b2.t1)],
+                        steps=[dict(op="lonely_empty", corner=corner,
+                                    rect=[str(v) for v in r],
+                                    area=float(rect_area(r) * (b2.t1 - b2.t0)))]))
+                    continue
+                new.append((b2, r))
+        rep["split"] += 1
+        work = new
+        if not work:
+            break
+    # --- the slab clip on every surviving piece
+    keep = []
+    for (bn, r) in work:
+        tr = []
+        nr = _clip_rect_lonely(r, bn, corner, c, s, nsub, st, trace=tr)
+        if tr:
+            lost = float((rect_area(r) - rect_area(nr)) * (bn.t1 - bn.t0))
+            for stp in tr:
+                stp["area"] = lost
+            mbox.trace.append(dict(lonely=True, pass_=pass_, t=[str(bn.t0), str(bn.t1)], steps=tr))
+        if nr is None:
+            rep["dropped_pieces"] += 1
+            continue
+        keep.append((bn, nr))
+    mbox.pieces = keep
+    rep["n_after"] = len(keep)
+    rep["area_after"] = float(sum(rect_area(r) * (b.t1 - b.t0) for (b, r) in keep))
+    rep["removed"] = rep["area_before"] - rep["area_after"]
+    rep["stats"] = dict(st)
+    mbox.lonely_removed = getattr(mbox, "lonely_removed", 0.0) + rep["removed"]
+    if not keep:
+        raise EmptyBox(mbox.name, dict(reason="lonely", corner=corner, c=float(c),
+                                       rule="A169 Theorem B / R3 (sideband.md sec 3, sec 6)"))
+    return rep
 
 
 # ==================================================================== K' FROM THE PIECES  (A172)
@@ -856,6 +1195,7 @@ class MBox:
                     union_box=(self.ubox.to_json() if getattr(self, "ubox", None) else None),
                     kept=self.kept, n_pieces=len(self.pieces),
                     sliver_area=float(self.sliver_area),
+                    lonely_removed=float(getattr(self, "lonely_removed", 0.0)),
                     k_source=self.k_source, k_info=self.k_info,
                     axis_a=(float(self.core.a) if self.core is not None else None),
                     poly_area=(self.pc.area() if self.pc is not None else None),
@@ -914,8 +1254,9 @@ class Node:
     # ---------------------------------------------------------------- THE RULE
     def normalise(self, s=None, nsub=4, max_iter=10, strict_container=True, mode="poly",
                   n_grid=97, max_v=16, aden=ADEN_DEFAULT, refine=2, max_pieces=96,
-                  kmode="pieces", verbose=False):
-        """Container clip + mutual clip to a fixed point.  Returns self.
+                  kmode="pieces", corners=None, lonely_nsub=4, lonely_refine=0,
+                  verbose=False):
+        """Container clip + LONELY clip + mutual clip to a fixed point.  Returns self.
 
         Every multi-box construction MUST call this before it draws a figure, prices a chord row,
         runs a lane cover or hands boxes to an LP.  Raises `EmptyBox(name)` the moment a box loses
@@ -930,9 +1271,39 @@ class Node:
         two halves cover the parent exactly, so a half the clip proves wholly dead is dropped with
         no loss.  Refinement is what makes the clip bite where the dead region is a diagonal band
         that shrinks no side of the rectangle (A131 conservatism (c)); without it the residual
-        "poses that still meet another core" stays large.  `max_pieces` caps the pieces per box."""
+        "poses that still meet another core" stays large.  `max_pieces` caps the pieces per box.
+
+        `corners` (A173) turns on the LONELY CLIP per box:  corners={"D": ("TR", c), "B": "BR"} --
+        either (corner, c) or just the corner name, in which case c = `C_WIDEN` = 1 + w, the
+        K0-WIDEN box.  The named box is then clipped by A169's Theorem B (row R3: a lonely pose
+        admits no second meeter of that corner box, so it cannot occur in a K0-BLOCKED packing)
+        AT EVERY PASS, BEFORE the mutual clip of that pass -- which is the point: the lonely clip
+        shrinks the pieces, K' is rebuilt larger from the survivors at the top of the next pass, and
+        the CASCADE carries that growth into the other boxes.  `lonely_refine` bisects a partly
+        lonely piece's tilt sub-bin first (tautologous).  A box that loses every piece raises
+        `EmptyBox` -- A168's R3 kill, recovered as the limiting case of the clip."""
         s = self.s if s is None else _fr(s)
         self.s = s
+        cspec = {}
+        for k, v in (corners or {}).items():
+            if k not in self.boxes:
+                raise KeyError(f"normalise(corners=...): no box named {k!r} in this node")
+            cspec[k] = (v, C_WIDEN) if isinstance(v, str) else (v[0], _fr(v[1]))
+        self.corners = cspec
+        self.lonely = {k: [] for k in cspec}
+
+        def _lonely_pass(tag):
+            """the lonely clip on every box that has a corner spec.  Returns True if anything moved."""
+            moved = False
+            for k, (corner, cc) in cspec.items():
+                mb = self.boxes[k]
+                rep = lonely_clip(mb, corner, c=cc, s=s, nsub=lonely_nsub,
+                                  refine=lonely_refine, max_pieces=max_pieces * 2, pass_=tag)
+                rep["stage"] = tag
+                self.lonely[k].append(rep)
+                if rep["removed"] > 0 or rep["dropped_pieces"]:
+                    moved = True
+            return moved
         # ---- 1. split every box into nsub tilt sub-bins
         for mb in self.boxes.values():
             mb.kmode = kmode
@@ -940,6 +1311,7 @@ class Node:
             mb.pieces = [(Bin(a, b), r0) for (a, b) in sub_bins(mb.t0, mb.t1, nsub)]
             mb.trace = []
             mb.sliver_area = Fr(0)
+            mb.lonely_removed = 0.0
         # ---- 2. container clip (independent of the other boxes; do it once, up front)
         for mb in self.boxes.values():
             keep = []
@@ -954,9 +1326,15 @@ class Node:
             if not keep:
                 raise EmptyBox(mb.name, dict(reason="container"))
             mb.pieces = keep
+        # ---- 2b. the LONELY clip (A173), before anything reads K': it only shrinks the pieces,
+        #          so every K' rebuilt below is already the larger, post-Theorem-B one
+        if cspec:
+            _lonely_pass("container")
         # ---- 3. interleaved refinement: bisect, drop the dead halves, clip the rest
         names = self.names
         for lvl in range(max(0, refine)):
+            if cspec:
+                _lonely_pass(f"refine{lvl + 1}")
             for mb in self.boxes.values():
                 mb.rebuild(n_grid=n_grid, max_v=max_v, aden=aden)
             obst = {k: self.boxes[k].obstacle(mode) for k in names}
@@ -987,12 +1365,13 @@ class Node:
                 print(f"  refine {lvl + 1}: " +
                       " ".join(f"{k}={self.boxes[k].kept_fraction():.4f}"
                                f"({len(self.boxes[k].pieces)}p)" for k in names), flush=True)
-        # ---- 4. mutual clip to a fixed point, rebuilding K' after every pass
+        # ---- 4. LONELY clip + mutual clip to a fixed point, rebuilding K' after every pass
         for it in range(max_iter):
+            lonely_moved = _lonely_pass(f"pass{it + 1}") if cspec else False
             for mb in self.boxes.values():
                 mb.rebuild(n_grid=n_grid, max_v=max_v, aden=aden)
             obst = {k: self.boxes[k].obstacle(mode) for k in names}
-            changed = False
+            changed = bool(lonely_moved)
             for k in names:
                 mb = self.boxes[k]
                 keep = []
@@ -1116,6 +1495,8 @@ class Node:
         rep["diagnostics"] = self.diagnostics(s=s, sample=sample, seed=seed)
         rep["kept"] = self.kept()
         rep["sliver_area"] = {k: float(b.sliver_area) for k, b in self.boxes.items()}
+        rep["lonely_removed"] = {k: float(getattr(b, "lonely_removed", 0.0))
+                                 for k, b in self.boxes.items()}
         rep["failures"] = fails
         rep["ok"] = not fails
         self.report = rep
@@ -1204,6 +1585,8 @@ class Node:
     def to_json(self):
         return dict(name=self.name, s=str(self.s), normalised=self.normalised,
                     stats=self.stats,
+                    corners={k: [v[0], str(v[1])] for k, v in getattr(self, "corners", {}).items()},
+                    lonely=getattr(self, "lonely", {}),
                     boxes={k: b.to_json() for k, b in self.boxes.items()},
                     report=getattr(self, "report", None))
 

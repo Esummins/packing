@@ -128,6 +128,24 @@ def test_a():
                core_meet_after={k: round(v["core_meet_frac"], 6)
                                 for k, v in r1["diagnostics"].items()})
     RESULTS[-1]["detail"] = dict(before=before, kept=kept)
+
+    # --- a3 (A173 regression): `Bin.radii` must key its cache on something NEVER reused.  It used
+    # to key on `id(obs)`; `normalise` frees each pass's obstacles before building the next pass's,
+    # CPython hands back the same address, and a surviving Bin then answers the NEW obstacle with
+    # the OLD one's radius bounds -- wrong bounds in the exact dead test (unsound, and it made
+    # `a2.invariant_after` flicker).  Here: rebuild an obstacle at a recycled address and check the
+    # Bin does not serve the stale radii.
+    bn = MB.Bin(MB.Fr(0), MB.Fr(1, 8))
+    o1 = MB.Obstacle([(1, 1), (2, 1), (2, 2), (1, 2)], name="o1")
+    r_small = bn.radii(o1)
+    uid1, addr1 = o1.uid, id(o1)
+    del o1
+    o2 = MB.Obstacle([(0, 0), (8, 0), (8, 8), (0, 8)], name="o2")   # much larger: different radii
+    r_big = bn.radii(o2)
+    ok &= _rec("a3.obstacle_cache_key_never_reused",
+               o2.uid != uid1 and r_big != r_small,
+               address_recycled=(id(o2) == addr1), uid1=uid1, uid2=o2.uid,
+               distinct_radii=(r_big != r_small))
     return ok
 
 
@@ -364,6 +382,131 @@ def test_e():
     return ok
 
 
+# ==================================================================== (f) A173: the LONELY clip
+#
+# Three obligations, in the order they matter:
+#   f1  the PORT is the same test.  `multibox.lonely_box` vs `resume168.lonely_box` (A168, imported
+#       READ-ONLY here and nowhere else) on 500 random corner-meeter boxes: IDENTICAL verdicts,
+#       clause by clause, and the same widened-box constant c = 1 + w.
+#   f2  the CLIP is sound.  Every centre the clip removes must really be lonely: for each piece,
+#       sample centres in (rect BEFORE) \ (rect AFTER) and, at sampled tilts of that piece's own
+#       sub-bin, check the POINTWISE Theorem B criterion (all four clauses fail) directly from
+#       sideband.md sec 3 -- an independent implementation, not the box test.
+#   f3  the node INVARIANT still holds with the clip wired into normalise, and the clip only ever
+#       SHRINKS: kept fractions after <= kept fractions before, on the same node.
+A173_CORNER, A173_C = "TR", None          # None -> multibox.C_WIDEN = 1 + w (K0-WIDEN)
+SF = float(MB.S_RAT)
+A173_S1 = {                               # A168 tree_l1_104 node root/D1, step S1, ALIVE(geometry);
+    "H": (2.46263075, 2.5674485, 2.1481775, 2.25299525, 30.0, 45.0),      # the roles' piece hulls
+    "D": (3.068929786149878, 3.223006893074939, 3.068929786149878, 3.377084, 78.75, 90.0),
+}
+A173_SRC = "attempts/A168-cascade-fable/results/tree_l1_104.json, node root/D1, step S1, ALIVE"
+
+
+def pointwise_lonely(x, y, th, c, n=1441, tol=1e-12):
+    """TRUE iff the pose (x, y) at tilt th (RADIANS, BL-local coordinates of the corner) is LONELY:
+    all four clauses of A169 Theorem B (sideband.md sec 3) fail.  Written straight from the paper --
+    h(n) = n.z + w(angle(n) - th)/2, m(g) = n.z - w(g - th)/2 -- so that it is an INDEPENDENT
+    check of what `multibox.lonely_rect` certifies, not a re-run of it."""
+    z = np.linspace(0.0, 0.5 * math.pi, n)
+    cz, sz = np.cos(z), np.sin(z)
+    hNE = x * cz + y * sz + 0.5 * np.abs(np.cos(z - th)) + 0.5 * np.abs(np.sin(z - th))
+    if np.any(hNE < c * (cz + sz) - tol):
+        return False, "NE"
+    aW = z + 0.5 * math.pi
+    hW = -x * sz + y * cz + 0.5 * (np.abs(np.cos(aW - th)) + np.abs(np.sin(aW - th)))
+    if np.any(hW < c * cz - sz ** 2 - tol):
+        return False, "W"
+    aS = -z
+    hS = x * cz - y * sz + 0.5 * (np.abs(np.cos(aS - th)) + np.abs(np.sin(aS - th)))
+    if np.any(hS < c * cz - sz ** 2 - tol):
+        return False, "S"
+    m = x * cz + y * sz - 0.5 * (np.abs(np.cos(z - th)) + np.abs(np.sin(z - th)))
+    if np.any(m >= cz + sz + tol):
+        return False, "P"
+    return True, None
+
+
+def test_f():
+    print("(f) A173 the LONELY clip: port, soundness, invariant", flush=True)
+    ok = True
+    # --- f1: 500-box cross-check against A168's resume168.lonely_box (read-only import)
+    sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..",
+                                                    "A173-lonely-clip", "code")))
+    import xcheck173                                            # noqa: E402
+    t = time.time()
+    xr = xcheck173.run(500, 173)
+    ok &= _rec("f1.port_identical_to_a168", xr["identical"] and xr["c_equal"],
+               n=xr["n"], n_lonely=xr["n_lonely"], mismatches=xr["n_mismatch"],
+               c=xr["c_widen_multibox"], seconds=round(time.time() - t, 2))
+    RESULTS[-1]["detail"] = dict(mismatches=xr["mismatches"])
+
+    # --- f2: soundness -- every removed centre is pointwise lonely at every sampled tilt
+    t = time.time()
+    rng = np.random.default_rng(1730)
+    c = float(MB.C_WIDEN if A173_C is None else A173_C)
+    nd = MB.Node(A173_S1, name="A173 soundness")
+    nd.normalise(nsub=4, refine=0, max_iter=1)
+    before = [(bn, r) for (bn, r) in nd.boxes["D"].pieces]
+    after = {}
+    for (bn, r) in before:
+        st = MB._new_lonely_stats()
+        nr = MB._clip_rect_lonely(r, bn, A173_CORNER, MB.C_WIDEN, MB.S_RAT, 4, st, trace=[])
+        after[(bn.t0, bn.t1)] = nr
+    tested = viol = removed_pieces = 0
+    worst = None
+    for (bn, r) in before:
+        nr = after[(bn.t0, bn.t1)]
+        if nr == r:
+            continue
+        removed_pieces += 1
+        x0, x1, y0, y1 = (float(v) for v in r)
+        for _ in range(160):
+            px = rng.uniform(x0, x1)
+            py = rng.uniform(y0, y1)
+            if nr is not None:
+                a, b, cc, dd = (float(v) for v in nr)
+                if a <= px <= b and cc <= py <= dd:
+                    continue                                   # kept, nothing to prove
+            for u in (0.0, 0.25, 0.5, 0.75, 1.0):
+                tt = float(bn.t0) + u * float(bn.t1 - bn.t0)
+                th = 2.0 * math.atan(tt)
+                lx, ly = SF - px, SF - py               # TR -> BL-local (a reflection)
+                lone, why = pointwise_lonely(lx, ly, th, c)
+                tested += 1
+                if not lone:
+                    viol += 1
+                    if worst is None:
+                        worst = dict(x=px, y=py, th_deg=math.degrees(th), clause=why)
+    ok &= _rec("f2.every_removed_centre_is_lonely", viol == 0 and tested > 0,
+               removed_pieces=removed_pieces, poses_tested=tested, violations=viol,
+               seconds=round(time.time() - t, 2))
+    RESULTS[-1]["detail"] = dict(worst=worst)
+
+    # --- f3: the clip inside normalise -- invariant holds, and it only ever shrinks
+    t = time.time()
+    base = MB.Node(A173_S1, name="A173 base").normalise(nsub=4, refine=0, max_iter=3)
+    rb = base.assert_invariant(raise_on_fail=False, sample=1500)
+    lone = MB.Node(A173_S1, name="A173 lonely").normalise(
+        nsub=4, refine=0, max_iter=3, corners={"D": (A173_CORNER, MB.C_WIDEN)}, lonely_refine=1)
+    rl = lone.assert_invariant(raise_on_fail=False, sample=1500)
+    kb, kl = base.kept(), lone.kept()
+    shrinks = all(kl[k] <= kb[k] + 1e-12 for k in kb)
+    vio = pose_violations(lone, 4000, seed=173)
+    ok &= _rec("f3.invariant_after_clip",
+               rb["ok"] and rl["ok"] and shrinks and vio["k_uncert"] == 0
+               and vio["escape"] == 0 and vio["not_core"] == 0 and vio["k_overlap"] == 0,
+               kept_before={k: round(v, 6) for k, v in kb.items()},
+               kept_after={k: round(v, 6) for k, v in kl.items()},
+               K_D_before=round(base.boxes["D"].pc.area(), 6),
+               K_D_after=round(lone.boxes["D"].pc.area(), 6),
+               removed=round(float(lone.boxes["D"].lonely_removed), 8),
+               seconds=round(time.time() - t, 2))
+    RESULTS[-1]["detail"] = dict(violations=vio, passes=[base.stats["passes"],
+                                                         lone.stats["passes"]])
+    return ok
+
+
 # ==================================================================== main
 def main():
     ap = argparse.ArgumentParser()
@@ -375,7 +518,7 @@ def main():
     t0 = time.time()
     ok = True
     for fn, args in ((test_a, ()), (test_b, ()), (test_c, ()), (test_d, (a.nodes,)),
-                     (test_e, ())):
+                     (test_e, ()), (test_f, ())):
         t = time.time()
         ok &= fn(*args)
         print(f"    -- {fn.__name__} {time.time() - t:.1f} s", flush=True)

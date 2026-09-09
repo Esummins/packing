@@ -1,6 +1,6 @@
 {
  "ok": true,
- "seconds": 53.73005175590515,
+ "seconds": 79.09588074684143,
  "s": "969271/250000",
  "a168_source": "attempts/A168-cascade-fable/results/v0_union_boxes/cascade168.jsonl, cell l1_153, node BR139/TRH-25, step S2, verdict ALIVE(geometry)",
  "results": [
@@ -49,6 +49,14 @@
      "B": 0.7066362441841404
     }
    }
+  },
+  {
+   "test": "a3.obstacle_cache_key_never_reused",
+   "ok": true,
+   "address_recycled": true,
+   "uid1": 15,
+   "uid2": 16,
+   "distinct_radii": true
   },
   {
    "test": "b.escapes_before",
@@ -130,7 +138,7 @@
     "POSE-CONTAINER-STRICT": true,
     "CLIP-FIXPOINT": true
    },
-   "seconds": 8.6
+   "seconds": 9.81
   },
   {
    "test": "c.sampled_clean_after",
@@ -441,7 +449,7 @@
     "B1": 32,
     "D": 12
    },
-   "seconds": 8.71
+   "seconds": 10.07
   },
   {
    "test": "e3.K_source_is_pieces",
@@ -520,6 +528,59 @@
       "core_meet_frac": 0.26625
      }
     }
+   }
+  },
+  {
+   "test": "f1.port_identical_to_a168",
+   "ok": true,
+   "n": 500,
+   "n_lonely": 104,
+   "mismatches": 0,
+   "c": "57709466408955508793627538727/56273914669429407150233835000",
+   "seconds": 5.39,
+   "detail": {
+    "mismatches": []
+   }
+  },
+  {
+   "test": "f2.every_removed_centre_is_lonely",
+   "ok": true,
+   "removed_pieces": 4,
+   "poses_tested": 3070,
+   "violations": 0,
+   "seconds": 1.45,
+   "detail": {
+    "worst": null
+   }
+  },
+  {
+   "test": "f3.invariant_after_clip",
+   "ok": true,
+   "kept_before": {
+    "H": 1.0,
+    "D": 0.764389
+   },
+   "kept_after": {
+    "H": 1.0,
+    "D": 0.023394
+   },
+   "K_D_before": 0.55266,
+   "K_D_after": 0.755656,
+   "removed": 0.00678485,
+   "seconds": 10.92,
+   "detail": {
+    "violations": {
+     "drawn": 8000,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0,
+     "core_meet": 131,
+     "k_uncert": 0
+    },
+    "passes": [
+     2,
+     3
+    ]
    }
   }
  ]
