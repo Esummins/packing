@@ -343,3 +343,255 @@ coordinate in ℚ(√2), all five tilted squares at exactly 45°, class k6_07 = 
 no closed form found by PSLQ at 170 digits); **S35** at 3.917417657814610628…; **S38** (class k6_21) at
 3.928914685222977527…, algebraic of degree 9. None lies in the window; they organise the alive population of
 the trees (§4.6) and are the anchors of the local certificates (§6).
+
+---
+
+## 3. The stratification by simple squares and the class-frame reduction
+
+### 3.1 The idea (PI, A53) and why it makes the continuum finite
+
+A packing is a point of a 33-dimensional continuum, and no finite case list exists a priori. The skeleton of
+§1.2 is a finite combinatorial label attached to every packing at every side in (3, 4): which corner slots are
+occupied by squares sitting *exactly* on the grid, closed under the Young down-set condition. This label
+splits the continuum into 163 D4-classes (`Census.lean`), and kills climb the containment lattice (K1): once
+a class is killed on the window, every class whose skeleton contains its pins is dead there too. A class is
+killed by a certificate that *pins* its skeleton squares as cores (hypotheses) and prices the remaining
+budget n − k squares. The class containing ẑ (trump5) cannot be killed by definition; its sub-skeleton
+classes cannot be killed by any single-square certificate (K1 applied to Trump's images, A55 sharpness) —
+these 16 protected classes need trees whose leaves land in the basin (§3.6). The empty class k0_00 has no
+pins and is the unstratified problem; it is handled by the teleport/crowding route of §7.
+
+### 3.2 Exhaustiveness and the top-level composition
+
+**Lemma (stratify) [L] (`TopLevel.stratify`, `exists_stratum`).** If the minimum is attained at m ∈ wnd then
+some minimiser lies in some class; as stated the selection content is empty — every packing has a skeleton.
+The uniqueness clause likewise reads a packing at ŝ into its class (`unique_transfer`, a theorem since A78).
+
+**Composition (`TopLevel.s_eleven_ge`, `s_eleven_eq`, `s_eleven_unique`) [L from the three axioms].** Take
+the attained minimiser at m ≤ ŝ; if its class is trump5, `trump_residual` + `basin` give m ≥ ŝ; otherwise
+`stratum_kill` contradicts. At ŝ every packing is in some class; non-Trump classes are excluded by
+`stratum_kill`, and Trump's class lands in the basin, whose equality clause gives ẑ up to the symmetry and
+relabelling.
+
+**Per-class form (A86, `Composition.lean`).** Define `ClassKilledAt i m` := every packing of class i at side m
+has m ≥ ŝ, and at m = ŝ is a D4-image of ẑ. Then `s_eleven_ge_of_classes` and `s_eleven_unique_of_classes`
+prove both halves from `∀ i m, ClassKilledAt i m` alone, without `stratum_kill`, `trump_residual` or `basin`
+[L]. The old axioms imply the new hypothesis (`classKilledAt_of_stratum_kill`,
+`classKilledAt_trump_of_residual`). A further re-split `StratumKillAll`/`StratumKillMin` (`s_eleven_ge_of_split`,
+`s_eleven_unique_of_split`) [L] admits classes killed only for σ-*minimisers* (needed if selected-form leaves
+such as K0-ROT are used; today MinForm = ∅).
+
+### 3.3 The certificate kills, by tier (status 2026-09-09)
+
+| tier | classes | result | status |
+|---|---|---|---|
+| k ≥ 7 | 1110 − (k ≤ 6) tuples | every k ≥ 7 tuple contains a killed k = 6 sub-tuple (A53 L5, combinatorial) | [L] via K1 once the k = 6 kills are on the window |
+| k = 6 | 33 | all 33 killed (A53/A54) | [C] window: all full-window (A56/A61/A114) |
+| k = 5 | 22 | 19 killed by single certificates; k5_11, k5_16 killed at s0 by A57's sub-stratification trees; trump5 = Trump's class | [C] for 19 (window); k5_11/k5_16 window trees running [P]; trump5 §3.6 |
+| k = 4 | 14 | 8 killed; the sweep is exactly sharp: a k = 4 class is certifiably empty iff it is not a sub-skeleton of trump5 | [C]; 6 protected |
+| k ≤ 3 | 11 | k3_00 killed; the other ten protected | [C] one; ten protected |
+| window coverage | 52 scoreboard rows (the classes needing a window certificate) | **52/52 full-window** (A146 closed the last row, k5_13, 2026-09-07) | [C] |
+
+The K61 corpus (61 s0 certificates) is replayed in Lean (A78 T5); the parametric certificate of k5_06 is
+replayed over the whole window (`ParamK506.k5_06_param_kill`, 215 s); `WindowRows.k5_06_slab` instantiates
+`SlabKill` for it [L]. The other 51 window rows are [C] with Lean replay priced but not run [P].
+
+### 3.4 Window transfer: why s0-only certificates prove nothing on the window
+
+A certificate is stated at one rational side. The composition needs every side m ∈ [3.82, ŝ]. Three facts
+govern the transfer:
+
+**Lemma B.0 [L] (`Dilation.lean`).** For a packing P at side m and λ > 1, Δ_λ P is a family of closed unit
+squares pairwise disjoint *as closed sets* with separating-axis gap ≥ λ − 1 (`scaleC_disjoint`, proved by
+A64's pull-back trick without any separation theorem), contained in [0, λm]² (`scaleC_subset`), and a pin at
+slot α + βm dilates to distance exactly (λ − 1)|α| from the side-λm slot (`slot_tracking`).
+
+**Lemma B (the bridge) [L] (`lemma_B`, `dilation_bridge`, `priced_dichotomy`, `hcert_of_priced`).** Let C be
+a case-LP PASS at side s″ with cores K₁ … K_r and empty NO-families, budget b = 11 − r, Σw < b, and let P be
+a packing at side m < s″ with r distinct squares whose dilates contain the cores. Then P does not exist.
+*Proof.* The ≥ b non-owner dilates are admissible, meet no core (closed disjointness from the owners), are
+not exempt, so each has μ-mass ≥ 1; the masses add over disjoint closed sets: μ(total) ≥ b > Σw. ∎ At
+λ = 1 the lemma fails (touching squares can share an atom): this is the S4 trap, and it is why every kill in
+the composition is applied at a certified side strictly above the packing's side.
+
+**Corollary B′ (slot form) [L] (`bprime_containment`).** With the containment margin
+ρ(C) := ½ − a(cos θ_c + sin θ_c) of a core against an axis-parallel pin and A = max |α| ≤ 5/2, the kill of
+pin set S at s″ applies to every packing containing S at side m with (s″/m − 1)·A < ρ(C).
+
+**The corpus number [M].** The library's ε-fat cores (a = 16383999967232/32768001953125) have
+ρ ≈ 1.0000009·10⁻⁹ > 0 exactly, so an s0-only certificate reaches only sides within relative distance
+4·10⁻¹⁰ below s0 — and (s0 − ŝ)/ŝ ≈ 1.06·10⁻⁷, so **an s0-only certificate with ε-fat cores instantiates
+`stratum_kill` at no side of [3.82, ŝ] at all** (`docs/proofs/closed_disjoint_bridge.md` B.2). The window
+quantifier is carried by (i) the parametric certificates (`checkParamI_kill` [L]: (P1)+(P2) at every real
+side of [s_lo, s_hi] for s-affine atoms and cores; the s-axis is bisected together with the pose box), or
+(ii) the **slack-core grid**: a certificate with cores of half-side ½ − δ covers a slab of relative width
+δ/A below its side (A57's window grid uses four sides at δ = 10⁻²), or (iii) the tube for the top slab.
+
+**Lemma B-NO [L] (`priced_dichotomy` with a nonempty `Exempt`).** With NO-families the bridged claim is
+occupancy: some non-owner square of P has its dilated (centre, t) in some zone F_k, i.e. (c, t) ∈ λ⁻¹F_k.
+Consumers must hypothesise the outward-widened zone F_k^{+ε}, ε = (λ_max − 1)·max coordinate — a real
+widening (≈ 1.6·10⁻³) under the slack-core grid (B.2″).
+
+**Cover invariance (A57's trees) [T] (`docs/proofs/cover_invariance.md`).** The interior zone
+Z(s) = [11/10, s − 11/10]² with 12 × 12 columns × 8 t-intervals is a complete cover at every s ∈ W (CI-1,
+Lean `grid_cover`); the frozen (a, tm) cores stay valid for every s ≤ s0 (CI-2, monotone in the box width);
+no pin centre ever enters Z(s) (CI-3, `slot_outside_zone`); but the T5 logic kills are relative-position
+facts that can flip across the window and must be re-checked per box (CI-4, obligation). The affine family is
+exactly `verify_param`'s (α, β) form with β dyadic/12 for boxes and β ∈ {0,1} for pins.
+
+**The slab-width law [M] (`docs/budget.md` §E).** A parametric slab passes iff
+log₂(width/w_min) + d_pose ≤ 48; one probe slab prices a class; every earlier bulk FAIL of A56 was an
+over-width slab, never node hardness; near a shadow at side s* the cost per unit side rises as
+(s* − s) → (s* − s0) and diverges only if the class contains an actual minimum.
+
+### 3.5 Zone trees and their leaves (the shape every campaign shares)
+
+A **zone tree** at s0 for a class S is a finite rooted tree whose root hypothesis is `ContainsPins S`
+(slack pin cores of half-side ½ − δ_pin) and whose branching at a node is a complete disjunction over a
+closed cover {Bᵢ} of a zone Z × [0°, 90°]: the NO child (no square centred in Z; budget unchanged) and the
+YES_i children (some square with (c, θ) ∈ Bᵢ; budget − 1), with the **pinguard** rules: a box containing a
+pin's (slot ± δ_pin) × {0°, 90°} is "parent" (never budget-decremented); a box whose core meets a pin core or
+another conditioned core without a shared witness is contradictory (T5, Lean `core_meet_same_square`);
+refinement by a closed sub-cover keeps the budget (T11, `refine_cover`); zone-assignment collapse N1
+(`centre_separation`, `zone_assign_bijective`: footprints of diameter < 1 hold at most one centre, so the
+labelled and unlabelled hypotheses coincide). Leaves:
+
+* **(K)** a case-LP PASS at s0 for the node — no family (Lemma B);
+* **(C)** contradictory or vacuous by logic;
+* **(D)** all free squares localised within the landing radii of a D4-image of ẑ — the tube (Lemma SEAM);
+* **(D′)** all eleven squares inside an atlas value box with certified σ ≥ V ≥ s0 (Lemma K0-ATLAS,
+  `atlas_dilated_kill_fold` [L]: no dilation bookkeeping since the dilate has strict wall margins);
+* **(T)** a teleport leaf (§7.2): a corner box or a usable slot met by ≤ 1 square.
+
+**Lemma P-TREE [T] (`docs/proofs/protected_trees.md` §2; Lean `ZoneTree.tree_kill`,
+`Composition.classKilledAt_of_tree`).** For a protected class S with pin set P_S, a closed tree at s0 over
+the *monotone* hypothesis whose leaves are (K)/(C)/(D), together with a tube certificate in each class
+direction v_I (I = the Trump-frame indices of the image's pinned squares) at radius ≥ the landings, proves:
+(a) no packing at any side m ∈ [ŝ − δ_basin(S), ŝ) contains S's pins; (b) every packing at ŝ containing
+S's pins is a D4-image of ẑ; with δ_basin(S) = min(T_I, T_K(δ_pin)), T_K(δ) = ((δ/A_S)ŝ − (s0 − ŝ))/(1 +
+δ/A_S). The exact-stratum hypothesis is used nowhere on the lower bound and only optionally at m = ŝ
+(Simp(g·ẑ) = trump5 ≠ S). **Lemma PD [L] (`pd_convex`, `pd_rule`)**: with slack pins the residue ladder
+stalls at δ_pin; the logic kills must use the drifted *full* pin square, tested at the two endpoints λ = 1
+and λ_max (convexity of K − Σ_p). Below the tube's reach the class needs plain slab kills (`SlabKill`,
+`classKilledAt_of_slabs` [L]).
+
+### 3.6 The protected tier and the trump5 residual
+
+Fourteen of the 16 protected classes have a compatible Trump image (G_S ≠ ∅) and are P-TREE campaigns;
+**the tube law [M]**: T_max depends on the pin set only through square 3 = BL(0,1) — 0.0457 (landing radii)
+/ 0.0574 (r = 6.5·10⁻⁴) when it is pinned, 0.1305 / 0.1680 when it is free — so the whole window is
+covered by the tube alone for the corner-only classes and needs one more ladder level (r ≤ 6.5·10⁻⁴) for the
+BL(0,1)-pinned ones. Pilot laws (A84 k4_08/k3_05, A100 k4_11/k3_02): the (D) geometry is class-independent
+per image (landing level 24, residue 53–118 boxes, the same numbers as A60's square-1 ladder); the η law is
+exact — η < 0 ⟺ a certificate exists, 54/54 cover nodes; price 3 500–4 200 CPU-h for the 15 classes
+excluding k0_00 [P]. **k4_05 and corners4 have no Trump image**: their trees have no (D) leaves and must
+close by (K)/(C) alone; corners4 emptiness is provably invisible to every single-square scheme (exact
+7-point centre witnesses at every window side, `docs/proofs/corners4_empty.md`; the obstruction is
+orientation coupling) and remains open [P]; the pair-certificate route was walled (Lemma W‴: complete
+verification trees of 10⁹–10¹¹ nodes, A77).
+
+**trump5** (Trump's own class) is the A60 residual tree: zone cover at s0 (kill rate 0.781 first pass),
+residue ladders contracting at ratio ≈ 4.5 per level to level 24 (landings 1.4472·10⁻³ centre, 2.0102·10⁻³
+rad), confinement of the outer squares by NO-families, (D) leaves into the tube. Status: paused; 218 alive
+nodes re-solved with exact cores by A149 killed 87 (40.7 %), 131 alive; regime 1 (plain slack-core slabs below
+ŝ − δ_basin) needs two certificates if they certify [P].
+
+---
+
+## 4. The case-measure LP leaf and its certificate
+
+### 4.1 The certificate and its claim
+
+A `case-lp-certificate-v1` (`docs/specs/case_lp_certificate_v1.md`) declares a side s, a count n (11), an
+atomic measure μ = Σ wᵢ δ_{pᵢ} (D4-expanded), core squares K₁ … K_r (half-side a_j > 0, centre, tilt
+tm_j), NO-families F₁ … F_m, and a budget b. A PASS establishes, as one theorem [L for the checker
+`checkCaseI`, `CaseBridge.checkCaseI_kill`]:
+
+> (P1) Σ wᵢ < b; (P2) every closed unit square Q ⊆ [0, s]² meeting no core (closed intersection) and not
+> NO-exempt has μ(Q) ≥ 1.
+
+The decision procedure is a branch-and-bound over boxes [t₀, t₁] × [x₀, x₁] × [y₀, y₁] with four discharge
+rules — VACUOUS (no admissible placement: the container clip via the quasiconcavity of w), EXEMPT-core
+(every pose of the box meets one core, by separating-axis overlap on all four edge normals with interval
+enclosures — sufficiency is `sat_squares` [L]), EXEMPT-nofam (the box lies in a zone), COVERED (atoms
+provably inside every pose of the box carry mass ≥ 1 + margin) — all in integer arithmetic on a common
+grid; an undischarged box at the depth cap is a FAIL witness. Errata: the loader rejects a ≤ 0 ("bad core"),
+contrary to the spec's original wording (A70). The parametric form (`verify_param.py`, V.PARAM [L]) replaces
+each point by its s-interval and the container by its most permissive end.
+
+### 4.2 The LP behind the certificate, and what "alive" means
+
+The certificate is the dual of a covering LP: maximise the total weight of a fractional packing (placements
+with density ≤ 1 at every atom) subject to the hypotheses; τ := its value; a certificate exists iff τ < b
+with a margin the certifier can close (η := τ − b < 0). **Lemma A57-3 (alive gate) [L]
+(`AliveChecker.lean`, `AliveBridge.lean`).** If a strictly disjoint family of ≥ b admissible squares
+avoiding every core exists (an `alivewitness`), then τ ≥ b and no certificate of that budget passes
+`checkCaseI`. Trump's dilated images are such witnesses for every node they reach: this is the **canary** —
+an engine that certifies a node an image realises is wrong (engine assertion, exit 9). Measured laws [M]:
+on A60/A100 cover nodes η < 0 ⟺ a certificate exists (54/54); on the k4 tier η ≤ −1 is geometrically
+impossible at every side (exact 6-families, A82); certification at fractional η depends on the "eps_geo"
+repair and the witness-feedback depth, an engineering constant (A85's f₂).
+
+### 4.3 Budget, exemptions, and why exact cores are certifiable today
+
+The budget is n − r: every core must be *owned* by a distinct square of the family (pinguard: distinct
+witnesses, `Zones.lean` T5/T11). A core is a lower approximation of the hypothesis square; the larger the
+certified core, the more placements are exempt and the cheaper the LP. **A135's finding [M, load-bearing]:**
+both frozen verifiers take the core half-side a *verbatim* from the certificate and never recompute it from
+the box (they check only 0 ≤ tm ≤ 1 and a > 0), so any half-side that is *sound* — certified inside every
+pose of the box by an argument outside the verifier — is certifiable under the frozen chain with no verifier
+change. For a pin box (tilt 0, half-width h = δ/√2, δ = 10⁻²) the exact core is ½ − h = 0.492928… against
+the stock ½ − δ = 0.49: ×1.012 in area; for a tilted conditioned box the exact axis core is A135's `exact_a`
+(corners certified per piece). **Measured effect [M]:** re-solving the alive A57 population with exact pin
+cores kills 28.6 % (46/161, A137); on trump5 40.7 % (87/214, A149); FAIL-with-holes records convert at
+62.5 % because their LP was already below budget and only the certificate's exemption annulus was short
+(A149). **A170's audit [M]:** an emission bug (`caselp.make_certificate` reverting exact cores to stock)
+touched only three attempts' lanes (A150/A165/A166); 698/698 certificates of the main lanes carry exact cores;
+59 certificates recovered, 118 already-exact FAILs unchanged, so the rates above stand.
+
+The **polygon core** K′(B) (§1.4) is strictly larger than any axis core (median area ratio 1.225, up to 1.53
+at level 1); it excludes 22.3 % of the dual-support columns carrying 35.7 % of τ over 506 alive nodes [M,
+A132]. Using it *inside* the certificate needs a new exemption clause (`verify_case_v3.py`'s `polycores`,
+A135: rational polygon–square SAT in the exemption test; identical to the frozen verifier on 24/24
+polycore-free certificates; independent sampled controls 0 unsound exemptions) [C, non-frozen] and one Lean
+lemma, `PolyCoreT5.checkVertexInPBox_sound` [L] (the exemption soundness statement `PolycoreExemptSound` is
+stated, not yet proved [P]). Its logic-level use needs no certificate at all (§5.2).
+
+### 4.4 Rows the LP does not know, and the exact-zero law
+
+The LP's dual support is a fractional object; its alive nodes are alive for reasons the LP cannot express
+(§4.6). Two attempts to feed structural facts into the LP as rows both failed for measured reasons:
+**SLOT-CROWD rows** (§7.3) re-price rather than forbid, because one placement can meet two or three slot
+boxes at once and the incidence budget pays for it (A109: 0 of 18 alive nodes at any licensed depth);
+**corner-incidence rows** (R6, A115/A154) go the wrong way — the widened corner boxes cover 28 % of the
+container where a covering measure is cheapest, so c = dτ/de ≥ B in 23/23 runs. The **existential-filter
+law** (A89–A101, `docs/proofs/exchange_lemma.md` §7): any leaf whose hypothesis is "no other square reaches
+region R" is silent at the frontier, where the unlocalised free squares' shadows cover everything, and
+free only at depth. Its complement, the **enumeration–certificate mismatch law** (A30–A52): counts quotient
+placement away, certificates price placements; every count-based route to k0 (FJ census 10³⁶ structures,
+frame census 10²⁸–10⁵⁹) lost on the count, not on the per-structure price.
+
+### 4.5 Tree composition in Lean
+
+`ZoneTree.ClosedTree s0 tc Root` is the abstract object: nodes carry `NodeHypC` (cores + NO-zones on the
+dilated family), leaves are (K) `checkCaseI … = true`, (C), (D) the SEAM landing, (D′) `checkAtlas … = true`
+with L ≥ s0, and `cover` is the complete-disjunction obligation the producer must supply; `tree_kill` is
+Lemma P-TREE (a)+(b) [L]. The rule library (`zone_dichotomy`, `grid_cover`, `slot_outside_zone`,
+`pd_convex`, `pd_rule`, `d4_dil_comm`) supplies the covers used by every campaign. What is missing [P]: the
+tree-file → `cover` emitter, and the `ClosedTree` instances for trump5 / the protected classes / k0_00,
+which await the campaigns' leaf corpora (`lean/lean_wave7_A86.md` §4).
+
+### 4.6 What the alive nodes are: shadows
+
+An alive node's dual support, drawn as squares at their centres and tilts with opacity by weight, is a
+picture a person can read (the PI's rule, A107: draw the relaxation, not a packing). Over A57/A60's alive
+population 53 shadow values explain 1 566 nodes (`docs/shadows/S01.svg` … ; `writeup/figures/shadow_S01.svg`,
+`shadow_S02.svg`, `shadow_S07.svg`): **S01 "room at side 4.000"** (a slot left empty or singly met — dead by
+teleport, which the LP does not know; ≈ 45 % of alive nodes), **S02 the k7 pinwheel** (seven slot squares +
+three load-bearing squares at 48.435° + one strut; s* = 3.886746 = s0 + 0.0097, so the relaxed core cannot see
+the slack; carries the deep tree), **S07** (the exact 45° packing above), S03–S53 small families, and a
+fractional tail with no integral support. The k0 spectrum reproduces this (K01 = room, K06 = the pinwheel).
+No open box contains a shadow (A106: 64 of 145 open level-2–4 boxes are empty by box-vs-pin geometry; the
+shadow floor of both A57 classes is the pinwheel at +0.0097) — the boxes are alive because the relaxation,
+not the geometry, has room. This is the reading that produced the geometric leaves of §5 and the local
+certificates of §6.
