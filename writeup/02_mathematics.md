@@ -1130,3 +1130,204 @@ theorem route (LOCK-FREE⁺ or DRAIN-SEL) at 0 if proved and nothing has been pr
 unmeasured until the first cell dies. Uniqueness at ŝ for the k0 branch is carried by K0-FREE + Theorem U
 (the K0-FREE branch) and by the (D) landings in the tube (the K0-BLOCKED branch), exactly as for the other
 classes — no k0_00 packing exists at ŝ once the tree closes (`k0_route.md` §6).
+
+---
+
+## 8. The composition theorem and the dependency graph
+
+### 8.1 The assembly
+
+**Theorem (composition) [L] (`TopLevel.s_eleven_eq`, `s_eleven_unique`; per-class form
+`Composition.s_eleven_ge_of_classes`, `s_eleven_unique_of_classes`).** Assume, for every class i and every
+m ∈ [3.82, ŝ], `ClassKilledAt i m`: every packing of class i at side m has m ≥ ŝ, and at m = ŝ is a
+D4-image of ẑ. Then s(11) = ŝ and every packing at ŝ is ẑ up to symmetry and relabelling.
+
+*Proof.* Attainment (D1) gives a minimiser at some m ≤ ŝ (Fits ŝ by Theorem 3–4); census exhaustiveness
+places it in a class; `ClassKilledAt` gives m ≥ ŝ. At ŝ every packing lies in a class and is an image. ∎
+
+The per-class obligation decomposes as follows (every arrow is a theorem in the notes or in Lean; the
+leaves are the certificate families and the campaigns):
+
+```
+ClassKilledAt i m  for all i, m in [3.82, s-hat]
+ |
+ |-- (a) 52 window rows (k>=6, 19 k=5, 8 k=4, k3_00; k>=7 by K1)      ClassKilledAt <- windowKilled_of_slab [L]
+ |        <- checkParamI PASS over [191/50, s0]  (52/52 rows)          [C]; Lean replay: k5_06 only [P]
+ |        <- Lemma B' (margin rho), Lemma M->E (class_kill)            [L]
+ |
+ |-- (b) k5_11, k5_16: A57 shadow trees                                 classKilledAt_of_tree [L] + cover [P]
+ |        <- (K) leaves = checkCaseI PASS at s0 (slack-core grid, four sides) / parametric NO-certs   [C], population still owing ~400 nodes [P]
+ |        <- (C) leaves: T5/T11, pin-clip, K', PAIR, lanes, chord lanes, local YES leaves           [T]/[L]/[C]
+ |        <- cover invariance CI-1..3 [T], CI-4 per-box check [P]
+ |
+ |-- (c) trump5: A60 residual tree                                      trump_residual <- tree_kill + Lemma SEAM [L]
+ |        <- (K)/(C) leaves at s0, (D) leaves -> Tube_slot(T, r_land)   tube [L]+[C]; tree paused, 131 alive [P]
+ |        <- regime-1 slabs below s-hat - delta_basin                    [P]
+ |
+ |-- (d) 14 image-bearing protected classes (incl. k1_00 = K0-O1)       Lemma P-TREE / tree_kill [L]
+ |        <- per-class tube certificates (19 directions)                [L]+[C]
+ |        <- trees at delta_pin = 2e-2 with Lemma PD                     priced 3,500-4,200 CPU-h, pilots only [P]
+ |
+ |-- (e) corners4, k4_05 (no Trump image)                               kill-only trees [P], route unpriced beyond 2-10 desktop-days [S]
+ |
+ '-- (f) k0_00                                                           k0_route.md s6
+          <- K0-FREE branch: teleport -> k1_00's tree (K0-O1) + Theorem U at s-hat      [L] modulo (d)
+          '-- K0-BLOCKED branch: F = dilate, eight crowd squares at the widened boxes   [T]
+                <- the cascade on each of the 11 cells: INV, CLIP, K', PAIR, R1-R3, coexistence, chord/lane rows,
+                   multi-box LP at the fixed point, (D)/(D') landings                    [T]/[C]; 0 cells killed [P]
+                <- alternatives: the crowd chain (Theorem N [L]; stalls at delta = 0.3 [M]),
+                   the interior-first tree (9,400-12,000 CPU-h [P]), LOCK-FREE+/DRAIN-SEL [S]
+```
+
+Supporting layer (all [L] unless marked): parametrisation; attainment; census (1110/163) and D4; K1 and
+M→E; Lemma B / B′ / B-NO; verifier soundness for the case, parametric, measure, tube and atlas checkers;
+Krawczyk, feasibility and optimality of ẑ; the basin and its θ↔t gates; CIDL (ŝ_A22 = ŝ) modulo
+`a22_exact_structure` [C]; Theorem U [C, replayed]; CC-2 teleport; SLIDE and Theorem N modulo K0-O1; CEIL;
+CW; SIDEBAND (a) and the cells; Theorem B [T, Lean [C]]; LocalDead for S07 and S02 [L], S33/S38 [C]; the
+YES/NO composition [L]; the polygon-core vertex test [L]; the tree composition `tree_kill` [L] with the cover
+obligation [P].
+
+### 8.2 What is pending — the [P] list, exhaustively
+
+1. **A57 window trees (k5_11, k5_16).** Work-owing population 406 nodes on the s0 side plus 4 683 level-1
+   children on grid sides 2–4; central price ≈ 1 800 CPU-h (≈ 15 wall-days at 5 workers), range 1 150–3 150
+   (`docs/budget.md` §A, A149). Kills so far are (K) under the frozen verifier and geometric leaves.
+2. **trump5's residual tree (A60)** — paused; 131 alive nodes after the exact-core re-solve; plus the
+   regime-1 slab certificates below ŝ − 0.0257 (two slabs if they certify).
+3. **The protected tier**: 14 image-bearing classes at 3 500–4 200 CPU-h (A100's measurement, ≈ 2× the
+   model; the resister branch at η = 0 has no measured closing mechanism); **k1_00 is among them and is the
+   dependency K0-O1 of every k0 statement**; corners4 and k4_05 have no (D) leaves and no priced route.
+4. **k0_00**: eleven converged-alive cells; the cascade on l1_104 in flight (A175); tree route
+   9 400–12 000 CPU-h.
+5. **Lean replays** of the A57/A60/A100 corpora (multi-day), the tree-file → `cover` emitter, the
+   `ClosedTree` instances per class, and the CI-4 per-box re-check of the 601 logic kills across the window.
+6. **Lean formalisations still open**: `a22_exact_structure` (witness lemmas), the S33/S38 local certificates,
+   `SecondMeeterCriterion` (Theorem B's four-clause proof), Lemma TC's separating-axis step, the exact
+   w-range enclosure in `LocalCertT2`, `PolycoreExemptSound` (the v3 exemption clause), the guard-line
+   clause (v4), Leaf WASTE's Lipschitz-raster soundness W3, the multi-box invariant's certificates.
+7. **Certificate-chain engineering with soundness content**: the standalone tree verifier
+   (`verify_tree_s0.py` analogue); the slack-pin re-certification of the twelve k6 extension classes
+   (needed for the slot-lane kills in A57's δ = 10⁻² family); the crowd chain beyond δ = 0.3 (blocked by the
+   LP, not by theory).
+8. **Uniqueness bookkeeping**: on the tree route the equality clause at ŝ is delivered by the (D) landings;
+   if the DRAIN-SEL/exchange route were used, the exchange branch needs a two-square Theorem U [C].
+
+### 8.3 What is FALSE or retracted in the record (stated with the true replacement)
+
+* "Every packing at or below ŝ has an axis-aligned square" / "has a flush contact" — NOT proven; k0_00 is
+  open; item 19 of `docs/known_results.md` gives corner-*zone* occupancy only.
+* Global confinement ("every near-optimal packing is near Trump") — true empirically (A04: one of 702 local
+  optima below s0), not proven; proving it is the protected-tier campaign.
+* SIDEBAND as first conjectured ("one meeter within 1 of a wall, the other outside the band") — FALSE at the
+  widened box and false in its second half; TRUE form: distinct cells at threshold c (§7.6).
+* A92's proof of d₂ ≥ ŝ − m — gives only the sum bound; replaced by the joint translation (A94; Lean).
+* A116's "capped" ρ ≥ 20° cells — three of four are ALIVE (A119).
+* A161's "90 new kills" — 27 new after collection from the status board; A166's "127 free certification
+  candidates" — 0 (A170); A150's "(R6) is a new row" — it is A115's d0 row (A154).
+* A103's "the jammed grid at 4 + ε is plausibly a locked frame" — measured FALSE (A104: 12/12 corpus
+  packings free a corner); A105's one-wall lemma — FALSE (the mixed hook pair).
+* The shrunk-cell slot leaf (A152) — FALSE (four grazers block every translate); "a quadrilateral with sides
+  < 1 and one hard side holds no square centre" — FALSE (a diamond in a 0.99-square crosses three sides).
+* The two-meeter atlas thresholds d*(θ) — pitch artefacts (A169).
+* The mixed-sign-V prune for corner 2-crowds — FALSE as a local statement (K0-PAIR (b)).
+* A148's LOG entry attributed the corner-frame witness bug to A141; it was A157's (A159); A141's 28
+  two-crowd witnesses are all real.
+* The `case-lp-certificate-v1` spec's "a = 0 point cores are legal" — the frozen loader rejects a ≤ 0 (A70).
+* `lean/README.md`'s theorem table still lists `basin` and `trump_residual` among `unique_via_chain`'s
+  axioms; `basin` has been a theorem since A79 — a stale line, not a mathematical discrepancy.
+* `docs/specs/tcb.md` lists `mpmath.iv` in the rigidity decision path (A62); removed by A79's Lean replay.
+
+### 8.4 The one unproved statement per branch
+
+For a reader who wants the shortest list: (a)–(b) are compute; (c)–(d) are compute plus the tree-cover
+obligation; (e) has no route with a theorem behind it beyond "kill-only trees close as A57's do"; (f) rests
+on K0-O1 (compute) and on the eleven cells dying under leaves that are all proved sound — the cascade's
+*termination* is the unproved part, and it is a projection until the first cell dies.
+
+---
+
+## 9. Generalisation to other n
+
+Every lemma above is stated for n unit squares, a container [0, s]², and a rational target side s0 unless
+its statement names 11; the n = 11 content is in the census, the constants, and the exact minima. What
+would change:
+
+**n-general as stated [T]/[L].** The parametrisation; attainment; the measure certificate and its bridge;
+Lemma B / B′ / B-NO and the slack-core grid; the Young-form census (the enumeration grows — at side ⌈√n⌉ the
+corner diagrams live in a ⌈√n⌉ − 1 box — but the definition, exhaustiveness proof and D4 action are the
+same); K1 and M→E; the zone-tree rules (T1, T5, T11, N1, PD, CI-1..3) and `tree_kill`; the case-LP and
+parametric verifiers; Lemma CC-2 (teleport), SLOT-CROWD and SLOT-SLIDE, K0-FREE/K0-WIDEN/K0-BLOCKED with
+⌈√n⌉ in place of 4 as the grid side; CEIL, SLIDE, CW and Theorem N; SIDEBAND, the cells, Theorem B and the
+lonely NO-family; Lemma TC, CN, LINE (chords), CLIP, K′, PAIR, OVL, the lane covers, the multi-box invariant;
+Theorem LOCAL with COVER/LEAF/RELAX/STAB; GRAIN-LP, INHERIT, CONT and the chain menu (the four chain
+formulas with ⌈√n⌉ in place of 4); SNAP/MULTI/SHELL/FLOOD-D/EXPOSE; Lemma ID and Leaf WASTE with
+E(m) = m² − n; the D4 quotient; the contraction tube (any rigid optimum with a certified Krawczyk box);
+NOCRIT-SEL, TF-U, ROT, BOX-MOVE and the selected re-split.
+
+**n = 11-specific.** The 1110/163 census and its class names; the certificate corpus and every kill; the
+identity of the protected tier with trump5's sub-skeletons (for another n the protected classes are the
+sub-skeletons of the conjectured optimum's class, which need not be unique or rigid); the rigidity of ẑ
+(A22) and its basin radius; the exact minima S07/S02/S33/S35/S38 and their chain formulas; the tube walls
+`E3c2-7e3`/`E7c2-9e3`; every measured constant (η laws, kill rates, prices).
+
+**What would be needed for n = 12** (s(12) ≥ 3.90 is certified [C]; the best known packing is not known to
+be rigid): (i) a Krawczyk/basin certificate at the candidate optimum, or the composition must be restated
+without uniqueness; (ii) the census at the new side (mechanical); (iii) the protected tier of the candidate's
+class; (iv) the k0 route unchanged in form, with the corner-box constant ⌈√12⌉ = 4 and a new widening pad.
+The method's transferable core is the reading loop itself — the gallery generator with its drawing rules,
+the review sheet, and the leaf-from-reading pipeline — because it does not depend on the answer.
+
+---
+
+## Appendix A. Lean roster used in this document
+
+| statement | file (`lean/PackingCertMathlib/PackingCertMathlib/`) | axioms beyond propext/choice/Quot.sound |
+|---|---|---|
+| `parametrize`, `set_subset_container_iff`, `wT_ge_one` | `Parametrize.lean` | — |
+| `attained_thm`, `mem_interior_iff_uv` | `Attain.lean` | — |
+| `checkMeasureI_no_packing`, `checkMeasurePy_no_packing`, `s_eleven_ge_382` | `MeasureBridge.lean`, `MeasurePyBridge.lean`, `Measure382.lean` | `native_decide` (3.82) |
+| `eleven_unit_squares_in_3877084`, `trump11_ccw_ok_kernel` | `Trump11.lean`, `Bridge.lean` | none (kernel `decide`) |
+| `krawczyk_sound`, `zhatV_feas`, `a22_optimal`, `a36_basin`, `zhatCfg_packing`, `basin_tframe` | `RigidKrawczyk.lean`, `RigidA22.lean`, `RigidOptimal.lean`, `RigidBasinMain.lean`, `Rigidity.lean` | `checkA22`, `checkA36` (`native_decide`) |
+| `shat_spec`, `shatA22_eq_shat`, `trump_packs_at_shat`, `basin`, `rBasin_gate_tilt/slab` | `TopLevel.lean`, `Cidl*.lean`, `ThetaT.lean` | CIDL `native_decide`; `a22_exact_structure` |
+| `checkTube`, `tube_basin`, `tube_tframe`, `seam_inTube` | `RigidTubeKernel.lean`, `RigidTube.lean`, `TubeSeam.lean` | per-certificate `native_decide` |
+| `atlas_kill`, `atlas_dilated_kill_fold` | `AtlasKernel.lean`, `AtlasBridge.lean` | `checkAtlas_all` |
+| `scaleC_disjoint`, `slot_tracking`, `dilation_bridge`, `lemma_B`, `priced_dichotomy`, `bprime_containment`, `pullback_mem_Icc` | `Dilation.lean` | — |
+| `sat_squares`; `sat_selection_thm`, `cover_pair'` | `CaseSat.lean`; `SatInterior.lean` | — |
+| `checkCaseI_price`, `checkCaseI_kill`, `checkCaseI_no_family`; `k5_06_lo_kill` | `CaseChecker.lean`, `CaseBridge.lean`; `CaseK506.lean` | `native_decide` (k5_06) |
+| `checkParamI_kill`, `checkParamI_kill_packing`, `nofamExemptIV_sound`; `k5_06_param_kill` | `ParamChecker.lean`, `ParamBridge.lean`, `ParamNoFam.lean`; `ParamK506.lean` | `native_decide` (k5_06 param) |
+| `skeleton_mem_census`, `exists_class_skeleton`, `containsPins_skeleton`, `skeleton_d4`, `d4_packing`, `class_kill`; `censusL_length` (1110), `classCodes_length` (163) | `Census.lean`; `CensusCheck.lean` | `native_decide` (counts) |
+| `containsPins_mono`, `kill_mono`, `monotone_to_exact` | `Skeleton.lean` | — |
+| `centre_separation`, `zone_assign_bijective`, `core_meet_same_square`, `refine_cover`, `M1_transfer` | `Zones.lean` | — |
+| `teleport_packing`, `exists_kmax`, `cc2_stuck`; `card_lt_teleport`, `cc2_stuck_census` | `Selection.lean`; `CensusSelection.lean` | — |
+| `stratify`, `unique_transfer`, `s_eleven_ge`, `s_eleven_eq`, `s_eleven_unique` | `TopLevel.lean` | `stratum_kill`, `trump_residual`, `a22_exact_structure` |
+| `unique_via_chain`, `s_eleven_unique_of_chain` | `UniqueChain.lean` | H10-stuck and Theorem U as hypotheses |
+| `d4_cover_zone`, `d4_wlog` | `D4Wlog.lean` | — |
+| `ClosedTree`, `tree_kill`, `root_of_containsPins`, `zone_dichotomy`, `grid_cover`, `slot_outside_zone`, `pd_convex`, `pd_rule`, `d4_dil_comm` | `ZoneTree.lean` | — |
+| `ClassKilledAt`, `s_eleven_ge_of_classes`, `s_eleven_unique_of_classes`, `classKilledAt_of_tree`, `classKilledAt_of_slabs`, `s_eleven_ge_of_split`, `K0O1`, `theoremN_slab`, `chain_cover`, `s_eleven_ge_of_chain`, `ShellKill`, `classKilledAt_of_chain` | `Composition.lean` | — |
+| `SlabKill`, `slabKill_of_param/case/M1`, `windowKilled_of_slab`, `k5_06_slab` | `WindowRows.lean` | (k5_06 evaluation) |
+| `crowd_sound`, `crowd_cert_kill`, `crowd_sound_incidence`, `crowdKill_of_files`, `sameMeasure_sound`, `crowdZones_sound` | `Crowd.lean`, `CrowdZone.lean` | — |
+| `slide_crowd`, `k0free_kill`; `sweep_core`, `pinnedShift_packing` | `Slide.lean`; `PinnedSlide.lean` | — (K0-O1 a hypothesis) |
+| `ceil`, `ceil_packing`, `wedge_x/y` | `Ceil.lean` | — |
+| `linf_sep`, `distinct_cells`, `not_both_ne`, `sideband_a`, `clauseP_second_meeter`; `SecondMeeterCriterion` (stated) | `Sideband.lean` | — |
+| `checkVertexInPBox_sound`, `shared_point_same_square` | `PolyCoreT5.lean` | — |
+| `LocalDead`, `localDead_of_contradiction`, `classKilledAt_of_localDead`; `node_dead_of_yes_no`, `classKilledAt_of_yes_no`, `y0230_dead` | `Local.lean`; `LocalCompose.lean` | (Y0230 NO replays) |
+| `checkLeaf_sound`, `localDead_of_cert`; `selectionOk_sound`, `relax_wall`, `relax_selection`, `localHyp_bodies`; `treeOk_sound`, `certCover_of_check`, `localDead_of_certOk`; `localDead_s07_t`, `localDead_s02_t` | `LocalCert.lean`; `LocalCertT2.lean`; `LocalCertT3.lean`; `LocalCertS07T.lean`, `LocalCertS02T.lean` | `native_decide` (S07, S02) + `check_3_82`'s |
+| `theta_lipschitz`, `sub_le_theta`, `corner_perturb` | `ThetaT.lean` | — |
+| `checkAlive`, `alive_sound`, `alive_sound_mono` (an alivewitness ⇒ no `checkCaseI` PASS of that budget) | `AliveChecker.lean`, `AliveBridge.lean` | — |
+
+## Appendix B. Figures (`writeup/figures/`)
+
+| file | what it shows | source |
+|---|---|---|
+| `trump.svg` | ẑ with its contact structure | `docs/residue_map/` |
+| `s07_vs_trump.svg`, `s33_vs_s07_trump.svg` | the exact minima beside Trump | A108, A122 |
+| `pinwheel_k7_shadow.svg`, `pinwheel_tilt_curve.svg` | S02 optimised, and side vs common tilt (minimum 3.886746 at 48.435°) | A106 |
+| `shadow_S01.svg`, `shadow_S02.svg`, `shadow_S07.svg` | the three dominant shadow families of the alive trees | A107 |
+| `a57_lp_support.svg`, `a57_residue.svg` | the LP dual support at four alive level-3 nodes; the level-1 residue by status | A107/A96 |
+| `k5_11_interior_Y0147_guardline.svg` | the PI's four-chord line, the guard-line row | A144 |
+| `lonely_clip_S1.svg`, `kprime_pieces_S2.svg` | the lonely clip and the per-piece polygon cores on a cascade node | A173, A172 |
+| `sideband_lemma.svg`, `two_meeter_atlas_v2.svg` | SIDEBAND's sharpness pair and cells; the second-meeter atlas (its thresholds are artefacts) | A169 |
+| `strict_3p9907_drain.svg`, `record3985_drain.svg`, `lock104.svg`, `lockmap103.svg`, `hookwall105.svg`, `residue128.svg` | the K0-BLOCKED records above 4 and their drains; the first fully-held packing at 4.000237; the held/unheld census; the mixed hook wall; the coupled-move residue | A87–A128 |
+| `box_to_grain_110.svg` | why the box-to-grain map has no certificate shape | A110 |
+| `lean_depgraph.svg` | the dependency graph as a scoreboard | `lean/depgraph.svg` |
+| `k0v4_*.svg`, `a57v4_*.svg`, `A168_*`, `A171_*` | gallery pages and cascade steps in the v4 drawing convention | A148, A168, A171 |
