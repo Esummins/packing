@@ -51,6 +51,8 @@ from caselp import Box, t_lo, t_hi                               # noqa: E402  A
 S_RAT = K.S_RAT
 HALF = Fr(1, 2)
 MAXV = 24
+_PC_CACHE = {}
+_PC_CACHE_MAX = 40000
 
 
 # ===================================================================== exact polygon helpers
@@ -182,7 +184,20 @@ class Role:
         if not self.pieces:
             self.pcs, self.core, self.axis = [], None, (Fr(0), Fr(0), Fr(0))
             return
-        self.pcs = [PC.build(b, max_v=(40 if self.name == "H" else MAXV)) for b in self.pieces]
+        # A181: PC.build is pure and deterministic; the same piece is rebuilt many times per node (the
+        # seeded roles, then the fixed point, then every sibling seeded from the same parent), so the
+        # per-piece K' is cached per process, keyed by the exact float box and max_v (bounded size).
+        mv = 40 if self.name == "H" else MAXV
+        self.pcs = []
+        for b in self.pieces:
+            key = (tuple(K.bx(b)), mv)
+            pc = _PC_CACHE.get(key)
+            if pc is None:
+                pc = PC.build(b, max_v=mv)
+                if len(_PC_CACHE) >= _PC_CACHE_MAX:
+                    _PC_CACHE.clear()
+                _PC_CACHE[key] = pc
+            self.pcs.append(pc)
         core = list(self.pcs[0].verts)
         for pc in self.pcs[1:]:
             core = poly_intersect(core, list(pc.verts))
