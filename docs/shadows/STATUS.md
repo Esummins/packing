@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-09 01:45` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-09 10:05` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -152,7 +152,7 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 
 | source | records read | of which kills |
 |---|---|---|
-| `A136 closures136.jsonl` | 15 | 15 |
+| `A136 closures136.jsonl` | 24 | 24 |
 | `A137 clipkills137.jsonl` | 159 | 159 |
 | `A140 exactcore140.jsonl` | 12 | 1 |
 | `A141 polycore_lane_kills.jsonl` | 293 | 293 |
@@ -193,7 +193,7 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `A57 tree jsonl (k5_16_interior_G1_D2) -- dead rows only` | 389 | 389 |
 | `A57 tree jsonl (k5_16_interior_L1) -- dead rows only` | 98 | 98 |
 | `A57 tree jsonl (k5_16_interior_L1_D2) -- dead rows only` | 8 | 8 |
-| `A96 a120_closures.jsonl` | 61 | 19 |
+| `A96 a120_closures.jsonl` | 85 | 43 |
 | `clipkill certs (attempts/*/certs/**)` | 342 | 342 |
 | `ledger superseded_by_backlog_A137.jsonl` | 581 | 581 |
 | `ledger superseded_by_exactcore_A137.jsonl` | 46 | 46 |
@@ -205,7 +205,7 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 
 ### Records REFUSED -- tree tag unresolved (A137 §C.3)
 
-107 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **103 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **4 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
+110 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **106 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **4 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
 
 | source | id | leaf | why refused | redundant? |
 |---|---|---|---|---|
@@ -238,6 +238,9 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `A136 closures136.jsonl` | `k5_11_interior_Y0036_D07_D00` | A120 composition (YES local cert + all NO children) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `A136 closures136.jsonl` | `k5_11_interior_Y0036_D07_D04` | A120 composition (YES local cert + all NO children) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `A136 closures136.jsonl` | `k5_11_interior_Y0036_D07_D05` | A120 composition (YES local cert + all NO children) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A96 a120_closures.jsonl` | `k5_11_interior_Y0036_D07_D00` | A120 composition | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A96 a120_closures.jsonl` | `k5_11_interior_Y0036_D07_D04` | A120 composition | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A96 a120_closures.jsonl` | `k5_11_interior_Y0036_D07_D05` | A120 composition | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `A96 a120_closures.jsonl` | `k5_11_interior_Y0036_D07_D00` | A120 composition | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `A96 a120_closures.jsonl` | `k5_11_interior_Y0036_D07_D04` | A120 composition | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `A96 a120_closures.jsonl` | `k5_11_interior_Y0036_D07_D05` | A120 composition | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
