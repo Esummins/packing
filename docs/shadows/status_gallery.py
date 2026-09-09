@@ -597,6 +597,28 @@ def collect(table, corpus):
             d,
         )
 
+    # (7c) A167's conditional chord-limited lane kills ------------------------
+    for shard in ("pass_s0.jsonl", "pass_s1.jsonl"):
+        for d in jl(A("A167-condlane-pass", "results", shard)):
+            if str(d.get("verdict", "")) != "KILL":
+                continue
+            cls = d.get("cls") or ""
+            camp = "A60" if cls.startswith("trump5") else "A57"
+            slot = str(d.get("slot") or "")
+            cert = os.path.join("attempts", "A167-condlane-pass", "certs",
+                                "cond_%s__%s.json" % (d.get("nid", ""), slot.replace("(", "").replace(",", "_").replace(")", "")))
+            table.add_rec(
+                "A167 %s" % shard,
+                camp,
+                d.get("nid", ""),
+                True,
+                "conditional chord-limited lane [%s]" % slot,
+                "A167",
+                cert,
+                fdate(A("A167-condlane-pass", "results", shard)),
+                d,
+            )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(

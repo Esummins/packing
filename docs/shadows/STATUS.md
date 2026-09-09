@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-08 22:23` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-09 00:53` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -11,7 +11,7 @@ python docs/shadows/status_gallery.py --dry-run  # print the plan, write nothing
 
 ## Residue left
 
-Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 53 alive / 7 dead; behind them the A57 tree still owes work on **406 nodes** (attempts/A57-shadow-trees/PAUSED.md §B, v3: 632 -> 406 after the fold-in and the exact-core re-emission), out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
+Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 53 alive / 7 dead; , out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
 
 ## Counts
 
@@ -50,7 +50,7 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 
 | attempt -- leaf | pages killed |
 |---|---|
-| A149 -- case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed) | 3 |
+| A149 -- case-measure-certificate-v1 (exact cores, FROZEN verify_case) | 3 |
 | A149 -- case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | 2 |
 | A161 -- chord-limited lane [BL(1,0)] | 1 |
 | A57 tree -- PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1) | 1 |
@@ -75,9 +75,9 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 
 | page | node | class | level | family | status | leaf | attempt | date | subtree cost (CPU-h, A142 rank) |
 |---|---|---|---|---|---|---|---|---|---|
-| [x] [`c0_Y0939.svg`](killed/c0_Y0939.svg) | `c0_Y0939` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 5) |
-| [x] [`c0_Y0942.svg`](killed/c0_Y0942.svg) | `c0_Y0942` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 6) |
-| [x] [`c0_Y1038.svg`](killed/c0_Y1038.svg) | `c0_Y1038` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 9) |
+| [x] [`c0_Y0939.svg`](killed/c0_Y0939.svg) | `c0_Y0939` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 5) |
+| [x] [`c0_Y0942.svg`](killed/c0_Y0942.svg) | `c0_Y0942` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 6) |
+| [x] [`c0_Y1038.svg`](killed/c0_Y1038.svg) | `c0_Y1038` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 9) |
 | [x] [`k5_11_interior_Y0275.svg`](killed/k5_11_interior_Y0275.svg) | `k5_11_interior_Y0275` | `k5_11` | 1 | `none` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 16) |
 | [x] [`k5_16_interior_Y0083.svg`](killed/k5_16_interior_Y0083.svg) | `k5_16_interior_Y0083` | `k5_16` | 1 | `S02` | **DEAD** | PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1) | A57 tree | 2026-09-01 | 4.53 (rank 3) |
 | [x] [`k5_16_interior_Y0275.svg`](killed/k5_16_interior_Y0275.svg) | `k5_16_interior_Y0275` | `k5_16` | 1 | `S11` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 24) |
@@ -142,9 +142,9 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 * `k5_11_interior_Y0275` (tree tag `k5_11_interior_G1`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/k5_11_interior_Y0275__exall.json`; attributed by *prior tau matched the tree record*; 2 record(s) agree.
 * `k5_16_interior_Y0275` (tree tag `k5_16_interior_G1`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/k5_16_interior_Y0275__exall.json`; attributed by *prior tau matched the tree record*; 2 record(s) agree.
 * `k5_16_interior_Y0842` (tree tag `k5_16_interior_G1`) -- direct kill record, **A161** by `chord-limited lane [BL(1,0)]`; certificate `attempts/A161-chord-lane/certs/cl_k5_16_interior_Y0842__BL1_0.json`; attributed by *id occurs in exactly one tree*; 1 record(s) agree.
-* `c0_Y0939` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0939__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
-* `c0_Y0942` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0942__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
-* `c0_Y1038` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y1038__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
+* `c0_Y0939` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0939__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
+* `c0_Y0942` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0942__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
+* `c0_Y1038` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y1038__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 
 **Review-sheet flag.** 1 page(s) in `review_a57v4.csv` carry `eta < 0` (that is `tau < budget`, a kill) while the review sheet's `verdict` column says `ALIVE-at-LP`: `k5_16_interior_Y0083` (tau 4.500000000, budget 5, eta -5.000e-01, now **DEAD**).  The `verdict` column is stale for these; the status above is taken from the campaign records, not from that column.
 
@@ -160,6 +160,8 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `A149 a60_reemit_g1.jsonl` | 48 | 12 |
 | `A149 a60_reemit_g2.jsonl` | 45 | 13 |
 | `A149 a60_reemit_g3.jsonl` | 38 | 11 |
+| `A149 a60_reemit_g4.jsonl` | 22 | 21 |
+| `A149 a60_reemit_g5.jsonl` | 17 | 16 |
 | `A149 a60_reemit_smoke.jsonl` | 1 | 0 |
 | `A149 exact_reemit_m0.jsonl` | 9 | 7 |
 | `A149 exact_reemit_m1.jsonl` | 9 | 6 |
@@ -179,6 +181,8 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `A158 no158.jsonl` | 66 | 0 |
 | `A158 yescert158.jsonl` | 6 | 0 |
 | `A161 t3_dedup.jsonl` | 98 | 98 |
+| `A167 pass_s0.jsonl` | 7 | 7 |
+| `A167 pass_s1.jsonl` | 10 | 10 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
@@ -194,14 +198,14 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `ledger superseded_by_backlog_A137.jsonl` | 581 | 581 |
 | `ledger superseded_by_exactcore_A137.jsonl` | 46 | 46 |
 | `ledger superseded_by_exactcore_A149.jsonl` | 93 | 93 |
-| `ledger superseded_by_exactcore_a60_A149.jsonl` | 46 | 46 |
+| `ledger superseded_by_exactcore_a60_A149.jsonl` | 79 | 79 |
 | `ledger superseded_by_tight_core.jsonl` | 70 | 70 |
 
 `*__exall.json` is **not** a kill record (A148's rule: it exists on LOST-KILL / TOO-TIGHT / FAIL too) and is not scanned.  A158's `yescert158.jsonl` rows say `verdict = "KILL"` with `kill = false` and are counted as **not** kills; in particular **`c0_Y0076`'s NO child is NOT a kill** (A158b: the YES child converges at `tau = budget`, `eta = 0`).  A140's `exactcore140.jsonl` kills only where `kills_converged` and the certificate `PASS` -- `l1_148`, `l2_p65_101` and `l2_p65_111` have `kills = true` with `converged = false` and are **not** kills (A124: a non-converged `tau` was never a bound).
 
 ### Records REFUSED -- tree tag unresolved (A137 §C.3)
 
-103 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **103 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **0 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
+107 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **103 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **4 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
 
 | source | id | leaf | why refused | redundant? |
 |---|---|---|---|---|
@@ -276,6 +280,10 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `A161 t3_dedup.jsonl` | `k5_16_interior_Y0653` | chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
 | `A161 t3_dedup.jsonl` | `k5_16_interior_Y0065` | chord-limited lane [TL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
 | `A161 t3_dedup.jsonl` | `k5_16_interior_Y0305` | chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
+| `A167 pass_s0.jsonl` | `k5_16_interior_Y0635` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
+| `A167 pass_s0.jsonl` | `k5_16_interior_Y0281` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
+| `A167 pass_s1.jsonl` | `k5_16_interior_Y0635` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
+| `A167 pass_s1.jsonl` | `k5_16_interior_Y0191` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D03_D05` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D07_D00` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D07_D01` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
