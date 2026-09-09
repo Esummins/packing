@@ -662,6 +662,8 @@ in them IS exact and the true `a_report` survives in the lane's jsonl and in
 `results/superseded_by_exactcore_a60_A149.jsonl`. No certificate is wrong; only its provenance line is.
 Fix it at resume by giving `build_hyp` the two attributes, or by emitting through the A170 wrapper.
 
+**Final numbers (409 certificates re-certified, 2.35 CPU-h of verifier, no LP solved).** 59 recovered PASSes, 59/59 clearing a 100 % independent check (A132 `polycore.vertex_ok` re-run on the WRITTEN rationals, the measure recomputed exactly in `Fraction`, a depth-64 frozen replay): 25 repairs in A150/A165/A166 (3 new nodes, all A165 `l1_104` spread tuples) and 34 free upgrades, all of them A59/A60 zero-atom VACUITY certificates. **Nothing in this tree moved**, and the shadow board did not either -- `docs/shadows/status_gallery.py --dry-run` goes 5,332 -> 5,344 kills with **0 new distinct pages** (k0v4 11 ALIVE, a57v4 53 ALIVE / 7 DEAD, unchanged). The k0 side is closed negative: all 128 `kill-candidate (cert FAIL)` records of `cells140.open_pool`, re-emitted from A115's STORED measure with exact cores at zero LP cost, give **0 PASS**.
+
 ### Resume-block note (one line, §E)
 
 **6. New lanes MUST emit through `attempts/A170-certfix/code/certwrap170.py`
@@ -715,3 +717,13 @@ through `caselp.make_certificate`; re-verifying all 55 stored non-PASS certifica
 re-solve recovered **0** (40 LOST-KILL-ON-RESOLVE re-FAIL deterministically on real holes, 15
 TOO-TIGHT have total ≥ budget and cannot PASS). The re-price of this campaign in `docs/budget.md`'s
 own model is `attempts/A149-a57-reprice/notes/{reprice.md, dupwork.md, reemission.md}`.
+
+*A149 addendum, operational (2026-09-09).* **The per-node process wall kills the node but not its
+verifier grandchild.** `run137.py`/`run149.py` enforce the 1,500 s wall with `p.kill()` on the node
+process; that node's own `emit135.run_case` child — the frozen `verify_case.py` — survives and runs
+on with nobody to read it. Observed at the close of A149's A60 lane: one orphan on
+`c0_Y1099` (a WALL-CAP row) had held a core for **2,914 CPU-seconds** before it was reaped. §D.5
+made the process wall the deployable answer to the `Y0381` wedge, and it still is — but it must
+kill the process TREE (Windows: `CREATE_NEW_PROCESS_GROUP` + `taskkill /T /F`, or a job object),
+otherwise every WALL-CAP leaves an invisible worker behind and the box-count gate under-counts.
+The verdict is unaffected: CAP is never a verdict and the node keeps its prior state.

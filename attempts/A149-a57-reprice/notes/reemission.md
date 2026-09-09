@@ -14,8 +14,9 @@ And the same lever on the protected tier, for the first time:
 |---|---|---|---|---|---|
 | **A60 alive trump5**, scope `exH` | 218 (214 decided) | 17.07 | **87** | **40.7 %** | **0.196** |
 
-0 WALL-CAP, 0 ERROR, and **not one node reached FAIL-with-holes**, so `verify_case_v3` was never
-needed and `results/superseded_by_exactcore_v3_A149.jsonl` is empty by construction. Every kill is
+Across both lanes: 0 ERROR, 7 WALL-CAP (never a verdict — 0 on A57, 4 on A60, 3 in the A60 lane's
+earlier passes), and **not one node in either lane reached FAIL-with-holes**, so `verify_case_v3`
+was never needed and both v3 ledgers are empty by construction. Every kill is
 the FROZEN `verify_case.py` (521cb01f) on a `case-measure-certificate-v1` whose only change from
 the corpus's own is the core half-side.
 
@@ -140,3 +141,22 @@ needed re-solving). **0 recovered.** 40 LOST-KILL-ON-RESOLVE re-FAIL determinist
 holes — and 15 TOO-TIGHT have a written total ≥ budget, which the verifier's claim forbids, so they
 cannot PASS without a better τ. For A170's audit: every non-`NO-KILL` outcome has its atoms and
 weights on disk under `certs/`; `NO-KILL` never built a certificate because τ ≥ budget.
+
+## Operational finding: the wall kills the node but not its verifier grandchild
+
+At the close of the run one A149 process was still alive: `verify_case.py` on
+`certs/a60/c0_Y1099__exH.json`, **orphaned** (its parent gone), started 00:54:32 and holding a core
+for **2,914 CPU-seconds** by the time it was reaped. `c0_Y1099` is one of the four WALL-CAP rows:
+`run149.py` (like `run137.py`, from which it descends) enforces the 1,500 s per-node wall by
+`p.kill()` on the **node** process, but the node's own `emit135.run_case` child — the frozen
+verifier — is a *grandchild* and survives, then runs to completion with nobody left to read its
+result. This is the hazard `pausegate.orphans()` was written for ("a `certify.py` ran 11.3 h after
+its parent shard was restarted, burning a core unattributed"), reproduced from a different
+direction: not a restart, but the wall itself.
+
+**Deployable fix, and it belongs in `run137.py` as much as here:** kill the process *tree*, not the
+process — on Windows `subprocess.Popen(..., creationflags=CREATE_NEW_PROCESS_GROUP)` plus
+`taskkill /T /F /PID`, or a job object. Until then, a WALL-CAP node leaves a verifier behind that
+the box-count gate cannot see as work, which is precisely how a 16-process ceiling gets quietly
+over-subscribed. The verdict itself is unaffected — WALL-CAP is never a verdict and `c0_Y1099`
+keeps its prior state.
