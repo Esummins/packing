@@ -261,9 +261,10 @@ def gallery(rows, out, ncol=5):
          f'<rect width="{int(W)}" height="{int(H)}" fill="#fff"/>', f'<defs>{HATCH}</defs>',
          text(20, 26, "A173 -- the ten A168 nodes whose D loses the most to the LONELY CLIP",
               14, bold=True),
-         text(20, 44, "each panel: D's centre window; grey hatch = the centres the BEFORE run kept "
-                      "and Theorem B removes, blue = what survives.  Projection over the tilt "
-                      "sub-bins (the exact per-bin view is lonely_clip_S1.svg).", 10, "#444")]
+         text(20, 44, "each panel: D's centre window.  Every BEFORE piece is drawn red-hatched and "
+                      "every surviving AFTER piece is painted blue over it, so BLUE IS WHAT SURVIVES "
+                      "and the red hatch left showing IS what Theorem B removed.  Projection over the "
+                      "tilt sub-bins (the exact per-bin view is lonely_clip_S1.svg).", 10, "#444")]
     for i, r in enumerate(rows):
         cx = 20 + (i % ncol) * (CW + 16)
         cy = 74 + (i // ncol) * (CH + 44)

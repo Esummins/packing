@@ -7832,3 +7832,79 @@ pass + ~3,700 s of diagnostics, checking and witness search ≈ 3.3 CPU-h of the
   logs/}`, `docs/proofs/sideband.md`, `docs/residue_map/sideband_lemma.svg`,
   `lean/PackingCertMathlib/PackingCertMathlib/Sideband.lean`, `docs/residue_ledger.md` section 4 paragraph,
   `docs/known_results.md` item 35, registry row.
+
+## 2026-09-09 — A173-lonely-clip (Opus engineer) — done-success
+- **Why (the PI's reading of A171's library)**: A169's **Theorem B** (`docs/proofs/sideband.md` §3,
+  consumption row **R3** §6) says a corner-meeter pose that admits **no second meeter** of the widened
+  corner box — a *lonely* pose — is impossible in a K0-BLOCKED packing, and R3 states the consumption
+  as "a conditioned box `B_H` is clipped to `B_H ∖ L_c′`" — a **clip**. A168 applied it only as a
+  whole-role **kill** (`resume168.lonely_role` needs *every* pose of the role lonely), so lonely poses
+  inside a surviving role were never removed, `K′` never grew from them, and the cascade to the other
+  roles was lost. The coordinator's own probe made the granularity concrete: axis-aligned D flush with
+  the right wall slid down is NOT lonely, but D at tilt 15° slid 0.1, or tilt 30° pressed, IS — so the
+  object R3 removes is a set of **tilt sub-bins and centre slabs**, not whole roles.
+- **What was built** (`attempts/A171-multibox-invariant/code/multibox.py`): `lonely_local` /
+  `lonely_rect` / `lonely_box` port the criterion from `resume168.lonely_box` (clauses W, S, NE on the
+  2001-point grid with the Lipschitz margin and the cached `g`; clause (P) the exact A131 rational clip
+  against the pressed square, with a degenerate zero-width rect padded OUTWARD by 1e-12 so a slab-
+  boundary probe can never be read as dead). `lonely_clip(mbox, corner, c)` drops a whole tilt sub-bin
+  the criterion certifies lonely and otherwise bisects the four axis slabs with A131's **certifying**
+  `_bisect_boundary` (the returned boundary is verified by the exact predicate, so what is dropped is
+  always a slab just proved lonely), tracing every removal with its area. `normalise(corners={"D":
+  ("TR", C_WIDEN)}, lonely_refine=1)` runs it at **every pass, before the mutual clip** — the point:
+  the survivors rebuild a larger `K′` and the cascade carries the growth. `EmptyBox` is A168's R3 kill,
+  recovered as the limiting case. **Soundness grade unchanged**: a *sufficient* condition, clause (P)
+  exact, the other three at A168's **[S]**.
+- **Verification**: `xcheck173` — 500 random corner-meeter boxes over all four corners, verdicts and
+  per-clause details **identical** to `resume168.lonely_box`, same `c = 1 + w` as an exact rational
+  (104/500 lonely). Test case (f) in `tests/test_multibox.py`: (f1) that cross-check; (f2) soundness —
+  every centre the clip removes, at five tilts of its own sub-bin, checked against an **independent
+  pointwise** implementation of §3 written from the paper, **3 070 poses, 0 violations**; (f3) the node
+  invariant after the clip and "the clip only ever shrinks". Suite **ALL PASS, 74.1 s** of the 120 s
+  budget.
+- **THE BUG THE SUITE FOUND — a live unsoundness in A171, present since `2b7172c3`.** `Bin.radii`
+  memoised its exact per-edge radius bounds under **`id(obs)`**. `normalise` compiles a fresh obstacle
+  per box per pass and drops the previous pass's; CPython hands the freed address straight back; a
+  `Bin` that outlived the old obstacle then answered the NEW one with the OLD one's bounds — wrong
+  bounds inside the exact dead test, **in either direction**. It fired nondeterministically (two
+  aliases in test case (a) alone), which is why `a2.invariant_after` passed at HEAD and failed on the
+  next run. `Obstacle` now carries a monotone `uid`; case **(a3)** rebuilds an obstacle at a recycled
+  address (`address_recycled=True` in the recorded run) and demands the fresh radii. The speed the
+  accidental hits had been stealing is taken back **legitimately** by `MBox.obstacle()`, which caches
+  the compiled obstacle under the exact rational CONTENT of `K′`. **A173's measurement was re-run from
+  scratch**; the pre-fix records are kept unused under `results/superseded/`.
+- **One more correction**: `lonely_clip`'s tautologous tilt bisection used to keep the split even when
+  neither half was dropped, inflating the piece count of every clipped box at every pass — and more
+  pieces make the *rest* of `normalise` stronger (A172) and slower, so the with/without comparison was
+  reading a mixture of Theorem B and extra refinement. A piece with no dropped descendant is now
+  returned UNSPLIT. Same effect for a fifth of the cost (test (f) node: `K′(D)` 0.55266 → 0.754208
+  against 0.755656; that node's lonely `normalise` 13.1 s → 2.5 s).
+- **The measurement** — all **146** ALIVE S1/S2 nodes of `tree_l1_104` + `tree_l1_153` (read-only),
+  D = the first TR meeter, `c = 1 + w`, `nsub` 4 / `refine` 1 / `max_iter` 6, base and lonely from the
+  same starting boxes (`results/{measure173_c.jsonl,report173.json,table173.md}`, `notes/measure.md`):
+
+  | step | nodes | alive in base | **LONELY KILL** | dead in base already | mean rel. loss of D | median | mean `K′(D)` before → after | H moved |
+  |---|---|---|---|---|---|---|---|---|
+  | S1 | 34 | 29 | **3** | 2 | 0.3641 | 0.2259 | 0.7169 → 0.7680 | 5 |
+  | S2 | 112 | 62 | **10** | 40 | 0.5154 | 0.5219 | 0.7058 → 0.7656 | 12 |
+
+  **42 of the 146 A168-ALIVE nodes are already dead to A171/A172's clipping alone**, before Theorem B
+  is applied. Of the 104 that survive it the lonely clip **kills 13 more** — twelve by emptying D, and
+  `l1_104 root/D53/S7` by emptying **S**, i.e. the *cascade* killing, not the clip — and halves what is
+  left: 10 S1 and 31 S2 nodes lose more than three quarters of D's surviving fraction, 23 lose under
+  1 %. Whole sweep 845 s in one BelowNormal process.
+- **Loose end, stated**: one node (`l1_104 S2 root/D55/S0`) does not reach the clip fixed point in 6
+  passes (5 × `CLIP-FIXPOINT`); at `max_iter=20` it converges in 10 passes with a clean invariant and
+  **identical** kept fractions (H 0.545185, D 0.036478, S 0.083866), so the recorded number is right
+  and only the convergence budget was short. Every other node's invariant passes.
+- **Figures**: `docs/residue_map/lonely_clip_S1.svg` — before/after for the worst surviving S1 node,
+  D's pieces as thin rects, the removed centres hatched red, `K′(D)` dashed before / solid after with
+  `K′(H)`, the hypothesis square at D's box centre at mid tilt with both extremal-tilt outlines, a
+  per-tilt-sub-bin strip (the only exact, unprojected view) and a note on each panel saying what it
+  **is**; `attempts/A173-lonely-clip/figs/lonely_clip_gallery.svg` — the ten largest-effect nodes.
+- Files: `attempts/A173-lonely-clip/{BRIEF.md,code/{measure173,xcheck173,fig173,report173}.py,
+  results/,notes/measure.md,figs/,logs/}`; edits to `attempts/A171-multibox-invariant/{code/multibox.py,
+  tests/test_multibox.py,notes/usage.md (lines 7 and 8),results/test_multibox.json}`;
+  `docs/residue_map/lonely_clip_S1.svg`; two paragraphs in `docs/residue_ledger.md` §6; registry row;
+  this entry. One BelowNormal process at affinity 0xFFFF for the sweep, box ceiling 16 counted and
+  waited on before every launch (A168's shards, A174 and A136 were running throughout); ~1.1 CPU-h.

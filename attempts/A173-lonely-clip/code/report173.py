@@ -133,9 +133,23 @@ def md(o):
                  f"{r['H_kept_before']:.6f} | {ha} | {r['passes_before']}/{r['passes_after']} | "
                  f"{'ok' if r['invariant'] else ('-' if r['kill'] else 'FAIL')} |")
     if o["base_kills"]:
-        L += ["", "## nodes the BASE run already kills (an A172 effect, not A173's)", ""]
+        L += ["", "## nodes the BASE run already kills (an A171/A172 effect, not A173's)", "",
+              "These are nodes A168 recorded ALIVE that A171/A172's container + mutual clip kills on",
+              "its own, before Theorem B is applied at all. They are excluded from every average",
+              "above, so the losses reported are losses the lonely clip alone is responsible for.", ""]
         for r in o["base_kills"]:
             L.append(f"* {r['cell']} {r['step']} `{r['path']}` -- box {r['box']} ({r['reason']})")
+    L += ["", "## loose ends, stated", "",
+          "* **One node does not converge at `max_iter` 6**: `l1_104 S2 root/D55/S0` ends with five",
+          "  `CLIP-FIXPOINT` failures, i.e. the mutual clip would still remove more. Re-run at",
+          "  `max_iter=20` it converges in **10** passes with a clean invariant and **identical** kept",
+          "  fractions (H 0.545185, D 0.036478, S 0.083866) -- the recorded number is right and only",
+          "  the convergence budget was short. Every other node's invariant passes.",
+          "* **A KILL in the `box` column that is not D** is the CASCADE killing rather than the clip:",
+          "  the lonely clip grew `K'(D)`, and that larger core emptied another box. `l1_104 S2",
+          "  root/D53/S7` is the one such node here (box `S`, at the refine stage).",
+          "* Every number here was produced AFTER A173's `Bin.radii` `id()` fix; the pre-fix sweep is",
+          "  kept, unused, under `results/superseded/`.", ""]
     return "\n".join(L) + "\n"
 
 
