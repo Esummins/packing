@@ -7792,3 +7792,43 @@ pass + ~3,700 s of diagnostics, checking and witness search ≈ 3.3 CPU-h of the
   notes/usage.md,results/{demo171,test_multibox}.json,figs/*.svg}`; registry row; this entry; one
   paragraph in `docs/residue_ledger.md` §6. Two BelowNormal processes at affinity 0xFFFF, box ceiling
   16 counted before every launch (6 other lab pythons live: A168, A169, A136); ~90 CPU-s total.
+
+## 2026-09-09 — A169-sideband-lemma (Fable lead) — done-success
+- **Why**: A168's k0 cascade needs, at every corner met by two crowd squares, (a) a band statement
+  (one centre within a wall band, the other outside) and (b) what a doubly-met corner REQUIRES of the
+  first meeter, both for any n; the coordinator had only samples (no disjoint pair with both centres
+  beyond 1 in 81k draws) and an atlas whose thresholds (0.18/0.34/...) nobody had derived.
+- **Sharp statements** (`docs/proofs/sideband.md`, derivations `notes/derivation.md`, picture
+  `docs/residue_map/sideband_lemma.svg`): SIDEBAND (a) [T] with constant **c itself** (1 unit,
+  1 + w widened) and no quadrant / no bound on c; "within 1 of a wall" at the widened box [F]
+  (45-deg diamonds at (1.01, 1.7226)/(1.7226, 1.01), SAT gap 0.0078); (b) "the other lies outside" [F]
+  (Q1 = [0.1,1.1]x[0,1] and a 2.87-deg-tilted Q2 at (0.524, 1.522), gap 1e-4, both centres x < 1) ->
+  the true form is **distinct cells of the 2x2 grid at c** (Lemma A2), from Lemma A1: interior-disjoint
+  unit squares have centres >= 1/sqrt2 apart in l-inf (sharp; SAT axis + Cauchy-Schwarz) and every meeter
+  cell has l-inf diameter < 1/sqrt2 for c < 1/2 + 1/sqrt2 = 1.207.  REQUIREMENT: Theorem B [T], an exact
+  four-clause support criterion (NE / W / S / P) for the existence of a second meeter, proved both
+  ways; the (=>) direction rests on two piecewise-concave support inequalities (wedge: w(phi) -
+  (cos z - sin z) w(z+phi) >= 2 sin^2 z; triangle: (cos g + sin g) w(psi) + w(psi-g) >= 2(cos g + sin g)).
+  Corollaries [T]: pressed => lonely at every tilt (unit box); mode-(a) slide threshold tan(theta/2) with
+  intrusion (delta - t) tan theta = 2t(delta-t)/(1-t^2); tilt-0 exact law a = u(2-u^2), F = u^2 sqrt(1-u^2);
+  exact slide threshold = tan(theta/2) for theta <= theta* = 56.76 deg and the crossing (W)-mode beyond
+  (0.5727 ... 0.4778 at 60...85 deg).  The atlas v2 d* values are pitch artefacts [M].  Widened box: the
+  pressed square admits a partner iff w(theta) < c + sqrt(c^2-1), theta < 17.35 deg or > 72.65 deg (clause
+  NE at alpha = theta), not the 12.8 deg of the mode-(a) guess.
+- **Lean** (`Sideband.lean`, builds clean, no sorry, no axiom): `linf_sep`/`linf_sep_sqrt` (A1),
+  `quad_centre_ge_half`, `meeter_cx/cy`, `distinct_cells` (A2), `not_both_ne`/`sideband_a` (SIDEBAND (a)),
+  `cell_hyp_of_lt`; Theorem B stated as `SecondMeeterCriterion` [C] with `supp`, `ClauseNE/W/S/P`,
+  `SecondMeeter`, and `clauseP_second_meeter` [T] (the pressed square is the (P) witness).
+- **Consumption (A168)**: R1 cell/pair prune of the corner pair list (subsumes 0.34 cores);
+  R2 the band/outside split into six cell pairs with the band meeter priced by A144's chord row and the
+  NE meeter confined to the quarter-disc of radius 1/sqrt2 at (c, c); R3 the LONELY NO-family (Theorem B
+  box test, quartic in T = tan(zeta/2), Bernstein) removing 54-74 % of widened meeter poses at every tilt,
+  unchanged by a conditioned H (A158's clip first).  Expected pair-census reduction ~ (0.4)^2 [S].
+- **Numerics** (`code/`, `results/`): `check_a` (counterexamples, 4 941 sampled disjoint meeter pairs,
+  0 in a common cell), `crit169`+`lonely_exact` (criterion vs independent raster: 783/783 agree, all
+  non-lonely cells carry SAT-certified witnesses), `slide169` (thresholds, theta*, the three inequalities
+  >= -4e-16 on a 720x2880 grid).  Total compute < 10 CPU-min.
+- **Files**: `attempts/A169-sideband-lemma/{BRIEF.md, notes/derivation.md, code/*.py, results/*.json,
+  logs/}`, `docs/proofs/sideband.md`, `docs/residue_map/sideband_lemma.svg`,
+  `lean/PackingCertMathlib/PackingCertMathlib/Sideband.lean`, `docs/residue_ledger.md` section 4 paragraph,
+  `docs/known_results.md` item 35, registry row.

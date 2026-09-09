@@ -254,6 +254,12 @@ file is the record of truth for claims, LOG.md is the record of events.
 33. CERT  The enumeration-certificate mismatch law, seven+ faces (A30-A52): certificates price placements;
     enumerable objects quotient placement away.
 34. CERT  s(12) >= 3.90 (A33).
+35. LEAN+PROSE Sideband (A169, `docs/proofs/sideband.md`): two interior-disjoint unit squares meeting the open
+    corner box (0,c)^2 never both have centres in [c,inf)^2 (sharp at c; FALSE with constant 1 at the widened box),
+    and their centres lie in distinct cells of the 2x2 grid at c (l-inf separation >= 1/sqrt2, Lean `distinct_cells`);
+    "the other centre lies outside the band" is FALSE.  A second meeter exists iff one of four support clauses
+    holds (Theorem B); a pressed first meeter is lonely for the unit box at every tilt; the slide threshold is
+    tan(theta/2) up to 56.76 deg, and the two-meeter atlas thresholds were pitch artefacts.
 
 ## F. NOT established (frequently misremembered)
 - "Every packing at or below s-hat has an axis-aligned square": NOT proven — k=0 (no simple squares) is a

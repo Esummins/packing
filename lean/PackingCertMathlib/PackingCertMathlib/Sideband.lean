@@ -246,6 +246,99 @@ theorem sideband_a (q q' : PSq) {c : ℝ} (hm : Meets q c) (hm' : Meets q' c)
   push Not at hcon
   exact not_both_ne q q' hm hm' hd ⟨hcon.1, hcon.2.1, hcon.2.2.1, hcon.2.2.2⟩
 
+
+/-! ## 5. Theorem B — the second-meeter criterion, stated [C]; clause (P) proved
+
+The document's Theorem B (§3): a square `q` in the quadrant meeting `(0, c)²`, `c ≥ 1`, admits
+an interior-disjoint second meeter iff one of four one-parameter support inequalities holds.
+The proposition is stated here (`SecondMeeterCriterion`) and clause (P) ⇒ second meeter is
+proved (`clauseP_second_meeter`, the witness is the pressed square `[0, 1]²`).  Obligations
+left [C]: the (W)/(S)/(NE) witnesses as `PSq` values with `t = sin ζ / (1 + cos ζ)` and their
+`Meets`/`InQuadrant`/separation facts; Lemmas B0 and B0′ (the wedge and triangle support
+inequalities); the four-quadrant case analysis of the axis returned by `sat_selection_thm`. -/
+
+/-- The support function of `q` in direction `n`: `n·z + (|n·e| + |n·e⊥|)/2`. -/
+def supp (q : PSq) (n : RP) : ℝ :=
+  rdot n (q.cx, q.cy) + (|rdot n (edir q)| + |rdot n (perpV (edir q))|) / 2
+
+/-- Clause (NE): a direction `(a, b)` in the closed NE quadrant with `h(n) < c (a + b)`. -/
+def ClauseNE (q : PSq) (c : ℝ) : Prop :=
+  ∃ a b : ℝ, a ^ 2 + b ^ 2 = 1 ∧ 0 ≤ a ∧ 0 ≤ b ∧ supp q (a, b) < c * (a + b)
+
+/-- Clause (W): `n_W(ζ) = (−sin ζ, cos ζ) = (−b, a)` with `h(n) < c cos ζ − sin² ζ`. -/
+def ClauseW (q : PSq) (c : ℝ) : Prop :=
+  ∃ a b : ℝ, a ^ 2 + b ^ 2 = 1 ∧ 0 < a ∧ 0 < b ∧ supp q (-b, a) < c * a - b ^ 2
+
+/-- Clause (S): the mirror image, `n_S(ζ) = (cos ζ, −sin ζ)`. -/
+def ClauseS (q : PSq) (c : ℝ) : Prop :=
+  ∃ a b : ℝ, a ^ 2 + b ^ 2 = 1 ∧ 0 < a ∧ 0 < b ∧ supp q (a, -b) < c * a - b ^ 2
+
+/-- Clause (P): `q` lies beyond a line through `(1, 1)` with a NE normal. -/
+def ClauseP (q : PSq) : Prop :=
+  ∃ a b : ℝ, a ^ 2 + b ^ 2 = 1 ∧ 0 ≤ a ∧ 0 ≤ b ∧ ∀ p ∈ q.set, a + b ≤ a * p.1 + b * p.2
+
+/-- `q2` is a second meeter of `(0, c)²` next to `q`. -/
+def SecondMeeter (q q2 : PSq) (c : ℝ) : Prop :=
+  0 ≤ q2.t ∧ q2.t ≤ 1 ∧ InQuadrant q2 ∧ Meets q2 c ∧
+    Disjoint (interior q.set) (interior q2.set)
+
+/-- **Theorem B** [C] (document §3), as a proposition on the threshold `c` (intended `1 ≤ c`). -/
+def SecondMeeterCriterion (c : ℝ) : Prop :=
+  ∀ q : PSq, 0 ≤ q.t → q.t ≤ 1 → InQuadrant q → Meets q c →
+    ((∃ q2 : PSq, SecondMeeter q q2 c) ↔
+      (ClauseNE q c ∨ ClauseW q c ∨ ClauseS q c ∨ ClauseP q))
+
+/-- The pressed axis square `[0, 1]²`. -/
+def pressed : PSq := ⟨1 / 2, 1 / 2, 0⟩
+
+theorem cosT_zero' : cosT 0 = 1 := by simp [cosT]
+
+theorem sinT_zero' : sinT 0 = 0 := by simp [sinT]
+
+theorem pressed_coords_of_mem {p : RP} (hp : p ∈ pressed.set) :
+    |p.1 - 1 / 2| ≤ 1 / 2 ∧ |p.2 - 1 / 2| ≤ 1 / 2 := by
+  have h := (mem_set_iff_uv pressed p).mp hp
+  simp only [pressed, rdot, edir, perpV, cosT_zero', sinT_zero', mul_one, mul_zero, add_zero,
+    zero_add, neg_zero] at h
+  exact h
+
+theorem pressed_coords_of_mem_interior {p : RP} (hp : p ∈ interior pressed.set) :
+    |p.1 - 1 / 2| < 1 / 2 ∧ |p.2 - 1 / 2| < 1 / 2 := by
+  have h := (mem_interior_iff_uv pressed p).mp hp
+  simp only [pressed, rdot, edir, perpV, cosT_zero', sinT_zero', mul_one, mul_zero, add_zero,
+    zero_add, neg_zero] at h
+  exact h
+
+/-- **Theorem B, (P) ⇒ second meeter**: the pressed square is a second meeter of every `q`
+satisfying (P), for every `c ≥ 1`. -/
+theorem clauseP_second_meeter (q : PSq) {c : ℝ} (hc : 1 ≤ c) (hP : ClauseP q) :
+    SecondMeeter q pressed c := by
+  obtain ⟨a, b, hab, ha, hb, hsep⟩ := hP
+  unfold SecondMeeter
+  refine ⟨by norm_num [pressed], by norm_num [pressed], ?_, ?_, ?_⟩
+  · intro p hp
+    have h := pressed_coords_of_mem hp
+    exact ⟨by linarith [(abs_le.mp h.1).1], by linarith [(abs_le.mp h.2).1]⟩
+  · have hm := vertex_mem pressed 0 0 (by rw [abs_zero]; norm_num) (by rw [abs_zero]; norm_num)
+    simp only [zero_mul, sub_zero, add_zero] at hm
+    refine ⟨(1 / 2, 1 / 2), hm, by norm_num, ?_, by norm_num, ?_⟩
+    · show (1 : ℝ) / 2 < c
+      linarith
+    · show (1 : ℝ) / 2 < c
+      linarith
+  · rw [Set.disjoint_left]
+    intro p hp1 hp2
+    have hq := interior_subset hp1
+    have hs := hsep p hq
+    have h := pressed_coords_of_mem_interior hp2
+    have h1 : p.1 < 1 := by linarith [(abs_lt.mp h.1).2]
+    have h2 : p.2 < 1 := by linarith [(abs_lt.mp h.2).2]
+    rcases eq_or_lt_of_le ha with ha0 | ha0
+    · subst ha0
+      have hb1 : 0 < b := by nlinarith
+      nlinarith [mul_pos hb1 (sub_pos.mpr h2)]
+    · nlinarith [mul_pos ha0 (sub_pos.mpr h1), mul_nonneg hb (sub_pos.mpr h2).le]
+
 end
 
 end S11
