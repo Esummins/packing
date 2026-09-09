@@ -876,3 +876,41 @@ restrict the band cover's root to the band slab `|v| <= 1/2` before bisecting (~
 Code `code/condlane.py`, record `results/t8_cond.json`. No certificate emitted; the population pass
 over the NO-LINE / `M = 1` cells was not run (budget), and its cost order should start with trump5
 BR(0,1) (82 such cells, and 20 of A161's 23 new trump5 kills already sit on that slot).
+
+## A167 (2026-09-09) — the conditional lane RUN over the population; 7 new trump5 nodes dead, and the rest measured
+
+A161 T8 left the conditional chord-limited lane stated but unrun. A167 (`attempts/A167-condlane-pass/`)
+ran it over the whole population, built FROM THE COLLECTOR rather than from a campaign snapshot:
+**416 alive cells over 258 alive A57/A60 nodes** (every `NO-LINE`/`UNDECIDED` cell with `M = 1` in
+A161's T3 tables whose node the collector still records ALIVE), in A161's cost order, at 60 s a cell.
+All 416 ran.
+
+**trump5 half.** `BR(0,1)` gives **10 kills of 66 cells**, `TR(0,1)` **1 of 48**, and
+`BL(0,2)` / `TL(0,0)` / `TR(1,0)` give **zero**. After a fresh collect at the end of the attempt the
+new trump5 dead nodes are **`c0_Y0989, c0_Y0993, c0_Y0995, c0_Y0996, c0_Y0997, c0_Y1002, c0_Y1131`**
+(all level 1); `c0_Y0902, c0_Y0913, c0_Y0921, c0_Y0994` were also killed here but A149 had reached
+them while A167 ran. Certificates `certs/cond_c0_Y*.json`, kind
+`conditional_chord_limited_lane_v1`, **all PASS** the independent checker `checkcond167.py`.
+
+**The two new levers, and which one pays.** Over the 121 pieces of the 15 certificates: 92 pieces
+closed because the BAND cover reached `LANE_band = 0` (offsets ranked by the sampled `band_free`
+count under `K'(piece)`, and the cover run over the band SLAB `|v| <= 1/2` that every band pose lives
+in — a 4× cut of the root volume), and 29 because the PER-PIECE chord row gave `beta = 0` outright
+(`minchord` is monotone under box inclusion, so the piece's own box is a legal, longer chord).
+`c0_Y1131` is killed by the per-piece `beta` alone on all nine pieces.
+
+**`c0_Y0169` — the PI's node — is a NO-GO, not a budget failure.** At `TL(0,0)` the whole-box picture
+A161 reported still holds (`beta = 1` from the two wall pins, `LANE_out = 0` certified, 58 free BAND
+poses), but on the pieces of `B_H` where `H` reaches the cell the sample exhibits a free pose meeting
+`int C` at EVERY one of the 106 swept offsets — `band_free = 2–6` per 20,000 draws on the good
+`x ≈ 0.729` lines even at split depth 5, and `outside_free > 0` on the h-lines — so the leaf's own
+counters are `>= 2` and no budget closes it. The same holds at `BL(0,2)` (53 offsets, all screened).
+The PI's geometric reading ("`H`'s corner leaves under 1 of width, so no band square fits") is
+therefore **false as stated**: a band square does fit beside `H` on part of `H`'s box. No exact
+two-crowd pair was found for `c0_Y0169` in 60,000 draws, so the cell is no-go at the depth searched
+rather than exactly retired.
+
+**Retirements.** 285 of the 416 cells are NO-GO in this sense; 60 were escalated to an EXACT rational
+two-crowd witness and **49 certified** (`certs_nogo/nogo_*.json`, kind `nogo_two_crowd_v1`), which
+retires those cells for the whole lane-leaf family. 116 cells remain `UNDECIDED-time` at the 60 s
+budget — those are where a longer pass could still find kills.

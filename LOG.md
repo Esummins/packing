@@ -7589,3 +7589,69 @@ cert166_*.json,certfix166_*.json,certaudit166.json,lp166_wmax_s*.jsonl,lp166_ret
 drawn); `notes/{method,canary,certificate_bug,composition,tables,registry_row,doc_lines,log_entry}.md`;
 `logs/`), plus the
 registry row, this entry, and one paragraph in `docs/residue_ledger.md` §4.
+
+## 2026-09-09 — A167: the CONDITIONAL chord-limited lane, run over its population (done-mixed)
+
+A161 stated the conditional form of the chord-limited slot lane and never ran it; the cap went on the
+retry, on A141's own leaf, and on three attempts at the PI's `c0_Y0169`. A167 ran it over the whole
+population, and the population was built **from the collector** (`docs/shadows/status_gallery.py`,
+5,742 records / 5,258 kills / 46 sources at the start) rather than from a campaign snapshot — A161's
+own lesson, after 62 of its 96 "kills" turned out to be nodes A149/A156 had already killed. That gave
+**416 cells over 258 ALIVE A57/A60 nodes**: every `NO-LINE (beta + M >= 2 on every swept offset)` or
+`UNDECIDED` cell of A161's T3 tables with `M = 1` — precisely the cells where `H` reaches the slot, so
+the unconditional form cannot fire by construction. All 416 ran, at 60 s a cell (~21 s actual), in two
+BelowNormal processes.
+
+**The leaf, per piece.** Split `B_H` by A141's deterministic bisection; on a piece `b`, with `K'(b)`
+its own fattened core and ONE guard line `l(b)`:
+`n(b) = beta(b) + LANE_out(b)` if every pose of `b` misses the cell, else
+`min(beta(b), LANE_band(b)) + LANE_out(b) + 1`; `n(b) <= 1` everywhere contradicts SLOT-CROWD.
+Two additions to A161's form, both sound and both load-bearing. **Per-piece `beta`:** `minchord` is
+monotone under box inclusion, so the PIECE's box is a legal (and longer) chord in A144's guard row —
+`H`'s true pose is in `b` — and that alone gives `beta = 0` on 29 of the 121 kill pieces, killing the
+band with no cover at all (all nine pieces of `c0_Y1131`). **Band-slab root:** `chord >= 1 <=>
+|v| <= f(y)` with `f` decreasing on `[1, sqrt2]`, so every band pose has `|v| <= f(1) = 1/2` and the
+`LANE_band` cover may be run over `centre_window ∩ {|v| <= 1/2}` — 92 of the 121 pieces closed that
+way.
+
+**Result.** **15 KILLs, 285 NO-GO, 116 UNDECIDED-time.** Against a FRESH collect at the end
+(5,800 / 5,314 / 46 / 3,238 dead ids) **11 of the 15 are still NEW dead nodes** — `c0_Y0989,
+c0_Y0993, c0_Y0995, c0_Y0996, c0_Y0997, c0_Y1002, c0_Y1131, k5_16_interior_Y0191,
+k5_16_interior_Y0281, k5_16_interior_Y0635, k5_16_interior_Y0663`, 7 trump5 and 4 k5_16, all level 1;
+the other four (`c0_Y0902, c0_Y0913, c0_Y0921, c0_Y0994`) were killed by A149 *while A167 was
+running*, which is why the number is re-derived at the end and not from the population snapshot.
+15/15 certificates PASS the independent checker. Kills sit on **trump5 BR(0,1) (10 of 66), k5_16
+BL(1,0) (4 of 54), trump5 TR(0,1) (1 of 48)** and nowhere else — zero on the other ten class×slot
+combinations, k5_11 included.
+
+**The negative half is the bigger result, and it answers A161's open question.** On 285 of the 416
+cells there is a piece of `B_H` on which EVERY one of the ~106 swept offsets is screened out, because
+the sample exhibits a FREE pose — avoiding every `K'`, the piece's fattened core included — that meets
+`int C` alongside `H`. That is a hard lower bound on the leaf's own counter (A159's C8 witness rule),
+so `n(b) >= 2` there and no budget changes it. Escalated on 60 cells to an EXACT rational two-crowd
+witness (two unit squares on a `1/10^6` grid, both inside `[0, s0]^2`, both meeting `int C`, interiors
+disjoint by an exact separating axis, both clear of the five pins, one a legal pose of `H`): **49 of
+60 certified**, which retires those cells for the whole lane-leaf family, not just for this leaf.
+**`c0_Y0169 / TL(0,0)`, the PI's case, is one of the no-goes**: `beta = 1` and `LANE_out = 0` hold as
+A161 reported, but on the pieces where `H` reaches the cell a free BAND pose survives at every offset
+(2-6 per 20,000 draws at split depth 5 on the good `x ≈ 0.729` lines), so the second half of the PI's
+sentence — "`H`'s corner leaves under 1 of width, so no band square fits" — is **false as stated**.
+A161's `LANE_band` cover was not under-budgeted; it had nothing to prove.
+
+**Two facts worth keeping.** (i) A lane cover that CLOSES closes in 0.6-1.2 s and one that does not
+grinds for as long as it is given, so breadth over offsets at a 2 s hard slice plus ONE 12 s retry on
+the offset that got closest beats any long single budget; the viability screen (one pose pool per
+piece, ~0.3 s, removing 50-100 of the 106 offsets) is what makes a depth-5 split affordable. (ii) In
+the conditional form a `witness` leaf citing the conditioned index must be checked against **the
+piece's box**, not `B_H` — on that branch the piece is the hypothesis and is the stronger obstacle;
+checking against `B_H` rejected all 15 genuine certificates until it was fixed.
+
+**Files.** `attempts/A167-condlane-pass/` (`BRIEF.md`; `code/{pop167,condlane2,runcond167,
+checkcond167,witness167,diag167,whydead,table167,recheck167,summarise167}.py`;
+`results/{pop.json,collector.json,collector_final.json,pass_s0.jsonl,pass_s1.jsonl,y0169.jsonl,
+nogo.jsonl,table.json,recheck.json,levers.json,checkcond.json,diag_*.json}`; `certs/cond_*.json`,
+`certs_nogo/nogo_*.json`; `notes/{leaf.md,table.md,doc_lines.md}`; `logs/`), plus the registry row,
+this entry, the A57 `PAUSED.md` v4 addendum, the A60 ledger section and one paragraph in
+`docs/residue_ledger.md` §1. Two BelowNormal processes at affinity `0xFFFF` throughout, the 16-process
+box ceiling counted before every launch (11-14 other lab pythons running); **~8,100 s of population
+pass + ~3,700 s of diagnostics, checking and witness search ≈ 3.3 CPU-h of the 4 CPU-h cap.**

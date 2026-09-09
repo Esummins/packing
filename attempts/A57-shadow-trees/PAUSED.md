@@ -564,3 +564,62 @@ exactly 1, `LANE_out = 0` certified on every piece reached — but the `LANE_ban
 where `H` reaches the cell did not close in any budget tried, so no kill and no certificate. It has
 not been run on the k5_16 NO-LINE / `M = 1` cells (94 at BL(1,0), 81 at TL(1,0), 84 at BR(1,0)) —
 that is the queued work, with the three levers listed in `notes/t3_table.md` §T8.
+
+### A167 fold-in (2026-09-09) — the CONDITIONAL chord-limited lane, POPULATION PASS (A161's queued work)
+
+`attempts/A167-condlane-pass/` (BRIEF.md, notes/{leaf.md,table.md,doc_lines.md},
+code/{pop167,condlane2,runcond167,checkcond167,witness167,diag167,whydead,table167,recheck167,
+summarise167}.py). A161 T8's conditional leaf was stated but never run over the population; this is
+that run, with A161's three queued levers and two more the measurement forced.
+
+**Population built FROM THE COLLECTOR, not from a snapshot** (A161's own lesson): a fresh
+`docs/shadows/status_gallery.py` collect (5,742 records / 5,258 kills / 46 sources / 3,214 dead ids
+at the start) intersected with A161's T3 rows gives **416 cells over 258 ALIVE A57/A60 nodes** — all
+of them `NO-LINE (beta + M >= 2 on every swept offset)` or `UNDECIDED` with `M = 1`, i.e. precisely
+the cells where `H` reaches the slot and the unconditional form can never fire. **All 416 were run**
+(2 × ~4,000 CPU-s at 60 s a cell, ~21 s a cell actual).
+
+| verdict | cells |
+|---|---|
+| `KILL` | **15** |
+| `NO-GO-witness` (every swept offset screened out by a sampled free meeter) | **285** |
+| `UNDECIDED-time` (60 s cell budget) | 116 |
+
+**Kills, by class × slot:** trump5 BR(0,1) 10, k5_16 BL(1,0) 4, trump5 TR(0,1) 1. Zero on k5_16
+BR(1,0)/BR(0,1)/TL(1,0)/TR(0,1)/TR(1,0), trump5 BL(0,2)/TL(0,0)/TR(1,0), k5_11 (both slots).
+**Re-checked against a FRESH collect at the end (5,800 / 5,314 / 46 / 3,238): 11 of the 15 are still
+NEW dead nodes** — `c0_Y0989, c0_Y0993, c0_Y0995, c0_Y0996, c0_Y0997, c0_Y1002, c0_Y1131,
+k5_16_interior_Y0191, k5_16_interior_Y0281, k5_16_interior_Y0635, k5_16_interior_Y0663` (7 trump5,
+4 k5_16, all level 1); the other four (`c0_Y0902, c0_Y0913, c0_Y0921, c0_Y0994`) were killed by
+**A149 while A167 was running**. **15/15 certificates PASS the independent checker**
+(`checkcond167.py`, which delegates a `chord_limited_lane_v1` certificate to A161's `checkcl.py`
+unchanged and adds E1–E9 for the conditional kind). Example cert
+`attempts/A167-condlane-pass/certs/cond_k5_16_interior_Y0663__BL1_0.json`, sha256 `8f7b3e1ad7c3e166…`.
+
+**Two additions to A161's leaf, both sound, both load-bearing** (piece accounting over the 15
+certificates, 121 pieces): the **per-piece guard row** — `minchord` is monotone under box inclusion,
+so putting the PIECE's box in the chord row is legitimate and often gives `beta = 0`, which kills the
+band with no cover at all (29 pieces, and all nine pieces of `c0_Y1131`) — and the **band-slab root**,
+`chord >= 1 => |v| <= f(1) = 1/2`, so the `LANE_band` cover runs over `centre_window ∩ {|v| <= 1/2}`
+(92 pieces closed `LANE_band = 0`). Every kill piece has `m = 1`.
+
+**The negative half is the bigger result.** 285 of 416 cells are NO-GO: on some piece of `B_H`,
+EVERY one of the ~106 swept offsets is screened out because the sample exhibits a FREE pose (avoiding
+every `K'`, the fattened piece core included) that meets `int C` — so the leaf's own counters are
+`>= 2` there and no budget can change it. Escalated on 60 cells with an EXACT rational two-crowd
+witness (`witness167.py`, `nogo_two_crowd_v1`: two unit squares on a `1/10^6` grid, both inside
+`[0, s0]^2`, both meeting `int C`, interiors disjoint by an exact separating axis, both clear of the
+five pins, one a legal pose of `H`): **49 of 60 certified**, which retires those cells for the WHOLE
+lane-leaf family (A159 C8 in exact arithmetic), by slot k5_16 BR(1,0) 16, trump5 BR(0,1) 14, k5_16
+TL(1,0) 13, k5_16 BL(1,0) 3, trump5 TR(0,1) 3.
+
+**Scheduling fact worth keeping** (`logs/diag_y0169_d*.log`): a lane cover that CLOSES closes in
+0.6–1.2 s and one that does not grinds for as long as it is given, so breadth over offsets at a
+2 s hard slice plus ONE 12 s retry on the offset that got closest beats any long single budget — and
+the viability screen (which costs one pose pool per piece, ~0.3 s, and removes 50–100 of the 106
+offsets) is what makes the deep split affordable at all.
+
+**One checker correction worth propagating:** in the conditional form a `witness` leaf citing the
+conditioned index must be verified against **the piece's box**, not `B_H` — on that branch the piece
+IS the hypothesis, and it is the strictly stronger obstacle. Checking against `B_H` rejects every
+genuine certificate (15/15 FAIL before the fix, 15/15 PASS after).

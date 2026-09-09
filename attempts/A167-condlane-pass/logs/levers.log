@@ -1,0 +1,40 @@
+== piece accounting over all A167 kill certificates ==
+   m=1, beta=1, band cover closed LANE_band=0                   92
+   m=1, per-piece beta=0 (no band cover needed)                 29
+
+== per certificate ==
+c0_Y0902                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+c0_Y0913                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+c0_Y0921                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+c0_Y0989                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 4, 'm=1, per-piece beta=0 (no band cover needed)': 4}
+c0_Y0993                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 4, 'm=1, per-piece beta=0 (no band cover needed)': 4}
+c0_Y0994                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+c0_Y0995                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+c0_Y0996                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+c0_Y0997                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 4, 'm=1, per-piece beta=0 (no band cover needed)': 4}
+c0_Y1002                           BR(0,1)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+c0_Y1131                           TR(0,1)   L1  pieces=9   {'m=1, per-piece beta=0 (no band cover needed)': 9}
+k5_16_interior_Y0191               BL(1,0)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+k5_16_interior_Y0281               BL(1,0)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 4, 'm=1, per-piece beta=0 (no band cover needed)': 4}
+k5_16_interior_Y0635               BL(1,0)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 4, 'm=1, per-piece beta=0 (no band cover needed)': 4}
+k5_16_interior_Y0663               BL(1,0)   L1  pieces=8   {'m=1, beta=1, band cover closed LANE_band=0': 8}
+
+== c0_Y0169 (the PI's node) ==
+c0_Y0169 BL(0,2) -> NO-GO-witness  pieces 5 (done 0, open 5, nogo 3)  13.8 s
+   first no-go piece '11110' (m=1): all 53 swept offsets screened, min free meeters over offsets = 1
+      {"orient": "v", "off": "20833/1000000", "beta": 1, "outside_free": 1, "band_free": 0, "why": "free outside pose => LANE_out >= 1"}
+      {"orient": "v", "off": "20833/500000", "beta": 1, "outside_free": 1, "band_free": 0, "why": "free outside pose => LANE_out >= 1"}
+      {"orient": "v", "off": "1/16", "beta": 1, "outside_free": 0, "band_free": 1, "why": "free band pose and beta >= 1 => min >= 1"}
+c0_Y0169 TL(0,0) -> NO-GO-witness  pieces 2 (done 1, open 1, nogo 1)  1.2 s
+   first no-go piece '1101' (m=1): all 106 swept offsets screened, min free meeters over offsets = 5
+      {"orient": "h", "off": "20833/1000000", "beta": 2, "outside_free": 5, "band_free": 0, "why": "free outside pose => LANE_out >= 1"}
+      {"orient": "h", "off": "20833/500000", "beta": 2, "outside_free": 3, "band_free": 2, "why": "free outside pose => LANE_out >= 1"}
+      {"orient": "h", "off": "1/16", "beta": 2, "outside_free": 2, "band_free": 3, "why": "free outside pose => LANE_out >= 1"}
+
+== exact two-crowd witnesses: 49 of 60 attempted ==
+   k5_16    BR(1,0)    16
+   trump5   BR(0,1)    14
+   k5_16    TL(1,0)    13
+   k5_16    BL(1,0)     3
+   trump5   TR(0,1)     3
+   example c0_Y0690 BR(0,1): H = ['83/50', '756729/500000', '455583/1000000'], F = ['620403/1000000', '1159661/500000', '20167/500000'] (gap 0.1062, den 1000000)

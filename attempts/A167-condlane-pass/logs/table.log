@@ -1,0 +1,44 @@
+# A167 -- the conditional chord-limited lane, population pass
+
+Population (built from the collector: 5742 records, 5258 kills, 46 sources, 3214 distinct dead node ids): **416 cells** over **258** alive A57/A60 nodes.
+
+Cells RUN: **416** of 416.
+
+| verdict | cells | meaning |
+|---|---|---|
+| `KILL` | 15 | every piece of `B_H` closed: `n(b) <= 1` everywhere, the node is DEAD |
+| `NO-GO-witness` | 285 | some piece has NO viable guard offset -- a sampled free meeter forces the leaf's own counters to `>= 2` at every swept offset |
+| `UNDECIDED-time` | 116 | the 60 s cell budget ran out with covers unresolved |
+
+## By class x slot (population cells in the last column)
+
+| class | slot | run | KILL | NO-GO | UNDEC | in population |
+|---|---|---|---|---|---|---|
+| trump5 | BR(0,1) | 66 | **10** | 36 | 20 | 66 |
+| k5_16 | BL(1,0) | 54 | **4** | 18 | 32 | 54 |
+| trump5 | TR(0,1) | 48 | **1** | 34 | 13 | 48 |
+| k5_16 | BR(1,0) | 47 | **0** | 33 | 14 | 47 |
+| k5_16 | BR(0,1) | 38 | **0** | 32 | 6 | 38 |
+| trump5 | BL(0,2) | 36 | **0** | 28 | 8 | 36 |
+| k5_16 | TR(0,1) | 35 | **0** | 25 | 10 | 35 |
+| k5_16 | TL(1,0) | 31 | **0** | 30 | 1 | 31 |
+| k5_16 | TR(1,0) | 29 | **0** | 26 | 3 | 29 |
+| trump5 | TL(0,0) | 16 | **0** | 8 | 8 | 16 |
+| k5_11 | BR(0,1) | 6 | **0** | 5 | 1 | 6 |
+| trump5 | TR(1,0) | 6 | **0** | 6 | 0 | 6 |
+| k5_11 | TL(1,0) | 4 | **0** | 4 | 0 | 4 |
+
+## Overlap with the collector's dead set
+
+| | nodes |
+|---|---|
+| kill nodes (distinct) | 15 |
+| already dead per the collector | 0 |
+| **distinct NEW dead nodes** | **15** |
+
+NEW: `c0_Y0902, c0_Y0913, c0_Y0921, c0_Y0989, c0_Y0993, c0_Y0994, c0_Y0995, c0_Y0996, c0_Y0997, c0_Y1002, c0_Y1131, k5_16_interior_Y0191, k5_16_interior_Y0281, k5_16_interior_Y0635, k5_16_interior_Y0663`
+
+## Exact two-crowd witnesses (`nogo_two_crowd_v1`)
+
+60 NO-GO cells escalated, **49** carry an EXACT rational two-crowd witness (both squares inside the container, both meeting `int C`, interiors disjoint, clear of all five pins, one a legal `H` pose) -- those cells are RETIRED for the whole lane-leaf family; the rest are no-go only at the split depth reached.
+
