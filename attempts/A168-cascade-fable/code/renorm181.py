@@ -282,7 +282,7 @@ def main():
     ap.add_argument("--steps", default="")
     ap.add_argument("--max_nodes", type=int, default=0)
     ap.add_argument("--depth", type=int, default=2)
-    ap.add_argument("--reuse176", type=int, default=1)
+    ap.add_argument("--reuse176", type=int, default=0)   # A176 records carry the sliver pieces: not reused
     ap.add_argument("--sample", type=int, default=2)
     a = ap.parse_args()
     sys.exit({"run": stage_run, "status": stage_status}[a.stage](a) or 0)

@@ -81,10 +81,22 @@ def mbox_to_pieces(mb, old_pieces):
         cands = [q for (a, b, q) in rng if a <= bn.t0 and bn.t1 <= b]
         if len(cands) != 1:
             cands = old_pieces
+        # A181: the survivor descends from exactly ONE old piece (every library split is nested), and
+        # its exact rect lies inside that host; the outward float rounding reaches into the host's
+        # NEIGHBOURS only by ~1e-12 slivers.  Keeping those slivers (A175/A176: every candidate was
+        # intersected) multiplied the piece count ~10x per level (root/D0/S0/B10: H 908 pieces of
+        # which 881 slivers) and cost 4/5 of a node's wall in per-piece K' builds.  Only the host --
+        # the candidate with the LARGEST intersection -- is kept: host ∩ pb ⊇ the exact survivor [T].
+        best, bv = None, None
         for q in cands:
             x = inter(pb, q)
-            if x is not None:
-                out.append(x)
+            if x is None:
+                continue
+            v = R.vol(x)
+            if bv is None or v > bv:
+                best, bv = x, v
+        if best is not None:
+            out.append(best)
     return out
 
 
