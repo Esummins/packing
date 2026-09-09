@@ -916,3 +916,217 @@ works where every single-square move fails (nine corners); below 4 every hold is
 ≈ 0. The non-rigid field (A130, Lemma BOX-FIELD-W) certifies the 4.001525 lock at all eight intruders; the
 three window holds are mode accumulations at the flush stratum (Lemma MODE), not locks, and are k ≥ 1
 packings above ŝ, so they cost DRAIN-SEL(W) nothing. None of this is composed into a node kill.
+
+---
+
+## 7. The k0 route: the empty class
+
+k0_00 is the class of packings with no square exactly on a corner slot — open and dense in configuration
+space (its complement has codimension 3), containing the rigid rotations of ẑ by |φ| ≤ 1.06·10⁻⁷ at side
+≤ s0 [T]. Its monotone hypothesis is vacuous (no pins), so it is the unstratified problem: the root LP has
+no slack at any side (η = 0.000 at 3.833, A82), the interior-first tree does not decide at level 1 and decides
+at depth 2 at ≈ 0.5–0.9 CPU-h per node (A85), and every count-based route (FJ census, frame census) loses on
+the count. The route below replaces the volume tree by two theorems and a residue.
+
+### 7.1 The two forms of the obligation
+
+**Theorem DF-K0 [T] (`docs/proofs/drain_flow_k0.md`).** A global σ-minimiser (D1) is a Fritz-John point of
+every selection consistent with it (D3′, no constraint qualification); so "no k0 configuration with σ ≤ ŝ is
+FJ-critical" (H1) implies `StratumKillMin {k0_00}`, with no flow, no induction and no selection. But H1 is
+`drain_lemma.md`'s T3 exclusion restricted to k0, which prunes nothing at cell level: measured dead as a
+coordinate-cell cover (0 of 74 σ-feasible cells excluded at any width; 10⁶³ cells at h = 10⁻²) [M]. The
+∀-packings form is what the tree route needs and what the teleport gives.
+
+### 7.2 K0-FREE: the teleport reduction to k1_00
+
+**Lemma K0-FREE [L modulo K0-O1] (`Slide.k0free_kill`; prose `docs/proofs/k0_route.md` §3).** Let P be a
+packing at side m ∈ [3.82, ŝ] and c a corner such that at most one square of P meets int B_c(m). Replacing
+that square (or any square) by the slot square B_c(m) gives a packing at side m containing a corner slot
+square (`teleport_packing`), hence one satisfying k1_00's monotone hypothesis. So: **(K0-O1)** if k1_00's
+tree is closed on the window — (k1-a) no packing at m < ŝ contains a corner slot square, (k1-b) every
+packing at ŝ containing one is a Trump image — then P does not exist for m < ŝ, and at m = ŝ P agrees with a
+Trump image except in one square, so P is that image by Theorem U. **K0-O1 is the single dependency of every
+k0 statement** and is itself one of the protected P-TREE campaigns (§3.6; k1_00 has three Trump images,
+tube reach 0.1305 ≥ the whole window) [P].
+
+**Corollary (the residual root) [T].** Every packing at m ∈ [3.82, ŝ] that is not a Trump image is
+**K0-BLOCKED**: every corner box is met by two distinct squares. By K0-WIDEN the dilate F has, at each
+corner, two distinct squares meeting the widened box B_c^w(s0); the four pairs are disjoint sets (the
+widened boxes are s0 − 2(1 + w) − √2 = 0.412 > 0 apart, R6), so **eight distinct squares of F are localised
+to the four corner reach sets and at most three are free** [T] (Lemma K0-BLOCKED, `k0_route.md` §4.2).
+
+**Lemma K0-D4 [T]; instance `d4_wlog` [L].** A zone tree for a D4-invariant root hypothesis need only be
+built below one representative child per D4-orbit; verdicts transport ((K)/(C) are invariant, (T) and (D)
+by the corner and image maps). With Theorem A38.1 (every 11-packing at s0 has a square centred in
+[11/10, s0 − 11/10]², certified [C]) the interior-first root is A27's 216 cells of the fundamental triangle
+× [0°, 90°].
+
+**Lemma K0-PAIR [T]+[M].** The two-crowd configuration space at a corner has nonempty interior in the
+6-dimensional pose space and contains same-sense tilted pairs (explicit exhibit at tilts 40° and 30°, SAT gap
+0.044; 32 % of 33 656 surviving pair boxes are same-sense), so **K0-BLOCKED has no finite exact case list**;
+the PI/advisor prune "a 2-crowd is a mixed-sign V or contains an axis-aligned blocker" is FALSE as a local
+statement [F]. At most one member of a corner 2-crowd of the *unit* box is axis-aligned (K0-PAIR (a)).
+
+**Lemma K0-ATLAS [L] (`atlas_dilated_kill_fold`).** If all eleven squares of F lie in an atlas box with
+certified σ ≥ V ≥ s0 then no packing at any side m < s0 reaches the node: the dilate has strictly positive
+wall margins, so σ(F) < s0. 48 of 49 A37/A85 boxes (including the 12 k0 "ghost" drains at s0 + 0.0101…0.0116)
+are replayed with L ≥ s0 at about half A37's radius [L].
+
+### 7.3 K0-BLOCKED: the doubly-met corner, crowding and the chain
+
+**Theorem CEIL [L] (`Ceil.ceil`, `ceil_packing`; prose `docs/proofs/k0_blocked_side.md` §2.1).** Two
+interior-disjoint unit squares in a quadrant satisfy max(μ(A), μ(B)) ≥ 1/(cos α + sin α) ≥ 1/√2, α the angle
+of a separating line (Wedge Lemma: a unit square inside {y ≥ 0, y ≤ (x − x₀) tan α} has min x ≥ x₀ +
+cos²α/sin α). So at every corner min(d₁, d₂) ≤ 1 − 1/√2 = 0.292893, with equality only for the diagonal 45°
+pair. Consequence: the pair charge (stranded corner area) is ≤ 1, so 4 × charge ≤ 4 < E(ŝ) = 4.0318 — area
+alone never closes the substantive case at any depth [T].
+
+**Lemma B-YES [L] (`scaleC_meets_cornerBox`).** If Q ∈ P meets [0, a]² at c then Δ_λ Q meets
+[0, λa + (λ − 1)/√2]²: the crowd hypothesis transfers to s0 with a pad; a_w < 1 iff δ > 0.4403·(s0 − m_lo).
+
+**Lemma CW (crowd-weighted certificate) [L] (`Crowd.crowd_sound`, `crowd_cert_kill`,
+`crowdKill_of_files`).** Let μ be one atomic measure and e > 0 with 8e ∈ ℤ. Run A: a case-LP PASS with
+n = 11 + 8e, no cores, no NO-families (μ(Q) ≥ 1 for every admissible Q, total < 11 + 8e). Run B: the same
+atoms with weights w/(1 + e) and NO-families forming an inner cover E of the complement of the crowd family
+G ⊇ ⋃_c F_c(a_w) (μ(Q) ≥ 1 + e for every Q ∉ E). Then no family of 11 disjoint closed squares has, at every
+corner, two members in F_c(a_w): the eight crowd members cost ≥ 1 + e each, the three others ≥ 1, total
+≥ 11 + 8e > μ(total). Both runs are the frozen verifier; `sameMeasure` and `crowdZones` (run B's zones avoid
+the crowd family at every corner) are decidable checks [L]. The brief's "8-core leaf" does not exist: the
+depth-δ pose set has empty core for δ < 0.134 [T].
+
+**Theorem S(0.3) [C] (`certs/runA_S_d0.3_e1_v2.json`, `runB_S_d0.3_e1_v2.json`, both PASS under
+`521cb01f…`).** No K0-BLOCKED packing at any side of [3.82, s0) has every corner's second intruder at depth
+≥ 0.3. With CEIL the certificate covers exactly δ ∈ [0.3, 0.2929]: the near-diagonal crowds. δ = 0.2 is OPEN
+(the 900-s LP value 18.10 < 19 is an unconverged lower bound; run B has 65 holes inside the family), δ ≤ 0.1
+is dead at the LP level (the fractional adversary puts all eleven squares in the crowd family) [M].
+
+**Lemma SLIDE [L modulo K0-O1] (`Slide.slide_crowd`; prose `k0_blocked_side.md` §3.1, corrected by
+`slot_crowds.md` §3.4).** Every packing at side m ∈ [3.82, ŝ) has, at every corner, two distinct squares at
+depth ≥ ŝ − m: translate the shallow intruders' retreat clusters diagonally (rate exactly 1/√2 in depth per
+1/√2 of side) letting the container grow, then teleport. **Correction of record [F→T]:** A92's sequential
+proof gives only the *sum* bound Σ_{i ≥ 1} d_i ≥ ŝ − m; the d₂ bound needs the *joint* translation of all
+shallow intruders (A94 §3.4); the Lean proof translates the whole packing and needs no clusters at all.
+
+**Theorem N (the chain) [L] (`Composition.theoremN_slab`, `chain_cover`, `s_eleven_ge_of_chain`,
+`classKilledAt_of_chain`).** K0-O1 + a crowd certificate C(δ, m_lo) exclude every packing at every side
+m ∈ [m_lo, ŝ − δ] (K0-FREE or K0-BLOCKED with min_c d₂ ≥ ŝ − m ≥ δ); a chain m₁ = 3.82, m_{k+1} ≤ ŝ − δ_k
+gives s(11) ≥ ŝ − δ_K, class-blind, and leaves the **named residue RES-N(δ_K)**: K0-BLOCKED packings at side
+m ∈ (ŝ − δ_K, ŝ] with some second intruder at depth in [ŝ − m, δ_K), plus the non-image K0-BLOCKED packings
+at ŝ (uniqueness). The chain converges with ratio 0.4403 but stops where the crowd LP stops passing: **δ_∞ ≥
+0.2 as measured — no crowd certificate beyond δ = 0.3 has been delivered [P/blocked]**, so the chain removes
+no side of the window today and RES-N is essentially all of K0-BLOCKED on W.
+
+### 7.4 The selected forms and what refutes them
+
+Several theorems hold for a *selected* minimiser only (they use minimality, not criticality): **NOCRIT-SEL
+[T]** (at a Ψ-minimal σ-minimiser every intruder's retreat cluster is wall- or intruder-anchored; Lemma K
+retreat trichotomy, Lemma CLUSTER: rows affine in the centres so a cluster translation is an exact packing),
+**TF-U [T]** (at a Φ-minimal minimiser every square has tilt exactly 0 or is flush-locked, Lemma LOCK by
+Gordan), **ROT / ROT-W [T]** (every intruder is held against single-square screws / weak translations),
+**K0-ROT [T]** (rotation stationarity with the exact centre-height term — the one-line form "extremal wall
+contacts cannot all be tilted the same way" holds only for single same-height contacts [F]), **Lemma
+BLIND [T]** (an FJ certificate is blind to unloaded squares, so the FJ form of NOCRIT is the wrong statement).
+Their residue is a **locked frame** RES-LOCK: K0-BLOCKED packings at which every intruder is held; the
+statement that would finish, **Conjecture LOCK-FREE⁺(< 4)**, is [S]: true on the whole corpus (0 of 12
+strictly blocked packings on disk, and 0 of 443 descent endpoints below 4, are fully held; the first
+fully-held packing is at 4.000237, A104), true at Trump in the only way it can be (Trump is K0-FREE and every
+one of its intruders *is* held), and its one-wall lemma is FALSE [F] (the mixed β–α hook pair at side
+2 + f(θ) + …, f(θ) = (2 − sin θ)/cos θ + tan(θ/2) < 2 on (0°, 30°); the 3.98548 record is exactly this at
+18.93°, `writeup/figures/hookwall105.svg`). DRAIN-SEL(W) (`docs/proofs/drain_sel.md`) states the weakest
+form the composition consumes — one packing per side, W only, a menu of moves — and is [C] open; its
+uniqueness branch through an exchange needs a two-square form of Theorem U [C]. Theorem NOROOM-LOCAL [T]:
+no packing within η₀ of a Trump image at side ≤ ŝ + ε₀ is K0-BLOCKED (ε₀ unquantified; circular for the
+window). Nothing in this family is on the critical path; the selected re-split of `stratum_kill` [L] is
+ready if a selected leaf is ever used.
+
+### 7.5 The corner-first and product roots: measured dead
+
+Rooting the k0 tree on the BL corner meeter instead of an interior square is a sound cover (216 cells, D4
+quotient /2) whose single-intruder geometry kills 0 of 216 (the lane leaf cannot fire when the conditioned
+square is itself a meeter) and whose doubly-met form empties 82 % of 11 772 pair cells but buys no LP slack
+(η ≈ −0.08 at budget 9 against the interior root's median −0.73) [M, A143]. Conditioning on all four corners
+(budget 7) buys a whole unit of slack (median η −1.0, 7/13 converged kills, 4 certified) but the band is not
+narrow (206 of 216 cells) and the product is priced out (≥ 4·10⁵ CPU-h; slab-wise ≥ 5·10⁶) [M, A150, A155];
+the pad w_max is a 2 % effect on the band [M]. The counting row R6 ("≥ 8 of 11 squares meet a corner box")
+is A115's d0 row verbatim and kills nothing — η rises under it in 23/23 runs [M, A154]. The nearest-corner
+sub-tree hung under an interior node needs a degenerate budget-9 branch (a corner meeter can *be* H: Trump's
+g4 image has sq9 = H as a TR meeter) and saves nothing (≈ 560 CPU-h at level 1 against the row's 12 000)
+[M, A166]. **What survives of all of it:** four conditioned corner squares buy LP slack where a node already
+carries them, and the certified fact that on l1_104 M(c) = 0 at all four corners — every corner crowd is two
+*free* squares.
+
+### 7.6 The sideband and requirement lemmas (A169; `docs/proofs/sideband.md`) — any n
+
+**Lemma A1 [L] (`Sideband.linf_sep`).** Two interior-disjoint unit squares have centres at ℓ∞-distance
+≥ 1/√2 (SAT axis + Cauchy–Schwarz); sharp for two 45° diamonds sharing an edge.
+
+**Lemma A2 / SIDEBAND (a) [L] (`distinct_cells`, `not_both_ne`, `sideband_a`).** For ½ ≤ c < ½ + 1/√2,
+two interior-disjoint squares in the quadrant both meeting the open box (0, c)² have centres in two
+*different* cells of the 2 × 2 grid {x < c, x ≥ c} × {y < c, y ≥ c}; in particular not both centres lie in
+[c, ∞)² (this part needs no quadrant and no bound on c). The constant is c itself (1 for the unit box,
+1 + w = 1.025510 for the widened box), sharp. **FALSE forms [F]:** "within 1 of a wall" for the widened box
+(two 45° diamonds at (1.01, 1.7226) and (1.7226, 1.01), SAT gap 0.0078); "the other centre lies outside the
+band" (Q₁ = [0.1, 1.1] × [0, 1] and a 2.866°-tilted Q₂ at (0.5244, 1.5220), both x < 1). On the window the
+band on F is x < λ_max = 1.014944, which beats 1 + w.
+
+**Theorem B (REQUIREMENT) [T; Lean stated as `SecondMeeterCriterion` [C], clause (P)
+`clauseP_second_meeter` proved].** For c ≥ 1 and a square Q₁ in the quadrant meeting (0, c)² with support
+function h, a second meeter exists iff one of (NE) ∃α: h(n_NE(α)) < c(cos α + sin α); (W) ∃ζ:
+h(n_W(ζ)) < c cos ζ − sin²ζ; (S) the mirror; (P) the pressed square [0, 1]² is weakly separated from Q₁ by
+a line through (1, 1) (vacuous at c = 1). The (⇒) direction rests on two piecewise-concave support
+inequalities (wedge: w(φ) − (cos ζ − sin ζ) w(ζ + φ) ≥ 2 sin²ζ; triangle: (cos γ + sin γ) w(ψ) + w(ψ − γ)
+≥ 2(cos γ + sin γ)). Corollaries [T]: a *pressed* first meeter (touching both walls) admits no second meeter
+of the unit box at any tilt; the slide threshold along a wall is exactly tan(θ/2) up to θ* = 56.76° and a
+crossing mode beyond; the tilt-0 law a = u(2 − u²), F = u²√(1 − u²); for the widened box the pressed square
+admits a partner iff cos θ + sin θ < c + √(c² − 1), i.e. θ < 17.35° or θ > 72.65°. The two-meeter atlas's
+thresholds 0.18/0.34/0.38/0.56/0.64/0.72 were pitch artefacts [M]; the true unit-box values are
+0/0.1317/0.2679/0.4142/0.5727/0.6302.
+
+**Consumption (rows for the cascade).** R1: a pair of crowd boxes in one cell, or at ℓ∞ centre distance
+< 1/√2, is pruned. R2: the corner case splits into six cell pairs; the band meeter is priced by the chord row
+on the wall it hugs, the NE meeter is confined to the quarter-disc of radius 1/√2 at the box corner. R3, the
+**lonely NO-family** [T]: in a K0-BLOCKED family no square is in a lonely pose at any corner (it would be the
+corner's only meeter at the widened box; K0-WIDEN + K0-FREE); the box test is three one-parameter checks
+(quartics in tan(ζ/2), Bernstein) plus (P) by the clip against the pressed square; the lonely set is 54–74 %
+of widened meeter poses at every tilt [M].
+
+### 7.7 The coexistence cut and the cascade (A168, A174, A175)
+
+**Coexistence [T] (A174.1).** A first meeter X at a corner is a valid hypothesis only on the poses admitting
+a second meeter of the widened box: per piece of X, the partner window is covered with the node's roles as
+obstacles (fewer obstacles ⇒ a superset of every child's partner poses, so reuse is sound); an open box that
+passes R3 and R1 and re-normalises with X in the piece is a coexistence witness; a piece with none is
+dropped, and the cut propagates to every descendant (the descendant's hypothesis is contained in the
+ancestor's). The **lonely clip** (A173) makes R3 a per-piece clip inside the invariant library (sound because
+the box test is monotone under shrinking).
+
+**The cascade (PI's construction, `attempts/A168-cascade-fable/notes/cascade.md`).** On a k0 cell with
+conditioned interior square H and M(c) = 0 at all four corners: (1) the TR corner square D; (2) the second
+TR meeter S, limited by D, which presses H down-right (re-clip H against K′(D), K′(S)); (3) B, the right-wall
+square under H = BR's deep meeter, whose partner can come only from the (left, floor) cell of the BR grid;
+(4) BR's second meeter; (5) the left corners if needed — every step a role placed by a complete cover, every
+node normalised to the fixed point (§5.9) with the lonely clip and the coexistence cut at all four corners,
+chord rows and lanes re-emitted from the grown cores, and the multi-box LP (budget 11 − #roles, exact cores,
+A170's exact-core emitter, frozen verifier) only at nodes whose geometry has reached the fixed point.
+**Status [P]:** A165 (Opus) was killed for drawing unclipped boxes; A168 (Fable) built the tree and was caught
+clipping against axis cores only (kept H 1.00 on a node the polygon clip kills outright); A175 is re-normalising
+every recorded node with the polygon obstacles and continuing the PI's order. **No k0 cell has been killed by
+the cascade yet**; the certified pieces are the corner counts M(c) = 0, the wall-row product as a 5 %
+pre-filter, Lemma (TOP) (nothing lies entirely beyond a guard line within 1 of a wall unless within 1.48° of
+an axis), the spread-core LP slack (τ = 5 = budget − 1 with one meeter box per corner on l1_104, one PASS,
+the canary alive at η = +0.73), and the rule "spend conditioning budget on cores pairwise far apart, never on
+a second core at a corner that already has one" [M, A165/A170].
+
+### 7.8 The eleven cells and the price
+
+After A115's warm re-solves (22 of 216 level-1 cells + 13 level-2 + 2 level-3 + 10 deeper nodes certified,
+29.8 CPU-h) and the polygon-core leaves, the converged-alive k0 residue is **eleven cells** (l1_071, 104,
+124, 148, 153, 158, 159; l2_p114_001, l2_p65_101, l2_p65_111, l2_p74_001; s3_far is dead by PAIR): τ =
+budget exactly, minmass 1, converged — no LP time kills them. One of them, l1_153, is exactly Trump's g4
+image's interior tilted square sq9 (pose distance 0.0000) and must survive every leaf: it is the cascade's
+canary. Their supports are mostly "room" (K01) or partial skeletons of near-critical shadows, not
+near-critical grains [M, A107/A113]. The tree route is priced at 9 400–12 000 CPU-h (`docs/budget.md`); the
+theorem route (LOCK-FREE⁺ or DRAIN-SEL) at 0 if proved and nothing has been proved; the cascade's price is
+unmeasured until the first cell dies. Uniqueness at ŝ for the k0 branch is carried by K0-FREE + Theorem U
+(the K0-FREE branch) and by the (D) landings in the tube (the K0-BLOCKED branch), exactly as for the other
+classes — no k0_00 packing exists at ŝ once the tree closes (`k0_route.md` §6).
