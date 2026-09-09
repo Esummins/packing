@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-08 17:31` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-08 19:52` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -11,7 +11,7 @@ python docs/shadows/status_gallery.py --dry-run  # print the plan, write nothing
 
 ## Residue left
 
-Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 57 alive / 3 dead; behind them the A57 tree still owes work on **406 nodes** (attempts/A57-shadow-trees/PAUSED.md §B, v3: 632 -> 406 after the fold-in and the exact-core re-emission), out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
+Of the 71 gallery pages the PI reviews, **65 are still ALIVE and 6 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 54 alive / 6 dead; behind them the A57 tree still owes work on **406 nodes** (attempts/A57-shadow-trees/PAUSED.md §B, v3: 632 -> 406 after the fold-in and the exact-core re-emission), out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
 
 ## Counts
 
@@ -20,8 +20,8 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 | gallery | pages | ALIVE | DEAD |
 |---|---|---|---|
 | `k0v4` | 11 | 11 | 0 |
-| `a57v4` | 60 | 57 | 3 |
-| **total** | **71** | **68** | **3** |
+| `a57v4` | 60 | 54 | 6 |
+| **total** | **71** | **65** | **6** |
 
 ### By family (A107/A128 shadow family of the page's panel N)
 
@@ -33,7 +33,7 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 | `K05` | 1 | 0 |
 | `K06` | 1 | 0 |
 | `K20` | 1 | 0 |
-| `S01` | 26 | 0 |
+| `S01` | 23 | 3 |
 | `S02` | 8 | 1 |
 | `S03` | 11 | 0 |
 | `S05` | 1 | 0 |
@@ -50,8 +50,8 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 
 | attempt -- leaf | pages killed |
 |---|---|
-| A149 -- case-measure-certificate-v1 (exact cores, FROZEN verify_case) | 1 |
-| A149 -- case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | 1 |
+| A149 -- case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed) | 3 |
+| A149 -- case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | 2 |
 | A57 tree -- PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1) | 1 |
 
 ## Checklist -- `k0v4`: the k0 residue gallery v4 (converged-alive k0_00 cells)
@@ -74,9 +74,12 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 
 | page | node | class | level | family | status | leaf | attempt | date | subtree cost (CPU-h, A142 rank) |
 |---|---|---|---|---|---|---|---|---|---|
+| [x] [`c0_Y0939.svg`](killed/c0_Y0939.svg) | `c0_Y0939` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 5) |
+| [x] [`c0_Y0942.svg`](killed/c0_Y0942.svg) | `c0_Y0942` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 6) |
+| [x] [`c0_Y1038.svg`](killed/c0_Y1038.svg) | `c0_Y1038` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 9) |
 | [x] [`k5_11_interior_Y0275.svg`](killed/k5_11_interior_Y0275.svg) | `k5_11_interior_Y0275` | `k5_11` | 1 | `none` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 16) |
 | [x] [`k5_16_interior_Y0083.svg`](killed/k5_16_interior_Y0083.svg) | `k5_16_interior_Y0083` | `k5_16` | 1 | `S02` | **DEAD** | PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1) | A57 tree | 2026-09-01 | 4.53 (rank 3) |
-| [x] [`k5_16_interior_Y0275.svg`](killed/k5_16_interior_Y0275.svg) | `k5_16_interior_Y0275` | `k5_16` | 1 | `S11` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 24) |
+| [x] [`k5_16_interior_Y0275.svg`](killed/k5_16_interior_Y0275.svg) | `k5_16_interior_Y0275` | `k5_16` | 1 | `S11` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 24) |
 | [ ] [`c0_Y0076.svg`](c0_Y0076.svg) | `c0_Y0076` | `trump5_j0` | 1 | `S02` | **ALIVE** | -- | -- | -- | 2.88 (rank 17) |
 | [ ] [`c0_Y0169.svg`](c0_Y0169.svg) | `c0_Y0169` | `trump5_j0` | 1 | `S38` | **ALIVE** | -- | -- | -- | 2.88 (rank 19) |
 | [ ] [`c0_Y0171.svg`](c0_Y0171.svg) | `c0_Y0171` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 20) |
@@ -89,12 +92,9 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 | [ ] [`c0_Y0695.svg`](c0_Y0695.svg) | `c0_Y0695` | `trump5_j0` | 1 | `S02` | **ALIVE** | -- | -- | -- | 2.88 (rank 15) |
 | [ ] [`c0_Y0787.svg`](c0_Y0787.svg) | `c0_Y0787` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 4) |
 | [ ] [`c0_Y0788.svg`](c0_Y0788.svg) | `c0_Y0788` | `trump5_j0` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 12) |
-| [ ] [`c0_Y0939.svg`](c0_Y0939.svg) | `c0_Y0939` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 5) |
-| [ ] [`c0_Y0942.svg`](c0_Y0942.svg) | `c0_Y0942` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 6) |
 | [ ] [`c0_Y0952.svg`](c0_Y0952.svg) | `c0_Y0952` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 11) |
 | [ ] [`c0_Y0959.svg`](c0_Y0959.svg) | `c0_Y0959` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 7) |
 | [ ] [`c0_Y1033.svg`](c0_Y1033.svg) | `c0_Y1033` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 8) |
-| [ ] [`c0_Y1038.svg`](c0_Y1038.svg) | `c0_Y1038` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 9) |
 | [ ] [`f1_L10_0003.svg`](f1_L10_0003.svg) | `f1_L10_0003` | `trump5_j0` | 1 | `S07` | **ALIVE** | -- | -- | -- | 2.88 (rank 10) |
 | [ ] [`k5_11_interior_Y0130.svg`](k5_11_interior_Y0130.svg) | `k5_11_interior_Y0130` | `k5_11` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 12) |
 | [ ] [`k5_11_interior_Y0147.svg`](k5_11_interior_Y0147.svg) | `k5_11_interior_Y0147` | `k5_11` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 39) |
@@ -139,7 +139,10 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 
 * `k5_16_interior_Y0083` (tree tag `k5_16_interior_L1`) -- direct kill record, **A57 tree** by `PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1)`; certificate `attempts/A57-shadow-trees/certs/tree/k5_16_interior_L1/k5_16_interior_Y0083.json`; attributed by *the record's own tree jsonl (tag is the file)*; 1 record(s) agree.  **An id is not a node (A137 §C.3): the `k5_16_interior_G1` node of this id is still ALIVE** -- only the `k5_16_interior_L1` node is dead, and this page was drawn from the `k5_16_interior_L1` record.
 * `k5_11_interior_Y0275` (tree tag `k5_11_interior_G1`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/k5_11_interior_Y0275__exall.json`; attributed by *prior tau matched the tree record*; 2 record(s) agree.
-* `k5_16_interior_Y0275` (tree tag `k5_16_interior_G1`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/k5_16_interior_Y0275__exall.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
+* `k5_16_interior_Y0275` (tree tag `k5_16_interior_G1`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/k5_16_interior_Y0275__exall.json`; attributed by *prior tau matched the tree record*; 2 record(s) agree.
+* `c0_Y0939` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0939__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
+* `c0_Y0942` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0942__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
+* `c0_Y1038` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the conditioned square's core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y1038__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 
 **Review-sheet flag.** 1 page(s) in `review_a57v4.csv` carry `eta < 0` (that is `tau < budget`, a kill) while the review sheet's `verdict` column says `ALIVE-at-LP`: `k5_16_interior_Y0083` (tau 4.500000000, budget 5, eta -5.000e-01, now **DEAD**).  The `verdict` column is stale for these; the status above is taken from the campaign records, not from that column.
 
@@ -151,11 +154,13 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 | `A137 clipkills137.jsonl` | 159 | 159 |
 | `A140 exactcore140.jsonl` | 12 | 1 |
 | `A141 polycore_lane_kills.jsonl` | 293 | 293 |
-| `A149 a60_reemit_g0.jsonl` | 11 | 0 |
-| `A149 a60_reemit_g1.jsonl` | 15 | 1 |
+| `A149 a60_reemit_g0.jsonl` | 32 | 2 |
+| `A149 a60_reemit_g1.jsonl` | 38 | 4 |
+| `A149 a60_reemit_g2.jsonl` | 35 | 5 |
+| `A149 a60_reemit_g3.jsonl` | 25 | 3 |
 | `A149 a60_reemit_smoke.jsonl` | 1 | 0 |
-| `A149 exact_reemit_m0.jsonl` | 7 | 5 |
-| `A149 exact_reemit_m1.jsonl` | 6 | 3 |
+| `A149 exact_reemit_m0.jsonl` | 9 | 7 |
+| `A149 exact_reemit_m1.jsonl` | 9 | 6 |
 | `A149 exact_reemit_prio.jsonl` | 1 | 1 |
 | `A149 exact_reemit_w0.jsonl` | 1 | 0 |
 | `A149 exact_reemit_w1.jsonl` | 1 | 0 |
@@ -166,9 +171,9 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 | `A149 exact_reemit_w6.jsonl` | 27 | 15 |
 | `A149 exact_reemit_w7.jsonl` | 23 | 15 |
 | `A149 poly149.jsonl` | 1 | 0 |
-| `A156 lp156_d1118.jsonl` | 68 | 48 |
-| `A156 lp156_d1119.jsonl` | 60 | 41 |
-| `A156 lp156_d1606L2.jsonl` | 21 | 18 |
+| `A156 lp156_d1118.jsonl` | 97 | 73 |
+| `A156 lp156_d1119.jsonl` | 95 | 68 |
+| `A156 lp156_d1606L2.jsonl` | 50 | 42 |
 | `A158 no158.jsonl` | 66 | 0 |
 | `A158 yescert158.jsonl` | 6 | 0 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 745 | 745 |
@@ -185,8 +190,8 @@ Of the 71 gallery pages the PI reviews, **68 are still ALIVE and 3 are now DEAD*
 | `clipkill certs (attempts/*/certs/**)` | 342 | 342 |
 | `ledger superseded_by_backlog_A137.jsonl` | 581 | 581 |
 | `ledger superseded_by_exactcore_A137.jsonl` | 46 | 46 |
-| `ledger superseded_by_exactcore_A149.jsonl` | 80 | 80 |
-| `ledger superseded_by_exactcore_a60_A149.jsonl` | 1 | 1 |
+| `ledger superseded_by_exactcore_A149.jsonl` | 93 | 93 |
+| `ledger superseded_by_exactcore_a60_A149.jsonl` | 12 | 12 |
 | `ledger superseded_by_tight_core.jsonl` | 70 | 70 |
 
 `*__exall.json` is **not** a kill record (A148's rule: it exists on LOST-KILL / TOO-TIGHT / FAIL too) and is not scanned.  A158's `yescert158.jsonl` rows say `verdict = "KILL"` with `kill = false` and are counted as **not** kills; in particular **`c0_Y0076`'s NO child is NOT a kill** (A158b: the YES child converges at `tau = budget`, `eta = 0`).  A140's `exactcore140.jsonl` kills only where `kills_converged` and the certificate `PASS` -- `l1_148`, `l2_p65_101` and `l2_p65_111` have `kills = true` with `converged = false` and are **not** kills (A124: a non-converged `tau` was never a bound).
