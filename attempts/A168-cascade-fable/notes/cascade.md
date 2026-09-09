@@ -306,3 +306,36 @@ page as a missed clip.  `fig168b.draw_role_full` now draws the hypothesis square
 ADMISSIBLE pose: the centre is the bbox centre if a surviving piece contains it (else the largest
 piece's centre), the solid square at the mid-tilt of the largest piece containing that centre, and
 the dashed extremal outlines at the th0 / th1 of THOSE pieces only -- never an excluded pose.
+
+**A183.3  Launch [M].**  16:1x: l1_104 shards 0/2 and 1/2 (depth-2 keys; 6,278 + 6,221 nodes to do
+including the whole S3) and l1_153 as ONE shard 0/1 (depth 5; ~700 nodes, S1..S8) -- two l1_153
+half-shards ran for two minutes first and were killed so that a fourth slot stays free for the
+figure, report and LP processes under the <= 4 rule (their records stay in
+`renorm181_l1_153_s{0,1}of2.jsonl`; every side file of a cell is read).  Launchers relaunch a
+wall-capped shard; the run is resumable at every record.
+
+**A183.4  The LP and the pieces (settled; `code/lp183.py`).**  The frozen verifier reads ONE
+rational square per hypothesised packed square (`hypotheses.cores = [{kx, ky, tm, a}]`, exemption
+"Q meets a core", bridge "some packed square CONTAINS the core") and ignores the box a core carries;
+a LIST of boxes per square is not expressible, and an exemption "Q meets some K_i of a list" would be
+UNSOUND for the bridge (a packed square other than Q0 may meet a K_i it does not contain).  What v1
+consumes from the pieces is any rational square K ⊆ K'(role) = the certified intersection of the
+per-piece cores (A172): every surviving pose contains its piece's core ⊇ K'(role) ⊇ K [T].  lp168 /
+cascade168 `stage_nodes` fed the exact core of the UNION BOX of the pieces (the clip's exclusions
+re-admitted; the core shrinks).  `lp183.PiecesHyp` feeds `Role.axis` -- the largest axis square about
+K'(role)'s centroid inside K'(role), every corner `vertex_ok`-certified against every surviving piece
+(`roles168.axis_core_in_poly`) -- as the live `Hyp.cores`; `certwrap170.carry_exact_cores` carries a
+live core verbatim (never shrinks one), so the certificate under the frozen verifier states exactly
+that core.  The polygon K' itself would need a v4 clause `hypotheses.poly_cores = [{vertices}]` with
+the exemption "Q meets the closed convex polygon" by exact SAT over Q's two axes and the polygon's
+edge normals, the bridge unchanged.  Demo: l1_104 root/D0/S1 (S2, b = 8) -- see A183.5.
+
+**A183.5  The pieces-LP demo [M] (`results/lp183_l1_104.jsonl`, `logs/lp183_104_D0_S1.log`).**  l1_104
+root/D0/S1 (S2 at nsub 8 / refine 3: H 0.637 / D 0.299 / S 0.228 kept; b = 8).  Core half-sides a --
+stock 0.3715 / 0.2779 / 0.3350; union-box A135 exact 0.3804 / 0.3043 / 0.3742; GROWN inside K' of the
+pieces 0.3804 / 0.3069 / 0.3843 (+0 % / +0.9 % / +2.7 %; the union box's core at its own tilt is
+already nearly maximal inside the polygon).  LP: tau = 7.999999999999936, CONVERGED, ALIVE(LP), 98 s
+(the axis-square variant: tau 8.0000000001 unconverged, 295 s).  So at this node the pieces buy the LP
+almost nothing and the LP cannot kill; the geometry (the clip's kills at S2/S3) is the lever.  The
+mechanism is settled: v1 consumes the pieces through one grown square core per role; the polygon
+itself needs the v4 clause of A183.4.
