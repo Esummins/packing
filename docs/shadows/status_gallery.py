@@ -576,6 +576,27 @@ def collect(table, corpus):
             d,
         )
 
+    # (7b) A161's chord-limited lane kills (A57 k5_16 + A60 trump5 wall slots) ----
+    for d in jl(A("A161-chord-lane", "results", "t3_dedup.jsonl")):
+        if str(d.get("verdict", "")) != "KILL":
+            continue
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        slot = str(d.get("slot") or "")
+        cert = os.path.join("attempts", "A161-chord-lane", "certs",
+                            "cl_%s__%s.json" % (d.get("nid", ""), slot.replace("(", "").replace(",", "_").replace(")", "")))
+        table.add_rec(
+            "A161 t3_dedup.jsonl",
+            camp,
+            d.get("nid", ""),
+            True,
+            "chord-limited lane [%s]" % slot,
+            "A161",
+            cert,
+            fdate(A("A161-chord-lane", "results", "t3_dedup.jsonl")),
+            d,
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
