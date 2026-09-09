@@ -284,7 +284,7 @@ def main():
     out = a.out or os.path.join(K.FIGS, "steps_%s_%s.svg" % (a.cell, step))
     svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" font-family="DejaVu Sans,Arial">' % (W, H),
            "<defs>" + FB.STIPPLE + "</defs>", '<rect width="100%" height="100%" fill="#fafafa"/>',
-           text(14, 30, "A181 (A168 cascade, PARENT-SEEDED polygon + lonely clip, fixed library) on %s -- step %s: %s   [%s; %d parents done; %d shard files overlaid]"
+           text(14, 30, "A183 (A168 cascade, PARENT-SEEDED polygon + lonely clip, fixed library; nsub 8 / refine 3 on the 4/2 survivors) on %s -- step %s: %s   [%s; %d parents done; %d shard files overlaid]"
                 % (a.cell, step, F.STEP_TITLE.get(step, step), time.strftime("%Y-%m-%d %H:%M"), len(parents), n_sh),
                 12, "#000", weight="bold"),
            text(14, 48, "legend: filled = admissible centres by geometry; squares = hypothesis at box centre & mid-tilt, "

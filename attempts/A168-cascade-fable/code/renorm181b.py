@@ -35,7 +35,8 @@ def overlay_side(T, cell):
             continue
         node["verdict"] = r["verdict"]
         node[TAG] = {k: r.get(k) for k in ("leaf", "kept", "kept_mb", "k_area", "passes", "n_pieces", "wall_s",
-                                            "seeded_kept", "seeded_n_pieces", "vol1", "vol1_le_parent", "reused_from")}
+                                            "seeded_kept", "seeded_n_pieces", "vol1", "vol1_le_parent", "reused_from",
+                                            "setting", "kept_42")}
         if r.get("roles"):
             node["roles"], node["kept"], node["invariant"] = r["roles"], r.get("kept"), r.get("invariant")
             node["clip_passes"], node["rows"], node["row_kill"] = r.get("passes"), r.get("rows"), r.get("row_kill")
@@ -156,7 +157,7 @@ def stage_apply(a):
             n["verdict"] = r["verdict"]
             n[TAG] = {k: r.get(k) for k in ("leaf", "kept", "kept_mb", "k_area", "k_area_mb", "passes", "n_pieces", "lonely",
                                              "seeded_kept", "seeded_n_pieces", "wall_s", "refine", "vol0", "vol1",
-                                             "vol1_le_parent", "reused_from", "lib")}
+                                             "vol1_le_parent", "reused_from", "lib", "setting", "kept_42")}
             if r.get("cert"):
                 c = dict(r["cert"])
                 if c.get("trace"):

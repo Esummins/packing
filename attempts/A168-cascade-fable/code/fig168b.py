@@ -88,11 +88,20 @@ def draw_role_full(g, name, rj, others, solid=True, region=True):
     verts = [(float(Fr(v[0])), float(Fr(v[1]))) for v in rj["core"]]
     if verts:
         g.append(poly(verts, fill=col, fill_opacity=("0.8" if solid else "0.3"), stroke=col, stroke_width="0.8"))
-    # --- the hypothesis square at the box centre, mid tilt; extremal tilts dashed
+    # --- the hypothesis square at an ADMISSIBLE pose (A183: the PI read an outline crossing S's K' as a
+    #     missed clip -- never draw an excluded pose): the centre is the bbox centre if some surviving
+    #     piece contains it, else the largest piece's centre; the solid square is at the mid-tilt of the
+    #     largest such piece and the dashed extremal outlines at the th0 / th1 of THOSE pieces only
     cx, cy = 0.5 * (b.x0 + b.x1), 0.5 * (b.y0 + b.y1)
-    tm = 0.5 * (b.th0 + b.th1)
-    g.append(poly(sq_pts(cx, cy, tm), fill="none", stroke=col, stroke_width="0.9"))
-    for th in (b.th0, b.th1):
+    pcs = [Box(*K.bx(p)) for p in role.pieces]
+    at = [p for p in pcs if p.x0 <= cx <= p.x1 and p.y0 <= cy <= p.y1]
+    if not at:
+        big = max(pcs, key=lambda p: float(R.vol(p)))
+        cx, cy = 0.5 * (big.x0 + big.x1), 0.5 * (big.y0 + big.y1)
+        at = [p for p in pcs if p.x0 <= cx <= p.x1 and p.y0 <= cy <= p.y1]
+    big = max(at, key=lambda p: float(R.vol(p)))
+    g.append(poly(sq_pts(cx, cy, 0.5 * (big.th0 + big.th1)), fill="none", stroke=col, stroke_width="0.9"))
+    for th in sorted({p.th0 for p in at} | {p.th1 for p in at}):
         g.append(poly(sq_pts(cx, cy, th), fill="none", stroke=col, stroke_width="0.5", stroke_dasharray="3,2"))
     g.append(text(sc(cx), Y(cy) + 3, name, 9, "#000", anchor="middle", weight="bold"))
 
@@ -154,7 +163,8 @@ def page_step(T, step, before, after, lp):
     inv = before.get("invariant") or {}
     kept = ", ".join("%s %.2f" % (nm, rj.get("kept", 1.0)) for nm, rj in (before.get("roles") or {}).items())
     r81 = before.get("renorm181") or {}
-    seed_line = (("SEEDED roles (A181: this node's parent-seeded fixed point = what every child inherits): %s" % kept)
+    seed_line = (("SEEDED roles (A181/A183: this node's parent-seeded fixed point at %s = what every child inherits): %s"
+                  % (r81.get("setting") or "nsub 4 / refine 2", kept))
                  if r81 else ("roles (A168 record; not yet re-normalised by A181): %s" % kept))
     fb = "%s\ninvariant: %s\n%s" % (seed_line, "PASS" if inv.get("ok") else str(inv.get("dead")), what_is("before", before))
     draw_node(mid, before, region=False)
@@ -169,10 +179,14 @@ def page_step(T, step, before, after, lp):
         rows = draw_rows(right, after)
         ia = after.get("invariant") or {}
         sk = (after.get("renorm181") or {}).get("seeded_kept") or {}
-        fa = "%skept: %s (passes %s)\ninvariant: %s | %s\nverdict: %s\n%s" % (
+        r8a = after.get("renorm181") or {}
+        k42 = r8a.get("kept_42") or {}
+        fa = "%skept: %s (passes %s; setting %s%s)\ninvariant: %s | %s\nverdict: %s\n%s" % (
             ("seeded from parent: %s -> " % ", ".join("%s %.2f" % (nm, v) for nm, v in sk.items() if v is not None)) if sk else "",
             ", ".join("%s %.2f" % (nm, rj.get("kept", 1.0)) for nm, rj in after["roles"].items()),
-            after.get("clip_passes"), "PASS" if ia.get("ok") else str(ia.get("dead")), " | ".join(rows)[:80],
+            after.get("clip_passes"), r8a.get("setting") or "A168 record",
+            ("; at 4/2: " + ", ".join("%s %.2f" % (nm, v) for nm, v in k42.items())) if k42 else "",
+            "PASS" if ia.get("ok") else str(ia.get("dead")), " | ".join(rows)[:80],
             after["verdict"][:60] + ((" LP tau %.3f" % lp[after["path"]]["tau"]) if lp.get(after["path"]) and lp[after["path"]].get("tau") else ""),
             what_is("after", after))
     else:

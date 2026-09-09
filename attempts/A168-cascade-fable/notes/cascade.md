@@ -270,3 +270,39 @@ volume here exceeds theirs.  Launched 12:52 (four processes, BelowNormal, affini
 `A168_LEGACY_CLIP=1`), so cascade168's steps, the coexistence cut and coex174's piece cut build every new
 node on the library's clip without the cascade175 router.  Smoke: the l1_153 root through the new default,
 kept H 1.000, 6.5 s [M].
+
+## A183 takeover (Fable lead, 2026-09-09 15:56 ->) -- A181 resumed after the 15:46 crash
+
+**State at the crash [M].**  Bugcheck 0xD1 (driver fault) at ~15:46, reboot 15:53; every process
+died, A181's agent with them, and A181 wrote no notes section (this one covers both).  A181 had
+landed: `renorm181` (parent-SEEDED top-down re-normalisation: child pieces = record ∩ parent's
+fixed-point pieces per role and tilt sub-bin, no bounding-box re-merge, DEAD by inheritance when the
+seeding empties a role; 49917cdf), the sliver fix in `polyclip175.mbox_to_pieces` (only the HOST
+intersection of a survivor is kept; the sliver-era records set aside as `results/slivers_renorm181_*`;
+c262d09c), and the l1_104 S1 figure (e4578050).  Records on disk: l1_104 78 (root, 28/28 S1 ALIVE,
+S2 49 of 111 done: 27 ALIVE / 22 DEAD = 6 EmptyBox + 14 ancestor + 2 inheritance; 2,401 S3 nodes
+already DEAD by closure), l1_153 24 (root, 6/6 S1, 1/1 S2, 16 of 119 S3 done, all ALIVE); `vol1 >
+parent` on 0 nodes in both cells (`renorm181b report`, `logs/a183_report_*_pre.log`).  l1_104's S3
+shards were merged into the tree at 14:47 (19,506 S3 nodes in `tree_l1_104.json`; the overlay adds
+nothing), so no merge was needed.  A168's untracked core files and the AD-state sliver file were
+committed first (da8a1ea2, 396737bf).
+
+**A183.1  The refinement lever (`code/renorm183.py`, `code/launch183.ps1`).**  The coordinator measured
+on l1_104 root/D0/S1/B5: nsub/refine 4/2 keeps H 0.745, 8/3 keeps 0.639 at 3.6x the time, 16/3 no
+better.  Rule: every node that SURVIVES the 4/2 pass is re-clipped at nsub 8 / refine 3 SEEDED FROM ITS
+OWN 4/2 FIXED POINT -- each surviving piece's tilt sub-bin is bisected once more (`MB.sub_bins(.., 2)`,
+tautologous: the two halves cover the piece exactly), then three levels of `split_piece` bisection and
+the polygon + lonely clip to the fixed point; the result is a subset of the 4/2 fixed point, so the
+pass is sound and never weaker [T].  Children are seeded from the parent's FINAL (8/3) pieces.  The
+record carries `setting` ("nsub 8 / refine 3 (after 4/2)"), `kept_42` / `vol1_42` and the final
+`kept` / `vol1`; every figure page prints the setting.  Resumable on A181's side files: a node is done
+when its last record is DEAD or ALIVE at the 8/3 setting; A181's 4/2-ALIVE records are UPGRADED in
+place (recorded roles re-seeded by the parent's current pieces, then the 8/3 pass only).  A node
+wall-capped (1,500 s, process tree killed) is retried at 4/2 only, then 4/1, then 4/0 (renorm181's
+cap rule).  Box ceiling today 12 lab pythons (`launch183.ps1`), <= 4 of mine.
+
+**A183.2  The figure rule.**  The PI read an extremal-tilt outline crossing S's K' on the "after S3"
+page as a missed clip.  `fig168b.draw_role_full` now draws the hypothesis square only at an
+ADMISSIBLE pose: the centre is the bbox centre if a surviving piece contains it (else the largest
+piece's centre), the solid square at the mid-tilt of the largest piece containing that centre, and
+the dashed extremal outlines at the th0 / th1 of THOSE pieces only -- never an excluded pose.
