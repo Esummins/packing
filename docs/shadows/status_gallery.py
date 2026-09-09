@@ -643,6 +643,32 @@ def collect(table, corpus):
                   if camp == "k0" else ""),
         )
 
+    # (7e) A182's forced-first ASSIGNMENT kills (A180 resumed after the 15:46 crash): six forced cells x
+    #      two distinct meeters from {H, F1..F5}, unit propagation then branching; multibox pair leaf,
+    #      chord-row kill or multi-box case LP.  results/assign182.jsonl is resumable: the LAST row per
+    #      nid is the verdict; the per-page node journal is results/journal/<nid>.jsonl.
+    last182 = {}
+    for d in jl(A("A180-forced-first-assignment", "results", "assign182.jsonl")):
+        if d.get("nid"):
+            last182[d["nid"]] = d
+    for nid, d in sorted(last182.items()):
+        if str(d.get("verdict", "")) != "DEAD":
+            continue
+        camp = "k0" if d.get("gallery") == "k0v4" else ("A60" if str(d.get("camp")) == "A60" else "A57")
+        cert = str(d.get("cert") or ("attempts/A180-forced-first-assignment/results/trees/%s.json" % nid))
+        table.add_rec(
+            "A182 assign182.jsonl",
+            camp,
+            nid,
+            True,
+            "forced-first assignment: %s (notes/assignment.md Theorem ASSIGN; %d multibox nodes)"
+            % (d.get("leaf") or "every assignment node dead", int(d.get("n_nodes") or 0)),
+            "A182",
+            cert.split(";")[0],
+            fdate(A("A180-forced-first-assignment", "results", "assign182.jsonl")),
+            d,
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
