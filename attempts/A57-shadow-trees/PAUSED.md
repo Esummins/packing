@@ -623,3 +623,57 @@ offsets) is what makes the deep split affordable at all.
 conditioned index must be verified against **the piece's box**, not `B_H` — on that branch the piece
 IS the hypothesis, and it is the strictly stronger obstacle. Checking against `B_H` rejects every
 genuine certificate (15/15 FAIL before the fix, 15/15 PASS after).
+
+
+---
+
+## A170 addendum (2026-09-09) — the certificate-EMISSION audit closes A166's question NEGATIVE for this tree
+
+`caselp.make_certificate` (`attempts/A57-shadow-trees/code/caselp.py:384`) ends with
+`hyp = Hyp.from_json(res["hyp"])`, and `Hyp.__init__` recomputes `self.cores = [b.core() for b in
+boxes]` — the STOCK cores — discarding the `cores` field `Hyp.to_json` wrote. An `ExactHyp` LP therefore
+emits a certificate exempting a strictly SMALLER core than its row filter dropped rows against, and
+every LP-dropped placement in the 1.4–15 % annulus between the two cores is a guaranteed hole
+(A166 `bc8b5dd5`, `attempts/A166-nearest-corner-subtree/notes/certificate_bug.md`).
+
+**A170 audited every certificate on disk empirically** (3,378 files: the exact core recomputed from the
+box each certificate itself carries, compared with the `a` it wrote — `attempts/A170-certfix/notes/audit.md`,
+`results/scan170.json`). **This tree's lanes are CLEAN:**
+
+| lane | cores written | FAILing certs re-certified with the cores enlarged |
+|---|---|---|
+| A137 night re-emission (`node137.py:50` → `emit135.make_cert`) | exact **241/241** | 44 → **NO-CHANGE 44/44** |
+| A149 a57 (`run149.py:259` → A137's `node137.py` verbatim) | exact **137/137** | 43 → **NO-CHANGE 43/43** |
+| A149 a60 (`node_a60.py:123`, scope `exH`) | H exact **95/95**, pins the corpus core by design (`node_a60.py:10-14`) | 14 → FAIL (pin cores enlarge < 0.01 %) |
+| A156 day shift (`run156.py:212` → `node137.py`) | exact **302/302** | 31 (+ the one `v3_candidates156.jsonl` row, the same node) → **NO-CHANGE 31/31** |
+| A145 | exact 18/18 | 9 → NO-CHANGE |
+
+The reason is structural, not luck: **A135's `emit135.make_cert` (`emit135.py:93`) is a copy of
+`caselp.make_certificate` that takes the LIVE `Hyp` instead of round-tripping it**, written for exactly
+this bug (`emit135.py:94-100`). Everything this tree emits goes through it.
+
+**Consequences for this file.** (i) §C.3's kills and the exact-core kill rate **46/161 = 28.6 %** stand
+unchanged — no A137/A149/A156 FAIL is spurious. (ii) A156's `v3_candidates156.jsonl` row
+(`k5_16_interior_Y0785`, 8 holes) is **not** a core-staleness failure and its own note already said so.
+(iii) One **cosmetic** defect found: `node_a60.py:64` mutates `hyp.cores` on a plain `caselp.Hyp`, which
+has no `.scope` / `.a_report`, so `emit135.make_cert`'s `getattr` defaults write
+`provenance.core_scope = "stock"` and `cores_exact = null` on all 95 `certs/a60/*__exH.json` — the H core
+in them IS exact and the true `a_report` survives in the lane's jsonl and in
+`results/superseded_by_exactcore_a60_A149.jsonl`. No certificate is wrong; only its provenance line is.
+Fix it at resume by giving `build_hyp` the two attributes, or by emitting through the A170 wrapper.
+
+### Resume-block note (one line, §E)
+
+**6. New lanes MUST emit through `attempts/A170-certfix/code/certwrap170.py`
+(`make_certificate_exact(res, S_RAT, scale=scale, hyp=H)`), never `caselp.make_certificate` — which
+silently reverts A135's exact cores to the stock ones via `Hyp.from_json`; `caselp.py` stays frozen and
+the regression guard is `attempts/A170-certfix/code/test_cores170.py` (50 boxes, 50/50).**
+
+### Resume-block note (one line, §E) — A171
+
+**7. Any MULTI-BOX construction (case tree, cascade, sub-tree, forced-box node) MUST call
+`attempts/A171-multibox-invariant/code/multibox.py` — `Node(boxes).normalise(s, nsub=4, refine=2)`
+then `assert_invariant()` — BEFORE any chord row, lane cover, figure or LP, and treat `EmptyBox` as
+the pair-leaf kill; `chord_rows` and `lane` refuse to run on an un-normalised node, and the guard is
+`attempts/A171-multibox-invariant/tests/test_multibox.py` (A168's own S2 node `BR139/TRH-25` fails
+the invariant as recorded — D's poses leave `[0,s]²` by 0.087938 — and passes after normalise).**

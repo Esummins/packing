@@ -265,6 +265,8 @@ T23's broader slack statement — but not for the sake of this refinement.
 
 **A167 (2026-09-09), the CONDITIONAL chord-limited lane, POPULATION PASS.** Splitting the conditioned square's box and scoring each piece with its OWN guard line, its own chord row (`minchord` is monotone under box inclusion, so the piece's chord is longer and its `beta` smaller) and its own fattened core — `n(b) = beta + LANE_out(b)` where the piece misses the cell, else `min(beta, LANE_band(b)) + LANE_out(b) + 1`, with the band cover run over the slab `|v| <= 1/2` that every band pose lives in — closes **15 of the 416 alive `NO-LINE`/`M = 1` wall-adjacent cells that A161's unconditional form could not touch (11 of them still NEW dead nodes when re-checked against a fresh collect: 7 trump5, 4 k5_16, all level 1), 15/15 certificates passing an independent checker**; but **285 of the 416 cells are NO-GO — at every one of the ~106 swept offsets the sample exhibits a free square meeting the cell alongside `H`, and on 49 of the 60 escalated cells that pair is verified EXACTLY in rational arithmetic (two interior-disjoint unit squares, both inside the container, both meeting `int C`, both clear of the five pins, one a legal `H` pose), which retires those cells for the whole lane-leaf family** — so the wall-lane line is now measured rather than merely unfinished, and the PI's `c0_Y0169 / TL(0,0)` is one of the no-goes, not a budget failure (`attempts/A167-condlane-pass/`, `notes/leaf.md`).
 
+**A170 (2026-09-09) — the `make_certificate` stock-core reversion does NOT touch this row.** A166's emission bug (`caselp.make_certificate` rebuilds the hypothesis with `Hyp.from_json`, which reverts A135's certified EXACT cores to the STOCK ones, so an exact-core LP's certificate under-exempts by 1.4-15 % of the core half-side and every LP-dropped placement in that annulus becomes a hole) was audited empirically against every one of the 3,378 certificates on disk: every A57/A60 exact-core lane -- A137's night re-emission, A149's `__exall` and `__exH` arms, A156's day shift, A145, A140, A135 itself -- writes **exact cores, 698 of 698**, because they all route through A135's `emit135.make_cert` rather than `caselp.make_certificate`; re-certifying all 118 of their FAILing certificates with the cores enlarged returns **NO-CHANGE on 118 of 118**, so those FAILs are real and the row's exact-core kill rate (46/161 = 28.6 %) stands unaltered. The bug reaches only A150, A165 and A166, which call the A57 driver directly; the recovery there is 25 certificates / 8 distinct nodes, 3 of them new (A165's `l1_104` spread tuples, that leaf going from 1-of-4 to 4-of-4 certified), all 25 independently re-checked (`attempts/A170-certfix/notes/{audit,recovered,fix}.md`).
+
 ## 2. The window stragglers — **CLOSED. A56 scoreboard 52/52 full-window** (A146, 2026-09-07 night; the rows below are the history)
 
 Every one of the 52 stratum rows now carries a 4-D PASS over the whole window [191/50, 969271/250000]:
@@ -589,3 +591,26 @@ diagnostic, not a kill: the counted version needs A141's lane counts / A153's co
 B₀ = 4.03 out of 15.03 is too large a fraction of the container for a 1–2 unit sliver to reach. |U|
 scales with the box count (0.128 at 1 box, 0.793 at 6, 1.701 at 7), which puts the first fire at
 9–10 boxes — a node with 1–2 free squares left, where the LP is cheap anyway.
+
+**[T] A171 (2026-09-09) — the multi-box clipping rule is now CODE, not an instruction.** Two
+consecutive multi-box readings of `l1_104` (A165, A168) drew and solved boxes that had never been
+clipped, so `attempts/A171-multibox-invariant/code/multibox.py` makes it an API: `Node(boxes)`,
+`normalise(s, nsub=4, refine=2)` (container clip — every pose inside `[0,s]²` per tilt sub-bin, the
+sacrificed wall slivers recorded with their area — then mutual clip of every box against every other
+box's `K′` to a fixed point, `K′` (A132) and the exact axis core (A135) rebuilt after each pass,
+`EmptyBox` = the pair-leaf kill), `assert_invariant()` (exact rational `K-CONTAINER`, `K-DISJOINT`,
+`POSE-CONTAINER`, `POSE-CONTAINER-STRICT`, `CLIP-FIXPOINT`), plus `chord_rows` (A144), `lane`
+(A141 + A161's exact miss test), `misses_cell` and an A148-style `figure` that prints the verdict on
+the page; `chord_rows`/`lane` REFUSE an un-normalised node. **[F] A168's own S2 node `BR139/TRH-25`
+(H, B1, D as recorded) fails the invariant as recorded** — D's centre rect exceeds `s − w_max/2` by
+0.087938 (47.1 % of its poses leave the container), B1's by 0.003405, and the mutual clip still
+removes area from D; 63.3 % of H's poses meet `K′(B1)` and 60.5 % of D's meet `K′(H)`. After
+`normalise` every check passes with kept fractions **H 0.4408, B1 0.9428, D 0.0882** — i.e. **91 % of
+D's box and 56 % of H's were never possible**, which is the size of the error the two cascades were
+building on. The residual "pose still meets another core" is a reported diagnostic, not zero — 0.205
+node-wide at `nsub` 4 / `refine` 3, falling monotonically in both (H 0.556 → 0.409 → 0.341 → 0.283 at
+`refine` 0/2/3/4): a rectangle × tilt-interval piece can only be clipped by axis slabs, so
+refinement, not clipping, is what drives it down. Tests: overlapping `K′` ⇒ a box is emptied;
+container straddle ⇒ outside poses removed (kept 0.297); the A168 node before/after; 10 random 2–6
+box nodes, 99 996 sampled poses, 0 violations — 11.3 s total.
+

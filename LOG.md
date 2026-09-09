@@ -7655,3 +7655,43 @@ this entry, the A57 `PAUSED.md` v4 addendum, the A60 ledger section and one para
 `docs/residue_ledger.md` §1. Two BelowNormal processes at affinity `0xFFFF` throughout, the 16-process
 box ceiling counted before every launch (11-14 other lab pythons running); **~8,100 s of population
 pass + ~3,700 s of diagnostics, checking and witness search ≈ 3.3 CPU-h of the 4 CPU-h cap.**
+
+## 2026-09-09 — A171-multibox-invariant (Opus engineer) — done-success
+- **Why**: two agents in a row (A165 Opus, A168 Fable) built multi-box case trees on the k0 cell
+  `l1_104` and drew/solved boxes that had never been clipped — cores escaping the container and pose
+  unions overlapping other cores — and the PI caught both by eye. A rule in a brief gets skipped, so
+  it is now CODE with a guard: `attempts/A171-multibox-invariant/code/multibox.py`.
+- **API**: `Node(boxes)` (named parameter boxes, carried as (t-sub-bin, rational centre rect)
+  pieces); `normalise(s, nsub=4, max_iter=10, refine=2)` = container clip (A131's sound `w_min` clip,
+  then the strict `w_max` clip that puts every pose inside `[0,s]^2`, the sacrificed wall slivers
+  recorded with their area) then mutual clip of every box against every other box's `K'` to a fixed
+  point, `K'` (A132) and the exact axis core (A135) rebuilt after each pass, with `refine` levels of
+  tautologous bisection interleaved; `EmptyBox(name)` = the pair-leaf kill; `assert_invariant()` =
+  exact rational `K-CONTAINER`, `K-DISJOINT` (polygon SAT), `POSE-CONTAINER`,
+  `POSE-CONTAINER-STRICT`, `CLIP-FIXPOINT`, raising with EVERY failure listed; consumers
+  `chord_rows` (A144), `lane` (A141 + A161's exact miss test), `misses_cell`, `figure` (A148-style,
+  verdict + kept fractions + residuals printed on the page, extreme POSES as thin outlines).
+  `chord_rows`/`lane` raise on an un-normalised node — the guard A165/A168 lacked.
+- **New primitive**: `dead_poly`, an exact rational SUFFICIENT test for "Q(c,th) meets int K' at
+  every tilt of the sub-bin" against a general convex rational polygon (K's edge normals with an
+  exact lower radius bound; four one-sided `exists vertex / for all theta` sinusoid statements
+  decided by A131's `_m_lt_half`). The slab removal is justified by CONVEXITY of the true dead set,
+  so a sufficient membership test at the four corners is a sound certificate; A131's
+  `_bisect_boundary` is reused verbatim.
+- **It convicts A168.** Node `BR139/TRH-25` (`H`, `B1`, `D` as recorded, verdict ALIVE(geometry))
+  fails 5 checks: `D`'s centre rect exceeds `s - w_max/2` by **0.087938** (47.1 % of its poses leave
+  the container), `B1`'s by 0.003405, and the mutual clip still removes 0.003806 of `D`'s area;
+  pose-vs-core, **H→K'(B1) 0.6328 and D→K'(H) 0.6050**. After `normalise` all five pass with kept
+  **H 0.440792, B1 0.942803, D 0.088172** — 91.2 % of D's box and 55.9 % of H's were never possible.
+- **Tests** `tests/test_multibox.py`, 11.3 s: (a) overlapping `K'` ⇒ a box is emptied, and the
+  disjoint-cores-but-meeting-poses variant shrinks 1.0 → 0.709 with the invariant holding after;
+  (b) container straddle ⇒ escape_frac 0.663 → 0, kept 0.297; (c) the A168 node before/after;
+  (d) 10 random 2-6-box nodes, 99,996 sampled poses, 0 violations.
+- **Two limitations, reported not hidden**: the strict container clip genuinely narrows the
+  hypothesis (recorded as `container_sliver` with its area; `strict_container=False` turns it off,
+  and no wall-touching node can satisfy "all poses inside" at finite `nsub`); and "a pose still
+  meets another core" cannot reach 0 in a rect × tilt-interval representation — 0.205 node-wide at
+  `refine` 3, monotone in `nsub`/`refine`, so refinement is the lever, not clipping.
+- Files: `code/{multibox,demo171}.py`, `tests/test_multibox.py`, `notes/usage.md`,
+  `results/{test_multibox,demo171}.json`, `figs/*.svg`; appends to
+  `attempts/A57-shadow-trees/PAUSED.md` (§E resume note 7) and `docs/residue_ledger.md` §6.
