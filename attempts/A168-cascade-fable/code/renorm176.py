@@ -244,7 +244,7 @@ def stage_run(a):
             break
         if not progress:
             waited += 1
-            if waited > 90:
+            if waited > 720:
                 print("  %d nodes still waiting for ancestors from other shards; giving up" % len(nxt), flush=True)
                 break
             time.sleep(60)
