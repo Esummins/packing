@@ -213,6 +213,56 @@ def overlay_side(T, cell):
     return n
 
 
+def stage_finish(a):
+    """the survivors with a role kept below --thr are re-run from their RECORDED (already clipped)
+    roles at --refine (tilt bisection is what the residual 'meets another K' at SOME tilt of the
+    sub-bin' needs); a node that dies is a DEAD record overriding the earlier one (later side
+    files win in load_side: this one is s<f>of1)."""
+    sk, sn = RS.shard_of(a.shard)
+    T, _n = load_tree_overlay(a.cell, a.overlay)
+    recs = load_side(a.cell)
+    todo = sorted(p for p, r in recs.items() if r["verdict"].startswith("ALIVE") and r.get("roles")
+                  and min(v.get("kept", 1.0) for v in r["roles"].values()) < a.thr
+                  and r.get("refine", 0) < a.refine and p in T["nodes"])[sk::sn]
+    if a.max_nodes:
+        todo = todo[:a.max_nodes]
+    out = os.path.join(K.RES, "polyclip175_%s_sf%dof%d.jsonl" % (a.cell, sk, sn))
+    print("finish %s: %d survivors with a role kept < %.3f -> refine %d -> %s" % (a.cell, len(todo), a.thr, a.refine, out), flush=True)
+    for p in todo:
+        if K.sentinel():
+            return 2
+        r0 = recs[p]
+        roles = R.roles_from_json(r0["roles"])
+        t0 = time.time()
+        with RS.NodeWall(a.cell, p):
+            rr, rep = PX.make_node(roles, refine=a.refine, lonely=bool(a.lonely))
+        rec = dict(r0)
+        rec.update(refine=a.refine, kept=rep.get("kept"), kept_mb=rep.get("kept_mb"), k_area=rep.get("k_area"),
+                   passes=rep.get("passes"), n_pieces=rep.get("n_pieces"), wall_s=round(time.time() - t0, 1),
+                   finish_from=dict(refine=r0.get("refine"), kept=r0.get("kept")))
+        if rr is None:
+            rec.pop("roles", None)
+            rec.pop("rows", None)
+            rec.update(verdict="DEAD(C, %s)" % rep["dead"], leaf=rep.get("leaf"), cert=rep.get("cert"),
+                       witness=rep.get("witness"), invariant=rep.get("invariant"))
+        else:
+            rec["roles"] = R.roles_json(rr)
+            rec["invariant"] = rep.get("invariant")
+            rows = {w: R.best_row(rr, CS.lines_of(w)) for w in walls_of(T["nodes"][p])}
+            rec["rows"], rec["row_kill"] = rows, bool(any(Fr(x["rhs"]) < 0 for x in rows.values()))
+            rec["verdict"] = ("DEAD(C, chord row A144 LINE-1 on the grown K')" if rec["row_kill"]
+                              else "ALIVE(geometry; polygon clip A175, refine %d)" % a.refine)
+            rec["leaf"] = "row" if rec["row_kill"] else None
+        recs[p] = rec
+        with open(out, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(rec, default=str) + "
+")
+        print("  %-34s %-46s kept %s -> %s  %.1fs" % (p, rec["verdict"][:46],
+              {k: round(v, 4) for k, v in (r0.get("kept") or {}).items()},
+              {k: round(v, 4) for k, v in (rec.get("kept") or {}).items()}, rec["wall_s"]), flush=True)
+    return 0
+
+
 def stage_status(a):
     recs = load_side(a.cell)
     by = {}
@@ -262,10 +312,21 @@ def stage_apply(a):
             n_app += 1
         after.setdefault(st, [0, 0])
         after[st][0 if n["verdict"].startswith("ALIVE") else 1] += 1
+    # a node under a DEAD ancestor is dead (its hypothesis is contained in the ancestor's) [T]
+    n_anc = 0
+    for q in sorted(T["nodes"], key=len):
+        n = T["nodes"][q]
+        par = n.get("parent")
+        if par and T["nodes"].get(par, {}).get("verdict", "").startswith("DEAD") and n["verdict"].startswith("ALIVE"):
+            n["verdict"] = "DEAD(C, ancestor %s: %s)" % (par, T["nodes"][par]["verdict"][:60])
+            st = n.get("step") or "root"
+            after[st][0] -= 1
+            after[st][1] += 1
+            n_anc += 1
     for spec in CS.STEPS:
         if any(n.get("step") == spec["step"] for n in T["nodes"].values()):
             CS.canary_locate(T, spec)
-    T["polyclip175"] = dict(n_applied=n_app, before=before, after=after, when=time.strftime("%Y-%m-%d %H:%M"),
+    T["polyclip175"] = dict(n_applied=n_app, n_dead_by_ancestor=n_anc, before=before, after=after, when=time.strftime("%Y-%m-%d %H:%M"),
                             source="A175 polyclip175 (A171 polygon obstacles + A173 lonely clip)")
     CS.save_tree(T)
     K.jdump(T["polyclip175"], os.path.join(K.RES, "polyclip175_summary_%s.json" % a.cell))
@@ -274,7 +335,8 @@ def stage_apply(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=("run", "apply", "status"))
+    ap.add_argument("stage", choices=("run", "apply", "status", "finish"))
+    ap.add_argument("--thr", type=float, default=0.01)
     ap.add_argument("--cell", default="l1_104")
     ap.add_argument("--shard", default="0/1")
     ap.add_argument("--overlay", type=int, default=1)
@@ -283,7 +345,7 @@ def main():
     ap.add_argument("--steps", default="")
     ap.add_argument("--max_nodes", type=int, default=0)
     a = ap.parse_args()
-    rc = {"run": stage_run, "apply": stage_apply, "status": stage_status}[a.stage](a)
+    rc = {"run": stage_run, "apply": stage_apply, "status": stage_status, "finish": stage_finish}[a.stage](a)
     sys.exit(rc or 0)
 
 

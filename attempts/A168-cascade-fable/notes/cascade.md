@@ -183,3 +183,46 @@ every merge / coexistence pass, and committed.  `figs/partner_<cell>_<STEP>.svg`
 the piece cut, the partner family drawn BY GEOMETRY (centres admitting some tilt inside the
 container, clear of every K′, meeting the corner cell) with the certified witnesses, and the first
 meeter's sub-pieces kept / dropped with the 2×2 grid at c = 1 + w drawn.
+
+---
+
+## A175 takeover (Fable lead, 2026-09-09 11:55 ->) -- the same tree under the POLYGON clip
+
+**The defect [F, coordinator; reproduced here M].**  `roles168.normalise` clipped every piece only against
+the other roles' AXIS CORES (`Role.axis`, the largest axis square inside K'(role)); K'(role) itself -- the
+certified polygon, several times the area of its inscribed axis square -- was never an obstacle, so a
+role's growth never reached the others and the cascade barely propagated upstream.  Two symptoms in the
+record: (i) on `root/D0/S1/B0` (S3 shard `s1of3`) A168 kept H 1.00 / D 1.00 / S 1.00 / B 0.60, ALIVE;
+the polygon clip empties H at pass 1 after two refinement levels (H 0.0027 kept, then EmptyBox(H): every
+pose of H meets another role's K' at every tilt of its sub-bin -- the pair leaf) [M, `code/polyclip175.py`
+on the shard record]; (ii) every reloaded role printed kept 1.00 because `Role.from_json` lost `area0`
+(fixed: kept is now relative to the role's SOURCE box).
+
+**A175.1  The polygon clip (`code/polyclip175.py`).**  A171/A172/A173's primitives (`multibox.py`, read-only,
+IMPORTED not copied) are driven on roles168's PIECES: each piece (caselp.Box, its own tilt sub-bin) becomes an
+A171 piece Bin(t_lo, t_hi) x the exact rational rect of its float coordinates (a superset [T]); then, in
+order, the SOUND container clip (w_min, `strict_container=False`), A173's LONELY CLIP on every corner role
+(D, S at TR; B, Bp at BR; T1, T2 at TL; L1, L2 at BL; c = 1 + w exactly `resume168.C_RAT` = `multibox.C_WIDEN`,
+asserted equal) BEFORE anything reads K', `refine = 2` levels of tautologous bisection interleaved with the
+clip against the POLYGON obstacles (`MBox.obstacle("poly")` = A172's per-piece K', every vertex certified
+by `polycore.vertex_ok` against every piece), then lonely + mutual clip to a fixed point with K' rebuilt
+from the survivors after every pass.  `EmptyBox` = the pair-leaf kill; the emptied box's replayable slab
+trace (every `slab` step re-checkable by four corner `dead_poly` calls + convexity of the dead set, A171)
+and every role's pieces at death are the certificate, recorded per node.  Survivors go back to roles168:
+each piece rounded OUTWARD (`piece_box`) and intersected with the piece it came from (the unique old
+piece whose t-range contains the survivor's sub-bin -- splits are nested), the Role rebuilt (roles168's
+own per-piece K', exact intersection, vertex_ok-certified, axis core) as the CROSS-CHECK of A171's K'
+(both areas recorded: `k_area` vs `k_area_mb`), then roles168's invariant (K' inside the container, every
+pair interior-disjoint, exact SAT) and OVL asserted as before.  `cascade175.py` routes every
+`roles168.make_node` call of cascade168 / coex174 (steps, coexistence cut, piece cut) to it.
+
+**A175.2  Re-normalisation of the record (`code/renorm175.py`).**  Top-down over every ALIVE node with roles
+(both trees; the S3 shard files overlaid read-only so the nodes the detached shards were still producing
+are covered before the merge): a node's roles are first intersected with the SAME roles' clipped pieces at
+its parent (the child's hypothesis is contained in the parent's, so a pose the parent's clip removed is
+impossible for the child [T]; an emptied role = DEAD(propagation)), a node under a DEAD parent is
+DEAD(ancestor) without computation, the rest run `polyclip175.make_node` under the 1,500 s wall.  Side files
+`results/polyclip175_<cell>_s<k>of<n>.jsonl` (one line per node: verdict, leaf, certificate, new roles with
+grown K', kept, rows on the step's walls), shards by S1 subtree, resumable; `apply` folds them into the tree
+(the A168 record kept under `node.a168`), `fig174` overlays them so every page's kept: line shows the polygon
+clip while the runs are in flight.

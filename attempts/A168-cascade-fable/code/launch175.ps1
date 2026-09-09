@@ -12,8 +12,10 @@ $name = $args[0]
 $rest = $args[1..($args.Count - 1)]
 function WaitSlot($need) {
   for ($k = 0; $k -lt 360; $k++) {
+    # every lab python counts (shards launched with a RELATIVE script path carry no 'packing' in
+    # their command line): all python.exe minus the Claude-extension venv ones
     $n = @(Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
-           Where-Object { $_.CommandLine -like '*code\packing\attempts*' }).Count
+           Where-Object { -not ($_.CommandLine -like '*Claude Extensions*') }).Count
     $os = Get-CimInstance Win32_OperatingSystem
     $free = [math]::Round($os.FreePhysicalMemory / 1KB, 0)
     if (($n + $need) -le 16 -and $free -ge 3072) { Write-Output ("slot ok: lab-python={0} freeMB={1}" -f $n, $free); return $true }
