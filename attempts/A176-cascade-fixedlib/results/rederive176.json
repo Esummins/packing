@@ -1,0 +1,446 @@
+{
+ "source": "attempts/A168-cascade-fable/results/v0_union_boxes/cascade168.jsonl -- cell l1_153, node BR139/TRH-25, step S2, verdict ALIVE(geometry), budget 8",
+ "roles": {
+  "H": [
+   2.5674485,
+   2.67226625,
+   2.357813,
+   2.46263075,
+   45.0,
+   60.0
+  ],
+  "B1": [
+   3.127084,
+   3.1733821433529026,
+   1.5015011950128963,
+   1.5785397484754269,
+   45.0,
+   50.625
+  ],
+  "D": [
+   3.223006893074939,
+   3.377084,
+   3.211365683498047,
+   3.377084,
+   0.0,
+   11.25
+  ]
+ },
+ "s": "969271/250000",
+ "library": {
+  "has_uid": true
+ },
+ "before": {
+  "ok": false,
+  "checks": {
+   "K-CONTAINER": true,
+   "K-DISJOINT": true,
+   "POSE-CONTAINER": false,
+   "POSE-CONTAINER-STRICT": false,
+   "CLIP-FIXPOINT": false
+  },
+  "failures": [
+   {
+    "check": "POSE-CONTAINER",
+    "what": "B1",
+    "detail": "centre rect leaves [w_min/2, s-w_min/2] by 0.000000002 on tilt [45.000,50.625]"
+   },
+   {
+    "check": "POSE-CONTAINER-STRICT",
+    "what": "B1",
+    "detail": "poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.003404926 on tilt [45.000,50.625]"
+   },
+   {
+    "check": "POSE-CONTAINER",
+    "what": "D",
+    "detail": "centre rect leaves [w_min/2, s-w_min/2] by 0.000000001 on tilt [0.000,11.250]"
+   },
+   {
+    "check": "POSE-CONTAINER-STRICT",
+    "what": "D",
+    "detail": "poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.087937870 on tilt [0.000,11.250]"
+   },
+   {
+    "check": "CLIP-FIXPOINT",
+    "what": "D",
+    "detail": "the mutual clip still removes area 0.003806076 on tilt [0.000,11.250] -- normalise() not run"
+   }
+  ],
+  "diagnostics": {
+   "H": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.631
+   },
+   "B1": {
+    "drawn": 4000,
+    "escape_frac": 0.05175,
+    "core_meet_frac": 0.0
+   },
+   "D": {
+    "drawn": 4000,
+    "escape_frac": 0.47075,
+    "core_meet_frac": 0.594
+   }
+  }
+ },
+ "after": {
+  "ok": true,
+  "checks": {
+   "K-CONTAINER": true,
+   "K-DISJOINT": true,
+   "POSE-CONTAINER": true,
+   "POSE-CONTAINER-STRICT": true,
+   "CLIP-FIXPOINT": true
+  },
+  "kept": {
+   "H": 0.3583916794069419,
+   "B1": 0.9428030096899332,
+   "D": 0.07217486590545714
+  },
+  "sliver_area": {
+   "H": 0.0,
+   "B1": 0.0002623104698082033,
+   "D": 0.020389059408317922
+  },
+  "diagnostics": {
+   "H": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.4715
+   },
+   "B1": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.0005
+   },
+   "D": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.26625
+   }
+  },
+  "pieces": {
+   "H": 22,
+   "B1": 32,
+   "D": 12
+  },
+  "axis_a": {
+   "H": 0.388133704662323,
+   "B1": 0.43538613244891167,
+   "D": 0.4205279238522053
+  },
+  "poly_area": {
+   "H": 0.7307967898802019,
+   "B1": 0.7993431033806644,
+   "D": 0.793731135998641
+  },
+  "stats": {
+   "exact_calls": 3694,
+   "backoffs": 2,
+   "passes": 2
+  },
+  "seconds": 11.73
+ },
+ "chord_rows": [
+  {
+   "orient": "h",
+   "off": "1487939/500000",
+   "off_float": 2.975878,
+   "rhs": "731505477624970975169448517039025749963188091697/268236275906234697076069475697838321041408000000",
+   "rhs_float": 2.7270937726583924,
+   "beta": 2,
+   "minchord": {
+    "H": 0.14999022734160777,
+    "B1": 0.0,
+    "D": 1.0
+   }
+  },
+  {
+   "orient": "v",
+   "off": "1503477/500000",
+   "off_float": 3.006954,
+   "rhs": "21098828055335309298397517971909/16777216000000000000000000000000",
+   "rhs_float": 1.2575881514153069,
+   "beta": 1,
+   "minchord": {
+    "H": 0.5352025603730953,
+    "B1": 1.0842932882115977,
+    "D": 1.0
+   }
+  }
+ ],
+ "misses_cell_TR": {
+  "H": false,
+  "B1": true,
+  "D": false
+ },
+ "lane_TR": {
+  "lane": 0,
+  "leaves": 33,
+  "open": 0,
+  "depth": 12,
+  "reason": null,
+  "seconds": 0.48
+ },
+ "union": {
+  "kept": {
+   "H": 0.4407921106984375,
+   "B1": 0.9428030096899332,
+   "D": 0.0881720738770686
+  },
+  "K_area": {
+   "H": 0.6580063591119014,
+   "B1": 0.7981641827965547,
+   "D": 0.7400651996431407
+  },
+  "axis_a": {
+   "H": 0.37927528098225594,
+   "B1": 0.43538613244891167,
+   "D": 0.4059893265366554
+  },
+  "pieces": {
+   "H": 26,
+   "B1": 32,
+   "D": 14
+  },
+  "k_source": {
+   "H": "union",
+   "B1": "union",
+   "D": "union"
+  },
+  "k_info": {
+   "H": {},
+   "B1": {},
+   "D": {}
+  },
+  "passes": 2,
+  "exact_calls": 3931,
+  "invariant": true,
+  "checks": {
+   "K-CONTAINER": true,
+   "K-DISJOINT": true,
+   "POSE-CONTAINER": true,
+   "POSE-CONTAINER-STRICT": true,
+   "CLIP-FIXPOINT": true
+  },
+  "diagnostics": {
+   "H": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.341
+   },
+   "B1": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.0
+   },
+   "D": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.27875
+   }
+  },
+  "seconds": 2.74
+ },
+ "same_pieces": {
+  "K_area": {
+   "H": 0.7093355218158789,
+   "B1": 0.7993431033806593,
+   "D": 0.774355590219619
+  },
+  "detail": {
+   "H": {
+    "area": 0.7093355218158789,
+    "nv": 16,
+    "n_pieces": 26,
+    "uncertified": 0,
+    "shrink": "0"
+   },
+   "B1": {
+    "area": 0.7993431033806593,
+    "nv": 16,
+    "n_pieces": 32,
+    "uncertified": 0,
+    "shrink": "0"
+   },
+   "D": {
+    "area": 0.774355590219619,
+    "nv": 16,
+    "n_pieces": 14,
+    "uncertified": 0,
+    "shrink": "0"
+   }
+  },
+  "seconds": 4.41
+ },
+ "pieces": {
+  "kept": {
+   "H": 0.3583916794069419,
+   "B1": 0.9428030096899332,
+   "D": 0.07217486590545714
+  },
+  "K_area": {
+   "H": 0.7307967898802019,
+   "B1": 0.7993431033806644,
+   "D": 0.793731135998641
+  },
+  "axis_a": {
+   "H": 0.388133704662323,
+   "B1": 0.43538613244891167,
+   "D": 0.4205279238522053
+  },
+  "pieces": {
+   "H": 22,
+   "B1": 32,
+   "D": 12
+  },
+  "k_source": {
+   "H": "pieces",
+   "B1": "pieces",
+   "D": "pieces"
+  },
+  "k_info": {
+   "H": {
+    "shrink": "0",
+    "shrink_f": 0.0,
+    "n_pieces": 22,
+    "nv": 16,
+    "area": 0.7307967898802031,
+    "axis": "union",
+    "axis_a": 0.388133704662323
+   },
+   "B1": {
+    "shrink": "0",
+    "shrink_f": 0.0,
+    "n_pieces": 32,
+    "nv": 16,
+    "area": 0.7993431033806593,
+    "axis": "union",
+    "axis_a": 0.43538613244891167
+   },
+   "D": {
+    "shrink": "0",
+    "shrink_f": 0.0,
+    "n_pieces": 12,
+    "nv": 16,
+    "area": 0.7937311359986485,
+    "axis": "union",
+    "axis_a": 0.4205279238522053
+   }
+  },
+  "passes": 2,
+  "exact_calls": 3694,
+  "invariant": true,
+  "checks": {
+   "K-CONTAINER": true,
+   "K-DISJOINT": true,
+   "POSE-CONTAINER": true,
+   "POSE-CONTAINER-STRICT": true,
+   "CLIP-FIXPOINT": true
+  },
+  "diagnostics": {
+   "H": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.4715
+   },
+   "B1": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.0005
+   },
+   "D": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.26625
+   }
+  },
+  "seconds": 10.86
+ },
+ "pieces_lonely": {
+  "kept": {
+   "H": 0.3583916794069419,
+   "B1": 0.9428030096899332,
+   "D": 0.05738376715505721
+  },
+  "K_area": {
+   "H": 0.7307967898802019,
+   "B1": 0.7993431033806644,
+   "D": 0.793731135998641
+  },
+  "axis_a": {
+   "H": 0.388133704662323,
+   "B1": 0.43538613244891167,
+   "D": 0.4205279238522053
+  },
+  "pieces": {
+   "H": 22,
+   "B1": 32,
+   "D": 12
+  },
+  "k_source": {
+   "H": "pieces",
+   "B1": "pieces",
+   "D": "pieces"
+  },
+  "k_info": {
+   "H": {
+    "shrink": "0",
+    "shrink_f": 0.0,
+    "n_pieces": 22,
+    "nv": 16,
+    "area": 0.7307967898802031,
+    "axis": "union",
+    "axis_a": 0.388133704662323
+   },
+   "B1": {
+    "shrink": "0",
+    "shrink_f": 0.0,
+    "n_pieces": 32,
+    "nv": 16,
+    "area": 0.7993431033806593,
+    "axis": "union",
+    "axis_a": 0.43538613244891167
+   },
+   "D": {
+    "shrink": "0",
+    "shrink_f": 0.0,
+    "n_pieces": 12,
+    "nv": 16,
+    "area": 0.7937311359986485,
+    "axis": "union",
+    "axis_a": 0.4205279238522053
+   }
+  },
+  "passes": 2,
+  "exact_calls": 3661,
+  "invariant": true,
+  "checks": {
+   "K-CONTAINER": true,
+   "K-DISJOINT": true,
+   "POSE-CONTAINER": true,
+   "POSE-CONTAINER-STRICT": true,
+   "CLIP-FIXPOINT": true
+  },
+  "diagnostics": {
+   "H": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.4715
+   },
+   "B1": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.0005
+   },
+   "D": {
+    "drawn": 4000,
+    "escape_frac": 0.0,
+    "core_meet_frac": 0.17275
+   }
+  },
+  "seconds": 11.3
+ },
+ "seconds": 42.91
+}

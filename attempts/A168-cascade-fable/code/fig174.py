@@ -60,15 +60,17 @@ def load_overlay(cell, step, shards=True):
             for p, node in S["nodes"].items():
                 T["nodes"][p] = node
             n_sh += 1
-    # A175: the polygon-clip side files (results/polyclip175_<cell>_s*.jsonl) overlay the record
+    # (A175 overlaid results/polyclip175_<cell>_s*.jsonl here; superseded by A176 below)
     # in memory, so every page shows the polygon-clipped kept fractions and verdicts at once
+    # A176: the polyclip175 side files are PRE-FIX (not the record) and are no longer overlaid; the
+    # renorm176 side files (fixed library, polygon + lonely clip) are.
     try:
-        import renorm175 as RN
+        import renorm176 as RN
         n_px = RN.overlay_side(T, cell)
         if n_px:
-            print("  A175 polygon-clip overlay: %d nodes" % n_px, flush=True)
+            print("  A176 fixed-library overlay: %d nodes" % n_px, flush=True)
     except Exception as e:                                       # noqa: BLE001
-        print("  (no A175 overlay: %r)" % (e,), flush=True)
+        print("  (no A176 overlay: %r)" % (e,), flush=True)
     return T, n_sh
 
 
@@ -279,7 +281,7 @@ def main():
     out = a.out or os.path.join(K.FIGS, "steps_%s_%s.svg" % (a.cell, step))
     svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" font-family="DejaVu Sans,Arial">' % (W, H),
            "<defs>" + FB.STIPPLE + "</defs>", '<rect width="100%" height="100%" fill="#fafafa"/>',
-           text(14, 30, "A175 (A168 cascade, POLYGON clip) on %s -- step %s: %s   [%s; %d parents done; %d shard files overlaid]"
+           text(14, 30, "A176 (A168 cascade, POLYGON + LONELY clip, fixed library) on %s -- step %s: %s   [%s; %d parents done; %d shard files overlaid]"
                 % (a.cell, step, F.STEP_TITLE.get(step, step), time.strftime("%Y-%m-%d %H:%M"), len(parents), n_sh),
                 12, "#000", weight="bold"),
            text(14, 48, "legend: filled = admissible centres by geometry; squares = hypothesis at box centre & mid-tilt, "
