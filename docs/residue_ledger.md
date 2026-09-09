@@ -177,6 +177,20 @@ core that the parametric core-affine form refuses, so certificate-based region-t
 window-valid claim today is the free TC kill of `k5_11_interior_Y0041_D02`, whose boxes are s-independent. **A151 (`PENDING`, 2026-09-08):** with the exact pin core S02 is the best-yielding family on the stubborn ALIVE population (36.8% = 21 of 57, against 25.9% overall and S01's 25.5%) but only marginally — every S02 kill lands within 0.25 budget units of the threshold and 29.8% fall in the LOST-KILL/TOO-TIGHT band against S01's 5.2%, while the survivors sit at τ = 5.000000 exactly — and an ASYMMETRIC N giving f1 ten times A116's cell volume (x ±0.40, y ±0.25, θ ∈ [8.435°, 88.435°]; 72,138 leaves; 10⁵ drawn → 2,959 tested → 0 hits) raises the consumer count from 72 to 96 of the 184 k5_11-frame S02 nodes (42 still alive), every growth refusal being a wall cap with no real partial packing found inside any grown N. Generalises as: *a class-boundary shadow — a dead class's minimiser
 sitting on a live class's box; the basin/grain lemma is the transfer.*
 
+**(7) The pinwheel's two extra directions, and why its basin is a UNION (A160
+`attempts/A160-s02-f0-slide`, after the PI's f0-slide reading and the coordinator's common-tilt
+reading):** `f0` is an exact one-parameter rattler slide of length 0.298419 along its own body axis at
+the fixed tilt 48.4351° (rails `BL(1,0)`/`f3`, stops `BR(0,1)`/`f1`; `f3` by contrast is the shadow's
+most load-bearing square, Δs\* 0.1190, and `BR(0,0)` is a second rattler at 0.5357), and the
+common-tilt chain certifies a 60–80° shared-tilt range in cheap links with every refusal labelled —
+but adding `f0` as a required box costs 96/42 → 15/8 and caps the tree, the chain's own ceiling is the
+tilt SPREAD of a node's support (63/27 at half-width 1.25°, 124/53 at 10°), and the coordinate that
+actually binds is `f2`'s and `f3`'s tilt INDEPENDENTLY (14 and 10 of the 20 alive nodes outside
+A151-B), which slices certify with zero failures in 348 s at `f1`'s base box yet a **LIVE-LOW
+witness** refutes together with A151-B's grown `f1` — so the growth directions trade off, the basin is
+a DISJUNCTION of differently shaped certified boxes, and that union reaches **114 of 184 in-N nodes,
+50 alive**.
+
 ### 1c. Families S03–S06 (PI-read) and S08–S53
 ![S03](shadows/S03.svg) ![S04](shadows/S04.svg)
 ![S05](shadows/S05.svg) ![S06](shadows/S06.svg)
