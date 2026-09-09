@@ -1,0 +1,26 @@
+10:09:01 A151-resume shard 0/1  entry=a163 (per node, A160 union)  cap 7000 s
+10:09:01   YES-leaf certificate: per node: attempts/A163-s02-other-frames/certs/<entry>.tcert.json.gz  sha NONE  *** CHECKED (per node; each entry's own sha256 and exact rational certified minimum are recorded on the node) ***
+10:09:01   boxes: the CHECKED certified set the node's support lies in, with the largest verified rational margin over s0
+10:09:01   LP: stage1 240 s -> per-LP wall 1500 s;  cert rounds 6 wall 2600 s time_limit 420 s
+10:09:01   memory gate (A112 a111lib.gate, called before EVERY LP): commit > 6144 MB, phys > 3072 MB
+10:09:01   affinity mask 0xFFFF set on this process (children inherit): True
+10:09:01   queue queue_a163_gallery.json: 2 nodes in this shard
+10:09:01   RESUME: 2 nodes left to run in this shard
+10:09:02   k5_16_interior_Y0941             S02_k5_16_A163chain_BOTH_base_r0.20_h10.00_nof0_+00.00 (frame k5_16; verified margin over s0 7.454e-06; YES leaf CHECKED)
+10:13:22   k5_16_interior_Y0941             NO0 LP stage1 tau=4.500000 eta=-0.500000 conv=True (245s; flat-900 245s)
+10:14:02     cert NO0                                            PASS (25s)
+10:14:02   k5_16_interior_Y0941             NO0 DEAD-CERT
+10:18:32   k5_16_interior_Y0941             NO1 LP stage1 tau=4.500000 eta=-0.500000 conv=False (255s; flat-900 1500s)
+10:20:01     cert NO1                                            PASS (74s)
+10:20:01   k5_16_interior_Y0941             NO1 DEAD-CERT
+10:24:35   k5_16_interior_Y0941             NO2 LP stage1 tau=4.500000 eta=-0.500000 conv=False (259s; flat-900 1500s)
+10:48:30     cert NO2                                            PASS (1420s)
+10:48:30   k5_16_interior_Y0941             NO2 DEAD-CERT
+11:02:46   k5_16_interior_Y0941             NO3 LP stage2 tau=4.666667 eta=-0.333333 conv=True (841s; flat-900 841s)
+11:06:13     cert NO3                                            FAIL (192s)
+11:06:13   k5_16_interior_Y0941             NO3 ALIVE
+11:06:13   k5_16_interior_Y0941             OPEN  (LP 1600 s, cert 1711 s)  children=['DEAD-CERT', 'DEAD-CERT', 'DEAD-CERT', 'ALIVE']
+11:06:13   k5_16_interior_Y0941             OPEN
+11:06:14   k5_16_interior_Y1110             S02_k5_16_A163chain_BOTH_base_r0.20_h10.00_nof0_+00.00 (frame k5_16; verified margin over s0 7.454e-06; YES leaf CHECKED)
+11:11:53   k5_16_interior_Y1110             NO0 LP stage2 tau=5.000000 eta=+0.000000 conv=True (324s; flat-900 256s)
+11:11:53   k5_16_interior_Y1110             NO0 ALIVE

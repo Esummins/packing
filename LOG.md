@@ -7908,3 +7908,72 @@ pass + ~3,700 s of diagnostics, checking and witness search ≈ 3.3 CPU-h of the
   `docs/residue_map/lonely_clip_S1.svg`; two paragraphs in `docs/residue_ledger.md` §6; registry row;
   this entry. One BelowNormal process at affinity 0xFFFF for the sweep, box ceiling 16 counted and
   waited on before every launch (A168's shards, A174 and A136 were running throughout); ~1.1 CPU-h.
+
+## 2026-09-09 — A136-a120-resume, resumed after the 02:20 reboot (Opus engineer) — **24 CLOSED → 29, and the binding constraint was the CORES, not the LP**
+
+- **Where the survivors actually were.** Of this attempt's **72 ALIVE NO children**, **56 are LP-alive** — the LP
+  itself found no kill, and no certifier budget touches those — while **16 were alive only because the certificate
+  did not land** (14 CAP, 2 FAIL) with the LP already converged at `eta` between −0.444 and −0.116. **Six of the
+  sixteen were the ONLY alive child of their node**, i.e. six nodes were one certificate from CLOSED. Splitting the
+  ALIVE population that way is what made the rest of the day cheap.
+- **A170's audit applies to this lane and A170 never ran on it.** `attempts/A170-certfix/results/scan170.json`:
+  **122 A136 certificates, all `kind: "stock"` / `exact_lane: false`**, exact core up to **1.0787×** the carried one —
+  A136 certifies through `caselp.make_certificate`, the entry point that `Hyp.from_json`s the hypothesis and throws
+  A135's exact cores away — and **no A136 row appears in any `recert170_*.jsonl`**. Three experiments, cheapest first:
+  - `exactcert136.py` **patches the written certificate** (A170's `carry_exact_cores`, ENLARGE only, guarded by A135's
+    exact vertex test) and re-runs the **FROZEN** `verify_case.py`. No LP, no re-emission. **2 of 16 PASS** in 10–48 s:
+    `Y0441/NO0` CAP → PASS **closing that node**, and `Y0691/NO3`.
+  - the same low-hole failures at **depth 64**: **0 of 6**, and `Y1147/NO1`'s "0 HOLES at depth 56" became **4 real
+    holes at depth 64**. Depth was never the constraint; the holes were simply not found at 56.
+  - `certify136x.py` **re-emits with the exact cores INSIDE the witness-feedback loop**
+    (`make_certificate` → `carry_exact_cores` → A136's F-COVER `narrow`, the only sound order): **2 more PASS**,
+    closing `Y0691` (558 s, 3 emissions, 18 cores enlarged) and **`k5_16_interior_Y0941`**.
+- **THE RULE, and the diagnostic that costs nothing.** A verdict of *`N` witness boxes at depth 56, `k` HOLES* is a
+  **coverage** failure — the cover really leaks and a wider core adds no mass — so all of those stayed FAIL. A verdict
+  of *`total mass >= budget: certificate proves nothing`* is a **measure** failure — the cover is fine and the measure
+  the loop built is too small — and that is exactly the class wider cores in the loop repair: **`Y0941/NO3` had ended
+  its stock-core loop at `total 5.025000 >= 5` after the full round budget and PASSed at ROUND 0 in 7.1 s at
+  `total = 2492839/500000 = 4.98568` with the cores 2.26 % wider.** So **on a stock-core lane a cert CAP or FAIL is
+  not evidence about the node until it has been re-certified with the cores the LP was entitled to use** — and read
+  the verdict line first, because it says which lever to reach for before any compute is spent.
+- **A gallery page retired.** `k5_16_interior_Y0941` carried an ALIVE `docs/shadows` page; it is now
+  `docs/shadows/a57v4/killed/`, **a57v4 53 alive / 7 dead → 52 / 8**. The four sole survivors that remain
+  (`Y0036_D02/NO2`, `Y0414_D06/NO0`, `Y0978_D07/NO0`, `Y1147/NO1`) all report **real holes under the wider cores**, so
+  they are honest survivors of this cover rather than certifier artefacts — a stronger statement than yesterday's CAPs.
+- **The last NO-COMPLETE node is closed, for 89 s of compute.** `k5_11_interior_Y0274`'s YES leaf was A160 union entry
+  34, which `entry151.A160_NO_CERTIFICATE` recorded as having **no certificate artefact at all**, and A160's own
+  `consumer160.json` puts Y0274 inside **only** the slices union (slack +0.12722; A151-B −0.58751, chain −0.93248), so
+  nothing could be cited instead. `yesleaf136.py` emits it: A160's `gent160` and A133's `gen_local_t`/`check_local_t`
+  imported UNCHANGED with every write target re-pointed into this attempt, the emitted bodies **asserted
+  float-for-float equal to `N_boxes160.json` entry 34** (the box set the NO side was cut against — a certificate for a
+  different box set would not license the citation), the tree DEAD in **67.9 s** and A133's **independent** rational
+  checker **VALID, 0 errors**, exact certified minimum `1117504297361694154655418074219141144140303/2882303761517117440…`
+  **above s₀ by 3.788·10⁻⁵**. `no_complete136.jsonl` is now empty.
+- **"Largest certified margin over s₀" is the wrong rule for choosing a YES leaf.** On A163's k5_16 frame the
+  `h = 1.25°` chain link (margin **8.121·10⁻⁵**, the largest citeable) left **12 of 12** NO children ALIVE across
+  Y0054/Y0183/Y0380 with the LP converging to `eta = 0` at `tau = 5` — the cover proves nothing — while the
+  `h = 10°` link (margin **7.454·10⁻⁶**, 11× smaller, but a **20°**-wide shared-tilt window against 2.5°) certified
+  3 of 4 children of Y0941. The margin measures how far the certificate's own tree got; the NO side needs the
+  **widest** citeable `N`, and width and certified depth are anti-correlated (the same trade-off A160 recorded between
+  growth directions, seen from the consumer side). `results/queue_a163_h10.json` forces that leaf on the nine nodes
+  that can cite it. Counter-evidence recorded too: `Y1110/NO0` is ALIVE on the h = 10° leaf as well, at `eta = 0`.
+- **Resumability, and one process-discipline fix.** `run151.py --out_suffix` was added because **both** `noside120`
+  caches are keyed by node id alone, so re-running an id against a second YES leaf inside the same subtree would
+  silently return the first leaf's verdicts; `report136.py` now discovers every `results/nodes_*` subtree by glob and
+  states `applies_to_tags` on each closure from the node's `campaign_path` (A137 §C.3 — an id is not a node), and
+  always rewrites `no_complete136.jsonl` so a filled hole cannot leave a stale row. Killing the re-emission driver to
+  re-launch it with a tighter per-child wall tore its in-flight children down and wrote each as `FAIL` with
+  `rc = 0xC000013A` after **0.0 s**; nothing had been measured. **13 such rows are quarantined in
+  `results/reemit136_discarded.jsonl` and the driver now records `KILLED` and re-runs them — a resource event is never
+  a verdict**, the same rule the lab already applies to a CAP.
+- **Still owed** (`results/owed136.json`, the per-queue board): `queue_base26` 26 → 10 CLOSED / 5 OPEN / 6 A149-kills /
+  2 SKIP-UNSOUND / 3 not-run (the base worker was still running at hand-off); `queue_asym10` 1 CLOSED / 7 OPEN /
+  2 A149-kills; `queue_a160_8` 1 CLOSED / 3 OPEN / 2 SKIP-UNSOUND — **complete**; `queue_a163` 22 with 19 not yet run
+  (the three that ran are OPEN on the h = 1.25° leaf); `queue_a163_h10` 10, only Y0941 done. The un-run a163 queues are
+  the whole remaining owed set and they are cheap per node; the OPEN nodes are **not** — 56 of their children are
+  LP-alive.
+- **Files**: `attempts/A136-a120-resume/code/{yesleaf136.py, exactcert136.py, certify136x.py, reemit136.py, owed136.py}`
+  + `run151.py`/`report136.py` patches, `results/{closures136.jsonl, report136.json, owed136.json, exactcert136.jsonl,
+  reemit136.jsonl, reemit136_discarded.jsonl, yesleaf136.json, queue_a163_h10.json, leanfrags/*}`,
+  `yesleaf/certs/`, `certs_exact/`, `certs_a163x/`, `notes/frames151.md` §§5–7, `docs/shadows/STATUS.md` +
+  `a57v4/killed/k5_16_interior_Y0941.svg`, `docs/residue_ledger.md` §5, registry row.

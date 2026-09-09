@@ -1,0 +1,54 @@
+10:08:18 A151-resume shard 0/1  entry=base (S02_k5_11_r0.20_rho10)  cap 16000 s
+10:08:18   YES-leaf certificate: attempts/A119-local-cert-lean/certs/S02_k5_11_r0.20_rho10.cert.json.gz  sha 41fa6e5a9da74c76
+10:08:18   boxes: A119's NOMINAL boxes -- exactly the boxes this cover names
+10:08:18   LP: stage1 240 s -> per-LP wall 1500 s;  cert rounds 6 wall 2600 s time_limit 420 s
+10:08:18   memory gate (A112 a111lib.gate, called before EVERY LP): commit > 6144 MB, phys > 3072 MB
+10:08:18   affinity mask 0xFFFF set on this process (children inherit): True
+10:08:18   queue queue_base26.json: 26 nodes in this shard
+10:08:18   RESUME: 15 of 26 already terminal on disk, skipped: [["k5_11_interior_Y0380", "CLOSED"], ["k5_11_interior_Y0422", "CLOSED"], ["k5_11_interior_Y0441", "OPEN"], ["k5_11_interior_Y0489", "CLOSED"], ["k5_11_interior_Y0527", "SKIP-UNSOUND"], ["k5_11_interior_Y0691", "OPEN"], ["k5_11_interior_Y1128", "OPEN"], ["k5_11_interior_Y0036_D07", "CLOSED"], ["k5_11_interior_Y0119_D06", "SKIP-UNSOUND"], ["k5_11_interior_Y0217_D03", "CLOSED"], ["k5_11_interior_Y0217_D06", "CLOSED"], ["k5_11_interior_Y0217_D07", "CLOSED"], ["k5_11_interior_Y0414_D03", "CLOSED"], ["k5_11_interior_Y0414_D06", "OPEN"], ["k5_11_interior_Y0978_D07", "OPEN"]]
+10:08:18   RESUME: 11 nodes left to run in this shard
+10:08:18   k5_11_interior_Y1140             SKIP: A149 already certified it dead on exact cores (exact_reemit_w6.jsonl, tau 4.844184)
+10:08:18   k5_11_interior_Y0036_D06         SKIP: A149 already certified it dead on exact cores (exact_reemit_w5.jsonl, tau 4.705882)
+10:08:18   k5_11_interior_Y0054_D00         SKIP: A149 already certified it dead on exact cores (exact_reemit_w7.jsonl, tau 4.000000)
+10:08:18   k5_11_interior_Y0083_D03         SKIP: A149 already certified it dead on exact cores (exact_reemit_w4.jsonl, tau 4.000000)
+10:08:18   k5_11_interior_Y0144_D01         SKIP: A149 already certified it dead on exact cores (exact_reemit_w4.jsonl, tau 4.000000)
+10:12:47   k5_11_interior_Y0636_D05         NO0 LP stage1 tau=4.750000 eta=-0.250000 conv=False (254s; flat-900 1500s)
+10:14:16     cert NO0                                            PASS (74s)
+10:14:16   k5_11_interior_Y0636_D05         NO0 DEAD-CERT
+10:19:12   k5_11_interior_Y0636_D05         NO1 LP stage1 tau=4.750000 eta=-0.250000 conv=False (282s; flat-900 1500s)
+10:53:17     cert NO1                                            PASS (2030s)
+10:53:17   k5_11_interior_Y0636_D05         NO1 DEAD-CERT
+10:57:45   k5_11_interior_Y0636_D05         NO2 LP stage1 tau=4.750000 eta=-0.250000 conv=False (253s; flat-900 1500s)
+11:03:58     cert NO2                                            PASS (358s)
+11:03:58   k5_11_interior_Y0636_D05         NO2 DEAD-CERT
+11:08:22   k5_11_interior_Y0636_D05         NO3 LP stage1 tau=4.714286 eta=-0.285714 conv=False (248s; flat-900 1500s)
+11:17:28     cert NO3                                            PASS (531s)
+11:17:28   k5_11_interior_Y0636_D05         NO3 DEAD-CERT
+11:17:28   k5_11_interior_Y0636_D05         CLOSED  (LP 1037 s, cert 2993 s)  children=['DEAD-CERT', 'DEAD-CERT', 'DEAD-CERT', 'DEAD-CERT']
+11:17:28   k5_11_interior_Y0636_D05         CLOSED
+11:18:10   k5_11_interior_Y0954_D01         NO0 LP stage2 tau=5.000000 eta=+0.000000 conv=True (26s; flat-900 20s)
+11:18:10   k5_11_interior_Y0954_D01         NO0 ALIVE
+11:19:15   k5_11_interior_Y0954_D01         NO1 LP stage2 tau=5.000000 eta=+0.000000 conv=True (50s; flat-900 27s)
+11:19:15   k5_11_interior_Y0954_D01         NO1 ALIVE
+11:20:08   k5_11_interior_Y0954_D01         NO2 LP stage2 tau=5.000000 eta=-0.000000 conv=True (38s; flat-900 8s)
+11:20:08   k5_11_interior_Y0954_D01         NO2 ALIVE
+11:23:15   k5_11_interior_Y0954_D01         NO3 LP stage2 tau=5.000000 eta=+0.000000 conv=True (172s; flat-900 110s)
+11:23:15   k5_11_interior_Y0954_D01         NO3 ALIVE
+11:23:15   k5_11_interior_Y0954_D01         OPEN  (LP 286 s, cert 0 s)  children=['ALIVE', 'ALIVE', 'ALIVE', 'ALIVE']
+11:23:15   k5_11_interior_Y0954_D01         OPEN
+11:23:15   k5_11_interior_Y0954_D03         SKIP: A149 already certified it dead on exact cores (exact_reemit_w6.jsonl, tau 4.750000)
+11:25:21   k5_11_interior_Y1128_D06         NO0 LP stage2 tau=5.000000 eta=+0.000000 conv=True (110s; flat-900 61s)
+11:25:21   k5_11_interior_Y1128_D06         NO0 ALIVE
+11:29:51   k5_11_interior_Y1128_D06         NO1 LP stage1 tau=4.791667 eta=-0.208333 conv=False (255s; flat-900 1500s)
+12:05:54     cert NO1                                            FAIL (2148s)
+12:05:54   k5_11_interior_Y1128_D06         NO1 ALIVE
+12:10:13   k5_11_interior_Y1128_D06         NO2 LP stage1 tau=4.500000 eta=-0.500000 conv=False (244s; flat-900 1500s)
+12:11:55     cert NO2                                            PASS (86s)
+12:11:55   k5_11_interior_Y1128_D06         NO2 DEAD-CERT
+12:39:25   k5_11_interior_Y1128_D06         NO3 LP stage2 tau=4.773437 eta=-0.226563 conv=False (1635s; flat-900 1635s)
+13:23:00     cert NO3                                            CAP (2600s)
+13:23:00   k5_11_interior_Y1128_D06         NO3 ALIVE
+13:23:00   k5_11_interior_Y1128_D06         OPEN  (LP 2244 s, cert 4835 s)  children=['ALIVE', 'ALIVE', 'DEAD-CERT', 'ALIVE']
+13:23:00   k5_11_interior_Y1128_D06         OPEN
+13:26:09   k5_11_interior_Y1128_D07         NO0 LP stage2 tau=5.000000 eta=+0.000000 conv=True (173s; flat-900 71s)
+13:26:09   k5_11_interior_Y1128_D07         NO0 ALIVE
