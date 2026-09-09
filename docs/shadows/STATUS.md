@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-09 00:53` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-09 01:45` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -160,8 +160,8 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `A149 a60_reemit_g1.jsonl` | 48 | 12 |
 | `A149 a60_reemit_g2.jsonl` | 45 | 13 |
 | `A149 a60_reemit_g3.jsonl` | 38 | 11 |
-| `A149 a60_reemit_g4.jsonl` | 22 | 21 |
-| `A149 a60_reemit_g5.jsonl` | 17 | 16 |
+| `A149 a60_reemit_g4.jsonl` | 25 | 24 |
+| `A149 a60_reemit_g5.jsonl` | 19 | 17 |
 | `A149 a60_reemit_smoke.jsonl` | 1 | 0 |
 | `A149 exact_reemit_m0.jsonl` | 9 | 7 |
 | `A149 exact_reemit_m1.jsonl` | 9 | 6 |
@@ -198,7 +198,7 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `ledger superseded_by_backlog_A137.jsonl` | 581 | 581 |
 | `ledger superseded_by_exactcore_A137.jsonl` | 46 | 46 |
 | `ledger superseded_by_exactcore_A149.jsonl` | 93 | 93 |
-| `ledger superseded_by_exactcore_a60_A149.jsonl` | 79 | 79 |
+| `ledger superseded_by_exactcore_a60_A149.jsonl` | 87 | 87 |
 | `ledger superseded_by_tight_core.jsonl` | 70 | 70 |
 
 `*__exall.json` is **not** a kill record (A148's rule: it exists on LOST-KILL / TOO-TIGHT / FAIL too) and is not scanned.  A158's `yescert158.jsonl` rows say `verdict = "KILL"` with `kill = false` and are counted as **not** kills; in particular **`c0_Y0076`'s NO child is NOT a kill** (A158b: the YES child converges at `tau = budget`, `eta = 0`).  A140's `exactcore140.jsonl` kills only where `kills_converged` and the certificate `PASS` -- `l1_148`, `l2_p65_101` and `l2_p65_111` have `kills = true` with `converged = false` and are **not** kills (A124: a non-converged `tau` was never a bound).
