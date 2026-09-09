@@ -187,6 +187,10 @@ def stage_apply(a):
                     if T["nodes"][q2]["verdict"].startswith("ALIVE"):
                         T["nodes"][q2]["verdict"] = "DEAD(C, ancestor %s: %s)" % (q, vq[:60])
                         n_desc_dead += 1
+    # the canary: its real family must still land in ALIVE nodes at every step (re-located on the new pieces)
+    for spec in CS.STEPS:
+        if any(n.get("step") == spec["step"] for n in T["nodes"].values()):
+            CS.canary_locate(T, spec)
     T.setdefault("piececut", {})[step] = dict(n_recorded=len(recs), n_dead=n_dead, n_shrunk=n_shrunk,
                                               n_desc_seen=n_desc_seen, n_desc_changed=n_desc_changed,
                                               n_desc_dead=n_desc_dead, when=time.strftime("%Y-%m-%d %H:%M"),

@@ -102,3 +102,84 @@ falsification (admissible poses in a clipped-away region must overlap another ro
 re-decisions (sampled pose pairs must overlap), the M(c) samples, the canary's real squares.
 
 ---
+
+---
+
+## 5. What generalises (every lemma n-general; each example → the lemma that generalises it)
+
+**The cascade as a procedure.**  Input: a hard interior square H (a k0 cell: one conditioned box, τ = budget),
+side s, pad w = (λ_max − 1)(1 + 1/√2).  Loop over the corners in the PI's order (the corner H blocks first):
+(i) K0-BLOCKED gives two DISTINCT meeters of the widened box; (ii) cover the meeter window with the roles
+as obstacles (container / misses-cell / witness leaves), and at every open box apply, in this order,
+R3 (lonely ⇒ dead), R1 (same cell as the first meeter, or ℓ∞ < 1/√2 ⇒ dead), then NORMALISE (container
++ mutual clip to a fixed point) and ASSERT the invariant (K′ inside, pairwise disjoint; a failure is the
+PAIR leaf), then OVL and the chord rows; (iii) before leaving a corner, the COEXISTENCE cut: a first meeter
+with no admissible second meeter dies; (iv) at the end, the case-LP at budget n − #roles on the exact cores
+(A170's wrapper), the uncoverable area and the cover number as free screens.  Nothing in the loop uses
+n = 11 except the budget arithmetic and the fixed side s.
+
+| statement used | n-general form | where it is proved |
+|---|---|---|
+| K0-BLOCKED / K0-WIDEN | for any n, any side window [m₀, s): a packing not a Trump image has ≥ 2 distinct squares at every widened corner box of its dilate, or is killed by the K0-FREE leaf | `k0_route.md` §3–4 |
+| (R6) crowds disjoint | s − 2(1 + w) − √2 > 0 ⇒ no unit square meets two widened corner boxes; holds for every s > 2(1 + w) + √2 = 3.465 | A150 `composition.md` §1 |
+| CLIP / PAIR / OVL | statements about two boxes of DISTINCT unit squares in any packing, no n | A131, A141 §3 (Lean), A118 §1.2 |
+| ROW (chord rows) | chords of interior-disjoint squares on a line inside [0, s]² sum to ≤ s; β = ⌊s − Σ minchord⌋ free band squares, any n | A144, A161 Lemma CL |
+| R1 (cells, ℓ∞) | Lemma A1 needs no container and no n; Lemma A2 needs c < 1/2 + 1/√2, i.e. every pad w < 0.2071 | A169 §2 |
+| R3 (lonely poses) | Theorem B is a statement about ONE unit square in a quadrant and a box (0, c)², c ≥ 1; the K0 consequence (no square of a K0-BLOCKED family is lonely at any corner) is n-free | A169 §3, §6 |
+| coexistence cut | "a hypothesis box for the first meeter is valid only if some admissible second meeter exists" is the constructive form of K0-BLOCKED at that corner; its cover + normalisation is the same code at every n | this attempt, §1 |
+| LEAF LP | the case-LP with k conditioned boxes at budget n − k, certificate on the exact cores, frozen verifier | A150, A166/A170 |
+
+**Examples → lemmas.**  A pressed TR meeter at 45° (centre 0.707 from both walls) is lonely (R3, Cor. B1);
+a first meeter slid δ < tan(θ/2) along a wall is lonely (Cor. B2); two candidate meeters both in the NE
+cell of a corner are the same square or overlap (R1, Lemma A2); the canary's real TR pair {D = square 5,
+S = H itself (M(TR) = 1)} lands in distinct cells at c = 1 + w and at ℓ∞ ≥ 1/√2, as Lemma A2 says it must.
+
+---
+
+## A174 takeover (Fable lead, 2026-09-09 11:00 -> ) — the same tree, continued
+
+A168's agent was stopped at 10:35 with its three S3 shards (`s3 --cell l1_104 --parents all --shard k/3`)
+and the canary's S3 coexistence pass in flight; A174 (`attempts/A174-cascade-takeover/BRIEF.md`) is its
+successor and works here.  Nothing of A168's record is re-derived; what is added is listed below with
+its file, and every figure of a step is regenerated the moment that step's results land
+(`code/fig174.py`, `figs/steps_<cell>_<STEP>.svg`, stable names; shard files are overlaid read-only so a
+page exists while the shards run).
+
+**A174.1  The coexistence cut at PIECE granularity (`code/coex174.py`, applied by `coex174b.py`).**
+[T] A first meeter X at corner c′ (D at TR, B at BR) is a valid hypothesis only on the poses that admit
+a second meeter of the widened box (K0-BLOCKED).  Per ALIVE node of S1 / S3 every piece of X is bisected
+(`--bisect 1`: the longer centre side halved, tilt sub-bin kept) and each sub-piece sp is tested:
+(i) the sub-node {other roles, X ∈ sp} is normalised (container + mutual clip to a fixed point,
+invariant, OVL) — a dead sub-node has no configuration with X ∈ sp; (ii) the partner window (the
+corner's meeter window) is covered ONCE PER PARENT with the parent's roles as obstacles (complete
+prefix-code cover, A141's discharges; fewer obstacles ⇒ a superset of every child's and sub-piece's
+partner poses, so the reuse is sound); (iii) every open box passes R3 (lonely ⇒ dead), R1 against sp
+(Lemma A2 cells, Lemma A1 ℓ∞), then is normalised with {roles, X ∈ sp}: the first survivor is a
+coexistence certificate (early exit), none ⇒ sp is dropped; in the M(TR) = 1 canary H itself
+(restricted to B_meet) is tried as the partner.  X is replaced by the union of its surviving,
+re-normalised sub-pieces, the node re-normalised, and the cut propagated to every descendant by
+intersecting the same role's pieces (the descendant's hypothesis is contained in the ancestor's)
+[T].  The cells of the parent's partner cover at c = 1 + w are RECORDED (corner-local x/y, `lo` =
+within c of the wall) so the PI's reading — B's partner comes from the (left, floor) cell — is
+measured, not assumed; those boxes are tried first.
+
+**A174.2  The lonely clip (`code/lonely174.py`, consuming A173's `multibox.lonely_clip`).**  [T] R3 is a
+NO-family in pose space (a lonely pose at corner c′ admits no second meeter of the widened box, so no
+square of a K0-BLOCKED family is in one), and A168 consumed it only as a whole-role kill.  A173 makes it
+a per-piece CLIP inside A171's library: centre slabs and tilt halves certified lonely are removed
+(the box test is a sufficient condition, monotone under shrinking, so every removal is sound).  Here it
+is applied to every corner-meeter role of every alive node (D, S at TR; B, B′ at BR; T at TL; L at
+BL; `refine 1`): the clipped pieces are intersected with the piece they came from, the role rebuilt
+(K′ from the survivors — larger, so the mutual clip bites harder), the invariant re-asserted, the
+fixed point re-run at levels ≤ 2, and the clip propagated to the same role in every descendant.
+Consumed only once A173 is registered done (until then A168's whole-role kill is what the tree has).
+
+**A174.3  Figures (`code/fig174.py`).**  Per step and cell, `figs/steps_<cell>_<STEP>.svg`: an
+AGGREGATE page (every touched parent's roles as thin outlines and ALL of the step's cover boxes,
+stipple = alive, faint = dead; the same boxes coloured by the coexistence status; the union of the
+alive children's new-role pieces = the region left after the step), then the per-chain pages of
+fig168b (canary chain first) — regenerated whenever a shard file lands (overlay, read-only) and at
+every merge / coexistence pass, and committed.  `figs/partner_<cell>_<STEP>.svg`: for a node after
+the piece cut, the partner family drawn BY GEOMETRY (centres admitting some tilt inside the
+container, clear of every K′, meeting the corner cell) with the certified witnesses, and the first
+meeter's sub-pieces kept / dropped with the 2×2 grid at c = 1 + w drawn.
