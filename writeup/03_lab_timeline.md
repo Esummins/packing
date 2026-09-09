@@ -267,3 +267,485 @@ fixed point before any LP.
 
 No k0 cell has been certified dead by the cascade as of 2026-09-09 midday. The eleven converged-alive cells stand
 at eleven (docs/shadows/STATUS.md, generated 10:05).
+
+## 3. The stuck/unblock episodes
+
+Each subsection has the same five parts: what the AI was doing; the sign it was stuck (wasted compute, a wrong
+reading, a false lemma); what the PI saw and said, quoted from the record; what changed; the measured effect.
+The episodes are in date order except that the false readings (§3.9) and the process rules (§3.12) are grouped.
+
+### 3.1 The stratification by simple squares (A53, 2026-08-31) — the load-bearing idea
+
+*What the AI was doing.* The endgame survey of Phase III: six routes to the global theorem, each piloted with a
+validated engine and each priced honestly at an impossible number. By 2026-08-28 the coordinator's own summary
+read: "the s-hat far-field survey is COMPLETE, A30-A42 ... s(11) = s-hat requires an N6-class weapon vs the ghost's
+equality manifold ... no known family works, each closed by an exact mechanism. Actionable now: A29 resume
+(3.84), n=12 campaign, corpus write-up" (memory log 2026-08-28). The same three fallbacks — resume the 3.84 tree,
+switch to n = 12, write up — recur in the coordinator's notes on 08-26, 08-27 (twice), 08-28 (twice) and 08-29.
+
+*The sign.* The AI had proved the walls were real (the enumeration–certificate mismatch law, seven faces by A52)
+and had no route around them. Its proposals for the next step were all retreats. Roughly 14 attempts in four
+days had produced theorems and zero progress on the residue.
+
+*What the PI saw and said.* On 2026-08-31 the PI proposed a decomposition of the whole configuration space by a
+finite combinatorial label. The dispatch records it: "PI's decomposition: k = number of grid-locked doubly-flush
+squares. Two leverages no prior branching had: skeletons are DISCRETE (exact rational grid slots, tiny census) and
+non-Trump skeletons are F4-SHIELD-FREE; plus the measurable crux — the 1/4-ghost's power is built on full-box
+symmetry, and residual-region LPs (skeleton pinned exactly, area deleted, L-shaped domain) have never been run.
+Hazard flagged: k unstable under epsilon (near-grid squares strand ~epsilon) — patched by the k-maximality drain
+selection" (LOG 2026-08-31). Note the shape of the idea: not a new certificate, but a way to make every existing
+certificate stronger by pinning exact squares and deleting their area from the container; and note that the PI
+flagged the soundness hazard (tolerance) in the same breath as the idea.
+
+*What changed.* A53 (Fable) turned it into a census — the Young-form definition ("tiling grown in from a corner"),
+1,110 skeleton 4-tuples in 163 D4 classes, k = 0..9, stable across the window — and ran the residual-region LPs.
+"HEADLINE: residual-region guard LPs with EXACT skeleton pins break the 1/4-ghost. All 33 k=6 classes LP-dead
+(typical tau = 4.000000 exactly = an integral 4-square blocking packing; 6 + 4 < 11)" (LOG 2026-08-31). The
+adversary of A10/A12, the quarter-weight pinwheel that had held τ = 11 at every box size for two weeks, "is a
+full-box-symmetry creature; residual regions kill it outright" (memory log 2026-09-01).
+
+*Measured effect.* Within two days: k ≥ 7 empty unconditionally; 33/33 k = 6 classes dead (A54); 19/21 non-Trump
+k = 5 dead; 8/14 k = 4 dead, exactly sharp (A55); 61 certified pin-sets covering every open class with k ≤ 4 by
+containment. "THE TOP OF THE STRATIFICATION COLLAPSED, first decomposition where this ever happened" (memory log
+2026-09-01). By 2026-09-07 all 52 stratum rows were certified on the whole window [3.82, s0] (A146). Everything
+since has been about three k = 5 classes and the empty class k0_00. In the outline's attribution the idea is
+listed first among the PI's contributions and called "the load-bearing idea of the whole proof"; the AI's part
+was the definition audit (the PI's form was strictly stronger than the brief's, 1110/163 against 7204/944), the
+census, the certificates and, later, the Lean definition (A78) and the clean-room re-enumeration (A72).
+Generalises: any n; the census grows but is mechanical.
+
+### 3.2 "Draw the LP support directly": the pinwheel shadow (A106/A107, 2026-09-06)
+
+*What the AI was doing.* Running the A57 shadow trees on k5_11 and k5_16 and measuring their descent rates
+(A96, 2026-09-04..06). The level-2 and level-3 rates kept moving as parents landed (1.54× → 2.76× → 2.43× →
+2.36× → 1.55× → 1.11×); a fertility probe found that descent was clustered in a few parents (A96, 2026-09-06). The
+AI's explanation was that a fertile box contains a local minimum and its proposal was a "basin switch": certify
+a ball around each minimum and let the tree cover the complement.
+
+*The sign.* A106 measured the premise and it was false: "none of the 145 open L2-L4 boxes contains a local minimum
+(box-constrained min on the boundary; released flow leaves; median distance to a shadow square 0.32 = 9 r_basin)
+... Boxes are alive because the LP relaxation ... cannot see the slack, NOT because they hold near-solutions"
+(memory log 2026-09-06). The AI had been about to build basins around objects the boxes did not contain. The lab
+law recorded from this: "an 'alive' box in a core-relaxed LP tree need not contain anything — check what the box
+CAN reach before building basins around what it cannot."
+
+*What the PI saw and said.* The PI asked for the LP's dual support at a fertile node, drawn as squares, and read
+it: "PI read the A57 LP support and named the shadow: k7 packing = BL L-shape 3 + BR stacked 2 + TL 1 + TR 1 +
+4-square PINWHEEL at one tilt (48.435 deg); direct SLSQP gives s* = 3.886746 = s-hat + 0.0097 ... A57's fertile
+lineage Y0036 is this shadow" (memory log 2026-09-06). And the rule: "The LP dual support IS the shadow (PI: 'grab
+the phase-space point near the dead end of the LP search') — draw it directly, not the hole witnesses." Figure:
+`figures/pinwheel_k7_shadow.svg`, `figures/pinwheel_tilt_curve.svg`.
+
+*What changed.* A107 (2026-09-06) drew the dual support of every alive node in the corpus, snapped it, released it,
+and grouped the minima by value: "53 distinct shadows explain 1260 of the 1566 ALIVE-at-LP nodes"; S02 is the PI's
+pinwheel (267 nodes, the whole deep tree); S01, half the alive nodes, minimises to a side of exactly 4.000 ("this
+has room, not this is nearly feasible"); S07 is a packing nobody had seen, at 3.885618, which A108 proved exact the
+same day (2 + 4√2/3, every coordinate in Q(√2), all five tilted squares at exactly 45° — the second-best known
+packing of eleven squares). The gallery `docs/shadows/S01..S53.svg` (figures `gallery_S01.svg`, `gallery_S02.svg`,
+`gallery_S07.svg`) became the object the PI reviewed; on 2026-09-06 the PI read S01–S06 at once ("S07 = Trump with
+f0's corner no longer poking into the gap ...; S01 has a FREE CORNER -> already killed by the teleport lemma into
+a higher-k class; ... S06 = the optimal n=5 packing (2+1/sqrt2) with a unit band = the s(10) optimum") and gave the
+diagnosis that set the next week's direction: "the issue is turning teleport-lemma kills into kills in phase
+space" (memory log 2026-09-06).
+
+*Measured effect.* Two honest numbers. The per-node readings of the 83-page first pass produced 9 node kills, none
+new (A121, 2026-09-07: all already found by A118's lane sweep; "a reading is a POINTER to a cell, never a fact about
+the node"). But the pass's `i` rows — pages whose support had fewer than eleven squares — pointed at cells no queue
+had reached, and 14 of 14 of them certified dead in A115's warm re-solve (2026-09-07), "seven of them level-1 cells
+no queue would have reached". And the exact minima the gallery surfaced (S02, S07, then S33/S35/S38 via the PI's
+2026-09-07 callout "S33/S34/S35 ... look FULLY LOADED") fed the local certificate A116–A139, which closed 15 of 35
+in-N nodes (A136) and is a Lean theorem for two neighbourhoods (A139). The lesson the coordinator banked: "draw the
+LP support directly at every fertile node (PI's rule) — it worked."
+
+### 3.3 The Y0036 pinch and the Y0186 columns: pin-clip and polygon core (A131, A132/A135, 2026-09-07)
+
+*What the AI was doing.* Deploying two geometric pre-filters at emission (T5′ tight core, T5″ tilt trimming,
+A96 2026-09-06) and re-solving alive nodes at a 900 s cap (recheck96), which docs/budget.md ranked "the best
+per-budget item on the board".
+
+*The sign.* A124 (2026-09-07) graded the re-check by the campaign's own rule: "2 STRICT, 1 WEAK, 18 KNIFE ...
+Fifteen CPU-hours rediscovered two known nodes and found no third. So docs/budget.md's ranking is backwards."
+Meanwhile the trimming lever's live fire rate came in at 1.0% full kills against a projected 3.7% ("T5″ buys LP
+tractability, not kills", A123).
+
+*What the PI saw and said.* Two readings of two pages on 2026-09-07. On `k5_11_interior_Y0036` against the pin
+bl10: "most drawn tilts are geometrically impossible at most centres" — checked exactly by the coordinator: "lower
+half of the L1 box blocked at every tilt (tree logic-killed it); alive D2 bins feasible only in a top sliver ... the
+mirror lean is impossible for the whole D02/D06 bin. T5″ cannot empty it (box corner survives)". On
+`Y0186_D00_D00`: "a support column intrudes into every hypothesis pose" — checked: "in EVERY node 2 of the 5-8
+weight-1 support columns overlap the hypothesis square at every pose (SAT gap -0.005..-0.029) yet clear the
+AXIS-ALIGNED core K(a) by +0.003..+0.045; the tilted square protrudes ~0.21 beyond K(a) along the diagonals"
+(memory log 2026-09-07). Figures: `figures/A131_pinclip_Y0036.svg`, `figures/a57_lp_support.svg`.
+
+*What changed.* Two leaves, one per reading. The **pin-clip** (A131): shrink the centre box, per tilt sub-bin, to
+the region where the conditioned square can clear each pin — four sinusoids in θ, rational in t = tan(θ/2), "no
+epsilon at all"; it strictly dominates T5″ (all 159 of its empties plus 21) and, run over the stored corpus, "132
+recorded-open A57 nodes killed by T5‴ geometry alone, in 4.1 s of CPU" (2026-09-07), 112 of them by a trim already
+deployed but only ever run on new children. The **polygon core** (A132): replace the inscribed axis square K(a) by
+K′(B) = ⋂ over the box of the hypothesis square, a convex polygon certified vertex by vertex; over 506 alive nodes
+it excludes 22.3% of the dual-support columns carrying 35.7% of τ, and a quarter of that weight was the *pins'* —
+the stored pin core half-side 0.49 against the exact 0.49293. A135 then found that "both frozen verifiers take the
+core half-side a VERBATIM from the certificate and never recompute it", so the exact cores were certifiable with
+no verifier change, no Lean change, and no re-verification of anything emitted.
+
+*Measured effect.* The exact-core re-solve became the campaign's main lever: 46 of 161 decided alive nodes certified
+dead (28.6%, A137 night of 2026-09-07/08, 15.5 CPU-h); A149's day lane drained the A57 ALIVE+FAIL population (93
+kills) and trump5's (87 of 214, 40.7%) — 180 certified kills for 46.7 CPU-h; A144's control arm found "the
+EXACT cores alone kill 15 of the 20, the deployed cores 0 of 6". Two drawing rules date from these pages: draw the
+hypothesis square at the centre of its box and the centre of its tilt window, and draw all three cores of a
+conditioned square in distinct styles (`writeup/sources/drawing_rules.md`, addenda of 2026-09-07). The ledger's
+one-line summary: "Both leaks are the same lesson: use the exact pose set, not its axis-aligned shadow."
+
+### 3.4 The pinwheel basin: f0's slide, the common-tilt grain, and the union (A151/A160/A163, 2026-09-08)
+
+*What the AI was doing.* Growing the local certificate around S02 — Theorem LOCAL (A116): a neighbourhood N of a
+known minimum is dead iff every leaf of a selection tree over the near pairs has chain minimum above s0 — one
+coordinate at a time. A151 (2026-09-08) grew f1's box to ten times A116's volume with zero witnesses and concluded
+"the limit is COMPUTE (wall caps), not geometry".
+
+*The sign.* The basin's consumer count barely moved (72/32 → 96/42 of the 184 S02 nodes), and A151 had grown the
+wrong square: "A151 grew f1 (compute-limited, no real packing found) but never f0 (forced-radius ordering)".
+
+*What the PI saw and said.* Two readings on 2026-09-08, from the pinwheel drawing: "S02's f0: the basin should be
+grown along f0's whole SLIDING SLOT (several contact graphs; a box hypothesis over poses does not care)"; and
+"S02's second basin axis = the COMMON TILT of the grain f1/f2/f3 (A106's pinwheel tilt curve, min 3.886746 at
+48.435 deg, rising both sides) -> cover it as a CHAIN of certified boxes along the curve (tilt steps ~2.5 deg,
+centres moving with the tilt), f0's slide inside each" (memory log 2026-09-08). [The brief for this document
+quotes the PI's phrase "universal coverage in the rattler dimensions"; that sentence is not in LOG.md, the memory
+log or any attempt note on disk. PI to insert the source and date.]
+
+*What changed.* A160 measured both directions exactly. f0 is a genuine rattler — "an exact one-parameter slide of
+length 0.298419 along its own body axis at the fixed tilt 48.4351°, three contact graphs" — which is the PI's
+diagonal slot exactly; but f3, which A116 had treated as "the strut", is the shadow's *most* load-bearing square
+(Δs* 0.119), and BR(0,0) is a second rattler. Putting f0 into N as a fifth body was a net loss (consumers 96/42 →
+15/8) and the tree capped. The common-tilt chain "works, is cheap, and buys almost nothing": 24 of 25 links certify
+a 60°-wide shared-tilt range at a median 7 s a link, but its ceiling is the tilt *spread* of a node's support, and
+f2's and f3's tilts bind independently. Independent per-square tilt slices certify "with zero failures in 348 s",
+and then the load-bearing finding: the directions trade off — f2's upward slice with A151's grown f1 "is REFUTED BY
+A LIVE-LOW WITNESS", a real partial packing of nine squares at side 3.869 < s0, "the first LIVE-LOW witnesses
+anywhere in the A116 / A151 / A160 line". So "S02's basin is not a growable box but a UNION of differently shaped
+certified boxes".
+
+*Measured effect.* Consumers 114 of 184 in-N / 50 alive for ≈ 0.9 CPU-h of tree time (A160). A163 then carried
+the union into the other two frames the pinwheel lives in — the PI's `k5_16_interior_Y1110` page had exposed that
+every S02 certificate was in k5_11's frame — and measured the asymmetry: k5_16 52/54 certified (both refusals wall
+caps), trump5 42/54 with nine live-low witnesses "because trump5 does not pin TL(0,0)"; consumers went from 0/0 to
+38/21 (k5_16) and 3/3 (trump5) for 1.6 CPU-h. Rule banked: "a basin certificate is per (minimum, class frame) —
+build it in every class frame the shadow appears in." What the AI could not have done alone here is the direction
+of growth; what the PI could not have done is the witness that bounds it.
+
+### 3.5 The corner-first tree and the doubly-met corner (A143/A150/A154/A155/A159/A166, 2026-09-07 to 09-09)
+
+*What the AI was doing.* Pricing the k0_00 tree as A38's interior-first cover — 216 level-1 cells over a
+fundamental triangle, one conditioned interior square per node — at 12,000 CPU-h (budget.md), and observing that
+"the k0 tree has zero logic kills today (it never branches on corners)" (A113, 2026-09-06).
+
+*The sign.* Every k0 cell that resisted did so at τ = budget exactly, converged, with a dual support that put a
+single deep meeter in each corner (A115: "the room is always a single DEEP meeter, never an empty corner ... exactly
+the K0-FREE teleport hypothesis"), and no row the AI could write charged it (A115, A154: the incidence rows
+"price what the LP already wants to buy").
+
+*What the PI saw and said.* On 2026-09-07 the PI proposed a different root: "the k0 tree already quotients D4 x S11
+via an EXISTENTIAL interior-zone hypothesis ... The PI's alternative canonical choice = condition on the BL CORNER
+INTRUDER (root lemma free for k0: K0-FREE dead by teleport, else every corner met by a tilted intruder; D4 -> one
+corner). Wall-strong leaves (polygon core, clip, K′ lane) bite hardest there"; then the refinement "corner-first
+root + DOUBLY-MET corner = condition on BOTH BL meeters ... pair cells nearly all geometry-killed (hook pairs
+only survive)"; and a prediction: "ONE deep lineage = Trump's shadow entering via its single non-simple corner (TL
+in trump5's frame; -> BL after D4); all other pair cells die" (memory log 2026-09-07). On 2026-09-08: "corner tree
+v2 = condition on ALL FOUR corner intruders at once (K0-BLOCKED means all four met); each corner's band is narrow
+... branch as a PRODUCT of band cells (D4 / 8)". [The brief for this document quotes the PI as saying of this line
+"that might actually be our 40x speed-up"; the sentence is not on disk in LOG.md or the memory log. PI to insert
+the source and date.]
+
+*What changed, measured.* A143 (2026-09-07): the root is sound and the doubly-met geometry is real — "9,638 of
+11,772 canonical pair cells (81.9 %) emptied by three exact prunes for 90 CPU-s" — but "a second conditioned
+square at the SAME corner buys essentially no slack for a whole unit of budget" (η −0.08 at budget 9 against the
+interior root's median −0.73), priced at 3,800–8,900 / 8,000–18,800 CPU-h against 12,000: "not cheaper". The PI's
+identification of TL as Trump's one non-simple corner was "CONFIRMED", but the K0-WIDEN pad makes every Trump image
+doubly met at every corner, so "that lineage can never die by K0-FREE, at any depth" — the terminal mechanism is
+the basin landing, as in the interior tree. A150 (2026-09-08): four cores at four corners move η by a whole unit
+(median −1.0, 7 converged kills, 7 certified once A166's certificate fix landed) — "the strongest level-1 LP in the
+k0 lab" — but "the band is NOT narrow (206/216 cells; whole zone)" and the product is ≥ 4·10⁵ CPU-h. A154: the
+counting row (R6) is A115's row verbatim and kills nothing. A155: the pad is a 2% effect and slabs make it worse.
+A159: the PI's `l1_124` reading ("two squares can touch the corner but are mutually exclusive") is right at the
+unwidened cell on 35 of 44 corners, 16 of them exactly tangent — and irrelevant at the widened box the window needs.
+A166 (2026-09-09): the nearest-corner sub-tree the PI asked for is ONE sub-tree (the corner is TR for 117 of 119
+open cells), the canary forced a second branch ("K0-BLOCKED says the corner box has two DISTINCT meeters; it does
+not say either differs from the conditioned square"), and the free (C) leaf "is provably unavailable" — the two
+conditions it needs are anti-correlated on every cell. Figures: `figures/A143_pair_survivors.svg`,
+`figures/A155_band155_pad0_vs_padmax.svg`.
+
+*Effect.* No k0 cell died, the k0 row did not move, and the corner-first line is closed from every side. What
+survived is a rule that the cascade of §3.6 is built on — "spend a node's conditioning budget on cores that are
+pairwise far apart, never on a second core at a corner that already has one" (A165: 1 core at a corner η −0.044;
+2 at the same corner −0.083; 2 at one corner + an interior core 0.0000; 4 at 4 corners −1.0 to −6.0) — and the
+lesson that the PI's predictions were "right in direction, wrong in consequence" three times running (A143, A159,
+A166), each time because of an object the drawing did not show: the window pad, the widened box, the conditioned
+square as its own corner's meeter.
+
+### 3.6 The l1_104 reading: wastage, the right wall, and the cascade order (A164/A165/A168, 2026-09-08 to 09-09)
+
+*What the AI was doing.* After the corner-first line closed, nothing on the eleven converged-alive k0 cells;
+docs/shadows/k0v4/ had been drawn (A148) and every leaf had been run on it with no kill.
+
+*What the PI saw and said.* On `docs/shadows/k0v4/l1_104.svg` (figure `figures/k0v4_l1_104.svg`), 2026-09-08:
+"a WASTAGE argument (not lane): only one centre fits near the right wall below H, the upper-right pocket is too
+short, so the right-wall strip is uncovered wherever that square goes." Then the cascade: "TR doubly met forces D
+(deep, up-right of H) + S (shallow, up-left) -> two centres in the top strip -> top-wall chord row leaves one more,
+which must poke into TL(0,0) with a min depth -> TL's second meeter forced along the left wall -> bottom-left band
+holds one -> six squares in narrow forced boxes, large wastage, the other five cannot fit. = A150's mechanism (many
+conditioned boxes buy LP slack) with the boxes FORCED by geometry instead of enumerated" (memory log 2026-09-08).
+
+*What the drawings said back.* A164: the wastage leaf is sound and cheap and "fires on nothing" — on `l1_104` the
+certified uncoverable area is 0.129 = 3.2% of the budget 4.03, all of it in the east wall strip the PI named:
+"the PI's location is right, the count is not" ("only one square's centre can sit near the right wall" is false
+unconditionally: seven 1-separated centres fit in x ≥ s0 − 1/2). A165: steps (a) and (b) confirmed and certified —
+M(c) = 0 at all four corners, so "11 = 8 FREE corner meeters + H + exactly 2 further squares"; on 185 of 500 TR
+cases the top-wall chord row gives β = 1 ("exactly the PI's sentence"); 434 of 500 cases are the PI's picture of
+the pair — and step (c) breaks: by Lemma (TOP) a TL meeter must cross the top line but "its chord there may be
+arbitrarily small", so the second TL meeter is a shallow crosser the row cannot charge. Spread cores at budget 6
+kill 4 of 4; stacked cores at budget 8 buy nothing (η = 0.0000 on 3 of 3). Figure: `figures/A165_cascade_l1_104.svg`.
+
+*The order, revised three times overnight.* 2026-09-09 ~00:30 (after killing A165, §3.7): the PI's first
+branching order "(1) the right-wall square under H meeting BR (one centre fits), (2) the TR pair ... (3) the top
+square the chord row leaves room for"; then "REVISED cascade order (supersedes): (1) the TR corner square D first;
+(2) the second TR meeter S, limited by D, presses H down-right (re-clip H vs K′(S), K′(D)) which kills much of the
+space for the right-wall square B under H; (3) BR's second meeter, greatly limited; (4) the two left corners last";
+then the final form "(1) TR corner square D; (2) second TR meeter S (re-clip H vs D,S); (3) B = the right-wall
+square under H, BR's deep meeter, as its own step; (4) BR's second meeter; (5) left corners last if needed." And
+the rule that changed the object being branched on: "a corner's first meeter's region = the poses ADMITTING a
+second meeter (coexistence, mutually clipped), not the bare corner-meeting region: D's region cut by the existence
+of an S; B1's region cut by the existence of a second BR meeter that (because of the small gap above B1 below H)
+cannot come from above or above-left" (memory log 2026-09-09 ~01:30). After A169 (§3.8) the partner window for B1
+was pinned to one cell: "B1 (right-wall deep meeter under H) -> partner only from the (left, floor) cell".
+
+*The directive.* The PI's reading of the first cascade results (2026-09-09) is recorded as a standing rule:
+"doing more of this forcing geometry before LP is going to be necessary to getting it to complete in a reasonable
+amount of time... it cuts down on the LP tree enough that it pays off massively on the backend"
+(`writeup/sources/geometry-before-lp.md`). Evidence attached to the rule: "D step killed 54/82 cover boxes by
+geometry; lonely rule 71/309 alive nodes in one pass at zero LP cost; per-piece K′ cut surviving poses of H and D
+by ~20% more; LP side costs ~0.7 CPU-h per ALIVE kill (A149)". Every brief since states the forcing order
+(container clip and per-piece K′ to a fixed point; lonely clip; coexistence cuts; all four corners at once; chord
+rows from the grown cores; exact-core LP last) and forbids an LP at a node whose geometry has not reached a fixed
+point.
+
+*Measured effect so far.* The cascade has not closed `l1_104` (§7). What it has produced is the structure the k0
+kill will use if it comes: the forced-box tree (A168, `figures/A168_cascade_l1_104.svg`,
+`figures/A168_steps_l1_104_S3.svg`), the coexistence cut at piece granularity (A174), and the lonely clip (A173:
+"13 of 146 A168 nodes killed by the clip alone").
+
+### 3.7 The two unclipped cascades, the invariant library, K′ from pieces, and the axis-core defect (A165, A168, A171, A172, A175, 2026-09-08 to 09-09)
+
+This is the episode the PI's brief singles out, because the failure was one the AI could not see in its own
+output and the PI saw at once in the picture — twice, on two different agents, in twelve hours.
+
+*First catch (2026-09-08, A165, Opus).* The coordinator's log: "PI caught A165 drawing unclipped pair boxes
+(TRa/TRb pose unions overlapping H's core). RULE (again, now hard): in every multi-box node, clip every box against
+every other core BEFORE drawing / rows / covers / LP; a box all of whose poses meet another core is empty (case
+dies); draw K′ as the core, pose unions as thin outlines only." At 00:35 on 09-09: "A165 (Opus cascade) KILLED at
+the PI's request (unclipped pair boxes; low faith in execution); redone as A168 (FABLE) ... RULE (PI): complex
+case-tree constructions go to Fable, not Opus."
+
+*Second catch (2026-09-09, A168, Fable).* "PI caught A168 (Fable) at S2: D's core escapes the container and overlaps
+H's core; B1 clips H; S (the second TR meeter) not placed before moving to TL. Sent a stop-and-fix with a hard
+INVARIANT: at every node, container clip + mutual clip to a fixed point, then the checker ASSERTS every K′ inside
+the container and pairwise disjoint before any figure/row/LP ... Second agent to break the clipping rule — the
+invariant must be code, not instruction."
+
+*What changed.* A171 (2026-09-09 ~02:30) made the rule a library: `multibox.Node.normalise` (container clip per tilt
+sub-bin, then mutual clip of every box against every other box's K′ to a fixed point, cores rebuilt after each
+pass) and `assert_invariant` (exact rational K-CONTAINER, K-DISJOINT, POSE-CONTAINER, CLIP-FIXPOINT), with
+`chord_rows`/`lane` refusing an un-normalised node. Run on A168's own S2 node it "fails 5 checks: D's centre rect
+exceeds s − w_max/2 by 0.087938 (47.1 % of its poses leave the container) ... After normalise ... kept H 0.440792,
+B1 0.942803, D 0.088172 — 91.2 % of D's box and 55.9 % of H's were never possible" — which is the size of the error
+both cascades had been building on. Figures: `figures/A171_BR139_TRH-25_before.svg`, `figures/A171_BR139_TRH-25_after.svg`.
+
+*The third catch, on the fix itself (2026-09-09 ~10:40).* "PI finding on A171: clipping a box's pose space must GROW
+its K′ on the far side (intersection over fewer poses), and that growth is what propagates the cascade (D grows ->
+clips H harder -> clips B1). A171's rebuild() formed K′ from the UNION HULL of the surviving pieces, losing most of
+it." A172 rebuilt K′ as the certified exact intersection of the per-piece K′: on the same pieces the hull gave K′
+areas H 0.658 / D 0.740, the pieces give 0.709 / 0.774; the fixed point then keeps H 0.358 (was 0.441) and D 0.072
+(was 0.088) — "the hull was hiding a quarter of what the clip had already proved." Figure:
+`figures/kprime_pieces_S2.svg`. "Rule: any clip/normalise loop must recompute cores from the PIECES, never from a
+hull."
+
+*The fourth catch (2026-09-09 ~12:30).* "DEFECT found by the PI reading A174's S3 page (H outlines crossing S and B
+cores while kept H = 1.00): roles168.normalise clips against the other roles AXIS CORES only, never their K′
+polygons -> no upstream propagation. Node l1_104 root/D0/S1/B0: A168 kept H/D/S/B 1/1/1/0.60 ALIVE; multibox poly
+obstacles -> EmptyBox(H) = DEAD (pair leaf)." A175 was launched to route every node through the polygon clip and
+re-normalise every recorded node. "RULE: multi-box clips must use K′ polygons (mode=poly), and pages must print
+kept fractions so a non-propagating clip is visible."
+
+*What this episode says.* Four defects in one construction, each invisible to the agent that produced it and to
+every internal consistency check, each visible on a page to a reader who knows what a clipped box should look
+like: a pose union crossing a core, a printed kept fraction of 1.00 beside an outline that crosses two cores. The
+PI's response each time was not a patch but a system change: the rule became a brief instruction, then a library
+with a guard, then a required line on every page. The `01_summary.md` phrase for it: "the loop corrects in both
+directions".
+
+### 3.8 The sideband lemma and the csc(θ) construction (A169/A173, 2026-09-09)
+
+*What the AI was doing.* Building the cascade's corner steps with sampled facts: "the coordinator had only samples
+(no disjoint pair with both centres beyond 1 in 81k draws) and an atlas whose thresholds (0.18/0.34/...) nobody had
+derived" (A169). The atlas (`figures/two_meeter_atlas_v2.svg`) had been drawn overnight from a pitch grid.
+
+*What the PI said.* "PI's LEMMA SIDEBAND (conjecture): a doubly-met corner box has at least one meeter with centre
+within 1 of an adjacent wall (x <= 1 or y <= 1 at BL) and the other outside that band. Numeric: no disjoint pair of
+meeters with both centres beyond 1" (memory log 2026-09-09). And a construction for the requirement on the first
+meeter: "closed-form construction for the second meeter given a wall gap delta of the deep meeter: deepest
+intrusion = a square flush with the side wall resting on the deep square, rotated by theta to fit the gap ->
+intrusion in csc(theta), valid while sin(theta) <= delta; shallowest = cores whose corner just touches the top of
+the gap. Expected: the allowable region is wildly small for flush deep squares and conservative delta."
+
+*What the proof said back (A169, Fable, done-success).* Half right, sharpened, and the false half replaced by the
+true statement. SIDEBAND (a) is a theorem "with constant c itself (1 unit, 1 + w widened) and no quadrant / no
+bound on c" — but "within 1 of a wall" is FALSE at the widened box (two 45° diamonds at (1.01, 1.72) and
+(1.72, 1.01), SAT gap 0.0078). Clause (b), "the other lies outside the band", is FALSE as stated (both centres can
+have x < 1) and TRUE as "centres in DIFFERENT cells of the 2×2 grid at c", from an ℓ∞ separation of 1/√2 (Lemma
+A2). The requirement became Theorem B: a second meeter exists iff one of four one-parameter support inequalities
+holds; a pressed first meeter is lonely at every tilt; the slide threshold is exactly tan(θ/2) up to θ* = 56.76°;
+the atlas's d* values "are pitch artefacts"; the widened-box partner exists iff θ < 17.35° or > 72.65°, "NOT the
+12.8 deg of the mode-(a) guess". `Sideband.lean` (345 lines) proves A1, A2 and (a) and states Theorem B with clause
+(P) proved. Figure: `figures/sideband_lemma.svg`.
+
+*Measured effect.* Three rows for the cascade (R1 cell prune, R2 band/outside split, R3 the LONELY NO-family) and a
+new clip: R3 "removes 54-74 % of the widened meeter poses at every tilt"; A173's per-piece lonely clip kills 13 of
+146 A168 nodes with no LP (`figures/lonely_clip_S1.svg`); and the PI's single-cell pinning of B1's partner. The
+shape of the exchange is the general one: the PI supplies a geometric statement with a mechanism attached (the
+csc(θ) construction is a mechanism), the AI proves the sharp form, refutes the over-statement with an explicit
+configuration, and hands back an n-general lemma with a Lean file.
+
+### 3.9 The false readings — where the drawings refuted the PI, and why that mattered
+
+The reading loop only works if it corrects in both directions. Roughly half of the PI's per-node readings of
+2026-09-08 failed on exact tests, and every failure was written down with the witness that refuted it. The
+common cause, four times out of six, was a *hairline meeter*: a square that reaches a cell by a clearance of
+10⁻² or 10⁻³, invisible on a page drawn at container scale. The record, in the order the readings were made:
+
+| page (figure) | the reading | what the exact test found | attempt |
+|---|---|---|---|
+| `k5_16_interior_Y1117` (`figures/a57v4_k5_16_interior_Y1117.svg`) | BR(0,1) singly met: a 55° grazer 0.003 into the cell should not count, so shrink the cell by the pin tolerance | "MY shrunk-cell argument was FALSE: four grazers through four faces block every admissible translate"; and "Y1117's BR(0,1) is a GENUINE 2-crowd (pairs with gap 0.24-0.33) — the PI's eye was wrong there" | A152 |
+| the same page | the LP drops H + 3 into one pinwheel grain — price the grain by a cover number | the leaf is sound and LP-free and "kills nothing, and provably will not": F_out already holds ≥ budget points pairwise ≥ 1 apart on 322 of 322 nodes; Y1117's cover number is 8 against budget 5 | A153 |
+| `c0_Y0076` (`figures/a57v4_c0_Y0076.svg`) | TL(0,0) singly met (A141 had it UNDECIDED with no free meeter sampled) | 400,000 draws: 14 free poses, the best clearing every core "by 1.1026e-2 at theta = 29.4420 deg"; "a free tilted square can reach a slot past H while clearing it by 1e-2 — invisible on a page" | A157 |
+| the same page, the PI's second diagnosis | the LP is alive only because it counts a near-simple TL slot square AND H as meeters; split YES/NO on the slot box | the NO child is DEAD and certified ("c0_Y0076 provably places a square within 0.10 of the exact TL(0,0) slot centre"), the YES child "does not exist: 0 of 141 measured cells", and as an LP node it "lands exactly back on the knife edge" — the slot square removes one unit of dual packing and one unit of budget | A158/A158b |
+| `c0_Y0959` (`figures/a57v4_c0_Y0959.svg`) | TR(0,1) singly met | H reaches into TR(0,1) by 0.12 and two disjoint grazers from below also meet it; "RULE for readings: 'met' = interior intersection, any depth; grazers from an adjacent region count" | memory log 2026-09-08 |
+| `c0_Y0169` (`figures/a57v4_c0_Y0169.svg`) | TL(0,0) reachable by one square at a time; H's corner leaves under 1 of width for a band square | first half CERTIFIED (LANE_out = 0 on every piece), second half "false as stated": a free band pose survives beside H on every swept offset; the cell is a no-go by exact two-crowd witness | A161 T8, A167 |
+| `l1_124` (`figures/k0v4_l1_124.svg`) | TR(0,0) cannot be doubly met — two squares can touch the cell but are mutually exclusive | right at the unwidened cell (0 of 28 recorded witnesses have both squares meeting the plain cell; 16 of 44 corners exactly tangent), and wrong at the widened box the window needs (30 of 44 corners have an exact realised two-crowd) — "the PI's reading is right about a different rectangle" | A159 |
+| `l1_104` (`figures/k0v4_l1_104.svg`) | only one centre fits near the right wall | seven 1-separated centres fit in x ≥ s0 − ½; the certified waste sits exactly where the PI put it, at 3.2% of the budget | A164 |
+| `k5_11_interior_Y0275` (`figures/a57v4_killed_k5_11_interior_Y0275.svg`) | a quadrilateral pocket with all sides < 1 and one firm side holds no square centre | "General lemma ... is FALSE (diamond in a 0.99-square at (0.25, 0.495) crosses 3 sides, misses the 4th, touches no vertex)"; the node was nevertheless pulled forward and certified dead by the exact-core re-solve (A149) | memory log 2026-09-08 |
+
+Why the refutations mattered as much as the hits. Each one changed the drawings or the leaf, not just the
+verdict: after Y1117 and c0_Y0076 the pages draw "the witnessed free meeters (the sampled disjoint pair, thin
+outlines, with their depth into the cell printed) so that hairline meeters are visible" (drawing rules, 2026-09-08
+addendum); after Y0275 the undecided band stopped being green ("A148 painted the UNDECIDED band pale green and the
+PI read it as feasible" — it had overstated the free set by about a fifth); after l1_124 every page prints the pad
+against which a lane verdict is stated; after c0_Y0169 the leaf that had "nothing to prove" was retired and the
+285 no-go cells were closed by exact witnesses rather than left undecided. A121's validator, run over the PI's
+whole first pass (83 pages, 219 items), put numbers on the reading types: "All 18 `r` readings exactly right"
+(singly met corners, the reading type that works); of 64 `ns` (near-snap) items 6 genuine, 24 already exactly on
+the cell, 26 flush along a wall — a new token `fl` was added rather than a re-drawn frame, because "the identity is
+still the argmin" over all 784 relabellings the PI might have been using.
+
+### 3.10 The earlier spatial reads: o012, the drains, and the price refusals (2026-09-03 to 09-06)
+
+Before the galleries existed the same pattern ran on single configurations.
+
+*o012 and the emptied corpus (2026-09-03).* A87's FJ-polish had produced "167 certified k0 FJ points" and the
+coordinator had built a route on them. "PI diagnosis, confirmed: the 167 'certified k0 FJ points' (A87) are ALL
+K0-FREE by teleport (0/167 genuinely K0-BLOCKED; o012 at 3.8972 = atlas fam13/14 (k1) lifted 4e-4 with a rattler
+whose removal frees the TR slot) ... Lesson: the 'k0' label by exact simple-square count is NOT the proof's residue;
+always filter by K0-BLOCKED" (memory log 2026-09-03). The outline calls this "the diagnosis of o012 as a k ≥ 1
+point in disguise, which emptied the entire corpus of 'k0 critical points'". The residue was thereafter
+K0-BLOCKED — every corner doubly met — and the PI's intuition "ghosts walk uphill; relaxing lands on simple squares
+/ octagon family at 4+" (memory log 2026-09-03) became DF-K0 (A87, [T], a two-line proof in the selected form).
+
+*The 3.985 record and the 3.9907 record (2026-09-05, 09-06).* Both were the lab's candidate counterexamples to the
+drain conjecture below side 4. On the first: "PI shower correction: the 3.985 'interlock' record degenerates at the
+SAME side into k5_10 ... align 4,5,6 (1e-4 moves; 6's TR 'nick' is a 1e-8 TANGENCY, not a block), slide 10 into the
+cell below TL (0.38) and 7 into the TR corner (0.39). Lessons: tangency != block". On the second: "PI read the
+figure and saw square 3's three contacts (sq 2 below, right wall, sq 8 upper-left) all permit a CCW rotation;
+rotating 3 by 1.31 deg about its centre to axis-aligned is collision-free (2000-step SAT sweep), lifts its vertex
+out of BR ... simultaneous snaps of 1,2,3,5,6,7,9 give a VALID packing at the same side with k = 7 ... Third time
+the PI's spatial read beat the census (3.985 record, interlock, now 3.9907)." Both drains are drawn
+(`figures/record3985_drain.svg`, `figures/strict_3p9907_drain.svg`) and the second became a tool (A102) that
+drained 10 of the 12 strictly blocked packings on disk. The lesson banked: "strict K0-BLOCKED with floor-depth second
+meeters is a ROTATION eta-disturbance, not just translation".
+
+*The price refusals.* The outline (§6, §7) records the PI's "repeated refusals to accept a price ('Are you
+kidding?'), which produced A85/A88/A89/A90 and the K0-BLOCKED filter instead of a compute purchase" and the AI's
+tendency to "reach for cloud compute as soon as a tree was priced" (the coordinator's 2026-09-03 note: "cloud spot
+~$500-1500 for everything, k0_00 alone ~$160-350 ... Decision pending with PI"). The PI's answers were a target
+("~400 CPU-h all layers", 2026-09-04) that the machinery has never met (all-layers estimates ran 5,900–13,700 CPU-h
+on 09-05 and ≈ 6,100 / 19,500 on the two routes by 09-08) and a direction: "PI rejected the volume-tree frame
+('remainder must have exploitable structure')" (memory log 2026-09-03). That refusal is what turned the k0 problem
+from a 12,000 CPU-h tree into the geometry programme of §3.5–3.8. [The "Are you kidding?" exchange itself is in the
+outline's attribution list, not in LOG.md or the memory log; PI to confirm the date.]
+
+### 3.11 The AI's own retractions
+
+The record keeps the AI's wrong claims beside the PI's, for the same reason. The ones that cost compute or
+direction:
+
+- "each grid side yields a record floor" — retracted 2026-09-03: "k0_00 eta = 0.000 (root LP has no slack above the
+  3.83 pure-LP ceiling) ... my 'free floors' claim retracted".
+- "most boxes exclude immediately by nonzero gradient" (the H1 cover) — A87: "ADVISOR ERROR ... confused 'forall z
+  exists descent direction' with 'exists one direction feasible on all of B'"; 1,448 cells, 0 kills.
+- the η-law ("η ≤ −1 ⇒ certificate") — "ETA LAW RETRACTED (A60's second overfit, n=16)"; re-measured one-sided
+  on A57 (A96, 2026-09-05: η = 0 ⇒ resister holds 15/15; η < 0 ⇒ certificate fails on 21%).
+- "the 4.000002 barrier" for K0-BLOCKED packings — retracted twice (2026-09-03 against the 3.985 record; 2026-09-05
+  "a search floor bounds what the search can SEE, not what exists").
+- the mixed-sign V prune for corner pairs — "UNSOUND locally" (A85).
+- A106's pin-clash prune (122/516 boxes "empty") — "NOT SOUND as a certificate as written ... a positive sample
+  minimum does not prove the true minimum is positive"; the sound version (A96 route B) yielded 70.
+- "four shallow corners are dead by area" — A89: "area alone never kills 4-shallow in the window (4(1-delta)^2 <= 4)".
+- A161's "90 new" kills — 27 on re-check against the collector; "RULE: build populations from the STATUS collector,
+  never from a campaign snapshot".
+- A165's "they need the separation loop with more rounds, not a different core" — A170: "they needed the cores they
+  were solved with" (a shared-machinery bug, `caselp.make_certificate` reverting exact cores to stock).
+- the A60 "stalled" false alarm from a command-line regex (2026-09-03, "5th instance"), and the sixth
+  "check-failed-read-as-negative incident (errored Get-Process read as 'finished') — rule: file-based wait
+  conditions, verify a check produced output before believing it".
+
+Two of these are of the same kind as the PI's false readings (a sampled minimum mistaken for a bound; a count
+taken from a stale snapshot) and were caught by the same discipline: an independent test with a witness.
+
+### 3.12 The process rules the PI imposed
+
+Each rule below is quoted from the record with the incident that produced it.
+
+- **No recursive deletes** (2026-09-06, "no-deletion rule"): A96 audited every file it had touched — "Exactly ONE
+  existed ... REPLACED with a non-deleting check"; every attempt's close-out since reports "no recursive deletes,
+  no pidfile deleted", and the status board `git mv`s dead pages to `killed/`, "never delete".
+- **Frozen verifiers**: sha-pinned copies, versioned successors, "frozen verifiers untouched" in every report;
+  the standing instruction that "kills are reproduced by REPLAYING certificates, never by re-emitting", after A112
+  found that emission is wall-clock dependent.
+- **Process ceilings and affinity** (2026-09-08): "BOX RULE (PI): lab work confined to the 16 P-core threads ...
+  ceiling 16 lab python processes"; and the night-shift refusal that preceded it — A123 "correctly REFUSED the full
+  A57 resume: the box already held 17-20 python processes ... 3x oversubscription would convert other campaigns'
+  wall-capped nodes into spurious TIMEOUTs" — with the law "a campaign resume needs a process budget counted against
+  the live box first; chores at '<= 2 each' add up".
+- **The priority rule** (2026-09-09): "Prioritise work that enables the PI's next round of feedback: results of
+  reading experiments (leaf pilots on named nodes), re-solves that answer a specific reading, and recomputing the
+  residue (ledger, STATUS.md, the galleries) take precedence over naive tree solving ... the loop (draw → read →
+  leaf → kill → redraw) is the lab's fastest source of kills, and it stalls when the board is stale or the LP slots
+  are occupied by the bisection tree. The tree only converts at its measured rate; it does not learn"
+  (`writeup/sources/feedback-priority-order.md`).
+- **Geometry before LP** (2026-09-09): §3.6.
+- **Aggressive optimisation testing** (2026-09-06): "wall-time is the primary limiting factor ... Every
+  chore/campaign must be RESUMABLE ... Fire jobs that kill tiers/windows ... whenever the kill estimate is under ~2
+  CPU-h — no need to ask" (`writeup/sources/aggressive-optimisation-testing.md`).
+- **Kill agents whose pictures are wrong**: A165 killed at 00:35 on 2026-09-09 (§3.7); A168 stopped at 10:35 and
+  A174 stopped at ~12:30 for the same class of defect; "complex case-tree constructions go to Fable, not Opus".
+- **Two-stage LP protocol** (2026-09-06): "stage 1 LP at 240 s -> any node with eta <= -1e-3 goes straight to the
+  frozen certifier ... stage 2 = only knife-edge nodes get 900 s ... Report kills as CERTIFIED passes, never LP
+  verdicts" — the PI's answer to "more nodes at low timeout or fewer at high?" was fewer at the converging cap,
+  and the asymmetric cost behind it: "a false ALIVE ... costs 8 children x ~850 s".
+- **The sampled-check rule** (A111, 2026-09-06): "no number derived from an LP-free geometric rule is reported
+  before dense random pose sampling confirms it", plus A96's refinement that "an acceptance-filtered sampled check
+  must report how many samples SURVIVED the filter, not how many were drawn".
+- **Git on the shared tree** (2026-09-04, after an autostash reset "clobbered 48 live tracked files of other
+  campaigns for ~2 min"): "no rebase / autostash / reset on the shared tree while campaigns run — git fetch, plain
+  merge if needed, push own paths only", and after the shared-index race of 09-07/08, "use `git commit -- <pathspecs>`,
+  never add-then-commit".
+- **CAP is never a verdict** (A117, A120, A124): a wall-capped run is recorded as CAP and the whole process tree is
+  killed; "a FAIL that returns in under a second is a crash, not a verdict" (A114).
