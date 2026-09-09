@@ -1,0 +1,33 @@
+{
+ "leaf": "cascade_Mzero_v1",
+ "claim": "no pose of the conditioned square's parameter box has interior meeting the interior of the WIDENED corner box, so M(c) = 0 and every meeter of that corner is a FREE square",
+ "s": "969271/250000",
+ "cell": "l1_104",
+ "corner": "TL",
+ "widened_box": [
+  0.0,
+  1.0255100742139405,
+  2.8515739257860595,
+  3.877084
+ ],
+ "pad_w": 0.02551007421394052,
+ "hyp_box": [
+  2.46263075,
+  2.5674485,
+  2.1481775,
+  2.25299525,
+  30.0,
+  45.0
+ ],
+ "test": "A161 chordlane.box_misses_cell_exact: full separating-axis test over the parameter box; axis and exact rational margin below",
+ "separating_axis": {
+  "axis": "ex+",
+  "margin": "97980806341577998330834275475579/134217728000000000000000000000000",
+  "radius": "1414213562373095048801689/2000000000000000000000000"
+ },
+ "consumes": [
+  "k0_route.md sec 4.1 Lemma K0-WIDEN",
+  "k0_route.md sec 3 Lemma K0-FREE (for what the count is used for)"
+ ],
+ "checker": "code/check165.py C6 (independently coded SAT + 5e4 sampled poses)"
+}
