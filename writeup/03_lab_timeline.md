@@ -410,9 +410,11 @@ wrong square: "A151 grew f1 (compute-limited, no real packing found) but never f
 grown along f0's whole SLIDING SLOT (several contact graphs; a box hypothesis over poses does not care)"; and
 "S02's second basin axis = the COMMON TILT of the grain f1/f2/f3 (A106's pinwheel tilt curve, min 3.886746 at
 48.435 deg, rising both sides) -> cover it as a CHAIN of certified boxes along the curve (tilt steps ~2.5 deg,
-centres moving with the tilt), f0's slide inside each" (memory log 2026-09-08). [The brief for this document
-quotes the PI's phrase "universal coverage in the rattler dimensions"; that sentence is not in LOG.md, the memory
-log or any attempt note on disk. PI to insert the source and date.]
+centres moving with the tilt), f0's slide inside each" (memory log 2026-09-08). The PI's reading of the S02 panel, in the session transcript of 2026-09-08 (Claude Code session 8b20e315, not
+copied into LOG.md at the time): "Doesn't that imply that the 10 square basin has universal coverage in the rattler
+dimensions?" -- i.e. that a basin grown along f0's slide and the common-tilt grain covers every direction in which
+the pinwheel can move without leaving the box hypothesis. The coordinator's answer and the chain construction above
+followed within the hour.
 
 *What changed.* A160 measured both directions exactly. f0 is a genuine rattler — "an exact one-parameter slide of
 length 0.298419 along its own body axis at the fixed tilt 48.4351°, three contact graphs" — which is the PI's
@@ -453,9 +455,12 @@ root + DOUBLY-MET corner = condition on BOTH BL meeters ... pair cells nearly al
 only survive)"; and a prediction: "ONE deep lineage = Trump's shadow entering via its single non-simple corner (TL
 in trump5's frame; -> BL after D4); all other pair cells die" (memory log 2026-09-07). On 2026-09-08: "corner tree
 v2 = condition on ALL FOUR corner intruders at once (K0-BLOCKED means all four met); each corner's band is narrow
-... branch as a PRODUCT of band cells (D4 / 8)". [The brief for this document quotes the PI as saying of this line
-"that might actually be our 40x speed-up"; the sentence is not on disk in LOG.md or the memory log. PI to insert
-the source and date.]
+... branch as a PRODUCT of band cells (D4 / 8)". The PI's reaction, in the session transcript of 2026-09-08 (Claude Code session 8b20e315): "holy fuck.... that
+might actually be our 40x speed up" -- said of conditioning the tree on all four doubly-met corners at once, with
+the candid follow-up in the same exchange, "Honestly I'm kind of mad neither of us noticed that until now". The
+measured outcome (A143/A150/A154/A155, below) was smaller than the hope: the pad is a 2% effect, the four
+conditioned corners buy LP slack, and the product branch priced out; the line closed as a tree and re-emerged as
+the cascade of section 3.6.
 
 *What changed, measured.* A143 (2026-09-07): the root is sound and the doubly-met geometry is real — "9,638 of
 11,772 canonical pair cells (81.9 %) emptied by three exact prunes for 90 CPU-s" — but "a second conditioned
@@ -973,9 +978,8 @@ geometry-then-LP machinery that closed the other classes, at a measured cost. `0
 plain language; this document's contribution is that the machinery, the readings that built it, the defects the
 PI caught in it, and the four days it took are all on the record, dated.
 
-*Gaps in this record the PI can fill in place.* (1) The sentence "that might actually be our 40x speed-up" (§3.5)
-and (2) "universal coverage in the rattler dimensions" (§3.4) are quoted in the brief for this document but are not
-in LOG.md, the memory log, or any attempt note on disk. (3) "Are you kidding?" (§3.10) is in the outline's
+*Gaps in this record the PI can fill in place.* (1)-(2) The two session quotations in §3.4 and §3.5 were filled in by the coordinator from the
+session transcript of 2026-09-08 (they were never copied into LOG.md); the PI may correct the wording. (3) "Are you kidding?" (§3.10) is in the outline's
 attribution list without a date. (4) The PI's own account of how the stratification idea arose is asked for in the
 outline's fill-in list and is not on disk. (5) The Y0036 reading is preserved in the coordinator's paraphrase, not
 the PI's words. (6) The registry's status cells for about 15 rows are malformed (a `|` inside the outcome text) and
