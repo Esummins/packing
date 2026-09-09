@@ -64,13 +64,16 @@ def load_overlay(cell, step, shards=True):
     # in memory, so every page shows the polygon-clipped kept fractions and verdicts at once
     # A176: the polyclip175 side files are PRE-FIX (not the record) and are no longer overlaid; the
     # renorm176 side files (fixed library, polygon + lonely clip) are.
+    # A181: the parent-SEEDED records supersede A176's (which restarted every child from its
+    # recorded boxes); only renorm181's side files are overlaid, so a page's "before" panel shows the
+    # parent's seeded fixed point and its kept: line the child's fixed point after the step.
     try:
-        import renorm176 as RN
-        n_px = RN.overlay_side(T, cell)
+        import renorm181b as RB
+        n_px = RB.overlay_side(T, cell)
         if n_px:
-            print("  A176 fixed-library overlay: %d nodes" % n_px, flush=True)
+            print("  A181 parent-seeded overlay: %d nodes" % n_px, flush=True)
     except Exception as e:                                       # noqa: BLE001
-        print("  (no A176 overlay: %r)" % (e,), flush=True)
+        print("  (no A181 overlay: %r)" % (e,), flush=True)
     return T, n_sh
 
 
@@ -281,7 +284,7 @@ def main():
     out = a.out or os.path.join(K.FIGS, "steps_%s_%s.svg" % (a.cell, step))
     svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" font-family="DejaVu Sans,Arial">' % (W, H),
            "<defs>" + FB.STIPPLE + "</defs>", '<rect width="100%" height="100%" fill="#fafafa"/>',
-           text(14, 30, "A176 (A168 cascade, POLYGON + LONELY clip, fixed library) on %s -- step %s: %s   [%s; %d parents done; %d shard files overlaid]"
+           text(14, 30, "A181 (A168 cascade, PARENT-SEEDED polygon + lonely clip, fixed library) on %s -- step %s: %s   [%s; %d parents done; %d shard files overlaid]"
                 % (a.cell, step, F.STEP_TITLE.get(step, step), time.strftime("%Y-%m-%d %H:%M"), len(parents), n_sh),
                 12, "#000", weight="bold"),
            text(14, 48, "legend: filled = admissible centres by geometry; squares = hypothesis at box centre & mid-tilt, "

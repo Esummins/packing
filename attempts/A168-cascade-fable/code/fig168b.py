@@ -153,7 +153,10 @@ def page_step(T, step, before, after, lp):
     draw_node(left, before)
     inv = before.get("invariant") or {}
     kept = ", ".join("%s %.2f" % (nm, rj.get("kept", 1.0)) for nm, rj in (before.get("roles") or {}).items())
-    fb = "roles: %s\ninvariant: %s\n%s" % (kept, "PASS" if inv.get("ok") else str(inv.get("dead")), what_is("before", before))
+    r81 = before.get("renorm181") or {}
+    seed_line = (("SEEDED roles (A181: this node's parent-seeded fixed point = what every child inherits): %s" % kept)
+                 if r81 else ("roles (A168 record; not yet re-normalised by A181): %s" % kept))
+    fb = "%s\ninvariant: %s\n%s" % (seed_line, "PASS" if inv.get("ok") else str(inv.get("dead")), what_is("before", before))
     draw_node(mid, before, region=False)
     na, nd = draw_children(mid, T, before)
     srec = before.get(step, {})
@@ -165,7 +168,9 @@ def page_step(T, step, before, after, lp):
         draw_node(right, after)
         rows = draw_rows(right, after)
         ia = after.get("invariant") or {}
-        fa = "kept: %s (passes %s)\ninvariant: %s | %s\nverdict: %s\n%s" % (
+        sk = (after.get("renorm181") or {}).get("seeded_kept") or {}
+        fa = "%skept: %s (passes %s)\ninvariant: %s | %s\nverdict: %s\n%s" % (
+            ("seeded from parent: %s -> " % ", ".join("%s %.2f" % (nm, v) for nm, v in sk.items() if v is not None)) if sk else "",
             ", ".join("%s %.2f" % (nm, rj.get("kept", 1.0)) for nm, rj in after["roles"].items()),
             after.get("clip_passes"), "PASS" if ia.get("ok") else str(ia.get("dead")), " | ".join(rows)[:80],
             after["verdict"][:60] + ((" LP tau %.3f" % lp[after["path"]]["tau"]) if lp.get(after["path"]) and lp[after["path"]].get("tau") else ""),
