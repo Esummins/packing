@@ -1,0 +1,101 @@
+{
+ "id": "TOPFINE_Y0738",
+ "spec": {
+  "id": "k5_11_interior_Y0738",
+  "pop": "a57v4",
+  "s": 3.877084,
+  "pitch": 0.009992484536082475,
+  "ntilt": 36,
+  "lam": 1.0,
+  "area_U": 1.271985929629812,
+  "boxes": [
+   {
+    "x0": 0.49292893218813455,
+    "x1": 0.5070710678118655,
+    "y0": 0.49292893218813455,
+    "y1": 0.5070710678118655,
+    "th0": 0.0,
+    "th1": 0.0
+   },
+   {
+    "x0": 0.49292893218813455,
+    "x1": 0.5070710678118655,
+    "y0": 1.4929289321881345,
+    "y1": 1.5070710678118655,
+    "th0": 0.0,
+    "th1": 0.0
+   },
+   {
+    "x0": 0.49292893218813455,
+    "x1": 0.5070710678118655,
+    "y0": 3.3700129321881347,
+    "y1": 3.3841550678118653,
+    "th0": 0.0,
+    "th1": 0.0
+   },
+   {
+    "x0": 1.4929289321881345,
+    "x1": 1.5070710678118655,
+    "y0": 0.49292893218813455,
+    "y1": 0.5070710678118655,
+    "th0": 0.0,
+    "th1": 0.0
+   },
+   {
+    "x0": 3.3700129321881347,
+    "x1": 3.3841550678118653,
+    "y0": 0.49292893218813455,
+    "y1": 0.5070710678118655,
+    "th0": 0.0,
+    "th1": 0.0
+   },
+   {
+    "x0": 1.239757,
+    "x1": 1.3795140000000001,
+    "y0": 2.357813,
+    "y1": 2.49757,
+    "th0": 28.072486935852957,
+    "th1": 41.11209043916693
+   }
+  ],
+  "m1": 0.022497744680470916,
+  "half_width": 0.5274924304449711
+ },
+ "obstacles": [
+  "P0",
+  "P1",
+  "P2",
+  "P3",
+  "P4",
+  "H"
+ ],
+ "checker": {
+  "nrand": 200000,
+  "ncell": 40,
+  "dc": 0.02,
+  "ndth": 45,
+  "cell_half": 0.004996242268041238,
+  "seed": 1164,
+  "note": "own SAT, own search; shares no code with geo164's dilation or with A132 poly_square_depth"
+ },
+ "n_cells_U": 12739,
+ "area_U_from_mask": 1.2719859296298124,
+ "A_targeted": {
+  "drawn": 200000,
+  "admissible_meeters": 0,
+  "witness": null,
+  "claim": "every pose that meets a certified-uncoverable cell must be inadmissible"
+ },
+ "B_dense": {
+  "cells": 40,
+  "poses_meeting": 4719232,
+  "admissible_meeters": 0,
+  "cells_refuted": 0
+ },
+ "C_converse": {
+  "drawn": 40000,
+  "admissible_meeters": 4962,
+  "note": "unshaded cells: an admissible meeter SHOULD normally exist; a shortfall is not a refutation, the mask is only an inner approximation of U"
+ },
+ "verdict": "MASK CONFIRMED \u2014 no admissible pose meets any certified-uncoverable cell (200000 targeted + 4719232 dense meeting poses tested)"
+}

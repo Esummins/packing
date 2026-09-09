@@ -1,0 +1,56 @@
+{
+ "id": "l1_104",
+ "spec": {
+  "id": "l1_104",
+  "pop": "k0v4",
+  "s": 3.877084,
+  "pitch": 0.009992484536082475,
+  "ntilt": 36,
+  "lam": 1.0,
+  "area_U": 0.07358926368923553,
+  "boxes": [
+   {
+    "x0": 2.46263075,
+    "x1": 2.5674485,
+    "y0": 2.1481775,
+    "y1": 2.25299525,
+    "th0": 30.0,
+    "th1": 45.0
+   }
+  ],
+  "m1": 0.022497744680470916,
+  "half_width": 0.5274924304449711
+ },
+ "obstacles": [
+  "H"
+ ],
+ "checker": {
+  "nrand": 200000,
+  "ncell": 60,
+  "dc": 0.02,
+  "ndth": 45,
+  "cell_half": 0.004996242268041238,
+  "seed": 1164,
+  "note": "own SAT, own search; shares no code with geo164's dilation or with A132 poly_square_depth"
+ },
+ "n_cells_U": 737,
+ "area_U_from_mask": 0.07358926368923556,
+ "A_targeted": {
+  "drawn": 200000,
+  "admissible_meeters": 0,
+  "witness": null,
+  "claim": "every pose that meets a certified-uncoverable cell must be inadmissible"
+ },
+ "B_dense": {
+  "cells": 60,
+  "poses_meeting": 7078860,
+  "admissible_meeters": 0,
+  "cells_refuted": 0
+ },
+ "C_converse": {
+  "drawn": 40000,
+  "admissible_meeters": 9680,
+  "note": "unshaded cells: an admissible meeter SHOULD normally exist; a shortfall is not a refutation, the mask is only an inner approximation of U"
+ },
+ "verdict": "MASK CONFIRMED \u2014 no admissible pose meets any certified-uncoverable cell (200000 targeted + 7078860 dense meeting poses tested)"
+}

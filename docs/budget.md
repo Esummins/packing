@@ -220,6 +220,21 @@ merely unconverged at the LP time cap.
    (64 T5‴ logic kills, 37 new, every witness re-certified closed AND strict against both boxes by an
    independent implementation, 64/64; plus the 4 certified LP kills);
    notes `{acceptance.md, certified.md, lean_bridge.md}`.
+   *A164 (`PENDING`, 2026-09-08):* Leaf WASTE (the uncoverable area |U| against the wastage budget
+   m² − 11 — A89's Lemma ID with the corner box replaced by any certified-uncoverable region) is the
+   CHEAPEST screen in the toolbox — 8–18 s per node for the whole certificate (raster + Lipschitz
+   margins + 10⁵ sampled poses), no certifier round at all, against ~850 s for an LP node — and it
+   **fires on nothing at the current frontier**: over all 71 alive gallery nodes the best node reaches
+   42.2 % of B₀ = 4.0318 at pitch 0.01 (47.1 % at pitch 0.005: `f1_L10_0003`, |U| = 1.8969), the median
+   18.6 %, and the eleven pin-free k0 cells 0–8.3 %; the four corner boxes are coverable on every
+   single node, so Lemma ID's own shallow-corner row has no consumer either. **0 CPU-h are at stake
+   from deploying it on today's alive set.** The right disposition is a 15-s pre-screen inside the
+   EMITTER at 7+ hypothesis boxes, where |U| scales with the box count (mean 0.128 at 1 box, 0.793 at
+   6, 1.701 at 7) and the leaf's own extrapolation puts the first fire at 9–10 boxes. The transferable
+   asset is W3, the Lipschitz-raster soundness obligation
+   (`attempts/A164-wastage-area/notes/leaf.md` §3): A148's gallery pages and A164's leaf lean on the
+   same two facts — clearance is 1-Lipschitz in the centre and (√2/2)-Lipschitz in the tilt — so
+   writing W3 once in Lean pays for both, and Leaf WASTE then costs 0 new axioms.
 2. **The alive population.** Re-run unconverged alive nodes with a longer LP cap before splitting them (A109's 28/46);
    branch on the load path instead of the rattler (A112); both are about not paying eight children for a node that
    was never alive or whose slack sits in squares it does not condition on.
