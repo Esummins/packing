@@ -62,7 +62,7 @@ def draw_role_full(g, name, rj, others, solid=True, region=True):
             pitch = 0.012
             xs = np.arange(pb.x0 + pitch / 2, pb.x1, pitch)
             ys = np.arange(pb.y0 + pitch / 2, pb.y1, pitch)
-            if not len(xs) or not len(ys):
+            if len(xs) < 2 or len(ys) < 2:                    # A176: a sliver thinner than the pitch
                 continue
             X, Yy = np.meshgrid(xs, ys, indexing="ij")
             Cc = np.column_stack([X.ravel(), Yy.ravel()])
