@@ -6816,3 +6816,61 @@ result reached from the other side and says where a pad-free (s0-only) leaf coul
 `joint_kills159.jsonl`; `logs/`), plus the four named appends: A115 `notes/t6_report.md` hand-off
 list, `docs/budget.md` k0 row, `docs/residue_ledger.md` §4, and a new `polycore_status` column in
 `docs/shadows/k0v4/review_k0v4.csv`.
+
+## 2026-09-08 — A162 — the shadow-gallery status board
+
+**What the PI asked for.** A single place that says how much residue is left in the two review
+galleries and where. Built `docs/shadows/status_gallery.py` — rerunnable, idempotent, **no LP**, no
+write outside `docs/shadows/` — and ran it.
+
+**The counts.** `docs/shadows/k0v4/` **11 pages: 11 ALIVE, 0 DEAD**.
+`docs/shadows/a57v4/` **60 pages: 57 ALIVE, 3 DEAD**. By family the dead are `S02` 1, `S11` 1,
+`none` 1; by leaf, A149's exact-core `case-measure-certificate-v1` 2 and A57's own tree certificate
+`PASS` 1. Underneath the collector read **4,995 kill records, 4,654 of them kills**, over the A57
+tree jsonl (the tag authority), A137's supersession ledgers and 159 fresh clipkills, A149's
+exactcore/poly/a60 ledgers and day149 rows, A156's `lp156_*`, A136's and A96's A120 closures,
+A140's `exactcore140`, A141's `polycore_lane_kills`, and all **342** `*.clipkill.json` under
+`attempts/*/certs/**`.
+
+**The three kills, and why the third one is the interesting one.**
+`k5_11_interior_Y0275` and `k5_16_interior_Y0275` are A149 exact-core kills on the **G1** tree,
+attributed by matching the ledger's `tau_before` against the canonical `(tag, id)` record
+(4.999999999999965 and 4.999999999004872 — the G1 records to the last digit, while the L1 records of
+the same ids sit at 4.0 and 4.0). `k5_16_interior_Y0083` is **A137 §C.3 in the wild**: A148 drew
+that page from the **L1** node's record, which has been a certified `PASS` in A57's own tree certs
+(`certs/tree/k5_16_interior_L1/k5_16_interior_Y0083.json`, `tau = 4.5 < budget 5`, converged,
+`minmass = 1`) all along — its review-sheet row even carries `eta = -0.5` while the `verdict`
+column says `ALIVE-at-LP`. The **G1** node of the same id is still alive (A149 recorded it
+`LOST-KILL-ON-RESOLVE` at 16:34). So the page is dead, the id is not, and a `board.py`-style
+last-wins id map would have got the attribution backwards in both directions.
+
+**Three non-kills the collector refuses on purpose, each for a recorded reason.**
+(a) A140's `exactcore140` rows for `l1_148`, `l2_p65_101` and `l2_p65_111` carry `kills = true` with
+`converged = false` and no certificate — A124: a non-converged `tau` was never a bound, so all three
+k0 cells stay alive and only `s3_far_BL389484_TR018470` (cert `PASS`) is a kill.
+(b) A158's `yescert158.jsonl` rows read `verdict = "KILL"` with `kill = false`; the conditional lane
+leaf reaches `1 + LANE + M = 2` on every measured cell and 0 of 141 kill the YES child. **`c0_Y0076`'s
+NO child is NOT a kill** — A158b ran the YES child as an LP node and it converges at `tau = budget`,
+`eta = 0`. (c) `*__exall.json` is not a kill record (it exists on LOST-KILL / TOO-TIGHT / FAIL too);
+`*.clipkill.json` is (A148's rule).
+
+**Tag resolution and refusals.** Of the 3,160 distinct ids in A57's tree corpus, **300 live in more
+than one tree**. Records are placed by `applies_to_tags` → prior-`tau` match → unique tree → REFUSE.
+**58 records were refused** for an unresolved tag; all 58 are redundant (the same id is killed with
+an explicit tag by another record), so **0 nodes are left unattributed**. The rule correctly keeps
+A142's two restricted kills (`k5_11_interior_Y0041_D02`, `k5_16_interior_Y0449`, written at
+`a_pin = 0.49999997`) on the L1 trees, while `k5_11_interior_Y0041_D02`'s G1_D2 node is killed
+independently by A149.
+
+**Residue left.** 68 of 71 gallery pages are alive. Behind them the A57 tree still owes work on
+**406 nodes** (`PAUSED.md` v3 §B, 632 → 406 after the fold-in and the exact-core re-emission), out of
+1,693 alive A57/A60 records = 1,590 distinct nodes (k5_11 713, k5_16 552, trump5 325), plus the 11
+converged-alive `k0_00` cells. The galleries are a 3.8 % sample of the live board and the whole of
+the k0 residue: they are where the residue is *looked at*, not where it is *counted*.
+
+**Files.** `docs/shadows/status_gallery.py` (the deliverable), `docs/shadows/STATUS.md` (generated —
+the checklist the PI reads first), `docs/shadows/a57v4/killed/` (3 pages, `git mv`d, nothing
+deleted), the status section appended to both gallery READMEs with their page links repointed, a
+one-line usage note appended to `attempts/A57-shadow-trees/PAUSED.md`, and
+`attempts/A162-gallery-status/` (`BRIEF.md`, `notes/method.md`, `results/status162.json`,
+`logs/run.log`).

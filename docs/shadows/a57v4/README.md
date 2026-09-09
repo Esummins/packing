@@ -56,17 +56,17 @@ A **disjoint pair** is two free meeters that miss each other, so on those two ce
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | [`k5_11_interior_Y1104`](k5_11_interior_Y1104.svg) | 1 | 3.902674 | S10 | 0.427 | 1.124 | **9** (5) | `H->wall x=s` 0.8022 | 4 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y0672`](k5_11_interior_Y0672.svg) | 1 | 4.000261 | S53 | 0.143 | 1.087 | **10** (5) | `P1-P2` 0.8912 | 2 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
-| [`k5_16_interior_Y0083`](k5_16_interior_Y0083.svg) | 1 | 3.886746 | S02 | 1.184 | 1.747 | **10** (5) | `P1-H` 0.4385 | 5 | `BL(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin core x0`) | clip, T5⁗ alive, lane near-miss, guard no kill |
+| [`k5_16_interior_Y0083`](killed/k5_16_interior_Y0083.svg) | 1 | 3.886746 | S02 | 1.184 | 1.747 | **10** (5) | `P1-H` 0.4385 | 5 | `BL(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin core x0`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y0738`](k5_11_interior_Y0738.svg) | 1 | 3.886746 | S02 | 2.213 | 2.694 | **9** (5) | `P1-H` 0.1231 | 8 | `TL(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.2811 (`grid v 2/8`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y1110`](k5_11_interior_Y1110.svg) | 1 | 3.924003 | S36 | 0.155 | 1.039 | **10** (5) | `P1-P2` 0.8912 | 4 | `BL(1,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y0662`](k5_11_interior_Y0662.svg) | 1 | 3.877084 | none | 0.391 | 1.092 | **9** (5) | `H->wall y=s` 0.8172 | 4 | `TL(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y0130`](k5_11_interior_Y0130.svg) | 1 | 4.000000 | S01 | 0.004 | 0.967 | **10** (5) | `P1-P2` 0.8912 | 2 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
-| [`k5_11_interior_Y0275`](k5_11_interior_Y0275.svg) | 1 | 3.877084 | none | 0.304 | 1.021 | **10** (5) | `P1-H` 0.8419 | 5 | `BL(1,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TL(1,0)` NEAR-MISS (LANE ub 1, lb 0, M 1), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
+| [`k5_11_interior_Y0275`](killed/k5_11_interior_Y0275.svg) | 1 | 3.877084 | none | 0.304 | 1.021 | **10** (5) | `P1-H` 0.8419 | 5 | `BL(1,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TL(1,0)` NEAR-MISS (LANE ub 1, lb 0, M 1), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y0308`](k5_11_interior_Y0308.svg) | 1 | 4.000000 | S01 | 0.360 | 1.068 | **9** (5) | `H->wall y=s` 0.8449 | 4 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TL(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS (LANE ub 1, lb 0, M 1) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y0985`](k5_11_interior_Y0985.svg) | 1 | 4.000000 | S01 | 0.410 | 1.146 | **9** (5) | `H->wall x=s` 0.8297 | 4 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_16_interior_Y0027`](k5_16_interior_Y0027.svg) | 1 | 4.000000 | S01 | 0.889 | 1.459 | **11** (5) | `P3-H` 0.4544 | 3 | — | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane no kill, guard no kill |
 | [`k5_16_interior_Y0191`](k5_16_interior_Y0191.svg) | 1 | 3.942809 | S03 | 1.490 | 1.982 | **10** (5) | `P1-H` 0.2712 | 5 | `BL(1,0)` NEAR-MISS (LANE ub 1, lb 0, M 1), `BR(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
-| [`k5_16_interior_Y0275`](k5_16_interior_Y0275.svg) | 1 | 3.976620 | S11 | 1.000 | 1.542 | **10** (5) | `P4-H` 0.2082 | 5 | `TL(1,0)` NEAR-MISS (LANE ub 1, lb 0, M 1), `TR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
+| [`k5_16_interior_Y0275`](killed/k5_16_interior_Y0275.svg) | 1 | 3.976620 | S11 | 1.000 | 1.542 | **10** (5) | `P4-H` 0.2082 | 5 | `TL(1,0)` NEAR-MISS (LANE ub 1, lb 0, M 1), `TR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_16_interior_Y0839`](k5_16_interior_Y0839.svg) | 1 | 4.000000 | S01 | 1.186 | 1.773 | **10** (5) | `P3-H` 0.2089 | 4 | `BR(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_16_interior_Y0842`](k5_16_interior_Y0842.svg) | 1 | 3.886746 | S02 | 0.908 | 1.582 | **10** (5) | `P3-H` 0.4325 | 4 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `BR(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_16_interior_Y0881`](k5_16_interior_Y0881.svg) | 1 | 4.000000 | S01 | 1.010 | 1.485 | **10** (5) | `P4-H` 0.4605 | 5 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
@@ -183,3 +183,21 @@ A **disjoint pair** is two free meeters that miss each other, so on those two ce
 `review_a57v4.csv` is the review sheet (every automatic column filled, the four `PI_*` columns
 empty).  The generator is `attempts/A148-gallery-v4/code/{gallery148,geo148,data148}.py`; the
 per-page facts are `attempts/A148-gallery-v4/results/gallery148_a57v4.json`.
+
+## Status: killed pages and the checklist
+
+*Maintained by `docs/shadows/status_gallery.py` (A162) — this section is regenerated, do not
+hand-edit it.*
+
+* **`../STATUS.md` is the checklist** — page, node, class, level, family, status, killing leaf,
+  attempt, date and A142 subtree cost for every page of every gallery, with the alive/dead counts
+  per gallery, by family and by leaf, and the "residue left" paragraph. **Read it first.**
+* **A page whose node is now DEAD lives in [`killed/`](killed/)**, moved there with `git mv` —
+  never deleted. A page still in this directory is ALIVE as of the last run, and the links in the
+  tables above are repointed to `killed/` when a page moves.
+* **The tables above are the frozen A148 build-time state.** Where they disagree with `STATUS.md`
+  — including the "no node in this set is killed" lines, which are statements about the *drawing*,
+  not about the campaign records — **`STATUS.md` wins.**
+* Regenerate with `python docs/shadows/status_gallery.py` (`--dry-run` prints the plan and writes
+  nothing). It solves no LP; it only reads existing kill records, and it writes nothing outside
+  `docs/shadows/`.

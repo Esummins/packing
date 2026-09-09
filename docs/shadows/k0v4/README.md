@@ -66,3 +66,21 @@ drawing**.  `n_max < budget` is a geometric kill with no LP at all.  The column 
 `review_k0v4.csv` is the review sheet (every automatic column filled, the four `PI_*` columns
 empty).  The generator is `attempts/A148-gallery-v4/code/{gallery148,geo148,data148}.py`; the
 per-page facts are `attempts/A148-gallery-v4/results/gallery148_k0v4.json`.
+
+## Status: killed pages and the checklist
+
+*Maintained by `docs/shadows/status_gallery.py` (A162) — this section is regenerated, do not
+hand-edit it.*
+
+* **`../STATUS.md` is the checklist** — page, node, class, level, family, status, killing leaf,
+  attempt, date and A142 subtree cost for every page of every gallery, with the alive/dead counts
+  per gallery, by family and by leaf, and the "residue left" paragraph. **Read it first.**
+* **A page whose node is now DEAD lives in [`killed/`](killed/)**, moved there with `git mv` —
+  never deleted. A page still in this directory is ALIVE as of the last run, and the links in the
+  tables above are repointed to `killed/` when a page moves.
+* **The tables above are the frozen A148 build-time state.** Where they disagree with `STATUS.md`
+  — including the "no node in this set is killed" lines, which are statements about the *drawing*,
+  not about the campaign records — **`STATUS.md` wins.**
+* Regenerate with `python docs/shadows/status_gallery.py` (`--dry-run` prints the plan and writes
+  nothing). It solves no LP; it only reads existing kill records, and it writes nothing outside
+  `docs/shadows/`.

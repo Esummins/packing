@@ -508,3 +508,16 @@ bought. `Y1110`'s NO child is alive (`tau = 5`), so even a closed `M` cover give
 that can fire, so the conditional lane leaf is only ever deployable where `H` is near enough to a
 wall or a pin for `box_misses_cell`/container to bite.** Cost ~0.7 CPU-h of a +2 CPU-h extension;
 nothing in A57 was written.
+
+---
+
+### A162 addendum (2026-09-08) — run the gallery status board at every pause
+
+**One line, at every pause, before you write the next `PAUSED.md`:**
+`python docs/shadows/status_gallery.py` — it re-reads every kill record in the repo (this file's
+supersession ledgers, A136/A140/A141/A149/A156's records, the A57 tree jsonl, and every
+`*.clipkill.json` under `attempts/*/certs/**`), applies §C.3's tag rule and monotonicity, `git mv`s
+the now-DEAD shadow-gallery pages into `docs/shadows/<gallery>/killed/` (never a delete) and
+rewrites `docs/shadows/STATUS.md`, which is the checklist the PI reads first. `--dry-run` prints the
+plan and writes nothing; it solves no LP, writes nothing outside `docs/shadows/`, and is idempotent.
+First run: `k0v4` 11 alive / 0 dead, `a57v4` 57 alive / 3 dead.
