@@ -1,0 +1,387 @@
+{
+ "ok": true,
+ "seconds": 11.914719104766846,
+ "s": "969271/250000",
+ "a168_source": "attempts/A168-cascade-fable/results/v0_union_boxes/cascade168.jsonl, cell l1_153, node BR139/TRH-25, step S2, verdict ALIVE(geometry)",
+ "results": [
+  {
+   "test": "a1.cores_overlap_before",
+   "ok": true,
+   "sat_gap": -0.133748675
+  },
+  {
+   "test": "a1.mutual_clip_empties",
+   "ok": true,
+   "emptied": "A"
+  },
+  {
+   "test": "a2.cores_disjoint_but_poses_meet",
+   "ok": true,
+   "cores_disjoint": true,
+   "core_meet_before": {
+    "A": 0.34375,
+    "B": 0.33225
+   }
+  },
+  {
+   "test": "a2.clip_shrinks",
+   "ok": true,
+   "kept": {
+    "A": 0.708642,
+    "B": 0.70834
+   }
+  },
+  {
+   "test": "a2.invariant_after",
+   "ok": true,
+   "failures": 0,
+   "core_meet_after": {
+    "A": 0.053,
+    "B": 0.05125
+   },
+   "detail": {
+    "before": {
+     "A": 0.34375,
+     "B": 0.33225
+    },
+    "kept": {
+     "A": 0.7086424453349627,
+     "B": 0.7083401049711554
+    }
+   }
+  },
+  {
+   "test": "b.escapes_before",
+   "ok": true,
+   "escape_frac_before": 0.663,
+   "failed": [
+    "POSE-CONTAINER",
+    "POSE-CONTAINER-STRICT"
+   ]
+  },
+  {
+   "test": "b.container_clip_removes_outside",
+   "ok": true,
+   "escape_frac_after": 0.0,
+   "kept": 0.29739,
+   "sliver_area": 0.036602547
+  },
+  {
+   "test": "b.sampled_clean",
+   "ok": true,
+   "drawn": 10000,
+   "escape": 0,
+   "not_core": 0,
+   "k_overlap": 0,
+   "core_meet": 0
+  },
+  {
+   "test": "c.invariant_fails_before",
+   "ok": true,
+   "checks": {
+    "K-CONTAINER": true,
+    "K-DISJOINT": true,
+    "POSE-CONTAINER": false,
+    "POSE-CONTAINER-STRICT": false,
+    "CLIP-FIXPOINT": false
+   },
+   "failures": [
+    "POSE-CONTAINER[B1]",
+    "POSE-CONTAINER-STRICT[B1]",
+    "POSE-CONTAINER[D]",
+    "POSE-CONTAINER-STRICT[D]",
+    "CLIP-FIXPOINT[D]"
+   ]
+  },
+  {
+   "test": "c.D_outside_container",
+   "ok": true,
+   "escape_frac_D": 0.47075,
+   "detail": [
+    "poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.003404926 on tilt [45.000,50.625]",
+    "poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.087937870 on tilt [0.000,11.250]"
+   ]
+  },
+  {
+   "test": "c.poses_meet_other_cores",
+   "ok": true,
+   "pair_meet_before": {
+    "H->B1": 0.6185,
+    "H->D": 0.0,
+    "B1->H": 0.0008,
+    "B1->D": 0.0,
+    "D->H": 0.5995,
+    "D->B1": 0.0
+   }
+  },
+  {
+   "test": "c.invariant_passes_after",
+   "ok": true,
+   "kept": {
+    "H": 0.440792,
+    "B1": 0.942803,
+    "D": 0.088172
+   },
+   "checks": {
+    "K-CONTAINER": true,
+    "K-DISJOINT": true,
+    "POSE-CONTAINER": true,
+    "POSE-CONTAINER-STRICT": true,
+    "CLIP-FIXPOINT": true
+   },
+   "seconds": 2.43
+  },
+  {
+   "test": "c.sampled_clean_after",
+   "ok": true,
+   "drawn": 30000,
+   "escape": 0,
+   "not_core": 0,
+   "k_overlap": 0,
+   "core_meet": 6145,
+   "detail": {
+    "before": {
+     "checks": {
+      "K-CONTAINER": true,
+      "K-DISJOINT": true,
+      "POSE-CONTAINER": false,
+      "POSE-CONTAINER-STRICT": false,
+      "CLIP-FIXPOINT": false
+     },
+     "pair_meet": {
+      "H->B1": 0.6185,
+      "H->D": 0.0,
+      "B1->H": 0.0008,
+      "B1->D": 0.0,
+      "D->H": 0.5995,
+      "D->B1": 0.0
+     },
+     "diagnostics": {
+      "H": {
+       "drawn": 4000,
+       "escape_frac": 0.0,
+       "core_meet_frac": 0.631
+      },
+      "B1": {
+       "drawn": 4000,
+       "escape_frac": 0.05175,
+       "core_meet_frac": 0.00025
+      },
+      "D": {
+       "drawn": 4000,
+       "escape_frac": 0.47075,
+       "core_meet_frac": 0.594
+      }
+     },
+     "failures": [
+      {
+       "check": "POSE-CONTAINER",
+       "what": "B1",
+       "detail": "centre rect leaves [w_min/2, s-w_min/2] by 0.000000002 on tilt [45.000,50.625]"
+      },
+      {
+       "check": "POSE-CONTAINER-STRICT",
+       "what": "B1",
+       "detail": "poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.003404926 on tilt [45.000,50.625]"
+      },
+      {
+       "check": "POSE-CONTAINER",
+       "what": "D",
+       "detail": "centre rect leaves [w_min/2, s-w_min/2] by 0.000000001 on tilt [0.000,11.250]"
+      },
+      {
+       "check": "POSE-CONTAINER-STRICT",
+       "what": "D",
+       "detail": "poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.087937870 on tilt [0.000,11.250]"
+      },
+      {
+       "check": "CLIP-FIXPOINT",
+       "what": "D",
+       "detail": "the mutual clip still removes area 0.003806076 on tilt [0.000,11.250] -- normalise() not run"
+      }
+     ]
+    },
+    "after": {
+     "kept": {
+      "H": 0.4407921106984375,
+      "B1": 0.9428030096899332,
+      "D": 0.0881720738770686
+     },
+     "diagnostics": {
+      "H": {
+       "drawn": 4000,
+       "escape_frac": 0.0,
+       "core_meet_frac": 0.341
+      },
+      "B1": {
+       "drawn": 4000,
+       "escape_frac": 0.0,
+       "core_meet_frac": 0.0
+      },
+      "D": {
+       "drawn": 4000,
+       "escape_frac": 0.0,
+       "core_meet_frac": 0.27875
+      }
+     },
+     "sliver_area": {
+      "H": 0.0,
+      "B1": 0.0002623104698082033,
+      "D": 0.020389059408317922
+     },
+     "pieces": {
+      "H": 26,
+      "B1": 32,
+      "D": 14
+     }
+    }
+   }
+  },
+  {
+   "test": "d.no_violation",
+   "ok": true,
+   "nodes": 10,
+   "dead": 0,
+   "drawn": 99996,
+   "escape": 0,
+   "not_core": 0,
+   "k_overlap": 0,
+   "core_meet": 54,
+   "invariant_fail": 0,
+   "detail": [
+    {
+     "node": 0,
+     "k": 4,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0,
+      "R2": 1.0,
+      "R3": 1.0
+     },
+     "drawn": 10000,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 1,
+     "k": 4,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0,
+      "R2": 1.0,
+      "R3": 1.0
+     },
+     "drawn": 10000,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 2,
+     "k": 3,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0,
+      "R2": 1.0
+     },
+     "drawn": 9999,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 3,
+     "k": 3,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0,
+      "R2": 1.0
+     },
+     "drawn": 9999,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 4,
+     "k": 3,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0,
+      "R2": 1.0
+     },
+     "drawn": 9999,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 5,
+     "k": 2,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0
+     },
+     "drawn": 10000,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 6,
+     "k": 3,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0,
+      "R2": 1.0
+     },
+     "drawn": 9999,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 7,
+     "k": 2,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0
+     },
+     "drawn": 10000,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 8,
+     "k": 4,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0,
+      "R2": 1.0,
+      "R3": 1.0
+     },
+     "drawn": 10000,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    },
+    {
+     "node": 9,
+     "k": 4,
+     "kept": {
+      "R0": 1.0,
+      "R1": 1.0,
+      "R2": 1.0,
+      "R3": 1.0
+     },
+     "drawn": 10000,
+     "escape": 0,
+     "not_core": 0,
+     "k_overlap": 0
+    }
+   ]
+  }
+ ]
+}

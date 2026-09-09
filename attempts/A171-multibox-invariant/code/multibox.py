@@ -1,0 +1,1092 @@
+"""A171 -- MULTIBOX: the multi-box clipping rule, as CODE.
+
+WHY THIS MODULE EXISTS.  A165 and A168 both built multi-box case trees on the k0 cell l1_104 and
+both drew/solved boxes that had never been clipped: pose unions escaping the container, and pose
+unions overlapping another box's certified core.  The PI caught both by eye.  A rule that lives in a
+brief is a rule that gets skipped; this module makes it a function call that every multi-box
+construction has to make before it draws a figure, prices a chord row, runs a lane cover or hands
+boxes to an LP.
+
+--------------------------------------------------------------------------------------------------
+THE OBJECT
+--------------------------------------------------------------------------------------------------
+A `Node` is a named collection of parameter boxes  B_name = [x0,x1] x [y0,y1] x [th0,th1],  each
+carrying the hypothesis "some square of the packing has (centre, tilt) in B_name", the boxes naming
+DISTINCT squares.  Two facts about a packing are then available for free and are what the clip uses:
+
+    (CONTAINER)  every square lies inside [0, s]^2, so a pose (c, th) needs
+                 w(th)/2 <= c <= s - w(th)/2 in each coordinate, w(th) = |cos th| + |sin th|;
+    (DISJOINT)   the squares are interior-disjoint, and K'(B) (A132's certified polygon core) is
+                 contained in EVERY pose of B, so a pose of box A whose square meets int K'(B) is
+                 IMPOSSIBLE.
+
+Each box is carried as a list of PIECES  (t-sub-bin [t0,t1], rational centre rect),  t = tan(th/2)
+as everywhere in this repo (A57 `caselp`).  A piece is an over-approximation: it CONTAINS every
+still-possible pose whose tilt lies in its sub-bin.  Clipping only ever removes poses that (CONTAINER)
+or (DISJOINT) has just proved impossible, so the union of the pieces is a sound replacement for the
+box at every stage.  A box that loses every piece has no possible pose at all -- the node is DEAD by
+the pair leaf (`shared_point_same_square`, A135) -- and `normalise` raises `EmptyBox(name)`.
+
+--------------------------------------------------------------------------------------------------
+THE TWO CLIPS, AND EXACTLY WHAT EACH IS ALLOWED TO REMOVE
+--------------------------------------------------------------------------------------------------
+Both clips remove a centre only when it is dead FOR EVERY TILT IN ITS PIECE'S SUB-BIN.  That is the
+only rule a (rect x tilt-interval) representation may use: a centre killed at some tilts but alive
+at others still carries a pose of the piece.
+
+  1. CONTAINER CLIP (sound).  Over a sub-bin the least restrictive container window is the one at
+     w_min (w = cos + sin is concave on [0, 90], so its minimum is at an endpoint -- exact).  A
+     centre outside [w_min/2, s - w_min/2]^2 admits no tilt in the sub-bin and is discarded.  This
+     is A131 `pinclip.clip_rect`'s container step, verbatim.
+
+     STRICT CONTAINER (`strict_container=True`, the default, and what "all poses inside [0,s]^2"
+     means): additionally clip to [w_max/2, s - w_max/2]^2, so that EVERY pose of the piece is
+     inside the container.  This is a genuine narrowing of the hypothesis and it is NOT free: the
+     poses it drops (centre feasible at the low-w tilts of the sub-bin only) are real.  It is
+     recorded as a `container_sliver` step in the trace, WITH ITS AREA, and `assert_invariant`
+     reports `sliver_area` per box.  A caller who needs the full hypothesis passes
+     `strict_container=False` and gets only the sound clip; a caller who wants a tight, drawable,
+     row-able node passes the default and must either refine the tilt bins until the slivers are
+     negligible or discharge them separately.  The slivers shrink like (w_max - w_min)/2 over the
+     sub-bin, i.e. like 1/nsub^2 near a tilt where w is smooth -- refining `nsub` is the fix.
+     Nothing is ever dropped silently.
+
+  2. MUTUAL CLIP (sound, no caveat).  For an ordered pair (A, B) the DEAD SET of A against B is
+
+         D_B(t0,t1) = { c : Q(c, th) meets int K'(B) for every th with tan(th/2) in [t0,t1] }.
+
+     Every centre in D_B carries no pose of the piece, so the piece may be clipped by D_B.  D_B is
+     CONVEX -- it is an intersection over th of Minkowski sums int K'(B) (+) (-Q(0,th)) of convex
+     sets -- which is what makes the clip cheap and certifiable: if the four corners of a rectangle
+     are in D_B then the whole rectangle is, so the axis slabs hanging off each side are found by
+     bisection on two corner points and certified exactly (A131's `_bisect_boundary`, reused).
+
+     The exact membership test `dead_poly` is a SUFFICIENT condition for c in D_B (never the
+     converse), so the clip removes less than the truth -- the sound direction.  Details in
+     `dead_poly`'s docstring.  `mode="core"` uses A135's exact axis core of B instead of A132's
+     polygon; that is a subset of K'(B), hence also sound, and it is A131's own octagon predicate
+     transported into the core's frame (`_frames`).
+
+  The two clips are iterated to a fixed point.  After each pass, K'(B) and the exact axis core are
+  RECOMPUTED from the surviving pieces: dropping poses from B can only ENLARGE K'(B) (an
+  intersection over fewer poses), which clips the other boxes harder.  That cascade is the whole
+  point -- it is what A165/A168 skipped.
+
+--------------------------------------------------------------------------------------------------
+THE INVARIANT
+--------------------------------------------------------------------------------------------------
+`assert_invariant()` is exact rational arithmetic throughout and raises `InvariantError` listing
+EVERY failure it found (never just the first):
+
+    K-CONTAINER   every vertex of every K'(B) lies in [0, s]^2.
+    K-DISJOINT    every pair K'(A), K'(B) is interior-disjoint (exact rational SAT over the edge
+                  normals of both polygons -- complete for convex polygons).
+    POSE-CONTAINER   every piece's rect is inside [w_min/2, s - w_min/2]^2 (sound clip reached).
+    POSE-CONTAINER-STRICT (strict=True)  every piece's rect is inside [w_max/2, s - w_max/2]^2,
+                  i.e. EVERY POSE of the node is inside the container.  This is the check that
+                  catches A168's D.
+    CLIP-FIXPOINT  re-running the mutual clip on every piece changes nothing, i.e. no centre of any
+                  box is dead against another box's core.
+
+It also returns (never raises on) the tightness diagnostics `sliver_area`, `escape_frac` and
+`core_meet_frac` -- the last two sampled -- because the residual "pose meets another core at SOME
+tilt of its sub-bin" cannot be driven to zero by a rectangle-times-interval representation, only
+made small by refining `nsub`.
+
+--------------------------------------------------------------------------------------------------
+READ-ONLY IMPORTS
+--------------------------------------------------------------------------------------------------
+A131 pinclip, A132 polycore, A135 exactcore, A141 polylane, A144 guardline, A161 chordlane, A57
+caselp.  Nothing in this module writes outside attempts/A171-multibox-invariant.
+"""
+import math
+import os
+import sys
+from fractions import Fraction as Fr
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ATT = os.path.abspath(os.path.join(HERE, "..", ".."))
+_PATHS = [
+    os.path.join(ATT, "A141-polycore-lane", "code"),      # blas1 first (single-thread guard)
+    os.path.join(ATT, "A57-shadow-trees", "code"),
+    os.path.join(ATT, "A131-pin-clip", "code"),
+    os.path.join(ATT, "A132-polygon-core", "code"),
+    os.path.join(ATT, "A135-polycore-verifier", "code"),
+    os.path.join(ATT, "A144-guard-lines", "code"),
+    os.path.join(ATT, "A161-chord-lane", "code"),
+    os.path.join(ATT, "A118-lane-count", "code"),
+]
+for _p in _PATHS:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
+import blas1  # noqa: F401,E402   READ-ONLY (A141) -- must precede numpy
+import numpy as np  # noqa: E402
+
+from caselp import Box, Core, cos_sin_t, t_lo, t_hi          # noqa: E402  READ-ONLY (A57)
+import pinclip as PIN                                        # noqa: E402  READ-ONLY (A131)
+import polycore as PC                                        # noqa: E402  READ-ONLY (A132)
+import exactcore as EC                                       # noqa: E402  READ-ONLY (A135)
+
+S_RAT = Fr(969271, 250000)          # s0 = 3.877084
+HALF = Fr(1, 2)
+VDEN = 10 ** 9
+ADEN_DEFAULT = 1 << 28              # exact-core bisection grid (A135 uses 1<<40; 1<<28 ~ 3.7e-9)
+
+
+class EmptyBox(Exception):
+    """A box lost every pose: the node is dead by the pair leaf."""
+
+    def __init__(self, name, detail=None):
+        self.name = name
+        self.detail = detail or {}
+        super().__init__(f"EmptyBox({name}): every pose is impossible -- the case is dead "
+                         f"by the pair leaf")
+
+
+class InvariantError(Exception):
+    """The multi-box invariant does not hold.  `failures` lists every violation found."""
+
+    def __init__(self, failures):
+        self.failures = failures
+        head = "; ".join(f"{f['check']}:{f['what']}" for f in failures[:6])
+        more = "" if len(failures) <= 6 else f" (+{len(failures) - 6} more)"
+        super().__init__(f"{len(failures)} invariant failure(s): {head}{more}")
+
+
+# ==================================================================== exact rational helpers
+def _fr(x):
+    return x if isinstance(x, Fr) else Fr(str(x)) if isinstance(x, float) else Fr(x)
+
+
+def sqrt_lo(q, den=1 << 30):
+    """rational LOWER bound of sqrt(q) for q >= 0 (exact integer sqrt on a fixed grid)."""
+    q = _fr(q)
+    if q <= 0:
+        return Fr(0)
+    n = math.isqrt(int(q * den * den))
+    return Fr(n, den)
+
+
+def _cs_at(t):
+    """(cos th, sin th) at t = tan(th/2), exact."""
+    return cos_sin_t(t)
+
+
+def w_min_max(t0, t1):
+    """(w_min, w_max) of w(th) = cos th + sin th over the sub-bin, exact rationals; w_max is an
+    UPPER bound (sqrt2 is bracketed from above when the bin contains 45 deg)."""
+    c0, s0 = _cs_at(t0)
+    c1, s1 = _cs_at(t1)
+    w0, w1 = c0 + s0, c1 + s1
+    wmin = min(w0, w1)                      # w concave on [0,90]: min at an endpoint
+    # w_max = sqrt2 iff the bin contains 45 deg, i.e. t = sqrt2 - 1
+    tlo = SQ2_LO - 1
+    thi = SQ2_HI - 1
+    wmax = SQ2_HI if (t0 <= thi and t1 >= tlo) else max(w0, w1)
+    return wmin, wmax
+
+
+SQ2_LO = Fr(1414213562373095048801688, 10 ** 24)      # < sqrt 2
+SQ2_HI = SQ2_LO + Fr(1, 10 ** 24)                      # > sqrt 2
+
+
+def rect_area(rect):
+    if rect is None:
+        return Fr(0)
+    x0, x1, y0, y1 = rect
+    if x1 <= x0 or y1 <= y0:
+        return Fr(0)
+    return (x1 - x0) * (y1 - y0)
+
+
+def sub_bins(t0, t1, n):
+    """n rational t-sub-bins covering [t0, t1] exactly."""
+    if t1 <= t0 or n <= 1:
+        return [(t0, t1)]
+    return [(t0 + (t1 - t0) * Fr(i, n), t0 + (t1 - t0) * Fr(i + 1, n)) for i in range(n)]
+
+
+def deg_of_t(t):
+    return math.degrees(2.0 * math.atan(float(t)))
+
+
+def t_of_deg(d):
+    return math.tan(math.radians(d) / 2.0)
+
+
+# ==================================================================== the obstacle
+class Obstacle:
+    """A convex rational polygon K contained in every pose of some box, precompiled for the exact
+    dead-set test.  `K` is A132's certified K'(B) (mode "poly") or the four corners of A135's exact
+    axis core (mode "core"); either is a subset of every pose of B, which is all soundness needs."""
+
+    __slots__ = ("verts", "fV", "edges", "name", "kind")
+
+    def __init__(self, verts, name="", kind="poly"):
+        self.verts = [(_fr(a), _fr(b)) for (a, b) in verts]
+        self.fV = np.array([[float(a), float(b)] for a, b in self.verts])
+        self.name = name
+        self.kind = kind
+        # outward edge normals of the ccw polygon, with the polygon's exact support interval
+        E = []
+        m = len(self.verts)
+        for i in range(m):
+            (ax, ay) = self.verts[i]
+            (bx, by) = self.verts[(i + 1) % m]
+            nx, ny = (by - ay), -(bx - ax)          # outward for ccw
+            if nx == 0 and ny == 0:
+                continue
+            pr = [nx * px + ny * py for (px, py) in self.verts]
+            E.append((nx, ny, min(pr), max(pr)))
+        self.edges = E
+
+
+def obstacle_from_poly(pc, name=""):
+    return Obstacle(pc.verts, name=name, kind="poly")
+
+
+def obstacle_from_core(core, name=""):
+    v = EC.core_corners(core.kx, core.ky, core.cm, core.sm, core.a)
+    # core_corners returns (1,1),(1,-1),(-1,-1),(-1,1) -- that is CLOCKWISE in the core frame;
+    # reverse to counter-clockwise so the edge normals point outward.
+    return Obstacle(list(reversed(v)), name=name, kind="core")
+
+
+# ==================================================================== the exact dead-set test
+def _radius_lo(nx, ny, c0, s0, c1, s1):
+    """rational LOWER bound of  min over the sub-bin of  (|n.u| + |n.v|)/2,  n = (nx, ny).
+
+    n.u = nx cos + ny sin, n.v = -nx sin + ny cos; writing n = |n|(cos phi, sin phi) these are
+    |n| cos(th - phi) and -|n| sin(th - phi), so the quantity is |n|(|cos psi| + |sin psi|)/2 with
+    psi = th - phi.  |cos| + |sin| has its minima exactly where psi is a multiple of 90 deg, i.e.
+    where n.u or n.v vanishes -- an exact sign test on the two endpoints.  If neither changes sign
+    the minimum is at an endpoint (exact); otherwise it is |n|/2, for which a rational lower bound
+    of |n| is used.  A LOWER bound is the sound direction (see `dead_poly`)."""
+    u0 = nx * c0 + ny * s0
+    v0 = -nx * s0 + ny * c0
+    u1 = nx * c1 + ny * s1
+    v1 = -nx * s1 + ny * c1
+    if (u0 > 0) != (u1 > 0) or (v0 > 0) != (v1 > 0) or u0 == 0 or u1 == 0 or v0 == 0 or v1 == 0:
+        return sqrt_lo(nx * nx + ny * ny) / 2
+    e0 = (abs(u0) + abs(v0)) / 2
+    e1 = (abs(u1) + abs(v1)) / 2
+    return min(e0, e1)
+
+
+class Bin:
+    """one t-sub-bin, with the exact endpoint (cos, sin) and the float twins."""
+
+    __slots__ = ("t0", "t1", "c0", "s0", "c1", "s1", "fc0", "fs0", "fc1", "fs1",
+                 "wmin", "wmax", "_rlo")
+
+    def __init__(self, t0, t1):
+        self.t0, self.t1 = t0, t1
+        self.c0, self.s0 = _cs_at(t0)
+        self.c1, self.s1 = _cs_at(t1)
+        self.fc0, self.fs0 = float(self.c0), float(self.s0)
+        self.fc1, self.fs1 = float(self.c1), float(self.s1)
+        self.wmin, self.wmax = w_min_max(t0, t1)
+        self._rlo = {}
+
+    def radii(self, obs):
+        """per-edge rational lower radius bounds, cached per obstacle."""
+        key = id(obs)
+        r = self._rlo.get(key)
+        if r is None:
+            r = [_radius_lo(nx, ny, self.c0, self.s0, self.c1, self.s1)
+                 for (nx, ny, _lo, _hi) in obs.edges]
+            self._rlo[key] = r
+        return r
+
+
+def dead_poly(cx, cy, obs, bn):
+    """EXACT, SUFFICIENT: does Q(c, th) meet int K for EVERY th in the sub-bin?  Fractions in.
+
+    Q(c,th) and K are convex, so their interiors meet iff no candidate axis separates them; the
+    candidate axes are K's edge normals and the square's own two, u(th) and v(th).  "For every th"
+    distributes over the conjunction of axes, so each axis is handled on its own.
+
+      * K's edge normal n (a FIXED rational direction).  K projects to [lo, hi]; the square projects
+        to [c.n - r(th), c.n + r(th)] with r(th) = (|n.u| + |n.v|)/2.  Overlap at every th follows
+        from  c.n - r_lo < hi  and  c.n + r_lo > lo  with r_lo <= min_th r(th) (`_radius_lo`).
+        Using a LOWER bound makes both inequalities harder, i.e. declares FEWER centres dead.
+
+      * the square's own axes u(th), v(th).  K projects to [min_p p.u, max_p p.u] over its vertices;
+        overlap is  max_p (p-c).u > -1/2  and  min_p (p-c).u < 1/2.  "for every th" of a max over
+        vertices does not distribute, so the sufficient form is used: SOME single vertex p works for
+        every th.  Each such statement is one sinusoid inequality over the sub-bin, decided exactly
+        by A131's `_m_lt_half` (at most one interior critical point when the bin is under 180 deg;
+        the comparison r < 1/2 is done as r^2 < 1/4, so nothing leaves the rationals).
+
+    The result is a SUFFICIENT condition for membership in the true dead set D_K, never the
+    converse.  That is what the clip needs in two ways: the slab it removes is justified by
+    CONVEXITY OF D_K (four corners in D_K => the rectangle they span is in D_K), and a centre this
+    test cannot certify is simply kept."""
+    m = PIN._m_lt_half
+    c0, s0, c1, s1 = bn.c0, bn.s0, bn.c1, bn.s1
+    # --- family A: K's edge normals
+    R = bn.radii(obs)
+    for k, (nx, ny, lo, hi) in enumerate(obs.edges):
+        p = nx * cx + ny * cy
+        r = R[k]
+        if not (p - r < hi and p + r > lo):
+            return False
+    # --- family B: the square's own two axes, four one-sided statements
+    for (swap, sign) in ((0, 1), (0, -1), (1, 1), (1, -1)):
+        ok = False
+        for (px, py) in obs.verts:
+            P, Q = px - cx, py - cy
+            if swap:
+                P, Q = Q, -P                  # (p - c).v  =  P' cos + Q' sin  with (P', Q') = (Q, -P)
+            if m(sign * P, sign * Q, c0, s0, c1, s1):     # max over th of  sign*(p-c).axis  < 1/2
+                ok = True
+                break
+        if not ok:
+            return False
+    return True
+
+
+def _dead_poly_f(cx, cy, obs, bn):
+    """float twin of `dead_poly`, used ONLY to search for a slab boundary -- never to decide."""
+    m = PIN._m_lt_half_f
+    c0, s0, c1, s1 = bn.fc0, bn.fs0, bn.fc1, bn.fs1
+    for (nx, ny, lo, hi) in obs.edges:
+        fnx, fny = float(nx), float(ny)
+        p = fnx * cx + fny * cy
+        u0, v0 = fnx * c0 + fny * s0, -fnx * s0 + fny * c0
+        u1, v1 = fnx * c1 + fny * s1, -fnx * s1 + fny * c1
+        r = min(abs(u0) + abs(v0), abs(u1) + abs(v1)) / 2.0
+        if not (p - r < float(hi) and p + r > float(lo)):
+            return False
+    for (swap, sign) in ((0, 1), (0, -1), (1, 1), (1, -1)):
+        ok = False
+        for (px, py) in obs.fV:
+            P, Q = px - cx, py - cy
+            if swap:
+                P, Q = Q, -P
+            if m(sign * P, sign * Q, c0, s0, c1, s1):
+                ok = True
+                break
+        if not ok:
+            return False
+    return True
+
+
+# ==================================================================== the clip of one rect
+def _clip_rect_obstacle(rect, obs, bn, stats, trace=None, tag=""):
+    """clip a rational rect against ONE obstacle's dead set over ONE sub-bin.  -> rect or None.
+
+    Structurally A131 `pinclip._clip_one_pin`, with the pin octagon replaced by the general exact
+    predicate above and A131's `_bisect_boundary` reused verbatim.  Every removal is recorded as a
+    replayable step; a checker replays a slab step by verifying the four corners (from/to) x (y0/y1)
+    are dead, which proves the slab dead by convexity of the dead set."""
+    x0, x1, y0, y1 = rect
+
+    def dq(px, py):
+        stats["exact_calls"] += 1
+        return dead_poly(px, py, obs, bn)
+
+    def df(px, py):
+        return _dead_poly_f(px, py, obs, bn)
+
+    def rec(side, frm, to):
+        if trace is not None and to != frm:
+            trace.append(dict(op="slab", obs=tag, side=side,
+                              **{"from": str(frm)}, to=str(to)))
+
+    if dq(x0, y0) and dq(x1, y0) and dq(x0, y1) and dq(x1, y1):
+        if trace is not None:
+            trace.append(dict(op="empty", obs=tag, rect=[str(v) for v in rect]))
+        return None
+    if dq(x0, y0) and dq(x0, y1):
+        nx = PIN._bisect_boundary(True, x0, x1,
+                                  lambda v: df(v, float(y0)) and df(v, float(y1)),
+                                  lambda v: dq(v, y0) and dq(v, y1), stats)
+        rec("x0", x0, nx)
+        x0 = nx
+    if dq(x1, y0) and dq(x1, y1):
+        neg = PIN._bisect_boundary(True, -x1, -x0,
+                                   lambda v: df(-v, float(y0)) and df(-v, float(y1)),
+                                   lambda v: dq(-v, y0) and dq(-v, y1), stats)
+        rec("x1", x1, -neg)
+        x1 = -neg
+    if x1 <= x0:
+        if trace is not None:
+            trace.append(dict(op="collapse", obs=tag, axis="x"))
+        return None
+    if dq(x0, y0) and dq(x1, y0):
+        ny = PIN._bisect_boundary(True, y0, y1,
+                                  lambda v: df(float(x0), v) and df(float(x1), v),
+                                  lambda v: dq(x0, v) and dq(x1, v), stats)
+        rec("y0", y0, ny)
+        y0 = ny
+    if dq(x0, y1) and dq(x1, y1):
+        neg = PIN._bisect_boundary(True, -y1, -y0,
+                                   lambda v: df(float(x0), -v) and df(float(x1), -v),
+                                   lambda v: dq(x0, -v) and dq(x1, -v), stats)
+        rec("y1", y1, -neg)
+        y1 = -neg
+    if x1 <= x0 or y1 <= y0:
+        if trace is not None:
+            trace.append(dict(op="collapse", obs=tag, axis="y"))
+        return None
+    return (x0, x1, y0, y1)
+
+
+def split_piece(bn, rect):
+    """bisect a piece on its widest coordinate (x, y or t, the t-width weighted 1.5 per 90 deg,
+    which is A141 `polylane.split_box`'s convention).  A tautologous split: the two children cover
+    the parent exactly, so dropping a child the clip proves DEAD loses nothing."""
+    x0, x1, y0, y1 = rect
+    wx, wy = x1 - x0, y1 - y0
+    wt = (bn.t1 - bn.t0) * Fr(3, 2)
+    if wx >= wy and wx >= wt:
+        m = (x0 + x1) / 2
+        return [(bn, (x0, m, y0, y1)), (bn, (m, x1, y0, y1))]
+    if wy >= wt:
+        m = (y0 + y1) / 2
+        return [(bn, (x0, x1, y0, m)), (bn, (x0, x1, m, y1))]
+    m = (bn.t0 + bn.t1) / 2
+    return [(Bin(bn.t0, m), rect), (Bin(m, bn.t1), rect)]
+
+
+def container_clip(rect, bn, s, strict=True, trace=None):
+    """(rect|None, sliver_area).  Sound clip at w_min, then -- if `strict` -- the narrowing clip at
+    w_max that puts EVERY pose inside [0,s]^2, with the sacrificed sliver's area recorded."""
+    x0, x1, y0, y1 = rect
+    h = bn.wmin / 2
+    nx0, ny0 = max(x0, h), max(y0, h)
+    nx1, ny1 = min(x1, s - h), min(y1, s - h)
+    if trace is not None and (nx0, nx1, ny0, ny1) != (x0, x1, y0, y1):
+        trace.append(dict(op="container", w="min", w_val=str(bn.wmin),
+                          rect=[str(v) for v in (nx0, nx1, ny0, ny1)]))
+    if nx1 <= nx0 or ny1 <= ny0:
+        return None, Fr(0)
+    sound = (nx0, nx1, ny0, ny1)
+    if not strict:
+        return sound, Fr(0)
+    H = bn.wmax / 2
+    sx0, sy0 = max(nx0, H), max(ny0, H)
+    sx1, sy1 = min(nx1, s - H), min(ny1, s - H)
+    if sx1 <= sx0 or sy1 <= sy0:
+        if trace is not None:
+            trace.append(dict(op="container_sliver", w="max", w_val=str(bn.wmax),
+                              sliver_area=str(rect_area(sound)), rect=None))
+        return None, rect_area(sound)
+    strict_rect = (sx0, sx1, sy0, sy1)
+    sl = rect_area(sound) - rect_area(strict_rect)
+    if sl > 0 and trace is not None:
+        trace.append(dict(op="container_sliver", w="max", w_val=str(bn.wmax),
+                          sliver_area=str(sl), rect=[str(v) for v in strict_rect]))
+    return strict_rect, sl
+
+
+# ==================================================================== a box of the node
+class MBox:
+    """one named box of a Node: its pieces, its certified polygon core, its exact axis core."""
+
+    def __init__(self, name, box):
+        self.name = name
+        self.box0 = box                              # the box as handed in (never mutated)
+        t0, t1 = t_lo(box.th0), t_hi(box.th1)
+        self.t0, self.t1 = t0, t1
+        self.pieces = [(Bin(t0, t1), PIN.outer_rect(box))]
+        self.pc = None                               # A132 K'(B)
+        self.core = None                             # A135 exact axis core
+        self.obs = None                              # the compiled obstacle
+        self.kept = 1.0
+        self.trace = []
+        self.sliver_area = Fr(0)
+        self.area0 = rect_area(PIN.outer_rect(box)) * (t1 - t0)
+
+    # ---------------------------------------------------------------- geometry
+    def union_box(self):
+        """the smallest caselp.Box containing every surviving piece (tilt hull included)."""
+        if not self.pieces:
+            return None
+        xs0 = min(r[0] for (_b, r) in self.pieces)
+        xs1 = max(r[1] for (_b, r) in self.pieces)
+        ys0 = min(r[2] for (_b, r) in self.pieces)
+        ys1 = max(r[3] for (_b, r) in self.pieces)
+        tt0 = min(b.t0 for (b, _r) in self.pieces)
+        tt1 = max(b.t1 for (b, _r) in self.pieces)
+        return Box(float(xs0), float(xs1), float(ys0), float(ys1),
+                   deg_of_t(tt0), deg_of_t(tt1))
+
+    def rebuild(self, n_grid=97, max_v=16, aden=ADEN_DEFAULT):
+        """recompute K'(B) and the exact axis core from the SURVIVING pieces."""
+        b = self.union_box()
+        if b is None:
+            raise EmptyBox(self.name)
+        self.ubox = b
+        self.pc = PC.build(b, n_grid=n_grid, max_v=max_v)
+        try:
+            self.core = EC.exact_core(b, aden=aden)
+        except Exception:
+            self.core = b.core()
+        return self.pc
+
+    def obstacle(self, mode="poly"):
+        return (obstacle_from_poly(self.pc, self.name) if mode == "poly"
+                else obstacle_from_core(self.core, self.name))
+
+    def kept_fraction(self):
+        if self.area0 <= 0:
+            return 0.0
+        v = sum(rect_area(r) * (b.t1 - b.t0) for (b, r) in self.pieces)
+        return float(v / self.area0)
+
+    def sample(self, n, rng):
+        """(C, TH) uniform over the surviving pieces (t uniform inside each sub-bin)."""
+        if not self.pieces:
+            return np.zeros((0, 2)), np.zeros(0)
+        wts = np.array([float(rect_area(r) * (b.t1 - b.t0)) for (b, r) in self.pieces])
+        if wts.sum() <= 0:
+            wts = np.ones(len(self.pieces))
+        wts = wts / wts.sum()
+        idx = rng.choice(len(self.pieces), size=n, p=wts)
+        C = np.zeros((n, 2))
+        TH = np.zeros(n)
+        for k, (bn, r) in enumerate(self.pieces):
+            sel = np.flatnonzero(idx == k)
+            if not len(sel):
+                continue
+            x0, x1, y0, y1 = (float(v) for v in r)
+            C[sel, 0] = rng.uniform(x0, x1, len(sel))
+            C[sel, 1] = rng.uniform(y0, y1, len(sel))
+            t = rng.uniform(float(bn.t0), float(bn.t1), len(sel))
+            TH[sel] = 2.0 * np.arctan(t)
+        return C, TH
+
+    def to_json(self):
+        return dict(name=self.name, box0=self.box0.to_json(),
+                    union_box=(self.ubox.to_json() if getattr(self, "ubox", None) else None),
+                    kept=self.kept, n_pieces=len(self.pieces),
+                    sliver_area=float(self.sliver_area),
+                    axis_a=(float(self.core.a) if self.core is not None else None),
+                    poly_area=(self.pc.area() if self.pc is not None else None),
+                    pieces=[dict(t0=str(b.t0), t1=str(b.t1),
+                                 th=[deg_of_t(b.t0), deg_of_t(b.t1)],
+                                 rect=[str(v) for v in r]) for (b, r) in self.pieces],
+                    trace=self.trace)
+
+
+# ==================================================================== the node
+def mk_box(x0, x1, y0, y1, a, b, t=False):
+    """a caselp.Box from (x0,x1,y0,y1) and either a DEGREE tilt interval or (t=True) a t-interval."""
+    if t:
+        return Box(x0, x1, y0, y1, deg_of_t(_fr(a)), deg_of_t(_fr(b)))
+    return Box(x0, x1, y0, y1, a, b)
+
+
+def as_box(v):
+    if isinstance(v, Box):
+        return v
+    if isinstance(v, dict):
+        return mk_box(v["x0"], v["x1"], v["y0"], v["y1"],
+                      v.get("th0", v.get("t0")), v.get("th1", v.get("t1")),
+                      t=("t0" in v and "th0" not in v))
+    return Box(*list(v)[:6])
+
+
+class Node:
+    """A named collection of parameter boxes for DISTINCT squares of one packing."""
+
+    def __init__(self, boxes, s=S_RAT, name=""):
+        self.name = name
+        self.s = _fr(s)
+        self.boxes = {}
+        for k, v in boxes.items():
+            self.boxes[k] = MBox(k, as_box(v))
+        self.normalised = False
+        self.stats = {"exact_calls": 0, "backoffs": 0, "passes": 0}
+
+    # ---------------------------------------------------------------- accessors
+    @property
+    def names(self):
+        return list(self.boxes)
+
+    def __getitem__(self, k):
+        return self.boxes[k]
+
+    def kept(self):
+        return {k: b.kept_fraction() for k, b in self.boxes.items()}
+
+    def build_cores(self, **kw):
+        for b in self.boxes.values():
+            b.rebuild(**kw)
+        return self
+
+    # ---------------------------------------------------------------- THE RULE
+    def normalise(self, s=None, nsub=4, max_iter=10, strict_container=True, mode="poly",
+                  n_grid=97, max_v=16, aden=ADEN_DEFAULT, refine=2, max_pieces=96,
+                  verbose=False):
+        """Container clip + mutual clip to a fixed point.  Returns self.
+
+        Every multi-box construction MUST call this before it draws a figure, prices a chord row,
+        runs a lane cover or hands boxes to an LP.  Raises `EmptyBox(name)` the moment a box loses
+        every pose -- that is a KILL, and the caller should record the pair leaf, not retry.
+
+        `refine` levels of TAUTOLOGOUS bisection are interleaved with the clip (`split_piece`): the
+        two halves cover the parent exactly, so a half the clip proves wholly dead is dropped with
+        no loss.  Refinement is what makes the clip bite where the dead region is a diagonal band
+        that shrinks no side of the rectangle (A131 conservatism (c)); without it the residual
+        "poses that still meet another core" stays large.  `max_pieces` caps the pieces per box."""
+        s = self.s if s is None else _fr(s)
+        self.s = s
+        # ---- 1. split every box into nsub tilt sub-bins
+        for mb in self.boxes.values():
+            r0 = PIN.outer_rect(mb.box0)
+            mb.pieces = [(Bin(a, b), r0) for (a, b) in sub_bins(mb.t0, mb.t1, nsub)]
+            mb.trace = []
+            mb.sliver_area = Fr(0)
+        # ---- 2. container clip (independent of the other boxes; do it once, up front)
+        for mb in self.boxes.values():
+            keep = []
+            for (bn, r) in mb.pieces:
+                tr = []
+                nr, sl = container_clip(r, bn, s, strict=strict_container, trace=tr)
+                mb.sliver_area += sl
+                if tr:
+                    mb.trace.append(dict(pass_=0, t=[str(bn.t0), str(bn.t1)], steps=tr))
+                if nr is not None:
+                    keep.append((bn, nr))
+            if not keep:
+                raise EmptyBox(mb.name, dict(reason="container"))
+            mb.pieces = keep
+        # ---- 3. interleaved refinement: bisect, drop the dead halves, clip the rest
+        names = self.names
+        for lvl in range(max(0, refine)):
+            for mb in self.boxes.values():
+                mb.rebuild(n_grid=n_grid, max_v=max_v, aden=aden)
+            obst = {k: self.boxes[k].obstacle(mode) for k in names}
+            for k in names:
+                mb = self.boxes[k]
+                if len(mb.pieces) * 2 > max_pieces:
+                    continue
+                new = []
+                for (bn, r) in mb.pieces:
+                    for (bn2, r2) in split_piece(bn, r):
+                        tr = []
+                        cur, sl = container_clip(r2, bn2, s, strict=strict_container, trace=tr)
+                        mb.sliver_area += sl
+                        for j in names:
+                            if j == k or cur is None:
+                                continue
+                            cur = _clip_rect_obstacle(cur, obst[j], bn2, self.stats,
+                                                      trace=tr, tag=j)
+                        if tr:
+                            mb.trace.append(dict(refine=lvl + 1,
+                                                 t=[str(bn2.t0), str(bn2.t1)], steps=tr))
+                        if cur is not None:
+                            new.append((bn2, cur))
+                if not new:
+                    raise EmptyBox(mb.name, dict(reason="refine", level=lvl + 1))
+                mb.pieces = new
+            if verbose:
+                print(f"  refine {lvl + 1}: " +
+                      " ".join(f"{k}={self.boxes[k].kept_fraction():.4f}"
+                               f"({len(self.boxes[k].pieces)}p)" for k in names), flush=True)
+        # ---- 4. mutual clip to a fixed point, rebuilding K' after every pass
+        for it in range(max_iter):
+            for mb in self.boxes.values():
+                mb.rebuild(n_grid=n_grid, max_v=max_v, aden=aden)
+            obst = {k: self.boxes[k].obstacle(mode) for k in names}
+            changed = False
+            for k in names:
+                mb = self.boxes[k]
+                keep = []
+                for (bn, r) in mb.pieces:
+                    tr = []
+                    cur = r
+                    for j in names:
+                        if j == k or cur is None:
+                            continue
+                        cur = _clip_rect_obstacle(cur, obst[j], bn, self.stats,
+                                                  trace=tr, tag=j)
+                    if tr:
+                        mb.trace.append(dict(pass_=it + 1, t=[str(bn.t0), str(bn.t1)], steps=tr))
+                        changed = True
+                    if cur is not None:
+                        keep.append((bn, cur))
+                if not keep:
+                    raise EmptyBox(mb.name, dict(reason="mutual", pass_=it + 1))
+                mb.pieces = keep
+            self.stats["passes"] = it + 1
+            if verbose:
+                print(f"  pass {it + 1}: kept " +
+                      " ".join(f"{k}={self.boxes[k].kept_fraction():.4f}" for k in names),
+                      flush=True)
+            if not changed:
+                break
+        for mb in self.boxes.values():
+            mb.rebuild(n_grid=n_grid, max_v=max_v, aden=aden)
+            mb.kept = mb.kept_fraction()
+        self.normalised = True
+        return self
+
+    # ---------------------------------------------------------------- THE INVARIANT
+    def assert_invariant(self, s=None, strict=True, sample=4000, seed=171, raise_on_fail=True,
+                         mode="poly"):
+        """Exact rational checks; raises `InvariantError` listing EVERY failure.  Returns the
+        report dict (which the figure prints on the page)."""
+        s = self.s if s is None else _fr(s)
+        for mb in self.boxes.values():
+            if mb.pc is None:
+                mb.rebuild()
+        fails = []
+        rep = dict(s=str(s), boxes=self.names, checks={}, diagnostics={})
+
+        # --- K-CONTAINER: every K' vertex inside [0, s]^2
+        kc = []
+        for k, mb in self.boxes.items():
+            bad = [[str(a), str(b)] for (a, b) in mb.pc.verts
+                   if not (0 <= a <= s and 0 <= b <= s)]
+            if bad:
+                kc.append(dict(box=k, n_bad=len(bad), worst=bad[0]))
+                fails.append(dict(check="K-CONTAINER", what=k,
+                                  detail=f"{len(bad)} K' vertices outside [0,{float(s):.6f}]^2, "
+                                         f"e.g. {bad[0]}"))
+        rep["checks"]["K-CONTAINER"] = dict(ok=not kc, bad=kc)
+
+        # --- K-DISJOINT: exact rational SAT between every pair of polygon cores
+        kd = []
+        names = self.names
+        for i in range(len(names)):
+            for j in range(i + 1, len(names)):
+                a, b = names[i], names[j]
+                ok, ax, gap = polys_disjoint_exact(self.boxes[a].pc.verts, self.boxes[b].pc.verts)
+                if not ok:
+                    kd.append(dict(pair=[a, b], depth=float(-gap)))
+                    fails.append(dict(check="K-DISJOINT", what=f"{a}|{b}",
+                                      detail=f"K'({a}) and K'({b}) interiors meet, "
+                                             f"SAT depth {float(-gap):.9f}"))
+        rep["checks"]["K-DISJOINT"] = dict(ok=not kd, bad=kd)
+
+        # --- POSE-CONTAINER (sound) and POSE-CONTAINER-STRICT (all poses inside)
+        pcv, psv = [], []
+        for k, mb in self.boxes.items():
+            for (bn, r) in mb.pieces:
+                h, H = bn.wmin / 2, bn.wmax / 2
+                ex = max(h - r[0], r[1] - (s - h), h - r[2], r[3] - (s - h))
+                if ex > 0:
+                    pcv.append(dict(box=k, excess=float(ex), th=[deg_of_t(bn.t0), deg_of_t(bn.t1)]))
+                    fails.append(dict(check="POSE-CONTAINER", what=k,
+                                      detail=f"centre rect leaves [w_min/2, s-w_min/2] by "
+                                             f"{float(ex):.9f} on tilt "
+                                             f"[{deg_of_t(bn.t0):.3f},{deg_of_t(bn.t1):.3f}]"))
+                exS = max(H - r[0], r[1] - (s - H), H - r[2], r[3] - (s - H))
+                if exS > 0:
+                    psv.append(dict(box=k, excess=float(exS),
+                                    th=[deg_of_t(bn.t0), deg_of_t(bn.t1)]))
+                    if strict:
+                        fails.append(dict(check="POSE-CONTAINER-STRICT", what=k,
+                                          detail=f"poses escape [0,s]^2: centre rect exceeds "
+                                                 f"[w_max/2, s-w_max/2] by {float(exS):.9f} on "
+                                                 f"tilt [{deg_of_t(bn.t0):.3f},"
+                                                 f"{deg_of_t(bn.t1):.3f}]"))
+        rep["checks"]["POSE-CONTAINER"] = dict(ok=not pcv, bad=pcv)
+        rep["checks"]["POSE-CONTAINER-STRICT"] = dict(ok=not psv, bad=psv, enforced=bool(strict))
+
+        # --- CLIP-FIXPOINT: re-running the mutual clip must change nothing
+        fx = []
+        obst = {k: self.boxes[k].obstacle(mode) for k in names}
+        st = {"exact_calls": 0, "backoffs": 0}
+        for k in names:
+            mb = self.boxes[k]
+            for (bn, r) in mb.pieces:
+                cur = r
+                for j in names:
+                    if j == k or cur is None:
+                        continue
+                    cur = _clip_rect_obstacle(cur, obst[j], bn, st)
+                if cur != r:
+                    lost = float(rect_area(r) - rect_area(cur))
+                    fx.append(dict(box=k, th=[deg_of_t(bn.t0), deg_of_t(bn.t1)],
+                                   lost_area=lost, emptied=(cur is None)))
+                    fails.append(dict(check="CLIP-FIXPOINT", what=k,
+                                      detail=("box is EMPTIED by the mutual clip"
+                                              if cur is None else
+                                              f"the mutual clip still removes area {lost:.9f} on "
+                                              f"tilt [{deg_of_t(bn.t0):.3f},"
+                                              f"{deg_of_t(bn.t1):.3f}] -- normalise() not run")))
+        rep["checks"]["CLIP-FIXPOINT"] = dict(ok=not fx, bad=fx)
+
+        # --- tightness diagnostics (reported, never raised)
+        rep["diagnostics"] = self.diagnostics(s=s, sample=sample, seed=seed)
+        rep["kept"] = self.kept()
+        rep["sliver_area"] = {k: float(b.sliver_area) for k, b in self.boxes.items()}
+        rep["failures"] = fails
+        rep["ok"] = not fails
+        self.report = rep
+        if fails and raise_on_fail:
+            raise InvariantError(fails)
+        return rep
+
+    def diagnostics(self, s=None, sample=4000, seed=171):
+        """sampled tightness numbers: what fraction of the node's poses still escape the container
+        or still meet another box's polygon core."""
+        s = self.s if s is None else _fr(s)
+        rng = np.random.default_rng(seed)
+        fs = float(s)
+        out = {}
+        for k, mb in self.boxes.items():
+            C, TH = mb.sample(sample, rng)
+            if not len(C):
+                out[k] = dict(escape_frac=0.0, core_meet_frac=0.0, drawn=0)
+                continue
+            h = 0.5 * (np.abs(np.cos(TH)) + np.abs(np.sin(TH)))
+            esc = ~((C[:, 0] >= h) & (C[:, 0] <= fs - h) &
+                    (C[:, 1] >= h) & (C[:, 1] <= fs - h))
+            hit = np.zeros(len(C), bool)
+            for j, ob in self.boxes.items():
+                if j == k or ob.pc is None:
+                    continue
+                hit |= PC.poly_square_depth(ob.pc.P, C, TH) > 0.0
+            out[k] = dict(drawn=int(len(C)), escape_frac=float(esc.mean()),
+                          core_meet_frac=float(hit.mean()))
+        return out
+
+    # ---------------------------------------------------------------- consumers
+    def chord_rows(self, lines, s=None):
+        """A144's guard-line chord row over the node's (normalised) boxes.
+
+        For each line:  rhs = s - sum_j minchord(B_j, l),  beta = floor(rhs)  -- the number of FREE
+        squares whose chord on l is >= 1.  Refuses to run on an un-normalised node."""
+        self._require_normalised("chord_rows")
+        import chordlane as CL                                   # READ-ONLY (A161)
+        s = self.s if s is None else _fr(s)
+        boxes = [self.boxes[k].ubox for k in self.names]
+        out = []
+        for ln in lines:
+            rhs, beta, terms = CL.guard_rhs(boxes, ln, s=s)
+            out.append(dict(orient=ln.orient, off=str(ln.off), off_float=float(ln.off),
+                            rhs=str(rhs), rhs_float=float(rhs), beta=beta,
+                            minchord={self.names[i]: terms[i]["minchord_float"]
+                                      for i in range(len(self.names))}))
+        return out
+
+    def lane(self, cell, line=None, s=None, max_depth=34, max_open=2500, deadline=None,
+             band_mode="out"):
+        """A141's lane cover with A161's exact miss test, restricted to the node's cores.
+
+        `cell` = (X0, X1, Y0, Y1).  Returns A161's cover dict (`lane` = 0, 1 or None)."""
+        self._require_normalised("lane")
+        import chordlane as CL                                   # READ-ONLY (A161)
+        import polylane as P                                     # READ-ONLY (A141)
+        s = float(self.s if s is None else _fr(s))
+        conds = P.build_cond([self.boxes[k].ubox for k in self.names], tighten=False)
+        return CL.lane_out(cell, conds, line, s=s, max_depth=max_depth, max_open=max_open,
+                           deadline=deadline, band_mode=band_mode)
+
+    def misses_cell(self, cell):
+        """A161's exact separating-axis miss test, per box of the node."""
+        import chordlane as CL                                   # READ-ONLY (A161)
+        out = {}
+        for k, mb in self.boxes.items():
+            ok, det = CL.box_misses_cell_exact(mb.ubox if getattr(mb, "ubox", None) else mb.box0,
+                                               cell)
+            out[k] = dict(misses=bool(ok), detail=det)
+        return out
+
+    def _require_normalised(self, what):
+        if not self.normalised:
+            raise RuntimeError(
+                f"Node.{what}() refuses to run on an un-normalised node: call node.normalise(s) "
+                f"first (A171; this is the A165/A168 failure mode)")
+
+    # ---------------------------------------------------------------- figure
+    def figure(self, path, s=None, extras=None, title=None, nsample=60):
+        """A148-style SVG panel: container, every K' solid, pose unions as thin outlines, names,
+        kept fractions, and the invariant's verdict printed on the page."""
+        return _figure(self, path, s=s, extras=extras, title=title, nsample=nsample)
+
+    def to_json(self):
+        return dict(name=self.name, s=str(self.s), normalised=self.normalised,
+                    stats=self.stats,
+                    boxes={k: b.to_json() for k, b in self.boxes.items()},
+                    report=getattr(self, "report", None))
+
+
+# ==================================================================== exact polygon SAT
+def polys_disjoint_exact(V1, V2):
+    """EXACT rational SAT: are the INTERIORS of two convex rational polygons disjoint?
+
+    Complete for convex polygons: the interiors are disjoint iff some edge normal of one of them
+    separates them (with a >= 0 gap -- a touch is interior-disjoint).  Returns (ok, axis, gap) with
+    `gap` the best (largest) separation, negative when they overlap."""
+    P = [(_fr(a), _fr(b)) for (a, b) in V1]
+    Q = [(_fr(a), _fr(b)) for (a, b) in V2]
+    best, bax = None, None
+    for (A, B, tag) in ((P, Q, "P"), (Q, P, "Q")):
+        m = len(A)
+        for i in range(m):
+            (ax, ay) = A[i]
+            (bx, by) = A[(i + 1) % m]
+            nx, ny = (by - ay), -(bx - ax)
+            if nx == 0 and ny == 0:
+                continue
+            n2 = sqrt_lo(nx * nx + ny * ny)
+            pa = [nx * px + ny * py for (px, py) in A]
+            pb = [nx * px + ny * py for (px, py) in B]
+            gap = max(min(pb) - max(pa), min(pa) - max(pb))
+            g = gap / n2 if n2 > 0 else gap
+            if best is None or g > best:
+                best, bax = g, f"{tag}{i}"
+    return (best is not None and best >= 0), bax, (best if best is not None else Fr(0))
+
+
+# ==================================================================== the figure
+def _svg_poly(P, fill, stroke, w=1.2, op=0.55, dash=""):
+    d = " ".join(f"{x:.3f},{y:.3f}" for (x, y) in P)
+    da = f' stroke-dasharray="{dash}"' if dash else ""
+    return (f'<polygon points="{d}" fill="{fill}" fill-opacity="{op}" stroke="{stroke}" '
+            f'stroke-width="{w}"{da}/>')
+
+
+def _svg_txt(x, y, t, size=11, col="#111", bold=False, anchor="start"):
+    t = (str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+    b = ' font-weight="bold"' if bold else ""
+    return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="DejaVu Sans,Arial,sans-serif" '
+            f'font-size="{size}" fill="{col}" text-anchor="{anchor}"{b}>{t}</text>')
+
+
+_PALETTE = ["#1f77b4", "#d62728", "#2ca02c", "#9467bd", "#ff7f0e", "#8c564b",
+            "#17becf", "#e377c2"]
+
+
+def _pose_outlines(mb, cap=24):
+    """the EXTREME poses of the box -- each corner of each piece's centre rect at each endpoint of
+    its tilt sub-bin -- as individual unit squares.  Drawn as thin outlines, they ARE poses of the
+    node (not a hull, not an envelope), so what the eye sees is what the hypothesis contains."""
+    out = []
+    for (bn, r) in mb.pieces:
+        x0, x1, y0, y1 = (float(v) for v in r)
+        for t in (float(bn.t0), float(bn.t1)):
+            th = 2.0 * math.atan(t)
+            c, s = math.cos(th), math.sin(th)
+            for cx in (x0, x1):
+                for cy in (y0, y1):
+                    out.append([(cx + 0.5 * (i * c - j * s), cy + 0.5 * (i * s + j * c))
+                                for (i, j) in ((1, 1), (1, -1), (-1, -1), (-1, 1))])
+    if len(out) <= cap:
+        return out
+    step = max(1, len(out) // cap)
+    return out[::step][:cap]
+
+
+def _figure(node, path, s=None, extras=None, title=None, nsample=60):
+    s = float(node.s if s is None else _fr(s))
+    for mb in node.boxes.values():
+        if mb.pc is None:
+            mb.rebuild()
+    rep = getattr(node, "report", None)
+    if rep is None:
+        rep = node.assert_invariant(raise_on_fail=False)
+    PAD, SCALE, RIGHT = 34.0, 150.0, 300.0
+    W = PAD * 2 + s * SCALE + RIGHT
+    H = PAD * 2 + s * SCALE + 26
+
+    def X(x):
+        return PAD + x * SCALE
+
+    def Y(y):
+        return PAD + (s - y) * SCALE
+
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{int(W)}" height="{int(H)}" '
+           f'viewBox="0 0 {int(W)} {int(H)}">',
+           f'<rect width="{int(W)}" height="{int(H)}" fill="#ffffff"/>']
+    out.append(_svg_txt(PAD, PAD - 14, title or (node.name or "A171 multi-box node"),
+                        size=13, bold=True))
+    # container
+    out.append(f'<rect x="{X(0):.2f}" y="{Y(s):.2f}" width="{s * SCALE:.2f}" '
+               f'height="{s * SCALE:.2f}" fill="none" stroke="#000" stroke-width="2.2"/>')
+    out.append(_svg_txt(X(0), Y(0) + 15, f"container [0,s]^2, s = {s:.6f}", size=10, col="#444"))
+    for i, (k, mb) in enumerate(node.boxes.items()):
+        col = _PALETTE[i % len(_PALETTE)]
+        for sq in _pose_outlines(mb, nsample):
+            out.append(_svg_poly([(X(x), Y(y)) for (x, y) in sq], "none", col,
+                                 w=0.55, op=0.0, dash="3,2"))
+        out.append(_svg_poly([(X(float(a)), Y(float(b))) for (a, b) in mb.pc.verts],
+                             col, col, w=1.4, op=0.55))
+        for (bn, r) in mb.pieces:
+            x0, x1, y0, y1 = (float(v) for v in r)
+            out.append(f'<rect x="{X(x0):.2f}" y="{Y(y1):.2f}" width="{(x1 - x0) * SCALE:.2f}" '
+                       f'height="{(y1 - y0) * SCALE:.2f}" fill="none" stroke="{col}" '
+                       f'stroke-width="0.7" stroke-opacity="0.9"/>')
+        cx = sum(float(a) for (a, _b) in mb.pc.verts) / len(mb.pc.verts)
+        cy = sum(float(b) for (_a, b) in mb.pc.verts) / len(mb.pc.verts)
+        out.append(_svg_txt(X(cx), Y(cy) + 4, k, size=12, col="#fff", bold=True, anchor="middle"))
+    # legend / verdict
+    tx = PAD + s * SCALE + 18
+    ty = PAD + 6
+    out.append(_svg_txt(tx, ty, "A171 multi-box invariant", size=12, bold=True))
+    ty += 18
+    out.append(_svg_txt(tx, ty, f"normalised: {node.normalised}   passes: "
+                                f"{node.stats.get('passes', 0)}", size=10, col="#333"))
+    ty += 16
+    verdict = "INVARIANT HOLDS" if rep.get("ok") else "INVARIANT FAILS"
+    out.append(_svg_txt(tx, ty, verdict, size=12, bold=True,
+                        col=("#1a7f37" if rep.get("ok") else "#c02020")))
+    ty += 6
+    for cname, c in rep["checks"].items():
+        ty += 15
+        out.append(_svg_txt(tx + 6, ty, f"{'OK ' if c['ok'] else 'BAD'}  {cname}", size=10,
+                            col=("#1a7f37" if c["ok"] else "#c02020")))
+    ty += 20
+    out.append(_svg_txt(tx, ty, "box: kept  K'area  axis a  esc  meet", size=10, bold=True))
+    dg = rep.get("diagnostics", {})
+    for i, (k, mb) in enumerate(node.boxes.items()):
+        ty += 15
+        d = dg.get(k, {})
+        out.append(_svg_txt(tx + 6, ty,
+                            f"{k}: {mb.kept_fraction():.4f}  {mb.pc.area():.4f}  "
+                            f"{float(mb.core.a) if mb.core is not None else 0:.4f}  "
+                            f"{d.get('escape_frac', 0):.3f}  {d.get('core_meet_frac', 0):.3f}",
+                            size=10, col=_PALETTE[i % len(_PALETTE)]))
+    if not rep.get("ok"):
+        ty += 20
+        out.append(_svg_txt(tx, ty, "failures:", size=10, bold=True, col="#c02020"))
+        for f in rep["failures"][:10]:
+            ty += 14
+            out.append(_svg_txt(tx + 6, ty, f"{f['check']} [{f['what']}] {f['detail'][:52]}",
+                                size=9, col="#c02020"))
+    for line in (extras or []):
+        ty += 15
+        out.append(_svg_txt(tx, ty, str(line), size=10, col="#333"))
+    ty += 22
+    out.append(_svg_txt(tx, ty, "solid = K'(B) (A132, certified)", size=9, col="#666"))
+    ty += 13
+    out.append(_svg_txt(tx, ty, "dashed = extreme POSES of the box (thin outlines)",
+                        size=9, col="#666"))
+    ty += 13
+    out.append(_svg_txt(tx, ty, "thin rects = clipped centre pieces", size=9, col="#666"))
+    out.append("</svg>")
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(out))
+    return path
+
+
+# ==================================================================== self-test
+if __name__ == "__main__":
+    import json
+    import time
+    t0 = time.time()
+    nd = Node({"H": (2.5674485, 2.67226625, 2.357813, 2.46263075, 45.0, 60.0),
+               "B1": (3.127084, 3.1733821433529026, 1.5015011950128963, 1.5785397484754269,
+                      45.0, 50.625),
+               "D": (3.223006893074939, 3.377084, 3.211365683498047, 3.377084, 0.0, 11.25)},
+              name="A168 BR139/TRH-25")
+    nd.build_cores()
+    r0 = nd.assert_invariant(raise_on_fail=False)
+    print("before normalise: ok =", r0["ok"], "  failures =", len(r0["failures"]))
+    for f in r0["failures"]:
+        print("   ", f["check"], f["what"], f["detail"])
+    nd.normalise(nsub=4, verbose=True)
+    r1 = nd.assert_invariant(raise_on_fail=False)
+    print("after normalise:  ok =", r1["ok"], "  kept =",
+          {k: round(v, 6) for k, v in r1["kept"].items()})
+    print(json.dumps(r1["diagnostics"], indent=1))
+    print(f"{time.time() - t0:.1f} s, exact calls {nd.stats['exact_calls']}")
