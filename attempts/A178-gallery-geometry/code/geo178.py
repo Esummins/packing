@@ -177,7 +177,7 @@ A2_PAIRS = [("SW", "SE"), ("SW", "NW"), ("SW", "NE"), ("SE", "NW"), ("SE", "NE")
 
 
 # ----------------------------------------------------------------------------- the cascade
-def cascade(rec, cls, nsub=4, refine=2, max_rounds=3, log=print, corner_split=True, pair_test=True):
+def cascade(rec, cls, nsub=4, refine=2, max_rounds=3, log=print, corner_split=True, pair_test=True, merge_cases=False, sharp=False):
     """returns dict(verdict, steps, cases_alive, ...).  A CASE is one branch of the corner-pair
     split; the page is DEAD iff every case dies."""
     base = base_roles(rec)
@@ -201,6 +201,26 @@ def cascade(rec, cls, nsub=4, refine=2, max_rounds=3, log=print, corner_split=Tr
     for it in corner_items:
         new = []
         splits = A2_PAIRS if (corner_split and it["misses"]) else [None]
+        if sharp and not it["misses"]:
+            # the SHARP two-meeter requirement at a corner H may meet (geo178c): two-free A2 pairs
+            # + a cover of H's box for the H-meets branch; DEAD iff every case dies
+            import geo178c as GC
+            for cs in cases:
+                r = GC.corner_sharp(pinroles, hnames, cs["hull"], it, nsub=nsub, refine=refine, log=log,
+                                    label=cs["label"])
+                rec_step = dict(step="corner-sharp", cell=it["cell"], case=cs["label"] + "/sharp:" + it["cell"],
+                                added=["F_*"], split="sharp",
+                                info=dict(dead=(None if r["alive"] else "sharp:" + it["cell"]), seconds=r["seconds"],
+                                          subcases=r["subcases"], leaf=r.get("leaf")))
+                steps.append(rec_step)
+                if r["alive"]:
+                    new.append(dict(label=cs["label"] + "/sharp:" + it["cell"], hull=r["h_hull_union"] or cs["hull"],
+                                    alive=True, history=cs["history"] + [rec_step]))
+            cases = new
+            if not cases:
+                return dict(verdict="DEAD", leaf="sharp corner requirement at %s: every case dies" % it["cell"],
+                            steps=steps, cert=[s_["info"] for s_ in steps if s_["info"].get("dead")])
+            continue
         for cs in cases:
             for sp in splits:
                 rb = role_boxes_for(it, sp)
@@ -224,6 +244,17 @@ def cascade(rec, cls, nsub=4, refine=2, max_rounds=3, log=print, corner_split=Tr
         if not cases:
             return dict(verdict="DEAD", leaf="pair leaf: every Lemma A2 case of %s dies" % it["cell"],
                         steps=steps, cert=[s_["info"]["cert"] for s_ in steps if s_["info"].get("dead")])
+        # ---- 1b. (pass mode) merge the alive cases of this corner into ONE case with the union hull
+        #          of H (sound: every packing of the page lies in one case; weaker than per-case, and
+        #          what keeps k0's four corners from multiplying to 6^4 cases)
+        if merge_cases and len(cases) > 1:
+            hu = {}
+            for k in hnames:
+                hs = [c["hull"][k] for c in cases]
+                hu[k] = [min(h[0] for h in hs), max(h[1] for h in hs), min(h[2] for h in hs), max(h[3] for h in hs),
+                         min(h[4] for h in hs), max(h[5] for h in hs)]
+            log("    merged %d alive cases of %s into one (union H hull)" % (len(cases), it["cell"]))
+            cases = [dict(label="merged(%s:%d)" % (it["cell"], len(cases)), hull=hu, alive=True, history=[])]
     # ---- 2. forced slots, in rounds of sqrt2-separated groups, per case
     gs = groups(slot_items)
     for cs in cases:

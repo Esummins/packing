@@ -1,0 +1,27 @@
+== c0_Y1033 (a57v4, trump5_j0)
+    root BL(0,2) need 2: candidates new -> 10 option(s)  [H: exact miss test]
+    root BL(1,1) need 2: candidates new -> 1 option(s)  [H: exact miss test]
+      refine BR(0,1) H+new: 6/32 combos alive
+      refine BR(0,1) new@c1+new@c3: 1/4 combos alive
+    root BR(0,1) need 2: candidates H+new -> 2 option(s)
+      refine TR(0,1) H+new: 7/56 combos alive
+    root TR(0,1) need 2: candidates H+new -> 2 option(s)
+    root TR(1,0) need 2: candidates H+new -> 4 option(s)
+    root TL(0,0) need 2: candidates new -> 5 option(s)  [H: exact miss test]
+  FORCED BL(1,1) <- new+new
+    root/forced:BL(1,1)=F1+F2 BL(0,2) need 2: candidates F1+F2+new -> 13 option(s)  [H: exact miss test]
+    root/forced:BL(1,1)=F1+F2 BR(0,1) need 2: candidates H+F1+F2+new -> 6 option(s)
+    root/forced:BL(1,1)=F1+F2 TR(0,1) need 2: candidates H+F1+F2+new -> 6 option(s)
+    root/forced:BL(1,1)=F1+F2 TR(1,0) need 2: candidates H+F1+F2+new -> 8 option(s)
+    root/forced:BL(1,1)=F1+F2 TL(0,0) need 2: candidates F1+F2+new -> 8 option(s)  [H: exact miss test]
+  BRANCH BR(0,1) <- H+F1 (1/6)
+    root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1 BL(0,2) need 2: candidates F2+new -> 8 option(s)  [H: exact miss test; F1: sqrt2 rule vs BR(0,1)]
+      refine TR(0,1) H+F1: 4/4 combos alive
+      refine TR(0,1) H+new: 0/24 combos alive
+      refine TR(0,1) F1+new: 0/96 combos alive
+    root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1 TR(0,1) need 2: candidates H+F1+new -> 1 option(s)  [F2: exact miss test]
+    root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1 TR(1,0) need 2: candidates H+F2+new -> 6 option(s)  [F1: exact miss test]
+    root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1 TL(0,0) need 2: candidates F2+new -> 5 option(s)  [H: exact miss test; F1: sqrt2 rule vs BR(0,1)]
+  FORCED TR(0,1) <- H+F1
+    root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1/forced:TR(0,1)=H+F1 BL(0,2) need 2: candidates F2+new -> 8 option(s)  [H: exact miss test; F1: sqrt2 rule vs BR(0,1)]
+    root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1/forced:TR(0,1)=H+F1 TR(1,0) need 2: candidates H+F2+new -> 6 option(s)  [F1: exact miss test]

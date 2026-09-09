@@ -57,6 +57,8 @@ def main():
     ap.add_argument("--shard", default="1/1")
     ap.add_argument("--redo", action="store_true")
     ap.add_argument("--capture", action="store_true")
+    ap.add_argument("--merge", action="store_true")
+    ap.add_argument("--sharp", action="store_true")
     ap.add_argument("--out", default=os.path.join(RES, "geopass178.jsonl"))
     a = ap.parse_args()
     os.makedirs(RES, exist_ok=True)
@@ -78,7 +80,7 @@ def main():
         G.CAPTURE = [] if a.capture else None
         try:
             r = G.cascade(rec, cls, nsub=a.nsub, refine=a.refine, max_rounds=a.rounds,
-                          log=lambda s: print(s, flush=True))
+                          log=lambda s: print(s, flush=True), merge_cases=a.merge, sharp=a.sharp)
         except Exception as ex:                                  # noqa: BLE001
             import traceback
             traceback.print_exc()

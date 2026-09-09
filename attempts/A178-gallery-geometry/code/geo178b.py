@@ -49,7 +49,7 @@ def _restrict(box, win):
     return (x0, x1, y0, y1, box[4], box[5])
 
 
-def slot_pair_test(pinroles, hnames, hull, item, nsub=4, refine=2, log=print, max_pairs=40, label=""):
+def slot_pair_test(pinroles, hnames, hull, item, nsub=4, refine=2, log=print, max_pairs=40, label="", max_cells=6):
     """-> dict(alive, subcases=[...], h_hull_union, seconds).  `hull` = {H: box} of the case."""
     import time
     t0 = time.time()
@@ -95,7 +95,13 @@ def slot_pair_test(pinroles, hnames, hull, item, nsub=4, refine=2, log=print, ma
     cells = _cells((hb[0], hb[1], hb[2], hb[3]))
     pairs = [(i, j) for i in range(len(cells)) for j in range(i + 1, len(cells))]
     n_alive_pairs = 0
-    if not pairs:
+    if len(cells) > max_cells:
+        # a wide hull (the free meeter is not squeezed): the pair test cannot kill cheaply; ALIVE
+        sub.append(dict(case="two-free", n_cells=len(cells), n_pairs=len(pairs), skipped="hull too wide: ALIVE untested",
+                        hull_B=hb[:4]))
+        n_alive_pairs = -1
+        pairs = []
+    elif not pairs:
         sub.append(dict(case="two-free", n_cells=len(cells), n_pairs=0, dead="no pair of cells"))
     else:
         tested = 0
@@ -117,7 +123,7 @@ def slot_pair_test(pinroles, hnames, hull, item, nsub=4, refine=2, log=print, ma
                 alive_hulls.append({k: G.hull_of(nd2, k) for k in hnames})
         sub.append(dict(case="two-free", n_cells=len(cells), n_pairs=len(pairs), n_alive_pairs=n_alive_pairs,
                         hull_B=hb[:4]))
-    alive = hm_alive or n_alive_pairs > 0
+    alive = hm_alive or n_alive_pairs != 0
     log("      %s: one-free alive (B hull %.2fx%.2f), H-meets %s, two-free %d/%d pairs alive -> %s" % (
         item["cell"], hb[1] - hb[0], hb[3] - hb[2], "ALIVE" if hm_alive else "dead", n_alive_pairs, len(pairs),
         "ALIVE" if alive else "DEAD"))
