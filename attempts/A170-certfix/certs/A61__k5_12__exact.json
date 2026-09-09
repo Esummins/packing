@@ -1,0 +1,151 @@
+{
+"format": "case-measure-certificate-v1",
+"n": 11,
+"s": "969271/250000",
+"budget": 6,
+"atoms": [
+[
+"1776997/1000000",
+"969271/500000"
+],
+[
+"3230903/1000000",
+"969271/500000"
+],
+[
+"74/25",
+"289/100"
+],
+[
+"1900213/1000000",
+"982111/1000000"
+],
+[
+"2782821/1000000",
+"1601937/1000000"
+],
+[
+"2584723/1000000",
+"1211589/500000"
+],
+[
+"9/5",
+"197/100"
+],
+[
+"56/25",
+"53/25"
+],
+[
+"59187/31250",
+"248077/250000"
+],
+[
+"1211589/500000",
+"1211589/500000"
+],
+[
+"2584723/1000000",
+"726953/500000"
+]
+],
+"weights": [
+"201/200",
+"201/200",
+"201/200",
+"201/200",
+"1/1000000",
+"201/200",
+"1/1000000",
+"1/1000000",
+"1/1000000",
+"1/1000000",
+"201/200"
+],
+"total": "1206001/200000",
+"hypotheses": {
+"cores": [
+{
+"kx": "1/2",
+"ky": "1/2",
+"tm": "1/33554432",
+"a": "16777215/33554432",
+"box": {
+"x0": 0.5,
+"x1": 0.5,
+"y0": 0.5,
+"y1": 0.5,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "1/2",
+"ky": "3/2",
+"tm": "1/33554432",
+"a": "16777215/33554432",
+"box": {
+"x0": 0.5,
+"x1": 0.5,
+"y0": 1.5,
+"y1": 1.5,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "1/2",
+"ky": "844271/250000",
+"tm": "1/33554432",
+"a": "16777215/33554432",
+"box": {
+"x0": 0.5,
+"x1": 0.5,
+"y0": 3.377084,
+"y1": 3.377084,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "3/2",
+"ky": "844271/250000",
+"tm": "1/33554432",
+"a": "16777215/33554432",
+"box": {
+"x0": 1.5,
+"x1": 1.5,
+"y0": 3.377084,
+"y1": 3.377084,
+"th0": 0.0,
+"th1": 0.0
+}
+},
+{
+"kx": "844271/250000",
+"ky": "1/2",
+"tm": "1/33554432",
+"a": "16777215/33554432",
+"box": {
+"x0": 3.377084,
+"x1": 3.377084,
+"y0": 0.5,
+"y1": 0.5,
+"th0": 0.0,
+"th1": 0.0
+}
+}
+],
+"nofams": []
+},
+"claim": "every admissible closed unit square Q in [0,969271/250000]^2 that is not in a NO-family and is disjoint from every core has mu(Q) >= 1, and mu(total) = 6.030005 < budget 6 = 11 - #cores; hence no packing of 11 unit squares in side <= 969271/250000 satisfies the hypotheses",
+"provenance": {
+"method": "A13 case-LP node (caselp.solve_node), weights x 1.0050 rounded up to 1/1000000, atoms rounded to 1/1000000",
+"lp_tau": 6.000000000028942,
+"eps_geo": 0.003,
+"eps_core": 0.002,
+"eps_zone": 0.002,
+"eps_th": 0.3,
+"a170_exact_cores": "cores ENLARGED to A135 exactcore.exact_a (the cores an ExactHyp LP's row filter uses); caselp.make_certificate reverts to Hyp.from_json's stock b.core() -- see attempts/A166-nearest-corner-subtree/notes/certificate_bug.md and attempts/A170-certfix/code/certwrap170.py.  Enlarging a certified core only removes verification obligations; exact_a certifies K(B) subset Q(p) for every pose p in B."
+}
+}

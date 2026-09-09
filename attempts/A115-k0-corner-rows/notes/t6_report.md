@@ -99,3 +99,40 @@ A115's own corner rows, for contrast, cost 13.4 CPU-h for one pass over the same
 
 * driver `code/t5.py` (tasks `a121`, `cand`, `notrun`, `rest`, `tail2`); records `results/t5/`; summary `results/t6_summary.json`; certificates `certs/t4_<nid>_s<stage>.json`; logs `logs/t5_s0.log`, `logs/t5_s1.log`
 * earlier rounds: `notes/t4_report.md`, `notes/t5_report.md`; the control that started it all: `code/control115.py`
+
+
+## A170 addendum (2026-09-09) — the 128 `kill-candidate (cert FAIL)` cells re-certified with A135's EXACT cores: **0 recovered**
+
+A166 found an emission bug in shared machinery: `caselp.make_certificate` (and `caselp92`'s copy, which
+this attempt's `t5.py:36` imports) ends with `hyp = Hyp.from_json(res["hyp"])`, and `Hyp.__init__`
+recomputes `self.cores = [b.core() for b in boxes]` — the STOCK cores — discarding the `cores` field the
+json carries. On a lane whose LP ran with A135's certified EXACT cores that manufactures holes, and A166
+asked whether the 127 `kill-candidate (cert FAIL)` cells of `cells140.open_pool` (which is derived from
+this attempt's `t4_runs.jsonl` / `t5_runs.jsonl`) were such spurious FAILs.
+
+**They are not.** A170 re-emitted the certificate for **every** `kill-candidate` record in the pool —
+128 of the 166 open records — from this attempt's **stored** LP measure
+(`results/nodes/<nid>.t{4,5}.lp.json`, keys `atoms_all` / `rows_all` / `hyp`; **no LP was re-solved**),
+with each core enlarged to `exactcore.exact_a`, at this attempt's own scale rule
+(`scale = max(1.005, min(1.4, (budget − 0.005)/τ − 0.002))`, `t4.certify_plain`), and ran the FROZEN
+`verify_case.py` (sha `521cb01f…`, byte-identical to this attempt's own copy) at depth 56:
+
+| | n |
+|---|---|
+| records re-certified | **128** |
+| **PASS** | **0** |
+| FAIL with genuine holes (6–52 per cert, `exact_mass = 0`) | 119 |
+| FAIL on `total ≥ budget` (no core can repair) | 9 |
+| core enlargement `a_exact / a_carried` | min 1.0062, median 1.0326, max 1.1179 |
+
+The reason is a property of the population, not an accident: **the T4/T5 LP ran on the STOCK cores too**,
+so the certificate it wrote was consistent with its LP — the reversion is present in the code path but
+had nothing to revert. Every one of the 128 is a single-box hypothesis at `budget = 10` whose LP did not
+converge (`converged: false, dead_unconverged: true`) with `τ ≈ 9.9767–9.9786`, i.e. ≈ 0.022 of slack;
+the rounded-up measure lands at `total ≈ 9.977` and a 0.6–11.8 % wider core does not reach the holes.
+
+**Hand-off consequence.** The 71 stage-A kill-candidates still owing the 900 s continuation, and the 32
+persistent `cand` cert-FAIL cells skipped by instruction, are **not** collectable by a free re-emission.
+They need LP work (longer cap / witness feedback / a new row), exactly as `notes/t6_report.md § What is
+left` says. Nothing in this attempt was written to: A170's patched certificates and records live under
+`attempts/A170-certfix/{certs,results}` (`results/recert170_k0.s*.jsonl`, `notes/recovered.md`).

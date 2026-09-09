@@ -1,0 +1,20 @@
+{
+ "cert": "C:\\Users\\esumm\\code\\packing\\attempts/A170-certfix/certs/A165__l1_104_spread_spread03__exact.json",
+ "result": "PASS",
+ "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+ "budget": 6,
+ "total": "1197/200",
+ "rounds": [
+  {
+   "round": 0,
+   "result": "PASS",
+   "verifier": [
+    "boxes = 94930  covered = 24100  vacuous = 0  exempt = 23397 (core 23397, nofam 0)  split = 47433  exact atom checks = 24100  max depth = 34  time = 6.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1197/200 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ]
+  }
+ ],
+ "scope": "s0_fixed_side",
+ "source_record": "attempts/A165-cascade-l1_104/certs/l1_104_spread_spread03.json",
+ "note": "A170 re-certification: the cores were ENLARGED to A135 exactcore.exact_a (the cores an ExactHyp LP's row filter uses); caselp.make_certificate reverts to Hyp.from_json's stock b.core() -- see attempts/A166-nearest-corner-subtree/notes/certificate_bug.md and attempts/A170-certfix/notes/audit.md.  Enlarging a certified core only removes verification obligations; exact_a certifies K(B) subset Q(p) for every pose p in B.  The ORIGINAL FAIL record is untouched."
+}

@@ -397,18 +397,28 @@ is boxes that do not lean into the unpinned `TL(0,0)` corner.
    `ExactHyp`: A150, A165, A166** (A168 already carries A166's patch). Every lane routed through
    A135's `emit135.make_cert` — A137, A140, A145, A149 (both the `__exall` and the `__exH` arms),
    A156 — writes **exact cores, 698 of 698**, because that function exists precisely to avoid the
-   round-trip (`emit135.py:94-100`). Recovered: **25 certificates / 8 distinct nodes, 3 of them new**
-   (A165's `l1_104_spread_spread00/02/03`, taking that leaf from 1-of-4 to **4 of 4** certified),
-   the other 5 nodes being A150's and A166's own, re-derived here through a separately written path
-   and agreeing 22/22. All 25 clear a 100 % independent check (A132 `polycore.vertex_ok` re-run on the
-   written rationals, the measure recomputed exactly in `Fraction`, and a depth-64 frozen replay).
-   **Everything else is a genuine FAIL:** 118 exact-core certificates are NO-CHANGE, and the whole k0
-   pool — all 128 `kill-candidate (cert FAIL)` records of `cells140.open_pool`, re-emitted from A115's
-   **stored** measure with exact cores at zero LP cost — yields **0 PASS** (they are unconverged
-   single-box LPs at `τ ≈ 9.977` against budget 10, and 6 fail on `total ≥ budget` outright). So
-   A166's "127 candidates for immediate certification" is closed at zero: none of them was emitted
-   through an exact-core path. **The A57 row's exact-core kill rate of 46/161 = 28.6 % is unchanged**
-   — A137's 44 FAILs are all NO-CHANGE. Cost **≈ 2.5 CPU-h** total, no LP solved. The forward fix is
+   round-trip (`emit135.py:94-100`). **59 certificates recovered over 409 re-certified, 59/59 clearing
+   a 100 % independent check** (A132 `polycore.vertex_ok` re-run on the written rationals, the measure
+   recomputed exactly in `Fraction`, and a depth-64 frozen replay), in two kinds. **(i) 25 repairs,
+   8 nodes, 3 of them new:** A165's `l1_104_spread_spread00/02/03`, taking that leaf from 1-of-4 to
+   **4 of 4** certified and refuting its note's "they need the separation loop with more rounds, not a
+   different core" — they needed the cores they were solved with; the other 5 nodes are A150's and
+   A166's own, re-derived here through a separately written path and agreeing 22/22. **(ii) 34
+   upgrades on stock-core lanes, all of them A59/A60 zero-atom VACUITY certificates** (`total = 0 <
+   budget = 1`), where the whole content of the certificate is "every admissible square is exempt", so
+   a wider certified core is exactly the lever: A59's residual ladder around Trump's packing now
+   certifies at **8–14 % less exemption parameter `a` at every rung** (`rb hw = 0.002`: `a_min`
+   0.009062 → 0.007969; `rk hw = 0.02`: 0.074883 → 0.067500) — **the certified `hw` envelope does not
+   move**, the ladder gets cheaper, not longer. **Everything else is a genuine FAIL:** 118 exact-core
+   certificates are NO-CHANGE, and the whole k0 pool — all 128 `kill-candidate (cert FAIL)` records of
+   `cells140.open_pool`, re-emitted from A115's **stored** measure with exact cores at zero LP cost —
+   yields **0 PASS** (unconverged single-box LPs at `τ ≈ 9.977` against budget 10, cores widening
+   0.6–11.8 %, and 9 failing on `total ≥ budget` outright). So A166's "127 candidates for immediate
+   certification" is closed at zero: none of them was emitted through an exact-core path. **The A57
+   row's exact-core kill rate of 46/161 = 28.6 % is unchanged** — A137's 44 FAILs are all NO-CHANGE.
+   The shadow board does not move either: `status_gallery.py` goes 5,332 → 5,344 kills and **0 new
+   distinct pages** (k0v4 11 ALIVE, a57v4 53 ALIVE / 7 DEAD, unchanged). Cost **2.35 CPU-h of
+   verifier**, no LP solved. The forward fix is
    `attempts/A170-certfix/code/certwrap170.py` (a wrapper, `caselp.py` untouched) plus
    `code/test_cores170.py`, a 50-box regression that asserts a certificate's cores equal
    `exactcore.exact_a` **and** that the unwrapped emitter still writes the stock core, so the guard

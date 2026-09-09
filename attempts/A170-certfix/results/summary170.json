@@ -1,0 +1,4772 @@
+{
+ "n": 404,
+ "sidecars": 59,
+ "by_lane": {
+  "A60-trump5-campaign": {
+   "FAIL": 40,
+   "PASS": 1
+  },
+  "A59-trump-residual": {
+   "FAIL": 32,
+   "PASS": 33
+  },
+  "A61-window-stragglers": {
+   "FAIL": 3
+  },
+  "A82-side-scan": {
+   "FAIL": 2
+  },
+  "A55-k4-sweep": {
+   "FAIL": 1
+  },
+  "A54-stragglers": {
+   "FAIL": 2
+  },
+  "A131-pin-clip": {
+   "FAIL": 3
+  },
+  "A150-four-corner-product": {
+   "PASS": 5
+  },
+  "A165-cascade-l1_104": {
+   "PASS": 3
+  },
+  "A166-nearest-corner-subtree": {
+   "PASS": 17
+  },
+  "A57-shadow-trees": {
+   "FAIL": 7
+  },
+  "A137-night-shift-2": {
+   "NO-CHANGE": 44
+  },
+  "A156-day-shift": {
+   "NO-CHANGE": 31
+  },
+  "A149-a57-reprice": {
+   "NO-CHANGE": 43,
+   "FAIL": 8,
+   "TIMEOUT": 1
+  },
+  "k0": {
+   "FAIL": 119,
+   "FAIL(total>=budget)": 9
+  }
+ },
+ "results": {
+  "FAIL": 217,
+  "PASS": 59,
+  "NO-CHANGE": 118,
+  "TIMEOUT": 1,
+  "FAIL(total>=budget)": 9
+ },
+ "passes": [
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A60__selftest_vac_a0.00448242__exact.json",
+   "verifier": [
+    "boxes = 2612  covered = 0  vacuous = 0  exempt = 1338 (core 1312, nofam 26)  split = 1274  exact atom checks = 0  max depth = 41  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A60-trump5-campaign/selftest_vac_a0.00448242",
+   "lane": "A60-trump5-campaign",
+   "src": "attempts/A60-trump5-campaign/certs/selftest_vac_a0.00448242.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "3267531800576/6557309765625",
+     "exact": "548344747161/1099511627776",
+     "stock": "3267531800576/6557309765625",
+     "applied": true,
+     "ratio": 1.0008286707960967
+    },
+    {
+     "i": 6,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 7,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 8,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 9,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0008286707960967,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.0005_a0.00213867_box__exact.json",
+   "verifier": [
+    "boxes = 3076  covered = 0  vacuous = 0  exempt = 1570 (core 1486, nofam 84)  split = 1506  exact atom checks = 0  max depth = 45  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.0005_a0.00213867_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.0005_a0.00213867_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16360829485056/32777275390625",
+     "exact": "274525176697/549755813888",
+     "stock": "16360829485056/32777275390625",
+     "applied": true,
+     "ratio": 1.0004142759376227
+    },
+    {
+     "i": 6,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 7,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 8,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 9,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0004142759376227,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.0005_a0.00221069_box__exact.json",
+   "verifier": [
+    "boxes = 3052  covered = 0  vacuous = 0  exempt = 1558 (core 1466, nofam 92)  split = 1494  exact atom checks = 0  max depth = 45  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.0005_a0.00221069_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.0005_a0.00221069_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16360829485056/32777275390625",
+     "exact": "274525176697/549755813888",
+     "stock": "16360829485056/32777275390625",
+     "applied": true,
+     "ratio": 1.0004142759376227
+    },
+    {
+     "i": 6,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 7,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 8,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 9,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0004142759376227,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.0005_a0.0022467_box__exact.json",
+   "verifier": [
+    "boxes = 2868  covered = 0  vacuous = 0  exempt = 1466 (core 1398, nofam 68)  split = 1402  exact atom checks = 0  max depth = 43  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.0005_a0.0022467_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.0005_a0.0022467_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16360829485056/32777275390625",
+     "exact": "274525176697/549755813888",
+     "stock": "16360829485056/32777275390625",
+     "applied": true,
+     "ratio": 1.0004142759376227
+    },
+    {
+     "i": 6,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 7,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 8,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    },
+    {
+     "i": 9,
+     "carried": "16360829485056/32786552734375",
+     "exact": "548707139519/1099511627776",
+     "stock": "16360829485056/32786552734375",
+     "applied": true,
+     "ratio": 1.0000718946176788
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0004142759376227,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.001_a0.00414063_box__exact.json",
+   "verifier": [
+    "boxes = 3436  covered = 0  vacuous = 0  exempt = 1750 (core 1615, nofam 135)  split = 1686  exact atom checks = 0  max depth = 44  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.001_a0.00414063_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.001_a0.00414063_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "3267531800576/6557309765625",
+     "exact": "548344747161/1099511627776",
+     "stock": "3267531800576/6557309765625",
+     "applied": true,
+     "ratio": 1.0008286707960967
+    },
+    {
+     "i": 6,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 7,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 8,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 9,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0008286707960967,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.001_a0.00441406_box__exact.json",
+   "verifier": [
+    "boxes = 2612  covered = 0  vacuous = 0  exempt = 1338 (core 1312, nofam 26)  split = 1274  exact atom checks = 0  max depth = 41  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.001_a0.00441406_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.001_a0.00441406_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "3267531800576/6557309765625",
+     "exact": "548344747161/1099511627776",
+     "stock": "3267531800576/6557309765625",
+     "applied": true,
+     "ratio": 1.0008286707960967
+    },
+    {
+     "i": 6,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 7,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 8,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 9,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0008286707960967,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.001_a0.00448242_box__exact.json",
+   "verifier": [
+    "boxes = 2612  covered = 0  vacuous = 0  exempt = 1338 (core 1312, nofam 26)  split = 1274  exact atom checks = 0  max depth = 41  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.001_a0.00448242_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.001_a0.00448242_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "3267531800576/6557309765625",
+     "exact": "548344747161/1099511627776",
+     "stock": "3267531800576/6557309765625",
+     "applied": true,
+     "ratio": 1.0008286707960967
+    },
+    {
+     "i": 6,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 7,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 8,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    },
+    {
+     "i": 9,
+     "carried": "3267531800576/6561019921875",
+     "exact": "547659719097/1099511627776",
+     "stock": "3267531800576/6561019921875",
+     "applied": true,
+     "ratio": 1.0001439363420153
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0008286707960967,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.002_a0.00796875_box__exact.json",
+   "verifier": [
+    "boxes = 3298  covered = 0  vacuous = 0  exempt = 1681 (core 1587, nofam 94)  split = 1617  exact atom checks = 0  max depth = 44  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.002_a0.00796875_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.002_a0.00796875_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16291318038528/32805095703125",
+     "exact": "546933001439/1099511627776",
+     "stock": "16291318038528/32805095703125",
+     "applied": true,
+     "ratio": 1.0016578283785254
+    },
+    {
+     "i": 6,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 7,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 8,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 9,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0016578283785254,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.002_a0.00851562_box__exact.json",
+   "verifier": [
+    "boxes = 2718  covered = 0  vacuous = 0  exempt = 1391 (core 1308, nofam 83)  split = 1327  exact atom checks = 0  max depth = 39  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.002_a0.00851562_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.002_a0.00851562_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16291318038528/32805095703125",
+     "exact": "546933001439/1099511627776",
+     "stock": "16291318038528/32805095703125",
+     "applied": true,
+     "ratio": 1.0016578283785254
+    },
+    {
+     "i": 6,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 7,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 8,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 9,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0016578283785254,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.002_a0.00878906_box__exact.json",
+   "verifier": [
+    "boxes = 2572  covered = 0  vacuous = 0  exempt = 1318 (core 1245, nofam 73)  split = 1254  exact atom checks = 0  max depth = 38  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.002_a0.00878906_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.002_a0.00878906_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16291318038528/32805095703125",
+     "exact": "546933001439/1099511627776",
+     "stock": "16291318038528/32805095703125",
+     "applied": true,
+     "ratio": 1.0016578283785254
+    },
+    {
+     "i": 6,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 7,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 8,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 9,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0016578283785254,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.002_a0.00892578_box__exact.json",
+   "verifier": [
+    "boxes = 2572  covered = 0  vacuous = 0  exempt = 1318 (core 1245, nofam 73)  split = 1254  exact atom checks = 0  max depth = 38  time = 0.1s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.002_a0.00892578_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.002_a0.00892578_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16291318038528/32805095703125",
+     "exact": "546933001439/1099511627776",
+     "stock": "16291318038528/32805095703125",
+     "applied": true,
+     "ratio": 1.0016578283785254
+    },
+    {
+     "i": 6,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 7,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 8,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    },
+    {
+     "i": 9,
+     "carried": "16291318038528/32842193359375",
+     "exact": "136392092795/274877906944",
+     "stock": "16291318038528/32842193359375",
+     "applied": true,
+     "ratio": 1.00028853168104
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0016578283785254,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.0037_a0.01665_box__exact.json",
+   "verifier": [
+    "boxes = 2296  covered = 0  vacuous = 0  exempt = 1180 (core 1119, nofam 61)  split = 1116  exact atom checks = 0  max depth = 35  time = 0.1s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.0037_a0.01665_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.0037_a0.01665_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16212538425344/32836619140625",
+     "exact": "544531517983/1099511627776",
+     "stock": "16212538425344/32836619140625",
+     "applied": true,
+     "ratio": 1.003068548003014
+    },
+    {
+     "i": 6,
+     "carried": "8106269212672/16452634765625",
+     "exact": "542023482293/1099511627776",
+     "stock": "8106269212672/16452634765625",
+     "applied": true,
+     "ratio": 1.0005359772211575
+    },
+    {
+     "i": 7,
+     "carried": "8106269212672/16452634765625",
+     "exact": "542023482293/1099511627776",
+     "stock": "8106269212672/16452634765625",
+     "applied": true,
+     "ratio": 1.0005359772211575
+    },
+    {
+     "i": 8,
+     "carried": "8106269212672/16452634765625",
+     "exact": "542023482293/1099511627776",
+     "stock": "8106269212672/16452634765625",
+     "applied": true,
+     "ratio": 1.0005359772211575
+    },
+    {
+     "i": 9,
+     "carried": "8106269212672/16452634765625",
+     "exact": "542023482293/1099511627776",
+     "stock": "8106269212672/16452634765625",
+     "applied": true,
+     "ratio": 1.0005359772211575
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.003068548003014,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.005_a0.0225_box__exact.json",
+   "verifier": [
+    "boxes = 2348  covered = 0  vacuous = 0  exempt = 1206 (core 1131, nofam 75)  split = 1142  exact atom checks = 0  max depth = 34  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.005_a0.0225_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.005_a0.0225_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16152295211008/32860736328125",
+     "exact": "542693538895/1099511627776",
+     "stock": "16152295211008/32860736328125",
+     "applied": true,
+     "ratio": 1.0041483331737966
+    },
+    {
+     "i": 6,
+     "carried": "16152295211008/32953474609375",
+     "exact": "16853816045/34359738368",
+     "stock": "16152295211008/32953474609375",
+     "applied": true,
+     "ratio": 1.0007264322002545
+    },
+    {
+     "i": 7,
+     "carried": "16152295211008/32953474609375",
+     "exact": "16853816045/34359738368",
+     "stock": "16152295211008/32953474609375",
+     "applied": true,
+     "ratio": 1.0007264322002545
+    },
+    {
+     "i": 8,
+     "carried": "16152295211008/32953474609375",
+     "exact": "16853816045/34359738368",
+     "stock": "16152295211008/32953474609375",
+     "applied": true,
+     "ratio": 1.0007264322002545
+    },
+    {
+     "i": 9,
+     "carried": "16152295211008/32953474609375",
+     "exact": "16853816045/34359738368",
+     "stock": "16152295211008/32953474609375",
+     "applied": true,
+     "ratio": 1.0007264322002545
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0041483331737966,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.01_a0.045_box__exact.json",
+   "verifier": [
+    "boxes = 2184  covered = 0  vacuous = 0  exempt = 1124 (core 1047, nofam 77)  split = 1060  exact atom checks = 0  max depth = 31  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.01_a0.045_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.01_a0.045_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "5306863484928/10984490234375",
+     "exact": "133903488383/274877906944",
+     "stock": "5306863484928/10984490234375",
+     "applied": true,
+     "ratio": 1.0083099368265824
+    },
+    {
+     "i": 6,
+     "carried": "15920590454784/33138939453125",
+     "exact": "529003322777/1099511627776",
+     "stock": "15920590454784/33138939453125",
+     "applied": true,
+     "ratio": 1.0014701481104595
+    },
+    {
+     "i": 7,
+     "carried": "15920590454784/33138939453125",
+     "exact": "529003322777/1099511627776",
+     "stock": "15920590454784/33138939453125",
+     "applied": true,
+     "ratio": 1.0014701481104595
+    },
+    {
+     "i": 8,
+     "carried": "15920590454784/33138939453125",
+     "exact": "529003322777/1099511627776",
+     "stock": "15920590454784/33138939453125",
+     "applied": true,
+     "ratio": 1.0014701481104595
+    },
+    {
+     "i": 9,
+     "carried": "15920590454784/33138939453125",
+     "exact": "529003322777/1099511627776",
+     "stock": "15920590454784/33138939453125",
+     "applied": true,
+     "ratio": 1.0014701481104595
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0083099368265824,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.02_a0.1075_box__exact.json",
+   "verifier": [
+    "boxes = 2024  covered = 0  vacuous = 0  exempt = 1044 (core 979, nofam 65)  split = 980  exact atom checks = 0  max depth = 30  time = 0.1s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.02_a0.1075_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.02_a0.1075_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "483036904448/1035591796875",
+     "exact": "521405021607/1099511627776",
+     "stock": "483036904448/1035591796875",
+     "applied": true,
+     "ratio": 1.0166785762872455
+    },
+    {
+     "i": 6,
+     "carried": "15457180942336/33509873046875",
+     "exact": "254350777529/549755813888",
+     "stock": "15457180942336/33509873046875",
+     "applied": true,
+     "ratio": 1.0030110794698117
+    },
+    {
+     "i": 7,
+     "carried": "15457180942336/33509873046875",
+     "exact": "254350777529/549755813888",
+     "stock": "15457180942336/33509873046875",
+     "applied": true,
+     "ratio": 1.0030110794698117
+    },
+    {
+     "i": 8,
+     "carried": "15457180942336/33509873046875",
+     "exact": "254350777529/549755813888",
+     "stock": "15457180942336/33509873046875",
+     "applied": true,
+     "ratio": 1.0030110794698117
+    },
+    {
+     "i": 9,
+     "carried": "15457180942336/33509873046875",
+     "exact": "254350777529/549755813888",
+     "stock": "15457180942336/33509873046875",
+     "applied": true,
+     "ratio": 1.0030110794698117
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0166785762872455,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rb_hw0.02_a0.11625_box__exact.json",
+   "verifier": [
+    "boxes = 1700  covered = 0  vacuous = 0  exempt = 882 (core 823, nofam 59)  split = 818  exact atom checks = 0  max depth = 26  time = 0.1s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rb_hw0.02_a0.11625_box",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rb_hw0.02_a0.11625_box.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "483036904448/1035591796875",
+     "exact": "521405021607/1099511627776",
+     "stock": "483036904448/1035591796875",
+     "applied": true,
+     "ratio": 1.0166785762872455
+    },
+    {
+     "i": 6,
+     "carried": "15457180942336/33509873046875",
+     "exact": "254350777529/549755813888",
+     "stock": "15457180942336/33509873046875",
+     "applied": true,
+     "ratio": 1.0030110794698117
+    },
+    {
+     "i": 7,
+     "carried": "15457180942336/33509873046875",
+     "exact": "254350777529/549755813888",
+     "stock": "15457180942336/33509873046875",
+     "applied": true,
+     "ratio": 1.0030110794698117
+    },
+    {
+     "i": 8,
+     "carried": "15457180942336/33509873046875",
+     "exact": "254350777529/549755813888",
+     "stock": "15457180942336/33509873046875",
+     "applied": true,
+     "ratio": 1.0030110794698117
+    },
+    {
+     "i": 9,
+     "carried": "15457180942336/33509873046875",
+     "exact": "254350777529/549755813888",
+     "stock": "15457180942336/33509873046875",
+     "applied": true,
+     "ratio": 1.0030110794698117
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0166785762872455,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.001_a0.00304688_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 3364  covered = 0  vacuous = 0  exempt = 1714 (core 1602, nofam 112)  split = 1650  exact atom checks = 0  max depth = 43  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.001_a0.00304688_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.001_a0.00304688_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "816882950144/1639383203125",
+     "exact": "548326032027/1099511627776",
+     "stock": "816882950144/1639383203125",
+     "applied": true,
+     "ratio": 1.0008285543031317
+    },
+    {
+     "i": 6,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 7,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 8,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 9,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0008285543031317,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.001_a0.00318359_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 3026  covered = 0  vacuous = 0  exempt = 1545 (core 1451, nofam 94)  split = 1481  exact atom checks = 0  max depth = 42  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.001_a0.00318359_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.001_a0.00318359_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "816882950144/1639383203125",
+     "exact": "548326032027/1099511627776",
+     "stock": "816882950144/1639383203125",
+     "applied": true,
+     "ratio": 1.0008285543031317
+    },
+    {
+     "i": 6,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 7,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 8,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 9,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0008285543031317,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.001_a0.00325195_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 3026  covered = 0  vacuous = 0  exempt = 1545 (core 1451, nofam 94)  split = 1481  exact atom checks = 0  max depth = 42  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.001_a0.00325195_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.001_a0.00325195_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "816882950144/1639383203125",
+     "exact": "548326032027/1099511627776",
+     "stock": "816882950144/1639383203125",
+     "applied": true,
+     "ratio": 1.0008285543031317
+    },
+    {
+     "i": 6,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 7,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 8,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 9,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0008285543031317,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.001_a0.00328613_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 3026  covered = 0  vacuous = 0  exempt = 1545 (core 1451, nofam 94)  split = 1481  exact atom checks = 0  max depth = 42  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.001_a0.00328613_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.001_a0.00328613_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "816882950144/1639383203125",
+     "exact": "548326032027/1099511627776",
+     "stock": "816882950144/1639383203125",
+     "applied": true,
+     "ratio": 1.0008285543031317
+    },
+    {
+     "i": 6,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 7,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 8,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    },
+    {
+     "i": 9,
+     "carried": "3267531800576/6561465234375",
+     "exact": "8556671409/17179869184",
+     "stock": "3267531800576/6561465234375",
+     "applied": true,
+     "ratio": 1.0001520079592272
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0008285543031317,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.6,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.002_a0.00578125_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 4004  covered = 0  vacuous = 0  exempt = 2034 (core 1881, nofam 153)  split = 1970  exact atom checks = 0  max depth = 45  time = 0.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.002_a0.00578125_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.002_a0.00578125_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "8145659019264/16403662109375",
+     "exact": "546895595071/1099511627776",
+     "stock": "8145659019264/16403662109375",
+     "applied": true,
+     "ratio": 1.0016573619943656
+    },
+    {
+     "i": 6,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 7,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 8,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 9,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0016573619943656,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.002_a0.00632813_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2922  covered = 0  vacuous = 0  exempt = 1493 (core 1364, nofam 129)  split = 1429  exact atom checks = 0  max depth = 39  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.002_a0.00632813_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.002_a0.00632813_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "8145659019264/16403662109375",
+     "exact": "546895595071/1099511627776",
+     "stock": "8145659019264/16403662109375",
+     "applied": true,
+     "ratio": 1.0016573619943656
+    },
+    {
+     "i": 6,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 7,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 8,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 9,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0016573619943656,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.002_a0.00646484_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2922  covered = 0  vacuous = 0  exempt = 1493 (core 1364, nofam 129)  split = 1429  exact atom checks = 0  max depth = 39  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.002_a0.00646484_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.002_a0.00646484_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "8145659019264/16403662109375",
+     "exact": "546895595071/1099511627776",
+     "stock": "8145659019264/16403662109375",
+     "applied": true,
+     "ratio": 1.0016573619943656
+    },
+    {
+     "i": 6,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 7,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 8,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 9,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0016573619943656,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.002_a0.0065332_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2922  covered = 0  vacuous = 0  exempt = 1493 (core 1364, nofam 129)  split = 1429  exact atom checks = 0  max depth = 39  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.002_a0.0065332_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.002_a0.0065332_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "8145659019264/16403662109375",
+     "exact": "546895595071/1099511627776",
+     "stock": "8145659019264/16403662109375",
+     "applied": true,
+     "ratio": 1.0016573619943656
+    },
+    {
+     "i": 6,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 7,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 8,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    },
+    {
+     "i": 9,
+     "carried": "16291318038528/32846650390625",
+     "exact": "272751605851/549755813888",
+     "stock": "16291318038528/32846650390625",
+     "applied": true,
+     "ratio": 1.0003047965681138
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0016573619943656,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.0037_a0.0112734_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2914  covered = 0  vacuous = 0  exempt = 1489 (core 1364, nofam 125)  split = 1425  exact atom checks = 0  max depth = 37  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.0037_a0.0112734_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.0037_a0.0112734_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16212538425344/32840748046875",
+     "exact": "272231093203/549755813888",
+     "stock": "16212538425344/32840748046875",
+     "applied": true,
+     "ratio": 1.0030669446447045
+    },
+    {
+     "i": 6,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 7,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 8,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 9,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0030669446447045,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.0037_a0.0118805_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2854  covered = 0  vacuous = 0  exempt = 1459 (core 1321, nofam 138)  split = 1395  exact atom checks = 0  max depth = 37  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.0037_a0.0118805_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.0037_a0.0118805_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16212538425344/32840748046875",
+     "exact": "272231093203/549755813888",
+     "stock": "16212538425344/32840748046875",
+     "applied": true,
+     "ratio": 1.0030669446447045
+    },
+    {
+     "i": 6,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 7,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 8,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 9,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0030669446447045,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.0037_a0.0120322_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2820  covered = 0  vacuous = 0  exempt = 1442 (core 1287, nofam 155)  split = 1378  exact atom checks = 0  max depth = 35  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.0037_a0.0120322_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.0037_a0.0120322_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16212538425344/32840748046875",
+     "exact": "272231093203/549755813888",
+     "stock": "16212538425344/32840748046875",
+     "applied": true,
+     "ratio": 1.0030669446447045
+    },
+    {
+     "i": 6,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 7,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 8,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    },
+    {
+     "i": 9,
+     "carried": "16212538425344/32913494140625",
+     "exact": "541904476751/1099511627776",
+     "stock": "16212538425344/32913494140625",
+     "applied": true,
+     "ratio": 1.0005663287870332
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0030669446447045,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.005_a0.0152344_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 3192  covered = 0  vacuous = 0  exempt = 1628 (core 1468, nofam 160)  split = 1564  exact atom checks = 0  max depth = 37  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.005_a0.0152344_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.005_a0.0152344_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16152295211008/32866306640625",
+     "exact": "33912498619/68719476736",
+     "stock": "16152295211008/32866306640625",
+     "applied": true,
+     "ratio": 1.0041454034056831
+    },
+    {
+     "i": 6,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 7,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 8,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 9,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0041454034056831,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.005_a0.0160547_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2562  covered = 0  vacuous = 0  exempt = 1313 (core 1220, nofam 93)  split = 1249  exact atom checks = 0  max depth = 35  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.005_a0.0160547_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.005_a0.0160547_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16152295211008/32866306640625",
+     "exact": "33912498619/68719476736",
+     "stock": "16152295211008/32866306640625",
+     "applied": true,
+     "ratio": 1.0041454034056831
+    },
+    {
+     "i": 6,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 7,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 8,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 9,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0041454034056831,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.005_a0.0162598_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2562  covered = 0  vacuous = 0  exempt = 1313 (core 1219, nofam 94)  split = 1249  exact atom checks = 0  max depth = 35  time = 0.1s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.005_a0.0162598_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.005_a0.0162598_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "16152295211008/32866306640625",
+     "exact": "33912498619/68719476736",
+     "stock": "16152295211008/32866306640625",
+     "applied": true,
+     "ratio": 1.0041454034056831
+    },
+    {
+     "i": 6,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 7,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 8,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    },
+    {
+     "i": 9,
+     "carried": "1468390473728/2996783203125",
+     "exact": "16848818273/34359738368",
+     "stock": "1468390473728/2996783203125",
+     "applied": true,
+     "ratio": 1.0007678968570286
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0041454034056831,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.01_a0.0304688_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2704  covered = 0  vacuous = 0  exempt = 1384 (core 1302, nofam 82)  split = 1320  exact atom checks = 0  max depth = 34  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.01_a0.0304688_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.01_a0.0304688_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "15920590454784/32964611328125",
+     "exact": "535426660347/1099511627776",
+     "stock": "15920590454784/32964611328125",
+     "applied": true,
+     "ratio": 1.0082981131000588
+    },
+    {
+     "i": 6,
+     "carried": "1768954494976/3684580078125",
+     "exact": "528693095691/1099511627776",
+     "stock": "1768954494976/3684580078125",
+     "applied": true,
+     "ratio": 1.0015558011914678
+    },
+    {
+     "i": 7,
+     "carried": "1768954494976/3684580078125",
+     "exact": "528693095691/1099511627776",
+     "stock": "1768954494976/3684580078125",
+     "applied": true,
+     "ratio": 1.0015558011914678
+    },
+    {
+     "i": 8,
+     "carried": "1768954494976/3684580078125",
+     "exact": "528693095691/1099511627776",
+     "stock": "1768954494976/3684580078125",
+     "applied": true,
+     "ratio": 1.0015558011914678
+    },
+    {
+     "i": 9,
+     "carried": "1768954494976/3684580078125",
+     "exact": "528693095691/1099511627776",
+     "stock": "1768954494976/3684580078125",
+     "applied": true,
+     "ratio": 1.0015558011914678
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0082981131000588,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.01_a0.0321094_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2452  covered = 0  vacuous = 0  exempt = 1258 (core 1166, nofam 92)  split = 1194  exact atom checks = 0  max depth = 32  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.01_a0.0321094_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.01_a0.0321094_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "15920590454784/32964611328125",
+     "exact": "535426660347/1099511627776",
+     "stock": "15920590454784/32964611328125",
+     "applied": true,
+     "ratio": 1.0082981131000588
+    },
+    {
+     "i": 6,
+     "carried": "1768954494976/3684580078125",
+     "exact": "528693095691/1099511627776",
+     "stock": "1768954494976/3684580078125",
+     "applied": true,
+     "ratio": 1.0015558011914678
+    },
+    {
+     "i": 7,
+     "carried": "1768954494976/3684580078125",
+     "exact": "528693095691/1099511627776",
+     "stock": "1768954494976/3684580078125",
+     "applied": true,
+     "ratio": 1.0015558011914678
+    },
+    {
+     "i": 8,
+     "carried": "1768954494976/3684580078125",
+     "exact": "528693095691/1099511627776",
+     "stock": "1768954494976/3684580078125",
+     "applied": true,
+     "ratio": 1.0015558011914678
+    },
+    {
+     "i": 9,
+     "carried": "1768954494976/3684580078125",
+     "exact": "528693095691/1099511627776",
+     "stock": "1768954494976/3684580078125",
+     "applied": true,
+     "ratio": 1.0015558011914678
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0082981131000588,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.5,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.02_a0.0675_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 2532  covered = 0  vacuous = 0  exempt = 1298 (core 1131, nofam 167)  split = 1234  exact atom checks = 0  max depth = 32  time = 0.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.02_a0.0675_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.02_a0.0675_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "966073808896/2072576171875",
+     "exact": "521029999801/1099511627776",
+     "stock": "966073808896/2072576171875",
+     "applied": true,
+     "ratio": 1.0166304087297375
+    },
+    {
+     "i": 6,
+     "carried": "15457180942336/33554439453125",
+     "exact": "63514788697/137438953472",
+     "stock": "15457180942336/33554439453125",
+     "applied": true,
+     "ratio": 1.0031935131895078
+    },
+    {
+     "i": 7,
+     "carried": "15457180942336/33554439453125",
+     "exact": "63514788697/137438953472",
+     "stock": "15457180942336/33554439453125",
+     "applied": true,
+     "ratio": 1.0031935131895078
+    },
+    {
+     "i": 8,
+     "carried": "15457180942336/33554439453125",
+     "exact": "63514788697/137438953472",
+     "stock": "15457180942336/33554439453125",
+     "applied": true,
+     "ratio": 1.0031935131895078
+    },
+    {
+     "i": 9,
+     "carried": "15457180942336/33554439453125",
+     "exact": "63514788697/137438953472",
+     "stock": "15457180942336/33554439453125",
+     "applied": true,
+     "ratio": 1.0031935131895078
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0166304087297375,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.4,
+   "cert": "attempts/A170-certfix/certs/A59__rk_hw0.02_a0.0740625_fulltheta__exact.json",
+   "verifier": [
+    "boxes = 1750  covered = 0  vacuous = 0  exempt = 907 (core 869, nofam 38)  split = 843  exact atom checks = 0  max depth = 30  time = 0.1s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 0 < budget 1  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A59-trump-residual/rk_hw0.02_a0.0740625_fulltheta",
+   "lane": "A59-trump-residual",
+   "src": "attempts/A59-trump-residual/certs/rk_hw0.02_a0.0740625_fulltheta.json",
+   "was": "FAIL",
+   "budget": 1,
+   "total": "0",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 1,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 2,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 3,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 4,
+     "carried": "16383999967232/32768001953125",
+     "exact": "16777215/33554432",
+     "stock": "16383999967232/32768001953125",
+     "applied": true,
+     "ratio": 1.0000000019999964
+    },
+    {
+     "i": 5,
+     "carried": "966073808896/2072576171875",
+     "exact": "521029999801/1099511627776",
+     "stock": "966073808896/2072576171875",
+     "applied": true,
+     "ratio": 1.0166304087297375
+    },
+    {
+     "i": 6,
+     "carried": "15457180942336/33554439453125",
+     "exact": "63514788697/137438953472",
+     "stock": "15457180942336/33554439453125",
+     "applied": true,
+     "ratio": 1.0031935131895078
+    },
+    {
+     "i": 7,
+     "carried": "15457180942336/33554439453125",
+     "exact": "63514788697/137438953472",
+     "stock": "15457180942336/33554439453125",
+     "applied": true,
+     "ratio": 1.0031935131895078
+    },
+    {
+     "i": 8,
+     "carried": "15457180942336/33554439453125",
+     "exact": "63514788697/137438953472",
+     "stock": "15457180942336/33554439453125",
+     "applied": true,
+     "ratio": 1.0031935131895078
+    },
+    {
+     "i": 9,
+     "carried": "15457180942336/33554439453125",
+     "exact": "63514788697/137438953472",
+     "stock": "15457180942336/33554439453125",
+     "applied": true,
+     "ratio": 1.0031935131895078
+    }
+   ],
+   "n_applied": 10,
+   "max_ratio": 1.0166304087297375,
+   "_file": "recert170_a60fam.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 2.8,
+   "cert": "attempts/A170-certfix/certs/A150__q_402_x4__exact.json",
+   "verifier": [
+    "boxes = 55378  covered = 24718  vacuous = 0  exempt = 3003 (core 3003, nofam 0)  split = 27657  exact atom checks = 24721  max depth = 35  time = 2.4s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 103/20 < budget 7  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A150-four-corner-product/q_402_x4",
+   "lane": "A150-four-corner-product",
+   "src": "attempts/A150-four-corner-product/certs/q_402_x4.json",
+   "was": "FAIL",
+   "budget": 7,
+   "total": "103/20",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "1624767926272/4695099609375",
+     "exact": "198218061563/549755813888",
+     "stock": "1624767926272/4695099609375",
+     "applied": true,
+     "ratio": 1.0419019888763
+    },
+    {
+     "i": 1,
+     "carried": "1624767926272/4695099609375",
+     "exact": "198218061563/549755813888",
+     "stock": "1624767926272/4695099609375",
+     "applied": true,
+     "ratio": 1.0419019888763
+    },
+    {
+     "i": 2,
+     "carried": "1624767926272/4695099609375",
+     "exact": "198218061563/549755813888",
+     "stock": "1624767926272/4695099609375",
+     "applied": true,
+     "ratio": 1.0419019888763
+    },
+    {
+     "i": 3,
+     "carried": "1624767926272/4695099609375",
+     "exact": "198218061563/549755813888",
+     "stock": "1624767926272/4695099609375",
+     "applied": true,
+     "ratio": 1.0419019888763
+    }
+   ],
+   "n_applied": 4,
+   "max_ratio": 1.0419019888763,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 3.2,
+   "cert": "attempts/A170-certfix/certs/A150__q_402_x4_recert__exact.json",
+   "verifier": [
+    "boxes = 55378  covered = 24718  vacuous = 0  exempt = 3003 (core 3003, nofam 0)  split = 27657  exact atom checks = 24721  max depth = 35  time = 2.9s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 13/2 < budget 7  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A150-four-corner-product/q_402_x4_recert",
+   "lane": "A150-four-corner-product",
+   "src": "attempts/A150-four-corner-product/certs/q_402_x4_recert.json",
+   "was": "FAIL",
+   "budget": 7,
+   "total": "13/2",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "1624767926272/4695099609375",
+     "exact": "198218061563/549755813888",
+     "stock": "1624767926272/4695099609375",
+     "applied": true,
+     "ratio": 1.0419019888763
+    },
+    {
+     "i": 1,
+     "carried": "1624767926272/4695099609375",
+     "exact": "198218061563/549755813888",
+     "stock": "1624767926272/4695099609375",
+     "applied": true,
+     "ratio": 1.0419019888763
+    },
+    {
+     "i": 2,
+     "carried": "1624767926272/4695099609375",
+     "exact": "198218061563/549755813888",
+     "stock": "1624767926272/4695099609375",
+     "applied": true,
+     "ratio": 1.0419019888763
+    },
+    {
+     "i": 3,
+     "carried": "1624767926272/4695099609375",
+     "exact": "198218061563/549755813888",
+     "stock": "1624767926272/4695099609375",
+     "applied": true,
+     "ratio": 1.0419019888763
+    }
+   ],
+   "n_applied": 4,
+   "max_ratio": 1.0419019888763,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 4.4,
+   "cert": "attempts/A170-certfix/certs/A150__q_rand_301_000_321_533__exact.json",
+   "verifier": [
+    "boxes = 56116  covered = 11029  vacuous = 0  exempt = 17061 (core 17061, nofam 0)  split = 28026  exact atom checks = 11029  max depth = 30  time = 3.9s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 309/50 < budget 7  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A150-four-corner-product/q_rand_301_000_321_533",
+   "lane": "A150-four-corner-product",
+   "src": "attempts/A150-four-corner-product/certs/q_rand_301_000_321_533.json",
+   "was": "FAIL",
+   "budget": 7,
+   "total": "309/50",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "253777543168/744683515625",
+     "exact": "380458509063/1099511627776",
+     "stock": "253777543168/744683515625",
+     "applied": true,
+     "ratio": 1.0153739726719995
+    },
+    {
+     "i": 1,
+     "carried": "968662245376/3090166015625",
+     "exact": "91716127825/274877906944",
+     "stock": "968662245376/3090166015625",
+     "applied": true,
+     "ratio": 1.0644256090709088
+    },
+    {
+     "i": 2,
+     "carried": "830281924608/2659583984375",
+     "exact": "88236929515/274877906944",
+     "stock": "830281924608/2659583984375",
+     "applied": true,
+     "ratio": 1.0282499036322694
+    },
+    {
+     "i": 3,
+     "carried": "3874648981504/12704556640625",
+     "exact": "346510188177/1099511627776",
+     "stock": "3874648981504/12704556640625",
+     "applied": true,
+     "ratio": 1.0333402148009652
+    }
+   ],
+   "n_applied": 4,
+   "max_ratio": 1.0644256090709088,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 4.2,
+   "cert": "attempts/A170-certfix/certs/A150__q_rand_301_000_321_533_recert__exact.json",
+   "verifier": [
+    "boxes = 56116  covered = 11029  vacuous = 0  exempt = 17061 (core 17061, nofam 0)  split = 28026  exact atom checks = 11029  max depth = 30  time = 4.0s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1745751/250000 < budget 7  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A150-four-corner-product/q_rand_301_000_321_533_recert",
+   "lane": "A150-four-corner-product",
+   "src": "attempts/A150-four-corner-product/certs/q_rand_301_000_321_533_recert.json",
+   "was": "FAIL",
+   "budget": 7,
+   "total": "1745751/250000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "253777543168/744683515625",
+     "exact": "380458509063/1099511627776",
+     "stock": "253777543168/744683515625",
+     "applied": true,
+     "ratio": 1.0153739726719995
+    },
+    {
+     "i": 1,
+     "carried": "968662245376/3090166015625",
+     "exact": "91716127825/274877906944",
+     "stock": "968662245376/3090166015625",
+     "applied": true,
+     "ratio": 1.0644256090709088
+    },
+    {
+     "i": 2,
+     "carried": "830281924608/2659583984375",
+     "exact": "88236929515/274877906944",
+     "stock": "830281924608/2659583984375",
+     "applied": true,
+     "ratio": 1.0282499036322694
+    },
+    {
+     "i": 3,
+     "carried": "3874648981504/12704556640625",
+     "exact": "346510188177/1099511627776",
+     "stock": "3874648981504/12704556640625",
+     "applied": true,
+     "ratio": 1.0333402148009652
+    }
+   ],
+   "n_applied": 4,
+   "max_ratio": 1.0644256090709088,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.0,
+   "cert": "attempts/A170-certfix/certs/A150__r_055_035_044_453__exact.json",
+   "verifier": [
+    "boxes = 8282  covered = 2060  vacuous = 0  exempt = 2113 (core 2113, nofam 0)  split = 4109  exact atom checks = 2060  max depth = 32  time = 0.6s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1745751/250000 < budget 7  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A150-four-corner-product/r_055_035_044_453",
+   "lane": "A150-four-corner-product",
+   "src": "attempts/A150-four-corner-product/certs/r_055_035_044_453.json",
+   "was": "FAIL",
+   "budget": 7,
+   "total": "1745751/250000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "12560559243264/40392232421875",
+     "exact": "188276826035/549755813888",
+     "stock": "12560559243264/40392232421875",
+     "applied": true,
+     "ratio": 1.1013260653648373
+    },
+    {
+     "i": 1,
+     "carried": "11623946944512/40392232421875",
+     "exact": "364608254787/1099511627776",
+     "stock": "11623946944512/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141847962899
+    },
+    {
+     "i": 2,
+     "carried": "507555086336/1559726484375",
+     "exact": "189177325705/549755813888",
+     "stock": "507555086336/1559726484375",
+     "applied": true,
+     "ratio": 1.0574613749068262
+    },
+    {
+     "i": 3,
+     "carried": "3874648981504/12704556640625",
+     "exact": "173255094077/549755813888",
+     "stock": "3874648981504/12704556640625",
+     "applied": true,
+     "ratio": 1.033340214732376
+    }
+   ],
+   "n_applied": 4,
+   "max_ratio": 1.1523141847962899,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.9,
+   "cert": "attempts/A170-certfix/certs/A165__l1_104_spread_spread00__exact.json",
+   "verifier": [
+    "boxes = 6014  covered = 1657  vacuous = 0  exempt = 1382 (core 1382, nofam 0)  split = 2975  exact atom checks = 1657  max depth = 23  time = 0.4s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1197/200 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A165-cascade-l1_104/l1_104_spread_spread00",
+   "lane": "A165-cascade-l1_104",
+   "src": "attempts/A165-cascade-l1_104/certs/l1_104_spread_spread00.json",
+   "was": "FAIL",
+   "budget": 6,
+   "total": "1197/200",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "1744415363072/4695099609375",
+     "exact": "418295262475/1099511627776",
+     "stock": "1744415363072/4695099609375",
+     "applied": true,
+     "ratio": 1.0239482945408929
+    },
+    {
+     "i": 1,
+     "carried": "5243784896/18869140625",
+     "exact": "41822853961/137438953472",
+     "stock": "5243784896/18869140625",
+     "applied": true,
+     "ratio": 1.0949923339817278
+    },
+    {
+     "i": 2,
+     "carried": "2684817866752/9287005859375",
+     "exact": "330206008981/1099511627776",
+     "stock": "2684817866752/9287005859375",
+     "applied": true,
+     "ratio": 1.0388337145254505
+    },
+    {
+     "i": 3,
+     "carried": "10739271467008/35995369140625",
+     "exact": "167923122755/549755813888",
+     "stock": "10739271467008/35995369140625",
+     "applied": true,
+     "ratio": 1.0237937692959258
+    },
+    {
+     "i": 4,
+     "carried": "10739271467008/36709916015625",
+     "exact": "41451350815/137438953472",
+     "stock": "10739271467008/36709916015625",
+     "applied": true,
+     "ratio": 1.0309495624721023
+    }
+   ],
+   "n_applied": 5,
+   "max_ratio": 1.0949923339817278,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A165__l1_104_spread_spread02__exact.json",
+   "verifier": [
+    "boxes = 16542  covered = 3049  vacuous = 0  exempt = 5254 (core 5254, nofam 0)  split = 8239  exact atom checks = 3049  max depth = 30  time = 1.2s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1197/200 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A165-cascade-l1_104/l1_104_spread_spread02",
+   "lane": "A165-cascade-l1_104",
+   "src": "attempts/A165-cascade-l1_104/certs/l1_104_spread_spread02.json",
+   "was": "FAIL",
+   "budget": 6,
+   "total": "1197/200",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "1744415363072/4695099609375",
+     "exact": "418295262475/1099511627776",
+     "stock": "1744415363072/4695099609375",
+     "applied": true,
+     "ratio": 1.0239482945408929
+    },
+    {
+     "i": 1,
+     "carried": "191772704768/646251953125",
+     "exact": "164868542845/549755813888",
+     "stock": "191772704768/646251953125",
+     "applied": true,
+     "ratio": 1.0106087257681178
+    },
+    {
+     "i": 2,
+     "carried": "10739271467008/36400892578125",
+     "exact": "165260322899/549755813888",
+     "stock": "10739271467008/36400892578125",
+     "applied": true,
+     "ratio": 1.0189103610608028
+    },
+    {
+     "i": 3,
+     "carried": "10739271467008/36400892578125",
+     "exact": "330520645979/1099511627776",
+     "stock": "10739271467008/36400892578125",
+     "applied": true,
+     "ratio": 1.0189103616187793
+    },
+    {
+     "i": 4,
+     "carried": "10739271467008/35995369140625",
+     "exact": "335846245229/1099511627776",
+     "stock": "10739271467008/35995369140625",
+     "applied": true,
+     "ratio": 1.0237937684393252
+    }
+   ],
+   "n_applied": 5,
+   "max_ratio": 1.0239482945408929,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 6.7,
+   "cert": "attempts/A170-certfix/certs/A165__l1_104_spread_spread03__exact.json",
+   "verifier": [
+    "boxes = 94930  covered = 24100  vacuous = 0  exempt = 23397 (core 23397, nofam 0)  split = 47433  exact atom checks = 24100  max depth = 34  time = 6.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1197/200 < budget 6  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A165-cascade-l1_104/l1_104_spread_spread03",
+   "lane": "A165-cascade-l1_104",
+   "src": "attempts/A165-cascade-l1_104/certs/l1_104_spread_spread03.json",
+   "was": "FAIL",
+   "budget": 6,
+   "total": "1197/200",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "1744415363072/4695099609375",
+     "exact": "418295262475/1099511627776",
+     "stock": "1744415363072/4695099609375",
+     "applied": true,
+     "ratio": 1.0239482945408929
+    },
+    {
+     "i": 1,
+     "carried": "10739271467008/36709916015625",
+     "exact": "165805403351/549755813888",
+     "stock": "10739271467008/36709916015625",
+     "applied": true,
+     "ratio": 1.0309495630379248
+    },
+    {
+     "i": 2,
+     "carried": "2684817866752/9287005859375",
+     "exact": "82551502235/274877906944",
+     "stock": "2684817866752/9287005859375",
+     "applied": true,
+     "ratio": 1.0388337143964639
+    },
+    {
+     "i": 3,
+     "carried": "5243784896/18869140625",
+     "exact": "167291415805/549755813888",
+     "stock": "5243784896/18869140625",
+     "applied": true,
+     "ratio": 1.0949923337264564
+    },
+    {
+     "i": 4,
+     "carried": "2684817866752/9287005859375",
+     "exact": "165103004581/549755813888",
+     "stock": "2684817866752/9287005859375",
+     "applied": true,
+     "ratio": 1.0388337150948797
+    }
+   ],
+   "n_applied": 5,
+   "max_ratio": 1.0949923337264564,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.7,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512__exact.json",
+   "verifier": [
+    "boxes = 28764  covered = 13836  vacuous = 0  exempt = 578 (core 578, nofam 0)  split = 14350  exact atom checks = 13836  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 7981001/1000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "7981001/1000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p005_dn1000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1758751/250000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p005_dn1000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p005_dn1000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1758751/250000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p005_dn1000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.4s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1758750001/250000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p005_dn1000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p005_dn1000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1758750001/250000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p005_dn1000000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1758750000001/250000000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p005_dn1000000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p005_dn1000000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1758750000001/250000000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p020_dn1000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1785001/250000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p020_dn1000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p020_dn1000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1785001/250000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p020_dn1000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1785000001/250000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p020_dn1000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p020_dn1000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1785000001/250000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.5,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p020_dn1000000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1785000000001/250000000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p020_dn1000000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p020_dn1000000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1785000000001/250000000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p050_dn1000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1837501/250000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p050_dn1000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p050_dn1000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1837501/250000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p050_dn1000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1837500001/250000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p050_dn1000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p050_dn1000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1837500001/250000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p050_dn1000000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1837500000001/250000000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p050_dn1000000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p050_dn1000000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1837500000001/250000000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p100_dn1000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1925001/250000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p100_dn1000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p100_dn1000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1925001/250000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p100_dn1000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1925000001/250000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p100_dn1000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p100_dn1000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1925000001/250000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p100_dn1000000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1925000000001/250000000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p100_dn1000000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p100_dn1000000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1925000000001/250000000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p140_dn1000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1995001/250000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p140_dn1000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p140_dn1000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1995001/250000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p140_dn1000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1995000001/250000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p140_dn1000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p140_dn1000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1995000001/250000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 1.6,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_005_512_sc1p140_dn1000000000000__exact.json",
+   "verifier": [
+    "boxes = 28464  covered = 13539  vacuous = 0  exempt = 725 (core 725, nofam 0)  split = 14200  exact atom checks = 13539  max depth = 28  time = 1.3s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 1995000000001/250000000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_005_512_sc1p140_dn1000000000000",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_005_512_sc1p140_dn1000000000000.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "1995000000001/250000000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946878976/40392232421875",
+     "exact": "364608253535/1099511627776",
+     "stock": "11623946878976/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141873362135
+    },
+    {
+     "i": 2,
+     "carried": "220406755328/670728515625",
+     "exact": "368547294221/1099511627776",
+     "stock": "220406755328/670728515625",
+     "applied": true,
+     "ratio": 1.0200354603776123
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141873362135,
+   "_file": "recert170_affected.jsonl"
+  },
+  {
+   "result": "PASS",
+   "rc": 0,
+   "verify_s": 0.9,
+   "cert": "attempts/A170-certfix/certs/A166__l2_p65_101_b8_015_504__exact.json",
+   "verifier": [
+    "boxes = 10530  covered = 4741  vacuous = 0  exempt = 556 (core 556, nofam 0)  split = 5233  exact atom checks = 4741  max depth = 27  time = 0.5s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 7981001/1000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ],
+   "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+   "id": "A166-nearest-corner-subtree/l2_p65_101_b8_015_504",
+   "lane": "A166-nearest-corner-subtree",
+   "src": "attempts/A166-nearest-corner-subtree/certs/l2_p65_101_b8_015_504.json",
+   "was": "FAIL",
+   "budget": 8,
+   "total": "7981001/1000000",
+   "cores": [
+    {
+     "i": 0,
+     "carried": "7584830717952/18399619140625",
+     "exact": "485789141065/1099511627776",
+     "stock": "7584830717952/18399619140625",
+     "applied": true,
+     "ratio": 1.071793002320503
+    },
+    {
+     "i": 1,
+     "carried": "11623946846208/40392232421875",
+     "exact": "91152063031/274877906944",
+     "stock": "11623946846208/40392232421875",
+     "applied": true,
+     "ratio": 1.1523141861252477
+    },
+    {
+     "i": 2,
+     "carried": "13044484145152/38993162109375",
+     "exact": "194267083787/549755813888",
+     "stock": "13044484145152/38993162109375",
+     "applied": true,
+     "ratio": 1.056308892758399
+    }
+   ],
+   "n_applied": 3,
+   "max_ratio": 1.1523141861252477,
+   "_file": "recert170_affected.jsonl"
+  }
+ ],
+ "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af"
+}

@@ -7695,3 +7695,51 @@ pass + ~3,700 s of diagnostics, checking and witness search ≈ 3.3 CPU-h of the
 - Files: `code/{multibox,demo171}.py`, `tests/test_multibox.py`, `notes/usage.md`,
   `results/{test_multibox,demo171}.json`, `figs/*.svg`; appends to
   `attempts/A57-shadow-trees/PAUSED.md` (§E resume note 7) and `docs/residue_ledger.md` §6.
+
+## 2026-09-09 — A170-certfix (Opus engineer) — done-success
+
+- **Task.** Audit which certificate-emission lanes are damaged by the `caselp.make_certificate` stock-core
+  reversion A166 found (`hyp = Hyp.from_json(res["hyp"])` recomputes `self.cores = [b.core() for b in boxes]`,
+  discarding A135's certified EXACT cores, so an `ExactHyp` LP emits a certificate that under-exempts by
+  1.4-15 % of the core half-side and manufactures holes); re-certify every FAILing record with the exact cores
+  carried through; ship the forward fix.
+- **Audit, done empirically on every certificate on disk** (`code/scan170.py`, 3,378 files: the exact core
+  recomputed from the box each certificate itself carries, compared with the `a` it wrote). **The bug reaches
+  only the lanes that call `caselp.make_certificate` / `caselp92.make_certificate` DIRECTLY with an `ExactHyp`
+  — A150, A165, A166.** A137, A140, A145, A149 (both the `__exall` and the `__exH` arms), A156 and A135 itself
+  all route through A135's `emit135.make_cert`, which takes the LIVE `Hyp` and was written for exactly this bug
+  (`emit135.py:94-100`): **exact cores, 698 of 698**. A168 already carries A166's inline patch.
+- **Re-certification** (`code/certwrap170.py` + `code/recert170.py`, arbiter the FROZEN `verify_case.py`
+  sha `521cb01f…`): **409 certificates, 2.35 CPU-h of verifier, ZERO LPs solved. 59 recovered PASSes, 59/59
+  clearing a 100 % independent check** (A132 `polycore.vertex_ok` re-run on the WRITTEN rationals, the measure
+  recomputed exactly in `Fraction`, and a depth-64 frozen replay — `code/check170.py`).
+  - **25 repairs, 8 nodes, 3 of them NEW**: A165's `l1_104_spread_spread00/02/03`, which takes that leaf from
+    1-of-4 to **4 of 4** certified and refutes its own note's "they need the A13/A14 separation loop with more
+    rounds, not a different core" — they needed the cores they were *solved* with. A150's 3 and A166's 2 are
+    re-derived here through a separately written path and agree 22/22 (the cross-check A166 asked for).
+  - **34 free UPGRADES on genuinely stock-core lanes, every one a zero-atom VACUITY certificate** (A59 33,
+    A60 1). That is the one class where a wider certified core is the whole lever, since a vacuity certificate
+    says "every admissible square is exempt". A59's residual ladder around Trump's packing now certifies at
+    **8-14 % less exemption parameter at every rung** (`rb hw=0.002`: `a_min` 0.009062 → 0.007969; `rk hw=0.02`:
+    0.074883 → 0.067500) with its certified `hw` **envelope unmoved** — cheaper, not longer.
+- **Negative where it matters.** 118 already-exact FAILs are **NO-CHANGE**, so the A57 row's exact-core kill
+  rate (46/161 = 28.6 %) stands and A156's `v3_candidates156` row is not a core failure. The whole k0 pool —
+  all **128** `kill-candidate (cert FAIL)` records of `cells140.open_pool`, re-emitted from A115's **stored**
+  measure with exact cores at zero LP cost — gives **0 PASS** (unconverged single-box LPs at τ ≈ 9.977 against
+  budget 10, cores widening 0.6-11.8 %, 9 failing on `total ≥ budget`). A166's "127 candidates for immediate
+  certification" closes at **zero**: none of them was emitted through an exact-core path. Shadow board
+  unchanged — `status_gallery.py --dry-run` 5,332 → 5,344 kills, **0 new distinct pages**.
+- **Fix shipped.** `code/certwrap170.py` — a wrapper (`caselp.py` NOT edited); `make_certificate_exact(res,
+  s_rat, scale, hyp=H)` carries the live cores, and with no `hyp` recomputes them from the box, which is what
+  lets it repair old certificates. Two guards: a core is only ever ENLARGED, and never without `exact_a`'s
+  vertex test passing and `(kx,ky,tm)` unchanged. Regression `code/test_cores170.py`: **50/50 boxes** (25 lifted
+  from real certificates), asserting both that the wrapper writes `exact_a` and that the UNWRAPPED
+  `caselp.make_certificate` still writes the stock core — so the guard fails loudly if upstream changes.
+- **One cosmetic defect found in passing:** `attempts/A149-a57-reprice/code/node_a60.py:64` mutates `hyp.cores`
+  on a plain `caselp.Hyp`, so `emit135.make_cert`'s `getattr` defaults label all 95 `certs/a60/*__exH.json`
+  `core_scope = "stock"` / `cores_exact = null` even though their H core IS exact. No certificate is wrong;
+  only its provenance line is.
+- **Files.** `attempts/A170-certfix/{BRIEF.md, notes/audit.md, notes/recovered.md, notes/fix.md, code/*.py,
+  results/*}`; appends to `docs/budget.md` §D.9, `docs/residue_ledger.md` §1,
+  `attempts/A57-shadow-trees/PAUSED.md` (A170 addendum + §E resume line 6),
+  `attempts/A60-trump5-campaign/notes/ledger.md`, `attempts/A115-k0-corner-rows/notes/t6_report.md`.

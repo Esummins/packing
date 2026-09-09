@@ -986,3 +986,17 @@ format, with `box_source`, `sym`, `pin_gate`, `cores_exact` and `verifier` on ev
 summary `results/day149_a60_summary.json`; queue builder `code/targets_a60.py`. **Nothing in A60 is
 rewritten by this fold-in** — the node files keep their recorded verdicts and the kills live in the
 ledger, exactly as `superseded_by_backlog_A137.jsonl` does it.
+
+**Correction to the '0 new kills' line above, measured after the full sweep finished.** A60's own campaign
+certificates gave **1** recovery -- `selftest_vac_a0.00448242`, a zero-atom VACUITY certificate -- and the
+sister campaign A59-trump-residual gave **33**, every one of them also a vacuity certificate
+(`rb_hw*_a*_box`, `rk_hw*_a*_fulltheta`; `total = 0 < budget = 1`, 10 cores, one NO-family). That is the one
+class where a stock-core lane pays: the whole content of a vacuity certificate is *every admissible square
+is exempt*, so a wider CERTIFIED core is exactly the lever. Mechanically the five exact pin cores are point
+boxes whose stock `a = 16383999967232/32768001953125` rises to `16777215/33554432` (one ULP of the 2^-25
+grid below 1/2) and the five tilted `hw`-boxes' cores rise 0.12-1.7 %; that sliver covers the last
+placements. Effect on A59's residual ladder around Trump's packing: the MINIMUM exemption parameter a rung
+needs drops **8-14 %** at every `hw` (`rb hw=0.002`: `a_min` 0.009062 -> 0.007969; `rk hw=0.02`: 0.074883 ->
+0.067500), while the certified `hw` ENVELOPE does not move (`rb hw=0.05` still has no PASS at any `a`) --
+the ladder is cheaper, not longer, and A59's headline radius is unchanged. A60's 40 non-vacuity FAILs stay
+FAIL. All 34 clear the independent check (`attempts/A170-certfix/results/check170.json`).
