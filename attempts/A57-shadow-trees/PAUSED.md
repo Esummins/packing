@@ -677,3 +677,41 @@ then `assert_invariant()` — BEFORE any chord row, lane cover, figure or LP, an
 the pair-leaf kill; `chord_rows` and `lane` refuse to run on an un-normalised node, and the guard is
 `attempts/A171-multibox-invariant/tests/test_multibox.py` (A168's own S2 node `BR139/TRH-25` fails
 the invariant as recorded — D's poses leave `[0,s]²` by 0.087938 — and passes after normalise).**
+
+---
+
+**A149 fold-in (2026-09-08/09, day lane after A137's night; append-only).** **The A57 ALIVE + FAIL
+population is DRAINED: 240 nodes re-solved with A135's exact certified-maximal cores under the
+FROZEN `verify_case.py`, 93 certified kills, 29.7 CPU-h, 0 WALL-CAP, 0 ERROR and NOT ONE node
+reaching FAIL-with-holes — so `verify_case_v3` was never invoked and its ledger is empty by
+construction.** Ledger `attempts/A149-a57-reprice/results/superseded_by_exactcore_A149.jsonl` in
+A137's format (plus `box_source`, `frac_exact`, `frac_exact_band`, `verifier`); nothing in A57 was
+rewritten. **§C.1 is superseded on its central question: the lever pays on the FAIL population,
+not the ALIVE one — recorded FAIL 62.5 % (70/112) at 0.220 CPU-h per kill against recorded ALIVE
+16.0 % (20/125) at 0.693**, because a FAIL is a node whose LP is already below budget and whose
+certificate merely has holes a larger core closes, while an ALIVE node needs τ itself to fall. Run
+the chore FAIL-FIRST; `targets137.py` defaults `--include_fail 0`. A145's `frac_exact` on n = 237
+is monotone on ALIVE (100 / 50 / 28.2 / **7.3 %** by band, so §C.1's untested `< 0.30` band is 4×
+weaker but not worthless) and nearly FLAT on FAIL (73.9 / 74.1 / 50 / 60 %), so rank an ALIVE queue
+by it and simply run a FAIL queue. **§C.3's "an id is not a node" has a third and costlier
+instance: 19 open G1-tree nodes are masked by a dead L1-tree row of the same id** and had never
+been offered by any queue, because `targets137.py` — and anything that walks `tree_*.jsonl` into a
+dict keyed by id — builds a LAST-WINS map. Run as their own lane they gave **14 kills of 19**, the
+highest-yield population of the day, including the coordinator's priority node
+`k5_11_interior_Y0275` (τ 4.999999999999965 → 3.999999999999985, frozen PASS in 33.7 s). **Key the
+corpus by (tag, id).** Two further bookkeeping cuts, neither touching soundness: **728 of the 1,995
+unsolved queued LP jobs (37 %) are already dead** by a supersession of the node or an ancestor
+(`mkqueue137.py` tests recorded and claimed ids but not ancestry), and **`emit137.py`'s `done` set
+reads one shard file instead of globbing `_s*`**, which is why 573 of §C.2's 849 level-1 children
+were re-screens of ids already in the corpus — on the 276 genuinely new ones the geometry rate is
+**22.5 %, not 27.4 %**, and the LP certifies **76.5 % of decided, not 78.8 %**, both of which move
+the schedule the unfavourable way. `k5_11_interior_Y0130` is alive under BOTH cores: the exact
+square core takes η from +0.500 to −4e-14 and stalls exactly at the budget, and A135's K′-pruned
+polygon core (16 vertices, area 0.681528 against the square's 0.624994, +9.0 %) CONVERGES at
+exactly 5.000000 — the node needs a different leaf, not a bigger core. Every certificate this lane
+wrote carries the EXACT cores on every box (137/137 audited against A166's stock-core reversion,
+`results/certaudit149.json`), because both node paths emit through A135's `make_cert` and never
+through `caselp.make_certificate`; re-verifying all 55 stored non-PASS certificates with no
+re-solve recovered **0** (40 LOST-KILL-ON-RESOLVE re-FAIL deterministically on real holes, 15
+TOO-TIGHT have total ≥ budget and cannot PASS). The re-price of this campaign in `docs/budget.md`'s
+own model is `attempts/A149-a57-reprice/notes/{reprice.md, dupwork.md, reemission.md}`.

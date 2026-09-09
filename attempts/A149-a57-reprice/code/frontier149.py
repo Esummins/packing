@@ -74,8 +74,10 @@ def main():
 
     # ---- supersessions (a kill folded in from another attempt), ancestors included
     dead = set(recdead)
-    for f in ("superseded_by_backlog_A137.jsonl", "superseded_by_exactcore_A137.jsonl"):
-        p = os.path.join(A57R, f)
+    for p in [os.path.join(A57R, f) for f in ("superseded_by_backlog_A137.jsonl",
+                                              "superseded_by_exactcore_A137.jsonl")] + \
+             [os.path.join(BASE, "results", f) for f in
+              ("superseded_by_exactcore_A149.jsonl", "superseded_by_exactcore_v3_A149.jsonl")]:
         if os.path.exists(p):
             for ln in open(p, encoding="utf-8"):
                 try:

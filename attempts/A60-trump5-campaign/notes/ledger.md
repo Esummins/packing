@@ -914,3 +914,75 @@ rather than exactly retired.
 two-crowd witness and **49 certified** (`certs_nogo/nogo_*.json`, kind `nogo_two_crowd_v1`), which
 retires those cells for the whole lane-leaf family. 116 cells remain `UNDECIDED-time` at the 60 s
 budget — those are where a longer pass could still find kills.
+
+
+## A170 fold-in (2026-09-09) — the certificate-EMISSION audit: A60's lanes are CLEAN, 0 kills recovered
+
+A166 found that `caselp.make_certificate` rebuilds the hypothesis with `Hyp.from_json`, which recomputes
+the STOCK cores and throws away A135's certified EXACT ones, so an exact-core LP emits a certificate that
+under-exempts by 1.4–15 % of the core half-side and manufactures holes. A170 audited **every** certificate
+on disk (3,378 files, the exact core recomputed from the box each certificate carries) and re-certified
+every FAILing one in this campaign's family with the cores enlarged, through the FROZEN `verify_case.py`
+(sha `521cb01f…`), at zero LP cost.
+
+* **A149's a60 re-emission lane is not affected.** All 95 `attempts/A149-a57-reprice/certs/a60/*__exH.json`
+  carry the EXACT `H` core (`node_a60.py:64`); the pins deliberately keep the corpus core
+  (`node_a60.py:10-14`). Re-certifying its 14 FAILs with every core enlarged to `exact_a` changes the pin
+  half-sides by under 0.01 % and closes **none** — those FAILs are real. One cosmetic defect: because
+  `build_hyp` returns a plain `caselp.Hyp`, `emit135.make_cert`'s `getattr` defaults label all 95 of those
+  certificates `provenance.core_scope = "stock"` / `cores_exact = null` even though the H core is exact;
+  the true `a_report` is in the lane's jsonl and in `results/superseded_by_exactcore_a60_A149.jsonl`.
+* **A60's own `certs/` are stock-core LPs** (as they should be — they predate A135), so for them the exact
+  core is a free *upgrade* rather than a repair. It buys nothing: every re-certified `c0_*` FAIL stays
+  FAIL, several of them with the holes intact after a 1.8–5.2 % core enlargement.
+* **0 new kills for this campaign.** The recovery is confined to A150/A165/A166, the three lanes that call
+  the A57 driver directly (25 certificates, 8 distinct nodes, 3 of them new).
+
+Byproduct worth a separate cheap pass: several A60 and A149-a60 FAILs report **0 HOLES** and only
+"undecided at this depth" (e.g. `c0_Y0317_epsgeo0.002`, `c0_Y0269__exH`, `c0_Y0335__exH`) — those are
+depth-limited, not core-limited, and a depth-64–72 replay costs seconds.
+
+Files: `attempts/A170-certfix/{notes/audit.md, notes/recovered.md, results/recert170_*.jsonl,
+results/summary170.json}`.
+
+
+**A149 (2026-09-08/09, `exact-core re-emission`) — 87 of the 218 alive trump5 nodes are CERTIFIED
+DEAD under the FROZEN verifier, for 17.1 CPU-h and no change to any verifier, schema or Lean
+file.** The population is A107's alive `src = A60` gallery (283 nodes) minus the 65 already dead by
+A142's exact-clip, A141's slot-lane and A137's fold-in: **218 targets, 214 decided, 87 PASS
+(40.7 %), 116 NO-KILL, 11 LOST-KILL-ON-RESOLVE, 4 WALL-CAP (never a verdict), 0 FAIL-with-holes —
+so `verify_case_v3` was never invoked.** 0.20 CPU-h per kill. All 87 are level 1; by shadow family
+S01 60, S07 5, S03 5, and thirteen others 1–2 each; median kill τ 4.095, minimum 3.000.
+
+**What changed is ONE number: the conditioned square's core.** A60's five pins are already exact
+boxes (`deepen.py` builds `Box(x, x, y, y, 0, 0)`) and they KEEP the corpus core
+`16383999967232/32768001953125 = 0.499999969` — deliberately, because at `a = 1/2` the cores of two
+slots exactly 1.0 apart would touch and the `budget = n − #cores` bridge would lose its pairwise
+disjointness; the measured gap at the corpus core is 6.2e-8 and the gate is re-checked before every
+node. So `scope = exH`, and the whole gain is H's: **×1.048 per side on average, ×1.109 at most**
+(e.g. `c0_Y0215` 0.356601649 → 0.395282921, ×1.23 in area) against A57's pin gain of ×1.006. That
+is why the same lever is worth 40.7 % here and 16 % on A57's alive nodes.
+
+Mechanics, for anyone re-running it. `attempts/A149-a57-reprice/code/node_a60.py` takes the
+hypothesis from A60's OWN node record (which stores the five pin boxes, H, and the cores), replaces
+H's core with `A135 exactcore.exact_core`, re-solves with `caselp.solve_node` warm-started from the
+stored result at `sym = D4 if hyp.is_symmetric_D4(s) else C1`, and emits with **A135's
+`emit135.make_cert`** — *not* `caselp.make_certificate`, which does `Hyp.from_json` and would
+recompute (and so discard) the exact core, the reversion A166 diagnosed. The arbiter is the FROZEN
+`verify_case.py`; A57's and A60's copies are byte-identical (sha256 `521cb01f…`). `lpbox`: A57's
+copy runs, and A60's differs from it in one constant, the oracle chunk size, which A57's own T19
+note records as result-neutral bit for bit. Nothing under A60 was written by the run.
+
+Caveats worth carrying. (i) The 11 LOST-KILL-ON-RESOLVE rows were re-verified from their stored
+certificates with **no re-solve** and all 11 FAIL again — real holes, not A166's spurious annulus
+(`results/recheck149.jsonl`). (ii) The 4 WALL-CAP nodes keep their prior state and are unclaimed.
+(iii) The coordinator's flagship `c0_Y0215` is NOT among the kills: its τ moves only
+5.5000000000000435 → 5.499999999825466, so the near-simple BL(1,1) square at tilt 82–90° is half a
+unit above budget and the core is not what is holding it.
+
+Ledger `attempts/A149-a57-reprice/results/superseded_by_exactcore_a60_A149.jsonl` (A137's row
+format, with `box_source`, `sym`, `pin_gate`, `cores_exact` and `verifier` on every row); v3 ledger
+`…_a60_v3_A149.jsonl` is empty by construction; certificates `attempts/A149-a57-reprice/certs/a60/`;
+summary `results/day149_a60_summary.json`; queue builder `code/targets_a60.py`. **Nothing in A60 is
+rewritten by this fold-in** — the node files keep their recorded verdicts and the kills live in the
+ledger, exactly as `superseded_by_backlog_A137.jsonl` does it.

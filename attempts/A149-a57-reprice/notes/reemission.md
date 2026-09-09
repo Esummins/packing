@@ -6,7 +6,13 @@
 |---|---|---|---|---|---|
 | recorded **ALIVE** | 125 | 13.86 | 20 | **16.0 %** | 0.693 |
 | recorded **FAIL** | 112 | 15.42 | **70** | **62.5 %** | **0.220** |
-| **total** | **237** | **29.28** | **90** | **38.0 %** | 0.325 |
+| **total** | **240** | **29.66** | **93** | **38.8 %** | 0.319 |
+
+And the same lever on the protected tier, for the first time:
+
+| population | nodes | CPU-h | certified kills | rate | CPU-h per kill |
+|---|---|---|---|---|---|
+| **A60 alive trump5**, scope `exH` | 218 (214 decided) | 17.07 | **87** | **40.7 %** | **0.196** |
 
 0 WALL-CAP, 0 ERROR, and **not one node reached FAIL-with-holes**, so `verify_case_v3` was never
 needed and `results/superseded_by_exactcore_v3_A149.jsonl` is empty by construction. Every kill is
@@ -81,7 +87,7 @@ highest of anything today:
 
 | | n | certified kills | rate |
 |---|---|---|---|
-| masked G1 nodes | 18 + `Y0275` | **10** so far | ~56 % |
+| masked G1 nodes | 18 + `Y0275` | **14** | **73.7 %** |
 
 Fix, and it is the same shape as the other two: key the corpus by **(tag, id)**, not `id`. A
 one-line change in every consumer, and PAUSED v3 §C.3 already has the reason written down.
@@ -95,5 +101,42 @@ one-line change in every consumer, and PAUSED v3 §C.3 already has the reason wr
 * the K′ arm's driver `code/poly149.py`, output `results/poly149.jsonl`;
 * box discipline: 4 workers at Normal priority, `ProcessorAffinity 0xFFFF` on every process
   (P-core threads only; `code/affinity149.ps1` sweeps every 5 min), a machine-wide gate of 16 lab
-  python processes that fired **119 times** as holds rather than oversubscribe alongside A156,
+  python processes that fired as holds rather than oversubscribe alongside A156 and A136,
   per-node process wall 1,500 s, free-physical and commit gates on every launch.
+
+## A60 (trump5) — the protected tier's first exact-core measurement
+
+218 alive trump5 nodes, **87 certified kills (40.7 % of 214 decided) in 17.07 CPU-h**, 0.196 CPU-h
+per kill, 4 WALL-CAP (never a verdict), 11 LOST-KILL-ON-RESOLVE, **0 FAIL-with-holes** so no v3.
+All 87 are level 1; by shadow family S01 60, S07 5, S03 5, and thirteen others 1–2 each.
+
+The change is one number: **only the conditioned square's core**. A60's pins are already exact
+boxes and must keep the corpus core `16383999967232/32768001953125` — at `a = 1/2` the cores of two
+slots exactly 1.0 apart would touch and the `budget = n − #cores` bridge would lose pairwise
+disjointness (measured gap 6.2e-8, re-checked before every node). So the whole gain is H's, and it
+is **×1.048 per side on average and ×1.109 at most**, against A57's pin gain of ×1.006. That is why
+the same lever is worth 40.7 % here and 16.0 % on A57's alive nodes.
+
+The coordinator's named start `c0_Y0215` is **not** among the kills: τ moves only
+5.5000000000000435 → 5.499999999825466. The near-simple BL(1,1) square at tilt 82–90° sits half a
+unit above budget; the core is not what holds it.
+
+## A166's stock-core reversion: audited, and this attempt was never on the broken path
+
+`code/certaudit149.py` recomputes A135's exact core from the box each certificate itself carries
+and compares it with the carried `a`, over all 233 certificates written here.
+
+* **A57: 137 of 137 clean** — the exact core is written on every box. Both node paths emit through
+  A135's `emit135.make_cert`, which reads the LIVE `Hyp`; `caselp.make_certificate` is never
+  called, and A135 wrote `make_cert` for exactly this reason.
+* **A60: the five pins are the corpus core by design** (see above), which the auditor labels
+  "STOCK"; H is exact in all 96. The shortfall is **3.1e-8 of the half-side, six orders of
+  magnitude below A166's measured 1.4–15 %**, and it is the conservative direction — it can cost a
+  kill, never soundness.
+
+`code/recheck149.py` then re-verified **all 55 stored non-PASS certificates with no re-solve** (the
+measure is on disk: `emit135.certify` dumps the certificate before taking the verdict, so nothing
+needed re-solving). **0 recovered.** 40 LOST-KILL-ON-RESOLVE re-FAIL deterministically — real
+holes — and 15 TOO-TIGHT have a written total ≥ budget, which the verifier's claim forbids, so they
+cannot PASS without a better τ. For A170's audit: every non-`NO-KILL` outcome has its atoms and
+weights on disk under `certs/`; `NO-KILL` never built a certificate because τ ≥ budget.
