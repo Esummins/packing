@@ -195,6 +195,24 @@ def stage_run(a):
     return 0
 
 
+def overlay_side(T, cell):
+    """fold the side files into an IN-MEMORY tree (figures while the runs are in flight): verdicts,
+    roles (grown K', new kept), rows.  Nothing is written.  Returns the number of nodes overlaid."""
+    recs = load_side(cell)
+    n = 0
+    for p, r in recs.items():
+        node = T["nodes"].get(p)
+        if node is None or r["verdict"].startswith("SKIPPED"):
+            continue
+        node["verdict"] = r["verdict"]
+        node["polyclip175"] = {k: r.get(k) for k in ("leaf", "kept", "kept_mb", "k_area", "passes", "n_pieces", "wall_s")}
+        if r.get("roles"):
+            node["roles"], node["kept"], node["invariant"] = r["roles"], r.get("kept"), r.get("invariant")
+            node["clip_passes"], node["rows"], node["row_kill"] = r.get("passes"), r.get("rows"), r.get("row_kill")
+        n += 1
+    return n
+
+
 def stage_status(a):
     recs = load_side(a.cell)
     by = {}
