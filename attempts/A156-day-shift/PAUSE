@@ -1,0 +1,11 @@
+﻿A156 day shift ended (PI's day window; 23:00 stop) (2026-09-08 22:11:32 PDT) -- A156 day shift, Opus owner.
+
+This is the SENTINEL path: every A156 worker (run156.py) checks this file between nodes, so the
+node in flight finishes and is recorded before the worker exits.  Nothing is killed and nothing is
+discarded.  The scaler (scale156.ps1) exits on this file too and launches nothing further.
+
+Scoped to A156 (pausegate.paused(base=...)).  A57's own PAUSE and A137's PAUSE were reported at
+every worker's start and never touched.
+
+To resume: delete THIS file, rebuild the queue with code\mkqueue156.py, then follow the resume
+block of attempts\A57-shadow-trees\PAUSED.md (v4).

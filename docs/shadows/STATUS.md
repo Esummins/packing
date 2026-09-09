@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-08 19:52` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-08 22:23` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -156,10 +156,10 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `A137 clipkills137.jsonl` | 159 | 159 |
 | `A140 exactcore140.jsonl` | 12 | 1 |
 | `A141 polycore_lane_kills.jsonl` | 293 | 293 |
-| `A149 a60_reemit_g0.jsonl` | 32 | 2 |
-| `A149 a60_reemit_g1.jsonl` | 39 | 4 |
-| `A149 a60_reemit_g2.jsonl` | 35 | 5 |
-| `A149 a60_reemit_g3.jsonl` | 25 | 3 |
+| `A149 a60_reemit_g0.jsonl` | 42 | 10 |
+| `A149 a60_reemit_g1.jsonl` | 48 | 12 |
+| `A149 a60_reemit_g2.jsonl` | 45 | 13 |
+| `A149 a60_reemit_g3.jsonl` | 38 | 11 |
 | `A149 a60_reemit_smoke.jsonl` | 1 | 0 |
 | `A149 exact_reemit_m0.jsonl` | 9 | 7 |
 | `A149 exact_reemit_m1.jsonl` | 9 | 6 |
@@ -173,19 +173,19 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `A149 exact_reemit_w6.jsonl` | 27 | 15 |
 | `A149 exact_reemit_w7.jsonl` | 23 | 15 |
 | `A149 poly149.jsonl` | 1 | 0 |
-| `A156 lp156_d1118.jsonl` | 97 | 73 |
-| `A156 lp156_d1119.jsonl` | 95 | 68 |
-| `A156 lp156_d1606L2.jsonl` | 50 | 42 |
+| `A156 lp156_d1118.jsonl` | 132 | 96 |
+| `A156 lp156_d1119.jsonl` | 127 | 90 |
+| `A156 lp156_d1606L2.jsonl` | 93 | 83 |
 | `A158 no158.jsonl` | 66 | 0 |
 | `A158 yescert158.jsonl` | 6 | 0 |
 | `A161 t3_dedup.jsonl` | 98 | 98 |
-| `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 745 | 745 |
-| `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 645 | 645 |
-| `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 32 | 32 |
+| `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
+| `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
+| `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2_D2) -- dead rows only` | 26 | 26 |
 | `A57 tree jsonl (k5_11_interior_L1) -- dead rows only` | 175 | 175 |
 | `A57 tree jsonl (k5_11_interior_L1_D2) -- dead rows only` | 22 | 22 |
-| `A57 tree jsonl (k5_16_interior_G1) -- dead rows only` | 711 | 711 |
+| `A57 tree jsonl (k5_16_interior_G1) -- dead rows only` | 746 | 746 |
 | `A57 tree jsonl (k5_16_interior_G1_D2) -- dead rows only` | 389 | 389 |
 | `A57 tree jsonl (k5_16_interior_L1) -- dead rows only` | 98 | 98 |
 | `A57 tree jsonl (k5_16_interior_L1_D2) -- dead rows only` | 8 | 8 |
@@ -194,17 +194,33 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `ledger superseded_by_backlog_A137.jsonl` | 581 | 581 |
 | `ledger superseded_by_exactcore_A137.jsonl` | 46 | 46 |
 | `ledger superseded_by_exactcore_A149.jsonl` | 93 | 93 |
-| `ledger superseded_by_exactcore_a60_A149.jsonl` | 12 | 12 |
+| `ledger superseded_by_exactcore_a60_A149.jsonl` | 46 | 46 |
 | `ledger superseded_by_tight_core.jsonl` | 70 | 70 |
 
 `*__exall.json` is **not** a kill record (A148's rule: it exists on LOST-KILL / TOO-TIGHT / FAIL too) and is not scanned.  A158's `yescert158.jsonl` rows say `verdict = "KILL"` with `kill = false` and are counted as **not** kills; in particular **`c0_Y0076`'s NO child is NOT a kill** (A158b: the YES child converges at `tau = budget`, `eta = 0`).  A140's `exactcore140.jsonl` kills only where `kills_converged` and the certificate `PASS` -- `l1_148`, `l2_p65_101` and `l2_p65_111` have `kills = true` with `converged = false` and are **not** kills (A124: a non-converged `tau` was never a bound).
 
 ### Records REFUSED -- tree tag unresolved (A137 §C.3)
 
-71 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **71 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **0 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
+103 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **103 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **0 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
 
 | source | id | leaf | why refused | redundant? |
 |---|---|---|---|---|
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0186_D00_D05` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0978_D07_D03` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y1140_D07_D04` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0978_D06_D00` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0978_D06_D04` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0978_D06_D05` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0636_D06_D00` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0636_D06_D02` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0978_D04_D05` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0636_D04_D00` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0636_D04_D02` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0186_D01_D03` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0414_D07_D04` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0414_D07_D05` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0954_D00_D00` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `A137 clipkills137.jsonl` | `k5_11_interior_Y0954_D00_D01` | KILL-BY-LOGIC (pin-clip T5''' at the exact pin core) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `ledger superseded_by_tight_core.jsonl` | `k5_11_interior_Y0300` | T5-prime tight common-inscribed core (A96) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1, k5_11_interior_L1` |
 | `ledger superseded_by_tight_core.jsonl` | `k5_16_interior_Y0299` | T5-prime tight common-inscribed core (A96) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
 | `ledger superseded_by_tight_core.jsonl` | `k5_11_interior_Y0036_D02_D05` | T5-prime tight common-inscribed core (A96) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
@@ -274,6 +290,22 @@ Of the 71 gallery pages the PI reviews, **64 are still ALIVE and 7 are now DEAD*
 | `clipkill certs (attempts/*/certs/**)` | `k5_16_interior_Y0251` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_16_interior_Y0527` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_16_interior_Y0623` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0186_D00_D05` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0186_D01_D03` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0414_D07_D04` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0414_D07_D05` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0636_D04_D00` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0636_D04_D02` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0636_D06_D00` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0636_D06_D02` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0954_D00_D00` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0954_D00_D01` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0978_D04_D05` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0978_D06_D00` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0978_D06_D04` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0978_D06_D05` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0978_D07_D03` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
+| `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y1140_D07_D04` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0041_D02` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_L1_D2` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_16_interior_Y0449` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_L1` |
 
