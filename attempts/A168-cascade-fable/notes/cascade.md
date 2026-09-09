@@ -226,3 +226,47 @@ DEAD(ancestor) without computation, the rest run `polyclip175.make_node` under t
 grown K', kept, rows on the step's walls), shards by S1 subtree, resumable; `apply` folds them into the tree
 (the A168 record kept under `node.a168`), `fig174` overlays them so every page's kept: line shows the polygon
 clip while the runs are in flight.
+
+---
+
+## A176 takeover (Fable lead, 2026-09-09 12:33 ->) -- the same tree on the FIXED library
+
+**Why.**  A173 found a LIVE unsoundness in A171's library (`multibox.py`, fixed in 0c5e6d30 / 13f23204):
+`Bin.radii` cached exact radius bounds keyed on `id(obstacle)`; `normalise` frees each pass's obstacles,
+CPython recycles the address, and a surviving `Bin` could answer a NEW obstacle with the OLD one's bounds --
+wrong in either direction inside the exact dead test.  Obstacles now carry a monotone `uid` and
+`MBox.obstacle` caches by the exact content of K'.  A175's `renorm175` shards ran while the fix was
+landing: their side files `results/polyclip175_l1_104_s*of4.jsonl` are NOT the record (kept read-only, a
+comparison only; `fig174` no longer overlays them); the round-1 relaunches and their launcher loops were
+killed at 12:33 [M].  A168's S3 shards (36268/37312/32084) and A174's coex174 processes do not use
+multibox and were left running.
+
+**A176.1  The library check [M].**  `multibox.py` on disk = 13f23204 (`Obstacle.__slots__` has `uid`;
+`renorm176` asserts it at import).  `tests/test_multibox.py` post-fix: ALL PASS, 70.7 s (budget 120 s),
+record `attempts/A176-cascade-fixedlib/results/test_multibox_postfix.json`.  A171's demo171 and A172's
+report172 replayed on the fixed library into A176's own results (`code/rederive176.py`,
+`results/rederive176.json`): NO cited number changed on BR139/TRH-25 (kept H 0.358392 / B1 0.942803 /
+D 0.072175 at the A172 fixed point; union hull 0.440792 / 0.942803 / 0.088172; K' areas 0.658/0.740 hull
+vs 0.709/0.774 same-pieces vs 0.731/0.799/0.794 fixed point; rows top beta 2 / right beta 1; lane 0) --
+on that node the recycled-address alias never occurred; the writeup owes no correction
+(`attempts/A176-cascade-fixedlib/notes/writeup_corrections.md`).  With the lonely clip on D at TR the same
+node keeps D 0.057384 (new number).
+
+**A176.2  Re-normalisation of the record (`code/renorm176.py`, `code/launch176.ps1`).**  renorm175's
+top-down discipline (parent-intersection propagation [T], DEAD(ancestor) without computation, every other
+node through `polyclip175.make_node` = `Node.normalise(nsub=4, refine=2, mode="poly", kmode="pieces",
+strict_container=False, corners={D,S: TR; B,Bp: BR; T1,T2: TL; L1,L2: BL}, c = 1 + w)` driven on the
+recorded PIECES, then roles168's invariant (strict=False) + OVL, under the 1,500 s wall) with FRESH side
+files `results/renorm176_<cell>_s<k>of<n>.jsonl`; shards by a depth-d subtree key assigned greedily by size
+(l1_104: depth 2, 3738 + 3732 nodes with the three S3 shard files overlaid; l1_153: depth 5, 348 + 344),
+a node whose ancestor sits in another shard is retried after the side files are re-read.  Every record
+carries the absolute pose volume per role before / after (`vol0`, `vol1`) and the role bounding boxes, so
+`renorm176 xcheck` compares node by node with the coordinator's `clipcheck.jsonl` (fixed library, no lonely
+clip, roles re-split from their bounding boxes): weaker here = they killed a node we kept, or a kept
+volume here exceeds theirs.  Launched 12:52 (four processes, BelowNormal, affinity 0xFFFF).
+
+**A176.3  Every NEW node on the fixed polygon + lonely clip.**  `roles168.make_node` now delegates to
+`polyclip175.make_node` by default (the axis-core rule survives as `make_node_legacy` behind
+`A168_LEGACY_CLIP=1`), so cascade168's steps, the coexistence cut and coex174's piece cut build every new
+node on the library's clip without the cascade175 router.  Smoke: the l1_153 root through the new default,
+kept H 1.000, 6.5 s [M].
