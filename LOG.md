@@ -7052,3 +7052,38 @@ t3_dedup.jsonl,t3_table.json,checkcl.json,cert_manifest.json,eligible.json,nodep
 `ledger.md` fold-ins and one sentence in `docs/residue_ledger.md` §1. One python at BelowNormal /
 affinity `0xFFFF` throughout on a box already running 16 lab processes (counted and waited twice);
 ~1.4 CPU-h of the 3 CPU-h cap.
+
+## 2026-09-08 (A161 continuation, +3 CPU-h) — the retry, A141's leaf without the chord row, and a correction
+
+**A correction first.** The A161 entry above claims 90 new dead nodes. It compared against A131,
+A141 and A142 only. The authority is the collector `docs/shadows/status_gallery.py` builds STATUS.md
+from — 44 sources, 5,474 records, 4,994 kills, **3,173 distinct node ids already dead**. Against
+that set A161's 105 kill nodes are **27 genuinely new** (23 trump5, 4 k5_16, all level 1;
+`k5_16_interior_Y0842` among them). 62 of the 78 already-dead ones are dead in A57's own tree jsonl:
+A161's population came from A141's `t2_a5760` snapshot, and A149's and A156's re-solves have landed
+since. **Build the population from the collector, not from a campaign snapshot.**
+
+**T5 — the 126 UNDECIDED pairs.** A longer budget alone buys nothing: at 60 s/pair and a 30,000-box
+budget, 12 of 12 still ended `time budget exhausted`. What matters is WHICH guard line — on Y0842
+the cover blows 40,000 boxes at `y_L = 0.9167` and closes in 163 leaves at `y_L = 0.7917`. Trying the
+top 6 ranked offsets: **127 pairs re-run, 13 new KILLs**, 22 closed as no-go by an exact free
+OUTSIDE pose, 92 still UNDECIDED. Also landed: budget exhaustion in `chordlane.cover` now folds the
+remaining stack into the open set (`leaves + open` still tiles the root) so the pairwise-overlap test
+can still certify `LANE <= 1`; on these cells it certifies nothing — the open sets are 600-800 boxes.
+
+**T6 — A141's own leaf with the exact separating-axis test, and why it is the useful negative.**
+Over 3,048 of A141's 3,103 early-exit cells (ALL usable slots), `box_misses_cell_exact` gives `M = 0`
+on 1,169 and **flips 105** cells where A141 recorded `M >= 1`. Run without the chord row and the band
+prune, the lane cover then closed on **none** of 220 `M = 0` cells: **zero kills.** So the exact SAT
+test is necessary (it is what made Y0842's `M` go 1 -> 0) but not sufficient — without the band prune
+the whole wall row of poses is free and spread, `LANE >= 2` is not excludable, and **the chord row is
+what does the killing in every A161 certificate.** `certs141x/` is empty by that result;
+`check141x.py` (A141's `check_lane_cert` with `leaf_misses` widened for the new `axis` reason code)
+is validated 2/2 against A141's own certificates.
+
+**Files.** `attempts/A161-chord-lane/code/{run141x,check141x,overlap161}.py`,
+`results/{t5_retry,t6_mpass,t6_a141x}.jsonl`, `results/overlap161.json`, `notes/t3_table.md` §T5-T7,
+109 certificates (all PASS `checkcl.py`), and the correction paragraphs appended to
+`attempts/A57-shadow-trees/PAUSED.md`, `attempts/A60-trump5-campaign/notes/ledger.md` and
+`docs/residue_ledger.md` §1. One python at BelowNormal / affinity `0xFFFF` throughout on a box at
+16-17 lab processes; ~1.9 CPU-h of the +3 CPU-h extension.

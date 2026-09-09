@@ -1,0 +1,29 @@
+A161 continuation: retry (+13 kills), A141's leaf without the chord row (0), CORRECTED overlap (27 new)
+
+CORRECTION to the first A161 report: "90 new dead nodes" compared against
+A131/A141/A142 only.  Against the collector docs/shadows/status_gallery.py builds
+STATUS.md from (44 sources, 4,994 kills, 3,173 nodes already dead), A161's 105
+kill nodes are 27 genuinely NEW (23 trump5, 4 k5_16, all level 1, Y0842 among
+them).  62 of the 78 already-dead ones are dead in A57's own tree jsonl since
+A149/A156's re-solves; A161's population came from A141's t2_a5760 snapshot.
+Build the population from the collector next time.
+
+T5 -- the 126 UNDECIDED pairs.  A longer budget alone buys nothing (12/12 still
+time out at 60 s/pair with 30,000 boxes).  WHICH guard line is tried decides it:
+on Y0842 the cover blows 40,000 boxes at y_L = 0.9167 and closes in 163 leaves at
+y_L = 0.7917.  Trying the top 6 ranked offsets: 127 pairs re-run, 13 new KILLs,
+22 closed as no-go by an exact free OUTSIDE pose, 92 still UNDECIDED.
+chordlane.cover now folds the remaining stack into the open set on budget
+exhaustion, so the pair test can still certify LANE <= 1 (it does not here).
+
+T6 -- A141's OWN leaf with the exact separating-axis test, over 3,048 of its
+3,103 early-exit cells: M = 0 on 1,169, and 105 cells FLIP from A141's M >= 1 to
+M = 0.  But with no chord row and no band prune the lane cover closed on NONE of
+220 M = 0 cells -- zero kills.  The exact SAT test is necessary (it is what made
+Y0842 close) but not sufficient: the chord row does the killing.  check141x.py
+(A141's check_lane_cert, leaf_misses widened for the new `axis` reason code) is
+validated 2/2 against A141's own certificates.
+
+109/109 A161 certificates PASS checkcl.py.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>

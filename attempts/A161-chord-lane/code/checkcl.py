@@ -191,17 +191,65 @@ def outside_container(b, s=S_RAT):
 
 
 def always_overlap(b1, b2):
-    """SOUND: every pose of b1 and every pose of b2 give overlapping squares.  A unit square
-    contains the open disc of radius 1/2 about its centre, so it is enough that the FARTHEST two
-    centres are less than 1 apart.  (Weaker than A118's octagon test; the checker only needs a
-    sound test, and every certificate this attempt emits has lane_out = 0 anyway.)"""
+    """SOUND: every pose of b1 and every pose of b2 give overlapping squares.
+
+    Two independent tests, the first exact.
+      (a) DISC.  A unit square contains the open disc of radius 1/2 about its centre, so it is
+          enough that the FARTHEST two centres are less than 1 apart (exact Fractions).
+      (b) SAT.  Along an edge normal `n` of square 1 the separating gap is
+          |n.(c2 - c1)| - 1/2 - (|cos D| + |sin D|)/2 with `D` the relative tilt; bounding the
+          projection ABOVE and (|cos D| + |sin D|) BELOW over the two boxes gives a sound upper
+          bound on the gap, and a negative bound for BOTH normal families means no separating axis
+          exists for any pose pair.  Re-implemented here from A118 sec 1.2(ii) in floats with a
+          conservative epsilon, as A141's own checker does.
+    """
     d2 = Fr(0)
     for (ax, bx) in ((Fr(b1[0]), Fr(b2[0])), (Fr(b1[0]), Fr(b2[1])),
                      (Fr(b1[1]), Fr(b2[0])), (Fr(b1[1]), Fr(b2[1]))):
         for (ay, by) in ((Fr(b1[2]), Fr(b2[2])), (Fr(b1[2]), Fr(b2[3])),
                          (Fr(b1[3]), Fr(b2[2])), (Fr(b1[3]), Fr(b2[3]))):
             d2 = max(d2, (ax - bx) ** 2 + (ay - by) ** 2)
-    return d2 < 1
+    if d2 < 1:
+        return True
+    lo, hi = float(b2[4]) - float(b1[5]), float(b2[5]) - float(b1[4])
+    if math.ceil(lo / 90.0) <= hi / 90.0 + 1e-12:
+        m = 1.0
+    else:
+        m = min(_csf(lo), _csf(hi))
+    lim = 0.5 + 0.5 * m
+    D = (float(b2[0]) - float(b1[1]), float(b2[1]) - float(b1[0]),
+         float(b2[2]) - float(b1[3]), float(b2[3]) - float(b1[2]))
+    eps = 1e-12
+    return (_max_abs_proj(D, float(b1[4]), float(b1[5])) - lim < -eps
+            and _max_abs_proj(D, float(b2[4]), float(b2[5])) - lim < -eps)
+
+
+def _csf(deg):
+    r = math.radians(deg)
+    return abs(math.cos(r)) + abs(math.sin(r))
+
+
+def _gmaxf(alpha, beta):
+    """max over psi in [alpha, beta] (radians) of max(|cos psi|, |sin psi|)."""
+    if math.ceil(alpha / (math.pi / 2)) <= beta / (math.pi / 2) + 1e-15:
+        return 1.0
+    return max(max(abs(math.cos(alpha)), abs(math.sin(alpha))),
+               max(abs(math.cos(beta)), abs(math.sin(beta))))
+
+
+def _max_abs_proj(D, th0, th1):
+    """max over d in the interval box D and the two edge normals of a square with tilt in
+    [th0, th1] (degrees) of |n . d|; the max over the box is at a corner."""
+    a0, a1 = math.radians(th0), math.radians(th1)
+    best = 0.0
+    for dx in (D[0], D[1]):
+        for dy in (D[2], D[3]):
+            R = math.hypot(dx, dy)
+            if R == 0.0:
+                continue
+            phi = math.atan2(dy, dx)
+            best = max(best, R * _gmaxf(a0 - phi, a1 - phi))
+    return best
 
 
 # ===================================================================== the cover skeleton

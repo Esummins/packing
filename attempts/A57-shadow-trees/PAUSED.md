@@ -566,3 +566,32 @@ structural gate worth remembering (the leaf needs TWO pins on the wall of the sl
 124 pairs are UNDECIDED (the outside cover did not close inside a 10 s/pair budget) over 88 nodes;
 one NEAR-MISS (`k5_16_interior_Y0143_D01 / BL(1,0)`, `beta = 1`, `LANE_out = 1`, `M = 0`).
 Nothing under `attempts/A57-shadow-trees/` was modified: these are records, not re-solves.
+
+### A161 continuation (2026-09-08, +3 CPU-h) — retry, A141's leaf, and a CORRECTION to the count above
+
+**CORRECTION.** The fold-in above says "66 of the 70 k5_16 nodes are new". That compared against
+A131/A141/A142 only. Against the full dead set the collector `docs/shadows/status_gallery.py` builds
+STATUS.md from (44 sources, 4,994 kills, 3,173 distinct node ids dead), **A161's A57 half contributes
+4 genuinely new dead k5_16 nodes, not 66**: `k5_16_interior_Y0150`, `k5_16_interior_Y0727`,
+`k5_16_interior_Y0842` (the PI's node) and `k5_16_interior_Y1146`. The other 68 were already
+recorded dead — 62 of them in A57's own tree jsonl (A149's and A156's re-solves landed after the
+A141 `t2_a5760` snapshot A161's population was built from). Lesson for the next pass: build the
+population from the collector, not from a campaign snapshot. Numbers: `results/overlap161.json`,
+`notes/t3_table.md` §T7.
+
+**Retry of the 126 UNDECIDED pairs (T5).** A longer budget alone buys nothing — at 60 s/pair with a
+30,000-box budget every one of the first 12 still ended `time budget exhausted`. What matters is
+WHICH guard line is tried: on Y0842 the cover blows a 40,000-box budget at `y_L = 0.9167` and closes
+in 163 leaves at `y_L = 0.7917`. Trying the top 6 ranked offsets: **127 pairs re-run, 13 new KILLs**
+(`results/t5_retry.jsonl`, certificates in `certs/`, all PASS `checkcl.py` — 109/109 overall), 22
+pairs closed as no-go by an exact free OUTSIDE pose, 92 still UNDECIDED.
+
+**A141's own leaf with the exact separating-axis test (T6), the useful negative.** Over 3,048 of the
+3,103 A141 early-exit cells (all usable slots), `box_misses_cell_exact` gives `M = 0` on 1,169 and
+**flips 105** cells where A141 had recorded `M >= 1` — including Y0842's, which is what made it
+close. But run WITHOUT the chord row and the band prune, the lane cover closed on **none** of 220
+`M = 0` cells tried (open sets 600-800 boxes, spread): **zero new kills under A141's leaf alone.**
+The exact SAT test is necessary but not sufficient — the chord row does the essential work.
+`code/{run141x,check141x}.py`, `results/{t6_mpass,t6_a141x}.jsonl`; `check141x.py` is A141's own
+`check_lane_cert` with `leaf_misses` widened for the new `axis` reason code, validated 2/2 against
+A141's own certificates.

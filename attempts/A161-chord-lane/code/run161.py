@@ -98,8 +98,10 @@ def main():
     ap.add_argument("--maxdepth", type=int, default=40)
     ap.add_argument("--nlines", type=int, default=48)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--pairs_file", default="", help="json list of [nid, slot] to run instead of the full population")
     ap.add_argument("--cap_s", type=float, default=4200.0, help="wall-clock cap for this shard")
     ap.add_argument("--pair_s", type=float, default=45.0, help="per-pair cover budget")
+    ap.add_argument("--nlines_try", type=int, default=1, help="how many ranked guard lines to try")
     a = ap.parse_args()
     prog = a.progress or (a.out.rsplit(".", 1)[0].replace("results", "progress") + ".json")
 
@@ -109,6 +111,9 @@ def main():
         if not b.get("covered_by_node"):
             recs.setdefault(b["nid"], b)
     pairs, killed = eligible()
+    if a.pairs_file:
+        want = {tuple(x) for x in json.load(open(a.pairs_file, encoding="utf-8"))}
+        pairs = [p for p in pairs if (p["nid"], p["slot"]) in want]
     k, n = (int(v) for v in a.shard.split("/"))
     pairs = [p for idx, p in enumerate(pairs) if idx % n == k and p["nid"] in recs]
     done = set()
@@ -148,7 +153,8 @@ def main():
             else:
                 r2, cert = CL.run_slot(rec, p["slot"], rng=rng, sample=a.sample,
                                        max_open=a.maxopen, max_depth=a.maxdepth,
-                                       n_lines=a.nlines, budget_s=a.pair_s)
+                                       n_lines=a.nlines, budget_s=a.pair_s,
+                                       cover_budget=a.nlines_try)
                 row.update({kk: vv for kk, vv in r2.items() if kk != "scan"})
                 row["n_scan"] = len(r2.get("scan") or [])
                 if cert is not None:

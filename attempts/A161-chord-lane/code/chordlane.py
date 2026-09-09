@@ -84,6 +84,7 @@ HALF = Fr(1, 2)
 SQRT2_LO = GL.SQRT2_LO
 SQRT2_HI = SQRT2_LO + Fr(1, 10 ** 24)
 LDEN = 10 ** 6                            # the rational grid the swept line offsets live on
+PAIR_CAP = 4000                           # max open boxes the O(n^2) pair test will accept
 
 # wall-adjacent slot cells and the orientation of their wall guard line
 WALL_ORIENT = {}
@@ -235,13 +236,19 @@ def cover(root, cell, conds, line, s=S0, skip=None, depth0=0, max_depth=40, max_
     stack = [("", root)]
     depth = 0
     nseen = 0
+    why_stop = None
     while stack:
         p, b = stack.pop()
         depth = max(depth, len(p))
         nseen += 1
         if deadline is not None and (nseen & 511) == 0 and time.time() > deadline:
-            return dict(ok=False, lane=None, leaves=leaves, open=[], depth=depth,
-                        reason="time budget exhausted")
+            # SOUND fallback: `leaves + open_ + the rest of the stack` still TILES the root, so the
+            # pairwise-always-overlap test below can still certify LANE <= 1 even though no
+            # complete DISCHARGE was found.  (LANE = 0 needs an empty open set, so it is lost.)
+            open_.extend([(p, b)] + stack)
+            stack = []
+            why_stop = "time budget exhausted"
+            break
         d = _discharge_out(b, cell, conds, line, s, skip, exact)
         if d is not None:
             why, det = d
@@ -250,17 +257,24 @@ def cover(root, cell, conds, line, s=S0, skip=None, depth0=0, max_depth=40, max_
         if len(p) >= max_depth:
             open_.append((p, b))
             if len(open_) > max_open:
-                return dict(ok=False, lane=None, leaves=leaves, open=[], depth=depth,
-                            reason="open budget exhausted")
+                open_.extend(stack)
+                stack = []
+                why_stop = "open budget exhausted"
+                break
             continue
         b0, b1 = P.split_box(b)
         stack.append((p + "0", b0))
         stack.append((p + "1", b1))
         if len(stack) + len(open_) > 8 * max_open:
-            return dict(ok=False, lane=None, leaves=leaves, open=[], depth=depth,
-                        reason="stack budget exhausted")
+            open_.extend(stack)
+            stack = []
+            why_stop = "stack budget exhausted"
+            break
     if not open_:
         return dict(ok=True, lane=0, leaves=leaves, open=[], depth=depth)
+    if len(open_) > PAIR_CAP:
+        return dict(ok=False, lane=None, leaves=leaves, open=[], depth=depth,
+                    reason=(why_stop or "open set too large for the pair test"))
     bxs = [b for (_, b) in open_]
     BAD = ~LANE.L.pairs_always_overlap_matrix(bxs)
     if BAD.any():
@@ -272,7 +286,8 @@ def cover(root, cell, conds, line, s=S0, skip=None, depth0=0, max_depth=40, max_
     lane = 1 if not BAD.any() else None
     return dict(ok=False, lane=lane, leaves=leaves,
                 open=[dict(path=p, box=P.box_json(b)) for (p, b) in open_], depth=depth,
-                reason=("LANE<=1" if lane == 1 else "undischarged leaves"))
+                reason=("LANE<=1 (pair test on the open set; cover stopped: %s)" % (why_stop or "budget")
+                        if lane == 1 else (why_stop or "undischarged leaves")))
 
 
 def lane_out(cell, conds, line, s=S0, max_depth=34, max_open=2500, deadline=None):
@@ -435,6 +450,7 @@ def run_slot(rec, slot, rng=None, sample=20000, max_open=2500, max_depth=34, n_l
 
     # ---- sweep the wall lines: exact beta, then the sampled outside screen (one pose pool)
     best = None
+    ranked = []
     scan = []
     boxes = [c.box for c in conds]
     for orient in orients:
@@ -462,6 +478,7 @@ def run_slot(rec, slot, rng=None, sample=20000, max_open=2500, max_depth=34, n_l
             # (that is what makes the cover's `band` prune close), then the smallest beta
             key = (sm.get("outside_free", 10 ** 9), -(sm.get("band_margin_min_free") or -9.0),
                    beta)
+            ranked.append((key, orient, ln, rhs, beta, terms, sm))
             if best is None or key < best[0]:
                 best = (key, orient, ln, rhs, beta, terms, sm)
     row["scan"] = scan
@@ -479,15 +496,43 @@ def run_slot(rec, slot, rng=None, sample=20000, max_open=2500, max_depth=34, n_l
         row["retire_witness"] = sm.get("two_crowd_outside") or sm.get("outside_free_pose")
         return row, None
 
-    # ---- the outside lane cover
-    cov = lane_out(cell, conds, ln, s=s, max_depth=max_depth, max_open=max_open,
-                   deadline=dl)
+    # ---- the outside lane cover.  WHICH line is tried matters far more than how long: on
+    # Y0842 the cover blows a 40,000-box budget at y_L = 0.9167 and closes in 163 leaves at
+    # y_L = 0.7917.  So try the top `cover_budget` ranked offsets, each with its own slice of
+    # the pair budget, and keep the first that closes.
+    ranked.sort(key=lambda z: z[0])
+    tries, cov, chosen = [], None, None
+    kmax = max(1, cover_budget)
+    per = None if budget_s is None else max(3.0, budget_s / float(kmax))
+    seen_off = set()
+    for cand in ranked:
+        if len(tries) >= kmax:
+            break
+        if str(cand[2].off) in seen_off:
+            continue
+        seen_off.add(str(cand[2].off))
+        if cand[4] + M >= 2 or (cand[6].get("outside_free") or 0) > 0:
+            continue
+        c = lane_out(cell, conds, cand[2], s=s, max_depth=max_depth, max_open=max_open,
+                     deadline=(None if per is None else time.time() + per))
+        tries.append(dict(off=str(cand[2].off), lane=c["lane"], leaves=len(c["leaves"]),
+                          open=len(c["open"]), reason=c.get("reason")))
+        if c["lane"] is not None and (cov is None or c["lane"] < cov["lane"]):
+            cov, chosen = c, cand
+            if c["lane"] == 0:
+                break
+    row["line_tries"] = tries
+    if cov is None:
+        row.update(lane_out=None, cover_reason=(tries[-1]["reason"] if tries else "no candidate"))
+        row["verdict"] = "UNDECIDED"
+        return row, None
+    key, orient, ln, rhs, beta, terms, sm = chosen
+    sm = {k: v for k, v in sm.items() if k != "per_core"}
+    row.update(line=ln.to_json(), rhs=str(rhs), rhs_float=float(rhs), beta=beta,
+               minchords=terms, sample=sm)
     row.update(lane_out=cov["lane"], cover_leaves=len(cov["leaves"]),
                cover_open=len(cov["open"]), cover_depth=cov["depth"],
                cover_reason=cov.get("reason"))
-    if cov["lane"] is None:
-        row["verdict"] = "UNDECIDED"
-        return row, None
     total = beta + cov["lane"] + M
     row["total"] = total
     row["verdict"] = "KILL" if total <= 1 else ("NEAR-MISS" if total == 2 else "UNDECIDED")

@@ -822,3 +822,25 @@ Certificates `attempts/A161-chord-lane/certs/cl_c0_*.json` (SHA-256 in
 margin, the band threshold, cover completeness and the arithmetic; it imports only A132's
 `vertex_ok` and A57's `caselp` from the emitter's world). Nothing under
 `attempts/A60-trump5-campaign/` was modified.
+
+### A161 continuation (2026-09-08) — CORRECTED count: 23 genuinely new trump5 dead nodes
+
+**CORRECTION.** The entry above says "24 of the 26 are new", compared against A131/A142 only.
+Against the full dead set the collector `docs/shadows/status_gallery.py` builds STATUS.md from
+(44 sources, 4,994 kills), the trump5 half contributes **23 genuinely new dead nodes** — the A60
+campaign is where nearly all of A161's residual value sits, because trump5's alive set has not been
+re-solved the way A57's has:
+
+`c0_Y0075, c0_Y0174, c0_Y0475, c0_Y0984, c0_Y0990, c0_Y0991, c0_Y0992, c0_Y1080, c0_Y1083,
+c0_Y1084, c0_Y1085, c0_Y1087, c0_Y1088, c0_Y1091, c0_Y1092, c0_Y1093, c0_Y1094, c0_Y1095,
+c0_Y1097, c0_Y1098, c0_Y1099, c0_Y1100, f1_L23_0030`
+
+by slot: BR(0,1) 20, TL(0,0) 2, BL(0,2) 1; all level 1. 20 of the 23 have `beta = 0` — the
+conditioned square is itself the one square the chord row allows across the wall line, so the slot
+is singly met by `H` alone. Certificates in `attempts/A161-chord-lane/certs/cl_c0_*.json` and
+`cl_f1_*.json`, 109/109 PASS `code/checkcl.py`; overlap in `results/overlap161.json`.
+
+Also recorded (see `notes/t3_table.md` §T5-T7): the retry of the UNDECIDED pairs at 6 guard lines
+each added 13 kills repo-wide; and A141's own leaf re-run with the exact separating-axis test flips
+105 `M` values from `>= 1` to 0 across 3,048 early-exit cells but yields **zero** kills on its own —
+without the chord row the lane cover never closes. The chord row, not the SAT fix, is what kills.
