@@ -7743,3 +7743,52 @@ pass + ~3,700 s of diagnostics, checking and witness search ≈ 3.3 CPU-h of the
   results/*}`; appends to `docs/budget.md` §D.9, `docs/residue_ledger.md` §1,
   `attempts/A57-shadow-trees/PAUSED.md` (A170 addendum + §E resume line 6),
   `attempts/A60-trump5-campaign/notes/ledger.md`, `attempts/A115-k0-corner-rows/notes/t6_report.md`.
+## 2026-09-09 — A172-multibox-pieces (Opus engineer) — done-success
+- **Why (PI finding on A171)**: `MBox.rebuild()` recomputed `K'(B)` from `union_box()` — the smallest
+  axis box × tilt hull containing the surviving pieces. A hull FORGETS a clip that removes different
+  slabs in different tilt sub-bins, so `K'` barely grew on the side opposite the clip and the cascade
+  that is the whole point of the fixed-point loop (a larger `K'(B)` clips the other boxes harder)
+  barely bit.
+- **The fix** (`attempts/A171-multibox-invariant/code/multibox.py`, public API unchanged): `K'(B)` is
+  the EXACT rational intersection of the PER-PIECE `K'` — `polycore.build` on each piece's own Box
+  (its six floats rounded OUTWARD with `nextafter`, and `t_lo/t_hi` of the degree endpoints asserted
+  to contain the piece's own rational t-sub-bin, so the Box handed to A132 CONTAINS the piece),
+  Sutherland–Hodgman intersection in `Fraction`s, simplification that only ever DELETES a vertex of a
+  convex polygon (that cuts a triangle OFF — inward, never outward), a final inward shrink about the
+  centroid + 1e-9-grid rounding with A132's own retry ladder — and then **every vertex re-certified
+  by `polycore.vertex_ok` against EVERY piece**. That certification, not the construction, is the
+  proof: a point inside every pose of every piece is inside every surviving pose, and `Q(c,θ)` is
+  convex, so the hull of certified vertices is inside every pose. The exact axis core follows A135's
+  pattern about the intersection's centroid (closed form `a = min_e (b_e − n_e·k)/(|n_e·e1|+|n_e·e2|)`
+  as the search, the four corners certified per piece as the proof, never allowed to regress below
+  A135's core on the union hull). `normalise(..., kmode="union")` and `MBox.union_pc()` keep A171's
+  union-hull `K'` as the automatic fallback (taken if no rounding certifies) and as the diagnostic;
+  per-piece cores are cached per piece across the passes. Figure legend now reads `solid = K'(B) =
+  intersection of per-piece K', certified`.
+- **The table** (A168's S2 node `BR139/TRH-25`, `nsub` 4 / `refine` 3, `attempts/A172-multibox-pieces/results/report172.json`):
+
+  | | union hull (A171) | per-piece, SAME pieces | per-piece fixed point (A172) |
+  |---|---|---|---|
+  | `K'` area H / B1 / D | 0.658006 / 0.798164 / 0.740065 | **0.709336 / 0.799343 / 0.774356** | 0.730797 / 0.799343 / 0.793731 |
+  | kept H / B1 / D | 0.440792 / 0.942803 / 0.088172 | — | **0.358392 / 0.942803 / 0.072175** |
+  | axis `a` H / B1 / D | 0.379275 / 0.435386 / 0.405989 | — | 0.388134 / 0.435386 / 0.420528 |
+  | pieces, passes, invariant | 26/32/14, 2, PASS | 0 uncertified vertices | 22/32/12, 2, PASS |
+
+  i.e. the hull was hiding a quarter of what the clip had already proved: another **19 % of H's
+  surviving box and 18 % of D's** go, on top of A171's 56 %/91 %. Consumers move the same way and no
+  further: `beta = 2` top / `beta = 1` right (A168's own rows) unchanged, `lane(TR unit cell) = 0` in
+  **33** discharged leaves instead of 38.
+- **Tests** (`tests/test_multibox.py`, now 5 cases, **53.7 s** of the 120 s budget, was 11.3 s): new
+  case (e) — the per-piece `K'` is `>=` the union-hull `K'` on the same pieces and matches the PI's
+  numbers to 4.8e-7, the new fixed point keeps strictly fewer poses for H and D, `k_source ==
+  "pieces"` on every box; and a `k_uncert` counter wired into (b), (c), (d) too, so **every vertex of
+  every `K'` in every test is re-certified against every piece — 0 failures** (10 random 2–6-box
+  nodes included). Every pre-existing assertion still passes unchanged.
+- **Cost, stated plainly**: the S2 node's `normalise` goes 2.1 s → 13.1 s (one `polycore.build` and
+  `vertex_ok` sweep per piece per rebuild, cached). `kmode="union"` is the lever for a wall-time-bound
+  sweep; anything about to be drawn, priced, covered or handed to an LP should use the default.
+- Files: `attempts/A172-multibox-pieces/{BRIEF.md,code/{probe172,report172}.py,results/report172.json,
+  logs/}`; edits to `attempts/A171-multibox-invariant/{code/multibox.py,tests/test_multibox.py,
+  notes/usage.md,results/{demo171,test_multibox}.json,figs/*.svg}`; registry row; this entry; one
+  paragraph in `docs/residue_ledger.md` §6. Two BelowNormal processes at affinity 0xFFFF, box ceiling
+  16 counted before every launch (6 other lab pythons live: A168, A169, A136); ~90 CPU-s total.

@@ -1,6 +1,6 @@
 {
  "ok": true,
- "seconds": 11.914719104766846,
+ "seconds": 53.73005175590515,
  "s": "969271/250000",
  "a168_source": "attempts/A168-cascade-fable/results/v0_union_boxes/cascade168.jsonl, cell l1_153, node BR139/TRH-25, step S2, verdict ALIVE(geometry)",
  "results": [
@@ -19,16 +19,16 @@
    "ok": true,
    "cores_disjoint": true,
    "core_meet_before": {
-    "A": 0.34375,
-    "B": 0.33225
+    "A": 0.34425,
+    "B": 0.3325
    }
   },
   {
    "test": "a2.clip_shrinks",
    "ok": true,
    "kept": {
-    "A": 0.708642,
-    "B": 0.70834
+    "A": 0.706182,
+    "B": 0.706636
    }
   },
   {
@@ -36,17 +36,17 @@
    "ok": true,
    "failures": 0,
    "core_meet_after": {
-    "A": 0.053,
-    "B": 0.05125
+    "A": 0.05,
+    "B": 0.051
    },
    "detail": {
     "before": {
-     "A": 0.34375,
-     "B": 0.33225
+     "A": 0.34425,
+     "B": 0.3325
     },
     "kept": {
-     "A": 0.7086424453349627,
-     "B": 0.7083401049711554
+     "A": 0.7061821708690684,
+     "B": 0.7066362441841404
     }
    }
   },
@@ -73,7 +73,8 @@
    "escape": 0,
    "not_core": 0,
    "k_overlap": 0,
-   "core_meet": 0
+   "core_meet": 0,
+   "k_uncert": 0
   },
   {
    "test": "c.invariant_fails_before",
@@ -108,9 +109,9 @@
    "pair_meet_before": {
     "H->B1": 0.6185,
     "H->D": 0.0,
-    "B1->H": 0.0008,
+    "B1->H": 0.0003,
     "B1->D": 0.0,
-    "D->H": 0.5995,
+    "D->H": 0.6,
     "D->B1": 0.0
    }
   },
@@ -118,9 +119,9 @@
    "test": "c.invariant_passes_after",
    "ok": true,
    "kept": {
-    "H": 0.440792,
+    "H": 0.358392,
     "B1": 0.942803,
-    "D": 0.088172
+    "D": 0.072175
    },
    "checks": {
     "K-CONTAINER": true,
@@ -129,7 +130,7 @@
     "POSE-CONTAINER-STRICT": true,
     "CLIP-FIXPOINT": true
    },
-   "seconds": 2.43
+   "seconds": 8.6
   },
   {
    "test": "c.sampled_clean_after",
@@ -138,7 +139,8 @@
    "escape": 0,
    "not_core": 0,
    "k_overlap": 0,
-   "core_meet": 6145,
+   "core_meet": 7390,
+   "k_uncert": 0,
    "detail": {
     "before": {
      "checks": {
@@ -151,9 +153,9 @@
      "pair_meet": {
       "H->B1": 0.6185,
       "H->D": 0.0,
-      "B1->H": 0.0008,
+      "B1->H": 0.0003,
       "B1->D": 0.0,
-      "D->H": 0.5995,
+      "D->H": 0.6,
       "D->B1": 0.0
      },
      "diagnostics": {
@@ -165,7 +167,7 @@
       "B1": {
        "drawn": 4000,
        "escape_frac": 0.05175,
-       "core_meet_frac": 0.00025
+       "core_meet_frac": 0.0
       },
       "D": {
        "drawn": 4000,
@@ -203,25 +205,25 @@
     },
     "after": {
      "kept": {
-      "H": 0.4407921106984375,
+      "H": 0.3583916794069419,
       "B1": 0.9428030096899332,
-      "D": 0.0881720738770686
+      "D": 0.07217486590545714
      },
      "diagnostics": {
       "H": {
        "drawn": 4000,
        "escape_frac": 0.0,
-       "core_meet_frac": 0.341
+       "core_meet_frac": 0.4715
       },
       "B1": {
        "drawn": 4000,
        "escape_frac": 0.0,
-       "core_meet_frac": 0.0
+       "core_meet_frac": 0.0005
       },
       "D": {
        "drawn": 4000,
        "escape_frac": 0.0,
-       "core_meet_frac": 0.27875
+       "core_meet_frac": 0.26625
       }
      },
      "sliver_area": {
@@ -230,9 +232,9 @@
       "D": 0.020389059408317922
      },
      "pieces": {
-      "H": 26,
+      "H": 22,
       "B1": 32,
-      "D": 14
+      "D": 12
      }
     }
    }
@@ -247,6 +249,7 @@
    "not_core": 0,
    "k_overlap": 0,
    "core_meet": 54,
+   "k_uncert": 0,
    "invariant_fail": 0,
    "detail": [
     {
@@ -382,6 +385,142 @@
      "k_overlap": 0
     }
    ]
+  },
+  {
+   "test": "e1.piece_K_beats_union_hull",
+   "ok": true,
+   "union_area": {
+    "H": 0.658006,
+    "B1": 0.798164,
+    "D": 0.740065
+   },
+   "piece_area": {
+    "H": 0.709336,
+    "B1": 0.799343,
+    "D": 0.774356
+   },
+   "worst_dev": 4.78e-07,
+   "uncertified_vertices": 0,
+   "nv": {
+    "H": 16,
+    "B1": 16,
+    "D": 16
+   }
+  },
+  {
+   "test": "e1.kept_matches_A171",
+   "ok": true,
+   "kept_union": {
+    "H": 0.440792,
+    "B1": 0.942803,
+    "D": 0.088172
+   }
+  },
+  {
+   "test": "e2.new_fixed_point_keeps_fewer",
+   "ok": true,
+   "kept_new": {
+    "H": 0.358392,
+    "B1": 0.942803,
+    "D": 0.072175
+   },
+   "kept_old": {
+    "H": 0.440792,
+    "B1": 0.942803,
+    "D": 0.088172
+   },
+   "passes": 2,
+   "invariant": true,
+   "K_area": {
+    "H": 0.730797,
+    "B1": 0.799343,
+    "D": 0.793731
+   },
+   "pieces": {
+    "H": 22,
+    "B1": 32,
+    "D": 12
+   },
+   "seconds": 8.71
+  },
+  {
+   "test": "e3.K_source_is_pieces",
+   "ok": true,
+   "k_source": {
+    "H": "pieces",
+    "B1": "pieces",
+    "D": "pieces"
+   },
+   "shrink": {
+    "H": "0",
+    "B1": "0",
+    "D": "0"
+   }
+  },
+  {
+   "test": "e4.every_vertex_certified",
+   "ok": true,
+   "union": {
+    "drawn": 12000,
+    "escape": 0,
+    "not_core": 0,
+    "k_overlap": 0,
+    "core_meet": 2468,
+    "k_uncert": 0
+   },
+   "pieces": {
+    "drawn": 12000,
+    "escape": 0,
+    "not_core": 0,
+    "k_overlap": 0,
+    "core_meet": 2897,
+    "k_uncert": 0
+   },
+   "detail": {
+    "union_area": {
+     "H": 0.6580063591119014,
+     "B1": 0.7981641827965547,
+     "D": 0.7400651996431407
+    },
+    "piece_area": {
+     "H": 0.7093355218158789,
+     "B1": 0.7993431033806593,
+     "D": 0.774355590219619
+    },
+    "kept_union": {
+     "H": 0.4407921106984375,
+     "B1": 0.9428030096899332,
+     "D": 0.0881720738770686
+    },
+    "kept_pieces": {
+     "H": 0.3583916794069419,
+     "B1": 0.9428030096899332,
+     "D": 0.07217486590545714
+    },
+    "K_area_new": {
+     "H": 0.7307967898802019,
+     "B1": 0.7993431033806644,
+     "D": 0.793731135998641
+    },
+    "passes": 2,
+    "diagnostics": {
+     "H": {
+      "drawn": 4000,
+      "escape_frac": 0.0,
+      "core_meet_frac": 0.4715
+     },
+     "B1": {
+      "drawn": 4000,
+      "escape_frac": 0.0,
+      "core_meet_frac": 0.0005
+     },
+     "D": {
+      "drawn": 4000,
+      "escape_frac": 0.0,
+      "core_meet_frac": 0.26625
+     }
+    }
+   }
   }
  ]
 }

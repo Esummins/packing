@@ -72,6 +72,13 @@ at others still carries a pose of the piece.
   intersection over fewer poses), which clips the other boxes harder.  That cascade is the whole
   point -- it is what A165/A168 skipped.
 
+  K'(B) IS BUILT FROM THE PIECES, NOT FROM THEIR HULL (A172).  The first version of this module
+  rebuilt K' from `union_box()`, the smallest axis box x tilt hull containing the survivors; a hull
+  forgets a clip that removes different slabs in different tilt sub-bins, so K' hardly grew and the
+  cascade hardly bit.  K'(B) is now the EXACT rational intersection of the per-piece K', with every
+  vertex re-certified against every piece by `polycore.vertex_ok` -- see the A172 block above
+  `MBox`.  `kmode="union"` restores the old behaviour as a fallback/diagnostic.
+
 --------------------------------------------------------------------------------------------------
 THE INVARIANT
 --------------------------------------------------------------------------------------------------
@@ -482,6 +489,239 @@ def container_clip(rect, bn, s, strict=True, trace=None):
     return strict_rect, sl
 
 
+# ==================================================================== K' FROM THE PIECES  (A172)
+#
+# WHY (A172, PI finding).  `MBox.rebuild` used to recompute K'(B) from `union_box()` -- the smallest
+# axis box x tilt hull containing every surviving piece.  That hull FORGETS the shape of the
+# survivors: a clip that removes different slabs in different tilt sub-bins barely moves the hull,
+# so K' barely grows on the side opposite the clip, and the cascade (a larger K'(B) clips the other
+# boxes harder) is much weaker than the truth.  On A168's S2 node after normalise(nsub=4, refine=3)
+# the union hull gives K' areas H 0.658 / B1 0.798 / D 0.740 where the exact intersection of the
+# per-piece K' gives H 0.709336 / B1 0.799343 / D 0.774356, and one further clip pass with the
+# per-piece obstacles takes the kept fractions H 0.4408 -> 0.3816 and D 0.0882 -> 0.0725.
+#
+# WHAT IS PROVED, AND BY WHAT.  K'(B) has to be a convex set contained in EVERY pose of B.  The
+# proof is NOT the construction -- it is `polycore.vertex_ok`, run on EVERY vertex of the result
+# against EVERY piece (exact rational, two quadratics in t per corner per edge normal).  A vertex
+# that passes lies in Q(c, th) for every (c, th) in that piece's box; the pieces cover every
+# surviving pose; Q(c, th) is convex, so the convex hull of certified vertices lies in every pose.
+# The per-piece polygons, their exact intersection and the inward simplification are only how a good
+# candidate is FOUND.  Every step of the search is nevertheless kept sound-by-shape:
+#
+#   * `piece_box` rounds the piece's six coordinates OUTWARD (float, then nextafter) so the Box
+#     handed to A132 CONTAINS the rational piece -- a narrower box would certify too much;
+#   * the intersection is Sutherland-Hodgman in Fractions (no floats, no epsilons);
+#   * `_simplify_frac` only ever DELETES a vertex of a convex polygon, which cuts a triangle OFF --
+#     inward, never outward;
+#   * the final rounding to the 1e-9 grid is done after an inward shrink about the centroid, and if
+#     the rounded polygon does not certify the shrink is raised (the same retry ladder A132 uses).
+#
+# The union-hull K' is kept as `MBox.union_pc()` -- the fallback when the per-piece build cannot be
+# certified, and the diagnostic the A172 test measures against.
+def _f_down(v):
+    """the largest float <= the exact rational v."""
+    f = float(v)
+    return f if Fr(f) <= v else math.nextafter(f, -math.inf)
+
+
+def _f_up(v):
+    """the smallest float >= the exact rational v."""
+    f = float(v)
+    return f if Fr(f) >= v else math.nextafter(f, math.inf)
+
+
+def piece_box(bn, rect):
+    """(Box, t0, t1) for one piece, the Box CONTAINING it: floats rounded outward, and the t
+    interval A132 will actually use (`t_lo/t_hi` of the degree endpoints) asserted to contain the
+    piece's own rational sub-bin."""
+    x0, x1, y0, y1 = rect
+    b = Box(_f_down(x0), _f_up(x1), _f_down(y0), _f_up(y1), deg_of_t(bn.t0), deg_of_t(bn.t1))
+    pt0, pt1 = t_lo(b.th0), t_hi(b.th1)
+    if not (pt0 <= bn.t0 and pt1 >= bn.t1):
+        raise RuntimeError(f"piece_box: t interval [{pt0},{pt1}] does not contain "
+                           f"[{bn.t0},{bn.t1}]")
+    return b, pt0, pt1
+
+
+def _clip_frac(poly, nx, ny, b):
+    """Sutherland-Hodgman clip of a convex rational polygon by  nx*x + ny*y <= b.  EXACT."""
+    if not poly:
+        return poly
+    out = []
+    m = len(poly)
+    for i in range(m):
+        px, py = poly[i]
+        qx, qy = poly[(i + 1) % m]
+        dp = nx * px + ny * py - b
+        dq = nx * qx + ny * qy - b
+        if dp <= 0:
+            out.append((px, py))
+        if (dp > 0) != (dq > 0):
+            t = dp / (dp - dq)
+            out.append((px + t * (qx - px), py + t * (qy - py)))
+    return out
+
+
+def _dedupe_frac(P):
+    out = []
+    for p in P:
+        if not out or p != out[-1]:
+            out.append(p)
+    while len(out) > 1 and out[0] == out[-1]:
+        out.pop()
+    return out
+
+
+def _tri2_frac(a, b, c):
+    return abs((b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]))
+
+
+def _simplify_frac(P, max_v):
+    """delete vertices of a convex ccw polygon until it has at most `max_v` of them.  Deleting a
+    vertex REMOVES the triangle it spans with its neighbours: the polygon can only shrink, never
+    grow, so the result stays inside every pose that contained the original."""
+    P = _dedupe_frac(list(P))
+    while len(P) > 3:
+        m = len(P)
+        ar = [_tri2_frac(P[(i - 1) % m], P[i], P[(i + 1) % m]) for i in range(m)]
+        j = min(range(m), key=lambda i: ar[i])
+        if len(P) > max_v or ar[j] == 0:
+            P.pop(j)
+        else:
+            break
+    return P
+
+
+def poly_area_frac(P):
+    """exact rational area of a simple polygon."""
+    a = Fr(0)
+    m = len(P)
+    for i in range(m):
+        x0, y0 = P[i]
+        x1, y1 = P[(i + 1) % m]
+        a += x0 * y1 - x1 * y0
+    return abs(a) / 2
+
+
+def intersect_frac(polys, max_v=16, work_v=28):
+    """EXACT intersection of convex ccw rational polygons ([] if empty or degenerate)."""
+    if not polys:
+        return []
+    P = list(polys[0])
+    for Q in polys[1:]:
+        m = len(Q)
+        for i in range(m):
+            ax, ay = Q[i]
+            bx, by = Q[(i + 1) % m]
+            nx, ny = (by - ay), -(bx - ax)              # outward normal of a ccw polygon
+            if nx == 0 and ny == 0:
+                continue
+            P = _clip_frac(P, nx, ny, nx * ax + ny * ay)
+            if len(P) < 3:
+                return []
+        P = _simplify_frac(P, work_v)
+        if len(P) < 3:
+            return []
+    return _simplify_frac(P, max_v)
+
+
+def _round_grid_inward(P, shrink, den=VDEN):
+    """shrink the polygon about its centroid by the factor `shrink`, then round every vertex to the
+    1/den grid and re-hull.  The rounding can move a vertex outward by at most 1/(2 den) per
+    coordinate, which is why the caller certifies afterwards and raises `shrink` on failure."""
+    n = len(P)
+    cx = sum(p[0] for p in P) / n
+    cy = sum(p[1] for p in P) / n
+    out = []
+    for (x, y) in P:
+        x = cx + (x - cx) * (1 - shrink)
+        y = cy + (y - cy) * (1 - shrink)
+        out.append((Fr(round(x * den), den), Fr(round(y * den), den)))
+    return PC._hull_frac(_dedupe_frac(out))
+
+
+K_SHRINKS = (Fr(0), Fr(1, 10 ** 8), Fr(1, 10 ** 6), Fr(1, 10 ** 4), Fr(1, 10 ** 3))
+
+
+def certify_verts(verts, boxes):
+    """[i] of the vertices NOT certified inside every pose of every piece.  This is the proof."""
+    bad = []
+    for i, (vx, vy) in enumerate(verts):
+        for (pb, pt0, pt1) in boxes:
+            if not PC.vertex_ok(vx, vy, pb, pt0, pt1):
+                bad.append(i)
+                break
+    return bad
+
+
+def pieces_poly(pieces, n_grid=97, max_v=16, cache=None):
+    """K'(B) as the certified exact intersection of the per-piece K'.  -> (verts|None, info).
+
+    `cache` is an optional dict keyed by the piece, so that the pieces a clip pass leaves untouched
+    are not rebuilt (the fixed-point loop rebuilds K' after every pass)."""
+    boxes, polys = [], []
+    for (bn, r) in pieces:
+        pb, pt0, pt1 = piece_box(bn, r)
+        boxes.append((pb, pt0, pt1))
+        key = (bn.t0, bn.t1, r, n_grid, max_v)
+        pc = None if cache is None else cache.get(key)
+        if pc is None:
+            pc = PC.build(pb, n_grid=n_grid, max_v=max_v)
+            if cache is not None:
+                cache[key] = pc
+        polys.append(pc.verts)
+    P = intersect_frac(polys, max_v=max_v)
+    if len(P) < 3:
+        return None, dict(reason="empty intersection", n_pieces=len(pieces)), boxes
+    for sh in K_SHRINKS:
+        V = _round_grid_inward(P, sh)
+        if len(V) < 3:
+            continue
+        if not certify_verts(V, boxes):
+            return V, dict(shrink=str(sh), shrink_f=float(sh), n_pieces=len(pieces), nv=len(V),
+                           area=float(poly_area_frac(V))), boxes
+    return None, dict(reason="no certified rounding", n_pieces=len(pieces)), boxes
+
+
+def axis_core_pieces(V, boxes, tm, aden=ADEN_DEFAULT, den=VDEN):
+    """the largest square at tilt tm about the CENTROID of V that fits inside V, its four corners
+    then certified against every piece (A135's pattern: the formula is the search, `vertex_ok` is
+    the proof).  -> (kx, ky, a) or None.
+
+    Inside a convex polygon the largest such square about a fixed centre k is exact:
+    a = min over the edges (b_e - n_e.k) / (|n_e.e1| + |n_e.e2|), e1 = (cos tm, sin tm),
+    e2 = (-sin tm, cos tm) -- the support of the square in the direction n_e is a(|n.e1| + |n.e2|)."""
+    n = len(V)
+    kx = Fr(round(sum(p[0] for p in V) / n * den), den)
+    ky = Fr(round(sum(p[1] for p in V) / n * den), den)
+    cm, sm = _cs_at(tm)
+    a = None
+    for i in range(n):
+        ax, ay = V[i]
+        bx, by = V[(i + 1) % n]
+        nx, ny = (by - ay), -(bx - ax)
+        if nx == 0 and ny == 0:
+            continue
+        slack = (nx * ax + ny * ay) - (nx * kx + ny * ky)
+        if slack <= 0:
+            return None                                   # the centroid is not strictly inside
+        sup = abs(nx * cm + ny * sm) + abs(-nx * sm + ny * cm)
+        if sup <= 0:
+            continue
+        v = slack / sup
+        a = v if a is None else min(a, v)
+    if a is None or a <= 0:
+        return None
+    a = Fr(math.floor(a * aden), aden)
+    for _try in range(4):
+        if a <= 0:
+            return None
+        if not certify_verts(EC.core_corners(kx, ky, cm, sm, a), boxes):
+            return kx, ky, a
+        a = Fr(int(a * aden) * 999999 // 1000000, aden)
+    return None
+
+
 # ==================================================================== a box of the node
 class MBox:
     """one named box of a Node: its pieces, its certified polygon core, its exact axis core."""
@@ -492,13 +732,17 @@ class MBox:
         t0, t1 = t_lo(box.th0), t_hi(box.th1)
         self.t0, self.t1 = t0, t1
         self.pieces = [(Bin(t0, t1), PIN.outer_rect(box))]
-        self.pc = None                               # A132 K'(B)
-        self.core = None                             # A135 exact axis core
+        self.pc = None                               # K'(B): A172's per-piece intersection
+        self.core = None                             # the exact axis core (A135's pattern)
         self.obs = None                              # the compiled obstacle
         self.kept = 1.0
         self.trace = []
         self.sliver_area = Fr(0)
         self.area0 = rect_area(PIN.outer_rect(box)) * (t1 - t0)
+        self.kmode = "pieces"                        # "pieces" (A172) or "union" (A171 fallback)
+        self.k_source = None                         # what the CURRENT pc/core actually came from
+        self.k_info = {}
+        self._pcache = {}                            # per-piece K', keyed by the piece
 
     # ---------------------------------------------------------------- geometry
     def union_box(self):
@@ -514,17 +758,65 @@ class MBox:
         return Box(float(xs0), float(xs1), float(ys0), float(ys1),
                    deg_of_t(tt0), deg_of_t(tt1))
 
-    def rebuild(self, n_grid=97, max_v=16, aden=ADEN_DEFAULT):
-        """recompute K'(B) and the exact axis core from the SURVIVING pieces."""
+    def union_pc(self, n_grid=97, max_v=16, aden=ADEN_DEFAULT):
+        """A171's K': A132's polygon on the UNION HULL of the surviving pieces.  Kept as the
+        fallback and as the diagnostic A172 measures the per-piece K' against.  -> (pc, core)."""
         b = self.union_box()
         if b is None:
             raise EmptyBox(self.name)
         self.ubox = b
-        self.pc = PC.build(b, n_grid=n_grid, max_v=max_v)
+        pc = PC.build(b, n_grid=n_grid, max_v=max_v)
+        return pc, self.union_core(b, aden=aden)
+
+    @staticmethod
+    def union_core(b, aden=ADEN_DEFAULT):
+        """A135's exact axis core of the union hull (never smaller than the stock core)."""
         try:
-            self.core = EC.exact_core(b, aden=aden)
+            return EC.exact_core(b, aden=aden)
         except Exception:
-            self.core = b.core()
+            return b.core()
+
+    def piece_boxes(self):
+        """[(Box, t0, t1)] -- one outward-rounded Box per surviving piece."""
+        return [piece_box(bn, r) for (bn, r) in self.pieces]
+
+    def rebuild(self, n_grid=97, max_v=16, aden=ADEN_DEFAULT, kmode=None):
+        """recompute K'(B) and the exact axis core from the SURVIVING pieces.
+
+        kmode "pieces" (A172, the default): K' is the EXACT intersection of the per-piece K',
+        every vertex re-certified with `polycore.vertex_ok` against EVERY piece, and the axis core
+        is the largest square about that polygon's centroid whose corners certify the same way.
+        kmode "union" (A171): K' is A132's polygon on the union hull of the pieces -- sound, but it
+        forgets everything the clip removed unevenly across the tilt sub-bins, so it is only the
+        fallback (used automatically when the per-piece build will not certify) and the diagnostic.
+        """
+        kmode = self.kmode if kmode is None else kmode
+        b = self.union_box()
+        if b is None:
+            raise EmptyBox(self.name)
+        self.ubox = b
+        if kmode == "pieces":
+            V, info, boxes = pieces_poly(self.pieces, n_grid=n_grid, max_v=max_v,
+                                         cache=self._pcache)
+            if V is not None:
+                stock = b.core()
+                tm = stock.tm if stock is not None else Fr(0)
+                ac = axis_core_pieces(V, boxes, tm, aden=aden)
+                core_u = self.union_core(b, aden=aden)
+                self.pc = PC.PolyCore(b, V, n_grid, info["shrink_f"], True)
+                if ac is not None and (core_u is None or ac[2] >= core_u.a):
+                    self.core = Core(ac[0], ac[1], tm, ac[2], None)
+                    info["axis"] = "pieces"
+                else:                     # never regress on the deployed core: both are sound
+                    self.core = core_u
+                    info["axis"] = "union"
+                info["axis_a"] = float(self.core.a) if self.core is not None else None
+                self.k_source, self.k_info = "pieces", info
+                return self.pc
+            self.k_info = dict(info)
+            self.k_info["fallback"] = "union"
+        self.pc, self.core = self.union_pc(n_grid=n_grid, max_v=max_v, aden=aden)
+        self.k_source = "union" if kmode == "union" else "union(fallback)"
         return self.pc
 
     def obstacle(self, mode="poly"):
@@ -564,6 +856,7 @@ class MBox:
                     union_box=(self.ubox.to_json() if getattr(self, "ubox", None) else None),
                     kept=self.kept, n_pieces=len(self.pieces),
                     sliver_area=float(self.sliver_area),
+                    k_source=self.k_source, k_info=self.k_info,
                     axis_a=(float(self.core.a) if self.core is not None else None),
                     poly_area=(self.pc.area() if self.pc is not None else None),
                     pieces=[dict(t0=str(b.t0), t1=str(b.t1),
@@ -621,12 +914,17 @@ class Node:
     # ---------------------------------------------------------------- THE RULE
     def normalise(self, s=None, nsub=4, max_iter=10, strict_container=True, mode="poly",
                   n_grid=97, max_v=16, aden=ADEN_DEFAULT, refine=2, max_pieces=96,
-                  verbose=False):
+                  kmode="pieces", verbose=False):
         """Container clip + mutual clip to a fixed point.  Returns self.
 
         Every multi-box construction MUST call this before it draws a figure, prices a chord row,
         runs a lane cover or hands boxes to an LP.  Raises `EmptyBox(name)` the moment a box loses
         every pose -- that is a KILL, and the caller should record the pair leaf, not retry.
+
+        `kmode` selects how K' is rebuilt after every pass: "pieces" (A172, the default) is the
+        certified exact intersection of the per-piece K', "union" is A171's union-hull polygon --
+        sound, but blind to a clip that removes different slabs in different tilt sub-bins, so it
+        under-drives the cascade (see the A172 block above `MBox`).
 
         `refine` levels of TAUTOLOGOUS bisection are interleaved with the clip (`split_piece`): the
         two halves cover the parent exactly, so a half the clip proves wholly dead is dropped with
@@ -637,6 +935,7 @@ class Node:
         self.s = s
         # ---- 1. split every box into nsub tilt sub-bins
         for mb in self.boxes.values():
+            mb.kmode = kmode
             r0 = PIN.outer_rect(mb.box0)
             mb.pieces = [(Bin(a, b), r0) for (a, b) in sub_bins(mb.t0, mb.t1, nsub)]
             mb.trace = []
@@ -1056,7 +1355,11 @@ def _figure(node, path, s=None, extras=None, title=None, nsample=60):
         ty += 15
         out.append(_svg_txt(tx, ty, str(line), size=10, col="#333"))
     ty += 22
-    out.append(_svg_txt(tx, ty, "solid = K'(B) (A132, certified)", size=9, col="#666"))
+    srcs = sorted({(mb.k_source or "?") for mb in node.boxes.values()})
+    out.append(_svg_txt(tx, ty, "solid = K'(B) = intersection of per-piece K', certified"
+                        if srcs == ["pieces"] else
+                        f"solid = K'(B), certified  [source: {', '.join(srcs)}]",
+                        size=9, col="#666"))
     ty += 13
     out.append(_svg_txt(tx, ty, "dashed = extreme POSES of the box (thin outlines)",
                         size=9, col="#666"))

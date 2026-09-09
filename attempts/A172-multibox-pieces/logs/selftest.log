@@ -1,0 +1,29 @@
+before normalise: ok = False   failures = 5
+    POSE-CONTAINER B1 centre rect leaves [w_min/2, s-w_min/2] by 0.000000002 on tilt [45.000,50.625]
+    POSE-CONTAINER-STRICT B1 poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.003404926 on tilt [45.000,50.625]
+    POSE-CONTAINER D centre rect leaves [w_min/2, s-w_min/2] by 0.000000001 on tilt [0.000,11.250]
+    POSE-CONTAINER-STRICT D poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.087937870 on tilt [0.000,11.250]
+    CLIP-FIXPOINT D the mutual clip still removes area 0.003806076 on tilt [0.000,11.250] -- normalise() not run
+  refine 1: H=0.4724(6p) B1=0.9428(8p) D=0.1197(4p)
+  refine 2: H=0.4030(12p) B1=0.9428(16p) D=0.0781(7p)
+  pass 1: kept H=0.4004 B1=0.9428 D=0.0781
+  pass 2: kept H=0.4004 B1=0.9428 D=0.0781
+after normalise:  ok = True   kept = {'H': 0.400413, 'B1': 0.942803, 'D': 0.078087}
+{
+ "H": {
+  "drawn": 4000,
+  "escape_frac": 0.0,
+  "core_meet_frac": 0.528
+ },
+ "B1": {
+  "drawn": 4000,
+  "escape_frac": 0.0,
+  "core_meet_frac": 0.001
+ },
+ "D": {
+  "drawn": 4000,
+  "escape_frac": 0.0,
+  "core_meet_frac": 0.33
+ }
+}
+4.9 s, exact calls 1819

@@ -1,0 +1,15 @@
+BEFORE  ok=False  failures=5
+   POSE-CONTAINER           [B1] centre rect leaves [w_min/2, s-w_min/2] by 0.000000002 on tilt [45.000,50.625]
+   POSE-CONTAINER-STRICT    [B1] poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.003404926 on tilt [45.000,50.625]
+   POSE-CONTAINER           [D] centre rect leaves [w_min/2, s-w_min/2] by 0.000000001 on tilt [0.000,11.250]
+   POSE-CONTAINER-STRICT    [D] poses escape [0,s]^2: centre rect exceeds [w_max/2, s-w_max/2] by 0.087937870 on tilt [0.000,11.250]
+   CLIP-FIXPOINT            [D] the mutual clip still removes area 0.003806076 on tilt [0.000,11.250] -- normalise() not run
+  refine 1: H=0.4724(6p) B1=0.9428(8p) D=0.1197(4p)
+  refine 2: H=0.4030(12p) B1=0.9428(16p) D=0.0781(7p)
+  refine 3: H=0.3587(22p) B1=0.9428(32p) D=0.0724(12p)
+  pass 1: kept H=0.3584 B1=0.9428 D=0.0722
+  pass 2: kept H=0.3584 B1=0.9428 D=0.0722
+AFTER   ok=True  kept=H=0.358392 B1=0.942803 D=0.072175
+chord rows: h@2.975878 beta=2 v@3.006954 beta=1
+lane(TR cell) = 0  (33 discharged leaves, 0 open)
+wrote C:\Users\esumm\code\packing\attempts\A171-multibox-invariant\results\demo171.json  (10.25 s)

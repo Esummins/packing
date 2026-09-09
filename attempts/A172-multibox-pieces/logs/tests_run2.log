@@ -1,0 +1,32 @@
+(a) two boxes whose K' overlap
+  [PASS] a1.cores_overlap_before  sat_gap=-0.133748675
+  [PASS] a1.mutual_clip_empties  emptied=A
+  [PASS] a2.cores_disjoint_but_poses_meet  cores_disjoint=True
+  [PASS] a2.clip_shrinks  
+  [PASS] a2.invariant_after  failures=0
+    -- test_a 4.1 s
+(b) a box straddling the container edge
+  [PASS] b.escapes_before  escape_frac_before=0.663
+  [PASS] b.container_clip_removes_outside  escape_frac_after=0.0 kept=0.29739 sliver_area=0.036602547
+  [PASS] b.sampled_clean  drawn=10000 escape=0 not_core=0 k_overlap=0 core_meet=0 k_uncert=0
+    -- test_b 1.5 s
+(c) A168's failing S2 node BR139/TRH-25 (attempts/A168-cascade-fable/results/v0_union_boxes/cascade168.jsonl, cell l1_153, node BR139/TRH-25, step S2, verdict ALIVE(geometry))
+  [PASS] c.invariant_fails_before  
+  [PASS] c.D_outside_container  escape_frac_D=0.47075
+  [PASS] c.poses_meet_other_cores  
+  [PASS] c.invariant_passes_after  seconds=8.6
+  [PASS] c.sampled_clean_after  drawn=30000 escape=0 not_core=0 k_overlap=0 core_meet=7390 k_uncert=0
+    -- test_c 9.3 s
+(d) random nodes of 2-6 boxes, 10000 sampled poses each
+  [PASS] d.no_violation  nodes=10 dead=0 drawn=99996 escape=0 not_core=0 k_overlap=0 core_meet=54 k_uncert=0 invariant_fail=0
+    -- test_d 23.7 s
+(e) A172: K' as the certified intersection of the per-piece K'
+  [PASS] e1.piece_K_beats_union_hull  worst_dev=4.78e-07 uncertified_vertices=0
+  [PASS] e1.kept_matches_A171  
+  [PASS] e2.new_fixed_point_keeps_fewer  passes=2 invariant=True seconds=8.71
+  [PASS] e3.K_source_is_pieces  
+  [PASS] e4.every_vertex_certified  
+    -- test_e 15.1 s
+
+ALL PASS  (53.7 s total, budget 120 s)
+wrote C:\Users\esumm\code\packing\attempts\A171-multibox-invariant\results\test_multibox.json
