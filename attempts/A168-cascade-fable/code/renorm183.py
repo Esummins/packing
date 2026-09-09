@@ -173,17 +173,21 @@ def stage_run(a):
                 return 2
             node = T["nodes"][p]
             r_try, pass83 = None, a.pass83
+            prev = recs.get(p)                                   # before any cap marker replaces it
             if p in caps:                                        # wall-capped: 4/2 only, then 4/1, then 4/0
                 m = recs.get(p)
-                r_prev = m.get("refine") if (m and m["verdict"].startswith("SKIPPED(cap")) else 3
-                r_try = min(r_prev - 1, 2)
-                pass83 = False
-                if r_try < 0:
+                # a cap recorded before A183 (sliver era: A175/A176/A181 markers carry no era) is
+                # STALE -- the full setting is tried once; only an A183-era cap steps the refine down
+                stale = not (m and m["verdict"].startswith("SKIPPED(cap") and m.get("era") == "A183")
+                r_prev = 4 if stale else m.get("refine")
+                r_try = None if stale else min(r_prev - 1, 2)
+                pass83 = stale
+                if r_try is not None and r_try < 0:
                     print("  skip %s (wall-capped at every refine level)" % p, flush=True)
                     continue
                 emit(p, dict(node=p, step=node.get("step") or "root", level=node.get("level", 0), parent=node.get("parent"),
-                             verdict="SKIPPED(cap attempt refine %d)" % r_try, refine=r_try, wall_s=0.0))
-            prev = recs.get(p)
+                             verdict="SKIPPED(cap attempt refine %s)" % ("3 (8/3 after 4/2)" if r_try is None else r_try),
+                             refine=(3 if r_try is None else r_try), era="A183", wall_s=0.0))
             up = prev if (prev is not None and prev["verdict"].startswith("ALIVE") and prev.get("roles")
                           and prev.get("setting") != SET83 and r_try is None) else None
             a.pass83 = pass83
