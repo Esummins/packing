@@ -146,3 +146,64 @@ k5_16_interior_Y0727, k5_16_interior_Y0842, k5_16_interior_Y1146`
 
 by slot: BR(0,1) 20, BL(1,0) 3, TL(0,0) 2, BR(1,0) 1, BL(0,2) 1. **The PI's node
 `k5_16_interior_Y0842` is among them.** 109/109 certificates PASS `checkcl.py`.
+
+---
+
+# T8 — the CONDITIONAL chord-limited lane (split over H's box): stated, implemented, NOT yet closed
+
+## The leaf (`code/condlane.py` docstring is the normative statement)
+
+Let `B_H` be the conditioned square's box and `B_1, ..., B_N` a COMPLETE binary subdivision of it, so
+the true pose of `H` lies in exactly one piece. For a piece `b`, using its OWN polygon core
+`K'(b) ⊇ K'(B_H)` as the obstacle (strictly fatter — that is the whole point):
+
+    m(b)         = 0 if EVERY pose of b misses int C (box_misses_cell_exact), else 1
+    LANE_out(b)  = lane cover with the `band` prune      (BAND poses discharged, charged to beta)
+    LANE_band(b) = lane cover with the `not_band` prune  (OUTSIDE poses discharged, charged to LANE_out)
+    n(b)         = beta + LANE_out(b)                                  if m(b) = 0
+                 = min(beta, LANE_band(b)) + LANE_out(b) + 1           if m(b) = 1
+
+`n(b) <= 1` on EVERY piece  ⇒  `int C` is met by at most one non-pin square in every realisation ⇒
+SLOT-CROWD's `>= 2` is contradicted ⇒ the node is DEAD. The split is tautologous, so nothing escapes;
+`LANE_band(b) <= beta` always (the chord row), so the `min` is a free tightening.
+
+New exact primitive: `chordlane.not_band_ok(b, l)`, the mirror of `band_ok` — every pose of `b` has
+chord `< 1` iff `min|v| > f(cs_min)` with `f(y) = (y + 1 - y^2)/2` (f decreasing, so the largest
+threshold over the tilt bin is at `cs_min`; a LOWER bound of `cs_min` makes the test strict in the
+safe direction). Both lanes are therefore covers over the same window with complementary sound
+prunes — which is why they are run as TWO covers and not one plain cover over all free meeters: each
+discharges half the window outright, and a single plain cover has neither prune and does not close
+(measured: it did not).
+
+## `c0_Y0169 / TL(0,0)` — the PI's case: half certified, half open
+
+`H` at x 1.2398-1.3795, y 2.3578-2.4976, tilt 14.25-28.07 deg; slot TL(0,0), LEFT wall of the TL
+frame. Chosen guard line `x = 364583/500000 = 0.729166`; `minchord` per hypothesis box
+`[1, 0, 1, 0, 0, 0]` — **the two pins below the cell give chord exactly 1 each**, so
+`rhs = 469271/250000 = 1.877084` and **`beta = 1`**, exactly as the PI said.
+
+Whole-box sample line on that offset: 8,174 poses meet `int TL(0,0)`; **58 are free and every one of
+them is a BAND pose (`outside_free = 0`)**; 4,258 poses are OUTSIDE and none of those is free.
+
+| half of the PI's argument | status |
+|---|---|
+| `B_miss` pieces: nothing from the right can reach TL, so `LANE_out = 0` | **CERTIFIED** — `LANE_out = 0` on every piece the run reached, `m = 1` pieces included |
+| `B_meet` pieces: `H`'s corner intrudes into the cell leaving under 1 of width, so `LANE_band = 0` | **OPEN** — the band cover did not close in any budget tried (3,000 boxes: `open budget exhausted`; 60,000 boxes: the time budget went on one branch) |
+
+So the node is **not yet dead** by this route, and the reason is precisely located: the `LANE_band`
+cover on the `m = 1` pieces. The 58 free band poses the sample finds are exactly the "one band square"
+`beta = 1` allows; the leaf closes iff `K'(piece)` blocks all of them, which is the PI's geometric
+claim and is what the cover has to certify.
+
+**What to try next, in order.** (i) Rank the guard offsets for the BAND cover by the sampled
+`band_free` count with `K'(piece)` (the current ranking optimises `LANE_out`, the wrong lane for the
+`m = 1` pieces). (ii) Split `B_H` shallowly first (depth 3-4) and give each `m = 1` piece its own
+line, since a fatter `K'(b)` changes which offset blocks the band. (iii) The band cover's window can
+be shrunk to the BAND slab itself (`|v| <= 1/2` around the line) before bisection — a factor of
+roughly 4 on the root volume that the present code does not exploit.
+
+No certificate was emitted and the population pass over the NO-LINE / UNDECIDED cells with `M = 1`
+was NOT run — the +3 CPU-h was spent by T5 (3,351 s), T6 (~1,750 s) and these three T8 runs
+(~2,800 s). The cost order that pass should use, from the T3 table: trump5 BR(0,1) (82 NO-LINE cells,
+and 20 of A161's 23 new trump5 kills already sit on that slot), then k5_16 BL(1,0) (94), TL(1,0) (81),
+BR(1,0) (84), then the left-wall cells.

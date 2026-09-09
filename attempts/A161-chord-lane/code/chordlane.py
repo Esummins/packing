@@ -186,6 +186,22 @@ def band_ok(b, line):
     return (V <= thr), dict(V=str(V), thr=str(thr), cs_max=str(Y))
 
 
+def not_band_ok(b, line):
+    """SOUND, exact: True if EVERY pose in `b` has chord `< 1` on `line` (the mirror of `band_ok`).
+
+    `chord >= 1 <=> |v| <= f(y) = (y + 1 - y^2)/2`, and `f` is DECREASING on [1, sqrt2], so the
+    largest threshold over the tilt bin is `f(cs_min)`.  Hence every pose has chord < 1 as soon as
+    `min |v| > f(cs_min)`; a LOWER bound of `cs_min` gives a LARGER `f`, so the test is strict in
+    the safe direction.  `min |v|` is 0 whenever the line crosses the centre range."""
+    lo, hi = ((b.y0, b.y1) if line.orient == "h" else (b.x0, b.x1))
+    lo, hi = Fr(lo), Fr(hi)
+    a_, b_ = line.off - hi, line.off - lo
+    V = Fr(0) if (a_ <= 0 <= b_) else min(abs(a_), abs(b_))
+    Y = cs_min_exact(*_tbin(b))
+    thr = (Y + 1 - Y * Y) / 2
+    return (V > thr), dict(V_min=str(V), thr=str(thr), cs_min=str(Y))
+
+
 def chord_band_lo(TH, V):
     """vectorised chord (A144 (CH)) at half-side 1/2 -- for the sample line only."""
     return GL.chord_many(0.5, TH, V)
@@ -207,16 +223,21 @@ def guard_rhs(boxes, line, s=S_RAT):
 
 
 # ===================================================================== the covers
-def _discharge_out(b, cell, conds, line, s, skip, exact=True):
+def _discharge_out(b, cell, conds, line, s, skip, exact=True, band_mode="out"):
     """(why, detail) for one box of the OUTSIDE lane cover, or None if it survives.
 
     Order: container, misses_cell (exact SAT), band, witness -- cheapest sound test first."""
     if P.box_outside_container(b, s):
         return ("container", {})
     if line is not None:                       # cheapest exact test: ~10 Fraction ops
-        ok, det = band_ok(b, line)
-        if ok:
-            return ("band", det)
+        if band_mode == "out":                 # LANE_out: BAND poses are charged to beta
+            ok, det = band_ok(b, line)
+            if ok:
+                return ("band", det)
+        elif band_mode == "band":              # LANE_band: OUTSIDE poses are charged to LANE_out
+            ok, det = not_band_ok(b, line)
+            if ok:
+                return ("not_band", det)
     ok, det = box_misses_cell_exact(b, cell)
     if ok:
         return ("misses_cell", det)
@@ -228,7 +249,7 @@ def _discharge_out(b, cell, conds, line, s, skip, exact=True):
 
 
 def cover(root, cell, conds, line, s=S0, skip=None, depth0=0, max_depth=40, max_open=2500,
-          exact=True, deadline=None):
+          exact=True, deadline=None, band_mode="out"):
     """A complete cover of `root` by boxes each DISCHARGED by one of the four prunes, or the set of
     open boxes if some survive.  `line = None` drops the band prune (then this is exactly A141's
     `cover_empty` with the stronger `misses_cell`)."""
@@ -249,7 +270,7 @@ def cover(root, cell, conds, line, s=S0, skip=None, depth0=0, max_depth=40, max_
             stack = []
             why_stop = "time budget exhausted"
             break
-        d = _discharge_out(b, cell, conds, line, s, skip, exact)
+        d = _discharge_out(b, cell, conds, line, s, skip, exact, band_mode)
         if d is not None:
             why, det = d
             leaves.append(dict(path=p, box=P.box_json(b), why=why, **det))
@@ -290,7 +311,8 @@ def cover(root, cell, conds, line, s=S0, skip=None, depth0=0, max_depth=40, max_
                         if lane == 1 else (why_stop or "undischarged leaves")))
 
 
-def lane_out(cell, conds, line, s=S0, max_depth=34, max_open=2500, deadline=None):
+def lane_out(cell, conds, line, s=S0, max_depth=34, max_open=2500, deadline=None,
+             band_mode="out"):
     """LANE_out for the cell: the cover of the whole meeting window with the band prune."""
     x0, x1, y0, y1 = P.centre_window(cell, s)
     if x1 <= x0 or y1 <= y0:
@@ -298,7 +320,7 @@ def lane_out(cell, conds, line, s=S0, max_depth=34, max_open=2500, deadline=None
                     root=[x0, x1, y0, y1, 0.0, 90.0], reason="empty centre window")
     root = Box(x0, x1, y0, y1, 0.0, 90.0)
     out = cover(root, cell, conds, line, s=s, max_depth=max_depth, max_open=max_open,
-                deadline=deadline)
+                deadline=deadline, band_mode=band_mode)
     out["root"] = [x0, x1, y0, y1, 0.0, 90.0]
     return out
 

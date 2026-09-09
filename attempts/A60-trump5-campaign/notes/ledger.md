@@ -844,3 +844,35 @@ Also recorded (see `notes/t3_table.md` §T5-T7): the retry of the UNDECIDED pair
 each added 13 kills repo-wide; and A141's own leaf re-run with the exact separating-axis test flips
 105 `M` values from `>= 1` to 0 across 3,048 early-exit cells but yields **zero** kills on its own —
 without the chord row the lane cover never closes. The chord row, not the SAT fix, is what kills.
+
+### A161 T8 (2026-09-08) — the CONDITIONAL form on c0_Y0169 / TL(0,0): half certified, band cover open
+
+The conditional chord-limited lane splits the conditioned square's own box (tautologous, so nothing
+escapes) and uses each piece's OWN fatter polygon core `K'(b)`:
+
+    n(b) = beta + LANE_out(b)                          if every pose of b misses int C
+         = min(beta, LANE_band(b)) + LANE_out(b) + 1   otherwise;      n(b) <= 1 everywhere => DEAD
+
+with `LANE_out` the cover that discharges BAND boxes (charged to `beta`) and `LANE_band` its mirror,
+discharging boxes every pose of which has chord `< 1` — a new exact primitive
+`chordlane.not_band_ok`: `min|v| > (y + 1 - y^2)/2` at `y = cs_min`.
+
+On `c0_Y0169 / TL(0,0)` (H at x 1.2398-1.3795, y 2.3578-2.4976, tilt 14.25-28.07 deg): guard line
+`x = 364583/500000` on the LEFT wall of the TL frame, `minchord = [1, 0, 1, 0, 0, 0]` — the two pins
+below the cell give chord exactly 1 each — `rhs = 469271/250000`, **`beta = 1`**, as the PI said.
+Sample line on that offset: 8,174 poses meet `int TL(0,0)`, 58 are free and **all 58 are BAND poses**
+(`outside_free = 0` of 4,258 outside poses).
+
+* the PI's first half — nothing from the right reaches TL — is **CERTIFIED**: `LANE_out = 0` on every
+  piece reached, including the `m = 1` ones;
+* the second half — `H`'s corner leaves under 1 of width so no band square fits — is **OPEN**: the
+  `LANE_band` cover did not close at 3,000 boxes (`open budget exhausted`) nor at 60,000 (the time
+  budget went on one branch).
+
+So `c0_Y0169` is NOT yet dead; the obstruction is exactly the `LANE_band` cover on the `B_meet`
+pieces. Next levers (notes/t3_table.md §T8): rank offsets by `band_free` under `K'(piece)` rather
+than by the `LANE_out` criterion; split `B_H` shallowly and give each `m = 1` piece its own line;
+restrict the band cover's root to the band slab `|v| <= 1/2` before bisecting (~4x on root volume).
+Code `code/condlane.py`, record `results/t8_cond.json`. No certificate emitted; the population pass
+over the NO-LINE / `M = 1` cells was not run (budget), and its cost order should start with trump5
+BR(0,1) (82 such cells, and 20 of A161's 23 new trump5 kills already sit on that slot).

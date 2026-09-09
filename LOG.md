@@ -7158,3 +7158,41 @@ row, this entry, one sentence in `docs/residue_ledger.md` §1b and one in `docs/
 BLAS-pinned BelowNormal processes at affinity `0xFFFF`, the 16-process box ceiling polled before every
 launch (the box ran 14–19 other lab pythons for most of the attempt, so the work was serialised);
 ≈ 2.5 CPU-h of the 4 CPU-h cap.
+
+## 2026-09-08 (A161 T8) — the conditional chord-limited lane: the leaf, and where it sticks
+
+**The leaf.** Split the conditioned square's own parameter box (tautologous — the pieces tile it, so
+no realisation escapes) and use each piece's OWN polygon core `K'(b) ⊇ K'(B_H)`, which is strictly
+fatter and is where the content is:
+
+    n(b) = beta + LANE_out(b)                          if EVERY pose of b misses int C
+         = min(beta, LANE_band(b)) + LANE_out(b) + 1   otherwise ;   n(b) <= 1 everywhere => DEAD
+
+`LANE_out` discharges BAND boxes (their poses are charged to `beta` by the chord row); `LANE_band` is
+its mirror, discharging boxes every pose of which has chord `< 1`. That mirror needed one new exact
+primitive, `chordlane.not_band_ok`: since `chord >= 1 <=> |v| <= f(y) = (y + 1 - y^2)/2` and `f` is
+decreasing on `[1, sqrt2]`, every pose has chord `< 1` as soon as `min|v| > f(cs_min)`. The two lanes
+are complementary covers over the SAME window, and they must be run as two covers, not as one plain
+cover over all free meeters: each carries a prune that discharges half the window, and the plain
+cover — which has neither — was measured and does not close.
+
+**The PI's case `c0_Y0169 / TL(0,0)`.** Guard line `x = 364583/500000` on the left wall of the TL
+frame; `minchord = [1, 0, 1, 0, 0, 0]` — the two pins below the cell give chord exactly 1 each —
+`rhs = 469271/250000`, `beta = 1`. Sample line: 8,174 poses meet `int TL(0,0)`, 58 free, **all 58 of
+them BAND** (`outside_free = 0` of 4,258 outside poses). So the PI's first half, *nothing from the
+right can reach TL*, is CERTIFIED (`LANE_out = 0` on every piece reached, `m = 1` pieces included);
+the second half, *H's corner leaves under 1 of width for a band square*, is OPEN — the `LANE_band`
+cover did not close at 3,000 boxes nor at 60,000. **The node is not yet dead and the obstruction is
+localised to one cover.** Three levers, in order: rank the offsets for the BAND cover by `band_free`
+under `K'(piece)` (the present ranking optimises the wrong lane); split `B_H` shallowly and give each
+`m = 1` piece its own line; restrict the band cover's root to the band slab `|v| <= 1/2` before
+bisecting (~4x on root volume). The population pass over the NO-LINE / `M = 1` cells was not run —
+the extension's CPU went to T5, T6 and three T8 runs; its cost order should start with trump5 BR(0,1)
+(82 such cells; 20 of A161's 23 new trump5 kills already sit on that slot), then k5_16 BL(1,0) (94),
+BR(1,0) (84), TL(1,0) (81).
+
+**Files.** `attempts/A161-chord-lane/code/condlane.py`, `results/t8_cond.json`,
+`notes/t3_table.md` §T8, and the fold-in paragraphs in `attempts/A57-shadow-trees/PAUSED.md` and
+`attempts/A60-trump5-campaign/notes/ledger.md`. One python at BelowNormal / affinity `0xFFFF`; the
++3 CPU-h extension is spent (T5 3,351 s, T6 ~1,750 s, T8 ~2,800 s, plus the checkers and the
+collector).

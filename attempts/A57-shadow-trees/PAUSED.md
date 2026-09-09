@@ -551,3 +551,16 @@ The exact SAT test is necessary but not sufficient — the chord row does the es
 `check_lane_cert` with `leaf_misses` widened for the new `axis` reason code, validated 2/2 against
 A141's own certificates.
 
+
+### A161 T8 (2026-09-08) — the CONDITIONAL form: stated and implemented, not yet closing
+
+The conditional chord-limited lane (split the conditioned square's box, use each piece's fatter
+`K'(b)`: `n(b) = beta + LANE_out(b)` when the piece misses the cell, `min(beta, LANE_band(b)) +
+LANE_out(b) + 1` when it does not; `<= 1` everywhere kills) is stated and implemented in
+`attempts/A161-chord-lane/code/condlane.py`, with the new exact mirror primitive
+`chordlane.not_band_ok` (every pose has chord `< 1` iff `min|v| > (y + 1 - y^2)/2` at `y = cs_min`).
+Tested on the PI's trump5 case `c0_Y0169 / TL(0,0)`: `beta = 1` with the two wall pins giving chord
+exactly 1, `LANE_out = 0` certified on every piece reached — but the `LANE_band` cover on the pieces
+where `H` reaches the cell did not close in any budget tried, so no kill and no certificate. It has
+not been run on the k5_16 NO-LINE / `M = 1` cells (94 at BL(1,0), 81 at TL(1,0), 84 at BR(1,0)) —
+that is the queued work, with the three levers listed in `notes/t3_table.md` §T8.

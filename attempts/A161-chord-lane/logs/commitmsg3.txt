@@ -1,0 +1,27 @@
+A161 T8: the CONDITIONAL chord-limited lane -- leaf stated, c0_Y0169 half certified
+
+Split the conditioned square's own box (tautologous) and use each piece's fatter
+polygon core K'(b):
+
+  n(b) = beta + LANE_out(b)                        if every pose of b misses int C
+       = min(beta, LANE_band(b)) + LANE_out(b) + 1 otherwise;  <=1 everywhere => DEAD
+
+LANE_out discharges BAND boxes (charged to beta by the chord row); LANE_band is its
+mirror, discharging boxes every pose of which has chord < 1 -- one new exact
+primitive chordlane.not_band_ok: min|v| > (y + 1 - y^2)/2 at y = cs_min, since f is
+decreasing on [1, sqrt2].  The two lanes must be two covers, not one plain cover
+over all free meeters: each carries a prune that discharges half the window, and
+the plain cover was measured and does not close.
+
+c0_Y0169 / TL(0,0) (the PI's case): guard line x = 364583/500000 on the TL frame's
+left wall, minchord = [1,0,1,0,0,0] -- the two pins below the cell give chord
+exactly 1 each -- rhs = 469271/250000, beta = 1.  Sample: 8,174 poses meet int
+TL(0,0), 58 free, ALL 58 of them BAND (outside_free = 0 of 4,258 outside poses).
+The PI's first half (nothing from the right reaches TL) is CERTIFIED: LANE_out = 0
+on every piece reached.  The second half (H's corner leaves under 1 of width) is
+OPEN: the LANE_band cover did not close at 3,000 boxes nor at 60,000.  So the node
+is NOT yet dead, and the obstruction is localised to that one cover.  No
+certificate emitted; the population pass over the NO-LINE / M = 1 cells was not run
+(the +3 CPU-h is spent).  Three levers and a cost order in notes/t3_table.md T8.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
