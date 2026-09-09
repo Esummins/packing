@@ -124,42 +124,90 @@ def process(T, path, recs, a):
     return rec
 
 
+def todo_nodes(T, sk, sn, steps, depth):
+    """ALIVE nodes with roles, sharded by the subtree key of the first `depth` path parts (nodes
+    above that depth by their own key), keys assigned greedily by size to the least-loaded shard
+    (deterministic); the retry loop in stage_run waits for ancestors computed by another shard."""
+    def key(p):
+        parts = p.split("/")
+        return "/".join(parts[1:1 + depth]) if len(parts) > 1 else "root"
+    cand = []
+    for p, n in T["nodes"].items():
+        if not n.get("roles") or not n["verdict"].startswith("ALIVE"):
+            continue
+        if str(n.get("step") or "").endswith("complement"):
+            continue
+        if steps and (n.get("step") or "root") not in steps:
+            continue
+        cand.append(p)
+    size = {}
+    for p in cand:
+        size[key(p)] = size.get(key(p), 0) + 1
+    load = [0] * sn
+    owner = {}
+    for k in sorted(size, key=lambda q: (-size[q], q)):
+        j = min(range(sn), key=lambda i: (load[i], i))
+        owner[k] = j
+        load[j] += size[k]
+    mine = [p for p in cand if key(p) == "root" or owner[key(p)] == sk]
+    mine.sort(key=lambda q: (T["nodes"][q].get("level", 0), q))
+    return mine
+
+
 def stage_run(a):
     sk, sn = RS.shard_of(a.shard)
     T, n_sh = RN.load_tree_overlay(a.cell, a.overlay)
     recs = load_side(a.cell)
     steps = set(a.steps.split(",")) if a.steps else None
-    todo = [p for p in RN.todo_nodes(T, sk, sn, steps) if p not in recs]
+    todo = [p for p in todo_nodes(T, sk, sn, steps, a.depth) if p not in recs]
     if a.max_nodes:
         todo = todo[:a.max_nodes]
     caps = RS.wallcapped(a.cell)
     out = side_path(a.cell, sk, sn)
-    print("%s %s shard %d/%d: %d nodes to do (%d done, %d shard files overlaid) -> %s" % (
-        TAG, a.cell, sk, sn, len(todo), len(recs), n_sh, out), flush=True)
+    print("%s %s shard %d/%d depth %d: %d nodes to do (%d done, %d shard files overlaid) -> %s" % (
+        TAG, a.cell, sk, sn, a.depth, len(todo), len(recs), n_sh, out), flush=True)
     t00 = time.time()
     cnt = {}
     n_run = 0
-    for p in todo:
-        if K.sentinel():
-            print("sentinel; stop", flush=True)
-            return 2
-        if p in caps:
-            print("  skip %s (wall-capped)" % p, flush=True)
-            continue
-        with RS.NodeWall(a.cell, p):
-            rec = process(T, p, recs, a)
-        if rec["verdict"].startswith("SKIPPED"):
-            print("  %s: %s" % (p, rec["verdict"]), flush=True)
-            continue
-        recs[p] = rec
-        with open(out, "a", encoding="utf-8") as fh:
-            fh.write(json.dumps(rec, default=str) + "\n")
-        n_run += 1
-        key = rec["verdict"].split("(")[0] + ("/" + str(rec.get("leaf")) if rec.get("leaf") else "")
-        cnt[key] = cnt.get(key, 0) + 1
-        kp = rec.get("kept") or rec.get("kept_mb") or {}
-        print("  %-34s %-9s %-46s kept %s  %.1fs" % (
-            p, rec["step"], rec["verdict"][:46], {k: round(v, 3) for k, v in kp.items()}, rec["wall_s"]), flush=True)
+    pending, waited = todo, 0
+    while pending:
+        nxt, progress = [], False
+        for p in pending:
+            if K.sentinel():
+                print("sentinel; stop", flush=True)
+                return 2
+            if p in caps:
+                print("  skip %s (wall-capped)" % p, flush=True)
+                continue
+            with RS.NodeWall(a.cell, p):
+                rec = process(T, p, recs, a)
+            if rec["verdict"].startswith("SKIPPED"):
+                nxt.append(p)
+                continue
+            recs[p] = rec
+            progress = True
+            with open(out, "a", encoding="utf-8") as fh:
+                fh.write(json.dumps(rec, default=str) + "\n")
+            n_run += 1
+            key = rec["verdict"].split("(")[0] + ("/" + str(rec.get("leaf")) if rec.get("leaf") else "")
+            cnt[key] = cnt.get(key, 0) + 1
+            kp = rec.get("kept") or rec.get("kept_mb") or {}
+            print("  %-34s %-9s %-46s kept %s  %.1fs" % (
+                p, rec["step"], rec["verdict"][:46], {k: round(v, 3) for k, v in kp.items()}, rec["wall_s"]), flush=True)
+        if not nxt:
+            break
+        if not progress:
+            waited += 1
+            if waited > 90:
+                print("  %d nodes still waiting for ancestors from other shards; giving up" % len(nxt), flush=True)
+                break
+            time.sleep(60)
+        else:
+            waited = 0
+        for q, r in load_side(a.cell).items():       # ancestors computed by the other shards
+            recs.setdefault(q, r)
+        print("  retry: %d nodes waiting for ancestors (%d recorded)" % (len(nxt), len(recs)), flush=True)
+        pending = nxt
     print("%s shard %d/%d done: %d run, %s, %.0fs" % (TAG, sk, sn, n_run, cnt, time.time() - t00), flush=True)
     return 0
 
@@ -304,6 +352,7 @@ def main():
     ap.add_argument("--lonely", type=int, default=1)
     ap.add_argument("--steps", default="")
     ap.add_argument("--max_nodes", type=int, default=0)
+    ap.add_argument("--depth", type=int, default=2)
     a = ap.parse_args()
     rc = {"run": stage_run, "apply": stage_apply, "status": stage_status, "xcheck": stage_xcheck}[a.stage](a)
     sys.exit(rc or 0)
