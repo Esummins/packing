@@ -56,6 +56,14 @@ def load_side(cell):
     return recs
 
 
+def vol_t(b):
+    """pose volume of a Box in A171's measure: area x (t_hi(th1) - t_lo(th0)), t = the library's
+    tilt parameter (what MBox.kept_fraction weighs sub-bins by)."""
+    from caselp import t_lo, t_hi
+    x0, x1, y0, y1, th0, th1 = b[:6]
+    return float((x1 - x0) * (y1 - y0)) * float(t_hi(th1) - t_lo(th0))
+
+
 def box6(b):
     return [b.x0, b.x1, b.y0, b.y1, b.th0, b.th1]
 
@@ -91,6 +99,12 @@ def process(T, path, recs, a, refine=None):
     if par is not None and par["verdict"].startswith("SKIPPED"):
         par = None
     if node.get("parent") and par is None:
+        pn = T["nodes"].get(node["parent"])
+        if pn is not None and pn["verdict"].startswith("DEAD"):
+            # the A168 record itself: a DEAD parent (killed after the child was recorded) kills the child
+            rec.update(verdict="DEAD(C, ancestor %s (A168 record): %s)" % (node["parent"], pn["verdict"][:70]),
+                       leaf="ancestor", wall_s=round(time.time() - t0, 1))
+            return rec
         rec.update(verdict="SKIPPED(parent %s not yet re-normalised)" % node["parent"], wall_s=0.0)
         return rec
     if par is not None and par["verdict"].startswith("DEAD"):
@@ -302,13 +316,15 @@ def stage_xcheck(a):
             continue
         for nm, kp in (d.get("kept") or {}).items():
             bb = r["bbox"].get(nm)
-            if bb is None:
+            src = (r.get("roles") or {}).get(nm, {}).get("src")
+            if bb is None or src is None or nm not in (r.get("kept_mb") or {}):
                 continue
-            theirs = kp * float(R.vol(Box(*bb)))
-            ours = r["vol1"].get(nm, 0.0)
-            if ours > theirs + 1e-9:
+            theirs = kp * vol_t(bb)                       # both in A171's t-measure (kept_fraction)
+            ours = r["kept_mb"][nm] * vol_t(src)
+            if ours > theirs * (1 + a.tol) + 1e-12:
                 n_weak += 1
-                weak.append(dict(node=p, why="role %s volume ours %.6g > theirs %.6g" % (nm, ours, theirs)))
+                weak.append(dict(node=p, role=nm, ours=ours, theirs=theirs, ratio=round(ours / theirs, 4) if theirs > 0 else None,
+                                 why="role %s t-volume ours %.6g > theirs %.6g" % (nm, ours, theirs)))
                 break
     rep = dict(cell=a.cell, compared=n_cmp, weaker=n_weak, dead_here_alive_there=n_str, weak=weak,
                n_clipcheck=len(cc), n_ours=len(recs))
@@ -386,6 +402,7 @@ def main():
     ap.add_argument("--max_nodes", type=int, default=0)
     ap.add_argument("--depth", type=int, default=2)
     ap.add_argument("--prop_max", type=int, default=16)
+    ap.add_argument("--tol", type=float, default=0.0)
     a = ap.parse_args()
     rc = {"run": stage_run, "apply": stage_apply, "status": stage_status, "xcheck": stage_xcheck}[a.stage](a)
     sys.exit(rc or 0)
