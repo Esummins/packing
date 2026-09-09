@@ -595,3 +595,324 @@ No open box contains a shadow (A106: 64 of 145 open level-2–4 boxes are empty 
 shadow floor of both A57 classes is the pinwheel at +0.0097) — the boxes are alive because the relaxation,
 not the geometry, has room. This is the reading that produced the geometric leaves of §5 and the local
 certificates of §6.
+
+---
+
+## 5. Geometric leaves: kills that need no LP
+
+Each leaf is stated for a node of a zone tree (any class, any n): pins P with certified cores, a conditioned
+square H with parameter box B_H, the container [0, s0]², the family F of eleven closed pairwise-disjoint unit
+squares (the dilate of §1.3 when the window is meant). Every leaf below has an exact rational certificate
+and an independent checker; the Lean column says what is formalised. The order in which they are applied
+matters and is a lemma of its own (§5.9): geometry to a fixed point first, LP only afterwards.
+
+### 5.1 Pin-clip and the tilt trim (A131, A96)
+
+**Lemma CLIP [T]+[C].** Let K be a certified core of another square (a pin's exact core, or the axis core of
+another conditioned square). For a tilt sub-bin [t₀, t₁] of B_H, the set of centres c at which Q(c, θ) meets
+int K *for every* θ in the sub-bin is convex and is decided exactly: each of the four separating-axis
+conditions is a single sinusoid in θ (rational in t), whose extremum over the sub-bin is at an endpoint or
+at one interior critical point (`P² + Q² < ¼`). Removing those centres from B_H is sound: a centre in the
+dead set carries no square distinct from K's owner. The clip is four bisected slabs per obstacle, searched
+in floats and certified in `Fraction`s, no epsilon. *Canary and controls [M]:* 674/674 existing logic kills
+clip to EMPTY; 1.14·10⁶ sampled poses, 0 hits; the predicate matches a direct SAT grid on 40 000 cases.
+**Yield [M]:** of A57's 607 unclosed nodes 132 clipped to EMPTY (112 of them by the deployed tilt trim
+T5″, the box-wise octagon test that CLIP strictly dominates), 292 narrowed; on ten alive nodes the clipped
+LP moved five from η ≈ 0 to η ≤ −0.5. **Caveat [T]:** the LP's `eps_geo` row-shrink must never be chained
+after a clip — it re-imposes exactly the shell the clip removed. Lean: the T5 rule
+`core_meet_same_square` [L]; the clip's sinusoid decision is [C] (A131 `pinclip.dead_q`, independent
+checker 132/132).
+
+### 5.2 The polygon core and the pair leaf (A132, A135, A141)
+
+**Lemma K′ [T]+[L].** K′(B) := ⋂_{poses ∈ B} Q(pose) is convex; a rational point v lies in K′(B) iff for each
+of the four corners (x, y) of the centre rectangle the polynomial conditions |proj_k(v − (x, y))| ≤ ½
+hold for all t ∈ [t₀, t₁] on both edge axes (`PolyCoreT5.checkVertexInPBox_sound` [L]; decided by Bernstein
+positivity after clearing 1 + t²). The certified polygon is the convex hull of certified vertices, built
+by clipping on a θ-grid, shrinking by 10⁻⁶ and simplifying inward only.
+
+**Leaf PAIR (shared point) [L] (`PolyCoreT5.shared_point_same_square`).** If two boxes B₁, B₂ have a common
+rational point v ∈ K′(B₁) ∩ K′(B₂) then any two squares with poses in B₁ and B₂ share an interior point, so
+they are the same square; a node hypothesising two *distinct* squares there is dead. This is the T5
+contradictory rule with the polygon in place of the axis core (T5⁗): 64 logic kills on 506 alive nodes, 37
+new [M]; on k0 it killed `s3_far` (A141: h0 and h1 share a certified point once h0's box is clipped to the
+container) [C].
+
+**Leaf OVL (always-overlap) [T] (A118 §1.2).** If every pose pair (p₁ ∈ B₁, p₂ ∈ B₂) overlaps then the
+two boxes cannot hold distinct squares. (Octagon pair inequality: strictly stronger than Lemma TC below,
+firing at centre distance < 1 rather than ≈ 0.7.)
+
+### 5.3 Tilt coherence (PI, Lemma TC) and centre separation
+
+**Lemma TC [T (support-function identity, verified to machine epsilon); leaf [C]] (`docs/known_results.md`
+26c; `ParamNoFam.lean` `TCLeaf`).** Two interior-disjoint unit squares with centre distance c and tilt
+difference D (mod 90°) satisfy (1 + cos D + sin D)/2 ≤ c; so centres within 1.05 force |D| ≤ 6.06°, within
+1.10 force |D| ≤ 13.05°, within 1.207 force |D| ≤ 44°, with equality for edge-to-edge flush at D = 0. As a
+leaf between two boxes (bins) it is frozen as a Lean `Prop` whose separating-axis step is [C] (A117: 170/170
+stored fires reproduced, 1.7·10⁶ sampled pairs, 0 counterexamples). n-general and elementary. Measured: as a
+kill test 4.8× weaker than the octagon interval test because it discards direction; it is the O(1)
+pre-screen and the reason the pinwheel's three tilted squares share a tilt.
+
+**Lemma CN (centre separation) [L] (`Zones.centre_separation`; A42 N1.0).** Distinct squares of a packing
+have Euclidean centre distance ≥ 1 (each contains the open disc of radius ½ about its centre). Corollary:
+a footprint of diameter < 1 holds at most one centre (`zone_assign_bijective`). **Leaf CN (cover number)
+[T, zero kills M] (A153):** if the certified outer feasible-centre region of a node is covered by k pieces of
+diameter < 1 then at most k more squares fit, so k < budget kills with no LP. Measured over 322 nodes: cover
+number − budget has median +4, minimum 0, and on 322/322 the region already holds ≥ budget points pairwise
+≥ 1 apart — a floor no refinement removes. Kept as a gallery assertion; priced at zero as a lever.
+
+### 5.4 The teleport leaf, lanes and slot lanes (A58, A118, A141)
+
+**Lemma CC-2 (teleport) [L] (`Selection.teleport_packing`).** If the open interior of a slot cell C ⊆ [0, m]²
+meets the interior of at most one square Q of a packing at side m, replacing Q by the exact cell square C
+gives a packing at side m (no corridor, no motion). Applied to a corner slot this is Lemma K0-FREE (§7.2).
+Applied to a **usable slot** of a pinned class S — a completable, unclipped slot whose extension class
+S ∪ {p} is certified dead on a window containing m — it gives:
+
+**Lemma SLOT-CROWD [T, ∀-packings] (`docs/proofs/slot_crowds.md` §2).** In every packing at side m ∈ [3.82,
+s0) containing S's pins, every usable slot is met (open interiors) by ≥ 2 non-pin squares. For k5_11 the
+usable slots are BL(1,1), BR(0,1), TL(1,0) (extensions k6_18, k6_20, k6_20, full window) and TR(0,0) (k6_23);
+for k5_16 BR(0,1), TR(0,1), TR(1,0) and BL(1,0); trump5's six unclipped completable slots are all doubly met
+by Trump's own free squares (exact 60-digit canary: second depths 0.016 … 0.305).
+
+**Leaf LANE [T]+[C] (A118 axis cores; A141 polygon cores).** LANE(C) := an upper bound on the number of
+pairwise interior-disjoint unit squares that can meet int C while lying in the container and interior-disjoint
+from every core (pins and K′(H)); M(C) := 1 if some pose of H meets int C, else 0 (decided exactly by
+A161's `box_misses_cell_exact`, the full separating-axis test over B_H with the square's own normals — A141's
+cell-normal test was incomplete). If LANE(C) + M(C) ≤ 1 the slot is singly met and the node is dead by
+SLOT-CROWD. LANE is certified by a complete prefix-code cover of the meeter pose space with three discharge
+rules (container, misses-cell, shared rational point) and a pair test on the open set; a realised disjoint
+pair is a sound LANE ≥ 2 certificate that retires the cell forever (Lemma A159-1). **Yield [M]:** 188 A57
+nodes + 56 trump5 nodes (A141; 294 certificates, independent checker); 47 k0 cells (A141). **Caveat (A118-O1,
+A152) [T]:** the k6 extension classes are certified with *exact* pins (tolerance 3·10⁻⁸), so a slot-lane
+kill is sound for the class-S composition with exact pins, and for A57's δ = 10⁻² slack-pin family only after
+the twelve extension certificates are re-solved with a = ½ − h and re-verified over the window (1–15 / 2–30
+CPU-h, four classes at τ = 4.60–4.72 at risk) [P]. **The shrunk-cell refinement is FALSE [F]** (A152): "every
+other square misses the cell shrunk by δ ⟹ some translate of the cell is free" fails — four grazers entering
+through the four faces block every translate; the sound fixed-translate form is vacuous at completable slots.
+**The undecided cells are real two-crowds [M]** (A157: 86 of 179 realise a free pose at 4·10⁵ draws; the
+covers close 0 of 93); a hairline grazer with clearance 10⁻² is invisible on a page — "met" is interior
+intersection at any depth.
+
+### 5.5 Chord rows, guard lines, and the chord-limited lane (A144, A161, A167)
+
+**Lemma LINE [T] (A144 `chord_sum_le_side`).** For any line ℓ inside the container the chords int Q ∩ ℓ of
+a packing's squares are disjoint open segments, so their lengths sum to ≤ s. For a parameter box B the
+minimum chord `minchord(B, ℓ)` over all poses is five exact rational evaluations (the chord depends on the
+tilt only through y = cos + sin; one factor is monotone, the other attains its interval minimum at an
+endpoint). Splitting off the hypothesis squares turns the PI's reading "a line crossing four squares through
+opposing sides forces side ≥ 4" into an LP column priced at rhs(ℓ) = s0 − Σ_pins minchord − minchord(H)
+instead of s0. As an LP row it is narrow (active on 2 of 20 re-solves) and needs a v4 certificate clause
+(`guardlines`, spec written, Lean shape two theorems + one checker, not built) [P]; offline it flags 86 of
+448 survivors [M] (`writeup/figures/k5_11_interior_Y0147_guardline.svg`).
+
+**Lemma CL (chord-limited lane) [T]+[C] (A161).** For a usable slot on a wall carrying two pins, the guard
+line inside the slot's wall row caps at β := ⌊s0 − Σⱼ minchord(Bⱼ, ℓ)⌋ the number of free squares crossing
+the line through opposite sides (chord ≥ 1, the band); A141's lane cover with an exact band prune
+(max|v| ≤ (y + 1 − y²)/2) bounds the outside meeters by LANE_out; SLOT-CROWD's ≥ 2 is contradicted by
+β + LANE_out + M ≤ 1. 98 certificates, all passing an independent checker; 27 genuinely new dead nodes
+after de-duplication against the status collector (A161's own "90 new" was a population-snapshot error).
+k5_11 contributes zero because its wall-adjacent usable slots sit on a wall with one pin chord (β = 2).
+**Conditional form [T]+[C] (A167):** splitting B_H into pieces b with their own guard line, chord row
+(minchord is monotone under box inclusion) and fattened core: n(b) = β(b) + LANE_out(b) if every pose of b
+misses the cell, else min(β, LANE_band) + LANE_out + 1; n(b) ≤ 1 on every piece kills. 15 kills (11 new)
+over 416 cells; 285 cells are no-go by an exact rational two-crowd witness (49 certified), which retires them
+for every lane-type leaf.
+
+### 5.6 The impossible-weight gate (A145)
+
+Not a lemma: the share of a node's dual-support weight sitting on placements the hypothesis forbids (columns
+meeting K′(H) or a pin's exact core) is a threshold *predictor* of an exact-core re-solve kill [M] (4 of 5
+above 0.60 killed; monotone on ALIVE records 100/50/28/7 % by band; nearly flat on FAIL records). It orders
+the exact-core chore; the kills it predicts are ordinary (K) leaves under the frozen verifier.
+
+### 5.7 Wastage: Lemma ID and Leaf WASTE (A89, A164)
+
+**Lemma ID [T] (`docs/proofs/tilt_floor_k0.md` §7).** If no square reaches depth ≥ δ at corner c then the
+box [0, 1 − δ]² at c is wasted, so c_sh shallow corners strand c_sh(1 − δ)² of the wastage budget
+E(m) := m² − 11 ≤ B₀ := s0² − 11 = 4.031780343056. Area alone never kills four shallow corners
+(4 < 4.0318); **certified [C] (A89-O3):** no packing at any side of the window has all four corners
+SHALLOW(0.3) — some square reaches within 0.7 of a corner point; three shallow corners is open.
+**Leaf WASTE [T] (A164):** with U := the container points no admissible square can contain (admissible = in
+the container, interior-disjoint from every certified core), |U| ≤ m² − 11; |U| > B₀ is an LP-free kill; the
+window is covered by inflating the cover square only. **Measured: zero kills on all 71 alive gallery nodes
+[M]** — |U|/B₀ median 18.6 %, maximum 47 %; the corner column is *empty* on every node, so Lemma ID's charged
+region is empty on the alive population; 64–100 % of the certified waste sits in wall strips. "Only one
+centre fits near the right wall" is false unconditionally (seven 1-separated centres fit in x ≥ s0 − ½).
+
+### 5.8 Snap, exchange and flood (A98, A101) — leaves that are sound and silent
+
+**Lemma SNAP-D [T].** A square Q of a packing can be replaced by the exact cell square C at the same side iff
+no other square meets int C (= `teleport_packing`). **Lemma MULTI [T]:** a set of squares moves onto a set T
+of pairwise interior-disjoint cells iff no *untouched* square meets any int C ∈ T — the movers may crowd each
+other's targets, which is why one-at-a-time greedy stalls while the joint move certifies. **Lemma SHELL
+[T]:** a crowder of an η-disturbed square's cell (tilt θ) is a grazer of SAT depth ≤ √2·ε,
+ε = η + ½ − 1/(2(cos θ + sin θ)) ≤ η + θ/2 — the tangency law made a theorem. **Lemma FLOOD-D [T]:** a Young
+diagram D at a corner with N(D) := #{squares meeting int D} ≤ |D| yields a packing at the same side with an
+exact corner slot square, hence k ≥ 1; the excess X(D) = N(D) − |D| equals overhang minus free area
+(Lemma X); at side < 4 every square meets the 3 × 3 corner block (Lemma CAP), so a win needs |D| ≤ 8.
+**Lemma EXPOSE [T]:** a re-fit Q₀ after removing a two-intruder corner's pair is valid iff no untouched
+square has an interior point in int Q₀ ∖ (A ∪ B). **Theorem EXCHANGE (every K0-BLOCKED packing on
+[3.82, ŝ) converts to k ≥ 1 at the same side) is OPEN [C]**; its exact stall is INTERLOCK / CELL-INTERLOCK
+(realised at two corners of the 3.9855 record and at Trump's TL, never at four corners). As node leaves these
+are silent at the frontier (existential-filter law) — SNAP-T fired on 0 of A57's witness holes.
+
+### 5.9 The multi-box invariant (A171, A172, A175) — the order of operations, as code
+
+**Lemma INV [T].** In a node with several conditioned roles, (i) every piece is first clipped to the
+container (the sound w_min rule; the strict w_max clip narrows the hypothesis and is a diagnostic only);
+(ii) every piece of every role is clipped against every *other* role's core with Lemma CLIP, and the cores
+are rebuilt after each pass, to a fixed point; (iii) **K′(role) is the exact rational intersection of the
+per-piece polygon cores**, every vertex re-certified against every piece — a hull of the surviving pieces
+forgets clips that remove different slabs in different tilt sub-bins and loses a quarter of the certified
+core (A172: on one node kept fractions H 0.44 → 0.36, D 0.088 → 0.072); (iv) the invariant K-CONTAINER,
+K-DISJOINT (exact polygon SAT), POSE-CONTAINER, CLIP-FIXPOINT is asserted before any row, cover, figure or LP;
+a failing K-DISJOINT is the PAIR kill, not an error; an emptied role is the kill `EmptyBox`. **The obstacle
+must be the polygon core, not the inscribed axis square** (A175's defect finding: with axis-core obstacles a
+recorded node kept H 1.00/D 1.00/S 1.00/B 0.60 and was alive; with polygon obstacles H is emptied and the
+node is dead). This is the rule two agents in a row broke and the PI caught by eye; it is now
+`attempts/A171-multibox-invariant/code/multibox.py`, and `chord_rows`/`lane` refuse an un-normalised node.
+
+---
+
+## 6. Local certificates around the exact minima (S07, S02, S33, S38)
+
+### 6.1 Theorem LOCAL (A116; `docs/proofs/local_certificate.md`) — n-general
+
+Fix a known minimum z* with load-bearing squares L and the class pins P (slack h), a side window
+W ∋ s0, radii (r, ρ) and an optional tilt cut. The **local hypothesis N**: s ∈ W; for each pin some square
+is axis-aligned with centre in the slot's h-box; for each ℓ ∈ L some *other* square has pose in
+F_ℓ = [c_ℓ ± r]² × ([θ_ℓ ± ρ] ∩ cut); all distinct. Dead(N, s0): no packing of n squares at side ≤ s0
+satisfies N.
+
+**Reduction DROP [T].** The |P| + |L| witnesses of N form a packing of |P| + |L| squares satisfying N, so
+Dead_{L∪P}(N, s0) ⇒ Dead(N, s0): the other squares never appear (and §6.4 says what that costs).
+
+**Lemma COVER [T] (Lean `cover_pair`, `SatInterior.cover_pair'`).** Over a tilt cell K, a pair is FAR if some
+selection's interval enclosure is ⊆ [0, ∞), NEAR otherwise; a selection is POSSIBLE on K if its enclosure
+reaches ≥ 0. Every packing of L ∪ P with tilts in K lies in the polyhedron P_λ(θ) of some **leaf** λ (one
+possible selection per near pair) — a finite case split of ≤ 8^k cases by Lemma SAT.
+
+**Lemma LEAF [T].** At fixed tilts, v_λ(θ) := min{s : (s, c, u) ∈ P_λ(θ)} is an LP whose dual y ≥ 0 gives
+s ≥ Σ y_k d_k(θ) for every point of the leaf polyhedron; the support of y is a wall-to-wall load path and its
+value is a chain formula in the tilts (Lemma GRAIN-LP).
+
+**Theorem LOCAL [T].** Dead_{L∪P}(N, s0) ⟺ for every cell K of a finite cover of N's tilt box and every
+possible leaf λ on K, inf_{θ ∈ K} v_λ(θ) > s0. (⇒ is the converse: an LP minimiser at side ≤ s0 is itself a
+packing of L ∪ P satisfying N.)
+
+**Lemma RELAX [T]+[L] (`LocalCertT2.relax_wall`, `relax_selection`).** Over a tilt cell each selection row
+is replaced by affine rows in (s, c, u, t) implied by the true row: p cos φ + q sin φ ≤ p + |q| sin hw +
+max(0, −p_lo)(1 − cos hw), the McCormick planes for q·φ, and affine lower bounds for the support width
+w = |cos Δ| + |sin Δ| (in t the two smooth branches cos Δ ± sin Δ bound w below on the whole cell, so the
+π/2 kink never appears: A133). The loss is second order in the cell width plus one McCormick term that
+halves under a q-range split. A111's earlier leaf stopped at r < s* − s0 because it dropped ambiguous pairs
+and lost first order per row; with every near pair case-split the certified minimum sits within 10 % of s*.
+
+**Lemma STAB [T]+[M].** A contact's selection is forced on a box until its riding vertex reaches the end of
+its edge (tangential slack ½ − |τ|) or the relative tilt crosses 90°; a flush contact costs one binary
+split. The PI's stability-radius reading (the minimum's own contacts) matches the rigorous radii to ±0.02;
+the single-leaf neighbourhood is ≈ 0.02 and stops at the short-slack contact (S07: f0's vertex 0.057 below
+BL(0,1)'s corner — the Trump boundary; S02: f1's corner 0.085 over f3's), which the tree case-splits.
+
+### 6.2 The certified neighbourhoods and the Trump boundary
+
+| minimum, frame | L | largest certified (r, ρ) | cut | status |
+|---|---|---|---|---|
+| S02, k5_11 (pins BL(0,0) BL(0,1) BL(1,0) TL(0,0) BR(0,0)) | f1, f2, f3, BR(0,1) | (0.2, 10°), (0.05, 20°) | none | [C] A119 rational; [L] `localDead_s02_t` (0.2, 10°) |
+| S07, trump5 | f0, f2, f4 | (0.1, 40°), (0.2, 10°) | F_T(θ) > s0, i.e. θ > θ_T + 6.1·10⁻⁵° (grid uses 41.565°) | [C]; [L] `localDead_s07_t` (0.1, 40°) |
+| S33, k6_07 (six pins) | all five free squares | (0.2, 10°), (0.05, 20°) | none (Trump outside on position alone) | [C] A125 |
+| S38, k6_21 | five free squares | (0.1, 10°) | none | [C] A125 |
+
+**The dip, exactly [T] (`local_certificate.md` §4).** For S07 the pair f0–BL(0,1) has two selections once
+δ > 0.024: the face (f0's vertex on x = 1) and the corner (BL(0,1)'s corner (1, 2) on f0's lower-left edge).
+The corner leaf's support is the **gap chain** with value F_T(θ) = 2 + (2 + sin θ)/(cos θ + sin θ), increasing
+on θ > 24.3°, equal to s0 at θ₀ = 40.181998° = θ_T + 6.1·10⁻⁵°: so N must be cut by θ > θ₀ — Trump's own
+tilt, not the grain boundary 41.565° (where F_T = Λ = S02's value 3.886746 and the *formula* changes). Below
+θ₀ the dip is real and unavoidable: Trump is a packing at ŝ < s0 satisfying trump5's pins, so no N containing
+Trump's tilt can be dead — the cut is the canary (uncut runs at (0.05, 5°) and beyond go ALIVE with witnesses
+at side F_T(40°) = 3.875871). For S02 the mirror dip D(θ) = F_T(90° − θ) < s0 at θ > 49.818° is an artefact of
+the restriction to L ∪ P (Trump's three tilted squares under the diagonal reflection satisfy k5_11's pins with
+nine squares) and does not materialise in the k5_11 frame because the pins BL(1,0), TL(0,0) leave no room.
+
+**The radius limit [M].** At r = 0.3 both shadows admit a genuine rearrangement of the |L| + |P| squares
+below s0 that the *dropped* squares would forbid (S02: BR(0,1) slides 0.3 left with f3 on top, 3.873; S07:
+the ladder shears, 3.856); adding the blockers as boxes lifts the value but does not extend the radius
+(A119 T3). **Correction to A116 [F]:** three of its four ρ ≥ 20° "capped" cells are ALIVE (checked packings
+of L ∪ P below s0 inside N); the certified radii are unaffected. At S33 nothing is dropped, and the ρ = 20°,
+r ≥ 0.1 cells are OPEN at the cap with no witness — the limiter is the tilt-cell count (five tilt dimensions
+bisected to ≈ 1°), not geometry.
+
+**Corollary TRUMP-GAP [T/M, 40 digits] (`docs/proofs/grain_flood.md` §2.4).** ŝ = 2 + (2 + sin θ_T)/(cos
+θ_T + sin θ_T) at Trump's tilt: Trump, S07 and S02 are three kink minima of one menu of chain formulas in the
+common tilt θ, with u = cos θ + sin θ — the ladder Λ(θ) = 2 + 4u/(u² + 1) (minimum 2 + 4√2/3 at 45°, = 4 at 0°
+and 90°: the grid), the column chain Y, the diagonal chain D(θ) = 2 + (2 + cos θ)/u, and the gap chain
+F_T = D(90° − θ). S07 = Λ meets Y at 45°; S02 = Λ meets D at sin θ cos θ = 2 sin θ − 1 (θ* = 48.43512°);
+S07's boundary into Trump's grain is at sin θ cos θ = 2 cos θ − 1 (41.56488°), crest exactly S02's value.
+**Theorem CONT [T]:** the fixed-tilt value function s_min(θ) is continuous in θ for every n (a finite union
+of polyhedra with Slater points, Berge); **Lemma INHERIT [T]:** the formula survives every unloaded contact
+change; only a change of the loaded basis can produce a kink, and only a crossing of two local branches can
+turn s_min down. **GRAIN-FLOOD as a box kill is true and empty [T]** ("every local minimum ≤ s0 lies in
+Trump's grain" is the class kill itself, `grain_flood.md` §4); the sound consumer is a conflict row on the
+support's cells (GRAIN-ROW), which kills a support pattern, not a node.
+
+### 6.3 The Lean closure: LocalDead from certificate data alone
+
+`Local.lean` defines `LocalHyp Ls Ps s z` (boxes, pins) and `LocalDead Ls Ps s0`. The chain
+`localDead_of_cert` (A126, a reflected weak-duality leaf checker `LocalCert.checkLeaf_sound` proved once
+and run on every dead leaf by `native_decide`) needed one named hypothesis, `CertCover` — that the recorded
+leaves cover the hypothesis. A133 re-emitted every certificate in **t = tan(θ/2)** (cos, sin rational: no
+π, no Taylor series, no interval kernel anywhere; the certificates got *sharper*, S02 32 570 → 16 406
+leaves). A134 proved the cover's three pieces (`selectionOk_sound`, `relax_wall`/`relax_selection`,
+`localHyp_bodies`) with a decidable Bernstein positivity certificate `posCheck` on the certificate; A138
+wrote the reflected plumbing (`treeOk_sound`, `wallOf_sound`, `selCtx_sound`, `rowImplies_sound` — the
+600-line quantisation estimate collapses to one lemma because the emitted row is compared with the built
+row through `minL`), ending in `certCover_of_check : certOk C = true → CertCover …` and
+`localDead_of_certOk`. A139 closed the data: **`localDead_s07_t : LocalDead s07Boxes s07Pins 3.877084` and
+`localDead_s02_t` are theorems [L]** with Ls, Ps read off the certificate's own `CMeta`, rosters
+`[propext, Classical.choice, Quot.sound]` + the replays' `native_decide` axioms + `check_3_82`'s; build
+571 s / 6 707 s. One catch [F→fixed]: Lean's support-width enclosure `wLoQ` is coarser than the
+generator's exact w-range, so 246/246 of S07's selection closures were not reproducible until the
+certificates were re-emitted with the Lean-side exclusion (+37 % leaves for S07); the permanent fix — the
+exact w-range as a decidable enclosure in `LocalCertT2` — is [P]. The S33/S38 certificates are [C] under
+A119's independent rational checker (six certificates, 602 421 dead leaves, 10.7·10⁶ multipliers) and not
+yet in Lean [P].
+
+### 6.4 YES/NO composition, F-COVER, basins as unions
+
+**Lemma YES/NO [L] (`LocalCompose.node_dead_of_yes_no`, `classKilledAt_of_yes_no`).** For a tree node with
+hypothesis H and a local neighbourhood N = (Ls, Ps): the YES child "a square in each box of Ls" is dead by
+`LocalDead`; the NO children "no square in box Bᵢ" are ordinary case-LP nodes with NO-families; the
+disjunction is a tautology (`yes_or_no`), so the node is dead when all NO certificates PASS. **F-COVER
+[F→fixed, A136]:** the NO zones were written rounded *outward* (tilt to 2⁻²⁰, centre to 9 decimals), so
+ZONE ⊆ BOX failed by ~10⁻⁷ and the tautology failed at file level; the fix rounds the zone inward and
+checks `zone_sub_box` on the written rationals (one trap: a bound that is an exact geometric fact, ½ or
+s0 − ½, must be written exactly). A120's 22 NO certificates re-certify 22/22; Y0230's four NO certificates
+replay in Lean (`y0230_dead` [L]); the in-N board is 15 closed / 24 touched of 35 targets [C]. `Local.Box`
+cannot carry a tilt cell leaving [0°, 90°] (the inside part is kept; sound, marked).
+
+**Basins are unions, per frame [C] (A151, A160, A163).** Growing S02's neighbourhood coordinate by
+coordinate: f1 certifies at 10× A116's cell volume (0 real packings found inside any grown N), but the
+growth directions trade off — a **live-low witness** (nine squares at side 3.8693 < s0) refutes f2's
+upward slice together with the grown f1 — so the certified basin is a *disjunction* of differently shaped
+boxes (53 box sets + A151-B, 114 of 184 in-N nodes). f0 is an exact rattler with a one-parameter slide of
+length 0.298419 at fixed tilt; f3 is the most load-bearing square. A basin is a statement about a
+hypothesis in a class frame: transported to k5_16 (52/54 certified) and trump5 (42/54; 9 refusals are real
+witnesses because trump5 does not pin TL(0,0)), all 94 objects re-emitted through A133's generator and
+checked. **Consumer of the S33 basin [M]:** one node — the sixth pin BL(0,2), which k6_07 has and trump5
+lacks, blocks 1 065 of 1 421 alive supports.
+
+### 6.5 Coupled moves at the k0 residue (A128, A130) — box lemmas, not node kills
+
+**Lemma BOX-MOVE [T] (`docs/proofs/drain_sel.md` §2.0).** A rigid screw of a cluster C ∋ Q, certified on a
+pose box B by interval rows (every possibly-active pair axis of a member against an outsider has positive
+derivative, every wall row likewise, Q's depth candidates decrease, no other depth increases), shows that B
+contains no Ψ^(w)-minimiser at which Q intrudes its corner, for every positive weight vector w; its dual is
+Lemma BOX-GORDAN (Motzkin form with interval coefficients). **Lemma EXCHANGE-BOX [T]:** Lemma EXPOSE on a
+box, ∀-packings. **Measured [M]:** on the twelve converged-alive k0 near-packings, K01–K06, the two locked
+boundary packings and Trump (canary held on every box), 35 exact certificates each re-sampled 10⁴ → 0 hits:
+the cluster screw certifies nothing a single square does not; the exchange is the only coupled move that
+works where every single-square move fails (nine corners); below 4 every hold is a flush re-fit with margin
+≈ 0. The non-rigid field (A130, Lemma BOX-FIELD-W) certifies the 4.001525 lock at all eight intruders; the
+three window holds are mode accumulations at the flush stratum (Lemma MODE), not locks, and are k ≥ 1
+packings above ŝ, so they cost DRAIN-SEL(W) nothing. None of this is composed into a node kill.
