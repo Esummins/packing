@@ -779,29 +779,44 @@ def lonely_clip(mbox, corner, c=None, s=S_RAT, nsub=4, refine=0, max_pieces=192,
     rep = dict(box=mbox.name, corner=corner, c=float(c),
                area_before=float(sum(rect_area(r) * (b.t1 - b.t0) for (b, r) in mbox.pieces)),
                n_before=len(mbox.pieces), dropped_pieces=0, split=0)
-    work = list(mbox.pieces)
-    # --- tautologous tilt refinement, dropping the halves that are wholly lonely
-    for _lvl in range(max(0, refine)):
-        if len(work) * 2 > max_pieces:
-            break
-        new = []
-        for (bn, r) in work:
-            m = (bn.t0 + bn.t1) / 2
-            for b2 in (Bin(bn.t0, m), Bin(m, bn.t1)):
-                if lonely_rect(r, b2, corner, c=c, s=s, nsub=nsub, stats=st):
-                    st["drops"] += 1
-                    rep["dropped_pieces"] += 1
-                    mbox.trace.append(dict(
-                        lonely=True, pass_=pass_, t=[str(b2.t0), str(b2.t1)],
-                        steps=[dict(op="lonely_empty", corner=corner,
-                                    rect=[str(v) for v in r],
-                                    area=float(rect_area(r) * (b2.t1 - b2.t0)))]))
-                    continue
-                new.append((b2, r))
-        rep["split"] += 1
-        work = new
-        if not work:
-            break
+    # --- tautologous tilt refinement, dropping the halves that are wholly lonely.
+    #
+    # A SPLIT IS KEPT ONLY WHERE IT PAYS.  The two halves cover the parent exactly, so bisecting is
+    # always legal -- but keeping the split when NEITHER half was dropped would inflate the piece
+    # count of every box the clip touches, and more pieces make the rest of `normalise` stronger
+    # (A172: `K'` is the intersection of the PER-PIECE `K'`) and slower.  A measurement that
+    # compared `normalise` with and without `corners=` would then be reading a mixture of
+    # Theorem B and extra tilt refinement.  So a piece with no dropped descendant is returned
+    # UNSPLIT, and the clip is purely subtractive.
+    def refine_piece(bn, r, depth):
+        if depth <= 0:
+            return [(bn, r)], False
+        m = (bn.t0 + bn.t1) / 2
+        out, moved = [], False
+        for b2 in (Bin(bn.t0, m), Bin(m, bn.t1)):
+            if lonely_rect(r, b2, corner, c=c, s=s, nsub=nsub, stats=st):
+                st["drops"] += 1
+                rep["dropped_pieces"] += 1
+                mbox.trace.append(dict(
+                    lonely=True, pass_=pass_, t=[str(b2.t0), str(b2.t1)],
+                    steps=[dict(op="lonely_empty", corner=corner,
+                                rect=[str(v) for v in r],
+                                area=float(rect_area(r) * (b2.t1 - b2.t0)))]))
+                moved = True
+                continue
+            sub, sub_moved = refine_piece(b2, r, depth - 1)
+            out += sub
+            moved = moved or sub_moved
+        return (out, True) if moved else ([(bn, r)], False)
+
+    work = []
+    for (bn, r) in mbox.pieces:
+        if refine > 0 and len(work) + 2 ** max(0, refine) <= max_pieces:
+            sub, moved = refine_piece(bn, r, refine)
+            rep["split"] += int(moved)
+            work += sub
+        else:
+            work.append((bn, r))
     # --- the slab clip on every surviving piece
     keep = []
     for (bn, r) in work:
@@ -1082,6 +1097,7 @@ class MBox:
         self.k_source = None                         # what the CURRENT pc/core actually came from
         self.k_info = {}
         self._pcache = {}                            # per-piece K', keyed by the piece
+        self._obs_cache = None                       # (content key, Obstacle) -- see obstacle()
 
     # ---------------------------------------------------------------- geometry
     def union_box(self):
@@ -1159,8 +1175,24 @@ class MBox:
         return self.pc
 
     def obstacle(self, mode="poly"):
-        return (obstacle_from_poly(self.pc, self.name) if mode == "poly"
-                else obstacle_from_core(self.core, self.name))
+        """the compiled obstacle for the CURRENT K', REUSED while K' is unchanged.
+
+        `normalise` asks for an obstacle once per box per pass, and `rebuild` hands back a fresh
+        `pc` object every pass even when the polygon is geometrically identical -- so a new
+        `Obstacle` (new `uid`) used to be compiled every pass and every `Bin` recomputed its exact
+        per-edge radius bounds from scratch.  Keying this cache on the CONTENT (the exact rational
+        vertices, or the core's five exact parameters) means the same object comes back only when
+        the obstacle really is the same one, which is what makes `Bin.radii`'s cache hit legitimate;
+        before A173 it hit by accident, on a recycled address, with the WRONG bounds."""
+        key = ((mode, tuple(self.pc.verts)) if mode == "poly" else
+               (mode, self.core.kx, self.core.ky, self.core.cm, self.core.sm, self.core.a))
+        cached = getattr(self, "_obs_cache", None)
+        if cached is not None and cached[0] == key:
+            return cached[1]
+        obs = (obstacle_from_poly(self.pc, self.name) if mode == "poly"
+               else obstacle_from_core(self.core, self.name))
+        self._obs_cache = (key, obs)
+        return obs
 
     def kept_fraction(self):
         if self.area0 <= 0:

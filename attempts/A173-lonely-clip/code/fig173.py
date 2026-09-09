@@ -8,8 +8,9 @@ every mark is a real object, and every panel carries a note saying what it IS).
         - the centres the lonely clip REMOVED, hatched red;
         - the hypothesis square at the centre of D's box at mid tilt, with the two extremal-tilt
           outlines of the same centre;
-        - a row of per-tilt-sub-bin insets of D's centre window (grey = before, blue = after,
-          red hatch = removed), which is the only exact per-bin view;
+        - a row of per-tilt-sub-bin insets of D's centre window (every BEFORE piece red-hatched,
+          every AFTER piece painted blue on top: blue survives, the hatch still showing was
+          removed), which is the only exact per-bin view;
         - a note on each panel saying what it is.
     -> docs/residue_map/lonely_clip_S1.svg
   * `--gallery`             a one-page gallery of the ten largest-effect nodes -> figs/.
@@ -167,9 +168,11 @@ def page(cell, path, out, nsub=4, refine=1, max_iter=6, lonely_refine=1):
     x0b, x1b = float(MB.PIN.outer_rect(b0)[0]), float(MB.PIN.outer_rect(b0)[1])
     y0b, y1b = float(MB.PIN.outer_rect(b0)[2]), float(MB.PIN.outer_rect(b0)[3])
     spanx, spany = max(x1b - x0b, 1e-9), max(y1b - y0b, 1e-9)
-    o.append(text(PAD, iy - 12, "D's centre window per TILT SUB-BIN of its box -- grey = the BEFORE "
-                                "pieces of that bin, blue = what survives the lonely clip, red hatch "
-                                "= removed.  Exact: no projection.", 10, bold=True))
+    o.append(text(PAD, iy - 12, "D's centre window per TILT SUB-BIN of its box -- every BEFORE piece "
+                                "of that bin is drawn red-hatched and every surviving AFTER piece is "
+                                "painted blue over it, so BLUE IS WHAT SURVIVES and the red hatch "
+                                "left showing IS what Theorem B removed.  Exact per bin: no "
+                                "projection.", 10, bold=True))
     for i, (t0, t1) in enumerate(refs):
         ox = PAD + i * (iw + 14)
         sx, sy = iw / spanx, INS_H / spany
@@ -304,29 +307,31 @@ def gallery(rows, out, ncol=5):
 
 
 def top_rows(n=10, step="S1"):
-    rows = []
+    seen = {}
     for fn in sorted(os.listdir(RES)):
         if not fn.startswith("measure173") or not fn.endswith(".jsonl"):
             continue
         for line in open(os.path.join(RES, fn), encoding="utf-8"):
-            if not line.strip():
-                continue
-            r = json.loads(line)
-            b, l = r.get("base", {}), r.get("lonely", {})
-            if b.get("kill") or "kept" not in b:
-                continue
-            if step and r["step"] != step:
-                continue
-            if l.get("kill"):
-                ka, ha, kk, hh = 0.0, 0.0, 0.0, 0.0
-            else:
-                ka, ha = l["kept"]["D"], l["kept"]["H"]
-                kk, hh = l["k_area"]["D"], l["k_area"]["H"]
-            rows.append(dict(cell=r["cell"], step=r["step"], path=r["path"],
-                             kept_before=b["kept"]["D"], kept_after=ka,
-                             k_before=b["k_area"]["D"], k_after=kk,
-                             h_before=b["kept"]["H"], h_after=ha,
-                             loss=b["kept"]["D"] - ka))
+            if line.strip():
+                q = json.loads(line)
+                seen[(q["cell"], q["step"], q["path"])] = q      # DEDUPE: shards may overlap
+    rows = []
+    for r in seen.values():
+        b, l = r.get("base", {}), r.get("lonely", {})
+        if b.get("kill") or "kept" not in b:
+            continue
+        if step and r["step"] != step:
+            continue
+        if l.get("kill"):
+            ka, ha, kk, hh = 0.0, 0.0, 0.0, 0.0
+        else:
+            ka, ha = l["kept"]["D"], l["kept"]["H"]
+            kk, hh = l["k_area"]["D"], l["k_area"]["H"]
+        rows.append(dict(cell=r["cell"], step=r["step"], path=r["path"],
+                         kept_before=b["kept"]["D"], kept_after=ka,
+                         k_before=b["k_area"]["D"], k_after=kk,
+                         h_before=b["kept"]["H"], h_after=ha,
+                         loss=b["kept"]["D"] - ka))
     rows.sort(key=lambda r: -r["loss"])
     return rows[:n]
 

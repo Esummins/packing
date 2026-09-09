@@ -13,12 +13,15 @@ BINS = [0.0, 0.01, 0.05, 0.10, 0.25, 0.50, 0.75, 0.95, 1.0000001]
 
 
 def load():
-    rows = []
+    """every measured node, DEDUPED by (cell, step, path): the sweep is resumable and shardable, so
+    two processes can in principle both finish the same node; the last record written wins."""
+    seen = {}
     for fn in sorted(glob.glob(os.path.join(RES, "measure173_*.jsonl"))):
         for line in open(fn, encoding="utf-8"):
             if line.strip():
-                rows.append(json.loads(line))
-    return rows
+                r = json.loads(line)
+                seen[(r["cell"], r["step"], r["path"])] = r
+    return list(seen.values())
 
 
 def summarise(rows):
@@ -140,7 +143,11 @@ if __name__ == "__main__":
     rows = load()
     o = summarise(rows)
     json.dump(o, open(os.path.join(RES, "report173.json"), "w", encoding="utf-8"), indent=1)
-    open(os.path.join(RES, "table173.md"), "w", encoding="utf-8").write(md(o))
+    text = md(o)
+    open(os.path.join(RES, "table173.md"), "w", encoding="utf-8").write(text)
+    NOTES = os.path.abspath(os.path.join(HERE, "..", "notes"))
+    os.makedirs(NOTES, exist_ok=True)
+    open(os.path.join(NOTES, "measure.md"), "w", encoding="utf-8").write(text)
     for step in sorted(o["by_step"]):
         print(step, o["by_step"][step], flush=True)
     print("lonely kills:", len(o["lonely_kills"]), " base kills:", len(o["base_kills"]),
