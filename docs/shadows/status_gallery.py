@@ -619,6 +619,30 @@ def collect(table, corpus):
                 d,
             )
 
+    # (7d) A178's geometry-cascade kills (forced-corner / forced-slot roles, multibox pair leaf)
+    #      results/geopass178.jsonl is resumable: the LAST row per nid is the verdict.
+    last178 = {}
+    for d in jl(A("A178-gallery-geometry", "results", "geopass178.jsonl")):
+        if d.get("nid"):
+            last178[d["nid"]] = d
+    for nid, d in sorted(last178.items()):
+        if str(d.get("verdict", "")) != "DEAD":
+            continue
+        camp = "k0" if d.get("gallery") == "k0v4" else ("A60" if str(d.get("camp")) == "A60" else "A57")
+        table.add_rec(
+            "A178 geopass178.jsonl",
+            camp,
+            nid,
+            True,
+            "geometry cascade: %s (forced_corners.md Theorem FC; A171 multibox pair leaf)" % (d.get("leaf") or ""),
+            "A178",
+            d.get("cert") or "",
+            fdate(A("A178-gallery-geometry", "results", "geopass178.jsonl")),
+            d,
+            note=("CONDITIONAL on K0-O1 (k1_00's tree): the k0 corner pairs are the K0-BLOCKED hypothesis"
+                  if camp == "k0" else ""),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
