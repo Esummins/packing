@@ -521,3 +521,48 @@ the now-DEAD shadow-gallery pages into `docs/shadows/<gallery>/killed/` (never a
 rewrites `docs/shadows/STATUS.md`, which is the checklist the PI reads first. `--dry-run` prints the
 plan and writes nothing; it solves no LP, writes nothing outside `docs/shadows/`, and is idempotent.
 First run: `k0v4` 11 alive / 0 dead, `a57v4` 57 alive / 3 dead.
+
+---
+
+## A161 fold-in (2026-09-08) — the CHORD-LIMITED LANE kills 70 alive k5_16 nodes (66 of them new)
+
+`attempts/A161-chord-lane/` (BRIEF.md, notes/leaf.md, code/{chordlane,run161,checkcl,t4_table}.py,
+results/t3_dedup.jsonl, notes/t3_table.md, certs/cl_*.json + results/cert_manifest.json).
+
+**The leaf.** At a WALL-ADJACENT usable slot cell `C` of a pinned class, put a guard line `l` inside
+the wall row of pins. A144's chord row gives `rhs(l) = s0 - SUM_j minchord(B_j, l)`; every square
+crossing `l` through opposite sides has chord `>= 1`, so at most `beta = floor(rhs(l))` FREE squares
+are in that BAND. A141's lane cover, run with one extra sound prune (`band`: every pose of the box
+has chord `>= 1`, decided exactly by `max|v| <= (y + 1 - y^2)/2` at `y = cs_max`), bounds the
+remaining meeters by `LANE_out`. With `M` the conditioned meeters,
+`#{non-pin meeters of int C} <= beta + LANE_out + M`, and SLOT-CROWD forces `>= 2`: **the node is
+DEAD when `beta + LANE_out + M <= 1`.** Soundness, certificate format, the independent checker and
+the Lean shape (`chord_sum_le_side` + `minchord_of_box` from A144, the A141/A135 lane leaf, two new
+`Bool` checkers and ONE new glue theorem, 0 new axioms) are in `notes/leaf.md`. A118-O1 is inherited
+verbatim: these are EXACT-PIN class-`S` kills, not slack-family kills.
+
+**One new primitive, and it is the reason `M` moves.** A141's `box_misses_cell` separates only along
+the CELL's normals, so for a conditioned box at 50-65 deg whose square clears the cell along one of
+its OWN edge normals it can never fire at any depth — every `M = 1` of that shape in A141's `t2`
+pass is a budget failure, not geometry. `chordlane.box_misses_cell_exact` runs the full
+separating-axis test over the parameter box (8 axis/sign pairs, every bound an exact Fraction by a
+two-endpoint rule). On `k5_16_interior_Y0842 / BL(1,0)` it excludes `H` at the ROOT box, in ONE leaf:
+`M` goes 1 -> 0.
+
+**The PI's node.** `k5_16_interior_Y0842 / BL(1,0)`: guard line `y = 770833/1000000`, the two
+bottom-row pins give chord exactly 1 each, `rhs = 469271/250000 = 1.877084`, `beta = 1`,
+`LANE_out = 0` (166 cover leaves: 44 `band`, 106 `witness`, 16 `container`; 0 open), `M = 0`,
+total `1 <= 1` — **DEAD**. Sample line: 60,000 poses drawn, 40,696 meet `int C`, 20,125 are BAND
+(min chord 1.0000000000453) and 20,571 are OUTSIDE, of which **zero** are free.
+Cert `attempts/A161-chord-lane/certs/cl_k5_16_interior_Y0842__BL1_0.json`, sha256 `bb2406ba727fc782...`.
+
+**Population (A57 half).** 2,377 (alive node, wall-adjacent usable slot) pairs run.
+k5_16 kills: **72 pairs / 70 nodes** — BL(1,0) 45, TL(1,0) 26, BR(1,0) 1; **66 of the 70 nodes are
+new** (3 were already dead by A131's pin-clip, 1 by A142's exact-clip; A141's own lane kills were
+excluded from the population by construction). All 70 are level 1 except one level-2 node. k5_11
+contributes **zero**: both of its wall-adjacent usable slots (BR(0,1), TL(1,0)) sit on a wall
+carrying only ONE pin chord, so `beta = 2` on every swept offset and the leaf cannot fire — a
+structural gate worth remembering (the leaf needs TWO pins on the wall of the slot).
+124 pairs are UNDECIDED (the outside cover did not close inside a 10 s/pair budget) over 88 nodes;
+one NEAR-MISS (`k5_16_interior_Y0143_D01 / BL(1,0)`, `beta = 1`, `LANE_out = 1`, `M = 0`).
+Nothing under `attempts/A57-shadow-trees/` was modified: these are records, not re-solves.

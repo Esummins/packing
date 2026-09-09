@@ -1,0 +1,30 @@
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+selftest: 7 cases, 0 UNSOUND
+  misses_cell [2.218056, 2.357813] -> True (w0+) sampled_meeting=0
+  misses_cell [1.3, 1.5] -> False (None) sampled_meeting=60000
+  misses_cell [3.0, 3.2] -> True (ex+) sampled_meeting=0
+  misses_cell [0.5, 0.6] -> False (None) sampled_meeting=60000
+  band [0.9, 1.0] -> True min_chord=1.000000 a144=1.000000 agree=True
+  band [1.3, 1.45] -> True min_chord=1.000000 a144=1.000000 agree=True
+  band [1.2, 1.5] -> False min_chord=0.000000 a144=0.000000 agree=True
+
+k5_16_interior_Y0842  cls=k5_16 level=1 alive=True  |  slot BL(1,0)
+  B0 ['0.500000', '0.500000', '0.500000', '0.500000', '0.000000', '0.000000']  K' verts=4 area=0.999996
+  B1 ['0.500000', '0.500000', '1.500000', '1.500000', '0.000000', '0.000000']  K' verts=4 area=0.999996
+  B2 ['0.500000', '0.500000', '3.361637', '3.377084', '0.000000', '0.000000']  K' verts=4 area=0.984550
+  B3 ['3.361637', '3.377084', '0.500000', '0.500000', '0.000000', '0.000000']  K' verts=4 area=0.984550
+  B4 ['3.361637', '3.377084', '3.361637', '3.377084', '0.000000', '0.000000']  K' verts=4 area=0.969342
+  B5 ['2.209219', '2.357813', '1.513218', '1.659028', '53.130102', '64.010766']  K' verts=40 area=0.586959
+
+VERDICT UNDECIDED   beta=1 LANE_out=None M=0 total=None
+  guard line h = 458333/500000   rhs = 469271/250000 = 1.877084000
+    minchord(B0) = 1 = 1.000000000  (V=0.416666, two-endpoint (A inc, B endpoint-min))
+    minchord(B1) = 0 = 0.000000000  (V=0.583334, two-endpoint (A inc, B endpoint-min))
+    minchord(B2) = 0 = 0.000000000  (V=2.460418, two-endpoint (A inc, B endpoint-min))
+    minchord(B3) = 1 = 1.000000000  (V=0.416666, two-endpoint (A inc, B endpoint-min))
+    minchord(B4) = 0 = 0.000000000  (V=2.460418, two-endpoint (A inc, B endpoint-min))
+    minchord(B5) = 0 = 0.000000000  (V=0.742362, two-endpoint (A inc, B endpoint-min))
+  sample: {"drawn": 40000, "meeting": 26942, "overlapping_some_core": 26506, "free": 436, "band": 17572, "band_free": 436, "outside": 9370, "outside_free": 0, "min_chord_band": 1.0000000000354081, "max_chord_outside": 0.9998694698174928}
+  M_detail: [{"j": 5, "excluded": true, "by": "cover", "leaves": 1, "reason": null}]
+
+done 121.3 s -> C:\Users\esumm\code\packing\attempts\A161-chord-lane\results\t1_y0842.json

@@ -6980,3 +6980,75 @@ N_boxes160.json,A160_slide_and_box.svg,A160_witnesses.svg}`; `logs/`), plus the 
 entry, one paragraph in `docs/budget.md` §D and one sentence in `docs/residue_ledger.md` §1b. Two
 BLAS-pinned processes at BelowNormal / affinity `0xFFFF` throughout, on a box that ran 16–19 other lab
 pythons; wall, not CPU, was binding.
+
+---
+
+## 2026-09-08 (A161) — the CHORD-LIMITED LANE: the PI's sentence about Y0842, made into a leaf, kills 96 alive nodes
+
+**The reading.** On `docs/shadows/a57v4/k5_16_interior_Y0842.svg` the PI said: *"you can only put one
+core in the bottom slot by chord sum, and no cores outside that slot can reach BL(1,0)."* That is the
+conjunction of two proved pieces — A144's guard-line chord row and A141's lane cover — applied to
+complementary halves of the same set of meeters, and it adds no analytic content beyond them.
+
+**The leaf (`attempts/A161-chord-lane/notes/leaf.md`).** At a WALL-ADJACENT usable slot cell `C` of a
+pinned class, with a guard line `l` inside the wall row of pins:
+
+    rhs(l) = s0 - SUM_j minchord(B_j, l)            beta = floor(rhs(l))          [A144 LINE-1/2]
+    BAND   = { poses with chord on l >= 1 }         LANE_out over the complement  [A141's cover]
+    #{non-pin squares meeting int C}  <=  beta + LANE_out + M     and SLOT-CROWD says this is >= 2,
+
+so `beta + LANE_out + M <= 1` is a contradiction and the node is DEAD. `beta` needs no cover at all —
+one linear inequality — and the two bottom-row pins of k5_16/trump5 spend exactly 2 of `s0 = 3.877084`
+on it, leaving 1.877084 and hence `beta = 1` unconditionally (and `beta = 0` whenever a conditioned
+box also crosses `l` with `minchord > 0.877084`, which is 68 of the 98 kills: there the CONDITIONED
+square is itself the one square allowed in the wall lane).
+
+**Two exact primitives, both cheap.** (i) BAND over a box is a closed form, not a cover:
+`chord >= 1  <=>  |v| <= f(y) = (y + 1 - y^2)/2` with `y = cos + sin`, and `f` is decreasing on
+`[1, sqrt2]`, so `max|v| <= f(cs_max)` decides it in ~10 Fraction operations — cross-checked against
+A144's independent five-point `minchord` on every box. (ii) `box_misses_cell_exact`, the FULL
+separating-axis test over a parameter box (the cell's two normals and the square's two, both signs,
+each bound an exact Fraction by a two-endpoint rule). A141's `box_misses_cell` uses only the cell's
+normals with the box's bounding half-width, so for a conditioned box at 50-65 deg clearing the cell
+along one of its OWN edge normals it can never fire at any depth. **That, not geometry, is why A141
+recorded `M = 1` on Y0842**; the new test excludes `H` at the ROOT box in one leaf, and `M` is 0.
+
+**Y0842 / BL(1,0), the headline.** `y_L = 770833/1000000`; the BL and BR pins give chord exactly 1
+each (`minchord` on a zero-width tilt bin is exact); `rhs = 469271/250000 = 1.877084`; `beta = 1`;
+`LANE_out = 0` on a complete cover of the meeting window in 166 leaves (44 `band`, 106 `witness`, 16
+`container`, 0 open); `M = 0`. Total `1 <= 1` — **DEAD**. Sample line: 60,000 poses, 40,696 meet
+`int C`, 20,125 BAND (min chord 1.0000000000453), 20,571 OUTSIDE of which **zero** are free.
+
+**Population.** 2,377 (alive node, wall-adjacent usable slot) pairs, staged so that the cheap sound
+retirements run first: `beta >= 2` (485), `beta + M >= 2` on every offset (769), an exact free
+OUTSIDE pose realising `LANE_out >= 1` (845, plus 53 where two interior-disjoint such poses form
+A159's two-crowd witness), then the cover. **98 kills over 96 nodes — 70 k5_16 and 26 trump5, of
+which 90 are new** (6 were already dead by A131's pin-clip or A142's exact-clip; A141's own lane
+kills were excluded from the population by construction). 126 UNDECIDED inside a 10 s/pair cover
+budget over 88 nodes, 1 NEAR-MISS.
+
+**The negative result worth keeping.** k5_11 contributes ZERO. Both of its wall-adjacent usable slots
+(BR(0,1), TL(1,0)) sit on a wall carrying only ONE pin chord, so `rhs = 2.877084` and `beta = 2` on
+every offset — the leaf needs **two pins on the slot's wall**. Same for trump5's TR(1,0). That is the
+structural gate, stated n-generally in `notes/leaf.md` §6: *a wall row of `k` pins prices the wall
+lane at `s - k`, and a slot in that lane holds only as many squares as the leftover length allows.*
+
+**Verification.** `code/checkcl.py` is independent of the emitter except A132's `vertex_ok` and A57's
+`caselp`: it re-derives the cframe boxes from the node JSON, every `minchord` by its own five-point
+implementation (so A144's and A161's are cross-checked on every run), every separating-axis margin,
+the band threshold, cover completeness as a prefix code under the split rule, and the arithmetic.
+**98/98 PASS.** A118-O1 is inherited verbatim — these are exact-pin class-`S` kills, not slack-family
+kills; `notes/leaf.md` §5b records that the `beta` side of the caveat is cheap to lift.
+
+**Lean shape.** `chord_sum_le_side` + `minchord_of_box` (A144's spec, unchanged), the A141/A135 lane
+leaf and `shared_point_same_square` (unchanged), two new `Bool` checkers with soundness lemmas
+(`checkBandBox`, `checkBoxMissesRect`) and **one** new glue theorem `chord_limited_slot_crowd`, whose
+proof is the four-line count above. 0 new axioms.
+
+**Files.** `attempts/A161-chord-lane/` (`BRIEF.md`; `notes/{leaf,t3_table}.md`;
+`code/{chordlane,t1_y0842,run161,checkcl,t4_table}.py`; `results/{t1_y0842.json,t3.jsonl,
+t3_dedup.jsonl,t3_table.json,checkcl.json,cert_manifest.json,eligible.json,nodepaths.json}`;
+`certs/cl_*.json` x98; `logs/`), plus the registry row, this entry, the A57 `PAUSED.md` and A60
+`ledger.md` fold-ins and one sentence in `docs/residue_ledger.md` §1. One python at BelowNormal /
+affinity `0xFFFF` throughout on a box already running 16 lab processes (counted and waited twice);
+~1.4 CPU-h of the 3 CPU-h cap.

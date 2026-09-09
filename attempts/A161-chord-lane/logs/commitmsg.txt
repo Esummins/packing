@@ -1,0 +1,27 @@
+A161 done-success: CHORD-LIMITED LANE kills 96 alive A57/A60 nodes (90 new)
+
+The PI's reading of k5_16_interior_Y0842 -- "you can only put one core in the
+bottom slot by chord sum, and no cores outside that slot can reach BL(1,0)" --
+stated as a leaf: A144's chord row caps the BAND (chord >= 1 on a wall guard
+line) at beta = floor(s0 - SUM_j minchord(B_j, l)), A141's lane cover with a new
+exact `band` prune bounds the OUTSIDE meeters, and SLOT-CROWD's ">= 2 non-pin
+meeters" is contradicted by beta + LANE_out + M <= 1.
+
+Y0842/BL(1,0) DEAD: y_L = 770833/1000000, rhs = 469271/250000 (two bottom pins,
+chord exactly 1 each), beta 1, LANE_out 0 in 166 leaves (0 open), M 0.  M was 1
+in A141 only because its box_misses_cell cannot separate along the square's OWN
+edge normals; the new exact full-SAT test box_misses_cell_exact excludes H at the
+root box in one leaf.
+
+Population 2,377 (alive node, wall-adjacent usable slot) pairs -> 98 kill pairs /
+96 nodes (70 k5_16, 26 trump5), 90 of them new; 126 UNDECIDED, 1 NEAR-MISS.
+k5_11 yields zero: both its wall-adjacent usable slots sit on a one-pin wall, so
+beta = 2 -- the leaf needs TWO pins on the slot's wall.
+
+98/98 certificates PASS the independent checker checkcl.py (D1-D8: cframe boxes
+re-derived, minchord re-implemented and cross-checked against A144's, every
+separating-axis margin, the band threshold, cover completeness, the arithmetic).
+A118-O1 inherited verbatim (exact-pin class-S kills).  Lean: 2 new Bool checkers,
+1 new glue theorem, 0 new axioms.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>

@@ -791,3 +791,34 @@ the first empty conditional lane cover obtained anywhere -- but its `M` cover di
 (0 leaves / 5,001 open at depth 40; 0 / 40,001 at depth 42), because `box_misses_cell` can never fire
 for an interior `H` against a corner cell, and its NO child is alive, so it is YES-only at best.
 Cost ~0.7 CPU-h of a +2 CPU-h extension; nothing in A60 was written.
+
+---
+
+## A161 (2026-09-08) — CHORD-LIMITED LANE: 26 alive trump5 nodes dead, 24 of them new
+
+`attempts/A161-chord-lane/` (leaf statement, soundness, certificate format, independent checker and
+Lean shape in `notes/leaf.md`; the population table in `notes/t3_table.md`).
+
+The leaf: at a wall-adjacent usable slot cell `C`, A144's chord row on a guard line `l` inside the
+wall row of pins caps the number of FREE squares crossing `l` through opposite sides at
+`beta = floor(s0 - SUM_j minchord(B_j, l))`; A141's lane cover, with one extra sound prune (`band`,
+decided exactly by `max|v| <= (y + 1 - y^2)/2` at `y = cs_max`), bounds the rest by `LANE_out`; with
+`M` the conditioned meeters, SLOT-CROWD's `>= 2` is contradicted by `beta + LANE_out + M <= 1`.
+Exact-pin form throughout, so A118-O1 is inherited: these kill class-`S` packings with EXACT pins,
+which is what A60's cover needs, not the slack family.
+
+trump5 result (`m_lo = s0`, so the frame boxes are the exact-pin boxes at `s0` with no hull):
+**26 kill pairs over 26 distinct nodes**, all level 1 — BR(0,1) 23, TL(0,0) 2, BL(0,2) 1; TR(0,1)
+and TR(1,0) contribute none (TR(1,0)'s wall carries only ONE pin chord, so `beta = 2` there and the
+leaf cannot fire). **24 of the 26 are new** (2 were already dead by A131/A142's clip leaves). Of the
+26, 23 have `beta = 0` — the CONDITIONED square is itself the one square allowed to cross the wall
+line (its `minchord` exceeds `s0 - 3 = 0.877084`), so nothing else reaches the slot and the slot is
+singly met by `H` alone; 3 have `beta = 1, M = 0`.
+32 trump5 pairs are UNDECIDED inside the 10 s/pair cover budget and are the natural re-run target.
+
+Certificates `attempts/A161-chord-lane/certs/cl_c0_*.json` (SHA-256 in
+`results/cert_manifest.json`); all 98 of the attempt's certificates PASS the independent checker
+`code/checkcl.py` (D1-D8, which re-derives the cframe boxes, every `minchord`, every separating-axis
+margin, the band threshold, cover completeness and the arithmetic; it imports only A132's
+`vertex_ok` and A57's `caselp` from the emitter's world). Nothing under
+`attempts/A60-trump5-campaign/` was modified.
