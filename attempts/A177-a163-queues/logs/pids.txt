@@ -1,0 +1,44 @@
+--- A177 2026-09-09 13:37 LAUNCH ---
+worker A pid 35320  BelowNormal affinity 0xFFFF  run177.py --entry a163 --queue results/queue177_h10.json
+    --out_suffix _a177h10 --skip_done --cpu_cap 16000 --cert_rounds 8 --cert_time 450   (9 nodes, h10 leaf)
+worker B pid 19492  BelowNormal affinity 0xFFFF  run177.py --entry a163 --queue results/queue177_rest.json
+    --out_suffix _a177rest --skip_done --cpu_cap 16000 --cert_rounds 8 --cert_time 450  (11 nodes, widest-N leaf)
+Both certify through certify136x.py (A170 exact cores INSIDE the witness-feedback loop).  Both are
+RESUMABLE: relaunch the same command with --skip_done and every terminal record is skipped.  The
+stop button is attempts/A177-a163-queues/PAUSE (this attempt's own; A136's and A57's are untouched).
+A136's base worker pid 26892 was RUNNING at launch and is never killed.  Pidfile lines are never removed.
+--- A177 2026-09-09 15:26 ---
+worker B (pid 19492) finished its 11 nodes at 15:20:05 in 6179 s: 7 OPEN, 4 SKIP-UNSOUND.
+Its slot was refilled with a CHAINED worker, powershell pid 63228 BelowNormal (children inherit the
+priority class), running two run177.py jobs in sequence:
+  1. queue177_fallback.json --out_suffix _a177fb  (c0_Y1132 on the next-widest citeable set, after
+     its widest one was refused by A1_pins_match -- a soundness refusal is a property of the
+     (node, N) pair, so the fallback is tested rather than assumed)
+  2. queue177_t1.json --out_suffix _a177t1  (k5_11_interior_Y1140_D06, whose A136 record is OPEN on
+     one cert-CAP child with eta = -0.3846 and three children that were never tested at all --
+     three CAP-GATE resource events.  A resource event is never a verdict.)
+A136's base worker pid 26892 EXITED cleanly at 14:54:04 ("shard 0 done: 17146 s, 5 nodes"); its
+queue_base26 is complete.  Pidfile lines are never removed.
+--- A177 2026-09-09 15:57 STALE (machine crash) ---
+STALE: every pid line ABOVE is dead.  The machine bugchecked (0xD1, driver fault) at ~15:46 and
+killed every process on the box; a scan at 15:56 found NO lab python at all (only the four
+windows-mcp venv pythons, which the gate excludes).  A crash is a RESOURCE EVENT, never a verdict:
+the two nodes that were mid-flight are re-run, not recorded.
+  worker A pid 35320  (h10 queue)   DEAD at ~15:46; 3 of 9 nodes terminal (Y0054, Y0380, Y0183 all
+      OPEN), Y0422 mid-node with NO0 and NO1 already DEAD-CERT on disk -> re-run, cache serves them.
+  worker B pid 19492  (rest queue)  had already FINISHED cleanly at 15:20:05 (11 nodes).
+  powershell pid 63228 (chained fb -> t1)  DEAD at ~15:46; the fb job had finished (c0_Y1132
+      SKIP-UNSOUND, 1 s) and the t1 job was mid-node on k5_11_interior_Y1140_D06 (NO0 DEAD-CERT,
+      NO1's LP done at 15:45 and its certification in flight) -> re-run, cache serves NO0.
+  A136's base worker pid 26892 had exited cleanly at 14:54:04 before the crash; nothing owed there.
+Pidfile lines are never removed.
+--- A177 2026-09-09 15:58 RELAUNCH (post-crash) ---
+worker A pid 28960  BelowNormal affinity 0xFFFF  run177.py --entry a163 --queue results/queue177_h10.json
+    --out_suffix _a177h10 --skip_done --cpu_cap 16000 --cert_rounds 8 --cert_time 450
+    (6 nodes left: Y0422 [NO0/NO1 already DEAD-CERT], Y0452, Y0791, Y0803, Y0817, Y0973)
+worker B pid 28952  BelowNormal affinity 0xFFFF  run177.py --entry base --queue results/queue177_t1.json
+    --out_suffix _a177t1 --skip_done --cpu_cap 9000 --cert_rounds 8 --cert_time 450
+    (1 node: k5_11_interior_Y1140_D06, NO0 already DEAD-CERT)
+The rest queue (11 nodes) and the fallback queue (1 node) are COMPLETE and are not relaunched.
+Same frozen verifiers, same certify136x.py (exact cores in the loop), same PAUSE sentinel
+(attempts/A177-a163-queues/PAUSE).  Resumable: same command line with --skip_done.

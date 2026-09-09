@@ -52,3 +52,26 @@
 13:23:00   k5_11_interior_Y1128_D06         OPEN
 13:26:09   k5_11_interior_Y1128_D07         NO0 LP stage2 tau=5.000000 eta=+0.000000 conv=True (173s; flat-900 71s)
 13:26:09   k5_11_interior_Y1128_D07         NO0 ALIVE
+13:30:34   k5_11_interior_Y1128_D07         NO1 LP stage1 tau=4.666667 eta=-0.333333 conv=False (251s; flat-900 1500s)
+13:46:25     cert NO1                                            PASS (936s)
+13:46:25   k5_11_interior_Y1128_D07         NO1 DEAD-CERT
+13:49:34   k5_11_interior_Y1128_D07         NO2 LP stage1 tau=4.500000 eta=-0.500000 conv=True (173s; flat-900 173s)
+13:50:11     cert NO2                                            PASS (22s)
+13:50:11   k5_11_interior_Y1128_D07         NO2 DEAD-CERT
+13:54:57   k5_11_interior_Y1128_D07         NO3 LP stage1 tau=4.666667 eta=-0.333333 conv=False (271s; flat-900 1500s)
+14:05:40     cert NO3                                            PASS (628s)
+14:05:40   k5_11_interior_Y1128_D07         NO3 DEAD-CERT
+14:05:40   k5_11_interior_Y1128_D07         OPEN  (LP 868 s, cert 1586 s)  children=['ALIVE', 'DEAD-CERT', 'DEAD-CERT', 'DEAD-CERT']
+14:05:40   k5_11_interior_Y1128_D07         OPEN
+14:10:28   k5_11_interior_Y1140_D06         NO0 LP stage1 tau=4.615385 eta=-0.384615 conv=False (273s; flat-900 1500s)
+14:54:04     cert NO0                                            CAP (2600s)
+14:54:04   k5_11_interior_Y1140_D06         NO0 ALIVE
+14:54:04   gate: deadline passed, SKIP k5_11_interior_Y1140_D06/NO1
+14:54:04   k5_11_interior_Y1140_D06         NO1 CAP-GATE (memory gate)
+14:54:04   gate: deadline passed, SKIP k5_11_interior_Y1140_D06/NO2
+14:54:04   k5_11_interior_Y1140_D06         NO2 CAP-GATE (memory gate)
+14:54:04   gate: deadline passed, SKIP k5_11_interior_Y1140_D06/NO3
+14:54:04   k5_11_interior_Y1140_D06         NO3 CAP-GATE (memory gate)
+14:54:04   k5_11_interior_Y1140_D06         OPEN  (LP 273 s, cert 2600 s)  children=['ALIVE', 'CAP-GATE', 'CAP-GATE', 'CAP-GATE']
+14:54:04   k5_11_interior_Y1140_D06         OPEN
+14:54:04 shard 0 done: 17146 s, 5 nodes, 6 skipped by A149: [["k5_11_interior_Y0636_D05", "CLOSED"], ["k5_11_interior_Y0954_D01", "OPEN"], ["k5_11_interior_Y1128_D06", "OPEN"], ["k5_11_interior_Y1128_D07", "OPEN"], ["k5_11_interior_Y1140_D06", "OPEN"]]
