@@ -60,16 +60,36 @@ def box6(b):
     return [b.x0, b.x1, b.y0, b.y1, b.th0, b.th1]
 
 
+def merge_to_subbins(new, child, cap):
+    """the parent-intersected pieces of a role, if more than `cap`, are replaced per CHILD piece by
+    the bounding box of those inside its tilt range (a superset of their union, a subset of the
+    child piece: sound both ways [T]); keeps the piece count -- and the per-piece K' cost of every
+    later rebuild -- bounded, at the price of the parent's finer partition."""
+    if len(new) <= cap:
+        return new
+    groups = {}
+    for q in new:
+        host = [k for k, c in enumerate(child) if c.th0 - 1e-12 <= q.th0 and q.th1 <= c.th1 + 1e-12]
+        groups.setdefault(host[0] if host else ("solo", id(q)), []).append(q)
+    out = []
+    for g in groups.values():
+        out.append(Box(min(b.x0 for b in g), max(b.x1 for b in g), min(b.y0 for b in g), max(b.y1 for b in g),
+                       min(b.th0 for b in g), max(b.th1 for b in g)))
+    return out
+
+
 def vols(roles):
     return {r.name: float(sum(R.vol(b) for b in r.pieces)) for r in roles}
 
 
-def process(T, path, recs, a):
+def process(T, path, recs, a, refine=None):
     node = T["nodes"][path]
     rec = dict(node=path, step=node.get("step") or "root", level=node.get("level", 0), parent=node.get("parent"),
-               a168_verdict=node["verdict"], a168_kept=node.get("kept"), refine=a.refine, lib="post-13f23204")
+               a168_verdict=node["verdict"], a168_kept=node.get("kept"), refine=(a.refine if refine is None else refine), lib="post-13f23204")
     t0 = time.time()
     par = recs.get(node.get("parent")) if node.get("parent") else None
+    if par is not None and par["verdict"].startswith("SKIPPED"):
+        par = None
     if node.get("parent") and par is None:
         rec.update(verdict="SKIPPED(parent %s not yet re-normalised)" % node["parent"], wall_s=0.0)
         return rec
@@ -95,14 +115,14 @@ def process(T, path, recs, a):
                                        "region -- the child's hypothesis is contained in the parent's)" % r.name,
                                leaf="propagation", propagated=prop, wall_s=round(time.time() - t0, 1))
                     return rec
-                r.pieces = new
+                r.pieces = merge_to_subbins(new, r.pieces, a.prop_max)
                 r.rebuild()
                 if r.empty():
                     rec.update(verdict="DEAD(C, propagation: K'(%s) empty on the intersected pieces)" % r.name,
                                leaf="propagation", propagated=prop, wall_s=round(time.time() - t0, 1))
                     return rec
     rec["propagated"] = prop
-    rr, rep = PX.make_node(roles, refine=a.refine, lonely=bool(a.lonely))
+    rr, rep = PX.make_node(roles, refine=rec["refine"], lonely=bool(a.lonely))
     rec.update(kept=rep.get("kept"), kept_mb=rep.get("kept_mb"), k_area=rep.get("k_area"),
                k_area_mb=rep.get("k_area_mb"), passes=rep.get("passes"), n_pieces=rep.get("n_pieces"),
                lonely=[l for l in rep.get("lonely", []) if l["removed"] > 0 or l["dropped"]],
@@ -176,11 +196,23 @@ def stage_run(a):
             if K.sentinel():
                 print("sentinel; stop", flush=True)
                 return 2
+            r_try = None
             if p in caps:
-                print("  skip %s (wall-capped)" % p, flush=True)
-                continue
+                m = recs.get(p)
+                r_prev = m.get("refine") if (m and m["verdict"].startswith("SKIPPED(cap")) else a.refine
+                r_try = r_prev - 1
+                if r_try < 0:
+                    print("  skip %s (wall-capped at every refine level)" % p, flush=True)
+                    continue
+                marker = dict(node=p, step=T["nodes"][p].get("step") or "root", level=T["nodes"][p].get("level", 0),
+                              parent=T["nodes"][p].get("parent"), verdict="SKIPPED(cap attempt refine %d)" % r_try,
+                              refine=r_try, wall_s=0.0)
+                recs[p] = marker
+                with open(out, "a", encoding="utf-8") as fh:
+                    fh.write(json.dumps(marker) + "\n")
+                print("  %s wall-capped: retrying at refine %d" % (p, r_try), flush=True)
             with RS.NodeWall(a.cell, p):
-                rec = process(T, p, recs, a)
+                rec = process(T, p, recs, a, refine=r_try)
             if rec["verdict"].startswith("SKIPPED"):
                 nxt.append(p)
                 continue
@@ -353,6 +385,7 @@ def main():
     ap.add_argument("--steps", default="")
     ap.add_argument("--max_nodes", type=int, default=0)
     ap.add_argument("--depth", type=int, default=2)
+    ap.add_argument("--prop_max", type=int, default=16)
     a = ap.parse_args()
     rc = {"run": stage_run, "apply": stage_apply, "status": stage_status, "xcheck": stage_xcheck}[a.stage](a)
     sys.exit(rc or 0)
