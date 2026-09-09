@@ -1,0 +1,20 @@
+{
+ "cert": "C:\\Users\\esumm\\code\\packing\\attempts\\A166-nearest-corner-subtree\\certs\\l2_p65_101_b8_005_512_exactcore.json",
+ "result": "PASS",
+ "verifier_sha": "521cb01fe656707cf134864b75227c6051d43a97253749f50ecd1eb37cbef7af",
+ "budget": 8,
+ "total": "7981001/1000000",
+ "rounds": [
+  {
+   "round": 0,
+   "result": "PASS",
+   "verifier": [
+    "boxes = 28764  covered = 13836  vacuous = 0  exempt = 578 (core 578, nofam 0)  split = 14350  exact atom checks = 13836  max depth = 28  time = 1.0s",
+    "PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 7981001/1000000 < budget 8  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)"
+   ]
+  }
+ ],
+ "scope": "s0_fixed_side",
+ "window": "carries [3.82, shat) by dilation: Lemma B.0 + Lemma K0-WIDEN, the cover is stated at the full pad w_max (A166 notes/composition.md 5)",
+ "note": "A166: cores substituted with A135 exact_a cores (the ones the LP row filter used); caselp.make_certificate reverts to Hyp.from_json's stock b.core() -- see notes/certificate_bug.md"
+}
