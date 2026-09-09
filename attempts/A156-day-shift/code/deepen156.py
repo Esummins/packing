@@ -63,7 +63,7 @@ def anc_dead(nid, dead):
     return nid in dead or any("_D".join(parts[:i]) in dead for i in range(1, len(parts)))
 
 
-def parents(min_level=2, max_level=3):
+def parents(min_level=2, max_level=3, today_only=False):
     """(key -> [parent records]) for every ALIVE level-2/3 node with no dead ancestor."""
     dead = dead_ids()
     out = collections.defaultdict(dict)
@@ -85,6 +85,8 @@ def parents(min_level=2, max_level=3):
             if str(r.get("cert") or "").startswith("ALIVE") and r.get("box"):
                 rowof[nid] = (key, r)
     for nid, (key, r) in rowof.items():
+        if today_only:
+            break
         cs = certs[nid]
         if any(c.startswith(("PASS", "KILL-BY-LOGIC", "UNSOUND")) for c in cs):
             continue
@@ -102,8 +104,10 @@ def parents(min_level=2, max_level=3):
                 qgeo[j["id"]] = j
         except Exception:
             pass
-    for lp in glob.glob(os.path.join(BASE, "results", "lp156_*.jsonl")) + \
-            glob.glob(os.path.join(A137, "results", "emit_lp_*.jsonl")):
+    lpfiles = glob.glob(os.path.join(BASE, "results", "lp156_*.jsonl"))
+    if not today_only:
+        lpfiles += glob.glob(os.path.join(A137, "results", "emit_lp_*.jsonl"))
+    for lp in lpfiles:
         for r in jl(lp):
             if r.get("result") != "NO-KILL":
                 continue
@@ -126,13 +130,21 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--key", default=None, help="parent key, e.g. k5_11_interior_G1_D2")
+    ap.add_argument("--emit-key", default=None,
+                    help="the tag emit137 writes under, when it must differ from --key: the tag "
+                         "k5_11_interior_G1_D2 is A137's own night file, and A156 never appends to "
+                         "another chore's rows.  sync156.py maps the alias back to the canonical "
+                         "tree file.")
+    ap.add_argument("--min-level", type=int, default=2)
+    ap.add_argument("--today-only", action="store_true",
+                    help="parents = only the nodes THIS attempt recorded ALIVE at the LP today")
     ap.add_argument("--name", default=None, help="class: k5_11 or k5_16")
     ap.add_argument("--levels", type=int, default=3)
     ap.add_argument("--nsub", type=int, default=1)
     ap.add_argument("--max_parents", type=int, default=10 ** 6)
     a = ap.parse_args()
 
-    P = parents()
+    P = parents(min_level=a.min_level, today_only=a.today_only)
     if a.list or not a.key:
         for k, v in sorted(P.items()):
             c = collections.Counter(x["level"] for x in v)
@@ -146,7 +158,8 @@ def main():
         return
     rows = rows[:a.max_parents]
     name = a.name or ("k5_11" if rows[0]["id"].startswith("k5_11") else "k5_16")
-    tag0 = a.key + "_D2"
+    emitkey = a.emit_key or a.key
+    tag0 = emitkey + "_D2"
     clash = [p for p in (os.path.join(A137, "results", f"emit_geo_{tag0}.jsonl"),
                          os.path.join(A137, "results", f"emitq_{tag0}.json")) if os.path.exists(p)]
     if clash:
@@ -162,7 +175,7 @@ def main():
     for k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
               "NUMEXPR_NUM_THREADS"):
         env[k] = "1"
-    cmd = [sys.executable, EMIT137, "--mode", "deepen", "--name", name, "--key", a.key,
+    cmd = [sys.executable, EMIT137, "--mode", "deepen", "--name", name, "--key", emitkey,
            "--parents", pf, "--levels", str(a.levels), "--nsub", str(a.nsub),
            "--max_parents", str(a.max_parents)]
     print("running: " + " ".join(cmd), flush=True)
@@ -172,7 +185,7 @@ def main():
     if p.returncode != 0:
         sys.exit(p.returncode)
 
-    tag = a.key + "_D2"
+    tag = emitkey + "_D2"
     moved = []
     # A later deepen pass on the same key must EXTEND this attempt's rows, never overwrite them:
     # the .jsonl is appended and the queue .json is merged by id (emit137 always writes a fresh

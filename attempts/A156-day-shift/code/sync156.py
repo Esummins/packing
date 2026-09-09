@@ -59,10 +59,14 @@ def main():
         sorted(glob.glob(os.path.join(BASE, "results", "emit_geo_*.jsonl")))
     for gp in geo_files:
         tag = os.path.basename(gp)[len("emit_geo_"):-len(".jsonl")]
-        if tag.endswith("_D2"):
-            dest = os.path.join(A57, "results", f"tree_{tag}.jsonl")
+        # A156's deepen lane writes under an ALIAS tag (…G1a156_D2) whenever the canonical tag is
+        # A137's own night file, because this attempt never appends to another chore's rows.  The
+        # alias maps back to the canonical tree file here: "a156" is dropped from the key.
+        canon = tag.replace("a156", "")
+        if canon.endswith("_D2"):
+            dest = os.path.join(A57, "results", f"tree_{canon}.jsonl")
         else:
-            key, si = tag.rsplit("_s", 1)
+            key, si = canon.rsplit("_s", 1)
             dest = os.path.join(A57, "results", f"tree_{key}_s{si}.jsonl")
         have = {r["id"] for r in jl(dest) if "id" in r}
         rows = []
