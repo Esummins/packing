@@ -357,6 +357,19 @@ disjunction**: A151-B ∪ the common-tilt chain ∪ the independent tilt slices 
 in-N nodes / 50 alive against A151-B's 96/42 and A116's 72/32**, for ≈ 0.9 CPU-h of tree time in 50+
 certified boxes, every refusal in the union either a wall cap (labelled) or a drawn witness.
 
+**Re-framing a basin is cheap, and it is the cheapest S02 work left (A163).** Carrying A160's 53
+box sets + A151-B into k5_16's and trump5's pin sets cost **3 824 s of selection tree** (1 688 s +
+2 136 s, 240 s cap, two BLAS-pinned BelowNormal processes) plus **2 104 s of exact emission and
+independent checking** for **all 94** t-certificates (1 616 s generator + 488 s checker, 125 840
+leaves, 58 MB; an h = 1.25° chain link is 0.6 s and 0.01 MB, a tilt slice 1–98 s, A151-B 229 s and
+9.4 MB) — about **1.6 CPU-h for 94 fully certificated objects in two frames that had none** — and it
+buys 38 in-N / 21 alive k5_16 nodes and 3 in-N / 3 alive trump5 nodes at
+≈ 0.05 CPU-h per alive consumer, against A160's ≈ 0.9 CPU-h for +8 alive in k5_11; the k5_16 frame
+is where the remaining cheap S02 yield is (its two refusals are wall caps at 240 s, so a longer cap
+finishes it), while trump5's 12 nodes are capped by geometry, not compute — 9 of its 12 refusals are
+re-verified LIVE-LOW witnesses, so no wall time closes them and the only route to its other 9 nodes
+is boxes that do not lean into the unpinned `TL(0,0)` corner.
+
 ## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
 
 The 4-D verifier bisects tilt, position and side to a cap of 48 levels per path. Two constants belong to the

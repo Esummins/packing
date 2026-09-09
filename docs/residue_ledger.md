@@ -191,6 +191,26 @@ witness** refutes together with A151-B's grown `f1` — so the growth directions
 a DISJUNCTION of differently shaped certified boxes, and that union reaches **114 of 184 in-N nodes,
 50 alive**.
 
+**(8) The pinwheel in the OTHER TWO FRAMES (A163 `attempts/A163-s02-other-frames`, after the PI's
+reading of `docs/shadows/a57v4/k5_16_interior_Y1110.svg`):** S02's seven slot squares contain all
+three classes' pin sets, so the same absolute configuration is an S02 shadow in k5_16 (pins
+corners4 + `BL(0,1)`, `BL(1,0)` dropped) and in trump5 (pins `BL(0,0) BL(1,0) BL(0,1) BR(0,0)
+TR(0,0)`, `TL(0,0)` dropped) with `L` unchanged (`f1 f2 f3` + `BR(0,1)`, `f0`/`BR(0,0)` the
+rattlers), and re-running A160's 53 box sets **plus A151-B itself — which `N_boxes160.json` does
+not contain, as the k5_11 control here shows by reproducing A160's 114/50 only once it is added** —
+in those pins gives **k5_16 52 of 54 CERTIFIED with both refusals WALL CAPS and zero witnesses**
+but **trump5 only 42 of 54, with 9 LIVE-LOW WITNESSES re-verified from scratch** (real partial
+packings of the nine squares of `L ∪ P` at sides 3.8200–3.8771 ≤ s₀, worst pair gap 4e−16), because
+trump5 does not pin `TL(0,0)` and every object leaning into that corner — A151-B included, refuted
+in 6.8 s — is geometrically false there; the consumer counts go from **0/0 to 38 of 68 in-N and 21
+alive in k5_16** (`Y1110` among them, inside A151-B and the h = 10° chain link, both carrying
+checked exact t-certificates here) and from **0/0 to 3 of 12 in trump5**, with **all 94 certified
+box sets re-emitted through A133's generator and verified by its independent checker (94 VALID, 0
+errors, sha256 recorded, the `certificate` block in A136's `CITE_ASYM` shape — the artefact A160's
+union lacked)** — so a basin is a statement about a HYPOTHESIS and
+transporting it to another class is a re-run whose survival is decided by which of the shadow's own
+squares the new class pins.
+
 ### 1c. Families S03–S06 (PI-read) and S08–S53
 ![S03](shadows/S03.svg) ![S04](shadows/S04.svg)
 ![S05](shadows/S05.svg) ![S06](shadows/S06.svg)
