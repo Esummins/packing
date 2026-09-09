@@ -151,6 +151,61 @@ def chain_for(T, parent, step):
     return chain, (kids[0] if kids else None)
 
 
+def page_partner(T, path, step):
+    """the S4-style page for one node after the piece-level cut: (left) the node's roles with the
+    PARTNER family drawn BY GEOMETRY -- the centres admitting some tilt whose square is inside the
+    container, clear of every K' and meets the corner cell (sampled raster, drawing aid) -- and the
+    certified partner witnesses (stipple); (right) the first meeter's sub-pieces: kept (filled) /
+    dropped (hatched red), with the 2x2 grid at c = 1 + w (A169 Lemma A2) drawn."""
+    import numpy as np
+    corner, second = CS.SECOND[step]
+    first = CS.FIRSTN[step]
+    node = T["nodes"][path]
+    g1, g2 = [], []
+    F.draw_base(g1)
+    F.draw_base(g2)
+    c = RS.C_F
+    s = K.S0
+    for g in (g1, g2):
+        xs = {"TR": [s - c], "TL": [c], "BL": [c], "BR": [s - c]}[corner]
+        ys = {"TR": [s - c], "TL": [s - c], "BL": [c], "BR": [c]}[corner]
+        for x in xs:
+            g.append(F.line(x, 0, x, s, stroke="#8fa8dd", stroke_width="0.5", stroke_dasharray="2,2"))
+        for y in ys:
+            g.append(F.line(0, y, s, y, stroke="#8fa8dd", stroke_width="0.5", stroke_dasharray="2,2"))
+    cores = [F.RolePoly(v["core"]) for v in node["roles"].values() if v.get("core")]
+    xr, yr, m = K.region_raster(cores, 0.0, 90.0, cell=K.corner_cell(corner), pitch=0.02, ntilt=18)
+    F.draw_region(g1, xr, yr, m, col=F.COL.get(second, "#b07fd6"), op="0.35")
+    FB.draw_node(g1, node, region=False)
+    pc = node.get("piececut") or {}
+    n_w = 0
+    for sb in pc.get("subs", []):
+        if sb.get("witness"):
+            b = Box(*sb["witness"])
+            g1.append(rect(b.x0, b.x1, b.y0, b.y1, fill="url(#stip)", stroke="#2f7d32", stroke_width="0.5"))
+            n_w += 1
+    col = F.COL.get(first, "#444")
+    n_k = n_d = 0
+    for sb in pc.get("subs", []):
+        b = Box(*sb["box"])
+        if sb.get("dead"):
+            n_d += 1
+            g2.append(rect(b.x0, b.x1, b.y0, b.y1, fill="#e53935", fill_opacity="0.35", stroke="#e53935", stroke_width="0.5"))
+        else:
+            n_k += 1
+            g2.append(rect(b.x0, b.x1, b.y0, b.y1, fill=col, fill_opacity="0.35", stroke=col, stroke_width="0.5"))
+    FB.draw_node(g2, node, region=False)
+    cells = (pc.get("cover") or {}).get("cells")
+    f1 = ("partner %s family (filled, by geometry: container + every K' + meets %s^w, 18 tilts) and %d certified "
+          "witnesses (stipple)\npartner cover cells at c = 1 + w (corner-local x/y, lo = within c of the wall): %s\n%s"
+          % (second, corner, n_w, cells, "IS: the region a second %s meeter can occupy given this node" % corner))
+    f2 = ("%s sub-pieces (bisect %s): %d kept (filled), %d dropped (red: no admissible %s partner)\nverdict: %s\n"
+          "IS: the piece-level coexistence cut on %s -- a dropped sub-piece admits no second %s meeter [T]"
+          % (first, pc.get("bisect"), n_k, n_d, second, node["verdict"][:70], first, corner))
+    return [panel(14, 70, "%s partner family at %s" % (second, corner), "node " + path, g1, f1),
+            panel(14 + PW + 14, 70, "%s piece-level cut" % first, "node " + path, g2, f2)]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cell", default="l1_104")
@@ -159,9 +214,29 @@ def main():
     ap.add_argument("--n_chains", type=int, default=2)
     ap.add_argument("--chains", default="")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--partner", default="", help="node paths (;-separated) for partner pages of --step (S1/S3)")
     a = ap.parse_args()
     step = a.step.upper()
     T, n_sh = load_overlay(a.cell, step, shards=bool(a.shards))
+    if a.partner:
+        pages = [page_partner(T, q, step) for q in a.partner.split(";") if q in T["nodes"]]
+        out = a.out or os.path.join(K.FIGS, "partner_%s_%s.svg" % (a.cell, step))
+        W = 2 * (PW + 14) + 14
+        H = 70 + (PH + 30) * len(pages) + 40
+        svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" font-family="DejaVu Sans,Arial">' % (W, H),
+               "<defs>" + FB.STIPPLE + "</defs>", '<rect width="100%" height="100%" fill="#fafafa"/>',
+               text(14, 30, "A174 on %s -- the partner family after step %s (piece-level coexistence cut)  [%s]"
+                    % (a.cell, step, time.strftime("%Y-%m-%d %H:%M")), 12, "#000", weight="bold")]
+        y = 0
+        for pg in pages:
+            svg.append('<g transform="translate(0,%d)">' % y)
+            svg += pg
+            svg.append("</g>")
+            y += PH + 30
+        svg.append("</svg>")
+        open(out, "w", encoding="utf-8").write("\n".join(svg))
+        print("wrote %s (%d partner pages)" % (out, len(pages)), flush=True)
+        return
     lp = {}
     p = os.path.join(K.RES, "lp_%s.jsonl" % a.cell)
     if os.path.exists(p):
