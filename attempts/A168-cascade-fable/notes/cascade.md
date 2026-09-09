@@ -339,3 +339,13 @@ already nearly maximal inside the polygon).  LP: tau = 7.999999999999936, CONVER
 almost nothing and the LP cannot kill; the geometry (the clip's kills at S2/S3) is the lever.  The
 mechanism is settled: v1 consumes the pieces through one grown square core per role; the polygon
 itself needs the v4 clause of A183.4.
+
+**A183.6  Alive before / after per step (running tally; [M] from the side files).**
+*S1.*  l1_104: 28 ALIVE before (A168) -> 28 ALIVE after (A181 4/2) -> 28 ALIVE after (A183 8/3); the
+lever's gain is in the pose volume, not the count: mean kept H 0.549 -> 0.511, D 0.153 -> 0.125, total
+vol1 H 2.534 -> 2.358 (-7 %), D 2.292 -> 1.873 (-18 %); 54 s per node for the 8/3 pass on the 4/2
+fixed point (root/D0: D 0.448 -> 0.332; root/D1: D 0.086 -> 0.059).  l1_153: 6 -> 6 -> 6 ALIVE; mean
+kept H 0.390 -> 0.340, D 0.055 -> 0.033, vol1 H 0.386 -> 0.336 (-13 %), D 0.176 -> 0.107 (-39 %)
+(root/D0: D 0.171 -> 0.112; root/D1: 0.021 -> 0.008; root/D2: 0.021 -> 0.007).  Figures
+`figs/steps_l1_104_S1.svg`, `figs/steps_l1_153_S1.svg` (before panel = root's seeded fixed point at
+8/3; the kept: line prints the setting and the 4/2 numbers).
