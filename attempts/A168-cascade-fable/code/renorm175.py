@@ -255,8 +255,7 @@ def stage_finish(a):
             rec["leaf"] = "row" if rec["row_kill"] else None
         recs[p] = rec
         with open(out, "a", encoding="utf-8") as fh:
-            fh.write(json.dumps(rec, default=str) + "
-")
+            fh.write(json.dumps(rec, default=str) + "\n")
         print("  %-34s %-46s kept %s -> %s  %.1fs" % (p, rec["verdict"][:46],
               {k: round(v, 4) for k, v in (r0.get("kept") or {}).items()},
               {k: round(v, 4) for k, v in (rec.get("kept") or {}).items()}, rec["wall_s"]), flush=True)
