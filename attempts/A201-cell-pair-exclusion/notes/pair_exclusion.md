@@ -71,6 +71,37 @@ cells, the PI's "21/22/23 can only have one centre total"), then on the option p
   `docs/residue_map/pairexcl201_<nid>.svg` from the certificates (live200's drawing rules + the excluded
   witness pairs in red); `exp201.py` -- the pricing experiment.
 
-## 3. Results
+## 3. Pricing rule (c) (`exp201.py`, `logs/exp201_y0044.log`, Y0044 at the g1 pad, 40 pairs the count reaches)
 
-(filled in below from `results/pairexcl201.jsonl` and `certs/pe201_*.json`)
+* The FULL multibox node {pins, H, hull(X1), hull(X2)} normalised at nsub 2 / refine 1 (the brief's first
+  reading of (c)): **0 exclusions in 118 s** (2.9 s a pair) -- the box hulls forget the piece structure, and K'
+  of a hull box is too small to clip anything.
+* The SEEDED two-box clip on the rows' own pieces (`pairclip201`): **17 exclusions in 30 s** (0.75 s a pair;
+  0.3-0.5 s on the PI's column pairs), among them EVERY 21|23 pair of the right-wall column the PI named --
+  `(21, BR(0,1)) | (23, BR(0,1))`, `(21, BR(1,0)) | (23, TR(0,1))`, ... (16 of 16 tested): a centre in cell 21
+  sits at y >= 1.5 (P3's stock box), one in cell 23 at y <= 2.377 (P4's), and every square of the first meets
+  K' of the second -- Lemma CN alone says 1.049 >= 1 and cannot decide it.  21|22 and 22|23 are Lemma CN
+  (max distance 0.927 / 0.9 < 1).  So the PI's "one centre total in 21/22/23" is exactly the three pairwise
+  exclusions, two by CN and one by the exact clip.
+* Where the budget goes: a lazy (c) inside the DFS (every pair the search touches, in search order) spent 180 s
+  on 211 option pairs, excluded 11, and left 350 pairs undecided -- and the count then walked through an
+  undecided pair.  The deployed design spends (c) on the CELL pairs first (80 near pairs of Y0044's 25 alive
+  cells, 74 s, 15-22 excluded) and then ONLY on the pairs of the covers the count proposes (the
+  witness-refutation loop): 7 covers refuted in 43 s, the 8th verified pair by pair, 0 pairs undecided.
+
+## 4. Y0044 (k5_16_interior_Y0044): the witness cover dies, the page does not
+
+| pad | A200 fast steps | A201 steps (s) | A200's witness cover | page |
+|---|---|---|---|---|
+| g1 | 210 s, ALIVE | normalise 3.4 > options 80 > union 0.3 > pair-cells 74 (80 pairs, 15 excl) > count 43 (7 covers refuted, 8th VERIFIED) > normalise 4.4 > options 74 > union 0.3 > pair-cells 65 (54 pairs, 12 excl) > count 51 (8 refuted, 9th VERIFIED); 401 s | **DEAD**: 16\|17 by **CN** (max centre distance 0.836 < 1: the coordinator's number), 17\|18 by **EXACT** (option pair, X2 empties in pass 1), 18\|14 by **EXACT** | **ALIVE** -- a verified cover exists |
+| 0 | 210 s, ALIVE | the same steps; 444 s | **DEAD**: the same three pairs | **ALIVE** -- a verified cover exists |
+
+The verified cover at the g1 pad (every pair passes (a) (b) (c)): H at cell 11 -> BL(1,0); F1 at cell 5 ->
+BL(1,0)+BR(1,0); anonymous squares at cell 16 -> BR(0,1)+BR(1,0), cell 18 -> BR(0,1)+TR(0,1), cell 8 ->
+TL(1,0)+TR(1,0), cell 14 -> TL(1,0)+TR(0,1)+TR(1,0).  Exclusions found per round: A1 124 / CN 85 / EXACT 10
+(round 1), A1 36 / CN 42 / EXACT 12 (round 2); the count used 218 of them (round 1).  "Verified" means no
+rule excludes any of its 15 pairs -- not that a packing realises it (the test is one-sided).
+
+## 5. The table over A200's fast-phase certificates
+
+(`code/report201.py`; every A200 certificate ALIVE at the g1 pad, run through the chain g1 -> pad 0)
