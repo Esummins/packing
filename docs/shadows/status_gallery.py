@@ -899,8 +899,10 @@ def collect(table, corpus):
     #      most ONE anonymous meeter; Theorem FC then FORCES H / the instantiated roles (A161 miss test per piece) to a
     #      fixed point across all slots (A171 multibox re-normalisation), the joint count with the caps, A199's corner
     #      SEAL chain with the clipped H, the no-room leaf.  results/quick200.jsonl is resumable: the LAST row per nid is
-    #      the verdict.  A kill at the WINDOW pad is valid on the page's window; a kill at PAD 0 (lam = 1) is a statement
-    #      at side s0 only and is flagged WINDOW-PENDING.  [C: geometry, quick200] -- no LP, no frozen verifier.
+    #      the verdict.  A kill at the G1 pad (lam = s0/3.861637: A57's G1 slab (3.861637, s0], the page's own window --
+    #      forced_corners.md section 2 remark / 5(a)) or the WINDOW pad (lam_max) is valid on the page's window; a kill at
+    #      PAD 0 (lam = 1) is a statement at side s0 only and is flagged WINDOW-PENDING.  [C: geometry, quick200] -- no LP,
+    #      no frozen verifier.
     last200 = {}
     for d in jl(A("A200-k516-quick", "results", "quick200.jsonl")):
         if d.get("nid"):
@@ -910,7 +912,7 @@ def collect(table, corpus):
             continue
         cls = d.get("cls") or ""
         camp = "A60" if cls.startswith("trump5") else "A57"
-        pend = bool(d.get("window_pending")) or str(d.get("pad", "window")) != "window"
+        pend = bool(d.get("window_pending")) or str(d.get("pad", "g1")) == "zero"
         table.add_rec(
             "A200 quick200.jsonl",
             camp,
@@ -923,7 +925,7 @@ def collect(table, corpus):
             fdate(A("A200-k516-quick", "results", "quick200.jsonl")),
             d,
             note="[C: geometry, quick200] A171 multibox exact dead test / A161 exact miss test / Lemma CN / Lemma A1 / open-chord "
-                 "rows / Theorem FC; " + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the window pad (lambda_max): valid on the window"),
+                 "rows / Theorem FC; " + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam"))),
         )
 
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.

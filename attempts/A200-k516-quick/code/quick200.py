@@ -45,8 +45,15 @@ import classes178 as CL                                        # noqa: E402  REA
 
 MB, GV, CLN, G = FP.MB, FP.GV, FP.CLN, FP.G
 S_RAT, HALF, SQ2H_LO, SQ2H_UP = FP.S_RAT, FP.HALF, FP.SQ2H_LO, FP.SQ2H_UP
-LAM_MAX = Fr(969271, 250000) / Fr(382, 100)                    # s0 / 3.82 (Theorem FC's lambda_max)
+LAM_MAX = Fr(969271, 250000) / Fr(382, 100)                    # s0 / 3.82 (Theorem FC's lambda_max: the whole window)
+LAM_G1 = Fr(969271, 250000) / Fr(3861637, 1000000)             # s0 / 3.861637: A57's G1 slab (3.861637, s0] -- the k5_16 pages'
+PADS = {"window": LAM_MAX, "g1": LAM_G1, "zero": Fr(1)}        # own window (forced_corners.md section 2 remark, section 5(a))
 INF = 99
+
+
+def pad_i(i, lam):
+    """Theorem FC's pad on the far sides of the cell at offset i: (lambda - 1)(i + 1 + 1/sqrt2), rounded UP."""
+    return (lam - 1) * (i + 1 + SQ2H_UP)
 
 
 # ----------------------------------------------------------------------------- exact union statistics
@@ -169,12 +176,13 @@ def count_search(slots, free_opts, fixed_opts, n_free, lines, base_chords, s, ca
 
 
 # ----------------------------------------------------------------------------- the page
-def pad_zero(items, s=S_RAT):
-    """the slot boxes at PAD 0 (lambda = 1: a statement at side s0 only -- WINDOW-PENDING) and their windows."""
+def set_pad(items, lam, s=S_RAT):
+    """the slot boxes with Theorem FC's pad at dilation lam (lam = LAM_MAX: the whole window [3.82, s0]; LAM_G1: A57's G1
+    slab (3.861637, s0], the k5_16 pages' own window; 1: pad 0, a statement at side s0 only -- WINDOW-PENDING)."""
     for it in items:
         c, i, j = it["corner"], it["i"], it["j"]
         xa, ya = CL.frame_to_xy(c, i, j, float(s))
-        xb, yb = CL.frame_to_xy(c, i + 1, j + 1, float(s))
+        xb, yb = CL.frame_to_xy(c, i + 1 + float(pad_i(i, lam)), j + 1 + float(pad_i(j, lam)), float(s))
         it["wbox"] = (min(xa, xb), max(xa, xb), min(ya, yb), max(ya, yb))
         X0, X1, Y0, Y1 = it["wbox"]
         it["window"] = (max(0.5, X0 - CL.SQ2H), min(float(s) - 0.5, X1 + CL.SQ2H), max(0.5, Y0 - CL.SQ2H), min(float(s) - 0.5, Y1 + CL.SQ2H))
@@ -186,8 +194,9 @@ class QPage(FP.Page):
     def __init__(self, *a, refine_union=2, pad="window", **kw):
         super().__init__(*a, **kw)
         self.pad = pad
-        if pad == "zero":
-            pad_zero(self.items, self.s)
+        self.lam = PADS[pad]
+        if pad != "window":
+            set_pad(self.items, self.lam, self.s)
         self.refine_union = refine_union
         self.role_slots, self.role_corner = {}, {}
         self.caps_last = {}
@@ -446,7 +455,7 @@ def seal_leaf(page, wall_left, log=print, lams=None):
     if not corners or page.nd is None:
         return None
     if lams is None:
-        lams = (("window", LAM_MAX),) if page.pad == "window" else (("s0", Fr(1)),)
+        lams = ((page.pad, page.lam),)
     rec = dict(page.rec)
     rec["H"] = [tuple(page.roles[h]) for h in page.hnames]
     pg = dict(page=page.name, record=None, rec=rec, cls=page.cls, items={it["cell"]: it for it in page.items})
@@ -465,7 +474,7 @@ def seal_leaf(page, wall_left, log=print, lams=None):
             log("   seal %s/%s (%s pad): %s (%.0f s)" % (c, B, tag, r["verdict"], r["seconds"]))
             if r["verdict"] == "DEAD":
                 return dict(runs=runs, verdict="DEAD", pad=tag, corner=c, B=B, A=A,
-                            leaf="corner seal at %s (F meets %s, %s unmet) at the %s pad%s" % (c, B, A, tag, "" if tag == "window" else "; s0-only: WINDOW-PENDING"),
+                            leaf="corner seal at %s (F meets %s, %s unmet) at the %s pad" % (c, B, A, tag),
                             seconds=round(time.time() - t0, 1))
     return dict(runs=runs, verdict="ALIVE", seconds=round(time.time() - t0, 1))
 
@@ -509,9 +518,10 @@ def run_page(nid, wall=900, depth=5, joint_depth=2, refine_union=2, seal=True, p
         sl = seal_leaf(pg, T.left(), log)
         out["seal"] = sl
         if sl and sl["verdict"] == "DEAD":
-            out["verdict"], out["leaf"], out["step_killed"] = "DEAD", sl["leaf"], "seal-" + sl["pad"]
+            out["verdict"], out["leaf"], out["step_killed"] = "DEAD", sl["leaf"], "seal"
     out["pad"] = pad
-    out["window_pending"] = (pad != "window") and out["verdict"] == "DEAD"
+    out["lam"] = float(PADS[pad])
+    out["window_pending"] = (pad == "zero") and out["verdict"] == "DEAD"
     if out["window_pending"]:
         out["leaf"] = (out["leaf"] or "") + " [pad 0: s0-only, WINDOW-PENDING]"
     out["tests"] = T.tests
@@ -543,14 +553,14 @@ if __name__ == "__main__":
     ap.add_argument("--jdepth", type=int, default=2)
     ap.add_argument("--refine-union", type=int, default=2)
     ap.add_argument("--noseal", action="store_true")
-    ap.add_argument("--pad", default="window", choices=("window", "zero"))
-    ap.add_argument("--chain", action="store_true", help="the quick chain: the window pad, then (if ALIVE) pad 0 (s0-only)")
+    ap.add_argument("--pad", default="g1", choices=("window", "g1", "zero"))
+    ap.add_argument("--chain", action="store_true", help="the quick chain: the g1 pad (the page's window), then (if ALIVE) pad 0 (s0-only)")
     ap.add_argument("--deep", action="store_true", help="if ALIVE after the quick path: the fine pair test (A198's fallback)")
     ap.add_argument("--out", default=None)
     ap.add_argument("--cert", default=None)
     ap.add_argument("--svg", default=None)
     a = ap.parse_args()
-    pads = ("window", "zero") if a.chain else (a.pad,)
+    pads = ("g1", "zero") if a.chain else (a.pad,)
     outs = []
     for k, pad in enumerate(pads):
         out, pg = run_page(a.nid, wall=a.wall, depth=a.depth, joint_depth=a.jdepth, refine_union=a.refine_union, seal=not a.noseal, pad=pad)
@@ -561,7 +571,7 @@ if __name__ == "__main__":
         emit(out, cert, a.out)
         if out["verdict"] == "DEAD":
             break
-    out = outs[0] if len(outs) == 1 or outs[-1]["verdict"] == "DEAD" else outs[0]     # the window-pad page is the one drawn
+    out = outs[0]                                                                       # the g1-pad node is the one the deep path continues
     if out["verdict"] == "ALIVE" and a.deep:
         pr = FP.pair_test_fallback(pg, pg.T.left())
         out["pair_test"] = pr
