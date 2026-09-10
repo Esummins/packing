@@ -349,3 +349,19 @@ kept H 0.390 -> 0.340, D 0.055 -> 0.033, vol1 H 0.386 -> 0.336 (-13 %), D 0.176 
 (root/D0: D 0.171 -> 0.112; root/D1: 0.021 -> 0.008; root/D2: 0.021 -> 0.007).  Figures
 `figs/steps_l1_104_S1.svg`, `figs/steps_l1_153_S1.svg` (before panel = root's seeded fixed point at
 8/3; the kept: line prints the setting and the 4/2 numbers).
+*S2.*  l1_104: 111 ALIVE before (A168) -> 64 ALIVE / 47 DEAD after (A181/A183): leaves ancestor 20
+(a DEAD S1 of the A168 record: R3 lonely), EmptyBox 23 (the pair leaf on the library's polygon +
+lonely clip; 4 of them -- root/D0/S14, root/D53/S7, root/D58/S13, root/D58/S14 -- survive 4/2 and die
+ONLY at 8/3), inheritance 4 (the seeding empties a role: no pose of the child's record inside the
+parent's fixed point).  On the 64 survivors: mean kept H 0.403 -> 0.338, D 0.096 -> 0.077, S 0.157 ->
+0.130; total vol1 H 4.251 -> 3.566 (-16 %), D 3.292 -> 2.625 (-20 %), S 5.373 -> 4.461 (-17 %); 102 s
+per node; vol1 <= parent on every node.  The PI's two chains: root/D0/S0 seeded H 0.827 / D 0.448 /
+S 0.888 -> 4/2 H 0.306 / D 0.254 / S 0.155 -> 8/3 H 0.293 / D 0.204 / S 0.111 (A176 had let its
+children settle at D 0.298); root/D1/S0 seeded 0.996 / 0.086 / 0.887 -> 0.674 / 0.034 / 0.129 -> 0.620 /
+0.027 / 0.109.  l1_153: 1 -> 1 -> 1 ALIVE (root/D25/S=H: H 0.897 -> 0.873, D 0.070 -> 0.059; the
+sliver-era wall cap was stale: 299 s at the full setting).  Figures `figs/steps_<cell>_S2.svg`.
+*Bookkeeping [M].*  A181's shard assignment differed from A183's, so a node's 4/2 record in one shard
+file was masking its 8/3 upgrade in another under name-order last-wins; `renorm181.load_side` now
+keeps the STRONGEST record per node (DEAD > ALIVE at 8/3 > ALIVE at 4/2 > SKIPPED marker) -- the
+counts above are on that rule.  The shards themselves were unaffected (a node and its children share
+the shard key; the owner's in-memory record is the upgraded one).
