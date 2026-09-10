@@ -8312,3 +8312,49 @@ halves of the answer come from opposite findings.
   per-stage wall 1,500 s with the tree killed on timeout; PYTHONDONTWRITEBYTECODE=1; ~1.1 CPU-h.
 - Files: `attempts/A196-y0491/{BRIEF.md, notes/y0491.md, code/{prio196,node196,node196b,rows196,waste196,lp196,lp196b,page196,pass196,queue196,fig196}.py, results/, logs/}`,
   `docs/residue_map/y0491_cascade.svg`, `docs/residue_ledger.md` s.4, `docs/budget.md` s.D item 14, registry row A196.
+
+## 2026-09-10 midday - A197-slot-pair-pass (Opus engineer) - done-negative
+
+- The PI (10:45): "`k5_16_interior_Y0054` is trivially dead: BL(1,0) can't be doubly met in any way.
+  That's true of most of this class: the H box is in front of a slot, so the two slot simple units
+  can't be doubly met."
+- **Why A178's per-cell pass missed it.** `geo178b.slot_pair_test`'s `H-meets` branch restricted H's
+  CENTRE to the cell's meeter window and never asked H to MEET the widened box `B_p+`.  On a `k5_16`
+  page that restriction is a NO-OP (H's record box already lies inside the window), so the branch was
+  ONE node with no Lemma A1 split at all, at `nsub 4 / refine 2`, under `max_cells 6` / `max_pairs 40`
+  which both declared ALIVE on exhaustion - 3 of Y0054's 6 cells were recorded `hull too wide: ALIVE
+  untested`.  Y0054's `BL(1,0)` record is NOT empty: `two-free` dies there already (0 of 1 pair) and
+  only that unsplit `H-meets` node keeps the cell alive.
+- **The fixed test** (`attempts/A197-slot-pair-pass/code/pair197.py`; A178 / A171 / A161 imported
+  read-only): `meet_cover` = an exact A161 separating-axis COVER of the poses whose square actually
+  meets `B_p+` (bisection to depth 9, 24-box cap, 0.05 s), applied to every meeter role; `H-meets`
+  split over ORDERED Lemma A1 cell pairs `(cell_H != cell_B)` on a grid of side 0.70 < 1/sqrt2;
+  `two-free` over unordered pairs; caps 24 / 400; `nsub 8 / refine 4` on every pair node; A169's
+  lonely clip at forced corners; a witness sampler.
+- **[F] The PI's reading is refuted by an explicit witness** (`results/witness_Y0054_BL10.json`).
+  The meet cover bites - H's `y` shrinks from `[1.5193, 1.6590]` to `[1.5193, 1.5542]` - and iterated
+  to a fixed point (`exp197`, four 26 s passes at 8/4) `BL(1,0)`'s `H-meets` branch is still ALIVE,
+  because the cell IS doubly met:
+
+      H = (1.938542, 1.519271, 82.3719 deg)    the SW corner of H's own record box, extreme tilt
+      B = (1.5, 0.5, 0 deg)                    a free square on the bottom wall
+
+  H's bottom edge dips below `y = 1.0255101` for `x in (1.858, 2.041)`: an interior sliver of area
+  **0.00228** inside `B_p+ = (1, 2.04045) x (0, 1.02551)`.  B's top edge is at `y = 1`, just under
+  the dip; the H|B separating-axis gap is **+0.006518**, all 21 pairs of the seven squares are
+  interior-disjoint (min gap 0, tangencies only), both meet `B_p+`, and their centres are 1.0193
+  apart in l-infinity against Lemma A1's 0.7071.
+- **The pass** (`results/slotpair197.jsonl`, resumable, still running at the time of writing):
+  **21 of the 44 alive `a57v4` pages, 43 forced cells, 3.5 CPU-h - 0 retired.**  Every cell admits a
+  pair; the sampler EXHIBITS a real admissible configuration on **28 of 43**.  The `H-meets` branch
+  is genuinely VACUOUS on 11 cells (H's box lies outside the meeter window, so H provably cannot
+  meet) and `two-free` is alive on those anyway.  Two cells per page (the most squeezed first) under
+  a 900 s wall killing the process tree; one page (Y0054) hit the wall at 3 cells.
+- **The missing half, from the concurrent A198 pass:** A198 retires 6 pages
+  (`k5_11_interior_Y1110` at `TR(0,0)`, `c0_Y0076` / `Y0169` / `Y0171` / `Y0257` / `Y0258` at
+  `BL(0,2)`) with the SAME theorem by running A178's cascade ROUNDS first - the forced-slot roles
+  tighten H's hull before the pair test - which A197's driver skipped to buy population coverage.
+  The lever is the COMPOSITION: cascade rounds + meet cover + Lemma A1 split in one driver.
+- Gallery `docs/residue_map/slotpair197.svg` (the surviving pair drawn as real poses),
+  `status_gallery` (7h) collector added and rerun (`a57v4` now 39 alive / 21 dead, all six new kills
+  A198's), `residue_ledger.md` section 4, `budget.md` section D item 14, REGISTRY row.
