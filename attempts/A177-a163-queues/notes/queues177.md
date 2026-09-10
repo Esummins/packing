@@ -97,3 +97,65 @@ terminated externally ~20 minutes in — empty stderr, no Windows Error Reportin
 sentinel, no gate line, ~4 CPU-s each — while the box's other lab processes were untouched; the
 same commands relaunched detached from bash with `nohup` ran normally.  Nothing was recorded for
 the killed pair.  A resource event is never a verdict, and that now includes *the launcher*.
+
+---
+
+# A177 §3 — the h10 lane's obstruction is ONE box, and it is the pin box, so no entry rule can move it
+
+This is the finding the queue was actually for, and it is stronger than the negative result of §2.
+
+Of the nine `h = 10°` rows, **eight came back with the identical shape**: `[DEAD-CERT, DEAD-CERT,
+DEAD-CERT, ALIVE]` on `Y0054`, `Y0380`, `Y0422`, `Y0452`, `Y0791`, `Y0803` — six nodes, 18 of 24
+children certified dead — plus `Y0183` (0 of 4) and `Y0817` (1 of 4).  And on every one of those six
+the survivor is **the same child**: `NO3`, whose cover box is **`BR(0,1)`** — the *pin* box, not one
+of the three free bodies `f1`, `f2`, `f3`.
+
+    cover = tautology over ['f1', 'f2', 'f3', 'BR(0,1)']    (identical on all nine rows)
+    NO0 = f1, NO1 = f2, NO2 = f3  ->  DEAD-CERT everywhere the LP had room
+    NO3 = BR(0,1)                 ->  ALIVE on every node of the queue
+
+**Why it is alive is not a certifier artefact and not a core question.**  Five of the six survivors
+report a cert `FAIL` whose own witness-feedback re-solve is printed in the report:
+
+    [round 0] tau=4.88-4.91  conv=False  cert total=4.98525 budget=5   (holes -> witnesses fed back)
+    [round 1] tau=5.00000    conv=True   cert total=5.02500 budget=5   atoms=5
+    a136x: 2 emissions, 12 cores enlarged, max ratio 1.05-1.11
+    certificate total >= budget: cannot certify
+
+The stage-1 `eta = -0.12 … -0.29` is an *unconverged* LP under the 1500 s flat-900 cap; the moment
+the witnesses are fed back the LP converges to **`tau = 5.000000` exactly, at the budget**.  A child
+whose LP optimum IS the budget admits no measure certificate at all, so no number of rounds, no
+depth and no wider core can close it — and indeed the loop enlarged 12 cores by up to 1.11× and the
+total moved from 4.985 to 5.025, the wrong way.  The sixth survivor (`Y0422/NO3`) reaches the same
+place directly: `tau = 5.000000, eta = 0, conv = True` after 1787 s of LP.  **So `cert FAIL with
+total >= budget` splits again, and the split is decidable from the report the certifier already
+writes: if the last round's re-solve CONVERGED at `tau = budget`, the child is LP-alive and the
+certifier was never the obstruction; only a re-solve that converges strictly below the budget leaves
+room for a measure that more rounds or wider cores could find.**  That refines A136 §7's taxonomy,
+which put every `total >= budget` verdict in the "cores are exactly the lever" class.
+
+**Why this makes the widest-`N` rule the wrong lever here, structurally.**  The entry rule of §1
+optimises the *free bodies*: it maximises the min tilt width and the log-volume of `f1, f2, f3`,
+because those are the bodies a certified `N` names.  The surviving branch is the one that says *no
+square's pose lies in the pin box `BR(0,1)`* — and **no choice of certified `N` widens a pin box**,
+because the pin box is fixed by the node's own skeleton, not by the neighbourhood the YES leaf
+certifies.  That is why widening `N` by a factor of 10 in volume bought `Y1104` and `Y0854` exactly
+one dead child each (a free body) and bought nothing anywhere else: it was pushing on the three
+branches that were already dying and could not touch the one that was not.
+
+**The lever this leaves, stated `n`-generally.**  On a node whose cover is *(free bodies) + (a pin
+box)*, once every free-body branch certifies dead and the pin branch is LP-alive at `tau = budget`,
+the remaining obligations are exactly:
+
+1. **split the pin box** — the pin branch is a single box in tilt × centre, and a re-split is the
+   same refinement A57 §T-depth-2 used on a YES box that converged AT the budget (splitting a box
+   refines the same disjunction, so every sub-child keeps the same budget);
+2. **or kill the pin box by geometry, not by measure** — this is precisely the shape A161's
+   chord-limited lane has (a wall-adjacent slot, a chord bound, `beta + LANE_out + M <= 1`), and
+   `BR(0,1)` is a wall-adjacent pin cell on both the `k5_16` and `trump5` frames;
+3. **not** a wider `N`, a deeper verifier, more certifier rounds, or exact cores — all four are now
+   measured to move nothing on this branch.
+
+Eight nodes of this queue are one lemma about `BR(0,1)` away from closing, and the lemma is a
+*single* statement shared by all of them, not eight node-specific ones — the cover, the pin box and
+the failure signature are byte-identical across the queue.

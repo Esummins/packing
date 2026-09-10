@@ -8000,8 +8000,8 @@ halves of the answer come from opposite findings.
 - **The a163 half is a clean negative worth as much: the widest citeable `N` closed NOTHING.** The rule
   was made computable — `(min tilt width over the free bodies, then log₁₀ of the box-volume product)`,
   margin over `s0` only as a tie-break (`code/queues177.py`, `notes/queues177.md` §1) — and it moves 5 of
-  the 11 remaining rows to a 10× wider set. All 15 completed a163 rows came back `OPEN` (11) or
-  `SKIP-UNSOUND` (4). The `h = 10°` link kills 3 of 4 children on `Y0054`, `Y0380` and `Y0422` and 0 of 4
+  the 11 remaining rows to a 10× wider set. All 19 completed a163 rows came back `OPEN` (15) or
+  `SKIP-UNSOUND` (4); the 20th, `Y0973`, is owed on a certification CAP (below). The `h = 10°` link kills 3 of 4 children on `Y0054`, `Y0380` and `Y0422` and 0 of 4
   on `Y0183`; the 10× wider `a151B` slice moves `Y1104` and `Y0854` from 0 dead children to 1 and moves
   `Y0486`, `Y0570`, `Y0559`, `Y0985` not at all; the one node that can cite only a 2.5° window (`Y0871`)
   dies nowhere, exactly as A136 §6 predicted. **Every surviving child is a converged LP at η = 0, τ = 5 —
@@ -8019,8 +8019,38 @@ halves of the answer come from opposite findings.
   while the box's other lab processes were untouched; the same commands relaunched detached from bash with
   `nohup` ran normally. Nothing was recorded for either pair. **A resource event is never a verdict, and
   that now includes the launcher.**
-- **Board.** `docs/shadows` a57v4 unchanged at **52 alive / 8 dead** — the closure is a depth-6 child with
-  no gallery page of its own. `results/owed136.json` regenerated; `no_complete136.jsonl` still empty.
+- **The h10 lane's obstruction is ONE box, and it is the PIN box — so no entry rule could ever have moved
+  it.** Six of the eight completed `h = 10°` rows came back with the *identical* shape
+  `[DEAD-CERT, DEAD-CERT, DEAD-CERT, ALIVE]` (`Y0054`, `Y0380`, `Y0422`, `Y0452`, `Y0791`, `Y0803` — 18 of
+  24 children certified dead), and the survivor is always the same child: `NO3`, whose cover box is
+  **`BR(0,1)`**, the pin box, not one of the three free bodies (the cover `['f1','f2','f3','BR(0,1)']` is
+  byte-identical across the queue). Five of the six report a cert `FAIL` whose own witness-feedback
+  re-solve is in the report — round 0 at `τ = 4.88…4.91` unconverged with `total = 4.98525 < 5`, round 1
+  **converged at `τ = 5.000000` exactly, at the budget**, `total = 5.02500`, after enlarging 12 cores by up
+  to 1.11× — and the sixth (`Y0422/NO3`) gets there directly at `η = 0` after 1787 s of LP. **`total ≥
+  budget` therefore splits again, decidably, from the report the certifier already writes: a last round
+  that CONVERGES at `τ = budget` means the child is LP-alive, no measure certificate exists, and more
+  rounds / more depth / wider cores are provably wasted — only a re-solve converging strictly below the
+  budget leaves room for A136 §7's lever.** This also makes the negative result structural: the entry rule
+  optimises the *free bodies* because those are what a certified `N` names, and **no `N` widens a pin
+  box**. The eight nodes are one shared lemma about `BR(0,1)` away from closing; the live levers are a
+  re-split of the pin box (A57's depth-2 move — splitting a box refines the same disjunction, so every
+  sub-child keeps the budget) or a geometric kill of it, `BR(0,1)` being a wall-adjacent pin cell, exactly
+  A161's chord-limited-lane shape.
+- **One node left owed, deliberately.** `k5_16_interior_Y0973`'s `NO0` CAPped at the 2600 s certification
+  wall with its LP at `η = −0.293` — a resource event — and with the node deadline passed the run could
+  only have written an `OPEN` built from three non-verdicts, so the driver was stopped and **no record was
+  written at all** (`owed136.json` says NOT-RUN, which is true). The re-run is queued and resumable:
+  `results/queue177_h10b.json` with `--out_suffix _a177h10b --cert_time 900 --cert_wall 5200` (a FRESH
+  suffix is mandatory — `certify_leaf_capped177` writes a `.done` for a CAP too, so the old suffix would
+  serve the resource event back as a cached verdict). It cannot close the node — `NO3 = BR(0,1)` is alive
+  on every row of this queue — so it buys evidence, not a closure.
+- **Board.** `docs/shadows` a57v4 carries no retirement from this attempt — the closure is a depth-6 child with
+  no gallery page of its own, so the count moved only through A182's two kills landing in the same run
+  (52 → **50 alive / 10 dead**, `k5_16_interior_Y0027` and `k5_16_interior_Y0839`, both A182's).
+  `results/owed136.json` regenerated: the a163 lane is down to **two** owed rows, `Y0973` (above) and
+  `Y1110` (excluded by design — its `NO0` is genuinely LP-alive on the h10 leaf). `no_complete136.jsonl`
+  still empty.
 - **Files**: `attempts/A177-a163-queues/{BRIEF.md, code/{queues177,run177,report177}.py, notes/queues177.md,
   results/queue177_{t1,h10,rest,fallback}.json, logs/}`, `attempts/A136-a120-resume/{results/nodes_a177*,
   certs_a177*, results/{closures136.jsonl, report136.json, owed136.json}, notes/frames151.md §8}`,

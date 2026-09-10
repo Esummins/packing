@@ -72,3 +72,19 @@ survives the shell:
       --cert_rounds 8 --cert_time 450   (Y0791, Y0817)
 Both verified healthy (80 and 24 CPU-s in the first minutes, LP-rate).  Nothing was recorded for
 the killed pair: a resource event is never a verdict.  Pidfile lines are never removed.
+--- A177 2026-09-09 20:28 STOP (queue complete except one node, left OWED with its queue on disk) ---
+worker B (shard 1/2, pid 32476) finished cleanly at 19:28:29 (7742 s): Y0791 OPEN, Y0817 OPEN.
+worker A (shard 0/2, pid 31112) finished Y0452 OPEN and Y0803 OPEN and was KILLED with its process
+TREE at 20:28 on its last node, k5_16_interior_Y0973.  Reason, and it is a soundness reason rather
+than a resource one: that node's NO0 had already CAPped at the 2600 s certification wall with its LP
+at eta = -0.292857 (a resource event, not a verdict), the node deadline had passed, and NO2/NO3 were
+therefore about to be written CAP-GATE -- so the only record the run could still produce was an OPEN
+built out of three non-verdicts, which is exactly the artefact this attempt exists to clean up.
+Killing it leaves NO record for Y0973 (owed136 will say NOT-RUN, which is true) instead of a false
+OPEN.  The re-run is prepared and resumable: results/queue177_h10b.json, to be run with
+  run177.py --entry a163 --queue results/queue177_h10b.json --out_suffix _a177h10b --skip_done
+            --cert_rounds 8 --cert_time 900 --cert_wall 5200 --cpu_cap 9000
+A FRESH suffix is mandatory: certify_leaf_capped177 writes a .done for a CAP too, so _a177h10 would
+serve the resource event straight back as a cached verdict.  Estimated 1.5-4 CPU-h; it CANNOT close
+the node (NO3 = BR(0,1) is LP-alive at tau = budget on every node of this queue, see notes s3), so it
+buys evidence, not a closure.  Pidfile lines are never removed.  No A177 process is running.

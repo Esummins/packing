@@ -1,0 +1,37 @@
+17:19:27 A151-resume shard 1/2  entry=a163 (per node, A160 union)  cap 11000 s
+17:19:27   YES-leaf certificate: per node: attempts/A163-s02-other-frames/certs/<entry>.tcert.json.gz  sha NONE  *** CHECKED (per node; each entry's own sha256 and exact rational certified minimum are recorded on the node) ***
+17:19:27   boxes: the CHECKED certified set the node's support lies in, with the largest verified rational margin over s0
+17:19:27   LP: stage1 240 s -> per-LP wall 1500 s;  cert rounds 8 wall 2600 s time_limit 450 s
+17:19:27   memory gate (A112 a111lib.gate, called before EVERY LP): commit > 6144 MB, phys > 3072 MB
+17:19:27   affinity mask 0xFFFF set on this process (children inherit): True
+17:19:27   queue queue177_h10.json: 4 nodes in this shard
+17:19:27   RESUME: 2 of 4 already terminal on disk, skipped: [["k5_16_interior_Y0380", "OPEN"], ["k5_16_interior_Y0422", "OPEN"]]
+17:19:27   RESUME: 2 nodes left to run in this shard
+17:19:27   k5_16_interior_Y0791             S02_k5_16_A163chain_BOTH_base_r0.20_h10.00_nof0_+00.00 (frame k5_16; verified margin over s0 7.454e-06; YES leaf CHECKED)
+17:24:18   k5_16_interior_Y0791             NO0 LP stage1 tau=4.750000 eta=-0.250000 conv=False (276s; flat-900 1500s)
+18:03:27     cert NO0                                            PASS (2334s)  [exact cores in the loop]
+18:03:27   k5_16_interior_Y0791             NO0 DEAD-CERT
+18:07:55   k5_16_interior_Y0791             NO1 LP stage1 tau=4.762238 eta=-0.237762 conv=False (253s; flat-900 1500s)
+18:10:30     cert NO1                                            PASS (140s)  [exact cores in the loop]
+18:10:30   k5_16_interior_Y0791             NO1 DEAD-CERT
+18:15:10   k5_16_interior_Y0791             NO2 LP stage1 tau=4.800000 eta=-0.200000 conv=False (265s; flat-900 1500s)
+18:48:29     cert NO2                                            PASS (1984s)  [exact cores in the loop]
+18:48:29   k5_16_interior_Y0791             NO2 DEAD-CERT
+18:53:16   k5_16_interior_Y0791             NO3 LP stage1 tau=4.968177 eta=-0.031823 conv=False (272s; flat-900 1500s)
+18:55:45     cert NO3                                            FAIL (134s)  [exact cores in the loop]
+18:55:45   k5_16_interior_Y0791             NO3 ALIVE
+18:55:45   k5_16_interior_Y0791             OPEN  (LP 1065 s, cert 4592 s)  children=['DEAD-CERT', 'DEAD-CERT', 'DEAD-CERT', 'ALIVE']
+18:55:45   k5_16_interior_Y0791             OPEN
+18:55:46   k5_16_interior_Y0817             S02_k5_16_A163chain_BOTH_base_r0.20_h10.00_nof0_+00.00 (frame k5_16; verified margin over s0 7.454e-06; YES leaf CHECKED)
+19:21:15   k5_16_interior_Y0817             NO0 LP stage2 tau=4.928571 eta=-0.071429 conv=True (1514s; flat-900 1514s)
+19:22:24     cert NO0                                            PASS (54s)  [exact cores in the loop]
+19:22:24   k5_16_interior_Y0817             NO0 DEAD-CERT
+19:25:31   k5_16_interior_Y0817             NO1 LP stage2 tau=5.000000 eta=+0.000000 conv=True (172s; flat-900 115s)
+19:25:31   k5_16_interior_Y0817             NO1 ALIVE
+19:27:10   k5_16_interior_Y0817             NO2 LP stage2 tau=5.000000 eta=+0.000000 conv=True (84s; flat-900 49s)
+19:27:10   k5_16_interior_Y0817             NO2 ALIVE
+19:28:29   k5_16_interior_Y0817             NO3 LP stage2 tau=5.000000 eta=+0.000000 conv=True (64s; flat-900 38s)
+19:28:29   k5_16_interior_Y0817             NO3 ALIVE
+19:28:29   k5_16_interior_Y0817             OPEN  (LP 1834 s, cert 54 s)  children=['DEAD-CERT', 'ALIVE', 'ALIVE', 'ALIVE']
+19:28:29   k5_16_interior_Y0817             OPEN
+19:28:29 shard 1 done: 7742 s, 2 nodes, 0 skipped by A149: [["k5_16_interior_Y0791", "OPEN"], ["k5_16_interior_Y0817", "OPEN"]]

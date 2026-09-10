@@ -230,7 +230,8 @@ between them were worth a whole node here, and §6's entry rule was not involved
 A119's ordinary `S02_k5_11_r0.20_rho10`.
 
 **On the k5_16 frame the widest citeable `N` closed nothing, and the survivors are honest.**  All
-15 completed a163 rows came back `OPEN` (11) or `SKIP-UNSOUND` (4).  The `h = 10°` link kills three
+19 completed a163 rows came back `OPEN` (15) or `SKIP-UNSOUND` (4); the 20th, `Y0973`, is owed on a
+certification CAP.  The `h = 10°` link kills three
 of four children on `Y0054`, `Y0380` and `Y0422` and none on `Y0183`; the 10× wider `a151B` slice
 moves `Y1104` and `Y0854` from zero dead children to one and moves `Y0486`, `Y0570`, `Y0559`,
 `Y0985` not at all; the one node that can cite only a 2.5° window (`Y0871`) dies nowhere, exactly as
@@ -241,3 +242,5 @@ pattern, and the queue that was supposed to repeat it did not.
 
 `c0_Y1132`'s `A1_pins_match` refusal was tested rather than assumed: it is refused on its
 next-widest citeable set too, so the refusal is a property of the node's pins, not of the entry.
+
+**And the h10 lane's obstruction is one box: `BR(0,1)`, the PIN box.** Six of the eight completed rows are `[DEAD-CERT, DEAD-CERT, DEAD-CERT, ALIVE]` with the survivor always `NO3 = BR(0,1)`; five of the six report a cert FAIL whose own witness-feedback re-solve converges at `tau = 5.000000` exactly (round 0 `4.88…4.91` unconverged, `total 4.98525 < 5`; round 1 converged, `total 5.02500`, 12 cores enlarged up to 1.11×), and the sixth is LP-alive directly.  A `total >= budget` FAIL whose last round CONVERGES at the budget is therefore not the measure failure of §7 at all — no certificate can exist and cores, rounds and depth are provably wasted on it.  Since a certified `N` names only the free bodies, **no entry rule can widen a pin box**: these eight nodes need a re-split of `BR(0,1)` or a geometric kill of it (it is a wall-adjacent pin cell — A161's chord-limited lane shape), and one shared lemma would close all eight.  `A177/notes/queues177.md` §3 carries the tables.
