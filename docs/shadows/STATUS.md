@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-10 14:46` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-10 14:57` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -210,7 +210,7 @@ Of the 71 gallery pages the PI reviews, **53 are still ALIVE and 18 are now DEAD
 | `A197 slotpair197.jsonl` | 1 | 1 |
 | `A198 fastprop198.jsonl` | 2 | 2 |
 | `A199 seal199.jsonl` | 1 | 1 |
-| `A200 quick200.jsonl` | 1 | 1 |
+| `A200 quick200.jsonl` | 2 | 2 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
@@ -233,7 +233,7 @@ Of the 71 gallery pages the PI reviews, **53 are still ALIVE and 18 are now DEAD
 
 ### Records REFUSED -- tree tag unresolved (A137 §C.3)
 
-117 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **113 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **4 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
+118 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **114 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **4 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
 
 | source | id | leaf | why refused | redundant? |
 |---|---|---|---|---|
@@ -322,6 +322,7 @@ Of the 71 gallery pages the PI reviews, **53 are still ALIVE and 18 are now DEAD
 | `A167 pass_s1.jsonl` | `k5_16_interior_Y0635` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
 | `A167 pass_s1.jsonl` | `k5_16_interior_Y0191` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
 | `A199 seal199.jsonl` | `k5_16_interior_Y0491` | corner seal [BR: F meets BR(0,1), BR(1,0) unmet] (s0-only; WINDOW-PENDING) | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
+| `A200 quick200.jsonl` | `k5_16_interior_Y0191` | quick killer [propagation; g1 pad]: EmptyBox(H) at round1 | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D03_D05` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D07_D00` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D07_D01` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
