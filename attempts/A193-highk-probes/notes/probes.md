@@ -105,3 +105,14 @@ At that leaf (`results/probe193_corners4.jsonl`, `lpres_corners4_root_forced-BL0
   (1.43, 1.28, 41°), (1.52, 1.61, 86°). This is the "fractional tilted" phantom — the same object as the root's
   cloud, concentrated by the windows onto 14 poses, and no chord row sees it (every tilted square's chord on
   every pin/slot line is < 1).
+
+Pass 2 in full (stopped by hand at 02:55 once the LP quota was spent — the remaining enumeration was repeating the
+verdict): **318 multibox nodes, 1,884 s of geometry (median 5.0 s, max 17.7 s per node), depth 8, 6 complete
+assignments reached, no-room 6/6 UNDECIDED (identical residue 5.903 at every leaf: the pockets are set by the four
+pin cores; the cored meeters are too small to close the centre block), 3/3 windows + guard-line LPs ALIVE at
+τ = 11.000 exactly (417 / 344 / 358 s), 0 of 10 guard lines active at every leaf, 13 option-test nodes dead by
+the pair leaf (`EmptyBox` on F1 / F3: a meeter restricted to a slot window that another meeter's K′ fills), no tree
+node dead by a chord row (min rhs 1.877 = s − 2: the pins' four unit chords leave s − 2 > 0 on every pin line, and
+the meeters' min-chords are 0).** So for corners4 the toolkit's every leaf returned the SAME answer: the geometry
+localises the meeters (a real gain over the root — hulls of 0.1–0.7 area, three of five with cores), and the
+measure LP at that localisation sits at exactly the budget with a half-integral support.
