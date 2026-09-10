@@ -8,3 +8,11 @@ ALIVE in 217 s, count feasible both rounds. The cover moved off (16,17) to
 Every pair passes CN (16-23 max distance 1.16). By hand, 16-23 looks dead only under the EXACT pair test: a square
 at 16 must sit at y >= ~1.5 (P3) and reaches x 3.16; a square at 23 is pinned under P4 (top <= 2.877) and then
 overlaps the first for every x. That is rule (c) of the brief -- the pairs the search actually reaches.
+
+## PI (16:00): "Does cell 16 even clear H? are they more than 1 apart in x?"
+H hull [1.659,1.799]x[1.380,1.519], tilt 82.4-90 (half-width <= 0.565); cell-16 hull [2.659,2.802]x[1.470,1.651]:
+dx in [0.86, 1.143], side by side (dy <= 0.27) => the pair needs dx >= 1.0 (both upright) to 1.13 (16 at 45 deg).
+Feasible only with H at its LEFTMOST pose and the cell-16 square at its RIGHTMOST pose, both upright (slack 0.14).
+Then the cell-16 square (x ~2.80, y in [1.5,1.65] to clear P3) tops out at 2.15 and the cell-23 square (hull y in
+[2.23,2.38]) cannot clear it (needs centre >= 2.65 or x >= 3.8). So the cover H/16/23 dies as a CHAIN of exact pair
+tests, including a FIXED role (H) against a free cell -- the table must cover fixed roles' options (brief item 1).
