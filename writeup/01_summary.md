@@ -1,7 +1,9 @@
 # Eleven squares in a square: the result, the method, and who did what
 
-*Living document, edited in place. Status as of 2026-09-09. Tags: [T] proved in the notes, [L] checked in Lean,
-[C] backed by a machine-checkable certificate, [P] pending compute, [S] supported but not proved.*
+*Living document, edited in place. Status as of 2026-09-10 (night). Tags, used uniformly across the writeup: [T]
+proved in the notes, [L] checked in Lean, [C] backed by a machine-checkable certificate under the named verifier,
+[P] pending computation (a priced route exists), [O] an open proof obligation (specified, not yet proved),
+[S] supported but not proved. Attempt notes older than this document sometimes use [C] for "open"; here it never does.*
 
 ## The question
 
@@ -16,14 +18,21 @@ certificate a computer can verify independently.
 
 - **Bounds.** The side is at least 3.82 and at most 3.877084. The lower bound is certified [C]; the upper bound
   is the exhibited packing. The remaining question is the window between them.
-- **The window is closed except for one family.** The problem splits into classes by how many squares sit
-  "simply" against the box. Every class but one is closed on the whole window by certificates checked by a
-  frozen verifier [C], with the closures around the exact local minima checked in the Lean proof assistant [L]
-  for two of the four minima. The last family, called k0, is where no square sits simply and every corner of
-  the box is met by two tilted squares. Its residue is eleven cells of hypothesis space.
-- **No k0 cell has yet been killed.** This is the honest state of the proof. The machinery to kill one is
-  built and is being run on the first cell, l1_104, as the test case. Until a cell dies, the claim that the
-  rest is "just compute" is a projection, not a result.
+- **The window scoreboard is full; the classes are not all closed.** The problem splits into classes by how
+  many squares sit "simply" in a corner slot of the box. The designated window scoreboard stands at 52 of 52
+  rows certified by the frozen verifier [C], and the neighbourhoods of two exact local minima, S07 and S02, have
+  Lean-checked closures [L]. What remains open, by family: the two A57 window trees (k5_11, k5_16) [P]; the trump5
+  residual [P]; fourteen protected classes [P]; corners4 and k4_05, which have no priced route yet [O]; and k0,
+  the family with no simple corner-slot square at all. For k0 the reduction to "every corner met by two squares"
+  rests on the K0-O1 transfer, not on the definition. Its diagnostic residue is eleven converged-alive cells;
+  the exhaustive frontier behind them also carries unresolved certificate candidates (A115's pool of 128 in
+  166 open records), and the gallery is a review interface, not the covering manifest.
+- **The complete theorem is conditional.** The top-level Lean statement still names three obligations:
+  the stratum kills per class, the Trump residual, and the exact structure of the minimiser. The composition
+  route refines them; it does not discharge them.
+- **No whole k0 gallery cell has been closed by the new cascade.** Earlier attempts record root-cell kills
+  (A115: 22) and conditional lane kills (A141); the cascade built this week has killed nodes inside l1_104 but
+  not the cell. A closed cell would be a pilot with a measured price, not a theorem that the rest is compute.
 
 ## How the proof works, in plain terms
 
@@ -43,15 +52,16 @@ region is empty, by one of two kinds of argument.
    point, the geometry removes most of the tree before the linear programs see it.
 
 The order of these two, geometry first and to a fixed point, then linear programs only where geometry runs
-out, is the central lesson of the lab and the reason a k0 kill is expected to be compute-bound rather than
-open-ended.
+out, is the central lesson of the lab. Whether the remaining search is compute-bound is an empirical forecast
+from measured kill rates and per-node costs on representative branches, and it is stated that way below.
 
-## What the AI could not do alone
+## What each party did, from the record
 
-The AI built the pipeline: the certificate format, the frozen verifiers, the Lean kernel, the case trees, the
-linear programs, the galleries of thousands of drawings, and the process that ran them across weeks of
-compute. It could not, on its own, tell when it was cutting the problem along the wrong lines. Concretely,
-from the record:
+The AI built the pipeline: the certificate format, the frozen verifiers, the Lean formalisations and checkers
+(using Lean and Mathlib; the trusted kernel is Lean's own, and the axiom audits record where `native_decide`
+is used), the case trees, the linear programs, the galleries of thousands of drawings, and the process that ran
+them across weeks of compute. This is not a controlled comparison with either party working alone; it is what
+happened in this collaboration and which suggestions preceded which results. Concretely:
 
 - The idea that makes the whole proof tractable, stratifying by how many squares sit simply against the box,
   came from the PI, not the AI.
@@ -94,8 +104,8 @@ first and the AI's formalisation second:
 Not every reading survived: several were refuted by the drawings, hairline grazers the eye cannot see or a lane a
 certified polygon closed, and those are listed in the timeline too. The point is the direction of the traffic.
 The PI supplies lateral, spatial reasoning that the AI does not generate on its own; the AI supplies the
-formalisation, the certificate, the test, and the application to every case at once. Neither half produced the
-leaves alone, and the leaves are where the kills came from.
+formalisation, the certificate, the test, and the application to every case at once. In this record the leaves
+came from the two halves together, and the leaves are where the kills came from.
 
 ## The systems that closed the gap
 
