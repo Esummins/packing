@@ -561,17 +561,36 @@ if __name__ == "__main__":
     ap.add_argument("--svg", default=None)
     a = ap.parse_args()
     pads = ("g1", "zero") if a.chain else (a.pad,)
-    outs = []
+    outs, pages = [], []
+    # the quick chain: propagation at the g1 pad, then at pad 0 (cheap: ~100-200 s each); SEAL (~300-600 s per corner) only
+    # if both leave the page alive, at the g1 pad first (window-valid) then at pad 0
     for k, pad in enumerate(pads):
-        out, pg = run_page(a.nid, wall=a.wall, depth=a.depth, joint_depth=a.jdepth, refine_union=a.refine_union, seal=not a.noseal, pad=pad)
+        out, pg = run_page(a.nid, wall=a.wall, depth=a.depth, joint_depth=a.jdepth, refine_union=a.refine_union, seal=False, pad=pad)
         out["path"] = "quick"
-        out["chain_done"] = (not a.chain) or (k == len(pads) - 1) or out["verdict"] == "DEAD"
+        out["chain_done"] = (not a.chain and a.noseal) or out["verdict"] == "DEAD"
         outs.append(out)
+        pages.append(pg)
         cert = a.cert if (not a.chain or k == 0) else (a.cert[:-5] + "_pad0.json" if a.cert else None)
+        out["cert_path"] = cert
         emit(out, cert, a.out)
         if out["verdict"] == "DEAD":
             break
-    out = outs[0]                                                                       # the g1-pad node is the one the deep path continues
+    if outs[-1]["verdict"] == "ALIVE" and not a.noseal:
+        for k, (out, pg) in enumerate(zip(outs, pages)):
+            sl = seal_leaf(pg, a.wall, print)
+            out["seal"] = sl
+            out["chain_done"] = (k == len(outs) - 1) or (sl is not None and sl["verdict"] == "DEAD")
+            if sl and sl["verdict"] == "DEAD":
+                out["verdict"], out["leaf"], out["step_killed"] = "DEAD", sl["leaf"], "seal"
+                out["window_pending"] = out["pad"] == "zero"
+                if out["window_pending"]:
+                    out["leaf"] += " [pad 0: s0-only, WINDOW-PENDING]"
+            out["tests"], out["steps"], out["seconds"] = pg.T.tests, pg.T.steps, round(pg.T.now(), 1)
+            print("   => after SEAL at the %s pad: %s%s" % (out["pad"], out["verdict"], ("; " + out["leaf"]) if out["leaf"] else ""), flush=True)
+            emit(out, out["cert_path"], a.out)
+            if out["verdict"] == "DEAD":
+                break
+    out, pg = outs[0], pages[0]                                                        # the g1-pad node is the one the deep path continues
     if out["verdict"] == "ALIVE" and a.deep:
         pr = FP.pair_test_fallback(pg, pg.T.left())
         out["pair_test"] = pr
@@ -583,6 +602,6 @@ if __name__ == "__main__":
                 out["verdict"], out["leaf"], out["step_killed"] = "DEAD", "pair test (geo178b, nsub 8 / refine 4) at %s: %s" % (pr["slot"], pr["leaf"]), "pair-test"
         out["tests"], out["steps"], out["seconds"] = pg.T.tests, pg.T.steps, round(pg.T.now(), 1)
         emit(out, a.cert, a.out)
-    if a.svg and outs[-1]["verdict"] == "ALIVE":
+    if a.svg and all(o["verdict"] == "ALIVE" for o in outs):
         import fig200
-        fig200.draw(pg, outs, a.svg)
+        fig200.draw(pages[-1], outs, a.svg)
