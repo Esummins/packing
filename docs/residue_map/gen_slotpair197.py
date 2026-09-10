@@ -110,7 +110,12 @@ def panel(ox, oy, d):
     out.append(text(ox, oy - S0 * S - 56,
                     "Theorem FC: two DISTINCT non-pin squares must meet the widened open slot box "
                     "B+ (orange).  The library proves there is no such pair.", 9.5, "#333"))
-    if tab:
+    if tab and "subcases" not in tab:
+        out.append(text(ox, oy - S0 * S - 42,
+                        "(one-free) NOT EVEN ONE free square can meet B+: EmptyBox(%s) -- so the two "
+                        "Theorem FC demands certainly do not exist.   %s s"
+                        % (tab.get("dead"), tab.get("seconds")), 9.5, "#333"))
+    elif tab:
         hm = [x for x in tab["subcases"] if x.get("case") == "H-meets"]
         tf = [x for x in tab["subcases"] if x.get("case") == "two-free"]
         hm, tf = (hm[0] if hm else {}), (tf[0] if tf else {})
@@ -150,7 +155,7 @@ def panel(ox, oy, d):
         out.append('<polygon points="%s" fill="#90caf9" fill-opacity="0.6" stroke="#1565c0" '
                    'stroke-width="1.5"/>' % pts)
     # the two meeters' admissible regions, HATCHED EMPTY
-    if tab and tab.get("hull_B"):
+    if tab and tab.get("hull_B") and "subcases" in tab:
         hb = tab["hull_B"]
         out.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="url(#hatch)" '
                    'stroke="#6a1b9a" stroke-width="1.6"/>'
@@ -211,14 +216,12 @@ def panel(ox, oy, d):
         out.append(text(X(hx), Y(hy) + 17, "%.1f deg" % thm, 8, "#000", False, "middle"))
     # what it IS
     note = d.get("leaf") or ""
-    lines = ["WHAT THIS IS: the page's own hypothesis (5 slack pins + the conditioned square H, "
-             "budget %s) forces two distinct" % d.get("budget"),
+    lines = ["WHAT THIS IS: the page's own hypothesis (the class's slack pins + the conditioned "
+             "square H, budget %s) forces two distinct" % d.get("budget"),
              "non-pin squares to meet B+ at %s (Theorem FC; the extension class %s is FULL on "
              "[191/50, s0])." % (kill, (item or {}).get("extension")),
-             "H sits IN FRONT of the cell: with H as one meeter no free square can be the second, "
-             "and two free squares cannot both",
-             "reach B+ either -- every Lemma A1 cell pair is EmptyBox under the A171 multibox clip. "
-             "So the page is DEAD.",
+             "The A171 multibox clip at nsub 8 / refine 4 empties every case that the two-meeter "
+             "requirement leaves open, so the page is DEAD.",
              "[C: library geometry -- the frozen verifier is not involved.]  leaf: " + note]
     for i, ln in enumerate(lines):
         out.append(text(ox, oy + 20 + 14 * i, ln, 9, "#333"))

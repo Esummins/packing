@@ -8365,3 +8365,20 @@ halves of the answer come from opposite findings.
 - **Pass [M] (44 alive a57v4 pages, Y0491 to A196, 600 s wall, two BelowNormal processes, ~2 h): 2 DEAD** — `c0_Y0076` (A1/FC at BL(0,2): no free meeter cell; `check198` 200k samples consistent) and `k5_16_interior_Y0191` (EmptyBox(H) after the forced BL(1,0) meeter is instantiated in its one sliver cell); 42 ALIVE; H forced to a named slot on 16 pages (15 alive); propagation median 222 s per page, 325 s with the pair test.
 - **Soundness incident, fixed:** five pair-test rows (c0_Y0169/Y0171/Y0257/Y0258, k5_11_interior_Y1110, 12:00–12:40) passed instantiated free-meeter roles to `slot_pair_test` as fixed distinct squares — the instantiated meeter can be the pair test's own meeter (double count). Rows withdrawn 13:35 (superseding jsonl rows), pages revived by `status_gallery.py`, fallback corrected to pins only, all five re-run ALIVE. The coordinator's live status rerun had moved them to killed/ for ~1 h.
 - Files: `attempts/A198-fastprop/{BRIEF.md, notes/fastprop.md, code/{fastprop,fig198,run198,check198}.py, results/fastprop198.jsonl, certs/fp198_*.json, logs/}`, `docs/residue_map/fastprop_<nid>.svg` (44), `docs/shadows/status_gallery.py` (7i), STATUS rerun, `docs/residue_ledger.md` s.4, `docs/budget.md` s.D item 14, registry row.
+
+### A197 addendum (2026-09-10, the pass completed)
+
+- **Final: all 44 alive `a57v4` pages (Y0491 left to A196), 82 forced cells at a cell budget of 2, 6.7 CPU-h -
+  ONE page retired.**  `c0_Y0076` at `TL(0,0)`, and not by a pair leaf: the ONE-FREE node is
+  `EmptyBox(B_TL00)` in **30 s** - not even one free square can meet the widened corner box under A169's
+  lonely clip, so the two Theorem FC demands certainly do not exist (`certs/sp197_c0_Y0076.json`; A198's
+  `fastprop` kills the same page independently at `BL(0,2)`).  On the other 81 cells a pair survives and the
+  sampler EXHIBITS a real admissible configuration on **45**.  `H-meets` is VACUOUS on 23 cells and
+  all-`EmptyBox` on 4 more; `two-free` dies on 18 - but never both at the same cell except on `c0_Y0076`.
+  Six pages hit the 900 s wall.
+- **[T] Why A200's zero-pad kill of `k5_16_interior_Y0054` and A197's witness are BOTH right.**  Measured with
+  A161's exact separating-axis test on H's whole record box: H **cannot** meet the UNWIDENED cell
+  `(1, 2) x (0, 1)` at any pose; the smallest vertical pad at which it can is **0.001158**, and K0-WIDEN
+  supplies `pi_0 = 0.0255101` - twenty-two times more.  The PI's reading is TRUE of the plain slot box and
+  FALSE of the widened box `B_p+` that Theorem FC states, and a kill at the plain box is s0-only (the A155 /
+  A159 pad phenomenon, third sighting).  A "cannot be doubly met" leaf has to name its box.
