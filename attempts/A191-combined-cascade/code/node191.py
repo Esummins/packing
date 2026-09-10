@@ -28,7 +28,10 @@ import winlp185 as W                                             # noqa: E402  (
 import cas168 as K                                               # noqa: E402  (A168, read-only)
 import roles168 as R                                             # noqa: E402  (A168, read-only)
 import lp168 as L                                                # noqa: E402  (A168, read-only)
+import emit190 as E                                              # noqa: E402  (A190, read-only: ExactHyp, make_certificate_v5)
 from caselp import Box, warm_from_result                         # noqa: E402  (A57, read-only)
+
+N = 11
 
 RAD = 0.7072                                                     # > sqrt2/2: a square meeting the cell has its centre this close
 PLACED = {"root": (), "S1": ("TR",), "S2": ("TR",), "S3": ("TR", "BR"), "S4": ("TR", "BR"),
@@ -77,7 +80,53 @@ def run_node(tag, cell, step, roles, warm, a, deadline, log=print, prev=None):
             return rec
     else:
         rec["geo_s"] = 0.0
-    # ---- (b) the windows LP: roles -> windows + grown cores
+    # ---- (b) the v1-style LP: A135 exact cores on the roles' UNION boxes (uncounted squares: the frozen bridge
+    # "some square contains the core", pbox = the box), A144's guard-line columns (rhs* = s - SUM minchord(box_j));
+    # it CONVERGES (A183.5: 98 s at this budget) and a kill is [C under v5] through A190's emitter
+    bboxes = [r.bbox() for r in roles]
+    ok, mem = prio191.wait_box(log=log, own=0, max_wait=3 * 3600)
+    rec["gate"] = mem
+    if not ok:
+        rec.update(verdict="[P] box gate (LP not run)", wall_s=round(time.time() - t0, 1))
+        return rec
+    t1 = time.time()
+    v1 = {}
+    fam = LN.family(roles)
+    rec["n_family"] = len(fam)
+    if prev is None and a.v1:
+        try:
+            Hx = E.ExactHyp(bboxes, [])
+            b1 = N - Hx.m()
+            v1.update(budget=b1, exact_ok=Hx.exact_ok, exact_gap=Hx.exact_gap, a_exact=Hx.a_exact, a_stock=Hx.a_stock)
+            res_a, _ = C.solve_guarded(Hx, b1, [], warm, a.cap * 0.3)
+            v1.update(tau0=res_a["tau"], converged0=bool(res_a.get("converged")), lp0_s=round(time.time() - t1, 1))
+            lines1, lrep1 = LN.select(res_a.get("packing") or [], fam, k=a.lines, boxes=bboxes)
+            v1["lines"] = lrep1
+            t1b = time.time()
+            res_b, z_b = C.solve_guarded(Hx, b1, lines1, warm_from_result(res_a), a.cap * 0.4)
+            tb = res_b.get("tau")
+            v1.update(tau=tb, converged=bool(res_b.get("converged")), minmass=res_b.get("minmass"), n_rows=res_b.get("n_rows"),
+                      support=len(res_b.get("packing") or []), z=[dict(line=Ln.to_json(), z=zz) for Ln, zz in zip(lines1, z_b)],
+                      n_active=sum(1 for zz in z_b if zz > 1e-6), lp1_s=round(time.time() - t1b, 1),
+                      kills=bool(tb is not None and tb < b1 - 1e-6),
+                      kills_converged=bool(res_b.get("converged") and tb is not None and tb < b1 - 1e-6))
+            v1["packing_rows"] = [[q["cx"], q["cy"], q["theta"], q["y"]] for q in (res_b.get("packing") or [])][:300]
+            if v1["kills_converged"] and a.cert:
+                t3 = time.time()
+                mk = lambda r, zz, sc: E.make_certificate_v5(r, Hx, lines1, zz, sc, tag + "_v1")   # noqa: E731
+                v, lg, path = C.certify(res_b, z_b, Hx, lines1, tag + "_v1", deadline, rounds=a.rounds, log=log, make=mk, budget=b1)
+                v1.update(certified=v, cert_log=lg, cert=os.path.relpath(path, ROOT).replace("\\", "/"), cert_s=round(time.time() - t3, 1))
+            warm = warm_from_result(res_b)
+            support = res_b.get("packing") or []
+        except Exception as e:                                   # noqa: BLE001
+            v1["error"] = repr(e)[:300]
+            support = []
+    else:
+        support = (prev or {}).get("packing") or []
+    v1["lp_s"] = round(time.time() - t1, 1)
+    rec["v1"] = v1
+    # ---- (c) the windows LP (A185 WindowsHyp: every role windowed, its grown core attached; budget 11) with the
+    # guard-line columns, warm from (b)
     wroles = [W.WRole(r.name, r.pieces) for r in roles]
     H = W.WindowsHyp(wroles)
     rec.update(n_cores=H.m, budget=H.budget4, free=H.free, core_kind={w.name: w.core_kind for w in wroles},
@@ -85,28 +134,11 @@ def run_node(tag, cell, step, roles, warm, a, deadline, log=print, prev=None):
     gate = [dict(i=i, j=j, **dict(zip(("disjoint", "gap"), L.cores_disjoint_exact(H.cores[i], H.cores[j]))))
             for i in range(H.m) for j in range(i + 1, H.m)]
     rec["cores_disjoint"] = all(g["disjoint"] for g in gate)
-    ok, mem = prio191.wait_box(log=log, own=0, max_wait=3 * 3600)
-    rec["gate"] = mem
-    if not ok:
-        rec.update(verdict="[P] box gate (LP not run)", wall_s=round(time.time() - t0, 1))
-        return rec
-    t1 = time.time()
+    t2 = time.time()
     try:
-        # a resumed leg (prev = the previous leg's lpres) skips the line-free leg: its rows/atoms are the warm start
-        cap_a = a.cap * (0.0 if (prev is not None) else a.split)
-        if cap_a > 0:
-            res0, _ = C.solve_guarded(H, H.budget4, [], warm, cap_a)
-            rec.update(tau0=res0["tau"], converged0=bool(res0.get("converged")), lp0_s=round(time.time() - t1, 1),
-                       support0=len(res0.get("packing") or []))
-            warm = warm_from_result(res0)
-            support = res0.get("packing") or []
-        else:
-            support = (prev or {}).get("packing") or []
-        fam = LN.family(roles)
         lines, lrep = LN.select(support, fam, k=a.lines)
-        rec.update(n_family=len(fam), lines=lrep)
-        t2 = time.time()
-        res, z = C.solve_guarded(H, H.budget4, lines, warm, max(30.0, a.cap - (t2 - t1)))
+        rec["lines"] = lrep
+        res, z = C.solve_guarded(H, H.budget4, lines, warm, a.cap * (0.5 if prev is None else 1.0))
     except Exception as e:                                       # noqa: BLE001
         rec.update(error=repr(e)[:300], verdict="ERROR(LP)", wall_s=round(time.time() - t0, 1))
         return rec
@@ -118,7 +150,7 @@ def run_node(tag, cell, step, roles, warm, a, deadline, log=print, prev=None):
     rec.update(tau=tau, eta=(tau - H.budget4) if tau is not None else None, converged=bool(res.get("converged")),
                minmass=res.get("minmass"), maxcov=res.get("maxcov"), n_rows=res.get("n_rows"), support=len(res.get("packing") or []),
                z=[dict(line=Ln.to_json(), z=zz) for Ln, zz in zip(lines, z)], n_active=sum(1 for zz in z if zz > 1e-6),
-               lp_s=round(time.time() - t1, 1), kills=bool(tau is not None and tau < H.budget4 - 1e-6),
+               lp_s=round(time.time() - t2, 1), kills=bool(tau is not None and tau < H.budget4 - 1e-6),
                kills_converged=bool(res.get("converged") and tau is not None and tau < H.budget4 - 1e-6),
                window_transfer="by dilation (Lemma B.0 + K0-WIDEN: the windows are stated on F = D_lambda P at s0)")
     rec["packing_rows"] = [[p["cx"], p["cy"], p["theta"], p["y"]] for p in (res.get("packing") or [])][:300]
@@ -126,6 +158,11 @@ def run_node(tag, cell, step, roles, warm, a, deadline, log=print, prev=None):
         t3 = time.time()
         v, lg, path = C.certify(res, z, H, lines, tag, deadline, rounds=a.rounds, log=log)
         rec.update(certified=v, cert_log=lg, cert=os.path.relpath(path, ROOT).replace("\\", "/"), cert_s=round(time.time() - t3, 1))
+    rec["lp_total_s"] = round(time.time() - t1, 1)
+    if v1.get("certified") == "PASS":
+        rec["verdict"] = "DEAD(LP v1-guarded, v5 certified) [C under v5 ONLY]"
+        rec["wall_s"] = round(time.time() - t0, 1)
+        return rec
     rec["verdict"] = ("DEAD(LP, v5 certified) [C under v5 ONLY]" if rec.get("certified") == "PASS"
                       else ("LP-dead converged, v5 certificate %s (kill candidate)" % rec.get("certified") if rec["kills_converged"]
                             else ("LP-dead unconverged (kill candidate; cap %.0f s)" % a.cap if rec["kills"]

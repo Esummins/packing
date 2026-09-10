@@ -87,15 +87,19 @@ def run_v5(cert_path, timeout, depth=56, max_w=64, log=print):
         return -9, "verifier timeout %.0fs (process tree killed)" % timeout
 
 
-def certify(res, z, hyp, lines, tag, deadline, rounds=2, verify_cap=420.0, log=print):
-    """A190's witness-feedback loop on the combined certificate.  Returns (verdict, log, path)."""
+def certify(res, z, hyp, lines, tag, deadline, rounds=2, verify_cap=420.0, log=print, make=None, budget=None):
+    """A190's witness-feedback loop on the certificate `make(res, z, scale)` (default: the combined windows +
+    guard-line certificate at budget_v4; the v1-style guarded certificate of A190's emit190 for `make=` that,
+    at budget n - m).  Returns (verdict, log, path)."""
     out = os.path.join(CERTS, tag + ".json")
     lg, extra = [], []
-    budget = hyp.budget4
+    budget = hyp.budget4 if budget is None else budget
+    if make is None:
+        make = lambda r, zz, sc: make_certificate(r, hyp, lines, zz, sc, tag)   # noqa: E731
     for rd in range(rounds + 1):
         tau = res["tau"]
         scale = max(1.005, min(1.03, (budget - 0.005) / tau - 0.002)) if tau > 1e-12 else 1.005
-        cert = make_certificate(res, hyp, lines, z, scale, tag)
+        cert = make(res, z, scale)
         json.dump(cert, open(out, "w"), indent=0)
         tot = float(Fr(cert["total_v5"]))
         if tot >= budget:

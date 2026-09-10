@@ -63,17 +63,27 @@ def family(roles, s=S_RAT, max_lines=64):
     return out
 
 
-def select(support, fam, k=8, s=S_RAT):
-    """(lines with costs attached, report rows): the k largest offline violations SUM_p y_p |l n Q_p| - s on the
-    dual support (a list of dicts cx, cy, theta, y); rhs = s exactly (every core attached)."""
+def select(support, fam, k=8, s=S_RAT, boxes=None):
+    """(lines with costs attached, report rows): the k largest offline violations SUM_p y_p |l n Q_p| - rhs on the
+    dual support (a list of dicts cx, cy, theta, y).  rhs = s exactly when every core is attached (`boxes` None);
+    with `boxes` (the v1-style LP: the roles' union boxes carry UNATTACHED exact cores) rhs = s - SUM_j
+    minchord(box_j, l) (A144's guard_row; the verifier re-derives rhs* from the cores' pbox = these boxes)."""
     rec = dict(packing=support or [])
     scored = []
     for L in fam:
+        rhs = Fr(s)
+        terms = []
+        if boxes:
+            for b in boxes:
+                lo = G.minchord_box(b, L, a=G.HALF)["lo"]
+                terms.append(lo)
+                rhs -= lo
         _c, lhs = G.support_chords(rec, L, a=0.5)
-        scored.append((lhs - float(s), L))
+        scored.append((lhs - float(rhs), L, rhs, terms))
     scored.sort(key=lambda x: -x[0])
     chosen = scored[:k]
-    rows = [dict(rhs=Fr(s), rhs_float=float(s)) for _ in chosen]
+    rows = [dict(rhs=rhs, rhs_float=float(rhs)) for (_v, _L, rhs, _t) in chosen]
     lines = guardlp.attach_costs([x[1] for x in chosen], rows)
-    rep = [dict(line=L.to_json(), rhs=str(Fr(s)), offline_viol=v) for (v, L) in chosen]
+    rep = [dict(line=L.to_json(), rhs=str(rhs), rhs_float=float(rhs), offline_viol=v, box_terms=[float(t) for t in terms])
+           for (v, L, rhs, terms) in chosen]
     return lines, rep

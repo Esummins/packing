@@ -60,7 +60,7 @@ def main():
     ap.add_argument("--cap", type=float, default=300.0)
     ap.add_argument("--wall", type=float, default=1500.0)
     ap.add_argument("--lines", type=int, default=8)
-    ap.add_argument("--split", type=float, default=0.4)
+    ap.add_argument("--v1", type=int, default=1)
     ap.add_argument("--geo", type=int, default=1)
     ap.add_argument("--geo-cap", type=float, default=150.0)
     ap.add_argument("--cert", type=int, default=1)

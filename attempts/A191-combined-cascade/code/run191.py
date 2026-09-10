@@ -5,7 +5,7 @@ results/run191_<cell>_<step>.jsonl (resumable: nodes with a record are skipped u
 --resume warm-starts an unconverged node from results/lpres_<tag>.json and skips the line-free leg).
 
     python run191.py --cell l1_104 --step S2 [--shard k/n] [--only NODE,NODE] [--exclude NODE,..] [--cap 300]
-                     [--wall 1500] [--lines 8] [--split 0.4] [--warm cell|a185] [--geo 1] [--cert 1]
+                     [--wall 1500] [--lines 8] [--v1 1] [--warm cell|a185] [--geo 1] [--cert 1]
 """
 import argparse
 import json
@@ -60,7 +60,7 @@ def main():
     ap.add_argument("--cap", type=float, default=300.0)
     ap.add_argument("--wall", type=float, default=1500.0)
     ap.add_argument("--lines", type=int, default=8)
-    ap.add_argument("--split", type=float, default=0.4, help="fraction of --cap for the line-free leg")
+    ap.add_argument("--v1", type=int, default=1, help="run the v1-style exact-core + guard-line LP first (converges; A190 emitter)")
     ap.add_argument("--geo", type=int, default=1)
     ap.add_argument("--geo-cap", type=float, default=150.0)
     ap.add_argument("--cert", type=int, default=1)
