@@ -33,11 +33,26 @@ def sq(cx, cy, th):
     return [(cx + 0.5 * (i * c - j * s), cy + 0.5 * (i * s + j * c)) for i, j in ((1, 1), (1, -1), (-1, -1), (-1, 1))]
 
 
+def draw_role_light(g, name, rj):
+    """fig168's draw_role without the K' rebuild and the pose sampling: the pieces' centre rects (the admissible
+    poses' centres lie in them), the recorded K' polygon filled, the label -- never an excluded pose."""
+    from fractions import Fraction as Fr
+    col = F.COL.get(name, "#444")
+    for p in rj["pieces"]:
+        g.append(F.rect(p[0], p[1], p[2], p[3], fill="none", stroke=col, stroke_width="0.6"))
+    verts = [(float(Fr(v[0])), float(Fr(v[1]))) for v in (rj.get("core") or [])]
+    if verts:
+        g.append(F.poly(verts, fill=col, fill_opacity="0.75", stroke=col, stroke_width="0.8"))
+    if rj.get("box"):
+        b = rj["box"]
+        g.append(F.text(F.sc(0.5 * (b[0] + b[1])), F.Y(0.5 * (b[2] + b[3])) + 3, name, 9, "#fff", anchor="middle", weight="bold"))
+
+
 def panel_of(rec, roles_json, ox, oy):
     g = []
     F.draw_base(g)
     for name, rj in (roles_json or {}).items():
-        F.draw_role(g, name, rj, solid=True, label=True)
+        draw_role_light(g, name, rj)
     for e in rec.get("z") or []:
         if e.get("z", 0) > 1e-6:
             ln = e["line"]
@@ -99,7 +114,7 @@ def main():
            '<rect width="100%" height="100%" fill="#fafafa"/>',
            F.text(10, 20, "A191 %s %s -- the combined leaf at the recorded fixed point: %d nodes, %d DEAD, %d LP-converged; %s" % (
                a.cell, a.step, len(items), n_dead, n_conv, time.strftime("%Y-%m-%d %H:%M")), 13, "#000", weight="bold"),
-           F.text(10, 38, "panel: pieces + admissible hull (dashed) + K' (filled) per role; magenta = guard lines the LP charged (z); blue = the LP's dual "
+           F.text(10, 38, "panel: pieces (centre rects) + K' (filled) per role; magenta = guard lines the LP charged (z); blue = the LP's dual "
                           "support (opacity ~ y); corner text = LANE of the widened box with the roles as obstacles; times printed per node", 8.5, "#444")]
     for i, (nd, r) in enumerate(items):
         rj = r.get("roles_fixed") or (side.get(nd) or {}).get("roles")
