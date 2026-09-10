@@ -102,7 +102,7 @@ def run_v5(cert_path, timeout, depth=56, max_w=64):
     """verify_case_v5 in ONE child process (jobs 1: <= 2 lab pythons in total); the tree is killed on timeout."""
     cmd = [sys.executable, VERIFIER, cert_path, "--jobs", "1", "--depth", str(depth), "--max-witnesses", str(max_w),
            "--report", "--quiet"]
-    prio190.wait_mine(limit=2, max_wait=max(60, timeout / 2))
+    prio190.wait_mine(limit=2, max_wait=max(1800, timeout))
     prio190.wait_box(own=1, max_wait=max(60, timeout / 2), log=print)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
                          env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
