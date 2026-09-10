@@ -15,3 +15,9 @@ REQUEST for stage 0 (A202): run the pair table on the surviving PIECES (sub-rect
  (c) a slot's demand-2 pair must be met by two PIECE-compatible options -- the count's witness must name pieces.
 This is closed-form (microseconds per pair) and would settle pairs like this one without A201's bisection.
 Keep A201's exact test as the fallback for pairs that survive (b).
+
+## Coordinator grid check (17:50), witness hulls from f30_k5_16_interior_Y0191_g1_s0.json
+cell 14 [2.154,2.226]x[2.80,3.23] and cell 18 [2.226,2.658]^2, poses inside the container, off the pins and MEETING
+the TL(1,0) box [1.0,2.04]x[2.852,3.877], 37 tilts each: 1,034 x 2,824 admissible poses, 0 disjoint pairs.
+=> the PI is right; CN on hulls passes (1.12) only because the far corners are not meeting poses.  Rule for stage 0:
+a slot's two meeters are tested as a pair over their MEETING pieces (options), never over cell hulls.
