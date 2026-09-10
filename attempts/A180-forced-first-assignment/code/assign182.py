@@ -207,8 +207,11 @@ class Search(A.Search):
                 J.git_commit([self.J.path], "A182: %s journal after branch %s (%s)" % (self.J.nid, st2["label"][-60:],
                                                                                         kids[-1].get("verdict")))
             if kids[-1].get("verdict") == "UNDECIDED" and "budget exhausted" in str(kids[-1].get("leaf")):
-                return dict(label=st["label"], verdict="UNDECIDED", branch=o["cell"], n_children=len(kids),
-                            children=kids, leaf=kids[-1]["leaf"])
+                # the search stops here (not memoised: a resume continues at this branch).  An alive leaf
+                # already found stands: the page is not killed whatever the unexplored branches say.
+                va = "ALIVE" if any(c["verdict"].startswith("ALIVE") for c in kids) else "UNDECIDED"
+                return dict(label=st["label"], verdict=va, branch=o["cell"], n_children=len(kids),
+                            children=kids, leaf=kids[-1]["leaf"], n_unexplored=len(opts) - len(kids))
         v = ("DEAD" if all(c["verdict"] == "DEAD" for c in kids) else
              ("ALIVE" if any(c["verdict"].startswith("ALIVE") for c in kids) else "UNDECIDED"))
         r = dict(label=st["label"], verdict=v, branch=o["cell"], n_children=len(kids), children=kids)
