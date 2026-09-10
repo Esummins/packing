@@ -48,9 +48,10 @@ def hull_maxdist2(h1, h2):
 
 
 class PairTable:
-    def __init__(self, page, budget=180.0, refine=0, max_iter=3, n_coarse=4, exact=True, log=None):
+    def __init__(self, page, budget=300.0, refine=0, max_iter=3, n_coarse=4, exact=True, lazy_exact=False, log=None):
         self.page = page
-        self.budget = budget
+        self.budget, self.lazy_exact = budget, lazy_exact
+        self.cheap_ok, self.refutations = set(), []
         self.refine, self.max_iter, self.n_coarse = refine, max_iter, n_coarse
         self.cell_pcs, self.cell_cache = {}, {}
         self.exact_on = exact
@@ -109,13 +110,20 @@ class PairTable:
         return self.pieces_of[k]
 
     # ---------------------------------------------------------------- the lookup
-    def compatible(self, k1, k2):
+    def compatible(self, k1, k2, exact=None):
+        """the search's test.  exact=None: (a) (b) + whatever (c) already decided (+ a lazy (c) if `lazy_exact`);
+        exact=True: run (c) now (verify_cover).  Only DECIDED results are cached."""
         self.n["lookups"] += 1
         pk = frozenset((k1, k2))
         if pk in self.cache:
             ok, rec = self.cache[pk]
+        elif pk in self.cheap_ok and not (exact or self.lazy_exact):
+            return True
         else:
-            ok, rec = self._decide(k1, k2)
+            ok, rec = self._decide(k1, k2, exact)
+            if rec is None:
+                self.cheap_ok.add(pk)
+                return True
             self.cache[pk] = (ok, rec)
             if not ok:
                 self.excl.append(rec)
@@ -123,7 +131,8 @@ class PairTable:
             self.hits.add(pk)
         return ok
 
-    def _decide(self, k1, k2):
+    def _decide(self, k1, k2, exact):
+        """-> (ok, record); record None = passes (a) (b), (c) not run."""
         h1, h2 = self.hull[k1], self.hull[k2]
         base = dict(a=key_json(k1), b=key_json(k2), hull_a=FP.rect_f(h1), hull_b=FP.rect_f(h2))
         if not FP.a1_compatible(h1, h2):
@@ -136,12 +145,28 @@ class PairTable:
             self.n["cn"] += 1
             return False, dict(base, rule="CN", maxdist=round(math.sqrt(float(d2)), 6),
                                why="Lemma CN: max Euclidean centre distance %.4f < 1 (inscribed discs)" % math.sqrt(float(d2)))
-        if not self.exact_on:
+        if not self.exact_on or not (exact or self.lazy_exact):
             return True, None
         if self.spent >= self.budget:
             self.undecided.add(frozenset((k1, k2)))
             return True, None
         return self._exact(k1, k2, base)
+
+    def verify_cover(self, witness):
+        """(c) on every pair of a count witness [(who, o)]: -> (excluded pairs, all decided?).  The count's DFS runs
+        on (a) (b) and the cached (c) results; the exact budget is spent HERE, on the covers the count proposes."""
+        keys = [okey(who, o) for who, o in witness]
+        excl, decided = [], True
+        for i in range(len(keys)):
+            for j in range(i + 1, len(keys)):
+                pk = frozenset((keys[i], keys[j]))
+                if not self.compatible(keys[i], keys[j], exact=True):
+                    excl.append(self.cache[pk][1])
+                elif pk not in self.cache:
+                    decided = False
+        self.refutations.append(dict(cover=[key_json(k) for k in keys], excluded=[dict(a=e["a"], b=e["b"], rule=e["rule"]) for e in excl],
+                                     decided=decided))
+        return excl, decided
 
     # ---------------------------------------------------------------- (c) the exact pair clip (pairclip201)
     def cell_union(self, ci):
@@ -205,7 +230,8 @@ class PairTable:
         d = dict(self.n)
         d["undecided_budget"] = len(self.undecided)
         d["exact_seconds"] = round(d["exact_seconds"], 2)
-        d.update(budget=self.budget, n_excl=len(self.excl), n_cached=len(self.cache),
+        d.update(budget=self.budget, n_excl=len(self.excl), n_cached=len(self.cache), n_cheap_ok=len(self.cheap_ok),
+                 n_refutations=len(self.refutations), n_refuted=sum(1 for r in self.refutations if r["excluded"]),
                  by_rule={r: sum(1 for e in self.excl if e["rule"] == r) for r in ("A1", "CN", "EXACT")})
         return d
 
@@ -215,8 +241,8 @@ class PairTable:
         ks = [k for k in keys if k in self.hull]
         for i in range(len(ks)):
             for j in range(i + 1, len(ks)):
-                ok = self.compatible(ks[i], ks[j])
-                rec = self.cache[frozenset((ks[i], ks[j]))][1]
+                ok = self.compatible(ks[i], ks[j], exact=True)
+                rec = self.cache.get(frozenset((ks[i], ks[j])), (True, None))[1]
                 out.append(dict(a=key_json(ks[i]), b=key_json(ks[j]), compatible=ok,
                                 rule=(rec or {}).get("rule"), why=(rec or {}).get("why")))
         return dict(label=label, n_keys=len(keys), n_found=len(ks), pairs=out,

@@ -34,10 +34,25 @@ class QPage201(Q.QPage):
         self.tables = []
 
     def _count(self, label, free_opts, fixed_opts, n_anon, caps, table, use_chords):
+        """the count, then the WITNESS-REFUTATION loop: every pair of the cover it proposes goes through rule (c);
+        an excluded pair is cached and the count re-run; stops when the count is infeasible (DEAD), the cover's pairs
+        are all decided compatible (a verified cover), or the budget leaves a pair undecided (ALIVE, undecided)."""
         t0 = time.time()
-        r = count201.count_search(self.slots, free_opts, fixed_opts, n_anon, self.lines, self.pin_chords, self.s, caps, table, use_chords=use_chords)
-        st = self.T.step("count", time.time() - t0, chords=use_chords, feasible=r.feasible, nodes=r.nodes, capped=r.capped,
-                         label=label, excl_used=len(table.hits), pair_spent=round(table.spent, 2))
+        n_ref, verified, nodes = 0, None, 0
+        while True:
+            r = count201.count_search(self.slots, free_opts, fixed_opts, n_anon, self.lines, self.pin_chords, self.s, caps, table, use_chords=use_chords)
+            nodes += r.nodes
+            if not r.feasible or not self.pair_exact or r.witness is None:
+                break
+            excl, decided = table.verify_cover(r.witness)
+            if not excl:
+                verified = decided
+                break
+            n_ref += 1
+            if self.T.out_of_time():
+                break
+        st = self.T.step("count", time.time() - t0, chords=use_chords, feasible=r.feasible, nodes=nodes, capped=r.capped, label=label,
+                         refutations=n_ref, cover_verified=verified, excl_used=len(table.hits), pair_spent=round(table.spent, 2))
         table.used[label] = table.hits_json()
         return r, st
 

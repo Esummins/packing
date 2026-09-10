@@ -62,7 +62,7 @@ def run_page(nid, wall=600, depth=5, joint_depth=2, refine_union=2, pad="g1", bu
             (rd.get("count_chord") or {}).get("feasible"), ("; DEAD: " + rd["dead"]) if rd.get("dead") else ""))
         pe = rd.get("pair_excl") or {}
         if pe:
-            log("      pair table: %s" % {k: pe.get(k) for k in ("lookups", "a1", "cn", "cell_pairs_near", "cell_tested", "cell_excl", "exact_tested", "exact_excl", "undecided_budget", "exact_seconds", "by_rule")})
+            log("      pair table: %s" % {k: pe.get(k) for k in ("lookups", "a1", "cn", "cell_pairs_near", "cell_tested", "cell_excl", "exact_tested", "exact_excl", "undecided_budget", "exact_seconds", "by_rule", "n_refutations", "n_refuted")})
         wc = rd.get("witness_check")
         if wc:
             log("      A200 witness cover (%d/%d rows found): %s" % (wc["n_found"], wc["n_keys"], "DEAD -- " + "; ".join(
