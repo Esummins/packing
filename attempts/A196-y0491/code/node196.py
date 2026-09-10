@@ -116,7 +116,7 @@ def meet_clip(roles, must_meet, nsub, refine, log, max_rounds=4, label="meet"):
             mb = nd.boxes[r]
             keep, n_drop = [], 0
             for (bn, rect) in mb.pieces:
-                pb = MB.piece_box(bn, rect)
+                pb = MB.piece_box(bn, rect)[0]
                 if any(CL.box_misses_cell_exact(pb, tuple(c))[0] for c in cells):
                     n_drop += 1
                 else:
