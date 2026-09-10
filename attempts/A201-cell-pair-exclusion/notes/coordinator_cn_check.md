@@ -16,3 +16,10 @@ Feasible only with H at its LEFTMOST pose and the cell-16 square at its RIGHTMOS
 Then the cell-16 square (x ~2.80, y in [1.5,1.65] to clear P3) tops out at 2.15 and the cell-23 square (hull y in
 [2.23,2.38]) cannot clear it (needs centre >= 2.65 or x >= 3.8). So the cover H/16/23 dies as a CHAIN of exact pair
 tests, including a FIXED role (H) against a free cell -- the table must cover fixed roles' options (brief item 1).
+
+## PI (16:20): two-disc cover of cell 16 (radius 1 at H's hull corner + radius 1/2 at P3's top-left corner)?
+Grid check (scratch, 384 H poses x 675 cell-16 poses x 409 cell-23 poses, all inside the container and off the pins,
+H dipping under the BL(1,0) box top): the two discs leave exactly the alive hull (its left edge 2.659 = 1.659 + 1);
+26,591 of 259,200 (H,16) pose pairs are DISJOINT (x16 >= 2.679, y16 >= 1.496); (H,16,23) triples: NONE.
+=> the quick kill on Y0044's cover is the 16-vs-23 pair test WITH H (and P3/P4) as obstacles, i.e. rule (c) with the
+fixed roles' cores as obstacles. Grid evidence only -- the certificate is the bisection.
