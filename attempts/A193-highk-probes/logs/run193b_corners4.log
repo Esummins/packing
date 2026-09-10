@@ -1,0 +1,87 @@
+  BL(0,1)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+  BL(1,0)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+  BR(0,1)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+  BR(1,0)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+  TR(0,1)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+  TR(1,0)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+  TL(0,1)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+  TL(1,0)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+   journal: 150 nodes, 0 subtrees, 24 lanes on disk
+    root BL(0,1) need 2: candidates new -> 1 option(s)
+    root BL(1,0) need 2: candidates new -> 1 option(s)
+    root BR(0,1) need 2: candidates new -> 1 option(s)
+    root BR(1,0) need 2: candidates new -> 1 option(s)
+    root TR(0,1) need 2: candidates new -> 1 option(s)
+    root TR(1,0) need 2: candidates new -> 1 option(s)
+    root TL(0,1) need 2: candidates new -> 1 option(s)
+    root TL(1,0) need 2: candidates new -> 1 option(s)
+  FORCED BL(0,1) <- new+new
+    root/forced:BL(0,1)=F1+F2 BL(1,0) need 2: candidates F1+F2+new -> 4 option(s)
+    root/forced:BL(0,1)=F1+F2 BR(0,1) need 2: candidates new -> 1 option(s)  [F1: sqrt2 rule vs BL(0,1); F2: sqrt2 rule vs BL(0,1)]
+    root/forced:BL(0,1)=F1+F2 BR(1,0) need 2: candidates F1+F2+new -> 4 option(s)
+    root/forced:BL(0,1)=F1+F2 TR(0,1) need 2: candidates new -> 1 option(s)  [F1: sqrt2 rule vs BL(0,1); F2: sqrt2 rule vs BL(0,1)]
+    root/forced:BL(0,1)=F1+F2 TR(1,0) need 2: candidates F1+F2+new -> 3 option(s)
+    root/forced:BL(0,1)=F1+F2 TL(0,1) need 2: candidates F1+F2+new -> 4 option(s)
+    root/forced:BL(0,1)=F1+F2 TL(1,0) need 2: candidates F1+F2+new -> 4 option(s)
+  FORCED BR(0,1) <- new+new
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4 BL(1,0) need 2: candidates F1+F2+F3+F4+new -> 11 option(s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4 BR(1,0) need 2: candidates F1+F2+F3+F4+new -> 11 option(s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4 TR(0,1) need 2: candidates F3+F4+new -> 4 option(s)  [F1: sqrt2 rule vs BL(0,1); F2: sqrt2 rule vs BL(0,1)]
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4 TR(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4 TL(0,1) need 2: candidates F1+F2+new -> 4 option(s)  [F3: sqrt2 rule vs BR(0,1); F4: sqrt2 rule vs BR(0,1)]
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4 TL(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+  BRANCH TR(0,1) <- F3+F4 (1/4)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4 BL(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4 BR(1,0) need 2: candidates F1+F2+F3+F4+new -> 11 option(s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4 TR(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4 TL(0,1) need 2: candidates F1+F2+new -> 4 option(s)  [F3: sqrt2 rule vs BR(0,1); F4: sqrt2 rule vs BR(0,1)]
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4 TL(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+  BRANCH TL(0,1) <- F1+F2 (1/4)
+      lane BL(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2 BL(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+      lane BR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2 BR(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+      lane TR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2 TR(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+      lane TL(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2 TL(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+  BRANCH BL(1,0) <- F1+F2 (1/10)
+      lane BR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2 BR(1,0) need 2: candidates F1+F2+F3+F4+new -> 10 option(s)
+      lane TR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2 TR(1,0) need 2: candidates F3+F4+new -> 4 option(s)  [F1: sqrt2 rule vs BL(1,0); F2: sqrt2 rule vs BL(1,0)]
+      lane TL(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2 TL(1,0) need 2: candidates F3+F4+new -> 3 option(s)  [F1: sqrt2 rule vs BL(1,0); F2: sqrt2 rule vs BL(1,0)]
+  BRANCH TL(1,0) <- F3+new (1/3)
+      lane BR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5 BR(1,0) need 2: candidates F1+F2+F4+new -> 6 option(s)  [F3: sqrt2 rule vs TL(1,0); F5: sqrt2 rule vs TL(1,0)]
+      lane TR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5 TR(1,0) need 2: candidates F3+F4+F5+new -> 7 option(s)  [F1: sqrt2 rule vs BL(1,0); F2: sqrt2 rule vs BL(1,0)]
+  BRANCH BR(1,0) <- F1+F4 (1/6)
+      lane TR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5/b1:BR(1,0)=F1+F4: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5/b1:BR(1,0)=F1+F4 TR(1,0) need 2: candidates F3+F5+new -> 4 option(s)  [F1: sqrt2 rule vs BL(1,0); F2: sqrt2 rule vs BL(1,0); F4: sqrt2 rule vs BR(1,0)]
+  BRANCH TR(1,0) <- F3+F5 (1/4)
+  NO-ROOM b1:TL(1,0)=F3+F5/b1:BR(1,0)=F1+F4/b1:TR(1,0)=F3+F5: UNDECIDED (161 s) residue too big to pocket: 2 pocket(s) of total area 5.903 > 0.750 (no lane cove
+  LP leaf ,0)=F1+F2/b1:TL(1,0)=F3+F5/b1:BR(1,0)=F1+F4/b1:TR(1,0)=F3+F5 (9 roles)
+  LP: ALIVE(LP, windows + guard lines) tau=10.999999999944045 / b4=11 (417 s)
+  BRANCH TR(1,0) <- F3+new (2/4)
+  NO-ROOM b1:TL(1,0)=F3+F5/b1:BR(1,0)=F1+F4/b2:TR(1,0)=F3+F6: UNDECIDED (169 s) residue too big to pocket: 2 pocket(s) of total area 5.903 > 0.750 (no lane cove
+  LP leaf ,0)=F1+F2/b1:TL(1,0)=F3+F5/b1:BR(1,0)=F1+F4/b2:TR(1,0)=F3+F6 (10 roles)
+  LP: ALIVE(LP, windows + guard lines) tau=10.99999999136125 / b4=11 (344 s)
+  BRANCH TR(1,0) <- F5+new (3/4)
+  NO-ROOM b1:TL(1,0)=F3+F5/b1:BR(1,0)=F1+F4/b3:TR(1,0)=F5+F6: UNDECIDED (168 s) residue too big to pocket: 2 pocket(s) of total area 5.903 > 0.750 (no lane cove
+  LP leaf ,0)=F1+F2/b1:TL(1,0)=F3+F5/b1:BR(1,0)=F1+F4/b3:TR(1,0)=F5+F6 (10 roles)
+  LP: ALIVE(LP, windows + guard lines) tau=11.00000000009832 / b4=11 (358 s)
+  BRANCH TR(1,0) <- new+new (4/4)
+  BRANCH BR(1,0) <- F2+F4 (2/6)
+      lane TR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5/b2:BR(1,0)=F2+F4: None (0s)
+    root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5/b2:BR(1,0)=F2+F4 TR(1,0) need 2: candidates F3+F5+new -> 4 option(s)  [F1: sqrt2 rule vs BL(1,0); F2: sqrt2 rule vs BL(1,0); F4: sqrt2 rule vs BR(1,0)]
+  BRANCH TR(1,0) <- F3+F5 (1/4)
+  NO-ROOM b1:TL(1,0)=F3+F5/b2:BR(1,0)=F2+F4/b1:TR(1,0)=F3+F5: UNDECIDED (168 s) residue too big to pocket: 2 pocket(s) of total area 5.903 > 0.750 (no lane cove
+  BRANCH TR(1,0) <- F3+new (2/4)
+  NO-ROOM b1:TL(1,0)=F3+F5/b2:BR(1,0)=F2+F4/b2:TR(1,0)=F3+F6: UNDECIDED (169 s) residue too big to pocket: 2 pocket(s) of total area 5.903 > 0.750 (no lane cove
+  BRANCH TR(1,0) <- F5+new (3/4)
+  NO-ROOM b1:TL(1,0)=F3+F5/b2:BR(1,0)=F2+F4/b3:TR(1,0)=F5+F6: UNDECIDED (167 s) residue too big to pocket: 2 pocket(s) of total area 5.903 > 0.750 (no lane cove
+  BRANCH TR(1,0) <- new+new (4/4)
+  BRANCH BR(1,0) <- F1+new (3/6)
+      lane TR(1,0) at root/forced:BL(0,1)=F1+F2/forced:BR(0,1)=F3+F4/b1:TR(0,1)=F3+F4/b1:TL(0,1)=F1+F2/b1:BL(1,0)=F1+F2/b1:TL(1,0)=F3+F5/b3:BR(1,0)=F1+F6: None (0s)

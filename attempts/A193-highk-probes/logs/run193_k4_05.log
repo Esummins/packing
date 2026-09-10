@@ -1,0 +1,33 @@
+  BL(1,0)   ext k5_11    FC at s0 only (A57 s0 tree; window = G1 [P])
+  BR(0,1)   ext k5_15    FC on the window
+  BR(1,0)   ext k5_13    FC on the window
+  TR(0,0)   ext k5_16    FC at s0 only (A57 s0 tree; window = G1 [P])
+  TL(1,0)   ext k5_12    FC on the window
+== k4_05 root LP (pins only + guard lines): tau 6.964787596790797 / budget 7 conv=False active lines 0 (337 s)
+   journal: 4 nodes, 0 subtrees, 1 lanes on disk
+    root BL(1,0) need 2: candidates new -> 6 option(s)
+    root BR(0,1) need 2: candidates new -> 1 option(s)
+    root BR(1,0) need 2: candidates new -> 10 option(s)
+    root TR(0,0) need 2: candidates new -> 6 option(s)
+    root TL(1,0) need 2: candidates new -> 1 option(s)
+  FORCED BR(0,1) <- new+new
+      lane BL(1,0) at root/forced:BR(0,1)=F1+F2: None (0s)
+    root/forced:BR(0,1)=F1+F2 BL(1,0) need 2: candidates F1+F2+new -> 9 option(s)
+      lane BR(1,0) at root/forced:BR(0,1)=F1+F2: None (0s)
+    root/forced:BR(0,1)=F1+F2 BR(1,0) need 2: candidates F1+F2+new -> 13 option(s)
+      lane TR(0,0) at root/forced:BR(0,1)=F1+F2: None (0s)
+    root/forced:BR(0,1)=F1+F2 TR(0,0) need 2: candidates F1+F2+new -> 9 option(s)
+      lane TL(1,0) at root/forced:BR(0,1)=F1+F2: None (0s)
+    root/forced:BR(0,1)=F1+F2 TL(1,0) need 2: candidates F1+F2+new -> 3 option(s)
+  BRANCH TL(1,0) <- F1+new (1/3)
+      lane BL(1,0) at root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3: None (0s)
+    root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3 BL(1,0) need 2: candidates F2+new -> 7 option(s)  [F1: sqrt2 rule vs TL(1,0); F3: sqrt2 rule vs TL(1,0)]
+      lane BR(1,0) at root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3: None (0s)
+    root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3 BR(1,0) need 2: candidates F2+new -> 11 option(s)  [F1: sqrt2 rule vs TL(1,0); F3: sqrt2 rule vs TL(1,0)]
+      lane TR(0,0) at root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3: None (0s)
+    root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3 TR(0,0) need 2: candidates F1+F2+F3+new -> 9 option(s)
+  BRANCH BL(1,0) <- F2+new (1/7)
+      lane BR(1,0) at root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3/b1:BL(1,0)=F2+F4: None (0s)
+    root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3/b1:BL(1,0)=F2+F4 BR(1,0) need 2: candidates F2+F4+new -> 6 option(s)  [F1: sqrt2 rule vs TL(1,0); F3: sqrt2 rule vs TL(1,0)]
+      lane TR(0,0) at root/forced:BR(0,1)=F1+F2/b1:TL(1,0)=F1+F3/b1:BL(1,0)=F2+F4: None (0s)
+== k4_05 search: UNDECIDED (154 nodes, 150 fresh, 1063 s) node budget exhausted (150 fresh + 4 replayed nodes, 1062 s compute)

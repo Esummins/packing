@@ -453,6 +453,23 @@ is boxes that do not lean into the unpinned `TL(0,0)` corner.
    coarseness that is affordable (4 x 4, `N = 1`) the bound is 16 for 7 free squares - it cannot bite at
    `k = 4`, so do not spend k0-cascade compute on it.
 
+12. **The two unpriced classes are theory-limited, not compute-limited (A193, 2026-09-10 night).** corners4
+   (k4_13) and k4_05 were the only campaigns in the dependency graph without a price ("kill-only trees, no route
+   beyond"). Probed with the k0 toolkit at s0 (every forced cell instantiated, A182's search, no-room, chord
+   rows, windows + guard-line LP under v5): **0 kills** — corners4's leaves sit at τ = 11.000 exactly with a
+   half-integral support, k4_05's at 10.77–10.86 unconverged with certificates failing at the k5_11 / k5_16
+   images and re-solves crossing 11. Measured costs, for whoever prices the route once the missing pieces
+   exist: multibox node 5.0 s (corners4) / 6.8 s (k4_05, lonely clip at TR); ≈ 60 option-test nodes per tree
+   level; first complete leaf at ≈ 500 / ≈ 180 nodes; no-room 100–170 s per leaf (never decides: the centre
+   block is one 5.9–6.8 pocket); windows + guard-line LP 340–420 s at cap 300; v5 certificate + one re-solve
+   260–430 s. Per complete leaf ≈ 0.25 CPU-h; the assignment trees have ≳ 10³–10⁴ leaves (branching 3–10 per
+   cell over 5–8 cells).
+
+   | class | window state | s0 state under the toolkit | what is missing | price |
+   |---|---|---|---|---|
+   | corners4 (k4_13) | nothing forced (all 8 extensions = k5_16, open); root LP alive 7.195 (K1) | 3/3 leaf LPs ALIVE at τ = 11.000, half-integral; no-room 0/6; chord rows 0 | a two-square row (pair clause: the two FC meeters of one slot) and/or the MEET clip (bounded spec., one afternoon in `multibox`) | **theory-limited: half-integral phantom.** With the MEET clip: one night (≈ 0.5 CPU-h geometry + 3 LPs) to re-measure; H-box datum: the YES box at the phantom's tilted pose dies by the pair leaf in 1.1 s, so the A57-type split below a leaf costs ≤ 14 geometric YES nodes (1–20 s) + one NO node whose LP needs the NoFam-in-windows clause — unpriced until that clause exists |
+   | k4_05 | 3 cells forced (BR(0,1), BR(1,0), TL(1,0)); root LP 6.965 = A55, cert FAIL → 7.189 (K1) | 3/3 leaf LPs 10.77–10.86 UNCONVERGED, certs FAIL (holes at the k5_11 / k5_16 images), re-solves 10.93 / 11.10 | the δ-resister split at BL(1,0) and TR(0,0): NO = NoFam at the slot (the v4/v5 windows clause has no NoFam for window rows — a small clause), YES = slack-pin k5_11 / k5_16 nodes (P-list item 7) | **theory-limited: Lemma K1.** The all-NO node costs ≈ 2.5 CPU-h to measure; the YES side is A57's row (≈ 1,800 CPU-h), not a new item |
+
 ## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
 
 The 4-D verifier bisects tilt, position and side to a cap of 48 levels per path. Two constants belong to the

@@ -213,3 +213,18 @@ Leaves 2 and 3: **FAIL** (51 holes, all in window P1 — the BL(0,1) pin's own r
 re-solves reach or cross the budget: the 10.77–10.86 readings were unconverged lower bounds of a value ≥ 11, exactly
 as the root's 6.965 was of 7.189. Certificates and reports: `certs/k4_05_root_forced-*.{json,certify.json,
 witnesses.json,report.json}` (260–430 s each, 1.35–1.54 M window boxes walked at depth 56).
+
+### 3.5 The pricing measurement: an A57-type YES box at a pose of the leaf's support (`hbox193.py`) [M]
+
+* **corners4, leaf 1, H = the most tilted half-weight placement (1.436, 1.280, 41.25°) ± 0.06 / ± 4°:** the node is
+  **DEAD at normalise in 1.1 s by A171's pair leaf** (`EmptyBox(F1)`: K′(H) fills F1's remaining pieces — a square
+  there is incompatible with F1 meeting its three slots). So the YES side of an A57 zone-tree split at the
+  phantom's tilted pose dies by geometry, for free; what is left is the NO side (a NoFam at that pose), and the
+  windows clause has no NoFam semantics for window rows — the same missing clause as k4_05's resister split.
+  One datum, not a rate; it says the tilted half of the half-integral support is *localisable*, not that the
+  phantom dies (its axis-aligned half sits at the slot poses, where a YES box is a slack pin of k5_16 — K1 again).
+* **k4_05, leaf 1, H = the heaviest placement, the TR corner pose (3.377, 3.377, 0°) ± 0.06 / [0, 4°]** (no tilted
+  half-weight placement exists in that support): geometry 12.5 s (H kept 0.161, F3 0.191), **LP 10.735 vs 11,
+  unconverged (minmass 0.69), 0 lines active, 362 s** — the node is now k5_16's slack-pin node plus meeters, and it
+  reads like every other K1 node tonight: a creeping lower bound. Not certified (the certify phase had ended; by
+  the three leaves' behaviour it would fail the same way).
