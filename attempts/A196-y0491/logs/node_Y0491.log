@@ -1,0 +1,23 @@
+  reach: H may meet B+
+      TR(0,1): one-free alive (B hull 1.23x1.11), H-meets ALIVE, two-free 2/6 pairs alive -> ALIVE
+== case H-meets
+      refine BL(1,0) new@c0+new@c1: 8/8 combos alive
+      refine BL(1,0) new@c1+new@c2: 16/16 combos alive
+    root/H-meets BL(1,0) need 2: candidates new -> 2 option(s)  [H: exact miss test; F1: exact miss test]
+    root/H-meets BR(0,1) need 2: candidates H+F1+new -> 4 option(s)
+    meet clip round 0: {'H': 0, 'F1': 0}
+  sharp fixed point: kept {'H': 0.656447, 'F1': 0.095582}  invariant True  (30 s)
+  no-room: UNDECIDED (residue too big to pocket: 2 pocket(s) of total area 3.772 > 0.750 (no lane cover attempted); 91 s)
+== case two-free:0+2
+    root/two-free:0+2 BL(1,0) need 2: candidates - -> 0 option(s)  [H: exact miss test; F1: exact miss test; F2: exact miss test; new: restricted node dead]
+    root/two-free:0+2 BR(0,1) need 2: candidates - -> 0 option(s)  [H: F2; F1: F2; F2: F2; new: restricted node dead]
+    root/two-free:0+2 BR(1,0) need 2: candidates - -> 0 option(s)  [H: F2; F1: exact miss test; F2: exact miss test; new: restricted node dead]
+    root/two-free:0+2 TR(1,0) need 2: candidates - -> 0 option(s)  [H: exact miss test; F1: F2; F2: F2; new: restricted node dead]
+    root/two-free:0+2 TL(1,0) need 2: candidates - -> 0 option(s)  [H: exact miss test; F1: F2; F2: exact miss test; new: restricted node dead]
+== case two-free:1+2
+    root/two-free:1+2 BL(1,0) need 2: candidates - -> 0 option(s)  [H: exact miss test; F1: exact miss test; F2: exact miss test; new: restricted node dead]
+    root/two-free:1+2 BR(0,1) need 2: candidates - -> 0 option(s)  [H: F2; F1: exact miss test; F2: F2; new: restricted node dead]
+    root/two-free:1+2 BR(1,0) need 2: candidates - -> 0 option(s)  [H: F2; F1: exact miss test; F2: exact miss test; new: restricted node dead]
+    root/two-free:1+2 TR(1,0) need 2: candidates - -> 0 option(s)  [H: exact miss test; F1: F2; F2: F2; new: restricted node dead]
+    root/two-free:1+2 TL(1,0) need 2: candidates - -> 0 option(s)  [H: exact miss test; F1: F2; F2: exact miss test; new: restricted node dead]
+== k5_16_interior_Y0491: OPEN  (968 s) -> C:\Users\esumm\code\packing\attempts\A196-y0491\results\node_k5_16_interior_Y0491.json
