@@ -225,12 +225,109 @@ def panel(ox, oy, d):
     return out
 
 
+def alive_panel(ox, oy, d, wit_file=None):
+    """the SURVIVING pair configuration of an ALIVE page: a real pair of admissible poses when the
+    sampler (or a hand witness) found one, else the open residue."""
+    rec = load_record(d["record"])
+    cores = (rec.get("hyp") or {}).get("cores", [])
+    pins = []
+    hbox = None
+    for c in cores:
+        b = c.get("box") or {}
+        if "th0" in b and abs(float(b["th1"]) - float(b["th0"])) > 1e-9:
+            hbox = b
+            continue
+        try:
+            pins.append((float(Fr(str(c["kx"]))), float(Fr(str(c["ky"]))))) 
+        except Exception:                                        # noqa: BLE001
+            pass
+    wit, cell, item = None, None, None
+    if wit_file and os.path.exists(wit_file):
+        w = json.load(open(wit_file, encoding="utf-8"))
+        wit, cell = w["poses_xytheta_deg"], w["cell"]
+        item = dict(cell=cell, wbox=w["widened_box"], extension=w.get("extension"))
+        note = w.get("note", "")
+        gap = w.get("min_pairwise_sat_gap")
+    else:
+        note, gap = "", None
+        for t in (d.get("subcases") or []):
+            if t.get("witness"):
+                wit = t["witness"]["poses"]
+                cell = t["cell"]
+                break
+        if cell:
+            for f in (d.get("forced") or []):
+                if f.get("cell") == cell:
+                    item = f
+
+    def X(u):
+        return ox + u * S
+
+    def Y(v):
+        return oy - v * S
+
+    out = [text(ox, oy - S0 * S - 72, "%s  (%s)  --  ALIVE: %s IS doubly met"
+                % (d["nid"], d.get("cls"), cell or "no cell decided"), 13, "#1b5e20", True),
+           text(ox, oy - S0 * S - 56,
+                "A real pair of admissible poses, drawn.  Every square is a closed unit square, all "
+                "pairs interior-disjoint%s." % ("" if gap is None else
+                                                " (min separating-axis gap %+.6f)" % gap), 9.5, "#333")]
+    out.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" stroke="#000" '
+               'stroke-width="2"/>' % (ox, oy - S0 * S, S0 * S, S0 * S))
+    for (x0, y0) in ((0, 0), (S0 - 1, 0), (0, S0 - 1), (S0 - 1, S0 - 1)):
+        out.append('<rect x="%.1f" y="%.1f" width="%d" height="%d" fill="none" stroke="#ccc" '
+                   'stroke-width="1" stroke-dasharray="4,3"/>' % (X(x0), Y(y0 + 1), S, S))
+    if item:
+        wx0, wx1, wy0, wy1 = item["wbox"]
+        out.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="#ff9800" '
+                   'fill-opacity="0.30" stroke="#e65100" stroke-width="2"/>'
+                   % (X(wx0), Y(wy1), (wx1 - wx0) * S, (wy1 - wy0) * S))
+        out.append(text(X(0.5 * (wx0 + wx1)), Y(0.5 * (wy0 + wy1)) + 4, "B+", 11, "#e65100", True,
+                        "middle"))
+    for (cx, cy) in pins:
+        pts = " ".join("%.1f,%.1f" % (X(x), Y(y)) for x, y in sq(cx, cy, 0.0))
+        out.append('<polygon points="%s" fill="#90caf9" fill-opacity="0.6" stroke="#1565c0" '
+                   'stroke-width="1.5"/>' % pts)
+    if hbox:
+        out.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" stroke="#000" '
+                   'stroke-width="1.5" stroke-dasharray="4,3"/>'
+                   % (X(hbox["x0"]), Y(hbox["y1"]), (hbox["x1"] - hbox["x0"]) * S,
+                      (hbox["y1"] - hbox["y0"]) * S))
+    for k, v in sorted((wit or {}).items()):
+        if k.startswith("P"):
+            continue
+        col = "#00e5ff" if k.startswith("H") else "#a5d6a7"
+        edge = "#000" if k.startswith("H") else "#2e7d32"
+        pts = " ".join("%.1f,%.1f" % (X(x), Y(y))
+                       for x, y in sq(v[0], v[1], math.radians(v[2])))
+        out.append('<polygon points="%s" fill="%s" fill-opacity="0.45" stroke="%s" '
+                   'stroke-width="2.5"/>' % (pts, col, edge))
+        out.append(text(X(v[0]), Y(v[1]) + 4, k, 11, edge, True, "middle"))
+        out.append(text(X(v[0]), Y(v[1]) + 16, "(%.3f, %.3f, %.2f deg)" % (v[0], v[1], v[2]), 7.5,
+                        edge, False, "middle"))
+    lines = ["WHAT THIS IS: the two meeters Theorem FC demands at %s, EXHIBITED." % (cell or "-"),
+             "So the cell is not the contradiction it was read as -- the page survives the pair test."]
+    for chunk in [note[i:i + 118] for i in range(0, len(note), 118)][:5]:
+        lines.append(chunk)
+    for i, ln in enumerate(lines):
+        out.append(text(ox, oy + 20 + 14 * i, ln, 9, "#333"))
+    return out
+
+
 def main():
     last = rows()
-    ids = sys.argv[1:] or [k for k, v in sorted(last.items()) if v.get("verdict") == "DEAD"]
+    dead = [k for k, v in sorted(last.items()) if v.get("verdict") == "DEAD"]
+    alive_w = [k for k, v in sorted(last.items())
+               if v.get("verdict") == "ALIVE"
+               and any((t or {}).get("witness") for t in (v.get("subcases") or []))]
+    WITF = os.path.join(R, "attempts", "A197-slot-pair-pass", "results",
+                        "witness_Y0054_BL10.json")
+    hand = ["k5_16_interior_Y0054"] if os.path.exists(WITF) else []
+    ids = sys.argv[1:] or (dead + [i for i in hand if i in last]
+                           + [i for i in alive_w if i not in hand][:max(0, 3 - len(dead))])
     ids = [i for i in ids if i in last]
     if not ids:
-        print("no DEAD pages in", JL)
+        print("no rows to draw in", JL)
     ncol = min(3, max(1, len(ids)))
     nrow = max(1, (len(ids) + ncol - 1) // ncol)
     PW = int(S0 * S + 60)
@@ -238,8 +335,15 @@ def main():
     body = []
     for k, nid in enumerate(ids):
         r, c = divmod(k, ncol)
-        body += panel(PAD_L + c * PW, PAD_T + r * PH + S0 * S, last[nid])
-        print("panel", nid, last[nid].get("kill_cell"), last[nid].get("leaf"))
+        d = last[nid]
+        ox, oy = PAD_L + c * PW, PAD_T + r * PH + S0 * S
+        if d.get("verdict") == "DEAD":
+            body += panel(ox, oy, d)
+        else:
+            wf = os.path.join(R, "attempts", "A197-slot-pair-pass", "results",
+                              "witness_Y0054_BL10.json")
+            body += alive_panel(ox, oy, d, wf if nid == "k5_16_interior_Y0054" else None)
+        print("panel", nid, d.get("verdict"), d.get("kill_cell"), d.get("leaf"))
     W = ncol * PW + 2 * PAD_L
     H = nrow * PH + 40
     head = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" '
@@ -248,8 +352,8 @@ def main():
             'patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#f3e5f5"/>'
             '<line x1="0" y1="0" x2="0" y2="7" stroke="#8e24aa" stroke-width="1.6"/>'
             '</pattern></defs>',
-            text(PAD_L, 30, "A197 -- forced-cell PAIR test: the pages retired (%d)" % len(ids),
-                 17, "#111", True),
+            text(PAD_L, 30, "A197 -- forced-cell PAIR test: %d page(s) retired, %d drawn"
+                 % (len(dead), len(ids)), 17, "#111", True),
             text(PAD_L, 50, "docs/proofs/forced_corners.md Theorem FC + Corollaries FC-slot / "
                             "FC-count; sideband.md Lemma A1; A171 multibox at nsub 8 / refine 4.  "
                             "Hatched = an admissible region the clip empties.", 10, "#555")]

@@ -62,7 +62,8 @@ def run_page(p, a, log):
                budget=rec["budget"], n_pins=len(rec["pins"]), n_H=len(rec["H"]),
                nsub=a.nsub, refine=a.refine, base_nsub=a.base_nsub, base_refine=a.base_refine,
                of_nsub=a.of_nsub, of_refine=a.of_refine, side=P.SIDE, max_cells=a.max_cells,
-               max_pairs=a.max_pairs, meet_boxes=a.meet_boxes, wall=a.wall, when=time.strftime("%Y-%m-%d %H:%M:%S"))
+               max_pairs=a.max_pairs, meet_boxes=a.meet_boxes, cell_budget=a.cell_budget,
+               wall=a.wall, when=time.strftime("%Y-%m-%d %H:%M:%S"))
 
     nd0, info0 = G.run_node(base, nsub=a.base_nsub, refine=a.base_refine, label="base")
     row["base"] = dict(dead=info0.get("dead"), seconds=info0["seconds"], kept=info0.get("kept"))
@@ -105,6 +106,9 @@ def run_page(p, a, log):
 
     # ---- phase 2: the pair test, most squeezed cell first
     ones.sort(key=lambda z: z[0])
+    n_cells_total = len(ones)
+    if a.cell_budget > 0:
+        ones = ones[:a.cell_budget]        # the most SQUEEZED cells first: where a kill can happen
     tables = []
     if not timed_out:
         try:
@@ -125,8 +129,11 @@ def run_page(p, a, log):
             log("    WALL during pair test (%s)" % e)
 
     row.update(verdict="ALIVE", kill_cell=None,
-               leaf=("wall %ds reached: pair test incomplete" % a.wall) if timed_out else None,
-               timed_out=timed_out, subcases=tables,
+               leaf=("wall %ds reached: pair test incomplete" % a.wall) if timed_out else
+                    ("cell budget %d of %d forced cells tested (the most squeezed first)"
+                     % (len(tables), n_cells_total) if len(tables) < n_cells_total else None),
+               timed_out=timed_out, n_cells_tested=len(tables), n_cells_forced=n_cells_total,
+               subcases=tables,
                open_residue=[dict(cell=t["cell"], caps=t["caps"],
                                   witness=t["witness"], hull_B=t["hull_B"]) for t in tables],
                seconds=round(time.time() - t0, 1))
@@ -146,6 +153,7 @@ def main():
     ap.add_argument("--max-cells", dest="max_cells", type=int, default=24)
     ap.add_argument("--max-pairs", dest="max_pairs", type=int, default=400)
     ap.add_argument("--meet-boxes", dest="meet_boxes", type=int, default=1)
+    ap.add_argument("--cell-budget", dest="cell_budget", type=int, default=2)
     ap.add_argument("--wall", type=int, default=900)
     ap.add_argument("--shard", default="1/1")
     ap.add_argument("--redo", action="store_true")
