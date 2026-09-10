@@ -5,7 +5,8 @@ project's `lakeb.py` wrapper with no `sorry`, and `#print axioms` (`scratch/A192
 `logs/axioms192b.log`) reports `[propext, Classical.choice, Quot.sound]` only — no new axiom, and
 none of the project's existing axioms (`sat_selection`, the `native_decide` replays) is used.
 Build logs: `logs/build_legs1.log` (Windows, NoRoom; 80 s), `logs/build_legs2.log` (WindowsCheck,
-GuardLine, ForcedCorners; 20 s), `logs/build_core2.log` (WindowsCore; 20 s).
+GuardLine, ForcedCorners; 20 s), `logs/build_core2.log` (WindowsCore; 20 s), `logs/build_round2.log`
+(WindowsRound; 17 s), `logs/build_S33T_2.log` (LocalCertS33T; 3 800 s).
 
 ## 1. The WINDOWS clause (`boxed_windows.md` Theorem W; A185 `verify_case_v4.py`) — [L] end to end
 
@@ -23,11 +24,11 @@ GuardLine, ForcedCorners; 20 s), `logs/build_core2.log` (WindowsCore; 20 s).
 | `coreSet_sub_of_corners` | `WindowsCore.lean` | a core is inside a square once its four corners are (`biaffine_bound`) |
 | `checkCoreInBox`, `checkCoreInBox_sound` | `WindowsCore.lean` | (V3) decided: A135's `checkVertexInPBox` on the four corners against the piece ⇒ `coreSet K ⊆ q.set` for every pose in the piece |
 | `checkWindowsI_kill_of_check` | `WindowsCore.lean` | **the end form with no geometric hypothesis**: checker PASS + `checkCoreInBox` PASS per (window with a core, piece) ⇒ `False` |
+| `windowBox`, `roundBounds`, `inBox_of_windowBox`, `windowBox_ne_none`, `winSet_of_pieces` | `WindowsRound.lean` | `verify_case_v4.window_boxes` (outward rounding to the grid, clamped to the root box) and its soundness: an admissible pose in a RATIONAL piece lies in the integer box; (H1) for rational windows |
 
 What the Lean statement takes as DATA that the Python verifier derives: the pieces as INTEGER boxes
-(the outward rounding `window_boxes` of the rational `(t,c)`-boxes — a superset, so a pose in a
-rational piece is a pose in the integer box; the rounding lemma is a two-line cast statement not
-written tonight), and the Bernstein certificates of `checkVertexInPBox` (the emitter's job, as
+(`windowBox`, the outward rounding of the rational `(t,c)`-boxes; `winSet_of_pieces` turns a
+pose in a rational piece into (H1) for the integer window), and the Bernstein certificates of `checkVertexInPBox` (the emitter's job, as
 for A135's polygon cores).  Polygon cores (v3) are NOT in this checker: a certificate with
 `polycores` still rests on `PolycoreExemptSound` [C].
 
