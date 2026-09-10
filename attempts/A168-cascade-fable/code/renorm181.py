@@ -60,11 +60,22 @@ def load_side(cell, tag=TAG):
             # A183: files are read in NAME order, not time order -- a SKIPPED(cap ...) marker left in
             # another shard file must never override a real record (l1_153 root/D25/S=H: ALIVE at 8/3
             # in s0of1, a stale A181 marker in s0of2)
+            # (and, A183, a shard's 4/2 record left in one file never overrides the 8/3 upgrade
+            # another shard wrote to its own file: the STRONGEST record per node wins, later file on ties)
             q = recs.get(d["node"])
-            if q is not None and d["verdict"].startswith("SKIPPED") and not q["verdict"].startswith("SKIPPED"):
+            if q is not None and rank(d) < rank(q):
                 continue
             recs[d["node"]] = d
     return recs
+
+
+def rank(r):
+    v = r["verdict"]
+    if v.startswith("DEAD"):
+        return 3
+    if v.startswith("ALIVE"):
+        return 2 if (r.get("setting") or "").startswith("nsub 8") else 1
+    return 0
 
 
 def dedupe(pieces):
