@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-10 00:17` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-10 10:08` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -200,7 +200,7 @@ Of the 71 gallery pages the PI reviews, **56 are still ALIVE and 15 are now DEAD
 | `A167 pass_s1.jsonl` | 10 | 10 |
 | `A182 assign182.jsonl` | 2 | 2 |
 | `A189 noroom189.jsonl` | 6 | 0 |
-| `A190 run190.jsonl` | 6 | 6 |
+| `A190 run190.jsonl` | 18 | 18 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
