@@ -19,6 +19,9 @@ for P in $PAGES; do
   # a page whose last row is an interim ALIVE row younger than 45 min is IN PROGRESS in another launcher: skip it
   W=$(echo "$LAST" | grep -o '"when": "[^"]*"' | cut -d'"' -f4); if [ -n "$W" ] && [ $(( $(date +%s) - $(date -d "$W" +%s) )) -lt 2700 ]; then echo "skip $P (in progress)"; continue; fi
   while [ "$(labcount)" -ge 12 ]; do sleep 60; done
+  # re-check after the gate: another launcher may have taken the page meanwhile
+  LAST=$(grep "\"nid\": \"$P\"" $RES 2>/dev/null | tail -1)
+  if [ -n "$LAST" ]; then W=$(echo "$LAST" | grep -o '"when": "[^"]*"' | cut -d'"' -f4); if [ -n "$W" ] && [ $(( $(date +%s) - $(date -d "$W" +%s) )) -lt 2700 ]; then echo "skip $P (taken)"; continue; fi; fi
   CERT=$ATT/certs/q200_${P}.json; LOG=$ATT/logs/q200_${P}.log; SVG=docs/residue_map/quick200_${P}.svg
   if [ "$MODE" = deep ]; then CERT=$ATT/certs/q200_${P}_deep.json; LOG=$ATT/logs/q200_${P}_deep.log; ARGS="--deep --noseal --pad g1"; TMO=$((WALL+240)); elif [ "$MODE" = fast ]; then ARGS="--chain --noseal"; TMO=$((2*WALL+120)); else ARGS="--chain"; TMO=$((2*WALL+300)); fi
   T0=$(date +%s); echo "$(date +%H:%M:%S) start $P ($MODE)"
