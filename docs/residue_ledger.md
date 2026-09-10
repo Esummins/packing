@@ -448,6 +448,24 @@ has an unlocked intruder — the drain theorem; the hook/chain formulas are one-
 
 **A182 (2026-09-09, the forced-first ASSIGNMENT of `c0_Y1033` resumed after the 15:46 crash, `attempts/A180-forced-first-assignment` (successor A182, brief in `attempts/A182-assignment-resume`)):** the PI's global construction is now run to a verdict on the named trump5 page, resumably (every multibox node journaled as it completes, finished branches memoised, the journal committed after every branch). **`c0_Y1033` is ALIVE under the assignment search [M]** — not one assignment node dies. The forced sequence, each premise verified by the test that establishes it: at the root BL(1,1) has ONE option, {new,new} (H excluded by A161's exact miss test; the Lemma-A1 cell-pair split of the one-free hull leaves one alive pair after refinement), so **F1+F2 are instantiated at BL(1,1)**; BR(0,1) then has 6 options (H+F1, H+F2, F1+F2, F1+new, F2+new, new+new) and is branched; under branch 1 (BR(0,1)=H+F1) **TR(0,1) is forced to H+F1** (H+new 0/24 and F1+new 0/48 refinement combos alive, H+F1 2/2; F2 excluded by the exact miss test); TL(0,0) (the forced corner) then has 5 options and is branched, F2+new first and the two-new Lemma-A2 split last; BL(0,2) 3 options, TR(1,0) 6–10. Under branch 1/1/1 every complete assignment is ALIVE: 23 leaves, of which 8 at budget 0 (all five free squares named, the multibox pair leaf the only test), 14 with the page's LP quota (4) spent, 3 [P] because a role hull carries no exact core, and **one ALIVE(LP)** (5 pins + H + F1..F3, budget 2, τ ≥ 2). 584 multibox nodes, 3.0 CPU-h at nsub 4 / refine 2 with the 8/3 re-pass on every tree node (base: H kept 0.271 → 0.209); chord rows never kill (min rhs 0.877 at the root); the lane prune fired once (lane 0 at TR(1,0) under TL(0,0)=F3+F4@SW+SE: no unnamed square can meet it there). Three of the six BR(0,1) branches and three of the five TL(0,0) branches are unexplored at the 3 CPU-h deadline — the verdict stands on the alive leaves. Page `docs/residue_map/c0_Y1033_forced.svg` (35 panels, premise tests printed). The a57v4 pass (`results/assign182.jsonl`, shard still running, resumable): the seven k5_11 pages reached so far are UNDECIDED at the ROOT option table (> 300 nodes / 1,200 s per page: 120 refinement combos and 63 cell-pair splits on `Y1104` before any cell was decided). Reading: the assignment is sound and sharper than A178 (global count, mutual clips, tightening to every assigned cell), but A171's clip does not separate assignments at this granularity — an alive complete assignment is a failure to kill, not a witness (`notes/assignment.md` §5) — and the LP on the role hulls is refused where a hull has no exact core (the F_i hulls are unions of meeter windows). A178 is closed: 34/34 pages ALIVE under the per-cell pass, superseded by this construction.
 
+**[T]/[M] A186 (2026-09-09 evening) — the contact census of a fully boxed assignment (c0_Y1033's eight budget-0
+leaves), the PI's question "can we turn an assignment set into a contact graph?"** Answered in
+`docs/proofs/contact_census.md`: Theorem CC — on a boxed node the minimal side is attained and the minimiser is a
+Fritz-John point of every consistent selection WITH THE BOX ROWS (a piece face is a wall of the hypothesis; L1′/L6′
+hold with faces and pins as ground); the node is dead iff every such stuck configuration has side > s0; the boxes
+determine the candidate graph (Lemma CAND, interval separation over the pieces), the loadable faces and the finite
+selection menu, and NOT which subgraph bears the load — that is solved, never counted (T1(d): flexible supports are
+legitimate), by Theorem LOCAL transported to piece bodies (Theorem CC-LP: the leaf LP's dual is the contact graph).
+Measured on the eight leaves (four geometries): candidate graphs 20–24 edges, H's only pin contact P4, F2..F5 on the
+left/top walls; the selection tree at 2.5 ms a node closed 8.4·10⁴ leaves on the first node in 555 s with no
+exact-feasible point and no unresolved leaf but is CAPPED at 2.1·10⁵ nodes (its lowest closed leaves are 45° root cells
+at s0 + 10⁻⁴: the coarse relaxation, not a near-packing); the elastic exact LP over the tilts found NO disjoint
+configuration of the hull boxes in 52 starts, least overlap 0.0615 at s0 in the upright column P2 | F2 | F3 above
+BL(0,1) (three unit heights in 2.877; A182's chord rows let the four top-left squares dodge one line at a time, the LP
+says they cannot dodge together). **Verdict: all eight [P] — no witness, not certified dead; the next lever is a
+certified column row for the crowd P2 | F2 | F3 (| F4 | F5) over the pieces (CC-5).** Page
+`docs/residue_map/c0_Y1033_contacts.svg`; `attempts/A186-contact-census/{notes/census.md, results/}`.
+
 ## 5. Lean / TCB
 
 TopLevel roster: K0-O1 + chain replays + ShellKill (Crowd, CrowdZone, Slide, PinnedSlide, Ceil, Composition);

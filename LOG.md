@@ -8136,3 +8136,25 @@ halves of the answer come from opposite findings.
 - Control: `k5_16_interior_Y1110` reproduces A163's consumer slack 0.01311 exactly.
 - Files: `attempts/A187-basin-map/{BRIEF.md,code/basin187.py,code/report187.py,results/basin_map187.json,notes/basin_map.md}`,
   `docs/residue_map/basin_map.svg`, `docs/residue_ledger.md` §3, registry row A187.
+
+## 2026-09-09 — A186-contact-census (Fable lead) — **Theorem CC settled; c0_Y1033's eight budget-0 assignments [P] (no witness, no kill), the measured obstruction is the column P2 | F2 | F3**
+- **The question** (PI, 19:15): can an assignment set be turned into a contact graph, and is there enough information?
+  **Answer** (`docs/proofs/contact_census.md`): yes — the pieces determine the CANDIDATE graph (Lemma CAND: interval
+  separation over piece pairs; a certified gap > 0 = never in contact), the loadable BOX FACES (Theorem CC (c)/(d): a
+  piece face is a wall of the hypothesis and carries a multiplier like one) and the finite SELECTION MENU; they do not
+  determine which subgraph bears the load — Theorem CC (e) is solved by the selection tree (Theorem CC-LP = Theorem
+  LOCAL on piece bodies, the leaf LP's dual = the contact graph), not by counting (T1(d): flexible supports are FJ points).
+- **Numbers [M]** (`attempts/A186-contact-census/notes/census.md`): 8 budget-0 leaves = 4 geometries twice; candidate
+  graphs 24/20/24/22 edges (free–free 15/13/15/15), H touches only P4 among the pins, F2..F5 the left/top walls;
+  selection tree 2.5 ms/node, node 1: 209,006 nodes / 83,919 closed / 0 exact-feasible / 0 unresolved, CAPPED at 555 s,
+  lowest closed leaves are the 45° root cells at s0 + 1.0e-4; elastic exact LP over the tilts (52 starts): no disjoint
+  configuration of the hull boxes, least overlap 0.0615 at s0 = the upright column P2 | F2 | F3 above BL(0,1)
+  (uprights need 3.5 for F3's centre against 3.377); nodes 2–4: 0.12 / 0.079 / 0.17. The k7 + pinwheel4 shadow does not
+  appear in any least-overlap configuration.
+- **Verdict**: all eight [P]; the certified form of the obstruction is a COLUMN row over the pieces (CC-5) — cheaper than
+  running the tree to completion.
+- **Process**: the box held 12–14 pythons (8 lab workers + 4 Claude-extension pythons caught by the CIM filter) for the
+  whole attempt, so no worker was launched; every computation was a transient foreground python of 5–560 s.
+- Files: `attempts/A186-contact-census/{BRIEF.md, code/{nodes186,contacts186,tree186,descend186,global186,fig186}.py,
+  results/{assignments186.json, candidates186_b0.json, tree186.jsonl, descend186.jsonl, global186.jsonl}, notes/census.md}`,
+  `docs/proofs/contact_census.md`, `docs/residue_map/c0_Y1033_contacts.svg`, `docs/residue_ledger.md` §4, registry row A186.
