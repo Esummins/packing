@@ -851,6 +851,48 @@ def collect(table, corpus):
                  "the frozen verifier is not involved" % (d.get("nsub"), d.get("refine"), d.get("side")),
         )
 
+    # (7j) A199's CORNER-SEAL kills (docs/proofs/corner_seal.md: Lemma SEAL, Lemma WEDGE, Cor. SIDES; the PI's
+    #      reading of Y0491, 2026-09-10 13:15).  At a pinned corner whose two neighbours along the walls are both
+    #      forced (Theorem FC), a FREE meeter F of the slot ABOVE the pin that reaches around the pin's corner
+    #      is rotated and seals the slot BESIDE the pin except a wedge no unit square can use; the chain is exact:
+    #      F's reach (multibox dead test + A161 miss test), the (FH) miss tests, the node {pins, H, F, G} with G a
+    #      further free meeter of A (EmptyBox(G)).  results/seal199.jsonl (s0, pad 0) and results/seal199_slabs.jsonl
+    #      (the slab chain of corner_seal.md section 5) are resumable: the LAST row per (page, s, lam) is the verdict.
+    #      A kill at s0 only is a statement about side s0 (lam = 1): it is flagged WINDOW-PENDING until every slab
+    #      of [3.82, s0] is dead in the slab file.  [C: geometry, SEAL] -- no LP, no frozen verifier.
+    seal_s0, seal_slab = {}, {}
+    for d in jl(A("A199-corner-seal", "results", "seal199.jsonl")):
+        if d.get("page") and abs(float(d.get("lam", 1)) - 1.0) < 1e-12 and abs(float(d.get("s", 0)) - 3.877084) < 1e-9:
+            seal_s0[d["page"]] = d
+    for d in jl(A("A199-corner-seal", "results", "seal199_slabs.jsonl")):
+        if d.get("page"):
+            seal_slab.setdefault(d["page"], {})[(round(float(d.get("s", 0)), 9), round(float(d.get("lam", 1)), 9))] = d
+    for nid, d in sorted(seal_s0.items()):
+        if str(d.get("verdict", "")) != "DEAD":
+            continue
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        slabs = seal_slab.get(nid, {})
+        n_slab = len(slabs)
+        n_dead = sum(1 for v in slabs.values() if str(v.get("verdict", "")) == "DEAD")
+        covered = n_slab > 0 and n_dead == n_slab and min(float(v["s"]) / float(v["lam"]) for v in slabs.values()) <= 3.82 + 1e-9
+        k = d.get("kill") or {}
+        table.add_rec(
+            "A199 seal199.jsonl",
+            camp,
+            nid,
+            True,
+            "corner seal [%s: F meets %s, %s unmet] %s" % (k.get("corner", "-"), k.get("B", "-"), k.get("A", "-"),
+                                                          ("(window: %d slabs DEAD)" % n_slab) if covered else
+                                                          ("(s0-only; WINDOW-PENDING%s)" % (", slabs %d/%d dead" % (n_dead, n_slab) if n_slab else ""))),
+            "A199",
+            os.path.join("attempts", "A199-corner-seal", "results", "seal199.jsonl"),
+            fdate(A("A199-corner-seal", "results", "seal199.jsonl")),
+            d,
+            note="[C: geometry, SEAL] A171 multibox exact dead test / A161 exact miss test; corner_seal.md section 4; "
+                 + ("the slab chain covers [3.82, s0]" if covered else "s0 only (lam = 1): WINDOW-PENDING"),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
