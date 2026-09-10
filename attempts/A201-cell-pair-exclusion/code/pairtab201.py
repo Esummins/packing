@@ -9,10 +9,14 @@ decides stays COMPATIBLE (the sound direction):
   (b) CN     Lemma CN (A153): two interior-disjoint unit squares have centres at Euclidean distance >= 1 (the open
              inscribed discs of radius 1/2 are disjoint).  The max distance between the two hulls (attained at
              corners: max x-extent, max y-extent) < 1  =>  EXCLUDED.  Exact in Fractions.
-  (c) EXACT  the pair as a multibox node {pins, every other role at its normalised hull, the two rows at the hulls
-             of THEIR surviving pieces (centre rect x tilt)} normalised by A171's mutual clip (container, the pins'
-             stock boxes, every role's K', the lonely clip at corner slots): EmptyBox => EXCLUDED, with the trace.
-             Cached per unordered pair; under a per-page time budget -- an untested pair is COMPATIBLE.
+  (c) EXACT  pairclip201.pair_clip: the two rows' own surviving PIECES (centre rect x tilt sub-bin; already clipped
+             by the container, the pins' stock boxes and every role's K' in A198's reach bisection) clipped against
+             each other's certified K' (A171/A172 per-piece K' on tilt-quarter hulls, exact dead test) to a fixed
+             point; a side with no surviving piece => EXCLUDED, with the pass trace.  Tried first on the CELL pair
+             (the union of the two cells' anonymous survivors: one test covers every option pair of the two cells),
+             then on the option pair.  Cached; under a per-round time budget -- an untested pair is COMPATIBLE.
+             (The full multibox node {pins, roles, hull(X1), hull(X2)} was measured on Y0044 and excluded NOTHING at
+             3 s a pair: the box hulls forget the piece structure -- exp201.py, logs/exp201_y0044.log.)
 Same-cell pairs are excluded by the count itself (one centre per closed cell of side < 1/sqrt2, Lemma A1); a cell's
 Euclidean diameter is < 1 as well, so CN says the same.  Every exclusion the search USES is recorded with its rule.
 """
@@ -21,6 +25,7 @@ import time
 from fractions import Fraction as Fr
 
 import fastprop as FP                                          # READ-ONLY (A198)
+import pairclip201 as PCL
 
 MB = FP.MB
 ONE = Fr(1)
@@ -43,17 +48,18 @@ def hull_maxdist2(h1, h2):
 
 
 class PairTable:
-    def __init__(self, page, budget=60.0, nsub=2, refine=1, max_iter=4, max_pieces=48, exact=True, log=None):
+    def __init__(self, page, budget=180.0, refine=0, max_iter=3, n_coarse=4, exact=True, log=None):
         self.page = page
         self.budget = budget
-        self.nsub, self.refine, self.max_iter, self.max_pieces = nsub, refine, max_iter, max_pieces
+        self.refine, self.max_iter, self.n_coarse = refine, max_iter, n_coarse
+        self.cell_pcs, self.cell_cache = {}, {}
         self.exact_on = exact
         self.log = log
         self.hull = {}                 # key -> (x0,x1,y0,y1) Fractions
         self.pieces_of = {}            # key -> pieces (lazy)
         self.cache = {}                # frozenset({k1,k2}) -> (compatible, record | None)
         self.excl = []                 # every exclusion found (rule + numbers)
-        self.n = dict(lookups=0, a1=0, cn=0, exact_tested=0, exact_excl=0, undecided_budget=0, exact_seconds=0.0)
+        self.n = dict(lookups=0, a1=0, cn=0, cell_tested=0, cell_excl=0, exact_tested=0, exact_excl=0, undecided_budget=0, exact_seconds=0.0)
         self.hits = set()              # exclusions USED by the current search
         self.spent = 0.0
 
@@ -109,67 +115,51 @@ class PairTable:
             return True, None
         return self._exact(k1, k2, base)
 
-    # ---------------------------------------------------------------- (c) the exact pair node
-    def _node_roles(self, k1, k2):
-        pg = self.page
-        roles, corners = {}, {}
-        for r in pg.nd.names:
-            if r.startswith("P"):
-                roles[r] = tuple(pg.roles[r])
-            else:
-                roles[r] = self._hull_box(pg.nd.boxes[r].pieces)
-                if r in getattr(pg, "role_corner", {}):
-                    corners[r] = pg.role_corner[r]
-        for tag, k in (("X1", k1), ("X2", k2)):
-            who, ci, S = k
-            name = tag if who == "free" else who
-            pcs = self.pieces(k)
-            if not pcs:
-                return None, None, name
-            roles[name] = self._hull_box(pcs)
-            for p in S:
-                if pg.item[p]["is_corner"]:
-                    corners[name] = pg.item[p]["corner"]
-        return roles, corners, None
+    # ---------------------------------------------------------------- (c) the exact pair clip (pairclip201)
+    def cell_union(self, ci):
+        """every surviving piece of an anonymous meeter with centre in cell ci (over all slots): a superset of the
+        poses of any anonymous row at that cell, so an exclusion at cell level covers every option pair there."""
+        if ci not in self.cell_pcs:
+            pcs = []
+            for p in self.page.slots:
+                pcs += self.page.reach(ci, frozenset([p]))[1]
+            self.cell_pcs[ci] = pcs
+        return self.cell_pcs[ci]
 
-    @staticmethod
-    def _hull_box(pcs):
-        h = FP.pieces_hull(pcs)
-        return (FP.fl(h[0]), FP.fl(h[1]), FP.fl(h[2]), FP.fl(h[3]), MB.deg_of_t(h[4]), MB.deg_of_t(h[5]))
+    def _clip(self, p1, p2):
+        r = PCL.pair_clip(p1, p2, self.page.s, max_iter=self.max_iter, refine=self.refine, n_coarse=self.n_coarse,
+                          stats=self.page.nd.stats)
+        self.spent += r["seconds"]
+        self.n["exact_seconds"] += r["seconds"]
+        return r
 
     def _exact(self, k1, k2, base):
-        t0 = time.time()
-        roles, corners, empty = self._node_roles(k1, k2)
-        rec = dict(base, rule="EXACT", settings=dict(nsub=self.nsub, refine=self.refine, max_iter=self.max_iter, max_pieces=self.max_pieces))
-        if roles is None:
-            rec.update(why="no surviving piece for %s" % empty, seconds=0.0)
-            self.n["exact_tested"] += 1; self.n["exact_excl"] += 1
-            return False, rec
-        rec["node"] = {r: FP.rect_f(b) for r, b in roles.items() if not r.startswith("P")}
-        rec["corners"] = dict(corners)
-        nd = MB.Node(dict(roles), name=self.page.name + "/pair")
-        dead = None
-        try:
-            nd.normalise(nsub=self.nsub, refine=self.refine, max_iter=self.max_iter, mode="poly", kmode="pieces",
-                         strict_container=False, corners=corners or None, max_pieces=self.max_pieces, verbose=False)
-        except MB.EmptyBox as e:
-            dead = e.name
-        dt = time.time() - t0
-        self.spent += dt
-        self.n["exact_tested"] += 1
-        self.n["exact_seconds"] += dt
-        rec.update(seconds=round(dt, 3), passes=nd.stats.get("passes"),
-                   kept={r: round(b.kept_fraction(), 5) for r, b in nd.boxes.items() if not r.startswith("P")})
-        if dead is None:
-            rec["why"] = "pair node alive: COMPATIBLE"
-            rec["hull_after"] = {r: [round(v, 5) for v in self._hull_box(b.pieces)] for r, b in nd.boxes.items()
-                                 if b.pieces and not r.startswith("P")}
+        rec = dict(base, rule="EXACT", settings=dict(max_iter=self.max_iter, refine=self.refine, n_coarse=self.n_coarse))
+        if k1[0] == "free" and k2[0] == "free":                 # (c1) the CELL pair first (cached per cell pair)
+            ck = frozenset((k1[1], k2[1]))
+            if ck not in self.cell_cache:
+                self.n["cell_tested"] += 1
+                self.cell_cache[ck] = self._clip(self.cell_union(k1[1]), self.cell_union(k2[1]))
+            r = self.cell_cache[ck]
+            if r["excluded"]:
+                self.n["exact_excl"] += 1; self.n["cell_excl"] += 1
+                rec.update(level="cell", cells=sorted(ck), why="EXACT (cell pair %s): %s" % (sorted(ck), r["why"]),
+                           passes=r.get("passes"), seconds=r["seconds"], n_pieces=[len(self.cell_union(k1[1])), len(self.cell_union(k2[1]))])
+                if self.log:
+                    self.log("      EXACT cell-pair exclusion %s: %s (%.2f s)" % (sorted(ck), r["why"], r["seconds"]))
+                return False, rec
+            if self.spent >= self.budget:
+                self.n["undecided_budget"] += 1
+                return True, None
+        self.n["exact_tested"] += 1                              # (c2) the option pair on its own pieces
+        r = self._clip(self.pieces(k1), self.pieces(k2))
+        rec.update(level="option", why="EXACT (option pair): " + r["why"], passes=r.get("passes"), seconds=r["seconds"],
+                   kept=[r.get("kept_a"), r.get("kept_b")], n_pieces=[len(self.pieces(k1)), len(self.pieces(k2))])
+        if not r["excluded"]:
             return True, rec
         self.n["exact_excl"] += 1
-        rec.update(kill_box=dead, why="EXACT: multibox pair node EmptyBox(%s) -- no admissible disjoint pair" % dead,
-                   trace=[str(t)[:160] for t in (nd.boxes[dead].trace[-12:] if dead in nd.boxes else [])])
         if self.log:
-            self.log("      EXACT exclusion %s | %s: EmptyBox(%s) in %.2f s" % (key_json(k1), key_json(k2), dead, dt))
+            self.log("      EXACT exclusion %s | %s: %s (%.2f s)" % (key_json(k1), key_json(k2), r["why"], r["seconds"]))
         return False, rec
 
     # ---------------------------------------------------------------- reporting

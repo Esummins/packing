@@ -27,7 +27,7 @@ INF = Q.INF
 
 # ----------------------------------------------------------------------------- the page
 class QPage201(Q.QPage):
-    def __init__(self, *a, pair_budget=60.0, pair_exact=True, prior_witness=None, **kw):
+    def __init__(self, *a, pair_budget=180.0, pair_exact=True, prior_witness=None, **kw):
         super().__init__(*a, **kw)
         self.pair_budget, self.pair_exact = pair_budget, pair_exact
         self.prior_witness = prior_witness          # [(who, ci, [slots])] of an earlier count (A200's certificate)
