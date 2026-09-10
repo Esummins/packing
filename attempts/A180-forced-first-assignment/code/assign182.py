@@ -198,7 +198,14 @@ class Search(A.Search):
                 kids.append(self.J.subtrees[st2["label"]])
                 self.log("  MEMO %s: %s" % (st2["label"], kids[-1].get("verdict")))
                 continue
-            if not self.normalise(st2, "branch"):
+            try:
+                alive = self.normalise(st2, "branch")
+            except A.Budget as e:
+                kids.append(dict(label=st2["label"], verdict="UNDECIDED", leaf=str(e)))
+                alive = None
+            if alive is None:
+                pass
+            elif not alive:
                 kids.append(dict(label=st2["label"], verdict="DEAD", leaf="branch node dead (%s)" % st2.get("dead_reason")))
                 self.J.subtree_done(st2["label"], kids[-1])
             else:
