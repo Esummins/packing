@@ -179,7 +179,9 @@ def make_certificate_v4(res, s_rat, hyp, scale=1.03, denom_pos=10 ** 6, denom_w=
     total = sum(weights, Fr(0))
     wins = []
     for i, w in enumerate(hyp.wroles):
-        pieces = [dict(x0=str(q_dn(b.x0)), x1=str(q_up(b.x1)), y0=str(q_dn(b.y0)), y1=str(q_up(b.y1)),
+        # the pieces' float bounds are EXACT binary rationals and are what grow_core / vertex_ok certified
+        # the core against; the window carries them verbatim (t via A57's outward t_lo/t_hi, as vertex_ok)
+        pieces = [dict(x0=str(Fr(b.x0)), x1=str(Fr(b.x1)), y0=str(Fr(b.y0)), y1=str(Fr(b.y1)),
                        t0=str(t_lo(b.th0)), t1=str(t_hi(b.th1))) for b in w.pieces]
         wins.append(dict(name=w.name, core=hyp.attach.get(i), pieces=pieces, deg=[w.bbox.th0, w.bbox.th1],
                          core_kind=w.core_kind))
@@ -193,8 +195,8 @@ def make_certificate_v4(res, s_rat, hyp, scale=1.03, denom_pos=10 ** 6, denom_w=
                        "pose of each window has mu >= 1 and total < budget_v4 = %d; a PASS of verify_case_v4 kills "
                        "the node [C under v4 ONLY -- the frozen v1 chain does not read `windows`]" % hyp.budget4),
                 provenance=dict(method="A185 winlp185 (caselp.solve_node with WindowsHyp), weights x %.4f rounded up "
-                                       "to 1/%d, atoms rounded to 1/%d; window pieces rounded OUTWARD (t via A57 "
-                                       "t_lo/t_hi, centres to 1e-9)" % (scale, denom_w, denom_pos),
+                                       "to 1/%d, atoms rounded to 1/%d; window pieces = the roles' exact float bounds (t via A57 "
+                                       "t_lo/t_hi)" % (scale, denom_w, denom_pos),
                                 lp_tau=res["tau"], eps_core=EPS_CORE, eps_wc=EPS_WC, eps_wt=EPS_WT))
 
 
@@ -203,6 +205,7 @@ def run_v4(cert_path, timeout, depth=56, max_w=64):
     cmd = [sys.executable, VERIFIER, cert_path, "--jobs", "1", "--depth", str(depth), "--max-witnesses", str(max_w),
            "--report", "--quiet"]
     prio185.wait_mine(limit=2, max_wait=max(60, timeout / 2))      # this process + the child = 2
+    prio185.wait_box(own=1, max_wait=max(60, timeout / 2), log=print)   # the child is one more on the box
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
                          env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
     try:
@@ -272,7 +275,7 @@ def solve_windows(tag, wroles, cap, warm, wall=1500.0, do_cert=True, log=print):
     gate = [dict(i=i, j=j, **dict(zip(("disjoint", "gap"), L.cores_disjoint_exact(H.cores[i], H.cores[j]))))
             for i in range(H.m) for j in range(i + 1, H.m)]
     rec["cores_disjoint"] = all(g["disjoint"] for g in gate)
-    ok, mem = prio185.wait_box(log=log, own=1)
+    ok, mem = prio185.wait_box(log=log, own=0, max_wait=6 * 3600)   # this process is already counted
     rec["gate"] = mem
     if not ok:
         rec.update(verdict="[P] box gate (LP not run)", wall_s=round(time.time() - t0, 1))
@@ -285,6 +288,10 @@ def solve_windows(tag, wroles, cap, warm, wall=1500.0, do_cert=True, log=print):
         rec.update(error=repr(e)[:300], verdict="ERROR(LP)", wall_s=round(time.time() - t0, 1))
         return rec
     tau = s.get("tau")
+    # resumable: the next leg warm-starts from these rows and atoms (run185 --resume)
+    json.dump(dict(tau=tau, converged=s.get("converged"), atoms_all=s.get("atoms_all"), rows_all=s.get("rows_all"),
+                   packing=s.get("packing"), n_rows=s.get("n_rows"), minmass=s.get("minmass"), hyp=s.get("hyp")),
+              open(os.path.join(BASE, "results", "lpres_%s.json" % tag), "w"))
     rec.update(tau=tau, eta=(tau - H.budget4) if tau is not None else None, converged=bool(s.get("converged")),
                minmass=s.get("minmass"), maxcov=s.get("maxcov"), n_rows=s.get("n_rows"),
                support=len(s.get("packing") or []), lp_s=round(time.time() - t0, 1),

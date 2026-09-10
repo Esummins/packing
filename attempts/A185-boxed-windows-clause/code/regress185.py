@@ -43,6 +43,14 @@ def pick(corpus, per, max_time):
             continue
         if not (r.get("stats") or {}).get("boxes"):
             continue                                             # no tree was walked (rc 2): uninformative
+        try:                                                     # v1 exits 2 before any tree if total >= budget
+            from fractions import Fraction as _F
+            c = json.load(open(cert))
+            sc = _F(str(r.get("scale_weights", "1")))
+            if _F(c["total"]) * sc >= int(c.get("budget", c.get("n", 11))):
+                continue
+        except Exception:                                        # noqa: BLE001
+            continue
         rows[r["result"]].append((r.get("time_s", 0), cert, r))
     out = []
     for k in ("PASS", "FAIL"):

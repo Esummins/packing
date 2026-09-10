@@ -221,11 +221,11 @@ def main(argv=None):
              use_float=use_float, max_w=a.max_witnesses, cores=cores, nofams=nofams, polycores=pcs,
              windows=wins, attached=d["_attached"], cap=a.max_witnesses_per_box)
     v0 = make_verifier("free", -1, P)
-    tasks = []
-    if free > 0:
-        tasks += [("free", -1, b) for b in v0.root_boxes(a.split)]
+    tasks = []                                                   # windows FIRST (the new, cheaper clause)
     for w in wins:
         tasks += [("win", w.idx, b) for b in window_boxes(v0, w)]
+    if free > 0:
+        tasks += [("free", -1, b) for b in v0.root_boxes(a.split)]
     stats, witnesses = {"free": {}, "win": {}}, []
     if a.jobs > 1:
         import multiprocessing as mp
@@ -239,10 +239,10 @@ def main(argv=None):
     else:
         # one `run` call per clause instance, exactly v1/v3's single-process flow (same witness caps)
         groups = []
-        if free > 0:
-            groups.append(("free", v0, [b for k, i, b in tasks if k == "free"]))
         for w in wins:
             groups.append(("win", w, [b for k, i, b in tasks if k == "win" and i == w.idx]))
+        if free > 0:
+            groups.append(("free", v0, [b for k, i, b in tasks if k == "free"]))
         for kind, obj, boxes in groups:
             v = obj if kind == "free" else make_verifier("win", obj.idx, P)
             v.max_witnesses = max(1, a.max_witnesses - len(witnesses))
@@ -255,10 +255,12 @@ def main(argv=None):
                 break
     elapsed = time.time() - t_start
     passed = len(witnesses) == 0
-    for kind, tag in (("free", "free clause"), ("win", "window clause")):
+    for kind, tag in (("win", "window clause"), ("free", "free clause")):
         st = stats[kind]
         if not st:
-            print(f"{tag}: skipped ({'no free squares' if kind == 'free' else 'no windows'})")
+            why = ("no windows" if kind == "win" else "no free squares") if (
+                (kind == "win" and not wins) or (kind == "free" and free <= 0)) else "not reached: witness cap hit earlier"
+            print(f"{tag}: skipped ({why})")
             continue
         print(f"{tag}: boxes = {st['boxes']}  covered = {st['covered']}  vacuous = {st['vacuous']}  "
               f"exempt = {st.get('exempt', 0)} (core {st.get('exempt_core', 0)}, nofam {st.get('exempt_nofam', 0)}, "

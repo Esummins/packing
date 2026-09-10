@@ -93,6 +93,7 @@ def main():
     ap.add_argument("--wall", type=float, default=1500.0)
     ap.add_argument("--only", default="")
     ap.add_argument("--redo", action="store_true")
+    ap.add_argument("--resume", action="store_true", help="warm-start each node from its previous leg (results/lpres_<tag>.json)")
     a = ap.parse_args()
     jobs = []
     if a.which in ("a183", "all"):
@@ -100,7 +101,7 @@ def main():
     if a.which in ("a182", "all"):
         jobs += a182_nodes(a.only)
     done = set()
-    if os.path.exists(OUT) and not a.redo:
+    if os.path.exists(OUT) and not (a.redo or a.resume):
         for ln in open(OUT, encoding="utf-8"):
             try:
                 done.add(json.loads(ln)["node"])
@@ -117,9 +118,18 @@ def main():
                 warms[cell] = w
             else:
                 warms[cell] = L.load_warm(cell)
-        print("== %s: %d roles, cores %s" % (tag[-70:], len(wroles), {w.name: w.core_kind for w in wroles}), flush=True)
-        rec = W.solve_windows(tag, wroles, a.cap, warms[cell], wall=a.wall)
-        rec.update(before=before, cell=cell, when=time.strftime("%Y-%m-%d %H:%M"))
+        warm, leg, prev_tau = warms[cell], 0, None
+        lp_prev = os.path.join(RES, "lpres_%s.json" % tag)
+        if a.resume and os.path.exists(lp_prev):
+            prev = json.load(open(lp_prev, encoding="utf-8"))
+            if prev.get("converged"):
+                print("%s already converged (tau %s); skipping" % (tag[-60:], prev.get("tau")), flush=True)
+                continue
+            warm, prev_tau = warm_from_result(prev), prev.get("tau")
+            leg = 1 + sum(1 for ln in open(OUT, encoding="utf-8") if json.loads(ln)["node"] == tag) if os.path.exists(OUT) else 1
+        print("== %s: %d roles, cores %s, leg %d (from tau %s)" % (tag[-70:], len(wroles), {w.name: w.core_kind for w in wroles}, leg, prev_tau), flush=True)
+        rec = W.solve_windows(tag, wroles, a.cap, warm, wall=a.wall)
+        rec.update(before=before, cell=cell, leg=leg, resumed_from_tau=prev_tau, when=time.strftime("%Y-%m-%d %H:%M"))
         emit(rec)
 
 
