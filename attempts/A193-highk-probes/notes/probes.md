@@ -207,3 +207,9 @@ LP (k4_05), and corners4's phantom is half-integral where the k0 cell's was inte
   product over the two open slots (4 nodes) ≈ **2.5 CPU-h to know**; the YES branches are k5_11 / k5_16's trees
   with slack pins — the standing [P] of A57 G1 plus item 7 of the P-list, priced there (≈ 1,800 CPU-h for the two
   A57 classes), not here. If the all-NO node is alive too, k4_05 joins corners4 under the pair-row obstruction.
+
+Leaves 2 and 3: **FAIL** (51 holes, all in window P1 — the BL(0,1) pin's own rows — re-solve **11.100 > 11**,
+"re-solve lost the kill"; 31 holes in window F1, re-solve **11.000**). So 0 of 3 k4_05 leaves certify, and all three
+re-solves reach or cross the budget: the 10.77–10.86 readings were unconverged lower bounds of a value ≥ 11, exactly
+as the root's 6.965 was of 7.189. Certificates and reports: `certs/k4_05_root_forced-*.{json,certify.json,
+witnesses.json,report.json}` (260–430 s each, 1.35–1.54 M window boxes walked at depth 56).
