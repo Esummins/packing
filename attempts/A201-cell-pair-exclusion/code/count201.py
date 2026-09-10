@@ -1,10 +1,11 @@
 """A201 -- A200's count_search (per-slot caps) with the pairwise test replaced by pairtab201.PairTable.compatible
-(Lemma A1 + Lemma CN + the exact multibox pair node): the copy of quick200.count_search, modified in one place."""
+(Lemma A1 + Lemma CN + the exact pair clip) and a set of FORBIDDEN covers (refuted by the joint cover clip): the copy of
+quick200.count_search, modified in two places."""
 import fastprop as FP                                          # READ-ONLY (A198)
 import pairtab201 as PT
 
 
-def count_search(slots, free_opts, fixed_opts, n_free, lines, base_chords, s, caps, table, node_cap=200000, use_chords=True):
+def count_search(slots, free_opts, fixed_opts, n_free, lines, base_chords, s, caps, table, node_cap=200000, use_chords=True, forbidden=frozenset()):
     """A200's count_search (per-slot caps) with `table.compatible` as the pairwise test (A1 + CN + EXACT)."""
     names = list(fixed_opts)
     nodes, capped = [0], [False]
@@ -28,6 +29,8 @@ def count_search(slots, free_opts, fixed_opts, n_free, lines, base_chords, s, ca
             return None
         need = [p for p in slots if demand[p] > 0]
         if not need:
+            if forbidden and frozenset(PT.okey(w, o) for w, o in chosen) in forbidden:
+                return None                                    # a cover the joint clip refuted: keep searching
             return list(chosen)
         if left == 0:
             return None

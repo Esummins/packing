@@ -27,9 +27,9 @@ INF = Q.INF
 
 # ----------------------------------------------------------------------------- the page
 class QPage201(Q.QPage):
-    def __init__(self, *a, pair_budget=300.0, pair_exact=True, prior_witness=None, **kw):
+    def __init__(self, *a, pair_budget=300.0, pair_exact=True, prior_witness=None, cover_clip=True, **kw):
         super().__init__(*a, **kw)
-        self.pair_budget, self.pair_exact = pair_budget, pair_exact
+        self.pair_budget, self.pair_exact, self.cover_clip = pair_budget, pair_exact, cover_clip
         self.prior_witness = prior_witness          # [(who, ci, [slots])] of an earlier count (A200's certificate)
         self.tables = []
 
@@ -38,21 +38,31 @@ class QPage201(Q.QPage):
         an excluded pair is cached and the count re-run; stops when the count is infeasible (DEAD), the cover's pairs
         are all decided compatible (a verified cover), or the budget leaves a pair undecided (ALIVE, undecided)."""
         t0 = time.time()
-        n_ref, verified, nodes = 0, None, 0
+        n_ref, n_joint, verified, joint_ok, nodes = 0, 0, None, None, 0
         while True:
-            r = count201.count_search(self.slots, free_opts, fixed_opts, n_anon, self.lines, self.pin_chords, self.s, caps, table, use_chords=use_chords)
+            r = count201.count_search(self.slots, free_opts, fixed_opts, n_anon, self.lines, self.pin_chords, self.s, caps, table,
+                                      use_chords=use_chords, forbidden=frozenset(table.forbidden))
             nodes += r.nodes
             if not r.feasible or not self.pair_exact or r.witness is None:
                 break
             excl, decided = table.verify_cover(r.witness)
-            if not excl:
+            if excl:
+                n_ref += 1
+            elif decided and self.cover_clip:                    # pairwise verified: now the JOINT clip of the cover
+                refuted, rec = table.check_cover(r.witness)
+                if refuted:
+                    n_joint += 1
+                else:
+                    verified, joint_ok = True, (None if rec is None else True)
+                    break
+            else:
                 verified = decided
                 break
-            n_ref += 1
             if self.T.out_of_time():
                 break
         st = self.T.step("count", time.time() - t0, chords=use_chords, feasible=r.feasible, nodes=nodes, capped=r.capped, label=label,
-                         refutations=n_ref, cover_verified=verified, excl_used=len(table.hits), pair_spent=round(table.spent, 2))
+                         refutations=n_ref, joint_refutations=n_joint, cover_verified=verified, cover_joint_ok=joint_ok,
+                         excl_used=len(table.hits), pair_spent=round(table.spent, 2))
         table.used[label] = table.hits_json()
         return r, st
 
@@ -122,8 +132,8 @@ class QPage201(Q.QPage):
         r, _ = self._count("nochord", free_opts, fixed_opts, n_anon, caps, table, False)
         info["count_nochord"] = dict(feasible=r.feasible, nodes=r.nodes, capped=r.capped, excl_used=table.used["nochord"])
         if not r.feasible:
-            self.dead = "JOINT COUNT + PAIR TABLE (caps %s; exclusions used: %s): no cover of the %d forced slots by H + %d role(s) + %d anonymous squares" % (
-                info["caps"], self._rules(table.used["nochord"]), len(self.slots), len(self.role_cell), n_anon)
+            self.dead = "JOINT COUNT + PAIR TABLE (caps %s; exclusions used: %s; covers refuted jointly: %d): no cover of the %d forced slots by H + %d role(s) + %d anonymous squares" % (
+                info["caps"], self._rules(table.used["nochord"]), len(table.forbidden), len(self.slots), len(self.role_cell), n_anon)
             self.T.test("COUNT", chords=False, verdict="DEAD", nodes=r.nodes, n_free_opts=len(free_opts), caps=info["caps"], excl_used=table.used["nochord"])
             info["dead"], info["pair_excl"] = self.dead, dict(table.summary(), used=dict(table.used))
             return info

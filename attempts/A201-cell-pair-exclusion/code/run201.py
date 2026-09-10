@@ -46,14 +46,14 @@ def prior_witness(nid, pad):
     return (w or None), os.path.relpath(f, ROOT).replace("\\", "/")
 
 
-def run_page(nid, wall=600, depth=5, joint_depth=2, refine_union=2, pad="g1", budget=300.0, exact=True, log=print):
+def run_page(nid, wall=600, depth=5, joint_depth=2, refine_union=2, pad="g1", budget=300.0, exact=True, cover=True, log=print):
     T = FP.Trace(wall=wall)
     rec, cls, row = FP.load_page(nid)
     pw, pwf = prior_witness(nid, pad)
     log("== %s (%s) at the %s pad: %d pins, H %s; pair budget %.0f s (exact %s); prior witness %s" % (
         nid, cls, pad, len(rec["pins"]), [round(v, 3) for v in rec["H"][0]], budget, exact, pwf))
     pg = Q1.QPage201(rec, cls, nid, T, depth=depth, joint_depth=joint_depth, refine_union=refine_union, pad=pad,
-                     pair_budget=budget, pair_exact=exact, prior_witness=pw)
+                     pair_budget=budget, pair_exact=exact, prior_witness=pw, cover_clip=cover)
     out = pg.run()
     for rd in out["rounds"]:
         log("   round %d: alive cells %s; caps %s; H reaches %s; forced_H %s; roles %s; instantiate %s; count %s / chords %s%s" % (
@@ -62,7 +62,7 @@ def run_page(nid, wall=600, depth=5, joint_depth=2, refine_union=2, pad="g1", bu
             (rd.get("count_chord") or {}).get("feasible"), ("; DEAD: " + rd["dead"]) if rd.get("dead") else ""))
         pe = rd.get("pair_excl") or {}
         if pe:
-            log("      pair table: %s" % {k: pe.get(k) for k in ("lookups", "a1", "cn", "cell_pairs_near", "cell_tested", "cell_excl", "exact_tested", "exact_excl", "undecided_budget", "exact_seconds", "by_rule", "n_refutations", "n_refuted")})
+            log("      pair table: %s" % {k: pe.get(k) for k in ("lookups", "a1", "cn", "cell_pairs_near", "cell_tested", "cell_excl", "exact_tested", "exact_excl", "undecided_budget", "exact_seconds", "by_rule", "n_refutations", "n_refuted", "cover_tested", "cover_excl", "cover_undecided")})
         wc = rd.get("witness_check")
         if wc:
             log("      A200 witness cover (%d/%d rows found): %s" % (wc["n_found"], wc["n_keys"], "DEAD -- " + "; ".join(
@@ -107,6 +107,7 @@ if __name__ == "__main__":
     ap.add_argument("--chain", action="store_true", help="g1 pad, then (if ALIVE) pad 0")
     ap.add_argument("--budget", type=float, default=300.0, help="seconds of exact pair nodes per page (rule (c))")
     ap.add_argument("--noexact", action="store_true", help="rules (a)(b) only")
+    ap.add_argument("--nocover", action="store_true", help="no joint clip of a pairwise-verified cover")
     ap.add_argument("--seal", action="store_true", help="A200's SEAL leaf at pad 0 if still alive")
     ap.add_argument("--nosvg", action="store_true")
     a = ap.parse_args()
@@ -116,7 +117,7 @@ if __name__ == "__main__":
     outs, pages = [], []
     for k, pad in enumerate(pads):
         out, pg = run_page(a.nid, wall=a.wall, depth=a.depth, joint_depth=a.jdepth, refine_union=a.refine_union, pad=pad,
-                           budget=a.budget, exact=not a.noexact)
+                           budget=a.budget, exact=not a.noexact, cover=not a.nocover)
         out["path"], out["chain_done"] = "quick", out["verdict"] == "DEAD" or pad == "zero" or not a.chain
         cert = os.path.join(CERTS, "pe201_%s%s.json" % (a.nid, "_pad0" if pad == "zero" else ""))
         out["cert_path"] = cert

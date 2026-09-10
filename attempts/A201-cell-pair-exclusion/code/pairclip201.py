@@ -102,3 +102,46 @@ def pair_clip(p1, p2, s, max_iter=4, refine=0, n_coarse=4, max_pieces=600, stats
             break
     return dict(excluded=False, why="both sides keep poses (X1 %.3f, X2 %.3f of their volume): COMPATIBLE" % (ka, kb),
                 passes=passes, seconds=round(time.time() - t0, 3), kept_a=round(ka, 5), kept_b=round(kb, 5))
+
+
+def cover_clip(piece_sets, s, max_iter=3, n_coarse=4, stats=None, names=None):
+    """the same clip on a WHOLE cover: every row's pieces against every other row's K' (rows whose hulls are >= sqrt2
+    apart skip each other), to a fixed point.  A row with no surviving piece => the cover is refuted: no packing
+    realises all its rows by distinct squares (the pairwise argument, applied to every pair at once, is exactly
+    what a pairwise-verified cover has NOT been asked).  -> dict(excluded, dead, why, passes, seconds, kept)."""
+    t0 = time.time()
+    stats = stats if stats is not None else {"exact_calls": 0, "backoffs": 0}
+    P = [list(p) for p in piece_sets]
+    names = names or ["X%d" % i for i in range(len(P))]
+    if any(not p for p in P):
+        i = [k for k, p in enumerate(P) if not p][0]
+        return dict(excluded=True, dead=names[i], why="row %s has no surviving piece" % names[i], passes=[], seconds=0.0)
+    v0 = [FP.pieces_volume(p) for p in P]
+    hulls = [FP.pieces_hull(p) for p in P]
+    near = {(i, j) for i in range(len(P)) for j in range(len(P)) if i != j and not far_apart(hulls[i], hulls[j])}
+    passes = []
+    for it in range(max_iter):
+        obs = {}
+        for i, p in enumerate(P):
+            if any((i, j) in near for j in range(len(P))):
+                mb = mbox_of(names[i], p, n_coarse)
+                mb.rebuild()
+                obs[i] = mb.obstacle("poly")
+        changed = False
+        for i in range(len(P)):
+            for j in range(len(P)):
+                if (i, j) not in near:
+                    continue
+                P[i], c = _clip_side(P[i], obs[j], stats, 0)
+                changed = changed or c
+                if not P[i]:
+                    passes.append(dict(pass_=it + 1, dead=names[i], against=names[j]))
+                    return dict(excluded=True, dead=names[i], why="row %s has no pose clear of K'(%s) after pass %d" % (names[i], names[j], it + 1),
+                                passes=passes, seconds=round(time.time() - t0, 3),
+                                kept={names[k]: round(float(FP.pieces_volume(P[k]) / v0[k]), 5) for k in range(len(P))})
+        kept = {names[k]: round(float(FP.pieces_volume(P[k]) / v0[k]), 5) for k in range(len(P))}
+        passes.append(dict(pass_=it + 1, kept=kept))
+        if not changed:
+            break
+    return dict(excluded=False, dead=None, why="every row keeps poses: the cover stands (joint clip, %d passes)" % len(passes),
+                passes=passes, seconds=round(time.time() - t0, 3), kept=kept)

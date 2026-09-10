@@ -26,18 +26,10 @@ from fractions import Fraction as Fr
 
 import fastprop as FP                                          # READ-ONLY (A198)
 import pairclip201 as PCL
+from pairtab201b import okey, key_json, CoverOps                # noqa: F401  (re-exported for count201)
 
 MB = FP.MB
 ONE = Fr(1)
-
-
-def okey(who, o):
-    """the option's identity: (who, cell, slot set).  who = 'free' (anonymous) or a role name."""
-    return (who, o[0], frozenset(o[1]))
-
-
-def key_json(k):
-    return [k[0], k[1], sorted(k[2])]
 
 
 def hull_maxdist2(h1, h2):
@@ -47,11 +39,12 @@ def hull_maxdist2(h1, h2):
     return dx * dx + dy * dy
 
 
-class PairTable:
+class PairTable(CoverOps):
     def __init__(self, page, budget=300.0, refine=0, max_iter=3, n_coarse=4, exact=True, lazy_exact=False, log=None):
         self.page = page
         self.budget, self.lazy_exact = budget, lazy_exact
         self.cheap_ok, self.refutations = set(), []
+        self.forbidden = set()         # covers refuted by the JOINT clip (frozensets of option keys)
         self.refine, self.max_iter, self.n_coarse = refine, max_iter, n_coarse
         self.cell_pcs, self.cell_cache = {}, {}
         self.exact_on = exact
@@ -72,33 +65,6 @@ class PairTable:
         for r, opts in fixed_opts.items():
             for o in opts:
                 self.hull[okey(r, o)] = tuple(o[3])
-
-    def precompute_cells(self, cell_budget):
-        """(c1) up front: every pair of DISTINCT cells that host anonymous rows, nearest first, within `cell_budget`
-        seconds -- one clip per cell pair decides every option pair of those cells."""
-        cells = sorted(set(k[1] for k in self.hull if k[0] == "free"))
-        t0 = time.time()
-        pairs = []
-        for i, a in enumerate(cells):
-            for b in cells[i + 1:]:
-                ra, rb = self.page.cells[a]["rect"], self.page.cells[b]["rect"]
-                dx = max(Fr(0), rb[0] - ra[1], ra[0] - rb[1]); dy = max(Fr(0), rb[2] - ra[3], ra[2] - rb[3])
-                if dx * dx + dy * dy < PCL.SQ2 * PCL.SQ2:
-                    pairs.append((dx * dx + dy * dy, a, b))
-        pairs.sort()
-        for _, a, b in pairs:
-            if self.spent >= cell_budget:
-                break
-            ck = frozenset((a, b))
-            if ck in self.cell_cache:
-                continue
-            self.n["cell_tested"] += 1
-            self.cell_cache[ck] = self._clip(self.cell_union(a), self.cell_union(b))
-            if self.cell_cache[ck]["excluded"]:
-                self.n["cell_excl"] += 1
-        self.n["cell_pairs_near"] = len(pairs)
-        self.n["cell_precompute_seconds"] = round(time.time() - t0, 2)
-        return len(pairs)
 
     def pieces(self, k):
         if k not in self.pieces_of:
@@ -151,22 +117,6 @@ class PairTable:
             self.undecided.add(frozenset((k1, k2)))
             return True, None
         return self._exact(k1, k2, base)
-
-    def verify_cover(self, witness):
-        """(c) on every pair of a count witness [(who, o)]: -> (excluded pairs, all decided?).  The count's DFS runs
-        on (a) (b) and the cached (c) results; the exact budget is spent HERE, on the covers the count proposes."""
-        keys = [okey(who, o) for who, o in witness]
-        excl, decided = [], True
-        for i in range(len(keys)):
-            for j in range(i + 1, len(keys)):
-                pk = frozenset((keys[i], keys[j]))
-                if not self.compatible(keys[i], keys[j], exact=True):
-                    excl.append(self.cache[pk][1])
-                elif pk not in self.cache:
-                    decided = False
-        self.refutations.append(dict(cover=[key_json(k) for k in keys], excluded=[dict(a=e["a"], b=e["b"], rule=e["rule"]) for e in excl],
-                                     decided=decided))
-        return excl, decided
 
     # ---------------------------------------------------------------- (c) the exact pair clip (pairclip201)
     def cell_union(self, ci):
@@ -224,7 +174,8 @@ class PairTable:
         for pk in self.hits:
             ok, rec = self.cache[pk]
             out.append(dict(a=rec["a"], b=rec["b"], rule=rec["rule"]))
-        return sorted(out, key=lambda d: (d["rule"], str(d["a"]), str(d["b"])))
+        out.sort(key=lambda d: (d["rule"], str(d["a"]), str(d["b"])))
+        return out + [dict(rule="COVER", cover=[key_json(k) for k in sorted(c)]) for c in self.forbidden]
 
     def summary(self):
         d = dict(self.n)
@@ -232,18 +183,5 @@ class PairTable:
         d["exact_seconds"] = round(d["exact_seconds"], 2)
         d.update(budget=self.budget, n_excl=len(self.excl), n_cached=len(self.cache), n_cheap_ok=len(self.cheap_ok),
                  n_refutations=len(self.refutations), n_refuted=sum(1 for r in self.refutations if r["excluded"]),
-                 by_rule={r: sum(1 for e in self.excl if e["rule"] == r) for r in ("A1", "CN", "EXACT")})
+                 by_rule={r: sum(1 for e in self.excl if e["rule"] == r) for r in ("A1", "CN", "EXACT", "COVER")})
         return d
-
-    def check_pairs(self, keys, label):
-        """run every pair of the given option keys through the table (a prior witness cover, e.g. A200's)."""
-        out = []
-        ks = [k for k in keys if k in self.hull]
-        for i in range(len(ks)):
-            for j in range(i + 1, len(ks)):
-                ok = self.compatible(ks[i], ks[j], exact=True)
-                rec = self.cache.get(frozenset((ks[i], ks[j])), (True, None))[1]
-                out.append(dict(a=key_json(ks[i]), b=key_json(ks[j]), compatible=ok,
-                                rule=(rec or {}).get("rule"), why=(rec or {}).get("why")))
-        return dict(label=label, n_keys=len(keys), n_found=len(ks), pairs=out,
-                    dead=any(not p["compatible"] for p in out))
