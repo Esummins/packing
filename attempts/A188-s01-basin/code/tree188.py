@@ -34,15 +34,17 @@ def s01_poses():
     return {f["name"]: (f["x"], f["y"], math.radians(f["theta_deg"])) for f in d["free"]}
 
 
-def bodies_for(cls, r, rho_deg, anchor_side=A.S0):
-    P = s01_poses()
-    lam = anchor_side / S_STAR
+def bodies_for(cls, r, rho_deg, anchor_side=A.S0, poses=None, s_star=S_STAR, names=ROW, axis=True):
+    """poses: {name: (x, y, theta_rad)} at side s_star (default: the S01 row); dilated to s0."""
+    P = poses or s01_poses()
+    lam = anchor_side / s_star
     rho = math.radians(rho_deg)
     bodies, nv = [], 1
-    for n in ROW:
+    for n in names:
         x, y, t = P[n]
         x, y = x * lam, y * lam
-        t = 0.0                                              # the row squares are axis-aligned
+        if axis:
+            t = 0.0                                          # the S01 row squares are axis-aligned
         bodies.append(A.Body(n, "free", x0=x - r, x1=x + r, y0=y - r, y1=y + r, t0=t - rho, t1=t + rho,
                              vi=nv, anchor=(x, y, t)))
         nv += 2
@@ -69,16 +71,24 @@ def boxlist(bodies):
     return out
 
 
-def run_one(cls, r, rho, time_cap, samples):
+def run_one(cls, r, rho, time_cap, samples, spec=None):
+    """spec (S03 pilots): dict(tag, s_star, poses={name: [x, y, theta_deg]}, L=[names])."""
     t0 = time.time()
-    bodies, nv = bodies_for(cls, r, rho)
+    if spec:
+        poses = {n: (v[0], v[1], math.radians(v[2])) for n, v in spec["poses"].items()}
+        bodies, nv = bodies_for(cls, r, rho, poses=poses, s_star=spec["s_star"], names=tuple(spec["L"]), axis=False)
+        tag, s_star, names = spec["tag"], spec["s_star"], tuple(spec["L"])
+    else:
+        bodies, nv = bodies_for(cls, r, rho)
+        tag, s_star, names = "S01", S_STAR, ROW
     Pe = {b.name: b.anchor for b in bodies}
     ss = A.shadow_selections(bodies, Pe)
     T = A.Tree(bodies, nv, contact_pairs=list(ss), min_cell_deg=0.05, node_cap=2000000,
-               time_cap=time_cap, target=A.S0 + 0.9 * (S_STAR - A.S0), tighten_cap=0)
+               time_cap=time_cap, target=A.S0 + 0.9 * (s_star - A.S0), tighten_cap=0)
     v = T.run()
-    rec = dict(id="S01_%s_A188row_r%.2f_rho%.0f" % (cls, r, rho), tag="S01", cls=cls, r=r, rho_deg=rho,
-               L=list(ROW), P=list(A.CLASS_PINS[cls]), tree=v, n_witnesses=len(T.witnesses),
+    rec = dict(id="%s_%s_A188%s_r%.2f_rho%.0f" % (tag, cls, "row" if not spec else "var", r, rho), tag=tag,
+               cls=cls, r=r, rho_deg=rho, s_star=s_star,
+               L=list(names), P=list(A.CLASS_PINS[cls]), tree=v, n_witnesses=len(T.witnesses),
                n_unresolved=len(T.unresolved), witnesses=T.witnesses[:2], boxes=boxlist(bodies),
                seconds_tree=round(time.time() - t0, 1))
     dead = bool(v["dead"]) and not v["capped"]
@@ -136,8 +146,10 @@ def main():
     ap.add_argument("--time-cap", type=float, default=300.0)
     ap.add_argument("--samples", type=int, default=3000)
     ap.add_argument("--emit", default=None)
+    ap.add_argument("--spec", default=None, help="S03 pilot: notes/s03_variant_<frame>.json")
     a = ap.parse_args()
-    out = os.path.join(L.RES, "tree188_%s.jsonl" % a.cls)
+    spec = json.load(open(a.spec, encoding="utf-8")) if a.spec else None
+    out = os.path.join(L.RES, "tree188_%s%s.jsonl" % (a.cls, "_" + spec["tag"] if spec else ""))
     done = set()
     if os.path.exists(out):
         for line in open(out, encoding="utf-8"):
@@ -153,11 +165,11 @@ def main():
     for cell in a.grid.split(","):
         r, rho = cell.split(":")
         r, rho = float(r), float(rho)
-        rid = "S01_%s_A188row_r%.2f_rho%.0f" % (a.cls, r, rho)
+        rid = "%s_%s_A188%s_r%.2f_rho%.0f" % (spec["tag"] if spec else "S01", a.cls, "var" if spec else "row", r, rho)
         if rid in done:
             print("skip", rid, flush=True)
             continue
-        rec = run_one(a.cls, r, rho, a.time_cap, a.samples)
+        rec = run_one(a.cls, r, rho, a.time_cap, a.samples, spec=spec)
         with open(out, "a", encoding="utf-8") as fh:
             fh.write(json.dumps(rec) + "\n")
         print("%-38s %-10s certified_min=%s tree %.0fs nodes %s" % (

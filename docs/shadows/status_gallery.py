@@ -619,6 +619,28 @@ def collect(table, corpus):
                 d,
             )
 
+    # (7e) A188's S01 LINE-basin closures (docs/proofs/local_certificate_s01.md Theorem S01-LINE).
+    #      results/consumed188.jsonl lists every page whose conditioned box is inside a certified
+    #      band; only verdict == "RETIRED" (a k = 3 line: the page itself dead by the chord sum, or a
+    #      LocalCompose closure with a citeable NO side) is a kill -- CONTAINED_YES_LEAF rows still
+    #      owe their NO children and are NOT collected (A187 s5: containment is necessary, not sufficient).
+    for d in jl(A("A188-s01-basin", "results", "consumed188.jsonl")):
+        if str(d.get("verdict", "")) != "RETIRED":
+            continue
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        table.add_rec(
+            "A188 consumed188.jsonl",
+            camp,
+            d.get("nid", ""),
+            True,
+            "S01 LINE basin [%s, k=%s]" % (d.get("line", ""), d.get("k", "")),
+            "A188",
+            d.get("cert_path") or "",
+            fdate(A("A188-s01-basin", "results", "consumed188.jsonl")),
+            d,
+        )
+
     # (7d) A178's geometry-cascade kills (forced-corner / forced-slot roles, multibox pair leaf)
     #      results/geopass178.jsonl is resumable: the LAST row per nid is the verdict.
     last178 = {}
@@ -668,6 +690,70 @@ def collect(table, corpus):
             fdate(A("A180-forced-first-assignment", "results", "assign182.jsonl")),
             d,
         )
+
+    # (7f) A189's NO-ROOM leaf on A182's recorded assignment nodes.  At a node with k boxed roles the
+    #      remaining 11 - k free unit squares must fit in the container clear of every K' (A132), and
+    #      A189 bounds how many can: #free <= sum over the residue pockets of A141/A161's LANE.  A node
+    #      with sum < 11 - k is DEAD, and so is its whole subtree: the leaf refutes the NODE's own
+    #      hypothesis from the node's fixed-point hull (a sound contraction of it), and A182's tree is a
+    #      case tree, so every descendant's hypothesis IMPLIES its ancestor's.  Hence a dead label kills
+    #      every label it is a prefix of -- no box monotonicity is needed for this.
+    #
+    #      A PAGE is retired only when its whole assignment search closes, which needs BOTH:
+    #        (i) every ALIVE leaf of A182's journal (the `subtree` records whose verdict starts ALIVE,
+    #            plus the UNDECIDED ones) has an A189-DEAD ancestor (label prefix), AND
+    #       (ii) A182's own run of that page was EXHAUSTIVE -- `assign182.jsonl`'s last record for the
+    #            page must not be a budget/deadline stop, since unexplored branches are unexamined
+    #            leaves.  A page whose alive leaves all die but whose search stopped on budget is NOT
+    #            retired here; it is reported as "leaves cleared, search incomplete".
+    n189 = {}
+    for d in jl(A("A189-noroom", "results", "noroom189.jsonl")):
+        if d.get("page") and d.get("label"):
+            n189.setdefault(d["page"], []).append(d)
+    if n189:
+        last182b = {}
+        for d in jl(A("A180-forced-first-assignment", "results", "assign182.jsonl")):
+            if d.get("nid"):
+                last182b[d["nid"]] = d
+        for page in sorted(n189):
+            recs = n189[page]
+            deadlab = [r["label"] for r in recs if r.get("verdict") == "DEAD"]
+            jpath = A("A180-forced-first-assignment", "results", "journal", page + ".jsonl")
+            leaves = []
+            for d in jl(jpath):
+                if d.get("kind") != "subtree":
+                    continue
+                res = d.get("result") or {}
+                v = str(res.get("verdict") or "")
+                if v.startswith("ALIVE") or v == "UNDECIDED":
+                    leaves.append(d.get("label") or res.get("label") or "")
+            covered = [L for L in leaves
+                       if any(L == dl or L.startswith(dl + "/") for dl in deadlab)]
+            pd = last182b.get(page) or {}
+            stop = str(pd.get("leaf") or "")
+            exhaustive = bool(pd) and ("budget exhausted" not in stop) and ("deadline" not in stop) \
+                and int((pd.get("summary") or {}).get("undecided") or 0) == 0
+            retired = bool(leaves) and len(covered) == len(leaves) and exhaustive
+            camp = "k0" if pd.get("gallery") == "k0v4" else ("A60" if str(pd.get("camp")) == "A60"
+                                                             else "A57")
+            note = ("A189 NO-ROOM: %d of %d recorded assignment nodes DEAD; %d of %d alive/undecided "
+                    "leaves covered by a dead ancestor; A182's search of the page was %s (%s)"
+                    % (len(deadlab), len(recs), len(covered), len(leaves),
+                       "EXHAUSTIVE" if exhaustive else "INCOMPLETE", stop or "no assign182 record"))
+            table.add_rec(
+                "A189 noroom189.jsonl",
+                camp,
+                page,
+                retired,                      # a kill row ONLY when the whole page closes
+                "NO-ROOM leaf: no room for the 11 - k free squares at every alive assignment node "
+                "(A189 Lemma 1; sum of pocket LANE < 11 - k)",
+                "A189",
+                os.path.join("attempts", "A189-noroom", "results", "noroom189.jsonl"),
+                fdate(A("A189-noroom", "results", "noroom189.jsonl")),
+                dict(page=page, n_dead=len(deadlab), n_nodes=len(recs), n_leaves=len(leaves),
+                     n_covered=len(covered), exhaustive=exhaustive),
+                note=note,
+            )
 
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
