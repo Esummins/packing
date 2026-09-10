@@ -65,6 +65,36 @@ from the record:
 - Several of the PI's readings were wrong too, and the drawings said so: a hairline grazer the eye cannot
   see, a lane the PI thought open that a certified polygon closed. The loop corrects in both directions.
 
+## Where the levers came from
+
+Most of the proof's geometric leaves began as a spatial reading by the PI on a drawing, which the AI then turned
+into a lemma, a test against the certified geometry, and a script that applies it everywhere. The record
+(`03_lab_timeline.md`, section 3) has each episode with dates and attempt numbers; the short list, PI's reading
+first and the AI's formalisation second:
+
+| the PI's reading | what it became |
+|---|---|
+| stratify by how many squares sit simply against the box | the class frames the whole proof is organised by (A53) |
+| "chords along a line add up": the Y0147 page carries a pin, H and two free columns for more than the side | the guard-line row and its verifier clause (A144, A190), six pages dead the night it landed |
+| a corner not holding a simple square must be met by two distinct squares, or the packing climbs to a dead class | Theorem FC on forced cells, the slot-lane kill, the assignment construction (A141, A178, A180) |
+| one meeter of a doubly-met corner sits in a band along a wall; the deepest second meeter is a csc(theta) construction | the sideband lemma in its sharp cell form and the requirement theorem, Lean-checked in part (A169) |
+| a first meeter must leave room for its partner; place the forced meeters before branching on the two-meeter ones | the coexistence cut and unit propagation before branching (A168, A180) |
+| the pinwheel's basin should grow along f0's slide and the common-tilt grain | the S02 basin as a union of certified boxes across three class frames (A160, A163) |
+| a clipped box's polygon must grow on the far side of the clip, and the growth must propagate | the per-piece core rebuild and the parent-seeded fixed point (A172, A181) |
+| "H is still allowing solutions that intersect S's core" on a page | the axis-core clip defect found and replaced by the polygon clip (A175) |
+| "I only see ten squares; how does this admit an eleventh?" | the no-room leaf, five nodes dead the same night (A189) |
+| union all the pins and pick five squares that satisfy all of them at once | the simultaneous assignment cover (A180) |
+| confine the LP's adversary to the designated boxes | the window clause, seven budget-zero assignments dead (A185) |
+| force geometry to a fixed point before any LP; drop the fine pass; test B before S; short-circuit by wastage | the standing order of the cascade and the knob experiments (A184) |
+| "can the whole solution set be a basin?" | the basin map, which showed the residue clustering on a side-4 plateau, and the line certificate (A187, A188) |
+| how much does a non-simple corner hurt, and can grain coverage carry high-k kills down to low k? | the descent programme (A194) |
+
+Not every reading survived: several were refuted by the drawings, hairline grazers the eye cannot see or a lane a
+certified polygon closed, and those are listed in the timeline too. The point is the direction of the traffic.
+The PI supplies lateral, spatial reasoning that the AI does not generate on its own; the AI supplies the
+formalisation, the certificate, the test, and the application to every case at once. Neither half produced the
+leaves alone, and the leaves are where the kills came from.
+
 ## The systems that closed the gap
 
 The PI cannot read certificates or linear programs, and does not write proofs in the usual sense. What the
