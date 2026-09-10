@@ -182,7 +182,9 @@ def make_certificate_v4(res, s_rat, hyp, scale=1.03, denom_pos=10 ** 6, denom_w=
         # the pieces' float bounds are EXACT binary rationals and are what grow_core / vertex_ok certified
         # the core against; the window carries them verbatim (t via A57's outward t_lo/t_hi, as vertex_ok)
         pieces = [dict(x0=str(Fr(b.x0)), x1=str(Fr(b.x1)), y0=str(Fr(b.y0)), y1=str(Fr(b.y1)),
-                       t0=str(t_lo(b.th0)), t1=str(t_hi(b.th1))) for b in w.pieces]
+                       t0=str(max(Fr(0), t_lo(b.th0))), t1=str(min(Fr(1), t_hi(b.th1)))) for b in w.pieces]
+        # (A57's t_lo is -1/2^24 for a tilt below ~1e-6 deg -- the pins; clamping to [0,1] is a subset of the
+        # superset vertex_ok certified the core against and still contains every pose of the piece)
         wins.append(dict(name=w.name, core=hyp.attach.get(i), pieces=pieces, deg=[w.bbox.th0, w.bbox.th1],
                          core_kind=w.core_kind))
     return dict(format="case-measure-certificate-v4-windows", n=hyp.n, s=str(s), budget=hyp.n - hyp.m,

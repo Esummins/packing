@@ -93,6 +93,7 @@ def main():
     ap.add_argument("--wall", type=float, default=1500.0)
     ap.add_argument("--only", default="")
     ap.add_argument("--redo", action="store_true")
+    ap.add_argument("--certify-only", action="store_true", help="re-certify converged kills from results/lpres_<tag>.json, no LP")
     ap.add_argument("--resume", action="store_true", help="warm-start each node from its previous leg (results/lpres_<tag>.json)")
     a = ap.parse_args()
     jobs = []
@@ -101,7 +102,7 @@ def main():
     if a.which in ("a182", "all"):
         jobs += a182_nodes(a.only)
     done = set()
-    if os.path.exists(OUT) and not (a.redo or a.resume):
+    if os.path.exists(OUT) and not (a.redo or a.resume or a.certify_only):
         for ln in open(OUT, encoding="utf-8"):
             try:
                 done.add(json.loads(ln)["node"])
@@ -120,6 +121,21 @@ def main():
                 warms[cell] = L.load_warm(cell)
         warm, leg, prev_tau = warms[cell], 0, None
         lp_prev = os.path.join(RES, "lpres_%s.json" % tag)
+        if a.certify_only:
+            if not os.path.exists(lp_prev):
+                continue
+            prev = json.load(open(lp_prev, encoding="utf-8"))
+            H = W.WindowsHyp(wroles)
+            if not (prev.get("converged") and prev.get("tau") is not None and prev["tau"] < H.budget4 - 1e-6):
+                continue
+            t0 = time.time()
+            v, lg, path = W.certify_v4(prev, H, tag, t0 + a.wall)
+            rec = dict(node=tag, leg="certify", budget_v4=H.budget4, budget_v1=W.N - H.m, tau=prev["tau"],
+                       converged=True, certified=v, cert_log=lg, cert=os.path.relpath(path, ROOT).replace("\\", "/"),
+                       verdict=("DEAD(LP, v4 certified) [C under v4 ONLY]" if v == "PASS" else "DEAD(LP, v4 certificate %s)" % v),
+                       before=before, cell=cell, wall_s=round(time.time() - t0, 1), when=time.strftime("%Y-%m-%d %H:%M"))
+            emit(rec)
+            continue
         if a.resume and os.path.exists(lp_prev):
             prev = json.load(open(lp_prev, encoding="utf-8"))
             if prev.get("converged"):
