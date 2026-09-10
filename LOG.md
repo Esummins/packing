@@ -8292,3 +8292,23 @@ halves of the answer come from opposite findings.
   run191_l1_153_S2.jsonl, report191.json, price191.json, lpres_*.json, s3_boxes_*.json}, certs/, figs/steps_l1_104_{S2,S3coarse}.svg, logs/}`,
   `docs/residue_ledger.md` s.4, `docs/budget.md` s.A k0 row + s.D item 13, registry row A191.
 - **S3 addendum (05:30) [M]/[C]: 22 of 23 S3 nodes tried are DEAD -- coarse parent-seeded children of the S2 survivors 14 of 15 (the corner-nearest B0 by EmptyBox(B) at 4/2 on 6 of 6 parents, 37-75 s; the interior children by the exact-core LP at budget 7 CONVERGED at tau = 6.000 on 8, 1 undecided at cap 240 s) and A183's fine 8/3 records 8 of 8 (the same LP, tau = 6.000); every LP kill PASS under v5 AND under the FROZEN verifier (`certs/*_B*_v1.frozen.certify.json`) -- the LP value drops by exactly one unit per pinned square (8 -> 7 at S2 on the collapsed nodes, 7 -> 6 at S3 on every node tried), so with four cores the S3 layer is where l1_104 closes: 5,432 A168-alive S3 children under the 47 S2 survivors at 249 s each = **376 CPU-h = 23 instance-hours at 16 vCPU** for the whole layer (the sample is 23 nodes biased to the root/D0 and root/D1 chains; `notes/price191.md` gives the 0.9x / 0.99 / 1.00 scenarios and the S4 residue).  Audit (`code/audit191.py`, `results/audit191.json`): every kill certificate's cores are pairwise interior-disjoint (exact SAT) and bound to their union boxes by v5's own `point_in_all_poses` check; frozen PASS on all.**
+
+## 2026-09-10 ~12:10 -- A196-y0491 (Fable lead) -- done-negative: **the PI's reading of k5_16_interior_Y0491 run to a verdict -- ALIVE at its node; the wastage premise fails (|U| = 1.02 of 4.03), the chord rows never go negative, the exact-core LP stays at tau 4.135 > 4**
+- **The reading (10:30)**: "forcing a double meet on TR(0,1) + the top and bottom chord limits seem like they would collectively blow the wastage budget."
+- **Step 1, the node [T]/[S]**: Theorem FC at TR(0,1) gives two distinct non-pin meeters of B+; A161's exact test lets H meet it; geo178b's pair test at 4/2 leaves H-meets alive
+  and 2 of 6 Lemma A1 cell pairs; both two-free cases DIE at unit propagation (every BL(1,0) candidate misses by the exact test; the 'new' meeter node re-normalised from the
+  case's hulls is EmptyBox(F2)) -- so TR(0,1) forces H + one free square F1.  Unit propagation over the other five cells (56 nodes, 705 s) forces nothing: BL(1,0) has 2 {new,new}
+  options, BR(0,1) 4.  Sharp 8/3 fixed point: H kept 0.656, F1 kept 0.096 (x [2.14, 2.48] x y [2.56, 3.38]), invariant PASS, meet clip drops nothing; no-room UNDECIDED (residue 3.77).
+- **Step 2, the rows [S]**: 92 pin-band lines, open chords per piece with verify_case_v5's primitive: 0 negative; top y = 2.937: P2 + P4 + F1 0.682 -> rhs 1.195 (beta 1);
+  right x = 2.937: P3 + P4 + H 0.581 -> 1.296; x = 1/2: 0.877 (beta 0); bottom 1.877.  The top limit is real (F1's 0.68) and leaves one unit chord.
+- **Step 3, the wastage [M]**: certified |U| = 1.0214 = 25.3 % of s0^2 - 11 = 4.0318 (W strip 0.46, E strip 0.56, nothing in the top/bottom bands); no kill; Z = 118 rects.
+- **Step 4, the LPs [M]**: exact-core LP (7 cores incl. F1's a = 0.044, zone nofams, 8 guard rows, budget 4): tau 4.138 (300 s) / 4.135 (900 s), unconverged, 1 line active,
+  support the S01 room phantom (right-wall square between P3 and P4 at weight 1 -- the slack-pin K1 mass; top-wall square 0.60; bottom-wall square split 0.46/0.54; fractional
+  tilted mass in x 1.3-2.0, y 2.2-2.5).  Windows + guard-line LP: 9.667 < 11 unconverged, 0 lines active, no certificate.  Nothing certified; frozen verifiers untouched.
+- **Steps 5-6**: page `docs/residue_map/y0491_cascade.svg` (5 panels, a note per panel, U hatched, chords printed, times); the pass over the other alive k5_16 pages NOT run
+  (Y0491 did not die); no new certificate kind, status_gallery unchanged.  Lever: the BL(1,0) branch (k = 9, budget 2); a geometry re-run at deadline 1,400 s is queued behind
+  the box ceiling (`logs/queue_geo.log`).
+- **Process**: <= 3 own pythons (2 at peak), BelowNormal / 0xFFFF; the box held 11-14 lab pythons excluding Claude Extensions, so a second geometry run was killed and queued;
+  per-stage wall 1,500 s with the tree killed on timeout; PYTHONDONTWRITEBYTECODE=1; ~1.1 CPU-h.
+- Files: `attempts/A196-y0491/{BRIEF.md, notes/y0491.md, code/{prio196,node196,node196b,rows196,waste196,lp196,lp196b,page196,pass196,queue196,fig196}.py, results/, logs/}`,
+  `docs/residue_map/y0491_cascade.svg`, `docs/residue_ledger.md` s.4, `docs/budget.md` s.D item 14, registry row A196.

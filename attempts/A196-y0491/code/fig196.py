@@ -256,28 +256,32 @@ def main():
     nid = a.nid
     nodes = json.load(open(os.path.join(RES, "node_%s.json" % nid), encoding="utf-8"))
     page = json.load(open(os.path.join(RES, "page_%s.json" % nid), encoding="utf-8")) if os.path.exists(os.path.join(RES, "page_%s.json" % nid)) else {}
-    PW = int(S0 * S + 60)
-    oy = 70 + S0 * S
+    PW = int(S0 * S + 60)                                        # panels in a 2-column grid (k -> column k % 2, row k // 2)
+    PH = int(S0 * S + 150)
+    oy0 = 70 + S0 * S
+
+    def pos(k):
+        return 30 + (k % 2) * PW, oy0 + (k // 2) * PH
     body, k = [], 0
     for case in nodes.get("cases", []):
         if "node" not in case:
             continue
         ck = case["label"].replace(":", "_").replace("+", "-")
-        body += panel_node(30 + k * PW, oy, nodes, case); k += 1
+        body += panel_node(*pos(k), nodes, case); k += 1
         rp = os.path.join(RES, "rows_%s__%s.json" % (nid, ck))
         if os.path.exists(rp):
-            body += panel_rows(30 + k * PW, oy, nodes, case, json.load(open(rp, encoding="utf-8"))); k += 1
+            body += panel_rows(*pos(k), nodes, case, json.load(open(rp, encoding="utf-8"))); k += 1
         wp = os.path.join(RES, "waste_%s__%s.json" % (nid, ck))
         if os.path.exists(wp):
-            body += panel_waste(30 + k * PW, oy, nodes, case, json.load(open(wp, encoding="utf-8")), os.path.join(RES, "masks", "%s__%s.npz" % (nid, ck))); k += 1
+            body += panel_waste(*pos(k), nodes, case, json.load(open(wp, encoding="utf-8")), os.path.join(RES, "masks", "%s__%s.npz" % (nid, ck))); k += 1
         for leg in ("a", "b"):
             lp = os.path.join(RES, "lp_%s__%s_%s.json" % (nid, ck, leg))
             if os.path.exists(lp):
                 lr = os.path.join(RES, "lpres_%s__%s_%s.json" % (nid, ck, leg))
-                body += panel_lp(30 + k * PW, oy, nodes, case, json.load(open(lp, encoding="utf-8")), leg,
+                body += panel_lp(*pos(k), nodes, case, json.load(open(lp, encoding="utf-8")), leg,
                                  json.load(open(lr, encoding="utf-8")) if os.path.exists(lr) else None); k += 1
-    W_ = max(1, k) * PW + 40
-    H_ = int(oy + 110)
+    W_ = min(2, max(1, k)) * PW + 40
+    H_ = int(oy0 + ((k + 1) // 2 - 1) * PH + 110)
     head = [text(30, 22, "A196 -- %s: the PI's reading (TR(0,1) double meet + the top/bottom chord rows vs the wastage budget) run to a verdict: %s %s" % (
         nid, page.get("verdict", nodes.get("verdict")), page.get("leaf") or nodes.get("leaf") or ""), 13, bold=True),
         text(30, 38, "drawing rules: docs/residue_map/gen_a57_lp.py -- hypothesis squares only at admissible poses; every number on the page is from attempts/A196-y0491/results; times printed per step", 9, "#555")]
