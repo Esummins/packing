@@ -116,7 +116,9 @@ def page_aggregate(T, step, parents):
             if v.startswith("ALIVE"):
                 n_al += 1
                 g1.append(rect(b.x0, b.x1, b.y0, b.y1, fill="url(#stip)", fill_opacity="0.9", stroke="#555", stroke_width="0.35"))
-                for pb in ch["roles"][spec["name"]]["pieces"]:
+                # A183: a child whose new square COINCIDES with an existing role (l1_153 "S=H") carries
+                # no role of the step's name
+                for pb in (ch["roles"].get(spec["name"]) or {}).get("pieces", []):
                     piece_boxes.append(Box(*pb))
             elif v.startswith("PRUNED"):
                 n_pr += 1
