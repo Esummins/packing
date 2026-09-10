@@ -893,6 +893,39 @@ def collect(table, corpus):
                  + ("the slab chain covers [3.82, s0]" if covered else "s0 only (lam = 1): WINDOW-PENDING"),
         )
 
+    # (7k) A200's COMPOSED / QUICK killer (attempts/A200-k516-quick; the PI's directive of 2026-09-10 15:10).  On top
+    #      of A198's fastprop engine: per forced slot the UNION of the surviving free-meeter pieces is tested by Lemma CN
+    #      (diameter < 1), Lemma A1 (l-inf < 1/sqrt2) and the open-chord row (fixed chords + 2 x min chord > s0) -- at
+    #      most ONE anonymous meeter; Theorem FC then FORCES H / the instantiated roles (A161 miss test per piece) to a
+    #      fixed point across all slots (A171 multibox re-normalisation), the joint count with the caps, A199's corner
+    #      SEAL chain with the clipped H, the no-room leaf.  results/quick200.jsonl is resumable: the LAST row per nid is
+    #      the verdict.  A kill at the WINDOW pad is valid on the page's window; a kill at PAD 0 (lam = 1) is a statement
+    #      at side s0 only and is flagged WINDOW-PENDING.  [C: geometry, quick200] -- no LP, no frozen verifier.
+    last200 = {}
+    for d in jl(A("A200-k516-quick", "results", "quick200.jsonl")):
+        if d.get("nid"):
+            last200[d["nid"]] = d
+    for nid, d in sorted(last200.items()):
+        if str(d.get("verdict", "")) != "DEAD":
+            continue
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        pend = bool(d.get("window_pending")) or str(d.get("pad", "window")) != "window"
+        table.add_rec(
+            "A200 quick200.jsonl",
+            camp,
+            nid,
+            True,
+            "quick killer [%s; %s pad]: %s%s" % (d.get("step_killed") or "-", d.get("pad", "window"), (d.get("leaf") or "")[:160],
+                                                 " (s0-only; WINDOW-PENDING)" if pend else ""),
+            "A200",
+            d.get("cert") or os.path.join("attempts", "A200-k516-quick", "results", "quick200.jsonl"),
+            fdate(A("A200-k516-quick", "results", "quick200.jsonl")),
+            d,
+            note="[C: geometry, quick200] A171 multibox exact dead test / A161 exact miss test / Lemma CN / Lemma A1 / open-chord "
+                 "rows / Theorem FC; " + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the window pad (lambda_max): valid on the window"),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
