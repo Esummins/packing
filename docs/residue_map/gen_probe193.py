@@ -112,7 +112,7 @@ def page(cls):
     root = next((r for r in rs if r['kind'] == 'root_lp'), None)
     leaves = [r for r in rs if r['kind'] == 'leaf_lp']
     search = ([r for r in rs if r['kind'] == 'search'] or [None])[-1]
-    certs = {r['node']: r for r in rows(os.path.join(A193, 'results', 'probe193_certify.jsonl')) if r.get('cls') == cls}
+    certs = {r.get('node'): r for r in rows(os.path.join(A193, 'results', 'probe193_certify.jsonl')) if r.get('cls') == cls and r.get('node')}
     nrs = [r for r in rs if r['kind'] == 'noroom']
     if fr is None:
         print(cls, 'no frame row'); return
@@ -129,7 +129,12 @@ def page(cls):
     if root:
         sub = 'tau %.4f / budget %s, %s, %d active lines, LP %.0f s [K1: tau* >= 7 while k5_11/k5_16 roots are alive]' % (
             root.get('tau') or 0, root.get('budget'), 'converged' if root.get('converged') else 'NOT converged', root.get('n_active') or 0, root.get('wall_s') or 0)
-        out += support_panel(ox2, oy, root.get('packing_rows') or [], root.get('z'), 'root LP: pins only + guard lines', sub, pins=pins)
+        try:                                                   # the FULL dual support (the jsonl row is capped at 200 rows)
+            rl = json.load(open(os.path.join(A193, 'results', 'lpres_root_%s.json' % cls), encoding='utf-8'))
+            rpk = [[q['cx'], q['cy'], q['theta'], q['y']] for q in (rl.get('packing') or [])]
+        except Exception:
+            rpk = root.get('packing_rows') or []
+        out += support_panel(ox2, oy, rpk, root.get('z'), 'root LP: pins only + guard lines', sub, pins=pins)
     ox3 = ox2 + S0 * S + 60
     if leaves:
         best = min(leaves, key=lambda r: (r.get('tau') or 99) - (r.get('budget_v4') or 0))
@@ -151,8 +156,8 @@ def page(cls):
     y = oy + S0 * S + 40
     if search:
         sm = search.get('summary') or {}
-        out.append(text(PAD, y, 'assignment search: %s -- %d nodes (%d fresh), %.0f s geometry, leaves dead %d / alive %d / undecided %d; %s' % (
-            search.get('verdict'), search.get('n_nodes') or 0, search.get('n_fresh') or 0, search.get('compute_s') or 0, sm.get('dead', 0), sm.get('alive', 0), sm.get('undecided', 0), (search.get('leaf') or '')[:90]), 10, '#222'))
+        out.append(text(PAD, y, 'assignment search: %s -- %d multibox nodes, %.0f s geometry, leaves dead %d / alive %d / undecided %d; %s' % (
+            search.get('verdict'), search.get('n_nodes') or 0, search.get('compute_s') or 0, sm.get('dead', 0), sm.get('alive', 0), sm.get('undecided', 0), (search.get('leaf') or '')[:90]), 10, '#222'))
         y += 14
     if nrs:
         out.append(text(PAD, y, 'no-room leaf at %d complete leaves: %s' % (len(nrs), '; '.join('%s (%.0f s, %s)' % (r.get('verdict'), r.get('seconds') or 0, (r.get('reason') or '')[:60]) for r in nrs[:3])), 10, '#222'))
