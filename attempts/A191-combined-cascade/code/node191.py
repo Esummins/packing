@@ -138,7 +138,7 @@ def run_node(tag, cell, step, roles, warm, a, deadline, log=print, prev=None):
     try:
         lines, lrep = LN.select(support, fam, k=a.lines)
         rec["lines"] = lrep
-        res, z = C.solve_guarded(H, H.budget4, lines, warm, a.cap * (0.5 if prev is None else 1.0))
+        res, z = C.solve_guarded(H, H.budget4, lines, warm, a.cap * (a.wfrac if prev is None else 1.0))
     except Exception as e:                                       # noqa: BLE001
         rec.update(error=repr(e)[:300], verdict="ERROR(LP)", wall_s=round(time.time() - t0, 1))
         return rec

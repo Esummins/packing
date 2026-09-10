@@ -62,6 +62,7 @@ def main():
     ap.add_argument("--lines", type=int, default=8)
     ap.add_argument("--v1", type=int, default=1, help="run the v1-style exact-core + guard-line LP first (converges; A190 emitter)")
     ap.add_argument("--geo", type=int, default=1)
+    ap.add_argument("--wfrac", type=float, default=0.25, help="fraction of --cap for the windows LP leg (diagnostic: it does not converge)")
     ap.add_argument("--geo-cap", type=float, default=150.0)
     ap.add_argument("--cert", type=int, default=1)
     ap.add_argument("--rounds", type=int, default=2)
