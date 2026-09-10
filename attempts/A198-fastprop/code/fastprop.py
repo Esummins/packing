@@ -766,6 +766,11 @@ def run_page(nid, wall=600, depth=5, joint_depth=2, pair=True, log=print):
     out["tests"] = T.tests
     out["seconds"] = round(T.now(), 1)
     out["row"] = dict(family=row.get("family"), camp=row.get("camp"), tau=row.get("tau"))
+    try:
+        out["prior_tau"] = float(row.get("tau"))
+    except (TypeError, ValueError):
+        out["prior_tau"] = None
+    out["record"] = (row.get("record") or "").replace(chr(92), "/")
     log("   => %s in %.1f s (%d exact tests)%s" % (out["verdict"], out["seconds"], len(T.tests), ("; " + out["leaf"]) if out["leaf"] else ""))
     return out, pg
 
@@ -788,6 +793,8 @@ if __name__ == "__main__":
         if a.out:
             slim = {k: v for k, v in out.items() if k not in ("tests", "steps")}
             slim["cert"] = a.cert
+            slim["prior_tau"] = out.get("prior_tau")            # the tree record's tau: status_gallery attributes the tag by it
+            slim["record"] = out.get("record")
             with open(a.out, "a", encoding="utf-8") as f:
                 f.write(json.dumps(slim, default=str) + "\n")
 

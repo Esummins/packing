@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-10 13:26` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-10 13:33` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -11,7 +11,7 @@ python docs/shadows/status_gallery.py --dry-run  # print the plan, write nothing
 
 ## Residue left
 
-Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 39 alive / 21 dead; , out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
+Of the 71 gallery pages the PI reviews, **54 are still ALIVE and 17 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 43 alive / 17 dead; , out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
 
 ## Counts
 
@@ -20,8 +20,8 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 | gallery | pages | ALIVE | DEAD |
 |---|---|---|---|
 | `k0v4` | 11 | 11 | 0 |
-| `a57v4` | 60 | 39 | 21 |
-| **total** | **71** | **50** | **21** |
+| `a57v4` | 60 | 43 | 17 |
+| **total** | **71** | **54** | **17** |
 
 ### By family (A107/A128 shadow family of the page's panel N)
 
@@ -33,16 +33,16 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 | `K05` | 1 | 0 |
 | `K06` | 1 | 0 |
 | `K20` | 1 | 0 |
-| `S01` | 14 | 12 |
+| `S01` | 16 | 10 |
 | `S02` | 5 | 4 |
-| `S03` | 11 | 0 |
+| `S03` | 10 | 1 |
 | `S05` | 1 | 0 |
 | `S07` | 1 | 0 |
-| `S08` | 1 | 1 |
+| `S08` | 2 | 0 |
 | `S10` | 1 | 0 |
 | `S11` | 1 | 1 |
-| `S36` | 0 | 1 |
-| `S38` | 0 | 1 |
+| `S36` | 1 | 0 |
+| `S38` | 1 | 0 |
 | `S53` | 1 | 0 |
 | `none` | 6 | 1 |
 
@@ -50,7 +50,6 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 
 | attempt -- leaf | pages killed |
 |---|---|
-| A198 -- fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows) | 4 |
 | A149 -- case-measure-certificate-v1 (exact cores, FROZEN verify_case) | 3 |
 | A149 -- case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | 2 |
 | A190 -- guard-line clause v5 [h=2.9078; tau 4.8896 < 5] | 2 |
@@ -62,7 +61,7 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 | A190 -- guard-line clause v5 [h=2.9078, h=2.8852; tau 4.8775 < 5] | 1 |
 | A190 -- guard-line clause v5 [v=0.9929, v=0.9693; tau 4.8773 < 5] | 1 |
 | A198 -- fastprop: A1/FC at BL(0,2): no free cell can hold a meeter (Theorem FC + Lemma A1 cells + exact reach + chord rows) | 1 |
-| A198 -- fastprop: pair test (geo178b, nsub 8 / refine 4) at TR(0,0): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows) | 1 |
+| A198 -- fastprop: EmptyBox(H) at round1 (Theorem FC + Lemma A1 cells + exact reach + chord rows) | 1 |
 | A57 tree -- PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1) | 1 |
 
 ## Checklist -- `k0v4`: the k0 residue gallery v4 (converged-alive k0_00 cells)
@@ -86,11 +85,7 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 | page | node | class | level | family | status | leaf | attempt | date | subtree cost (CPU-h, A142 rank) |
 |---|---|---|---|---|---|---|---|---|---|
 | [x] [`c0_Y0076.svg`](killed/c0_Y0076.svg) | `c0_Y0076` | `trump5_j0` | 1 | `S02` | **DEAD** | fastprop: A1/FC at BL(0,2): no free cell can hold a meeter (Theorem FC + Lemma A1 cells + exact reach + chord rows) | A198 | 2026-09-10 | 2.88 (rank 17) |
-| [x] [`c0_Y0169.svg`](killed/c0_Y0169.svg) | `c0_Y0169` | `trump5_j0` | 1 | `S38` | **DEAD** | fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows) | A198 | 2026-09-10 | 2.88 (rank 19) |
-| [x] [`c0_Y0171.svg`](killed/c0_Y0171.svg) | `c0_Y0171` | `trump5_j0` | 1 | `S01` | **DEAD** | fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows) | A198 | 2026-09-10 | 2.88 (rank 20) |
 | [x] [`c0_Y0175.svg`](killed/c0_Y0175.svg) | `c0_Y0175` | `trump5_j0` | 1 | `S01` | **DEAD** | guard-line clause v5 [v=0.9929, v=0.9693; tau 4.8773 < 5] | A190 | 2026-09-10 | 2.88 (rank 21) |
-| [x] [`c0_Y0257.svg`](killed/c0_Y0257.svg) | `c0_Y0257` | `trump5_j0` | 1 | `S08` | **DEAD** | fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows) | A198 | 2026-09-10 | 2.88 (rank 13) |
-| [x] [`c0_Y0258.svg`](killed/c0_Y0258.svg) | `c0_Y0258` | `trump5_j0` | 1 | `S01` | **DEAD** | fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows) | A198 | 2026-09-10 | 2.88 (rank 3) |
 | [x] [`c0_Y0939.svg`](killed/c0_Y0939.svg) | `c0_Y0939` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 5) |
 | [x] [`c0_Y0942.svg`](killed/c0_Y0942.svg) | `c0_Y0942` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 6) |
 | [x] [`c0_Y0952.svg`](killed/c0_Y0952.svg) | `c0_Y0952` | `trump5_j0` | 1 | `S01` | **DEAD** | guard-line clause v5 [h=2.9078; tau 4.8896 < 5] | A190 | 2026-09-10 | 2.88 (rank 11) |
@@ -98,17 +93,21 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 | [x] [`c0_Y1038.svg`](killed/c0_Y1038.svg) | `c0_Y1038` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 9) |
 | [x] [`k5_11_interior_Y0147.svg`](killed/k5_11_interior_Y0147.svg) | `k5_11_interior_Y0147` | `k5_11` | 1 | `S01` | **DEAD** | guard-line clause v5 [h=2.9078, h=2.8852; tau 4.8775 < 5] | A190 | 2026-09-10 | 2.88 (rank 39) |
 | [x] [`k5_11_interior_Y0275.svg`](killed/k5_11_interior_Y0275.svg) | `k5_11_interior_Y0275` | `k5_11` | 1 | `none` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 16) |
-| [x] [`k5_11_interior_Y1110.svg`](killed/k5_11_interior_Y1110.svg) | `k5_11_interior_Y1110` | `k5_11` | 1 | `S36` | **DEAD** | fastprop: pair test (geo178b, nsub 8 / refine 4) at TR(0,0): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows) | A198 | 2026-09-10 | 2.88 (rank 5) |
 | [x] [`k5_16_interior_Y0027.svg`](killed/k5_16_interior_Y0027.svg) | `k5_16_interior_Y0027` | `k5_16` | 1 | `S01` | **DEAD** | guard-line clause v5 [-; tau 4.0000 < 5] | A190 | 2026-09-10 | 2.88 (rank 21) |
 | [x] [`k5_16_interior_Y0083.svg`](killed/k5_16_interior_Y0083.svg) | `k5_16_interior_Y0083` | `k5_16` | 1 | `S02` | **DEAD** | PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1) | A57 tree | 2026-09-01 | 4.53 (rank 3) |
+| [x] [`k5_16_interior_Y0191.svg`](killed/k5_16_interior_Y0191.svg) | `k5_16_interior_Y0191` | `k5_16` | 1 | `S03` | **DEAD** | fastprop: EmptyBox(H) at round1 (Theorem FC + Lemma A1 cells + exact reach + chord rows) | A198 | 2026-09-10 | 2.88 (rank 22) |
 | [x] [`k5_16_interior_Y0230.svg`](killed/k5_16_interior_Y0230.svg) | `k5_16_interior_Y0230` | `k5_16` | 1 | `S01` | **DEAD** | guard-line clause v5 [-; tau 4.7500 < 5] | A190 | 2026-09-10 | 2.88 (rank 45) |
 | [x] [`k5_16_interior_Y0275.svg`](killed/k5_16_interior_Y0275.svg) | `k5_16_interior_Y0275` | `k5_16` | 1 | `S11` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 24) |
 | [x] [`k5_16_interior_Y0839.svg`](killed/k5_16_interior_Y0839.svg) | `k5_16_interior_Y0839` | `k5_16` | 1 | `S01` | **DEAD** | forced-first assignment: no admissible meeter assignment at BL(1,0) (notes/assignment.md Theorem ASSIGN; 188 multibox nodes) | A182 | 2026-09-10 | 2.88 (rank 26) |
 | [x] [`k5_16_interior_Y0842.svg`](killed/k5_16_interior_Y0842.svg) | `k5_16_interior_Y0842` | `k5_16` | 1 | `S02` | **DEAD** | chord-limited lane [BL(1,0)] | A161 | 2026-09-08 | 2.88 (rank 27) |
 | [x] [`k5_16_interior_Y0941.svg`](killed/k5_16_interior_Y0941.svg) | `k5_16_interior_Y0941` | `k5_16` | 1 | `S02` | **DEAD** | A120 composition (YES local cert + all NO children) | A136 | 2026-09-09 | 2.88 (rank 29) |
+| [ ] [`c0_Y0169.svg`](c0_Y0169.svg) | `c0_Y0169` | `trump5_j0` | 1 | `S38` | **ALIVE** | -- | -- | -- | 2.88 (rank 19) |
+| [ ] [`c0_Y0171.svg`](c0_Y0171.svg) | `c0_Y0171` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 20) |
 | [ ] [`c0_Y0215.svg`](c0_Y0215.svg) | `c0_Y0215` | `trump5_j0` | 1 | `S11` | **ALIVE** | -- | -- | -- | 2.88 (rank 23) |
 | [ ] [`c0_Y0223.svg`](c0_Y0223.svg) | `c0_Y0223` | `trump5_j0` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 24) |
 | [ ] [`c0_Y0255.svg`](c0_Y0255.svg) | `c0_Y0255` | `trump5_j0` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 16) |
+| [ ] [`c0_Y0257.svg`](c0_Y0257.svg) | `c0_Y0257` | `trump5_j0` | 1 | `S08` | **ALIVE** | -- | -- | -- | 2.88 (rank 13) |
+| [ ] [`c0_Y0258.svg`](c0_Y0258.svg) | `c0_Y0258` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 3) |
 | [ ] [`c0_Y0695.svg`](c0_Y0695.svg) | `c0_Y0695` | `trump5_j0` | 1 | `S02` | **ALIVE** | -- | -- | -- | 2.88 (rank 15) |
 | [ ] [`c0_Y0787.svg`](c0_Y0787.svg) | `c0_Y0787` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 4) |
 | [ ] [`c0_Y0788.svg`](c0_Y0788.svg) | `c0_Y0788` | `trump5_j0` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 12) |
@@ -122,10 +121,10 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 | [ ] [`k5_11_interior_Y0738.svg`](k5_11_interior_Y0738.svg) | `k5_11_interior_Y0738` | `k5_11` | 1 | `S02` | **ALIVE** | -- | -- | -- | 3.76 (rank 4) |
 | [ ] [`k5_11_interior_Y0985.svg`](k5_11_interior_Y0985.svg) | `k5_11_interior_Y0985` | `k5_11` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 19) |
 | [ ] [`k5_11_interior_Y1104.svg`](k5_11_interior_Y1104.svg) | `k5_11_interior_Y1104` | `k5_11` | 1 | `S10` | **ALIVE** | -- | -- | -- | 11.59 (rank 1) |
+| [ ] [`k5_11_interior_Y1110.svg`](k5_11_interior_Y1110.svg) | `k5_11_interior_Y1110` | `k5_11` | 1 | `S36` | **ALIVE** | -- | -- | -- | 2.88 (rank 5) |
 | [ ] [`k5_16_interior_Y0044.svg`](k5_16_interior_Y0044.svg) | `k5_16_interior_Y0044` | `k5_16` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 38) |
 | [ ] [`k5_16_interior_Y0054.svg`](k5_16_interior_Y0054.svg) | `k5_16_interior_Y0054` | `k5_16` | 1 | `S02` | **ALIVE** | -- | -- | -- | 2.88 (rank 42) |
 | [ ] [`k5_16_interior_Y0099.svg`](k5_16_interior_Y0099.svg) | `k5_16_interior_Y0099` | `k5_16` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 43) |
-| [ ] [`k5_16_interior_Y0191.svg`](k5_16_interior_Y0191.svg) | `k5_16_interior_Y0191` | `k5_16` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 22) |
 | [ ] [`k5_16_interior_Y0249.svg`](k5_16_interior_Y0249.svg) | `k5_16_interior_Y0249` | `k5_16` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 33) |
 | [ ] [`k5_16_interior_Y0325.svg`](k5_16_interior_Y0325.svg) | `k5_16_interior_Y0325` | `k5_16` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 46) |
 | [ ] [`k5_16_interior_Y0380.svg`](k5_16_interior_Y0380.svg) | `k5_16_interior_Y0380` | `k5_16` | 1 | `S02` | **ALIVE** | -- | -- | -- | 2.88 (rank 47) |
@@ -149,25 +148,21 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 **The kills, with their certificates.**
 
 * `k5_16_interior_Y0083` (tree tag `k5_16_interior_L1`) -- direct kill record, **A57 tree** by `PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1)`; certificate `attempts/A57-shadow-trees/certs/tree/k5_16_interior_L1/k5_16_interior_Y0083.json`; attributed by *the record's own tree jsonl (tag is the file)*; 1 record(s) agree.  **An id is not a node (A137 §C.3): the `k5_16_interior_G1` node of this id is still ALIVE** -- only the `k5_16_interior_L1` node is dead, and this page was drawn from the `k5_16_interior_L1` record.
-* `k5_11_interior_Y1110` (tree tag `k5_11_interior_G1`) -- direct kill record, **A198** by `fastprop: pair test (geo178b, nsub 8 / refine 4) at TR(0,0): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_k5_11_interior_Y1110.json`; attributed by *id occurs in exactly one tree*; 1 record(s) agree.
 * `k5_11_interior_Y0275` (tree tag `k5_11_interior_G1`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/k5_11_interior_Y0275__exall.json`; attributed by *prior tau matched the tree record*; 2 record(s) agree.
 * `k5_16_interior_Y0027` (tree tag `k5_16_interior_G1`) -- direct kill record, **A190** by `guard-line clause v5 [-; tau 4.0000 < 5]`; certificate `attempts/A190-guardline-clause/certs/k5_16_interior_Y0027.json`; attributed by *prior tau matched the tree record*; 2 record(s) agree.
+* `k5_16_interior_Y0191` (tree tag `k5_16_interior_G1`) -- direct kill record, **A198** by `fastprop: EmptyBox(H) at round1 (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_k5_16_interior_Y0191.json`; attributed by *prior tau matched 2 trees (all)*; 1 record(s) agree.
 * `k5_16_interior_Y0275` (tree tag `k5_16_interior_G1`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/k5_16_interior_Y0275__exall.json`; attributed by *prior tau matched the tree record*; 2 record(s) agree.
 * `k5_16_interior_Y0839` (tree tag `k5_16_interior_G1`) -- direct kill record, **A182** by `forced-first assignment: no admissible meeter assignment at BL(1,0) (notes/assignment.md Theorem ASSIGN; 188 multibox nodes)`; certificate `attempts/A180-forced-first-assignment/results/trees/k5_16_interior_Y0839.json`; attributed by *id occurs in exactly one tree*; 1 record(s) agree.
 * `k5_16_interior_Y0842` (tree tag `k5_16_interior_G1`) -- direct kill record, **A161** by `chord-limited lane [BL(1,0)]`; certificate `attempts/A161-chord-lane/certs/cl_k5_16_interior_Y0842__BL1_0.json`; attributed by *id occurs in exactly one tree*; 1 record(s) agree.
 * `k5_16_interior_Y0941` (tree tag `k5_16_interior_G1`) -- direct kill record, **A136** by `A120 composition (YES local cert + all NO children)`; certificate `attempts/A163-s02-other-frames/certs/S02_k5_16_A163chain_BOTH_base_r0.20_h10.00_nof0_+00.00.tcert.json.gz`; attributed by *applies_to_tags (A137 fold137)*; 4 record(s) agree.
 * `k5_11_interior_Y0147` (tree tag `k5_11_interior_G1`) -- direct kill record, **A190** by `guard-line clause v5 [h=2.9078, h=2.8852; tau 4.8775 < 5]`; certificate `attempts/A190-guardline-clause/certs/k5_11_interior_Y0147.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
 * `k5_16_interior_Y0230` (tree tag `k5_16_interior_G1`) -- direct kill record, **A190** by `guard-line clause v5 [-; tau 4.7500 < 5]`; certificate `attempts/A190-guardline-clause/certs/k5_16_interior_Y0230.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
-* `c0_Y0258` (tree tag `trump5_j0`) -- direct kill record, **A198** by `fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_c0_Y0258.json`; attributed by *single-tree camp*; 1 record(s) agree.
 * `c0_Y0939` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0939__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 * `c0_Y0942` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0942__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 * `c0_Y0959` (tree tag `trump5_j0`) -- direct kill record, **A190** by `guard-line clause v5 [h=2.9078; tau 4.8896 < 5]`; certificate `attempts/A190-guardline-clause/certs/c0_Y0959.json`; attributed by *single-tree camp*; 1 record(s) agree.
 * `c0_Y1038` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y1038__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 * `c0_Y0952` (tree tag `trump5_j0`) -- direct kill record, **A190** by `guard-line clause v5 [h=2.9078; tau 4.8896 < 5]`; certificate `attempts/A190-guardline-clause/certs/c0_Y0952.json`; attributed by *single-tree camp*; 1 record(s) agree.
-* `c0_Y0257` (tree tag `trump5_j0`) -- direct kill record, **A198** by `fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_c0_Y0257.json`; attributed by *single-tree camp*; 1 record(s) agree.
 * `c0_Y0076` (tree tag `trump5_j0`) -- direct kill record, **A198** by `fastprop: A1/FC at BL(0,2): no free cell can hold a meeter (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_c0_Y0076.json`; attributed by *single-tree camp*; 1 record(s) agree.
-* `c0_Y0169` (tree tag `trump5_j0`) -- direct kill record, **A198** by `fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_c0_Y0169.json`; attributed by *single-tree camp*; 1 record(s) agree.
-* `c0_Y0171` (tree tag `trump5_j0`) -- direct kill record, **A198** by `fastprop: pair test (geo178b, nsub 8 / refine 4) at BL(0,2): one free meeter impossible (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_c0_Y0171.json`; attributed by *single-tree camp*; 1 record(s) agree.
 * `c0_Y0175` (tree tag `trump5_j0`) -- direct kill record, **A190** by `guard-line clause v5 [v=0.9929, v=0.9693; tau 4.8773 < 5]`; certificate `attempts/A190-guardline-clause/certs/c0_Y0175.json`; attributed by *single-tree camp*; 1 record(s) agree.
 
 **Review-sheet flag.** 1 page(s) in `review_a57v4.csv` carry `eta < 0` (that is `tau < budget`, a kill) while the review sheet's `verdict` column says `ALIVE-at-LP`: `k5_16_interior_Y0083` (tau 4.500000000, budget 5, eta -5.000e-01, now **DEAD**).  The `verdict` column is stale for these; the status above is taken from the campaign records, not from that column.
@@ -210,7 +205,7 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 | `A182 assign182.jsonl` | 2 | 2 |
 | `A189 noroom189.jsonl` | 6 | 0 |
 | `A190 run190.jsonl` | 18 | 18 |
-| `A198 fastprop198.jsonl` | 7 | 7 |
+| `A198 fastprop198.jsonl` | 2 | 2 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
@@ -233,7 +228,7 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 
 ### Records REFUSED -- tree tag unresolved (A137 §C.3)
 
-117 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **112 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **5 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
+116 record(s) name an id that exists in more than one tree and carry neither an `applies_to_tags` field nor a prior `tau` to match, so the tree they belong to cannot be read off them.  **113 of them are redundant** -- the same id is killed with an explicit tag by another record -- and **3 leave a node unattributed**.  A refusal never kills a page: the certificate is correct for the node it names, but this script will not guess which tree that is.
 
 | source | id | leaf | why refused | redundant? |
 |---|---|---|---|---|
@@ -320,8 +315,7 @@ Of the 71 gallery pages the PI reviews, **50 are still ALIVE and 21 are now DEAD
 | `A167 pass_s0.jsonl` | `k5_16_interior_Y0635` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
 | `A167 pass_s0.jsonl` | `k5_16_interior_Y0281` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
 | `A167 pass_s1.jsonl` | `k5_16_interior_Y0635` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
-| `A167 pass_s1.jsonl` | `k5_16_interior_Y0191` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
-| `A198 fastprop198.jsonl` | `k5_16_interior_Y0191` | fastprop: EmptyBox(H) at round1 (Theorem FC + Lemma A1 cells + exact reach + chord rows) | AMBIGUOUS id over 2 trees, no tag and no prior tau | **no -- unattributed** |
+| `A167 pass_s1.jsonl` | `k5_16_interior_Y0191` | conditional chord-limited lane [BL(1,0)] | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_16_interior_G1, k5_16_interior_L1` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D03_D05` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D07_D00` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
 | `clipkill certs (attempts/*/certs/**)` | `k5_11_interior_Y0036_D07_D01` | T5''' pin-clip kill certificate (pin-clip-kill-certificate-v1) | AMBIGUOUS id over 2 trees, no tag and no prior tau | yes -- also killed at `k5_11_interior_G1_D2, k5_11_interior_G1_D2_D2` |
