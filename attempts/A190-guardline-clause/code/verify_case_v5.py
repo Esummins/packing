@@ -119,6 +119,10 @@ class VerifierV5(v3.VerifierV3):
         if LI >= self.NEED0:
             self.n_line_only += 1
             return True, None, None
+        if kmass + LI >= self.NEED0:
+            # the atoms already certified for a parent box plus the (larger) line mass of this sub-box suffice;
+            # the frozen loop compares with NEED only after adding a NEW atom, so this case is decided here
+            return True, None, None
         self.NEED, self.fneed = self.NEED0 - LI, self.fneed0 - float(Lm)
         try:
             return super().covered(T0, T1, X0, X1, Y0, Y1, known, kmass)
