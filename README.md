@@ -1,5 +1,26 @@
 # Square-packing lab: the n = 11 case
 
+> ## Start here — 2026-09-10
+>
+> * **[`writeup/`](writeup/) — the six write-up documents.** Begin with
+>   **[`writeup/01_summary.md`](writeup/01_summary.md)**, the two-page brief.
+> * **[`writeup/05_status_sheet.md`](writeup/05_status_sheet.md) — the canonical status table**, pinned to a
+>   commit: every result and every unfinished family, with the verifier sha behind each certificate and the
+>   concrete Lean theorem behind each `[L]`. **Nothing else in this repository may state a status that
+>   disagrees with that file.**
+> * **[`writeup/06_compute_plan.md`](writeup/06_compute_plan.md) — the capped compute plan**: reconciled
+>   components, the $300–500 calibration pilot, stop conditions, and the exit criteria for "only compute
+>   remains".
+>
+> **Current headline, in one line:** `3.82 ≤ s(11) ≤ 3.877084`, the lower bound unconditional and Lean-checked
+> end to end; the complete optimality-and-uniqueness theorem is **not** proved and is **not** merely waiting on
+> compute — three Lean obligations are open, two classes are theory-limited with no priced route, and no k0
+> cell is closed. See the status sheet before quoting anything.
+>
+> Everything below and in `LOG.md`, `attempts/` and `docs/` is the working record, kept accessible behind this
+> pointer. Historical documents are not retro-edited; where one disagrees with the status sheet, the status
+> sheet is right.
+
 **Problem.** Let s(n) be the side of the smallest square that contains n non-overlapping unit
 squares (rotations allowed). Determine s(11).
 
