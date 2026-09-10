@@ -8087,3 +8087,22 @@ halves of the answer come from opposite findings.
   A180 (interrupted, resumed as A182), A182.
 - **Push blocked:** A176's `0a369850` (10 commits back) holds `attempts/A168-cascade-fable/results/tree_l1_104.json`
   at 793.6 MB > GitHub's 100 MB limit; every push from this box is rejected until that commit is rewritten by its owner.
+
+## 2026-09-09 ~20:40 — A187-basin-map (Opus engineer) — done-negative
+- **The PI's question:** "is it possible to just turn the entire solution set into a basin?" — every alive node dying
+  by containment in a certified local certificate instead of by measure.
+- **Answer: not with the basins that exist.** Measured all **63 ALIVE gallery pages** (52 `a57v4` + 11 `k0v4`) against
+  every certified basin on disk — S02 in `k5_11` (57 box sets, A119+A160), `k5_16` (52, A163), `trump5` (42, A163);
+  S07 in `trump5` (2, A119); S33 in `k6_07` (6, A125); S38 in `k6_21` (1, A125).
+- **[M] 7 of 63 (11 %)** minimise to a configuration with a certified basin **in their own class frame**;
+  **7 of 63** pass the A116/A151/A160/A163 consumer test (all inside S02's basin, all `k5_11`/`k5_16`, only three of
+  them S02 pages). **8 of 63** have their conditioned box inside a certified basin box, **32 of 63 (51 %)** within a
+  2× growth — but usually against the *wrong* minimiser's basin.
+- **[F] The cluster ranking is S01 23 pages (no basin anywhere), S03 11 (none), `none` 6, S02 6.** One certificate for
+  S01 would more than treble the basin-covered residue; growing S02 to its wall cap would add almost nothing.
+- **[F] The 11 `k0_00` cells cannot be tested at all** — no class pins, so no `CLASS_PINS`-form certificate applies;
+  their six K-family minimisers have no basin. They and the other 45 orphan pages are the **drain-census** population.
+- **[S]** Box containment is necessary, not sufficient: N wants a square in *each* box, a page conditions *one*.
+- Control: `k5_16_interior_Y1110` reproduces A163's consumer slack 0.01311 exactly.
+- Files: `attempts/A187-basin-map/{BRIEF.md,code/basin187.py,code/report187.py,results/basin_map187.json,notes/basin_map.md}`,
+  `docs/residue_map/basin_map.svg`, `docs/residue_ledger.md` §3, registry row A187.

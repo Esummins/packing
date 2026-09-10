@@ -316,6 +316,37 @@ on 54/54 cover nodes; parametric route carries to protected classes; the resiste
 Everything that kills S01/S02 in A57 kills the same families here. Generalises as: *the class containing the optimum
 needs a basin certificate; every other class needs only crowd rows and a tree.*
 
+![the basin containment map of the alive residue](residue_map/basin_map.svg)
+
+**[M] A187 (2026-09-09) — the basin containment map: the residue is NOT basin-shaped, and the missing minimisers are
+S01 and S03, not S02.** The PI asked whether the whole solution set can be turned into a basin — every alive node dying
+by containment in a certified local certificate instead of by measure. A187 measured all **63 ALIVE gallery pages**
+(52 `a57v4` + 11 `k0v4`, `docs/shadows/STATUS.md`) against **every certified basin that exists**: S02 in `k5_11` (57 box
+sets, A119 + A160), `k5_16` (52, A163) and `trump5` (42, A163); S07 in `trump5` (2, A119); S33 in `k6_07` (6, A125);
+S38 in `k6_21` (1, A125) — `attempts/A187-basin-map/{results/basin_map187.json, notes/basin_map.md}`. **[M] Only 7 of
+the 63 pages (11 %) minimise to a configuration that has a certified basin in their own class frame** — six S02 pages
+and one S07 page — and **7 of 63 (the same 11 %, a different 7)** pass the A116/A151/A160/A163 consumer test, i.e. have
+their A107 representative configuration inside a certified N; all seven of those are `k5_11` / `k5_16` pages inside the
+S02 basin, and only three of them are S02 pages themselves (`k5_16` Y0054 / Y0380 / Y1110 — Y1110 reproduces A163's
+consumer slack 0.01311 exactly, the attempt's control). **[M] 8 of 63 pages have their conditioned box inside a
+certified basin box and 32 of 63 (51 %) are within a 2× growth of one**, but that fit is usually against the *wrong*
+minimiser's basin: it is a coincidence of position, not of family. **[F] The ranked cluster is S01 (23 pages, s\* = 4.0,
+no basin anywhere), S03 (11, 3.942809, no basin), `none` (6 — no A107 family at all), then S02 (6, the only family whose
+basin exists in every frame its pages live in).** **[F] The whole `k0_00` lane (11 pages) cannot be tested at all: it has
+no class pins, so no local certificate of the `CLASS_PINS` form applies, and its six K-family minimisers (K01 ×3, K03,
+K04, K05, K06, K20) have no basin.** **[F] S38 does have a basin — in `k6_21` — while its one alive page is `trump5`:
+A163's frame problem again, one family further out.** **[S] The caveat that decides the route: a certified N asks for a
+square in EACH of its boxes, while an alive page conditions ONE (62 of 63 pages have exactly one conditioned box), so
+box containment is *necessary* for the LocalCompose YES leaf to cover a page, never sufficient — the other boxes are
+what the NO children (A120/A136) still have to supply. **The answer to the PI's question is therefore: not with the
+basins that exist.** Turning the residue into a union of basins needs (i) a local certificate for **S01** — one family
+would cover 23 of the 63 pages, more than trebling the basin-covered residue — and then **S03** (11 more); (ii)
+re-framing S38 into `trump5` and S33 into the frames its pages live in, the cheap A163-style move; (iii) growth of the
+S02 basin by a **median 1.28× in `k5_11`, 1.21× in `trump5` and 3.09× in `k5_16`** (max 4.19×) to swallow the pages
+already nearest it — A151/A160 report every refusal at the current radii as a WALL CAP, compute-limited rather than
+geometry-limited, so this is a compute question, not a theorem question. The 56 pages with no basin for their own
+minimiser, and above all the 11 `k0_00` cells, are the **drain-census** route's population, not the basin route's.
+
 ---
 
 ## 4. k0_00 — the frame residue
