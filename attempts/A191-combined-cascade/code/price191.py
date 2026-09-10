@@ -50,29 +50,33 @@ def s3_numbers():
                 clip=st.mean(r.get("clip_s") or 0 for r in R), geo=st.mean(r.get("geo_s") or 0 for r in lp) if lp else 0,
                 v1=st.mean(r["v1"]["lp_s"] for r in lp) if lp else 0, win=st.mean(r.get("lp_s") or 0 for r in lp) if lp else 0,
                 cert=st.mean((r.get("cert_s") or 0) + (r["v1"].get("cert_s") or 0) for r in lp) if lp else 0,
-                wall=st.mean(r["wall_s"] for r in R), wall_max=max(r["wall_s"] for r in R))
+                wall=st.mean(r["wall_s"] for r in R), wall_max=max(r["wall_s"] for r in R),
+                wall_lp=(st.mean(r["wall_s"] for r in lp) if lp else 250.0), dead_lp_frac=((len(dead_lp) / len(lp)) if lp else None))
 
 
-def price(s2, s3, kappa_deep, phi_first=112.0, phi_partner=56.0, n_s2=64, layers=("S2", "S3", "S4", "S5", "S6", "S7", "S8")):
-    """returns rows [(layer, N_k, c_k, kappa_k, cost_h)] and the total."""
+N_S3 = 5432          # [M] A168-ALIVE S3 children of the 47 S2 survivors (8,460 children, 3,028 already dead by A168's clip; s3_boxes_*.json)
+
+
+def price(s2, s3, kappa_deep, phi_first=112.0, phi_partner=56.0, n_s2=64, layers=("S2", "S3", "S4", "S5", "S6", "S7", "S8"), kappa3=None):
+    """rows [(layer, N_k, c_k, kappa_k, cost_h)] and the total.  S2 and S3 measured / sampled; S4..S8 at kappa_deep."""
     c2 = s2["wall"]
     k2 = s2["dead"] / s2["n"]
-    c3 = (s3["wall"] if s3 else 250.0)
-    k3 = ((s3["dead_geo"] + s3["dead_lp"]) / s3["n"]) if s3 else kappa_deep
-    rows, N, tot = [], float(n_s2), 0.0
+    c3 = (s3["wall_lp"] if s3 else 250.0)
+    k3 = kappa3 if kappa3 is not None else (((s3["dead_geo"] + s3["dead_lp"]) / s3["n"]) if s3 else kappa_deep)
+    rows, tot = [], 0.0
+    N = float(n_s2)
     for L in layers:
         if L == "S2":
             c, k = c2, k2
         elif L == "S3":
-            c, k = c3, k3
+            c, k, N = c3, k3, float(N_S3)
         else:
             c, k = c3, kappa_deep
         cost = N * c / 3600.0
         rows.append((L, N, c, k, cost))
         tot += cost
-        phi = phi_first if L in ("S2", "S4", "S6") else phi_partner       # S3 = B (first BR), S4 = B' (partner), S5 = T1 ...
-        # the children of layer L's survivors form layer L+1; S2's survivors fan out to S3 with phi_first
-        N = N * (1.0 - k) * (phi_first if L in ("S2", "S4", "S6") else phi_partner)
+        if L != "S2":
+            N = N * (1.0 - k) * (phi_first if L in ("S4", "S6") else phi_partner)
     return rows, tot
 
 
@@ -99,11 +103,14 @@ def main():
                    s3["n"], s3["dead_geo"], s3["dead_lp"], s3["cand"], s3["clip"], s3["geo"], s3["v1"], s3["win"], s3["cert"], s3["wall"], s3["wall_max"]))
     blocks = []
     k3 = ((s3["dead_geo"] + s3["dead_lp"]) / s3["n"]) if s3 else None
+    k3 = ((s3["dead_geo"] + s3["dead_lp"]) / s3["n"]) if s3 else None
     scen = [("deep kill rate = the S3 sample's (%s)" % ("%.2f" % k3 if k3 is not None else "not yet measured; 0.27 = S2's"), k3 if k3 is not None else 0.27),
-            ("deep kill rate 0.90 (what closure at S8 needs)", 0.90), ("deep kill rate 0.99", 0.99)]
+            ("deep kill rate 0.90", 0.90), ("deep kill rate 0.99", 0.99), ("deep kill rate 1.00 (the S3 layer closes the cell)", 1.0)]
     for name, kd in scen:
         rows, tot = price(s2, s3, kd)
         blocks.append("**Scenario: %s; fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**\n\n%s" % (name, fmt_rows(rows, tot)))
+    blocks.append("**S2 continuation (not in the rows):** the %d unconverged S2 kill candidates at a 900 s cap = %.1f CPU-h; if they die, the S3 "
+                  "layer shrinks by their %d children (3,420 in A168's tree under the 19)." % (s2["cand"], s2["cand"] * 900 / 3600.0, 3420))
     blocks.append("**Eleven cells:** multiply the per-cell total by <= 11 (l1_104 is the largest S1 layer of the eleven; the canary "
                   "l1_153 has 1 alive S2 node against 64, so the true multiplier is well below 11).  The S2 layer alone, all eleven "
                   "cells at l1_104's size: %.0f CPU-h = %.0f instance-hours." % (11 * s2["total_h"], 11 * s2["total_h"] / 16))
