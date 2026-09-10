@@ -6,7 +6,8 @@ project's `lakeb.py` wrapper with no `sorry`, and `#print axioms` (`scratch/A192
 none of the project's existing axioms (`sat_selection`, the `native_decide` replays) is used.
 Build logs: `logs/build_legs1.log` (Windows, NoRoom; 80 s), `logs/build_legs2.log` (WindowsCheck,
 GuardLine, ForcedCorners; 20 s), `logs/build_core2.log` (WindowsCore; 20 s), `logs/build_round2.log`
-(WindowsRound; 17 s), `logs/build_S33T_2.log` (LocalCertS33T; 3 800 s).
+(WindowsRound; 17 s), `logs/build_fc2.log` (ForcedCorners with Step 2; 20 s), `logs/build_S33T_2.log`
+(LocalCertS33T; 3 800 s).
 
 ## 1. The WINDOWS clause (`boxed_windows.md` Theorem W; A185 `verify_case_v4.py`) — [L] end to end
 
@@ -74,5 +75,6 @@ two `native_decide` axioms + `check_3_82`'s through `lb_382`).
 | theorem | file | status |
 |---|---|---|
 | `slot_crowd_key`, `slot_crowd` | `ForcedCorners.lean` | [L] **Lemma SLOT-CROWD = Theorem FC Step 1** at side `m`: packing with the pins of `S` (assignment `f`), unclipped cell `p ∉ S`, a non-pin square, the monotone kill of `insert p S` at `m` ⇒ two distinct non-pin squares meet `int B_p(m)` — by `Selection.teleport_packing` |
-| Theorem FC Step 2 (transfer to the dilate with the widened box `B_p⁺`), Corollaries FC-corner / FC-slot / FC-count | — | [C]; FC-corner is `Sideband.distinct_cells` once the two meeters are placed in the quadrant |
+| `mem_interior_scaleC_iff`, `abs_le_inv_sqrt_two`, `fc_transfer` | `ForcedCorners.lean` | [L] **Theorem FC Step 2**, bottom-left corner frame: an interior point of `q` in the open slot box `(i, i+1) × (j, j+1)` transfers under `scaleC λ` (`1 ≤ λ ≤ λ_max`) to an interior point of the dilate inside the widened box `(i, i + 1 + π_i) × (j, j + 1 + π_j)`, `π_i = (λ_max − 1)(i + 1 + 1/√2)`; lower bounds for `i, j ≥ 1` |
+| Theorem FC in the other three corner frames (D4 transport of Step 2), Corollaries FC-corner / FC-slot / FC-count | — | [C]; FC-corner is `Sideband.distinct_cells` once the two meeters are placed in the quadrant |
 | `interior_meets_of_centre_mem`, `pocket_bound`, `noroom_dead` | `NoRoom.lean` | [L] **A189 Lemma 1** (pocket counting bound): centres of the `M` free squares covered by pockets, lanes summing `< M` ⇒ `False`; the lane cover's own soundness and the residue cover are the certificate's data (hypotheses) |

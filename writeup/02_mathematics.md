@@ -1215,8 +1215,8 @@ obligation [P].
    four-quadrant case split — unchanged by A192), Lemma TC's separating-axis step, the exact w-range
    enclosure in `LocalCertT2`, `PolycoreExemptSound` (the v3 exemption clause), the guard-line clause's
    CHECKER half (`minchord_of_box`, the distinctness checkers; LINE-1 and Theorem G are [L], A192),
-   Leaf WASTE's Lipschitz-raster soundness W3, the multi-box invariant's certificates, Theorem FC's Step 2
-   (the dilation transfer to the widened box; Step 1 = SLOT-CROWD is [L]).  Closed by A192 (all
+   Leaf WASTE's Lipschitz-raster soundness W3, the multi-box invariant's certificates, Theorem FC's Step 2 in the
+   three reflected corner frames (the D4 transport; Step 1 = SLOT-CROWD and Step 2 at the BL corner are [L]).  Closed by A192 (all
    `[propext, Classical.choice, Quot.sound]`, no `sorry`): the WINDOWS clause of A185's v4 verifier end
    to end (`checkWindowsI_kill_of_check`: checker PASS ⇒ no strict family satisfies the node hypothesis,
    (V3) included), the no-room leaf's Lemma 1 (`noroom_dead`), SLOT-CROWD (`slot_crowd`).
@@ -1332,7 +1332,7 @@ the review sheet, and the leaf-from-reading pipeline — because it does not dep
 | `count_core`, `windowed_counted`, `windowed_dead`, `windowed_no_family`, `massIn_finset_sum_le` (Theorem W, set level); `checkWindowsI`, `checkWindowsI_facts`, `goC_box_price`, `inBox_root`, `mem_otherCores`, `checkWindowsI_kill` (the v4 checker and its soundness); `coreCorners`, `coreSet_sub_of_corners`, `checkCoreInBox`, `checkCoreInBox_sound`, `checkWindowsI_kill_of_check` ((V3) decided); `windowBox`, `inBox_of_windowBox`, `winSet_of_pieces` (rational pieces → integer boxes) | `Windows.lean`; `WindowsCheck.lean`; `WindowsCore.lean`; `WindowsRound.lean` (A192) | — |
 | `chord_sum_le_side` (LINE-1 on strict families), `guarded_dead` (Theorem G, set level); `minchord_of_box`, the distinctness checkers | `GuardLine.lean` (A192) | — ; [P] for the checker half |
 | `interior_meets_of_centre_mem`, `pocket_bound`, `noroom_dead` (A189's no-room Lemma 1) | `NoRoom.lean` (A192) | — |
-| `slot_crowd_key`, `slot_crowd` (Lemma SLOT-CROWD = Theorem FC Step 1, by teleport) | `ForcedCorners.lean` (A192) | — |
+| `slot_crowd_key`, `slot_crowd` (Lemma SLOT-CROWD = Theorem FC Step 1, by teleport); `mem_interior_scaleC_iff`, `fc_transfer` (Theorem FC Step 2, BL corner frame) | `ForcedCorners.lean` (A192) | — |
 
 ## Appendix B. Figures (`writeup/figures/`)
 
