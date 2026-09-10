@@ -57,6 +57,12 @@ def load_side(cell, tag=TAG):
                 d = json.loads(ln)
             except Exception:                                    # noqa: BLE001
                 continue
+            # A183: files are read in NAME order, not time order -- a SKIPPED(cap ...) marker left in
+            # another shard file must never override a real record (l1_153 root/D25/S=H: ALIVE at 8/3
+            # in s0of1, a stale A181 marker in s0of2)
+            q = recs.get(d["node"])
+            if q is not None and d["verdict"].startswith("SKIPPED") and not q["verdict"].startswith("SKIPPED"):
+                continue
             recs[d["node"]] = d
     return recs
 
