@@ -1,9 +1,31 @@
 # Eleven squares in a square: the result, the method, and who did what
 
-*Living document, edited in place. Status as of 2026-09-10 (night). Tags, used uniformly across the writeup: [T]
-proved in the notes, [L] checked in Lean, [C] backed by a machine-checkable certificate under the named verifier,
-[P] pending computation (a priced route exists), [O] an open proof obligation (specified, not yet proved),
-[S] supported but not proved. Attempt notes older than this document sometimes use [C] for "open"; here it never does.*
+> **Start here — 2026-09-10, commit `7d21d1df`.**
+> The one canonical table of what is proved, checked and open is **[`05_status_sheet.md`](05_status_sheet.md)**.
+> The capped compute plan, with its rates, its pilot and its stop conditions, is
+> **[`06_compute_plan.md`](06_compute_plan.md)**.
+> This page is the two-page brief. It does **not** claim a complete optimality-and-uniqueness proof is ready
+> except for purchasable compute; three Lean obligations are open, two classes are theory-limited with no priced
+> route, and no k0 cell is closed.
+
+*Living document, edited in place. Status as of 2026-09-10 (night).*
+
+**Tag legend — identical in every writeup document, and in `05_status_sheet.md`.**
+
+| tag | meaning |
+|---|---|
+| **[T]** | proved in prose, in a named `docs/proofs/*.md` note; not formalised |
+| **[L]** | Lean-checked, no `sorry`; where `native_decide` is used the axiom roster says so |
+| **[C]** | certificate-backed **under a named verifier and its sha** — a `[C]` that does not name its verifier is not a `[C]` |
+| **[P]** | pending computation; a **priced** route exists, and the price is in `docs/budget.md` |
+| **[O]** | **open proof obligation** — specified, not proved; no priced route until it lands |
+| **[M]** | measured (a number from a run, with the run cited) |
+| **[S]** | supported by evidence, not proved |
+
+*The verifiers `[C]` can name: **frozen v1** `attempts/A57-shadow-trees/code/verify_case.py` sha `521cb01fe656`;
+**measure** `certs/verify_measure.py` sha `2a735939d67f`; **v3** (polygon cores) `f578a8c9346c`; **v4** (windows
+clause) `b36acb012f42`; **v5** (guard-line clause, post-fix) `f93958cca421`. Attempt notes older than 2026-09-09
+sometimes use [C] for "open"; here it never does.*
 
 ## The question
 
@@ -20,19 +42,59 @@ certificate a computer can verify independently.
   is the exhibited packing. The remaining question is the window between them.
 - **The window scoreboard is full; the classes are not all closed.** The problem splits into classes by how
   many squares sit "simply" in a corner slot of the box. The designated window scoreboard stands at 52 of 52
-  rows certified by the frozen verifier [C], and the neighbourhoods of two exact local minima, S07 and S02, have
-  Lean-checked closures [L]. What remains open, by family: the two A57 window trees (k5_11, k5_16) [P]; the trump5
-  residual [P]; fourteen protected classes [P]; corners4 and k4_05, which have no priced route yet [O]; and k0,
-  the family with no simple corner-slot square at all. For k0 the reduction to "every corner met by two squares"
-  rests on the K0-O1 transfer, not on the definition. Its diagnostic residue is eleven converged-alive cells;
-  the exhaustive frontier behind them also carries unresolved certificate candidates (A115's pool of 128 in
-  166 open records), and the gallery is a review interface, not the covering manifest.
+  rows certified by the frozen verifier [C] (`521cb01fe656`), and the neighbourhoods of three exact local minima —
+  S07, S02 and now S33 — have Lean-checked closures [L]. What remains open, by family: the two A57 window trees
+  (k5_11, k5_16) [P, ≈ 1,800 CPU-h]; the trump5 residual [P]; **fourteen** protected classes [P, ≈ 3,800 CPU-h];
+  **corners4 and k4_05, theory-limited with no priced route** [O]; and k0, the family with no simple corner-slot
+  square at all. For k0 the reduction to "every corner met by two squares" rests on the K0-O1 transfer, not on
+  the definition. Its diagnostic residue is eleven converged-alive cells; the exhaustive frontier behind them
+  also carries unresolved certificate candidates (A115's pool of 128 in 166 open records), and the gallery is a
+  **review interface** — 71 pages, 56 alive, a 3.8 % sample of 1,693 alive records — **not the covering manifest**.
 - **The complete theorem is conditional.** The top-level Lean statement still names three obligations:
-  the stratum kills per class, the Trump residual, and the exact structure of the minimiser. The composition
-  route refines them; it does not discharge them.
-- **No whole k0 gallery cell has been closed by the new cascade.** Earlier attempts record root-cell kills
-  (A115: 22) and conditional lane kills (A141); the cascade built this week has killed nodes inside l1_104 but
-  not the cell. A closed cell would be a pilot with a measured price, not a theorem that the rest is compute.
+  `stratum_kill` (the stratum kills per class), `trump_residual` (the Trump residual), and `a22_exact_structure`
+  (the exact structure of the minimiser). The composition route refines them; it does not discharge them.
+  Twelve other named axioms have been discharged; `sat_selection` is a theorem since A126.
+
+### Last night's numbers (2026-09-09/10)
+
+- **The first k0 node kills under the frozen chain [M].** A191 ran the combined cascade leaf on `l1_104`:
+  **17 of its 64 alive S2 nodes** die by the exact-core LP at budget 8 (τ = 7.000 < 8) and **23 S3 nodes**
+  (10 fine, 13 coarse) die the same way — all 40 **PASS the frozen v1 `521cb01fe656`**, conditional on K0-O1 as
+  every cascade kill is. 19 further S2 nodes are unconverged **kill candidates**, and candidates are not
+  certificates. **No cell is closed**, and no whole k0 gallery cell has ever been closed by this cascade. Earlier
+  attempts record root-cell kills (A115: 22) and conditional lane kills (A141). A closed cell would be a pilot
+  with a measured price, **not** a theorem that the rest is compute.
+- **The S3 price [M].** `l1_104`'s S2 layer costs 305 s per node (5.4 CPU-h for the layer); its S3 layer is
+  **5,432 nodes at 239 s = 360.5 CPU-h = 23 instance-hours at 16 vCPU**. Below S3 nothing is measured, and the
+  whole per-cell price turns on that: **1,375 CPU-h** if the S3 layer closes the cell, **4,245** at a deep kill
+  rate of 0.99, **359,647** at the 0.95 the S3 sample itself measured. Eleven cells is an *upper* envelope — the
+  canary `l1_153` has one alive S2 node against `l1_104`'s 64. Measuring the S4 rate is the single highest-value
+  experiment in the project, and it is lane 3 of the pilot in [`06_compute_plan.md`](06_compute_plan.md).
+- **corners4 and k4_05 are theory-limited, with named fixes [M/O].** A193 ran the full k0 toolkit on both.
+  *corners4* (k4_13): at s0 every one of six complete assignments returns the same answer — the geometry
+  localises the meeters (hulls of area 0.1–0.7, cores on three of five), the no-room leaf cannot pocket the
+  centre block (residue 5.90), no guard line is ever active, and the LP sits at **τ = 11.000000 exactly with a
+  half-integral support** (14 placements at weight ½; the largest near-disjoint sub-family is 5 of 14, so it is
+  not two near-packings averaged). **The missing object is a pair row**: two distinct meeters of one slot box
+  cannot both be half-present. *k4_05*: two open k5 extensions put Lemma-K1 witness images inside every LP — the
+  root's τ = 6.965 < 7 is not a kill, its certificate fails with 58 holes **at the k5_11 slot pose**, and the
+  re-solve lands at **7.189 > 7**; 0 of 3 s0 leaves certify, all three re-solves reaching or crossing 11. **The
+  missing clause is NoFam semantics for window rows**, which the δ-resister split needs and v4/v5 cannot state.
+  This refutes the working conjecture that the tools which closed the k0 cell would carry to the other classes,
+  and it refutes it for identifiable reasons rather than by running out of time.
+- **The Lean roster grew [L].** A192 closed, with no `sorry` and no new axiom: the **windows clause end to end**
+  (`windowed_dead`, `checkWindowsI_kill_of_check` — no geometric hypothesis left), **Lemma LINE-1 and Theorem G**
+  at set level (the checker half remains [C]), **Theorem FC Steps 1 and 2**, the **no-room lemma**, and the
+  **S33 `LocalDead` kernel** at (0.05, 10°) (`localDead_s33_t`, a 3,800 s `native_decide` build).
+- **A verifier soundness bug was found by external review, reproduced, and fixed.** v5 accepted a declared
+  right-hand side *smaller* than the one it re-derived, which the proved inequality does not license; a
+  four-line certificate then "proved" that one unit square does not fit in a box of side 3.877084. Fix:
+  `f590c4db`, `12f8b9c6` — the declared RHS must equal the derived one exactly. **All six v5 kills replay PASS**,
+  and four certificates (`Y0027`, `Y0230`, `Y0241`, `Y0249`) turned out to carry no guard-line term at all and
+  **PASS the frozen v1**, so they were relabelled into the frozen chain. The adversarial case is committed as
+  `attempts/A190-guardline-clause/tests/repro_v5_false_kill.json`. Related, and found the same way: LINE-1 as
+  written for *interior*-disjoint squares is false (the 2×2 tiling of `[0,2]²` on `y = 1`); Lean states it for
+  strict closed-disjoint families, which is what the certificate bridge supplies.
 
 ## How the proof works, in plain terms
 
@@ -107,6 +169,91 @@ The PI supplies lateral, spatial reasoning that the AI does not generate on its 
 formalisation, the certificate, the test, and the application to every case at once. In this record the leaves
 came from the two halves together, and the leaves are where the kills came from.
 
+## Three episodes, in pictures
+
+*Each figure below is the actual page the loop ran on. For each: what the PI read, what changed or was refuted,
+the exact measured effect, and what is still not closed.*
+
+### 1. "Chords along a line add up" — the guard-line row
+
+![The guard line on k5_11_interior_Y0147 and its four chords](figures/A144_k5_11_interior_Y0147_guardline.svg)
+
+**The original reading.** On the `k5_11_interior_Y0147` page the PI saw a pin, the hypothesis square H and two
+free columns all crossing one horizontal line about 0.99 below the top of the box, and read off that their
+chords along that line already added to more than the box's own side could allow. The node's LP had recorded
+τ = 5.000000 against a budget of 5 — dead level, no kill.
+
+**What it became, and what was refuted.** The reading became **Lemma LINE-1** (the chords of a family of
+squares on any axis-parallel line sum to at most the side) and **Theorem G**, a new row in the certificate
+language, with a verifier clause (A144 → A190 v5). Two things about it were then refuted, both by exact
+argument rather than by opinion: (i) LINE-1 as first written, for *interior*-disjoint squares with closed
+chords, is **false** — the ordinary 2×2 tiling of `[0,2]²` puts four unit chords on the line `y = 1`; the true
+statement is for **strict, closed-disjoint** families, which is what the certificate bridge supplies after
+dilation, and that is the form Lean proves (`chord_sum_le_side`). (ii) The v5 checker accepted a declared
+right-hand side smaller than the one it derived, which lets a certificate claim more than the lemma gives.
+
+**Measured effect [M].** The line at `h = 2.887084` gives four chords; the family line `grid h 6/8` at 2.907813
+gives the identical four. **Six gallery pages died the night the clause landed**, at τ = 4.0000, 4.7500, 4.8773,
+4.8775 and 4.8896 against budget 5. After the soundness fix (`f590c4db`, `12f8b9c6`) **all six replay PASS**,
+and four further certificates turned out to carry no guard-line term at all and PASS the **frozen v1**.
+
+**Remaining limitation.** Theorem G is [L] only at set level. The checker half — `minchord_of_box`,
+`checkBoxesDisjoint`, `checkCornersFar`, `checkCoreOffPiece` — is **[C]**, and the residual Lean obligation is
+exactly `clo l j ≤ chordLen (lines l) (Q (own j))` plus three distinctness facts. The T3 test still enshrines
+the old inequality direction and needs rewriting.
+
+### 2. "Does the polygon grow on the far side of the clip?" — hull versus per-piece cores
+
+![K′ rebuilt from the union hull (before) versus the exact intersection of the per-piece K′ (after)](figures/kprime_pieces_S2.svg)
+
+**The original reading.** The cascade's clipping step reported that the invariant held and that boxes had been
+cut, yet on the drawn page the *core* — the region every pose of a square must contain — was not growing where
+it visibly should have. The PI asked whether the polygon grew on the far side of the clip.
+
+**What it became.** It had not. `multibox.normalise` rebuilt each core from the **union hull** of the surviving
+centre pieces, which throws away exactly the growth that makes a cut propagate to the neighbours. The fix (A172)
+rebuilds the core as the **exact intersection of the per-piece cores**. In the figure the band between the
+dashed outline (the core the clip actually used) and the solid one (the true per-piece intersection) *is* the
+discarded growth; after the fix the dashed line lies on the solid one.
+
+**Measured effect [M].** On the A168 S2 node `BR139/TRH-25`, same settings (nsub 4, refine 3): role **H** kept
+fraction 0.4408 → **0.3584**, core used 0.6580 → **0.7308**, pieces 26 → 22; role **D** kept 0.0882 → **0.0722**,
+core used 0.7401 → **0.7937**, pieces 14 → 12. Role B1, already tight, did not move. Crucially, **kills computed
+on the old fixed point still stand** — the hull core is a subset of the true one — so only ALIVE verdicts were
+ever weakened. The same defect, in a second form (clipping against small inscribed squares instead of the true
+polygon cores), was caught later on another page and fixed in A175; the parent-seeded re-normalisation of A181
+follows from the same principle.
+
+**Remaining limitation.** The fixed point is now per-piece and parent-seeded, but computing it is expensive: the
+per-piece core build was four-fifths of a 570-second wall on one node until the intersection was restricted to
+the host piece. Geometry cost is the reason the cascade runs a coarse pass first, and A184 measured that choice
+(mean S3 cost 41.7 s coarse against 263.9 s fine, for one verdict change in 64 cases) — which supports
+coarse-first but does **not** establish the price of the whole search.
+
+### 3. "I only see ten squares; how does this admit an eleventh?" — the no-room leaf
+
+![The no-room leaf killing c0_Y1033's STEP 34 node by geometry alone](figures/noroom_c0_Y1033.svg)
+
+**The original reading.** On the STEP 34 page of `c0_Y1033` the PI counted the drawn squares, got ten, and asked
+where the eleventh was supposed to go. The search had recorded that node **UNDECIDED**.
+
+**What it became.** A new leaf (A189 Lemma 1) that needs no linear program at all: with ten roles boxed, the
+eleventh unit square must lie in the container with its interior clear of every core; certify that the residue
+is a small pocket, then run an exact lane cover on the pocket. If the lanes sum to less than one square, there
+is nowhere for it to be.
+
+**Measured effect [M].** Ten cores of total area 6.7320; an exact bisection of the eleventh square's
+centre × tilt domain (13 levels, 8 tilt sub-bins) certifies **99.9615 %** of the root volume dead, leaving 2,594
+open pieces — one connected pocket `[3.179, 3.440] × [1.522, 1.903]`. The exact lane cover on that pocket
+returns **LANE = 0** (depth 21, 249 leaves, **2.5 s**). Verdict **DEAD**, with no LP and **no certificate file
+to verify at all**. Five nodes died the same night.
+
+**Remaining limitation.** The bisection alone does not finish: the pocket exists because of a **graze** — the
+core of `F1` reaches y = 1.873 and the core of `H` starts at y = 1.870, three thousandths of a unit that no
+piece representation can pin. That is why the lane cover is needed as a second certificate. And in Lean,
+`noroom_dead` is [L] but the lane cover's own soundness and the residue cover enter as **hypotheses**, i.e. as
+certificate data — closing that is an open obligation, not a proved one.
+
 ## The systems that closed the gap
 
 The PI cannot read certificates or linear programs, and does not write proofs in the usual sense. What the
@@ -124,16 +271,30 @@ proof's geometric leaves came from, and it is the part of this work that is not 
 
 ## What remains, and what "compute-bound" would mean
 
-- Kill l1_104 [P]: the cascade with the polygon clip, the lonely clip and the partner cuts, then linear
-  programs only at the geometric fixed point. A first kill is the evidence the method works on k0.
-- Repeat on the other ten k0 cells and on the remaining alive pages of the other classes [P]; the current
-  price for the expensive class is a few thousand CPU-hours, and every geometric leaf lowers it.
-- Finish the Lean composition [P]: the two remaining local minima, the sideband requirement theorem, and the
-  top-level assembly that turns the class certificates into the theorem.
+- **Close `l1_104` [P].** The cascade with the polygon clip, the lonely clip and the partner cuts, then linear
+  programs only at the geometric fixed point. Forty of its nodes are now dead under the frozen verifier; the
+  cell is not. Closing it would be the first evidence the method finishes on k0 — **a pilot with a measured
+  price, not a proof that everything after it is compute.**
+- **Measure the S4 kill rate [P].** The eleven-cell price ranges over three orders of magnitude on this one
+  unmeasured number (15,125 CPU-h if the S3 layer closes a cell; 3.96 × 10⁶ if the deep layers kill at the rate
+  S3 itself did). No other experiment in the project has that leverage.
+- **Land two clauses [O].** A pair row for two meeters of one slot box (corners4) and NoFam semantics for
+  window rows (k4_05). Until they exist those two classes have **no priced route at all** — they are not slow,
+  they are blocked, and running more compute at them buys nothing.
+- **Finish the Lean composition [P/O].** The remaining local minima, the sideband requirement theorem, the
+  guard-line checker-half bridge, a concrete tree-file → cover check on one complete example, and the top-level
+  assembly that discharges `stratum_kill`, `trump_residual` and `a22_exact_structure`.
 
-When a k0 cell has died by the same machinery that closed the other classes, the remaining work is running
-that machinery, and the claim "the certificates exist for a known amount of compute" becomes a statement
-about a pipeline that has already done the hard case once.
+**What "compute-bound" would require, and does not yet hold.** A sound fixed certificate chain; every
+non-computational proof and transfer obligation discharged or separately committed; an *exhaustive* manifest of
+outstanding work keyed by tree and node identity rather than by page name; independently checked tree
+composition; and a workload estimate calibrated on representative **complete** branches. Those five conditions
+are written out with their current status as E1–E5 of [`06_compute_plan.md`](06_compute_plan.md), and none of
+them is satisfied today. Until they are, the accurate description of this project is: **unconditional certified
+results, a substantial formal-verification infrastructure, and a priced but only partially calibrated campaign
+for the rest** — not a finished proof waiting on a purchase order.
 
-*See `02_mathematics.md` for the lemmas and their composition, and `03_lab_timeline.md` for the full record
-of the interaction.*
+*See [`02_mathematics.md`](02_mathematics.md) for the lemmas and their composition, [`03_lab_timeline.md`](03_lab_timeline.md)
+for the full record of the interaction, [`04_related_work.md`](04_related_work.md) for where this sits among other
+AI-assisted results, [`05_status_sheet.md`](05_status_sheet.md) for the canonical status table, and
+[`06_compute_plan.md`](06_compute_plan.md) for the capped compute plan.*
