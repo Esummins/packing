@@ -135,3 +135,75 @@ still climbing), 0 of 10 lines active, 340–349 s each.** The supports are the 
 TR corner square (3.377, 3.377, 0°) — k5_16's fifth pin — at weight 0.795, the BL column's pin rows, the BL(1,0)
 slot pose (1.52, 0.5, 0°) — k5_11's — at 0.31, and a tilted centre remainder. Whether these are kills is the
 certificate's decision (§3.5): the root's 6.965 looked the same and lost the kill to its witnesses at 7.189.
+
+### 3.4 The certificates (verify_case_v5, depth 56, one witness re-solve; `certs/`) [C-FAIL]
+
+k4_05 leaf 1 (τ 10.766): round 0 total 10.9735 — **FAIL, 22 holes, all in window F1** (1.35 M boxes walked);
+the witness re-solve lifts τ to **10.930** and round 1 fails again with 33 holes (windows F1, F2 and the free
+clause). The pattern of the root repeats one level down: the LP value is a creeping lower bound and the witnesses
+are exactly where the K1 images live. (Leaves 2 and 3: see the certify rows appended below as they land.)
+
+## 4. Verdicts [S], with the numbers of §3
+
+**corners4 (k4_13): THEORY-LIMITED — twice.**
+(i) *On the window* nothing is forced (all eight extensions are k5_16, open), so every hypothesis available is
+"the four pins", and the root LP is alive by K1 (τ 7.195, A65's 7.2545): no leaf of any kind can fire until A57 G1
+closes k5_16 on the window, and even then only the s0-form below transfers.
+(ii) *At s0*, with all eight slots forced (CC4), the toolkit's whole pipeline runs and returns one answer at
+every complete assignment: geometry localises the meeters (hulls of area 0.1–0.7, cores on three of five), the
+no-room leaf cannot pocket the centre block (residue 5.90), no chord row is negative (rhs ≥ s − 2), and the
+windows + guard-line LP sits at **τ = 11.000 exactly with a HALF-INTEGRAL support** — fourteen placements at
+weight 1/2, no two-near-packing decomposition (largest disjoint sub-family 5 of 14). That object satisfies every
+single-square row the certificate language has (atoms, cores, windows, guard lines: 0 of 10 active) — it is the
+fractional-tilted phantom of `corners4_empty.md` §6 ("beyond ALL single-square machinery") surviving inside the
+assignment leaves. **The lemma needed is a two-square row**: a constraint that two DISTINCT meeters of one slot
+box (FC gives two) cannot both be half-present — a pair certificate (A66/A71–A77's line, closed in its hint-tree
+form at r(d) = 0.75–0.86) or a bounded specification that has not been written: the exact MEET clip (clip a role's
+pieces to the bounding box, per tilt sub-bin, of ∩_i (B_i ⊕ −Q_θ) over the slots it is assigned to — sound, convex,
+2.4× smaller for the two four-slot roles of leaf 1; A2-type ℓ∞ separation between the two meeters of one slot is
+already in `forced_corners.md` FC-slot but reaches the LP only as a partner-existence cut, never as a row).
+Measured kill rate under the present toolkit: **0 of 3 LP leaves, 0 of 6 no-room leaves, 0 chord kills, 13 of 318
+option nodes by the pair leaf (option pruning, not branch closure)**; per node 5.0 s geometry, per complete leaf
+≈ 170 s no-room + 340–420 s LP.
+
+**k4_05: THEORY-LIMITED at every hypothesis the toolkit can state on the window, and NOT closing at s0 either.**
+(i) *On the window* three cells are forced (BR(0,1), BR(1,0), TL(1,0): extensions k5_15 / k5_13 / k5_12 FULL) —
+a genuine hypothesis — but the two open extensions k5_11 (BL(1,0)) and k5_16 (TR(0,0)) leave the K1 images
+inside every LP: the root's 6.965 is A55's number and it fails certification with its holes AT the k5_11 pose,
+re-solving to 7.189.
+(ii) *At s0* (five forced cells) the assignment search reaches complete leaves at depth 5 (179 nodes, 6.8 s
+each) and the leaf LPs read 10.766 / 10.857 / 10.778 against 11 — but every one is UNCONVERGED with rows of mass
+0.72 still uncovered, and the first certificate FAILS with all 22 holes in window F1, the re-solve creeping to
+10.930: the same creep-to-budget as the root, one level down. The support is the K1 object (the TR corner pin of
+k5_16 at 0.795, the BL(1,0) pose of k5_11 at 0.31). **The obstruction is Lemma K1 itself, not a missing row: as
+long as k5_11 and k5_16 are LP-alive at the corresponding node, k4_05's node inherits their aliveness** (their
+packings satisfy every hypothesis the anonymous-meeter form can state, because a pin at the slot IS a meeter of
+the slot). The bounded specification that removes it is the δ-resister split: branch each open-extension slot
+into YES (a square within δ of the slot pose and tilt ≤ δ_θ — the slack-pin form of k5_11 / k5_16's nodes, the
+P-list item 7 "slack-pin re-certification") and NO (a NoFam at the slot pose: no square within δ), and run the
+toolkit on the all-NO node, whose LP no longer contains the K1 images. Whether the all-NO node dies is an open
+measurement (not run tonight: the v4/v5 windows clause has no NoFam semantics for window rows — the NoFam would
+have to enter through the free clause only, or the clause be extended; A57's `interior_NO` form is the model).
+
+**So the PI's conjecture — "the tools that worked for the residue class I was fighting today will perform
+comparably on the other classes" — is FALSE for these two, for identifiable reasons:** on c0_Y1033 the class has
+no open superclass (its forced corners are forced on the window, the K1 mass does not exist) and its complete
+assignments have every role cored; here the open k5 superclasses put an integral witness fragment inside every
+LP (k4_05), and corners4's phantom is half-integral where the k0 cell's was integral.
+
+## 5. Routes and prices [S]
+
+* **corners4.** No priced route through the present leaves: every leaf is alive at τ = 11 exactly and the tree
+  does not close by enumeration (6 complete leaves, all alive; branching 3–10 per cell, ≳ 10⁴ leaves). Two
+  bounded items would change that, and both are specifications, not open questions: (a) the MEET clip
+  (one afternoon in `multibox`, sound by convexity; expected effect: cores on all five meeters, no-room pockets
+  below the 0.75 cap — then the A189 leaf can fire at 47 s); (b) a pair row for the two meeters of one slot
+  (A169 Lemma A1: centres ≥ 1/√2 apart in ℓ∞) in the certificate language — a new clause with a Lean obligation.
+  With (a) alone the price is measurable in one night (re-run tonight's 318-node pass: ≈ 0.5 CPU-h of geometry
+  + 3 LPs); without them the class stays as `corners4_empty.md` §6 left it: the pair certificate (τ₂ ∈ [14.8, 21.3]
+  vs 21) or the CC4 case list by hand. The H-box measurement (§3.5) prices the A57-type zone tree below a leaf.
+* **k4_05.** The route is the δ-resister split + the toolkit on the all-NO node, priced by tonight's numbers if
+  the all-NO node's LP kills: 179 nodes × 6.8 s + 3 LPs × 350 s ≈ 0.6 CPU-h per root pass, times the YES/NO
+  product over the two open slots (4 nodes) ≈ **2.5 CPU-h to know**; the YES branches are k5_11 / k5_16's trees
+  with slack pins — the standing [P] of A57 G1 plus item 7 of the P-list, priced there (≈ 1,800 CPU-h for the two
+  A57 classes), not here. If the all-NO node is alive too, k4_05 joins corners4 under the pair-row obstruction.
