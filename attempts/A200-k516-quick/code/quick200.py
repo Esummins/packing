@@ -615,6 +615,9 @@ if __name__ == "__main__":
             break
     if outs[-1]["verdict"] == "ALIVE" and not a.noseal:
         for k, (out, pg) in enumerate(zip(outs, pages)):
+            if pg.pad != "zero":
+                out["chain_done"] = False                        # SEAL is run at pad 0 only (the corner strip is what it removes;
+                continue                                         # at the g1 pad it stayed alive on Y0054 / Y0044 at 300-600 s a corner)
             sl = seal_leaf(pg, a.wall, print)
             out["seal"] = sl
             out["chain_done"] = (k == len(outs) - 1) or (sl is not None and sl["verdict"] == "DEAD")
