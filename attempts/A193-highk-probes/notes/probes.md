@@ -57,3 +57,23 @@ and a chord that reduces the line budgets).** That is exactly A182/A185's mechan
 complete assignments dead under v4), and it is what the probes below test on the two classes.
 
 ## 3. The probes (measured)
+
+### 3.1 The pins-only root LP with guard lines (budget 7, A190's ExactHyp + guardlp, 10 lines: pin midlines / core
+edges, the slot lines x, y ∈ {1, 3/2, 2, s−2, s−3/2, s−1}, the container sixteenths; cap 300 s) [M]
+
+| class | τ | converged | active lines | support | axis-aligned mass | tilted mass | LP s |
+|---|---|---|---|---|---|---|---|
+| corners4 | **7.1952** (> 7) | no | 0 of 10 | 209 placements | 2.36 (at the slot poses: (0.5, 1.65), (3.38, 1.5), (2.38, 0.51), (2.38, 3.38)) | 4.84 (centre block, 28°–58°) | 526 |
+| k4_05 | **6.9648** (< 7) | no | 0 of 10 | 277 placements | 2.05 (0.75 at the TR corner = k5_16's pin; 0.55 within 0.08 of BL(1,0)'s slot pose = k5_11's pin) | 4.92 | 337 |
+
+corners4 reproduces A65's wall (τ(0) = 7.2545 after long column generation; A55's canary 7.200): the root is
+LP-alive, no guard line is active (chords of tilted centre squares on the pin lines are < 1, the lines cost s − 2
+and buy nothing), and the support is the fractional cloud of `corners4_empty.md` §4 — near-axis arm squares at the
+slot poses plus tilted centre squares. **k4_05's 6.965 is the same number A55 measured twice (6.982 at 1,024 s,
+6.973 at 3,885 s, both `FAIL(rc=3)`) and it is NOT a kill [C-FAIL]:** the v5 certificate (total 6.99978, 20,639
+boxes, 9,467 core-exempt) fails with 58 holes at depth 56 — 8 witnesses AT the BL(1,0) slot pose (1.49, 0.50, 0°)
+= k5_11's fifth pin, 40 in the centre block just above it ((1.489, 1.038), 1.3°: a square stacked on the BL column
+at the k5_11 image), 16 in the top arm — and A190's witness re-solve lands at **τ = 7.189 > 7** ("re-solve lost
+the kill", `certs/root_k4_05.*`). That is Lemma K1 measured: the LP's slow creep toward 7 is the k5_11 / k5_16
+images being pushed one row at a time, and the limit is above the budget. Root LPs are useless for both classes,
+guard lines included; anyone re-running A55's k4_05 root and reading 6.97 as a kill candidate should read this line.
