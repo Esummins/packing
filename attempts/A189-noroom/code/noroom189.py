@@ -66,6 +66,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, os.path.join(ROOT, "attempts", "A171-multibox-invariant", "code"))
 import multibox as MB                                              # READ-ONLY (A171/A172)
+# A role carried as a whole meeter window (the F_i hulls of A182's assignment nodes) has an EMPTY
+# K': no point lies in every pose, and A132's polycore.build refuses.  A178's runtime patch installs
+# the sound semantics -- an empty K' clips nothing, the role is still there, everything else is
+# unchanged -- which is exactly what the leaf needs (such a role simply contributes no exclusion).
+sys.path.insert(0, os.path.join(ROOT, "attempts", "A178-gallery-geometry", "code"))
+import mbpatch178                                                  # READ-ONLY (A178); self-installing
 
 SQ2_LO = 0.70710678                                                # < 1/sqrt(2), a sound lower bound
 
@@ -73,7 +79,7 @@ DEFAULT_BUDGET = dict(
     nsub=4, refine=2,                 # normalise
     tsub=8, depth=13, max_pieces=120000,   # bisection (shallow: the depth-20 run exploded)
     grid=0.0625, margin=0.0625, max_pockets=8,
-    lane_depth=48, lane_max_open=100000, lane_deadline=240.0,
+    lane_depth=48, lane_max_open=100000, lane_deadline=240.0, max_pocket_area=0.75,
     total_deadline=1500.0,
 )
 
@@ -191,7 +197,14 @@ def noroom(roles, s0=None, budget=None, name="node", n=11, verbose=False, nd=Non
     if m <= 0:
         return dict(k=k, m=m, verdict="VACUOUS", reason="no free square left", seconds=0.0)
     if nd is None:
-        nd, budget = build_node(roles, s0, budget, name=name, verbose=verbose)
+        try:
+            nd, budget = build_node(roles, s0, budget, name=name, verbose=verbose)
+        except MB.EmptyBox as e:
+            # Not the NO-ROOM leaf: re-normalising the node's own recorded hull already empties a
+            # role's box, so the node's hypothesis is contradictory by A171's pair leaf.  Recorded as
+            # a kill with its own leaf name so it is never miscounted as a NO-ROOM kill.
+            return dict(k=k, m=m, verdict="DEAD", bound=None, leaf="EmptyBox (A171 pair leaf)",
+                        reason=str(e)[:200], seconds=round(time.time() - t0, 1))
     else:
         b = dict(DEFAULT_BUDGET); b.update(budget or {}); budget = b
     s0 = float(nd.s)
@@ -202,6 +215,18 @@ def noroom(roles, s0=None, budget=None, name="node", n=11, verbose=False, nd=Non
                     reason="bisection alone: every pose of a free unit square meets some core",
                     seconds=round(time.time() - t0, 1))
     pk = pockets_of(pieces, s0, budget)
+    area = sum((p[1] - p[0]) * (p[3] - p[2]) for p in pk)
+    if area > budget["max_pocket_area"]:
+        # A cheap, sound early-out: the lane cover cannot return 0 on a pocket that big (a pocket of
+        # area A holds a free centre wherever the bisection could not certify a kill), so spending
+        # the lane budget on it only buys the same UNDECIDED more slowly.  This is a BUDGET decision,
+        # never a verdict.
+        return dict(k=k, m=m, verdict="UNDECIDED", bound=None, bisect=bcert,
+                    pockets=[[round(c, 6) for c in p] for p in pk], lanes=[],
+                    pocket_area=round(area, 4),
+                    reason=("residue too big to pocket: %d pocket(s) of total area %.3f > %.3f "
+                            "(no lane cover attempted)" % (len(pk), area, budget["max_pocket_area"])),
+                    seconds=round(time.time() - t0, 1))
     lanes = []; bound = 0
     for cell in pk:
         if bound is not None and bound >= m:
@@ -330,6 +355,7 @@ def main():
     ap.add_argument("--ncell", type=int, default=6)
     ap.add_argument("--sample", type=int, default=12)
     ap.add_argument("--page", default=None)
+    ap.add_argument("--retry-errors", action="store_true")
     a = ap.parse_args()
     bud = dict(depth=a.depth, lane_deadline=a.lane_deadline, total_deadline=a.total_deadline)
     os.makedirs(a.certdir, exist_ok=True)
@@ -350,7 +376,10 @@ def main():
         if os.path.exists(a.out):
             for ln in open(a.out):
                 try:
-                    done.add(json.loads(ln)["node"])
+                    r0 = json.loads(ln)
+                    if a.retry_errors and r0.get("verdict") == "ERROR":
+                        continue
+                    done.add(r0["node"])
                 except Exception:
                     pass
         print("%d journal nodes, %d already recorded" % (len(todo), len(done)), flush=True)
@@ -418,14 +447,14 @@ def a183_nodes(sample):
                     r = json.loads(ln)
                 except Exception:
                     continue
-                if str(r.get("stage") or r.get("step") or "") not in ("S3", "3", "s3"):
+                if str(r.get("step") or r.get("stage") or "") not in ("S3", "3", "s3"):
                     continue
                 if str(r.get("verdict") or r.get("status") or "").upper().startswith("DEAD"):
                     continue
-                hull = r.get("hull") or r.get("boxes") or r.get("roles_in") or {}
+                hull = r.get("bbox") or r.get("hull") or r.get("boxes") or {}
                 if not hull:
                     continue
-                out.append(dict(cell="l1_104", label=r.get("label") or r.get("name") or "?",
+                out.append(dict(cell="l1_104", label=r.get("node") or r.get("label") or "?",
                                 hull=hull, src=p))
                 if len(out) >= sample:
                     return out
