@@ -54,7 +54,8 @@ def overlay(cert, body, ox, oy, S):
             body.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" stroke="%s" stroke-width="1.6"/>' % (
                 X(h[0]), Y(h[3]), max(1, (h[1] - h[0]) * S), max(1, (h[3] - h[2]) * S), col))
         body.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="%s" stroke-width="2.2"/>' % (X(xa), Y(ya), X(xb), Y(yb), col))
-        lab = "%s %s" % (e["rule"], ("max dist %.3f" % e["maxdist"]) if e["rule"] == "CN" else (("l-inf %.3f" % e["linf_max"]) if e["rule"] == "A1" else "EmptyBox(%s)" % e.get("kill_box")))
+        lab = "%s %s" % (e["rule"], ("max dist %.3f" % e["maxdist"]) if e["rule"] == "CN" else (("l-inf %.3f" % e["linf_max"]) if e["rule"] == "A1"
+                                                                                                 else ("cell pair %s" % e.get("cells") if e.get("level") == "cell" else "option pair: one side empties")))
         body.append(text(X(0.5 * (xa + xb)), Y(0.5 * (ya + yb)) - 4, lab, 7.5, col, True, "middle"))
         n += 1
     return n
@@ -69,8 +70,13 @@ def side(cert, body, x, y):
         while s:
             lines.append((s[:110], 8, col, False)); s = s[110:]
     lines.append(("WHAT THIS IS: the page's node after A200's fast steps (normalise / options / union caps / assignment count) with the count's pairwise test", 8, "#333", False))
-    lines.append(("replaced by the CELL-PAIR TABLE -- (a) Lemma A1, (b) Lemma CN (max Euclidean centre distance of two hulls < 1 => excluded), (c) the exact multibox", 8, "#333", False))
-    lines.append(("pair node (EmptyBox => excluded).  'cell-pair mutual exclusion' is the PI's reading of 2026-09-10.  Undecided cells are grey stipple, never green.", 8, "#333", False))
+    lines.append(("replaced by the CELL-PAIR TABLE -- (a) Lemma A1, (b) Lemma CN (max Euclidean centre distance of two hulls < 1 => excluded), (c) the seeded pair clip", 8, "#333", False))
+    lines.append(("on the two rows' own pieces against each other's K' (a side with no pose left => excluded; cell pair first, then option pair); the count re-runs until", 8, "#333", False))
+    lines.append(("it is infeasible or its cover is VERIFIED pair by pair.  'cell-pair mutual exclusion' is the PI's reading of 2026-09-10.  Undecided cells: grey stipple, never green.", 8, "#333", False))
+    cs = [st for st in (cert.get("steps") or []) if st["step"] == "count"]
+    if cs:
+        lines.append(("count covers refuted: %s; last cover verified pair by pair: %s" % (
+            sum(int(st.get("refutations", 0)) for st in cs), cs[-1].get("cover_verified")), 8, "#000", True))
     steps = cert.get("steps") or []
     lines.append(("STEPS (s): " + " > ".join("%s%s %.1f" % (st["step"], ("[" + str(st.get("label", "")) + "]") if st.get("label") else "", st.get("seconds", 0)) for st in steps), 7.5, "#333", False))
     lines.append(("whole run %.0f s, %d exact tests, %d round(s); lam %s; window pending %s" % (float(cert.get("seconds") or 0), len(cert.get("tests") or []), len(cert.get("rounds") or []), cert.get("lam"), cert.get("window_pending")), 7.5, "#555", False))
