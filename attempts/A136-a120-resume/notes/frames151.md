@@ -209,3 +209,35 @@ driver wrote each of them as `FAIL` with `rc = 0xC000013A` after `0.0 s`.  Nothi
 measured.  Thirteen such rows are quarantined in `results/reemit136_discarded.jsonl`, and
 `reemit136.py` now records `KILLED` and re-runs it — the same rule the lab already applies to a CAP:
 **a resource event is never a verdict.**
+
+## 8. A177 finishes the owed queues: the closure came from the CAPs, not from the entry rule
+
+A177 (`attempts/A177-a163-queues`) ran the three things this attempt left owed and cheap — the base
+worker's last node, the 9 rows of `queue_a163_h10.json` and the 11 remaining rows of
+`queue_a163.json` re-pointed at the widest citeable `N` per node — with A170's exact cores carried
+**inside** the witness-feedback loop (`certify136x.py`) and the widest-`N` rule of §6 made
+computable as `(min tilt width over the free bodies, then log-volume)`.  The result is one closure
+and a clean negative, and the two come from opposite findings of this note.
+
+**`k5_11_interior_Y1140_D06` is CLOSED** (`closures136.jsonl` 29 → 30).  This is the node the base
+worker recorded `OPEN` with children `[ALIVE, CAP-GATE, CAP-GATE, CAP-GATE]` at 14:54:04: `NO0`'s
+certification hit the 2600 s wall and `NO1`–`NO3` were never tested at all because the node
+deadline had passed — four verdicts, zero evidence.  Re-run under a fresh `--out_suffix` (both
+`noside120` caches are keyed by node id and would otherwise have served the CAP-GATE record
+straight back), **all four NO children certify dead under the frozen `verify_case.py`**, `NO0` in
+532 s against the 2600 s the stock-core loop had burned.  §7's rule and the resource-event rule
+between them were worth a whole node here, and §6's entry rule was not involved: the YES leaf is
+A119's ordinary `S02_k5_11_r0.20_rho10`.
+
+**On the k5_16 frame the widest citeable `N` closed nothing, and the survivors are honest.**  All
+15 completed a163 rows came back `OPEN` (11) or `SKIP-UNSOUND` (4).  The `h = 10°` link kills three
+of four children on `Y0054`, `Y0380` and `Y0422` and none on `Y0183`; the 10× wider `a151B` slice
+moves `Y1104` and `Y0854` from zero dead children to one and moves `Y0486`, `Y0570`, `Y0559`,
+`Y0985` not at all; the one node that can cite only a 2.5° window (`Y0871`) dies nowhere, exactly as
+§6 predicted.  Every one of those ALIVE children is a **converged** LP at η = 0, τ = 5 — not a CAP
+and not a cert FAIL — so the barrier on this frame is the **cover**, not the certifier and not the
+choice of entry.  §6's `Y0941` (3 of 4 children, closed) is the exception on this frame, not the
+pattern, and the queue that was supposed to repeat it did not.
+
+`c0_Y1132`'s `A1_pins_match` refusal was tested rather than assumed: it is refused on its
+next-widest citeable set too, so the refusal is a property of the node's pins, not of the entry.

@@ -42,3 +42,33 @@ worker B pid 28952  BelowNormal affinity 0xFFFF  run177.py --entry base --queue 
 The rest queue (11 nodes) and the fallback queue (1 node) are COMPLETE and are not relaunched.
 Same frozen verifiers, same certify136x.py (exact cores in the loop), same PAUSE sentinel
 (attempts/A177-a163-queues/PAUSE).  Resumable: same command line with --skip_done.
+--- A177 2026-09-09 16:55 RE-SHARD ---
+worker B (t1, pid 28952) finished at 16:42:26: k5_11_interior_Y1140_D06 CLOSED (all four NO children
+DEAD-CERT).  Its slot was free and the h10 tail was serial, so worker A (pid 28960) was KILLED with
+its process TREE at 16:54 mid-node (Y0452/NO0's certification, ~13 min in; the LP record for that
+child was already on disk and is cached, so the loss is that one certification's compute).  A kill
+is a RESOURCE EVENT, not a verdict: Y0452 has no terminal record and is simply re-run below.
+Relaunched as TWO DISJOINT SHARDS of the same queue, so no node has two owners and no cache can be
+read while another process is writing it:
+  worker A pid 19880  BelowNormal affinity 0xFFFF  run177.py --entry a163 --queue results/queue177_h10.json
+      --shard 0/2 --out_suffix _a177h10 --skip_done --cpu_cap 12000 --cert_rounds 8 --cert_time 450
+      (indices 0,2,4,6,8 = Y0054 OPEN, Y0183 OPEN [both skipped], Y0452, Y0803, Y0973)
+  worker B pid 29112  BelowNormal affinity 0xFFFF  run177.py --entry a163 --queue results/queue177_h10.json
+      --shard 1/2 --out_suffix _a177h10 --skip_done --cpu_cap 12000 --cert_rounds 8 --cert_time 450
+      (indices 1,3,5,7 = Y0380 OPEN, Y0422 OPEN [both skipped], Y0791, Y0817)
+Box at relaunch: 8 lab pythons (these 2 + A183's three l1_104/l1_153 shards + A182's two gallery
+runs + one certifier child), under today's ceiling of 12.  Pidfile lines are never removed.
+--- A177 2026-09-09 17:20 RELAUNCH 2 (the 16:55 pair died silently) ---
+The 16:55 shard pair (pids 19880 / 29112, started with PowerShell Start-Process) both VANISHED
+between 17:05 and 17:16 having burned ~4 CPU-s each: empty stderr, no Windows Error Reporting
+event, no PAUSE sentinel, no gate line and no "shard done" line -- i.e. an external termination,
+not a verdict and not a crash of theirs.  The likeliest cause is the launching PowerShell shell's
+job object being torn down (both A177 workers launched from PowerShell died; the A183/A182
+processes, launched elsewhere, were untouched).  Relaunched detached from bash with nohup, which
+survives the shell:
+  worker A pid 31112  run177.py --shard 0/2 --out_suffix _a177h10 --skip_done --cpu_cap 11000
+      --cert_rounds 8 --cert_time 450   (Y0452, Y0803, Y0973)   [BelowNormal + 0xFFFF set by run177]
+  worker B pid 32476  run177.py --shard 1/2 --out_suffix _a177h10 --skip_done --cpu_cap 11000
+      --cert_rounds 8 --cert_time 450   (Y0791, Y0817)
+Both verified healthy (80 and 24 CPU-s in the first minutes, LP-rate).  Nothing was recorded for
+the killed pair: a resource event is never a verdict.  Pidfile lines are never removed.

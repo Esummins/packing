@@ -7977,3 +7977,52 @@ pass + ~3,700 s of diagnostics, checking and witness search ≈ 3.3 CPU-h of the
   reemit136.jsonl, reemit136_discarded.jsonl, yesleaf136.json, queue_a163_h10.json, leanfrags/*}`,
   `yesleaf/certs/`, `certs_exact/`, `certs_a163x/`, `notes/frames151.md` §§5–7, `docs/shadows/STATUS.md` +
   `a57v4/killed/k5_16_interior_Y0941.svg`, `docs/residue_ledger.md` §5, registry row.
+
+## 2026-09-09 — A177-a163-queues (Opus engineer) — **29 CLOSED → 30, and the widest citeable N closed nothing**
+
+A136 left three things owed and cheap: its base worker's last node, the 9 un-run rows of
+`queue_a163_h10.json`, and the 18 un-run rows of `queue_a163.json`. This attempt ran all of them under
+A136's own three findings — A170's exact cores carried **inside** the witness-feedback loop, the
+widest-citeable-`N` entry rule for the NO side, and *a resource event is never a verdict* — and the two
+halves of the answer come from opposite findings.
+
+- **One closure, and the entry rule did not earn it: `k5_11_interior_Y1140_D06` is CLOSED**
+  (`results/closures136.jsonl` 29 → 30). A136's base worker had recorded it `OPEN` with children
+  `[ALIVE, CAP-GATE, CAP-GATE, CAP-GATE]` at 14:54:04 — `NO0`'s certification hit the 2600 s wall (a CAP)
+  and `NO1`–`NO3` were never tested at all, the node deadline having passed: four verdicts carrying zero
+  evidence. Re-run under a fresh `--out_suffix` (both `noside120` caches are keyed by node id and would
+  otherwise have served the CAP-GATE record straight back) with exact cores in the loop, **all four NO
+  children certify dead** under the frozen `verify_case.py` (sha `521cb01f…`) with ZONE ⊆ BOX on the
+  written rationals and `per_box_soundness ok` — `NO0` in **532 s** where the stock-core loop had burned
+  **2600 s** and CAPped, `NO1` in 954 s, `NO2`/`NO3` in 4 s each. Its YES leaf is A119's ordinary
+  `S02_k5_11_r0.20_rho10`, so §6's entry rule is not involved: §7 (exact cores) and the resource-event
+  rule were worth a whole node between them.
+- **The a163 half is a clean negative worth as much: the widest citeable `N` closed NOTHING.** The rule
+  was made computable — `(min tilt width over the free bodies, then log₁₀ of the box-volume product)`,
+  margin over `s0` only as a tie-break (`code/queues177.py`, `notes/queues177.md` §1) — and it moves 5 of
+  the 11 remaining rows to a 10× wider set. All 15 completed a163 rows came back `OPEN` (11) or
+  `SKIP-UNSOUND` (4). The `h = 10°` link kills 3 of 4 children on `Y0054`, `Y0380` and `Y0422` and 0 of 4
+  on `Y0183`; the 10× wider `a151B` slice moves `Y1104` and `Y0854` from 0 dead children to 1 and moves
+  `Y0486`, `Y0570`, `Y0559`, `Y0985` not at all; the one node that can cite only a 2.5° window (`Y0871`)
+  dies nowhere, exactly as A136 §6 predicted. **Every surviving child is a converged LP at η = 0, τ = 5 —
+  not a CAP and not a cert FAIL** (`Y0422/NO3` converges to η = 0 after 1787 s). So on the k5_16 frame the
+  binding constraint is the **cover's width**, not the certifier and not the choice of entry, and A136's
+  `Y0941` (3 of 4, closed on the h10 link) is the exception on that frame rather than the pattern.
+- **A soundness refusal was tested rather than assumed.** `c0_Y1132` is refused by `A1_pins_match` on its
+  widest citeable set, so the fallback queue re-ran it on the next-widest: refused there too, in 1 s. The
+  refusal is a property of the node's pin set, not of the entry. `Y0864`, `slack0.02_c0_Y0411` and
+  `slack0.02_c0_Y0513` are refused the same way.
+- **Two resource events, neither recorded as a verdict.** A 0xD1 bugcheck at ~15:46 killed both drivers
+  mid-node; both queues resumed with `--skip_done` and the child-level caches served every verdict already
+  on disk. Later, two workers launched with PowerShell `Start-Process` were terminated externally ~20 min
+  in — empty stderr, no Windows Error Reporting event, no PAUSE sentinel, no gate line, ~4 CPU-s each —
+  while the box's other lab processes were untouched; the same commands relaunched detached from bash with
+  `nohup` ran normally. Nothing was recorded for either pair. **A resource event is never a verdict, and
+  that now includes the launcher.**
+- **Board.** `docs/shadows` a57v4 unchanged at **52 alive / 8 dead** — the closure is a depth-6 child with
+  no gallery page of its own. `results/owed136.json` regenerated; `no_complete136.jsonl` still empty.
+- **Files**: `attempts/A177-a163-queues/{BRIEF.md, code/{queues177,run177,report177}.py, notes/queues177.md,
+  results/queue177_{t1,h10,rest,fallback}.json, logs/}`, `attempts/A136-a120-resume/{results/nodes_a177*,
+  certs_a177*, results/{closures136.jsonl, report136.json, owed136.json}, notes/frames151.md §8}`,
+  `attempts/A96-a57-parametric/results/a120_closures.jsonl`, `docs/shadows/STATUS.md`,
+  `docs/residue_ledger.md` §5, registry row.

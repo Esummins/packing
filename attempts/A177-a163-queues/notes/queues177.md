@@ -44,3 +44,56 @@ h10 row as `wider_alternative` rather than substituted — the h10 link is the o
 kill behind it (`Y0941`, 3 of 4 children).  `k5_16_interior_Y0864` can cite **only** `A163A151B`,
 so it is the node that measures whether that extra width pays, at a margin two orders of magnitude
 thinner than anything else in the queue.
+
+---
+
+# A177 §2 — what the two queues actually bought, and the one node that closed
+
+Written 2026-09-09 evening, after a machine bugcheck (0xD1, a driver fault) at ~15:46 killed both
+drivers mid-node and the queues were resumed with `--skip_done`.  Every number below is from the
+records in `attempts/A136-a120-resume/results/nodes_a177*`.
+
+**One closure: `k5_11_interior_Y1140_D06`, and it did not come from the entry rule.**  It came from
+T1 — the node A136's base worker had recorded `OPEN` with children `[ALIVE, CAP-GATE, CAP-GATE,
+CAP-GATE]`.  Not one of those four verdicts was evidence: `NO0`'s certification hit the 2600 s wall
+(a CAP) and `NO1`–`NO3` were never tested at all, the node deadline having passed.  Re-run under a
+fresh `--out_suffix` with A170's exact cores **inside** the witness-feedback loop, **all four NO
+children certify dead** — `NO0` in 532 s where the stock-core loop had burned 2600 s and CAPped,
+`NO1` in 954 s, `NO2`/`NO3` in 4 s each.  `closures136.jsonl` 29 → 30; the row carries the four
+`case-measure-certificate-v1` hashes, `per_box_soundness ok`, and ZONE ⊆ BOX on the written
+rationals.  Two of A136's three findings did all the work here (exact cores in the loop; a resource
+event is never a verdict) and the third — the entry rule — was not involved: this node's YES leaf is
+A119's `S02_k5_11_r0.20_rho10`, the ordinary base entry.
+
+**The widest-citeable-N rule bought no closure on the a163 queues, and the reason is measurable.**
+Across the two a163 queues every completed node is `OPEN` or `SKIP-UNSOUND`; not one closed.  What
+the rule *did* buy is a clean separation of two barriers, node by node:
+
+| leaf lane | nodes | NO children dead / tested | what it says |
+|---|---|---|---|
+| `h = 10°` chain link (10° window, margin 7.45e-6) | Y0054, Y0380, Y0422 | 9 / 12 | three of four children die on every node; **one child survives the LP on each** |
+| the same link, Y0183 | 1 | 0 / 4 | η = 0 at τ = 5, converged, on all four |
+| widest slice per node (`a151B`, `logvol` 2.72) | Y1104, Y0854 | 2 / 8 | the 10× wider box kills exactly one child each |
+| widest slice, the rest (Y0486, Y0570, Y0559, Y0985) | 4 | 0 / 16 | LP converges to η = 0 at τ = 5 |
+| `h = 1.25°` link, the only citeable one (Y0871) | 1 | 0 / 4 | exactly the rule's own prediction: a 2.5° window proves nothing here |
+
+So on the k5_16 frame **the survivors are LP survivors, not certifier artefacts**: every ALIVE child
+above is a converged LP at η = 0 (or, on Y0422/NO3, a converged η = 0 after 1787 s), not a CAP and
+not a cert FAIL.  Widening `N` from `logvol 1.72` to `2.72` moved `Y1104` and `Y0854` from 0 to 1
+dead child and moved nothing else.  The barrier on this frame is **the cover, not the certifier and
+not the entry rule** — which is the honest negative result this attempt owed, and it is what makes
+the h10 lane's `Y0941` (3 of 4, closed by A136) the exception rather than the pattern.
+
+**Four SKIP-UNSOUND, and one of them is a property of the node.**  `c0_Y1132` was refused by
+`A1_pins_match` on its widest citeable set, so the fallback queue tested it on the next-widest
+(`slice_f1base_f2+00.0_f3+20.0`) rather than assuming the refusal transfers: it is refused there
+too, in 1 s.  A soundness refusal on this node is therefore about the node's pin set, not about the
+choice of `N`.  `k5_16_interior_Y0864` (the experiment: the widest set there is, at a margin two
+orders of magnitude thinner than anything else in the queue), `slack0.02_c0_Y0411` and
+`slack0.02_c0_Y0513` are refused the same way.
+
+**Process note, for the next attempt.**  Two workers launched with PowerShell `Start-Process` were
+terminated externally ~20 minutes in — empty stderr, no Windows Error Reporting event, no PAUSE
+sentinel, no gate line, ~4 CPU-s each — while the box's other lab processes were untouched; the
+same commands relaunched detached from bash with `nohup` ran normally.  Nothing was recorded for
+the killed pair.  A resource event is never a verdict, and that now includes *the launcher*.
