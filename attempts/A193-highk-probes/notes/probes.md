@@ -116,3 +116,22 @@ node dead by a chord row (min rhs 1.877 = s − 2: the pins' four unit chords le
 the meeters' min-chords are 0).** So for corners4 the toolkit's every leaf returned the SAME answer: the geometry
 localises the meeters (a real gain over the root — hulls of 0.1–0.7 area, three of five with cores), and the
 measure LP at that localisation sits at exactly the budget with a half-integral support.
+
+### 3.3 k4_05 at s0: the assignment search from the root (3 window-forced cells + 2 at s0 only) [M]
+
+Pass 1 (150 nodes, 1,062 s: **6.8 s per node**, the lonely clip at TR(0,0) included) reached depth 2; pass 2
+(journal replay + 900 / 3,000 s, stopped by hand at 03:23 after the LP quota): **179 fresh nodes, 1,320 s
+geometry (median 6.8 s, max 24.8 s), depth 5, 37 option-test nodes dead by the pair leaf (20 of them
+`EmptyBox(P3)`: a meeter restricted to a slot window fills the BR pin's box — the option is contradictory), chord
+rows never negative (min rhs 0.877 = s − 3 on the pin column x = 1/2: three pins, the meeters' min-chords 0),
+3 complete assignments reached, no-room 3/3 UNDECIDED (residue 6.755, one pocket: the centre block and the
+right/top arms).** The first complete assignment: BR(0,1) ← F1+F2 (forced), TL(1,0) ← F1+F3, BL(1,0) ← F2+F4,
+BR(1,0) ← F2+F4, TR(0,0) ← F1+F3 — eight roles (F1 and F3 have grown cores, a = 0.107 / 0.099; F2, F4 none), three
+free squares.
+
+**The windows + guard-line LPs (b4 = 11): τ = 10.766, 10.857, 10.778 — all three BELOW the budget, all three
+UNCONVERGED at the 300 s cap (minmass 0.72–0.77: the fine oracle still finds rows of mass ≈ 0.72, so the value is
+still climbing), 0 of 10 lines active, 340–349 s each.** The supports are the root's K1 object concentrated: the
+TR corner square (3.377, 3.377, 0°) — k5_16's fifth pin — at weight 0.795, the BL column's pin rows, the BL(1,0)
+slot pose (1.52, 0.5, 0°) — k5_11's — at 0.31, and a tilted centre remainder. Whether these are kills is the
+certificate's decision (§3.5): the root's 6.965 looked the same and lost the kill to its witnesses at 7.189.
