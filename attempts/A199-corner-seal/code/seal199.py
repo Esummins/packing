@@ -168,7 +168,7 @@ def reach(win, obst, box, s, depth=8, nsub=4, max_pieces=512):
             if cur is None:
                 continue
             n_tests += 1
-            if CLN.box_misses_cell_exact(MB.piece_box(bn, cur)[0], box)[0]:
+            if box is not None and CLN.box_misses_cell_exact(MB.piece_box(bn, cur)[0], box)[0]:
                 continue
             if d < depth and len(pieces) <= max_pieces:
                 nxt.extend(MB.split_piece(bn, cur))

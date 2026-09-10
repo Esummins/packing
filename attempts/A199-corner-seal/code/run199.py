@@ -16,6 +16,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import seal199 as S            # noqa: E402
 import seal199b as SB          # noqa: E402
+import seal199c as SC          # noqa: E402
 
 ROOT = S.ROOT
 STATUS = os.path.join(ROOT, "docs", "shadows", "STATUS.md")
@@ -42,8 +43,11 @@ def done_keys(path):
 
 def one(page, s, lam, args, log):
     t = time.time()
-    r = SB.run_page(page, s=s, lam=lam, log=log, nsub=args.nsub, refine=args.refine, depth=args.depth,
-                    fine=(args.fine_nsub, args.fine_refine), grid=tuple(args.grid))
+    if args.chain:
+        r = SB.run_page(page, s=s, lam=lam, log=log, nsub=args.nsub, refine=args.refine, depth=args.depth,
+                        fine=(args.fine_nsub, args.fine_refine), grid=tuple(args.grid))
+    else:
+        r = SC.run_page_leaf(page, s=s, lam=lam, log=log, nsub=args.nsub, refine=args.refine, depth=args.depth, wall=args.page_wall)
     r["when"] = time.strftime("%Y-%m-%d %H:%M:%S")
     r["settings"] = dict(nsub=args.nsub, refine=args.refine, depth=args.depth, fine=[args.fine_nsub, args.fine_refine], grid=args.grid)
     r["wall"] = round(time.time() - t, 1)
@@ -63,7 +67,9 @@ def main(argv=None):
     ap.add_argument("--out", default=os.path.join(HERE, "..", "results", "seal199.jsonl"))
     ap.add_argument("--nsub", type=int, default=4)
     ap.add_argument("--refine", type=int, default=2)
-    ap.add_argument("--depth", type=int, default=8)
+    ap.add_argument("--depth", type=int, default=12)
+    ap.add_argument("--chain", action="store_true", help="the multibox pair-test chain (seal199b) instead of the SEAL leaf")
+    ap.add_argument("--page-wall", type=float, default=600.0, help="per-(corner) wall (s) for the leaf bisection")
     ap.add_argument("--fine-nsub", type=int, default=8)
     ap.add_argument("--fine-refine", type=int, default=4)
     ap.add_argument("--grid", type=int, nargs=3, default=[2, 2, 2])

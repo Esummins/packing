@@ -127,40 +127,61 @@ L_F).  (ii) Without the far-side hypothesis G ⊂ {y ≥ −1} the conclusion fa
 bottom line).  So the sharp statement is exactly Lemma WEDGE: for every φ, with A's far side closed (the floor, or
 any obstacle G cannot cross).
 
-## 3. [T] Corollary SIDES (A is met from its other sides only)
+## 3. [T] Corollary SIDES and Lemma NO-SECOND (A has no second meeter at all)
 
-Let F reach around the corner from A's side in the DEEP regime (q_y < cos φ − sin φ) and G be a second meeter of A
-as in WEDGE.  By WEDGE, G has a point p with p_y < 0 on the A-side of L_F; p ∉ int F, and F's cross-section at height
-p_y ∈ [b_y, 0) runs from F's left boundary to L_F, so p lies either UNDER F — in U := {(x, y) : y < b_y, or
-b_y ≤ y < l_y and x < b_x − (y − b_y) cot φ} (the wedge of angle φ between the floor and F's lower-left edge) — or
-LEFT of F's far edge lt at a height in [l_y, 0): x < x_l + p_y tan φ < x_l < −1, i.e. OUTSIDE A on its left; in the
-latter case the segment from p to a point of int G ∩ A crosses A's left side {−1} × (l_y, 0).  Hence: **every
-second meeter of A either crosses A's LEFT side or reaches under F's lowest vertex; none enters through A's top edge.**
-Quantitatively U ⊂ {y < −δ_F} with δ_F := (cos φ − q_y) − (b_x + 1) tan φ, so a square whose depth below y = 0
-inside A is less than δ_F and which does not reach x < −1 at a height in (l_y, 0) is not a meeter of A.  ∎
+Let F reach around the corner from A's side in the DEEP regime (q_y < cos φ − sin φ, so φ < 45°, b_y < −sin φ,
+l_y < 0, x_l < −1) and let G be any unit square with int G ∩ int F = ∅ = int G ∩ int P, G ⊂ {x ≤ 1, y ≥ −1},
+int G ∩ A ≠ ∅.  Write y_bl := b_y + (b_x + 1) tan φ for the height at which F's lower-left edge bl crosses A's left
+side x = −1 (F occupies that side from y_bl up to a height > 0, since the far edge lt crosses y = 0 at x_l < −1).
 
-On Y0491's BR corner this is the H-exclusion: H's pieces provably miss both the region left of A and A's lower part
-(A161's exact test, §4), so H is not a BR(1,0) meeter; BR(1,0) then needs a free meeter besides F, and none exists.
+**(i) [T] G's chord on the line y = 0 lies in (−∞, x_l].**  G is not contained in {y < 0} (a unit square in
+{x ≤ 0, −1 ≤ y ≤ 0} is upright with its top edge on y = 0, which must avoid F's open chord, so it lies left of x_l and
+misses A), so G crosses y = 0 and its chord avoids F's open chord and has x ≤ 0; if it lay in [x_r, 0] then, as in
+the proof of WEDGE, Case A would give a dip |v_y| ≤ |x_r| sin ψ cos ψ < sin φ/4 < |b_y|, hence a crossing height
+y* > v_y > b_y on F's open edge qb — G enters int F; Cases B and C are impossible verbatim; an upright G has chord 1.
+**(ii) [T] G ∩ {y ≥ b_y} lies on the far side of F** (x ≤ F's left boundary at that height): the slab {b_y ≤ y ≤ 0}
+minus int F has two components (left of F, right of L_F), G ∩ slab is convex and contains the chord of (i).  Hence
+**G ∩ {x > −1} ⊂ {−1 ≤ y < y_bl}** and every point of G right of x = −1 lies UNDER F's lower boundary: A's top edge
+admits no second meeter, and a second meeter crosses A's left side below y_bl or lies under F (Cor. SIDES).
+**(iii) [T] Lemma NO-SECOND.**  Put h := 1 + y_bl (require y_bl < 0), c := −1 − l_x (> 0), g := 1 + l_y (> 0).  If
 
-## 4. The certificate chain on a page (what `seal199` runs; every step an exact test)
+        min_{ψ′ ∈ [arccos h, 90°)} ( cos ψ′ + c tan ψ′ )  >  g,     in particular if  c √(1 − h²) / h > g   or   2 √(c √(1 − h²)) > g,
+
+then NO such G exists: A's only non-pin meeter is F itself.  *Proof.*  By (ii) every vertical chord of G at x > −1
+has length < h < 1, so G is not upright (chord 1) and the line x = −1 meets G within h/2 of its rightmost or leftmost
+vertex; the leftmost case is impossible (right of the line G has a vertical chord ≥ 1: at distance min(sin ψ, cos ψ)
+from the leftmost vertex the chord is 1/cos ψ or 1/sin ψ, and if that lies left of x = −1 the chord AT the line is
+already full).  So G's rightmost vertex v_R = (x_R, y_R) has x_R > −1 and lies under F's lower boundary; its two
+edges go left, the upper one at angle ψ′ above the horizontal, the lower one dropping cos ψ′, so y_R ≥ −1 + cos ψ′,
+and y_R < y_bl forces cos ψ′ < h.  The upper edge stays under F's lower boundary; it reaches x = l_x (if it ended
+first, at a left vertex above l_x, G's top edge would rise from below l_y into the region right of l_x at heights
+≥ l_y, which is inside or right of F's far edge — but G's points at height ≥ 0 lie left of x_l by (i), and the top
+edge's x only increases: contradiction), where it must pass below l: y_R + (x_R − l_x) tan ψ′ ≤ l_y.  With
+x_R − l_x > c this gives cos ψ′ + c tan ψ′ < g.  The two closed forms are the bounds c tan ψ′ ≥ c tan(arccos h) and
+cos ψ′ + c tan ψ′ ≥ 2 √(c sin ψ′) ≥ 2 √(c √(1 − h²)) (AM–GM).  ∎
+
+Every quantity is an explicit function of (q_x, q_y, φ); on a piece of F's pose space the inequalities are checked at
+their worst ends in exact rationals of t = tan(θ/2) (`seal199c.sealed`): that is the SEAL LEAF.  On Y0491's BR
+corner (F's certified region: φ ≤ 23°, q_y ≤ 0.11) c ≈ 0.3, h ≈ 0.35, g ≈ 0.49: 2√(c√(1−h²)) ≈ 1.06 > 0.49.
+
+## 4. The certificate on a page (what `seal199` runs; every step an exact test)
 
 For a pinned corner c whose two neighbours B = c(0,1), A = c(1,0) are both forced (Theorem FC), at reference side s
-with slab factor λ (§5; λ = 1, s = s0 at the top):
+with slab factor λ (§5; λ = 1, s = s0 at the top), **the SEAL leaf** (`seal199c`):
 1. base node {pins, H} normalised (A171/A172 multibox; EmptyBox = the pair leaf);
-2. F's REACH: the meeter window of B bisected against every role's K′, the container, and A161's miss test against
-   B's box — the surviving pieces are a sound superset of the poses of any free meeter of B (SEAL's hypothesis
-   F ∩ {y<0} ≠ ∅ is read off the pieces: on Y0491 every piece has its rightmost vertex below cos φ);
-3. the SEAL statistics per piece, exact in t = tan(θ/2): q_y, φ, x_r, the deep-regime margin, the chord [T: (c)];
-4. a case split of F's pieces into sub-boxes; per sub-box the node {pins, H, F}, then (FH) H's pieces and F's pieces
-   against A's box (A161 per piece) and (G) the node {pins, H, F, G} with G a free meeter of A distinct from F
-   (EmptyBox(G) kills every case with a further free meeter; then (FH) decides); if G survives and F provably
-   misses A, the {H, G} and {G, G′} cases as in `geo178b` (H restricted to A's window; pairs of Lemma-A1 cells);
-5. the corner is DEAD iff every sub-box case is dead; the page is DEAD iff some (corner, orientation) is.
-Soundness: FC gives a free meeter F of B and two distinct non-pin meeters of A; every clip is one of multibox's
-exact dead test, A161's exact miss test or the container clip; the case split covers F's poses.  [C: geometry,
-exact tests; the multibox invariant of A171 on every node.]  SEAL/WEDGE/SIDES are the reading of the certificate
-(why G dies), not a step of it; a lemma-based leaf (the per-piece inequalities of §1–3 with H's depth bound) is the
-cheap pre-screen for the pass and is what to formalise.
+2. B's meeter window bisected (4 tilt sub-bins, depth ≤ 16): a piece is DROPPED when provably dead — container clip,
+   multibox's exact dead test against every role's K′, A161's exact miss test against B's box, or q_y < 0 at every
+   pose (no pose meets int B clear of the pin, SEAL (b)); SEALED when Lemma NO-SECOND's inequalities hold at their
+   worst ends (deep regime, l_x < −1, y_bl < 0, the closed-form bound); otherwise SPLIT.  The unsealed survivors at
+   the cap are the residue; **DEAD iff the residue is empty**: then every free meeter F of B (Theorem FC gives one)
+   leaves A with F as its only non-pin meeter, against FC(A).
+Soundness: the pieces are a superset of the free meeters' poses; each drop is an exact test; each seal is Lemma
+NO-SECOND on the whole piece.  [C: geometry, SEAL; the multibox invariant of A171 on the base node.]  The certificate
+row records every piece's fate (dropped / sealed with its margin / residue with the failing inequality).
+**The exact multibox chain** (`seal199b`, `--chain`: {pins, H, F-sub-box, G} with G a further free meeter of A,
+then the (FH) miss tests) is ALSO run on Y0491 and does NOT kill (G survives in every F sub-box): the pair test sees
+only F's K′ (the part present in EVERY pose of the sub-box), which is far smaller than any actual F, so it cannot see
+the seal — the lemma is not a reading of that certificate but the leaf that replaces it.
 
 ## 5. The window: the slab certificate
 
