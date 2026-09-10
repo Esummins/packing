@@ -53,7 +53,7 @@ def frame_panel(ox, oy, fr, pins, title):
                    ' '.join(f'{X(x):.1f},{Y(y):.1f}' for x, y in P))
     for c in fr:
         # the OPEN slot box of the cell in the container frame (unit cell at the corner's offsets)
-        corner, i, j = c['corner'], c['i'], c['j']
+        corner, i, j = c['cell'][:2], int(c['cell'][3]), int(c['cell'][5])
         u0, v0 = i, j
         x0 = u0 if corner in ('BL', 'TL') else S0 - u0 - 1
         y0 = v0 if corner in ('BL', 'BR') else S0 - v0 - 1
@@ -73,12 +73,6 @@ def support_panel(ox, oy, pk, lines, title, sub, hulls=None, pins=()):
         P = sq(cx, cy, 0.0)
         out.append('<polygon points="%s" fill="#90caf9" fill-opacity="0.35" stroke="#1565c0" stroke-width="1"/>' %
                    ' '.join(f'{X(x):.1f},{Y(y):.1f}' for x, y in P))
-    for k, h in (hulls or {}).items():
-        if k.startswith('P'):
-            continue
-        x0, x1, y0, y1 = h[0], h[1], h[2], h[3]
-        out.append(f'<rect x="{X(x0):.1f}" y="{Y(y1):.1f}" width="{(x1 - x0) * S:.1f}" height="{(y1 - y0) * S:.1f}" fill="#fff59d" fill-opacity="0.35" stroke="#f9a825" stroke-width="1"/>')
-        out.append(text(X(x0) + 2, Y(y1) + 9, '%s [%.0f-%.0f deg]' % (k, h[4], h[5]), 7, '#6d4c00'))
     for L in lines or []:
         if L.get('z', 0) <= 1e-6:
             continue
@@ -89,6 +83,7 @@ def support_panel(ox, oy, pk, lines, title, sub, hulls=None, pins=()):
         else:
             out.append(f'<line x1="{X(off):.1f}" y1="{Y(0):.1f}" x2="{X(off):.1f}" y2="{Y(S0):.1f}" stroke="#2e7d32" stroke-width="1.2" stroke-dasharray="6,2"/>')
             out.append(text(X(off) - 8, Y(S0) - 3, 'z=%.3f' % L['z'], 8, '#2e7d32'))
+    pk = [p for p in pk if float(p[3]) > 1e-6]                 # the dual SUPPORT: positive weight only
     ys = [float(p[3]) for p in pk] or [1.0]
     ymax = max(ys) or 1.0
     bad = 0
@@ -101,6 +96,12 @@ def support_panel(ox, oy, pk, lines, title, sub, hulls=None, pins=()):
         op = 0.15 + 0.7 * (w / ymax)
         out.append('<polygon points="%s" fill="#ef9a9a" fill-opacity="%.2f" stroke="#b71c1c" stroke-width="0.8"/>' %
                    (' '.join(f'{X(x):.1f},{Y(y):.1f}' for x, y in P), op))
+    for k, h in (hulls or {}).items():                        # the roles' centre hulls, drawn ON TOP (thin, no fill)
+        if k.startswith('P'):
+            continue
+        x0, x1, y0, y1 = h[0], h[1], h[2], h[3]
+        out.append(f'<rect x="{X(x0):.1f}" y="{Y(y1):.1f}" width="{(x1 - x0) * S:.1f}" height="{(y1 - y0) * S:.1f}" fill="none" stroke="#1b5e20" stroke-width="1.6"/>')
+        out.append(text(X(x0) + 2, Y(y1) + 9, '%s [%.0f-%.0f deg]' % (k, h[4], h[5]), 8, '#1b5e20', bold=True))
     out.append(text(ox, Y(0) + 14, '%d support placements drawn (opacity = dual weight, sum %.3f); %d inadmissible NOT drawn' % (len(pk) - bad, sum(ys) if pk else 0, bad), 9, '#444'))
     return out
 
@@ -110,7 +111,7 @@ def page(cls):
     fr = next((r for r in rs if r['kind'] == 'frame'), None)
     root = next((r for r in rs if r['kind'] == 'root_lp'), None)
     leaves = [r for r in rs if r['kind'] == 'leaf_lp']
-    search = next((r for r in rs if r['kind'] == 'search'), None)
+    search = ([r for r in rs if r['kind'] == 'search'] or [None])[-1]
     certs = {r['node']: r for r in rows(os.path.join(A193, 'results', 'probe193_certify.jsonl')) if r.get('cls') == cls}
     nrs = [r for r in rs if r['kind'] == 'noroom']
     if fr is None:
