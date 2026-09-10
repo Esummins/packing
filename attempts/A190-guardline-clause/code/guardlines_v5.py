@@ -187,7 +187,12 @@ def rederive(lines, cores, pboxes, windows, attached, s):
                     raise ValueError("guardline %d: core %d may lie in window %s (would be double-counted)" % (L.idx, j, w.name))
         L.terms = terms
         L.rhs_star = s - sum((c for _, c in terms), ZERO)
-        if L.rhs > L.rhs_star:
-            raise ValueError("guardline %d: declared rhs %s > re-derived rhs* %s" % (L.idx, L.rhs, L.rhs_star))
-        L.rhs_eff = min(L.rhs, L.rhs_star)
+        # SOUNDNESS FIX (external review 2026-09-10, P0): the proved inequality bounds the counted chord sum by
+        # rhs_star only; a declared rhs SMALLER than rhs_star is not justified by anything the verifier checks
+        # (min(rhs, rhs_star) accepted a false PASS: four lines with rhs 0 "excluded" one unit square).  The
+        # declared field is a consistency check and must equal the independently re-derived value exactly.
+        if L.rhs != L.rhs_star:
+            raise ValueError("guardline %d: declared rhs %s differs from the independently re-derived rhs* %s"
+                             % (L.idx, L.rhs, L.rhs_star))
+        L.rhs_eff = L.rhs_star
     return lines
