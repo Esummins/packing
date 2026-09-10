@@ -377,3 +377,13 @@ a fixed point), the 8/3 pass bisects the tilt sub-bins once more and keeps 0.873
 the lever is not idempotent (each application halves the sub-bins again) and every application is
 sound.  Cost note: coex174 / coex174b (piece-level coexistence) call `make_node` per sub-node and now
 pay the lever too; `A183_LEVER=0` restores the 4/2-only normalise for a sweep that cannot afford it.
+*S3 (PARTIAL at 18:52; the shards keep running, resumable).*  l1_104: 12,381 ALIVE before (A168); 47
+recorded under 2 parents (root/D0/S0, root/D0/S1): 37 ALIVE / 10 DEAD, all ten by EmptyBox on the
+polygon + lonely clip (root/D0/S1/B107 only at 8/3); on the survivors mean kept H 0.461 -> 0.448,
+D 0.264 -> 0.243, S 0.171 -> 0.157, B 0.364 -> 0.329; 300 s per node (max 421 s) -- at that rate the
+~10,000 open S3 nodes are ~17 CPU-days on two processes, so the S3 layer is a campaign, not a session;
+the S2 kills close their subtrees first (`renorm181b report` counts them as dead_by_closure).
+l1_153: 119 ALIVE before; 21 recorded (root/D25/S=H's children B1.., B10x): 21 ALIVE / 0 DEAD; mean
+kept H 0.670 -> 0.612, D 0.062 -> 0.045, B 0.508 -> 0.475; 476 s per node (max 788 s).  vol1 <= parent
+on every S3 node of both cells.  Figures `figs/steps_<cell>_S3.svg` (partial overlay, dated in the
+title).
