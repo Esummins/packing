@@ -387,3 +387,16 @@ l1_153: 119 ALIVE before; 21 recorded (root/D25/S=H's children B1.., B10x): 21 A
 kept H 0.670 -> 0.612, D 0.062 -> 0.045, B 0.508 -> 0.475; 476 s per node (max 788 s).  vol1 <= parent
 on every S3 node of both cells.  Figures `figs/steps_<cell>_S3.svg` (partial overlay, dated in the
 title).
+
+**A183.8  Apply [M] (`renorm181b apply`, `results/renorm181_summary_<cell>.json`, `logs/apply183_*.log`).**
+l1_104: 192 records folded (the A168 record kept under `node['a168']`); alive/dead per step before ->
+after: S1 28/33 -> 28/33, S2 111/0 -> 64/47, S3 12,381/65 -> 7,235/5,211 (+5,135 DEAD by ancestor: the 47
+S2 kills close 41 % of the S3 layer without a computation).  l1_153: 30 records, no verdict changed
+(S3 119/68 stays 119/68 with 22 done).  The applied trees are on disk only (`tree_l1_104.json` is
+868 MB; re-derivable from the side files by `renorm181b apply`), the side files are the record and are
+committed after every tick.  **Verdict per cell:** l1_104 ALIVE -- 7,235 open S3 nodes under 64 live
+S2 parents (41 done; ~300 s each at 8/3 -> ~15 CPU-days on two processes); l1_153 ALIVE -- 97 open S3
++ 571 deeper (S4..S8 untouched).  No LP kill (root/D0/S1 tau = 8.000 converged).  Next lever: the S3
+shards (running, resumable; every S2 kill closes its subtree first), then the piece-level coexistence
+cut (D vs S; B1 vs the (left, floor) partner) at every surviving S3 node BEFORE any LP -- the LP has no
+room at S1/S2 (tau = budget) and the pieces buy it < 3 % of core half-side.

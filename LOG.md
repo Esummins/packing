@@ -8026,3 +8026,31 @@ halves of the answer come from opposite findings.
   certs_a177*, results/{closures136.jsonl, report136.json, owed136.json}, notes/frames151.md §8}`,
   `attempts/A96-a57-parametric/results/a120_closures.jsonl`, `docs/shadows/STATUS.md`,
   `docs/residue_ledger.md` §5, registry row.
+
+## 2026-09-09 — A183-cascade-resume (Fable lead) — done-mixed (A181 resumed after the 15:46 crash; S3 shards left running, resumable)
+- **Why**: the 15:46 bugcheck (0xD1) killed A181's parent-seeded re-normalisation of the k0 cascade with
+  78 + 24 records on disk and no notes section. A183 restates the brief (`attempts/A183-cascade-resume/BRIEF.md`),
+  commits A168's orphaned core files and A181's never-committed side files, and continues in
+  `attempts/A168-cascade-fable` (`notes/cascade.md` §A183).
+- **The lever**: `renorm183.py` re-clips every nsub 4 / refine 2 survivor at nsub 8 / refine 3 seeded from its own
+  4/2 fixed point (each tilt sub-bin bisected once more; sound, never weaker, not idempotent); A181's 4/2-ALIVE
+  records are upgraded in place; `roles168.make_node` carries the same lever for every NEW node (`A183_LEVER`).
+  A stale sliver-era wall cap is retried once at the full setting (l1_153 root/D25/S=H: 299 s, H 0.897 → 0.873).
+- **Numbers [M]**: l1_104 S1 28 → 28 ALIVE (vol1 D −18 %); S2 111 → 64 / 47 DEAD (ancestor 20, EmptyBox 23 of
+  which 4 only at 8/3, inheritance 4; vol1 H/D/S −16/−20/−17 %); S3 47 of 12,381 recorded (37 / 10 EmptyBox,
+  300 s a node). l1_153 6 → 6, 1 → 1, S3 21 of 119 all ALIVE (476 s a node). `vol1 ≤ parent` on every node.
+- **The LP and the pieces (settled)**: the frozen v1 verifier reads one square core per packed square; a list of
+  boxes is not expressible and a union-of-cores exemption is unsound for the bridge. `lp183.py` feeds the
+  union-box exact core GROWN inside K′(role) (four corners `vertex_ok` on every piece): root/D0/S1 +0/0.9/2.7 %,
+  τ = 7.999999999999936 converged, ALIVE(LP), 98 s. The polygon needs a v4 `poly_cores` clause.
+- **Bookkeeping fixes**: `renorm181.load_side` keeps the strongest record per node across shard files (a 4/2
+  record or a stale cap marker in a later-named file was masking 8/3 upgrades); `fig168b` draws the hypothesis
+  square only at an admissible pose (the PI read an extremal-tilt outline crossing S's K′ as a missed clip);
+  `fig174` tolerates the S=H child.
+- **Verdict**: both cells ALIVE; the open set is the S3 layer (l1_104 7,235 open S3 nodes under 64 live S2 parents (5,135 closed by ancestry),
+  ~17 CPU-days on two processes; l1_153 97 S3 + 571 deeper). Next lever: the S2 kills' closure and the
+  piece-level coexistence cut at every S3 node before any LP.
+- **Files**: `attempts/A168-cascade-fable/code/{renorm183.py, lp183.py, launch183.ps1}` + patches to
+  `renorm181.py, renorm181b.py, roles168.py, fig168b.py, fig174.py`; `results/renorm181_*.jsonl` (the record),
+  `results/lp183_l1_104*.jsonl`, `results/renorm181_{report,summary}_*.json`; `figs/steps_{l1_104,l1_153}_{S1,S2,S3}.svg`;
+  fold-ins `attempts/A57-shadow-trees/PAUSED.md`, `docs/residue_ledger.md` §4; registry rows A181 / A183.

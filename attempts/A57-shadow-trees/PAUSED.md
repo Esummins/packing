@@ -727,3 +727,23 @@ made the process wall the deployable answer to the `Y0381` wedge, and it still i
 kill the process TREE (Windows: `CREATE_NEW_PROCESS_GROUP` + `taskkill /T /F`, or a job object),
 otherwise every WALL-CAP leaves an invisible worker behind and the box-count gate under-counts.
 The verdict is unaffected: CAP is never a verdict and the node keeps its prior state.
+
+*A183 addendum (2026-09-09 19:05, the k0 cascade re-normalised top-down with parent seeding, resumed
+after the 15:46 crash; `attempts/A168-cascade-fable/notes/cascade.md` §A183).* **The record's fixed
+points now nest.** A176 re-merged more than 16 parent-intersected pieces into one bounding box per
+sub-bin, so a child could settle LOOSER than its parent (root/D0/S0 vol1 D 0.136 → children 0.159);
+A181/A183 seed every child with the parent's fixed-point pieces exactly and `vol1 ≤ parent` holds on
+every recorded node of both cells (0 violations, `renorm181b report`). The coordinator's refinement
+lever (nsub 8 / refine 3 on every 4/2 survivor, seeded from its own 4/2 fixed point — sound, never
+weaker, not idempotent) buys pose volume more than kills: l1_104 S1 28 → 28 ALIVE but vol1 D −18 %;
+S2 111 → 64 ALIVE / 47 DEAD (ancestor 20, EmptyBox 23 of which **4 die only at 8/3**, inheritance 4),
+vol1 H/D/S −16/−20/−17 % on the survivors; S3 partial (47 of 12,381: 37 ALIVE / 10 EmptyBox, 300 s a
+node — ~17 CPU-days for the layer on two processes, a campaign). l1_153 (the Trump-image canary):
+S1 6 → 6, S2 1 → 1 (its sliver-era wall cap was stale: 299 s at the full setting), S3 21 of 119 done,
+all ALIVE. **The LP cannot consume the pieces as a list** under the frozen v1 verifier (one square
+core per packed square; a union-of-cores exemption would break the bridge); it consumes them through
+one square grown inside K′(role) (`lp183.py`), which on root/D0/S1 grows the union-box core by
+0/0.9/2.7 % and leaves τ = 8.000 converged ALIVE — the geometry, not the LP, is the lever. Both cells
+stay ALIVE; the open count is the S3 layer (l1_104 7,235 open S3 nodes under 64 live S2 parents -- the 47 S2 kills close 5,135 by ancestry; l1_153 97
+S3 + 571 deeper). The v4 clause the polygon core would need: `hypotheses.poly_cores` with the exemption
+"Q meets the closed convex polygon" by exact SAT over Q's axes and the polygon's edge normals.
