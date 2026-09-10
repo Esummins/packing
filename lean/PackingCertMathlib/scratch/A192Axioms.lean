@@ -1,5 +1,6 @@
 import PackingCertMathlib.Windows
 import PackingCertMathlib.WindowsCheck
+import PackingCertMathlib.WindowsCore
 import PackingCertMathlib.GuardLine
 import PackingCertMathlib.NoRoom
 import PackingCertMathlib.ForcedCorners
@@ -16,3 +17,5 @@ import PackingCertMathlib.ForcedCorners
 #print axioms PackingCert.S11.GuardLineW.guarded_dead
 #print axioms PackingCert.S11.NoRoom.noroom_dead
 #print axioms PackingCert.S11.ForcedCorners.slot_crowd
+#print axioms PackingCert.S11.WindowsW.checkCoreInBox_sound
+#print axioms PackingCert.S11.WindowsW.checkWindowsI_kill_of_check
