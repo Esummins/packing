@@ -62,7 +62,7 @@ def run_page(p, a, log):
                budget=rec["budget"], n_pins=len(rec["pins"]), n_H=len(rec["H"]),
                nsub=a.nsub, refine=a.refine, base_nsub=a.base_nsub, base_refine=a.base_refine,
                of_nsub=a.of_nsub, of_refine=a.of_refine, side=P.SIDE, max_cells=a.max_cells,
-               max_pairs=a.max_pairs, wall=a.wall, when=time.strftime("%Y-%m-%d %H:%M:%S"))
+               max_pairs=a.max_pairs, meet_boxes=a.meet_boxes, wall=a.wall, when=time.strftime("%Y-%m-%d %H:%M:%S"))
 
     nd0, info0 = G.run_node(base, nsub=a.base_nsub, refine=a.base_refine, label="base")
     row["base"] = dict(dead=info0.get("dead"), seconds=info0["seconds"], kept=info0.get("kept"))
@@ -111,7 +111,7 @@ def run_page(p, a, log):
             for (_, it, hb, tag, info) in ones:
                 r = P.pair_test(pinroles, hnames, hull, it, info, hb, tag, s, nsub=a.nsub,
                                 refine=a.refine, max_cells=a.max_cells, max_pairs=a.max_pairs,
-                                deadline=deadline, log=log, label=p["nid"],
+                                meet_boxes=a.meet_boxes, deadline=deadline, log=log, label=p["nid"],
                                 want_witness=not a.no_witness)
                 tables.append(dict(cell=it["cell"], corner=it["is_corner"], alive=r["alive"],
                                    caps=r["caps"], subcases=r["subcases"], hull_B=r["hull_B"],
@@ -145,6 +145,7 @@ def main():
     ap.add_argument("--of-refine", dest="of_refine", type=int, default=2)
     ap.add_argument("--max-cells", dest="max_cells", type=int, default=24)
     ap.add_argument("--max-pairs", dest="max_pairs", type=int, default=400)
+    ap.add_argument("--meet-boxes", dest="meet_boxes", type=int, default=1)
     ap.add_argument("--wall", type=int, default=900)
     ap.add_argument("--shard", default="1/1")
     ap.add_argument("--redo", action="store_true")

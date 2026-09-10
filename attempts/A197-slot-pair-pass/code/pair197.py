@@ -43,6 +43,7 @@ if A178 not in sys.path:
     sys.path.insert(0, A178)
 
 import geo178 as G                                              # noqa: E402  READ-ONLY (A178)
+import chordlane as CL                                          # noqa: E402  READ-ONLY (A161)
 
 SQ2H = 0.70710678118654757
 SIDE = 0.70                     # < 1/sqrt2: two meeter centres never share a closed cell
@@ -89,6 +90,64 @@ def cells_meeting(grid, box):
         if r is not None and (r[1] - r[0]) * (r[3] - r[2]) >= 0:
             out.append((idx, r))
     return out
+
+
+# ------------------------------------------------------------------ the MEET cover (A161 exact)
+def can_meet(box6, wbox):
+    """False when EVERY pose of the box gives a square disjoint from the widened box (A161's exact
+    separating-axis test, `chordlane.box_misses_cell_exact`)."""
+    ok, _ = CL.box_misses_cell_exact(G.MB.as_box(tuple(box6)), tuple(wbox))
+    return not ok
+
+
+def _bisect(b):
+    x0, x1, y0, y1, t0, t1 = b
+    dx, dy, dt = x1 - x0, y1 - y0, (t1 - t0) / 90.0
+    if dx >= dy and dx >= dt and dx > 1e-12:
+        m = 0.5 * (x0 + x1)
+        return [(x0, m, y0, y1, t0, t1), (m, x1, y0, y1, t0, t1)]
+    if dy >= dt and dy > 1e-12:
+        m = 0.5 * (y0 + y1)
+        return [(x0, x1, y0, m, t0, t1), (x0, x1, m, y1, t0, t1)]
+    if dt > 1e-12:
+        m = 0.5 * (t0 + t1)
+        return [(x0, x1, y0, y1, t0, m), (x0, x1, y0, y1, m, t1)]
+    return [tuple(b)]
+
+
+def _merge(bs, k):
+    bs = sorted(bs)
+    g = int(math.ceil(len(bs) / float(k)))
+    out = []
+    for i in range(0, len(bs), g):
+        c = bs[i:i + g]
+        out.append((min(b[0] for b in c), max(b[1] for b in c), min(b[2] for b in c),
+                    max(b[3] for b in c), min(b[4] for b in c), max(b[5] for b in c)))
+    return out
+
+
+def meet_cover(box6, wbox, depth=9, max_boxes=2, cap=24):
+    """A COVER of {poses of box6 whose open square meets the open widened box} by <= max_boxes
+    sub-boxes.  `[]` means NO pose of the box meets it -- the branch is VACUOUS, not alive.
+
+    This is the constraint A178's H-meets branch never carried: it restricted H's CENTRE to the
+    meeter window (which on a k5_16 page is a no-op, H's record box already lies inside) and never
+    asked H to actually MEET the box.  Every sub-box dropped here is dropped by A161's exact
+    separating-axis test, so the cover is sound.
+    """
+    if not can_meet(box6, wbox):
+        return []
+    cur = [tuple(box6)]
+    for _ in range(depth):
+        nxt = [h for b in cur for h in _bisect(b) if can_meet(h, wbox)]
+        if not nxt:
+            return []
+        if len(nxt) == len(cur) and nxt == cur:
+            break
+        cur = nxt
+        if len(cur) > max(cap, 4 * max_boxes):
+            break
+    return _merge(cur, max_boxes) if len(cur) > max_boxes else cur
 
 
 # ------------------------------------------------------------------ the witness sampler
@@ -177,7 +236,8 @@ def one_free(pinroles, hnames, hull, item, nsub=4, refine=2, deadline=None, labe
     roles = dict(pinroles)
     for k in hnames:
         roles[k] = tuple(hull[k])
-    roles["B_" + tag] = (W[0], W[1], W[2], W[3], 0.0, 90.0)
+    mc = meet_cover((W[0], W[1], W[2], W[3], 0.0, 90.0), item["wbox"], max_boxes=1)
+    roles["B_" + tag] = mc[0] if mc else (W[0], W[1], W[2], W[3], 0.0, 90.0)
     corners = {"B_" + tag: item["corner"]} if item.get("is_corner") else None
     nd, info = G.run_node(roles, corners=corners, nsub=nsub, refine=refine,
                           label=label + "/one-free:" + item["cell"])
@@ -187,7 +247,7 @@ def one_free(pinroles, hnames, hull, item, nsub=4, refine=2, deadline=None, labe
 
 # ------------------------------------------------------------------ phase 2: the pair test
 def pair_test(pinroles, hnames, hull, item, of_info, hb, tag, s,
-              nsub=8, refine=4, max_cells=24, max_pairs=400, deadline=None,
+              nsub=8, refine=4, max_cells=24, max_pairs=400, meet_boxes=2, deadline=None,
               log=print, label="", want_witness=True):
     """-> dict(alive, subcases, h_hull_union, leaf, seconds, witness).  `of_info`/`hb` from one_free."""
     t0 = time.time()
@@ -248,23 +308,37 @@ def pair_test(pinroles, hnames, hull, item, of_info, hb, tag, s,
                     capped = True
                     hm_alive += 1
                     break
-                roles = dict(pinroles)
-                roles[hn] = ci
-                roles["B_" + tag] = cj
-                cs = {"B_" + tag: corner} if corner else None
-                nd2, i2 = node(roles, label + "/H-meets:%s:%d+%d" % (item["cell"], i, j), cs)
+                hsub = meet_cover(ci, wbox, max_boxes=meet_boxes)
+                bsub = meet_cover(cj, wbox, max_boxes=meet_boxes)
                 hm_tested += 1
-                vac = (not i2["dead"]) and G.h_misses(nd2, list(wbox))
-                hm_cases.append(dict(cH=i, cB=j, dead=i2.get("dead"), vacuous=vac,
-                                     seconds=i2["seconds"]))
-                if i2["dead"] or vac:
+                if not hsub or not bsub:
+                    hm_cases.append(dict(cH=i, cB=j, vacuous=True,
+                                         reason="no pose in %s meets the widened box (A161 exact)"
+                                                % ("cell_H" if not hsub else "cell_B")))
                     continue
-                hm_alive += 1
-                alive_hulls.append({k: G.hull_of(nd2, k) for k in hnames})
-                if want_witness and wit is None:
-                    wit = witness(nd2, [hn, "B_" + tag], wbox, s)
-                    if wit is not None:
-                        wit = dict(case="H-meets", cells=[i, j], **wit)
+                alive_here = 0
+                secs = 0.0
+                for u, hbx in enumerate(hsub):
+                    for v, bbx in enumerate(bsub):
+                        roles = dict(pinroles)
+                        roles[hn] = hbx
+                        roles["B_" + tag] = bbx
+                        cs = {"B_" + tag: corner} if corner else None
+                        nd2, i2 = node(roles, label + "/H-meets:%s:%d+%d:%d.%d"
+                                       % (item["cell"], i, j, u, v), cs)
+                        secs += i2["seconds"]
+                        vac = (not i2["dead"]) and G.h_misses(nd2, list(wbox))
+                        if i2["dead"] or vac:
+                            continue
+                        alive_here += 1
+                        alive_hulls.append({k: G.hull_of(nd2, k) for k in hnames})
+                        if want_witness and wit is None:
+                            wit = witness(nd2, [hn, "B_" + tag], wbox, s)
+                            if wit is not None:
+                                wit = dict(case="H-meets", cells=[i, j], **wit)
+                hm_cases.append(dict(cH=i, cB=j, n_meet_H=len(hsub), n_meet_B=len(bsub),
+                                     n_alive=alive_here, seconds=round(secs, 1)))
+                hm_alive += alive_here
             sub.append(dict(case="H-meets", n_cells_H=len(hcells), n_cells_B=len(bcells),
                             n_pairs=len(pairs), tested=hm_tested, capped=capped,
                             n_alive=hm_alive, cases=hm_cases))
@@ -293,23 +367,38 @@ def pair_test(pinroles, hnames, hull, item, of_info, hb, tag, s,
                 capped2 = True
                 tf_alive += 1
                 break
-            roles = dict(pinroles)
-            for k in hnames:
-                roles[k] = tuple(hull[k])
-            roles["B_" + tag] = ci
-            roles["B2_" + tag] = cj
-            cs = {"B_" + tag: corner, "B2_" + tag: corner} if corner else None
-            nd2, i2 = node(roles, label + "/two-free:%s:%d+%d" % (item["cell"], i, j), cs)
             tested += 1
-            tf_cases.append(dict(c1=i, c2=j, dead=i2.get("dead"), seconds=i2["seconds"]))
-            if i2["dead"]:
+            s1 = meet_cover(ci, wbox, max_boxes=meet_boxes)
+            s2 = meet_cover(cj, wbox, max_boxes=meet_boxes)
+            if not s1 or not s2:
+                tf_cases.append(dict(c1=i, c2=j, vacuous=True,
+                                     reason="no pose in that cell meets the widened box "
+                                            "(A161 exact)"))
                 continue
-            tf_alive += 1
-            alive_hulls.append({k: G.hull_of(nd2, k) for k in hnames})
-            if want_witness and wit is None:
-                wit = witness(nd2, ["B_" + tag, "B2_" + tag], wbox, s)
-                if wit is not None:
-                    wit = dict(case="two-free", cells=[i, j], **wit)
+            alive_here = 0
+            secs = 0.0
+            for u, b1 in enumerate(s1):
+                for v, b2 in enumerate(s2):
+                    roles = dict(pinroles)
+                    for k in hnames:
+                        roles[k] = tuple(hull[k])
+                    roles["B_" + tag] = b1
+                    roles["B2_" + tag] = b2
+                    cs = {"B_" + tag: corner, "B2_" + tag: corner} if corner else None
+                    nd2, i2 = node(roles, label + "/two-free:%s:%d+%d:%d.%d"
+                                   % (item["cell"], i, j, u, v), cs)
+                    secs += i2["seconds"]
+                    if i2["dead"]:
+                        continue
+                    alive_here += 1
+                    alive_hulls.append({k: G.hull_of(nd2, k) for k in hnames})
+                    if want_witness and wit is None:
+                        wit = witness(nd2, ["B_" + tag, "B2_" + tag], wbox, s)
+                        if wit is not None:
+                            wit = dict(case="two-free", cells=[i, j], **wit)
+            tf_cases.append(dict(c1=i, c2=j, n_meet_1=len(s1), n_meet_2=len(s2),
+                                 n_alive=alive_here, seconds=round(secs, 1)))
+            tf_alive += alive_here
         sub.append(dict(case="two-free", n_cells=len(bcells), n_pairs=len(tfpairs),
                         tested=tested, capped=capped2, n_alive=tf_alive, cases=tf_cases,
                         hull_B=list(hb[:4])))
