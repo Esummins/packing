@@ -75,7 +75,7 @@ first and the AI's formalisation second:
 | the PI's reading | what it became |
 |---|---|
 | stratify by how many squares sit simply against the box | the class frames the whole proof is organised by (A53) |
-| search the residue with a BDBFS, a breadth-first, depth-bounded sweep organised around basins and drains, instead of one deep tree | the drain lemma and the basin-and-drain route the case trees run on (A29, A30, the drain notes) |
+| search bidirectionally: a breadth-first sweep from the outside (the case tree) meeting an inside-out set of targets (the basins around the known minima and the drains toward them), so the tree never has to reach the bottom on its own and its asymptotic blow-up is cut | the basin-and-drain route the case trees run on: local certificates around the exact minima, drains, and the tree only down to where a basin or a drain takes over (A29, A30, the drain and basin notes) |
 | grow basins anisotropically, along the directions the packing can actually move, not as balls | the asymmetric-width certificates and the slide and common-tilt chains (A151, A160, A163) |
 | "chords along a line add up": the Y0147 page carries a pin, H and two free columns for more than the side | the guard-line row and its verifier clause (A144, A190), six pages dead the night it landed |
 | a corner not holding a simple square must be met by two distinct squares, or the packing climbs to a dead class | Theorem FC on forced cells, the slot-lane kill, the assignment construction (A141, A178, A180) |
