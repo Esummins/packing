@@ -501,6 +501,33 @@ S01 line / S03 / S08 families (34 of the 52 alive A57/A60 pages have no basin in
 box set, the pin-free descents ≈ 1 CPU-h per grain, and NOT the extension classes above s0 (2–30 CPU-h per class for a
 licensed depth ≤ 0.05).
 
+**[M]/[S] A193 (2026-09-10 night) — the two unpriced high-k classes, corners4 (k4_13) and k4_05, under the k0
+toolkit (`attempts/A193-highk-probes`, pages `residue_map/probe193_corners4.svg`, `probe193_k4_05.svg`).** The PI's
+question was whether the tools that moved c0_Y1033 (multibox clips, Theorem FC meeters, A182's assignment search,
+the no-room leaf, the windows + guard-line LP under v5) move these two, or whether they are theory-limited. **Both
+are theory-limited, for named reasons, and the toolkit's kill count is 0 on both.** [T] Frames: corners4's eight
+completable slots all extend to k5_16, which is open on the window, so Theorem FC forces NOTHING on the window and
+all eight slots only at s0 (Lemma CC4); k4_05 has three window-forced cells (BR(0,1) → k5_15, BR(1,0) → k5_13,
+TL(1,0) → k5_12, all FULL) and two s0-only (BL(1,0) → k5_11, TR(0,0) → k5_16). [M] Roots: the pins-only LP with ten
+guard lines is alive on corners4 (τ 7.195 > 7, 0 lines active — A65's wall) and READS 6.965 < 7 on k4_05 — A55's
+number, twice — but the v5 certificate fails with its 58 holes AT the k5_11 pose (1.49, 0.50, 0°) and the witness
+re-solve lands at 7.189: Lemma K1 (aliveness descends containment) measured — the open superclasses' pin images
+sit inside every LP the anonymous-meeter form can state. [M] At s0 with every forced cell instantiated, A182's search
+reaches complete assignments at ≈ 500 nodes (corners4, 5.0 s per node, depth 8) and ≈ 180 (k4_05, 6.8 s, depth 5);
+the meeters localise (hulls 0.1–0.7, cores on 2–3 of them), the no-room leaf is UNDECIDED at all 9 leaves
+(residues 5.9 / 6.8: the centre block never pockets), no chord row is negative, 0 of 10 guard lines is ever
+active, and the windows + guard-line LP returns **τ = 11.000 exactly at all three corners4 leaves with a
+HALF-INTEGRAL support** (fourteen placements at weight 1/2, no near-packing decomposition — the fractional-tilted
+phantom of `corners4_empty.md` surviving inside the assignment) and **10.77–10.86 unconverged at the three k4_05
+leaves, every certificate FAILING with its holes in the windows of the K1 images and the re-solves crossing 11
+(10.930, 11.100)**. [S] Obstructions: corners4 needs a TWO-square row (the two FC meeters of one slot cannot both
+be half-present; Lemma A1's ℓ∞ separation reaches the LP only as a partner-existence cut) — a pair clause, or the
+bounded MEET clip (pieces ∩ bbox of ∩_i (B_i ⊕ −Q_θ) per sub-bin, 2.4× smaller for the four-slot roles) as the
+geometric half; k4_05 needs the δ-resister split at its two open slots (YES = slack-pin k5_11 / k5_16 nodes, the
+P-list's item 7; NO = a NoFam at the slot, which the v4/v5 windows clause does not yet carry). The PI's conjecture
+("comparably") is false here because c0_Y1033 has no open superclass and cored roles at its leaves; these have K1
+mass and a half-integral phantom. Nothing in the residue count moves; `budget.md` §D item 12 carries the prices.
+
 ## 5. Lean / TCB
 
 TopLevel roster: K0-O1 + chain replays + ShellKill (Crowd, CrowdZone, Slide, PinnedSlide, Ceil, Composition);
