@@ -6,9 +6,8 @@ piece; the per-piece minimum is >= the hull's minimum, so it is the tighter soun
 line crosses contributes 1; the free squares contribute >= 0.  rhs(l) = s0 - SUM_roles;  rhs < 0 kills the
 node [T]; beta = floor(rhs) is the number of free squares that can still have a UNIT chord on l.
 
-OPEN chords, never a line ON a square edge: minchord_box is evaluated on each piece's outward box enlarged by
-EPS in centre and tilt, so a pose with the line exactly on an edge (closed chord 1, open chord 0) is dominated
-by a neighbouring pose with the line just outside (chord 0); off an edge the open and closed chords coincide.
+OPEN chords, never a line ON a square edge: the chord primitive is verify_case_v5's own (guardlines_v5.minchord,
+external review P0/P1 fix: an axis-aligned pose whose edge lies on the line counts 0), on each piece's outward box.
 The pin lines: the four pin midlines y = 1/2, y = s0 - 1/2, x = 1/2, x = s0 - 1/2 (each pin of the row has open
 chord 1 at every pose of its delta-box) plus a sweep of the band (0.02, 0.98) and its mirror, on the 1e-9 grid.
 """
@@ -24,12 +23,13 @@ for _p in (os.path.join(ATT, "A144-guard-lines", "code"), os.path.join(ATT, "A57
     if _p not in sys.path:
         sys.path.insert(0, _p)
 import guardline as GL                                           # noqa: E402  READ-ONLY (A144)
-from caselp import Box                                           # noqa: E402  READ-ONLY (A57)
+from caselp import Box, t_lo, t_hi                               # noqa: E402  READ-ONLY (A57)
+sys.path.insert(0, os.path.join(ATT, "A190-guardline-clause", "code"))
+import guardlines_v5 as V5                                       # noqa: E402  READ-ONLY (A190): the verifier's exact primitive
 
 S_RAT = GL.S_RAT
 S0 = float(S_RAT)
 LDEN = GL.LDEN
-EPS = 1e-7                                                       # the open-chord enlargement (centre, degrees)
 
 
 def _q(x):
@@ -54,11 +54,16 @@ def pin_lines(sweep=24):
 
 
 def minchord_pieces(pieces, line):
-    """min over the role's pieces of the exact minchord on the EPS-enlarged piece box (a lower bound of the open chord)."""
+    """min over the role's pieces of verify_case_v5's own exact OPEN-chord primitive (guardlines_v5.minchord: t in
+    [0, 1] via A57's outward t_lo / t_hi clamped, centre rect as exact rationals of the piece's outward box; an
+    axis-aligned pose with the line at distance >= 1/2 -- the line ON an edge -- counts 0).  A lower bound of the
+    open chord over every pose of the role [T]."""
     best = None
     for p in pieces:
-        b = Box(p[0] - EPS, p[1] + EPS, p[2] - EPS, p[3] + EPS, max(0.0, p[4] - EPS), min(90.0, p[5] + EPS))
-        lo = GL.minchord_box(b, line, a=GL.HALF)["lo"]
+        t0, t1 = max(Fr(0), t_lo(p[4])), min(Fr(1), t_hi(p[5]))
+        if t0 > t1:
+            t0, t1 = t1, t0
+        lo = V5.minchord(GL.HALF, t0, t1, Fr(p[0]), Fr(p[1]), Fr(p[2]), Fr(p[3]), line.orient, line.off)
         best = lo if best is None else min(best, lo)
     return best if best is not None else Fr(0)
 
