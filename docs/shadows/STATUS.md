@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-10 14:06` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-10 14:16` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -164,7 +164,7 @@ Of the 71 gallery pages the PI reviews, **53 are still ALIVE and 18 are now DEAD
 * `c0_Y0959` (tree tag `trump5_j0`) -- direct kill record, **A190** by `guard-line clause v5 [h=2.9078; tau 4.8896 < 5]`; certificate `attempts/A190-guardline-clause/certs/c0_Y0959.json`; attributed by *single-tree camp*; 1 record(s) agree.
 * `c0_Y1038` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y1038__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 * `c0_Y0952` (tree tag `trump5_j0`) -- direct kill record, **A190** by `guard-line clause v5 [h=2.9078; tau 4.8896 < 5]`; certificate `attempts/A190-guardline-clause/certs/c0_Y0952.json`; attributed by *single-tree camp*; 1 record(s) agree.
-* `c0_Y0076` (tree tag `trump5_j0`) -- direct kill record, **A198** by `fastprop: A1/FC at BL(0,2): no free cell can hold a meeter (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_c0_Y0076.json`; attributed by *single-tree camp*; 1 record(s) agree.
+* `c0_Y0076` (tree tag `trump5_j0`) -- direct kill record, **A198** by `fastprop: A1/FC at BL(0,2): no free cell can hold a meeter (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_c0_Y0076.json`; attributed by *single-tree camp*; 2 record(s) agree.
 * `c0_Y0175` (tree tag `trump5_j0`) -- direct kill record, **A190** by `guard-line clause v5 [v=0.9929, v=0.9693; tau 4.8773 < 5]`; certificate `attempts/A190-guardline-clause/certs/c0_Y0175.json`; attributed by *single-tree camp*; 1 record(s) agree.
 
 **Review-sheet flag.** 1 page(s) in `review_a57v4.csv` carry `eta < 0` (that is `tau < budget`, a kill) while the review sheet's `verdict` column says `ALIVE-at-LP`: `k5_16_interior_Y0083` (tau 4.500000000, budget 5, eta -5.000e-01, now **DEAD**).  The `verdict` column is stale for these; the status above is taken from the campaign records, not from that column.
@@ -207,6 +207,7 @@ Of the 71 gallery pages the PI reviews, **53 are still ALIVE and 18 are now DEAD
 | `A182 assign182.jsonl` | 2 | 2 |
 | `A189 noroom189.jsonl` | 6 | 0 |
 | `A190 run190.jsonl` | 18 | 18 |
+| `A197 slotpair197.jsonl` | 1 | 1 |
 | `A198 fastprop198.jsonl` | 2 | 2 |
 | `A199 seal199.jsonl` | 1 | 1 |
 | `A200 quick200.jsonl` | 1 | 1 |
