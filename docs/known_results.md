@@ -240,6 +240,18 @@ file is the record of truth for claims, LOG.md is the record of events.
     The local certificate (A116) applies to S33 and S38 without any Trump cut out to r = 0.205 / 0.677.
 
 ## E. What cannot work (proved or measured)
+26e. PROSE Descent (A194, 2026-09-10, `docs/proofs/descent.md`): a non-simple corner met at depths d1 >= d2 converts
+    RIGIDLY to a simple corner at side cost exactly d2 (any corner, all packings; the opposite corner's pins kept),
+    seals the box (0, c_b - d1)^2 (waste >= (c_b - d1)^2), puts its meeters in distinct cells non-lonely, and its
+    band meeter carries a unit chord on every wall-parallel line within gamma(theta) >= 0.2071 of its centre line
+    (Lemma CH).  Theorem D1: T = S + {p} dead on [s_lo, s_T] => every S-packing at m has d2(p) >= s_T - m — the
+    whole content of 'k+1 dead => k'; yield 0 at the window top today, <= 0.01-0.04 after certifying T to its own
+    minimum, exactly 0 at a k0 corner forever (k1_00's minimum is s-hat); Trump refutes the stronger claim.
+    Theorem D2: a local certificate descends to the class lacking pin p as the same tree with p dropped, the lonely
+    clip on bodies meeting p's box, and a partner lane at surviving leaves; [M] A163's nine trump5 witnesses all
+    have f1 as the only TL meeter in a LONELY pose (D2(b) kills them by a clip).  Theorem D3: kills are constant
+    along grain moves inside a certified box; the exchange completion costs the chain difference and a non-simple
+    corner is harmless to the kill unless its crowd is load-bearing.
 27. PROSE Collapse theorem (A34): any sparse SDP relaxation whose cliques carry <= m squares is capped at
     s(m) <= 3.71.
 28. LEAN+CERT Single-square guard-field certificates cannot kill any protected class (item 15).

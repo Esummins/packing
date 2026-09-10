@@ -88,7 +88,7 @@ least overlap is 0.0615 in the upright column P2 | F2 | F3 above BL(0,1); A189: 
 
 **What the descent theorems say.**
 * D1 at TL(0,0): T = k6_23 ⊂ S02's skeleton, so s*_T ≤ 3.886746 and the licensed depth is ≤ 0.0097 even after
-  certifying k6_23 above s0; today 0.  At BR(0,1): T = k6_21, s*_T ≤ 3.9142 (S08), depth ≤ 0.037.  Nothing.
+  certifying k6_23 above s0; today 0.  At BR(0,1): T = k6_21, s*_T ≤ 3.9289 (S38 ∈ k6_21; 3.914 if S08's match is genuine), depth ≤ 0.052.  Nothing.
 * CH-L at TL(0,0), the row A186 asked for (CC-5) [T].  The TL crowd's band meeter hugs the left wall (NW/SW cell,
   u_z < c_b) or the top wall (SE/SW, v_z < c_b).  LEFT case: on every vertical line x = g with |g − u_z| ≤ γ(θ) its
   chord is ≥ 1; the exact pins BL(0,0), BL(0,1) have chord exactly 1 on every x = g, g ∈ (0, 1) (slack h: g ∈ (h,

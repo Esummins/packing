@@ -33,7 +33,7 @@ the pad π_i), `slot_crowds.md` (SLOT-CROWD, SLOT-SLIDE, ŝ′), `exchange_lemma
 > whole content of "class k+1 dead ⇒ class k"** and its yield is s_T − m: **zero at the top of the window while every
 > extension is certified only to s0** (A109's measured zero, now with its reason), and at most s*_T − s0 once T is
 > certified up to its own minimum — ≤ 0.0097 for trump5's TL(0,0) (S02 ⊃ k6_23), ≤ 0.0085 for BL(0,2) (S07),
-> ≤ 0.037 for the others [M, gallery].  Counterexample to "T dead ⇒ S dead": Trump itself.
+> ≤ 0.052 for the others [M, gallery].  Counterexample to "T dead ⇒ S dead": Trump itself.
 >
 > **Theorem D2 (basin descent) [T] — the lever.**  A local certificate C = Dead_{L∪P}(N, s0) in T's frame, with p ∈ P,
 > descends to S's frame as the SAME selection tree with the body p deleted and, at every leaf, the forced-cell
@@ -139,9 +139,9 @@ T's own minimum s*_T; the gallery bounds it from above by the smallest shadow wh
 |---|---|---|---|---|
 | TL(0,0) | k6_23 | S02 (7 slots ⊇ k6_23) | 3.886746 | 0.00966 |
 | BL(0,2) | k6_07 | S07 | 3.885618 | 0.00853 |
-| BR(0,1) / TR(0,1) / TR(1,0) / BL(1,1) | k6_21 / 22 / 24 / 19 | S08 (3.914214) or higher | ≤ 3.9142 (k6_21) | ≤ 0.037 |
+| BR(0,1) / TR(0,1) / TR(1,0) / BL(1,1) | k6_21 / 22 / 24 / 19 | S38 ∈ k6_21 (3.928915, A125's basin frame); S08 (3.914214) if its k6_21 match is genuine | ≤ 3.9289 (k6_21) | ≤ 0.052 |
 
-So the conversion descent can never license the depth 0.3 that A109 measured as decisive; its ceiling is ~0.01–0.04.
+So the conversion descent can never license the depth 0.3 that A109 measured as decisive; its ceiling is ~0.01–0.05.
 **Counterexample to the stronger claim "T dead on W ⇒ S dead on W" [F]:** Trump: trump5 ⊂ every k6 extension, all
 six extensions dead on [191/50, s0], Trump alive at ŝ; its TL crowd has (d₁, d₂) = (0.168, 0.155) [M], so D1 says
 only ŝ + 0.155 > s_T, i.e. s_T < 4.03 — true and harmless.  The non-simple corner is what LETS Trump beat its k6

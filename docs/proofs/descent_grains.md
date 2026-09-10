@@ -75,7 +75,7 @@ boxes:
   width is ≈ 5·10³ pairs per corner after R1/R3 (`sideband.md` §6).  No basin, by definition.
 * D1's precomputation (extension classes certified above s0, `descent.md` §3.1 table): parametric slabs on
   [s0, s*_T − ε] per k6 class; by the slab-width law the cost per class is comparable to A56's whole-window run
-  (2–30 CPU-h) for a licensed depth ≤ s*_T − s0 ≤ 0.01–0.04 — and the k0 corners' extension class k1_00 has minimum
+  (2–30 CPU-h) for a licensed depth ≤ s*_T − s0 ≤ 0.01–0.05 — and the k0 corners' extension class k1_00 has minimum
   ŝ, so **at a k0 corner D1 licenses depth 0 at every side, forever** [T].  Not worth buying.
 
 ## 6. Joint tilt/slide dynamics — how a grain moves, and how a move descends

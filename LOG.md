@@ -8207,3 +8207,37 @@ halves of the answer come from opposite findings.
 - Files: `attempts/A189-noroom/{BRIEF.md, code/{noroom189,report189}.py, code/run189.ps1, results/{noroom189.jsonl,
   report189.txt, certs/}, logs/}`, `docs/residue_map/{gen_noroom189.py, noroom_c0_Y1033.svg}`,
   `docs/shadows/status_gallery.py` (7f), `docs/residue_ledger.md` §4, `docs/budget.md` §D item 11, registry row A189.
+
+## 2026-09-10 — A194-descent (Fable lead, theory) — **Lemma CH + Theorems D1/D2/D3: a non-simple corner hurts by a trade-off, the conversion descent yields s_T − m (zero today), the basin descent is the lever — nine A163 witnesses die by a clip**
+- **The PI's diagnosis (00:45):** no fast way to apply higher-k search results to lower-k spaces; formalise how much a
+  non-simple corner hurts, precompute the grain coverage (Trump 5-grain, pinwheel 4-grain, V 3-grain) with joint
+  tilt/slide dynamics, and turn higher-k kills into lower-k kills.  Delivered as `docs/proofs/descent.md` (Lemma CH,
+  D1–D3), `descent_grains.md` (grains, precomputation P1–P6, dynamics), `descent_examples.md` (l1_104, c0_Y1033, the
+  A163 witnesses, Trump), `docs/residue_map/descent.svg` (`gen_descent.py`), `attempts/A194-descent/`.
+- **Lemma CH [T]** (corner met at depths d₁ ≥ d₂, box side c_b): (S) rigid conversion to a simple corner at side cost
+  exactly d₂ — μ(Q + (t,t)) = μ(Q) + t, every packing, any corner, the opposite corner's pins kept; (A) the box
+  (0, c_b − d₁)² is met by no square; (C) distinct cells, non-lonely, 6-dim pair interior; (L) the band meeter's unit
+  chord on every wall-parallel line within γ(θ) ≥ 0.2071 of its centre line.  [F] no named line, no depth, no area
+  beyond (A) is forced.  Consumption: crowd row at depth s_T − m, R3 NO-family, v5 guard line per centre-slab; clips.
+- **Theorem D1 [T]** (T = S + {p} dead on [s_lo, s_T] ⇒ d₂(p) ≥ s_T − m): the whole content of "k+1 dead ⇒ k"; yield 0
+  at the window top today, ≤ 0.0097 (TL(0,0): S02 ⊃ k6_23) / 0.0085 (BL(0,2): S07) / 0.052 after certifying the
+  extensions to their minima, **exactly 0 at a k0 corner at every side** (k1_00's minimum is ŝ); Trump refutes the
+  stronger claim (its TL crowd at (0.194, 0.181) widened / (0.168, 0.155) unit is what lets it beat its k6 completions).
+- **Theorem D2 [T]** (basin descent): Dead_{L∪P}(N, s0) in T's frame descends to S = T ∖ {p} as the same tree with p
+  dropped + the lonely clip on bodies meeting p's widened box + a partner lane at surviving leaves; emits an `N_boxes`
+  entry in the p-less frame.  **[M] A163's nine trump5 witnesses: f1 is the ONLY TL meeter, depth 0.19–0.31, LONELY in
+  9/9 (margins −0.13…−0.30), 0 partners in 2·10⁵ draws — all nine die by D2(b)**; the clipped re-run [C] is the step from
+  42/54 toward 54/54 in trump5.
+- **Theorem D3 [T]**: kills are constant along grain moves inside a certified box; the exchange completion costs the chain
+  difference; a non-simple corner is harmless to the kill unless its crowd is load-bearing.  [F] "the crowd slides into
+  the slot along the grain's freedom at no cost" — f0's freedom is a 0.298 segment between stops at fixed tilt.
+- **l1_104 [M]**: the τ = 10 support is a k3-skeleton — slot squares at BR/TL/TR (weight 1) + grazers ≤ 0.026 deep
+  (TL's lonely) = three k1 pockets bought with the K0-WIDEN pad — plus one BL crowd (0.628, 0.548); no basin to descend
+  from (K04/S08 has none); l1_159 (K06 = the pinwheel) is a ≈ 1 CPU-h pin-free descent away.  **c0_Y1033**: CH-L is
+  A186's CC-5 column row (pins 2 + left-wall band meeter 1 ⇒ 0.877 left on a vertical line in (0,1)); the slot-square
+  exposure test prunes the "two new" TL branch.
+- **Missing, priced**: basins for S01-line/S03/S08 (34 of 52 alive pages) 1–3 CPU-h each; pin-free descents ≈ 1 CPU-h per
+  grain; extension classes above s0 NOT worth it (2–30 CPU-h per class for depth ≤ 0.05).
+- Process: one BelowNormal python (≈ 3 CPU-min), ceiling 12 excl. Claude Extensions counted and waited on; read-only
+  elsewhere.  Files: `docs/proofs/descent{,_grains,_examples}.md`, `docs/residue_map/{gen_descent.py,descent.svg}`,
+  `attempts/A194-descent/{BRIEF.md,code/hurt194.py,results/hurt194.json,logs/}`, ledger §4, known_results 26e, registry.
