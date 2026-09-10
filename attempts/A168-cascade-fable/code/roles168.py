@@ -408,7 +408,18 @@ def make_node(roles, nsub=4, passes=8):
     axis-core clip below is kept only behind A168_LEGACY_CLIP=1 (the A168 record's own rule)."""
     if os.environ.get("A168_LEGACY_CLIP", "0") != "1":
         import polyclip175 as PX                                  # lazy: polyclip175 imports this module
-        return PX.make_node(roles, refine=int(os.environ.get("A176_REFINE", "2")))
+        rr, rep = PX.make_node(roles, refine=int(os.environ.get("A176_REFINE", "2")))
+        # A183: the coordinator's lever for every NEW node of the cascade -- a 4/2 survivor is
+        # re-clipped at nsub 8 / refine 3 from its own 4/2 fixed point (renorm183.make_node_83);
+        # the parent seeding is by construction (the inherited roles ARE the parent's fixed point)
+        if rr is not None and os.environ.get("A183_LEVER", "1") == "1":
+            import renorm183 as R83                               # lazy: renorm183 imports this module
+            rep42 = rep
+            rr, rep = R83.make_node_83(rr)
+            rep["kept_42"], rep["setting"] = rep42.get("kept"), R83.SET83
+        else:
+            rep["setting"] = "nsub 4 / refine %s" % os.environ.get("A176_REFINE", "2")
+        return rr, rep
     return make_node_legacy(roles, nsub=nsub, passes=passes)
 
 

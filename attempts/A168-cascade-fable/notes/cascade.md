@@ -365,3 +365,15 @@ file was masking its 8/3 upgrade in another under name-order last-wins; `renorm1
 keeps the STRONGEST record per node (DEAD > ALIVE at 8/3 > ALIVE at 4/2 > SKIPPED marker) -- the
 counts above are on that rule.  The shards themselves were unaffected (a node and its children share
 the shard key; the owner's in-memory record is the upgraded one).
+
+**A183.7  Every NEW node on the lever [M] (`roles168.make_node`).**  The cascade's own normalise
+(`roles168.make_node`, the default since A176 = `polyclip175.make_node` on the library) now runs the
+4/2 clip and, on a survivor, `renorm183.make_node_83` from that fixed point (env `A183_LEVER=1`, the
+default; `A176_REFINE` still sets the first pass); the report carries `kept_42` and `setting`.  Parent
+seeding of a NEW node is by construction: a child's inherited roles are the parent's recorded roles,
+which after `renorm181b apply` are the parent's seeded fixed point (no union box, no re-merge).
+Smoke on l1_153 root/D25's 8/3 fixed point (H, D): the 4/2 pass keeps it (0.897 / 0.070 = the record,
+a fixed point), the 8/3 pass bisects the tilt sub-bins once more and keeps 0.873 / 0.059 in 216 s --
+the lever is not idempotent (each application halves the sub-bins again) and every application is
+sound.  Cost note: coex174 / coex174b (piece-level coexistence) call `make_node` per sub-node and now
+pay the lever too; `A183_LEVER=0` restores the 4/2-only normalise for a sweep that cannot afford it.
