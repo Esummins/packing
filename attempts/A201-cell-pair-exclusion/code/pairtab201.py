@@ -61,6 +61,7 @@ class PairTable:
         self.excl = []                 # every exclusion found (rule + numbers)
         self.n = dict(lookups=0, a1=0, cn=0, cell_tested=0, cell_excl=0, exact_tested=0, exact_excl=0, undecided_budget=0, exact_seconds=0.0)
         self.hits = set()              # exclusions USED by the current search
+        self.undecided = set()         # pairs left COMPATIBLE by the budget (distinct)
         self.spent = 0.0
 
     # ---------------------------------------------------------------- registration
@@ -70,6 +71,33 @@ class PairTable:
         for r, opts in fixed_opts.items():
             for o in opts:
                 self.hull[okey(r, o)] = tuple(o[3])
+
+    def precompute_cells(self, cell_budget):
+        """(c1) up front: every pair of DISTINCT cells that host anonymous rows, nearest first, within `cell_budget`
+        seconds -- one clip per cell pair decides every option pair of those cells."""
+        cells = sorted(set(k[1] for k in self.hull if k[0] == "free"))
+        t0 = time.time()
+        pairs = []
+        for i, a in enumerate(cells):
+            for b in cells[i + 1:]:
+                ra, rb = self.page.cells[a]["rect"], self.page.cells[b]["rect"]
+                dx = max(Fr(0), rb[0] - ra[1], ra[0] - rb[1]); dy = max(Fr(0), rb[2] - ra[3], ra[2] - rb[3])
+                if dx * dx + dy * dy < PCL.SQ2 * PCL.SQ2:
+                    pairs.append((dx * dx + dy * dy, a, b))
+        pairs.sort()
+        for _, a, b in pairs:
+            if self.spent >= cell_budget:
+                break
+            ck = frozenset((a, b))
+            if ck in self.cell_cache:
+                continue
+            self.n["cell_tested"] += 1
+            self.cell_cache[ck] = self._clip(self.cell_union(a), self.cell_union(b))
+            if self.cell_cache[ck]["excluded"]:
+                self.n["cell_excl"] += 1
+        self.n["cell_pairs_near"] = len(pairs)
+        self.n["cell_precompute_seconds"] = round(time.time() - t0, 2)
+        return len(pairs)
 
     def pieces(self, k):
         if k not in self.pieces_of:
@@ -111,7 +139,7 @@ class PairTable:
         if not self.exact_on:
             return True, None
         if self.spent >= self.budget:
-            self.n["undecided_budget"] += 1
+            self.undecided.add(frozenset((k1, k2)))
             return True, None
         return self._exact(k1, k2, base)
 
@@ -149,7 +177,7 @@ class PairTable:
                     self.log("      EXACT cell-pair exclusion %s: %s (%.2f s)" % (sorted(ck), r["why"], r["seconds"]))
                 return False, rec
             if self.spent >= self.budget:
-                self.n["undecided_budget"] += 1
+                self.undecided.add(frozenset((k1, k2)))
                 return True, None
         self.n["exact_tested"] += 1                              # (c2) the option pair on its own pieces
         r = self._clip(self.pieces(k1), self.pieces(k2))
@@ -175,6 +203,7 @@ class PairTable:
 
     def summary(self):
         d = dict(self.n)
+        d["undecided_budget"] = len(self.undecided)
         d["exact_seconds"] = round(d["exact_seconds"], 2)
         d.update(budget=self.budget, n_excl=len(self.excl), n_cached=len(self.cache),
                  by_rule={r: sum(1 for e in self.excl if e["rule"] == r) for r in ("A1", "CN", "EXACT")})

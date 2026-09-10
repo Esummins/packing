@@ -46,7 +46,7 @@ def prior_witness(nid, pad):
     return (w or None), os.path.relpath(f, ROOT).replace("\\", "/")
 
 
-def run_page(nid, wall=600, depth=5, joint_depth=2, refine_union=2, pad="g1", budget=180.0, exact=True, log=print):
+def run_page(nid, wall=600, depth=5, joint_depth=2, refine_union=2, pad="g1", budget=300.0, exact=True, log=print):
     T = FP.Trace(wall=wall)
     rec, cls, row = FP.load_page(nid)
     pw, pwf = prior_witness(nid, pad)
@@ -62,7 +62,7 @@ def run_page(nid, wall=600, depth=5, joint_depth=2, refine_union=2, pad="g1", bu
             (rd.get("count_chord") or {}).get("feasible"), ("; DEAD: " + rd["dead"]) if rd.get("dead") else ""))
         pe = rd.get("pair_excl") or {}
         if pe:
-            log("      pair table: %s" % {k: pe.get(k) for k in ("lookups", "a1", "cn", "exact_tested", "exact_excl", "undecided_budget", "exact_seconds", "by_rule")})
+            log("      pair table: %s" % {k: pe.get(k) for k in ("lookups", "a1", "cn", "cell_pairs_near", "cell_tested", "cell_excl", "exact_tested", "exact_excl", "undecided_budget", "exact_seconds", "by_rule")})
         wc = rd.get("witness_check")
         if wc:
             log("      A200 witness cover (%d/%d rows found): %s" % (wc["n_found"], wc["n_keys"], "DEAD -- " + "; ".join(
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     ap.add_argument("--refine-union", type=int, default=2)
     ap.add_argument("--pad", default="g1", choices=("window", "g1", "zero"))
     ap.add_argument("--chain", action="store_true", help="g1 pad, then (if ALIVE) pad 0")
-    ap.add_argument("--budget", type=float, default=180.0, help="seconds of exact pair nodes per page (rule (c))")
+    ap.add_argument("--budget", type=float, default=300.0, help="seconds of exact pair nodes per page (rule (c))")
     ap.add_argument("--noexact", action="store_true", help="rules (a)(b) only")
     ap.add_argument("--seal", action="store_true", help="A200's SEAL leaf at pad 0 if still alive")
     ap.add_argument("--nosvg", action="store_true")

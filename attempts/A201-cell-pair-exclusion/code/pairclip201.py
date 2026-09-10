@@ -48,6 +48,9 @@ def far_apart(h1, h2):
 def _clip_side(pcs, obs, stats, refine):
     keep, changed = [], False
     for bn, r in pcs:
+        if not FP.obstacle_near(obs, r):                         # the K' polygon is > 1/sqrt2 from the rect: untouched
+            keep.append((bn, r))
+            continue
         cur = MB._clip_rect_obstacle(r, obs, bn, stats)
         if cur is None:
             changed = True

@@ -27,7 +27,7 @@ INF = Q.INF
 
 # ----------------------------------------------------------------------------- the page
 class QPage201(Q.QPage):
-    def __init__(self, *a, pair_budget=180.0, pair_exact=True, prior_witness=None, **kw):
+    def __init__(self, *a, pair_budget=300.0, pair_exact=True, prior_witness=None, **kw):
         super().__init__(*a, **kw)
         self.pair_budget, self.pair_exact = pair_budget, pair_exact
         self.prior_witness = prior_witness          # [(who, ci, [slots])] of an earlier count (A200's certificate)
@@ -95,6 +95,10 @@ class QPage201(Q.QPage):
         table.register(free_opts, fixed_opts)
         table.used = {}
         self.tables.append(table)
+        if self.pair_exact:
+            t0 = time.time()
+            npairs = table.precompute_cells(self.pair_budget / 2)
+            self.T.step("pair-cells", time.time() - t0, n_near=npairs, tested=table.n["cell_tested"], excluded=table.n["cell_excl"])
         if self.prior_witness and rnd == 1:
             keys = [(who, ci, frozenset(S)) for who, ci, S in self.prior_witness]
             info["witness_check"] = table.check_pairs(keys, "A200 witness cover")
