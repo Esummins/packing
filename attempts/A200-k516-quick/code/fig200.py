@@ -127,7 +127,8 @@ def panel(page, out, body, ox, oy, S, rng, title):
     ty += 10
     if out.get("pair_test"):
         pr = out["pair_test"]
-        body.append(text(ox, ty, "DEEP: pair test (geo178b, nsub 8 / refine 4) on %s: %s in %.0f s" % (pr["slot"], "ALIVE" if pr["alive"] else "DEAD", pr["seconds"]), 8, "#222", True))
+        body.append(text(ox, ty, "DEEP: pair tests (geo178b, nsub 8 / refine 4): %s; total %.0f s" % (
+            "; ".join("%s (fixed %s) %s %.0fs" % (r["slot"], "+".join(r.get("fixed_roles") or []) or "-", "ALIVE" if r["alive"] else "DEAD", r["seconds"]) for r in pr.get("runs", [])) or "none run", pr.get("seconds", 0)), 8, "#222", True))
         ty += 10
     return ty
 
