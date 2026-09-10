@@ -17,6 +17,7 @@ RES = os.path.join(ATT, "results", "fastprop198.jsonl")
 CERTS = os.path.join(ATT, "certs")
 LOGS = os.path.join(ATT, "logs")
 SVGD = os.path.join(ROOT, "docs", "residue_map")
+FORCE = False
 
 
 def alive_pages(skip=("k5_16_interior_Y0491",)):
@@ -81,7 +82,7 @@ def worker(pages, wall, shard, nshard, svg):
     for k, nid in enumerate(pages):
         if k % nshard != shard:
             continue
-        if nid in done_pages():
+        if nid in done_pages() and not FORCE:
             continue
         while lab_count() >= 12:
             time.sleep(60)
@@ -97,7 +98,9 @@ if __name__ == "__main__":
     ap.add_argument("--nosvg", action="store_true")
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--pages", nargs="*")
+    ap.add_argument("--force", action="store_true", help="re-run pages that already have a row (a new LAST row supersedes)")
     a = ap.parse_args()
+    FORCE = a.force
     pages = a.pages or alive_pages()
     if a.list:
         print(len(pages), pages)

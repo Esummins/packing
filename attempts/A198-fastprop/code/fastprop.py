@@ -720,10 +720,11 @@ def pair_test_fallback(page, wall_left, nsub=8, refine=4):
     p = min(single, key=lambda q: (len(single[q]), sum(single[q].values())))
     it = page.item[p]
     hull = {page.H: list(page.roles[page.H])}
+    # pins ONLY: an instantiated meeter role F_k is a FREE square and may be the very meeter B the pair test
+    # instantiates (it was forced at a cell for some slot, and its pieces may reach this slot too), so passing it as
+    # a distinct role would double-count one square -- unsound (caught on c0_Y0169: B_BL02 died against F1's K').
+    # Dropping the F roles is a relaxation of the node, hence sound.
     pinroles = dict(page.pins)
-    for r, b in page.roles.items():
-        if r.startswith("F"):
-            pinroles[r] = b
     t0 = time.time()
     res = GB.slot_pair_test(pinroles, [page.H], hull, it, nsub=nsub, refine=refine, log=lambda *a: None, label=page.name)
     page.T.step("pair-test", time.time() - t0, slot=p, alive=res["alive"], subcases=res.get("subcases"))
