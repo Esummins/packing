@@ -580,6 +580,29 @@ def main():
                 if not ln.strip():
                     continue
                 r = json.loads(ln)
+                if r.get("kind") == "root_lp" and r.get("kills") and not os.path.exists(os.path.join(CERTS, "root_%s.certify.json" % cls)):
+                    # the pins-only root at budget 7: A190's v5 certificate loop (ExactHyp + guard lines), one round
+                    import emit190 as E
+                    import guardlp
+                    import guardline as GL
+                    from caselp import Box
+                    t0 = time.time()
+                    d = json.load(open(os.path.join(RES, "lpres_root_%s.json" % cls), encoding="utf-8"))
+                    rec_ = record(cls)
+                    boxes = [Box(p["kx"] - p["dpin"], p["kx"] + p["dpin"], p["ky"] - p["dpin"], p["ky"] + p["dpin"], 0.0, 0.0) for p in rec_["pins"]]
+                    H = E.ExactHyp(boxes, [])
+                    lines = [GL.Line(e["orient"], Fr(e["off"]), e.get("tag", "")) for e in d["lines"]]
+                    lines = guardlp.attach_costs(lines, [dict(rhs=S_RAT - sum((GL.minchord_box(b, L, a=Fr(1, 2))["lo"] for b in boxes), Fr(0))) for L in lines])
+                    res = dict(tau=d["tau"], converged=d["converged"], atoms_all=d["atoms_all"], rows_all=d["rows_all"], packing=d["packing"])
+                    log("== certify root %s (tau %s / 7)" % (cls, d["tau"]))
+                    E.CERTS = CERTS
+                    E.run_v5 = run_v5                            # my gates (count + WAIT; in-process at the ceiling)
+                    v, lg, path = E.certify_v5(res, list(d["z"]), H, lines, "root_%s" % cls, t0 + a.certify_wall, rounds=1)
+                    emit(out_path, dict(kind="certify_root", cls=cls, tau=d["tau"], budget=7, certified=v, cert_log=lg,
+                                        cert=os.path.relpath(path, ROOT).replace("\\", "/"), wall_s=round(time.time() - t0, 1),
+                                        verdict=("DEAD(LP, v5 certified) [C under v5 ONLY]" if v == "PASS" else "LP-dead, v5 certificate %s" % v)))
+                    log("== root %s: %s (%.0f s)" % (cls, v, time.time() - t0))
+                    continue
                 if r.get("kind") != "leaf_lp" or not r.get("kills"):
                     continue
                 tag = r["node"]
