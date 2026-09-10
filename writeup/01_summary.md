@@ -162,6 +162,8 @@ first and the AI's formalisation second:
 | force geometry to a fixed point before any LP; drop the fine pass; test B before S; short-circuit by wastage | the standing order of the cascade and the knob experiments (A184) |
 | "can the whole solution set be a basin?" | the basin map, which showed the residue clustering on a side-4 plateau, and the line certificate (A187, A188) |
 | how much does a non-simple corner hurt, and can grain coverage carry high-k kills down to low k? | the descent programme (A194) |
+| two millisecond pair exclusions: meeters' centres a unit apart (inscribed discs), and a chord row that leaves budget for one unit chord, not two | the first tests of the fast propagation engine (A198), which kill in milliseconds what the fine pair test took 1,310 seconds to say |
+| a meeter reaching around a pin's corner is forced into one rotation and seals the neighbouring slot's top edge, so that slot cannot be met from above | the corner-sealing lemma and its window slabs (A199); on Y0491 the pad was the only thing keeping the page alive |
 
 Not every reading survived: several were refuted by the drawings, hairline grazers the eye cannot see or a lane a
 certified polygon closed, and those are listed in the timeline too. The point is the direction of the traffic.
