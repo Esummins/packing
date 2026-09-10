@@ -880,8 +880,11 @@ row through `minL`), ending in `certCover_of_check : certOk C = true → CertCov
 generator's exact w-range, so 246/246 of S07's selection closures were not reproducible until the
 certificates were re-emitted with the Lean-side exclusion (+37 % leaves for S07); the permanent fix — the
 exact w-range as a decidable enclosure in `LocalCertT2` — is [P]. The S33/S38 certificates are [C] under
-A119's independent rational checker (six certificates, 602 421 dead leaves, 10.7·10⁶ multipliers) and not
-yet in Lean [P].
+A119's independent rational checker (six certificates, 602 421 dead leaves, 10.7·10⁶ multipliers); the S33
+neighbourhood (0.05, 10°) — the first with the FULL eleven-square skeleton, 5 free bodies + 6 pins, nv = 28 —
+is in Lean [L] (`localDead_s33_t`, `LocalCertS33T.lean`, A192: A139's regen/encode pipeline unchanged,
+1 908 leaves, build 3 800 s); S33's consumer-relevant (0.2, 10°) neighbourhood (215 904 leaves, ≈ 10× the
+S02T build) and S38 remain [P].
 
 ### 6.4 YES/NO composition, F-COVER, basins as unions
 
@@ -1323,7 +1326,7 @@ the review sheet, and the leaf-from-reading pipeline — because it does not dep
 | `linf_sep`, `distinct_cells`, `not_both_ne`, `sideband_a`, `clauseP_second_meeter`; `SecondMeeterCriterion` (stated) | `Sideband.lean` | — |
 | `checkVertexInPBox_sound`, `shared_point_same_square` | `PolyCoreT5.lean` | — |
 | `LocalDead`, `localDead_of_contradiction`, `classKilledAt_of_localDead`; `node_dead_of_yes_no`, `classKilledAt_of_yes_no`, `y0230_dead` | `Local.lean`; `LocalCompose.lean` | (Y0230 NO replays) |
-| `checkLeaf_sound`, `localDead_of_cert`; `selectionOk_sound`, `relax_wall`, `relax_selection`, `localHyp_bodies`; `treeOk_sound`, `certCover_of_check`, `localDead_of_certOk`; `localDead_s07_t`, `localDead_s02_t` | `LocalCert.lean`; `LocalCertT2.lean`; `LocalCertT3.lean`; `LocalCertS07T.lean`, `LocalCertS02T.lean` | `native_decide` (S07, S02) + `check_3_82`'s |
+| `checkLeaf_sound`, `localDead_of_cert`; `selectionOk_sound`, `relax_wall`, `relax_selection`, `localHyp_bodies`; `treeOk_sound`, `certCover_of_check`, `localDead_of_certOk`; `localDead_s07_t`, `localDead_s02_t`, `localDead_s33_t` (S33 `k6_07` (0.05, 10°), A192) | `LocalCert.lean`; `LocalCertT2.lean`; `LocalCertT3.lean`; `LocalCertS07T.lean`, `LocalCertS02T.lean`, `LocalCertS33T.lean` | `native_decide` (S07, S02, S33) + `check_3_82`'s |
 | `theta_lipschitz`, `sub_le_theta`, `corner_perturb` | `ThetaT.lean` | — |
 | `checkAlive`, `alive_sound`, `alive_sound_mono` (an alivewitness ⇒ no `checkCaseI` PASS of that budget) | `AliveChecker.lean`, `AliveBridge.lean` | — |
 | `count_core`, `windowed_counted`, `windowed_dead`, `windowed_no_family`, `massIn_finset_sum_le` (Theorem W, set level); `checkWindowsI`, `checkWindowsI_facts`, `goC_box_price`, `inBox_root`, `mem_otherCores`, `checkWindowsI_kill` (the v4 checker and its soundness); `coreCorners`, `coreSet_sub_of_corners`, `checkCoreInBox`, `checkCoreInBox_sound`, `checkWindowsI_kill_of_check` ((V3) decided) | `Windows.lean`; `WindowsCheck.lean`; `WindowsCore.lean` (A192) | — |

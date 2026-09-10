@@ -54,12 +54,19 @@ of the axis from `sat_selection_thm`.
 
 | neighbourhood | status |
 |---|---|
-| S33 `k6_07` (r, ρ) = (0.05, 10°) | re-emitted with A139's Lean-faithful exclusion (`regen_t3.py`, 31.8 s: 1 280 bisections, 243 branches, 1 908 dead leaves, 34 477 rows, 0 unresolved) and encoded by `encode_t3.py` (18.3 s, 6.85 MB) as `LocalCertS33T.lean` — `certOk_s33`, `checkLeaf_s33`, **`localDead_s33_t`** stated in the S07T/S02T shape; build: see below |
+| S33 `k6_07` (r, ρ) = (0.05, 10°) | **[L]** — re-emitted with A139's Lean-faithful exclusion (`regen_t3.py`, 31.8 s: 1 280 bisections, 243 branches, 1 908 dead leaves, 34 477 rows, 0 unresolved) and encoded by `encode_t3.py` (18.3 s, 6.85 MB) as `LocalCertS33T.lean` — `certOk_s33`, `checkLeaf_s33`, **`localDead_s33_t`** stated in the S07T/S02T shape; build: see below |
 | S33 (0.2, 10°) (the neighbourhood containing the one alive node, `c0_Y0335`) | [C] under A119's checker; 215 904 dead leaves — priced ≈ 10× the S02T build (≈ 20 h of `native_decide`) — not run |
 | S33 (0.1, 10°), (0.2, 5°), (0.05, 20°) | [C] under A119's checker; the same pipeline applies (`--certdir attempts/A125-s33-local-cert/certs`) |
 | S38 `k6_21` (0.1, 10°) | [C] under A119's checker; 174 160 dead leaves — not run |
 
-S33T_BUILD_STATUS
+**Build**: `python attempts/A78-lean-wave6/code/lakeb.py PackingCertMathlib.LocalCertS33T` → `exit 0 in
+3800.4 s` (63 min, BelowNormal, one `lean.exe` at 3.4 GB; `logs/build_S33T_2.log`; a first run was
+killed at 50 min to free the single lake slot for the other files, `logs/build_S33T.log`).  So
+**`localDead_s33_t` is [L]**: `LocalDead s33Boxes s33Pins (969271/250000)` with `Ls`, `Ps` read off
+the certificate's own `CMeta` (5 free boxes `f0..f4`, 6 pins `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0)
+TR(0,0)`), from `certOk_s33` and `checkLeaf_s33` (`native_decide`) and `localDead_of_certOk`;
+axiom roster in `logs/axioms192_s33.log` (expected, as S07T/S02T: the three standard axioms + the
+two `native_decide` axioms + `check_3_82`'s through `lb_382`).
 
 ## 5. Theorem FC (`forced_corners.md`) and the no-room lemma (A189 Lemma 1)
 
