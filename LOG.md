@@ -8054,3 +8054,36 @@ halves of the answer come from opposite findings.
   `renorm181.py, renorm181b.py, roles168.py, fig168b.py, fig174.py`; `results/renorm181_*.jsonl` (the record),
   `results/lp183_l1_104*.jsonl`, `results/renorm181_{report,summary}_*.json`; `figs/steps_{l1_104,l1_153}_{S1,S2,S3}.svg`;
   fold-ins `attempts/A57-shadow-trees/PAUSED.md`, `docs/residue_ledger.md` §4; registry rows A181 / A183.
+
+## 2026-09-09 — A182-assignment-resume (Fable lead) — **c0_Y1033 ALIVE under the forced-first assignment; A180 resumed resumably after the 15:46 crash; A178 closed**
+
+- **State found.** The machine crashed at ~15:46 (bugcheck 0xD1). A180's directory was entirely uncommitted and its
+  c0_Y1033 run (pid 91776) had reached `FORCED TR(0,1) <- H+F1` under branch 1/6 of BR(0,1) without writing a tree or a
+  capture; A178's pass was at 34 of 52 alive a57v4 pages (all ALIVE) with uncommitted edits to `geo178/geo178b/run178`.
+  Both committed as found (`b6c282db`); brief `attempts/A182-assignment-resume/BRIEF.md`.
+- **Resumable search** (`attempts/A180-forced-first-assignment/code/{journal182,assign182,run182}.py`, `launch182.ps1`,
+  `watch182.ps1`): every multibox node is journaled as it completes (label, input roles, verdict, hulls, the exact miss
+  test per forced cell, chord rows, lanes, the tree nodes' pieces), replayed on resume when label + roles + setting
+  match, finished branches memoised, the journal committed after every branch; a heartbeat and a watchdog enforce the
+  per-node wall of 1,500 s by killing the process tree. Measured: 471 nodes replayed in 22 s [M].
+- **Sharper than A180 [T]:** the 8/3 re-pass of every tree node surviving 4/2 (base: H 0.271 → 0.209, 2.4 → 9.8 s);
+  the chord-row kill (Σ min-chords of pairwise-distinct squares on a guard line > s); the lane prune of the "new"
+  options (A141/A161 LANE cover of the cell's window against the grown cores: lane 0 = no unnamed meeter, lane 1 =
+  not two).
+- **c0_Y1033: ALIVE [M].** Root: BL(1,1) has one option {new,new} → **F1+F2 instantiated**; BR(0,1) 6 options,
+  branched; under BR(0,1)=H+F1, **TR(0,1) forced to H+F1** (H+new 0/24, F1+new 0/48 combos alive); then TL(0,0)
+  (5 options, the Lemma-A2 two-new split last), BL(0,2) (3), TR(1,0) (6–10). 23 complete assignments alive under the
+  clip, 0 dead; one **ALIVE(LP)** (pins + H + F1..F3, budget 2, τ ≥ 2); 3 [P] no exact core on a role hull; 14 [P] LP
+  quota; 8 at budget 0. 584 nodes, 3.0 CPU-h; chord rows min rhs 0.877 (no kill); lane 0 fired once. Three of six
+  BR(0,1) branches and three of five TL(0,0) branches unexplored at the deadline; the verdict stands on the alive
+  leaves. Page `docs/residue_map/c0_Y1033_forced.svg` (35 panels; premise tests and results printed).
+- **a57v4 pass** (`results/assign182.jsonl`, last row per nid; shard pid 17324 still running, resumable): the seven
+  k5_11 pages reached are UNDECIDED at the ROOT option table (> 300 nodes / 1,200 s each; `Y1104`: 120 refinement +
+  63 pair-split nodes before any cell decided). Two rows carry `ERROR` from a Budget raised in a branch child's
+  normalise (fixed `611ceefe`; the same meaning, re-run on the next resume).
+- **Reading.** The assignment is sound and global, and the clip leaf does not separate assignments: no complete
+  assignment died, and the LP on the F_i hulls (unions of meeter windows) is refused for want of an exact core.
+  `docs/residue_ledger.md` §4, `docs/budget.md` §D.10, registry rows A178 (closed, 34/34 ALIVE, superseded),
+  A180 (interrupted, resumed as A182), A182.
+- **Push blocked:** A176's `0a369850` (10 commits back) holds `attempts/A168-cascade-fable/results/tree_l1_104.json`
+  at 793.6 MB > GitHub's 100 MB limit; every push from this box is rejected until that commit is rewritten by its owner.

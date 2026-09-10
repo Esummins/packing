@@ -1,0 +1,57 @@
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\run182.py", line 96, in main
+    r = S.run()
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 222, in run
+    st = self.root
+           ^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 205, in search
+    kids.append(self.search(st2, depth + 1))
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 205, in search
+    kids.append(self.search(st2, depth + 1))
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 205, in search
+    kids.append(self.search(st2, depth + 1))
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 201, in search
+    if not self.normalise(st2, "branch"):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 162, in normalise
+    ok = super().normalise(st, kind)
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign180.py", line 306, in normalise
+    nd, info, rec = self.node(st["roles"], st["corners"], st["label"], kind, assign=dict(st["assign"]))
+                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 58, in node
+    self._budget()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 44, in _budget
+    raise A.Budget("node budget exhausted (%d fresh + %d replayed nodes, %.0f s compute)"
+                   % (self.n_fresh, self.J.n_replayed, self.compute_s))
+assign180.Budget: node budget exhausted (67 fresh + 4 replayed nodes, 1257 s compute)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\run182.py", line 96, in main
+    r = S.run()
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 222, in run
+    v = ("DEAD" if all(c["verdict"] == "DEAD" for c in kids) else
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 205, in search
+    alive = None
+    
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 205, in search
+    alive = None
+    
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 201, in search
+    try:
+    
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 162, in normalise
+    ok = super().normalise(st, kind)
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign180.py", line 306, in normalise
+    nd, info, rec = self.node(st["roles"], st["corners"], st["label"], kind, assign=dict(st["assign"]))
+                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 58, in node
+    self._budget()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A180-forced-first-assignment\code\assign182.py", line 44, in _budget
+    raise A.Budget("node budget exhausted (%d fresh + %d replayed nodes, %.0f s compute)"
+                   % (self.n_fresh, self.J.n_replayed, self.compute_s))
+assign180.Budget: node budget exhausted (111 fresh + 0 replayed nodes, 1201 s compute)

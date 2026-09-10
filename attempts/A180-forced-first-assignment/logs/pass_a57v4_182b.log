@@ -1,0 +1,144 @@
+== k5_11_interior_Y1104 (a57v4, k5_11)  [resume: previous UNDECIDED]
+   journal: 100 nodes, 0 subtrees, 4 lanes on disk
+    root BL(1,1) need 2: candidates new -> 1 option(s)  [H: exact miss test]
+      refine BR(0,1) H+new: 8/32 combos alive
+      refine BR(0,1) new@c1+new@c3: 2/16 combos alive
+    root BR(0,1) need 2: candidates H+new -> 2 option(s)
+      refine TR(0,0) H+new: 2/16 combos alive
+      refine TR(0,0) new@SW+new@SE: 0/4 combos alive
+    root TR(0,0) need 2: candidates H+new -> 1 option(s)
+      refine TL(1,0) new@c2+new@c3: 7/32 combos alive
+    root TL(1,0) need 2: candidates new -> 2 option(s)  [H: exact miss test]
+  FORCED BL(1,1) <- new+new
+    root/forced:BL(1,1)=F1+F2 BR(0,1) need 2: candidates H+F1+F2+new -> 6 option(s)
+      refine TR(0,0) H+new: 2/16 combos alive
+      refine TR(0,0) new@SW+new@SE: 0/4 combos alive
+    root/forced:BL(1,1)=F1+F2 TR(0,0) need 2: candidates H+new -> 1 option(s)  [F1: H; F2: H]
+    root/forced:BL(1,1)=F1+F2 TL(1,0) need 2: candidates F1+F2+new -> 4 option(s)  [H: exact miss test]
+  FORCED TR(0,0) <- H+new
+    root/forced:BL(1,1)=F1+F2/forced:TR(0,0)=H+F3 BR(0,1) need 2: candidates H+F1+F2+new -> 6 option(s)  [F3: exact miss test]
+== k5_11_interior_Y1104: UNDECIDED node budget exhausted (131 fresh + 100 replayed nodes, 1201 s compute) (231 nodes, 131 fresh, 1202 s)
+== k5_11_interior_Y0672 (a57v4, k5_11)  [resume: previous UNDECIDED]
+   journal: 100 nodes, 0 subtrees, 1 lanes on disk
+    root BL(1,1) need 2: candidates H+new -> 2 option(s)
+    root BR(0,1) need 2: candidates H+new -> 2 option(s)
+    root TR(0,0) need 2: candidates H+new -> 4 option(s)
+    root TL(1,0) need 2: candidates H+new -> 2 option(s)
+  BRANCH BL(1,1) <- H+new (1/2)
+    root/b1:BL(1,1)=H+F1 BR(0,1) need 2: candidates H+F1+new -> 4 option(s)
+    root/b1:BL(1,1)=H+F1 TR(0,0) need 2: candidates H+new -> 4 option(s)  [F1: H]
+    root/b1:BL(1,1)=H+F1 TL(1,0) need 2: candidates H+F1+new -> 4 option(s)
+  BRANCH BR(0,1) <- H+F1 (1/4)
+    root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1 TR(0,0) need 2: candidates H+new -> 4 option(s)  [F1: exact miss test]
+    root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1 TL(1,0) need 2: candidates H+new -> 2 option(s)  [F1: exact miss test]
+  BRANCH TL(1,0) <- H+new (1/2)
+    root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1/b1:TL(1,0)=H+F2 TR(0,0) need 2: candidates H+F2+new -> 6 option(s)  [F1: exact miss test]
+  BRANCH TR(0,0) <- H+F2 (1/6)
+  LP leaf root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1/b1:TL(1,0)=H+F2/b1:TR(0,0)=H+F2 budget 3
+  LP: DEAD(LP) tau=2.0 (11 s)
+  BRANCH TR(0,0) <- F2+new (2/6)
+  LP leaf root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1/b1:TL(1,0)=H+F2/b2:TR(0,0)=F2+F3 budget 2
+  LP: [P] no exact core on the hull of F3 (LP not run) tau=None (0 s)
+  BRANCH TR(0,0) <- H+new (3/6)
+  LP leaf root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1/b1:TL(1,0)=H+F2/b3:TR(0,0)=H+F3 budget 2
+  LP: [P] no exact core on the hull of F2 (LP not run) tau=None (0 s)
+  BRANCH TR(0,0) <- new+new (4/6)
+== k5_11_interior_Y0672: ERROR node budget exhausted (67 fresh + 4 replayed nodes, 1257 s compute) (71 nodes, 67 fresh, 1270 s)
+== k5_11_interior_Y0738 (a57v4, k5_11)
+   journal: 92 nodes, 0 subtrees, 4 lanes on disk
+    root BL(1,1) need 2: candidates H+new -> 2 option(s)
+    root BR(0,1) need 2: candidates new -> 1 option(s)  [H: exact miss test]
+    root TR(0,0) need 2: candidates new -> 6 option(s)  [H: exact miss test]
+      refine TL(1,0) H+new: 20/24 combos alive
+      refine TL(1,0) new@c2+new@c3: 16/16 combos alive
+    root TL(1,0) need 2: candidates H+new -> 3 option(s)
+  FORCED BR(0,1) <- new+new
+    root/forced:BR(0,1)=F1+F2 BL(1,1) need 2: candidates H+F1+F2+new -> 7 option(s)
+    root/forced:BR(0,1)=F1+F2 TR(0,0) need 2: candidates F1+F2+new -> 9 option(s)  [H: exact miss test]
+    root/forced:BR(0,1)=F1+F2 TL(1,0) need 2: candidates H+F1+F2+new -> 7 option(s)
+  BRANCH BL(1,1) <- F1+F2 (1/7)
+    root/forced:BR(0,1)=F1+F2/b1:BL(1,1)=F1+F2 TR(0,0) need 2: candidates F1+F2+new -> 7 option(s)  [H: exact miss test]
+    root/forced:BR(0,1)=F1+F2/b1:BL(1,1)=F1+F2 TL(1,0) need 2: candidates H+F1+F2+new -> 5 option(s)
+  BRANCH TL(1,0) <- H+F1 (1/5)
+== k5_11_interior_Y0738: UNDECIDED node budget exhausted (99 fresh + 36 replayed nodes, 1226 s compute) (135 nodes, 99 fresh, 1230 s)
+== k5_11_interior_Y1110 (a57v4, k5_11)
+   journal: 0 nodes, 0 subtrees, 0 lanes on disk
+    root BL(1,1) need 2: candidates H+new -> 2 option(s)
+    root BR(0,1) need 2: candidates H+new -> 2 option(s)
+    root TR(0,0) need 2: candidates H+new -> 1 option(s)
+    root TL(1,0) need 2: candidates H+new -> 2 option(s)
+  FORCED TR(0,0) <- H+new
+    root/forced:TR(0,0)=H+F1 BL(1,1) need 2: candidates H+new -> 2 option(s)  [F1: exact miss test]
+      refine BR(0,1) H+new: 7/40 combos alive
+      refine BR(0,1) new@c1+new@c4: 2/4 combos alive
+      refine BR(0,1) new@c1+new@c5: 2/32 combos alive
+    root/forced:TR(0,0)=H+F1 BR(0,1) need 2: candidates H+new -> 3 option(s)  [F1: exact miss test]
+      refine TL(1,0) H+new: 6/40 combos alive
+== k5_11_interior_Y1110: UNDECIDED node budget exhausted (185 fresh + 0 replayed nodes, 1201 s compute) (185 nodes, 185 fresh, 1203 s)
+== k5_11_interior_Y0662 (a57v4, k5_11)
+   journal: 0 nodes, 0 subtrees, 0 lanes on disk
+    root BL(1,1) need 2: candidates new -> 1 option(s)  [H: exact miss test]
+      refine BR(0,1) new@c1+new@c5: 20/32 combos alive
+    root BR(0,1) need 2: candidates H+new -> 3 option(s)
+      refine TR(0,0) H+new: 2/16 combos alive
+      refine TR(0,0) new@SW+new@NW: 0/4 combos alive
+    root TR(0,0) need 2: candidates H+new -> 1 option(s)
+      refine TL(1,0) H+new: 7/32 combos alive
+      refine TL(1,0) new@c2+new@c3: 0/4 combos alive
+    root TL(1,0) need 2: candidates H+new -> 1 option(s)
+  FORCED BL(1,1) <- new+new
+    root/forced:BL(1,1)=F1+F2 BR(0,1) need 2: candidates H+F1+F2+new -> 7 option(s)
+      refine TR(0,0) H+new: 2/16 combos alive
+      refine TR(0,0) new@SW+new@NW: 0/4 combos alive
+    root/forced:BL(1,1)=F1+F2 TR(0,0) need 2: candidates H+new -> 1 option(s)  [F1: H; F2: H]
+    root/forced:BL(1,1)=F1+F2 TL(1,0) need 2: candidates H+F1+F2+new -> 6 option(s)
+  FORCED TR(0,0) <- H+new
+== k5_11_interior_Y0662: UNDECIDED node budget exhausted (190 fresh + 0 replayed nodes, 1331 s compute) (190 nodes, 190 fresh, 1332 s)
+== k5_11_interior_Y0130 (a57v4, k5_11)
+   journal: 0 nodes, 0 subtrees, 0 lanes on disk
+    root BL(1,1) need 2: candidates H+new -> 2 option(s)
+    root BR(0,1) need 2: candidates H+new -> 2 option(s)
+    root TR(0,0) need 2: candidates H+new -> 4 option(s)
+    root TL(1,0) need 2: candidates H+new -> 2 option(s)
+  BRANCH BL(1,1) <- H+new (1/2)
+    root/b1:BL(1,1)=H+F1 BR(0,1) need 2: candidates H+F1+new -> 4 option(s)
+    root/b1:BL(1,1)=H+F1 TR(0,0) need 2: candidates H+new -> 4 option(s)  [F1: H]
+    root/b1:BL(1,1)=H+F1 TL(1,0) need 2: candidates H+F1+new -> 4 option(s)
+  BRANCH BR(0,1) <- H+F1 (1/4)
+      refine TR(0,0) H+new: 11/32 combos alive
+      refine TR(0,0) new@SW+new@NW: 7/8 combos alive
+      refine TR(0,0) new@SE+new@NW: 1/16 combos alive
+    root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1 TR(0,0) need 2: candidates H+new -> 3 option(s)  [F1: exact miss test]
+    root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1 TL(1,0) need 2: candidates H+new -> 2 option(s)  [F1: exact miss test]
+  BRANCH TL(1,0) <- H+new (1/2)
+== k5_11_interior_Y0130: ERROR node budget exhausted (111 fresh + 0 replayed nodes, 1201 s compute) (111 nodes, 111 fresh, 1202 s)
+== k5_11_interior_Y0308 (a57v4, k5_11)
+   journal: 0 nodes, 0 subtrees, 0 lanes on disk
+    root BL(1,1) need 2: candidates H+new -> 2 option(s)
+    root BR(0,1) need 2: candidates H+new -> 2 option(s)
+      refine TR(0,0) H+new: 2/16 combos alive
+      refine TR(0,0) new@SW+new@NW: 2/8 combos alive
+    root TR(0,0) need 2: candidates H+new -> 2 option(s)
+      refine TL(1,0) H+new: 11/32 combos alive
+      refine TL(1,0) new@c2+new@c3: 0/4 combos alive
+    root TL(1,0) need 2: candidates H+new -> 1 option(s)
+  FORCED TL(1,0) <- H+new
+    root/forced:TL(1,0)=H+F1 BL(1,1) need 2: candidates H+F1+new -> 4 option(s)
+    root/forced:TL(1,0)=H+F1 BR(0,1) need 2: candidates H+new -> 2 option(s)  [F1: exact miss test]
+      refine TR(0,0) H+new: 2/16 combos alive
+      refine TR(0,0) new@SW+new@NW: 2/8 combos alive
+    root/forced:TL(1,0)=H+F1 TR(0,0) need 2: candidates H+new -> 2 option(s)  [F1: exact miss test]
+  BRANCH BR(0,1) <- H+new (1/2)
+    root/forced:TL(1,0)=H+F1/b1:BR(0,1)=H+F2 BL(1,1) need 2: candidates H+F1+F2+new -> 7 option(s)
+== k5_11_interior_Y0308: UNDECIDED node budget exhausted (151 fresh + 0 replayed nodes, 1204 s compute) (151 nodes, 151 fresh, 1206 s)
+== k5_11_interior_Y0985 (a57v4, k5_11)
+   journal: 0 nodes, 0 subtrees, 0 lanes on disk
+    root BL(1,1) need 2: candidates new -> 1 option(s)  [H: exact miss test]
+      refine BR(0,1) H+new: 8/32 combos alive
+      refine BR(0,1) new@c1+new@c3: 1/8 combos alive
+    root BR(0,1) need 2: candidates H+new -> 2 option(s)
+      refine TR(0,0) H+new: 2/16 combos alive
+      refine TR(0,0) new@SW+new@SE: 2/8 combos alive
+    root TR(0,0) need 2: candidates H+new -> 2 option(s)
+    root TL(1,0) need 2: candidates H+new -> 4 option(s)
+  FORCED BL(1,1) <- new+new

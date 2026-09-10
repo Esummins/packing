@@ -426,6 +426,17 @@ is boxes that do not lean into the unpinned `TL(0,0)` corner.
    notes/recovered.md, notes/fix.md, results/scan170.json, results/summary170.json,
    results/check170.json}`.
 
+10. **The assignment search is node-bound, not LP-bound (A182, 2026-09-09).** `c0_Y1033` under the
+   forced-first assignment: 584 multibox nodes in 3.0 CPU-h, 26 LP-leaf calls of which ONE solved (ALIVE,
+   τ ≥ 2 at budget 2) — the rest were refused by the page's LP quota or by a role hull without an exact core.
+   Where the nodes go: option refinement (up to 100 sub-box combinations per option) and the cell-pair splits
+   are two thirds of them (`Y1104`: 120 + 63 of 231); the 8/3 re-pass costs 4× the 4/2 pass on a tree node
+   (2.4 → 9.8 s at the base) and buys H 0.271 → 0.209; a lane cover costs 6–12 s and returned information once
+   in 20 calls. A k5_11 page cannot decide its first cell inside 300 nodes / 1,200 s. The lever, if the
+   construction is pursued: cap the refinement (combos ≤ 40 costs nothing in kills on `c0_Y1033`), drop lanes
+   at the root, and spend the LP only where every role hull has an exact core — or replace the clip leaf by
+   the piece-granularity coexistence cut (A174), since no complete assignment died under the clip.
+
 ## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
 
 The 4-D verifier bisects tilt, position and side to a cap of 48 levels per path. Two constants belong to the
