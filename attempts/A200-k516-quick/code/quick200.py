@@ -491,6 +491,44 @@ def noroom_leaf(page, log=print):
     return r
 
 
+# ----------------------------------------------------------------------------- (g) the deep path: the fine pair test per slot
+def deep_pair(page, wall_left, log=print, nsub=8, refine=4):
+    """A178's geo178b.slot_pair_test (H-meets + two-free, Lemma A1 cells, nsub 8 / refine 4) on the clipped node, slot by
+    slot from the most constrained unbounded one (smallest union diameter); an instantiated role F_k is passed as a fixed
+    obstacle ONLY when it provably misses the slot (then it cannot be the meeter B the test instantiates: sound)."""
+    import geo178b as GB
+    if page.nd is None:
+        return None
+    rd = page.rounds[-1] if page.rounds else {}
+    urec = rd.get("union") or {}
+    order = sorted([p for p in page.slots if page.caps_last.get(p, INF) >= INF],
+                   key=lambda p: (urec.get(p, {}).get("diam") or 9, len(rd.get("single", {}).get(p, {}))))
+    order += [p for p in page.slots if p not in order and page.caps_last.get(p, INF) > 0]
+    t0 = time.time()
+    runs = []
+    for p in order:
+        if wall_left is not None and time.time() - t0 > wall_left - 120:
+            break
+        it = page.item[p]
+        hull = {h: list(page.roles[h]) for h in page.hnames}
+        fixed = dict(page.pins)
+        for r in page.role_cell:
+            if not page.role_reach(r, frozenset([p]))[1]:
+                fixed[r] = tuple(page.roles[r])
+        t1 = time.time()
+        res = GB.slot_pair_test(fixed, list(page.hnames), hull, it, nsub=nsub, refine=refine, log=lambda *a: None, label=page.name,
+                                max_pairs=400, max_cells=24)
+        r = dict(slot=p, alive=res["alive"], leaf=res.get("leaf"), seconds=round(time.time() - t1, 1), subcases=res.get("subcases"),
+                 fixed_roles=sorted(k for k in fixed if not k.startswith("P")))
+        runs.append(r)
+        page.T.step("pair-test", r["seconds"], slot=p, alive=res["alive"], fixed=r["fixed_roles"])
+        log("   pair test on %s (fixed %s): %s (%.0f s)" % (p, r["fixed_roles"], "ALIVE" if res["alive"] else "DEAD", r["seconds"]))
+        if not res["alive"]:
+            return dict(runs=runs, slot=p, alive=False, leaf="pair test (geo178b, nsub %d / refine %d) at %s: %s" % (nsub, refine, p, res.get("leaf")),
+                        seconds=round(time.time() - t0, 1))
+    return dict(runs=runs, alive=True, seconds=round(time.time() - t0, 1))
+
+
 # ----------------------------------------------------------------------------- driver
 def run_page(nid, wall=900, depth=5, joint_depth=2, refine_union=2, seal=True, pad="window", log=print):
     T = FP.Trace(wall=wall)
@@ -592,16 +630,14 @@ if __name__ == "__main__":
                 break
     out, pg = outs[0], pages[0]                                                        # the g1-pad node is the one the deep path continues
     if out["verdict"] == "ALIVE" and a.deep:
-        pr = FP.pair_test_fallback(pg, pg.T.left())
+        pr = deep_pair(pg, a.wall, print)
         out["pair_test"] = pr
         out["path"] = "deep"
         out["chain_done"] = True
-        if pr is not None:
-            print("   pair test on %s: %s (%.0f s)" % (pr["slot"], "ALIVE" if pr["alive"] else "DEAD", pr["seconds"]), flush=True)
-            if not pr["alive"]:
-                out["verdict"], out["leaf"], out["step_killed"] = "DEAD", "pair test (geo178b, nsub 8 / refine 4) at %s: %s" % (pr["slot"], pr["leaf"]), "pair-test"
+        if pr is not None and not pr["alive"]:
+            out["verdict"], out["leaf"], out["step_killed"] = "DEAD", pr["leaf"], "pair-test"
         out["tests"], out["steps"], out["seconds"] = pg.T.tests, pg.T.steps, round(pg.T.now(), 1)
-        emit(out, a.cert, a.out)
+        emit(out, out["cert_path"], a.out)
     if a.svg and all(o["verdict"] == "ALIVE" for o in outs):
         import fig200
         fig200.draw(pages[-1], outs, a.svg)
