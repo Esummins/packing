@@ -56,7 +56,7 @@ def run_one(nid, wall, svg=True):
     args = [sys.executable, os.path.join(HERE, "fastprop.py"), nid, "--wall", str(wall), "--cert", cert, "--out", RES]
     if svg:
         args += ["--svg", os.path.join(SVGD, "fastprop_%s.svg" % nid)]
-    env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1")
+    env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTHONUNBUFFERED="1")
     t0 = time.time()
     p = subprocess.Popen(args, stdout=log, stderr=subprocess.STDOUT, env=env, cwd=ROOT,
                          creationflags=getattr(subprocess, "BELOW_NORMAL_PRIORITY_CLASS", 0))

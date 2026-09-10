@@ -89,7 +89,7 @@ def admissible_pose(pcs, pin_polys, rng, tries=400, wbs=()):
     return None
 
 
-def realise(page, witness, pin_polys, rng, tries=3000):
+def realise(page, witness, pin_polys, rng, tries=400):
     """try to sample one pose per witness placement, pairwise interior-disjoint, each meeting its claimed slots."""
     plans = []
     for who, (ci, S, _ch, _h) in witness:
@@ -207,7 +207,7 @@ def draw(page, out, path, seed=198):
             body.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="#ff8f00" fill-opacity="0.25" stroke="#e65100" stroke-width="1.2" stroke-dasharray="4,2"/>' % (
                 X(hh[0]), Y(hh[3]), max(1, (hh[1] - hh[0]) * S), max(1, (hh[3] - hh[2]) * S)))
             body.append(text(X(0.5 * (hh[0] + hh[1])), Y(0.5 * (hh[2] + hh[3])) - 4, "%s@%d -> %s" % (who, ci, "+".join(sorted(Sset))), 7, "#bf360c", True, "middle"))
-        body.append(text(ox, oy + 16, "witness cover (hulls of the placements' surviving pieces; the sampler found NO realised configuration in 3000 tries)", 9, "#bf360c", True))
+        body.append(text(ox, oy + 16, "witness cover (hulls of the placements' surviving pieces; the sampler found NO realised configuration in 400 tries)", 9, "#bf360c", True))
     # per-slot small panels
     px0 = ox + S0 * S + 40
     ss = 62

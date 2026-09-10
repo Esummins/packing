@@ -781,14 +781,28 @@ if __name__ == "__main__":
     ap.add_argument("--cert", default=None)
     ap.add_argument("--svg", default=None)
     a = ap.parse_args()
-    out, pg = run_page(a.nid, wall=a.wall, depth=a.depth, joint_depth=a.jdepth, pair=not a.nopair)
-    if a.cert:
-        json.dump(out, open(a.cert, "w", encoding="utf-8"), indent=1, default=str)
-    if a.out:
-        slim = {k: v for k, v in out.items() if k not in ("tests", "steps")}
-        slim["cert"] = a.cert
-        with open(a.out, "a", encoding="utf-8") as f:
-            f.write(json.dumps(slim, default=str) + "\n")
+    def emit(out):
+        if a.cert:
+            json.dump(out, open(a.cert, "w", encoding="utf-8"), indent=1, default=str)
+        if a.out:
+            slim = {k: v for k, v in out.items() if k not in ("tests", "steps")}
+            slim["cert"] = a.cert
+            with open(a.out, "a", encoding="utf-8") as f:
+                f.write(json.dumps(slim, default=str) + "\n")
+
+    # the propagation verdict is written FIRST (an interim row); the pair test and the figure may overrun the wall
+    out, pg = run_page(a.nid, wall=a.wall, depth=a.depth, joint_depth=a.jdepth, pair=False)
+    emit(out)
+    if out["verdict"] == "ALIVE" and not a.nopair:
+        pr = pair_test_fallback(pg, pg.T.left())
+        out["pair_test"] = pr
+        if pr is not None:
+            print("   pair test on %s: %s (%.0f s)" % (pr["slot"], "ALIVE" if pr["alive"] else "DEAD", pr["seconds"]), flush=True)
+            if not pr["alive"]:
+                out["verdict"], out["leaf"] = "DEAD", "pair test (geo178b, nsub 8 / refine 4) at %s: %s" % (pr["slot"], pr["leaf"])
+            out["tests"] = pg.T.tests
+            out["seconds"] = round(pg.T.now(), 1)
+            emit(out)
     if a.svg:
         import fig198
         fig198.draw(pg, out, a.svg)
