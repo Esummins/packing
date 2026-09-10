@@ -90,7 +90,7 @@ def main():
             except Exception:                                    # noqa: BLE001
                 continue
             if not str(r.get("verdict", "")).startswith(("[P]", "ERROR")):
-                done[r["node"]] = r
+                done[r.get("record_node") or r["node"]] = r
     todo = []
     for nd, r in nodes:
         d = done.get(nd)
