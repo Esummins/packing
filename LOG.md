@@ -8158,3 +8158,52 @@ halves of the answer come from opposite findings.
 - Files: `attempts/A186-contact-census/{BRIEF.md, code/{nodes186,contacts186,tree186,descend186,global186,fig186}.py,
   results/{assignments186.json, candidates186_b0.json, tree186.jsonl, descend186.jsonl, global186.jsonl}, notes/census.md}`,
   `docs/proofs/contact_census.md`, `docs/residue_map/c0_Y1033_contacts.svg`, `docs/residue_ledger.md` §4, registry row A186.
+
+## 2026-09-09 — A189-noroom (Opus engineer) — done-mixed
+- **The task**: turn PI's NO-ROOM leaf (the reading of A182's STEP 34 panel — *"I only see 10 squares placed. How does
+  this admit an 11th square anywhere?"*, killed by the coordinator in `attempts/A182-assignment-resume/results/noroom/`)
+  into a tool with a general-`k` statement, and run it over every recorded assignment node.
+- **Statement [T]** (`attempts/A189-noroom/code/noroom189.py` docstring, stated for any `n`):
+  **Lemma 1 (pocket counting bound).** With `k` roles boxed at the multibox fixed point, bisect the free unit square's
+  (centre, tilt) space against the `k` cores with multibox's exact dead test — the free square is deliberately NOT a
+  `Node` role, because it has no `K'` of its own. Every dropped piece is certified "every pose here meets some core", so
+  every free pose's centre lies in the open residue. Cover the residue's centres by axis-aligned pockets `P_j` with
+  non-empty interior; a square whose centre lies in `P_j` MEETS `int(P_j)` (its interior is an open neighbourhood of the
+  centre), so `#free ≤ Σ_j LANE(P_j)` with A141/A161's exact lane cover, and the node is DEAD once that sum is `< n − k`.
+  `k = n − 1`: DEAD iff every pocket has LANE = 0 (the STEP 34 certificate). `k = n − 2`: DEAD iff the pockets sum to
+  ≤ 1 — A161's pair test is exactly what turns an undischarged cover into LANE = 1, so the two-free case is free.
+  Undecided pockets count as unbounded. **Lemma 2 (container partition with multiplicity).** On a uniform grid of side
+  `w`, a unit square at tilt θ contains the concentric axis-aligned square of side `1/(|cos|+|sin|) ≥ 1/√2`; an interval
+  of length `L` meets ≥ `⌈L/w⌉` column interiors and every (met column, met row) cell interior is met, so a free square
+  meets **at least** `N(w) = ⌈(1/√2)/w⌉²` cells and `m ≤ ⌊Σ_i LANE(C_i)/N(w)⌋`. The brief's "a single square meets at
+  most 4 cells of side < 1" is the same observation reversed — a tilted unit square meets up to 9 half-grid cells; the
+  sound, useful direction is AT LEAST, `N(1/2) = 4`.
+- **Regression [C]**: STEP 34 reproduces DEAD in **47.5 s** — bisect depth 13 in 20.3 s dropping **0.99962** of the root
+  centre×tilt volume, ONE residue pocket `[3.179, 3.440] × [1.522, 1.903]` (area 0.0995), `LANE = 0` in 2.5 s
+  (`results/certs/step34_regression.json`).
+- **The pass [M]** (`results/noroom189.jsonl`, `results/report189.txt`): 33 recorded `branch` nodes of A182's fourteen
+  journals with `8 ≤ k ≤ 10` (the journals have no `leaf` kind; `subtree` records are result summaries with no `hull`,
+  and `k = 11` nodes are vacuous — no free square left). **5 NO-ROOM kills, every one at `k = 10` and every one on
+  `c0_Y1033`** of 19 tested; **0 of 8** at `k = 9`; **0 of 6** at `k = 8`. Two further nodes of `k5_11_interior_Y0672`
+  die at normalise by A171's pair leaf (`EmptyBox`), recorded under their own leaf name and never counted as NO-ROOM.
+- **Why the rest survive [M]**: an `F_i` role carried as a whole meeter window has an **EMPTY `K'`** — no point lies in
+  every pose — so it clips nothing (A178's `mbpatch178` gives that the sound semantics; without it the run raises).
+  Such nodes still drop ~95 % of the free square's volume but leave pockets of total area **0.8–2.1**, where LANE = 0 is
+  impossible; the pass declines the lane cover there as a budget decision, never as a verdict (26 UNDECIDED).
+- **A183's alive S3 nodes of `l1_104`** (4 boxed roles, 7 free): 8 sampled, the counting bound **never bites**, exactly
+  as the arithmetic says — a 4×4 grid on `s ≈ 3.877` gives `w ≈ 0.969`, `N = 1`, and a bound of 16 ≥ 7 even if every
+  cell decided; the half-grid that would give `N = 4` needs a LANE verdict on 64 cells.
+- **Pages retired: NONE, structurally.** A dead branch kills its whole subtree (A182's tree is a case tree: a
+  descendant's hypothesis implies its ancestor's — no box monotonicity needed), but `c0_Y1033`'s five dead nodes cover
+  only **4 of its 30 alive/undecided leaves**, and A182's search of every one of the six pages carrying journaled
+  branch nodes stopped on node budget, so the unexplored branches are unexamined leaves. `status_gallery` (7f) computes
+  exactly this and adds a kill row only when both conditions hold; a57v4 stays 50 ALIVE / 10 DEAD, k0v4 11 ALIVE.
+- **Read-across for every n**: the leaf costs 47 s against the ~850 s an LP kill costs, and it killed the deepest node
+  A182 reached — it belongs INSIDE the assignment search, at every node before branching or LP, and it pays exactly
+  where the assignment has been refined enough to give each role a real core.
+- **Process**: ≤ 1 python at BelowNormal / affinity 0xFFFF throughout (the box held 9–10 lab pythons plus 4
+  Claude-extension pythons; ceiling 12 checked with a CIM filter before every launch); READ-ONLY on every other attempt;
+  `PYTHONDONTWRITEBYTECODE=1`; ~2.5 CPU-h total.
+- Files: `attempts/A189-noroom/{BRIEF.md, code/{noroom189,report189}.py, code/run189.ps1, results/{noroom189.jsonl,
+  report189.txt, certs/}, logs/}`, `docs/residue_map/{gen_noroom189.py, noroom_c0_Y1033.svg}`,
+  `docs/shadows/status_gallery.py` (7f), `docs/residue_ledger.md` §4, `docs/budget.md` §D item 11, registry row A189.

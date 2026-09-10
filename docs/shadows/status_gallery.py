@@ -641,6 +641,35 @@ def collect(table, corpus):
             d,
         )
 
+    # (7g) A190's GUARD-LINE kills (docs/proofs/guardline_clause.md Theorem G): the chord-sum column in the
+    #      node LP and the `guardlines` clause of verify_case_v5 (over A185's v4 over v3 over v1, shas
+    #      asserted).  results/run190.jsonl is resumable: the LAST row per id is the verdict; only
+    #      "DEAD(LP, v5 certified)" rows are kills, and every one is [C] under v5 ONLY -- the frozen v1
+    #      chain does not read `guardlines` (flagged "v5" in the leaf and the note).
+    last190 = {}
+    for d in jl(A("A190-guardline-clause", "results", "run190.jsonl")):
+        if d.get("id"):
+            last190[d["id"]] = d
+    for nid, d in sorted(last190.items()):
+        if not str(d.get("verdict", "")).startswith("DEAD(LP, v5 certified)"):
+            continue
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        act = [z for z in (d.get("z") or []) if float(z.get("z") or 0) > 1e-6]
+        lines = ", ".join("%s=%.4f" % (z["line"]["orient"], z["line"]["off_float"]) for z in act) or "-"
+        table.add_rec(
+            "A190 run190.jsonl",
+            camp,
+            nid,
+            True,
+            "guard-line clause v5 [%s; tau %.4f < %s]" % (lines, float(d.get("tau") or 0), d.get("budget")),
+            "A190",
+            d.get("cert") or "",
+            fdate(A("A190-guardline-clause", "results", "run190.jsonl")),
+            dict(d, tau_before=d.get("tau_stored")),
+            note="[C] under verify_case_v5 ONLY (guardlines clause; v1/v3/v4 imported unchanged)",
+        )
+
     # (7d) A178's geometry-cascade kills (forced-corner / forced-slot roles, multibox pair leaf)
     #      results/geopass178.jsonl is resumable: the LAST row per nid is the verdict.
     last178 = {}
@@ -708,7 +737,9 @@ def collect(table, corpus):
     #            retired here; it is reported as "leaves cleared, search incomplete".
     n189 = {}
     for d in jl(A("A189-noroom", "results", "noroom189.jsonl")):
-        if d.get("page") and d.get("label"):
+        # only the A182 assignment journals carry a page whose closure this block can decide;
+        # A189's A183 rows (the k0 cascade's S3 nodes) are cells, not gallery pages.
+        if d.get("page") and d.get("label") and d.get("source") == "A182 journal":
             n189.setdefault(d["page"], []).append(d)
     if n189:
         last182b = {}

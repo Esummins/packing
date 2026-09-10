@@ -1,0 +1,49 @@
+== by source / k / verdict ==
+  A182 journal     k=10  DEAD       NO-ROOM                    5
+  A182 journal     k=10  UNDECIDED  NO-ROOM                    14
+  A182 journal     k=9   DEAD       EmptyBox (A171 pair leaf)  1
+  A182 journal     k=9   UNDECIDED  NO-ROOM                    7
+  A182 journal     k=8   DEAD       EmptyBox (A171 pair leaf)  1
+  A182 journal     k=8   UNDECIDED  NO-ROOM                    5
+  A183 alive S3    k=4   UNDECIDED  NO-ROOM                    8
+
+== by page ==
+  c0_Y1033                     {'UNDECIDED': 19, 'DEAD': 5}
+  k5_11_interior_Y0308         {'UNDECIDED': 1}
+  k5_11_interior_Y0672         {'DEAD': 2, 'UNDECIDED': 2}
+  k5_11_interior_Y0738         {'UNDECIDED': 2}
+  k5_11_interior_Y0985         {'UNDECIDED': 1}
+  k5_16_interior_Y0881         {'UNDECIDED': 1}
+  l1_104                       {'UNDECIDED': 8}
+
+== DEAD nodes ==
+  k=10  c0_Y1033                      NO-ROOM bound=0
+        root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1/forced:TR(0,1)=H+F1/b1:TL(0,0)=F2+F3/b2:BL(0,2)=F2+F4/b1:TR(1,0)=F2+F3
+  k=10  c0_Y1033                      NO-ROOM bound=0
+        root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1/forced:TR(0,1)=H+F1/b1:TL(0,0)=F2+F3/b2:BL(0,2)=F2+F4/b2:TR(1,0)=F2+F4
+  k=10  c0_Y1033                      NO-ROOM bound=0
+        root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1/forced:TR(0,1)=H+F1/b1:TL(0,0)=F2+F3/b3:BL(0,2)=F3+F4/b1:TR(1,0)=F2+F3
+  k=10  c0_Y1033                      NO-ROOM bound=0
+        root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1/forced:TR(0,1)=H+F1/b1:TL(0,0)=F2+F3/b3:BL(0,2)=F3+F4/b2:TR(1,0)=F2+F4
+  k=10  c0_Y1033                      NO-ROOM bound=0
+        root/forced:BL(1,1)=F1+F2/b1:BR(0,1)=H+F1/forced:TR(0,1)=H+F1/b2:TL(0,0)=F3+F4@SW+SE
+  k=8  k5_11_interior_Y0672          EmptyBox (A171 pair leaf)
+        root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1/b1:TL(1,0)=H+F2/b1:TR(0,0)=H+F2
+  k=9  k5_11_interior_Y0672          EmptyBox (A171 pair leaf)
+        root/b1:BL(1,1)=H+F1/b1:BR(0,1)=H+F1/b1:TL(1,0)=H+F2/b2:TR(0,0)=F2+F3
+
+== page closure (A182 journal leaves) ==
+  c0_Y1033                     dead nodes  5 | alive/undecided leaves 30, covered  4 | A182 search INCOMPLETE (node budget exhausted (1 fresh + 471 replayed no)
+      -> page retired: False
+  k5_11_interior_Y0308         dead nodes  0 | alive/undecided leaves  0, covered  0 | A182 search INCOMPLETE (node budget exhausted (151 fresh + 0 replayed no)
+      -> page retired: False
+  k5_11_interior_Y0672         dead nodes  2 | alive/undecided leaves  2, covered  1 | A182 search INCOMPLETE (node budget exhausted (67 fresh + 4 replayed nod)
+      -> page retired: False
+  k5_11_interior_Y0738         dead nodes  0 | alive/undecided leaves  0, covered  0 | A182 search INCOMPLETE (node budget exhausted (99 fresh + 36 replayed no)
+      -> page retired: False
+  k5_11_interior_Y0985         dead nodes  0 | alive/undecided leaves  0, covered  0 | A182 search INCOMPLETE (node budget exhausted (180 fresh + 0 replayed no)
+      -> page retired: False
+  k5_16_interior_Y0881         dead nodes  0 | alive/undecided leaves  0, covered  0 | A182 search INCOMPLETE (node budget exhausted (175 fresh + 0 replayed no)
+      -> page retired: False
+  l1_104                       dead nodes  0 | alive/undecided leaves  0, covered  0 | A182 search INCOMPLETE (no record)
+      -> page retired: False
