@@ -21,62 +21,62 @@ guard-line LP (budget 11, cap 150 s, unconverged), (d) v5 certification of a con
 
 | l1_104 S3 coarse sample (children of S2 survivors, nsub 4 / refine 2, parent-seeded) | DEAD by geometry | DEAD by LP | kill candidates | clip s | corner leaf s | v1 LP s | windows LP s | cert s | wall s mean / max |
 |---|---|---|---|---|---|---|---|---|---|
-| 15 | 6 | 8 | 1 | 75 | 25 | 68 | 55 | 3 | 172 / 376 |
+| 20 | 6 | 13 | 1 | 77 | 25 | 62 | 55 | 4 | 184 / 376 |
 
 ## 3. The price
 
 %%PRICE_TABLE%%
-**Scenario: deep kill rate = the S3 sample's (0.93); fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**
+**Scenario: deep kill rate = the S3 sample's (0.95); fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**
 
 | layer | nodes entering | CPU-s per node | fraction killed | CPU-h |
 |---|---|---|---|---|
 | S2 | 64 | 305 | 0.27 | 5.4 |
-| S3 | 5432 | 249 | 0.93 | 375.8 |
-| S4 | 20279 | 249 | 0.93 | 1402.9 |
-| S5 | 151420 | 249 | 0.93 | 10474.6 |
-| S6 | 565301 | 249 | 0.93 | 39105.2 |
-| S7 | 4.22e+06 | 249 | 0.93 | 2.92e+05 |
-| S8 | 1.58e+07 | 249 | 0.93 | 1.09e+06 |
-| **total per cell** | | | | **1.43e+06** (8.96e+04 instance-h at 16 vCPU) |
+| S3 | 5432 | 239 | 0.95 | 360.5 |
+| S4 | 15210 | 239 | 0.95 | 1009.4 |
+| S5 | 85174 | 239 | 0.95 | 5652.4 |
+| S6 | 238487 | 239 | 0.95 | 15826.7 |
+| S7 | 1.34e+06 | 239 | 0.95 | 88629.5 |
+| S8 | 3.74e+06 | 239 | 0.95 | 2.48e+05 |
+| **total per cell** | | | | **359647** (22478 instance-h at 16 vCPU) |
 
 **Scenario: deep kill rate 0.90; fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**
 
 | layer | nodes entering | CPU-s per node | fraction killed | CPU-h |
 |---|---|---|---|---|
 | S2 | 64 | 305 | 0.27 | 5.4 |
-| S3 | 5432 | 249 | 0.93 | 375.8 |
-| S4 | 20279 | 249 | 0.90 | 1402.9 |
-| S5 | 227130 | 249 | 0.90 | 15711.9 |
-| S6 | 1.27e+06 | 249 | 0.90 | 87986.8 |
-| S7 | 1.42e+07 | 249 | 0.90 | 9.85e+05 |
-| S8 | 7.98e+07 | 249 | 0.90 | 5.52e+06 |
-| **total per cell** | | | | **6.61e+06** (4.13e+05 instance-h at 16 vCPU) |
+| S3 | 5432 | 239 | 0.95 | 360.5 |
+| S4 | 15210 | 239 | 0.90 | 1009.4 |
+| S5 | 170348 | 239 | 0.90 | 11304.8 |
+| S6 | 953946 | 239 | 0.90 | 63306.8 |
+| S7 | 1.07e+07 | 239 | 0.90 | 7.09e+05 |
+| S8 | 5.98e+07 | 239 | 0.90 | 3.97e+06 |
+| **total per cell** | | | | **4.76e+06** (2.97e+05 instance-h at 16 vCPU) |
 
 **Scenario: deep kill rate 0.99; fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**
 
 | layer | nodes entering | CPU-s per node | fraction killed | CPU-h |
 |---|---|---|---|---|
 | S2 | 64 | 305 | 0.27 | 5.4 |
-| S3 | 5432 | 249 | 0.93 | 375.8 |
-| S4 | 20279 | 249 | 0.99 | 1402.9 |
-| S5 | 22713 | 249 | 0.99 | 1571.2 |
-| S6 | 12719 | 249 | 0.99 | 879.9 |
-| S7 | 14246 | 249 | 0.99 | 985.5 |
-| S8 | 7978 | 249 | 0.99 | 551.9 |
-| **total per cell** | | | | **5772** (361 instance-h at 16 vCPU) |
+| S3 | 5432 | 239 | 0.95 | 360.5 |
+| S4 | 15210 | 239 | 0.99 | 1009.4 |
+| S5 | 17035 | 239 | 0.99 | 1130.5 |
+| S6 | 9539 | 239 | 0.99 | 633.1 |
+| S7 | 10684 | 239 | 0.99 | 709.0 |
+| S8 | 5983 | 239 | 0.99 | 397.1 |
+| **total per cell** | | | | **4245** (265 instance-h at 16 vCPU) |
 
 **Scenario: deep kill rate 1.00 (the S3 layer closes the cell); fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**
 
 | layer | nodes entering | CPU-s per node | fraction killed | CPU-h |
 |---|---|---|---|---|
 | S2 | 64 | 305 | 0.27 | 5.4 |
-| S3 | 5432 | 249 | 0.93 | 375.8 |
-| S4 | 20279 | 249 | 1.00 | 1402.9 |
-| S5 | 0 | 249 | 1.00 | 0.0 |
-| S6 | 0 | 249 | 1.00 | 0.0 |
-| S7 | 0 | 249 | 1.00 | 0.0 |
-| S8 | 0 | 249 | 1.00 | 0.0 |
-| **total per cell** | | | | **1784** (112 instance-h at 16 vCPU) |
+| S3 | 5432 | 239 | 0.95 | 360.5 |
+| S4 | 15210 | 239 | 1.00 | 1009.4 |
+| S5 | 0 | 239 | 1.00 | 0.0 |
+| S6 | 0 | 239 | 1.00 | 0.0 |
+| S7 | 0 | 239 | 1.00 | 0.0 |
+| S8 | 0 | 239 | 1.00 | 0.0 |
+| **total per cell** | | | | **1375** (86 instance-h at 16 vCPU) |
 
 **S2 continuation (not in the rows):** the 19 unconverged S2 kill candidates at a 900 s cap = 4.8 CPU-h; if they die, the S3 layer shrinks by their 3420 children (3,420 in A168's tree under the 19).
 
