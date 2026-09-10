@@ -437,6 +437,22 @@ is boxes that do not lean into the unpinned `TL(0,0)` corner.
    at the root, and spend the LP only where every role hull has an exact core — or replace the clip leaf by
    the piece-granularity coexistence cut (A174), since no complete assignment died under the clip.
 
+11. **A 47-second geometric leaf that A182 never ran (A189, 2026-09-09).** The NO-ROOM leaf costs one
+   multibox normalise (20-25 s at 4/2), one shallow exact bisection of the free unit square against the
+   node's k cores (20 s at depth 13, 0.99962 of the centre x tilt volume certified dropped on the STEP 34
+   node) and one lane cover per residue pocket (2.5 s) - **47 s against the ~850 s a killed node costs
+   through LP and verification, and against A182's own 3.0 CPU-h / 584 nodes on one page.** Run as a
+   post-hoc pass over what A182 happened to journal it kills 5 of 19 `k = 10` nodes and retires no page,
+   because the search stopped on node budget and only 4 of `c0_Y1033`'s 30 alive/undecided leaves sit
+   under a dead node. Run INSIDE the search, at every node before branching or LP, it is 5.5 % of a node's
+   cost for a test that killed the deepest node A182 reached. Two prices worth knowing before spending on
+   it: (a) it needs the roles' K' to be non-empty, and an `F_i` carried as a whole meeter window has an
+   EMPTY K', which is what keeps 26 of the 33 journaled nodes UNDECIDED - so the leaf pays off exactly
+   where the assignment has been refined enough to give each role a real core, i.e. deep, where the nodes
+   are; (b) the container-partition form (Lemma 2) needs a LANE verdict on every cell, and at the grid
+   coarseness that is affordable (4 x 4, `N = 1`) the bound is 16 for 7 free squares - it cannot bite at
+   `k = 4`, so do not spend k0-cascade compute on it.
+
 ## E. The slab-width law (window certificates; A114's k6_07 log, 2026-09-06)
 
 The 4-D verifier bisects tilt, position and side to a cap of 48 levels per path. Two constants belong to the
