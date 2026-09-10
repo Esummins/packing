@@ -16,10 +16,57 @@ of the S2 survivors at the coarse setting (a sample), and the canary `l1_153` (1
 ## 2. The S2 table (filled from `report191.py` when the sweep lands)
 
 %%S2_TABLE%%
+| l1_104 S2 (64 alive after A183) | DEAD certified | kill candidates (v1 LP below budget, unconverged at cap) | converged ALIVE | geometry s | v1 LP s | windows LP s (diagnostic) | certificate s | wall s mean / max | total CPU-h |
+|---|---|---|---|---|---|---|---|---|---|
+| 64 | 17 (27 %) | 19 (30 %) | 26 (41 %) | 29 | 162 | 101 | 14 | 305 / 663 | 5.4 |
+
+| l1_104 S3 coarse sample (children of S2 survivors, nsub 4 / refine 2, parent-seeded) | DEAD by geometry | DEAD by LP | kill candidates | clip s | corner leaf s | v1 LP s | windows LP s | cert s | wall s mean / max |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 1 | 0 | 0 | 60 | 0 | 0 | 0 | 0 | 60 / 60 |
 
 ## 3. The price
 
 %%PRICE_TABLE%%
+**Scenario: deep kill rate = the S3 sample's (1.00); fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**
+
+| layer | nodes entering | CPU-s per node | fraction killed | CPU-h |
+|---|---|---|---|---|
+| S2 | 64 | 305 | 0.27 | 5.4 |
+| S3 | 5264 | 60 | 1.00 | 87.0 |
+| S4 | 0 | 60 | 1.00 | 0.0 |
+| S5 | 0 | 60 | 1.00 | 0.0 |
+| S6 | 0 | 60 | 1.00 | 0.0 |
+| S7 | 0 | 60 | 1.00 | 0.0 |
+| S8 | 0 | 60 | 1.00 | 0.0 |
+| **total per cell** | | | | **92** (6 instance-h at 16 vCPU) |
+
+**Scenario: deep kill rate 0.90 (what closure at S8 needs); fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**
+
+| layer | nodes entering | CPU-s per node | fraction killed | CPU-h |
+|---|---|---|---|---|
+| S2 | 64 | 305 | 0.27 | 5.4 |
+| S3 | 5264 | 60 | 1.00 | 87.0 |
+| S4 | 0 | 60 | 0.90 | 0.0 |
+| S5 | 0 | 60 | 0.90 | 0.0 |
+| S6 | 0 | 60 | 0.90 | 0.0 |
+| S7 | 0 | 60 | 0.90 | 0.0 |
+| S8 | 0 | 60 | 0.90 | 0.0 |
+| **total per cell** | | | | **92** (6 instance-h at 16 vCPU) |
+
+**Scenario: deep kill rate 0.99; fan-out 112 (first meeter, A168 S3) / 56 (partner, ASSUMED half).**
+
+| layer | nodes entering | CPU-s per node | fraction killed | CPU-h |
+|---|---|---|---|---|
+| S2 | 64 | 305 | 0.27 | 5.4 |
+| S3 | 5264 | 60 | 1.00 | 87.0 |
+| S4 | 0 | 60 | 0.99 | 0.0 |
+| S5 | 0 | 60 | 0.99 | 0.0 |
+| S6 | 0 | 60 | 0.99 | 0.0 |
+| S7 | 0 | 60 | 0.99 | 0.0 |
+| S8 | 0 | 60 | 0.99 | 0.0 |
+| **total per cell** | | | | **92** (6 instance-h at 16 vCPU) |
+
+**Eleven cells:** multiply the per-cell total by <= 11 (l1_104 is the largest S1 layer of the eleven; the canary l1_153 has 1 alive S2 node against 64, so the true multiplier is well below 11).  The S2 layer alone, all eleven cells at l1_104's size: 60 CPU-h = 4 instance-hours.
 
 ## 4. Assumptions (each one a lever the PI can move)
 

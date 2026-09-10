@@ -80,8 +80,9 @@ def main():
                       key=lambda c: int(c.rsplit("B", 1)[1]))
         # spread: the first, the middle, the last ... (A184 sampled evenly spaced boxes)
         if len(kids) > a.per_parent:
-            step = max(1, len(kids) // a.per_parent)
-            kids = kids[::step][:a.per_parent]
+            # interior quantiles (the first cover box B0 is the one nearest the corner and dies at 4/2 on every
+            # parent tried: 4 of 4 in 60 s -- a biased sample); take the (j + 1/2) / per_parent quantiles
+            kids = [kids[int((j + 0.5) * len(kids) / a.per_parent)] for j in range(a.per_parent)]
         jobs += [(p, c) for c in kids]
     jobs = [j for i, j in enumerate(jobs) if i % n == k]
     done = set()
