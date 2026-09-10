@@ -720,6 +720,39 @@ def collect(table, corpus):
             d,
         )
 
+    # (7i) A198's FASTPROP kills (the PI's cheap exact propagation over the page node, 2026-09-10): per forced slot
+    #      (forced_corners.md Theorem FC: two DISTINCT non-pin meeters of the widened open box) the meeter's centre
+    #      cells of a grid of side < 1/sqrt2 (Lemma A1: one centre per cell) are bisected with multibox's exact
+    #      dead test against every role's K', A161's exact miss test and (corners only) A173's lonely clip; the
+    #      JOINT count asks whether H + the free squares can cover every slot twice with pairwise-distinct cells,
+    #      the exact joint reach on window intersections, and the open-chord rows; H barred from a slot and
+    #      infeasible => H forced there and clipped (A161 exact) -- a page is DEAD when the count is infeasible, H
+    #      is forced to slots it cannot meet jointly, a slot H misses has < 2 alive cells, or multibox raises
+    #      EmptyBox at the re-normalisation.  results/fastprop198.jsonl is resumable: the LAST row per nid is the
+    #      verdict; the certificate (certs/fp198_<nid>.json) is the list of exact tests.  [C: geometry, fastprop] --
+    #      the frozen LP verifier is NOT involved.
+    last198 = {}
+    for d in jl(A("A198-fastprop", "results", "fastprop198.jsonl")):
+        if d.get("nid"):
+            last198[d["nid"]] = d
+    for nid, d in sorted(last198.items()):
+        if str(d.get("verdict", "")) != "DEAD":
+            continue
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        table.add_rec(
+            "A198 fastprop198.jsonl",
+            camp,
+            nid,
+            True,
+            "fastprop: %s (Theorem FC + Lemma A1 cells + exact reach + chord rows)" % (d.get("leaf") or ""),
+            "A198",
+            d.get("cert") or os.path.join("attempts", "A198-fastprop", "certs", "fp198_%s.json" % nid),
+            fdate(A("A198-fastprop", "results", "fastprop198.jsonl")),
+            d,
+            note="[C: geometry, fastprop] A171 multibox exact dead test / A161 exact miss test / A1 cells / open-chord rows; no LP",
+        )
+
     # (7f) A189's NO-ROOM leaf on A182's recorded assignment nodes.  At a node with k boxed roles the
     #      remaining 11 - k free unit squares must fit in the container clear of every K' (A132), and
     #      A189 bounds how many can: #free <= sum over the residue pockets of A141/A161's LANE.  A node

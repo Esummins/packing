@@ -174,7 +174,7 @@ def draw(page, out, path, seed=198):
     for role, b in page.roles.items():
         if role.startswith("P"):
             continue
-        col = COL["H"] if role == "H" else COL["F"]
+        col = COL["H"] if role.startswith("H") else COL["F"]
         body.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" stroke="%s" stroke-width="2"/>' % (
             X(b[0]), Y(b[3]), max(0.5, (b[1] - b[0]) * S), max(0.5, (b[3] - b[2]) * S), col))
         pcs = page.nd.boxes[role].pieces if page.nd is not None and role in page.nd.boxes else []
@@ -187,8 +187,8 @@ def draw(page, out, path, seed=198):
             body.append(poly(sq(*z), "#00e5ff", 0.35, col, 2.5))
             body.append(text(X(z[0]), Y(z[1]) + 4, role, 11, col, True, "middle"))
             body.append(text(X(z[0]), Y(z[1]) + 15, "%.1f deg" % math.degrees(z[2]), 8, col, False, "middle"))
-    if page.roles.get("H") and page.base.get("H"):
-        b0 = page.base["H"]
+    for hn in page.hnames:
+        b0 = page.base[hn]
         body.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" stroke="#000" stroke-width="0.8" stroke-dasharray="3,2"/>' % (
             X(b0[0]), Y(b0[3]), (b0[1] - b0[0]) * S, (b0[3] - b0[2]) * S))
     # the witness cover: realised if possible
@@ -230,15 +230,16 @@ def draw(page, out, path, seed=198):
         for (cx, cy) in pins:
             body.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="#90caf9" fill-opacity="0.5" stroke="#1565c0" stroke-width="0.8"/>' % (
                 cx0 + (cx - 0.5) * ss, cy0 - (cy + 0.5) * ss, ss, ss))
-        b = page.roles["H"]
-        body.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" stroke="#000" stroke-width="1.2"/>' % (
-            cx0 + b[0] * ss, cy0 - b[3] * ss, max(0.5, (b[1] - b[0]) * ss), max(0.5, (b[3] - b[2]) * ss)))
+        for hn in page.hnames:
+            b = page.roles[hn]
+            body.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" stroke="#000" stroke-width="1.2"/>' % (
+                cx0 + b[0] * ss, cy0 - b[3] * ss, max(0.5, (b[1] - b[0]) * ss), max(0.5, (b[3] - b[2]) * ss)))
     # the joint-count table
     ty = 90 + 2 * (S0 * ss + 40) + 10
     body.append(text(px0, ty, "JOINT COUNT (round %d): %d forced slots x 2 distinct non-pin meeters = %d incidences; H + %d free squares; A1 cells; chord rows on %d lines" % (
         rd.get("round", 0), len(page.slots), 2 * len(page.slots), page.n_free, len(page.lines)), 9, "#222", True))
     ty += 13
-    body.append(text(px0, ty, "H options (cell -> slots met jointly): " + "; ".join("%d -> %s" % (ci, "+".join(Sl) if Sl else "none") for ci, Sl in (rd.get("fixed") or {}).get("H", [])[:12]), 8, "#222"))
+    body.append(text(px0, ty, "%s options (cell -> slots met jointly): " % page.H + "; ".join("%d -> %s" % (ci, "+".join(Sl) if Sl else "none") for ci, Sl in (rd.get("fixed") or {}).get(page.H, [])[:12]), 8, "#222"))
     ty += 12
     bycell = {}
     for ci, Sl, h in rd.get("free_opts", []):

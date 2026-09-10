@@ -131,6 +131,7 @@ def slot_geometry(item, s=S_RAT):
 
 # ----------------------------------------------------------------------------- the exact reach bisection
 SQ2H_LO = Fr(7071067811, 10 ** 10)         # < 1/sqrt2
+LSTATS = MB._new_lonely_stats()            # the lonely clip's own counters
 
 
 def obstacle_near(ob, rect):
@@ -182,7 +183,7 @@ def bisect_region(rect, obst, wbs, s, stats, depth=6, nsub=4, corner=None, t_ran
             if cur is None:
                 continue
             if corner is not None:
-                cur = MB._clip_rect_lonely(cur, bn, corner, MB.C_WIDEN, s, 4, stats)
+                cur = MB._clip_rect_lonely(cur, bn, corner, MB.C_WIDEN, s, 4, LSTATS)
                 n_tests += 1
                 if cur is None:
                     continue
@@ -353,10 +354,9 @@ class Page:
         self.base = G.base_roles(rec)
         self.pins = {k: v for k, v in self.base.items() if k.startswith("P")}
         self.hnames = [k for k in self.base if k.startswith("H")]
-        assert len(self.hnames) == 1, "one conditioned square per page"
-        self.H = "H"
-        self.roles = dict(self.base)                       # current boxes (pins, H hull, instantiated F roles)
-        self.n_free = n - len(self.pins) - 1
+        self.H = self.hnames[0]                            # the conditioned square the forcing logic acts on; any
+        self.roles = dict(self.base)                       # further H_k is carried as a fixed distinct role
+        self.n_free = n - len(self.pins) - len(self.hnames)
         self.items = G.forced_items(cls, rec)
         for it in self.items:
             it["wb"], it["win"] = slot_geometry(it, self.s)
@@ -511,7 +511,7 @@ class Page:
             for S, pcs in alive_sets.items():
                 free_opts.append((ci, S, minchord_pieces(pcs, self.lines), pieces_hull(pcs)[:4]))
         fixed_opts = {}
-        for role in [self.H] + sorted(self.role_cell):
+        for role in list(self.hnames) + sorted(self.role_cell):
             opts = []
             cells = self.role_cells(role)
             reach1 = [p for p in self.slots if self.role_reach(role, frozenset([p]))[1]]
@@ -553,7 +553,7 @@ class Page:
         forced_H, instantiate = set(), {}
         for p in self.slots:
             n_free_cells = len(single[p])
-            n_role_cells = sum(1 for r in self.role_cell if any(p in S for _, S, _, _ in fixed_opts[r]))
+            n_role_cells = sum(1 for r in fixed_opts if r != self.H and any(p in S for _, S, _, _ in fixed_opts[r]))
             if p not in H_reach:
                 if n_free_cells + n_role_cells < 2:
                     self.dead = "A1/FC at %s: H provably misses it and only %d free cell(s) can hold a meeter" % (p, n_free_cells + n_role_cells)
