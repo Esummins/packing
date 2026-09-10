@@ -11,9 +11,9 @@ PAGE = sys.argv[1] if len(sys.argv) > 1 else 'k5_16_interior_Y0491'
 rows = [json.loads(l) for l in open(os.path.join(R, 'attempts', 'A199-corner-seal', 'results', 'seal199.jsonl'), encoding='utf-8') if l.strip()]
 row = [d for d in rows if d.get('page') == PAGE and abs(d.get('lam', 1) - 1) < 1e-12][-1]
 run = [r for r in row['runs'] if r['verdict'] == 'DEAD'][0] if row['verdict'] == 'DEAD' else row['runs'][0]
-reach = [s for s in run['steps'] if s['step'] == 'reach'][0]
-seal = [s for s in run['steps'] if s['step'] == 'seal'][0]
-cases = [s for s in run['steps'] if s['step'] == 'cases'][0]
+leaf = run['leaf_result']
+reach = dict(n_pieces=leaf['n_sealed'] + leaf['n_residue'], vol_frac=leaf['vol_sealed'] + leaf['vol_residue'], n_tests=leaf['n_tests'],
+             hull=leaf['sealed_hull'] or leaf['residue_hull'], H_misses_B='n/a', seconds=leaf['seconds'])
 rec = json.load(open(os.path.join(R, row['record']), encoding='utf-8'))
 pins = [(0.5 * (b['x0'] + b['x1']), 0.5 * (b['y0'] + b['y1'])) for b in rec['hyp']['boxes'] if abs(b['th1'] - b['th0']) < 1e-9]
 hbox = [b for b in rec['hyp']['boxes'] if abs(b['th1'] - b['th0']) > 1e-9][0]
@@ -66,7 +66,7 @@ def esc(t): return str(t).replace('&', '&amp;').replace('<', '&lt;').replace('>'
 def text(x, y, t, size=10, col='#222', bold=False, anchor='start'):
     return f'<text x="{x:.1f}" y="{y:.1f}" font-size="{size}" fill="{col}" text-anchor="{anchor}"{" font-weight=\"bold\"" if bold else ""}>{esc(t)}</text>'
 out = ['<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="800" font-family="Segoe UI, sans-serif" style="background:#fff">',
-       text(OX, 22, f'{PAGE}: the corner seal at BR (A199; docs/proofs/corner_seal.md).  F = a free meeter of BR(0,1) at a pose of the CERTIFIED reach region (exact); it reaches around the pin\'s corner, is rotated (phi = {math.degrees(phi):.1f} deg), seals BR(1,0)\'s top edge; verdict {row["verdict"]} in {row.get("seconds", 0):.0f} s', 11, bold=True),
+       text(OX, 22, f'{PAGE}: the corner seal at BR (A199; docs/proofs/corner_seal.md).  F = a free meeter of BR(0,1) at a pose of the CERTIFIED reach region (exact); it reaches around the pin\'s corner, is rotated (phi = {math.degrees(phi):.1f} deg), seals BR(1,0)\'s top edge; verdict {row["verdict"]} in {row.get("seconds", 0):.0f} s (SEAL leaf)', 11, bold=True),
        text(OX, 36, 'blue = pins (k5_16, exact at s0); black rect = H\'s box; green = F (admissible: inside, clear of every pin and of H at 125 sampled poses); dashed = the unit slot boxes BR(0,1), BR(1,0) (pad 0); orange = F\'s chord on y = 1 (the seal); hatched = the wedge between L_F and the pin\'s side; red dashed = a would-be H dipping into the sliver -- its left edge enters F (Lemma WEDGE, case A)', 8.5, '#444')]
 # clip region: the corner
 out.append(f'<rect x="{X(x_lo)}" y="{Y(y_hi)}" width="{(S0 - x_lo) * SC:.1f}" height="{(y_hi + 0.0) * SC:.1f}" fill="none" stroke="#000" stroke-width="2"/>')
@@ -87,21 +87,20 @@ out.append(f'<polygon points="{pts(Hw)}" fill="none" stroke="#c62828" stroke-wid
 out.append(text(X(c[0]) + 3, Y(c[1]) + 10, 'pin corner c', 8))
 # right panel: the statistics
 tx, ty = 760, 70
-lines = [f'Certified reach region of BR(0,1)\'s free meeters (exact bisection vs pins\' K\', H\'s K\', container + A161 miss test):',
-         f'  {reach["n_pieces"]} pieces, {reach["vol_frac"]:.4f} of the window volume, {reach["n_tests"]} exact tests, {reach["seconds"]} s',
-         f'  hull: x [{hx0:.3f}, {hx1:.3f}]  y [{hy0:.3f}, {hy1:.3f}]  tilt [{ht0:.1f}, {ht1:.1f}] deg;  H provably misses BR(0,1): {reach["H_misses_B"]}',
-         'SEAL statistics over the pieces (exact in t = tan(theta/2), corner frame):',
-         f'  q_y in [{seal["qy"][0]:.3f}, {seal["qy"][1]:.3f}]  (every F pokes past the corner: q_y > 0)',
-         f'  phi in [{seal["phi"][0]:.1f}, {seal["phi"][1]:.1f}] deg  (the forced rotation)',
-         f'  x_r <= {seal["xr_max"]:.4f}  (the leaning edge crosses y = 1 left of the pin)',
-         f'  deep regime (q_y < cos phi - sin phi) on every piece: {seal["deep_all"]} (margin {seal["deep_margin_min"]:.3f}); chord >= {seal["chord_min"]:.3f} > 1: the top edge of BR(1,0) is sealed except the sliver',
-         f'Cases (F\'s pieces split into {cases["n"]} sub-boxes; per sub-box the node {{pins, H, F}} then {{pins, H, F, G}}, G a free meeter of BR(1,0) distinct from F):']
-for cs in cases['cases']:
-    lines.append(f'  F box x [{cs["F_box"][0]:.2f},{cs["F_box"][1]:.2f}] y [{cs["F_box"][2]:.2f},{cs["F_box"][3]:.2f}] t [{cs["F_box"][4]:.0f},{cs["F_box"][5]:.0f}]: '
-                 + (f'H misses A {cs.get("H_misses_A")}, F misses A {cs.get("F_misses_A")}, G {"EmptyBox" if (cs.get("G_node") or {}).get("dead") else "alive"} -> {"DEAD" if cs.get("dead") else "alive"} ({cs.get("seconds", 0):.0f} s)' if 'G_node' in cs else f'{cs.get("dead")}'))
-lines += [f'Verdict: {row["verdict"]} -- {run.get("leaf")}', f'Total {row.get("seconds", 0):.0f} s at s0 (pad 0; lam = 1); certificate = results/seal199.jsonl (every test listed).',
-          'Reading (corner_seal.md): SEAL gives the rotation and the seal; WEDGE says no second meeter of BR(1,0) lives on the wedge side of L_F; SIDES: it must cross',
-          'BR(1,0)\'s left side or pass under F -- H (above, shallow) can do neither (A161), and the node {pins, H, F, G} has no room for a free G.']
+lines = ['Certified region of BR(0,1)'s free meeters (exact bisection of the meeter window against the pins' K', H's K', the container; A161 miss test on BR(0,1)):',
+         f'  {leaf["n_sealed"]} SEALED pieces (vol {leaf["vol_sealed"]:.5f} of the window), {leaf["n_residue"]} residue, {leaf["dropped"]} dropped, {leaf["n_tests"]} exact tests, {leaf["seconds"]} s',
+         f'  sealed hull: x [{hx0:.3f}, {hx1:.3f}]  y [{hy0:.3f}, {hy1:.3f}]  tilt [{ht0:.1f}, {ht1:.1f}] deg  (phi = 90 - tilt in [{90 - ht1:.1f}, {90 - ht0:.1f}] deg)',
+         'Lemma NO-SECOND per sealed piece (exact rationals in t = tan(theta/2), worst ends): deep regime q_y < cos phi - sin phi,',
+         '  l_x < -1, y_bl < 0, and min over psi' of cos psi' + c tan psi' > 1 + l_y  (c = -1 - l_x, h = 1 + y_bl):',
+         f'  smallest margin over the sealed pieces {leaf["sealed_margin_min"]:.2e} > 0',
+         (f'The near-upright sliver (residue at the depth cap): a second meeter would have its rightmost vertex within h/2 = {leaf["gbox"]["h"]/2:.3f} of BR(1,0)'s left side,'
+          f' so its centre in the box x [{leaf["gbox"]["box"][0]:.2f}, {leaf["gbox"]["box"][1]:.2f}] y [{leaf["gbox"]["box"][2]:.2f}, {leaf["gbox"]["box"][3]:.2f}]: exact reach test EMPTY ({leaf["gbox"]["n_tests"]} tests)' if leaf.get('gbox') else 'no residue'),
+         f'Verdict: {row["verdict"]} -- {run.get("leaf")}',
+         f'Total {row.get("seconds", 0):.0f} s at s0 (pad 0; lam = 1); certificate = attempts/A199-corner-seal/results/seal199.jsonl (every test listed).',
+         'Reading (corner_seal.md): SEAL gives the rotation and the seal (chord 1/cos phi > 1 covers the top edge of BR(1,0) except the sliver);',
+         'WEDGE: no second meeter of BR(1,0) on the wedge side of L_F; NO-SECOND: none under F or across the left side either -- BR(1,0)'s only',
+         'non-pin meeter is F, against Theorem FC.  H is not needed except as the obstacle that confines F's region.',
+         'What the pair test could not see: the exact multibox chain {pins, H, F-sub-box, G} leaves G ALIVE in every sub-box (F's K' is far smaller than any actual F).']
 for k, l in enumerate(lines):
     out.append(text(tx, ty + 14 * k, l, 8.5 if not l.startswith('  ') else 8, '#222' if not l.startswith('  ') else '#333', not l.startswith('  ') and not l.startswith('Reading') and not l.startswith('BR')))
 out.append('</svg>')

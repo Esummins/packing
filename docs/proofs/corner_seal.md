@@ -160,8 +160,16 @@ edge's x only increases: contradiction), where it must pass below l: y_R + (x_R 
 x_R − l_x > c this gives cos ψ′ + c tan ψ′ < g.  The two closed forms are the bounds c tan ψ′ ≥ c tan(arccos h) and
 cos ψ′ + c tan ψ′ ≥ 2 √(c sin ψ′) ≥ 2 √(c √(1 − h²)) (AM–GM).  ∎
 
+**(iv) [T] Vertex localisation (the fallback when (iii)'s margin vanishes, i.e. F within ≈ q_y²/4 radians of
+upright).**  The proof of (iii) shows, before any inequality, that a second meeter's RIGHTMOST vertex lies in
+(−1, −1 + h/2] × [−1, y_bl), so its centre lies in [−1 − 1/√2, −1 + h/2 − 1/2] × [−3/2, y_bl + 1/2]; on a page that
+box is bisected against the pins' and H's K′ and the container (an exact reach test), and if nothing survives there
+is no second meeter.  On k5_16 pages the box overlaps the BL pin column, and the test is empty.
+
 Every quantity is an explicit function of (q_x, q_y, φ); on a piece of F's pose space the inequalities are checked at
-their worst ends in exact rationals of t = tan(θ/2) (`seal199c.sealed`): that is the SEAL LEAF.  On Y0491's BR
+their worst ends in exact rationals of t = tan(θ/2) (`seal199c.sealed`, with q_x ≤ q_y tan φ substituted for q_x's
+upper end — sound for dipping poses by SEAL (b) — and the exact minimum of u + c√(1−u²)/u over u = cos ψ′ ∈ (0, h]:
+at u = h when h²(1−h²) ≤ c², else ≥ √c (2 − h²)): that is the SEAL LEAF.  On Y0491's BR
 corner (F's certified region: φ ≤ 23°, q_y ≤ 0.11) c ≈ 0.3, h ≈ 0.35, g ≈ 0.49: 2√(c√(1−h²)) ≈ 1.06 > 0.49.
 
 ## 4. The certificate on a page (what `seal199` runs; every step an exact test)
@@ -172,9 +180,13 @@ with slab factor λ (§5; λ = 1, s = s0 at the top), **the SEAL leaf** (`seal19
 2. B's meeter window bisected (4 tilt sub-bins, depth ≤ 16): a piece is DROPPED when provably dead — container clip,
    multibox's exact dead test against every role's K′, A161's exact miss test against B's box, or q_y < 0 at every
    pose (no pose meets int B clear of the pin, SEAL (b)); SEALED when Lemma NO-SECOND's inequalities hold at their
-   worst ends (deep regime, l_x < −1, y_bl < 0, the closed-form bound); otherwise SPLIT.  The unsealed survivors at
-   the cap are the residue; **DEAD iff the residue is empty**: then every free meeter F of B (Theorem FC gives one)
-   leaves A with F as its only non-pin meeter, against FC(A).
+   worst ends (deep regime, l_x < −1, y_bl < 0, the exact minimum bound); otherwise SPLIT.  The unsealed survivors
+   at the cap are the residue; if every residue piece is in the deep regime with y_bl < 0, the fallback (iv) runs one
+   exact reach test on the second meeter's centre box (h = the residue's largest 1 + y_bl); **DEAD iff the residue is
+   empty (or the fallback box is empty)**: then every free meeter F of B (Theorem FC gives one) leaves A with F as
+   its only non-pin meeter, against FC(A).  On Y0491: 49 sealed pieces (vol 0.0023 of the window, smallest margin
+   2.7·10⁻⁴), 74 dropped, residue = the near-upright sliver (tilt ≥ 89.5°, vol < 10⁻⁶) closed by the fallback with
+   h = 0.101; 2,804 exact tests, 4 s [M].
 Soundness: the pieces are a superset of the free meeters' poses; each drop is an exact test; each seal is Lemma
 NO-SECOND on the whole piece.  [C: geometry, SEAL; the multibox invariant of A171 on the base node.]  The certificate
 row records every piece's fate (dropped / sealed with its margin / residue with the failing inequality).
