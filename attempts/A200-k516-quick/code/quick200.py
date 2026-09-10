@@ -389,6 +389,7 @@ class QPage(FP.Page):
             self.T.test("ROLE-CLIP", role=r, slots=sorted(S), box_after=FP.rect_f(nb))
             changed = True
         # --- apply: instantiate the unique anonymous meeter of p (exists and is distinct: see the module docstring)
+        new_boxes = []
         for p in sorted(instantiate):
             pcs = self.union_last.get(p) or []
             if not pcs:
@@ -396,12 +397,24 @@ class QPage(FP.Page):
             hull = FP.pieces_hull(pcs)
             role = "F%d" % (len(self.role_cell) + 1)
             box = (FP.fl(hull[0]), FP.fl(hull[1]), FP.fl(hull[2]), FP.fl(hull[3]), MB.deg_of_t(hull[4]), MB.deg_of_t(hull[5]))
+            # DISTINCTNESS within the round: an anonymous meeter is distinct from the roles that existed when the round's
+            # unions were computed, NOT from another anonymous meeter instantiated in the same round (the meeter of an
+            # adjacent slot may be the same square).  Two same-round instantiations are distinct squares only if their
+            # pose sets are DISJOINT (one square has one pose); otherwise the second is deferred to the next round,
+            # where the first is a role and the union is recomputed.  (Y1022's first run instantiated identical boxes
+            # for BL(1,0) and BR(1,0) and died at normalise -- an unsound kill, withdrawn.)
+            clash = [q for q, b in new_boxes if FP.rect_inter(box[:4], b[:4]) is not None and box[4] <= b[5] and b[4] <= box[5]]
+            if clash:
+                self.T.test("INSTANTIATE-DEFER", slot=p, box=FP.rect_f(box), clash_with=clash, why="pose set meets a same-round instantiation")
+                continue
+            new_boxes.append((p, box))
             self.roles[role] = box
             self.role_cell[role] = -1                       # not cell-bound: distinct by the anonymous semantics
             self.role_slots[role] = (p,)
             if self.item[p]["is_corner"]:
                 self.role_corner[role] = self.item[p]["corner"]
-            self.T.test("INSTANTIATE", role=role, slot=p, box=FP.rect_f(box), n_pieces=len(pcs), why=urec[p]["why"])
+            self.T.test("INSTANTIATE", role=role, slot=p, box=FP.rect_f(box), n_pieces=len(pcs), why=urec[p]["why"],
+                        disjoint_from_same_round=[q for q, _ in new_boxes if q != p])
             changed = True
         info["changed"] = changed
         return info
