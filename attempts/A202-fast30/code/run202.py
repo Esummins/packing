@@ -101,7 +101,20 @@ def stage1(nid, pad, out0, wall, force):
     return out
 
 
+def belownormal():
+    """the lab's process rules: BelowNormal, affinity 0xFFFF (kernel32; no psutil in this interpreter)."""
+    try:
+        import ctypes
+        k = ctypes.windll.kernel32
+        h = k.GetCurrentProcess()
+        k.SetPriorityClass(h, 0x00004000)
+        k.SetProcessAffinityMask(h, 0xFFFF)
+    except Exception:
+        pass
+
+
 if __name__ == "__main__":
+    belownormal()
     ap = argparse.ArgumentParser()
     ap.add_argument("nid")
     ap.add_argument("--wall", type=float, default=600)

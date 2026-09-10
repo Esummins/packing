@@ -928,6 +928,42 @@ def collect(table, corpus):
                  "rows / Theorem FC; " + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam"))),
         )
 
+    # (7l) A202's fast30 (attempts/A202-fast30; the PI's directive of 2026-09-10 16:35): STAGE 0 = the CLOSED-FORM geometric
+    #      kill layer (<= 30 s per page: pin discs, walls, Lemma CN and the relative-tilt separating-axis bound against H,
+    #      open-chord rows, reach / A161 miss on refined pieces; union caps; Theorem FC; the count with the A1 / CN / MK pair
+    #      table; H forcing to a fixed point) -- kills there are [C: closed-form trace], NO verifier clause exists yet;
+    #      STAGE 1 = A200's exact option table on the cells stage 0 left alive ([C: exact-test trace]).  results/fast30.jsonl
+    #      has one row per (nid, pad, stage); a kill at the g1 pad is valid on the page's window, at pad 0 it is s0-only
+    #      (WINDOW-PENDING).
+    seen202 = set()
+    for d in jl(A("A202-fast30", "results", "fast30.jsonl")):
+        if not d.get("nid") or str(d.get("verdict", "")) != "DEAD" or d.get("pad") not in ("g1", "zero", "window"):
+            continue
+        key = (d["nid"], d.get("pad"), d.get("stage"))
+        if key in seen202:
+            continue
+        seen202.add(key)
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        pend = bool(d.get("window_pending")) or str(d.get("pad")) == "zero"
+        stage = int(d.get("stage", 0))
+        table.add_rec(
+            "A202 fast30.jsonl",
+            camp,
+            d["nid"],
+            True,
+            "fast30 stage %d [%s; %s pad]: %s%s" % (stage, d.get("step_killed") or "-", d.get("pad"), (d.get("leaf") or "")[:160],
+                                                   " (s0-only; WINDOW-PENDING)" if pend else ""),
+            "A202",
+            d.get("cert") or os.path.join("attempts", "A202-fast30", "results", "fast30.jsonl"),
+            fdate(A("A202-fast30", "results", "fast30.jsonl")),
+            d,
+            note=("[C: closed-form trace] rules P/W/C/M/L/R/X + union caps + Theorem FC + the count (notes/fast30.md); no verifier clause yet; "
+                  if stage == 0 else
+                  "[C: exact-test trace] A171 dead test / A161 miss / CN / A1 / chord rows / FC on stage 0's alive cells; ")
+                 + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam"))),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(

@@ -77,7 +77,6 @@ def combine(vs):
 
 def free_options(st):
     single = {p: {} for p in st.slots}
-    per_cell = st.nsub * st.nsub * st.nbins
     by_cell = {}
     for p in st.slots:
         for pc in st.alive[p]:
@@ -87,7 +86,8 @@ def free_options(st):
         singles = {}
         for p, pcs in by_cell[ci].items():
             singles[p] = (bbox([pc[2] for pc in pcs]), sorted({pc[4] for pc in pcs}), chords_of(st, pcs))
-            single[p][ci] = round(len({(pc[1][0], pc[1][2]) for pc in pcs}) / per_cell, 4)
+            rects = {pc[1] for pc in pcs}
+            single[p][ci] = round(float(sum((r[1] - r[0]) * (r[3] - r[2]) for r in rects) / (st.side * st.side)), 4)
         for S, (h, b, ch) in closure(singles, combine).items():
             opts.append((ci, S, ch, h, b))
     return opts, single
