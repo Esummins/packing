@@ -611,6 +611,14 @@ if __name__ == "__main__":
         cert = a.cert if (not a.chain or k == 0) else (a.cert[:-5] + "_pad0.json" if a.cert else None)
         out["cert_path"] = cert
         emit(out, cert, a.out)
+        if a.svg:
+            # the page AFTER THE FAST STEPS (the PI, 14:00: "run the fast steps, then write an svg showing what the fast
+            # steps got it to, then it can do the longer steps"): drawn from the pieces, before any slow leaf
+            try:
+                import fig200
+                fig200.draw(pg, outs, a.svg[:-4] + "_fast_%s.svg" % pad)
+            except Exception as e:
+                print("   fig200 (fast page) failed: %r" % (e,), flush=True)
         if out["verdict"] == "DEAD":
             break
     if outs[-1]["verdict"] == "ALIVE" and not a.noseal:
