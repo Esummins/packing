@@ -786,6 +786,38 @@ def collect(table, corpus):
                 note=note,
             )
 
+    # (7h) A197's FORCED-CELL PAIR kills (docs/proofs/forced_corners.md Theorem FC + Corollaries
+    #      FC-slot / FC-count, sideband.md Lemma A1).  At a forced cell two DISTINCT non-pin squares
+    #      meet the widened open slot box; the non-pin squares are H and the free squares, so the case
+    #      is (H-meets) H + one free, or (two-free) two free.  Both branches are split over a Lemma A1
+    #      grid of side 0.70 < 1/sqrt2 (two meeter centres never share a closed cell) and every cell
+    #      pair is a multibox node at nsub 8 / refine 4.  A page is DEAD when SOME forced cell has no
+    #      surviving pair -- A178's (7d) pass ran the same idea at 4/2 with an UNSPLIT H-meets node and
+    #      caps that declared ALIVE on exhaustion, so it retired nobody.  results/slotpair197.jsonl is
+    #      resumable: the LAST row per nid is the verdict.  A row that hit a cap or the 900 s wall is
+    #      ALIVE-untested and is never collected as a kill.
+    last197 = {}
+    for d in jl(A("A197-slot-pair-pass", "results", "slotpair197.jsonl")):
+        if d.get("nid"):
+            last197[d["nid"]] = d
+    for nid, d in sorted(last197.items()):
+        if str(d.get("verdict", "")) != "DEAD":
+            continue
+        camp = "k0" if d.get("gallery") == "k0v4" else ("A60" if str(d.get("camp")) == "A60" else "A57")
+        table.add_rec(
+            "A197 slotpair197.jsonl",
+            camp,
+            nid,
+            True,
+            "forced-cell pair test [%s]: %s" % (d.get("kill_cell") or "-", d.get("leaf") or ""),
+            "A197",
+            d.get("cert") or "",
+            fdate(A("A197-slot-pair-pass", "results", "slotpair197.jsonl")),
+            d,
+            note="[C] library geometry (A171 multibox at nsub %s / refine %s, Lemma A1 grid side %s); "
+                 "the frozen verifier is not involved" % (d.get("nsub"), d.get("refine"), d.get("side")),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
