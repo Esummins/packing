@@ -669,7 +669,9 @@ gives a packing at side m (no corridor, no motion). Applied to a corner slot thi
 Applied to a **usable slot** of a pinned class S — a completable, unclipped slot whose extension class
 S ∪ {p} is certified dead on a window containing m — it gives:
 
-**Lemma SLOT-CROWD [T, ∀-packings] (`docs/proofs/slot_crowds.md` §2).** In every packing at side m ∈ [3.82,
+**Lemma SLOT-CROWD [T, ∀-packings; L] (`docs/proofs/slot_crowds.md` §2; Lean `ForcedCorners.slot_crowd`,
+A192, from `teleport_packing` and the monotone kill of S ∪ {p} — this is also Step 1 of Theorem FC,
+`docs/proofs/forced_corners.md`).** In every packing at side m ∈ [3.82,
 s0) containing S's pins, every usable slot is met (open interiors) by ≥ 2 non-pin squares. For k5_11 the
 usable slots are BL(1,1), BR(0,1), TL(1,0) (extensions k6_18, k6_20, k6_20, full window) and TR(0,0) (k6_23);
 for k5_16 BR(0,1), TR(0,1), TR(1,0) and BL(1,0); trump5's six unclipped completable slots are all doubly met
@@ -703,8 +705,11 @@ tilt only through y = cos + sin; one factor is monotone, the other attains its i
 endpoint). Splitting off the hypothesis squares turns the PI's reading "a line crossing four squares through
 opposing sides forces side ≥ 4" into an LP column priced at rhs(ℓ) = s0 − Σ_pins minchord − minchord(H)
 instead of s0. As an LP row it is narrow (active on 2 of 20 re-solves) and needs a v4 certificate clause
-(`guardlines`, spec written, Lean shape two theorems + one checker, not built) [P]; offline it flags 86 of
-448 survivors [M] (`writeup/figures/k5_11_interior_Y0147_guardline.svg`).
+(`guardlines`, A190's v5 verifier; Lean: Lemma LINE-1 on strict families `chord_sum_le_side` and Theorem G
+`guarded_dead` are [L] (A192, `GuardLine.lean`), the five-point `minchord` checker and the three
+distinctness checkers [P] — and note A192's finding that LINE-1 with closed chords is FALSE for merely
+interior-disjoint squares, true for the closed-disjoint families the chain actually refutes); offline it
+flags 86 of 448 survivors [M] (`writeup/figures/k5_11_interior_Y0147_guardline.svg`).
 
 **Lemma CL (chord-limited lane) [T]+[C] (A161).** For a usable slot on a wall carrying two pins, the guard
 line inside the slot's wall row caps at β := ⌊s0 − Σⱼ minchord(Bⱼ, ℓ)⌋ the number of free squares crossing
@@ -1201,10 +1206,17 @@ obligation [P].
    9 400–12 000 CPU-h.
 5. **Lean replays** of the A57/A60/A100 corpora (multi-day), the tree-file → `cover` emitter, the
    `ClosedTree` instances per class, and the CI-4 per-box re-check of the 601 logic kills across the window.
-6. **Lean formalisations still open**: `a22_exact_structure` (witness lemmas), the S33/S38 local certificates,
-   `SecondMeeterCriterion` (Theorem B's four-clause proof), Lemma TC's separating-axis step, the exact
-   w-range enclosure in `LocalCertT2`, `PolycoreExemptSound` (the v3 exemption clause), the guard-line
-   clause (v4), Leaf WASTE's Lipschitz-raster soundness W3, the multi-box invariant's certificates.
+6. **Lean formalisations still open**: `a22_exact_structure` (witness lemmas), the S38 local certificate and
+   S33's consumer-relevant neighbourhood (0.2, 10°) (S33 at (0.05, 10°) — see §3.7 and Appendix A),
+   `SecondMeeterCriterion` (Theorem B's four-clause proof: the (W)/(S)/(NE) witnesses, Lemmas B0/B0′, the
+   four-quadrant case split — unchanged by A192), Lemma TC's separating-axis step, the exact w-range
+   enclosure in `LocalCertT2`, `PolycoreExemptSound` (the v3 exemption clause), the guard-line clause's
+   CHECKER half (`minchord_of_box`, the distinctness checkers; LINE-1 and Theorem G are [L], A192),
+   Leaf WASTE's Lipschitz-raster soundness W3, the multi-box invariant's certificates, Theorem FC's Step 2
+   (the dilation transfer to the widened box; Step 1 = SLOT-CROWD is [L]).  Closed by A192 (all
+   `[propext, Classical.choice, Quot.sound]`, no `sorry`): the WINDOWS clause of A185's v4 verifier end
+   to end (`checkWindowsI_kill_of_check`: checker PASS ⇒ no strict family satisfies the node hypothesis,
+   (V3) included), the no-room leaf's Lemma 1 (`noroom_dead`), SLOT-CROWD (`slot_crowd`).
 7. **Certificate-chain engineering with soundness content**: the standalone tree verifier
    (`verify_tree_s0.py` analogue); the slack-pin re-certification of the twelve k6 extension classes
    (needed for the slot-lane kills in A57's δ = 10⁻² family); the crowd chain beyond δ = 0.3 (blocked by the
@@ -1314,6 +1326,10 @@ the review sheet, and the leaf-from-reading pipeline — because it does not dep
 | `checkLeaf_sound`, `localDead_of_cert`; `selectionOk_sound`, `relax_wall`, `relax_selection`, `localHyp_bodies`; `treeOk_sound`, `certCover_of_check`, `localDead_of_certOk`; `localDead_s07_t`, `localDead_s02_t` | `LocalCert.lean`; `LocalCertT2.lean`; `LocalCertT3.lean`; `LocalCertS07T.lean`, `LocalCertS02T.lean` | `native_decide` (S07, S02) + `check_3_82`'s |
 | `theta_lipschitz`, `sub_le_theta`, `corner_perturb` | `ThetaT.lean` | — |
 | `checkAlive`, `alive_sound`, `alive_sound_mono` (an alivewitness ⇒ no `checkCaseI` PASS of that budget) | `AliveChecker.lean`, `AliveBridge.lean` | — |
+| `count_core`, `windowed_counted`, `windowed_dead`, `windowed_no_family`, `massIn_finset_sum_le` (Theorem W, set level); `checkWindowsI`, `checkWindowsI_facts`, `goC_box_price`, `inBox_root`, `mem_otherCores`, `checkWindowsI_kill` (the v4 checker and its soundness); `coreCorners`, `coreSet_sub_of_corners`, `checkCoreInBox`, `checkCoreInBox_sound`, `checkWindowsI_kill_of_check` ((V3) decided) | `Windows.lean`; `WindowsCheck.lean`; `WindowsCore.lean` (A192) | — |
+| `chord_sum_le_side` (LINE-1 on strict families), `guarded_dead` (Theorem G, set level); `minchord_of_box`, the distinctness checkers | `GuardLine.lean` (A192) | — ; [P] for the checker half |
+| `interior_meets_of_centre_mem`, `pocket_bound`, `noroom_dead` (A189's no-room Lemma 1) | `NoRoom.lean` (A192) | — |
+| `slot_crowd_key`, `slot_crowd` (Lemma SLOT-CROWD = Theorem FC Step 1, by teleport) | `ForcedCorners.lean` (A192) | — |
 
 ## Appendix B. Figures (`writeup/figures/`)
 
