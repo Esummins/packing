@@ -65,9 +65,11 @@ explicit margin EPS = 1e-9, the chord rule exact in rationals)
 * **X (A161's exact miss).**  `chordlane.box_misses_cell_exact` on the piece's outward-rounded pose box (A161 / A198:
   every pose of the box gives a square whose interior misses the open widened box) -- closed form (a separating-
   axis minimum over the box), run at the coarse level and at the last refinement level.
-* **H's own clip.**  H's pieces die under P and W; when H is FORCED at a slot set (below) a piece of H survives only
-  if some pose of it MAY meet every forced box: c within w_max/2 (l-inf, strict) of the open box (the square lies
-  in that ball, so a piece outside it cannot meet).  H's box := the hull of its surviving pieces (never grown).
+* **H's own clip and reach.**  H's pieces die under P and W; a piece of H MAY MEET a slot only if c is within w_max/2
+  (l-inf, strict) of the open box (the square lies in that ball) AND A161's exact separating-axis miss test on the
+  piece's pose box does not prove every pose misses (rule X on H); H "provably misses" p when no alive piece may
+  meet it.  When H is FORCED at a slot set (below) only the pieces that may meet every forced box survive.  H's box
+  := the hull of its surviving pieces (never grown).
 
 ## 2. What is built on the survivors (A198 / A200, unchanged in substance)
 

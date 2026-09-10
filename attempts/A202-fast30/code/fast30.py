@@ -108,6 +108,7 @@ class Stage0:
         self.depth_h = depth_h
         self.other_h = {k: self.base[k] for k in self.hnames[1:]}
         self.forced_H = set()
+        self.hmeet = {}
         self.alive = {}                                                        # slot -> [Piece]
         self.rounds = []
         self.verdict_leaf = None
@@ -219,6 +220,19 @@ class Stage0:
             cur = nxt
         return cur
 
+    def h_may_meet(self, hp, p):
+        """False only when NO pose of H's piece meets the open box of p: the l-inf ball test, then A161's exact
+        separating-axis miss test on the piece's pose box (cached per piece and slot)."""
+        key = (id(hp), p)
+        v = self.hmeet.get(key)
+        if v is None:
+            v = R.may_meet(hp[2], hp[3], self.wbox[p])
+            if v:
+                bx = MB.piece_box(hp[3], hp[1])[0]
+                v = not FP.CLN.box_misses_cell_exact(bx, self.wbfr[p])[0]
+            self.hmeet[key] = v
+        return v
+
     # ------------------------------------------------------------------ H's own closed-form clip (P, W, meet)
     def clip_H(self, forced=(), depth=0):
         t0 = time.perf_counter()
@@ -229,7 +243,7 @@ class Stage0:
             for hp in cur:
                 if R.pin_dead(hp[2], self.cores) or R.wall_dead(hp[2], hp[3], self.s):
                     continue
-                if any(not R.may_meet(hp[2], hp[3], self.wbox[p]) for p in forced):
+                if any(not self.h_may_meet(hp, p) for p in forced):
                     continue
                 keep.append(hp)
             cur = keep if d == depth else [ch for hp in keep for ch in split(hp)]

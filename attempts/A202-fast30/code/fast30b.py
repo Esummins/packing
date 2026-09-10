@@ -113,7 +113,7 @@ def role_options(st, pieces):
             pidx.append(pc)
         if not clipped:
             continue
-        singles = {p: set(k for k, c in enumerate(clipped) if R.may_meet(c[2], c[0], st.wbox[p])) for p in st.slots}
+        singles = {p: set(k for k, c in enumerate(clipped) if R.may_meet(c[2], c[0], st.wbox[p]) and st.h_may_meet(pidx[k], p)) for p in st.slots}
         singles = {p: v for p, v in singles.items() if v}
         reach |= set(singles)
         sets = closure(singles, lambda vs: (set.intersection(*vs) or None))
