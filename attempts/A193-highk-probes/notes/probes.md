@@ -77,3 +77,31 @@ at the k5_11 image), 16 in the top arm — and A190's witness re-solve lands at 
 the kill", `certs/root_k4_05.*`). That is Lemma K1 measured: the LP's slow creep toward 7 is the k5_11 / k5_16
 images being pushed one row at a time, and the limit is above the budget. Root LPs are useless for both classes,
 guard lines included; anyone re-running A55's k4_05 root and reading 6.97 as a kill candidate should read this line.
+
+### 3.2 corners4 at s0: the assignment search from the root (8 forced slots, 16 meeter incidences) [M]
+
+Root = 4 pins + nothing else; A182's search (nsub 4 / refine 2, chord rows at every tree node, lane prune 30 s,
+`MAXF = 7`) instantiates anonymous meeters cell by cell. Pass 1 (150 nodes, 674 s: **4.5 s per multibox node**)
+reached depth 1: unit propagation forced BL(0,1) ← F1+F2 and BR(0,1) ← F3+F4 (the far cells have ONE option:
+two new squares, by the √2 rule), then the first branch TR(0,1) had 4 options and the option tests (81 pair
+nodes, 65 single, 23 pair-splits) ate the budget. Pass 2 (journal replay + 900 nodes / 3,000 s) went down the
+first branch of each level — TR(0,1) ← F3+F4, TL(0,1) ← F1+F2, BL(1,0) ← F1+F2 (10 options), TL(1,0) ← F3+F5 (3),
+BR(1,0) ← F1+F4 (6), TR(1,0) ← F3+F5 (4) — and reached its **first complete assignment at ≈ 520 nodes**: nine
+roles, F1 ↦ {BL(0,1), TL(0,1), BL(1,0), BR(1,0)} (four slots: legal for the WIDENED boxes — the pose (1.425, 1.425,
+0°) meets all four 0.088 deep through the middle-strip overlap and the pads; CC4's "≤ 3" is for the unwidened
+boxes), F2 ↦ three left/bottom slots, F3 ↦ four top/right slots, F4 ↦ three, F5 ↦ two; two free squares.
+
+At that leaf (`results/probe193_corners4.jsonl`, `lpres_corners4_root_forced-BL01-…`):
+* the roles are LOCALISED — hulls F1 0.31 × 0.60, F2 0.43 × 0.23, F3 0.61 × 0.61, F4 1.15 × 0.60, F5 1.29 × 1.24,
+  all at tilt [0, 90°]; **three meeters have grown cores** (F1 a = 0.117, F2 0.185, F3 0.063), F4/F5 none;
+* **no-room leaf: UNDECIDED** in 161 s — the bisection against the 7 cores drops 85.8 % of the free square's
+  (centre × tilt) volume but the residue pockets have area 5.90 (F4/F5 have no core, the centre block is open);
+* **windows + guard-line LP (b4 = 11, 7 cores attached, 2 free): τ = 11.000000 exactly, NOT converged
+  (minmass 1.5·10⁻⁸ — uncovered rows remain, so the converged value is ≥ 11), 0 of 10 lines active, 417 s.**
+  The support is the pins at weight 1 plus **fourteen placements at weight exactly 1/2** (a half-integral
+  support; the largest near-disjoint sub-family among the fourteen has 5 members, worst gap +0.10 — so it is NOT
+  two near-packings averaged, it is a genuinely fractional odd-cycle support): near-axis squares at (0.5, 1.65),
+  (3.38, 1.65), (1.60, 0.51), (2.38, 0.58), (2.30, 3.35), (2.23, 2.23) and tilted ones at (2.54, 1.41, 25°),
+  (1.43, 1.28, 41°), (1.52, 1.61, 86°). This is the "fractional tilted" phantom — the same object as the root's
+  cloud, concentrated by the windows onto 14 poses, and no chord row sees it (every tilted square's chord on
+  every pin/slot line is < 1).
