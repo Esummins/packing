@@ -46,7 +46,7 @@ def n_python():
     """every python on the box, counted by IMAGE NAME (catches relative command lines: A182)."""
     try:
         cmd = ["powershell", "-NoProfile", "-Command",
-               "(Get-CimInstance Win32_Process -Filter \"Name like 'python%'\" | Measure-Object).Count"]
+               "(Get-CimInstance Win32_Process -Filter \"Name like 'python%'\" | Where-Object { $_.CommandLine -notmatch 'Claude Extensions' } | Measure-Object).Count"]
         out = subprocess.run(cmd, capture_output=True, text=True, timeout=60).stdout.strip()
         return int(out.splitlines()[-1])
     except Exception:                                            # noqa: BLE001
