@@ -11,7 +11,7 @@ os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
 for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
     os.environ.setdefault(_v, "1")
 BELOW_NORMAL = 0x4000
-MINE = ("A196",)
+MINE = ("A196", "196b.py", "page196", "pass196", "queue196", "node196", "fig196")
 
 
 def set_priority(mask=0xFFFF):
@@ -42,7 +42,7 @@ def mem_gate(min_phys_mb=3072, min_commit_mb=6144):
 
 def _cmdlines():
     cmd = ["powershell", "-NoProfile", "-Command",
-           "Get-CimInstance Win32_Process -Filter \"Name like 'python%'\" | ForEach-Object { $_.CommandLine }"]
+           "Get-CimInstance Win32_Process -Filter \"Name like 'python%'\" | ForEach-Object { ($_.CommandLine -replace \"`r?`n\", ' ') }"]
     try:
         out = subprocess.run(cmd, capture_output=True, text=True, timeout=60).stdout
     except Exception:                                            # noqa: BLE001

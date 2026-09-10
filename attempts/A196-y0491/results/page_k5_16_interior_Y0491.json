@@ -1,0 +1,100 @@
+{
+ "nid": "k5_16_interior_Y0491",
+ "when": "2026-09-10 10:58",
+ "stages": {},
+ "wall": 1500.0,
+ "geo": {
+  "verdict": "OPEN",
+  "leaf": null,
+  "n_cases": 3,
+  "cases": {
+   "H-meets": {
+    "verdict": "OPEN",
+    "leaf": null
+   },
+   "two-free:0+2": {
+    "verdict": "DEAD",
+    "leaf": "no admissible meeter assignment at BL(1,0) (Theorem ASSIGN)"
+   },
+   "two-free:1+2": {
+    "verdict": "DEAD",
+    "leaf": "no admissible meeter assignment at BL(1,0) (Theorem ASSIGN)"
+   }
+  }
+ },
+ "cases": {
+  "H-meets": {
+   "label": "H-meets",
+   "rows": {
+    "n_negative": 0,
+    "n_beta_le1": 92,
+    "tightest": {
+     "orient": "v",
+     "off": "1/2",
+     "off_float": 0.5,
+     "tag": "left pin midline x=1/2",
+     "rhs": "219271/250000",
+     "rhs_float": 0.877084,
+     "beta": 0,
+     "negative": false,
+     "minchord": {
+      "P0": 1.0,
+      "P1": 1.0,
+      "P2": 1.0,
+      "P3": 0.0,
+      "P4": 0.0,
+      "H": 0.0,
+      "F1": 0.0
+     },
+     "pins_full": 3,
+     "free": 4,
+     "free_unit_max": 0
+    },
+    "seconds": 1.6
+   },
+   "waste": {
+    "rc": 0,
+    "seconds": 17.1,
+    "area_U": 1.021363064148155,
+    "ratio_B0": 0.2533280529300822,
+    "kill": false,
+    "zone_n_rects": 118,
+    "bands": {
+     "bottom band (y<=1.01)": 0.0,
+     "top band (y>=s0-1.01)": 0.0,
+     "left band (x<=1.01)": 0.4627037285426288,
+     "right band (x>=s0-1.01)": 0.5586593356055262,
+     "interior (1.01<x,y<s0-1.01)": 0.0
+    }
+   },
+   "lpa": {
+    "rc": 0,
+    "seconds": 305.1,
+    "verdict": "ALIVE(LP exact-core; unconverged at cap)",
+    "tau": 4.137895748724937,
+    "budget": 4,
+    "converged": false,
+    "n_active": 1,
+    "certified": null,
+    "cert": null,
+    "support": "fractional: 19 placements, 1 at weight 1, mass 4.138 (a phantom)"
+   },
+   "lpb": {
+    "rc": 0,
+    "seconds": 325.0,
+    "verdict": "LP-dead unconverged at cap (kill candidate)",
+    "tau": 9.666666666666977,
+    "budget": 11,
+    "converged": false,
+    "n_active": 0,
+    "certified": null,
+    "cert": null,
+    "support": "fractional: 20 placements, 5 at weight 1, mass 9.667 (a phantom)"
+   },
+   "verdict": "ALIVE"
+  }
+ },
+ "verdict": "ALIVE",
+ "leaf": null,
+ "seconds": 1014.5
+}
