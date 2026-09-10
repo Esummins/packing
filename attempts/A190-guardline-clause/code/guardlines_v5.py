@@ -63,6 +63,12 @@ def minchord(a, t0, t1, x0, x1, y0, y1, orient, off):
     [t0,t1] x [x0,x1] x [y0,y1] of a square of half-side a; l is y = off ('h') or x = off ('v')."""
     lo, hi = (y0, y1) if orient == "h" else (x0, x1)
     V = max(abs(off - lo), abs(off - hi))
+    # OPEN chords (external review 2026-09-10, P0/P1): the chord-sum lemma holds for interior-disjoint squares
+    # only with |l n int Q| -- an AXIS-ALIGNED pose whose edge lies exactly on l has closed chord 2a but open
+    # chord 0 (the 2x2 tiling on y = 1 sums closed chords to 4 > 2).  If the box admits an axis-aligned pose
+    # (t = 0 or t = 1 in the bin) at distance V >= a, the minimum open chord over the box is 0.
+    if (t0 <= 0 or t1 >= 1) and V >= a:
+        return ZERO
     if t0 == t1:
         return chord_at(a, t0, V)
     cands = []

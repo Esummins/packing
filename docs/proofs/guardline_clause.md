@@ -26,12 +26,20 @@ A guard line `l` is `y = h` or `x = g` with a rational offset in `(0, s)`; `|l �
 
 ## 1. The two lemmas the clause rests on
 
-**Lemma LINE-1 (chord sum) [T] (A144).**  If `Q_1..Q_N` are closed unit squares with pairwise disjoint interiors
-in `[0,s]²` and `l` is an axis-parallel line meeting the container, then `Σ_i |l ∩ Q_i| ≤ |l ∩ [0,s]²| = s`.
-*Proof.*  Each `l ∩ Q_i` is a closed sub-interval (convexity); two of them sharing an interior point would give a
-point interior to both squares (a point of `l` interior to a chord is interior to the square or on its boundary,
-and the boundary meets `l` only at the chord's endpoints); intervals with pairwise disjoint interiors inside a
-segment of length `s` have total length ≤ `s` (one-dimensional Lebesgue additivity). ∎
+**Lemma LINE-1 (chord sum, OPEN chords) [T] (A144; scope corrected 2026-09-10 after the external review).**  If
+`Q_1..Q_N` are closed unit squares with pairwise disjoint interiors in `[0,s]²` and `l` is an axis-parallel line
+meeting the container, then `Σ_i |l ∩ int Q_i| ≤ s`, where `|l ∩ int Q_i|` is the OPEN chord (the length of
+`l ∩ int Q_i`).
+*Proof.*  Each `l ∩ int Q_i` is an open sub-interval of `l ∩ (0,s)²` (convexity of the open square); two of them
+are disjoint because a common point would be interior to both squares; disjoint open intervals inside a segment
+of length `s` have total length ≤ `s`. ∎
+*Why the closed form is FALSE.*  With closed chords the statement fails whenever a square's EDGE lies on `l`: the
+four unit squares tiling `[0,2]²` have closed chords of length 1 each on `y = 1`, sum 4 > 2.  A tilted square
+meets `l` in a boundary point only at a vertex (closed chord 0), so open and closed chords differ exactly for
+axis-parallel poses whose edge lies on `l`; `guardlines_v5.minchord` returns 0 for a box that admits such a pose
+(the `t = 0 / t = 1` bins at distance `V ≥ a`).  For PAIRWISE DISJOINT CLOSED squares (the closed-disjoint family
+of `closed_disjoint_bridge.md`, reached by the dilation transfer) the closed and open chords coincide up to the
+endpoints and the closed form holds; the verifier does not rely on that and uses open chords throughout.
 
 **Lemma MINCHORD [T] (A144 §2; `guardlines_v5.minchord`).**  For half-side `a`, `C = |cos θ|`, `S = |sin θ|`, `V`
 the distance from the centre to `l`: `chord = max(0, min(2a/max(C,S), (a(C+S) − V)/(CS)))` (CH) — exact rational
