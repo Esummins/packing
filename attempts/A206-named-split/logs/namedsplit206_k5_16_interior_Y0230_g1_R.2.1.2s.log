@@ -1,2 +1,11 @@
 12:05:16 start k5_16_interior_Y0230 g1_R.2.1.2s (lab 10, free 7830 MB)
 == k5_16_interior_Y0230 leaf pad g1 [R.2.1.2s]: start attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0230.json; H [1.799, 1.939, 1.519, 1.573, 73.739, 82.373]; forced H ['BL(1,0)']; roles {'F1': ['BL(1,0)'], 'F2': ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)'], 'F3': ['TL(1,0)', 'TR(1,0)'], 'F4': ['TR(0,1)']} (cells {'F1': -1, 'F2': 18, 'F3': 8, 'F4': 21}); 6 slots; free squares 5
+   node R.2.1.2s   d0 root: INTERNAL (637.2 s, 3 rounds; t=637.4)
+   Rule NS at R.2.1.2s: split F1 at BR(0,1) (meeting fraction 0.008804; alive rows []; named ['F1', 'F2', 'F4'])
+   node R.2.1.2s.1 d1 BR(0,1)<-None: DEAD by REACH r1 (192.0 s, 1 rounds; t=829.4)
+   node R.2.1.2s.2 d1 BR(0,1)<-None: INTERNAL (576.0 s, 3 rounds; t=1405.4)
+   Rule NS at R.2.1.2s.2: split F4 at BR(1,0) (meeting fraction 0.119615; alive rows []; named ['F1', 'F4', 'H'])
+   node R.2.1.2s.2.1 d2 BR(1,0)<-None: DEAD by EmptyBox r3 (454.7 s, 3 rounds; t=1860.2)
+   node R.2.1.2s.2.2 d2 BR(1,0)<-None: DEAD by EmptyBox r3 (381.9 s, 3 rounds; t=2242.1)
+   => DEAD (g1_R.2.1.2s) in 2242.2 s: 5 nodes, depth 2, 2 NS splits, 3 dead / 0 alive leaves
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A206-namedsplit\namedsplit206_gallery.svg
