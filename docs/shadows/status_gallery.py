@@ -964,6 +964,38 @@ def collect(table, corpus):
                  + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam"))),
         )
 
+    # (7m) A203's csp203 (attempts/A203-csp-consistency; the PI's readings of 2026-09-10 18:20 / 17:40): A202's stage 0 plus
+    #      the piece-level CSP -- rule S (the separating-axis bound with the tilt bins on piece pairs), H-CONSISTENCY (an
+    #      option row with no piece compatible with any alive H piece is dead), the MUTUAL CLIP (an H unit compatible with
+    #      no option of a slot a free square must meet is dead), the SETTLE refinement, the count carrying the H-mask and
+    #      piece-compatible pairs (notes/csp_consistency.md).  Kills are [C: closed-form trace], NO verifier clause exists
+    #      yet; results/csp203.jsonl has one row per (nid, pad); g1 pad = valid on the window, pad 0 = s0-only.
+    seen203 = set()
+    for d in jl(A("A203-csp-consistency", "results", "csp203.jsonl")):
+        if not d.get("nid") or str(d.get("verdict", "")) != "DEAD" or d.get("pad") not in ("g1", "zero", "window"):
+            continue
+        key = (d["nid"], d.get("pad"))
+        if key in seen203:
+            continue
+        seen203.add(key)
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        pend = bool(d.get("window_pending")) or str(d.get("pad")) == "zero"
+        table.add_rec(
+            "A203 csp203.jsonl",
+            camp,
+            d["nid"],
+            True,
+            "csp203 stage 0 + CSP [%s pad]: %s%s" % (d.get("pad"), (d.get("leaf") or "")[:160], " (s0-only; WINDOW-PENDING)" if pend else ""),
+            "A203",
+            d.get("cert") or os.path.join("attempts", "A203-csp-consistency", "results", "csp203.jsonl"),
+            fdate(A("A203-csp-consistency", "results", "csp203.jsonl")),
+            d,
+            note=("[C: closed-form trace] A202's rules P/W/C/M/L/R/X + rule S piece pairs + H-consistency + the mutual clip + settle + "
+                  "the H-mask count (notes/csp_consistency.md); no verifier clause yet; the kills audited by sampling (scratch/audit203.py); "
+                  + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(

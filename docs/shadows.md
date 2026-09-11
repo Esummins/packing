@@ -9,6 +9,11 @@ Part I below is the pinned classes (A57 k5_11 / k5_16, A60 trump5, A61 window st
 **Part II, at the end of this file, is the k0_00 cells** of A38-root-power, A85-k0-route and
 A99-k0-tree-v2, which have no pins and so are de-duplicated over the full D4.
 
+
+> **Where the galleries are (2026-09-10 reorganisation).** Current: `docs/shadows/a57v4/` and `docs/shadows/k0v4/` (with
+> `killed/` subfolders) and `docs/shadows/STATUS.md`. Superseded galleries (`a57v3`, `k0v3`, `v1`, the S-family pages) are
+> under `docs/shadows/archive/` -- paths quoted below for those refer to their archived location. Rules in `docs/shadows/README.md`.
+
 ## Method
 
 1. **Alive-at-LP** = `dead == False` in the node json (the LP did not certify the case).
