@@ -38,8 +38,10 @@ semantics):
   rows' pieces are pairwise rule-S-dead (Lemma PC, A203 s.1: no interior-disjoint pose pair exists);
 * |C_p| = 1: at least one anonymous meeter -- the branches are the rows g_i singly.
 
-The disjunction over the branches is EXHAUSTIVE (every packing of N's hypothesis realises one of them), and each
-branch is a node: the chosen row g is instantiated as a new role F with pieces = the row's reach survivors (a
+The disjunction over the branches is EXHAUSTIVE (every packing of N's hypothesis realises one of them) PROVIDED the
+option table read is that of a round in which no role was instantiated (a table built before an instantiation still
+holds the new role's own poses among its anonymous rows: the tree refreshes it with one more cascade round first), and
+each branch is a node: the chosen row g is instantiated as a new role F with pieces = the row's reach survivors (a
 superset of the poses of a free square with centre in g meeting p: sound), pinned to g (Lemma A1: no other centre
 in g, so g leaves the anonymous table -- A198's `cell_role`), named at p (the exact reach clip keeps only the poses
 meeting B_p+), distinct from every other role (it is a free square, and a second row of the same branch has its
@@ -93,6 +95,22 @@ leaf is off by default (137-333 s at a 10-role node, never fired).  Two runs of 
 the v1 extended run at the 10-role node R.1.1.4u (1,384 s); the same node costs 539 s after the levers, a depth-2
 node 160 s, an EmptyBox leaf 10-60 s.
 
+
+**CORRECTION (2026-09-11 04:50, the Y0491 artefact).**  A branch taken on an option table that predates a role
+instantiated in the SAME round is unsound: the table's rows still contain the poses of the FC-instantiated anonymous
+meeter (the reach is clipped against a role's K' only at the next round), so a branch row can instantiate that same
+square a second time and the two "distinct" roles kill each other (EmptyBox).  Found by the audit of
+`k5_16_interior_Y0491` g1 (its unit step TL(1,0)<-8 instantiated F5 = F4, the anonymous TL(1,0) meeter FC had just
+named; 18,000 sampled configurations refute the leaf) and by the structural scan over every certificate (a branch
+whose parent's last round has `instantiated` != []): **the Y0491 g1 DEAD row is RETRACTED** (cert / page / log in
+`scratch/*.retracted.*`, the page re-run), and the stale-table EmptyBox leaves of the Y0202 extended trees (v2 / v3:
+R.1.2.1-2, R.1.4.1-3(4), R.2.1-3) and Y0380 g1's R.1.4u are WITHDRAWN -- the Y0202 v3 tree has **6 sound kills**
+(R.1.1.1-3, R.1.3 by EmptyBox; R.3.1.2s, R.3.1.3 by FC), not 14, and R.2 = BL(1,1)<-13 is NOT closed.  The kills of
+Y0839, Y0308, Y0027 and Y0054 are all branches of a root whose last round instantiated nothing: unaffected.  Fix
+(`tree205b.candidates` returns "stale"; the tree runs one refresh cascade round before any branching, up to 4): commit
+707bb812; the shard restarted at Y0491 / Y0500 with the fix; the extended Y0202 re-run as `_w3600v4`.  Lesson for the
+lemma: **the branching rule reads the table of a round in which no role was instantiated** (added to s.1).
+
 ## 3. Y0202 (k5_11), the PI's case  [M]
 
 Root (A203's start: H 512 units, no slot forced, H reaches only BL(1,1)): one cascade round, H kept 0.996, nothing
@@ -106,7 +124,8 @@ undecided leaves); pad 0 the same (913 s).  A node costs 150-450 s at this setti
 
 **The extended run (wall 3,600 s, 2 rounds a node, bar-anon + the sharp leaf; `certs/extended/cliptree205_k5_11_interior_Y0202_w3600v3.json`,
 page `extended/cliptree205_k5_11_interior_Y0202_w3600v3.svg`; the v2 run before those two levers: `_w3600`).**
-29 nodes, depth 3, **14 DEAD / 5 ALIVE leaves** in 3,642 s:
+29 nodes, depth 3, 14 DEAD / 5 ALIVE leaves in 3,642 s AS RECORDED -- **8 of the 14 kills are WITHDRAWN by the
+correction above (stale-table branches, marked (W) below); 6 stand**:
 
 | branch | slot <- rows | verdict | clip / round | s |
 |---|---|---|---|---|
@@ -115,13 +134,13 @@ page `extended/cliptree205_k5_11_interior_Y0202_w3600v3.svg`; the v2 run before 
 | R.1.1.1-3 | TR(0,0) <- 14, 19, 23 | **DEAD** | EmptyBox r1 (the pair leaf in the fixed point) | 36-40 each |
 | R.1.1.4(s) | TR(0,0) <- 24, then the sharp round | ALIVE (fully named) | H kept 0.47, F1 0.11, F2 0.034, F3 0.11, F4 0.20 | 497 + 185 |
 | R.1.2 | BR(0,1) <- {18,22} | internal | **bar-anon**: an anonymous TR(0,0) meeter is forced; rows 23 / 24 | 208 |
-| R.1.2.1-2 | TR(0,0) <- 23, 24 | **DEAD** | EmptyBox r1 | 14, 10 |
+| R.1.2.1-2 | TR(0,0) <- 23, 24 | (W) withdrawn | EmptyBox r1 on a stale table (the FC-instantiated TR(0,0) meeter duplicated) | 14, 10 |
 | R.1.3 | BR(0,1) <- {18,23} | **DEAD** | EmptyBox r1 | 53 |
 | R.1.4 | BR(0,1) <- {21,23} | internal | branch TR(0,0) over 14 / 18 / 19 | 145 |
-| R.1.4.1-3 | TR(0,0) <- 14, 18, 19 | **DEAD** | EmptyBox r1 | 9-10 each |
+| R.1.4.1-3 | TR(0,0) <- 14, 18, 19 | (W) withdrawn | EmptyBox r1 on a stale table | 9-10 each |
 | R.1.5(s) | BR(0,1) <- {22,23}, then the sharp round | ALIVE (fully named) | H kept 0.43, F1 0.12, **F2 0.0029, F3 0.0018**, F4 0.18 | 266 + 201 |
 | R.2 | BL(1,1) <- 13 | internal | branch TR(0,0) over 18 / 22 / 23 | 126 |
-| R.2.1-3 | TR(0,0) <- 18, 22, 23 | **DEAD** | EmptyBox r1 | 8-15 each: **R.2 closed** |
+| R.2.1-3 | TR(0,0) <- 18, 22, 23 | (W) withdrawn | EmptyBox r1 on a stale table -- R.2 is NOT closed | 8-15 each |
 | R.3 | BL(1,1) <- 18 | internal | branch BR(0,1) over 21 / 22 / 23 | 134 |
 | R.3.1 | BR(0,1) <- 21 | internal | branch TL(1,0) over 8 / 9 / 14 | 162 |
 | R.3.1.1(s) | TL(1,0) <- 8, then the sharp round | ALIVE (fully named) | H kept 0.15, F1 0.0036, F3 0.019, F4 0.012 | 382 + 241 |
@@ -129,9 +148,10 @@ page `extended/cliptree205_k5_11_interior_Y0202_w3600v3.svg`; the v2 run before 
 | R.3.1.3 | TL(1,0) <- 14 | **DEAD** | FC r1 | 59 |
 | R.3.2, R.3.3 | BR(0,1) <- 22, 23 | undecided | wall | - |
 
-So the PI's reading holds on the tree's evidence: every branch that instantiates the BR(0,1) meeters and one more
-row dies in the FIXED POINT (EmptyBox: a role's every piece meets another role's K' at every tilt of its sub-bin) in
-10-60 s -- 11 of the 14 kills -- and the survivors are three FULLY NAMED nodes (pins + H + F1..F4 + one anonymous
+What stands of the PI's reading on the tree's evidence: under BL(1,1)<-8 / BR(0,1)<-{18,21} every TR(0,0) row but
+one dies in the FIXED POINT (EmptyBox, 36-40 s), BR(0,1)<-{18,23} dies at once (53 s), and under BL(1,1)<-18 two of
+the three TL(1,0) rows die by FC (one after the sharp round); the withdrawn branches are re-run in `_w3600v4`.  The
+survivors are three FULLY NAMED nodes (pins + H + F1..F4 + one anonymous
 square) whose roles keep 0.2-3 % of their seeds (R.1.5s: F2 at 0.29 %, F3 at 0.18 %; R.3.1.1s: F1 at 0.36 %), plus
 two branches the wall did not reach.  What kills those three is not more branching (nothing is left to branch on):
 the LP on the node (A180's `lp180` with the roles' pieces as A191/A183's cores) or one more level of geometry
@@ -159,18 +179,25 @@ time of the report (32 pages queued, 9 done):
 |---|---|---|---|---|---|---|
 | k5_16_Y0839 | g1 | **DEAD** | 4 / 1 | 3 / 0 | 526 | BR(0,1)<-10, 15, 23: FC at BL(1,0) r1 |
 | k5_11_Y0308 | g1 | **DEAD** | 3 / 1 | 2 / 0 | 203 | TR(0,0)<-23: FC at BR(0,1) (CN cap 1, H misses); TR(0,0)<-24: EmptyBox(F2) r3 (F2 = the FC-instantiated TL(1,0) meeter) -- A204 had it only at pad 0 |
-| k5_11_Y0202 | g1 / 0 | ALIVE wall | 3 / 2 | 0 / 7 | 982 / 913 | (extended: 14 dead, 3 fully named leaves, 2 undecided, s.3) |
+| k5_11_Y0202 | g1 / 0 | ALIVE wall | 3 / 2 | 0 / 7 | 982 / 913 | (extended v3: 6 sound kills, 8 withdrawn, 3 fully named leaves, 2 undecided, s.3; v4 re-run with the fix) |
 | k5_11_Y0130 | g1 / 0 | ALIVE wall | 6 / 3, 5 / 2 | 3 / 4, 2 / 3 | 1,062 / 953 | TR(0,0)<-19 then BL(1,1)<-6, 7: FC at BR(0,1); BR(0,1)<-21: FC at BL(1,1) |
 | k5_11_Y0662 | g1 / 0 | ALIVE wall | 3 / 1 | 2 / 2 | 1,080 / 967 | BR(0,1)<-{11,21}, {11,22}: FC at BL(1,1) (H misses; 2 of 4 pairs) |
 | k5_11_Y0672 | g1 / 0 | ALIVE wall | 10 / 2 | 5 / 5 | 981 / 968 | BR(0,1)<-21, 22, 23: EmptyBox(F3) r2; BL(1,1)<-6, 11: FC at TL(1,0) |
 | k5_11_Y0738 | g1 / 0 | ALIVE wall | 7 / 3 | 1 / 6 | 917 / 934 | BR(0,1)<-17: EmptyBox(F2) after the S clip (round1s1) |
-| k5_11_Y0985 | g1 / 0 | ALIVE wall | (report) | | 1,953 total | (see the report) |
+| k5_11_Y0985, Y1104; k5_16_Y0044, Y0099, Y0249, Y0325, Y0380, Y0436, Y0460 | g1 / 0 | ALIVE wall | (report) | | ~1,900 each | see `results/report205.md`; Y0380's R.1.4u kill withdrawn (stale table) |
+| k5_16_Y0027 | g1 | **DEAD** | 6 / 1 | 5 / 0 | 365 | BR(0,1)<-10, 23: FC; <-15: EmptyBox r2; <-21, 22: COUNT (pair table) |
+| k5_16_Y0054 | g1 | **DEAD** | 4 / 1 | 3 / 0 | 312 | BR(0,1)<-{18,21}, {18,22}: COUNT; <-{18,23}: FC |
+| k5_16_Y0083 | g1 / 0 | ALIVE wall / DEAD (s0-only, WINDOW-PENDING) | | | | |
+| k5_16_Y0230, Y0402 | g1 / 0 | ALIVE wall / undecided (process wall 2,100 s) | | | | |
+| k5_16_Y0491 | g1 | RETRACTED, re-running | | | | the Y0491 artefact (correction above) |
 
 Every branch the wall let run on the k5_11 pages dies by FC at the NEXT slot or by the pair leaf; no branch has come
 back ALIVE except the fully named nodes of Y0202.  The 900 s wall holds 3-10 nodes; at wall 3,600 s a k5_11 page's
 tree reaches depth 3 with 25-30 nodes.
 
-**Audits** (`scratch/audit205.py`, batch `scratch/audit_batch.sh`, logs `logs/audit_*.log`): Y0839 g1 R.1-R.3, Y0308 g1
+**Audits** (`scratch/audit205.py`, batch `scratch/audit_batch.sh`, logs `logs/audit_*.log`; the sampler checks (H, the
+branch rows, the killing slot's meeter) and NOT the FC-instantiated roles, so a pair-leaf audit is a necessary check
+only -- the structural stale-table scan is the one that found the artefact): Y0839 g1 R.1-R.3, Y0308 g1
 R.1-R.2, Y0130 g1 / pad 0 (5 FC leaves) and **Y0027 g1 R.1-R.5 (the third kill: 88 s root, then BR(0,1)<-10 FC, <-15
 EmptyBox r2, <-21 / 22 COUNT with the pair table, <-23 FC; DEAD at g1 in 365 s)** -- 0 refutations each.  One false alarm
 caught in the audit itself, not the kill: a cap-1 leaf ("at most ONE anonymous meeter", Lemma CN) is refuted only by TWO

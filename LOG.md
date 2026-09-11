@@ -8504,3 +8504,9 @@ halves of the answer come from opposite findings.
   the 5-role fixed point's cost (400 s).  Files: `code/tree205.py`, `tree205b.py`, `run205.py`, `run205.sh`, `ext205.sh`,
   `fig205.py`, `report205.py` (+ A204's `poly204.py` / `poly204b.py` / `fig204.py` copied at 57f8d6ae), `notes/clip_tree.md`,
   `scratch/audit205.py`, `logs/`, status gallery block (7n), CURRENT.json -> A205.
+- **CORRECTION (2026-09-11 04:50).**  The audit of `k5_16_interior_Y0491` g1 refuted its leaf: a branch taken on an option table
+  that predates a role instantiated in the same round can instantiate the FC-named anonymous meeter a second time (two "distinct"
+  roles on one square: EmptyBox, unsound).  Y0491 g1's DEAD row is RETRACTED and re-run; the same stale-table EmptyBox leaves in
+  Y0202's extended trees (8 of the 14 kills; R.2 is NOT closed) and Y0380 g1's R.1.4u are withdrawn; the four window-pad kills
+  (Y0839, Y0308, Y0027, Y0054) are branches of a root whose last round instantiated nothing and stand, audited.  Fix: the tree
+  refreshes the table (one cascade round) before branching (707bb812); the shard restarted with it; Y0202 re-run as `_w3600v4`.
