@@ -53,6 +53,8 @@ def main():
     ok = inside(H[:, 0], H[:, 1], H[:, 2]) & pin_free(H[:, 0], H[:, 1], H[:, 2], pins)
     for p in forced:
         ok &= meets_box(H[:, 0], H[:, 1], H[:, 2], wbox[p])
+    for p in (node.get("miss") or {}).get("H", []):
+        ok &= ~meets_box(H[:, 0], H[:, 1], H[:, 2], wbox[p])
     H = H[ok]
     if len(H) > a.nh:
         H = H[rng.choice(len(H), a.nh, replace=False)]
@@ -70,6 +72,8 @@ def main():
         okf = inside(X, Y, T) & pin_free(X, Y, T, pins)
         for p in rs[role]:
             okf &= meets_box(X, Y, T, wbox[p])
+        for p in (node.get("miss") or {}).get(role, []):          # A206 Rule NS: a [role misses slot] hypothesis on the path
+            okf &= ~meets_box(X, Y, T, wbox[p])
         R.append((role, X[okf], Y[okf], T[okf]))
         print("  role %s: box %s, slots %s, cell %s: %d admissible poses meeting every slot" % (role, [round(v, 3) for v in box[:4]], rs[role], rc.get(role), int(okf.sum())))
     if any(len(r[1]) == 0 for r in R):
