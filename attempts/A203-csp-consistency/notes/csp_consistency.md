@@ -121,8 +121,15 @@ bar-H counts (H forced at p when no cover without H at p exists) run with the sa
 * Audit of the kills by sampling (`scratch/audit203.py`): for every dead row (H / F) sample admissible poses
   (container, pin cores) on a grid over the row's hull x its tilt intervals that meet every slot of S, and every
   admissible H pose on a grid over H's RECORD box x window; a sampled disjoint pair would refute the kill.  Y0839
-  g1: 6 dead rows, 216 / 11 meeting admissible poses each, 2975 H poses, **0 refutations**; Y0191 g1: see the log
-  (`logs/audit_Y0191_g1.log`).
+  g1: 6 dead rows, 216 / 11 meeting admissible poses each, 2975 H poses, **0 refutations**.  After the fix of the
+  artefact below, on the regenerated certificates (7 x 7 x 25 grids; H restricted to the poses meeting every slot
+  forced BEFORE the round of the kill -- the forcing is a hypothesis of every later round): Y0839 g1 0, Y0191 g1 0
+  (21 rows), Y0054 g1 0 (7 rows, H forced at BL(1,0)), **Y0842 g1 0 (17 rows, the page's kill)**, and the count's
+  pair exclusions 0 on all four; Y0044 g1: the four round-2 kills of cell 17's BR(1,0) rows show 89 of 329 meeting
+  poses disjoint from SOME record-box H pose meeting BL(1,0) -- every such H pose lies in a unit the round-1 mutual
+  clip killed (MC:BL(1,0), units (0, 0-2, 3-7)), and for the 27 of them re-checked no admissible BL(1,0) meeter
+  disjoint from the H pose exists in any alive BL(1,0) row (`scratch/audit_y0044.py`): the kills stand on Lemma MC,
+  which the sampling does not refute.  Logs `logs/audit_*.log`.
 * Kept rule (A202): a stage-0 kill of a page that the exact tests leave alive is a bug until proved otherwise; the
   CSP adds constraints the exact table never had (H-consistency), so its kills are audited by sampling first.
 * **The artefact this rule caught (2026-09-10 17:50).**  The first population run "killed" Y0054 at the g1 pad by the
