@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2394" height="827" font-family="Segoe UI, sans-serif" style="background:#fff">
+<svg xmlns="http://www.w3.org/2000/svg" width="2394" height="995" font-family="Segoe UI, sans-serif" style="background:#fff">
 <defs><pattern id="stipple" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#f2f2f2"/><circle cx="1" cy="1" r="0.7" fill="#999"/><circle cx="3" cy="3" r="0.7" fill="#999"/></pattern></defs>
 <text x="20.0" y="22.0" font-size="13" fill="#000" text-anchor="start" font-weight="bold">k5_16_interior_Y0044 -- A201 cell-pair mutual exclusion (PI, 2026-09-10) in A200's quick chain: the page AFTER THE FAST STEPS, one panel per pad</text>
 <text x="20.0" y="38.0" font-size="8" fill="#444" text-anchor="start">grey stipple = cells where some forced slot's meeter still has surviving centres (undecided); white = none; dashed colour = slot unit + its union box; blue = pins; black = H's clipped box with its hypothesis square at an admissible sampled pose (dashed if none); purple = instantiated meeters; yellow = the count's witness cells;</text>
-<text x="20.0" y="50.0" font-size="8" fill="#444" text-anchor="start">RED = A200's witness pairs the table excludes (rule + number).  Drawn from the certificates, nothing recomputed; rendered 2026-09-10 17:24:34</text>
-<text x="20.0" y="64.0" font-size="9" fill="#000" text-anchor="start" font-weight="bold">PANEL 1: pe201_k5_16_interior_Y0044.json (pad g1; written 17:01:17)</text>
+<text x="20.0" y="50.0" font-size="8" fill="#444" text-anchor="start">RED = A200's witness pairs the table excludes (rule + number).  Drawn from the certificates, nothing recomputed; rendered 2026-09-10 17:34:28</text>
+<text x="20.0" y="64.0" font-size="9" fill="#000" text-anchor="start" font-weight="bold">PANEL 1: pe201_k5_16_interior_Y0044.json (pad g1; written 17:34:28)</text>
 <rect x="20.0" y="70.0" width="457.5" height="457.5" fill="#fff" fill-opacity="1.00" stroke="#000" stroke-width="1.6"/>
 <rect x="79.0" y="400.6" width="67.9" height="67.9" fill="#fff" fill-opacity="1.00" stroke="#ddd" stroke-width="0.4"/>
 <rect x="79.0" y="332.7" width="67.9" height="67.9" fill="#fff" fill-opacity="1.00" stroke="#ddd" stroke-width="0.4"/>
@@ -77,13 +77,13 @@
 <rect x="197.0" y="463.2" width="17.8" height="5.3" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
 <text x="205.9" y="468.8" font-size="5.5" fill="#6d4c00" text-anchor="middle">F1:BL(1,0),BR(1,0)</text>
 <rect x="333.7" y="332.7" width="16.9" height="20.8" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
-<text x="342.2" y="346.1" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:BR(0,1),BR(1,0)</text>
+<text x="342.2" y="346.1" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:BR(0,1),BR(1,0),TR(0,1)</text>
 <rect x="282.7" y="221.0" width="42.4" height="41.7" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
-<text x="303.9" y="244.9" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:BR(0,1),TL(1,0),TR(0,1),TR(1,0)</text>
+<text x="303.9" y="244.9" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:BR(0,1),TL(1,0),TR(0,1)</text>
 <rect x="183.1" y="196.9" width="31.7" height="49.8" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
 <text x="199.0" y="224.8" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TL(1,0),TR(1,0)</text>
-<rect x="282.7" y="129.0" width="18.5" height="67.9" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
-<text x="291.9" y="165.9" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TR(0,1)</text>
+<rect x="214.8" y="129.0" width="67.9" height="67.9" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
+<text x="248.7" y="165.9" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TR(1,0)</text>
 <rect x="308.7" y="264.8" width="41.9" height="67.9" fill="none" stroke="#c62828" stroke-width="1.6"/>
 <rect x="333.7" y="332.7" width="16.9" height="21.4" fill="none" stroke="#c62828" stroke-width="1.6"/>
 <line x1="329.6" y1="298.7" x2="342.2" y2="343.4" stroke="#c62828" stroke-width="2.2"/>
@@ -102,66 +102,82 @@
 <text x="507.0" y="121.0" font-size="8" fill="#333" text-anchor="start">on the two rows' own pieces against each other's K' (a side with no pose left =&gt; excluded; cell pair first, then option pair); the count re-runs until</text>
 <text x="507.0" y="133.0" font-size="8" fill="#333" text-anchor="start">it is infeasible or its cover is VERIFIED pair by pair.  'cell-pair mutual exclusion' is the PI's reading of 2026-09-10.  Undecided cells: grey stippl</text>
 <text x="507.0" y="145.0" font-size="8" fill="#333" text-anchor="start">e, never green.</text>
-<text x="507.0" y="157.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold">count covers refuted: 54 pairwise + 34 by the joint clip; last cover verified pair by pair: False; joint clip alive: None</text>
-<text x="507.0" y="169.0" font-size="7.5" fill="#333" text-anchor="start">STEPS (s): normalise[base] 3.7 &gt; options 86.2 &gt; union 0.3 &gt; pair-cells 78.2 &gt; count[nochord] 217.4 &gt; count[chord] 0.1 &gt; count[barH:BR(1,0)] 0.1 &gt; coun</text>
-<text x="507.0" y="180.5" font-size="7.5" fill="#333" text-anchor="start">t[barH+chord:BR(1,0)] 0.1 &gt; normalise[round1] 5.6 &gt; options 83.7 &gt; union 0.3 &gt; pair-cells 72.7 &gt; count[nochord] 228.3 &gt; count[chord] 0.0 &gt; count[barH:</text>
-<text x="507.0" y="192.0" font-size="7.5" fill="#333" text-anchor="start">BR(1,0)] 0.0 &gt; count[barH+chord:BR(1,0)] 0.0</text>
-<text x="507.0" y="203.5" font-size="7.5" fill="#555" text-anchor="start">whole run 783 s, 296 exact tests, 2 round(s); lam 1.004000117048806; window pending False</text>
-<text x="507.0" y="215.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold">round 1: count no-chords True (1400 nodes, 272 exclusions used) / chords True (1259 nodes, 272 used); caps {'BL(1,0)': 1, 'BR(0,1)': None, 'BR(1,0)': </text>
+<text x="507.0" y="157.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold">count covers refuted: 94 pairwise + 70 by the joint clip; last cover verified pair by pair: True; joint clip alive: True</text>
+<text x="507.0" y="169.0" font-size="7.5" fill="#333" text-anchor="start">STEPS (s): normalise[base] 3.8 &gt; options 90.4 &gt; union 0.2 &gt; pair-cells 74.3 &gt; count[nochord] 332.8 &gt; count[chord] 7.9 &gt; count[barH:BR(1,0)] 8.5 &gt; coun</text>
+<text x="507.0" y="180.5" font-size="7.5" fill="#333" text-anchor="start">t[barH+chord:BR(1,0)] 8.4 &gt; normalise[round1] 5.1 &gt; options 78.9 &gt; union 0.3 &gt; pair-cells 69.1 &gt; count[nochord] 475.1 &gt; count[chord] 6.2 &gt; count[barH:</text>
+<text x="507.0" y="192.0" font-size="7.5" fill="#333" text-anchor="start">BR(1,0)] 5.9 &gt; count[barH+chord:BR(1,0)] 6.1</text>
+<text x="507.0" y="203.5" font-size="7.5" fill="#555" text-anchor="start">whole run 1179 s, 296 exact tests, 2 round(s); lam 1.004000117048806; window pending False</text>
+<text x="507.0" y="215.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold">round 1: count no-chords True (2942 nodes, 330 exclusions used) / chords True (2686 nodes, 330 used); caps {'BL(1,0)': 1, 'BR(0,1)': None, 'BR(1,0)': </text>
 <text x="507.0" y="227.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold">None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}</text>
-<text x="507.0" y="239.0" font-size="7.5" fill="#333" text-anchor="start">   table: 1071847 lookups; exclusions A1 130 / CN 99 / EXACT 30 (exact nodes tested 163, 300.2 s of the 300 s budget, 2 pairs left undecided by budget</text>
-<text x="507.0" y="250.5" font-size="7.5" fill="#333" text-anchor="start">)</text>
+<text x="507.0" y="239.0" font-size="7.5" fill="#333" text-anchor="start">   table: 2445814 lookups; exclusions A1 133 / CN 123 / EXACT 50 (exact nodes tested 236, 433.1 s of the 1500 s budget, 0 pairs left undecided by budg</text>
+<text x="507.0" y="250.5" font-size="7.5" fill="#333" text-anchor="start">et)</text>
 <text x="507.0" y="262.0" font-size="8" fill="#c62828" text-anchor="start" font-weight="bold">   A200's witness cover (5 rows found of 6): DEAD</text>
 <text x="507.0" y="274.0" font-size="7" fill="#c62828" text-anchor="start">      ['free', 16, ['BR(1,0)']] | ['free', 17, ['BR(0,1)']] : Lemma CN: max Euclidean centre distance 0.8357 &lt; 1 (inscribed discs)</text>
 <text x="507.0" y="285.0" font-size="7" fill="#e65100" text-anchor="start">      ['free', 17, ['BR(0,1)']] | ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']] : EXACT (option pair): X2 has no pose clear of K'(X1) aft</text>
 <text x="507.0" y="296.0" font-size="7" fill="#e65100" text-anchor="start">er pass 1</text>
 <text x="507.0" y="307.0" font-size="7" fill="#e65100" text-anchor="start">      ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']] | ['free', 14, ['TL(1,0)', 'TR(0,1)', 'TR(1,0)']] : EXACT (option pair): X1 has no po</text>
 <text x="507.0" y="318.0" font-size="7" fill="#e65100" text-anchor="start">se clear of K'(X2) after pass 1</text>
-<text x="507.0" y="329.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold">round 2: count no-chords True (559 nodes, 142 exclusions used) / chords True (531 nodes, 142 used); caps {'BL(1,0)': 0, 'BR(0,1)': None, 'BR(1,0)': 1,</text>
+<text x="507.0" y="329.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold">round 2: count no-chords True (753 nodes, 214 exclusions used) / chords True (701 nodes, 214 used); caps {'BL(1,0)': 0, 'BR(0,1)': None, 'BR(1,0)': 1,</text>
 <text x="507.0" y="341.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold"> 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}</text>
-<text x="507.0" y="353.0" font-size="7.5" fill="#333" text-anchor="start">   table: 251921 lookups; exclusions A1 43 / CN 50 / EXACT 32 (exact nodes tested 181, 300.2 s of the 300 s budget, 1 pairs left undecided by budget)</text>
-<text x="507.0" y="364.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">all exclusions found (418), by rule:</text>
-<text x="507.0" y="376.5" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@18; sub-cover whole cover; row free@18 has no pose clear of K'(free@14) after pass 1</text>
-<text x="507.0" y="387.0" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row H@11; sub-cover whole cover; row H@11 has no pose clear of K'(free@18) after pass 2</text>
-<text x="507.0" y="397.5" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row H@11; sub-cover whole cover; row H@11 has no pose clear of K'(free@18) after pass 2</text>
-<text x="507.0" y="408.0" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@19; sub-cover whole cover; row free@19 has no pose clear of K'(free@18) after pass 2</text>
-<text x="507.0" y="418.5" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@18; sub-cover whole cover; row free@18 has no pose clear of K'(free@14) after pass 1</text>
-<text x="507.0" y="429.0" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@18; sub-cover whole cover; row free@18 has no pose clear of K'(free@14) after pass 1</text>
-<text x="507.0" y="439.5" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@18; sub-cover whole cover; row free@18 has no pose clear of K'(free@14) after pass 1</text>
-<text x="507.0" y="450.0" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row H@11; sub-cover whole cover; row H@11 has no pose clear of K'(free@18) after pass 2</text>
-<text x="507.0" y="460.5" font-size="6.5" fill="#880e4f" text-anchor="start">   ... 26 more COVER exclusions in the certificate</text>
-<text x="507.0" y="471.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 17, ['BR(0,1)']] | ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']]  EXACT (option pair): X2 has no pose clear of K'(X1) </text>
-<text x="507.0" y="481.5" font-size="6.5" fill="#e65100" text-anchor="start">after pass 1</text>
-<text x="507.0" y="492.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']] | ['free', 14, ['TL(1,0)', 'TR(0,1)', 'TR(1,0)']]  EXACT (option pair): X1 has no</text>
-<text x="507.0" y="502.5" font-size="6.5" fill="#e65100" text-anchor="start"> pose clear of K'(X2) after pass 1</text>
-<text x="507.0" y="513.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 23, ['BR(0,1)', 'TR(0,1)', 'TR(1,0)']]  EXACT (cell pair [16, 23]): X1 has no pose clear of K'(X2) afte</text>
-<text x="507.0" y="523.5" font-size="6.5" fill="#e65100" text-anchor="start">r pass </text>
-<text x="507.0" y="534.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 22, ['BR(0,1)', 'TR(0,1)']]  EXACT (cell pair [16, 22]): X1 has no pose clear of K'(X2) after pass </text>
-<text x="507.0" y="544.5" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 23, ['BR(0,1)', 'TR(0,1)']]  EXACT (cell pair [16, 23]): X1 has no pose clear of K'(X2) after pass </text>
-<text x="507.0" y="555.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 23, ['BR(0,1)', 'TR(1,0)']]  EXACT (cell pair [16, 23]): X1 has no pose clear of K'(X2) after pass </text>
-<text x="507.0" y="565.5" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 14, ['TL(1,0)', 'TR(0,1)']] | ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']]  EXACT (option pair): X1 has no pose clear</text>
-<text x="507.0" y="576.0" font-size="6.5" fill="#e65100" text-anchor="start"> of K'(X2) after pass 1</text>
-<text x="507.0" y="586.5" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 22, ['BR(0,1)']]  EXACT (cell pair [16, 22]): X1 has no pose clear of K'(X2) after pass </text>
-<text x="507.0" y="597.0" font-size="6.5" fill="#e65100" text-anchor="start">   ... 54 more EXACT exclusions in the certificate</text>
-<text x="507.0" y="607.5" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 16, ['BR(1,0)']] | ['free', 17, ['BR(0,1)']]  Lemma CN: max Euclidean centre distance 0.8357 &lt; 1 (inscribed discs)</text>
-<text x="507.0" y="618.0" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 10, ['BR(1,0)']] | ['free', 5, ['BL(1,0)']]  Lemma CN: max Euclidean centre distance 0.7274 &lt; 1 (inscribed discs)</text>
-<text x="507.0" y="628.5" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 15, ['BR(1,0)']] | ['free', 5, ['BL(1,0)']]  Lemma CN: max Euclidean centre distance 0.8782 &lt; 1 (inscribed discs)</text>
-<text x="507.0" y="639.0" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 15, ['BR(0,1)', 'BR(1,0)']] | ['free', 5, ['BL(1,0)']]  Lemma CN: max Euclidean centre distance 0.8780 &lt; 1 (inscribed discs)</text>
-<text x="507.0" y="649.5" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 21, ['BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma CN: max Euclidean centre distance 0.7409 &lt; 1 (inscribed discs)</text>
-<text x="507.0" y="660.0" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 21, ['BR(0,1)', 'BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma CN: max Euclidean centre distance 0.7409 &lt; 1 (inscribed discs)</text>
-<text x="507.0" y="670.5" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 21, ['BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma CN: max Euclidean centre distance 0.7409 &lt; 1 (inscribed discs)</text>
-<text x="507.0" y="681.0" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 21, ['BR(0,1)', 'BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma CN: max Euclidean centre distance 0.7409 &lt; 1 (inscribed disc</text>
-<text x="507.0" y="691.5" font-size="6.5" fill="#c62828" text-anchor="start">s)</text>
-<text x="507.0" y="702.0" font-size="6.5" fill="#c62828" text-anchor="start">   ... 141 more CN exclusions in the certificate</text>
-<text x="507.0" y="712.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 17, ['BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.2441 &lt; 1/sqrt2</text>
-<text x="507.0" y="723.0" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 17, ['BR(0,1)', 'BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.2283 &lt; 1/sqrt2</text>
-<text x="507.0" y="733.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 17, ['BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.2283 &lt; 1/sqrt2</text>
-<text x="507.0" y="744.0" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 17, ['BR(0,1)', 'BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.2283 &lt; 1/sqrt2</text>
-<text x="507.0" y="754.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 22, ['BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.5897 &lt; 1/sqrt2</text>
-<text x="507.0" y="765.0" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 22, ['BR(0,1)', 'BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.5552 &lt; 1/sqrt2</text>
-<text x="507.0" y="775.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 22, ['BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.5552 &lt; 1/sqrt2</text>
-<text x="507.0" y="786.0" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 22, ['BR(0,1)', 'BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.5552 &lt; 1/sqrt2</text>
-<text x="507.0" y="796.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   ... 165 more A1 exclusions in the certificate</text>
+<text x="507.0" y="353.0" font-size="7.5" fill="#333" text-anchor="start">   table: 747378 lookups; exclusions A1 51 / CN 78 / EXACT 56 (exact nodes tested 283, 560.4 s of the 1500 s budget, 0 pairs left undecided by budget)</text>
+<text x="507.0" y="364.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">all exclusions found (561), by rule:</text>
+<text x="507.0" y="376.5" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@18; sub-cover [['H', 11, ['BL(1,0)']], ['free', 8, ['TL(1,0)']], ['free', 14, ['TL(1</text>
+<text x="507.0" y="387.0" font-size="6.5" fill="#880e4f" text-anchor="start">,0)', 'TR(0,1)', 'TR(1,0)']], ['free', 16, ['BR(0,1)', 'BR(1,0)']], ['free', 18, ['BR(0,1)', 'TR(0,1)', 'TR(1,0)']]]; row free@18 has no pose clear of</text>
+<text x="507.0" y="397.5" font-size="6.5" fill="#880e4f" text-anchor="start"> K'(free@14) after pass 1 (s</text>
+<text x="507.0" y="408.0" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row H@11; sub-cover [['H', 11, ['BL(1,0)']], ['free', 5, ['BL(1,0)', 'BR(1,0)']], ['free', 8,</text>
+<text x="507.0" y="418.5" font-size="6.5" fill="#880e4f" text-anchor="start"> ['TL(1,0)']], ['free', 16, ['BR(0,1)', 'BR(1,0)']], ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']], ['free', 19, ['TR(0,1)', 'TR(1,0)']]]</text>
+<text x="507.0" y="429.0" font-size="6.5" fill="#880e4f" text-anchor="start">; row H@11 has no pose clear of K'(free@18) after pass 2 (sub-</text>
+<text x="507.0" y="439.5" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row H@11; sub-cover [['H', 11, ['BL(1,0)']], ['free', 5, ['BL(1,0)', 'BR(1,0)']], ['free', 8,</text>
+<text x="507.0" y="450.0" font-size="6.5" fill="#880e4f" text-anchor="start"> ['TL(1,0)']], ['free', 16, ['BR(0,1)', 'BR(1,0)']], ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']], ['free', 19, ['TL(1,0)', 'TR(0,1)', '</text>
+<text x="507.0" y="460.5" font-size="6.5" fill="#880e4f" text-anchor="start">TR(1,0)']]]; row H@11 has no pose clear of K'(free@18) after pass 2 (sub-</text>
+<text x="507.0" y="471.0" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@19; sub-cover [['H', 11, ['BL(1,0)']], ['free', 5, ['BL(1,0)', 'BR(1,0)']], ['free',</text>
+<text x="507.0" y="481.5" font-size="6.5" fill="#880e4f" text-anchor="start"> 8, ['TL(1,0)']], ['free', 16, ['BR(0,1)', 'BR(1,0)']], ['free', 18, ['BR(0,1)', 'TR(0,1)', 'TR(1,0)']], ['free', 19, ['TL(1,0)', 'TR(0,1)', 'TR(1,0)'</text>
+<text x="507.0" y="492.0" font-size="6.5" fill="#880e4f" text-anchor="start">]]]; row free@19 has no pose clear of K'(free@18) after pass 2 (s</text>
+<text x="507.0" y="502.5" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@18; sub-cover [['H', 11, ['BL(1,0)']], ['free', 8, ['TL(1,0)', 'TR(1,0)']], ['free',</text>
+<text x="507.0" y="513.0" font-size="6.5" fill="#880e4f" text-anchor="start"> 14, ['TL(1,0)', 'TR(0,1)']], ['free', 16, ['BR(0,1)', 'BR(1,0)']], ['free', 18, ['BR(0,1)', 'TR(0,1)', 'TR(1,0)']]]; row free@18 has no pose clear of</text>
+<text x="507.0" y="523.5" font-size="6.5" fill="#880e4f" text-anchor="start"> K'(free@14) after pass 1 (s</text>
+<text x="507.0" y="534.0" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@18; sub-cover [['H', 11, ['BL(1,0)']], ['free', 8, ['TL(1,0)', 'TR(1,0)']], ['free',</text>
+<text x="507.0" y="544.5" font-size="6.5" fill="#880e4f" text-anchor="start"> 14, ['TL(1,0)', 'TR(0,1)', 'TR(1,0)']], ['free', 16, ['BR(0,1)', 'BR(1,0)']], ['free', 18, ['BR(0,1)', 'TR(0,1)']]]; row free@18 has no pose clear of</text>
+<text x="507.0" y="555.0" font-size="6.5" fill="#880e4f" text-anchor="start"> K'(free@14) after pass 1 (s</text>
+<text x="507.0" y="565.5" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row free@18; sub-cover [['H', 11, ['BL(1,0)']], ['free', 8, ['TL(1,0)', 'TR(1,0)']], ['free',</text>
+<text x="507.0" y="576.0" font-size="6.5" fill="#880e4f" text-anchor="start"> 14, ['TL(1,0)', 'TR(0,1)', 'TR(1,0)']], ['free', 16, ['BR(0,1)', 'BR(1,0)']], ['free', 18, ['BR(0,1)', 'TR(0,1)', 'TR(1,0)']]]; row free@18 has no po</text>
+<text x="507.0" y="586.5" font-size="6.5" fill="#880e4f" text-anchor="start">se clear of K'(free@14) after pass 1 (s</text>
+<text x="507.0" y="597.0" font-size="6.5" fill="#880e4f" text-anchor="start">   COVER (joint clip of a pairwise-verified cover): dead row H@11; sub-cover [['H', 11, ['BL(1,0)']], ['free', 5, ['BL(1,0)', 'BR(1,0)']], ['free', 8,</text>
+<text x="507.0" y="607.5" font-size="6.5" fill="#880e4f" text-anchor="start"> ['TL(1,0)', 'TR(1,0)']], ['free', 16, ['BR(0,1)', 'BR(1,0)']], ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)']], ['free', 19, ['TR(0,1)', 'TR(1,0)']]]</text>
+<text x="507.0" y="618.0" font-size="6.5" fill="#880e4f" text-anchor="start">; row H@11 has no pose clear of K'(free@18) after pass 2 (sub-</text>
+<text x="507.0" y="628.5" font-size="6.5" fill="#880e4f" text-anchor="start">   ... 62 more COVER exclusions in the certificate</text>
+<text x="507.0" y="639.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 17, ['BR(0,1)']] | ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']]  EXACT (option pair): X2 has no pose clear of K'(X1) </text>
+<text x="507.0" y="649.5" font-size="6.5" fill="#e65100" text-anchor="start">after pass 1</text>
+<text x="507.0" y="660.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']] | ['free', 14, ['TL(1,0)', 'TR(0,1)', 'TR(1,0)']]  EXACT (option pair): X1 has no</text>
+<text x="507.0" y="670.5" font-size="6.5" fill="#e65100" text-anchor="start"> pose clear of K'(X2) after pass 1</text>
+<text x="507.0" y="681.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 23, ['BR(0,1)', 'TR(0,1)', 'TR(1,0)']]  EXACT (cell pair [16, 23]): X1 has no pose clear of K'(X2) afte</text>
+<text x="507.0" y="691.5" font-size="6.5" fill="#e65100" text-anchor="start">r pass </text>
+<text x="507.0" y="702.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 22, ['BR(0,1)', 'TR(0,1)']]  EXACT (cell pair [16, 22]): X1 has no pose clear of K'(X2) after pass </text>
+<text x="507.0" y="712.5" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 23, ['BR(0,1)', 'TR(0,1)']]  EXACT (cell pair [16, 23]): X1 has no pose clear of K'(X2) after pass </text>
+<text x="507.0" y="723.0" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 23, ['BR(0,1)', 'TR(1,0)']]  EXACT (cell pair [16, 23]): X1 has no pose clear of K'(X2) after pass </text>
+<text x="507.0" y="733.5" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 14, ['TL(1,0)', 'TR(0,1)']] | ['free', 18, ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)']]  EXACT (option pair): X1 has no pose clear</text>
+<text x="507.0" y="744.0" font-size="6.5" fill="#e65100" text-anchor="start"> of K'(X2) after pass 1</text>
+<text x="507.0" y="754.5" font-size="6.5" fill="#e65100" text-anchor="start">   EXACT  ['free', 16, ['BR(1,0)']] | ['free', 22, ['BR(0,1)']]  EXACT (cell pair [16, 22]): X1 has no pose clear of K'(X2) after pass </text>
+<text x="507.0" y="765.0" font-size="6.5" fill="#e65100" text-anchor="start">   ... 98 more EXACT exclusions in the certificate</text>
+<text x="507.0" y="775.5" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 16, ['BR(1,0)']] | ['free', 17, ['BR(0,1)']]  Lemma CN: max Euclidean centre distance 0.8357 &lt; 1 (inscribed discs)</text>
+<text x="507.0" y="786.0" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 10, ['BR(1,0)']] | ['free', 5, ['BL(1,0)']]  Lemma CN: max Euclidean centre distance 0.7274 &lt; 1 (inscribed discs)</text>
+<text x="507.0" y="796.5" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 15, ['BR(1,0)']] | ['free', 5, ['BL(1,0)']]  Lemma CN: max Euclidean centre distance 0.8782 &lt; 1 (inscribed discs)</text>
+<text x="507.0" y="807.0" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 15, ['BR(0,1)', 'BR(1,0)']] | ['free', 5, ['BL(1,0)']]  Lemma CN: max Euclidean centre distance 0.8780 &lt; 1 (inscribed discs)</text>
+<text x="507.0" y="817.5" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 21, ['BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma CN: max Euclidean centre distance 0.7409 &lt; 1 (inscribed discs)</text>
+<text x="507.0" y="828.0" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 21, ['BR(0,1)', 'BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma CN: max Euclidean centre distance 0.7409 &lt; 1 (inscribed discs)</text>
+<text x="507.0" y="838.5" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 21, ['BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma CN: max Euclidean centre distance 0.7409 &lt; 1 (inscribed discs)</text>
+<text x="507.0" y="849.0" font-size="6.5" fill="#c62828" text-anchor="start">   CN  ['free', 21, ['BR(0,1)', 'BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma CN: max Euclidean centre distance 0.7409 &lt; 1 (inscribed disc</text>
+<text x="507.0" y="859.5" font-size="6.5" fill="#c62828" text-anchor="start">s)</text>
+<text x="507.0" y="870.0" font-size="6.5" fill="#c62828" text-anchor="start">   ... 193 more CN exclusions in the certificate</text>
+<text x="507.0" y="880.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 17, ['BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.2441 &lt; 1/sqrt2</text>
+<text x="507.0" y="891.0" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 17, ['BR(0,1)', 'BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.2283 &lt; 1/sqrt2</text>
+<text x="507.0" y="901.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 17, ['BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.2283 &lt; 1/sqrt2</text>
+<text x="507.0" y="912.0" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 17, ['BR(0,1)', 'BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.2283 &lt; 1/sqrt2</text>
+<text x="507.0" y="922.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 22, ['BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.5897 &lt; 1/sqrt2</text>
+<text x="507.0" y="933.0" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 22, ['BR(0,1)', 'BR(1,0)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.5552 &lt; 1/sqrt2</text>
+<text x="507.0" y="943.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 22, ['BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.5552 &lt; 1/sqrt2</text>
+<text x="507.0" y="954.0" font-size="6.5" fill="#6a1b9a" text-anchor="start">   A1  ['free', 22, ['BR(0,1)', 'BR(1,0)', 'TR(0,1)']] | ['free', 16, ['BR(1,0)']]  Lemma A1: max l-inf centre distance 0.5552 &lt; 1/sqrt2</text>
+<text x="507.0" y="964.5" font-size="6.5" fill="#6a1b9a" text-anchor="start">   ... 176 more A1 exclusions in the certificate</text>
 <text x="1197.0" y="64.0" font-size="9" fill="#000" text-anchor="start" font-weight="bold">PANEL 2: pe201_k5_16_interior_Y0044_pad0.json (pad zero; written 17:14:15)</text>
 <rect x="1197.0" y="70.0" width="457.5" height="457.5" fill="#fff" fill-opacity="1.00" stroke="#000" stroke-width="1.6"/>
 <rect x="1256.0" y="400.6" width="67.9" height="67.9" fill="#fff" fill-opacity="1.00" stroke="#ddd" stroke-width="0.4"/>
