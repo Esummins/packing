@@ -41,8 +41,6 @@
    },
    "n_free_opts": 25,
    "H_reach": [
-    "BL(1,1)",
-    "BR(0,1)",
     "TL(1,0)",
     "TR(0,0)"
    ],
@@ -51,18 +49,6 @@
      [
       18,
       [
-       "BL(1,1)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)"
-      ]
-     ],
-     [
-      18,
-      [
        "TR(0,0)"
       ]
      ],
@@ -75,82 +61,6 @@
      [
       18,
       [
-       "BL(1,1)",
-       "BR(0,1)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
        "TL(1,0)",
        "TR(0,0)"
       ]
@@ -543,12 +453,12 @@
    },
    "count_nochord": {
     "feasible": true,
-    "nodes": 33,
+    "nodes": 29,
     "capped": false
    },
    "count_chord": {
     "feasible": true,
-    "nodes": 33,
+    "nodes": 29,
     "capped": false
    },
    "witness": [
@@ -601,7 +511,7 @@
     "A1": 10,
     "CN": 2,
     "MK": 7,
-    "ok": 83
+    "ok": 81
    },
    "forced_H": [
     "TR(0,0)"
@@ -778,44 +688,44 @@
  },
  "kills": {
   "H-clip": {
-   "kills": 0,
-   "ms": 71.7
+   "kills": 393,
+   "ms": 75.7
   },
   "P": {
    "kills": 5534,
-   "ms": 200.7
+   "ms": 174.0
   },
   "W": {
    "kills": 1207,
-   "ms": 26.3
+   "ms": 22.9
   },
   "C": {
    "kills": 1047,
-   "ms": 60.7
+   "ms": 52.6
   },
   "M": {
    "kills": 4155,
-   "ms": 1485.7
+   "ms": 1271.4
   },
   "L": {
    "kills": 14,
-   "ms": 291.5
+   "ms": 246.4
   },
   "R": {
    "kills": 1573,
-   "ms": 27.9
+   "ms": 24.6
   },
   "X": {
    "kills": 0,
-   "ms": 7323.9
+   "ms": 6260.4
   }
  },
- "seconds": 11.817,
+ "seconds": 14.625,
  "steps": [
   {
    "step": "pieces",
-   "t": 10.99,
-   "seconds": 9.608,
+   "t": 9.37,
+   "seconds": 8.22,
    "coarse": 2400,
    "base_alive": 484,
    "alive": {
@@ -827,12 +737,12 @@
   },
   {
    "step": "options",
-   "t": 11.65,
-   "seconds": 0.658,
+   "t": 14.5,
+   "seconds": 5.133,
    "round": 1,
    "n_free_opts": 25,
    "n_fixed": {
-    "H": 16
+    "H": 4
    },
    "alive_cells": {
     "BL(1,1)": 7,
@@ -843,8 +753,8 @@
   },
   {
    "step": "union",
-   "t": 11.73,
-   "seconds": 0.076,
+   "t": 14.55,
+   "seconds": 0.055,
    "caps": {
     "BL(1,1)": null,
     "BR(0,1)": null,
@@ -854,59 +764,41 @@
   },
   {
    "step": "count",
-   "t": 11.73,
+   "t": 14.56,
    "seconds": 0.002,
    "chords": false,
    "feasible": true,
-   "nodes": 33,
+   "nodes": 29,
    "capped": false,
    "pairs": {
     "A1": 10,
     "CN": 2,
     "MK": 7,
-    "ok": 83
+    "ok": 81
    }
   },
   {
    "step": "count",
-   "t": 11.73,
+   "t": 14.56,
    "seconds": 0.001,
    "chords": true,
    "feasible": true,
-   "nodes": 33,
+   "nodes": 29,
    "capped": false,
    "pairs": {
     "A1": 10,
     "CN": 2,
     "MK": 7,
-    "ok": 83
+    "ok": 81
    }
   },
   {
    "step": "count-barH",
-   "t": 11.73,
-   "seconds": 0.002,
-   "slot": "BL(1,1)",
-   "feasible": true,
-   "nodes": 31,
-   "capped": false
-  },
-  {
-   "step": "count-barH",
-   "t": 11.74,
-   "seconds": 0.002,
-   "slot": "BR(0,1)",
-   "feasible": true,
-   "nodes": 31,
-   "capped": false
-  },
-  {
-   "step": "count-barH",
-   "t": 11.74,
-   "seconds": 0.003,
+   "t": 14.56,
+   "seconds": 0.001,
    "slot": "TL(1,0)",
    "feasible": true,
-   "nodes": 33,
+   "nodes": 29,
    "capped": false
   }
  ],
@@ -16748,7 +16640,7 @@
   "TR(0,0)": 796,
   "TL(1,0)": 1792
  },
- "n_hpieces": 4096,
+ "n_hpieces": 3703,
  "window_pending": false,
  "path": "fast30",
  "verifier": "[C: closed-form trace] -- no verifier clause exists yet",
