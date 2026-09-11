@@ -1,2 +1,18 @@
 12:55:16 start k5_16_interior_Y0083 g1_R.3.1s (lab 7, free 10044 MB)
 == k5_16_interior_Y0083 leaf pad g1 [R.3.1s]: start attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0083.json; H [1.799, 1.882, 1.519, 1.536, 82.371, 84.86]; forced H ['BL(1,0)']; roles {'F1': ['BL(1,0)'], 'F2': ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)'], 'F3': ['TL(1,0)', 'TR(1,0)'], 'F4': ['BR(0,1)', 'TR(0,1)']} (cells {'F1': -1, 'F2': 18, 'F3': 8, 'F4': -1}); 6 slots; free squares 5
+   node R.3.1s     d0 root: DEAD by FC r2 (297.4 s, 2 rounds; t=297.4)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A206-named-split\code\run206.py", line 161, in <module>
+    doc = json.load(open(cert, encoding="utf-8"))
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A206-named-split\code\run206.py", line 117, in run_one
+    root = tree.nodes[0] if tree.nodes else {}
+    
+    out["root"] = dict(verdict=root.get("verdict"), clip=root.get("clip"), seconds=root.get("seconds"), n_rounds=root.get("n_rounds"), kept=root.get("kept"),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       forced_H=root.get("forced_H"), role_slots=root.get("role_slots"), alive_cells=root.get("alive_cells"), branch_slot=root.get("branch_slot"),
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A206-named-split\code\run206.py", line 118, in <genexpr>
+    out["root"] = dict(verdict=root.get("verdict"), clip=root.get("clip"), seconds=root.get("seconds"), n_rounds=root.get("n_rounds"), kept=root.get("kept"),
+                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'startswith'
