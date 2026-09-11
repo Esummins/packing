@@ -106,7 +106,7 @@ the disk bound's combinatorial twin and 2–4 pieces tighter (Y1117: disk 10, co
 ![the LP support at the four alive level-3 nodes](residue_map/a57_lp_support.svg)
 
 ### 1a. Family S01 — "room at side 4" (k5_11 238, k5_16 178, trump5 196)
-![S01](shadows/S01.svg)
+![S01](shadows/archive/s_family/S01.svg)
 The support minimises to side exactly 4.000 in 62 combinatorial variants: a slot left empty or singly met. Every such
 configuration teleports into a higher-k class that is dead on W. **The LP does not know the teleport lemma.** Technique tried:
 SLOT-CROWD incidence rows at the node level — **A109 (2026-09-06, `7daabe6f`): 0 of 18 genuinely-alive nodes killed at
@@ -135,7 +135,7 @@ trump5 after A114's closures; A109-O1 discharged.
 Generalises as: *crowding rows need certified depth; depth needs the extension classes dead ABOVE the target side.*
 
 ### 1b. Family S02 — the k7 pinwheel (k5_11 184, k5_16 68, trump5 12; carries the deep tree)
-![S02](shadows/S02.svg)
+![S02](shadows/archive/s_family/S02.svg)
 ![the pinwheel, optimised, with contacts](residue_map/pinwheel_k7_shadow.svg)
 ![side vs common tilt](residue_map/pinwheel_tilt_curve.svg)
 Seven slot squares (BL L-shape 3, BR stacked 2, TL 1, TR 1) + three load-bearing squares at one tilt 48.435° + one
@@ -212,8 +212,8 @@ transporting it to another class is a re-run whose survival is decided by which 
 squares the new class pins.
 
 ### 1c. Families S03–S06 (PI-read) and S08–S53
-![S03](shadows/S03.svg) ![S04](shadows/S04.svg)
-![S05](shadows/S05.svg) ![S06](shadows/S06.svg)
+![S03](shadows/archive/s_family/S03.svg) ![S04](shadows/archive/s_family/S04.svg)
+![S05](shadows/archive/s_family/S05.svg) ![S06](shadows/archive/s_family/S06.svg)
 S03: f0/f1/f2 essentially simple (SNAP → higher k). S04: f0 teleports to BR(0,1). S05: the S07 pinwheel inverted. S06:
 the optimal five-square packing (2 + 1/√2) with a unit band = the s(10) optimum 3 + 1/√2, a ten-square shadow (the LP
 found room for ten and only fractional room for the eleventh). S08–S53: 1–17 nodes each, mostly level 1, the gallery

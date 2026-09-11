@@ -180,7 +180,7 @@ Total alive nodes explained by an integral shadow: **1260** of **1566**.  Not ex
 
 ## S01 - a k11 packing at s* = 4.000000 on the boundary of class k5_11, k5_16, trump5, k5_05, k5_10, k5_12, k5_17, k6_20, k6_29
 
-![S01](shadows/S01.svg)
+![S01](shadows/archive/s_family/S01.svg)
 
 * **s\*** = 4.000000000 = s-hat +0.122916410  (s0 = 3.877084, s\* - s0 = +0.122916)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TR(0,0)` `BR(1,1) (=f3)` `BR(0,1) (=f4)` + 4 free squares; a k11 packing.
@@ -247,7 +247,7 @@ Load-bearing free squares: `f1`, `f3`, `f4`.  Rattlers/struts (removal leaves s\
 
 ## S02 - a k11 packing at s* = 3.886746 on the boundary of class k5_11, k5_16, trump5, k5_02, k5_03, k6_29
 
-![S02](shadows/S02.svg)
+![S02](shadows/archive/s_family/S02.svg)
 
 * **s\*** = 3.886746030 = s-hat +0.009662440  (s0 = 3.877084, s\* - s0 = +0.009662)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares; a k11 packing.
@@ -308,7 +308,7 @@ Load-bearing free squares: `f1`, `f2`, `f3`.  Rattlers/struts (removal leaves s\
 
 ## S03 - a k11 packing at s* = 3.942809 on the boundary of class k5_11, k5_16, trump5
 
-![S03](shadows/S03.svg)
+![S03](shadows/archive/s_family/S03.svg)
 
 * **s\*** = 3.942809044 = s-hat +0.065725454  (s0 = 3.877084, s\* - s0 = +0.065725)
 * **shadow** = 8 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` `BL(1,1) (=f0)` `TR(0,1) (=f2)` + 3 free squares; a k11 packing.
@@ -368,7 +368,7 @@ Load-bearing free squares: `f0`, `f2`.  Rattlers/struts (removal leaves s\* unch
 
 ## S04 - a k10 packing at s* = 3.822876 on the boundary of class k5_11, k5_16, trump5
 
-![S04](shadows/S04.svg)
+![S04](shadows/archive/s_family/S04.svg)
 
 * **s\*** = 3.822875659 = s-hat -0.054207931  (s0 = 3.877084, s\* - s0 = -0.054208)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` `BR(1,0) (=f2)` + 4 free squares; a k10 packing.
@@ -429,7 +429,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S05 - a k11 packing at s* = 3.912232 on the boundary of class k5_11, k5_16, trump5, k6_20, k6_27
 
-![S05](shadows/S05.svg)
+![S05](shadows/archive/s_family/S05.svg)
 
 * **s\*** = 3.912232042 = s-hat +0.035148452  (s0 = 3.877084, s\* - s0 = +0.035148)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares; a k11 packing.
@@ -484,7 +484,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S06 - a k10 packing at s* = 3.707107 on the boundary of class k5_11, k5_16, trump5
 
-![S06](shadows/S06.svg)
+![S06](shadows/archive/s_family/S06.svg)
 
 * **s\*** = 3.707106786 = s-hat -0.169976804  (s0 = 3.877084, s\* - s0 = -0.169977)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` `TL(1,1) (=f0)` `TR(0,1) (=f3)` + 3 free squares; a k10 packing.
@@ -546,7 +546,7 @@ Load-bearing free squares: `f4`.  Rattlers/struts (removal leaves s\* unchanged)
 
 ## S07 - a k11 packing at s* = 3.885618 on the boundary of class k5_16, trump5
 
-![S07](shadows/S07.svg)
+![S07](shadows/archive/s_family/S07.svg)
 
 * **s\*** = 3.885618055 = s-hat +0.008534465  (s0 = 3.877084, s\* - s0 = +0.008534)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -612,7 +612,7 @@ Load-bearing free squares: `f0`, `f2`, `f3`, `f4`.  Rattlers/struts (removal lea
 
 ## S08 - a k11 packing at s* = 3.914214 on the boundary of class k5_11, k5_16, trump5, k6_21
 
-![S08](shadows/S08.svg)
+![S08](shadows/archive/s_family/S08.svg)
 
 * **s\*** = 3.914213562 = s-hat +0.037129972  (s0 = 3.877084, s\* - s0 = +0.037130)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TR(0,0)` + 6 free squares; a k11 packing.
@@ -675,7 +675,7 @@ Load-bearing free squares: `f0`, `f2`, `f3`, `f4`, `f5`.  Rattlers/struts (remov
 
 ## S09 - a k11 packing at s* = 3.925149 on the boundary of class k5_11, k5_16, trump5
 
-![S09](shadows/S09.svg)
+![S09](shadows/archive/s_family/S09.svg)
 
 * **s\*** = 3.925148814 = s-hat +0.048065224  (s0 = 3.877084, s\* - s0 = +0.048065)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares; a k11 packing.
@@ -731,7 +731,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S10 - a k11 packing at s* = 3.902674 on the boundary of class k5_11, k5_16, trump5
 
-![S10](shadows/S10.svg)
+![S10](shadows/archive/s_family/S10.svg)
 
 * **s\*** = 3.902673975 = s-hat +0.025590385  (s0 = 3.877084, s\* - s0 = +0.025590)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares; a k11 packing.
@@ -788,7 +788,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S11 - a k11 packing at s* = 3.976620 on the boundary of class k5_11, k5_16, trump5
 
-![S11](shadows/S11.svg)
+![S11](shadows/archive/s_family/S11.svg)
 
 * **s\*** = 3.976619590 = s-hat +0.099536000  (s0 = 3.877084, s\* - s0 = +0.099536)
 * **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) TL(0,0) TR(0,0) TR(0,1)` + 3 free squares; a k11 packing.
@@ -839,7 +839,7 @@ Load-bearing free squares: `f1`, `f2`.  Rattlers/struts (removal leaves s\* unch
 
 ## S12 - a k9 packing at s* = 3.400000 on the boundary of class k5_11, k5_16, trump5
 
-![S12](shadows/S12.svg)
+![S12](shadows/archive/s_family/S12.svg)
 
 * **s\*** = 3.400000000 = s-hat -0.477083590  (s0 = 3.877084, s\* - s0 = -0.477084)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 4 free squares; a k9 packing.
@@ -897,7 +897,7 @@ Load-bearing free squares: none.  Rattlers/struts (removal leaves s\* unchanged)
 
 ## S13 - a k11 packing at s* = 3.991994 on the boundary of class k5_16, trump5
 
-![S13](shadows/S13.svg)
+![S13](shadows/archive/s_family/S13.svg)
 
 * **s\*** = 3.991994282 = s-hat +0.114910692  (s0 = 3.877084, s\* - s0 = +0.114910)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(1,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -958,7 +958,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S14 - a k10 packing at s* = 3.767767 on the boundary of class k5_11, k5_16
 
-![S14](shadows/S14.svg)
+![S14](shadows/archive/s_family/S14.svg)
 
 * **s\*** = 3.767766944 = s-hat -0.109316646  (s0 = 3.877084, s\* - s0 = -0.109317)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` `TL(1,0) (=f2)` + 4 free squares; a k10 packing.
@@ -1019,7 +1019,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S15 - a k11 packing at s* = 3.996117 on the boundary of class k5_11, k5_16, trump5
 
-![S15](shadows/S15.svg)
+![S15](shadows/archive/s_family/S15.svg)
 
 * **s\*** = 3.996117051 = s-hat +0.119033461  (s0 = 3.877084, s\* - s0 = +0.119033)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,1)` `TL(1,0) (=f2)` + 4 free squares; a k11 packing.
@@ -1082,7 +1082,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S16 - a k10 packing at s* = 3.768118 on the boundary of class k5_11, k5_16
 
-![S16](shadows/S16.svg)
+![S16](shadows/archive/s_family/S16.svg)
 
 * **s\*** = 3.768117767 = s-hat -0.108965823  (s0 = 3.877084, s\* - s0 = -0.108966)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` `TL(1,0) (=f2)` + 3 free squares; a k10 packing.
@@ -1139,7 +1139,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S17 - a k10 packing at s* = 3.858216 on the boundary of class k5_11, k5_16
 
-![S17](shadows/S17.svg)
+![S17](shadows/archive/s_family/S17.svg)
 
 * **s\*** = 3.858216318 = s-hat -0.018867272  (s0 = 3.877084, s\* - s0 = -0.018868)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares; a k10 packing.
@@ -1199,7 +1199,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S18 - a k10 packing at s* = 3.755342 on the boundary of class k5_11
 
-![S18](shadows/S18.svg)
+![S18](shadows/archive/s_family/S18.svg)
 
 * **s\*** = 3.755342035 = s-hat -0.121741555  (s0 = 3.877084, s\* - s0 = -0.121742)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 5 free squares; a k10 packing.
@@ -1258,7 +1258,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S19 - a k10 packing at s* = 3.728581 on the boundary of class k5_11
 
-![S19](shadows/S19.svg)
+![S19](shadows/archive/s_family/S19.svg)
 
 * **s\*** = 3.728581293 = s-hat -0.148502297  (s0 = 3.877084, s\* - s0 = -0.148503)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` `BR(0,2) (=f1)` `BR(0,1) (=f2)` + 3 free squares; a k10 packing.
@@ -1317,7 +1317,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S20 - a k10 packing at s* = 3.806721 on the boundary of class trump5
 
-![S20](shadows/S20.svg)
+![S20](shadows/archive/s_family/S20.svg)
 
 * **s\*** = 3.806720615 = s-hat -0.070362975  (s0 = 3.877084, s\* - s0 = -0.070363)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 4 free squares; a k10 packing.
@@ -1372,7 +1372,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S21 - a k11 packing at s* = 3.894322 on the boundary of class trump5
 
-![S21](shadows/S21.svg)
+![S21](shadows/archive/s_family/S21.svg)
 
 * **s\*** = 3.894321926 = s-hat +0.017238336  (s0 = 3.877084, s\* - s0 = +0.017238)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -1432,7 +1432,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S22 - a k11 packing at s* = 3.998111 on the boundary of class k5_11
 
-![S22](shadows/S22.svg)
+![S22](shadows/archive/s_family/S22.svg)
 
 * **s\*** = 3.998110682 = s-hat +0.121027092  (s0 = 3.877084, s\* - s0 = +0.121027)
 * **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares; a k11 packing.
@@ -1483,7 +1483,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 
 ## S23 - a k10 packing at s* = 3.894653 on the boundary of class k5_11
 
-![S23](shadows/S23.svg)
+![S23](shadows/archive/s_family/S23.svg)
 
 * **s\*** = 3.894653059 = s-hat +0.017569469  (s0 = 3.877084, s\* - s0 = +0.017569)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) TL(0,0)` `BL(2,1) (=f0)` + 3 free squares; a k10 packing.
@@ -1540,7 +1540,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S24 - a k11 packing at s* = 3.989264 on the boundary of class k5_11, k5_16
 
-![S24](shadows/S24.svg)
+![S24](shadows/archive/s_family/S24.svg)
 
 * **s\*** = 3.989264411 = s-hat +0.112180821  (s0 = 3.877084, s\* - s0 = +0.112180)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares; a k11 packing.
@@ -1597,7 +1597,7 @@ Load-bearing free squares: `f0`, `f2`, `f3`.  Rattlers/struts (removal leaves s\
 
 ## S25 - a k10 packing at s* = 3.728606 on the boundary of class k5_11
 
-![S25](shadows/S25.svg)
+![S25](shadows/archive/s_family/S25.svg)
 
 * **s\*** = 3.728606234 = s-hat -0.148477356  (s0 = 3.877084, s\* - s0 = -0.148478)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` `TL(2,0) (=f0)` + 4 free squares; a k10 packing.
@@ -1656,7 +1656,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S26 - a k10 packing at s* = 3.822889 on the boundary of class k5_16
 
-![S26](shadows/S26.svg)
+![S26](shadows/archive/s_family/S26.svg)
 
 * **s\*** = 3.822888964 = s-hat -0.054194626  (s0 = 3.877084, s\* - s0 = -0.054195)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0) TR(0,0)` + 4 free squares; a k10 packing.
@@ -1712,7 +1712,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S27 - a k10 packing at s* = 3.823521 on the boundary of class k5_16
 
-![S27](shadows/S27.svg)
+![S27](shadows/archive/s_family/S27.svg)
 
 * **s\*** = 3.823521494 = s-hat -0.053562096  (s0 = 3.877084, s\* - s0 = -0.053563)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares; a k10 packing.
@@ -1768,7 +1768,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S28 - a k10 packing at s* = 3.825844 on the boundary of class k5_16
 
-![S28](shadows/S28.svg)
+![S28](shadows/archive/s_family/S28.svg)
 
 * **s\*** = 3.825844092 = s-hat -0.051239498  (s0 = 3.877084, s\* - s0 = -0.051240)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 4 free squares; a k10 packing.
@@ -1826,7 +1826,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S29 - a k11 packing at s* = 3.886761 on the boundary of class k5_16
 
-![S29](shadows/S29.svg)
+![S29](shadows/archive/s_family/S29.svg)
 
 * **s\*** = 3.886760521 = s-hat +0.009676931  (s0 = 3.877084, s\* - s0 = +0.009677)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` `BR(1,0) (=f2)` + 4 free squares; a k11 packing.
@@ -1885,7 +1885,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S30 - a k11 packing at s* = 3.897231 on the boundary of class k5_11
 
-![S30](shadows/S30.svg)
+![S30](shadows/archive/s_family/S30.svg)
 
 * **s\*** = 3.897230788 = s-hat +0.020147198  (s0 = 3.877084, s\* - s0 = +0.020147)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0)` + 5 free squares; a k11 packing.
@@ -1949,7 +1949,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S31 - a k11 packing at s* = 3.907472 on the boundary of class trump5
 
-![S31](shadows/S31.svg)
+![S31](shadows/archive/s_family/S31.svg)
 
 * **s\*** = 3.907471834 = s-hat +0.030388244  (s0 = 3.877084, s\* - s0 = +0.030388)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2010,7 +2010,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S32 - a k11 packing at s* = 3.912250 on the boundary of class k5_16
 
-![S32](shadows/S32.svg)
+![S32](shadows/archive/s_family/S32.svg)
 
 * **s\*** = 3.912250002 = s-hat +0.035166412  (s0 = 3.877084, s\* - s0 = +0.035166)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` `BL(1,0) (=f0)` + 4 free squares; a k11 packing.
@@ -2074,7 +2074,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S33 - a k11 packing at s* = 3.916931 on the boundary of class trump5
 
-![S33](shadows/S33.svg)
+![S33](shadows/archive/s_family/S33.svg)
 
 * **s\*** = 3.916930867 = s-hat +0.039847277  (s0 = 3.877084, s\* - s0 = +0.039847)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2137,7 +2137,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S34 - a k11 packing at s* = 3.917360 on the boundary of class trump5
 
-![S34](shadows/S34.svg)
+![S34](shadows/archive/s_family/S34.svg)
 
 * **s\*** = 3.917360053 = s-hat +0.040276463  (s0 = 3.877084, s\* - s0 = +0.040276)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2200,7 +2200,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S35 - a k11 packing at s* = 3.917433 on the boundary of class trump5
 
-![S35](shadows/S35.svg)
+![S35](shadows/archive/s_family/S35.svg)
 
 * **s\*** = 3.917432667 = s-hat +0.040349077  (s0 = 3.877084, s\* - s0 = +0.040349)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2261,7 +2261,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S36 - a k11 packing at s* = 3.924003 on the boundary of class k5_11
 
-![S36](shadows/S36.svg)
+![S36](shadows/archive/s_family/S36.svg)
 
 * **s\*** = 3.924003080 = s-hat +0.046919490  (s0 = 3.877084, s\* - s0 = +0.046919)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` + 6 free squares; a k11 packing.
@@ -2323,7 +2323,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers/struts 
 
 ## S37 - a k11 packing at s* = 3.925470 on the boundary of class trump5
 
-![S37](shadows/S37.svg)
+![S37](shadows/archive/s_family/S37.svg)
 
 * **s\*** = 3.925470104 = s-hat +0.048386514  (s0 = 3.877084, s\* - s0 = +0.048386)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0)` + 4 free squares; a k11 packing.
@@ -2379,7 +2379,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S38 - a k11 packing at s* = 3.928915 on the boundary of class trump5
 
-![S38](shadows/S38.svg)
+![S38](shadows/archive/s_family/S38.svg)
 
 * **s\*** = 3.928914695 = s-hat +0.051831105  (s0 = 3.877084, s\* - s0 = +0.051831)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2443,7 +2443,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S39 - a k11 packing at s* = 3.932425 on the boundary of class k5_16
 
-![S39](shadows/S39.svg)
+![S39](shadows/archive/s_family/S39.svg)
 
 * **s\*** = 3.932424859 = s-hat +0.055341269  (s0 = 3.877084, s\* - s0 = +0.055341)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2506,7 +2506,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S40 - a k10 packing at s* = 3.940518 on the boundary of class k5_16
 
-![S40](shadows/S40.svg)
+![S40](shadows/archive/s_family/S40.svg)
 
 * **s\*** = 3.940517848 = s-hat +0.063434258  (s0 = 3.877084, s\* - s0 = +0.063434)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares; a k10 packing.
@@ -2563,7 +2563,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 
 ## S41 - a k11 packing at s* = 3.940838 on the boundary of class k5_16
 
-![S41](shadows/S41.svg)
+![S41](shadows/archive/s_family/S41.svg)
 
 * **s\*** = 3.940838294 = s-hat +0.063754704  (s0 = 3.877084, s\* - s0 = +0.063754)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TL(1,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2624,7 +2624,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S42 - a k11 packing at s* = 3.952692 on the boundary of class k5_16
 
-![S42](shadows/S42.svg)
+![S42](shadows/archive/s_family/S42.svg)
 
 * **s\*** = 3.952691881 = s-hat +0.075608291  (s0 = 3.877084, s\* - s0 = +0.075608)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2685,7 +2685,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S43 - a k11 packing at s* = 3.956360 on the boundary of class k5_11
 
-![S43](shadows/S43.svg)
+![S43](shadows/archive/s_family/S43.svg)
 
 * **s\*** = 3.956360153 = s-hat +0.079276563  (s0 = 3.877084, s\* - s0 = +0.079276)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0)` + 5 free squares; a k11 packing.
@@ -2744,7 +2744,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S44 - a k11 packing at s* = 3.958425 on the boundary of class k5_11
 
-![S44](shadows/S44.svg)
+![S44](shadows/archive/s_family/S44.svg)
 
 * **s\*** = 3.958424767 = s-hat +0.081341177  (s0 = 3.877084, s\* - s0 = +0.081341)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0)` `TR(0,0) (=f1)` + 5 free squares; a k11 packing.
@@ -2807,7 +2807,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers/struts 
 
 ## S45 - a k11 packing at s* = 3.985467 on the boundary of class trump5
 
-![S45](shadows/S45.svg)
+![S45](shadows/archive/s_family/S45.svg)
 
 * **s\*** = 3.985466789 = s-hat +0.108383199  (s0 = 3.877084, s\* - s0 = +0.108383)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(1,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -2868,7 +2868,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S46 - a k11 packing at s* = 3.985478 on the boundary of class k5_16
 
-![S46](shadows/S46.svg)
+![S46](shadows/archive/s_family/S46.svg)
 
 * **s\*** = 3.985477651 = s-hat +0.108394061  (s0 = 3.877084, s\* - s0 = +0.108394)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 4 free squares; a k11 packing.
@@ -2925,7 +2925,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S47 - a k11 packing at s* = 3.989280 on the boundary of class k5_11
 
-![S47](shadows/S47.svg)
+![S47](shadows/archive/s_family/S47.svg)
 
 * **s\*** = 3.989279618 = s-hat +0.112196028  (s0 = 3.877084, s\* - s0 = +0.112196)
 * **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares; a k11 packing.
@@ -2981,7 +2981,7 @@ Load-bearing free squares: `f1`, `f2`.  Rattlers/struts (removal leaves s\* unch
 
 ## S48 - a k11 packing at s* = 3.996435 on the boundary of class k5_16
 
-![S48](shadows/S48.svg)
+![S48](shadows/archive/s_family/S48.svg)
 
 * **s\*** = 3.996434529 = s-hat +0.119350939  (s0 = 3.877084, s\* - s0 = +0.119351)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0) TR(1,0)` + 5 free squares; a k11 packing.
@@ -3041,7 +3041,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`, `f4`.  Rattlers/struts (remov
 
 ## S49 - a k11 packing at s* = 3.996724 on the boundary of class k5_11
 
-![S49](shadows/S49.svg)
+![S49](shadows/archive/s_family/S49.svg)
 
 * **s\*** = 3.996724423 = s-hat +0.119640833  (s0 = 3.877084, s\* - s0 = +0.119640)
 * **shadow** = 7 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) TL(0,0) TR(0,0) TR(0,1)` + 4 free squares; a k11 packing.
@@ -3097,7 +3097,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S50 - a k11 packing at s* = 4.000027 on the boundary of class trump5
 
-![S50](shadows/S50.svg)
+![S50](shadows/archive/s_family/S50.svg)
 
 * **s\*** = 4.000027330 = s-hat +0.122943740  (s0 = 3.877084, s\* - s0 = +0.122943)
 * **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BL(1,1) BR(0,0) TL(0,0) TR(0,0)` + 3 free squares; a k11 packing.
@@ -3148,7 +3148,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 
 ## S51 - a k11 packing at s* = 4.000052 on the boundary of class k5_11
 
-![S51](shadows/S51.svg)
+![S51](shadows/archive/s_family/S51.svg)
 
 * **s\*** = 4.000051836 = s-hat +0.122968246  (s0 = 3.877084, s\* - s0 = +0.122968)
 * **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(1,0) BR(0,0) BR(0,1) TL(0,0) TR(0,0) TR(1,0)` + 3 free squares; a k11 packing.
@@ -3199,7 +3199,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`.  Rattlers/struts (removal leaves s\
 
 ## S52 - a k11 packing at s* = 4.000197 on the boundary of class trump5
 
-![S52](shadows/S52.svg)
+![S52](shadows/archive/s_family/S52.svg)
 
 * **s\*** = 4.000196613 = s-hat +0.123113023  (s0 = 3.877084, s\* - s0 = +0.123113)
 * **shadow** = 8 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) BR(0,0) TL(0,0) TR(0,0)` `TR(1,0) (=f2)` + 3 free squares; a k11 packing.
@@ -3255,7 +3255,7 @@ Load-bearing free squares: `f0`, `f1`, `f2`, `f3`.  Rattlers/struts (removal lea
 
 ## S53 - a k11 packing at s* = 4.000261 on the boundary of class k5_11
 
-![S53](shadows/S53.svg)
+![S53](shadows/archive/s_family/S53.svg)
 
 * **s\*** = 4.000260741 = s-hat +0.123177150  (s0 = 3.877084, s\* - s0 = +0.123177)
 * **shadow** = 9 slot squares `BL(0,0) BL(0,1) BL(1,0) BL(1,1) BR(0,0) BR(0,1) BR(0,2) TL(0,0) TR(0,0)` + 2 free squares; a k11 packing.
@@ -3433,7 +3433,7 @@ Rows are listed when either score is high (packing Jaccard >= 0.5, or slot-set J
 
 ## K01 - a k11 packing at s* = 4.000000 on the boundary of class k0_00
 
-![K01](shadows/K01.svg)
+![K01](shadows/archive/k_pages/K01.svg)
 
 * **s\*** = 4.000000000 = s-hat +0.122916410  (s0 = 3.877084, s\* - s0 = +0.122916)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BL(1,0) TL(0,0) TR(0,0)` + 5 free squares; a k11 packing.
@@ -3475,7 +3475,7 @@ Load-bearing: none.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`.
 
 ## K02 - a k11 packing at s* = 3.942809 on the boundary of class k0_00
 
-![K02](shadows/K02.svg)
+![K02](shadows/archive/k_pages/K02.svg)
 
 * **s\*** = 3.942809044 = s-hat +0.065725454  (s0 = 3.877084, s\* - s0 = +0.065725)
 * **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,1)` + 7 free squares; a k11 packing.
@@ -3528,7 +3528,7 @@ Load-bearing: `f6`.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.
 
 ## K03 - a k11 packing at s* = 3.925149 on the boundary of class k0_00
 
-![K03](shadows/K03.svg)
+![K03](shadows/archive/k_pages/K03.svg)
 
 * **s\*** = 3.925148806 = s-hat +0.048065216  (s0 = 3.877084, s\* - s0 = +0.048065)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) TL(0,0) TR(0,0)` `BR(0,1) (=f3)` + 6 free squares; a k11 packing.
@@ -3590,7 +3590,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 
 ## K04 - a k11 packing at s* = 3.914214 on the boundary of class k0_00
 
-![K04](shadows/K04.svg)
+![K04](shadows/archive/k_pages/K04.svg)
 
 * **s\*** = 3.914213572 = s-hat +0.037129982  (s0 = 3.877084, s\* - s0 = +0.037130)
 * **shadow** = 5 slot squares `BL(0,0) BR(0,0)` `TR(0,1) (=f1)` `TR(0,0) (=f4)` `TR(1,0) (=f5)` + 6 free squares; a k11 packing.
@@ -3657,7 +3657,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: n
 
 ## K05 - a k11 packing at s* = 3.912232 on the boundary of class k0_00
 
-![K05](shadows/K05.svg)
+![K05](shadows/archive/k_pages/K05.svg)
 
 * **s\*** = 3.912232040 = s-hat +0.035148450  (s0 = 3.877084, s\* - s0 = +0.035148)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` `BL(1,0) (=f2)` `TL(1,0) (=f5)` + 5 free squares; a k11 packing.
@@ -3718,7 +3718,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 
 ## K06 - a k11 packing at s* = 3.886745 on the boundary of class k0_00
 
-![K06](shadows/K06.svg)
+![K06](shadows/archive/k_pages/K06.svg)
 
 * **s\*** = 3.886745485 = s-hat +0.009661895  (s0 = 3.877084, s\* - s0 = +0.009661)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,1) TL(0,0) TR(0,0)` `BL(1,0) (=f2)` + 5 free squares; a k11 packing.
@@ -3772,7 +3772,7 @@ Load-bearing: `f3`, `f4`, `f5`.  Rattlers: `f0`, `f1`, `f2`.
 
 ## K07 - a k9 packing at s* = 3.400000 on the boundary of class k0_00
 
-![K07](shadows/K07.svg)
+![K07](shadows/archive/k_pages/K07.svg)
 
 * **s\*** = 3.400000000 = s-hat -0.477083590  (s0 = 3.877084, s\* - s0 = -0.477084)
 * **shadow** = 0 slot squares `(none)` + 9 free squares; a k9 packing.
@@ -3828,7 +3828,7 @@ Load-bearing: none.  Rattlers: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `
 
 ## K08 - a k10 packing at s* = 3.828427 on the boundary of class k0_00
 
-![K08](shadows/K08.svg)
+![K08](shadows/archive/k_pages/K08.svg)
 
 * **s\*** = 3.828427125 = s-hat -0.048656465  (s0 = 3.877084, s\* - s0 = -0.048657)
 * **shadow** = 0 slot squares `(none)` + 10 free squares; a k10 packing.
@@ -3886,7 +3886,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`, `f9`.  Rattl
 
 ## K09 - a k10 packing at s* = 3.788222 on the boundary of class k0_00
 
-![K09](shadows/K09.svg)
+![K09](shadows/archive/k_pages/K09.svg)
 
 * **s\*** = 3.788221847 = s-hat -0.088861743  (s0 = 3.877084, s\* - s0 = -0.088862)
 * **shadow** = 3 slot squares `BL(0,0)` `TL(2,0) (=f1)` `TL(0,0) (=f2)` + 7 free squares; a k10 packing.
@@ -3955,7 +3955,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: n
 
 ## K10 - a k10 packing at s* = 3.822876 on the boundary of class k0_00
 
-![K10](shadows/K10.svg)
+![K10](shadows/archive/k_pages/K10.svg)
 
 * **s\*** = 3.822875659 = s-hat -0.054207931  (s0 = 3.877084, s\* - s0 = -0.054208)
 * **shadow** = 2 slot squares `BL(0,0) TR(0,1)` + 8 free squares; a k10 packing.
@@ -4010,7 +4010,7 @@ Load-bearing: `f0`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: `f1`, `f2`.
 
 ## K11 - a k10 packing at s* = 3.728581 on the boundary of class k0_00
 
-![K11](shadows/K11.svg)
+![K11](shadows/archive/k_pages/K11.svg)
 
 * **s\*** = 3.728580909 = s-hat -0.148502681  (s0 = 3.877084, s\* - s0 = -0.148503)
 * **shadow** = 3 slot squares `BL(0,1)` `BL(0,2) (=f4)` `BR(0,1) (=f5)` + 7 free squares; a k10 packing.
@@ -4072,7 +4072,7 @@ Load-bearing: `f1`, `f2`, `f4`, `f5`, `f7`, `f8`.  Rattlers: `f0`, `f3`, `f6`.
 
 ## K12 - a k10 packing at s* = 3.768117 on the boundary of class k0_00
 
-![K12](shadows/K12.svg)
+![K12](shadows/archive/k_pages/K12.svg)
 
 * **s\*** = 3.768117120 = s-hat -0.108966470  (s0 = 3.877084, s\* - s0 = -0.108967)
 * **shadow** = 4 slot squares `BL(0,0) BL(0,1)` `BR(0,0) (=f2)` `TR(0,1) (=f4)` + 6 free squares; a k10 packing.
@@ -4130,7 +4130,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
 
 ## K13 - a k10 packing at s* = 3.803539 on the boundary of class k0_00
 
-![K13](shadows/K13.svg)
+![K13](shadows/archive/k_pages/K13.svg)
 
 * **s\*** = 3.803539311 = s-hat -0.073544279  (s0 = 3.877084, s\* - s0 = -0.073545)
 * **shadow** = 1 slot squares `BL(0,0)` + 9 free squares; a k10 packing.
@@ -4193,7 +4193,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f4`, `f5`, `f6`, `f7`.  Rattlers: `f3`, `f8`.
 
 ## K14 - a k10 packing at s* = 3.804138 on the boundary of class k0_00
 
-![K14](shadows/K14.svg)
+![K14](shadows/archive/k_pages/K14.svg)
 
 * **s\*** = 3.804137638 = s-hat -0.072945952  (s0 = 3.877084, s\* - s0 = -0.072946)
 * **shadow** = 3 slot squares `BL(0,0) BR(0,0)` `TR(0,1) (=f2)` + 7 free squares; a k10 packing.
@@ -4254,7 +4254,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
 
 ## K15 - a k10 packing at s* = 3.828944 on the boundary of class k0_00
 
-![K15](shadows/K15.svg)
+![K15](shadows/archive/k_pages/K15.svg)
 
 * **s\*** = 3.828944345 = s-hat -0.048139245  (s0 = 3.877084, s\* - s0 = -0.048140)
 * **shadow** = 1 slot squares `BL(0,0)` + 9 free squares; a k10 packing.
@@ -4323,7 +4323,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: n
 
 ## K16 - a k10 packing at s* = 3.898863 on the boundary of class k0_00
 
-![K16](shadows/K16.svg)
+![K16](shadows/archive/k_pages/K16.svg)
 
 * **s\*** = 3.898862588 = s-hat +0.021778998  (s0 = 3.877084, s\* - s0 = +0.021779)
 * **shadow** = 3 slot squares `BL(0,0) BR(0,0) TL(0,1)` + 7 free squares; a k10 packing.
@@ -4382,7 +4382,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 
 ## K17 - a k11 packing at s* = 3.912259 on the boundary of class k0_00
 
-![K17](shadows/K17.svg)
+![K17](shadows/archive/k_pages/K17.svg)
 
 * **s\*** = 3.912259346 = s-hat +0.035175756  (s0 = 3.877084, s\* - s0 = +0.035175)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) TL(1,0) TR(0,0)` `BL(1,0) (=f5)` + 6 free squares; a k11 packing.
@@ -4442,7 +4442,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 
 ## K18 - a k11 packing at s* = 3.915298 on the boundary of class k0_00
 
-![K18](shadows/K18.svg)
+![K18](shadows/archive/k_pages/K18.svg)
 
 * **s\*** = 3.915297623 = s-hat +0.038214033  (s0 = 3.877084, s\* - s0 = +0.038214)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` `BL(1,0) (=f2)` + 6 free squares; a k11 packing.
@@ -4501,7 +4501,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 
 ## K19 - a k11 packing at s* = 3.916931 on the boundary of class k0_00
 
-![K19](shadows/K19.svg)
+![K19](shadows/archive/k_pages/K19.svg)
 
 * **s\*** = 3.916930857 = s-hat +0.039847267  (s0 = 3.877084, s\* - s0 = +0.039847)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BL(0,2) BR(0,0) TR(0,0)` `BL(1,0) (=f3)` + 5 free squares; a k11 packing.
@@ -4562,7 +4562,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
 
 ## K20 - a k11 packing at s* = 3.924402 on the boundary of class k0_00
 
-![K20](shadows/K20.svg)
+![K20](shadows/archive/k_pages/K20.svg)
 
 * **s\*** = 3.924402484 = s-hat +0.047318894  (s0 = 3.877084, s\* - s0 = +0.047318)
 * **shadow** = 4 slot squares `BL(0,0) TR(0,0)` `TR(1,0) (=f1)` `BR(1,0) (=f4)` + 7 free squares; a k11 packing.
@@ -4628,7 +4628,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: `f3`.
 
 ## K21 - a k11 packing at s* = 3.925275 on the boundary of class k0_00
 
-![K21](shadows/K21.svg)
+![K21](shadows/archive/k_pages/K21.svg)
 
 * **s\*** = 3.925275351 = s-hat +0.048191761  (s0 = 3.877084, s\* - s0 = +0.048191)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` `TL(1,0) (=f2)` + 5 free squares; a k11 packing.
@@ -4683,7 +4683,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
 
 ## K22 - a k11 packing at s* = 3.943894 on the boundary of class k0_00
 
-![K22](shadows/K22.svg)
+![K22](shadows/archive/k_pages/K22.svg)
 
 * **s\*** = 3.943894303 = s-hat +0.066810713  (s0 = 3.877084, s\* - s0 = +0.066810)
 * **shadow** = 4 slot squares `BL(0,0)` `TR(0,0) (=f4)` `TL(0,1) (=f6)` `TR(0,1) (=f7)` + 7 free squares; a k11 packing.
@@ -4751,7 +4751,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f6`, `f7`, `f8`, `f9`.  Rattlers: `
 
 ## K23 - a k11 packing at s* = 3.948781 on the boundary of class k0_00
 
-![K23](shadows/K23.svg)
+![K23](shadows/archive/k_pages/K23.svg)
 
 * **s\*** = 3.948781318 = s-hat +0.071697728  (s0 = 3.877084, s\* - s0 = +0.071697)
 * **shadow** = 3 slot squares `BL(0,0) TR(0,0)` `BR(1,0) (=f6)` + 8 free squares; a k11 packing.
@@ -4811,7 +4811,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`.  Rattlers: n
 
 ## K24 - a k11 packing at s* = 3.967522 on the boundary of class k0_00
 
-![K24](shadows/K24.svg)
+![K24](shadows/archive/k_pages/K24.svg)
 
 * **s\*** = 3.967521745 = s-hat +0.090438155  (s0 = 3.877084, s\* - s0 = +0.090438)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` `TL(0,0) (=f2)` `TR(0,1) (=f3)` + 5 free squares; a k11 packing.
@@ -4871,7 +4871,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 
 ## K25 - a k11 packing at s* = 3.977041 on the boundary of class k0_00
 
-![K25](shadows/K25.svg)
+![K25](shadows/archive/k_pages/K25.svg)
 
 * **s\*** = 3.977040890 = s-hat +0.099957300  (s0 = 3.877084, s\* - s0 = +0.099957)
 * **shadow** = 6 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(0,0) TR(0,0)` `BL(1,0) (=f5)` + 5 free squares; a k11 packing.
@@ -4927,7 +4927,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`.  Rattlers: none.
 
 ## K26 - a k11 packing at s* = 3.985467 on the boundary of class k0_00
 
-![K26](shadows/K26.svg)
+![K26](shadows/archive/k_pages/K26.svg)
 
 * **s\*** = 3.985466708 = s-hat +0.108383118  (s0 = 3.877084, s\* - s0 = +0.108383)
 * **shadow** = 4 slot squares `BL(0,0) BL(0,1) TL(1,0)` `BR(0,1) (=f4)` + 7 free squares; a k11 packing.
@@ -4984,7 +4984,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`.  Rattlers: none.
 
 ## K27 - a k11 packing at s* = 3.989264 on the boundary of class k0_00
 
-![K27](shadows/K27.svg)
+![K27](shadows/archive/k_pages/K27.svg)
 
 * **s\*** = 3.989264329 = s-hat +0.112180739  (s0 = 3.877084, s\* - s0 = +0.112180)
 * **shadow** = 5 slot squares `BL(0,0) BL(0,1) BR(0,0) BR(1,0) TL(0,0)` + 6 free squares; a k11 packing.
@@ -5035,7 +5035,7 @@ Load-bearing: `f0`, `f2`, `f3`, `f5`.  Rattlers: `f1`, `f4`.
 
 ## K28 - a k11 packing at s* = 4.000023 on the boundary of class k0_00
 
-![K28](shadows/K28.svg)
+![K28](shadows/archive/k_pages/K28.svg)
 
 * **s\*** = 4.000023424 = s-hat +0.122939834  (s0 = 3.877084, s\* - s0 = +0.122939)
 * **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TR(0,0)` + 7 free squares; a k11 packing.
@@ -5086,7 +5086,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 
 ## K29 - a k11 packing at s* = 4.000145 on the boundary of class k0_00
 
-![K29](shadows/K29.svg)
+![K29](shadows/archive/k_pages/K29.svg)
 
 * **s\*** = 4.000144630 = s-hat +0.123061040  (s0 = 3.877084, s\* - s0 = +0.123061)
 * **shadow** = 4 slot squares `BL(0,0) BL(0,1) BR(0,0) TL(1,0)` + 7 free squares; a k11 packing.
@@ -5138,7 +5138,7 @@ Load-bearing: `f0`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`.  Rattlers: none.
 
 ## K30 - a k11 packing at s* = 4.020670 on the boundary of class k0_00
 
-![K30](shadows/K30.svg)
+![K30](shadows/archive/k_pages/K30.svg)
 
 * **s\*** = 4.020669624 = s-hat +0.143586034  (s0 = 3.877084, s\* - s0 = +0.143586)
 * **shadow** = 3 slot squares `BL(0,0) BL(0,1)` `BL(0,2) (=f6)` + 8 free squares; a k11 packing.
