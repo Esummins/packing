@@ -1,0 +1,10 @@
+14:56:47 audit k5_16_interior_Y0881 g1_R.2.3s R.2.3s.1.1.2
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y0881 g1_R.2.3s leaf R.2.3s.1.1.2: MISS-CLIP(F1) at round1: every piece of F1 provably meets a slot the branch hypothesises it misses ['TR(1,0)'] (Rule NS)
+  parent snapshot R.2.3s.1.1 (round 3); H forced at ['BR(0,1)', 'TR(0,1)', 'TR(1,0)']; roles {'F1': ['TL(1,0)', 'TR(0,1)'], 'F2': ['TL(1,0)', 'TR(1,0)'], 'F3': ['BL(1,0)', 'BR(0,1)', 'BR(1,0)'], 'F4': ['BL(1,0)', 'BR(1,0)'], 'H': ['BR(0,1)', 'TR(0,1)', 'TR(1,0)']}; cells {'F1': 19, 'F2': -1, 'F3': 15, 'F4': -1}; misses {'F1': ['TR(1,0)']}
+  role H (127 pieces of the parent's snapshot): 1482 admissible poses (slots ['BR(0,1)', 'TR(0,1)', 'TR(1,0)'], misses [])
+  role F1 (146 pieces of the parent's snapshot): 0 admissible poses (slots ['TL(1,0)', 'TR(0,1)'], misses ['TR(1,0)'])
+  role F2 (155 pieces of the parent's snapshot): 784 admissible poses (slots ['TL(1,0)', 'TR(1,0)'], misses [])
+  role F3 (104 pieces of the parent's snapshot): 160 admissible poses (slots ['BL(1,0)', 'BR(0,1)', 'BR(1,0)'], misses [])
+  role F4 (139 pieces of the parent's snapshot): 1099 admissible poses (slots ['BL(1,0)', 'BR(1,0)'], misses [])
+  VACUOUS for ['F1'] (no admissible sampled pose: the role's own constraints already exclude the samples; consistent, not a refutation)
