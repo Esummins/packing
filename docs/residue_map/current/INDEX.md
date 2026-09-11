@@ -1,4 +1,4 @@
-# current pages -- checker A203 (41 nodes); source patterns ['csp203_{nid}.svg', 'campaigns/A203-csp/csp203_{nid}.svg', 'campaigns/A202-fast30/fast30_{nid}.svg']
+# current pages -- checker A203 (41 nodes); source patterns ['campaigns/A203-csp/csp203_{nid}.svg', 'campaigns/A202-fast30/fast30_{nid}.svg']
 - gallery.svg
 - k5_11_interior_Y0130.svg
 - k5_11_interior_Y0147.svg

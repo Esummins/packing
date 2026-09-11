@@ -17,4 +17,4 @@ Rules for a new campaign Ann:
    extremal outlines only at admissible poses, pins as pins, schematic objects thin dashed, undecided grey stipple
    never green, a note on every panel saying what it IS, times per step, verifier label on every verdict.
 4. Killed nodes' gallery pages move to docs/shadows/a57v4/killed/ by the status loop (unchanged).
-A203 was in flight during the reorganisation (19:20) and writes csp203_<nid>.svg at the top level until it finishes; its pages then move to campaigns/A203-csp/ (CURRENT.json already lists both).
+A203 finished 20:05; its pages are in campaigns/A203-csp/.
