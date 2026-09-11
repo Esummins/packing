@@ -8467,3 +8467,40 @@ halves of the answer come from opposite findings.
 - Files: `code/csp203.py`, `satbatch203.py`, `csp203b.py`, `csp203c.py`, `count203.py`, `cert203.py`, `sweep203.py`, the copies
   `fast30.py` / `fast30b.py` / `rules202.py` / `fig203.py`, `fig203b.py`, `run203.py`, `run203.sh`, `report203.py`;
   `scratch/fuzz203.py`, `fuzz203b.py`, `audit203.py`, `pair_y0191.py`; `logs/`.
+
+## 2026-09-10 night -- A205-clip-tree (Fable) -- running (shard on the survivors): **the CLIP TREE -- branch on a forced slot's remaining meeter rows, instantiate, A204's cascade + A203's rule S at every node; k5_16_Y0839 DEAD at the window pad in 526 s (every BR(0,1) row dies by FC at BL(1,0)), k5_11_Y0308 DEAD at the window pad in 203 s, and on the PI's Y0202 the BR(0,1) meeters die exactly as read -- 14 of 19 closed branches by the pair leaf, the 3 survivors fully named nodes whose roles keep 0.2-3 % of their seeds (the LP's job)**
+
+- **What it is** (`attempts/A205-clip-tree`, the PI 20:35: "k5_11 Y0202 looks like it'll die if/when clip cascades try to run on
+  the BR01 meeters").  A204 instantiates only FORCED meeters (cap 1), so on Y0202 (no cap, H reaches one slot) nothing was ever
+  clipped against the BR(0,1) meeters.  **Lemma CT** (`notes/clip_tree.md` s.1, any n): at an alive node take the forced slot p
+  with the fewest alive option rows (ties: the one H reaches); Theorem FC gives two distinct non-pin meeters, at most |named_p|
+  of them H / instantiated roles, so with no named candidate the branches are the unordered PAIRS of rows (distinct cells by
+  Lemma A1; rule-S-compatible on the rows' pieces), with one named candidate the rows singly, and with two the rows singly when
+  the count has no cover with p's anonymous cap set to 0 (**bar-anon**, the analogue of A204's bar-H).  A branch instantiates
+  its rows as roles seeded with the rows' reach survivors, pinned to their cells, named at p, and runs A204's cascade (the
+  seeded polygon + lonely clip fixed point on the pieces, Theorem FC, the caps, the count) to which A205 adds the **rule-S clip
+  between roles** (Lemma PC on the pieces: a piece with no compatible piece of another role is dropped), **Lemma HC on the
+  rows**, the **count with A203's pair table**, the **S-PAIR** kill, and a **sharp leaf** (one 8/3 round on a fully named node,
+  A182's rule).  A node is DEAD iff every branch is (exhaustive disjunction); an undecided branch (depth 4 / 200 nodes / wall
+  900 s a pad) leaves it ALIVE.  Every kill `[C: library clip trace]` with its branch / clip / round; a page after the root
+  cascade and after every closed branch (`docs/residue_map/campaigns/A205-cliptree/`, the tree as a panel row + table).
+- **Y0839 (k5_16)**: root 146 s; BR(0,1) has 3 rows (10 / 15 / 23) and H reaches it -- rows singly; **all three DEAD by FC at
+  BL(1,0) in round 1** (the pinned BR(0,1) meeter's K' empties BL(1,0)'s anonymous table; H provably misses): **DEAD at g1 in
+  526 s** (A202 / A203 / A204: ALIVE).  Audit by sampling (`scratch/audit205.py`): 0 pairwise-disjoint (H, F, G) configurations
+  on each leaf.  **Y0308 (k5_11)** DEAD at g1 in 203 s (TR(0,0)<-23: FC at BR(0,1); TR(0,0)<-24: EmptyBox on the FC-instantiated
+  TL(1,0) meeter) -- A204 had it at pad 0 only; audited, 0 refutations.
+- **Y0202 (k5_11)**: the brief's row (wall 900 s) holds 3 nodes a pad (ALIVE, undecided).  The EXTENDED run (wall 3,600 s,
+  2 rounds a node, bar-anon + sharp leaf; `certs/extended/`, `results/cliptree205_extended.jsonl`, pages `extended/`): 29 nodes,
+  depth 3, **14 DEAD / 5 ALIVE leaves**: BL(1,1)<-13 closes entirely (its three TR(0,0) rows die by EmptyBox in 8-15 s each),
+  under BL(1,1)<-8 the BR(0,1) pairs {18,23} and every TR(0,0) row under {18,21} / {18,22} / {21,23} die by EmptyBox (9-53 s),
+  one TL(1,0) row by FC and one by the sharp leaf's FC; the survivors are three FULLY NAMED nodes (pins + H + F1..F4 + one
+  anonymous square; kept H 0.15-0.47, roles down to 0.18-0.36 % of their seeds) and two branches behind the wall.  Two runs
+  killed for speed levers (`logs/kills.log`): the seeded reach re-clipped only against CHANGED obstacles (the option table
+  180 -> 30-80 s), the fixed point stopped at < 0.1 % volume per pass, one S-clip re-normalisation a round, no-room off.
+- **Population** (`run205.sh` over `pages_todo.txt`, one shard, committing after every page; `results/report205.md`): 9 pages
+  so far, 2 DEAD at g1, the k5_11 pages ALIVE at the 900 s wall with 1-5 kills each (every branch that ran dies by FC at the
+  next slot or by the pair leaf; Y0738's by the S clip) and 2-6 undecided branches; 15-18 min a page for both pads; 3.7 CPU-h.
+- **Next lever**: the LP on the fully named leaves (lp180 with the roles' pieces as cores); the extended wall as the k5_11 row;
+  the 5-role fixed point's cost (400 s).  Files: `code/tree205.py`, `tree205b.py`, `run205.py`, `run205.sh`, `ext205.sh`,
+  `fig205.py`, `report205.py` (+ A204's `poly204.py` / `poly204b.py` / `fig204.py` copied at 57f8d6ae), `notes/clip_tree.md`,
+  `scratch/audit205.py`, `logs/`, status gallery block (7n), CURRENT.json -> A205.
