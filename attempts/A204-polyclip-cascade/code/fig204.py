@@ -104,8 +104,8 @@ def note_lines(doc, pad, snap):
     L = [("PANEL = the node at the top of %s (pad %s): pins + H (seeded from A203's alive units) + %s after the seeded polygon + lonely clip FIXED POINT (nsub 4 / refine 2, %s passes, %s s)%s" % (
         snap.get("label"), pad, ", ".join(k for k in snap.get("roles", {}) if not k.startswith("P") and k != "H") or "no F role",
         fx.get("passes"), fx.get("seconds"), ("; lonely clip on %s" % fx.get("corners")) if fx.get("corners") else ""), 7, "#000", True)]
-    L.append(("kept (of the record box) %s; K' areas %s; grey stipple = cells where a FREE meeter of some slot may still sit (this round's exact reach); yellow = the count's witness cells" % (
-        fx.get("kept"), {k: round(v, 3) for k, v in (fx.get("k_area") or {}).items() if not k.startswith("P")}), 6.5, "#333", False))
+    L.append(("kept (of the record box; an F role of its seed) %s; K' areas %s; grey stipple = cells where a FREE meeter of some slot may still sit (this round's exact reach); yellow = the count's witness cells" % (
+        {k: v for k, v in (fx.get("kept") or {}).items() if not k.startswith("P")}, {k: round(v, 3) for k, v in (fx.get("k_area") or {}).items() if not k.startswith("P")}), 6.5, "#333", False))
     if fz:
         L.append(("round %d: caps %s; forced H %s (all forced so far %s); forced roles %s; instantiated %s; changed %s" % (
             snap.get("round", 0), fz.get("caps"), fz.get("forced_H"), snap.get("forced_H"), fz.get("forced_role"), fz.get("instantiated"), fz.get("changed")), 6.5, "#333", False))
