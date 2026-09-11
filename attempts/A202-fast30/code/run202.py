@@ -120,10 +120,11 @@ if __name__ == "__main__":
     ap.add_argument("--wall", type=float, default=600)
     ap.add_argument("--stage0-only", action="store_true")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--force-stage0", action="store_true", help="recompute stage 0 (both pads) with the current code; stage 1 stays cached")
     a = ap.parse_args()
     outs = {}
     for pad in ("g1", "zero"):
-        outs[pad], _ = stage0(a.nid, pad, a.force)
+        outs[pad], _ = stage0(a.nid, pad, a.force or a.force_stage0)
         if outs[pad]["verdict"] == "DEAD" and pad == "g1":
             break
     if a.stage0_only or outs["g1"]["verdict"] == "DEAD":
