@@ -40,7 +40,11 @@ for f, nid, rk, lab, roles in leaves():
     if (nid, rk, lab) in done: continue
     t0 = time.time()
     try:
-        out = NR.noroom(roles, s0=None, budget=None, name=lab, n=11)
+        # k = 10 (one free square): the full A189 budget -- the bisection alone often decides (Y0881); k = 9 (two free
+        # squares): pockets are the OPTION ROWS of the next tree level, so record them cheaply (no lane cover) -- the PI
+        # (15:50): "9/10 placed, so of course there's room"; the tree instantiates the 10th square in a pocket and re-runs.
+        bud = None if m <= 1 else dict(max_pocket_area=0.0)
+        out = NR.noroom(roles, s0=None, budget=bud, name=lab, n=11)
     except Exception as e:
         out = dict(verdict="ERROR", reason=repr(e)[:300])
     m = 11 - len(roles)
