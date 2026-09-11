@@ -1,6 +1,7 @@
 """A206 auditor's list: every DEAD leaf of every run row in results/namedsplit206.jsonl not yet in scratch/audit_done.txt
 -> lines "<nid> <run key> <leaf label>" (the leaves come from the certificate's node records)."""
-import json, os
+import json, os, sys
+sys.stdout.reconfigure(newline=chr(10))                              # no CR on Windows pipes (the labels are read by bash)
 HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, "..", "results", "namedsplit206.jsonl")
 DONE = os.path.join(HERE, "audit_done.txt")
