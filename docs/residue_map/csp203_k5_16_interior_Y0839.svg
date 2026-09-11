@@ -2,7 +2,7 @@
 <defs><pattern id="stipple" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#f2f2f2"/><circle cx="1" cy="1" r="0.7" fill="#999"/><circle cx="3" cy="3" r="0.7" fill="#999"/></pattern></defs>
 <text x="20.0" y="22.0" font-size="13" fill="#000" text-anchor="start" font-weight="bold">k5_16_interior_Y0839 -- A203 csp203: STAGE 0 (A202's closed-form layer) + the piece-level CSP (H-consistency, the mutual clip, the settle, the H-mask count), &lt;= 30 s per pad, drawn first</text>
 <text x="20.0" y="38.0" font-size="8" fill="#444" text-anchor="start">grey stipple = sub-rects where some forced slot's meeter may still sit; white + letter = dead (P pins, W walls, C CN vs H, M tilt-SAT vs H, L chord row, R reach / A161 miss, H / F = H-consistency); red boxes + letter = dead option rows (H / F); dashed colour = slot unit + its alive-union box; blue = pins; black = H with a hypothesis square at an admissible pose; yellow = the count's witness.</text>
-<text x="20.0" y="50.0" font-size="8" fill="#444" text-anchor="start">read-only from certs/csp203_*.json; rendered 2026-09-10 17:34:15</text>
+<text x="20.0" y="50.0" font-size="8" fill="#444" text-anchor="start">read-only from certs/csp203_*.json; rendered 2026-09-10 17:47:47</text>
 <text x="20.0" y="64.0" font-size="9" fill="#000" text-anchor="start" font-weight="bold">PANEL stage 0 + CSP / pad g1: csp203_k5_16_interior_Y0839_g1_s0.json</text>
 <rect x="20.0" y="70.0" width="457.5" height="457.5" fill="#fff" fill-opacity="1.00" stroke="#000" stroke-width="1.6"/>
 <rect x="79.0" y="451.5" width="17.0" height="17.0" fill="#fff" fill-opacity="1.00" stroke="#e6e6e6" stroke-width="0.3"/>
@@ -1819,19 +1819,19 @@
 <text x="393.0" y="257.2" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TR(0,1),TR(1,0)</text>
 <rect x="189.3" y="129.0" width="25.5" height="67.9" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
 <text x="202.1" y="165.9" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TL(1,0),TR(1,0)</text>
-<text x="507.0" y="82.0" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="bold">k5_16_interior_Y0839  pad g1  STAGE 0 + CSP: ALIVE  (28191 ms)</text>
+<text x="507.0" y="82.0" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="bold">k5_16_interior_Y0839  pad g1  STAGE 0 + CSP: ALIVE  (24927 ms)</text>
 <text x="507.0" y="97.0" font-size="7.5" fill="#333" text-anchor="start">STAGE 0 + CSP = closed-form tests only (A202's piece rules + A203's piece-pair CSP: no exact option table, no branching,</text>
 <text x="507.0" y="108.5" font-size="7.5" fill="#333" text-anchor="start"> no LP); verdict [C: closed-form trace] -- no verifier clause exists yet</text>
 <text x="507.0" y="120.0" font-size="7.5" fill="#333" text-anchor="start">pieces: 2400 = 25 cells x 16 sub-rects x 6 tilt bins; dead by the slot-independent rules: 0; rounds 2</text>
 <text x="507.0" y="131.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">rule   kills   ms     meaning</text>
-<text x="507.0" y="143.5" font-size="7.5" fill="#333" text-anchor="start">H-clip      0    73.9   H's own pieces off the pins / walls / not meeting its forced slots</text>
-<text x="507.0" y="155.0" font-size="7.5" fill="#1565c0" text-anchor="start">P        5336   322.6   pins (inscribed disc of radius 1/2 meets a pin core)</text>
-<text x="507.0" y="166.5" font-size="7.5" fill="#455a64" text-anchor="start">W        1708    39.6   walls (w_min/2)</text>
-<text x="507.0" y="178.0" font-size="7.5" fill="#c62828" text-anchor="start">C        1220    78.3   Lemma CN against every alive piece of H</text>
-<text x="507.0" y="189.5" font-size="7.5" fill="#ad1457" text-anchor="start">M        3919  1642.7   relative-tilt separating-axis bound against H</text>
-<text x="507.0" y="201.0" font-size="7.5" fill="#6a1b9a" text-anchor="start">L           7   442.4   open-chord row (pins + H + piece &gt; s)</text>
-<text x="507.0" y="212.5" font-size="7.5" fill="#9e9e9e" text-anchor="start">R        3165    31.1   reach: no slot's widened box within reach (disc 1/sqrt2 / half-extent, then A161's exact miss X)</text>
-<text x="507.0" y="224.0" font-size="7.5" fill="#9e9e9e" text-anchor="start">X         824  7590.6   </text>
+<text x="507.0" y="143.5" font-size="7.5" fill="#333" text-anchor="start">H-clip      0    55.5   H's own pieces off the pins / walls / not meeting its forced slots</text>
+<text x="507.0" y="155.0" font-size="7.5" fill="#1565c0" text-anchor="start">P        5336   290.0   pins (inscribed disc of radius 1/2 meets a pin core)</text>
+<text x="507.0" y="166.5" font-size="7.5" fill="#455a64" text-anchor="start">W        1708    37.2   walls (w_min/2)</text>
+<text x="507.0" y="178.0" font-size="7.5" fill="#c62828" text-anchor="start">C        1220    77.7   Lemma CN against every alive piece of H</text>
+<text x="507.0" y="189.5" font-size="7.5" fill="#ad1457" text-anchor="start">M        3919  1507.5   relative-tilt separating-axis bound against H</text>
+<text x="507.0" y="201.0" font-size="7.5" fill="#6a1b9a" text-anchor="start">L           7   387.2   open-chord row (pins + H + piece &gt; s)</text>
+<text x="507.0" y="212.5" font-size="7.5" fill="#9e9e9e" text-anchor="start">R        3165    29.3   reach: no slot's widened box within reach (disc 1/sqrt2 / half-extent, then A161's exact miss X)</text>
+<text x="507.0" y="224.0" font-size="7.5" fill="#9e9e9e" text-anchor="start">X         824  6779.1   </text>
 <text x="507.0" y="235.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">slot      alive cells  cap   union diam / l-inf / chord row   why</text>
 <text x="507.0" y="247.5" font-size="7.5" fill="#e65100" text-anchor="start">BL(1,0)     6          -     1.53931 / 1.22276 / 3.0   no union exclusion fires</text>
 <text x="507.0" y="259.0" font-size="7.5" fill="#2e7d32" text-anchor="start">BR(0,1)     2          -     2.14835 / 1.88809 / 3.0   no union exclusion fires</text>
@@ -1841,12 +1841,12 @@
 <text x="507.0" y="305.0" font-size="7.5" fill="#5d4037" text-anchor="start">TL(1,0)     8          -     1.64019 / 1.36661 / 3.0   no union exclusion fires</text>
 <text x="507.0" y="316.5" font-size="7.5" fill="#333" text-anchor="start">H reaches ['BR(0,1)', 'BR(1,0)', 'TR(0,1)']; forced H at ['BR(0,1)']; H box [2.49757, 2.637327, 1.519271, 1.659028, 53.1</text>
 <text x="507.0" y="328.0" font-size="7.5" fill="#333" text-anchor="start">30097, 64.010771]</text>
-<text x="507.0" y="339.5" font-size="7.5" fill="#333" text-anchor="start">assignment count (Theorem COUNT + H-mask + piece pairs A1/S): no chords True (421 nodes, prunes {'mask': 147, 'pair': 80</text>
-<text x="507.0" y="351.0" font-size="7.5" fill="#333" text-anchor="start">1, 'chord': 0}); with chords True (421 nodes); free options 67; pairs {'A1': 31, 'S': 62, 'ok': 293}</text>
+<text x="507.0" y="339.5" font-size="7.5" fill="#333" text-anchor="start">assignment count (Theorem COUNT + H-mask + piece pairs A1/S): no chords True (476 nodes, prunes {'mask': 167, 'pair': 89</text>
+<text x="507.0" y="351.0" font-size="7.5" fill="#333" text-anchor="start">4, 'chord': 0}); with chords True (476 nodes); free options 67; pairs {'A1': 33, 'S': 67, 'ok': 319}</text>
 <text x="507.0" y="362.5" font-size="7.5" fill="#6d4c00" text-anchor="start">witness of the count (yellow): a cell per square with the slots it would serve -- a counting witness, not a packing</text>
-<text x="507.0" y="374.0" font-size="7" fill="#555" text-anchor="start">steps: pieces 9737ms &gt; options 6448ms &gt; csp 7680ms &gt; union 126ms &gt; count 44ms &gt; count 19ms &gt; count-barH 26ms &gt; count-bar</text>
-<text x="507.0" y="385.0" font-size="7" fill="#555" text-anchor="start">H 41ms &gt; count-barH 56ms &gt; options 679ms</text>
-<text x="507.0" y="396.0" font-size="7" fill="#555" text-anchor="start">window pending: False;  lam 1.004000117048806;  rendered 2026-09-10 17:34:15</text>
+<text x="507.0" y="374.0" font-size="7" fill="#555" text-anchor="start">steps: pieces 8770ms &gt; options 5577ms &gt; csp 6748ms &gt; union 86ms &gt; count 37ms &gt; count 23ms &gt; count-barH 33ms &gt; count-barH</text>
+<text x="507.0" y="385.0" font-size="7" fill="#555" text-anchor="start"> 41ms &gt; count-barH 37ms &gt; options 602ms</text>
+<text x="507.0" y="396.0" font-size="7" fill="#555" text-anchor="start">window pending: False;  lam 1.004000117048806;  rendered 2026-09-10 17:47:47</text>
 <text x="1117.0" y="78.0" font-size="7" fill="#333" text-anchor="start">CSP: H's box [2.498, 2.637, 1.519, 1.659] x tilt 53.1-64.0 deg as 8 x 8 sub-rects x 8 tilt bins (strips, left = low tilt); grey alive, red M = mutual clip, white = never alive</text>
 <rect x="1117.0" y="82.0" width="260.0" height="260.0" fill="#fff" stroke="#000" stroke-width="1"/>
 <rect x="1117.0" y="309.5" width="4.1" height="32.5" fill="url(#stipple)" stroke="#bbb" stroke-width="0.2"/>
@@ -2467,17 +2467,17 @@
 <line x1="1117.0" y1="309.5" x2="1377.0" y2="309.5" stroke="#888" stroke-width="0.5"/>
 <line x1="1117.0" y1="342.0" x2="1377.0" y2="342.0" stroke="#888" stroke-width="0.5"/>
 <text x="1117.0" y="356.0" font-size="7.5" fill="#000" text-anchor="start" font-weight="bold">round 1: 512 H units (3400 pieces) -&gt; 425 alive; 73 options (32964 pieces); mutual clip {'MC:BR(0,1)': 87} in 2 iteration(s); dead options 6</text>
-<text x="1117.0" y="366.5" font-size="7" fill="#333" text-anchor="start">  ms: build 538.0 | masks 2858.3 (rule S: 84714 node tests, 1855104 leaf pairs in numpy blocks, 4581 block cache hits) | settle 4247.4 | clip 7105.8</text>
-<text x="1117.0" y="376.5" font-size="7" fill="#333" text-anchor="start">  settle kills {'P': 90, 'W': 1056, 'C': 336, 'M': 536, 'L': 0, 'R': 10690, 'X': 1024, 'S': 17401}; rule ms {'P': 201.0, 'W': 25.0, 'C': 41.5, 'M': 13</text>
-<text x="1117.0" y="386.5" font-size="7" fill="#333" text-anchor="start">66.5, 'L': 200.2, 'R': 51.3, 'X': 1729.4}; 19 options refined, 6 died</text>
-<text x="1117.0" y="396.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BR(0,1): hull [2.19029, 2.22625, 0.6978, 0.76973], 11 pieces, 133 pairs refined -&gt; 133 dead in 244.5 ms</text>
-<text x="1117.0" y="406.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BL(1,0)+BR(0,1): hull [2.19029, 2.22625, 0.6978, 0.76973], 11 pieces, 133 pairs refined -&gt; 133 dead in 297.8 ms</text>
-<text x="1117.0" y="416.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BR(0,1)+BR(1,0): hull [2.19029, 2.22625, 0.6978, 0.76973], 11 pieces, 133 pairs refined -&gt; 133 dead in 325.6 ms</text>
-<text x="1117.0" y="426.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BL(1,0)+BR(0,1)+BR(1,0): hull [2.19029, 2.22625, 0.6978, 0.76973], 11 pieces, 133 pairs refined -&gt; 133 dead in 404.3 ms</text>
-<text x="1117.0" y="436.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 7 BR(1,0): hull [1.54294, 1.65083, 1.65083, 1.6868], 4 pieces, 330 pairs refined -&gt; 330 dead in 452.6 ms</text>
-<text x="1117.0" y="446.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 7 BL(1,0)+BR(1,0): hull [1.54294, 1.65083, 1.65083, 1.6868], 4 pieces, 330 pairs refined -&gt; 330 dead in 462.9 ms</text>
+<text x="1117.0" y="366.5" font-size="7" fill="#333" text-anchor="start">  ms: build 652.2 | masks 2556.0 (rule S: 84714 node tests, 1855104 leaf pairs in numpy blocks, 4581 block cache hits) | settle 3510.1 | clip 6066.4</text>
+<text x="1117.0" y="376.5" font-size="7" fill="#333" text-anchor="start">  settle kills {'P': 90, 'W': 1056, 'C': 336, 'M': 536, 'L': 0, 'R': 10690, 'X': 1024, 'S': 17401}; rule ms {'P': 167.0, 'W': 21.1, 'C': 36.4, 'M': 11</text>
+<text x="1117.0" y="386.5" font-size="7" fill="#333" text-anchor="start">95.2, 'L': 171.9, 'R': 40.9, 'X': 1348.5}; 19 options refined, 6 died</text>
+<text x="1117.0" y="396.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BR(0,1): hull [2.19029, 2.22625, 0.6978, 0.76973], 11 pieces, 133 pairs refined -&gt; 133 dead in 189.7 ms</text>
+<text x="1117.0" y="406.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BL(1,0)+BR(0,1): hull [2.19029, 2.22625, 0.6978, 0.76973], 11 pieces, 133 pairs refined -&gt; 133 dead in 222.1 ms</text>
+<text x="1117.0" y="416.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BR(0,1)+BR(1,0): hull [2.19029, 2.22625, 0.6978, 0.76973], 11 pieces, 133 pairs refined -&gt; 133 dead in 264.6 ms</text>
+<text x="1117.0" y="426.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BL(1,0)+BR(0,1)+BR(1,0): hull [2.19029, 2.22625, 0.6978, 0.76973], 11 pieces, 133 pairs refined -&gt; 133 dead in 316.6 ms</text>
+<text x="1117.0" y="436.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 7 BR(1,0): hull [1.54294, 1.65083, 1.65083, 1.6868], 4 pieces, 330 pairs refined -&gt; 330 dead in 415.2 ms</text>
+<text x="1117.0" y="446.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 7 BL(1,0)+BR(1,0): hull [1.54294, 1.65083, 1.65083, 1.6868], 4 pieces, 330 pairs refined -&gt; 330 dead in 431.2 ms</text>
 <text x="1117.0" y="456.5" font-size="7.5" fill="#000" text-anchor="start" font-weight="bold">round 2: 425 H units (3400 pieces) -&gt; 425 alive; 67 options (32912 pieces); mutual clip {} in 1 iteration(s); dead options 0</text>
-<text x="1117.0" y="467.0" font-size="7" fill="#333" text-anchor="start">  ms: build 133.1 | masks 607.1 (rule S: 149403 node tests, 1857358 leaf pairs in numpy blocks, 11322 block cache hits) | settle 155.8 | clip 763.0</text>
+<text x="1117.0" y="467.0" font-size="7" fill="#333" text-anchor="start">  ms: build 112.5 | masks 519.6 (rule S: 149262 node tests, 1896600 leaf pairs in numpy blocks, 11340 block cache hits) | settle 157.0 | clip 676.8</text>
 <text x="1117.0" y="477.0" font-size="7" fill="#333" text-anchor="start">  settle kills {'P': 0, 'W': 0, 'C': 0, 'M': 0, 'L': 0, 'R': 0, 'X': 0, 'S': 0}; rule ms {'P': 0.0, 'W': 0.0, 'C': 0.0, 'M': 0.0, 'L': 0.0, 'R': 0.0, </text>
 <text x="1117.0" y="487.0" font-size="7" fill="#333" text-anchor="start">'X': 0.0}; 13 options refined, 0 died</text>
 <text x="1117.0" y="497.0" font-size="6.5" fill="#555" text-anchor="start">H = no piece of the row is rule-S compatible with any alive H piece; F = the same after the settle refinement; M = H unit with no compatible option of</text>
@@ -4291,19 +4291,19 @@
 <text x="2170.0" y="257.2" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TR(0,1),TR(1,0)</text>
 <rect x="1966.3" y="129.0" width="25.5" height="67.9" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
 <text x="1979.1" y="165.9" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TL(1,0),TR(1,0)</text>
-<text x="2284.0" y="82.0" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="bold">k5_16_interior_Y0839  pad zero  STAGE 0 + CSP: ALIVE  (25514 ms)</text>
+<text x="2284.0" y="82.0" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="bold">k5_16_interior_Y0839  pad zero  STAGE 0 + CSP: ALIVE  (21931 ms)</text>
 <text x="2284.0" y="97.0" font-size="7.5" fill="#333" text-anchor="start">STAGE 0 + CSP = closed-form tests only (A202's piece rules + A203's piece-pair CSP: no exact option table, no branching,</text>
 <text x="2284.0" y="108.5" font-size="7.5" fill="#333" text-anchor="start"> no LP); verdict [C: closed-form trace] -- no verifier clause exists yet</text>
 <text x="2284.0" y="120.0" font-size="7.5" fill="#333" text-anchor="start">pieces: 2400 = 25 cells x 16 sub-rects x 6 tilt bins; dead by the slot-independent rules: 0; rounds 2</text>
 <text x="2284.0" y="131.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">rule   kills   ms     meaning</text>
-<text x="2284.0" y="143.5" font-size="7.5" fill="#333" text-anchor="start">H-clip      0    82.3   H's own pieces off the pins / walls / not meeting its forced slots</text>
-<text x="2284.0" y="155.0" font-size="7.5" fill="#1565c0" text-anchor="start">P        5330   317.5   pins (inscribed disc of radius 1/2 meets a pin core)</text>
-<text x="2284.0" y="166.5" font-size="7.5" fill="#455a64" text-anchor="start">W        1676    39.1   walls (w_min/2)</text>
-<text x="2284.0" y="178.0" font-size="7.5" fill="#c62828" text-anchor="start">C        1220    81.5   Lemma CN against every alive piece of H</text>
-<text x="2284.0" y="189.5" font-size="7.5" fill="#ad1457" text-anchor="start">M        3889  1627.1   relative-tilt separating-axis bound against H</text>
-<text x="2284.0" y="201.0" font-size="7.5" fill="#6a1b9a" text-anchor="start">L           7   434.9   open-chord row (pins + H + piece &gt; s)</text>
-<text x="2284.0" y="212.5" font-size="7.5" fill="#9e9e9e" text-anchor="start">R        3142    30.5   reach: no slot's widened box within reach (disc 1/sqrt2 / half-extent, then A161's exact miss X)</text>
-<text x="2284.0" y="224.0" font-size="7.5" fill="#9e9e9e" text-anchor="start">X         839  7208.0   </text>
+<text x="2284.0" y="143.5" font-size="7.5" fill="#333" text-anchor="start">H-clip      0    54.4   H's own pieces off the pins / walls / not meeting its forced slots</text>
+<text x="2284.0" y="155.0" font-size="7.5" fill="#1565c0" text-anchor="start">P        5330   268.5   pins (inscribed disc of radius 1/2 meets a pin core)</text>
+<text x="2284.0" y="166.5" font-size="7.5" fill="#455a64" text-anchor="start">W        1676    33.8   walls (w_min/2)</text>
+<text x="2284.0" y="178.0" font-size="7.5" fill="#c62828" text-anchor="start">C        1220    71.9   Lemma CN against every alive piece of H</text>
+<text x="2284.0" y="189.5" font-size="7.5" fill="#ad1457" text-anchor="start">M        3889  1356.0   relative-tilt separating-axis bound against H</text>
+<text x="2284.0" y="201.0" font-size="7.5" fill="#6a1b9a" text-anchor="start">L           7   360.6   open-chord row (pins + H + piece &gt; s)</text>
+<text x="2284.0" y="212.5" font-size="7.5" fill="#9e9e9e" text-anchor="start">R        3142    27.1   reach: no slot's widened box within reach (disc 1/sqrt2 / half-extent, then A161's exact miss X)</text>
+<text x="2284.0" y="224.0" font-size="7.5" fill="#9e9e9e" text-anchor="start">X         839  6214.9   </text>
 <text x="2284.0" y="235.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">slot      alive cells  cap   union diam / l-inf / chord row   why</text>
 <text x="2284.0" y="247.5" font-size="7.5" fill="#e65100" text-anchor="start">BL(1,0)     6          -     1.53931 / 1.22276 / 3.0   no union exclusion fires</text>
 <text x="2284.0" y="259.0" font-size="7.5" fill="#2e7d32" text-anchor="start">BR(0,1)     2          -     2.14835 / 1.88809 / 3.0   no union exclusion fires</text>
@@ -4313,12 +4313,12 @@
 <text x="2284.0" y="305.0" font-size="7.5" fill="#5d4037" text-anchor="start">TL(1,0)     8          -     1.64019 / 1.36661 / 3.0   no union exclusion fires</text>
 <text x="2284.0" y="316.5" font-size="7.5" fill="#333" text-anchor="start">H reaches ['BR(0,1)', 'BR(1,0)', 'TR(0,1)']; forced H at ['BR(0,1)']; H box [2.49757, 2.637327, 1.519271, 1.659028, 53.1</text>
 <text x="2284.0" y="328.0" font-size="7.5" fill="#333" text-anchor="start">30097, 64.010771]</text>
-<text x="2284.0" y="339.5" font-size="7.5" fill="#333" text-anchor="start">assignment count (Theorem COUNT + H-mask + piece pairs A1/S): no chords True (421 nodes, prunes {'mask': 153, 'pair': 79</text>
-<text x="2284.0" y="351.0" font-size="7.5" fill="#333" text-anchor="start">5, 'chord': 0}); with chords True (421 nodes); free options 67; pairs {'A1': 31, 'S': 58, 'ok': 287}</text>
+<text x="2284.0" y="339.5" font-size="7.5" fill="#333" text-anchor="start">assignment count (Theorem COUNT + H-mask + piece pairs A1/S): no chords True (476 nodes, prunes {'mask': 173, 'pair': 88</text>
+<text x="2284.0" y="351.0" font-size="7.5" fill="#333" text-anchor="start">8, 'chord': 0}); with chords True (476 nodes); free options 67; pairs {'A1': 33, 'S': 63, 'ok': 313}</text>
 <text x="2284.0" y="362.5" font-size="7.5" fill="#6d4c00" text-anchor="start">witness of the count (yellow): a cell per square with the slots it would serve -- a counting witness, not a packing</text>
-<text x="2284.0" y="374.0" font-size="7" fill="#555" text-anchor="start">steps: pieces 9329ms &gt; options 6207ms &gt; csp 5677ms &gt; union 91ms &gt; count 48ms &gt; count 21ms &gt; count-barH 42ms &gt; count-barH</text>
-<text x="2284.0" y="385.0" font-size="7" fill="#555" text-anchor="start"> 45ms &gt; count-barH 42ms &gt; options 683ms</text>
-<text x="2284.0" y="396.0" font-size="7" fill="#555" text-anchor="start">window pending: False;  lam 1.0;  rendered 2026-09-10 17:34:15</text>
+<text x="2284.0" y="374.0" font-size="7" fill="#555" text-anchor="start">steps: pieces 8023ms &gt; options 5483ms &gt; csp 4868ms &gt; union 76ms &gt; count 32ms &gt; count 19ms &gt; count-barH 26ms &gt; count-barH</text>
+<text x="2284.0" y="385.0" font-size="7" fill="#555" text-anchor="start"> 35ms &gt; count-barH 36ms &gt; options 563ms</text>
+<text x="2284.0" y="396.0" font-size="7" fill="#555" text-anchor="start">window pending: False;  lam 1.0;  rendered 2026-09-10 17:47:47</text>
 <text x="2894.0" y="78.0" font-size="7" fill="#333" text-anchor="start">CSP: H's box [2.498, 2.637, 1.519, 1.659] x tilt 53.1-64.0 deg as 8 x 8 sub-rects x 8 tilt bins (strips, left = low tilt); grey alive, red M = mutual clip, white = never alive</text>
 <rect x="2894.0" y="82.0" width="260.0" height="260.0" fill="#fff" stroke="#000" stroke-width="1"/>
 <rect x="2894.0" y="309.5" width="4.1" height="32.5" fill="url(#stipple)" stroke="#bbb" stroke-width="0.2"/>
@@ -4939,17 +4939,17 @@
 <line x1="2894.0" y1="309.5" x2="3154.0" y2="309.5" stroke="#888" stroke-width="0.5"/>
 <line x1="2894.0" y1="342.0" x2="3154.0" y2="342.0" stroke="#888" stroke-width="0.5"/>
 <text x="2894.0" y="356.0" font-size="7.5" fill="#000" text-anchor="start" font-weight="bold">round 1: 512 H units (3400 pieces) -&gt; 425 alive; 73 options (32418 pieces); mutual clip {'MC:BR(0,1)': 87} in 2 iteration(s); dead options 6</text>
-<text x="2894.0" y="366.5" font-size="7" fill="#333" text-anchor="start">  ms: build 573.4 | masks 2620.7 (rule S: 84670 node tests, 1825608 leaf pairs in numpy blocks, 4456 block cache hits) | settle 2438.8 | clip 5059.8</text>
-<text x="2894.0" y="376.5" font-size="7" fill="#333" text-anchor="start">  settle kills {'P': 90, 'W': 1056, 'C': 136, 'M': 256, 'L': 0, 'R': 3536, 'X': 332, 'S': 13045}; rule ms {'P': 119.0, 'W': 15.1, 'C': 22.4, 'M': 602.</text>
-<text x="2894.0" y="386.5" font-size="7" fill="#333" text-anchor="start">1, 'L': 116.8, 'R': 31.0, 'X': 1065.0}; 17 options refined, 6 died</text>
-<text x="2894.0" y="396.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BR(0,1): hull [2.20827, 2.22625, 0.71578, 0.76973], 6 pieces, 60 pairs refined -&gt; 60 dead in 84.7 ms</text>
-<text x="2894.0" y="406.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BL(1,0)+BR(0,1): hull [2.20827, 2.22625, 0.71578, 0.76973], 6 pieces, 60 pairs refined -&gt; 60 dead in 128.3 ms</text>
-<text x="2894.0" y="416.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BR(0,1)+BR(1,0): hull [2.20827, 2.22625, 0.71578, 0.76973], 6 pieces, 60 pairs refined -&gt; 60 dead in 119.8 ms</text>
-<text x="2894.0" y="426.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BL(1,0)+BR(0,1)+BR(1,0): hull [2.20827, 2.22625, 0.71578, 0.76973], 6 pieces, 60 pairs refined -&gt; 60 dead in 154.4 ms</text>
-<text x="2894.0" y="436.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 7 BR(1,0): hull [1.57891, 1.65083, 1.65083, 1.6868], 3 pieces, 142 pairs refined -&gt; 142 dead in 185.4 ms</text>
-<text x="2894.0" y="446.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 7 BL(1,0)+BR(1,0): hull [1.57891, 1.65083, 1.65083, 1.6868], 3 pieces, 142 pairs refined -&gt; 142 dead in 187.4 ms</text>
+<text x="2894.0" y="366.5" font-size="7" fill="#333" text-anchor="start">  ms: build 475.0 | masks 2468.5 (rule S: 84670 node tests, 1825608 leaf pairs in numpy blocks, 4456 block cache hits) | settle 1896.9 | clip 4365.5</text>
+<text x="2894.0" y="376.5" font-size="7" fill="#333" text-anchor="start">  settle kills {'P': 90, 'W': 1056, 'C': 136, 'M': 256, 'L': 0, 'R': 3536, 'X': 332, 'S': 13045}; rule ms {'P': 94.0, 'W': 11.8, 'C': 18.0, 'M': 474.2</text>
+<text x="2894.0" y="386.5" font-size="7" fill="#333" text-anchor="start">, 'L': 91.6, 'R': 24.0, 'X': 805.4}; 17 options refined, 6 died</text>
+<text x="2894.0" y="396.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BR(0,1): hull [2.20827, 2.22625, 0.71578, 0.76973], 6 pieces, 60 pairs refined -&gt; 60 dead in 72.1 ms</text>
+<text x="2894.0" y="406.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BL(1,0)+BR(0,1): hull [2.20827, 2.22625, 0.71578, 0.76973], 6 pieces, 60 pairs refined -&gt; 60 dead in 75.1 ms</text>
+<text x="2894.0" y="416.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BR(0,1)+BR(1,0): hull [2.20827, 2.22625, 0.71578, 0.76973], 6 pieces, 60 pairs refined -&gt; 60 dead in 99.3 ms</text>
+<text x="2894.0" y="426.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 10 BL(1,0)+BR(0,1)+BR(1,0): hull [2.20827, 2.22625, 0.71578, 0.76973], 6 pieces, 60 pairs refined -&gt; 60 dead in 114.7 ms</text>
+<text x="2894.0" y="436.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 7 BR(1,0): hull [1.57891, 1.65083, 1.65083, 1.6868], 3 pieces, 142 pairs refined -&gt; 142 dead in 146.5 ms</text>
+<text x="2894.0" y="446.5" font-size="7" fill="#bf360c" text-anchor="start">  F  cell 7 BL(1,0)+BR(1,0): hull [1.57891, 1.65083, 1.65083, 1.6868], 3 pieces, 142 pairs refined -&gt; 142 dead in 139.8 ms</text>
 <text x="2894.0" y="456.5" font-size="7.5" fill="#000" text-anchor="start" font-weight="bold">round 2: 425 H units (3400 pieces) -&gt; 425 alive; 67 options (32388 pieces); mutual clip {} in 1 iteration(s); dead options 0</text>
-<text x="2894.0" y="467.0" font-size="7" fill="#333" text-anchor="start">  ms: build 131.4 | masks 659.8 (rule S: 149883 node tests, 1827646 leaf pairs in numpy blocks, 11167 block cache hits) | settle 127.5 | clip 787.3</text>
+<text x="2894.0" y="467.0" font-size="7" fill="#333" text-anchor="start">  ms: build 97.9 | masks 565.6 (rule S: 149742 node tests, 1866888 leaf pairs in numpy blocks, 11185 block cache hits) | settle 136.3 | clip 702.0</text>
 <text x="2894.0" y="477.0" font-size="7" fill="#333" text-anchor="start">  settle kills {'P': 0, 'W': 0, 'C': 0, 'M': 0, 'L': 0, 'R': 0, 'X': 0, 'S': 0}; rule ms {'P': 0.0, 'W': 0.0, 'C': 0.0, 'M': 0.0, 'L': 0.0, 'R': 0.0, </text>
 <text x="2894.0" y="487.0" font-size="7" fill="#333" text-anchor="start">'X': 0.0}; 11 options refined, 0 died</text>
 <text x="2894.0" y="497.0" font-size="6.5" fill="#555" text-anchor="start">H = no piece of the row is rule-S compatible with any alive H piece; F = the same after the settle refinement; M = H unit with no compatible option of</text>
