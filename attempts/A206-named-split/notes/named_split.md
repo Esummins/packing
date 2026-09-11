@@ -137,4 +137,16 @@ the Rule-NS miss hypotheses).
 | k5_11_Y0738 (g1) | R.1.1.2s | ALIVE | 12 / 4 | NS F3 at BL(1,1) (0.034): [meets] REACH r2 159 s; [misses] -> NS F2 at BR(0,1) (0.23, rows 21, 22): [misses] EmptyBox r3 487 s, [meets] -> NS F1 at TR(0,0) (0.43) -> NS F3 at TR(0,0) (0.82): three sharp leaves with every name HARD (2 anonymous rows at TR(0,0) unresolved; next lever: the whole tree / LP) | 3,020 |
 | k5_16_Y0083 (g1) | R.3.1s | **DEAD** | 1 / 0 | the loaded sharp leaf dies in its own refresh cascade: FC r2 (297 s) | 297 |
 | k5_16_Y0380 (g1) | R.1.1s | **DEAD** | 5 / 2 | root 198 s; NS F2 at TL(1,0) (0.040, rows 9, 14): [meets] COUNT r2 197 s, [misses] -> NS F3 at BR(1,0) (0.30): [meets] EmptyBox r1 48 s, [misses] EmptyBox r1 30 s | 1,077 |
+| k5_16_Y0865 (g1) | R.1.3.2s | **DEAD** | 1 / 0 | the loaded sharp leaf (H, F1..F5) dies in its own refresh cascade: EmptyBox r2 (353 s) | 353 |
 | k5_16_Y0402 (g1) | R.1.3.1s | ALIVE | 8 / 3 | root 451 s; NS F2 at BR(1,0) (0.42): [meets] -> NS F1 at BR(1,0) (0.83): [meets] -> NS H at BR(1,0) (0.9999): both FC r1 (153 / 104 s); [F1 misses] **MISS-CLIP r1** (every piece of F1 within 1/2 of the box, 0 s); [F2 misses BR(1,0)] alive after the sharp round (every name HARD) | 2,194 |
+
+## 4. The whole trees under Rule NS (the pages whose 900 s trees were wall-cut)  [M]
+
+The tree from A203's start with Rule NS at every fully named node, wall 3,600 s, g1 pad (window-valid); a run
+restricted to a branch path (`--pad g1+R.3`) records the other branches as skipped.  A DEAD whole tree is a kill of the
+PAGE (the status gallery's block 7o collects those rows only).
+
+| page | run | verdict | nodes / depth / NS splits | dead / alive | the kills (branch: clip r round, s) | s |
+|---|---|---|---|---|---|---|
+| k5_11_Y0672 | g1_tree | ALIVE wall | 19 / 4 / 2 | 10 / 8 | R.1 closed (BR(0,1)<-21, 22, 23 EmptyBox r2); R.2 closed (BL(1,1)<-6, 11 FC r1; <-16: TL(1,0)<-9 **NS H at TR(0,0): both EmptyBox r2**, <-14 FC r2, <-19 EmptyBox r1); R.3 open (R.3.1: TL(1,0)<-7 EmptyBox r2; <-8 NS H at TR(0,0) meets alive at the wall) | 3,718 |
+| **k5_11_Y0985** | g1_tree | **DEAD** | 8 / 2 / 0 | 6 / 0 | BR(0,1)<-16 EmptyBox r2 120 s; <-21: TL(1,0) pairs {7,9}, {7,14}, {8,9} FC r1 (270-291 s), {8,14} EmptyBox r2 364 s; <-22 FC r1 198 s -- **the page's first kill in the lab** (A205's 900 s tree was cut at 5 nodes); no split needed, the wall was | 2,121 |
