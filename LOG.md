@@ -8551,5 +8551,5 @@ halves of the answer come from opposite findings.
   <-21: three TL(1,0) pairs FC r1, one EmptyBox r2; <-22 FC r1) and **k5_11_Y1104 DEAD in 2,401 s** (the same shape) --
   neither needed a split: A205's 900 s wall had cut both at 4-5 nodes.  Pages
   `docs/residue_map/campaigns/A206-namedsplit/namedsplit206_<nid>.svg` (one per page, every run's root and closed branches),
-  CURRENT.json -> A206, status gallery block (7o) collects the whole-tree kills.  18 runs, 7.7 CPU-h so far; the queues
+  CURRENT.json -> A206, status gallery block (7o) collects the whole-tree kills.  21 runs, 9.3 CPU-h so far; the queues
   continue (pad-0 leaves, then the whole trees of the remaining wall-cut pages).

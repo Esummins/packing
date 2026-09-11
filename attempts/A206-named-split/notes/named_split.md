@@ -145,6 +145,8 @@ the Rule-NS miss hypotheses).
 | k5_16_Y0881 (g1) | R.2.3s | ALIVE | 10 / 3 | root 165 s; NS F2 at TR(1,0) (0.24): [meets] -> NS H at TR(1,0) (0.57, old policy) -> NS F1 at TR(1,0) (1.0): [F1 misses] MISS-CLIP r1; three sharp leaves alive (every name HARD) | 2,332 |
 | k5_11_Y0202 (g1, ext v4) | R.1.5s | ALIVE | 2 / 0 | every name HARD at the loaded node (H, F1..F4 each hypothesised at its slots): the sharp round only (H kept 0.58, F2 0.19, F3 0.13); the LP's input | 371 |
 | k5_11_Y0202 (g1, ext v4) | R.3.1.1s | **DEAD** | 1 / 0 | the loaded sharp leaf dies in its own refresh cascade: FC r2 (266 s) -- the fourth such leaf; R.1.4s not loadable (its snapshot capped at 300 of H's 424 pieces) | 266 |
+| k5_16_Y0991 (pad 0) | R.2.1s | ALIVE | 4 / 1 | root 174 s; NS F4 at TR(1,0) (0.043, rows 9, 14): [misses] EmptyBox r3 340 s; [meets] alive after the sharp round (every name HARD) | 964 |
+| k5_16_Y0991 (pad 0) | R.2.2s | ALIVE | 4 / 1 | root 102 s; NS F3 at BR(0,1) (0.054): [meets] EmptyBox r2 169 s; [misses] alive after the sharp round (every name HARD) | 546 |
 | k5_16_Y0402 (g1) | R.1.3.1s | ALIVE | 8 / 3 | root 451 s; NS F2 at BR(1,0) (0.42): [meets] -> NS F1 at BR(1,0) (0.83): [meets] -> NS H at BR(1,0) (0.9999): both FC r1 (153 / 104 s); [F1 misses] **MISS-CLIP r1** (every piece of F1 within 1/2 of the box, 0 s); [F2 misses BR(1,0)] alive after the sharp round (every name HARD) | 2,194 |
 
 ## 4. The whole trees under Rule NS (the pages whose 900 s trees were wall-cut)  [M]
@@ -159,3 +161,28 @@ PAGE (the status gallery's block 7o collects those rows only).
 | k5_11_Y0672 | g1_tree_R.3 | ALIVE wall | 12 / 6 / 4 | 3 / 11 | under R.3.1.2 = TR(0,0)<-24, BR(0,1)<-16, TL(1,0)<-8: NS H at TR(0,0) (0.64) -> H at TL(1,0) (0.65) -> H at BR(0,1) (0.75): [misses] EmptyBox r3 418 s, [meets] depth cap; -> NS F4 at TR(0,0) (**0.0039**): [meets] EmptyBox r2 193 s; the hour spent on H's large-fraction splits (300-680 s a node): **the split is the lever only for slivers** -- MAX_FRAC 0.5 from here on | 3,636 |
 | **k5_11_Y0985** | g1_tree | **DEAD** | 8 / 2 / 0 | 6 / 0 | BR(0,1)<-16 EmptyBox r2 120 s; <-21: TL(1,0) pairs {7,9}, {7,14}, {8,9} FC r1 (270-291 s), {8,14} EmptyBox r2 364 s; <-22 FC r1 198 s -- **the page's first kill in the lab** (A205's 900 s tree was cut at 5 nodes); no split needed, the wall was | 2,121 |
 | **k5_11_Y1104** | g1_tree | **DEAD** | 8 / 2 / 0 | 6 / 0 | BR(0,1)<-16 FC r1 182 s; <-21: TL(1,0) pairs {7,9}, {7,14}, {8,9} FC r1 (280-305 s), {8,14} EmptyBox r2 401 s; <-22 FC r1 215 s -- **the page's first kill in the lab** (A205's 900 s tree: 4 nodes, cut); the same shape as Y0985 | 2,401 |
+| k5_11_Y0202 | g1_tree | ALIVE wall | 11 / 5 / 2 | 5 / 7 | R.1 = BL(1,1)<-8, R.1.1 = BR(0,1)<-{18,21}: TR(0,0)<-14, 19, 23 EmptyBox r1 (49-53 s, as A205 v4); **TR(0,0)<-24 (A205's fully named leaf R.1.1.4s): NS F2 at BL(1,1) (0.106): [meets] REACH r2 395 s; [misses] (1,484 s: the 5-role fixed point) -> NS F2 at TL(1,0) (0.044, row 14): [meets] the sharp round EmptyBox r1 733 s**, [misses] behind the wall; R.1.2-5, R.2, R.3 behind the wall | 4,552 |
+
+## 5. What the split is, and is not, the lever for; what survives  [M]
+
+* **The sliver is the lever.**  Every split whose role met the slot at a fraction below 0.13 closed at least one branch in
+  one or two rounds (Y0230 F1 0.0088: REACH; Y0380 F2 0.040: COUNT; Y0738 F3 0.034: REACH; Y0672 F4 0.0039: EmptyBox r2;
+  Y0202 F2 0.044 / 0.106: EmptyBox / REACH; Y0991 F4 0.043 / F3 0.054: EmptyBox; Y0941 F1 0.13: EmptyBox r3), and in five
+  cases the twin branch died too (Y0230, Y0380, Y0672 R.2.3.1 in the whole tree, Y0941 R.3s's second split).  The splits of
+  H at fractions 0.57-1.0 (Y0672 R.3, Y0881, Y0402) cost 300-680 s a node for one kill in six -- `MAX_FRAC` 0.5 from 14:20.
+* **The refresh alone kills four of A205's sharp leaves** (Y0083, Y0865, Y0202 R.1.2s, R.3.1.1s: 234-353 s): a leaf whose
+  8/3 fixed point survived at A205's wall dies when its pieces are re-cascaded at 4/2 with a fresh option table (A182's rule
+  applied once more).  Cheap, and it says A205's ALIVE leaves were wall-cut more than geometry-limited.
+* **The whole tree at 3,600 s** kills k5_11_Y0985 and Y1104 (6 kills each, no split) and closes R.1 + R.2 of Y0672; on Y0202
+  and Y0672's R.3 the hour goes into 5-role nodes at 400-1,500 s.
+* **What survives** (the LP's input: every name a HYPOTHESIS, the roles' pieces the cores): sharp leaves with every name
+  hard -- Y0738 R.1.1.2s (3 leaves), Y0402 R.1.3.1s (1), Y0941 R.3s (1) / R.4s (1), Y0881 R.2.3s (3), Y0202 R.1.5s (1),
+  Y0991 R.2.1s / R.2.2s (pad 0, 1 each), the miss branches of Y0202 R.1.1.4s and R.1.1.4.2 behind their walls; Y0672's R.3
+  subtree; the pages the queues have not reached.  **Next lever:** the LP on the hard-named leaves (A180's `lp180`, the
+  roles' pieces as A191/A183's exact cores), then the 5-role fixed point's cost (bisect only the roles whose K' changed),
+  then the remaining whole trees (`queue_d.txt`).
+* Population at this report: 21 runs, 9.3 CPU-h, 53 kills, 28 splits, 9 runs DEAD; every DEAD node audited by
+  `scratch/audit206b.py` (sampling inside the parent's snapshot pieces, exact meets test, FC kills need two meeters):
+  0 refutations (two flags of the hull-box grid at tilts outside the roles' ranges resolved).  Fixes on the way: the
+  Windows rename race on the certificate (a reader holding the file; `run206.save` retries), the run finalised from its node
+  records when the last save failed (`scratch/finalise206.py`: Y0738, Y0083), the CR in the auditor's queue lines.
