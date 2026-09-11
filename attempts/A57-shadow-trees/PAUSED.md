@@ -753,10 +753,10 @@ S3 + 571 deeper). The v4 clause the polygon core would need: `hypotheses.poly_co
 `attempts/A205-clip-tree` (the PI's Y0202 reading; `notes/clip_tree.md`): branch on a forced slot's remaining meeter rows,
 instantiate, A204's cascade + A203's rule S at every node.  **Retired at the window pad:** `k5_16_interior_Y0839` (526 s;
 every BR(0,1) row dies by FC at BL(1,0)), `k5_11_interior_Y0308` (203 s), `k5_16_interior_Y0027` (365 s), `k5_16_interior_Y0054`
-(312 s); `k5_16_interior_Y0491`'s g1 kill was RETRACTED on 2026-09-11 (a stale-table branch; the page is re-running).  **Survivors at the brief's 900 s wall** (both
+(312 s); `k5_16_interior_Y0491` (319 s, re-run with the fix after its first kill was retracted as a stale-table branch), `k5_16_interior_Y0565` (397 s).  **Survivors at the brief's 900 s wall** (both
 pads, 1–5 kills each, 2–6 undecided branches): `k5_11_interior_Y0130 / Y0202 / Y0662 / Y0672 / Y0738 / Y0985` and the pages
 the shard has not reached (`pages_todo.txt`; `results/cliptree205.jsonl` is the live row list).  **Y0202 at wall 3,600 s**
-(`certs/extended/cliptree205_k5_11_interior_Y0202_w3600v3.json`): 6 of 19 branches soundly DEAD (8 more withdrawn as stale-table artefacts; re-run `_w3600v4`), three FULLY NAMED leaves alive
+(`certs/extended/cliptree205_k5_11_interior_Y0202_w3600v3.json`): the sound re-run `_w3600v4`: 5 branches DEAD (BL(1,1)<-13 closed by the refresh round), FIVE fully named sharp leaves alive
 (R.1.1.4s, R.1.5s, R.3.1.1s: pins + H + F1..F4 + one anonymous square, kept H 0.15–0.47, roles at 0.18–3 % of their seeds)
 and two branches behind the wall (R.3.2, R.3.3 = BL(1,1)<-18 with BR(0,1)<-22 / 23).  **Next lever, named:** the LP on the
 fully named leaves (A180's `lp180` with the roles' pieces as A191/A183's exact cores — the geometry has already collapsed the

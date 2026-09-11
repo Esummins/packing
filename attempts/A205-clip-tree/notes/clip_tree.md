@@ -157,6 +157,18 @@ two branches the wall did not reach.  What kills those three is not more branchi
 the LP on the node (A180's `lp180` with the roles' pieces as A191/A183's cores) or one more level of geometry
 (refine 4 on the 0.2 % roles), each a few hundred seconds -- the next lever, priced in section 5.
 
+
+**The SOUND extended tree (`_w3600v4`, the fix in; `certs/extended/cliptree205_k5_11_interior_Y0202_w3600v4.json`, page
+`extended/…_w3600v4.svg`): 24 nodes, depth 3, 5 DEAD / 9 ALIVE leaves in 3,921 s.**  Kills: R.1.1.1-3 = BL(1,1)<-8 /
+BR(0,1)<-{18,21} / TR(0,0)<-14, 19, 23 by EmptyBox in 37-40 s each; R.1.3 = BR(0,1)<-{18,23} by EmptyBox 52 s; **R.2 =
+BL(1,1)<-13 closed by the second REFRESH round (A204's own cascade, no branch: the FC-instantiated TR(0,0) meeter dies
+by EmptyBox, 23 s)**.  Alive: the fully named sharp leaves R.1.1.4s (H 0.47, F2 0.034), R.1.2s (H 0.36, F2 0.013, F3
+0.017, F4 0.030), R.1.4s (H 0.77), R.1.5s (H 0.43, **F2 0.0029, F3 0.0018**), R.3.1.1s (H 0.24, F1 0.019) -- the v3
+"kills" under R.1.2 and R.1.4 were the stale-table artefacts; on a fresh table both nodes have nothing to branch on --
+and the wall's four undecided branches (R.3.1.2-3, R.3.2-3).  So: BL(1,1)<-13 is dead, BL(1,1)<-8 has five fully named
+survivors, BL(1,1)<-18 is open; the page's residue is five nodes of pins + H + F1..F4 + one anonymous square with the
+roles collapsed to slivers -- the LP's input, not the tree's.
+
 ## 4. Y0839 (k5_16)  [M]
 
 Root: A203's start (H forced at BR(0,1), 412 units), one round, 146 s (the option table skipped at round 2: the
@@ -173,7 +185,8 @@ leaves (consistent with the kill; the kills are exact, the audit is the kept rul
 
 `results/report205.md` (one row per (page, pad); the shard `run205.sh` over `pages_todo.txt` keeps appending to
 `results/cliptree205.jsonl` and commits after every page; the status gallery's block (7n) collects the kills).  At the
-time of the report (32 pages queued, 9 done):
+time of the report (32 pages queued, 24 done; **six window-pad kills: Y0839, Y0308, Y0027, Y0054, Y0491, Y0565**; the
+k5_11 pages and Y0044 / Y0099 / Y0230 / Y0249 / Y0325 / Y0380 / Y0402 / Y0436 / Y0460 / Y0500 ALIVE at the walls):
 
 | page | pad | verdict | nodes / depth | dead / alive leaves | s | the kills (branch: clip) |
 |---|---|---|---|---|---|---|
@@ -189,7 +202,8 @@ time of the report (32 pages queued, 9 done):
 | k5_16_Y0054 | g1 | **DEAD** | 4 / 1 | 3 / 0 | 312 | BR(0,1)<-{18,21}, {18,22}: COUNT; <-{18,23}: FC |
 | k5_16_Y0083 | g1 / 0 | ALIVE wall / DEAD (s0-only, WINDOW-PENDING) | | | | |
 | k5_16_Y0230, Y0402 | g1 / 0 | ALIVE wall / undecided (process wall 2,100 s) | | | | |
-| k5_16_Y0491 | g1 | RETRACTED, re-running | | | | the Y0491 artefact (correction above) |
+| k5_16_Y0491 | g1 | **DEAD** (re-run with the fix) | 2 / 0 | 1 / 0 | 319 | no branch: the REFRESH round (A204's cascade) kills the FC-instantiated TL(1,0) meeter F4 by EmptyBox; full-role audit (`audit_roles205.py`): F1 (forced at BL(1,0)+BR(0,1)+BR(1,0)) has no admissible grid pose at all -- consistent, grid-limited |
+| k5_16_Y0565 | g1 | **DEAD** | 5 / 1 | 4 / 0 | 397 | BR(0,1)<-10: FC; <-15: FC r2; <-22: EmptyBox after the S clip; <-23: COUNT (pair table) -- fresh root table |
 
 Every branch the wall let run on the k5_11 pages dies by FC at the NEXT slot or by the pair leaf; no branch has come
 back ALIVE except the fully named nodes of Y0202.  The 900 s wall holds 3-10 nodes; at wall 3,600 s a k5_11 page's

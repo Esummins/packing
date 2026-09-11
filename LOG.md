@@ -8510,3 +8510,8 @@ halves of the answer come from opposite findings.
   Y0202's extended trees (8 of the 14 kills; R.2 is NOT closed) and Y0380 g1's R.1.4u are withdrawn; the four window-pad kills
   (Y0839, Y0308, Y0027, Y0054) are branches of a root whose last round instantiated nothing and stand, audited.  Fix: the tree
   refreshes the table (one cascade round) before branching (707bb812); the shard restarted with it; Y0202 re-run as `_w3600v4`.
+- **Update (2026-09-11 06:00).**  With the fix: Y0491 g1 DEAD again (319 s) by A204's own cascade at the refresh round (no branch;
+  full-role audit consistent, grid-limited), **k5_16_Y0565 DEAD at g1 in 397 s** (FC / FC / EmptyBox after the S clip / COUNT on a
+  fresh root table) -- six window-pad kills in 24 pages; Y0202's sound extended tree (`_w3600v4`): 24 nodes, 5 DEAD (four pair
+  leaves under BL(1,1)<-8, and BL(1,1)<-13 closed by the refresh round), five fully named sharp leaves with the roles at 0.2-3 %
+  of their seeds, four branches behind the wall.  10.4 CPU-h on the rows so far; the shard continues.
