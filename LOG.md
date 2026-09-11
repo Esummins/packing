@@ -8382,3 +8382,56 @@ halves of the answer come from opposite findings.
   supplies `pi_0 = 0.0255101` - twenty-two times more.  The PI's reading is TRUE of the plain slot box and
   FALSE of the widened box `B_p+` that Theorem FC states, and a kill at the plain box is s0-only (the A155 /
   A159 pad phenomenon, third sighting).  A "cannot be doubly met" leaf has to name its box.
+
+## 2026-09-10 evening -- A202-fast30 (Fable lead) -- done-mixed: **the CLOSED-FORM geometric kill layer runs in 8-28 s a page and draws the page first; it kills one page on its own at the window pad (k5_11_interior_Y1110) and reproduces A200's pad-0 kill of Y0054; stage 1 (A200's exact table on the survivors) retires four more (k5_11_interior_Y0275, k5_16_interior_Y0191 / Y0275 / Y0842, all at the g1 pad)**
+
+- **What it is** (`attempts/A202-fast30`, the PI's directive of 16:35 and the PI's disc / corner / column readings of the
+  day, credited in `notes/fast30.md`): every half-grid cell (side 0.575 < 1/sqrt2) split 4 x 4, times 6 exact tilt
+  sub-bins = 2,400 pieces per page, each piece tested by SOUND necessary conditions in closed form -- **P** the pin
+  discs (a centre within 1/2 of a pin's core meets the pin), **W** the walls at w_min/2, **C** Lemma CN against every
+  alive piece of H (centres of interior-disjoint unit squares are >= 1 apart), **M** the relative-tilt separating-axis
+  bound (|d . a| >= 1/2 + w(theta_F - theta_H)/2 on some axis of F or H; folded-mod-90 angular gaps; = CN when both
+  tilts are free, up to 1.207 at 45 deg), **L** the open-chord row (pins + H + the piece > s), **R** reach (disc
+  1/sqrt2, half-extent w_max/2) and **X** A161's exact separating-axis miss -- the survivors of each slot refined
+  2 x 2 x 2 for three levels under the same rules (piece budget 12,000), so the alive region of a slot is a union of
+  small pieces: the PI's discs appear on the page (Y0044's cell 16 alive only at x >= 2.659 = 1.659 + 1 and above
+  P3's disc, exactly the 16:20 reading).  On the survivors: A200's union caps (CN / A1-U / CHORD-U), Theorem FC's
+  demand 2, the assignment count with a pair table (A1 / CN / M on the option hulls x alive tilt intervals), the
+  bar-H forcing, H clipped to the pieces that may meet its forced slots (l-inf ball AND A161's exact miss per H
+  piece), iterated to a fixed point.  Verdicts `[C: closed-form trace]` -- no verifier clause exists yet.  Then
+  STAGE 1 = A200's `QPage` with `reach(cell, S)` empty on the cells stage 0 killed and stage 0's H box; stop there.
+- **Y0044 (the PI's page), g1 pad, 10.1 s:** P 4,634 pieces / 196 ms, W 1,337 / 27 ms, C 1,074 / 59 ms, M 2,760 /
+  771 ms, L 7 / 292 ms, R 3,273 / 30 ms, X 1,308 / 7,233 ms (the exact miss is 70 % of the wall); BL(1,0) keeps 3
+  cells whose refined union has diameter 0.9055 < 1 -> cap 1 -> H FORCED at BL(1,0) (A200 needed the exact table for
+  the same forcing); every other slot uncapped; the count feasible (witness H@11, free@5 BL+BR(1,0), @16, @8, @18
+  serving four slots, @22 three): ALIVE at stage 0; stage 1 ALIVE in 168 s (A200: 203 s), 60 reach tests skipped.
+  Y0054: 20 s, pad 0 DEAD at stage 0 (FC at BL(1,0): H provably misses by A161 on its pieces, cap 1 by CN on the
+  refined union, diam 0.9387) -- A200's kill, closed form, s0-only WINDOW-PENDING as before; g1 ALIVE (H may meet the
+  padded box: A197's witness).  Y0491: 18 s, no cap fires (six slots, H at 64-74 deg), ALIVE both stages.
+- **The population (40 ALIVE-at-LP pages of k5_16 / k5_11, both pads, two BelowNormal processes, 82 min):** stage 0
+  8-28 s per pad; stage 1 37-294 s per pad (median ~100 s; A200's exact table on fewer cells).  DEAD: k5_11_Y1110
+  (stage 0, g1: FC at TR(0,0), H provably misses the corner box, ONE alive cell -- cells 19 / 23 die by CN against
+  H's hull, which multibox's K' test does not see; A198's earlier kill of this page was a withdrawn pair-test row,
+  this one is FC + A1), k5_16_Y0054 (stage 0, pad 0 only), k5_11_Y0275 (stage 1 g1: TL(1,0) cap 1 by CN -> F1
+  instantiated -> H's box clipped to 2 % by the mutual clip -> BL(1,1) has no meeter cell; **the unmodified A200
+  quick200 reproduces this kill verbatim in 49 s** -- A200 had simply not run the k5_11 pages), k5_16_Y0191 and
+  Y0275 (stage 1 g1: H forced at two slots + F1 -> EmptyBox(H), A198/A200's mechanism), k5_16_Y0842 (stage 1 g1:
+  FC at BL(1,0), H provably misses, CN cap 1 -- the Y0054 mechanism, valid on the window here).  The other 34 pages
+  ALIVE at both stages and both pads.
+- **Soundness work:** a fuzz of every rule against an exact float SAT on 4,000 / 3,000 random pieces (0 refutations,
+  `notes/fast30.md` s.4); a per-page refutation sampler (4,000 poses per stage-0-dead cell, H sampled over its box,
+  pins' cores, container, the open widened box) on every killed page -- 0 admissible meeter poses in any dead cell;
+  and one bug caught before it shipped: the joint option rows first intersected the two slots' alive tilt intervals
+  as SETS of interval tuples, which emptied when the two refinements differed, and Y0044 "died" by the count --
+  corrected to interval overlaps, Y0044 is alive as A200 says.  Rule for readers: a stage-0 kill of a page A200's
+  exact tests leave alive is a bug until proved otherwise.
+- **What stage 0 cannot do and why:** its unions are unions of BOXES x tilt bins, so the sliver-shaped alive regions
+  (Y0054's BL(1,0) meeter at the bottom wall, height 0.12) come out ~0.94 in diameter rather than 0.885, and a cap
+  that needs the exact K' geometry (H's core growing as H is clipped) is stage 1's; it has no lonely clip at corners,
+  no SEAL (Lemma NO-SECOND needs a certified deep-regime tilt range for F, which is the exact bisection's output),
+  and no instantiation of the unique anonymous meeter (A200's).  The exact miss X is 70 % of its wall: the next
+  factor of 3 is a closed-form corner test in place of A161's bisection.
+- Files: `code/rules202.py`, `fast30.py`, `fast30b.py`, `count202.py`, `stage1_202.py`, `fig202.py`, `run202.py`,
+  `run202.sh`, `report202.py`; `results/fast30.jsonl` (one row per nid / pad / stage), `certs/f30_<nid>_<pad>_s<stage>.json`,
+  `results/xcheck/` (the A200 cross-check); pages `docs/residue_map/fast30_<nid>.svg` (stage 0 top, stage 1 below,
+  one panel per pad) and `fast30_gallery.svg`; `status_gallery.py` block (7l).
