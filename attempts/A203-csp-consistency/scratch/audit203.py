@@ -46,3 +46,19 @@ for rd in cert.get("csp") or []:
         print("round", rd["round"], "cell", d["cell"], "+".join(d["S"]), d["rule"], "meeting admissible poses", total, "disjoint from some H pose:", found)
         refuted += found > 0
 print("REFUTATIONS", refuted)
+
+# ---- the count's pair exclusions (rule S between two rows, one of them possibly H's row): sample both sides over the
+# hull x the FULL tilt range [0, 90] (a superset of every row's tilt set), admissible and meeting every slot of the row
+def poses_full(h, serve):
+    return poses(h, 0.0, 90.0, serve)
+seen = set()
+for t in cert.get("tests") or []:
+    for e in t.get("pair_excl") or []:
+        k = (tuple(e["a"][0:1]), tuple(e["a"][1]), tuple(e["b"][0:1]), tuple(e["b"][1]))
+        if k in seen: continue
+        seen.add(k)
+        A = poses_full(e["hull_a"], e["a"][1]); Bp = poses_full(e["hull_b"], e["b"][1])
+        found = sum(1 for P in A if any(sep(P, Q) for Q in Bp))
+        print("pair", e["rule"], e["a"], e["b"], "maxdist", e["maxdist"], "poses", len(A), "x", len(Bp), "disjoint pairs found for", found, "poses of a")
+        refuted += found > 0
+print("REFUTATIONS incl. pairs", refuted)

@@ -75,6 +75,14 @@ class Node:
             self.lr = np.array([p[2] for p in leaves], dtype=float)
             self.lb = np.array([p[4] for p in leaves], dtype=float)
             self.lkey = tuple(id(p) for p in leaves)                     # the block cache survives the round (same pieces)
+        elif not self.kids:
+            # a HULL-ONLY leaf (a fixed role's row: hull x its tilt intervals, no pieces): one block row per interval.
+            # (A203 artefact caught 2026-09-10 17:50: such a node was walked as an internal node with no children, so
+            # every (free row, H row) pair surviving the hull test was vacuously EXCLUDED -- Y0054 "died" at the g1 pad.)
+            self.leaves = []
+            self.lr = np.array([rect] * len(self.bins), dtype=float)
+            self.lb = np.array(self.bins, dtype=float)
+            self.lkey = ("hull", self.uid)
         else:
             self.lr = self.lb = self.lkey = None
 
@@ -143,6 +151,7 @@ class Compat:
         if A.leaves is not None and B.leaves is not None:
             return self.block(A, B)
         if A.leaves is None and B.leaves is None:
+            assert A.kids and B.kids
             for a in A.kids:
                 if not self.dead(a, B):
                     for b in B.kids:
