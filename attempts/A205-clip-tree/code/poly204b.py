@@ -179,7 +179,7 @@ def run(pg, max_rounds=10, on_round=None):
         if rnd >= 2 and not self.norm_shrunk and self.rounds and not self.rounds[-1].get("changed"):
             # A205: the fixed point did not move and the last apply changed nothing -> the node IS at its fixed point;
             # the option table would be the previous round's (skipped: ~100 s a node)
-            info = dict(self.rounds[-1], round=rnd, fixed_point=True, skipped="fixed point: nothing moved since round %d" % (rnd - 1))
+            info = dict(self.rounds[-1], round=rnd, fixed_point=True, instantiated=[], skipped="fixed point: nothing moved since round %d" % (rnd - 1))
             self.rounds.append(info)
             snap["forcing"] = dict(self.snapshots[-2].get("forcing") or {}) if len(self.snapshots) >= 2 else {}
             snap["note"] = info["skipped"]

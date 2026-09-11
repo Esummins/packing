@@ -94,6 +94,9 @@ def candidates(pg):
     if not pg.rounds:
         return None
     info = pg.rounds[-1]
+    if info.get("instantiated"):
+        return "stale"          # the option table predates the roles this round instantiated: one more cascade round first (SOUNDNESS: a
+                                # branch row could otherwise duplicate an FC-instantiated anonymous meeter -- the Y0491 g1 artefact)
     single, H_reach = info.get("single") or {}, set(info.get("H_reach") or [])
     reach_r = {r: set().union(*[set(S) for _, S in rows]) if rows else set() for r, rows in (info.get("fixed") or {}).items()}
     inst = info.get("instantiated") or []
@@ -213,6 +216,21 @@ class Tree:
         pg = self.pg
         while True:
             ch = candidates(pg)
+            n_stale = 0
+            while ch == "stale" and n_stale < 4:
+                # the last round instantiated a role: refresh the option table (one cascade round) before any branching
+                t0 = time.time()
+                clip, rnd = cascade(pg, 1, log=self.log)
+                self.n_nodes += 1
+                n_stale += 1
+                self.record(label + "r%d" % n_stale, depth, dict(slot=None, kind="refresh", rows=None, named=None), "DEAD" if pg.dead else "INTERNAL", clip, rnd, t0)
+                if pg.dead:
+                    return
+                ch = candidates(pg)
+            if ch == "stale":
+                self.nodes[-1].update(verdict="ALIVE", reason="undecided: the option table stayed stale after 4 refresh rounds")
+                self.alive_leaves += 1
+                return
             if ch is None and SHARP and not getattr(pg, "sharpened", False):
                 # the SHARP leaf (A182's rule: a survivor of the 4/2 pass re-normalised at 8/3, seeded from its own fixed
                 # point -- sound, never weaker): one more cascade round with refine 3 / nsub 8 on the fully named node
