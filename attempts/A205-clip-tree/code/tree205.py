@@ -167,6 +167,7 @@ class TreePage(P.PolyPage):
             for o in opts:
                 self.row_pieces[(role, o[0], o[1])] = coarse(self.role_pieces_in_cell(role, o[1], o[0]))
         self.T.step("hc-rows", time.time() - t0, n_dead=len(dead_cells), n_free_opts=len(free_opts), alive_cells={p: len(v) for p, v in single.items()})
+        self.last_opts = (free_opts, fixed_opts, single)
         return free_opts, fixed_opts, single
 
     def pair_ok(self, n1, o1, n2, o2):

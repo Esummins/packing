@@ -68,6 +68,26 @@ def test_seconds(pg):
     return out
 
 
+def anon_needed(pg, p):
+    """bar-anon forcing (the analogue of A204's bar-H): with the anonymous cap of p set to 0 the count has no cover
+    (without and with the chord rows) => in every packing of the node an ANONYMOUS free square meets p, so one of
+    p's alive rows is realised and the rows can be branched on singly.  Exact (the count is exhaustive unless capped)."""
+    lo = getattr(pg, "last_opts", None)
+    if lo is None or not pg.caps_last:
+        return False
+    free_opts, fixed_opts, _ = lo
+    caps = dict(pg.caps_last)
+    caps[p] = 0
+    n_anon = pg.n_free - len(pg.role_cell)
+    t0 = time.time()
+    for chords in (False, True):
+        r = pg.count_search(pg.slots, free_opts, fixed_opts, n_anon, pg.lines, pg.pin_chords, pg.s, caps, use_chords=chords)
+        if not r.feasible:
+            pg.T.test("COUNT", bar_anon=p, chords=chords, verdict="an anonymous meeter of %s is forced" % p, nodes=r.nodes, seconds=round(time.time() - t0, 3))
+            return True
+    return False
+
+
 def candidates(pg):
     """-> (n_rows, tie, slot, branches) for the slot to branch on, or None when every slot has two named meeters."""
     if not pg.rounds:
@@ -79,11 +99,14 @@ def candidates(pg):
     best = None
     for p in pg.slots:
         named = ([pg.H] if p in H_reach else []) + [r for r in sorted(reach_r) if r != pg.H and p in reach_r[r]] + [role for q, role in inst if q == p]
-        if len(named) >= 2:
-            continue
         rows = sorted(int(c) for c in single.get(p, {}))
-        if len(named) == 1:
-            br = [dict(slot=p, kind="row", rows=[ci], named=named) for ci in rows]
+        anon_forced = False
+        if len(named) >= 2:
+            if not rows or not anon_needed(pg, p):
+                continue
+            anon_forced = True                                   # bar-anon: no cover without an anonymous meeter of p
+        if len(named) == 1 or anon_forced:
+            br = [dict(slot=p, kind="row-anon" if anon_forced else "row", rows=[ci], named=named) for ci in rows]
         else:
             br, excl = [], []
             for ci, cj in itertools.combinations(rows, 2):
