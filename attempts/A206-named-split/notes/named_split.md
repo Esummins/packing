@@ -109,11 +109,30 @@ log `logs/namedsplit206_k5_11_interior_Y0672_g1_R.2.3.1.log`; **DEAD in 339 s** 
   poses meeting their slots in their cells -- **0 pairwise-disjoint configurations of H + F1..F4** (148 partial tries):
   consistent with the kill.
 
-So A205's leaf R.2.3.1 (TR(0,0)<-23, BL(1,1)<-16, TL(1,0)<-9) of Y0672's g1 tree is closed; the page's other open
-branches (R.2.3.2-3, R.3) are the whole-tree run's (section 4).
+So A205's leaf R.2.3.1 (TR(0,0)<-23, BL(1,1)<-16, TL(1,0)<-9) of Y0672's g1 tree is closed.
+
+**The whole tree of Y0672 under Rule NS (run `g1_tree`, wall 3,600 s; 19 nodes, depth 4, 2 NS splits, 10 DEAD / 8
+undecided, ALIVE at the wall; 3,718 s).**  R.1 = TR(0,0)<-19 closed (BR(0,1)<-21, 22, 23 by EmptyBox r2, 52-57 s
+each) and **R.2 = TR(0,0)<-23 closed entirely**: BL(1,1)<-6, 11 by FC r1; under BL(1,1)<-16, TL(1,0)<-9 is the PI's
+node again -- here bar-anon is silent on the fresh table and **Rule NS fires: split H at TR(0,0) (meeting fraction
+0.063, alive row 24, named {F1, H}); [H meets TR(0,0)] DEAD by EmptyBox r2 (170 s), [H misses TR(0,0)] DEAD by
+EmptyBox r2 (159 s)** -- the F4 instantiated by FC in the miss branch kills the fixed point, as the PI said;
+TL(1,0)<-14 by FC r2 (399 s), TL(1,0)<-19 by EmptyBox r1 (29 s).  R.3 = TR(0,0)<-24 is open: R.3.1 = BR(0,1)<-16 has
+TL(1,0)<-7 DEAD (EmptyBox r2), TL(1,0)<-8 split by Rule NS (H at TR(0,0), fraction 0.64) with its meets branch alive
+at the wall, and three rows plus R.3.2-4 behind the wall -- re-run as the path-restricted tree `g1_tree_R.3`.
 
 ## 3. The fully named leaves of A205's certificates  [M]
 
-(filled per batch below; every kill `[C: library clip trace]` with branch / clip / round; certificates
-`certs/namedsplit206_<nid>.json`, pages `docs/residue_map/campaigns/A206-namedsplit/namedsplit206_<nid>.svg`,
-rows `results/namedsplit206.jsonl`.)
+Every fully named ALIVE leaf of A205's certificates (g1 pads first; the extended Y0202 `_w3600v4` leaves; the pad-0
+leaves last) loaded from its last snapshot and run under Rule NS (wall 3,600 s a page, split among a page's leaves).
+Every kill `[C: library clip trace]` with branch / clip / round; certificates `certs/namedsplit206_<nid>.json`, pages
+`docs/residue_map/campaigns/A206-namedsplit/namedsplit206_<nid>.svg`, rows `results/namedsplit206.jsonl`, audits
+`logs/audit_*.log` (the auditor `scratch/auditor206.sh` samples every DEAD leaf with A205's full-role sampler plus
+the Rule-NS miss hypotheses).
+
+| page (pad) | A205 leaf | verdict | nodes / NS splits | the splits and kills (branch: clip r round, s) | s |
+|---|---|---|---|---|---|
+| k5_11_Y0672 (g1) | R.2.3.1 | **DEAD** | 2 / 0 | bar-anon on the fresh table instantiates F4 at cell 24: R.2.3.1u EmptyBox(F2) r1, 57 s (s.2; audited, 0 refutations) | 339 |
+| k5_16_Y0230 (g1) | R.2.1.2s | **DEAD** | 5 / 2 | root 637 s; NS F1 at BR(0,1) (fraction 0.0088): [meets] REACH r1 192 s, [misses] alive -> NS F4 at BR(1,0) (0.12): [meets] EmptyBox r3 455 s, [misses] EmptyBox r3 382 s | 2,242 |
+| k5_11_Y0738 (g1) | R.1.1.2s | ALIVE | 12 / 4 | NS F3 at BL(1,1) (0.034): [meets] REACH r2 159 s; [misses] -> NS F2 at BR(0,1) (0.23, rows 21, 22): [misses] EmptyBox r3 487 s, [meets] -> NS F1 at TR(0,0) (0.43) -> NS F3 at TR(0,0) (0.82): three sharp leaves with every name HARD (2 anonymous rows at TR(0,0) unresolved; next lever: the whole tree / LP) | 3,020 |
+| k5_16_Y0083 (g1) | R.3.1s | **DEAD** | 1 / 0 | the loaded sharp leaf dies in its own refresh cascade: FC r2 (297 s) | 297 |
