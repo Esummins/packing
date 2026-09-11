@@ -387,7 +387,7 @@
      "kind": "row"
     }
    ],
-   "verdict": "RUNNING",
+   "verdict": "DEAD",
    "nodes": [
     {
      "label": "R.3.1s",
@@ -3804,7 +3804,77 @@
    "alive_leaves": 0,
    "dead_leaves": 1,
    "ns_splits": 0,
-   "seconds": 297.4
+   "seconds": 297.4,
+   "n_records": 1,
+   "killing": [
+    {
+     "label": "R.3.1s",
+     "slot": null,
+     "rows": null,
+     "clip": "FC",
+     "round": 2,
+     "seconds": 297.4,
+     "kind": null,
+     "role": null
+    }
+   ],
+   "undecided": [],
+   "wall": false,
+   "window_pending": false,
+   "leaf": "every branch DEAD under Rule NS: R.3.1s root<-None by FC r2",
+   "finalised": "verdict / lists computed from the node records after the last save failed (PermissionError on os.replace); tests / steps not kept",
+   "root": {
+    "verdict": "DEAD",
+    "clip": "FC",
+    "seconds": 297.4,
+    "n_rounds": 2,
+    "kept": {
+     "P0": 0.062655,
+     "P1": 0.180219,
+     "P2": 0.062655,
+     "P3": 0.062655,
+     "P4": 0.062655,
+     "H": 0.204409,
+     "F1": 0.015907,
+     "F2": 0.01315,
+     "F3": 0.009559,
+     "F4": 0.051681
+    },
+    "forced_H": [
+     "BL(1,0)"
+    ],
+    "role_slots": {
+     "F1": [
+      "BL(1,0)"
+     ],
+     "F2": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "F3": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "F4": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ]
+    },
+    "alive_cells": {
+     "BL(1,0)": [],
+     "BR(0,1)": [],
+     "BR(1,0)": [],
+     "TR(0,1)": [],
+     "TR(1,0)": [],
+     "TL(1,0)": []
+    },
+    "branch_slot": null,
+    "branch_role": null,
+    "branch_rows": null,
+    "ns_candidates": null
+   }
   }
  },
  "cls": "k5_16",

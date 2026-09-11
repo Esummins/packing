@@ -123,7 +123,7 @@ def run_one(doc, a, cert, log=print):
     out["leaf"] = None
     if out["verdict"] == "DEAD":
         out["leaf"] = "every branch DEAD under Rule NS: " + "; ".join("%s %s%s<-%s by %s r%s" % (
-            k["label"], k.get("slot") or "root", ("[%s %s]" % (k.get("role"), "meets" if k.get("kind") == "ns-meets" else "misses")) if k.get("kind", "").startswith("ns-") else "",
+            k["label"], k.get("slot") or "root", ("[%s %s]" % (k.get("role"), "meets" if k.get("kind") == "ns-meets" else "misses")) if str(k.get("kind") or "").startswith("ns-") else "",
             k.get("rows"), k["clip"], k["round"]) for k in out["killing"])
         if out["window_pending"]:
             out["leaf"] += " [pad 0: s0-only, WINDOW-PENDING]"

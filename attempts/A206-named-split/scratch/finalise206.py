@@ -35,6 +35,10 @@ d["ns_splits"] = sum(1 for n in nodes if n.get("branch_role"))
 d["wall"] = False
 d["window_pending"] = (d.get("pad") == "zero") and d["verdict"] == "DEAD"
 d["leaf"] = None
+if d["verdict"] == "DEAD":
+    d["leaf"] = "every branch DEAD under Rule NS: " + "; ".join("%s %s%s<-%s by %s r%s" % (
+        k["label"], k.get("slot") or "root", ("[%s %s]" % (k.get("role"), "meets" if k.get("kind") == "ns-meets" else "misses")) if str(k.get("kind") or "").startswith("ns-") else "",
+        k.get("rows"), k["clip"], k["round"]) for k in d["killing"]) + (" [pad 0: s0-only, WINDOW-PENDING]" if d["window_pending"] else "")
 d["finalised"] = "verdict / lists computed from the node records after the last save failed (PermissionError on os.replace); tests / steps not kept"
 d["seconds"] = max(float(n.get("t") or 0) for n in nodes)
 root = nodes[0]
