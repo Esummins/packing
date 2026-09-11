@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-10 17:46` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-10 17:55` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -159,7 +159,7 @@ Of the 71 gallery pages the PI reviews, **52 are still ALIVE and 19 are now DEAD
 * `k5_16_interior_Y0842` (tree tag `k5_16_interior_G1`) -- direct kill record, **A161** by `chord-limited lane [BL(1,0)]`; certificate `attempts/A161-chord-lane/certs/cl_k5_16_interior_Y0842__BL1_0.json`; attributed by *id occurs in exactly one tree*; 2 record(s) agree.
 * `k5_16_interior_Y0941` (tree tag `k5_16_interior_G1`) -- direct kill record, **A136** by `A120 composition (YES local cert + all NO children)`; certificate `attempts/A163-s02-other-frames/certs/S02_k5_16_A163chain_BOTH_base_r0.20_h10.00_nof0_+00.00.tcert.json.gz`; attributed by *applies_to_tags (A137 fold137)*; 4 record(s) agree.
 * `k5_11_interior_Y0147` (tree tag `k5_11_interior_G1`) -- direct kill record, **A190** by `guard-line clause v5 [h=2.9078, h=2.8852; tau 4.8775 < 5]`; certificate `attempts/A190-guardline-clause/certs/k5_11_interior_Y0147.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
-* `k5_16_interior_Y0054` (tree tag `k5_16_interior_G1`) -- direct kill record, **A200** by `quick killer [propagation; zero pad]: FC at BL(1,0): at most 1 distinct non-pin meeter(s) (H provably misses; roles []; anonymous cap 1 by CN: union diameter 0.8952 < 1) [pad 0: s0-only, WINDOW-PEND (s0-only; WINDOW-PENDING)`; certificate `attempts/A200-k516-quick/certs/q200_k5_16_interior_Y0054_pad0.json`; attributed by *id occurs in exactly one tree*; 4 record(s) agree.
+* `k5_16_interior_Y0054` (tree tag `k5_16_interior_G1`) -- direct kill record, **A200** by `quick killer [propagation; zero pad]: FC at BL(1,0): at most 1 distinct non-pin meeter(s) (H provably misses; roles []; anonymous cap 1 by CN: union diameter 0.8952 < 1) [pad 0: s0-only, WINDOW-PEND (s0-only; WINDOW-PENDING)`; certificate `attempts/A200-k516-quick/certs/q200_k5_16_interior_Y0054_pad0.json`; attributed by *id occurs in exactly one tree*; 3 record(s) agree.
 * `k5_16_interior_Y0230` (tree tag `k5_16_interior_G1`) -- direct kill record, **A190** by `guard-line clause v5 [-; tau 4.7500 < 5]`; certificate `attempts/A190-guardline-clause/certs/k5_16_interior_Y0230.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
 * `c0_Y0939` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0939__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 * `c0_Y0942` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0942__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
@@ -214,7 +214,7 @@ Of the 71 gallery pages the PI reviews, **52 are still ALIVE and 19 are now DEAD
 | `A199 seal199.jsonl` | 1 | 1 |
 | `A200 quick200.jsonl` | 2 | 2 |
 | `A202 fast30.jsonl` | 8 | 8 |
-| `A203 csp203.jsonl` | 2 | 2 |
+| `A203 csp203.jsonl` | 1 | 1 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
