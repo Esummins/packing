@@ -34,16 +34,31 @@ def poses(h, b0, b1, serve):
     return out
 Hb = cert["H_record"]
 H = poses(Hb[:4], Hb[4], Hb[5], [])
-print("H poses", len(H))
+# H's forcing (Theorem FC / the bar-H count at the end of round r) is a hypothesis of every LATER round: a row killed in
+# round >= 2 is audited against the H poses meeting every slot forced before that round (the certificate's rounds carry
+# forced_H); round-1 kills against every admissible H pose of the record box.
+forced_by_round = {}
+acc = set()
+for rd in cert.get("rounds") or []:
+    forced_by_round[int(rd.get("round", 0))] = sorted(acc)
+    acc |= set(rd.get("forced_H") or [])
+Hf = {}
+def H_for(r):
+    key = tuple(forced_by_round.get(r, []))
+    if key not in Hf:
+        Hf[key] = [P for P in H if all(not sep(P, R(wb[s])) for s in key)]
+    return Hf[key]
+print("H poses", len(H), "forced by round", forced_by_round)
 refuted = 0
 for rd in cert.get("csp") or []:
     for d in rd.get("dead_opts") or []:
         h = d["hull"]; total = 0; found = 0
+        HH = H_for(int(rd.get("round", 1)))
         for b0, b1 in d["bins"]:
             A = poses(h, b0, b1, d["S"]); total += len(A)
             for P in A:
-                if any(sep(P, Q) for Q in H): found += 1
-        print("round", rd["round"], "cell", d["cell"], "+".join(d["S"]), d["rule"], "meeting admissible poses", total, "disjoint from some H pose:", found)
+                if any(sep(P, Q) for Q in HH): found += 1
+        print("round", rd["round"], "cell", d["cell"], "+".join(d["S"]), d["rule"], "meeting admissible poses", total, "disjoint from some H pose:", found, "(H poses", len(HH), "meeting", forced_by_round.get(int(rd.get("round", 1))), ")")
         refuted += found > 0
 print("REFUTATIONS", refuted)
 
@@ -58,6 +73,10 @@ for t in cert.get("tests") or []:
         if k in seen: continue
         seen.add(k)
         A = poses_full(e["hull_a"], e["a"][1]); Bp = poses_full(e["hull_b"], e["b"][1])
+        fin = H_for(max(forced_by_round) + 1) if forced_by_round else H                     # the count's pairs: the final round
+        inH = lambda h: Hb[0] - 1e-9 <= h[0] and h[1] <= Hb[1] + 1e-9 and Hb[2] - 1e-9 <= h[2] and h[3] <= Hb[3] + 1e-9
+        if inH(e["hull_b"]): Bp = [P for P in Bp if any(all(abs(x - y) < 1e-9 for x, y in zip(P[0], Q[0])) for Q in fin)] or Bp
+        if inH(e["hull_a"]): A = [P for P in A if any(all(abs(x - y) < 1e-9 for x, y in zip(P[0], Q[0])) for Q in fin)] or A
         found = sum(1 for P in A if any(sep(P, Q) for Q in Bp))
         print("pair", e["rule"], e["a"], e["b"], "maxdist", e["maxdist"], "poses", len(A), "x", len(Bp), "disjoint pairs found for", found, "poses of a")
         refuted += found > 0

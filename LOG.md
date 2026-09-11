@@ -8435,3 +8435,35 @@ halves of the answer come from opposite findings.
   `run202.sh`, `report202.py`; `results/fast30.jsonl` (one row per nid / pad / stage), `certs/f30_<nid>_<pad>_s<stage>.json`,
   `results/xcheck/` (the A200 cross-check); pages `docs/residue_map/fast30_<nid>.svg` (stage 0 top, stage 1 below,
   one panel per pad) and `fast30_gallery.svg`; `status_gallery.py` block (7l).
+
+## 2026-09-10 evening -- A203-csp-consistency (Fable) -- done-mixed: **the fast count is a CSP on PIECES: H-consistency, the mutual clip and the settle kill Y0839's witness row in closed form (the coordinator's grid, reproduced), clip H on every page (4,606 units), force H on 10 more pads, and retire k5_16_interior_Y0842 at the window pad on their own; one artefact caught by the audit before shipping**
+
+- **What it is** (`attempts/A203-csp-consistency`, the PI's readings of 18:20 on Y0839 -- "clipping H on both of those (and settling
+  the mutual clip) should basically kill all the options there" -- and of 17:40 on Y0191 -- the meeter pair must be tested over
+  MEETING pieces; the coordinator's grid check `y0839_csp_gridcheck.py`).  A202's stage 0 (copied at d13f7420, modified only in
+  the copy) plus: **rule S** (Lemma PC: an interior-disjoint pair has an axis of one square with projection distance >= 1/2 +
+  w(relative tilt)/2; on a piece pair the bound over the difference rect's corners and 4-degree tilt sub-intervals, numpy blocks);
+  **Lemma HC** (a row with no piece compatible with any alive H piece is dead -- H exists); **Lemma MC** (an H unit compatible with
+  no row of a slot a FREE square must meet is dead -- Corollary FC-count); the **SETTLE** (a near-dead row's compatible pairs split
+  2x2x2 three levels under P/W/C/M/L/R/X + S); **Theorem COUNT-CSP** (the count ANDs the H-mask along the branch and needs
+  piece-compatible chosen pairs).  Lemmas for any n in `notes/csp_consistency.md`; the page `docs/residue_map/csp203_<nid>.svg`
+  = A202's panel + a CSP panel (H's units after the mutual clip, the dead rows lettered H / F, milliseconds per rule).
+- **Y0839** (both pads, 25 s / 22 s): the count's witness row (cell 10 serving BL(1,0)+BR(0,1)+BR(1,0), 11 pieces at tilt 62-71
+  deg) survives rule S at node level against 11 units (max distance 1.0025) and DIES by F after the settle (133 pairs, all dead,
+  315 ms); the mutual clip kills 87 of H's 512 units; the count finds another cover (cell 15) and forces H at BR(0,1).  ALIVE.
+- **Y0191** ALIVE (14 s): H 512 -> 96 units by MC:BL(1,0); 21 rows dead; the witness pair for TL(1,0) moves to (8, 18); the PI's
+  pair 14 | 18 is NOT excluded at piece resolution (the closed form needs a pair settle; A201's exact test stays the fallback).
+  **Y0044** ALIVE (17 s; H -> 161 units, forced at BL(1,0)).  **Y0054** ALIVE at g1 (33 s; H -> 1 unit), DEAD at pad 0 (A202's FC).
+- **Population** (39 pages x 2 pads, two shards, 25 min): median 23 s, max 57 s; 296 rows dead (115 H / 181 F); H forced on 34
+  pads (10 more than A202's stage 0); **kill: k5_16_interior_Y0842 at g1** (the F kills in cells 6 / 15 / 21 leave BL(1,0) a CN
+  cap 1 with H provably missing -- Theorem FC; A202 needed stage 1 for it) and Y0054 at pad 0.  `results/csp203.jsonl`,
+  `results/report203.md`, certs, pages; status_gallery block (7m), kills `[C: closed-form trace]` (no verifier clause yet).
+- **Soundness**: rule S fuzzed (6,000 pairs, 2,872 dead, 0 refutations); tree compatibility vs brute force (3,000 cases); every
+  kill audited by pose sampling (`scratch/audit203.py`).  **The audit caught an artefact**: a fixed role's row (a hull-only node)
+  was walked as an internal node with no children, so every (free row, H row) pair surviving the hull test was excluded vacuously
+  -- Y0054 "died" at g1; a sampled disjoint admissible pair F (1.504, 0.5, 0 deg) | H (1.949, 1.519, 82.4 deg) refuted it; fixed
+  (hull-only nodes are leaf blocks), the population regenerated.  Kept rule: a closed-form kill of a page the exact tests leave
+  alive is a bug until audited.
+- Files: `code/csp203.py`, `satbatch203.py`, `csp203b.py`, `csp203c.py`, `count203.py`, `cert203.py`, `sweep203.py`, the copies
+  `fast30.py` / `fast30b.py` / `rules202.py` / `fig203.py`, `fig203b.py`, `run203.py`, `run203.sh`, `report203.py`;
+  `scratch/fuzz203.py`, `fuzz203b.py`, `audit203.py`, `pair_y0191.py`; `logs/`.
