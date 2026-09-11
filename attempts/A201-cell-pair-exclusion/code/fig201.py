@@ -39,6 +39,8 @@ def overlay(cert, body, ox, oy, S):
     excl_by = {}
     for r in pe.get("rounds", []):
         for e in r.get("excl", []):
+            if "a" not in e:                                   # a COVER refutation has no pair
+                continue
             excl_by[(str(e["a"]), str(e["b"]))] = e
             excl_by[(str(e["b"]), str(e["a"]))] = e
     n = 0
@@ -75,8 +77,9 @@ def side(cert, body, x, y):
     lines.append(("it is infeasible or its cover is VERIFIED pair by pair.  'cell-pair mutual exclusion' is the PI's reading of 2026-09-10.  Undecided cells: grey stipple, never green.", 8, "#333", False))
     cs = [st for st in (cert.get("steps") or []) if st["step"] == "count"]
     if cs:
-        lines.append(("count covers refuted: %s; last cover verified pair by pair: %s" % (
-            sum(int(st.get("refutations", 0)) for st in cs), cs[-1].get("cover_verified")), 8, "#000", True))
+        lines.append(("count covers refuted: %s pairwise + %s by the joint clip; last cover verified pair by pair: %s; joint clip alive: %s" % (
+            sum(int(st.get("refutations", 0)) for st in cs), sum(int(st.get("joint_refutations", 0) or 0) for st in cs),
+            cs[-1].get("cover_verified"), cs[-1].get("cover_joint_ok")), 8, "#000", True))
     steps = cert.get("steps") or []
     lines.append(("STEPS (s): " + " > ".join("%s%s %.1f" % (st["step"], ("[" + str(st.get("label", "")) + "]") if st.get("label") else "", st.get("seconds", 0)) for st in steps), 7.5, "#333", False))
     lines.append(("whole run %.0f s, %d exact tests, %d round(s); lam %s; window pending %s" % (float(cert.get("seconds") or 0), len(cert.get("tests") or []), len(cert.get("rounds") or []), cert.get("lam"), cert.get("window_pending")), 7.5, "#555", False))
@@ -99,12 +102,16 @@ def side(cert, body, x, y):
     excl = [e for r in (cert.get("pair_excl") or {}).get("rounds", []) for e in r.get("excl", [])]
     if excl:
         lines.append(("all exclusions found (%d), by rule:" % len(excl), 8, "#000", True))
-        for rule in ("EXACT", "CN", "A1"):
+        for rule in ("COVER", "EXACT", "CN", "A1"):
             es = [e for e in excl if e["rule"] == rule]
             for e in es[:8]:
-                lines.append(("   %s  %s | %s  %s" % (rule, e["a"], e["b"], (e.get("why") or "")[:70]), 6.5, RULECOL[rule], False))
+                if rule == "COVER":
+                    lines.append(("   COVER (joint clip of a pairwise-verified cover): dead row %s; sub-cover %s; %s" % (
+                        e.get("dead"), e.get("subcover") or "whole cover", (e.get("why") or "")[:60]), 6.5, "#880e4f", False))
+                else:
+                    lines.append(("   %s  %s | %s  %s" % (rule, e["a"], e["b"], (e.get("why") or "")[:70]), 6.5, RULECOL[rule], False))
             if len(es) > 8:
-                lines.append(("   ... %d more %s exclusions in the certificate" % (len(es) - 8, rule), 6.5, RULECOL[rule], False))
+                lines.append(("   ... %d more %s exclusions in the certificate" % (len(es) - 8, rule), 6.5, RULECOL.get(rule, "#880e4f"), False))
     if cert.get("decisive_rules"):
         lines.append(("DECISIVE RULES of the kill: %s" % cert["decisive_rules"], 9, "#c62828", True))
     yy = y
@@ -151,7 +158,8 @@ def render_page(nid):
     certs.sort(key=lambda c: {"g1": 0, "window": 0, "zero": 1}.get(c.get("pad"), 2))
     os.makedirs(OUTD, exist_ok=True)
     p = os.path.join(OUTD, "pairexcl201_%s.svg" % nid)
-    open(p, "w", encoding="utf-8").write(page_svg(nid, certs))
+    doc = page_svg(nid, certs)                                 # built BEFORE the file is opened: a failure leaves the old page
+    open(p, "w", encoding="utf-8").write(doc)
     import xml.dom.minidom
     xml.dom.minidom.parse(p)
     return p
