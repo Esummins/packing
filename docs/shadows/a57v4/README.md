@@ -54,7 +54,7 @@ A **disjoint pair** is two free meeters that miss each other, so on those two ce
 
 | node | level | s\* of panel N | family | green area | green+undec. | disk bound n\_max (budget) | narrowest pocket | pockets < 1 | lane tags (hot) | tightest guard rhs | leaves run |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| [`k5_11_interior_Y1104`](k5_11_interior_Y1104.svg) | 1 | 3.902674 | S10 | 0.427 | 1.124 | **9** (5) | `H->wall x=s` 0.8022 | 4 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
+| [`k5_11_interior_Y1104`](killed/k5_11_interior_Y1104.svg) | 1 | 3.902674 | S10 | 0.427 | 1.124 | **9** (5) | `H->wall x=s` 0.8022 | 4 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y0672`](k5_11_interior_Y0672.svg) | 1 | 4.000261 | S53 | 0.143 | 1.087 | **10** (5) | `P1-P2` 0.8912 | 2 | `BR(0,1)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?), `TR(0,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin midline x`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_16_interior_Y0083`](killed/k5_16_interior_Y0083.svg) | 1 | 3.886746 | S02 | 1.184 | 1.747 | **10** (5) | `P1-H` 0.4385 | 5 | `BL(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.8771 (`pin core x0`) | clip, T5⁗ alive, lane near-miss, guard no kill |
 | [`k5_11_interior_Y0738`](k5_11_interior_Y0738.svg) | 1 | 3.886746 | S02 | 2.213 | 2.694 | **9** (5) | `P1-H` 0.1231 | 8 | `TL(1,0)` NEAR-MISS-OR-WORSE (LANE lb 1, M 1?) | 0.2811 (`grid v 2/8`) | clip, T5⁗ alive, lane near-miss, guard no kill |
