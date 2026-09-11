@@ -85,7 +85,9 @@ class Tree206(TB.Tree):
                     if pg.dead:
                         return
                     continue
-                return self.leaf_alive("every forced slot has two HARD-named meeters (no soft name left to split): nothing to branch on (next lever: LP on the node)")
+                soft = [c for c in N6.ns_candidates(pg)]
+                return self.leaf_alive("every forced slot has two named meeters, %s (next lever: LP on the node)" % (
+                    ("the soft names all at fraction >= %s: %s -- not split" % (N6.MAX_FRAC, [(c["role"], c["slot"], c["frac"]) for c in soft][:4])) if soft else "every name HARD (no soft name left to split)"))
             if not ch["branches"]:
                 pg.dead = "S-PAIR at %s: no rule-S / A1 compatible pair among its %d alive rows %s (Theorem FC needs two anonymous meeters; excluded %s)" % (
                     ch["slot"], len(ch["rows"]), ch["rows"], ch["excluded"])

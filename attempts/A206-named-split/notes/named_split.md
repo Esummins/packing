@@ -138,6 +138,10 @@ the Rule-NS miss hypotheses).
 | k5_16_Y0083 (g1) | R.3.1s | **DEAD** | 1 / 0 | the loaded sharp leaf dies in its own refresh cascade: FC r2 (297 s) | 297 |
 | k5_16_Y0380 (g1) | R.1.1s | **DEAD** | 5 / 2 | root 198 s; NS F2 at TL(1,0) (0.040, rows 9, 14): [meets] COUNT r2 197 s, [misses] -> NS F3 at BR(1,0) (0.30): [meets] EmptyBox r1 48 s, [misses] EmptyBox r1 30 s | 1,077 |
 | k5_16_Y0865 (g1) | R.1.3.2s | **DEAD** | 1 / 0 | the loaded sharp leaf (H, F1..F5) dies in its own refresh cascade: EmptyBox r2 (353 s) | 353 |
+| k5_16_Y0941 (g1) | R.3s | ALIVE | 8 / 3 | root 160 s; NS F1 at BR(0,1) (0.13): [misses] EmptyBox r3 247 s; [meets] -> NS F3 at BR(0,1) (0.26): [meets] EmptyBox r3 290 s, [misses] -> NS F3 at TL(1,0) (0.40, row 8): [misses] EmptyBox r2 94 s, [meets] alive after the sharp round (every name HARD) | 1,683 |
+| k5_16_Y0941 (g1) | R.4s | ALIVE | 2 / 0 | no soft pair at all (every name HARD at the loaded node): the sharp round only; the LP's input | 321 |
+| k5_11_Y0202 (g1, ext v4) | R.1.1.4s | ALIVE wall | 2 / 1 | root 702 s (H 276 pieces); NS F2 at TL(1,0) (0.049, row 14): [meets] **FC r2** 219 s; [misses] behind the 900 s wall (a quarter of the page's hour) | 922 |
+| k5_11_Y0202 (g1, ext v4) | R.1.2s | **DEAD** | 1 / 0 | the loaded sharp leaf (H 220 pieces, F1..F4) dies in its own refresh cascade: EmptyBox r2 (234 s) -- the third such leaf (Y0083, Y0865) | 234 |
 | k5_16_Y0402 (g1) | R.1.3.1s | ALIVE | 8 / 3 | root 451 s; NS F2 at BR(1,0) (0.42): [meets] -> NS F1 at BR(1,0) (0.83): [meets] -> NS H at BR(1,0) (0.9999): both FC r1 (153 / 104 s); [F1 misses] **MISS-CLIP r1** (every piece of F1 within 1/2 of the box, 0 s); [F2 misses BR(1,0)] alive after the sharp round (every name HARD) | 2,194 |
 
 ## 4. The whole trees under Rule NS (the pages whose 900 s trees were wall-cut)  [M]
@@ -149,4 +153,5 @@ PAGE (the status gallery's block 7o collects those rows only).
 | page | run | verdict | nodes / depth / NS splits | dead / alive | the kills (branch: clip r round, s) | s |
 |---|---|---|---|---|---|---|
 | k5_11_Y0672 | g1_tree | ALIVE wall | 19 / 4 / 2 | 10 / 8 | R.1 closed (BR(0,1)<-21, 22, 23 EmptyBox r2); R.2 closed (BL(1,1)<-6, 11 FC r1; <-16: TL(1,0)<-9 **NS H at TR(0,0): both EmptyBox r2**, <-14 FC r2, <-19 EmptyBox r1); R.3 open (R.3.1: TL(1,0)<-7 EmptyBox r2; <-8 NS H at TR(0,0) meets alive at the wall) | 3,718 |
+| k5_11_Y0672 | g1_tree_R.3 | ALIVE wall | 12 / 6 / 4 | 3 / 11 | under R.3.1.2 = TR(0,0)<-24, BR(0,1)<-16, TL(1,0)<-8: NS H at TR(0,0) (0.64) -> H at TL(1,0) (0.65) -> H at BR(0,1) (0.75): [misses] EmptyBox r3 418 s, [meets] depth cap; -> NS F4 at TR(0,0) (**0.0039**): [meets] EmptyBox r2 193 s; the hour spent on H's large-fraction splits (300-680 s a node): **the split is the lever only for slivers** -- MAX_FRAC 0.5 from here on | 3,636 |
 | **k5_11_Y0985** | g1_tree | **DEAD** | 8 / 2 / 0 | 6 / 0 | BR(0,1)<-16 EmptyBox r2 120 s; <-21: TL(1,0) pairs {7,9}, {7,14}, {8,9} FC r1 (270-291 s), {8,14} EmptyBox r2 364 s; <-22 FC r1 198 s -- **the page's first kill in the lab** (A205's 900 s tree was cut at 5 nodes); no split needed, the wall was | 2,121 |

@@ -23,7 +23,9 @@ import tree205b as TB
 FP, MB = P.FP, P.MB
 QUARTER = Fr(1, 4)
 EPS_IN = Fr(1, 10 ** 6)
-SOFT_ALL = True          # split every soft-named pair (the qualifying ones -- frac < 0.5 or alive rows -- first)
+SOFT_ALL = False         # True: split every soft-named pair (the qualifying ones first); False: only the qualifying ones
+MAX_FRAC = 0.5           # a pair qualifies when the role's meeting fraction of the slot is below this (the sliver); Y0672's R.3
+                         # subtree spent its hour splitting H at fractions 0.64-0.75 (3 kills, 11 undecided) -- not the lever
 
 
 def provably_meets(rect, wb):
@@ -121,7 +123,7 @@ def ns_candidates(pg):
                 continue
             t0 = time.time()
             frac = pg.role_reach(r, frozenset([p]))[0]
-            q = 0 if (frac < 0.5 or rows) else 1
+            q = 0 if frac < MAX_FRAC else 1
             out.append(dict(slot=p, role=r, frac=round(float(frac), 6), rows=rows, named=named, qualifies=(q == 0), seconds=round(time.time() - t0, 2)))
     out.sort(key=lambda d: (0 if d["qualifies"] else 1, d["frac"], -len(d["rows"]), d["slot"], d["role"]))
     if not SOFT_ALL:

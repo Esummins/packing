@@ -103,7 +103,7 @@ def run_one(doc, a, cert, log=print):
     page_doc(doc, pg)
     d = doc["runs"][key] = dict(pad=a.pad, mode=a.mode, leaf_label=(a.leaf if a.mode == "leaf" else None), source=meta.get("source"), lam=float(pg.lam),
                                 start=start, loaded=meta.get("loaded"), recorded=meta.get("recorded"), path=meta.get("path"), verdict="RUNNING", nodes=[],
-                                verifier=VERIFIER, cfg=dict(rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, wall=a.wall, nsub=4, refine=2, soft_all=N6.SOFT_ALL, only=a.only))
+                                verifier=VERIFIER, cfg=dict(rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, wall=a.wall, nsub=4, refine=2, soft_all=N6.SOFT_ALL, max_frac=N6.MAX_FRAC, only=a.only))
     log("== %s %s pad %s [%s]: start %s; H %s; forced H %s; roles %s (cells %s); %d slots; free squares %d" % (
         a.nid, a.mode, a.pad, root_label, meta.get("source"), [round(v, 3) for v in pg.roles[pg.H]], sorted(pg.forced_H),
         {k: list(v) for k, v in pg.role_slots.items()}, dict(pg.role_cell), len(pg.slots), pg.n_free))
