@@ -32,6 +32,7 @@ def clip_of(pg):
 
 
 NOROOM = False
+SHARP = True
 
 
 def cascade(pg, rounds, on_round=None, log=print):
@@ -212,6 +213,18 @@ class Tree:
         pg = self.pg
         while True:
             ch = candidates(pg)
+            if ch is None and SHARP and not getattr(pg, "sharpened", False):
+                # the SHARP leaf (A182's rule: a survivor of the 4/2 pass re-normalised at 8/3, seeded from its own fixed
+                # point -- sound, never weaker): one more cascade round with refine 3 / nsub 8 on the fully named node
+                t0 = time.time()
+                pg.refine_mb, pg.nsub_mb, pg.sharpened = 3, 8, True
+                clip, rnd = cascade(pg, 1, log=self.log)
+                pg.refine_mb, pg.nsub_mb = 2, 4
+                self.n_nodes += 1
+                self.record(label + "s", depth, dict(slot=None, kind="sharp", rows=None, named=None), "DEAD" if pg.dead else "INTERNAL", clip, rnd, t0)
+                if pg.dead:
+                    return
+                continue
             if ch is None:
                 self.nodes[-1].update(verdict="ALIVE", reason="every forced slot has two named meeters: nothing to branch on (next lever: LP on the node)")
                 self.alive_leaves += 1
@@ -249,6 +262,7 @@ class Tree:
                 continue
             T5.restore_state(pg, st)
             t0 = time.time()
+            pg.sharpened = False
             apply_branch(pg, br)
             clip, rnd = cascade(pg, self.rounds, log=self.log)
             self.n_nodes += 1
