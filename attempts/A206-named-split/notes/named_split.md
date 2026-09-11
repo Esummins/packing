@@ -143,6 +143,8 @@ the Rule-NS miss hypotheses).
 | k5_11_Y0202 (g1, ext v4) | R.1.1.4s | ALIVE wall | 2 / 1 | root 702 s (H 276 pieces); NS F2 at TL(1,0) (0.049, row 14): [meets] **FC r2** 219 s; [misses] behind the 900 s wall (a quarter of the page's hour) | 922 |
 | k5_11_Y0202 (g1, ext v4) | R.1.2s | **DEAD** | 1 / 0 | the loaded sharp leaf (H 220 pieces, F1..F4) dies in its own refresh cascade: EmptyBox r2 (234 s) -- the third such leaf (Y0083, Y0865) | 234 |
 | k5_16_Y0881 (g1) | R.2.3s | ALIVE | 10 / 3 | root 165 s; NS F2 at TR(1,0) (0.24): [meets] -> NS H at TR(1,0) (0.57, old policy) -> NS F1 at TR(1,0) (1.0): [F1 misses] MISS-CLIP r1; three sharp leaves alive (every name HARD) | 2,332 |
+| k5_11_Y0202 (g1, ext v4) | R.1.5s | ALIVE | 2 / 0 | every name HARD at the loaded node (H, F1..F4 each hypothesised at its slots): the sharp round only (H kept 0.58, F2 0.19, F3 0.13); the LP's input | 371 |
+| k5_11_Y0202 (g1, ext v4) | R.3.1.1s | **DEAD** | 1 / 0 | the loaded sharp leaf dies in its own refresh cascade: FC r2 (266 s) -- the fourth such leaf; R.1.4s not loadable (its snapshot capped at 300 of H's 424 pieces) | 266 |
 | k5_16_Y0402 (g1) | R.1.3.1s | ALIVE | 8 / 3 | root 451 s; NS F2 at BR(1,0) (0.42): [meets] -> NS F1 at BR(1,0) (0.83): [meets] -> NS H at BR(1,0) (0.9999): both FC r1 (153 / 104 s); [F1 misses] **MISS-CLIP r1** (every piece of F1 within 1/2 of the box, 0 s); [F2 misses BR(1,0)] alive after the sharp round (every name HARD) | 2,194 |
 
 ## 4. The whole trees under Rule NS (the pages whose 900 s trees were wall-cut)  [M]

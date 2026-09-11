@@ -763,3 +763,24 @@ fully named leaves (A180's `lp180` with the roles' pieces as A191/A183's exact c
 roles to slivers), then the extended wall (3,600 s, 2 rounds a node) as the k5_11 row in a second shard, then the cost of
 the 5-role fixed point (400 s a node: bisect only the roles whose K' changed).  Resume block: `bash
 attempts/A205-clip-tree/code/run205.sh <pages>` (skips done pages), `bash code/ext205.sh <nid> <pad> <wall> <rounds> <tag>`.
+
+### A206 fold-in (2026-09-11 afternoon) — Rule NS at the clip tree's fully named leaves; what stays ALIVE and its next lever
+
+`attempts/A206-named-split` (the PI's Y0672 reading; `notes/named_split.md`): at a fully named node a SOFT name (a role not
+provably missing a slot the node does not hypothesise it at) is SPLIT into [meets] / [misses]; the sliver first.  **Retired
+at the window pad as whole trees (wall 3,600 s):** `k5_11_interior_Y0985` (2,121 s) and `k5_11_interior_Y1104` (2,401 s) —
+no split needed, A205's 900 s wall was the limit.  **A205's fully named leaves closed:** Y0672 R.2.3.1 (the PI's node, 339 s:
+F4 instantiated at cell 24, EmptyBox at round 1), Y0230 R.2.1.2s (2 splits, 2,242 s), Y0380 R.1.1s (2 splits, 1,077 s),
+Y0083 R.3.1s / Y0865 R.1.3.2s / Y0202 R.1.2s / Y0202 R.3.1.1s (die in their own refresh cascade, 234-353 s).  **What
+survives:** (i) Y0672's R.3 = TR(0,0)<-24 subtree (R.1, R.2 closed; R.3.1.2's H splits at fractions 0.64-0.75 undecided at the
+depth cap, R.3.1.3-5 and R.3.2-4 behind the wall); (ii) sharp leaves with EVERY name HARD after 1-4 splits — Y0738
+R.1.1.2s (3 leaves, 2 anonymous TR(0,0) rows), Y0402 R.1.3.1s (1), Y0941 R.3s (1) and R.4s (1, no soft name), Y0881 R.2.3s
+(3), Y0202 R.1.5s (1, no soft name) and R.1.1.4s's miss branch (its 900 s quarter-wall); (iii) the pages the queues have
+not reached (`code/queue_a.txt`: the pad-0 leaves; `code/queue_d.txt`: the whole trees of Y0202, Y0130, Y0662, Y0738 and
+the k5_16 pages).  **Next lever, named:** the LP on the HARD-named sharp leaves (A180's `lp180` with the roles' pieces as
+A191/A183's exact cores — every name is now a hypothesis, not a reach count, so the LP's cores are the roles' pieces at
+their slots), then the 5-role fixed point's cost (300-700 s a node: bisect only the roles whose K' changed, A183's parent
+seeding of the per-piece K' cache), then the whole trees at 3,600 s for the remaining k5_16 pages.  Resume block: `bash
+attempts/A206-named-split/code/queue206.sh <queue file>` (one worker per file; `run206.sh` skips cached runs; `leaf <nid> <pad>
+<leaf> [standard|extended|a206 <tag> <wall>]`, `tree <nid> <pad>[+<branch>] [wall]`), `bash scratch/auditor206.sh` (the
+auditor, one at a time within the 3-process cap).

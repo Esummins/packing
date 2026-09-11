@@ -8515,3 +8515,41 @@ halves of the answer come from opposite findings.
   fresh root table) -- six window-pad kills in 24 pages; Y0202's sound extended tree (`_w3600v4`): 24 nodes, 5 DEAD (four pair
   leaves under BL(1,1)<-8, and BL(1,1)<-13 closed by the refresh round), five fully named sharp leaves with the roles at 0.2-3 %
   of their seeds, four branches behind the wall.  10.4 CPU-h on the rows so far; the shard continues.
+
+## 2026-09-11 afternoon -- A206-named-split (Fable) -- running (queues over the pad-0 leaves and the whole trees): **Rule NS, the NAMED-OR-ANONYMOUS split at the clip tree's fully named leaves; the PI's Y0672 R.2.3.1 DEAD in 339 s (F4 instantiated at cell 24, EmptyBox at round 1 -- "there should be an F4 core, and once that tries to cascade the clip, it will probably die"); k5_11_Y0985 and k5_11_Y1104 DEAD at the window pad as whole trees (2,121 / 2,401 s); A205's fully named leaves closed on Y0230, Y0380, Y0083, Y0865 and two of Y0202's**
+
+- **The reading** (`attempts/A206-named-split`, the PI 12:20): A205's stop rule counted a role as a slot's meeter whenever it was
+  not PROVABLY missing the slot -- on Y0672's leaf R.2.3.1 H's top-right corner reaches TR(0,0)'s widened box by 0.02, so
+  TR(0,0) had "two named meeters" (H, F1) and the anonymous cell 24 the count's own witness used was never instantiated.
+  **Rule NS** (`notes/named_split.md` s.1, any n): at a node where every forced slot has two named meeters, a SOFT pair (p, r)
+  -- r in named_p but not hypothesised at p -- is split: [r meets p] names r at p (the exact reach clip at p every round, the
+  lonely clip at a corner); [r misses p] drops r's rows containing p from the option table (r is no meeter of p in the count and
+  in Theorem FC's avail: FC instantiates a cap-1 anonymous meeter or A205's rule branches on the rows) and every piece of r all
+  of whose poses meet B_p+ (MISS-CLIP: the inscribed disc of radius 1/2 about a centre within 1/2 of the closed box, on the box
+  shrunk by 1e-6).  The two branches cover r's pose; DEAD iff both DEAD.  The pair with the smallest MEETING FRACTION (r's
+  volume not provably missing p, A161 at two levels) is split first; after Y0672's R.3 subtree spent its hour on H at
+  fractions 0.64-0.75 only slivers (< 0.5) are split (`MAX_FRAC`).  A205's proviso (the table of a round with no instantiation)
+  is inherited: the split is applied only when `candidates()` returned None on a fresh table.  A node is loaded from an A205 /
+  A206 certificate's last snapshot with its pieces padded outward (a superset: sound; capped snapshots refused).
+- **Y0672 R.2.3.1** (g1, loaded; `certs/namedsplit206_k5_11_interior_Y0672.json`): the refresh cascade (282 s) leaves H's
+  TR(0,0) reach at 1.5 % of its volume; A205's bar-anon (added to A205 after its standard Y0672 run) has no cover with
+  TR(0,0)'s anonymous cap 0 and instantiates cell 24 as F4 by unit propagation; **EmptyBox(F2) at round 1, 57 s: DEAD in
+  339 s**, full-role audit 0 refutations.  In the whole tree (3,600 s) the split proper fires at the same node (H at TR(0,0),
+  fraction 0.063): **both branches DEAD by EmptyBox r2** (170 / 159 s); R.1 and R.2 closed (10 kills), R.3 = TR(0,0)<-24 open
+  after two hours (3 kills, H's large-fraction splits 300-680 s a node).
+- **A205's fully named leaves** (g1; wall 3,600 s a page): **DEAD** Y0230 R.2.1.2s (F1 at BR(0,1) fraction 0.0088: REACH;
+  then F4 at BR(1,0): both EmptyBox r3; 2,242 s), Y0380 R.1.1s (F2 at TL(1,0) 0.040: COUNT; F3 at BR(1,0): both EmptyBox r1;
+  1,077 s), and four sharp leaves that die in their own refresh cascade (Y0083 R.3.1s FC r2 297 s, Y0865 R.1.3.2s EmptyBox r2
+  353 s, Y0202 R.1.2s EmptyBox r2 234 s, Y0202 R.3.1.1s FC r2 266 s); **ALIVE** with every name HARD after 1-4 splits and
+  1-3 kills each: Y0738 R.1.1.2s (REACH, EmptyBox r3), Y0402 R.1.3.1s (FC, FC, MISS-CLIP), Y0941 R.3s (three EmptyBox),
+  Y0881 R.2.3s (MISS-CLIP), Y0202 R.1.1.4s (FC r2 on the meets branch, the miss branch behind its 900 s quarter-wall);
+  no soft name at all on Y0941 R.4s and Y0202 R.1.5s.  Every kill `[C: library clip trace]`, audited by sampling inside
+  the parent's snapshot pieces with the exact meets test (`scratch/audit206b.py`; A204's sampled meets_box was vacuous on
+  Y0230's marginal H): 0 refutations; two flags of the hull-box grid (poses at 22 / 26 deg outside the roles' 0-14 / 20-25
+  deg) resolved by restricting the grid to the box's tilt range.
+- **Whole trees under Rule NS at 3,600 s** (`queue_d.txt`, g1): **k5_11_Y0985 DEAD in 2,121 s** (BR(0,1)<-16 EmptyBox;
+  <-21: three TL(1,0) pairs FC r1, one EmptyBox r2; <-22 FC r1) and **k5_11_Y1104 DEAD in 2,401 s** (the same shape) --
+  neither needed a split: A205's 900 s wall had cut both at 4-5 nodes.  Pages
+  `docs/residue_map/campaigns/A206-namedsplit/namedsplit206_<nid>.svg` (one per page, every run's root and closed branches),
+  CURRENT.json -> A206, status gallery block (7o) collects the whole-tree kills.  18 runs, 7.7 CPU-h so far; the queues
+  continue (pad-0 leaves, then the whole trees of the remaining wall-cut pages).
