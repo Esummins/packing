@@ -47,3 +47,12 @@ k5_11_interior_Y0985 g1_tree leaf R.2.4: EmptyBox(F5) at round2: every pose of F
   role F4 (grid over its hull box in cell 14): 2294 admissible poses (slots ['TL(1,0)'], misses [])
   role F5 (grid over its hull box): 216 admissible poses (slots ['BL(1,1)'], misses [])
   pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3', 'F4', 'F5']: 0 over 400 H poses (476 partial tries)  -> 0 refutations (consistent with the kill)
+14:01:26 audit k5_11_interior_Y0985 g1_tree R.3
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_11_interior_Y0985 g1_tree leaf R.3: FC at BR(0,1): at most 1 distinct non-pin meeter(s) (H provably misses; roles ['F2']; anonymous cap 0 by A1: 0 alive cell(s))
+  parent snapshot R (round 3); H forced at ['TR(0,0)']; roles {'F1': ['TR(0,0)'], 'F2': ['BR(0,1)'], 'H': ['TR(0,0)']}; cells {'F1': -1, 'F2': 22}; misses {}
+  role H (106 pieces of the parent's snapshot): 1039 admissible poses (slots ['TR(0,0)'], misses [])
+  role F1 (97 pieces of the parent's snapshot): 877 admissible poses (slots ['TR(0,0)'], misses [])
+  role F2 (grid over its hull box in cell 22): 1841 admissible poses (slots ['BR(0,1)'], misses [])
+  REFUTED (sampled): [('H', 2.509, 2.4772, 26.2), ('F1', 3.3771, 3.3644, 90.0), ('F2', 3.2017, 1.6708, 24.0)]
+  pairwise-disjoint admissible configurations of ['H', 'F1', 'F2']: 25 over 400 H poses (394 partial tries)  -> REFUTED (investigate: the parent's pieces are a superset of the node's)
