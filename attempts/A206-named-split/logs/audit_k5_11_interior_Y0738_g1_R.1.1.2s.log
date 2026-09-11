@@ -18,3 +18,12 @@ Traceback (most recent call last):
     node = [n for n in nodes if n["label"] == a.leaf][0]
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
 IndexError: list index out of range
+13:51:33 audit k5_11_interior_Y0738 g1_R.1.1.2s R.1.1.2s.1
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_11_interior_Y0738 g1 leaf R.1.1.2s.1: F3 forced to meet ['BL(1,1)', 'BR(0,1)']: no pose survives the exact reach (container, every other K', A161 miss per piece)
+  H forced at ['BL(1,1)', 'TL(1,0)']; roles {'F1': ['TL(1,0)', 'TR(0,0)'], 'F2': ['BL(1,1)', 'BR(0,1)'], 'F3': ['BL(1,1)', 'BR(0,1)']}; cells {'F1': 14, 'F2': 11, 'F3': 18}
+  H poses admissible: 150
+  role F1: box [1.945, 2.226, 2.935, 3.377], slots ['TL(1,0)', 'TR(0,0)'], cell 14: 189 admissible poses meeting every slot
+  role F2: box [1.927, 2.226, 1.446, 1.651], slots ['BL(1,1)', 'BR(0,1)'], cell 11: 108 admissible poses meeting every slot
+  role F3: box [2.552, 2.802, 2.226, 2.616], slots ['BL(1,1)', 'BR(0,1)'], cell 18: 70 admissible poses meeting every slot
+  pairwise-disjoint admissible configurations of H + ['F1', 'F2', 'F3']: 0 (240506 partial tries)  -> 0 refutations (consistent with the kill)
