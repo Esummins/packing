@@ -8,3 +8,13 @@ Traceback (most recent call last):
     node = [n for n in nodes if n["label"] == a.leaf][0]
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
 IndexError: list index out of range
+13:52:10 audit k5_16_interior_Y0083 g1_R.3.1s R.3.1s
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y0083 g1 leaf R.3.1s: FC at TL(1,0): at most 1 distinct non-pin meeter(s) (H provably misses; roles ['F3']; anonymous cap 0 by A1: 0 alive cell(s))
+  H forced at ['BL(1,0)']; roles {'F1': ['BL(1,0)'], 'F2': ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)'], 'F3': ['TL(1,0)', 'TR(1,0)'], 'F4': ['BR(0,1)', 'TR(0,1)']}; cells {'F1': -1, 'F2': 18, 'F3': 8, 'F4': -1}
+  H poses admissible: 0
+  role F1: box [1.5, 1.536, 0.5, 0.512], slots ['BL(1,0)'], cell -1: 2 admissible poses meeting every slot
+  role F2: box [2.44, 2.444, 2.446, 2.453], slots ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)'], cell 18: 0 admissible poses meeting every slot
+  role F3: box [1.454, 1.495, 2.601, 2.802], slots ['TL(1,0)', 'TR(1,0)'], cell 8: 15 admissible poses meeting every slot
+  role F4: box [3.288, 3.377, 1.5, 1.622], slots ['BR(0,1)', 'TR(0,1)'], cell -1: 42 admissible poses meeting every slot
+  a role has NO admissible pose meeting its slots on the grid: consistent with the kill (grid-limited)
