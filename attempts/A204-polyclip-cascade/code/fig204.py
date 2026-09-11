@@ -46,7 +46,7 @@ def panel(doc, snap, body, ox, oy, S, small=False):
             body.append(text(X(r[0]) + 2, Y(r[3]) + 7, "%d" % ci, 5.5, "#888"))
     for k, p in enumerate(doc.get("slots") or []):
         col = SLOTCOL[k % len(SLOTCOL)]
-        wb = (doc.get("wbox") or {}).get(p)
+        wb = ((doc.get("wbox_pad") or {}).get(snap.get("pad")) or doc.get("wbox") or {}).get(p)
         if wb:
             body.append(rect(wb, col, 0.05, col, 1.2, "6,3"))
             if not small:

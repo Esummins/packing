@@ -14,7 +14,7 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-sys.path.insert(0, os.path.join(HERE, "..", "code"))
+sys.path.insert(0, os.path.join(HERE, "..", "code")); sys.path.insert(0, os.path.join(ROOT, "attempts", "A178-gallery-geometry", "code"))
 import poly204 as P                                             # noqa: E402
 
 S0 = 969271 / 250000
@@ -83,7 +83,15 @@ def main():
     if leaf.startswith("FC at "):                                 # an FC kill: audit the killing slot's meeter poses too
         slots.append(dict(slot=leaf[6:].split(":")[0], role="FC slot"))
     forced = sorted(set(d.get("forced_H") or []))
-    wbox = cert["wbox"]
+    wbox = (cert.get("wbox_pad") or {}).get(a.pad) or cert["wbox"]
+    if a.pad == "zero" and not (cert.get("wbox_pad") or {}).get(a.pad):        # older certs: pad 0's boxes from the corner frame
+        from classes178 import frame_to_xy                                      # noqa: E402  (A178)
+        for p in list(wbox):
+            c_, ij = p[:2], p[3:-1].split(",")
+            i, j = int(ij[0]), int(ij[1])
+            xa, ya = frame_to_xy(c_, i, j, S0); xb, yb = frame_to_xy(c_, i + 1, j + 1, S0)
+            wbox[p] = [min(xa, xb) - 1e-9, max(xa, xb) + 1e-9, min(ya, yb) - 1e-9, max(ya, yb) + 1e-9]
+        print("pad 0 boxes (lam = 1):", wbox)
     pins = [(0.5 * (v["box"][0] + v["box"][1]), 0.5 * (v["box"][2] + v["box"][3])) for k, v in d["snapshots"][0]["roles"].items() if k.startswith("P")]
     print("%s %s: %s; forced H %s; instantiations %s" % (a.nid, a.pad, d.get("leaf"), forced, [(t["slot"], t["role"]) for t in slots]))
     units = P.unit_pieces(st["H_box"], st["units"]) if st.get("units") else [(P.MB.Bin(P.MB.t_lo(st["H_box"][4]), P.MB.t_hi(st["H_box"][5])), tuple(map(float, st["H_box"][:4])))]
@@ -100,13 +108,31 @@ def main():
                     H.append((cx, cy, 2 * math.atan(t)))
     H = np.array(H)
     ok = inside(H[:, 0], H[:, 1], H[:, 2]) & pin_free(H[:, 0], H[:, 1], H[:, 2], pins)
-    H_all = H[ok]
     for p in forced:
         ok &= meets_box(H[:, 0], H[:, 1], H[:, 2], wbox[p])
     H = H[ok]
+    # a forced CORNER slot: the lonely clip on H is legitimate (Cor. FC-corner), so restrict the sample to NON-LONELY poses,
+    # witnessed independently by a PARTNER G (admissible, meeting the K0-WIDEN box (s-c, s)^2, c = 1 + w, disjoint from H)
+    import classes178 as CL
+    for p in forced:
+        c_ = p[:2]
+        if p[3:-1] != "0,0":
+            continue
+        C = 1 + 0.02551007421394
+        xa, ya = CL.frame_to_xy(c_, 0, 0, S0); xb, yb = CL.frame_to_xy(c_, C, C, S0)
+        WB = (min(xa, xb), max(xa, xb), min(ya, yb), max(ya, yb))
+        gx = np.arange(max(0.5, WB[0] - 0.71), min(S0 - 0.5, WB[1] + 0.71) + 1e-9, 0.02)
+        gy = np.arange(max(0.5, WB[2] - 0.71), min(S0 - 0.5, WB[3] + 0.71) + 1e-9, 0.02)
+        GX, GY, GT = np.meshgrid(gx, gy, np.radians(np.arange(0.0, 90.0 + 1e-9, 2.0)), indexing="ij")
+        GX, GY, GT = GX.ravel(), GY.ravel(), GT.ravel()
+        okg = inside(GX, GY, GT) & meets_box(GX, GY, GT, WB) & pin_free(GX, GY, GT, pins)
+        GX, GY, GT = GX[okg], GY[okg], GT[okg]
+        keep = np.array([sat_disjoint(hx, hy, hth, GX, GY, GT).any() for (hx, hy, hth) in H])
+        print("corner %s: %d partner poses; H poses with a partner (NON-LONELY, sampled): %d of %d" % (p, len(GX), int(keep.sum()), len(H)))
+        H = H[keep]
+    H_all = H                                                   # the reach's hypothesis set = H forced + non-lonely
     cells = cert.get("cells") or []
-    print("H poses admissible over ALL alive units: %d" % len(H_all))
-    print("H poses admissible (container, pin cores, meeting %s): %d" % (forced, len(H)))
+    print("H poses admissible (container, pin cores, meeting %s, non-lonely at a forced corner): %d" % (forced, len(H)))
     for t in slots:
         p = t["slot"]
         W = wbox[p]
@@ -138,7 +164,7 @@ def main():
                 if r[0] <= x <= r[1] and r[2] <= y <= r[3]:
                     by_cell[ci] = by_cell.get(ci, 0) + 1
         rec = [tt for tt in d["tests"] if tt["test"] == "UNION" and tt["slot"] == p]
-        print("  F poses disjoint from some H pose, by cell: %s; the certificate's alive cells for %s: %s" % (by_cell, p, [tt for tt in d["snapshots"] if tt.get("forcing")][-1]["forcing"]["single"].get(p)))
+        print("  F poses disjoint from some hypothesis H pose, by cell: %s; the certificate's alive cells for %s: %s" % (by_cell, p, [tt for tt in d["snapshots"] if tt.get("forcing")][-1]["forcing"]["single"].get(p)))
 
 
 if __name__ == "__main__":

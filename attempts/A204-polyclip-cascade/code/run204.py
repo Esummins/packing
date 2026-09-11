@@ -78,6 +78,7 @@ def run_pad(doc, nid, pad, wall, cert, log=print):
     doc.setdefault("cells", [FP.rect_f(c["rect"]) for c in pg.cells])
     doc.setdefault("slots", list(pg.slots))
     doc.setdefault("wbox", {p: FP.rect_f(pg.item[p]["wb"]) for p in pg.slots})
+    doc.setdefault("wbox_pad", {})[pad] = {p: FP.rect_f(pg.item[p]["wb"]) for p in pg.slots}    # the pad's own boxes
     doc.setdefault("H_record", [round(v, 6) for v in pg.record_H])
     d = doc["pads"][pad] = dict(pad=pad, lam=float(pg.lam), start=start, verdict="RUNNING", snapshots=pg.snapshots, round_times=pg.round_times,
                                 verifier=VERIFIER)
