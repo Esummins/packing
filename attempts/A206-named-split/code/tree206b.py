@@ -15,11 +15,15 @@ class Tree206(TB.Tree):
         self.ns_splits = 0
 
     def record(self, label, depth, br, verdict, clip, rnd, t0, reason=None):
+        cb, self.on_node = self.on_node, None                       # the NS fields go in BEFORE the certificate is saved
         r = TB.Tree.record(self, label, depth, br, verdict, clip, rnd, t0, reason=reason)
+        self.on_node = cb
         r["miss"] = {k: sorted(v) for k, v in self.pg.miss.items()}
         r["miss_rep"] = list(self.pg.miss_rep)[-6:]
         if br and str(br.get("kind", "")).startswith("ns-"):
             r.update(role=br.get("role"), frac=br.get("frac"), alive_rows=br.get("alive_rows"))
+        if self.on_node:
+            self.on_node(self)
         return r
 
     def run(self):

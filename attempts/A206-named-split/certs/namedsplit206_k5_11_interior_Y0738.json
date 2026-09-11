@@ -2442,7 +2442,7 @@
      "kind": "row"
     }
    ],
-   "verdict": "RUNNING",
+   "verdict": "ALIVE",
    "nodes": [
     {
      "label": "R.1.1.2s",
@@ -99013,7 +99013,8 @@
        1,
        0.0
       ]
-     }
+     },
+     "role": "F2"
     }
    ],
    "verifier": "[C: library clip trace] A206 Rule NS on A205's clip tree: at a fully named node split a soft-named (slot, role) pair into [role meets slot] (the exact reach clip at the slot, A161) / [role misses slot] (its rows leave the option table, MISS-CLIP), A204's cascade + A205's clips at every node; DEAD iff every branch DEAD; no verifier clause",
@@ -99031,7 +99032,167 @@
    "alive_leaves": 3,
    "dead_leaves": 2,
    "ns_splits": 4,
-   "seconds": 3019.5
+   "seconds": 3019.5,
+   "n_records": 12,
+   "killing": [
+    {
+     "label": "R.1.1.2s.1",
+     "slot": "BL(1,1)",
+     "rows": null,
+     "clip": "REACH",
+     "round": 2,
+     "seconds": 158.6,
+     "kind": "ns-meets",
+     "role": "F3"
+    },
+    {
+     "label": "R.1.1.2s.2.2",
+     "slot": "BR(0,1)",
+     "rows": null,
+     "clip": "EmptyBox",
+     "round": 3,
+     "seconds": 486.8,
+     "kind": "ns-misses",
+     "role": "F2"
+    }
+   ],
+   "undecided": [
+    {
+     "label": "R.1.1.2s.2.1.1.1s",
+     "reason": "every forced slot has two HARD-named meeters (no soft name left to split): nothing to branch on (next lever: LP on the node)"
+    },
+    {
+     "label": "R.1.1.2s.2.1.1.2s",
+     "reason": "every forced slot has two HARD-named meeters (no soft name left to split): nothing to branch on (next lever: LP on the node)"
+    },
+    {
+     "label": "R.1.1.2s.2.1.2s",
+     "reason": "every forced slot has two HARD-named meeters (no soft name left to split): nothing to branch on (next lever: LP on the node)"
+    }
+   ],
+   "wall": false,
+   "window_pending": false,
+   "leaf": null,
+   "finalised": "verdict / lists computed from the node records after the last save failed (PermissionError on os.replace); tests / steps not kept",
+   "root": {
+    "verdict": "INTERNAL",
+    "clip": null,
+    "seconds": 153.5,
+    "n_rounds": 2,
+    "kept": {
+     "P0": 0.249999,
+     "P1": 0.250024,
+     "P2": 0.249999,
+     "P3": 0.250024,
+     "P4": 0.249999,
+     "H": 1.0,
+     "F1": 0.99883,
+     "F2": 0.999969,
+     "F3": 0.999868
+    },
+    "forced_H": [
+     "TL(1,0)"
+    ],
+    "role_slots": {
+     "F1": [
+      "TL(1,0)"
+     ],
+     "F2": [
+      "BL(1,1)"
+     ],
+     "F3": [
+      "BR(0,1)"
+     ]
+    },
+    "alive_cells": {
+     "BL(1,1)": [],
+     "BR(0,1)": [
+      21,
+      22
+     ],
+     "TR(0,0)": [
+      24
+     ],
+     "TL(1,0)": []
+    },
+    "branch_slot": "BL(1,1)",
+    "branch_role": "F3",
+    "branch_rows": [
+     "meets",
+     "misses"
+    ],
+    "ns_candidates": [
+     {
+      "slot": "BL(1,1)",
+      "role": "F3",
+      "frac": 0.0341,
+      "rows": [],
+      "named": [
+       "F2",
+       "F3",
+       "H"
+      ],
+      "qualifies": true,
+      "seconds": 0.0
+     },
+     {
+      "slot": "BR(0,1)",
+      "role": "F2",
+      "frac": 0.227781,
+      "rows": [
+       21,
+       22
+      ],
+      "named": [
+       "F2",
+       "F3"
+      ],
+      "qualifies": true,
+      "seconds": 0.0
+     },
+     {
+      "slot": "TR(0,0)",
+      "role": "F1",
+      "frac": 0.404033,
+      "rows": [
+       24
+      ],
+      "named": [
+       "F1",
+       "F3"
+      ],
+      "qualifies": true,
+      "seconds": 0.0
+     },
+     {
+      "slot": "TR(0,0)",
+      "role": "F3",
+      "frac": 0.898512,
+      "rows": [
+       24
+      ],
+      "named": [
+       "F1",
+       "F3"
+      ],
+      "qualifies": true,
+      "seconds": 0.0
+     },
+     {
+      "slot": "BL(1,1)",
+      "role": "H",
+      "frac": 1.0,
+      "rows": [],
+      "named": [
+       "F2",
+       "F3",
+       "H"
+      ],
+      "qualifies": false,
+      "seconds": 0.0
+     }
+    ]
+   }
   }
  },
  "cls": "k5_11",

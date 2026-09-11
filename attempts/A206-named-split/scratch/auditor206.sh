@@ -6,13 +6,13 @@ ATT=attempts/A206-named-split
 export PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 mine() { powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter 'Name=\"python.exe\"' | Where-Object { \$_.CommandLine -match 'run206.py|audit206.py' } | Measure-Object | Select-Object -ExpandProperty Count" | tr -d '\r '; }
 while true; do
-  python $ATT/scratch/audit_queue.py | while read -r NID KEY LEAF; do
+  python $ATT/scratch/audit_queue.py | tr -d '' | while read -r NID KEY LEAF; do
     [ -z "$NID" ] && continue
     while [ "$(mine)" -ge 3 ]; do sleep 60; done
     LOG=$ATT/logs/audit_${NID}_${KEY}.log
     echo "$(date +%H:%M:%S) audit $NID $KEY $LEAF" | tee -a $LOG
-    timeout -s KILL 1500 python $ATT/scratch/audit206.py $NID $KEY $LEAF --nh 150 >> $LOG 2>&1
-    echo "$NID $KEY $LEAF" >> $ATT/scratch/audit_done.txt
+    timeout -s KILL 1500 python $ATT/scratch/audit206.py $NID $KEY $LEAF --nh 150 >> $LOG 2>&1 && echo "$NID $KEY $LEAF" >> $ATT/scratch/audit_done.txt
+    sleep 5
     git add -- $LOG $ATT/scratch/audit_done.txt 2>/dev/null; git commit -q -m "A206 audit: $NID $KEY $LEAF" -- $LOG $ATT/scratch/audit_done.txt 2>/dev/null
   done
   sleep 120

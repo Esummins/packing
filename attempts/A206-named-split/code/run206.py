@@ -43,8 +43,16 @@ def belownormal():
 def save(doc, cert):
     os.makedirs(os.path.dirname(cert), exist_ok=True)
     tmp = cert + ".tmp"
-    json.dump(doc, open(tmp, "w", encoding="utf-8"), indent=1, default=str)
-    os.replace(tmp, cert)
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(doc, f, indent=1, default=str)
+    for k in range(8):                                            # Windows: a reader (auditor, status loop) holding the file blocks the rename
+        try:
+            os.replace(tmp, cert)
+            return
+        except PermissionError:
+            time.sleep(2 + 3 * k)
+    with open(cert, "w", encoding="utf-8") as f:
+        json.dump(doc, f, indent=1, default=str)
 
 
 def draw(doc):
