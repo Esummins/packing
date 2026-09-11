@@ -13,3 +13,17 @@
    node R.1.1.2s.2.1.1.1s d4 root<-None: INTERNAL (65.5 s, 1 rounds; t=1325.9)
    node R.1.1.2s.2.1.1.2 d4 TR(0,0)<-None: INTERNAL (551.8 s, 3 rounds; t=1878.0)
    node R.1.1.2s.2.1.1.2s d4 root<-None: INTERNAL (239.1 s, 1 rounds; t=2117.2)
+   node R.1.1.2s.2.1.2 d3 TR(0,0)<-None: INTERNAL (340.0 s, 3 rounds; t=2457.3)
+   node R.1.1.2s.2.1.2s d3 root<-None: INTERNAL (74.7 s, 1 rounds; t=2532.4)
+   node R.1.1.2s.2.2 d2 BR(0,1)<-None: DEAD by EmptyBox r3 (486.8 s, 3 rounds; t=3019.5)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A206-named-split\code\run206.py", line 161, in <module>
+    run_one(doc, a, cert)
+    ~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A206-named-split\code\run206.py", line 125, in run_one
+    save(doc, cert)
+    ~~~~^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A206-named-split\code\run206.py", line 47, in save
+    os.replace(tmp, cert)
+    ~~~~~~~~~~^^^^^^^^^^^
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\esumm\\code\\packing\\attempts\\A206-named-split\\certs\\namedsplit206_k5_11_interior_Y0738.json.tmp' -> 'C:\\Users\\esumm\\code\\packing\\attempts\\A206-named-split\\certs\\namedsplit206_k5_11_interior_Y0738.json'
