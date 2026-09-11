@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-10 19:26` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-10 19:36` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -155,7 +155,7 @@ Of the 71 gallery pages the PI reviews, **52 are still ALIVE and 19 are now DEAD
 * `k5_16_interior_Y0027` (tree tag `k5_16_interior_G1`) -- direct kill record, **A190** by `guard-line clause v5 [-; tau 4.0000 < 5]`; certificate `attempts/A190-guardline-clause/certs/k5_16_interior_Y0027.json`; attributed by *prior tau matched the tree record*; 2 record(s) agree.
 * `k5_16_interior_Y0191` (tree tag `k5_16_interior_G1`) -- direct kill record, **A198** by `fastprop: EmptyBox(H) at round1 (Theorem FC + Lemma A1 cells + exact reach + chord rows)`; certificate `attempts/A198-fastprop/certs/fp198_k5_16_interior_Y0191.json`; attributed by *prior tau matched 2 trees (all)*; 2 record(s) agree.
 * `k5_16_interior_Y0275` (tree tag `k5_16_interior_G1`) -- direct kill record, **A149** by `case-measure-certificate-v1 (ordinary leaf; only the core half-side changed)`; certificate `attempts/A149-a57-reprice/certs/k5_16_interior_Y0275__exall.json`; attributed by *prior tau matched the tree record*; 3 record(s) agree.
-* `k5_16_interior_Y0839` (tree tag `k5_16_interior_G1`) -- direct kill record, **A182** by `forced-first assignment: no admissible meeter assignment at BL(1,0) (notes/assignment.md Theorem ASSIGN; 188 multibox nodes)`; certificate `attempts/A180-forced-first-assignment/results/trees/k5_16_interior_Y0839.json`; attributed by *id occurs in exactly one tree*; 1 record(s) agree.
+* `k5_16_interior_Y0839` (tree tag `k5_16_interior_G1`) -- direct kill record, **A182** by `forced-first assignment: no admissible meeter assignment at BL(1,0) (notes/assignment.md Theorem ASSIGN; 188 multibox nodes)`; certificate `attempts/A180-forced-first-assignment/results/trees/k5_16_interior_Y0839.json`; attributed by *id occurs in exactly one tree*; 2 record(s) agree.
 * `k5_16_interior_Y0842` (tree tag `k5_16_interior_G1`) -- direct kill record, **A161** by `chord-limited lane [BL(1,0)]`; certificate `attempts/A161-chord-lane/certs/cl_k5_16_interior_Y0842__BL1_0.json`; attributed by *id occurs in exactly one tree*; 4 record(s) agree.
 * `k5_16_interior_Y0941` (tree tag `k5_16_interior_G1`) -- direct kill record, **A136** by `A120 composition (YES local cert + all NO children)`; certificate `attempts/A163-s02-other-frames/certs/S02_k5_16_A163chain_BOTH_base_r0.20_h10.00_nof0_+00.00.tcert.json.gz`; attributed by *applies_to_tags (A137 fold137)*; 4 record(s) agree.
 * `k5_11_interior_Y0147` (tree tag `k5_11_interior_G1`) -- direct kill record, **A190** by `guard-line clause v5 [h=2.9078, h=2.8852; tau 4.8775 < 5]`; certificate `attempts/A190-guardline-clause/certs/k5_11_interior_Y0147.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
@@ -215,6 +215,7 @@ Of the 71 gallery pages the PI reviews, **52 are still ALIVE and 19 are now DEAD
 | `A200 quick200.jsonl` | 2 | 2 |
 | `A202 fast30.jsonl` | 8 | 8 |
 | `A203 csp203.jsonl` | 3 | 3 |
+| `A205 cliptree205.jsonl` | 1 | 1 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
