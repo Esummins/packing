@@ -94,8 +94,13 @@ def main():
             cell = cells[rc[role]] if rc.get(role, -1) >= 0 else None
             X, Y, T = A5.grid([box[0] - 0.5, box[1] + 0.5, box[2] - 0.5, box[3] + 0.5], 0.02, 2.0, cell=cell)
             m = (X >= box[0] - 1e-9) & (X <= box[1] + 1e-9) & (Y >= box[2] - 1e-9) & (Y <= box[3] + 1e-9)
+            m &= (T >= math.radians(box[4]) - 1e-9) & (T <= math.radians(box[5]) + 1e-9)          # the box's TILT range too
             X, Y, T = X[m], Y[m], T[m]
-            src = "grid over its hull box%s" % (" in cell %d" % rc[role] if cell else "")
+            for d_ in (box[4], box[5]):                                                            # and the tilt endpoints
+                Xe, Ye, _ = A5.grid([box[0] - 0.5, box[1] + 0.5, box[2] - 0.5, box[3] + 0.5], 0.02, 90.0, cell=cell)
+                me = (Xe >= box[0] - 1e-9) & (Xe <= box[1] + 1e-9) & (Ye >= box[2] - 1e-9) & (Ye <= box[3] + 1e-9)
+                X = np.concatenate([X, Xe[me]]); Y = np.concatenate([Y, Ye[me]]); T = np.concatenate([T, np.full(int(me.sum()), math.radians(d_))])
+            src = "grid over its hull box%s (tilt %s-%s)" % (" in cell %d" % rc[role] if cell else "", round(box[4], 2), round(box[5], 2))
         ok = inside(X, Y, T) & pin_free(X, Y, T, pins)
         for p in rs.get(role, []):
             ok &= meets_box(X, Y, T, wbox[p])
@@ -111,7 +116,34 @@ def main():
     if vacuous:
         print("  VACUOUS for %s (no admissible sampled pose: the role's own constraints already exclude the samples; consistent, not a refutation)" % vacuous)
         return
+    leaf = str(node.get("leaf") or "")
+    clip = node.get("clip")
+    q = leaf[6:].split(":")[0] if leaf.startswith("FC at ") else None
+    if clip in ("COUNT", "S-PAIR"):
+        print("  kill by %s (a cover / pair statement): the roles' consistency below is a NECESSARY check only (no refutation criterion)" % clip)
+    G = None
+    if q is not None:
+        GX, GY, GT = A5.grid(wbox[q], 0.03, 3.0)
+        okg = inside(GX, GY, GT) & meets_box(GX, GY, GT, wbox[q]) & pin_free(GX, GY, GT, pins)
+        G = (GX[okg], GY[okg], GT[okg])
+        print("  FC kill at %s: a refutation needs TWO distinct non-pin meeters of %s -- the roles that meet it plus anonymous squares sampled over its window (%d admissible)" % (q, q, len(G[0])))
     found, n_try = [None], [0]
+
+    def fc_refutes(conf):
+        """the configuration's roles meeting q, plus mutually disjoint anonymous meeters G disjoint from every role: >= 2 ?"""
+        need = 2 - sum(1 for (r, c) in zip(R, conf) if meets_box(np.array([c[0]]), np.array([c[1]]), np.array([c[2]]), wbox[q])[0])
+        if need <= 0:
+            return True
+        m = np.ones(len(G[0]), bool)
+        for (cx, cy, ct) in conf:
+            m &= sat_disjoint(cx, cy, ct, *G)
+        idx = np.nonzero(m)[0]
+        if need == 1:
+            return len(idx) > 0
+        for a_ in idx[:300]:
+            if sat_disjoint(G[0][a_], G[1][a_], G[2][a_], G[0][idx], G[1][idx], G[2][idx]).any():
+                return True
+        return False
 
     def rec(k, chosen):
         if k == len(R):
@@ -129,16 +161,20 @@ def main():
                 return True
         return False
 
-    n_conf = 0
+    n_conf, n_ref = 0, 0
     role0, X0, Y0, T0 = R[0]
     order = rng.permutation(len(X0))[:400]
     for i_ in order:
         if rec(1, [(X0[i_], Y0[i_], T0[i_])]):
             n_conf += 1
-            if n_conf == 1:
-                print("  REFUTED (sampled): %s" % [(r[0], round(float(c[0]), 4), round(float(c[1]), 4), round(math.degrees(float(c[2])), 1)) for r, c in zip(R, found[0])])
-    print("  pairwise-disjoint admissible configurations of %s: %d over %d H poses (%d partial tries)  %s" % (
-        [r[0] for r in R], n_conf, len(order), n_try[0], "-> REFUTED (investigate: the parent's pieces are a superset of the node's)" if n_conf else "-> 0 refutations (consistent with the kill)"))
+            ref = (clip not in ("COUNT", "S-PAIR")) and (q is None or fc_refutes(found[0]))
+            if ref:
+                n_ref += 1
+                if n_ref == 1:
+                    print("  REFUTED (sampled): %s" % [(r[0], round(float(c[0]), 4), round(float(c[1]), 4), round(math.degrees(float(c[2])), 1)) for r, c in zip(R, found[0])])
+    print("  pairwise-disjoint admissible configurations of %s: %d over %d H poses (%d partial tries); refuting: %d  %s" % (
+        [r[0] for r in R], n_conf, len(order), n_try[0], n_ref,
+        "-> REFUTED (investigate: the sampled sets are supersets of the node's pieces)" if n_ref else ("-> 0 refutations (consistent with the kill)" if q is not None or clip not in ("COUNT", "S-PAIR") else "-> necessary check only")))
 
 
 if __name__ == "__main__":
