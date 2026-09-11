@@ -996,6 +996,40 @@ def collect(table, corpus):
                   + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
         )
 
+    # (7n) A205's cliptree205 (attempts/A205-clip-tree; the PI 2026-09-10 20:35: "k5_11 Y0202 looks like it'll die if/when clip
+    #      cascades try to run on the BR01 meeters"): the CLIP TREE on A204's survivors -- branch on a forced slot's remaining
+    #      meeter rows (Theorem FC: pairs of rows when H misses the slot, rows singly when one named meeter reaches it),
+    #      instantiate the rows as roles, A204's polygon + lonely clip cascade + A203's rule-S clip at every node, the count
+    #      with the pair table and Lemma HC rows; a page dies when every branch dies (EmptyBox / S-CLIP / FC / REACH / COUNT /
+    #      NOROOM / S-PAIR).  Kills are [C: library clip trace], NO verifier clause; one row per (nid, pad); g1 pad = valid on
+    #      the window, pad 0 = s0-only.
+    seen205 = set()
+    for d in jl(A("A205-clip-tree", "results", "cliptree205.jsonl")):
+        if not d.get("nid") or str(d.get("verdict", "")) != "DEAD" or d.get("pad") not in ("g1", "zero"):
+            continue
+        key = (d["nid"], d.get("pad"))
+        if key in seen205:
+            continue
+        seen205.add(key)
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        pend = bool(d.get("window_pending")) or str(d.get("pad")) == "zero"
+        table.add_rec(
+            "A205 cliptree205.jsonl",
+            camp,
+            d["nid"],
+            True,
+            "cliptree205 clip tree [%s pad; %s nodes, depth %s]: %s%s" % (d.get("pad"), d.get("n_nodes"), d.get("max_depth"), (d.get("leaf") or "")[:160],
+                                                                        " (s0-only; WINDOW-PENDING)" if pend else ""),
+            "A205",
+            d.get("cert") or os.path.join("attempts", "A205-clip-tree", "results", "cliptree205.jsonl"),
+            fdate(A("A205-clip-tree", "results", "cliptree205.jsonl")),
+            d,
+            note=("[C: library clip trace] the clip tree: A171/A172/A173 polygon + lonely clip, A203 rule S between roles and on the rows, "
+                  "A161 exact miss, A198/A200 caps + Theorem FC + the count with the pair table (notes/clip_tree.md); no verifier clause; "
+                  + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
