@@ -9,10 +9,17 @@ import tree206 as N6
 
 
 class Tree206(TB.Tree):
-    def __init__(self, pg, rounds=3, depth_cap=6, node_cap=200, on_node=None, log=print, root_label="R"):
+    def __init__(self, pg, rounds=3, depth_cap=6, node_cap=200, on_node=None, log=print, root_label="R", only=None):
         TB.Tree.__init__(self, pg, rounds=rounds, depth_cap=depth_cap, node_cap=node_cap, on_node=on_node, log=log)
         self.root_label = root_label
         self.ns_splits = 0
+        self.only = only                # run only the branches on the path to / under this label (the others recorded as skipped)
+
+    def snap(self, pg, cap=1500):
+        return TB.Tree.snap(self, pg, cap=cap)
+
+    def on_path(self, lab):
+        return self.only is None or lab == self.only or self.only.startswith(lab + ".") or lab.startswith(self.only + ".") or lab.startswith(self.only + "u") or lab.startswith(self.only + "s")
 
     def record(self, label, depth, br, verdict, clip, rnd, t0, reason=None):
         cb, self.on_node = self.on_node, None                       # the NS fields go in BEFORE the certificate is saved
@@ -112,6 +119,9 @@ class Tree206(TB.Tree):
         st = N6.save_state(pg)
         for i, br in enumerate(branches):
             lab = "%s.%d" % (label, i + 1)
+            if not self.on_path(lab):
+                self.undecided(lab, depth + 1, br, "undecided: skipped (not on the requested path %s)" % self.only)
+                continue
             if pg.T.out_of_time() or self.n_nodes >= self.node_cap:
                 self.undecided(lab, depth + 1, br, "undecided: %s before this branch ran" % ("wall" if pg.T.out_of_time() else "node cap"))
                 continue

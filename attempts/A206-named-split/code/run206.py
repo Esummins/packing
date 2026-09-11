@@ -91,17 +91,19 @@ def run_one(doc, a, cert, log=print):
     if a.mode == "leaf":
         pg, meta = load206.load_node(a.nid, a.pad, a.leaf, T, src=a.src, tag=a.tag)
         key, root_label, start = "%s_%s" % (a.pad, a.leaf), a.leaf, meta["start"]
+        if a.src == "a206":
+            key = "%s_%s_%s" % (a.pad, a.tag, a.leaf)
     else:
         start = P.load_start(a.nid, a.pad)
         rec, cls, row = FP.load_page(a.nid)
         pg = N6.TreePage206(rec, cls, a.nid, T, pad=a.pad, start=start)
         meta = dict(source=start.get("file"), start=start)
-        key, root_label = "%s_tree" % a.pad, "R"
+        key, root_label = ("%s_tree_%s" % (a.pad, a.only)) if a.only else "%s_tree" % a.pad, "R"
     doc["cls"] = pg.cls if hasattr(pg, "cls") else doc.get("cls")
     page_doc(doc, pg)
     d = doc["runs"][key] = dict(pad=a.pad, mode=a.mode, leaf_label=(a.leaf if a.mode == "leaf" else None), source=meta.get("source"), lam=float(pg.lam),
                                 start=start, loaded=meta.get("loaded"), recorded=meta.get("recorded"), path=meta.get("path"), verdict="RUNNING", nodes=[],
-                                verifier=VERIFIER, cfg=dict(rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, wall=a.wall, nsub=4, refine=2, soft_all=N6.SOFT_ALL))
+                                verifier=VERIFIER, cfg=dict(rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, wall=a.wall, nsub=4, refine=2, soft_all=N6.SOFT_ALL, only=a.only))
     log("== %s %s pad %s [%s]: start %s; H %s; forced H %s; roles %s (cells %s); %d slots; free squares %d" % (
         a.nid, a.mode, a.pad, root_label, meta.get("source"), [round(v, 3) for v in pg.roles[pg.H]], sorted(pg.forced_H),
         {k: list(v) for k, v in pg.role_slots.items()}, dict(pg.role_cell), len(pg.slots), pg.n_free))
@@ -112,7 +114,7 @@ def run_one(doc, a, cert, log=print):
         save(doc, cert)
         draw(doc)
 
-    tree = NB.Tree206(pg, rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, on_node=on_node, log=log, root_label=root_label)
+    tree = NB.Tree206(pg, rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, on_node=on_node, log=log, root_label=root_label, only=a.only)
     out = tree.run()
     root = tree.nodes[0] if tree.nodes else {}
     out["root"] = dict(verdict=root.get("verdict"), clip=root.get("clip"), seconds=root.get("seconds"), n_rounds=root.get("n_rounds"), kept=root.get("kept"),
@@ -144,7 +146,7 @@ if __name__ == "__main__":
     ap.add_argument("nid")
     ap.add_argument("--pad", default="g1")
     ap.add_argument("--leaf", default=None)
-    ap.add_argument("--src", default="standard", choices=("standard", "extended"))
+    ap.add_argument("--src", default="standard", choices=("standard", "extended", "a206"))
     ap.add_argument("--tag", default="")
     ap.add_argument("--wall", type=float, default=3600)
     ap.add_argument("--rounds", type=int, default=3)
@@ -152,6 +154,9 @@ if __name__ == "__main__":
     ap.add_argument("--nodes", type=int, default=200)
     ap.add_argument("--force", action="store_true")
     a = ap.parse_args()
+    a.only = None
+    if "+" in a.pad:                                              # tree mode: pad "g1+R.3" = the g1 pad, only the branches under R.3
+        a.pad, a.only = a.pad.split("+", 1)
     if a.mode == "leaf" and not a.leaf:
         ap.error("leaf mode needs --leaf")
     cert = os.path.join(CERTS, "namedsplit206_%s.json" % a.nid)
@@ -161,7 +166,7 @@ if __name__ == "__main__":
             doc = json.load(open(cert, encoding="utf-8"))
         except Exception:
             doc = dict(nid=a.nid, runs={})
-    key = "%s_%s" % (a.pad, a.leaf) if a.mode == "leaf" else "%s_tree" % a.pad
+    key = ("%s_%s_%s" % (a.pad, a.tag, a.leaf) if a.src == "a206" else "%s_%s" % (a.pad, a.leaf)) if a.mode == "leaf" else (("%s_tree_%s" % (a.pad, a.only)) if a.only else "%s_tree" % a.pad)
     prev = doc["runs"].get(key)
     if prev and prev.get("verdict") in ("DEAD", "ALIVE") and not a.force:
         print("   %s: cached %s" % (key, prev["verdict"]), flush=True)

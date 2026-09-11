@@ -20,6 +20,8 @@ EPS_D = 0.001
 def cert_path(nid, src="standard", tag=""):
     if src == "extended":
         return os.path.join(CERTS205, "extended", "cliptree205_%s%s.json" % (nid, tag or "_w3600"))
+    if src == "a206":                                             # a node of an A206 run (tag = the run key, e.g. g1_tree)
+        return os.path.join(HERE, "..", "certs", "namedsplit206_%s.json" % nid)
     return os.path.join(CERTS205, "cliptree205_%s.json" % nid)
 
 
@@ -29,8 +31,8 @@ def pad_piece(p6):
     return (MB.Bin(MB.t_lo(max(0.0, d0 - EPS_D)), MB.t_hi(min(90.0, d1 + EPS_D))), rect)
 
 
-def find_node(doc, pad, leaf):
-    d = doc["pads"][pad]
+def find_node(doc, pad, leaf, src="standard", tag=""):
+    d = doc["runs"][tag] if src == "a206" else doc["pads"][pad]
     for n in d.get("nodes") or []:
         if n.get("label") == leaf:
             return d, n
@@ -41,7 +43,7 @@ def load_node(nid, pad, leaf, T, src="standard", tag=""):
     """-> (page, meta): a TreePage206 at the recorded node (before any cascade), and what was loaded."""
     f = cert_path(nid, src, tag)
     doc = json.load(open(f, encoding="utf-8"))
-    d, node = find_node(doc, pad, leaf)
+    d, node = find_node(doc, pad, leaf, src, tag)
     snap = node.get("snapshot")
     if not snap:
         raise ValueError("node %s has no snapshot" % leaf)
@@ -68,12 +70,13 @@ def load_node(nid, pad, leaf, T, src="standard", tag=""):
         for p in S:
             if pg.item[p]["is_corner"]:
                 pg.role_corner[k] = pg.item[p]["corner"]
+    pg.miss = {k: frozenset(v) for k, v in (node.get("miss") or {}).items()}       # an A206 node: its Rule-NS miss hypotheses
     meta = dict(source=os.path.relpath(f, ROOT).replace("\\", "/"), pad=pad, leaf=leaf, snapshot_round=snap.get("round"), snapshot_label=snap.get("label"),
                 recorded=dict(verdict=node.get("verdict"), reason=node.get("reason"), depth=node.get("depth"), seconds=node.get("seconds"),
                               roles=node.get("roles"), kept=node.get("kept"), alive_cells=node.get("alive_cells"), t=node.get("t")),
                 path=[dict(label=n["label"], slot=n.get("slot"), rows=n.get("rows"), kind=n.get("kind")) for n in d["nodes"]
                       if n.get("rows") and (leaf == n["label"] or leaf.startswith(n["label"] + ".") or leaf.startswith(n["label"] + "u") or leaf.startswith(n["label"] + "s"))],
                 loaded=loaded, forced_H=sorted(pg.forced_H), role_slots={k: list(v) for k, v in pg.role_slots.items()}, role_cell=dict(pg.role_cell),
-                role_corner=dict(pg.role_corner), padding=dict(rect=float(EPS_R), tilt_deg=EPS_D), start=start,
+                role_corner=dict(pg.role_corner), miss={k: sorted(v) for k, v in pg.miss.items()}, padding=dict(rect=float(EPS_R), tilt_deg=EPS_D), start=start,
                 doc=dict(cells=doc.get("cells"), slots=doc.get("slots"), wbox_pad=doc.get("wbox_pad"), wbox=doc.get("wbox"), H_record=doc.get("H_record"), cls=doc.get("cls")))
     return pg, meta
