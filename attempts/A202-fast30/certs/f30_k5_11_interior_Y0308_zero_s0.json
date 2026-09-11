@@ -42,7 +42,6 @@
    },
    "n_free_opts": 27,
    "H_reach": [
-    "BL(1,1)",
     "BR(0,1)",
     "TL(1,0)",
     "TR(0,0)"
@@ -52,12 +51,6 @@
      [
       18,
       [
-       "BL(1,1)"
-      ]
-     ],
-     [
-      18,
-      [
        "BR(0,1)"
       ]
      ],
@@ -76,27 +69,6 @@
      [
       18,
       [
-       "BL(1,1)",
-       "BR(0,1)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
        "BR(0,1)",
        "TL(1,0)"
       ]
@@ -118,39 +90,6 @@
      [
       18,
       [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
        "BR(0,1)",
        "TL(1,0)",
        "TR(0,0)"
@@ -581,12 +520,12 @@
    },
    "count_nochord": {
     "feasible": true,
-    "nodes": 79,
+    "nodes": 10,
     "capped": false
    },
    "count_chord": {
     "feasible": true,
-    "nodes": 79,
+    "nodes": 10,
     "capped": false
    },
    "witness": [
@@ -594,14 +533,13 @@
      "H",
      18,
      [
-      "BL(1,1)"
+      "BR(0,1)"
      ]
     ],
     [
      "free",
      23,
      [
-      "BR(0,1)",
       "TR(0,0)"
      ]
     ],
@@ -616,6 +554,7 @@
      "free",
      7,
      [
+      "BL(1,1)",
       "TL(1,0)"
      ]
     ],
@@ -636,10 +575,10 @@
     ]
    ],
    "pair_stats": {
-    "A1": 5,
-    "CN": 1,
-    "MK": 4,
-    "ok": 87
+    "A1": 4,
+    "CN": 0,
+    "MK": 0,
+    "ok": 34
    },
    "forced_H": [],
    "changed": false
@@ -719,20 +658,19 @@
    "H",
    18,
    [
-    "BL(1,1)"
+    "BR(0,1)"
    ],
    [
-    2.357813,
+    2.436426,
     2.49757,
     2.49757,
-    2.628592
+    2.602388
    ]
   ],
   [
    "free",
    23,
    [
-    "BR(0,1)",
     "TR(0,0)"
    ],
    [
@@ -759,6 +697,7 @@
    "free",
    7,
    [
+    "BL(1,1)",
     "TL(1,0)"
    ],
    [
@@ -805,43 +744,43 @@
  "kills": {
   "H-clip": {
    "kills": 0,
-   "ms": 44.5
+   "ms": 58.8
   },
   "P": {
    "kills": 5522,
-   "ms": 195.1
+   "ms": 219.6
   },
   "W": {
    "kills": 1323,
-   "ms": 26.6
+   "ms": 29.7
   },
   "C": {
    "kills": 1102,
-   "ms": 62.0
+   "ms": 72.2
   },
   "M": {
    "kills": 4462,
-   "ms": 1487.6
+   "ms": 1691.0
   },
   "L": {
    "kills": 14,
-   "ms": 261.8
+   "ms": 301.4
   },
   "R": {
    "kills": 1617,
-   "ms": 27.4
+   "ms": 31.0
   },
   "X": {
    "kills": 1,
-   "ms": 6701.4
+   "ms": 7684.5
   }
  },
- "seconds": 10.759,
+ "seconds": 17.491,
  "steps": [
   {
    "step": "pieces",
-   "t": 10.16,
-   "seconds": 8.951,
+   "t": 11.66,
+   "seconds": 10.242,
    "coarse": 2400,
    "base_alive": 482,
    "alive": {
@@ -853,12 +792,12 @@
   },
   {
    "step": "options",
-   "t": 10.64,
-   "seconds": 0.481,
+   "t": 17.35,
+   "seconds": 5.693,
    "round": 1,
    "n_free_opts": 27,
    "n_fixed": {
-    "H": 16
+    "H": 8
    },
    "alive_cells": {
     "BL(1,1)": 7,
@@ -869,8 +808,8 @@
   },
   {
    "step": "union",
-   "t": 10.72,
-   "seconds": 0.083,
+   "t": 17.46,
+   "seconds": 0.109,
    "caps": {
     "BL(1,1)": null,
     "BR(0,1)": null,
@@ -880,68 +819,59 @@
   },
   {
    "step": "count",
-   "t": 10.72,
-   "seconds": 0.003,
+   "t": 17.46,
+   "seconds": 0.001,
    "chords": false,
    "feasible": true,
-   "nodes": 79,
+   "nodes": 10,
    "capped": false,
    "pairs": {
-    "A1": 5,
-    "CN": 1,
-    "MK": 4,
-    "ok": 87
+    "A1": 4,
+    "CN": 0,
+    "MK": 0,
+    "ok": 34
    }
   },
   {
    "step": "count",
-   "t": 10.73,
-   "seconds": 0.003,
+   "t": 17.46,
+   "seconds": 0.0,
    "chords": true,
    "feasible": true,
-   "nodes": 79,
+   "nodes": 10,
    "capped": false,
    "pairs": {
-    "A1": 5,
-    "CN": 1,
-    "MK": 4,
-    "ok": 87
+    "A1": 4,
+    "CN": 0,
+    "MK": 0,
+    "ok": 34
    }
   },
   {
    "step": "count-barH",
-   "t": 10.73,
-   "seconds": 0.001,
-   "slot": "BL(1,1)",
+   "t": 17.47,
+   "seconds": 0.002,
+   "slot": "BR(0,1)",
+   "feasible": true,
+   "nodes": 25,
+   "capped": false
+  },
+  {
+   "step": "count-barH",
+   "t": 17.47,
+   "seconds": 0.0,
+   "slot": "TR(0,0)",
    "feasible": true,
    "nodes": 10,
    "capped": false
   },
   {
    "step": "count-barH",
-   "t": 10.73,
-   "seconds": 0.004,
-   "slot": "BR(0,1)",
-   "feasible": true,
-   "nodes": 79,
-   "capped": false
-  },
-  {
-   "step": "count-barH",
-   "t": 10.74,
-   "seconds": 0.004,
-   "slot": "TR(0,0)",
-   "feasible": true,
-   "nodes": 79,
-   "capped": false
-  },
-  {
-   "step": "count-barH",
-   "t": 10.74,
-   "seconds": 0.003,
+   "t": 17.47,
+   "seconds": 0.0,
    "slot": "TL(1,0)",
    "feasible": true,
-   "nodes": 79,
+   "nodes": 10,
    "capped": false
   }
  ],

@@ -4,9 +4,9 @@
  "pad": "g1",
  "lam": 1.004000117048806,
  "stage": 0,
- "verdict": "ALIVE",
- "leaf": null,
- "step_killed": null,
+ "verdict": "DEAD",
+ "leaf": "FC at TR(0,0): at most 1 distinct non-pin meeter(s) (H provably misses; anonymous cap 1 by A1: 1 alive cell)",
+ "step_killed": "stage0",
  "rounds": [
   {
    "round": 1,
@@ -37,10 +37,7 @@
    },
    "n_free_opts": 19,
    "H_reach": [
-    "BL(1,1)",
-    "BR(0,1)",
-    "TL(1,0)",
-    "TR(0,0)"
+    "BL(1,1)"
    ],
    "fixed": {
     "H": [
@@ -48,107 +45,6 @@
       18,
       [
        "BL(1,1)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)"
-      ]
-     ],
-     [
-      18,
-      [
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TL(1,0)",
-       "TR(0,0)"
       ]
      ],
      [
@@ -463,85 +359,10 @@
     "TR(0,0)": 1,
     "TL(1,0)": null
    },
-   "count_nochord": {
-    "feasible": true,
-    "nodes": 36,
-    "capped": false
-   },
-   "count_chord": {
-    "feasible": true,
-    "nodes": 36,
-    "capped": false
-   },
-   "witness": [
-    [
-     "H",
-     18,
-     [
-      "TR(0,0)"
-     ]
-    ],
-    [
-     "free",
-     24,
-     [
-      "TR(0,0)"
-     ]
-    ],
-    [
-     "free",
-     11,
-     [
-      "BL(1,1)",
-      "BR(0,1)"
-     ]
-    ],
-    [
-     "free",
-     21,
-     [
-      "BR(0,1)"
-     ]
-    ],
-    [
-     "free",
-     7,
-     [
-      "BL(1,1)",
-      "TL(1,0)"
-     ]
-    ],
-    [
-     "free",
-     9,
-     [
-      "TL(1,0)"
-     ]
-    ]
-   ],
-   "pair_stats": {
-    "A1": 8,
-    "CN": 0,
-    "MK": 0,
-    "ok": 60
-   },
-   "forced_H": [
-    "TR(0,0)"
-   ],
-   "H_box": [
-    2.357813,
-    2.49757,
-    2.357813,
-    2.49757,
-    41.112078,
-    53.130108
-   ],
-   "changed": false
+   "dead": "FC at TR(0,0): at most 1 distinct non-pin meeter(s) (H provably misses; anonymous cap 1 by A1: 1 alive cell)"
   }
  ],
- "forced_H": [
-  "TR(0,0)"
- ],
+ "forced_H": [],
  "roles": {
   "P0": [
    0.49,
@@ -610,88 +431,7 @@
  ],
  "role_slots": {},
  "role_cells": {},
- "witness": [
-  [
-   "H",
-   18,
-   [
-    "TR(0,0)"
-   ],
-   [
-    2.357813,
-    2.49757,
-    2.357813,
-    2.49757
-   ]
-  ],
-  [
-   "free",
-   24,
-   [
-    "TR(0,0)"
-   ],
-   [
-    2.891576,
-    3.377084,
-    2.92754,
-    3.377084
-   ]
-  ],
-  [
-   "free",
-   11,
-   [
-    "BL(1,1)",
-    "BR(0,1)"
-   ],
-   [
-    2.154323,
-    2.22625,
-    1.399089,
-    1.542943
-   ]
-  ],
-  [
-   "free",
-   21,
-   [
-    "BR(0,1)"
-   ],
-   [
-    2.801667,
-    3.377084,
-    1.471016,
-    1.650834
-   ]
-  ],
-  [
-   "free",
-   7,
-   [
-    "BL(1,1)",
-    "TL(1,0)"
-   ],
-   [
-    1.399089,
-    1.542943,
-    2.154323,
-    2.22625
-   ]
-  ],
-  [
-   "free",
-   9,
-   [
-    "TL(1,0)"
-   ],
-   [
-    1.471016,
-    1.650834,
-    2.801667,
-    3.377084
-   ]
-  ]
- ],
+ "witness": [],
  "caps": {
   "BL(1,1)": null,
   "BR(0,1)": null,
@@ -701,43 +441,43 @@
  "kills": {
   "H-clip": {
    "kills": 0,
-   "ms": 78.0
+   "ms": 51.0
   },
   "P": {
    "kills": 5280,
-   "ms": 191.5
+   "ms": 174.4
   },
   "W": {
    "kills": 2221,
-   "ms": 26.2
+   "ms": 22.6
   },
   "C": {
    "kills": 1214,
-   "ms": 61.2
+   "ms": 53.4
   },
   "M": {
    "kills": 4707,
-   "ms": 1437.6
+   "ms": 1269.4
   },
   "L": {
    "kills": 14,
-   "ms": 257.7
+   "ms": 229.5
   },
   "R": {
    "kills": 1261,
-   "ms": 25.5
+   "ms": 22.9
   },
   "X": {
    "kills": 0,
-   "ms": 6393.9
+   "ms": 5873.4
   }
  },
- "seconds": 10.878,
+ "seconds": 13.726,
  "steps": [
   {
    "step": "pieces",
-   "t": 9.82,
-   "seconds": 8.583,
+   "t": 9.13,
+   "seconds": 7.812,
    "coarse": 2400,
    "base_alive": 449,
    "alive": {
@@ -749,12 +489,12 @@
   },
   {
    "step": "options",
-   "t": 10.67,
-   "seconds": 0.848,
+   "t": 13.66,
+   "seconds": 4.527,
    "round": 1,
    "n_free_opts": 19,
    "n_fixed": {
-    "H": 16
+    "H": 2
    },
    "alive_cells": {
     "BL(1,1)": 6,
@@ -765,71 +505,14 @@
   },
   {
    "step": "union",
-   "t": 10.74,
-   "seconds": 0.07,
+   "t": 13.71,
+   "seconds": 0.048,
    "caps": {
     "BL(1,1)": null,
     "BR(0,1)": null,
     "TR(0,0)": 1,
     "TL(1,0)": null
    }
-  },
-  {
-   "step": "count",
-   "t": 10.74,
-   "seconds": 0.002,
-   "chords": false,
-   "feasible": true,
-   "nodes": 36,
-   "capped": false,
-   "pairs": {
-    "A1": 8,
-    "CN": 0,
-    "MK": 0,
-    "ok": 60
-   }
-  },
-  {
-   "step": "count",
-   "t": 10.74,
-   "seconds": 0.001,
-   "chords": true,
-   "feasible": true,
-   "nodes": 36,
-   "capped": false,
-   "pairs": {
-    "A1": 8,
-    "CN": 0,
-    "MK": 0,
-    "ok": 60
-   }
-  },
-  {
-   "step": "count-barH",
-   "t": 10.75,
-   "seconds": 0.002,
-   "slot": "BL(1,1)",
-   "feasible": true,
-   "nodes": 34,
-   "capped": false
-  },
-  {
-   "step": "count-barH",
-   "t": 10.75,
-   "seconds": 0.002,
-   "slot": "BR(0,1)",
-   "feasible": true,
-   "nodes": 34,
-   "capped": false
-  },
-  {
-   "step": "count-barH",
-   "t": 10.75,
-   "seconds": 0.002,
-   "slot": "TL(1,0)",
-   "feasible": true,
-   "nodes": 36,
-   "capped": false
   }
  ],
  "tests": [
@@ -1153,34 +836,12 @@
   },
   {
    "test": "FC-AVAIL",
-   "verdict": "H forced",
-   "avail": 2,
+   "verdict": "DEAD",
+   "avail": 1,
    "slot": "TR(0,0)",
-   "H": true,
+   "H": false,
    "roles": [],
    "cap": 1
-  },
-  {
-   "test": "H-CLIP",
-   "slots": [
-    "TR(0,0)"
-   ],
-   "box_before": [
-    2.357813,
-    2.49757,
-    2.357813,
-    2.49757,
-    41.112078,
-    53.130108
-   ],
-   "box_after": [
-    2.357813,
-    2.49757,
-    2.357813,
-    2.49757,
-    41.112078,
-    53.130108
-   ]
   }
  ],
  "subrects": [

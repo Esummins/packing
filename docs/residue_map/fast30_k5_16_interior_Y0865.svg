@@ -2,7 +2,7 @@
 <defs><pattern id="stipple" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#f2f2f2"/><circle cx="1" cy="1" r="0.7" fill="#999"/><circle cx="3" cy="3" r="0.7" fill="#999"/></pattern></defs>
 <text x="20.0" y="22.0" font-size="13" fill="#000" text-anchor="start" font-weight="bold">k5_16_interior_Y0865 -- A202 fast30: STAGE 0 (closed-form geometric kill layer, &lt;= 30 s) drawn first; STAGE 1 (A200's exact option table on the surviving cells) below it when run</text>
 <text x="20.0" y="38.0" font-size="8" fill="#444" text-anchor="start">grey stipple = sub-rects (centre cells x any tilt) where some forced slot's meeter may still sit; white + letter = dead, the letter is the rule (P pins, W walls, C CN vs H, M tilt-SAT vs H, L chord row, R reach / A161 miss); dashed colour = slot unit + its alive-union box; blue = pins; black = H (record dashed, clipped solid) with a hypothesis square at an admissible pose; yellow = the count's witness.</text>
-<text x="20.0" y="50.0" font-size="8" fill="#444" text-anchor="start">read-only from certs/f30_*.json; rendered 2026-09-10 17:05:26</text>
+<text x="20.0" y="50.0" font-size="8" fill="#444" text-anchor="start">read-only from certs/f30_*.json; rendered 2026-09-10 17:37:58</text>
 <text x="20.0" y="64.0" font-size="9" fill="#000" text-anchor="start" font-weight="bold">PANEL stage 0 / pad g1: f30_k5_16_interior_Y0865_g1_s0.json</text>
 <rect x="20.0" y="70.0" width="457.5" height="457.5" fill="#fff" fill-opacity="1.00" stroke="#000" stroke-width="1.6"/>
 <rect x="79.0" y="451.5" width="17.0" height="17.0" fill="#fff" fill-opacity="1.00" stroke="#e6e6e6" stroke-width="0.3"/>
@@ -1862,19 +1862,19 @@
 <text x="384.5" y="257.2" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:BR(0,1),TR(0,1),TR(1,0)</text>
 <rect x="274.2" y="150.2" width="8.5" height="46.7" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
 <text x="278.5" y="176.6" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TL(1,0),TR(0,1),TR(1,0)</text>
-<text x="507.0" y="82.0" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="bold">k5_16_interior_Y0865  pad g1  STAGE 0: ALIVE  (16241 ms)</text>
+<text x="507.0" y="82.0" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="bold">k5_16_interior_Y0865  pad g1  STAGE 0: ALIVE  (15323 ms)</text>
 <text x="507.0" y="97.0" font-size="7.5" fill="#333" text-anchor="start">STAGE 0 = closed-form tests only (no exact option table, no branching, no LP); verdict [C: closed-form trace] -- no veri</text>
 <text x="507.0" y="108.5" font-size="7.5" fill="#333" text-anchor="start">fier clause exists yet</text>
 <text x="507.0" y="120.0" font-size="7.5" fill="#333" text-anchor="start">pieces: 2400 = 25 cells x 16 sub-rects x 6 tilt bins; dead by the slot-independent rules: 0; rounds 1</text>
 <text x="507.0" y="131.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">rule   kills   ms     meaning</text>
-<text x="507.0" y="143.5" font-size="7.5" fill="#333" text-anchor="start">H-clip    355    79.4   H's own pieces off the pins / walls / not meeting its forced slots</text>
-<text x="507.0" y="155.0" font-size="7.5" fill="#1565c0" text-anchor="start">P        5184   233.8   pins (inscribed disc of radius 1/2 meets a pin core)</text>
-<text x="507.0" y="166.5" font-size="7.5" fill="#455a64" text-anchor="start">W        2148    31.5   walls (w_min/2)</text>
-<text x="507.0" y="178.0" font-size="7.5" fill="#c62828" text-anchor="start">C        1220    70.1   Lemma CN against every alive piece of H</text>
-<text x="507.0" y="189.5" font-size="7.5" fill="#ad1457" text-anchor="start">M        3955   992.6   relative-tilt separating-axis bound against H</text>
-<text x="507.0" y="201.0" font-size="7.5" fill="#6a1b9a" text-anchor="start">L           7   332.1   open-chord row (pins + H + piece &gt; s)</text>
-<text x="507.0" y="212.5" font-size="7.5" fill="#9e9e9e" text-anchor="start">R        2602    35.3   reach: no slot's widened box within reach (disc 1/sqrt2 / half-extent, then A161's exact miss X)</text>
-<text x="507.0" y="224.0" font-size="7.5" fill="#9e9e9e" text-anchor="start">X         732  8747.4   </text>
+<text x="507.0" y="143.5" font-size="7.5" fill="#333" text-anchor="start">H-clip    355    73.6   H's own pieces off the pins / walls / not meeting its forced slots</text>
+<text x="507.0" y="155.0" font-size="7.5" fill="#1565c0" text-anchor="start">P        5184   220.3   pins (inscribed disc of radius 1/2 meets a pin core)</text>
+<text x="507.0" y="166.5" font-size="7.5" fill="#455a64" text-anchor="start">W        2148    30.1   walls (w_min/2)</text>
+<text x="507.0" y="178.0" font-size="7.5" fill="#c62828" text-anchor="start">C        1220    67.9   Lemma CN against every alive piece of H</text>
+<text x="507.0" y="189.5" font-size="7.5" fill="#ad1457" text-anchor="start">M        3955   927.0   relative-tilt separating-axis bound against H</text>
+<text x="507.0" y="201.0" font-size="7.5" fill="#6a1b9a" text-anchor="start">L           7   321.4   open-chord row (pins + H + piece &gt; s)</text>
+<text x="507.0" y="212.5" font-size="7.5" fill="#9e9e9e" text-anchor="start">R        2602    32.9   reach: no slot's widened box within reach (disc 1/sqrt2 / half-extent, then A161's exact miss X)</text>
+<text x="507.0" y="224.0" font-size="7.5" fill="#9e9e9e" text-anchor="start">X         732  8347.3   </text>
 <text x="507.0" y="235.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">slot      alive cells  cap   union diam / l-inf / chord row   why</text>
 <text x="507.0" y="247.5" font-size="7.5" fill="#e65100" text-anchor="start">BL(1,0)     2          1     0.38609 / 0.34165 / 3.1022   CN: union diameter 0.3861 &lt; 1</text>
 <text x="507.0" y="259.0" font-size="7.5" fill="#2e7d32" text-anchor="start">BR(0,1)     5          -     1.48282 / 1.15083 / 3.0   no union exclusion fires</text>
@@ -1887,8 +1887,8 @@
 <text x="507.0" y="339.5" font-size="7.5" fill="#333" text-anchor="start">assignment count (Theorem COUNT, pair table A1/CN/MK): no chords True (78 nodes); with chords True (78 nodes); free opti</text>
 <text x="507.0" y="351.0" font-size="7.5" fill="#333" text-anchor="start">ons 78; pairs {'A1': 6, 'CN': 4, 'MK': 4, 'ok': 188}</text>
 <text x="507.0" y="362.5" font-size="7.5" fill="#6d4c00" text-anchor="start">witness of the count (yellow): a cell per square with the slots it would serve -- a counting witness, not a packing</text>
-<text x="507.0" y="374.0" font-size="7" fill="#555" text-anchor="start">steps: pieces 10667ms &gt; options 4016ms &gt; union 110ms &gt; count 5ms &gt; count 3ms &gt; count-barH 4ms &gt; count-barH 4ms</text>
-<text x="507.0" y="385.0" font-size="7" fill="#555" text-anchor="start">window pending: False;  lam 1.004000117048806;  rendered 2026-09-10 17:05:26</text>
+<text x="507.0" y="374.0" font-size="7" fill="#555" text-anchor="start">steps: pieces 10157ms &gt; options 3708ms &gt; union 109ms &gt; count 6ms &gt; count 2ms &gt; count-barH 4ms &gt; count-barH 4ms</text>
+<text x="507.0" y="385.0" font-size="7" fill="#555" text-anchor="start">window pending: False;  lam 1.004000117048806;  rendered 2026-09-10 17:37:58</text>
 <text x="1097.0" y="64.0" font-size="9" fill="#000" text-anchor="start" font-weight="bold">PANEL stage 0 / pad zero: f30_k5_16_interior_Y0865_zero_s0.json</text>
 <rect x="1097.0" y="70.0" width="457.5" height="457.5" fill="#fff" fill-opacity="1.00" stroke="#000" stroke-width="1.6"/>
 <rect x="1156.0" y="451.5" width="17.0" height="17.0" fill="#fff" fill-opacity="1.00" stroke="#e6e6e6" stroke-width="0.3"/>
@@ -3739,19 +3739,19 @@
 <text x="1461.5" y="257.2" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:BR(0,1),TR(0,1),TR(1,0)</text>
 <rect x="1359.7" y="129.0" width="21.2" height="67.9" fill="#ffe082" fill-opacity="0.35" stroke="#8d6e00" stroke-width="0.7" stroke-dasharray="3,2"/>
 <text x="1370.3" y="165.9" font-size="5.5" fill="#6d4c00" text-anchor="middle">free:TL(1,0),TR(0,1),TR(1,0)</text>
-<text x="1584.0" y="82.0" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="bold">k5_16_interior_Y0865  pad zero  STAGE 0: ALIVE  (15763 ms)</text>
+<text x="1584.0" y="82.0" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="bold">k5_16_interior_Y0865  pad zero  STAGE 0: ALIVE  (15415 ms)</text>
 <text x="1584.0" y="97.0" font-size="7.5" fill="#333" text-anchor="start">STAGE 0 = closed-form tests only (no exact option table, no branching, no LP); verdict [C: closed-form trace] -- no veri</text>
 <text x="1584.0" y="108.5" font-size="7.5" fill="#333" text-anchor="start">fier clause exists yet</text>
 <text x="1584.0" y="120.0" font-size="7.5" fill="#333" text-anchor="start">pieces: 2400 = 25 cells x 16 sub-rects x 6 tilt bins; dead by the slot-independent rules: 0; rounds 1</text>
 <text x="1584.0" y="131.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">rule   kills   ms     meaning</text>
-<text x="1584.0" y="143.5" font-size="7.5" fill="#333" text-anchor="start">H-clip    591    78.5   H's own pieces off the pins / walls / not meeting its forced slots</text>
-<text x="1584.0" y="155.0" font-size="7.5" fill="#1565c0" text-anchor="start">P        5182   233.2   pins (inscribed disc of radius 1/2 meets a pin core)</text>
-<text x="1584.0" y="166.5" font-size="7.5" fill="#455a64" text-anchor="start">W        2092    32.1   walls (w_min/2)</text>
-<text x="1584.0" y="178.0" font-size="7.5" fill="#c62828" text-anchor="start">C        1220    71.3   Lemma CN against every alive piece of H</text>
-<text x="1584.0" y="189.5" font-size="7.5" fill="#ad1457" text-anchor="start">M        3930  1010.3   relative-tilt separating-axis bound against H</text>
-<text x="1584.0" y="201.0" font-size="7.5" fill="#6a1b9a" text-anchor="start">L           7   342.8   open-chord row (pins + H + piece &gt; s)</text>
-<text x="1584.0" y="212.5" font-size="7.5" fill="#9e9e9e" text-anchor="start">R        2564    35.1   reach: no slot's widened box within reach (disc 1/sqrt2 / half-extent, then A161's exact miss X)</text>
-<text x="1584.0" y="224.0" font-size="7.5" fill="#9e9e9e" text-anchor="start">X         759  8520.5   </text>
+<text x="1584.0" y="143.5" font-size="7.5" fill="#333" text-anchor="start">H-clip    591    57.9   H's own pieces off the pins / walls / not meeting its forced slots</text>
+<text x="1584.0" y="155.0" font-size="7.5" fill="#1565c0" text-anchor="start">P        5182   218.5   pins (inscribed disc of radius 1/2 meets a pin core)</text>
+<text x="1584.0" y="166.5" font-size="7.5" fill="#455a64" text-anchor="start">W        2092    29.8   walls (w_min/2)</text>
+<text x="1584.0" y="178.0" font-size="7.5" fill="#c62828" text-anchor="start">C        1220    68.0   Lemma CN against every alive piece of H</text>
+<text x="1584.0" y="189.5" font-size="7.5" fill="#ad1457" text-anchor="start">M        3930   938.0   relative-tilt separating-axis bound against H</text>
+<text x="1584.0" y="201.0" font-size="7.5" fill="#6a1b9a" text-anchor="start">L           7   312.2   open-chord row (pins + H + piece &gt; s)</text>
+<text x="1584.0" y="212.5" font-size="7.5" fill="#9e9e9e" text-anchor="start">R        2564    33.0   reach: no slot's widened box within reach (disc 1/sqrt2 / half-extent, then A161's exact miss X)</text>
+<text x="1584.0" y="224.0" font-size="7.5" fill="#9e9e9e" text-anchor="start">X         759  8133.9   </text>
 <text x="1584.0" y="235.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">slot      alive cells  cap   union diam / l-inf / chord row   why</text>
 <text x="1584.0" y="247.5" font-size="7.5" fill="#e65100" text-anchor="start">BL(1,0)     2          1     0.38609 / 0.34165 / 3.1022   CN: union diameter 0.3861 &lt; 1</text>
 <text x="1584.0" y="259.0" font-size="7.5" fill="#2e7d32" text-anchor="start">BR(0,1)     5          -     1.47845 / 1.15083 / 3.0   no union exclusion fires</text>
@@ -3764,8 +3764,8 @@
 <text x="1584.0" y="339.5" font-size="7.5" fill="#333" text-anchor="start">assignment count (Theorem COUNT, pair table A1/CN/MK): no chords True (76 nodes); with chords True (76 nodes); free opti</text>
 <text x="1584.0" y="351.0" font-size="7.5" fill="#333" text-anchor="start">ons 78; pairs {'A1': 6, 'CN': 6, 'MK': 4, 'ok': 182}</text>
 <text x="1584.0" y="362.5" font-size="7.5" fill="#6d4c00" text-anchor="start">witness of the count (yellow): a cell per square with the slots it would serve -- a counting witness, not a packing</text>
-<text x="1584.0" y="374.0" font-size="7" fill="#555" text-anchor="start">steps: pieces 10466ms &gt; options 3761ms &gt; union 108ms &gt; count 5ms &gt; count 2ms &gt; count-barH 4ms &gt; count-barH 5ms</text>
-<text x="1584.0" y="385.0" font-size="7" fill="#555" text-anchor="start">window pending: False;  lam 1.0;  rendered 2026-09-10 17:05:26</text>
+<text x="1584.0" y="374.0" font-size="7" fill="#555" text-anchor="start">steps: pieces 9940ms &gt; options 4091ms &gt; union 99ms &gt; count 4ms &gt; count 2ms &gt; count-barH 4ms &gt; count-barH 4ms</text>
+<text x="1584.0" y="385.0" font-size="7" fill="#555" text-anchor="start">window pending: False;  lam 1.0;  rendered 2026-09-10 17:37:58</text>
 <text x="20.0" y="561.5" font-size="9" fill="#000" text-anchor="start" font-weight="bold">PANEL stage 1 / pad g1: f30_k5_16_interior_Y0865_g1_s1.json</text>
 <rect x="20.0" y="567.5" width="457.5" height="457.5" fill="#fff" fill-opacity="1.00" stroke="#000" stroke-width="1.6"/>
 <rect x="146.9" y="898.1" width="67.9" height="67.9" fill="#fff" fill-opacity="1.00" stroke="#ddd" stroke-width="0.4"/>

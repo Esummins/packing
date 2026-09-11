@@ -115,3 +115,69 @@ stage 0's alive cells]`.
   refinements differ): Y0044 then "died" by the count.  Corrected to interval overlaps; Y0044 is ALIVE at stage 0,
   as A200's exact table says.  Rule kept for readers: a stage-0 kill of a page that A200's exact tests leave alive
   is a bug until proved otherwise.
+
+## 5. The population (40 ALIVE-at-LP pages of k5_16 / k5_11, both pads; stage 0 with the final code, stage 1 as run)
+
+Stage 0 milliseconds per pad (nsub 4, nbins 6, depth 3, piece budget 12,000); stage 1 seconds per pad (A200's exact
+table on the surviving cells, 600 s wall); a DEAD cell names the stage and pad of the kill (a pad-0 kill is s0-only,
+WINDOW-PENDING).  The stage-1 certificates were produced before the last stage-0 refinement (H's exact miss per
+piece); they are sound either way (their inputs were a superset).  The A200 cross-check of k5_11_Y0275 is in
+`results/xcheck/` (the unmodified quick200 gives the same trace).
+
+| page | s0 g1 (ms) | s0 pad0 (ms) | s1 g1 (s) | s1 pad0 (s) | verdict | leaf |
+|---|---|---|---|---|---|---|
+| k5_11_Y0130 | 16478 | 15208 | 37 | 37 | ALIVE |  |
+| k5_11_Y0147 | 11382 | 10527 | 43 | 43 | ALIVE |  |
+| k5_11_Y0202 | 10663 | 10985 | 169 | 163 | ALIVE |  |
+| k5_11_Y0275 | 12661 | 12310 | 48 DEAD | - | DEAD (stage 1, g1 pad) | FC at BL(1,1): at most 1 distinct non-pin meeter(s) (H reaches; roles []; anonymous cap 0 by A1: 0 alive cell( |
+| k5_11_Y0308 | 16314 | 17491 | 41 | 43 | ALIVE |  |
+| k5_11_Y0662 | 14632 | 14625 | 86 | 82 | ALIVE |  |
+| k5_11_Y0672 | 18474 | 17588 | 41 | 38 | ALIVE |  |
+| k5_11_Y0738 | 10667 | 10148 | 199 | 191 | ALIVE |  |
+| k5_11_Y0985 | 15001 | 14624 | 91 | 87 | ALIVE |  |
+| k5_11_Y1104 | 15406 | 15777 | 101 | 101 | ALIVE |  |
+| k5_11_Y1110 | 13726 DEAD | 12853 DEAD | 66 DEAD | - | DEAD (stage 0, g1 pad) | FC at TR(0,0): at most 1 distinct non-pin meeter(s) (H provably misses; anonymous cap 1 by A1: 1 alive cell) |
+| k5_16_Y0027 | 22231 | 21779 | 77 | 75 | ALIVE |  |
+| k5_16_Y0044 | 13440 | 12892 | 168 | 174 | ALIVE |  |
+| k5_16_Y0054 | 21227 | 18924 DEAD | 178 | - | DEAD (stage 0, zero pad; s0-only WINDOW-PENDING) | FC at BL(1,0): at most 1 distinct non-pin meeter(s) (H provably misses; anonymous cap 1 by CN: union diameter  |
+| k5_16_Y0083 | 13640 | 13240 | 224 | 213 | ALIVE |  |
+| k5_16_Y0099 | 14487 | 15363 | 66 | 64 | ALIVE |  |
+| k5_16_Y0191 | 12693 | 12723 | 102 DEAD | - | DEAD (stage 1, g1 pad) | EmptyBox(H) at round1 |
+| k5_16_Y0230 | 18859 | 24516 | 202 | 196 | ALIVE |  |
+| k5_16_Y0249 | 16951 | 17094 | 64 | 65 | ALIVE |  |
+| k5_16_Y0275 | 18668 | 18521 | 65 DEAD | - | DEAD (stage 1, g1 pad) | EmptyBox(H) at round1 |
+| k5_16_Y0325 | 28405 | 26403 | 64 | 61 | ALIVE |  |
+| k5_16_Y0380 | 21919 | 20630 | 196 | 179 | ALIVE |  |
+| k5_16_Y0402 | 15987 | 14376 | 192 | 193 | ALIVE |  |
+| k5_16_Y0436 | 16990 | 16633 | 61 | 59 | ALIVE |  |
+| k5_16_Y0460 | 13227 | 13463 | 204 | 192 | ALIVE |  |
+| k5_16_Y0491 | 16453 | 16894 | 184 | 187 | ALIVE |  |
+| k5_16_Y0500 | 17939 | 19017 | 58 | 63 | ALIVE |  |
+| k5_16_Y0565 | 18995 | 18451 | 63 | 64 | ALIVE |  |
+| k5_16_Y0660 | 17635 | 16424 | 180 | 174 | ALIVE |  |
+| k5_16_Y0719 | 15876 | 18829 | 64 | 65 | ALIVE |  |
+| k5_16_Y0839 | 17460 | 15966 | 66 | 66 | ALIVE |  |
+| k5_16_Y0842 | 14730 | 14315 | 99 DEAD | - | DEAD (stage 1, g1 pad) | FC at BL(1,0): at most 1 distinct non-pin meeter(s) (H provably misses; roles []; anonymous cap 1 by CN: union |
+| k5_16_Y0865 | 15323 | 15415 | 189 | 211 | ALIVE |  |
+| k5_16_Y0881 | 18257 | 19057 | 80 | 73 | ALIVE |  |
+| k5_16_Y0941 | 10813 | 11528 | 294 | 281 | ALIVE |  |
+| k5_16_Y0991 | 18599 | 18824 | 181 | 171 | ALIVE |  |
+| k5_16_Y1022 | 19099 | 18662 | 254 | 244 | ALIVE |  |
+| k5_16_Y1056 | 12081 | 11515 | 122 | 128 | ALIVE |  |
+| k5_16_Y1110 | 15891 | 16054 | 103 | 109 | ALIVE |  |
+| k5_16_Y1117 | 16500 | 15680 | 94 | 99 | ALIVE |  |
+
+pages 40, dead 6
+k5_16_interior_Y0044 g1 13440 ms H-clip:18/95ms P:4634/199ms W:1337/26ms C:1074/62ms M:2760/841ms L:7/295ms R:3273/30ms X:1308/7325ms caps {'BL(1,0)': 1, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None} forced ['BL(1,0)']
+k5_16_interior_Y0044 zero 12892 ms H-clip:71/56ms P:4596/190ms W:1305/25ms C:1064/55ms M:2724/800ms L:7/283ms R:3247/28ms X:1298/7013ms caps {'BL(1,0)': 1, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None} forced ['BL(1,0)']
+k5_16_interior_Y0054 g1 21227 ms H-clip:4093/73ms P:6534/538ms W:3417/69ms C:10608/130ms M:10579/2042ms L:7/474ms R:2709/56ms X:805/15255ms caps {'BL(1,0)': 1, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None} forced ['BL(1,0)']
+k5_16_interior_Y0054 zero 18924 ms H-clip:0/38ms P:6494/348ms W:3379/47ms C:1274/91ms M:5919/1827ms L:7/393ms R:2620/53ms X:792/14147ms caps {'BL(1,0)': 1, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None} forced []
+k5_16_interior_Y0491 g1 16453 ms H-clip:0/38ms P:5534/215ms W:1537/28ms C:1098/64ms M:4048/1255ms L:7/292ms R:3299/31ms X:803/7136ms caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None} forced []
+k5_16_interior_Y0491 zero 16894 ms H-clip:0/44ms P:5522/223ms W:1505/30ms C:1098/67ms M:4027/1334ms L:7/294ms R:3264/32ms X:816/7455ms caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None} forced []
+k5_11_interior_Y1110 g1 13726 ms H-clip:0/51ms P:5280/174ms W:2221/23ms C:1214/53ms M:4707/1269ms L:14/230ms R:1261/23ms X:0/5873ms caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': 1, 'TL(1,0)': None} forced []
+k5_11_interior_Y1110 zero 12853 ms H-clip:0/44ms P:5268/169ms W:2217/23ms C:1214/54ms M:4684/1194ms L:14/224ms R:1268/23ms X:0/5522ms caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': 1, 'TL(1,0)': None} forced []
+
+
+Per-rule kills / ms on the PI's three pages and on the stage-0 kill (g1 pad, from the certificates): see the last
+lines of `python code/report202.py`; e.g. Y0044 g1 13.4 s = P 4,634 / 199 ms, W 1,337 / 26 ms, C 1,074 / 62 ms,
+M 2,760 / 841 ms, L 7 / 295 ms, R 3,273 / 30 ms, X 1,308 / 7,325 ms (+ options 2.3 s, unions 0.1 s, count 0.03 s).

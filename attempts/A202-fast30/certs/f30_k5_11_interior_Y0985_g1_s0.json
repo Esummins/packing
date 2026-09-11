@@ -42,7 +42,6 @@
    },
    "n_free_opts": 27,
    "H_reach": [
-    "BL(1,1)",
     "BR(0,1)",
     "TL(1,0)",
     "TR(0,0)"
@@ -52,12 +51,6 @@
      [
       18,
       [
-       "BL(1,1)"
-      ]
-     ],
-     [
-      18,
-      [
        "BR(0,1)"
       ]
      ],
@@ -76,34 +69,6 @@
      [
       18,
       [
-       "BL(1,1)",
-       "BR(0,1)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
        "BR(0,1)",
        "TR(0,0)"
       ]
@@ -111,47 +76,6 @@
      [
       18,
       [
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TL(1,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BR(0,1)",
-       "TL(1,0)",
-       "TR(0,0)"
-      ]
-     ],
-     [
-      18,
-      [
-       "BL(1,1)",
-       "BR(0,1)",
        "TL(1,0)",
        "TR(0,0)"
       ]
@@ -581,12 +505,12 @@
    },
    "count_nochord": {
     "feasible": true,
-    "nodes": 95,
+    "nodes": 67,
     "capped": false
    },
    "count_chord": {
     "feasible": true,
-    "nodes": 95,
+    "nodes": 67,
     "capped": false
    },
    "witness": [
@@ -594,7 +518,7 @@
      "H",
      18,
      [
-      "BL(1,1)"
+      "BR(0,1)"
      ]
     ],
     [
@@ -621,25 +545,25 @@
     ],
     [
      "free",
-     21,
+     8,
      [
-      "BR(0,1)"
+      "BL(1,1)",
+      "TL(1,0)"
      ]
     ],
     [
      "free",
      7,
      [
-      "BL(1,1)",
-      "TL(1,0)"
+      "BL(1,1)"
      ]
     ]
    ],
    "pair_stats": {
-    "A1": 6,
-    "CN": 1,
+    "A1": 34,
+    "CN": 2,
     "MK": 0,
-    "ok": 97
+    "ok": 130
    },
    "forced_H": [],
    "changed": false
@@ -719,13 +643,13 @@
    "H",
    18,
    [
-    "BL(1,1)"
+    "BR(0,1)"
    ],
    [
     2.49757,
     2.637327,
     2.357813,
-    2.49757
+    2.471366
    ]
   ],
   [
@@ -770,28 +694,28 @@
   ],
   [
    "free",
-   21,
+   8,
    [
-    "BR(0,1)"
+    "BL(1,1)",
+    "TL(1,0)"
    ],
    [
-    2.801667,
-    3.377084,
-    1.471016,
-    1.650834
+    1.183307,
+    1.650834,
+    2.22625,
+    2.72974
    ]
   ],
   [
    "free",
    7,
    [
-    "BL(1,1)",
-    "TL(1,0)"
+    "BL(1,1)"
    ],
    [
     1.399089,
     1.650834,
-    2.154323,
+    1.650834,
     2.22625
    ]
   ]
@@ -805,43 +729,43 @@
  "kills": {
   "H-clip": {
    "kills": 0,
-   "ms": 41.7
+   "ms": 38.9
   },
   "P": {
    "kills": 5528,
-   "ms": 184.9
+   "ms": 179.8
   },
   "W": {
    "kills": 1279,
-   "ms": 25.2
+   "ms": 24.1
   },
   "C": {
    "kills": 1051,
-   "ms": 55.4
+   "ms": 59.9
   },
   "M": {
    "kills": 4194,
-   "ms": 1301.2
+   "ms": 1248.3
   },
   "L": {
    "kills": 14,
-   "ms": 230.4
+   "ms": 262.1
   },
   "R": {
    "kills": 1537,
-   "ms": 25.7
+   "ms": 25.4
   },
   "X": {
    "kills": 9,
-   "ms": 6431.1
+   "ms": 6382.2
   }
  },
- "seconds": 10.271,
+ "seconds": 15.001,
  "steps": [
   {
    "step": "pieces",
-   "t": 9.52,
-   "seconds": 8.435,
+   "t": 9.61,
+   "seconds": 8.357,
    "coarse": 2400,
    "base_alive": 480,
    "alive": {
@@ -853,12 +777,12 @@
   },
   {
    "step": "options",
-   "t": 10.14,
-   "seconds": 0.621,
+   "t": 14.86,
+   "seconds": 5.256,
    "round": 1,
    "n_free_opts": 27,
    "n_fixed": {
-    "H": 16
+    "H": 6
    },
    "alive_cells": {
     "BL(1,1)": 7,
@@ -869,8 +793,8 @@
   },
   {
    "step": "union",
-   "t": 10.22,
-   "seconds": 0.073,
+   "t": 14.94,
+   "seconds": 0.077,
    "caps": {
     "BL(1,1)": null,
     "BR(0,1)": null,
@@ -880,68 +804,59 @@
   },
   {
    "step": "count",
-   "t": 10.22,
-   "seconds": 0.004,
+   "t": 14.95,
+   "seconds": 0.007,
    "chords": false,
    "feasible": true,
-   "nodes": 95,
+   "nodes": 67,
    "capped": false,
    "pairs": {
-    "A1": 6,
-    "CN": 1,
+    "A1": 34,
+    "CN": 2,
     "MK": 0,
-    "ok": 97
+    "ok": 130
    }
   },
   {
    "step": "count",
-   "t": 10.22,
+   "t": 14.95,
    "seconds": 0.004,
    "chords": true,
    "feasible": true,
-   "nodes": 95,
+   "nodes": 67,
    "capped": false,
    "pairs": {
-    "A1": 6,
-    "CN": 1,
+    "A1": 34,
+    "CN": 2,
     "MK": 0,
-    "ok": 97
+    "ok": 130
    }
   },
   {
    "step": "count-barH",
-   "t": 10.23,
-   "seconds": 0.006,
-   "slot": "BL(1,1)",
+   "t": 14.97,
+   "seconds": 0.016,
+   "slot": "BR(0,1)",
+   "feasible": true,
+   "nodes": 162,
+   "capped": false
+  },
+  {
+   "step": "count-barH",
+   "t": 14.97,
+   "seconds": 0.005,
+   "slot": "TR(0,0)",
    "feasible": true,
    "nodes": 67,
    "capped": false
   },
   {
    "step": "count-barH",
-   "t": 10.23,
-   "seconds": 0.003,
-   "slot": "BR(0,1)",
-   "feasible": true,
-   "nodes": 95,
-   "capped": false
-  },
-  {
-   "step": "count-barH",
-   "t": 10.24,
-   "seconds": 0.005,
-   "slot": "TR(0,0)",
-   "feasible": true,
-   "nodes": 95,
-   "capped": false
-  },
-  {
-   "step": "count-barH",
-   "t": 10.24,
-   "seconds": 0.004,
+   "t": 14.98,
+   "seconds": 0.006,
    "slot": "TL(1,0)",
    "feasible": true,
-   "nodes": 95,
+   "nodes": 67,
    "capped": false
   }
  ],
