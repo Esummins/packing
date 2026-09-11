@@ -170,8 +170,13 @@ Every branch the wall let run on the k5_11 pages dies by FC at the NEXT slot or 
 back ALIVE except the fully named nodes of Y0202.  The 900 s wall holds 3-10 nodes; at wall 3,600 s a k5_11 page's
 tree reaches depth 3 with 25-30 nodes.
 
-**Audits** (`scratch/audit205.py`, batch `scratch/audit_batch.sh`, logs `logs/audit_*.log`): Y0839 g1 R.1-R.3 and
-Y0308 g1 R.1-R.2 -- 0 refutations each (the pair leaf audited through the FC-instantiated role's slot window).
+**Audits** (`scratch/audit205.py`, batch `scratch/audit_batch.sh`, logs `logs/audit_*.log`): Y0839 g1 R.1-R.3, Y0308 g1
+R.1-R.2, Y0130 g1 / pad 0 (5 FC leaves) and **Y0027 g1 R.1-R.5 (the third kill: 88 s root, then BR(0,1)<-10 FC, <-15
+EmptyBox r2, <-21 / 22 COUNT with the pair table, <-23 FC; DEAD at g1 in 365 s)** -- 0 refutations each.  One false alarm
+caught in the audit itself, not the kill: a cap-1 leaf ("at most ONE anonymous meeter", Lemma CN) is refuted only by TWO
+admissible meeters of the slot pairwise disjoint from each other, H and the rows; the first criterion (one meeter) flagged
+Y0027 R.5 with 10 single-meeter configurations, the corrected one finds 0 two-meeter configurations on Y0027 R.5, Y0839 R.3
+and Y0308 R.1 (`logs/audit_cap1_recheck.log`).
 
 **Price.**  A node at the coarse setting: 10-60 s when it dies in the fixed point, 130-270 s when it survives two
 rounds at depth 1-2, 400-540 s at a fully named depth-3 node (the fixed point with five roles is 75 % of it), the

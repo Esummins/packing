@@ -108,7 +108,9 @@ def main():
         okg = inside(X, Y, T) & meets_box(X, Y, T, wbox[q]) & pin_free(X, Y, T, pins)
         G = (X[okg], Y[okg], T[okg])
         print("  slot %s: %d admissible meeter poses over the whole window" % (q, len(G[0])))
-    n_conf, best = 0, None
+    n_conf, n_single, best = 0, 0, None
+    cap1 = "anonymous cap 1" in leaf
+    print("  kill kind: %s" % ("cap 1 (at most one anonymous meeter of %s): a refutation needs TWO disjoint meeters" % q if cap1 else "cap 0 / pair leaf: a refutation needs one meeter of %s" % q))
     for (hx, hy, hth) in H:
         cand = [np.nonzero(sat_disjoint(hx, hy, hth, fx, fy, ft))[0] for (_, _, fx, fy, ft) in F]
         if any(len(c) == 0 for c in cand):
@@ -132,6 +134,24 @@ def main():
                 if not m.any():
                     break
             if m.any():
+                if cap1:
+                    # a cap-1 kill ("at most ONE anonymous meeter", Lemma CN / A1-U / CHORD-U) is refuted only by TWO admissible
+                    # meeters of q, pairwise disjoint and disjoint from H and the rows
+                    idx = np.nonzero(m)[0]
+                    found = None
+                    for a_ in idx[:400]:
+                        dj = sat_disjoint(G[0][a_], G[1][a_], G[2][a_], G[0][idx], G[1][idx], G[2][idx])
+                        if dj.any():
+                            found = (a_, idx[int(np.argmax(dj))])
+                            break
+                    if found is None:
+                        n_single += 1
+                        continue
+                    n_conf += 1
+                    if best is None:
+                        best = ((hx, hy, math.degrees(hth)), [(x, y, math.degrees(t)) for x, y, t in fs],
+                                [(G[0][k_], G[1][k_], math.degrees(G[2][k_])) for k_ in found])
+                    continue
                 n_conf += 1
                 i = int(np.argmax(m))
                 if best is None:
@@ -139,7 +159,8 @@ def main():
     if G is None:
         print("  admissible (H, rows) configurations: %d (the rows' hypothesis is realisable; the kill is by a later clip)" % n_conf)
     else:
-        print("  pairwise disjoint (H, rows, G-meeting-%s) configurations: %d  %s" % (q, n_conf, ("-> REFUTED, e.g. %s" % (best,)) if best else "-> 0 refutations (consistent with the kill)"))
+        print("  pairwise disjoint (H, rows, %s) configurations: %d%s  %s" % ("G, G' both meeting %s" % q if cap1 else "G-meeting-%s" % q, n_conf,
+              (" (single-G configurations %d: consistent with cap 1)" % n_single) if cap1 else "", ("-> REFUTED, e.g. %s" % (best,)) if best else "-> 0 refutations (consistent with the kill)"))
 
 
 if __name__ == "__main__":
