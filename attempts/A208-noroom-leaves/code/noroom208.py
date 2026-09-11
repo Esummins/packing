@@ -13,7 +13,9 @@ OUT = os.path.join(ROOT, "attempts", "A208-noroom-leaves", "results", "noroom208
 done = set()
 if os.path.exists(OUT):
     for l in open(OUT, encoding="utf-8"):
-        try: d = json.loads(l); done.add((d["nid"], d["run"], d["leaf"]))
+        try:
+            d = json.loads(l)
+            if d.get("verdict") != "ERROR": done.add((d["nid"], d["run"], d["leaf"]))
         except Exception: pass
 
 def leaves():
@@ -39,6 +41,7 @@ def diam(p):
 for f, nid, rk, lab, roles in leaves():
     if (nid, rk, lab) in done: continue
     t0 = time.time()
+    m = 11 - len(roles)
     try:
         # k = 10 (one free square): the full A189 budget -- the bisection alone often decides (Y0881); k = 9 (two free
         # squares): pockets are the OPTION ROWS of the next tree level, so record them cheaply (no lane cover) -- the PI
