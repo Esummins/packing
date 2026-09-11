@@ -231,6 +231,34 @@ def c2(par, tag, log, slo=S_LO, depth=44):
     return out
 
 
+def warm_from_prev(ext, idx, warm, used):
+    """the atoms / rows of every earlier basin node of the same (class, slot) join the warm start (a row is only a demand
+    mu(Q) >= 1 at a placement -- always legitimate; the near-pin rows of a smaller basin are exactly what a larger one needs)."""
+    import glob
+    seen_a = set((round(a[0], 7), round(a[1], 7)) for a in warm["atoms"])
+    seen_r = set((round(r[0], 6), round(r[1], 6), round(r[2], 7)) for r in warm["rows"])
+    atoms, rows = list(warm["atoms"]), list(warm["rows"])
+    for f in sorted(glob.glob(os.path.join(NODES, "basin207_%s_c%d_*.json" % (ext, idx)))):
+        if f.endswith("_state.json") or f.endswith(".rec.json"):
+            continue
+        try:
+            d = json.load(open(f))
+        except Exception:
+            continue
+        used.append(os.path.basename(f))
+        for a in d.get("atoms_all", []):
+            k = (round(a[0], 7), round(a[1], 7))
+            if k not in seen_a:
+                seen_a.add(k)
+                atoms.append((a[0], a[1]))
+        for r in d.get("rows_all", []):
+            k = (round(r[0], 6), round(r[1], 6), round(r[2], 7))
+            if k not in seen_r:
+                seen_r.add(k)
+                rows.append((r[0], r[1], r[2]))
+    return dict(atoms=atoms, rows=rows), used
+
+
 # ----------------------------------------------------------------------------- one (class, slot, r_c, r_t) run
 def run(ext, idx, rc, tdeg, lp_time=600, cert_time=300, cert_rounds=3, eps_geo=0.003, depth=48, slab_fallback=True, log=print):
     os.makedirs(CERTS, exist_ok=True)
@@ -252,6 +280,7 @@ def run(ext, idx, rc, tdeg, lp_time=600, cert_time=300, cert_rounds=3, eps_geo=0
                  core="[c_p +- a]^2 axis-aligned; every unit square with |c - c_p|_inf <= r_c and |tan(theta/2)| <= t_r contains it (Lemma BASIN (i))")
     rec = dict(tag=tag, ext=ext, idx=idx, r_c=float(rc), r_c_rat=str(rc), t_r=str(tr), r_t_deg=basin["r_t_deg"], a=float(a), eps_geo=eps_geo, started=time.strftime("%Y-%m-%d %H:%M:%S"))
     warm, used, n_lp_rows, n_wit = RM.build_warm(ext)
+    warm, used = warm_from_prev(ext, idx, warm, used)
     budget = 11 - len(slots)
     L("=== %s: slot %d at (%s, %s), r_c = %s, t_r = %s (%.3f deg), a = %.9f; warm %d atoms / %d rows from %s" % (tag, idx, float(kx), float(ky), float(rc), tr, basin["r_t_deg"], float(a), len(warm["atoms"]), len(warm["rows"]), used))
     t0 = time.time()
