@@ -82,7 +82,9 @@ class CoverOps:
                                      decided=True, joint=rec))
         if r["excluded"]:
             self.n["cover_excl"] = self.n.get("cover_excl", 0) + 1
-            self.forbidden.add(frozenset(keys))
+            sub = frozenset(keys[i] for i in (r.get("subcover") or range(len(keys))))
+            rec["subcover"] = [key_json(k) for k in sorted(sub)]
+            self.forbidden.add(sub)                             # any cover CONTAINING the sub-cover is refuted
             self.excl.append(rec)
         return r["excluded"], rec
 

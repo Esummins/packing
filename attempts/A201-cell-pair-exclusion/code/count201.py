@@ -20,7 +20,13 @@ def count_search(slots, free_opts, fixed_opts, n_free, lines, base_chords, s, ca
 
     def compat(who, o, chosen):
         k = PT.okey(who, o)
-        return all(table.compatible(k, PT.okey(w2, o2)) for w2, o2 in chosen)
+        if not all(table.compatible(k, PT.okey(w2, o2)) for w2, o2 in chosen):
+            return False
+        if forbidden:                                          # a refuted SUB-cover (joint clip) inside the choice: prune
+            ks = {PT.okey(w2, o2) for w2, o2 in chosen} | {k}
+            if any(k in f and f <= ks for f in forbidden):
+                return False
+        return True
 
     def rec_free(demand, used, ch, left, chosen, anon):
         nodes[0] += 1
@@ -29,8 +35,6 @@ def count_search(slots, free_opts, fixed_opts, n_free, lines, base_chords, s, ca
             return None
         need = [p for p in slots if demand[p] > 0]
         if not need:
-            if forbidden and frozenset(PT.okey(w, o) for w, o in chosen) in forbidden:
-                return None                                    # a cover the joint clip refuted: keep searching
             return list(chosen)
         if left == 0:
             return None

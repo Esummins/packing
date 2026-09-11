@@ -129,14 +129,22 @@ def cover_clip(piece_sets, s, max_iter=3, n_coarse=4, stats=None, names=None):
                 obs[i] = mb.obstacle("poly")
         changed = False
         for i in range(len(P)):
+            culprits = []                                      # the rows whose K' moved row i in THIS pass
             for j in range(len(P)):
                 if (i, j) not in near:
                     continue
                 P[i], c = _clip_side(P[i], obs[j], stats, 0)
                 changed = changed or c
+                if c:
+                    culprits.append(j)
                 if not P[i]:
-                    passes.append(dict(pass_=it + 1, dead=names[i], against=names[j]))
-                    return dict(excluded=True, dead=names[i], why="row %s has no pose clear of K'(%s) after pass %d" % (names[i], names[j], it + 1),
+                    # pass 1: every K' used is built from the rows' ORIGINAL pieces, so the death of row i is a
+                    # refutation of the SUB-cover {i} + culprits alone (any cover containing them is refuted);
+                    # a later pass used K' of clipped rows, so only the whole cover is refuted
+                    sub = sorted(set([i] + culprits)) if it == 0 else list(range(len(P)))
+                    passes.append(dict(pass_=it + 1, dead=names[i], against=names[j], subcover=[names[k] for k in sub]))
+                    return dict(excluded=True, dead=names[i], subcover=sub,
+                                why="row %s has no pose clear of K'(%s) after pass %d (sub-cover %s)" % (names[i], names[j], it + 1, [names[k] for k in sub]),
                                 passes=passes, seconds=round(time.time() - t0, 3),
                                 kept={names[k]: round(float(FP.pieces_volume(P[k]) / v0[k]), 5) for k in range(len(P))})
         kept = {names[k]: round(float(FP.pieces_volume(P[k]) / v0[k]), 5) for k in range(len(P))}
