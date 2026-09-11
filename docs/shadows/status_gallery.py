@@ -1030,6 +1030,40 @@ def collect(table, corpus):
                   + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
         )
 
+    # (7o) A206's namedsplit206 (attempts/A206-named-split; the PI 2026-09-11 12:20 on k5_11 Y0672's leaf R.2.3.1: H counted
+    #      as TR(0,0)'s second meeter by a 0.02 corner reach -- "there should be an F4 core, and once that tries to cascade
+    #      the clip, it will probably die"): Rule NS at the clip tree's fully named nodes -- a SOFT-named (slot, role) pair is
+    #      SPLIT into [role meets slot] (the exact reach clip at the slot) / [role misses slot] (its rows leave the option
+    #      table, MISS-CLIP; the anonymous meeter is instantiated by FC or branched on), A204's cascade + A205's clips at
+    #      every node; DEAD iff both branches DEAD.  A page is KILLED only by a whole-tree run (mode "tree"); a "leaf" run
+    #      closes one A205 leaf and is not a kill of the node.  Kills are [C: library clip trace], NO verifier clause.
+    seen206 = set()
+    for d in jl(A("A206-named-split", "results", "namedsplit206.jsonl")):
+        if not d.get("nid") or str(d.get("verdict", "")) != "DEAD" or d.get("mode") != "tree" or d.get("pad") not in ("g1", "zero"):
+            continue
+        key = (d["nid"], d.get("pad"))
+        if key in seen206:
+            continue
+        seen206.add(key)
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        pend = bool(d.get("window_pending")) or str(d.get("pad")) == "zero"
+        table.add_rec(
+            "A206 namedsplit206.jsonl",
+            camp,
+            d["nid"],
+            True,
+            "namedsplit206 clip tree with Rule NS [%s pad; %s nodes, depth %s, %s NS splits]: %s%s" % (
+                d.get("pad"), d.get("n_nodes"), d.get("max_depth"), d.get("ns_splits"), (d.get("leaf") or "")[:160], " (s0-only; WINDOW-PENDING)" if pend else ""),
+            "A206",
+            d.get("cert") or os.path.join("attempts", "A206-named-split", "results", "namedsplit206.jsonl"),
+            fdate(A("A206-named-split", "results", "namedsplit206.jsonl")),
+            d,
+            note=("[C: library clip trace] the clip tree with the named-or-anonymous split (notes/named_split.md): A171/A172/A173 polygon + lonely "
+                  "clip, A203 rule S, A161 exact miss / MISS-CLIP, A198/A200 caps + Theorem FC + the count with the pair table; no verifier clause; "
+                  + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(

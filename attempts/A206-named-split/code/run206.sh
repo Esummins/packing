@@ -10,7 +10,7 @@ labcount() { powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filt
 mine() { powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter 'Name=\"python.exe\"' | Where-Object { \$_.CommandLine -match 'run206.py' } | Measure-Object | Select-Object -ExpandProperty Count" | tr -d '\r '; }
 freemb() { powershell -NoProfile -Command "[int]((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1024)" | tr -d '\r '; }
 MODE=$1; NID=$2; PAD=$3
-if [ "$MODE" = "leaf" ]; then LEAF=$4; SRC=${5:-standard}; TAG=${6:-}; WALL=${7:-3600}; KEY="${PAD}_${LEAF}"; ARGS="leaf $NID --pad $PAD --leaf $LEAF --src $SRC --wall $WALL"; [ -n "$TAG" ] && ARGS="$ARGS --tag $TAG"
+if [ "$MODE" = "leaf" ]; then LEAF=$4; SRC=${5:-standard}; TAG=${6:-}; [ "$TAG" = "-" ] && TAG=; WALL=${7:-3600}; KEY="${PAD}_${LEAF}"; ARGS="leaf $NID --pad $PAD --leaf $LEAF --src $SRC --wall $WALL"; [ -n "$TAG" ] && ARGS="$ARGS --tag $TAG"
 else WALL=${4:-3600}; KEY="${PAD}_tree"; ARGS="tree $NID --pad $PAD --wall $WALL"; fi
 while [ "$(labcount)" -ge 12 ] || [ "$(mine)" -ge 3 ] || [ "$(freemb)" -lt 6144 ]; do sleep 60; done
 LOG=$ATT/logs/namedsplit206_${NID}_${KEY}.log
