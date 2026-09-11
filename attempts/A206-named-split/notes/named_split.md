@@ -84,7 +84,35 @@ loaded node (the refresh: A205's proviso) before any split.  Kept fractions in t
 This is A182's H-meets / two-free split (`attempts/A182-assignment-resume`, A180 `notes/assignment.md` s.1: the
 second meeter of p is an existing role or a new free square -- exhaustive) applied at the leaf to every soft name.
 
-## 2. Runs  [M]
+## 2. Y0672 R.2.3.1, the PI's node  [M]
+
+`certs/namedsplit206_k5_11_interior_Y0672.json` run `g1_R.2.3.1`, page `namedsplit206_k5_11_interior_Y0672.svg`,
+log `logs/namedsplit206_k5_11_interior_Y0672_g1_R.2.3.1.log`; **DEAD in 339 s** (commit fbbf86e0).
+
+* The node loaded: H 56 pieces (box [2.358, 2.389] x [2.370, 2.469], tilt 0-14.3 deg), F1 136 (cell 23, TR(0,0)),
+  F2 99 (cell 16, BL(1,1)), F3 71 (cell 9, TL(1,0)); H forced at BL(1,1), TL(1,0).
+* The refresh cascade (the root, 3 rounds, 282 s): H kept 0.29, F1 0.76, F2 0.59, F3 0.18 of the loaded node; H's
+  reach at TR(0,0) is **2 pieces, 1.5 % of its volume** (ROLE-REACH H {BR, TL, TR}: frac 0.0152) -- the sliver the
+  PI saw; TR(0,0)'s anonymous table is the single cell 24, its cap 1; named_TR = {H, F1}.
+* On the fresh table A205's **bar-anon** (the copy's `anon_needed`, added to A205 after its standard Y0672 run) fires
+  first: the count with TR(0,0)'s anonymous cap set to 0 has NO cover (1,248 nodes, 0.07 s) -- H's two TR-meeting
+  rows and F1 cannot both be TR(0,0)'s meeters beside the covers of the other three slots -- so an anonymous meeter of
+  TR(0,0) is forced and cell 24 is instantiated as **F4** (10 reach pieces, box [3.225, 3.377] x [3.328, 3.377]) by
+  unit propagation (branch R.2.3.1u, kind row-anon).  This is Rule NS's [H misses TR(0,0)] branch taken without its
+  twin: bar-anon proves the [H meets TR(0,0)] branch has no cover.
+* **R.2.3.1u DEAD by EmptyBox(F2) at round 1 (56.7 s): the mutual clip's pass 3** -- with F4's K' in the corner H is
+  pushed, and F2 (BL(1,1)'s meeter at cell 16) has no pose left against H's K' at any tilt of its sub-bins.  The PI's
+  prediction ("there should be an F4 core, and once that tries to cascade the clip, it will probably die") to the
+  letter.  `[C: library clip trace]` branch R.2.3.1u, clip EmptyBox, round 1.
+* Audit (`scratch/audit206.py`, A205's full-role sampler on the A206 certificate; `logs/audit_Y0672_g1_R.2.3.1u.log`):
+  175 admissible H poses over A203's units meeting BL(1,1) + TL(1,0), F1 183 / F2 513 / F3 90 / F4 28 admissible grid
+  poses meeting their slots in their cells -- **0 pairwise-disjoint configurations of H + F1..F4** (148 partial tries):
+  consistent with the kill.
+
+So A205's leaf R.2.3.1 (TR(0,0)<-23, BL(1,1)<-16, TL(1,0)<-9) of Y0672's g1 tree is closed; the page's other open
+branches (R.2.3.2-3, R.3) are the whole-tree run's (section 4).
+
+## 3. The fully named leaves of A205's certificates  [M]
 
 (filled per batch below; every kill `[C: library clip trace]` with branch / clip / round; certificates
 `certs/namedsplit206_<nid>.json`, pages `docs/residue_map/campaigns/A206-namedsplit/namedsplit206_<nid>.svg`,
