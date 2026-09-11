@@ -13,3 +13,11 @@ Coordinator's check with A189's NO-ROOM leaf on the leaf's role BOXES (scratch n
 RULE for A206 (and every tree after it): at every fully hard-named leaf run the NO-ROOM leaf (A189) with the pocket
 CN bound (diameter < 1 -> at most one free centre) BEFORE declaring "next lever: LP"; it is the PI's "mark all geo
 dead space" step and costs ~300 s.  Kills are [C: library clip trace + A189 Lemma 1 + Lemma CN].
+
+## Results on all three alive leaves of Y0738's R.1.1.2s tree (role BOXES, A189 defaults)
+- ...2.1.1.1s (9 roles, m=2): one pocket [3.037,3.440]x[2.920,3.440], diameter 0.66 -> lane <= 1 < 2 -> DEAD by CN.
+- ...2.1.1.2s (10 roles, m=1): DEAD by bisection alone, 17 s (every pose of a free square meets some core).
+- ...2.1.2s   (10 roles, m=1): UNDECIDED: two adjacent pockets at the right wall, [3.205,3.440]x[1.574,1.893] and
+  [3.273,3.440]x[1.437,1.609] (union diameter ~0.5 -> at most ONE centre = m, so CN does not decide); the lane returned
+  None on boxes.  Re-run with the leaf's PIECES (bigger cores, esp. F3 / F1) and the lane; this is the only leaf that
+  keeps Y0738 alive after the no-room step.
