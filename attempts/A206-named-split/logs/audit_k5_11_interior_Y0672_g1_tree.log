@@ -98,3 +98,12 @@ Traceback (most recent call last):
     node = [n for n in nodes if n["label"] == a.leaf][0]
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
 IndexError: list index out of range
+13:52:16 audit k5_11_interior_Y0672 g1_tree R.1.1
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_11_interior_Y0672 g1 leaf R.1.1: EmptyBox(F3) at round2: every pose of F3 is outside the container, lonely, or meets another role's K' at every tilt of its sub-bin (A171 pair leaf; {'reason': '
+  H forced at ['BL(1,1)']; roles {'F1': ['TR(0,0)'], 'F2': ['BR(0,1)'], 'F3': ['BL(1,1)']}; cells {'F1': 19, 'F2': 21, 'F3': -1}
+  H poses admissible: 150
+  role F1: box [2.334, 2.802, 3.35, 3.377], slots ['TR(0,0)'], cell 19: 30 admissible poses meeting every slot
+  role F2: box [3.316, 3.377, 1.5, 1.651], slots ['BR(0,1)'], cell 21: 28 admissible poses meeting every slot
+  role F3: box [2.349, 2.404, 1.324, 1.384], slots ['BL(1,1)'], cell -1: 33 admissible poses meeting every slot
+  pairwise-disjoint admissible configurations of H + ['F1', 'F2', 'F3']: 0 (30 partial tries)  -> 0 refutations (consistent with the kill)
