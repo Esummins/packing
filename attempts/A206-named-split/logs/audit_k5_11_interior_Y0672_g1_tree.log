@@ -38,3 +38,13 @@ Traceback (most recent call last):
     node = [n for n in nodes if n["label"] == a.leaf][0]
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
 IndexError: list index out of range
+13:47:59 audit k5_11_interior_Y0672 g1_tree R.2.2
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A206-named-split\scratch\audit206.py", line 113, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A206-named-split\scratch\audit206.py", line 32, in main
+    node = [n for n in nodes if n["label"] == a.leaf][0]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
