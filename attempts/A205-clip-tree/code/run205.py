@@ -55,7 +55,7 @@ def draw(doc):
 
 def row_of(doc, pad, cert):
     d = doc["pads"][pad]
-    slim = dict(nid=doc["nid"], cls=doc["cls"], pad=pad, lam=d.get("lam"), verdict=d.get("verdict"), leaf=d.get("leaf"),
+    slim = dict(nid=doc["nid"], cls=doc["cls"], pad=pad, tag=doc.get("tag") or "", cfg=d.get("cfg"), lam=d.get("lam"), verdict=d.get("verdict"), leaf=d.get("leaf"),
                 n_nodes=d.get("n_nodes"), n_records=d.get("n_records"), max_depth=d.get("max_depth"), alive_leaves=d.get("alive_leaves"),
                 dead_leaves=d.get("dead_leaves"), killing=d.get("killing"), undecided=d.get("undecided"), seconds=d.get("seconds"),
                 root=d.get("root"), wall=d.get("wall"), window_pending=d.get("window_pending"), verifier=VERIFIER, start=d.get("start"),
@@ -128,9 +128,16 @@ if __name__ == "__main__":
     ap.add_argument("--depth", type=int, default=4)
     ap.add_argument("--nodes", type=int, default=200)
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--noroom", action="store_true", help="A189's no-room leaf at >= 9 roles (off: 137-333 s a node, never fired)")
+    ap.add_argument("--tag", default="", help="an EXTENDED run (e.g. _w2700): its own certificate / page under extended/, never the 900 s row")
     a = ap.parse_args()
-    cert = os.path.join(CERTS, "cliptree205_%s.json" % a.nid)
-    doc = dict(nid=a.nid, pads={})
+    TB.NOROOM = a.noroom
+    if a.tag:
+        CERTS = os.path.join(CERTS, "extended")
+        RES = os.path.join(os.path.dirname(RES), "cliptree205_extended.jsonl")
+        fig205.OUTD = os.path.join(fig205.OUTD, "extended")
+    cert = os.path.join(CERTS, "cliptree205_%s%s.json" % (a.nid, a.tag))
+    doc = dict(nid=a.nid, pads={}, tag=a.tag)
     if os.path.exists(cert) and not a.force:
         try:
             doc = json.load(open(cert, encoding="utf-8"))
@@ -144,6 +151,8 @@ if __name__ == "__main__":
                 break
             continue
         r = run_pad(doc, a.nid, pad, a.wall, cert, rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes)
+        if a.tag:
+            continue
         if r["verdict"] == "DEAD":
             break
     try:

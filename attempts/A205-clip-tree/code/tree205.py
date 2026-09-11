@@ -124,12 +124,18 @@ class TreePage(P.PolyPage):
                 self.dead = "S-CLIP(%s) at %s: every piece of %s is rule-S-dead against another role's pieces (Lemma PC; no interior-disjoint pose pair)" % (empty, label, empty)
                 self.fix_rep = dict(dead=empty, detail="sclip", seconds=round(time.time() - t0, 1))
                 return None
-            if not dropped:
-                break
-            self.sclip_rep.append(dict(label=label, it=it + 1, dropped=dropped))
             self.T.step("sclip", time.time() - t0, label=label, dropped=dropped)
             for k, mb in self.nd.boxes.items():
                 self.pieces[k] = list(mb.pieces)
+            big = any(n >= 0.05 * (len(self.nd.boxes[k].pieces) + n) for k, n in dropped.items())
+            if not dropped or it >= 1 or not big:
+                if dropped:
+                    self.sclip_rep.append(dict(label=label, it=it + 1, dropped=dropped, renorm=False))
+                    for k, mb in self.nd.boxes.items():
+                        mb.rebuild()
+                    self.obst = {k: mb.obstacle("poly") for k, mb in self.nd.boxes.items()}
+                break
+            self.sclip_rep.append(dict(label=label, it=it + 1, dropped=dropped, renorm=True))
             nd = P.PolyPage.normalise(self, label + "s%d" % (it + 1))
             self.prev_reach, self.prev_obst = pr, old_obst
             self.norm_shrunk = True

@@ -166,6 +166,7 @@ def fixpoint(nd, corners, s, refine=2, max_iter=10, max_pieces=96, near=True):
             if not new:
                 raise MB.EmptyBox(mb.name, dict(reason="refine", level=lvl + 1))
             mb.pieces = new
+    vprev = sum(vol(mb.pieces) for mb in nd.boxes.values())
     for it in range(max_iter):
         moved = lonely_pass("pass%d" % (it + 1)) if corners else False
         for mb in nd.boxes.values():
@@ -184,8 +185,11 @@ def fixpoint(nd, corners, s, refine=2, max_iter=10, max_pieces=96, near=True):
                 raise MB.EmptyBox(mb.name, dict(reason="mutual", pass_=it + 1))
             mb.pieces = keep
         rep["passes"] = it + 1
-        if not moved:
+        vnow = sum(vol(mb.pieces) for mb in nd.boxes.values())
+        if not moved or vnow > vprev * (1 - Fr(1, 1000)):          # A205: a pass that moved < 0.1 % of the volume ends the loop (sound: any prefix of the clip chain is)
+            rep["stopped"] = "moved < 0.1%%" if moved else "fixed"
             break
+        vprev = vnow
     for mb in nd.boxes.values():
         mb.rebuild()
         mb.kept = mb.kept_fraction()

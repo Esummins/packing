@@ -82,7 +82,7 @@ def page_svg(doc):
     PW = int(S0 * S) + 20
     NH = 84
     ncol = 4
-    body = [text(20, 22, "%s -- A205 cliptree205: the CLIP TREE (branch on a forced slot's remaining meeter rows, instantiate, A204's cascade + rule-S clip at every node, the count with A203's pair table; a branch dies by EmptyBox / S-CLIP / FC / REACH / COUNT / NOROOM / S-PAIR; NO LP)" % doc["nid"], 12, "#000", True),
+    body = [text(20, 22, "%s%s -- A205 cliptree205: the CLIP TREE (branch on a forced slot's remaining meeter rows, instantiate, A204's cascade + rule-S clip at every node, the count with A203's pair table; a branch dies by EmptyBox / S-CLIP / FC / REACH / COUNT / NOROOM / S-PAIR; NO LP)" % (doc["nid"], (" [EXTENDED run %s: its own wall / caps, not the 900 s row]" % doc["tag"]) if doc.get("tag") else ""), 12, "#000", True),
             text(20, 36, "per pad (g1 = the page's window, then pad 0 = s0-only, WINDOW-PENDING): the ROOT panel, then one panel per closed branch (first %d); blue = pins; black = H (thin = pieces, filled = certified K'); coloured = instantiated meeters (forced by Theorem FC or by the branch); grey stipple = alive cells of the anonymous option table (never green); yellow = the count's witness" % MAXP, 8, "#444"),
             text(20, 48, "read-only from certs/cliptree205_%s.json; rendered %s" % (doc["nid"], time.strftime("%Y-%m-%d %H:%M:%S")), 8, "#444")]
     y = 64
@@ -105,7 +105,7 @@ def page_svg(doc):
 
 def render(doc):
     os.makedirs(OUTD, exist_ok=True)
-    p = os.path.join(OUTD, "cliptree205_%s.svg" % doc["nid"])
+    p = os.path.join(OUTD, "cliptree205_%s%s.svg" % (doc["nid"], doc.get("tag") or ""))
     open(p, "w", encoding="utf-8").write(page_svg(doc))
     return p
 

@@ -31,20 +31,41 @@ def clip_of(pg):
     return rt.get("dead") or ((pg.rounds[-1].get("clip") if pg.rounds else None) or "EmptyBox")
 
 
+NOROOM = False
+
+
 def cascade(pg, rounds, on_round=None, log=print):
     """A204's loop (seeded fixed point + S clip, HC rows, caps / FC / pair-table count, apply) then the no-room leaf."""
     pg.rounds, pg.snapshots, pg.round_times, pg.dead, pg.witness = [], [], [], None, None
     pg.sclip_rep, pg.hc_dead, pg.pair_cache = [], [], {}
+    pg.step0, pg.test0 = len(pg.T.steps), len(pg.T.tests)
     PB.run(pg, max_rounds=rounds, on_round=on_round)
     clip, rnd = None, None
     if pg.dead:
         clip, rnd = clip_of(pg), (pg.round_times[-1].get("round") if pg.round_times else None)
-    elif len(pg.roles) >= 9:
+    elif NOROOM and len(pg.roles) >= 9:
         nr = QP.noroom_leaf(pg, log)
         if nr and nr.get("verdict") == "DEAD":
             pg.dead = "no-room (A189 Lemma 1): %s" % nr.get("reason")
             clip, rnd = "NOROOM", len(pg.round_times)
     return clip, rnd
+
+
+def step_seconds(pg):
+    """seconds per step name since the node's cascade started (the trace is shared across the tree)."""
+    out = {}
+    for st in pg.T.steps[getattr(pg, "step0", 0):]:
+        out[st["step"]] = round(out.get(st["step"], 0.0) + float(st.get("seconds") or 0), 1)
+    return out
+
+
+def test_seconds(pg):
+    out = {}
+    for t in pg.T.tests[getattr(pg, "test0", 0):]:
+        k = t.get("test")
+        n, sec = out.get(k, (0, 0.0))
+        out[k] = (n + 1, round(sec + float(t.get("seconds") or 0), 1))
+    return out
 
 
 def candidates(pg):
@@ -131,7 +152,7 @@ class Tree:
                  role_slots={k: list(v) for k, v in pg.role_slots.items()}, role_cell=dict(pg.role_cell), forced_H=sorted(pg.forced_H),
                  kept=(pg.fix_rep or {}).get("kept"), sclip=list(pg.sclip_rep), hc_dead=list(pg.hc_dead)[:40],
                  alive_cells={p: sorted(v) for p, v in (pg.rounds[-1].get("single") or {}).items()} if pg.rounds else None,
-                 snapshot=self.snap(pg), verifier="[C: library clip trace]")
+                 snapshot=self.snap(pg), verifier="[C: library clip trace]", step_seconds=step_seconds(pg), test_seconds=test_seconds(pg))
         self.nodes.append(r)
         self.max_depth = max(self.max_depth, depth)
         if verdict == "DEAD":
