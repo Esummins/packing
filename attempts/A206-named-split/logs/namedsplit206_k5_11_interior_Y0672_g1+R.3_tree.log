@@ -1,3 +1,8 @@
 13:19:51 start k5_11_interior_Y0672 g1+R.3_tree (lab 6, free 7991 MB)
 == k5_11_interior_Y0672 tree pad g1 [R]: start attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0672_g1_s0.json; H [2.358, 2.498, 2.358, 2.498, 0.0, 14.25]; forced H []; roles {} (cells {}); 4 slots; free squares 5
    node R          d0 root: INTERNAL (89.6 s, 1 rounds; t=89.7)
+   node R.3        d1 TR(0,0)<-[24]: INTERNAL (203.5 s, 3 rounds; t=293.4)
+   node R.3.1      d2 BR(0,1)<-[16]: INTERNAL (353.8 s, 3 rounds; t=647.4)
+   node R.3.1.1    d3 TL(1,0)<-[7]: DEAD by EmptyBox r2 (222.7 s, 2 rounds; t=870.4)
+   node R.3.1.2    d3 TL(1,0)<-[8]: INTERNAL (380.3 s, 3 rounds; t=1250.9)
+   Rule NS at R.3.1.2: split H at TR(0,0) (meeting fraction 0.636985; alive rows [19, 23]; named ['F1', 'H'])
