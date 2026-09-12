@@ -12,3 +12,17 @@
    node R.2.3.1s   d3 root<-None: DEAD by EmptyBox r1 (25.5 s, 1 rounds; t=1961.1)
    node R.2.3.2    d3 TL(1,0)<-[8]: INTERNAL (415.1 s, 3 rounds; t=2376.3)
    Rule NS at R.2.3.2: split F3 at BR(0,1) (meeting fraction 0.002141; alive rows []; named ['F2', 'F3', 'H'])
+   node R.2.3.2.1  d4 BR(0,1)<-None: DEAD by EmptyBox r2 (133.0 s, 2 rounds; t=2511.1)
+   node R.2.3.2.2  d4 BR(0,1)<-None: INTERNAL (311.3 s, 3 rounds; t=2822.4)
+   Rule NS at R.2.3.2.2: split F4 at TR(1,0) (meeting fraction 0.146411; alive rows [9, 14]; named ['F3', 'F4'])
+   node R.2.3.2.2.1 d5 TR(1,0)<-None: INTERNAL (454.6 s, 3 rounds; t=3278.1)
+   node R.2.3.2.2.1s d5 root<-None: INTERNAL (224.8 s, 1 rounds; t=3504.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 27 s (1 pockets; sum of pocket LANE = 0 < 1 free squares)
+   node R.2.3.2.2.1 d5: DEAD by NOROOM (no-room, k=10) 26.8 s
+   node R.2.3.2.2.2 d5 TR(1,0)<-None: INTERNAL (101.1 s, 1 rounds; t=3632.2)
+   node R.2.3.2.2.2r1 d5 root<-None: DEAD by EmptyBox r1 (143.2 s, 1 rounds; t=3775.5)
+   => ALIVE (g1_page) in 3775.7 s: 16 nodes, depth 5, 2 NS splits, 0 pocket splits, 0 inherited, 7 dead / 4 alive leaves (WALL)
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0991_zero_s0.json)
+== k5_16_interior_Y0991 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0991_zero_s0.json; basins []; inherited A206 kills []; H [2.218, 2.358, 1.38, 1.519, 14.25, 28.072]; forced H ['BL(1,0)']; 6 slots; free squares 5
+   node R          d0 root: INTERNAL (321.9 s, 3 rounds; t=321.9)
+   node R.1        d1 BR(0,1)<-[18]: DEAD by REACH r1 (59.3 s, 1 rounds; t=381.6)
