@@ -1064,6 +1064,43 @@ def collect(table, corpus):
                   + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
         )
 
+    # (7p) A207's basinclip207 (attempts/A207-basin-clip; the PI 2026-09-11 14:40 on k5_16 Y0881's leaf R.2.3s: "it's basically
+    #      just setting F1 directly in a simple slot, and then using the fact that the pads grow around corners to claim the simple
+    #      square totally isn't simple" -- NEAR-SIMPLE IS SIMPLE): Lemma BASIN (notes/basin.md) -- the extension class T = S u {p}
+    #      re-solved with p's pin replaced by the BOXED square |c - c_p|_inf <= r_c, |tan(theta/2)| <= t_r (an exact case-measure /
+    #      parametric certificate, frozen A53 / A56 verifiers, C2), so no square of the page's F lies in the basin box B_F(p) of
+    #      the dilated simple pose; the basin is cut from every role's pieces and every anonymous row inside A206's clip tree with
+    #      Rule NS.  A page is KILLED only by a whole-tree run (mode "tree"); a "leaf" run closes one A205 / A206 leaf.  Kills are
+    #      [C: extension certificate + Lemma BASIN + library clip trace]; the basin certificates are named in the row's `basins`.
+    seen207 = set()
+    for d in jl(A("A207-basin-clip", "results", "basinclip207.jsonl")):
+        if not d.get("nid") or str(d.get("verdict", "")) != "DEAD" or d.get("mode") != "tree" or d.get("pad") not in ("g1", "zero", "window"):
+            continue
+        key = (d["nid"], d.get("pad"))
+        if key in seen207:
+            continue
+        seen207.add(key)
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        pend = bool(d.get("window_pending")) or str(d.get("pad")) == "zero"
+        basins = ", ".join("%s r_c=%s r_t=%s" % (b.get("cell"), b.get("r_c"), b.get("r_t_deg")) for b in (d.get("basins") or []))
+        table.add_rec(
+            "A207 basinclip207.jsonl",
+            camp,
+            d["nid"],
+            True,
+            "basinclip207 basin clip + clip tree with Rule NS [%s pad; basins %s; %s nodes, depth %s]: %s%s" % (
+                d.get("pad"), basins, d.get("n_nodes"), d.get("max_depth"), (d.get("leaf") or "")[:160], " (s0-only; WINDOW-PENDING)" if pend else ""),
+            "A207",
+            d.get("cert") or os.path.join("attempts", "A207-basin-clip", "results", "basinclip207.jsonl"),
+            fdate(A("A207-basin-clip", "results", "basinclip207.jsonl")),
+            d,
+            note=("[C: extension certificate + Lemma BASIN + library clip trace] the basin certificates (attempts/A207-basin-clip/certs/basin207_*.param.json, "
+                  "verified by the frozen A53 verify_case / A56 verify_param, C2) + A171/A172/A173 polygon + lonely clip, A203 rule S, A161 exact miss, "
+                  "A206 Rule NS, A198/A200 caps + Theorem FC + the count; no verifier clause on the tree; "
+                  + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
