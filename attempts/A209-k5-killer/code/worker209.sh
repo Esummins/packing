@@ -1,7 +1,7 @@
 #!/bin/bash
 # A209 worker: drain a queue file (one nid per line, optional wall) through run209.py, one node at a time; claims by
 # mkdir (atomic) so several workers share a queue; gated before EVERY launch on the lab ceiling (10 pythons excluding
-# "Claude Extensions" command lines), on A209's own count (<= 6), and on free memory (>= 6144 MB); BLAS pinned; the
+# "Claude Extensions" command lines), on A209's own count (<= 6), and on free memory (>= 3072 MB free physical -- the 6144 MB figure in the ops rules is the per-process COMMIT gate for LPs, not a free-memory floor; corrected by the coordinator 2026-09-12); BLAS pinned; the
 # node re-checked against the closure ledgers before it runs (a kill folded in meanwhile closes it: Lemma K1); after
 # every node: fold209 (the closure ledger), progress209 (results/progress.md, the price and the STOP rule), the page's
 # CURRENT copy refreshed, git add / commit with explicit pathspecs.  Exits when logs/STOP exists.
@@ -21,7 +21,7 @@ while read -r NID W; do
   mkdir "$ATT/logs/claims/$NID" 2>/dev/null || continue
   if python $ATT/code/fold209.py --closed "$NID" >/dev/null 2>&1; then echo "$(date +%H:%M:%S) [$SLOT] $NID already closed (ledger / ancestor): skipped"; continue; fi
   WW=${W:-$WALL}
-  while [ "$(labcount)" -ge 10 ] || [ "$(mine)" -ge 6 ] || [ "$(freemb)" -lt 6144 ]; do sleep 60; done
+  while [ "$(labcount)" -ge 10 ] || [ "$(mine)" -ge 6 ] || [ "$(freemb)" -lt 3072 ]; do sleep 60; done
   LOG=$ATT/logs/k5killer209_${NID}.log
   T0=$(date +%s); echo "$(date +%H:%M:%S) [$SLOT] start $NID wall $WW (lab $(labcount), free $(freemb) MB)" | tee -a $LOG
   timeout -s KILL $(( 2 * WW + 1800 )) python $ATT/code/run209.py page $NID --wall $WW >> $LOG 2>&1
