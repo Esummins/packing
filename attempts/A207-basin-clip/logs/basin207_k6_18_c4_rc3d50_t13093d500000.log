@@ -1,0 +1,46 @@
+=== basin207_k6_18_c4_rc3d50_t13093d500000: slot 4 at (1.5, 1.5), r_c = 0.06, t_r = 13093/500000 (3.000 deg), a = 0.415752946; warm 123 atoms / 20368 rows from ['k6_18.json', 'k6_18.param.wit.json', 'basin207_k6_18_c4_rc1d25_t13093d500000.json', 'basin207_k6_18_c4_rc1d50_t13093d500000.json']
+    LP: tau = 4.660365 (budget 5, converged False) in 1102.4 s
+    [certify round 0] tau=4.66037 conv=False scale=1.0600 total=4.94006 budget=5 atoms=127
+
+$ verify_case.py C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.json --jobs 1 --depth 56 --max-witnesses 96 --report C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.report.json --witness-file C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.witnesses.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.json
+s = 969271/250000 (~3.8770840000), n = 11, atoms = 127, total mass = 988011/200000 (~4.9400550000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 112866  covered = 30392  vacuous = 0  exempt = 26073 (core 26073, nofam 0)  split = 56401  exact atom checks = 109069  max depth = 35  time = 9.3s
+PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 988011/200000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.report.json
+    verify_case rc=0 (9.3 s)
+
+$ verify_param.py C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.param.json --slo 191/50 --shi 969271/250000 --depth 48 --sscale 8 --jobs 1 --split 3 --report C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.param.report.json --max-witnesses 20 --witness-file C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.param.wit.json --quiet
+parametric certificate: C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.param.json  (k6_18)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 127, cores = 6, budget = 5, total = 988011/200000 (~4.940055000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '52/25', 'threshold_y': '129817/62500', 'threshold_x_float': 2.08, 'threshold_y_float': 2.077072, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+boxes = 1494236  covered = 426534  vacuous = 0  exempt = 320616  split = 747086  s-splits = 139459  s-cells = 281  max depth = 44  max s-depth = 9  time = 131.9s
+PASS: for EVERY s in [191/50, 969271/250000], every admissible closed unit square in [0,s]^2 disjoint from all 6 cores has mu_s >= 1; total 988011/200000 < budget 5  ==>  the stratum is empty for every s in the window (node DEAD on the whole window)
+  report written to C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\basin207_k6_18_c4_rc3d50_t13093d500000.param.report.json
+    verify_param over [191/50, 969271/250000]: PASS (131.9 s)
+
+$ verify_case.py C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.lo.json --jobs 1 --depth 44 --max-witnesses 20 --report C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.lo.report.json --witness-file C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.lo.witnesses.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.lo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 127, total mass = 988011/200000 (~4.9400550000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 25858  covered = 7460  vacuous = 0  exempt = 5501 (core 5501, nofam 0)  split = 12897  exact atom checks = 33540  max depth = 28  time = 2.1s
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 988011/200000 < budget 5  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.lo.report.json
+
+$ verify_case.py C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.mid.json --jobs 1 --depth 44 --max-witnesses 20 --report C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.mid.report.json --witness-file C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.mid.witnesses.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.mid.json
+s = 1924271/500000 (~3.8485420000), n = 11, atoms = 127, total mass = 988011/200000 (~4.9400550000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 35262  covered = 10060  vacuous = 0  exempt = 7603 (core 7603, nofam 0)  split = 17599  exact atom checks = 45492  max depth = 30  time = 2.9s
+PASS: every NON-EXEMPT closed unit square in [0,1924271/500000]^2 has mass >= 1 ; total 988011/200000 < budget 5  ==>  no packing of 11 unit squares in side <= 1924271/500000 (~3.8485420000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.mid.report.json
+
+$ verify_case.py C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.hi.json --jobs 1 --depth 44 --max-witnesses 20 --report C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.hi.report.json --witness-file C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.hi.witnesses.json --quiet
+certificate: C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.hi.json
+s = 969271/250000 (~3.8770840000), n = 11, atoms = 127, total mass = 988011/200000 (~4.9400550000), margin = 0
+hypotheses: 6 cores, 0 NO-families, budget = 5
+boxes = 112864  covered = 30391  vacuous = 0  exempt = 26073 (core 26073, nofam 0)  split = 56400  exact atom checks = 109068  max depth = 35  time = 9.4s
+PASS: every NON-EXEMPT closed unit square in [0,969271/250000]^2 has mass >= 1 ; total 988011/200000 < budget 5  ==>  no packing of 11 unit squares in side <= 969271/250000 (~3.8770840000) satisfies the hypotheses (node DEAD)
+  report written to C:\Users\esumm\code\packing\attempts\A207-basin-clip\certs\c2\basin207_k6_18_c4_rc3d50_t13093d500000.hi.report.json
+    => BASIN (1258.1 s)
