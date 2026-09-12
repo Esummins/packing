@@ -11,6 +11,7 @@ import tree206 as N6
 import clip207 as C
 
 FP = P.FP
+_SAVE206, _RESTORE206 = N6.save_state, N6.restore_state       # the originals (install() rebinds N6's names to ours)
 
 
 class TreePage207(N6.TreePage206):
@@ -92,13 +93,13 @@ class TreePage207(N6.TreePage206):
 
 
 def save_state(pg):
-    st = N6.save_state(pg)
+    st = _SAVE206(pg)
     st["basin_rep"], st["basin_reach"] = list(pg.basin_rep), dict(pg.basin_reach)
     return st
 
 
 def restore_state(pg, st):
-    N6.restore_state(pg, st)
+    _RESTORE206(pg, st)
     pg.basin_rep, pg.basin_reach = list(st["basin_rep"]), dict(st["basin_reach"])
 
 
