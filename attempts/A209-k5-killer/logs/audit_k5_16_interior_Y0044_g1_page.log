@@ -29,3 +29,14 @@ k5_16_interior_Y0044 g1_page leaf R.3.1.2.1.2: MISS-CLIP(F1) at round1: every pi
   role F3 (122 pieces of the parent's snapshot): 72 admissible poses (slots ['TL(1,0)', 'TR(1,0)'], misses [])
   role F4 (33 pieces of the parent's snapshot): 43 admissible poses (slots ['BR(0,1)', 'BR(1,0)', 'TR(0,1)'], misses [])
   VACUOUS for ['F1'] (no admissible sampled pose: the role's own constraints already exclude the samples; consistent, not a refutation)
+09:30:32 audit k5_16_interior_Y0044 g1_page R.3.1.2.2s
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y0044 g1_page leaf R.3.1.2.2s: no-room at R.3.1.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+  parent snapshot R.3.1.2.2 (round 3); H forced at ['BL(1,0)', 'BR(1,0)']; roles {'F1': ['BL(1,0)', 'BR(1,0)'], 'F2': ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)'], 'F3': ['TL(1,0)', 'TR(1,0)'], 'F4': ['BR(0,1)', 'TR(0,1)'], 'H': ['BL(1,0)', 'BR(1,0)']}; cells {'F1': -1, 'F2': 18, 'F3': 8, 'F4': -1}; misses {'F1': ['BR(0,1)'], 'F4': ['BR(1,0)']}
+  role H (75 pieces of the parent's snapshot): 1050 admissible poses (slots ['BL(1,0)', 'BR(1,0)'], misses [])
+  role F1 (100 pieces of the parent's snapshot): 519 admissible poses (slots ['BL(1,0)', 'BR(1,0)'], misses ['BR(0,1)'])
+  role F2 (102 pieces of the parent's snapshot): 410 admissible poses (slots ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)'], misses [])
+  role F3 (216 pieces of the parent's snapshot): 306 admissible poses (slots ['TL(1,0)', 'TR(1,0)'], misses [])
+  role F4 (51 pieces of the parent's snapshot): 242 admissible poses (slots ['BR(0,1)', 'TR(0,1)'], misses ['BR(1,0)'])
+  no-room kill (k=10, m=1): a refutation needs 1 mutually disjoint free squares beside the configuration (grid over the container, 20029 admissible)
+  pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3', 'F4']: 0 over 400 H poses (273 partial tries); refuting: 0  -> 0 refutations (consistent with the kill)
