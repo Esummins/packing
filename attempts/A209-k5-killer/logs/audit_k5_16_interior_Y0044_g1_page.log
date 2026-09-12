@@ -19,3 +19,13 @@ k5_16_interior_Y0044 g1_page leaf R.3.1.2.1.1: FC at BL(1,0): at most 0 distinct
   role F4 (33 pieces of the parent's snapshot): 43 admissible poses (slots ['BR(0,1)', 'BR(1,0)', 'TR(0,1)'], misses [])
   FC kill at BL(1,0): a refutation needs TWO distinct non-pin meeters of BL(1,0) -- the roles that meet it plus anonymous squares sampled over its window (22338 admissible)
   pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3', 'F4']: 0 over 400 H poses (311 partial tries); refuting: 0  -> 0 refutations (consistent with the kill)
+09:30:28 audit k5_16_interior_Y0044 g1_page R.3.1.2.1.2
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y0044 g1_page leaf R.3.1.2.1.2: MISS-CLIP(F1) at round1: every piece of F1 provably meets a slot the branch hypothesises it misses ['BR(0,1)', 'BR(1,0)'] (Rule NS)
+  parent snapshot R.3.1.2.1 (round 3); H forced at ['BL(1,0)']; roles {'F1': ['BL(1,0)'], 'F2': ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)'], 'F3': ['TL(1,0)', 'TR(1,0)'], 'F4': ['BR(0,1)', 'BR(1,0)', 'TR(0,1)'], 'H': ['BL(1,0)']}; cells {'F1': -1, 'F2': 18, 'F3': 8, 'F4': -1}; misses {'F1': ['BR(0,1)', 'BR(1,0)']}
+  role H (75 pieces of the parent's snapshot): 1050 admissible poses (slots ['BL(1,0)'], misses [])
+  role F1 (100 pieces of the parent's snapshot): 0 admissible poses (slots ['BL(1,0)'], misses ['BR(0,1)', 'BR(1,0)'])
+  role F2 (63 pieces of the parent's snapshot): 238 admissible poses (slots ['BR(0,1)', 'TL(1,0)', 'TR(0,1)', 'TR(1,0)'], misses [])
+  role F3 (122 pieces of the parent's snapshot): 72 admissible poses (slots ['TL(1,0)', 'TR(1,0)'], misses [])
+  role F4 (33 pieces of the parent's snapshot): 43 admissible poses (slots ['BR(0,1)', 'BR(1,0)', 'TR(0,1)'], misses [])
+  VACUOUS for ['F1'] (no admissible sampled pose: the role's own constraints already exclude the samples; consistent, not a refutation)
