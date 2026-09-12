@@ -23,6 +23,7 @@ commit () {  # $1 = message; explicit pathspecs only, never -a
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') A210 start; pages $(wc -l < "$PAGES_FILE")"
 while read -r P; do
+  P=$(printf '%s' "$P" | tr -d '')
   [ -z "$P" ] && continue
   T0=$(date +%s)
   echo "$(date +%H:%M:%S) start $P"

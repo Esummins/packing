@@ -79,14 +79,21 @@ def stage0(nid, pad, force):
 
 
 def belownormal():
+    """BelowNormal + affinity 0xFFFF.  NB the lab's usual snippet passes GetCurrentProcess()'s pseudo-handle through
+    ctypes' default 32-bit int conversion and SILENTLY FAILS on this box (GetPriorityClass then returns 0 and the
+    process stays at NORMAL, as A209's workers show); c_void_p(-1) with explicit argtypes works."""
     try:
         import ctypes
         k = ctypes.windll.kernel32
-        h = k.GetCurrentProcess()
+        k.SetPriorityClass.argtypes = [ctypes.c_void_p, ctypes.c_uint]
+        k.SetProcessAffinityMask.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
+        k.GetPriorityClass.argtypes = [ctypes.c_void_p]
+        h = ctypes.c_void_p(-1)
         k.SetPriorityClass(h, 0x00004000)
         k.SetProcessAffinityMask(h, 0xFFFF)
-    except Exception:
-        pass
+        print("   priority class %d (16384 = BelowNormal)" % k.GetPriorityClass(h), flush=True)
+    except Exception as e:
+        print("   belownormal failed: %r" % (e,), flush=True)
 
 
 if __name__ == "__main__":

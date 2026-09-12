@@ -8553,3 +8553,51 @@ halves of the answer come from opposite findings.
   `docs/residue_map/campaigns/A206-namedsplit/namedsplit206_<nid>.svg` (one per page, every run's root and closed branches),
   CURRENT.json -> A206, status gallery block (7o) collects the whole-tree kills.  21 runs, 9.3 CPU-h so far; the queues
   continue (pad-0 leaves, then the whole trees of the remaining wall-cut pages).
+
+## 2026-09-12 noon -- A210-corner-cover (Opus) -- LAUNCHED (one detached pass; report at launch): **Lemma CORNER-COVER and rule CC -- a square pushed into an unpinned corner covers the corner slot's cell except two wall wedges, so the slot's SECOND meeter is pinned to a thin band; the rule is silent at a page root and kills 15 (node, slot) pairs in A209's named trees in 1.3 s, including the PI's own 2,226 s leaf**
+- The PI, 01:20, on A209's Y0202-style leaf R.1.1.2.1.2s: *"TR00 has a near simple square, and the regions around the
+  top and left of the simple unit square, where it meets the wall, are certifiably dead.  Since a square pushed into the
+  corner covers the opposite corner under all rotations, that should imply that there's no way for TR00 to get a second
+  meeter, and that should have been determinable way before burning 30+ minutes on the node."*  And 01:50: *state the
+  lemma in the PACKING's frame; pad the CONTACT REGION, not the box.*  Both are now theorems in
+  `attempts/A210-corner-cover/notes/corner_cover.md`, proved before use:
+  - **[T] Lemma CORNER-COVER.**  In the corner frame a unit square at wall distances d1, d2 and tilt theta has vertices
+    (s+d1, d2), (2h+d1, s+d2), (c+d1, 2h+d2), (d1, c+d2), and the corner slot's unit CELL minus it is EXACTLY the three
+    wedges W0 = {cu + sv < cs + c d1 + s d2}, W1 = {v < d2 + s(u - s - d1)/c}, W2 = {u < d1 + c(v - c - d2)/s}; the
+    fourth halfplane never meets the cell (2h - 1 - cs = -(1-c)(1-s) <= 0).
+  - **[T] Corollary CC0** (the PI's sentence, sharp): a square touching both walls contains the cell's inner corner for
+    EVERY tilt -- the offset's coordinates in the square's frame are 2h(1-h) <= 1/2 ((2h-1)^2 >= 0) and
+    (1-h)|c-s| = sqrt(2(1-h)^2(1-2h^2)) <= 1/2 (decreasing in h on [1/2, 1/sqrt2]), with equality only at 0 / 90 deg.
+  - **[T] CC1**: over a tilt interval and slacks the wedges fit in three rectangles of the cell, closed form, with
+    c(1-c)/s = cs/(1+c) and s(1-s)/c = cs/(1+s) -- no division by sin theta anywhere.
+  - **[T] CC'** (the PI's frame note): F's squares are P's translated by (lambda-1)c_Q, so the slot box in P is the
+    EXACT unit cell and only the wedges move: the second meeter's centre is within lambda/sqrt2 of the wedges grown by
+    lambda - 1 (0.004 on the G1 slab, 0 at pad 0).  **There is no inner-corner margin disc and no far-side strip of
+    width pi_i**: the window statement is the pad-0 statement widened by 0.004.  Pad the contact region, never the box.
+- **Rule CC** (`code/cc210.py`, on a copy of A202's stage-0 code as extended by A203's CSP): per corner slot and per
+  non-pin role near that corner, (i) an anonymous meeter piece that reaches no pose class's band is dead (letter **Q**),
+  (ii) a pose class of the role that leaves NO candidate second meeter at all is impossible by Theorem FC.  Microseconds:
+  33 ms a pad on a whole page.
+- **[M] At a page ROOT the rule says nothing** -- H is a mid-container box on every k5 gallery page, so no square is at a
+  corner (k5_11_interior_Y0202 at pad 0: ALIVE in 17.3 s, rule CC 0 kills in 33 ms).  **At A209's NAMED nodes it is the
+  lever the PI described**: over the 22 `k5killer209` certificates, 15 (node, corner slot) kills in 1.3 s -- 9 reproduce
+  A209's own kills instantly, 4 are INTERNAL nodes (their whole subtrees), and 2 are nodes A209 left ALIVE:
+  **k5_11_interior_Y0738 R.1.1.2.1.2s at pad 0** (the PI's leaf: F4 is a corner square at TR with 46 pose classes, F3 is
+  the branch's other instantiated meeter of TR(0,0), and F3's centre box is 0.9195 from the band where it needs
+  1/sqrt2 = 0.7071 -- a 0.21 margin) and **k5_11_interior_Y0130 R.3.1.2 at the G1 pad** (all 40 pose classes of F1 at the
+  TR corner leave no second non-pin meeter at all).
+- **[T] Fuzzed before the population** (`scratch/fuzz210.py`, A202 section 4's discipline): 89,240 sampled cell points
+  against random pushed-in squares -- every point outside the square lies in CC1's rectangles, 0 refutations; 42,262
+  centres that do hold a band point -- 0 killed wrongly; the four corner frames and the tilt flip are involutions.
+  The targeted search for an admissible disjoint second meeter of a corner square found NONE in 3,000 configurations,
+  which is why the rule kills.
+- Running: ONE detached BelowNormal pass `bash attempts/A210-corner-cover/code/run210.sh` over the 19 still-alive k5
+  gallery pages (STATUS's 22 minus Y0325 / Y0380 / Y0436, killed by A209 this morning), pad 0 first then the G1 pad,
+  stage 0 + A203's CSP + rule CC, page after each pad, commit per page; rows `results/cornercover210.jsonl`, leaves
+  `results/cornercover210_leaves.jsonl`, pages `docs/residue_map/campaigns/A210-cornercover/`.
+- **[!] Lab-wide: the usual `belownormal()` snippet silently fails on this box** -- ctypes passes GetCurrentProcess()'s
+  pseudo-handle as a 32-bit int, GetPriorityClass returns 0 and the process stays at NORMAL (A209's workers are all at
+  priority 8).  Fixed in A210's copy with `c_void_p(-1)` + explicit argtypes; worth copying into the other runners.
+- What CC cannot do: nothing near 45 deg (the band is the whole cell), nothing at offset cells, and nothing when the
+  second meeter genuinely sits in the wall band next to the corner cell -- those cells still have to die by the other
+  stage-0 rules, as they do on the PI's leaf.  Verdicts `[C: closed-form trace; Lemma CORNER-COVER]`, no verifier clause.
