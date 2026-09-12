@@ -23,3 +23,28 @@
 == stage 0 + basin k5_16_interior_Y1117 at the g1 pad: ALIVE in 23419 ms; basins [('TR(1,0)', 0.03)]; pieces cut {}; kills {'H-clip': 0, 'P': 5026, 'W': 1385, 'C': 1038, 'M': 3593, 'L': 7, 'R': 3004, 'X': 655}; alive cells {'BL(1,0)': 8, 'BR(0,1)': 6, 'BR(1,0)': 10, 'TR(0,1)': 3, 'TR(1,0)': 3, 'TL(1,0)': 4}; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H []
 === 00:14 code/run207.py tree k5_16_interior_Y0881 --pad g1+R.3 --wall 5400
 == k5_16_interior_Y0881 tree pad g1 [R]: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0881_g1_s0.json; basins [('TR(1,0)', 0.03, 3.0)]; H [2.358, 2.498, 2.078, 2.218, 41.112, 53.13]; forced H []; roles {}; 6 slots
+   node R          d0 root: INTERNAL (157.3 s, 1 rounds; t=157.4)
+   node R.3        d1 TR(0,1)<-[21]: INTERNAL (295.0 s, 3 rounds; t=452.8)
+   node R.3.1      d2 TR(1,0)<-[8]: INTERNAL (651.6 s, 3 rounds; t=1105.3)
+   node R.3.1.1    d3 BL(1,0)<-[5, 11]: DEAD by EmptyBox r1 (18.8 s, 1 rounds; t=1124.4)
+   node R.3.1.2    d3 BL(1,0)<-[6, 10]: DEAD by EmptyBox r1 (15.0 s, 1 rounds; t=1139.7)
+   node R.3.1.3    d3 BL(1,0)<-[6, 15]: DEAD by EmptyBox r1 (14.7 s, 1 rounds; t=1154.6)
+   node R.3.1.4    d3 BL(1,0)<-[10, 11]: DEAD by EmptyBox r1 (7.4 s, 1 rounds; t=1162.2)
+   node R.3.1.5    d3 BL(1,0)<-[11, 15]: DEAD by EmptyBox r1 (14.7 s, 1 rounds; t=1177.2)
+   node R.3.2      d2 TR(1,0)<-[9]: DEAD by FC r1 (113.4 s, 1 rounds; t=1290.9)
+   node R.3.3      d2 TR(1,0)<-[14]: INTERNAL (664.5 s, 3 rounds; t=1955.7)
+   node R.3.3.1    d3 BL(1,0)<-[5, 11]: DEAD by EmptyBox r1 (43.5 s, 1 rounds; t=1999.8)
+   node R.3.3.2    d3 BL(1,0)<-[6, 10]: DEAD by EmptyBox r1 (99.3 s, 1 rounds; t=2099.4)
+   node R.3.3.3    d3 BL(1,0)<-[6, 15]: DEAD by EmptyBox r1 (129.5 s, 1 rounds; t=2229.3)
+   node R.3.3.4    d3 BL(1,0)<-[10, 11]: DEAD by EmptyBox r1 (53.2 s, 1 rounds; t=2282.8)
+   node R.3.3.5    d3 BL(1,0)<-[11, 15]: DEAD by EmptyBox r1 (209.0 s, 1 rounds; t=2492.2)
+   node R.3.4      d2 TR(1,0)<-[19]: INTERNAL (537.3 s, 3 rounds; t=3030.0)
+   node R.3.4.1    d3 BL(1,0)<-[5, 11]: DEAD by EmptyBox r1 (9.3 s, 1 rounds; t=3039.9)
+   node R.3.4.2    d3 BL(1,0)<-[6, 10]: DEAD by EmptyBox r1 (16.9 s, 1 rounds; t=3057.2)
+   node R.3.4.3    d3 BL(1,0)<-[6, 15]: DEAD by EmptyBox r1 (16.6 s, 1 rounds; t=3074.2)
+   node R.3.4.4    d3 BL(1,0)<-[10, 11]: DEAD by EmptyBox r1 (16.9 s, 1 rounds; t=3091.5)
+   node R.3.4.5    d3 BL(1,0)<-[11, 15]: DEAD by EmptyBox r1 (16.9 s, 1 rounds; t=3108.9)
+   => ALIVE (g1_tree_R.3) in 3109.4 s: 21 nodes, depth 3, 0 NS splits, 16 dead / 2 alive leaves
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A207-basinclip\basinclip207_gallery.svg
+=== 01:06 code/run207.py leaf k5_16_interior_Y0881 --pad g1 --leaf R.2.3s --src standard --wall 1800
+== k5_16_interior_Y0881 leaf pad g1 [R.2.3s]: start attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0881.json; basins [('TR(1,0)', 0.03, 3.0)]; H [2.443, 2.498, 2.114, 2.178, 41.111, 47.26]; forced H ['BR(0,1)', 'TR(0,1)']; roles {'F1': ['TL(1,0)', 'TR(0,1)'], 'F2': ['TL(1,0)'], 'F3': ['BL(1,0)', 'BR(0,1)', 'BR(1,0)'], 'F4': ['BL(1,0)', 'BR(1,0)']}; 6 slots
