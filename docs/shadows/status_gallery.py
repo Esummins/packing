@@ -1101,6 +1101,45 @@ def collect(table, corpus):
                   + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
         )
 
+    # (7q) A209's k5killer209 (attempts/A209-k5-killer; the PI 2026-09-12: "we had a system to kill every remaining non trump5
+    #      node"): ONE composed runner over the alive k5 gallery pages and then the whole k5 frontier of A57's census --
+    #      A202 stage 0 + A203 CSP, A204's polygon-clip cascade, A205's clip tree (Lemma CT, bar-anon, sharp round) with
+    #      A206's Rule NS, A207's basin clip where a certified basin covers the window, and at every leaf with >= 9 roles
+    #      A208's no-room (A189 Lemma 1) with the pocket CN bound and pocket branching at k = 9.  A node is KILLED by a DEAD
+    #      run at the g1 (window) pad (mode "page"); pad 0 is s0-only (WINDOW-PENDING).  Kills are [C: library clip trace
+    #      (+ A189 Lemma 1 / Lemma CN / Lemma BASIN)], NO verifier clause; a tree id's family is in applies_to_tags.
+    seen209 = set()
+    for d in jl(A("A209-k5-killer", "results", "k5killer209.jsonl")):
+        if not d.get("nid") or str(d.get("verdict", "")) != "DEAD" or d.get("mode") != "page" or d.get("pad") not in ("g1", "zero"):
+            continue
+        nid = d["nid"].split("__", 1)[0]
+        key = (nid, d.get("pad"))
+        if key in seen209:
+            continue
+        seen209.add(key)
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        pend = bool(d.get("window_pending")) or str(d.get("pad")) == "zero"
+        st0 = (d.get("stage0") or {}).get(d.get("pad")) or {}
+        how = ("stage 0 (A202 closed form + A203 CSP)" if d.get("stage0_kill") or not d.get("n_nodes") else
+               "composed clip tree [%s nodes, depth %s, %s NS splits, %s pocket splits, %s inherited A206 kills]" % (
+                   d.get("n_nodes"), d.get("max_depth"), d.get("ns_splits"), d.get("pocket_splits"), len(d.get("inherited") or {})))
+        table.add_rec(
+            "A209 k5killer209.jsonl",
+            camp,
+            nid,
+            True,
+            "k5killer209 composed chain [%s pad; %s]: %s%s" % (d.get("pad"), how, (d.get("leaf") or st0.get("leaf") or "")[:160], " (s0-only; WINDOW-PENDING)" if pend else ""),
+            "A209",
+            d.get("cert") or os.path.join("attempts", "A209-k5-killer", "results", "k5killer209.jsonl"),
+            fdate(A("A209-k5-killer", "results", "k5killer209.jsonl")),
+            d,
+            note=("[C: library clip trace (+ A189 Lemma 1 / Lemma CN / Lemma BASIN)] the composed chain (A209 BRIEF.md): A202/A203 closed form, A171/A172/A173 polygon + lonely "
+                  "clip, A203 rule S, A161 exact miss / MISS-CLIP, A198/A200 caps + Theorem FC + the count with the pair table, Rule NS, the basin clip (A207 certificates), "
+                  "A189 Lemma 1 + Lemma CN no-room; no verifier clause; "
+                  + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(
