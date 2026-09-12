@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-12 04:24` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-12 04:34` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -11,7 +11,7 @@ python docs/shadows/status_gallery.py --dry-run  # print the plan, write nothing
 
 ## Residue left
 
-Of the 71 gallery pages the PI reviews, **45 are still ALIVE and 26 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 34 alive / 26 dead; , out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
+Of the 71 gallery pages the PI reviews, **44 are still ALIVE and 27 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 33 alive / 27 dead; , out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
 
 ## Counts
 
@@ -20,8 +20,8 @@ Of the 71 gallery pages the PI reviews, **45 are still ALIVE and 26 are now DEAD
 | gallery | pages | ALIVE | DEAD |
 |---|---|---|---|
 | `k0v4` | 11 | 11 | 0 |
-| `a57v4` | 60 | 34 | 26 |
-| **total** | **71** | **45** | **26** |
+| `a57v4` | 60 | 33 | 27 |
+| **total** | **71** | **44** | **27** |
 
 ### By family (A107/A128 shadow family of the page's panel N)
 
@@ -34,7 +34,7 @@ Of the 71 gallery pages the PI reviews, **45 are still ALIVE and 26 are now DEAD
 | `K06` | 1 | 0 |
 | `K20` | 1 | 0 |
 | `S01` | 11 | 15 |
-| `S02` | 4 | 5 |
+| `S02` | 3 | 6 |
 | `S03` | 10 | 1 |
 | `S05` | 1 | 0 |
 | `S07` | 1 | 0 |
@@ -70,6 +70,7 @@ Of the 71 gallery pages the PI reviews, **45 are still ALIVE and 26 are now DEAD
 | A206 -- namedsplit206 clip tree with Rule NS [g1 pad; 5 nodes, depth 1, 0 NS splits]: every branch DEAD under Rule NS: R.1 BR(0,1)<-[11, 21] by FC r1; R.2 BR(0,1)<-[11, 22] by FC r1; R.3 BR(0,1)<-[16, 21] by FC r1; R.4 BR(0,1)<-[16, 22] by EmptyB | 1 |
 | A206 -- namedsplit206 clip tree with Rule NS [g1 pad; 8 nodes, depth 2, 0 NS splits]: every branch DEAD under Rule NS: R.1 BR(0,1)<-[16] by EmptyBox r2; R.2.1 TL(1,0)<-[7, 9] by FC r1; R.2.2 TL(1,0)<-[7, 14] by FC r1; R.2.3 TL(1,0)<-[8, 9] by FC  | 1 |
 | A206 -- namedsplit206 clip tree with Rule NS [g1 pad; 8 nodes, depth 2, 0 NS splits]: every branch DEAD under Rule NS: R.1 BR(0,1)<-[16] by FC r1; R.2.1 TL(1,0)<-[7, 9] by FC r1; R.2.2 TL(1,0)<-[7, 14] by FC r1; R.2.3 TL(1,0)<-[8, 9] by FC r1; R. | 1 |
+| A209 -- k5killer209 composed chain [g1 pad; composed clip tree [14 nodes, depth 4, 3 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD: R.1.1.1 TL(1,0)[F2 meets]<-None by COUNT r2; R.1.1.2.1 BR(1,0)[F3 meets]<-None by EmptyBox r1; R.1.1.2.2 BR(1,0)[F3 misses]<-None by EmptyBox | 1 |
 | A209 -- k5killer209 composed chain [g1 pad; composed clip tree [4 nodes, depth 1, 0 NS splits, 0 pocket splits, 2 inherited A206 kills]]: every branch DEAD: R.1 TR(0,1)<-[14] by A206-CLOSED rNone; R.2 TR(0,1)<-[19] by A206-CLOSED rNone; R.3 TR(0,1)<-[21] by COUNT r1; R.4 TR(0,1)<-[22] by COUNT r1; | 1 |
 | A57 tree -- PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1) | 1 |
 
@@ -114,6 +115,7 @@ Of the 71 gallery pages the PI reviews, **45 are still ALIVE and 26 are now DEAD
 | [x] [`k5_16_interior_Y0230.svg`](killed/k5_16_interior_Y0230.svg) | `k5_16_interior_Y0230` | `k5_16` | 1 | `S01` | **DEAD** | guard-line clause v5 [-; tau 4.7500 < 5] | A190 | 2026-09-10 | 2.88 (rank 45) |
 | [x] [`k5_16_interior_Y0275.svg`](killed/k5_16_interior_Y0275.svg) | `k5_16_interior_Y0275` | `k5_16` | 1 | `S11` | **DEAD** | case-measure-certificate-v1 (ordinary leaf; only the core half-side changed) | A149 | 2026-09-08 | 2.88 (rank 24) |
 | [x] [`k5_16_interior_Y0325.svg`](killed/k5_16_interior_Y0325.svg) | `k5_16_interior_Y0325` | `k5_16` | 1 | `S01` | **DEAD** | k5killer209 composed chain [g1 pad; composed clip tree [4 nodes, depth 1, 0 NS splits, 0 pocket splits, 2 inherited A206 kills]]: every branch DEAD: R.1 TR(0,1)<-[14] by A206-CLOSED rNone; R.2 TR(0,1)<-[19] by A206-CLOSED rNone; R.3 TR(0,1)<-[21] by COUNT r1; R.4 TR(0,1)<-[22] by COUNT r1; | A209 | 2026-09-12 | 2.88 (rank 46) |
+| [x] [`k5_16_interior_Y0380.svg`](killed/k5_16_interior_Y0380.svg) | `k5_16_interior_Y0380` | `k5_16` | 1 | `S02` | **DEAD** | k5killer209 composed chain [g1 pad; composed clip tree [14 nodes, depth 4, 3 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD: R.1.1.1 TL(1,0)[F2 meets]<-None by COUNT r2; R.1.1.2.1 BR(1,0)[F3 meets]<-None by EmptyBox r1; R.1.1.2.2 BR(1,0)[F3 misses]<-None by EmptyBox | A209 | 2026-09-12 | 2.88 (rank 47) |
 | [x] [`k5_16_interior_Y0491.svg`](killed/k5_16_interior_Y0491.svg) | `k5_16_interior_Y0491` | `k5_16` | 1 | `S01` | **DEAD** | cliptree205 clip tree [g1 pad; 2 nodes, depth 0]: every branch of the clip tree DEAD: Rr1 root<-None by EmptyBox r1 | A205 | 2026-09-11 | 2.88 (rank 49) |
 | [x] [`k5_16_interior_Y0565.svg`](killed/k5_16_interior_Y0565.svg) | `k5_16_interior_Y0565` | `k5_16` | 1 | `S01` | **DEAD** | cliptree205 clip tree [g1 pad; 5 nodes, depth 1]: every branch of the clip tree DEAD: R.1 BR(0,1)<-[10] by FC r1; R.2 BR(0,1)<-[15] by FC r2; R.3 BR(0,1)<-[22] by EmptyBox r1; R.4 BR(0,1)<-[23] by COUNT r1 | A205 | 2026-09-11 | 2.88 (rank 50) |
 | [x] [`k5_16_interior_Y0839.svg`](killed/k5_16_interior_Y0839.svg) | `k5_16_interior_Y0839` | `k5_16` | 1 | `S01` | **DEAD** | forced-first assignment: no admissible meeter assignment at BL(1,0) (notes/assignment.md Theorem ASSIGN; 188 multibox nodes) | A182 | 2026-09-10 | 2.88 (rank 26) |
@@ -138,7 +140,6 @@ Of the 71 gallery pages the PI reviews, **45 are still ALIVE and 26 are now DEAD
 | [ ] [`k5_16_interior_Y0044.svg`](k5_16_interior_Y0044.svg) | `k5_16_interior_Y0044` | `k5_16` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 38) |
 | [ ] [`k5_16_interior_Y0099.svg`](k5_16_interior_Y0099.svg) | `k5_16_interior_Y0099` | `k5_16` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 43) |
 | [ ] [`k5_16_interior_Y0249.svg`](k5_16_interior_Y0249.svg) | `k5_16_interior_Y0249` | `k5_16` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 33) |
-| [ ] [`k5_16_interior_Y0380.svg`](k5_16_interior_Y0380.svg) | `k5_16_interior_Y0380` | `k5_16` | 1 | `S02` | **ALIVE** | -- | -- | -- | 2.88 (rank 47) |
 | [ ] [`k5_16_interior_Y0402.svg`](k5_16_interior_Y0402.svg) | `k5_16_interior_Y0402` | `k5_16` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 35) |
 | [ ] [`k5_16_interior_Y0436.svg`](k5_16_interior_Y0436.svg) | `k5_16_interior_Y0436` | `k5_16` | 1 | `none` | **ALIVE** | -- | -- | -- | 2.88 (rank 48) |
 | [ ] [`k5_16_interior_Y0460.svg`](k5_16_interior_Y0460.svg) | `k5_16_interior_Y0460` | `k5_16` | 1 | `none` | **ALIVE** | -- | -- | -- | 2.88 (rank 32) |
@@ -173,6 +174,7 @@ Of the 71 gallery pages the PI reviews, **45 are still ALIVE and 26 are now DEAD
 * `k5_16_interior_Y0054` (tree tag `k5_16_interior_G1`) -- direct kill record, **A200** by `quick killer [propagation; zero pad]: FC at BL(1,0): at most 1 distinct non-pin meeter(s) (H provably misses; roles []; anonymous cap 1 by CN: union diameter 0.8952 < 1) [pad 0: s0-only, WINDOW-PEND (s0-only; WINDOW-PENDING)`; certificate `attempts/A200-k516-quick/certs/q200_k5_16_interior_Y0054_pad0.json`; attributed by *id occurs in exactly one tree*; 4 record(s) agree.
 * `k5_16_interior_Y0230` (tree tag `k5_16_interior_G1`) -- direct kill record, **A190** by `guard-line clause v5 [-; tau 4.7500 < 5]`; certificate `attempts/A190-guardline-clause/certs/k5_16_interior_Y0230.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
 * `k5_16_interior_Y0325` (tree tag `k5_16_interior_G1`) -- direct kill record, **A209** by `k5killer209 composed chain [g1 pad; composed clip tree [4 nodes, depth 1, 0 NS splits, 0 pocket splits, 2 inherited A206 kills]]: every branch DEAD: R.1 TR(0,1)<-[14] by A206-CLOSED rNone; R.2 TR(0,1)<-[19] by A206-CLOSED rNone; R.3 TR(0,1)<-[21] by COUNT r1; R.4 TR(0,1)<-[22] by COUNT r1;`; certificate `attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y0325.json`; attributed by *applies_to_tags (A137 fold137)*; 1 record(s) agree.
+* `k5_16_interior_Y0380` (tree tag `k5_16_interior_G1`) -- direct kill record, **A209** by `k5killer209 composed chain [g1 pad; composed clip tree [14 nodes, depth 4, 3 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD: R.1.1.1 TL(1,0)[F2 meets]<-None by COUNT r2; R.1.1.2.1 BR(1,0)[F3 meets]<-None by EmptyBox r1; R.1.1.2.2 BR(1,0)[F3 misses]<-None by EmptyBox`; certificate `attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y0380.json`; attributed by *applies_to_tags (A137 fold137)*; 1 record(s) agree.
 * `k5_16_interior_Y0491` (tree tag `k5_16_interior_G1`) -- direct kill record, **A205** by `cliptree205 clip tree [g1 pad; 2 nodes, depth 0]: every branch of the clip tree DEAD: Rr1 root<-None by EmptyBox r1`; certificate `attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0491.json`; attributed by *prior tau matched 2 trees (all)*; 1 record(s) agree.
 * `k5_16_interior_Y0565` (tree tag `k5_16_interior_G1`) -- direct kill record, **A205** by `cliptree205 clip tree [g1 pad; 5 nodes, depth 1]: every branch of the clip tree DEAD: R.1 BR(0,1)<-[10] by FC r1; R.2 BR(0,1)<-[15] by FC r2; R.3 BR(0,1)<-[22] by EmptyBox r1; R.4 BR(0,1)<-[23] by COUNT r1`; certificate `attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0565.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
 * `c0_Y0939` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0939__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
@@ -231,7 +233,7 @@ Of the 71 gallery pages the PI reviews, **45 are still ALIVE and 26 are now DEAD
 | `A203 csp203.jsonl` | 3 | 3 |
 | `A205 cliptree205.jsonl` | 7 | 7 |
 | `A206 namedsplit206.jsonl` | 3 | 3 |
-| `A209 k5killer209.jsonl` | 1 | 1 |
+| `A209 k5killer209.jsonl` | 2 | 2 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
