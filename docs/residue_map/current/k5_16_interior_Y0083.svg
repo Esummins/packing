@@ -1,22 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2350" height="577" font-family="Segoe UI, sans-serif" style="background:#fff">
 <defs><pattern id="stipple" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#f2f2f2"/><circle cx="1" cy="1" r="0.7" fill="#999"/><circle cx="3" cy="3" r="0.7" fill="#999"/></pattern></defs>
-<text x="20.0" y="22.0" font-size="12" fill="#000" text-anchor="start" font-weight="bold">k5_16_interior_Y0083 -- A206 namedsplit206: Rule NS at the clip tree's fully named leaves (a soft-named role r at a forced slot p is SPLIT: [r meets p] = the exact reach clip at p; [r misses p] = r leaves p's row set, MISS-CLIP; A204's cascade + A205's clips at every node; DEAD iff both branches DEAD; NO LP)</text>
+<text x="20.0" y="22.0" font-size="12" fill="#000" text-anchor="start" font-weight="bold">k5_16_interior_Y0083 -- A207 basinclip207: the BASIN CLIP (Lemma BASIN: no non-pin square of F has its pose inside the basin B_F(p) of a FULL slot's simple pose -- the extension certificate re-solved with the boxed slot square; magenta dashed boxes) + A206's clip tree with Rule NS; DEAD iff every branch DEAD</text>
 <text x="20.0" y="36.0" font-size="8" fill="#444" text-anchor="start">per run: the ROOT panel (the loaded node after its refresh cascade), then one panel per closed branch (first 12); blue = pins; black = H (thin = pieces, filled = certified K'); coloured = instantiated meeters; grey stipple = alive cells of the anonymous option table (never green); yellow = the count's witness</text>
-<text x="20.0" y="48.0" font-size="8" fill="#444" text-anchor="start">read-only from certs/namedsplit206_k5_16_interior_Y0083.json; rendered 2026-09-11 13:00:47</text>
-<text x="20.0" y="74.0" font-size="9" fill="#c62828" text-anchor="start" font-weight="bold">RUN g1_R.3.1s: A205 leaf R.3.1s of attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0083.json (recorded ALIVE: every forced slot has two named meeters: nothing to branch on (next lever: LP on the node); roles ['H', 'F1', 'F2', 'F3', 'F4']), loaded fro</text>
-<text x="20.0" y="85.0" font-size="9" fill="#c62828" text-anchor="start" font-weight="bold">m its last snapshot (pieces padded outward 1e-6 / 1e-3 deg)</text>
+<text x="20.0" y="48.0" font-size="8" fill="#444" text-anchor="start">read-only from certs/basinclip207_k5_16_interior_Y0083.json; basins [('TR(0,1)', 0.02, 3.0, ['191/50', '969271/250000']), ('TR(1,0)', 0.03, 3.0, ['191/50', '969271/250000'])]; rendered 2026-09-12 06:24:39</text>
+<text x="20.0" y="74.0" font-size="9" fill="#c62828" text-anchor="start" font-weight="bold">RUN g1_standard_R.3.1s: A205 leaf R.3.1s of attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0083.json (recorded ALIVE: every forced slot has two named meeters: nothing to branch on (next lever: LP on the node); roles ['H', 'F1', 'F2', 'F3', 'F4']), l</text>
+<text x="20.0" y="85.0" font-size="9" fill="#c62828" text-anchor="start" font-weight="bold">oaded from its last snapshot (pieces padded outward 1e-6 / 1e-3 deg)</text>
 <text x="20.0" y="96.0" font-size="7" fill="#333" text-anchor="start">path to the leaf in A205's tree: [('R.3', 'BR(0,1)', [18]), ('R.3.1', 'TL(1,0)', [8])]</text>
-<text x="1350.0" y="121.0" font-size="11" fill="#c62828" text-anchor="start" font-weight="bold">k5_16_interior_Y0083  pad g1  A205 CLIP TREE: DEAD  (297.4 s; 1 nodes, depth 0; 1 dead / 0 alive leaves)</text>
-<text x="1350.0" y="134.0" font-size="7.5" fill="#c62828" text-anchor="start">every branch DEAD under Rule NS: R.3.1s root&lt;-None by FC r2</text>
+<text x="1350.0" y="121.0" font-size="11" fill="#c62828" text-anchor="start" font-weight="bold">k5_16_interior_Y0083  pad g1  A205 CLIP TREE: DEAD  (316.9 s; 1 nodes, depth 0; 1 dead / 0 alive leaves)</text>
+<text x="1350.0" y="134.0" font-size="7.5" fill="#c62828" text-anchor="start">every branch DEAD under the basin clip + Rule NS: R.3.1s root&lt;-None by FC r2</text>
 <text x="1350.0" y="143.5" font-size="7" fill="#333" text-anchor="start">start = A203 csp203 (attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0083_g1_s0.json): H box [1.798785, 1.938542, 1.519271, 1.545475, 82.37</text>
-<text x="1350.0" y="152.5" font-size="7" fill="#333" text-anchor="start">1846, 87.250329], forced H ['BL(1,0)'], H units 33 alive of 33; cfg {'rounds': 3, 'depth_cap': 6, 'node_cap': 200, 'wall': 3600.0, 'nsub': 4, 'refine'</text>
-<text x="1350.0" y="161.5" font-size="7" fill="#333" text-anchor="start">: 2, 'soft_all': True}</text>
-<text x="1350.0" y="170.5" font-size="6.5" fill="#555" text-anchor="start">verdict label [C: library clip trace] A206 Rule NS on A205's clip tree: at a fully named node split a soft-named (slot, role) pair into [role meets sl</text>
-<text x="1350.0" y="179.0" font-size="6.5" fill="#555" text-anchor="start">ot] (the exact reach clip at the slot, A161) / [role misses slot] (its rows leave the option table, MISS-CLIP), A204's cascade + A205's clips at every</text>
-<text x="1350.0" y="187.5" font-size="6.5" fill="#555" text-anchor="start"> node; DEAD iff every branch DEAD; no verifier clause</text>
-<text x="1350.0" y="196.0" font-size="8" fill="#000" text-anchor="start" font-weight="bold">label        depth  slot      &lt;- rows          kind   verdict   clip     round  seconds  t</text>
-<text x="1350.0" y="206.0" font-size="7" fill="#c62828" text-anchor="start">R.3.1s       0      root                              DEAD      FC       2      297.4    297.4</text>
-<text x="1350.0" y="215.0" font-size="7" fill="#555" text-anchor="start">window pending: False; lam 1.004000117048806; rendered 2026-09-11 13:00:47</text>
+<text x="1350.0" y="152.5" font-size="7" fill="#333" text-anchor="start">1846, 87.250329], forced H ['BL(1,0)'], H units 33 alive of 33; cfg {'rounds': 3, 'depth_cap': 6, 'node_cap': 200, 'wall': 900.0, 'nsub': 4, 'refine':</text>
+<text x="1350.0" y="161.5" font-size="7" fill="#333" text-anchor="start"> 2, 'soft_all': False, 'max_frac': 0.5, 'only': None}</text>
+<text x="1350.0" y="170.5" font-size="6.5" fill="#555" text-anchor="start">verdict label [C: extension certificate + Lemma BASIN + library clip trace] A207 basin clip on A206's clip tree with Rule NS: every non-pin role's pie</text>
+<text x="1350.0" y="179.0" font-size="6.5" fill="#555" text-anchor="start">ces and every anonymous option row minus the basin B_F(p) of each FULL slot p (Lemma BASIN, notes/basin.md; the basin certificate = the extension clas</text>
+<text x="1350.0" y="187.5" font-size="6.5" fill="#555" text-anchor="start">s re-solved with the boxed slot square, verified by the frozen A53 / A56 verifiers), then A204's cascade + A205's clips + Rule NS at every node; DEAD </text>
+<text x="1350.0" y="196.0" font-size="6.5" fill="#555" text-anchor="start">iff every branch DEAD; no verifier clause on the clip tree itself</text>
+<text x="1350.0" y="204.5" font-size="8" fill="#000" text-anchor="start" font-weight="bold">label        depth  slot      &lt;- rows          kind   verdict   clip     round  seconds  t</text>
+<text x="1350.0" y="214.5" font-size="7" fill="#c62828" text-anchor="start">R.3.1s       0      root                              DEAD      FC       2      316.8    316.9</text>
+<text x="1350.0" y="223.5" font-size="7" fill="#555" text-anchor="start">window pending: False; lam 1.004000117048806; rendered 2026-09-12 06:24:39</text>
 <rect x="20.0" y="109.0" width="310.2" height="310.2" fill="#fff" fill-opacity="1.00" stroke="#000" stroke-width="1.60"/>
 <rect x="60.0" y="333.1" width="46.0" height="46.0" fill="#fff" fill-opacity="1.00" stroke="#ddd" stroke-width="0.30"/>
 <rect x="60.0" y="287.1" width="46.0" height="46.0" fill="#fff" fill-opacity="1.00" stroke="#ddd" stroke-width="0.30"/>
@@ -214,8 +215,12 @@
 <polygon points="329.1,338.2 329.1,258.2 249.1,258.2 249.1,338.2" fill="none" fill-opacity="0.00" stroke="#c62828" stroke-width="0.50" stroke-dasharray="3,2"/>
 <text x="289.1" y="302.2" font-size="10" fill="#c62828" text-anchor="middle" font-weight="bold">F4</text>
 <text x="289.1" y="311.2" font-size="5.5" fill="#c62828" text-anchor="middle">89.1 deg in [88.2, 90.0] of the largest piece; kept 0.051681; 42 pieces; box centre / mid-tilt</text>
+<rect x="288.6" y="227.9" width="3.0" height="2.7" fill="#d500f9" fill-opacity="0.12" stroke="#d500f9" stroke-width="1.2" stroke-dasharray="3,2"/>
+<text x="288.6" y="225.9" font-size="5.5" fill="#d500f9" text-anchor="start">basin TR(0,1) r=0.020</text>
+<rect x="207.8" y="146.8" width="4.3" height="4.6" fill="#d500f9" fill-opacity="0.12" stroke="#d500f9" stroke-width="1.2" stroke-dasharray="3,2"/>
+<text x="207.8" y="144.8" font-size="5.5" fill="#d500f9" text-anchor="start">basin TR(1,0) r=0.030</text>
 <text x="20.0" y="429.2" font-size="6.5" fill="#000" text-anchor="start" font-weight="bold">PANEL = branch R.3.1s (depth 0): None &lt;- rows None (None); pins + H + instantiat</text>
-<text x="20.0" y="437.7" font-size="6.5" fill="#000" text-anchor="start" font-weight="bold">ed roles after this node's cascade (2 rounds, 297.4 s; t = 297.4 s of the pad's </text>
+<text x="20.0" y="437.7" font-size="6.5" fill="#000" text-anchor="start" font-weight="bold">ed roles after this node's cascade (2 rounds, 316.8 s; t = 316.9 s of the pad's </text>
 <text x="20.0" y="446.2" font-size="6.5" fill="#000" text-anchor="start" font-weight="bold">wall)</text>
 <text x="20.0" y="454.7" font-size="6.5" fill="#c62828" text-anchor="start" font-weight="bold">DEAD by FC at round 2: FC at TL(1,0): at most 1 distinct non-pin meeter(s) (H pr</text>
 <text x="20.0" y="463.2" font-size="6.5" fill="#c62828" text-anchor="start" font-weight="bold">ovably misses; roles ['F3']; anonymous cap 0 by A1: 0 alive cell(s))</text>
