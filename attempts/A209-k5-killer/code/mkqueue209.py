@@ -23,8 +23,8 @@ def alive_gallery():
 
 if __name__ == "__main__":
     g = alive_gallery()
-    open(os.path.join(HERE, "queue_gallery.txt"), "w").write("\n".join(g) + "\n")
+    open(os.path.join(HERE, "queue_gallery.txt"), "w", newline="\n").write("\n".join(g) + "\n")      # LF only: a CRLF line would leak a CR into the nid
     c = [d["nid"] for d in L.census() if d["nid"] not in set(g)]
-    open(os.path.join(HERE, "queue_frontier.txt"), "w").write("\n".join(c) + "\n")
+    open(os.path.join(HERE, "queue_frontier.txt"), "w", newline="\n").write("\n".join(c) + "\n")
     print("gallery %d: %s" % (len(g), g))
     print("frontier %d (first 10: %s)" % (len(c), c[:10]))

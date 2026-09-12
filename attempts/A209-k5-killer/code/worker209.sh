@@ -15,6 +15,7 @@ mine() { powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter '
 freemb() { powershell -NoProfile -Command "[int]((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1024)" | tr -d '\r '; }
 mkdir -p $ATT/logs/claims
 while read -r NID W; do
+  NID=${NID//$'\r'/}; W=${W//$'\r'/}                        # a CRLF queue line (Python on Windows) must not leak a CR into the nid
   [ -z "$NID" ] && continue
   case "$NID" in \#*) continue;; esac
   [ -f $ATT/logs/STOP ] && { echo "$(date +%H:%M:%S) [$SLOT] STOP present: exiting"; exit 0; }
