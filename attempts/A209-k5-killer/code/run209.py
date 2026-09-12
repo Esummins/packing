@@ -206,7 +206,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=("page",))
     ap.add_argument("nid")
-    ap.add_argument("--pads", default="g1,zero")
+    ap.add_argument("--pads", default="zero,g1")   # PI 2026-09-12: pad 0 FIRST (instant kills of pad ghosts), the window second
     ap.add_argument("--wall", type=float, default=3600)
     ap.add_argument("--rounds", type=int, default=3)
     ap.add_argument("--depth", type=int, default=5)
