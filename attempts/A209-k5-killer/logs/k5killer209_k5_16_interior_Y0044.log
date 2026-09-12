@@ -1,3 +1,9 @@
 02:46:50 [b] start k5_16_interior_Y0044 wall 3600 (lab 9, free 9105 MB)
    stage 0 g1 pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0044_g1_s0.json)
 == k5_16_interior_Y0044 page pad g1: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0044_g1_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; inherited A206 kills ['BR(0,1)<-(16,)', 'BR(0,1)<-(17,)']; H [1.659, 1.799, 1.449, 1.519, 82.372, 90.0]; forced H ['BL(1,0)']; 6 slots; free squares 5
+   node R          d0 root: INTERNAL (273.7 s, 3 rounds; t=273.8)
+   node R.1        d1 BR(0,1)<-[16]: DEAD inherited from A206 g1_tree R.1
+   node R.2        d1 BR(0,1)<-[17]: DEAD inherited from A206 g1_tree R.2
+   node R.3        d1 BR(0,1)<-[18]: INTERNAL (305.6 s, 3 rounds; t=579.6)
+   node R.3.1      d2 TL(1,0)<-[8]: INTERNAL (407.0 s, 3 rounds; t=986.8)
+   Rule NS at R.3.1: split F1 at BR(0,1) (meeting fraction 0.025576; alive rows []; named ['F1', 'F2', 'F4'])
