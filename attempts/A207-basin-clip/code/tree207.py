@@ -75,6 +75,22 @@ class TreePage207(N6.TreePage206):
         return res
 
 
+    def snapshot(self, rnd, label):
+        """A204's snapshot, or -- when the basin clip killed the node BEFORE any fixed point (self.nd is None on a freshly loaded
+        leaf) -- one built from the node's current pieces (no K'), so that the record carries what the panel IS."""
+        if self.nd is not None:
+            return N6.TreePage206.snapshot(self, rnd, label)
+        roles = {}
+        for k in self.roles:
+            pcs = self.pieces.get(k) or []
+            roles[k] = dict(box=[round(float(v), 6) for v in self.roles[k]], n_pieces=len(pcs), pieces=[P.piece6(b, r) for b, r in pcs][:600], kprime=[],
+                            kept=None, corner=self.corners_now().get(k))
+        snap = dict(pad=self.pad, round=rnd, label=label + " (basin clip before the fixed point)", roles=roles, forced_H=sorted(self.forced_H),
+                    role_slots={k: list(v) for k, v in self.role_slots.items()}, t=round(self.T.now(), 1), fix=(self.fix_rep or {}), dead=self.dead)
+        self.snapshots.append(snap)
+        return snap
+
+
 def save_state(pg):
     st = N6.save_state(pg)
     st["basin_rep"], st["basin_reach"] = list(pg.basin_rep), dict(pg.basin_reach)
