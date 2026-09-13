@@ -12,3 +12,25 @@
    no-room (k=10, m=1): UNDECIDED in 128 s (2 pockets; pocket LANE sum None does not beat 1)
    Lemma ROLE-SPLIT at R.1.4.2.2: bisect F4 on y at 2.917814 (extents (0.320117, 0.91854), tilt 90.0 deg, core non-empty, 58 piece(s); split 1 of 4)
    node R.1.4.2.2.1 d1 F4<-['y<=2.917814']: INTERNAL (81.2 s, 1 rounds; t=268.5)
+   no-room (k=10, m=1): UNDECIDED in 124 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.1: bisect F2 on t at 53.1301 (extents (0.420267, 0.150837), tilt 90.0 deg, core non-empty, 64 piece(s); split 1 of 4)
+   node R.1.4.2.2.1.1 d2 F2<-['t<=53.1301']: INTERNAL (111.8 s, 1 rounds; t=504.4)
+   no-room (k=10, m=1): DEAD by NOROOM in 28 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.1.1 d2: DEAD by NOROOM -- no-room at R.1.4.2.2.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.2.2.1.2 d2 F2<-['t>=53.1301']: INTERNAL (98.2 s, 1 rounds; t=630.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 28 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.1.2 d2: DEAD by NOROOM -- no-room at R.1.4.2.2.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.2.2.2 d1 F4<-['y>=2.917814']: INTERNAL (30.2 s, 1 rounds; t=688.9)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.2: bisect F2 on t at 53.1301 (extents (0.436761, 0.150837), tilt 90.0 deg, core non-empty, 69 piece(s); split 1 of 4)
+   node R.1.4.2.2.2.1 d2 F2<-['t<=53.1301']: INTERNAL (34.9 s, 1 rounds; t=845.2)
+   no-room (k=10, m=1): UNDECIDED in 60 s (1 pockets; pocket LANE sum None does not beat 1)
+   node R.1.4.2.2.2.1x d2 root<-None: INTERNAL (80.0 s, 1 rounds; t=985.8)
+   node R.1.4.2.2.2.1x: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R.1.4.2.2    => ALIVE (7 nodes; t = 986 s of 900.0)
+   start R.1.5.2: SKIPPED (wall)
+   start R.2: SKIPPED (wall)
+   start R.3: SKIPPED (wall)
+   => ALIVE (zero_page) in 985.9 s: 4 start runs, 7 nodes, depth 2, 0 CC kills, 1 exact leaf cascades, 0 NS splits, 0 pocket splits, 3 role splits (0 empty-half kills), 6 inherited dead (6 up front + 0 in tree), 8 dead / 2 alive leaves (WALL)
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2 d2 DEAD INHERIT 0.0s; R.1.3 d2 DEAD INHERIT 0.0s; R.1.4.1 d3 DEAD INHERIT 0.0s; R.1.4.2.1 d4 DEAD INHERIT 0.0s; R.1.5.1 d3 DEAD INHERIT 0.0s; R.1.4.2.2 d0 INTERNAL 59.4s; R.1.4.2.2.1 d1 INTERNAL 81.2s; R.1.4.2.2.1.1 d2 DEAD NOROOM 111.8s; R.1.4.2.2.1.2 d2 DEAD NOROOM 98.2s; R.1.4.2.2.2 d1 INTERNAL 30.2s; R.1.4.2.2.2.1 d2 INTERNAL 34.9s; R.1.4.2.2.2.1x d2 ALIVE 80.0s [exact]; R.1.4.2.2.2.2 d2 ALIVE 0.0s
+== k5_11_interior_Y0202: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
