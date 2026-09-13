@@ -56,3 +56,14 @@ k5_16_interior_Y1022 zero_page leaf R.2.1.1.2s: no-room at R.2.1.1.2 (k=10, m=1;
   role F3 (100 pieces of the parent's snapshot): 0 admissible poses (slots ['TL(1,0)', 'TR(0,1)', 'TR(1,0)'], misses [])
   role F4 (97 pieces of the parent's snapshot): 535 admissible poses (slots ['TL(1,0)', 'TR(1,0)'], misses [])
   VACUOUS for ['F3'] (no admissible sampled pose: the role's own constraints already exclude the samples; consistent, not a refutation)
+00:03:56 audit k5_16_interior_Y1022 zero_page R.2.1.2.1s
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y1022 zero_page leaf R.2.1.2.1s: no-room at R.2.1.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+  parent snapshot R.2.1.2.1 (round 3); H forced at ['BL(1,0)', 'BR(0,1)', 'BR(1,0)']; roles {'F1': ['BL(1,0)', 'BR(1,0)'], 'F2': ['BR(0,1)', 'TR(0,1)', 'TR(1,0)'], 'F3': ['TL(1,0)', 'TR(0,1)', 'TR(1,0)'], 'F4': ['TL(1,0)'], 'H': ['BL(1,0)', 'BR(0,1)', 'BR(1,0)']}; cells {'F1': -1, 'F2': 22, 'F3': -1, 'F4': 7}; misses {'F4': ['TR(1,0)']}
+  role H (127 pieces of the parent's snapshot): 931 admissible poses (slots ['BL(1,0)', 'BR(0,1)', 'BR(1,0)'], misses [])
+  role F1 (79 pieces of the parent's snapshot): 546 admissible poses (slots ['BL(1,0)', 'BR(1,0)'], misses [])
+  role F2 (51 pieces of the parent's snapshot): 341 admissible poses (slots ['BR(0,1)', 'TR(0,1)', 'TR(1,0)'], misses [])
+  role F3 (73 pieces of the parent's snapshot): 222 admissible poses (slots ['TL(1,0)', 'TR(0,1)', 'TR(1,0)'], misses [])
+  role F4 (101 pieces of the parent's snapshot): 699 admissible poses (slots ['TL(1,0)'], misses ['TR(1,0)'])
+  no-room kill (k=10, m=1): a refutation needs 1 mutually disjoint free squares beside the configuration (grid over the container, 20012 admissible)
+  pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3', 'F4']: 0 over 400 H poses (0 partial tries); refuting: 0  -> 0 refutations (consistent with the kill)
