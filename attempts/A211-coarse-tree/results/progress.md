@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-13 01:39:31
+# A211 progress -- 2026-09-13 01:44:38
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -65,14 +65,15 @@ CPU-h in this block: 15.86
 | k5_11_interior_Y0217_D02 | zero | 2 (tree: 20 nodes, depth 7, CC 2, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1853 |
 | k5_11_interior_Y0217_D03 | g1 | 2 (tree: 18 nodes, depth 6, CC 4, exact 1, NS 3, pockets 0) | ALIVE (wall) | 1930 |
 | k5_11_interior_Y0217_D03 | zero | 2 (tree: 20 nodes, depth 5, CC 4, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1861 |
+| k5_11_interior_Y0217_D06 | g1 | 2 (tree: 17 nodes, depth 5, CC 3, exact 0, NS 4, pockets 1) | ALIVE (wall) | 1847 |
 | k5_11_interior_Y0217_D06 | zero | 2 (tree: 18 nodes, depth 6, CC 3, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1816 |
 | k5_11_interior_Y0217_D07 | zero | 2 (tree: 25 nodes, depth 5, CC 5, exact 0, NS 4, pockets 0) | ALIVE (wall) | 1828 |
 
-CPU-h in this block: 7.26
+CPU-h in this block: 7.78
 
 ## Price and projection
 
 * gallery: 2 / 18 pages DEAD at the window pad, 15.86 CPU-h
-* frontier: 10 nodes run (2 DEAD at the window pad), 7.26 CPU-h; the census has 316 alive nodes, 293 remaining
-* PRICE over the first 10 frontier nodes: mean 2615 s, median 3671 s per node (both pads); PROJECTION for the remaining 293: 212.8 CPU-h (cap 200)
+* frontier: 10 nodes run (2 DEAD at the window pad), 7.78 CPU-h; the census has 316 alive nodes, 293 remaining
+* PRICE over the first 10 frontier nodes: mean 2799 s, median 3671 s per node (both pads); PROJECTION for the remaining 293: 227.8 CPU-h (cap 200)
 
