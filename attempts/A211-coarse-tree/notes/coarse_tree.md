@@ -141,3 +141,42 @@ closed at ANY depth is recorded `INHERIT` with its source certificate instead of
 **On the page and in the row.**  Inherited branches are drawn GREY in the tree table with the campaign, the rule and
 the certificate path (`fig211.side`, `fig211.node_note`); the result row carries `inherited_dead` / `inherited_alive`,
 `inherit_sources` (one entry per inherited kill with its certificate) and `start_nodes` / `start_runs`.
+
+## 5. Lemma ROLE-SPLIT -- bisecting a WIDE named role at an undecided leaf (2026-09-12, A211c)  [T]
+
+The PI (19:40) on the pad-0 leaf `R.1.4.2.2s` of k5_11_interior_Y0202: *"Why does this case list 'next lever' as lp on
+the node instead of no-room?  it's got 5 pins and 5 named nodes that cover a huge chunk of the box."*  Two prices were
+found.  (i) the tree SKIPPED no-room there by a once-per-k rule -- backwards, since a child's boxes are SMALLER and its
+cores therefore LARGER, so an UNDECIDED parent says nothing about the child; no-room now runs at EVERY fully named leaf
+(a node-level flag).  (ii) On that leaf no-room is UNDECIDED anyway, and the reason is width, not coverage: F4's box
+spans 0.9 in y with tilt 0-90 and F1's 0.4 x 0.35 with tilt 3-66, so their K' (the core, A132) is EMPTY -- the ten
+squares cover the container in the UNION sense only, and every core-based test (no-room's bisection, the mutual clip,
+rule CC's band) sees nothing.  The lever is to make the boxes narrow enough that the cores reappear.
+
+**Lemma ROLE-SPLIT.**  Let N be a node of the clip tree (Lemma CT) carrying a role r whose current pose set is the union
+of its pieces, and let the hull of those pieces be the box (x0, x1) x (y0, y1) x (t0, t1) in (centre, tan(tilt/2)).  Fix
+one coordinate u in {x, y, t} and a value m with u0 <= m <= u1, and let
+    N_lo = N conjoined with "the pose of r has u(r) <= m",      N_hi = N conjoined with "u(r) >= m".
+Then N is DEAD iff N_lo and N_hi are both DEAD.  *Proof.*  Every genuine packing satisfying N gives r a definite pose,
+whose coordinate u is a real number, so u <= m or u >= m: the disjunction is exhaustive (the two cases overlap on
+u = m, which only makes each child weaker).  Soundness of the child's state: the child's pieces are the parent's pieces
+intersected with the halfspace {u <= m} (a position coordinate: the rect clipped, a piece disjoint from the halfspace
+dropped; the tilt coordinate: the sub-bin [b0, b1] replaced by [b0, min(b1, m)], the piece dropped when b0 >= m), so
+the union of the child's pieces contains every pose of r satisfying the child's hypothesis, i.e. the child's pose set
+is a SUPERSET of the truth under its hypothesis -- which is all A204's cascade needs (it only ever clips and kills by
+sound necessary conditions).  The union of the two children's pose sets is the parent's, so nothing is lost.  []
+
+**Where it is applied and how it is steered (a heuristic; soundness does not depend on it).**  At a fully named leaf
+where no-room ran and did NOT kill (rule (b) of s.2 S5 returned UNDECIDED, or its pockets could not be branched), and
+after the cheap rules (a)-(d), the tree picks among the non-pin roles those that are WIDE --
+    position extent max(x1 - x0, y1 - y0) > 0.25   or   tilt range > 30 degrees --
+preferring a role whose core is EMPTY (`pg.obst[r] is None`, the A178 semantics for a K' that `polycore.build`
+refuses), then the widest such role (the extents scored against their own gates, 0.25 and 30 deg), and bisects its
+WIDEST dimension at the MIDPOINT (the exact rational midpoint of the t-interval for a tilt split).  Each child is a
+coarse node again: the coarse cascade round, then the leaf rules from the top, no-room included.  The recursion stops
+when the children decide (DEAD, or a kill by any leaf rule), when the role has already been split
+`RSPLIT_CAP = 4` times along the path, or when no role is wide.  Splitting is a BRANCH step like any other: it is
+recorded in the node's path key as `("rsplit", role, dim, m, side)`, so Lemma INHERIT (s.4) applies to it unchanged --
+a split child whose path a prior certificate closed is inherited DEAD, and a certificate written here can be inherited
+later.  The tree's depth cap counts only the row / NS / pocket steps (a split is charged to its own per-role cap), so
+splitting cannot be starved by the depth cap nor run away past 4 per role.

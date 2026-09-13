@@ -4,7 +4,10 @@ one cascade round, re-binned pieces, refine 1, no lonely clip, shallow reach) br
 slot has two named meeters on a fresh table) the leaf rules in order, cheapest first:
   (a) rule CC (Lemma CORNER-COVER, leaves211);  (b) NO-ROOM + the pocket CN bound at k >= 9 (A208 / A209: pockets
   branched on at k = 9, Lemma POCKET);  (c) the basin clip (A207, Lemma BASIN);  (d) Rule NS on a soft name (A206,
-  slivers only: MAX_FRAC);  (e) the EXACT cascade at the leaf (nsub 4 / refine 2, lonely clip, basins, 3 rounds) then
+  slivers only: MAX_FRAC);  (d') Lemma ROLE-SPLIT (rsplit211, notes/coarse_tree.md s.5: where no-room did NOT kill,
+  the widest non-pin role -- an empty core preferred -- is bisected at the midpoint of its widest dimension and both
+  halves recurse through the coarse round and the leaf rules; <= 4 splits per role along a path);
+  (e) the EXACT cascade at the leaf (nsub 4 / refine 2, lonely clip, basins, 3 rounds) then
   the sharp round -- after which the loop re-reads the table: new branches are coarse children again.
 A leaf is DEAD iff one rule proves it; a node is DEAD iff every branch is (Lemma CT); undecided = ALIVE."""
 import time
@@ -16,6 +19,7 @@ import tree206b as NB
 import tree209 as N9
 import leaves211 as L11
 import inherit211 as INH
+import rsplit211 as RS
 
 EXACT_ROUNDS = 3
 NOROOM_CAP = 120.0                     # seconds for A189's no-room at a leaf (Y0202 test: 300 s UNDECIDED x 3 ate half the wall)
@@ -25,7 +29,8 @@ class Tree211(N9.Tree209):
     def __init__(self, pg, dead_paths=None, path0=(), **kw):
         N9.Tree209.__init__(self, pg, **kw)
         self.cc_kills, self.exact_rounds, self.basin_kills = 0, 0, 0
-        self._ns = None
+        self.rsplits, self.rsplit_kills = 0, 0
+        self._ns = self._rs = None
         self.dead_paths = dead_paths or {}          # Lemma INHERIT: path -> the certificate that closed it
         self.pathof = {self.root_label: tuple(path0)}
         self.n_inherited = 0
@@ -38,7 +43,21 @@ class Tree211(N9.Tree209):
             return ("ns", str(br.get("slot")), str(br.get("role")), kind)
         if kind == "pocket":
             return ("pocket", tuple(round(float(v), 6) for v in (br.get("pocket") or ())), tuple(br.get("rows") or ()))
+        if kind == "rsplit":                                     # Lemma ROLE-SPLIT (notes/coarse_tree.md s.5)
+            return ("rsplit", str(br.get("role")), str(br.get("dim")), str(br.get("m")), str(br.get("side")))
         return ("row", str(br.get("slot")), tuple(br.get("rows") or ()))
+
+    def rsplit_used(self, label):
+        """how often each role has already been bisected on this node's path (Lemma ROLE-SPLIT's per-role cap)."""
+        c = {}
+        for s in self.pathof.get(label, ()):
+            if s and s[0] == "rsplit":
+                c[s[1]] = c.get(s[1], 0) + 1
+        return c
+
+    def eff_depth(self, depth, label):
+        """the depth the CAP counts: a role split is charged to its own per-role cap, not to the tree's depth."""
+        return depth - sum(self.rsplit_used(label).values())
 
     def child_path(self, lab, parent, br):
         p = tuple(self.pathof.get(parent, ())) + (self.step_key(br),)
@@ -101,7 +120,7 @@ class Tree211(N9.Tree209):
     def leaf_rules(self, depth, label):
         pg = self.pg
         node = self.nodes[-1]
-        caps = depth >= self.depth_cap or self.n_nodes >= self.node_cap
+        caps = self.eff_depth(depth, label) >= self.depth_cap or self.n_nodes >= self.node_cap
         if pg.T.out_of_time():
             self.alive("undecided (wall) at the fully named leaf before the leaf rules")
             return "ALIVE"
@@ -150,6 +169,15 @@ class Tree211(N9.Tree209):
         if cands and not caps and not pg.T.out_of_time():
             self._ns = cands[0]
             return "NS"
+        # (d') Lemma ROLE-SPLIT (notes/coarse_tree.md s.5): no-room ran here and did NOT kill -- the wide roles have
+        # EMPTY cores, so every core-based test is blind; bisect the widest one and let the children decide.
+        nr = node.get("noroom")
+        if nr and nr.get("verdict") != "DEAD" and self.n_nodes < self.node_cap and not pg.T.out_of_time():
+            sps = RS.candidates(pg, self.rsplit_used(label))
+            node["rsplit_candidates"] = [{k: v for k, v in s.items() if k != "m"} for s in sps[:6]]
+            if sps:
+                self._rs = sps[0]
+                return "RSPLIT"
         if pg.coarse:                                                             # (e) the exact cascade at the leaf
             t0 = time.time()
             pg.set_coarse(False)
@@ -212,7 +240,7 @@ class Tree211(N9.Tree209):
 
     def _expand(self, depth, label):
         pg = self.pg
-        ns = None
+        ns = rs = None
         while True:
             ch = TB.candidates(pg)
             n_stale = 0
@@ -231,6 +259,9 @@ class Tree211(N9.Tree209):
                 r = self.leaf_rules(depth, label)
                 if r == "NS":
                     ns = self._ns
+                    break
+                if r == "RSPLIT":
+                    rs = self._rs
                     break
                 if r == "CONTINUE":
                     continue
@@ -255,9 +286,17 @@ class Tree211(N9.Tree209):
             self.ns_splits += 1
             self.nodes[-1].update(branch_slot=ns["slot"], branch_role=ns["role"], n_branches=2, branch_rows=["meets", "misses"], ns=ns, verdict="INTERNAL")
             self.log("   Rule NS at %s: split %s at %s (meeting fraction %s; alive rows %s; named %s)" % (label, ns["role"], ns["slot"], ns["frac"], ns["rows"], ns["named"]))
+        elif rs is not None:
+            branches = RS.branches(rs)
+            self.rsplits += 1
+            self.nodes[-1].update(branch_slot=rs["role"], branch_role=rs["role"], n_branches=2, branch_rows=[b["rows"][0] for b in branches],
+                                  rsplit=dict(rs, m=str(rs["m"])), verdict="INTERNAL")
+            self.log("   Lemma ROLE-SPLIT at %s: bisect %s on %s at %s (extents %s, tilt %s deg, core %s, %d piece(s); split %d of %d)" % (
+                label, rs["role"], rs["dim"], branches[0]["m_f"], (rs["extents"]["x"], rs["extents"]["y"]), rs["extents"]["tilt"],
+                "EMPTY" if rs["core_empty"] else "non-empty", rs["n_pieces"], rs["n_splits"] + 1, RS.CAP))
         else:
-            if depth >= self.depth_cap or self.n_nodes >= self.node_cap or pg.T.out_of_time():
-                why = "depth cap" if depth >= self.depth_cap else ("node cap" if self.n_nodes >= self.node_cap else "wall")
+            if self.eff_depth(depth, label) >= self.depth_cap or self.n_nodes >= self.node_cap or pg.T.out_of_time():
+                why = "depth cap" if self.eff_depth(depth, label) >= self.depth_cap else ("node cap" if self.n_nodes >= self.node_cap else "wall")
                 return self.alive("undecided (%s) before branching on %s over %s" % (why, ch["slot"], [b["rows"] for b in ch["branches"]]))
             branches = ch["branches"]
             self.nodes[-1].update(branch_slot=ch["slot"], n_branches=len(branches), branch_rows=[b["rows"] for b in branches])
@@ -279,6 +318,15 @@ class Tree211(N9.Tree209):
             t0 = time.time()
             if str(br.get("kind", "")).startswith("ns-"):
                 N6.apply_ns(pg, br)
+            elif br.get("kind") == "rsplit":
+                try:
+                    RS.apply_rsplit(pg, br)
+                except ValueError as e:                           # the half is empty: the branch is DEAD by the split itself
+                    pg.dead = "Lemma ROLE-SPLIT at %s: %s -- the role has no pose in this half, so the branch is impossible" % (label, e)
+                    self.n_nodes += 1
+                    self.rsplit_kills += 1
+                    self.record(lab, depth + 1, br, "DEAD", "RSPLIT-EMPTY", None, t0)
+                    continue
             else:
                 TB.apply_branch(pg, br)
             clip, rnd = N6.cascade(pg, self.rounds, log=self.log)
@@ -290,5 +338,6 @@ class Tree211(N9.Tree209):
 
     def result(self):
         out = N9.Tree209.result(self)
-        out.update(cc_kills=self.cc_kills, exact_rounds=self.exact_rounds, basin_kills=self.basin_kills, n_inherited=self.n_inherited)
+        out.update(cc_kills=self.cc_kills, exact_rounds=self.exact_rounds, basin_kills=self.basin_kills, n_inherited=self.n_inherited,
+                   rsplits=self.rsplits, rsplit_kills=self.rsplit_kills)
         return out

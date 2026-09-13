@@ -32,6 +32,9 @@ def node_note(n):
     else:
         L = F6.node_note(n)
         col = "#c62828" if n.get("verdict") == "DEAD" else "#2e7d32"
+    if kind == "rsplit":
+        L = [("PANEL = Lemma ROLE-SPLIT branch %s (depth %d): the role %s bisected, this half %s (the parent's no-room was UNDECIDED and the role's box was wide; the two halves are exhaustive, notes/coarse_tree.md s.5); pins + H + roles after this node's cascade (%s rounds, %s s; t = %s s)" % (
+            n.get("label"), n.get("depth", 0), n.get("slot"), (n.get("rows") or [""])[0], n.get("n_rounds"), n.get("seconds"), n.get("t")), 6.5, col, True)]
     if kind == "exact":
         L = [("PANEL = the EXACT cascade (leaf rule e: nsub 4 / refine 2, lonely clip, basins, %s rounds) at the fully named leaf %s after the coarse rules; %s s; t = %s s" % (n.get("n_rounds"), n.get("label"), n.get("seconds"), n.get("t")), 6.5, col, True)]
     if n.get("coarse"):
@@ -41,6 +44,11 @@ def node_note(n):
     if n.get("noroom"):
         r = n["noroom"]
         L.append(("NO-ROOM leaf (A189 Lemma 1 on the role boxes, k=%s, m=%s): %s%s; %s pockets; %s s" % (r.get("k"), r.get("m"), r.get("verdict"), (" by " + r["clip"]) if r.get("clip") else "", r.get("n_pockets"), r.get("seconds")), 6.5, col, True))
+    if n.get("rsplit"):
+        r = n["rsplit"]
+        L.append(("Lemma ROLE-SPLIT here: %s bisected on %s at %s (extents x %s / y %s, tilt %s deg; core %s; split %s of %s) -- both halves below" % (
+            r.get("role"), r.get("dim"), r.get("m"), (r.get("extents") or {}).get("x"), (r.get("extents") or {}).get("y"), (r.get("extents") or {}).get("tilt"),
+            "EMPTY" if r.get("core_empty") else "non-empty", (r.get("n_splits") or 0) + 1, 4), 6.5, "#1565c0", True))
     if kind == "pocket" and n.get("verdict") == "DEAD":
         L.append(("DEAD by %s at round %s: %s" % (n.get("clip"), n.get("killed_round"), str(n.get("leaf") or "")[:300]), 6.5, col, True))
     return L
@@ -60,8 +68,8 @@ def stage_lines(doc):
 
 def run_head(doc, key, d):
     col = "#c62828" if d.get("verdict") == "DEAD" else ("#2e7d32" if d.get("verdict") == "ALIVE" else "#555")
-    L = [("RUN %s: the COARSE tree from %s -- coarse internal nodes (one round, re-binned pieces, refine 1, no lonely clip), the leaf rules at every fully named leaf: rule CC -> no-room + pockets -> basin clip (basins %s) -> Rule NS -> the exact cascade; verdict %s in %s s; %s nodes, depth %s, %s CC kills, %s exact leaf cascades, %s NS splits, %s pocket splits, %s inherited kills" % (
-        key, d.get("source"), [(b.get("cell"), b.get("r_c")) for b in (d.get("basins") or [])] or "none certified", d.get("verdict"), d.get("seconds"), d.get("n_nodes"), d.get("max_depth"), d.get("cc_kills"), d.get("exact_rounds"), d.get("ns_splits"), d.get("pocket_splits"), len(d.get("inherited") or {})), 9, col, True)]
+    L = [("RUN %s: the COARSE tree from %s -- coarse internal nodes (one round, re-binned pieces, refine 1, no lonely clip), the leaf rules at every fully named leaf: rule CC -> no-room + pockets -> basin clip (basins %s) -> Rule NS -> Lemma ROLE-SPLIT -> the exact cascade; verdict %s in %s s; %s nodes, depth %s, %s CC kills, %s exact leaf cascades, %s NS splits, %s pocket splits, %s role splits, %s inherited kills" % (
+        key, d.get("source"), [(b.get("cell"), b.get("r_c")) for b in (d.get("basins") or [])] or "none certified", d.get("verdict"), d.get("seconds"), d.get("n_nodes"), d.get("max_depth"), d.get("cc_kills"), d.get("exact_rounds"), d.get("ns_splits"), d.get("pocket_splits"), d.get("rsplits"), len(d.get("inherited") or {})), 9, col, True)]
     if d.get("leaf"):
         L.append((str(d["leaf"])[:600], 7, col, False))
     return L
@@ -111,7 +119,7 @@ def page_svg(doc):
     PW = int(S0 * S) + 20
     NH = 110
     ncol = 4
-    body = [text(20, 22, "%s -- A211 coarsetree211: the COARSE tree (cheap coarse internal nodes; at every fully named leaf: rule CC -> no-room + pockets -> basin clip -> Rule NS -> the exact cascade last; pad 0 first); NO LP" % doc["nid"], 12, "#000", True),
+    body = [text(20, 22, "%s -- A211 coarsetree211: the COARSE tree (cheap coarse internal nodes; at every fully named leaf: rule CC -> no-room + pockets -> basin clip -> Rule NS -> Lemma ROLE-SPLIT -> the exact cascade last; pad 0 first); NO LP" % doc["nid"], 12, "#000", True),
             text(20, 36, "per run: the ROOT panel, then one panel per closed branch (first %d); blue = pins; black = H (thin = pieces, filled = certified K'); coloured = instantiated meeters; grey stipple = alive cells of the anonymous option table (never green); yellow = the count's witness" % MAXP, 8, "#444"),
             text(20, 48, "read-only from certs/coarsetree211_%s.json (record %s); rendered %s" % (doc["nid"], doc.get("record"), time.strftime("%Y-%m-%d %H:%M:%S")), 8, "#444")]
     y = wrap(body, 20, 62, stage_lines(doc), 300) + 4

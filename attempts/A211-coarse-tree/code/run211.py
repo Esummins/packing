@@ -71,7 +71,12 @@ def save(doc, cert):
         json.dump(doc, f, indent=1, default=str)
 
 
+NOFIG = False
+
+
 def draw(doc):
+    if NOFIG:
+        return
     try:
         return fig211.render(doc)
     except Exception as e:                                        # noqa: BLE001
@@ -126,6 +131,7 @@ def row_of(doc, key, cert):
                 run=key, pad=d.get("pad"), mode="page", source=d.get("source"), cfg=d.get("cfg"), lam=d.get("lam"), verdict=d.get("verdict"), leaf=d.get("leaf"),
                 n_nodes=d.get("n_nodes"), n_records=d.get("n_records"), max_depth=d.get("max_depth"), alive_leaves=d.get("alive_leaves"), dead_leaves=d.get("dead_leaves"),
                 ns_splits=d.get("ns_splits"), pocket_splits=d.get("pocket_splits"), cc_kills=d.get("cc_kills"), exact_rounds=d.get("exact_rounds"), basin_kills=d.get("basin_kills"),
+                rsplits=d.get("rsplits"), rsplit_kills=d.get("rsplit_kills"),
                 noroom=[dict(label=r["label"], k=r["k"], verdict=r["verdict"], clip=r["clip"], seconds=r["seconds"]) for r in (d.get("noroom_runs") or [])],
                 inherited=d.get("inherited"), inherited_dead=d.get("inherited_dead"), inherited_alive=d.get("inherited_alive"), n_inherited=d.get("n_inherited"),
                 inherit_sources=[dict(camp=e.get("camp"), label=e.get("label"), rule=e.get("rule"), cert=e.get("cert"), ledger=e.get("ledger"))
@@ -192,9 +198,10 @@ def run_tree(doc, a, pad, cert, log=print):
     agg["tests"], agg["steps"], agg["seconds"] = T.tests[-4000:], T.steps[-2000:], round(T.now(), 1)
     d.update(agg)
     log("   => %s (%s) in %.1f s: %d start runs, %d nodes, depth %d, %d CC kills, %d exact leaf cascades, %d NS splits, %d pocket splits, "
-        "%d inherited dead (%d up front + %d in tree), %d dead / %d alive leaves%s" % (
+        "%d role splits (%d empty-half kills), %d inherited dead (%d up front + %d in tree), %d dead / %d alive leaves%s" % (
             agg["verdict"], key, agg["seconds"], len(starts), agg["n_nodes"], agg["max_depth"], agg["cc_kills"], agg["exact_rounds"], agg["ns_splits"],
-            agg["pocket_splits"], agg["n_inherited"], len(rows), agg["n_inherited"] - len(rows), agg["dead_leaves"], agg["alive_leaves"], " (WALL)" if agg["wall"] else ""))
+            agg["pocket_splits"], agg["rsplits"], agg["rsplit_kills"], agg["n_inherited"], len(rows), agg["n_inherited"] - len(rows), agg["dead_leaves"],
+            agg["alive_leaves"], " (WALL)" if agg["wall"] else ""))
     log("   per node: " + "; ".join("%s d%s %s%s %ss%s" % (n["label"], n.get("depth"), n.get("verdict"), (" " + n["clip"]) if n.get("clip") else "",
                                                            n.get("seconds"), "" if n.get("coarse", True) else " [exact]") for n in d["nodes"]))
     return key, agg["verdict"]
@@ -203,7 +210,7 @@ def run_tree(doc, a, pad, cert, log=print):
 def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, dead_paths, base, have_merge, log=print):
     """one coarse tree per start node (the shared wall); the pad is DEAD iff every start node's tree is DEAD."""
     agg = dict(verdict="DEAD", n_nodes=0, n_records=len(rows), max_depth=0, alive_leaves=0, dead_leaves=len(rows), ns_splits=0, pocket_splits=0,
-               cc_kills=0, exact_rounds=0, basin_kills=0, n_inherited=len(rows), killing=list(
+               cc_kills=0, exact_rounds=0, basin_kills=0, rsplits=0, rsplit_kills=0, n_inherited=len(rows), killing=list(
                    dict(label=r["label"], slot=r["slot"], rows=r["rows"], clip="INHERIT", round=None, seconds=0.0, cert=r["source_cert"]) for r in rows),
                undecided=[], noroom_runs=[], inherited={}, runs=[], root=None, basin_clips=[])
     done = []
@@ -244,7 +251,8 @@ def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, d
             r0 = tree.nodes[0] if tree.nodes else {}
             agg["root"] = dict(verdict=r0.get("verdict"), clip=r0.get("clip"), seconds=r0.get("seconds"), n_rounds=r0.get("n_rounds"), kept=r0.get("kept"),
                                forced_H=r0.get("forced_H"), role_slots=r0.get("role_slots"), alive_cells=r0.get("alive_cells"))
-        for k in ("n_nodes", "n_records", "alive_leaves", "dead_leaves", "ns_splits", "pocket_splits", "cc_kills", "exact_rounds", "basin_kills", "n_inherited"):
+        for k in ("n_nodes", "n_records", "alive_leaves", "dead_leaves", "ns_splits", "pocket_splits", "cc_kills", "exact_rounds", "basin_kills",
+                  "rsplits", "rsplit_kills", "n_inherited"):
             agg[k] = agg.get(k, 0) + (out.get(k) or 0)
         agg["max_depth"] = max(agg["max_depth"], out.get("max_depth") or 0)
         agg["killing"] += out.get("killing") or []
@@ -303,8 +311,12 @@ if __name__ == "__main__":
     ap.add_argument("--nodes", type=int, default=600)
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--no-inherit", dest="no_inherit", action="store_true", help="ignore the prior certificates and run the page from its A203 root")
+    ap.add_argument("--cert-dir", dest="cert_dir", default=CERTS, help="where the certificate goes (a TEST run points this away from certs/)")
+    ap.add_argument("--results", default=RES, help="the jsonl the row is appended to (a TEST run points this away from results/)")
+    ap.add_argument("--no-fig", dest="no_fig", action="store_true", help="do not write the SVG page (a TEST run beside the running workers)")
     a = ap.parse_args()
-    cert = os.path.join(CERTS, "coarsetree211_%s.json" % a.nid)
+    RES, NOFIG = os.path.abspath(a.results), bool(a.no_fig)
+    cert = os.path.join(os.path.abspath(a.cert_dir), "coarsetree211_%s.json" % a.nid)
     doc = dict(nid=a.nid, runs={})
     if os.path.exists(cert) and not a.force:
         try:
@@ -312,7 +324,8 @@ if __name__ == "__main__":
         except Exception:
             doc = dict(nid=a.nid, runs={})
     run_page(doc, a, cert)
-    try:
-        print("   gallery: %s" % fig211.gallery(), flush=True)
-    except Exception as e:                                        # noqa: BLE001
-        print("   gallery failed: %r" % (e,), flush=True)
+    if not NOFIG:
+        try:
+            print("   gallery: %s" % fig211.gallery(), flush=True)
+        except Exception as e:                                    # noqa: BLE001
+            print("   gallery failed: %r" % (e,), flush=True)
