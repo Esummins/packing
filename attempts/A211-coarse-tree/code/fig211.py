@@ -27,7 +27,8 @@ def node_note(n):
         L = [("PANEL = Lemma POCKET branch %s (depth %d): the 10th square's centre in pocket %s (diameter %s) instantiated as %s; pins + H + roles after this node's cascade (%s rounds, %s s; t = %s s)" % (
             n.get("label"), n.get("depth", 0), n.get("pocket"), n.get("diam"), n.get("pocket_role"), n.get("n_rounds"), n.get("seconds"), n.get("t")), 6.5, "#000", True)]
     elif kind == "inherited":
-        return [("%s: DEAD inherited from A206 -- %s" % (n.get("label"), str(n.get("leaf"))[:300]), 6.5, "#c62828", True)]
+        return [("%s: DEAD INHERITED (Lemma INHERIT) from %s %s -- %s" % (n.get("label"), n.get("source_camp"), n.get("source_label"), n.get("source_cert")), 6.5, "#777", True),
+                (str(n.get("leaf"))[:300], 6.5, "#777", False)]
     else:
         L = F6.node_note(n)
         col = "#c62828" if n.get("verdict") == "DEAD" else "#2e7d32"
@@ -66,6 +67,45 @@ def run_head(doc, key, d):
     return L
 
 
+def side(doc, pad, body, x, y):
+    """A205's side table with the INHERITED rows in GREY, each citing the certificate that closed the branch."""
+    d = doc["pads"].get(pad) or {}
+    col = "#c62828" if d.get("verdict") == "DEAD" else ("#2e7d32" if d.get("verdict") == "ALIVE" else "#555")
+    inh = d.get("inherit") or {}
+    L = [("%s  pad %s  A211 COARSE TREE from the MERGED prior state: %s  (%s s; %s nodes, depth %s; %s dead / %s alive leaves%s)" % (
+        doc["nid"], pad, d.get("verdict"), d.get("seconds"), d.get("n_nodes"), d.get("max_depth"), d.get("dead_leaves"), d.get("alive_leaves"),
+        "; WALL" if d.get("wall") else ""), 11, col, True),
+        ("Lemma INHERIT (notes/coarse_tree.md s.4): %s prior tree(s) %s merged on the path key; %s branch(es) inherited DEAD (FINAL, grey below, each with its certificate); %s start node(s) run here: %s" % (
+            inh.get("n_trees"), [t.get("camp") for t in (inh.get("trees") or [])], d.get("inherited_dead"), d.get("inherited_alive"),
+            [(s.get("label"), s.get("camp"), s.get("anc_label"), s.get("steps")) for s in (d.get("start_nodes") or [])][:10]), 7, "#555", False)]
+    if d.get("leaf"):
+        L.append((str(d["leaf"])[:500], 7.5, col, False))
+    st = d.get("start") or {}
+    L.append(("start = %s (%s): H box %s, forced H %s, H units %s alive of %s; cfg %s" % (
+        st.get("source"), st.get("file"), st.get("H_box"), st.get("forced_H"), st.get("n_units_alive"), st.get("n_units"), d.get("cfg")), 7, "#333", False))
+    L.append(("verdict label %s" % d.get("verifier"), 6.5, "#555", False))
+    L.append(("label        depth  slot      <- rows          kind   verdict   clip     round  seconds  t     source", 8, "#000", True))
+    for n in d.get("nodes") or []:
+        c = "#777" if n.get("kind") == "inherited" else ("#c62828" if n.get("verdict") == "DEAD" else ("#2e7d32" if n.get("verdict") == "ALIVE" else "#333"))
+        tail = ("  <- %s %s [%s] %s" % (n.get("source_camp"), n.get("source_label"), n.get("source_rule"),
+                                        os.path.basename(str(n.get("source_cert"))))) if n.get("kind") == "inherited" else (
+            ("  " + str(n.get("reason"))[:70]) if n.get("reason") else "")
+        L.append(("%-12s %-6s %-9s %-16s %-6s %-9s %-8s %-6s %-8s %s%s" % (
+            n.get("label"), n.get("depth"), n.get("slot") or "root", str(n.get("rows") or ""), n.get("kind") or "", n.get("verdict"), n.get("clip") or "-",
+            n.get("killed_round") or "-", n.get("seconds"), n.get("t"), tail), 7, c, False))
+    for n in d.get("nodes") or []:
+        if n.get("kind") == "inherited":
+            L.append(("INHERITED %-12s %s<-%s  FINAL by %s %s [%s]%s: %s" % (
+                n.get("label"), n.get("slot"), n.get("rows"), n.get("source_camp"), n.get("source_label"), n.get("source_rule"),
+                ("  ledger " + str(n.get("source_ledger"))) if n.get("source_ledger") else "", n.get("source_cert")), 6.5, "#777", False))
+    for r in d.get("runs_started") or d.get("runs") or []:
+        if isinstance(r, dict) and r.get("label"):
+            L.append(("start run %-12s %s in %s s (from %s %s; steps applied %s)" % (
+                r.get("label"), r.get("verdict"), r.get("seconds"), r.get("cert"), r.get("anc"), r.get("applied")), 7, "#333", False))
+    L.append(("window pending: %s; lam %s; rendered %s" % (d.get("window_pending"), d.get("lam"), time.strftime("%Y-%m-%d %H:%M:%S")), 7, "#555", False))
+    return wrap(body, x, y, L, 150)
+
+
 def page_svg(doc):
     S = 80
     PW = int(S0 * S) + 20
@@ -81,7 +121,7 @@ def page_svg(doc):
         show = nodes[:1] + [n for n in nodes[1:] if n.get("verdict") in ("DEAD", "ALIVE")][:MAXP - 1]
         nrow = max(1, (len(show) + ncol - 1) // ncol)
         y = wrap(body, 20, y + 10, run_head(doc, key, d), 300) + 4
-        ys = F5.side(dict(doc, pads={pad: d}), pad, body, 20 + ncol * PW + 10, y + 12)
+        ys = side(dict(doc, pads={pad: d}), pad, body, 20 + ncol * PW + 10, y + 12)
         for k, n in enumerate(show):
             ox, oy = 20 + (k % ncol) * PW, y + (k // ncol) * (S0 * S + NH + 12)
             panel(doc, dict(n["snapshot"], pad=pad), body, ox, oy, S, small=False)

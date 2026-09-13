@@ -25,15 +25,19 @@ import tree206 as N6                                           # noqa: E402
 import clip207 as C                                            # noqa: E402
 import coarse211 as C11                                        # noqa: E402
 import tree211 as N11                                          # noqa: E402
+import inherit211 as INH                                       # noqa: E402
+import startload211 as SL                                      # noqa: E402
 import fig211                                                  # noqa: E402
 
 C11.install()
 FP, QP, MB = P.FP, P.QP, P.MB
 A206CERTS = os.path.join(ROOT, "attempts", "A206-named-split", "certs")
-VERIFIER = ("[C: closed-form / library clip trace + the leaf lemma (Lemma CORNER-COVER / A189 Lemma 1 / Lemma CN / Lemma BASIN)] A211 coarse tree "
+VERIFIER = ("[C: closed-form / library clip trace + the leaf lemma (Lemma CORNER-COVER / A189 Lemma 1 / Lemma CN / Lemma BASIN) + Lemma INHERIT] A211 coarse tree "
             "(notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces, refine 1, no lonely clip, shallow reach: supersets); "
             "at every fully named leaf rule CC (A210), A208 no-room + pocket CN bound (pockets branched at k = 9), A207 basin clip, A206 Rule NS (MAX_FRAC 0.5), "
-            "then the exact A204/A205 cascade (nsub 4 / refine 2, lonely clip, sharp round); DEAD iff every branch DEAD (Lemma CT); no verifier clause")
+            "then the exact A204/A205 cascade (nsub 4 / refine 2, lonely clip, sharp round); started from the MERGED state of every prior certificate "
+            "(Lemma INHERIT: branches closed by A205 / A206 / A209 / A210 / A208 / A207 are FINAL and cited; the tree runs only the remaining start nodes, "
+            "loaded from the recorded snapshot with the pieces padded outward); DEAD iff every branch DEAD (Lemma CT); no verifier clause")
 
 
 def belownormal():
@@ -123,7 +127,10 @@ def row_of(doc, key, cert):
                 n_nodes=d.get("n_nodes"), n_records=d.get("n_records"), max_depth=d.get("max_depth"), alive_leaves=d.get("alive_leaves"), dead_leaves=d.get("dead_leaves"),
                 ns_splits=d.get("ns_splits"), pocket_splits=d.get("pocket_splits"), cc_kills=d.get("cc_kills"), exact_rounds=d.get("exact_rounds"), basin_kills=d.get("basin_kills"),
                 noroom=[dict(label=r["label"], k=r["k"], verdict=r["verdict"], clip=r["clip"], seconds=r["seconds"]) for r in (d.get("noroom_runs") or [])],
-                inherited=d.get("inherited"), basins=d.get("basins"), killing=d.get("killing"), undecided=d.get("undecided"), seconds=d.get("seconds"), root=d.get("root"),
+                inherited=d.get("inherited"), inherited_dead=d.get("inherited_dead"), inherited_alive=d.get("inherited_alive"), n_inherited=d.get("n_inherited"),
+                inherit_sources=[dict(camp=e.get("camp"), label=e.get("label"), rule=e.get("rule"), cert=e.get("cert"), ledger=e.get("ledger"))
+                                 for e in ((d.get("inherit") or {}).get("inherited_dead") or [])],
+                start_nodes=d.get("start_nodes"), start_runs=d.get("runs"), basins=d.get("basins"), killing=d.get("killing"), undecided=d.get("undecided"), seconds=d.get("seconds"), root=d.get("root"),
                 wall=d.get("wall"), window_pending=d.get("window_pending"), stage0=doc.get("stage0"), verdicts=doc.get("verdicts"), stage_reached=doc.get("stage_reached"),
                 nodes_brief=brief_nodes(d.get("nodes") or []), verifier=VERIFIER, cert=os.path.relpath(cert, ROOT).replace("\\", "/"), when=time.strftime("%Y-%m-%d %H:%M:%S"))
     os.makedirs(os.path.dirname(RES), exist_ok=True)
@@ -132,54 +139,123 @@ def row_of(doc, key, cert):
     return slim
 
 
+def inherited_rows(M):
+    """the branches every prior certificate already closed, as FINAL grey rows on the page (Lemma INHERIT)."""
+    rows = []
+    for e in M["info"]["inherited_dead"]:
+        p = e["path"]
+        rows.append(dict(label=e["label"], depth=e["n_steps"], slot=(p[-1][1] if p else None), kind="inherited", rows=(p[-1][2] if p else None),
+                         named=None, verdict="DEAD", clip="INHERIT", killed_round=None, seconds=0.0, t=0.0, n_rounds=0, snapshot=None,
+                         source_cert=e["cert"], source_label=e["label"], source_camp=e["camp"], source_rule=e["rule"], source_ledger=e.get("ledger"),
+                         source_path=["%s<-%s" % (s[1], s[2]) for s in p], path_key=e.get("key"),
+                         reason="inherited DEAD (final) from %s %s" % (e["camp"], e["cert"]),
+                         leaf="Lemma INHERIT (notes/coarse_tree.md s.4): the hypothesis %s is refuted by %s [%s] -- %s" % (
+                             "; ".join("%s<-%s" % (s[1], s[2]) for s in p), e["camp"], e["rule"], e["cert"]),
+                         verifier="[C: library clip trace] inherited (Lemma INHERIT): %s" % e["cert"]))
+    return rows
+
+
 def run_tree(doc, a, pad, cert, log=print):
+    """PAD's run = the MERGED prior state: the inherited dead branches (final, cited) + one coarse tree per START NODE."""
     T = FP.Trace(wall=a.wall)
     rec, cls, row = FP.load_page(a.nid)
     start = stage209.start_of(a.nid, pad)
     basins = C.load_basins(cls, pad, QP.PADS[pad]) if pad != "zero" else []
-    pg = C11.CoarsePage(rec, cls, a.nid, T, pad=pad, start=start, basins=basins)
-    inh = a206_inherited(a.nid, pad, start.get("file"))
     key = "%s_page" % pad
-    page_doc(doc, pg)
-    d = doc["runs"][key] = dict(pad=pad, mode="page", source=start.get("file"), lam=float(pg.lam), start=start, verdict="RUNNING", nodes=[], basins=[C.basin_json(b) for b in basins],
-                                inherited_available={"%s<-%s" % k: v for k, v in inh.items()}, verifier=VERIFIER,
-                                cfg=dict(rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, wall=a.wall, coarse=dict(grid=[C11.NX, C11.NY, C11.NB], cap=C11.CAP, refine=C11.REFINE, max_iter=C11.MAX_ITER,
-                                         nsub=C11.NSUB, depth=C11.DEPTH, jdepth=C11.JDEPTH, kmode=C11.KMODE), exact=C11.EXACT, exact_rounds=N11.EXACT_ROUNDS, noroom_cap=N11.NOROOM_CAP,
-                                         soft_all=N6.SOFT_ALL, max_frac=N6.MAX_FRAC))
-    log("== %s page pad %s: start %s; basins %s; inherited A206 kills %s; H %s; forced H %s; %d slots; free squares %d" % (
-        a.nid, pad, start.get("file"), [(b["cell"], float(b["rc"])) for b in basins], list(d["inherited_available"]), [round(v, 3) for v in pg.roles[pg.H]], sorted(pg.forced_H), len(pg.slots), pg.n_free))
+    M = None if a.no_inherit else INH.merge(a.nid, pad, start.get("file"), log=log)
+    base = C11.CoarsePage(rec, cls, a.nid, T, pad=pad, start=start, basins=basins)
+    page_doc(doc, base)
+    rows = inherited_rows(M) if M else []
+    starts = list((M or {}).get("starts") or [])
+    dead_paths = (M or {}).get("dead_paths") or {}
+    d = doc["runs"][key] = dict(pad=pad, mode="page", source=start.get("file"), lam=float(base.lam), start=start, verdict="RUNNING", nodes=list(rows),
+                                basins=[C.basin_json(b) for b in basins], verifier=VERIFIER, inherit=(M["info"] if M else None),
+                                inherited_dead=len(rows), inherited_alive=len(starts), start_nodes=[dict(s, steps=len(s["steps"])) for s in starts],
+                                cfg=dict(rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, wall=a.wall, inherit=not a.no_inherit,
+                                         coarse=dict(grid=[C11.NX, C11.NY, C11.NB], cap=C11.CAP, refine=C11.REFINE, max_iter=C11.MAX_ITER,
+                                                     nsub=C11.NSUB, depth=C11.DEPTH, jdepth=C11.JDEPTH, kmode=C11.KMODE),
+                                         exact=C11.EXACT, exact_rounds=N11.EXACT_ROUNDS, noroom_cap=N11.NOROOM_CAP, soft_all=N6.SOFT_ALL, max_frac=N6.MAX_FRAC))
+    log("== %s page pad %s: start %s; basins %s; INHERIT %d dead branches (final) + %d start nodes %s; H %s; forced H %s; %d slots; free squares %d" % (
+        a.nid, pad, start.get("file"), [(b["cell"], float(b["rc"])) for b in basins], len(rows), len(starts), [s["label"] for s in starts][:10],
+        [round(v, 3) for v in base.roles[base.H]], sorted(base.forced_H), len(base.slots), base.n_free))
+    for r in rows:
+        log("   INHERITED DEAD %-12s %s<-%s  [%s %s] %s" % (r["label"], r["slot"], r["rows"], r["source_camp"], r["source_rule"], r["source_cert"]))
+    agg = run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, dead_paths, base, log=log)
+    agg["wall"] = T.out_of_time()
+    agg["window_pending"] = (pad == "zero") and agg["verdict"] == "DEAD"
+    agg["leaf"] = None
+    if agg["verdict"] == "DEAD":
+        agg["leaf"] = "every branch DEAD (%d inherited from prior certificates + %d proved here): " % (len(rows), len(agg["killing"]) - len(rows)) + "; ".join(
+            "%s %s<-%s by %s" % (k["label"], k.get("slot") or "root", k.get("rows"), k["clip"]) for k in agg["killing"][:40])
+        if agg["window_pending"]:
+            agg["leaf"] += " [pad 0: s0-only, WINDOW-PENDING]"
+    agg["tests"], agg["steps"], agg["seconds"] = T.tests[-4000:], T.steps[-2000:], round(T.now(), 1)
+    d.update(agg)
+    log("   => %s (%s) in %.1f s: %d start runs, %d nodes, depth %d, %d CC kills, %d exact leaf cascades, %d NS splits, %d pocket splits, "
+        "%d inherited dead (%d up front + %d in tree), %d dead / %d alive leaves%s" % (
+            agg["verdict"], key, agg["seconds"], len(starts), agg["n_nodes"], agg["max_depth"], agg["cc_kills"], agg["exact_rounds"], agg["ns_splits"],
+            agg["pocket_splits"], agg["n_inherited"], len(rows), agg["n_inherited"] - len(rows), agg["dead_leaves"], agg["alive_leaves"], " (WALL)" if agg["wall"] else ""))
+    log("   per node: " + "; ".join("%s d%s %s%s %ss%s" % (n["label"], n.get("depth"), n.get("verdict"), (" " + n["clip"]) if n.get("clip") else "",
+                                                           n.get("seconds"), "" if n.get("coarse", True) else " [exact]") for n in d["nodes"]))
+    return key, agg["verdict"]
 
-    def on_node(tree):
-        d["nodes"] = tree.nodes
-        d.update(n_nodes=tree.n_nodes, max_depth=tree.max_depth, alive_leaves=tree.alive_leaves, dead_leaves=tree.dead_leaves, ns_splits=tree.ns_splits,
-                 pocket_splits=tree.pocket_splits, cc_kills=tree.cc_kills, exact_rounds=tree.exact_rounds, seconds=round(T.now(), 1), basin_clips=list(pg.basin_rep)[-40:])
-        save(doc, cert)
-        draw(doc)
 
-    tree = N11.Tree211(pg, inherited=inh, rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, on_node=on_node, log=log, root_label="R")
-    out = tree.run()
-    root = tree.nodes[0] if tree.nodes else {}
-    out["root"] = dict(verdict=root.get("verdict"), clip=root.get("clip"), seconds=root.get("seconds"), n_rounds=root.get("n_rounds"), kept=root.get("kept"),
-                       forced_H=root.get("forced_H"), role_slots=root.get("role_slots"), alive_cells=root.get("alive_cells"))
-    out["wall"] = T.out_of_time()
-    out["window_pending"] = (pad == "zero") and out["verdict"] == "DEAD"
-    out["leaf"] = None
-    if out["verdict"] == "DEAD":
-        out["leaf"] = "every branch DEAD: " + "; ".join("%s %s%s<-%s by %s r%s" % (
-            k["label"], k.get("slot") or "root", ("[%s %s]" % (k.get("role"), "meets" if k.get("kind") == "ns-meets" else "misses")) if str(k.get("kind") or "").startswith("ns-") else "",
-            k.get("rows"), k["clip"], k["round"]) for k in out["killing"])
-        if out["window_pending"]:
-            out["leaf"] += " [pad 0: s0-only, WINDOW-PENDING]"
-    out["tests"], out["steps"], out["seconds"] = T.tests[-4000:], T.steps[-2000:], round(T.now(), 1)
-    out["basin_clips"] = list(pg.basin_rep)[-60:]
-    d.update(out)
-    d["nodes"] = tree.nodes
-    log("   => %s (%s) in %.1f s: %d nodes, depth %d, %d CC kills, %d exact leaf cascades, %d NS splits, %d pocket splits, %d inherited, %d dead / %d alive leaves%s" % (
-        out["verdict"], key, out["seconds"], out["n_nodes"], out["max_depth"], out["cc_kills"], out["exact_rounds"], out["ns_splits"], out["pocket_splits"], len(out["inherited"]),
-        out["dead_leaves"], out["alive_leaves"], " (WALL)" if out["wall"] else ""))
-    log("   per node: " + "; ".join("%s d%s %s%s %ss%s" % (n["label"], n.get("depth"), n.get("verdict"), (" " + n["clip"]) if n.get("clip") else "", n.get("seconds"), "" if n.get("coarse") else " [exact]")
-                                    for n in tree.nodes))
-    return key, out["verdict"]
+def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, dead_paths, base, log=print):
+    """one coarse tree per start node (the shared wall); the pad is DEAD iff every start node's tree is DEAD."""
+    agg = dict(verdict="DEAD", n_nodes=0, n_records=len(rows), max_depth=0, alive_leaves=0, dead_leaves=len(rows), ns_splits=0, pocket_splits=0,
+               cc_kills=0, exact_rounds=0, basin_kills=0, n_inherited=len(rows), killing=list(
+                   dict(label=r["label"], slot=r["slot"], rows=r["rows"], clip="INHERIT", round=None, seconds=0.0, cert=r["source_cert"]) for r in rows),
+               undecided=[], noroom_runs=[], inherited={}, runs=[], root=None, basin_clips=[])
+    done = []
+    for sn in (starts or [None]):
+        if T.out_of_time():
+            agg["verdict"] = "ALIVE"
+            agg["undecided"].append(dict(label=(sn or {}).get("label", "R"), reason="undecided: the wall ran out before this start node ran"))
+            log("   start %s: SKIPPED (wall)" % (sn or {}).get("label", "R"))
+            continue
+        try:
+            pg, meta = (SL.load(sn, rec, cls, a.nid, T, pad, start, basins, rounds=a.rounds, log=log) if sn else
+                        (C11.CoarsePage(rec, cls, a.nid, T, pad=pad, start=start, basins=basins), dict(label="R", path=[], steps=[], applied=[])))
+        except Exception as e:                                    # noqa: BLE001
+            agg["verdict"] = "ALIVE"
+            agg["undecided"].append(dict(label=(sn or {}).get("label", "R"), reason="undecided: the start node could not be loaded soundly (%r)" % (e,)))
+            log("   start %s: NOT LOADED (%r) -- the pad stays ALIVE" % ((sn or {}).get("label", "R"), e))
+            continue
+        lab = (sn or {}).get("label", "R")
+
+        def on_node(tree):
+            d["nodes"] = rows + done + tree.nodes
+            d.update(n_nodes=agg["n_nodes"] + tree.n_nodes, seconds=round(T.now(), 1))
+            save(doc, cert)
+            draw(doc)
+
+        tree = N11.Tree211(pg, dead_paths=dead_paths, path0=INH.path_tuple(sn) if sn else (), rounds=a.rounds, depth_cap=a.depth,
+                           node_cap=a.nodes, on_node=on_node, log=log, root_label=lab)
+        out = tree.run()
+        for n in tree.nodes[:1]:
+            n.update(start_node=lab, start_cert=(sn or {}).get("cert"), start_camp=(sn or {}).get("camp"), start_path=(sn or {}).get("path"),
+                     start_anc=(sn or {}).get("anc_label"), start_meta=meta, path_key=(sn or {}).get("key") or [])
+        done += tree.nodes
+        agg["runs"].append(dict(label=lab, verdict=out["verdict"], n_nodes=out["n_nodes"], seconds=round(T.now(), 1), cert=(sn or {}).get("cert"),
+                                anc=(sn or {}).get("anc_label"), applied=meta.get("applied"), leaf=out.get("leaf"), wall=T.out_of_time()))
+        if agg["root"] is None:
+            r0 = tree.nodes[0] if tree.nodes else {}
+            agg["root"] = dict(verdict=r0.get("verdict"), clip=r0.get("clip"), seconds=r0.get("seconds"), n_rounds=r0.get("n_rounds"), kept=r0.get("kept"),
+                               forced_H=r0.get("forced_H"), role_slots=r0.get("role_slots"), alive_cells=r0.get("alive_cells"))
+        for k in ("n_nodes", "n_records", "alive_leaves", "dead_leaves", "ns_splits", "pocket_splits", "cc_kills", "exact_rounds", "basin_kills", "n_inherited"):
+            agg[k] = agg.get(k, 0) + (out.get(k) or 0)
+        agg["max_depth"] = max(agg["max_depth"], out.get("max_depth") or 0)
+        agg["killing"] += out.get("killing") or []
+        agg["undecided"] += out.get("undecided") or []
+        agg["noroom_runs"] += out.get("noroom_runs") or []
+        agg["inherited"].update(out.get("inherited") or {})
+        agg["basin_clips"] += list(pg.basin_rep)[-20:]
+        if out["verdict"] != "DEAD":
+            agg["verdict"] = "ALIVE"
+        log("   start %-12s => %s (%d nodes; t = %.0f s of %s)" % (lab, out["verdict"], out["n_nodes"], T.now(), a.wall))
+    d["nodes"] = rows + done
+    agg["n_records"] = len(d["nodes"])
+    return agg
 
 
 def run_page(doc, a, cert, log=print):
@@ -224,6 +300,7 @@ if __name__ == "__main__":
     ap.add_argument("--depth", type=int, default=6)
     ap.add_argument("--nodes", type=int, default=600)
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--no-inherit", dest="no_inherit", action="store_true", help="ignore the prior certificates and run the page from its A203 root")
     a = ap.parse_args()
     cert = os.path.join(CERTS, "coarsetree211_%s.json" % a.nid)
     doc = dict(nid=a.nid, runs={})

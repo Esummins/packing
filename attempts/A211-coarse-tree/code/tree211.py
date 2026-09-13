@@ -15,16 +15,56 @@ import tree206 as N6
 import tree206b as NB
 import tree209 as N9
 import leaves211 as L11
+import inherit211 as INH
 
 EXACT_ROUNDS = 3
 NOROOM_CAP = 120.0                     # seconds for A189's no-room at a leaf (Y0202 test: 300 s UNDECIDED x 3 ate half the wall)
 
 
 class Tree211(N9.Tree209):
-    def __init__(self, pg, **kw):
+    def __init__(self, pg, dead_paths=None, path0=(), **kw):
         N9.Tree209.__init__(self, pg, **kw)
         self.cc_kills, self.exact_rounds, self.basin_kills = 0, 0, 0
         self._ns = None
+        self.dead_paths = dead_paths or {}          # Lemma INHERIT: path -> the certificate that closed it
+        self.pathof = {self.root_label: tuple(path0)}
+        self.n_inherited = 0
+
+    # ------------------------------------------------------------------ Lemma INHERIT at every depth
+    def step_key(self, br):
+        """the branch's hypothesis as inherit211's path step (a unit-propagation step adds none: it is derived)."""
+        kind = str(br.get("kind") or "row")
+        if kind.startswith("ns-"):
+            return ("ns", str(br.get("slot")), str(br.get("role")), kind)
+        if kind == "pocket":
+            return ("pocket", tuple(round(float(v), 6) for v in (br.get("pocket") or ())), tuple(br.get("rows") or ()))
+        return ("row", str(br.get("slot")), tuple(br.get("rows") or ()))
+
+    def child_path(self, lab, parent, br):
+        p = tuple(self.pathof.get(parent, ())) + (self.step_key(br),)
+        self.pathof[lab] = p
+        if not self.dead_paths:
+            return None, None, p
+        info, q = INH.covered(self.dead_paths, p)
+        return info, q, p
+
+    def record_inherited(self, lab, depth, br, info, p):
+        pg = self.pg
+        why = ("Lemma INHERIT: the hypothesis of this branch (%d step(s): %s) is already refuted -- %s closed it as %s in %s [%s]" % (
+            len(p), "; ".join("%s<-%s" % (s[1], s[2]) for s in p), info.get("camp"), info.get("label"), info.get("cert"), info.get("rule")))
+        self.nodes.append(dict(label=lab, depth=depth, slot=br.get("slot"), kind="inherited", rows=br.get("rows"), named=br.get("named"),
+                               verdict="DEAD", clip="INHERIT", killed_round=None, reason="inherited DEAD from %s %s" % (info.get("camp"), info.get("cert")),
+                               leaf=why, seconds=0.0, t=round(pg.T.now(), 1), n_rounds=0, snapshot=None,
+                               source_cert=info.get("cert"), source_label=info.get("label"), source_camp=info.get("camp"),
+                               source_rule=info.get("rule"), source_ledger=info.get("ledger"),
+                               verifier="[C: library clip trace] inherited (Lemma INHERIT, notes/coarse_tree.md s.4): %s" % info.get("cert")))
+        self.dead_leaves += 1
+        self.n_inherited += 1
+        self.inherit_hits[lab] = dict(info, path=[list(map(str, s)) for s in p], slot=br.get("slot"), rows=br.get("rows"))
+        pg.T.test("INHERIT", label=lab, verdict="DEAD", cert=info.get("cert"), source=info.get("label"), rule=info.get("rule"))
+        self.log("   node %-10s d%d %s<-%s: DEAD INHERITED from %s %s (%s)" % (lab, depth, br.get("slot"), br.get("rows"), info.get("camp"), info.get("label"), info.get("cert")))
+        if self.on_node:
+            self.on_node(self)
 
     def record(self, label, depth, br, verdict, clip, rnd, t0, reason=None):
         cb, self.on_node = self.on_node, None
@@ -143,6 +183,10 @@ class Tree211(N9.Tree209):
         for j, pocket in enumerate(pk):
             lab = "%s.p%d" % (label, j + 1)
             br = dict(slot="pocket", kind="pocket", rows=[j], named=None, pocket=[round(v, 6) for v in pocket], diam=round(N9.diam(pocket), 4))
+            info, _q, p = self.child_path(lab, label, br)
+            if info is not None:
+                self.record_inherited(lab, depth + 1, br, info, p)
+                continue
             if pg.T.out_of_time() or self.n_nodes >= self.node_cap:
                 NB.Tree206.undecided(self, lab, depth + 1, br, "undecided: %s before this pocket branch ran" % ("wall" if pg.T.out_of_time() else "node cap"))
                 continue
@@ -220,6 +264,10 @@ class Tree211(N9.Tree209):
         st = N6.save_state(pg)
         for i, br in enumerate(branches):
             lab = "%s.%d" % (label, i + 1)
+            info, _q, p = self.child_path(lab, label, br)
+            if info is not None:
+                self.record_inherited(lab, depth + 1, br, info, p)
+                continue
             if not self.on_path(lab):
                 self.undecided(lab, depth + 1, br, "undecided: skipped (not on the requested path %s)" % self.only)
                 continue
@@ -242,5 +290,5 @@ class Tree211(N9.Tree209):
 
     def result(self):
         out = N9.Tree209.result(self)
-        out.update(cc_kills=self.cc_kills, exact_rounds=self.exact_rounds, basin_kills=self.basin_kills)
+        out.update(cc_kills=self.cc_kills, exact_rounds=self.exact_rounds, basin_kills=self.basin_kills, n_inherited=self.n_inherited)
         return out
