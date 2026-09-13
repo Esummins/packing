@@ -9,3 +9,54 @@
    node R.1.1.1    d3 TR(0,0)<-[14]: DEAD by EmptyBox r1 (15.4 s, 1 rounds; t=89.1)
    node R.1.1.2    d3 TR(0,0)<-[19]: DEAD by FC r1 (50.0 s, 1 rounds; t=139.1)
    node R.1.1.3    d3 TR(0,0)<-[23]: DEAD by EmptyBox r1 (12.0 s, 1 rounds; t=151.2)
+   node R.1.1.4    d3 TR(0,0)<-[24]: INTERNAL (70.0 s, 1 rounds; t=221.2)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.4: split F2 at BL(1,1) (meeting fraction 0.173969; alive rows []; named ['F1', 'F2', 'H'])
+   node R.1.1.4.1  d4 BL(1,1)<-None: INTERNAL (87.0 s, 1 rounds; t=429.1)
+   node R.1.1.4.1  d4: DEAD by CC -- rule CC at R.1.1.4.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R.1.1.4.2  d4 BL(1,1)<-None: INTERNAL (71.2 s, 1 rounds; t=500.4)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.4.2: split F2 at TL(1,0) (meeting fraction 0.156807; alive rows [14]; named ['F1', 'F2'])
+   node R.1.1.4.2.1 d5 TL(1,0)<-None: INTERNAL (49.4 s, 1 rounds; t=671.0)
+   node R.1.1.4.2.1 d5: DEAD by CC -- rule CC at R.1.1.4.2.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interio
+   node R.1.1.4.2.2 d5 TL(1,0)<-None: INTERNAL (44.7 s, 1 rounds; t=715.8)
+   node R.1.1.4.2.2r1 d5 root<-None: INTERNAL (89.0 s, 1 rounds; t=804.8)
+   node R.1.1.4.2.2 d5: DEAD by CC -- rule CC at R.1.1.4.2.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interio
+   node R.1.2      d2 BR(0,1)<-[18, 22]: INTERNAL (26.3 s, 1 rounds; t=831.3)
+   no-room (k=9, m=2): UNDECIDED in 144 s (1 pockets; residue too big to pocket: 1 pocket(s) of total area 1.810 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.2: 1 pockets (k=9, m=2): the 10th square instantiated in each
+   node R.1.2.p1   d3 pocket<-[0]: INTERNAL (74.4 s, 1 rounds; t=1049.7)
+   no-room (k=10, m=1): UNDECIDED in 149 s (1 pockets; residue too big to pocket: 1 pocket(s) of total area 1.649 > 0.750 (no lane cove)
+   Rule NS at R.1.2.p1: split F4 at BR(0,1) (meeting fraction 0.068638; alive rows [23]; named ['F2', 'F3', 'F4'])
+   node R.1.2.p1.1 d4 BR(0,1)<-None: DEAD by REACH r1 (75.8 s, 1 rounds; t=1274.4)
+   node R.1.2.p1.2 d4 BR(0,1)<-None: INTERNAL (80.0 s, 1 rounds; t=1354.5)
+   no-room (k=10, m=1): UNDECIDED in 197 s (1 pockets; residue too big to pocket: 1 pocket(s) of total area 1.649 > 0.750 (no lane cove)
+   Rule NS at R.1.2.p1.2: split F2 at BL(1,1) (meeting fraction 0.045867; alive rows []; named ['F1', 'F2', 'H'])
+   node R.1.2.p1.2.1 d5 BL(1,1)<-None: INTERNAL (67.5 s, 1 rounds; t=1619.2)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.2.p1.2.1: split F2 at TL(1,0) (meeting fraction 0.195464; alive rows [14, 19]; named ['F1', 'F2', 'F4'])
+   node R.1.2.p1.2.1.1 d6 TL(1,0)<-None: INTERNAL (74.4 s, 1 rounds; t=1816.1)
+   node R.1.2.p1.2.1.1: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R            => ALIVE (18 nodes; t = 1816 s of 1800.0)
+   => ALIVE (zero_page) in 1816.3 s: 0 start runs, 18 nodes, depth 6, 3 CC kills, 0 exact leaf cascades, 5 NS splits, 1 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 7 dead / 8 alive leaves (WALL)
+   per node: R d0 INTERNAL 35.6s; R.1 d1 INTERNAL 12.4s; R.1.1 d2 INTERNAL 25.5s; R.1.1.1 d3 DEAD EmptyBox 15.4s; R.1.1.2 d3 DEAD FC 50.0s; R.1.1.3 d3 DEAD EmptyBox 12.0s; R.1.1.4 d3 INTERNAL 70.0s; R.1.1.4.1 d4 DEAD CC 87.0s; R.1.1.4.2 d4 INTERNAL 71.2s; R.1.1.4.2.1 d5 DEAD CC 49.4s; R.1.1.4.2.2 d5 INTERNAL 44.7s; R.1.1.4.2.2r1 d5 DEAD CC 89.0s; R.1.2 d2 INTERNAL 26.3s; R.1.2.p1 d3 INTERNAL 74.4s; R.1.2.p1.1 d4 DEAD REACH 75.8s; R.1.2.p1.2 d4 INTERNAL 80.0s; R.1.2.p1.2.1 d5 INTERNAL 67.5s; R.1.2.p1.2.1.1 d6 ALIVE 74.4s; R.1.2.p1.2.1.2 d6 ALIVE 0.0s; R.1.2.p1.2.2 d5 ALIVE 0.0s; R.1.3 d2 ALIVE 0.0s; R.1.4 d2 ALIVE 0.0s; R.1.5 d2 ALIVE 0.0s; R.2 d1 ALIVE 0.0s; R.3 d1 ALIVE 0.0s
+== stage 0 + CSP k5_11_interior_Y0217_D06 at the g1 pad: ALIVE in 13595 ms; kills {'H-clip': 0, 'P': 2154, 'W': 1005, 'C': 544, 'M': 2429, 'L': 10, 'R': 2679, 'X': 881}; CSP units 272 -> 272 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== k5_11_interior_Y0217_D06 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0217_D06_g1_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.008, 2.078, 1.48, 1.519, 73.74, 78.056]; forced H []; 4 slots; free squares 5
+   node R          d0 root: INTERNAL (45.6 s, 1 rounds; t=45.7)
+   node R.1        d1 BL(1,1)<-[8]: INTERNAL (16.2 s, 1 rounds; t=62.1)
+   node R.1.1      d2 BR(0,1)<-[18, 21]: INTERNAL (32.9 s, 1 rounds; t=95.2)
+   node R.1.1.1    d3 TR(0,0)<-[14]: DEAD by EmptyBox r1 (21.5 s, 1 rounds; t=116.9)
+   node R.1.1.2    d3 TR(0,0)<-[19]: DEAD by FC r1 (66.5 s, 1 rounds; t=183.5)
+   node R.1.1.3    d3 TR(0,0)<-[23]: DEAD by S-CLIP r1 (21.9 s, 1 rounds; t=205.6)
+   node R.1.1.4    d3 TR(0,0)<-[24]: INTERNAL (93.4 s, 1 rounds; t=299.2)
+   no-room (k=10, m=1): UNDECIDED in 143 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.4: split F2 at BL(1,1) (meeting fraction 0.270058; alive rows []; named ['F1', 'F2', 'H'])
+   node R.1.1.4.1  d4 BL(1,1)<-None: INTERNAL (113.2 s, 1 rounds; t=555.4)
+   node R.1.1.4.1  d4: DEAD by CC -- rule CC at R.1.1.4.1 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R.1.1.4.2  d4 BL(1,1)<-None: INTERNAL (92.7 s, 1 rounds; t=648.5)
+   no-room (k=10, m=1): UNDECIDED in 151 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.4.2: split F2 at TL(1,0) (meeting fraction 0.220511; alive rows [14]; named ['F1', 'F2'])
+   node R.1.1.4.2.1 d5 TL(1,0)<-None: INTERNAL (68.7 s, 1 rounds; t=868.6)
+   node R.1.1.4.2.1 d5: DEAD by CC -- rule CC at R.1.1.4.2.1 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interio
+   node R.1.1.4.2.2 d5 TL(1,0)<-None: INTERNAL (64.0 s, 1 rounds; t=933.1)
