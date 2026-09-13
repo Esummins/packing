@@ -1,0 +1,12 @@
+19:19:28 audit k5_11_interior_Y0202 g1_page R.1.5
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_11_interior_Y0202 g1_page leaf R.1.5: no-room at R.1.5 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+  parent snapshot R.1.1 (round None); H forced at ['BL(1,1)']; roles {'F1': ['BL(1,1)', 'TL(1,0)'], 'F2': ['BR(0,1)'], 'F3': ['BR(0,1)', 'TR(0,0)'], 'F4': ['TL(1,0)', 'TR(0,0)'], 'H': ['BL(1,1)']}; cells {'F1': 8, 'F2': 22, 'F3': 23, 'F4': -1}; misses {}
+  role H (grid over its hull box (tilt 73.74-82.37)): 441 admissible poses (slots ['BL(1,1)'], misses [])
+  role F1 (grid over its hull box in cell 8 (tilt 19.94-65.61)): 4000 admissible poses (slots ['BL(1,1)', 'TL(1,0)'], misses [])
+  role F2 (grid over its hull box in cell 22 (tilt 65.29-84.37)): 378 admissible poses (slots ['BR(0,1)'], misses [])
+  role F3 (grid over its hull box in cell 23 (tilt 66.55-78.19)): 32 admissible poses (slots ['BR(0,1)', 'TR(0,0)'], misses [])
+  role F4 (grid over its hull box (tilt 0.0-90.0)): 4000 admissible poses (slots ['TL(1,0)', 'TR(0,0)'], misses [])
+  no-room kill (k=5, m=6): a refutation needs 6 mutually disjoint free squares beside the configuration (grid over the container, 52263 admissible)
+  REFUTED (sampled): [('H', 1.9497, 1.64, 74.0), ('F1', 1.2754, 2.6463, 46.0), ('F2', 3.0017, 1.6508, 74.0), ('F3', 3.2417, 2.6263, 74.0), ('F4', 2.3731, 3.2413, 74.0)]
+  pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3', 'F4']: 7 over 400 H poses (586830 partial tries); refuting: 7  -> REFUTED (investigate: the sampled sets are supersets of the node's pieces)
