@@ -1140,6 +1140,45 @@ def collect(table, corpus):
                   + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
         )
 
+    # (7r) A211's coarsetree211 (attempts/A211-coarse-tree; the PI 2026-09-12 18:20: "the more coarse we can get away with the
+    #      better, since we want to reach the leaf kills asap"): A209's chain with CHEAP coarse internal nodes (pieces re-binned to
+    #      <= 96 units, refine 1, no lonely clip, reach depth 2, one round, branch at once -- supersets, notes/coarse_tree.md S1-S4)
+    #      and at every fully named leaf the leaf rules in order: rule CC (A210 Lemma CORNER-COVER), A208 no-room + the pocket CN
+    #      bound (pockets branched at k = 9), A207 basin clip, A206 Rule NS, then the exact cascade + sharp round.  Pad 0 FIRST.
+    #      A node is KILLED by a DEAD run at the g1 (window) pad (mode "page"); pad 0 is s0-only (WINDOW-PENDING).  Kills are
+    #      [C: closed-form / library clip trace + the leaf lemma], NO verifier clause; a tree id's family is in applies_to_tags.
+    seen211 = set()
+    for d in jl(A("A211-coarse-tree", "results", "coarsetree211.jsonl")):
+        if not d.get("nid") or str(d.get("verdict", "")) != "DEAD" or d.get("mode") != "page" or d.get("pad") not in ("g1", "zero"):
+            continue
+        nid = d["nid"].split("__", 1)[0]
+        key = (nid, d.get("pad"))
+        if key in seen211:
+            continue
+        seen211.add(key)
+        cls = d.get("cls") or ""
+        camp = "A60" if cls.startswith("trump5") else "A57"
+        pend = bool(d.get("window_pending")) or str(d.get("pad")) == "zero"
+        st0 = (d.get("stage0") or {}).get(d.get("pad")) or {}
+        how = ("stage 0 (A202 closed form + A203 CSP)" if d.get("stage0_kill") or not d.get("n_nodes") else
+               "coarse tree [%s nodes, depth %s, %s CC kills, %s exact leaf cascades, %s NS splits, %s pocket splits, %s inherited A206 kills]" % (
+                   d.get("n_nodes"), d.get("max_depth"), d.get("cc_kills"), d.get("exact_rounds"), d.get("ns_splits"), d.get("pocket_splits"), len(d.get("inherited") or {})))
+        table.add_rec(
+            "A211 coarsetree211.jsonl",
+            camp,
+            nid,
+            True,
+            "coarsetree211 coarse tree [%s pad; %s]: %s%s" % (d.get("pad"), how, (d.get("leaf") or st0.get("leaf") or "")[:160], " (s0-only; WINDOW-PENDING)" if pend else ""),
+            "A211",
+            d.get("cert") or os.path.join("attempts", "A211-coarse-tree", "results", "coarsetree211.jsonl"),
+            fdate(A("A211-coarse-tree", "results", "coarsetree211.jsonl")),
+            d,
+            note=("[C: closed-form / library clip trace + the leaf lemma (Lemma CORNER-COVER / A189 Lemma 1 / Lemma CN / Lemma BASIN)] the coarse tree (A211 notes/coarse_tree.md): "
+                  "A202/A203 closed form, coarse supersets at internal nodes (S1-S4), rule CC, A189 Lemma 1 + Lemma CN no-room, the basin clip (A207 certificates), Rule NS, "
+                  "the exact A171/A172/A173 polygon + lonely clip, A203 rule S, A161 exact miss, A198/A200 caps + Theorem FC + the count; no verifier clause; "
+                  + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(

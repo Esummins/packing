@@ -1,0 +1,89 @@
+# A211 -- the COARSE TREE: cheap internal nodes, the leaf rules at fully named leaves, exactness last (2026-09-12)
+
+The PI (18:20): *"the more coarse we can get away with the better, since we want to reach the leaf kills asap."*  A209's
+trees are WALL-limited: every gallery page sits ALIVE at 3,600 s on both pads with undecided branches because a 5-role
+exact fixed point costs 400-1,000 s and the hour goes into 10-20 internal nodes (A209 `results/progress.md`), while the
+leaf rules (Lemma CORNER-COVER, NO-ROOM + the pocket CN bound, Lemma BASIN, Rule NS) kill in milliseconds to seconds
+once a fully named leaf is reached.  So the internal nodes are made CHEAP supersets and exactness is spent only where
+a kill is claimed.  Labels: [T] proved, [S] supported, [M] measured, [C] open.  Code: `code/coarse211.py` (the coarse
+node), `tree211.py` (the tree with the leaf rules), `leaves211.py` (rule CC on the live node), `run211.py`; A209's
+chain copied at 65a4903e (`poly204*`, `tree205*`, `tree206*`, `tree207`, `tree209`, `clip207`, `stage209`, `load211`)
+and A210's `cc210` / `leaves210` at 65a4903e, imported unchanged except where named below.
+
+## 1. The setting (A205 Lemma CT, `attempts/A205-clip-tree/notes/clip_tree.md` s.1)  [T]
+
+A node N of the clip tree is a hypothesis about the packing (pins, H's pieces, instantiated roles F_i as pieces, some
+pinned to a grid cell, each named at the slots it is hypothesised to meet, Rule-NS miss hypotheses); A204's cascade at
+N is a chain of sound clips and sound kills; the branching rule over a forced slot's remaining meeter options is
+exhaustive PROVIDED the option table read is that of a round in which no role was instantiated (the fresh-table
+proviso); N is DEAD iff every branch is DEAD.  Nothing below changes the branching rule, the apply, or the leaf
+lemmas; everything below only WEAKENS the clips at internal nodes (keeps more poses) and reorders the leaf work.
+
+## 2. The soundness points, each a necessary condition on a genuine packing of N  [T]
+
+**S1 (re-binning).**  At a coarse node every non-pin role carrying more than CAP = 96 pieces is replaced by the units
+of a 4 x 4 x 6 grid (sub-rects x tilt bins, exact rationals) of its own hull that MEET some piece
+(`coarse211.rebin`, open overlap; a degenerate piece counts when it lies inside the unit).  Every piece is covered by
+the units it meets, so the union of the units is a SUPERSET of the union of the pieces: the role's true pose (which
+lies in some piece) lies in some unit.  Every downstream test (K', reach, rule S, the count, FC, Rule NS's meeting
+fraction, rule CC's slack, NO-ROOM's boxes) is monotone in the pose set -- a larger set kills less and claims less --
+so a coarse DEAD is a DEAD.  The exact leaf cascade starts from the coarse units (a superset of the exact node).
+
+**S2 (a prefix of the clip chain).**  The coarse fixed point (`coarse211.coarse_fixpoint`) is A204's `poly204.fixpoint`
+with the LONELY clip omitted, refine = 1 (A204: 2), at most 2 mutual-clip passes (A204: up to 10), and K' rebuilt per
+piece (A172's certified per-piece intersection; KMODE "union" = A171's union-hull polygon is the box-only fallback,
+also certified, weaker).  Every pass is one of A171/A172/A173's certified clips (container clip, tautologous split,
+mutual clip against K'); any PREFIX of a chain of sound clips is sound (A205's cost levers (i)-(v) rest on the same
+fact).  Omitting the lonely clip and the basin clip at internal nodes keeps more poses.  The rule-S clip and Lemma HC
+on the rows (A205 s.2) are unchanged and cheap.
+
+**S3 (shallow reach).**  The option table's per-cell reach bisects 2 levels per cell and 1 for joint slot sets (A198:
+5 / 2; `CoarsePage.set_coarse`), and a role's reach against its slots is clipped in place (depth 0).  A shallower
+bisection stops earlier in the same tautologous split-and-test tree, so its survivors are a superset of the deeper
+survivors: the rows, unions, caps, Theorem FC's `avail` and the count all see a larger set (fewer kills, never a
+wrong one).  A205's seeded reach (the parent's survivors re-clipped in place against the obstacles that changed) is
+sound by hypothesis implication: a pose the parent's K' killed is impossible under the child's hypothesis, which
+implies the parent's, whatever the child's coarse K' looks like.
+
+**S4 (one round, then branch).**  A coarse node runs ONE cascade round (fixed point, option table, caps, FC, count,
+apply) and branches at once on A205's rule (fewest rows; pairs when no named meeter; unit propagation).  The fresh-
+table proviso is kept exactly as A205/A206: `candidates()` returns "stale" when the last round instantiated a role and
+the tree runs a refresh round (coarse, one round) before any branch.  Depth cap 6, node cap 600.
+
+**S5 (the leaf rules, in order, at a FULLY NAMED node -- every forced slot has two named meeters on a fresh table).**
+  (a) rule CC (A210 Lemma CORNER-COVER, Corollaries CC1 / CC') on the live node (`leaves211`): the pose classes are the
+      node's current pieces (coarse units at an internal leaf: they over-state the wall slack, and CC1's band grows
+      with the slack -- CC'(a) says the page's slack is an upper bound anyway), the candidate second meeters are the
+      slot's alive anonymous cells and the other roles' hull boxes (supersets).  DEAD when a role the node
+      hypothesises at p cannot reach the band, or when every pose class of the pushed-in role leaves no second meeter.
+      The band's formulas hold for every slack d1, d2 >= 0 (the fourth halfplane never meets the cell); NEAR = 0.6 is a
+      usefulness gate, not a soundness condition.  lam = 1 at pad 0, the page's lam on the window pad (CC').
+  (b) NO-ROOM (A189 Lemma 1) on the roles' hull BOXES with the pocket CN bound at k >= 9 (A208 / A209 `noroom_at`;
+      cores from boxes lie inside cores from pieces: sound, weaker); at k = 9 the pockets are BRANCHED on (Lemma
+      POCKET, A209 `notes/k5killer.md`: the 10th square's centre lies in some pocket, the disjunction is exhaustive,
+      each branch instantiates a superset) with a 300 s cap on A189's search (a shorter search decides less).
+  (c) the basin clip (A207 Lemma BASIN (ii)) with `results/basin207.jsonl`'s BASIN rows whose window covers the page's,
+      applied to every non-pin role's pieces; a role emptied is DEAD by BASIN.
+  (d) Rule NS (A206) on the soft name with the smallest meeting fraction below MAX_FRAC = 0.5 (slivers only); the two
+      children [r meets p] / [r misses p] are exhaustive (A206 s.1) and are coarse nodes again.
+  (e) ONLY THEN the exact cascade at the leaf: `set_coarse(False)` restores A209's node (nsub 4 / refine 2, the lonely
+      clip, the basins, reach 5 / 2) and A204's cascade runs 3 rounds from the coarse units (a superset: sound), then
+      A205's sharp round (refine 3 / nsub 8).  After it the table is re-read: new branches are coarse children.
+  A leaf is DEAD iff one rule proves it; the node is DEAD iff every branch is; undecided (wall / caps) = ALIVE.
+  No rule is applied twice to the same state without a change in between (flags `noroom_done`, `basin_done`,
+  `sharpened`, `coarse`, reset at every branch).
+
+**S6 (pad 0 first).**  Each page runs pad 0 (lam = 1) first, then the G1 window pad; a pad-0 DEAD is recorded
+s0-only, WINDOW-PENDING (A209's rule); a page is killed only by a DEAD window run.  The pad enters only through
+Theorem FC's slot pads and CC's lam.
+
+**S7 (certificates and audit).**  Every kill carries branch / rule / round / seconds and the node's last snapshot
+(`certs/coarsetree211_<nid>.json`), verdict `[C: closed-form / library clip trace + the leaf lemma]`, no verifier
+clause; `code/audit211.py` (A206's audit206b as A209 adapted it: sampling inside the parent's snapshot pieces, exact
+meets test, FC and CC kills need TWO meeters of the slot -- the cap-1 two-meeter criterion, NOROOM kills m free
+squares, BASIN kills a pose outside the basins) is run by the worker on every DEAD leaf after the node.
+
+## 3. What is measured before the launch (Y0202 at pad 0, `logs/test_Y0202_zero.log`)  [M]
+
+See the launch report (the per-node seconds, the depth at which the fully named leaves were reached, which leaf rule
+fired) -- filled in below by the coordinator from `results/progress.md`.
