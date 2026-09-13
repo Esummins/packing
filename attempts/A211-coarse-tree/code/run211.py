@@ -180,7 +180,7 @@ def run_tree(doc, a, pad, cert, log=print):
         [round(v, 3) for v in base.roles[base.H]], sorted(base.forced_H), len(base.slots), base.n_free))
     for r in rows:
         log("   INHERITED DEAD %-12s %s<-%s  [%s %s] %s" % (r["label"], r["slot"], r["rows"], r["source_camp"], r["source_rule"], r["source_cert"]))
-    agg = run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, dead_paths, base, log=log)
+    agg = run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, dead_paths, base, M is not None, log=log)
     agg["wall"] = T.out_of_time()
     agg["window_pending"] = (pad == "zero") and agg["verdict"] == "DEAD"
     agg["leaf"] = None
@@ -200,14 +200,16 @@ def run_tree(doc, a, pad, cert, log=print):
     return key, agg["verdict"]
 
 
-def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, dead_paths, base, log=print):
+def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, dead_paths, base, have_merge, log=print):
     """one coarse tree per start node (the shared wall); the pad is DEAD iff every start node's tree is DEAD."""
     agg = dict(verdict="DEAD", n_nodes=0, n_records=len(rows), max_depth=0, alive_leaves=0, dead_leaves=len(rows), ns_splits=0, pocket_splits=0,
                cc_kills=0, exact_rounds=0, basin_kills=0, n_inherited=len(rows), killing=list(
                    dict(label=r["label"], slot=r["slot"], rows=r["rows"], clip="INHERIT", round=None, seconds=0.0, cert=r["source_cert"]) for r in rows),
                undecided=[], noroom_runs=[], inherited={}, runs=[], root=None, basin_clips=[])
     done = []
-    for sn in (starts or [None]):
+    if have_merge and not starts:                                 # every branch of the merged trie is already closed
+        log("   every branch of the merged prior state is DEAD: nothing left to run (Lemma INHERIT (c))")
+    for sn in (starts if have_merge else [None]):
         if T.out_of_time():
             agg["verdict"] = "ALIVE"
             agg["undecided"].append(dict(label=(sn or {}).get("label", "R"), reason="undecided: the wall ran out before this start node ran"))

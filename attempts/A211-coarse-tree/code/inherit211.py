@@ -113,34 +113,35 @@ def keyed(tree, rootpath):
     (label + 'u') adds NO step: its hypothesis is DERIVED at the node by sound clips (the slot had one surviving
     branch), so the node keeps the weaker path and a kill there kills the weaker hypothesis too."""
     root = tree["root_label"]
-    path, own, recs, order = {root: tuple(rootpath)}, {}, {}, [root]
+    recs, order = {}, []
     for n in tree["nodes"]:
-        c, suf = parse(n.get("label") or "", root)
+        c, _suf = parse(n.get("label") or "", root)
         if c is None:
             continue
-        parent = c.rsplit(".", 1)[0] if c != root else None
-        if c not in path:
-            st = step_of(n)
-            if n.get("path_key") is not None:                      # an A211 start-run root / inherited row: its own path
-                path[c] = tuple(norm(s) for s in n["path_key"])
-            elif parent is None:
-                path[c] = tuple(rootpath)
-            elif parent not in path or st is None or suf.startswith("u"):
-                continue                                           # an orphan record: its hypothesis cannot be placed
-            else:
-                path[c] = path[parent] + (st,)
-                own[c] = br_of(n)
         recs.setdefault(c, []).append(n)
         if c not in order:
             order.append(c)
-    kids = {}
-    for c in order:                                               # the CERTIFIED branch list, not the recorded children:
-        for n in recs.get(c, []):                                 # a wall-stopped tree records fewer children than it proved
-            if not n.get("branch_rows") or c not in path:
+    path = {root: tuple(rootpath)}
+    for c in order:                                               # an A211 start-run root / inherited row carries its own key
+        for n in recs[c]:
+            if n.get("path_key") is not None:
+                path[c] = tuple(norm(s) for s in n["path_key"])
+                break
+    kids, changed = {}, True
+    while changed:                                                # the CERTIFIED branch list, never the recorded children:
+        changed = False                                           # a wall-stopped tree records fewer children than it proved
+        for c in order:
+            if c not in path or c in kids:
+                continue
+            n = next((r for r in recs[c] if r.get("branch_rows")), None)
+            if n is None:
                 continue
             kids[c] = branches_of(n, path[c], c)
-            break
-    return dict(root=root, order=order, path=path, own=own, recs=recs, kids=kids)
+            for p, _br, lab in kids[c]:
+                if lab not in path:
+                    path[lab] = p
+                    changed = True
+    return dict(root=root, order=order, path=path, recs=recs, kids=kids)
 
 
 def branches_of(n, base, c):
@@ -227,6 +228,8 @@ def trie(K, kills):
     G = {}
     for t, kk in sorted(K, key=lambda x: x[0]["rank"]):
         for c in kk["order"]:
+            if c not in kk["path"]:
+                continue
             p = kk["path"][c]
             g = G.setdefault(p, dict(dead=None, kids=None, rank=-1, recs=[]))
             g["recs"].append((t["rank"], t, kk, c))
