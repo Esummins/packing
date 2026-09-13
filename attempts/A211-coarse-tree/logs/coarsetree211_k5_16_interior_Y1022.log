@@ -30,3 +30,47 @@
    no-room (k=10, m=1): DEAD by NOROOM in 19 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
    node R.2.2.2.1.2.2 d4: DEAD by NOROOM -- no-room at R.2.2.2.1.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
    node R.2.2.2.2  d2 TR(1,0)<-None: INTERNAL (58.7 s, 1 rounds; t=1559.2)
+   no-room (k=10, m=1): UNDECIDED in 124 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.2.2.2.2: bisect F3 on y at 2.899745 (extents (0.29666, 0.954678), tilt 90.0 deg, core non-empty, 72 piece(s); split 1 of 4)
+   node R.2.2.2.2.1 d3 F3<-['y<=2.899745']: INTERNAL (96.0 s, 1 rounds; t=1815.1)
+   node R.2.2.2.2.1: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R.2.2        => ALIVE (10 nodes; t = 1831 s of 1800.0)
+   start R.2.3: SKIPPED (wall)
+   start R.2.4: SKIPPED (wall)
+   start R.2.5: SKIPPED (wall)
+   start R.2.6: SKIPPED (wall)
+   start R.3: SKIPPED (wall)
+   => ALIVE (zero_page) in 1831.5 s: 6 start runs, 10 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 2 NS splits, 0 pocket splits, 3 role splits (0 empty-half kills), 2 inherited dead (2 up front + 0 in tree), 6 dead / 2 alive leaves (WALL)
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1 d2 DEAD INHERIT 0.0s; R.2.2 d0 INTERNAL 123.6s; R.2.2.1 d1 DEAD NOROOM 92.3s; R.2.2.2 d1 INTERNAL 71.2s; R.2.2.2.1 d2 INTERNAL 71.3s; R.2.2.2.1.1 d3 DEAD NOROOM 50.0s; R.2.2.2.1.2 d3 INTERNAL 52.0s; R.2.2.2.1.2.1 d4 DEAD NOROOM 64.4s; R.2.2.2.1.2.2 d4 DEAD NOROOM 56.1s; R.2.2.2.2 d2 INTERNAL 58.7s; R.2.2.2.2.1 d3 ALIVE 96.0s; R.2.2.2.2.2 d3 ALIVE 0.0s
+   stage 0 g1 pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y1022_g1_s0.json)
+   INHERIT k5_16_interior_Y1022 pad g1: 2 prior trees, 20 paths, 2 branches inherited DEAD (final, with their certificates), 8 start nodes
+== k5_16_interior_Y1022 page pad g1: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y1022_g1_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 2 dead branches (final) + 8 start nodes ['R.2.1.2.1', 'R.2.1.2.2', 'R.2.2', 'R.2.3', 'R.2.4', 'R.2.5', 'R.2.6', 'R.3']; H [2.358, 2.498, 1.24, 1.38, 53.13, 64.011]; forced H ['BR(1,0)']; 6 slots; free squares 5
+   INHERITED DEAD R.1          BR(0,1)<-(18,)  [A205 tree: every branch DEAD] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y1022.json
+   INHERITED DEAD R.2.1.1      TR(1,0)<-F4  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y1022.json
+   node R.2.1.2.1  d0 root: INTERNAL (67.9 s, 1 rounds; t=68.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 19 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.1.2.1  d0: DEAD by NOROOM -- no-room at R.2.1.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R.2.1.2.1    => DEAD (1 nodes; t = 87 s of 1800.0)
+   start R.2.1.2.2: applied step 1/1 -- NS F2 misses at TR(1,0)
+   node R.2.1.2.2  d0 root: INTERNAL (50.9 s, 1 rounds; t=213.2)
+   node R.2.1.2.2r1 d0 root<-None: INTERNAL (63.2 s, 1 rounds; t=276.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Lemma ROLE-SPLIT at R.2.1.2.2: bisect F1 on t at 53.1301 (extents (0.068683, 0.051514), tilt 90.0 deg, core non-empty, 44 piece(s); split 1 of 4)
+   node R.2.1.2.2.1 d1 F1<-['t<=53.1301']: DEAD by EmptyBox r1 (11.4 s, 1 rounds; t=288.1)
+   node R.2.1.2.2.2 d1 F1<-['t>=53.1301']: DEAD by EmptyBox r1 (7.4 s, 1 rounds; t=295.6)
+   start R.2.1.2.2    => DEAD (4 nodes; t = 296 s of 1800.0)
+   start R.2.2: applied step 1/1 -- TL(1,0) <- [8]
+   node R.2.2      d0 root: INTERNAL (67.7 s, 1 rounds; t=416.4)
+   no-room (k=10, m=1): UNDECIDED in 93 s (1 pockets; residue too big to pocket: 1 pocket(s) of total area 1.285 > 0.750 (no lane cove)
+   Rule NS at R.2.2: split F3 at BR(0,1) (meeting fraction 0.108092; alive rows [18]; named ['F2', 'F3', 'H'])
+   node R.2.2.1    d1 BR(0,1)<-None: INTERNAL (69.7 s, 1 rounds; t=612.5)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.2.1: split F2 at TR(1,0) (meeting fraction 0.197272; alive rows [9, 14]; named ['F2', 'F3', 'F4'])
+   node R.2.2.1.1  d2 TR(1,0)<-None: DEAD by FC r1 (62.2 s, 1 rounds; t=810.2)
+   node R.2.2.1.2  d2 TR(1,0)<-None: DEAD by FC r1 (49.7 s, 1 rounds; t=860.1)
+   node R.2.2.2    d1 BR(0,1)<-None: INTERNAL (55.4 s, 1 rounds; t=915.7)
+   no-room (k=10, m=1): UNDECIDED in 91 s (1 pockets; residue too big to pocket: 1 pocket(s) of total area 1.280 > 0.750 (no lane cove)
+   Rule NS at R.2.2.2: split F2 at TR(1,0) (meeting fraction 0.197272; alive rows [9, 14]; named ['F2', 'F3', 'F4'])
+   node R.2.2.2.1  d2 TR(1,0)<-None: INTERNAL (98.3 s, 1 rounds; t=1122.3)
+   no-room (k=10, m=1): ERROR in 67 s (0 pockets; RuntimeError('polycore: no certified polygon for B([2.163,2.430]x[2.402,3.377]x[)
+   Lemma ROLE-SPLIT at R.2.2.2.1: bisect F3 on y at 2.889779 (extents (0.303489, 0.974609), tilt 90.0 deg, core non-empty, 71 piece(s); split 1 of 4)
