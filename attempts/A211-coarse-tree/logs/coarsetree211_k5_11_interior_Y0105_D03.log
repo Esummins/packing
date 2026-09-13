@@ -1,0 +1,13 @@
+23:33:11 [w3] start k5_11_interior_Y0105_D03 wall 1800 (lab 8, free 6318 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_11_interior_Y0105_D03 at the zero pad: ALIVE in 14654 ms; kills {'H-clip': 0, 'P': 2110, 'W': 924, 'C': 644, 'M': 2307, 'L': 10, 'R': 2548, 'X': 552}; CSP units 512 -> 512 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== k5_11_interior_Y0105_D03 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0105_D03_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.078, 2.148, 1.484, 1.519, 86.186, 90.0]; forced H []; 4 slots; free squares 5
+   node R          d0 root: INTERNAL (36.5 s, 1 rounds; t=36.6)
+   node R.1        d1 BL(1,1)<-[8]: INTERNAL (15.3 s, 1 rounds; t=51.9)
+   node R.1.1      d2 BR(0,1)<-[18, 21]: INTERNAL (30.2 s, 1 rounds; t=82.2)
+   node R.1.1.1    d3 TR(0,0)<-[14]: DEAD by EmptyBox r1 (4.8 s, 1 rounds; t=87.0)
+   node R.1.1.2    d3 TR(0,0)<-[19]: DEAD by EmptyBox r1 (34.3 s, 1 rounds; t=121.3)
+   node R.1.1.3    d3 TR(0,0)<-[23]: INTERNAL (60.8 s, 1 rounds; t=182.1)
+   no-room (k=10, m=1): DEAD by EmptyBox in 10 s (0 pockets; EmptyBox(P1): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.1.3    d3: DEAD by EmptyBox -- no-room at R.1.1.3 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(P1): every pose is impossible -- the case is dead by the pair leaf
