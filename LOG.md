@@ -8601,3 +8601,29 @@ halves of the answer come from opposite findings.
 - What CC cannot do: nothing near 45 deg (the band is the whole cell), nothing at offset cells, and nothing when the
   second meeter genuinely sits in the wall band next to the corner cell -- those cells still have to die by the other
   stage-0 rules, as they do on the PI's leaf.  Verdicts `[C: closed-form trace; Lemma CORNER-COVER]`, no verifier clause.
+## 2026-09-12 evening -- A211-coarse-tree (Fable) -- LAUNCHED (launch-and-exit; report at launch): **the COARSE tree -- cheap coarse internal nodes (supersets) branched at once, the leaf rules at every fully named leaf in order (rule CC -> no-room + pockets -> basin clip -> Rule NS -> the exact cascade LAST), pad 0 first; a Y0202 internal node costs 16-36 s against A209's 277-296 s**
+- The PI (18:20): *"the more coarse we can get away with the better, since we want to reach the leaf kills asap."*  A209's
+  trees are WALL-limited (every gallery page ALIVE at 3,600 s on both pads with undecided branches: 10-20 internal nodes
+  at 300-1,000 s each), while the leaf rules kill in ms-s once a fully named leaf is reached.
+- `attempts/A211-coarse-tree/notes/coarse_tree.md` states the soundness points BEFORE use: S1 re-binning (a role with
+  > 96 pieces -> the 4 x 4 x 6 grid units of its hull that meet a piece: a superset), S2 a PREFIX of A204's clip chain
+  (refine 1, <= 2 mutual passes, no lonely clip, K' per piece or union-hull), S3 shallow reach (depth 2 / 1, roles in
+  place), S4 one round then A205's branching rule with the fresh-table proviso, S5 the leaf rules in order (CC, NO-ROOM +
+  pocket CN bound with pockets branched at k = 9, BASIN, Rule NS slivers only, then the exact nsub 4 / refine 2 cascade
+  + sharp round), S6 pad 0 first, S7 certificates + the sampling audit (audit211, the cap-1 two-meeter criterion).
+- Code: `code/coarse211.py` (CoarsePage: `rebin`, `coarse_fixpoint`, the coarse / exact switch), `tree211.py` (Tree211:
+  `leaf_rules`, pocket branching, the coarse expand), `leaves211.py` (rule CC on the live node), `run211.py` (pad 0
+  first, wall 1,800 s per pad, depth 6, node cap 600, BelowNormal via A210's working fix), `worker211.sh` (claims,
+  gates 10 / 6 / 3072 MB, audit per node, fold + progress + refresh + pathspec commit per node), `launch211.sh` (THE one
+  detached launcher: N worker slots over `queue_gallery.txt` (the 19 alive pages, A210's list) then `queue_frontier.txt`
+  (303 alive census nodes not in the gallery, deepest first) + the hourly progress.md commit), `fold211.py` (ledger
+  `results/superseded_by_coarsetree_A211.jsonl`, Lemma K1), `progress211.py` (results/progress.md; STOP at a 200 CPU-h
+  projection after 20 frontier nodes), `audit211.py`; A209's chain and A210's cc210 / leaves210 copied at 65a4903e.
+- **[M] Y0202 at pad 0 (the one-page test, `logs/test_Y0202_zero.log`, wall 1,200 s):** root 36 s (normalise 10 s,
+  the depth-2 option table 26 s), R.1 = BL(1,1)<-8 16 s, R.1.1 = BR(0,1)<-{18,21} 33 s, R.1.1.1 = TR(0,0)<-14 DEAD by
+  EmptyBox in 27 s -- the same first four nodes cost A209 296 / 277 / 291 / 57 s (its zero_page run): **8-9x cheaper
+  per internal node, the same kills**.  The whole wall-1,200 s run: 13 nodes, depth 5, 5 DEAD / 8 undecided (ALIVE at the wall); per node R 36 / R.1 16 / R.1.1 33 / R.1.1.1 EmptyBox 27 / R.1.1.2 63 + no-room 8 (A189's pair leaf on the role boxes, k = 10) / R.1.1.3 EmptyBox 15 / R.1.1.4 80 / R.1.1.4.1 90 / R.1.1.4.1.1 37 then **DEAD by rule CC (F4 a corner square at TR, the hypothesised second meeter of TR(0,0) cannot reach the wall band) at depth 5** / R.1.1.4.1.2r1 EmptyBox 6 / R.1.1.4.2 74 / R.1.1.4.2.1 91 s -- the fully named leaves were reached at depths 3 and 5 (A209's zero run reached depth 4 in 3,718 s), the leaf rules that fired: no-room (EmptyBox on the boxes) at d3, rule CC at d5, Rule NS three times (F2 at BL(1,1) 0.21, F2 at TL(1,0) 0.21); the exact cascade never ran.  One price found and fixed before the launch: A189's no-room at the k = 10 leaves came back UNDECIDED at its 300 s cap three times on one path (665 s of the 1,274 s) -- now capped at 120 s and run once per k along a path (an NS child adds no role).
+- Pages `docs/residue_map/campaigns/A211-coarsetree/coarsetree211_<nid>.svg` (fig211: the coarse note per panel, the
+  CC line on a CC kill, the exact-cascade panel), CURRENT.json -> A211; status gallery block (7r); rows
+  `results/coarsetree211.jsonl` (with `nodes_brief`: label / depth / verdict / rule / seconds / coarse per node).
+- Running: `nohup bash attempts/A211-coarse-tree/code/launch211.sh 4 1800` (4 worker slots, each gated per launch; pid in `logs/launch211.log`), rows land in `results/coarsetree211.jsonl`, certs `certs/coarsetree211_<nid>.json`, per-node logs `logs/coarsetree211_<nid>.log`, `results/progress.md` per node and hourly.  Resume: the same command (claims under `logs/claims/` skip taken nodes; delete a claim dir to re-run; `touch logs/STOP` stops the workers after their node, `logs/HOURLY_STOP` the launcher).

@@ -784,3 +784,5 @@ seeding of the per-piece K' cache), then the whole trees at 3,600 s for the rema
 attempts/A206-named-split/code/queue206.sh <queue file>` (one worker per file; `run206.sh` skips cached runs; `leaf <nid> <pad>
 <leaf> [standard|extended|a206 <tag> <wall>]`, `tree <nid> <pad>[+<branch>] [wall]`), `bash scratch/auditor206.sh` (the
 auditor, one at a time within the 3-process cap).
+
+**A211 fold-in (2026-09-12 evening):** the coarse tree's window-pad (g1) kills of A57 tree ids land in `attempts/A211-coarse-tree/results/superseded_by_coarsetree_A211.jsonl` (the A137 / A149 / A209 ledger format: id, applies_to_tags = the tree, prior verdict RETAINED, closes_subtree by Lemma K1; `[C: closed-form / library clip trace + the leaf lemma]`, no verifier clause) — fold it like A209's `superseded_by_k5killer_A209.jsonl` before any A57 resume; A57's own files are never written by A211.

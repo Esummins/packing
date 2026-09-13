@@ -17,7 +17,7 @@ import tree209 as N9
 import leaves211 as L11
 
 EXACT_ROUNDS = 3
-NOROOM_CAP = 300.0                     # seconds for A189's no-room at a leaf (its own budget is min(900, wall left))
+NOROOM_CAP = 120.0                     # seconds for A189's no-room at a leaf (Y0202 test: 300 s UNDECIDED x 3 ate half the wall)
 
 
 class Tree211(N9.Tree209):
@@ -75,8 +75,11 @@ class Tree211(N9.Tree209):
             self.kill(label, depth, "CC", "rule CC at %s (Lemma CORNER-COVER; %s pad, lam %s): %s" % (label, pg.pad, round(float(pg.lam), 6), r["why"]),
                       cc_slot=r["slot"], cc_role=r["role"], verifier=r["verifier"])
             return "DEAD"
-        if len(pg.roles) >= 9 and not getattr(pg, "noroom_done", False):         # (b) no-room + pockets
+        # (b) no-room + pockets: once per k along a path (an NS child adds no role: its boxes are subsets of the parent's,
+        #     where the search was already UNDECIDED at the cap; a row / pocket child adds a role and runs it afresh)
+        if len(pg.roles) >= 9 and not getattr(pg, "noroom_done", False) and len(pg.roles) != getattr(pg, "noroom_k", None):
             pg.noroom_done = True
+            pg.noroom_k = len(pg.roles)
             res = N9.noroom_at(pg, min(pg.T.left() or 0.0, NOROOM_CAP + 30), log=self.log)
             rec = dict(label=label, depth=depth, k=res["k"], m=res["m"], verdict=res["verdict"], clip=res["clip"], bound=res["bound"], cn_bound=res["cn_bound"],
                        n_pockets=len(res["pockets"]), pockets=res["pockets"], seconds=res["seconds"], reason=res["reason"])

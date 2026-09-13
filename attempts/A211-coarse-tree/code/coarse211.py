@@ -186,7 +186,7 @@ class CoarsePage(N7.TreePage207):
 
 def save_state(pg):
     st = N7.save_state(pg)
-    st["coarse"], st["rebin_rep"] = pg.coarse, list(pg.rebin_rep)
+    st["coarse"], st["rebin_rep"], st["noroom_k"] = pg.coarse, list(pg.rebin_rep), getattr(pg, "noroom_k", None)
     return st
 
 
@@ -194,6 +194,7 @@ def restore_state(pg, st):
     N7.restore_state(pg, st)
     pg.set_coarse(st["coarse"])
     pg.rebin_rep = list(st["rebin_rep"])
+    pg.noroom_k = st.get("noroom_k")
 
 
 def install():

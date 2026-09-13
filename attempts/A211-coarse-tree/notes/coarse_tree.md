@@ -61,7 +61,7 @@ the tree runs a refresh round (coarse, one round) before any branch.  Depth cap 
   (b) NO-ROOM (A189 Lemma 1) on the roles' hull BOXES with the pocket CN bound at k >= 9 (A208 / A209 `noroom_at`;
       cores from boxes lie inside cores from pieces: sound, weaker); at k = 9 the pockets are BRANCHED on (Lemma
       POCKET, A209 `notes/k5killer.md`: the 10th square's centre lies in some pocket, the disjunction is exhaustive,
-      each branch instantiates a superset) with a 300 s cap on A189's search (a shorter search decides less).
+      each branch instantiates a superset) with a 120 s cap on A189's search (a shorter search decides less), run once per k along a path (an NS child adds no role and its boxes are subsets of the parent's, where the search was already undecided at the cap).
   (c) the basin clip (A207 Lemma BASIN (ii)) with `results/basin207.jsonl`'s BASIN rows whose window covers the page's,
       applied to every non-pin role's pieces; a role emptied is DEAD by BASIN.
   (d) Rule NS (A206) on the soft name with the smallest meeting fraction below MAX_FRAC = 0.5 (slivers only); the two
@@ -85,5 +85,4 @@ squares, BASIN kills a pose outside the basins) is run by the worker on every DE
 
 ## 3. What is measured before the launch (Y0202 at pad 0, `logs/test_Y0202_zero.log`)  [M]
 
-See the launch report (the per-node seconds, the depth at which the fully named leaves were reached, which leaf rule
-fired) -- filled in below by the coordinator from `results/progress.md`.
+The whole wall-1,200 s run: 13 nodes, depth 5, 5 DEAD / 8 undecided (ALIVE at the wall); per node R 36 / R.1 16 / R.1.1 33 / R.1.1.1 EmptyBox 27 / R.1.1.2 63 + no-room 8 (A189's pair leaf on the role boxes, k = 10) / R.1.1.3 EmptyBox 15 / R.1.1.4 80 / R.1.1.4.1 90 / R.1.1.4.1.1 37 then DEAD by rule CC (F4 a corner square at TR, the hypothesised second meeter of TR(0,0) cannot reach the wall band) at depth 5 / R.1.1.4.1.2r1 EmptyBox 6 / R.1.1.4.2 74 / R.1.1.4.2.1 91 s -- the fully named leaves were reached at depths 3 and 5 (A209's zero run reached depth 4 in 3,718 s), the leaf rules that fired: no-room (EmptyBox on the boxes) at d3, rule CC at d5, Rule NS three times (F2 at BL(1,1) 0.21, F2 at TL(1,0) 0.21); the exact cascade never ran.  One price found and fixed before the launch: A189's no-room at the k = 10 leaves came back UNDECIDED at its 300 s cap three times on one path (665 s of the 1,274 s) -- now capped at 120 s and run once per k along a path (an NS child adds no role).
