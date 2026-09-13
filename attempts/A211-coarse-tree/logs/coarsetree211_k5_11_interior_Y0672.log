@@ -59,3 +59,25 @@
    start R.3.1.2.p3.2: applied step 1/1 -- NS F4 misses at TR(0,0)
    node R.3.1.2.p3.2 d0 root: INTERNAL (67.8 s, 1 rounds; t=551.2)
    no-room (k=10, m=1): UNDECIDED in 135 s (2 pockets; pocket LANE sum None does not beat 1)
+   node R.3.1.2.p3.2x d0 root<-None: INTERNAL (455.6 s, 3 rounds; t=1143.1)
+   node R.3.1.2.p3.2s d0 root<-None: INTERNAL (74.5 s, 1 rounds; t=1218.2)
+   node R.3.1.2.p3.2s: ALIVE [every forced slot has two named meeters after the exact cascade and the sharp round; no soft name below MAX_FRAC 0.5 left to split (next lever: LP on ]
+   start R.3.1.2.p3.2 => ALIVE (3 nodes; t = 1219 s of 1800.0)
+   start R.3.1.3: NOT LOADED (ValueError('role H: the snapshot holds 300 of 359 pieces (capped): cannot load soundly')) -- the pad stays ALIVE
+   start R.3.1.4: applied step 1/1 -- TL(1,0) <- [14]
+   node R.3.1.4    d0 root: INTERNAL (55.1 s, 1 rounds; t=1310.6)
+   no-room (k=9, m=2): UNDECIDED in 148 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.982 > 0.000 (no lane cove)
+   Lemma POCKET at R.3.1.4: 2 pockets (k=9, m=2): the 10th square instantiated in each
+   node R.3.1.4.p1 d1 pocket<-[0]: INTERNAL (40.1 s, 1 rounds; t=1499.1)
+   no-room (k=10, m=1): UNDECIDED in 154 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.966 > 0.750 (no lane cove)
+   node R.3.1.4.p1x d1 root<-None: INTERNAL (267.2 s, 2 rounds; t=1920.6)
+   node R.3.1.4.p1x: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R.3.1.4      => ALIVE (3 nodes; t = 1921 s of 1800.0)
+   start R.3.1.5: SKIPPED (wall)
+   start R.3.2: SKIPPED (wall)
+   start R.3.3: SKIPPED (wall)
+   start R.3.4: SKIPPED (wall)
+   => ALIVE (g1_page) in 1921.5 s: 8 start runs, 9 nodes, depth 1, 0 CC kills, 3 exact leaf cascades, 0 NS splits, 1 pocket splits, 6 inherited dead (6 up front + 0 in tree), 6 dead / 4 alive leaves (WALL)
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1.1 d3 DEAD INHERIT 0.0s; R.3.1.2.p1 d4 DEAD INHERIT 0.0s; R.3.1.2.p2.1 d5 DEAD INHERIT 0.0s; R.3.1.2.p3.1 d5 DEAD INHERIT 0.0s; R.3.1.2.p2.2 d0 INTERNAL 48.8s; R.3.1.2.p2.2x d0 INTERNAL 155.4s [exact]; R.3.1.2.p2.2s d0 ALIVE 53.0s [exact]; R.3.1.2.p3.2 d0 INTERNAL 67.8s; R.3.1.2.p3.2x d0 INTERNAL 455.6s [exact]; R.3.1.2.p3.2s d0 ALIVE 74.5s [exact]; R.3.1.4 d0 INTERNAL 55.1s; R.3.1.4.p1 d1 INTERNAL 40.1s; R.3.1.4.p1x d1 ALIVE 267.2s [exact]; R.3.1.4.p2 d1 ALIVE 0.0s
+== k5_11_interior_Y0672: g1 ALIVE | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
