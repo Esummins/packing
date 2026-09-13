@@ -117,9 +117,9 @@ class Tree211(N9.Tree209):
             return "DEAD"
         # (b) no-room + pockets: once per k along a path (an NS child adds no role: its boxes are subsets of the parent's,
         #     where the search was already UNDECIDED at the cap; a row / pocket child adds a role and runs it afresh)
-        if len(pg.roles) >= 9 and not getattr(pg, "noroom_done", False) and len(pg.roles) != getattr(pg, "noroom_k", None):
-            pg.noroom_done = True
-            pg.noroom_k = len(pg.roles)
+        # PI 2026-09-12 19:40: run no-room at EVERY fully named leaf -- a child's smaller boxes mean LARGER cores, so an
+        # UNDECIDED parent says nothing about the child (the once-per-k skip was backwards); node-level flag only.
+        if len(pg.roles) >= 9 and not node.get("noroom"):
             res = N9.noroom_at(pg, min(pg.T.left() or 0.0, NOROOM_CAP + 30), log=self.log)
             rec = dict(label=label, depth=depth, k=res["k"], m=res["m"], verdict=res["verdict"], clip=res["clip"], bound=res["bound"], cn_bound=res["cn_bound"],
                        n_pockets=len(res["pockets"]), pockets=res["pockets"], seconds=res["seconds"], reason=res["reason"])
