@@ -66,3 +66,15 @@
    node R.1.4.1.1x d2 root<-None: INTERNAL (457.3 s, 3 rounds; t=1611.6)
    Rule NS at R.1.4.1.1: split F2 at BR(1,0) (meeting fraction 0.359267; alive rows []; named ['F1', 'F2', 'H'])
    node R.1.4.1.1.1 d3 BR(1,0)<-None: INTERNAL (61.4 s, 1 rounds; t=1673.2)
+   node R.1.4.1.1.1x d3 root<-None: INTERNAL (245.0 s, 2 rounds; t=1918.5)
+   node R.1.4.1.1.1x: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R.1.4        => ALIVE (6 nodes; t = 1919 s of 1800.0)
+   start R.2: SKIPPED (wall)
+   start R.3: SKIPPED (wall)
+   start R.4: SKIPPED (wall)
+   start R.5: SKIPPED (wall)
+   start R.6: SKIPPED (wall)
+   => ALIVE (g1_page) in 1918.7 s: 8 start runs, 13 nodes, depth 3, 0 CC kills, 3 exact leaf cascades, 4 NS splits, 0 pocket splits, 4 inherited dead (4 up front + 0 in tree), 8 dead / 5 alive leaves (WALL)
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2 d2 DEAD INHERIT 0.0s; R.1.3.1 d3 DEAD INHERIT 0.0s; R.1.3.2 d3 DEAD INHERIT 0.0s; R.1.3.3 d0 INTERNAL 62.8s; R.1.3.3.1 d1 INTERNAL 107.4s; R.1.3.3.1.1 d2 DEAD EmptyBox 31.4s; R.1.3.3.1.2 d2 DEAD EmptyBox 19.3s; R.1.3.3.2 d1 INTERNAL 79.7s; R.1.3.3.2x d1 DEAD EmptyBox 182.1s [exact]; R.1.3.4 d0 DEAD EmptyBox 15.6s; R.1.4 d0 INTERNAL 22.6s; R.1.4.1 d1 INTERNAL 81.5s; R.1.4.1.1 d2 INTERNAL 96.5s; R.1.4.1.1x d2 INTERNAL 457.3s [exact]; R.1.4.1.1.1 d3 INTERNAL 61.4s; R.1.4.1.1.1x d3 ALIVE 245.0s [exact]; R.1.4.1.1.2 d3 ALIVE 0.0s; R.1.4.1.2 d2 ALIVE 0.0s; R.1.4.2 d1 ALIVE 0.0s; R.1.4.3 d1 ALIVE 0.0s
+== k5_16_interior_Y0402: g1 ALIVE | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
