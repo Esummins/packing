@@ -1,0 +1,21 @@
+20:35:20 audit k5_11_interior_Y0738 g1_page R.1.1.2.2.1.1
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_11_interior_Y0738 g1_page leaf R.1.1.2.2.1.1: no-room at R.1.1.2.2.1.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (1 pocket group(s) of diameter < 1; Lemma CN)
+  parent snapshot R.1.1.1 (round None); H forced at ['BL(1,1)', 'TL(1,0)']; roles {'F1': ['TL(1,0)', 'TR(0,0)'], 'F2': ['BL(1,1)', 'BR(0,1)'], 'F3': ['BR(0,1)'], 'H': ['BL(1,1)', 'TL(1,0)']}; cells {'F1': 14, 'F2': 11, 'F3': 18}; misses {'F3': ['BL(1,1)']}
+  role H (grid over its hull box (tilt 28.07-41.11)): 350 admissible poses (slots ['BL(1,1)', 'TL(1,0)'], misses [])
+  role F1 (grid over its hull box in cell 14 (tilt 21.24-62.72)): 334 admissible poses (slots ['TL(1,0)', 'TR(0,0)'], misses [])
+  role F2 (grid over its hull box in cell 11 (tilt 36.33-71.41)): 390 admissible poses (slots ['BL(1,1)', 'BR(0,1)'], misses [])
+  role F3 (grid over its hull box in cell 18 (tilt 28.07-64.01)): 792 admissible poses (slots ['BR(0,1)'], misses ['BL(1,1)'])
+  no-room kill (k=4, m=7): a refutation needs 7 mutually disjoint free squares beside the configuration (grid over the container, 52263 admissible)
+  REFUTED (sampled): [('H', 1.36, 2.4278, 34.0), ('F1', 2.2108, 3.1617, 48.0), ('F2', 2.1708, 1.4554, 44.0), ('F3', 2.7863, 2.3062, 48.0)]
+  pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3']: 350 over 350 H poses (51222 partial tries); refuting: 350  -> REFUTED (investigate: the sampled sets are supersets of the node's pieces)
+20:35:48 audit k5_11_interior_Y0738 g1_page R.1.1.2.2.1.2x
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_11_interior_Y0738 g1_page leaf R.1.1.2.2.1.2x: rule CC at R.1.1.2.2.1.2 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) ha
+  parent snapshot R.1.1.1 (round None); H forced at ['BL(1,1)', 'TL(1,0)']; roles {'F1': ['TL(1,0)'], 'F2': ['BL(1,1)', 'BR(0,1)'], 'F3': ['BR(0,1)', 'TR(0,0)'], 'F4': ['TR(0,0)'], 'H': ['BL(1,1)', 'TL(1,0)']}; cells {'F1': 14, 'F2': 11, 'F3': 18, 'F4': -1}; misses {'F3': ['BL(1,1)'], 'F1': ['TR(0,0)']}
+  role H (grid over its hull box (tilt 28.07-41.11)): 350 admissible poses (slots ['BL(1,1)', 'TL(1,0)'], misses [])
+  role F1 (grid over its hull box in cell 14 (tilt 0.0-90.0)): 4000 admissible poses (slots ['TL(1,0)'], misses ['TR(0,0)'])
+  role F2 (grid over its hull box in cell 11 (tilt 44.22-70.22)): 232 admissible poses (slots ['BL(1,1)', 'BR(0,1)'], misses [])
+  role F3 (grid over its hull box in cell 18 (tilt 44.22-73.17)): 512 admissible poses (slots ['BR(0,1)', 'TR(0,0)'], misses ['BL(1,1)'])
+  role F4 (grid over its hull box (tilt 0.0-90.0)): 1550 admissible poses (slots ['TR(0,0)'], misses [])
+  FC kill at TR(0,0): a refutation needs TWO distinct non-pin meeters of TR(0,0) -- the roles that meet it plus anonymous squares sampled over its window (29366 admissible)

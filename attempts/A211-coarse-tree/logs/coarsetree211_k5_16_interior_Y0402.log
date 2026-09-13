@@ -1,0 +1,24 @@
+20:22:03 [w2] start k5_16_interior_Y0402 wall 1800 (lab 8, free 7161 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0402_zero_s0.json)
+   INHERIT k5_16_interior_Y0402 pad zero: 2 prior trees, 19 paths, 4 branches inherited DEAD (final, with their certificates), 8 start nodes
+== k5_16_interior_Y0402 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0402_zero_s0.json; basins []; INHERIT 4 dead branches (final) + 8 start nodes ['R.1.3.3', 'R.1.3.4', 'R.1.4', 'R.2', 'R.3', 'R.4', 'R.5', 'R.6']; H [1.659, 1.799, 1.414, 1.519, 0.0, 14.25]; forced H ['BL(1,0)']; 6 slots; free squares 5
+   INHERITED DEAD R.1.1        TR(0,1)<-(13,)  [A205 tree: FC] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.2        TR(0,1)<-(14,)  [A205 tree: FC] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.3.1      TL(1,0)<-(8,)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.3.2      TL(1,0)<-(9,)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y0402.json
+   node R.1.3.3    d0 root: INTERNAL (79.0 s, 1 rounds; t=79.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 21 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.3.3    d0: DEAD by NOROOM -- no-room at R.1.3.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R.1.3.3      => DEAD (1 nodes; t = 104 s of 1800.0)
+   start R.1.3.4: applied step 1/1 -- TL(1,0) <- [19]
+   node R.1.3.4    d0 root: DEAD by EmptyBox r1 (12.8 s, 1 rounds; t=162.0)
+   start R.1.3.4      => DEAD (1 nodes; t = 162 s of 1800.0)
+   start R.1.4: applied step 1/1 -- TR(0,1) <- [19]
+   node R.1.4      d0 root: INTERNAL (17.5 s, 1 rounds; t=206.6)
+   node R.1.4.1    d1 TL(1,0)<-[8]: INTERNAL (65.0 s, 1 rounds; t=272.6)
+   no-room (k=10, m=1): UNDECIDED in 127 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.4.1: split F1 at BR(0,1) (meeting fraction 0.164129; alive rows [18]; named ['F1', 'F2'])
+   node R.1.4.1.1  d2 BR(0,1)<-None: INTERNAL (103.2 s, 1 rounds; t=511.7)
+   node R.1.4.1.1x d2 root<-None: INTERNAL (524.1 s, 3 rounds; t=1047.4)
+   Rule NS at R.1.4.1.1: split F2 at BR(1,0) (meeting fraction 0.337495; alive rows []; named ['F1', 'F2', 'H'])
