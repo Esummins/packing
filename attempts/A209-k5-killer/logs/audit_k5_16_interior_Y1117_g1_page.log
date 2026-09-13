@@ -46,3 +46,13 @@ k5_16_interior_Y1117 g1_page leaf R.2.2.1: JOINT COUNT (caps {'BL(1,0)': 0, 'BR(
   role F4 (grid over its hull box in cell 6 (tilt 0.0-90.0)): 271 admissible poses (slots ['BL(1,0)'], misses [])
   kill by COUNT (a cover / pair statement): the roles' consistency below is a NECESSARY check only (no refutation criterion)
   pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3', 'F4']: 320 over 400 H poses (790787 partial tries); refuting: 0  -> necessary check only
+00:11:18 audit k5_16_interior_Y1117 g1_page R.2.2.2
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y1117 g1_page leaf R.2.2.2: JOINT COUNT (caps {'BL(1,0)': 0, 'BR(0,1)': 0, 'BR(1,0)': 0, 'TR(0,1)': 0, 'TR(1,0)': 0, 'TL(1,0)': 0}): no cover of the 6 forced slots by H + 4 role(s) + 1 ano
+  parent snapshot R.2.2 (round 3); H forced at ['TR(1,0)']; roles {'F1': ['TR(0,1)'], 'F2': ['TR(1,0)'], 'F3': ['BL(1,0)'], 'F4': ['BL(1,0)'], 'H': ['TR(1,0)']}; cells {'F1': 21, 'F2': 9, 'F3': 5, 'F4': 7}; misses {}
+  role H (512 pieces of the parent's snapshot): 4000 admissible poses (slots ['TR(1,0)'], misses [])
+  role F1 (84 pieces of the parent's snapshot): 568 admissible poses (slots ['TR(0,1)'], misses [])
+  role F2 (217 pieces of the parent's snapshot): 1955 admissible poses (slots ['TR(1,0)'], misses [])
+  role F3 (grid over its hull box in cell 5 (tilt 0.0-90.0)): 612 admissible poses (slots ['BL(1,0)'], misses [])
+  role F4 (grid over its hull box in cell 7 (tilt 19.5-70.22)): 0 admissible poses (slots ['BL(1,0)'], misses [])
+  VACUOUS for ['F4'] (no admissible sampled pose: the role's own constraints already exclude the samples; consistent, not a refutation)
