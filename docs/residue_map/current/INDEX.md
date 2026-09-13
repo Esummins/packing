@@ -1,4 +1,4 @@
-# current pages -- checker A211 (48 nodes); source patterns ['campaigns/A211-coarsetree/coarsetree211_{nid}.svg', 'campaigns/A209-k5killer/k5killer209_{nid}.svg', 'campaigns/A207-basinclip/basinclip207_{nid}.svg', 'campaigns/A206-namedsplit/namedsplit206_{nid}.svg', 'campaigns/A205-cliptree/cliptree205_{nid}.svg', 'campaigns/A204-polyclip/polyclip204_{nid}.svg', 'campaigns/A203-csp/csp203_{nid}.svg', 'campaigns/A202-fast30/fast30_{nid}.svg']
+# current pages -- checker A211 (49 nodes); source patterns ['campaigns/A211-coarsetree/coarsetree211_{nid}.svg', 'campaigns/A209-k5killer/k5killer209_{nid}.svg', 'campaigns/A207-basinclip/basinclip207_{nid}.svg', 'campaigns/A206-namedsplit/namedsplit206_{nid}.svg', 'campaigns/A205-cliptree/cliptree205_{nid}.svg', 'campaigns/A204-polyclip/polyclip204_{nid}.svg', 'campaigns/A203-csp/csp203_{nid}.svg', 'campaigns/A202-fast30/fast30_{nid}.svg']
 - gallery.svg
 - k5_11_interior_Y0036_D07.svg
 - k5_11_interior_Y0105_D03.svg
@@ -10,6 +10,7 @@
 - k5_11_interior_Y0186_D01.svg
 - k5_11_interior_Y0202.svg
 - k5_11_interior_Y0217_D02.svg
+- k5_11_interior_Y0217_D03.svg
 - k5_11_interior_Y0275.svg
 - k5_11_interior_Y0308.svg
 - k5_11_interior_Y0662.svg

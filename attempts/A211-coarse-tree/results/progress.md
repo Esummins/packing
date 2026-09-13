@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-13 00:35:41
+# A211 progress -- 2026-09-13 00:42:07
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -58,13 +58,14 @@ CPU-h in this block: 15.86
 | k5_11_interior_Y0105_D03 | g1 | 2 (tree: 19 nodes, depth 5, CC 2, exact 0, NS 2, pockets 1) | ALIVE (wall) | 1844 |
 | k5_11_interior_Y0105_D03 | zero | 2 (tree: 21 nodes, depth 5, CC 4, exact 0, NS 2, pockets 0) | ALIVE (wall) | 1834 |
 | k5_11_interior_Y0186_D00 | zero | 2 (tree: 22 nodes, depth 6, CC 2, exact 1, NS 3, pockets 1) | ALIVE (wall) | 1915 |
+| k5_11_interior_Y0186_D01 | g1 | 2 (tree: 47 nodes, depth 5, CC 3, exact 0, NS 1, pockets 1) | ALIVE (wall) | 1811 |
 | k5_11_interior_Y0186_D01 | zero | 2 (tree: 44 nodes, depth 5, CC 2, exact 0, NS 1, pockets 0) | ALIVE (wall) | 1852 |
 
-CPU-h in this block: 3.14
+CPU-h in this block: 3.65
 
 ## Price and projection
 
 * gallery: 2 / 18 pages DEAD at the window pad, 15.86 CPU-h
-* frontier: 6 nodes run (2 DEAD at the window pad), 3.14 CPU-h; the census has 316 alive nodes, 297 remaining
-* PRICE over the first 6 frontier nodes: mean 1886 s, median 1884 s per node (both pads); PROJECTION for the remaining 297: 155.6 CPU-h (cap 200)
+* frontier: 6 nodes run (2 DEAD at the window pad), 3.65 CPU-h; the census has 316 alive nodes, 297 remaining
+* PRICE over the first 6 frontier nodes: mean 2188 s, median 2789 s per node (both pads); PROJECTION for the remaining 297: 180.5 CPU-h (cap 200)
 
