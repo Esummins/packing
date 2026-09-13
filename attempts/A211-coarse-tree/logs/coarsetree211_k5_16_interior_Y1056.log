@@ -1,0 +1,34 @@
+22:30:25 [w4] start k5_16_interior_Y1056 wall 1800 (lab 8, free 5822 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y1056_zero_s0.json)
+   INHERIT k5_16_interior_Y1056 pad zero: 2 prior trees, 21 paths, 4 branches inherited DEAD (final, with their certificates), 13 start nodes
+== k5_16_interior_Y1056 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y1056_zero_s0.json; basins []; INHERIT 4 dead branches (final) + 13 start nodes ['R.2.2.2.2', 'R.2.2.3', 'R.2.2.4', 'R.2.2.5', 'R.2.3', 'R.2.4', 'R.2.5', 'R.2.6', 'R.2.7', 'R.2.8']; H [1.519, 1.659, 2.218, 2.358, 28.072, 41.112]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1          TL(1,0)<-(9,)  [A205 tree: COUNT] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y1056.json
+   INHERITED DEAD R.2.1        BL(1,0)<-(5, 11)  [A209 tree: NOROOM] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y1056.json
+   INHERITED DEAD R.2.2.1      BR(0,1)<-(17,)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y1056.json
+   INHERITED DEAD R.2.2.2.1    TR(1,0)<-H  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y1056.json
+   node R.2.2.2.2  d0 root: INTERNAL (135.8 s, 1 rounds; t=136.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 57 s (1 pockets; sum of pocket LANE = 0 < 1 free squares)
+   node R.2.2.2.2  d0: DEAD by NOROOM -- no-room at R.2.2.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): sum of pocket LANE = 0 < 1 free squares
+   start R.2.2.2.2    => DEAD (1 nodes; t = 193 s of 1800.0)
+   start R.2.2.3: applied step 1/1 -- BR(0,1) <- [21]
+   node R.2.2.3    d0 root: INTERNAL (59.4 s, 1 rounds; t=338.8)
+   no-room (k=10, m=1): UNDECIDED in 123 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.2.3: split F1 at TR(0,1) (meeting fraction 0.134408; alive rows [18]; named ['F1', 'F3', 'F4'])
+   node R.2.2.3.1  d1 TR(0,1)<-None: INTERNAL (74.6 s, 1 rounds; t=558.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 35 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.2.3.1  d1: DEAD by NOROOM -- no-room at R.2.2.3.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.2.3.2  d1 TR(0,1)<-None: INTERNAL (52.8 s, 1 rounds; t=664.0)
+   no-room (k=10, m=1): UNDECIDED in 124 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.2.3.2: split H at TR(1,0) (meeting fraction 0.140678; alive rows [18]; named ['F1', 'H'])
+   node R.2.2.3.2.1 d2 TR(1,0)<-None: INTERNAL (88.8 s, 1 rounds; t=890.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 34 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.2.3.2.1 d2: DEAD by NOROOM -- no-room at R.2.2.3.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.2.3.2.2 d2 TR(1,0)<-None: INTERNAL (64.2 s, 1 rounds; t=999.7)
+   node R.2.2.3.2.2r1 d2 root<-None: DEAD by EmptyBox r1 (13.0 s, 1 rounds; t=1012.7)
+   start R.2.2.3      => DEAD (6 nodes; t = 1013 s of 1800.0)
+   start R.2.2.4: applied step 1/1 -- BR(0,1) <- [22]
+   node R.2.2.4    d0 root: INTERNAL (99.7 s, 1 rounds; t=1198.8)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.2.4: split F4 at BR(1,0) (meeting fraction 0.019235; alive rows []; named ['F2', 'F3', 'F4'])
+   node R.2.2.4.1  d1 BR(1,0)<-None: INTERNAL (102.4 s, 1 rounds; t=1492.6)
