@@ -8656,3 +8656,60 @@ halves of the answer come from opposite findings.
 - PER RUN (`results/timing213.md`, Y0202 pad 0, 900 s, isolated dirs, cProfile; both columns carry A213 and A214's C kernel, so the clip is the only difference): **`_clip_rect_obstacle` 417.7 s -> 65.1 s on MORE clips (273 k vs 214 k), 1.95 -> 0.24 ms per call (x8.2)**; Fraction arithmetic across the run 332 M -> 131 M calls; the clip was 44% of the BEFORE wall and is 6.8% of the AFTER wall.  It bought work: 13 nodes expanded vs 11 in the same wall (6 role splits vs 5, 12 dead leaves vs 11), **16 of the 17 common nodes carry the identical verdict** and the 17th is the one BEFORE left ALIVE at the wall and AFTER expanded (one more DEAD NOROOM).
 - What is left of the clip: `IPair`, the per (obstacle, bin) compile, is 36.1 of the 65.1 s (1.45 ms x 24,945 pairs, ~11 clips per pair) -- the next lever is to compile the OBSTACLE once (its vertices, normals and support intervals do not depend on the bin) and carry the integer form on the `Obstacle` instead of a side cache.
 - Wiring: `mbpatch213.install_clip` patches the INNERMOST slot -- `mbpatch178._orig_clip`, i.e. under A178's `obs is None` guard and under A211's clip memo (which captured the library function at its own import) -- so both wrappers keep working and the memo still hits (54,988 hits / 143,089 misses in the AFTER run).  Flag `A213_INTCLIP`, default ON since the tests passed (`=0` restores the library clip); `A213_VERIFY=1` runs both and asserts on every call.  The read-only libraries (A131 pinclip, A171 multibox) are untouched and the running workers were not restarted.
+
+## 2026-09-14 midday -- A214-c-kernel (Opus) -- DONE (launch-and-exit): **the C KERNEL for the vertex certification -- clang 22, a plain DLL via ctypes, 16 ns a quadratic test, bit-exact, flag ON**
+
+- The PI installed clang 22.1.8 this morning, so A213's Phase-3 design note (`notes/int_polycore.md` s.6) could be
+  built.  `attempts/A214-c-kernel/notes/c_kernel.md`: `code/ckernel214.c` + `code/i192.h` -> `build/ckernel214.dll`
+  (plain C11, **no Python.h, no extension module, no build system**; one command `sh code/build214.sh` =
+  `clang -O2 -shared -nostdlib -Wl,-noentry -ffp-contract=off -fno-fast-math`, the sha256 committed beside the DLL
+  in `build/BUILD.md`).  `-ffp-contract=off` is not cosmetic: the float filter's error bound assumes ONE rounding
+  per operation, so FMA contraction must be off.  `-nostdlib -Wl,-noentry` because the box has clang but no MSVC
+  CRT import libraries -- the kernel needs no CRT and supplies `_fltused` and `memset` itself.
+- TWO LAYERS, both deciding the predicate the library decides.  (1) A213's Phase-2 FLOAT FILTER ported operation for
+  operation to scalar C, three-valued (Kleene) with the same rigorous forward error bound; a pair it cannot decide
+  falls through.  (2) The EXACT test in integers: `__int128` for U, V, A, B, C and the interior test, and a SIGNED
+  THREE-LIMB 192-BIT accumulator (`i192.h`, schoolbook, exact) for the two tests that do not fit 128 bits -- the
+  endpoint value (< 2^142) and the discriminant `4AC - B^2` (< 2^183), exactly A213's bound.
+- THE FALLBACK PROTOCOL is the part that makes it sound: the kernel is proved only inside a CHECKED envelope
+  (|X|, |Y|, W, |CX|, |CY|, CW < 2^60; E, |T0|, |T1| < 2^31; |A|, |B|, |C| < 2^93) and **never returns an answer it
+  cannot prove** -- three gates (no DLL / a different machine / a failed self-test; outside the envelope; a corner
+  or t that is not an exact double) each hand the pair back to A213's Python-int path, which is unbounded and stays
+  the reference.  In a real run the gate fires exactly where predicted: the axis core's corners, whose
+  W = den aden Q reaches ~2^110.
+- DIFFERENTIAL TESTS, **0 mismatches everywhere** (`tests/all214.py`, `logs/all214.log`): `tests/diff214.py` checks
+  the 192-bit path ALONE on every in-envelope sample (not just the ones the filter punts), the filter ALONE (every
+  answer it decides), the full kernel and the batch, over 46,800 (vertex, box) samples in three classes -- the 1e-9
+  grid, "wide" points with W ~ 2^37 that drive the coefficients to 2^91 and the discriminant to 2^182, and exact
+  tilted-axis boundary points -- plus 200 deliberately out-of-envelope points the kernel must REFUSE (it did, all
+  200).  A213's `tests/replay213.py` on all 441 recorded rebuilds of the Y0202 pad-0 run was run TWICE, kernel OFF
+  and kernel ON: 0 mismatches against the library build both times, 0 record-vs-replay differences; A213's
+  `fuzz213.py` (150 piece sets, 2,700 vertex tests, 75 polygon cases) 0 mismatches.  `A214_VERIFY=1` (both paths on
+  every call, asserted equal) also clean.  The kernel's own coverage counters show the wide paths were really
+  exercised: 163,307 quadratics decided exactly, 3,315 of them through the discriminant.
+- PER CALL (`results/timing214.md`): `certify_verts` 2.0 ms -> **0.2 ms** (x10 over A213's Python-int path, x321
+  over the library); through `polycore_vec` 0.71 ms (numpy) -> 0.10 ms.  The kernel itself, on 16 certified
+  vertices x 12 piece boxes (192 pairs, 3,072 tests, all passing): **50.5 us a call = 263 ns a pair = 16 ns a
+  test**, against 10.5 us a pair in Python -- A213 s.6 predicted "10-20 ns".  The SCALAR drop-in is only x2.3
+  (1.97 vs 4.50 us) because a ctypes call costs ~1 us; **the lesson for the next kernel is that the win is the
+  BATCH entry point, never one sign test per call**.
+- PER RUN (Y0202 pad 0, wall 900 s, isolated dirs, cProfile; BEFORE = `A214_CKERNEL=0`): the whole vertex-
+  certification stage 3.5 s -> 2.9 s (wrapper included) **while doing 19% more rebuilds** (8.9 -> 6.2 ms a rebuild);
+  inside the same wall 11 nodes expanded vs 9, and the two frontier nodes the BEFORE run left ALIVE at the wall
+  (R.1.4.2.2.2.1.1.2, R.1.4.2.2.2.1.2) both came back DEAD.  Verdicts identical on every node both runs finished
+  (14 of 17 records field-identical with the time fields stripped; the rest are the nodes only the AFTER run
+  reached, plus R.1.4.2.2's no-room `pockets` differing in the 5th decimal from the deadline-bounded `bisect_free`
+  A213 already recorded).  In that run the float filter decided **160,580 of 160,580 pairs in C** -- the exact
+  192-bit path was never needed live, and nothing was handed back except the out-of-envelope axis-core corners.
+- **[M] THE HONEST LIMIT.**  After A213 the certification was already only 3.5 s of a 910 s node, so this kernel
+  buys ~0.6 s a run directly; the 11-vs-9 nodes is a wall race, not a 10x.  What a node costs is
+  `_clip_rect_obstacle` (445 s of 910; 745 s of the wall sits inside the no-room leaf, most of it the same clip) --
+  A213b's integer clip (x9.2 a clip, flag now ON) is the lever.  A C kernel for the clip afterwards is a DIFFERENT
+  kernel and worth stating now: A213b's measured bound is **229 bits (four limbs, not three) and it GROWS with tree
+  depth** (G gains ~2 bits per t-split, CW per halving of the rect), so it needs a guarded envelope + Python
+  fallback like this one but firing more often the deeper the tree; and A213b measured its float filter at NO gain
+  (0.090 vs 0.085 ms a clip), so there it is the INTEGER path that belongs in C -- the opposite emphasis from here.
+- Wiring: `ckernel214.install()` rebinds `polycore_int.vertex_ok_h` / `certify_h` and `polycore_vec.certify_verts`
+  IN MEMORY (nothing edited on disk, the read-only libraries untouched), called by `mbpatch213.install()` behind
+  `A214_CKERNEL` (default ON since the tests passed; `=0` restores the Python-int path).  A213b's files were not
+  touched -- the only shared surface is that flag layer, and A213b's own runs already carry the kernel.

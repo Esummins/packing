@@ -67,7 +67,8 @@ Why those numbers: with `|A|, |B|, |C| < 2^93` and `T0sq, T1sq, E^2 < 2^62` the 
 the discriminant `< 2^189`, both inside signed 192 bits; the interior test `2 A T <= 2^94 . 2^31 = 2^125` is inside
 `__int128`.  Real grid vertices sit far inside this (`W <= 10^9`, `CW <= 2^53`: coefficients `< 2^83`, endpoint
 `< 2^142`).  The gate that actually fires in a run is the **axis core**: its corners have `W = den . aden . Q` up to
-~2^110, so `axis_core_pieces` certifies its four corners in Python -- 0.2 s of a 950 s run, not worth a wider kernel.
+~2^110, so `axis_core_pieces` certifies its four corners in Python -- 419 of the 838 batch calls of a real 900 s
+run, 0.7 s in total, not worth a wider kernel.
 
 Nothing is edited on disk: `ckernel214.install()` rebinds `polycore_int.vertex_ok_h` and `polycore_int.certify_h`
 (so `vertex_ok`, `certify_verts`, `pieces_poly`, `axis_core_pieces` and A135's `exactcore` all route through C) and
@@ -81,17 +82,28 @@ envelope -- `i192.h` is plain schoolbook multiplication with no truncation), so 
 truth values.  The float layer decides a sign only when the value exceeds a rigorous bound on its own error, so a
 decision it makes is the exact decision; and the layers are ordered so that "cannot decide" always costs correctness
 nothing -- it costs an exact test, and, past the envelope, a Python one.  The differential tests assert exactly this
-(s.6 of `results/timing214.md`): the exact path alone, the filter alone, the full kernel, the batch, and the two
+(s.1 of `results/timing214.md`): the exact path alone, the filter alone, the full kernel, the batch, and the two
 A213 test suites end to end.
 
-## 5. Why the rectangle-obstacle clip is NOT in this kernel
+## 5. The rectangle-obstacle clip: not in this kernel, and what its kernel would be
 
-The brief's third target was A213b's `pinclip_int.py` once it landed.  It has landed -- and its own bit bound
-(`attempts/A213-int-polycore/NOTES_clip.md`) reads: *"Measured on the Y0202 run: b <= 118, every integer below
-2^480."*  Those tests are not a fixed-width kernel: 480 bits is eight limbs, and the widths are data-dependent (the
-obstacle denominators VD, the container grid, the bisection candidates), so a C version would have to carry a
-general bignum, at which point CPython's own (which is what A213b already uses, with no gcd on the hot path) is the
-sensible implementation.  What CAN go to C there is the same thing that went to C here: a **float filter** in front
-of it -- A213b already has one on family A (`A213_CLIPFILTER`, default off, its error bound in its notes).  That is
-the next kernel, and it is a strictly bigger job than this one because the clip's float twin steers a bisection
-(`PIN._bisect_boundary`) rather than answering a single predicate.  A213b's files were left untouched here.
+The brief's third target was A213b's `pinclip_int.py` once it landed.  It landed while this was being built, and
+its numbers say clearly that it is a SEPARATE kernel, not an extension of this one:
+
+* **Its integers are wider and they grow.**  A213b's measured bound (`notes/int_clip.md` s.3, over the recorded
+  clips of the Y0202 runs) is 229 bits for the widest product -- four limbs, not the three this kernel uses -- and,
+  unlike the certification's, the width is data-dependent and INCREASES with tree depth: G gains ~2 bits per
+  t-split and CW per halving of the rect.  So a C clip kernel is perfectly possible (256-bit accumulation) but it
+  must carry a runtime envelope guard and a Python fallback exactly like s.3 here, and the fallback would fire more
+  often the deeper the tree goes.
+* **Its float filter is not the way in.**  Here the filter is the whole win (it decided 160,580 of 160,580 pairs in
+  a real run, s.3 of `results/timing214.md`).  A213b measured the analogous filter on the clip's family A at 0.090
+  ms a clip against 0.085 ms for the plain integer path -- no gain, because the clip's float twin steers a
+  bisection rather than answering one predicate.  So the clip's kernel is the INTEGER path in C, the opposite
+  emphasis from this one.
+* **The batch lesson transfers.**  A ctypes call costs ~1 us, a quarter of a Python-int certification; the win here
+  came from `a214_cert_batch` amortising it over 192 pairs.  A clip kernel should likewise expose the inner loop
+  (`dead_int` over an obstacle's edges and vertices for a whole rect, or a whole bisection step), never one sign
+  test per call.
+
+A213b's files were not touched here; the only shared surface is `mbpatch213`'s flag layer (`A214_CKERNEL`).
