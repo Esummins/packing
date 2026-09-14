@@ -1,0 +1,28 @@
+10:27:41 [w2] start slack0.02_c0_Y0272 wall 1800 (lab 6, free 14142 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP slack0.02_c0_Y0272 at the zero pad: ALIVE in 32010 ms; kills {'H-clip': 16, 'P': 4188, 'W': 1937, 'C': 1005, 'M': 4661, 'L': 7, 'R': 3314, 'X': 1057}; CSP units 464 -> 464 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': 1}; forced H ['TL(0,0)']
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== slack0.02_c0_Y0272 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_slack0.02_c0_Y0272_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [1.38, 1.519, 2.498, 2.637, 0.0, 14.25]; forced H ['TL(0,0)']; 6 slots; free 5
+   node R          d0 root: INTERNAL (21.3 s, 1 rounds; t=21.4)
+   node Rr1        d0 root<-None: INTERNAL (17.3 s, 1 rounds; t=38.8)
+   node R.1        d1 TR(1,0)<-[14]: INTERNAL (13.3 s, 1 rounds; t=52.2)
+   node R.1r1      d1 root<-None: INTERNAL (17.0 s, 1 rounds; t=69.2)
+   node R.1.1      d2 BR(0,1)<-[11]: DEAD by FC r1 (15.6 s, 1 rounds; t=85.3)
+   node R.1.2      d2 BR(0,1)<-[12]: DEAD by FC r1 (11.3 s, 1 rounds; t=96.6)
+   node R.1.3      d2 BR(0,1)<-[16]: DEAD by EmptyBox r1 (12.7 s, 1 rounds; t=109.3)
+   node R.1.4      d2 BR(0,1)<-[17]: DEAD by EmptyBox r1 (10.2 s, 1 rounds; t=119.5)
+   node R.1.5      d2 BR(0,1)<-[21]: INTERNAL (12.8 s, 1 rounds; t=132.3)
+   node R.1.5      d2: DEAD by CC -- rule CC at R.1.5 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior poin
+   node R.1.6      d2 BR(0,1)<-[22]: DEAD by EmptyBox r1 (3.5 s, 1 rounds; t=136.9)
+   node R.2        d1 TR(1,0)<-[17]: INTERNAL (16.5 s, 1 rounds; t=153.3)
+   node R.2.1      d2 BR(0,1)<-[11]: DEAD by EmptyBox r1 (1.6 s, 1 rounds; t=155.3)
+   node R.2.2      d2 BR(0,1)<-[16]: DEAD by EmptyBox r1 (24.9 s, 1 rounds; t=180.3)
+   node R.2.3      d2 BR(0,1)<-[21]: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=182.5)
+   node R.2.4      d2 BR(0,1)<-[22]: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=184.7)
+   node R.3        d1 TR(1,0)<-[18]: INTERNAL (22.8 s, 1 rounds; t=207.6)
+   node R.3.1      d2 BR(0,1)<-[11]: INTERNAL (28.2 s, 1 rounds; t=236.3)
+   no-room (k=9, m=2): UNDECIDED in 104 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.632 > 0.000 (no lane cove)
+   Lemma POCKET at R.3.1: 2 pockets (k=9, m=2)
+   node R.3.1.p1   d3 pocket<-[0]: INTERNAL (45.4 s, 1 rounds; t=388.7)
+   node R.3.1.p1   d3: DEAD by CC -- rule CC at R.3.1.p1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior p
+   node R.3.1.p2   d3 pocket<-[1]: INTERNAL (92.4 s, 1 rounds; t=481.2)
