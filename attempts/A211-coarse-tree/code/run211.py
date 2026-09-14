@@ -116,14 +116,16 @@ def a206_inherited(nid, pad, source):
 def wall_limited(d):
     """A211g -- the pad's recorded run stopped on the WALL (or a node cap), so a fresh wall can still make progress:
     the re-run inherits this certificate's own DEAD branches (inherit211 ranks A211 highest) and restarts exactly at
-    the alive frontier.  A DEAD pad, a stage-0 kill, and an ALIVE pad that ran out of anything but time (a start node
-    that cannot be loaded soundly, say) are FINAL: those stay cached."""
+    the alive frontier.  A DEAD pad and a stage-0 kill are FINAL: those stay cached.
+    A211h -- a pad left ALIVE because a start node "could not be loaded soundly" is ALSO re-runnable: that refusal was
+    the LOADER's, not the geometry's, and startload211 now climbs to the nearest COMPLETE ancestor (the page's A203
+    stage-0 root at worst) instead of refusing."""
     if not isinstance(d, dict) or d.get("stage0_kill") or d.get("verdict") == "DEAD":
         return False
     if d.get("wall"):
         return True
     return any(("wall" in str(u.get("reason") or "")) or ("node cap" in str(u.get("reason") or ""))
-               for u in (d.get("undecided") or []))
+               or ("could not be loaded soundly" in str(u.get("reason") or "")) for u in (d.get("undecided") or []))
 
 
 def page_doc(doc, pg):
@@ -191,7 +193,7 @@ def run_tree(doc, a, pad, cert, log=print):
     dead_paths = (M or {}).get("dead_paths") or {}
     d = doc["runs"][key] = dict(pad=pad, mode="page", source=start.get("file"), lam=float(base.lam), start=start, verdict="RUNNING", nodes=list(rows),
                                 basins=[C.basin_json(b) for b in basins], verifier=VERIFIER, inherit=(M["info"] if M else None),
-                                inherited_dead=len(rows), inherited_alive=len(starts), start_nodes=[dict(s, steps=len(s["steps"])) for s in starts],
+                                inherited_dead=len(rows), inherited_alive=len(starts), start_nodes=[INH.brief(s) for s in starts],
                                 cfg=dict(rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, wall=a.wall, inherit=not a.no_inherit,
                                          coarse=dict(grid=[C11.NX, C11.NY, C11.NB], cap=C11.CAP, refine=C11.REFINE, max_iter=C11.MAX_ITER,
                                                      nsub=C11.NSUB, depth=C11.DEPTH, jdepth=C11.JDEPTH, kmode=C11.KMODE, n_grid=C11.NGRID,
@@ -263,7 +265,8 @@ def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, d
                      start_anc=(sn or {}).get("anc_label"), start_meta=meta, path_key=(sn or {}).get("key") or [])
         done += tree.nodes
         agg["runs"].append(dict(label=lab, verdict=out["verdict"], n_nodes=out["n_nodes"], seconds=round(T.now(), 1), cert=(sn or {}).get("cert"),
-                                anc=(sn or {}).get("anc_label"), applied=meta.get("applied"), leaf=out.get("leaf"), wall=T.out_of_time()))
+                                anc=(sn or {}).get("anc_label"), applied=meta.get("applied"), loaded_from=meta.get("loaded_from"),
+                                leaf=out.get("leaf"), wall=T.out_of_time()))
         if agg["root"] is None:
             r0 = tree.nodes[0] if tree.nodes else {}
             agg["root"] = dict(verdict=r0.get("verdict"), clip=r0.get("clip"), seconds=r0.get("seconds"), n_rounds=r0.get("n_rounds"), kept=r0.get("kept"),

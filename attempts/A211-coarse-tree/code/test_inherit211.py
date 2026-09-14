@@ -76,7 +76,9 @@ def check_step(br):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pads", default="zero,g1")
-    ap.add_argument("--load", action="store_true", help="also run startload211 on every start node with a role split")
+    ap.add_argument("--load", action="store_true", help="also run startload211 on every start node (A211h)")
+    ap.add_argument("--rsplit-only", dest="rsplit_only", action="store_true",
+                    help="--load only the start nodes that carry a role split (the A211f regression)")
     ap.add_argument("--nid", default=None)
     a = ap.parse_args()
     import inherit211 as INH
@@ -109,8 +111,8 @@ def main():
                     rs = rs or br.get("kind") == "rsplit"
                     for why in check_step(br):
                         errs.append((nid, pad, sn["label"], why))
-                if rs:
-                    n_rs += 1
+                n_rs += rs
+                if rs or not a.rsplit_only:
                     loadable.append((nid, pad, sn, start))
     print("MERGE   %d pages x %d pads -> %d merges, %d start nodes, %d replay steps (%d start nodes carry a role split)"
           % (len(nids), len(a.pads.split(",")), n_merge, n_start, n_step, n_rs))
@@ -124,17 +126,24 @@ def main():
         import coarse211 as C11
         import startload211 as SL
         C11.install()
-        n_ok = 0
+        n_ok, n_root, n_climb, refused = 0, 0, 0, []
         for nid, pad, sn, start in loadable:
             T = P.FP.Trace(wall=10 ** 9)
             rec, cls, _row = P.FP.load_page(nid)
             try:
-                SL.load(sn, rec, cls, nid, T, pad, start, [], rounds=1, log=quiet)
+                _pg, meta = SL.load(sn, rec, cls, nid, T, pad, start, [], rounds=1, log=quiet)
+                lf = meta.get("loaded_from") or {}
                 n_ok += 1
+                n_root += lf.get("mode") == "a203_root"
+                n_climb += bool(lf.get("climbed"))
             except Exception as e:                                # noqa: BLE001
+                refused.append((nid, pad, sn["label"], repr(e)))
                 errs.append((nid, pad, sn["label"], "load: %r" % (e,)))
                 print("   LOAD FAIL %s pad %s %s: %r" % (nid, pad, sn["label"], e))
-        print("LOAD    %d / %d role-split start nodes loaded" % (n_ok, len(loadable)))
+        print("LOAD    %d / %d start nodes loaded (%d climbed past a capped / missing snapshot, %d replayed from the "
+              "A203 stage-0 root); %d REFUSED" % (n_ok, len(loadable), n_climb, n_root, len(refused)))
+        for r in refused:
+            print("   REFUSED %s pad %s %s: %s" % r)
     print("%s in %.1f s" % ("PASS" if not errs else "FAIL (%d)" % len(errs), time.time() - t0))
     return 1 if errs else 0
 

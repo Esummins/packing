@@ -14,6 +14,7 @@ import tree209 as N9
 import rsplit211 as RS
 import coarse211 as C11
 import load206 as L6
+import inherit211 as INH
 
 FP = P.FP
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -31,12 +32,21 @@ def run_doc(doc, run, pad):
     raise KeyError("run %s not in the certificate" % run)
 
 
-def find(doc, run, pad, label):
+def find(doc, run, pad, label, want_round=None):
+    """the record `label` in this run whose snapshot is COMPLETE (A211h; `want_round` is the round inherit211 saw --
+    the certificate on disk may have been rewritten since the merge read it)."""
     d = run_doc(doc, run, pad)
-    for n in reversed(d.get("nodes") or []):
-        if n.get("label") == label and n.get("snapshot"):
+    hits = [n for n in (d.get("nodes") or []) if n.get("label") == label and n.get("snapshot")]
+    if want_round is None:
+        hits.reverse()
+    else:
+        hits.sort(key=lambda n: (n.get("snapshot") or {}).get("round") != want_round)
+    if not hits:
+        raise KeyError("node %s carries no snapshot" % label)
+    for n in hits:
+        if INH.snap_complete(n):
             return n
-    raise KeyError("node %s carries no snapshot" % label)
+    raise ValueError("node %s: every snapshot recorded there is capped: cannot load soundly" % label)
 
 
 def fill(pg, node):
@@ -96,16 +106,25 @@ def fresh_clock(T, wall):
                          "earlier run -- a start node needs a FRESH Trace for this run's wall" % (T.now(), float(wall)))
 
 
-def load(sn, rec, cls, nid, T, pad, start, basins, rounds=1, wall=None, log=print):
-    """-> (CoarsePage at the start node, meta).  pg.dead is set when the replay's own coarse cascade already kills it."""
-    fresh_clock(T, wall)
-    f = os.path.join(ROOT, sn["cert"])
-    doc = json.load(open(f, encoding="utf-8"))
-    node = find(doc, sn["run"], pad, sn["anc_label"])
+def cands_of(sn):
+    """A211h -- the ancestors this start node may be loaded from, deepest first (inherit211.cands_of puts the page's
+    A203 stage-0 root last).  A start node from an older certificate carries only the one chosen ancestor."""
+    cs = list(sn.get("cands") or [])
+    if not cs:
+        cs = [dict(cert=sn.get("cert"), run=sn.get("run"), camp=sn.get("camp"), anc_label=sn.get("anc_label"),
+                   anc_steps=sn.get("anc_steps"), snapshot_round=sn.get("snapshot_round"), steps=sn.get("steps") or [])]
+    return cs
+
+
+def one(sn, cd, rec, cls, nid, T, pad, start, basins, rounds, log):
+    """load the single ancestor `cd` and replay its steps -> (page, node record or None, loaded roles, applied)."""
     pg = C11.CoarsePage(rec, cls, nid, T, pad=pad, start=start, basins=basins)
-    loaded = fill(pg, node)
-    applied = []
-    steps = sn.get("steps") or []
+    node, loaded = None, {}
+    if cd.get("cert"):                                        # else: the A203 stage-0 root itself -- every step replayed
+        doc = json.load(open(os.path.join(ROOT, cd["cert"]), encoding="utf-8"))
+        node = find(doc, cd["run"], pad, cd["anc_label"], cd.get("snapshot_round"))
+        loaded = fill(pg, node)
+    applied, steps = [], cd.get("steps") or []
     for j, br in enumerate(steps):
         if pg.dead:
             break
@@ -114,11 +133,42 @@ def load(sn, rec, cls, nid, T, pad, start, basins, rounds=1, wall=None, log=prin
             break
         applied.append(apply_step(pg, br, log=log))
         log("   start %s: applied step %d/%d -- %s" % (sn["label"], j + 1, len(steps), applied[-1]))
-    meta = dict(cert=sn["cert"], run=sn["run"], camp=sn["camp"], anc_label=sn["anc_label"], anc_steps=sn["anc_steps"],
-                label=sn["label"], path=sn["path"], n_steps=sn["n_steps"], loaded=loaded, applied=applied,
-                padding=dict(rect=float(L6.EPS_R), tilt_deg=L6.EPS_D), snapshot_round=(node.get("snapshot") or {}).get("round"),
-                recorded=dict(verdict=node.get("verdict"), depth=node.get("depth"), seconds=node.get("seconds"),
-                              t=node.get("t")),                 # A211g: the recorded elapsed time -- PROVENANCE ONLY,
-                clock=dict(wall=T.wall, spent_at_load=round(T.now(), 2)),   # never the running clock (fresh_clock)
-                dead_on_replay=pg.dead)
-    return pg, meta
+    return pg, node, loaded, applied
+
+
+def load(sn, rec, cls, nid, T, pad, start, basins, rounds=1, wall=None, log=print):
+    """-> (CoarsePage at the start node, meta).  pg.dead is set when the replay's own coarse cascade already kills it.
+    A211h: when the chosen ancestor cannot be loaded soundly (its snapshot was written at the 300-piece cap, or the
+    certificate on disk no longer carries it -- A211 rewrites its own certificate per node), CLIMB to the next
+    complete ancestor and replay the extra steps, the A203 stage-0 root last.  Lemma INHERIT (notes/coarse_tree.md
+    s.4): a higher ancestor is a PREFIX of the same path key, so its pose set is a superset of the start node's
+    parent, and every replayed step is a child of a branch list a prior certificate certified exhaustive -- the page
+    still arrives at exactly the start node's hypothesis, over-approximated.  Never a silent subset."""
+    fresh_clock(T, wall)
+    cands, tried, err = cands_of(sn), [], None
+    for cd in cands:
+        try:
+            pg, node, loaded, applied = one(sn, cd, rec, cls, nid, T, pad, start, basins, rounds, log)
+        except Exception as e:                                # noqa: BLE001  -- a capped / missing / unreplayable ancestor
+            err = e
+            tried.append(dict(cert=cd.get("cert"), run=cd.get("run"), anc_label=cd.get("anc_label"),
+                              anc_steps=cd.get("anc_steps"), why=repr(e)))
+            log("   start %s: ancestor %s (%s) refused (%r) -- climbing to the next complete ancestor"
+                % (sn["label"], cd.get("anc_label") or "A203 root", cd.get("cert") or "-", e))
+            continue
+        meta = dict(cert=cd["cert"], run=cd["run"], camp=cd["camp"], anc_label=cd["anc_label"], anc_steps=cd["anc_steps"],
+                    label=sn["label"], path=sn["path"], n_steps=sn["n_steps"], loaded=loaded, applied=applied,
+                    padding=dict(rect=float(L6.EPS_R), tilt_deg=L6.EPS_D), snapshot_round=((node or {}).get("snapshot") or {}).get("round"),
+                    recorded=dict(verdict=(node or {}).get("verdict"), depth=(node or {}).get("depth"),
+                                  seconds=(node or {}).get("seconds"), t=(node or {}).get("t")),   # A211g: PROVENANCE ONLY,
+                    clock=dict(wall=T.wall, spent_at_load=round(T.now(), 2)),   # never the running clock (fresh_clock)
+                    loaded_from=dict(mode="snapshot" if node is not None else "a203_root", cert=cd["cert"], run=cd["run"],
+                                     camp=cd["camp"], anc_label=cd["anc_label"], anc_steps=cd["anc_steps"],
+                                     snapshot_round=cd.get("snapshot_round"), n_replayed=len(cd.get("steps") or []),
+                                     n_steps=sn["n_steps"], climbed=len(tried), refused=tried, n_cands=len(cands),
+                                     rule="Lemma INHERIT (notes/coarse_tree.md s.4): a prefix of the path key, loaded "
+                                          "with the pieces padded outward, then the remaining certified branch steps "
+                                          "replayed -- a superset of the start node"),
+                    dead_on_replay=pg.dead)
+        return pg, meta
+    raise err

@@ -186,8 +186,28 @@ the rect and 0.001 deg in tilt, so the loaded pose set is a SUPERSET of the reco
 branch steps of the path, applied with the tree's own `apply_branch` / `apply_ns` / `apply_pocket`.  An ANCESTOR's
 snapshot is a sound over-approximation of the start node's parent (its hypothesis is implied by the start node's), and
 a `u` record's snapshot is sound for the weaker path for the same reason as above; each applied step is a child of a
-list certified exhaustive by (b).  A start node whose snapshot was written at the piece cap is REFUSED (load206's
-rule) and the page falls back to the plain root run: never a silent subset.
+list certified exhaustive by (b).  A snapshot written at the 300-piece cap holds only SOME of the node's pieces: it is
+a subset of the node's pose set, so it is never loaded (`inherit211.snap_complete`) -- never a silent subset.
+
+**(d) The climb: the nearest COMPLETE ancestor, the A203 stage-0 root at worst (2026-09-14, A211h).**  Let P be a
+start path and let A_0 = P, A_1, ..., A_n = () be its prefixes, innermost first.  Then for EVERY i, the state of A_i
+padded outward and carried forward by the recorded branch steps of P beyond A_i is a sound over-approximation of P.
+*Proof.*  A_i is a prefix of P's path key, so the hypothesis of A_i is implied by that of P and the pose set recorded
+at A_i contains every pose consistent with P (this is the same argument as for the parent above, applied i levels up);
+padding outward only enlarges it (load206); and each of the remaining steps is a child of a branch list certified
+exhaustive at its own node by (b), so applying them lands on exactly P's hypothesis, over-approximated.  The case
+i = n is the page's own A203 stage-0 root, which is the weakest hypothesis of all and is always available -- it needs
+no snapshot, only the page and the pad.  []
+
+So the loader (`inherit211.anc_snapshots` / `cands_of`, `startload211.load`) takes the ancestors carrying a COMPLETE
+snapshot, DEEPEST FIRST, with the A203 stage-0 root appended last, and loads the first of them that reads back; a
+capped snapshot, an ancestor with no snapshot (a refresh record), and a certificate rewritten under the run's feet
+(A211 rewrites its own certificate per node, so a candidate found at merge time can be gone at load time) all make the
+loader CLIMB one step further instead of refusing the start node.  Every candidate is sound by (d) -- the climb costs
+only the replay of the extra steps, never correctness.  What was loaded is recorded in the node's
+`start_meta.loaded_from` (mode `snapshot` / `a203_root`, the ancestor, the number of steps replayed, and each refused
+candidate with its reason) and in the run row's `start_runs[*].loaded_from`.  A pad left ALIVE by an old loader
+refusal is therefore no longer FINAL: `run211.wall_limited` resumes it (A211h).
 
 **What it is worth (measured, `logs/test211b_Y0202_zero.log`; `python code/inherit211.py <nid> <pad>` prints it).**
 k5_11_interior_Y0202 pad 0: 3 prior trees merge to 16 paths, 3 branches inherited DEAD (A209's R.1.1, R.1.2, R.1.3,

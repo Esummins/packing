@@ -286,47 +286,98 @@ def walk(G, p, dead, starts, BR, depth=0):
     starts.append(p)
 
 
-def anc_snapshot(G, p):
-    """the deepest recorded snapshot on p's own chain: a PREFIX hypothesis, so its pose set is a superset -- sound."""
+def snap_complete(n):
+    """the record's snapshot holds EVERY piece of every named role -- it was not written at the 300-piece cap, so
+    startload211.fill can load it (padded outward) as a SUPERSET.  A capped snapshot is a SUBSET of the node's pose
+    set: loading it would be unsound, so it never becomes a start node's ancestor (A211h)."""
+    snap = n.get("snapshot") or {}
+    roles = snap.get("roles") or {}
+    for k, v in roles.items():
+        if k.startswith("P"):
+            continue
+        if int(v.get("n_pieces", 0) or 0) > len(v.get("pieces") or []):
+            return False
+    return bool(roles)
+
+
+def anc_snapshots(G, p):
+    """A211h -- EVERY ancestor of p on p's own chain that carries a COMPLETE snapshot, DEEPEST FIRST.  Each is a
+    PREFIX hypothesis of p, so its pose set is a superset -- sound (Lemma INHERIT, "how a start node is loaded").
+    A CAPPED snapshot is skipped rather than refused: the loader climbs to the next complete ancestor, and an empty
+    list means the start node is replayed from the page's own A203 stage-0 root (still a superset: the root is the
+    weakest hypothesis of all)."""
+    out = []
     for i in range(len(p), -1, -1):
         best = None
         for rank, t, kk, c in (G.get(p[:i]) or {}).get("recs", []):
             for n in kk["recs"].get(c, []):
-                if n.get("snapshot") and (best is None or rank >= best[0]):
-                    best = (rank, t, kk, c, n.get("label"))
+                if n.get("snapshot") and snap_complete(n) and (best is None or rank >= best[0]):
+                    best = (rank, t, kk, c, n.get("label"), (n.get("snapshot") or {}).get("round"))
         if best is not None:
-            return (i,) + best
-    return None
+            out.append((i,) + best)
+    return out
+
+
+def anc_snapshot(G, p):
+    """the deepest COMPLETE snapshot on p's own chain (None: p is replayed from the A203 stage-0 root)."""
+    a = anc_snapshots(G, p)
+    return a[0][:6] if a else None
+
+
+def cands_of(G, BR, p):
+    """A211h -- the ancestors the start node p may be loaded from, BEST (deepest) FIRST, each with the branch steps
+    that must be replayed from it; the LAST entry is always the page's own A203 stage-0 root (cert None, every step
+    replayed), so a start node is never refused merely because the snapshots on its chain were written at the cap."""
+    out = []
+    for i, _rank, t, _kk, _c, lab, rnd in anc_snapshots(G, p):
+        out.append(dict(cert=rel(t["file"]), run=t["run"], camp=t["camp"], anc_label=lab, anc_steps=i, snapshot_round=rnd,
+                        steps=[BR[p[:j + 1]] for j in range(i, len(p))]))
+    out.append(dict(cert=None, run=None, camp="A203", anc_label=None, anc_steps=0, snapshot_round=None,
+                    steps=[BR[p[:j + 1]] for j in range(0, len(p))]))
+    return out
 
 
 def merge(nid, pad, start_file, log=print):
-    """-> dict(dead_paths, starts, info) or None when no start node carries a loadable snapshot."""
+    """-> dict(dead_paths, starts, info)."""
     K = keyed_trees(nid, pad, start_file, log=log)
     G = trie(K, leaf_kills(nid, pad))
     dead, starts, BR = [], [], {}
     walk(G, (), dead, starts, BR)
-    out = []
+    out, n_root = [], 0
     for p in starts:
-        a = anc_snapshot(G, p)
-        if a is None:
-            log("   INHERIT: the start path %s carries no recorded snapshot -- the page falls back to the plain root run" % (list(map(str, p)),))
-            return None
-        i, rank, t, kk, c, lab = a
+        cands = cands_of(G, BR, p)
+        top = cands[0]
+        n_root += top["cert"] is None
+        if top["cert"] is None:
+            log("   INHERIT: the start path %s carries no COMPLETE ancestor snapshot -- it is replayed from the A203 "
+                "stage-0 root (%d steps)" % (list(map(str, p)), len(p)))
         named = sorted((G.get(p) or {}).get("recs", []), key=lambda r: -r[0])
-        out.append(dict(label=named[0][3] if named else (lab if i == len(p) else "%s+%s" % (lab, "".join("/" + str(s[1]) for s in p[i:]))),
-                        path=[list(map(str, s)) for s in p], key=[list(s) for s in p], n_steps=len(p), cert=rel(t["file"]), run=t["run"], camp=t["camp"],
-                        anc_label=lab, anc_canon=c, anc_steps=i, pad=pad, nid=nid,
-                        steps=[BR[p[:j + 1]] for j in range(i, len(p))],
-                        recorded=dict(verdict=next((r.get("verdict") for r in kk["recs"].get(c, [])), None), depth=len(p)))
-                   )
+        if named:
+            label = named[0][3]
+        elif top["anc_label"] and top["anc_steps"] == len(p):
+            label = top["anc_label"]
+        else:
+            label = "%s+%s" % (top["anc_label"] or "R0", "".join("/" + str(s[1]) for s in p[top["anc_steps"]:]))
+        rv = next((r.get("verdict") for r in (named[0][2]["recs"].get(named[0][3]) or [])), None) if named else None
+        out.append(dict(label=label, path=[list(map(str, s)) for s in p], key=[list(s) for s in p], n_steps=len(p),
+                        cert=top["cert"], run=top["run"], camp=top["camp"], anc_label=top["anc_label"],
+                        anc_steps=top["anc_steps"], snapshot_round=top["snapshot_round"], steps=top["steps"],
+                        cands=cands, n_cands=len(cands), pad=pad, nid=nid,
+                        recorded=dict(verdict=rv, depth=len(p))))
     info = dict(nid=nid, pad=pad, start_file=start_file, n_trees=len(K), n_paths=len(G),
                 trees=[dict(camp=t["camp"], cert=rel(t["file"]), run=t["run"], mode=t["mode"], n_nodes=len(t["nodes"]),
                             rooted_at=kk["root"], root_steps=len(kk["path"][kk["root"]])) for t, kk in K],
                 inherited_dead=[dict(path=[list(map(str, s)) for s in p], key=[list(s) for s in p], n_steps=len(p), **v) for p, v in dead],
-                n_inherited_dead=len(dead), start_nodes=[dict(s, steps=[dict(b) for b in s["steps"]]) for s in out], n_start_nodes=len(out))
-    log("   INHERIT %s pad %s: %d prior trees, %d paths, %d branches inherited DEAD (final, with their certificates), %d start nodes" % (
-        nid, pad, len(K), len(G), len(dead), len(out)))
+                n_inherited_dead=len(dead), n_start_nodes=len(out), n_start_from_root=n_root,
+                start_nodes=[dict(brief(s), steps=[dict(b) for b in s["steps"]]) for s in out])
+    log("   INHERIT %s pad %s: %d prior trees, %d paths, %d branches inherited DEAD (final, with their certificates), %d start nodes (%d from the A203 root)" % (
+        nid, pad, len(K), len(G), len(dead), len(out), n_root))
     return dict(dead_paths={p: v for p, v in dead}, starts=out, info=info)
+
+
+def brief(s):
+    """the start node as it goes into a certificate / a log line: the replay steps and each fallback ancestor COUNTED."""
+    return dict(s, steps=len(s["steps"]), cands=[dict(c, steps=len(c["steps"])) for c in (s.get("cands") or [])])
 
 
 def norm(s):

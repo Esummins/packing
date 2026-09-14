@@ -46,7 +46,8 @@ def test_gate():
     s0run = dict(verdict="DEAD", stage0_kill=True)
     check("gate: wall-limited ALIVE resumes", R.wall_limited(wallrun) is True)
     check("gate: node-cap ALIVE resumes", R.wall_limited(caprun) is True)
-    check("gate: unloadable start node stays cached", R.wall_limited(loadrun) is False)
+    check("gate: a loader refusal now RESUMES (A211h)",            # startload211 climbs to the nearest COMPLETE
+          R.wall_limited(loadrun) is True)                          # ancestor (A203 root at worst): not final
     check("gate: DEAD stays cached", R.wall_limited(deadrun) is False)
     check("gate: stage-0 kill stays cached", R.wall_limited(s0run) is False)
     check("gate: a missing run stays cached", R.wall_limited({}) is False and R.wall_limited(None) is False)
