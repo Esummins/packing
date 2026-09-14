@@ -1,0 +1,45 @@
+A213 profrun: tag before nid k5_11_interior_Y0202 flag A213_INTCORE=None argv ['page', 'k5_11_interior_Y0202', '--cert-dir', 'C:\\Users\\esumm\\code\\packing\\attempts\\A213-int-polycore\\results\\run_before', '--results', 'C:\\Users\\esumm\\code\\packing\\attempts\\A213-int-polycore\\results\\run_before\\rows.jsonl', '--no-fig', '--force', '--wall', '900', '--pads', 'zero']
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0202_zero_s0.json)
+   INHERIT k5_11_interior_Y0202 pad zero: 3 prior trees, 24 paths, 6 branches inherited DEAD (final, with their certificates), 4 start nodes
+== k5_11_interior_Y0202 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0202_zero_s0.json; basins []; INHERIT 6 dead branches (final) + 4 start nodes ['R.1.4.2.2', 'R.1.5.2', 'R.2', 'R.3']; H [1.939, 2.078, 1.519, 1.659, 73.74, 82.372]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1.1        BR(0,1)<-(18, 21)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.2        BR(0,1)<-(18, 22)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.3        BR(0,1)<-(18, 23)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.4.1      BR(0,1)<-F4  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.4.2.1    BL(1,1)<-F4  [A211 tree: FC] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.5.1      BL(1,1)<-F4  [A211 tree: REACH] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0202.json
+   node R.1.4.2.2  d0 root: INTERNAL (12.8 s, 1 rounds; t=13.3)
+   no-room (k=10, m=1): UNDECIDED in 131 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2: bisect F4 on y at 2.917814 (extents (0.320117, 0.91854), tilt 90.0 deg, core non-empty, 58 piece(s); split 1 of 4)
+   node R.1.4.2.2.1 d1 F4<-['y<=2.917814']: INTERNAL (17.9 s, 1 rounds; t=163.3)
+   no-room (k=10, m=1): UNDECIDED in 159 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.1: bisect F2 on t at 53.1301 (extents (0.436761, 0.150837), tilt 90.0 deg, core non-empty, 69 piece(s); split 1 of 4)
+   node R.1.4.2.2.1.1 d2 F2<-['t<=53.1301']: INTERNAL (24.8 s, 1 rounds; t=347.3)
+   no-room (k=10, m=1): UNDECIDED in 139 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.1.1: bisect F3 on t at 53.1301 (extents (0.275342, 0.223946), tilt 90.0 deg, core non-empty, 45 piece(s); split 1 of 4)
+   node R.1.4.2.2.1.1.1 d3 F3<-['t<=53.1301']: INTERNAL (23.7 s, 1 rounds; t=510.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 41 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.1.1.1 d3: DEAD by NOROOM -- no-room at R.1.4.2.2.1.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.2.2.1.1.2 d3 F3<-['t>=53.1301']: INTERNAL (20.4 s, 1 rounds; t=571.7)
+   no-room (k=10, m=1): DEAD by NOROOM in 43 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.1.1.2 d3: DEAD by NOROOM -- no-room at R.1.4.2.2.1.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.2.2.1.2 d2 F2<-['t>=53.1301']: INTERNAL (18.5 s, 1 rounds; t=633.1)
+   no-room (k=10, m=1): UNDECIDED in 161 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.1.2: bisect F3 on t at 53.1301 (extents (0.275342, 0.232044), tilt 90.0 deg, core non-empty, 55 piece(s); split 1 of 4)
+   node R.1.4.2.2.1.2.1 d3 F3<-['t<=53.1301']: INTERNAL (23.5 s, 1 rounds; t=817.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 37 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.1.2.1 d3: DEAD by NOROOM -- no-room at R.1.4.2.2.1.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.2.2.1.2.2 d3 F3<-['t>=53.1301']: INTERNAL (15.0 s, 1 rounds; t=869.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 41 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.1.2.2 d3: DEAD by NOROOM -- no-room at R.1.4.2.2.1.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R.1.4.2.2    => ALIVE (8 nodes; t = 911 s of 900.0)
+   start R.1.5.2: SKIPPED (wall)
+   start R.2: SKIPPED (wall)
+   start R.3: SKIPPED (wall)
+   => ALIVE (zero_page) in 910.9 s: 4 start runs, 8 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 4 role splits (0 empty-half kills), 6 inherited dead (6 up front + 0 in tree), 10 dead / 1 alive leaves (WALL)
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2 d2 DEAD INHERIT 0.0s; R.1.3 d2 DEAD INHERIT 0.0s; R.1.4.1 d3 DEAD INHERIT 0.0s; R.1.4.2.1 d4 DEAD INHERIT 0.0s; R.1.5.1 d3 DEAD INHERIT 0.0s; R.1.4.2.2 d0 INTERNAL 12.8s; R.1.4.2.2.1 d1 INTERNAL 17.9s; R.1.4.2.2.1.1 d2 INTERNAL 24.8s; R.1.4.2.2.1.1.1 d3 DEAD NOROOM 23.7s; R.1.4.2.2.1.1.2 d3 DEAD NOROOM 20.4s; R.1.4.2.2.1.2 d2 INTERNAL 18.5s; R.1.4.2.2.1.2.1 d3 DEAD NOROOM 23.5s; R.1.4.2.2.1.2.2 d3 DEAD NOROOM 15.0s; R.1.4.2.2.2 d1 ALIVE 0.0s
+== k5_11_interior_Y0202: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1079, 'misses': 441, 'entries': 441}; clip {'hits': 21110, 'misses': 167493, 'entries': 167493}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 650, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 870}
+A213 profrun: 441 library rebuilds recorded, 245.7 s inside rebuild, 911.3 s total; profile C:\Users\esumm\code\packing\attempts\A213-int-polycore\logs\profile\before_k5_11_interior_Y0202.prof
