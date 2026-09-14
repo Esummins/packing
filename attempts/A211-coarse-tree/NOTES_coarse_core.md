@@ -82,3 +82,33 @@ max_rounds; the round_times of every internal node show `round: 1`).  The exact 
 (`poly204.fixpoint`: a mutual pass that moved < 0.1 % of the volume ends the loop -- `coarse_fixpoint` carries the
 same test), and `tree211.leaf_rules` still leaves the leaf undecided rather than starting the exact cascade once the
 wall is spent (A211d's change, commit 2db5a295).
+
+## ONE FRONTIER NODE -- k5_11_interior_Y0036_D07, pad 0, wall 900 (the same page run both ways)
+
+`logs/profile/coarse_k5_11_interior_Y0036_D07_zero.log` (A211e) against
+`logs/profile/base_k5_11_interior_Y0036_D07_zero.log` (the same code with `A211_KMODE=pieces A211_NGRID=97`, i.e. the
+pre-A211e node), one process, sequential.
+
+| run    | seconds | nodes | depth | dead leaves | node cascade: sum / mean / max | kills |
+|--------|--------:|------:|------:|------------:|-------------------------------:|-------|
+| before |   548.4 |    24 |     2 |          20 |      290.8 / 12.1 / 38.3       | 5 EmptyBox, 2 COUNT, 3 NOROOM, 2 CC, 1 FC |
+| after  |   797.9 |    51 |     3 |          38 |      221.8 /  4.4 /  8.2       | 14 EmptyBox, 2 COUNT, 8 NOROOM, 2 CC, 1 FC, 3 S-CLIP |
+
+Both runs end at the SAME verdict: the three startable branches (R.1.4.4, R.2, R.3) all close DEAD, no leaf is left
+alive, and the page stays ALIVE for an unrelated reason -- two start nodes (R.1.4.3.1.2, R.1.4.3.2) fail to load with
+`TypeError('list indices must be integers or slices, not str')` in BOTH runs.  (That loader bug, not the core, is what
+keeps this page open; it is pre-existing and outside A211e.)
+
+The honest trade, in one page: the coarse core makes a NODE 2.8x cheaper (mean 12.1 -> 4.4 s, worst 38.3 -> 8.2 s, and
+the total cascade time falls 24 %), but the weaker clip kills later, so the tree needs 51 nodes where 24 sufficed, and
+each extra fully named leaf pays A189 no-room in FULL (no-room keeps kmode "pieces").  Net on this page: +45 % wall.
+Net on Y0202, where a single node cost 89-214 s and the wall ran out at depth 2: -86 % a node and three more kills.
+So the lever pays where the fixed point dominates (deep, wide, expensive nodes) and costs where the tree is already
+shallow and the kills come from EmptyBox / COUNT off a strong clip.
+
+NEXT LEVERS (not taken).  (i) Make the coarse core CONDITIONAL -- keep it while the node's fixed point is expensive
+(pieces above a threshold, or the parent's normalise above N seconds) and fall back to the per-piece core on a cheap
+node; the knob is already per-call (`grid_rebuild`), so this is a predicate, not a rewrite.  (ii) A189 no-room is now
+82 % of an expensive page and runs at twice as many leaves: its `build_node` (172 -> 345 s here) rebuilds K' per piece
+from scratch at every leaf and is the next thing to memoise across a parent and its children.  (iii) n_grid 33 was not
+tuned -- 17 also certified on every box tested.
