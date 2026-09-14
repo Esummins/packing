@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-14 11:38` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-14 11:48` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -128,10 +128,10 @@ Of the 71 gallery pages the PI reviews, **37 are still ALIVE and 34 are now DEAD
 | [x] [`k5_16_interior_Y0436.svg`](killed/k5_16_interior_Y0436.svg) | `k5_16_interior_Y0436` | `k5_16` | 1 | `none` | **DEAD** | k5killer209 composed chain [zero pad; composed clip tree [20 nodes, depth 2, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD: R.1 TL(1,0)<-[8, 9] by FC r1; R.2.1 BL(1,0)<-[5, 6] by FC r1; R.2.2 BL(1,0)<-[5, 11] by EmptyBox r1; R.2.3 BL(1,0)<-[5, 16] by EmptyBox r1; R (s0-only; WINDOW-PENDING) | A209 | 2026-09-12 | 2.88 (rank 48) |
 | [x] [`k5_16_interior_Y0491.svg`](killed/k5_16_interior_Y0491.svg) | `k5_16_interior_Y0491` | `k5_16` | 1 | `S01` | **DEAD** | cliptree205 clip tree [g1 pad; 2 nodes, depth 0]: every branch of the clip tree DEAD: Rr1 root<-None by EmptyBox r1 | A205 | 2026-09-11 | 2.88 (rank 49) |
 | [x] [`k5_16_interior_Y0565.svg`](killed/k5_16_interior_Y0565.svg) | `k5_16_interior_Y0565` | `k5_16` | 1 | `S01` | **DEAD** | cliptree205 clip tree [g1 pad; 5 nodes, depth 1]: every branch of the clip tree DEAD: R.1 BR(0,1)<-[10] by FC r1; R.2 BR(0,1)<-[15] by FC r2; R.3 BR(0,1)<-[22] by EmptyBox r1; R.4 BR(0,1)<-[23] by COUNT r1 | A205 | 2026-09-11 | 2.88 (rank 50) |
-| [x] [`k5_16_interior_Y0719.svg`](killed/k5_16_interior_Y0719.svg) | `k5_16_interior_Y0719` | `k5_16` | 1 | `S01` | **DEAD** | coarsetree211 coarse tree [zero pad; coarse tree [13 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD (7 inherited from prior certificates + 9 proved here): R.1 TR(0,1)<-(19,) by INHERIT; R.2.1 TR(1,0)<-(8,) by INHERIT; R.2.2 TR(1,0)<-(9,) by I (s0-only; WINDOW-PENDING) | A211 | 2026-09-13 | 2.88 (rank 54) |
+| [x] [`k5_16_interior_Y0719.svg`](killed/k5_16_interior_Y0719.svg) | `k5_16_interior_Y0719` | `k5_16` | 1 | `S01` | **DEAD** | coarsetree211 coarse tree [zero pad; coarse tree [13 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD (7 inherited from prior certificates + 9 proved here): R.1 TR(0,1)<-(19,) by INHERIT; R.2.1 TR(1,0)<-(8,) by INHERIT; R.2.2 TR(1,0)<-(9,) by I (s0-only; WINDOW-PENDING) | A211 | 2026-09-14 | 2.88 (rank 54) |
 | [x] [`k5_16_interior_Y0839.svg`](killed/k5_16_interior_Y0839.svg) | `k5_16_interior_Y0839` | `k5_16` | 1 | `S01` | **DEAD** | forced-first assignment: no admissible meeter assignment at BL(1,0) (notes/assignment.md Theorem ASSIGN; 188 multibox nodes) | A182 | 2026-09-10 | 2.88 (rank 26) |
 | [x] [`k5_16_interior_Y0842.svg`](killed/k5_16_interior_Y0842.svg) | `k5_16_interior_Y0842` | `k5_16` | 1 | `S02` | **DEAD** | chord-limited lane [BL(1,0)] | A161 | 2026-09-08 | 2.88 (rank 27) |
-| [x] [`k5_16_interior_Y0881.svg`](killed/k5_16_interior_Y0881.svg) | `k5_16_interior_Y0881` | `k5_16` | 1 | `S01` | **DEAD** | coarsetree211 coarse tree [zero pad; coarse tree [34 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 2 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD (5 inherited from prior certificates + 24 proved here): R.1 TR(0,1)<-(14,) by INHERIT; R.2.1 BR(0,1)<-(10,) by INHERIT; R.2.2 BR(0,1)<-(11,) b (s0-only; WINDOW-PENDING) | A211 | 2026-09-13 | 2.88 (rank 28) |
+| [x] [`k5_16_interior_Y0881.svg`](killed/k5_16_interior_Y0881.svg) | `k5_16_interior_Y0881` | `k5_16` | 1 | `S01` | **DEAD** | coarsetree211 coarse tree [zero pad; coarse tree [34 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 2 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD (5 inherited from prior certificates + 24 proved here): R.1 TR(0,1)<-(14,) by INHERIT; R.2.1 BR(0,1)<-(10,) by INHERIT; R.2.2 BR(0,1)<-(11,) b (s0-only; WINDOW-PENDING) | A211 | 2026-09-14 | 2.88 (rank 28) |
 | [x] [`k5_16_interior_Y0941.svg`](killed/k5_16_interior_Y0941.svg) | `k5_16_interior_Y0941` | `k5_16` | 1 | `S02` | **DEAD** | A120 composition (YES local cert + all NO children) | A136 | 2026-09-09 | 2.88 (rank 29) |
 | [x] [`k5_16_interior_Y1110.svg`](killed/k5_16_interior_Y1110.svg) | `k5_16_interior_Y1110` | `k5_16` | 1 | `S02` | **DEAD** | k5killer209 composed chain [g1 pad; composed clip tree [10 nodes, depth 2, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD: R.1 TR(0,1)<-[16] by EmptyBox r2; R.2.1 TR(1,0)<-[8] by FC r1; R.2.2 TR(1,0)<-[9] by EmptyBox r2; R.2.3 TR(1,0)<-[14] by EmptyBox r2; R.3.1 T | A209 | 2026-09-12 | 2.88 (rank 61) |
 | [x] [`k5_16_interior_Y1117.svg`](killed/k5_16_interior_Y1117.svg) | `k5_16_interior_Y1117` | `k5_16` | 1 | `S01` | **DEAD** | k5killer209 composed chain [zero pad; composed clip tree [17 nodes, depth 3, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD: R.1 TR(0,1)<-[16] by REACH r3; R.2.1 TR(1,0)<-[8] by EmptyBox r1; R.2.2r2 root<-None by EmptyBox r1; R.2.3.1 BL(1,0)<-[5, 11] by EmptyBox r1; (s0-only; WINDOW-PENDING) | A209 | 2026-09-12 | 2.88 (rank 36) |
@@ -248,7 +248,7 @@ Of the 71 gallery pages the PI reviews, **37 are still ALIVE and 34 are now DEAD
 | `A205 cliptree205.jsonl` | 7 | 7 |
 | `A206 namedsplit206.jsonl` | 3 | 3 |
 | `A209 k5killer209.jsonl` | 5 | 5 |
-| `A211 coarsetree211.jsonl` | 13 | 13 |
+| `A211 coarsetree211.jsonl` | 15 | 15 |
 | `A212 trump5tree212.jsonl` | 2 | 2 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
