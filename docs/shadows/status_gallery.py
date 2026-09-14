@@ -1179,6 +1179,42 @@ def collect(table, corpus):
                   + ("pad 0 (lam = 1): s0 only, WINDOW-PENDING" if pend else "the %s pad (lam = %s): valid on the page's window" % (d.get("pad"), d.get("lam")))),
         )
 
+    # (7s) A212's trump5tree212 (attempts/A212-trump5-tree; the PI 2026-09-13 00:40: "check if the current node is a parent of
+    #      trump, and if so, don't try to kill it, just go straight to split"): A211's coarse tree on the trump5 population at PAD 0
+    #      ONLY (lam = 1, s0-only, the currency of A60's own certificates) with the Trump-containment GATE (a node holding a D4
+    #      image of z-hat is never submitted to a kill rule), the TUBE LEAF (all 11 named inside the certified tube radii:
+    #      verdict TRUMP-TUBE = the Trump basin, a UNIQUENESS leaf, NOT a kill: recorded dead=False, its own note) and the
+    #      aligned split.  A node is KILLED by verdict DEAD (mode "page", pad zero).  [C: closed-form / library clip trace + the
+    #      leaf lemma], NO verifier clause.
+    seen212 = set()
+    for d in jl(A("A212-trump5-tree", "results", "trump5tree212.jsonl")):
+        if not d.get("nid") or d.get("mode") != "page" or str(d.get("verdict", "")) not in ("DEAD", "TRUMP-TUBE"):
+            continue
+        key = (d["nid"], d.get("verdict"))
+        if key in seen212:
+            continue
+        seen212.add(key)
+        dead = d.get("verdict") == "DEAD"
+        g = d.get("gate_root") or {}
+        how = ("stage 0 (A202 closed form + A203 CSP)" if d.get("stage0_kill") or not d.get("n_nodes") else
+               "trump5 tree [%s nodes, depth %s, gate hits %s, tube leaves %s, kills by rule %s]" % (d.get("n_nodes"), d.get("max_depth"), d.get("gate_hits"), d.get("tube_leaves"), d.get("kills_by_rule")))
+        table.add_rec(
+            "A212 trump5tree212.jsonl",
+            "A60",
+            d["nid"],
+            dead,
+            "trump5tree212 [pad 0, lam = 1; %s]: %s" % (how, (d.get("leaf") or "")[:160]),
+            "A212",
+            d.get("cert") or os.path.join("attempts", "A212-trump5-tree", "results", "trump5tree212.jsonl"),
+            fdate(A("A212-trump5-tree", "results", "trump5tree212.jsonl")),
+            d,
+            note=("[C: closed-form / library clip trace + the leaf lemma (Lemma CORNER-COVER / A189 Lemma 1 / Lemma CN / Lemma BASIN)] the trump5 tree (A212 notes/trump5_tree.md): "
+                  "A211's coarse tree at pad 0 (s0-only, lam = 1) + the Trump-containment gate (root gate: %s) + the tube leaf; no verifier clause" % ("contains %s" % g.get("g") if g.get("contains") else "no image")
+                  if dead else
+                  "TRUMP-TUBE (not a kill; separate column): every branch DEAD or a tube leaf -- the node's residue at s0 is the Trump image's basin (Lemma TUBE-LEAF: exact containment "
+                  "of the pieces in the tube box + Theorem T1, certs/tube_scale_T5.71e-2_window.json); uniqueness, the (D) leaf of k0_route.md s.4.2"),
+        )
+
     # (8) A158 -- the slot split.  NOT a kill, recorded so the PI can see why.
     for d in jl(A("A158-slot-split", "results", "yescert158.jsonl")):
         table.add_rec(

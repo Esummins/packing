@@ -18,3 +18,5 @@ Rules for a new campaign Ann:
    never green, a note on every panel saying what it IS, times per step, verifier label on every verdict.
 4. Killed nodes' gallery pages move to docs/shadows/a57v4/killed/ by the status loop (unchanged).
 A203 finished 20:05; its pages are in campaigns/A203-csp/.
+A212 (2026-09-14, the trump5 tree): pages campaigns/A212-trump5tree/trump5tree212_<nid>.svg + trump5tree212_gallery.svg; CURRENT.json stays A211
+(the trump5 pages are A60's, not in current/).
