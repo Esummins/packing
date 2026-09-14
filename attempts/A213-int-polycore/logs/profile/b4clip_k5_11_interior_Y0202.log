@@ -1,0 +1,61 @@
+A213b profclip: tag b4clip nid k5_11_interior_Y0202 A213_INTCLIP='0' A213_INTCORE=None record=True argv ['page', 'k5_11_interior_Y0202', '--cert-dir', 'C:\\Users\\esumm\\code\\packing\\attempts\\A213-int-polycore\\results\\run_b4clip', '--results', 'C:\\Users\\esumm\\code\\packing\\attempts\\A213-int-polycore\\results\\run_b4clip\\rows.jsonl', '--no-fig', '--force', '--wall', '900', '--pads', 'zero']
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0202_zero_s0.json)
+   INHERIT k5_11_interior_Y0202 pad zero: 3 prior trees, 24 paths, 6 branches inherited DEAD (final, with their certificates), 4 start nodes
+== k5_11_interior_Y0202 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0202_zero_s0.json; basins []; INHERIT 6 dead branches (final) + 4 start nodes ['R.1.4.2.2', 'R.1.5.2', 'R.2', 'R.3']; H [1.939, 2.078, 1.519, 1.659, 73.74, 82.372]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1.1        BR(0,1)<-(18, 21)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.2        BR(0,1)<-(18, 22)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.3        BR(0,1)<-(18, 23)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.4.1      BR(0,1)<-F4  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.4.2.1    BL(1,1)<-F4  [A211 tree: FC] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0202.json
+   INHERITED DEAD R.1.5.1      BL(1,1)<-F4  [A211 tree: REACH] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0202.json
+   node R.1.4.2.2  d0 root: INTERNAL (17.5 s, 1 rounds; t=18.0)
+   no-room (k=10, m=1): UNDECIDED in 188 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2: bisect F4 on y at 2.917814 (extents (0.320117, 0.91854), tilt 90.0 deg, core non-empty, 58 piece(s); split 1 of 4)
+   node R.1.4.2.2.1 d1 F4<-['y<=2.917814']: INTERNAL (31.3 s, 1 rounds; t=237.3)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.1: bisect F2 on t at 53.1301 (extents (0.420267, 0.150837), tilt 90.0 deg, core non-empty, 64 piece(s); split 1 of 4)
+   node R.1.4.2.2.1.1 d2 F2<-['t<=53.1301']: INTERNAL (19.3 s, 1 rounds; t=378.3)
+   no-room (k=10, m=1): DEAD by NOROOM in 24 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.1.1 d2: DEAD by NOROOM -- no-room at R.1.4.2.2.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.2.2.1.2 d2 F2<-['t>=53.1301']: INTERNAL (8.7 s, 1 rounds; t=411.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 16 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.1.2 d2: DEAD by NOROOM -- no-room at R.1.4.2.2.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.2.2.2 d1 F4<-['y>=2.917814']: INTERNAL (4.9 s, 1 rounds; t=432.4)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.2: bisect F2 on t at 53.1301 (extents (0.436761, 0.150837), tilt 90.0 deg, core non-empty, 69 piece(s); split 1 of 4)
+   node R.1.4.2.2.2.1 d2 F2<-['t<=53.1301']: INTERNAL (6.8 s, 1 rounds; t=561.4)
+   no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.2.1: bisect F3 on t at 53.1301 (extents (0.367123, 0.232044), tilt 90.0 deg, core non-empty, 46 piece(s); split 1 of 4)
+   node R.1.4.2.2.2.1.1 d3 F3<-['t<=53.1301']: INTERNAL (13.5 s, 1 rounds; t=695.4)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.4.2.2.2.1.1: bisect F4 on t at 53.1301 (extents (0.320117, 0.45927), tilt 90.0 deg, core non-empty, 52 piece(s); split 2 of 4)
+   node R.1.4.2.2.2.1.1.1 d4 F4<-['t<=53.1301']: INTERNAL (30.4 s, 1 rounds; t=847.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 20 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.2.1.1.1 d4: DEAD by NOROOM -- no-room at R.1.4.2.2.2.1.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.2.2.2.1.1.2 d4 F4<-['t>=53.1301']: INTERNAL (28.7 s, 1 rounds; t=896.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 20 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.2.2.2.1.1.2 d4: DEAD by NOROOM -- no-room at R.1.4.2.2.2.1.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R.1.4.2.2    => ALIVE (9 nodes; t = 917 s of 900.0)
+   start R.1.5.2: SKIPPED (wall)
+   start R.2: SKIPPED (wall)
+   start R.3: SKIPPED (wall)
+   => ALIVE (zero_page) in 917.3 s: 4 start runs, 9 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 5 role splits (0 empty-half kills), 6 inherited dead (6 up front + 0 in tree), 10 dead / 2 alive leaves (WALL)
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2 d2 DEAD INHERIT 0.0s; R.1.3 d2 DEAD INHERIT 0.0s; R.1.4.1 d3 DEAD INHERIT 0.0s; R.1.4.2.1 d4 DEAD INHERIT 0.0s; R.1.5.1 d3 DEAD INHERIT 0.0s; R.1.4.2.2 d0 INTERNAL 17.5s; R.1.4.2.2.1 d1 INTERNAL 31.3s; R.1.4.2.2.1.1 d2 DEAD NOROOM 19.3s; R.1.4.2.2.1.2 d2 DEAD NOROOM 8.7s; R.1.4.2.2.2 d1 INTERNAL 4.9s; R.1.4.2.2.2.1 d2 INTERNAL 6.8s; R.1.4.2.2.2.1.1 d3 INTERNAL 13.5s; R.1.4.2.2.2.1.1.1 d4 DEAD NOROOM 30.4s; R.1.4.2.2.2.1.1.2 d4 DEAD NOROOM 28.7s; R.1.4.2.2.2.1.2 d3 ALIVE 0.0s; R.1.4.2.2.2.2 d2 ALIVE 0.0s
+== k5_11_interior_Y0202: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1096, 'misses': 424, 'entries': 424}; clip {'hits': 35848, 'misses': 126055, 'entries': 126055}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 150, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1370, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 2, 'exact_core_nodes': 7}}
+   mbpatch213.rep() {'installed': True, 'flag': True, 'flag_clip': False, 'clip_at': None, 'verify': False, 'vec': False, 'build': 3995, 'vertex_ok': 35072, 'pieces_poly': 372, 'axis_core': 372, 'certify': 0, 'clip': 0, 'verified': 0}
+   pinclip_int.rep() {'pairs': 0, 'points': 0, 'filt': 0, 'fallback': 0, 'cached': 0, 'filter': False}
+A213b profclip: 233717 library clips, 1882 recorded (4.9 s inside them), 917.7 s total; profile C:\Users\esumm\code\packing\attempts\A213-int-polycore\logs\profile\b4clip_k5_11_interior_Y0202.prof
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A213-int-polycore\code\profclip213.py", line 74, in <module>
+    runpy.run_path(sys.argv[0], run_name="__main__")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 332, in <module>
+    print("   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): %s" % (C11.grid_rep(),), flush=True)
+                                                                                                           ^^^
+NameError: name 'NRM' is not defined

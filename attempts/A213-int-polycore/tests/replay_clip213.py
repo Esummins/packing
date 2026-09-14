@@ -90,7 +90,8 @@ def main():
         return out, st, time.perf_counter() - t
 
     o1, s1, t1 = run(MB._clip_rect_obstacle)
-    o2, s2, t2 = run(PI.clip_rect_obstacle)
+    o2, s2, t2 = run(PI.clip_rect_obstacle)                     # cold: one IPair compiled per sampled clip
+    _o, _s, t2w = run(PI.clip_rect_obstacle)                    # warm: the pair cached, as in a real run
     bad = rec_bad = 0
     for i, r in enumerate(recs):
         if o1[i] != o2[i] or s1[i] != s2[i]:
@@ -108,8 +109,10 @@ def main():
     n = max(len(recs), 1)
     print("A213b replay: %d clips, %d obstacles, %d bins -- %d mismatches, %d record-vs-replay differences"
           % (len(recs), len(_OBS), len(_BINS), bad, rec_bad))
-    print("  clip per call:  library %.3f ms   integer space %.3f ms   x%.1f   (run recorded %.3f ms)"
-          % (1e3 * t1 / n, 1e3 * t2 / n, t1 / max(t2, 1e-12), 1e3 * sum(r["seconds"] for r in recs) / n))
+    print("  clip per call:  library %.3f ms   integer space %.3f ms cold / %.3f ms warm   x%.1f / x%.1f   "
+          "(run recorded %.3f ms, under cProfile)"
+          % (1e3 * t1 / n, 1e3 * t2 / n, 1e3 * t2w / n, t1 / max(t2, 1e-12), t1 / max(t2w, 1e-12),
+             1e3 * sum(r["seconds"] for r in recs) / n))
     print("  exact_calls %d / backoffs %d (identical both paths)"
           % (sum(s["exact_calls"] for s in s1), sum(s["backoffs"] for s in s1)))
     print("  bit widths reached (first 400 clips): %r" % (B,))
@@ -120,9 +123,9 @@ def main():
         o3, s3, t3 = run(PI.clip_rect_obstacle)
         PI.FILTER = False
         f = 1 if o3 != o1 or s3 != s1 else 0
-        print("  PHASE 2 float filter on family A: %.3f ms per call (x%.2f vs the exact integer path), "
-              "%d filtered / %d exact fallbacks, %d mismatches"
-              % (1e3 * t3 / n, t2 / max(t3, 1e-12), PI.STATS["filt"], PI.STATS["fallback"], f))
+        print("  PHASE 2 float filter on family A (warm): %.3f ms per call (x%.2f vs the exact integer path, "
+              "x%.1f vs the library), %d filtered / %d exact fallbacks, %d mismatches"
+              % (1e3 * t3 / n, t2w / max(t3, 1e-12), t1 / max(t3, 1e-12), PI.STATS["filt"], PI.STATS["fallback"], f))
         bad += f
     return 1 if (bad or rec_bad) else 0
 

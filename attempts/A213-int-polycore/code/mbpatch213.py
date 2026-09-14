@@ -26,7 +26,7 @@ import polycore as PC                                          # noqa: E402  REA
 FLAG = os.environ.get("A213_INTCORE", "1") != "0"      # default ON: the replay of 441 rebuilds + the fuzz passed with 0 mismatches
 VERIFY = os.environ.get("A213_VERIFY") == "1"
 VEC = os.environ.get("A213_VEC", "0") == "1"
-FLAGC = os.environ.get("A213_INTCLIP", "0") == "1"     # A213b: OFF until the replay + fuzz pass (flipped ON below)
+FLAGC = os.environ.get("A213_INTCLIP", "1") != "0"     # A213b, default ON: the replay (1,882 recorded clips) + the fuzz (450 clips, 3,284 point tests) passed with 0 mismatches
 FLAGK = os.environ.get("A214_CKERNEL", "1") != "0"     # A214: the C kernel under the integer path (default ON:
                                                       # the replay + fuzz + tests/diff214.py pass with 0 mismatches)
 ORIG = dict(build=PC.build, vertex_ok=PC.vertex_ok, pieces_poly=MB.pieces_poly,

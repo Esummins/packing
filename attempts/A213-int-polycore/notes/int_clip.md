@@ -75,8 +75,8 @@ every ask, so the counters the certificate carries are unchanged.
 
 Write `b = max bit length of VD, CW, G0, G1, RD`.  The widest integers are `PN EA` and `EU CW` (family A),
 `4(Pn^2 + Qn^2)` vs `M^2` and `X G'` (family B) -- every one of them a product of at most four of those quantities
-plus a few bits of slack, so everything stays below `2^(4b + 6)`.  Measured on the recorded clips of the Y0202 run
-(`tests/replay_clip213.py` reports the widths actually reached):
+plus a few bits of slack, so everything stays below `2^(4b + 6)`.  Measured on the recorded clips of the Y0202 runs
+(`tests/replay_clip213.py` reports the widths actually reached; the table is the maximum over both recordings):
 
 | quantity | bits reached |
 |---|---|
@@ -128,8 +128,14 @@ precomputed `float(EU CW)`, `float(EL CW)`, accepting the float verdict only whe
 -- a bound that dominates the six roundings on the longest path (two input conversions, two products, one sum, one
 product: `gamma_6 = 6u/(1-6u)` times the sum of the term magnitudes) plus one rounding of `float(bound)` and one of
 the subtraction, with margin; any non-finite value falls through.  Undecided edges go to the exact integers, so the
-answer is the exact answer by construction -- the filter only chooses who pays for bignum arithmetic.  It is
-DEFAULT OFF: it is a second mechanism to audit and it is not needed for the gain reported here.
+answer is the exact answer by construction -- the filter only chooses who pays for bignum arithmetic.
+
+MEASURED (results/timing213.md): on the replayed clips with the (obstacle, bin) pair warm it is 0.090 ms per clip
+against 0.085 ms for the plain integer path -- **no gain**, 1,498 filtered and 4,689 exact fallbacks, 0 mismatches.
+Once the pair is compiled, a ~150-bit integer multiply is not slower than two `float(bigint)` conversions plus the
+error bound, and family A only decides a minority of the calls on its own.  It stays DEFAULT OFF: it is a second
+mechanism to audit and it buys nothing here.  (Where it WOULD pay is a C kernel, s.6: there the float path is
+hardware and only the fallbacks need bignums.)
 
 ## 6. Phase 3 -- a C kernel (design note; still no compiler on this machine)
 

@@ -70,3 +70,75 @@ logs/replay_before_Y0202.log, logs/fuzz213.log.
 * Phase 2: the float filter certifies a (vertex, box) pair in ~1 numpy pass over (nv, N, 4) arrays and sends the
   undecided pairs (a few per thousand) to the integer path; the object-dtype route is exact but slower than the scalar
   integer loop (no early exit, one bignum op per element per step).  Two-limb int64 does not fit the 2^183 bound.
+
+---
+
+# A213b -- timing: the RECTANGLE-OBSTACLE CLIP in integer space (per call and per run)
+
+Same machine and protocol (one BelowNormal python per run, BLAS pinned, `PYTHONDONTWRITEBYTECODE=1`, other lab
+pythons running), same page `k5_11_interior_Y0202` pad 0, wall 900 s, isolated cert / results dirs, `--no-fig`,
+inherited start.  BEFORE = `A213_INTCLIP=0` (A131/A171's clip on Fractions), AFTER = `A213_INTCLIP=1`
+(`pinclip_int`).  Both runs carry A213 (integer K' build) and A214's C kernel, so the ONLY difference between the
+two columns is the clip.  Code `code/pinclip_int.py`, wiring `code/mbpatch213.install_clip`, note
+`notes/int_clip.md`.
+
+## Per call (tests/replay_clip213.py: the recorded clips of a real run, replayed through both paths, no profiler)
+
+1,882 clips recorded by `code/profclip213.py` (a stride-67 sample of the 233,717 library clips of the BEFORE run,
+i.e. the clip memo's MISSES), 153 distinct obstacles, 607 distinct tilt bins.  **0 mismatches** (rect, `stats`
+delta and trace) and **0 record-vs-replay differences** (the replay reproduces what the run itself computed).
+
+| primitive (per call) | calls | library | integer space | gain |
+|---|---|---|---|---|
+| `_clip_rect_obstacle` (recorded clips, (obstacle, bin) pair warm as in a run) | 1,882 | 0.787 ms | 0.085 ms | **x9.2** |
+| `_clip_rect_obstacle` (same, pair COLD -- one compile per clip, the sampling's artefact) | 1,882 | 0.787 ms | 0.211 ms | x3.7 |
+| `dead_poly` -> `dead_int` (the exact test) | 3,284 (fuzz) | 112.2 us | 12.6 us | x8.9 |
+| `_dead_poly_f` -> `dead_f` (the search twin, bit-identical) | 3,284 (fuzz) | 13.8 us | 4.1 us | x3.4 |
+| the whole clip (fuzz: random obstacles / bins / rects) | 450 | 1.31 ms | 0.16 ms | x8.0 |
+
+`exact_calls` 11,095 and `backoffs` 22 over the replayed clips -- identical on both paths, so the certificates cite
+the same counts.  The integer widths reached: VD 30, CW 74-83, G 51, EA 79, EU 109-110 bits, **widest product 229
+bits** (`notes/int_clip.md` s.3).
+
+Phase 2 (`A213_CLIPFILTER=1`, the rigorous float filter on family A with exact fallback): 0.090 ms per clip against
+0.085 ms for the plain integer path on the same warm data -- **no gain**, 1,498 filtered / 4,689 exact fallbacks,
+0 mismatches.  The filter is correct and it stays DEFAULT OFF: once the (obstacle, bin) pair is compiled, a
+150-bit integer multiply is not slower than two `float(bigint)` conversions plus the error bound.
+
+## Per run (code/profclip213.py under cProfile; the stage table by code/stages213.py)
+
+| stage / function | BEFORE calls | BEFORE s | AFTER calls | AFTER s |
+|---|---|---|---|---|
+| run_page (wall; 900 s wall + the last node) | 1 | 944.6 | 1 | 952.1 |
+| tree normalise (the coarse fixed point) | 11 | 132.7 | 13 | 96.2 |
+| MBox.rebuild (library-level, memo misses) | 471 | 50.9 | 523 | 69.8 |
+| **`_clip_rect_obstacle` (library / integer space)** | **214,490** | **417.7** | **273,306** | **65.1** |
+| &nbsp;&nbsp;`dead_poly` -> `dead_int` (the exact test) | 1,201,640 | 290.3 | 881,960 | 4.8 |
+| &nbsp;&nbsp;`_dead_poly_f` -> `dead_f` (the search twin) | 1,641,230 | 121.1 | 2,231,584 | 11.9 |
+| &nbsp;&nbsp;`_m_lt_half` + `_m_lt_half_f` (A131, now inlined) | 22,384,467 | 124.4 | 50 | 0.0 |
+| &nbsp;&nbsp;`_bisect_boundary` (A131, reused verbatim) | 22,480 | 161.6 | 30,214 | 14.8 |
+| &nbsp;&nbsp;`IPair` (the per (obstacle, bin) compile) | 0 | 0.0 | 24,945 | 36.1 |
+| no-room leaf (noroom189; contains the clips) | 11 | 762.7 | 13 | 814.6 |
+| role reach depth 0 (fastclip211.reach0) | 321 | 25.7 | 377 | 16.9 |
+| Fraction arithmetic (`_mul` + `_add` + `_sub` + `math.gcd`) | 331.6 M | 226.1 | 130.6 M | 84.1 |
+
+**417.7 s -> 65.1 s** on a run that did MORE clips (273 k vs 214 k): per call 1.95 ms -> 0.24 ms, **x8.2** under the
+profiler, x9.2 without it.  Fraction arithmetic across the whole run drops from 332 M to 131 M calls.  The clip was
+44 % of the BEFORE wall and is 6.8 % of the AFTER wall.
+
+**And it bought work.**  Inside the same 900 s wall the AFTER run expanded 13 nodes (depth 4, 6 role splits, 12 dead
+leaves) against 11 (5 role splits, 11 dead leaves).  Of the 17 nodes both runs reached, **16 carry the identical
+verdict**; the 17th is `R.1.4.2.2.2.2`, which BEFORE left ALIVE at the wall and AFTER expanded into two children
+(one DEAD NOROOM, one ALIVE at the wall).  Every DEAD NOROOM leaf of BEFORE is a DEAD NOROOM leaf of AFTER.
+
+**What is left.**  `IPair` -- compiling one (obstacle, tilt bin) pair to integers -- is now 36.1 of the 65.1 s, i.e.
+more than half of the clip, at 1.45 ms per pair over 24,945 pairs (~11 clips per pair; the cache holds 20,000).
+The compile is Fraction -> int conversion of the obstacle's vertices, normals and support intervals plus the
+library's own `Bin.radii`; it is the obvious next lever (compile the obstacle once instead of once per bin, and
+carry the integer form on the `Obstacle` rather than in a side cache).  After that the node is again dominated by
+the K' build and the no-room leaf.
+
+Logs: `logs/profile/{b4clip2,afclip}_k5_11_interior_Y0202.{prof,log}` (and `b4clip_*`, the recording run),
+`results/run_{b4clip2,afclip}/`, `results/clips_b4clip_k5_11_interior_Y0202.jsonl`, `logs/replay_clip_b4clip.log`,
+`logs/fuzz_clip213.log`.  Live differential: `A213_VERIFY=1` on one node ran both clips on every call --
+25,930 verified calls (3,193 of them clips), 0 assertion failures.
