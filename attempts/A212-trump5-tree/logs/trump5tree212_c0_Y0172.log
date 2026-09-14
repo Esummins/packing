@@ -14,3 +14,13 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0172_interior_G1'
 10:38:38 [w3] c0_Y0172  rc=1 3s
+14:33:34 [w3] start c0_Y0172 wall 1800 (lab 7, free 3441 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0172 at the zero pad: ALIVE in 49399 ms; kills {'H-clip': 1477, 'P': 4240, 'W': 1958, 'C': 836, 'M': 5093, 'L': 7, 'R': 3414, 'X': 705}; CSP units 208 -> 208 alive; caps {'BL(0,2)': 1, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': 1}; forced H ['BL(0,2)', 'TL(0,0)']
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0172 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0172_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [1.24, 1.38, 2.384, 2.498, 53.13, 64.011]; forced H ['BL(0,2)', 'TL(0,0)']; 6 slots; free 5
+   node R          d0 root: INTERNAL (28.1 s, 1 rounds; t=28.2)
+   node Rr1        d0 root<-None: INTERNAL (24.0 s, 1 rounds; t=52.2)
+   node R.1        d1 BL(1,1)<-[11]: INTERNAL (31.9 s, 1 rounds; t=84.1)
+   node R.1.1      d2 BR(0,1)<-[17]: DEAD by EmptyBox r1 (23.1 s, 1 rounds; t=107.3)
+   node R.1.2      d2 BR(0,1)<-[18]: INTERNAL (46.6 s, 1 rounds; t=154.0)

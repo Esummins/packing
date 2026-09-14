@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 14:32:30
+# A212 progress -- 2026-09-14 14:37:47
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -6,7 +6,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
-| c0_Y1033 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 2, 'REACH': 3, 'CC': 1, 'FC': 1} | 16 / 6 | 1821 |
+| c0_Y1033 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 2, 'REACH': 3, 'CC': 1} | 15 / 5 | 1802 |
 | c0_Y0169 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 5, 'FC': 3, 'CC': 12, 'REACH': 1, 'COUNT': 1} | 37 / 3 | 1818 |
 | c0_Y0171 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 2, 'CC': 19, 'EmptyBox': 7} | 46 / 3 | 1810 |
 | c0_Y0215 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 7, 'NOROOM': 3, 'FC': 1} | 23 / 6 | 1846 |
@@ -20,7 +20,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 | c0_Y0788 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 2, 'EmptyBox': 21, 'REACH': 4, 'CC': 1, 'COUNT': 1} | 42 / 4 | 1835 |
 | slack0.02_c0_Y0272 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 3, 'EmptyBox': 9, 'CC': 4, 'REACH': 2} | 32 / 5 | 1811 |
 
-CPU-h in this block: 5.67
+CPU-h in this block: 5.66
 
 ## A60's alive trump5 frontier (deepest first) (15 nodes)
 
@@ -46,6 +46,6 @@ CPU-h in this block: 0.41
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 11, 'DEAD': 17}; gallery 13 / 13 run (5.67 CPU-h); frontier 15 run of 121 (121 remaining; 0.41 CPU-h)
+* verdicts so far: {'ALIVE': 11, 'DEAD': 17}; gallery 13 / 13 run (5.66 CPU-h); frontier 15 run of 121 (121 remaining; 0.41 CPU-h)
 * PRICE over the first 15 frontier nodes: mean 99 s, median 22 s per node; PROJECTION for the remaining 121: 3.3 CPU-h; spent 6.1; cap 150
 

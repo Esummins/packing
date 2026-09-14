@@ -19,3 +19,8 @@ KeyError: 'c0_Y0170_interior_G1'
 == stage 0 + CSP c0_Y0170 at the zero pad: ALIVE in 33951 ms; kills {'H-clip': 2469, 'P': 4328, 'W': 2352, 'C': 1649, 'M': 6604, 'L': 7, 'R': 3413, 'X': 707}; CSP units 77 -> 77 alive; caps {'BL(0,2)': 1, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': 1}; forced H ['BL(0,2)', 'TL(0,0)']
    INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
 == c0_Y0170 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0170_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [1.24, 1.353, 2.428, 2.498, 28.072, 41.112]; forced H ['BL(0,2)', 'TL(0,0)']; 6 slots; free 5
+   node R          d0 root: INTERNAL (26.1 s, 1 rounds; t=26.1)
+   node Rr1        d0 root<-None: INTERNAL (17.3 s, 1 rounds; t=43.5)
+   node R.1        d1 BL(1,1)<-[11]: INTERNAL (59.8 s, 1 rounds; t=103.4)
+   node R.1.1      d2 BR(0,1)<-[17]: DEAD by FC r1 (62.2 s, 1 rounds; t=165.6)
+   node R.1.2      d2 BR(0,1)<-[18]: INTERNAL (92.6 s, 1 rounds; t=258.3)
