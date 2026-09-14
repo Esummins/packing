@@ -63,3 +63,12 @@ KeyError: 'c0_Y0208_interior_G1'
    node R.1.8      d2 BR(0,1)<-[18, 21]: INTERNAL (38.5 s, 1 rounds; t=1418.8)
    no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
    Rule NS at R.1.8: split F2 at BL(1,1) (meeting fraction 0.091061)
+   node R.1.8.1    d3 BL(1,1)<-None: INTERNAL (81.5 s, 1 rounds; t=1624.9)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.8.1: split H at BL(0,2) (meeting fraction 0.100942)
+   node R.1.8.1.1  d4 BL(0,2)<-None: DEAD by COUNT r1 (61.3 s, 1 rounds; t=1809.6)
+   start R            => ALIVE (22 nodes; t = 1810 s of 1800.0)
+   => ALIVE (zero_page) in 1809.8 s: 22 nodes, depth 5, gate hits 0 (conflicts 0), tube leaves 0 (depths []), 0 aligned cuts, kills by rule {'EmptyBox': 6, 'NOROOM': 4, 'FC': 1, 'COUNT': 1}, 6 NS, 0 pockets, 0 role splits, 12 dead / 9 alive leaves (WALL)
+   per node: R d0 INTERNAL 40.0s; R.1 d1 INTERNAL 19.7s; R.1r1 d1 INTERNAL 44.6s; R.1.1 d2 INTERNAL 48.0s; R.1.1.1 d3 DEAD EmptyBox 50.1s; R.1.1.2 d3 INTERNAL 41.8s; R.1.1.2.1 d4 INTERNAL 74.3s; R.1.1.2.1.1 d5 DEAD NOROOM 46.4s; R.1.1.2.1.2 d5 DEAD NOROOM 36.8s; R.1.1.2.2 d4 INTERNAL 62.7s; R.1.1.2.2.1 d5 DEAD NOROOM 46.3s; R.1.1.2.2.2 d5 DEAD NOROOM 41.5s; R.1.2 d2 INTERNAL 37.7s; R.1.2r1 d2 DEAD EmptyBox 3.3s; R.1.3 d2 DEAD EmptyBox 50.5s; R.1.4 d2 DEAD FC 58.7s; R.1.5 d2 DEAD EmptyBox 7.9s; R.1.6 d2 DEAD EmptyBox 7.0s; R.1.7 d2 DEAD EmptyBox 35.3s; R.1.8 d2 INTERNAL 38.5s; R.1.8.1 d3 INTERNAL 81.5s; R.1.8.1.1 d4 DEAD COUNT 61.3s; R.1.8.1.2 d4 ALIVE 0.0s; R.1.8.2 d3 ALIVE 0.0s; R.1.9 d2 ALIVE 0.0s; R.1.10 d2 ALIVE 0.0s; R.2 d1 ALIVE 0.0s; R.3 d1 ALIVE 0.0s; R.4 d1 ALIVE 0.0s; R.5 d1 ALIVE 0.0s; R.6 d1 ALIVE 0.0s
+== c0_Y0208: pad0 ALIVE   (s0-only, lam = 1; DEAD = killed at s0, TRUMP-TUBE = the Trump basin, ALIVE = undecided)
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A212-trump5tree\trump5tree212_gallery.svg
