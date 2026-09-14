@@ -151,7 +151,10 @@ class Tree211(N9.Tree209):
             # PI 2026-09-14 16:40 (Y0130 R.3.1.1.p3.2): with m = 1 the LAST square's centre lies in one of the pockets
             # (A189's bisection certifies every centre outside them dead), so branch the 11th square into each pocket
             # too -- the child is fully named (11 roles) and the cascade decides; no lane cover needed (Lemma POCKET, m >= 1)
-            if res["m"] >= 1 and res["pockets"] and not caps and not pg.T.out_of_time():
+            # an m = 1 pocket split is TERMINAL (its children are fully named): it is exempt from the depth cap
+            # (Y0130 g1 R.3.1.1.p3.2 sat at eff_depth 5 with two pockets and never branched); node cap and wall still apply
+            terminal = res["m"] == 1
+            if res["m"] >= 1 and res["pockets"] and (terminal or not caps) and self.n_nodes < self.node_cap and not pg.T.out_of_time():
                 self.pocket_branches(depth, label, res["pockets"], res)
                 return "BRANCHED"
         if pg.all_basins and not getattr(pg, "basin_done", False):                # (c) the basin clip

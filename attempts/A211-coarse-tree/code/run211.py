@@ -130,6 +130,7 @@ def wall_limited(d):
     # PI 2026-09-14: a leaf left "every forced slot has two named meeters ... no-room UNDECIDED (k=10, m=1)" is now
     # decidable by Lemma POCKET at m = 1 (the 11th square branched into the pockets): re-run such pads too
     return any(("no-room UNDECIDED" in str(u.get("reason") or "")) or ("undecided leaf" in str(u.get("reason") or ""))
+               or ("every forced slot has two named meeters" in str(u.get("reason") or ""))
                for u in (d.get("undecided") or []))
 
 
