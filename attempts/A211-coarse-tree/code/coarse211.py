@@ -4,14 +4,16 @@ clips + A204's cascade + the basin clip) with a `coarse` switch.  In coarse mode
     (exact rationals); a unit is kept iff it meets some piece, so the union of the units is a SUPERSET of the union of
     the pieces (S1: sound, weaker);
   * the polygon fixed point runs with refine REFINE, at most MAX_ITER mutual-clip passes, NO lonely clip, K' rebuilt
-    in KMODE ("pieces" = A172's per-piece intersection, "union" = A171's union-hull polygon: both certified, the
-    union one weaker) -- a PREFIX of A204's clip chain (S2: any prefix of a chain of sound clips is sound);
+    in KMODE ("union" = A171's polygon on the union hull of the surviving pieces) on the coarser NGRID tilt grid --
+    a PREFIX of A204's clip chain on a WEAKER core (S2': the union-hull K' is a subset of A172's per-piece K', and
+    every vertex of either is exactly certified against the whole tilt interval, so a coarse K' is a sound obstacle);
   * the option table's reach bisects DEPTH levels per cell (JDEPTH for joint slot sets) instead of A198's 5 / 2, and a
     role's reach is clipped in place (depth 0) -- a shallower bisection keeps a superset (S3);
   * the basin clip is off (it returns with the exact leaf cascade; skipping a clip keeps more: S2).
 In exact mode (the leaf's cascade, rule (e)) everything is A209's: nsub 4 / refine 2, lonely clip, the basins, depth
 5 / 2, the sharp round.  Every coarse DEAD is a genuine DEAD (every test is a sound necessary condition); a coarse
 ALIVE only says "branch further"."""
+import os
 import time
 from fractions import Fraction as Fr
 
@@ -24,7 +26,11 @@ NX, NY, NB = 4, 4, 6                     # the coarse grid: 16 sub-rects x 6 til
 CAP = 96                                 # a role carrying more pieces than this is re-binned (<= NX*NY*NB units)
 REFINE, MAX_ITER, NSUB = 1, 2, 2         # the coarse fixed point: refine 1, <= 2 mutual passes, nsub 2 for box-only roles
 DEPTH, JDEPTH = 2, 1                     # the coarse reach depths (A198: 5 / 2)
-KMODE = "pieces"                         # "pieces" (A172) or "union" (A171's box-only K')
+KMODE = os.environ.get("A211_KMODE", "union")     # the COARSE core: A171's union-hull K' (a subset of A172's per-piece
+NGRID = int(os.environ.get("A211_NGRID", "33"))   # K': S2'), on a coarser tilt grid than A171/A132's 97.  The two env
+                                                  # knobs re-run the pre-A211e node ("pieces" / 97) for a comparison.
+NGRID_FALL = 97                          # ... and the fallback when the coarse grid will not certify at all
+_GRID = [0, 0, 0, 0]                     # [coarse builds, grid fallbacks, per-piece fallbacks, exact-mode builds]
 EXACT = dict(depth=5, joint_depth=2, refine_mb=2, nsub_mb=4)
 _BINS = {}
 
@@ -60,11 +66,50 @@ def rebin(pcs, nx=NX, ny=NY, nb=NB):
     return out
 
 
+# --------------------------------------------------------------------------- the COARSE core (S2')
+_REBUILD = [None]
+
+
+def grid_rebuild(self, *a, **kw):
+    """`MBox.rebuild` with the COARSE tilt grid whenever the box is in kmode "union" -- i.e. at every internal node,
+    where `coarse_fixpoint` sets kmode = KMODE.  In kmode "pieces" (the exact leaf cascade, and A171's own fallback
+    inside `rebuild`) nothing changes: the call goes straight through with the library's n_grid 97.
+
+    SOUNDNESS (notes/coarse_tree.md S2').  `polycore.build` clips a start polygon by the half-planes of the n_grid
+    sampled tilts, shrinks, rounds to rationals, and then CERTIFIES every vertex with the exact `vertex_ok` against
+    the WHOLE tilt interval [t0, t1], retrying with a larger shrink until every vertex certifies (or raising).  So
+    whatever polygon comes back is exactly certified whatever n_grid was: a coarse grid needs a larger shrink and
+    therefore returns a SMALLER polygon -- weaker, never wrong.  A178's `mbpatch178.rebuild` turns "no certified polygon" into an EMPTY K'
+    (k_source "empty", no obstacle, no clip: sound but blind), and a WIDE role's union hull certifies nothing while
+    its per-piece K' still does -- so an empty coarse K' retries on the library grid and then, still empty, on kmode
+    "pieces": a STRONGER core, i.e. exactly the pre-A211e node.  EmptyBox propagates as always."""
+    if a or "n_grid" in kw or (kw.get("kmode") or self.kmode) != "union":
+        _GRID[3] += 1
+        return _REBUILD[0](self, *a, **kw)
+    out = _REBUILD[0](self, n_grid=NGRID, **kw)
+    if self.k_source != "empty":
+        _GRID[0] += 1
+        return out
+    out = _REBUILD[0](self, n_grid=NGRID_FALL, **kw)             # the coarse grid certified nothing: the library grid
+    if self.k_source != "empty":
+        _GRID[1] += 1
+        return out
+    kw.pop("kmode", None)                                        # no certified polygon on the UNION HULL at any grid
+    out = _REBUILD[0](self, kmode="pieces", **kw)                # (a wide role): back to A172's per-piece K' -- a
+    _GRID[2] += 1                                                # STRONGER core, i.e. exactly the pre-A211e node
+    return out
+
+
+def grid_rep():
+    return dict(kmode=KMODE, n_grid=NGRID, coarse_builds=_GRID[0], grid_fallbacks=_GRID[1],
+                pieces_fallbacks=_GRID[2], exact_builds=_GRID[3])
+
+
 def coarse_fixpoint(nd, corners, s, refine=REFINE, max_iter=MAX_ITER, max_pieces=96, near=True):
-    """A204's fixpoint (poly204.fixpoint) with the lonely clip OFF, refine / max_iter capped and K' in KMODE (S2)."""
+    """A204's fixpoint (poly204.fixpoint) with the lonely clip OFF, refine / max_iter capped and K' in KMODE (S2')."""
     names = nd.names
     st = nd.stats
-    rep = dict(lonely=[], passes=0, refine=refine, coarse=True, kmode=KMODE)
+    rep = dict(lonely=[], passes=0, refine=refine, coarse=True, kmode=KMODE, n_grid=NGRID)
 
     def clip_all(cur, bn, k, obst):
         for j in names:
@@ -202,11 +247,31 @@ def restore_state(pg, st):
 
 
 def install():
-    """route the tree's save / restore through the coarse flag (after tree207.install) and install A211d's two pure
-    caches on the clip hot path (fastclip211: same results, same test counts -- only the recomputation is skipped)."""
+    """route the tree's save / restore through the coarse flag (after tree207.install), install A211d's two pure
+    caches on the clip hot path (fastclip211: same results, same test counts -- only the recomputation is skipped),
+    and A211e's coarse-grid rebuild on top of them (S2': a weaker, still certified K' at internal nodes)."""
     import tree206 as N6
     N7.install()
     N6.save_state = save_state
     N6.restore_state = restore_state
     FC.install_rebuild()
     FC.install_memo()
+    _REBUILD[0] = MB.MBox.rebuild                                 # on top of the memo: the memo keys on the n_grid it is given
+    MB.MBox.rebuild = grid_rebuild
+    install_a213()
+
+
+def install_a213():
+    """A213: the K' build in INTEGER space (polycore_int / polycore_fast via mbpatch213) -- bit-exact (the replay of
+    every rebuild of A211d's profile run and a fuzz: identical vertices, cores, k_info), only faster.  Behind the flag
+    A213_INTCORE (default on; =0 restores the library build); A213_VERIFY=1 runs both and asserts on every call."""
+    import sys
+    a213 = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "A213-int-polycore", "code"))
+    try:
+        if a213 not in sys.path:
+            sys.path.insert(0, a213)
+        import mbpatch213 as M213
+        return M213.install()
+    except Exception as e:                                        # noqa: BLE001  -- never let the patch stop a node
+        print("   A213 int-polycore NOT installed (library build in use): %r" % (e,), flush=True)
+        return False

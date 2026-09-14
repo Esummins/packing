@@ -30,12 +30,43 @@ fraction, rule CC's slack, NO-ROOM's boxes) is monotone in the pose set -- a lar
 so a coarse DEAD is a DEAD.  The exact leaf cascade starts from the coarse units (a superset of the exact node).
 
 **S2 (a prefix of the clip chain).**  The coarse fixed point (`coarse211.coarse_fixpoint`) is A204's `poly204.fixpoint`
-with the LONELY clip omitted, refine = 1 (A204: 2), at most 2 mutual-clip passes (A204: up to 10), and K' rebuilt per
-piece (A172's certified per-piece intersection; KMODE "union" = A171's union-hull polygon is the box-only fallback,
-also certified, weaker).  Every pass is one of A171/A172/A173's certified clips (container clip, tautologous split,
+with the LONELY clip omitted, refine = 1 (A204: 2), at most 2 mutual-clip passes (A204: up to 10), and K' rebuilt in
+the COARSE mode of S2'.  Every pass is one of A171/A172/A173's certified clips (container clip, tautologous split,
 mutual clip against K'); any PREFIX of a chain of sound clips is sound (A205's cost levers (i)-(v) rest on the same
 fact).  Omitting the lonely clip and the basin clip at internal nodes keeps more poses.  The rule-S clip and Lemma HC
 on the rows (A205 s.2) are unchanged and cheap.
+
+**S2' (the COARSE CORE at internal nodes: a weaker K', still certified).  2026-09-14, A211e.**  A clip against a role's
+K' is sound for ANY set K' of points that is certified to lie inside EVERY pose the role still has: a pose of another
+square that would overlap such a set is impossible.  The kill power grows with K', the soundness does not -- so at an
+internal node, whose only job is to kill cheaply or hand the branch on, K' may be replaced by any certified SUBSET.
+A211e does that twice over (`coarse211.KMODE` = "union", `coarse211.NGRID` = 33; both are read from `A211_KMODE` /
+`A211_NGRID` so the old node can be re-run for comparison):
+  (i) KMODE "union" (A171).  K' is A132's certified polygon of the union hull B_u of the surviving pieces instead of
+      A172's exact intersection of the per-piece K'(B_i).  Every piece box B_i is contained in B_u, so the pose set of
+      B_u CONTAINS the pose set of B_i, and a point certified inside every pose of B_u is certified inside every pose
+      of B_i: K'(B_u) is a subset of every K'(B_i) and hence of their intersection.  The union core is thus the
+      weaker of the two -- it forgets the growth the clip made unevenly across the tilt sub-bins, which is exactly
+      what an internal node does not need.  The axis core moves the same way: `MBox.rebuild` in kmode "pieces" keeps
+      max(per-piece core, union core) and in kmode "union" keeps the union core alone.
+  (ii) A coarser tilt grid.  `polycore.build(box, n_grid)` clips a start polygon by the half-planes of n_grid SAMPLED
+      tilts, shrinks, rounds to rationals, and then CERTIFIES every vertex with the exact `polycore.vertex_ok` over
+      the WHOLE tilt interval [t0, t1], retrying with a larger shrink until every vertex certifies (or raising).  The
+      certificate is therefore independent of n_grid: whatever polygon comes back has every vertex proved inside
+      every pose, and Q(c, theta) is convex, so the polygon is inside every pose.  n_grid only decides HOW BIG that
+      polygon may be -- a coarse grid needs a larger shrink and returns a smaller polygon (measured on six role-shaped
+      boxes: n_grid 33 certifies wherever 97 does, agrees on the certified area to 3-5 significant digits, and costs
+      0.3-0.6 of the build).  Soundness is untouched at any n_grid.
+A wide role's union hull may certify NO polygon at all, where its per-piece K' still certifies (A178's `mbpatch178`
+turns that failure into an empty K': sound, but the role then clips nothing).  So the coarse rebuild is a LADDER --
+union at n_grid 33, else union at 97, else kmode "pieces" at 97 -- and a role that reaches the last rung has exactly
+its pre-A211e core: no node is worse off than before, and the count of each rung is reported per run
+(`coarse211.grid_rep`, printed by run211).  The exact
+leaf cascade (S5 (e), `set_coarse(False)`) is untouched: `poly204.fixpoint` sets kmode "pieces" and the library grid,
+and the per-piece K' of A172 is what every certificate-bearing leaf kill is proved against.  Consequence for the
+record: an internal node's kills stay valid (each is still a necessary condition), an internal node's ALIVE still
+only means "branch further", and the coarse round may now kill LATER (a weaker clip) but each node costs much less --
+the trade is measured in NOTES_coarse_core.md, not asserted.
 
 **S3 (shallow reach).**  The option table's per-cell reach bisects 2 levels per cell and 1 for joint slot sets (A198:
 5 / 2; `CoarsePage.set_coarse`), and a role's reach against its slots is clipped in place (depth 0).  A shallower
