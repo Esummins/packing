@@ -20,6 +20,7 @@ from fractions import Fraction as Fr
 import poly204 as P
 import tree207 as N7
 import fastclip211 as FC
+import noroommemo211 as NRM
 
 FP, MB = P.FP, P.MB
 NX, NY, NB = 4, 4, 6                     # the coarse grid: 16 sub-rects x 6 tilt bins
@@ -31,6 +32,19 @@ NGRID = int(os.environ.get("A211_NGRID", "33"))   # K': S2'), on a coarser tilt 
                                                   # knobs re-run the pre-A211e node ("pieces" / 97) for a comparison.
 NGRID_FALL = 97                          # ... and the fallback when the coarse grid will not certify at all
 _GRID = [0, 0, 0, 0]                     # [coarse builds, grid fallbacks, per-piece fallbacks, exact-mode builds]
+# A211f -- the coarse core is CONDITIONAL (NOTES_A211f (3)).  A211e measured the trade exactly: the union-hull K'
+# makes a node 2.8x cheaper but kills later, so it pays only where the fixed point is the expensive part (Y0202:
+# -86 % a node, +3 kills in the wall) and costs where the node is already cheap and the kills come from EmptyBox /
+# COUNT off a strong clip (Y0036_D07: +45 % wall).  The predicate is the PARENT's own cascade seconds -- the one
+# number that separates the two pages (Y0202: 89-214 s a node; Y0036_D07: mean 12.1 s, max 38.3 s) -- with the role
+# count as a second, off-by-default trigger (on Y0036_D07 every node from depth 1 carries >= 8 roles, so the role
+# count alone would just restore A211e).  A start node's ROOT has no parent: it runs with the exact per-piece core.
+# Soundness is untouched either way: S2' says the coarse K' is a subset of the per-piece one, so both are sound
+# obstacles; the choice is a BUDGET decision and is recorded per node (`coarse_core` in the round report).
+COARSE_SECONDS = float(os.environ.get("A211_COARSE_SECONDS", "20"))
+COARSE_ROLES = int(os.environ.get("A211_COARSE_ROLES", "99"))
+_CORE = [False]                          # the core the NEXT coarse_fixpoint uses
+_CORE_N = [0, 0]                         # [nodes with the coarse core, nodes with the exact per-piece core]
 EXACT = dict(depth=5, joint_depth=2, refine_mb=2, nsub_mb=4)
 _BINS = {}
 
@@ -102,14 +116,18 @@ def grid_rebuild(self, *a, **kw):
 
 def grid_rep():
     return dict(kmode=KMODE, n_grid=NGRID, coarse_builds=_GRID[0], grid_fallbacks=_GRID[1],
-                pieces_fallbacks=_GRID[2], exact_builds=_GRID[3])
+                pieces_fallbacks=_GRID[2], exact_builds=_GRID[3], conditional=dict(
+                    parent_seconds=COARSE_SECONDS, roles=COARSE_ROLES, coarse_nodes=_CORE_N[0], exact_core_nodes=_CORE_N[1]))
 
 
 def coarse_fixpoint(nd, corners, s, refine=REFINE, max_iter=MAX_ITER, max_pieces=96, near=True):
-    """A204's fixpoint (poly204.fixpoint) with the lonely clip OFF, refine / max_iter capped and K' in KMODE (S2')."""
+    """A204's fixpoint (poly204.fixpoint) with the lonely clip OFF, refine / max_iter capped and K' in KMODE (S2')
+    -- but only at a node the predicate calls expensive (A211f): elsewhere the per-piece core of the pre-A211e node."""
     names = nd.names
     st = nd.stats
-    rep = dict(lonely=[], passes=0, refine=refine, coarse=True, kmode=KMODE, n_grid=NGRID)
+    km = KMODE if _CORE[0] else "pieces"
+    rep = dict(lonely=[], passes=0, refine=refine, coarse=True, kmode=km, n_grid=NGRID if _CORE[0] else NGRID_FALL,
+               coarse_core=_CORE[0])
 
     def clip_all(cur, bn, k, obst):
         for j in names:
@@ -130,7 +148,7 @@ def coarse_fixpoint(nd, corners, s, refine=REFINE, max_iter=MAX_ITER, max_pieces
         if not keep:
             raise MB.EmptyBox(mb.name, dict(reason="container"))
         mb.pieces = keep
-        mb.kmode = KMODE
+        mb.kmode = km
     for lvl in range(max(0, refine)):
         for mb in nd.boxes.values():
             mb.rebuild()
@@ -186,6 +204,8 @@ class CoarsePage(N7.TreePage207):
         self.all_basins = list(self.basins)
         self.rebin_rep = []
         self.coarse = None
+        self.last_round_seconds = 0.0                             # A211f: the PARENT's cascade seconds (save/restore)
+        self.core_rep = []
         self.set_coarse(True)
 
     def set_coarse(self, on):
@@ -197,11 +217,26 @@ class CoarsePage(N7.TreePage207):
             self.depth, self.joint_depth, self.refine_mb, self.nsub_mb = EXACT["depth"], EXACT["joint_depth"], EXACT["refine_mb"], EXACT["nsub_mb"]
             self.basins = list(self.all_basins)
 
+    def coarse_core_on(self, label):
+        """A211f: does THIS node get the coarse union-hull core?  Only when the fixed point is the expensive part --
+        the parent's cascade took more than COARSE_SECONDS (or the node carries COARSE_ROLES roles).  A budget
+        decision, recorded: both cores are sound (S2'), the coarse one is simply weaker."""
+        par, nr = float(self.last_round_seconds or 0.0), len(self.roles)
+        on = par > COARSE_SECONDS or nr >= COARSE_ROLES
+        _CORE[0] = on
+        _CORE_N[0 if on else 1] += 1
+        self.core_rep.append(dict(label=label, coarse_core=on, parent_seconds=round(par, 1), n_roles=nr))
+        self.T.test("COARSE-CORE", label=label, coarse_core=on, parent_seconds=round(par, 1), n_roles=nr,
+                    kmode=(KMODE if on else "pieces"), n_grid=(NGRID if on else NGRID_FALL),
+                    rule="parent cascade > %.0f s or >= %d roles" % (COARSE_SECONDS, COARSE_ROLES))
+        return on
+
     def normalise(self, label):
         FC.drop(self)                                             # the node's nd (and every K' in it) is rebuilt here
         if not self.coarse:
             return N7.TreePage207.normalise(self, label)
         t0 = time.time()
+        self.coarse_core_on(label)
         for k, pcs in list(self.pieces.items()):
             if k.startswith("P") or not pcs or len(pcs) <= CAP:
                 continue
@@ -216,6 +251,7 @@ class CoarsePage(N7.TreePage207):
             return N7.TreePage207.normalise(self, label)
         finally:
             P.fixpoint = old
+            self.last_round_seconds = time.time() - t0            # the number this node's CHILDREN are judged on
 
     def role_reach(self, role, S):
         if not self.coarse:
@@ -236,6 +272,7 @@ class CoarsePage(N7.TreePage207):
 def save_state(pg):
     st = N7.save_state(pg)
     st["coarse"], st["rebin_rep"], st["noroom_k"] = pg.coarse, list(pg.rebin_rep), getattr(pg, "noroom_k", None)
+    st["last_round_seconds"] = getattr(pg, "last_round_seconds", 0.0)
     return st
 
 
@@ -244,6 +281,7 @@ def restore_state(pg, st):
     pg.set_coarse(st["coarse"])
     pg.rebin_rep = list(st["rebin_rep"])
     pg.noroom_k = st.get("noroom_k")
+    pg.last_round_seconds = st.get("last_round_seconds", 0.0)     # A211f: every child is judged on ITS parent
 
 
 def install():
@@ -258,6 +296,7 @@ def install():
     FC.install_memo()
     _REBUILD[0] = MB.MBox.rebuild                                 # on top of the memo: the memo keys on the n_grid it is given
     MB.MBox.rebuild = grid_rebuild
+    NRM.install()                                                 # A211f: the no-room memos (A189 wrapped, not edited)
     install_a213()
 
 

@@ -27,6 +27,7 @@ import coarse211 as C11                                        # noqa: E402
 import tree211 as N11                                          # noqa: E402
 import inherit211 as INH                                       # noqa: E402
 import startload211 as SL                                      # noqa: E402
+import noroommemo211 as NRM                                    # noqa: E402
 import fig211                                                  # noqa: E402
 
 C11.install()
@@ -179,7 +180,9 @@ def run_tree(doc, a, pad, cert, log=print):
                                 inherited_dead=len(rows), inherited_alive=len(starts), start_nodes=[dict(s, steps=len(s["steps"])) for s in starts],
                                 cfg=dict(rounds=a.rounds, depth_cap=a.depth, node_cap=a.nodes, wall=a.wall, inherit=not a.no_inherit,
                                          coarse=dict(grid=[C11.NX, C11.NY, C11.NB], cap=C11.CAP, refine=C11.REFINE, max_iter=C11.MAX_ITER,
-                                                     nsub=C11.NSUB, depth=C11.DEPTH, jdepth=C11.JDEPTH, kmode=C11.KMODE, n_grid=C11.NGRID),
+                                                     nsub=C11.NSUB, depth=C11.DEPTH, jdepth=C11.JDEPTH, kmode=C11.KMODE, n_grid=C11.NGRID,
+                                                     conditional=dict(parent_seconds=C11.COARSE_SECONDS, roles=C11.COARSE_ROLES,
+                                                                      fallback=dict(kmode="pieces", n_grid=C11.NGRID_FALL))),
                                          exact=C11.EXACT, exact_rounds=N11.EXACT_ROUNDS, noroom_cap=N11.NOROOM_CAP, soft_all=N6.SOFT_ALL, max_frac=N6.MAX_FRAC))
     log("== %s page pad %s: start %s; basins %s; INHERIT %d dead branches (final) + %d start nodes %s; H %s; forced H %s; %d slots; free squares %d" % (
         a.nid, pad, start.get("file"), [(b["cell"], float(b["rc"])) for b in basins], len(rows), len(starts), [s["label"] for s in starts][:10],
@@ -327,6 +330,7 @@ if __name__ == "__main__":
     import fastclip211 as FC211
     print("   caches (A211d, pure: same results, same test counts): K' %s; clip %s" % (FC211.rebuild_rep(), FC211.memo_rep()), flush=True)
     print("   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): %s" % (C11.grid_rep(),), flush=True)
+    print("   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): %s" % (NRM.rep(),), flush=True)
     if not NOFIG:
         try:
             print("   gallery: %s" % fig211.gallery(), flush=True)

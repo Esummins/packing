@@ -94,6 +94,8 @@ def step_of(n):
         return ("ns", str(n.get("slot")), str(n.get("role") or n.get("ns_role") or "?"), kind)
     if kind == "pocket":
         return ("pocket", tuple(round(float(v), 6) for v in (n.get("pocket") or ())), tuple(n.get("rows") or ()))
+    if kind == "rsplit":                                          # a CHILD rsplit record carries only the label:
+        return None                                               # its key comes from the parent's branch list
     if n.get("rows") is not None and n.get("slot"):
         return ("row", str(n.get("slot")), tuple(n.get("rows")))
     return None
@@ -144,12 +146,33 @@ def keyed(tree, rootpath):
     return dict(root=root, order=order, path=path, recs=recs, kids=kids)
 
 
+def rsplit_branch(n, rows, i):
+    """A211 Lemma ROLE-SPLIT (notes/coarse_tree.md s.5) -> (step key, branch dict).  The PARENT record carries
+    `rsplit` = the role spec with `m` stringified (the exact rational); `branch_rows[i]` is only the printable label
+    ("t>=53.1301"), and rsplit211.branches emits side 'lo' first, 'hi' second.  The step key is exactly
+    tree211.Tree211.step_key's, so a live branch and an inherited one share one path."""
+    rs = n.get("rsplit") or {}
+    role = str(rs.get("role") or n.get("branch_role") or n.get("branch_slot"))
+    dim, m, side = str(rs.get("dim")), str(rs.get("m")), ("lo" if i == 0 else "hi")
+    try:
+        m_f = float(str(rows).split("=")[-1])
+    except ValueError:
+        m_f = None
+    br = dict(slot=role, role=role, kind="rsplit", rows=[rows], named=None, dim=dim, side=side, m=m, m_f=m_f,
+              extents=rs.get("extents"), core_empty=rs.get("core_empty"), box=rs.get("box"))
+    return ("rsplit", role, dim, m, side), br
+
+
 def branches_of(n, base, c):
     """the exhaustive disjunction a record proved at its node -> [(child path, child branch dict, child label)]."""
     slot, role, pk = n.get("branch_slot"), n.get("branch_role"), n.get("pockets") or []
     out = []
     for i, rows in enumerate(n.get("branch_rows") or []):
         lab = "%s.%d" % (c, i + 1)
+        if n.get("rsplit") and isinstance(rows, str):             # Lemma ROLE-SPLIT: `rows` is a label, not row indices
+            st, br = rsplit_branch(n, rows, i)
+            out.append((base + (st,), br, lab))
+            continue
         if rows in ("meets", "misses"):
             st = ("ns", str(slot), str(role), "ns-" + rows)
             br = dict(slot=slot, role=role, kind="ns-" + rows, rows=None, named=None, frac=None, alive_rows=None)

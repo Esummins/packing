@@ -11,6 +11,7 @@ import poly204 as P
 import tree205b as TB
 import tree206 as N6
 import tree209 as N9
+import rsplit211 as RS
 import coarse211 as C11
 import load206 as L6
 
@@ -69,6 +70,10 @@ def apply_step(pg, br, log=print):
     if str(br.get("kind") or "").startswith("ns-"):
         N6.apply_ns(pg, br)
         return "NS %s %s at %s" % (br.get("role"), br["kind"][3:], br.get("slot"))
+    if br.get("kind") == "rsplit":                                # Lemma ROLE-SPLIT (notes/coarse_tree.md s.5)
+        n = RS.apply_rsplit(pg, br)                               # ValueError (empty half) propagates: the caller
+        return "RSPLIT %s %s%s%s (%d pieces)" % (                 # leaves the start node undecided rather than guess
+            br["role"], br["dim"], "<=" if br["side"] == "lo" else ">=", br.get("m_f"), n)
     if br.get("kind") == "pocket":
         role = N9.apply_pocket(pg, [float(v) for v in br["pocket"]], (br.get("rows") or [0])[0])
         return "POCKET %s as %s" % ([round(float(v), 4) for v in br["pocket"]], role)

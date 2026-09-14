@@ -68,6 +68,34 @@ record: an internal node's kills stay valid (each is still a necessary condition
 only means "branch further", and the coarse round may now kill LATER (a weaker clip) but each node costs much less --
 the trade is measured in NOTES_coarse_core.md, not asserted.
 
+**S2'' (the coarse core is CONDITIONAL).  2026-09-14, A211f.**  S2' makes the coarse core SOUND; it does not make it
+profitable.  A211e measured both directions on one page each: where the fixed point dominates (k5_11_interior_Y0202:
+89-214 s a node) the coarse core is -86 % a node and buys three extra kills inside the wall, and where the node is
+already cheap and its kills come from EmptyBox / COUNT off a strong clip (k5_11_interior_Y0036_D07: mean 12.1 s a
+node) the weaker clip kills later, the tree needs 51 nodes where 24 sufficed, and the wall grows 45 %.  So the core is
+chosen PER NODE by a predicate over the node's expected cost -- `coarse211.CoarsePage.coarse_core_on`: the coarse core
+is used iff the PARENT's cascade took more than `COARSE_SECONDS` (20 s) or the node carries `COARSE_ROLES` roles
+(99 = off by default; on a shallow page every node from depth 1 already carries >= 8 roles, so the role count alone
+just restores A211e).  A start node's root has no parent and runs with the exact per-piece core.  NOTHING about
+soundness depends on the predicate: by S2' both cores are certified subsets of every pose, so either choice gives a
+sound clip, a valid kill and the same meaning of ALIVE.  It is a BUDGET decision and is recorded as one -- every
+node's round report carries `coarse_core`, `kmode` and `n_grid`, the trace carries a `COARSE-CORE` test with the
+parent's seconds and the rule, and `coarse211.grid_rep` counts the nodes that went each way.
+
+**S2''' (the no-room leaf is MEMOISED, not changed).  2026-09-14, A211f.**  A189's no-room leaf
+(`noroom189.build_node` / `bisect_free`, A189 Lemma 1) is 82 % of an expensive page and re-derives at every child what
+its parent already derived.  `noroommemo211.py` WRAPS it (module-attribute patches; A189, A208 and A171/A132 are
+read-only) with three pure memos: the compiled `Obstacle` of a K' is interned process-wide on (role name, mode, exact
+vertices) instead of per box, so A211d's clip memo and A173's `Bin.radii` cache hit across nodes; `build_node` is
+memoised on (the exact role boxes, s0, nsub, refine), replaying an `MB.EmptyBox` -- A171's pair leaf, a KILL -- rather
+than swallowing it; and `bisect_free` is memoised on the node's OBSTACLE CONTENT (plus s, tsub, depth, max_pieces),
+which is all it reads, so a child whose cores agree with its parent's reuses the bisection exactly.  This is the
+parent/child case Lemma ROLE-SPLIT creates on purpose: rsplit211 prefers to bisect a role whose K' is EMPTY, and such
+a role contributes no obstacle at all.  A run stopped by the DEADLINE is never cached (its residue depends on the
+clock, not on the content).  Every memoised value is the value the library would return for the same content
+(`A211_NOROOM_VERIFY=1` recomputes every hit and asserts), so every certificate field is identical; what the memo
+does change is that the 120 s per-node cap (`tree211.NOROOM_CAP`, once per node) now buys more of the leaf.
+
 **S3 (shallow reach).**  The option table's per-cell reach bisects 2 levels per cell and 1 for joint slot sets (A198:
 5 / 2; `CoarsePage.set_coarse`), and a role's reach against its slots is clipped in place (depth 0).  A shallower
 bisection stops earlier in the same tautologous split-and-test tree, so its survivors are a superset of the deeper
