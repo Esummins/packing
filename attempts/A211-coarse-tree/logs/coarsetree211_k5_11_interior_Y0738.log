@@ -358,3 +358,27 @@
    no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
    node R.1.1.4.p1.2.1.2.2.2.2.1.1.1.2 d11: DEAD by NOROOM -- no-room at R.1.1.4.p1.2.1.2.2.2.2.1.1.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
    node R.1.1.4.p1.2.1.2.2.2.2.1.1.2 d10 F4<-['t>=53.1301']: INTERNAL (2.3 s, 1 rounds; t=1466.7)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.1.4.p1.2.1.2.2.2.2.1.1.2: bisect F3 on y at 1.938542 (extents (0.569816, 0.575419), tilt 53.1301 deg, core non-empty, 89 piece(s); split 2 of 4)
+   node R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1 d11 F3<-['y<=1.938542']: INTERNAL (1.7 s, 1 rounds; t=1591.7)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1: bisect F1 on y at 3.106928 (extents (0.281594, 0.540311), tilt 53.1301 deg, core non-empty, 49 piece(s); split 2 of 4)
+   node R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.1 d12 F1<-['y<=3.106928']: INTERNAL (4.1 s, 1 rounds; t=1719.3)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.1 d12: DEAD by NOROOM -- no-room at R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.2 d12 F1<-['y>=3.106928']: INTERNAL (2.0 s, 1 rounds; t=1723.2)
+   no-room (k=10, m=1): UNDECIDED in 65 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.2: bisect F4 on y at 3.117868 (extents (0.401273, 0.518431), tilt 36.8699 deg, core non-empty, 62 piece(s); split 3 of 4)
+   node R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.2.1 d13 F4<-['y<=3.117868']: INTERNAL (1.6 s, 1 rounds; t=1791.1)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 82, in draw
+    return fig211.render(doc)
+           ~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\fig211.py", line 145, in render
+    open(p, "w", encoding="utf-8").write(page_svg(doc))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\esumm\\code\\packing\\docs\\residue_map\\campaigns\\A211-coarsetree\\coarsetree211_k5_11_interior_Y0738.svg'
+   fig211 failed: OSError(22, 'Invalid argument')
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.2.1 d13: DEAD by NOROOM -- no-room at R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.1.4.p1.2.1.2.2.2.2.1.1.2.1.2.2 d13 F4<-['y>=3.117868']: INTERNAL (2.4 s, 1 rounds; t=1795.0)

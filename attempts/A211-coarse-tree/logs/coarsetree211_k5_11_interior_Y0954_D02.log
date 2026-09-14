@@ -121,3 +121,18 @@
    no-room (k=10, m=1): ERROR in 10 s (0 pockets; RuntimeError('polycore: no certified polygon for B([1.500,2.401]x[2.826,3.377]x[)
    Rule NS at R.1.5.p1: split F4 at TR(0,0) (meeting fraction 0.439379; alive rows []; named ['F1', 'F2', 'F4'])
    node R.1.5.p1.1 d4 TR(0,0)<-None: INTERNAL (3.5 s, 1 rounds; t=80.5)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.5.p1.1: bisect F2 on t at 53.1301 (extents (0.575417, 0.237212), tilt 90.0 deg, core non-empty, 57 piece(s); split 1 of 4)
+   node R.1.5.p1.1.1 d5 F2<-['t<=53.1301']: INTERNAL (3.5 s, 1 rounds; t=206.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.5.p1.1.1 d5: DEAD by NOROOM -- no-room at R.1.5.p1.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.5.p1.1.2 d5 F2<-['t>=53.1301']: INTERNAL (3.4 s, 1 rounds; t=211.7)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.5.p1.1.2 d5: DEAD by NOROOM -- no-room at R.1.5.p1.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.5.p1.2 d4 TR(0,0)<-None: INTERNAL (2.0 s, 1 rounds; t=216.1)
+   no-room (k=10, m=1): ERROR in 4 s (0 pockets; RuntimeError('polycore: no certified polygon for B([1.500,2.385]x[2.871,3.377]x[)
+   Lemma ROLE-SPLIT at R.1.5.p1.2: bisect F4 on x at 1.942691 (extents (0.885385, 0.506514), tilt 90.0 deg, core non-empty, 59 piece(s); split 1 of 4)
+   node R.1.5.p1.2.1 d5 F4<-['x<=1.942691']: INTERNAL (2.6 s, 1 rounds; t=222.9)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.5.p1.2.1: bisect F2 on t at 53.1301 (extents (0.575417, 0.237212), tilt 90.0 deg, core non-empty, 57 piece(s); split 1 of 4)
+   node R.1.5.p1.2.1.1 d6 F2<-['t<=53.1301']: INTERNAL (5.7 s, 1 rounds; t=351.1)
