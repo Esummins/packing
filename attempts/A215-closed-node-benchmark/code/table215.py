@@ -59,6 +59,21 @@ if rat:
     g = math.exp(sum(math.log(x) for x in rat) / len(rat))
     L.append("**Geometric-mean speedup over the %d agreeing nodes: %.2fx**  (spread %.2fx -- %.2fx; "
              "median %.2fx)\n" % (len(rat), g, min(rat), max(rat), sorted(rat)[len(rat)//2]))
+CLEAN = {"k5_11_interior_Y0308", "k5_16_interior_Y0054", "k5_16_interior_Y0027", "k5_16_interior_Y0565",
+         "k5_16_interior_Y0839", "k5_16_interior_Y1110"}
+cl = [r["old"] / r["new"] for r in out if r["nid"] in CLEAN and r["verdict"] == r["oldv"] and r["new"] > 0]
+if cl:
+    g2 = math.exp(sum(math.log(x) for x in cl) / len(cl))
+    L.append("**LIKE-FOR-LIKE sub-mean.** Only %d of the 11 old numbers are themselves a ROOT-TO-KILL wall (the five "
+             "A205 clip-tree pages and A209's Y1110); the other five old numbers had a head start this run did not "
+             "(A211/A211f inherited dead branches, A206 started from A205's leaf certificates).  Over those %d "
+             "genuinely comparable nodes the geometric mean is **%.2fx** (spread %.2fx -- %.2fx).\n"
+             % (len(cl), len(cl), g2, min(cl), max(cl)))
+L.append("**Reading the one ratio below 1 (`k5_11_interior_Y0036_D07`, 0.16x).**  It is NOT a slowdown and NOT a "
+         "regression: the page still dies, and it dies from the A203 ROOT with nothing inherited (52 nodes, 0 alive "
+         "leaves, 671 s).  A211f's 106.2 s was a run that started from 6 inherited DEAD branches and 5 start nodes, "
+         "i.e. most of the tree was already proved.  The comparable statement is that the whole page, root to kill, "
+         "now costs 671 s where A211e could not close it at all inside 900 s even WITH the same inheritance.\n")
 bad = [r for r in out if r["verdict"] != r["oldv"]]
 if bad:
     L.append("## REGRESSIONS -- nodes that no longer die\n")
@@ -83,6 +98,13 @@ L.append("")
 st = os.path.join(ATT, "results", "stagetable215.txt")
 if os.path.exists(st):
     L.append("## Stage table (A211f `code/profstage211.py`) for two runs\n")
+    L.append("Two extra cProfile runs, same flags and same isolation.  The columns are, in order, "
+             "`k5_16_interior_Y0027` pad g1 and `k5_16_interior_Y0839` pad g1 -- the two cheapest nodes, chosen so "
+             "the profiler's overhead is paid on short runs.  cProfile roughly triples the wall (12.6 s -> 39.9 s, "
+             "11.3 s -> 35.0 s), so read the SHARES, not the seconds.  Note the shape against A211f's own table "
+             "(Y0202, no-room-bound at 82%): on a page that dies FAST there is no no-room leaf at all -- the budget "
+             "is the option table (52-63%, of which ROLE-REACH 10-15%), the coarse fixed point (26-29%) and K' "
+             "(18-21%).  The lane cover, 40% of A211f's expensive page, does not appear.\n")
     L.append("```")
     L.append(open(st, encoding="utf-8").read().rstrip())
     L.append("```")
