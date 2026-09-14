@@ -8,11 +8,14 @@ them to tree205b.apply_branch and died with TypeError('list indices must be inte
 page ALIVE for a reason that has nothing to do with the geometry.
 
   python test_inherit211.py            # static check over every page and pad (fast)
-  python test_inherit211.py --load     # ... and actually load every start node whose path contains a role split
+  python test_inherit211.py --load     # ... and actually LOAD every start node (A211h: the loader must climb to
+                                       #     the nearest COMPLETE ancestor rather than refuse a capped snapshot)
+  python test_inherit211.py --load --rsplit-only   # ... only the start nodes carrying a role split (the A211f case)
 """
 import argparse
 import os
 import sys
+import re
 import time
 from fractions import Fraction as Fr
 
@@ -21,6 +24,7 @@ sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 ATT = os.path.join(ROOT, "attempts")
 KINDS = ("row", "pair", "row-anon", "ns-meets", "ns-misses", "pocket", "rsplit", "inherited")
+TAG = re.compile(r"_w\d+[a-z0-9]*$")
 
 
 def pages():
@@ -32,8 +36,8 @@ def pages():
                    (os.path.join(ATT, "A209-k5-killer", "certs"), "k5killer209_"),
                    (os.path.join(ATT, "A211-coarse-tree", "certs"), "coarsetree211_")):
         for f in (sorted(os.listdir(d)) if os.path.isdir(d) else []):
-            if f.startswith(pre) and f.endswith(".json"):
-                out.add(f[len(pre):-5].split("__")[0])
+            if f.startswith(pre) and f.endswith(".json"):        # A211h: an EXTENDED cert is <nid>_w<wall><variant>,
+                out.add(TAG.sub("", f[len(pre):-5].split("__")[0]))   # not a page of its own (load_page would KeyError)
     return sorted(out)
 
 
