@@ -324,6 +324,8 @@ if __name__ == "__main__":
         except Exception:
             doc = dict(nid=a.nid, runs={})
     run_page(doc, a, cert)
+    import fastclip211 as FC211
+    print("   caches (A211d, pure: same results, same test counts): K' %s; clip %s" % (FC211.rebuild_rep(), FC211.memo_rep()), flush=True)
     if not NOFIG:
         try:
             print("   gallery: %s" % fig211.gallery(), flush=True)

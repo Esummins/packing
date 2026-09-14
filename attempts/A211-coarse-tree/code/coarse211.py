@@ -17,6 +17,7 @@ from fractions import Fraction as Fr
 
 import poly204 as P
 import tree207 as N7
+import fastclip211 as FC
 
 FP, MB = P.FP, P.MB
 NX, NY, NB = 4, 4, 6                     # the coarse grid: 16 sub-rects x 6 tilt bins
@@ -152,6 +153,7 @@ class CoarsePage(N7.TreePage207):
             self.basins = list(self.all_basins)
 
     def normalise(self, label):
+        FC.drop(self)                                             # the node's nd (and every K' in it) is rebuilt here
         if not self.coarse:
             return N7.TreePage207.normalise(self, label)
         t0 = time.time()
@@ -176,9 +178,11 @@ class CoarsePage(N7.TreePage207):
         key = (role, S)
         if key in self.reach_cache:
             return self.reach_cache[key]
-        pcs = self.nd.boxes[role].pieces
         t0 = time.time()
-        res = FP.bisect_region(None, self.obstacles_except(role), [self.item[p]["wb"] for p in S], self.s, self.nd.stats, depth=0, seed_pieces=pcs, max_pieces=4096)
+        # FP.bisect_region(None, obstacles_except(role), the windows of S, s, stats, depth=0, seed_pieces=pieces,
+        # max_pieces=4096) with the S-INDEPENDENT prefix (container + obstacles) shared across this role's slot sets
+        # at this node: the same survivors, the same fraction, the same exact-test count (fastclip211 (2)).
+        res = FC.reach0(self, role, [self.item[p]["wb"] for p in S])
         self.T.test("ROLE-REACH", role=role, slots=sorted(S), depth=0, coarse=True, frac=round(res[0], 6), n_pieces=len(res[1]), n_exact=res[2], seconds=round(time.time() - t0, 3))
         self.reach_cache[key] = res
         return res
@@ -198,8 +202,11 @@ def restore_state(pg, st):
 
 
 def install():
-    """route the tree's save / restore through the coarse flag (after tree207.install)."""
+    """route the tree's save / restore through the coarse flag (after tree207.install) and install A211d's two pure
+    caches on the clip hot path (fastclip211: same results, same test counts -- only the recomputation is skipped)."""
     import tree206 as N6
     N7.install()
     N6.save_state = save_state
     N6.restore_state = restore_state
+    FC.install_rebuild()
+    FC.install_memo()
