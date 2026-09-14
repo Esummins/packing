@@ -16,3 +16,58 @@ KeyError: 'c0_Y0179_interior_G1'
 10:38:54 [w3] c0_Y0179  rc=1 2s
 15:09:53 [w1] start c0_Y0179 wall 1800 (lab 6, free 15389 MB)
    priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0179 at the zero pad: ALIVE in 30223 ms; kills {'H-clip': 164, 'P': 3794, 'W': 794, 'C': 842, 'M': 3896, 'L': 7, 'R': 3247, 'X': 646}; CSP units 61 -> 61 alive; caps {'BL(0,2)': 1, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': 1}; forced H ['BL(0,2)', 'TL(0,0)']
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0179 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0179_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [1.31, 1.38, 2.498, 2.567, 41.112, 53.13]; forced H ['BL(0,2)', 'TL(0,0)']; 6 slots; free 5
+   node R          d0 root: INTERNAL (14.7 s, 1 rounds; t=14.7)
+   node Rr1        d0 root<-None: INTERNAL (14.6 s, 1 rounds; t=29.4)
+   node R.1        d1 BL(1,1)<-[11]: INTERNAL (33.0 s, 1 rounds; t=62.4)
+   node R.1.1      d2 BR(0,1)<-[17]: DEAD by EmptyBox r1 (24.7 s, 1 rounds; t=87.2)
+   node R.1.2      d2 BR(0,1)<-[18]: INTERNAL (67.2 s, 1 rounds; t=154.4)
+   node R.1.2r1    d2 root<-None: INTERNAL (95.1 s, 1 rounds; t=249.6)
+   node R.1.2      d2: DEAD by CC -- rule CC at R.1.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior poin
+   node R.1.3      d2 BR(0,1)<-[21]: INTERNAL (32.4 s, 1 rounds; t=284.2)
+   node R.1.3.1    d3 TR(1,0)<-[14, 18]: DEAD by S-CLIP r1 (51.3 s, 1 rounds; t=335.8)
+   node R.1.3.2    d3 TR(1,0)<-[18, 19]: DEAD by EmptyBox r1 (32.0 s, 1 rounds; t=367.8)
+   node R.1.4      d2 BR(0,1)<-[22]: INTERNAL (29.5 s, 1 rounds; t=397.4)
+   node R.1.4.1    d3 TR(1,0)<-[14]: INTERNAL (35.7 s, 1 rounds; t=433.5)
+   node R.1.4.1    d3: DEAD by CC -- rule CC at R.1.4.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior po
+   node R.1.4.2    d3 TR(1,0)<-[18]: DEAD by FC r1 (64.7 s, 1 rounds; t=500.4)
+   node R.1.4.3    d3 TR(1,0)<-[19]: INTERNAL (54.6 s, 1 rounds; t=555.0)
+   node R.1.4.3    d3: DEAD by CC -- rule CC at R.1.4.3 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior po
+   node R.1.5      d2 BR(0,1)<-[23]: INTERNAL (21.5 s, 1 rounds; t=578.7)
+   node R.1.5r1    d2 root<-None: INTERNAL (33.2 s, 1 rounds; t=612.0)
+   node R.1.5      d2: DEAD by CC -- rule CC at R.1.5 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior poin
+   node R.2        d1 BL(1,1)<-[12]: INTERNAL (15.7 s, 1 rounds; t=627.8)
+   node R.2.1      d2 BR(0,1)<-[16]: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=629.6)
+   node R.2.2      d2 BR(0,1)<-[17]: DEAD by FC r1 (23.7 s, 1 rounds; t=653.4)
+   node R.2.3      d2 BR(0,1)<-[18]: INTERNAL (18.7 s, 1 rounds; t=672.2)
+   node R.2.3r1    d2 root<-None: INTERNAL (31.2 s, 1 rounds; t=703.4)
+   node R.2.3r2    d2 root<-None: DEAD by EmptyBox r1 (40.0 s, 1 rounds; t=743.5)
+   node R.2.4      d2 BR(0,1)<-[21]: INTERNAL (23.2 s, 1 rounds; t=766.8)
+   node R.2.4.1    d3 TR(1,0)<-[14, 18]: DEAD by S-CLIP r1 (33.3 s, 1 rounds; t=800.4)
+   node R.2.4.2    d3 TR(1,0)<-[18, 19]: DEAD by EmptyBox r1 (22.6 s, 1 rounds; t=823.2)
+   node R.2.5      d2 BR(0,1)<-[22]: INTERNAL (23.8 s, 1 rounds; t=847.1)
+   node R.2.5.1    d3 TR(1,0)<-[14]: INTERNAL (26.8 s, 1 rounds; t=874.4)
+   node R.2.5.1    d3: DEAD by CC -- rule CC at R.2.5.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior po
+   node R.2.5.2    d3 TR(1,0)<-[18]: DEAD by FC r1 (48.4 s, 1 rounds; t=925.7)
+   node R.2.5.3    d3 TR(1,0)<-[19]: INTERNAL (50.9 s, 1 rounds; t=976.7)
+   node R.2.5.3    d3: DEAD by CC -- rule CC at R.2.5.3 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior po
+   node R.2.6      d2 BR(0,1)<-[23]: INTERNAL (22.6 s, 1 rounds; t=999.6)
+   node R.2.6r1    d2 root<-None: INTERNAL (31.6 s, 1 rounds; t=1031.3)
+   node R.2.6      d2: DEAD by CC -- rule CC at R.2.6 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior poin
+   node R.3        d1 BL(1,1)<-[16]: INTERNAL (18.0 s, 1 rounds; t=1049.6)
+   node R.3.1      d2 BR(0,1)<-[17]: DEAD by EmptyBox r1 (7.8 s, 1 rounds; t=1057.6)
+   node R.3.2      d2 BR(0,1)<-[18]: INTERNAL (64.5 s, 1 rounds; t=1122.3)
+   node R.3.2r1    d2 root<-None: INTERNAL (100.9 s, 1 rounds; t=1223.3)
+   node R.3.2      d2: DEAD by CC -- rule CC at R.3.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior poin
+   node R.3.3      d2 BR(0,1)<-[21]: INTERNAL (38.5 s, 1 rounds; t=1264.8)
+   node R.3.3.1    d3 TR(1,0)<-[14, 18]: DEAD by S-CLIP r1 (22.6 s, 1 rounds; t=1287.7)
+   node R.3.3.2    d3 TR(1,0)<-[18, 19]: DEAD by EmptyBox r1 (9.5 s, 1 rounds; t=1297.4)
+   node R.3.4      d2 BR(0,1)<-[22]: INTERNAL (28.9 s, 1 rounds; t=1326.4)
+   node R.3.4.1    d3 TR(1,0)<-[14]: INTERNAL (44.4 s, 1 rounds; t=1371.3)
+   node R.3.4.1    d3: DEAD by CC -- rule CC at R.3.4.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior po
+   node R.3.4.2    d3 TR(1,0)<-[18]: DEAD by COUNT r1 (66.7 s, 1 rounds; t=1441.3)
+   node R.3.4.3    d3 TR(1,0)<-[19]: INTERNAL (37.1 s, 1 rounds; t=1478.6)
+   node R.3.4.3    d3: DEAD by CC -- rule CC at R.3.4.3 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior po
+   node R.3.5      d2 BR(0,1)<-[23]: INTERNAL (21.4 s, 1 rounds; t=1503.1)
