@@ -1,0 +1,20 @@
+== stage 0 + CSP synth_trump_f1 at the zero pad: ALIVE in 24392 ms; kills {'H-clip': 0, 'P': 3584, 'W': 3241, 'C': 2136, 'M': 3731, 'L': 7, 'R': 1957, 'X': 1312}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+== synth_trump_f1 pad zero (lam = 1, s0-only): start ../../AppData/Local/Temp/claude/C--Users-esumm-code-packing/8b20e315-017a-445b-9327-302e5359887a/scratchpad/certs/csp209_synth_trump_f1_zero_s0.json; GATE at the root: CONTAINS id {'H0': 7, 'H1': 9}; INHERIT 0 dead + 0 start nodes; H [1.687, 1.689, 1.959, 1.96, 40.093, 40.246]; forced H []; 6 slots; free 4
+   node R          d0 root: INTERNAL (28.6 s, 1 rounds; t=28.8)
+   GATE R: contains the Trump image id ({'F1': 6, 'F2': 10, 'H0': 7, 'H1': 9}); no kill rule will be applied here
+   node Rr1        d0 root<-None: INTERNAL (30.0 s, 1 rounds; t=58.8)
+   GATE Rr1: contains the Trump image id ({'F1': 6, 'F2': 10, 'F3': 4, 'F4': 8, 'H0': 7, 'H1': 9}); no kill rule will be applied here
+   node Rr2        d0 root<-None: INTERNAL (50.5 s, 1 rounds; t=109.3)
+   GATE Rr2: contains the Trump image id ({'F1': 6, 'F2': 10, 'F3': 4, 'F4': 8, 'H0': 7, 'H1': 9}); no kill rule will be applied here
+   ALIGNED split at R: cut F3 on y at 2.534157 (excess 527.0995 x radius, image on the lo side)
+   node R.1        d1 F3<-['y<=2.534157']: INTERNAL (64.6 s, 1 rounds; t=173.9)
+   GATE R.1: contains the Trump image id ({'F1': 6, 'F2': 10, 'F3': 4, 'F4': 8, 'H0': 7, 'H1': 9}); no kill rule will be applied here
+   ALIGNED split at R.1: cut F3 on t at 89.8797 (excess 475.1915 x radius, image on the hi side)
+   node R.1.1      d2 F3<-['t<=89.8797']: INTERNAL (85.6 s, 1 rounds; t=259.5)
+   GATE R.1.1: contains the Trump image id ({'F1': 6, 'F2': 10, 'F3': 4, 'F4': 8, 'H0': 7, 'H1': 9}); no kill rule will be applied here
+   ALIGNED split at R.1.1: cut F1 on t at 40.0616 (excess 39.6806 x radius, image on the hi side)
+   node R.1.1.1    d3 F1<-['t<=40.0616']: INTERNAL (72.7 s, 1 rounds; t=332.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Lemma ROLE-SPLIT at R.1.1.1: cut F3 on t at 53.0339 (midpoint)
+   node R.1.1.1.1  d4 F3<-['t<=53.0339']: INTERNAL (44.8 s, 1 rounds; t=377.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
