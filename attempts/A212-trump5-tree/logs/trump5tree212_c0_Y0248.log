@@ -14,3 +14,21 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0248_interior_G1'
 10:39:38 [w3] c0_Y0248  rc=1 3s
+16:15:02 [w2] start c0_Y0248 wall 1800 (lab 7, free 15078 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0248 at the zero pad: ALIVE in 24976 ms; kills {'H-clip': 0, 'P': 3882, 'W': 2378, 'C': 898, 'M': 4782, 'L': 7, 'R': 3433, 'X': 714}; CSP units 200 -> 200 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0248 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0248_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [1.449, 1.519, 2.078, 2.218, 0.0, 14.25]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (23.8 s, 1 rounds; t=23.8)
+   node R.1        d1 BL(0,2)<-[3]: INTERNAL (11.9 s, 1 rounds; t=35.8)
+   node R.1r1      d1 root<-None: INTERNAL (13.5 s, 1 rounds; t=49.3)
+   node R.1.1      d2 TR(1,0)<-[17]: INTERNAL (23.1 s, 1 rounds; t=72.5)
+   node R.1.1r1    d2 root<-None: DEAD by EmptyBox r1 (48.7 s, 1 rounds; t=121.2)
+   node R.1.2      d2 TR(1,0)<-[18]: INTERNAL (19.3 s, 1 rounds; t=140.6)
+   node R.1.2.1    d3 BR(0,1)<-[16]: INTERNAL (36.3 s, 1 rounds; t=177.2)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.2.1: split F1 at BL(1,1) (meeting fraction 0.093929)
+   node R.1.2.1.1  d4 BL(1,1)<-None: INTERNAL (97.8 s, 1 rounds; t=398.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 19 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.2.1.1  d4: DEAD by NOROOM -- no-room at R.1.2.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.2.1.2  d4 BL(1,1)<-None: INTERNAL (79.2 s, 1 rounds; t=497.2)
