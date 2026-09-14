@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-14 15:56:09
+# A211 progress -- 2026-09-14 16:34:01
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -19,9 +19,9 @@ The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal
 | k5_16_interior_Y0099 | g1 | 2 (tree: 10 nodes, depth 1, CC 0, exact 0, NS 1, pockets 1) | DEAD | 169 |
 | k5_16_interior_Y0099 | zero | 2 (tree: 8 nodes, depth 1, CC 0, exact 0, NS 0, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 78 |
 | k5_16_interior_Y0249 | g1 | 2 (tree: 24 nodes, depth 2, CC 0, exact 2, NS 1, pockets 0) | ALIVE (wall) | 1810 |
-| k5_16_interior_Y0249 | zero | 2 (tree: 24 nodes, depth 3, CC 0, exact 2, NS 8, pockets 0) | ALIVE (wall) | 1808 |
+| k5_16_interior_Y0249 | zero | 2 (tree: 68 nodes, depth 4, CC 0, exact 0, NS 9, pockets 0) | ALIVE (wall) | 1842 |
 | k5_16_interior_Y0402 | g1 | 2 (tree: 13 nodes, depth 3, CC 0, exact 3, NS 4, pockets 0) | ALIVE (wall) | 1919 |
-| k5_16_interior_Y0402 | zero | 2 (tree: 10 nodes, depth 3, CC 0, exact 2, NS 2, pockets 0) | ALIVE (wall) | 1826 |
+| k5_16_interior_Y0402 | zero | 2 (tree: 43 nodes, depth 5, CC 0, exact 0, NS 9, pockets 0) | ALIVE (wall) | 1849 |
 | k5_16_interior_Y0460 | g1 | 2 (tree: 15 nodes, depth 3, CC 0, exact 0, NS 5, pockets 0) | ALIVE (wall) | 1857 |
 | k5_16_interior_Y0460 | zero | 2 (tree: 15 nodes, depth 3, CC 0, exact 0, NS 5, pockets 0) | ALIVE (wall) | 1860 |
 | k5_16_interior_Y0719 | g1 | 2 (tree: 9 nodes, depth 1, CC 0, exact 0, NS 0, pockets 0) | DEAD | 237 |
@@ -43,9 +43,9 @@ The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal
 | k5_16_interior_Y1056 | g1 | 2 (tree: 14 nodes, depth 4, CC 0, exact 0, NS 5, pockets 0) | ALIVE (wall) | 1895 |
 | k5_16_interior_Y1056 | zero | 2 (tree: 12 nodes, depth 2, CC 0, exact 0, NS 4, pockets 0) | ALIVE (wall) | 1846 |
 
-CPU-h in this block: 13.93
+CPU-h in this block: 13.94
 
-## The k5 frontier (A57 census, deepest-first) (29 nodes)
+## The k5 frontier (A57 census, deepest-first) (31 nodes)
 
 | page | pad | stage reached | verdict | seconds |
 |---|---|---|---|---|
@@ -107,12 +107,15 @@ CPU-h in this block: 13.93
 | k5_11_interior_Y0978_D04 | zero | 2 (tree: 82 nodes, depth 6, CC 3, exact 0, NS 5, pockets 2) | DEAD (s0-only, WINDOW-PENDING) | 829 |
 | k5_11_interior_Y0954_D02 | g1 | 2 (tree: 41 nodes, depth 9, CC 6, exact 0, NS 1, pockets 1) | ALIVE (wall) | 1831 |
 | k5_11_interior_Y0954_D02 | zero | 2 (tree: 41 nodes, depth 9, CC 6, exact 0, NS 1, pockets 1) | ALIVE (wall) | 1840 |
+| k5_11_interior_Y0978_D07 | g1 | 2 (tree: 43 nodes, depth 8, CC 3, exact 0, NS 4, pockets 0) | ALIVE (wall) | 1804 |
+| k5_11_interior_Y0978_D07 | zero | 2 (tree: 47 nodes, depth 8, CC 1, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1803 |
+| k5_11_interior_Y1069_D06 | zero | 2 (tree: 44 nodes, depth 12, CC 1, exact 0, NS 4, pockets 2) | ALIVE (wall) | 1818 |
 
-CPU-h in this block: 24.36
+CPU-h in this block: 25.87
 
 ## Price and projection
 
-* gallery: 5 / 18 pages DEAD at the window pad, 13.93 CPU-h
-* frontier: 29 nodes run (6 DEAD at the window pad), 24.36 CPU-h; the census has 309 alive nodes, 274 remaining
-* PRICE over the first 20 frontier nodes: mean 2999 s, median 3677 s per node (both pads); PROJECTION for the remaining 274: 228.2 CPU-h (cap 200)
+* gallery: 5 / 18 pages DEAD at the window pad, 13.94 CPU-h
+* frontier: 31 nodes run (6 DEAD at the window pad), 25.87 CPU-h; the census has 309 alive nodes, 272 remaining
+* PRICE over the first 20 frontier nodes: mean 2999 s, median 3677 s per node (both pads); PROJECTION for the remaining 272: 226.6 CPU-h (cap 200)
 
