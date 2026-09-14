@@ -178,6 +178,9 @@ class Tree211(N9.Tree209):
             if sps:
                 self._rs = sps[0]
                 return "RSPLIT"
+        if pg.coarse and pg.T.out_of_time():                                      # A211d: the exact cascade cost 838 s past a
+            self.alive("undecided (wall) at the fully named leaf before the exact cascade")   # spent wall -- leave it undecided
+            return "ALIVE"
         if pg.coarse:                                                             # (e) the exact cascade at the leaf
             t0 = time.time()
             pg.set_coarse(False)
