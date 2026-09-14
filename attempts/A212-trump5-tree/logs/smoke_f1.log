@@ -1,0 +1,20 @@
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A212-trump5-tree/certs/csp209_f1_L10_0003_zero_s0.json)
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== f1_L10_0003 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_f1_L10_0003_zero_s0.json; GATE at the root: CONTAINS id {'H0': 7}; INHERIT 0 dead + 0 start nodes; H [1.687, 1.689, 1.959, 1.96, 40.093, 40.246]; forced H []; 6 slots; free 4
+   node R          d0 root: INTERNAL (27.1 s, 1 rounds; t=27.2)
+   node Rr1        d0 root<-None: INTERNAL (29.8 s, 1 rounds; t=57.0)
+   node Rr2        d0 root<-None: INTERNAL (40.9 s, 1 rounds; t=97.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R: split F3 at BL(1,1) (meeting fraction 0.114126)
+   node R.1        d1 BL(1,1)<-None: DEAD by REACH r1 (52.8 s, 1 rounds; t=150.7)
+   node R.2        d1 BL(1,1)<-None: INTERNAL (42.5 s, 1 rounds; t=193.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Lemma ROLE-SPLIT at R.2: cut F3 on t at 53.1301 (midpoint)
+   node R.2.1      d2 F3<-['t<=53.1301']: DEAD by EmptyBox r1 (13.0 s, 1 rounds; t=206.2)
+   node R.2.2      d2 F3<-['t>=53.1301']: DEAD by EmptyBox r1 (4.1 s, 1 rounds; t=210.2)
+   start R            => DEAD (7 nodes; t = 210 s of 240.0)
+   => DEAD (zero_page) in 210.3 s: 7 nodes, depth 2, gate hits 0 (conflicts 0), tube leaves 0 (depths []), 0 aligned cuts, kills by rule {'REACH': 1, 'EmptyBox': 2}, 1 NS, 0 pockets, 1 role splits, 3 dead / 0 alive leaves
+   per node: R d0 INTERNAL 27.1s; Rr1 d0 INTERNAL 29.8s; Rr2 d0 INTERNAL 40.9s; R.1 d1 DEAD REACH 52.8s; R.2 d1 INTERNAL 42.5s; R.2.1 d2 DEAD EmptyBox 13.0s; R.2.2 d2 DEAD EmptyBox 4.1s
+== f1_L10_0003: pad0 DEAD   (s0-only, lam = 1; DEAD = killed at s0, TRUMP-TUBE = the Trump basin, ALIVE = undecided)
+rc=0
