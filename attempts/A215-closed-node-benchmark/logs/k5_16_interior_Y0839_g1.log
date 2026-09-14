@@ -1,0 +1,15 @@
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 g1 pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0839_g1_s0.json)
+== k5_16_interior_Y0839 page pad g1: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0839_g1_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.498, 2.637, 1.519, 1.659, 53.13, 64.011]; forced H ['BR(0,1)']; 6 slots; free squares 5
+   node R          d0 root: INTERNAL (3.3 s, 1 rounds; t=3.4)
+   node R.1        d1 BR(0,1)<-[10]: DEAD by FC r1 (2.3 s, 1 rounds; t=5.8)
+   node R.2        d1 BR(0,1)<-[15]: INTERNAL (2.0 s, 1 rounds; t=7.8)
+   node R.2r1      d1 root<-None: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=9.5)
+   node R.3        d1 BR(0,1)<-[23]: DEAD by FC r1 (1.8 s, 1 rounds; t=11.3)
+   start R            => DEAD (5 nodes; t = 11 s of 3600.0)
+   => DEAD (g1_page) in 11.3 s: 0 start runs, 5 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 3 dead / 0 alive leaves
+   per node: R d0 INTERNAL 3.3s; R.1 d1 DEAD FC 2.3s; R.2 d1 INTERNAL 2.0s; R.2r1 d1 DEAD EmptyBox 1.7s; R.3 d1 DEAD FC 1.8s
+== k5_16_interior_Y0839: g1 DEAD | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 117, 'misses': 51, 'entries': 51}; clip {'hits': 5756, 'misses': 6649, 'entries': 6649}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 168, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 5}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 119, 'obs_misses': 49, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 49, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
