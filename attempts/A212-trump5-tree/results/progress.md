@@ -1,8 +1,8 @@
-# A212 progress -- 2026-09-14 10:06:42
+# A212 progress -- 2026-09-14 10:20:39
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
-## The 13 alive trump5 gallery pages (7 nodes)
+## The 13 alive trump5 gallery pages (8 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -13,8 +13,9 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 | c0_Y0223 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 7, 'NOROOM': 4, 'FC': 1} | 24 / 6 | 1861 |
 | c0_Y0255 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 1, 'NOROOM': 14, 'EmptyBox': 10, 'COUNT': 1} | 49 / 4 | 1808 |
 | c0_Y0258 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 5} | 9 / 2 | 143 |
+| c0_Y0257 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 4, 'NOROOM': 2} | 20 / 7 | 1833 |
 
-CPU-h in this block: 3.09
+CPU-h in this block: 3.60
 
 ## A60's alive trump5 frontier (deepest first) (0 nodes)
 
@@ -25,5 +26,5 @@ CPU-h in this block: 0.00
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 6, 'DEAD': 1}; gallery 7 / 13 run (3.09 CPU-h); frontier 0 run of 136 (136 remaining; 0.00 CPU-h)
+* verdicts so far: {'ALIVE': 7, 'DEAD': 1}; gallery 8 / 13 run (3.60 CPU-h); frontier 0 run of 136 (136 remaining; 0.00 CPU-h)
 
