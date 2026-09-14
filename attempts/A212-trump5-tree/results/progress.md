@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 15:05:11
+# A212 progress -- 2026-09-14 15:09:50
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (17 nodes)
+## A60's alive trump5 frontier (deepest first) (18 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -43,11 +43,12 @@ CPU-h in this block: 5.66
 | c0_Y0168 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 1} | 1 / 0 | 7 |
 | c0_Y0170 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 3, 'CC': 12, 'EmptyBox': 4} | 33 / 3 | 1881 |
 | c0_Y0172 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 8, 'CC': 15, 'FC': 2} | 42 / 3 | 1842 |
+| c0_Y0173 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 10, 'CC': 15, 'S-CLIP': 2} | 47 / 3 | 1864 |
 
-CPU-h in this block: 1.45
+CPU-h in this block: 1.96
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 13, 'DEAD': 17}; gallery 13 / 13 run (5.66 CPU-h); frontier 17 run of 121 (119 remaining; 1.45 CPU-h)
-* PRICE over the first 17 frontier nodes: mean 306 s, median 22 s per node; PROJECTION for the remaining 119: 10.1 CPU-h; spent 7.1; cap 150
+* verdicts so far: {'ALIVE': 14, 'DEAD': 17}; gallery 13 / 13 run (5.66 CPU-h); frontier 18 run of 121 (118 remaining; 1.96 CPU-h)
+* PRICE over the first 18 frontier nodes: mean 393 s, median 22 s per node; PROJECTION for the remaining 118: 12.9 CPU-h; spent 7.6; cap 150
 
