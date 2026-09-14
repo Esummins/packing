@@ -76,9 +76,13 @@ def main():
         proj = mean * len(remaining) / 3600
         L2.append("* frontier: %d nodes run (%d DEAD at the window pad), %.2f CPU-h; the census has %d alive nodes, %d remaining" % (len(fnodes), kills_f, tf / 3600, len(census), len(remaining)))
         L2.append("* PRICE over the first %d frontier nodes: mean %.0f s, median %.0f s per node (both pads); PROJECTION for the remaining %d: %.1f CPU-h (cap %.0f)" % (len(first), mean, med, len(remaining), proj, CAP_CPUH))
-        if len(first) >= 20 and proj > CAP_CPUH:
+        if len(first) >= 20 and proj > CAP_CPUH and not os.path.exists(os.path.join(HERE, "..", "logs", "FRONTIER_STOPPED")):
+            # the frontier STOP fired once (2026-09-13 20:22, projection 236 CPU-h); the marker keeps it from re-firing
+            # on every later gallery-pass node (coordinator, 2026-09-14) -- the frontier queue itself is not re-run
             L2.append("* **STOP: the projection exceeds the cap -- the workers exit after their current node**")
             os.makedirs(os.path.dirname(STOP), exist_ok=True)
+            open(os.path.join(HERE, "..", "logs", "FRONTIER_STOPPED"), "w").write("frontier stop recorded
+")
             open(STOP, "w").write("projection %.1f CPU-h > %.0f at %s\n" % (proj, CAP_CPUH, time.strftime("%Y-%m-%d %H:%M:%S")))
     else:
         L2.append("* frontier: not started; the census has %d alive nodes (%s)" % (len(census), dict(collections.Counter(c["tree"] for c in census))))
