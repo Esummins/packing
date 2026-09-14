@@ -1,0 +1,37 @@
+
+===== diff214  (A214_CKERNEL=1)  diff214.py 300 214
+A214 diff: 46800 (vertex, box) samples over 300 boxes; classes {'grid': 7200, 'far': 21600, 'wide': 18000}
+  exact 192-bit path : 0 mismatches, 21600 undecided (guard)
+  float filter       : 0 mismatches, 601 undecided (-> exact)
+  full scalar kernel : 0 mismatches;  C 1.97 us/call   Python-int 4.50 us/call  (x2.3)
+  batch kernel       : 0 mismatches over 300 grids
+  out-of-envelope    : 0 failures of 200 (W ~ 2^61..2^70 -> Python-int)
+  batch throughput   : 16 verts x 12 boxes = 192 pairs evaluated -- C call 50.5 us (263 ns/pair), +ctypes/Python wrapper 89.1 us, Python-int reference 2015 us
+  kernel stats: {'available': True, 'installed': False, 'flag': True, 'verify': False, 'dll': 'C:\\Users\\esumm\\code\\packing\\attempts\\A214-c-kernel\\build\\ckernel214.dll', 'load_error': None, 'c_pairs': 70079, 'c_undecided': 1, 'c_exact': 1, 'c_punt': 0, 'cover': {'exact_quads': 163307, 'endpoint_neg': 19061, 'interior': 3315, 'disc_neg': 21, 'guard': 32}, 'scalar': 25200, 'scalar_py': 21800, 'batch': 500, 'pairs': 0, 'undecided': 0, 'exact_c': 0, 'punt': 0, 'batch_py': 0, 'verified': 0}
+===== diff214 done rc=0 in 1.5 s
+
+===== replay213 KERNEL OFF  (A214_CKERNEL=0)  replay213.py C:\Users\esumm\code\packing\attempts\A213-int-polycore\results\replay_before_k5_11_interior_Y0202.jsonl
+REPLAY replay_before_k5_11_interior_Y0202.jsonl: 441 rebuilds, 0 mismatches (int vs lib), 0 record-vs-replay differences; kinds {'union': 181, 'pieces': 260}
+rebuild per call: lib 0.361 s  int 0.053 s  (x6.8); totals 159.2 s -> 23.4 s (recorded in the run: 245.7 s)
+PC.build per call (3349): lib 25.8 ms  fast 4.8 ms (x5.4)
+intersect per call (441): lib 25.9 ms  int 1.5 ms (x17.3)
+certify per call (260): lib 56.0 ms  int 2.0 ms (x28.4)  vec-filter 0.71 ms (x79.3)  obj 2.1 ms (x26.8); vec stats {'calls': 260, 'pairs': 47656, 'exact_pairs': 0, 'obj_calls': 260}
+axis core per call (260): lib 15.6 ms  int 0.6 ms (x24.1)
+===== replay213 KERNEL OFF done rc=0 in 317.9 s
+
+===== replay213 KERNEL ON  (A214_CKERNEL=1)  replay213.py C:\Users\esumm\code\packing\attempts\A213-int-polycore\results\replay_before_k5_11_interior_Y0202.jsonl
+REPLAY replay_before_k5_11_interior_Y0202.jsonl: 441 rebuilds, 0 mismatches (int vs lib), 0 record-vs-replay differences; kinds {'union': 181, 'pieces': 260}
+rebuild per call: lib 0.333 s  int 0.046 s  (x7.2); totals 147.0 s -> 20.3 s (recorded in the run: 245.7 s)
+PC.build per call (3349): lib 23.9 ms  fast 4.3 ms (x5.5)
+intersect per call (441): lib 24.5 ms  int 1.4 ms (x17.5)
+certify per call (260): lib 51.9 ms  int 0.2 ms (x320.8)  vec-filter 0.10 ms (x500.7)  obj 2.0 ms (x25.7); vec stats {'calls': 0, 'pairs': 0, 'exact_pairs': 0, 'obj_calls': 260}
+axis core per call (260): lib 14.6 ms  int 0.6 ms (x25.0)
+===== replay213 KERNEL ON done rc=0 in 292.1 s
+
+===== fuzz213 KERNEL ON  (A214_CKERNEL=1)  fuzz213.py 150 213
+fuzz rebuilds: 150 sets, 0 mismatches; kinds {'pieces': 95, 'union': 55}; lib 0.245 s/call int 0.036 s/call (x6.9)
+fuzz vertex tests: 2700 points, 0 mismatches; vec filter exact fallbacks 0 of 0 pairs
+fuzz polygon primitives: 75 cases, 0 mismatches
+===== fuzz213 KERNEL ON done rc=0 in 43.2 s
+
+ALL214 rc=0
