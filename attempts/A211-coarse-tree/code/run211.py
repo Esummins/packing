@@ -1,5 +1,5 @@
 """A211 driver -- ONE runner for the COARSE tree on one node (a gallery page or an A57 tree record):
-   python run211.py page <nid> [--wall 1800] [--pads zero,g1] [--depth 6] [--nodes 600] [--force]
+   python run211.py page <nid> [--wall 1800] [--pads zero,g1] [--depth 6] [--nodes 600] [--force] [--no-resume]
 Per pad, PAD 0 FIRST (a pad-0 kill is s0-only, WINDOW-PENDING; the window pad follows): stage 0 (A202 closed form +
 A203 CSP, cached), then the coarse tree (tree211: cheap coarse internal nodes, the leaf rules at every fully named
 leaf: rule CC -> no-room + pockets -> basin clip -> Rule NS -> the exact cascade last).  One certificate per node
@@ -113,6 +113,19 @@ def a206_inherited(nid, pad, source):
     return out
 
 
+def wall_limited(d):
+    """A211g -- the pad's recorded run stopped on the WALL (or a node cap), so a fresh wall can still make progress:
+    the re-run inherits this certificate's own DEAD branches (inherit211 ranks A211 highest) and restarts exactly at
+    the alive frontier.  A DEAD pad, a stage-0 kill, and an ALIVE pad that ran out of anything but time (a start node
+    that cannot be loaded soundly, say) are FINAL: those stay cached."""
+    if not isinstance(d, dict) or d.get("stage0_kill") or d.get("verdict") == "DEAD":
+        return False
+    if d.get("wall"):
+        return True
+    return any(("wall" in str(u.get("reason") or "")) or ("node cap" in str(u.get("reason") or ""))
+               for u in (d.get("undecided") or []))
+
+
 def page_doc(doc, pg):
     doc.setdefault("cells", [FP.rect_f(c["rect"]) for c in pg.cells])
     doc.setdefault("slots", list(pg.slots))
@@ -164,8 +177,9 @@ def inherited_rows(M):
 
 def run_tree(doc, a, pad, cert, log=print):
     """PAD's run = the MERGED prior state: the inherited dead branches (final, cited) + one coarse tree per START NODE."""
-    T = FP.Trace(wall=a.wall)
-    rec, cls, row = FP.load_page(a.nid)
+    T = FP.Trace(wall=a.wall)                                     # A211g: ONE fresh clock per pad run, started HERE --
+    assert T.left() is not None and abs(T.left() - a.wall) < 1.0  # never a Trace carried over from a previous run or
+    rec, cls, row = FP.load_page(a.nid)                           # reconstructed from a snapshot's `t` (provenance only)
     start = stage209.start_of(a.nid, pad)
     basins = C.load_basins(cls, pad, QP.PADS[pad]) if pad != "zero" else []
     key = "%s_page" % pad
@@ -226,7 +240,7 @@ def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, d
             log("   start %s: SKIPPED (wall)" % (sn or {}).get("label", "R"))
             continue
         try:
-            pg, meta = (SL.load(sn, rec, cls, a.nid, T, pad, start, basins, rounds=a.rounds, log=log) if sn else
+            pg, meta = (SL.load(sn, rec, cls, a.nid, T, pad, start, basins, rounds=a.rounds, wall=a.wall, log=log) if sn else
                         (C11.CoarsePage(rec, cls, a.nid, T, pad=pad, start=start, basins=basins), dict(label="R", path=[], steps=[], applied=[])))
         except Exception as e:                                    # noqa: BLE001
             agg["verdict"] = "ALIVE"
@@ -278,8 +292,13 @@ def run_page(doc, a, cert, log=print):
     doc.setdefault("verdicts", {})
     for pad in a.pads.split(","):
         if pad in doc["verdicts"] and not a.force:
-            log("   pad %s: cached %s" % (pad, doc["verdicts"][pad]))
-            continue
+            prev = (doc.get("runs") or {}).get("%s_page" % pad) or {}
+            if not (not a.no_resume and doc["verdicts"][pad] != "DEAD" and wall_limited(prev)):
+                log("   pad %s: cached %s" % (pad, doc["verdicts"][pad]))
+                continue
+            log("   pad %s: cached %s was WALL-limited (%d undecided) -- RESUMING with a FRESH wall of %.0f s (A211g)"
+                % (pad, doc["verdicts"][pad], len(prev.get("undecided") or []), a.wall))
+            doc["verdicts"].pop(pad, None)
         s0 = stage209.stage0(a.nid, pad, log=log)
         doc["stage0"][pad] = s0
         doc["stage_reached"] = "0"
@@ -313,6 +332,8 @@ if __name__ == "__main__":
     ap.add_argument("--depth", type=int, default=6)
     ap.add_argument("--nodes", type=int, default=600)
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--no-resume", dest="no_resume", action="store_true",
+                    help="A211g: keep a cached WALL-limited ALIVE verdict instead of re-running the pad on a fresh wall")
     ap.add_argument("--no-inherit", dest="no_inherit", action="store_true", help="ignore the prior certificates and run the page from its A203 root")
     ap.add_argument("--cert-dir", dest="cert_dir", default=CERTS, help="where the certificate goes (a TEST run points this away from certs/)")
     ap.add_argument("--results", default=RES, help="the jsonl the row is appended to (a TEST run points this away from results/)")

@@ -81,8 +81,24 @@ def apply_step(pg, br, log=print):
     return "%s <- %s" % (br.get("slot"), br.get("rows"))
 
 
-def load(sn, rec, cls, nid, T, pad, start, basins, rounds=1, log=print):
+def fresh_clock(T, wall):
+    """A211g -- the start node must run on the RUN's own clock.  The recorded snapshot carries the elapsed time `t` of
+    the run that produced it (and a resumed page carries a spent certificate): if any of that reached pg.T the loaded
+    node would be out of time the instant it is built, and every start node would come back "undecided (wall) at the
+    fully named leaf" in seconds.  So: T is the caller's fresh Trace, T.wall is the run's wall, and the snapshot's `t`
+    is kept in meta as PROVENANCE only."""
+    if wall is None:
+        return
+    if T.wall is None or abs(float(T.wall) - float(wall)) > 1e-6:
+        raise ValueError("startload211: the Trace carries wall %r, not the run's wall %r" % (T.wall, wall))
+    if T.out_of_time():
+        raise ValueError("startload211: the Trace handed in is already spent (%.1f s of %.1f s): it belongs to an "
+                         "earlier run -- a start node needs a FRESH Trace for this run's wall" % (T.now(), float(wall)))
+
+
+def load(sn, rec, cls, nid, T, pad, start, basins, rounds=1, wall=None, log=print):
     """-> (CoarsePage at the start node, meta).  pg.dead is set when the replay's own coarse cascade already kills it."""
+    fresh_clock(T, wall)
     f = os.path.join(ROOT, sn["cert"])
     doc = json.load(open(f, encoding="utf-8"))
     node = find(doc, sn["run"], pad, sn["anc_label"])
@@ -101,6 +117,8 @@ def load(sn, rec, cls, nid, T, pad, start, basins, rounds=1, log=print):
     meta = dict(cert=sn["cert"], run=sn["run"], camp=sn["camp"], anc_label=sn["anc_label"], anc_steps=sn["anc_steps"],
                 label=sn["label"], path=sn["path"], n_steps=sn["n_steps"], loaded=loaded, applied=applied,
                 padding=dict(rect=float(L6.EPS_R), tilt_deg=L6.EPS_D), snapshot_round=(node.get("snapshot") or {}).get("round"),
-                recorded=dict(verdict=node.get("verdict"), depth=node.get("depth"), seconds=node.get("seconds")),
+                recorded=dict(verdict=node.get("verdict"), depth=node.get("depth"), seconds=node.get("seconds"),
+                              t=node.get("t")),                 # A211g: the recorded elapsed time -- PROVENANCE ONLY,
+                clock=dict(wall=T.wall, spent_at_load=round(T.now(), 2)),   # never the running clock (fresh_clock)
                 dead_on_replay=pg.dead)
     return pg, meta
