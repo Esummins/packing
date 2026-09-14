@@ -1,6 +1,8 @@
 """A211 (A209 copy; the closure ledgers include A209's and A211's) -- the page loader for BOTH populations, installed over A198's FP.load_page at run time (the library's Stage0 /
 QPage / load206 all call FP.load_page(nid)):
   * a gallery page (docs/shadows/a57v4/review_a57v4.csv, A198's loader, unchanged);
+  * an A60 trump5 frontier record: nid = <tag>, the record attempts/A60-trump5-campaign/results/nodes/<tag>.json in
+    the same geo178 format (A211g: stage209 re-installs THIS loader at import time, so it must answer for A60 too);
   * an A57 tree record: nid = <id> for the G1 family, <id>__L1 for the L1 family (the same id is a DIFFERENT node in the
     two families -- A137 C.3), the record attempts/A57-shadow-trees/results/tree/<tree>/<id>.json in the record format
     geo178.load_record reads (hyp.boxes / hyp.cores: the class pins + H's box); an alive row with no record file on
@@ -20,6 +22,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 ATT = os.path.join(ROOT, "attempts")
 A57 = os.path.join(ATT, "A57-shadow-trees", "results")
+A60 = os.path.join(ATT, "A60-trump5-campaign", "results")      # A212/A211g: the trump5 frontier records
 LEDGER = os.path.join(HERE, "..", "results", "superseded_by_coarsetree_A211.jsonl")
 for _p in (os.path.join(ATT, "A198-fastprop", "code"), os.path.join(ATT, "A178-gallery-geometry", "code")):
     if _p not in sys.path:
@@ -73,6 +76,48 @@ def trees():
     return _TREES
 
 
+# ---------------------------------------------------------------- A60's trump5 frontier (A211g)
+# stage209 re-installs THIS loader at import time (import-time install()), so whichever of load211 / load212 ends up
+# on FP.load_page must resolve an A60 frontier node -- otherwise nid "f1_L02_0007" falls through to the A57 tree
+# branch and dies in synth_record with KeyError 'f1_L02_0007_interior_G1'.  A60's record is
+# attempts/A60-trump5-campaign/results/nodes/<tag>.json, in the same hyp.boxes / hyp.cores format geo178.load_record
+# reads (tree60.py / substrat.py write it); the node's row is the first a60_*.jsonl row carrying the tag.
+_A60ROWS = None
+
+
+def a60_record(nid):
+    return os.path.join(A60, "nodes", "%s.json" % nid)
+
+
+def a60_rows():
+    """tag -> the first A60 row (a60_*.jsonl) with its file; and the set of tags PASSed anywhere.  Cached."""
+    global _A60ROWS
+    if _A60ROWS is None:
+        first, passed = {}, set()
+        for f in sorted(glob.glob(os.path.join(A60, "a60_*.jsonl"))):
+            for r in jl(f):
+                t = r.get("tag")
+                if not t:
+                    continue
+                if str(r.get("verdict", "")).startswith("PASS"):
+                    passed.add(t)
+                elif t not in first:
+                    first[t] = dict(r, _file=os.path.basename(f))
+        _A60ROWS = (first, passed)
+    return _A60ROWS
+
+
+def a60_page(nid, f):
+    """(rec, cls, row) for an A60 trump5 frontier node (load212's row, kept identical)."""
+    rec = G.load_record(os.path.relpath(f, ROOT))
+    first, _ = a60_rows()
+    r = first.get(nid, {})
+    row = dict(node=nid, camp="A60", cls="trump5_j0", level=str(1 + int(r.get("depth_j") or 0)), family="",
+               record=os.path.relpath(f, ROOT).replace("\\", "/"), tree="trump5_j0", tau=r.get("tau"),
+               budget=r.get("budget"), verdict=str(r.get("verdict")), a60_kind=r.get("kind"))
+    return rec, G.class_of_record(rec), row
+
+
 def split_nid(nid):
     """-> (id, family): 'k5_11_interior_Y0041_D00' -> G1; 'k5_16_interior_Y0083__L1' -> L1."""
     fam = "G1"
@@ -116,6 +161,9 @@ def load_page(nid, csv_path=None):
             return _ORIG(nid, csv_path)
     except KeyError:
         pass
+    f60 = a60_record(nid)                                      # A211g: A60's trump5 frontier before the A57 tree
+    if "__" not in nid and os.path.exists(f60):                # (load212.load_page's own answer, to the letter)
+        return a60_page(nid, f60)
     path, key, i = record_path(nid)
     if os.path.exists(path):
         rec = G.load_record(os.path.relpath(path, ROOT))

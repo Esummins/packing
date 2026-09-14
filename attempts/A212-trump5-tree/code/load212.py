@@ -21,23 +21,8 @@ GALLERY = ["c0_Y0169", "c0_Y0171", "c0_Y0215", "c0_Y0223", "c0_Y0255", "c0_Y0257
 jl = L.jl
 
 
-def a60_record(nid):
-    return os.path.join(A60, "nodes", "%s.json" % nid)
-
-
-def a60_rows():
-    """tag -> the first A60 row (a60_*.jsonl) with its file; and the set of tags PASSed anywhere."""
-    first, passed = {}, set()
-    for f in sorted(glob.glob(os.path.join(A60, "a60_*.jsonl"))):
-        for r in jl(f):
-            t = r.get("tag")
-            if not t:
-                continue
-            if str(r.get("verdict", "")).startswith("PASS"):
-                passed.add(t)
-            elif t not in first:
-                first[t] = dict(r, _file=os.path.basename(f))
-    return first, passed
+a60_record = L.a60_record          # A211g: ONE reader for A60's frontier records (load211 answers for them too,
+a60_rows = L.a60_rows              # because stage209 re-installs load211 over this module at import time)
 
 
 def a60_ledger_dead():
@@ -75,13 +60,7 @@ def load_page(nid, csv_path=None):
     f = a60_record(nid)
     if not os.path.exists(f):
         raise KeyError(nid)
-    rec = G.load_record(os.path.relpath(f, ROOT))
-    cls = G.class_of_record(rec)
-    first, _ = a60_rows()
-    r = first.get(nid, {})
-    row = dict(node=nid, camp="A60", cls="trump5_j0", level=str(1 + int(r.get("depth_j") or 0)), family="", record=os.path.relpath(f, ROOT).replace("\\", "/"),
-               tree="trump5_j0", tau=r.get("tau"), budget=r.get("budget"), verdict=str(r.get("verdict")), a60_kind=r.get("kind"))
-    return rec, cls, row
+    return L.a60_page(nid, f)
 
 
 def install():
