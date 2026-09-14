@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 10:38:45
+# A212 progress -- 2026-09-14 10:38:49
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
