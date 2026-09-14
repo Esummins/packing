@@ -81,8 +81,7 @@ def main():
             # on every later gallery-pass node (coordinator, 2026-09-14) -- the frontier queue itself is not re-run
             L2.append("* **STOP: the projection exceeds the cap -- the workers exit after their current node**")
             os.makedirs(os.path.dirname(STOP), exist_ok=True)
-            open(os.path.join(HERE, "..", "logs", "FRONTIER_STOPPED"), "w").write("frontier stop recorded
-")
+            open(os.path.join(HERE, "..", "logs", "FRONTIER_STOPPED"), "w").write("frontier stop recorded")
             open(STOP, "w").write("projection %.1f CPU-h > %.0f at %s\n" % (proj, CAP_CPUH, time.strftime("%Y-%m-%d %H:%M:%S")))
     else:
         L2.append("* frontier: not started; the census has %d alive nodes (%s)" % (len(census), dict(collections.Counter(c["tree"] for c in census))))
