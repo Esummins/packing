@@ -104019,10 +104019,10 @@
        "A1"
       ]
      ],
-     "verdict": "INTERNAL",
-     "clip": null,
-     "killed_round": null,
-     "leaf": null,
+     "verdict": "DEAD",
+     "clip": "EmptyBox",
+     "killed_round": 1,
+     "leaf": "no-room at R.1.4.9 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf",
      "reason": null,
      "seconds": 58.5,
      "t": 1340.9,
@@ -109189,7 +109189,112 @@
        "n_before": 448,
        "n_after": 96
       }
-     ]
+     ],
+     "trump_gate": {
+      "contains": false,
+      "g": null,
+      "assignment": null,
+      "pins": null,
+      "checks": [
+       {
+        "g": "id",
+        "fail": "no assignment",
+        "detail": []
+       },
+       {
+        "g": "rot90",
+        "fail": "pins"
+       },
+       {
+        "g": "rot180",
+        "fail": "pins"
+       },
+       {
+        "g": "rot270",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_x",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_y",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_d",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_ad",
+        "fail": "pins"
+       }
+      ],
+      "seconds": 0.001,
+      "n_roles": 5,
+      "pre": {
+       "contains": false,
+       "g": null
+      }
+     },
+     "cc": {
+      "n_rows": 1,
+      "seconds": 0.001,
+      "rows": [
+       {
+        "nid": "c0_Y0788",
+        "pad": "zero",
+        "lam": 1.0,
+        "label": "R.1.4.9",
+        "slot": "TL(0,0)",
+        "corner": "TL",
+        "role": "F4",
+        "all_near": false,
+        "role_box": [
+         1.075417,
+         1.650834,
+         3.145972,
+         3.377084,
+         0.0,
+         90.0
+        ],
+        "n_classes": 22,
+        "n_near": 2,
+        "dead_classes": 0,
+        "n_band": 66,
+        "cells_before": [
+         3,
+         4
+        ],
+        "cells_killed": [],
+        "cells_left": [
+         3,
+         4
+        ],
+        "roles_excluded": [],
+        "named_meeters": [
+         "F3"
+        ],
+        "verdict": "ALIVE",
+        "why": null,
+        "verifier": "[C: closed-form trace; Lemma CORNER-COVER (attempts/A210-corner-cover/notes/corner_cover.md)] -- no verifier clause"
+       }
+      ]
+     },
+     "noroom": {
+      "label": "R.1.4.9",
+      "depth": 3,
+      "k": 10,
+      "m": 1,
+      "verdict": "DEAD",
+      "clip": "EmptyBox",
+      "bound": null,
+      "cn_bound": null,
+      "n_pockets": 0,
+      "pockets": [],
+      "seconds": 1.1,
+      "reason": "EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf"
+     }
     }
    ],
    "basins": [],
@@ -109243,7 +109348,7 @@
     "max_frac": 0.5
    },
    "n_nodes": 26,
-   "seconds": 1340.9
+   "seconds": 1344.0
   }
  },
  "cls": "trump5",
