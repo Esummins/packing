@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-14 09:47` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-14 09:57` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -11,7 +11,7 @@ python docs/shadows/status_gallery.py --dry-run  # print the plan, write nothing
 
 ## Residue left
 
-Of the 71 gallery pages the PI reviews, **39 are still ALIVE and 32 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 28 alive / 32 dead; , out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
+Of the 71 gallery pages the PI reviews, **38 are still ALIVE and 33 are now DEAD**. `k0v4` is 11 alive / 0 dead; `a57v4` is 27 alive / 33 dead; , out of 1,693 alive A57/A60 records -- 1,590 distinct nodes, k5_11 713, k5_16 552, trump5 (A60) 325 -- and the k0 lane holds its 11 converged-alive `k0_00` cells.  So the galleries are a **3.8 % sample of the live A57/A60 board** and the whole of the k0 residue: the pages are where the residue is *looked at*, not where it is *counted* -- the count is the work-owing number above.  Nothing in either gallery is dead by an unconverged LP: every DEAD page below carries a certificate.
 
 ## Counts
 
@@ -20,8 +20,8 @@ Of the 71 gallery pages the PI reviews, **39 are still ALIVE and 32 are now DEAD
 | gallery | pages | ALIVE | DEAD |
 |---|---|---|---|
 | `k0v4` | 11 | 11 | 0 |
-| `a57v4` | 60 | 28 | 32 |
-| **total** | **71** | **39** | **32** |
+| `a57v4` | 60 | 27 | 33 |
+| **total** | **71** | **38** | **33** |
 
 ### By family (A107/A128 shadow family of the page's panel N)
 
@@ -33,7 +33,7 @@ Of the 71 gallery pages the PI reviews, **39 are still ALIVE and 32 are now DEAD
 | `K05` | 1 | 0 |
 | `K06` | 1 | 0 |
 | `K20` | 1 | 0 |
-| `S01` | 8 | 18 |
+| `S01` | 7 | 19 |
 | `S02` | 2 | 7 |
 | `S03` | 10 | 1 |
 | `S05` | 1 | 0 |
@@ -77,6 +77,7 @@ Of the 71 gallery pages the PI reviews, **39 are still ALIVE and 32 are now DEAD
 | A209 -- k5killer209 composed chain [zero pad; composed clip tree [20 nodes, depth 2, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD: R.1 TL(1,0)<-[8, 9] by FC r1; R.2.1 BL(1,0)<-[5, 6] by FC r1; R.2.2 BL(1,0)<-[5, 11] by EmptyBox r1; R.2.3 BL(1,0)<-[5, 16] by EmptyBox r1; R (s0-only; WINDOW-PENDING) | 1 |
 | A211 -- coarsetree211 coarse tree [zero pad; coarse tree [13 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD (7 inherited from prior certificates + 9 proved here): R.1 TR(0,1)<-(19,) by INHERIT; R.2.1 TR(1,0)<-(8,) by INHERIT; R.2.2 TR(1,0)<-(9,) by I (s0-only; WINDOW-PENDING) | 1 |
 | A211 -- coarsetree211 coarse tree [zero pad; coarse tree [34 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 2 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD (5 inherited from prior certificates + 24 proved here): R.1 TR(0,1)<-(14,) by INHERIT; R.2.1 BR(0,1)<-(10,) by INHERIT; R.2.2 BR(0,1)<-(11,) b (s0-only; WINDOW-PENDING) | 1 |
+| A212 -- trump5tree212 [pad 0, lam = 1; trump5 tree [9 nodes, depth 2, gate hits 0, tube leaves 0, kills by rule {'EmptyBox': 5}]]: every branch DEAD (0 inherited + 5 proved here; s0-only, lam = 1): R.1.1 BL(1,1)<-[11] by EmptyBox; R.1.2 BL(1,1)<-[16] by EmptyBox; R.1.3 BL(1,1)<-[17] by Empt | 1 |
 | A57 tree -- PASS -- case-measure-certificate-v1 in A57's own tree certs (k5_16_interior_L1) | 1 |
 
 ## Checklist -- `k0v4`: the k0 residue gallery v4 (converged-alive k0_00 cells)
@@ -101,6 +102,7 @@ Of the 71 gallery pages the PI reviews, **39 are still ALIVE and 32 are now DEAD
 |---|---|---|---|---|---|---|---|---|---|
 | [x] [`c0_Y0076.svg`](killed/c0_Y0076.svg) | `c0_Y0076` | `trump5_j0` | 1 | `S02` | **DEAD** | fastprop: A1/FC at BL(0,2): no free cell can hold a meeter (Theorem FC + Lemma A1 cells + exact reach + chord rows) | A198 | 2026-09-10 | 2.88 (rank 17) |
 | [x] [`c0_Y0175.svg`](killed/c0_Y0175.svg) | `c0_Y0175` | `trump5_j0` | 1 | `S01` | **DEAD** | guard-line clause v5 [v=0.9929, v=0.9693; tau 4.8773 < 5] | A190 | 2026-09-10 | 2.88 (rank 21) |
+| [x] [`c0_Y0258.svg`](killed/c0_Y0258.svg) | `c0_Y0258` | `trump5_j0` | 1 | `S01` | **DEAD** | trump5tree212 [pad 0, lam = 1; trump5 tree [9 nodes, depth 2, gate hits 0, tube leaves 0, kills by rule {'EmptyBox': 5}]]: every branch DEAD (0 inherited + 5 proved here; s0-only, lam = 1): R.1.1 BL(1,1)<-[11] by EmptyBox; R.1.2 BL(1,1)<-[16] by EmptyBox; R.1.3 BL(1,1)<-[17] by Empt | A212 | 2026-09-14 | 2.88 (rank 3) |
 | [x] [`c0_Y0939.svg`](killed/c0_Y0939.svg) | `c0_Y0939` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 5) |
 | [x] [`c0_Y0942.svg`](killed/c0_Y0942.svg) | `c0_Y0942` | `trump5_j0` | 1 | `S01` | **DEAD** | case-measure-certificate-v1 (exact cores, FROZEN verify_case) | A149 | 2026-09-08 | 2.88 (rank 6) |
 | [x] [`c0_Y0952.svg`](killed/c0_Y0952.svg) | `c0_Y0952` | `trump5_j0` | 1 | `S01` | **DEAD** | guard-line clause v5 [h=2.9078; tau 4.8896 < 5] | A190 | 2026-09-10 | 2.88 (rank 11) |
@@ -137,7 +139,6 @@ Of the 71 gallery pages the PI reviews, **39 are still ALIVE and 32 are now DEAD
 | [ ] [`c0_Y0223.svg`](c0_Y0223.svg) | `c0_Y0223` | `trump5_j0` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 24) |
 | [ ] [`c0_Y0255.svg`](c0_Y0255.svg) | `c0_Y0255` | `trump5_j0` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 16) |
 | [ ] [`c0_Y0257.svg`](c0_Y0257.svg) | `c0_Y0257` | `trump5_j0` | 1 | `S08` | **ALIVE** | -- | -- | -- | 2.88 (rank 13) |
-| [ ] [`c0_Y0258.svg`](c0_Y0258.svg) | `c0_Y0258` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 3) |
 | [ ] [`c0_Y0695.svg`](c0_Y0695.svg) | `c0_Y0695` | `trump5_j0` | 1 | `S02` | **ALIVE** | -- | -- | -- | 2.88 (rank 15) |
 | [ ] [`c0_Y0787.svg`](c0_Y0787.svg) | `c0_Y0787` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 4) |
 | [ ] [`c0_Y0788.svg`](c0_Y0788.svg) | `c0_Y0788` | `trump5_j0` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 12) |
@@ -187,6 +188,7 @@ Of the 71 gallery pages the PI reviews, **39 are still ALIVE and 32 are now DEAD
 * `k5_16_interior_Y0565` (tree tag `k5_16_interior_G1`) -- direct kill record, **A205** by `cliptree205 clip tree [g1 pad; 5 nodes, depth 1]: every branch of the clip tree DEAD: R.1 BR(0,1)<-[10] by FC r1; R.2 BR(0,1)<-[15] by FC r2; R.3 BR(0,1)<-[22] by EmptyBox r1; R.4 BR(0,1)<-[23] by COUNT r1`; certificate `attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0565.json`; attributed by *prior tau matched the tree record*; 1 record(s) agree.
 * `k5_16_interior_Y0719` (tree tag `k5_16_interior_G1`) -- direct kill record, **A211** by `coarsetree211 coarse tree [zero pad; coarse tree [13 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD (7 inherited from prior certificates + 9 proved here): R.1 TR(0,1)<-(19,) by INHERIT; R.2.1 TR(1,0)<-(8,) by INHERIT; R.2.2 TR(1,0)<-(9,) by I (s0-only; WINDOW-PENDING)`; certificate `attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0719.json`; attributed by *applies_to_tags (A137 fold137)*; 2 record(s) agree.
 * `k5_16_interior_Y1110` (tree tag `k5_16_interior_G1`) -- direct kill record, **A209** by `k5killer209 composed chain [g1 pad; composed clip tree [10 nodes, depth 2, 0 NS splits, 0 pocket splits, 0 inherited A206 kills]]: every branch DEAD: R.1 TR(0,1)<-[16] by EmptyBox r2; R.2.1 TR(1,0)<-[8] by FC r1; R.2.2 TR(1,0)<-[9] by EmptyBox r2; R.2.3 TR(1,0)<-[14] by EmptyBox r2; R.3.1 T`; certificate `attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y1110.json`; attributed by *applies_to_tags (A137 fold137)*; 1 record(s) agree.
+* `c0_Y0258` (tree tag `trump5_j0`) -- direct kill record, **A212** by `trump5tree212 [pad 0, lam = 1; trump5 tree [9 nodes, depth 2, gate hits 0, tube leaves 0, kills by rule {'EmptyBox': 5}]]: every branch DEAD (0 inherited + 5 proved here; s0-only, lam = 1): R.1.1 BL(1,1)<-[11] by EmptyBox; R.1.2 BL(1,1)<-[16] by EmptyBox; R.1.3 BL(1,1)<-[17] by Empt`; certificate `attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0258.json`; attributed by *single-tree camp*; 1 record(s) agree.
 * `c0_Y0939` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0939__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 * `c0_Y0942` (tree tag `trump5_j0`) -- direct kill record, **A149** by `case-measure-certificate-v1 (exact cores, FROZEN verify_case)`; certificate `attempts/A149-a57-reprice/certs/a60/c0_Y0942__exH.json`; attributed by *single-tree camp*; 2 record(s) agree.
 * `c0_Y0959` (tree tag `trump5_j0`) -- direct kill record, **A190** by `guard-line clause v5 [h=2.9078; tau 4.8896 < 5]`; certificate `attempts/A190-guardline-clause/certs/c0_Y0959.json`; attributed by *single-tree camp*; 1 record(s) agree.
@@ -245,6 +247,7 @@ Of the 71 gallery pages the PI reviews, **39 are still ALIVE and 32 are now DEAD
 | `A206 namedsplit206.jsonl` | 3 | 3 |
 | `A209 k5killer209.jsonl` | 5 | 5 |
 | `A211 coarsetree211.jsonl` | 13 | 13 |
+| `A212 trump5tree212.jsonl` | 1 | 1 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
