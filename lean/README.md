@@ -1,3 +1,15 @@
+# lean/ — START HERE (A216, 2026-09-14)
+
+1. **The theorem, readable:** `PackingCertMathlib/PackingCertMathlib/Main.lean` — `main_lower_bound`,
+   `main_value`, `main_uniqueness` (= `s(11) = ŝ`, Trump unique), a plain-language docstring, and
+   "What you must believe": the three remaining named axioms with prose/certificate pointers.
+2. **One small file per key result:** `PackingCertMathlib/PackingCertMathlib/Statements/` (statement,
+   docstring, proof IMPORTED, `#print axioms`); the obligations still in prose or certificates are
+   named axioms in `Statements/Open/` (each file a `-- OPEN:` banner + pointer).
+3. **The audit:** `lean/AUDIT.md` — every statement with the axioms it depends on and its sorry count;
+   regenerate with `python lean/audit.py` (builds `PackingCertMathlib.Main` + `.Statements`, runs
+   `scratch/Audit.lean`).  Trusted base = `propext, Classical.choice, Quot.sound` + `native_decide`.
+
 # lean/ — Lean 4 certificates for the square-packing lab
 
 Two projects:
