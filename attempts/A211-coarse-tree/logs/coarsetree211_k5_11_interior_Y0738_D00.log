@@ -1,0 +1,21 @@
+11:44:04 [f1] start k5_11_interior_Y0738_D00 wall 1800 (lab 0, free 14921 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_11_interior_Y0738_D00 at the zero pad: ALIVE in 11649 ms; kills {'H-clip': 0, 'P': 2466, 'W': 802, 'C': 458, 'M': 2172, 'L': 7, 'R': 2806, 'X': 1145}; CSP units 264 -> 264 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== k5_11_interior_Y0738_D00 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0738_D00_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [1.24, 1.31, 2.371, 2.428, 28.072, 34.592]; forced H []; 4 slots; free squares 5
+   node R          d0 root: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=0.5)
+   start R            => DEAD (1 nodes; t = 1 s of 1800.0)
+   => DEAD (zero_page) in 0.6 s: 0 start runs, 1 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 1 dead / 0 alive leaves
+   per node: R d0 DEAD EmptyBox 0.5s
+== stage 0 + CSP k5_11_interior_Y0738_D00 at the g1 pad: ALIVE in 12005 ms; kills {'H-clip': 0, 'P': 2478, 'W': 820, 'C': 458, 'M': 2188, 'L': 7, 'R': 2883, 'X': 1177}; CSP units 264 -> 264 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== k5_11_interior_Y0738_D00 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0738_D00_g1_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 0 dead branches (final) + 0 start nodes []; H [1.24, 1.31, 2.371, 2.428, 28.072, 34.592]; forced H []; 4 slots; free squares 5
+   node R          d0 root: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=0.1)
+   start R            => DEAD (1 nodes; t = 0 s of 1800.0)
+   => DEAD (g1_page) in 0.1 s: 0 start runs, 1 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 1 dead / 0 alive leaves
+   per node: R d0 DEAD EmptyBox 0.0s
+== k5_11_interior_Y0738_D00: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 6, 'misses': 6, 'entries': 6}; clip {'hits': 16, 'misses': 16, 'entries': 16}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 12, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 2}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 6, 'obs_misses': 6, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 6, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
