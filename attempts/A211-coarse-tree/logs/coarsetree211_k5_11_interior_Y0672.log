@@ -375,3 +375,35 @@
    no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 9683, 'obs_misses': 2382, 'build_hits': 0, 'build_misses': 37, 'bisect_hits': 0, 'bisect_misses': 35, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 2325, 'build_entries': 38, 'bisect_entries': 35, 'on': True}
    gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
 15:06:24 [p2a] k5_11_interior_Y0672 == k5_11_interior_Y0672: g1 ALIVE | pad0 ALIVE    rc=0 3478s
+16:54:20 [p3a] start k5_11_interior_Y0672 wall 1800 (lab 7, free 14626 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   pad zero: cached ALIVE was WALL-limited (11 undecided) -- RESUMING with a FRESH wall of 1800 s (A211g)
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0672_zero_s0.json)
+   INHERIT k5_11_interior_Y0672 pad zero: 3 prior trees, 60 paths, 6 branches inherited DEAD (final, with their certificates), 12 start nodes (0 from the A203 root)
+== k5_11_interior_Y0672 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0672_zero_s0.json; basins []; INHERIT 6 dead branches (final) + 12 start nodes ['R.3.1.2.p2', 'R.3.1.2.p3', 'R.3.1.4.p1.1.1.1.1.2', 'R.3.1.4.p1.1.1.1.2', 'R.3.1.4.p1.1.1.2', 'R.3.1.4.p1.1.2', 'R.3.1.4.p1.2', 'R.3.1.4.p2', 'R.3.1.5', 'R.3.2']; H [2.358, 2.498, 2.358, 2.498, 0.0, 14.25]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1          TR(0,0)<-(19,)  [A205 tree: every branch DEAD] attempts/A205-clip-tree/certs/cliptree205_k5_11_interior_Y0672.json
+   INHERITED DEAD R.2          TR(0,0)<-(23,)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0672.json
+   INHERITED DEAD R.3.1.1      TL(1,0)<-(7,)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0672.json
+   INHERITED DEAD R.3.1.2.p1   (1.437499, 1.879801, 1.437499, 1.864168)<-(0,)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0672.json
+   INHERITED DEAD R.3.1.3      TL(1,0)<-(9,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0672.json
+   INHERITED DEAD R.3.1.4.p1.1.1.1.1.1 F1<-x  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0672.json
+   node R.3.1.2.p2 d0 root: INTERNAL (7.0 s, 1 rounds; t=7.5)
+   no-room (k=10, m=1): UNDECIDED in 121 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma POCKET at R.3.1.2.p2: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.1.2.p2.p1 d1 pocket<-[0]: DEAD by EmptyBox r1 (3.4 s, 1 rounds; t=133.8)
+   node R.3.1.2.p2.p2 d1 pocket<-[1]: INTERNAL (4.6 s, 1 rounds; t=138.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.3.1.2.p2.p2: split F4 at TR(0,0) (meeting fraction 0.03225; alive rows []; named ['F1', 'F4', 'F5', 'H'])
+   node R.3.1.2.p2.p2.1 d2 TR(0,0)<-None: INTERNAL (6.4 s, 1 rounds; t=146.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.3.1.2.p2.p2.1: split F5 at TR(0,0) (meeting fraction 0.182273; alive rows []; named ['F1', 'F4', 'F5', 'H'])
+   node R.3.1.2.p2.p2.1.1 d3 TR(0,0)<-None: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=147.8)
+   node R.3.1.2.p2.p2.1.2 d3 TR(0,0)<-None: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=148.7)
+   node R.3.1.2.p2.p2.2 d2 TR(0,0)<-None: INTERNAL (3.2 s, 1 rounds; t=152.4)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.3.1.2.p2.p2.2: split F5 at TR(0,0) (meeting fraction 0.182273; alive rows []; named ['F1', 'F5', 'H'])
+   node R.3.1.2.p2.p2.2.1 d3 TR(0,0)<-None: DEAD by S-CLIP r1 (4.6 s, 1 rounds; t=157.7)
+   node R.3.1.2.p2.p2.2.2 d3 TR(0,0)<-None: DEAD by S-CLIP r1 (1.1 s, 1 rounds; t=159.3)
+   start R.3.1.2.p2   => DEAD (9 nodes; t = 160 s of 1800.0)
+   start R.3.1.2.p3: applied step 1/1 -- POCKET [3.088, 3.4396, 1.4375, 2.554] as F4
+   node R.3.1.2.p3 d0 root: INTERNAL (2.8 s, 1 rounds; t=168.1)
