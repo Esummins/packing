@@ -239,3 +239,19 @@ recorded in the node's path key as `("rsplit", role, dim, m, side)`, so Lemma IN
 a split child whose path a prior certificate closed is inherited DEAD, and a certificate written here can be inherited
 later.  The tree's depth cap counts only the row / NS / pocket steps (a split is charged to its own per-role cap), so
 splitting cannot be starved by the depth cap nor run away past 4 per role.
+
+**A211f correction (2026-09-14): that inheritance did not actually work, and the failure was loud.**  A role split is
+recorded like every other branch -- `branch_slot` = the role, `branch_rows` = one entry per branch -- but its entry is
+a printable LABEL (`"t<=53.1301"`), not a list of row indices, and the exact split lives in the parent's `rsplit`
+record (role, dim, `m` as an exact rational string) instead.  `inherit211.branches_of` read the label as a list of
+rows, so `list("t<=53.1301")` became ten one-character "rows" with `kind: "pair"`, the merged path key of a split
+child was a tuple of characters rather than `("rsplit", role, dim, m, side)` -- so a split branch closed by a prior
+certificate was NEVER recognised as the same hypothesis -- and `startload211` handed the ten characters to
+`tree205b.apply_branch`, which indexed `pg.cells` with a string and raised
+`TypeError('list indices must be integers or slices, not str')`.  On k5_11_interior_Y0036_D07 that, and nothing
+geometric, is why the page stayed ALIVE: two of its five start nodes (R.1.4.3.1.2, R.1.4.3.2) could not be loaded in
+either of A211e's runs.  `inherit211.rsplit_branch` now rebuilds the branch from the parent's `rsplit` record with
+exactly `tree211.step_key`'s key, `startload211.apply_step` applies it with `rsplit211.apply_rsplit` (an empty half
+raises, and the start node is then left undecided rather than guessed), and `code/test_inherit211.py` pins it: the
+merge over every page's certificates on both pads, with every replay step checked against what the appliers accept,
+and `--load` loading every start node whose path carries a role split.
