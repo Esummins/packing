@@ -786,3 +786,5 @@ attempts/A206-named-split/code/queue206.sh <queue file>` (one worker per file; `
 auditor, one at a time within the 3-process cap).
 
 **A211 fold-in (2026-09-12 evening):** the coarse tree's window-pad (g1) kills of A57 tree ids land in `attempts/A211-coarse-tree/results/superseded_by_coarsetree_A211.jsonl` (the A137 / A149 / A209 ledger format: id, applies_to_tags = the tree, prior verdict RETAINED, closes_subtree by Lemma K1; `[C: closed-form / library clip trace + the leaf lemma]`, no verifier clause) — fold it like A209's `superseded_by_k5killer_A209.jsonl` before any A57 resume; A57's own files are never written by A211.
+
+**A212 fold-in (2026-09-14):** the trump5 tree's pad-0 (s0-only, lam = 1) kills of A60 nodes are folded into `attempts/A212-trump5-tree/results/superseded_by_trump5tree_A212.jsonl` (camp A60, applies_to_tags [trump5_j0], the currency of A60's own s0 certificates); TRUMP-TUBE verdicts are uniqueness leaves, not kills, and are not folded.  The gate is false on every alive trump5 record (the Trump-containing residue was A60's ladder, discharged by A60/A83).

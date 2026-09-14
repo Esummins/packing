@@ -101,4 +101,35 @@ the ladder node pinning Trump's square 7) contains a Trump image at the root; th
 square of any D4 image (A60's `trump_realized` = False on every alive record agrees), so on them the gate is false
 at every node and the tree is A211's pad-0 tree with the sharper rules.  The test of s.6 measures both.
 
-## 6. [M] c0_Y1033 at wall 900 s -- filled after the test (see results/progress.md and the report)
+## 6. [M] The tests (logs/test_c0_Y1033_zero.log, logs/smoke_f1.log, logs/test_synth_trump_f1.log)
+
+**c0_Y1033, pad 0, wall 900 s** (`certs/trump5tree212_c0_Y1033.json`, the first row of `results/trump5tree212.jsonl`):
+stage 0 (A203's Stage0 + CSP computed here, 53 s: 472 CSP units alive, no forced H); the tree ALIVE at the wall with
+10 nodes, depth 4: R 73 s / Rr1 16 / R.1 = BL(1,1) row 21 / R.1.1 DEAD EmptyBox 18 / R.1.2 32 then Lemma POCKET at
+k = 9 (3 pockets) / R.1.2.p1 DEAD EmptyBox 81 / R.1.2.p2 95 / R.1.2.p2.1 DEAD REACH 98 / R.1.2.p2.2 DEAD by rule CC 76 /
+R.1.2.p3 ALIVE (wall) 82; R.1.3, R.1.4, R.2, R.3, R.4 undecided (wall).  Kills per rule: EmptyBox 2, REACH 1, CC 1.
+GATE decisions: 17 checks (every node before and after its cascade), 0 hits, 0.024 s in total -- the page holds no
+D4 image of z-hat at any node (s.5), so the tree ran A211's rules unchanged at pad 0 and no tube leaf was reachable.
+
+**f1_L10_0003, pad 0, wall 240 s (smoke, scratch certificate; the launcher redoes it at 1,800 s):** its record has TWO
+H boxes (H0 = Trump's square 7 within 8e-4, H1 = A60's ladder box [2.419, 2.428] x [2.629, 2.637] x [39.5, 41.1] deg
+which does NOT hold square 9 at (2.4365, 2.6238)), so the root gate is true on the record's boxes and FALSE after the
+first cascade (H1's pieces hold no image square): the page contains no Trump image; the tree killed it in 193 s --
+R.1 DEAD by REACH after Rule NS (F3 at BL(1,1)), R.2 -> Lemma ROLE-SPLIT on F3's tilt -> R.2.1 / R.2.2 DEAD EmptyBox.
+(The 2-H record needed one change in the copied chain: `stage209.start_of` / `poly204.load_start` read the start's H
+box under the first H key, `H0`, when there is no `H`.)
+
+**The synthetic Trump-containing page** (f1_L10_0003 with H1 REPLACED by a box of half-width 0.02 / 2 deg around
+square 9, `scratchpad/synth_trump.py`, wall 900 s): the gate holds at the root and after the cascade with the
+assignment {H0: 7, H1: 9, F1: 6, F2: 10}; after two refresh rounds all 11 squares are named ({F3: 4, F4: 8} added) and
+the tube check runs: NOT fitted (worst F3, 475 x r_theta: the coarse pieces keep the full tilt range).  The aligned
+splits follow: R -> R.1 (F3 y <= 2.534, the image side, gated, 65 s) -> R.1.1 (F3 t <= 89.88, gated, 86 s) -> R.1.1.1
+(F1 t <= 40.06 = the NON-image half, ungated: rule CC no kill, A211's ROLE-SPLIT on F3 45 s, then the exact cascade
+581 s -> ALIVE at the wall).  958 s: 8 nodes, 5 gated, 3 aligned cuts, 0 tube leaves, 0 kills, 0 gate conflicts.
+**The depth needed:** the pieces of a gated node do not contract by themselves (a coarse round leaves F3 at the full
+tilt range and F1 at 40 x r_theta), so the tube is reached only after ~36 aligned cuts (2 per coordinate x 3 x 6
+non-pin roles), i.e. ~36 gated nodes at 30-90 s each PLUS 36 sibling subtrees each of which must DIE by the leaf
+rules -- and the one sibling run here (R.1.1.1: F1 tilted 0.12 deg below the image's) did not die in 700 s.  So on a
+Trump-containing page the tube leaf is reachable in principle (the gate holds along the whole path, no conflict) but
+not within a 1,800 s wall by aligned cuts alone: the near-Trump siblings need a contraction lever (A60's LP ladder /
+an A36-type basin clip around the image), which is exactly where A60/A83 discharged the real Trump residue.  [M]

@@ -159,7 +159,7 @@ def run_page(doc, a, cert, log=print):
     doc.setdefault("stage0", {})
     doc.setdefault("verdicts", {})
     for pad in a.pads.split(","):
-        if pad in doc["verdicts"] and not a.force:
+        if pad in doc["verdicts"] and not a.force and doc["verdicts"][pad] != "ALIVE":      # a cached ALIVE (a shorter wall) is re-run; DEAD / TRUMP-TUBE stay
             log("   pad %s: cached %s" % (pad, doc["verdicts"][pad]))
             continue
         s0 = stage209.stage0(a.nid, pad, log=log)
