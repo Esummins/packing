@@ -148,7 +148,10 @@ class Tree211(N9.Tree209):
                 self.kill(label, depth, res["clip"], "no-room at %s (k=%d, m=%d; A189 Lemma 1%s on the role boxes): %s" % (
                     label, res["k"], res["m"], " + Lemma CN" if res["clip"] == "NOROOM-CN" else "", res["reason"]))
                 return "DEAD"
-            if res["m"] >= 2 and res["pockets"] and not caps and not pg.T.out_of_time():
+            # PI 2026-09-14 16:40 (Y0130 R.3.1.1.p3.2): with m = 1 the LAST square's centre lies in one of the pockets
+            # (A189's bisection certifies every centre outside them dead), so branch the 11th square into each pocket
+            # too -- the child is fully named (11 roles) and the cascade decides; no lane cover needed (Lemma POCKET, m >= 1)
+            if res["m"] >= 1 and res["pockets"] and not caps and not pg.T.out_of_time():
                 self.pocket_branches(depth, label, res["pockets"], res)
                 return "BRANCHED"
         if pg.all_basins and not getattr(pg, "basin_done", False):                # (c) the basin clip
@@ -209,7 +212,7 @@ class Tree211(N9.Tree209):
         pg = self.pg
         self.pocket_splits += 1
         self.nodes[-1].update(branch_slot="pocket", n_branches=len(pk), branch_rows=[[j] for j in range(len(pk))], pockets=pk, verdict="INTERNAL", reason=None)
-        self.log("   Lemma POCKET at %s: %d pockets (k=%d, m=%d): the 10th square instantiated in each" % (label, len(pk), res["k"], res["m"]))
+        self.log("   Lemma POCKET at %s: %d pockets (k=%d, m=%d): the next square instantiated in each" % (label, len(pk), res["k"], res["m"]))
         st = N6.save_state(pg)
         for j, pocket in enumerate(pk):
             lab = "%s.p%d" % (label, j + 1)

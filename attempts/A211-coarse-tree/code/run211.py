@@ -124,8 +124,13 @@ def wall_limited(d):
         return False
     if d.get("wall"):
         return True
-    return any(("wall" in str(u.get("reason") or "")) or ("node cap" in str(u.get("reason") or ""))
-               or ("could not be loaded soundly" in str(u.get("reason") or "")) for u in (d.get("undecided") or []))
+    if any(("wall" in str(u.get("reason") or "")) or ("node cap" in str(u.get("reason") or ""))
+           or ("could not be loaded soundly" in str(u.get("reason") or "")) for u in (d.get("undecided") or [])):
+        return True
+    # PI 2026-09-14: a leaf left "every forced slot has two named meeters ... no-room UNDECIDED (k=10, m=1)" is now
+    # decidable by Lemma POCKET at m = 1 (the 11th square branched into the pockets): re-run such pads too
+    return any(("no-room UNDECIDED" in str(u.get("reason") or "")) or ("undecided leaf" in str(u.get("reason") or ""))
+               for u in (d.get("undecided") or []))
 
 
 def page_doc(doc, pg):
