@@ -1,0 +1,10 @@
+09:51:36 audit c0_Y0255 zero_page R.1.1r1
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+c0_Y0255 zero_page leaf R.1.1r1: FC at TR(0,1): at most 1 distinct non-pin meeter(s) (H provably misses; roles ['F3']; anonymous cap 0 by A1: 0 alive cell(s))
+  parent snapshot R.1 (round 1); H forced at []; roles {'F1': ['BL(0,2)', 'TL(0,0)'], 'F2': ['TL(0,0)'], 'F3': ['BR(0,1)', 'TR(1,0)'], 'F4': ['BR(0,1)'], 'H': []}; cells {'F1': 3, 'F2': -1, 'F3': 17, 'F4': -1}; misses {}
+  role H (40 pieces of the parent's snapshot): 282 admissible poses (slots [], misses [])
+  role F1 (7 pieces of the parent's snapshot): 46 admissible poses (slots ['BL(0,2)', 'TL(0,0)'], misses [])
+  role F2 (grid over its hull box (tilt 0.0-90.0)): 4000 admissible poses (slots ['TL(0,0)'], misses [])
+  role F3 (grid over its hull box in cell 17 (tilt 44.22-69.02)): 192 admissible poses (slots ['BR(0,1)', 'TR(1,0)'], misses [])
+  role F4 (grid over its hull box (tilt 41.11-64.01)): 32 admissible poses (slots ['BR(0,1)'], misses [])
+  FC kill at TR(0,1): a refutation needs TWO distinct non-pin meeters of TR(0,1) -- the roles that meet it plus anonymous squares sampled over its window (27469 admissible)
