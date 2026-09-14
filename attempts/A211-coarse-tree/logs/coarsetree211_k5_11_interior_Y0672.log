@@ -99,3 +99,83 @@
    no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 0, 'obs_misses': 0, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 0, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
    gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
 11:45:27 [p2b] k5_11_interior_Y0672 == k5_11_interior_Y0672: g1 ALIVE | pad0 ALIVE    rc=0 4s
+14:08:26 [p2a] start k5_11_interior_Y0672 wall 1800 (lab 5, free 5181 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   pad zero: cached ALIVE was WALL-limited (8 undecided) -- RESUMING with a FRESH wall of 1800 s (A211g)
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0672_zero_s0.json)
+   INHERIT k5_11_interior_Y0672 pad zero: 3 prior trees, 29 paths, 6 branches inherited DEAD (final, with their certificates), 8 start nodes
+== k5_11_interior_Y0672 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0672_zero_s0.json; basins []; INHERIT 6 dead branches (final) + 8 start nodes ['R.3.1.2.p2.2', 'R.3.1.2.p3.2', 'R.3.1.3', 'R.3.1.4', 'R.3.1.5', 'R.3.2', 'R.3.3', 'R.3.4']; H [2.358, 2.498, 2.358, 2.498, 0.0, 14.25]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1          TR(0,0)<-(19,)  [A205 tree: every branch DEAD] attempts/A205-clip-tree/certs/cliptree205_k5_11_interior_Y0672.json
+   INHERITED DEAD R.2          TR(0,0)<-(23,)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0672.json
+   INHERITED DEAD R.3.1.1      TL(1,0)<-(7,)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0672.json
+   INHERITED DEAD R.3.1.2.p1   (1.437499, 1.879801, 1.437499, 1.864168)<-(0,)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0672.json
+   INHERITED DEAD R.3.1.2.p2.1 TR(0,0)<-F4  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0672.json
+   INHERITED DEAD R.3.1.2.p3.1 TR(0,0)<-F4  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0672.json
+   node R.3.1.2.p2.2 d0 root: INTERNAL (6.8 s, 1 rounds; t=7.1)
+   no-room (k=10, m=1): UNDECIDED in 122 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.3.1.2.p2.2: bisect F4 on x at 1.951614 (extents (0.90323, 0.140425), tilt 90.0 deg, core non-empty, 52 piece(s); split 1 of 4)
+   node R.3.1.2.p2.2.1 d1 F4<-['x<=1.951614']: INTERNAL (10.2 s, 1 rounds; t=140.6)
+   node R.3.1.2.p2.2.1 d1: DEAD by CC -- rule CC at R.3.1.2.p2.2.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an inte
+   node R.3.1.2.p2.2.2 d1 F4<-['x>=1.951614']: DEAD by EmptyBox r1 (5.3 s, 1 rounds; t=147.6)
+   start R.3.1.2.p2.2 => DEAD (3 nodes; t = 148 s of 1800.0)
+   start R.3.1.2.p3.2: NOT LOADED (KeyError('node R.3.1.2.p3.2s carries no snapshot')) -- the pad stays ALIVE
+   start R.3.1.3: applied step 1/1 -- TL(1,0) <- [9]
+   node R.3.1.3    d0 root: INTERNAL (3.8 s, 1 rounds; t=157.7)
+   no-room (k=9, m=2): UNDECIDED in 19 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.899 > 0.000 (no lane cove)
+   Lemma POCKET at R.3.1.3: 2 pockets (k=9, m=2): the 10th square instantiated in each
+   node R.3.1.3.p1 d1 pocket<-[0]: INTERNAL (7.7 s, 1 rounds; t=184.9)
+   no-room (k=10, m=1): ERROR in 12 s (0 pockets; RuntimeError('polycore: no certified polygon for B([1.363,1.802]x[1.500,2.402]x[)
+   Rule NS at R.3.1.3.p1: split F4 at TL(1,0) (meeting fraction 0.173084; alive rows []; named ['F3', 'F4', 'H'])
+   node R.3.1.3.p1.1 d2 TL(1,0)<-None: INTERNAL (5.8 s, 1 rounds; t=203.4)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.3.1.3.p1.1: bisect F1 on t at 53.1301 (extents (0.575418, 0.575418), tilt 90.0 deg, core non-empty, 63 piece(s); split 1 of 4)
+   node R.3.1.3.p1.1.1 d3 F1<-['t<=53.1301']: INTERNAL (8.8 s, 1 rounds; t=334.2)
+   node R.3.1.3.p1.1.1 d3: DEAD by CC -- rule CC at R.3.1.3.p1.1.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an inte
+   node R.3.1.3.p1.1.2 d3 F1<-['t>=53.1301']: INTERNAL (7.7 s, 1 rounds; t=342.7)
+   node R.3.1.3.p1.1.2 d3: DEAD by CC -- rule CC at R.3.1.3.p1.1.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an inte
+   node R.3.1.3.p1.2 d2 TL(1,0)<-None: INTERNAL (3.9 s, 1 rounds; t=347.3)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.3.1.3.p1.2: bisect F4 on y at 1.940748 (extents (0.404194, 0.881497), tilt 90.0 deg, core non-empty, 12 piece(s); split 1 of 4)
+   node R.3.1.3.p1.2.1 d3 F4<-['y<=1.940748']: INTERNAL (5.0 s, 1 rounds; t=476.6)
+   no-room (k=10, m=1): UNDECIDED in 123 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.3.1.3.p1.2.1: bisect F1 on t at 53.1301 (extents (0.575418, 0.575418), tilt 90.0 deg, core non-empty, 62 piece(s); split 1 of 4)
+   node R.3.1.3.p1.2.1.1 d4 F1<-['t<=53.1301']: INTERNAL (11.6 s, 1 rounds; t=612.9)
+   no-room (k=10, m=1): UNDECIDED in 123 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.3.1.3.p1.2.1.1: bisect F3 on t at 53.1301 (extents (0.150835, 0.153942), tilt 90.0 deg, core non-empty, 34 piece(s); split 1 of 4)
+   node R.3.1.3.p1.2.1.1.1 d5 F3<-['t<=53.1301']: INTERNAL (9.1 s, 1 rounds; t=746.4)
+   no-room (k=10, m=1): UNDECIDED in 120 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.3.1.3.p1.2.1.1.1: split F2 at BL(1,1) (meeting fraction 0.404621; alive rows []; named ['F2', 'F4', 'H'])
+   node R.3.1.3.p1.2.1.1.1.1 d6 BL(1,1)<-None: INTERNAL (6.0 s, 1 rounds; t=874.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 15 s (2 pockets; sum of pocket LANE = 0 < 1 free squares)
+   node R.3.1.3.p1.2.1.1.1.1 d6: DEAD by NOROOM -- no-room at R.3.1.3.p1.2.1.1.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): sum of pocket LANE = 0 < 1 free squares
+   node R.3.1.3.p1.2.1.1.1.2 d6 BL(1,1)<-None: INTERNAL (3.7 s, 1 rounds; t=894.3)
+   no-room (k=10, m=1): DEAD by NOROOM in 4 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.1.3.p1.2.1.1.1.2 d6: DEAD by NOROOM -- no-room at R.3.1.3.p1.2.1.1.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.1.3.p1.2.1.1.2 d5 F3<-['t>=53.1301']: INTERNAL (6.2 s, 1 rounds; t=905.6)
+   node R.3.1.3.p1.2.1.1.2 d5: DEAD by CC -- rule CC at R.3.1.3.p1.2.1.1.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an 
+   node R.3.1.3.p1.2.1.2 d4 F1<-['t>=53.1301']: INTERNAL (8.0 s, 1 rounds; t=915.2)
+   no-room (k=10, m=1): UNDECIDED in 121 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.3.1.3.p1.2.1.2: split H at TR(0,0) (meeting fraction 0.393667; alive rows [23]; named ['F1', 'H'])
+   node R.3.1.3.p1.2.1.2.1 d5 TR(0,0)<-None: INTERNAL (5.4 s, 1 rounds; t=1042.2)
+   node R.3.1.3.p1.2.1.2.1 d5: DEAD by CC -- rule CC at R.3.1.3.p1.2.1.2.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an 
+   node R.3.1.3.p1.2.1.2.2 d5 TR(0,0)<-None: INTERNAL (1.8 s, 1 rounds; t=1044.8)
+   node R.3.1.3.p1.2.1.2.2r1 d5 root<-None: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=1045.6)
+   node R.3.1.3.p1.2.2 d3 F4<-['y>=1.940748']: INTERNAL (4.3 s, 1 rounds; t=1050.1)
+   node R.3.1.3.p1.2.2 d3: DEAD by CC -- rule CC at R.3.1.3.p1.2.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an inte
+   node R.3.1.3.p2 d1 pocket<-[1]: INTERNAL (4.0 s, 1 rounds; t=1055.2)
+   no-room (k=10, m=1): UNDECIDED in 124 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.3.1.3.p2: split F4 at TR(0,0) (meeting fraction 0.154216; alive rows []; named ['F1', 'F4', 'H'])
+   node R.3.1.3.p2.1 d2 TR(0,0)<-None: INTERNAL (3.1 s, 1 rounds; t=1182.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.1.3.p2.1 d2: DEAD by NOROOM -- no-room at R.3.1.3.p2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.1.3.p2.2 d2 TR(0,0)<-None: INTERNAL (3.3 s, 1 rounds; t=1189.3)
+   node R.3.1.3.p2.2 d2: DEAD by CC -- rule CC at R.3.1.3.p2.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interi
+   start R.3.1.3      => DEAD (20 nodes; t = 1190 s of 1800.0)
+   start R.3.1.4: applied step 1/1 -- TL(1,0) <- [14]
+   node R.3.1.4    d0 root: INTERNAL (6.5 s, 1 rounds; t=1200.6)
+   no-room (k=9, m=2): UNDECIDED in 20 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.982 > 0.000 (no lane cove)
+   Lemma POCKET at R.3.1.4: 2 pockets (k=9, m=2): the 10th square instantiated in each
+   node R.3.1.4.p1 d1 pocket<-[0]: INTERNAL (4.9 s, 1 rounds; t=1225.8)
+   no-room (k=10, m=1): UNDECIDED in 15 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.966 > 0.750 (no lane cove)
+   Lemma ROLE-SPLIT at R.3.1.4.p1: bisect F4 on y at 2.040375 (extents (0.572401, 1.080752), tilt 90.0 deg, core EMPTY, 8 piece(s); split 1 of 4)
+   node R.3.1.4.p1.1 d2 F4<-['y<=2.040375']: INTERNAL (6.5 s, 1 rounds; t=1248.0)
