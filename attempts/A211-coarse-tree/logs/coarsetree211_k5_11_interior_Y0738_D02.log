@@ -63,3 +63,13 @@
    node R.1.1.3.2  d4 TR(0,0)<-[23]: INTERNAL (2.2 s, 1 rounds; t=1104.6)
    no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
    Rule NS at R.1.1.3.2: split F2 at BR(0,1) (meeting fraction 0.242265; alive rows []; named ['F2', 'F3', 'F4'])
+   node R.1.1.3.2.1 d5 BR(0,1)<-None: INTERNAL (2.6 s, 1 rounds; t=1228.5)
+   no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.1.3.2.1: bisect F3 on t at 53.1301 (extents (0.449628, 0.150835), tilt 90.0 deg, core non-empty, 70 piece(s); split 1 of 4)
+   node R.1.1.3.2.1.1 d6 F3<-['t<=53.1301']: INTERNAL (5.4 s, 1 rounds; t=1354.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.1.3.2.1.1 d6: DEAD by NOROOM -- no-room at R.1.1.3.2.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.1.3.2.1.2 d6 F3<-['t>=53.1301']: INTERNAL (4.6 s, 1 rounds; t=1361.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.1.3.2.1.2 d6: DEAD by NOROOM -- no-room at R.1.1.3.2.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.1.3.2.2 d5 BR(0,1)<-None: INTERNAL (1.0 s, 1 rounds; t=1364.3)
