@@ -16,3 +16,18 @@ prominently -- that is a regression to chase, not a speedup to report.  Also rec
 profstage211) for two of them.  No code changes; if a run crashes, record it and move on.  Never touch the running
 workers (A211 f1/f2, and A211g's relaunches of p2a/p2b and A212 when they appear) or the k0 cascade.  Explicit-pathspec
 commits; no monitors, no waiting turns.  Report once (the table, the geometric mean, regressions if any) and EXIT.
+
+## RESULT (A215, 2026-09-14 14:40).  `results/benchmark215.md` (table, means, caveats, stage table).
+
+All 11 nodes re-run root-to-kill under the current runner, one process at a time, `--no-inherit`, wall 3600, isolated
+`--cert-dir` / `--results` / `--no-fig`, BelowNormal + BLAS pinned.  **Every one still DIES and every verdict agrees
+with the old campaign's -- 0 regressions.**  Geometric mean 7.22x over all 11 (spread 0.16x -- 43.9x, median 12.0x);
+**16.9x over the 6 nodes whose OLD number was itself a root-to-kill wall** (the five A205 clip-tree pages and A209's
+Y1110).  The five other old numbers had a head start this run did not: A211 / A211f rows inherited dead branches, and
+A206's rows started from A205's leaf certificates -- those ratios (1.33x, 1.48x, 0.16x, 15.2x, 25.6x) are quoted but
+are not like-for-like.  The single sub-1 ratio, `k5_11_interior_Y0036_D07` pad 0 at 671 s against A211f's 106.2 s, is
+that artefact: A211f started from 6 inherited DEAD branches and 5 start nodes, this run from the A203 root (52 nodes,
+0 alive leaves).  Stage table (cProfile, the two cheapest nodes): a page that dies fast is NOT no-room-bound --
+option table 52-63 %, coarse fixed point 26-29 %, K' 18-21 %, and no `noroom_at` / lane rows at all, unlike A211f's
+Y0202 (no-room 82 %, lane 40 %).  Data: `results/times215.tsv`, `results/bench215.jsonl`, `results/stagetable215.txt`,
+`logs/`, `certs/`.  Running workers and the k0 cascade untouched.
