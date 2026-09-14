@@ -1,0 +1,14 @@
+14:11:46 audit f1_L15_0006 zero_page R
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+f1_L15_0006 zero_page leaf R: FC at TR(0,1): at most 1 distinct non-pin meeter(s) (H provably misses; roles []; anonymous cap 1 by CN: union diameter 0.9761 < 1)
+  parent snapshot R (round 1); H forced at []; roles {'H': []}; cells {}; misses {}
+  role H: no pieces and no box recorded: skipped
+  FC kill at TR(0,1): a refutation needs TWO distinct non-pin meeters of TR(0,1) -- the roles that meet it plus anonymous squares sampled over its window (27469 admissible)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A212-trump5-tree\code\audit212.py", line 211, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A212-trump5-tree\code\audit212.py", line 195, in main
+    role0, X0, Y0, T0 = R[0]
+                        ~^^^
+IndexError: list index out of range
