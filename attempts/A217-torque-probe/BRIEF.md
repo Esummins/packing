@@ -43,3 +43,14 @@ results (l1_104 LP supports: NOT packings).
    results/torque217.md; notes/torque.md (the setting, the candidates, the verdict, the PI credited); registry row,
    LOG entry.  Report once (witness count and sides, the candidate invariants and their fate, the drawn
    counterexample or the conjecture) and EXIT.
+
+## PI's remark (17:45) -- what the invariant should and should not forbid
+"I think it's actually consistent with trump and higher n having non-simple middle grains, since the space those
+grains occupy are non-convex."  Read: an interior tilted square (Trump's middle grains, and the tilted grains of the
+best-known packings at higher n) sits in a NON-CONVEX pocket formed by its neighbours, so it can be held on all sides
+and its wall-free torque balance closes without any sign constraint; a CORNER meeter sits in a CONVEX region bounded by
+two walls, so its holders can only act from the interior side and the sign of the torque it can receive is
+constrained.  The candidate invariant must therefore be a statement about wall-bounded (convex) positions only --
+test that the interior grains of Trump and of the atlas optima carry no such constraint, and that the constraint
+appears exactly at the corners (and possibly along the walls: a square touching one wall is a half-constrained case
+worth tabulating too).
