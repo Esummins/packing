@@ -1,0 +1,77 @@
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   pad zero: cached ALIVE was WALL-limited (5 undecided) -- RESUMING with a FRESH wall of 1800 s (A211g)
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0130_zero_s0.json)
+   INHERIT k5_11_interior_Y0130 pad zero: 3 prior trees, 53 paths, 9 branches inherited DEAD (final, with their certificates), 2 start nodes (0 from the A203 root)
+== k5_11_interior_Y0130 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_11_interior_Y0130_zero_s0.json; basins []; INHERIT 9 dead branches (final) + 2 start nodes ['R.3.1.1.p3', 'R.3.2']; H [2.358, 2.498, 2.358, 2.498, 82.372, 90.0]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1          TR(0,0)<-(19,)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0130.json
+   INHERITED DEAD R.2          TR(0,0)<-(23,)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0130.json
+   INHERITED DEAD R.3.1.1.p1   (1.437499, 1.864168, 1.437499, 1.864168)<-(0,)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0130.json
+   INHERITED DEAD R.3.1.1.p2   (1.437499, 2.548025, 3.174683, 3.439584)<-(1,)  [A209 tree: EmptyBox] attempts/A209-k5-killer/certs/k5killer209_k5_11_interior_Y0130.json
+   INHERITED DEAD R.3.1.2      TL(1,0)<-(9,)  [A211 tree: INHERIT] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0130.json
+   INHERITED DEAD R.3.1.3      TL(1,0)<-(14,)  [A211 tree: INHERIT] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0130.json
+   INHERITED DEAD R.3.1.4      TL(1,0)<-(19,)  [A211 tree: INHERIT] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0130.json
+   INHERITED DEAD R.3.3        BR(0,1)<-(22,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0130.json
+   INHERITED DEAD R.3.4        BR(0,1)<-(23,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0130.json
+   start R.3.1.1.p3: applied step 1/1 -- POCKET [3.1637, 3.4396, 1.4375, 2.5159] as F4
+   node R.3.1.1.p3 d0 root: INTERNAL (4.0 s, 1 rounds; t=10.2)
+   no-room (k=10, m=1): UNDECIDED in 125 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma POCKET at R.3.1.1.p3: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.1.1.p3.p1 d1 pocket<-[0]: DEAD by EmptyBox r1 (5.5 s, 1 rounds; t=141.9)
+   node R.3.1.1.p3.p2 d1 pocket<-[1]: INTERNAL (5.6 s, 1 rounds; t=147.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.3.1.1.p3.p2: split F5 at TR(0,0) (meeting fraction 0.041866; alive rows []; named ['F1', 'F4', 'F5', 'H'])
+   node R.3.1.1.p3.p2.1 d2 TR(0,0)<-None: INTERNAL (6.2 s, 1 rounds; t=154.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.3.1.1.p3.p2.1: split F4 at TR(0,0) (meeting fraction 0.060035; alive rows []; named ['F1', 'F4', 'F5', 'H'])
+   node R.3.1.1.p3.p2.1.1 d3 TR(0,0)<-None: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=156.1)
+   node R.3.1.1.p3.p2.1.2 d3 TR(0,0)<-None: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=156.7)
+   node R.3.1.1.p3.p2.2 d2 TR(0,0)<-None: INTERNAL (3.3 s, 1 rounds; t=160.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.3.1.1.p3.p2.2: split F4 at TR(0,0) (meeting fraction 0.060035; alive rows []; named ['F1', 'F4', 'H'])
+   node R.3.1.1.p3.p2.2.1 d3 TR(0,0)<-None: INTERNAL (6.2 s, 1 rounds; t=166.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.3.1.1.p3.p2.2.1: split H at TR(0,0) (meeting fraction 0.467049; alive rows []; named ['F1', 'F4', 'H'])
+   node R.3.1.1.p3.p2.2.1.1 d4 TR(0,0)<-None: DEAD by EmptyBox r1 (1.9 s, 1 rounds; t=168.9)
+   node R.3.1.1.p3.p2.2.1.2 d4 TR(0,0)<-None: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=169.4)
+   node R.3.1.1.p3.p2.2.2 d3 TR(0,0)<-None: INTERNAL (5.9 s, 1 rounds; t=175.5)
+   node R.3.1.1.p3.p2.2.2 d3: DEAD by CC -- rule CC at R.3.1.1.p3.p2.2.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an i
+   start R.3.1.1.p3   => DEAD (11 nodes; t = 176 s of 1800.0)
+   start R.3.2: applied step 1/1 -- BR(0,1) <- [21]
+   node R.3.2      d0 root: INTERNAL (2.0 s, 1 rounds; t=181.2)
+   node R.3.2.1    d1 TL(1,0)<-[8]: INTERNAL (2.3 s, 1 rounds; t=183.7)
+   no-room (k=9, m=2): UNDECIDED in 15 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.653 > 0.000 (no lane cove)
+   Lemma POCKET at R.3.2.1: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R.3.2.1.p1 d2 pocket<-[0]: INTERNAL (4.2 s, 1 rounds; t=203.1)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma POCKET at R.3.2.1.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.2.1.p1.p1 d3 pocket<-[0]: INTERNAL (7.6 s, 1 rounds; t=333.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.3.2.1.p1.p1: split H at TR(0,0) (meeting fraction 0.026866; alive rows []; named ['F1', 'F5', 'H'])
+   node R.3.2.1.p1.p1.1 d4 TR(0,0)<-None: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=335.2)
+   node R.3.2.1.p1.p1.2 d4 TR(0,0)<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=335.5)
+   node R.3.2.1.p2 d2 pocket<-[1]: INTERNAL (2.7 s, 1 rounds; t=338.5)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma POCKET at R.3.2.1.p2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.2.1.p2.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (3.4 s, 1 rounds; t=464.5)
+   node R.3.2.2    d1 TL(1,0)<-[9]: INTERNAL (3.2 s, 1 rounds; t=467.9)
+   node R.3.2.2.1  d2 BL(1,1)<-[6]: INTERNAL (3.3 s, 1 rounds; t=471.5)
+   node R.3.2.2.1  d2: DEAD by CC -- rule CC at R.3.2.2.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R.3.2.2.2  d2 BL(1,1)<-[8]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=472.3)
+   node R.3.2.2.3  d2 BL(1,1)<-[11]: INTERNAL (2.2 s, 1 rounds; t=474.7)
+   node R.3.2.2.3  d2: DEAD by CC -- rule CC at R.3.2.2.3 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R.3.2.2.4  d2 BL(1,1)<-[16]: INTERNAL (2.5 s, 1 rounds; t=477.8)
+   node R.3.2.2.4  d2: DEAD by CC -- rule CC at R.3.2.2.4 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R.3.2.3    d1 TL(1,0)<-[14]: INTERNAL (3.4 s, 1 rounds; t=481.9)
+   node R.3.2.3.1  d2 BL(1,1)<-[8]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=482.7)
+   node R.3.2.3.2  d2 BL(1,1)<-[16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=483.0)
+   node R.3.2.4    d1 TL(1,0)<-[19]: INTERNAL (2.7 s, 1 rounds; t=486.1)
+   node R.3.2.4r1  d1 root<-None: DEAD by EmptyBox r1 (3.3 s, 1 rounds; t=489.7)
+   start R.3.2        => DEAD (18 nodes; t = 490 s of 1800.0)
+   => DEAD (zero_page) in 490.0 s: 2 start runs, 29 nodes, depth 4, 4 CC kills, 0 exact leaf cascades, 5 NS splits, 4 pocket splits, 0 role splits (0 empty-half kills), 9 inherited dead (9 up front + 0 in tree), 25 dead / 0 alive leaves
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1.1.p1 d4 DEAD INHERIT 0.0s; R.3.1.1.p2 d4 DEAD INHERIT 0.0s; R.3.1.2 d3 DEAD INHERIT 0.0s; R.3.1.3 d3 DEAD INHERIT 0.0s; R.3.1.4 d3 DEAD INHERIT 0.0s; R.3.3 d2 DEAD INHERIT 0.0s; R.3.4 d2 DEAD INHERIT 0.0s; R.3.1.1.p3 d0 INTERNAL 4.0s; R.3.1.1.p3.p1 d1 DEAD EmptyBox 5.5s; R.3.1.1.p3.p2 d1 INTERNAL 5.6s; R.3.1.1.p3.p2.1 d2 INTERNAL 6.2s; R.3.1.1.p3.p2.1.1 d3 DEAD EmptyBox 1.4s; R.3.1.1.p3.p2.1.2 d3 DEAD EmptyBox 0.4s; R.3.1.1.p3.p2.2 d2 INTERNAL 3.3s; R.3.1.1.p3.p2.2.1 d3 INTERNAL 6.2s; R.3.1.1.p3.p2.2.1.1 d4 DEAD EmptyBox 1.9s; R.3.1.1.p3.p2.2.1.2 d4 DEAD EmptyBox 0.3s; R.3.1.1.p3.p2.2.2 d3 DEAD CC 5.9s; R.3.2 d0 INTERNAL 2.0s; R.3.2.1 d1 INTERNAL 2.3s; R.3.2.1.p1 d2 INTERNAL 4.2s; R.3.2.1.p1.p1 d3 INTERNAL 7.6s; R.3.2.1.p1.p1.1 d4 DEAD EmptyBox 1.2s; R.3.2.1.p1.p1.2 d4 DEAD EmptyBox 0.2s; R.3.2.1.p2 d2 INTERNAL 2.7s; R.3.2.1.p2.p1 d3 DEAD EmptyBox 3.4s; R.3.2.2 d1 INTERNAL 3.2s; R.3.2.2.1 d2 DEAD CC 3.3s; R.3.2.2.2 d2 DEAD EmptyBox 0.2s; R.3.2.2.3 d2 DEAD CC 2.2s; R.3.2.2.4 d2 DEAD CC 2.5s; R.3.2.3 d1 INTERNAL 3.4s; R.3.2.3.1 d2 DEAD EmptyBox 0.5s; R.3.2.3.2 d2 DEAD EmptyBox 0.1s; R.3.2.4 d1 INTERNAL 2.7s; R.3.2.4r1 d1 DEAD EmptyBox 3.3s
+   pad g1: cached ALIVE
+== k5_11_interior_Y0130: g1 ALIVE | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1432, 'misses': 579, 'entries': 579}; clip {'hits': 41029, 'misses': 405427, 'entries': 5427}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 2011, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 31}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 1526, 'obs_misses': 524, 'build_hits': 0, 'build_misses': 4, 'bisect_hits': 0, 'bisect_misses': 4, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 520, 'build_entries': 4, 'bisect_entries': 4, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
