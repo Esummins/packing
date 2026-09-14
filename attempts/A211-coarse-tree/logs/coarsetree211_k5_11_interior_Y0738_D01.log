@@ -3,3 +3,11 @@
 == stage 0 + CSP k5_11_interior_Y0738_D01 at the zero pad: ALIVE in 10895 ms; kills {'H-clip': 0, 'P': 2442, 'W': 800, 'C': 468, 'M': 2214, 'L': 7, 'R': 2819, 'X': 1134}; CSP units 264 -> 264 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
    INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
 == k5_11_interior_Y0738_D01 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0738_D01_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [1.24, 1.31, 2.371, 2.428, 34.592, 41.112]; forced H []; 4 slots; free squares 5
+   node R          d0 root: INTERNAL (14.6 s, 1 rounds; t=14.7)
+   node R.1        d1 TL(1,0)<-[14]: INTERNAL (1.5 s, 1 rounds; t=16.2)
+   node R.1.1      d2 BL(1,1)<-[11]: INTERNAL (2.3 s, 1 rounds; t=18.6)
+   node R.1.1.1    d3 BR(0,1)<-[17]: DEAD by EmptyBox r1 (4.1 s, 1 rounds; t=22.7)
+   node R.1.1.2    d3 BR(0,1)<-[18]: INTERNAL (2.0 s, 1 rounds; t=24.7)
+   no-room (k=9, m=2): UNDECIDED in 10 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.826 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.1.2: 2 pockets (k=9, m=2): the 10th square instantiated in each
+   node R.1.1.2.p1 d4 pocket<-[0]: INTERNAL (2.8 s, 1 rounds; t=37.5)
