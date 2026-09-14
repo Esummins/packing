@@ -7,7 +7,8 @@ names up in its module at call time, so the memo (fastclip211), the empty-K' han
 
 Flags:  A213_INTCORE=0 turns the patch off (the library runs as before);  A213_VERIFY=1 runs BOTH builds on every
 call and asserts the results equal (the differential test, live);  A213_VEC=1 routes the vertex certification through
-polycore_vec (Phase 2, itself falling back to the exact integer path wherever the float filter cannot decide).
+polycore_vec (Phase 2, itself falling back to the exact integer path wherever the float filter cannot decide);
+A214_CKERNEL=0 keeps the vertex test in Python (default ON: the C kernel of A214 under the same integer path).
 """
 import os
 import sys
@@ -26,11 +27,14 @@ FLAG = os.environ.get("A213_INTCORE", "1") != "0"      # default ON: the replay 
 VERIFY = os.environ.get("A213_VERIFY") == "1"
 VEC = os.environ.get("A213_VEC", "0") == "1"
 FLAGC = os.environ.get("A213_INTCLIP", "0") == "1"     # A213b: OFF until the replay + fuzz pass (flipped ON below)
+FLAGK = os.environ.get("A214_CKERNEL", "1") != "0"     # A214: the C kernel under the integer path (default ON:
+                                                      # the replay + fuzz + tests/diff214.py pass with 0 mismatches)
 ORIG = dict(build=PC.build, vertex_ok=PC.vertex_ok, pieces_poly=MB.pieces_poly,
             axis_core_pieces=MB.axis_core_pieces, certify_verts=MB.certify_verts,
             clip=MB._clip_rect_obstacle)
 INSTALLED = [False]
 CLIP_AT = [None]
+_CLIP_PREV = []
 STATS = dict(build=0, vertex_ok=0, pieces_poly=0, axis_core=0, certify=0, clip=0, verified=0)
 
 
@@ -84,27 +88,45 @@ def _verified_clip(new, old):
     return g
 
 
+def _lib_clip_slot():
+    """the INNERMOST clip slot: the library function itself, under whatever the chain has wrapped around it --
+    A178's `obs is None` guard (`mbpatch178._orig_clip`) and A211's memo (`fastclip211._ORIG_CLIP`, the miss path).
+    Patching the innermost slot keeps every wrapper above it working exactly as before."""
+    M8 = sys.modules.get("mbpatch178")
+    if M8 is not None and getattr(M8, "_orig_clip", None) is not None:
+        return M8, "_orig_clip", M8._orig_clip
+    FC = sys.modules.get("fastclip211")
+    if FC is not None and getattr(FC, "_ORIG_CLIP", None) is not None:
+        return FC, "_ORIG_CLIP", FC._ORIG_CLIP
+    return MB, "_clip_rect_obstacle", MB._clip_rect_obstacle
+
+
 def install_clip(verify=None):
-    """A213b: route `_clip_rect_obstacle` to the integer-space clip.  A211's clip MEMO (fastclip211) captured the
-    library function at ITS import, so when the memo is installed the patch goes into `fastclip211._ORIG_CLIP` (the
-    memo's miss path) and the memo stays on top; otherwise straight into the multibox global."""
+    """A213b: route `_clip_rect_obstacle` to the integer-space clip, at the innermost slot (idempotent)."""
     if not FLAGC:
         return False
     verify = VERIFY if verify is None else verify
+    holder, attr, lib = _lib_clip_slot()
+    if getattr(lib, "_a213b", False):
+        return True                                            # already routed
+    ORIG["clip"] = lib
     clip = PIC.clip_rect_obstacle
     if verify:
-        clip = _verified_clip(clip, ORIG["clip"])
+        clip = _verified_clip(clip, lib)
     clip = _counted("clip", clip)
-    where = []
-    FC = sys.modules.get("fastclip211")
-    if FC is not None and getattr(FC, "_ORIG_CLIP", None) is ORIG["clip"]:
-        FC._ORIG_CLIP = clip
-        where.append("fastclip211._ORIG_CLIP")
-    if MB._clip_rect_obstacle is ORIG["clip"]:
-        MB._clip_rect_obstacle = clip
-        where.append("multibox._clip_rect_obstacle")
-    CLIP_AT[0] = " + ".join(where) or None
-    return bool(where)
+    clip._a213b = True
+    del _CLIP_PREV[:]
+    _CLIP_PREV.append((holder, attr, lib))
+    setattr(holder, attr, clip)
+    CLIP_AT[0] = "%s.%s" % (getattr(holder, "__name__", holder), attr)
+    return True
+
+
+def uninstall_clip():
+    for (o, a, prev) in _CLIP_PREV:
+        setattr(o, a, prev)
+    del _CLIP_PREV[:]
+    CLIP_AT[0] = None
 
 
 def _pp_same(a, b):
@@ -112,9 +134,30 @@ def _pp_same(a, b):
         [(x.x0, x.x1, x.y0, x.y1, y, z) for x, y, z in b[2]]
 
 
+CKERNEL = [False]
+
+
+def install_ckernel():
+    """A214: route polycore_int's vertex test through the C kernel (build/ckernel214.dll, ctypes).  Bit-exact -- the
+    kernel answers only what it can prove and hands every other pair back to the Python-int path, which stays the
+    reference and the fallback (no DLL / another machine / outside the proved envelope).  Idempotent."""
+    if not FLAGK or CKERNEL[0]:
+        return CKERNEL[0]
+    try:
+        a214 = os.path.abspath(os.path.join(HERE, "..", "..", "A214-c-kernel", "code"))
+        if a214 not in sys.path:
+            sys.path.insert(0, a214)
+        import ckernel214 as CK
+        CKERNEL[0] = CK.install()
+    except Exception:                                          # noqa: BLE001  -- never let the kernel stop a node
+        CKERNEL[0] = False
+    return CKERNEL[0]
+
+
 def install(verify=None, vec=None):
     """route the library's names to the integer-space build (idempotent).  Returns True when installed."""
     verify = VERIFY if verify is None else verify
+    install_ckernel()
     vec = VEC if vec is None else vec
     if not FLAG:                                               # A213 off, A213b still available on its own flag
         return install_clip(verify)
@@ -139,11 +182,7 @@ def install(verify=None, vec=None):
 
 
 def uninstall():
-    FC = sys.modules.get("fastclip211")
-    if FC is not None and getattr(FC, "_ORIG_CLIP", None) is not ORIG["clip"]:
-        FC._ORIG_CLIP = ORIG["clip"]
-    MB._clip_rect_obstacle = ORIG["clip"]
-    CLIP_AT[0] = None
+    uninstall_clip()
     PC.build, PC.vertex_ok = ORIG["build"], ORIG["vertex_ok"]
     MB.pieces_poly, MB.axis_core_pieces, MB.certify_verts = ORIG["pieces_poly"], ORIG["axis_core_pieces"], ORIG["certify_verts"]
     INSTALLED[0] = False
@@ -151,4 +190,4 @@ def uninstall():
 
 def rep():
     return dict(installed=INSTALLED[0], flag=FLAG, flag_clip=FLAGC, clip_at=CLIP_AT[0],
-                verify=VERIFY, vec=VEC, **STATS)
+                verify=VERIFY, vec=VEC, ckernel=CKERNEL[0], **STATS)
