@@ -1,0 +1,41 @@
+# A229 queue for PASS 7 -- one line per START NODE (not per page), so N workers take N start nodes of the same
+# page in parallel.  Run it with:   bash attempts/A229-start-parallel/code/worker229.sh p7a 1800 attempts/A211-coarse-tree/code/queue_pass7.txt
+# (one worker per slot; they claim by mkdir attempts/A211-coarse-tree/logs/claims229/<nid>__<TAG>, so several
+# workers may share this one file).  Proof that the shards merge back into the page: attempts/A229-start-parallel/
+# notes/parallel229.md (Lemma PAR).
+#
+# DO NOT LAUNCH BEFORE PASS 6 ENDS, AND RE-RUN queue229.py AT LAUNCH TIME.  This snapshot was taken 2026-09-15 09:13
+# while p6a/p6b/p6c were still running Y0402 / Y0738 / Y1056: their certificates will have changed by the time pass 7
+# starts, start nodes listed here will be dead and new ones will have appeared.  Rebuild with
+#   python attempts/A229-start-parallel/code/queue229.py k5_16_interior_Y0402 \
+#          k5_11_interior_Y0738 k5_16_interior_Y1056 --pads zero,g1 --wall 1800 \
+#          --out attempts/A211-coarse-tree/code/queue_pass7.txt
+#
+# A229 queue: <nid> <pad>:<start label> <wall>   (longest-first; re-run queue229.py at launch time --
+# the certificates keep changing, and a start node already killed is simply not in this list any more)
+k5_16_interior_Y0402 zero:R.3 1800     # 1023 s absorbed, 1 branch steps
+k5_16_interior_Y0402 g1:R.3 1800     # 1007 s absorbed, 1 branch steps
+k5_11_interior_Y0738 zero:R.3 1800     # 351 s absorbed, 1 branch steps
+k5_11_interior_Y0738 g1:R.1.3 1800     # 266 s absorbed, 2 branch steps
+k5_16_interior_Y1056 g1:R.3 1800     # 23 s absorbed, 1 branch steps
+k5_16_interior_Y1056 g1:R.2.6.p1.p1.2.2.2.1 1800     # 0 s absorbed, 8 branch steps
+k5_16_interior_Y1056 g1:R.2.6.p1.p1.2.2.2.2 1800     # 0 s absorbed, 8 branch steps
+k5_16_interior_Y1056 zero:R.2.6.p1.p1.2.2.1 1800     # 0 s absorbed, 7 branch steps
+k5_16_interior_Y1056 zero:R.2.6.p1.p1.2.2.2 1800     # 0 s absorbed, 7 branch steps
+k5_11_interior_Y0738 g1:R.3.1 1800     # 0 s absorbed, 2 branch steps
+k5_11_interior_Y0738 g1:R.3.2 1800     # 0 s absorbed, 2 branch steps
+k5_11_interior_Y0738 g1:R.3.3 1800     # 0 s absorbed, 2 branch steps
+k5_11_interior_Y0738 g1:R.3.4 1800     # 0 s absorbed, 2 branch steps
+k5_11_interior_Y0738 g1:R.3.5 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y1056 zero:R.2.7 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y1056 zero:R.2.8 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y1056 zero:R.2.9 1800     # 0 s absorbed, 2 branch steps
+k5_16_interior_Y0402 g1:R.4 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 g1:R.5 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 g1:R.6 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 zero:R.4 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 zero:R.5 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y0402 zero:R.6 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y1056 g1:R.4 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y1056 zero:R.3 1800     # 0 s absorbed, 1 branch steps
+k5_16_interior_Y1056 zero:R.4 1800     # 0 s absorbed, 1 branch steps
