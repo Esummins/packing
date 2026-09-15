@@ -13,17 +13,18 @@ off, same page / pad / wall).  All runs: pad g1, one runner, BelowNormal, wall a
 | k5_11_interior_Y0738 | nri | y | ALIVE (wall) | 1813 | 1.00 | 93 | 68 | 1 | 7 | 0 | 0/0/0 | 41 | 0 | 428.7 (24%) | 1029.1 (57%) | 0.0 (0%) | 355.4 |
 | k5_16_interior_Y0402 | off | y | ALIVE (wall) | 1803 | 1.00 | 72 | 46 | 0 | 9 | 0 | 0/0/0 | 32 | 0 | 1121.2 (62%) | 493.1 (27%) | 0.0 (0%) | 189.0 |
 | k5_16_interior_Y0402 | nri | y | ALIVE (wall) | 1809 | 1.00 | 71 | 45 | 0 | 8 | 1 | 1/1/0 | 32 | 0 | 1137.7 (63%) | 491.8 (27%) | 3.0 (0%) | 176.5 |
+| k5_16_interior_Y0460 | off | n | RUNNING | 998 | 1.00 | 50 | None | None | None | None | 0/0/0 | 0 | None | 217.1 (22%) | 0 (0%) | 0.0 (0%) | 781.4 |
 | k5_16_interior_Y0865 | off | y | ALIVE (wall) | 1804 | 1.00 | 134 | 57 | 0 | 31 | 38 | 0/0/0 | 82 | 0 | 1196.0 (66%) | 127.1 (7%) | 345.3 (19%) | 135.1 |
 | k5_16_interior_Y0865 | ef | y | ALIVE (wall) | 1801 | 1.00 | 89 | 42 | 0 | 14 | 22 | 28/5/0 | 52 | 0 | 807.1 (45%) | 313.5 (17%) | 599.5 (33%) | 80.8 |
 | k5_16_interior_Y0865 | efs | y | ALIVE (wall) | 1809 | 1.00 | 95 | 44 | 0 | 22 | 26 | 18/4/0 | 60 | 0 | 1018.9 (56%) | 122.3 (7%) | 574.2 (32%) | 93.5 |
-| k5_16_interior_Y0865 | nri | y | RUNNING | 782 | 0.43 | 46 | None | None | None | None | 12/4/0 | 0 | None | 419.8 (54%) | 0 (0%) | 222.9 (29%) | 139.0 |
+| k5_16_interior_Y0865 | nri | y | ALIVE (wall) | 1802 | 1.00 | 129 | 59 | 0 | 24 | 30 | 18/4/0 | 76 | 0 | 845.0 (47%) | 450.6 (25%) | 412.2 (23%) | 94.3 |
 | k5_16_interior_Y0865 | smoke | y | RUNNING | 546 | 0.30 | 22 | None | None | None | None | 6/4/0 | 0 | None | 319.6 (59%) | 0 (0%) | 89.0 (16%) | 137.0 |
 
 **ef**: geometric-mean ratio 0.999 over 1 page(s); no verdict regression.
 
 **efs**: geometric-mean ratio 1.003 over 1 page(s); no verdict regression.
 
-**nri**: geometric-mean ratio 0.758 over 3 page(s); no verdict regression.
+**nri**: geometric-mean ratio 1.002 over 3 page(s); no verdict regression.
 
 **flag-off equivalence** (k5_11_interior_Y0672, pad g1, no inherit): pre-A220 code ALIVE in 602 s (63 nodes) vs this code ALIVE in 601 s (61 nodes) -- node list and verdicts DIFFER.
   first difference: R.3.1.2.p2.p2:INTERNAL:None vs R.3.1.2.p2.p2:ALIVE:None
