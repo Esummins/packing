@@ -33,3 +33,13 @@ role) BEFORE (e) the exact cascade, which is last because it once cost 838 s pas
 4. Deliverables: attempts/A220-exact-first/{notes/exact_first.md, results/bench220.md (+jsonl), code/ (patch is IN
    tree211.py / tree206.py, flag-gated)}, registry row, LOG entry.  Report once (<= 15 lines: the table, the
    decision, commits) and EXIT.  Long benchmark runs detached with a resume block.
+
+## Addendum 1b (20:40) -- the no-room cap is the wall
+On the alive k5 pages the wall goes to A189/A208 no-room returning UNDECIDED at its ~120 s cap at EVERY child after a
+split: Y0402 g1 14 x ~125 s = 1518 s of 1847 (82 %); Y0738 g1 12 gaps = 1153 s (63 %); Y1056 9 gaps = 1044 s
+("no-room (k=10, m=1): UNDECIDED in 122 s (2 pockets; pocket LANE sum None does not beat 1)").  Node rounds are 4-8 s.
+The A211f no-room memo has build_hits 0 / bisect_hits 0 (obs-level hits only).  Flag A220_NOROOM_INHERIT: (i) parent
+UNDECIDED at cap => child cap A220_NOROOM_CHILD_CAP (25 s) unless a role box shrank > 50 % or the child is a terminal
+m=1 pocket; (ii) exact-first precedes no-room in that case; (iii) diagnose the 0 memo hits and, if cheap, resume
+bisect_free from the parent's undecided leaves restricted to the child's region.  Benchmark adds Y0402 g1, Y0738 g1;
+report the wall BY STAGE before/after.
