@@ -275,3 +275,15 @@ exactly `tree211.step_key`'s key, `startload211.apply_step` applies it with `rsp
 raises, and the start node is then left undecided rather than guessed), and `code/test_inherit211.py` pins it: the
 merge over every page's certificates on both pads, with every replay step checked against what the appliers accept,
 and `--load` loading every start node whose path carries a role split.
+
+**A220 addendum to the RULE ORDER (2026-09-14, flag-gated, OFF by default).**  Rules (d') and (e) can be swapped at a
+fully named leaf: with `A220_EXACT_FIRST` set (`1` always, `small` only when the role the split would bisect has max
+position extent < 0.25) the tree runs ONE exact cascade round under a cooperative deadline (`A220_BUDGET`, 45 s;
+`tree206.budget_cascade`) BEFORE Lemma ROLE-SPLIT, records a kill as this node's `x` record exactly as (e) does, and on
+a timeout keeps the shrinks, restores coarse mode and falls through to (d') as today.  With `A220_NOROOM_INHERIT` set,
+rule (b)'s cap is shortened to `A220_NOROOM_CHILD_CAP` (25 s) at a child whose nearest ancestor's no-room already ran
+out its cap UNDECIDED and whose role boxes have not shrunk by more than 50 % since (a terminal m = 1 pocket child keeps
+the full cap), with the budgeted exact round run first.  Soundness: notes/exact_first.md s.2 Lemma BUDGET (a prefix of a
+sound clip chain is sound; an interrupted fixed point writes nothing back) and s.4 (a cap is a budget, never a claim) --
+both are cost decisions of the same kind as S2'', and nothing about ALIVE or DEAD changes.  With the flags unset this
+file's rule order is what runs, unchanged.  The measurement: `attempts/A220-exact-first/results/bench220.md`.
