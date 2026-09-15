@@ -233,3 +233,63 @@
    start R.12: applied step 1/1 -- TL(1,0) <- [9, 18]
    node R.12       d0 root: INTERNAL (4.6 s, 1 rounds; t=1078.9)
    node R.12r1     d0 root<-None: INTERNAL (15.4 s, 1 rounds; t=1094.5)
+   no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma POCKET at R.12: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.12.p1    d1 pocket<-[0]: INTERNAL (75.6 s, 1 rounds; t=1295.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; no free square left)
+   Rule NS at R.12.p1: split F4 at TR(1,0) (meeting fraction 0.026343; alive rows []; named ['F2', 'F3', 'F4', 'F5'])
+   node R.12.p1.1  d2 TR(1,0)<-None: DEAD by EmptyBox r1 (2.2 s, 1 rounds; t=1298.0)
+   node R.12.p1.2  d2 TR(1,0)<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=1298.4)
+   start R.12         => DEAD (5 nodes; t = 1299 s of 1800.0)
+   start R.13: applied step 1/1 -- TL(1,0) <- [13, 14]
+   node R.13       d0 root: INTERNAL (3.8 s, 1 rounds; t=1304.3)
+   node R.13r1     d0 root<-None: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=1306.3)
+   start R.13         => DEAD (2 nodes; t = 1307 s of 1800.0)
+   start R.14: applied step 1/1 -- TL(1,0) <- [13, 18]
+   node R.14       d0 root: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=1308.4)
+   start R.14         => DEAD (1 nodes; t = 1309 s of 1800.0)
+   start R.15: applied step 1/1 -- TL(1,0) <- [13, 19]
+   node R.15       d0 root: INTERNAL (3.4 s, 1 rounds; t=1314.0)
+   node R.15r1     d0 root<-None: INTERNAL (9.0 s, 1 rounds; t=1323.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.15       d0: DEAD by NOROOM -- no-room at R.15 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R.15         => DEAD (2 nodes; t = 1326 s of 1800.0)
+   start R.16: applied step 1/1 -- TL(1,0) <- [14, 18]
+   node R.16       d0 root: INTERNAL (3.2 s, 1 rounds; t=1330.8)
+   node R.16r1     d0 root<-None: INTERNAL (11.7 s, 1 rounds; t=1342.8)
+   no-room (k=10, m=1): UNDECIDED in 124 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma POCKET at R.16: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.16.p1    d1 pocket<-[0]: DEAD by EmptyBox r1 (2.5 s, 1 rounds; t=1471.9)
+   start R.16         => DEAD (3 nodes; t = 1472 s of 1800.0)
+   start R.17: applied step 1/1 -- TL(1,0) <- [18, 19]
+   node R.17       d0 root: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=1474.2)
+   start R.17         => DEAD (1 nodes; t = 1474 s of 1800.0)
+   => DEAD (zero_page) in 1474.5 s: 11 start runs, 42 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 7 NS splits, 8 pocket splits, 0 role splits (0 empty-half kills), 15 inherited dead (15 up front + 0 in tree), 36 dead / 0 alive leaves
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3 d1 DEAD INHERIT 0.0s; R.4 d1 DEAD INHERIT 0.0s; R.5 d1 DEAD INHERIT 0.0s; R.6 d1 DEAD INHERIT 0.0s; R.7 d1 DEAD INHERIT 0.0s; R.8.1 d2 DEAD INHERIT 0.0s; R.8.2 d2 DEAD INHERIT 0.0s; R.8.3 d2 DEAD INHERIT 0.0s; R.8.4.1 d3 DEAD INHERIT 0.0s; R.8.4.2.1 d4 DEAD INHERIT 0.0s; R.8.4.2.2 d4 DEAD INHERIT 0.0s; R.9.1 d2 DEAD INHERIT 0.0s; R.9.2.1 d3 DEAD INHERIT 0.0s; R.9.2.2 d0 INTERNAL 14.3s; R.9.2.2.p1 d1 INTERNAL 54.2s; R.9.2.2.p1.1 d2 DEAD S-CLIP 3.2s; R.9.2.2.p1.2 d2 DEAD S-CLIP 1.1s; R.9.3 d0 INTERNAL 11.4s; R.9.3.p1 d1 INTERNAL 35.2s; R.9.3.p1.1 d2 INTERNAL 32.4s; R.9.3.p1.1.1 d3 DEAD EmptyBox 2.4s; R.9.3.p1.1.2 d3 DEAD EmptyBox 0.6s; R.9.3.p1.2 d2 INTERNAL 24.6s; R.9.3.p1.2.1 d3 INTERNAL 33.8s; R.9.3.p1.2.1.1 d4 DEAD REACH 6.2s; R.9.3.p1.2.1.2 d4 DEAD FC 0.7s; R.9.3.p1.2.2 d3 INTERNAL 15.0s; R.9.3.p1.2.2.1 d4 DEAD EmptyBox 4.0s; R.9.3.p1.2.2.2 d4 DEAD EmptyBox 0.7s; R.9.4 d0 INTERNAL 10.1s; R.9.4.p1 d1 DEAD EmptyBox 3.2s; R.10 d0 INTERNAL 3.4s; R.10.1 d1 DEAD EmptyBox 1.2s; R.10.2 d1 INTERNAL 7.9s; R.10.2.p1 d2 DEAD EmptyBox 2.3s; R.10.3 d1 INTERNAL 7.3s; R.10.3.p1 d2 DEAD EmptyBox 1.2s; R.10.4 d1 INTERNAL 5.8s; R.10.4.p1 d2 DEAD EmptyBox 1.1s; R.11 d0 INTERNAL 2.5s; R.11r1 d0 DEAD EmptyBox 2.4s; R.12 d0 INTERNAL 4.6s; R.12r1 d0 INTERNAL 15.4s; R.12.p1 d1 INTERNAL 75.6s; R.12.p1.1 d2 DEAD EmptyBox 2.2s; R.12.p1.2 d2 DEAD EmptyBox 0.2s; R.13 d0 INTERNAL 3.8s; R.13r1 d0 DEAD EmptyBox 1.7s; R.14 d0 DEAD EmptyBox 0.0s; R.15 d0 INTERNAL 3.4s; R.15r1 d0 DEAD NOROOM 9.0s; R.16 d0 INTERNAL 3.2s; R.16r1 d0 INTERNAL 11.7s; R.16.p1 d1 DEAD EmptyBox 2.5s; R.17 d0 DEAD EmptyBox 0.2s
+   pad g1: cached ALIVE was WALL-limited (12 undecided) -- RESUMING with a FRESH wall of 1800 s (A211g)
+   stage 0 g1 pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0660_g1_s0.json)
+   INHERIT k5_16_interior_Y0660 pad g1: 3 prior trees, 40 paths, 10 branches inherited DEAD (final, with their certificates), 12 start nodes (0 from the A203 root)
+== k5_16_interior_Y0660 page pad g1: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0660_g1_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 10 dead branches (final) + 12 start nodes ['R.9.2.2.1.1.1', 'R.9.2.2.1.1.2', 'R.9.2.2.1.2', 'R.9.2.2.2', 'R.10', 'R.11', 'R.12', 'R.13', 'R.14', 'R.15']; H [2.218, 2.358, 1.38, 1.519, 0.0, 14.25]; forced H ['BL(1,0)']; 6 slots; free squares 5
+   INHERITED DEAD R.1          TL(1,0)<-(7, 9)  [A205 tree: EmptyBox] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0660.json
+   INHERITED DEAD R.2          TL(1,0)<-(7, 13)  [A205 tree: EmptyBox] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0660.json
+   INHERITED DEAD R.3          TL(1,0)<-(7, 14)  [A205 tree: EmptyBox] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0660.json
+   INHERITED DEAD R.4          TL(1,0)<-(7, 18)  [A205 tree: EmptyBox] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0660.json
+   INHERITED DEAD R.5          TL(1,0)<-(7, 19)  [A205 tree: EmptyBox] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0660.json
+   INHERITED DEAD R.6          TL(1,0)<-(8, 9)  [A205 tree: EmptyBox] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0660.json
+   INHERITED DEAD R.7          TL(1,0)<-(8, 13)  [A205 tree: FC] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0660.json
+   INHERITED DEAD R.8          TL(1,0)<-(8, 14)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y0660.json
+   INHERITED DEAD R.9.1        BR(0,1)<-F3  [A211 tree: NOROOM] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0660.json
+   INHERITED DEAD R.9.2.1      TR(1,0)<-F4  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0660.json
+   node R.9.2.2.1.1.1 d0 root: INTERNAL (8.9 s, 1 rounds; t=9.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.9.2.2.1.1.1 d0: DEAD by NOROOM -- no-room at R.9.2.2.1.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R.9.2.2.1.1.1 => DEAD (1 nodes; t = 12 s of 1800.0)
+   start R.9.2.2.1.1.2: ancestor R.9.2.2.1.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0660.json) refused (KeyError('node R.9.2.2.1.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.9.2.2.1.1.2: ancestor R.9.2.2.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0660.json) refused (KeyError('node R.9.2.2.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.9.2.2.1.1.2: ancestor R.9.2.2 (attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0660.json) refused (KeyError('node R.9.2.2 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.9.2.2.1.1.2: ancestor R.9.2 (attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0660.json) refused (KeyError('node R.9.2 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.9.2.2.1.1.2: ancestor R.9 (attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0660.json) refused (KeyError('node R.9 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.9.2.2.1.1.2: applied step 1/6 -- TL(1,0) <- [8, 18]
+   start R.9.2.2.1.1.2: applied step 2/6 -- NS F3 misses at BR(0,1)
+   start R.9.2.2.1.1.2: applied step 3/6 -- NS F4 misses at TR(1,0)
+   start R.9.2.2.1.1.2: applied step 4/6 -- NS F4 meets at BR(1,0)
