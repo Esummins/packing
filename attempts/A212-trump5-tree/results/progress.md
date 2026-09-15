@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 17:38:15
+# A212 progress -- 2026-09-14 17:48:35
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (42 nodes)
+## A60's alive trump5 frontier (deepest first) (43 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -68,11 +68,12 @@ CPU-h in this block: 5.66
 | c0_Y0262 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 1} | 1 / 0 | 6 |
 | c0_Y0251 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 1, 'EmptyBox': 6, 'NOROOM': 2, 'REACH': 1} | 26 / 4 | 1835 |
 | c0_Y0256 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 1, 'NOROOM': 3, 'EmptyBox': 3} | 20 / 5 | 1822 |
+| c0_Y0263 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'NOROOM': 2, 'FC': 2} | 16 / 6 | 1806 |
 
-CPU-h in this block: 8.25
+CPU-h in this block: 8.75
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 26, 'DEAD': 29}; gallery 13 / 13 run (5.66 CPU-h); frontier 42 run of 109 (94 remaining; 8.25 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 94: 12.0 CPU-h; spent 13.9; cap 150
+* verdicts so far: {'ALIVE': 27, 'DEAD': 29}; gallery 13 / 13 run (5.66 CPU-h); frontier 43 run of 109 (93 remaining; 8.75 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 93: 11.9 CPU-h; spent 14.4; cap 150
 
