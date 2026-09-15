@@ -568,6 +568,19 @@ unloaded).  C4 (0/883) stands as measured; its mechanism is the drain (a forced 
 the CROWD pull is exactly HOLD's missing holder, the HELD torque is the aligning one).  **This row is unchanged.**
 Lean: `Statements/Open/K0Count.lean` (`lemma_PUSH`, axiom, audited).
 
+**[T]/[M]/[C] A219 (2026-09-14 night) — the PI's wall-torque limitations, exact (`docs/proofs/wall_torque.md`).**  [T] CEIL
+(s(n) ≤ ⌈√n⌉; `Fits 11 4` in Lean), TWO-CONTACT (a loaded tilted wall square, tilt ∉ {0, 45, 90}°, needs ≥ 2 further loaded
+contacts: two forces must be collinear through the touching vertex) and ONE-TILTED (two flat meeters of an open corner box overlap,
+so every doubly-met open corner has a tilted meeter) — n-general, Lean axiom files built and audited.  [F] L2 as stated fails on flat
+squares and 45° diamonds.  [M] Lemma RING (no loaded four-crowd balances by walls and meeters alone) holds on 193 / 193 of A217's
+four-crowd witnesses: the free FJ LP is infeasible; the deficit is an anti-aligning torque on the tilted meeters or a force along
+the wall toward the corner / into the wall; one added holder never balances 11 squares.  [M] Addendum 2b: the ring's square 6 is a
+two-force strut and its rotation a first-order zero mode of the loaded core, but the side RISES at second order (v₂ = +0.381) and
+the mode is blocked by a caged rattler in the 11-square configuration; Theorem SO (second-order exclusion, selection form) excludes
+11 of 182 stationary CROWD four-crowds and 29 more as not FJ under another selection, no HELD one.  [C] RING as a structure census:
+2.6·10¹¹ structures, 2.3·10⁶ CPU-days (232 CPU-days even without interior holders) — not a route; and it would exclude loaded
+four-crowds only, the rattler crowds stay with H1 (DF-O4, OPEN).  **This row is unchanged.**
+
 ## 5. Lean / TCB
 
 TopLevel roster: K0-O1 + chain replays + ShellKill (Crowd, CrowdZone, Slide, PinnedSlide, Ceil, Composition);

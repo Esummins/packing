@@ -8829,3 +8829,42 @@ gaps = 1,518 s of a 1,847 s wall (82 %), Y0738 12 gaps = 1,153 s (63 %), Y1056 9
 - DECISION RULE (unchanged from the brief, and NOT yet taken): a variant goes ON in `worker211.sh` / `launch211.sh` only
   at a geometric-mean ratio < 0.8 with no verdict regression.  Until the lanes finish, the flags stay OFF everywhere and
   `CURRENT.json` is untouched.
+
+## 2026-09-14 night -- A219-wall-torque (Fable) -- DONE (launch-and-exit; holder search continuing detached): **the PI's wall-torque limitations made exact -- CEIL, TWO-CONTACT, ONE-TILTED proved; Lemma RING holds on 193 / 193 four-crowd witnesses but is unaffordable as a structure census (2.6e11 structures); the ring's strut mode is first-order free but second-order STIFF (v2 = +0.381) and blocked by a caged rattler; k0_00 unchanged**
+
+- The brief (19:10) + addendum 2b (19:30): L1 "WLOG S < ceil(sqrt n)", L2 "squares cannot load along a wall without a net torque",
+  L3 "the meeters need holders pushing out from the centre, and the holders must torque-balance in the middle"; then the PI's
+  second-order observation on the ring (square 6 a two-force strut, its rotation a first-order free mode).
+- [T] Lemma CEIL (`docs/proofs/wall_torque.md` s.1): s(n) <= ceil(sqrt n) by the grid; a minimiser has S < ceil(sqrt n) iff s(n) <
+  ceil(sqrt n) (false at n = k^2, k^2-1, k^2-2); at n = 11 `Fits 11 4` (Lean theorem from the axiom, ceil(sqrt 11) = 4 proved) and the
+  certified S <= 3.877084 is the bound used.  [T] Lemma TWO-CONTACT (s.2): a tilted wall square (tilt not 0/45/90) with exactly one
+  further loaded contact is not in balance (two forces collinear through the touching vertex; no other vertex on that normal, no edge
+  normal wall-normal) -- a loaded tilted wall square needs >= 2 further contacts.  [F] L2 as stated: flat squares carry along-wall
+  compression with zero torque (the simple packing; ring squares 3, 5, 10 balance by wall + two contacts) and a 45-deg diamond
+  pinched by a flat square balances with one contact (A217's C5 diamonds).  [T] Lemma ONE-TILTED (s.3): two flat meeters of an open
+  corner box overlap, so every doubly-met open corner has a tilted meeter -- where L2 acts.  Lean: `Statements/Open/LemmaCEIL.lean`,
+  `TwoContact.lean` (geometric core), `OneTilted.lean`; build + audit exit 0, no sorry.
+- [M] Lemma RING (s.4, `results/ring219.md`): tilt-floor / crowd rows dropped, contact structure kept, free FJ LP INFEASIBLE on all 8
+  HELD + 185 CROWD four-crowds (also on the loaded rows alone).  The minimal external load: torques alone suffice on 8 / 8 HELD and
+  37 / 185 CROWD, always anti-aligning on the tilted meeters (128 : 10); the external FORCE on a meeter is along its wall toward the
+  corner (175) or into its wall (114), radial 3 -- the PI's L3 direction; in 130 / 193 witnesses a non-meeter needs load too (the
+  holders cannot balance).  One added interior holder: no feasible pose at the witness side (free space at S ~ 4 is slivers); after
+  a 15 % dilation the drains return to side 4.000 (free, <= 2 doubly-met corners) or keep the four-crowd only with crowd pulls
+  (sum lambda >= 0.16); never an FJ four-crowd, never <= s-hat (`holder219.jsonl`, 31 / 193 at the write-up, detached, per-row
+  commits, resume block in `ring219.md`).  Pages: `ring_residual_rand_0_0569_t20.svg`, `best_attempt_w060_crowd.svg`.
+- [T]/[M] 2b (s.5, `results/second_order219.md`): Lemma STRUT (a two-force strut's rotation about either contact is a first-order
+  zero mode of the loaded structure) and Theorem SO (v2(y) = min e_s.w s.t. grad g_r.w >= -y^T H_r y on the tight rows of a
+  consistent selection = max over the multiplier polytope of y^T Hess(L) y; v2 < 0 => a feasible curve with s decreasing at second
+  order => not a local minimum => no sigma-minimiser).  The ring: the PI's numbers reproduced (floor +6.0e-4, 7-contact +2.5e-7,
+  4-contact -7.5e-7 per mrad) AND the rattler 0 is hit at first order (-6.4e-4); on the loaded core the mode exists and v2 = +0.381
+  (the side RISES); with the rattler's rows the mode is blocked (0 is caged by 4, 5, 6).  All witnesses (four variants, rotations
+  about every contact point + reduced-Hessian eigenvectors, LP completion, curve re-check): HELD 0 saddles; CROWD 11 of 182 stationary
+  are second-order saddles (6-9 curve-verified) and 29 are not Fritz-John under another consistent selection (excluded at first
+  order by D3'); no strut mode is a saddle (v2 >= 0 on all 51).  Page: `ring_mode_rand_0_0569_t20.svg`.
+- [C] The finite structure question (s.6, `structures219.json`): 8 meeters x {wall, partner, <= 2 holders in other meeters / <= 3
+  interior squares}: 1.2e13 labelled, ~2.6e11 orbits (2.6e7 with no interior holder), 2.3e6 CPU-days at 0.78 s per structure
+  (232 CPU-days for the no-holder slice alone).  Not a route.  RING excludes LOADED four-crowds; the rattler crowds (61 / 70 at the
+  genuine k0 FJ points) are covered by no proved lemma -- K0-FREE (teleport, [T]) needs a corner met by <= 1 square; they stay with
+  H1 = T3|k0 (`drain_flow_k0.md` DF-O4, OPEN).  **k0_00 unchanged.**
+- Files: `docs/proofs/wall_torque.md`; `attempts/A219-wall-torque/{code,results,logs}`; pages
+  `docs/residue_map/campaigns/A219-wall-torque/`; registry row; ledger s.4 note.
