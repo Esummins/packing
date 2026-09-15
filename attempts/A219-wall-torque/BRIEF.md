@@ -45,3 +45,14 @@ L3. "They require squares pushing out from the centre to keep them pinned; the h
 4. Deliverables: wall_torque.md, Open/ files, results/ring219.md (+ jsonl), pages, registry row, LOG entry,
    ledger s.4 note.  Report once (<= 25 lines: the three lemmas' status, RING feasible-or-not per witness class, the
    structure count and certificate price, what closes) and EXIT.
+
+## Addendum 2b (PI, 19:30) -- the second-order test
+On the ring witness square 6 is a two-force strut (loaded contacts 4 and 7 only, collinear through the two contact
+vertices, floor contact unloaded, moment about the 7-contact -2.7e-11).  A clockwise rotation of 6 about its
+7-contact is a FIRST-ORDER FREE MODE (1 mrad: floor +6e-4, 7 held, gap to 4 -5e-7, quadratic).  The ring is
+stationary, not stable; the stress LP cannot see it.  (i) Decide whether the side decreases at second order along
+that mode (a sigma-minimiser is a local minimum: an FJ point with a zero mode along which s decreases at second
+order is excluded).  (ii) Lemma STRUT (any n): a square whose loaded contacts are exactly two collinear vertex
+contacts has rotation about either contact as a first-order free mode; state the second-order exclusion (reduced
+Hessian of the side on the first-order zero modes of the active set) and run it on every HELD and CROWD four-crowd
+witness; count the saddles.  Deliverables: results/second_order219.md, a page for the ring's mode.
