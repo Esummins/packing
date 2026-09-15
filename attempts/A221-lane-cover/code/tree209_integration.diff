@@ -1,0 +1,107 @@
+diff --git a/attempts/A211-coarse-tree/code/tree209.py b/attempts/A211-coarse-tree/code/tree209.py
+index a60f1845f..853c891cd 100644
+--- a/attempts/A211-coarse-tree/code/tree209.py
++++ b/attempts/A211-coarse-tree/code/tree209.py
+@@ -13,6 +13,7 @@ Kills: [C: library clip trace (+ A189 Lemma 1 / Lemma CN / Lemma BASIN)] with br
+ The closed top-level branches of an A206 whole-tree run of the same page and pad (the same (slot, rows) hypothesis at
+ depth 1 from the same A203 start; A209's root is a subset of A206's) are inherited as DEAD, not re-run."""
+ import math
++import os
+ import time
+ from fractions import Fraction as Fr
+ 
+@@ -25,6 +26,8 @@ import tree207 as N7
+ FP, MB = P.FP, P.MB
+ N7.install()
+ _NR = None
++_N221 = None
++A221 = os.environ.get("A221_LANE") == "1"       # A221: the POCKET COVER (Lemma POCKET-DEAD) in place of A189's lane
+ 
+ 
+ def NR():
+@@ -40,6 +43,18 @@ def NR():
+     return _NR
+ 
+ 
++def N221():
++    global _N221
++    if _N221 is None:
++        import sys
++        d = os.path.join(P.ROOT, "attempts", "A221-lane-cover", "code")
++        if d not in sys.path:
++            sys.path.insert(0, d)
++        import noroom221
++        _N221 = noroom221
++    return _N221
++
++
+ def diam(p):
+     return math.hypot(p[1] - p[0], p[3] - p[2])
+ 
+@@ -63,10 +78,14 @@ def cn_groups(pockets):
+     return len(groups), ok
+ 
+ 
+-def noroom_at(pg, wall_left, log=print, deadline=None):
++def noroom_at(pg, wall_left, log=print, deadline=None, parent_pockets=None):
+     """A208's leaf on the node's role boxes; -> dict(verdict, clip, reason, k, m, pockets, cn_bound, seconds).
+     A220: `deadline` (seconds) overrides the wall-derived budget, which has a 60 s FLOOR -- the short child cap of
+-    the A220 addendum (A220_NOROOM_CHILD_CAP) has to be able to go below it.  deadline=None is the old behaviour."""
++    the A220 addendum (A220_NOROOM_CHILD_CAP) has to be able to go below it.  deadline=None is the old behaviour.
++    A221 (flag A221_LANE=1): the POCKET COVER of attempts/A221-lane-cover/notes/lane221.md replaces A189's lane --
++    each pocket is covered by the exact clip ROOTED AT THE POCKET (Lemma POCKET-DEAD), and `parent_pockets` (the
++    nearest recorded no-room ANCESTOR's pocket list, which covers this node's free centres by Lemma POCKET-INHERIT)
++    lets the child skip the container-wide bisection."""
+     roles = {k: tuple(float(v) for v in b) for k, b in pg.roles.items()}
+     k, m = len(roles), 11 - len(roles)
+     t0 = time.time()
+@@ -74,13 +93,18 @@ def noroom_at(pg, wall_left, log=print, deadline=None):
+     if m >= 2:
+         bud["max_pocket_area"] = 0.0
+     try:
+-        out = NR().noroom(roles, s0=None, budget=bud, name=pg.name, n=11)
++        if A221 and parent_pockets:
++            out = N221().noroom_child(roles, parent_pockets, budget=bud, name=pg.name, n=11)
++        elif A221:
++            out = N221().noroom(roles, s0=None, budget=bud, name=pg.name, n=11)
++        else:
++            out = NR().noroom(roles, s0=None, budget=bud, name=pg.name, n=11)
+     except Exception as e:                                        # noqa: BLE001
+         out = dict(verdict="ERROR", reason=repr(e)[:200])
+     res = dict(k=k, m=m, verdict=out.get("verdict"), clip=None, reason=str(out.get("reason"))[:300], bound=out.get("bound"), pockets=out.get("pockets") or [],
+                cn_bound=None, bisect=out.get("bisect"), lanes=out.get("lanes"), seconds=round(time.time() - t0, 1))
+     if res["verdict"] == "DEAD":
+-        res["clip"] = "NOROOM" if out.get("leaf") != "EmptyBox (A171 pair leaf)" else "EmptyBox"
++        res["clip"] = out.get("clip") or ("NOROOM" if out.get("leaf") != "EmptyBox (A171 pair leaf)" else "EmptyBox")
+     elif res["verdict"] == "UNDECIDED" and res["pockets"]:
+         n, ok = cn_groups(res["pockets"])
+         if ok:
+@@ -148,6 +172,19 @@ class Tree209(NB.Tree206):
+             self.on_node(self)
+ 
+     # ------------------------------------------------------------------ the no-room leaf with pocket branching
++    def parent_pockets(self, label):
++        """A221 Lemma POCKET-INHERIT: the pocket list of the nearest ANCESTOR (never a sibling) that recorded one.
++        Every branch rule of this tree shrinks a role's pose set or adds a role, so the ancestor's pockets cover this
++        node's free centres."""
++        seen = {r["label"]: r for r in self.noroom_runs}
++        lab = label
++        while "." in lab:
++            lab = lab.rsplit(".", 1)[0]
++            r = seen.get(lab)
++            if r and r.get("pockets"):
++                return [list(map(float, p)) for p in r["pockets"]]
++        return None
++
+     def expand(self, depth, label):
+         self._ctx.append((depth, label))
+         try:
+@@ -161,7 +198,7 @@ class Tree209(NB.Tree206):
+         fully = why.startswith("every forced slot has two named meeters")
+         if len(pg.roles) < 9 or pg.T.out_of_time() or "wall" in why:
+             return NB.Tree206.leaf_alive(self, why)
+-        res = noroom_at(pg, pg.T.left(), log=self.log)
++        res = noroom_at(pg, pg.T.left(), log=self.log, parent_pockets=self.parent_pockets(label) if A221 else None)
+         rec = dict(label=label, depth=depth, k=res["k"], m=res["m"], verdict=res["verdict"], clip=res["clip"], bound=res["bound"], cn_bound=res["cn_bound"],
+                    n_pockets=len(res["pockets"]), pockets=res["pockets"], seconds=res["seconds"], reason=res["reason"])
+         self.noroom_runs.append(rec)
