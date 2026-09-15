@@ -30,6 +30,7 @@ import PackingCertMathlib.Statements.Open.OneTilted
 import PackingCertMathlib.Statements.Open.RingSwap
 import PackingCertMathlib.Statements.Open.TwoGrains
 import PackingCertMathlib.Statements.Open.OneFlush
+import PackingCertMathlib.Statements.Open.LemmaEps
 import PackingCertMathlib.Statements.SnapRule
 
 /-!
