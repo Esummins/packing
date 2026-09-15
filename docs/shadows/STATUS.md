@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-15 00:57` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-15 01:08` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -171,7 +171,7 @@ Of the 71 gallery pages the PI reviews, **25 are still ALIVE and 46 are now DEAD
 | [ ] [`c0_Y1033.svg`](c0_Y1033.svg) | `c0_Y1033` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 8) |
 | [ ] [`k5_11_interior_Y0738.svg`](k5_11_interior_Y0738.svg) | `k5_11_interior_Y0738` | `k5_11` | 1 | `S02` | **ALIVE** | A211 coarse tree still open at the g1 pad: 1 start nodes left, 5 alive leaves, depth 17 (4 run(s), 2.03 CPU-h spent) | A211 | 2026-09-15 | 3.76 (rank 4) |
 | [ ] [`k5_16_interior_Y0402.svg`](k5_16_interior_Y0402.svg) | `k5_16_interior_Y0402` | `k5_16` | 1 | `S03` | **ALIVE** | A211 coarse tree still open at the g1 pad: 0 start nodes left, 0 alive leaves, depth 7 (3 run(s), 1.97 CPU-h spent) | A211 | 2026-09-14 | 2.88 (rank 35) |
-| [ ] [`k5_16_interior_Y1056.svg`](k5_16_interior_Y1056.svg) | `k5_16_interior_Y1056` | `k5_16` | 1 | `S08` | **ALIVE** | A211 coarse tree still open at the g1 pad: 2 start nodes left, 2 alive leaves, depth 10 (3 run(s), 1.54 CPU-h spent) | A211 | 2026-09-14 | 2.88 (rank 31) |
+| [ ] [`k5_16_interior_Y1056.svg`](k5_16_interior_Y1056.svg) | `k5_16_interior_Y1056` | `k5_16` | 1 | `S08` | **ALIVE** | A211 coarse tree still open at the g1 pad: 3 start nodes left, 4 alive leaves, depth 10 (4 run(s), 2.08 CPU-h spent) | A211 | 2026-09-15 | 2.88 (rank 31) |
 | [ ] [`slack0.02_c0_Y0272.svg`](slack0.02_c0_Y0272.svg) | `slack0.02_c0_Y0272` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 1) |
 
 **The kills, with their certificates.**
