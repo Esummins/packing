@@ -21,3 +21,22 @@ KeyError: 'c0_Y0880_interior_G1'
 == c0_Y0880 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0880_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.358, 2.498, 1.38, 1.519, 0.0, 14.25]; forced H []; 6 slots; free 5
    node R          d0 root: INTERNAL (37.6 s, 1 rounds; t=37.6)
    node R.1        d1 BR(0,1)<-[18]: INTERNAL (17.0 s, 1 rounds; t=54.7)
+   node R.1.1      d2 TL(0,0)<-[3, 8]: INTERNAL (27.9 s, 1 rounds; t=82.7)
+   no-room (k=9, m=2): DEAD by EmptyBox in 1 s (0 pockets; EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.1      d2: DEAD by EmptyBox -- no-room at R.1.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.2      d2 TL(0,0)<-[3, 9]: INTERNAL (40.1 s, 1 rounds; t=125.1)
+   no-room (k=9, m=2): UNDECIDED in 95 s (3 pockets; residue too big to pocket: 3 pocket(s) of total area 0.422 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.2: 3 pockets (k=9, m=2)
+   node R.1.2.p1   d3 pocket<-[0]: INTERNAL (75.3 s, 1 rounds; t=297.1)
+   no-room (k=10, m=1): DEAD by NOROOM in 26 s (1 pockets; sum of pocket LANE = 0 < 1 free squares)
+   node R.1.2.p1   d3: DEAD by NOROOM -- no-room at R.1.2.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): sum of pocket LANE = 0 < 1 free squares
+   node R.1.2.p2   d3 pocket<-[1]: DEAD by EmptyBox r1 (7.7 s, 1 rounds; t=342.7)
+   node R.1.2.p3   d3 pocket<-[2]: INTERNAL (57.5 s, 1 rounds; t=400.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 15 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.2.p3   d3: DEAD by NOROOM -- no-room at R.1.2.p3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.3      d2 TL(0,0)<-[3, 14]: INTERNAL (29.4 s, 1 rounds; t=448.7)
+   node R.1.3r1    d2 root<-None: DEAD by EmptyBox r1 (12.5 s, 1 rounds; t=461.2)
+   node R.1.4      d2 TL(0,0)<-[4, 8]: INTERNAL (38.7 s, 1 rounds; t=500.0)
+   no-room (k=9, m=2): UNDECIDED in 112 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.629 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.4: 2 pockets (k=9, m=2)
+   node R.1.4.p1   d3 pocket<-[0]: INTERNAL (74.3 s, 1 rounds; t=687.3)

@@ -14,3 +14,29 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0881_interior_G1'
 10:44:27 [w3] c0_Y0881  rc=1 3s
+01:11:53 [w2] start c0_Y0881 wall 1800 (lab 2, free 14090 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0881 at the zero pad: ALIVE in 29856 ms; kills {'H-clip': 0, 'P': 4578, 'W': 1120, 'C': 832, 'M': 3255, 'L': 2, 'R': 3927, 'X': 1046}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0881 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0881_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.358, 2.498, 1.38, 1.519, 14.25, 28.072]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (41.1 s, 1 rounds; t=41.2)
+   node R.1        d1 BR(0,1)<-[13]: INTERNAL (12.7 s, 1 rounds; t=53.9)
+   node R.1.1      d2 BL(0,2)<-[3, 4]: DEAD by EmptyBox r1 (2.8 s, 1 rounds; t=56.8)
+   node R.1.2      d2 BL(0,2)<-[3, 9]: DEAD by REACH r1 (30.5 s, 1 rounds; t=87.3)
+   node R.1.3      d2 BL(0,2)<-[4, 8]: DEAD by REACH r1 (12.2 s, 1 rounds; t=99.6)
+   node R.1.4      d2 BL(0,2)<-[4, 9]: DEAD by REACH r1 (21.8 s, 1 rounds; t=121.4)
+   node R.1.5      d2 BL(0,2)<-[8, 9]: DEAD by EmptyBox r1 (3.8 s, 1 rounds; t=125.2)
+   node R.2        d1 BR(0,1)<-[18]: INTERNAL (21.3 s, 1 rounds; t=146.5)
+   node R.2.1      d2 TL(0,0)<-[3, 8]: INTERNAL (34.0 s, 1 rounds; t=180.6)
+   no-room (k=9, m=2): DEAD by EmptyBox in 2 s (0 pockets; EmptyBox(P4): every pose is impossible -- the case is dead by the pair leaf)
+   node R.2.1      d2: DEAD by EmptyBox -- no-room at R.2.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(P4): every pose is impossible -- the case is dead by the pair leaf
+   node R.2.2      d2 TL(0,0)<-[3, 9]: INTERNAL (46.1 s, 1 rounds; t=229.6)
+   no-room (k=9, m=2): UNDECIDED in 100 s (3 pockets; residue too big to pocket: 3 pocket(s) of total area 0.530 > 0.000 (no lane cove)
+   Lemma POCKET at R.2.2: 3 pockets (k=9, m=2)
+   node R.2.2.p1   d3 pocket<-[0]: INTERNAL (77.4 s, 1 rounds; t=408.5)
+   no-room (k=10, m=1): UNDECIDED in 121 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.2.p1: split H at TR(0,1) (meeting fraction 0.21244)
+   node R.2.2.p1.1 d4 TR(0,1)<-None: INTERNAL (49.0 s, 1 rounds; t=582.1)
+   no-room (k=10, m=1): DEAD by NOROOM in 14 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.2.p1.1 d4: DEAD by NOROOM -- no-room at R.2.2.p1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.2.p1.2 d4 TR(0,1)<-None: INTERNAL (39.6 s, 1 rounds; t=639.2)

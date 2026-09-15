@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-15 01:11:51
+# A212 progress -- 2026-09-15 01:23:46
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (98 nodes)
+## A60's alive trump5 frontier (deepest first) (99 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -124,11 +124,12 @@ CPU-h in this block: 5.66
 | c0_Y0878 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 1} | 1 / 0 | 6 |
 | c0_Y0879 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 1} | 1 / 0 | 4 |
 | c0_Y0850 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'COUNT': 1, 'EmptyBox': 4, 'S-CLIP': 1, 'MISS-CLIP': 1} | 19 / 7 | 1849 |
+| c0_Y0877 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 6, 'NOROOM': 7, 'CC': 2} | 28 / 7 | 1818 |
 
-CPU-h in this block: 29.96
+CPU-h in this block: 30.47
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 65, 'DEAD': 46}; gallery 13 / 13 run (5.66 CPU-h); frontier 98 run of 92 (38 remaining; 29.96 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 38: 4.9 CPU-h; spent 35.6; cap 150
+* verdicts so far: {'ALIVE': 66, 'DEAD': 46}; gallery 13 / 13 run (5.66 CPU-h); frontier 99 run of 92 (37 remaining; 30.47 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 37: 4.7 CPU-h; spent 36.1; cap 150
 
