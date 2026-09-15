@@ -49,3 +49,15 @@ chain through S has a flush segment and the formula's minimum moves).
    candidate as a documented axiom + the consequence theorem), build + audit, 0 sorry.
 4. Deliverables: docs/proofs/realign.md, the Lean file, code/, results/realign231.md (+jsonl), pages, registry row,
    LOG entry, ledger s.4 note.  Report once (<= 20 lines) and EXIT.
+
+## Addendum (PI, 10:05) -- grain selection and the wall-wastage bound
+"Each non-flush corner corresponds to at least one grain, so there must be at least one grain we can select where
+draining it to flush improves the global packing; doing so removes the wastage along the outer wall where that
+grain meets the wall; is that enough for all n?"  Add: Lemma WALL-EXCESS (any n): a wall touched by a grain of k
+squares at tilts theta_i with sealed gaps has along-wall extent sum(cos + sin) >= k (equality only flush) and sealed
+wasted area >= sum sin cos (exact bound; what an unsealed gap gives back).  DICHOTOMY strategy for ONE-FLUSH: every
+corner grain is flush-side (its anchored drain is the improvement, quantified by WALL-EXCESS) or kink-side; if all
+four corner grains are kink-side the four-wall wastage >= c * (wall squares) contradicts s <= s(n) for the survey n
+(compute per n; n = 11: all-45-deg walls waste ~ sqrt2 s > 5.03 at s = 3.88 -- check).  Area alone cannot exclude a
+CROWD-ABOVE crowd (O(eps)); the dichotomy avoids that (the crowd is flush-side).  Report the horn of every corner
+grain of the 193 + 40 witnesses and whether each has a flush-side corner grain whose anchored drain succeeded.
