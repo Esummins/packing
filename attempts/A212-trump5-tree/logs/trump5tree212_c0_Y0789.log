@@ -31,3 +31,23 @@ KeyError: 'c0_Y0789_interior_G1'
    no-room (k=10, m=1): DEAD by NOROOM in 35 s (1 pockets; sum of pocket LANE = 0 < 1 free squares)
    node R.1.1.p1.1 d4: DEAD by NOROOM -- no-room at R.1.1.p1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): sum of pocket LANE = 0 < 1 free squares
    node R.1.1.p1.2 d4 TR(0,1)<-None: INTERNAL (84.7 s, 1 rounds; t=776.6)
+   no-room (k=10, m=1): UNDECIDED in 121 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.p1.2: split F1 at BL(1,1) (meeting fraction 0.081386)
+   node R.1.1.p1.2.1 d5 BL(1,1)<-None: INTERNAL (94.3 s, 1 rounds; t=1004.2)
+   no-room (k=10, m=1): DEAD by EmptyBox in 1 s (0 pockets; EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.1.p1.2.1 d5: DEAD by EmptyBox -- no-room at R.1.1.p1.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.1.p1.2.2 d5 BL(1,1)<-None: INTERNAL (76.0 s, 1 rounds; t=1098.7)
+   no-room (k=10, m=1): DEAD by EmptyBox in 6 s (0 pockets; EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.1.p1.2.2 d5: DEAD by EmptyBox -- no-room at R.1.1.p1.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.1.p2   d3 pocket<-[1]: INTERNAL (76.8 s, 1 rounds; t=1190.9)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.p2: split H at TR(0,1) (meeting fraction 0.02951)
+   node R.1.1.p2.1 d4 TR(0,1)<-None: DEAD by REACH r1 (79.6 s, 1 rounds; t=1394.5)
+   node R.1.1.p2.2 d4 TR(0,1)<-None: INTERNAL (54.9 s, 1 rounds; t=1449.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 18 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.1.p2.2 d4: DEAD by NOROOM -- no-room at R.1.1.p2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.2      d2 TL(0,0)<-[3, 9]: INTERNAL (53.1 s, 1 rounds; t=1520.5)
+   no-room (k=9, m=2): UNDECIDED in 174 s (3 pockets; residue too big to pocket: 3 pocket(s) of total area 0.690 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.2: 3 pockets (k=9, m=2)
+   node R.1.2.p1   d3 pocket<-[0]: INTERNAL (92.2 s, 1 rounds; t=1789.1)
+   no-room (k=10, m=1): UNDECIDED in 71 s (2 pockets; pocket LANE sum None does not beat 1)
