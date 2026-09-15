@@ -1,5 +1,6 @@
 """A211 driver -- ONE runner for the COARSE tree on one node (a gallery page or an A57 tree record):
    python run211.py page <nid> [--wall 1800] [--pads zero,g1] [--depth 6] [--nodes 600] [--force] [--no-resume]
+                              [--start LABEL[,LABEL...]] [--cert-suffix TAG]      # A229: ONE SHARD of the page
 Per pad, PAD 0 FIRST (a pad-0 kill is s0-only, WINDOW-PENDING; the window pad follows): stage 0 (A202 closed form +
 A203 CSP, cached), then the coarse tree (tree211: cheap coarse internal nodes, the leaf rules at every fully named
 leaf: rule CC -> no-room + pockets -> basin clip -> Rule NS -> the exact cascade last).  One certificate per node
@@ -133,6 +134,10 @@ def wall_limited(d):
         return True
     # PI 2026-09-14: a leaf left "every forced slot has two named meeters ... no-room UNDECIDED (k=10, m=1)" is now
     # decidable by Lemma POCKET at m = 1 (the 11th square branched into the pockets): re-run such pads too
+    # A229: a SHARD run (--start) leaves the start nodes it was not given as "SKIPPED (filter)" -- that refusal is the
+    # FILTER's, not the geometry's, so the shard is always re-runnable on a fresh wall (its cert lives in its own file)
+    if any("SKIPPED (filter)" in str(u.get("reason") or "") for u in (d.get("undecided") or [])):
+        return True
     return any(("no-room UNDECIDED" in str(u.get("reason") or "")) or ("undecided leaf" in str(u.get("reason") or ""))
                or ("every forced slot has two named meeters" in str(u.get("reason") or ""))
                for u in (d.get("undecided") or []))
@@ -168,6 +173,9 @@ def row_of(doc, key, cert):
                 start_nodes=d.get("start_nodes"), start_runs=d.get("runs"), basins=d.get("basins"), killing=d.get("killing"), undecided=d.get("undecided"), seconds=d.get("seconds"), root=d.get("root"),
                 wall=d.get("wall"), window_pending=d.get("window_pending"), stage0=doc.get("stage0"), verdicts=doc.get("verdicts"), stage_reached=doc.get("stage_reached"),
                 nodes_brief=brief_nodes(d.get("nodes") or []), verifier=VERIFIER, cert=os.path.relpath(cert, ROOT).replace("\\", "/"), when=time.strftime("%Y-%m-%d %H:%M:%S"))
+    if d.get("start_filter") or d.get("cert_suffix"):             # A229: this row is ONE SHARD of the page, not the page
+        slim.update(shard=True, start_filter=d.get("start_filter"), cert_suffix=d.get("cert_suffix"),
+                    start_skipped=[u.get("label") for u in (d.get("undecided") or []) if "SKIPPED (filter)" in str(u.get("reason") or "")])
     os.makedirs(os.path.dirname(RES), exist_ok=True)
     with open(RES, "a", encoding="utf-8") as f:
         f.write(json.dumps(slim, default=str) + "\n")
@@ -216,6 +224,12 @@ def run_tree(doc, a, pad, cert, log=print):
                                          a220=dict(exact_first=N11.EXACT_FIRST, budget=N11.BUDGET, rounds=N11.EXACT_FIRST_ROUNDS, small_ext=N11.SMALL_EXT,
                                                    noroom_inherit=N11.NOROOM_INHERIT, child_cap=N11.NOROOM_CHILD_CAP, shrink=N11.NR_SHRINK),
                                          a224=dict(snap=N11.SNAP.ON, eps=N11.SNAP.EPS_C, deg=N11.SNAP.DEG)))
+    if getattr(a, "start_only", None) or getattr(a, "cert_suffix", None):
+        d.update(start_filter=sorted(a.start_only or []), cert_suffix=a.cert_suffix,
+                 shard="A229: ONE SHARD of this page -- only the start nodes in start_filter were run; the others are "
+                       "recorded SKIPPED (filter) and are the sibling shards' work.  This certificate is merged with "
+                       "the page certificate (and every sibling shard's) on the PATH KEY by Lemma INHERIT file-wise "
+                       "(attempts/A229-start-parallel/notes/parallel229.md).")
     log("== %s page pad %s: start %s; basins %s; INHERIT %d dead branches (final) + %d start nodes %s; H %s; forced H %s; %d slots; free squares %d" % (
         a.nid, pad, start.get("file"), [(b["cell"], float(b["rc"])) for b in basins], len(rows), len(starts), [s["label"] for s in starts][:10],
         [round(v, 3) for v in base.roles[base.H]], sorted(base.forced_H), len(base.slots), base.n_free))
@@ -260,7 +274,21 @@ def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, d
     done = []
     if have_merge and not starts:                                 # every branch of the merged trie is already closed
         log("   every branch of the merged prior state is DEAD: nothing left to run (Lemma INHERIT (c))")
+    only = set(getattr(a, "start_only", None) or [])
+    if only:                                                      # A229: say exactly which of the asked-for labels exist NOW
+        have = set((s or {}).get("label", "R") for s in (starts if have_merge else [None]))
+        miss = sorted(only - have)
+        log("   A229 SHARD: --start %s -- %d of them are start nodes of this page/pad right now (%d start nodes in all)%s"
+            % (",".join(sorted(only)), len(only & have), len(have),
+               ("; NOT PRESENT (already dead, or the queue is stale -- re-run queue229.py): %s" % ",".join(miss)) if miss else ""))
     for sn in (starts if have_merge else [None]):
+        if only and (sn or {}).get("label", "R") not in only:      # A229: this shard was given other start nodes
+            agg["verdict"] = "ALIVE"
+            agg["undecided"].append(dict(label=(sn or {}).get("label", "R"),
+                                         reason="undecided: SKIPPED (filter) -- this run is the shard --start %s of the page; "
+                                                "this start node belongs to a sibling shard of the same pass" % ",".join(sorted(only))))
+            log("   start %s: SKIPPED (filter)" % (sn or {}).get("label", "R"))
+            continue
         if T.out_of_time():
             agg["verdict"] = "ALIVE"
             agg["undecided"].append(dict(label=(sn or {}).get("label", "R"), reason="undecided: the wall ran out before this start node ran"))
@@ -367,12 +395,28 @@ if __name__ == "__main__":
     ap.add_argument("--no-resume", dest="no_resume", action="store_true",
                     help="A211g: keep a cached WALL-limited ALIVE verdict instead of re-running the pad on a fresh wall")
     ap.add_argument("--no-inherit", dest="no_inherit", action="store_true", help="ignore the prior certificates and run the page from its A203 root")
+    ap.add_argument("--start", dest="start_only", default=None,
+                    help="A229: run ONLY these start nodes of the page (comma separated labels, exactly as queue229.py / "
+                         "pstats211 print them); every other start node is recorded SKIPPED (filter), NOT (wall).  The pad "
+                         "verdict of such a run is ALIVE unless the filter happened to cover every start node left.")
+    ap.add_argument("--cert-suffix", dest="cert_suffix", default=None,
+                    help="A229: write this run's certificate to coarsetree211_<nid>__<TAG>.json (the page certificate is "
+                         "left untouched, so sibling shards of the same page never write the same file).  Letters, digits, "
+                         "'.', '_' and '-' only.  Implies --no-fig: a shard holds only part of the page.")
     ap.add_argument("--cert-dir", dest="cert_dir", default=CERTS, help="where the certificate goes (a TEST run points this away from certs/)")
     ap.add_argument("--results", default=RES, help="the jsonl the row is appended to (a TEST run points this away from results/)")
     ap.add_argument("--no-fig", dest="no_fig", action="store_true", help="do not write the SVG page (a TEST run beside the running workers)")
     a = ap.parse_args()
-    RES, NOFIG = os.path.abspath(a.results), bool(a.no_fig)
-    cert = os.path.join(os.path.abspath(a.cert_dir), "coarsetree211_%s.json" % a.nid)
+    a.start_only = [x for x in (a.start_only or "").replace(";", ",").split(",") if x.strip()] or None
+    if a.start_only:
+        a.start_only = [x.strip() for x in a.start_only]
+    if a.cert_suffix:
+        import re as _re
+        if not _re.fullmatch(r"[A-Za-z0-9._-]+", a.cert_suffix):
+            ap.error("--cert-suffix: letters, digits, '.', '_' and '-' only (it becomes part of a file name)")
+    RES, NOFIG = os.path.abspath(a.results), bool(a.no_fig) or bool(a.cert_suffix)
+    cert = os.path.join(os.path.abspath(a.cert_dir),
+                        "coarsetree211_%s%s.json" % (a.nid, ("__" + a.cert_suffix) if a.cert_suffix else ""))
     doc = dict(nid=a.nid, runs={})
     if os.path.exists(cert) and not a.force:
         try:

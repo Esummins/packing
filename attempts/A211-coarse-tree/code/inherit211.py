@@ -10,7 +10,16 @@ Two nodes of two different campaigns with the SAME path are the SAME hypothesis,
     only ones the new tree has to decide: the START NODES.
 This module reads A205 (cliptree205 + certs/extended), A206 (namedsplit206, runs keyed by leaf label), A209
 (k5killer209, both pads), A211's own certs, and the leaf-kill ledgers A210 cornercover210_leaves / A208 noroom208 /
-A207 basinclip207, and returns dead_paths (minimal, each with its source certificate) + start_nodes."""
+A207 basinclip207, and returns dead_paths (minimal, each with its source certificate) + start_nodes.
+
+A229 -- EVERY A211 certificate of the page is a source, not just the page certificate: the page file
+`coarsetree211_<nid>.json` AND every per-start SHARD file `coarsetree211_<nid>__<TAG>.json` that a `run211.py
+--start ... --cert-suffix TAG` run wrote (`attempts/A229-start-parallel/notes/parallel229.md`).  They are merged on
+the path key exactly as the other campaigns are -- Lemma INHERIT applied FILE-WISE: the same path key is the same
+hypothesis whichever file refuted it, so a DEAD branch from any of them is final, and the ALIVE leaves come from the
+newest file that recorded a branch list at that path (the A211 files are ranked by mtime, oldest first, so the newest
+wins the tie in `trie`).  Set A229_CERT_DIR to read the A211 certificates from somewhere else (an isolated TEST dir).
+"""
 import json
 import os
 import re
@@ -19,6 +28,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 ATT = os.path.join(ROOT, "attempts")
 SEG = re.compile(r"^(p?\d+)(.*)$")
+A211CERTS = os.environ.get("A229_CERT_DIR") or os.path.join(HERE, "..", "certs")
 BRANCH_KINDS = ("row", "pair", "ns-meets", "ns-misses", "pocket", "inherited")
 
 
@@ -46,6 +56,38 @@ def rel(p):
     return os.path.relpath(p, ROOT).replace("\\", "/")
 
 
+# ---------------------------------------------------------------- A229: every A211 certificate of ONE page
+def a211_certs(nid):
+    """the page certificate coarsetree211_<nid>.json and every per-start SHARD certificate
+    coarsetree211_<nid>__<TAG>.json, OLDEST FIRST (mtime).
+
+    Only these two spellings count: the '__' separator keeps `coarsetree211_<nid>_D07.json` -- a DIFFERENT page of the
+    A57 tree, whose id merely extends this one -- out of the list.  The order is the merge's tie-break: `trie` keeps the
+    branch list of the LAST source of the highest rank it sees, and every A211 file has rank 5, so oldest-first means
+    the NEWEST A211 file's branch list wins at a shared path.  DEAD is never a tie-break: a path closed in ANY of them
+    is closed (Lemma INHERIT (a), applied file-wise -- notes/parallel229.md).  With only the page certificate present
+    this returns exactly the one file the pre-A229 code read."""
+    d = os.path.abspath(A211CERTS)
+    want, pre = "coarsetree211_%s.json" % nid, "coarsetree211_%s__" % nid
+    out = []
+    try:
+        names = os.listdir(d)
+    except OSError:
+        names = []
+    for f in names:
+        if f == want or (f.startswith(pre) and f.endswith(".json") and len(f) > len(pre) + 5):
+            out.append(os.path.join(d, f))
+    def mt(f):
+        try:
+            return os.path.getmtime(f)
+        except OSError:
+            return 0.0
+    out.sort(key=lambda f: (mt(f), os.path.basename(f)))
+    if not out:                                                   # the pre-A229 path: the (possibly absent) page cert
+        out = [os.path.join(d, want)]
+    return out
+
+
 # ---------------------------------------------------------------- the tree sources for one page
 def sources(nid):
     """every prior tree for the page as dict(camp, file, run, pad, mode, source, root_label, nodes, rank)."""
@@ -60,9 +102,9 @@ def sources(nid):
         for pad, d in ((doc or {}).get("pads") or {}).items():
             out.append(dict(camp=camp, file=f, run="pad_%s" % pad, pad=pad, mode="tree", source=d.get("source"),
                             root_label=(d.get("nodes") or [{}])[0].get("label") or "R", nodes=d.get("nodes") or [], rank=rank))
-    for camp, f, rank in (("A206", os.path.join(ATT, "A206-named-split", "certs", "namedsplit206_%s.json" % nid), 3),
-                          ("A209", os.path.join(ATT, "A209-k5-killer", "certs", "k5killer209_%s.json" % nid), 4),
-                          ("A211", os.path.join(HERE, "..", "certs", "coarsetree211_%s.json" % nid), 5)):
+    a211 = [("A211", f, 5) for f in a211_certs(nid)]              # A229: the page cert AND every per-start shard cert
+    for camp, f, rank in [("A206", os.path.join(ATT, "A206-named-split", "certs", "namedsplit206_%s.json" % nid), 3),
+                          ("A209", os.path.join(ATT, "A209-k5-killer", "certs", "k5killer209_%s.json" % nid), 4)] + a211:
         doc = jload(f)
         for run, d in ((doc or {}).get("runs") or {}).items():
             nodes = d.get("nodes") or []
