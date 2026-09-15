@@ -20,3 +20,14 @@ KeyError: 'c0_Y0789_interior_G1'
    INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
 == c0_Y0789 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0789_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.218, 2.358, 1.38, 1.519, 64.011, 73.74]; forced H []; 6 slots; free 5
    node R          d0 root: INTERNAL (48.7 s, 1 rounds; t=48.8)
+   node R.1        d1 BR(0,1)<-[18]: INTERNAL (19.7 s, 1 rounds; t=68.6)
+   node R.1.1      d2 TL(0,0)<-[3, 8]: INTERNAL (54.9 s, 1 rounds; t=123.6)
+   no-room (k=9, m=2): UNDECIDED in 122 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.970 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.1: 2 pockets (k=9, m=2)
+   node R.1.1.p1   d3 pocket<-[0]: INTERNAL (89.7 s, 1 rounds; t=337.7)
+   no-room (k=10, m=1): UNDECIDED in 194 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.773 > 0.750 (no lane cove)
+   Rule NS at R.1.1.p1: split H at TR(0,1) (meeting fraction 0.043035)
+   node R.1.1.p1.1 d4 TR(0,1)<-None: INTERNAL (102.9 s, 1 rounds; t=645.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 35 s (1 pockets; sum of pocket LANE = 0 < 1 free squares)
+   node R.1.1.p1.1 d4: DEAD by NOROOM -- no-room at R.1.1.p1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): sum of pocket LANE = 0 < 1 free squares
+   node R.1.1.p1.2 d4 TR(0,1)<-None: INTERNAL (84.7 s, 1 rounds; t=776.6)

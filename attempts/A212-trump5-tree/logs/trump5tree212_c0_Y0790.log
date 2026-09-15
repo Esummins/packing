@@ -14,3 +14,17 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0790_interior_G1'
 10:43:49 [w3] c0_Y0790  rc=1 3s
+00:07:37 [w1] start c0_Y0790 wall 1800 (lab 5, free 13047 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0790 at the zero pad: ALIVE in 20171 ms; kills {'H-clip': 0, 'P': 4568, 'W': 1264, 'C': 682, 'M': 3608, 'L': 2, 'R': 3892, 'X': 1097}; CSP units 448 -> 448 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0790 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0790_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.218, 2.358, 1.38, 1.519, 73.74, 82.372]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (47.5 s, 1 rounds; t=47.6)
+   node R.1        d1 BR(0,1)<-[18]: INTERNAL (16.8 s, 1 rounds; t=64.5)
+   node R.1.1      d2 TL(0,0)<-[3, 8]: INTERNAL (54.8 s, 1 rounds; t=119.3)
+   no-room (k=9, m=2): UNDECIDED in 199 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.818 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.1: 2 pockets (k=9, m=2)
+   node R.1.1.p1   d3 pocket<-[0]: INTERNAL (97.0 s, 1 rounds; t=417.4)
+   no-room (k=10, m=1): ERROR in 196 s (0 pockets; RuntimeError('polycore: no certified polygon for B([1.295,2.377]x[3.210,3.377]x[)
+   Rule NS at R.1.1.p1: split F1 at BL(1,1) (meeting fraction 0.153786)
+   node R.1.1.p1.1 d4 BL(1,1)<-None: DEAD by EmptyBox r1 (43.7 s, 1 rounds; t=675.2)
