@@ -65,6 +65,9 @@ class Tree211(N9.Tree209):
         self.nr_short, self.nr_state, self.pocket_terminal = 0, {}, set()                  # A220 addendum: the short no-room cap
         self.snap_runs, self.snap_kills, self.snap_handoffs, self.snap_partial = 0, 0, 0, 0   # A224 Rule SNAP
         self.snap_cands, self.snap_seconds, self.snap_first, self.snap_rows = 0, 0.0, None, []
+        self.eps_runs, self.eps_kills, self.eps_seconds, self.eps_rows = 0, 0, 0.0, []            # A230 Rule EPS
+        self.eps_cands, self.eps_first, self.eps_ns_splits, self.eps_ns_kills = 0, None, 0, 0
+        self._ens = None
         self.dead_paths = dead_paths or {}          # Lemma INHERIT: path -> the certificate that closed it
         self.pathof = {self.root_label: tuple(path0)}
         self.n_inherited = 0
@@ -75,6 +78,8 @@ class Tree211(N9.Tree209):
         kind = str(br.get("kind") or "row")
         if kind.startswith("ns-"):
             return ("ns", str(br.get("slot")), str(br.get("role")), kind)
+        if kind.startswith("epsns-"):                            # A230 Rule EPS at the wedge
+            return ("epsns", str(br.get("slot")), str(br.get("role")), kind, str(br.get("wedge")))
         if kind == "pocket":
             return ("pocket", tuple(round(float(v), 6) for v in (br.get("pocket") or ())), tuple(br.get("rows") or ()))
         if kind == "rsplit":                                     # Lemma ROLE-SPLIT (notes/coarse_tree.md s.5)
@@ -188,6 +193,45 @@ class Tree211(N9.Tree209):
             return "ALIVE"
         return "OK"
 
+    # ------------------------------------------------------------------ A230: Rule EPS (flag A230_EPS=1, default OFF)
+    def eps_try(self, depth, label, where):
+        """Rule EPS (attempts/A230-eps-branch, docs/proofs/lemma_eps.md): at a FORCED cell where a role is near-simple,
+        the second meeter Theorem FC demands must enter through a WEDGE of (role, cell) -- a free-side wedge polygon or
+        the end zone of a pin/wall-backed side (EPS-3/4/5).  A230 evaluates EVERY candidate (smallest box first) and
+        tests the exact wedge polygon, not only its bounding rectangle.  When every other role misses every target and
+        no anonymous cell is within 1/sqrt2 of one, the node is DEAD by FC+EPS; when exactly ONE role survives with the
+        anonymous clause certified empty, that role MUST meet the wedge -- the NS-at-wedge split ("EPSNS").  Flag off:
+        nil (L11.EPS_ON is read once at import)."""
+        if not L11.EPS_ON or self.pg.dead or not self.nodes:
+            return "OK"
+        t0 = time.time()
+        r = L11.eps_eval(self.pg, label, log=self.log)
+        if r is None:
+            return "OK"
+        r["where"], r["depth"], r["seconds"] = where, depth, round(time.time() - t0, 3)
+        self.eps_runs += 1
+        self.eps_cands += r.get("n_cands") or 0
+        self.eps_seconds += r["seconds"]
+        self.nodes[-1].setdefault("eps", r)
+        w = r.get("wedge_ns")
+        self.eps_rows.append(dict(label=label, where=where, verdict=r.get("verdict"), n_cands=r.get("n_cands"),
+                                  n_added=r.get("n_added"), taper=r.get("taper"), seconds=r["seconds"],
+                                  wedge_ns=(dict(role=w["role"], slot=w["slot"], F=w["F"], n_targets=w["n_targets"]) if w else None),
+                                  cands=[dict(role=c["role"], slot=c["slot"], only_new=c["only_new"], struck=c["struck"],
+                                              survivors=sorted(c["survivors"]), anon_cells=c.get("anon_cells")) for c in (r.get("cands") or [])][:8]))
+        self.pg.T.test("EPS", label=label, where=where, verdict=r.get("verdict"), n_cands=r.get("n_cands"),
+                       seconds=r["seconds"], wedge_ns=bool(w))
+        if r.get("verdict") == "DEAD":
+            self.eps_kills += 1
+            if self.eps_first is None:
+                self.eps_first = round(self.pg.T.now(), 1)
+            self.kill(label, depth, "FC+EPS", r["leaf"], eps=r["kill"], verifier=r["verifier"])
+            return "DEAD"
+        if w and self.eff_depth(depth, label) < self.depth_cap and self.n_nodes < self.node_cap and not self.pg.T.out_of_time():
+            self._ens = w
+            return "EPSNS"
+        return "OK"
+
     # ------------------------------------------------------------------ A220: ONE budgeted exact cascade round, early
     def anc_noroom(self):
         """the nearest ANCESTOR on the live context stack whose no-room ran (A220 addendum)."""
@@ -234,6 +278,9 @@ class Tree211(N9.Tree209):
             self.alive("undecided (wall) at the fully named leaf before the leaf rules")
             return "ALIVE"
         s = self.snap_try(depth, label, "leaf")                                    # (0) A224 Rule SNAP, the FIRST rule
+        if s != "OK":
+            return s
+        s = self.eps_try(depth, label, "leaf")                                     # (0') A230 Rule EPS, beside SNAP
         if s != "OK":
             return s
         t0 = time.time()                                                          # (a) rule CC
@@ -384,10 +431,15 @@ class Tree211(N9.Tree209):
 
     def _expand(self, depth, label):
         pg = self.pg
-        ns = rs = None
+        ns = rs = ens = None
         if self.snap_try(depth, label, "internal") != "OK":                        # A224: cheap, after the coarse round
             return
-        while True:
+        e = self.eps_try(depth, label, "internal")                                 # A230: cheap, beside SNAP
+        if e == "DEAD":
+            return
+        if e == "EPSNS":
+            ens = self._ens
+        while ens is None:
             ch = TB.candidates(pg)
             n_stale = 0
             while ch == "stale" and n_stale < 4:
@@ -409,6 +461,9 @@ class Tree211(N9.Tree209):
                 if r == "RSPLIT":
                     rs = self._rs
                     break
+                if r == "EPSNS":                                  # A230: Rule EPS handed back the NS-at-wedge split
+                    ens = self._ens
+                    break
                 if r == "CONTINUE":
                     continue
                 return
@@ -427,7 +482,14 @@ class Tree211(N9.Tree209):
             self.record(label + "u", depth, dict(br, unit=True), "DEAD" if pg.dead else "INTERNAL", clip, rnd, t0)
             if pg.dead:
                 return
-        if ns is not None:
+        if ens is not None:                                                        # A230: Rule NS at the WEDGE
+            branches = L11.eps_branches(ens)
+            self.eps_ns_splits += 1
+            self.nodes[-1].update(branch_slot=ens["slot"], branch_role=ens["role"], n_branches=2,
+                                  branch_rows=["meets W", "misses W"], eps_ns=ens, verdict="INTERNAL")
+            self.log("   Rule NS at the WEDGE at %s: %s meets / misses the wedge of (%s, %s) -- %d target(s): %s" % (
+                label, ens["role"], ens["F"], ens["slot"], ens["n_targets"], ens["wedge"][:140]))
+        elif ns is not None:
             branches = N6.ns_branches(ns)
             self.ns_splits += 1
             self.nodes[-1].update(branch_slot=ns["slot"], branch_role=ns["role"], n_branches=2, branch_rows=["meets", "misses"], ns=ns, verdict="INTERNAL")
@@ -462,7 +524,22 @@ class Tree211(N9.Tree209):
             N6.restore_state(pg, st)
             self.fresh_child()
             t0 = time.time()
-            if str(br.get("kind", "")).startswith("ns-"):
+            if str(br.get("kind", "")).startswith("epsns-"):       # A230: Rule NS at the wedge
+                if br["kind"] == "epsns-misses":                   # DEAD at once by FC+EPS: no second meeter is left
+                    pg.dead = br["leaf"]
+                    self.n_nodes += 1
+                    self.eps_ns_kills += 1
+                    self.record(lab, depth + 1, br, "DEAD", "FC+EPS", None, t0).update(verifier=br["verifier"])
+                    continue
+                try:
+                    L11.eps_apply(pg, br)
+                except ValueError as e:                            # nothing reaches the wedge: DEAD by the clip itself
+                    pg.dead = "FC+EPS (wedge clip) at %s: %s" % (label, e)
+                    self.n_nodes += 1
+                    self.eps_ns_kills += 1
+                    self.record(lab, depth + 1, br, "DEAD", "EPS-WEDGE-EMPTY", None, t0).update(verifier=br["verifier"])
+                    continue
+            elif str(br.get("kind", "")).startswith("ns-"):
                 N6.apply_ns(pg, br)
             elif br.get("kind") == "rsplit":
                 try:
@@ -490,5 +567,8 @@ class Tree211(N9.Tree209):
                    ef_seconds=round(self.ef_seconds, 1), nr_short=self.nr_short,
                    snap_runs=self.snap_runs, snap_kills=self.snap_kills, snap_handoffs=self.snap_handoffs,
                    snap_partial=self.snap_partial, snap_cands=self.snap_cands, snap_first=self.snap_first,
-                   snap_seconds=round(self.snap_seconds, 2), snap_rows=self.snap_rows[-60:])
+                   snap_seconds=round(self.snap_seconds, 2), snap_rows=self.snap_rows[-60:],
+                   eps_runs=self.eps_runs, eps_kills=self.eps_kills, eps_cands=self.eps_cands, eps_first=self.eps_first,
+                   eps_ns_splits=self.eps_ns_splits, eps_ns_kills=self.eps_ns_kills,
+                   eps_seconds=round(self.eps_seconds, 2), eps_rows=self.eps_rows[-60:])
         return out

@@ -7,6 +7,8 @@ hypothesises at p cannot reach the band, or when every pose class of the pushed-
 The option table must be FRESH (a round with no instantiation: Lemma CT's proviso) -- the tree calls this only at
 a node where `candidates()` returned None.  Verdicts [C: closed-form trace; Lemma CORNER-COVER], no verifier clause."""
 import math
+import os
+import sys
 
 import cc210 as CC
 import leaves210 as L10
@@ -89,6 +91,46 @@ def snap_eval(pg, label, log=None):
         pg.T.test("SNAP-ROWS", label=label, n_cands=r.get("n_cands"), n_anon=r.get("n_anon"),
                   cands=r.get("cands"), verdict=r.get("verdict"))
     return r
+
+
+EPS_ON = (os.environ.get("A230_EPS") or os.environ.get("A227_EPS") or "").strip().lower() in ("1", "on", "yes")
+
+
+def eps_eval(pg, label, log=None):
+    """A230 leaf rule (0'), Rule EPS -- beside snap_eval (the logic is attempts/A230-eps-branch/code/epsns230.py +
+    eps230.py, which wrap A227 / A224 / A161 / A171 read-only; docs/proofs/lemma_eps.md).  None when the flag
+    A230_EPS (or A227_EPS) is off or no role is near-simple at a forced cell; otherwise a record with verdict DEAD
+    (FC+EPS: the cell is left with fewer than two possible non-pin meeters) or None with the survivors, the wedge
+    targets they reach and -- when exactly one survives -- the NS-at-wedge split `wedge_ns`.  Like SNAP it does not
+    need a fresh option table for the NAMED roles; the anonymous clause uses the fresh row exactly as rule CC does."""
+    if not EPS_ON:
+        return None
+    r = _e230().evaluate(pg, label, log=log)                     # A230 (flag-gated; the import is cheap and pure)
+    if r is not None:
+        pg.T.test("EPS-ROWS", label=label, n_cands=r.get("n_cands"), n_added=r.get("n_added"),
+                  n_anon=r.get("n_anon"), verdict=r.get("verdict"), wedge_ns=bool(r.get("wedge_ns")))
+    return r
+
+
+def _e230():
+    root = os.path.dirname(os.path.abspath(__file__))
+    while root and os.path.basename(root) != "attempts":
+        root = os.path.dirname(root)
+    for d in (os.path.join(root, "A227-lemma-eps", "code"), os.path.join(root, "A230-eps-branch", "code")):
+        if d not in sys.path:
+            sys.path.insert(0, d)
+    import epsns230
+    return epsns230
+
+
+def eps_branches(w):
+    """the two children of the NS-at-wedge split (A230): "M meets W" / "M misses W", exhaustive by Theorem FC + EPS."""
+    return _e230().branches(w)
+
+
+def eps_apply(pg, br):
+    """the MEETS child: M's pieces clipped to the poses that reach W (exact; ValueError when nothing is left)."""
+    return _e230().apply_wedge(pg, br)
 
 
 def cc_rows(pg, label):
