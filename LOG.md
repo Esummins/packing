@@ -8992,3 +8992,20 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
   n = 18 unverified.
 - Lean `Statements/Open/TwoGrains.lean`: `lemma_FLUSH`, `click_down` axioms; `flush_eleven_four`, `four_wall`, `no_stuck_in_window`
   theorems; build + audit exit 0, no sorry.  Files: `attempts/A223-two-grains/{code,results,logs}`; registry row; ledger s.4 note.
+
+## 2026-09-14 23:55 -- A225: progress on the page (how many top-level nodes are left, how deep it goes)
+- The PI: "update the node lists on the right of the summary page to show how many top-level nodes are left, so I can
+  better judge progress / work remaining / see how deep it's going."  New `attempts/A211-coarse-tree/code/pstats211.py`
+  (stdlib only, reads `results/coarsetree211.jsonl`, no cert loads, no runs) computes per page and pad: the START NODES
+  of the current run (the alive leaves it inherited, Lemma INHERIT) = N, D dead this run / A alive at the wall / U never
+  reached, one line per start node (verdict, nodes, depth reached, seconds), the cumulative line over every run (runs,
+  wall spent, dead / alive leaves now, ABSOLUTE max depth = the start node's path length + the depth the run added), and
+  a one-line estimate `start nodes left x median seconds per killed start node`, labelled an UNDER-estimate.
+- Shown in three places, all regenerated from disk: the PROGRESS block at the top of the right-hand text column of every
+  `docs/residue_map/campaigns/A211-coarsetree/*.svg` page (the node table stays below it) + a progress line per gallery
+  thumbnail (`fig211.py`); a per-alive-page table with a total line in `attempts/A211-coarse-tree/results/progress.md`
+  (`progress211.py`); the three numbers on the board row of every page the tree has not closed in `docs/shadows/STATUS.md`
+  (`status_gallery.py`'s A211 collector).
+- Where the 4 worked k5 pages stand at the window pad: Y0738 5 start nodes left / 8 alive leaves / depth 17, Y0402 4 / 14 /
+  7, Y0865 4 / 6 / 13, Y1056 2 / 2 / 10; 2-3 runs and ~1.0-1.5 CPU-h per page per pad so far.  The estimate is small
+  (0.03-0.19 CPU-h per page) precisely because the survivors are the start nodes that already ate a whole wall.
