@@ -29,7 +29,23 @@ for Q in "$@"; do
     T0=$(date +%s); echo "$(date +%H:%M:%S) [$SLOT] start $NID wall $WW (lab $(labcount), free $(freemb) MB)" | tee -a $LOG
     timeout -s KILL $(( 2 * WW + 1200 )) python $ATT/code/run211.py page $NID --wall $WW >> $LOG 2>&1
     RC=$?
-    if [ $RC -eq 137 ]; then echo "{\"nid\": \"$NID\", \"run\": \"process\", \"mode\": \"page\", \"pad\": \"g1\", \"verdict\": \"ALIVE\", \"leaf\": \"process wall $(( 2 * WW + 1200 )) s reached (killed): undecided\", \"seconds\": $(( $(date +%s) - T0 )), \"killed\": true, \"when\": \"$(date '+%Y-%m-%d %H:%M:%S')\"}" >> $RES/coarsetree211.jsonl; fi
+    # A228: a row for EVERY non-zero exit, not just the 137 wall kill -- the pass-5 SIGSEGV (rc 139) of
+    # k5_16_interior_Y0402 left no row at all in results/coarsetree211.jsonl and no mark in progress.md, so the
+    # crash was invisible to every ledger.  A crashed / killed run is recorded as ALIVE + killed (undecided),
+    # never as a verdict; a CRASH additionally releases its claim and is written to logs/requeue.txt so the pad is
+    # offered again (the page is re-run next pass in any case).
+    if [ $RC -ne 0 ]; then
+      case $RC in
+        137) WHY="process wall $(( 2 * WW + 1200 )) s reached (killed)";;
+        139) WHY="CRASHED: SIGSEGV (rc 139) -- see A228";;
+        134) WHY="CRASHED: abort (rc 134)";;
+        *)   WHY="run211 exited rc=$RC";;
+      esac
+      echo "{\"nid\": \"$NID\", \"run\": \"process\", \"mode\": \"page\", \"pad\": \"g1\", \"verdict\": \"ALIVE\", \"leaf\": \"$WHY: undecided\", \"seconds\": $(( $(date +%s) - T0 )), \"killed\": true, \"rc\": $RC, \"when\": \"$(date '+%Y-%m-%d %H:%M:%S')\"}" >> $RES/coarsetree211.jsonl
+      echo "$(date '+%Y-%m-%d %H:%M:%S') [$SLOT] $NID rc=$RC $WHY" >> $ATT/logs/requeue.txt
+      echo "$NID $WW" >> $ATT/logs/requeue.txt
+      if [ $RC -ne 137 ]; then rmdir "$ATT/logs/claims/$NID" 2>/dev/null; fi
+    fi
     # the audit of this node's DEAD leaves (sampling; <= 6 leaves, <= 240 s each)
     python $ATT/code/audit_queue211.py --nid "$NID" 2>/dev/null | tr -d '\r' | head -6 | while read -r ANID KEY LEAF; do
       [ -z "$ANID" ] && continue

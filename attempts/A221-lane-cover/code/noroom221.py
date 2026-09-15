@@ -161,7 +161,13 @@ def noroom(roles, s0=None, budget=None, name="node", n=11, nd=None, deadline=Non
         return dict(k=k, m=m, verdict="DEAD", clip="NOROOM", step="bisect", bisect=bcert, pockets=[],
                     t_build=t_build, t_bisect=t_bis, seconds=round(time.time() - t0, 1),
                     reason="bisection alone: every pose of a free unit square meets some core")
-    pk = NR.pockets_of(pieces, float(nd.s), bud)
+    # A228: the same guard the pocket re-pocketing got -- A189's `pockets_of` merge is O(components^3) and is
+    # reached AFTER `bisect_free`'s deadline, so a residue spread over many grid components burns unbounded wall
+    # (the pass-5 k5_16_interior_Y0402 crash sat here for ~500 s past a 150 s cap).  The fallback rectangle is the
+    # centre box [1/2, s - 1/2]^2, which contains the centre of EVERY pose of a unit square in the container, so
+    # it is a cover: sound, and it can only make the node UNDECIDED.
+    pk, how = PK.repocket(pieces, float(nd.s), bud,
+                          [0.5, float(nd.s) - 0.5, 0.5, float(nd.s) - 0.5])
     if m >= 2:
         # Lemma CN is FREE (it reads the rectangles, runs nothing).  A209 applies it to the whole pocket list and it
         # often bites there, so try it BEFORE paying for any cover -- that is A189+A209's own fast path, kept.
@@ -173,7 +179,7 @@ def noroom(roles, s0=None, budget=None, name="node", n=11, nd=None, deadline=Non
                         seconds=round(time.time() - t0, 1), reason=early.get("reason"))
     verdict, recs, alive = pocket_pass(nd, pk, bud, dl, m)
     return cn_upgrade(dict(k=k, m=m, verdict=verdict, clip=("NOROOM-POCKET" if verdict == "DEAD" else None),
-                           step="bisect+pockets", bisect=bcert, pockets=[[round(c, 6) for c in p] for p in pk],
+                           step="bisect+pockets", bisect=bcert, repocket=how, pockets=[[round(c, 6) for c in p] for p in pk],
                            pocket_recs=recs, alive=alive, t_build=t_build, t_bisect=t_bis,
                            seconds=round(time.time() - t0, 1),
                            reason=("every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square"

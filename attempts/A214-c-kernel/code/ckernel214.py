@@ -34,6 +34,12 @@ FLAG = os.environ.get("A214_CKERNEL", "1") != "0"
 VERIFY = os.environ.get("A214_VERIFY") == "1"
 LIM60 = 1 << 60
 LIM31 = 1 << 31
+# A228 (input guard, gate (2') of the FALLBACK PROTOCOL): `a214_cert_batch` addresses its output with
+# `int i0 = i * nb`, a C int -- at nv * nb >= 2^31 that product overflows, i0 goes negative and the kernel writes
+# OUTSIDE the ctypes buffer (an access violation, or silent heap corruption, which is worse).  The Python caller
+# is the only place that knows the real product, so it refuses the batch there and runs A213's unbounded-int path,
+# exactly as it does for a box outside the coefficient envelope.  The C code is untouched.
+LIM_PAIRS = 1 << 30
 STATS = dict(scalar=0, scalar_py=0, batch=0, pairs=0, undecided=0, exact_c=0, punt=0, batch_py=0, verified=0)
 _PY_VOK = PI.vertex_ok_h                                       # the reference, captured before any patching
 
@@ -155,6 +161,10 @@ def certify_h(hv, ibs):
     nv, nb = len(hv), len(ibs)
     if nv == 0 or nb == 0:
         return []
+    if nv * nb >= LIM_PAIRS:                                   # A228: `int i * nb` in the kernel would overflow
+        STATS["batch_py"] += 1
+        STATS["batch_pairs_guard"] = STATS.get("batch_pairs_guard", 0) + 1
+        return _PY_CERT(hv, ibs)
     cbs = [cbox_of(ib) for ib in ibs]
     if None in cbs or not all(_in_env(*p) for p in hv):
         STATS["batch_py"] += 1

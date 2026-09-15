@@ -36,7 +36,14 @@ DEFAULTS.update(
                                 # survives it is paid for again by the full leaf -- so keep the filter short
     pk_container=True,     # the sound w_min container clip on every piece (A171 container_clip, strict=False)
     grow=0.0,              # extra margin added to an inherited pocket before the cover (0: the cover is exact)
+    # ---------------- A228 (the pass-5 crash guards).  None of these can turn UNDECIDED into a verdict: every one
+    # of them replaces a residue by a SUPERSET of it (the cover's own root), which only ever loses sharpness.
+    pk_max_dump=4096,      # pieces of the undischarged STACK materialised when the cover gives up (deadline / cap)
+    pk_max_repocket=20000, # open pieces above which the residue is the cover's ROOT instead of a re-pocketing
+    pk_max_cells=400000,   # grid cells the re-pocketing may touch before it gives up and returns the root
+    pk_max_comps=64,       # components above which A189's O(n^3) `pockets_of` merge is NOT paid for (root instead)
 )
+EPS_OUT = 1e-9             # the outward nudge that keeps a float rectangle a SUPERSET of the rational one
 
 
 def install_kernels():
@@ -54,6 +61,24 @@ def budget_of(b=None):
     return d
 
 
+def _out(lo, hi):
+    """(lo, hi) as floats that BRACKET the rationals: float() rounds to nearest, so nudge outward."""
+    return (math.nextafter(float(lo), -math.inf) - EPS_OUT, math.nextafter(float(hi), math.inf) + EPS_OUT)
+
+
+def _dump(open_, stack, cap):
+    """A228: the undischarged frontier appended when the cover GIVES UP, bounded to `cap` pieces.
+
+    The stack held up to `pk_max_pieces` (2e5) entries and all of them were materialised, re-volumed and then
+    re-pocketed on a 4x finer grid -- an unbounded amount of work AFTER the pocket's own deadline had already
+    passed.  Truncating it is sound because a truncated cover is never read as DEAD (`pocket_dead` requires
+    `cert["exhausted"]`) and the residue of a give-up is the cover's ROOT, which contains the whole stack."""
+    n = len(stack)
+    src = stack[-cap:] if n > cap else stack
+    open_.extend([(b2, r2) for _d2, b2, r2 in src])
+    return n - len(src)
+
+
 # ------------------------------------------------------------------ LEMMA POCKET-DEAD
 def cover_rect(nd, rect, bud, deadline=None):
     """Bisect { (c, th) : c in `rect` } against the node's cores.  -> (open pieces, certificate).
@@ -67,9 +92,11 @@ def cover_rect(nd, rect, bud, deadline=None):
     y0 = max(half, Fr(math.floor(rect[2] * 4096 - 1), 4096))
     y1 = min(S - half, Fr(math.ceil(rect[3] * 4096 + 1), 4096))
     t0 = time.time()
+    rx = _out(x0, x1) + _out(y0, y1)                               # the cover's root as a float SUPERSET
     if x1 <= x0 or y1 <= y0:
-        return [], dict(depth=0, stop="empty", n_open=0, n_dropped=0, seconds=0.0,
-                        root=[float(x0), float(x1), float(y0), float(y1)], dropped_container=0)
+        return [], dict(depth=0, stop="empty", n_open=0, n_dropped=0, seconds=0.0, exhausted=True,
+                        root=[float(x0), float(x1), float(y0), float(y1)], root_out=list(rx),
+                        dropped_container=0)
     obst = [nd.boxes[k].obstacle("poly") for k in nd.names]
     root = [(0, MB.Bin(a, b), (x0, x1, y0, y1)) for (a, b) in MB.sub_bins(Fr(0), Fr(1), bud["pk_tsub"])]
     vol0 = sum(MB.rect_area(r) * (bn.t1 - bn.t0) for _d, bn, r in root)
@@ -79,7 +106,7 @@ def cover_rect(nd, rect, bud, deadline=None):
     stack = list(reversed(root))
     open_ = []
     depth = 0
-    nseen = n_dropped = n_cont = 0
+    nseen = n_dropped = n_cont = n_undumped = 0
     why = "exhausted"
     while stack:
         d, bn, r = stack.pop()
@@ -88,7 +115,7 @@ def cover_rect(nd, rect, bud, deadline=None):
         if (nseen & 255) == 0 and deadline is not None and time.time() > deadline:
             why = "deadline"
             open_.append((bn, r))
-            open_.extend([(b2, r2) for _d2, b2, r2 in stack])
+            n_undumped = _dump(open_, stack, bud["pk_max_dump"])
             break
         cur = r
         if bud["pk_container"]:
@@ -107,22 +134,56 @@ def cover_rect(nd, rect, bud, deadline=None):
             open_.append((bn, cur))
             if len(open_) > bud["pk_max_open"]:
                 why = "open cap"
-                open_.extend([(b2, r2) for _d2, b2, r2 in stack])
+                n_undumped = _dump(open_, stack, bud["pk_max_dump"])
                 break
             continue
         for (b2, r2) in MB.split_piece(bn, cur):
             stack.append((d + 1, b2, r2))
         if len(stack) > bud["pk_max_pieces"]:
             why = "piece cap"
-            open_.extend([(b2, r2) for _d2, b2, r2 in stack])
+            n_undumped = _dump(open_, stack, bud["pk_max_dump"])
             break
     vol = sum(MB.rect_area(r) * (bn.t1 - bn.t0) for bn, r in open_)
     cert = dict(depth=depth, stop=why, n_open=len(open_), n_dropped=n_dropped, dropped_container=n_cont,
-                n_seen=nseen, root=[float(x0), float(x1), float(y0), float(y1)],
+                n_seen=nseen, exhausted=(why == "exhausted"), n_undumped=n_undumped,
+                root=[float(x0), float(x1), float(y0), float(y1)], root_out=list(rx),
                 open_volume=float(vol), root_volume=float(vol0),
                 dropped_fraction=float(1 - vol / vol0) if vol0 else None,
                 seconds=round(time.time() - t0, 1))
     return open_, cert
+
+
+def repocket(pieces, s0, bud, root, grid=None):
+    """A228: A189's `pockets_of` on `pieces`, GUARDED -> (rect list, how).
+
+    A189's `pockets_of` is READ-ONLY and has two unbounded costs that no deadline reaches: the grid-cell hull dict
+    (one entry per cell each piece touches -- quadratic in 1/grid on a piece that spans the container) and, worse,
+    the merge loop `while len(pk) > max_pockets`, which rescans EVERY pair to pick the cheapest merge and so costs
+    O(n^3) in the number of connected components.  Both are paid AFTER the cover's deadline has passed.  This
+    wrapper estimates the two sizes first (both linear) and, when either is over budget, returns `root` -- the
+    cover's own root rectangle, which contains every open piece by construction.  A superset of the residue is a
+    superset of the free centres, so Lemma POCKET-DEAD / POCKET-INHERIT stay sound; only sharpness is lost, and a
+    node whose residue is the whole root is UNDECIDED, never DEAD."""
+    g = float(grid if grid is not None else bud["grid"])
+    if len(pieces) > bud["pk_max_repocket"]:
+        return [list(root)], "root (%d open pieces > pk_max_repocket)" % len(pieces)
+    cells, ncell = set(), 0
+    for _bn, r in pieces:
+        i0, i1 = int(math.floor(float(r[0]) / g)), int(math.floor(float(r[1]) / g))
+        j0, j1 = int(math.floor(float(r[2]) / g)), int(math.floor(float(r[3]) / g))
+        ncell += (i1 - i0 + 1) * (j1 - j0 + 1)
+        if ncell > bud["pk_max_cells"]:
+            return [list(root)], "root (> pk_max_cells grid cells)"
+        for i in range(i0, i1 + 1):
+            for j in range(j0, j1 + 1):
+                cells.add((i, j))
+    ncomp = len(NR._components(cells))
+    if ncomp > bud["pk_max_comps"]:
+        return [list(root)], "root (%d components > pk_max_comps: A189's merge is O(n^3))" % ncomp
+    rb = dict(bud)
+    rb["margin"] = 0.0
+    rb["grid"] = g
+    return [[round(c, 6) for c in p] for p in NR.pockets_of(pieces, s0, rb)], "pockets_of"
 
 
 def pocket_dead(nd, pocket, bud, deadline=None):
@@ -133,17 +194,21 @@ def pocket_dead(nd, pocket, bud, deadline=None):
     if deadline is not None:
         dl = min(dl, deadline)
     pieces, cert = cover_rect(nd, rect, bud, deadline=dl)
-    out = dict(pocket=[round(float(v), 6) for v in pocket], dead=not pieces, cert=cert,
-               seconds=cert["seconds"], residue=[],
+    # A228: DEAD demands an EXHAUSTED cover.  `not pieces` alone was only ever true on an exhausted cover, but the
+    # give-up paths now truncate their dump, so make the requirement explicit rather than implicit.
+    out = dict(pocket=[round(float(v), 6) for v in pocket], dead=(not pieces) and bool(cert.get("exhausted")),
+               cert=cert, seconds=cert["seconds"], residue=[],
                open_volume=cert.get("open_volume"), root_volume=cert.get("root_volume"),
                dropped_fraction=cert.get("dropped_fraction"))
-    if pieces:
+    if not out["dead"]:
         # re-pocket the SURVIVORS with NO extra margin: `pockets_of`'s grid-cell hulls already contain every open
         # piece, so the margin is pure slack -- and re-applying it at every level would GROW the pocket each time.
-        rb = dict(bud)
-        rb["margin"] = 0.0
-        rb["grid"] = min(bud["grid"], 0.015625)
-        out["residue"] = [[round(c, 6) for c in p] for p in NR.pockets_of(pieces, float(nd.s), rb)]
+        root = cert.get("root_out") or list(rect)
+        if pieces:
+            out["residue"], out["repocket"] = repocket(pieces, float(nd.s), bud, root,
+                                                       grid=min(bud["grid"], 0.015625))
+        else:
+            out["residue"], out["repocket"] = [list(root)], "root (cover gave up with no open piece)"
     return out
 
 

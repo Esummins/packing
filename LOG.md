@@ -9063,3 +9063,55 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
 - Lean `Statements/SnapRule.lean`: `snap_assign`, `snap_step`, `snap_dead`, `snap_diag_two` -- theorems, no new axiom;
   `lake build` + `lean/audit.py` exit 0, no sorry.  Files `attempts/A224-snap-rule/{code,notes,results,logs}`;
   registry row; `results/bench224.md` (+ `snapscan224.jsonl`, `bench224.jsonl`).
+
+## 2026-09-15 01:15 -- A228-segfault (Opus) -- DONE (reproduction + closed-page verification finishing detached; resume `attempts/A228-segfault/notes/segfault228.md` s.4): **the pass-5 `rc=139` was in the G1 pad, not pad 0, and the ~500 s of silence before it is A189's `pockets_of` -- an O(components^3) merge with no deadline, reached after the leaf's clock has already expired; guarded by supersets in A221's own wrapper (a guard may only return UNDECIDED), plus a real out-of-bounds write found and guarded in the A214 C kernel's batch index, plus a worker that now records every rc != 0 instead of only 137**
+
+- **[F] The BRIEF's fact is wrong, and the correction is the finding.** The crashed process's OWN certificate has
+  `zero_page` COMPLETE (`ALIVE` at the wall, 1818.7 s, 86 nodes) and `g1_page` **`RUNNING` at 977.1 s, 75 nodes**;
+  the log's pass-5 pad-zero segment runs to `t = 1818 s` and the g1 segment ends at
+  `node R.3.4.p1 d1 pocket<-[0]: INTERNAL (... t=977.1)`.  The worker's `g1 ... rc=0 4408s` printed beside `rc=139`
+  is the PASS-2 verdict line: `worker211.sh` greps the whole accumulated log for it, so a crashed run reprints the
+  last successful one's.  **Pad 0's work was not lost; the G1 pad's 75 nodes were.**
+- **[M] The process then ran ~500 s emitting nothing, inside a leaf whose cap is 150 s** -- the no-room leaf at
+  `R.3.4.p1` (k = 10, **m = 1**), i.e. the path that pays for the global bisection and then for `pockets_of`.
+- **[T]/[M] Two steps of that leaf see no deadline and are unbounded.** (i) `noroom189.pockets_of`'s
+  `while len(pk) > max_pockets` merge rescans EVERY pair to choose the cheapest merge: **O(components^3)**, run
+  AFTER `bisect_free`'s clock expired; at `grid = 0.0625` the container `[1/2, s-1/2]^2` holds 46 x 46 = 2116 cells,
+  so a SPREAD residue (many small components, not a few blobs -- which is why no benchmark ever saw it) costs up to
+  ~1.6e9 inner steps.  (ii) every give-up path of `pocket221.cover_rect` (`deadline` / `piece cap` / `open cap`)
+  materialised the whole `pk_max_pieces = 2e5` stack, re-volumed it and re-pocketed it on a **16x finer** grid --
+  the same unbounded work, again strictly after its own deadline.
+- **[T] The guards are supersets, so they can only ever return UNDECIDED.**  `pocket221`: `_dump` bounds the
+  give-up frontier (`pk_max_dump = 4096`); `cert["exhausted"]` is written and `pocket_dead` now requires it for
+  `dead`, so a cover that gave up can never be read as DEAD; new `repocket()` measures the cost of `pockets_of`
+  first (all linear) and returns the cover's own ROOT when pieces / cells / components exceed budget.  `noroom221`:
+  the global call falls back to the container CENTRE BOX `[1/2, s-1/2]^2`, which contains the centre of every pose
+  of a unit square -- a cover whatever the residue looks like.  A189 / A171 / A131 are untouched.
+- **[F] The BRIEF's other two suspects are cleared.**  There is NO deep Python recursion in the pocket path:
+  `cover_rect` is an explicit stack loop, `noroom189._components` an explicit flood fill, `pinclip._bisect_boundary`
+  a bounded `for`, and `multibox._clip_rect_obstacle`'s `rec` is a one-line trace appender, not a recursion (the
+  only recursion in reach, `lonely_clip.refine_piece`, is bounded by `refine <= 2`).  The A214 kernel's arithmetic
+  envelope is guarded (`fits93` / `a214_box_ok` / `vert_ok_range`) and its DLL imports nothing (empty PE import
+  table, read directly).
+- **[M] A genuine out-of-bounds WRITE was found in the C kernel anyway, and guarded without touching it.**
+  `a214_cert_batch` addresses its output with `int i0 = i * nb`: at `nv * nb >= 2^31` the product overflows, `i0`
+  goes negative and the kernel writes BEFORE the ctypes buffer.  Unreachable on this population (`nv <= 16`), but
+  the Python caller is the only party that knows the true product, so `certify_h` now refuses the batch above
+  `2^30` pairs and takes A213's unbounded-integer path -- gate (2') of the module's own FALLBACK PROTOCOL.  The C
+  source and the DLL sha256 are unchanged.
+- **[M] Worker hygiene.**  The crash left NO row in `results/coarsetree211.jsonl` and no mark in `progress.md`
+  (only `rc == 137` was recorded).  `worker211.sh` now writes a row for EVERY non-zero rc (`"rc": <n>`,
+  `killed: true`, `verdict: ALIVE` -- a crash is undecided, never a verdict), appends the nid to
+  `logs/requeue.txt`, and on a CRASH (not on the 137 wall kill) releases its `logs/claims/<nid>` so a sibling
+  worker re-offers the page.  The script is being executed right now by p5a/p5b and bash re-reads a running script
+  by byte offset, so the new text was `bash -n`-checked in `worker211.sh.new` and `mv`-ed over the path: the
+  rename swaps the inode, the running shells keep the old one, the next launch gets the new one.  Both worker pids
+  verified alive afterwards; nothing was restarted.  The missing Y0402 row was backfilled, labelled as backfilled.
+- **[C] The step from "runs away" to "SIGSEGV" is NOT proved** -- a Python-level runaway normally ends in
+  `MemoryError`.  This is the only `Segmentation fault` in `attempts/*/logs/*` in the whole campaign, so a clean
+  reproduction cannot clear the code; the guards are therefore sound and cheap whether or not it fires, and the
+  worker now makes the next one visible.  **A189's STEP 34 regression PASSES through the patched leaf** with
+  `repocket: pockets_of`, i.e. on a normal node no guard fires and the computation is the old one.
+- Files: `attempts/A228-segfault/{notes/segfault228.md, code/repro228.sh, code/verify228.sh, logs, results, certs}`;
+  patches in `attempts/A221-lane-cover/code/{pocket221,noroom221}.py`, `attempts/A214-c-kernel/code/ckernel214.py`,
+  `attempts/A211-coarse-tree/code/worker211.sh`; registry row.
