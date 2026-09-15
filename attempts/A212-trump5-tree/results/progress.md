@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 17:59:56
+# A212 progress -- 2026-09-14 18:01:18
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (44 nodes)
+## A60's alive trump5 frontier (deepest first) (45 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -70,11 +70,12 @@ CPU-h in this block: 5.66
 | c0_Y0256 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 1, 'NOROOM': 3, 'EmptyBox': 3} | 20 / 5 | 1822 |
 | c0_Y0263 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'NOROOM': 2, 'FC': 2} | 16 / 6 | 1806 |
 | c0_Y0269 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 4, 'CC': 22, 'S-CLIP': 1} | 37 / 3 | 1248 |
+| c0_Y0264 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 1, 'NOROOM': 3, 'EmptyBox': 3} | 21 / 6 | 1897 |
 
-CPU-h in this block: 9.10
+CPU-h in this block: 9.62
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 27, 'DEAD': 30}; gallery 13 / 13 run (5.66 CPU-h); frontier 44 run of 108 (92 remaining; 9.10 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 92: 11.8 CPU-h; spent 14.8; cap 150
+* verdicts so far: {'ALIVE': 28, 'DEAD': 30}; gallery 13 / 13 run (5.66 CPU-h); frontier 45 run of 108 (91 remaining; 9.62 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 91: 11.6 CPU-h; spent 15.3; cap 150
 
