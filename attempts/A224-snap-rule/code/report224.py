@@ -81,9 +81,16 @@ def live_section(rows):
             s.get("runs"), s.get("cands"), s.get("kills"), s.get("handoffs"), s.get("partial"),
             s.get("seconds"), s.get("first_kill_t"), r.get("seconds")))
     L += [""]
-    dis = [nid for (nid, m) in by if m == "ON" and (nid, "OFF") in by
-           and by[(nid, "ON")].get("verdict") != by[(nid, "OFF")].get("verdict")]
-    L += ["**Verdict agreement:** " + ("every paired run agrees." if not dis else "DISAGREE on %s -- investigate." % dis), ""]
+    paired = [nid for (nid, m) in by if m == "ON" and (nid, "OFF") in by]
+    dis = [nid for nid in paired if by[(nid, "ON")].get("verdict") != by[(nid, "OFF")].get("verdict")]
+    if dis:
+        msg = "DISAGREE on %s -- investigate." % dis
+    elif paired:
+        msg = "%d of 5 pages paired; every paired run agrees." % len(paired)
+    else:
+        msg = ("no page is paired yet -- the live A/B is still running detached; finish and commit it with "
+               "`bash attempts/A224-snap-rule/code/finish224.sh` (resumable, skips what is already done).")
+    L += ["**Verdict agreement:** " + msg, ""]
     return L
 
 

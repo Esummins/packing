@@ -42,5 +42,5 @@ engine is byte-for-byte the pass-5 engine; the OFF column is the control.
 |---|---|---|---|---|---|---|---|---|---|
 | k5_16_interior_Y0865 | ON | ALIVE | 45 | 24 | 4 | 60 / 60 / **0** / 0 / 0 | 0.17 | None | 422.4 |
 
-**Verdict agreement:** every paired run agrees.
+**Verdict agreement:** no page is paired yet -- the live A/B is still running detached; finish and commit it with `bash attempts/A224-snap-rule/code/finish224.sh` (resumable, skips what is already done).
 
