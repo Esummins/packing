@@ -1,0 +1,81 @@
+10:29:24 [p7d] start k5_16_interior_Y0402 pad zero node R.4 wall 1800 (lab 6, free 13398 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A203 csp203: attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0402_zero_s0.json)
+   INHERIT k5_16_interior_Y0402 pad zero: 5 prior trees, 174 paths, 16 branches inherited DEAD (final, with their certificates), 3 start nodes (0 from the A203 root)
+== k5_16_interior_Y0402 page pad zero: start attempts/A203-csp-consistency/certs/csp203_k5_16_interior_Y0402_zero_s0.json; basins []; INHERIT 16 dead branches (final) + 3 start nodes ['R.4', 'R.5', 'R.6']; H [1.659, 1.799, 1.414, 1.519, 0.0, 14.25]; forced H ['BL(1,0)']; 6 slots; free squares 5
+   INHERITED DEAD R.1.1        TR(0,1)<-(13,)  [A205 tree: FC] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.2        TR(0,1)<-(14,)  [A205 tree: FC] attempts/A205-clip-tree/certs/cliptree205_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.3.1      TL(1,0)<-(8,)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.3.2      TL(1,0)<-(9,)  [A209 tree: every branch DEAD] attempts/A209-k5-killer/certs/k5killer209_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.3.3      TL(1,0)<-(14,)  [A211 tree: INHERIT] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.3.4      TL(1,0)<-(19,)  [A211 tree: INHERIT] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.1.4        TR(0,1)<-(19,)  [A211 tree: INHERIT] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.2          BR(0,1)<-(17,)  [A211 tree: INHERIT] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.3.1        TL(1,0)<-(8,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.3.2        TL(1,0)<-(9,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.3.3        TL(1,0)<-(13,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.3.4.p1     (2.632857, 3.377084, 1.460325, 2.377085)<-(0,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.3.4.p2.p1.1 TR(1,0)<-F5  [A211 tree: REACH] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.3.4.p2.p1.2.1 TL(1,0)<-F2  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402.json
+   INHERITED DEAD R.3.4.p2.p1.2.2 TL(1,0)<-F2  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402__zero_R.3.4.p2.p1.2.2.json
+   INHERITED DEAD R.3.5        TL(1,0)<-(19,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0402__zero_R.3.5.json
+   A229 SHARD: --start R.4 -- 1 of them are start nodes of this page/pad right now (3 start nodes in all)
+   start R.4: applied step 1/1 -- BR(0,1) <- [21]
+   node R.4        d0 root: INTERNAL (2.3 s, 1 rounds; t=6.5)
+   node R.4.1      d1 TR(0,1)<-[13]: INTERNAL (2.4 s, 1 rounds; t=8.9)
+   node R.4.1r1    d1 root<-None: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=9.0)
+   node R.4.2      d1 TR(0,1)<-[14]: INTERNAL (1.4 s, 1 rounds; t=10.3)
+   node R.4.2.1    d2 TL(1,0)<-[8]: INTERNAL (6.1 s, 1 rounds; t=16.7)
+   no-room (k=10, m=1): UNDECIDED in 8 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.4.2.1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.4.2.1.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=28.4)
+   node R.4.2.2    d2 TL(1,0)<-[18]: DEAD by S-CLIP r1 (0.6 s, 1 rounds; t=29.1)
+   node R.4.3      d1 TR(0,1)<-[17]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=29.2)
+   node R.4.4      d1 TR(0,1)<-[18]: INTERNAL (2.2 s, 1 rounds; t=31.4)
+   node R.4.4.1    d2 TL(1,0)<-[8]: INTERNAL (4.4 s, 1 rounds; t=36.1)
+   no-room (k=10, m=1): UNDECIDED in 13 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.4.4.1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.4.4.1.p1 d3 pocket<-[0]: INTERNAL (42.5 s, 1 rounds; t=94.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.4.4.1.p1: split F1 at BR(0,1) (meeting fraction 0.144472; alive rows []; named ['F1', 'F2', 'F3'])
+   node R.4.4.1.p1.1 d4 BR(0,1)<-None: INTERNAL (41.6 s, 1 rounds; t=135.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.4.4.1.p1.1: split F5 at TR(0,1) (meeting fraction 0.19164; alive rows []; named ['F2', 'F3', 'F5'])
+   node R.4.4.1.p1.1.1 d5 TR(0,1)<-None: INTERNAL (28.5 s, 1 rounds; t=164.4)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.4.4.1.p1.1.1: split F3 at TL(1,0) (meeting fraction 0.046639; alive rows []; named ['F3', 'F4', 'F5'])
+   node R.4.4.1.p1.1.1.1 d6 TL(1,0)<-None: DEAD by EmptyBox r1 (3.8 s, 1 rounds; t=168.3)
+   node R.4.4.1.p1.1.1.2 d6 TL(1,0)<-None: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=169.0)
+   node R.4.4.1.p1.1.2 d5 TR(0,1)<-None: INTERNAL (14.3 s, 1 rounds; t=183.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.4.4.1.p1.1.2: split F3 at TL(1,0) (meeting fraction 0.046639; alive rows []; named ['F3', 'F4', 'F5'])
+   node R.4.4.1.p1.1.2.1 d6 TL(1,0)<-None: DEAD by REACH r1 (9.6 s, 1 rounds; t=193.1)
+   node R.4.4.1.p1.1.2.2 d6 TL(1,0)<-None: INTERNAL (7.5 s, 1 rounds; t=200.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.4.4.1.p1.1.2.2: bisect F1 on t at 53.1301 (extents (0.038845, 0.070743), tilt 90.0 deg, core non-empty, 11 piece(s); split 1 of 4)
+   node R.4.4.1.p1.1.2.2.1 d7 F1<-['t<=53.1301']: INTERNAL (14.1 s, 1 rounds; t=214.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.4.4.1.p1.1.2.2.1: bisect F2 on t at 53.1301 (extents (0.186999, 0.150835), tilt 90.0 deg, core non-empty, 50 piece(s); split 1 of 4)
+   node R.4.4.1.p1.1.2.2.1.1 d8 F2<-['t<=53.1301']: INTERNAL (9.9 s, 1 rounds; t=224.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.4.4.1.p1.1.2.2.1.1: bisect F5 on t at 53.1301 (extents (0.402274, 0.250933), tilt 90.0 deg, core non-empty, 40 piece(s); split 1 of 4)
+   node R.4.4.1.p1.1.2.2.1.1.1 d9 F5<-['t<=53.1301']: DEAD by COUNT r1 (6.5 s, 1 rounds; t=231.3)
+   node R.4.4.1.p1.1.2.2.1.1.2 d9 F5<-['t>=53.1301']: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=231.5)
+   node R.4.4.1.p1.1.2.2.1.2 d8 F2<-['t>=53.1301']: DEAD by S-CLIP r1 (3.3 s, 1 rounds; t=234.8)
+   node R.4.4.1.p1.1.2.2.2 d7 F1<-['t>=53.1301']: INTERNAL (11.3 s, 1 rounds; t=246.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.4.4.1.p1.1.2.2.2: bisect F2 on t at 53.1301 (extents (0.181501, 0.150835), tilt 90.0 deg, core non-empty, 44 piece(s); split 1 of 4)
+   node R.4.4.1.p1.1.2.2.2.1 d8 F2<-['t<=53.1301']: DEAD by EmptyBox r1 (7.7 s, 1 rounds; t=254.0)
+   node R.4.4.1.p1.1.2.2.2.2 d8 F2<-['t>=53.1301']: DEAD by S-CLIP r1 (1.4 s, 1 rounds; t=255.6)
+   node R.4.4.1.p1.2 d4 BR(0,1)<-None: INTERNAL (33.1 s, 1 rounds; t=288.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.4.4.1.p1.2: split F5 at TR(0,1) (meeting fraction 0.19164; alive rows []; named ['F2', 'F3', 'F5'])
+   node R.4.4.1.p1.2.1 d5 TR(0,1)<-None: INTERNAL (32.0 s, 1 rounds; t=320.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.4.4.1.p1.2.1: split F3 at TL(1,0) (meeting fraction 0.278784; alive rows []; named ['F3', 'F4', 'F5'])
+   node R.4.4.1.p1.2.1.1 d6 TL(1,0)<-None: DEAD by REACH r1 (10.9 s, 1 rounds; t=332.0)
+   node R.4.4.1.p1.2.1.2 d6 TL(1,0)<-None: INTERNAL (8.3 s, 1 rounds; t=340.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.4.4.1.p1.2.1.2: bisect F1 on x at 1.938542 (extents (0.877086, 0.148501), tilt 90.0 deg, core non-empty, 75 piece(s); split 1 of 4)
+   node R.4.4.1.p1.2.1.2.1 d7 F1<-['x<=1.938542']: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=341.7)
+   node R.4.4.1.p1.2.1.2.2 d7 F1<-['x>=1.938542']: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=342.5)

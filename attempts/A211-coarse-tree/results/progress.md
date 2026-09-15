@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-15 10:29:22
+# A211 progress -- 2026-09-15 10:35:13
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -8,14 +8,14 @@ A *start node* is an alive leaf the run inherited from the previous run (Lemma I
 
 | page | pad | start nodes | dead this run | alive at wall | not reached | **left** | alive leaves | max depth | runs | wall (CPU-h) | estimate (CPU-h) | last run |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| k5_16_interior_Y0402 | g1 | 4 | 1 | 0 | 3 | **3** | 3 | 12 | 6 | 2.54 | 0.04 | 2026-09-15 10:28:37 |
+| k5_16_interior_Y0402 | g1 | 5 | 1 | 0 | 4 | **4** | 4 | 14 | 8 | 2.80 | 0.08 | 2026-09-15 10:32:30 |
 | k5_16_interior_Y0402 | zero | 5 | 1 | 0 | 4 | **4** | 4 | 13 | 6 | 2.14 | 0.05 | 2026-09-15 10:25:37 |
 | k5_16_interior_Y1117 | g1 | 10 | 8 | 1 | 1 | **2** | 11 | 5 | 1 | 0.51 | 0.07 | 2026-09-12 23:28:01 |
 | k5_16_interior_Y1117 | zero | 0 | 0 | 0 | 0 | **0** | 0 | 0 | 1 | 0.00 | 0.00 | 2026-09-12 22:57:37 (**this pad is now DEAD**) |
 | k5_16_interior_Y1056 | g1 | 3 | 1 | 0 | 2 | **2** | 2 | 10 | 6 | 3.42 | 0.02 | 2026-09-15 10:21:54 |
 | k5_16_interior_Y1056 | zero | 5 | 1 | 0 | 4 | **4** | 4 | 7 | 8 | 3.09 | 0.05 | 2026-09-15 10:27:24 |
 
-**TOTAL over the 3 alive k5 gallery pages (window pad):** 7 start nodes left, 16 alive leaves (the next runs' start nodes), deepest branch 12, 28 run(s) over both pads for 11.70 CPU-h spent; ESTIMATE (not a bound) 0.13 CPU-h to close the start nodes now open at the window pad -- an UNDER-estimate: the start nodes still alive are the ones that already survived a full wall, and each survivor splits into several new start nodes.
+**TOTAL over the 3 alive k5 gallery pages (window pad):** 8 start nodes left, 17 alive leaves (the next runs' start nodes), deepest branch 14, 30 run(s) over both pads for 11.96 CPU-h spent; ESTIMATE (not a bound) 0.17 CPU-h to close the start nodes now open at the window pad -- an UNDER-estimate: the start nodes still alive are the ones that already survived a full wall, and each survivor splits into several new start nodes.
 
 ## The 19 alive k5 gallery pages (18 nodes)
 
@@ -35,7 +35,7 @@ A *start node* is an alive leaf the run inherited from the previous run (Lemma I
 | k5_16_interior_Y0099 | zero | 2 (tree: 8 nodes, depth 1, CC 0, exact 0, NS 0, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 78 |
 | k5_16_interior_Y0249 | g1 | 2 (tree: 87 nodes, depth 4, CC 0, exact 0, NS 9, pockets 1) | DEAD | 1669 |
 | k5_16_interior_Y0249 | zero | 2 (tree: 68 nodes, depth 4, CC 0, exact 0, NS 9, pockets 0) | ALIVE (wall) | 1842 |
-| k5_16_interior_Y0402 | g1 | 2 (tree: 12 nodes, depth 2, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 67 |
+| k5_16_interior_Y0402 | g1 | 2 (tree: 40 nodes, depth 11, CC 0, exact 2, NS 6, pockets 1) | ALIVE | 631 |
 | k5_16_interior_Y0402 | zero | 2 (tree: 11 nodes, depth 4, CC 0, exact 0, NS 3, pockets 3) | ALIVE | 200 |
 | k5_16_interior_Y0460 | g1 | 2 (tree: 43 nodes, depth 4, CC 0, exact 0, NS 5, pockets 7) | DEAD | 1297 |
 | k5_16_interior_Y0460 | zero | 2 (tree: 47 nodes, depth 4, CC 0, exact 0, NS 6, pockets 8) | DEAD (s0-only, WINDOW-PENDING) | 1571 |
@@ -58,7 +58,7 @@ A *start node* is an alive leaf the run inherited from the previous run (Lemma I
 | k5_16_interior_Y1056 | g1 | 2 (tree: 11 nodes, depth 1, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 23 |
 | k5_16_interior_Y1056 | zero | 2 (tree: 4 nodes, depth 2, CC 0, exact 0, NS 0, pockets 2) | ALIVE | 112 |
 
-CPU-h in this block: 8.70
+CPU-h in this block: 8.86
 
 ## The k5 frontier (A57 census, deepest-first) (54 nodes)
 
@@ -177,7 +177,7 @@ CPU-h in this block: 38.77
 
 ## Price and projection
 
-* gallery: 15 / 18 pages DEAD at the window pad, 8.70 CPU-h
+* gallery: 15 / 18 pages DEAD at the window pad, 8.86 CPU-h
 * frontier: 54 nodes run (21 DEAD at the window pad), 38.77 CPU-h; the census has 284 alive nodes, 249 remaining
 * PRICE over the first 20 frontier nodes: mean 2999 s, median 3677 s per node (both pads); PROJECTION for the remaining 249: 207.4 CPU-h (cap 200)
 
