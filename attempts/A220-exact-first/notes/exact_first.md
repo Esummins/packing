@@ -143,6 +143,12 @@ logs/STOP` stops the lanes after their current job.  THE DECISION RULE (from the
 `worker211.sh` / `launch211.sh` only if its geometric-mean ratio is < 0.8 with no verdict regression; otherwise the
 numbers are recorded here and the flag stays OFF.
 
+**How a winning variant is turned ON** (only after the rule above is met): add the export to the environment line of
+`attempts/A211-coarse-tree/code/worker211.sh` (and `launch211.sh`, which the worker inherits), e.g.
+`export ... A220_EXACT_FIRST=small` (or `... A220_EXACT_FIRST=small A220_NOROOM_INHERIT=1`).  Only NEW pages pick it up;
+the running workers are not restarted, and `CURRENT.json` does not change -- the flag reorders work, it does not change
+what a verdict means.
+
 ## 7. Status
 
 [M] the numbers as they stand are in `results/bench220.md` (regenerated after every job).  [C] until the geometric
