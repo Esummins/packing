@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-15 00:38:40
+# A212 progress -- 2026-09-15 00:40:05
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (91 nodes)
+## A60's alive trump5 frontier (deepest first) (92 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -117,11 +117,12 @@ CPU-h in this block: 5.66
 | c0_Y0785 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'REACH': 2, 'NOROOM': 5} | 20 / 7 | 1826 |
 | c0_Y0786 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 2, 'REACH': 3, 'NOROOM': 3} | 20 / 7 | 1824 |
 | c0_Y0790 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 2, 'NOROOM': 3} | 13 / 6 | 1815 |
+| c0_Y0789 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'NOROOM': 2, 'EmptyBox': 2, 'REACH': 1} | 14 / 5 | 2007 |
 
-CPU-h in this block: 27.85
+CPU-h in this block: 28.41
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 61, 'DEAD': 43}; gallery 13 / 13 run (5.66 CPU-h); frontier 91 run of 95 (45 remaining; 27.85 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 45: 5.8 CPU-h; spent 33.5; cap 150
+* verdicts so far: {'ALIVE': 62, 'DEAD': 43}; gallery 13 / 13 run (5.66 CPU-h); frontier 92 run of 95 (44 remaining; 28.41 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 44: 5.6 CPU-h; spent 34.1; cap 150
 
