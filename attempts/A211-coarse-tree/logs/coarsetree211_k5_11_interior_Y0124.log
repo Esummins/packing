@@ -1,0 +1,55 @@
+22:07:11 [f1] start k5_11_interior_Y0124 wall 1800 (lab 6, free 13861 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_11_interior_Y0124 at the zero pad: ALIVE in 16981 ms; kills {'H-clip': 0, 'P': 5480, 'W': 1369, 'C': 1175, 'M': 4508, 'L': 14, 'R': 1643, 'X': 0}; CSP units 464 -> 464 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_11_interior_Y0124 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_11_interior_Y0124 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0124_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.498, 2.637, 2.358, 2.498, 82.372, 90.0]; forced H []; 4 slots; free squares 5
+   node R0+        d0 root: INTERNAL (2.8 s, 1 rounds; t=2.9)
+   node R0+.1      d1 TR(0,0)<-[19]: INTERNAL (1.2 s, 1 rounds; t=4.1)
+   node R0+.1r1    d1 root<-None: DEAD by EmptyBox r1 (1.3 s, 1 rounds; t=5.4)
+   node R0+.2      d1 TR(0,0)<-[24]: INTERNAL (1.2 s, 1 rounds; t=6.6)
+   node R0+.2r1    d1 root<-None: INTERNAL (2.3 s, 1 rounds; t=9.0)
+   node R0+.2.1    d2 TL(1,0)<-[7]: INTERNAL (7.3 s, 1 rounds; t=16.3)
+   node R0+.2.1r1  d2 root<-None: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=17.0)
+   node R0+.2.2    d2 TL(1,0)<-[8]: INTERNAL (2.0 s, 1 rounds; t=19.1)
+   node R0+.2.2r1  d2 root<-None: INTERNAL (8.4 s, 1 rounds; t=27.5)
+   node R0+.2.2    d2: DEAD by CC -- rule CC at R0+.2.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior po
+   node R0+.2.3    d2 TL(1,0)<-[9]: INTERNAL (0.9 s, 1 rounds; t=28.5)
+   node R0+.2.3r1  d2 root<-None: INTERNAL (2.5 s, 1 rounds; t=31.0)
+   node R0+.2.3    d2: DEAD by CC -- rule CC at R0+.2.3 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior po
+   node R0+.2.4    d2 TL(1,0)<-[13]: DEAD by FC r1 (4.0 s, 1 rounds; t=35.1)
+   node R0+.2.5    d2 TL(1,0)<-[14]: INTERNAL (4.0 s, 1 rounds; t=39.1)
+   node R0+.2.5r1  d2 root<-None: DEAD by EmptyBox r1 (4.2 s, 1 rounds; t=43.4)
+   node R0+.2.6    d2 TL(1,0)<-[19]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=43.7)
+   start R0+          => DEAD (15 nodes; t = 44 s of 1800.0)
+   => DEAD (zero_page) in 43.7 s: 1 start runs, 15 nodes, depth 2, 2 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 7 dead / 0 alive leaves
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': False, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 2.8s; R0+.1 d1 INTERNAL 1.2s; R0+.1r1 d1 DEAD EmptyBox 1.3s; R0+.2 d1 INTERNAL 1.2s; R0+.2r1 d1 INTERNAL 2.3s; R0+.2.1 d2 INTERNAL 7.3s; R0+.2.1r1 d2 DEAD EmptyBox 0.7s; R0+.2.2 d2 INTERNAL 2.0s; R0+.2.2r1 d2 DEAD CC 8.4s; R0+.2.3 d2 INTERNAL 0.9s; R0+.2.3r1 d2 DEAD CC 2.5s; R0+.2.4 d2 DEAD FC 4.0s; R0+.2.5 d2 INTERNAL 4.0s; R0+.2.5r1 d2 DEAD EmptyBox 4.2s; R0+.2.6 d2 DEAD EmptyBox 0.2s
+== stage 0 + CSP k5_11_interior_Y0124 at the g1 pad: ALIVE in 18409 ms; kills {'H-clip': 0, 'P': 5508, 'W': 1389, 'C': 1203, 'M': 4546, 'L': 14, 'R': 1673, 'X': 15}; CSP units 464 -> 464 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_11_interior_Y0124 pad g1: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_11_interior_Y0124 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0124_g1_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.498, 2.637, 2.358, 2.498, 82.372, 90.0]; forced H []; 4 slots; free squares 5
+   node R0+        d0 root: INTERNAL (1.7 s, 1 rounds; t=1.8)
+   node R0+.1      d1 TR(0,0)<-[19]: INTERNAL (0.6 s, 1 rounds; t=2.5)
+   node R0+.1r1    d1 root<-None: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=2.6)
+   node R0+.2      d1 TR(0,0)<-[24]: INTERNAL (0.9 s, 1 rounds; t=3.6)
+   node R0+.2r1    d1 root<-None: INTERNAL (1.8 s, 1 rounds; t=5.5)
+   node R0+.2.1    d2 TL(1,0)<-[7]: INTERNAL (4.9 s, 1 rounds; t=10.5)
+   node R0+.2.1r1  d2 root<-None: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=11.5)
+   node R0+.2.2    d2 TL(1,0)<-[8]: INTERNAL (0.8 s, 1 rounds; t=12.4)
+   node R0+.2.2    d2: DEAD by CC -- rule CC at R0+.2.2 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior po
+   node R0+.2.3    d2 TL(1,0)<-[9]: INTERNAL (0.8 s, 1 rounds; t=13.5)
+   node R0+.2.3    d2: DEAD by CC -- rule CC at R0+.2.3 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F1 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior po
+   node R0+.2.4    d2 TL(1,0)<-[13]: DEAD by FC r1 (0.8 s, 1 rounds; t=14.5)
+   node R0+.2.5    d2 TL(1,0)<-[14]: INTERNAL (0.9 s, 1 rounds; t=15.5)
+   node R0+.2.5r1  d2 root<-None: DEAD by EmptyBox r1 (3.0 s, 1 rounds; t=18.6)
+   node R0+.2.6    d2 TL(1,0)<-[19]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=18.8)
+   start R0+          => DEAD (13 nodes; t = 19 s of 1800.0)
+   => DEAD (g1_page) in 18.9 s: 1 start runs, 13 nodes, depth 2, 2 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 7 dead / 0 alive leaves
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': False, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 1.7s; R0+.1 d1 INTERNAL 0.6s; R0+.1r1 d1 DEAD EmptyBox 0.1s; R0+.2 d1 INTERNAL 0.9s; R0+.2r1 d1 INTERNAL 1.8s; R0+.2.1 d2 INTERNAL 4.9s; R0+.2.1r1 d2 DEAD EmptyBox 1.0s; R0+.2.2 d2 DEAD CC 0.8s; R0+.2.3 d2 DEAD CC 0.8s; R0+.2.4 d2 DEAD FC 0.8s; R0+.2.5 d2 INTERNAL 0.9s; R0+.2.5r1 d2 DEAD EmptyBox 3.0s; R0+.2.6 d2 DEAD EmptyBox 0.1s
+== k5_11_interior_Y0124: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1019, 'misses': 289, 'entries': 289}; clip {'hits': 35946, 'misses': 28483, 'entries': 28483}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1308, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 28}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 1034, 'obs_misses': 274, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 274, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
