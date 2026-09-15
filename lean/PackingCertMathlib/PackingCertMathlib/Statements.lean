@@ -27,6 +27,7 @@ import PackingCertMathlib.Statements.Open.K0Count
 import PackingCertMathlib.Statements.Open.LemmaCEIL
 import PackingCertMathlib.Statements.Open.TwoContact
 import PackingCertMathlib.Statements.Open.OneTilted
+import PackingCertMathlib.Statements.Open.RingSwap
 
 /-!
 # The readable layer, one import (A216)
