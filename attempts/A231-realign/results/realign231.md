@@ -41,8 +41,8 @@ Largest upticks of compA: 193:w207_crowd:BL 2.5e-02, 193:w220_crowd:BR 1.4e-02, 
 
 | item | count |
 |---|---|
-| witnesses (cases = witness x corner) | 40 (160) |
-| corner swap available (A222 / retraction) | 74 / 160 |
+| witnesses (cases = witness x corner) | 30 (120); 10 further witnesses are among the 193 of section 1 (w047_crowd, w050_crowd, w062_crowd, w103_crowd, w115_crowd, w137_crowd, w175_crowd, w287_held, w300_held, w350_held) |
+| corner swap available (A222 / retraction) | 74 / 120 |
 | the SHRINK (fixed tilts, S pinned, axes free) lowers the side strictly below s0 | 73 / 74 |
 | S touches no tilted square after the shrink (G_comp empty) | 62 / 74 |
 | S touches tilted squares of ONE handedness / of BOTH | 11 / 74 / 0 / 74 |
@@ -62,10 +62,10 @@ Largest upticks of compA: win40:win_crowd_10_0737_crowd0.05:TR 1.9e-02, win40:wi
 
 | per witness | count |
 |---|---|
-| >= 1 corner swap | 30 / 40 |
-| >= 1 corner where swap + shrink lowers the side strictly | 30 / 40 |
-| >= 1 corner with a FLUSH-SIDE grain in contact with S whose anchored drain (compA) is unblocked and ends below s0 | 10 / 40 |
-| >= 1 corner with ANY strict improvement (shrink or a path) | 30 / 40 |
+| >= 1 corner swap | 30 / 30 |
+| >= 1 corner where swap + shrink lowers the side strictly | 30 / 30 |
+| >= 1 corner with a FLUSH-SIDE grain in contact with S whose anchored drain (compA) is unblocked and ends below s0 | 10 / 30 |
+| >= 1 corner with ANY strict improvement (shrink or a path) | 30 / 30 |
 
 ## 3. The 8 CROWD-ABOVE crowds of A226 (n = 26 .. 55, retraction swap)
 
