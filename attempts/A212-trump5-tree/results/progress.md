@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-15 00:52:21
+# A212 progress -- 2026-09-15 00:53:00
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (93 nodes)
+## A60's alive trump5 frontier (deepest first) (94 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -119,11 +119,12 @@ CPU-h in this block: 5.66
 | c0_Y0790 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 2, 'NOROOM': 3} | 13 / 6 | 1815 |
 | c0_Y0789 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'NOROOM': 2, 'EmptyBox': 2, 'REACH': 1} | 14 / 5 | 2007 |
 | c0_Y0791 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 20, 'FC': 4, 'NOROOM': 2, 'S-CLIP': 1} | 43 / 4 | 1929 |
+| c0_Y0872 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 1} | 1 / 0 | 7 |
 
 CPU-h in this block: 28.94
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 63, 'DEAD': 43}; gallery 13 / 13 run (5.66 CPU-h); frontier 93 run of 95 (43 remaining; 28.94 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 43: 5.5 CPU-h; spent 34.6; cap 150
+* verdicts so far: {'ALIVE': 63, 'DEAD': 44}; gallery 13 / 13 run (5.66 CPU-h); frontier 94 run of 94 (42 remaining; 28.94 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 42: 5.4 CPU-h; spent 34.6; cap 150
 
