@@ -29,3 +29,15 @@ KeyError: 'c0_Y0950_interior_G1'
    no-room (k=10, m=1): DEAD by NOROOM in 10 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
    node R.2.1      d2: DEAD by NOROOM -- no-room at R.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
    node R.2.2      d2 TR(0,1)<-[21]: INTERNAL (27.1 s, 1 rounds; t=154.7)
+   node R.2.2r1    d2 root<-None: INTERNAL (38.0 s, 1 rounds; t=192.8)
+   no-room (k=10, m=1): DEAD by EmptyBox in 1 s (0 pockets; EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf)
+   node R.2.2      d2: DEAD by EmptyBox -- no-room at R.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf
+   node R.2.3      d2 TR(0,1)<-[22]: INTERNAL (30.7 s, 1 rounds; t=224.5)
+   node R.2.3r1    d2 root<-None: INTERNAL (25.9 s, 1 rounds; t=250.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 15 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.3      d2: DEAD by NOROOM -- no-room at R.2.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R            => DEAD (11 nodes; t = 265 s of 1800.0)
+   => DEAD (zero_page) in 265.3 s: 11 nodes, depth 2, gate hits 0 (conflicts 0), tube leaves 0 (depths []), 0 aligned cuts, kills by rule {'EmptyBox': 2, 'NOROOM': 2}, 0 NS, 0 pockets, 0 role splits, 4 dead / 0 alive leaves
+   per node: R d0 INTERNAL 18.5s; R.1 d1 INTERNAL 7.2s; R.1r1 d1 DEAD EmptyBox 6.0s; R.2 d1 INTERNAL 6.3s; R.2r1 d1 INTERNAL 20.9s; R.2.1 d2 INTERNAL 38.3s; R.2.1r1 d2 DEAD NOROOM 20.2s; R.2.2 d2 INTERNAL 27.1s; R.2.2r1 d2 DEAD EmptyBox 38.0s; R.2.3 d2 INTERNAL 30.7s; R.2.3r1 d2 DEAD NOROOM 25.9s
+== c0_Y0950: pad0 DEAD   (s0-only, lam = 1; DEAD = killed at s0, TRUMP-TUBE = the Trump basin, ALIVE = undecided)
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A212-trump5tree\trump5tree212_gallery.svg
