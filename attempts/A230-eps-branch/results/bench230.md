@@ -15,57 +15,57 @@ either of two cells is evaluated in both; all candidates are evaluated, smallest
 
 | measure | A227 | A230 |
 |---|---|---|
-| pages with a candidate node | 17 | 32 |
-| nodes with a candidate | 294 | 660 |
-| candidate (role, slot) evaluations | 322 | 694 |
-| candidates per node | 1.10 | 1.05 |
-| ... of which ONLY A230's wider test returns | - | 519 |
+| pages with a candidate node | 17 | 58 |
+| nodes with a candidate | 294 | 1374 |
+| candidate (role, slot) evaluations | 322 | 1801 |
+| candidates per node | 1.10 | 1.31 |
+| ... of which ONLY A230's wider test returns | - | 1479 |
 | **nodes DEAD by FC+EPS** | **0** | **0** |
-| nodes with an NS-at-wedge split (one blocker, anon certified empty) | - | 86 |
-| nodes where a candidate lost >= 1 meeter without dying | 284 | 628 |
-| strikes the POLYGON taper added (the bbox test failed, the polygon separated) | - | 223 |
-| wedge targets carrying an exact polygon | - | 4313 |
-| candidates by number of roles struck | 0: 10, 1: 32, 2: 80, 3: 138, 4: 62 | 0: 32, 1: 105, 2: 234, 3: 257, 4: 66 |
-| anonymous clause (per candidate) | no claim: 145, none: 173, some: 4 | no claim: 450, none: 236, some: 8 |
-| replay seconds (sum) | 8.7 | 48.0 |
+| nodes with an NS-at-wedge split (one blocker, anon certified empty) | - | 433 |
+| nodes where a candidate lost >= 1 meeter without dying | 284 | 1342 |
+| strikes the POLYGON taper added (the bbox test failed, the polygon separated) | - | 617 |
+| wedge targets carrying an exact polygon | - | 14556 |
+| candidates by number of roles struck | 0: 10, 1: 32, 2: 80, 3: 138, 4: 62 | 0: 35, 1: 147, 2: 487, 3: 820, 4: 312 |
+| anonymous clause (per candidate) | no claim: 145, none: 173, some: 4 | no claim: 758, none: 1007, some: 36 |
+| replay seconds (sum) | 8.7 | 150.3 |
 
 **Survivor sets** (the roles that can still reach a wedge target, per candidate):
 
 | survivors | candidates |
 |---|---|
-| F1 | 194 |
-| F1, F2 | 90 |
-| F2 | 86 |
-| F1, F4 | 76 |
-| F1, F3 | 59 |
-| H | 40 |
-| F4, H | 39 |
+| H | 516 |
+| F1 | 233 |
+| F4, H | 157 |
+| F3, H | 129 |
+| F1, F2 | 117 |
+| F1, F4 | 97 |
+| F2 | 94 |
+| F2, H | 92 |
+| F1, F3 | 83 |
+| F3 | 76 |
+| F2, F3 | 45 |
+| F2, F4 | 41 |
+| F5, H | 27 |
 | F1, F2, F4 | 13 |
-| F3 | 13 |
-| F3, H | 13 |
-| F3, F4, H | 9 |
-| F2, H | 8 |
-| F5, H | 7 |
-| F4 | 6 |
 
 **What the wider candidate test added** (role, survivor set):
 
 | role | survivors | candidates |
 |---|---|---|
+| F1 | H | 413 |
 | H | F1 | 109 |
+| F1 | F4, H | 99 |
+| F2 | F3, H | 71 |
+| F1 | F2, H | 70 |
 | H | F1, F2 | 53 |
-| F4 | F2 | 47 |
+| F4 | F2 | 48 |
+| F2 | F4, H | 48 |
 | H | F1, F4 | 47 |
-| H | F1, F3 | 33 |
-| F3 | F2 | 32 |
-| F2 | F4, H | 27 |
-| F2 | H | 22 |
-| F1 | H | 16 |
-| F4 | F3 | 10 |
-| F2 | F3, H | 10 |
-| H | F1, F2, F4 | 9 |
-| F2 | F1 | 9 |
-| F3 | F4, H | 7 |
+| F2 | F1 | 46 |
+| F2 | H | 44 |
+| F3 | F2, F4 | 41 |
+| F4 | F3 | 39 |
+| F3 | F2 | 39 |
 
 **NS-at-wedge splits** (the surviving blocker, the near-simple role and its cell, the targets):
 
@@ -108,3 +108,7 @@ Flag set: the pass-6 set `A220_NOROOM_INHERIT=1 A221_LANE=1 A224_SNAP=1` (OFF) v
 
 | page | run | flags | verdict | s | nodes | dead leaves | FC+EPS kills | NS-at-wedge splits / kills | EPS evals / s | first kill s |
 |---|---|---|---|---|---|---|---|---|---|---|
+| k5_16_interior_Y0500 | g1_page | off | DEAD | 584.9 | 163 | 112 | 0 | 0 / 0 | 0 / 0.0 | None |
+| k5_16_interior_Y0865 | g1_page | off | ALIVE | 901.9 | 125 | 53 | 0 | 0 / 0 | 0 / 0.0 | None |
+| k5_16_interior_Y0500 | g1_page | on | DEAD | 603.7 | 172 | 117 | 7 | 0 / 10 | 36 / 3.9 | None |
+| k5_16_interior_Y0865 | g1_page | on | ALIVE | 900.4 | 132 | 49 | 2 | 0 / 3 | 78 / 15.1 | None |
