@@ -94,6 +94,15 @@ class Tree211(N9.Tree209):
                 c[s[1]] = c.get(s[1], 0) + 1
         return c
 
+    def epsns_used(self, label):
+        """how often each (slot, role) pair has already been split AT THE WEDGE on this node's path (A230: the clip
+        tightens each time, but the returns diminish and the split would otherwise eat the whole depth budget)."""
+        c = {}
+        for s in self.pathof.get(label, ()):
+            if s and s[0] == "epsns":
+                c[(s[1], s[2])] = c.get((s[1], s[2]), 0) + 1
+        return c
+
     def eff_depth(self, depth, label):
         """the depth the CAP counts: a role split is charged to its own per-role cap, not to the tree's depth."""
         return depth - sum(self.rsplit_used(label).values())
@@ -205,7 +214,9 @@ class Tree211(N9.Tree209):
         if not L11.EPS_ON or self.pg.dead or not self.nodes:
             return "OK"
         t0 = time.time()
-        r = L11.eps_eval(self.pg, label, log=self.log)
+        used = self.epsns_used(label)
+        skip = {k for k, v in used.items() if v >= L11.EPS_WEDGE_CAP}
+        r = L11.eps_eval(self.pg, label, log=self.log, skip=skip)
         if r is None:
             return "OK"
         r["where"], r["depth"], r["seconds"] = where, depth, round(time.time() - t0, 3)

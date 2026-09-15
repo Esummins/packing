@@ -30,7 +30,7 @@ def _fmt(T):
     return "[%s]" % ",".join(str(round(float(v), 5)) for v in T)
 
 
-def evaluate(pg, label, log=None):
+def evaluate(pg, label, log=None, skip=None):
     cands = G.candidates(pg)
     if not cands:
         return None
@@ -72,7 +72,7 @@ def evaluate(pg, label, log=None):
                     "; ".join("%s=%s" % (nm, _fmt(T)) for nm, T, _pl in tg), ", ".join(row["struck"])))
             rec["verifier"] = VERIFIER
     if rec["verdict"] is None and G.WEDGE_NS:
-        w = pick_wedge(rec, label)
+        w = pick_wedge(rec, label, skip)
         if w:
             rec["wedge_ns"] = w
     if log and rec["verdict"]:
@@ -80,13 +80,17 @@ def evaluate(pg, label, log=None):
     return rec
 
 
-def pick_wedge(rec, label):
+def pick_wedge(rec, label, skip=None):
     """the first candidate (smallest box first) with exactly one named survivor, a certified-empty anonymous clause
-    and a non-empty reachable target list: the NS-at-wedge split."""
+    and a non-empty reachable target list: the NS-at-wedge split.  `skip` holds the (slot, blocker) pairs already
+    split to their cap on this path (the caller's per-pair cap: the clip tightens each time but returns diminish)."""
+    skip = skip or set()
     for row in rec["cands"]:
         if row["anon_cells"] != [] or len(row["survivors"]) != 1:
             continue
         M, sv = list(row["survivors"].items())[0]
+        if (row["slot"], M) in skip:
+            continue
         if sv["via"] == "budget" or not sv["reach"]:
             continue
         names = set(sv["reach"])

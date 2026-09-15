@@ -94,9 +94,10 @@ def snap_eval(pg, label, log=None):
 
 
 EPS_ON = (os.environ.get("A230_EPS") or os.environ.get("A227_EPS") or "").strip().lower() in ("1", "on", "yes")
+EPS_WEDGE_CAP = int(os.environ.get("A230_WEDGE_CAP") or 1)     # NS-at-wedge splits of ONE (slot, role) pair along a path
 
 
-def eps_eval(pg, label, log=None):
+def eps_eval(pg, label, log=None, skip=None):
     """A230 leaf rule (0'), Rule EPS -- beside snap_eval (the logic is attempts/A230-eps-branch/code/epsns230.py +
     eps230.py, which wrap A227 / A224 / A161 / A171 read-only; docs/proofs/lemma_eps.md).  None when the flag
     A230_EPS (or A227_EPS) is off or no role is near-simple at a forced cell; otherwise a record with verdict DEAD
@@ -105,7 +106,7 @@ def eps_eval(pg, label, log=None):
     need a fresh option table for the NAMED roles; the anonymous clause uses the fresh row exactly as rule CC does."""
     if not EPS_ON:
         return None
-    r = _e230().evaluate(pg, label, log=log)                     # A230 (flag-gated; the import is cheap and pure)
+    r = _e230().evaluate(pg, label, log=log, skip=skip)                     # A230 (flag-gated; the import is cheap and pure)
     if r is not None:
         pg.T.test("EPS-ROWS", label=label, n_cands=r.get("n_cands"), n_added=r.get("n_added"),
                   n_anon=r.get("n_anon"), verdict=r.get("verdict"), wedge_ns=bool(r.get("wedge_ns")))
