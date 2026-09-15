@@ -592,6 +592,8 @@ any |Y| ≤ 3 subset found, 201 tested).  [M] RAISE holds on all 4,534 A217 witn
 every witness has a corner met by ≤ 1); the ring swaps at once at side 4.11.  **This row is unchanged**: the obligation is RAISE(0 → 1)
 for every k0 packing of the window, geometric, untested below side 3.89.
 
+**[T]/[F]/[M]/[C] A223 (2026-09-14 night) — TWO GRAINS, the CLICK and FOUR-WALL, exact (`docs/proofs/two_grains.md`).**  [T] Lemma FLUSH: a flush packing of n unit squares has side ≥ ⌈√n⌉ (n = 11: 4).  [T] Theorem FOUR-WALL, conditional: CLICK-DOWN (every teleport-stuck packing has a flush packing at a side no larger than its own) ⇒ every teleport-stuck packing has side ≥ 4 > ŝ, none in the window, RAISE(0 → 1) follows; but [T] CLICK-DOWN ⟺ STUCK-4 ("no teleport-stuck packing below 4") — the conjecture is the kill, the click its proposed mechanism.  [M] The click is real on the ring (4.1099 → 4.000 monotone with all 15 contact axes kept, the lean 4|6 sliding) and on all 193 four-crowds (never blocked; the free variant reaches 4.000 from every one, never above its start) — all at sides ≥ 4.0014, where the conjecture is vacuous.  [F] "the chain formula decreases toward alignment" (Λ rises from 45° to alignment); [F] TWO-GRAIN's exclusion clause as geometry (12 / 193 one-grain four-crowds, crowd-held), [C] at free FJ points.  [C] SEAM consistent with n = 5, 10, 11, 19.  **This row is unchanged**: the obligation is now STUCK-4 (stronger than RAISE(0 → 1)), geometric, load-free, with no test object below side 4.
+
 ## 5. Lean / TCB
 
 TopLevel roster: K0-O1 + chain replays + ShellKill (Crowd, CrowdZone, Slide, PinnedSlide, Ceil, Composition);

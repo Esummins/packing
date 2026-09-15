@@ -8964,3 +8964,31 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
   corner, RING4X too.  [M] `trump222.md`: 201 subsets |Y| <= 3 of Trump, no different re-packing inside U(Y).
 - Lean: `Statements/Open/RingSwap.lean` (4 theorems, 1 axiom), build + audit exit 0, no sorry.  Files: `docs/proofs/ring_swap.md`;
   `attempts/A222-ring-swap/{code,results,logs}`; pages `docs/residue_map/campaigns/A222-ring-swap/`; registry row; ledger s.4 note.
+
+## 2026-09-14 night -- A223-two-grains (Fable) -- DONE (launch-and-exit; click run complete, resumable): **TWO GRAINS + CLICK + FOUR-WALL made exact -- Lemma FLUSH (flush packings need side >= ceil(sqrt n)) is a theorem; FOUR-WALL is conditional on CLICK-DOWN, which is EQUIVALENT to 'no teleport-stuck packing below 4' (stronger than RAISE(0->1)); the PI's click is real on the ring (4.1099 -> 4.000 monotone, the lean contact slides) and on all 193 four-crowds (never blocked, free variant to 4.000 from every one); the exclusion clause of TWO-GRAIN is false as geometry (one-grain four-crowds exist, crowd-held) and open at free FJ points; 'the chain formula decreases toward alignment' is false (Lambda); SEAM stated and checked; k0_00 unchanged**
+
+- The brief (21:10): the ring as two opposite-handed half-rings balanced at the top and bottom middle; the click-down; a self-supporting
+  k0 structure needs two grains with boundaries on all four walls; a grain-boundary minimiser keeps one diagonal seam.
+- [T] `docs/proofs/two_grains.md` s.1: handedness ('+' (0,45), '-' (45,90); rotations keep it, reflections swap), grains = components of
+  the contact graph on loaded squares within one class; Lemma W's sign (every wall torques a grain toward its own alignment), Lemma
+  TORQUE-ID (self-torques + wall-force circulation = 0: a one-handed structure needs a circulation of the opposite sign, not an
+  obstruction), Lemma CORNER-LOAD (frame handedness of a loaded corner decides floor-loaded vs wall-loaded; a floor pair holding each
+  other across the bottom is a LEAN of opposite global handedness -- the ring's 4|6).
+- [F]/[M] the exclusion clause: 12 / 193 four-crowds have ONE grain meeting all four corners (w062_crowd: all eleven squares '+'), 68 a
+  single handedness class; these are crowd-held packings, not free FJ points (A219: 193/193 infeasible), so the clause is [C] there.
+- [T]/[F]/[M] s.2 Lemma CLICK: EXTENT (vertex-to-vertex chains decrease toward alignment), LEAN-SLIDE (a lean contact never blocks:
+  the click along P(S, theta(t)) fails only when the polyhedron is empty -- a pin above, a caged rattler, a stale axis); [F] the general
+  chain-formula claim (Lambda(45) = 3.886 < Lambda(0) = 4); the ring's two ladder formulas (c+s) + (2+sig0) s + (1+sig1+sig2) c and its
+  mirror, exact to 1e-6, both decreasing toward alignment with sig held; [M] `click223.md`: the ring 4.1099 -> 4.000 in 21 steps,
+  monotone, 15/15 contacts kept; 193 four-crowds: 0 blocked (A, B, C), B reaches 4.000 on 193/193 never above its start, A ends at 4.000 on
+  187 and 5.000 on 6 (fixed axes force a bad flush arrangement); rattlers never block; pages `ring_grains_*`, `ring_click_*`,
+  `click_worst_w156_crowd.svg`.
+- [T] s.3 Lemma FLUSH (n-general, interval pigeonhole: n <= (ceil(sqrt n) - 1)^2 below ceil(sqrt n)); Theorem FOUR-WALL conditional; [T]
+  CLICK-DOWN <=> STUCK-4 (above 4 the grid is the flush packing; below 4 it is the kill by FLUSH): the click is a proposed mechanism,
+  the conjecture is 'every teleport-stuck 11-packing has side >= 4', which implies RAISE(0->1) (K0-FREE on a corner met by <= 1) and
+  with k1-a empties k0_00; no stuck packing below 4 exists to test it (lowest four-crowd 4.0014).
+- [C] s.4 Conjecture SEAM stated; n = 5, 10 = Goebel strips (one 45-deg strip between two staircases), n = 11 Trump (one 40.18-deg strip),
+  n = 19 the double 45-deg band (3 + 4 sqrt2 / 3 = Lambda(45) + 1): one seam each; n = 17 (Bidwell beats the a = 3 Goebel strip) and
+  n = 18 unverified.
+- Lean `Statements/Open/TwoGrains.lean`: `lemma_FLUSH`, `click_down` axioms; `flush_eleven_four`, `four_wall`, `no_stuck_in_window`
+  theorems; build + audit exit 0, no sorry.  Files: `attempts/A223-two-grains/{code,results,logs}`; registry row; ledger s.4 note.
