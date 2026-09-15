@@ -58,8 +58,11 @@ DEFAULTS.update(
     pk_depth=34,           # halvings of the pocket cover (the pocket is ~1/16 of the container's area)
     pk_max_pieces=200000,   # stack cap (depth-first: this is the frontier, not the whole level)
     pk_max_open=20000,      # undischarged pieces at pk_depth before the pocket is given up
-    pk_deadline=45.0,      # per pocket
-    pk_deadline_inherit=10.0,   # per pocket in the INHERITED pass: it is a cheap filter, and a parent pocket that
+    pk_deadline=5.0,       # per pocket.  MEASURED (results/bench221.md s."the cap"): on 42 pocket covers every DEAD
+                           # pocket died in <= 0.1 s and every surviving one burned the whole 45 s cap -- the cover
+                           # either collapses at once or not at all, so a 5 s cap is a 50x margin and turns an
+                           # UNDECIDED node from ~45 s into ~5 s.
+    pk_deadline_inherit=3.0,   # per pocket in the INHERITED pass: it is a cheap filter, and a parent pocket that
                                 # survives it is paid for again by the full leaf -- so keep the filter short
     pk_container=True,     # the sound w_min container clip on every piece (A171 container_clip, strict=False)
     grow=0.0,              # extra margin added to an inherited pocket before the cover (0: the cover is exact)

@@ -20,6 +20,7 @@ if HERE not in sys.path:
 
 import nodeload221 as NL                                                     # noqa: E402
 import noroom221 as N221                                                     # noqa: E402
+import noroom189 as NR189                                                    # noqa: E402  READ-ONLY (A189), the control
 
 
 def one(node, args, inherited):
@@ -28,7 +29,12 @@ def one(node, args, inherited):
                pk_tsub=args.pk_tsub, pk_max_pieces=args.pk_max_pieces, pk_max_open=args.pk_max_open,
                pk_deadline_inherit=args.pk_deadline_inherit)
     try:
-        if inherited:
+        if args.engine == "a189":
+            # the CONTROL: A189's own leaf on exactly the boxes this replay loaded, so that a verdict A221 reaches
+            # and the certificate did not can be attributed to the COVER rather than to tighter replayed boxes.
+            r = NR189.noroom(node["roles"], budget=dict(total_deadline=args.cap), name=node["label"][-30:], n=args.n)
+            r["step"] = "a189-control"
+        elif inherited:
             r = N221.noroom_child(node["roles"], inherited, budget=bud, name=node["label"][-30:], n=args.n)
         else:
             r = N221.noroom(node["roles"], budget=bud, name=node["label"][-30:], n=args.n)
@@ -54,6 +60,7 @@ def main():
     ap.add_argument("--pk-deadline-inherit", type=float, default=N221.DEFAULTS["pk_deadline_inherit"])
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--tag", default="bench")
+    ap.add_argument("--engine", choices=["a221", "a189"], default="a221")
     ap.add_argument("--out", default=os.path.join(HERE, "..", "results", "bench221.jsonl"))
     args = ap.parse_args()
 
