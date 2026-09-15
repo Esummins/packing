@@ -73,9 +73,9 @@ The other three sides follow by the symmetries of `C`: `x ↦ 1 − x` sends `(�
 sends `e ↦ e⊥`, i.e. `(u, v) ↦ (v, −u)`.  For `θ = 0` the wedge is the rectangle `C ∩ {x > 1 + δx}` (empty when
 `δx ≥ 0`, of width `−δx` and no taper when `δx < 0`: the formula's `y* → −∞`).  ∎
 
-*The half side.*  `y* ≥ ½ + t/2 + δy` whenever `δx ≥ 0`: an offset AWAY from the side keeps the foot strictly inside
-the upper half; an offset TOWARD the side lengthens it by `|δx|(1 − t²)/(2t)`, and once `|δx| ≥ (½ + t/2 + δy)·2t/(1 − t²)`
-the wedge is a full strip.  So "half side" is exact for the pure rotation and a bound `y* ≥ ½ + t/2 − |δy| − |δx|(1 − t²)/(2t)`
+*The half side.*  `y* ≥ ½ + t/2 + δy` whenever `δx ≥ 0`: an offset TOWARD the side (`F` pushed against it) keeps
+the foot strictly inside the upper half; an offset AWAY from the side (`δx < 0`) lengthens it by `|δx|(1 − t²)/(2t)`,
+and once `|δx| ≥ (½ + t/2 + δy)·2t/(1 − t²)` the wedge is a full strip (page `eps227_pinwheel.svg`, panel C).  So "half side" is exact for the pure rotation and a bound `y* ≥ ½ + t/2 − |δy| − |δx|(1 − t²)/(2t)`
 in general — the engine uses the exact polygons, not the half.
 
 *The constant.*  `w_R ≤ t(1 + 2|δy|)/(1 − t²) + |δx| ≤ w̄(δ, t0) = δ + t0(1 + 2δ)/(1 − t0²)`; A224's filter gives

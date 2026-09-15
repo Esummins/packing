@@ -1,0 +1,114 @@
+--- a/attempts/A211-coarse-tree/code/leaves211.py
++++ b/attempts/A211-coarse-tree/code/leaves211.py
+@@ -7,6 +7,8 @@
+ The option table must be FRESH (a round with no instantiation: Lemma CT's proviso) -- the tree calls this only at
+ a node where `candidates()` returned None.  Verdicts [C: closed-form trace; Lemma CORNER-COVER], no verifier clause."""
+ import math
++import os
++import sys
+ 
+ import cc210 as CC
+ import leaves210 as L10
+@@ -91,6 +93,30 @@
+     return r
+ 
+ 
++EPS_ON = (os.environ.get("A227_EPS") or "").strip().lower() in ("1", "on", "yes")   # A227 Rule EPS (default OFF)
++
++
++def eps_eval(pg, label, log=None):
++    """A227 leaf rule (0'), Rule EPS -- beside snap_eval (the logic is attempts/A227-lemma-eps/code/eps227.py, which
++    wraps A224 / A161 / A171 read-only).  None when the flag A227_EPS is off or no role is near-simple at a forced
++    cell; otherwise a record with verdict DEAD (FC+EPS: no possible second meeter of the cell is left) or None
++    (the survivors and the wedge targets they reach -- the Rule NS geometry).  Like SNAP it does not need a fresh
++    option table for the NAMED roles; the anonymous clause uses the fresh row exactly as rule CC does."""
++    if not EPS_ON:
++        return None
++    root = os.path.dirname(os.path.abspath(__file__))
++    while root and os.path.basename(root) != "attempts":
++        root = os.path.dirname(root)
++    d = os.path.join(root, "A227-lemma-eps", "code")
++    if d not in sys.path:
++        sys.path.insert(0, d)
++    import eps227 as E227                                       # A227 (flag-gated; import is cheap and pure)
++    r = E227.evaluate(pg, label, log=log)
++    if r is not None:
++        pg.T.test("EPS-ROWS", label=label, n_cands=r.get("n_cands"), n_anon=r.get("n_anon"), verdict=r.get("verdict"))
++    return r
++
++
+ def cc_rows(pg, label):
+     if not pg.rounds or pg.rounds[-1].get("instantiated"):
+         return []                                                # not a fresh table: no claim (Lemma CT's proviso)
+--- a/attempts/A211-coarse-tree/code/tree211.py
++++ b/attempts/A211-coarse-tree/code/tree211.py
+@@ -65,6 +65,7 @@
+         self.nr_short, self.nr_state, self.pocket_terminal = 0, {}, set()                  # A220 addendum: the short no-room cap
+         self.snap_runs, self.snap_kills, self.snap_handoffs, self.snap_partial = 0, 0, 0, 0   # A224 Rule SNAP
+         self.snap_cands, self.snap_seconds, self.snap_first, self.snap_rows = 0, 0.0, None, []
++        self.eps_runs, self.eps_kills, self.eps_seconds, self.eps_rows = 0, 0, 0.0, []            # A227 Rule EPS
+         self.dead_paths = dead_paths or {}          # Lemma INHERIT: path -> the certificate that closed it
+         self.pathof = {self.root_label: tuple(path0)}
+         self.n_inherited = 0
+@@ -188,6 +189,33 @@
+             return "ALIVE"
+         return "OK"
+ 
++    # ------------------------------------------------------------------ A227: Rule EPS (flag A227_EPS=1, default OFF)
++    def eps_try(self, depth, label, where):
++        """Rule EPS (attempts/A227-lemma-eps, docs/proofs/lemma_eps.md): at a FORCED cell where a role is near-simple,
++        the second meeter Theorem FC demands must enter through a WEDGE of (role, cell) -- a free-side wedge or the
++        end zone of a pin/wall-backed side (Lemma EPS-3/4/5); when every other role misses every wedge target
++        exactly (A161, in t) and no anonymous cell is within 1/sqrt2 of one, the node is DEAD by FC+EPS.  Flag off:
++        nil.  Otherwise the survivors and their reachable targets are recorded on the node (the NS split geometry)."""
++        if not L11.EPS_ON or self.pg.dead or not self.nodes:
++            return "OK"
++        t0 = time.time()
++        r = L11.eps_eval(self.pg, label, log=self.log)
++        if r is None:
++            return "OK"
++        r["where"], r["depth"], r["seconds"] = where, depth, round(time.time() - t0, 3)
++        self.eps_runs += 1
++        self.eps_seconds += r["seconds"]
++        self.nodes[-1].setdefault("eps", r)
++        self.eps_rows.append(dict(label=label, where=where, verdict=r.get("verdict"), n_cands=r.get("n_cands"), seconds=r["seconds"],
++                                  cands=[dict(role=c["role"], slot=c["slot"], struck=c["struck"], survivors=sorted(c["survivors"]),
++                                              anon_cells=c.get("anon_cells")) for c in (r.get("cands") or [])][:8]))
++        self.pg.T.test("EPS", label=label, where=where, verdict=r.get("verdict"), n_cands=r.get("n_cands"), seconds=r["seconds"])
++        if r.get("verdict") == "DEAD":
++            self.eps_kills += 1
++            self.kill(label, depth, "FC+EPS", r["leaf"], eps=r["kill"], verifier=r["verifier"])
++            return "DEAD"
++        return "OK"
++
+     # ------------------------------------------------------------------ A220: ONE budgeted exact cascade round, early
+     def anc_noroom(self):
+         """the nearest ANCESTOR on the live context stack whose no-room ran (A220 addendum)."""
+@@ -236,6 +264,9 @@
+         s = self.snap_try(depth, label, "leaf")                                    # (0) A224 Rule SNAP, the FIRST rule
+         if s != "OK":
+             return s
++        s = self.eps_try(depth, label, "leaf")                                     # (0') A227 Rule EPS, beside SNAP
++        if s != "OK":
++            return s
+         t0 = time.time()                                                          # (a) rule CC
+         rows = L11.cc_rows(pg, label)
+         node["cc"] = dict(n_rows=len(rows), seconds=round(time.time() - t0, 3), rows=[{k: v for k, v in r.items() if k != "band"} for r in rows][:8])
+@@ -387,6 +418,8 @@
+         ns = rs = None
+         if self.snap_try(depth, label, "internal") != "OK":                        # A224: cheap, after the coarse round
+             return
++        if self.eps_try(depth, label, "internal") != "OK":                         # A227: cheap, beside SNAP
++            return
+         while True:
+             ch = TB.candidates(pg)
+             n_stale = 0
+@@ -490,5 +523,7 @@
+                    ef_seconds=round(self.ef_seconds, 1), nr_short=self.nr_short,
+                    snap_runs=self.snap_runs, snap_kills=self.snap_kills, snap_handoffs=self.snap_handoffs,
+                    snap_partial=self.snap_partial, snap_cands=self.snap_cands, snap_first=self.snap_first,
+-                   snap_seconds=round(self.snap_seconds, 2), snap_rows=self.snap_rows[-60:])
++                   snap_seconds=round(self.snap_seconds, 2), snap_rows=self.snap_rows[-60:],
++                   eps_runs=self.eps_runs, eps_kills=self.eps_kills, eps_seconds=round(self.eps_seconds, 2),
++                   eps_rows=self.eps_rows[-60:])
+         return out
