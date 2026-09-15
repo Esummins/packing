@@ -56,7 +56,8 @@ DEFAULTS = dict(NR.DEFAULT_BUDGET)
 DEFAULTS.update(
     pk_tsub=8,             # tilt sub-bins of the pocket root
     pk_depth=34,           # halvings of the pocket cover (the pocket is ~1/16 of the container's area)
-    pk_max_pieces=250000,
+    pk_max_pieces=200000,   # stack cap (depth-first: this is the frontier, not the whole level)
+    pk_max_open=20000,      # undischarged pieces at pk_depth before the pocket is given up
     pk_deadline=45.0,      # per pocket
     pk_container=True,     # the sound w_min container clip on every piece (A171 container_clip, strict=False)
     grow=0.0,              # extra margin added to an inherited pocket before the cover (0: the cover is exact)
@@ -95,44 +96,58 @@ def cover_rect(nd, rect, bud, deadline=None):
         return [], dict(depth=0, stop="empty", n_open=0, n_dropped=0, seconds=0.0,
                         root=[float(x0), float(x1), float(y0), float(y1)], dropped_container=0)
     obst = [nd.boxes[k].obstacle("poly") for k in nd.names]
-    pieces = [(MB.Bin(a, b), (x0, x1, y0, y1)) for (a, b) in MB.sub_bins(Fr(0), Fr(1), bud["pk_tsub"])]
-    vol0 = sum(MB.rect_area(r) * (bn.t1 - bn.t0) for bn, r in pieces)
+    root = [(0, MB.Bin(a, b), (x0, x1, y0, y1)) for (a, b) in MB.sub_bins(Fr(0), Fr(1), bud["pk_tsub"])]
+    vol0 = sum(MB.rect_area(r) * (bn.t1 - bn.t0) for _d, bn, r in root)
     stats = nd.stats
+    # DEPTH-FIRST, unlike A189's level-by-level `bisect_free`: the memory is the stack (depth x 2), not the whole
+    # frontier, so a pocket whose residue is thin reaches depth 30+ where a breadth-first pass dies on its piece cap.
+    stack = list(reversed(root))
+    open_ = []
     depth = 0
-    n_dropped = n_cont = 0
+    nseen = n_dropped = n_cont = 0
     why = "exhausted"
-    while pieces and depth < bud["pk_depth"]:
-        if len(pieces) > bud["pk_max_pieces"]:
-            why = "piece cap"
-            break
-        if deadline is not None and time.time() > deadline:
+    while stack:
+        d, bn, r = stack.pop()
+        nseen += 1
+        depth = max(depth, d)
+        if (nseen & 255) == 0 and deadline is not None and time.time() > deadline:
             why = "deadline"
+            open_.append((bn, r))
+            open_.extend([(b2, r2) for _d2, b2, r2 in stack])
             break
-        nxt = []
-        for bn, r in pieces:
-            cur = r
-            if bud["pk_container"]:
-                cur, _sl = MB.container_clip(cur, bn, S, strict=False)
-                if cur is None:
-                    n_cont += 1
-                    continue
-            for ob in obst:
-                cur = MB._clip_rect_obstacle(cur, ob, bn, stats)
-                if cur is None:
-                    break
+        cur = r
+        if bud["pk_container"]:
+            cur, _sl = MB.container_clip(cur, bn, S, strict=False)
             if cur is None:
-                n_dropped += 1
+                n_cont += 1
                 continue
-            nxt.extend(MB.split_piece(bn, cur))
-        pieces = nxt
-        depth += 1
-    vol = sum(MB.rect_area(r) * (bn.t1 - bn.t0) for bn, r in pieces)
-    cert = dict(depth=depth, stop=why, n_open=len(pieces), n_dropped=n_dropped, dropped_container=n_cont,
-                root=[float(x0), float(x1), float(y0), float(y1)],
+        for ob in obst:
+            cur = MB._clip_rect_obstacle(cur, ob, bn, stats)
+            if cur is None:
+                break
+        if cur is None:
+            n_dropped += 1
+            continue
+        if d >= bud["pk_depth"]:
+            open_.append((bn, cur))
+            if len(open_) > bud["pk_max_open"]:
+                why = "open cap"
+                open_.extend([(b2, r2) for _d2, b2, r2 in stack])
+                break
+            continue
+        for (b2, r2) in MB.split_piece(bn, cur):
+            stack.append((d + 1, b2, r2))
+        if len(stack) > bud["pk_max_pieces"]:
+            why = "piece cap"
+            open_.extend([(b2, r2) for _d2, b2, r2 in stack])
+            break
+    vol = sum(MB.rect_area(r) * (bn.t1 - bn.t0) for bn, r in open_)
+    cert = dict(depth=depth, stop=why, n_open=len(open_), n_dropped=n_dropped, dropped_container=n_cont,
+                n_seen=nseen, root=[float(x0), float(x1), float(y0), float(y1)],
                 open_volume=float(vol), root_volume=float(vol0),
                 dropped_fraction=float(1 - vol / vol0) if vol0 else None,
                 seconds=round(time.time() - t0, 1))
-    return pieces, cert
+    return open_, cert
 
 
 def pocket_dead(nd, pocket, bud, deadline=None):
