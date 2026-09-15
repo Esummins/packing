@@ -1,0 +1,66 @@
+== identities (all witnesses): total wall torque about centre, tau_wall = W(sin-cos)/2 on tilted squares, equilibrium closure
+BOXK0     36/ 36 FJ-feasible  |tot wall torque| n=36 min +1.110e-16 max +1.330e-08  pred_err n=36 min +0.000e+00 max +3.886e-16  eq_torque n=36 min +6.939e-17 max +1.330e-08  eq_force n=36 min +1.388e-16 max +5.454e-09  lam0=0: 0
+CROWD    182/185 FJ-feasible  |tot wall torque| n=182 min +1.776e-15 max +1.516e+01  pred_err n=182 min +0.000e+00 max +2.220e-15  eq_torque n=182 min +1.247e-17 max +2.249e-08  eq_force n=182 min +6.939e-18 max +5.498e-08  lam0=0: 0
+HELD     174/184 FJ-feasible  |tot wall torque| n=174 min +7.457e-03 max +9.445e-01  pred_err n=174 min +1.041e-17 max +2.776e-16  eq_torque n=174 min +1.388e-17 max +2.125e-09  eq_force n=174 min +1.483e-17 max +1.519e-08  lam0=0: 0
+K0FREE    41/ 41 FJ-feasible  |tot wall torque| n=41 min +0.000e+00 max +7.249e-09  pred_err n=41 min +0.000e+00 max +1.943e-16  eq_torque n=41 min +0.000e+00 max +4.913e-08  eq_force n=41 min +5.901e-17 max +4.550e-08  lam0=0: 0
+SETTLED   40/ 40 FJ-feasible  |tot wall torque| n=40 min +8.674e-18 max +4.117e-09  pred_err n=40 min +0.000e+00 max +2.047e-16  eq_torque n=40 min +2.776e-17 max +2.998e-08  eq_force n=40 min +5.551e-17 max +3.084e-08  lam0=0: 0
+
+== per-corner signed torque T_c (corner frame) at UNSETTLED corners, by number of meeters; LP range over the polytope
+BOXK0    meeters=1  T_c n=131 min -6.651e-09 max +3.784e-10   T_min n=131 min -6.651e-09 max +3.784e-10   T_max n=131 min -6.651e-09 max +3.784e-10   sum chi*tau_wall n=131 min -6.651e-09 max +0.000e+00
+BOXK0    meeters=2  T_c n=6 min -4.677e-17 max +1.110e-15   T_min n=6 min -4.677e-17 max +1.110e-15   T_max n=6 min -4.677e-17 max +1.110e-15   sum chi*tau_wall n=6 min -1.110e-15 max +0.000e+00
+CROWD    meeters=2  T_c n=728 min -3.804e+00 max +3.905e+00   T_min n=728 min -3.804e+00 max +3.905e+00   T_max n=727 min -3.804e+00 max +3.905e+00   sum chi*tau_wall n=728 min -3.553e+00 max +0.000e+00
+HELD     meeters=1  T_c n=265 min -4.730e-01 max +4.718e-01   T_min n=265 min -4.730e-01 max +4.718e-01   T_max n=265 min -4.730e-01 max +4.718e-01   sum chi*tau_wall n=265 min -4.730e-01 max +0.000e+00
+HELD     meeters=2  T_c n=431 min -4.731e-01 max +4.731e-01   T_min n=431 min -4.731e-01 max +4.731e-01   T_max n=431 min -4.731e-01 max +4.731e-01   sum chi*tau_wall n=431 min -4.731e-01 max +0.000e+00
+K0FREE   meeters=1  T_c n=156 min -5.000e-01 max +5.000e-01   T_min n=156 min -5.000e-01 max +4.910e-01   T_max n=156 min -4.910e-01 max +5.000e-01   sum chi*tau_wall n=156 min -5.000e-01 max +0.000e+00
+K0FREE   meeters=2  T_c n=8 min +0.000e+00 max +3.804e-16   T_min n=8 min +0.000e+00 max +3.804e-16   T_max n=8 min -0.000e+00 max +3.804e-16   sum chi*tau_wall n=8 min -3.804e-16 max +0.000e+00
+SETTLED  meeters=1  T_c n=64 min -1.544e-01 max +2.033e-01   T_min n=64 min -1.716e-01 max +8.650e-02   T_max n=64 min -8.377e-02 max +2.033e-01   sum chi*tau_wall n=64 min -8.650e-02 max +0.000e+00
+SETTLED  meeters=2  T_c n=13 min -2.778e-01 max +1.379e-01   T_min n=13 min -2.985e-01 max +1.379e-01   T_max n=13 min -2.623e-01 max +1.379e-01   sum chi*tau_wall n=13 min -7.327e-02 max +0.000e+00
+
+== per meeter (unsettled corners): tilted loaded meeters: chi vs sign of holder torque (frame)
+BOXK0    tilted loaded meeters: holder torque sign == chi: 30, != chi: 33; upright loaded meeters 0
+CROWD    tilted loaded meeters: holder torque sign == chi: 862, != chi: 0; upright loaded meeters 247
+HELD     tilted loaded meeters: holder torque sign == chi: 915, != chi: 5; upright loaded meeters 0
+K0FREE   tilted loaded meeters: holder torque sign == chi: 24, != chi: 3; upright loaded meeters 58
+SETTLED  tilted loaded meeters: holder torque sign == chi: 31, != chi: 0; upright loaded meeters 33
+
+== CROWD witnesses: where the crowd force is needed
+number of corners with an active crowd force per witness: {4: 51, 3: 61, 2: 67, 1: 3}
+crowd forces (lam, corner, square, walls touched, tilt in frame) sample: [(7.1946, 'TL', 3, ['y=s'], 82.1), (6.9636, 'TL', 8, ['y=s'], 81.8), (6.9636, 'BR', 7, ['x=s'], 8.2), (6.9636, 'BR', 3, ['y=0'], 81.8), (6.9636, 'BR', 3, ['y=0'], 81.8), (6.7757, 'TL', 10, ['x=0'], 8.4), (6.7757, 'TL', 8, ['y=s'], 81.6), (6.7757, 'TL', 5, ['y=s'], 81.6), (6.7757, 'TL', 2, ['x=0'], 8.4), (6.7757, 'BR', 9, ['y=0'], 81.6), (6.7757, 'BL', 9, ['x=0'], 8.4), (6.7757, 'BL', 3, ['y=0'], 81.6)]
+crowd force on a square touching NO wall: 0 of 639
+
+== doubly-met unsettled corners: are both meeters wall-loaded? (cls: both / one / none)
+BOXK0    {0: 3, 2: 2, 1: 1}
+CROWD    {2: 526, 0: 145, 1: 57}
+HELD     {2: 268, 0: 18, 1: 145}
+K0FREE   {0: 5, 2: 2, 1: 1}
+SETTLED  {2: 9, 0: 3, 1: 1}
+crowd pull direction: {'along its wall toward the corner': 569, 'toward its own wall': 70}
+crowd torque sign vs chi: {('chi=-1', 'crowd torque sign -1'): 253, ('chi=+0', 'crowd torque sign -1'): 47, ('chi=+1', 'crowd torque sign +1'): 279, ('chi=+0', 'crowd torque sign +1'): 41, ('chi=-1', 'crowd torque sign +1'): 5, ('chi=+1', 'crowd torque sign -1'): 14}
+pairs:
+   ('along its wall toward the corner', "other meeter walls=['y=0']", 'other loaded') 164
+   ('along its wall toward the corner', "other meeter walls=['x=0']", 'other loaded') 135
+   ('along its wall toward the corner', "other meeter walls=['x=s']", 'other loaded') 119
+   ('along its wall toward the corner', "other meeter walls=['y=s']", 'other loaded') 107
+   ('along its wall toward the corner', 'other meeter walls=[]', 'other unloaded') 44
+   ('toward its own wall', 'other meeter walls=[]', 'other unloaded') 32
+   ('toward its own wall', "other meeter walls=['y=s']", 'other loaded') 13
+   ('toward its own wall', "other meeter walls=['x=0']", 'other loaded') 10
+   ('toward its own wall', "other meeter walls=['y=0']", 'other loaded') 8
+   ('toward its own wall', "other meeter walls=['x=s']", 'other loaded') 7
+sample rows (wid, s, corner, sq, walls, tilt_frame, coord, lam, tau_crowd_frame, chi):
+   ('w036_crowd', 4.0014, 'BL', 0, ['y=0'], 87.8, 'u', 0.03, -0.0146, -1)
+   ('w036_crowd', 4.0014, 'BR', 2, ['y=0'], 0.0, 'u', 0.001, -0.0004, 0)
+   ('w036_crowd', 4.0014, 'BR', 5, ['x=s'], 1.2, 'v', 0.036, 0.0176, 1)
+   ('w036_crowd', 4.0014, 'TR', 4, ['y=s'], 0.0, 'u', 0.001, -0.0005, 0)
+   ('w036_crowd', 4.0014, 'TR', 10, ['x=s'], 1.2, 'v', 0.043, 0.0211, 1)
+   ('w036_crowd', 4.0014, 'TL', 1, ['y=s'], 87.8, 'u', 0.037, -0.0177, -1)
+   ('w037_crowd', 4.0016, 'BL', 3, ['x=0'], 2.4, 'v', 0.039, 0.0185, 1)
+   ('w037_crowd', 4.0016, 'BR', 10, ['x=s'], 2.4, 'v', 0.039, 0.0185, 1)
+   ('w037_crowd', 4.0016, 'TR', 4, ['x=s'], 0.0, 'v', 0.001, 0.0004, 0)
+   ('w037_crowd', 4.0016, 'TR', 7, ['y=s'], 88.8, 'u', 0.039, -0.0193, -1)
+   ('w037_crowd', 4.0016, 'TL', 8, ['x=0'], 0.0, 'v', 0.001, 0.0004, 0)
+   ('w037_crowd', 4.0016, 'TL', 2, ['y=s'], 88.8, 'u', 0.041, -0.02, -1)
+   ('w038_crowd', 4.0025, 'BL', 1, ['x=0'], 1.2, 'v', 0.083, 0.0407, 1)
+   ('w038_crowd', 4.0025, 'BR', 8, ['y=0'], 87.2, 'u', 0.068, -0.0324, -1)
+   ('w038_crowd', 4.0025, 'TR', 4, ['y=s'], 87.8, 'u', 0.107, -0.0513, -1)
+   ('w039_crowd', 4.0076, 'BL', 2, ['x=0'], 2.5, 'v', 0.147, 0.0701, 1)

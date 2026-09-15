@@ -8713,3 +8713,36 @@ halves of the answer come from opposite findings.
   IN MEMORY (nothing edited on disk, the read-only libraries untouched), called by `mbpatch213.install()` behind
   `A214_CKERNEL` (default ON since the tests passed; `=0` restores the Python-int path).  A213b's files were not
   touched -- the only shared surface is that flag layer, and A213b's own runs already carry the kernel.
+
+## 2026-09-14 evening -- A217-torque-probe (Fable) -- DONE (launch-and-exit; the crowd search detached): **the TORQUE PROBE -- Fritz-John stress at 3,555 jammed local optima; no torque invariant, but NO FJ point has four doubly-met open corners (0 of 883; the 185 forced four-crowds all need an external along-wall pull)**
+
+- The PI's question (17:40): is there a signed equilibrium condition at unsettled corners that forbids all four corners being
+  unsettled at once -- a torque proof of "every optimal packing has a settled corner"?  Remark (17:45): the invariant must live
+  at convex wall-bounded positions; interior grains in non-convex pockets are unconstrained.
+- Built: SLSQP side-minimiser on the selected SAT rows (`opt217.py`), active-set Fritz-John multipliers (NNLS residual < 1e-8,
+  HiGHS LP polytope ranges), the tilt box (no-settled-corner constraint) and the CROWD rows (two meeters per corner box with a
+  margin), D4-quotiented; seeds = A85's 262 k0 optima, 600 random, 168+ crowd starts.  3,555 distinct FJ-feasible local optima:
+  SETTLED 430 (lowest 3.886746), K0FREE 417 (3.897231; the first with tilted corner squares 3.966513, two 44-deg diamonds),
+  BOXK0 36, HELD 2,487 (tilt bound active), CROWD 185 (crowd rows active), CROWD0 **0**.  None below s-hat.
+- [T] Lemma W: a wall torques a tilted square by W(sin theta - cos theta)/2 about its centre toward its nearest alignment, EVERY
+  wall the same sign (checked 2e-15); the total wall moment about the centre is 0 at every FJ point (1e-8).  So "the meeters
+  receive wall torque of sign -chi and holder torque of sign +chi" is an identity, not a constraint: C1 (sum of corner torques)
+  fails at Trump's own open TL corner (T = +0.035), C2/C3 are identities, C6 (winding) is the count of tilt-side changes -- free.
+- [M] What survives (C4): no FJ point has four doubly-met open corners (0/883, max three once); forcing four 2-crowds always
+  leaves >= 1 crowd row loaded (1/2/3/4 corners in 3/67/61/51 witnesses), the pull along the meeter's wall toward the corner
+  (569/639), its torque the anti-aligning one of sign chi (532/551); the interior holders push the meeter flat as well (368/551).
+  The 8 HELD four-crowds: bound torque of sign chi 494/494.  C5 (thin): at k0 FJ points the loaded meeters of doubly-met corners
+  are torque-neutral (45 deg or flush), 14/14 corners -- Trump's TL is not, so it is k0-specific.
+- [M] The PI's remark confirmed: interior tilted grains (no wall) receive holder torques of both signs on the same square
+  (254/254); the constraint sits on wall-touching squares (one wall = half of it).
+- [M] A85's 14 k0 optima below 3.9 drain to settled optima under the SAT-row SLSQP (A87 s.5.4 reproduced); atlas family 11
+  (no slot square, 3.888014) drains to family 6.
+- [C] Lemma TORQUE (notes/torque.md s.4): at a sigma-minimiser at most three corner boxes are doubly met; with K0-2 (every
+  corner box of the k-maximal minimiser doubly met) the k-maximal minimiser has a settled corner.  Proof route = a COUNT: 8
+  distinct meeters + >= 4 along-wall holders (a holder serves <= 2 meeters: the two of one wall or the two of one corner; the two
+  meeters of a corner push each other OUT) = 12 > 11 -- n = 11 only, silent for n >= 12 (consistent with tilted middle grains
+  and open corners at higher n).  Gaps: G1 "a 2-crowd meeter is pinned along its wall" (the crowd data, not a theorem), G2 the
+  sharing bound.  Not a torque identity: the torque bookkeeping contributes nothing to the count.
+- Pages `docs/residue_map/campaigns/A217-torque/` (39, forces as arrows, corner torques annotated, gallery); results
+  `attempts/A217-torque-probe/results/torque217.md`, `witnesses217.jsonl`, `torque217.jsonl`; registry row; resume block in
+  `notes/torque.md` s.6 (re-run collect/hunt/fig when `search217_crowd0.jsonl` has grown; a CROWD0 witness would refute C4).
