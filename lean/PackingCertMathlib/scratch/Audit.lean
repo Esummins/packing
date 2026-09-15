@@ -36,6 +36,7 @@ import PackingCertMathlib.Statements
 #print axioms PackingCert.S11.OpenLemmas.inherit_kill
 #print axioms PackingCert.S11.OpenLemmas.inherit_branches
 #print axioms PackingCert.S11.OpenLemmas.lemma_CORNER_COVER
+#print axioms PackingCert.S11.OpenLemmas.lemma_PUSH
 #print axioms PackingCert.S11.OpenLemmas.lemma_A189_noroom
 #print axioms PackingCert.S11.OpenLemmas.role_split
 #print axioms PackingCert.S11.OpenLemmas.stratum_kill_open

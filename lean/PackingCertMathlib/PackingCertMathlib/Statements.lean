@@ -23,6 +23,7 @@ import PackingCertMathlib.Statements.Open.NoRoom189
 import PackingCertMathlib.Statements.Open.CornerCover
 import PackingCertMathlib.Statements.Open.BasinLemma
 import PackingCertMathlib.Statements.Open.TubeLeaf
+import PackingCertMathlib.Statements.Open.K0Count
 
 /-!
 # The readable layer, one import (A216)
