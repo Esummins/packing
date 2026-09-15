@@ -70,3 +70,18 @@ KeyError: 'c0_Y0784_interior_G1'
    node R.2.2.1    d3 BL(0,2)<-[3]: INTERNAL (62.6 s, 1 rounds; t=1297.8)
    no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
    Rule NS at R.2.2.1: split F1 at TL(0,0) (meeting fraction 0.105788)
+   node R.2.2.1.1  d4 TL(0,0)<-None: DEAD by EmptyBox r1 (23.1 s, 1 rounds; t=1445.3)
+   node R.2.2.1.2  d4 TL(0,0)<-None: DEAD by EmptyBox r1 (16.4 s, 1 rounds; t=1461.9)
+   node R.2.2.2    d3 BL(0,2)<-[4]: INTERNAL (83.9 s, 1 rounds; t=1545.9)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.2.2: split H at BR(0,1) (meeting fraction 0.004736)
+   node R.2.2.2.1  d4 BR(0,1)<-None: INTERNAL (61.4 s, 1 rounds; t=1730.6)
+   no-room (k=10, m=1): UNDECIDED in 66 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.2.2.1: split F3 at BR(0,1) (meeting fraction 0.102751)
+   node R.2.2.2.1.1 d5 BR(0,1)<-None: INTERNAL (46.8 s, 1 rounds; t=1844.9)
+   node R.2.2.2.1.1: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R            => ALIVE (36 nodes; t = 1848 s of 1800.0)
+   => ALIVE (zero_page) in 1848.4 s: 36 nodes, depth 5, gate hits 0 (conflicts 0), tube leaves 0 (depths []), 0 aligned cuts, kills by rule {'NOROOM': 4, 'EmptyBox': 10, 'FC': 2}, 4 NS, 0 pockets, 0 role splits, 16 dead / 8 alive leaves (WALL)
+   per node: R d0 INTERNAL 37.9s; R.1 d1 INTERNAL 13.1s; R.1.1 d2 INTERNAL 13.0s; R.1.1r1 d2 INTERNAL 19.1s; R.1.1r2 d2 DEAD NOROOM 56.4s; R.1.2 d2 INTERNAL 11.2s; R.1.2r1 d2 INTERNAL 29.7s; R.1.2.1 d3 DEAD EmptyBox 44.1s; R.1.2.2 d3 DEAD NOROOM 54.7s; R.1.2.3 d3 DEAD EmptyBox 8.2s; R.1.3 d2 INTERNAL 30.9s; R.1.3r1 d2 INTERNAL 57.9s; R.1.3.1 d3 DEAD EmptyBox 49.1s; R.1.3.2 d3 DEAD NOROOM 60.6s; R.1.3.3 d3 DEAD EmptyBox 10.1s; R.1.4 d2 INTERNAL 15.1s; R.1.4r1 d2 INTERNAL 31.6s; R.1.4.1 d3 DEAD EmptyBox 48.6s; R.1.4.2 d3 DEAD NOROOM 55.2s; R.1.4.3 d3 DEAD EmptyBox 8.3s; R.2 d1 INTERNAL 13.3s; R.2.1 d2 INTERNAL 17.9s; R.2.1r1 d2 INTERNAL 29.2s; R.2.1.1 d3 DEAD EmptyBox 7.4s; R.2.1.2 d3 INTERNAL 80.0s; R.2.1.2.1 d4 DEAD FC 66.7s; R.2.1.2.2 d4 DEAD FC 44.4s; R.2.1.3 d3 DEAD EmptyBox 43.0s; R.2.2 d2 INTERNAL 18.0s; R.2.2r1 d2 INTERNAL 23.9s; R.2.2.1 d3 INTERNAL 62.6s; R.2.2.1.1 d4 DEAD EmptyBox 23.1s; R.2.2.1.2 d4 DEAD EmptyBox 16.4s; R.2.2.2 d3 INTERNAL 83.9s; R.2.2.2.1 d4 INTERNAL 61.4s; R.2.2.2.1.1 d5 ALIVE 46.8s; R.2.2.2.1.2 d5 ALIVE 0.0s; R.2.2.2.2 d4 ALIVE 0.0s; R.2.2.3 d3 ALIVE 0.0s; R.2.3 d2 ALIVE 0.0s; R.2.4 d2 ALIVE 0.0s; R.3 d1 ALIVE 0.0s; R.4 d1 ALIVE 0.0s
+== c0_Y0784: pad0 ALIVE   (s0-only, lam = 1; DEAD = killed at s0, TRUMP-TUBE = the Trump basin, ALIVE = undecided)
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A212-trump5tree\trump5tree212_gallery.svg
