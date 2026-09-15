@@ -8938,3 +8938,29 @@ lane was in fact still running and finished normally, so a lab python was killed
 worker was lost (all committed `rc=0` either side of that minute) and the resumable A219 holder loop restarted at
 19:46:38 and has been committing per crowd since.  The lesson for the next attempt: match the PID against
 `Win32_Process.CommandLine`, never against start time -- which is what every later kill in this attempt did.
+
+## 2026-09-14 night -- A222-ring-swap (Fable) -- DONE (launch-and-exit; the region searches continuing detached, per-row commits): **RING SWAP made exact -- Lemma SWAP is a theorem (teleport = |X| = 1); the PI's perimeter sweep is Lemma STEP / Lemma CELLS (|M(Pi)| <= |Pi|); its COUNT does not close (one remaining meeter per exposed cell is a teleport; 9 <= 11); RAISE(0 -> 1) is the load-free geometric obligation and covers rattler crowds; the ring swaps at once at its own side; Trump swap-rigid on 201 subsets; k0_00 unchanged**
+
+- The brief (22:10) and the PI's addenda 0 / 0b / 0c / corrections (22:30-23:05): teleport-decompose a loaded ring at once; the
+  inductive sweep around the perimeter (4 floor(sqrt n) - 4 = 8 cells at n = 11); Lemma RAISE(0 -> 2); VALUE vs UNIQUENESS.
+- [T] Lemma SWAP (`docs/proofs/ring_swap.md` s.1.1, Lean `swap_packing`): |X| unit squares inside U(X) = (union X) u Free, interior-
+  disjoint from the rest, replace X at the same side.  [T] Lemma STEP (s.1.2): the sweep's bookkeeping h_k = sum |M_j| - k (place from
+  hand / teleport the single meeter / pick up all and place one); it ENDS iff h_k = 0.  [T] Lemma CELLS (s.1.3, Lean `cells_swap`):
+  a packing exchanges into one containing a family Pi of disjoint cells iff |M(Pi)| <= |Pi|; K0-FREE = |Pi| = 1; Theorem FC = pins + a
+  cell in a COMPLETE packing -- mid-sweep FC does not apply.
+- [F] The count (s.1.4): each exposed cell needs ONE remaining meeter (a teleport), not the PI's second; with every corner doubly met
+  >= 9 squares meet the 8 window cells and n = 11 supplies them; counting closes only for n <= 4; the endgame (8 settled + 3 in the
+  cross region) is impossible at S < 4, so the sweep ends only on an under-met PREFIX.  The count gives: >= 1 centre square meets an
+  exposed cell (the ring: rattler 0 at BL(1,0) / holder 9 at TR(1,0)); the ring is not self-supporting, one intruder supports it.
+- [T]/[C] Lemma RAISE(0 -> k) (s.1.5) = an under-met family with a corner; simultaneous (two singly-met cells, distinct meeters) and
+  sequential teleports are the same condition; with k1-a it empties k0_00 (Lean `no_packing_of_raise`, axiom `raise_zero_one`);
+  stated from k = 0 only.  VALUE needs RAISE(0 -> 1) + the k1_00 tree; UNIQUENESS reduces to SWAP-RIGIDITY of Trump (s.1.7).
+  Loads are never used: rattler crowds are covered (s.1.8).
+- [M] `raise222.md`: 4,534 A217 packings, RAISE holds on every non-settled one at its own side (trivial at S >= 4); every witness
+  below side 4 has a corner met by <= 1 square; window-shaped 8-cell family over-met on 40 / 1,172 four-crowds (page
+  `window8_fail_w047_crowd.svg`); the ring's window sweep from BL: consumed 10, h = 2 (page `sweep_rand_0_0569_t20.svg`).
+- [M] `swap222.md` (193 four-crowds, detached): on the ring, CORNER-SWAP at BR / TR / TL, not BL (rattler 0 in the pocket above the
+  4-6 contact); RING4 (four settled + four band squares) FOUND at side 4.11 (page `ring_swap_rand_0_0569_t20.svg`); RING1 at every
+  corner, RING4X too.  [M] `trump222.md`: 201 subsets |Y| <= 3 of Trump, no different re-packing inside U(Y).
+- Lean: `Statements/Open/RingSwap.lean` (4 theorems, 1 axiom), build + audit exit 0, no sorry.  Files: `docs/proofs/ring_swap.md`;
+  `attempts/A222-ring-swap/{code,results,logs}`; pages `docs/residue_map/campaigns/A222-ring-swap/`; registry row; ledger s.4 note.

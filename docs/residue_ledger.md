@@ -581,6 +581,17 @@ the mode is blocked by a caged rattler in the 11-square configuration; Theorem S
 2.6·10¹¹ structures, 2.3·10⁶ CPU-days (232 CPU-days even without interior holders) — not a route; and it would exclude loaded
 four-crowds only, the rattler crowds stay with H1 (DF-O4, OPEN).  **This row is unchanged.**
 
+**[T]/[F]/[M]/[C] A222 (2026-09-14 night) — RING SWAP and the perimeter sweep, exact (`docs/proofs/ring_swap.md`).**  [T] Lemma
+SWAP (Lean theorem; teleport is |X| = 1), Lemma STEP and Lemma CELLS: a packing exchanges at the same side into one containing a
+family Π of disjoint cells iff |M(Π)| ≤ |Π| (K0-FREE = |Π| = 1, FC = pins + a cell in a complete packing).  [F] The PI's count does
+not close: an exposed cell needs one remaining meeter (a teleport), the 8 window cells are met by ≥ 9 of the 11 squares whenever every
+corner is doubly met, and counting closes only for n ≤ 4; it gives that ≥ 1 centre square meets an exposed cell.  [T]/[C] Lemma
+RAISE(0 → k) = an under-met family with a corner; with k1-a it empties k0_00 (Lean `no_packing_of_raise`); it is load-free, so rattler
+crowds are covered; VALUE needs RAISE(0 → 1) + k1_00's tree, UNIQUENESS reduces to SWAP-RIGIDITY of Trump (no different re-packing of
+any |Y| ≤ 3 subset found, 201 tested).  [M] RAISE holds on all 4,534 A217 witnesses at their own sides (trivial at S ≥ 4; below 4
+every witness has a corner met by ≤ 1); the ring swaps at once at side 4.11.  **This row is unchanged**: the obligation is RAISE(0 → 1)
+for every k0 packing of the window, geometric, untested below side 3.89.
+
 ## 5. Lean / TCB
 
 TopLevel roster: K0-O1 + chain replays + ShellKill (Crowd, CrowdZone, Slide, PinnedSlide, Ceil, Composition);
