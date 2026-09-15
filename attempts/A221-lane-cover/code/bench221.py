@@ -25,7 +25,8 @@ import noroom221 as N221                                                     # n
 def one(node, args, inherited):
     t = time.time()
     bud = dict(total_deadline=args.cap, pk_deadline=args.pk_deadline, pk_depth=args.pk_depth,
-               pk_tsub=args.pk_tsub, pk_max_pieces=args.pk_max_pieces, pk_max_open=args.pk_max_open)
+               pk_tsub=args.pk_tsub, pk_max_pieces=args.pk_max_pieces, pk_max_open=args.pk_max_open,
+               pk_deadline_inherit=args.pk_deadline_inherit)
     try:
         if inherited:
             r = N221.noroom_child(node["roles"], inherited, budget=bud, name=node["label"][-30:], n=args.n)
@@ -50,6 +51,7 @@ def main():
     ap.add_argument("--pk-tsub", type=int, default=N221.DEFAULTS["pk_tsub"])
     ap.add_argument("--pk-max-pieces", type=int, default=N221.DEFAULTS["pk_max_pieces"])
     ap.add_argument("--pk-max-open", type=int, default=N221.DEFAULTS["pk_max_open"])
+    ap.add_argument("--pk-deadline-inherit", type=float, default=N221.DEFAULTS["pk_deadline_inherit"])
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--tag", default="bench")
     ap.add_argument("--out", default=os.path.join(HERE, "..", "results", "bench221.jsonl"))

@@ -59,6 +59,8 @@ DEFAULTS.update(
     pk_max_pieces=200000,   # stack cap (depth-first: this is the frontier, not the whole level)
     pk_max_open=20000,      # undischarged pieces at pk_depth before the pocket is given up
     pk_deadline=45.0,      # per pocket
+    pk_deadline_inherit=10.0,   # per pocket in the INHERITED pass: it is a cheap filter, and a parent pocket that
+                                # survives it is paid for again by the full leaf -- so keep the filter short
     pk_container=True,     # the sound w_min container clip on every piece (A171 container_clip, strict=False)
     grow=0.0,              # extra margin added to an inherited pocket before the cover (0: the cover is exact)
 )
@@ -214,14 +216,21 @@ def noroom_child(roles, parent_pockets, budget=None, s0=None, name="child", n=11
     if bad is not None:
         return dict(k=k, m=m, step="build", seconds=round(time.time() - t0, 1), **bad)
     t_build = time.time() - t0
-    verdict, recs, alive = pocket_pass(nd, parent_pockets or [], bud, dl, m)
+    fb = dict(bud)
+    fb["pk_deadline"] = min(bud["pk_deadline"], bud["pk_deadline_inherit"])
+    # LARGEST pocket first: a DEAD verdict needs every pocket anyway, but an UNDECIDED one is reached soonest by
+    # testing the pocket most likely to survive first.
+    pks = sorted([list(map(float, q)) for q in (parent_pockets or [])],
+                 key=lambda q: -((q[1] - q[0]) * (q[3] - q[2])))
+    verdict, recs, alive = pocket_pass(nd, pks, fb, dl, m)
     out = dict(k=k, m=m, verdict=verdict, step="inherited-pockets", n_inherited=len(parent_pockets or []),
                pockets=[r["pocket"] for r in recs], pocket_recs=recs, alive=alive,
+               inherit_cap=fb["pk_deadline"],
                t_build=round(t_build, 1), seconds=round(time.time() - t0, 1),
                reason=("every inherited pocket is DEAD (Lemma POCKET-DEAD + Lemma POCKET-INHERIT): the node has no "
                        "free unit square" if verdict == "DEAD" else
                        "%d of %d inherited pocket(s) survive the cover" % (len(alive), len(parent_pockets or []))))
-    if verdict == "DEAD" or not (parent_pockets or []):
+    if verdict == "DEAD" or not pks:
         out["clip"] = "NOROOM-POCKET" if verdict == "DEAD" else None
         return out
     full = noroom(roles, s0=s0, budget=bud, name=name, n=n, nd=nd, deadline=dl)
