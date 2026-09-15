@@ -16,3 +16,26 @@ KeyError: 'c0_Y0943_interior_G1'
 10:44:48 [w3] c0_Y0943  rc=1 2s
 02:13:43 [w1] start c0_Y0943 wall 1800 (lab 2, free 13839 MB)
    priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0943 at the zero pad: ALIVE in 19803 ms; kills {'H-clip': 0, 'P': 5476, 'W': 1349, 'C': 1222, 'M': 4597, 'L': 7, 'R': 3100, 'X': 855}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0943 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0943_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.358, 2.498, 2.358, 2.498, 82.372, 90.0]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (41.9 s, 1 rounds; t=41.9)
+   node R.1        d1 BR(0,1)<-[16]: INTERNAL (9.5 s, 1 rounds; t=51.4)
+   node R.1.1      d2 TR(1,0)<-[8]: INTERNAL (16.0 s, 1 rounds; t=67.5)
+   node R.1.1.1    d3 TL(0,0)<-[3]: INTERNAL (28.5 s, 1 rounds; t=96.2)
+   no-room (k=9, m=2): DEAD by EmptyBox in 2 s (0 pockets; EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.1.1    d3: DEAD by EmptyBox -- no-room at R.1.1.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.1.2    d3 TL(0,0)<-[4]: INTERNAL (47.5 s, 1 rounds; t=147.5)
+   no-room (k=9, m=2): UNDECIDED in 134 s (3 pockets; residue too big to pocket: 3 pocket(s) of total area 0.844 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.1.2: 3 pockets (k=9, m=2)
+   node R.1.1.2.p1 d4 pocket<-[0]: INTERNAL (84.3 s, 1 rounds; t=366.1)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.2.p1: split F2 at BL(1,1) (meeting fraction 0.406877)
+   node R.1.1.2.p1.1 d5 BL(1,1)<-None: DEAD by EmptyBox r1 (16.8 s, 1 rounds; t=509.6)
+   node R.1.1.2.p1.2 d5 BL(1,1)<-None: DEAD by EmptyBox r1 (9.0 s, 1 rounds; t=518.6)
+   node R.1.1.2.p2 d4 pocket<-[1]: INTERNAL (56.9 s, 1 rounds; t=575.6)
+   no-room (k=10, m=1): UNDECIDED in 123 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.2.p2: split F4 at TR(0,1) (meeting fraction 0.06918)
+   node R.1.1.2.p2.1 d5 TR(0,1)<-None: INTERNAL (40.2 s, 1 rounds; t=743.7)
+   no-room (k=10, m=1): DEAD by EmptyBox in 6 s (0 pockets; EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.1.2.p2.1 d5: DEAD by EmptyBox -- no-room at R.1.1.2.p2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf
