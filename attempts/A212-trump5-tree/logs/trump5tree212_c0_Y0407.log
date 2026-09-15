@@ -14,3 +14,33 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0407_interior_G1'
 10:41:42 [w3] c0_Y0407  rc=1 3s
+19:37:31 [w2] start c0_Y0407 wall 1800 (lab 8, free 12755 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0407 at the zero pad: ALIVE in 10636 ms; kills {'H-clip': 0, 'P': 2874, 'W': 717, 'C': 610, 'M': 2048, 'L': 7, 'R': 4038, 'X': 851}; CSP units 128 -> 128 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0407 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0407_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [1.659, 1.799, 1.493, 1.519, 82.372, 90.0]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (53.7 s, 1 rounds; t=53.8)
+   node R.1        d1 BL(1,1)<-[3]: INTERNAL (21.5 s, 1 rounds; t=75.4)
+   node R.1.1      d2 BL(0,2)<-[4]: DEAD by EmptyBox r1 (1.5 s, 1 rounds; t=77.1)
+   node R.1.2      d2 BL(0,2)<-[8]: INTERNAL (15.7 s, 1 rounds; t=92.8)
+   node R.1.2.1    d3 BR(0,1)<-[16, 18]: DEAD by EmptyBox r1 (15.0 s, 1 rounds; t=107.9)
+   node R.1.2.2    d3 BR(0,1)<-[17, 18]: DEAD by EmptyBox r1 (3.3 s, 1 rounds; t=111.2)
+   node R.1.2.3    d3 BR(0,1)<-[18, 21]: INTERNAL (67.3 s, 1 rounds; t=178.5)
+   no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.2.3: split F3 at BL(1,1) (meeting fraction 0.102426)
+   node R.1.2.3.1  d4 BL(1,1)<-None: INTERNAL (67.6 s, 1 rounds; t=368.1)
+   no-room (k=10, m=1): DEAD by NOROOM in 34 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.2.3.1  d4: DEAD by NOROOM -- no-room at R.1.2.3.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.2.3.2  d4 BL(1,1)<-None: INTERNAL (54.0 s, 1 rounds; t=458.4)
+   no-room (k=10, m=1): UNDECIDED in 123 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.2.3.2: split F2 at BL(1,1) (meeting fraction 0.290625)
+   node R.1.2.3.2.1 d5 BL(1,1)<-None: DEAD by REACH r1 (98.6 s, 1 rounds; t=681.0)
+   node R.1.2.3.2.2 d5 BL(1,1)<-None: INTERNAL (70.4 s, 1 rounds; t=751.5)
+   no-room (k=10, m=1): DEAD by EmptyBox in 16 s (0 pockets; EmptyBox(F2): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.2.3.2.2 d5: DEAD by EmptyBox -- no-room at R.1.2.3.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F2): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.2.4    d3 BR(0,1)<-[18, 22]: INTERNAL (63.3 s, 1 rounds; t=830.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 44 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.2.4    d3: DEAD by NOROOM -- no-room at R.1.2.4 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.2.5    d3 BR(0,1)<-[18, 23]: DEAD by EmptyBox r1 (3.7 s, 1 rounds; t=878.1)
+   node R.1.3      d2 BL(0,2)<-[9]: INTERNAL (50.6 s, 1 rounds; t=928.8)
+   node R.1.3.1    d3 BR(0,1)<-[16, 18]: INTERNAL (49.8 s, 1 rounds; t=978.7)
