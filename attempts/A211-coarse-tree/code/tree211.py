@@ -10,6 +10,7 @@ slot has two named meeters on a fresh table) the leaf rules in order, cheapest f
   (e) the EXACT cascade at the leaf (nsub 4 / refine 2, lonely clip, basins, 3 rounds) then
   the sharp round -- after which the loop re-reads the table: new branches are coarse children again.
 A leaf is DEAD iff one rule proves it; a node is DEAD iff every branch is (Lemma CT); undecided = ALIVE."""
+import os
 import time
 
 import poly204 as P
@@ -24,6 +25,29 @@ import rsplit211 as RS
 EXACT_ROUNDS = 3
 NOROOM_CAP = 120.0                     # seconds for A189's no-room at a leaf (Y0202 test: 300 s UNDECIDED x 3 ate half the wall)
 
+# ---------------------------------------------------------------------------- A220 (attempts/A220-exact-first), all OFF by default
+EXACT_FIRST = (os.environ.get("A220_EXACT_FIRST") or "").strip().lower()   # "" off | "1"/"on" always | "small" only a positionally small role
+BUDGET = float(os.environ.get("A220_BUDGET") or 45.0)                      # seconds for ONE budgeted exact round
+EXACT_FIRST_ROUNDS = int(os.environ.get("A220_EXACT_ROUNDS") or 1)
+SMALL_EXT = float(os.environ.get("A220_SMALL_EXT") or 0.25)                # variant "small": max position extent of the role the split would bisect
+NOROOM_INHERIT = (os.environ.get("A220_NOROOM_INHERIT") or "") == "1"      # addendum: the SHORT child cap after an UNDECIDED parent
+NOROOM_CHILD_CAP = float(os.environ.get("A220_NOROOM_CHILD_CAP") or 25.0)
+NR_SHRINK = float(os.environ.get("A220_NOROOM_SHRINK") or 0.5)             # a role box that lost more than this fraction earns the FULL cap
+
+
+def box_shrank(old, new, frac=NR_SHRINK):
+    """A220 addendum: did the node change materially since the ancestor's no-room -- a NEW role, or some role box
+    that lost more than `frac` of its (x, y, t) volume?  Then the ancestor's UNDECIDED says nothing and the child
+    gets the full cap; otherwise the boxes are essentially the ancestor's and the search will cap again."""
+    for k, b in (new or {}).items():
+        a = (old or {}).get(k)
+        if a is None:
+            return True
+        va, vb = P.box_vol(a), P.box_vol(b)
+        if va > 0 and vb < va * (1.0 - frac):
+            return True
+    return False
+
 
 class Tree211(N9.Tree209):
     def __init__(self, pg, dead_paths=None, path0=(), **kw):
@@ -31,6 +55,8 @@ class Tree211(N9.Tree209):
         self.cc_kills, self.exact_rounds, self.basin_kills = 0, 0, 0
         self.rsplits, self.rsplit_kills = 0, 0
         self._ns = self._rs = None
+        self.ef_runs, self.ef_kills, self.ef_timeouts, self.ef_seconds = 0, 0, 0, 0.0      # A220 exact-first
+        self.nr_short, self.nr_state, self.pocket_terminal = 0, {}, set()                  # A220 addendum: the short no-room cap
         self.dead_paths = dead_paths or {}          # Lemma INHERIT: path -> the certificate that closed it
         self.pathof = {self.root_label: tuple(path0)}
         self.n_inherited = 0
@@ -116,6 +142,43 @@ class Tree211(N9.Tree209):
         NB.Tree206.leaf_alive(self, why)
         self.log("   node %-10s: ALIVE [%s]" % (self.nodes[-1]["label"], why[:150]))
 
+    # ------------------------------------------------------------------ A220: ONE budgeted exact cascade round, early
+    def anc_noroom(self):
+        """the nearest ANCESTOR on the live context stack whose no-room ran (A220 addendum)."""
+        for _d, lab in reversed(self._ctx[:-1]):
+            st = self.nr_state.get(lab)
+            if st is not None:
+                return st
+        return None
+
+    def exact_first(self, depth, label, node, why):
+        """A220: run ONE exact cascade round (tree206.budget_cascade, A220_BUDGET seconds) BEFORE the expensive rule.
+        On DEAD the kill is recorded as this node's `x` record exactly as rule (e) does; on a timeout the sound
+        shrinks already made are KEPT (a prefix of a sound clip chain), coarse mode is restored and the caller falls
+        through to the old rule.  At most one per node."""
+        pg = self.pg
+        if node.get("exact_first") or not pg.coarse or pg.T.out_of_time():
+            return "OK"
+        t0 = time.time()
+        pg.set_coarse(False)
+        out = N6.budget_cascade(pg, EXACT_FIRST_ROUNDS, BUDGET, log=self.log)
+        self.ef_runs += 1
+        self.ef_seconds += out["seconds"]
+        self.ef_timeouts += 1 if out["timeout"] else 0
+        node["exact_first"] = dict(why=why, budget=BUDGET, seconds=out["seconds"], timeout=out["timeout"],
+                                   rounds=out["rounds"], clip=out["clip"], verdict="DEAD" if pg.dead else "undecided")
+        self.log("   A220 exact-first at %-10s (%s): %s in %.1f s (%d round(s) of budget %.0f s)" % (
+            label, why, ("DEAD by %s" % out["clip"]) if pg.dead else ("TIMEOUT" if out["timeout"] else "undecided"),
+            out["seconds"], out["rounds"], BUDGET))
+        if pg.dead:
+            self.ef_kills += 1
+            self.n_nodes += 1
+            self.exact_rounds += 1
+            self.record(label + "x", depth, dict(slot=None, kind="exact", rows=None, named=None), "DEAD", out["clip"], out["rnd"], t0)
+            return "DEAD"
+        pg.set_coarse(True)
+        return "OK"
+
     # ------------------------------------------------------------------ the leaf rules at a fully named node
     def leaf_rules(self, depth, label):
         pg = self.pg
@@ -139,9 +202,24 @@ class Tree211(N9.Tree209):
         # PI 2026-09-12 19:40: run no-room at EVERY fully named leaf -- a child's smaller boxes mean LARGER cores, so an
         # UNDECIDED parent says nothing about the child (the once-per-k skip was backwards); node-level flag only.
         if len(pg.roles) >= 9 and not node.get("noroom"):
-            res = N9.noroom_at(pg, min(pg.T.left() or 0.0, NOROOM_CAP + 30), log=self.log)
+            # A220 addendum (i)/(ii): when the nearest ancestor's no-room already ran out its cap UNDECIDED and no role
+            # box has since lost more than NR_SHRINK of its volume (and this is not a terminal m = 1 pocket child), the
+            # same search will cap again -- run it under the SHORT cap instead, and spend the saved seconds on ONE
+            # budgeted EXACT round first (which shrinks the boxes the search reads: smaller boxes, LARGER cores).
+            cap, short = NOROOM_CAP, None
+            if NOROOM_INHERIT:
+                anc = self.anc_noroom()
+                if anc and anc["capped"] and label not in self.pocket_terminal and not box_shrank(anc["roles"], pg.roles):
+                    cap, short = NOROOM_CHILD_CAP, dict(anc=anc["label"], anc_seconds=anc["seconds"], anc_cap=anc["cap"], shrink=NR_SHRINK)
+                    self.nr_short += 1
+                    if self.exact_first(depth, label, node, "before no-room (ancestor %s UNDECIDED at %.0f s)" % (anc["label"], anc["seconds"])) == "DEAD":
+                        return "DEAD"
+            res = N9.noroom_at(pg, min(pg.T.left() or 0.0, cap + 30), log=self.log, deadline=(cap if short else None))
             rec = dict(label=label, depth=depth, k=res["k"], m=res["m"], verdict=res["verdict"], clip=res["clip"], bound=res["bound"], cn_bound=res["cn_bound"],
-                       n_pockets=len(res["pockets"]), pockets=res["pockets"], seconds=res["seconds"], reason=res["reason"])
+                       n_pockets=len(res["pockets"]), pockets=res["pockets"], seconds=res["seconds"], reason=res["reason"], cap=cap, short_cap=short)
+            self.nr_state[label] = dict(label=label, verdict=res["verdict"], seconds=res["seconds"], cap=cap,
+                                        capped=(res["verdict"] != "DEAD" and res["seconds"] >= 0.8 * cap),
+                                        roles={k: tuple(v) for k, v in pg.roles.items()})
             self.noroom_runs.append(rec)
             node["noroom"] = rec
             if res["verdict"] == "DEAD":
@@ -180,6 +258,12 @@ class Tree211(N9.Tree209):
         nr = node.get("noroom")
         if nr and nr.get("verdict") != "DEAD" and self.n_nodes < self.node_cap and not pg.T.out_of_time():
             sps = RS.candidates(pg, self.rsplit_used(label))
+            # A220 (PI, Y0865): the 8 leaves of 3-4 blind tilt bisections all die by EmptyBox in the EXACT cascade in
+            # 0.7-18 s -- so spend ONE budgeted exact round HERE, before the split, and kill the parent instead.
+            if EXACT_FIRST and sps and (EXACT_FIRST != "small" or max(sps[0]["extents"]["x"], sps[0]["extents"]["y"]) < SMALL_EXT):
+                if self.exact_first(depth, label, node, "before ROLE-SPLIT on %s (%s)" % (sps[0]["role"], sps[0]["dim"])) == "DEAD":
+                    return "DEAD"
+                sps = RS.candidates(pg, self.rsplit_used(label))   # the shrinks are kept: re-read the candidates
             node["rsplit_candidates"] = [{k: v for k, v in s.items() if k != "m"} for s in sps[:6]]
             if sps:
                 self._rs = sps[0]
@@ -219,6 +303,8 @@ class Tree211(N9.Tree209):
         st = N6.save_state(pg)
         for j, pocket in enumerate(pk):
             lab = "%s.p%d" % (label, j + 1)
+            if res["m"] == 1:
+                self.pocket_terminal.add(lab)                     # A220 addendum (i): a terminal pocket child keeps the FULL no-room cap
             br = dict(slot="pocket", kind="pocket", rows=[j], named=None, pocket=[round(v, 6) for v in pocket], diam=round(N9.diam(pocket), 4))
             info, _q, p = self.child_path(lab, label, br)
             if info is not None:
@@ -348,5 +434,7 @@ class Tree211(N9.Tree209):
     def result(self):
         out = N9.Tree209.result(self)
         out.update(cc_kills=self.cc_kills, exact_rounds=self.exact_rounds, basin_kills=self.basin_kills, n_inherited=self.n_inherited,
-                   rsplits=self.rsplits, rsplit_kills=self.rsplit_kills)
+                   rsplits=self.rsplits, rsplit_kills=self.rsplit_kills,
+                   ef_runs=self.ef_runs, ef_kills=self.ef_kills, ef_timeouts=self.ef_timeouts,
+                   ef_seconds=round(self.ef_seconds, 1), nr_short=self.nr_short)
         return out

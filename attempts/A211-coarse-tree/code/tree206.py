@@ -103,6 +103,51 @@ def cascade(pg, rounds, log=print):
     return clip, rnd
 
 
+# ------------------------------------------------------------------ A220: the cascade under a cooperative deadline
+class Budget(Exception):
+    """A220: the budgeted cascade hit its deadline.  A VERDICT is never claimed on it -- only shrinks are kept."""
+
+
+def budget_cascade(pg, rounds, budget, log=print):
+    """A220 (attempts/A220-exact-first/notes/exact_first.md) -- run `rounds` cascade rounds under a COOPERATIVE
+    deadline of `budget` seconds.  The deadline is a SUB-TIMER on pg.T: the trace's wall is pulled in to now + budget
+    for the duration, so every `T.out_of_time()` the chain already checks (poly204b's round loop, the bar-H count's
+    per-slot loop, quick200's reach loops) becomes a deadline check, and the innermost mutual-clip call
+    (`MB._clip_rect_obstacle`, once per obstacle per piece) is wrapped to raise Budget every 64 calls.
+    SOUNDNESS.  A timeout claims NOTHING: it only stops a chain of clips early, and any PREFIX of a chain of
+    A171/A172/A173 clips is sound (notes/coarse_tree.md S2), so the poses kept are a superset of the truth.  A round
+    interrupted inside `poly204.PolyPage.normalise` writes nothing back (the pieces are copied out of the MB node
+    only after the fixed point returns) and leaves pg.pieces / pg.obst / pg.nd exactly where the last COMPLETED round
+    put them.  A DEAD reached before the deadline is an ordinary cascade kill with its ordinary trace.
+    -> dict(dead, clip, rnd, seconds, timeout, rounds)."""
+    T, t0 = pg.T, time.time()
+    old_wall, t_end = T.wall, T.now() + float(budget)
+    T.wall = t_end if old_wall is None else min(old_wall, t_end)
+    orig = MB._clip_rect_obstacle
+    n = [0]
+
+    def clip_checked(*a, **kw):
+        n[0] += 1
+        if not (n[0] & 63) and T.now() > t_end:
+            raise Budget("A220 budget %.0f s" % float(budget))
+        return orig(*a, **kw)
+
+    MB._clip_rect_obstacle = clip_checked
+    timeout, clip, rnd = False, None, None
+    try:
+        clip, rnd = cascade(pg, rounds, log=log)
+    except Budget:
+        timeout = True
+    finally:
+        MB._clip_rect_obstacle = orig
+        T.wall = old_wall
+    out = dict(dead=pg.dead, clip=clip, rnd=rnd, seconds=round(time.time() - t0, 1), n_clips=n[0],
+               timeout=bool(timeout or (not pg.dead and T.now() > t_end)), rounds=len(pg.round_times or []))
+    T.test("A220-BUDGET", budget=float(budget), seconds=out["seconds"], timeout=out["timeout"], rounds=out["rounds"],
+           verdict=("DEAD" if pg.dead else "undecided"), clip=clip)
+    return out
+
+
 def ns_candidates(pg):
     """the SOFT-named (slot, role) pairs of a fully named node, the sliver first: r in named_p (r not provably missing p, or
     instantiated there) that the node does not hypothesise at p (H: p not forced; F_i: p not among its slots)."""

@@ -63,12 +63,14 @@ def cn_groups(pockets):
     return len(groups), ok
 
 
-def noroom_at(pg, wall_left, log=print):
-    """A208's leaf on the node's role boxes; -> dict(verdict, clip, reason, k, m, pockets, cn_bound, seconds)."""
+def noroom_at(pg, wall_left, log=print, deadline=None):
+    """A208's leaf on the node's role boxes; -> dict(verdict, clip, reason, k, m, pockets, cn_bound, seconds).
+    A220: `deadline` (seconds) overrides the wall-derived budget, which has a 60 s FLOOR -- the short child cap of
+    the A220 addendum (A220_NOROOM_CHILD_CAP) has to be able to go below it.  deadline=None is the old behaviour."""
     roles = {k: tuple(float(v) for v in b) for k, b in pg.roles.items()}
     k, m = len(roles), 11 - len(roles)
     t0 = time.time()
-    bud = dict(total_deadline=max(60.0, min(900.0, wall_left - 30)))
+    bud = dict(total_deadline=max(60.0, min(900.0, wall_left - 30)) if deadline is None else float(deadline))
     if m >= 2:
         bud["max_pocket_area"] = 0.0
     try:
