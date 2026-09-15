@@ -14,3 +14,18 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0950_interior_G1'
 10:45:13 [w3] c0_Y0950  rc=1 2s
+02:44:42 [w2] start c0_Y0950 wall 1800 (lab 2, free 14268 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0950 at the zero pad: ALIVE in 24860 ms; kills {'H-clip': 0, 'P': 5676, 'W': 1359, 'C': 1004, 'M': 4677, 'L': 7, 'R': 3392, 'X': 1040}; CSP units 472 -> 472 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0950 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0950_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.358, 2.498, 2.498, 2.637, 73.74, 82.372]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (18.5 s, 1 rounds; t=18.6)
+   node R.1        d1 TR(1,0)<-[8]: INTERNAL (7.2 s, 1 rounds; t=25.9)
+   node R.1r1      d1 root<-None: DEAD by EmptyBox r1 (6.0 s, 1 rounds; t=31.8)
+   node R.2        d1 TR(1,0)<-[9]: INTERNAL (6.3 s, 1 rounds; t=38.1)
+   node R.2r1      d1 root<-None: INTERNAL (20.9 s, 1 rounds; t=59.0)
+   node R.2.1      d2 TR(0,1)<-[16]: INTERNAL (38.3 s, 1 rounds; t=97.3)
+   node R.2.1r1    d2 root<-None: INTERNAL (20.2 s, 1 rounds; t=117.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 10 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.1      d2: DEAD by NOROOM -- no-room at R.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.2      d2 TR(0,1)<-[21]: INTERNAL (27.1 s, 1 rounds; t=154.7)
