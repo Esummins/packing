@@ -9009,3 +9009,30 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
 - Where the 4 worked k5 pages stand at the window pad: Y0738 5 start nodes left / 8 alive leaves / depth 17, Y0402 4 / 14 /
   7, Y0865 4 / 6 / 13, Y1056 2 / 2 / 10; 2-3 runs and ~1.0-1.5 CPU-h per page per pad so far.  The estimate is small
   (0.03-0.19 CPU-h per page) precisely because the survivors are the start nodes that already ate a whole wall.
+
+## 2026-09-15 night -- A226-one-flush (Fable) -- DONE (launch-and-exit): **ONE-FLUSH surveyed and pinned down -- every record packing below ceil(sqrt n) has >= 3 flush corners (20 of 21 have four; Trump is the only crowded corner), so 'no non-trivial optimum has 4 flush corners' is FALSE (n = 5, 10 are proved optimal with four); the all-packings form 'no four-crowd below ceil(sqrt n)' is FALSE in general (Proposition CROWD-ABOVE: explicit four-crowds at every side above a domino-cornered record, verified for n = 26, 28, 29, 37, 40, 50, 51, 55), so Theorem PERIMETER and every local charge are dead; the conjecture with content is about the OPTIMUM (ONE-FLUSH(n) <=> UNCROWD(n)) and at n = 11 it is the k0_00 obligation itself; k0_00 unchanged**
+
+- The brief (23:40): "at least one corner can always be teleported to flush" -- survey first, then mechanism.
+- [M] `svg226.py` parses Ellsworth's SVGs (entities, nested transforms, merged flush blocks decomposed into cells) and
+  re-verifies each packing by exact SAT (worst overlap 3e-16); `survey226.md`: n = 5, 10, 11, 17, 18, 19, 26-29, 37-41,
+  50-55 -- flush corners 4/4/3/4/.../4, singly-met corners the same, doubly-met corners 0 except Trump's TR (2).
+- [F] FOUR-FLUSH-FREE refuted by the proved optima n = 5, 10 and by 18 more records; [C] THREE-FLUSH (>= 3 flush corners
+  at every optimum) is the sharper empirical statement.
+- [T]+[M] Proposition CROWD-ABOVE (`one_flush.md` s.3): corner square A slid eps up its wall, flush neighbour B tilted by
+  eps/2 with its vertex poking into the strip under A (depth O(eps^2)), the rest shifted by (eps, eps): a packing at side
+  s + 2 eps with every corner doubly met; `crowd226.md` verifies it at S = s + (k - s)/2 < k for the 8 records with four
+  dominoes.  Consequences: STUCK(n) false there, inf side of four-crowds <= s(n), PERIMETER can only restate ONE-FLUSH,
+  a crowd costs O(eps) (no waste / chord / wall-budget proof), the 12 > 11 count is n-specific, the crowds are RATTLER
+  crowds (unloaded second meeter) -- the class A218/A219 could not exclude by loads.
+- [T] ONE-FLUSH(n) <=> UNCROWD(n) (every four-crowd below ceil(sqrt n) admits a packing at a smaller side): the honest
+  statement of "the k0 exclusion" -- four-crowds exist below ceil(sqrt n), they are never the LAST word.
+- [M] n = 11 (`ring11_226.jsonl`, page `ring11.svg`): the 8-square crowd ring at S = 3.90 / 3.95 / 3.99 (eps 0.02-0.10)
+  leaves a pinwheel into which A222's region search fits ONE square, never three -- the construction gives no four-crowd
+  below 4 at n = 11 (A217: none below 4.0014).
+- Lean `Statements/Open/OneFlush.lean`: `MeetsCornerN`, `SinglyMet`, `IsOptimalPacking` (n-general), `one_flush` (axiom
+  [C], hypothesis s < ceil(sqrt n)), `optimal_not_stuck` (theorem, via `ceil_sqrt_eleven`), `no_optimal_of_kill` (theorem:
+  with K0-FREE's exchange O-LINK and the k1-a kill as hypotheses, no optimal packing at m < 4); registered in
+  `Statements.lean`; build exit 0; audit: the three statements depend on `one_flush` only, no sorry.
+- Files: `attempts/A226-one-flush/{code,data,results,logs}`; `docs/proofs/one_flush.md`; pages
+  `docs/residue_map/campaigns/A226-one-flush/{survey_small,survey_mid,survey_large,crowd_above,ring11}.svg`; registry row;
+  ledger s.4 note.
