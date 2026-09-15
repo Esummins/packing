@@ -123,3 +123,26 @@ arbitrary `n`, `k`, `m`.  For larger `n` the pockets are what changes: more free
 more pockets, so LEMMA POCKET-DEAD fires less often on its own and the counting bound (A189 Lemma 1, A209 Lemma CN)
 carries more of the weight -- but every pocket the cover kills is one the counting bound no longer has to price,
 which is a strict gain at every `n`.
+
+## 5. Resume
+
+Everything A221 runs is a replay of recorded certificate nodes -- no tree, no shared state, nothing to restart.  To
+re-run or extend the benchmark:
+
+```
+PYTHONDONTWRITEBYTECODE=1 sh attempts/A221-lane-cover/code/run221.sh all      # or: four | closed
+PYTHONDONTWRITEBYTECODE=1 python attempts/A221-lane-cover/code/bench221.py     --cert attempts/A211-coarse-tree/certs/<cert>.json --run g1_page --verdict any     --cap 120 --pk-deadline 5 --tag <tag> [--inherit] [--engine a189]     --out attempts/A221-lane-cover/results/bench221.jsonl
+PYTHONDONTWRITEBYTECODE=1 python attempts/A221-lane-cover/code/table221.py    # -> results/bench221.md
+```
+
+Rows are appended with a `tag`; `table221.py` keeps the LAST row per `(tag, page, run, node)`, so a re-run of a lane
+simply supersedes it.  `--engine a189` is the control (A189's own leaf on the same replayed boxes) and must be run
+before any "A221 kills what A189 did not" claim.  Two BelowNormal pythons at affinity `0xFFFF` is the whole budget.
+
+## 6. Integration (after A220 lands)
+
+`code/tree209_integration.diff` applies cleanly to `attempts/A211-coarse-tree/code/tree209.py`
+(`git apply --check`).  It is OFF unless `A221_LANE=1`.  Before turning it on, run one page both ways
+(`run211.py page <page> --pads g1 --wall 1800` with an isolated cert dir) and compare verdicts node by node --
+A221 is designed to be at least as strong at every node, so any verdict that gets WEAKER is a bug, and the
+seconds should fall on every node whose no-room hit the cap.
