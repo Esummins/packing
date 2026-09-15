@@ -8868,3 +8868,68 @@ gaps = 1,518 s of a 1,847 s wall (82 %), Y0738 12 gaps = 1,153 s (63 %), Y1056 9
   H1 = T3|k0 (`drain_flow_k0.md` DF-O4, OPEN).  **k0_00 unchanged.**
 - Files: `docs/proofs/wall_torque.md`; `attempts/A219-wall-torque/{code,results,logs}`; pages
   `docs/residue_map/campaigns/A219-wall-torque/`; registry row; ledger s.4 note.
+
+## 2026-09-14 night -- A221-lane-cover (Opus) -- launch-and-exit (the final benchmark pass detached; resume block in `notes/lane221.md` s.5): **the no-room LANE replaced by a POCKET COVER -- the same exact clip rooted at the pocket instead of at the pocket's MEETING window -- plus pocket INHERITANCE; 5.9x on the no-room wall, two nodes killed that A189 left UNDECIDED, 0 regressions on 112 replayed rows**
+
+EXPERIMENT FIRST (`results/experiment221.md`, harness `code/exp221.py` + `code/nodeload221.py`).  On the four target
+k = 10 nodes (Y0402 zero_page R.2.1 / R.2.1.1, Y0738 zero_page R.1.1.3.3 / R.1.2.5.2) the 120 s cap splits as
+build 3.0 s, bisection 3.7-9.3 s **which EXHAUSTS at its own depth cap**, and then **109-115 s of lane returning
+`None`**.  The lane is the blocker, structurally: `chordlane.lane_out` roots its cover at
+`polylane.centre_window(cell)`, the centres of squares MEETING the cell -- the pocket grown by `1/sqrt2` on every
+side, **10-21x the pocket's area** on these three pockets.
+- [M] the lane ALONE at 600 s and `lane_max_open = 1e6` still returns `None` on two of the three pockets; on the one
+  it does discharge it needs **160 s**, more than the node's entire cap.  A221's cover kills that same pocket in
+  **0.0 s**.
+- [M] `cProfile` of a 120 s lane run: ~98 % is polylane's FLOAT witness search (`_gmax` 20.9 s, `point_margin_many`
+  13.6 s, `best_shared_point` cum 44.4 s of 45 s; `Fraction.__new__` 0.8 s).  **A213's integer core and A214's C
+  kernel were installed and active throughout** -- routing "the lane's exact tests" through them was never the
+  lever, because the lane is not spending its time there.
+- [M] the surviving pocket of Y0402 R.2.1 is **genuinely alive**: 48 halvings and 245 s leave **88 %** of its
+  (centre x tilt) volume open.  No no-room leaf can ever kill that node; A189 was paying 109 s to find that out.
+
+THEORY (`notes/lane221.md`, both n-general).
+- [T] **Lemma POCKET-DEAD.**  If every rectangle of a cover of the residue's free CENTRES is DEAD -- every pose with
+  centre in it meets some `K'` -- the node has no free unit square at all, hence is DEAD for every `m >= 1`.  The
+  per-pocket certificate is A171's own exact clip `_clip_rect_obstacle` **rooted at the pocket**, plus the SOUND
+  `container_clip(strict=False)` at `w_min` (the strict `w_max` clip would not be sound here), run DEPTH-FIRST so
+  the memory is the stack and the depth is not capped by a frontier.
+- [T] **Lemma POCKET-INHERIT.**  Rule NS, ROLE-SPLIT and POCKET instantiation only shrink a role's pose set (or add
+  a role), and `K'` is an intersection over surviving poses, so `K'_parent subset K'_child` for every parent role;
+  hence the child's free poses lie inside the parent's and **the parent's pockets cover the child's free centres**.
+  A child therefore skips the container-wide bisection and covers the parent's pockets with its own larger cores.
+- [T] **Lemma CN on the survivors.**  A209's CN bound is applied to the pockets that SURVIVE the cover, not to the
+  whole list: a pocket certified DEAD holds no free centre, so dropping it keeps the cover and can only give fewer
+  groups.  Strictly stronger than A209's own input.
+
+BENCHMARK (`results/bench221.md` + `.jsonl`, `code/bench221.py` / `run221.sh` / `table221.py`; every row replays a
+RECORDED no-room node from an A211 certificate, nothing is re-run in a tree).
+- [M] **0 regressions** on 112 rows: every node the certificates killed, A221 kills.
+- [M] **verdict agreement on the closed pages** Y0500 g1 and Y0460 g1: 24 non-vacuous no-room nodes, 9 DEAD -> DEAD,
+  15 UNDECIDED -> UNDECIDED, 1835 s -> 712 s.
+- [M] **two genuine new kills**, `Y0402 zero_page R.3.1.2.1` (12.1 s) and `R.3.1.2.2` (15.8 s), both left UNDECIDED
+  at the cap by the certificate.  Attributed to the COVER by a CONTROL that runs **A189's own leaf on exactly the
+  same replayed boxes**: it returns UNDECIDED at 133 s on both.  A third node, `R.3.1.1.1.2`, also comes back DEAD
+  but the control kills it too -- that one is the certificate's `roles` (the page's LIVE dict) being tighter than
+  the boxes the leaf actually saw, and is NOT credited to A221.  Any "new kill" claim from a replay needs this
+  control.
+- [M] **THE CAP is the budget lever.**  Over 42 pocket covers *every* DEAD pocket died in `<= 0.1 s` and *every*
+  surviving pocket burned the whole 45 s -- the cover collapses at once or not at all -- so `pk_deadline` drops to
+  5 s (a 50x margin).  At 5 s over 36 no-room nodes: **2550 s -> 436 s (5.9x)**, slowest node 25.3 s, verdicts
+  identical.  With Lemma POCKET-INHERIT as well: 246 s -> 48 s (5.2x), slowest 20.9 s, and a child whose inherited
+  pockets all die is decided in **3.0-4.6 s with no container bisection at all** (e.g. R.2.1.2.2.2: 20.6 s -> 4.0 s).
+- [M] the benchmark also FOUND a real defect: the one m = 2 node `Y0738 R.1.2.3` came back UNDECIDED because A209's
+  CN upgrade lives in `tree209`, not in A189 -- fixed by the Lemma-CN-on-survivors step above (and CN is tried
+  BEFORE any cover when `m >= 2`, since it is free, which restores A189's fast path on those nodes).
+
+DELIVERY.  `code/pocket221.py` (the cover engine) + `code/noroom221.py` (the lemmas and the leaf: `noroom`,
+`noroom_child`), `code/nodeload221.py`, `code/exp221.py`, `code/bench221.py`, `code/run221.sh`, `code/table221.py`.
+**A220 owns `tree209.py` / `tree211.py` / `tree206.py`, so nothing there is edited**: the integration ships as
+`code/tree209_integration.diff`, a flag-gated (`A221_LANE=1`) change that adds `Tree209.parent_pockets` (the nearest
+ANCESTOR's recorded pocket list -- never a sibling) and routes `noroom_at` through `noroom221`; `git apply --check`
+is clean against the current file.  A189 / A171 / A141 / A161 are untouched.
+
+OPS NOTE (honest).  At 19:45 I issued a `Stop-Process` on a PID I had mis-identified as my own experiment lane; my
+lane was in fact still running and finished normally, so a lab python was killed by mistake.  No `run211` / `run212`
+worker was lost (all committed `rc=0` either side of that minute) and the resumable A219 holder loop restarted at
+19:46:38 and has been committing per crowd since.  The lesson for the next attempt: match the PID against
+`Win32_Process.CommandLine`, never against start time -- which is what every later kill in this attempt did.
