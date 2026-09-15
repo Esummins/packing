@@ -14,3 +14,14 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y1076_interior_G1'
 10:46:39 [w3] c0_Y1076  rc=1 3s
+04:37:53 [w3] start c0_Y1076 wall 1800 (lab 2, free 14118 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y1076 at the zero pad: ALIVE in 9351 ms; kills {'H-clip': 0, 'P': 3816, 'W': 870, 'C': 672, 'M': 1852, 'L': 1, 'R': 3708, 'X': 918}; CSP units 217 -> 217 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': 1, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H ['BR(0,1)']
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y1076 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y1076_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.637, 2.777, 1.432, 1.519, 53.13, 64.011]; forced H ['BR(0,1)']; 6 slots; free 5
+   node R          d0 root: DEAD by FC r1 (29.5 s, 1 rounds; t=29.6)
+   start R            => DEAD (1 nodes; t = 30 s of 1800.0)
+   => DEAD (zero_page) in 29.6 s: 1 nodes, depth 0, gate hits 0 (conflicts 0), tube leaves 0 (depths []), 0 aligned cuts, kills by rule {'FC': 1}, 0 NS, 0 pockets, 0 role splits, 1 dead / 0 alive leaves
+   per node: R d0 DEAD FC 29.5s
+== c0_Y1076: pad0 DEAD   (s0-only, lam = 1; DEAD = killed at s0, TRUMP-TUBE = the Trump basin, ALIVE = undecided)
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A212-trump5tree\trump5tree212_gallery.svg
