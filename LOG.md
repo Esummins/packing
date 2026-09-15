@@ -8903,20 +8903,25 @@ THEORY (`notes/lane221.md`, both n-general).
 
 BENCHMARK (`results/bench221.md` + `.jsonl`, `code/bench221.py` / `run221.sh` / `table221.py`; every row replays a
 RECORDED no-room node from an A211 certificate, nothing is re-run in a tree).
-- [M] **0 regressions** on 112 rows: every node the certificates killed, A221 kills.
+- [M] **0 regressions in the shipped configuration** over 314 replayed rows (the single regression on record is the
+  m = 2 node below, under the code before Lemma CN was in this module).
 - [M] **verdict agreement on the closed pages** Y0500 g1 and Y0460 g1: 24 non-vacuous no-room nodes, 9 DEAD -> DEAD,
   15 UNDECIDED -> UNDECIDED, 1835 s -> 712 s.
-- [M] **two genuine new kills**, `Y0402 zero_page R.3.1.2.1` (12.1 s) and `R.3.1.2.2` (15.8 s), both left UNDECIDED
-  at the cap by the certificate.  Attributed to the COVER by a CONTROL that runs **A189's own leaf on exactly the
-  same replayed boxes**: it returns UNDECIDED at 133 s on both.  A third node, `R.3.1.1.1.2`, also comes back DEAD
+- [M] **three genuine new kills**, `Y0402 zero_page R.3.1.2.1` (12.9 s), `R.3.1.2.2` (16.9 s) and
+  `Y0738 zero_page R.1.3.3.2` (12.4 s) -- 3.1-4.3 s each under inheritance -- all left UNDECIDED at the cap by the
+  certificate.  Attributed to the COVER by a CONTROL that runs **A189's own leaf on exactly the
+  same replayed boxes**: it returns UNDECIDED at 131-133 s on all three.  A third node, `R.3.1.1.1.2`, also comes back DEAD
   but the control kills it too -- that one is the certificate's `roles` (the page's LIVE dict) being tighter than
   the boxes the leaf actually saw, and is NOT credited to A221.  Any "new kill" claim from a replay needs this
   control.
 - [M] **THE CAP is the budget lever.**  Over 42 pocket covers *every* DEAD pocket died in `<= 0.1 s` and *every*
   surviving pocket burned the whole 45 s -- the cover collapses at once or not at all -- so `pk_deadline` drops to
-  5 s (a 50x margin).  At 5 s over 36 no-room nodes: **2550 s -> 436 s (5.9x)**, slowest node 25.3 s, verdicts
-  identical.  With Lemma POCKET-INHERIT as well: 246 s -> 48 s (5.2x), slowest 20.9 s, and a child whose inherited
-  pockets all die is decided in **3.0-4.6 s with no container bisection at all** (e.g. R.2.1.2.2.2: 20.6 s -> 4.0 s).
+  5 s (a 50x margin).  Final pass over all four pages, 68 non-vacuous no-room nodes: **4685 s -> 934 s (5.0x)**,
+  slowest node 28.5 s, verdicts identical.  With Lemma POCKET-INHERIT on Y0402's 25 nodes: **1573 s -> 258 s
+  (6.1x)**, slowest 25.2 s, and a child whose inherited pockets all die is decided in **3.0-4.6 s with no container
+  bisection at all** (e.g. R.2.1.2.2.2: 20.6 s -> 4.0 s).  COST SIDE: for m >= 2 an UNDECIDED node is now SLOWER
+  than A189 (6.5 s -> 15.3 s), because A189 with `max_pocket_area = 0` never tries a cover there; Lemma CN is tried
+  first (free), so the nodes CN kills cost what they did and the extra seconds buy the cover's extra kills.
 - [M] the benchmark also FOUND a real defect: the one m = 2 node `Y0738 R.1.2.3` came back UNDECIDED because A209's
   CN upgrade lives in `tree209`, not in A189 -- fixed by the Lemma-CN-on-survivors step above (and CN is tried
   BEFORE any cover when `m >= 2`, since it is free, which restores A189's fast path on those nodes).
