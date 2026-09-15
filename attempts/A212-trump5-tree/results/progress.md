@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 20:54:43
+# A212 progress -- 2026-09-14 21:03:00
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (68 nodes)
+## A60's alive trump5 frontier (deepest first) (69 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -94,11 +94,12 @@ CPU-h in this block: 5.66
 | c0_Y0442 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'S-CLIP': 1, 'EmptyBox': 7, 'FC': 3, 'NOROOM': 2} | 24 / 7 | 1813 |
 | c0_Y0496 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 7, 'REACH': 2, 'NOROOM': 6, 'FC': 1} | 26 / 5 | 1846 |
 | c0_Y0592 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 11, 'CC': 2, 'COUNT': 1, 'FC': 1} | 23 / 3 | 633 |
+| c0_Y0502 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'NOROOM': 3, 'EmptyBox': 4, 'REACH': 1} | 18 / 4 | 1890 |
 
-CPU-h in this block: 17.62
+CPU-h in this block: 18.15
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 42, 'DEAD': 39}; gallery 13 / 13 run (5.66 CPU-h); frontier 68 run of 99 (68 remaining; 17.62 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 68: 8.7 CPU-h; spent 23.3; cap 150
+* verdicts so far: {'ALIVE': 43, 'DEAD': 39}; gallery 13 / 13 run (5.66 CPU-h); frontier 69 run of 99 (67 remaining; 18.15 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 67: 8.6 CPU-h; spent 23.8; cap 150
 
