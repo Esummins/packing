@@ -14,3 +14,22 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y1037_interior_G1'
 10:46:18 [w3] c0_Y1037  rc=1 3s
+04:09:56 [w2] start c0_Y1037 wall 1800 (lab 2, free 13832 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y1037 at the zero pad: ALIVE in 31491 ms; kills {'H-clip': 0, 'P': 5546, 'W': 1978, 'C': 846, 'M': 5671, 'L': 7, 'R': 3361, 'X': 1315}; CSP units 400 -> 400 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y1037 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y1037_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.498, 2.637, 2.358, 2.498, 64.011, 73.74]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (42.5 s, 1 rounds; t=42.6)
+   node R.1        d1 TR(0,1)<-[16]: INTERNAL (9.7 s, 1 rounds; t=52.4)
+   node R.1.1      d2 TR(1,0)<-[8]: INTERNAL (12.5 s, 1 rounds; t=64.9)
+   node R.1.1.1    d3 TL(0,0)<-[3]: INTERNAL (23.4 s, 1 rounds; t=88.5)
+   no-room (k=9, m=2): UNDECIDED in 108 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 0.575 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.1.1: 2 pockets (k=9, m=2)
+   node R.1.1.1.p1 d4 pocket<-[0]: INTERNAL (60.6 s, 1 rounds; t=258.9)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.1.p1: split F2 at TL(0,0) (meeting fraction 0.109976)
+   node R.1.1.1.p1.1 d5 TL(0,0)<-None: DEAD by FC r1 (62.9 s, 1 rounds; t=448.7)
+   node R.1.1.1.p1.2 d5 TL(0,0)<-None: DEAD by FC r1 (42.6 s, 1 rounds; t=491.3)
+   node R.1.1.1.p2 d4 pocket<-[1]: INTERNAL (28.2 s, 1 rounds; t=519.5)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.1.p2: split F2 at TL(0,0) (meeting fraction 0.391874)

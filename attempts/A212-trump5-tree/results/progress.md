@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-15 04:09:54
+# A212 progress -- 2026-09-15 04:21:16
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (121 nodes)
+## A60's alive trump5 frontier (deepest first) (122 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -147,11 +147,12 @@ CPU-h in this block: 5.66
 | c0_Y1028 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'FC': 2, 'EmptyBox': 7, 'NOROOM': 3, 'S-CLIP': 1} | 23 / 4 | 723 |
 | c0_Y0972 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 8, 'NOROOM': 7, 'CC': 1} | 32 / 7 | 1825 |
 | c0_Y1034 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'S-CLIP': 1, 'FC': 3, 'EmptyBox': 2} | 18 / 8 | 1849 |
+| c0_Y1035 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 6, 'REACH': 1, 'NOROOM': 2} | 22 / 8 | 2025 |
 
-CPU-h in this block: 38.32
+CPU-h in this block: 38.88
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 80, 'DEAD': 54}; gallery 13 / 13 run (5.66 CPU-h); frontier 121 run of 84 (15 remaining; 38.32 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 15: 1.9 CPU-h; spent 44.0; cap 150
+* verdicts so far: {'ALIVE': 81, 'DEAD': 54}; gallery 13 / 13 run (5.66 CPU-h); frontier 122 run of 84 (14 remaining; 38.88 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 14: 1.8 CPU-h; spent 44.5; cap 150
 
