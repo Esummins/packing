@@ -555,6 +555,19 @@ mass and a half-integral phantom. Nothing in the residue count moves; `budget.md
 
 **[T]/[M] A212 (2026-09-14) — the TRUMP5 tree (`attempts/A212-trump5-tree`, `notes/trump5_tree.md`, pages `residue_map/campaigns/A212-trump5tree/trump5tree212_<nid>.svg`, rows `results/trump5tree212.jsonl`, ledger `results/superseded_by_trump5tree_A212.jsonl`).**  The PI (00:40): every node has to be killed in every direction that is not Trump; a node that is a parent of Trump is never killed, only split.  **[T]** A211's coarse tree on the trump5 population at PAD 0 ONLY (lam = 1, s0-only — the currency of A60's own certificates) with (1) the GATE: an exact-rational injective assignment of the node's named squares to a D4 image of z-hat embedded at s0 (pins, pieces, named slots, NS misses; margins in favour of containment) — a gated node is never submitted to a kill rule, only to the branching levers (rows, pockets, Rule NS, the aligned split); skipping proves nothing, so soundness never depends on the gate; (2) Lemma TUBE-LEAF: all eleven squares named with every piece inside (r_c − 2(s0 − ŝ), r_θ) of the image ⇒ every packing at s0 in the node lies within the radii (the (D) leaf of k0_route §4.2), and by Theorem T1 on the scale-ray tube `certs/tube_scale_T5.71e-2_window.json` every window packing whose dilate satisfies the node is the image at ŝ — verdict TRUMP-TUBE, a uniqueness leaf, NOT a kill; (3) the ALIGNED split: Lemma ROLE-SPLIT cut at the tube wall (two cuts per coordinate).  **[M]** The gate is FALSE on the whole alive trump5 population: no c0_* H box holds a square of any D4 image, f1_L10_0003's ladder box misses square 9 by 0.009, A60's `trump_realized` is False on every alive record — the Trump-containing residue was isolated by A60's ladder and discharged by A60/A83.  So the campaign is A211's pad-0 tree on 13 gallery pages + 136 frontier nodes with the gate as a safety net: c0_Y1033 at 900 s ALIVE at the wall (10 nodes, depth 4, EmptyBox 2 / REACH 1 / CC 1, pockets at k = 9, 17 gate checks in 0.024 s); f1_L10_0003 DEAD at pad 0 in 193 s.  Launcher running (3 slots, 1,800 s, STOP at 150 CPU-h); the tube path exercised on a synthetic Trump-containing page (LOG).
 
+**[T]/[F] A218 (2026-09-14 night) — the PI's torque line as a COUNT (`docs/proofs/k0_count.md`).**  A217 left
+"four doubly-met open corners need 8 meeters + ≥ 4 along-wall holders = 12 > 11" as the surviving form of Lemma
+TORQUE.  A218: [T] Lemma PUSH — two meeters of the open unit corner box push each other OUT (every separating normal
+has a positive frame component, and a positive component along any wall the pushed square touches; from Lemma B0 /
+B0′), and [T] Lemma HOLD (G1) — a meeter pressed by its partner has a holder square pushing it toward the corner
+along its wall.  [F] The count itself does not close k0_00: G2 ("a holder serves ≤ 2 meeters") has true bound four,
+holders are meeters of the adjacent corner in 1,986 of 6,351 loaded holder relations, a force-balanced four-crowd
+with NINE squares exists (`rand_0_0569|t20`, side 4.11, a compression ring through the eight meeters, only the tilt
+bound loaded), and 61 of the 70 doubly-met corners at the genuine k0 FJ points are rattler crowds (both meeters
+unloaded).  C4 (0/883) stands as measured; its mechanism is the drain (a forced four-crowd wants to settle a corner:
+the CROWD pull is exactly HOLD's missing holder, the HELD torque is the aligning one).  **This row is unchanged.**
+Lean: `Statements/Open/K0Count.lean` (`lemma_PUSH`, axiom, audited).
+
 ## 5. Lean / TCB
 
 TopLevel roster: K0-O1 + chain replays + ShellKill (Crowd, CrowdZone, Slide, PinnedSlide, Ceil, Composition);

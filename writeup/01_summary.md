@@ -164,6 +164,7 @@ first and the AI's formalisation second:
 | how much does a non-simple corner hurt, and can grain coverage carry high-k kills down to low k? | the descent programme (A194) |
 | two millisecond pair exclusions: meeters' centres a unit apart (inscribed discs), and a chord row that leaves budget for one unit chord, not two | the first tests of the fast propagation engine (A198), which kill in milliseconds what the fine pair test took 1,310 seconds to say |
 | a meeter reaching around a pin's corner is forced into one rotation and seals the neighbouring slot's top edge, so that slot cannot be met from above | the corner-sealing lemma and its window slabs (A199); on Y0491 the pad was the only thing keeping the page alive |
+| "something about torque being an invariant that prevents all four corners from being pinned like that" | the torque probe (A217: no sign-rule invariant, but no Fritz-John point with four doubly-met corners) and its counting form (A218): Lemma PUSH, two meeters of an open corner push each other out along their walls, and Lemma HOLD, proved for every n; the count itself refuted by a nine-square force-balanced ring and by rattler crowds, so the k0 obligation stays with the drain |
 
 Not every reading survived: several were refuted by the drawings, hairline grazers the eye cannot see or a lane a
 certified polygon closed, and those are listed in the timeline too. The point is the direction of the traffic.

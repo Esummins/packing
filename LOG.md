@@ -8746,3 +8746,34 @@ halves of the answer come from opposite findings.
 - Pages `docs/residue_map/campaigns/A217-torque/` (39, forces as arrows, corner torques annotated, gallery); results
   `attempts/A217-torque-probe/results/torque217.md`, `witnesses217.jsonl`, `torque217.jsonl`; registry row; resume block in
   `notes/torque.md` s.6 (re-run collect/hunt/fig when `search217_crowd0.jsonl` has grown; a CROWD0 witness would refute C4).
+
+## 2026-09-14 night -- A218-k0-count (Fable) -- DONE (launch-and-exit): **Lemma K0-COUNT stated exactly; G1 PROVED (Lemma PUSH + Lemma HOLD, n-general); G2 FALSE -- the count does not close k0_00 (a force-balanced four-crowd with nine squares; rattler crowds at the k0 FJ points)**
+
+- The brief (18:00): A217's surviving statement is a COUNT -- four doubly-met open corners need 8 distinct meeters + >= 4 along-wall
+  holders = 12 > 11; state it, prove G1 (a 2-crowd meeter is pushed OUT along its wall by the other meeter and must be held) and G2
+  (a holder serves <= 2 meeters), test on A217's witnesses.
+- [T] Lemma PUSH (`docs/proofs/k0_count.md` s.2, any n, any side): two unit squares in a corner's quadrant both meeting the OPEN unit
+  corner box push each other out -- every line separating them has a normal with a strictly positive frame component (i), and a
+  strictly positive component along any corner wall the pushed square touches (ii).  (i) is Theorem B's clause (P) at c = 1 via Lemma
+  B0'; (ii): the separating line meets the floor at u0 >= sin(alpha) (Lemma B0 on the floor meeter) and the pushing square, in the
+  wedge under the line, has every point at u >= u0 + cos^2(alpha)/sin(alpha) (B0's mirror), so it lies in {u >= 1/sin(alpha)} and
+  cannot meet the box.  Sharp in both constants.  Measured 10,638 / 10,638 loaded partner pushes on 2,732 witnesses (`count218.py`).
+- [T] Lemma HOLD = G1 in loaded form (s.3): at a Fritz-John point a meeter PRESSED by its partner has a holder -- a third square pushing
+  it toward the corner, along its wall if it touches one (the u-balance: the corner's walls push outward, the far walls are out of
+  reach).  At the CROWD witnesses the crowd row is exactly that holder (its force = minus the partner push's along-wall component).
+- [T, vacuous] Lemma K0-COUNT (s.4): under LOAD (every corner's two meeters press on each other) and DISTINCT (four holders, distinct
+  and no meeters) n >= 12; corollary at n = 11 with K0-2.  **[F] Both hypotheses fail** (s.5): the true sharing bound of G2 is FOUR
+  (a centre diamond holds a meeter of every corner; measured: a holder is a meeter of the ADJACENT corner in 1,986 of 6,351 loaded holder
+  relations), and `rand_0_0569|t20` (HELD, side 4.1099) is a FORCE-BALANCED four-crowd with NINE squares -- a compression ring through
+  the 8 meeters (the floor meeters of BL and BR hold each other, the wall meeters up each wall hold each other, one square holds both
+  ceiling meeters), only the tilt bound loaded; LOAD fails where it matters: 61 of the 70 doubly-met corners at the genuine k0 FJ
+  points have BOTH meeters unloaded (rattler crowds, sides 4.00-4.47), 33 of 57 at the settled optima.
+- [M] What C4 (0 of 883 FJ points with four 2-crowds) is, then: not a count but the DRAIN -- a forced four-crowd wants to SETTLE a
+  corner: a meeter slides out along its wall (CROWD, 3,071 of 3,261 pulls along the touched wall) or a corner square turns flat (HELD,
+  the bound torque aligning, 494/494).  The k0_00 obligation is unchanged (DF-K0's H1 / the tree); the sharpest open form of the PI's
+  torque conjecture is whether a loaded RING can ever be torque-balanced at n = 11 -- a finite structure question for Lemma H-LOC,
+  whose NO would still leave the rattler crowds.
+- Lean: `Statements/Open/K0Count.lean` (`lemma_PUSH` as a named axiom with the proof pointer), `Statements.lean` import, `lake build` +
+  `lean/audit.py` exit 0, no sorry, `lean/AUDIT.md` regenerated.  Pages `docs/residue_map/campaigns/A218-k0-count/` (the ring, the
+  rattler crowd, the three-crowd K0FREE witness, the lowest CROWD witness); results `attempts/A218-k0-count/results/count218.md`,
+  `count218.jsonl`; registry row; `residue_ledger.md` s.4 note; `writeup/01_summary.md` lever table row.
