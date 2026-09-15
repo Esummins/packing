@@ -1,6 +1,6 @@
 # Shadow-gallery STATUS -- the checklist (generated, do not hand-edit)
 
-Generated `2026-09-15 00:47` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
+Generated `2026-09-15 00:57` by `docs/shadows/status_gallery.py` (A162).  Rerun it at every pause:
 
 ```
 python docs/shadows/status_gallery.py            # move DEAD pages, rewrite this file
@@ -169,8 +169,8 @@ Of the 71 gallery pages the PI reviews, **25 are still ALIVE and 46 are now DEAD
 | [ ] [`c0_Y0787.svg`](c0_Y0787.svg) | `c0_Y0787` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 4) |
 | [ ] [`c0_Y0788.svg`](c0_Y0788.svg) | `c0_Y0788` | `trump5_j0` | 1 | `S03` | **ALIVE** | -- | -- | -- | 2.88 (rank 12) |
 | [ ] [`c0_Y1033.svg`](c0_Y1033.svg) | `c0_Y1033` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 8) |
-| [ ] [`k5_11_interior_Y0738.svg`](k5_11_interior_Y0738.svg) | `k5_11_interior_Y0738` | `k5_11` | 1 | `S02` | **ALIVE** | A211 coarse tree still open at the g1 pad: 5 start nodes left, 8 alive leaves, depth 17 (3 run(s), 1.53 CPU-h spent) | A211 | 2026-09-14 | 3.76 (rank 4) |
-| [ ] [`k5_16_interior_Y0402.svg`](k5_16_interior_Y0402.svg) | `k5_16_interior_Y0402` | `k5_16` | 1 | `S03` | **ALIVE** | A211 coarse tree still open at the g1 pad: 4 start nodes left, 14 alive leaves, depth 7 (2 run(s), 1.05 CPU-h spent) | A211 | 2026-09-14 | 2.88 (rank 35) |
+| [ ] [`k5_11_interior_Y0738.svg`](k5_11_interior_Y0738.svg) | `k5_11_interior_Y0738` | `k5_11` | 1 | `S02` | **ALIVE** | A211 coarse tree still open at the g1 pad: 1 start nodes left, 5 alive leaves, depth 17 (4 run(s), 2.03 CPU-h spent) | A211 | 2026-09-15 | 3.76 (rank 4) |
+| [ ] [`k5_16_interior_Y0402.svg`](k5_16_interior_Y0402.svg) | `k5_16_interior_Y0402` | `k5_16` | 1 | `S03` | **ALIVE** | A211 coarse tree still open at the g1 pad: 0 start nodes left, 0 alive leaves, depth 7 (3 run(s), 1.97 CPU-h spent) | A211 | 2026-09-14 | 2.88 (rank 35) |
 | [ ] [`k5_16_interior_Y1056.svg`](k5_16_interior_Y1056.svg) | `k5_16_interior_Y1056` | `k5_16` | 1 | `S08` | **ALIVE** | A211 coarse tree still open at the g1 pad: 2 start nodes left, 2 alive leaves, depth 10 (3 run(s), 1.54 CPU-h spent) | A211 | 2026-09-14 | 2.88 (rank 31) |
 | [ ] [`slack0.02_c0_Y0272.svg`](slack0.02_c0_Y0272.svg) | `slack0.02_c0_Y0272` | `trump5_j0` | 1 | `S01` | **ALIVE** | -- | -- | -- | 2.88 (rank 1) |
 
@@ -273,7 +273,7 @@ Of the 71 gallery pages the PI reviews, **25 are still ALIVE and 46 are now DEAD
 | `A206 namedsplit206.jsonl` | 3 | 3 |
 | `A209 k5killer209.jsonl` | 5 | 5 |
 | `A211 coarsetree211.jsonl` | 71 | 71 |
-| `A212 trump5tree212.jsonl` | 43 | 43 |
+| `A212 trump5tree212.jsonl` | 44 | 44 |
 | `A57 tree jsonl (k5_11_interior_G1) -- dead rows only` | 780 | 780 |
 | `A57 tree jsonl (k5_11_interior_G1_D2) -- dead rows only` | 729 | 729 |
 | `A57 tree jsonl (k5_11_interior_G1_D2_D2) -- dead rows only` | 101 | 101 |
