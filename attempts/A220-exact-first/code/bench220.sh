@@ -19,14 +19,14 @@ while IFS='|' read -r TAG NID INH WALL CODE ENVS; do
   MARK=$A220/results/done/${TAG}__${NID}
   [ -f "$MARK" ] && { echo "$(date +%T) [lane $LANE] $TAG $NID: done (marker)"; continue; }
   [ -f $A220/logs/STOP ] && { echo "$(date +%T) [lane $LANE] STOP present: exiting"; exit 0; }
-  while [ "$(labcount)" -ge 9 ]; do sleep 60; done
+  while [ "$(labcount)" -ge 10 ]; do sleep 60; done
   LOG=$A220/logs/${TAG}__${NID}.log
   CD=$A220/results/certs/$TAG
   mkdir -p "$CD"
   EXTRA=""; [ "$INH" = "noinh" ] && EXTRA="--no-inherit"
   T0=$(date +%s)
   echo "$(date +%T) [lane $LANE] START $TAG $NID ($INH, wall $WALL, code $CODE, env: $ENVS)" | tee -a $LOG $A220/logs/bench220.log
-  ( export $ENVS; timeout -s KILL $((WALL + 900)) python $CODE/run211.py page "$NID" --pads g1 --wall "$WALL" $EXTRA --no-fig \
+  ( [ -n "$ENVS" ] && export $ENVS; timeout -s KILL $((WALL + 900)) python $CODE/run211.py page "$NID" --pads g1 --wall "$WALL" $EXTRA --no-fig \
       --cert-dir "$CD" --results $A220/results/rows/${TAG}.jsonl >> $LOG 2>&1 )
   RC=$?
   SEC=$(( $(date +%s) - T0 ))

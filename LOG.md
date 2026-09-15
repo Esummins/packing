@@ -8777,3 +8777,55 @@ halves of the answer come from opposite findings.
   `lean/audit.py` exit 0, no sorry, `lean/AUDIT.md` regenerated.  Pages `docs/residue_map/campaigns/A218-k0-count/` (the ring, the
   rattler crowd, the three-crowd K0FREE witness, the lowest CROWD witness); results `attempts/A218-k0-count/results/count218.md`,
   `count218.jsonl`; registry row; `residue_ledger.md` s.4 note; `writeup/01_summary.md` lever table row.
+
+## 2026-09-14 evening -- A220-exact-first (Opus) -- launch-and-exit (the benchmark lanes detached, resume block in `notes/exact_first.md` s.6): **the EXACT cascade moved BEFORE the blind role split, and the no-room cap shortened under an UNDECIDED parent -- both FLAG-GATED, both OFF by default**
+
+The PI (20:05, from `attempts/A211-coarse-tree/logs/coarsetree211_k5_16_interior_Y0865.log`): under `R.2.3.1.1.2.2.1` the
+coarse tree bisects F1's tilt, then F2's, then F5's / F4's (Lemma ROLE-SPLIT, extents ~0.08 x 0.05 with the FULL tilt
+range), and every one of the 8 leaves then dies in the EXACT cascade by EmptyBox in 0.7-18 s -- 43 such leaf cascades on
+that page, all kills, each reached only after 3-4 split levels; *"the position of F1 should have killed this node in the
+parent well before this depth"*.  The coordinator's addendum (20:40): on the ALIVE pages the wall is not in the coarse
+rounds at all but in A189/A208's no-room returning UNDECIDED at its 120 s cap at EVERY child after a split -- Y0402 14
+gaps = 1,518 s of a 1,847 s wall (82 %), Y0738 12 gaps = 1,153 s (63 %), Y1056 9 gaps = 1,044 s.
+
+- [T] **Lemma BUDGET** (`notes/exact_first.md` s.2): a cascade stopped by a clock claims nothing -- any PREFIX of a chain
+  of A171/A172/A173 clips is sound, so the pose set kept is still a superset of the truth, and a DEAD reached before the
+  stop is an ordinary kill.  Implemented as a SUB-TIMER on `pg.T` (`tree206.budget_cascade`): the trace's wall is pulled
+  in to `now + budget` and restored in a `finally`, so every `T.out_of_time()` the chain already checks becomes a
+  deadline check, and `MB._clip_rect_obstacle` -- the innermost mutual-clip call -- is wrapped for the duration to raise
+  every 64 calls.  `poly204.normalise` copies pieces out of the `MB.Node` only after the fixed point returns, so an
+  interrupted round leaves the node exactly where the last COMPLETED round put it.  The read-only libraries are never
+  edited; the wrapper is removed in the same `finally`.
+- [T] **Rule EXACT-FIRST** (`A220_EXACT_FIRST`, s.3): at a fully named leaf, before Lemma ROLE-SPLIT, ONE exact cascade
+  round under `A220_BUDGET` (45 s).  DEAD -> the node is closed here with rule (e)'s own `x` record and verifier clause;
+  undecided / budget -> coarse mode restored, the shrinks KEPT, the split candidates re-read from the tighter boxes and
+  the old rule runs.  Variant `small`: only when the role the split would bisect has max position extent < 0.25 (the
+  Y0865 case -- a blind TILT bisection of an already well-located role).
+- [T] **Rule NOROOM-INHERIT** (`A220_NOROOM_INHERIT`, s.4): when the nearest ancestor's no-room used >= 80 % of its cap
+  without deciding and no role box has since lost more than 50 % of its volume (and the node is not a terminal m = 1
+  pocket child), the child's cap is 25 s and ONE budgeted exact round runs first, so the search reads smaller boxes.  A
+  cap is a BUDGET, never a claim: a shorter search returns UNDECIDED more often and UNDECIDED prunes nothing (A211f's
+  S'' argument one level down).  `tree209.noroom_at` gained one optional `deadline` argument because the wall-derived
+  budget has a 60 s FLOOR.
+- [M] **why A211f's no-room memos never hit** (`build_hits` 0 / `bisect_hits` 0 on Y0865): not a bug -- both memos are
+  keyed on CONTENT (the exact role boxes; the obstacle vertex sets) and a child never reproduces its parent's content,
+  because the child runs its own coarse cascade round before the leaf rules and that round's mutual clip moves boxes the
+  design note assumed untouched.  Only the obstacle INTERNING survives (21,392 hits / 6,077 misses on the Y0865 run).
+  Resuming `bisect_free` from the parent's undecided leaves is NOT cheap (A189 returns a residue, not a frontier, and is
+  read-only): left [C].
+- [T] **flags OFF = A211 exactly** (s.5): every edit is inside an `if` on an unset env var, plus one keyword argument
+  defaulting to the old expression; the running run211 / run212 workers, which import these files afresh per page, keep
+  A211's behaviour.  The pre-A220 code is kept verbatim in `attempts/A220-exact-first/base211/` so the claim is CHECKED
+  by a run, not asserted: configs `eqbase` (old code) vs `eqoff` (this code, flags off) on the same page / pad / wall.
+- Benchmark (`code/bench220.sh`, `plan_a.txt` / `plan_b.txt`, `analyze220.py` -> `results/bench220.md` + `.jsonl`): two
+  detached lanes, one python each, BelowNormal + affinity 0xFFFF, gated at 10 lab pythons, isolated cert dirs and row
+  files, `--no-fig`; configs `off` / `ef` / `efs` / `nri` on `k5_16_interior_Y0865` (the PI's page), the addendum's
+  `k5_16_interior_Y0402` and `k5_11_interior_Y0738` (inheritance ON -- they are ALIVE and their gallery claims are
+  taken, so every config starts from the same frozen merged state) and the closed `k5_11_interior_Y0672`,
+  `k5_16_interior_Y0249`, `k5_16_interior_Y0460`, `k5_16_interior_Y0500` (`--no-inherit`, since with inheritance ON they
+  would inherit their own DEAD verdict and measure nothing).  Per row: verdict, seconds, ratio against that page's `off`
+  row, node / kill counters, the A220 counters and the WALL SPLIT BY STAGE (coarse rounds / no-room / exact cascade /
+  other); per config the geometric-mean ratio and the verdict-regression check.
+- DECISION RULE (unchanged from the brief, and NOT yet taken): a variant goes ON in `worker211.sh` / `launch211.sh` only
+  at a geometric-mean ratio < 0.8 with no verdict regression.  Until the lanes finish, the flags stay OFF everywhere and
+  `CURRENT.json` is untouched.
