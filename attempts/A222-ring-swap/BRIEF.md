@@ -58,3 +58,11 @@ intruder where it fails); (ii) FC applies to cells exposed mid-sweep (pins = squ
 exact count of exposed cells vs n - |ring| interior squares and how many exposed cells one interior square can
 meet (A1 / CN).  Do this first (ring_swap.md s.1 + a sweep page on the ring witness); say whether it covers rattler
 crowds and what geometric obligation remains.
+
+## Addendum 0b (PI, 22:50) -- "if that count holds in general, k0 AND k1 are both trivially empty"
+Run the sweep from a k1 start too and state the general theorem: every teleport-stuck packing at side <
+ceil(sqrt n) exchanges at the SAME side into one with >= k* settled squares (k* exact at n = 11 if the count
+closes; exact bookkeeping of the sweep, nothing left in hand -- or the corrected form: each exposed cell met only
+by the next pin is a K0-FREE teleport on its own).  Separate VALUE (exchanges preserve the side: lower classes
+reduce to higher ones) from UNIQUENESS (a k0/k1 packing at s-hat exchanges into Trump, so it is Trump with a subset
+re-packed inside its union u Free: the finite obligation SWAP-RIGIDITY of Trump; test it on Trump if cheap).
