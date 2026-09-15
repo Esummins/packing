@@ -43,3 +43,26 @@
    node R.2.6.p1.p1.2.1.1 d5 TL(1,0)<-None: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=937.9)
    node R.2.6.p1.p1.2.1.2 d5 TL(1,0)<-None: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=938.3)
    node R.2.6.p1.p1.2.2 d4 TL(1,0)<-None: INTERNAL (38.4 s, 1 rounds; t=976.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.6.p1.p1.2.2: split F5 at TL(1,0) (meeting fraction 0.011074; alive rows [18]; named ['F1', 'F5', 'H'])
+   node R.2.6.p1.p1.2.2.1 d5 TL(1,0)<-None: DEAD by REACH r1 (80.0 s, 1 rounds; t=1114.5)
+   node R.2.6.p1.p1.2.2.2 d5 TL(1,0)<-None: INTERNAL (77.4 s, 1 rounds; t=1191.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.6.p1.p1.2.2.2: split F5 at TR(1,0) (meeting fraction 0.026309; alive rows [18, 23]; named ['F1', 'F4', 'F5', 'H'])
+   node R.2.6.p1.p1.2.2.2.1 d6 TR(1,0)<-None: INTERNAL (70.6 s, 1 rounds; t=1380.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.2.6.p1.p1.2.2.2.1: bisect F4 on y at 2.014689 (extents (0.890527, 1.029379), tilt 90.0 deg, core EMPTY, 68 piece(s); split 1 of 4)
+   node R.2.6.p1.p1.2.2.2.1.1 d7 F4<-['y<=2.014689']: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=1488.0)
+   node R.2.6.p1.p1.2.2.2.1.2 d7 F4<-['y>=2.014689']: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=1488.1)
+   node R.2.6.p1.p1.2.2.2.2 d6 TR(1,0)<-None: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=1489.3)
+   start R.2.6        => DEAD (17 nodes; t = 1489 s of 1800.0)
+   start R.3: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   => ALIVE (g1_page) in 1489.4 s: 3 start runs, 17 nodes, depth 7, 0 CC kills, 0 exact leaf cascades, 6 NS splits, 2 pocket splits, 1 role splits (0 empty-half kills), 15 inherited dead (15 up front + 0 in tree), 23 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 18 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1.1 d3 DEAD INHERIT 0.0s; R.2.1.2 d3 DEAD INHERIT 0.0s; R.2.1.3 d3 DEAD INHERIT 0.0s; R.2.1.4.1 d4 DEAD INHERIT 0.0s; R.2.1.4.2.1 d5 DEAD INHERIT 0.0s; R.2.1.4.2.2 d5 DEAD INHERIT 0.0s; R.2.1.5 d3 DEAD INHERIT 0.0s; R.2.2 d2 DEAD INHERIT 0.0s; R.2.3 d2 DEAD INHERIT 0.0s; R.2.4 d2 DEAD INHERIT 0.0s; R.2.5 d2 DEAD INHERIT 0.0s; R.2.7 d2 DEAD INHERIT 0.0s; R.2.8 d2 DEAD INHERIT 0.0s; R.2.9 d2 DEAD INHERIT 0.0s; R.2.6 d0 INTERNAL 3.0s; R.2.6.p1 d1 INTERNAL 24.2s; R.2.6.p1.p1 d2 INTERNAL 128.5s; R.2.6.p1.p1.1 d3 INTERNAL 98.1s; R.2.6.p1.p1.1.1 d4 DEAD EmptyBox 1.0s; R.2.6.p1.p1.1.2 d4 DEAD EmptyBox 0.4s; R.2.6.p1.p1.2 d3 INTERNAL 61.0s; R.2.6.p1.p1.2.1 d4 INTERNAL 45.3s; R.2.6.p1.p1.2.1.1 d5 DEAD EmptyBox 1.1s; R.2.6.p1.p1.2.1.2 d5 DEAD EmptyBox 0.4s; R.2.6.p1.p1.2.2 d4 INTERNAL 38.4s; R.2.6.p1.p1.2.2.1 d5 DEAD REACH 80.0s; R.2.6.p1.p1.2.2.2 d5 INTERNAL 77.4s; R.2.6.p1.p1.2.2.2.1 d6 INTERNAL 70.6s; R.2.6.p1.p1.2.2.2.1.1 d7 DEAD EmptyBox 0.8s; R.2.6.p1.p1.2.2.2.1.2 d7 DEAD EmptyBox 0.0s; R.2.6.p1.p1.2.2.2.2 d6 DEAD EmptyBox 1.2s
+== k5_16_interior_Y1056: g1 ALIVE | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 922, 'misses': 256, 'entries': 256}; clip {'hits': 65767, 'misses': 866467, 'entries': 66467}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1178, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 18}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 934, 'obs_misses': 282, 'build_hits': 0, 'build_misses': 2, 'bisect_hits': 0, 'bisect_misses': 1, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 131, 'build_entries': 2, 'bisect_entries': 1, 'on': True}
