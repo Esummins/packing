@@ -45,3 +45,16 @@ the four bands -- "decomposed at once" where one corner alone might not swap.
 4. Deliverables: docs/proofs/ring_swap.md, the Lean files, code/, results/swap222.md (+jsonl), pages, registry row,
    LOG entry, ledger s.4 note.  Report once (<= 20 lines: SWAP status, witness counts, what is proved, what remains,
    whether loads are needed, commits) and EXIT.
+
+## Addendum 0 (PI, 22:30) -- the perimeter SWEEP is the proof route, and it needs no loads
+Pick up one corner meeter A; the corner box now has one meeter B; pick B up and settle A in the corner (1-for-1
+teleport: the box lies in A u B u Free).  The cell next to the settled square along the wall must be doubly met
+(Theorem FC) -- one meeter is the next ring pin; place the square in hand there, pick up the next pin; repeat
+around the perimeter.  The outside holds at most 4 floor(sqrt n) simple squares (make exact: at S < 4, 3 per
+wall), and the sweep uncovers that many, so at every step the SECOND meeter must be a centre square: no ring is
+self-supporting under teleport-freeness.  Obligations: (i) Lemma STEP -- each exchange valid at the same side (the
+target cell met only by the squares in hand and the next pin; check step by step on the 193 witnesses, name the
+intruder where it fails); (ii) FC applies to cells exposed mid-sweep (pins = squares settled so far); (iii) the
+exact count of exposed cells vs n - |ring| interior squares and how many exposed cells one interior square can
+meet (A1 / CN).  Do this first (ring_swap.md s.1 + a sweep page on the ring witness); say whether it covers rattler
+crowds and what geometric obligation remains.
