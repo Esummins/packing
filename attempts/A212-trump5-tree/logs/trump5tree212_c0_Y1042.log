@@ -14,3 +14,20 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y1042_interior_G1'
 10:46:26 [w3] c0_Y1042  rc=1 2s
+04:24:29 [w3] start c0_Y1042 wall 1800 (lab 1, free 14170 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y1042 at the zero pad: ALIVE in 15852 ms; kills {'H-clip': 0, 'P': 5520, 'W': 1191, 'C': 918, 'M': 4589, 'L': 7, 'R': 2950, 'X': 907}; CSP units 64 -> 64 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y1042 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y1042_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.498, 2.559, 2.498, 2.559, 28.072, 41.112]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (31.8 s, 1 rounds; t=31.9)
+   node R.1        d1 TR(0,1)<-[16]: INTERNAL (15.0 s, 1 rounds; t=46.9)
+   node R.1r1      d1 root<-None: DEAD by EmptyBox r1 (6.7 s, 1 rounds; t=53.5)
+   node R.2        d1 TR(0,1)<-[21]: INTERNAL (8.5 s, 1 rounds; t=62.0)
+   node R.2r1      d1 root<-None: DEAD by S-CLIP r1 (7.1 s, 1 rounds; t=69.1)
+   node R.3        d1 TR(0,1)<-[22]: INTERNAL (9.0 s, 1 rounds; t=78.1)
+   node R.3r1      d1 root<-None: DEAD by EmptyBox r1 (9.1 s, 1 rounds; t=87.3)
+   start R            => DEAD (7 nodes; t = 87 s of 1800.0)
+   => DEAD (zero_page) in 87.3 s: 7 nodes, depth 1, gate hits 0 (conflicts 0), tube leaves 0 (depths []), 0 aligned cuts, kills by rule {'EmptyBox': 2, 'S-CLIP': 1}, 0 NS, 0 pockets, 0 role splits, 3 dead / 0 alive leaves
+   per node: R d0 INTERNAL 31.8s; R.1 d1 INTERNAL 15.0s; R.1r1 d1 DEAD EmptyBox 6.7s; R.2 d1 INTERNAL 8.5s; R.2r1 d1 DEAD S-CLIP 7.1s; R.3 d1 INTERNAL 9.0s; R.3r1 d1 DEAD EmptyBox 9.1s
+== c0_Y1042: pad0 DEAD   (s0-only, lam = 1; DEAD = killed at s0, TRUMP-TUBE = the Trump basin, ALIVE = undecided)
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A212-trump5tree\trump5tree212_gallery.svg
