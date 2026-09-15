@@ -12,11 +12,51 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import load211 as L                                            # noqa: E402
+import pstats211 as PS                                         # noqa: E402  (A225: the PROGRESS numbers)
 
 RES = os.path.join(HERE, "..", "results", "coarsetree211.jsonl")
 OUT = os.path.join(HERE, "..", "results", "progress.md")
 STOP = os.path.join(HERE, "..", "logs", "STOP")
 CAP_CPUH = 200.0
+
+
+def alive_block(L2, per, gnodes):
+    """A225 (the PI 2026-09-14 23:40: "how many top-level nodes are left ... how deep it's going"): where the
+    still-alive pages stand.  A run starts from the ALIVE leaves of the previous run (Lemma INHERIT): the work
+    left on a page is the start nodes it has not closed; the depth is absolute (start-node path + this run's depth)."""
+    alive = [n for n in gnodes if (per[n].get("g1") or {}).get("verdict") != "DEAD"]
+    L2.append("## Where the alive k5 gallery pages stand (A225 PROGRESS: start nodes left / alive leaves / depth)")
+    L2.append("")
+    L2.append("A *start node* is an alive leaf the run inherited from the previous run (Lemma INHERIT, notes/coarse_tree.md s.4) -- "
+              "the top-level branches of the current run.  *Left* = alive at the wall + never reached.  *Alive leaves* = the start "
+              "nodes of the NEXT run.  *Depth* = absolute (the start node's own path length + the depth the run added below it).")
+    L2.append("")
+    L2.append("| page | pad | start nodes | dead this run | alive at wall | not reached | **left** | alive leaves | max depth | runs | wall (CPU-h) | estimate (CPU-h) | last run |")
+    L2.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+    tot = dict(left=0, leaves=0, wall=0.0, runs=0, est=0.0, depth=0)
+    for n in alive:
+        for pad in ("g1", "zero"):
+            st = PS.page_stats(n, pad)
+            if not st:
+                continue
+            L2.append("| %s | %s | %d | %d | %d | %d | **%d** | %d | %d | %d | %.2f | %.2f | %s%s |" % (
+                n, pad, st["n_start"], st["dead"], st["alive"], st["unreached"], st["left"], st["alive_leaves"],
+                st["max_abs_ever"], st["n_runs"], st["wall_total"] / 3600.0, st["est_s"] / 3600.0,
+                st["when"], "" if st["verdict"] != "DEAD" else " (**this pad is now DEAD**)"))
+            if pad == "g1":
+                tot["left"] += st["left"]
+                tot["leaves"] += st["alive_leaves"]
+                tot["est"] += st["est_s"] / 3600.0
+                tot["depth"] = max(tot["depth"], st["max_abs_ever"])
+            tot["wall"] += st["wall_total"] / 3600.0
+            tot["runs"] += st["n_runs"]
+    L2.append("")
+    L2.append("**TOTAL over the %d alive k5 gallery pages (window pad):** %d start nodes left, %d alive leaves (the next runs' "
+              "start nodes), deepest branch %d, %d run(s) over both pads for %.2f CPU-h spent; ESTIMATE (not a bound) %.2f CPU-h "
+              "to close the start nodes now open at the window pad -- an UNDER-estimate: the start nodes still alive are the ones "
+              "that already survived a full wall, and each survivor splits into several new start nodes."
+              % (len(alive), tot["left"], tot["leaves"], tot["depth"], tot["runs"], tot["wall"], tot["est"]))
+    L2.append("")
 
 
 def main():
@@ -62,6 +102,7 @@ def main():
         L2.append("")
         return tot
 
+    alive_block(L2, per, gnodes)
     tg = table(gnodes, "The 19 alive k5 gallery pages")
     tf = table(fnodes, "The k5 frontier (A57 census, deepest-first)")
     secs = [sum(float(d.get("seconds") or 0) for d in per[n].values()) for n in fnodes]

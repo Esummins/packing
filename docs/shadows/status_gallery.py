@@ -409,6 +409,11 @@ class Table(object):
 
 A = lambda *p: os.path.join(ROOT, "attempts", *p)
 
+# A225 (the PI 2026-09-14 23:40: "how many top-level nodes are left ... how deep it is going"):
+# nid -> (the three PROGRESS numbers, the date of the last run) for the pages A211's coarse tree has
+# NOT closed.  Filled by the A211 collector below, printed on the board row.  Never a verdict.
+A211_PROGRESS = {}
+
 
 def collect(table, corpus):
     # (0) A57's canonical tree jsonl -- the corpus's own verdicts ------------
@@ -1147,6 +1152,27 @@ def collect(table, corpus):
     #      bound (pockets branched at k = 9), A207 basin clip, A206 Rule NS, then the exact cascade + sharp round.  Pad 0 FIRST.
     #      A node is KILLED by a DEAD run at the g1 (window) pad (mode "page"); pad 0 is s0-only (WINDOW-PENDING).  Kills are
     #      [C: closed-form / library clip trace + the leaf lemma], NO verifier clause; a tree id's family is in applies_to_tags.
+    #      A225: on top of the kills, the PROGRESS numbers of the pages the tree has NOT closed -- start nodes
+    #      left (the top-level branches of the current run still open), alive leaves (the next run's start
+    #      nodes) and the absolute depth reached.  Read from the same jsonl by A211's pstats211; a failure here
+    #      never touches a verdict.
+    A211_PROGRESS.clear()
+    try:
+        if A("A211-coarse-tree", "code") not in sys.path:
+            sys.path.insert(0, A("A211-coarse-tree", "code"))
+        import pstats211 as PS211                                # noqa: E402  (stdlib only, reads the jsonl)
+        for nid in sorted(set(r.get("nid") for r in PS211.rows() if r.get("nid"))):
+            for pad in ("g1", "zero"):
+                st = PS211.page_stats(nid, pad)
+                if st and st.get("verdict") != "DEAD":
+                    A211_PROGRESS[nid] = (
+                        "A211 coarse tree still open at the %s pad: %s (%d run(s), %.2f CPU-h spent)"
+                        % (pad, PS211.fmt_short(st), st["n_runs"], st["wall_total"] / 3600.0),
+                        str(st.get("when") or "")[:10])
+                    break
+    except Exception as e:
+        print("A211 progress numbers unavailable: %s" % e)
+
     seen211 = set()
     for d in jl(A("A211-coarse-tree", "results", "coarsetree211.jsonl")):
         if not d.get("nid") or str(d.get("verdict", "")) != "DEAD" or d.get("mode") != "page" or d.get("pad") not in ("g1", "zero"):
@@ -1568,6 +1594,11 @@ def write_status(galleries, verdicts, table, paused, clip_n, dry):
             st, rec, how, _ = verdicts[(g["name"], p["file"])]
             here = "killed/" + p["file"] if st == "DEAD" else p["file"]
             box = "[x]" if st == "DEAD" else "[ ]"
+            # A225: the coarse tree's PROGRESS on a page it has not closed (never a verdict, only the counts)
+            prog, pdate = A211_PROGRESS.get(p["node"], ("", ""))
+            leafcell = md_escape(rec["leaf"]) if rec else "--"
+            if prog:
+                leafcell = md_escape(prog) if not rec else (leafcell + " -- " + md_escape(prog))
             w(
                 "| %s [`%s`](%s) | `%s` | `%s` | %s | `%s` | **%s** | %s | %s | %s | %s%s |"
                 % (
@@ -1579,9 +1610,9 @@ def write_status(galleries, verdicts, table, paused, clip_n, dry):
                     p["level"],
                     p["family"],
                     st,
-                    md_escape(rec["leaf"]) if rec else "--",
-                    rec["attempt"] if rec else "--",
-                    rec["date"] if rec else "--",
+                    leafcell,
+                    rec["attempt"] if rec else ("A211" if prog else "--"),
+                    rec["date"] if rec else (pdate or "--"),
                     p["cost"] or "--",
                     (" (rank %s)" % p["rank_a142"]) if p["rank_a142"] else "",
                 )

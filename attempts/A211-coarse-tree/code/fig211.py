@@ -15,6 +15,7 @@ sys.path.insert(0, HERE)
 import fig204 as F4                                            # noqa: E402
 import fig205 as F5                                            # noqa: E402
 import fig206 as F6                                            # noqa: E402
+import pstats211 as PS                                         # noqa: E402  (A225: the PROGRESS block)
 
 S0, text, defs, panel, wrap = F4.S0, F4.text, F4.defs, F4.panel, F5.wrap
 MAXP = 12
@@ -75,12 +76,40 @@ def run_head(doc, key, d):
     return L
 
 
+def progress_lines(nid, pad):
+    """A225 (the PI 2026-09-14 23:40: "how many top-level nodes are left ... how deep it's going"):
+    the PROGRESS block -- the START NODES of this run (the alive leaves inherited from the previous run),
+    one line each with its verdict / nodes / depth reached / seconds, then the cumulative line over every
+    run of this page at this pad, then the one-line estimate.  Read from results/coarsetree211.jsonl only."""
+    try:
+        st = PS.page_stats(nid, pad)
+    except Exception as e:                                       # a figure never fails on a bad jsonl line
+        return [("PROGRESS: unavailable (%s)" % e, 7, "#777", False)]
+    if not st:
+        return [("PROGRESS: no run of %s at the %s pad is recorded in results/coarsetree211.jsonl" % (nid, pad), 7, "#777", False)]
+    hot = "#c62828" if st["left"] else "#2e7d32"
+    L = [(PS.fmt_head(st), 9, hot, True),
+         ("start node        steps  verdict   nodes  depth (abs)   seconds   -- the top-level branches of THIS run, in the order the run took them", 7.5, "#000", True)]
+    for s in st["starts"]:
+        c = "#c62828" if s["verdict"] == "DEAD" else ("#2e7d32" if s["verdict"] == "ALIVE" else "#888")
+        L.append(("%-34s %-6s %-9s %-6s %-2s (abs %-3s) %8.1f%s" % (
+            s["label"], s["n_steps"], s["verdict"], s["n_nodes"] or "-", s["depth"], s["abs_depth"], s["seconds"],
+            "   PENDING -- the wall ran out before this start node ran" if not s["reached"] else
+            ("   still ALIVE at the wall: it becomes a start node of the next run" if s["verdict"] != "DEAD" else "")), 7, c, False))
+    L.append((PS.fmt_cum(st), 8, "#000", True))
+    L.append((PS.fmt_est(st), 7.5, "#555", False))
+    L.append(("(a start node is an alive leaf of the previous run, Lemma INHERIT; depth abs = the start node's own path "
+              "length + the depth this run added below it; the node table below lists every node of this run)", 6.5, "#777", False))
+    return L
+
+
 def side(doc, pad, body, x, y):
     """A205's side table with the INHERITED rows in GREY, each citing the certificate that closed the branch."""
     d = doc["pads"].get(pad) or {}
     col = "#c62828" if d.get("verdict") == "DEAD" else ("#2e7d32" if d.get("verdict") == "ALIVE" else "#555")
     inh = d.get("inherit") or {}
-    L = [("%s  pad %s  A211 COARSE TREE from the MERGED prior state: %s  (%s s; %s nodes, depth %s; %s dead / %s alive leaves%s)" % (
+    L = progress_lines(doc["nid"], pad) + [("", 6, "#000", False)]
+    L += [("%s  pad %s  A211 COARSE TREE from the MERGED prior state: %s  (%s s; %s nodes, depth %s; %s dead / %s alive leaves%s)" % (
         doc["nid"], pad, d.get("verdict"), d.get("seconds"), d.get("n_nodes"), d.get("max_depth"), d.get("dead_leaves"), d.get("alive_leaves"),
         "; WALL" if d.get("wall") else ""), 11, col, True),
         ("Lemma INHERIT (notes/coarse_tree.md s.4): %s prior tree(s) %s merged on the path key; %s branch(es) inherited DEAD (FINAL, grey below, each with its certificate); %s start node(s) run here: %s" % (
@@ -149,7 +178,7 @@ def render(doc):
 def gallery():
     S = 52
     PW = int(S0 * S) + 16
-    PH = PW + 44
+    PH = PW + 54                                                 # A225: + the PROGRESS line
     ncol = 6
     docs = []
     for f in sorted(glob.glob(os.path.join(CERTS, "coarsetree211_*.json"))):
@@ -157,23 +186,35 @@ def gallery():
             docs.append(json.load(open(f, encoding="utf-8")))
         except Exception:
             continue
-    body = [text(16, 20, "A211 coarsetree211 -- the coarse tree over the alive k5 pages and the k5 frontier, one thumbnail per node (red = DEAD at the window pad, green = ALIVE; the pad-0 verdict beside it); rendered %s" % time.strftime("%Y-%m-%d %H:%M:%S"), 12, "#000", True)]
+    body = [text(16, 20, "A211 coarsetree211 -- the coarse tree over the alive k5 pages and the k5 frontier, one thumbnail per node (red = DEAD at the window pad, green = ALIVE; the pad-0 verdict beside it); rendered %s" % time.strftime("%Y-%m-%d %H:%M:%S"), 12, "#000", True),
+            text(16, 33, "A225 PROGRESS, last line of each still-alive thumbnail: START NODES LEFT (the top-level branches of the current run not yet closed) / ALIVE LEAVES now (the next run's start nodes) / MAX DEPTH reached (absolute)", 8, "#c62828")]
     for k, doc in enumerate(docs):
         runs = doc.get("runs") or {}
         v = doc.get("verdicts") or {}
         first = next(iter(runs.values()), {}) if runs else {}
         nodes = [n for n in (first.get("nodes") or []) if n.get("snapshot")]
-        ox, oy = 16 + (k % ncol) * PW, 40 + (k // ncol) * PH
+        ox, oy = 16 + (k % ncol) * PW, 52 + (k // ncol) * PH
         if nodes:
             panel(doc, dict(nodes[0]["snapshot"], pad=first.get("pad")), body, ox, oy, S, small=True)
         dead = v.get("g1") == "DEAD"
         body.append(text(ox, oy + S0 * S + 11, doc["nid"].replace("_interior", ""), 8, "#000", True))
         body.append(text(ox, oy + S0 * S + 21, ("g1 %s | pad0 %s" % (v.get("g1", "-"), v.get("zero", "-")))[:60], 6.5, "#c62828" if dead else "#2e7d32"))
         body.append(text(ox, oy + S0 * S + 31, ("stage %s; %s nodes" % (doc.get("stage_reached"), sum(int(r.get("n_nodes") or 0) for r in runs.values())))[:60], 6.5, "#555"))
+        # A225 PROGRESS: on a page still ALIVE somewhere, how much of the top level is left and how deep it went
+        pr = ""
+        for p in ("g1", "zero"):
+            try:
+                s = PS.page_stats(doc["nid"], p)
+            except Exception:
+                s = None
+            if s and s.get("verdict") != "DEAD":
+                pr = "%s: %s" % (p, PS.fmt_short(s))
+                break
+        body.append(text(ox, oy + S0 * S + 41, pr[:60], 6.5, "#c62828" if pr else "#555"))
     nrow = max(1, (len(docs) + ncol - 1) // ncol)
     os.makedirs(OUTD, exist_ok=True)
     p = os.path.join(OUTD, "coarsetree211_gallery.svg")
-    open(p, "w", encoding="utf-8").write("\n".join(['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" font-family="Segoe UI, sans-serif" style="background:#fff">' % (ncol * PW + 32, 40 + nrow * PH), defs()] + body + ["</svg>"]))
+    open(p, "w", encoding="utf-8").write("\n".join(['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" font-family="Segoe UI, sans-serif" style="background:#fff">' % (ncol * PW + 32, 52 + nrow * PH), defs()] + body + ["</svg>"]))
     return p
 
 
