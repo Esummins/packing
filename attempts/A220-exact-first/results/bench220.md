@@ -8,8 +8,9 @@ off, same page / pad / wall).  All runs: pad g1, one runner, BelowNormal, wall a
 | page | cfg | inh | verdict | s | ratio | nodes | dead | cc | rsplit | exact | ef run/kill/TO | nr runs | short | coarse s | noroom s | exact s | other s |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | k5_11_interior_Y0672 | eqbase | n | ALIVE (wall) | 602 | - | 63 | 40 | 2 | 1 | 0 | 0/0/0 | 12 | None | 166.7 (28%) | 423.9 (70%) | 0.0 (0%) | 11.9 |
-| k5_11_interior_Y0672 | eqoff | n | RUNNING | 46 | - | 30 | None | None | None | None | 0/0/0 | 0 | None | 44.0 (96%) | 0 (0%) | 0.0 (0%) | 1.9 |
+| k5_11_interior_Y0672 | eqoff | n | ALIVE (wall) | 601 | - | 61 | 39 | 2 | 0 | 0 | 0/0/0 | 10 | 0 | 190.5 (32%) | 397.3 (66%) | 0.0 (0%) | 13.0 |
+| k5_16_interior_Y0402 | off | y | RUNNING | 281 | 1.00 | 10 | None | None | None | None | 0/0/0 | 0 | None | 85.9 (31%) | 0 (0%) | 0.0 (0%) | 195.3 |
 | k5_16_interior_Y0865 | smoke | y | RUNNING | 546 | - | 22 | None | None | None | None | 6/4/0 | 0 | None | 319.6 (59%) | 0 (0%) | 89.0 (16%) | 137.0 |
 
-**flag-off equivalence** (k5_11_interior_Y0672, pad g1, no inherit): pre-A220 code ALIVE in 602 s (63 nodes) vs this code RUNNING in 46 s (30 nodes) -- node list and verdicts DIFFER.
-  first difference: length 72 vs 30
+**flag-off equivalence** (k5_11_interior_Y0672, pad g1, no inherit): pre-A220 code ALIVE in 602 s (63 nodes) vs this code ALIVE in 601 s (61 nodes) -- node list and verdicts DIFFER.
+  first difference: R.3.1.2.p2.p2:INTERNAL:None vs R.3.1.2.p2.p2:ALIVE:None
