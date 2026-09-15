@@ -1,0 +1,75 @@
+{
+ "nid": "k5_11_interior_Y1141_D04",
+ "runs": {
+  "zero_page": {
+   "pad": "zero",
+   "mode": "page",
+   "source": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1141_D04_zero_s0.json",
+   "verdict": "DEAD",
+   "leaf": "stage 0: H-CONSISTENCY: no piece of H is compatible with any option of a forced slot (mutual clip {'MC:TR(0,0)': 512}; 512 units, 25 options) [pad 0: s0-only, WINDOW-PENDING]",
+   "n_nodes": 0,
+   "seconds": 26.8,
+   "window_pending": true,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)",
+   "stage0_kill": true,
+   "nodes": []
+  }
+ },
+ "cls": "k5_11",
+ "record": "tree_k5_11_interior_G1_D2.jsonl row (synthesised: box + the family's pins)",
+ "tree": "k5_11_interior_G1_D2",
+ "level": "2",
+ "stage0": {
+  "zero": {
+   "verdict": "DEAD",
+   "leaf": "H-CONSISTENCY: no piece of H is compatible with any option of a forced slot (mutual clip {'MC:TR(0,0)': 512}; 512 units, 25 options) [pad 0: s0-only, WINDOW-PENDING]",
+   "seconds": 26.8,
+   "source": "A209 csp209 (A203's Stage0 + CSP on the record)",
+   "file": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1141_D04_zero_s0.json",
+   "cached": false,
+   "kills": {
+    "H-clip": 0,
+    "P": 6936,
+    "W": 709,
+    "C": 865,
+    "M": 4724,
+    "L": 14,
+    "R": 1522,
+    "X": 2
+   },
+   "caps": {},
+   "forced_H": [],
+   "n_units_alive": 0,
+   "n_units": 512,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)"
+  },
+  "g1": {
+   "verdict": "DEAD",
+   "leaf": "H-CONSISTENCY: no piece of H is compatible with any option of a forced slot (mutual clip {'MC:TR(0,0)': 512}; 512 units, 25 options)",
+   "seconds": 29.5,
+   "source": "A209 csp209 (A203's Stage0 + CSP on the record)",
+   "file": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1141_D04_g1_s0.json",
+   "cached": false,
+   "kills": {
+    "H-clip": 0,
+    "P": 6966,
+    "W": 709,
+    "C": 865,
+    "M": 4765,
+    "L": 14,
+    "R": 1466,
+    "X": 7
+   },
+   "caps": {},
+   "forced_H": [],
+   "n_units_alive": 0,
+   "n_units": 512,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)"
+  }
+ },
+ "verdicts": {
+  "zero": "DEAD (stage 0)",
+  "g1": "DEAD (stage 0)"
+ },
+ "stage_reached": "0"
+}
