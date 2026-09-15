@@ -14,3 +14,55 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0882_interior_G1'
 10:44:31 [w3] c0_Y0882  rc=1 3s
+01:23:48 [w3] start c0_Y0882 wall 1800 (lab 3, free 13843 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0882 at the zero pad: ALIVE in 22861 ms; kills {'H-clip': 0, 'P': 4496, 'W': 1178, 'C': 820, 'M': 2976, 'L': 1, 'R': 3951, 'X': 1212}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0882 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0882_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.358, 2.498, 1.38, 1.519, 28.072, 41.112]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (37.9 s, 1 rounds; t=38.0)
+   node R.1        d1 BR(0,1)<-[13]: DEAD by REACH r1 (11.8 s, 1 rounds; t=49.9)
+   node R.2        d1 BR(0,1)<-[18]: INTERNAL (21.7 s, 1 rounds; t=71.6)
+   node R.2.1      d2 TR(0,1)<-[19]: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=73.1)
+   node R.2.2      d2 TR(0,1)<-[22]: INTERNAL (33.7 s, 1 rounds; t=106.8)
+   node R.2.2.1    d3 TR(1,0)<-[8]: INTERNAL (27.9 s, 1 rounds; t=134.7)
+   node R.2.2.1r1  d3 root<-None: DEAD by EmptyBox r1 (25.6 s, 1 rounds; t=160.3)
+   node R.2.2.2    d3 TR(1,0)<-[9]: INTERNAL (48.1 s, 1 rounds; t=208.4)
+   node R.2.2.2.1  d4 BL(0,2)<-[3]: DEAD by EmptyBox r1 (19.8 s, 1 rounds; t=228.3)
+   node R.2.2.2.2  d4 BL(0,2)<-[4]: DEAD by S-CLIP r1 (13.3 s, 1 rounds; t=241.7)
+   node R.2.2.2.3  d4 BL(0,2)<-[8]: DEAD by EmptyBox r1 (7.0 s, 1 rounds; t=248.8)
+   node R.2.2.3    d3 TR(1,0)<-[14]: DEAD by FC r1 (34.6 s, 1 rounds; t=283.4)
+   node R.2.3      d2 TR(0,1)<-[23]: INTERNAL (24.0 s, 1 rounds; t=307.4)
+   node R.2.3.1    d3 BL(0,2)<-[3, 4]: DEAD by EmptyBox r1 (3.6 s, 1 rounds; t=311.1)
+   node R.2.3.2    d3 BL(0,2)<-[3, 9]: INTERNAL (47.4 s, 1 rounds; t=358.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 11 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.3.2    d3: DEAD by NOROOM -- no-room at R.2.3.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.3.3    d3 BL(0,2)<-[4, 8]: INTERNAL (37.1 s, 1 rounds; t=407.0)
+   node R.2.3.3    d3: DEAD by CC -- rule CC at R.2.3.3 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F3 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior po
+   node R.2.3.4    d3 BL(0,2)<-[4, 9]: DEAD by REACH r1 (36.5 s, 1 rounds; t=444.1)
+   node R.2.3.5    d3 BL(0,2)<-[8, 9]: DEAD by EmptyBox r1 (9.6 s, 1 rounds; t=453.8)
+   node R.3        d1 BR(0,1)<-[22]: INTERNAL (23.9 s, 1 rounds; t=477.7)
+   node R.3.1      d2 TR(0,1)<-[13]: INTERNAL (19.6 s, 1 rounds; t=497.4)
+   node R.3.1.1    d3 TL(0,0)<-[3, 9]: INTERNAL (58.0 s, 1 rounds; t=555.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 15 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.1.1    d3: DEAD by NOROOM -- no-room at R.3.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.1.2    d3 TL(0,0)<-[3, 14]: DEAD by FC r1 (37.9 s, 1 rounds; t=609.9)
+   node R.3.1.3    d3 TL(0,0)<-[4, 8]: DEAD by EmptyBox r1 (20.3 s, 1 rounds; t=630.3)
+   node R.3.1.4    d3 TL(0,0)<-[4, 9]: INTERNAL (44.5 s, 1 rounds; t=674.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 18 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.1.4    d3: DEAD by NOROOM -- no-room at R.3.1.4 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.1.5    d3 TL(0,0)<-[4, 14]: DEAD by FC r1 (27.6 s, 1 rounds; t=720.7)
+   node R.3.1.6    d3 TL(0,0)<-[8, 9]: DEAD by EmptyBox r1 (6.6 s, 1 rounds; t=727.4)
+   node R.3.1.7    d3 TL(0,0)<-[8, 14]: DEAD by EmptyBox r1 (2.5 s, 1 rounds; t=729.9)
+   node R.3.2      d2 TR(0,1)<-[14]: INTERNAL (15.3 s, 1 rounds; t=745.4)
+   node R.3.2.1    d3 TL(0,0)<-[3, 8]: DEAD by FC r1 (46.8 s, 1 rounds; t=792.3)
+   node R.3.2.2    d3 TL(0,0)<-[4, 8]: INTERNAL (49.6 s, 1 rounds; t=841.9)
+   no-room (k=10, m=1): DEAD by NOROOM in 19 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.2.2    d3: DEAD by NOROOM -- no-room at R.3.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.2.3    d3 TL(0,0)<-[8, 9]: INTERNAL (23.5 s, 1 rounds; t=884.7)
+   no-room (k=10, m=1): DEAD by NOROOM in 18 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.2.3    d3: DEAD by NOROOM -- no-room at R.3.2.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.3      d2 TR(0,1)<-[18]: INTERNAL (20.5 s, 1 rounds; t=923.5)
+   node R.3.3.1    d3 TL(0,0)<-[3, 8]: INTERNAL (48.6 s, 1 rounds; t=972.3)
+   no-room (k=10, m=1): DEAD by EmptyBox in 3 s (0 pockets; EmptyBox(P4): every pose is impossible -- the case is dead by the pair leaf)
+   node R.3.3.1    d3: DEAD by EmptyBox -- no-room at R.3.3.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(P4): every pose is impossible -- the case is dead by the pair leaf
+   node R.3.3.2    d3 TL(0,0)<-[3, 9]: INTERNAL (62.8 s, 1 rounds; t=1039.4)
