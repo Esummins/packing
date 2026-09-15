@@ -16,3 +16,27 @@ KeyError: 'c0_Y0346_interior_G1'
 10:41:25 [w3] c0_Y0346  rc=1 2s
 19:04:29 [w1] start c0_Y0346 wall 1800 (lab 5, free 13537 MB)
    priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0346 at the zero pad: ALIVE in 29134 ms; kills {'H-clip': 0, 'P': 3912, 'W': 2731, 'C': 1118, 'M': 4474, 'L': 7, 'R': 3155, 'X': 622}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0346 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0346_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [1.519, 1.659, 2.078, 2.218, 28.072, 41.112]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (26.5 s, 1 rounds; t=26.6)
+   node R.1        d1 BL(0,2)<-[3]: INTERNAL (18.9 s, 1 rounds; t=45.6)
+   node R.1r1      d1 root<-None: INTERNAL (42.4 s, 1 rounds; t=88.0)
+   node R.1.1      d2 TR(1,0)<-[17]: INTERNAL (69.3 s, 1 rounds; t=157.4)
+   node R.1.1r1    d2 root<-None: DEAD by EmptyBox r1 (45.0 s, 1 rounds; t=202.4)
+   node R.1.2      d2 TR(1,0)<-[18]: INTERNAL (62.1 s, 1 rounds; t=264.6)
+   node R.1.2.1    d3 BR(0,1)<-[11]: DEAD by EmptyBox r1 (14.1 s, 1 rounds; t=278.9)
+   node R.1.2.2    d3 BR(0,1)<-[16]: INTERNAL (51.6 s, 1 rounds; t=330.6)
+   no-room (k=10, m=1): UNDECIDED in 122 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.2.2: split F1 at BL(1,1) (meeting fraction 0.129993)
+   node R.1.2.2.1  d4 BL(1,1)<-None: INTERNAL (59.9 s, 1 rounds; t=513.8)
+   no-room (k=10, m=1): UNDECIDED in 122 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.2.2.1: cut F1 on t at 53.1301 (midpoint)
+   node R.1.2.2.1.1 d5 F1<-['t<=53.1301']: DEAD by EmptyBox r1 (9.9 s, 1 rounds; t=648.0)
+   node R.1.2.2.1.2 d5 F1<-['t>=53.1301']: DEAD by EmptyBox r1 (10.3 s, 1 rounds; t=658.4)
+   node R.1.2.2.2  d4 BL(1,1)<-None: INTERNAL (52.7 s, 1 rounds; t=711.1)
+   no-room (k=10, m=1): UNDECIDED in 122 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.2.2.2: cut F1 on t at 53.1301 (midpoint)
+   node R.1.2.2.2.1 d5 F1<-['t<=53.1301']: INTERNAL (69.0 s, 1 rounds; t=904.6)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.2.2.2.1: cut F2 on t at 53.1301 (midpoint)
