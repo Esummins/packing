@@ -172,12 +172,22 @@ is benchmarked on Y0402 g1 and on the closed page Y0865 g1 in isolated cert dirs
 
 ## 7. [C] Obligations and levers
 
-1. **[C] The polygon strike.**  The strike tests the wedge's bounding RECTANGLE; a separating-axis test against the
-   polygon itself (axes: the polygon's edge normals + the square's, as A161 does for the rectangle) recovers the
-   taper — it matters exactly at the foot, where Y0865's `H` enters.
+1. **[T] The polygon strike — DISCHARGED (A230, `attempts/A230-eps-branch/code/eps230.py` `misses_poly_t`).**  The
+   strike now tests the wedge POLYGON as well as its bounding rectangle: axes = the polygon's edge normals (support
+   radius of the square in an unnormalised direction `w = (a, b)` bounded by interval arithmetic in `(cos, sin)` over
+   the tilt bin, the same relaxation as EPS-4) + the square's own two normals at radius `½`, both over the Minkowski
+   difference `D = {box corner} − {polygon vertex}` (its extreme points).  Sound a fortiori: wedge ⊆ polygon ⊆ bbox.
+   Flag `A230_TAPER` (on with the rule); the count of strikes it adds is in `attempts/A230-eps-branch/results/bench230.md`.
 2. **[C] The tilt-coupled wedge.**  EPS-4 relaxes `(cos, sin)` to a box; the exact union over a bin is bounded by a
    circular arc, not a line — negligible at piece bins.
-3. **[C] Rule NS at the wedge.**  Implemented as a record, not as a branch: the split of the survivor on
-   "meets target T" needs A206's NS machinery to accept a rectangle target instead of a slot.
+3. **[T] Rule NS at the wedge — DISCHARGED (A230, `attempts/A230-eps-branch/code/epsns230.py`, notes/eps230.md s.3).**
+   Where exactly ONE named role `M` survives a candidate and the anonymous clause is CERTIFIED empty, `M` *is*
+   Theorem FC's second meeter, so "`M` meets `W`" / "`M` misses `W`" (`W` = the union of the hull-box targets `M`
+   can still reach) is exhaustive: the MISSES child is DEAD at once by FC+EPS (certificate = the target list + the
+   struck roles' miss certificates; no cascade is run), and the MEETS child carries `M`'s pieces clipped exactly to
+   the poses reaching `W` — a piece separated from every target is dropped, the rest are intersected with `W`'s
+   bounding box dilated by `h = (cos + sin)/2` over their own bin (EPS-6).  Branch kinds `epsns-meets` /
+   `epsns-misses` in `tree211.py`; depth-cap accounting as Rule NS's, and the split is capped per `(slot, role)`
+   along a path (`A230_WEDGE_CAP`, default 1) because it otherwise recurs on the same pair at every depth.
 4. **[T] n-general.**  Nothing uses `n = 11`: EPS-1…6 are about one cell, one near-simple square and its neighbours;
    Rule EPS consumes only Theorem FC (any forced cell of any class) and the node's pose sets.
