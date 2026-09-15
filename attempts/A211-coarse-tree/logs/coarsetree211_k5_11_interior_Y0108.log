@@ -172,3 +172,25 @@
    node R0+.3.2.1  d3 BR(0,1)<-[16]: INTERNAL (4.0 s, 1 rounds; t=787.0)
    node R0+.3.2.1.1 d4 TR(0,0)<-[19]: DEAD by EmptyBox r1 (2.3 s, 1 rounds; t=789.8)
    node R0+.3.2.1.2 d4 TR(0,0)<-[24]: INTERNAL (5.3 s, 1 rounds; t=795.6)
+   no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma POCKET at R0+.3.2.1.2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.2.1.2.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=917.4)
+   node R0+.3.2.2  d3 BR(0,1)<-[17]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=918.1)
+   node R0+.3.2.3  d3 BR(0,1)<-[21]: INTERNAL (2.7 s, 1 rounds; t=921.3)
+   node R0+.3.2.3r1 d3 root<-None: DEAD by FC r1 (2.1 s, 1 rounds; t=923.8)
+   node R0+.3.2.4  d3 BR(0,1)<-[22]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=925.3)
+   node R0+.3.3    d2 TL(1,0)<-[19]: INTERNAL (1.8 s, 1 rounds; t=927.6)
+   node R0+.3.3.1  d3 BR(0,1)<-[16]: DEAD by EmptyBox r1 (2.7 s, 1 rounds; t=930.7)
+   node R0+.3.3.2  d3 BR(0,1)<-[21]: INTERNAL (0.9 s, 1 rounds; t=932.1)
+   no-room (k=9, m=2): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R0+.3.3.2  d3: DEAD by EmptyBox -- no-room at R0+.3.3.2 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R0+.3.3.3  d3 BR(0,1)<-[22]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=933.5)
+   start R0+          => DEAD (57 nodes; t = 934 s of 1800.0)
+   => DEAD (g1_page) in 934.0 s: 1 start runs, 57 nodes, depth 5, 3 CC kills, 0 exact leaf cascades, 0 NS splits, 8 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 33 dead / 0 alive leaves
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': False, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 17.4s; R0+.1 d1 INTERNAL 0.9s; R0+.1.1 d2 INTERNAL 2.4s; R0+.1.1.1 d3 DEAD S-CLIP 2.6s; R0+.1.1.2 d3 INTERNAL 3.4s; R0+.1.1.2.p1 d4 DEAD CC 6.3s; R0+.1.2 d2 INTERNAL 1.8s; R0+.1.2.1 d3 DEAD EmptyBox 0.6s; R0+.1.2.2 d3 INTERNAL 3.9s; R0+.1.2.2.p1 d4 DEAD EmptyBox 0.4s; R0+.1.2.3 d3 DEAD EmptyBox 0.4s; R0+.1.2.4 d3 DEAD NOROOM 1.9s; R0+.1.2.5 d3 INTERNAL 1.8s; R0+.1.2.5.p1 d4 DEAD EmptyBox 1.6s; R0+.1.2.5.p2 d4 DEAD EmptyBox 0.2s; R0+.1.3 d2 INTERNAL 3.2s; R0+.1.3.p1 d3 INTERNAL 5.2s; R0+.1.3.p1.p1 d4 DEAD CC 6.6s; R0+.1.3.p2 d3 INTERNAL 4.4s; R0+.1.3.p2r1 d3 DEAD CC 6.2s; R0+.1.4 d2 INTERNAL 2.7s; R0+.1.4r1 d2 DEAD NOROOM 2.9s; R0+.1.5 d2 INTERNAL 2.7s; R0+.1.5.p1 d3 DEAD S-CLIP 1.9s; R0+.1.5.p2 d3 DEAD S-CLIP 1.1s; R0+.1.5.p3 d3 DEAD EmptyBox 0.4s; R0+.2 d1 INTERNAL 0.8s; R0+.2.1 d2 DEAD EmptyBox 0.3s; R0+.2.2 d2 DEAD FC 0.7s; R0+.2.3 d2 DEAD EmptyBox 0.1s; R0+.2.4 d2 INTERNAL 3.6s; R0+.2.4.1 d3 DEAD S-CLIP 3.4s; R0+.2.4.2 d3 DEAD EmptyBox 0.8s; R0+.3 d1 INTERNAL 2.2s; R0+.3.1 d2 INTERNAL 2.2s; R0+.3.1.1 d3 INTERNAL 1.4s; R0+.3.1.1.1 d4 DEAD EmptyBox 1.7s; R0+.3.1.1.2 d4 DEAD EmptyBox 1.2s; R0+.3.1.2 d3 INTERNAL 1.6s; R0+.3.1.2.1 d4 INTERNAL 1.7s; R0+.3.1.2.1.p1 d5 DEAD EmptyBox 1.9s; R0+.3.1.2.2 d4 DEAD EmptyBox 0.1s; R0+.3.1.2.3 d4 DEAD NOROOM 1.4s; R0+.3.1.2.4 d4 DEAD EmptyBox 0.8s; R0+.3.2 d2 INTERNAL 2.6s; R0+.3.2.1 d3 INTERNAL 4.0s; R0+.3.2.1.1 d4 DEAD EmptyBox 2.3s; R0+.3.2.1.2 d4 INTERNAL 5.3s; R0+.3.2.1.2.p1 d5 DEAD EmptyBox 0.8s; R0+.3.2.2 d3 DEAD EmptyBox 0.1s; R0+.3.2.3 d3 INTERNAL 2.7s; R0+.3.2.3r1 d3 DEAD FC 2.1s; R0+.3.2.4 d3 DEAD EmptyBox 1.0s; R0+.3.3 d2 INTERNAL 1.8s; R0+.3.3.1 d3 DEAD EmptyBox 2.7s; R0+.3.3.2 d3 DEAD EmptyBox 0.9s; R0+.3.3.3 d3 DEAD EmptyBox 0.1s
+== k5_11_interior_Y0108: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 5791, 'misses': 1903, 'entries': 1903}; clip {'hits': 226589, 'misses': 1485377, 'entries': 85377}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 7694, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 116}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 6181, 'obs_misses': 1709, 'build_hits': 0, 'build_misses': 20, 'bisect_hits': 0, 'bisect_misses': 20, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 1706, 'build_entries': 24, 'bisect_entries': 20, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
