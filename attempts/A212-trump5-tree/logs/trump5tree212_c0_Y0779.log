@@ -14,3 +14,25 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0779_interior_G1'
 10:43:15 [w3] c0_Y0779  rc=1 2s
+23:04:28 [w2] start c0_Y0779 wall 1800 (lab 8, free 10496 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0779 at the zero pad: ALIVE in 20171 ms; kills {'H-clip': 0, 'P': 4400, 'W': 1174, 'C': 786, 'M': 3113, 'L': 0, 'R': 3792, 'X': 1014}; CSP units 24 -> 24 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0779 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0779_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.323, 2.358, 1.345, 1.38, 41.112, 53.13]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (45.2 s, 1 rounds; t=45.2)
+   node R.1        d1 BR(0,1)<-[18]: INTERNAL (23.1 s, 1 rounds; t=68.4)
+   node R.1.1      d2 TR(0,1)<-[14]: DEAD by FC r1 (20.8 s, 1 rounds; t=89.3)
+   node R.1.2      d2 TR(0,1)<-[19]: DEAD by EmptyBox r1 (6.0 s, 1 rounds; t=95.4)
+   node R.1.3      d2 TR(0,1)<-[22]: INTERNAL (32.1 s, 1 rounds; t=127.5)
+   node R.1.3r1    d2 root<-None: DEAD by REACH r1 (52.8 s, 1 rounds; t=180.3)
+   node R.1.4      d2 TR(0,1)<-[23]: INTERNAL (21.7 s, 1 rounds; t=202.1)
+   node R.1.4r1    d2 root<-None: DEAD by REACH r1 (44.2 s, 1 rounds; t=246.3)
+   node R.2        d1 BR(0,1)<-[22]: INTERNAL (20.2 s, 1 rounds; t=266.5)
+   node R.2r1      d1 root<-None: INTERNAL (24.3 s, 1 rounds; t=290.9)
+   node R.2.1      d2 TL(0,0)<-[3, 8]: INTERNAL (78.9 s, 1 rounds; t=370.0)
+   no-room (k=10, m=1): UNDECIDED in 133 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.1: split F1 at TR(1,0) (meeting fraction 0.183359)
+   node R.2.1.1    d3 TR(1,0)<-None: INTERNAL (44.4 s, 1 rounds; t=556.9)
+   no-room (k=10, m=1): UNDECIDED in 121 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.1.1: split F3 at BL(1,1) (meeting fraction 0.293725)
+   node R.2.1.1.1  d4 BL(1,1)<-None: INTERNAL (39.6 s, 1 rounds; t=720.9)
