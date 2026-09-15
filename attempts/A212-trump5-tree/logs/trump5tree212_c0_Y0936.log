@@ -14,3 +14,30 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0936_interior_G1'
 10:44:44 [w3] c0_Y0936  rc=1 3s
+01:56:28 [w3] start c0_Y0936 wall 1800 (lab 2, free 14043 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0936 at the zero pad: ALIVE in 21440 ms; kills {'H-clip': 0, 'P': 5524, 'W': 1357, 'C': 1122, 'M': 4458, 'L': 7, 'R': 3056, 'X': 861}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0936 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0936_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.358, 2.498, 2.358, 2.498, 0.0, 14.25]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (47.4 s, 1 rounds; t=47.5)
+   node R.1        d1 BR(0,1)<-[16]: INTERNAL (11.2 s, 1 rounds; t=58.7)
+   node R.1.1      d2 TR(1,0)<-[8]: INTERNAL (18.7 s, 1 rounds; t=77.4)
+   node R.1.1.1    d3 TL(0,0)<-[3]: DEAD by EmptyBox r1 (25.6 s, 1 rounds; t=103.2)
+   node R.1.1.2    d3 TL(0,0)<-[4]: INTERNAL (51.3 s, 1 rounds; t=154.5)
+   no-room (k=9, m=2): UNDECIDED in 150 s (3 pockets; residue too big to pocket: 3 pocket(s) of total area 0.922 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.1.2: 3 pockets (k=9, m=2)
+   node R.1.1.2.p1 d4 pocket<-[0]: INTERNAL (76.5 s, 1 rounds; t=382.1)
+   node R.1.1.2.p1 d4: DEAD by CC -- rule CC at R.1.1.2.p1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F3 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior
+   node R.1.1.2.p2 d4 pocket<-[1]: INTERNAL (56.1 s, 1 rounds; t=443.7)
+   no-room (k=10, m=1): UNDECIDED in 122 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.2.p2: split F4 at TR(0,1) (meeting fraction 0.167351)
+   node R.1.1.2.p2.1 d5 TR(0,1)<-None: INTERNAL (39.3 s, 1 rounds; t=609.1)
+   no-room (k=10, m=1): UNDECIDED in 120 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.1.2.p2.1: split F4 at BL(0,2) (meeting fraction 0.354321)
+   node R.1.1.2.p2.1.1 d6 BL(0,2)<-None: DEAD by REACH r1 (32.9 s, 1 rounds; t=767.0)
+   node R.1.1.2.p2.1.2 d6 BL(0,2)<-None: INTERNAL (30.1 s, 1 rounds; t=797.1)
+   no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.1.2.p2.1.2: cut F2 on t at 53.1301 (midpoint)
+   node R.1.1.2.p2.1.2.1 d7 F2<-['t<=53.1301']: DEAD by EmptyBox r1 (13.5 s, 1 rounds; t=932.2)
+   node R.1.1.2.p2.1.2.2 d7 F2<-['t>=53.1301']: DEAD by EmptyBox r1 (13.0 s, 1 rounds; t=945.2)
+   node R.1.1.2.p2.2 d5 TR(0,1)<-None: INTERNAL (38.1 s, 1 rounds; t=983.3)
