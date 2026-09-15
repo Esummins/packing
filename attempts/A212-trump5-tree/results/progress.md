@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 19:54:54
+# A212 progress -- 2026-09-14 20:08:47
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (61 nodes)
+## A60's alive trump5 frontier (deepest first) (62 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -87,11 +87,12 @@ CPU-h in this block: 5.66
 | c0_Y0346 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 4} | 18 / 9 | 1942 |
 | c0_Y0406 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 1} | 1 / 0 | 6 |
 | c0_Y0400 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 5, 'REACH': 2, 'COUNT': 2, 'NOROOM': 4, 'FC': 1} | 23 / 5 | 1934 |
+| c0_Y0428 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 3, 'REACH': 3} | 17 / 5 | 1834 |
 
-CPU-h in this block: 14.79
+CPU-h in this block: 15.30
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 37, 'DEAD': 37}; gallery 13 / 13 run (5.66 CPU-h); frontier 61 run of 101 (75 remaining; 14.79 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 75: 9.6 CPU-h; spent 20.5; cap 150
+* verdicts so far: {'ALIVE': 38, 'DEAD': 37}; gallery 13 / 13 run (5.66 CPU-h); frontier 62 run of 101 (74 remaining; 15.30 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 74: 9.5 CPU-h; spent 21.0; cap 150
 

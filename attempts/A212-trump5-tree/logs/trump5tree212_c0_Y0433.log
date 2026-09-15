@@ -14,3 +14,20 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0433_interior_G1'
 10:41:50 [w3] c0_Y0433  rc=1 2s
+19:54:57 [w3] start c0_Y0433 wall 1800 (lab 9, free 8623 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0433 at the zero pad: ALIVE in 39031 ms; kills {'H-clip': 0, 'P': 4946, 'W': 2859, 'C': 1096, 'M': 5439, 'L': 7, 'R': 3580, 'X': 1096}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0433 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0433_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [1.659, 1.799, 1.939, 2.078, 14.25, 28.072]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (34.3 s, 1 rounds; t=34.4)
+   node R.1        d1 BL(1,1)<-[3]: INTERNAL (18.2 s, 1 rounds; t=52.8)
+   node R.1r1      d1 root<-None: INTERNAL (62.2 s, 1 rounds; t=114.9)
+   node R.1.1      d2 TR(1,0)<-[17]: INTERNAL (39.7 s, 1 rounds; t=154.8)
+   node R.1.1r1    d2 root<-None: DEAD by EmptyBox r1 (22.6 s, 1 rounds; t=177.4)
+   node R.1.2      d2 TR(1,0)<-[18]: INTERNAL (39.2 s, 1 rounds; t=216.7)
+   node R.1.2.1    d3 BR(0,1)<-[16]: INTERNAL (74.7 s, 1 rounds; t=291.9)
+   no-room (k=10, m=1): UNDECIDED in 132 s (2 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.2.1: split H at BL(0,2) (meeting fraction 0.099417)
+   node R.1.2.1.1  d4 BL(0,2)<-None: INTERNAL (151.8 s, 1 rounds; t=578.6)
+   no-room (k=10, m=1): UNDECIDED in 148 s (2 pockets; pocket LANE sum None does not beat 1)
+   Lemma ROLE-SPLIT at R.1.2.1.1: cut F1 on t at 53.1301 (midpoint)
