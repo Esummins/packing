@@ -11,7 +11,12 @@ slot has two named meeters on a fresh table) the leaf rules in order, cheapest f
   the sharp round -- after which the loop re-reads the table: new branches are coarse children again.
 A leaf is DEAD iff one rule proves it; a node is DEAD iff every branch is (Lemma CT); undecided = ALIVE."""
 import os
+import sys
 import time
+
+_A224 = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "A224-snap-rule", "code"))
+if _A224 not in sys.path:
+    sys.path.insert(0, _A224)
 
 import poly204 as P
 import tree205b as TB
@@ -21,6 +26,7 @@ import tree209 as N9
 import leaves211 as L11
 import inherit211 as INH
 import rsplit211 as RS
+import snap224 as SNAP                    # A224 Rule SNAP (flag A224_SNAP=1, default OFF: with it off nothing here runs)
 
 EXACT_ROUNDS = 3
 NOROOM_CAP = 120.0                     # seconds for A189's no-room at a leaf (Y0202 test: 300 s UNDECIDED x 3 ate half the wall)
@@ -57,6 +63,8 @@ class Tree211(N9.Tree209):
         self._ns = self._rs = None
         self.ef_runs, self.ef_kills, self.ef_timeouts, self.ef_seconds = 0, 0, 0, 0.0      # A220 exact-first
         self.nr_short, self.nr_state, self.pocket_terminal = 0, {}, set()                  # A220 addendum: the short no-room cap
+        self.snap_runs, self.snap_kills, self.snap_handoffs, self.snap_partial = 0, 0, 0, 0   # A224 Rule SNAP
+        self.snap_cands, self.snap_seconds, self.snap_first, self.snap_rows = 0, 0.0, None, []
         self.dead_paths = dead_paths or {}          # Lemma INHERIT: path -> the certificate that closed it
         self.pathof = {self.root_label: tuple(path0)}
         self.n_inherited = 0
@@ -142,6 +150,44 @@ class Tree211(N9.Tree209):
         NB.Tree206.leaf_alive(self, why)
         self.log("   node %-10s: ALIVE [%s]" % (self.nodes[-1]["label"], why[:150]))
 
+    # ------------------------------------------------------------------ A224: Rule SNAP (flag A224_SNAP=1, default OFF)
+    def snap_try(self, depth, label, where):
+        """Rule SNAP (attempts/A224-snap-rule, docs/proofs/snap_rule.md): a role whose box sits on a simple slot pose
+        whose cell NO other square can meet teleports into the slot (Lemma SWAP / `teleport_of_swap`), so the packing
+        lies in the extension stratum -- DEAD when that stratum is a FULL scoreboard row.  Cost with the flag off: nil;
+        with it on: the near test (floats, roles x slots) and, only when it fires, one exact miss test per other role."""
+        if not SNAP.ON or self.pg.dead or not self.nodes:
+            return "OK"
+        t0 = time.time()
+        r = L11.snap_eval(self.pg, label, log=self.log)
+        if r is None:
+            return "OK"
+        r["where"], r["depth"], r["seconds"] = where, depth, round(time.time() - t0, 3)
+        self.snap_runs += 1
+        self.snap_seconds += r["seconds"]
+        self.snap_cands += r.get("n_cands") or 0
+        self.snap_partial += 1 if r.get("partial") else 0
+        self.nodes[-1].setdefault("snap", r)
+        if r.get("n_cands"):
+            self.snap_rows.append(dict(label=label, where=where, verdict=r.get("verdict"), kind=r.get("kind"),
+                                       n_cands=r.get("n_cands"), n_anon=r.get("n_anon"), seconds=r["seconds"],
+                                       cands=r.get("cands"), target=r.get("target"),
+                                       snapped=[dict(role=c["role"], slot=c["slot"]) for c in (r.get("snapped") or [])]))
+        self.pg.T.test("SNAP", label=label, where=where, verdict=r.get("verdict"), rule=r.get("kind"),
+                       n_cands=r.get("n_cands"), n_anon=r.get("n_anon"), seconds=r["seconds"],
+                       stratum=(r.get("target") or {}).get("stratum"))
+        if r.get("verdict") == "DEAD":
+            self.snap_kills += 1
+            if self.snap_first is None:
+                self.snap_first = round(self.pg.T.now(), 1)
+            self.kill(label, depth, r["kind"], r["leaf"], snap=r, verifier=r["verifier"])
+            return "DEAD"
+        if r.get("verdict") == "HANDOFF":                      # snapped into a stratum that is NOT closed: hand off
+            self.snap_handoffs += 1
+            self.alive(r["leaf"])
+            return "ALIVE"
+        return "OK"
+
     # ------------------------------------------------------------------ A220: ONE budgeted exact cascade round, early
     def anc_noroom(self):
         """the nearest ANCESTOR on the live context stack whose no-room ran (A220 addendum)."""
@@ -187,6 +233,9 @@ class Tree211(N9.Tree209):
         if pg.T.out_of_time():
             self.alive("undecided (wall) at the fully named leaf before the leaf rules")
             return "ALIVE"
+        s = self.snap_try(depth, label, "leaf")                                    # (0) A224 Rule SNAP, the FIRST rule
+        if s != "OK":
+            return s
         t0 = time.time()                                                          # (a) rule CC
         rows = L11.cc_rows(pg, label)
         node["cc"] = dict(n_rows=len(rows), seconds=round(time.time() - t0, 3), rows=[{k: v for k, v in r.items() if k != "band"} for r in rows][:8])
@@ -336,6 +385,8 @@ class Tree211(N9.Tree209):
     def _expand(self, depth, label):
         pg = self.pg
         ns = rs = None
+        if self.snap_try(depth, label, "internal") != "OK":                        # A224: cheap, after the coarse round
+            return
         while True:
             ch = TB.candidates(pg)
             n_stale = 0
@@ -436,5 +487,8 @@ class Tree211(N9.Tree209):
         out.update(cc_kills=self.cc_kills, exact_rounds=self.exact_rounds, basin_kills=self.basin_kills, n_inherited=self.n_inherited,
                    rsplits=self.rsplits, rsplit_kills=self.rsplit_kills,
                    ef_runs=self.ef_runs, ef_kills=self.ef_kills, ef_timeouts=self.ef_timeouts,
-                   ef_seconds=round(self.ef_seconds, 1), nr_short=self.nr_short)
+                   ef_seconds=round(self.ef_seconds, 1), nr_short=self.nr_short,
+                   snap_runs=self.snap_runs, snap_kills=self.snap_kills, snap_handoffs=self.snap_handoffs,
+                   snap_partial=self.snap_partial, snap_cands=self.snap_cands, snap_first=self.snap_first,
+                   snap_seconds=round(self.snap_seconds, 2), snap_rows=self.snap_rows[-60:])
         return out

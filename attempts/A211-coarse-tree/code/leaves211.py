@@ -76,6 +76,21 @@ def live_node(pg, label):
                 alive_cells={p: sorted(int(c) for c in single.get(p, {})) for p in pg.slots}, snapshot=dict(roles=snap))
 
 
+def snap_eval(pg, label, log=None):
+    """A224 leaf rule (0), Rule SNAP -- the entry point beside cc_rows (the logic is attempts/A224-snap-rule/code/
+    snap224.py, which wraps A161 / A178 read-only).  Returns None when the flag A224_SNAP is off or the rule makes no
+    claim; otherwise a record with verdict DEAD (SNAP / SNAP-DIAG), HANDOFF, or None.  Unlike rule CC this does NOT
+    need a fresh option table: its hypothesis is the roles' own pose sets, not the anonymous rows."""
+    import snap224 as S224                                      # A224 (flag-gated; import is cheap and pure)
+    if not S224.ON:
+        return None
+    r = S224.evaluate(pg, label, log=log)
+    if r is not None:
+        pg.T.test("SNAP-ROWS", label=label, n_cands=r.get("n_cands"), n_anon=r.get("n_anon"),
+                  cands=r.get("cands"), verdict=r.get("verdict"))
+    return r
+
+
 def cc_rows(pg, label):
     if not pg.rounds or pg.rounds[-1].get("instantiated"):
         return []                                                # not a fresh table: no claim (Lemma CT's proviso)

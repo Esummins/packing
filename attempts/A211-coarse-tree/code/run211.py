@@ -39,6 +39,10 @@ VERIFIER = ("[C: closed-form / library clip trace + the leaf lemma (Lemma CORNER
             "then the exact A204/A205 cascade (nsub 4 / refine 2, lonely clip, sharp round); started from the MERGED state of every prior certificate "
             "(Lemma INHERIT: branches closed by A205 / A206 / A209 / A210 / A208 / A207 are FINAL and cited; the tree runs only the remaining start nodes, "
             "loaded from the recorded snapshot with the pieces padded outward); DEAD iff every branch DEAD (Lemma CT); no verifier clause")
+if N11.SNAP.ON:                                                   # A224: the flag is ON for this run -- say so in the clause
+    VERIFIER += ("  [A224 Rule SNAP is ON as leaf rule (0) and after the coarse round at internal nodes: a node killed by SNAP / "
+                 "SNAP-DIAG carries its OWN verifier clause (exact separating-axis miss certificates + Lemma SWAP / teleport + "
+                 "Theorem FC Step 2 + the target stratum's FULL scoreboard row); docs/proofs/snap_rule.md]")
 
 
 def belownormal():
@@ -154,6 +158,9 @@ def row_of(doc, key, cert):
                 n_nodes=d.get("n_nodes"), n_records=d.get("n_records"), max_depth=d.get("max_depth"), alive_leaves=d.get("alive_leaves"), dead_leaves=d.get("dead_leaves"),
                 ns_splits=d.get("ns_splits"), pocket_splits=d.get("pocket_splits"), cc_kills=d.get("cc_kills"), exact_rounds=d.get("exact_rounds"), basin_kills=d.get("basin_kills"),
                 rsplits=d.get("rsplits"), rsplit_kills=d.get("rsplit_kills"),
+                snap=dict(runs=d.get("snap_runs"), kills=d.get("snap_kills"), handoffs=d.get("snap_handoffs"),
+                          partial=d.get("snap_partial"), cands=d.get("snap_cands"), seconds=d.get("snap_seconds"),
+                          first_kill_t=d.get("snap_first"), rows=(d.get("snap_rows") or [])[-20:]),
                 noroom=[dict(label=r["label"], k=r["k"], verdict=r["verdict"], clip=r["clip"], seconds=r["seconds"]) for r in (d.get("noroom_runs") or [])],
                 inherited=d.get("inherited"), inherited_dead=d.get("inherited_dead"), inherited_alive=d.get("inherited_alive"), n_inherited=d.get("n_inherited"),
                 inherit_sources=[dict(camp=e.get("camp"), label=e.get("label"), rule=e.get("rule"), cert=e.get("cert"), ledger=e.get("ledger"))
@@ -207,7 +214,8 @@ def run_tree(doc, a, pad, cert, log=print):
                                                                       fallback=dict(kmode="pieces", n_grid=C11.NGRID_FALL))),
                                          exact=C11.EXACT, exact_rounds=N11.EXACT_ROUNDS, noroom_cap=N11.NOROOM_CAP, soft_all=N6.SOFT_ALL, max_frac=N6.MAX_FRAC,
                                          a220=dict(exact_first=N11.EXACT_FIRST, budget=N11.BUDGET, rounds=N11.EXACT_FIRST_ROUNDS, small_ext=N11.SMALL_EXT,
-                                                   noroom_inherit=N11.NOROOM_INHERIT, child_cap=N11.NOROOM_CHILD_CAP, shrink=N11.NR_SHRINK)))
+                                                   noroom_inherit=N11.NOROOM_INHERIT, child_cap=N11.NOROOM_CHILD_CAP, shrink=N11.NR_SHRINK),
+                                         a224=dict(snap=N11.SNAP.ON, eps=N11.SNAP.EPS_C, deg=N11.SNAP.DEG)))
     log("== %s page pad %s: start %s; basins %s; INHERIT %d dead branches (final) + %d start nodes %s; H %s; forced H %s; %d slots; free squares %d" % (
         a.nid, pad, start.get("file"), [(b["cell"], float(b["rc"])) for b in basins], len(rows), len(starts), [s["label"] for s in starts][:10],
         [round(v, 3) for v in base.roles[base.H]], sorted(base.forced_H), len(base.slots), base.n_free))
@@ -229,6 +237,9 @@ def run_tree(doc, a, pad, cert, log=print):
             agg["verdict"], key, agg["seconds"], len(starts), agg["n_nodes"], agg["max_depth"], agg["cc_kills"], agg["exact_rounds"], agg["ns_splits"],
             agg["pocket_splits"], agg["rsplits"], agg["rsplit_kills"], agg["n_inherited"], len(rows), agg["n_inherited"] - len(rows), agg["dead_leaves"],
             agg["alive_leaves"], " (WALL)" if agg["wall"] else ""))
+    log("   A224 Rule SNAP [%s]: %d evaluation(s), %d candidate(s), %d KILL(s), %d hand-off(s), %d partial (anonymous squares left), %.2f s; first kill at t = %s s" % (
+        "ON" if N11.SNAP.ON else "OFF (flag A224_SNAP)", agg.get("snap_runs") or 0, agg.get("snap_cands") or 0, agg.get("snap_kills") or 0,
+        agg.get("snap_handoffs") or 0, agg.get("snap_partial") or 0, agg.get("snap_seconds") or 0.0, agg.get("snap_first")))
     log("   A220: exact-first %d run(s), %d kill(s), %d timeout(s), %.1f s; short no-room cap %d time(s) [flags %s]" % (
         agg.get("ef_runs") or 0, agg.get("ef_kills") or 0, agg.get("ef_timeouts") or 0, agg.get("ef_seconds") or 0.0, agg.get("nr_short") or 0,
         d["cfg"]["a220"]))
@@ -241,7 +252,9 @@ def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, d
     """one coarse tree per start node (the shared wall); the pad is DEAD iff every start node's tree is DEAD."""
     agg = dict(verdict="DEAD", n_nodes=0, n_records=len(rows), max_depth=0, alive_leaves=0, dead_leaves=len(rows), ns_splits=0, pocket_splits=0,
                cc_kills=0, exact_rounds=0, basin_kills=0, rsplits=0, rsplit_kills=0, n_inherited=len(rows),
-               ef_runs=0, ef_kills=0, ef_timeouts=0, ef_seconds=0.0, nr_short=0, killing=list(
+               ef_runs=0, ef_kills=0, ef_timeouts=0, ef_seconds=0.0, nr_short=0,
+               snap_runs=0, snap_kills=0, snap_handoffs=0, snap_partial=0, snap_cands=0, snap_seconds=0.0,
+               snap_first=None, snap_rows=[], killing=list(
                    dict(label=r["label"], slot=r["slot"], rows=r["rows"], clip="INHERIT", round=None, seconds=0.0, cert=r["source_cert"]) for r in rows),
                undecided=[], noroom_runs=[], inherited={}, runs=[], root=None, basin_clips=[])
     done = []
@@ -284,8 +297,12 @@ def run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, d
             agg["root"] = dict(verdict=r0.get("verdict"), clip=r0.get("clip"), seconds=r0.get("seconds"), n_rounds=r0.get("n_rounds"), kept=r0.get("kept"),
                                forced_H=r0.get("forced_H"), role_slots=r0.get("role_slots"), alive_cells=r0.get("alive_cells"))
         for k in ("n_nodes", "n_records", "alive_leaves", "dead_leaves", "ns_splits", "pocket_splits", "cc_kills", "exact_rounds", "basin_kills",
-                  "rsplits", "rsplit_kills", "n_inherited", "ef_runs", "ef_kills", "ef_timeouts", "ef_seconds", "nr_short"):
+                  "rsplits", "rsplit_kills", "n_inherited", "ef_runs", "ef_kills", "ef_timeouts", "ef_seconds", "nr_short",
+                  "snap_runs", "snap_kills", "snap_handoffs", "snap_partial", "snap_cands", "snap_seconds"):
             agg[k] = agg.get(k, 0) + (out.get(k) or 0)
+        agg["snap_rows"] += out.get("snap_rows") or []                     # A224: the per-node SNAP records
+        if out.get("snap_first") is not None and agg.get("snap_first") is None:
+            agg["snap_first"] = out["snap_first"]
         agg["max_depth"] = max(agg["max_depth"], out.get("max_depth") or 0)
         agg["killing"] += out.get("killing") or []
         agg["undecided"] += out.get("undecided") or []

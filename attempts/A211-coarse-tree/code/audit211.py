@@ -130,6 +130,16 @@ def main():
         okg = inside(GX, GY, GT) & pin_free(GX, GY, GT, pins)
         NRM = (GX[okg], GY[okg], GT[okg])
         print("  no-room kill (k=%d, m=%d): a refutation needs %d mutually disjoint free squares beside the configuration (grid over the container, %d admissible)" % (len(pins) + len(R), m_free, m_free, len(NRM[0])))
+    SNAPR = None
+    if clip in ("SNAP", "SNAP-DIAG"):
+        # A224: the kill says NO square other than the snapped role(s) meets the snapped slot box(es) -- a refutation is
+        # a pairwise-disjoint admissible configuration in which some OTHER role DOES meet one of them.  (Anonymous
+        # squares cannot refute: SNAP only runs where none are left.)
+        sn = node.get("snap") or {}
+        SNAPR = [(c["role"], c["slot"]) for c in (sn.get("snapped") or []) if c.get("slot") in wbox]
+        print("  %s kill (%s -> stratum %s): a refutation needs a role OTHER than %s meeting one of %s" % (
+            clip, ", ".join("%s:=%s" % rs for rs in SNAPR), (sn.get("target") or {}).get("stratum"),
+            [r for r, _ in SNAPR], [q for _, q in SNAPR]))
     basins = [b for b in ((d.get("basins") or [])) if b.get("box")]
     if clip == "BASIN":
         print("  basin kill: a refutation needs a configuration whose roles all lie OUTSIDE every basin box %s (Lemma BASIN)" % [(b["cell"], b["box"]) for b in basins])
@@ -155,6 +165,17 @@ def main():
         for a_ in idx[:300]:
             if sat_disjoint(G[0][a_], G[1][a_], G[2][a_], G[0][idx], G[1][idx], G[2][idx]).any():
                 return True
+        return False
+
+    def snap_refutes(conf):
+        """some role that SNAP excluded meets one of the snapped slot boxes."""
+        snapped = {r for r, _ in SNAPR}
+        for (role, _X, _Y, _T), c in zip(R, conf):
+            if role in snapped:
+                continue
+            for _r, q in SNAPR:
+                if meets_box(np.array([c[0]]), np.array([c[1]]), np.array([c[2]]), wbox[q])[0]:
+                    return True
         return False
 
     def outside_basins(conf):
@@ -197,7 +218,7 @@ def main():
     for i_ in order:
         if rec(1, [(X0[i_], Y0[i_], T0[i_])]):
             n_conf += 1
-            ref = (clip not in ("COUNT", "S-PAIR")) and (q is None or fc_refutes(found[0])) and (NRM is None or noroom_refutes(found[0])) and (clip != "BASIN" or outside_basins(found[0]))
+            ref = (clip not in ("COUNT", "S-PAIR")) and (q is None or fc_refutes(found[0])) and (NRM is None or noroom_refutes(found[0])) and (clip != "BASIN" or outside_basins(found[0])) and (SNAPR is None or snap_refutes(found[0]))
             if ref:
                 n_ref += 1
                 if n_ref == 1:
