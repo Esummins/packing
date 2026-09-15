@@ -9132,3 +9132,35 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
 - **[M] Y0865 g1 (`results/eps227.md`, partial until the chain finishes):** 163 snapshot nodes, 75 with a near-simple candidate, 101 (role, slot) evaluations; every candidate loses 3-4 meeters (F2..F5 struck at the hull box), **0 DEAD by FC+EPS**; survivors `H` (46) / `{F3, H}` (55); H reaches F1's left-family wedge 55x and the right one 45x, F3 the top/left wedges of F2's BR(0,1) cell; anonymous clause vacuous (fully named). The PI's Y0865 node: targets = right wedge `[1.974, 2.0108] x [0.5, 1.0068]` (+ the lower pad strip), top wedges, zones LB/LT/RB; H's edge crosses x = 2 at y = 0.9916 inside the right wedge -- not struck; page `docs/residue_map/campaigns/A227-lemma-eps/eps227_Y0865.svg`; `eps227_pinwheel.svg` (feet at y*, numeric checks pass). Cost 0.05 s per node.
 - **[C]** the strike tests the wedge's bounding rectangle (a polygon SAT would recover the taper at the foot, exactly where H enters); Rule NS on a rectangle target is recorded, not branched; the tilt-coupled (arc) wedge is relaxed to a box (second order).
 - Registry row; files `attempts/A227-lemma-eps/{code,results,logs}`, `docs/proofs/lemma_eps.md`, `lean/.../Statements/Open/LemmaEps.lean` (+ one import line in `Statements.lean`).
+
+## 2026-09-15 — A230-eps-branch (Opus) — Rule EPS: all candidates, the polygon taper, Rule NS at the wedge
+- PI, 09:00: *"F1 (BL10) should trigger EPS before F2 does (BR01), so there may need to be something to make sure
+  it checks all candidates."*  **Answer:** A227 already evaluated every candidate its loop was given — the 1.1
+  candidates/node came from A224's FILTER (`snap224.near`: the role's box CENTRE within 0.06 of the slot centre
+  and EVERY piece near-aligned), not from a scan stopping at the first.  `eps230.candidates` takes the ℓ∞
+  distance from the slot centre to the role's position BOX and asks only that SOME piece's tilt bin be
+  near-aligned, so both cells a role can be near-simple in are returned; order is smallest box volume first.
+  On Y0865 g1's 163 recorded nodes: 271 candidates (1.66/node) against A227's 1.1, **170 returned only by the
+  wider test**.
+- **[T] TAPER** (lemma_eps s.7 [C]1 discharged): `eps230.misses_poly_t` is A161's separating-axis test against
+  the exact convex wedge POLYGON — the polygon's own edge normals with the square's support radius bounded by
+  interval arithmetic in (cos, sin) over the tilt bin, plus the square's two normals over the Minkowski
+  difference {box corner} − {polygon vertex}.  Sound a fortiori (wedge ⊆ polygon ⊆ bbox); 3 229 randomised
+  claimed separations, 0 contradicted.
+- **[T] NS AT THE WEDGE** (s.7 [C]3 discharged): where exactly one named role M survives a candidate and the
+  anonymous clause is CERTIFIED empty, M *is* Theorem FC's second meeter, so "M meets W" / "M misses W" is
+  exhaustive.  The `epsns-misses` child is DEAD at once by FC+EPS (no cascade, 0.0 s, certificate = the target
+  list + the struck roles' miss certificates); the `epsns-meets` child carries M's pieces clipped exactly to the
+  poses reaching W (pieces separated from every target dropped, the rest intersected with W's bbox dilated by
+  h = (cos+sin)/2 over their own bin) and then the ordinary coarse round — so the option table is fresh before
+  any further branching.  Live on Y0865 g1 at once: the split fires from depth 2 and every misses child dies.
+- **[C] the split must be capped**: uncapped it recurs on the same (slot, role) at every depth (the clip tightens
+  a little each time) and spends the whole depth budget — `A230_WEDGE_CAP`, default 1 per pair per path.
+- Wiring is flag-gated in `tree211.py` / `leaves211.py`: `A230_EPS` (or `A227_EPS`), **default OFF = pass-6
+  behaviour**; sub-levers `A230_ALLCAND` / `A230_TAPER` / `A230_WEDGE_NS` / `A230_WEDGE_CAP`.  Leaf rule (0′) and
+  an internal check beside Rule SNAP; `step_key` carries `("epsns", slot, role, kind, W)` for Lemma INHERIT.
+- Benchmark detached and resumable (`bash attempts/A230-eps-branch/code/bench230.sh 900`): the re-scan over every
+  A211 g1 certificate, then Y0865 g1 and Y0500 g1 from their A203 roots (`--no-inherit`) under the pass-6 flag set
+  off vs on, isolated cert dirs.  Results land in `attempts/A230-eps-branch/results/bench230.md`.
+- **queue_pass7 recommendation:** add `A230_EPS=1` to the pass-6 flag set (`A220_NOROOM_INHERIT=1 A221_LANE=1
+  A224_SNAP=1`) with `A230_WEDGE_CAP=1`, pending the off/on verdict table in `results/bench230.md`.
