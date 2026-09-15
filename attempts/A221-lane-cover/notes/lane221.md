@@ -87,6 +87,26 @@ Two cautions that the implementation respects:
   for the same reason.  Every stop reason of `bisect_free` leaves a cover; only an *empty* pocket list means "no
   residue", which is already a kill.
 
+## 2b. What the benchmark actually showed (results/bench221.md), and the honest limits
+
+* **0 regressions** on 112 replayed rows: every node the certificates killed, A221 kills.
+* **verdict agreement on the closed pages** Y0500 g1 and Y0460 g1: 24 non-vacuous no-room nodes, 9 DEAD -> DEAD and
+  15 UNDECIDED -> UNDECIDED, 1835 s -> 712 s.
+* **two genuine new kills**: `Y0402 zero_page R.3.1.2.1` and `R.3.1.2.2`, which the certificate left UNDECIDED at the
+  cap and A221 kills in 12.1 s and 15.8 s.  These are attributed to the COVER by a control: A189's own leaf on
+  exactly the same replayed boxes returns UNDECIDED at 133 s on both.  (A third node, `R.3.1.1.1.2`, also comes back
+  DEAD -- but the control kills it too, so that one is the replayed boxes being tighter than the ones the tree's
+  `noroom_at` was handed, not A221.  A node record's `roles` is the page's LIVE dict, so a certificate can carry a
+  later, tighter box than the leaf saw; every "new kill" claim needs this control.)
+* **THE CAP is the real budget lever.**  Over 42 pocket covers, *every* DEAD pocket died in <= 0.1 s and *every*
+  surviving pocket burned the entire 45 s: the cover either collapses at once or not at all.  So `pk_deadline`
+  drops to 5 s (a 50x margin) and an UNDECIDED node costs build + bisect + 5 s a pocket.  Measured at 5 s over the
+  36 no-room nodes of Y0402 / Y0500 / Y0460 / Y0738: 2550 s -> 436 s (**5.9x**), slowest node 25.3 s, verdicts
+  identical.  With inheritance as well: 246 s -> 48 s (**5.2x**), slowest 20.9 s.
+* **the honest limit**: on these pages most UNDECIDED-at-cap nodes are *genuinely* undecidable by no-room -- their
+  surviving pocket really holds free poses (experiment221.md s.3b: 88 % of the pocket's volume still open after 48
+  halvings).  A221 cannot kill those and nothing can; what it does is stop paying 120 s to find out.
+
 ## 3. What A221 ships
 
 * `code/noroom221.py` -- `cover_rect` (the pocket-rooted exact cover), `pocket_dead`, `pocket_pass`,
