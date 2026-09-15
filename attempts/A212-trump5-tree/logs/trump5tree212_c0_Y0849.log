@@ -20,3 +20,17 @@ KeyError: 'c0_Y0849_interior_G1'
    INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
 == c0_Y0849 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0849_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.218, 2.358, 2.498, 2.637, 14.25, 28.072]; forced H []; 6 slots; free 5
    node R          d0 root: INTERNAL (29.9 s, 1 rounds; t=30.0)
+   node R.1        d1 TR(1,0)<-[8]: INTERNAL (24.6 s, 1 rounds; t=54.7)
+   node R.1r1      d1 root<-None: DEAD by EmptyBox r1 (1.9 s, 1 rounds; t=56.6)
+   node R.2        d1 TR(1,0)<-[9]: INTERNAL (12.7 s, 1 rounds; t=69.3)
+   node R.2r1      d1 root<-None: INTERNAL (45.7 s, 1 rounds; t=115.0)
+   node R.2.1      d2 TR(0,1)<-[16]: INTERNAL (41.7 s, 1 rounds; t=156.8)
+   node R.2.1r1    d2 root<-None: INTERNAL (130.1 s, 1 rounds; t=286.9)
+   no-room (k=10, m=1): UNDECIDED in 122 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.1: split F4 at TR(1,0) (meeting fraction 0.027221)
+   node R.2.1.1    d3 TR(1,0)<-None: INTERNAL (68.9 s, 1 rounds; t=480.4)
+   no-room (k=10, m=1): UNDECIDED in 124 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.2.1.1: split F2 at BL(1,1) (meeting fraction 0.135875)
+   node R.2.1.1.1  d4 BL(1,1)<-None: DEAD by EmptyBox r1 (44.0 s, 1 rounds; t=650.8)
+   node R.2.1.1.2  d4 BL(1,1)<-None: DEAD by EmptyBox r1 (36.6 s, 1 rounds; t=687.4)
+   node R.2.1.2    d3 TR(1,0)<-None: INTERNAL (70.9 s, 1 rounds; t=758.4)
