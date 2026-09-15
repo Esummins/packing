@@ -162,6 +162,15 @@ def noroom(roles, s0=None, budget=None, name="node", n=11, nd=None, deadline=Non
                     t_build=t_build, t_bisect=t_bis, seconds=round(time.time() - t0, 1),
                     reason="bisection alone: every pose of a free unit square meets some core")
     pk = NR.pockets_of(pieces, float(nd.s), bud)
+    if m >= 2:
+        # Lemma CN is FREE (it reads the rectangles, runs nothing).  A209 applies it to the whole pocket list and it
+        # often bites there, so try it BEFORE paying for any cover -- that is A189+A209's own fast path, kept.
+        early = cn_upgrade(dict(verdict="UNDECIDED", alive=[list(map(float, q)) for q in pk]), m)
+        if early.get("verdict") == "DEAD":
+            return dict(k=k, m=m, verdict="DEAD", clip="NOROOM-CN", step="bisect+cn", bisect=bcert,
+                        pockets=[[round(c, 6) for c in p] for p in pk], pocket_recs=[], alive=[],
+                        cn_bound=early.get("cn_bound"), t_build=t_build, t_bisect=t_bis,
+                        seconds=round(time.time() - t0, 1), reason=early.get("reason"))
     verdict, recs, alive = pocket_pass(nd, pk, bud, dl, m)
     return cn_upgrade(dict(k=k, m=m, verdict=verdict, clip=("NOROOM-POCKET" if verdict == "DEAD" else None),
                            step="bisect+pockets", bisect=bcert, pockets=[[round(c, 6) for c in p] for p in pk],

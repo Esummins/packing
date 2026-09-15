@@ -89,12 +89,14 @@ Two cautions that the implementation respects:
 
 ## 2b. What the benchmark actually showed (results/bench221.md), and the honest limits
 
-* **0 regressions** on 112 replayed rows: every node the certificates killed, A221 kills.
+* **0 regressions** in the shipped configuration over 314 replayed rows (the one regression on record is
+  `Y0738 R.1.2.3`, k = 9, under the code before Lemma CN was in this module -- see the last bullet).
 * **verdict agreement on the closed pages** Y0500 g1 and Y0460 g1: 24 non-vacuous no-room nodes, 9 DEAD -> DEAD and
   15 UNDECIDED -> UNDECIDED, 1835 s -> 712 s.
-* **two genuine new kills**: `Y0402 zero_page R.3.1.2.1` and `R.3.1.2.2`, which the certificate left UNDECIDED at the
-  cap and A221 kills in 12.1 s and 15.8 s.  These are attributed to the COVER by a control: A189's own leaf on
-  exactly the same replayed boxes returns UNDECIDED at 133 s on both.  (A third node, `R.3.1.1.1.2`, also comes back
+* **three genuine new kills**: `Y0402 zero_page R.3.1.2.1` (12.9 s), `R.3.1.2.2` (16.9 s) and
+  `Y0738 zero_page R.1.3.3.2` (12.4 s), all left UNDECIDED at the cap by the certificate -- and 3.1-4.3 s each under
+  Lemma POCKET-INHERIT.  Attributed to the COVER by a control: A189's own leaf on exactly the same replayed boxes
+  returns UNDECIDED at 131-133 s on all three.  (A third node, `R.3.1.1.1.2`, also comes back
   DEAD -- but the control kills it too, so that one is the replayed boxes being tighter than the ones the tree's
   `noroom_at` was handed, not A221.  A node record's `roles` is the page's LIVE dict, so a certificate can carry a
   later, tighter box than the leaf saw; every "new kill" claim needs this control.)
@@ -102,7 +104,12 @@ Two cautions that the implementation respects:
   surviving pocket burned the entire 45 s: the cover either collapses at once or not at all.  So `pk_deadline`
   drops to 5 s (a 50x margin) and an UNDECIDED node costs build + bisect + 5 s a pocket.  Measured at 5 s over the
   36 no-room nodes of Y0402 / Y0500 / Y0460 / Y0738: 2550 s -> 436 s (**5.9x**), slowest node 25.3 s, verdicts
-  identical.  With inheritance as well: 246 s -> 48 s (**5.2x**), slowest 20.9 s.
+  identical.  Final numbers over all four pages, 68 non-vacuous no-room nodes: **4685 s -> 934 s (5.0x)**, slowest
+  node 28.5 s; with Lemma POCKET-INHERIT on Y0402's 25 nodes: **1573 s -> 258 s (6.1x)**, slowest 25.2 s, and a
+  child whose inherited pockets all die is decided in 3.0-4.6 s with no container bisection at all.
+* **the cost side**: for `m >= 2` (k = 9) an UNDECIDED node is now *slower* than A189 (e.g. 6.5 s -> 15.3 s),
+  because A189 with `max_pocket_area = 0` never even tries a cover there.  Lemma CN is tried FIRST (it is free), so
+  a node CN can kill still costs what it did; the extra seconds buy the cover's extra kills.
 * **the honest limit**: on these pages most UNDECIDED-at-cap nodes are *genuinely* undecidable by no-room -- their
   surviving pocket really holds free poses (experiment221.md s.3b: 88 % of the pocket's volume still open after 48
   halvings).  A221 cannot kill those and nothing can; what it does is stop paying 120 s to find out.

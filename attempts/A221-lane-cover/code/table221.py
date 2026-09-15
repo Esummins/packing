@@ -10,7 +10,11 @@ HEAD = """# A221 benchmark -- A189's no-room leaf vs A221's pocket cover
 Every row replays a RECORDED no-room node out of an A211 certificate (`code/nodeload221.py`: the node's own role
 boxes, the five pins included) through `noroom221`.  `A189` is the verdict and seconds the CERTIFICATE recorded;
 `A221` is this module on the replayed boxes.  A REGRESSION is a recorded DEAD that A221 does not kill -- the only
-unsound direction, and there are none.
+unsound direction.
+
+Lanes are tagged; `table221.py` keeps the LAST row per `(tag, page, run, node)`.  The **SHIPPED** configuration is
+tags `final` (the full leaf) and `inherit5` (with Lemma POCKET-INHERIT), both at the measured 5 s pocket cap and
+with Lemma CN on the surviving pockets; the earlier tags are kept as the record of how the design got there.
 
 **The replayed boxes are not always the boxes A189 saw.**  A node record's `roles` is the page's live dict, so a
 certificate can carry boxes TIGHTER than the ones `tree209.noroom_at` was handed at the leaf.  That is why the
@@ -20,8 +24,9 @@ reaches and the certificate did not is attributed to the COVER only when the con
 Tags: `four` = the four target k=10 nodes (full leaf, 45 s pocket cap) | `inherit` / `inherit5` = the same through
 Lemma POCKET-INHERIT (the nearest recorded ancestor's pockets, no container bisection) | `alive_page` = every
 recorded no-room node of the ALIVE page Y0402 at the 45 s cap | `cap5` = the same with the MEASURED 5 s pocket cap
-(the deployed setting) | `closed` = every recorded no-room node of the CLOSED pages Y0500 g1 / Y0460 g1 (verdict
-agreement) | `a189ctl` = the control | `deep` = the budget probe of `results/experiment221.md` s.3b.
+(before Lemma CN was in this module) | `closed` = every recorded no-room node of the CLOSED pages Y0500 g1 /
+Y0460 g1 (verdict agreement) | `final` = all four pages at the shipped settings | `a189ctl` = the control |
+`deep` = the budget probe of `results/experiment221.md` s.3b.
 """
 
 
@@ -55,11 +60,20 @@ def main():
     ctl = {r["node"]: r for r in rows if r.get("step") == "a189-control"}
     live = [r for r in rows if r.get("tag") not in ("deep",) and r.get("step") != "a189-control"]
     reg = [r for r in live if r.get("regression")]
+    SHIP = ("final", "inherit5")   # the SHIPPED configuration: pk_deadline 5 s, Lemma CN on the survivors
     kills = sorted(set((r["node"], (ctl.get(r["node"]) or {}).get("a221", "control not run"))
                        for r in live if r.get("recorded") == "UNDECIDED" and r.get("a221") == "DEAD"))
     out += ["", "## Summary", "",
-            "* rows: %d (%d A189 control, %d budget probe); **REGRESSIONS: %d**"
-            % (len(rows), len(ctl), sum(1 for r in rows if r.get("tag") == "deep"), len(reg)), "",
+            "* rows: %d (%d A189 control, %d budget probe)" % (len(rows), len(ctl),
+                                                                sum(1 for r in rows if r.get("tag") == "deep")),
+            "* **REGRESSIONS in the SHIPPED configuration (tags %s): %d**"
+            % ("/".join("`%s`" % t for t in SHIP),
+               sum(1 for r in reg if r.get("tag") in SHIP)),
+            "* regressions in superseded lanes: %d%s -- all of them `Y0738 R.1.2.3` (k=9, m=2) under the code "
+            "BEFORE Lemma CN was added to this module; the `final` lane re-runs that page and kills it in 10.7 s "
+            "by `bisect+cn`" % (sum(1 for r in reg if r.get("tag") not in SHIP),
+                                (" (" + ", ".join(sorted(set("`%s`" % r["tag"] for r in reg
+                                                             if r.get("tag") not in SHIP))) + ")") if reg else ""), "",
             "Nodes A221 kills that the certificate left UNDECIDED, with the control's verdict on the SAME boxes:", ""]
     out += ["  * `%s` -- A189 on the same replayed boxes: **%s**%s"
             % (nd, v, "  (so this kill is A221's cover)" if v == "UNDECIDED"
@@ -72,8 +86,9 @@ def main():
             continue
         a = sum(float(r["recorded_seconds"]) for r in sel)
         b = sum(float(r["a221_seconds"]) for r in sel)
-        out.append("* `%s`: %d nodes, A189 %.0f s -> A221 %.0f s (**%.2fx**); slowest A221 node %.1f s"
-                   % (tag, len(sel), a, b, a / max(b, 1e-9), max(float(r["a221_seconds"]) for r in sel)))
+        out.append("%s `%s`: %d nodes, A189 %.0f s -> A221 %.0f s (**%.2fx**); slowest A221 node %.1f s"
+                   % ("* **SHIPPED**" if tag in SHIP else "*", tag, len(sel), a, b, a / max(b, 1e-9),
+                      max(float(r["a221_seconds"]) for r in sel)))
     with open(os.path.join(RES, "bench221.md"), "w", newline="\n") as f:
         f.write("\n".join(out) + "\n")
     print("\n".join(out[out.index("## Summary"):]))
