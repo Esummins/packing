@@ -14,7 +14,7 @@ off, same page / pad / wall).  All runs: pad g1, one runner, BelowNormal, wall a
 | k5_11_interior_Y0738 | off | y | ALIVE (wall) | 1808 | 1.00 | 74 | 56 | 1 | 7 | 0 | 0/0/0 | 36 | 0 | 547.4 (30%) | 780.7 (43%) | 0.0 (0%) | 479.5 |
 | k5_11_interior_Y0738 | nri | y | ALIVE (wall) | 1813 | 1.00 | 93 | 68 | 1 | 7 | 0 | 0/0/0 | 41 | 0 | 428.7 (24%) | 1029.1 (57%) | 0.0 (0%) | 355.4 |
 | k5_16_interior_Y0249 | off | n | ALIVE (wall) | 1852 | 1.00 | 103 | 68 | 0 | 0 | 0 | 0/0/0 | 37 | 0 | 296.6 (16%) | 1495.2 (81%) | 0.0 (0%) | 60.7 |
-| k5_16_interior_Y0249 | efs | n | RUNNING | 84 | 0.05 | 32 | None | None | None | None | 0/0/0 | 0 | None | 73.6 (88%) | 0 (0%) | 0.0 (0%) | 10.1 |
+| k5_16_interior_Y0249 | efs | n | ALIVE (wall) | 1805 | 0.97 | 103 | 68 | 0 | 0 | 0 | 0/0/0 | 36 | 0 | 310.9 (17%) | 1429.2 (79%) | 0.0 (0%) | 64.5 |
 | k5_16_interior_Y0402 | off | y | ALIVE (wall) | 1803 | 1.00 | 72 | 46 | 0 | 9 | 0 | 0/0/0 | 32 | 0 | 1121.2 (62%) | 493.1 (27%) | 0.0 (0%) | 189.0 |
 | k5_16_interior_Y0402 | nri | y | ALIVE (wall) | 1809 | 1.00 | 71 | 45 | 0 | 8 | 1 | 1/1/0 | 32 | 0 | 1137.7 (63%) | 491.8 (27%) | 3.0 (0%) | 176.5 |
 | k5_16_interior_Y0460 | off | n | DEAD | 1449 | 1.00 | 64 | 32 | 0 | 0 | 0 | 0/0/0 | 24 | 0 | 267.2 (18%) | 1117.0 (77%) | 0.0 (0%) | 64.4 |
@@ -29,7 +29,7 @@ off, same page / pad / wall).  All runs: pad g1, one runner, BelowNormal, wall a
 
 **ef**: geometric-mean ratio 0.999 over 1 page(s); no verdict regression.
 
-**efs**: geometric-mean ratio 0.539 over 5 page(s); no verdict regression.
+**efs**: geometric-mean ratio 0.996 over 5 page(s); no verdict regression.
 
 **nri**: geometric-mean ratio 1.002 over 3 page(s); no verdict regression.
 
