@@ -66,3 +66,12 @@ closes; exact bookkeeping of the sweep, nothing left in hand -- or the corrected
 by the next pin is a K0-FREE teleport on its own).  Separate VALUE (exchanges preserve the side: lower classes
 reduce to higher ones) from UNIQUENESS (a k0/k1 packing at s-hat exchanges into Trump, so it is Trump with a subset
 re-packed inside its union u Free: the finite obligation SWAP-RIGIDITY of Trump; test it on Trump if cheap).
+
+## Addendum 0c (PI, 23:00) -- RAISE: k0 -> k2, start the search at k2
+Target: from any teleport-stuck packing at side < ceil(sqrt n) at least TWO cells settle by exchange, so k0
+raises to k2 and the stratified search starts at k2; the same count holds above k0 because for k > 0 the container
+minus the settled squares is non-convex (FC's forced cells).  State Lemma RAISE(k -> k+2) or the honest RAISE(k ->
+k+1) with exact hypotheses, from k = 0 and k = 1; simultaneous (independent teleports commute when cells and
+meeters are distinct) vs sequential; what the certified k1-k4 trees give.  Consequence if it holds: the k0 cascade
+is not needed for the VALUE; uniqueness reduces to SWAP-RIGIDITY of Trump.  Test RAISE on all A217 k0 witnesses
+(two simultaneous teleports / one / none; draw a failing case).
