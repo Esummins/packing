@@ -46,3 +46,20 @@ KeyError: 'c0_Y0256_interior_G1'
    node R.1.2.1.2.2 d5 TR(0,1)<-None: INTERNAL (56.1 s, 1 rounds; t=1166.7)
    node R.1.2.1.2.2r1 d5 root<-None: DEAD by EmptyBox r1 (5.6 s, 1 rounds; t=1172.3)
    node R.1.2.2    d3 TR(1,0)<-None: INTERNAL (53.8 s, 1 rounds; t=1226.2)
+   no-room (k=10, m=1): UNDECIDED in 123 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.2.2: split F1 at BL(1,1) (meeting fraction 0.106217)
+   node R.1.2.2.1  d4 BL(1,1)<-None: INTERNAL (100.0 s, 1 rounds; t=1450.3)
+   no-room (k=10, m=1): UNDECIDED in 120 s (1 pockets; pocket LANE sum None does not beat 1)
+   Rule NS at R.1.2.2.1: split F3 at TR(0,1) (meeting fraction 0.063113)
+   node R.1.2.2.1.1 d5 TR(0,1)<-None: INTERNAL (72.2 s, 1 rounds; t=1644.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 25 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.2.2.1.1 d5: DEAD by NOROOM -- no-room at R.1.2.2.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.2.2.1.2 d5 TR(0,1)<-None: INTERNAL (63.7 s, 1 rounds; t=1734.3)
+   node R.1.2.2.1.2r1 d5 root<-None: DEAD by EmptyBox r1 (6.7 s, 1 rounds; t=1741.2)
+   node R.1.2.2.2  d4 BL(1,1)<-None: INTERNAL (80.1 s, 1 rounds; t=1821.5)
+   node R.1.2.2.2 : ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R            => ALIVE (20 nodes; t = 1823 s of 1800.0)
+   => ALIVE (zero_page) in 1822.5 s: 20 nodes, depth 5, gate hits 0 (conflicts 0), tube leaves 0 (depths []), 0 aligned cuts, kills by rule {'FC': 1, 'NOROOM': 3, 'EmptyBox': 3}, 6 NS, 0 pockets, 0 role splits, 7 dead / 11 alive leaves (WALL)
+   per node: R d0 INTERNAL 25.5s; R.1 d1 INTERNAL 11.9s; R.1r1 d1 INTERNAL 10.7s; R.1.1 d2 DEAD FC 45.3s; R.1.2 d2 INTERNAL 52.8s; R.1.2.1 d3 INTERNAL 61.1s; R.1.2.1.1 d4 INTERNAL 116.7s; R.1.2.1.1.1 d5 DEAD NOROOM 60.5s; R.1.2.1.1.2 d5 INTERNAL 52.3s; R.1.2.1.1.2r1 d5 DEAD EmptyBox 6.8s; R.1.2.1.2 d4 INTERNAL 82.7s; R.1.2.1.2.1 d5 DEAD NOROOM 58.9s; R.1.2.1.2.2 d5 INTERNAL 56.1s; R.1.2.1.2.2r1 d5 DEAD EmptyBox 5.6s; R.1.2.2 d3 INTERNAL 53.8s; R.1.2.2.1 d4 INTERNAL 100.0s; R.1.2.2.1.1 d5 DEAD NOROOM 72.2s; R.1.2.2.1.2 d5 INTERNAL 63.7s; R.1.2.2.1.2r1 d5 DEAD EmptyBox 6.7s; R.1.2.2.2 d4 ALIVE 80.1s; R.1.3 d2 ALIVE 0.0s; R.1.4 d2 ALIVE 0.0s; R.1.5 d2 ALIVE 0.0s; R.1.6 d2 ALIVE 0.0s; R.1.7 d2 ALIVE 0.0s; R.1.8 d2 ALIVE 0.0s; R.1.9 d2 ALIVE 0.0s; R.1.10 d2 ALIVE 0.0s; R.2 d1 ALIVE 0.0s; R.3 d1 ALIVE 0.0s
+== c0_Y0256: pad0 ALIVE   (s0-only, lam = 1; DEAD = killed at s0, TRUMP-TUBE = the Trump basin, ALIVE = undecided)
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A212-trump5tree\trump5tree212_gallery.svg
