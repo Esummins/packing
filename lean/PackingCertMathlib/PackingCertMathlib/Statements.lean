@@ -29,12 +29,13 @@ import PackingCertMathlib.Statements.Open.TwoContact
 import PackingCertMathlib.Statements.Open.OneTilted
 import PackingCertMathlib.Statements.Open.RingSwap
 import PackingCertMathlib.Statements.Open.TwoGrains
+import PackingCertMathlib.Statements.Open.OneFlush
 
 /-!
 # The readable layer, one import (A216)
 
-`Statements/` — one small file per key result (statement, prose docstring, proof imported,
-`#print axioms`); `Statements/Open/` — the obligations that are still prose or certificates,
+`Statements/` â€” one small file per key result (statement, prose docstring, proof imported,
+`#print axioms`); `Statements/Open/` â€” the obligations that are still prose or certificates,
 as named axioms (or, where the logical core is trivial, one-line theorems) with pointers.
 `lean/audit.py` builds this module and `Main.lean` and writes `lean/AUDIT.md`.
 -/
