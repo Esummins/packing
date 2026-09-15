@@ -51,8 +51,7 @@ def compose(c, th, s, idx):
     z = np.zeros(G.NV)
     for a, i in enumerate(idx):
         z[3 * i:3 * i + 3] = (c[2 * a], c[2 * a + 1], th[a])
-    z[G.S_IDX] = s
-    return z
+    z[G.S_IDX] = s; return z
 
 
 def wfun(n, th):
@@ -81,11 +80,8 @@ def lp(th, sel, idx, seed):
         r[2 * o:2 * o + 2] = n
         A.append(r); b.append(-rhs)                                                       # n.(c_p - c_o) >= rhs
     cost = np.zeros(nv); cost[-1] = 1.0
-    bounds = [(0, S_MAX)] * (nv - 1) + [(1, S_MAX)]
-    res = linprog(cost, A_ub=np.array(A), b_ub=np.array(b), bounds=bounds, method='highs')
-    if not res.success:
-        return None
-    return res.x[:-1], float(res.x[-1])
+    res = linprog(cost, A_ub=np.array(A), b_ub=np.array(b), bounds=[(0, S_MAX)] * (nv - 1) + [(1, S_MAX)], method='highs')
+    return (res.x[:-1], float(res.x[-1])) if res.success else None
 
 
 def select(c, th, idx, fixed):
@@ -137,8 +133,7 @@ def blockers(c, th_prev, th_new, idx):
     for (i, j), g in gaps.items():
         if i in idx and j in idx and g < -1e-9:
             out.append([int(i), int(j), round(float(g), 5)])
-    out.sort(key=lambda x: x[2])
-    return out[:6]
+    return sorted(out, key=lambda x: x[2])[:6]
 
 
 def path(z0, idx, contacts_fixed, steps, sense=None, keep_all=False):
@@ -180,8 +175,7 @@ def path(z0, idx, contacts_fixed, steps, sense=None, keep_all=False):
     return rec
 
 
-def refit(z_core, idx, rattlers):
-    """place the removed rattlers as flat squares into the free space of the clicked core at its side."""
+def refit(z_core, idx, rattlers):        # the removed rattlers placed flat into the clicked core's free space
     s = float(z_core[G.S_IDX])
     fixed = [tuple(float(v) for v in z_core[3 * i:3 * i + 3]) for i in idx]
     r = RG.place(fixed, s, len(rattlers), thetas=[0.0], restarts=8)
