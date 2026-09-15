@@ -14,3 +14,16 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y1034_interior_G1'
 10:46:05 [w3] c0_Y1034  rc=1 3s
+03:38:20 [w2] start c0_Y1034 wall 1800 (lab 2, free 14019 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y1034 at the zero pad: ALIVE in 29346 ms; kills {'H-clip': 0, 'P': 7888, 'W': 2221, 'C': 1212, 'M': 7092, 'L': 7, 'R': 3281, 'X': 1083}; CSP units 472 -> 472 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y1034 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y1034_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.498, 2.637, 2.358, 2.498, 28.072, 41.112]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (47.3 s, 1 rounds; t=47.4)
+   node Rr1        d0 root<-None: INTERNAL (12.5 s, 1 rounds; t=60.0)
+   node R.1        d1 TR(1,0)<-[8]: INTERNAL (23.2 s, 1 rounds; t=83.3)
+   node R.1.1      d2 TL(0,0)<-[3]: DEAD by S-CLIP r1 (39.6 s, 1 rounds; t=123.2)
+   node R.1.2      d2 TL(0,0)<-[4]: INTERNAL (52.6 s, 1 rounds; t=175.8)
+   no-room (k=9, m=2): UNDECIDED in 139 s (2 pockets; residue too big to pocket: 2 pocket(s) of total area 2.146 > 0.000 (no lane cove)
+   Lemma POCKET at R.1.2: 2 pockets (k=9, m=2)
+   node R.1.2.p1   d3 pocket<-[0]: INTERNAL (56.4 s, 1 rounds; t=373.0)
