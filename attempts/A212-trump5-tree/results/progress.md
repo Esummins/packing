@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 20:29:34
+# A212 progress -- 2026-09-14 20:39:43
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (65 nodes)
+## A60's alive trump5 frontier (deepest first) (66 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -91,11 +91,12 @@ CPU-h in this block: 5.66
 | c0_Y0407 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 5, 'NOROOM': 4, 'REACH': 1, 'FC': 3} | 23 / 5 | 2053 |
 | c0_Y0433 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 3, 'S-CLIP': 2} | 17 / 7 | 1992 |
 | c0_Y0501 | 2 (tree) | DEAD | no | 0 | 0 (None) | {'EmptyBox': 1} | 1 / 0 | 7 |
+| c0_Y0442 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'S-CLIP': 1, 'EmptyBox': 7, 'FC': 3, 'NOROOM': 2} | 24 / 7 | 1813 |
 
-CPU-h in this block: 16.43
+CPU-h in this block: 16.93
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 40, 'DEAD': 38}; gallery 13 / 13 run (5.66 CPU-h); frontier 65 run of 100 (71 remaining; 16.43 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 71: 9.1 CPU-h; spent 22.1; cap 150
+* verdicts so far: {'ALIVE': 41, 'DEAD': 38}; gallery 13 / 13 run (5.66 CPU-h); frontier 66 run of 100 (70 remaining; 16.93 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 70: 9.0 CPU-h; spent 22.6; cap 150
 
