@@ -25,7 +25,7 @@ import noroom221 as N221                                                     # n
 def one(node, args, inherited):
     t = time.time()
     bud = dict(total_deadline=args.cap, pk_deadline=args.pk_deadline, pk_depth=args.pk_depth,
-               pk_tsub=args.pk_tsub, pk_max_pieces=args.pk_max_pieces)
+               pk_tsub=args.pk_tsub, pk_max_pieces=args.pk_max_pieces, pk_max_open=args.pk_max_open)
     try:
         if inherited:
             r = N221.noroom_child(node["roles"], inherited, budget=bud, name=node["label"][-30:], n=args.n)
@@ -49,6 +49,7 @@ def main():
     ap.add_argument("--pk-depth", type=int, default=N221.DEFAULTS["pk_depth"])
     ap.add_argument("--pk-tsub", type=int, default=N221.DEFAULTS["pk_tsub"])
     ap.add_argument("--pk-max-pieces", type=int, default=N221.DEFAULTS["pk_max_pieces"])
+    ap.add_argument("--pk-max-open", type=int, default=N221.DEFAULTS["pk_max_open"])
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--tag", default="bench")
     ap.add_argument("--out", default=os.path.join(HERE, "..", "results", "bench221.jsonl"))
@@ -83,6 +84,11 @@ def main():
                        pocket_seconds=[q.get("seconds") for q in (r.get("pocket_recs") or [])],
                        pocket_dead=[q.get("dead") for q in (r.get("pocket_recs") or [])],
                        pocket_stop=[(q.get("cert") or {}).get("stop") for q in (r.get("pocket_recs") or [])],
+                       pocket_depth=[(q.get("cert") or {}).get("depth") for q in (r.get("pocket_recs") or [])],
+                       pocket_nopen=[(q.get("cert") or {}).get("n_open") for q in (r.get("pocket_recs") or [])],
+                       pocket_dropped=[(q.get("cert") or {}).get("dropped_fraction") for q in (r.get("pocket_recs") or [])],
+                       pocket_openvol=[(q.get("cert") or {}).get("open_volume") for q in (r.get("pocket_recs") or [])],
+                       pocket_rootvol=[(q.get("cert") or {}).get("root_volume") for q in (r.get("pocket_recs") or [])],
                        when=time.strftime("%Y-%m-%d %H:%M:%S"))
             ok = not (nd_["rec"]["verdict"] == "DEAD" and r.get("verdict") != "DEAD")
             row["regression"] = not ok

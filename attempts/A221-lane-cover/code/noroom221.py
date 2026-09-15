@@ -159,9 +159,16 @@ def pocket_dead(nd, pocket, bud, deadline=None):
         dl = min(dl, deadline)
     pieces, cert = cover_rect(nd, rect, bud, deadline=dl)
     out = dict(pocket=[round(float(v), 6) for v in pocket], dead=not pieces, cert=cert,
-               seconds=cert["seconds"], residue=[])
+               seconds=cert["seconds"], residue=[],
+               open_volume=cert.get("open_volume"), root_volume=cert.get("root_volume"),
+               dropped_fraction=cert.get("dropped_fraction"))
     if pieces:
-        out["residue"] = [[round(c, 6) for c in p] for p in NR.pockets_of(pieces, float(nd.s), bud)]
+        # re-pocket the SURVIVORS with NO extra margin: `pockets_of`'s grid-cell hulls already contain every open
+        # piece, so the margin is pure slack -- and re-applying it at every level would GROW the pocket each time.
+        rb = dict(bud)
+        rb["margin"] = 0.0
+        rb["grid"] = min(bud["grid"], 0.015625)
+        out["residue"] = [[round(c, 6) for c in p] for p in NR.pockets_of(pieces, float(nd.s), rb)]
     return out
 
 
