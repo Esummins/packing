@@ -50,7 +50,7 @@ the four bands -- "decomposed at once" where one corner alone might not swap.
 Pick up one corner meeter A; the corner box now has one meeter B; pick B up and settle A in the corner (1-for-1
 teleport: the box lies in A u B u Free).  The cell next to the settled square along the wall must be doubly met
 (Theorem FC) -- one meeter is the next ring pin; place the square in hand there, pick up the next pin; repeat
-around the perimeter.  The outside holds at most 4 floor(sqrt n) simple squares (make exact: at S < 4, 3 per
+around the perimeter.  The outside holds at most 4 floor(sqrt n) - 4 simple squares (corners double-counted; n = 11: 8; at S < 4, 3 per
 wall), and the sweep uncovers that many, so at every step the SECOND meeter must be a centre square: no ring is
 self-supporting under teleport-freeness.  Obligations: (i) Lemma STEP -- each exchange valid at the same side (the
 target cell met only by the squares in hand and the next pin; check step by step on the 193 witnesses, name the
