@@ -53017,10 +53017,10 @@
      ],
      "named": null,
      "excluded": null,
-     "verdict": "INTERNAL",
-     "clip": null,
-     "killed_round": null,
-     "leaf": null,
+     "verdict": "DEAD",
+     "clip": "NOROOM",
+     "killed_round": 1,
+     "leaf": "no-room at R.1.3.3.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core",
      "reason": null,
      "seconds": 124.4,
      "t": 979.4,
@@ -59519,7 +59519,84 @@
        "n_before": 128,
        "n_after": 96
       }
-     ]
+     ],
+     "trump_gate": {
+      "contains": false,
+      "g": null,
+      "assignment": null,
+      "pins": null,
+      "checks": [
+       {
+        "g": "id",
+        "fail": "no assignment",
+        "detail": [
+         {
+          "role": "F1",
+          "square": 4,
+          "fail": "named slot not met",
+          "slots": [
+           "BL(0,2)",
+           "BL(1,1)",
+           "TL(0,0)"
+          ]
+         }
+        ]
+       },
+       {
+        "g": "rot90",
+        "fail": "pins"
+       },
+       {
+        "g": "rot180",
+        "fail": "pins"
+       },
+       {
+        "g": "rot270",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_x",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_y",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_d",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_ad",
+        "fail": "pins"
+       }
+      ],
+      "seconds": 0.002,
+      "n_roles": 5,
+      "pre": {
+       "contains": false,
+       "g": null
+      }
+     },
+     "cc": {
+      "n_rows": 0,
+      "seconds": 0.004,
+      "rows": []
+     },
+     "noroom": {
+      "label": "R.1.3.3.2",
+      "depth": 4,
+      "k": 10,
+      "m": 1,
+      "verdict": "DEAD",
+      "clip": "NOROOM",
+      "bound": 0,
+      "cn_bound": null,
+      "n_pockets": 0,
+      "pockets": [],
+      "seconds": 37.9,
+      "reason": "bisection alone: every pose of a free unit square meets some core"
+     }
     }
    ],
    "basins": [],
@@ -59573,7 +59650,7 @@
     "max_frac": 0.5
    },
    "n_nodes": 17,
-   "seconds": 979.4
+   "seconds": 1017.5
   }
  },
  "cls": "trump5",
