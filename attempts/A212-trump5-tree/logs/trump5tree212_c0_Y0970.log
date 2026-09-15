@@ -14,3 +14,42 @@ Traceback (most recent call last):
              ~~~~~~~^^^^^
 KeyError: 'c0_Y0970_interior_G1'
 10:45:30 [w3] c0_Y0970  rc=1 2s
+02:50:07 [w1] start c0_Y0970 wall 1800 (lab 2, free 14123 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0970 at the zero pad: ALIVE in 13754 ms; kills {'H-clip': 0, 'P': 4820, 'W': 1599, 'C': 634, 'M': 4004, 'L': 0, 'R': 3719, 'X': 1228}; CSP units 64 -> 64 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no recorded snapshot -- the page falls back to the plain root run
+== c0_Y0970 pad zero (lam = 1, s0-only): start attempts/A212-trump5-tree/certs/csp209_c0_Y0970_zero_s0.json; GATE at the root: no image; INHERIT 0 dead + 0 start nodes; H [2.498, 2.559, 1.318, 1.38, 28.072, 41.112]; forced H []; 6 slots; free 5
+   node R          d0 root: INTERNAL (33.9 s, 1 rounds; t=34.0)
+   node R.1        d1 BR(0,1)<-[13]: INTERNAL (6.8 s, 1 rounds; t=40.9)
+   node R.1.1      d2 TR(0,1)<-[19]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=41.7)
+   node R.1.2      d2 TR(0,1)<-[22]: DEAD by REACH r1 (10.9 s, 1 rounds; t=52.6)
+   node R.1.3      d2 TR(0,1)<-[23]: DEAD by REACH r1 (21.5 s, 1 rounds; t=74.1)
+   node R.2        d1 BR(0,1)<-[18]: INTERNAL (9.3 s, 1 rounds; t=83.4)
+   node R.2.1      d2 TR(0,1)<-[19]: DEAD by EmptyBox r1 (2.2 s, 1 rounds; t=85.7)
+   node R.2.2      d2 TR(0,1)<-[22]: INTERNAL (12.1 s, 1 rounds; t=97.8)
+   node R.2.2.1    d3 TR(1,0)<-[8]: INTERNAL (15.6 s, 1 rounds; t=113.5)
+   node R.2.2.1.1  d4 BL(0,2)<-[4]: INTERNAL (38.2 s, 1 rounds; t=151.8)
+   node R.2.2.1.1  d4: DEAD by CC -- rule CC at R.2.2.1.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F4 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior 
+   node R.2.2.1.2  d4 BL(0,2)<-[9]: DEAD by EmptyBox r1 (4.4 s, 1 rounds; t=156.6)
+   node R.2.2.2    d3 TR(1,0)<-[9]: INTERNAL (29.3 s, 1 rounds; t=186.0)
+   node R.2.2.2.1  d4 BL(0,2)<-[3]: INTERNAL (51.8 s, 1 rounds; t=237.9)
+   no-room (k=10, m=1): DEAD by NOROOM in 20 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.2.2.1  d4: DEAD by NOROOM -- no-room at R.2.2.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.2.2.2  d4 BL(0,2)<-[4]: INTERNAL (42.1 s, 1 rounds; t=299.7)
+   no-room (k=10, m=1): DEAD by NOROOM in 15 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.2.2.2  d4: DEAD by NOROOM -- no-room at R.2.2.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.2.2.3  d4 BL(0,2)<-[8]: DEAD by EmptyBox r1 (7.3 s, 1 rounds; t=322.5)
+   node R.2.2.3    d3 TR(1,0)<-[14]: INTERNAL (30.0 s, 1 rounds; t=352.6)
+   node R.2.2.3.1  d4 BL(0,2)<-[3, 4]: DEAD by EmptyBox r1 (3.7 s, 1 rounds; t=356.4)
+   node R.2.2.3.2  d4 BL(0,2)<-[3, 9]: DEAD by EmptyBox r1 (6.7 s, 1 rounds; t=363.2)
+   node R.2.2.3.3  d4 BL(0,2)<-[4, 8]: DEAD by EmptyBox r1 (15.8 s, 1 rounds; t=379.0)
+   node R.2.2.3.4  d4 BL(0,2)<-[8, 9]: DEAD by EmptyBox r1 (2.6 s, 1 rounds; t=381.7)
+   node R.2.2.4    d3 TR(1,0)<-[19]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=382.9)
+   node R.2.3      d2 TR(0,1)<-[23]: INTERNAL (12.1 s, 1 rounds; t=395.0)
+   node R.2.3.1    d3 BL(0,2)<-[3, 4]: DEAD by EmptyBox r1 (2.2 s, 1 rounds; t=397.2)
+   node R.2.3.2    d3 BL(0,2)<-[3, 7]: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=399.0)
+   node R.2.3.3    d3 BL(0,2)<-[3, 9]: INTERNAL (36.6 s, 1 rounds; t=435.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 20 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.2.3.3    d3: DEAD by NOROOM -- no-room at R.2.3.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.3.4    d3 BL(0,2)<-[4, 7]: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=457.4)
+   node R.2.3.5    d3 BL(0,2)<-[4, 8]: INTERNAL (38.2 s, 1 rounds; t=495.7)
