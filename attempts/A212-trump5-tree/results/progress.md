@@ -1,4 +1,4 @@
-# A212 progress -- 2026-09-14 19:22:17
+# A212 progress -- 2026-09-14 19:37:04
 
 The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 1, s0-only) + the Trump-containment GATE (a node holding a D4 image of z-hat is never submitted to a kill rule) + the TUBE LEAF (all 11 named inside the certified tube radii: TRUMP-TUBE, uniqueness, not a kill) + the ALIGNED split.  Wall 1800 s per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -22,7 +22,7 @@ The TRUMP5 tree (notes/trump5_tree.md): A211's coarse tree at PAD 0 ONLY (lam = 
 
 CPU-h in this block: 5.66
 
-## A60's alive trump5 frontier (deepest first) (57 nodes)
+## A60's alive trump5 frontier (deepest first) (58 nodes)
 
 | page | stage reached | verdict | root gate | gate hits | tube leaves (depth) | kills by rule | nodes / depth | seconds |
 |---|---|---|---|---|---|---|---|---|
@@ -83,11 +83,12 @@ CPU-h in this block: 5.66
 | c0_Y0335 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'EmptyBox': 3, 'NOROOM': 3, 'COUNT': 2, 'REACH': 1} | 22 / 6 | 1819 |
 | c0_Y0334 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 6, 'NOROOM': 4, 'EmptyBox': 5, 'S-CLIP': 1} | 29 / 5 | 1850 |
 | c0_Y0345 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'FC': 1, 'S-CLIP': 2, 'REACH': 1, 'EmptyBox': 5, 'NOROOM': 1} | 22 / 6 | 1864 |
+| c0_Y0347 | 2 (tree) | ALIVE (wall) | no | 0 | 0 (None) | {'COUNT': 1, 'S-CLIP': 1, 'EmptyBox': 2} | 16 / 9 | 1892 |
 
-CPU-h in this block: 13.19
+CPU-h in this block: 13.72
 
 ## Price and projection
 
-* verdicts so far: {'ALIVE': 34, 'DEAD': 36}; gallery 13 / 13 run (5.66 CPU-h); frontier 57 run of 102 (79 remaining; 13.19 CPU-h)
-* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 79: 10.1 CPU-h; spent 18.9; cap 150
+* verdicts so far: {'ALIVE': 35, 'DEAD': 36}; gallery 13 / 13 run (5.66 CPU-h); frontier 58 run of 102 (78 remaining; 13.72 CPU-h)
+* PRICE over the first 20 frontier nodes: mean 461 s, median 23 s per node; PROJECTION for the remaining 78: 10.0 CPU-h; spent 19.4; cap 150
 
