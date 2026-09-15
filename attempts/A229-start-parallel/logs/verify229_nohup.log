@@ -1,1 +1,21 @@
 2026-09-15 09:12:15 phase base: run211 k5_16_interior_Y0500 --pads g1 --wall 600 (cert dir attempts/A229-start-parallel/certs/verify/base, lab 3, free 11153 MB)
+2026-09-15 09:22:18 phase base: rc=0 603s   == k5_16_interior_Y0500: g1 ALIVE | pad0 None   
+2026-09-15 09:22:19 the shared state has 5 start node(s) at pad g1: R.2.3 R.2.1.8 R.2.2 R.2.4 R.3 
+2026-09-15 09:22:21 phase whole: run211 k5_16_interior_Y0500 --pads g1 --wall 3000 (cert dir attempts/A229-start-parallel/certs/verify/whole, lab 4, free 11823 MB)
+2026-09-15 09:48:46 phase whole: rc=0 1586s   == k5_16_interior_Y0500: g1 DEAD | pad0 None   
+2026-09-15 09:48:46 phase s1: share = R.2.3,R.2.4
+2026-09-15 09:48:48 phase s1: run211 k5_16_interior_Y0500 --pads g1 --wall 3000 --start R.2.3,R.2.4 --cert-suffix s1 (cert dir attempts/A229-start-parallel/certs/verify/s1, lab 4, free 14002 MB)
+2026-09-15 09:56:53 phase s1: rc=0 486s   == k5_16_interior_Y0500: g1 ALIVE | pad0 None   
+2026-09-15 09:56:53 phase s2: share = R.2.1.8,R.3
+2026-09-15 09:56:55 phase s2: run211 k5_16_interior_Y0500 --pads g1 --wall 3000 --start R.2.1.8,R.3 --cert-suffix s2 (cert dir attempts/A229-start-parallel/certs/verify/s2, lab 4, free 13881 MB)
+2026-09-15 10:14:02 phase s2: rc=0 1028s   == k5_16_interior_Y0500: g1 ALIVE | pad0 None   
+2026-09-15 10:14:02 phase s3: share = R.2.2
+2026-09-15 10:14:04 phase s3: run211 k5_16_interior_Y0500 --pads g1 --wall 3000 --start R.2.2 --cert-suffix s3 (cert dir attempts/A229-start-parallel/certs/verify/s3, lab 2, free 16107 MB)
+2026-09-15 10:14:59 phase s3: rc=0 56s   == k5_16_interior_Y0500: g1 ALIVE | pad0 None   
+2026-09-15 10:15:00 merge dir: coarsetree211_k5_16_interior_Y0500.json coarsetree211_k5_16_interior_Y0500__s1.json coarsetree211_k5_16_interior_Y0500__s2.json coarsetree211_k5_16_interior_Y0500__s3.json 
+   OK   k5_16_interior_Y0500 g1   DEAD path set : 13 == 13
+   OK   k5_16_interior_Y0500 g1   START node set: 0 == 0
+        whole: 3 trees, 113 paths | shards: 6 trees, 113 paths
+A229 multi-file merge test: PASS
+2026-09-15 10:15:01 verify229: comparison rc=0
+2026-09-15 10:15:01 verify229: wrote attempts/A229-start-parallel/results/verify229.md
