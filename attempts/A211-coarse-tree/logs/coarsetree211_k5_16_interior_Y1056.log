@@ -629,3 +629,21 @@
    node R.2.6.p1.p1.2.2 d4 TL(1,0)<-None: INTERNAL (53.4 s, 1 rounds; t=1238.7)
    no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
    Rule NS at R.2.6.p1.p1.2.2: split F5 at TL(1,0) (meeting fraction 0.011077; alive rows [18]; named ['F1', 'F5', 'H'])
+   node R.2.6.p1.p1.2.2.1 d5 TL(1,0)<-None: DEAD by REACH r1 (118.7 s, 1 rounds; t=1437.5)
+   node R.2.6.p1.p1.2.2.2 d5 TL(1,0)<-None: INTERNAL (110.9 s, 1 rounds; t=1548.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.6.p1.p1.2.2.2: split F5 at TR(1,0) (meeting fraction 0.026216; alive rows [18, 23]; named ['F1', 'F4', 'F5', 'H'])
+   node R.2.6.p1.p1.2.2.2.1 d6 TR(1,0)<-None: INTERNAL (102.2 s, 1 rounds; t=1811.7)
+   node R.2.6.p1.p1.2.2.2.1: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R.2.6        => ALIVE (14 nodes; t = 1968 s of 1800.0)
+   start R.3.6: SKIPPED (wall)
+   start R.4: SKIPPED (wall)
+   => ALIVE (g1_page) in 1967.9 s: 3 start runs, 14 nodes, depth 6, 0 CC kills, 0 exact leaf cascades, 6 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 20 inherited dead (20 up front + 0 in tree), 25 dead / 2 alive leaves (WALL)
+   A224 Rule SNAP [OFF (flag A224_SNAP)]: 0 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1.1 d3 DEAD INHERIT 0.0s; R.2.1.2 d3 DEAD INHERIT 0.0s; R.2.1.3 d3 DEAD INHERIT 0.0s; R.2.1.4.1 d4 DEAD INHERIT 0.0s; R.2.1.4.2.1 d5 DEAD INHERIT 0.0s; R.2.1.4.2.2 d5 DEAD INHERIT 0.0s; R.2.1.5 d3 DEAD INHERIT 0.0s; R.2.2 d2 DEAD INHERIT 0.0s; R.2.3 d2 DEAD INHERIT 0.0s; R.2.4 d2 DEAD INHERIT 0.0s; R.2.5 d2 DEAD INHERIT 0.0s; R.2.7 d2 DEAD INHERIT 0.0s; R.2.8 d2 DEAD INHERIT 0.0s; R.2.9 d2 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2 d2 DEAD INHERIT 0.0s; R.3.3 d2 DEAD INHERIT 0.0s; R.3.4 d2 DEAD INHERIT 0.0s; R.3.5 d2 DEAD INHERIT 0.0s; R.2.6 d0 INTERNAL 2.6s; R.2.6.p1 d1 INTERNAL 20.9s; R.2.6.p1.p1 d2 INTERNAL 125.1s; R.2.6.p1.p1.1 d3 INTERNAL 134.2s; R.2.6.p1.p1.1.1 d4 DEAD EmptyBox 1.6s; R.2.6.p1.p1.1.2 d4 DEAD EmptyBox 0.4s; R.2.6.p1.p1.2 d3 INTERNAL 107.1s; R.2.6.p1.p1.2.1 d4 INTERNAL 58.3s; R.2.6.p1.p1.2.1.1 d5 DEAD EmptyBox 1.4s; R.2.6.p1.p1.2.1.2 d5 DEAD EmptyBox 0.5s; R.2.6.p1.p1.2.2 d4 INTERNAL 53.4s; R.2.6.p1.p1.2.2.1 d5 DEAD REACH 118.7s; R.2.6.p1.p1.2.2.2 d5 INTERNAL 110.9s; R.2.6.p1.p1.2.2.2.1 d6 ALIVE 102.2s; R.2.6.p1.p1.2.2.2.2 d6 ALIVE 0.0s
+== k5_16_interior_Y1056: g1 ALIVE | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1658, 'misses': 379, 'entries': 379}; clip {'hits': 111462, 'misses': 1676197, 'entries': 76197}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 2037, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 26}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 1684, 'obs_misses': 429, 'build_hits': 0, 'build_misses': 4, 'bisect_hits': 0, 'bisect_misses': 2, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 159, 'build_entries': 4, 'bisect_entries': 2, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
