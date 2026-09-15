@@ -9036,3 +9036,30 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
 - Files: `attempts/A226-one-flush/{code,data,results,logs}`; `docs/proofs/one_flush.md`; pages
   `docs/residue_map/campaigns/A226-one-flush/{survey_small,survey_mid,survey_large,crowd_above,ring11}.svg`; registry row;
   ledger s.4 note.
+
+## 2026-09-15 00:15 -- A224-snap-rule (Opus) -- DONE (launch-and-exit; the live A/B finishing detached, resume block `code/finish224.sh`): **Rule SNAP is a THEOREM and is in the engine behind `A224_SNAP=1` (default OFF, old behaviour byte-for-byte unchanged) -- a non-pin square whose census cell no OTHER square meets teleports onto it (Lemma SWAP, |X| = 1), landing the packing in a stratum the scoreboard has closed; the certificate is exactly the theorem's hypothesis, Lean `snap_step` / `snap_dead` / `snap_diag_two`, no new axiom -- but it does NOT fire on the k5 population: 0 kills over every node of every A211 g1 certificate (72 pages, 294 candidate nodes), because at box width 0.077 the PI's "second meeter only at the corner point" is a positive-area sliver and the conditioned square H pokes 0.008 into the raw cell; cost nil, pass flags unchanged, two levers named**
+
+- **[T] Rule SNAP** (`docs/proofs/snap_rule.md`, any n): a NON-pin square whose census cell `p` no OTHER square meets
+  teleports onto `p` (Lemma SWAP with |X| = 1), so the packing lies in the stratum `S + {p}`; that stratum closed on
+  the window kills the node.  **SNAP-DIAG** is |X| = k at pairwise interior-disjoint cells, each blocked only by the
+  others; for k >= 7 A53's census has no name and Lemma K1 kills through any closed subset.
+- **In the engine, flag-gated** (`A224_SNAP=1`, default OFF; with it off the engine is unchanged and `chordlane` is not
+  even imported): leaf rule (0) before rule CC, plus one cheap test per internal node after the coarse round.  The
+  certificate IS the theorem's hypothesis -- (a) an exact separating-axis miss certificate per other ROLE against the
+  widened box `B_p+` (page -> side-m by Theorem FC Step 2, contrapositive only; the test is taken in `t` so the tilt
+  bin is never rounded inward), (b) the pins by the class's UNCLIPPED census and the anonymous squares vacuously or by
+  an EMPTY option-table row, (c) the target stratum's FULL [191/50, 969271/250000] row.  `audit211` gained the
+  matching refutation criterion.
+- **[F]/[M] It does not fire on the k5 population.**  Replayed on EVERY node of EVERY A211 g1 certificate (72 pages):
+  294 nodes carry a candidate, **0 kills, 0 hand-offs**; 65 of 173 candidate pairs have exactly ONE blocker, 107 of
+  them the conditioned square `H`.  Y0865, the PI's own case: `F1` is near-simple at BL(1,0) (centre within 0.038,
+  tilt [0, 2.4] deg) and every other free role misses the cell exactly -- but `H` at (2.17, 1.475, 58 deg) has an edge
+  crossing x = 2 at y = 0.992, i.e. 0.008 inside the RAW cell.  At box width 0.077 the "corner point" is a sliver of
+  positive area, so the near-simple square does not block the last approach.
+- **[M] Cost nil** (0.17 s of SNAP over 60 evaluations inside a 422 s run), so the rule stays in for the lower-k sweep
+  (no `H`, smaller roles).  Pass flags UNCHANGED and no `queue_pass6.txt`: the brief made both conditional on a kill.
+- **Levers named:** branch the single blocker at the cell (a Rule NS split whose MISSES child is an immediate SNAP
+  kill), or bisect the near-simple role below the sliver.
+- Lean `Statements/SnapRule.lean`: `snap_assign`, `snap_step`, `snap_dead`, `snap_diag_two` -- theorems, no new axiom;
+  `lake build` + `lean/audit.py` exit 0, no sorry.  Files `attempts/A224-snap-rule/{code,notes,results,logs}`;
+  registry row; `results/bench224.md` (+ `snapscan224.jsonl`, `bench224.jsonl`).

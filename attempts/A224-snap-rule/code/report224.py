@@ -72,14 +72,14 @@ def live_section(rows):
     L = ["## 2. The live A/B -- run211 with the flag ON and OFF (`results/bench224.jsonl`)", "",
          "Same wall, same pads (g1), same inheritance, isolated cert dirs, `--no-fig`.  With `A224_SNAP` unset the",
          "engine is byte-for-byte the pass-5 engine; the OFF column is the control.", "",
-         "| page | flag | verdict | nodes | dead leaves | alive | SNAP eval / cand / kill / hand-off / partial | first SNAP kill | seconds |",
-         "|---|---|---|---|---|---|---|---|---|"]
+         "| page | flag | verdict | nodes | dead leaves | alive | SNAP eval / cand / kill / hand-off / partial | SNAP s | first SNAP kill | run s |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
     for (nid, mode), r in by.items():
         s = r.get("snap") or {}
-        L.append("| %s | %s | %s | %s | %s | %s | %s / %s / **%s** / %s / %s | %s | %s |" % (
+        L.append("| %s | %s | %s | %s | %s | %s | %s / %s / **%s** / %s / %s | %s | %s | %s |" % (
             nid, mode, r.get("verdict"), r.get("n_nodes"), r.get("dead_leaves"), r.get("alive_leaves"),
             s.get("runs"), s.get("cands"), s.get("kills"), s.get("handoffs"), s.get("partial"),
-            s.get("first_kill_t"), r.get("seconds")))
+            s.get("seconds"), s.get("first_kill_t"), r.get("seconds")))
     L += [""]
     dis = [nid for (nid, m) in by if m == "ON" and (nid, "OFF") in by
            and by[(nid, "ON")].get("verdict") != by[(nid, "OFF")].get("verdict")]
