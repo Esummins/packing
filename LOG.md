@@ -9369,3 +9369,53 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
 - Files: `attempts/A240-cross/{code,results,logs}`, `docs/proofs/cross.md`, pages `docs/residue_map/campaigns/A240-cross/`
   (`cross_ring_x.svg`, `oppose_corners.svg`, `wall_grains.svg`; 11 panels geometry-checked), Lean `Statements/Open/Cross.lean`
   (no axiom for a refuted statement), registry row, ledger §4.
+
+## 2026-09-16 — A241-row-cascade (Opus) — running (both workers detached and resumable)
+
+- **Target** (A238's finding, PI 13:00): every kill rule of the k5 toolkit acts on Theorem FC's forced cells;
+  `classes178.forced_cells` marks a cell usable only when the one-slot EXTENSION carries a FULL-window A56
+  scoreboard row; the eight k4 classes A55 killed exactly have no row, so every k ≤ 3 class has 0 usable cells.
+  Row them and the same geometry that prices k4 starts pricing k3.
+- **[T] The brief's cascade rule is unsound, and A241 does not use it.**  "Row C when every one-slot EXTENSION of
+  C is full-window closed" fails because Lemma K1 (`instratum_bridge.md` E.1) climbs **up** containment: a packing
+  whose skeleton is *exactly* C carries no fifth simple square, so C's extension classes never apply to it.  What
+  closed extensions give is **Lemma SLOT-CROWD** — every usable slot of C is met by ≥ 2 non-pin squares, i.e. C's
+  FORCED CELLS, which is the traction A238 measured — and promoting that to "C is empty" is the crowd certificate
+  CS(S; …) of `slot_crowds.md` §4, which **A94 measured does not certify** (LP PASS at every window, runs B₂–B₄
+  FAIL with 30–32 exact holes; the Trump-image ceiling voids the chain for k4_03 / k4_06 / k4_08 regardless).
+  A row therefore has exactly two sources, and `code/rowcascade241.py` implements only those: **(A)** a direct
+  `parametric-kill-certificate-v1` 4D PASS over [191/50, 969271/250000] + canary C2, and **(B)** the Lemma K1(i)
+  climb (a class CONTAINING a rowed class inherits its row, with the D4 element recorded).
+- **[T] A55's eight exact kills were never one table edit from a row.**  `closed_disjoint_bridge.md` B.2 prices the
+  whole corpus — A55's ten certificates included — at ρ ≈ 1.0000009·10⁻⁹ with A = 5/2, so Corollary B′'s (H′) reads
+  **s″/m − 1 < 4.0·10⁻¹⁰**: an s0-anchored PASS instantiates the kill at *no side of [3.82, ŝ] whatsoever*, and
+  A55's "scales 1.048–1.164" are the LP's mass slack, not a dilation window.  The window statement is A56's
+  parametric layer re-run on A55's base certificates — a compute campaign (`code/param241.py` + `.sh`: anchoring
+  ladder gap → nearest-wall → mid-band, stage-0 gate at 191/50 with the unmodified A53 `verify_case.py`, 4D over
+  the window, C2 at 191/50 / mid / s0; resumable, one row per class to `results/param241.jsonl`).
+- **[M] The tier splits three ways** (`results/rows241.md`, the full extension table for all 16 protected classes
+  plus A55's eight kills plus `k3_00`): **rowable today on CPU alone** — `k3_00` and `k4_00 / 01 / 02 / 04 / 07 /
+  09 / 10 / 12`, each already carrying its own A55 PASS, and `k4_00 / 01 / 02` each CONTAIN `k3_00` (D4 `id`,
+  A55 `cap.json`'s own witness field) so they row by (B) for free once `k3_00` lands; **never rowable by a
+  certificate of this kind** — the six protected k4 classes and the ten open k ≤ 3 classes, forbidden by K1(ii)
+  (each is ≤ an open k5 class, so τ* ≥ 11 − |S|), reachable only through P-TREE's obligation O1 after the frontier;
+  **waiting on the frontier for FORCED CELLS rather than for a row** — the protected k4 cells extending into
+  `trump5` / `k5_11` / `k5_16` (alive nodes 325 / 713 / 552), with `corners4` 0/8 the extreme case.
+- **[M] First measurement from the campaign: `k4_07` PASSes stage 0 at 191/50 on all three anchorings and FAILs the
+  4D at depth 48 with 40 witness boxes and 0 HOLES** — depth-limited, not a geometric refusal.  Its certificate has
+  12 atoms and only 0.017 of mass slack (total 1745751/250000 = 6.983 < budget 7), which is exactly the profile
+  that will need A56's `resolve_margin` re-solve; the fat certificates (185–579 atoms) are the campaign's best
+  bets.  Resume block: re-running `bash attempts/A241-row-cascade/code/param241.sh 2400 56` skips every class
+  already TRANSFERRED and retries the rest at the deeper cap, no code change.
+- **Wiring**: `code/rowcascade241.py --apply --report` runs every 10 minutes from `docs/shadows/status_loop.sh`
+  (installed by RENAME — the loop was running; the pre-A241 copy is kept as `status_loop.sh.pre_a241`), writing the
+  A56 scoreboard atomically (tmp + `os.replace`, backup `scoreboard.json.bak_pre_a241`, change log
+  `results/cascade241.jsonl`), so a class rows itself the moment its verification lands and the k ≤ 3 tier gains
+  its forced cells with no further attempt.  `code/traction241.sh` re-runs A238's benchmark (its code unchanged,
+  isolated `--cert-dir` / `--results`) on k3_02's 20 A100 head-to-head cells at wall 300 s against A238's blind run
+  (0 DEAD / 20 ALIVE, mean 4.3 s, no kills, depth 0), and waits for the cascade before it starts so the number is
+  never a re-measurement of the blind run.
+- Files: `attempts/A241-row-cascade/{code,results,notes,certs,logs}` (`results/rows241.md`,
+  `results/traction241.md`, `results/param241.jsonl`, `results/cascade241.jsonl`, `notes/cascade241.md`),
+  `docs/shadows/status_loop.sh`, registry row, ledger §3.
+
