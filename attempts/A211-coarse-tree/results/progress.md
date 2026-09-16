@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-16 08:01:13
+# A211 progress -- 2026-09-16 08:06:06
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -393,15 +393,16 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y0186__L1 | zero | 2 (tree: 202 nodes, depth 7, CC 4, exact 0, NS 5, pockets 42) | DEAD (s0-only, WINDOW-PENDING) | 1409 |
 | k5_16_interior_Y0036 | g1 | 2 (tree: 83 nodes, depth 5, CC 0, exact 0, NS 4, pockets 10) | DEAD | 414 |
 | k5_16_interior_Y0036 | zero | 2 (tree: 80 nodes, depth 5, CC 0, exact 0, NS 4, pockets 11) | DEAD (s0-only, WINDOW-PENDING) | 430 |
+| k5_16_interior_Y0033 | g1 | 2 (tree: 238 nodes, depth 4, CC 0, exact 0, NS 0, pockets 1) | DEAD | 739 |
 | k5_16_interior_Y0033 | zero | 2 (tree: 208 nodes, depth 4, CC 0, exact 0, NS 0, pockets 3) | DEAD (s0-only, WINDOW-PENDING) | 540 |
 | k5_11_interior_Y0461__L1 | zero | 2 (tree: 192 nodes, depth 7, CC 0, exact 0, NS 2, pockets 40) | DEAD (s0-only, WINDOW-PENDING) | 1210 |
 | k5_11_interior_Y0384__L1 | zero | 2 (tree: 281 nodes, depth 10, CC 13, exact 0, NS 8, pockets 41) | DEAD (s0-only, WINDOW-PENDING) | 1697 |
 
-CPU-h in this block: 50.54
+CPU-h in this block: 50.74
 
 ## Price and projection
 
 * gallery: 17 / 18 pages DEAD at the window pad, 8.84 CPU-h
-* frontier: 170 nodes run (152 DEAD at the window pad), 50.54 CPU-h; the census has 148 alive nodes, 133 remaining
+* frontier: 170 nodes run (153 DEAD at the window pad), 50.74 CPU-h; the census has 147 alive nodes, 133 remaining
 * PRICE over the first 20 frontier nodes: mean 537 s, median 444 s per node (both pads); PROJECTION for the remaining 133: 19.8 CPU-h (cap 200)
 
