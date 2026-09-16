@@ -34,6 +34,7 @@ import PackingCertMathlib.Statements.Open.LemmaEps
 import PackingCertMathlib.Statements.Open.Realign
 import PackingCertMathlib.Statements.Open.LocalLock
 import PackingCertMathlib.Statements.Open.NoVV
+import PackingCertMathlib.Statements.Open.RingCapacity
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 
