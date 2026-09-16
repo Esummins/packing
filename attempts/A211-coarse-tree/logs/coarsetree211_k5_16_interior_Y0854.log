@@ -1,0 +1,41 @@
+14:52:39 [fr4] start k5_16_interior_Y0854 wall 1800 (lab 6, free 17086 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y0854 at the zero pad: ALIVE in 22453 ms; kills {'H-clip': 0, 'P': 4772, 'W': 1267, 'C': 2197, 'M': 8582, 'L': 7, 'R': 3920, 'X': 2328}; CSP units 16 -> 16 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': 1, 'TR(1,0)': None, 'TL(1,0)': None}; forced H ['TR(0,1)']
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0854 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0854 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0854_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.637, 2.655, 2.428, 2.463, 53.13, 64.011]; forced H ['TR(0,1)']; 6 slots; free squares 5
+   node R0+        d0 root: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=0.2)
+   start R0+          => DEAD (1 nodes; t = 0 s of 1800.0)
+   => DEAD (zero_page) in 0.4 s: 1 start runs, 1 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 1 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 0 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 DEAD EmptyBox 0.1s
+== stage 0 + CSP k5_16_interior_Y0854 at the g1 pad: ALIVE in 17354 ms; kills {'H-clip': 0, 'P': 4790, 'W': 1283, 'C': 818, 'M': 3933, 'L': 7, 'R': 3885, 'X': 2447}; CSP units 224 -> 224 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H ['TR(0,1)']
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0854 pad g1: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0854 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0854_g1_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.637, 2.777, 2.358, 2.463, 53.13, 64.011]; forced H ['TR(0,1)']; 6 slots; free squares 5
+   node R0+        d0 root: INTERNAL (2.9 s, 1 rounds; t=3.0)
+   node R0+r1      d0 root<-None: INTERNAL (1.3 s, 1 rounds; t=4.2)
+   node R0+.1      d1 TR(1,0)<-[7]: INTERNAL (1.4 s, 1 rounds; t=5.7)
+   node R0+.1r1    d1 root<-None: DEAD by FC r1 (5.7 s, 1 rounds; t=11.4)
+   node R0+.2      d1 TR(1,0)<-[8]: INTERNAL (1.3 s, 1 rounds; t=12.7)
+   node R0+.2r1    d1 root<-None: INTERNAL (4.0 s, 1 rounds; t=16.8)
+   node R0+.2r2    d1 root<-None: DEAD by FC r1 (6.5 s, 1 rounds; t=23.2)
+   node R0+.3      d1 TR(1,0)<-[9]: INTERNAL (1.1 s, 1 rounds; t=24.4)
+   node R0+.3r1    d1 root<-None: INTERNAL (3.1 s, 1 rounds; t=27.5)
+   node R0+.3r2    d1 root<-None: DEAD by FC r1 (5.0 s, 1 rounds; t=32.6)
+   node R0+.4      d1 TR(1,0)<-[13]: INTERNAL (1.2 s, 1 rounds; t=33.8)
+   node R0+.4r1    d1 root<-None: DEAD by FC r1 (2.6 s, 1 rounds; t=36.4)
+   node R0+.5      d1 TR(1,0)<-[14]: INTERNAL (1.1 s, 1 rounds; t=37.6)
+   node R0+.5r1    d1 root<-None: INTERNAL (4.3 s, 1 rounds; t=41.9)
+   node R0+.5r2    d1 root<-None: DEAD by FC r1 (3.3 s, 1 rounds; t=45.2)
+   start R0+          => DEAD (15 nodes; t = 45 s of 1800.0)
+   => DEAD (g1_page) in 45.3 s: 1 start runs, 15 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 5 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 6 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 2.9s; R0+r1 d0 INTERNAL 1.3s; R0+.1 d1 INTERNAL 1.4s; R0+.1r1 d1 DEAD FC 5.7s; R0+.2 d1 INTERNAL 1.3s; R0+.2r1 d1 INTERNAL 4.0s; R0+.2r2 d1 DEAD FC 6.5s; R0+.3 d1 INTERNAL 1.1s; R0+.3r1 d1 INTERNAL 3.1s; R0+.3r2 d1 DEAD FC 5.0s; R0+.4 d1 INTERNAL 1.2s; R0+.4r1 d1 DEAD FC 2.6s; R0+.5 d1 INTERNAL 1.1s; R0+.5r1 d1 INTERNAL 4.3s; R0+.5r2 d1 DEAD FC 3.3s
+== k5_16_interior_Y0854: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 649, 'misses': 254, 'entries': 254}; clip {'hits': 24060, 'misses': 26061, 'entries': 26061}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 903, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 16}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 678, 'obs_misses': 225, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 225, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
