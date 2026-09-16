@@ -36,6 +36,7 @@ import PackingCertMathlib.Statements.Open.LocalLock
 import PackingCertMathlib.Statements.Open.NoVV
 import PackingCertMathlib.Statements.Open.RingCapacity
 import PackingCertMathlib.Statements.Open.PocketWaste
+import PackingCertMathlib.Statements.Open.Cross
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 

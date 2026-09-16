@@ -46,6 +46,10 @@ import PackingCertMathlib.Statements
 #print axioms PackingCert.S11.OpenLemmas.inherit_kill
 #print axioms PackingCert.S11.OpenLemmas.inherit_branches
 #print axioms PackingCert.S11.OpenLemmas.lemma_CORNER_COVER
+#print axioms PackingCert.S11.OpenLemmas.crossing_lemma
+#print axioms PackingCert.S11.OpenLemmas.isCompact_of_isUnitSquare
+#print axioms PackingCert.S11.OpenLemmas.chains_meet
+#print axioms PackingCert.S11.OpenLemmas.chains_share_or_touch
 #print axioms PackingCert.S11.OpenLemmas.lemma_PUSH
 #print axioms PackingCert.S11.OpenLemmas.simple_packing_fits
 #print axioms PackingCert.S11.OpenLemmas.ceil_sqrt_eleven
@@ -68,6 +72,13 @@ import PackingCertMathlib.Statements
 #print axioms PackingCert.S11.OpenLemmas.optimal_not_stuck
 #print axioms PackingCert.S11.OpenLemmas.no_optimal_of_kill
 #print axioms PackingCert.S11.OpenLemmas.one_tilted
+#print axioms PackingCert.S11.OpenLemmas.pocket_cap
+#print axioms PackingCert.S11.OpenLemmas.packsBeside_compl
+#print axioms PackingCert.S11.OpenLemmas.ring_capacity_of_pocket_cap
+#print axioms PackingCert.S11.OpenLemmas.locked_crowd_free_of_pocket_cap
+#print axioms PackingCert.S11.OpenLemmas.one_flush_value_of_pocket_cap
+#print axioms PackingCert.S11.OpenLemmas.optimal_psiMin_not_stuck_of_pocket_cap
+#print axioms PackingCert.S11.OpenLemmas.capacity_le_of_pierce
 #print axioms PackingCert.S11.OpenLemmas.realign
 #print axioms PackingCert.S11.OpenLemmas.one_flush_of_realign
 #print axioms PackingCert.S11.OpenLemmas.fourcrowd_dead_of_step_kill
