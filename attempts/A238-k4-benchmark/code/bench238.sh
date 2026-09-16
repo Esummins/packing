@@ -20,12 +20,16 @@ mkdir -p $A/logs $A/certs $A/results docs/residue_map/campaigns/A238-k4-benchmar
 mine() { powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter 'Name=\"python.exe\"' | Where-Object { \$_.CommandLine -match 'run238' } | Measure-Object | Select-Object -ExpandProperty Count" | tr -d '\r '; }
 freemb() { powershell -NoProfile -Command "[int]((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1024)" | tr -d '\r '; }
 
+PATHS="$A/certs $A/results $A/logs $A/code docs/residue_map/campaigns/A238-k4-benchmark"
 commit() { # commit(msg) -- explicit pathspecs only, retried while another worker holds the index
   local msg="$1" k
-  for k in 1 2 3 4 5 6; do
-    git add -- $A/certs $A/results $A/logs $A/code docs/residue_map/campaigns/A238-k4-benchmark 2>/dev/null
-    if git commit -q -m "$msg" -- $A/certs $A/results $A/logs $A/code docs/residue_map/campaigns/A238-k4-benchmark 2>/dev/null; then return 0; fi
-    sleep $((5 * k))
+  for k in 1 2 3; do
+    git add -- $PATHS 2>/dev/null
+    if git diff --cached --quiet -- $PATHS 2>/dev/null; then return 0; fi     # nothing of ours changed
+    if git commit -q -m "$msg
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>" -- $PATHS 2>/dev/null; then return 0; fi
+    sleep $((4 * k))
   done
   echo "$(date +%H:%M:%S) commit failed (index busy) for: $msg"
 }
