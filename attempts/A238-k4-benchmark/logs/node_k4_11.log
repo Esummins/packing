@@ -2800,3 +2800,29 @@
    per node: R d0 INTERNAL 1.7s; Rr1 d0 INTERNAL 2.9s; Rr2 d0 INTERNAL 5.5s; R.1 d1 DEAD NOROOM-CN 2.3s; R.2 d1 DEAD NOROOM-CN 1.2s; R.3 d1 DEAD FC 1.0s
 == k4_11_c0_Y1015: g1 None | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
 == A238 k4_11_c0_Y1015 [k4_11]: {'zero': 'DEAD'} in 51.2 s
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k4_11_c0_Y1023 at the zero pad: ALIVE in 19979 ms; kills {'H-clip': 0, 'P': 2618, 'W': 1277, 'C': 744, 'M': 2486, 'L': 0, 'R': 4547, 'X': 1694}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BR(0,1)': 1, 'BR(1,0)': None, 'TR(0,1)': 1, 'TR(1,0)': None}; forced H ['BR(0,1)', 'TR(0,1)']
+== k4_11_c0_Y1023 page pad zero: start attempts/A238-k4-benchmark/certs/csp209_k4_11_c0_Y1023_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.498, 2.637, 2.078, 2.218, 82.372, 90.0]; forced H ['BR(0,1)', 'TR(0,1)']; 5 slots; free squares 6
+   node R          d0 root: INTERNAL (1.9 s, 1 rounds; t=2.0)
+   node Rr1        d0 root<-None: INTERNAL (1.9 s, 1 rounds; t=3.8)
+   node Rr2        d0 root<-None: INTERNAL (4.6 s, 1 rounds; t=8.4)
+   node R.1        d1 TR(1,0)<-[8]: INTERNAL (6.1 s, 1 rounds; t=14.6)
+   Rule NS at the WEDGE at R.1: F3 meets / misses the wedge of (F2, BR(1,0)) -- 6 target(s): wedge-e-T=[2.28851,2.87708,0.5,1.0]; wedge-e-T=[1.87708,2.28851,1.0,1.0]; wedge--e-L=[1.87708,2.37709,-0.0,0.63029]; wedge--e-L=[1.87708,1.8
+   node R.1.1      d2 BR(1,0)<-['meets W']: INTERNAL (3.7 s, 1 rounds; t=18.5)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 8 s (1 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.1.1      d2: DEAD by NOROOM-CN -- no-room at R.1.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the rest h
+   node R.1.2      d2 BR(1,0)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=27.5)
+   node R.2        d1 TR(1,0)<-[9]: INTERNAL (2.3 s, 1 rounds; t=29.8)
+   Rule NS at the WEDGE at R.2: F3 meets / misses the wedge of (F2, BR(1,0)) -- 6 target(s): wedge-e-T=[2.28851,2.87708,0.5,1.0]; wedge-e-T=[1.87708,2.28851,1.0,1.0]; wedge--e-L=[1.87708,2.37709,-0.0,0.63029]; wedge--e-L=[1.87708,1.8
+   node R.2.1      d2 BR(1,0)<-['meets W']: INTERNAL (1.9 s, 1 rounds; t=31.8)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 10 s (3 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.2.1      d2: DEAD by NOROOM-CN -- no-room at R.2.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the rest h
+   node R.2.2      d2 BR(1,0)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=42.4)
+   node R.3        d1 TR(1,0)<-[13]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=42.9)
+   start R            => DEAD (10 nodes; t = 43 s of 300.0)
+   => DEAD (zero_page) in 43.0 s: 0 start runs, 10 nodes, depth 2, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 5 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 7 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R d0 INTERNAL 1.9s; Rr1 d0 INTERNAL 1.9s; Rr2 d0 INTERNAL 4.6s; R.1 d1 INTERNAL 6.1s; R.1.1 d2 DEAD NOROOM-CN 3.7s; R.1.2 d2 DEAD FC+EPS 0.0s; R.2 d1 INTERNAL 2.3s; R.2.1 d2 DEAD NOROOM-CN 1.9s; R.2.2 d2 DEAD FC+EPS 0.0s; R.3 d1 DEAD EmptyBox 0.5s
+== k4_11_c0_Y1023: g1 None | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+== A238 k4_11_c0_Y1023 [k4_11]: {'zero': 'DEAD'} in 63.1 s
