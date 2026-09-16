@@ -1,0 +1,106 @@
+{
+ "nid": "k4_11_c0_Y0883",
+ "runs": {},
+ "camp": "A238",
+ "cls": "k4_11",
+ "hypothesis": "A238 protected-class page (attempts/A238-k4-benchmark/code/load238.py): the hypothesis is M_S(m) & YES(H) -- P is an 11-square packing in [0, m]^2 with an axis-aligned unit square centred at every slot of class k4_11 (slack pin cores a = 1/2 - delta_pin, delta_pin = 0.02: Lemma P-TREE s.1, docs/proofs/protected_trees.md), and some NON-pin square of the dilate Delta_{s0/m}P has its (centre, tilt) in H = [2.357813, 2.49757, 1.379514, 1.519271, 41.11209, 53.130102].  A DEAD verdict is the instance of `stratum_kill` for k4_11 restricted to H (Lemma K1 / Lemma P-TREE (c), obligation O1); it is NOT a statement about any other class.",
+ "h_meta": {
+  "kind": "cover",
+  "state": "attemptable",
+  "ghost": 0.17713846942315858,
+  "hugs": [],
+  "hug": null,
+  "k": 3,
+  "images_in_box": [],
+  "grid": [
+   12,
+   12,
+   8
+  ],
+  "rect": [
+   1.1,
+   2.777084,
+   1.1,
+   2.777084
+  ],
+  "child_budget": 6,
+  "census": "attempts/A100-protected-pilot/results/a84_k4_11_census_j0.json"
+ },
+ "delta_pin": 0.02,
+ "budget": 6,
+ "flags": {
+  "A220_NOROOM_INHERIT": "1",
+  "A221_LANE": "1",
+  "A224_SNAP": "1",
+  "A230_EPS": "1",
+  "A238_SNAP_AT_GATE": "1",
+  "A238_GATE": "1",
+  "A238_DELTA_PIN": 0.02
+ },
+ "a100_baseline": {
+  "cells": 882,
+  "budget": 6,
+  "sample": 39,
+  "w_node_asrun_s": 558.8,
+  "w_node_eta_gated_s": 337.9,
+  "f1_first_pass": 0.3846,
+  "level1_cpu_h": 82.8,
+  "total_measured_cpu_h": 203.1,
+  "D_leaves": 28
+ },
+ "tube_direction": {
+  "cert": "certs/tube_I_0_2_3_5_landing_T28o625_rc1o625_rt21o10000.json",
+  "r_c": "1/625",
+  "r_theta": "21/10000",
+  "T": "28/625",
+  "r_c_eff": "79959002281417730789706010096270637645566846316256076397/50000000000000000000000000000000000000000000000000000000000",
+  "r_s": "0",
+  "I": [
+   0,
+   2,
+   3,
+   5
+  ],
+  "direction": "slot(I = [0, 2, 3, 5])",
+  "lemma": "Lemma TUBE-LEAF/S (attempts/A238-k4-benchmark/code/tube238.py) = Lemma P-TREE Step 4 (docs/proofs/protected_trees.md s.2) + Theorem T1 (docs/proofs/contraction_tube.md)"
+ },
+ "statement": "A238 certificate for the STRATUM k4_11: every verdict here is a statement about packings satisfying M_k4_11 (Lemma P-TREE s.1), not about any other class.",
+ "record": "attempts/A238-k4-benchmark/code/load238.py (synthesised: k4_11 pins at delta_pin 0.02 + H = cover)",
+ "tree": "k4_11_interior_j0",
+ "level": "1",
+ "stage0": {
+  "zero": {
+   "verdict": "ALIVE",
+   "leaf": null,
+   "seconds": 14.2,
+   "source": "A209 csp209 (A203's Stage0 + CSP on the record)",
+   "file": "attempts/A238-k4-benchmark/certs/csp209_k4_11_c0_Y0883_zero_s0.json",
+   "cached": false,
+   "kills": {
+    "H-clip": 0,
+    "P": 3338,
+    "W": 1216,
+    "C": 916,
+    "M": 2632,
+    "L": 0,
+    "R": 3471,
+    "X": 734
+   },
+   "caps": {
+    "BL(0,2)": null,
+    "BR(0,1)": null,
+    "BR(1,0)": 1,
+    "TR(0,1)": null,
+    "TR(1,0)": null
+   },
+   "forced_H": [
+    "BR(1,0)"
+   ],
+   "n_units_alive": 512,
+   "n_units": 512,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)"
+  }
+ },
+ "verdicts": {},
+ "stage_reached": "0"
+}
