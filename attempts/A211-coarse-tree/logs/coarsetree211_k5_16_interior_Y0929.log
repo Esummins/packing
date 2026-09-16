@@ -753,3 +753,39 @@
    no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
    node R0+.2.4.2  d3: DEAD by NOROOM -- no-room at R0+.2.4.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
    node R0+.2.4.3  d3 BL(1,0)<-[6, 16]: INTERNAL (3.4 s, 1 rounds; t=1114.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.2.4.3  d3: DEAD by NOROOM -- no-room at R0+.2.4.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.2.4.4  d3 BL(1,0)<-[10, 11]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=1123.3)
+   node R0+.2.4.5  d3 BL(1,0)<-[10, 16]: INTERNAL (2.3 s, 1 rounds; t=1127.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.2.4.5  d3: DEAD by NOROOM -- no-room at R0+.2.4.5 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.2.4.6  d3 BL(1,0)<-[11, 15]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=1135.2)
+   node R0+.2.4.7  d3 BL(1,0)<-[11, 16]: DEAD by FC r1 (1.9 s, 1 rounds; t=1139.0)
+   node R0+.2.4.8  d3 BL(1,0)<-[15, 16]: INTERNAL (4.2 s, 1 rounds; t=1145.1)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R0+.2.4.8  d3: DEAD by EmptyBox -- no-room at R0+.2.4.8 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R0+.3      d1 TL(1,0)<-[18]: INTERNAL (1.7 s, 1 rounds; t=1154.3)
+   node R0+.3.1    d2 TR(1,0)<-[9]: INTERNAL (2.5 s, 1 rounds; t=1158.7)
+   node R0+.3.1.1  d3 TR(0,1)<-[16]: INTERNAL (2.8 s, 1 rounds; t=1163.4)
+   node R0+.3.1.1.1 d4 BL(1,0)<-[5]: INTERNAL (3.2 s, 1 rounds; t=1168.8)
+   no-room (k=10, m=1): UNDECIDED in 16 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.1.1.1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.1.1.1.p1 d5 pocket<-[0]: INTERNAL (14.4 s, 1 rounds; t=1202.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.3.1.1.1.p1: split F1 at BR(0,1) (meeting fraction 0.068186; alive rows []; named ['F1', 'F3', 'F5'])
+   node R0+.3.1.1.1.p1.1 d6 BR(0,1)<-None: INTERNAL (14.6 s, 1 rounds; t=1219.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.1.1.1.p1.1: bisect F2 on t at 53.1301 (extents (0.150835, 0.187164), tilt 90.0 deg, core non-empty, 46 piece(s); split 1 of 4)
+   node R0+.3.1.1.1.p1.1.1 d7 F2<-['t<=53.1301']: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=1221.8)
+   node R0+.3.1.1.1.p1.1.2 d7 F2<-['t>=53.1301']: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=1224.2)
+   node R0+.3.1.1.1.p1.2 d6 BR(0,1)<-None: INTERNAL (8.4 s, 1 rounds; t=1234.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.1.1.1.p1.2: bisect F2 on t at 53.1301 (extents (0.150835, 0.187164), tilt 90.0 deg, core non-empty, 46 piece(s); split 1 of 4)
+   node R0+.3.1.1.1.p1.2.1 d7 F2<-['t<=53.1301']: DEAD by REACH r1 (6.0 s, 1 rounds; t=1242.9)
+   node R0+.3.1.1.1.p1.2.2 d7 F2<-['t>=53.1301']: DEAD by REACH r1 (3.9 s, 1 rounds; t=1248.8)
+   node R0+.3.1.1.2 d4 BL(1,0)<-[6]: INTERNAL (5.0 s, 1 rounds; t=1255.7)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 8 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R0+.3.1.1.2 d4: DEAD by NOROOM-POCKET -- no-room at R0+.3.1.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R0+.3.1.1.3 d4 BL(1,0)<-[10]: INTERNAL (3.0 s, 1 rounds; t=1271.2)
+   no-room (k=10, m=1): UNDECIDED in 16 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.1.1.3: 1 pockets (k=10, m=1): the next square instantiated in each
