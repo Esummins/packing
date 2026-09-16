@@ -110,7 +110,7 @@ def summarise(cls, items):
         snap_k += (r.get("snap") or {}).get("kills") or 0
         snap_h += (r.get("snap") or {}).get("handoffs") or 0
         depth_hist[r.get("max_depth")] += 1
-    return dict(cls=cls, cover=cov, head=H, extra=E, all=allp, root=(dict(verdict=root.get("verdict"), seconds=root.get("priced_seconds") or root.get("seconds"),
+    return dict(cls=cls, cover=cov, head=H, extra=E, all=allp, rows_head=head, root=(dict(verdict=root.get("verdict"), seconds=root.get("priced_seconds") or root.get("seconds"),
                 n_nodes=root.get("n_nodes"), gate=root.get("gate_root")) if root else None),
                 rules=dict(rules), gate_hits=gate_hits, tube_leaves=tube_leaves, snap_kills=snap_k, snap_handoffs=snap_h,
                 depth=dict(depth_hist), a100=a100_proj(cls))
@@ -197,6 +197,19 @@ def md(sums):
               "root (A84-P1 node, H = the whole interior zone): %s" % (S["root"] or "not run"), "",
               "kills by rule: `%s`; gate hits %d; TRUMP-TUBE leaves %d; SNAP kills %d, hand-offs %d; max depth %s" % (
                   json.dumps(S["rules"]), S["gate_hits"], S["tube_leaves"], S["snap_kills"], S["snap_handoffs"], json.dumps(S["depth"])), ""]
+        cells = sorted(((i, r) for i, r in S["rows_head"]), key=lambda t: t[0])
+        if cells:
+            L += ["### %s — cell by cell (A100's own LP row against A238's geometry)" % S["cls"], "",
+                  "| cell | A100 verdict | A100 s | A238 verdict | A238 s | killed by | nodes | depth |",
+                  "|---|---|---|---|---|---|---|---|"]
+            for i, r in cells:
+                a = r.get("a100") or {}
+                L.append("| `c0_Y%04d` | %s | %.0f | **%s** | %.1f | %s | %s | %s |" % (
+                    i, str(a.get("verdict") or "-")[:34], (a.get("lp_s") or 0) + (a.get("cert_s") or 0),
+                    r.get("verdict"), r.get("priced_seconds") or 0.0,
+                    ", ".join("%s x%d" % (k, v) for k, v in sorted((r.get("kills_by_rule") or {}).items())) or "—",
+                    r.get("n_nodes"), r.get("max_depth")))
+            L.append("")
         p = price(S)
         if p:
             L += ["price: %d cover cells x %.1f s = **%.1f CPU-h** of geometry; the %.0f %% geometry leaves over (at "
@@ -216,6 +229,8 @@ if __name__ == "__main__":
     sums = [summarise(c, it) for c, it in per_class(R).items()]
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     open(a.out, "w", encoding="utf-8").write(md(sums))
+    for S in sums:
+        S.pop("rows_head", None)
     json.dump(dict(rows=len(R), classes=sums, price={S["cls"]: price(S) for S in sums}),
               open(os.path.join(A238, "results", "bench238_summary.json"), "w", encoding="utf-8"), indent=1, default=str)
     print("A238 report: %d rows, %d classes -> %s" % (len(R), len(sums), os.path.relpath(a.out, ROOT)))
