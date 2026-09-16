@@ -638,3 +638,22 @@
    node R.5        d1 TR(1,0)<-[19]: INTERNAL (5.2 s, 1 rounds; t=161.9)
    node R.5.1      d2 BL(0,2)<-[3, 4]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=162.7)
    node R.5.2      d2 BL(0,2)<-[3, 8]: DEAD by EmptyBox r1 (3.5 s, 1 rounds; t=166.3)
+   node R.5.3      d2 BL(0,2)<-[3, 9]: INTERNAL (4.9 s, 1 rounds; t=171.3)
+   Rule NS at the WEDGE at R.5.3: F2 meets / misses the wedge of (F1, BR(0,1)) -- 6 target(s): wedge-e-T=[3.25203,3.87708,1.5,2.0]; wedge-e-T=[2.87708,3.25203,2.0,2.0]; wedge--e-L=[2.87708,3.37708,1.0,1.57542]; wedge--e-L=[2.87708,2.87
+   node R.5.3.1    d3 BR(0,1)<-['meets W']: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=172.0)
+   node R.5.3.2    d3 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=172.1)
+   node R.5.4      d2 BL(0,2)<-[4, 8]: INTERNAL (6.8 s, 1 rounds; t=179.0)
+   Rule NS at the WEDGE at R.5.4: F2 meets / misses the wedge of (F1, BR(0,1)) -- 6 target(s): wedge-e-T=[3.25203,3.87708,1.5,2.0]; wedge-e-T=[2.87708,3.25203,2.0,2.0]; wedge--e-L=[2.87708,3.37708,1.0,1.57542]; wedge--e-L=[2.87708,2.87
+   node R.5.4.1    d3 BR(0,1)<-['meets W']: INTERNAL (9.4 s, 1 rounds; t=188.8)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 5 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.5.4.1    d3: DEAD by NOROOM-POCKET -- no-room at R.5.4.1 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.5.4.2    d3 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=194.3)
+   node R.5.5      d2 BL(0,2)<-[4, 9]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=194.9)
+   node R.5.6      d2 BL(0,2)<-[8, 9]: DEAD by S-CLIP r1 (1.0 s, 1 rounds; t=196.1)
+   start R            => DEAD (36 nodes; t = 196 s of 300.0)
+   => DEAD (zero_page) in 196.2 s: 0 start runs, 36 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 1 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 23 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 28 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.03 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R d0 INTERNAL 2.8s; Rr1 d0 INTERNAL 1.4s; Rr2 d0 INTERNAL 2.2s; R.1 d1 INTERNAL 3.9s; R.1.1 d2 DEAD NOROOM-CN 5.6s; R.1.2 d2 INTERNAL 3.3s; R.1.2.p1 d3 DEAD NOROOM-POCKET 7.8s; R.1.2.p2 d3 DEAD EmptyBox 0.2s; R.1.3 d2 DEAD EmptyBox 1.0s; R.1.4 d2 DEAD EmptyBox 0.2s; R.2 d1 INTERNAL 2.0s; R.2.1 d2 DEAD NOROOM-CN 4.3s; R.2.2 d2 DEAD NOROOM-POCKET 4.0s; R.2.3 d2 DEAD EmptyBox 0.9s; R.3 d1 INTERNAL 2.6s; R.3r1 d1 DEAD EmptyBox 2.8s; R.4 d1 INTERNAL 2.4s; R.4.1 d2 DEAD NOROOM-CN 3.6s; R.4.2 d2 DEAD NOROOM-CN 2.4s; R.4.3 d2 INTERNAL 5.2s; R.4.3.1 d3 DEAD EmptyBox 0.7s; R.4.3.2 d3 DEAD NOROOM-POCKET 5.4s; R.4.3.3 d3 DEAD EmptyBox 0.5s; R.4.4 d2 INTERNAL 4.3s; R.4.4r1 d2 DEAD EmptyBox 0.8s; R.5 d1 INTERNAL 5.2s; R.5.1 d2 DEAD EmptyBox 0.6s; R.5.2 d2 DEAD EmptyBox 3.5s; R.5.3 d2 INTERNAL 4.9s; R.5.3.1 d3 DEAD EmptyBox 0.3s; R.5.3.2 d3 DEAD FC+EPS 0.0s; R.5.4 d2 INTERNAL 6.8s; R.5.4.1 d3 DEAD NOROOM-POCKET 9.4s; R.5.4.2 d3 DEAD FC+EPS 0.0s; R.5.5 d2 DEAD EmptyBox 0.5s; R.5.6 d2 DEAD S-CLIP 1.0s
+== k4_11_c0_Y0404: g1 None | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+== A238 k4_11_c0_Y0404 [k4_11]: {'zero': 'DEAD'} in 214.6 s
