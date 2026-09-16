@@ -1226,3 +1226,43 @@ KeyError: 'A238: no landing tube certificate for the direction slot(I = [0, 1, 3
    node R.1.1.2.1  d4 BR(1,0)<-[16]: INTERNAL (3.0 s, 1 rounds; t=96.8)
    Rule NS at R.1.1.2.1: split H at BR(0,1) (meeting fraction 0.362796; alive rows [22, 23]; named ['F2', 'F3', 'H'])
    node R.1.1.2.1.1 d5 BR(0,1)<-None: INTERNAL (3.6 s, 1 rounds; t=100.5)
+   node R.1.1.2.1.1x d5 root<-None: INTERNAL (37.7 s, 3 rounds; t=138.3)
+   Rule NS at the WEDGE at R.1.1.2.1.1: F1 meets / misses the wedge of (F4, TL(1,0)) -- 5 target(s): wedge--e-B=[1.0,1.9373,2.87708,3.37708]; wedge--e-B=[1.9373,2.0,2.87708,2.87708]; wedge-e^-B=[1.0,1.4373,2.87708,3.15957]; wedge--e^-B=[1.5,
+   node R.1.1.2.1.1.1 d6 TL(1,0)<-['meets W']: DEAD by REACH r1 (6.3 s, 1 rounds; t=145.0)
+   node R.1.1.2.1.1.2 d6 TL(1,0)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 3 rounds; t=145.1)
+   node R.1.1.2.1.2 d5 BR(0,1)<-None: INTERNAL (1.0 s, 1 rounds; t=146.2)
+   node R.1.1.2.1.2x d5 root<-None: INTERNAL (18.0 s, 3 rounds; t=164.3)
+   Rule NS at R.1.1.2.1.2: split H at TL(1,0) (meeting fraction 0.012733; alive rows [9, 14]; named ['F1', 'H'])
+   node R.1.1.2.1.2.1 d6 TL(1,0)<-None: INTERNAL (4.4 s, 1 rounds; t=168.8)
+   node R.1.1.2.1.2.1x d6 root<-None: DEAD by REACH r2 (24.0 s, 2 rounds; t=192.9)
+   node R.1.1.2.1.2.2 d6 TL(1,0)<-None: INTERNAL (0.7 s, 1 rounds; t=193.8)
+   node R.1.1.2.1.2.2r1 d6 root<-None: INTERNAL (5.1 s, 1 rounds; t=199.0)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 8 s (1 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.1.1.2.1.2.2 d6: DEAD by NOROOM-CN -- no-room at R.1.1.2.1.2.2 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; th
+   node R.1.1.2.2  d4 BR(1,0)<-[17]: INTERNAL (2.6 s, 1 rounds; t=209.8)
+   Rule NS at R.1.1.2.2: split H at BR(0,1) (meeting fraction 0.328529; alive rows [22, 23]; named ['F2', 'F3', 'H'])
+   node R.1.1.2.2.1 d5 BR(0,1)<-None: INTERNAL (1.6 s, 1 rounds; t=211.5)
+   node R.1.1.2.2.1x d5 root<-None: INTERNAL (22.8 s, 3 rounds; t=234.4)
+   Rule NS at the WEDGE at R.1.1.2.2.1: F1 meets / misses the wedge of (F4, TL(1,0)) -- 5 target(s): wedge--e-B=[1.0,1.94063,2.87708,3.37708]; wedge--e-B=[1.94063,2.0,2.87708,2.87708]; wedge-e^-B=[1.0,1.44063,2.87708,3.14994]; wedge--e^-B=[1
+   node R.1.1.2.2.1.1 d6 TL(1,0)<-['meets W']: INTERNAL (8.5 s, 1 rounds; t=243.3)
+   no-room (k=9, m=2): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.1.2.2.1.1 d6: DEAD by NOROOM -- no-room at R.1.1.2.2.1.1 (k=9, m=2; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.1.2.2.1.2 d6 TL(1,0)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 3 rounds; t=246.3)
+   node R.1.1.2.2.2 d5 BR(0,1)<-None: INTERNAL (0.6 s, 1 rounds; t=247.0)
+   node R.1.1.2.2.2x d5 root<-None: INTERNAL (11.0 s, 3 rounds; t=258.2)
+   Rule NS at R.1.1.2.2.2: split H at TL(1,0) (meeting fraction 0.406629; alive rows [9, 14]; named ['F1', 'H'])
+   node R.1.1.2.2.2.1 d6 TL(1,0)<-None: INTERNAL (2.2 s, 1 rounds; t=260.5)
+   node R.1.1.2.2.2.1x d6 root<-None: INTERNAL (13.8 s, 3 rounds; t=274.5)
+   node R.1.1.2.2.2.1s d6 root<-None: INTERNAL (5.6 s, 1 rounds; t=280.3)
+   node R.1.1.2.2.2.1s: ALIVE [every forced slot has two named meeters after the exact cascade and the sharp round; no soft name below MAX_FRAC 0.5 left to split (next lever: LP on ]
+   node R.1.1.2.2.2.2 d6 TL(1,0)<-None: INTERNAL (1.9 s, 1 rounds; t=282.4)
+   node R.1.1.2.2.2.2r1 d6 root<-None: INTERNAL (5.3 s, 1 rounds; t=287.9)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 14 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.1.1.2.2.2.2 d6: DEAD by NOROOM-CN -- no-room at R.1.1.2.2.2.2 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; th
+   start R            => ALIVE (44 nodes; t = 302 s of 300.0)
+   => ALIVE (zero_page) in 302.6 s: 0 start runs, 44 nodes, depth 6, 0 CC kills, 10 exact leaf cascades, 7 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 9 dead / 23 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 54 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.03 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R d0 INTERNAL 1.8s; R.1 d1 INTERNAL 1.2s; R.1.1 d2 INTERNAL 1.9s; R.1.1.1 d3 INTERNAL 3.0s; R.1.1.1.1 d4 DEAD REACH 2.1s; R.1.1.1.2 d4 INTERNAL 0.4s; R.1.1.1.2.1 d5 INTERNAL 1.6s; R.1.1.1.2.1x d5 INTERNAL 21.2s [exact]; R.1.1.1.2.1s d5 ALIVE 2.8s [exact]; R.1.1.1.2.2 d5 INTERNAL 1.0s; R.1.1.1.2.2x d5 INTERNAL 10.6s [exact]; R.1.1.1.2.2s d5 ALIVE 3.3s [exact]; R.1.1.1.2.3 d5 INTERNAL 2.3s; R.1.1.1.2.3.1 d6 DEAD REACH 4.0s; R.1.1.1.2.3.2 d6 INTERNAL 1.1s; R.1.1.1.2.3.2x d6 INTERNAL 15.1s [exact]; R.1.1.1.2.3.2s d6 ALIVE 7.7s [exact]; R.1.1.1.2.4 d5 INTERNAL 0.8s; R.1.1.1.2.4x d5 INTERNAL 7.4s [exact]; R.1.1.1.2.4s d5 ALIVE 2.1s [exact]; R.1.1.2 d3 INTERNAL 0.8s; R.1.1.2.1 d4 INTERNAL 3.0s; R.1.1.2.1.1 d5 INTERNAL 3.6s; R.1.1.2.1.1x d5 INTERNAL 37.7s [exact]; R.1.1.2.1.1.1 d6 DEAD REACH 6.3s; R.1.1.2.1.1.2 d6 DEAD FC+EPS 0.0s; R.1.1.2.1.2 d5 INTERNAL 1.0s; R.1.1.2.1.2x d5 INTERNAL 18.0s [exact]; R.1.1.2.1.2.1 d6 INTERNAL 4.4s; R.1.1.2.1.2.1x d6 DEAD REACH 24.0s [exact]; R.1.1.2.1.2.2 d6 INTERNAL 0.7s; R.1.1.2.1.2.2r1 d6 DEAD NOROOM-CN 5.1s; R.1.1.2.2 d4 INTERNAL 2.6s; R.1.1.2.2.1 d5 INTERNAL 1.6s; R.1.1.2.2.1x d5 INTERNAL 22.8s [exact]; R.1.1.2.2.1.1 d6 DEAD NOROOM 8.5s; R.1.1.2.2.1.2 d6 DEAD FC+EPS 0.0s; R.1.1.2.2.2 d5 INTERNAL 0.6s; R.1.1.2.2.2x d5 INTERNAL 11.0s [exact]; R.1.1.2.2.2.1 d6 INTERNAL 2.2s; R.1.1.2.2.2.1x d6 INTERNAL 13.8s [exact]; R.1.1.2.2.2.1s d6 ALIVE 5.6s [exact]; R.1.1.2.2.2.2 d6 INTERNAL 1.9s; R.1.1.2.2.2.2r1 d6 DEAD NOROOM-CN 5.3s; R.1.1.2.3 d4 ALIVE 0.0s; R.1.1.2.4 d4 ALIVE 0.0s; R.1.2 d2 ALIVE 0.0s; R.1.3 d2 ALIVE 0.0s; R.1.4 d2 ALIVE 0.0s; R.1.5 d2 ALIVE 0.0s; R.1.6 d2 ALIVE 0.0s; R.1.7 d2 ALIVE 0.0s; R.1.8 d2 ALIVE 0.0s; R.1.9 d2 ALIVE 0.0s; R.2 d1 ALIVE 0.0s; R.3 d1 ALIVE 0.0s; R.4 d1 ALIVE 0.0s; R.5 d1 ALIVE 0.0s; R.6 d1 ALIVE 0.0s; R.7 d1 ALIVE 0.0s; R.8 d1 ALIVE 0.0s; R.9 d1 ALIVE 0.0s
+== k4_05_root: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+== A238 k4_05_root [k4_05]: {'zero': 'ALIVE'} in 340.5 s
