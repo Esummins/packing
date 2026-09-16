@@ -119,3 +119,29 @@
    node R0+.2.1.1.p1.p1.2 d6 BL(1,0)<-None: INTERNAL (118.4 s, 1 rounds; t=790.6)
    no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
    Lemma ROLE-SPLIT at R0+.2.1.1.p1.p1.2: bisect F4 on y at 2.424704 (extents (1.877085, 1.90476), tilt 90.0 deg, core EMPTY, 30 piece(s); split 1 of 4)
+   node R0+.2.1.1.p1.p1.2.1 d7 F4<-['y<=2.424704']: INTERNAL (127.4 s, 1 rounds; t=1055.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.2.1.1.p1.p1.2.1: bisect F5 on y at 2.424704 (extents (1.877085, 1.90476), tilt 90.0 deg, core EMPTY, 44 piece(s); split 1 of 4)
+   node R0+.2.1.1.p1.p1.2.1.1 d8 F5<-['y<=2.424704']: INTERNAL (163.8 s, 1 rounds; t=1371.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.2.1.1.p1.p1.2.1.1: bisect F4 on x at 2.438541 (extents (1.877085, 0.88476), tilt 90.0 deg, core EMPTY, 72 piece(s); split 2 of 4)
+   node R0+.2.1.1.p1.p1.2.1.1.1 d9 F4<-['x<=2.438541']: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=1578.3)
+   node R0+.2.1.1.p1.p1.2.1.1.2 d9 F4<-['x>=2.438541']: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=1580.0)
+   node R0+.2.1.1.p1.p1.2.1.2 d8 F5<-['y>=2.424704']: INTERNAL (65.5 s, 1 rounds; t=1645.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.2.1.1.p1.p1.2.1.2: bisect F4 on x at 2.438541 (extents (1.877085, 0.88476), tilt 90.0 deg, core EMPTY, 60 piece(s); split 2 of 4)
+   node R0+.2.1.1.p1.p1.2.1.2.1 d9 F4<-['x<=2.438541']: DEAD by EmptyBox r1 (1.8 s, 1 rounds; t=1702.3)
+   node R0+.2.1.1.p1.p1.2.1.2.2 d9 F4<-['x>=2.438541']: INTERNAL (49.4 s, 1 rounds; t=1752.1)
+   node R0+.2.1.1.p1.p1.2.1.2.2r1 d9 root<-None: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=1753.2)
+   node R0+.2.1.1.p1.p1.2.2 d7 F4<-['y>=2.424704']: INTERNAL (50.4 s, 1 rounds; t=1803.9)
+   node R0+.2.1.1.p1.p1.2.2: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R0+          => ALIVE (30 nodes; t = 1877 s of 1800.0)
+   => ALIVE (g1_page) in 1876.6 s: 1 start runs, 30 nodes, depth 9, 0 CC kills, 0 exact leaf cascades, 1 NS splits, 2 pocket splits, 8 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 12 dead / 14 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 28 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.03 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 2.8s; R0+.1 d1 INTERNAL 2.3s; R0+.1r1 d1 INTERNAL 1.9s; R0+.1.1 d2 DEAD REACH 4.8s; R0+.1.2 d2 DEAD REACH 2.3s; R0+.1.3 d2 DEAD REACH 2.1s; R0+.2 d1 INTERNAL 2.1s; R0+.2.1 d2 INTERNAL 2.9s; R0+.2.1.1 d3 INTERNAL 2.3s; R0+.2.1.1.p1 d4 INTERNAL 8.3s; R0+.2.1.1.p1.p1 d5 INTERNAL 99.5s; R0+.2.1.1.p1.p1.1 d6 INTERNAL 120.9s; R0+.2.1.1.p1.p1.1.1 d7 INTERNAL 32.2s; R0+.2.1.1.p1.p1.1.1.1 d8 DEAD EmptyBox 0.3s; R0+.2.1.1.p1.p1.1.1.2 d8 INTERNAL 16.8s; R0+.2.1.1.p1.p1.1.1.2.1 d9 DEAD EmptyBox 0.2s; R0+.2.1.1.p1.p1.1.1.2.2 d9 DEAD EmptyBox 0.0s; R0+.2.1.1.p1.p1.1.2 d7 INTERNAL 19.9s; R0+.2.1.1.p1.p1.1.2.1 d8 DEAD EmptyBox 3.9s; R0+.2.1.1.p1.p1.1.2.2 d8 DEAD EmptyBox 0.7s; R0+.2.1.1.p1.p1.2 d6 INTERNAL 118.4s; R0+.2.1.1.p1.p1.2.1 d7 INTERNAL 127.4s; R0+.2.1.1.p1.p1.2.1.1 d8 INTERNAL 163.8s; R0+.2.1.1.p1.p1.2.1.1.1 d9 DEAD EmptyBox 1.4s; R0+.2.1.1.p1.p1.2.1.1.2 d9 DEAD EmptyBox 1.2s; R0+.2.1.1.p1.p1.2.1.2 d8 INTERNAL 65.5s; R0+.2.1.1.p1.p1.2.1.2.1 d9 DEAD EmptyBox 1.8s; R0+.2.1.1.p1.p1.2.1.2.2 d9 INTERNAL 49.4s; R0+.2.1.1.p1.p1.2.1.2.2r1 d9 DEAD EmptyBox 0.6s; R0+.2.1.1.p1.p1.2.2 d7 ALIVE 50.4s; R0+.2.1.2 d3 ALIVE 0.0s; R0+.2.1.3 d3 ALIVE 0.0s; R0+.2.1.4 d3 ALIVE 0.0s; R0+.2.1.5 d3 ALIVE 0.0s; R0+.2.1.6 d3 ALIVE 0.0s; R0+.2.1.7 d3 ALIVE 0.0s; R0+.2.2 d2 ALIVE 0.0s; R0+.2.3 d2 ALIVE 0.0s; R0+.2.4 d2 ALIVE 0.0s; R0+.2.5 d2 ALIVE 0.0s; R0+.3 d1 ALIVE 0.0s; R0+.4 d1 ALIVE 0.0s; R0+.5 d1 ALIVE 0.0s
+== k5_16_interior_Y0672: g1 ALIVE | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 3392, 'misses': 1181, 'entries': 1181}; clip {'hits': 136627, 'misses': 2810163, 'entries': 10163}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 4573, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 66}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 3586, 'obs_misses': 1168, 'build_hits': 0, 'build_misses': 7, 'bisect_hits': 0, 'bisect_misses': 5, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 927, 'build_entries': 7, 'bisect_entries': 5, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
