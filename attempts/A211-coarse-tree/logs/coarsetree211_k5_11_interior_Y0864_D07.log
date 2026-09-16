@@ -355,3 +355,44 @@
    no-room (k=10, m=1): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
    Lemma POCKET at R.1.3.4.p1: 1 pockets (k=10, m=1): the next square instantiated in each
    node R.1.3.4.p1.p1 d3 pocket<-[0]: INTERNAL (5.4 s, 1 rounds; t=430.4)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.3.4.p1.p1: split F4 at BL(1,1) (meeting fraction 0.041723; alive rows [18]; named ['F2', 'F4', 'F5', 'H'])
+   node R.1.3.4.p1.p1.1 d4 BL(1,1)<-None: DEAD by REACH r1 (3.3 s, 1 rounds; t=437.5)
+   node R.1.3.4.p1.p1.2 d4 BL(1,1)<-None: INTERNAL (2.2 s, 1 rounds; t=440.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.3.4.p1.p1.2: split F4 at TL(1,0) (meeting fraction 0.023442; alive rows [18]; named ['F1', 'F4', 'F5', 'H'])
+   node R.1.3.4.p1.p1.2.1 d5 TL(1,0)<-None: DEAD by REACH r1 (2.6 s, 1 rounds; t=444.1)
+   node R.1.3.4.p1.p1.2.2 d5 TL(1,0)<-None: INTERNAL (1.7 s, 1 rounds; t=446.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.3.4.p1.p1.2.2: split F4 at BR(0,1) (meeting fraction 0.065041; alive rows [18, 23]; named ['F2', 'F3', 'F4', 'F5'])
+   node R.1.3.4.p1.p1.2.2.1 d6 BR(0,1)<-None: INTERNAL (2.6 s, 1 rounds; t=450.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.1.3.4.p1.p1.2.2.1: bisect F5 on y at 2.886366 (extents (0.892352, 0.981435), tilt 90.0 deg, core EMPTY, 52 piece(s); split 1 of 4)
+   node R.1.3.4.p1.p1.2.2.1.1 d7 F5<-['y<=2.886366']: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=451.6)
+   node R.1.3.4.p1.p1.2.2.1.2 d7 F5<-['y>=2.886366']: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=452.7)
+   node R.1.3.4.p1.p1.2.2.2 d6 BR(0,1)<-None: INTERNAL (1.6 s, 1 rounds; t=454.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.1.3.4.p1.p1.2.2.2: bisect F4 on y at 2.886366 (extents (0.892234, 0.981435), tilt 90.0 deg, core EMPTY, 52 piece(s); split 1 of 4)
+   node R.1.3.4.p1.p1.2.2.2.1 d7 F4<-['y<=2.886366']: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=457.4)
+   node R.1.3.4.p1.p1.2.2.2.2 d7 F4<-['y>=2.886366']: DEAD by EmptyBox r1 (1.5 s, 1 rounds; t=459.3)
+   node R.1.3.5    d1 BR(0,1)<-[23]: INTERNAL (0.9 s, 1 rounds; t=460.6)
+   no-room (k=9, m=2): UNDECIDED in 17 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.1.3.5: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R.1.3.5.p1 d2 pocket<-[0]: INTERNAL (3.2 s, 1 rounds; t=481.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.3.5.p1 d2: DEAD by NOROOM -- no-room at R.1.3.5.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.3.5.p2 d2 pocket<-[1]: INTERNAL (2.0 s, 1 rounds; t=485.1)
+   no-room (k=10, m=1): UNDECIDED in 12 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.1.3.5.p2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.3.5.p2.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=499.4)
+   start R.1.3        => DEAD (32 nodes; t = 500 s of 1800.0)
+   start R.1.4: ancestor R.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0864_D07.json) refused (KeyError('node R.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.4: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0864_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.4: applied step 1/2 -- TL(1,0) <- [14]
+   start R.1.4: applied step 2/2 -- BL(1,1) <- [17]
+   node R.1.4      d0 root: INTERNAL (3.8 s, 1 rounds; t=520.1)
+   node R.1.4.1    d1 BR(0,1)<-[16]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=520.8)
+   node R.1.4.2    d1 BR(0,1)<-[18]: INTERNAL (1.7 s, 1 rounds; t=522.9)
+   node R.1.4.2r1  d1 root<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=523.5)
+   node R.1.4.3    d1 BR(0,1)<-[21]: INTERNAL (5.4 s, 1 rounds; t=529.3)
+   node R.1.4.3r1  d1 root<-None: INTERNAL (1.8 s, 1 rounds; t=531.6)
