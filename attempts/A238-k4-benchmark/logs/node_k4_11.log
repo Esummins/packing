@@ -3565,3 +3565,11 @@
    per node: R d0 INTERNAL 1.8s; Rr1 d0 INTERNAL 3.2s; Rr2 d0 INTERNAL 4.7s; R.1 d1 INTERNAL 3.4s; R.1.1 d2 DEAD NOROOM-CN 4.0s; R.1.2 d2 DEAD FC+EPS 0.0s; R.2 d1 INTERNAL 1.7s; R.2.1 d2 DEAD NOROOM-CN 1.6s; R.2.2 d2 DEAD FC+EPS 0.0s; R.3 d1 DEAD FC 1.3s
 == k4_11_c0_Y1111: g1 None | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
 == A238 k4_11_c0_Y1111 [k4_11]: {'zero': 'DEAD'} in 62.2 s
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k4_11_c0_Y1119 at the zero pad: ALIVE in 10796 ms; kills {'H-clip': 0, 'P': 2166, 'W': 707, 'C': 556, 'M': 1166, 'L': 0, 'R': 4030, 'X': 1008}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BR(0,1)': 1, 'BR(1,0)': None, 'TR(0,1)': 1, 'TR(1,0)': None}; forced H ['BR(0,1)', 'TR(0,1)']
+== k4_11_c0_Y1119 page pad zero: start attempts/A238-k4-benchmark/certs/csp209_k4_11_c0_Y1119_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.637, 2.777, 2.078, 2.218, 82.372, 90.0]; forced H ['BR(0,1)', 'TR(0,1)']; 5 slots; free squares 6
+   node R          d0 root: INTERNAL (1.8 s, 1 rounds; t=1.9)
+   node Rr1        d0 root<-None: INTERNAL (1.3 s, 1 rounds; t=3.2)
+   node R.1        d1 BR(1,0)<-[5]: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=4.6)
+   node R.2        d1 BR(1,0)<-[6]: INTERNAL (1.5 s, 1 rounds; t=6.1)
+   node R.2.1      d2 TR(1,0)<-[8]: INTERNAL (3.1 s, 1 rounds; t=9.2)
