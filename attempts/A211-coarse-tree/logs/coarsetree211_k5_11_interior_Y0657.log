@@ -278,3 +278,21 @@
    no-room (k=10, m=1): UNDECIDED in 22 s (4 pockets; 2 of 4 pocket(s) survive the cover)
    Lemma POCKET at R0+.2.2.4.p1: 4 pockets (k=10, m=1): the next square instantiated in each
    node R0+.2.2.4.p1.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=174.8)
+   node R0+.2.2.4.p1.p2 d5 pocket<-[1]: DEAD by EmptyBox r1 (1.9 s, 1 rounds; t=177.2)
+   node R0+.2.2.4.p1.p3 d5 pocket<-[2]: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=177.8)
+   node R0+.2.2.4.p1.p4 d5 pocket<-[3]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=179.3)
+   node R0+.2.2.4.p2 d4 pocket<-[1]: INTERNAL (2.2 s, 1 rounds; t=182.1)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.2.2.4.p2 d4: DEAD by NOROOM -- no-room at R0+.2.2.4.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.2.2.5  d3 TL(1,0)<-[19]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=185.3)
+   node R0+.2.3    d2 TR(0,0)<-[24]: INTERNAL (2.1 s, 1 rounds; t=188.0)
+   node R0+.2.3.1  d3 TL(1,0)<-[7]: INTERNAL (1.5 s, 1 rounds; t=190.1)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 87, in draw
+    return fig211.render(doc)
+           ~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\fig211.py", line 174, in render
+    open(p, "w", encoding="utf-8").write(page_svg(doc))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\esumm\\code\\packing\\docs\\residue_map\\campaigns\\A211-coarsetree\\coarsetree211_k5_11_interior_Y0657.svg'
+   fig211 failed: OSError(22, 'Invalid argument')
