@@ -1,10 +1,36 @@
-# A241 -- the ROW cascade: one-slot extensions and their window status
+# A241 -- the ROW cascade: the one-slot extensions of the protected tier and A55's k4 kills
 
-`FULL-WINDOW` = the extension class carries a scoreboard row `FULL [191/50, 969271/250000]`, so Lemma SLOT-CROWD
-applies at that cell and Theorem FC gives the class a forced cell.  `s0 only` = A55 killed the class
-exactly, but at s0 -- and `closed_disjoint_bridge.md` B.2 makes that worth NOTHING on the window
-(corpus margin rho ~ 1.0e-9, A = 5/2, so (H') reads s''/m - 1 < 4.0e-10: no side of [3.82, s-hat]
-is reached).  Turning those into window rows is A241's campaign (`code/param241.py`).
+A class gets a **full-window row** `FULL [191/50, 969271/250000]` when, and only when, one of two things holds
+(`code/rowcascade241.py` docstring carries the contract):
+
+* **(A) a direct window certificate** -- a `parametric-kill-certificate-v1` 4D PASS over the window plus
+  canary C2 at 191/50 / midpoint / s0.  `closed_disjoint_bridge.md` B.2 then instantiates `stratum_kill`
+  at every m in the window.
+* **(B) the Lemma K1(i) climb** -- `instratum_bridge.md` E.1(i): a class CONTAINING an already-rowed class
+  inherits its row (slots_S(s) is a D4 image of a subset of slots_S'(s) at every side s).
+
+**What is NOT a row, and the correction A241 has to make to its own brief.**  "Row C when every one-slot
+EXTENSION of C is full-window closed" is unsound: K1 climbs UP containment, and a packing whose skeleton is
+exactly C has no fifth simple square, so C's extensions never apply to it.  Closed extensions give Lemma
+SLOT-CROWD (`slot_crowds.md` s.2) -- every such slot of C is met by >= 2 non-pin squares -- i.e. C's
+FORCED CELLS, the toolkit's traction (A238), not C's emptiness.  Promoting "all slots doubly met" to
+"C is empty" is the crowd certificate CS(S; ...) of `slot_crowds.md` s.4, and A94 measured that it does
+NOT certify (runs B2-B4 FAIL, 30-32 exact holes).  So the CASCADE below is (A) + (B), and what it hands
+the k <= 3 tier is forced cells, which is exactly the lever A238 asked for.
+
+**Why A55's eight exact k4 kills were not already rows.**  They are certified AT s0.
+`closed_disjoint_bridge.md` B.2: the corpus containment margin is rho ~ 1.0000009e-9 with A = 5/2, so
+(H') reads s''/m - 1 < 4.0e-10 -- an s0-anchored PASS instantiates the kill at NO side of [3.82, s-hat]
+whatsoever.  The window statement is therefore real work: A56's parametric layer, re-run on A55's base
+certificates.  That campaign is `code/param241.py` (resumable, `code/param241.sh`).
+
+## 1. The window-statement campaign (source (A)) -- A55's exact k <= 4 kills
+
+| class | base certificate | atoms | stage 0 at 191/50 (gap / nearest-wall / mid-band) | 4D over the window | C2 | ROW |
+|---|---|---|---|---|---|---|
+| _(the campaign has not written a row yet)_ | | | | | | |
+
+## 2. The extension table
 
 | class | own row | forced cells | USABLE | extension -> status |
 |---|---|---|---|---|
@@ -33,3 +59,22 @@ is reached).  Turning those into window rows is A241's campaign (`code/param241.
 | `k4_10` | -- | 6 | **6** | BL(0,2)→k5_06 [FULL-WINDOW], BL(1,0)→k5_10 [FULL-WINDOW], BR(0,2)→k5_06 [FULL-WINDOW], BR(1,0)→k5_10 [FULL-WINDOW], TR(0,0)→k5_15 [FULL-WINDOW], TL(0,0)→k5_15 [FULL-WINDOW] |
 | `k4_12` | -- | 6 | **6** | BL(0,2)→k5_08 [FULL-WINDOW], BL(1,0)→k5_19 [FULL-WINDOW], BR(0,0)→k5_17 [FULL-WINDOW], TR(0,2)→k5_08 [FULL-WINDOW], TR(1,0)→k5_19 [FULL-WINDOW], TL(0,0)→k5_17 [FULL-WINDOW] |
 | `k3_00` | -- | 3 | **0** | BL(1,0)→k4_00 [s0 only], BR(0,0)→k4_01 [s0 only], TR(0,0)→k4_02 [s0 only] |
+
+## 3. Who can be rowed TODAY, and who waits on what
+
+* **TODAY, and on nothing but CPU:** `k3_00` and the eight A55-killed k4 classes
+  (`k4_00`, `k4_01`, `k4_02`, `k4_04`, `k4_07`, `k4_09`, `k4_10`, `k4_12`).  Each already has its
+  own A55 `case-measure-certificate-v1` PASS; the only missing step is the parametric re-expression
+  and the 4D run of section 1.  `k4_00` / `k4_01` / `k4_02` have a second route: each CONTAINS
+  `k3_00` (D4 `id`, A55 `cap.json` witness), so once `k3_00` rows they row by (B) for free.
+* **NEVER by certificate:** the six protected k4 classes `k4_03`, `k4_05`, `k4_06`, `k4_08`,
+  `k4_11`, `k4_13`=`corners4` and the ten open k <= 3 classes.  Lemma K1(ii) (`instratum_bridge.md`
+  E.1(ii)) forbids it: each is <= an open k5 class, so tau*(S) >= 11 - |S| and no certificate of this
+  kind can exist.  Their rows can only come from the P-TREE obligation O1 per class, i.e. AFTER the
+  k5 frontier closes -- they are not a bookkeeping item.
+* **Waiting on the frontier (for forced cells, not for rows):** the cells of the protected k4 tier
+  that extend into `trump5`, `k5_11`, `k5_16`.  Alive frontier nodes still covering each
+  (A57 `PAUSED.md` census, 1590 distinct alive nodes): `k5_11` 713, `k5_16` 552, `trump5` 325.
+  `corners4` is the extreme case: all eight of its cells extend into `k5_16`, so it has 0 usable
+  forced cells until `k5_16` is closed on the whole window (A193 and A84 s.7.1 independently).
+
