@@ -9306,3 +9306,41 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
 - **[T]+[M] POCKET-CAP** (s.3): area(P) = s^2 - p, so the area form is WASTE > s^2 - n (p never enters: NO-CLOSURE again).  n = 11: A226's rings at S = 3.90 (all eps) and S = 3.95 / 3.99 with eps = 0.10: PIERCE(1) residual 0 => capacity 1 => 8 + 1 < 11 (the other four fail by 3e-4 .. 2e-2: two-stub diamonds); the window family ring(S, theta) (flat meeters at the least TILT-MIN offset sin theta + 0.02, mode-(a) partners, S in {3.82, 3.85, s-hat}, theta = 1..30 deg, verified packings, four-crowds for theta >= 5): PIERCE(1) at the centre holds at EVERY member -- capacity 1, 9 < 11; the area form alone gives capacity <= 2 only at theta >= 15-20 deg.  **Analytically NOT closed**: 4 w_c(theta_min) > s-hat^2 - 11 = 4.03 needs theta_min >= 32 deg (w_c(20) = 0.689, w_c(45) = 1.271), no floor exists; the closure of the n = 11 rings is the CENTRE (side < 2, Lemma TWO) + stubs (width < 1), a shape statement.  n-general table (s.3.3): the four corners waste <= 5.08 at 45 deg while s(n)^2 - n grows: closes at n = 5, 10, 11, 17, 19 under floors 17 / 29 / 32 / 42 / 42 deg only, at no n >= 18 by any floor <= 45.
 - **[M] the tests** (s.4, `results/pocket237.md`): the ring + 189 four-crowds with a loaded component: sound 189/189 (coverable >= n - p), the area form fires on none (above m, as it must), waste median 5.46 of 6.1, PIERCE(n - p) with the rattler centres 13/67 (rattlers slide); the ring: waste 4.31 of 7.89, PIERCE(2) residual 0.12; the 22 records (U = wall touchers): sound 22/22, fires on none, waste 1.46-3.39 (Trump's 45-deg grain corners).
 - Files: `attempts/A237-pocket-waste/{code,results,logs}`, `docs/proofs/pocket_waste.md`, `docs/residue_map/campaigns/A237-pocket-waste/{ring_pocket,n11_window}.svg` (the ring / A226's S = 3.90 ring with its piercing point / Trump; ring(s-hat, 20), ring(s-hat, 2), one crowd's sealed region; uncoverable sets hatched, geometry checked per panel), `lean/.../Statements/Open/PocketWaste.lean` (axiom `pocket_cap` = POCKET(n) => `ring_capacity_of_pocket_cap` => LOCKED-CROWD-FREE(n) => ONE-FLUSH(n) value form, n = 11 corollary; theorem `capacity_le_of_pierce`; build + audit exit 0, no sorry), registry row, ledger s.4 note.  k0_00 unchanged.
+
+## 2026-09-16 — A238-k4-benchmark (Opus) — the k5 toolkit on the Trump-parent protected classes
+- PI (10:30): *"the k4- classes that are parents of Trump shouldn't be able to get that close to Trump, since a bunch
+  of the geo tests will kill them when they try to press the fifth simple square into place."*  A100 priced k4_11 and
+  k3_02 with the case-LP (≈ 560 / 485 s per level-1 cover cell, 203 / 290 CPU-h measured, 3,500–4,200 CPU-h per class
+  projected).  A238 re-prices **the same nodes, the same hypothesis, the same boxes** with the geometry the k5
+  frontier runs today.
+- `code/load238.py` makes a protected class a page for the k5 runner (class slots as slack pin cores δ_pin = 2·10⁻²,
+  H = an A100/A84 level-1 cover cell or the whole interior zone, budget 11 − k_S − 1).  Every certificate carries the
+  hypothesis it certifies: **M_S(m) & YES(H)**, and a DEAD verdict is stated as the instance of `stratum_kill` for
+  **that class** restricted to H (Lemma K1 / Lemma P-TREE (c), obligation O1 of `docs/proofs/protected_trees.md`).
+- `code/tube238.py` — **Lemma TUBE-LEAF/S**, the class form of A212's tube leaf: the direction is slot(I_g) (A84 §4's
+  swept certificates `certs/tube_I_<I>_landing_*.json`, k4_11 I = {0,2,3,5}, k3_02 I = {0,1,3}) and the **pins are
+  exempt from the radius** — M_S(m) puts them exactly on slots_S(m), the tube direction's pinned coordinate (w = 0,
+  Lemma P-TREE Step 4), so the slack pin box never enters the (D) test.  `code/tree238.py` re-applies A212's gate and
+  Rule SNAP-at-the-gated-leaf to **A211's LIVE Tree211** (A212's own dir carries frozen pre-A220/A224/A230 copies —
+  `code/path238.py` enforces the import order and asserts it).
+- **[M] The geometry does what the PI said — on k4.**  k4_11's cover cells die by EmptyBox / REACH / NOROOM-CN /
+  NOROOM-POCKET / S-CLIP / COUNT / FC in **0.2–16 s** where A100's LP spent 130–560 s and often could not kill at all
+  (`c0_Y0074`: A100 τ = 6.000 = budget, FAIL → deepen, 184 s; A238 DEAD by EmptyBox at the root.  `c0_Y0076`: A100
+  refused at τ = 6.000, 131 s; A238 DEAD in 0.2 s).
+- **[F] and it does NOTHING on k3 — for a reason that is half bookkeeping.**  Every kill rule of the toolkit acts on
+  Theorem FC's FORCED CELLS, and `classes178.forced_cells` marks a cell usable only when the one-slot extension is a
+  class with a FULL-window A56 scoreboard row.  `code/fc238.py` (`results/forced238.md`): trump5 6/6, k4_08 and k4_11
+  5/7, k4_03 / k4_05 / k4_06 3/5, **corners4 0/8** (all eight extensions are the open k5_16 — A193's finding from the
+  other side), **every k ≤ 3 class 0**.  So k3_02's 41 cover cells run out of levers in ~4 s each with 0 kills and 0
+  branches (max depth 0 on 42 of 42 nodes).  Of the blocked k ≤ 3 extensions, the k4 protected classes are genuinely
+  open — but `k4_00 / 01 / 02 / 04 / 07 / 09 / 10 / 12` were **killed exactly by A55** and are blocked only because
+  the 52-row A56 scoreboard covers k5/k6 only.  **Emitting full-window rows for those eight would hand every k3 class
+  2–5 forced cells and move it into the k4 regime.**
+- **[T/M] The tier price is a CASCADE, not a flat number**: traction on a class = the number of its one-slot
+  extensions closed *on the window*.  Closing k4 hands k3 its cells, k3 hands k2 its cells, down to k0_00 — the K1
+  climb Rule SNAP performs inside one tree, applied to the tier itself.
+- Files: `attempts/A238-k4-benchmark/{code,results,notes,certs,logs}` (`results/bench238.md` + `bench238.jsonl` with
+  A100's own row on every head-to-head cell, `results/forced238.md`, `notes/k4_238.md`), pages
+  `docs/residue_map/campaigns/A238-k4-benchmark/`, registry row, ledger §3.  The k4_11 sweep continues detached
+  (`code/bench238.sh` + `code/chain238.sh`, per-node commits, resume by row presence); `code/report238.py` regenerates
+  the table at any time.
