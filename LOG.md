@@ -9172,3 +9172,45 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
 - **[F] s.4 the area horn:** four kink-side corner grains waste <= 3.0 (45 deg) against s(n)^2 - n >= 3.7 for every record n >= 10; even every wall square a sealed diamond wastes 2 floor(s/sqrt2) - 1 = 3 < 4.03 at n = 11 (the brief's "sqrt2 s > 5.03" mis-added: 3.877^2 - 11 = 4.03), beating the slack only from n = 17 on; horn (b) has to be handled by the certified k >= 1 classes.
 - **[T] s.5 what closes; Lean `Statements/Open/Realign.lean`:** `fourcrowd_dead_of_step_kill` (std axioms only): where no packing contains a corner slot square (k1-a on [3.82, s-hat)), a four-crowd with a corner swap does not exist -- at n = 11 the four-crowd exclusion needs STEP alone, i.e. RAISE(0 -> 1) as in ring_swap.md; `one_flush_of_realign`: REALIGN + STEP => every optimal packing below ceil(sqrt n) has a singly-met corner (ONE-FLUSH(n)); axioms `realign` [C] and `lemma_WALL_EXCESS` [T-prose]; theorems `chordT_ge_one`, `wall_count_le`; `lake build` + `lean/audit.py` exit 0, no sorry.  k0_00's row: unchanged.
 - Files: `attempts/A231-realign/{code,results,logs}`, `docs/proofs/realign.md`, `docs/residue_map/campaigns/A231-realign/` (3 geometry-checked pages), `lean/.../Statements/Open/Realign.lean` (+ one import line in `Statements.lean`), registry row, ledger s.4 note.
+
+## 2026-09-15 18:1x -- A232-swap-leaf (Opus) -- DONE (launch-and-exit; the cell run detached with per-cell commits, resume `bash attempts/A232-swap-leaf/code/run232.sh`): **the SWAP leaf is a sound certificate clause and a Lean theorem, and it does not fire on a single k0 root cell -- because those cells box ONE of eleven squares, and an unboxed role must be exchanged**
+- PI, 17:30: *"can we prove STEP against the window? we only need it true <= s-hat for the search to ignore k0 entirely."*
+- **[T] Lemma SWAP-LEAF** (`docs/proofs/swap_leaf.md` s.1, n-general): a cell + an injection naming the exchanged
+  roles `X` + `|X|` unit squares at FIXED poses inside every container of the window, pairwise interior-disjoint,
+  one of them the corner slot, + one exact MISS certificate per (square, role outside `X`) ==> every packing of
+  the cell exchanges AT THE SAME SIDE into one with that corner settled (Lemma CELLS / `cells_swap`), so with
+  k1-a the cell is DEAD.  `|X| = 1` is K0-FREE, `|X| = 2` is the PI's STEP, larger `X` allowed; no LP, no load,
+  rattler crowds covered.  Lean `Statements/SwapLeaf.lean`: `swap_leaf_exchange`, `swap_leaf_pins`,
+  `swap_leaf_dead`, `swap_leaf_corner` -- ALL THEOREMS, std axioms, no new axiom (k1-a is a hypothesis);
+  `lake build` + `lean/audit.py` exit 0, no sorry.
+- **[T] the frame bookkeeping** the leaf needs, both m-free supersets: Lemma PULL-BACK (K0-WIDEN read backwards:
+  a cell's s0 box pulls back to `[x0/lambda_max, x1] x [y0/lambda_max, y1]` at the ORIGINAL side, same tilt) and
+  Lemma CORNER-FRAME (the D4 map to BL costs the window's width 0.0571 in each flipped coordinate and flips the
+  tilt bin).  Containment is asked at `m_lo = 3.82`, so a fixed pose is inside every container of the window.
+- **NEW verifier `code/verify_swap232.py`** (stdlib + exact `Fraction`, `swap-leaf-certificate-v1`): it
+  re-derives the pull-back and the corner frame ITSELF and checks containment, pairwise interior-disjointness,
+  the slot cell, that no role outside `X` is unboxed, and every miss (A161's full separating-axis test for an
+  axis cell; the polygon's own normals with radius `|n| sqrt2 / 2` for a tilted one -- sound, deliberately
+  incomplete).  The frozen `verify_case.py` / `verify_case_v4.py` are not read, not imported, not changed.
+- **[T] Lemma X-FORCED / Lemma SPLIT-INVARIANCE** (s.2): an UNBOXED role has the whole container as its reach,
+  so it must be in `X` (`|X| >= u` = #unboxed); A185's split refines boxed pieces and never boxes an unboxed
+  role, so `u` -- and the demand -- survives any number of split rounds.  **Only conditioning lowers `|X|`.**
+- **[M]/[F] the eleven k0v4 cells:** each is A115's record with ONE hypothesis box (the conditioned square `H`,
+  30-45 deg) and budget 10, so `u = 10` and `|X| = 10` at every corner of every cell.  The leaf then asks for a
+  ten-square packing of `[0, 3.82]^2` (`s(10)` = 3.70711, slack 0.113) with one member at the corner slot, all
+  avoiding `H`'s reach set (1.64-1.82 of area, in the middle of the container).  The search places 6-7 (the same
+  search places 9 with no obstacle at all); one round of A185's split, 16 children at the best corner of each
+  cell, raises nothing -- as SPLIT-INVARIANCE says it cannot.  **So STEP is NOT certifiable cell-wise from the
+  k0 ROOT cells and "the search can ignore k0" does not come off; k0_00's row is unchanged.**
+- **[M] the machinery is not at fault:** the n = 5 geometry controls (no k1-a claim -- an `|X| = 2` control
+  CANNOT exist at n = 11 in the window, because a passing leaf there IS the theorem) produce and PASS `|X| = 1`
+  (K0-FREE), `|X| = 2` (STEP) and `|X| = 5` certificates end to end, and 7 corruption tests of a passing
+  certificate are all refused.
+- **[C] where the leaf belongs and what it costs:** at `k0_route.md` s.4.2's crowd root `H_B` (the four corner
+  crowds, EIGHT boxed roles, budget 3) `u = 3` and `|X| = 5` at a corner -- the first node of the k0 lane where
+  the leaf has a chance.  It is therefore a cheap (seconds/node), LP-free, load-free LEAF RULE FOR the k0
+  cascade, not a way past it; s.8 prices the lane at 3 200-7 000 CPU-h.  The cheaper route to the same end
+  remains RAISE(0 -> 1) as a geometric lemma, which needs no cell at all.
+- Files: `attempts/A232-swap-leaf/{code,results,certs,logs}`, `docs/proofs/swap_leaf.md`,
+  `docs/residue_map/campaigns/A232-swap-leaf/` (one 4-panel page per cell, exact geometry check per panel),
+  `lean/.../Statements/SwapLeaf.lean` (+ one import line in `Statements.lean`), registry row, ledger s.4 note.
