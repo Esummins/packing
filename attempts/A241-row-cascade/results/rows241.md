@@ -30,6 +30,7 @@ certificates.  That campaign is `code/param241.py` (resumable, `code/param241.sh
 |---|---|---|---|---|---|---|
 | `k4_07` | attempts\A55-k4-sweep\certs\k4_07.json | - | gap PASS / nearest-wall PASS / mid-band PASS | gap rc=1 134.7s / nearest-wall rc=1 161.3s / mid-band rc=1 132.1s | - | PARAM-FAIL |
 | `k4_10` | attempts\A55-k4-sweep\certs\k4_10.json | - | gap PASS / nearest-wall PASS / mid-band PASS | gap rc=1 353.5s / nearest-wall rc=1 1687.9s / mid-band rc=1 310.9s | - | PARAM-FAIL |
+| `k4_12` | attempts\A55-k4-sweep\certs\k4_12.json | - | gap PASS / nearest-wall PASS / mid-band PASS | gap rc=1 653.6s / nearest-wall rc=124 2400.0s / mid-band rc=1 399.6s | - | PARAM-FAIL |
 
 ## 2. The extension table
 
