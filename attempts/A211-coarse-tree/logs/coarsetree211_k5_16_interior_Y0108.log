@@ -1,0 +1,64 @@
+08:37:37 [fr2] start k5_16_interior_Y0108 wall 1800 (lab 4, free 20187 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y0108 at the zero pad: ALIVE in 10148 ms; kills {'H-clip': 0, 'P': 4430, 'W': 1329, 'C': 658, 'M': 3085, 'L': 3, 'R': 3202, 'X': 527}; CSP units 248 -> 248 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0108 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0108 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0108_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [1.432, 1.519, 2.078, 2.218, 82.372, 90.0]; forced H []; 6 slots; free squares 5
+   node R0+        d0 root: INTERNAL (2.9 s, 1 rounds; t=3.0)
+   node R0+.1      d1 TL(1,0)<-[9, 18]: INTERNAL (1.5 s, 1 rounds; t=4.7)
+   node R0+.1.1    d2 TR(0,1)<-[16]: INTERNAL (1.7 s, 1 rounds; t=6.5)
+   node R0+.1.1r1  d2 root<-None: DEAD by EmptyBox r1 (5.6 s, 1 rounds; t=12.1)
+   node R0+.1.2    d2 TR(0,1)<-[21]: INTERNAL (1.5 s, 1 rounds; t=13.6)
+   node R0+.1.2.1  d3 BL(1,0)<-[5, 16]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=14.0)
+   node R0+.1.2.2  d3 BL(1,0)<-[10, 16]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=14.2)
+   node R0+.1.3    d2 TR(0,1)<-[22]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=14.3)
+   node R0+.2      d1 TL(1,0)<-[14, 18]: INTERNAL (2.1 s, 1 rounds; t=16.4)
+   node R0+.2r1    d1 root<-None: DEAD by REACH r1 (1.0 s, 1 rounds; t=17.4)
+   node R0+.3      d1 TL(1,0)<-[18, 19]: INTERNAL (1.0 s, 1 rounds; t=18.5)
+   node R0+.3.1    d2 BL(1,0)<-[5, 16]: INTERNAL (2.5 s, 1 rounds; t=21.2)
+   no-room (k=10, m=1): DEAD by EmptyBox in 2 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R0+.3.1    d2: DEAD by EmptyBox -- no-room at R0+.3.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R0+.3.2    d2 BL(1,0)<-[6, 16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=23.0)
+   node R0+.3.3    d2 BL(1,0)<-[10, 16]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=23.9)
+   node R0+.3.4    d2 BL(1,0)<-[11, 16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=24.1)
+   start R0+          => DEAD (15 nodes; t = 24 s of 1800.0)
+   => DEAD (zero_page) in 24.2 s: 1 start runs, 15 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 9 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 8 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 2.9s; R0+.1 d1 INTERNAL 1.5s; R0+.1.1 d2 INTERNAL 1.7s; R0+.1.1r1 d2 DEAD EmptyBox 5.6s; R0+.1.2 d2 INTERNAL 1.5s; R0+.1.2.1 d3 DEAD EmptyBox 0.3s; R0+.1.2.2 d3 DEAD EmptyBox 0.2s; R0+.1.3 d2 DEAD EmptyBox 0.1s; R0+.2 d1 INTERNAL 2.1s; R0+.2r1 d1 DEAD REACH 1.0s; R0+.3 d1 INTERNAL 1.0s; R0+.3.1 d2 DEAD EmptyBox 2.5s; R0+.3.2 d2 DEAD EmptyBox 0.1s; R0+.3.3 d2 DEAD EmptyBox 0.9s; R0+.3.4 d2 DEAD EmptyBox 0.1s
+== stage 0 + CSP k5_16_interior_Y0108 at the g1 pad: ALIVE in 10098 ms; kills {'H-clip': 0, 'P': 4436, 'W': 1341, 'C': 664, 'M': 3092, 'L': 3, 'R': 3104, 'X': 526}; CSP units 248 -> 248 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0108 pad g1: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0108 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0108_g1_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [1.432, 1.519, 2.078, 2.218, 82.372, 90.0]; forced H []; 6 slots; free squares 5
+   node R0+        d0 root: INTERNAL (2.0 s, 1 rounds; t=2.1)
+   node R0+.1      d1 TL(1,0)<-[9, 18]: INTERNAL (0.9 s, 1 rounds; t=3.2)
+   node R0+.1.1    d2 TR(0,1)<-[16]: INTERNAL (0.8 s, 1 rounds; t=4.0)
+   node R0+.1.1r1  d2 root<-None: DEAD by FC r1 (2.9 s, 1 rounds; t=7.0)
+   node R0+.1.2    d2 TR(0,1)<-[21]: INTERNAL (1.0 s, 1 rounds; t=8.2)
+   node R0+.1.2.1  d3 BL(1,0)<-[5, 16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=8.5)
+   node R0+.1.2.2  d3 BL(1,0)<-[10, 16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=8.6)
+   node R0+.1.3    d2 TR(0,1)<-[22]: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=8.8)
+   node R0+.2      d1 TL(1,0)<-[14, 18]: INTERNAL (1.9 s, 1 rounds; t=10.7)
+   node R0+.2.1    d2 BR(0,1)<-[10]: DEAD by FC r1 (0.9 s, 1 rounds; t=11.7)
+   node R0+.2.2    d2 BR(0,1)<-[11]: DEAD by FC r1 (0.7 s, 1 rounds; t=12.5)
+   node R0+.2.3    d2 BR(0,1)<-[15]: DEAD by FC r1 (0.8 s, 1 rounds; t=13.4)
+   node R0+.2.4    d2 BR(0,1)<-[16]: INTERNAL (0.9 s, 1 rounds; t=14.4)
+   node R0+.2.4r1  d2 root<-None: DEAD by FC r1 (3.1 s, 1 rounds; t=17.6)
+   node R0+.2.5    d2 BR(0,1)<-[21]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=17.8)
+   node R0+.3      d1 TL(1,0)<-[18, 19]: INTERNAL (1.0 s, 1 rounds; t=18.9)
+   node R0+.3.1    d2 BL(1,0)<-[5, 16]: INTERNAL (2.4 s, 1 rounds; t=21.5)
+   no-room (k=10, m=1): DEAD by EmptyBox in 1 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R0+.3.1    d2: DEAD by EmptyBox -- no-room at R0+.3.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R0+.3.2    d2 BL(1,0)<-[6, 16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=22.7)
+   node R0+.3.3    d2 BL(1,0)<-[10, 16]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=23.7)
+   node R0+.3.4    d2 BL(1,0)<-[11, 16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=23.9)
+   start R0+          => DEAD (20 nodes; t = 26 s of 1800.0)
+   => DEAD (g1_page) in 26.0 s: 1 start runs, 20 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 13 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 9 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 2.0s; R0+.1 d1 INTERNAL 0.9s; R0+.1.1 d2 INTERNAL 0.8s; R0+.1.1r1 d2 DEAD FC 2.9s; R0+.1.2 d2 INTERNAL 1.0s; R0+.1.2.1 d3 DEAD EmptyBox 0.1s; R0+.1.2.2 d3 DEAD EmptyBox 0.1s; R0+.1.3 d2 DEAD EmptyBox 0.0s; R0+.2 d1 INTERNAL 1.9s; R0+.2.1 d2 DEAD FC 0.9s; R0+.2.2 d2 DEAD FC 0.7s; R0+.2.3 d2 DEAD FC 0.8s; R0+.2.4 d2 INTERNAL 0.9s; R0+.2.4r1 d2 DEAD FC 3.1s; R0+.2.5 d2 DEAD EmptyBox 0.1s; R0+.3 d1 INTERNAL 1.0s; R0+.3.1 d2 DEAD EmptyBox 2.4s; R0+.3.2 d2 DEAD EmptyBox 0.1s; R0+.3.3 d2 DEAD EmptyBox 0.9s; R0+.3.4 d2 DEAD EmptyBox 0.1s
+== k5_16_interior_Y0108: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1025, 'misses': 380, 'entries': 380}; clip {'hits': 61003, 'misses': 37342, 'entries': 37342}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1405, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 35}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 1033, 'obs_misses': 372, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 372, 'build_entries': 2, 'bisect_entries': 0, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
