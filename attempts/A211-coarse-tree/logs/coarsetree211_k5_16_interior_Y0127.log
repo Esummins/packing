@@ -1,0 +1,22 @@
+08:46:10 [fr5] start k5_16_interior_Y0127 wall 1800 (lab 4, free 18289 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y0127 at the zero pad: ALIVE in 23056 ms; kills {'H-clip': 911, 'P': 5450, 'W': 2484, 'C': 1477, 'M': 7771, 'L': 7, 'R': 2735, 'X': 585}; CSP units 344 -> 344 alive; caps {'BL(1,0)': 1, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H ['BL(1,0)']
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0127 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0127 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0127_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.218, 2.358, 1.38, 1.502, 82.372, 90.0]; forced H ['BL(1,0)']; 6 slots; free squares 5
+   node R0+        d0 root: INTERNAL (2.6 s, 1 rounds; t=2.7)
+   node R0+r1      d0 root<-None: INTERNAL (2.1 s, 1 rounds; t=4.9)
+   node R0+.1      d1 TR(0,1)<-[13]: INTERNAL (2.2 s, 1 rounds; t=7.2)
+   node R0+.1r1    d1 root<-None: DEAD by EmptyBox r1 (2.0 s, 1 rounds; t=9.2)
+   node R0+.2      d1 TR(0,1)<-[14]: INTERNAL (1.4 s, 1 rounds; t=10.7)
+   node R0+.2r1    d1 root<-None: INTERNAL (4.2 s, 1 rounds; t=14.9)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 8 s (1 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.2      d1: DEAD by NOROOM-CN -- no-room at R0+.2 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the rest h
+   node R0+.3      d1 TR(0,1)<-[18]: INTERNAL (1.6 s, 1 rounds; t=26.0)
+   node R0+.3.1    d2 TL(1,0)<-[7]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=26.6)
+   node R0+.3.2    d2 TL(1,0)<-[8]: INTERNAL (2.3 s, 1 rounds; t=28.9)
+   no-room (k=9, m=2): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.2: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.2.p1 d3 pocket<-[0]: INTERNAL (18.8 s, 1 rounds; t=63.8)
+   no-room (k=10, m=1): UNDECIDED in 16 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.2.p1: 1 pockets (k=10, m=1): the next square instantiated in each
