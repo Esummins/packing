@@ -3134,3 +3134,89 @@
 == stage 0 + CSP k4_11_c0_Y1043 at the zero pad: ALIVE in 11540 ms; kills {'H-clip': 0, 'P': 3040, 'W': 1181, 'C': 672, 'M': 3144, 'L': 0, 'R': 4043, 'X': 1262}; CSP units 168 -> 168 alive; caps {'BL(0,2)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None}; forced H []
 == k4_11_c0_Y1043 page pad zero: start attempts/A238-k4-benchmark/certs/csp209_k4_11_c0_Y1043_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.498, 2.602, 2.498, 2.602, 41.112, 53.13]; forced H []; 5 slots; free squares 6
    node R          d0 root: INTERNAL (2.4 s, 1 rounds; t=2.5)
+   node R.1        d1 TR(0,1)<-[16]: INTERNAL (2.4 s, 1 rounds; t=5.0)
+   node R.1.1      d2 TR(1,0)<-[8]: INTERNAL (2.7 s, 1 rounds; t=7.7)
+   node R.1.1r1    d2 root<-None: INTERNAL (5.1 s, 1 rounds; t=12.8)
+   node R.1.1.1    d3 BL(0,2)<-[4]: INTERNAL (4.6 s, 1 rounds; t=17.5)
+   Rule NS at the WEDGE at R.1.1.1: F1 meets / misses the wedge of (F3, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.72556]; wedge--e-L=[2.87708,2.87708,1.72556,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.1.1.1.1  d4 BR(0,1)<-['meets W']: DEAD by EmptyBox r1 (4.1 s, 1 rounds; t=21.7)
+   node R.1.1.1.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=21.8)
+   node R.1.1.2    d3 BL(0,2)<-[9]: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=22.1)
+   node R.1.2      d2 TR(1,0)<-[9]: INTERNAL (1.2 s, 1 rounds; t=23.3)
+   node R.1.2r1    d2 root<-None: INTERNAL (1.6 s, 1 rounds; t=24.9)
+   node R.1.2.1    d3 BL(0,2)<-[3]: INTERNAL (3.1 s, 1 rounds; t=28.2)
+   Rule NS at the WEDGE at R.1.2.1: F1 meets / misses the wedge of (F3, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.72627]; wedge--e-L=[2.87708,2.87708,1.72627,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.1.2.1.1  d4 BR(0,1)<-['meets W']: INTERNAL (4.9 s, 1 rounds; t=33.2)
+   no-room (k=9, m=2): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.2.1.1  d4: DEAD by EmptyBox -- no-room at R.1.2.1.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.2.1.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=34.2)
+   node R.1.2.2    d3 BL(0,2)<-[4]: INTERNAL (2.7 s, 1 rounds; t=36.9)
+   Rule NS at the WEDGE at R.1.2.2: F1 meets / misses the wedge of (F3, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.72627]; wedge--e-L=[2.87708,2.87708,1.72627,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.1.2.2.1  d4 BR(0,1)<-['meets W']: INTERNAL (4.4 s, 1 rounds; t=41.5)
+   no-room (k=9, m=2): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.2.2.1  d4: DEAD by EmptyBox -- no-room at R.1.2.2.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.2.2.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=42.3)
+   node R.1.2.3    d3 BL(0,2)<-[7]: INTERNAL (5.0 s, 1 rounds; t=47.4)
+   Rule NS at the WEDGE at R.1.2.3: F1 meets / misses the wedge of (F3, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.72584]; wedge--e-L=[2.87708,2.87708,1.72584,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.1.2.3.1  d4 BR(0,1)<-['meets W']: INTERNAL (5.4 s, 1 rounds; t=52.9)
+   no-room (k=9, m=2): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.2.3.1  d4: DEAD by EmptyBox -- no-room at R.1.2.3.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.2.3.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=53.6)
+   node R.1.2.4    d3 BL(0,2)<-[8]: INTERNAL (2.9 s, 1 rounds; t=56.6)
+   Rule NS at the WEDGE at R.1.2.4: F1 meets / misses the wedge of (F3, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.72627]; wedge--e-L=[2.87708,2.87708,1.72627,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.1.2.4.1  d4 BR(0,1)<-['meets W']: INTERNAL (4.0 s, 1 rounds; t=60.7)
+   no-room (k=9, m=2): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.2.4.1  d4: DEAD by EmptyBox -- no-room at R.1.2.4.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.2.4.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=61.4)
+   node R.1.3      d2 TR(1,0)<-[14]: INTERNAL (1.2 s, 1 rounds; t=62.7)
+   node R.1.3r1    d2 root<-None: INTERNAL (1.7 s, 1 rounds; t=64.5)
+   node R.1.3.1    d3 BL(0,2)<-[3]: INTERNAL (1.9 s, 1 rounds; t=66.6)
+   Rule NS at the WEDGE at R.1.3.1: F1 meets / misses the wedge of (F3, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.72627]; wedge--e-L=[2.87708,2.87708,1.72627,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.1.3.1.1  d4 BR(0,1)<-['meets W']: INTERNAL (3.5 s, 1 rounds; t=70.3)
+   no-room (k=9, m=2): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.3.1.1  d4: DEAD by EmptyBox -- no-room at R.1.3.1.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.3.1.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=71.5)
+   node R.1.3.2    d3 BL(0,2)<-[4]: INTERNAL (1.2 s, 1 rounds; t=72.9)
+   Rule NS at the WEDGE at R.1.3.2: F1 meets / misses the wedge of (F3, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.72627]; wedge--e-L=[2.87708,2.87708,1.72627,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.1.3.2.1  d4 BR(0,1)<-['meets W']: INTERNAL (1.9 s, 1 rounds; t=74.9)
+   no-room (k=9, m=2): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.3.2.1  d4: DEAD by EmptyBox -- no-room at R.1.3.2.1 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.1.3.2.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=75.9)
+   node R.1.3.3    d3 BL(0,2)<-[7]: INTERNAL (4.3 s, 1 rounds; t=80.2)
+   node R.1.3.3r1  d3 root<-None: DEAD by REACH r1 (3.2 s, 1 rounds; t=83.6)
+   node R.1.3.4    d3 BL(0,2)<-[8]: DEAD by REACH r1 (3.3 s, 1 rounds; t=87.0)
+   node R.2        d1 TR(0,1)<-[21]: INTERNAL (2.3 s, 1 rounds; t=89.5)
+   node R.2.1      d2 TR(1,0)<-[8]: INTERNAL (2.0 s, 1 rounds; t=91.7)
+   node R.2.1.1    d3 BR(0,1)<-[10]: INTERNAL (1.4 s, 1 rounds; t=93.4)
+   Rule NS at the WEDGE at R.2.1.1: F3 meets / misses the wedge of (F1, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.65083]; wedge--e-L=[2.87708,2.87708,1.65083,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.2.1.1.1  d4 BR(0,1)<-['meets W']: INTERNAL (1.6 s, 1 rounds; t=95.1)
+   node R.2.1.1.1.1 d5 BL(0,2)<-[4]: INTERNAL (3.5 s, 1 rounds; t=98.8)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 17 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.2.1.1.1.1 d5: DEAD by NOROOM-CN -- no-room at R.2.1.1.1.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the 
+   node R.2.1.1.1.2 d5 BL(0,2)<-[6]: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=116.4)
+   node R.2.1.1.1.3 d5 BL(0,2)<-[7]: INTERNAL (3.3 s, 1 rounds; t=119.9)
+   no-room (k=9, m=2): DEAD by NOROOM-POCKET in 11 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.2.1.1.1.3 d5: DEAD by NOROOM-POCKET -- no-room at R.2.1.1.1.3 (k=9, m=2; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.2.1.1.1.4 d5 BL(0,2)<-[9]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=132.1)
+   node R.2.1.1.1.5 d5 BL(0,2)<-[12]: INTERNAL (1.8 s, 1 rounds; t=134.0)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 16 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.2.1.1.1.5 d5: DEAD by NOROOM-CN -- no-room at R.2.1.1.1.5 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the 
+   node R.2.1.1.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=150.1)
+   node R.2.1.2    d3 BR(0,1)<-[11]: INTERNAL (1.5 s, 1 rounds; t=151.8)
+   Rule NS at the WEDGE at R.2.1.2: F3 meets / misses the wedge of (F1, BR(0,1)) -- 5 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.65083]; wedge--e-L=[2.87708,2.87708,1.65083,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.2.1.2.1  d4 BR(0,1)<-['meets W']: INTERNAL (2.3 s, 1 rounds; t=154.3)
+   node R.2.1.2.1.1 d5 BL(0,2)<-[4]: INTERNAL (2.2 s, 1 rounds; t=156.8)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 16 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.2.1.2.1.1 d5: DEAD by NOROOM-CN -- no-room at R.2.1.2.1.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the 
+   node R.2.1.2.1.2 d5 BL(0,2)<-[7]: DEAD by FC r1 (2.4 s, 1 rounds; t=176.3)
+   node R.2.1.2.1.3 d5 BL(0,2)<-[9]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=176.8)
+   node R.2.1.2.1.4 d5 BL(0,2)<-[12]: INTERNAL (1.4 s, 1 rounds; t=178.4)
+   no-room (k=9, m=2): DEAD by EmptyBox in 2 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.2.1.2.1.4 d5: DEAD by EmptyBox -- no-room at R.2.1.2.1.4 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.2.1.2.2  d4 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=180.6)
+   node R.2.1.3    d3 BR(0,1)<-[15]: INTERNAL (1.3 s, 1 rounds; t=182.1)
+   Rule NS at the WEDGE at R.2.1.3: F3 meets / misses the wedge of (F1, BR(0,1)) -- 6 target(s): wedge--e-L=[2.87708,3.37708,1.0,1.65083]; wedge--e-L=[2.87708,2.87708,1.65083,2.0]; wedge-e^-L=[2.87708,3.37708,1.5,2.0]; wedge-e^-L=[2.8770
+   node R.2.1.3.1  d4 BR(0,1)<-['meets W']: INTERNAL (1.4 s, 1 rounds; t=183.8)
+   node R.2.1.3.1.1 d5 BL(0,2)<-[4]: INTERNAL (2.7 s, 1 rounds; t=186.8)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 16 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.2.1.3.1.1 d5: DEAD by NOROOM-CN -- no-room at R.2.1.3.1.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the 
