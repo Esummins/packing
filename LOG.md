@@ -9344,3 +9344,28 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
   `docs/residue_map/campaigns/A238-k4-benchmark/`, registry row, ledger §3.  The k4_11 sweep continues detached
   (`code/bench238.sh` + `code/chain238.sh`, per-node commits, resume by row presence); `code/report238.py` regenerates
   the table at any time.
+
+## 2026-09-16 12:xx -- A240-cross (Fable) -- DONE (launch-and-exit; census 13 s, summary + pages + tests 1 min, Lean build + audit ~5 min; resume `bash attempts/A240-cross/code/run240.sh`): **the PI's X-sketch made exact and tested -- Lemma OPPOSE ("corner jams require opposing torques") is FALSE: locked corners are same-handed 215 : 11, including 44 : 1 at the free Fritz-John points, because the torque of a partner contact is a function of the tilt difference (vertex owner) and of the contact position (edge owner) and a flush pair's line of action is free -- handedness enters nowhere (Lemma PARTNER-TORQUE [T]); the wall-grain alternation occurs on 0 / 193 four-crowds; the bracing chains are Corollary CHAIN; the planarity step is Theorem CROSS-PLANAR [T] (Lean; a left-right chain and a floor-ceiling chain SHARE a square OR TOUCH -- the second alternative occurs at the n = 26 record); the shared square is NOT obstructed (90 tilted interior crossing squares with no external row; Trump crosses at a flush square).  CROSS + A233 closes nothing for any n and does not reduce LOCKED-CROWD-FREE(n) to the flush-crossing case; k0_00 unchanged**
+- **[F] Lemma OPPOSE** (`docs/proofs/cross.md` §1): at a LOCKED open corner (both meeters loaded, no external row on either)
+  the meeters are same-handed at 215 of 1 363 doubly-met corners and opposite-handed at 11 (HELD 121 : 9, CROWD 50 : 1,
+  free FJ 44 : 1); 191 of the same-handed locks are flush same-tilt pairs, 23 are vertex-on-edge pairs (17 with both tilts
+  ≥ 1° off flat, e.g. `fj_rand_0_0073_free` TR at 81.9° / 75.1°).  **[T] Lemma PARTNER-TORQUE**: τ_vertex-owner =
+  λ h_k × R(θ_O − θ_P) ν_e (tilt difference only), τ_edge-owner = λ x (the contact's tangential coordinate); corner form: the
+  vertex owner is turned toward its partner's tilt for a gap < 45°, the edge owner's torque sign is free; a flush pair is
+  free in both.  The ring's tilt floor sits on its unloaded-wall two-contact meeters 4, 8, 2 (STRUT's collinearity fails),
+  not on handedness; 121 HELD + 44 free locked same-handed corners balance without any bound.
+- **[F] Alternation**: 0 / 193 four-crowds; 144 of 772 walls carry both handednesses, 110 four-crowds have a mixed wall; the
+  ring's grains are its left and right HALVES (floor 4 '−' | 6 '+'), as CORNER-LOAD's corollary requires (a lean).
+- **[T] Chains** = Corollary CHAIN, measured: 525 / 618 loaded four-crowd components reach both far walls, 486 contain the
+  opposite corner's meeters — the loaded component is the whole packing.
+- **[T] Theorem CROSS-PLANAR** (`cross.md` §4; Lean `crossing_lemma` classical axiom, `chains_meet`, `chains_share_or_touch`,
+  `isCompact_of_isUnitSquare`): two compact connected sets crossing the square meet (Brouwer / Maehara); an LR chain and a TB
+  chain share a square OR a square of one touches a square of the other.  On 589 witnesses with both loaded chains: 586
+  share, 3 only touch (`square-26b`, two free FJ points), 0 neither.  No chain avoids the corner meeters at n = 11 (0 / 193).
+- **[F] The shared square**: of 220 crossing squares on 126 four-crowds, 90 are tilted non-meeters with no external row
+  (47 four-crowds have every crossing square tilted and unloaded; `w037_crowd` crosses at interior square 0); the ring's
+  crossing is its tilted meeter 6 (VV + flush, external load 0); Trump's chains cross at the FLUSH square 3.  Neither the
+  tilted nor the flush crossing is forbidden; both balance.
+- Files: `attempts/A240-cross/{code,results,logs}`, `docs/proofs/cross.md`, pages `docs/residue_map/campaigns/A240-cross/`
+  (`cross_ring_x.svg`, `oppose_corners.svg`, `wall_grains.svg`; 11 panels geometry-checked), Lean `Statements/Open/Cross.lean`
+  (no axiom for a refuted statement), registry row, ledger §4.
