@@ -1,0 +1,22 @@
+16:09:00 [fr2] start k5_16_interior_Y1112 wall 1800 (lab 6, free 16118 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y1112 at the zero pad: ALIVE in 12816 ms; kills {'H-clip': 0, 'P': 4348, 'W': 1339, 'C': 856, 'M': 2909, 'L': 5, 'R': 2906, 'X': 527}; CSP units 512 -> 512 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y1112 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y1112 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y1112_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [1.519, 1.659, 2.078, 2.218, 28.072, 41.112]; forced H []; 6 slots; free squares 5
+   node R0+        d0 root: INTERNAL (3.4 s, 1 rounds; t=3.5)
+   node R0+.1      d1 TL(1,0)<-[9]: INTERNAL (2.8 s, 1 rounds; t=6.6)
+   node R0+.1.1    d2 TR(1,0)<-[17]: DEAD by COUNT r1 (5.2 s, 1 rounds; t=11.9)
+   node R0+.1.2    d2 TR(1,0)<-[18]: INTERNAL (2.8 s, 1 rounds; t=14.7)
+   node R0+.1.2.1  d3 TR(0,1)<-[16]: INTERNAL (3.3 s, 1 rounds; t=18.0)
+   node R0+.1.2.1.1 d4 BL(1,0)<-[5]: INTERNAL (3.0 s, 1 rounds; t=21.4)
+   no-room (k=10, m=1): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.2.1.1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.2.1.1.p1 d5 pocket<-[0]: INTERNAL (13.8 s, 1 rounds; t=51.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.1.2.1.1.p1: split F5 at BR(1,0) (meeting fraction 0.247386; alive rows []; named ['F3', 'F4', 'F5'])
+   node R0+.1.2.1.1.p1.1 d6 BR(1,0)<-None: INTERNAL (8.9 s, 1 rounds; t=60.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.1.2.1.1.p1.1: bisect F1 on t at 53.1301 (extents (0.150835, 0.184953), tilt 90.0 deg, core non-empty, 44 piece(s); split 1 of 4)
+   node R0+.1.2.1.1.p1.1.1 d7 F1<-['t<=53.1301']: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=60.9)
+   node R0+.1.2.1.1.p1.1.2 d7 F1<-['t>=53.1301']: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=61.0)
