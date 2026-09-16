@@ -165,3 +165,17 @@ FALSE if square-38 / square-40 are optimal (loadable VV edges present, unloaded 
 statement; no axiom), `lake build` + `lean/audit.py` exit 0, no sorry.  Prose [T]: POINT, VV-AXES, REFLEX, the two-selection
 principle (D1 / D3′), CONCURRENT, KNIFE.  Obligations: O-VV1 the wedge computation of VV-AXES in Lean over `PSq` (routine); O-VV2
 NO-VV-STRESS for the free side problem [C] (§5, with HOLD / RING).  Nothing in `Main.lean` depends on this file.
+
+## Addendum (coordinator, 2026-09-15 22:10) -- composite edges: the PI's correction to s.5
+
+The PI (22:00): "two same-grain aligned squares effectively have a single shared top edge, and if the vertex of
+another square lies on the seam, that is not a VV load, it is a VE load (where the E is actually two Vs coincident)."
+Re-classifying every vertex-on-vertex contact between non-parallel squares with the symmetric COMPOSITE-EDGE test
+(one of the two squares has a parallel neighbour sharing the point with collinear edges through it, so the other
+square's vertex sits on a composite edge): the n = 38 and n = 40 records' 12 contacts are ALL vertex-on-composite-
+edge (the flush square's corner sits on the boundary line of a 45-degree band, two parallel diamonds' collinear
+edges), NOT genuine VV; the survey has 0 genuine VV contacts, SETTLED 0, BOXK0 0, K0FREE 2 (both unloaded, as
+NO-VV-IND requires), HELD 17 and CROWD 4 (held configurations).  So the contact-graph form of Lemma NO-VV holds on
+every optimal packing we have in the PI's sense: [M] no genuine (isolated, non-composite) vertex-on-vertex contact
+between non-parallel squares at any record or settled optimum; loaded genuine VV never.  s.5's "false" refers to
+the naive classification only.  Code: the coordinator's probe (attempts/A235-no-vv/code/composite_probe.py).
