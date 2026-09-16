@@ -78,3 +78,21 @@
    per node: R d0 INTERNAL 2.5s; R.1 d1 INTERNAL 3.2s; R.1.1 d2 INTERNAL 3.2s; R.1.1.1 d3 DEAD EmptyBox 0.2s; R.1.1.2 d3 DEAD EmptyBox 0.1s; R.1.1.3 d3 DEAD EmptyBox 0.1s; R.1.1.4 d3 DEAD EmptyBox 0.2s; R.1.1.5 d3 DEAD EmptyBox 0.2s; R.1.2 d2 DEAD REACH 5.9s; R.1.3 d2 INTERNAL 3.4s; R.1.3.p1 d3 INTERNAL 5.0s; R.1.3.p1.p1 d4 DEAD EmptyBox 1.4s; R.1.3.p1.p2 d4 DEAD EmptyBox 1.6s; R.1.3.p2 d3 DEAD EmptyBox 0.7s; R.1.4 d2 INTERNAL 3.6s; R.1.4.1 d3 INTERNAL 3.0s; R.1.4.1.p1 d4 DEAD EmptyBox 1.8s; R.1.4.2 d3 DEAD EmptyBox 2.6s; R.1.4.3 d3 INTERNAL 2.1s; R.1.4.3.p1 d4 DEAD EmptyBox 1.5s; R.1.4.4 d3 DEAD S-CLIP 1.4s; R.1.4.5 d3 DEAD EmptyBox 0.4s; R.1.5 d2 DEAD EmptyBox 1.1s; R.1.6 d2 INTERNAL 1.4s; R.1.6r1 d2 DEAD EmptyBox 0.2s; R.1.7 d2 INTERNAL 1.1s; R.1.7.1 d3 DEAD EmptyBox 0.1s; R.1.7.2 d3 DEAD EmptyBox 0.1s; R.1.7.3 d3 DEAD EmptyBox 0.2s; R.1.7.4 d3 DEAD EmptyBox 0.2s; R.1.8 d2 INTERNAL 0.9s; R.1.8.1 d3 DEAD EmptyBox 0.1s; R.1.8.2 d3 DEAD EmptyBox 0.1s; R.1.8.3 d3 DEAD EmptyBox 0.1s; R.1.8.4 d3 DEAD EmptyBox 0.1s; R.2 d1 DEAD EmptyBox 0.2s; R.3 d1 INTERNAL 2.0s; R.3.1 d2 DEAD EmptyBox 0.2s; R.3.2 d2 DEAD FC 3.1s; R.3.3 d2 INTERNAL 2.2s; R.3.3.1 d3 DEAD NOROOM 5.7s; R.3.3.2 d3 DEAD S-CLIP 0.8s; R.3.3.3 d3 DEAD NOROOM 3.0s; R.3.3.4 d3 DEAD EmptyBox 0.4s; R.3.4 d2 INTERNAL 2.4s; R.3.4.1 d3 DEAD NOROOM 4.0s; R.3.4.2 d3 DEAD EmptyBox 1.7s; R.3.4.3 d3 DEAD NOROOM 2.9s; R.3.4.4 d3 DEAD S-CLIP 0.6s; R.3.4.5 d3 DEAD EmptyBox 0.3s; R.3.5 d2 DEAD EmptyBox 0.1s; R.3.6 d2 DEAD EmptyBox 0.1s; R.3.7 d2 DEAD EmptyBox 0.1s; R.3.8 d2 DEAD EmptyBox 0.1s
 == k4_11_c0_Y0539: g1 None | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
 == A238 k4_11_c0_Y0539 [k4_11]: {'zero': 'DEAD'} in 168.5 s
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k4_11_c0_Y1135 at the zero pad: ALIVE in 19878 ms; kills {'H-clip': 0, 'P': 2970, 'W': 1073, 'C': 778, 'M': 3528, 'L': 0, 'R': 4580, 'X': 1892}; CSP units 336 -> 336 alive; caps {'BL(0,2)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None}; forced H []
+== k4_11_c0_Y1135 page pad zero: start attempts/A238-k4-benchmark/certs/csp209_k4_11_c0_Y1135_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.637, 2.777, 2.358, 2.471, 82.372, 90.0]; forced H []; 5 slots; free squares 6
+   node R          d0 root: INTERNAL (2.1 s, 1 rounds; t=2.2)
+   node Rr1        d0 root<-None: INTERNAL (1.8 s, 1 rounds; t=4.0)
+   node R.1        d1 TR(1,0)<-[7]: INTERNAL (2.1 s, 1 rounds; t=6.1)
+   node R.1.1      d2 BL(0,2)<-[3]: INTERNAL (5.2 s, 1 rounds; t=11.5)
+   node R.1.1r1    d2 root<-None: DEAD by EmptyBox r1 (1.8 s, 1 rounds; t=13.3)
+   node R.1.2      d2 BL(0,2)<-[4]: INTERNAL (4.4 s, 1 rounds; t=17.7)
+   node R.1.2r1    d2 root<-None: INTERNAL (3.4 s, 1 rounds; t=21.1)
+   no-room (k=9, m=2): UNDECIDED in 21 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.1.2: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R.1.2.p1   d3 pocket<-[0]: INTERNAL (4.8 s, 1 rounds; t=47.7)
+   no-room (k=10, m=1): UNDECIDED in 19 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.1.2.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.2.p1.p1 d4 pocket<-[0]: DEAD by S-CLIP r1 (1.8 s, 1 rounds; t=69.4)
+   node R.1.3      d2 BL(0,2)<-[9]: INTERNAL (2.7 s, 1 rounds; t=72.2)
+   node R.1.3r1    d2 root<-None: INTERNAL (3.4 s, 1 rounds; t=75.7)
