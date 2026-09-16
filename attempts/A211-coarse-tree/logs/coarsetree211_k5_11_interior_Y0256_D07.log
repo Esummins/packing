@@ -217,3 +217,61 @@
    start R.1.2.p1.2.2: applied step 3/5 -- POCKET [1.4375, 3.4396, 2.5676, 3.4396] as F4
    start R.1.2.p1.2.2: applied step 4/5 -- NS F2 misses at BL(1,1)
    start R.1.2.p1.2.2: applied step 5/5 -- NS F4 misses at TL(1,0)
+   node R.1.2.p1.2.2 d0 root: INTERNAL (4.6 s, 1 rounds; t=60.4)
+   no-room (k=10, m=1): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.1.2.p1.2.2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.2.p1.2.2.p1 d1 pocket<-[0]: INTERNAL (6.6 s, 1 rounds; t=82.5)
+   node R.1.2.p1.2.2.p1 d1: DEAD by CC -- rule CC at R.1.2.p1.2.2.p1 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an int
+   start R.1.2.p1.2.2 => DEAD (2 nodes; t = 83 s of 1800.0)
+   start R.1.3: ancestor R.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0256_D07.json) refused (KeyError('node R.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.3: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0256_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.3: applied step 1/2 -- BL(1,1) <- [8]
+   start R.1.3: applied step 2/2 -- BR(0,1) <- [18, 23]
+   node R.1.3      d0 root: INTERNAL (1.4 s, 1 rounds; t=100.5)
+   no-room (k=9, m=2): DEAD by EmptyBox in 2 s (0 pockets; EmptyBox(P2): every pose is impossible -- the case is dead by the pair leaf)
+   node R.1.3      d0: DEAD by EmptyBox -- no-room at R.1.3 (k=9, m=2; A189 Lemma 1 on the role boxes): EmptyBox(P2): every pose is impossible -- the case is dead by the pair leaf
+   start R.1.3        => DEAD (1 nodes; t = 103 s of 1800.0)
+   start R.1.4: ancestor R.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0256_D07.json) refused (KeyError('node R.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.4: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0256_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.4: applied step 1/2 -- BL(1,1) <- [8]
+   start R.1.4: applied step 2/2 -- BR(0,1) <- [21, 23]
+   node R.1.4      d0 root: INTERNAL (1.0 s, 1 rounds; t=119.0)
+   node R.1.4.1    d1 TL(1,0)<-[9]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=119.8)
+   node R.1.4.2    d1 TL(1,0)<-[13]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=120.4)
+   node R.1.4.3    d1 TL(1,0)<-[14]: INTERNAL (2.0 s, 1 rounds; t=122.7)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 7 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.1.4.3    d1: DEAD by NOROOM-POCKET -- no-room at R.1.4.3 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.1.4.4    d1 TL(1,0)<-[18]: INTERNAL (2.8 s, 1 rounds; t=133.0)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 4 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.1.4.4    d1: DEAD by NOROOM-POCKET -- no-room at R.1.4.4 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.1.4.5    d1 TL(1,0)<-[19]: INTERNAL (1.4 s, 1 rounds; t=138.7)
+   no-room (k=10, m=1): UNDECIDED in 13 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.1.4.5: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.4.5.p1 d2 pocket<-[0]: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=153.9)
+   node R.1.4.5.p2 d2 pocket<-[1]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=154.3)
+   start R.1.4        => DEAD (8 nodes; t = 155 s of 1800.0)
+   start R.1.5: ancestor R.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0256_D07.json) refused (KeyError('node R.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.5: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0256_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.5: applied step 1/2 -- BL(1,1) <- [8]
+   start R.1.5: applied step 2/2 -- BR(0,1) <- [22, 23]
+   node R.1.5      d0 root: INTERNAL (1.6 s, 1 rounds; t=172.1)
+   node R.1.5r1    d0 root<-None: INTERNAL (3.9 s, 1 rounds; t=176.3)
+   no-room (k=10, m=1): UNDECIDED in 12 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.1.5: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.5.p1   d1 pocket<-[0]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=188.5)
+   start R.1.5        => DEAD (3 nodes; t = 189 s of 1800.0)
+   start R.2: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0256_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.2: applied step 1/1 -- BL(1,1) <- [13]
+   node R.2        d0 root: INTERNAL (0.8 s, 1 rounds; t=204.9)
+   node R.2.1      d1 BR(0,1)<-[18, 21]: INTERNAL (1.1 s, 1 rounds; t=206.3)
+   node R.2.1r1    d1 root<-None: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=207.6)
+   node R.2.2      d1 BR(0,1)<-[18, 22]: DEAD by COUNT r1 (2.0 s, 1 rounds; t=209.9)
+   node R.2.3      d1 BR(0,1)<-[21, 23]: INTERNAL (1.1 s, 1 rounds; t=211.3)
+   node R.2.3.1    d2 TR(0,0)<-[19]: INTERNAL (3.1 s, 1 rounds; t=214.7)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F4): every pose is impossible -- the case is dead by the pair leaf)
+   node R.2.3.1    d2: DEAD by EmptyBox -- no-room at R.2.3.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F4): every pose is impossible -- the case is dead by the pair leaf
+   node R.2.3.2    d2 TR(0,0)<-[24]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=215.9)
+   node R.2.4      d1 BR(0,1)<-[22, 23]: INTERNAL (0.7 s, 1 rounds; t=216.9)
+   node R.2.4u     d1 TR(0,0)<-[19]: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=217.6)
+   start R.2          => DEAD (9 nodes; t = 218 s of 1800.0)
+   start R.3: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0256_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
