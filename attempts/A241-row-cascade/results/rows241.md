@@ -28,7 +28,7 @@ certificates.  That campaign is `code/param241.py` (resumable, `code/param241.sh
 
 | class | base certificate | atoms | stage 0 at 191/50 (gap / nearest-wall / mid-band) | 4D over the window | C2 | ROW |
 |---|---|---|---|---|---|---|
-| _(the campaign has not written a row yet)_ | | | | | | |
+| `k4_07` | attempts\A55-k4-sweep\certs\k4_07.json | - | gap PASS / nearest-wall PASS / mid-band PASS | gap rc=1 134.7s / nearest-wall rc=1 161.3s / mid-band rc=1 132.1s | - | PARAM-FAIL |
 
 ## 2. The extension table
 
