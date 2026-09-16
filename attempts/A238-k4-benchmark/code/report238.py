@@ -135,6 +135,47 @@ def price(S):
                 speedup_per_node=(round(lp / mean, 2) if mean else None))
 
 
+def forced():
+    """the forced-cell census (code/fc238.py): traction = the one-slot extensions closed on the window."""
+    f = os.path.join(A238, "results", "forced238.json")
+    return {r["cls"]: r for r in json.load(open(f, encoding="utf-8"))} if os.path.exists(f) else {}
+
+
+def tier(sums):
+    """the extrapolation, split by the ONE number that predicts it: the class's usable forced cells."""
+    FC = forced()
+    K4 = ["k4_03", "k4_05", "k4_06", "k4_08", "k4_11"]
+    K3 = ["k3_01", "k3_02", "k3_03", "k3_04", "k3_05"]
+    P = {S["cls"]: price(S) for S in sums if price(S)}
+    k4 = P.get("k4_11")
+    k3 = P.get("k3_02")
+    L = ["## Tier extrapolation", "",
+         "The measured per-class numbers are the two pilots; the extrapolation carries them by the ONE number that",
+         "predicts traction -- the class's USABLE forced cells (`results/forced238.md`), i.e. how many of its one-slot",
+         "extensions are closed on the window.", "",
+         "| block | classes | usable forced cells | geometry CPU-h | LP residue CPU-h | total (A238) | A100's price |",
+         "|---|---|---|---|---|---|---|"]
+    if k4:
+        n4 = ", ".join("%s %s/%s" % (c, (FC.get(c) or {}).get("n_usable"), (FC.get(c) or {}).get("n_cells")) for c in K4)
+        L.append("| k4 with traction (%s) | 5 | %s | %.0f | %.0f | **%.0f** | %s each |" % (
+            ", ".join(K4), n4, 5 * k4["geometry_cpu_h"], 5 * k4["lp_residue_cpu_h"], 5 * k4["total_cpu_h"],
+            k4["a100_total_cpu_h"]))
+    if k3:
+        L.append("| k <= 3 (%s, k2_*, k1_00) | 9 | 0 for every one | %.0f | %.0f | **%.0f** | %s each |" % (
+            ", ".join(K3), 9 * k3["geometry_cpu_h"], 9 * k3["lp_residue_cpu_h"], 9 * k3["total_cpu_h"],
+            k3["a100_total_cpu_h"]))
+    L += ["| corners4 (shadow, no image) | 1 | 0/8 -- every extension is the OPEN k5_16 | 0 | not priced | - | not priced |", ""]
+    L += ["`corners4` is not run: with no usable forced cell the toolkit's rules have nothing to act on (A193 and",
+          "A84 s.7.1 independently), so a run would cost the stage-0 seconds and decide nothing -- exactly what the",
+          "k3_02 rows above measure.  For the same reason the k <= 3 row is NOT a saving: the geometry is cheap there",
+          "because it is blind, and the LP residue is A100's whole price.", "",
+          "**The lever the numbers point at**: five of the nine blocked k <= 3 extensions are k4 classes A55 already",
+          "killed exactly (k4_00 / 01 / 02 / 04 / 07 / 09 / 10 / 12) that simply have no full-window scoreboard row.",
+          "Emitting those rows would give each k3 class 2-5 usable forced cells and move it into the k4 row of this",
+          "table.", ""]
+    return L
+
+
 def md(sums):
     L = ["# A238 -- the k5 toolkit on the Trump-parent protected classes: geometry against A100's LP", "",
          "Every row is ONE node of a protected class's tree at s0 with the SAME hypothesis A100 priced: M_S & YES(H),",
@@ -163,19 +204,7 @@ def md(sums):
                   "(per node %s x cheaper)." % (p["cells"], p["mean_node_s"], p["geometry_cpu_h"],
                                                 100 * (1 - p["kill_rate"]), p["a100_node_s"], p["lp_residue_cpu_h"],
                                                 p["total_cpu_h"], p["a100_total_cpu_h"], p["speedup_per_node"]), ""]
-    tot = [price(S) for S in sums if price(S)]
-    if tot:
-        per = sum(t["total_cpu_h"] for t in tot) / len(tot)
-        a100per = sum((t["a100_total_cpu_h"] or 0) for t in tot) / len(tot)
-        L += ["## Tier extrapolation", "",
-              "| tier block | classes | per class CPU-h (A238) | per class CPU-h (A100) | block CPU-h (A238) | block CPU-h (A100) |",
-              "|---|---|---|---|---|---|",
-              "| Trump-parent (image-bearing) | %d | %.0f | %.0f | %.0f | %.0f |" % (
-                  TRUMP_PARENTS, per, a100per, TRUMP_PARENTS * per, TRUMP_PARENTS * a100per),
-              "| shadow (%s): no image, kill-only | 2 | %.0f | - | %.0f | - |" % (
-                  ", ".join(SHADOW), per, 2 * per), "",
-              "The shadow classes carry no Trump image, so the gate never holds: every node is submitted to the kill",
-              "rules and there is no tube-pending residue -- the same geometry price with a smaller alive fraction.", ""]
+    L += tier(sums)
     return "\n".join(L) + "\n"
 
 
