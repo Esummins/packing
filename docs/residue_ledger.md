@@ -318,6 +318,32 @@ needs a basin certificate; every other class needs only crowd rows and a tree.*
 
 ![the basin containment map of the alive residue](residue_map/basin_map.svg)
 
+**[M] A238 (2026-09-16) — the protected tier re-priced with the k5 GEOMETRY instead of the case-LP, and the one
+number that decides whether that works.** A100 priced k4_11 / k3_02 by LP (≈ 560 / 485 s per level-1 cover cell,
+3,500–4,200 CPU-h a class). A238 ran **A100's own cover cells, same hypothesis M_S & YES(H), δ_pin = 2·10⁻²** through
+the toolkit the k5 frontier uses (A211's live coarse tree + A212's Trump-containment gate + A224 Rule SNAP with the
+k+1 hand-off + A230 Rule EPS), with the (D) leaf re-stated for a parent class as **Lemma TUBE-LEAF/S**: A212's tube
+leaf in the class direction slot(I_g) (A84 §4's swept certificates) with the **pins exempt from the radius**, because
+M_S(m) puts them exactly on slots_S(m) — the tube direction's pinned coordinate, w = 0 (Lemma P-TREE Step 4). Every
+certificate states its hypothesis and states DEAD as the `stratum_kill` instance for **that class** restricted to H
+(obligation O1). **[M] On k4_11 the PI's expectation holds hard**: cover cells die by EmptyBox / REACH / NOROOM-CN /
+NOROOM-POCKET / S-CLIP / COUNT / FC in **0.2–16 s** where A100's LP spent 130–560 s and usually could not kill at all
+(`c0_Y0074`: A100 τ = 6.000 = budget, FAIL → deepen, 184 s; A238 DEAD by EmptyBox at the root). **[F] On k3_02 the
+same toolkit decides nothing**: 41 of 41 cover cells ALIVE in ≈ 4 s, 0 kills, 0 branches. The reason is exact and it
+is the tier's real structure: every kill rule acts on Theorem FC's **forced cells**, and `classes178.forced_cells`
+marks a cell usable only when the one-slot extension carries a FULL-window A56 scoreboard row. The census
+(`attempts/A238-k4-benchmark/results/forced238.md`): **trump5 6/6, k4_08 and k4_11 5/7, k4_03 / k4_05 / k4_06 3/5,
+corners4 0/8** (all eight extensions are the open `k5_16` — A193's finding from the LP side), **and every k ≤ 3 class
+0**. Half of the k ≤ 3 blockage is bookkeeping: `k4_00 / 01 / 02 / 04 / 07 / 09 / 10 / 12` were killed **exactly** by
+A55 and are blocked only because the 52-row scoreboard covers k5 / k6 alone — **emitting full-window rows for those
+eight would hand every k3 class 2–5 forced cells and move it into the k4 regime**. **The protected tier's price is
+therefore a cascade, not a flat number: traction on a class = the count of its one-slot extensions closed on the
+window, so closing k4 pays for k3, k3 for k2, down to k0_00 — the K1 climb Rule SNAP performs inside a single tree,
+applied to the tier itself.** `corners4` stays where A84 §7.1 and A193 left it: no Trump image, no forced cell, no
+lever until k5_16 closes.
+
+
+
 **[M] A187 (2026-09-09) — the basin containment map: the residue is NOT basin-shaped, and the missing minimisers are
 S01 and S03, not S02.** The PI asked whether the whole solution set can be turned into a basin — every alive node dying
 by containment in a certified local certificate instead of by measure. A187 measured all **63 ALIVE gallery pages**
