@@ -454,3 +454,23 @@
    no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
    node R0+.3.5.4  d3: DEAD by NOROOM -- no-room at R0+.3.5.4 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
    node R0+.3.5.5  d3 BR(0,1)<-[21]: INTERNAL (3.4 s, 1 rounds; t=1503.4)
+   no-room (k=9, m=2): UNDECIDED in 27 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.5.5: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.5.5.p1 d4 pocket<-[0]: INTERNAL (2.0 s, 1 rounds; t=1533.4)
+   no-room (k=10, m=1): UNDECIDED in 21 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.5.5.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.5.5.p1.p1 d5 pocket<-[0]: INTERNAL (3.6 s, 1 rounds; t=1559.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.3.5.5.p1.p1: split F1 at BR(0,1) (meeting fraction 0.333418; alive rows [11, 12, 16, 17]; named ['F1', 'F3', 'F4', 'F5'])
+   node R0+.3.5.5.p1.p1.1 d6 BR(0,1)<-None: INTERNAL (2.2 s, 1 rounds; t=1565.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.5.5.p1.p1.1: bisect F4 on y at 1.938542 (extents (0.860292, 2.877084), tilt 90.0 deg, core EMPTY, 14 piece(s); split 1 of 4)
+   node R0+.3.5.5.p1.p1.1.1 d7 F4<-['y<=1.938542']: INTERNAL (5.6 s, 1 rounds; t=1572.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.5.5.p1.p1.1.1: bisect F2 on t at 53.1301 (extents (0.483478, 0.544586), tilt 90.0 deg, core non-empty, 45 piece(s); split 1 of 4)
+   node R0+.3.5.5.p1.p1.1.1.1 d8 F2<-['t<=53.1301']: DEAD by EmptyBox r1 (4.3 s, 1 rounds; t=1578.0)
+   node R0+.3.5.5.p1.p1.1.1.2 d8 F2<-['t>=53.1301']: DEAD by S-CLIP r1 (2.2 s, 1 rounds; t=1581.2)
+   node R0+.3.5.5.p1.p1.1.2 d7 F4<-['y>=1.938542']: INTERNAL (4.5 s, 1 rounds; t=1586.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.5.5.p1.p1.1.2: bisect F2 on t at 53.1301 (extents (0.464152, 0.544586), tilt 90.0 deg, core non-empty, 60 piece(s); split 1 of 4)
+   node R0+.3.5.5.p1.p1.1.2.1 d8 F2<-['t<=53.1301']: DEAD by EmptyBox r1 (6.1 s, 1 rounds; t=1593.9)
