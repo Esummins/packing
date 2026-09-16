@@ -176270,10 +176270,10 @@
       "F1"
      ],
      "excluded": null,
-     "verdict": "INTERNAL",
-     "clip": null,
-     "killed_round": null,
-     "leaf": null,
+     "verdict": "DEAD",
+     "clip": "NOROOM-CN",
+     "killed_round": 1,
+     "leaf": "no-room at R.1.1.4.2.2 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the rest hold no free centre at all)",
      "reason": null,
      "seconds": 2.1,
      "t": 195.5,
@@ -180882,7 +180882,112 @@
        "n_before": 456,
        "n_after": 96
       }
-     ]
+     ],
+     "trump_gate": {
+      "contains": false,
+      "g": null,
+      "assignment": null,
+      "pins": null,
+      "checks": [
+       {
+        "g": "id",
+        "fail": "no assignment",
+        "detail": []
+       },
+       {
+        "g": "rot90",
+        "fail": "pins"
+       },
+       {
+        "g": "rot180",
+        "fail": "pins"
+       },
+       {
+        "g": "rot270",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_x",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_y",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_d",
+        "fail": "pins"
+       },
+       {
+        "g": "refl_ad",
+        "fail": "pins"
+       }
+      ],
+      "seconds": 0.002,
+      "n_roles": 5,
+      "pre": null
+     },
+     "a238": {
+      "rule": null,
+      "verdict": "INTERNAL",
+      "depth": 5,
+      "seconds": 2.1,
+      "gated": false,
+      "snap": null,
+      "eps": null
+     },
+     "snap": {
+      "label": "R.1.1.4.2.2",
+      "n_cands": 0,
+      "n_anon": 2,
+      "eps": 0.06,
+      "deg": 3.0,
+      "verdict": null,
+      "cands": [],
+      "where": "internal",
+      "depth": 5,
+      "seconds": 0.001
+     },
+     "cc": {
+      "n_rows": 0,
+      "seconds": 0.001,
+      "rows": []
+     },
+     "noroom": {
+      "label": "R.1.1.4.2.2",
+      "depth": 5,
+      "k": 9,
+      "m": 2,
+      "verdict": "DEAD",
+      "clip": "NOROOM-CN",
+      "bound": null,
+      "cn_bound": null,
+      "n_pockets": 3,
+      "pockets": [
+       [
+        3.140408,
+        3.377084,
+        1.499999,
+        2.377085
+       ],
+       [
+        1.162555,
+        1.408271,
+        3.251388,
+        3.377084
+       ],
+       [
+        0.5,
+        0.526681,
+        3.361678,
+        3.377084
+       ]
+      ],
+      "seconds": 18.3,
+      "reason": "pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the rest hold no free centre at all)",
+      "cap": 120.0,
+      "short_cap": null
+     }
     }
    ],
    "basins": [],
@@ -180946,7 +181051,7 @@
     }
    },
    "n_nodes": 42,
-   "seconds": 195.5
+   "seconds": 214.2
   }
  },
  "camp": "A238",
