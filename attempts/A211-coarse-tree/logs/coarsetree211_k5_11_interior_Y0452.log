@@ -78,3 +78,35 @@
    node R0+.3.1.4.4 d4: DEAD by CC -- rule CC at R0+.3.1.4.4 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F3 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interio
    node R0+.3.2    d2 BR(0,1)<-[22]: INTERNAL (1.1 s, 1 rounds; t=66.0)
    node R0+.3.2.1  d3 TL(1,0)<-[8]: INTERNAL (2.9 s, 1 rounds; t=69.1)
+   no-room (k=9, m=2): UNDECIDED in 23 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.2.1: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.2.1.p1 d4 pocket<-[0]: INTERNAL (4.6 s, 1 rounds; t=97.3)
+   no-room (k=10, m=1): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.2.1.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.2.1.p1.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=110.4)
+   node R0+.3.2.2  d3 TL(1,0)<-[9]: INTERNAL (1.9 s, 1 rounds; t=112.5)
+   no-room (k=9, m=2): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.2.2: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.2.2.p1 d4 pocket<-[0]: INTERNAL (3.0 s, 1 rounds; t=130.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.3.2.2.p1 d4: DEAD by NOROOM -- no-room at R0+.3.2.2.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.3.2.3  d3 TL(1,0)<-[13]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=133.2)
+   node R0+.3.2.4  d3 TL(1,0)<-[14]: INTERNAL (2.9 s, 1 rounds; t=136.4)
+   node R0+.3.2.4r1 d3 root<-None: INTERNAL (2.0 s, 1 rounds; t=138.6)
+   node R0+.3.2.4  d3: DEAD by CC -- rule CC at R0+.3.2.4 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R0+.3.2.5  d3 TL(1,0)<-[19]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=139.3)
+   node R0+.3.3    d2 BR(0,1)<-[23]: INTERNAL (0.9 s, 1 rounds; t=140.5)
+   node R0+.3.3.1  d3 TL(1,0)<-[8]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=141.5)
+   node R0+.3.3.2  d3 TL(1,0)<-[9]: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=143.2)
+   node R0+.3.3.3  d3 TL(1,0)<-[14]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=143.5)
+   node R0+.3.3.4  d3 TL(1,0)<-[19]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=143.8)
+   start R0+          => DEAD (42 nodes; t = 144 s of 1800.0)
+   => DEAD (g1_page) in 144.1 s: 1 start runs, 42 nodes, depth 5, 3 CC kills, 0 exact leaf cascades, 0 NS splits, 3 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 26 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 28 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 15.1s; R0+.1 d1 INTERNAL 1.3s; R0+.1.1 d2 DEAD EmptyBox 0.2s; R0+.1.2 d2 DEAD EmptyBox 1.4s; R0+.1.3 d2 INTERNAL 3.2s; R0+.1.3r1 d2 DEAD S-CLIP 2.5s; R0+.1.4 d2 INTERNAL 1.8s; R0+.1.4.1 d3 DEAD EmptyBox 1.7s; R0+.1.4.2 d3 DEAD EmptyBox 0.4s; R0+.1.4.3 d3 DEAD FC 3.4s; R0+.1.4.4 d3 DEAD EmptyBox 1.0s; R0+.2 d1 INTERNAL 0.7s; R0+.2.1 d2 DEAD EmptyBox 0.1s; R0+.2.2 d2 DEAD FC 1.8s; R0+.2.3 d2 INTERNAL 1.7s; R0+.2.3r1 d2 DEAD FC 4.4s; R0+.3 d1 INTERNAL 0.9s; R0+.3.1 d2 INTERNAL 0.9s; R0+.3.1.1 d3 DEAD EmptyBox 0.1s; R0+.3.1.2 d3 DEAD EmptyBox 0.6s; R0+.3.1.3 d3 INTERNAL 1.2s; R0+.3.1.3r1 d3 DEAD EmptyBox 0.2s; R0+.3.1.4 d3 INTERNAL 1.4s; R0+.3.1.4.1 d4 DEAD CC 4.7s; R0+.3.1.4.2 d4 DEAD NOROOM 1.2s; R0+.3.1.4.3 d4 DEAD EmptyBox 0.7s; R0+.3.1.4.4 d4 DEAD CC 3.9s; R0+.3.2 d2 INTERNAL 1.1s; R0+.3.2.1 d3 INTERNAL 2.9s; R0+.3.2.1.p1 d4 INTERNAL 4.6s; R0+.3.2.1.p1.p1 d5 DEAD EmptyBox 1.1s; R0+.3.2.2 d3 INTERNAL 1.9s; R0+.3.2.2.p1 d4 DEAD NOROOM 3.0s; R0+.3.2.3 d3 DEAD EmptyBox 0.5s; R0+.3.2.4 d3 INTERNAL 2.9s; R0+.3.2.4r1 d3 DEAD CC 2.0s; R0+.3.2.5 d3 DEAD EmptyBox 0.3s; R0+.3.3 d2 INTERNAL 0.9s; R0+.3.3.1 d3 DEAD EmptyBox 0.7s; R0+.3.3.2 d3 DEAD EmptyBox 1.4s; R0+.3.3.3 d3 DEAD EmptyBox 0.1s; R0+.3.3.4 d3 DEAD EmptyBox 0.1s
+== k5_11_interior_Y0452: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 2743, 'misses': 1016, 'entries': 1016}; clip {'hits': 79050, 'misses': 1280387, 'entries': 80387}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 3759, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 74}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 2902, 'obs_misses': 933, 'build_hits': 0, 'build_misses': 5, 'bisect_hits': 0, 'bisect_misses': 4, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 905, 'build_entries': 5, 'bisect_entries': 4, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
