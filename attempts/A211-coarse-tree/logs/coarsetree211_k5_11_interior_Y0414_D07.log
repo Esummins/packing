@@ -189,3 +189,120 @@
    node R.3.2.2r1  d2 root<-None: DEAD by FC r1 (1.0 s, 1 rounds; t=231.7)
    node R.3.2.3    d2 TL(1,0)<-[13]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=232.0)
    node R.3.2.4    d2 TL(1,0)<-[14]: INTERNAL (1.2 s, 1 rounds; t=233.5)
+   node R.3.2.4r1  d2 root<-None: DEAD by COUNT r1 (1.2 s, 1 rounds; t=234.9)
+   node R.3.3      d1 BR(0,1)<-[23]: INTERNAL (0.9 s, 1 rounds; t=236.1)
+   node R.3.3.1    d2 TL(1,0)<-[8]: DEAD by COUNT r1 (1.9 s, 1 rounds; t=238.4)
+   node R.3.3.2    d2 TL(1,0)<-[9]: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=239.9)
+   node R.3.3.3    d2 TL(1,0)<-[14]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=240.2)
+   start R.3          => DEAD (22 nodes; t = 240 s of 1800.0)
+   => DEAD (zero_page) in 240.5 s: 6 start runs, 50 nodes, depth 4, 2 CC kills, 0 exact leaf cascades, 2 NS splits, 2 pocket splits, 2 role splits (0 empty-half kills), 3 inherited dead (3 up front + 0 in tree), 34 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 36 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2.p1.1 d4 DEAD INHERIT 0.0s; R.1.2.p1.2.1 d5 DEAD INHERIT 0.0s; R.1.2.p1.2.2 d0 INTERNAL 3.6s; R.1.2.p1.2.2.p1 d1 INTERNAL 7.4s; R.1.2.p1.2.2.p1.1 d2 INTERNAL 5.5s; R.1.2.p1.2.2.p1.1.1 d3 INTERNAL 6.7s; R.1.2.p1.2.2.p1.1.1.1 d4 DEAD EmptyBox 0.9s; R.1.2.p1.2.2.p1.1.1.2 d4 DEAD EmptyBox 0.2s; R.1.2.p1.2.2.p1.1.2 d3 DEAD FC 1.1s; R.1.2.p1.2.2.p1.2 d2 INTERNAL 4.6s; R.1.2.p1.2.2.p1.2.1 d3 DEAD EmptyBox 5.1s; R.1.2.p1.2.2.p1.2.2 d3 DEAD EmptyBox 2.5s; R.1.3 d0 DEAD S-CLIP 1.8s; R.1.4 d0 INTERNAL 1.7s; R.1.4.1 d1 DEAD EmptyBox 0.6s; R.1.4.2 d1 DEAD NOROOM-POCKET 3.9s; R.1.4.3 d1 DEAD NOROOM 2.5s; R.1.4.4 d1 INTERNAL 1.5s; R.1.4.4.p1 d2 DEAD EmptyBox 0.9s; R.1.4.4.p2 d2 DEAD EmptyBox 0.2s; R.1.5 d0 INTERNAL 2.9s; R.1.5r1 d0 DEAD NOROOM 4.1s; R.2 d0 INTERNAL 0.7s; R.2.1 d1 DEAD EmptyBox 0.1s; R.2.2 d1 DEAD FC 0.8s; R.2.3 d1 INTERNAL 1.2s; R.2.3.1 d2 DEAD EmptyBox 0.2s; R.2.3.2 d2 DEAD EmptyBox 0.1s; R.2.3.3 d2 DEAD EmptyBox 1.3s; R.2.3.4 d2 DEAD EmptyBox 0.2s; R.3 d0 INTERNAL 0.8s; R.3.1 d1 INTERNAL 1.8s; R.3.1.1 d2 DEAD EmptyBox 0.2s; R.3.1.2 d2 DEAD REACH 1.9s; R.3.1.3 d2 INTERNAL 1.1s; R.3.1.3.1 d3 DEAD CC 3.3s; R.3.1.3.2 d3 DEAD CC 2.1s; R.3.1.3.3 d3 DEAD EmptyBox 0.3s; R.3.1.3.4 d3 INTERNAL 1.4s; R.3.1.3.4r1 d3 DEAD EmptyBox 1.0s; R.3.2 d1 INTERNAL 1.7s; R.3.2.1 d2 INTERNAL 3.3s; R.3.2.1r1 d2 DEAD REACH 1.3s; R.3.2.2 d2 INTERNAL 2.3s; R.3.2.2r1 d2 DEAD FC 1.0s; R.3.2.3 d2 DEAD EmptyBox 0.1s; R.3.2.4 d2 INTERNAL 1.2s; R.3.2.4r1 d2 DEAD COUNT 1.2s; R.3.3 d1 INTERNAL 0.9s; R.3.3.1 d2 DEAD COUNT 1.9s; R.3.3.2 d2 DEAD EmptyBox 1.2s; R.3.3.3 d2 DEAD EmptyBox 0.1s
+   pad g1: cached ALIVE was WALL-limited (6 undecided) -- RESUMING with a FRESH wall of 1800 s (A211g)
+   stage 0 g1 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0414_D07_g1_s0.json)
+   INHERIT k5_11_interior_Y0414_D07 pad g1: 1 prior trees, 24 paths, 3 branches inherited DEAD (final, with their certificates), 6 start nodes (0 from the A203 root)
+== k5_11_interior_Y0414_D07 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0414_D07_g1_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 3 dead branches (final) + 6 start nodes ['R.1.2.p1.2.2', 'R.1.3', 'R.1.4', 'R.1.5', 'R.2', 'R.3']; H [2.008, 2.078, 1.48, 1.519, 68.875, 73.74]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1.1        BR(0,1)<-(18, 21)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json
+   INHERITED DEAD R.1.2.p1.1   TR(0,0)<-F3  [A211 tree: REACH] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json
+   INHERITED DEAD R.1.2.p1.2.1 BL(1,1)<-F2  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json
+   node R.1.2.p1.2.2 d0 root: INTERNAL (3.3 s, 1 rounds; t=3.4)
+   no-room (k=10, m=1): UNDECIDED in 20 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.1.2.p1.2.2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.2.p1.2.2.p1 d1 pocket<-[0]: INTERNAL (11.1 s, 1 rounds; t=35.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.2.p1.2.2.p1: split F2 at TL(1,0) (meeting fraction 0.24338; alive rows [14]; named ['F1', 'F2', 'F4', 'F5'])
+   node R.1.2.p1.2.2.p1.1 d2 TL(1,0)<-None: INTERNAL (7.0 s, 1 rounds; t=52.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.2.p1.2.2.p1.1: split F4 at TL(1,0) (meeting fraction 0.310173; alive rows [14]; named ['F1', 'F2', 'F4', 'F5'])
+   node R.1.2.p1.2.2.p1.1.1 d3 TL(1,0)<-None: INTERNAL (4.0 s, 1 rounds; t=62.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.2.p1.2.2.p1.1.1: split F5 at TL(1,0) (meeting fraction 0.004943; alive rows [14]; named ['F1', 'F2', 'F4', 'F5'])
+   node R.1.2.p1.2.2.p1.1.1.1 d4 TL(1,0)<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=63.8)
+   node R.1.2.p1.2.2.p1.1.1.2 d4 TL(1,0)<-None: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=64.1)
+   node R.1.2.p1.2.2.p1.1.2 d3 TL(1,0)<-None: DEAD by EmptyBox r1 (1.8 s, 1 rounds; t=66.1)
+   node R.1.2.p1.2.2.p1.2 d2 TL(1,0)<-None: INTERNAL (4.8 s, 1 rounds; t=71.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.2.p1.2.2.p1.2: split F4 at TL(1,0) (meeting fraction 0.310173; alive rows [14]; named ['F1', 'F4', 'F5'])
+   node R.1.2.p1.2.2.p1.2.1 d3 TL(1,0)<-None: INTERNAL (2.8 s, 1 rounds; t=77.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.2.p1.2.2.p1.2.1: split F5 at TL(1,0) (meeting fraction 0.363134; alive rows [14]; named ['F1', 'F4', 'F5'])
+   node R.1.2.p1.2.2.p1.2.1.1 d4 TL(1,0)<-None: DEAD by FC r1 (4.8 s, 1 rounds; t=85.5)
+   node R.1.2.p1.2.2.p1.2.1.2 d4 TL(1,0)<-None: DEAD by FC r1 (1.1 s, 1 rounds; t=86.9)
+   node R.1.2.p1.2.2.p1.2.2 d3 TL(1,0)<-None: INTERNAL (4.4 s, 1 rounds; t=91.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.1.2.p1.2.2.p1.2.2: bisect F3 on t at 53.1301 (extents (0.231882, 0.140727), tilt 90.0 deg, core non-empty, 31 piece(s); split 1 of 4)
+   node R.1.2.p1.2.2.p1.2.2.1 d4 F3<-['t<=53.1301']: DEAD by S-CLIP r1 (2.0 s, 1 rounds; t=93.8)
+   node R.1.2.p1.2.2.p1.2.2.2 d4 F3<-['t>=53.1301']: DEAD by S-CLIP r1 (1.0 s, 1 rounds; t=95.1)
+   start R.1.2.p1.2.2 => DEAD (14 nodes; t = 95 s of 1800.0)
+   start R.1.3: ancestor R.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json) refused (KeyError('node R.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.3: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.3: applied step 1/2 -- BL(1,1) <- [8]
+   start R.1.3: applied step 2/2 -- BR(0,1) <- [18, 23]
+   node R.1.3      d0 root: DEAD by FC r1 (2.0 s, 1 rounds; t=113.9)
+   start R.1.3        => DEAD (1 nodes; t = 114 s of 1800.0)
+   start R.1.4: ancestor R.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json) refused (KeyError('node R.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.4: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.4: applied step 1/2 -- BL(1,1) <- [8]
+   start R.1.4: applied step 2/2 -- BR(0,1) <- [21, 23]
+   node R.1.4      d0 root: INTERNAL (1.6 s, 1 rounds; t=131.6)
+   node R.1.4.1    d1 TL(1,0)<-[13]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=132.6)
+   node R.1.4.2    d1 TL(1,0)<-[14]: INTERNAL (2.1 s, 1 rounds; t=135.0)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 7 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.1.4.2    d1: DEAD by NOROOM-POCKET -- no-room at R.1.4.2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.1.4.3    d1 TL(1,0)<-[18]: INTERNAL (3.2 s, 1 rounds; t=145.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.1.4.3    d1: DEAD by NOROOM -- no-room at R.1.4.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4.4    d1 TL(1,0)<-[19]: INTERNAL (1.5 s, 1 rounds; t=149.4)
+   no-room (k=10, m=1): UNDECIDED in 12 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.1.4.4: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.4.4.p1 d2 pocket<-[0]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=163.3)
+   node R.1.4.4.p2 d2 pocket<-[1]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=163.8)
+   start R.1.4        => DEAD (7 nodes; t = 164 s of 1800.0)
+   start R.1.5: ancestor R.1 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json) refused (KeyError('node R.1 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.5: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.1.5: applied step 1/2 -- BL(1,1) <- [8]
+   start R.1.5: applied step 2/2 -- BR(0,1) <- [22, 23]
+   node R.1.5      d0 root: INTERNAL (1.8 s, 1 rounds; t=182.6)
+   node R.1.5r1    d0 root<-None: INTERNAL (4.2 s, 1 rounds; t=187.1)
+   no-room (k=10, m=1): UNDECIDED in 9 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.1.5: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.5.p1   d1 pocket<-[0]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=196.5)
+   start R.1.5        => DEAD (3 nodes; t = 197 s of 1800.0)
+   start R.2: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.2: applied step 1/1 -- BL(1,1) <- [13]
+   node R.2        d0 root: INTERNAL (0.7 s, 1 rounds; t=212.7)
+   node R.2.1      d1 TL(1,0)<-[8]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=213.1)
+   node R.2.2      d1 TL(1,0)<-[18]: DEAD by FC r1 (0.7 s, 1 rounds; t=214.1)
+   node R.2.3      d1 TL(1,0)<-[19]: INTERNAL (1.2 s, 1 rounds; t=215.6)
+   node R.2.3.1    d2 BR(0,1)<-[21, 23]: INTERNAL (2.8 s, 1 rounds; t=218.8)
+   no-room (k=10, m=1): DEAD by EmptyBox in 1 s (0 pockets; EmptyBox(F2): every pose is impossible -- the case is dead by the pair leaf)
+   node R.2.3.1    d2: DEAD by EmptyBox -- no-room at R.2.3.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F2): every pose is impossible -- the case is dead by the pair leaf
+   node R.2.3.2    d2 BR(0,1)<-[22, 23]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=220.3)
+   start R.2          => DEAD (6 nodes; t = 221 s of 1800.0)
+   start R.3: ancestor R (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0414_D07.json) refused (KeyError('node R carries no snapshot')) -- climbing to the next complete ancestor
+   start R.3: applied step 1/1 -- BL(1,1) <- [18]
+   node R.3        d0 root: INTERNAL (0.8 s, 1 rounds; t=236.6)
+   node R.3.1      d1 BR(0,1)<-[21]: INTERNAL (1.0 s, 1 rounds; t=237.9)
+   node R.3.1.1    d2 TR(0,0)<-[19]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=238.5)
+   node R.3.1.2    d2 TR(0,0)<-[23]: INTERNAL (2.1 s, 1 rounds; t=240.9)
+   node R.3.1.2r1  d2 root<-None: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=241.3)
+   node R.3.1.3    d2 TR(0,0)<-[24]: INTERNAL (1.3 s, 1 rounds; t=242.9)
+   node R.3.1.3.1  d3 TL(1,0)<-[8]: INTERNAL (3.5 s, 1 rounds; t=246.8)
+   node R.3.1.3.1  d3: DEAD by CC -- rule CC at R.3.1.3.1 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F3 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R.3.1.3.2  d3 TL(1,0)<-[9]: INTERNAL (2.5 s, 1 rounds; t=249.9)
+   node R.3.1.3.2  d3: DEAD by CC -- rule CC at R.3.1.3.2 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F3 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R.3.1.3.3  d3 TL(1,0)<-[13]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=250.9)
+   node R.3.1.3.4  d3 TL(1,0)<-[14]: INTERNAL (1.6 s, 1 rounds; t=252.8)
+   node R.3.1.3.4  d3: DEAD by CC -- rule CC at R.3.1.3.4 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F3 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior 
+   node R.3.2      d1 BR(0,1)<-[22]: INTERNAL (2.0 s, 1 rounds; t=255.6)
+   node R.3.2.1    d2 TL(1,0)<-[8]: INTERNAL (1.7 s, 1 rounds; t=257.7)
+   no-room (k=9, m=2): UNDECIDED in 20 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.2.1: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R.3.2.1.p1 d3 pocket<-[0]: INTERNAL (2.2 s, 1 rounds; t=280.6)
+   no-room (k=10, m=1): UNDECIDED in 20 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.2.1.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.2.1.p1.p1 d4 pocket<-[0]: INTERNAL (7.8 s, 1 rounds; t=309.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.3.2.1.p1.p1: split F4 at TR(0,0) (meeting fraction 0.083357; alive rows [23, 24]; named ['F1', 'F4', 'F5'])
+   node R.3.2.1.p1.p1.1 d5 TR(0,0)<-None: INTERNAL (5.0 s, 1 rounds; t=322.6)
