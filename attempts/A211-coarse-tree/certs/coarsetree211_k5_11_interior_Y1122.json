@@ -1,0 +1,2599 @@
+{
+ "nid": "k5_11_interior_Y1122",
+ "runs": {
+  "zero_page": {
+   "pad": "zero",
+   "mode": "page",
+   "source": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1122_zero_s0.json",
+   "verdict": "DEAD",
+   "leaf": "stage 0: FC at TR(0,0): at most 1 distinct non-pin meeter(s) (H provably misses; anonymous cap 1 by A1: 1 alive cell) [pad 0: s0-only, WINDOW-PENDING]",
+   "n_nodes": 0,
+   "seconds": 18.2,
+   "window_pending": true,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)",
+   "stage0_kill": true,
+   "nodes": []
+  },
+  "g1_page": {
+   "pad": "g1",
+   "mode": "page",
+   "source": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1122_g1_s0.json",
+   "lam": 1.004000117048806,
+   "start": {
+    "source": "A209 csp209 (A203's Stage0 + CSP on the record)",
+    "file": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1122_g1_s0.json",
+    "verdict": "ALIVE",
+    "H_box": [
+     2.340343,
+     2.357813,
+     2.628592,
+     2.637327,
+     51.688779,
+     53.130108
+    ],
+    "forced_H": [
+     "TL(1,0)",
+     "TR(0,0)"
+    ],
+    "role_slots": {},
+    "units": {
+     "nx": 8,
+     "ny": 8,
+     "nb": 8,
+     "alive": [
+      [
+       7,
+       7,
+       7
+      ]
+     ]
+    },
+    "n_units": 1,
+    "n_units_alive": 1
+   },
+   "verdict": "DEAD",
+   "nodes": [
+    {
+     "label": "R0+",
+     "depth": 0,
+     "slot": null,
+     "kind": null,
+     "rows": null,
+     "named": null,
+     "excluded": null,
+     "verdict": "DEAD",
+     "clip": "FC",
+     "killed_round": 1,
+     "leaf": "FC at TL(1,0): at most 1 distinct non-pin meeter(s) (H reaches; roles []; anonymous cap 0 by A1: 0 alive cell(s))",
+     "reason": null,
+     "seconds": 0.6,
+     "t": 0.7,
+     "n_rounds": 1,
+     "round_times": [
+      {
+       "round": 1,
+       "seconds": 0.6,
+       "fix": 0.2,
+       "passes": 1,
+       "changed": null,
+       "dead": "FC",
+       "kept": {
+        "P0": 0.249999,
+        "P1": 0.250025,
+        "P2": 0.249999,
+        "P3": 0.250025,
+        "P4": 0.249999,
+        "H": 2e-06
+       }
+      }
+     ],
+     "roles": {
+      "H": [
+       2.355629,
+       2.357813,
+       2.636235,
+       2.637327,
+       52.950917,
+       53.130108
+      ]
+     },
+     "role_slots": {},
+     "role_cell": {},
+     "forced_H": [
+      "TL(1,0)",
+      "TR(0,0)"
+     ],
+     "kept": {
+      "P0": 0.249999,
+      "P1": 0.250025,
+      "P2": 0.249999,
+      "P3": 0.250025,
+      "P4": 0.249999,
+      "H": 2e-06
+     },
+     "sclip": [],
+     "hc_dead": [],
+     "alive_cells": {
+      "BL(1,1)": [
+       6,
+       7,
+       11,
+       12,
+       16
+      ],
+      "BR(0,1)": [
+       11,
+       16,
+       21,
+       22
+      ],
+      "TR(0,0)": [
+       24
+      ],
+      "TL(1,0)": []
+     },
+     "snapshot": {
+      "pad": "g1",
+      "round": 1,
+      "label": "round1",
+      "roles": {
+       "P0": {
+        "box": [
+         0.5,
+         0.51,
+         0.5,
+         0.51,
+         0.0,
+         7e-06
+        ],
+        "n_pieces": 4,
+        "pieces": [
+         [
+          0.5,
+          0.505,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          0.505,
+          0.51,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          0.5,
+          0.505,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          0.505,
+          0.51,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ]
+        ],
+        "kprime": [
+         [
+          0.010001033,
+          0.99999897
+         ],
+         [
+          0.010001048,
+          0.513389792
+         ],
+         [
+          0.010001093,
+          0.010001033
+         ],
+         [
+          0.502500101,
+          0.010001048
+         ],
+         [
+          0.999999,
+          0.010001093
+         ],
+         [
+          0.99999897,
+          0.999999
+         ]
+        ],
+        "kept": 0.249999,
+        "corner": null
+       },
+       "P1": {
+        "box": [
+         0.5,
+         0.51,
+         1.499999,
+         1.51,
+         0.0,
+         7e-06
+        ],
+        "n_pieces": 4,
+        "pieces": [
+         [
+          0.5,
+          0.51,
+          1.499999,
+          1.5,
+          0.0,
+          0.0
+         ],
+         [
+          0.5,
+          0.51,
+          1.5,
+          1.51,
+          0.0,
+          0.0
+         ],
+         [
+          0.5,
+          0.51,
+          1.499999,
+          1.5,
+          0.0,
+          0.0
+         ],
+         [
+          0.5,
+          0.51,
+          1.5,
+          1.51,
+          0.0,
+          0.0
+         ]
+        ],
+        "kprime": [
+         [
+          0.010001033,
+          1.99999794
+         ],
+         [
+          0.010001048,
+          1.51338977
+         ],
+         [
+          0.010001093,
+          1.010001033
+         ],
+         [
+          0.496610285,
+          1.010001048
+         ],
+         [
+          0.999999,
+          1.010001093
+         ],
+         [
+          0.99999897,
+          1.99999797
+         ]
+        ],
+        "kept": 0.250025,
+        "corner": null
+       },
+       "P2": {
+        "box": [
+         0.5,
+         0.51,
+         3.367084,
+         3.377084,
+         0.0,
+         7e-06
+        ],
+        "n_pieces": 4,
+        "pieces": [
+         [
+          0.5,
+          0.505,
+          3.367084,
+          3.377084,
+          0.0,
+          0.0
+         ],
+         [
+          0.505,
+          0.51,
+          3.367084,
+          3.377084,
+          0.0,
+          0.0
+         ],
+         [
+          0.5,
+          0.505,
+          3.367084,
+          3.377084,
+          0.0,
+          0.0
+         ],
+         [
+          0.505,
+          0.51,
+          3.367084,
+          3.377084,
+          0.0,
+          0.0
+         ]
+        ],
+        "kprime": [
+         [
+          0.010001032,
+          3.867082908
+         ],
+         [
+          0.010001047,
+          3.380473715
+         ],
+         [
+          0.010001092,
+          2.877085
+         ],
+         [
+          0.999999,
+          2.87708503
+         ],
+         [
+          0.99999897,
+          3.867082968
+         ],
+         [
+          0.507499976,
+          3.867082953
+         ]
+        ],
+        "kept": 0.249999,
+        "corner": null
+       },
+       "P3": {
+        "box": [
+         1.499999,
+         1.51,
+         0.5,
+         0.51,
+         0.0,
+         7e-06
+        ],
+        "n_pieces": 4,
+        "pieces": [
+         [
+          1.499999,
+          1.5,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          1.5,
+          1.51,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          1.499999,
+          1.5,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          1.5,
+          1.51,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ]
+        ],
+        "kprime": [
+         [
+          1.010001033,
+          0.99999897
+         ],
+         [
+          1.010001048,
+          0.513389793
+         ],
+         [
+          1.010001093,
+          0.010001033
+         ],
+         [
+          1.499157189,
+          0.010001048
+         ],
+         [
+          1.99999797,
+          0.010001093
+         ],
+         [
+          1.99999794,
+          0.999999
+         ]
+        ],
+        "kept": 0.250025,
+        "corner": null
+       },
+       "P4": {
+        "box": [
+         3.367084,
+         3.377084,
+         0.5,
+         0.51,
+         0.0,
+         7e-06
+        ],
+        "n_pieces": 4,
+        "pieces": [
+         [
+          3.367084,
+          3.372084,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          3.372084,
+          3.377084,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          3.367084,
+          3.372084,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ],
+         [
+          3.372084,
+          3.377084,
+          0.5,
+          0.51,
+          0.0,
+          0.0
+         ]
+        ],
+        "kprime": [
+         [
+          2.877085,
+          0.99999897
+         ],
+         [
+          2.87708503,
+          0.010001032
+         ],
+         [
+          3.369584024,
+          0.010001047
+         ],
+         [
+          3.867082968,
+          0.010001092
+         ],
+         [
+          3.867082953,
+          0.496610285
+         ],
+         [
+          3.867082908,
+          0.999999
+         ]
+        ],
+        "kept": 0.249999,
+        "corner": null
+       },
+       "H": {
+        "box": [
+         2.355629,
+         2.357813,
+         2.636235,
+         2.637327,
+         52.950917,
+         53.130108
+        ],
+        "n_pieces": 2,
+        "pieces": [
+         [
+          2.3556292,
+          2.357813,
+          2.6362351,
+          2.637327,
+          52.9509,
+          53.0405
+         ],
+         [
+          2.3556292,
+          2.357813,
+          2.6362351,
+          2.637327,
+          53.0405,
+          53.1301
+         ]
+        ],
+        "kprime": [
+         [
+          1.659274056,
+          2.538181451
+         ],
+         [
+          2.056567376,
+          2.23826551
+         ],
+         [
+          2.057185503,
+          2.237799646
+         ],
+         [
+          2.057810383,
+          2.237330215
+         ],
+         [
+          2.455169513,
+          1.939310926
+         ],
+         [
+          2.75469074,
+          2.336081376
+         ],
+         [
+          2.755156604,
+          2.336699503
+         ],
+         [
+          2.755626035,
+          2.337324383
+         ],
+         [
+          3.054168194,
+          2.735380674
+         ],
+         [
+          2.656874874,
+          3.035296615
+         ],
+         [
+          2.656256747,
+          3.035762479
+         ],
+         [
+          2.655631867,
+          3.03623191
+         ],
+         [
+          2.258272737,
+          3.334251199
+         ],
+         [
+          1.95875151,
+          2.937480749
+         ],
+         [
+          1.958285646,
+          2.936862622
+         ],
+         [
+          1.957816215,
+          2.936237742
+         ]
+        ],
+        "kept": 2e-06,
+        "corner": "TR"
+       }
+      },
+      "forced_H": [
+       "TL(1,0)",
+       "TR(0,0)"
+      ],
+      "role_slots": {},
+      "t": 0.2,
+      "fix": {
+       "lonely": [],
+       "passes": 1,
+       "refine": 1,
+       "coarse": true,
+       "kmode": "pieces",
+       "n_grid": 97,
+       "coarse_core": false,
+       "stopped": "fixed",
+       "seconds": 0.2,
+       "kept": {
+        "P0": 0.249999,
+        "P1": 0.250025,
+        "P2": 0.249999,
+        "P3": 0.250025,
+        "P4": 0.249999,
+        "H": 2e-06
+       },
+       "n_pieces": {
+        "P0": 4,
+        "P1": 4,
+        "P2": 4,
+        "P3": 4,
+        "P4": 4,
+        "H": 2
+       },
+       "k_area": {
+        "P0": 0.9800959000875967,
+        "P1": 0.98009488021302,
+        "P2": 0.9800959020675926,
+        "P3": 0.9800948802894576,
+        "P4": 0.980095902067593,
+        "H": 0.9938626576308991
+       },
+       "corners": {
+        "H": "TR"
+       }
+      },
+      "dead": "FC at TL(1,0): at most 1 distinct non-pin meeter(s) (H reaches; roles []; anonymous cap 0 by A1: 0 alive cell(s))",
+      "forcing": {
+       "forced_H": null,
+       "forced_role": null,
+       "instantiated": null,
+       "clips": null,
+       "caps": {
+        "BL(1,1)": null,
+        "BR(0,1)": null,
+        "TR(0,0)": 1,
+        "TL(1,0)": 0
+       },
+       "witness": null,
+       "dead": "FC at TL(1,0): at most 1 distinct non-pin meeter(s) (H reaches; roles []; anonymous cap 0 by A1: 0 alive cell(s))",
+       "single": {
+        "BL(1,1)": [
+         6,
+         7,
+         11,
+         12,
+         16
+        ],
+        "BR(0,1)": [
+         11,
+         16,
+         21,
+         22
+        ],
+        "TR(0,0)": [
+         24
+        ],
+        "TL(1,0)": []
+       },
+       "changed": null,
+       "union": {
+        "BL(1,1)": {
+         "bbox": [
+          1.499999,
+          2.717936,
+          1.177321,
+          1.904284
+         ],
+         "diam": 1.30929,
+         "cap": 99,
+         "why": "no union exclusion fires"
+        },
+        "BR(0,1)": {
+         "bbox": [
+          2.163149,
+          3.377084,
+          1.204656,
+          2.107883
+         ],
+         "diam": 1.39713,
+         "cap": 99,
+         "why": "no union exclusion fires"
+        },
+        "TR(0,0)": {
+         "bbox": [
+          3.353577,
+          3.377084,
+          3.359339,
+          3.377084
+         ],
+         "diam": 0.02945,
+         "cap": 1,
+         "why": "A1: 1 alive cell(s)"
+        },
+        "TL(1,0)": {
+         "bbox": null,
+         "diam": null,
+         "cap": 0,
+         "why": "A1: 0 alive cell(s)"
+        }
+       }
+      }
+     },
+     "verifier": "[C: library clip trace]",
+     "step_seconds": {
+      "rebin": 0.0,
+      "normalise": 0.2,
+      "sclip": 0.0,
+      "options": 0.4,
+      "hc-rows": 0.0,
+      "union": 0.0
+     },
+     "test_seconds": {
+      "COARSE-CORE": [
+       1,
+       0.0
+      ],
+      "REACH": [
+       51,
+       0.2
+      ],
+      "ROLE-REACH": [
+       6,
+       0.0
+      ],
+      "UNION": [
+       4,
+       0.0
+      ],
+      "FC-AVAIL": [
+       2,
+       0.0
+      ]
+     },
+     "miss": {},
+     "miss_rep": [],
+     "coarse": true,
+     "n_pieces": {
+      "H": 2
+     },
+     "rebin": [],
+     "start_node": "R0+",
+     "start_cert": null,
+     "start_camp": "A203",
+     "start_path": [],
+     "start_anc": null,
+     "start_meta": {
+      "cert": null,
+      "run": null,
+      "camp": "A203",
+      "anc_label": null,
+      "anc_steps": 0,
+      "label": "R0+",
+      "path": [],
+      "n_steps": 0,
+      "loaded": {},
+      "applied": [],
+      "padding": {
+       "rect": 1e-06,
+       "tilt_deg": 0.001
+      },
+      "snapshot_round": null,
+      "recorded": {
+       "verdict": null,
+       "depth": null,
+       "seconds": null,
+       "t": null
+      },
+      "clock": {
+       "wall": 1800.0,
+       "spent_at_load": 0.03
+      },
+      "loaded_from": {
+       "mode": "a203_root",
+       "cert": null,
+       "run": null,
+       "camp": "A203",
+       "anc_label": null,
+       "anc_steps": 0,
+       "snapshot_round": null,
+       "n_replayed": 0,
+       "n_steps": 0,
+       "climbed": 0,
+       "refused": [],
+       "n_cands": 1,
+       "rule": "Lemma INHERIT (notes/coarse_tree.md s.4): a prefix of the path key, loaded with the pieces padded outward, then the remaining certified branch steps replayed -- a superset of the start node"
+      },
+      "dead_on_replay": null
+     },
+     "path_key": []
+    }
+   ],
+   "basins": [
+    {
+     "cell": "BL(1,1)",
+     "ext": "k6_18",
+     "idx": 4,
+     "r_c": 0.06,
+     "t_r": "13093/500000",
+     "r_t_deg": 3.0,
+     "box": [
+      1.4457601685502806,
+      1.56,
+      1.4457601685502806,
+      1.56
+     ],
+     "cert": "attempts/A207-basin-clip/certs/basin207_k6_18_c4_rc3d50_t13093d500000.param.json",
+     "window": [
+      "191/50",
+      "969271/250000"
+     ],
+     "tag": "basin207_k6_18_c4_rc3d50_t13093d500000",
+     "lam": 1.004000117048806
+    }
+   ],
+   "verifier": "[C: closed-form / library clip trace + the leaf lemma (Lemma CORNER-COVER / A189 Lemma 1 / Lemma CN / Lemma BASIN) + Lemma INHERIT] A211 coarse tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces, refine 1, no lonely clip, shallow reach: supersets); at every fully named leaf rule CC (A210), A208 no-room + pocket CN bound (pockets branched at k = 9), A207 basin clip, A206 Rule NS (MAX_FRAC 0.5), then the exact A204/A205 cascade (nsub 4 / refine 2, lonely clip, sharp round); started from the MERGED state of every prior certificate (Lemma INHERIT: branches closed by A205 / A206 / A209 / A210 / A208 / A207 are FINAL and cited; the tree runs only the remaining start nodes, loaded from the recorded snapshot with the pieces padded outward); DEAD iff every branch DEAD (Lemma CT); no verifier clause  [A224 Rule SNAP is ON as leaf rule (0) and after the coarse round at internal nodes: a node killed by SNAP / SNAP-DIAG carries its OWN verifier clause (exact separating-axis miss certificates + Lemma SWAP / teleport + Theorem FC Step 2 + the target stratum's FULL scoreboard row); docs/proofs/snap_rule.md]",
+   "inherit": {
+    "nid": "k5_11_interior_Y1122",
+    "pad": "g1",
+    "start_file": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1122_g1_s0.json",
+    "n_trees": 0,
+    "n_paths": 0,
+    "trees": [],
+    "inherited_dead": [],
+    "n_inherited_dead": 0,
+    "n_start_nodes": 1,
+    "n_start_from_root": 1,
+    "start_nodes": [
+     {
+      "label": "R0+",
+      "path": [],
+      "key": [],
+      "n_steps": 0,
+      "cert": null,
+      "run": null,
+      "camp": "A203",
+      "anc_label": null,
+      "anc_steps": 0,
+      "snapshot_round": null,
+      "steps": [],
+      "cands": [
+       {
+        "cert": null,
+        "run": null,
+        "camp": "A203",
+        "anc_label": null,
+        "anc_steps": 0,
+        "snapshot_round": null,
+        "steps": 0
+       }
+      ],
+      "n_cands": 1,
+      "pad": "g1",
+      "nid": "k5_11_interior_Y1122",
+      "recorded": {
+       "verdict": null,
+       "depth": 0
+      }
+     }
+    ]
+   },
+   "inherited_dead": 0,
+   "inherited_alive": 1,
+   "start_nodes": [
+    {
+     "label": "R0+",
+     "path": [],
+     "key": [],
+     "n_steps": 0,
+     "cert": null,
+     "run": null,
+     "camp": "A203",
+     "anc_label": null,
+     "anc_steps": 0,
+     "snapshot_round": null,
+     "steps": 0,
+     "cands": [
+      {
+       "cert": null,
+       "run": null,
+       "camp": "A203",
+       "anc_label": null,
+       "anc_steps": 0,
+       "snapshot_round": null,
+       "steps": 0
+      }
+     ],
+     "n_cands": 1,
+     "pad": "g1",
+     "nid": "k5_11_interior_Y1122",
+     "recorded": {
+      "verdict": null,
+      "depth": 0
+     }
+    }
+   ],
+   "cfg": {
+    "rounds": 1,
+    "depth_cap": 6,
+    "node_cap": 600,
+    "wall": 1800.0,
+    "inherit": true,
+    "coarse": {
+     "grid": [
+      4,
+      4,
+      6
+     ],
+     "cap": 96,
+     "refine": 1,
+     "max_iter": 2,
+     "nsub": 2,
+     "depth": 2,
+     "jdepth": 1,
+     "kmode": "union",
+     "n_grid": 33,
+     "conditional": {
+      "parent_seconds": 20.0,
+      "roles": 99,
+      "fallback": {
+       "kmode": "pieces",
+       "n_grid": 97
+      }
+     }
+    },
+    "exact": {
+     "depth": 5,
+     "joint_depth": 2,
+     "refine_mb": 2,
+     "nsub_mb": 4
+    },
+    "exact_rounds": 3,
+    "noroom_cap": 120.0,
+    "soft_all": false,
+    "max_frac": 0.5,
+    "a220": {
+     "exact_first": "",
+     "budget": 45.0,
+     "rounds": 1,
+     "small_ext": 0.25,
+     "noroom_inherit": true,
+     "child_cap": 25.0,
+     "shrink": 0.5
+    },
+    "a224": {
+     "snap": true,
+     "eps": 0.06,
+     "deg": 3.0
+    }
+   },
+   "n_nodes": 1,
+   "seconds": 0.7,
+   "n_records": 1,
+   "max_depth": 0,
+   "alive_leaves": 0,
+   "dead_leaves": 1,
+   "ns_splits": 0,
+   "pocket_splits": 0,
+   "cc_kills": 0,
+   "exact_rounds": 0,
+   "basin_kills": 0,
+   "rsplits": 0,
+   "rsplit_kills": 0,
+   "n_inherited": 0,
+   "ef_runs": 0,
+   "ef_kills": 0,
+   "ef_timeouts": 0,
+   "ef_seconds": 0.0,
+   "nr_short": 0,
+   "snap_runs": 0,
+   "snap_kills": 0,
+   "snap_handoffs": 0,
+   "snap_partial": 0,
+   "snap_cands": 0,
+   "snap_seconds": 0.0,
+   "snap_first": null,
+   "snap_rows": [],
+   "killing": [
+    {
+     "label": "R0+",
+     "slot": null,
+     "rows": null,
+     "clip": "FC",
+     "round": 1,
+     "seconds": 0.6,
+     "kind": null,
+     "role": null
+    }
+   ],
+   "undecided": [],
+   "noroom_runs": [],
+   "inherited": {},
+   "runs": [
+    {
+     "label": "R0+",
+     "verdict": "DEAD",
+     "n_nodes": 1,
+     "seconds": 0.7,
+     "cert": null,
+     "anc": null,
+     "applied": [],
+     "loaded_from": {
+      "mode": "a203_root",
+      "cert": null,
+      "run": null,
+      "camp": "A203",
+      "anc_label": null,
+      "anc_steps": 0,
+      "snapshot_round": null,
+      "n_replayed": 0,
+      "n_steps": 0,
+      "climbed": 0,
+      "refused": [],
+      "n_cands": 1,
+      "rule": "Lemma INHERIT (notes/coarse_tree.md s.4): a prefix of the path key, loaded with the pieces padded outward, then the remaining certified branch steps replayed -- a superset of the start node"
+     },
+     "leaf": null,
+     "wall": false
+    }
+   ],
+   "root": {
+    "verdict": "DEAD",
+    "clip": "FC",
+    "seconds": 0.6,
+    "n_rounds": 1,
+    "kept": {
+     "P0": 0.249999,
+     "P1": 0.250025,
+     "P2": 0.249999,
+     "P3": 0.250025,
+     "P4": 0.249999,
+     "H": 2e-06
+    },
+    "forced_H": [
+     "TL(1,0)",
+     "TR(0,0)"
+    ],
+    "role_slots": {},
+    "alive_cells": {
+     "BL(1,1)": [
+      6,
+      7,
+      11,
+      12,
+      16
+     ],
+     "BR(0,1)": [
+      11,
+      16,
+      21,
+      22
+     ],
+     "TR(0,0)": [
+      24
+     ],
+     "TL(1,0)": []
+    }
+   },
+   "basin_clips": [],
+   "wall": false,
+   "window_pending": false,
+   "leaf": "every branch DEAD (0 inherited from prior certificates + 1 proved here): R0+ root<-None by FC",
+   "tests": [
+    {
+     "test": "COARSE-CORE",
+     "label": "round1",
+     "coarse_core": false,
+     "parent_seconds": 0.0,
+     "n_roles": 6,
+     "kmode": "pieces",
+     "n_grid": 97,
+     "rule": "parent cascade > 20 s or >= 99 roles"
+    },
+    {
+     "test": "REACH",
+     "cell": 0,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 1,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 2,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 2,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 3,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 3,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 4,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 5,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 6,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.016244,
+     "n_pieces": 10,
+     "n_exact": 94,
+     "lonely": null,
+     "seconds": 0.03
+    },
+    {
+     "test": "REACH",
+     "cell": 7,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.019534,
+     "n_pieces": 10,
+     "n_exact": 131,
+     "lonely": null,
+     "seconds": 0.026
+    },
+    {
+     "test": "REACH",
+     "cell": 7,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 8,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 32,
+     "lonely": null,
+     "seconds": 0.012
+    },
+    {
+     "test": "REACH",
+     "cell": 8,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 33,
+     "lonely": null,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 9,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 11,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 10,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 10,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.126406,
+     "n_pieces": 14,
+     "n_exact": 155,
+     "lonely": null,
+     "seconds": 0.026
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.043037,
+     "n_pieces": 6,
+     "n_exact": 54,
+     "lonely": null,
+     "seconds": 0.017
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BL(1,1)",
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      1.075417,
+      1.650834
+     ],
+     "depth": 3,
+     "frac": 0.845658,
+     "n_pieces": 9,
+     "n_exact": 61,
+     "lonely": null,
+     "seconds": 0.024
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.059288,
+     "n_pieces": 16,
+     "n_exact": 112,
+     "lonely": null,
+     "seconds": 0.023
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": "TR",
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 13,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 13,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 13,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": "TR",
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 13,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 14,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": "TR",
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 14,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 15,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 15,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 16,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.190907,
+     "n_pieces": 15,
+     "n_exact": 110,
+     "lonely": null,
+     "seconds": 0.031
+    },
+    {
+     "test": "REACH",
+     "cell": 16,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.2052,
+     "n_pieces": 13,
+     "n_exact": 99,
+     "lonely": null,
+     "seconds": 0.025
+    },
+    {
+     "test": "REACH",
+     "cell": 16,
+     "slots": [
+      "BL(1,1)",
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      1.075417,
+      1.650834
+     ],
+     "depth": 3,
+     "frac": 0.543837,
+     "n_pieces": 26,
+     "n_exact": 211,
+     "lonely": null,
+     "seconds": 0.058
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": "TR",
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BL(1,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": "TR",
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 19,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": "TR",
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 19,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 20,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.097982,
+     "n_pieces": 13,
+     "n_exact": 78,
+     "lonely": null,
+     "seconds": 0.018
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.275254,
+     "n_pieces": 16,
+     "n_exact": 84,
+     "lonely": null,
+     "seconds": 0.025
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": "TR",
+     "seconds": 0.009
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": "TR",
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 24,
+     "slots": [
+      "TR(0,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 9.5e-05,
+     "n_pieces": 2,
+     "n_exact": 28,
+     "lonely": "TR",
+     "seconds": 0.055
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "BL(1,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 2,
+     "seconds": 0.0
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 2,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TR(0,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 2,
+     "n_exact": 2,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 2,
+     "n_exact": 2,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 2,
+     "n_exact": 4,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 2,
+     "n_exact": 0,
+     "seconds": 0.0
+    },
+    {
+     "test": "UNION",
+     "slot": "BL(1,1)",
+     "n_pieces": 65,
+     "bbox": [
+      1.499999,
+      2.717936,
+      1.177321,
+      1.904284
+     ],
+     "diam": 1.30929,
+     "linf": 1.21794,
+     "chord_line": "h=0.5000",
+     "chord_fixed": 3.0,
+     "chord_min": 0.0,
+     "chord_row": 3.0,
+     "refined": 0,
+     "cap": 99,
+     "why": "no union exclusion fires",
+     "seconds": 0.012
+    },
+    {
+     "test": "UNION",
+     "slot": "BR(0,1)",
+     "n_pieces": 48,
+     "bbox": [
+      2.163149,
+      3.377084,
+      1.204656,
+      2.107883
+     ],
+     "diam": 1.39713,
+     "linf": 1.21394,
+     "chord_line": "h=0.5000",
+     "chord_fixed": 3.0,
+     "chord_min": 0.0,
+     "chord_row": 3.0,
+     "refined": 0,
+     "cap": 99,
+     "why": "no union exclusion fires",
+     "seconds": 0.008
+    },
+    {
+     "test": "UNION",
+     "slot": "TR(0,0)",
+     "cap": 1,
+     "why": "A1: 1 alive cell(s)",
+     "n_pieces": 2,
+     "bbox": [
+      3.353577,
+      3.377084,
+      3.359339,
+      3.377084
+     ],
+     "diam": 0.02945,
+     "linf": 0.02351
+    },
+    {
+     "test": "UNION",
+     "slot": "TL(1,0)",
+     "cap": 0,
+     "why": "A1: 0 alive cell(s)",
+     "n_pieces": 0
+    },
+    {
+     "test": "FC-AVAIL",
+     "verdict": "all forced",
+     "avail": 2,
+     "slot": "TR(0,0)",
+     "H": true,
+     "roles": [],
+     "cap": 1
+    },
+    {
+     "test": "FC-AVAIL",
+     "verdict": "DEAD",
+     "avail": 1,
+     "slot": "TL(1,0)",
+     "H": true,
+     "roles": [],
+     "cap": 0
+    }
+   ],
+   "steps": [
+    {
+     "step": "rebin",
+     "t": 0.03,
+     "seconds": 0.0,
+     "label": "round1"
+    },
+    {
+     "step": "normalise",
+     "t": 0.21,
+     "seconds": 0.176,
+     "label": "round1",
+     "kept": {
+      "P0": 0.249999,
+      "P1": 0.250025,
+      "P2": 0.249999,
+      "P3": 0.250025,
+      "P4": 0.249999,
+      "H": 2e-06
+     },
+     "passes": 1,
+     "n_pieces": {
+      "P0": 4,
+      "P1": 4,
+      "P2": 4,
+      "P3": 4,
+      "P4": 4,
+      "H": 2
+     },
+     "corners": {
+      "H": "TR"
+     }
+    },
+    {
+     "step": "sclip",
+     "t": 0.21,
+     "seconds": 0.0,
+     "label": "round1",
+     "dropped": {}
+    },
+    {
+     "step": "options",
+     "t": 0.65,
+     "seconds": 0.441,
+     "n_free_opts": 12,
+     "n_fixed": {
+      "H": 4
+     },
+     "alive_cells": {
+      "BL(1,1)": 5,
+      "BR(0,1)": 4,
+      "TR(0,0)": 1,
+      "TL(1,0)": 0
+     }
+    },
+    {
+     "step": "hc-rows",
+     "t": 0.65,
+     "seconds": 0.003,
+     "n_dead": 0,
+     "n_free_opts": 12,
+     "alive_cells": {
+      "BL(1,1)": 5,
+      "BR(0,1)": 4,
+      "TR(0,0)": 1,
+      "TL(1,0)": 0
+     }
+    },
+    {
+     "step": "union",
+     "t": 0.68,
+     "seconds": 0.021,
+     "caps": {
+      "BL(1,1)": null,
+      "BR(0,1)": null,
+      "TR(0,0)": 1,
+      "TL(1,0)": 0
+     }
+    }
+   ]
+  }
+ },
+ "cls": "k5_11",
+ "record": "attempts/A57-shadow-trees/results/tree/k5_11_interior_G1/k5_11_interior_Y1122.json",
+ "tree": "k5_11_interior_G1",
+ "level": "1",
+ "stage0": {
+  "zero": {
+   "verdict": "DEAD",
+   "leaf": "FC at TR(0,0): at most 1 distinct non-pin meeter(s) (H provably misses; anonymous cap 1 by A1: 1 alive cell) [pad 0: s0-only, WINDOW-PENDING]",
+   "seconds": 18.2,
+   "source": "A209 csp209 (A203's Stage0 + CSP on the record)",
+   "file": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1122_zero_s0.json",
+   "cached": false,
+   "kills": {
+    "H-clip": 37,
+    "P": 5578,
+    "W": 2787,
+    "C": 1258,
+    "M": 6103,
+    "L": 14,
+    "R": 1496,
+    "X": 0
+   },
+   "caps": {
+    "BL(1,1)": null,
+    "BR(0,1)": null,
+    "TR(0,0)": 1,
+    "TL(1,0)": null
+   },
+   "forced_H": [
+    "TL(1,0)"
+   ],
+   "n_units_alive": 331,
+   "n_units": 331,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)"
+  },
+  "g1": {
+   "verdict": "ALIVE",
+   "leaf": null,
+   "seconds": 20.0,
+   "source": "A209 csp209 (A203's Stage0 + CSP on the record)",
+   "file": "attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1122_g1_s0.json",
+   "cached": false,
+   "kills": {
+    "H-clip": 2645,
+    "P": 5592,
+    "W": 2801,
+    "C": 3645,
+    "M": 11657,
+    "L": 14,
+    "R": 1487,
+    "X": 4
+   },
+   "caps": {
+    "BL(1,1)": null,
+    "BR(0,1)": null,
+    "TR(0,0)": 1,
+    "TL(1,0)": 1
+   },
+   "forced_H": [
+    "TL(1,0)",
+    "TR(0,0)"
+   ],
+   "n_units_alive": 1,
+   "n_units": 1,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)"
+  }
+ },
+ "verdicts": {
+  "zero": "DEAD (stage 0)",
+  "g1": "DEAD"
+ },
+ "stage_reached": "2 (tree)",
+ "cells": [
+  [
+   0.5,
+   1.075417,
+   0.5,
+   1.075417
+  ],
+  [
+   0.5,
+   1.075417,
+   1.075417,
+   1.650834
+  ],
+  [
+   0.5,
+   1.075417,
+   1.650834,
+   2.22625
+  ],
+  [
+   0.5,
+   1.075417,
+   2.22625,
+   2.801667
+  ],
+  [
+   0.5,
+   1.075417,
+   2.801667,
+   3.377084
+  ],
+  [
+   1.075417,
+   1.650834,
+   0.5,
+   1.075417
+  ],
+  [
+   1.075417,
+   1.650834,
+   1.075417,
+   1.650834
+  ],
+  [
+   1.075417,
+   1.650834,
+   1.650834,
+   2.22625
+  ],
+  [
+   1.075417,
+   1.650834,
+   2.22625,
+   2.801667
+  ],
+  [
+   1.075417,
+   1.650834,
+   2.801667,
+   3.377084
+  ],
+  [
+   1.650834,
+   2.22625,
+   0.5,
+   1.075417
+  ],
+  [
+   1.650834,
+   2.22625,
+   1.075417,
+   1.650834
+  ],
+  [
+   1.650834,
+   2.22625,
+   1.650834,
+   2.22625
+  ],
+  [
+   1.650834,
+   2.22625,
+   2.22625,
+   2.801667
+  ],
+  [
+   1.650834,
+   2.22625,
+   2.801667,
+   3.377084
+  ],
+  [
+   2.22625,
+   2.801667,
+   0.5,
+   1.075417
+  ],
+  [
+   2.22625,
+   2.801667,
+   1.075417,
+   1.650834
+  ],
+  [
+   2.22625,
+   2.801667,
+   1.650834,
+   2.22625
+  ],
+  [
+   2.22625,
+   2.801667,
+   2.22625,
+   2.801667
+  ],
+  [
+   2.22625,
+   2.801667,
+   2.801667,
+   3.377084
+  ],
+  [
+   2.801667,
+   3.377084,
+   0.5,
+   1.075417
+  ],
+  [
+   2.801667,
+   3.377084,
+   1.075417,
+   1.650834
+  ],
+  [
+   2.801667,
+   3.377084,
+   1.650834,
+   2.22625
+  ],
+  [
+   2.801667,
+   3.377084,
+   2.22625,
+   2.801667
+  ],
+  [
+   2.801667,
+   3.377084,
+   2.801667,
+   3.377084
+  ]
+ ],
+ "slots": [
+  "BL(1,1)",
+  "BR(0,1)",
+  "TR(0,0)",
+  "TL(1,0)"
+ ],
+ "wbox": {
+  "BL(1,1)": [
+   1.0,
+   2.010829,
+   1.0,
+   2.010829
+  ],
+  "BR(0,1)": [
+   2.870255,
+   3.877084,
+   1.0,
+   2.010829
+  ],
+  "TR(0,0)": [
+   2.870255,
+   3.877084,
+   2.870255,
+   3.877084
+  ],
+  "TL(1,0)": [
+   1.0,
+   2.010829,
+   2.870255,
+   3.877084
+  ]
+ },
+ "wbox_pad": {
+  "g1": {
+   "BL(1,1)": [
+    1.0,
+    2.010829,
+    1.0,
+    2.010829
+   ],
+   "BR(0,1)": [
+    2.870255,
+    3.877084,
+    1.0,
+    2.010829
+   ],
+   "TR(0,0)": [
+    2.870255,
+    3.877084,
+    2.870255,
+    3.877084
+   ],
+   "TL(1,0)": [
+    1.0,
+    2.010829,
+    2.870255,
+    3.877084
+   ]
+  }
+ },
+ "H_record": [
+  2.218056,
+  2.357813,
+  2.49757,
+  2.637327,
+  41.11209,
+  53.130102
+ ]
+}
