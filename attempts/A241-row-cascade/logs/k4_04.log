@@ -1,0 +1,138 @@
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:\Users\esumm\code\packing\attempts\A55-k4-sweep\certs\k4_04.json -o C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.param.json --name k4_04 --beta-gap 19/10,27/10
+k4_04: 205 atoms, 4 cores, budget 7, anchoring gap -> C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.at_slo.json
+specialised k4_04 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.at_slo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.at_slo.json --depth 48
+certificate: C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.at_slo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 205, total mass = 1745461/250000 (~6.9818440000), margin = 0
+hypotheses: 4 cores, 0 NO-families, budget = 7
+boxes = 150168  covered = 66415  vacuous = 0  exempt = 8701 (core 8701, nofam 0)  split = 75052  exact atom checks = 182114  max depth = 42  time = 5.9s
+depth histogram (covered leaves): 7:3 8:10 9:25 10:81 11:206 12:221 13:526 14:753 15:569 16:1085 17:1200 18:867 19:1497 20:1300 21:947 22:1744 23:1247 24:1109 25:1264 26:1852 27:1602 28:2263 29:2760 30:2540 31:1685 32:4811 33:4529 34:2176 35:7404 36:8047 37:2332 38:4471 39:4962 40:80 41:89 42:158
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 1745461/250000 < budget 7  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:\Users\esumm\code\packing\attempts\A55-k4-sweep\certs\k4_04.json -o C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.param.json --name k4_04
+k4_04: 205 atoms, 4 cores, budget 7, anchoring nearest-wall -> C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.at_slo.json
+specialised k4_04 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.at_slo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.at_slo.json --depth 48
+certificate: C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.at_slo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 205, total mass = 1745461/250000 (~6.9818440000), margin = 0
+hypotheses: 4 cores, 0 NO-families, budget = 7
+  ... 1400000 boxes (697844 covered, 0 vacuous, 0 witnesses), stack 17, 50s
+  ... 2000000 boxes (997842 covered, 0 vacuous, 0 witnesses), stack 21, 70s
+  ... 2400000 boxes (1197840 covered, 0 vacuous, 0 witnesses), stack 25, 84s
+boxes = 2659102  covered = 1326607  vacuous = 0  exempt = 2976 (core 2976, nofam 0)  split = 1329519  exact atom checks = 1772519  max depth = 43  time = 93.5s
+depth histogram (covered leaves): 7:3 8:12 9:23 10:81 11:207 12:207 13:517 14:763 15:589 16:1116 17:1284 18:946 19:1761 20:1978 21:1699 22:3298 23:3608 24:3065 25:6095 26:7755 27:6692 28:15160 29:18064 30:16482 31:34382 32:35918 33:29161 34:58943 35:55033 36:47911 37:100086 38:108286 39:91761 40:195736 41:186488 42:141207 43:150290
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 1745461/250000 < budget 7  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\make_param.py C:\Users\esumm\code\packing\attempts\A55-k4-sweep\certs\k4_04.json -o C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.param.json --name k4_04 --beta-mid
+k4_04: 205 atoms, 4 cores, budget 7, anchoring mid-band -> C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.param.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\specialize.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.param.json --s 191/50 -o C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.at_slo.json
+specialised k4_04 at s = 191/50 (~3.820000000) -> C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.at_slo.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A53-simple-strata\code\verify_case.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.at_slo.json --depth 48
+certificate: C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.at_slo.json
+s = 191/50 (~3.8200000000), n = 11, atoms = 205, total mass = 1745461/250000 (~6.9818440000), margin = 0
+hypotheses: 4 cores, 0 NO-families, budget = 7
+boxes = 124934  covered = 59770  vacuous = 0  exempt = 2729 (core 2729, nofam 0)  split = 62435  exact atom checks = 166177  max depth = 42  time = 4.7s
+depth histogram (covered leaves): 7:2 8:11 9:20 10:80 11:242 12:196 13:505 14:820 15:563 16:1224 17:1266 18:1082 19:1793 20:1623 21:783 22:835 23:969 24:800 25:699 26:1621 27:1303 28:865 29:2534 30:2322 31:1279 32:4310 33:4237 34:2064 35:6467 36:7639 37:2218 38:4166 39:4980 40:65 41:89 42:98
+PASS: every NON-EXEMPT closed unit square in [0,191/50]^2 has mass >= 1 ; total 1745461/250000 < budget 7  ==>  no packing of 11 unit squares in side <= 191/50 (~3.8200000000) satisfies the hypotheses (node DEAD)
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.param.json --slo 191/50 --shi 969271/250000 --depth 48 --report C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.param.report.json
+parametric certificate: C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.param.json  (k4_04)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 205, cores = 4, budget = 7, total = 1745461/250000 (~6.981844000), margin = 0
+anchoring: {'rule': 'gap', 'threshold_x': '468481/200000', 'threshold_y': '407/200', 'threshold_x_float': 2.342405, 'threshold_y_float': 2.035, 'mid_band_half_width': None, 'gap_band': ['19/10', '27/10'], 'n_overrides': 0}
+  ... 400000 boxes (90324 cov, 0 vac, 109673 exempt, 43691 s-splits, 0 witnesses), stack 23, 22s
+  ... 1000000 boxes (215496 cov, 0 vac, 284490 exempt, 108472 s-splits, 8 witnesses), stack 9, 58s
+  ... 1200000 boxes (251207 cov, 0 vac, 348774 exempt, 130659 s-splits, 8 witnesses), stack 20, 69s
+  ... 1400000 boxes (292404 cov, 0 vac, 407580 exempt, 153031 s-splits, 8 witnesses), stack 14, 81s
+  ... 1600000 boxes (334100 cov, 0 vac, 465881 exempt, 175450 s-splits, 8 witnesses), stack 21, 93s
+  ... 1800000 boxes (376606 cov, 0 vac, 523378 exempt, 197182 s-splits, 8 witnesses), stack 15, 104s
+  ... 2000000 boxes (420578 cov, 0 vac, 579409 exempt, 219611 s-splits, 8 witnesses), stack 9, 115s
+  ... 2200000 boxes (456663 cov, 0 vac, 643322 exempt, 236896 s-splits, 8 witnesses), stack 14, 127s
+  ... 2600000 boxes (617386 cov, 0 vac, 682599 exempt, 260261 s-splits, 8 witnesses), stack 18, 145s
+  ... 2800000 boxes (717385 cov, 0 vac, 682599 exempt, 269488 s-splits, 8 witnesses), stack 20, 153s
+  ... 3800000 boxes (1217386 cov, 0 vac, 682599 exempt, 315409 s-splits, 8 witnesses), stack 18, 193s
+  ... 4400000 boxes (1408498 cov, 0 vac, 791490 exempt, 366476 s-splits, 8 witnesses), stack 15, 227s
+  ... 4600000 boxes (1492625 cov, 0 vac, 807357 exempt, 377897 s-splits, 8 witnesses), stack 32, 236s
+  ... 5400000 boxes (1871471 cov, 0 vac, 828367 exempt, 460374 s-splits, 80 witnesses), stack 26, 275s
+  ... 5600000 boxes (1971474 cov, 0 vac, 828367 exempt, 492689 s-splits, 80 witnesses), stack 20, 284s
+  ... 6800000 boxes (2571406 cov, 0 vac, 828367 exempt, 666081 s-splits, 112 witnesses), stack 11, 342s
+  ... 7000000 boxes (2671371 cov, 0 vac, 828367 exempt, 692862 s-splits, 128 witnesses), stack 23, 354s
+boxes = 7224777  covered = 2783736  vacuous = 0  exempt = 828367  split = 3612530  s-splits = 720530  s-cells = 1551  max depth = 48  max s-depth = 10  time = 362.8s
+FAIL: 144 witness boxes at depth 48 (0 HOLES)
+  worst witness: s = 191/50 (~3.820000000), theta = 0.006994 deg, centre = (2.499945659, 3.319913587), exact mass = 263463/250000 (~1.053852000000)
+  witness s-ranges: [3.820000000, 3.877084000] over 144 boxes
+  witnesses written to C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.gap.param.witnesses.json
+  report written to C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.param.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.param.json --slo 191/50 --shi 969271/250000 --depth 48 --report C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.param.report.json
+parametric certificate: C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.param.json  (k4_04)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 205, cores = 4, budget = 7, total = 1745461/250000 (~6.981844000), margin = 0
+anchoring: {'rule': 'nearest-wall', 'threshold_x': '969271/500000', 'threshold_y': '969271/500000', 'threshold_x_float': 1.938542, 'threshold_y_float': 1.938542, 'mid_band_half_width': None, 'gap_band': None, 'n_overrides': 0}
+  ... 400000 boxes (190468 cov, 0 vac, 9530 exempt, 21145 s-splits, 0 witnesses), stack 21, 17s
+  ... 600000 boxes (289796 cov, 0 vac, 10203 exempt, 31058 s-splits, 0 witnesses), stack 19, 25s
+  ... 800000 boxes (388856 cov, 0 vac, 11143 exempt, 41194 s-splits, 0 witnesses), stack 19, 33s
+  ... 1600000 boxes (739657 cov, 0 vac, 60329 exempt, 89769 s-splits, 8 witnesses), stack 16, 68s
+  ... 2000000 boxes (875369 cov, 0 vac, 124618 exempt, 115516 s-splits, 8 witnesses), stack 18, 88s
+  ... 2200000 boxes (975369 cov, 0 vac, 124618 exempt, 124661 s-splits, 8 witnesses), stack 18, 96s
+  ... 2800000 boxes (1275370 cov, 0 vac, 124618 exempt, 152160 s-splits, 8 witnesses), stack 16, 121s
+  ... 3200000 boxes (1444166 cov, 0 vac, 155821 exempt, 175935 s-splits, 8 witnesses), stack 26, 140s
+  ... 3400000 boxes (1533836 cov, 0 vac, 166122 exempt, 186216 s-splits, 24 witnesses), stack 12, 150s
+  ... 3600000 boxes (1627683 cov, 0 vac, 172236 exempt, 207035 s-splits, 40 witnesses), stack 13, 160s
+  ... 3800000 boxes (1727682 cov, 0 vac, 172236 exempt, 231452 s-splits, 40 witnesses), stack 15, 168s
+  ... 4200000 boxes (1927661 cov, 0 vac, 172236 exempt, 276855 s-splits, 48 witnesses), stack 22, 186s
+  ... 4400000 boxes (2027660 cov, 0 vac, 172236 exempt, 298846 s-splits, 48 witnesses), stack 24, 194s
+  ... 4600000 boxes (2127661 cov, 0 vac, 172236 exempt, 320807 s-splits, 48 witnesses), stack 22, 201s
+  ... 4800000 boxes (2227661 cov, 0 vac, 172236 exempt, 343600 s-splits, 48 witnesses), stack 22, 210s
+  ... 5000000 boxes (2327661 cov, 0 vac, 172236 exempt, 365858 s-splits, 48 witnesses), stack 22, 217s
+  ... 5800000 boxes (2727661 cov, 0 vac, 172236 exempt, 455363 s-splits, 48 witnesses), stack 22, 249s
+  ... 6600000 boxes (3127664 cov, 0 vac, 172236 exempt, 545590 s-splits, 48 witnesses), stack 16, 280s
+  ... 6800000 boxes (3227661 cov, 0 vac, 172236 exempt, 567606 s-splits, 48 witnesses), stack 22, 289s
+  ... 7000000 boxes (3327664 cov, 0 vac, 172236 exempt, 590006 s-splits, 48 witnesses), stack 16, 296s
+  ... 7600000 boxes (3627660 cov, 0 vac, 172236 exempt, 658505 s-splits, 48 witnesses), stack 24, 320s
+  ... 8600000 boxes (4127662 cov, 0 vac, 172236 exempt, 769963 s-splits, 48 witnesses), stack 20, 359s
+  ... 8800000 boxes (4227660 cov, 0 vac, 172236 exempt, 793996 s-splits, 48 witnesses), stack 24, 367s
+  ... 9200000 boxes (4427659 cov, 0 vac, 172236 exempt, 840953 s-splits, 48 witnesses), stack 26, 384s
+  ... 10400000 boxes (5022640 cov, 0 vac, 177233 exempt, 979541 s-splits, 64 witnesses), stack 16, 435s
+  ... 11000000 boxes (5320344 cov, 0 vac, 179493 exempt, 1068496 s-splits, 80 witnesses), stack 20, 465s
+  ... 11200000 boxes (5420325 cov, 0 vac, 179493 exempt, 1096051 s-splits, 88 witnesses), stack 27, 475s
+  ... 11400000 boxes (5520271 cov, 0 vac, 179493 exempt, 1120794 s-splits, 112 witnesses), stack 21, 485s
+  ... 12200000 boxes (5920226 cov, 0 vac, 179493 exempt, 1236456 s-splits, 136 witnesses), stack 21, 524s
+boxes = 12349173  covered = 5994804  vacuous = 0  exempt = 179493  split = 6174732  s-splits = 1253137  s-cells = 1578  max depth = 48  max s-depth = 10  time = 530.5s
+FAIL: 144 witness boxes at depth 48 (0 HOLES)
+  worst witness: s = 191/50 (~3.820000000), theta = 0.006994 deg, centre = (2.499945659, 3.319913587), exact mass = 263463/250000 (~1.053852000000)
+  witness s-ranges: [3.820000000, 3.877084000] over 144 boxes
+  witnesses written to C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.nearest-wall.param.witnesses.json
+  report written to C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.param.report.json
+
+$ C:\Users\esumm\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\esumm\code\packing\attempts\A56-sparametric\code\verify_param.py C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.param.json --slo 191/50 --shi 969271/250000 --depth 48 --report C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.param.report.json
+parametric certificate: C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.param.json  (k4_04)
+s in [191/50, 969271/250000]  (~[3.820000000, 3.877084000], width 0.057084000), n = 11, atoms = 205, cores = 4, budget = 7, total = 1745461/250000 (~6.981844000), margin = 0
+anchoring: {'rule': 'mid-band', 'threshold_x': '969271/500000', 'threshold_y': '969271/500000', 'threshold_x_float': 1.938542, 'threshold_y_float': 1.938542, 'mid_band_half_width': '1/2', 'gap_band': None, 'n_overrides': 0}
+  ... 200000 boxes (84644 cov, 0 vac, 15354 exempt, 13154 s-splits, 0 witnesses), stack 21, 9s
+  ... 600000 boxes (282835 cov, 0 vac, 17163 exempt, 33620 s-splits, 0 witnesses), stack 21, 25s
+  ... 1400000 boxes (678933 cov, 0 vac, 21068 exempt, 75471 s-splits, 0 witnesses), stack 15, 57s
+  ... 1800000 boxes (811117 cov, 0 vac, 88871 exempt, 107308 s-splits, 8 witnesses), stack 12, 77s
+  ... 2400000 boxes (1069498 cov, 0 vac, 130488 exempt, 139142 s-splits, 8 witnesses), stack 20, 103s
+  ... 3000000 boxes (1369498 cov, 0 vac, 130488 exempt, 166653 s-splits, 8 witnesses), stack 20, 128s
+  ... 3400000 boxes (1546867 cov, 0 vac, 153126 exempt, 190336 s-splits, 8 witnesses), stack 10, 145s
+  ... 4000000 boxes (1797739 cov, 0 vac, 202178 exempt, 239108 s-splits, 40 witnesses), stack 17, 175s
+  ... 4200000 boxes (1897741 cov, 0 vac, 202178 exempt, 267736 s-splits, 40 witnesses), stack 13, 183s
+  ... 5000000 boxes (2297050 cov, 0 vac, 202843 exempt, 359016 s-splits, 56 witnesses), stack 15, 217s
+  ... 5200000 boxes (2391555 cov, 0 vac, 208300 exempt, 380492 s-splits, 72 witnesses), stack 31, 226s
+  ... 5400000 boxes (2491540 cov, 0 vac, 208300 exempt, 407116 s-splits, 80 witnesses), stack 24, 236s
+  ... 6800000 boxes (3191474 cov, 0 vac, 208300 exempt, 604740 s-splits, 112 witnesses), stack 11, 303s
+  ... 7200000 boxes (3391426 cov, 0 vac, 208300 exempt, 655571 s-splits, 136 witnesses), stack 17, 324s
+boxes = 7359243  covered = 3471037  vacuous = 0  exempt = 208300  split = 3679762  s-splits = 673835  s-cells = 1581  max depth = 48  max s-depth = 10  time = 330.2s
+FAIL: 144 witness boxes at depth 48 (0 HOLES)
+  worst witness: s = 191/50 (~3.820000000), theta = 0.006994 deg, centre = (2.499945659, 3.319913587), exact mass = 263463/250000 (~1.053852000000)
+  witness s-ranges: [3.820000000, 3.877084000] over 144 boxes
+  witnesses written to C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.mid-band.param.witnesses.json
+  report written to C:\Users\esumm\code\packing\attempts\A241-row-cascade\certs\k4_04.param.report.json
