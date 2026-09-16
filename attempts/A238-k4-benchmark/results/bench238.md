@@ -108,13 +108,13 @@ kills by rule: `{"EmptyBox": 10, "S-CLIP": 2, "NOROOM-CN": 2, "NOROOM-POCKET": 1
 
 | set | n | A238 DEAD | TUBE | ALIVE | A238 mean / median s | A100 PASS | A100 mean / median s | speed-up (median) |
 |---|---|---|---|---|---|---|---|---|
-| A100 head-to-head | 8 | 4 | 0 | 4 | 192.0 / 265.6 | 1 | 230.3 / 183.0 | 0.7x |
-| + extrapolation set | 0 | 0 | 0 | 0 | None / None | - | - | - |
-| all cover nodes | 8 | 4 | 0 | 4 | 192.0 / 265.6 | 1 | 230.3 / 183.0 | - |
+| A100 head-to-head | 9 | 4 | 0 | 5 | 205.6 / 315.0 | 1 | 244.6 / 184.3 | 0.6x |
+| + extrapolation set | 2 | 1 | 0 | 1 | 253.1 / 253.1 | - | - | - |
+| all cover nodes | 11 | 5 | 0 | 6 | 214.3 / 315.0 | 1 | 200.1 / 181.7 | - |
 
 root (A84-P1 node, H = the whole interior zone): {'verdict': 'ALIVE', 'seconds': 337.0, 'n_nodes': 50, 'gate': True}
 
-kills by rule: `{"EmptyBox": 151, "FC": 11, "NOROOM": 21, "COUNT": 3, "REACH": 10, "S-CLIP": 6, "FC+EPS": 19, "NOROOM-CN": 21, "NOROOM-POCKET": 6}`; gate hits 2; TRUMP-TUBE leaves 0; SNAP kills 0, hand-offs 0; max depth {"0": 3, "9": 1, "5": 2, "7": 1, "3": 1, "6": 1}
+kills by rule: `{"EmptyBox": 234, "FC": 23, "NOROOM": 29, "COUNT": 3, "REACH": 12, "S-CLIP": 10, "FC+EPS": 25, "NOROOM-CN": 24, "NOROOM-POCKET": 6}`; gate hits 2; TRUMP-TUBE leaves 0; SNAP kills 0, hand-offs 0; max depth {"0": 3, "9": 1, "5": 3, "7": 1, "3": 1, "4": 2, "6": 1}
 
 ### k4_11 — cell by cell (A100's own LP row against A238's geometry)
 
@@ -128,8 +128,9 @@ kills by rule: `{"EmptyBox": 151, "FC": 11, "NOROOM": 21, "COUNT": 3, "REACH": 1
 | `c0_Y0403` | refused (tau 6.000000 >= budget 6) | 314 | **ALIVE** | 322.8 | EmptyBox x35, FC x2, FC+EPS x4, NOROOM x4, REACH x1, S-CLIP x1 | 78 | 7 |
 | `c0_Y0404` | refused (tau 6.000000 >= budget 6) | 164 | **DEAD** | 214.4 | EmptyBox x12, FC+EPS x2, NOROOM-CN x4, NOROOM-POCKET x4, S-CLIP x1 | 36 | 3 |
 | `c0_Y0405` | PASS | 182 | **ALIVE** | 318.1 | EmptyBox x19, FC+EPS x9, NOROOM x5, NOROOM-CN x11, NOROOM-POCKET x1, S-CLIP x2 | 76 | 5 |
+| `c0_Y0497` | FAIL(rc=3) | 359 | **ALIVE** | 315.0 | EmptyBox x38, FC x6, FC+EPS x6, NOROOM x4, REACH x1 | 98 | 5 |
 
-price: 923 cover cells x 192.0 s = **49.2 CPU-h** of geometry; the 50 % geometry leaves over (at A100's 559 s/node LP) 71.6 CPU-h; total **120.9 CPU-h** against A100's measured 203.1 CPU-h (per node 2.91 x cheaper).
+price: 923 cover cells x 214.3 s = **54.9 CPU-h** of geometry; the 55 % geometry leaves over (at A100's 559 s/node LP) 78.2 CPU-h; total **133.1 CPU-h** against A100's measured 203.1 CPU-h (per node 2.61 x cheaper).
 
 ## Tier extrapolation
 
@@ -139,7 +140,7 @@ extensions are closed on the window.
 
 | block | classes | usable forced cells | geometry CPU-h | LP residue CPU-h | total (A238) | A100's price |
 |---|---|---|---|---|---|---|
-| k4 with traction (k4_03, k4_05, k4_06, k4_08, k4_11) | 5 | k4_03 3/5, k4_05 3/5, k4_06 3/5, k4_08 5/7, k4_11 5/7 | 246 | 358 | **604** | 203.1 each |
+| k4 with traction (k4_03, k4_05, k4_06, k4_08, k4_11) | 5 | k4_03 3/5, k4_05 3/5, k4_06 3/5, k4_08 5/7, k4_11 5/7 | 274 | 391 | **666** | 203.1 each |
 | k <= 3 (k3_01, k3_02, k3_03, k3_04, k3_05, k2_*, k1_00) | 9 | 0 for every one | 9 | 1048 | **1057** | 290.2 each |
 | corners4 (shadow, no image) | 1 | 0/8 -- every extension is the OPEN k5_16 | 0 | not priced | - | not priced |
 
