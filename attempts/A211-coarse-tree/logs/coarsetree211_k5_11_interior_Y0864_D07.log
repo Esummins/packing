@@ -1067,3 +1067,22 @@
    no-room (k=9, m=2): UNDECIDED in 14 s (2 pockets; 1 of 2 pocket(s) survive the cover)
    Lemma POCKET at R.3.3.4: 2 pockets (k=9, m=2): the next square instantiated in each
    node R.3.3.4.p1 d3 pocket<-[0]: INTERNAL (3.6 s, 1 rounds; t=1503.8)
+   no-room (k=10, m=1): UNDECIDED in 14 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.4.p1: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.3.4.p1.p1 d4 pocket<-[0]: INTERNAL (2.2 s, 1 rounds; t=1521.4)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.3.3.4.p1.p1: split F1 at TR(0,0) (meeting fraction 0.081022; alive rows []; named ['F1', 'F4', 'F5'])
+   node R.3.3.4.p1.p1.1 d5 TR(0,0)<-None: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=1523.8)
+   node R.3.3.4.p1.p1.2 d5 TR(0,0)<-None: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=1525.5)
+   node R.3.3.4.p1.p2 d4 pocket<-[1]: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=1527.0)
+   node R.3.3.4.p2 d3 pocket<-[1]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=1528.6)
+   node R.3.3.5    d2 BR(0,1)<-[23]: INTERNAL (0.9 s, 1 rounds; t=1530.9)
+   no-room (k=9, m=2): UNDECIDED in 20 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.5: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R.3.3.5.p1 d3 pocket<-[0]: INTERNAL (2.6 s, 1 rounds; t=1554.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.3.5.p1 d3: DEAD by NOROOM -- no-room at R.3.3.5.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.3.5.p2 d3 pocket<-[1]: INTERNAL (2.1 s, 1 rounds; t=1560.9)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 6 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.3.3.5.p2 d3: DEAD by NOROOM-POCKET -- no-room at R.3.3.5.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.3.3.5.p3 d3 pocket<-[2]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=1569.8)
