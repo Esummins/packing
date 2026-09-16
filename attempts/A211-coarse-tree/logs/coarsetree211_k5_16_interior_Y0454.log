@@ -157,3 +157,25 @@
    no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
    node R0+.3.4    d2: DEAD by NOROOM -- no-room at R0+.3.4 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
    node R0+.3.5    d2 BL(1,0)<-[10, 11]: INTERNAL (4.9 s, 1 rounds; t=287.1)
+   no-room (k=10, m=1): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.5: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.5.p1 d3 pocket<-[0]: DEAD by S-CLIP r1 (1.3 s, 1 rounds; t=306.7)
+   node R0+.3.6    d2 BL(1,0)<-[10, 16]: INTERNAL (7.7 s, 1 rounds; t=314.7)
+   no-room (k=10, m=1): UNDECIDED in 12 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.6: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.6.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (2.5 s, 1 rounds; t=338.2)
+   node R0+.3.7    d2 BL(1,0)<-[11, 15]: DEAD by FC r1 (2.0 s, 1 rounds; t=340.6)
+   node R0+.3.8    d2 BL(1,0)<-[11, 16]: DEAD by FC r1 (1.6 s, 1 rounds; t=342.6)
+   node R0+.3.9    d2 BL(1,0)<-[15, 16]: INTERNAL (4.0 s, 1 rounds; t=347.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.3.9    d2: DEAD by NOROOM -- no-room at R0+.3.9 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R0+          => DEAD (45 nodes; t = 350 s of 1800.0)
+   => DEAD (g1_page) in 350.0 s: 1 start runs, 45 nodes, depth 5, 0 CC kills, 0 exact leaf cascades, 3 NS splits, 9 pocket splits, 2 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 24 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 38 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.03 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 2.7s; R0+.1 d1 INTERNAL 2.0s; R0+.1r1 d1 INTERNAL 2.1s; R0+.1.1 d2 INTERNAL 4.2s; R0+.1.1.p1 d3 INTERNAL 11.0s; R0+.1.1.p1.1 d4 DEAD EmptyBox 6.2s; R0+.1.1.p1.2 d4 DEAD EmptyBox 0.9s; R0+.1.2 d2 INTERNAL 3.2s; R0+.1.2.p1 d3 INTERNAL 15.4s; R0+.1.2.p1.1 d4 DEAD REACH 6.5s; R0+.1.2.p1.2 d4 INTERNAL 2.7s; R0+.1.2.p1.2.1 d5 DEAD EmptyBox 0.5s; R0+.1.2.p1.2.2 d5 DEAD EmptyBox 0.1s; R0+.1.3 d2 DEAD EmptyBox 0.2s; R0+.1.4 d2 DEAD NOROOM 4.4s; R0+.1.5 d2 INTERNAL 4.2s; R0+.1.5.p1 d3 INTERNAL 6.9s; R0+.1.5.p1.1 d4 DEAD EmptyBox 1.2s; R0+.1.5.p1.2 d4 DEAD EmptyBox 3.6s; R0+.1.6 d2 INTERNAL 6.0s; R0+.1.6.p1 d3 INTERNAL 9.0s; R0+.1.6.p1.1 d4 DEAD EmptyBox 0.9s; R0+.1.6.p1.2 d4 DEAD EmptyBox 2.1s; R0+.1.7 d2 DEAD FC 2.3s; R0+.1.8 d2 DEAD FC 2.3s; R0+.1.9 d2 INTERNAL 3.4s; R0+.1.9.p1 d3 DEAD EmptyBox 1.7s; R0+.2 d1 INTERNAL 1.1s; R0+.2r1 d1 INTERNAL 3.4s; R0+.2r2 d1 DEAD REACH 5.2s; R0+.3 d1 INTERNAL 2.0s; R0+.3r1 d1 INTERNAL 2.2s; R0+.3.1 d2 INTERNAL 5.7s; R0+.3.1.p1 d3 DEAD EmptyBox 2.9s; R0+.3.2 d2 INTERNAL 4.3s; R0+.3.2.p1 d3 DEAD EmptyBox 3.6s; R0+.3.3 d2 DEAD EmptyBox 0.2s; R0+.3.4 d2 DEAD NOROOM 4.6s; R0+.3.5 d2 INTERNAL 4.9s; R0+.3.5.p1 d3 DEAD S-CLIP 1.3s; R0+.3.6 d2 INTERNAL 7.7s; R0+.3.6.p1 d3 DEAD EmptyBox 2.5s; R0+.3.7 d2 DEAD FC 2.0s; R0+.3.8 d2 DEAD FC 1.6s; R0+.3.9 d2 DEAD NOROOM 4.0s
+== k5_16_interior_Y0454: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 6032, 'misses': 1631, 'entries': 1631}; clip {'hits': 174519, 'misses': 5241333, 'entries': 41333}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 7663, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 88}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 6630, 'obs_misses': 1445, 'build_hits': 0, 'build_misses': 24, 'bisect_hits': 0, 'bisect_misses': 20, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 1404, 'build_entries': 24, 'bisect_entries': 20, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
