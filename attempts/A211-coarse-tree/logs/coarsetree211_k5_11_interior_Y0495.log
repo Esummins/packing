@@ -814,3 +814,58 @@
    no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 28854, 'obs_misses': 7897, 'build_hits': 0, 'build_misses': 87, 'bisect_hits': 1, 'bisect_misses': 76, 'build_saved': 0.0, 'bisect_saved': 1.8, 'obs_entries': 7195, 'build_entries': 94, 'bisect_entries': 76, 'on': True}
    gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
 20:00:03 [fr5] k5_11_interior_Y0495 == k5_11_interior_Y0495: g1 ALIVE | pad0 DEAD    rc=0 3289s
+02:10:15 [fr1] start k5_11_interior_Y0495 wall 1800 (lab 4, free 18505 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   pad zero: cached DEAD
+   pad g1: cached ALIVE was WALL-limited (3 undecided) -- RESUMING with a FRESH wall of 1800 s (A211g)
+   stage 0 g1 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0495_g1_s0.json)
+   INHERIT k5_11_interior_Y0495 pad g1: 1 prior trees, 215 paths, 10 branches inherited DEAD (final, with their certificates), 3 start nodes (0 from the A203 root)
+== k5_11_interior_Y0495 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0495_g1_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 10 dead branches (final) + 3 start nodes ['R.4.4.4.p2', 'R.4.4.5', 'R.4.4.6']; H [1.38, 1.519, 2.218, 2.358, 0.0, 14.25]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1          BL(1,1)<-(11,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.2          BL(1,1)<-(16,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.3          BL(1,1)<-(17,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.4.1        TR(0,0)<-(14,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.4.2        TR(0,0)<-(19,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.4.3        TR(0,0)<-(23,)  [A211 tree: FC] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.4.4.1      BR(0,1)<-(11,)  [A211 tree: REACH] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.4.4.2      BR(0,1)<-(16,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.4.4.3      BR(0,1)<-(17,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   INHERITED DEAD R.4.4.4.p1   (2.211538, 2.412855, 1.381454, 1.57997)<-(0,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json
+   node R.4.4.4.p2 d0 root: INTERNAL (3.8 s, 1 rounds; t=4.4)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 3 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.4.4.4.p2 d0: DEAD by NOROOM-POCKET -- no-room at R.4.4.4.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   start R.4.4.4.p2   => DEAD (1 nodes; t = 9 s of 1800.0)
+   start R.4.4.5: ancestor R0+.4.4 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json) refused (KeyError('node R0+.4.4 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.4.4.5: ancestor R0+.4 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json) refused (KeyError('node R0+.4 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.4.4.5: ancestor R0+ (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json) refused (KeyError('node R0+ carries no snapshot')) -- climbing to the next complete ancestor
+   start R.4.4.5: applied step 1/3 -- BL(1,1) <- [18]
+   start R.4.4.5: applied step 2/3 -- TR(0,0) <- [24]
+   start R.4.4.5: applied step 3/3 -- BR(0,1) <- [22]
+   node R.4.4.5    d0 root: INTERNAL (4.4 s, 1 rounds; t=33.4)
+   no-room (k=9, m=2): UNDECIDED in 20 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.4.4.5: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R.4.4.5.p1 d1 pocket<-[0]: INTERNAL (5.6 s, 1 rounds; t=59.7)
+   no-room (k=10, m=1): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.4.4.5.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.4.4.5.p1.p1 d2 pocket<-[0]: INTERNAL (5.9 s, 1 rounds; t=77.5)
+   node R.4.4.5.p1.p1 d2: DEAD by CC -- rule CC at R.4.4.5.p1.p1 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F2 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an inter
+   node R.4.4.5.p2 d1 pocket<-[1]: INTERNAL (3.8 s, 1 rounds; t=83.0)
+   node R.4.4.5.p2 d1: DEAD by CC -- rule CC at R.4.4.5.p2 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F2 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interior
+   start R.4.4.5      => DEAD (4 nodes; t = 85 s of 1800.0)
+   start R.4.4.6: ancestor R0+.4.4 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json) refused (KeyError('node R0+.4.4 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.4.4.6: ancestor R0+.4 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json) refused (KeyError('node R0+.4 carries no snapshot')) -- climbing to the next complete ancestor
+   start R.4.4.6: ancestor R0+ (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0495.json) refused (KeyError('node R0+ carries no snapshot')) -- climbing to the next complete ancestor
+   start R.4.4.6: applied step 1/3 -- BL(1,1) <- [18]
+   start R.4.4.6: applied step 2/3 -- TR(0,0) <- [24]
+   start R.4.4.6: applied step 3/3 -- BR(0,1) <- [23]
+   node R.4.4.6    d0 root: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=103.0)
+   start R.4.4.6      => DEAD (1 nodes; t = 104 s of 1800.0)
+   => DEAD (g1_page) in 103.9 s: 3 start runs, 6 nodes, depth 2, 2 CC kills, 0 exact leaf cascades, 0 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 10 inherited dead (10 up front + 0 in tree), 14 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 10 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3 d1 DEAD INHERIT 0.0s; R.4.1 d2 DEAD INHERIT 0.0s; R.4.2 d2 DEAD INHERIT 0.0s; R.4.3 d2 DEAD INHERIT 0.0s; R.4.4.1 d3 DEAD INHERIT 0.0s; R.4.4.2 d3 DEAD INHERIT 0.0s; R.4.4.3 d3 DEAD INHERIT 0.0s; R.4.4.4.p1 d4 DEAD INHERIT 0.0s; R.4.4.4.p2 d0 DEAD NOROOM-POCKET 3.8s; R.4.4.5 d0 INTERNAL 4.4s; R.4.4.5.p1 d1 INTERNAL 5.6s; R.4.4.5.p1.p1 d2 DEAD CC 5.9s; R.4.4.5.p2 d1 DEAD CC 3.8s; R.4.4.6 d0 DEAD EmptyBox 0.3s
+== k5_11_interior_Y0495: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 573, 'misses': 269, 'entries': 269}; clip {'hits': 7706, 'misses': 545182, 'entries': 145182}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 842, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 12}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 661, 'obs_misses': 248, 'build_hits': 0, 'build_misses': 3, 'bisect_hits': 0, 'bisect_misses': 3, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 248, 'build_entries': 3, 'bisect_entries': 3, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
