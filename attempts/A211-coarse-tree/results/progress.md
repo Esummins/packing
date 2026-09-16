@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-16 15:18:37
+# A211 progress -- 2026-09-16 15:20:09
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -592,16 +592,17 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0878 | zero | 2 (tree: 15 nodes, depth 3, CC 0, exact 0, NS 0, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 62 |
 | k5_16_interior_Y0864 | g1 | 2 (tree: 103 nodes, depth 5, CC 0, exact 0, NS 9, pockets 12) | DEAD | 724 |
 | k5_16_interior_Y0864 | zero | 2 (tree: 100 nodes, depth 5, CC 0, exact 0, NS 9, pockets 11) | DEAD (s0-only, WINDOW-PENDING) | 598 |
+| k5_16_interior_Y0954 | g1 | 2 (tree: 64 nodes, depth 7, CC 0, exact 0, NS 3, pockets 8) | DEAD | 389 |
 | k5_16_interior_Y0954 | zero | 2 (tree: 58 nodes, depth 6, CC 0, exact 0, NS 5, pockets 6) | DEAD (s0-only, WINDOW-PENDING) | 323 |
 | k5_16_interior_Y0943 | zero | 2 (tree: 146 nodes, depth 9, CC 0, exact 2, NS 27, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 531 |
 | k5_16_interior_Y0959 | g1 | 2 (tree: 15 nodes, depth 2, CC 0, exact 0, NS 0, pockets 0) | DEAD | 53 |
 | k5_16_interior_Y0959 | zero | 2 (tree: 15 nodes, depth 2, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 62 |
 
-CPU-h in this block: 82.81
+CPU-h in this block: 82.92
 
 ## Price and projection
 
 * gallery: 17 / 18 pages DEAD at the window pad, 8.84 CPU-h
-* frontier: 269 nodes run (233 DEAD at the window pad), 82.81 CPU-h; the census has 67 alive nodes, 34 remaining
+* frontier: 269 nodes run (234 DEAD at the window pad), 82.92 CPU-h; the census has 66 alive nodes, 34 remaining
 * PRICE over the first 20 frontier nodes: mean 537 s, median 444 s per node (both pads); PROJECTION for the remaining 34: 5.1 CPU-h (cap 200)
 
