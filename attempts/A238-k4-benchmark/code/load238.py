@@ -34,11 +34,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 ATT = os.path.join(ROOT, "attempts")
 A100 = os.path.join(ATT, "A100-protected-pilot", "results")
-for _p in (os.path.join(ATT, "A212-trump5-tree", "code"), os.path.join(ATT, "A211-coarse-tree", "code")):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
-import load212 as L2                                            # noqa: E402  READ-ONLY (A212)
-import load211 as L1                                            # noqa: E402  READ-ONLY (A211)
+sys.path.insert(0, HERE)
+import path238                                                  # noqa: E402  the import order (A211 live, A212 last)
+path238.fix()
+import load211 as L1                                            # noqa: E402  READ-ONLY (A211, the LIVE loader)
+path238.fix()
 
 FP, G = L1.FP, L1.G
 CL = G.CL
@@ -159,7 +159,7 @@ def record(cls, kind, idx):
 def load_page(nid, csv_path=None):
     p = parse(nid)
     if p is None:
-        return L2.load_page(nid, csv_path)
+        return L1.load_page(nid, csv_path)                       # a gallery page or an A57 tree record
     cls, kind, idx = p
     rec = record(cls, kind, idx)
     row = dict(node=nid, camp="A238", cls=cls, level="1" if kind == "cover" else "0", family="%s_j0" % cls,
@@ -170,7 +170,7 @@ def load_page(nid, csv_path=None):
 
 
 def install():
-    L2.install()
+    L1.install()
     patch_classes()
     FP.load_page = load_page
 

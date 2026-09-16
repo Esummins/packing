@@ -42,9 +42,9 @@ from fractions import Fraction as Fr
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-for _p in (os.path.join(ROOT, "attempts", "A212-trump5-tree", "code"),):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
+sys.path.insert(0, HERE)
+import path238                                                  # noqa: E402
+path238.fix()
 import trump212 as TR                                           # noqa: E402  READ-ONLY (A212)
 import poly204 as P                                             # noqa: E402
 

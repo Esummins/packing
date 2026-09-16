@@ -86,7 +86,7 @@ def summarise(cls, items):
             extra.append((i, r))
     def agg(pairs, a100=False):
         n = len(pairs)
-        s238 = sum((r.get("seconds_total") or r.get("seconds") or 0.0) for _i, r in pairs)  # incl. stage 0
+        s238 = sum((r.get("priced_seconds") or r.get("seconds_total") or r.get("seconds") or 0.0) for _i, r in pairs)  # tree + stage 0
         dead = sum(1 for _i, r in pairs if r.get("verdict") == "DEAD")
         tube = sum(1 for _i, r in pairs if r.get("verdict") == "TRUMP-TUBE")
         alive = n - dead - tube
@@ -110,7 +110,7 @@ def summarise(cls, items):
         snap_k += (r.get("snap") or {}).get("kills") or 0
         snap_h += (r.get("snap") or {}).get("handoffs") or 0
         depth_hist[r.get("max_depth")] += 1
-    return dict(cls=cls, cover=cov, head=H, extra=E, all=allp, root=(dict(verdict=root.get("verdict"), seconds=root.get("seconds_total") or root.get("seconds"),
+    return dict(cls=cls, cover=cov, head=H, extra=E, all=allp, root=(dict(verdict=root.get("verdict"), seconds=root.get("priced_seconds") or root.get("seconds"),
                 n_nodes=root.get("n_nodes"), gate=(root.get("gate_root") or {}).get("contains")) if root else None),
                 rules=dict(rules), gate_hits=gate_hits, tube_leaves=tube_leaves, snap_kills=snap_k, snap_handoffs=snap_h,
                 depth=dict(depth_hist), a100=a100_proj(cls))

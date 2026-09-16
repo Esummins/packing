@@ -33,31 +33,33 @@ CERTS = os.path.join(A238, "certs")
 RES = os.path.join(A238, "results", "bench238.jsonl")
 PAGES = os.path.join(ROOT, "docs", "residue_map", "campaigns", "A238-k4-benchmark")
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.join(ROOT, "attempts", "A212-trump5-tree", "code"))
+import path238                                                  # noqa: E402  the import order, enforced
+path238.fix()
+import stage209                                                 # noqa: E402  READ-ONLY (A211)
+import tree211 as N11                                           # noqa: E402  READ-ONLY (A211, the LIVE toolkit)
+import run211 as RUN                                            # noqa: E402  READ-ONLY (A211's driver)
 import load238                                                  # noqa: E402
-load238.install()
-import stage209                                                 # noqa: E402
-import rows212 as RW                                            # noqa: E402
-import tree212 as N12                                           # noqa: E402
 import tube238 as TU                                            # noqa: E402
 import tree238 as T238                                          # noqa: E402
-import run212                                                   # noqa: E402
-
-load238.install()                                               # stage209 re-installs load211 at import: re-install ours
+path238.fix()
+_BAD = path238.check()
+assert not _BAD, "A238: shared modules resolved to the wrong attempt: %s" % (_BAD,)
+load238.install()                                               # our page loader, over A211's
 stage209.CERTS = CERTS                                          # never write A211's cert dir
-N12.Tree212 = T238.Tree238                                      # run212 builds Tree238 (a subclass; base bound already)
-run212.TR = TU
+N11.Tree211 = T238.Tree238                                      # run211 builds Tree238 (the base was captured already)
 FLAGS = dict(A220_NOROOM_INHERIT=os.environ.get("A220_NOROOM_INHERIT"), A221_LANE=os.environ.get("A221_LANE"),
              A224_SNAP=os.environ.get("A224_SNAP"), A230_EPS=os.environ.get("A230_EPS"),
-             A238_SNAP_AT_GATE=os.environ.get("A238_SNAP_AT_GATE", "1"), A238_DELTA_PIN=load238.DELTA_PIN)
+             A238_SNAP_AT_GATE=os.environ.get("A238_SNAP_AT_GATE", "1"), A238_GATE=os.environ.get("A238_GATE", "1"),
+             A238_DELTA_PIN=load238.DELTA_PIN)
 A238_CLAUSE = (
     "  [A238: this page is a node of the PROTECTED CLASS %s's tree at s0 (attempts/A238-k4-benchmark/code/load238.py). "
     "The hypothesis is M_S(m) & YES(H): an 11-square packing in [0, m]^2 with an axis-aligned unit square centred at "
     "every slot of %s (slack pin cores, delta_pin = %s) and some non-pin square of its s0-dilate in H = %s.  DEAD is "
     "the instance of `stratum_kill` for %s restricted to H (Lemma K1 / Lemma P-TREE (c), obligation O1, "
     "docs/proofs/protected_trees.md); TRUMP-TUBE is Lemma TUBE-LEAF/S in the class direction slot(I_g) "
-    "(attempts/A238-k4-benchmark/code/tube238.py + Theorem T1 on %s); a SNAP HAND-OFF is A224's Rule SNAP into the "
-    "k+1 stratum (docs/proofs/snap_rule.md).  Flag set %s.]")
+    "(attempts/A238-k4-benchmark/code/tube238.py + Theorem T1 on %s); a node holding a D4 image of z-hat is GATED and "
+    "never killed (A212 s.1); a SNAP HAND-OFF is A224's Rule SNAP into the k+1 stratum (docs/proofs/snap_rule.md).  "
+    "Flag set %s.]")
 
 
 def clause(rec, cls):
@@ -65,7 +67,7 @@ def clause(rec, cls):
         cert = TU.radii(image_I(cls))["cert"]
     except Exception:                                             # noqa: BLE001
         cert = "certs/tube_I_*_landing_*.json (per image)"
-    return RW.VERIFIER + A238_CLAUSE % (cls, cls, rec.get("delta_pin"), [round(v, 6) for v in rec["H"][0]], cls, cert, json.dumps(FLAGS))
+    return RUN.VERIFIER + A238_CLAUSE % (cls, cls, rec.get("delta_pin"), [round(v, 6) for v in rec["H"][0]], cls, cert, json.dumps(FLAGS))
 
 
 def image_I(cls):
@@ -77,7 +79,7 @@ def image_I(cls):
 
 
 def main():
-    run212.belownormal()
+    RUN.belownormal()
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=("page",))
     ap.add_argument("nid")
@@ -87,19 +89,21 @@ def main():
     ap.add_argument("--depth", type=int, default=6)
     ap.add_argument("--nodes", type=int, default=600)
     ap.add_argument("--force", action="store_true")
-    ap.add_argument("--no-inherit", dest="no_inherit", action="store_true", default=True)
+    ap.add_argument("--no-resume", dest="no_resume", action="store_true")
+    ap.add_argument("--inherit", dest="no_inherit", action="store_false", default=True,
+                    help="merge prior certificates (Lemma INHERIT); OFF by default -- an A238 page is new, nothing to inherit")
     ap.add_argument("--cert-dir", dest="cert_dir", default=CERTS)
     ap.add_argument("--results", default=RES)
     ap.add_argument("--no-fig", dest="no_fig", action="store_true")
     a = ap.parse_args()
-    run212.RES = os.path.join(A238, "results", "rows212_raw.jsonl")   # A212's slim row; the canonical
-    # benchmark row (with the SNAP / EPS counters) is bench_row's, written to --results below
-    RW.NOFIG[0] = bool(a.no_fig)
+    a.start_only, a.cert_suffix = None, None
     rec, cls, row = load238.FP.load_page(a.nid)
     TU.CLS[0] = cls
     TU.IG[0] = image_I(cls)
-    RW.VERIFIER = clause(rec, cls)
-    RW.CERTS = os.path.abspath(a.cert_dir)
+    RUN.RES = os.path.join(A238, "results", "rows211_raw.jsonl")   # A211's slim row; the canonical benchmark row
+    RUN.NOFIG = bool(a.no_fig)                                     # (with the SNAP / EPS / gate counters) is bench_row's
+    RUN.VERIFIER = clause(rec, cls)
+    RUN.CERTS = os.path.abspath(a.cert_dir)
     cert = os.path.join(os.path.abspath(a.cert_dir), "k4bench238_%s.json" % a.nid)
     doc = dict(nid=a.nid, runs={})
     if os.path.exists(cert) and not a.force:
@@ -113,9 +117,9 @@ def main():
                statement=("A238 certificate for the STRATUM %s: every verdict here is a statement about packings "
                           "satisfying M_%s (Lemma P-TREE s.1), not about any other class." % (cls, cls)))
     t0 = time.time()
-    run212.run_page(doc, a, cert)
+    RUN.run_page(doc, a, cert)
     doc["seconds_total"] = round(time.time() - t0, 1)
-    RW.save(doc, cert)
+    RUN.save(doc, cert)
     bench_row(doc, a, cert, cls, rec)
     print("== A238 %s [%s]: %s in %.1f s" % (a.nid, cls, doc.get("verdicts"), doc["seconds_total"]), flush=True)
 
@@ -154,16 +158,34 @@ def bench_row(doc, a, cert, cls, rec):
              gated=sum(1 for s in snaps if s.get("where") == "gated-leaf"))
     E = dict(runs=len(epss), kills=sum(1 for e in epss if e.get("verdict") == "DEAD"),
              seconds=round(sum(e.get("seconds") or 0.0 for e in epss), 2))
+    rules = {}
+    for n in nodes:
+        if n.get("verdict") == "DEAD" and n.get("clip"):
+            rules[n["clip"]] = rules.get(n["clip"], 0) + 1
+    st0 = (doc.get("stage0") or {}).get("zero") or {}
+    s0_s = float(st0.get("seconds") or 0.0)
+    gated = [n for n in nodes if (n.get("trump_gate") or {}).get("contains")]
+    G = dict(hits=len(gated), conflicts=sum(1 for n in nodes if n.get("gate_conflict")),
+             root=((nodes[0].get("trump_gate") or {}).get("contains") if nodes else None),
+             nodes=[dict(label=n["label"], depth=n.get("depth"), g=(n.get("trump_gate") or {}).get("g"),
+                         verdict=n.get("verdict"), n_anon=n.get("n_anon"),
+                         tube_worst=(n.get("tube") or {}).get("worst")) for n in gated][:40],
+             tube=sum(1 for n in nodes if n.get("verdict") == "TRUMP-TUBE"),
+             pending=sum(1 for n in nodes if n.get("tube") and n.get("verdict") != "TRUMP-TUBE"),
+             tube_nodes=[dict(label=n["label"], depth=n.get("depth"), g=(n.get("tube") or {}).get("g"),
+                              direction=(n.get("tube") or {}).get("direction")) for n in nodes if n.get("verdict") == "TRUMP-TUBE"])
     row = dict(nid=doc["nid"], cls=cls, camp="A238", kind=rec.get("kind"), index=rec.get("index"),
                h=[round(v, 6) for v in rec["H"][0]], state=(rec.get("h_meta") or {}).get("state"),
                ghost=(rec.get("h_meta") or {}).get("ghost"), budget=rec.get("budget"), delta_pin=rec.get("delta_pin"),
                verdict=d.get("verdict") or (doc.get("verdicts") or {}).get("zero"), leaf=str(d.get("leaf") or "")[:400],
                seconds=d.get("seconds"), seconds_total=doc.get("seconds_total"), wall=d.get("wall"),
                n_nodes=d.get("n_nodes"), max_depth=d.get("max_depth"), dead_leaves=d.get("dead_leaves"),
-               alive_leaves=d.get("alive_leaves"), kills_by_rule=d.get("kills_by_rule"),
-               gate_hits=d.get("gate_hits"), gate_conflicts=d.get("gate_conflicts"), gate_root=d.get("gate_root"),
-               tube_leaves=d.get("tube_leaves"), tube_depths=d.get("tube_depths"), tube_nodes=d.get("tube_nodes"),
-               aligned_cuts=d.get("aligned_cuts"), gated_snaps=S["gated"],
+               alive_leaves=d.get("alive_leaves"), kills_by_rule=rules, stage0_seconds=s0_s,
+               stage0_verdict=st0.get("verdict"), stage0_cached=st0.get("cached"), pad="zero", s0_only=True,
+               window_pending=d.get("window_pending"),
+               priced_seconds=round((d.get("seconds") or 0.0) + s0_s, 1),
+               gate_hits=G["hits"], gate_conflicts=G["conflicts"], gate_root=G["root"], gated_nodes=G["nodes"],
+               tube_leaves=G["tube"], tube_pending=G["pending"], tube_nodes=G["tube_nodes"], gated_snaps=S["gated"],
                snap=dict(S, targets=[dict(label=s.get("label"), verdict=s.get("verdict"), kind=s.get("kind"),
                                           where=s.get("where"), target=(s.get("target") or {}).get("stratum"),
                                           full=(s.get("target") or {}).get("full"),
