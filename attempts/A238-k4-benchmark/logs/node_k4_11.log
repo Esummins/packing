@@ -204,3 +204,6 @@
 == stage 0 + CSP k4_11_c0_Y0401 at the zero pad: ALIVE in 15118 ms; kills {'H-clip': 0, 'P': 2614, 'W': 1123, 'C': 849, 'M': 1871, 'L': 0, 'R': 3793, 'X': 1219}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None}; forced H []
 == k4_11_c0_Y0401 page pad zero: start attempts/A238-k4-benchmark/certs/csp209_k4_11_c0_Y0401_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [1.659, 1.799, 1.38, 1.519, 14.25, 28.072]; forced H []; 5 slots; free squares 6
    node R          d0 root: INTERNAL (2.7 s, 1 rounds; t=2.8)
+   node R.1        d1 BR(1,0)<-[10]: INTERNAL (2.7 s, 1 rounds; t=5.6)
+   node R.1.1      d2 BL(0,2)<-[3, 4]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=6.0)
+   node R.1.2      d2 BL(0,2)<-[3, 8]: INTERNAL (2.9 s, 1 rounds; t=8.9)
