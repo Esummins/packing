@@ -33,6 +33,7 @@ import PackingCertMathlib.Statements.Open.OneFlush
 import PackingCertMathlib.Statements.Open.LemmaEps
 import PackingCertMathlib.Statements.Open.Realign
 import PackingCertMathlib.Statements.Open.LocalLock
+import PackingCertMathlib.Statements.Open.NoVV
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 
