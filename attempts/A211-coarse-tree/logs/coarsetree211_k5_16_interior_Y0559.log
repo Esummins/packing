@@ -621,3 +621,47 @@
    node R0+.2.2.5.3 d4 BL(1,0)<-[5, 16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=885.4)
    node R0+.2.2.5.4 d4 BL(1,0)<-[6, 10]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=887.0)
    node R0+.2.2.5.5 d4 BL(1,0)<-[6, 15]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=888.7)
+   node R0+.2.2.5.6 d4 BL(1,0)<-[6, 16]: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=890.3)
+   node R0+.2.2.5.7 d4 BL(1,0)<-[10, 11]: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=892.2)
+   node R0+.2.2.5.8 d4 BL(1,0)<-[10, 16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=894.0)
+   node R0+.2.2.5.9 d4 BL(1,0)<-[11, 15]: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=895.7)
+   node R0+.2.2.6  d3 BR(0,1)<-[22]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=897.5)
+   node R0+.2.3    d2 TR(1,0)<-[22]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=899.4)
+   node R0+.2.4    d2 TR(1,0)<-[23]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=901.6)
+   node R0+.3      d1 TL(1,0)<-[19]: INTERNAL (2.6 s, 1 rounds; t=905.8)
+   node R0+.3r1    d1 root<-None: INTERNAL (2.7 s, 1 rounds; t=910.1)
+   node R0+.3.1    d2 BL(1,0)<-[5, 6]: INTERNAL (3.1 s, 1 rounds; t=915.0)
+   node R0+.3.1r1  d2 root<-None: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=917.1)
+   node R0+.3.2    d2 BL(1,0)<-[5, 11]: INTERNAL (7.3 s, 1 rounds; t=925.9)
+   no-room (k=10, m=1): UNDECIDED in 14 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.2.p1 d3 pocket<-[0]: INTERNAL (7.9 s, 1 rounds; t=953.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.3.2.p1: split F4 at BR(0,1) (meeting fraction 0.106617; alive rows []; named ['F2', 'F4', 'F5'])
+   node R0+.3.2.p1.1 d4 BR(0,1)<-None: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=956.2)
+   node R0+.3.2.p1.2 d4 BR(0,1)<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=958.0)
+   node R0+.3.3    d2 BL(1,0)<-[5, 12]: INTERNAL (4.6 s, 1 rounds; t=964.2)
+   no-room (k=10, m=1): UNDECIDED in 10 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.3.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (2.0 s, 1 rounds; t=981.5)
+   node R0+.3.4    d2 BL(1,0)<-[5, 16]: INTERNAL (5.7 s, 1 rounds; t=988.9)
+   no-room (k=10, m=1): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.4: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.4.p1 d3 pocket<-[0]: INTERNAL (14.3 s, 1 rounds; t=1022.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.3.4.p1: split F2 at TL(1,0) (meeting fraction 0.13379; alive rows []; named ['F1', 'F2', 'H'])
+   node R0+.3.4.p1.1 d4 TL(1,0)<-None: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=1024.9)
+   node R0+.3.4.p1.2 d4 TL(1,0)<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=1026.8)
+   node R0+.3.5    d2 BL(1,0)<-[5, 17]: INTERNAL (3.3 s, 1 rounds; t=1031.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.3.5    d2: DEAD by NOROOM -- no-room at R0+.3.5 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.3.6    d2 BL(1,0)<-[6, 10]: INTERNAL (3.5 s, 1 rounds; t=1041.2)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 87, in draw
+    return fig211.render(doc)
+           ~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\fig211.py", line 174, in render
+    open(p, "w", encoding="utf-8").write(page_svg(doc))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\esumm\\code\\packing\\docs\\residue_map\\campaigns\\A211-coarsetree\\coarsetree211_k5_16_interior_Y0559.svg'
+   fig211 failed: OSError(22, 'Invalid argument')
