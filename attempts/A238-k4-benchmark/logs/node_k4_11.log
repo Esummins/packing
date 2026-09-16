@@ -86,3 +86,7 @@
 == k4_11_root page pad zero: start attempts/A238-k4-benchmark/certs/csp209_k4_11_root_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [1.1, 2.777, 1.1, 2.777, 0.0, 90.0]; forced H []; 5 slots; free squares 6
    node R          d0 root: INTERNAL (3.9 s, 1 rounds; t=4.0)
    GATE R: contains the Trump image id ({'H': 7}); no kill rule will be applied here
+   node R.1        d1 BL(0,2)<-[3]: INTERNAL (3.6 s, 1 rounds; t=7.6)
+   GATE R.1: contains the Trump image id ({'F1': 4, 'H': 7}); no kill rule will be applied here
+   node R.1.1      d2 BR(0,1)<-[10]: INTERNAL (3.9 s, 1 rounds; t=11.5)
+   node R.1.1.1    d3 TR(0,1)<-[11]: DEAD by COUNT r1 (1.8 s, 1 rounds; t=13.4)
