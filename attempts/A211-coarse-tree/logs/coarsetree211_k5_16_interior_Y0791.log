@@ -1,0 +1,35 @@
+14:40:17 [fr3] start k5_16_interior_Y0791 wall 1800 (lab 6, free 16397 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y0791 at the zero pad: ALIVE in 32580 ms; kills {'H-clip': 231, 'P': 6064, 'W': 2782, 'C': 1108, 'M': 6055, 'L': 7, 'R': 2629, 'X': 1090}; CSP units 331 -> 331 alive; caps {'BL(1,0)': 1, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H ['BL(1,0)']
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0791 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0791 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0791_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [1.799, 1.939, 1.537, 1.659, 53.13, 64.011]; forced H ['BL(1,0)']; 6 slots; free squares 5
+   node R0+        d0 root: INTERNAL (3.1 s, 1 rounds; t=3.2)
+   node R0+r1      d0 root<-None: INTERNAL (3.4 s, 1 rounds; t=6.7)
+   node R0+.1      d1 BR(0,1)<-[17]: INTERNAL (3.1 s, 1 rounds; t=9.9)
+   node R0+.1r1    d1 root<-None: DEAD by EmptyBox r1 (2.8 s, 1 rounds; t=12.7)
+   node R0+.2      d1 BR(0,1)<-[18]: INTERNAL (3.3 s, 1 rounds; t=16.1)
+   node R0+.2.1    d2 TL(1,0)<-[8]: INTERNAL (3.0 s, 1 rounds; t=19.2)
+   node R0+.2.1.1  d3 TR(0,1)<-[14]: INTERNAL (5.3 s, 1 rounds; t=25.2)
+   no-room (k=10, m=1): DEAD by EmptyBox in 2 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R0+.2.1.1  d3: DEAD by EmptyBox -- no-room at R0+.2.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R0+.2.1.2  d3 TR(0,1)<-[19]: INTERNAL (4.1 s, 1 rounds; t=31.7)
+   no-room (k=10, m=1): DEAD by EmptyBox in 2 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R0+.2.1.2  d3: DEAD by EmptyBox -- no-room at R0+.2.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R0+.2.1.3  d3 TR(0,1)<-[21]: INTERNAL (6.6 s, 1 rounds; t=40.1)
+   no-room (k=10, m=1): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.2.1.3: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.2.1.3.p1 d4 pocket<-[0]: INTERNAL (14.2 s, 1 rounds; t=71.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.2.1.3.p1: split F1 at BR(0,1) (meeting fraction 0.081907; alive rows []; named ['F1', 'F2', 'F4'])
+   node R0+.2.1.3.p1.1 d5 BR(0,1)<-None: DEAD by REACH r1 (8.5 s, 1 rounds; t=79.9)
+   node R0+.2.1.3.p1.2 d5 BR(0,1)<-None: INTERNAL (1.8 s, 1 rounds; t=81.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.2.1.3.p1.2: bisect F1 on t at 53.1301 (extents (0.004806, 0.003362), tilt 90.0 deg, core non-empty, 2 piece(s); split 1 of 4)
+   node R0+.2.1.3.p1.2.1 d6 F1<-['t<=53.1301']: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=82.0)
+   node R0+.2.1.3.p1.2.2 d6 F1<-['t>=53.1301']: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=82.1)
+   node R0+.2.1.4  d3 TR(0,1)<-[22]: INTERNAL (5.4 s, 1 rounds; t=87.5)
+   no-room (k=10, m=1): UNDECIDED in 16 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.2.1.4: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.2.1.4.p1 d4 pocket<-[0]: DEAD by REACH r1 (6.1 s, 1 rounds; t=110.8)
+   node R0+.2.1.5  d3 TR(0,1)<-[23]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=111.1)
