@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-16 01:22:44
+# A211 progress -- 2026-09-16 01:29:30
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -108,7 +108,7 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y0738_D01 | zero | 2 (tree: 41 nodes, depth 7, CC 4, exact 0, NS 8, pockets 1) | ALIVE (wall) | 1859 |
 | k5_11_interior_Y0738_D03 | g1 | 2 (tree: 42 nodes, depth 11, CC 5, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1805 |
 | k5_11_interior_Y0738_D03 | zero | 2 (tree: 37 nodes, depth 8, CC 5, exact 0, NS 8, pockets 1) | ALIVE (wall) | 1842 |
-| k5_11_interior_Y0864_D07 | g1 | 2 (tree: 38 nodes, depth 8, CC 6, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1837 |
+| k5_11_interior_Y0864_D07 | g1 | 2 (tree: 200 nodes, depth 7, CC 6, exact 0, NS 15, pockets 41) | DEAD | 1701 |
 | k5_11_interior_Y0864_D07 | zero | 2 (tree: 176 nodes, depth 7, CC 2, exact 0, NS 8, pockets 33) | DEAD (s0-only, WINDOW-PENDING) | 1328 |
 | k5_11_interior_Y0954_D00 | g1 | 2 (tree: 151 nodes, depth 8, CC 4, exact 0, NS 7, pockets 21) | DEAD | 1109 |
 | k5_11_interior_Y0954_D00 | zero | 2 (tree: 141 nodes, depth 8, CC 5, exact 0, NS 7, pockets 21) | DEAD (s0-only, WINDOW-PENDING) | 987 |
@@ -125,7 +125,7 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y1128_D06 | g1 | 2 (tree: 63 nodes, depth 7, CC 4, exact 0, NS 8, pockets 1) | ALIVE (wall) | 1843 |
 | k5_11_interior_Y1128_D06 | zero | 2 (tree: 77 nodes, depth 9, CC 5, exact 0, NS 10, pockets 2) | ALIVE (wall) | 1848 |
 | k5_11_interior_Y1128_D07 | g1 | 2 (tree: 84 nodes, depth 7, CC 5, exact 0, NS 7, pockets 21) | ALIVE (wall) | 1850 |
-| k5_11_interior_Y1128_D07 | zero | 2 (tree: 81 nodes, depth 7, CC 5, exact 0, NS 7, pockets 21) | ALIVE (wall) | 1832 |
+| k5_11_interior_Y1128_D07 | zero | 2 (tree: 83 nodes, depth 4, CC 1, exact 0, NS 0, pockets 14) | DEAD (s0-only, WINDOW-PENDING) | 690 |
 | k5_11_interior_Y1141_D00 | g1 | 2 (tree: 8 nodes, depth 1, CC 2, exact 0, NS 0, pockets 0) | DEAD | 26 |
 | k5_11_interior_Y1141_D00 | zero | 2 (tree: 8 nodes, depth 1, CC 2, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 31 |
 | k5_11_interior_Y1141_D01 | g1 | 2 (tree: 5 nodes, depth 1, CC 0, exact 0, NS 0, pockets 0) | DEAD | 4 |
@@ -237,11 +237,11 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y0597 | zero | 2 (tree: 91 nodes, depth 8, CC 6, exact 0, NS 5, pockets 10) | DEAD (s0-only, WINDOW-PENDING) | 442 |
 | k5_11_interior_Y0636 | zero | 2 (tree: 79 nodes, depth 5, CC 4, exact 0, NS 0, pockets 2) | DEAD (s0-only, WINDOW-PENDING) | 225 |
 
-CPU-h in this block: 34.02
+CPU-h in this block: 33.66
 
 ## Price and projection
 
 * gallery: 17 / 18 pages DEAD at the window pad, 8.84 CPU-h
-* frontier: 89 nodes run (70 DEAD at the window pad), 34.02 CPU-h; the census has 230 alive nodes, 214 remaining
+* frontier: 89 nodes run (71 DEAD at the window pad), 33.66 CPU-h; the census has 230 alive nodes, 214 remaining
 * PRICE over the first 20 frontier nodes: mean 537 s, median 444 s per node (both pads); PROJECTION for the remaining 214: 31.9 CPU-h (cap 200)
 
