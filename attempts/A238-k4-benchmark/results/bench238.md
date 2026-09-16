@@ -92,17 +92,29 @@ root (A84-P1 node, H = the whole interior zone): {'verdict': 'ALIVE', 'seconds':
 
 kills by rule: `{"EmptyBox": 3, "REACH": 6}`; gate hits 1; TRUMP-TUBE leaves 0; SNAP kills 0, hand-offs 0; max depth {"6": 1}
 
+## k4_08
+
+| set | n | A238 DEAD | TUBE | ALIVE | A238 mean / median s | A100 PASS | A100 mean / median s | speed-up (median) |
+|---|---|---|---|---|---|---|---|---|
+| A100 head-to-head | 0 | 0 | 0 | 0 | None / None | 0 | None / None | - |
+| + extrapolation set | 0 | 0 | 0 | 0 | None / None | - | - | - |
+| all cover nodes | 0 | 0 | 0 | 0 | None / None | 0 | None / None | - |
+
+root (A84-P1 node, H = the whole interior zone): {'verdict': 'ALIVE', 'seconds': 333.5, 'n_nodes': 31, 'gate': True}
+
+kills by rule: `{"EmptyBox": 10, "S-CLIP": 2, "NOROOM-CN": 2, "NOROOM-POCKET": 1}`; gate hits 2; TRUMP-TUBE leaves 0; SNAP kills 0, hand-offs 0; max depth {"7": 1}
+
 ## k4_11
 
 | set | n | A238 DEAD | TUBE | ALIVE | A238 mean / median s | A100 PASS | A100 mean / median s | speed-up (median) |
 |---|---|---|---|---|---|---|---|---|
-| A100 head-to-head | 7 | 4 | 0 | 3 | 174.0 / 214.4 | 0 | 237.2 / 184.3 | 0.9x |
+| A100 head-to-head | 8 | 4 | 0 | 4 | 192.0 / 265.6 | 1 | 230.3 / 183.0 | 0.7x |
 | + extrapolation set | 0 | 0 | 0 | 0 | None / None | - | - | - |
-| all cover nodes | 7 | 4 | 0 | 3 | 174.0 / 214.4 | 0 | 237.2 / 184.3 | - |
+| all cover nodes | 8 | 4 | 0 | 4 | 192.0 / 265.6 | 1 | 230.3 / 183.0 | - |
 
 root (A84-P1 node, H = the whole interior zone): {'verdict': 'ALIVE', 'seconds': 337.0, 'n_nodes': 50, 'gate': True}
 
-kills by rule: `{"EmptyBox": 132, "FC": 11, "NOROOM": 16, "COUNT": 3, "REACH": 10, "S-CLIP": 4, "FC+EPS": 10, "NOROOM-CN": 10, "NOROOM-POCKET": 5}`; gate hits 2; TRUMP-TUBE leaves 0; SNAP kills 0, hand-offs 0; max depth {"0": 3, "9": 1, "5": 1, "7": 1, "3": 1, "6": 1}
+kills by rule: `{"EmptyBox": 151, "FC": 11, "NOROOM": 21, "COUNT": 3, "REACH": 10, "S-CLIP": 6, "FC+EPS": 19, "NOROOM-CN": 21, "NOROOM-POCKET": 6}`; gate hits 2; TRUMP-TUBE leaves 0; SNAP kills 0, hand-offs 0; max depth {"0": 3, "9": 1, "5": 2, "7": 1, "3": 1, "6": 1}
 
 ### k4_11 — cell by cell (A100's own LP row against A238's geometry)
 
@@ -115,8 +127,9 @@ kills by rule: `{"EmptyBox": 132, "FC": 11, "NOROOM": 16, "COUNT": 3, "REACH": 1
 | `c0_Y0402` | refused (tau 6.000000 >= budget 6) | 185 | **ALIVE** | 316.7 | EmptyBox x35, FC+EPS x4, NOROOM x8, REACH x1, S-CLIP x1 | 78 | 5 |
 | `c0_Y0403` | refused (tau 6.000000 >= budget 6) | 314 | **ALIVE** | 322.8 | EmptyBox x35, FC x2, FC+EPS x4, NOROOM x4, REACH x1, S-CLIP x1 | 78 | 7 |
 | `c0_Y0404` | refused (tau 6.000000 >= budget 6) | 164 | **DEAD** | 214.4 | EmptyBox x12, FC+EPS x2, NOROOM-CN x4, NOROOM-POCKET x4, S-CLIP x1 | 36 | 3 |
+| `c0_Y0405` | PASS | 182 | **ALIVE** | 318.1 | EmptyBox x19, FC+EPS x9, NOROOM x5, NOROOM-CN x11, NOROOM-POCKET x1, S-CLIP x2 | 76 | 5 |
 
-price: 923 cover cells x 174.0 s = **44.6 CPU-h** of geometry; the 43 % geometry leaves over (at A100's 559 s/node LP) 61.4 CPU-h; total **106.0 CPU-h** against A100's measured 203.1 CPU-h (per node 3.21 x cheaper).
+price: 923 cover cells x 192.0 s = **49.2 CPU-h** of geometry; the 50 % geometry leaves over (at A100's 559 s/node LP) 71.6 CPU-h; total **120.9 CPU-h** against A100's measured 203.1 CPU-h (per node 2.91 x cheaper).
 
 ## Tier extrapolation
 
@@ -126,7 +139,7 @@ extensions are closed on the window.
 
 | block | classes | usable forced cells | geometry CPU-h | LP residue CPU-h | total (A238) | A100's price |
 |---|---|---|---|---|---|---|
-| k4 with traction (k4_03, k4_05, k4_06, k4_08, k4_11) | 5 | k4_03 3/5, k4_05 3/5, k4_06 3/5, k4_08 5/7, k4_11 5/7 | 223 | 307 | **530** | 203.1 each |
+| k4 with traction (k4_03, k4_05, k4_06, k4_08, k4_11) | 5 | k4_03 3/5, k4_05 3/5, k4_06 3/5, k4_08 5/7, k4_11 5/7 | 246 | 358 | **604** | 203.1 each |
 | k <= 3 (k3_01, k3_02, k3_03, k3_04, k3_05, k2_*, k1_00) | 9 | 0 for every one | 9 | 1048 | **1057** | 290.2 each |
 | corners4 (shadow, no image) | 1 | 0/8 -- every extension is the OPEN k5_16 | 0 | not priced | - | not priced |
 

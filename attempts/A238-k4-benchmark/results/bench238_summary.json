@@ -1,5 +1,5 @@
 {
- "rows": 79,
+ "rows": 81,
  "classes": [
   {
    "cls": "corners4",
@@ -367,31 +367,22 @@
    "a100": {}
   },
   {
-   "cls": "k4_11",
-   "cover": {
-    "cover": 1152,
-    "uncoverable": 0,
-    "contradictory": 229,
-    "parent": 0,
-    "shared": 0,
-    "nocore": 0,
-    "attemptable": 882,
-    "unkillable": 41
-   },
+   "cls": "k4_08",
+   "cover": {},
    "head": {
-    "n": 7,
-    "dead": 4,
+    "n": 0,
+    "dead": 0,
     "tube": 0,
-    "alive": 3,
-    "s238": 1217.7,
-    "med238": 214.4,
-    "med100": 184.3,
-    "mean238": 174.0,
-    "kill_rate": 0.5714,
-    "s100": 1660.7,
-    "mean100": 237.2,
+    "alive": 0,
+    "s238": 0,
+    "med238": null,
+    "med100": null,
+    "mean238": null,
+    "kill_rate": null,
+    "s100": 0,
+    "mean100": null,
     "a100_pass": 0,
-    "a100_kill_rate": 0.0
+    "a100_kill_rate": null
    },
    "extra": {
     "n": 0,
@@ -409,19 +400,97 @@
     "a100_kill_rate": null
    },
    "all": {
-    "n": 7,
+    "n": 0,
+    "dead": 0,
+    "tube": 0,
+    "alive": 0,
+    "s238": 0,
+    "med238": null,
+    "med100": null,
+    "mean238": null,
+    "kill_rate": null,
+    "s100": 0,
+    "mean100": null,
+    "a100_pass": 0,
+    "a100_kill_rate": null
+   },
+   "root": {
+    "verdict": "ALIVE",
+    "seconds": 333.5,
+    "n_nodes": 31,
+    "gate": true
+   },
+   "rules": {
+    "EmptyBox": 10,
+    "S-CLIP": 2,
+    "NOROOM-CN": 2,
+    "NOROOM-POCKET": 1
+   },
+   "gate_hits": 2,
+   "tube_leaves": 0,
+   "snap_kills": 0,
+   "snap_handoffs": 0,
+   "depth": {
+    "7": 1
+   },
+   "a100": {}
+  },
+  {
+   "cls": "k4_11",
+   "cover": {
+    "cover": 1152,
+    "uncoverable": 0,
+    "contradictory": 229,
+    "parent": 0,
+    "shared": 0,
+    "nocore": 0,
+    "attemptable": 882,
+    "unkillable": 41
+   },
+   "head": {
+    "n": 8,
     "dead": 4,
     "tube": 0,
-    "alive": 3,
-    "s238": 1217.7,
-    "med238": 214.4,
-    "med100": 184.3,
-    "mean238": 174.0,
-    "kill_rate": 0.5714,
-    "s100": 1660.7,
-    "mean100": 237.2,
-    "a100_pass": 0,
-    "a100_kill_rate": 0.0
+    "alive": 4,
+    "s238": 1535.8,
+    "med238": 265.6,
+    "med100": 183.0,
+    "mean238": 192.0,
+    "kill_rate": 0.5,
+    "s100": 1842.4,
+    "mean100": 230.3,
+    "a100_pass": 1,
+    "a100_kill_rate": 0.125
+   },
+   "extra": {
+    "n": 0,
+    "dead": 0,
+    "tube": 0,
+    "alive": 0,
+    "s238": 0,
+    "med238": null,
+    "med100": null,
+    "mean238": null,
+    "kill_rate": null,
+    "s100": null,
+    "mean100": null,
+    "a100_pass": null,
+    "a100_kill_rate": null
+   },
+   "all": {
+    "n": 8,
+    "dead": 4,
+    "tube": 0,
+    "alive": 4,
+    "s238": 1535.8,
+    "med238": 265.6,
+    "med100": 183.0,
+    "mean238": 192.0,
+    "kill_rate": 0.5,
+    "s100": 1842.4,
+    "mean100": 230.3,
+    "a100_pass": 1,
+    "a100_kill_rate": 0.125
    },
    "root": {
     "verdict": "ALIVE",
@@ -430,15 +499,15 @@
     "gate": true
    },
    "rules": {
-    "EmptyBox": 132,
+    "EmptyBox": 151,
     "FC": 11,
-    "NOROOM": 16,
+    "NOROOM": 21,
     "COUNT": 3,
     "REACH": 10,
-    "S-CLIP": 4,
-    "FC+EPS": 10,
-    "NOROOM-CN": 10,
-    "NOROOM-POCKET": 5
+    "S-CLIP": 6,
+    "FC+EPS": 19,
+    "NOROOM-CN": 21,
+    "NOROOM-POCKET": 6
    },
    "gate_hits": 2,
    "tube_leaves": 0,
@@ -447,7 +516,7 @@
    "depth": {
     "0": 3,
     "9": 1,
-    "5": 1,
+    "5": 2,
     "7": 1,
     "3": 1,
     "6": 1
@@ -496,16 +565,17 @@
   "k4_03": null,
   "k4_05": null,
   "k4_06": null,
+  "k4_08": null,
   "k4_11": {
    "cells": 923,
-   "mean_node_s": 174.0,
-   "kill_rate": 0.5714,
+   "mean_node_s": 192.0,
+   "kill_rate": 0.5,
    "a100_node_s": 558.8,
-   "geometry_cpu_h": 44.6,
-   "lp_residue_cpu_h": 61.4,
-   "total_cpu_h": 106.0,
+   "geometry_cpu_h": 49.2,
+   "lp_residue_cpu_h": 71.6,
+   "total_cpu_h": 120.9,
    "a100_total_cpu_h": 203.1,
-   "speedup_per_node": 3.21
+   "speedup_per_node": 2.91
   }
  }
 }
