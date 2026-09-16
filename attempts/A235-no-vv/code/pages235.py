@@ -64,7 +64,7 @@ def main():
             if l.startswith('{"wid": "%s"' % raw['wid'])]
     ro = next(o for o in roll if o['pair'] == [4, 6])
 
-    pg = D.Page(z, width_notes=520, height_extra=300)
+    pg = D.Page(z, width_notes=780, height_extra=300)
     pg.frame()
     pg.squares({4: ORANGE, 6: ORANGE, 0: BLUE, 7: GREY, 5: GREY})
     q = G.corners(z)

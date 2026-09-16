@@ -67,9 +67,10 @@ def run_witness(w, vv_pairs, cap, rng):
         st, _ = V.fj_status(A[idx])
         status[tuple(sorted(choice.items()))] = st
         red.append(len(idx) - int(np.linalg.matrix_rank(A[idx], tol=1e-9)))
-        for k in vv_rows & set(idx):                       # NO-VV-IND's hypothesis inside this selection
-            if not V.in_span(A, k, [m for m in idx if m != k])[0]:
-                indep += 1
+        for e in vv_pairs:                                 # NO-VV-IND's hypothesis inside this selection: the VV row
+            for k, kk in ((e['rowA'], e['rowB']), (e['rowB'], e['rowA'])):   # outside the span of the selection's other
+                if k in idx and not V.in_span(A, k, [m for m in idx if m != k] + [kk])[0]:   # rows AND the partner row
+                    indep += 1
     out['n_selections'] = len(status)
     out['rows_per_selection'] = [min(len(i) for _, i in selections(rows, cap, rng)), max(len(i) for _, i in selections(rows, cap, rng))]
     out['redundancy_min_max'] = [min(red), max(red)]

@@ -50,14 +50,17 @@ def main():
     n_dep = sum(1 for o in cen for e in o['vv'] if e['load_range'] is not None and e['gA_in_span'])
     n_ind_loaded = sum(1 for o in cen for e in o['vv'] if e['load_range'] is not None and not e['gA_in_span'] and e['load_range'][1] > 1e-5)
     full = sum(1 for o in cen if o['n_rows'] - o['rank_deficiency'] >= 3 * o['n'] + 1)
-    L += ['Tilted VV rows whose gradient is OUTSIDE the span of the other active rows: %d, of which loadable: %d (the theorem says 0).  '
-          'Inside the span (dependent, over-braced): %d -- every loadable tilted VV contact is of this kind.  The active row matrix has '
-          'FULL rank 3n + 1 at %d of %d witnesses (all rows of A217's active set: both axes of every flush pair, line rows), so the '
-          'hypothesis of NO-VV-IND never holds on this data as a whole; per consistent selection (select235): the VV row is independent '
-          'of the selection's other rows in %d selection-instances over %d witnesses (rows per selection %s, redundancy rows - rank %s).' % (
-              n_ind, n_ind_loaded, n_dep, full, len(cen), sum(o.get('n_vv_row_independent_in_a_selection', 0) for o in sel), len(sel),
+    ind_w = [o['name'] for o in sel if o.get('n_vv_row_independent_in_a_selection', 0) > 0]
+    L += ['Tilted VV rows whose gradient is OUTSIDE the span of the other active rows (partner row included): %d, of which loadable: '
+          '%d (the theorem says 0).  Inside the span (dependent, over-braced): %d -- every loadable tilted VV contact is of this kind.  '
+          'The full active row set (A217: both axes of every tied pair, line rows) has rank 3n + 1 at %d of %d witnesses.  Per consistent '
+          'selection (select235, %d witnesses): rows per selection %s against 34 coordinates, redundancy rows - rank %s; the VV row is '
+          'independent of the other rows of the selection and of its partner in %d selection-instances, all at %s -- exactly the witnesses the '
+          'two-selection test excludes (NO-VV-IND applies there and forces the contact unloaded in those selections, which is what fails).' % (
+              n_ind, n_ind_loaded, n_dep, full, len(cen), len(sel),
               [min(o['rows_per_selection'][0] for o in sel), max(o['rows_per_selection'][1] for o in sel)] if sel else '-',
-              [min(o['redundancy_min_max'][0] for o in sel), max(o['redundancy_min_max'][1] for o in sel)] if sel else '-'), '',
+              [min(o['redundancy_min_max'][0] for o in sel), max(o['redundancy_min_max'][1] for o in sel)] if sel else '-',
+              sum(o.get('n_vv_row_independent_in_a_selection', 0) for o in sel), ', '.join(ind_w) or 'none'), '',
           '## 3. The loadable tilted VV contacts of the HELD / CROWD witnesses: first order, rolling plane, complete local test', '',
           '| witness | class | s | pair | tilt gap | load range | necessary | sel_A / sel_B | all-selection FJ (n sel) | rolling plane S_A / S_B | verdict |',
           '|---|---|---|---|---|---|---|---|---|---|---|']
