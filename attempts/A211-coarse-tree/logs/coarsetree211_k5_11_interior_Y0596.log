@@ -460,3 +460,41 @@
    Lemma POCKET at R0+.4.2.3.p1: 1 pockets (k=10, m=1): the next square instantiated in each
    node R0+.4.2.3.p1.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (2.0 s, 1 rounds; t=1642.4)
    node R0+.4.2.3.p2 d4 pocket<-[1]: INTERNAL (1.8 s, 1 rounds; t=1645.2)
+02:15:56 [fr4] start k5_11_interior_Y0596 wall 1800 (lab 4, free 17465 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0596_zero_s0.json)
+   INHERIT k5_11_interior_Y0596 pad zero: 1 prior trees, 230 paths, 7 branches inherited DEAD (final, with their certificates), 7 start nodes (0 from the A203 root)
+== k5_11_interior_Y0596 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0596_zero_s0.json; basins []; INHERIT 7 dead branches (final) + 7 start nodes ['R.4.2.3.p2', 'R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103)', 'R0+.4.2+/TL(1,0)', 'R0+.4.2+/TL(1,0)', 'R0+.4+/BL(1,1)', 'R0+.4+/BL(1,1)', 'R0+.4+/BL(1,1)']; H [2.218, 2.358, 1.38, 1.519, 64.011, 73.74]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1          BR(0,1)<-(18,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json
+   INHERITED DEAD R.2          BR(0,1)<-(21,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json
+   INHERITED DEAD R.3          BR(0,1)<-(22,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json
+   INHERITED DEAD R.4.1        BL(1,1)<-(7,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json
+   INHERITED DEAD R.4.2.1      TL(1,0)<-(9,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json
+   INHERITED DEAD R.4.2.2      TL(1,0)<-(13,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json
+   INHERITED DEAD R.4.2.3.p1   (2.587069, 3.377084, 3.012439, 3.377084)<-(0,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json
+   node R.4.2.3.p2 d0 root: INTERNAL (7.6 s, 1 rounds; t=8.0)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 8 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.4.2.3.p2 d0: DEAD by NOROOM-POCKET -- no-room at R.4.2.3.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   start R.4.2.3.p2   => DEAD (1 nodes; t = 16 s of 1800.0)
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103): ancestor R0+.4.2.3 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json) refused (KeyError('node R0+.4.2.3 carries no snapshot')) -- climbing to the next complete ancestor
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103): ancestor R0+.4.2 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json) refused (KeyError('node R0+.4.2 carries no snapshot')) -- climbing to the next complete ancestor
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103): ancestor R0+.4 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json) refused (KeyError('node R0+.4 carries no snapshot')) -- climbing to the next complete ancestor
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103): ancestor R0+ (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json) refused (KeyError('node R0+ carries no snapshot')) -- climbing to the next complete ancestor
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103): applied step 1/4 -- BR(0,1) <- [23]
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103): applied step 2/4 -- BL(1,1) <- [8]
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103): applied step 3/4 -- TL(1,0) <- [14]
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103): applied step 4/4 -- POCKET [2.4612, 2.4907, 2.6966, 2.7521] as F4
+   node R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103) d0 root: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=39.1)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 87, in draw
+    return fig211.render(doc)
+           ~~~~~~~~~~~~~^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\fig211.py", line 174, in render
+    open(p, "w", encoding="utf-8").write(page_svg(doc))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\esumm\\code\\packing\\docs\\residue_map\\campaigns\\A211-coarsetree\\coarsetree211_k5_11_interior_Y0596.svg'
+   fig211 failed: OSError(22, 'Invalid argument')
+   start R0+.4.2.3+/(2.461234, 2.490725, 2.69659, 2.752103) => DEAD (1 nodes; t = 39 s of 1800.0)
+   start R0+.4.2+/TL(1,0): ancestor R0+.4.2 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json) refused (KeyError('node R0+.4.2 carries no snapshot')) -- climbing to the next complete ancestor
+   start R0+.4.2+/TL(1,0): ancestor R0+.4 (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json) refused (KeyError('node R0+.4 carries no snapshot')) -- climbing to the next complete ancestor
+   start R0+.4.2+/TL(1,0): ancestor R0+ (attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y0596.json) refused (KeyError('node R0+ carries no snapshot')) -- climbing to the next complete ancestor
