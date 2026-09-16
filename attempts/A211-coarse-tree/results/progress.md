@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-15 23:59:07
+# A211 progress -- 2026-09-16 00:04:18
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -64,16 +64,16 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y0186_D00_D00 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 7 |
 | k5_11_interior_Y0127_D04 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 6 |
 | k5_11_interior_Y0127_D04 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 7 |
-| k5_11_interior_Y0036_D07 | g1 | 2 (tree: 25 nodes, depth 6, CC 0, exact 0, NS 0, pockets 1) | ALIVE (wall) | 1831 |
-| k5_11_interior_Y0036_D07 | zero | 2 (tree: 25 nodes, depth 5, CC 0, exact 1, NS 0, pockets 1) | ALIVE (wall) | 2012 |
+| k5_11_interior_Y0036_D07 | g1 | 2 (tree: 28 nodes, depth 2, CC 2, exact 0, NS 0, pockets 0) | DEAD | 189 |
+| k5_11_interior_Y0036_D07 | zero | 2 (tree: 26 nodes, depth 2, CC 2, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 142 |
 | k5_11_interior_Y0105_D03 | g1 | 2 (tree: 19 nodes, depth 5, CC 2, exact 0, NS 2, pockets 1) | ALIVE (wall) | 1844 |
-| k5_11_interior_Y0105_D03 | zero | 2 (tree: 21 nodes, depth 5, CC 4, exact 0, NS 2, pockets 0) | ALIVE (wall) | 1834 |
+| k5_11_interior_Y0105_D03 | zero | 2 (tree: 35 nodes, depth 4, CC 1, exact 0, NS 0, pockets 3) | DEAD (s0-only, WINDOW-PENDING) | 186 |
 | k5_11_interior_Y0186_D00 | g1 | 2 (tree: 25 nodes, depth 7, CC 1, exact 1, NS 4, pockets 1) | ALIVE (wall) | 1897 |
 | k5_11_interior_Y0186_D00 | zero | 2 (tree: 22 nodes, depth 6, CC 2, exact 1, NS 3, pockets 1) | ALIVE (wall) | 1915 |
 | k5_11_interior_Y0186_D01 | g1 | 2 (tree: 47 nodes, depth 5, CC 3, exact 0, NS 1, pockets 1) | ALIVE (wall) | 1811 |
 | k5_11_interior_Y0186_D01 | zero | 2 (tree: 44 nodes, depth 5, CC 2, exact 0, NS 1, pockets 0) | ALIVE (wall) | 1852 |
 | k5_11_interior_Y0217_D02 | g1 | 2 (tree: 18 nodes, depth 6, CC 3, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1836 |
-| k5_11_interior_Y0217_D02 | zero | 2 (tree: 20 nodes, depth 7, CC 2, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1853 |
+| k5_11_interior_Y0217_D02 | zero | 2 (tree: 36 nodes, depth 3, CC 3, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 224 |
 | k5_11_interior_Y0217_D03 | g1 | 2 (tree: 18 nodes, depth 6, CC 4, exact 1, NS 3, pockets 0) | ALIVE (wall) | 1930 |
 | k5_11_interior_Y0217_D03 | zero | 2 (tree: 20 nodes, depth 5, CC 4, exact 0, NS 5, pockets 1) | ALIVE (wall) | 1861 |
 | k5_11_interior_Y0217_D06 | g1 | 2 (tree: 17 nodes, depth 5, CC 3, exact 0, NS 4, pockets 1) | ALIVE (wall) | 1847 |
@@ -237,11 +237,11 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y0597 | zero | 2 (tree: 91 nodes, depth 8, CC 6, exact 0, NS 5, pockets 10) | DEAD (s0-only, WINDOW-PENDING) | 442 |
 | k5_11_interior_Y0636 | zero | 2 (tree: 79 nodes, depth 5, CC 4, exact 0, NS 0, pockets 2) | DEAD (s0-only, WINDOW-PENDING) | 225 |
 
-CPU-h in this block: 50.65
+CPU-h in this block: 48.76
 
 ## Price and projection
 
 * gallery: 17 / 18 pages DEAD at the window pad, 8.84 CPU-h
-* frontier: 89 nodes run (49 DEAD at the window pad), 50.65 CPU-h; the census has 251 alive nodes, 214 remaining
-* PRICE over the first 20 frontier nodes: mean 2999 s, median 3677 s per node (both pads); PROJECTION for the remaining 214: 178.3 CPU-h (cap 200)
+* frontier: 89 nodes run (50 DEAD at the window pad), 48.76 CPU-h; the census has 250 alive nodes, 214 remaining
+* PRICE over the first 20 frontier nodes: mean 2659 s, median 3654 s per node (both pads); PROJECTION for the remaining 214: 158.1 CPU-h (cap 200)
 
