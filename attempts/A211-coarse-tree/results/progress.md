@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-16 01:58:28
+# A211 progress -- 2026-09-16 01:59:27
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -193,7 +193,7 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y0376 | g1 | 2 (tree: 62 nodes, depth 4, CC 2, exact 0, NS 0, pockets 1) | DEAD | 189 |
 | k5_11_interior_Y0376 | zero | 2 (tree: 59 nodes, depth 4, CC 0, exact 0, NS 0, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 161 |
 | k5_11_interior_Y0321 | g1 | 2 (tree: 225 nodes, depth 9, CC 9, exact 0, NS 11, pockets 44) | ALIVE (wall) | 1804 |
-| k5_11_interior_Y0321 | zero | 2 (tree: 242 nodes, depth 8, CC 7, exact 0, NS 12, pockets 49) | ALIVE (wall) | 1801 |
+| k5_11_interior_Y0321 | zero | 2 (tree: 3 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 44 |
 | k5_11_interior_Y0355 | g1 | 2 (tree: 222 nodes, depth 8, CC 8, exact 0, NS 10, pockets 44) | ALIVE (wall) | 1800 |
 | k5_11_interior_Y0355 | zero | 2 (tree: 241 nodes, depth 7, CC 9, exact 0, NS 12, pockets 47) | ALIVE (wall) | 1804 |
 | k5_11_interior_Y0380 | g1 | 2 (tree: 78 nodes, depth 8, CC 2, exact 0, NS 6, pockets 8) | DEAD | 396 |
@@ -237,11 +237,11 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y0597 | zero | 2 (tree: 91 nodes, depth 8, CC 6, exact 0, NS 5, pockets 10) | DEAD (s0-only, WINDOW-PENDING) | 442 |
 | k5_11_interior_Y0636 | zero | 2 (tree: 79 nodes, depth 5, CC 4, exact 0, NS 0, pockets 2) | DEAD (s0-only, WINDOW-PENDING) | 225 |
 
-CPU-h in this block: 29.90
+CPU-h in this block: 29.42
 
 ## Price and projection
 
 * gallery: 17 / 18 pages DEAD at the window pad, 8.84 CPU-h
-* frontier: 89 nodes run (77 DEAD at the window pad), 29.90 CPU-h; the census has 223 alive nodes, 214 remaining
+* frontier: 89 nodes run (77 DEAD at the window pad), 29.42 CPU-h; the census has 223 alive nodes, 214 remaining
 * PRICE over the first 20 frontier nodes: mean 537 s, median 444 s per node (both pads); PROJECTION for the remaining 214: 31.9 CPU-h (cap 200)
 
