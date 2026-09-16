@@ -1,0 +1,13 @@
+08:48:52 [fr2] start k5_16_interior_Y0130 wall 1800 (lab 4, free 18476 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y0130 at the zero pad: ALIVE in 17959 ms; kills {'H-clip': 0, 'P': 5108, 'W': 1297, 'C': 1156, 'M': 4168, 'L': 7, 'R': 3187, 'X': 558}; CSP units 512 -> 512 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0130 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0130 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0130_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.358, 2.498, 2.358, 2.498, 82.372, 90.0]; forced H []; 6 slots; free squares 5
+   node R0+        d0 root: INTERNAL (2.8 s, 1 rounds; t=2.9)
+   node R0+.1      d1 TL(1,0)<-[8]: INTERNAL (1.8 s, 1 rounds; t=4.9)
+   node R0+.1.1    d2 TR(0,1)<-[16]: INTERNAL (2.3 s, 1 rounds; t=7.3)
+   node R0+.1.1.1  d3 BL(1,0)<-[5]: INTERNAL (3.2 s, 1 rounds; t=10.6)
+   no-room (k=9, m=2): UNDECIDED in 22 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.1: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.1.1.p1 d4 pocket<-[0]: INTERNAL (8.4 s, 1 rounds; t=41.8)
