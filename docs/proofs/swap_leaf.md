@@ -30,14 +30,14 @@ Lean `Statements/SwapLeaf.lean`.  n-general throughout; n = 11 in §3–§4.
 > asks, at every corner, for **ten** pairwise interior-disjoint unit squares in `[0, 3.82]²`, one at the
 > corner slot, all missing `H`'s reach set — an object barely weaker than the theorem itself (`s(10)` =
 > 3.70711, slack 0.113, against a reach set of area 1.64–1.82 sitting in the middle of the container).  The
-> search places 6–7 of the 10 at the best corner of each cell; one round of A185's split into 16 children
+> search places 6–9 of the 10 — ONE SHORT on several cells; one round of A185's split into 16 children
 > changes nothing (Lemma SPLIT-INVARIANCE).  So **the PI's hope does not come off from the k0 ROOT cells:
 > STEP on W is not certifiable cell-wise there, and k0_00's row is unchanged.**
 > **[M] the machinery is not at fault**: the geometry controls (n = 5, no k1-a claim) produce and PASS
 > `|X| = 1` (K0-FREE), `|X| = 2` (STEP) and `|X| = 5` certificates end to end, and seven corruption tests of
 > a passing certificate are all refused.
 > **[C]/price.** The leaf becomes available exactly where the cell boxes most of the squares.  At
-> `k0_route.md` §4.1's crowd-conditioned root `H_B` (the four corner crowds, EIGHT boxed roles) `u = 3` and
+> `k0_route.md` §4.2's crowd-conditioned root `H_B` (the four corner crowds, EIGHT boxed roles) `u = 3` and
 > `|X| = 5` at a corner — the right place to fire it; reaching such nodes is the k0 cascade, priced at
 > `k0_route.md` §8 (3 200–7 000 CPU-h).  The leaf does not replace that cascade; it is a LEAF for it.
 
@@ -128,8 +128,8 @@ conditioned square `H`, tilt bin 30°–45°, centre box ≈ 0.105 × 0.105) and
 the single role outside `X` at three or four corners, and `|X| = 10` at every corner of every cell.  The
 reach set of `H` in the corner frame takes 1.64–1.82 of area out of the 14.59 of `[0, 3.82]²` and sits in
 its middle.  The search (bottom-left lattice fill with randomised restarts, plus tilted leftovers by
-clearance, every pose re-decided by the verifier) places 6–7 cells; with no obstacle at all the same search
-places 9.  One round of A185's split, 16 children (2 × 2 centre × 4 tilt) at the best corner of each cell,
+clearance, every pose re-decided by the verifier) places 6–9 cells — ONE SHORT of the ten on several cells; with no obstacle at all the same search
+places 9 (the axis maximum in a container of side < 4).  One round of A185's split, 16 children (2 × 2 centre × 4 tilt) at the best corner of each cell,
 raises nothing — as Lemma SPLIT-INVARIANCE says it cannot.
 
 **[F] "|X| = 2 with X = the two corner meeters is the PI's STEP" is right as a statement of the leaf and

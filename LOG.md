@@ -9198,8 +9198,8 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
 - **[M]/[F] the eleven k0v4 cells:** each is A115's record with ONE hypothesis box (the conditioned square `H`,
   30-45 deg) and budget 10, so `u = 10` and `|X| = 10` at every corner of every cell.  The leaf then asks for a
   ten-square packing of `[0, 3.82]^2` (`s(10)` = 3.70711, slack 0.113) with one member at the corner slot, all
-  avoiding `H`'s reach set (1.64-1.82 of area, in the middle of the container).  The search places 6-7 (the same
-  search places 9 with no obstacle at all); one round of A185's split, 16 children at the best corner of each
+  avoiding `H`'s reach set (1.64-1.82 of area, in the middle of the container).  The search places 6-9 -- ONE SHORT of the
+  ten on several cells (the same search places 9 with no obstacle at all, the axis maximum below side 4); one round of A185's split, 16 children at the best corner of each
   cell, raises nothing -- as SPLIT-INVARIANCE says it cannot.  **So STEP is NOT certifiable cell-wise from the
   k0 ROOT cells and "the search can ignore k0" does not come off; k0_00's row is unchanged.**
 - **[M] the machinery is not at fault:** the n = 5 geometry controls (no k1-a claim -- an `|X| = 2` control
