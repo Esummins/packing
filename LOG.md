@@ -9252,3 +9252,32 @@ worker was lost (all committed `rc=0` either side of that minute) and the resuma
   `docs/residue_map/campaigns/A233-local-lock/` (2 pages, 11 panels, geometry check printed per panel),
   `lean/.../Statements/Open/LocalLock.lean` (+ one import line in `Statements.lean`; build + audit exit 0, no sorry),
   registry row, ledger s.4 note.
+
+## 2026-09-15 21:xx -- A234-handedness (Fable) -- DONE (launch-and-exit; the probe 64 s, tests 20 s, pages 15 s; no Lean: nothing separates): **TORQUE-ID stated and proved in three forms for every n (about the centre = the handedness sum S = C + F; no per-wall identity; Lemma ARM-MOMENT about each corner point); probed on 1,393 stressed witnesses; NO handedness count separates a four-crowd from an optimum -- the four global identities are satisfiable by the wall rows alone on 178/193 four-crowds, what fails there is the per-square balance; Trump and the ring share a torque-neutral wall reservoir and a circulation slack by the factor s - 1**
+- PI, 19:00: *"counting handedness across the container, since a convex shape can't provide a net torque; that would allow Trump et al. AND extend up in n."*
+- **[T] TORQUE-ID** (`docs/proofs/handedness.md` s.1): (G) sum over wall rows of lam (q - O) x n_w = 0 at every FJ point (each square's
+  moment about O vanishes, pair rows cancel at their common point) = sum tau^wall + C = 0, C the wall pressure's circulation (first
+  moments about the wall midpoints); with Lemma W (tau^wall = -chi W d) the HANDEDNESS SUM S = sum_{tilted} chi W d = C + F, F the flat
+  touchers' self-torque, free in [-W/2, W/2] each.  (W) no per-wall identity: a wall's pressure is pinned only by the global identities
+  (polytope span up to 1.0).  (K) Lemma ARM-MOMENT: about a corner point the arm's floor rows turn it one way (>= 0), its wall rows the
+  other (<= 0), the external pair rows supply the difference -- RADIAL's rotational twin, the arm's rigid-body equilibrium.  [M] residual
+  <= 3e-5 on 1,393 witnesses, <= 6e-6 on 1,363 doubly-met corners; Lemma W's sign 2,920/2,920 loaded tilted touchers.
+- **[M] the probe** (`hand234.{jsonl,md}`): A217's 486 witnesses (193 four-crowds), the 883 genuine free FJ points, Trump, S02, S07, 21 record
+  packings n = 5..55 -- every one with a bounded FJ stress; per square chi, N, d, W, tau^wall, tau^contact (along-wall / interior), tau^ext;
+  per wall P, M_c, M_q, handedness mix, touchers with perimeter coordinates; per corner the arm moments; LP ranges of C, S, F, S_meet, P_w
+  over the multiplier polytope.
+- **[F] no candidate separates**: (a) perimeter flips: Trump 0, ring 2, four-crowds {0: 56, 2: 125, 4: 12}, free FJ points {0, 2}; mixed
+  walls FJ 0-2, FOUR 0-3.  (b) anti-aligning demand vs supply: the along-wall / interior split is unconstrained (shares -0.17..1.2); only
+  the external share is nonzero on four-crowds -- RING again.  (c) |C|/bound: Trump 0.029, ring 0.088, FJ <= 0.33, FOUR <= 0.66; |S|
+  overlaps everywhere; S_meet: 324 of 1,544 four-crowd meeters carry no wall load.  19 scalars tabulated: the only YES is ext_load.
+- **[M] the global relaxation** (`global234.py`): {lam >= 0 on the WALL rows; sum F = 0; sum moment about O = 0; far sum = 1} is FEASIBLE
+  on 178/193 four-crowds (the 15 others have a wall with no contact or a single one), 292/293 W3, 3/3 optima: every inequality derivable
+  from TORQUE-ID + Lemma W + pressure bounds holds at a four-crowd; RING's infeasibility is the PER-SQUARE balance (TWO-CONTACT, HOLD).
+- **[T]+[M] what Trump and the ring share** (s.4): |tau^wall| <= W/2 per toucher but the circulation's reach is (s - 1) P/2, so the
+  identity is slack by the factor s - 1 at every n >= 5; Trump's six flush squares are a torque-neutral reservoir (F ranges [-0.21, 0.12],
+  S = 0.035 fixed, C in [-0.08, 0.25]); the ring's +/- pairs are the same reservoir (F = 0, S in [-0.117, 0.117], C in [-0.23, 0.27]); a
+  handedness count sees a flat square and a +/- pair identically.  The residue stays LOCKED-CROWD-FREE(n); k0_00 unchanged.
+- Files: `attempts/A234-handedness/{code,results,logs}`, `docs/proofs/handedness.md`, `docs/residue_map/campaigns/A234-handedness/`
+  (`wall_pressure_chi.svg`: the ring, Trump, S07, S02 with chi fills and the wall forces as arrows; `perimeter_handedness.svg`: the
+  perimeter handedness map on 8 packings; geometry check per panel), registry row, ledger s.4 note.  No Lean file (task 3's condition
+  -- a separating candidate -- is not met).
