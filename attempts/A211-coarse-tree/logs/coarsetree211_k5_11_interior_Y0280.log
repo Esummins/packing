@@ -1,0 +1,22 @@
+17:43:14 [fr1] start k5_11_interior_Y0280 wall 1800 (lab 4, free 10324 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_11_interior_Y0280 at the zero pad: ALIVE in 13342 ms; kills {'H-clip': 0, 'P': 2334, 'W': 864, 'C': 614, 'M': 2340, 'L': 9, 'R': 2688, 'X': 907}; CSP units 472 -> 472 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_11_interior_Y0280 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_11_interior_Y0280 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0280_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.218, 2.358, 1.38, 1.519, 73.74, 82.372]; forced H []; 4 slots; free squares 5
+   node R0+        d0 root: INTERNAL (19.0 s, 1 rounds; t=19.0)
+   node R0+.1      d1 BL(1,1)<-[7]: INTERNAL (1.1 s, 1 rounds; t=20.2)
+   node R0+.1.1    d2 BR(0,1)<-[18]: INTERNAL (2.1 s, 1 rounds; t=22.3)
+   node R0+.1.1.1  d3 TR(0,0)<-[19]: DEAD by FC r1 (5.2 s, 1 rounds; t=27.5)
+   node R0+.1.1.2  d3 TR(0,0)<-[24]: INTERNAL (2.1 s, 1 rounds; t=29.6)
+   node R0+.1.1.2.1 d4 TL(1,0)<-[14]: INTERNAL (6.6 s, 1 rounds; t=36.3)
+   node R0+.1.1.2.1 d4: DEAD by CC -- rule CC at R0+.1.1.2.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F3 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interio
+   node R0+.1.1.2.2 d4 TL(1,0)<-[19]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=36.6)
+   node R0+.1.2    d2 BR(0,1)<-[22]: INTERNAL (1.8 s, 1 rounds; t=38.5)
+   node R0+.1.2.1  d3 TL(1,0)<-[14]: INTERNAL (6.9 s, 1 rounds; t=45.4)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 8 s (1 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.1.2.1  d3: DEAD by NOROOM-CN -- no-room at R0+.1.2.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the re
+   node R0+.1.2.2  d3 TL(1,0)<-[18]: INTERNAL (2.8 s, 1 rounds; t=55.9)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 12 s (1 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.1.2.2  d3: DEAD by NOROOM-CN -- no-room at R0+.1.2.2 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the re
+   node R0+.1.2.3  d3 TL(1,0)<-[19]: INTERNAL (2.6 s, 1 rounds; t=70.2)
