@@ -342,6 +342,32 @@ window, so closing k4 pays for k3, k3 for k2, down to k0_00 — the K1 climb Rul
 applied to the tier itself.** `corners4` stays where A84 §7.1 and A193 left it: no Trump image, no forced cell, no
 lever until k5_16 closes.
 
+**[T/M] A241 (2026-09-16) — the ROW cascade: A238's "half bookkeeping" is NOT bookkeeping, and the correct
+cascade is Lemma K1 upwards, not downwards.** Two corrections and one campaign. **(i) [T] the rule "row a class
+when every one-slot EXTENSION of it is full-window closed" is unsound.** Lemma K1 (`instratum_bridge.md` E.1)
+climbs UP containment; a packing whose skeleton is *exactly* C carries no fifth simple square, so C's extension
+classes never apply to it. What closed extensions give is **Lemma SLOT-CROWD** — every usable slot of C is met by
+≥ 2 non-pin squares, i.e. C's FORCED CELLS (the traction A238 measured) — and promoting that to "C is empty" is
+the crowd certificate CS(S; …) of `slot_crowds.md` §4, which **A94 measured does not certify** (B₂–B₄ FAIL, 30–32
+exact holes; the Trump-image ceiling voids the chain for k4_03 / k4_06 / k4_08 anyway). So a row has exactly two
+sources: **(A)** a direct `parametric-kill-certificate-v1` 4D PASS over the window + canary C2, and **(B)** the
+Lemma K1(i) climb (a class CONTAINING a rowed class inherits its row). **(ii) [T] A55's eight exact k4 kills were
+never one edit away from being rows.** `closed_disjoint_bridge.md` B.2 prices the corpus (A55's ten certificates
+included): ρ ≈ 1.0000009·10⁻⁹, A = 5/2, so (H′) reads s″/m − 1 < 4.0·10⁻¹⁰ — an s0-anchored PASS instantiates the
+kill at **no side of [3.82, ŝ] whatsoever**, and A55's "scales 1.048–1.164" are LP mass slack, not a window. The
+window statement is A56's parametric layer re-run on A55's base certificates, and that is a compute campaign
+(`attempts/A241-row-cascade/code/param241.py`, anchoring ladder gap → nearest-wall → mid-band, 4D over
+[191/50, 969271/250000], C2 at 191/50 / mid / s0). **(iii) [M] the tier splits three ways** (`results/rows241.md`):
+`k3_00` + the eight A55-killed k4 classes are rowable **today, blocked on nothing but CPU** (and `k4_00 / 01 / 02`
+each CONTAIN `k3_00`, D4 `id` — A55 `cap.json`'s own witness — so they row by (B) free once `k3_00` lands); the six
+protected k4 classes and the ten open k ≤ 3 classes can **never** be rowed by a certificate of this kind (K1(ii):
+each is ≤ an open k5 class, so τ* ≥ 11 − |S|), only by P-TREE's obligation O1 after the frontier; and the protected
+k4 cells that extend into `trump5` / `k5_11` / `k5_16` wait on the frontier for their **forced cells**, not for a
+row (`corners4` 0/8 is the extreme case). The cascade itself (`code/rowcascade241.py`, sources (A)+(B) only,
+idempotent, atomic write with backup `scoreboard.json.bak_pre_a241`) is wired into
+`docs/shadows/status_loop.sh` every 10 minutes, so each class rows itself the moment its verification lands.
+
+
 
 
 **[M] A187 (2026-09-09) — the basin containment map: the residue is NOT basin-shaped, and the missing minimisers are
