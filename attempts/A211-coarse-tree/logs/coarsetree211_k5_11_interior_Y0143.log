@@ -1,0 +1,16 @@
+17:36:11 [fr1] start k5_11_interior_Y0143 wall 1800 (lab 0, free 14393 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_11_interior_Y0143 at the zero pad: ALIVE in 12741 ms; kills {'H-clip': 0, 'P': 2106, 'W': 478, 'C': 606, 'M': 1578, 'L': 14, 'R': 2609, 'X': 529}; CSP units 512 -> 512 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_11_interior_Y0143 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_11_interior_Y0143 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0143_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [1.519, 1.659, 1.799, 1.939, 82.372, 90.0]; forced H []; 4 slots; free squares 5
+   node R0+        d0 root: INTERNAL (16.0 s, 1 rounds; t=16.1)
+   node R0+.1      d1 BL(1,1)<-[16]: INTERNAL (1.1 s, 1 rounds; t=17.3)
+   node R0+.1.1    d2 BR(0,1)<-[18]: INTERNAL (4.3 s, 1 rounds; t=21.6)
+   node R0+.1.1.1  d3 TL(1,0)<-[8]: INTERNAL (7.7 s, 1 rounds; t=29.3)
+   node R0+.1.1.1r1 d3 root<-None: DEAD by EmptyBox r1 (2.6 s, 1 rounds; t=32.0)
+   node R0+.1.1.2  d3 TL(1,0)<-[9]: INTERNAL (2.1 s, 1 rounds; t=34.2)
+   node R0+.1.1.2.1 d4 TR(0,0)<-[19]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=35.3)
+   node R0+.1.1.2.2 d4 TR(0,0)<-[23]: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=35.4)
+   node R0+.1.1.2.3 d4 TR(0,0)<-[24]: INTERNAL (5.7 s, 1 rounds; t=41.1)
+   node R0+.1.1.2.3 d4: DEAD by CC -- rule CC at R0+.1.1.2.3 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interio
