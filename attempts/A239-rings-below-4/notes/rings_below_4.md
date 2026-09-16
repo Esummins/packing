@@ -71,8 +71,8 @@ the partner B of tilt θ ∈ (0°, 90°) with sin θ ≤ δ (TILT-MIN (a)) and l
 tan θ (TILT-MIN (b)), sharp in mode (a): B's leftmost vertex on the wall, its lower edge through A's corner.  Trump's
 own crowd is of type F (δ = 0.8445, θ = 40.18°).
 
-**Lemma REACH (type F, mode (a)).**  Along A's wall the crowd occupies [0, 1 + δ] (A's far edge; B stays behind
-u = 1 + ... only through its vertex region, TILT-MIN); along the other wall it occupies [0, y_v + w(θ)] with
+**Lemma REACH (type F, mode (a)).**  Along A's wall the crowd occupies [0, 1 + δ] (A's far edge; B's rightmost
+vertex is at sin θ + cos θ < 1 + δ, behind it); along the other wall it occupies [0, y_v + w(θ)] with
 y_v = 1 − (δ − sin θ) tan θ the height of B's lowest vertex and w(θ) = cos θ + sin θ its extent: **reach 1 + R′,
 R′ = w(θ) − (δ − sin θ) tan θ**.  Two type-F crowds at the two ends of a wall of side s, alternating (one presents
 its flat meeter to the wall, the other its tilted one — the only way two flat meeters do not overlap on a wall of
