@@ -1,0 +1,29 @@
+03:50:09 [fr1] start k5_11_interior_Y0866 wall 1800 (lab 4, free 11109 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_11_interior_Y0866 at the zero pad: ALIVE in 13951 ms; kills {'H-clip': 0, 'P': 6132, 'W': 1787, 'C': 1424, 'M': 4687, 'L': 14, 'R': 1327, 'X': 2}; CSP units 512 -> 512 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_11_interior_Y0866 pad zero: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_11_interior_Y0866 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0866_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.218, 2.358, 2.218, 2.358, 14.25, 28.072]; forced H []; 4 slots; free squares 5
+   node R0+        d0 root: INTERNAL (2.5 s, 1 rounds; t=2.6)
+   node R0+r1      d0 root<-None: DEAD by FC r1 (1.2 s, 1 rounds; t=3.9)
+   start R0+          => DEAD (2 nodes; t = 4 s of 1800.0)
+   => DEAD (zero_page) in 3.9 s: 1 start runs, 2 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 1 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 1 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 2.5s; R0+r1 d0 DEAD FC 1.2s
+== stage 0 + CSP k5_11_interior_Y0866 at the g1 pad: ALIVE in 13962 ms; kills {'H-clip': 0, 'P': 6150, 'W': 1819, 'C': 1428, 'M': 4760, 'L': 14, 'R': 1331, 'X': 6}; CSP units 512 -> 512 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_11_interior_Y0866 pad g1: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_11_interior_Y0866 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y0866_g1_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.218, 2.358, 2.218, 2.358, 14.25, 28.072]; forced H []; 4 slots; free squares 5
+   node R0+        d0 root: INTERNAL (1.6 s, 1 rounds; t=1.6)
+   node R0+r1      d0 root<-None: DEAD by FC r1 (1.0 s, 1 rounds; t=2.7)
+   start R0+          => DEAD (2 nodes; t = 3 s of 1800.0)
+   => DEAD (g1_page) in 2.7 s: 1 start runs, 2 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 1 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 1 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 1.6s; R0+r1 d0 DEAD FC 1.0s
+== k5_11_interior_Y0866: g1 DEAD | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 64, 'misses': 28, 'entries': 28}; clip {'hits': 1163, 'misses': 3459, 'entries': 3459}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 92, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 4}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 64, 'obs_misses': 28, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 28, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   gallery: C:\Users\esumm\code\packing\docs\residue_map\campaigns\A211-coarsetree\coarsetree211_gallery.svg
