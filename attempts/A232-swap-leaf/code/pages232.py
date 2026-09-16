@@ -29,7 +29,7 @@ import verify_swap232 as V                                       # noqa: E402
 PAGES = os.path.join(ROOT, "docs", "residue_map", "campaigns", "A232-swap-leaf")
 PX = 98.0
 PAD = 30
-NOTE = 132
+NOTE = 182
 
 
 def esc(t):
@@ -79,7 +79,15 @@ class Page:
     def note(self, k, lines, size=10.4):
         ox, oy = self.org(k)
         y = oy + PX * self.side + 15
+        wrapped = []
         for t in lines:
+            while len(t) > 74:
+                cut = t.rfind(" ", 0, 74)
+                cut = cut if cut > 40 else 74
+                wrapped.append(t[:cut])
+                t = "   " + t[cut:].lstrip()
+            wrapped.append(t)
+        for t in wrapped:
             self.o.append('<text x="%d" y="%.1f" font-size="%.1f" fill="#222">%s</text>'
                           % (ox, y, size, esc(t)))
             y += 12.6
@@ -126,7 +134,7 @@ def draw_cell_page(rec, cell):
         for r in outside:
             for b in C.normalised_pieces(r, corner):
                 boxes.append(b)
-                g = S.reach_poly(b)
+                g = C.reach_poly(b)
                 pg.poly(k, list(g.exterior.coords)[:-1], "url(#stip)", "#777", 1.1,
                         label="reach %s" % r["name"])
                 pg.rect(k, float(b[0]), float(b[2]), float(b[1]), float(b[3]),
@@ -146,8 +154,9 @@ def draw_cell_page(rec, cell):
             "the REACH SET of a role outside X (every pose of its pulled-back, flipped box) -- the",
             "leftovers must miss it; thin orange dashed = that role's centre box.  Blue = the slot",
             "square S; orange = the leftover cells the search placed.",
-            "LEAF: |X| = %d cells needed, %d found  ->  %s" % (
-                cr["need"], cr["found"],
+            "LEAF: |X| = %d cells needed; %d DRAWN here (the page re-runs the search under an "
+            "8 s wall; the campaign row's best at this corner was %d)  ->  %s" % (
+                cr["need"], len(cells), cr["found"],
                 "DEAD by SWAP-LEAF (verify_swap232 %s)" % cr.get("verified")
                 if cr.get("verified") == "PASS" else "UNDECIDED (no certificate)"),
             "X = %s   (every UNBOXED role is forced into X: its reach is the whole container)"
@@ -178,6 +187,9 @@ def main():
         if "cells_drawn" not in rec:                              # re-run the search for the page
             rec["cells_drawn"] = {}
             for cr in rec["corners"]:
+                if cr.get("cells"):
+                    rec["cells_drawn"][str(cr["corner"])] = cr["cells"]
+                    continue
                 X, outside, obst = C.role_sets(cell, cr["corner"])
                 boxes = [b for r in cell["roles"] if r["name"] in outside
                          for b in C.normalised_pieces(r, cr["corner"])]
