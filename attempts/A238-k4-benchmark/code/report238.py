@@ -111,7 +111,7 @@ def summarise(cls, items):
         snap_h += (r.get("snap") or {}).get("handoffs") or 0
         depth_hist[r.get("max_depth")] += 1
     return dict(cls=cls, cover=cov, head=H, extra=E, all=allp, root=(dict(verdict=root.get("verdict"), seconds=root.get("priced_seconds") or root.get("seconds"),
-                n_nodes=root.get("n_nodes"), gate=(root.get("gate_root") or {}).get("contains")) if root else None),
+                n_nodes=root.get("n_nodes"), gate=root.get("gate_root")) if root else None),
                 rules=dict(rules), gate_hits=gate_hits, tube_leaves=tube_leaves, snap_kills=snap_k, snap_handoffs=snap_h,
                 depth=dict(depth_hist), a100=a100_proj(cls))
 
