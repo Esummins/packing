@@ -1,0 +1,103 @@
+{
+ "format": "swap-leaf-certificate-v1",
+ "n": 5,
+ "cell": "control_X2",
+ "node": "control_X2",
+ "record": "synthetic (A232 control)",
+ "s0": "969271/250000",
+ "m_lo": "191/50",
+ "lambda_max": "969271/955000",
+ "corner": 2,
+ "corner_name": "TR",
+ "roles": [
+  {
+   "name": "F0",
+   "pieces": []
+  },
+  {
+   "name": "F1",
+   "pieces": []
+  },
+  {
+   "name": "B0",
+   "pieces": [
+    {
+     "x0": 2.39,
+     "x1": 2.4099999999999997,
+     "y0": 2.39,
+     "y1": 2.4099999999999997,
+     "th0": 0.0,
+     "th1": 0.0
+    }
+   ]
+  },
+  {
+   "name": "B1",
+   "pieces": [
+    {
+     "x0": 3.59,
+     "x1": 3.6099999999999994,
+     "y0": 2.39,
+     "y1": 2.4099999999999997,
+     "th0": 0.0,
+     "th1": 0.0
+    }
+   ]
+  },
+  {
+   "name": "B2",
+   "pieces": [
+    {
+     "x0": 2.39,
+     "x1": 2.4099999999999997,
+     "y0": 3.59,
+     "y1": 3.6099999999999994,
+     "th0": 0.0,
+     "th1": 0.0
+    }
+   ]
+  }
+ ],
+ "X": [
+  "F0",
+  "F1",
+  "B0",
+  "B1",
+  "B2"
+ ],
+ "cells": [
+  {
+   "kind": "axis",
+   "x": "0",
+   "y": "0"
+  },
+  {
+   "kind": "axis",
+   "x": "1",
+   "y": "0"
+  },
+  {
+   "kind": "axis",
+   "x": "2",
+   "y": "0"
+  },
+  {
+   "kind": "axis",
+   "x": "0",
+   "y": "1"
+  },
+  {
+   "kind": "axis",
+   "x": "1",
+   "y": "1"
+  }
+ ],
+ "slot_index": 0,
+ "claim": "SWAP-LEAF (docs/proofs/swap_leaf.md): the 5 cells are pairwise interior-disjoint unit squares in [0, m]^2 for every side m of the window, cell 0 is the TR slot square, and every role outside X misses every cell -- so |M(Pi)| <= |X| = |Pi| and Lemma CELLS (`cells_swap`) exchanges every packing of the cell, at the same side, into one with the corner settled.  With k1-a the cell is DEAD.",
+ "cites": [
+  "swap_packing / cells_swap -- lean Statements/Open/RingSwap.lean (theorems)",
+  "swap_leaf_dead -- lean Statements/SwapLeaf.lean (theorem)",
+  "k1-a -- k0_route.md s.3 (DEPENDENCY: the k1_00 tree)",
+  "K0-WIDEN -- k0_route.md s.4.1 (the pull-back to the original side)"
+ ]
+}
