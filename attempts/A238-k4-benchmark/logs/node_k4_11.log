@@ -3573,3 +3573,43 @@
    node R.1        d1 BR(1,0)<-[5]: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=4.6)
    node R.2        d1 BR(1,0)<-[6]: INTERNAL (1.5 s, 1 rounds; t=6.1)
    node R.2.1      d2 TR(1,0)<-[8]: INTERNAL (3.1 s, 1 rounds; t=9.2)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 9 s (1 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.2.1      d2: DEAD by NOROOM-CN -- no-room at R.2.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the rest h
+   node R.2.2      d2 TR(1,0)<-[9]: INTERNAL (1.2 s, 1 rounds; t=19.3)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 12 s (3 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R.2.2      d2: DEAD by NOROOM-CN -- no-room at R.2.2 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the rest h
+   node R.2.3      d2 TR(1,0)<-[13]: DEAD by FC r1 (3.2 s, 1 rounds; t=34.6)
+   node R.3        d1 BR(1,0)<-[10]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=34.8)
+   node R.4        d1 BR(1,0)<-[11]: INTERNAL (2.1 s, 1 rounds; t=36.9)
+   node R.4.1      d2 TR(1,0)<-[8]: INTERNAL (4.3 s, 1 rounds; t=41.3)
+   Rule NS at the WEDGE at R.4.1: F3 meets / misses the wedge of (F2, BR(1,0)) -- 6 target(s): wedge-e-T=[2.25733,2.87708,0.5,1.0]; wedge-e-T=[1.87708,2.25733,1.0,1.0]; wedge--e-L=[1.87708,2.37709,-0.0,0.72372]; wedge--e-L=[1.87708,1.8
+   node R.4.1.1    d3 BR(1,0)<-['meets W']: INTERNAL (6.0 s, 1 rounds; t=47.5)
+   node R.4.1.1.1  d4 BL(0,2)<-[3]: DEAD by EmptyBox r1 (2.3 s, 1 rounds; t=50.2)
+   node R.4.1.1.2  d4 BL(0,2)<-[4]: INTERNAL (4.6 s, 1 rounds; t=54.9)
+   Rule NS at the WEDGE at R.4.1.1.2: F4 meets / misses the wedge of (F1, TR(1,0)) -- 6 target(s): wedge--e-B=[1.87708,2.37709,2.87708,3.37708]; wedge--e-B=[2.37709,2.87708,2.87708,2.87708]; wedge-e^-L=[1.87708,2.37709,3.05975,3.87708]; we
+   node R.4.1.1.2.1 d5 TR(1,0)<-['meets W']: INTERNAL (4.6 s, 1 rounds; t=59.7)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.4.1.1.2.1 d5: DEAD by NOROOM -- no-room at R.4.1.1.2.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.4.1.1.2.2 d5 TR(1,0)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=61.6)
+   node R.4.1.1.3  d4 BL(0,2)<-[9]: INTERNAL (3.5 s, 1 rounds; t=65.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.4.1.1.3  d4: DEAD by NOROOM -- no-room at R.4.1.1.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.4.1.2    d3 BR(1,0)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=68.5)
+   node R.4.2      d2 TR(1,0)<-[9]: INTERNAL (1.7 s, 1 rounds; t=70.2)
+   Rule NS at the WEDGE at R.4.2: F3 meets / misses the wedge of (F2, BR(1,0)) -- 6 target(s): wedge-e-T=[2.25733,2.87708,0.5,1.0]; wedge-e-T=[1.87708,2.25733,1.0,1.0]; wedge--e-L=[1.87708,2.37709,-0.0,0.72372]; wedge--e-L=[1.87708,1.8
+   node R.4.2.1    d3 BR(1,0)<-['meets W']: INTERNAL (2.3 s, 1 rounds; t=72.7)
+   node R.4.2.1.1  d4 BL(0,2)<-[3]: INTERNAL (1.3 s, 1 rounds; t=74.4)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F4): every pose is impossible -- the case is dead by the pair leaf)
+   node R.4.2.1.1  d4: DEAD by EmptyBox -- no-room at R.4.2.1.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F4): every pose is impossible -- the case is dead by the pair leaf
+   node R.4.2.1.2  d4 BL(0,2)<-[8]: INTERNAL (1.5 s, 1 rounds; t=76.9)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 3 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.4.2.1.2  d4: DEAD by NOROOM-POCKET -- no-room at R.4.2.1.2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.4.2.2    d3 BR(1,0)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=80.4)
+   node R.4.3      d2 TR(1,0)<-[13]: DEAD by FC r1 (1.2 s, 1 rounds; t=81.8)
+   start R            => DEAD (23 nodes; t = 82 s of 300.0)
+   => DEAD (zero_page) in 81.9 s: 0 start runs, 23 nodes, depth 5, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 14 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 20 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R d0 INTERNAL 1.8s; Rr1 d0 INTERNAL 1.3s; R.1 d1 DEAD EmptyBox 1.4s; R.2 d1 INTERNAL 1.5s; R.2.1 d2 DEAD NOROOM-CN 3.1s; R.2.2 d2 DEAD NOROOM-CN 1.2s; R.2.3 d2 DEAD FC 3.2s; R.3 d1 DEAD EmptyBox 0.1s; R.4 d1 INTERNAL 2.1s; R.4.1 d2 INTERNAL 4.3s; R.4.1.1 d3 INTERNAL 6.0s; R.4.1.1.1 d4 DEAD EmptyBox 2.3s; R.4.1.1.2 d4 INTERNAL 4.6s; R.4.1.1.2.1 d5 DEAD NOROOM 4.6s; R.4.1.1.2.2 d5 DEAD FC+EPS 0.0s; R.4.1.1.3 d4 DEAD NOROOM 3.5s; R.4.1.2 d3 DEAD FC+EPS 0.0s; R.4.2 d2 INTERNAL 1.7s; R.4.2.1 d3 INTERNAL 2.3s; R.4.2.1.1 d4 DEAD EmptyBox 1.3s; R.4.2.1.2 d4 DEAD NOROOM-POCKET 1.5s; R.4.2.2 d3 DEAD FC+EPS 0.0s; R.4.3 d2 DEAD FC 1.2s
+== k4_11_c0_Y1119: g1 None | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+== A238 k4_11_c0_Y1119 [k4_11]: {'zero': 'DEAD'} in 92.8 s
