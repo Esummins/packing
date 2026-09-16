@@ -26,6 +26,18 @@ import load238                                                  # noqa: E402
 TIER = ["trump5", "k4_03", "k4_05", "k4_06", "k4_08", "k4_11", "corners4",
         "k3_01", "k3_02", "k3_03", "k3_04", "k3_05", "k2_00", "k2_01", "k2_02", "k1_00", "k0_00"]
 IMAGES = os.path.join(ROOT, "attempts", "A84-protected-trees", "results", "tier84_classes.json")
+OPEN = {"trump5", "k5_11", "k5_16", "k4_03", "k4_05", "k4_06", "k4_08", "k4_11", "k4_13", "corners4",
+        "k3_01", "k3_02", "k3_03", "k3_04", "k3_05", "k2_00", "k2_01", "k2_02", "k1_00", "k0_00"}
+A55_KILLED = {"k4_00", "k4_01", "k4_02", "k4_04", "k4_07", "k4_09", "k4_10", "k4_12"}
+
+
+def why_blocked(ext):
+    """why Theorem FC cannot use this extension: the class is OPEN, or it is closed with no full-window row."""
+    if ext in OPEN:
+        return "OPEN"
+    if ext in A55_KILLED:
+        return "closed by A55 (exact) -- but NO full-window scoreboard row"
+    return "no full-window scoreboard row"
 
 
 def tier84():
@@ -45,7 +57,7 @@ def census():
         d = T84.get(c) or {}
         out.append(dict(cls=c, k=len(CL.pins_of(c)) if c != "k0_00" else 0, n_cells=len(rows), n_usable=len(us),
                         usable=[[r["cell"], r["extension"]] for r in us],
-                        blocked=[[r["cell"], r["extension"]] for r in rows if not r["usable"]],
+                        blocked=[[r["cell"], r["extension"], why_blocked(r["extension"])] for r in rows if not r["usable"]],
                         n_images=d.get("n_images"), image_bearing=bool(d.get("n_images")),
                         pin_sets=d.get("distinct_trump_frame_pin_sets")))
     return out
@@ -66,22 +78,31 @@ def md(rows):
         L.append("| `%s` | %s | %s | %d | **%d** | %s | %s |" % (
             r["cls"], r["k"], r.get("n_images") or 0, r["n_cells"], r["n_usable"],
             ", ".join("%s→%s" % (a, b) for a, b in r["usable"]) or "—",
-            ", ".join("%s→%s" % (a, b) for a, b in r["blocked"]) or "—"))
+            ", ".join("%s→%s [%s]" % (a, b, w) for a, b, w in r["blocked"]) or "—"))
     L += ["", "## The reading", "",
-          "* **trump5 6/6** — every k6 class is closed, so the toolkit has full traction; that is why A211/A212's",
-          "  frontier runs at all.",
-          "* **the k4 tier 3–5 usable** — its extensions are the k5 classes, and all but `trump5` (and, for",
-          "  `corners4`, `k5_16`) are closed. The four image-bearing k4 classes and `k4_05` therefore get forced",
-          "  roles and the geometry bites.",
-          "* **`corners4` 0/8** — every one-slot extension is `k5_16`, which is still OPEN. The shadow class has NO",
-          "  forced cell, so rule CC / no-room / NS / EPS / SNAP have nothing to act on: the toolkit cannot price it",
-          "  until k5_16 closes. (A84 §7.1 reached the same conclusion from the LP side: root τ = 7.25 > 7.)",
-          "* **every k ≤ 3 class 0 usable** — their one-slot extensions are the k4 protected classes, which are",
-          "  themselves open. The toolkit has no lever on them TODAY, and acquires one the moment the k4 tier closes.",
+          "* **`trump5` 6/6** -- every k6 class is closed with a full-window scoreboard row, so the toolkit has full",
+          "  traction; that is why A211 / A212's frontier runs at all.",
+          "* **the k4 tier 3-5 usable** -- its one-slot extensions are k5 classes, and all but `trump5` / `k5_11` /",
+          "  `k5_16` carry a full-window row.  The four image-bearing k4 classes and `k4_05` get forced roles and the",
+          "  geometry bites; the blocked cells are exactly the extensions into the still-open k5 classes -- and the",
+          "  cell blocked by `trump5` IS the fifth simple square, the one A224's Rule SNAP hands off.",
+          "* **`corners4` 0/8** -- all eight one-slot extensions are `k5_16`, still OPEN.  No forced cell, so rule CC /",
+          "  no-room / Rule NS / Rule EPS / Rule SNAP have nothing to act on.  (A193 reached this independently:",
+          "  corners4's eight slots all extend to k5_16, nothing forced on the window; A84 s.7.1 from the LP side:",
+          "  root tau = 7.25 > 7.)  The toolkit cannot price `corners4` until k5_16 closes.",
+          "* **every k <= 3 class 0 usable -- and this is partly BOOKKEEPING.**  Their extensions split in two: the",
+          "  still-open k4 protected classes (genuinely blocked), and the EIGHT k4 classes A55 killed with exact",
+          "  certificates (`k4_00`, `k4_01`, `k4_02`, `k4_04`, `k4_07`, `k4_09`, `k4_10`, `k4_12`).  The second kind is",
+          "  blocked only because the A56 scoreboard -- the 52-row table `classes178.forced_cells` consults -- covers",
+          "  k5 and k6 classes ONLY, so there is no FULL-window row to cite for any k4 class.  **Emitting window rows",
+          "  for those eight (A55's kills are exact but s0-anchored, scales 1.048-1.164; the window statement is the",
+          "  work) would hand every k3 class 2-5 forced cells at a stroke**, and the same geometry that prices k4",
+          "  would start to price k3.",
           "",
-          "So the geometry price of the protected tier is not flat: it is a **cascade**. Closing k4 hands every k3",
-          "class 4–6 forced cells, closing k3 hands k2 its cells, and so on down to k0_00 — the same K1 climb that",
-          "A224's Rule SNAP uses inside a single tree, applied to the tier itself.", ""]
+          "So the toolkit's price for the protected tier is a **cascade**, not a flat number: traction on a class is",
+          "the count of its one-slot extensions closed ON THE WINDOW.  Closing k4 (and rowing the eight A55 kills)",
+          "hands k3 its cells, closing k3 hands k2 its cells, and so on down to k0_00 -- the K1 climb that Rule SNAP",
+          "performs inside one tree, applied to the tier itself.", ""]
     return "\n".join(L) + "\n"
 
 
