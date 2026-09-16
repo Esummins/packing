@@ -92,7 +92,12 @@ def summarise(cls, items):
         alive = n - dead - tube
         s100 = sum(((a1.get(i) or {}).get("lp_s") or 0.0) + ((a1.get(i) or {}).get("cert_s") or 0.0) for i, _r in pairs) if a100 else None
         k100 = sum(1 for i, _r in pairs if str((a1.get(i) or {}).get("verdict") or "").startswith("PASS")) if a100 else None
-        return dict(n=n, dead=dead, tube=tube, alive=alive, s238=round(s238, 1),
+        def med(v):
+            v = sorted(v)
+            return round((v[len(v) // 2] if len(v) % 2 else 0.5 * (v[len(v) // 2 - 1] + v[len(v) // 2])), 1) if v else None
+        m238 = med([(r.get("priced_seconds") or r.get("seconds") or 0.0) for _i, r in pairs])
+        m100 = med([((a1.get(i) or {}).get("lp_s") or 0.0) + ((a1.get(i) or {}).get("cert_s") or 0.0) for i, _r in pairs]) if a100 else None
+        return dict(n=n, dead=dead, tube=tube, alive=alive, s238=round(s238, 1), med238=m238, med100=m100,
                     mean238=round(s238 / n, 1) if n else None, kill_rate=round(dead / n, 4) if n else None,
                     s100=(round(s100, 1) if s100 is not None else None),
                     mean100=(round(s100 / n, 1) if (s100 is not None and n) else None),
@@ -185,15 +190,15 @@ def md(sums):
     for S in sums:
         A, H = S["all"], S["head"]
         L += ["## %s" % S["cls"], "",
-              "| set | n | A238 DEAD | TUBE | ALIVE | A238 mean s | A100 PASS | A100 mean s | speed-up |",
+              "| set | n | A238 DEAD | TUBE | ALIVE | A238 mean / median s | A100 PASS | A100 mean / median s | speed-up (median) |",
               "|---|---|---|---|---|---|---|---|---|",
-              "| A100 head-to-head | %s | %s | %s | %s | %s | %s | %s | %s |" % (
-                  H["n"], H["dead"], H["tube"], H["alive"], H["mean238"], H["a100_pass"], H["mean100"],
-                  ("%.1fx" % (H["mean100"] / H["mean238"])) if (H["mean238"] and H["mean100"]) else "-"),
-              "| + extrapolation set | %s | %s | %s | %s | %s | - | - | - |" % (
-                  S["extra"]["n"], S["extra"]["dead"], S["extra"]["tube"], S["extra"]["alive"], S["extra"]["mean238"]),
-              "| all cover nodes | %s | %s | %s | %s | %s | %s | %s | - |" % (
-                  A["n"], A["dead"], A["tube"], A["alive"], A["mean238"], A["a100_pass"], A["mean100"]), "",
+              "| A100 head-to-head | %s | %s | %s | %s | %s / %s | %s | %s / %s | %s |" % (
+                  H["n"], H["dead"], H["tube"], H["alive"], H["mean238"], H["med238"], H["a100_pass"], H["mean100"], H["med100"],
+                  ("%.1fx" % (H["med100"] / H["med238"])) if (H["med238"] and H["med100"]) else "-"),
+              "| + extrapolation set | %s | %s | %s | %s | %s / %s | - | - | - |" % (
+                  S["extra"]["n"], S["extra"]["dead"], S["extra"]["tube"], S["extra"]["alive"], S["extra"]["mean238"], S["extra"]["med238"]),
+              "| all cover nodes | %s | %s | %s | %s | %s / %s | %s | %s / %s | - |" % (
+                  A["n"], A["dead"], A["tube"], A["alive"], A["mean238"], A["med238"], A["a100_pass"], A["mean100"], A["med100"]), "",
               "root (A84-P1 node, H = the whole interior zone): %s" % (S["root"] or "not run"), "",
               "kills by rule: `%s`; gate hits %d; TRUMP-TUBE leaves %d; SNAP kills %d, hand-offs %d; max depth %s" % (
                   json.dumps(S["rules"]), S["gate_hits"], S["tube_leaves"], S["snap_kills"], S["snap_handoffs"], json.dumps(S["depth"])), ""]
