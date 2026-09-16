@@ -69,10 +69,16 @@ CLS = [None]                    # the class of the page being run (set by run238
 IG = [None]                     # the Trump-frame pin indices of the accepted image (set per tube() call)
 
 
-def cert_for(I):
-    """the SLOT(I) tube certificate at A60's landing radii (A84 s.4's sweep), or the scale ray when I is empty."""
+def cert_for(I, cls=None):
+    """the SLOT(I) tube certificate at A60's landing radii (A84 s.4's sweep), or the scale ray when I is empty.
+
+    A84 wrote the sweep under `tube_I_<i_j_k>_landing_*.json`, but its two PILOT directions (k4_08's I = {0,1,3,5}
+    and k3_05's I = {0,2,5}) were emitted earlier under the CLASS name, `tube_<cls>_landing_*.json` -- the same
+    direction, the same radii, the same arbiter.  Try the direction file first, then the class file."""
     tag = "none" if not I else "_".join(str(i) for i in sorted(I))
     hit = sorted(glob.glob(os.path.join(CERTDIR, "tube_I_%s_landing_*.json" % tag)))
+    if not hit and (cls or CLS[0]):
+        hit = sorted(glob.glob(os.path.join(CERTDIR, "tube_%s_landing_*.json" % (cls or CLS[0]))))
     if not hit:
         raise KeyError("A238: no landing tube certificate for the direction slot(I = %s) in certs/ "
                        "(A84 s.4 swept 19 pin sets; emit one with attempts/A84-protected-trees/code/tube84.py)" % (sorted(I),))
@@ -84,7 +90,7 @@ def radii(I=None):
     I = IG[0] if I is None else I
     key = tuple(sorted(I or []))
     if key not in _R:
-        f = cert_for(key)
+        f = cert_for(key, CLS[0])
         c = json.load(open(f, encoding="utf-8"))
         rc, rt, T = Fr(c["r_c"]), Fr(c["r_theta"]), Fr(c["T"])
         _R[key] = dict(cert=os.path.relpath(f, ROOT).replace("\\", "/"), r_c=rc, r_theta=rt, T=T,
