@@ -1858,3 +1858,38 @@
 == k4_11_c0_Y0485: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
 == A238 k4_11_c0_Y0485 [k4_11]: {'zero': 'ALIVE'} in 327.7 s
    priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k4_11_c0_Y0484 at the zero pad: ALIVE in 22816 ms; kills {'H-clip': 0, 'P': 2198, 'W': 611, 'C': 536, 'M': 1258, 'L': 0, 'R': 3986, 'X': 1215}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BR(0,1)': None, 'BR(1,0)': 1, 'TR(0,1)': None, 'TR(1,0)': None}; forced H ['BR(1,0)']
+== k4_11_c0_Y0484 page pad zero: start attempts/A238-k4-benchmark/certs/csp209_k4_11_c0_Y0484_zero_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [1.799, 1.939, 1.1, 1.24, 53.13, 64.011]; forced H ['BR(1,0)']; 5 slots; free squares 6
+   node R          d0 root: INTERNAL (2.9 s, 1 rounds; t=2.9)
+   node Rr1        d0 root<-None: INTERNAL (2.2 s, 1 rounds; t=5.2)
+   node Rr2        d0 root<-None: INTERNAL (3.5 s, 1 rounds; t=8.7)
+   node R.1        d1 TR(1,0)<-[7]: INTERNAL (4.8 s, 1 rounds; t=13.6)
+   node R.1.1      d2 BL(0,2)<-[3]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=14.7)
+   node R.1.2      d2 BL(0,2)<-[4]: DEAD by REACH r1 (4.0 s, 1 rounds; t=18.7)
+   node R.1.3      d2 BL(0,2)<-[9]: DEAD by REACH r1 (1.7 s, 1 rounds; t=20.4)
+   node R.2        d1 TR(1,0)<-[8]: INTERNAL (3.3 s, 1 rounds; t=23.7)
+   node R.2.1      d2 BL(0,2)<-[3]: INTERNAL (6.6 s, 1 rounds; t=30.8)
+   no-room (k=9, m=2): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.2.1: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R.2.1.p1   d3 pocket<-[0]: INTERNAL (11.0 s, 1 rounds; t=58.3)
+   no-room (k=10, m=1): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.2.1.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.2.1.p1.p1 d4 pocket<-[0]: INTERNAL (24.9 s, 1 rounds; t=106.3)
+   Rule NS at the WEDGE at R.2.1.p1.p1: F2 meets / misses the wedge of (F1, BR(0,1)) -- 5 target(s): wedge-e-T=[2.87708,3.87708,1.5,2.0]; wedge--e-L=[2.87708,3.37708,1.0,1.63808]; wedge--e-L=[2.87708,2.87708,1.63808,2.0]; wedge-e^-L=[2.87708
+   node R.2.1.p1.p1.1 d5 BR(0,1)<-['meets W']: DEAD by EmptyBox r1 (3.7 s, 1 rounds; t=110.1)
+   node R.2.1.p1.p1.2 d5 BR(0,1)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=110.2)
+   node R.2.2      d2 BL(0,2)<-[4]: INTERNAL (2.9 s, 1 rounds; t=113.1)
+   no-room (k=9, m=2): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.2.2: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R.2.2.p1   d3 pocket<-[0]: INTERNAL (8.7 s, 1 rounds; t=134.0)
+   no-room (k=10, m=1): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.2.2.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.2.2.p1.p1 d4 pocket<-[0]: INTERNAL (27.5 s, 1 rounds; t=187.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.2.p1.p1: split F5 at BL(0,2) (meeting fraction 0.122758; alive rows [9]; named ['F3', 'F4', 'F5', 'F6'])
+   node R.2.2.p1.p1.1 d5 BL(0,2)<-None: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=260.7)
+   node R.2.2.p1.p1.2 d5 BL(0,2)<-None: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=261.3)
+   node R.2.3      d2 BL(0,2)<-[9]: INTERNAL (4.7 s, 1 rounds; t=266.1)
+   no-room (k=9, m=2): UNDECIDED in 20 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.2.3: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R.2.3.p1   d3 pocket<-[0]: INTERNAL (7.1 s, 1 rounds; t=295.1)
