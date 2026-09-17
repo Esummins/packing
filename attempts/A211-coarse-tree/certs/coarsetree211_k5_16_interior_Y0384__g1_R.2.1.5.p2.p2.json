@@ -2590,7 +2590,7 @@
     "n_units": 512,
     "n_units_alive": 512
    },
-   "verdict": "RUNNING",
+   "verdict": "ALIVE",
    "nodes": [
     {
      "label": "R.1",
@@ -6814,7 +6814,221 @@
       ],
       "qualifies": true,
       "seconds": 0.0
-     }
+     },
+     "start_node": "R.2.1.5.p2.p2",
+     "start_cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json",
+     "start_camp": "A211",
+     "start_path": [
+      [
+       "row",
+       "TL(1,0)",
+       "(14,)"
+      ],
+      [
+       "row",
+       "TR(0,1)",
+       "(16,)"
+      ],
+      [
+       "row",
+       "BL(1,0)",
+       "(15,)"
+      ],
+      [
+       "pocket",
+       "(2.391442, 3.377084, 1.499999, 2.591329)",
+       "(1,)"
+      ],
+      [
+       "pocket",
+       "(2.391458, 3.377084, 1.499999, 2.587995)",
+       "(1,)"
+      ]
+     ],
+     "start_anc": "R0+.2.1.5.p2.p2",
+     "start_meta": {
+      "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json",
+      "run": "g1_page",
+      "camp": "A211",
+      "anc_label": "R0+.2.1.5.p2.p2",
+      "anc_steps": 5,
+      "label": "R.2.1.5.p2.p2",
+      "path": [
+       [
+        "row",
+        "TL(1,0)",
+        "(14,)"
+       ],
+       [
+        "row",
+        "TR(0,1)",
+        "(16,)"
+       ],
+       [
+        "row",
+        "BL(1,0)",
+        "(15,)"
+       ],
+       [
+        "pocket",
+        "(2.391442, 3.377084, 1.499999, 2.591329)",
+        "(1,)"
+       ],
+       [
+        "pocket",
+        "(2.391458, 3.377084, 1.499999, 2.587995)",
+        "(1,)"
+       ]
+      ],
+      "n_steps": 5,
+      "loaded": {
+       "H": {
+        "n_pieces": 62,
+        "box": [
+         1.398377,
+         1.519272,
+         2.357812,
+         2.463678,
+         0.0,
+         14.251008
+        ]
+       },
+       "F1": {
+        "n_pieces": 60,
+        "box": [
+         1.650833,
+         2.226251,
+         3.160957,
+         3.377085,
+         0.0,
+         90.0
+        ]
+       },
+       "F2": {
+        "n_pieces": 51,
+        "box": [
+         2.226249,
+         2.801668,
+         1.4835,
+         1.650835,
+         0.0,
+         90.0
+        ]
+       },
+       "F3": {
+        "n_pieces": 58,
+        "box": [
+         2.226249,
+         2.377086,
+         0.499999,
+         0.813361,
+         0.0,
+         90.0
+        ]
+       },
+       "F4": {
+        "n_pieces": 13,
+        "box": [
+         2.403273,
+         3.377085,
+         1.499998,
+         2.559584,
+         0.0,
+         90.0
+        ]
+       },
+       "F5": {
+        "n_pieces": 9,
+        "box": [
+         2.398951,
+         3.377085,
+         1.499998,
+         2.560664,
+         0.0,
+         90.0
+        ]
+       }
+      },
+      "applied": [],
+      "padding": {
+       "rect": 1e-06,
+       "tilt_deg": 0.001
+      },
+      "snapshot_round": 1,
+      "recorded": {
+       "verdict": "ALIVE",
+       "depth": 5,
+       "seconds": 115.8,
+       "t": 1822.3
+      },
+      "clock": {
+       "wall": 1800.0,
+       "spent_at_load": 0.55
+      },
+      "loaded_from": {
+       "mode": "snapshot",
+       "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json",
+       "run": "g1_page",
+       "camp": "A211",
+       "anc_label": "R0+.2.1.5.p2.p2",
+       "anc_steps": 5,
+       "snapshot_round": 1,
+       "n_replayed": 0,
+       "n_steps": 5,
+       "climbed": 0,
+       "refused": [],
+       "n_cands": 7,
+       "rule": "Lemma INHERIT (notes/coarse_tree.md s.4): a prefix of the path key, loaded with the pieces padded outward, then the remaining certified branch steps replayed -- a superset of the start node"
+      },
+      "dead_on_replay": null
+     },
+     "path_key": [
+      [
+       "row",
+       "TL(1,0)",
+       [
+        14
+       ]
+      ],
+      [
+       "row",
+       "TR(0,1)",
+       [
+        16
+       ]
+      ],
+      [
+       "row",
+       "BL(1,0)",
+       [
+        15
+       ]
+      ],
+      [
+       "pocket",
+       [
+        2.391442,
+        3.377084,
+        1.499999,
+        2.591329
+       ],
+       [
+        1
+       ]
+      ],
+      [
+       "pocket",
+       [
+        2.391458,
+        3.377084,
+        1.499999,
+        2.587995
+       ],
+       [
+        1
+       ]
+      ]
+     ]
     },
     {
      "label": "R.2.1.5.p2.p2.1",
@@ -6829,11 +7043,11 @@
       "F5"
      ],
      "excluded": null,
-     "verdict": "INTERNAL",
+     "verdict": "ALIVE",
      "clip": null,
      "killed_round": null,
      "leaf": null,
-     "reason": null,
+     "reason": "undecided (wall) at the fully named leaf before the leaf rules",
      "seconds": 438.2,
      "t": 1361.7,
      "n_rounds": 1,
@@ -11876,7 +12090,40 @@
       "F4": 56,
       "F5": 57
      },
-     "rebin": []
+     "rebin": [],
+     "snap": {
+      "label": "R.2.1.5.p2.p2.1",
+      "n_cands": 0,
+      "n_anon": 0,
+      "eps": 0.06,
+      "deg": 3.0,
+      "verdict": null,
+      "cands": [],
+      "where": "internal",
+      "depth": 1,
+      "seconds": 0.001
+     }
+    },
+    {
+     "label": "R.2.1.5.p2.p2.2",
+     "depth": 1,
+     "slot": "TR(0,1)",
+     "kind": "ns-misses",
+     "rows": null,
+     "named": [
+      "F1",
+      "F2",
+      "F4",
+      "F5"
+     ],
+     "verdict": "ALIVE",
+     "clip": null,
+     "reason": "undecided: wall before this branch ran",
+     "seconds": 0.0,
+     "t": 2290.2,
+     "n_rounds": 0,
+     "snapshot": null,
+     "verifier": "[C: library clip trace]"
     }
    ],
    "basins": [
@@ -13726,7 +13973,5866 @@
    "cert_suffix": "g1_R.2.1.5.p2.p2",
    "shard": "A229: ONE SHARD of this page -- only the start nodes in start_filter were run; the others are recorded SKIPPED (filter) and are the sibling shards' work.  This certificate is merged with the page certificate (and every sibling shard's) on the PATH KEY by Lemma INHERIT file-wise (attempts/A229-start-parallel/notes/parallel229.md).",
    "n_nodes": 2,
-   "seconds": 1361.7
+   "seconds": 2290.2,
+   "n_records": 10,
+   "max_depth": 1,
+   "alive_leaves": 2,
+   "dead_leaves": 7,
+   "ns_splits": 1,
+   "pocket_splits": 0,
+   "cc_kills": 0,
+   "exact_rounds": 0,
+   "basin_kills": 0,
+   "rsplits": 0,
+   "rsplit_kills": 0,
+   "n_inherited": 7,
+   "ef_runs": 0,
+   "ef_kills": 0,
+   "ef_timeouts": 0,
+   "ef_seconds": 0.0,
+   "nr_short": 0,
+   "snap_runs": 3,
+   "snap_kills": 0,
+   "snap_handoffs": 0,
+   "snap_partial": 0,
+   "snap_cands": 0,
+   "snap_seconds": 0.0,
+   "snap_first": null,
+   "snap_rows": [],
+   "killing": [
+    {
+     "label": "R.1",
+     "slot": "TL(1,0)",
+     "rows": "(9,)",
+     "clip": "INHERIT",
+     "round": null,
+     "seconds": 0.0,
+     "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json"
+    },
+    {
+     "label": "R.2.1.1",
+     "slot": "BL(1,0)",
+     "rows": "(5,)",
+     "clip": "INHERIT",
+     "round": null,
+     "seconds": 0.0,
+     "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json"
+    },
+    {
+     "label": "R.2.1.2",
+     "slot": "BL(1,0)",
+     "rows": "(6,)",
+     "clip": "INHERIT",
+     "round": null,
+     "seconds": 0.0,
+     "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json"
+    },
+    {
+     "label": "R.2.1.3",
+     "slot": "BL(1,0)",
+     "rows": "(10,)",
+     "clip": "INHERIT",
+     "round": null,
+     "seconds": 0.0,
+     "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json"
+    },
+    {
+     "label": "R.2.1.4",
+     "slot": "BL(1,0)",
+     "rows": "(11,)",
+     "clip": "INHERIT",
+     "round": null,
+     "seconds": 0.0,
+     "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json"
+    },
+    {
+     "label": "R.2.1.5.p1",
+     "slot": "(1.499999, 1.843611, 1.325858, 1.53688)",
+     "rows": "(0,)",
+     "clip": "INHERIT",
+     "round": null,
+     "seconds": 0.0,
+     "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json"
+    },
+    {
+     "label": "R.2.1.5.p2.p1",
+     "slot": "(1.499999, 1.842009, 1.325858, 1.537331)",
+     "rows": "(0,)",
+     "clip": "INHERIT",
+     "round": null,
+     "seconds": 0.0,
+     "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json"
+    }
+   ],
+   "undecided": [
+    {
+     "label": "R.2.1.5.p2.p2.1",
+     "reason": "undecided (wall) at the fully named leaf before the leaf rules"
+    },
+    {
+     "label": "R.2.1.5.p2.p2.2",
+     "reason": "undecided: wall before this branch ran"
+    },
+    {
+     "label": "R.2.2",
+     "reason": "undecided: SKIPPED (filter) -- this run is the shard --start R.2.1.5.p2.p2 of the page; this start node belongs to a sibling shard of the same pass"
+    },
+    {
+     "label": "R.2.3",
+     "reason": "undecided: SKIPPED (filter) -- this run is the shard --start R.2.1.5.p2.p2 of the page; this start node belongs to a sibling shard of the same pass"
+    },
+    {
+     "label": "R.2.4",
+     "reason": "undecided: SKIPPED (filter) -- this run is the shard --start R.2.1.5.p2.p2 of the page; this start node belongs to a sibling shard of the same pass"
+    },
+    {
+     "label": "R.2.5",
+     "reason": "undecided: SKIPPED (filter) -- this run is the shard --start R.2.1.5.p2.p2 of the page; this start node belongs to a sibling shard of the same pass"
+    },
+    {
+     "label": "R.2.6",
+     "reason": "undecided: SKIPPED (filter) -- this run is the shard --start R.2.1.5.p2.p2 of the page; this start node belongs to a sibling shard of the same pass"
+    },
+    {
+     "label": "R.3",
+     "reason": "undecided: SKIPPED (filter) -- this run is the shard --start R.2.1.5.p2.p2 of the page; this start node belongs to a sibling shard of the same pass"
+    },
+    {
+     "label": "R.4",
+     "reason": "undecided: SKIPPED (filter) -- this run is the shard --start R.2.1.5.p2.p2 of the page; this start node belongs to a sibling shard of the same pass"
+    }
+   ],
+   "noroom_runs": [
+    {
+     "label": "R.2.1.5.p2.p2",
+     "depth": 0,
+     "k": 11,
+     "m": 0,
+     "verdict": "VACUOUS",
+     "clip": null,
+     "bound": null,
+     "cn_bound": null,
+     "n_pockets": 0,
+     "pockets": [],
+     "seconds": 0.0,
+     "reason": "None",
+     "cap": 120.0,
+     "short_cap": null
+    }
+   ],
+   "inherited": {},
+   "runs": [
+    {
+     "label": "R.2.1.5.p2.p2",
+     "verdict": "ALIVE",
+     "n_nodes": 2,
+     "seconds": 2290.2,
+     "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json",
+     "anc": "R0+.2.1.5.p2.p2",
+     "applied": [],
+     "loaded_from": {
+      "mode": "snapshot",
+      "cert": "attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0384.json",
+      "run": "g1_page",
+      "camp": "A211",
+      "anc_label": "R0+.2.1.5.p2.p2",
+      "anc_steps": 5,
+      "snapshot_round": 1,
+      "n_replayed": 0,
+      "n_steps": 5,
+      "climbed": 0,
+      "refused": [],
+      "n_cands": 7,
+      "rule": "Lemma INHERIT (notes/coarse_tree.md s.4): a prefix of the path key, loaded with the pieces padded outward, then the remaining certified branch steps replayed -- a superset of the start node"
+     },
+     "leaf": null,
+     "wall": true
+    }
+   ],
+   "root": {
+    "verdict": "INTERNAL",
+    "clip": null,
+    "seconds": 314.3,
+    "n_rounds": 1,
+    "kept": {
+     "P0": 0.249999,
+     "P1": 0.250025,
+     "P2": 0.249999,
+     "P3": 0.249999,
+     "P4": 0.249999,
+     "H": 0.999983,
+     "F1": 0.999977,
+     "F2": 0.999907,
+     "F3": 0.97166,
+     "F4": 0.617932,
+     "F5": 0.356265
+    },
+    "forced_H": [],
+    "role_slots": {
+     "F1": [
+      "TL(1,0)"
+     ],
+     "F2": [
+      "TR(0,1)"
+     ],
+     "F3": [
+      "BL(1,0)"
+     ],
+     "F4": [],
+     "F5": []
+    },
+    "alive_cells": {
+     "BL(1,0)": [
+      6,
+      11
+     ],
+     "BR(0,1)": [
+      18,
+      21,
+      22,
+      23
+     ],
+     "BR(1,0)": [
+      6,
+      11,
+      21
+     ],
+     "TR(0,1)": [
+      18,
+      21,
+      22,
+      23
+     ],
+     "TR(1,0)": [
+      18,
+      23
+     ],
+     "TL(1,0)": [
+      18
+     ]
+    }
+   },
+   "basin_clips": [
+    {
+     "label": "R.2.1.5.p2.p2",
+     "role": "F4",
+     "removed": [
+      [
+       "TR(0,1)",
+       0.000807
+      ]
+     ],
+     "n_before": 37,
+     "n_after": 41
+    },
+    {
+     "label": "R.2.1.5.p2.p2",
+     "role": "F5",
+     "removed": [
+      [
+       "TR(0,1)",
+       0.000642
+      ]
+     ],
+     "n_before": 20,
+     "n_after": 24
+    }
+   ],
+   "wall": true,
+   "window_pending": false,
+   "leaf": null,
+   "tests": [
+    {
+     "test": "COARSE-CORE",
+     "label": "round1",
+     "coarse_core": false,
+     "parent_seconds": 0.0,
+     "n_roles": 11,
+     "kmode": "pieces",
+     "n_grid": 97,
+     "rule": "parent cascade > 20 s or >= 99 roles"
+    },
+    {
+     "test": "REACH",
+     "cell": 0,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 1,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.006
+    },
+    {
+     "test": "REACH",
+     "cell": 2,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      1.650834,
+      1.713935
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 2,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 3,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 4,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      0.5,
+      1.075417,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 5,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 16,
+     "lonely": null,
+     "seconds": 0.009
+    },
+    {
+     "test": "REACH",
+     "cell": 5,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      1.159148,
+      1.650834,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 16,
+     "lonely": null,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 6,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.004647,
+     "n_pieces": 4,
+     "n_exact": 67,
+     "lonely": null,
+     "seconds": 0.043
+    },
+    {
+     "test": "REACH",
+     "cell": 6,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      1.159148,
+      1.650834,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.005438,
+     "n_pieces": 4,
+     "n_exact": 67,
+     "lonely": null,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 6,
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)"
+     ],
+     "rect": [
+      1.159148,
+      1.650834,
+      1.075417,
+      1.650834
+     ],
+     "depth": 3,
+     "frac": 0.937165,
+     "n_pieces": 7,
+     "n_exact": 79,
+     "lonely": null,
+     "seconds": 0.025
+    },
+    {
+     "test": "REACH",
+     "cell": 7,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      1.650834,
+      1.713935
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 11,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 7,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      1.159148,
+      1.650834,
+      1.650834,
+      1.713935
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 11,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 7,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      1.159148,
+      1.650834,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 7,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 8,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      1.159148,
+      1.650834,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 8,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 9,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      1.159148,
+      1.650834,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 10,
+     "lonely": null,
+     "seconds": 0.007
+    },
+    {
+     "test": "REACH",
+     "cell": 9,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.075417,
+      1.650834,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 10,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 10,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 20,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 10,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 10,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 20,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.020697,
+     "n_pieces": 5,
+     "n_exact": 109,
+     "lonely": null,
+     "seconds": 0.038
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.020697,
+     "n_pieces": 5,
+     "n_exact": 109,
+     "lonely": null,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      1.159148,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      1.075417,
+      1.650834
+     ],
+     "depth": 3,
+     "frac": 0.651997,
+     "n_pieces": 9,
+     "n_exact": 86,
+     "lonely": null,
+     "seconds": 0.037
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      1.650834,
+      1.713935
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 10,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      1.650834,
+      1.713935
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 10,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 12,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 13,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 13,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.163149,
+      2.22625,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 8,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 13,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 16,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 13,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      1.650834,
+      2.22625,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 16,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      1.650834,
+      1.713935
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 20,
+     "lonely": null,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      1.650834,
+      1.713935
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 20,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 16,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 17,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 16,
+     "lonely": null,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.010616,
+     "n_pieces": 2,
+     "n_exact": 69,
+     "lonely": null,
+     "seconds": 0.047
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.012287,
+     "n_pieces": 4,
+     "n_exact": 77,
+     "lonely": null,
+     "seconds": 0.034
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.012287,
+     "n_pieces": 4,
+     "n_exact": 77,
+     "lonely": null,
+     "seconds": 0.008
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.011166,
+     "n_pieces": 3,
+     "n_exact": 72,
+     "lonely": null,
+     "seconds": 0.035
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.241262,
+     "n_pieces": 2,
+     "n_exact": 31,
+     "lonely": null,
+     "seconds": 0.022
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.241262,
+     "n_pieces": 2,
+     "n_exact": 31,
+     "lonely": null,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.241262,
+     "n_pieces": 2,
+     "n_exact": 31,
+     "lonely": null,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.801667
+     ],
+     "depth": 3,
+     "frac": 0.406883,
+     "n_pieces": 3,
+     "n_exact": 38,
+     "lonely": null,
+     "seconds": 0.021
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.801667
+     ],
+     "depth": 3,
+     "frac": 0.406883,
+     "n_pieces": 3,
+     "n_exact": 37,
+     "lonely": null,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.801667
+     ],
+     "depth": 3,
+     "frac": 0.319102,
+     "n_pieces": 4,
+     "n_exact": 47,
+     "lonely": null,
+     "seconds": 0.02
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.241262,
+     "n_pieces": 2,
+     "n_exact": 35,
+     "lonely": null,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.241262,
+     "n_pieces": 2,
+     "n_exact": 35,
+     "lonely": null,
+     "seconds": 0.007
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.241262,
+     "n_pieces": 2,
+     "n_exact": 35,
+     "lonely": null,
+     "seconds": 0.007
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.801667
+     ],
+     "depth": 3,
+     "frac": 0.406883,
+     "n_pieces": 3,
+     "n_exact": 43,
+     "lonely": null,
+     "seconds": 0.009
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.241262,
+     "n_pieces": 2,
+     "n_exact": 39,
+     "lonely": null,
+     "seconds": 0.011
+    },
+    {
+     "test": "REACH",
+     "cell": 19,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 19,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.801667,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 19,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "rect": [
+      2.22625,
+      2.717936,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 12,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 20,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 20,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      0.5,
+      1.075417
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.013952,
+     "n_pieces": 6,
+     "n_exact": 50,
+     "lonely": null,
+     "seconds": 0.022
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.075417,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.009726,
+     "n_pieces": 3,
+     "n_exact": 42,
+     "lonely": null,
+     "seconds": 0.006
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.159148,
+      1.650834
+     ],
+     "depth": 2,
+     "frac": 0.016328,
+     "n_pieces": 6,
+     "n_exact": 50,
+     "lonely": null,
+     "seconds": 0.009
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.075417,
+      1.650834
+     ],
+     "depth": 3,
+     "frac": 0.989053,
+     "n_pieces": 6,
+     "n_exact": 36,
+     "lonely": null,
+     "seconds": 0.011
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.159148,
+      1.650834
+     ],
+     "depth": 3,
+     "frac": 0.96266,
+     "n_pieces": 11,
+     "n_exact": 70,
+     "lonely": null,
+     "seconds": 0.023
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.159148,
+      1.650834
+     ],
+     "depth": 3,
+     "frac": 0.989053,
+     "n_pieces": 6,
+     "n_exact": 36,
+     "lonely": null,
+     "seconds": 0.008
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.159148,
+      1.650834
+     ],
+     "depth": 3,
+     "frac": 0.989053,
+     "n_pieces": 6,
+     "n_exact": 45,
+     "lonely": null,
+     "seconds": 0.011
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.099544,
+     "n_pieces": 10,
+     "n_exact": 117,
+     "lonely": null,
+     "seconds": 0.037
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.650834,
+      1.713935
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 18,
+     "lonely": null,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.650834,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.099544,
+     "n_pieces": 10,
+     "n_exact": 117,
+     "lonely": null,
+     "seconds": 0.008
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.163149,
+      2.22625
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 17,
+     "lonely": null,
+     "seconds": 0.008
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      1.650834,
+      2.22625
+     ],
+     "depth": 3,
+     "frac": 0.921025,
+     "n_pieces": 19,
+     "n_exact": 146,
+     "lonely": null,
+     "seconds": 0.051
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.717936
+     ],
+     "depth": 2,
+     "frac": 0.044559,
+     "n_pieces": 10,
+     "n_exact": 78,
+     "lonely": null,
+     "seconds": 0.032
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.038075,
+     "n_pieces": 10,
+     "n_exact": 78,
+     "lonely": null,
+     "seconds": 0.008
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.801667
+     ],
+     "depth": 2,
+     "frac": 0.036875,
+     "n_pieces": 8,
+     "n_exact": 70,
+     "lonely": null,
+     "seconds": 0.007
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.632163,
+     "n_pieces": 13,
+     "n_exact": 104,
+     "lonely": null,
+     "seconds": 0.049
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.537076,
+     "n_pieces": 7,
+     "n_exact": 80,
+     "lonely": null,
+     "seconds": 0.014
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.801667
+     ],
+     "depth": 3,
+     "frac": 0.537076,
+     "n_pieces": 7,
+     "n_exact": 80,
+     "lonely": null,
+     "seconds": 0.019
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.22625,
+      2.717936
+     ],
+     "depth": 3,
+     "frac": 0.537076,
+     "n_pieces": 7,
+     "n_exact": 97,
+     "lonely": null,
+     "seconds": 0.028
+    },
+    {
+     "test": "REACH",
+     "cell": 24,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 24,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "rect": [
+      2.801667,
+      3.377084,
+      2.801667,
+      3.377084
+     ],
+     "depth": 2,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 4,
+     "lonely": null,
+     "seconds": 0.0
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 248,
+     "seconds": 0.007
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 248,
+     "seconds": 0.005
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 248,
+     "seconds": 0.005
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 248,
+     "seconds": 0.002
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.767427,
+     "n_pieces": 34,
+     "n_exact": 248,
+     "seconds": 0.025
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.999998,
+     "n_pieces": 62,
+     "n_exact": 248,
+     "seconds": 0.031
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.767427,
+     "n_pieces": 34,
+     "n_exact": 310,
+     "seconds": 0.052
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.999998,
+     "n_pieces": 62,
+     "n_exact": 186,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 240,
+     "seconds": 0.014
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 240,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 240,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "n_exact": 240,
+     "seconds": 0.01
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 60,
+     "n_exact": 240,
+     "seconds": 0.022
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 60,
+     "n_exact": 240,
+     "seconds": 0.029
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "n_exact": 242,
+     "seconds": 0.011
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "n_exact": 242,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 60,
+     "n_exact": 300,
+     "seconds": 0.048
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "n_exact": 244,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 60,
+     "n_exact": 180,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.248471,
+     "n_pieces": 8,
+     "n_exact": 200,
+     "seconds": 0.01
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 50,
+     "n_exact": 200,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.979633,
+     "n_pieces": 49,
+     "n_exact": 200,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 50,
+     "n_exact": 200,
+     "seconds": 0.023
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 200,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 200,
+     "seconds": 0.003
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.248471,
+     "n_pieces": 8,
+     "n_exact": 208,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.248471,
+     "n_pieces": 8,
+     "n_exact": 208,
+     "seconds": 0.01
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.248471,
+     "n_pieces": 8,
+     "n_exact": 208,
+     "seconds": 0.013
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.979633,
+     "n_pieces": 49,
+     "n_exact": 250,
+     "seconds": 0.043
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 50,
+     "n_exact": 250,
+     "seconds": 0.046
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.979633,
+     "n_pieces": 49,
+     "n_exact": 250,
+     "seconds": 0.043
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.248471,
+     "n_pieces": 8,
+     "n_exact": 216,
+     "seconds": 0.017
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.248471,
+     "n_pieces": 8,
+     "n_exact": 216,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.248471,
+     "n_pieces": 8,
+     "n_exact": 216,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.979633,
+     "n_pieces": 49,
+     "n_exact": 300,
+     "seconds": 0.06
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.248471,
+     "n_pieces": 8,
+     "n_exact": 224,
+     "seconds": 0.018
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 50,
+     "n_exact": 150,
+     "seconds": 0.0
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 58,
+     "n_exact": 174,
+     "seconds": 0.059
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.53517,
+     "n_pieces": 32,
+     "n_exact": 174,
+     "seconds": 0.015
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 58,
+     "n_exact": 174,
+     "seconds": 0.031
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 174,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 174,
+     "seconds": 0.003
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 174,
+     "seconds": 0.003
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.53517,
+     "n_pieces": 32,
+     "n_exact": 232,
+     "seconds": 0.035
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 58,
+     "n_exact": 232,
+     "seconds": 0.041
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.53517,
+     "n_pieces": 32,
+     "n_exact": 206,
+     "seconds": 0.03
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.53517,
+     "n_pieces": 32,
+     "n_exact": 264,
+     "seconds": 0.05
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 58,
+     "n_exact": 116,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 259,
+     "seconds": 0.057
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.984351,
+     "n_pieces": 33,
+     "n_exact": 259,
+     "seconds": 0.015
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.075026,
+     "n_pieces": 3,
+     "n_exact": 259,
+     "seconds": 0.003
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 37,
+     "n_exact": 259,
+     "seconds": 0.016
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.326079,
+     "n_pieces": 10,
+     "n_exact": 259,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.013556,
+     "n_pieces": 5,
+     "n_exact": 259,
+     "seconds": 0.006
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.075026,
+     "n_pieces": 3,
+     "n_exact": 292,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.984351,
+     "n_pieces": 33,
+     "n_exact": 292,
+     "seconds": 0.029
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.31043,
+     "n_pieces": 6,
+     "n_exact": 292,
+     "seconds": 0.018
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.001901,
+     "n_pieces": 2,
+     "n_exact": 292,
+     "seconds": 0.018
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.075026,
+     "n_pieces": 3,
+     "n_exact": 296,
+     "seconds": 0.016
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 269,
+     "seconds": 0.008
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(1,0)",
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 264,
+     "seconds": 0.005
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.326079,
+     "n_pieces": 10,
+     "n_exact": 296,
+     "seconds": 0.027
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.013556,
+     "n_pieces": 5,
+     "n_exact": 296,
+     "seconds": 0.021
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.013556,
+     "n_pieces": 5,
+     "n_exact": 264,
+     "seconds": 0.007
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.075026,
+     "n_pieces": 3,
+     "n_exact": 325,
+     "seconds": 0.038
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.31043,
+     "n_pieces": 6,
+     "n_exact": 325,
+     "seconds": 0.03
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.001901,
+     "n_pieces": 2,
+     "n_exact": 325,
+     "seconds": 0.037
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.001901,
+     "n_pieces": 2,
+     "n_exact": 294,
+     "seconds": 0.021
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.013556,
+     "n_pieces": 5,
+     "n_exact": 301,
+     "seconds": 0.021
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.001901,
+     "n_pieces": 2,
+     "n_exact": 327,
+     "seconds": 0.029
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 37,
+     "n_exact": 222,
+     "seconds": 0.0
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 140,
+     "seconds": 0.033
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.98993,
+     "n_pieces": 18,
+     "n_exact": 140,
+     "seconds": 0.008
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.108247,
+     "n_pieces": 2,
+     "n_exact": 140,
+     "seconds": 0.002
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.999916,
+     "n_pieces": 20,
+     "n_exact": 140,
+     "seconds": 0.006
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.409106,
+     "n_pieces": 7,
+     "n_exact": 140,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.022097,
+     "n_pieces": 3,
+     "n_exact": 140,
+     "seconds": 0.002
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.108247,
+     "n_pieces": 2,
+     "n_exact": 158,
+     "seconds": 0.008
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.98993,
+     "n_pieces": 18,
+     "n_exact": 158,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.39912,
+     "n_pieces": 5,
+     "n_exact": 158,
+     "seconds": 0.008
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.013202,
+     "n_pieces": 2,
+     "n_exact": 158,
+     "seconds": 0.007
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.108247,
+     "n_pieces": 2,
+     "n_exact": 160,
+     "seconds": 0.01
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 147,
+     "seconds": 0.006
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(1,0)",
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 143,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.409106,
+     "n_pieces": 7,
+     "n_exact": 160,
+     "seconds": 0.015
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.022097,
+     "n_pieces": 3,
+     "n_exact": 160,
+     "seconds": 0.008
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.022097,
+     "n_pieces": 3,
+     "n_exact": 143,
+     "seconds": 0.003
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.108247,
+     "n_pieces": 2,
+     "n_exact": 176,
+     "seconds": 0.012
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.39912,
+     "n_pieces": 5,
+     "n_exact": 176,
+     "seconds": 0.014
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.013202,
+     "n_pieces": 2,
+     "n_exact": 176,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.013202,
+     "n_pieces": 2,
+     "n_exact": 160,
+     "seconds": 0.008
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.022097,
+     "n_pieces": 3,
+     "n_exact": 163,
+     "seconds": 0.008
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.013202,
+     "n_pieces": 2,
+     "n_exact": 178,
+     "seconds": 0.017
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.999916,
+     "n_pieces": 20,
+     "n_exact": 120,
+     "seconds": 0.0
+    },
+    {
+     "test": "UNION",
+     "slot": "BL(1,0)",
+     "n_pieces": 9,
+     "bbox": [
+      1.499999,
+      1.840774,
+      1.365616,
+      1.54353
+     ],
+     "diam": 0.3664,
+     "linf": 0.34077,
+     "chord_line": "v=1.9385",
+     "chord_fixed": 2.1703,
+     "chord_min": 0.9265,
+     "chord_row": 4.0233,
+     "refined": 0,
+     "cap": 1,
+     "why": "CN: union diameter 0.3664 < 1",
+     "seconds": 0.003
+    },
+    {
+     "test": "UNION",
+     "slot": "BR(0,1)",
+     "n_pieces": 28,
+     "bbox": [
+      2.400262,
+      3.377084,
+      1.499999,
+      2.563724
+     ],
+     "diam": 1.44286,
+     "linf": 1.06373,
+     "chord_line": "h=3.3771",
+     "chord_fixed": 3.0,
+     "chord_min": 0.0,
+     "chord_row": 3.0,
+     "refined": 0,
+     "cap": 99,
+     "why": "no union exclusion fires",
+     "seconds": 0.003
+    },
+    {
+     "test": "UNION",
+     "slot": "BR(1,0)",
+     "n_pieces": 12,
+     "bbox": [
+      1.499999,
+      3.377084,
+      1.365616,
+      1.650834
+     ],
+     "diam": 1.89407,
+     "linf": 1.87709,
+     "chord_line": "h=1.5000",
+     "chord_fixed": 2.0,
+     "chord_min": 1.0,
+     "chord_row": 4.0,
+     "refined": 0,
+     "cap": 1,
+     "why": "CHORD-U: fixed 2.0000 + 2 x 1.0000 > s on h=1.5000",
+     "seconds": 0.002
+    },
+    {
+     "test": "UNION",
+     "slot": "TR(0,1)",
+     "n_pieces": 30,
+     "bbox": [
+      2.399183,
+      3.377084,
+      1.499999,
+      2.59261
+     ],
+     "diam": 1.44673,
+     "linf": 1.09261,
+     "chord_line": "h=3.3771",
+     "chord_fixed": 3.0,
+     "chord_min": 0.0,
+     "chord_row": 3.0,
+     "refined": 0,
+     "cap": 99,
+     "why": "no union exclusion fires",
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH-REFINE",
+     "slot": "TR(1,0)",
+     "n_in": 12,
+     "n_out": 14,
+     "frac": 0.247558,
+     "n_exact": 237,
+     "seconds": 0.047
+    },
+    {
+     "test": "UNION",
+     "slot": "TR(1,0)",
+     "n_pieces": 14,
+     "bbox": [
+      2.414098,
+      3.377084,
+      2.22625,
+      2.537863
+     ],
+     "diam": 0.9999,
+     "linf": 0.96299,
+     "chord_line": "h=2.3771",
+     "chord_fixed": 1.0,
+     "chord_min": 1.0,
+     "chord_row": 3.0,
+     "refined": 2,
+     "cap": 1,
+     "why": "CN: union diameter 0.9999 < 1",
+     "seconds": 0.05
+    },
+    {
+     "test": "UNION",
+     "slot": "TL(1,0)",
+     "cap": 1,
+     "why": "A1: 1 alive cell(s)",
+     "n_pieces": 3,
+     "bbox": [
+      2.399183,
+      2.551933,
+      2.43055,
+      2.583226
+     ],
+     "diam": 0.21267,
+     "linf": 0.15275
+    },
+    {
+     "test": "ROLE-CLIP",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "frac": 1.0,
+     "n_pieces": 60,
+     "vol": 0.0015368791523410355,
+     "vol_before": 0.0015368791523410355,
+     "box_after": [
+      1.650833,
+      2.226251,
+      3.160957,
+      3.377084,
+      0.0,
+      90.0
+     ]
+    },
+    {
+     "test": "ROLE-CLIP",
+     "role": "F2",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "frac": 1.0,
+     "n_pieces": 50,
+     "vol": 0.03330210836438043,
+     "vol_before": 0.03330210836438043,
+     "box_after": [
+      2.226249,
+      2.801668,
+      1.4835,
+      1.650835,
+      0.0,
+      90.0
+     ]
+    },
+    {
+     "test": "ROLE-CLIP",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "frac": 1.0,
+     "n_pieces": 58,
+     "vol": 0.00788702721592301,
+     "vol_before": 0.00788702721592301,
+     "box_after": [
+      2.226249,
+      2.377085,
+      0.5,
+      0.807263,
+      0.0,
+      90.0
+     ]
+    },
+    {
+     "test": "SNAP-ROWS",
+     "label": "R.2.1.5.p2.p2",
+     "n_cands": 0,
+     "n_anon": 0,
+     "cands": [],
+     "verdict": null
+    },
+    {
+     "test": "SNAP",
+     "label": "R.2.1.5.p2.p2",
+     "where": "internal",
+     "verdict": null,
+     "rule": null,
+     "n_cands": 0,
+     "n_anon": 0,
+     "seconds": 0.002,
+     "stratum": null
+    },
+    {
+     "test": "SNAP-ROWS",
+     "label": "R.2.1.5.p2.p2",
+     "n_cands": 0,
+     "n_anon": 0,
+     "cands": [],
+     "verdict": null
+    },
+    {
+     "test": "SNAP",
+     "label": "R.2.1.5.p2.p2",
+     "where": "leaf",
+     "verdict": null,
+     "rule": null,
+     "n_cands": 0,
+     "n_anon": 0,
+     "seconds": 0.001,
+     "stratum": null
+    },
+    {
+     "test": "NOROOM",
+     "k": 11,
+     "m": 0,
+     "verdict": "VACUOUS",
+     "clip": null,
+     "bound": null,
+     "cn_bound": null,
+     "n_pockets": 0,
+     "seconds": 0.0
+    },
+    {
+     "test": "BASIN-CLIP",
+     "role": "F4",
+     "label": "R.2.1.5.p2.p2",
+     "removed": [
+      [
+       "TR(0,1)",
+       0.000807
+      ]
+     ],
+     "n_before": 37,
+     "n_after": 41
+    },
+    {
+     "test": "BASIN-CLIP",
+     "role": "F5",
+     "label": "R.2.1.5.p2.p2",
+     "removed": [
+      [
+       "TR(0,1)",
+       0.000642
+      ]
+     ],
+     "n_before": 20,
+     "n_after": 24
+    },
+    {
+     "test": "NS-MEETS",
+     "role": "F1",
+     "slot": "TR(0,1)",
+     "frac": 0.008078,
+     "forced_H": [],
+     "role_slots": {
+      "F1": [
+       "TL(1,0)",
+       "TR(0,1)"
+      ],
+      "F2": [
+       "TR(0,1)"
+      ],
+      "F3": [
+       "BL(1,0)"
+      ],
+      "F4": [],
+      "F5": []
+     }
+    },
+    {
+     "test": "COARSE-CORE",
+     "label": "round1",
+     "coarse_core": false,
+     "parent_seconds": 4.3,
+     "n_roles": 11,
+     "kmode": "pieces",
+     "n_grid": 97,
+     "rule": "parent cascade > 20 s or >= 99 roles"
+    },
+    {
+     "test": "REACH",
+     "cell": 6,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 4,
+     "n_exact": 12,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 6,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 4,
+     "n_exact": 12,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 6,
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 7,
+     "n_exact": 28,
+     "seconds": 0.008
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BL(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 5,
+     "n_exact": 10,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 5,
+     "n_exact": 10,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 11,
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 9,
+     "n_exact": 27,
+     "seconds": 0.009
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.951001,
+     "n_pieces": 2,
+     "n_exact": 4,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.800908,
+     "n_pieces": 3,
+     "n_exact": 7,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.800908,
+     "n_pieces": 3,
+     "n_exact": 7,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.901697,
+     "n_pieces": 2,
+     "n_exact": 6,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999046,
+     "n_pieces": 2,
+     "n_exact": 6,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999046,
+     "n_pieces": 2,
+     "n_exact": 6,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999046,
+     "n_pieces": 2,
+     "n_exact": 6,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.933955,
+     "n_pieces": 3,
+     "n_exact": 9,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.933955,
+     "n_pieces": 3,
+     "n_exact": 9,
+     "seconds": 0.002
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.928036,
+     "n_pieces": 4,
+     "n_exact": 12,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999046,
+     "n_pieces": 2,
+     "n_exact": 8,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999046,
+     "n_pieces": 2,
+     "n_exact": 8,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999046,
+     "n_pieces": 2,
+     "n_exact": 8,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.933955,
+     "n_pieces": 3,
+     "n_exact": 12,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 18,
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999046,
+     "n_pieces": 2,
+     "n_exact": 10,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.996464,
+     "n_pieces": 6,
+     "n_exact": 12,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.994928,
+     "n_pieces": 3,
+     "n_exact": 6,
+     "seconds": 0.001
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.996464,
+     "n_pieces": 6,
+     "n_exact": 12,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999279,
+     "n_pieces": 6,
+     "n_exact": 18,
+     "seconds": 0.008
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999484,
+     "n_pieces": 11,
+     "n_exact": 33,
+     "seconds": 0.011
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999279,
+     "n_pieces": 6,
+     "n_exact": 18,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 21,
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.999279,
+     "n_pieces": 6,
+     "n_exact": 24,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 10,
+     "n_exact": 30,
+     "seconds": 0.009
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 10,
+     "n_exact": 30,
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH",
+     "cell": 22,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 1.0,
+     "n_pieces": 19,
+     "n_exact": 76,
+     "seconds": 0.013
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.976959,
+     "n_pieces": 10,
+     "n_exact": 20,
+     "seconds": 0.009
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.976959,
+     "n_pieces": 10,
+     "n_exact": 20,
+     "seconds": 0.006
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.976209,
+     "n_pieces": 8,
+     "n_exact": 16,
+     "seconds": 0.005
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.982457,
+     "n_pieces": 12,
+     "n_exact": 37,
+     "seconds": 0.01
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.97868,
+     "n_pieces": 6,
+     "n_exact": 19,
+     "seconds": 0.004
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.97868,
+     "n_pieces": 6,
+     "n_exact": 19,
+     "seconds": 0.007
+    },
+    {
+     "test": "REACH",
+     "cell": 23,
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "seeded": true,
+     "n_changed_obst": 5,
+     "frac": 0.97868,
+     "n_pieces": 6,
+     "n_exact": 25,
+     "seconds": 0.01
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 248,
+     "seconds": 0.007
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 248,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 248,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 248,
+     "seconds": 0.002
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.767431,
+     "n_pieces": 34,
+     "n_exact": 248,
+     "seconds": 0.014
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.999999,
+     "n_pieces": 62,
+     "n_exact": 248,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.767431,
+     "n_pieces": 34,
+     "n_exact": 310,
+     "seconds": 0.04
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "H",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.999999,
+     "n_pieces": 62,
+     "n_exact": 186,
+     "seconds": 0.0
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 240,
+     "seconds": 0.013
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 240,
+     "seconds": 0.002
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 240,
+     "seconds": 0.002
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "n_exact": 240,
+     "seconds": 0.005
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 60,
+     "n_exact": 240,
+     "seconds": 0.026
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 60,
+     "n_exact": 240,
+     "seconds": 0.032
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "n_exact": 242,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "n_exact": 242,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 60,
+     "n_exact": 300,
+     "seconds": 0.052
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "n_exact": 244,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F1",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 60,
+     "n_exact": 180,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.255036,
+     "n_pieces": 8,
+     "n_exact": 196,
+     "seconds": 0.01
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 49,
+     "n_exact": 196,
+     "seconds": 0.028
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.979095,
+     "n_pieces": 48,
+     "n_exact": 196,
+     "seconds": 0.024
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 49,
+     "n_exact": 196,
+     "seconds": 0.024
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 196,
+     "seconds": 0.003
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 196,
+     "seconds": 0.003
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.255036,
+     "n_pieces": 8,
+     "n_exact": 204,
+     "seconds": 0.014
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.255036,
+     "n_pieces": 8,
+     "n_exact": 204,
+     "seconds": 0.014
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.255036,
+     "n_pieces": 8,
+     "n_exact": 204,
+     "seconds": 0.013
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.979095,
+     "n_pieces": 48,
+     "n_exact": 245,
+     "seconds": 0.039
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 49,
+     "n_exact": 245,
+     "seconds": 0.037
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.979095,
+     "n_pieces": 48,
+     "n_exact": 245,
+     "seconds": 0.037
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.255036,
+     "n_pieces": 8,
+     "n_exact": 212,
+     "seconds": 0.015
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.255036,
+     "n_pieces": 8,
+     "n_exact": 212,
+     "seconds": 0.015
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.255036,
+     "n_pieces": 8,
+     "n_exact": 212,
+     "seconds": 0.02
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.979095,
+     "n_pieces": 48,
+     "n_exact": 294,
+     "seconds": 0.062
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.255036,
+     "n_pieces": 8,
+     "n_exact": 220,
+     "seconds": 0.017
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F2",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 49,
+     "n_exact": 147,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 58,
+     "n_exact": 174,
+     "seconds": 0.024
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.53517,
+     "n_pieces": 32,
+     "n_exact": 174,
+     "seconds": 0.021
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 58,
+     "n_exact": 174,
+     "seconds": 0.026
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 174,
+     "seconds": 0.003
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 174,
+     "seconds": 0.002
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 174,
+     "seconds": 0.002
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.53517,
+     "n_pieces": 32,
+     "n_exact": 232,
+     "seconds": 0.032
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 58,
+     "n_exact": 232,
+     "seconds": 0.049
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.53517,
+     "n_pieces": 32,
+     "n_exact": 206,
+     "seconds": 0.023
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)",
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.53517,
+     "n_pieces": 32,
+     "n_exact": 264,
+     "seconds": 0.043
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F3",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 1.0,
+     "n_pieces": 58,
+     "n_exact": 116,
+     "seconds": 0.001
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 392,
+     "seconds": 0.036
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.98621,
+     "n_pieces": 48,
+     "n_exact": 392,
+     "seconds": 0.024
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.122612,
+     "n_pieces": 5,
+     "n_exact": 392,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.999993,
+     "n_pieces": 56,
+     "n_exact": 392,
+     "seconds": 0.02
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.167671,
+     "n_pieces": 18,
+     "n_exact": 392,
+     "seconds": 0.012
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.012581,
+     "n_pieces": 8,
+     "n_exact": 392,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.122612,
+     "n_pieces": 5,
+     "n_exact": 440,
+     "seconds": 0.024
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.98621,
+     "n_pieces": 48,
+     "n_exact": 440,
+     "seconds": 0.043
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.153888,
+     "n_pieces": 10,
+     "n_exact": 440,
+     "seconds": 0.029
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.002459,
+     "n_pieces": 3,
+     "n_exact": 440,
+     "seconds": 0.028
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.122612,
+     "n_pieces": 5,
+     "n_exact": 448,
+     "seconds": 0.028
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 410,
+     "seconds": 0.011
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(1,0)",
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 400,
+     "seconds": 0.01
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.167671,
+     "n_pieces": 18,
+     "n_exact": 448,
+     "seconds": 0.031
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.012581,
+     "n_pieces": 8,
+     "n_exact": 448,
+     "seconds": 0.038
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.012581,
+     "n_pieces": 8,
+     "n_exact": 400,
+     "seconds": 0.012
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.122612,
+     "n_pieces": 5,
+     "n_exact": 488,
+     "seconds": 0.055
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.153888,
+     "n_pieces": 10,
+     "n_exact": 488,
+     "seconds": 0.059
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.002459,
+     "n_pieces": 3,
+     "n_exact": 488,
+     "seconds": 0.038
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.002459,
+     "n_pieces": 3,
+     "n_exact": 443,
+     "seconds": 0.02
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.012581,
+     "n_pieces": 8,
+     "n_exact": 456,
+     "seconds": 0.028
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.002459,
+     "n_pieces": 3,
+     "n_exact": 491,
+     "seconds": 0.046
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F4",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.999993,
+     "n_pieces": 56,
+     "n_exact": 336,
+     "seconds": 0.0
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 399,
+     "seconds": 0.029
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.983806,
+     "n_pieces": 49,
+     "n_exact": 399,
+     "seconds": 0.027
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.142068,
+     "n_pieces": 5,
+     "n_exact": 399,
+     "seconds": 0.004
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.99985,
+     "n_pieces": 57,
+     "n_exact": 399,
+     "seconds": 0.019
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.104515,
+     "n_pieces": 16,
+     "n_exact": 399,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.014623,
+     "n_pieces": 8,
+     "n_exact": 399,
+     "seconds": 0.007
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.142068,
+     "n_pieces": 5,
+     "n_exact": 448,
+     "seconds": 0.028
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.983806,
+     "n_pieces": 49,
+     "n_exact": 448,
+     "seconds": 0.051
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.088471,
+     "n_pieces": 8,
+     "n_exact": 448,
+     "seconds": 0.026
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.002858,
+     "n_pieces": 3,
+     "n_exact": 448,
+     "seconds": 0.028
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.142068,
+     "n_pieces": 5,
+     "n_exact": 456,
+     "seconds": 0.031
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 415,
+     "seconds": 0.013
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(1,0)",
+      "TL(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.0,
+     "n_pieces": 0,
+     "n_exact": 407,
+     "seconds": 0.007
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.104515,
+     "n_pieces": 16,
+     "n_exact": 456,
+     "seconds": 0.037
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.014623,
+     "n_pieces": 8,
+     "n_exact": 456,
+     "seconds": 0.026
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.014623,
+     "n_pieces": 8,
+     "n_exact": 407,
+     "seconds": 0.009
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "BR(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.142068,
+     "n_pieces": 5,
+     "n_exact": 497,
+     "seconds": 0.053
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.088471,
+     "n_pieces": 8,
+     "n_exact": 497,
+     "seconds": 0.044
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.002858,
+     "n_pieces": 3,
+     "n_exact": 497,
+     "seconds": 0.04
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.002858,
+     "n_pieces": 3,
+     "n_exact": 451,
+     "seconds": 0.028
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.014623,
+     "n_pieces": 8,
+     "n_exact": 464,
+     "seconds": 0.024
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [
+      "BR(0,1)",
+      "TL(1,0)",
+      "TR(0,1)",
+      "TR(1,0)"
+     ],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.002858,
+     "n_pieces": 3,
+     "n_exact": 500,
+     "seconds": 0.045
+    },
+    {
+     "test": "ROLE-REACH",
+     "role": "F5",
+     "slots": [],
+     "depth": 0,
+     "coarse": true,
+     "frac": 0.99985,
+     "n_pieces": 57,
+     "n_exact": 342,
+     "seconds": 0.001
+    },
+    {
+     "test": "UNION",
+     "slot": "BL(1,0)",
+     "n_pieces": 9,
+     "bbox": [
+      1.499999,
+      1.840774,
+      1.365616,
+      1.54353
+     ],
+     "diam": 0.3664,
+     "linf": 0.34077,
+     "chord_line": "v=1.9385",
+     "chord_fixed": 2.1703,
+     "chord_min": 0.9265,
+     "chord_row": 4.0233,
+     "refined": 0,
+     "cap": 1,
+     "why": "CN: union diameter 0.3664 < 1",
+     "seconds": 0.004
+    },
+    {
+     "test": "UNION",
+     "slot": "BR(0,1)",
+     "n_pieces": 28,
+     "bbox": [
+      2.400262,
+      3.377084,
+      1.499999,
+      2.563724
+     ],
+     "diam": 1.44286,
+     "linf": 1.06373,
+     "chord_line": "h=3.3771",
+     "chord_fixed": 3.0,
+     "chord_min": 0.0,
+     "chord_row": 3.0,
+     "refined": 0,
+     "cap": 99,
+     "why": "no union exclusion fires",
+     "seconds": 0.003
+    },
+    {
+     "test": "UNION",
+     "slot": "BR(1,0)",
+     "n_pieces": 12,
+     "bbox": [
+      1.499999,
+      3.377084,
+      1.365616,
+      1.650834
+     ],
+     "diam": 1.89407,
+     "linf": 1.87709,
+     "chord_line": "h=1.5000",
+     "chord_fixed": 2.0,
+     "chord_min": 1.0,
+     "chord_row": 4.0,
+     "refined": 0,
+     "cap": 1,
+     "why": "CHORD-U: fixed 2.0000 + 2 x 1.0000 > s on h=1.5000",
+     "seconds": 0.002
+    },
+    {
+     "test": "UNION",
+     "slot": "TR(0,1)",
+     "n_pieces": 29,
+     "bbox": [
+      2.399183,
+      3.377084,
+      1.499999,
+      2.567971
+     ],
+     "diam": 1.44673,
+     "linf": 1.06797,
+     "chord_line": "h=3.3771",
+     "chord_fixed": 3.0,
+     "chord_min": 0.0,
+     "chord_row": 3.0,
+     "refined": 0,
+     "cap": 99,
+     "why": "no union exclusion fires",
+     "seconds": 0.003
+    },
+    {
+     "test": "REACH-REFINE",
+     "slot": "TR(1,0)",
+     "n_in": 11,
+     "n_out": 14,
+     "frac": 0.265506,
+     "n_exact": 236,
+     "seconds": 0.038
+    },
+    {
+     "test": "UNION",
+     "slot": "TR(1,0)",
+     "n_pieces": 14,
+     "bbox": [
+      2.414098,
+      3.377084,
+      2.22625,
+      2.537863
+     ],
+     "diam": 0.9999,
+     "linf": 0.96299,
+     "chord_line": "h=2.3771",
+     "chord_fixed": 1.0,
+     "chord_min": 1.0,
+     "chord_row": 3.0,
+     "refined": 2,
+     "cap": 1,
+     "why": "CN: union diameter 0.9999 < 1",
+     "seconds": 0.044
+    },
+    {
+     "test": "UNION",
+     "slot": "TL(1,0)",
+     "cap": 1,
+     "why": "A1: 1 alive cell(s)",
+     "n_pieces": 2,
+     "bbox": [
+      2.399183,
+      2.54857,
+      2.43055,
+      2.56157
+     ],
+     "diam": 0.19849,
+     "linf": 0.14939
+    },
+    {
+     "test": "ROLE-CLIP",
+     "role": "F1",
+     "slots": [
+      "TL(1,0)",
+      "TR(0,1)"
+     ],
+     "frac": 0.008078,
+     "n_pieces": 2,
+     "vol": 1.2414316426359248e-05,
+     "vol_before": 0.0015368791523410355,
+     "box_after": [
+      2.210521,
+      2.226251,
+      3.160957,
+      3.211803,
+      19.503788,
+      22.965013
+     ]
+    },
+    {
+     "test": "ROLE-CLIP",
+     "role": "F2",
+     "slots": [
+      "TR(0,1)"
+     ],
+     "frac": 1.0,
+     "n_pieces": 49,
+     "vol": 0.032444897955710615,
+     "vol_before": 0.032444897955710615,
+     "box_after": [
+      2.226249,
+      2.801668,
+      1.4835,
+      1.650835,
+      0.0,
+      90.0
+     ]
+    },
+    {
+     "test": "ROLE-CLIP",
+     "role": "F3",
+     "slots": [
+      "BL(1,0)"
+     ],
+     "frac": 1.0,
+     "n_pieces": 58,
+     "vol": 0.00788702721592301,
+     "vol_before": 0.00788702721592301,
+     "box_after": [
+      2.226249,
+      2.377085,
+      0.5,
+      0.807263,
+      0.0,
+      90.0
+     ]
+    },
+    {
+     "test": "SNAP-ROWS",
+     "label": "R.2.1.5.p2.p2.1",
+     "n_cands": 0,
+     "n_anon": 0,
+     "cands": [],
+     "verdict": null
+    },
+    {
+     "test": "SNAP",
+     "label": "R.2.1.5.p2.p2.1",
+     "where": "internal",
+     "verdict": null,
+     "rule": null,
+     "n_cands": 0,
+     "n_anon": 0,
+     "seconds": 0.001,
+     "stratum": null
+    }
+   ],
+   "steps": [
+    {
+     "step": "rebin",
+     "t": 0.55,
+     "seconds": 0.0,
+     "label": "round1"
+    },
+    {
+     "step": "normalise",
+     "t": 3.24,
+     "seconds": 2.688,
+     "label": "round1",
+     "kept": {
+      "P0": 0.249999,
+      "P1": 0.250025,
+      "P2": 0.249999,
+      "P3": 0.249999,
+      "P4": 0.249999,
+      "H": 0.999988,
+      "F1": 0.999977,
+      "F2": 0.999907,
+      "F3": 0.97166,
+      "F4": 0.837054,
+      "F5": 0.440804
+     },
+     "passes": 2,
+     "n_pieces": {
+      "P0": 4,
+      "P1": 4,
+      "P2": 4,
+      "P3": 4,
+      "P4": 4,
+      "H": 62,
+      "F1": 60,
+      "F2": 51,
+      "F3": 58,
+      "F4": 25,
+      "F5": 14
+     },
+     "corners": {}
+    },
+    {
+     "step": "sclip",
+     "t": 3.27,
+     "seconds": 0.036,
+     "label": "round1",
+     "dropped": {
+      "F4": 4,
+      "F5": 2
+     }
+    },
+    {
+     "step": "normalise",
+     "t": 4.76,
+     "seconds": 1.484,
+     "label": "round1s1",
+     "kept": {
+      "P0": 0.249999,
+      "P1": 0.250025,
+      "P2": 0.249999,
+      "P3": 0.249999,
+      "P4": 0.249999,
+      "H": 0.999983,
+      "F1": 0.999977,
+      "F2": 0.999907,
+      "F3": 0.97166,
+      "F4": 0.617932,
+      "F5": 0.356265
+     },
+     "passes": 2,
+     "n_pieces": {
+      "P0": 8,
+      "P1": 8,
+      "P2": 8,
+      "P3": 8,
+      "P4": 8,
+      "H": 62,
+      "F1": 60,
+      "F2": 51,
+      "F3": 58,
+      "F4": 40,
+      "F5": 22
+     },
+     "corners": {}
+    },
+    {
+     "step": "sclip",
+     "t": 4.79,
+     "seconds": 0.033,
+     "label": "round1",
+     "dropped": {
+      "F2": 1,
+      "F4": 3,
+      "F5": 2
+     }
+    },
+    {
+     "step": "options",
+     "t": 7.8,
+     "seconds": 2.985,
+     "n_free_opts": 38,
+     "n_fixed": {
+      "H": 4,
+      "F1": 20,
+      "F2": 64,
+      "F3": 16,
+      "F4": 40,
+      "F5": 40
+     },
+     "alive_cells": {
+      "BL(1,0)": 2,
+      "BR(0,1)": 4,
+      "BR(1,0)": 3,
+      "TR(0,1)": 4,
+      "TR(1,0)": 2,
+      "TL(1,0)": 1
+     }
+    },
+    {
+     "step": "hc-rows",
+     "t": 7.86,
+     "seconds": 0.062,
+     "n_dead": 0,
+     "n_free_opts": 38,
+     "alive_cells": {
+      "BL(1,0)": 2,
+      "BR(0,1)": 4,
+      "BR(1,0)": 3,
+      "TR(0,1)": 4,
+      "TR(1,0)": 2,
+      "TL(1,0)": 1
+     }
+    },
+    {
+     "step": "union",
+     "t": 7.97,
+     "seconds": 0.109,
+     "caps": {
+      "BL(1,0)": 1,
+      "BR(0,1)": null,
+      "BR(1,0)": 1,
+      "TR(0,1)": null,
+      "TR(1,0)": 1,
+      "TL(1,0)": 1
+     }
+    },
+    {
+     "step": "count",
+     "t": 60.37,
+     "seconds": 52.4,
+     "chords": false,
+     "feasible": true,
+     "nodes": 200001,
+     "capped": true
+    },
+    {
+     "step": "count",
+     "t": 111.53,
+     "seconds": 51.16,
+     "chords": true,
+     "feasible": true,
+     "nodes": 200001,
+     "capped": true
+    },
+    {
+     "step": "count-barH",
+     "t": 215.0,
+     "seconds": 103.468,
+     "slot": "TR(1,0)",
+     "feasible": true,
+     "nodes": 200001,
+     "capped": true
+    },
+    {
+     "step": "count-barH",
+     "t": 314.8,
+     "seconds": 99.801,
+     "slot": "TL(1,0)",
+     "feasible": true,
+     "nodes": 200001,
+     "capped": true
+    },
+    {
+     "step": "rebin",
+     "t": 923.58,
+     "seconds": 0.0,
+     "label": "round1"
+    },
+    {
+     "step": "normalise",
+     "t": 925.77,
+     "seconds": 2.187,
+     "label": "round1",
+     "kept": {
+      "P0": 0.249999,
+      "P1": 0.250025,
+      "P2": 0.249999,
+      "P3": 0.249999,
+      "P4": 0.249999,
+      "H": 0.99998,
+      "F1": 0.999977,
+      "F2": 0.998924,
+      "F3": 0.97166,
+      "F4": 0.472852,
+      "F5": 0.239152
+     },
+     "passes": 2,
+     "n_pieces": {
+      "P0": 16,
+      "P1": 16,
+      "P2": 16,
+      "P3": 16,
+      "P4": 16,
+      "H": 62,
+      "F1": 60,
+      "F2": 50,
+      "F3": 58,
+      "F4": 78,
+      "F5": 46
+     },
+     "corners": {}
+    },
+    {
+     "step": "sclip",
+     "t": 925.79,
+     "seconds": 0.029,
+     "label": "round1",
+     "dropped": {
+      "F2": 1,
+      "F4": 17,
+      "F5": 8
+     }
+    },
+    {
+     "step": "normalise",
+     "t": 927.87,
+     "seconds": 2.074,
+     "label": "round1s1",
+     "kept": {
+      "P0": 0.249999,
+      "P1": 0.250025,
+      "P2": 0.249999,
+      "P3": 0.249999,
+      "P4": 0.249999,
+      "H": 0.999978,
+      "F1": 0.999977,
+      "F2": 0.973211,
+      "F3": 0.97166,
+      "F4": 0.370674,
+      "F5": 0.171229
+     },
+     "passes": 2,
+     "n_pieces": {
+      "P0": 32,
+      "P1": 32,
+      "P2": 32,
+      "P3": 32,
+      "P4": 32,
+      "H": 62,
+      "F1": 60,
+      "F2": 49,
+      "F3": 58,
+      "F4": 61,
+      "F5": 70
+     },
+     "corners": {}
+    },
+    {
+     "step": "sclip",
+     "t": 927.9,
+     "seconds": 0.037,
+     "label": "round1",
+     "dropped": {
+      "F4": 5,
+      "F5": 13
+     }
+    },
+    {
+     "step": "options",
+     "t": 930.66,
+     "seconds": 2.746,
+     "n_free_opts": 38,
+     "n_fixed": {
+      "H": 4,
+      "F1": 20,
+      "F2": 64,
+      "F3": 16,
+      "F4": 40,
+      "F5": 40
+     },
+     "alive_cells": {
+      "BL(1,0)": 2,
+      "BR(0,1)": 4,
+      "BR(1,0)": 3,
+      "TR(0,1)": 4,
+      "TR(1,0)": 2,
+      "TL(1,0)": 1
+     }
+    },
+    {
+     "step": "hc-rows",
+     "t": 930.74,
+     "seconds": 0.078,
+     "n_dead": 0,
+     "n_free_opts": 38,
+     "alive_cells": {
+      "BL(1,0)": 2,
+      "BR(0,1)": 4,
+      "BR(1,0)": 3,
+      "TR(0,1)": 4,
+      "TR(1,0)": 2,
+      "TL(1,0)": 1
+     }
+    },
+    {
+     "step": "union",
+     "t": 930.83,
+     "seconds": 0.094,
+     "caps": {
+      "BL(1,0)": 1,
+      "BR(0,1)": null,
+      "BR(1,0)": 1,
+      "TR(0,1)": null,
+      "TR(1,0)": 1,
+      "TL(1,0)": 1
+     }
+    },
+    {
+     "step": "count",
+     "t": 1008.54,
+     "seconds": 77.712,
+     "chords": false,
+     "feasible": true,
+     "nodes": 200001,
+     "capped": true
+    },
+    {
+     "step": "count",
+     "t": 1085.23,
+     "seconds": 76.684,
+     "chords": true,
+     "feasible": true,
+     "nodes": 200001,
+     "capped": true
+    },
+    {
+     "step": "count-barH",
+     "t": 1221.24,
+     "seconds": 136.012,
+     "slot": "TR(1,0)",
+     "feasible": true,
+     "nodes": 200001,
+     "capped": true
+    },
+    {
+     "step": "count-barH",
+     "t": 1361.74,
+     "seconds": 140.502,
+     "slot": "TL(1,0)",
+     "feasible": true,
+     "nodes": 200001,
+     "capped": true
+    }
+   ]
   }
  },
  "cls": "k5_16",
@@ -13765,8 +19871,10 @@
    "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)"
   }
  },
- "verdicts": {},
- "stage_reached": "0",
+ "verdicts": {
+  "g1": "ALIVE"
+ },
+ "stage_reached": "2 (tree)",
  "cells": [
   [
    0.5,
