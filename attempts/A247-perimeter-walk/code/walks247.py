@@ -23,28 +23,11 @@ import time
 import numpy as np
 
 import geo247 as G
+from ring247 import Ring, corner_options, option_ok, free_multisets, lemma_kill, NEXT, WALL   # noqa: F401
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ATT = os.path.abspath(os.path.join(HERE, '..'))
 ROOT = os.path.abspath(os.path.join(ATT, '..', '..'))
-NEXT = {'BL': 'BR', 'BR': 'TR', 'TR': 'TL', 'TL': 'BL'}          # ring order of the corners
-# the two slots on the wall between c and NEXT[c]: (c's slot, NEXT[c]'s slot)
-WALL = {'BL': ('BL10', 'BR10'), 'BR': ('BR01', 'TR01'), 'TR': ('TR10', 'TL10'), 'TL': ('TL01', 'BL01')}
-
-
-def lemma_kill(a, b):
-    """closed-form [T] pair kills (monotone, any level, n-general, s in (3.5, 4)): NOT-SELF-
-    SUFFICIENT (A246): two meeters of c cannot both meet c01 and c10; TWO-FAR (A247): two
-    meeters of c cannot both meet the same far slot."""
-    if a[0] != 'M' or b[0] != 'M' or a[1] != b[1]:
-        return False
-    c = a[1]
-    A, B = set(a[2]), set(b[2])
-    if {'%s01' % c, '%s10' % c} <= A and {'%s01' % c, '%s10' % c} <= B:
-        return True
-    return any(f[:2] != c and f in A and f in B for f in G.SLOTS_OF[c])
-
-
 class Facts(object):
     def __init__(self, paths, lemmas=True):
         self.lemmas, self.status, self.eta, self.eta_avoid, self.cache = lemmas, {}, None, None, {}
@@ -64,101 +47,6 @@ class Facts(object):
 
     def n_infeasible(self):
         return sum(1 for v in self.status.values() if v == 'INFEASIBLE')
-
-
-def corner_options(c, facts, slotmet=False):
-    subs = [tuple(sorted(comb, key=G.RING.index)) for r in range(5)
-            for comb in itertools.combinations(G.SLOTS_OF[c], r)]
-    out = []
-    for i, d1 in enumerate(subs):
-        for d2 in subs[i:]:
-            s1, s2 = ('M', c, ('%s00' % c,) + d1), ('M', c, ('%s00' % c,) + d2)
-            if facts.forbidden(s1, s2):
-                continue
-            if slotmet and not all(z in d1 or z in d2 for z in ('%s01' % c, '%s10' % c)):
-                continue
-            out.append((d1, d2, s1, s2))
-    return out
-
-
-def option_ok(o1, o2, facts):
-    return not (facts.forbidden(o1[2], o2[2]) or facts.forbidden(o1[2], o2[3]) or
-                facts.forbidden(o1[3], o2[2]) or facts.forbidden(o1[3], o2[3]))
-
-
-def free_multisets(facts):
-    F = [()] + G.free_sets()
-    specs = {f: ('F', f) for f in F if f}
-    ok2 = {(a, b): (not a or not b or not facts.forbidden(specs[a], specs[b])) for a in F for b in F}
-    out = []
-    for comb in itertools.combinations_with_replacement(F, 3):
-        if any(not ok2[(comb[i], comb[j])] for i in range(3) for j in range(i + 1, 3)):
-            continue
-        cnt = collections.Counter(z for f in comb for z in f)
-        out.append((tuple(cnt.get(z, 0) for z in G.SLOT_RING), comb))
-    return out, specs
-
-
-class Ring(object):
-    """the transfer matrices: options per corner, pair-fact adjacency, slot counts on each wall."""
-
-    def __init__(self, facts, slotmet=False):
-        self.facts = facts
-        self.opts = {c: corner_options(c, facts, slotmet) for c in G.CORNERS}
-        self.adj = {}
-        self.cnt = {}
-        for c in G.CORNERS:
-            c2 = NEXT[c]
-            o1, o2 = self.opts[c], self.opts[c2]
-            A = np.array([[option_ok(a, b, facts) for b in o2] for a in o1], bool)
-            z1, z2 = WALL[c]
-            n1 = np.array([[sum(z1 in d for d in (a[0], a[1])) + sum(z1 in d for d in (b[0], b[1])) for b in o2] for a in o1])
-            n2 = np.array([[sum(z2 in d for d in (a[0], a[1])) + sum(z2 in d for d in (b[0], b[1])) for b in o2] for a in o1])
-            self.adj[c], self.cnt[c] = A, (n1, n2)
-        self.fms, self.fspecs = free_multisets(facts)
-        self.compat = {}
-
-    def compat_mask(self, c, comb):
-        key = (c, comb)
-        if key not in self.compat:
-            m = np.ones(len(self.opts[c]), bool)
-            for f in comb:
-                if f:
-                    for i, o in enumerate(self.opts[c]):
-                        if m[i] and (self.facts.forbidden(self.fspecs[f], o[2]) or self.facts.forbidden(self.fspecs[f], o[3])):
-                            m[i] = False
-            self.compat[key] = m
-        return self.compat[key]
-
-    def matrices(self, vec, comb):
-        need = {z: max(0, 2 - v) for z, v in zip(G.SLOT_RING, vec)}
-        M = {}
-        for c in G.CORNERS:
-            z1, z2 = WALL[c]
-            n1, n2 = self.cnt[c]
-            m = self.adj[c] & (n1 >= need[z1]) & (n2 >= need[z2])
-            m &= self.compat_mask(c, comb)[:, None] & self.compat_mask(NEXT[c], comb)[None, :]
-            M[c] = m.astype(np.int64)
-        return M
-
-    def count(self, vec, comb):
-        M = self.matrices(vec, comb)
-        P = M['BL'] @ M['BR'] @ M['TR'] @ M['TL']
-        return int(np.trace(P)), M
-
-    def enumerate(self, M, comb, cap):
-        out = []
-        oBL, oBR, oTR, oTL = (self.opts[c] for c in G.CORNERS)
-        for i in range(len(oBL)):
-            for j in np.flatnonzero(M['BL'][i]):
-                for k in np.flatnonzero(M['BR'][j]):
-                    for l in np.flatnonzero(M['TR'][k]):
-                        if M['TL'][l, i]:
-                            o = (oBL[i], oBR[j], oTR[k], oTL[l])
-                            out.append((tuple((c, oc[0], oc[1]) for c, oc in zip(G.CORNERS, o)), tuple(sorted(comb))))
-                            if len(out) >= cap:
-                                return out
-        return out
 
 
 def canon_walk(rec):
@@ -250,13 +138,14 @@ def main():
     ap.add_argument('--slotmet', action='store_true')
     ap.add_argument('--corpus', action='store_true')
     ap.add_argument('--no-lemmas', action='store_true')
+    ap.add_argument('--type-f', action='store_true', help='CONDITIONAL: every corner of the PI type-F form (flat meeter + tilted partner)')
     ap.add_argument('--list-cap', type=int, default=200000, help='list walks explicitly only up to this raw count')
     ap.add_argument('--tag', default='')
     a = ap.parse_args()
     t0 = time.time()
     facts = Facts([os.path.join(ATT, p) if not os.path.isabs(p) else p for p in a.pairs], lemmas=not a.no_lemmas)
     print('pair facts: %d rows, %d INFEASIBLE, level (%s, %s), lemmas %s' % (len(facts.status), facts.n_infeasible(), facts.eta, facts.eta_avoid, not a.no_lemmas))
-    ring = Ring(facts, a.slotmet)
+    ring = Ring(facts, a.slotmet, a.type_f)
     print('corner options: ' + ', '.join('%s %d' % (c, len(ring.opts[c])) for c in G.CORNERS) + '; free multisets %d' % len(ring.fms))
     raw = 0
     per_free = collections.Counter()
@@ -275,8 +164,8 @@ def main():
             walks.setdefault(k, rec)
     print('raw walks %d (by free squares used: %s); up to D4 %s (%.0f s)' % (
         raw, dict(sorted(per_free.items())), len(walks) if raw <= a.list_cap else 'not listed (cap %d)' % a.list_cap, time.time() - t0))
-    tag = a.tag or (os.path.basename(a.pairs[0]).replace('pairs247_', '').replace('.jsonl', '') + ('_slotmet' if a.slotmet else '') + ('_nolemmas' if a.no_lemmas else ''))
-    summary = {'kind': 'summary', 'pairs': a.pairs, 'slotmet': a.slotmet, 'lemmas': not a.no_lemmas, 'eta': facts.eta,
+    tag = a.tag or (os.path.basename(a.pairs[0]).replace('pairs247_', '').replace('.jsonl', '') + ('_slotmet' if a.slotmet else '') + ('_nolemmas' if a.no_lemmas else '') + ('_typef' if a.type_f else ''))
+    summary = {'kind': 'summary', 'pairs': a.pairs, 'slotmet': a.slotmet, 'type_f': a.type_f, 'lemmas': not a.no_lemmas, 'eta': facts.eta,
                'eta_avoid': facts.eta_avoid, 'n_infeasible_pairs': facts.n_infeasible(),
                'corner_options': {c: len(ring.opts[c]) for c in G.CORNERS}, 'free_multisets': len(ring.fms),
                'raw_walks': raw, 'raw_by_free_used': dict(per_free), 'walks_d4': len(walks) if raw <= a.list_cap else None,
