@@ -13,6 +13,6 @@ python code/pages247.py
 python code/summarise247.py > /dev/null
 echo PHASE_B_DONE
 [ -f logs/STOP ] && exit 0
-python code/triples247.py --walks results/walks247_window_exact_0.05_typef_slotmet.jsonl --eta 0.05 --eta-avoid 0.07 --budget 200000
+python code/triples247.py --walks results/walks247_window_exact_0.05_typef.jsonl --max-walks 5000 --eta 0.05 --eta-avoid 0.07 --budget 200000
 python code/summarise247.py > /dev/null
 echo TRIPLES_DONE

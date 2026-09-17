@@ -27,7 +27,7 @@ case "${1:-}" in
              "$PY" "$HERE/walks247.py" --pairs "$T" --type-f --slotmet --list-cap 1000000 ;;
   triples)   [ -f "$ATT/logs/STOP" ] && { echo "STOP present"; exit 0; }
              "$PY" "$HERE/triples247.py" --three-in-box --eta "$ETA" --eta-avoid "$AV" --budget 300000
-             "$PY" "$HERE/triples247.py" --walks "results/walks247_window_exact_${ETA}_typef_slotmet.jsonl" --eta "$ETA" --eta-avoid "$AV" --budget 200000 ;;
+             "$PY" "$HERE/triples247.py" --walks "results/walks247_window_exact_${ETA}_typef.jsonl" --max-walks 5000 --eta "$ETA" --eta-avoid "$AV" --budget 200000 ;;
   pages)     "$PY" "$HERE/pages247.py" ;;
   summary)   "$PY" "$HERE/summarise247.py" ;;
   *) echo "usage: run247.sh test|catalogue|pairs|walks|triples|pages|summary [ETA AV [shard]]"; exit 1 ;;

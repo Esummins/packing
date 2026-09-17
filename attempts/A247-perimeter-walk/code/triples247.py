@@ -69,6 +69,7 @@ def main():
     ap.add_argument('--eta', type=float, default=0.05)
     ap.add_argument('--budget', type=int, default=600_000)
     ap.add_argument('--top', type=int, default=0, help='run only the N most valuable triples (0 = all)')
+    ap.add_argument('--max-walks', type=int, default=0, help='extract the triple types from the first N walks of the list (0 = all)')
     ap.add_argument('--eta-avoid', type=float, default=None)
     ap.add_argument('--three-in-box', action='store_true')
     ap.add_argument('--tag', default='')
@@ -100,6 +101,8 @@ def main():
     if a.walks:
         walks = [json.loads(l) for l in open(os.path.join(ATT, a.walks) if not os.path.isabs(a.walks) else a.walks)]
         walks = [w for w in walks if w.get('kind') != 'summary']
+        if a.max_walks:
+            walks = walks[:a.max_walks]
         tr = triples_of(walks)
         log('%d walks, %d distinct touching triples' % (len(walks), len(tr)))
         order = sorted(tr.items(), key=lambda kv: -len(kv[1][1]))

@@ -37,11 +37,12 @@ Sources: `construct_towards.md` (A246: the rules, NOT-SELF-SUFFICIENT, TYPE-F-OW
 > is allowed (0 missing of 764).
 >
 > **[F] The pair table** (§4): of the 851 pair problems (exact form, level (0.05, 0.07), window [3.82, ŝ]) the certified
-> branch-and-bound decided N_DEC (N_FEAS feasible with exact witnesses, N_INF infeasible) within 2·10⁵ boxes each; the
-> rest are undecided.  The undecided pairs are the η-DEGENERATE ones: the exact form's constraints "depth ≥ η" and
+> branch-and-bound decided 759 (697 feasible with exact witnesses, 62 infeasible: 21 same-corner, 28 meeter–free, 13
+> free–free, none adjacent) within 2·10⁵ boxes each; 92 are undecided.  The undecided pairs are the η-DEGENERATE ones: the exact form's constraints "depth ≥ η" and
 > "depth ≤ η′" leave a forced overlap of order η, and the branch-and-bound's cost grows like η⁻ᵏ; the same degeneracy that
-> left SLOT-MET's limit [S] in A246.  No walk was killed by the table beyond the lemmas, and the per-walk triple searches
-> were not reached.  **STUCK-EXIST(11) is not closed on the window**; k0_00 unchanged.
+> left SLOT-MET's limit [S] in A246.  The 62 kills cut the counts by a factor ≈ 5 (65 options per corner, 16 989 free
+> triples: 13 453 179 721 labelled walks; 4 562 962 219 with SLOT-MET; 820 161 = 102 945 up to D4 under type-F) — nowhere
+> near "few"; the triple searches over the type-F list run detached (§4.4).  **STUCK-EXIST(11) is not closed on the window**; k0_00 unchanged.
 
 ## 1. Setting: the ring, the meeting level, the walk
 
@@ -106,11 +107,12 @@ their number is the trace of the product of the four matrices: an exact count, n
 when it is short; membership of a given walk is decided directly (`walk_allowed`).
 
 **3.2 The count.**  Kills used: NOT-SELF-SUFFICIENT (both meeters ⊇ {c01, c10}) and TWO-FAR (both ∋ the same far slot):
-136 → **69 options per corner**.  Labelled walks: **66 112 676 788**, by free squares carrying cells: 0 → 160 000,
+136 → **69 options per corner** (65 with the pair table's kills).  Labelled walks: **66 112 676 788**, by free squares carrying cells: 0 → 160 000,
 1 → 29 129 440, 2 → 1 907 890 776, 3 → 64 175 496 572 (`walks247_lemmas_level0.jsonl`).  Up to relabelling and D4
 (≤ 8 per orbit) that is ≥ 8.26·10⁹ walks.  With SLOT-MET (each own slot met by one of its corner's meeters; A246
 [T-computed] at depth ≥ η, [S] at 0): 36 options per corner and **15 684 260 866** labelled walks (0 → 160 000,
-1 → 15 904 800, 2 → 643 651 938, 3 → 15 024 544 128).  So the plain answer: **the walks are not few** — with the proved,
+1 → 15 904 800, 2 → 643 651 938, 3 → 15 024 544 128).  With the pair table's 62 certified kills (§4.2) the free
+triples fall to 16 989 and the walks to **13 453 179 721** (65 options) and **4 562 962 219** with SLOT-MET (35).  So the plain answer: **the walks are not few** — with the proved,
 monotone rules the freedom is 69 per corner × 20 825 free triples, and no count-type inequality is violated.
 
 **3.3 The PI's picture as a conditional count [C].**  Suppose every corner is of A246's type F: a flat meeter on one
@@ -118,6 +120,7 @@ wall with set {c00, own slot} or {c00, own slot, far slot of that wall} (δ > s 
 {c00, other own slot} or {c00, other own slot, far slot of the other wall} — 4 options per corner (8 with the choice of
 wall, 4 up to the diagonal).  Then: **960 769** labelled walks (0 free squares carrying cells → 1: the all-ADJ
 wall-grain ring, A246 §3.4 (b) at every wall; 1 → 288; 2 → 25 168; 3 → 935 312); SLOT-MET is automatic in this picture.
+With the pair table's kills: **820 161** labelled, **102 945 up to D4** (`walks247_window_exact_0.05_typef.jsonl`, listed).
 Even this conditional list is not "few": the free squares are the
 freedom (a free square can carry 1–4 of the eight slots in 48 ways), and a per-walk bounded search over 8 + 3 poses is
 what A246 §3.4 called the 8-pose room statement.
@@ -141,7 +144,12 @@ rationalised onto the unit circle, all depths as Fractions); UNDECIDED / BUDGET 
 exact in this sense.
 
 **4.2 The pair table** (`pairs247`, exact form, level (0.05, 0.07), window, budget 2·10⁵ boxes per pair, 851 canonical
-pairs = 76 same-corner + 136 adjacent + 76 opposite + 396 meeter–free + 167 free–free): PAIR_TABLE_LINE.
+pairs = 76 same-corner + 136 adjacent + 76 opposite + 396 meeter–free + 167 free–free): **697 FEASIBLE** (exact rational
+witnesses; 212 of the 212 adjacent/opposite pairs), **62 INFEASIBLE** (same-corner 21 — e.g. a meeter on both far slots
+with a partner on either far slot; meeter–free 28 — e.g. the diagonal free square {c01, c10} beside a meeter that reaches
+the far floor slot without its own; free–free 13), **92 undecided** (51 of the 76 same-corner pairs, 27 meeter–free, 14
+free–free) — the list is in `results/walk247.md`.  THREE-IN-BOX (three meeters of one box, monotone form): undecided at
+3·10⁵ boxes.
 
 **4.3 Why the search does not decide** [T, as an analysis].  In the exact form at threshold η the constraints "meets
 with depth ≥ η" and "does not meet: depth ≤ η′" are adjacent (η′ = η is the sound choice; the gap η′ − η = 0.02 is a
@@ -154,14 +162,21 @@ wall on SLOT-MET and paid it with a 6-dimensional reduction proved by hand (CAP-
 per pair the table cannot be completed by search, and the per-walk 8-pose searches (task 3) are out of reach by the
 same factor.  What the walk enumeration therefore delivers is exact counts under proved rules, not kills.
 
+**4.4 The triples** (`triples247`, detached, resumable): over the first 5 000 walks of the type-F list there are 1 662
+distinct touching triples (a corner's two meeters and a third square sharing a cell, or three along a wall); each runs the
+three-square search (10 dims + s) at budget 2·10⁵ boxes; a certified triple kills every walk containing it.  The run
+continues after this note (`results/triples247_window_exact_0.05.jsonl`, `results/walk247.md` §4 summarises it; the
+same η-degeneracy applies, so most will be undecided).
+
 ## 5. Plain answers to the brief's questions
 
 * How many walks exist at s ≤ ŝ: 66 112 676 788 labelled (≥ 8.26·10⁹ up to D4) under the proved rules; 15 684 260 866
-  with SLOT-MET; 960 769 under the conditional type-F picture (TYPEF_KILLS_SHORT).  Not few.
+  with SLOT-MET; 13 453 179 721 / 4 562 962 219 with the 62 certified pair kills; 960 769 → 820 161 (102 945 up to D4)
+  under the conditional type-F picture.  Not few.
 * Killed analytically: every walk with a self-sufficient corner (NSS) or with two meeters of one corner on the same
   far slot (TWO-FAR) — 67 of the 136 corner options, i.e. all but 69^4/136^4 ≈ 6.6 % of the raw corner configurations;
-  above 4 + √2 every walk (UPPER-END).  Killed by the bounded search: N_INF pairs (0 corner options beyond the lemmas).
-  Remaining: everything else; the corpus's own walks are among them.
+  above 4 + √2 every walk (UPPER-END).  Killed by the bounded search: 62 pairs (4 more corner options, 3 836 free
+  triples), no triple yet.  Remaining: everything else; the corpus's own walks are among them.
 * STUCK-EXIST(11) on the window: **not closed**; k0_00 unchanged.  Conditional upper end: now a theorem (UPPER-END).
 * n-general: PROJECTION, TWO-FAR, the catalogue and the count are n-independent except through the free-square count
   f = n − 8 (the multiset of f free sets; f = 3 at n = 11) and Lemma TWO; UPPER-END is the statement that above

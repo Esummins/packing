@@ -76,10 +76,14 @@ def page_catalogue():
         eta = r.get('eta', 0.0) if r.get('exact') else 0.0
         met, gap = check_pose(pose, sw, eta)
         pg.text(x0 + 10, y0 - 6, '(%s) %s set %s' % (key, 'meeter' if kind == 'M' else 'free (box-avoiding)', ' '.join(cells)), 11, weight='bold')
-        pg.note(x0, y0 + 316, ['witness s = %.4f, pose (%.3f, %.3f, %.1f deg), exact rational check: %s' % (
+        lines = ['witness s = %.4f, pose (%.3f, %.3f, %.1f deg), exact rational check: %s' % (
             sw, pose[0], pose[1], math.degrees(pose[2]), w['exact']['ok']),
             'check as drawn: cells met at level %g = %s' % (eta, ' '.join(met)),
-            'containment gap %.3f; %s; tilt bins %s' % (gap, 'exact form' if r.get('exact') else 'monotone form', r.get('tilt_bins_deg', ''))])
+            'containment gap %.3f; %s; tilt bins %s' % (gap, 'exact form' if r.get('exact') else 'monotone form', r.get('tilt_bins_deg', ''))]
+        if r.get('exact') and sorted(met) != sorted(cells):
+            lines.append('NB: the avoid gap (depth <= %g on the other cells) admits this pose, whose threshold-%g set is larger;' % (r.get('eta_avoid', eta), eta))
+            lines.append('the set %s itself is a zero-margin case (a meeter reaching a far slot meets its own slot as deeply, s.4.3).' % ' '.join(cells))
+        pg.note(x0, y0 + 316, lines)
     pg.save(os.path.join(OUT, 'catalogue.svg'))
 
 
