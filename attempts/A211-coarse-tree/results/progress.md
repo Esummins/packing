@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-17 00:09:44
+# A211 progress -- 2026-09-17 00:10:11
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -454,7 +454,7 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0127 | zero | 2 (tree: 119 nodes, depth 8, CC 0, exact 0, NS 7, pockets 18) | DEAD (s0-only, WINDOW-PENDING) | 1784 |
 | k5_16_interior_Y0130 | g1 | 2 (tree: 13 nodes, depth 2, CC 0, exact 0, NS 0, pockets 1) | ALIVE | 124 |
 | k5_16_interior_Y0130 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 6 |
-| k5_16_interior_Y0186 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 8 |
+| k5_16_interior_Y0186 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 7 |
 | k5_16_interior_Y0186 | zero | 2 (tree: 5 nodes, depth 2, CC 0, exact 0, NS 2, pockets 0) | ALIVE (wall) | 2177 |
 | k5_16_interior_Y0281 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 2 |
 | k5_16_interior_Y0281 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 3 |
