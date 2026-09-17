@@ -16,3 +16,19 @@
    no-room (k=9, m=2): UNDECIDED in 24 s (2 pockets; 2 of 2 pocket(s) survive the cover)
    Lemma POCKET at R.3.4.2.3: 2 pockets (k=9, m=2): the next square instantiated in each
    node R.3.4.2.3.p1 d1 pocket<-[0]: INTERNAL (2.8 s, 1 rounds; t=31.7)
+   no-room (k=10, m=1): UNDECIDED in 16 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.4.2.3.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.4.2.3.p1.p1 d2 pocket<-[0]: INTERNAL (7.9 s, 1 rounds; t=56.2)
+   node R.3.4.2.3.p1.p1 d2: DEAD by CC -- rule CC at R.3.4.2.3.p1.p1 (Lemma CORNER-COVER; g1 pad, lam 1.004): rule CC: F3 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an int
+   node R.3.4.2.3.p2 d1 pocket<-[1]: INTERNAL (4.9 s, 1 rounds; t=61.1)
+   node R.3.4.2.3.p2r1 d1 root<-None: DEAD by REACH r1 (8.8 s, 1 rounds; t=70.0)
+   start R.3.4.2.3    => DEAD (5 nodes; t = 70 s of 1800.0)
+   start R.3.5: SKIPPED (filter)
+   => ALIVE (g1_page) in 70.0 s: 2 start runs, 5 nodes, depth 2, 1 CC kills, 0 exact leaf cascades, 0 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 8 inherited dead (8 up front + 0 in tree), 10 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 7 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2 d2 DEAD INHERIT 0.0s; R.3.3 d2 DEAD INHERIT 0.0s; R.3.4.1 d3 DEAD INHERIT 0.0s; R.3.4.2.1 d4 DEAD INHERIT 0.0s; R.3.4.2.2 d4 DEAD INHERIT 0.0s; R.3.4.2.3 d0 INTERNAL 3.4s; R.3.4.2.3.p1 d1 INTERNAL 2.8s; R.3.4.2.3.p1.p1 d2 DEAD CC 7.9s; R.3.4.2.3.p2 d1 INTERNAL 4.9s; R.3.4.2.3.p2r1 d1 DEAD REACH 8.8s
+== k5_11_interior_Y0929: g1 ALIVE | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 338, 'misses': 229, 'entries': 229}; clip {'hits': 3183, 'misses': 416332, 'entries': 16332}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 567, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 5}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 396, 'obs_misses': 218, 'build_hits': 0, 'build_misses': 2, 'bisect_hits': 0, 'bisect_misses': 2, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 218, 'build_entries': 2, 'bisect_entries': 2, 'on': True}
