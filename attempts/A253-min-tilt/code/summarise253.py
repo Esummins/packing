@@ -34,12 +34,15 @@ def main():
           'M = sup over the eight deltas and the poker pose of min(ring feasibility without the',
           'tilt block, A252 poke_margin).  M > 0 means: a ring of the family AND a ninth square',
           'whose interior meets the slot-overlap ribbon exist at that common tilt.', '',
-          '| s | tau (deg) | M | ring feas | poker wall | binding term |',
-          '|---|---|---|---|---|---|']
+          '| s | tau (deg) | M | ring feas | poker wall | least ring term | least poker term | who binds |',
+          '|---|---|---|---|---|---|---|---|']
     for r in sorted(cur, key=lambda q: (q['side'], -q['tau_deg'])):
-        b = (r.get('binding') or [['-', 0]])[0]
-        L.append('| %s | %.3f | %+.6f | %+.6f | %s | %s %+.5f |'
-                 % (r['side'], r['tau_deg'], r['M'], r['feas'], r['wall'], b[0], b[1]))
+        b = r.get('binding') or []
+        rt, pk = (b[0] if len(b) > 0 else ['-', 0]), (b[3] if len(b) > 3 else ['-', 0])
+        who = 'poker' if pk[1] < rt[1] else 'ring'
+        L.append('| %s | %.3f | %+.3e | %+.3e | %s | %s %+.2e | %s %+.2e | %s |'
+                 % (r['side'], r['tau_deg'], r['M'], r['feas'], r['wall'], rt[0], rt[1],
+                    pk[0], pk[1], who if b else '-'))
     L += ['', 'Least tilt at which M > 0 was found, per side (the effort is the row count above',
           'times ~40 s of Nelder-Mead at maxiter 900, warm-started down the ladder):', '']
     for sd in sorted({r['side'] for r in cur}):

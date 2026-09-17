@@ -24,9 +24,10 @@ results `results/mintilt253.md` (+ `mintilt253_curve.jsonl`, `room253.jsonl`, `l
 > margin M(τ, s) = sup over the eight δ and the poker pose of min(ring feasibility, A252's
 > `poke_margin`) is **strictly positive for every τ > 0 tested down to 0.1°** — at ŝ,
 > M = 7.75·10⁻³ (14.545°), 7.8·10⁻⁴ (4°), 4.8·10⁻⁵ (1°), 9.8·10⁻⁷ (0.25°), **5.7·10⁻⁸ (0.1°)** —
-> and the quantity that degenerates is precisely the PI's one: at every τ ≤ 4° the binding term is
-> **`poker_ribbon`, the poker's depth in the slot-overlap ribbon**, while the ring's own margin stays
-> two to four orders of magnitude larger.  So the ribbon does close as the tilt falls, exactly as the
+> and the quantity that degenerates is precisely the PI's one: at ŝ the binding term at every
+> τ ≤ 4° is the **POKER's** (`poker_ribbon`, its depth in the slot-overlap ribbon, or its gap to the
+> adjacent floor meeter), while the ring's own margin stays up to three orders of magnitude larger
+> (1.2·10⁻³ against 9.8·10⁻⁷ at τ = 0.25°).  So the ribbon does close as the tilt falls, exactly as the
 > PI said — but it closes only **in the limit**, at τ = 0.  (Effort: 24 Nelder–Mead sup-margin runs
 > per side over an 8-δ + 3-poker joint objective, warm-started down the tilt ladder, ~40 s each; the
 > upper end of the tilt window is between 26° and 30° at ŝ — the family is an OPEN interval
@@ -88,10 +89,13 @@ the ring and of the poker.  The pattern is uniform across s = 3.82, ŝ, 3.99:
 
     tau (deg)   14.545     8       4       2       1      0.5     0.25     0.1
     M at s-hat  7.75e-3  2.84e-3 7.80e-4 2.15e-4 4.76e-5 1.42e-5 9.83e-7  5.70e-8
-    binding     ribbon   gap      ribbon  gap     ribbon  ribbon  ribbon   ribbon
+    ring feas   7.76e-3  2.84e-3 8.39e-4 2.15e-4 7.64e-5 1.45e-5 1.16e-3  2.22e-5
+    who binds   poker    poker   poker   both    poker   poker   poker    poker
 
 M falls smoothly and stays positive; the ring's own margin `feas` is far larger than M at the small
-tilts (1.2·10⁻³ at τ = 0.25°), so **the ring is comfortable and the POKER is what is starving**.
+tilts (1.2·10⁻³ against 9.8·10⁻⁷ at τ = 0.25°), so **the ring is comfortable and the POKER is what
+is starving**.  (At s = 3.82 the ring's own terms bind down to τ ≈ 1°, the poker's below that; the
+search loses resolution at τ = 0.1° there — M = −3·10⁻⁶ is a failure to find, not an exclusion.)
 
 **Why the ribbon closes only in the limit.**  Both wall touchers of the wall x = 0 (B_BL with offset
 δ, B_TL with offset δ′) touch the wall at a single VERTEX when 0 < θ < 90°, at heights δ + cos τ and

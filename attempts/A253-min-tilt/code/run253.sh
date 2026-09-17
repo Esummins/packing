@@ -8,6 +8,7 @@ set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"
 ATT="$(cd "$HERE/.." && pwd)"
 ROOT="$(cd "$ATT/../.." && pwd)"
+SELF="$HERE/run253.sh"
 export PYTHONDONTWRITEBYTECODE=1
 mkdir -p "$ATT/logs" "$ATT/results"
 stage="${1:-ladder}"
@@ -18,12 +19,12 @@ SIG="${SIG:-00110011}"
 stop() { [ -f "$ATT/logs/STOP" ] && { echo "STOP present"; exit 0; }; return 0; }
 PATHS="attempts/A253-min-tilt/results attempts/A253-min-tilt/logs docs/residue_map/campaigns/A253-min-tilt"
 shard() {  # commit the stage's rows, explicit pathspecs only (retried: the two lanes share the index)
-  cd "$ROOT"
+ ( cd "$ROOT"
   for k in 1 2 3 4 5; do
     if git add -- $PATHS >/dev/null 2>&1 && \
-       git commit -q -m "A253: $1 rows" -- $PATHS >/dev/null 2>&1; then return 0; fi
+       git commit -q -m "A253: $1 rows" -- $PATHS >/dev/null 2>&1; then exit 0; fi
     sleep 7
-  done
+  done ) || true
   return 0
 }
 case "$stage" in
@@ -40,16 +41,16 @@ case "$stage" in
   oneparam) python "$HERE/cert253.py" --mode oneparam --boxes "${2:-12}" --taus "${3:-14.545,6,2}" ;;
   summary)  python "$HERE/summarise253.py" ;;
   pages)    python "$HERE/pages253.py" ;;
-  ladder)   stop; bash "$0" limit;    shard limit;    stop
-            bash "$0" curve;    shard curve;    stop
-            bash "$0" summary;  bash "$0" pages; shard "summary + pages"; stop
-            bash "$0" bisect;   shard bisect;   stop
-            bash "$0" exact;    shard exact;    stop
-            bash "$0" oneparam; shard oneparam; stop
-            bash "$0" minimax;  shard minimax;  stop
-            bash "$0" summary;  bash "$0" pages; shard "summary + pages"
+  ladder)   stop; bash "$SELF" limit;    shard limit;    stop
+            bash "$SELF" curve;    shard curve;    stop
+            bash "$SELF" summary;  bash "$SELF" pages; shard "summary + pages"; stop
+            bash "$SELF" bisect;   shard bisect;   stop
+            bash "$SELF" exact;    shard exact;    stop
+            bash "$SELF" oneparam; shard oneparam; stop
+            bash "$SELF" minimax;  shard minimax;  stop
+            bash "$SELF" summary;  bash "$SELF" pages; shard "summary + pages"
             echo "LADDER DONE" ;;
-  roomlane) stop; bash "$0" room; shard room; bash "$0" summary; bash "$0" pages
+  roomlane) stop; bash "$SELF" room; shard room; bash "$SELF" summary; bash "$SELF" pages
             shard "room summary + pages"; echo "ROOMLANE DONE" ;;
   *) echo "usage: run253.sh test|limit|curve|room|bisect|minimax|exact|oneparam|summary|pages|ladder|roomlane"; exit 1 ;;
 esac
