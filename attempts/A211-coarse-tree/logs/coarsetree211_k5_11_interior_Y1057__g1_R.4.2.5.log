@@ -1,0 +1,41 @@
+19:33:02 [p8a] start k5_11_interior_Y1057 pad g1 node R.4.2.5 wall 1800 (lab 7, free 17326 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 g1 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1057_g1_s0.json)
+   INHERIT k5_11_interior_Y1057 pad g1: 5 prior trees, 241 paths, 10 branches inherited DEAD (final, with their certificates), 5 start nodes (0 from the A203 root)
+== k5_11_interior_Y1057 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_11_interior_Y1057_g1_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 10 dead branches (final) + 5 start nodes ['R.4.2.4', 'R.4.2.5', 'R.4.3', 'R.4.4', 'R.4.5']; H [2.358, 2.498, 1.24, 1.38, 14.25, 28.072]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1          BR(0,1)<-(13,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057.json
+   INHERITED DEAD R.2          BR(0,1)<-(18,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057.json
+   INHERITED DEAD R.3          BR(0,1)<-(22,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057.json
+   INHERITED DEAD R.4.1        BL(1,1)<-(7,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057.json
+   INHERITED DEAD R.4.2.1      TL(1,0)<-(9,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057.json
+   INHERITED DEAD R.4.2.2      TL(1,0)<-(13,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057.json
+   INHERITED DEAD R.4.2.3.p1   (2.197479, 2.440545, 2.327774, 2.558588)<-(0,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057__g1_R.4.2.3.p1.json
+   INHERITED DEAD R.4.2.3.p2   (2.582439, 3.377084, 3.012962, 3.377084)<-(1,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057__g1_R.4.2.3.p2.json
+   INHERITED DEAD R.4.2.3.p3   (3.237308, 3.377084, 1.607691, 1.902689)<-(2,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057__g1_R.4.2.3.p3.json
+   INHERITED DEAD R.4.2.3.p4   (2.458337, 2.591321, 2.719675, 2.835348)<-(3,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1057__g1_R.4.2.3.p4.json
+   A229 SHARD: --start R.4.2.5 -- 1 of them are start nodes of this page/pad right now (5 start nodes in all)
+   start R.4.2.4: SKIPPED (filter)
+   start R.4.2.5: applied step 1/1 -- TL(1,0) <- [19]
+   node R.4.2.5    d0 root: INTERNAL (3.2 s, 1 rounds; t=10.0)
+   no-room (k=9, m=2): UNDECIDED in 29 s (4 pockets; 3 of 4 pocket(s) survive the cover)
+   Lemma POCKET at R.4.2.5: 4 pockets (k=9, m=2): the next square instantiated in each
+   node R.4.2.5.p1 d1 pocket<-[0]: INTERNAL (10.6 s, 1 rounds; t=49.9)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 10 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.4.2.5.p1 d1: DEAD by NOROOM-POCKET -- no-room at R.4.2.5.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.4.2.5.p2 d1 pocket<-[1]: INTERNAL (5.8 s, 1 rounds; t=68.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.4.2.5.p2 d1: DEAD by NOROOM -- no-room at R.4.2.5.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.4.2.5.p3 d1 pocket<-[2]: DEAD by EmptyBox r1 (1.6 s, 1 rounds; t=72.1)
+   node R.4.2.5.p4 d1 pocket<-[3]: DEAD by EmptyBox r1 (1.9 s, 1 rounds; t=74.0)
+   start R.4.2.5      => DEAD (5 nodes; t = 74 s of 1800.0)
+   start R.4.3: SKIPPED (filter)
+   start R.4.4: SKIPPED (filter)
+   start R.4.5: SKIPPED (filter)
+   => ALIVE (g1_page) in 74.0 s: 5 start runs, 5 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 1 pocket splits, 0 role splits (0 empty-half kills), 10 inherited dead (10 up front + 0 in tree), 14 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 6 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3 d1 DEAD INHERIT 0.0s; R.4.1 d2 DEAD INHERIT 0.0s; R.4.2.1 d3 DEAD INHERIT 0.0s; R.4.2.2 d3 DEAD INHERIT 0.0s; R.4.2.3.p1 d4 DEAD INHERIT 0.0s; R.4.2.3.p2 d4 DEAD INHERIT 0.0s; R.4.2.3.p3 d4 DEAD INHERIT 0.0s; R.4.2.3.p4 d4 DEAD INHERIT 0.0s; R.4.2.5 d0 INTERNAL 3.2s; R.4.2.5.p1 d1 DEAD NOROOM-POCKET 10.6s; R.4.2.5.p2 d1 DEAD NOROOM 5.8s; R.4.2.5.p3 d1 DEAD EmptyBox 1.6s; R.4.2.5.p4 d1 DEAD EmptyBox 1.9s
+== k5_11_interior_Y1057: g1 ALIVE | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 416, 'misses': 214, 'entries': 214}; clip {'hits': 9989, 'misses': 546201, 'entries': 146201}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 630, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 6}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 515, 'obs_misses': 200, 'build_hits': 0, 'build_misses': 3, 'bisect_hits': 0, 'bisect_misses': 3, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 200, 'build_entries': 3, 'bisect_entries': 3, 'on': True}
