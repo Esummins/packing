@@ -31,8 +31,9 @@ vertex sectors of the separation case analysis are NOT closed, so `centre_disc_r
 bound itself — stays an axiom [T-computed] (A251's family-wide search) and `ring_pocket_eleven`
 [C] stays the obligation.
 
-**Status (2026-09-17).**  `unit_square_inball`, `three_disc`, `mid_notch_wall`: axioms [T-prose];
-`centre_disc_ring`: axiom [T-computed]; `ring_pocket_eleven`, `family_stuck_non_ring`: axioms [C];
+**Status (2026-09-17, A252).**  `unit_square_inball`, `three_disc`, `mid_notch_wall`: axioms
+[T-prose]; `centre_disc_ring`: REMOVED (false, see `CentreDisc.lean`); `ring_pocket_eleven`,
+`family_stuck_non_ring`: axioms [C];
 `inradius_sep`, `capacity_le_two_of_centre_disc`, `family_stuck_eleven_of_ring_pocket`: theorems.
 -/
 
@@ -104,17 +105,12 @@ axiom mid_notch_wall (m : ℝ) (hm : 3.82 ≤ m) (z : Cfg) (hz : CfgPacking m z)
     (hnotch : ∀ i : Fin 11, Disjoint (interior ((z i).set)) {p : RP | sqdist p c < 1 / 4}) :
     ∃ R : ℝ, 3 * R ^ 2 < 1 ∧ sqdist c (m / 2, m / 2) ≤ R ^ 2
 
-/-- **[T-computed] Lemma CENTRE-DISC for the ring family** (A251's family-wide search: the
-maximum of `|q − O|` over feasible (ring, free square) pairs on `[3.82, 4)` is below
-`1/√3 = 0.57735`). -/
-axiom centre_disc_ring (m : ℝ) (hm : 3.82 ≤ m ∧ m < 4) (z : Cfg) (hz : CfgPacking m z)
-    (hr : AllAdjRing m z) :
-    ∃ R : ℝ, 3 * R ^ 2 < 1 ∧ ∀ S : Set RP, IsUnitSquare S →
-      (∀ i : Fin 11, (∃ c : Fin 4, MeetsCorner m z c i) →
-        Disjoint (interior S) (interior ((z i).set))) →
-      S ⊆ container m →
-      ∃ c : RP, sqdist c (m / 2, m / 2) ≤ R ^ 2 ∧
-        ∀ p : RP, sqdist p c < 1 / 4 → p ∈ interior S
+/-! A251's axiom `centre_disc_ring` (every admissible centre within `1/√3` of the container
+centre `O`) was REMOVED by A252 (2026-09-17): it is FALSE on the window — the corner MOUTH of a
+near-flat corner admits a centre at `(s/2 − 3/2)√2 > 1/√3` from `O` for every `s > 3.8165`
+(`docs/proofs/centre_disc.md`, `Statements/Open/CentreDisc.lean`, adv252: `far_O = 0.628` at
+`s = 3.99` on a feasible ring).  `mid_notch_wall` below is unaffected (it is the exclusion of the
+wall's middle notch, a theorem in prose). -/
 
 /-- **[OPEN] RING-POCKET(11)** [C]: no family-stuck eleven-square packing below side `4` has the
 all-ADJ ring structure — the pocket of the eight wall touchers holds at most two squares, and
@@ -139,7 +135,6 @@ theorem family_stuck_eleven_of_ring_pocket (m : ℝ) (hm : 3.82 ≤ m ∧ m < 4)
 #print axioms three_disc
 #print axioms capacity_le_two_of_centre_disc
 #print axioms mid_notch_wall
-#print axioms centre_disc_ring
 #print axioms ring_pocket_eleven
 #print axioms family_stuck_eleven_of_ring_pocket
 
