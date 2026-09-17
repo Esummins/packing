@@ -31,6 +31,23 @@ def rect(name, s):
     return C.cell_rect(name, s)
 
 
+SYM = {'00': (0.0, 1.0, 0.0, 1.0), '01': (0.0, 1.0, 1.0, 2.0), '10': (1.0, 2.0, 0.0, 1.0)}
+
+
+def rect_sym(name):
+    """the cell's (x0, x1, y0, y1) as affine pairs (a, b) meaning a + b*s -- exact, so that a
+    comparison of two cell edges is ONE linear expression in s (no interval dependency)."""
+    c, k = name[:2], name[2:]
+    u0, u1, v0, v1 = SYM[k]
+    if c == 'BL':
+        return ((u0, 0), (u1, 0), (v0, 0), (v1, 0))
+    if c == 'BR':
+        return ((-u1, 1), (-u0, 1), (v0, 0), (v1, 0))
+    if c == 'TR':
+        return ((-u1, 1), (-u0, 1), (-v1, 1), (-v0, 1))
+    return ((u0, 0), (u1, 0), (-v1, 1), (-v0, 1))
+
+
 def overlaps(a, b, s, tol=0.0):
     """do the INTERIORS of cells a, b overlap at side s (by more than tol)?"""
     ax0, ax1, ay0, ay1 = rect(a, s)

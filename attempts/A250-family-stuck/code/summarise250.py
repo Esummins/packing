@@ -26,6 +26,21 @@ def rows(tag):
     return out
 
 
+def recheck(rs, cap=400):
+    """re-verify every candidate that met its rows with the CURRENT verify250 (the lanes may have
+    been started with an older one), and overwrite its `cert`."""
+    import verify250 as V
+    out = []
+    for r in rs:
+        if not r.get('target_met') or 'z' not in r or len(out) >= cap:
+            continue
+        c = V.certify_z(r['z'])
+        r['cert'] = {k: v for k, v in c.items() if k not in ('sure_meeters', 'witness_families')}
+        out.append({'rid': r['rid'], 's': r['s'], 'cert': r['cert'],
+                    'witness_families': c['witness_families'][:3]})
+    return out
+
+
 def lane_line(tag, rs):
     if not rs:
         return '| %s | 0 | -- | -- | -- | -- |' % tag
@@ -53,6 +68,14 @@ def main():
     cj = json.load(open(os.path.join(ATT, 'results', 'count250.json')))
     tags = sorted({os.path.basename(p)[7:-6]
                    for p in glob.glob(os.path.join(ATT, 'results', 'fam250_*.jsonl'))})
+    data = {t: rows(t) for t in tags}
+    rech = []
+    for t in tags:
+        rech += recheck(data[t])
+    if rech:
+        with open(os.path.join(ATT, 'results', 'recheck250.jsonl'), 'w') as fh:
+            for r in rech:
+                fh.write(json.dumps(r) + chr(10))
     L = []
     L.append('# A250 -- FAMILY-STUCK: the search, the count, the corpus')
     L.append('')
@@ -122,11 +145,11 @@ def main():
              'family-stuck side |')
     L.append('| --- | --- | --- | --- | --- | --- |')
     for t in tags:
-        L.append(lane_line(t, rows(t)))
+        L.append(lane_line(t, data[t]))
     L.append('')
     res = {}
     for t in tags:
-        for s, v in residual_table(rows(t)).items():
+        for s, v in residual_table(data[t]).items():
             if s not in res or v[0] < res[s][0]:
                 res[s] = v
     if res:
@@ -138,13 +161,14 @@ def main():
         for s in sorted(res):
             L.append('| %.6f | %.3e | %s |' % (s, res[s][0], res[s][1]))
         L.append('')
-    allr = [r for t in tags for r in rows(t)]
+    allr = [r for t in tags for r in data[t]]
     cert = [r for r in allr if r.get('cert', {}).get('FAMILY_STUCK')]
     L.append('**No candidate anywhere is FAMILY-STUCK**: %d of %d jobs met the rows imposed '
              '(|Pi| <= maxfam) and %d certified' % (
                  sum(1 for r in allr if r.get('target_met')), len(allr), len(cert)))
-    L.append('FAMILY-STUCK exactly.  Every candidate that met the rows was verified in interval '
-             'arithmetic (`verify250`: containment,')
+    L.append('FAMILY-STUCK exactly (re-verified with the current `verify250` into '
+             '`results/recheck250.jsonl`).  Every candidate that met the rows was verified in '
+             'interval arithmetic (containment,')
     L.append('pairwise interior-disjointness, and the family condition over EVERY disjoint family '
              'at the certified side).')
     p = os.path.join(ATT, 'results', 'family250.md')

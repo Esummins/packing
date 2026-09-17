@@ -3,12 +3,13 @@
 Built on A244's `verify244` (same inflation lam -> a genuine packing, same interval depth), with
 the family checks added.  Two certified verdicts, each conservative in its own direction:
 
-  FAMILY_STUCK = True   uses the SURE meeters (depth interval entirely > 0) and every family that
-                        is not PROVABLY overlapping -- so it only claims |M(Pi)| > |Pi| when that
-                        holds for the true meeter sets and for every genuinely disjoint family;
+  FAMILY_STUCK = True   uses the SURE meeters (depth interval entirely > 0) and EVERY family with
+                        no PROVABLY overlapping pair -- a superset of the genuinely disjoint
+                        families, so the claim |M(Pi)| > |Pi| covers all of them;
   NOT_FAMILY_STUCK      uses the MAYBE meeters (depth interval reaching above 0) and only families
-                        whose cells are PROVABLY pairwise interior-disjoint -- so a witness family
-                        with |M(Pi)| <= |Pi| is a certified exchange by Lemma CELLS.
+                        whose cells are PROVABLY pairwise interior-disjoint (no pair whose overlap
+                        might be positive) -- so a witness family with |M(Pi)| <= |Pi| is a
+                        certified exchange by Lemma CELLS.
 
 Both use the certified side S' = lam s and A244's certified containment + disjointness.
 """
@@ -33,18 +34,39 @@ N = 11
 CELLS = list(C.CELLS)
 
 
+def _val(p, S):
+    """the affine pair (a, b) as the interval a + b*S."""
+    return iv.mpf(repr(p[0])) + iv.mpf(p[1]) * S
+
+
+def _span(p, q, S, take_min):
+    """min (or max) of two affine edges, EXACTLY: the difference is one linear expression in s, so
+    the interval arithmetic has no dependency loss.  Returns the chosen affine pair or None when
+    the comparison is undecided."""
+    d = _val((p[0] - q[0], p[1] - q[1]), S)
+    if d.b < 0:
+        return p if take_min else q
+    if d.a > 0:
+        return q if take_min else p
+    return None
+
+
 def cell_overlap_flags(S):
-    """for each pair of cells: (sure_overlap, maybe_overlap) at the interval side S."""
-    R = V.rects(S)
+    """for each pair of cells: (sure_overlap, maybe_overlap) at the interval side S.  Cell edges
+    are affine in s (rect_sym), so a TOUCHING pair (overlap identically 0, e.g. the two cells that
+    share the line x = s - 1) is decided exactly instead of being left undecided."""
     sure, maybe = set(), set()
     for i, j in itertools.combinations(range(len(CELLS)), 2):
-        ax0, ax1, ay0, ay1 = R[CELLS[i]]
-        bx0, bx1, by0, by1 = R[CELLS[j]]
-        ox = V.imin(ax1, bx1) - V.imax(ax0, bx0)
-        oy = V.imin(ay1, by1) - V.imax(ay0, by0)
-        if ox.a > 0 and oy.a > 0:
+        a, b = FM.rect_sym(CELLS[i]), FM.rect_sym(CELLS[j])
+        ovs = []
+        for lo, hi in ((0, 1), (2, 3)):
+            m = _span(a[hi], b[hi], S, True)
+            M = _span(a[lo], b[lo], S, False)
+            ovs.append(None if m is None or M is None
+                       else _val((m[0] - M[0], m[1] - M[1]), S))
+        if all(o is not None and o.a > 0 for o in ovs):
             sure.add((i, j))
-        if ox.b > 0 and oy.b > 0:
+        if all(o is None or o.b > 0 for o in ovs):
             maybe.add((i, j))
     return sure, maybe
 
@@ -81,8 +103,9 @@ def certify_family(cent, th, s, kmax=12, lam=None):
         sure_sets.append({i for i in range(N) if ds[i].a > 0})
         maybe_sets.append({i for i in range(N) if ds[i].b > 0})
     sure_ov, maybe_ov = cell_overlap_flags(S)
-    w_stuck, arg_stuck, _ = scan(sure_sets, maybe_ov, kmax)          # for a PASS
-    w_fail, arg_fail, bad = scan(maybe_sets, sure_ov, kmax)          # for a certified failure
+    w_stuck, arg_stuck, _ = scan(sure_sets, sure_ov, kmax)           # for a PASS: only provable
+    w_fail, arg_fail, bad = scan(maybe_sets, maybe_ov, kmax)         # overlaps are dropped here;
+    #                                                                # only provably disjoint here
     out = dict(base)
     out.pop('cells', None)
     out.update({
