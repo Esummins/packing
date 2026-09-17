@@ -17,11 +17,8 @@ case "${1:-}" in
   test)    "$PY" "$HERE/test246.py" ;;
   check)   "$PY" "$HERE/check246.py" --fresh 6 ;;
   slotmet)
-    for eta in 0.0001 1e-05 1e-06 1e-07; do
-      [ -f "$ATT/logs/STOP" ] && { echo "STOP present"; exit 0; }
-      [ -f "$ATT/results/slotmet246_$eta.json" ] && grep -q CERTIFIED "$ATT/results/slotmet246_$eta.json" && continue
-      "$PY" "$HERE/slotmet246.py" --eta "$eta" --hmin 1e-5 --budget-min 90 --batch 40000 >> "$ATT/logs/slotmet_ladder.log" 2>&1
-    done ;;
+    [ -f "$ATT/logs/STOP" ] && { echo "STOP present"; exit 0; }
+    "$PY" "$HERE/ladder246.py" --budget-min 90 ;;
   pages)   "$PY" "$HERE/pages246.py" ;;
   *) echo "usage: run246.sh test|check|slotmet|pages"; exit 1 ;;
 esac
