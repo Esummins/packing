@@ -56,3 +56,14 @@ k5_11_interior_Y0384__L1 zero_page leaf R0+.1.2.3: JOINT COUNT (caps {'BL(1,1)':
   role F3 (grid over its hull box in cell 21 (tilt 0.0-90.0)): 269 admissible poses (slots ['BR(0,1)'], misses [])
   kill by COUNT (a cover / pair statement): the roles' consistency below is a NECESSARY check only (no refutation criterion)
   pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3']: 0 over 99 H poses (2337 partial tries); refuting: 0  -> necessary check only
+18:14:01 audit k5_11_interior_Y0384__L1 zero_page R0+.1.2.2.3.p1
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_11_interior_Y0384__L1 zero_page leaf R0+.1.2.2.3.p1: rule CC at R0+.1.2.2.3.p1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) h
+  parent snapshot R0+.1.2.2.3 (round 1); H forced at []; roles {'F1': ['TL(1,0)'], 'F2': ['BL(1,1)'], 'F3': ['BR(0,1)', 'TR(0,0)'], 'F4': ['TR(0,0)'], 'F5': [], 'H': []}; cells {'F1': 9, 'F2': 16, 'F3': 18, 'F4': 24, 'F5': -1}; misses {}
+  role H (36 pieces of the parent's snapshot): 411 admissible poses (slots [], misses [])
+  role F1 (30 pieces of the parent's snapshot): 221 admissible poses (slots ['TL(1,0)'], misses [])
+  role F2 (83 pieces of the parent's snapshot): 535 admissible poses (slots ['BL(1,1)'], misses [])
+  role F3 (75 pieces of the parent's snapshot): 574 admissible poses (slots ['BR(0,1)', 'TR(0,0)'], misses [])
+  role F4 (26 pieces of the parent's snapshot): 211 admissible poses (slots ['TR(0,0)'], misses [])
+  role F5 (grid over its hull box (tilt 0.0-90.0)): 825 admissible poses (slots [], misses [])
+  FC kill at TR(0,0): a refutation needs TWO distinct non-pin meeters of TR(0,0) -- the roles that meet it plus anonymous squares sampled over its window (28830 admissible)
