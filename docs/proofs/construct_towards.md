@@ -27,8 +27,8 @@ rule on the corpus, composes them per supplier pattern, and says plainly what cl
 > ≥ 2), ADJ-REACH (an adjacent-corner supplier has extent > s − 3 along the shared wall — vacuous below 4, dead above
 > 3 + √2), and Lemma TWO on the centre.  **[T] CAP-REDUCTION** for SLOT-MET (each square of a counterexample has
 > exactly its leftmost vertex left of u = 1, in the box) and **[T-computed] SLOT-MET(η)**: for meetings of depth ≥ η
-> the claim is certified by interval branch-and-bound, η = 0.05 and 10⁻³ in under 2 s each (191 525 / 345 941 boxes,
-> guard 10⁻⁹), a ladder 10⁻⁴ … 10⁻⁷ detached (`results/slotmet246_*.json`); the depth-free limit stays [S].
+> the claim is certified by interval branch-and-bound, η = 0.05, 10⁻³, 10⁻⁴, 10⁻⁵, 10⁻⁶, 10⁻⁷ in about a second each (191 525 …
+> 649 243 boxes, guard 10⁻⁹, `results/slotmet246_*.json`); the depth-free limit stays [S].
 >
 > **[M] Every rule holds on the corpus** (§4): 282 corpus 12-stuck crowds, 34 certified candidates: 0 violations
 > of any lemma; the sub-4 attempts (A244's 304 near-4 poses, two fresh ones at ŝ and 3.95) break NOT-SELF-SUFFICIENT
@@ -127,7 +127,8 @@ leftmost vertex, 0 < a ≤ min(sin θ, cos θ), v ≥ cos θ (lowest vertex abov
 chord's top ≤ 1), and WLOG v_A ≥ v_B.  ∎  The B&B (`slotmet246`) bisects the 6-box (θ, a, v)², discards a box only
 when an interval enclosure shows every pose in it violates a constraint or has SAT overlap depth > 0 (guard 10⁻⁹,
 `interval246`, soundness-tested on 15 000 samples), and certifies: **no pair with both box depths ≥ η is disjoint**
-— η = 0.05 (191 525 boxes, 0.5 s), η = 10⁻³ (345 941 boxes, 1 s); the ladder 10⁻⁴ … 10⁻⁷ is detached.  The margin
+— η = 0.05 (191 525 boxes), 10⁻³ (345 941), 10⁻⁴ (397 321), 10⁻⁵ (476 943, box floor 10⁻⁷), 10⁻⁶ (566 843),
+10⁻⁷ (649 243, floor 10⁻⁹), each in about a second.  The margin
 degenerates as η → 0 (a flush A and a B of depth ε overlap by ≈ ε), so the depth-free claim is exactly the [S] left.
 
 ## 3. The supplier patterns and the composed inequalities
@@ -175,7 +176,7 @@ of 2432 slots) leans on ADJ and on free triples, exactly the mutual-service and 
 ## 5. What is proved, what remains, n-generality
 
 * **[T]** A, B, C, D, E, F (+ Lemma TWO), CAP-REDUCTION; O-NO-SELF-SUFFICIENT closed.  **[T-computed]** SLOT-MET(η)
-  for η ≥ 10⁻³ (ladder running); **[S]** SLOT-MET as η → 0.
+  for every η ≥ 10⁻⁷; **[S]** SLOT-MET as η → 0.
 * **[F]** as a proof of STUCK-EXIST(11): the rules compose to counts and to (b)'s wall inequality, satisfiable below 4.
 * **[C]** STUCK-EXIST(11) — with WALL-SLOT and K0-FREE it closes k0_00 without locks (`no_packing_of_stuck_exist`);
   the honest residue is the 8-pose room statement of §3.4, i.e. POCKET(11) under the sharper 12-stuck + propagation
@@ -186,5 +187,5 @@ of 2432 slots) leans on ADJ and on free triples, exactly the mutual-service and 
   K0-FREE given SLOT-MET), theorems `stuck4_unlocked_of_stuck_exist`, `no_packing_of_stuck_exist`,
   `no_twelve_stuck_of_stuck_exist`, `stuck_exist_of_unlocked`; build + audit, no sorry.  Obligations: O-SLOT-MET-LIMIT
   (η → 0), O-SQUARE-IN-TRIANGLE / O-NSS in Lean over `IsUnitSquare` (routine).
-* Resume: `bash attempts/A246-construct-towards/code/run246.sh test|check|slotmet|pages`; stop the ladder with
-  `touch attempts/A246-construct-towards/logs/STOP` (checkpoint `logs/slotmet_<eta>.npz`, resumes on relaunch).
+* Resume: `bash attempts/A246-construct-towards/code/run246.sh test|check|slotmet|pages` (nothing left running; the
+  ladder is seconds; `logs/STOP` + checkpoints `logs/slotmet_<eta>.npz` if a finer η is ever wanted).
