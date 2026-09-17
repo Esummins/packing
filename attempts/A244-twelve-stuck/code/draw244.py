@@ -17,9 +17,15 @@ class Page(object):
         self.parts = []
         self.panels = {}
 
-    def panel(self, key, x, y, w, h, side, pad=0.12):
-        sc = min(w / (side + 2 * pad), h / (side + 2 * pad))
-        self.panels[key] = (x + (w - sc * side) / 2, y + h - (h - sc * side) / 2, sc)
+    def panel(self, key, x, y, w, h, side, pad=0.12, win=None):
+        """map a window (x0,x1,y0,y1) of the plane -- the whole container by default -- onto the
+        rectangle (x, y, w, h) of the page, isotropically."""
+        x0, x1, y0, y1 = win if win else (0.0, side, 0.0, side)
+        W, H = x1 - x0, y1 - y0
+        sc = min(w / (W + 2 * pad), h / (H + 2 * pad))
+        ox = x + (w - sc * W) / 2 - sc * x0
+        oy = y + h - (h - sc * H) / 2 + sc * y0
+        self.panels[key] = (ox, oy, sc)
         return self.panels[key]
 
     def _t(self, key, p):

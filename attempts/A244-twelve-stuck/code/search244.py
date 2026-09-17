@@ -120,8 +120,11 @@ def main():
     ap.add_argument('--step0', type=float, default=0.05)
     ap.add_argument('--tol', type=float, default=1e-6)
     ap.add_argument('--wall', type=float, default=1e9)
+    ap.add_argument('--tilt', type=float, default=0.0,
+                    help='tilt floor in degrees applied to every square (0 = off)')
     a = ap.parse_args()
     belownormal()
+    F.TILT_MIN = math.radians(a.tilt) if a.tilt > 0 else 0.0
     cells = A.CELLSETS[a.mode]
     want = 'twelve' if a.mode == 'twelve' else 'four'
     deltas = [float(x) for x in a.deltas.split(',')]
@@ -158,7 +161,8 @@ def main():
             name = '%s_%d_%04d' % (a.seeds, a.seed, k)
             z0 = A.STARTS[a.seeds](rng, a.S)
         for delta in deltas:
-            rid = '%s|%s|d%g' % (name, a.mode, delta)
+            rid = '%s|%s|d%g%s' % (name, a.mode, delta,
+                                   '' if a.tilt <= 0 else '|t%g' % a.tilt)
             if rid in done:
                 continue
             nrun += 1
@@ -167,8 +171,8 @@ def main():
                 z, ok = A.phase_a(z0.copy(), cells, delta, rng, tries=5)
                 if ok:
                     z, s = A.phase_b(z, cells, delta, rng, step0=a.step0, tol=a.tol, retries=2)
-                    rec = record(rid, {'mode': a.mode, 'seed_family': a.seeds, 'seed_name': name},
-                                 z, s, cells, delta, want)
+                    rec = record(rid, {'mode': a.mode, 'seed_family': a.seeds, 'seed_name': name,
+                                       'tilt_floor_deg': a.tilt}, z, s, cells, delta, want)
                 else:
                     rec = record(rid, {'mode': a.mode, 'seed_family': a.seeds, 'seed_name': name,
                                        'phase_a': False, 'worst': list(F.worst(z, cells, delta))},

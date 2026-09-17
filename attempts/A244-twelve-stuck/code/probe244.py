@@ -64,8 +64,11 @@ def main():
     ap.add_argument('--seed', type=int, default=0)
     ap.add_argument('--delta', type=float, default=1e-4)
     ap.add_argument('--wall', type=float, default=1e9)
+    ap.add_argument('--tilt', type=float, default=0.0,
+                    help='tilt floor in degrees applied to every square (0 = off)')
     a = ap.parse_args()
     belownormal()
+    F.TILT_MIN = math.radians(a.tilt) if a.tilt > 0 else 0.0
     cells = A.CELLSETS[a.mode]
     sides = [float(x) for x in a.sides.split(',')]
     out = os.path.join(ATT, 'results', 'probe244_%s.jsonl' % a.tag)
@@ -88,7 +91,9 @@ def main():
                 print('stop', flush=True)
                 fh.close()
                 return
-            rid = 'probe|%s|s%g|d%g|%d' % (a.mode, s, a.delta, a.seed * 100000 + k)
+            rid = 'probe|%s|s%g|d%g%s|%d' % (a.mode, s, a.delta,
+                                             '' if a.tilt <= 0 else '|t%g' % a.tilt,
+                                             a.seed * 100000 + k)
             if rid in done:
                 continue
             fam = ('a217', 'random', 'border', 'grid')[k % 4]
@@ -102,6 +107,7 @@ def main():
             rec = {'rid': rid, 'side': s, 'mode': a.mode, 'delta': a.delta, 'family': fam,
                    'residual': r, 'min_wall_gap': det[0], 'min_pair_gap': det[1],
                    'worst_second_depth': det[2], 'strict_ok': strict,
+                   'tilt_floor_deg': a.tilt,
                    'secs': round(time.time() - ts, 2)}
             if r < 1e-3:
                 rec['z'] = [float(v) for v in w]

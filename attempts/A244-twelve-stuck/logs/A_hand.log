@@ -1,0 +1,15 @@
+--- (a) how many of the twelve cells can ONE unit square meet?
+  s=3.820000  max cells met = 5  (36 distinct >=3-subsets)  witness ('BL00', 'BL01', 'BL10', 'BR10', 'TL01')
+--- (a) how many of the twelve cells can ONE unit square meet?
+  s=3.820000  max cells met = 5  (36 distinct >=3-subsets)  witness ['BL00', 'BL01', 'BL10', 'BR10', 'TL01']
+  s=3.877084  max cells met = 5  (36 distinct >=3-subsets)  witness ['BL00', 'BL01', 'BL10', 'BR10', 'TL01']
+  s=4.000000  max cells met = 4  (28 distinct >=3-subsets)  witness ['BL01', 'TL00', 'TL01', 'TL10']
+  s=4.200000  max cells met = 4  (28 distinct >=3-subsets)  witness ['BL01', 'TL00', 'TL01', 'TL10']
+  s=4.414214  max cells met = 3  (4 distinct >=3-subsets)  witness ['BL00', 'BL01', 'BL10']
+  s=4.600000  max cells met = 3  (4 distinct >=3-subsets)  witness ['BL00', 'BL01', 'BL10']
+--- (b) can a CORNER be self-sufficient?
+  delta 0.001: ONE square meeting all three cells of a corner: penalty 0.000e+00 (0 = found); TWO disjoint squares each meeting all three: 3.339e-07 over 1500 restarts
+  delta 1e-06: ONE square meeting all three cells of a corner: penalty 0.000e+00 (0 = found); TWO disjoint squares each meeting all three: 3.359e-13 over 1500 restarts
+--- (c) the reach bounds
+  cross-corner (ADJ) supply along a wall is impossible for s >= 3 + sqrt2 = 4.414214
+written results/hand244.json

@@ -32,6 +32,26 @@ HALF = np.array([(-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5)])
 NHAT = np.array([(0.0, -1.0), (1.0, 0.0), (0.0, 1.0), (-1.0, 0.0)])
 PAIRS = [(i, j) for i in range(N) for j in range(i + 1, N)]
 
+# The TILT FLOOR (radians, 0 = off): every square's tilt is pushed at least this far from a
+# multiple of pi/2.  A217 applied its floor to the corner squares only; here the whole packing is
+# floored, which is the stronger variant -- a floored packing has no axis-aligned square at all.
+TILT_MIN = 0.0
+
+
+def tilt_part(z, grad):
+    if TILT_MIN <= 0.0:
+        return 0.0
+    f = 0.0
+    q = math.pi / 2
+    for i in range(N):
+        m = z[3 * i + 2] % q
+        dev, sgn = (m, 1.0) if m <= q / 2 else (q - m, -1.0)
+        v = min(dev - TILT_MIN, 0.0)
+        if v < 0.0:
+            f += v * v
+            grad[3 * i + 2] += 2.0 * v * sgn
+    return f
+
 
 def geom(z):
     c = np.asarray(z, float)[:33].reshape(N, 3)
@@ -214,6 +234,7 @@ def penalty(z, cells, delta, free_s=False, wgt=0.0):
     f = wall_part(z, q, cx, cy, th, grad)
     f += pair_part(z, q, n, cx, cy, grad)
     f += cell_part(z, cells, delta, grad)
+    f += tilt_part(z, grad)
     if free_s:
         f += wgt * float(z[S_IDX])
         grad[S_IDX] += wgt
