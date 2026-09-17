@@ -65,9 +65,47 @@ Every verdict is taken only when the whole interval lies on one side of 0.  Cell
 the walls, so a meeting of depth d survives any inflation with lam - 1 < d / (2 s): the certified
 sides use lam - 1 ~ 1e-14 against depths >= 1e-5.
 
-## 2. The thresholds
+## 2. The thresholds ([M]; the authoritative tables are `results/twelve244.md`)
 
-PLACEHOLDER-THRESHOLD
+**[M] 12-STUCK EXISTS, and it is common just above 4.**  Before any new search: of A217's 1217
+FEASIBLE four-crowds (`search217_crowd0.jsonl`, min pair and wall gaps >= -1e-9), **282 are
+already 12-stuck** -- all twelve border cells doubly met -- the least at side 4.002076.  So the
+configuration type the PI asked about is constructible; it was already in the lab's own corpus,
+unlabelled.
+
+**[M] The least CERTIFIED 12-stuck side is 4.0000xx** (see `results/twelve244.md` s.1 for the
+exact value and the witness), reached by the halving descent at crowd margin delta = 1e-5 from
+A217 seeds and certified by `verify244` in interval arithmetic.  The descent's limit moves with
+the margin exactly as `4 + c delta` (delta = 1e-3 gives ~4.0004, delta = 1e-5 gives ~4.00002), so
+the measured infimum of the sides carrying a 12-stuck packing is **s = 4, the trivial side**, and
+the search never gets below it.
+
+**[M] Nothing below 4.**  The fixed-side probe minimises the residual
+`max(-min wall gap, -min pair gap, delta - min second depth, 0)` at a FIXED side; it is 0 exactly
+when a delta-margin 12-stuck packing exists there.  Over the ladder (each side seeded from A217's
+crowds, random, border and grid starts):
+
+| side | 3.82 | 3.877084 = s-hat | 3.95 | 3.999 | 3.9999 |
+|---|---|---|---|---|---|
+| best residual | 3.5e-2 | ~2.7e-2 | 5.8e-3 | 4e-6 | 3.5e-6 |
+
+and **no strict 12-stuck packing was found at any side below 4** (`strict_ok` never true).  Near 4
+the residual is of the order of the margin itself (0.35 delta), i.e. the obstruction has gone; at
+s-hat and below it is four orders of magnitude larger.  Caveat: at 3.82 the side is at the
+certified LOWER bound for s(11), so part of that residual is the packing being infeasible, not the
+cells; s-hat and 3.95 carry packings and are the honest readings.
+
+**[M] The 4-STUCK control** (corner boxes only, A217's condition) is run through the SAME optimiser
+and verifier; see `results/twelve244.md` s.1 and s.3.  A217's published four-crowd threshold
+4.0013 was measured at crowd margin 0.02 on a vertex-based row, so it is an upper bound for the
+depth-based condition; the control here separates the two.
+
+**[M] None of them is LOCKED.**  On every 12-stuck candidate the FREE Fritz-John system (walls and
+contacts only, no crowd rows; `stress244` on A217's `opt217`/`stress217`) is INFEASIBLE -- least
+residual 1.28e-2 over the candidates -- and no candidate has all of its cell meeters loaded.  The
+12-stuck packings are held at their side by the artificial crowd rows alone.  This is the same
+reading A239 got on all twelve rings below 4, and it answers the brief's secondary question: NO,
+for everything found.
 
 ## 3. Why the window is where it is (`code/hand244.py`, `results/hand244.json`)
 
@@ -112,7 +150,36 @@ that window does not reach down to s-hat.
 
 ## 4. What this does and does not say about k0
 
-PLACEHOLDER-K0
+**The PI's worry is answered, and the answer is the reassuring one for the HYPOTHESIS and the
+unwelcome one for a cheap kill.**  A 12-stuck four-crowd IS constructible: 282 of A217's own 1217
+feasible four-crowds already have all twelve border cells doubly met, and the campaign certifies
+one at a side just above 4.  So A243's Lemma WALL-SLOT + SLOT-MET does NOT make STUCK-4(11)
+vacuous by non-existence of the configuration type: 12-STUCK is a real class, it is only EMPTY in
+the window.
+
+**What it does say.**  Reading the measurement as evidence for the k0 statement: over the whole
+window [3.82, s-hat] the twelve-cell condition fails by a LARGE margin -- the least residual the
+fixed-side probe reaches is of order 1e-2, not 1e-6 -- while just above 4 it is satisfied with a
+certificate.  In other words the boundary of the 12-stuck class sits at the TRIVIAL SIDE 4, the
+same place A217 found the four-crowd boundary (4.0013 at crowd margin 0.02), and the window is
+nowhere near it.  That is exactly the conclusion A242's cascade would have to prove -- and the
+measurement says the conclusion is true with roughly 0.12 of side to spare, which is why the
+cascade's leaves keep returning UNDECIDED rather than DEAD: they are being asked to certify
+something that is true but not LOCALLY visible.
+
+**What it does not say.**  (i) It is a SEARCH.  A side at which the search found nothing is a side
+at which the search found nothing; nothing here is a proof, and the note never calls the threshold
+one.  (ii) None of the 12-stuck packings found is LOCKED: on every candidate the FREE Fritz-John
+system (walls + contacts, no crowd rows) is infeasible, best residual 1.28e-2, and no candidate
+has all of its meeters loaded.  They are held at their side by the crowd rows alone -- the same
+reading A239 got on all twelve rings below 4.  So the secondary question ("is any 12-stuck packing
+LOCKED?") is answered NO for everything this campaign found, which is consistent with, and no
+stronger than, LOCKED-CROWD-FREE(11).  (iii) The one place this could become a proof is s.3: the
+two structural facts there (CROSS-CORNER-REACH [T], NO-SELF-SUFFICIENT-CORNER [M]/[S]) are
+n-general and cheap, and together with SLOT-MET they reduce the supply of every wall slot to A243
+s.4's three cases with the ADJACENT case dead above 3 + sqrt2 -- but inside the window the
+adjacent case is alive, and the argument still needs the room statement that A237/A242 could not
+supply.
 
 ## 5. Reproduce / resume
 
