@@ -154,6 +154,10 @@ def solve(problem, hmin=1e-5, budget_boxes=3_000_000, budget_s=None, batch=20000
     k = len(problem['squares'])
     stats = {'processed': 0, 'discarded': 0, 'undecided': 0, 'seconds': 0.0, 'witness': None,
              'undecided_boxes': [], 'min_pair_depth_lo': None}
+    if (init[1] < init[0] - GUARD).any():          # the required cells' centre bands do not meet
+        stats.update(status='INFEASIBLE', note='empty initial box (extent <= sqrt2)', queue_left=0, hmin=hmin,
+                     guard=GUARD, eta=problem.get('eta', 0.0), eta_avoid=problem.get('eta_avoid'), s=list(problem['s']))
+        return stats
     if want_witness and not (ck and os.path.exists(ck)):
         t0 = time.time()
         w = search_witness(problem, init)

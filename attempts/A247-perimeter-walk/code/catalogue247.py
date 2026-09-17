@@ -149,7 +149,7 @@ def main():
          '(eta = 0, window and corpus range): %s' % (len(bad_pairs), out[0]['all_infeasible']),
          '* meeter sets at BL ({BL00} + subset of its 4 slots): %d, realisable %d (%d D4 orbits); free sets (box-avoiding, '
          'inside a window): %d, realisable %d (%d D4 orbits); eta = %g' % (n_m, fe_m, orb_m, n_f, fe_f, orb_f, a.eta),
-         '* corpus: %d (square, tol) pairs checked over the 282 + 34 packings, violations %d, max cells %d' % (
+         '* corpus: %d (square, tol) pairs checked over the 282 + 482 corpus packings, violations %d, max cells %d' % (
              len(rows), len(bad), max(r[3] for r in rows)), '',
          '| kind | cells | status | tilt bins (%.0f deg each, F = realisable) | witness (s; cx, cy, tilt) |' % (90.0 / a.bins),
          '|---|---|---|---|---|']
