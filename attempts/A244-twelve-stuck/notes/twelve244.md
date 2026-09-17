@@ -16,14 +16,15 @@ Tags as elsewhere: [T] proved here, [M] measured, [S] proof route with a gap, [C
 
 ## 0. The answer in one line
 
-**Yes, the ring is constructible -- 282 of A217's own 1217 feasible four-crowds are already
-12-stuck -- but only at and above the TRIVIAL SIDE: the least certified 12-stuck side is
-4.000022, the four-cell control lands at 4.000015, and no strict 12-stuck packing was found at
-any side below 4 (best residual 3.46e-6 at 3.9999, 1.43e-2 at s-hat = 3.877084, 3.52e-2 at 3.82).
-None of the candidates is LOCKED.**  Effort: 53 descent runs + 500 fixed-side probe restarts,
-0.65 CPU-h; EVIDENCE, not proof.  So the PI's worry does not bite as non-existence of the
-configuration type -- it bites as non-existence IN THE WINDOW, which is exactly the statement
-A242's cascade is trying to certify.
+**Yes, the ring is constructible, and it is not rare: 482 12-stuck packings are certified here, at
+every side from 4.000010 to 4.500000, and 282 of A217's own 1217 feasible four-crowds were already
+12-stuck without anyone labelling them.  The search never produced one BELOW 4** -- not in 434
+side-minimising descents (least 4.000010; the four-cell control lands at the same place, 4.000015)
+and not in 4056 fixed-side restarts at nine sides in [3.82, 4).  **None of the candidates is
+LOCKED.**  Effort 5.83 CPU-h; EVIDENCE, not proof, and s.2 is explicit about how strong the
+below-4 evidence is and is not.  So the PI's worry does not bite as non-existence of the
+configuration type -- it bites, if at all, as non-existence IN THE WINDOW, which is exactly the
+statement A242's cascade is trying to certify.
 
 ## 1. What is constrained, and how
 
@@ -80,12 +81,12 @@ already 12-stuck** -- all twelve border cells doubly met -- the least at side 4.
 configuration type the PI asked about is constructible; it was already in the lab's own corpus,
 unlabelled.
 
-**[M] The least CERTIFIED 12-stuck side is 4.000022** (`a217:crowd_10_0113|crowd0.02|twelve|d1e-05`;
-`results/twelve244.md` s.1-2), reached by the halving descent at crowd margin delta = 1e-5 from
-A217 seeds and certified by `verify244` in interval arithmetic.  The descent's limit moves with
-the margin exactly as `4 + c delta` (delta = 1e-3 gives ~4.0004, delta = 1e-5 gives ~4.00002), so
-the measured infimum of the sides carrying a 12-stuck packing is **s = 4, the trivial side**, and
-the search never gets below it.
+**[M] The least CERTIFIED 12-stuck side is 4.000010** (`results/twelve244.md` s.1-2), reached by
+the halving descent at crowd margin delta = 1e-5 from A217 seeds and certified by `verify244` in
+interval arithmetic; **482 candidates are certified in all, spread over 4.000010 to 4.500000**.
+The descent's limit moves with the margin as `4 + c delta` (delta = 1e-3 gives ~4.0004, delta =
+1e-5 gives ~4.00001), so the measured infimum of the sides carrying a 12-stuck packing is
+**s = 4, the trivial side**, and the descent never gets below it.
 
 **[M] Nothing below 4.**  The fixed-side probe minimises the residual
 `max(-min wall gap, -min pair gap, delta - min second depth, 0)` at a FIXED side; it is 0 exactly
@@ -94,14 +95,24 @@ crowds, random, border and grid starts):
 
 | side | 3.82 | 3.877084 = s-hat | 3.95 | 3.999 | 3.9999 |
 |---|---|---|---|---|---|
-| best residual | 3.52e-2 | 1.43e-2 | 1.03e-2 | 3.68e-6 | 3.46e-6 |
-| restarts | 60 | 60 | 30 | 54 | 240 |
+| 12-stuck, best residual | 2.686e-2 | 3.444e-3 | 4.0e-6 | 4.0e-6 | 3.0e-6 |
+| PACKING-ONLY baseline | 2.667e-2 | 7.996e-3 | 0 | 0 | -- |
+| restarts | 240 | 240 | 240 | 240 | 240 |
 
-and **no strict 12-stuck packing was found at any side below 4** (`strict_ok` never true).  Near 4
-the residual is of the order of the margin itself (0.35 delta), i.e. the obstruction has gone; at
-s-hat and below it is four orders of magnitude larger.  Caveat: at 3.82 the side is at the
-certified LOWER bound for s(11), so part of that residual is the packing being infeasible, not the
-cells; s-hat and 3.95 carry packings and are the honest readings.
+(the full ladder, including 3.98 / 3.99 / 3.995 / 3.998, is in `results/twelve244.md` s.3; every
+side from 3.95 up reads 3-4e-6, and the four-cell control reads the same)
+
+and **no strict 12-stuck packing was found at any side below 4** (`strict_ok` never true in 4056
+restarts).  **How strong is that?**  Read the row honestly.  From 3.95 to 3.9999 the best residual
+is a FLAT 3-4e-6 = 0.4 delta: it tracks the crowd MARGIN, not the side, which is the penalty's own
+trade-off signature (the optimiser splits the shortfall evenly over the wall, pair and cell rows),
+not a geometric gap that grows as s falls.  At 3.82 the PACKING-ONLY baseline (mode `none`, same
+optimiser, cells switched off) is 2.667e-2 against the twelve-cell 2.686e-2, so essentially ALL of
+that residual is the packing itself -- 3.82 is the certified LOWER bound for s(11).  At s-hat the
+baseline (7.996e-3, 80 restarts) is LARGER than the twelve-cell value (3.444e-3, 240 restarts)
+although a packing certainly exists there, which shows the baseline is search-limited too.  **So
+the below-4 evidence is the two NEGATIVES -- no descent below 4.000010 and no strict packing in
+4056 restarts -- and NOT a residual that grows as the side falls.**
 
 **[M] The 4-STUCK control** (corner boxes only, A217's condition) run through the SAME optimiser and
 verifier certifies **4.000015** -- the same threshold, 7e-6 below the twelve-cell one.  A217's
@@ -110,7 +121,7 @@ the depth-based condition.  **So the twelve-cell hypothesis buys NO side over th
 both boundaries sit at the trivial side 4.  (Every 4-stuck optimum found is in fact 12-stuck as
 well, which is the same phenomenon A217's corpus already showed.)
 
-**[M] None of them is LOCKED.**  On all 34 verified 12-stuck candidates the FREE Fritz-John system
+**[M] None of them is LOCKED.**  On the verified 12-stuck candidates the FREE Fritz-John system
 (walls and contacts only, no crowd rows; `stress244` on A217's `opt217`/`stress217`) is INFEASIBLE
 -- least residual 1.28e-2 over the candidates, and 1.0 (no active row at all) on the extremal one -- and no candidate has all of its cell meeters loaded.  The
 12-stuck packings are held at their side by the artificial crowd rows alone.  This is the same
@@ -136,9 +147,13 @@ last drop is exactly at **s = 3 + sqrt2**:
 box c00 (u < 1 in the wall's coordinate) and a point in the FAR slot of the same wall (u > s - 2)
 has extent > s - 3 along that wall; a unit square has extent <= sqrt2 in every direction; so for
 **s >= 3 + sqrt2 = 4.414214** no square meets both, i.e. no wall slot can be supplied by the
-ADJACENT corner's meeter.  (The same computation kills the c'00-meets-c01 form.)  This is the
-upper end of the twelve-cell window: A217's own four-crowds are 12-stuck up to side 4.391318 and
-no further, 0.023 below the bound.
+ADJACENT corner's meeter.  (The same computation kills the adjacent-box-meets-c01 form.)  **It
+does NOT bound the twelve-cell window** -- an earlier draft of this note said it did and the probe
+refuted it: 48 strict 12-stuck packings are certified at 4.2, 4.35, 4.41, 4.414, 4.42 and 4.5,
+i.e. on both sides of 3 + sqrt2.  What the lemma does is force the SUPPLY to change above
+3 + sqrt2, and the certificates show how: at 4.42 the twelve cells are met by 8 corner meeters
+(exactly two per corner box) plus 3 free squares, and the slot incidences read **12 OWN + 5 FREE,
+with no ADJ at all**.
 
 **[M] A corner is NOT SELF-SUFFICIENT.**  Can two DISJOINT unit squares in the quadrant each meet
 all three cells c00, c01, c10 of one corner?  ONE square can (penalty 0 at every margin tested;
@@ -151,12 +166,16 @@ meet the three quadrants Q1 = {u<1,v<1}, Q2 = {u<1,v>1}, Q4 = {u>1,v<1} around t
 up-left through the corner box, and the unit-square constraint must be brought in to finish
 (obligation O-NO-SELF-SUFFICIENT).
 
-**The consequence.**  Each corner's two slot-meetings cannot both come from its own two meeters
-with room to spare, so under SLOT-MET the second meeter of a slot is (a) the adjacent corner's
-meeter -- dead for s >= 3 + sqrt2 by CROSS-CORNER-REACH -- (b) the corner's own other meeter, or
-(c) one of the three free squares, which is A243 s.4's list.  The twelve-cell condition therefore
-lives in a WINDOW of sides, bounded above by the reach and below by the measurement of s.2, and
-that window does not reach down to s-hat.
+**The consequence, and a conditional upper bound.**  Under SLOT-MET the second meeter of a slot is
+(a) the adjacent corner's meeter -- dead for s >= 3 + sqrt2 by CROSS-CORNER-REACH -- (b) the
+corner's own other meeter, or (c) a free square: A243 s.4's list.  With exactly two meeters per
+corner box, NO-SELF-SUFFICIENT-CORNER says (b) cannot serve BOTH slots of a corner, so every
+corner needs at least one free-square incidence; three free squares over four corners force one
+free square to serve slots of TWO DIFFERENT corners, and the nearest such pair (the two slots of
+one wall, or the two wall slots of one side) are s - 4 apart, so that square needs extent > s - 4
+and **s < 4 + sqrt2 = 5.414214**.  [C] This is CONDITIONAL -- a corner box may have three meeters,
+which breaks the count -- and it is not tested here: the probe stopped at 4.5, where a 12-stuck
+packing exists.  It is the cheapest thing to measure next.
 
 ## 4. What this does and does not say about k0
 
