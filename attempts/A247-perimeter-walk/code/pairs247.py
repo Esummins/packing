@@ -25,14 +25,34 @@ import geo247 as G
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ATT = os.path.abspath(os.path.join(HERE, '..'))
-RANGES = {'window': (G.S_LO, G.SHAT), 'corpus': (G.S_LO, 4.4), 'to4': (G.SHAT, 3.999)}
+RANGES = {'window': (G.S_LO, G.SHAT), 'corpus': (G.S_LO, 4.5), 'to4': (G.SHAT, 3.999)}
 
 
-def pair_problems(kinds):
-    M_BL = [('M', 'BL', c) for c in G.meeter_sets('BL')]
-    M_BR = [('M', 'BR', c) for c in G.meeter_sets('BR')]
-    M_TR = [('M', 'TR', c) for c in G.meeter_sets('TR')]
-    F = [('F', c) for c in G.free_sets()]
+def realisable(catalogue):
+    """the D4-orbit keys of the single-square sets the catalogue found FEASIBLE (None = all)."""
+    if not catalogue:
+        return None
+    ok = set()
+    for line in open(catalogue):
+        r = json.loads(line)
+        if r.get('kind') in ('M', 'F') and r['status'] == 'FEASIBLE':
+            ok.add((r['kind'], tuple(r['orbit'])))
+    return ok
+
+
+def orbit_key(cells):
+    return min(tuple(sorted(m[c] for c in cells)) for m in G.D4)
+
+
+def pair_problems(kinds, catalogue=None):
+    ok = realisable(catalogue)
+
+    def keep(kind, cells):
+        return ok is None or (kind, orbit_key(cells)) in ok
+    M_BL = [('M', 'BL', c) for c in G.meeter_sets('BL') if keep('M', c)]
+    M_BR = [('M', 'BR', c) for c in G.meeter_sets('BR') if keep('M', c)]
+    M_TR = [('M', 'TR', c) for c in G.meeter_sets('TR') if keep('M', c)]
+    F = [('F', c) for c in G.free_sets() if keep('F', c)]
     raw = []
     if 'MM-same' in kinds:
         raw += [(a, b) for a, b in itertools.combinations_with_replacement(M_BL, 2)]
@@ -69,6 +89,9 @@ def main():
     ap.add_argument('--hmin', type=float, default=1e-5)
     ap.add_argument('--kinds', default='MM-same,MM-adj,MM-opp,MF,FF')
     ap.add_argument('--shard', default='0/1')
+    ap.add_argument('--eta-avoid', type=float, default=None, help='avoid level (default = eta); a gap makes the searches decisive')
+    ap.add_argument('--exact', action='store_true', help='exact cell-sets (avoid every other reachable cell)')
+    ap.add_argument('--catalogue', default='', help='exact catalogue jsonl: only its FEASIBLE sets enter the table')
     ap.add_argument('--only-status', default='', help='rerun only keys whose status in a previous file is this (e.g. BUDGET)')
     a = ap.parse_args()
     try:
@@ -80,16 +103,21 @@ def main():
         pass
     os.makedirs(os.path.join(ATT, 'results'), exist_ok=True)
     os.makedirs(os.path.join(ATT, 'logs'), exist_ok=True)
-    out = os.path.join(ATT, 'results', 'pairs247_%s_%g.jsonl' % (a.range, a.eta))
+    out = os.path.join(ATT, 'results', 'pairs247_%s%s_%g.jsonl' % (a.range, '_exact' if a.exact else '', a.eta))
     stop = os.path.join(ATT, 'logs', 'STOP')
-    lf = open(os.path.join(ATT, 'logs', 'pairs247_%s_%g_%s.log' % (a.range, a.eta, a.shard.replace('/', 'of'))), 'a')
+    lf = open(os.path.join(ATT, 'logs', 'pairs247_%s%s_%g_%s.log' % (a.range, '_exact' if a.exact else '', a.eta, a.shard.replace('/', 'of'))), 'a')
 
     def log(t):
         lf.write(time.strftime('%H:%M:%S ') + t + '\n')
         lf.flush()
 
-    probs = pair_problems(a.kinds.split(','))
-    keys = sorted(probs)
+    probs = pair_problems(a.kinds.split(','), os.path.join(ATT, a.catalogue) if a.catalogue and not os.path.isabs(a.catalogue) else a.catalogue)
+    def rank(k):
+        nf = k.count('F:')
+        if nf == 0:
+            return 0 if k.split(' | ')[0][2:4] == k.split(' | ')[1][2:4] else 1
+        return 1 + nf
+    keys = sorted(probs, key=lambda k: (rank(k), k))       # MM-same, MM-adj/opp, MF, FF
     k, n = map(int, a.shard.split('/'))
     keys = [x for i, x in enumerate(keys) if i % n == k]
     done = load_done(out)
@@ -105,13 +133,13 @@ def main():
             log('STOP')
             break
         specs = probs[key]
-        prob = B.problem_of(list(specs), RANGES[a.range], eta=a.eta)
+        prob = B.problem_of(list(specs), RANGES[a.range], eta=a.eta, exact=a.exact, eta_avoid=a.eta_avoid)
         t = time.time()
         r = B.solve(prob, hmin=a.hmin, budget_boxes=a.budget, stop=stop)
         row = {'key': key, 'specs': [list(s) if s[0] == 'F' else [s[0], s[1], list(s[2])] for s in specs],
-               'status': r['status'], 'eta': a.eta, 'range': a.range, 's': list(RANGES[a.range]),
+               'status': r['status'], 'eta': a.eta, 'eta_avoid': prob['eta_avoid'], 'range': a.range, 'exact': a.exact, 's': list(RANGES[a.range]),
                'boxes': r['processed'], 'undecided': r['undecided'], 'seconds': round(time.time() - t, 2),
-               'witness': r['witness'], 'undecided_boxes': r['undecided_boxes'][:3]}
+               'witness': r['witness'], 'how': (r['witness'] or {}).get('how', 'bb'), 'undecided_boxes': r['undecided_boxes'][:3]}
         with open(out, 'a') as f:
             f.write(json.dumps(row) + '\n')
         log('%4d/%d %-11s %8d boxes %6.1fs  %s' % (i + 1, len(keys), r['status'], r['processed'], time.time() - t, key))

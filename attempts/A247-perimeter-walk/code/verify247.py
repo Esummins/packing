@@ -16,6 +16,7 @@ import geo247 as G
 
 # ---------------------------------------------------------------- float pre-test
 def check_float(s, ps, problem, margin=1e-7, eta=0.0):
+    eta_a = problem.get('eta_avoid', eta)
     for i, sq in enumerate(problem['squares']):
         q = G.C.square_corners(*ps[i])
         if q.min() < margin or q.max() > s - margin:
@@ -24,7 +25,7 @@ def check_float(s, ps, problem, margin=1e-7, eta=0.0):
             if G.depth_cell_pt(ps[i], name, s) <= eta + margin:
                 return False
         for name in sq.get('avoid', ()):
-            if G.depth_cell_pt(ps[i], name, s) >= -margin:
+            if G.depth_cell_pt(ps[i], name, s) >= eta_a - margin:
                 return False
     for i in range(len(ps)):
         for j in range(i + 1, len(ps)):
@@ -80,6 +81,7 @@ def check_exact(s, ps, problem):
     sr = rat(s)
     rps = [rational_pose(p) for p in ps]
     eta = Fr(problem.get('eta', 0.0)).limit_denominator(10 ** 12)
+    eta_a = Fr(problem.get('eta_avoid', problem.get('eta', 0.0))).limit_denominator(10 ** 12)
     out = {'ok': True, 's': str(sr), 'poses': [[str(v) for v in rp] for rp in rps], 'fail': None,
            'min_req': None, 'max_avoid': None, 'max_pair': None}
     pts = [corners_exact(rp) for rp in rps]
@@ -98,7 +100,7 @@ def check_exact(s, ps, problem):
         for name in sq.get('avoid', ()):
             d = depth_exact(pts[i], nrm[i], rect_exact(name, sr), AXES)
             out['max_avoid'] = d if out['max_avoid'] is None else max(out['max_avoid'], d)
-            if d > 0:
+            if d > eta_a:
                 out.update(ok=False, fail='avoid %d %s' % (i, name))
                 return out
     for i in range(len(ps)):
