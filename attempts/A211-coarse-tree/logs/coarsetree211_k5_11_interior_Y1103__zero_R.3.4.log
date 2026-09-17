@@ -36,3 +36,27 @@
    no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
    node R.3.4.2.p2 d2: DEAD by NOROOM -- no-room at R.3.4.2.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
    node R.3.4.2.p3 d2 pocket<-[2]: INTERNAL (7.3 s, 1 rounds; t=124.6)
+   no-room (k=10, m=1): UNDECIDED in 17 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.3.4.2.p3: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.4.2.p3.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (1.8 s, 1 rounds; t=144.0)
+   node R.3.4.2.p3.p2 d3 pocket<-[1]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=144.7)
+   node R.3.4.3    d1 TR(0,0)<-[24]: INTERNAL (2.9 s, 1 rounds; t=147.7)
+   node R.3.4.3.1  d2 TL(1,0)<-[8]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=147.9)
+   node R.3.4.3.2  d2 TL(1,0)<-[9]: INTERNAL (4.4 s, 1 rounds; t=152.3)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.4.3.2  d2: DEAD by NOROOM -- no-room at R.3.4.3.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.4.3.3  d2 TL(1,0)<-[14]: INTERNAL (3.7 s, 1 rounds; t=159.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.4.3.3  d2: DEAD by NOROOM -- no-room at R.3.4.3.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.4.3.4  d2 TL(1,0)<-[19]: INTERNAL (5.9 s, 1 rounds; t=166.4)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.4.3.4  d2: DEAD by NOROOM -- no-room at R.3.4.3.4 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R.3.4        => DEAD (17 nodes; t = 169 s of 1800.0)
+   => DEAD (zero_page) in 168.8 s: 1 start runs, 17 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 4 pocket splits, 0 role splits (0 empty-half kills), 9 inherited dead (9 up front + 0 in tree), 20 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 22 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2 d2 DEAD INHERIT 0.0s; R.3.3.1 d3 DEAD INHERIT 0.0s; R.3.3.2 d3 DEAD INHERIT 0.0s; R.3.3.3 d3 DEAD INHERIT 0.0s; R.3.3.4 d3 DEAD INHERIT 0.0s; R.3.5 d2 DEAD INHERIT 0.0s; R.3.4 d0 INTERNAL 4.5s; R.3.4.1 d1 INTERNAL 2.1s; R.3.4.1.p1 d2 DEAD NOROOM 7.8s; R.3.4.1.p2 d2 DEAD EmptyBox 3.8s; R.3.4.2 d1 INTERNAL 2.4s; R.3.4.2.p1 d2 INTERNAL 8.9s; R.3.4.2.p1.p1 d3 DEAD EmptyBox 1.8s; R.3.4.2.p1.p2 d3 DEAD EmptyBox 0.1s; R.3.4.2.p2 d2 DEAD NOROOM 6.1s; R.3.4.2.p3 d2 INTERNAL 7.3s; R.3.4.2.p3.p1 d3 DEAD EmptyBox 1.8s; R.3.4.2.p3.p2 d3 DEAD EmptyBox 0.7s; R.3.4.3 d1 INTERNAL 2.9s; R.3.4.3.1 d2 DEAD EmptyBox 0.1s; R.3.4.3.2 d2 DEAD NOROOM 4.4s; R.3.4.3.3 d2 DEAD NOROOM 3.7s; R.3.4.3.4 d2 DEAD NOROOM 5.9s
+== k5_11_interior_Y1103: g1 None | pad0 DEAD   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1316, 'misses': 607, 'entries': 607}; clip {'hits': 26132, 'misses': 997717, 'entries': 197717}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1923, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 18}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 1577, 'obs_misses': 519, 'build_hits': 0, 'build_misses': 9, 'bisect_hits': 0, 'bisect_misses': 9, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 519, 'build_entries': 10, 'bisect_entries': 9, 'on': True}
