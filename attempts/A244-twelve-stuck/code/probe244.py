@@ -33,7 +33,8 @@ from search244 import a217_seeds, belownormal        # noqa: E402
 
 def residual(z, cells, delta):
     gw, gp, d2 = F.worst(z, cells, delta)
-    return max(-gw, -gp, delta - d2, 0.0), (gw, gp, d2)
+    short = 0.0 if d2 == float('inf') else delta - d2
+    return max(-gw, -gp, short, 0.0), (gw, gp, (-1.0 if d2 == float('inf') else d2))
 
 
 def attempt(z0, cells, delta, s, rng, inner=4):
@@ -58,7 +59,7 @@ def attempt(z0, cells, delta, s, rng, inner=4):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--tag', required=True)
-    ap.add_argument('--mode', default='twelve', choices=('twelve', 'four', 'slots'))
+    ap.add_argument('--mode', default='twelve', choices=('twelve', 'four', 'slots', 'none'))
     ap.add_argument('--sides', default='3.999,3.99,3.95,3.9,3.877084,3.82')
     ap.add_argument('--n', type=int, default=200)
     ap.add_argument('--seed', type=int, default=0)

@@ -112,8 +112,6 @@ def border_start(rng, S):
     m = S / 2
     for (px, py) in ((m, 0.5), (S - 0.5, m), (m, S - 0.5)):
         pts.append((px + rng.normal(0, 0.3), py + rng.normal(0, 0.3)))
-    for (x, y) in pts:
-        pass
     for i, (x, y) in enumerate(pts[:F.N]):
         z[3 * i], z[3 * i + 1] = x, y
         z[3 * i + 2] = rng.uniform(0, math.pi / 2)
@@ -136,4 +134,5 @@ def grid_start(rng, S):
 
 
 STARTS = {'random': random_start, 'border': border_start, 'grid': grid_start}
-CELLSETS = {'twelve': list(C.CELLS), 'four': list(C.BOXES), 'slots': list(C.SLOTS)}
+CELLSETS = {'twelve': list(C.CELLS), 'four': list(C.BOXES), 'slots': list(C.SLOTS),
+            'none': []}          # 'none' = the packing-only baseline of the probe

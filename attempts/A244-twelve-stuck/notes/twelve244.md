@@ -20,15 +20,95 @@ PLACEHOLDER-ANSWER
 
 ## 1. What is constrained, and how
 
-PLACEHOLDER-METHOD
+**The cells.**  `cells244`: in corner c's frame (u, v), c00 = [0,1]^2, c01 = [0,1]x[1,2] (up c's
+wall), c10 = [1,2]x[0,1] (along c's floor); every frame map is a signed diagonal, so all twelve
+cells are global axis-aligned rectangles.  At s = 4 they are exactly the twelve boundary cells of
+the 4x4 grid and they tile the border strip (A243's observation, re-checked in `test244`).
+
+**Meeting.**  A square meets a cell iff their INTERIORS overlap.  For a unit square and an
+axis-aligned rectangle the separating-axis set is {e_x, e_y, n_0(th), n_1(th)}, and the OVERLAP
+DEPTH is the min over those four axes of the projection overlap: > 0 iff the interiors meet.  For
+any unit axis a the square projects to [c.a - h/2, c.a + h/2] with h = |a.n_0| + |a.n_1| and the
+rect to [b.a - v/2, b.a + v/2] with v = |a_x| w_x + |a_y| w_y, so depth and its gradient are
+closed-form (`fast244`).
+
+**Why not A217's crowd rows.**  A217 forces a corner box by pushing a DESIGNATED VERTEX of a
+designated meeter into the box.  That is only sufficient for meeting, and it cannot express the
+CROSS configuration -- a 45-degree unit square centred on a cell meets it with no vertex of either
+inside the other (`test244` checks this) -- which is exactly what a wall slot invites.  A244 first
+replaced the vertex row by a WITNESS-POINT row (`crowd244`: a point constrained into the cell and
+into the square, 8 smooth rows per designated pair, no selection) and minimised s with SLSQP
+(`opt244`).  **[F] That form does not work**: with the designation frozen, the phase-1 problem
+(maximise the uniform slack t over all rows) converges to t = -delta/2 at EVERY margin and from
+every seed -- the designated meeter clips a cell at a corner and cannot enter without overlapping
+its neighbour, and SLSQP has no way to re-designate.  The files are kept (and `test244` still
+checks the witness-row jacobian) because the failure is the reason for the second form.
+
+**The form that works** (`fast244` + `feas244`): a DESIGNATION-FREE penalty
+
+    F(z) = sum_walls min(g,0)^2 + sum_pairs min(gap,0)^2 + sum_cells min(d2 - delta, 0)^2,
+
+where d2 is the SECOND LARGEST overlap depth of the cell over the eleven squares.  Which two
+squares meet a cell is decided afresh at every evaluation, so the assignment moves during the
+descent.  Phase A finds a feasible point with the side FREE (the twelve-cell condition is
+infeasible for LARGE s as well as small -- see s.3 -- so widening alone never finds the window);
+phase B is a halving descent on s, re-polishing at each side and accepting only F = 0 exactly.
+Optional tilt floor: every square's tilt at least `--tilt` degrees from a multiple of 90.
+
+**Verification** (`verify244`, 40-digit mpmath INTERVAL arithmetic).  An optimiser output has
+gaps of order -1e-15, so it is not literally a packing.  The verifier first INFLATES: c -> lam c,
+s -> lam s (this adds (lam-1) n.(c_p - c_o) >= (lam-1)(gap + 1) to every selected separating-axis
+gap and (lam-1) * a non-negative centre coordinate to every wall gap), takes the smallest lam on a
+ladder that makes it a packing, and then certifies AT THAT SIDE: containment, pairwise
+interior-disjointness, and >= 2 strictly positive overlap depths for each of the twelve cells.
+Every verdict is taken only when the whole interval lies on one side of 0.  Cells are anchored at
+the walls, so a meeting of depth d survives any inflation with lam - 1 < d / (2 s): the certified
+sides use lam - 1 ~ 1e-14 against depths >= 1e-5.
 
 ## 2. The thresholds
 
 PLACEHOLDER-THRESHOLD
 
-## 3. The structure of a 12-stuck packing
+## 3. Why the window is where it is (`code/hand244.py`, `results/hand244.json`)
 
-PLACEHOLDER-STRUCTURE
+**[M] How many of the twelve cells can ONE unit square meet?**  Exhaustive over a 181 x 181 x 181
+grid in (c_x, c_y, theta):
+
+| side s | 3.82 | 3.877084 | 4.0 | 4.2 | 3 + sqrt2 = 4.414214 | 4.6 |
+|---|---|---|---|---|---|---|
+| max cells met | **5** | **5** | **4** | **4** | **3** | **3** |
+
+with witnesses BL00 BL01 BL10 BR10 TL01 (below 4: a square at the BL corner still reaches the
+NEXT corner's floor slot and the next corner's wall slot), BL01 TL00 TL01 TL10 (at 4 and 4.2: the
+three cells of one wall plus the neighbouring top-wall slot) and BL00 BL01 BL10 (at and above
+3 + sqrt2: only its OWN corner's triple).  So the reach falls monotonically as s grows, and the
+last drop is exactly at **s = 3 + sqrt2**:
+
+**[T] Lemma CROSS-CORNER-REACH** (n-general, any n, any side).  A square with a point in a corner
+box c00 (u < 1 in the wall's coordinate) and a point in the FAR slot of the same wall (u > s - 2)
+has extent > s - 3 along that wall; a unit square has extent <= sqrt2 in every direction; so for
+**s >= 3 + sqrt2 = 4.414214** no square meets both, i.e. no wall slot can be supplied by the
+ADJACENT corner's meeter.  (The same computation kills the c'00-meets-c01 form.)  This is the
+upper end of the twelve-cell window: A217's own four-crowds are 12-stuck up to side 4.391318 and
+no further, 0.023 below the bound.
+
+**[M] A corner is NOT SELF-SUFFICIENT.**  Can two DISJOINT unit squares in the quadrant each meet
+all three cells c00, c01, c10 of one corner?  ONE square can (penalty 0 at every margin tested;
+a square straddling the frame point (1,1) meets all three).  TWO cannot, to any positive depth:
+1500 L-BFGS restarts of the six-variable penalty give best value 3.339e-07 at margin delta = 1e-3
+and 3.359e-13 at delta = 1e-6 -- exactly proportional to delta^2, i.e. the achievable common
+depth is **0**, the two squares can at best TOUCH the three cells.  [S] proof route: both squares
+meet the three quadrants Q1 = {u<1,v<1}, Q2 = {u<1,v>1}, Q4 = {u>1,v<1} around the frame point
+(1,1); a separating line of the two must then itself meet all three cells, which forces it to run
+up-left through the corner box, and the unit-square constraint must be brought in to finish
+(obligation O-NO-SELF-SUFFICIENT).
+
+**The consequence.**  Each corner's two slot-meetings cannot both come from its own two meeters
+with room to spare, so under SLOT-MET the second meeter of a slot is (a) the adjacent corner's
+meeter -- dead for s >= 3 + sqrt2 by CROSS-CORNER-REACH -- (b) the corner's own other meeter, or
+(c) one of the three free squares, which is A243 s.4's list.  The twelve-cell condition therefore
+lives in a WINDOW of sides, bounded above by the reach and below by the measurement of s.2, and
+that window does not reach down to s-hat.
 
 ## 4. What this does and does not say about k0
 

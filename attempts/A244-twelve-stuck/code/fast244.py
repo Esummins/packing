@@ -250,6 +250,8 @@ def worst(z, cells, delta):
     gw = float(np.min(np.stack([q[..., 0], q[..., 1], s - q[..., 0], s - q[..., 1]], -1)))
     _, g1, _ = pair_table(q, n, cx, cy)
     gp = min(max(g1[i, j], g1[j, i]) for (i, j) in PAIRS)
+    if not len(cells):
+        return gw, float(gp), float('inf')        # the PACKING-ONLY baseline
     d = depths(z, cells)
     d2 = min(float(np.sort(d[ci])[-2]) for ci in range(len(cells)))
     return gw, float(gp), d2
