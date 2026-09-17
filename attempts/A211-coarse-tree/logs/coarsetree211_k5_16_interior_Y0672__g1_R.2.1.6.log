@@ -1,0 +1,33 @@
+21:04:05 [p8f] start k5_16_interior_Y0672 pad g1 node R.2.1.6 wall 1800 (lab 9, free 15310 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 g1 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0672_g1_s0.json)
+   INHERIT k5_16_interior_Y0672 pad g1: 6 prior trees, 65 paths, 6 branches inherited DEAD (final, with their certificates), 11 start nodes (0 from the A203 root)
+== k5_16_interior_Y0672 page pad g1: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0672_g1_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 6 dead branches (final) + 11 start nodes ['R.2.1.4', 'R.2.1.5', 'R.2.1.6', 'R.2.1.7', 'R.2.2', 'R.2.3', 'R.2.4', 'R.2.5', 'R.3', 'R.4']; H [2.358, 2.498, 2.358, 2.498, 0.0, 14.25]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1          TL(1,0)<-(7,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0672.json
+   INHERITED DEAD R.2.1.1.p1.p1.1 BL(1,0)<-F2  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0672.json
+   INHERITED DEAD R.2.1.1.p1.p1.2.1 F4<-y  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0672.json
+   INHERITED DEAD R.2.1.1.p1.p1.2.2 F4<-y  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0672__g1_R.2.1.1.p1.p1.2.2.json
+   INHERITED DEAD R.2.1.2      BL(1,0)<-(6,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0672__g1_R.2.1.2.json
+   INHERITED DEAD R.2.1.3      BL(1,0)<-(7,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0672__g1_R.2.1.3.json
+   A229 SHARD: --start R.2.1.6 -- 1 of them are start nodes of this page/pad right now (11 start nodes in all)
+   start R.2.1.4: SKIPPED (filter)
+   start R.2.1.5: SKIPPED (filter)
+   start R.2.1.6: applied step 1/1 -- BL(1,0) <- [12]
+   node R.2.1.6    d0 root: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=6.6)
+   start R.2.1.6      => DEAD (1 nodes; t = 7 s of 1800.0)
+   start R.2.1.7: SKIPPED (filter)
+   start R.2.2: SKIPPED (filter)
+   start R.2.3: SKIPPED (filter)
+   start R.2.4: SKIPPED (filter)
+   start R.2.5: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   start R.5: SKIPPED (filter)
+   => ALIVE (g1_page) in 6.6 s: 11 start runs, 1 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 6 inherited dead (6 up front + 0 in tree), 7 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 0 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1.1.p1.p1.1 d6 DEAD INHERIT 0.0s; R.2.1.1.p1.p1.2.1 d7 DEAD INHERIT 0.0s; R.2.1.1.p1.p1.2.2 d7 DEAD INHERIT 0.0s; R.2.1.2 d3 DEAD INHERIT 0.0s; R.2.1.3 d3 DEAD INHERIT 0.0s; R.2.1.6 d0 DEAD EmptyBox 0.9s
+== k5_16_interior_Y0672: g1 ALIVE | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 26, 'misses': 33, 'entries': 33}; clip {'hits': 2309, 'misses': 3558, 'entries': 3558}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 59, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 2}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 30, 'obs_misses': 29, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 29, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
