@@ -11,3 +11,24 @@
    INHERITED DEAD R.3.4.1      TR(0,0)<-(14,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1108.json
    INHERITED DEAD R.3.4.2      TR(0,0)<-(19,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_11_interior_Y1108__zero_R.3.4.2.json
    A229 SHARD: --start R.3.4.3 -- 1 of them are start nodes of this page/pad right now (2 start nodes in all)
+   start R.3.4.3: applied step 1/1 -- TR(0,0) <- [24]
+   node R.3.4.3    d0 root: INTERNAL (5.1 s, 1 rounds; t=13.9)
+   node R.3.4.3.1  d1 TL(1,0)<-[9]: INTERNAL (4.0 s, 1 rounds; t=18.1)
+   no-room (k=10, m=1): DEAD by NOROOM in 4 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.4.3.1  d1: DEAD by NOROOM -- no-room at R.3.4.3.1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.4.3.2  d1 TL(1,0)<-[14]: INTERNAL (2.5 s, 1 rounds; t=24.4)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.4.3.2  d1: DEAD by NOROOM -- no-room at R.3.4.3.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.4.3.3  d1 TL(1,0)<-[19]: INTERNAL (9.6 s, 1 rounds; t=35.4)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.4.3.3  d1: DEAD by NOROOM -- no-room at R.3.4.3.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R.3.4.3      => DEAD (4 nodes; t = 38 s of 1800.0)
+   start R.3.5: SKIPPED (filter)
+   => ALIVE (zero_page) in 38.3 s: 2 start runs, 4 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 7 inherited dead (7 up front + 0 in tree), 10 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 7 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2 d2 DEAD INHERIT 0.0s; R.3.3 d2 DEAD INHERIT 0.0s; R.3.4.1 d3 DEAD INHERIT 0.0s; R.3.4.2 d3 DEAD INHERIT 0.0s; R.3.4.3 d0 INTERNAL 5.1s; R.3.4.3.1 d1 DEAD NOROOM 4.0s; R.3.4.3.2 d1 DEAD NOROOM 2.5s; R.3.4.3.3 d1 DEAD NOROOM 9.6s
+== k5_11_interior_Y1108: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 425, 'misses': 180, 'entries': 180}; clip {'hits': 7400, 'misses': 12105, 'entries': 12105}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 605, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 5}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 481, 'obs_misses': 154, 'build_hits': 0, 'build_misses': 3, 'bisect_hits': 0, 'bisect_misses': 3, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 154, 'build_entries': 3, 'bisect_entries': 3, 'on': True}
