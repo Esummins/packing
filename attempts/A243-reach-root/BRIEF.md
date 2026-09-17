@@ -47,3 +47,16 @@ proves LOCKED-CROWD-FREE(11) (Stuck4.lean's stuck4_eleven), which with A233's th
    docs/residue_map/campaigns/A243-reach-root/ (the summary domain with the leaves' kill regions shaded; a survivor
    cell drawn as a crowd), registry row, LOG entry, ledger s.4 note; Lean: no new axiom unless a leaf needs a prose
    lemma (then Statements/Open/ with docstring; build + audit, 0 sorry).  Report once (<= 15 lines) and EXIT.
+
+## Addendum (PI, 18:00) -- Lemma WALL-SLOT: the wall slots must be doubly met too
+"Look at BL00 and BL01: how can we possibly get a second meeter for BL01?  If we cannot, both A and B teleport to
+those two slots."  In a teleport-stuck packing every wall slot adjacent to a corner (8 cells: BL01 above the wall
+meeter, BL10 beside the floor meeter, ...) must be met by a second square, else its meeter teleports into the slot
+(swap_packing, |X| = 1) and then the corner box is singly met and teleports (K0-FREE): a corner domino, k2.  So
+STUCK-4 may assume all 12 cells doubly met.  Ring check: BL01 is met by 5 AND 2 (the TL wall meeter reaches down
+to 1.85) -- the adjacent corner's wall meeter; below 4 the two wall slots of adjacent corners OVERLAP (s - 2 < 2)
+so the two wall meeters can serve each other iff h > s-2-delta, h' > s-2-delta', h + h' <= s - delta - delta'
+(feasible iff s < 4).  Leaf: enumerate the possible second meeters (adjacent wall meeter; third wall member --
+juts, empties the pocket; interior vertex through the notch; the floor meeter's tip in the notch -- the ring's 4
+misses by 0.12); mutual case => walls fully occupied, pocket = centre + notches, capacity <= 2 => 10 < 11.  Say
+whether this covers the domain analytically at n = 11 below 4 (a proof of POCKET(11)?) and the exact remaining case.
