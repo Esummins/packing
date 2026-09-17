@@ -145,7 +145,7 @@ def axes(pg, x, y, w, h, xr, yr, xt, yt, xlab, ylab, ylog=False):
         pg.line(x - 4, Y(v), x, Y(v), '#444', 1.0)
         pg.text(x - 7, Y(v) + 3, ('%g' % v), 8.5, '#444', anchor='end')
     pg.text(x + w / 2, y + h + 32, xlab, 9.5, '#222', anchor='middle')
-    pg.text(x, y - 8, ylab, 9.5, '#222')
+    pg.text(x - 30, y - 12, ylab, 9.5, '#222')
     return X, Y
 
 
@@ -155,23 +155,21 @@ def page2(su):
     pg.text(24, 30, 'A244 -- the 12-STUCK threshold: what the search bought', 17, '#111', weight='600')
     cw = [(k, v) for k, v in su['curve_twelve'] if v]
     cf = [(k, v) for k, v in su['curve_four'] if v]
-    lo = min([v for _, v in cw + cf] + [3.99])
-    hi = max([v for _, v in cw + cf] + [4.05])
     nmax = max([k for k, _ in su['curve_twelve'] + su['curve_four']] + [1])
-    X, Y = axes(pg, 80, 80, 470, 420, (0, nmax), (lo - 0.002, hi + 0.002),
+    X, Y = axes(pg, 80, 96, 470, 400, (0, nmax), (1e-5, 1e-1),
                 [0, nmax // 4, nmax // 2, 3 * nmax // 4, nmax],
-                [round(lo - 0.002 + i * (hi - lo + 0.004) / 4, 4) for i in range(5)],
-                'restarts (descent runs, in file order)', 'best CERTIFIED side')
+                [1e-5, 1e-4, 1e-3, 1e-2, 1e-1],
+                'restarts (descent runs, in file order)',
+                'best CERTIFIED side MINUS 4  (log)', ylog=True)
     for pts, col, lab in ((cw, D.ORANGE, '12-STUCK'), (cf, D.BLUE, '4-STUCK (control)')):
         if pts:
-            pg.polyline([(X(k), Y(v)) for k, v in pts], col, 1.8)
-            pg.text(X(pts[-1][0]) - 4, Y(pts[-1][1]) - 6, '%s  %.6f' % (lab, pts[-1][1]), 9.5, col,
-                    anchor='end')
-    for v, lab, col in ((4.0, 's = 4', '#666'), (SHAT, 's-hat = 3.877084', D.GREEN)):
-        if lo - 0.002 <= v <= hi + 0.002:
-            pg.line(80, Y(v), 550, Y(v), col, 1.0, '5,4')
-            pg.text(84, Y(v) - 4, lab, 8.5, col)
-    pg.text(80, 66, '(E) the descent: best certified side after k restarts', 11, '#111')
+            pg.polyline([(X(k), Y(max(v - 4.0, 1e-5))) for k, v in pts], col, 1.8)
+            pg.text(X(pts[-1][0]) - 4, Y(max(pts[-1][1] - 4.0, 1e-5)) - 7,
+                    '%s  %.6f' % (lab, pts[-1][1]), 9.5, col, anchor='end')
+    pg.line(80, Y(1e-5), 550, Y(1e-5), '#666', 1.0, '5,4')
+    pg.text(84, Y(1e-5) - 4, 's = 4 (the trivial side); s-hat = 3.877084 is 0.123 BELOW it',
+            8.5, '#666')
+    pg.text(80, 74, '(E) the descent: best certified side after k restarts', 11, '#111')
     agg = {}
     for k, v in su['probe'].items():
         mode, side = k.split('|')[0], float(k.split('|')[1])
@@ -183,7 +181,7 @@ def page2(su):
     allsides = sides12 + sides4
     if allsides:
         xr = (min(allsides) - 0.02, max(allsides) + 0.02)
-        X2, Y2 = axes(pg, 680, 80, 440, 420, xr, (1e-6, 1e-1),
+        X2, Y2 = axes(pg, 680, 96, 440, 400, xr, (1e-6, 1e-1),
                       [round(v, 3) for v in (xr[0], (xr[0] + xr[1]) / 2, xr[1])],
                       [1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1],
                       'side s', 'best residual over the restarts (log)', ylog=True)
@@ -199,9 +197,9 @@ def page2(su):
         for v, lab, col in ((4.0, 's = 4', '#666'), (SHAT, 's-hat', D.GREEN),
                             (3 + math.sqrt(2), '3+sqrt2', '#8a4a08')):
             if xr[0] <= v <= xr[1]:
-                pg.line(X2(v), 80, X2(v), 500, col, 1.0, '5,4')
-                pg.text(X2(v) + 3, 92, lab, 8.5, col)
-        pg.text(680, 66, '(F) the fixed-side probe: how close it got at each side', 11, '#111')
+                pg.line(X2(v), 96, X2(v), 496, col, 1.0, '5,4')
+                pg.text(X2(v) + 3, 108, lab, 8.5, col)
+        pg.text(680, 74, '(F) the fixed-side probe: how close it got at each side', 11, '#111')
     pg.note(80, 545, [
         'EVIDENCE, NOT PROOF.  (E) is the running minimum of verify244\'s certified side over the '
         'descent runs; (F) is the least residual the fixed-side probe reached,',

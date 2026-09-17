@@ -16,7 +16,14 @@ Tags as elsewhere: [T] proved here, [M] measured, [S] proof route with a gap, [C
 
 ## 0. The answer in one line
 
-PLACEHOLDER-ANSWER
+**Yes, the ring is constructible -- 282 of A217's own 1217 feasible four-crowds are already
+12-stuck -- but only at and above the TRIVIAL SIDE: the least certified 12-stuck side is
+4.000022, the four-cell control lands at 4.000015, and no strict 12-stuck packing was found at
+any side below 4 (best residual 3.46e-6 at 3.9999, 1.43e-2 at s-hat = 3.877084, 3.52e-2 at 3.82).
+None of the candidates is LOCKED.**  Effort: 53 descent runs + 500 fixed-side probe restarts,
+0.65 CPU-h; EVIDENCE, not proof.  So the PI's worry does not bite as non-existence of the
+configuration type -- it bites as non-existence IN THE WINDOW, which is exactly the statement
+A242's cascade is trying to certify.
 
 ## 1. What is constrained, and how
 
@@ -73,8 +80,8 @@ already 12-stuck** -- all twelve border cells doubly met -- the least at side 4.
 configuration type the PI asked about is constructible; it was already in the lab's own corpus,
 unlabelled.
 
-**[M] The least CERTIFIED 12-stuck side is 4.0000xx** (see `results/twelve244.md` s.1 for the
-exact value and the witness), reached by the halving descent at crowd margin delta = 1e-5 from
+**[M] The least CERTIFIED 12-stuck side is 4.000022** (`a217:crowd_10_0113|crowd0.02|twelve|d1e-05`;
+`results/twelve244.md` s.1-2), reached by the halving descent at crowd margin delta = 1e-5 from
 A217 seeds and certified by `verify244` in interval arithmetic.  The descent's limit moves with
 the margin exactly as `4 + c delta` (delta = 1e-3 gives ~4.0004, delta = 1e-5 gives ~4.00002), so
 the measured infimum of the sides carrying a 12-stuck packing is **s = 4, the trivial side**, and
@@ -87,7 +94,8 @@ crowds, random, border and grid starts):
 
 | side | 3.82 | 3.877084 = s-hat | 3.95 | 3.999 | 3.9999 |
 |---|---|---|---|---|---|
-| best residual | 3.5e-2 | ~2.7e-2 | 5.8e-3 | 4e-6 | 3.5e-6 |
+| best residual | 3.52e-2 | 1.43e-2 | 1.03e-2 | 3.68e-6 | 3.46e-6 |
+| restarts | 60 | 60 | 30 | 54 | 240 |
 
 and **no strict 12-stuck packing was found at any side below 4** (`strict_ok` never true).  Near 4
 the residual is of the order of the margin itself (0.35 delta), i.e. the obstruction has gone; at
@@ -95,14 +103,16 @@ s-hat and below it is four orders of magnitude larger.  Caveat: at 3.82 the side
 certified LOWER bound for s(11), so part of that residual is the packing being infeasible, not the
 cells; s-hat and 3.95 carry packings and are the honest readings.
 
-**[M] The 4-STUCK control** (corner boxes only, A217's condition) is run through the SAME optimiser
-and verifier; see `results/twelve244.md` s.1 and s.3.  A217's published four-crowd threshold
-4.0013 was measured at crowd margin 0.02 on a vertex-based row, so it is an upper bound for the
-depth-based condition; the control here separates the two.
+**[M] The 4-STUCK control** (corner boxes only, A217's condition) run through the SAME optimiser and
+verifier certifies **4.000015** -- the same threshold, 7e-6 below the twelve-cell one.  A217's
+published four-crowd threshold 4.0013 was its VERTEX row at crowd margin 0.02, an upper bound for
+the depth-based condition.  **So the twelve-cell hypothesis buys NO side over the four-cell one**:
+both boundaries sit at the trivial side 4.  (Every 4-stuck optimum found is in fact 12-stuck as
+well, which is the same phenomenon A217's corpus already showed.)
 
-**[M] None of them is LOCKED.**  On every 12-stuck candidate the FREE Fritz-John system (walls and
-contacts only, no crowd rows; `stress244` on A217's `opt217`/`stress217`) is INFEASIBLE -- least
-residual 1.28e-2 over the candidates -- and no candidate has all of its cell meeters loaded.  The
+**[M] None of them is LOCKED.**  On all 34 verified 12-stuck candidates the FREE Fritz-John system
+(walls and contacts only, no crowd rows; `stress244` on A217's `opt217`/`stress217`) is INFEASIBLE
+-- least residual 1.28e-2 over the candidates, and 1.0 (no active row at all) on the extremal one -- and no candidate has all of its cell meeters loaded.  The
 12-stuck packings are held at their side by the artificial crowd rows alone.  This is the same
 reading A239 got on all twelve rings below 4, and it answers the brief's secondary question: NO,
 for everything found.
@@ -187,7 +197,9 @@ supply.
 bash attempts/A244-twelve-stuck/code/run244.sh test          # the self-tests
 bash attempts/A244-twelve-stuck/code/run244.sh A [WALL]      # structure + the descent lane
 bash attempts/A244-twelve-stuck/code/run244.sh B [WALL]      # the fixed-side probe lane
+bash attempts/A244-twelve-stuck/code/run244.sh C [WALL]      # the tilt-floor variants (5/10/20 deg)
 bash attempts/A244-twelve-stuck/code/run244.sh pages         # summary + the two pages
 # stop:   touch attempts/A244-twelve-stuck/logs/STOP
-# resume: rm attempts/A244-twelve-stuck/logs/STOP   then lane A and lane B again
+# resume: rm attempts/A244-twelve-stuck/logs/STOP   then lane A and lane B again (at most two
+#         pythons at a time; every stage skips the rids already in its jsonl)
 ```
