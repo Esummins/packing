@@ -57,3 +57,10 @@ Every kill = a certificate for the cell's hypothesis; the cascade's completeness
    A242-crowd-root/ (root, first kills, survivors), Statements/Open/Stuck4.lean (STUCK-4(11) as a documented axiom
    + the consequence chain to k0_00 via A233's theorems and K0-FREE; build + audit, 0 sorry), registry row, LOG
    entry, ledger s.4 note.  Report once (<= 15 lines) and EXIT.
+
+## Addendum (PI, 15:40) -- "no ring constructable below s-hat"
+L1 uses NO lock / force hypothesis: if L1 alone closes the tree on a side range, the theorem is the UNLOCKED
+STUCK-4 -- no teleport-stuck 11-packing exists at side in that range -- which with K0-FREE closes k0_00 directly
+(no A233 needed).  Run and report L1 alone first over [3.82, s-hat], then s < 4; per surviving cell record the pocket
+capacity L1 found and the meeters' offsets / tilts (corner-wasting deep poses?); state STUCK-4 in the unlocked form
+in Stuck4.lean if L1 closes.
