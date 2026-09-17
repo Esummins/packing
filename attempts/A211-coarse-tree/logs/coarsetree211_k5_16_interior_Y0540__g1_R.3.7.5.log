@@ -17,3 +17,33 @@
    INHERITED DEAD R.3.7.4      BR(0,1)<-(21,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0540.json
    A229 SHARD: --start R.3.7.5 -- 1 of them are start nodes of this page/pad right now (14 start nodes in all)
    node R.3.7.5    d0 root: INTERNAL (43.6 s, 1 rounds; t=44.4)
+   no-room (k=10, m=1): UNDECIDED in 16 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.3.7.5: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.7.5.p1 d1 pocket<-[0]: INTERNAL (26.2 s, 1 rounds; t=150.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.3.7.5.p1: split F3 at BR(0,1) (meeting fraction 0.28273; alive rows []; named ['F3', 'F4', 'F5'])
+   node R.3.7.5.p1.1 d2 BR(0,1)<-None: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=150.6)
+   node R.3.7.5.p1.2 d2 BR(0,1)<-None: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=150.7)
+   node R.3.7.5.p2 d1 pocket<-[1]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=151.2)
+   start R.3.7.5      => DEAD (5 nodes; t = 151 s of 1800.0)
+   start R.3.7.6: SKIPPED (filter)
+   start R.3.8: SKIPPED (filter)
+   start R.3.9: SKIPPED (filter)
+   start R.3.10: SKIPPED (filter)
+   start R.3.11: SKIPPED (filter)
+   start R.3.12: SKIPPED (filter)
+   start R.3.13: SKIPPED (filter)
+   start R.3.14: SKIPPED (filter)
+   start R.3.15: SKIPPED (filter)
+   start R.3.16: SKIPPED (filter)
+   start R.3.17: SKIPPED (filter)
+   start R.3.18: SKIPPED (filter)
+   start R.3.19: SKIPPED (filter)
+   => ALIVE (g1_page) in 151.2 s: 14 start runs, 5 nodes, depth 2, 0 CC kills, 0 exact leaf cascades, 1 NS splits, 1 pocket splits, 0 role splits (0 empty-half kills), 12 inherited dead (12 up front + 0 in tree), 15 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 4 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2 d2 DEAD INHERIT 0.0s; R.3.3 d2 DEAD INHERIT 0.0s; R.3.4 d2 DEAD INHERIT 0.0s; R.3.5 d2 DEAD INHERIT 0.0s; R.3.6 d2 DEAD INHERIT 0.0s; R.3.7.1 d3 DEAD INHERIT 0.0s; R.3.7.2 d3 DEAD INHERIT 0.0s; R.3.7.3 d3 DEAD INHERIT 0.0s; R.3.7.4 d3 DEAD INHERIT 0.0s; R.3.7.5 d0 INTERNAL 43.6s; R.3.7.5.p1 d1 INTERNAL 26.2s; R.3.7.5.p1.1 d2 DEAD EmptyBox 0.4s; R.3.7.5.p1.2 d2 DEAD EmptyBox 0.1s; R.3.7.5.p2 d1 DEAD EmptyBox 0.5s
+== k5_16_interior_Y0540: g1 ALIVE | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 148, 'misses': 100, 'entries': 100}; clip {'hits': 2491, 'misses': 91475, 'entries': 91475}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 248, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 5}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 182, 'obs_misses': 96, 'build_hits': 0, 'build_misses': 1, 'bisect_hits': 0, 'bisect_misses': 1, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 96, 'build_entries': 1, 'bisect_entries': 1, 'on': True}
