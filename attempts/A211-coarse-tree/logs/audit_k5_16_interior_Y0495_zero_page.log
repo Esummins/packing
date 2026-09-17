@@ -59,3 +59,24 @@ k5_16_interior_Y0495 zero_page leaf R0+.1.2.1: FC at TR(0,1): at most 1 distinct
   role F4 (grid over its hull box in cell 17 (tilt 34.71-82.37)): 1320 admissible poses (slots ['BR(0,1)'], misses [])
   FC kill at TR(0,1): a refutation needs TWO distinct non-pin meeters of TR(0,1) -- the roles that meet it plus anonymous squares sampled over its window (27028 admissible)
   pairwise-disjoint admissible configurations of ['H', 'F1', 'F2', 'F3', 'F4']: 0 over 400 H poses (269985 partial tries); refuting: 0  -> 0 refutations (consistent with the kill)
+19:15:17 audit k5_16_interior_Y0495 zero_page R0+.1.2.2.p1.1
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y0495 zero_page leaf R0+.1.2.2.p1.1: EmptyBox(F2) at round1s1: every pose of F2 is outside the container, lonely, or meets another role's K' at every tilt of its sub-bin (A171 pair leaf; {'reason':
+  parent snapshot R0+.1.2.2.p1 (round 1); H forced at []; roles {'F1': ['TL(1,0)'], 'F2': ['BL(1,0)'], 'F3': ['BL(1,0)', 'TR(0,1)'], 'F4': ['BR(0,1)'], 'F5': [], 'H': []}; cells {'F1': 9, 'F2': 5, 'F3': 16, 'F4': 18, 'F5': -1}; misses {}
+  role H (60 pieces of the parent's snapshot): 541 admissible poses (slots [], misses [])
+  role F1 (76 pieces of the parent's snapshot): 745 admissible poses (slots ['TL(1,0)'], misses [])
+  role F2 (37 pieces of the parent's snapshot): 175 admissible poses (slots ['BL(1,0)'], misses [])
+  role F3 (23 pieces of the parent's snapshot): 0 admissible poses (slots ['BL(1,0)', 'TR(0,1)'], misses [])
+  role F4 (13 pieces of the parent's snapshot): 55 admissible poses (slots ['BR(0,1)'], misses [])
+  role F5 (6 pieces of the parent's snapshot): 36 admissible poses (slots [], misses [])
+  VACUOUS for ['F3'] (no admissible sampled pose: the role's own constraints already exclude the samples; consistent, not a refutation)
+19:15:18 audit k5_16_interior_Y0495 zero_page R0+.1.2.2.p1.2
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y0495 zero_page leaf R0+.1.2.2.p1.2: EmptyBox(F2) at round1s1: every pose of F2 is outside the container, lonely, or meets another role's K' at every tilt of its sub-bin (A171 pair leaf; {'reason':
+  parent snapshot R0+.1.2.2.p1 (round 1); H forced at []; roles {'F1': ['TL(1,0)'], 'F2': ['BL(1,0)'], 'F3': ['BL(1,0)'], 'F4': ['BR(0,1)'], 'F5': [], 'H': []}; cells {'F1': 9, 'F2': 5, 'F3': 16, 'F4': 18, 'F5': -1}; misses {'F3': ['TR(0,1)']}
+  role H (60 pieces of the parent's snapshot): 541 admissible poses (slots [], misses [])
+  role F1 (76 pieces of the parent's snapshot): 745 admissible poses (slots ['TL(1,0)'], misses [])
+  role F2 (37 pieces of the parent's snapshot): 175 admissible poses (slots ['BL(1,0)'], misses [])
+  role F3 (23 pieces of the parent's snapshot): 174 admissible poses (slots ['BL(1,0)'], misses ['TR(0,1)'])
+  role F4 (13 pieces of the parent's snapshot): 55 admissible poses (slots ['BR(0,1)'], misses [])
+  role F5 (6 pieces of the parent's snapshot): 36 admissible poses (slots [], misses [])
