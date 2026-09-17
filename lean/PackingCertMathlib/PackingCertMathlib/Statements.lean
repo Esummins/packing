@@ -40,6 +40,7 @@ import PackingCertMathlib.Statements.Open.WedgedSeal
 import PackingCertMathlib.Statements.Open.Cross
 import PackingCertMathlib.Statements.Open.Stuck4
 import PackingCertMathlib.Statements.Open.SnapDown
+import PackingCertMathlib.Statements.Open.StuckExist
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 

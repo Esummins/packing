@@ -9,18 +9,19 @@
 #         logs/slotmet_<eta>.npz; an eta with results/slotmet246_<eta>.json is skipped)
 set -u
 export PYTHONDONTWRITEBYTECODE=1
+PY="${PYTHON:-C:/Users/esumm/AppData/Local/Python/bin/python.exe}"; command -v "$PY" >/dev/null 2>&1 || PY=python
 HERE="$(cd "$(dirname "$0")" && pwd)"
 ATT="$(cd "$HERE/.." && pwd)"
 mkdir -p "$ATT/logs" "$ATT/results"
 case "${1:-}" in
-  test)    python "$HERE/test246.py" ;;
-  check)   python "$HERE/check246.py" --fresh 6 ;;
+  test)    "$PY" "$HERE/test246.py" ;;
+  check)   "$PY" "$HERE/check246.py" --fresh 6 ;;
   slotmet)
-    for eta in 1e-4 1e-5 1e-6 1e-7; do
+    for eta in 0.0001 1e-05 1e-06 1e-07; do
       [ -f "$ATT/logs/STOP" ] && { echo "STOP present"; exit 0; }
       [ -f "$ATT/results/slotmet246_$eta.json" ] && grep -q CERTIFIED "$ATT/results/slotmet246_$eta.json" && continue
-      python "$HERE/slotmet246.py" --eta "$eta" --hmin 1e-5 --budget-min 90 --batch 40000 >> "$ATT/logs/slotmet_ladder.log" 2>&1
+      "$PY" "$HERE/slotmet246.py" --eta "$eta" --hmin 1e-5 --budget-min 90 --batch 40000 >> "$ATT/logs/slotmet_ladder.log" 2>&1
     done ;;
-  pages)   python "$HERE/pages246.py" ;;
+  pages)   "$PY" "$HERE/pages246.py" ;;
   *) echo "usage: run246.sh test|check|slotmet|pages"; exit 1 ;;
 esac

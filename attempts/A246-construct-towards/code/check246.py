@@ -128,10 +128,15 @@ def main():
     if a.fresh > 0:
         items += fresh(a.fresh)
     rows = []
+    freshz = {}
     for rid, z, kind in items:
         rep = G.check_all(z)
         rows.append({'rid': rid, 's': rep['s'], 'kind': kind.split()[0], 'note': kind, 'report': rep})
+        if rid.startswith('fresh'):
+            freshz[rid] = [float(v) for v in z]
     os.makedirs(os.path.join(ATT, 'results'), exist_ok=True)
+    with open(os.path.join(ATT, 'results', 'fresh246.json'), 'w') as f:
+        json.dump(freshz, f)
     with open(os.path.join(ATT, 'results', 'construct246.jsonl'), 'w') as f:
         for r in rows:
             f.write(json.dumps(r) + '\n')
