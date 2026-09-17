@@ -42,6 +42,30 @@ def belownormal():
         pass
 
 
+def seed_ring():
+    return list(SEED_X[:4]) + list(SEED_X[4:8]) + list(SEED_X[:4]) + list(SEED_X[4:8])
+
+
+def load_rings(sides, per_side=2, restarts=8):
+    """feasible rings for the pilot: A251's joint251.json store if it exists (the ladder runs the
+    joint search first), else a short sampling seeded by A249's C2 witness."""
+    src = os.path.join(ATT, 'results', 'joint251.json')
+    out = []
+    if os.path.exists(src):
+        j = json.load(open(src, encoding='utf-8'))
+        for k, v in j.items():
+            for x in v.get('rings', {}).get('x', [])[:per_side]:
+                out.append({'x': x, 'side': float(k)})
+    if out:
+        return out
+    for s in sides:
+        for r0 in F.sample_rings(s, restarts, sym_seed=SEED_X)[:per_side]:
+            out.append({'x': r0['x'], 'side': s})
+    if not out:
+        out = [{'x': seed_ring(), 'side': 3.877084}]
+    return out
+
+
 def eps_of_radius(r):
     """the worst per-member effective core shrink of the uniform box of half-width r."""
     rad = [r] * 17
@@ -156,6 +180,7 @@ def main():
     sides = [float(v) for v in a.sides.split(',')]
     if a.stage in ('tol', 'all'):
         out.setdefault('rings', {})
+        store = load_rings(sides, per_side=4, restarts=a.restarts)
         for s in sides:
             if os.path.exists(STOP):
                 print('STOP present')
@@ -163,7 +188,10 @@ def main():
             key = '%.6f' % s
             if key in out['rings']:
                 continue
-            rs = F.sample_rings(s, a.restarts, sym_seed=SEED_X)
+            rs = [{'x': r['x'], 'margin': F.margin(r['x'], s)} for r in store
+                  if abs(r['side'] - s) < 1e-9]
+            if not rs:
+                rs = F.sample_rings(s, a.restarts, sym_seed=SEED_X)
             recs = []
             for r0 in rs[:4]:
                 rec = analyse_ring(r0['x'], s)
@@ -175,16 +203,11 @@ def main():
             out['rings'][key] = {'n_found': len(rs), 'records': recs}
             json.dump(out, open(RES, 'w', encoding='utf-8'), indent=1)
     if a.stage in ('pilot', 'all'):
-        src = json.load(open(RES, encoding='utf-8'))
-        rings = []
-        for k, v in src.get('rings', {}).items():
-            for r0 in F.sample_rings(float(k), 8, sym_seed=SEED_X)[:2]:
-                rings.append({'x': r0['x'], 'side': float(k)})
-        if not rings:
-            print('no feasible rings: run --stage tol first')
-            return
-        eps = min(r['eps_star_pierce2'] for v in src['rings'].values() for r in v['records'])
+        rings = load_rings(sides)
+        recs = [r for v in out.get('rings', {}).values() for r in v['records']]
+        eps = min([r['eps_star_pierce2'] for r in recs] or [0.1396484375])
         r_adm = max(1e-4, radius_for_eps(eps))
+        out['eps_star_used'] = eps
         out['pilot'] = {}
         for r in sorted({r_adm, 1e-3, 1e-2}):
             if os.path.exists(STOP):
