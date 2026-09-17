@@ -55,8 +55,11 @@ def ring_only(tau, sigma, s, d0=None, maxiter=2500, tries=2, seed=0):
     """sup over the eight deltas of feas at a fixed common tilt."""
     rng = np.random.default_rng(seed)
     best = (-9.0, [0.8] * 8)
-    for t in range(tries):
-        d = list(d0) if (d0 is not None and t == 0) else list(rng.uniform(0.55, 0.99, 8))
+    xs = Z.shat_ring()
+    starts = ([list(d0)] if d0 is not None else []) + \
+        [[xs[1], xs[3], xs[5], xs[7], xs[9], xs[11], xs[13], xs[15]]]
+    for t in range(len(starts) + tries):
+        d = starts[t] if t < len(starts) else list(rng.uniform(0.55, 0.99, 8))
         r = minimize(lambda z: -Z.feas(Z.x_of(tau, sigma, z), s), d, method='Nelder-Mead',
                      options={'xatol': 1e-10, 'fatol': 1e-12, 'maxiter': maxiter, 'adaptive': True})
         if -r.fun > best[0]:

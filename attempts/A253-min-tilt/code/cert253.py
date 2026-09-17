@@ -181,81 +181,81 @@ def box_cert(x_mid, s_mid, dth, ddel, ds, step_deg=2.0, tol=1e-12):
 
 
 def mode_oneparam(a):
+    """the ONE-PARAMETER certificate: the tilt is FIXED (theta_min(s) = 0, so the curve the family
+    reduces to is s -> the ring at a fixed common tilt) and only s varies.  Over each s-interval
+    the members move by rho_i = LIP_C_THETA*0 + ddelta_i + kappa_i*ds, so A251's sound cores are
+    large and A237's box-valid PIERCE(1) / (2) is cheap."""
     import mintilt253 as M
     fn = os.path.join(RES, 'cert253_oneparam.jsonl')
     done = set()
     if os.path.exists(fn):
-        done = {json.loads(l)['box'] for l in open(fn, encoding='utf-8') if l.strip()}
-    br = [r for r in M.rows('mintilt253_bisect.jsonl') if r['kind'] == 'joint' and r.get('best')]
-    if not br:
-        return print('no bisect rows yet', flush=True)
-    br.sort(key=lambda r: float(r['side']))
-    sg = br[0]['sigma']
-    n = a.boxes
-    h = (a.s_hi - a.s_lo) / n
-    for i in range(n):
-        if os.path.exists(STOP):
-            return print('STOP present', flush=True)
-        if i in done:
-            continue
-        t0 = time.time()
-        s0, s1 = a.s_lo + i * h, a.s_lo + (i + 1) * h
-        sm = 0.5 * (s0 + s1)
-        near = min(br, key=lambda r: abs(float(r['side']) - sm))
-        d0, tau0 = near['best']['deltas'], near['best']['tau_deg']
-        ends = {}
-        for tag, ss in (('lo', s0), ('mid', sm), ('hi', s1)):
-            l, hh, best = theta_min_at(ss, sg, d0, max(0.05, tau0 - 4.0), tau0 + 6.0,
-                                       iters=a.iters, maxiter=a.maxiter)
-            ends[tag] = {'lo_deg': l, 'hi_deg': hh, 'best': best}
-            if best:
-                d0 = best['deltas']
-        if not all(ends[t]['best'] for t in ends):
-            row = {'box': i, 's0': s0, 's1': s1, 'ok': False, 'why': 'no theta_min ring',
-                   'ends': ends, 'seconds': time.time() - t0}
+        done = {(json.loads(l)['box'], json.loads(l)['tau_deg'])
+                for l in open(fn, encoding='utf-8') if l.strip()}
+    sg = a.sigma
+    n, h = a.boxes, (a.s_hi - a.s_lo) / a.boxes
+    x0 = Z.shat_ring()
+    for tau in [float(v) for v in a.taus.split(',')]:
+        d0 = [x0[1], x0[3], x0[5], x0[7], x0[9], x0[11], x0[13], x0[15]]
+        for i in range(n):
+            if os.path.exists(STOP):
+                return print('STOP present', flush=True)
+            if (i, tau) in done:
+                continue
+            t0 = time.time()
+            s0, s1 = a.s_lo + i * h, a.s_lo + (i + 1) * h
+            sm = 0.5 * (s0 + s1)
+            got = {}
+            for tag, ss in (('mid', sm), ('lo', s0), ('hi', s1)):
+                r = M.joint_best(tau * Z.DEG, [int(c) for c in sg], ss, d0=d0,
+                                 maxiter=a.maxiter, tries=1)
+                got[tag] = r
+                if r['M'] > 0:
+                    d0 = r['deltas']
+            row = {'box': i, 'tau_deg': tau, 's0': s0, 's1': s1, 's_mid': sm, 'sigma': sg,
+                   'M': {t: got[t]['M'] for t in got}, 'seconds': time.time() - t0}
+            if min(got[t]['M'] for t in got) <= 0:
+                row['ok'] = False
+                row['why'] = 'no ring at this tilt across the interval'
+            else:
+                xm = Z.x_of(tau * Z.DEG, [int(c) for c in sg], got['mid']['deltas'])
+                ddel = [a.safety * max(abs(got[t]['deltas'][j] - got['mid']['deltas'][j])
+                                       for t in ('lo', 'hi')) for j in range(8)]
+                cert = box_cert(xm, sm, [0.0] * 8, ddel, 0.5 * h, step_deg=a.step_deg)
+                row.update({'ddelta_max': max(ddel), 'ds': 0.5 * h, 'cert': cert, 'x_mid': xm,
+                            'pose': got['mid']['pose'], 'wall': got['mid']['wall']})
+                row['ok'] = bool(not cert.get('cores_empty') and
+                                 (cert.get('pierce1', {}).get('certifies') or
+                                  cert.get('pierce2', {}).get('certifies')))
+                row['seconds'] = time.time() - t0
             with open(fn, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(row) + '\n')
-            continue
-        mid = ends['mid']['best']
-        xm = Z.x_of(mid['tau_deg'] * Z.DEG, [int(c) for c in sg], mid['deltas'])
-        dth_scalar = a.safety * max(abs(ends[t]['best']['tau_deg'] - mid['tau_deg'])
-                                    for t in ('lo', 'hi')) * Z.DEG
-        ddel_i = [a.safety * max(abs(ends[t]['best']['deltas'][j] - mid['deltas'][j])
-                                 for t in ('lo', 'hi')) for j in range(8)]
-        ddel = [ddel_i[j // 1] for j in range(8)]
-        cert = box_cert(xm, sm, [dth_scalar] * 8, ddel, 0.5 * h, step_deg=a.step_deg)
-        row = {'box': i, 's0': s0, 's1': s1, 's_mid': sm, 'sigma': sg,
-               'tau_mid_deg': mid['tau_deg'], 'dtheta_deg': dth_scalar / Z.DEG,
-               'ddelta_max': max(ddel), 'ds': 0.5 * h, 'cert': cert,
-               'ends': {t: {'lo_deg': ends[t]['lo_deg'], 'hi_deg': ends[t]['hi_deg']} for t in ends},
-               'x_mid': xm, 'pose': mid['pose'], 'wall': mid['wall'], 'seconds': time.time() - t0}
-        row['ok'] = bool(not cert.get('cores_empty') and
-                         (cert.get('pierce1', {}).get('certifies') or
-                          cert.get('pierce2', {}).get('certifies')))
-        with open(fn, 'a', encoding='utf-8') as f:
-            f.write(json.dumps(row) + '\n')
-        print('box %2d [%.4f, %.4f] tau %6.3f deg  rho %.4f  pierce1 %s pierce2 %s  (%.0fs)'
-              % (i, s0, s1, mid['tau_deg'], cert.get('rho_max', -1),
-                 cert.get('pierce1', {}).get('residual'), cert.get('pierce2', {}).get('residual'),
-                 row['seconds']), flush=True)
+            print('box %2d tau %5.2f [%.4f, %.4f]  ok %s  pierce1 %s pierce2 %s (%.0fs)'
+                  % (i, tau, s0, s1, row.get('ok'),
+                     row.get('cert', {}).get('pierce1', {}).get('residual'),
+                     row.get('cert', {}).get('pierce2', {}).get('residual'),
+                     row['seconds']), flush=True)
     print('ONEPARAM DONE', flush=True)
 
 
 def mode_exact(a):
+    """rational re-verification of every ring + poker the curve rows report as feasible."""
     import mintilt253 as M
     out = []
-    for r in M.rows('mintilt253_bisect.jsonl'):
-        if r['kind'] != 'joint' or not r.get('best') or not r['best'].get('pose'):
+    src = [r for r in M.rows('mintilt253_curve.jsonl') if r.get('pose') and r['M'] > 0]
+    src += [r['best'] for r in M.rows('mintilt253_bisect.jsonl')
+            if r['kind'] == 'joint' and r.get('best') and r['best'].get('pose')]
+    for r in src:
+        sg = r.get('sigma', a.sigma)
+        s = float(r['side']) if 'side' in r else None
+        if s is None:
             continue
-        b = r['best']
-        x = Z.x_of(b['tau_deg'] * Z.DEG, [int(c) for c in r['sigma']], b['deltas'])
-        s = float(r['side'])
-        e = exact_ring(x, s, b['pose'], b['wall'])
-        e.update({'side': r['side'], 'sigma': r['sigma'], 'tau_deg': b['tau_deg'],
-                  'float_M': b['M'], 'wall': b['wall']})
+        x = Z.x_of(r['tau_deg'] * Z.DEG, [int(c) for c in sg], r['deltas'])
+        e = exact_ring(x, s, r['pose'], r['wall'])
+        e.update({'side': r['side'], 'sigma': sg, 'tau_deg': r['tau_deg'], 'float_M': r['M'],
+                  'wall': r['wall']})
         out.append(e)
         print('exact s=%s tau %6.3f  ring_ok %s (gap %+.2e) poker_ok %s (gap %+.2e, ribbon %+.2e)'
-              % (r['side'], b['tau_deg'], e['ring_ok'], e['exact_min_gap'], e.get('poker_ok'),
+              % (r['side'], r['tau_deg'], e['ring_ok'], e['exact_min_gap'], e.get('poker_ok'),
                  e.get('poker_min_gap', 0), e.get('poker_ribbon_gap', 0)), flush=True)
     json.dump(out, open(os.path.join(RES, 'cert253_exact.json'), 'w', encoding='utf-8'), indent=1)
     print('EXACT DONE (%d rows)' % len(out), flush=True)
@@ -271,6 +271,8 @@ def main():
     ap.add_argument('--maxiter', type=int, default=900)
     ap.add_argument('--step-deg', type=float, default=2.0, dest='step_deg')
     ap.add_argument('--safety', type=float, default=1.5)
+    ap.add_argument('--sigma', default='00110011')
+    ap.add_argument('--taus', default='14.545,6,2')
     a = ap.parse_args()
     Z.belownormal()
     {'exact': mode_exact, 'oneparam': mode_oneparam}[a.mode](a)
