@@ -27,3 +27,18 @@
    node R.2.5.p1.p1.2.2.1.1 d3 TR(0,1)<-None: DEAD by EmptyBox r1 (1.8 s, 1 rounds; t=1482.7)
    node R.2.5.p1.p1.2.2.1.2 d3 TR(0,1)<-None: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=1483.0)
    node R.2.5.p1.p1.2.2.2 d2 BR(1,0)<-None: INTERNAL (96.2 s, 1 rounds; t=1579.2)
+   node R.2.5.p1.p1.2.2.2: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R.2.5.p1.p1.2 => ALIVE (9 nodes; t = 1816 s of 1800.0)
+   start R.2.6: SKIPPED (filter)
+   start R.2.7: SKIPPED (filter)
+   start R.2.8: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   => ALIVE (g1_page) in 1815.6 s: 6 start runs, 9 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 4 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 6 inherited dead (6 up front + 0 in tree), 10 dead / 1 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 9 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1 d2 DEAD INHERIT 0.0s; R.2.2 d2 DEAD INHERIT 0.0s; R.2.3 d2 DEAD INHERIT 0.0s; R.2.4 d2 DEAD INHERIT 0.0s; R.2.5.p1.p1.1 d5 DEAD INHERIT 0.0s; R.2.5.p1.p1.2 d0 INTERNAL 117.9s; R.2.5.p1.p1.2.1 d1 INTERNAL 119.7s; R.2.5.p1.p1.2.1.1 d2 DEAD EmptyBox 1.3s; R.2.5.p1.p1.2.1.2 d2 DEAD EmptyBox 0.2s; R.2.5.p1.p1.2.2 d1 INTERNAL 125.2s; R.2.5.p1.p1.2.2.1 d2 INTERNAL 95.2s; R.2.5.p1.p1.2.2.1.1 d3 DEAD EmptyBox 1.8s; R.2.5.p1.p1.2.2.1.2 d3 DEAD EmptyBox 0.3s; R.2.5.p1.p1.2.2.2 d2 ALIVE 96.2s
+== k5_16_interior_Y1112: g1 ALIVE | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 243, 'misses': 54, 'entries': 54}; clip {'hits': 20588, 'misses': 7641, 'entries': 7641}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 297, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 9}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 213, 'obs_misses': 84, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 40, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
