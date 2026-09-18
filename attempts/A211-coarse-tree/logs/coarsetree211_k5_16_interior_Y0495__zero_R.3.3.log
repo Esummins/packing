@@ -1,0 +1,36 @@
+13:38:02 [p8f] start k5_16_interior_Y0495 pad zero node R.3.3 wall 1800 (lab 7, free 10792 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0495_zero_s0.json)
+   INHERIT k5_16_interior_Y0495 pad zero: 4 prior trees, 187 paths, 6 branches inherited DEAD (final, with their certificates), 9 start nodes (0 from the A203 root)
+== k5_16_interior_Y0495 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0495_zero_s0.json; basins []; INHERIT 6 dead branches (final) + 9 start nodes ['R.3.3', 'R.3.4', 'R.3.5', 'R.3.6', 'R.3.7', 'R.3.8', 'R.3.9', 'R.3.10', 'R.4']; H [1.416, 1.519, 2.218, 2.358, 0.0, 14.25]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1          TL(1,0)<-(9,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0495.json
+   INHERITED DEAD R.2          TL(1,0)<-(14,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0495.json
+   INHERITED DEAD R.3.1        BL(1,0)<-(5, 11)  [A211 tree: NOROOM] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0495.json
+   INHERITED DEAD R.3.2.p1.p1.1 BR(1,0)<-F4  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0495__zero_R.3.2.p1.p1.json
+   INHERITED DEAD R.3.2.p1.p1.2.1 BR(0,1)<-F1  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0495__zero_R.3.2.p1.p1.json
+   INHERITED DEAD R.3.2.p1.p1.2.2 BR(0,1)<-F1  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0495__zero_R.3.2.p1.p1.2.2.json
+   A229 SHARD: --start R.3.3 -- 1 of them are start nodes of this page/pad right now (9 start nodes in all)
+   start R.3.3: applied step 1/1 -- BL(1,0) <- [6, 10]
+   node R.3.3      d0 root: INTERNAL (2.9 s, 1 rounds; t=7.6)
+   node R.3.3.1    d1 BR(0,1)<-[16]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=8.4)
+   node R.3.3.2    d1 BR(0,1)<-[17]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=8.5)
+   node R.3.3.3    d1 BR(0,1)<-[21]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=8.6)
+   node R.3.3.4    d1 BR(0,1)<-[22]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=8.8)
+   node R.3.3.5    d1 BR(0,1)<-[23]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=8.9)
+   start R.3.3        => DEAD (6 nodes; t = 9 s of 1800.0)
+   start R.3.4: SKIPPED (filter)
+   start R.3.5: SKIPPED (filter)
+   start R.3.6: SKIPPED (filter)
+   start R.3.7: SKIPPED (filter)
+   start R.3.8: SKIPPED (filter)
+   start R.3.9: SKIPPED (filter)
+   start R.3.10: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   => ALIVE (zero_page) in 8.9 s: 9 start runs, 6 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 6 inherited dead (6 up front + 0 in tree), 11 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 1 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2.p1.p1.1 d5 DEAD INHERIT 0.0s; R.3.2.p1.p1.2.1 d6 DEAD INHERIT 0.0s; R.3.2.p1.p1.2.2 d6 DEAD INHERIT 0.0s; R.3.3 d0 INTERNAL 2.9s; R.3.3.1 d1 DEAD EmptyBox 0.3s; R.3.3.2 d1 DEAD EmptyBox 0.1s; R.3.3.3 d1 DEAD EmptyBox 0.1s; R.3.3.4 d1 DEAD EmptyBox 0.2s; R.3.3.5 d1 DEAD EmptyBox 0.1s
+== k5_16_interior_Y0495: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 73, 'misses': 41, 'entries': 41}; clip {'hits': 7021, 'misses': 7461, 'entries': 7461}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 114, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 7}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 75, 'obs_misses': 39, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 39, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
