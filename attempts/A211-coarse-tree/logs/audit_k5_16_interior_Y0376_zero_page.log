@@ -425,3 +425,13 @@ k5_16_interior_Y0376 zero_page leaf R0+.3.4.p1.p1.1.2.1.1.1x: EmptyBox(H) at rou
   role F4 (26 pieces of the parent's snapshot): 131 admissible poses (slots ['TR(0,1)'], misses [])
   role F5 (25 pieces of the parent's snapshot): 156 admissible poses (slots ['TL(1,0)'], misses [])
   VACUOUS for ['F1'] (no admissible sampled pose: the role's own constraints already exclude the samples; consistent, not a refutation)
+15:12:55 audit k5_16_interior_Y0376 zero_page R0+.3.2.3
+WARNING blas1: numpy was already imported -- BLAS thread pinning had no effect; import blas1 earlier
+k5_16_interior_Y0376 zero_page leaf R0+.3.2.3: no-room at R0+.3.2.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+  parent snapshot R0+.3.2 (round 1); H forced at ['BL(1,0)']; roles {'F1': ['BL(1,0)'], 'F2': ['BR(0,1)', 'TR(0,1)'], 'F3': ['TL(1,0)'], 'F4': ['TR(0,1)'], 'H': ['BL(1,0)']}; cells {'F1': -1, 'F2': 18, 'F3': 9, 'F4': 21}; misses {}
+  role H (96 pieces of the parent's snapshot): 1282 admissible poses (slots ['BL(1,0)'], misses [])
+  role F1 (50 pieces of the parent's snapshot): 333 admissible poses (slots ['BL(1,0)'], misses [])
+  role F2 (42 pieces of the parent's snapshot): 236 admissible poses (slots ['BR(0,1)', 'TR(0,1)'], misses [])
+  role F3 (27 pieces of the parent's snapshot): 152 admissible poses (slots ['TL(1,0)'], misses [])
+  role F4 (grid over its hull box in cell 21 (tilt 0.0-90.0)): 3492 admissible poses (slots ['TR(0,1)'], misses [])
+  no-room kill (k=10, m=1): a refutation needs 1 mutually disjoint free squares beside the configuration (grid over the container, 20012 admissible)
