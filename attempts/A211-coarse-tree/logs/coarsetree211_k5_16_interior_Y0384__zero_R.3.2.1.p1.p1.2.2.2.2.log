@@ -39,3 +39,18 @@
    node R.3.2.1.p1.p1.2.2.2.2.1.1.1.2 d4 TR(1,0)<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=804.7)
    node R.3.2.1.p1.p1.2.2.2.2.1.1.2 d3 TR(1,0)<-None: DEAD by MISS-CLIP r1 (0.0 s, 1 rounds; t=804.7)
    node R.3.2.1.p1.p1.2.2.2.2.1.2 d2 TL(1,0)<-None: INTERNAL (341.7 s, 1 rounds; t=1146.4)
+   node R.3.2.1.p1.p1.2.2.2.2.1.2: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R.3.2.1.p1.p1.2.2.2.2 => ALIVE (8 nodes; t = 1970 s of 1800.0)
+   start R.3.2.3.p1.p1.2.1.2.1: SKIPPED (filter)
+   start R.3.2.3.p1.p1.2.1.2.2: SKIPPED (filter)
+   start R.3.2.3.p1.p1.2.2: SKIPPED (filter)
+   start R.3.7: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   => ALIVE (zero_page) in 1969.6 s: 8 start runs, 8 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 4 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 16 inherited dead (16 up front + 0 in tree), 19 dead / 2 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 9 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2.1.p1.p1.1.1 d7 DEAD INHERIT 0.0s; R.3.2.1.p1.p1.1.2 d7 DEAD INHERIT 0.0s; R.3.2.1.p1.p1.2.1 d7 DEAD INHERIT 0.0s; R.3.2.1.p1.p1.2.2.1 d8 DEAD INHERIT 0.0s; R.3.2.2 d3 DEAD INHERIT 0.0s; R.3.2.3.p1.p1.1 d6 DEAD INHERIT 0.0s; R.3.2.3.p1.p1.2.1.1 d8 DEAD INHERIT 0.0s; R.3.2.4 d3 DEAD INHERIT 0.0s; R.3.2.5 d3 DEAD INHERIT 0.0s; R.3.3 d2 DEAD INHERIT 0.0s; R.3.4 d2 DEAD INHERIT 0.0s; R.3.5 d2 DEAD INHERIT 0.0s; R.3.6 d2 DEAD INHERIT 0.0s; R.3.2.1.p1.p1.2.2.2.2 d0 INTERNAL 78.2s; R.3.2.1.p1.p1.2.2.2.2.1 d1 INTERNAL 72.2s; R.3.2.1.p1.p1.2.2.2.2.1.1 d2 INTERNAL 92.6s; R.3.2.1.p1.p1.2.2.2.2.1.1.1 d3 INTERNAL 31.2s; R.3.2.1.p1.p1.2.2.2.2.1.1.1.1 d4 DEAD EmptyBox 1.0s; R.3.2.1.p1.p1.2.2.2.2.1.1.1.2 d4 DEAD EmptyBox 0.2s; R.3.2.1.p1.p1.2.2.2.2.1.1.2 d3 DEAD MISS-CLIP 0.0s; R.3.2.1.p1.p1.2.2.2.2.1.2 d2 ALIVE 341.7s; R.3.2.1.p1.p1.2.2.2.2.2 d1 ALIVE 0.0s
+== k5_16_interior_Y0384: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 273, 'misses': 101, 'entries': 101}; clip {'hits': 14668, 'misses': 12635, 'entries': 12635}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 374, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 9}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 251, 'obs_misses': 123, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 80, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
