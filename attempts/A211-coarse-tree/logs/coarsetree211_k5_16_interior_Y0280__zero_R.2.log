@@ -1,0 +1,26 @@
+15:05:04 [p8b] start k5_16_interior_Y0280 pad zero node R.2 wall 1800 (lab 7, free 8414 MB)
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0280_zero_s0.json)
+   INHERIT k5_16_interior_Y0280 pad zero: 3 prior trees, 63 paths, 7 branches inherited DEAD (final, with their certificates), 3 start nodes (0 from the A203 root)
+== k5_16_interior_Y0280 page pad zero: start attempts/A211-coarse-tree/certs/csp209_k5_16_interior_Y0280_zero_s0.json; basins []; INHERIT 7 dead branches (final) + 3 start nodes ['R.2', 'R.3', 'R.4']; H [2.218, 2.358, 1.38, 1.476, 73.74, 82.372]; forced H ['BL(1,0)']; 6 slots; free squares 5
+   INHERITED DEAD R.1.1        TL(1,0)<-(7,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0280.json
+   INHERITED DEAD R.1.2        TL(1,0)<-(8,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0280.json
+   INHERITED DEAD R.1.3        TL(1,0)<-(9,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0280.json
+   INHERITED DEAD R.1.4        TL(1,0)<-(13,)  [A211 tree: NOROOM] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0280.json
+   INHERITED DEAD R.1.5.p1     (3.130905, 3.377084, 1.499999, 2.377085)<-(0,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0280.json
+   INHERITED DEAD R.1.5.p2     (1.256723, 1.816872, 2.15143, 2.657813)<-(1,)  [A211 tree: every branch DEAD] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0280__zero_R.1.5.p2.json
+   INHERITED DEAD R.1.6        TL(1,0)<-(19,)  [A211 tree: EmptyBox] attempts/A211-coarse-tree/certs/coarsetree211_k5_16_interior_Y0280__zero_R.1.6.json
+   A229 SHARD: --start R.2 -- 1 of them are start nodes of this page/pad right now (3 start nodes in all)
+   start R.2: applied step 1/1 -- BR(0,1) <- [21]
+   node R.2        d0 root: INTERNAL (3.5 s, 1 rounds; t=7.6)
+   node R.2.1      d1 TL(1,0)<-[8, 9]: DEAD by FC r1 (7.7 s, 1 rounds; t=15.5)
+   node R.2.2      d1 TL(1,0)<-[8, 13]: DEAD by FC r1 (2.0 s, 1 rounds; t=17.4)
+   node R.2.3      d1 TL(1,0)<-[8, 14]: INTERNAL (3.9 s, 1 rounds; t=21.4)
+   no-room (k=10, m=1): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.2.3: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.2.3.p1   d2 pocket<-[0]: INTERNAL (15.4 s, 1 rounds; t=50.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.3.p1: split F2 at BR(1,0) (meeting fraction 0.129357; alive rows []; named ['F1', 'F2', 'H'])
+   node R.2.3.p1.1 d3 BR(1,0)<-None: INTERNAL (11.2 s, 1 rounds; t=61.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.3.p1.1: split H at TR(0,1) (meeting fraction 0.132619; alive rows []; named ['F2', 'F5', 'H'])
