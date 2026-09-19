@@ -62,3 +62,24 @@
    no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
    node R.3.5.5    d1: DEAD by NOROOM -- no-room at R.3.5.5 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
    node R.3.5.6    d1 BL(1,0)<-[6, 10]: INTERNAL (1.7 s, 1 rounds; t=51.5)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 3 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.3.5.6    d1: DEAD by NOROOM-POCKET -- no-room at R.3.5.6 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.3.5.7    d1 BL(1,0)<-[6, 15]: INTERNAL (2.2 s, 1 rounds; t=58.0)
+   no-room (k=10, m=1): UNDECIDED in 19 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.5.7: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.5.7.p1 d2 pocket<-[0]: INTERNAL (22.2 s, 1 rounds; t=101.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.3.5.7.p1: split F1 at BR(0,1) (meeting fraction 0.186994; alive rows []; named ['F1', 'F2', 'F4'])
+   node R.3.5.7.p1.1 d3 BR(0,1)<-None: DEAD by EmptyBox r1 (3.2 s, 1 rounds; t=105.0)
+   node R.3.5.7.p1.2 d3 BR(0,1)<-None: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=105.6)
+   node R.3.5.8    d1 BL(1,0)<-[6, 16]: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=106.1)
+   node R.3.5.9    d1 BL(1,0)<-[10, 11]: INTERNAL (2.8 s, 1 rounds; t=109.0)
+   no-room (k=10, m=1): UNDECIDED in 17 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.5.9: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.5.9.p1 d2 pocket<-[0]: INTERNAL (19.3 s, 1 rounds; t=147.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.3.5.9.p1: split F4 at BR(0,1) (meeting fraction 0.092242; alive rows []; named ['F1', 'F2', 'F4'])
+   node R.3.5.9.p1.1 d3 BR(0,1)<-None: DEAD by EmptyBox r1 (5.8 s, 1 rounds; t=153.4)
+   node R.3.5.9.p1.2 d3 BR(0,1)<-None: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=154.3)
+   node R.3.5.10   d1 BL(1,0)<-[10, 12]: DEAD by FC r1 (1.5 s, 1 rounds; t=155.8)
+   node R.3.5.11   d1 BL(1,0)<-[10, 16]: INTERNAL (5.5 s, 1 rounds; t=161.4)
