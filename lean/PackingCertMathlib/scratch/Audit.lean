@@ -42,6 +42,16 @@ import PackingCertMathlib.Statements
 #print axioms PackingCert.S11.windows_clause_kill
 #print axioms PackingCert.S11.OpenLemmas.a22_exact_structure_open
 #print axioms PackingCert.S11.OpenLemmas.lemma_BASIN_containment
+#print axioms PackingCert.S11.OpenLemmas.same_wall_core
+#print axioms PackingCert.S11.OpenLemmas.blocker_side_core
+#print axioms PackingCert.S11.OpenLemmas.strip_landing_core
+#print axioms PackingCert.S11.OpenLemmas.cert_core
+#print axioms PackingCert.S11.OpenLemmas.meeters_split
+#print axioms PackingCert.S11.OpenLemmas.touch_normal
+#print axioms PackingCert.S11.OpenLemmas.box_meeters
+#print axioms PackingCert.S11.OpenLemmas.rows_classified
+#print axioms PackingCert.S11.OpenLemmas.normal_ring_of_parts
+#print axioms PackingCert.S11.OpenLemmas.only_ring_value_261
 #print axioms PackingCert.S11.OpenLemmas.capacity_le_two_of_two_pieces
 #print axioms PackingCert.S11.OpenLemmas.capacity_le_two_of_anchor
 #print axioms PackingCert.S11.OpenLemmas.ring_has_poker
