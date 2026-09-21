@@ -144,7 +144,9 @@ NORMAL-RING(11) [C, A258] + `pair_pierce` ⟹ no row-normal packing of 11 is fam
 proof is GAP-DEPTH-ONE via 2.5 + the capping vertex; (O2) the detached tree finishing with 0 OPEN and the verifier
 passing (`results/verify259.json`); (O3) the stretch (ŝ, 4): rerun `cert259` with s_max = 3.95, 3.99 (margin
 (4−s)/2 → finer boxes; est. 10–40 CPU-h at 3.99), not launched; (O4) NORMAL-RING(11) itself and family258 VERSION 2
-(mixed senses, rows of three, type F, a third box meeter): the room of THOSE structures is not bounded here;
+(mixed senses — A258: a +++− ring of pairs exists from s = 3.9298 > ŝ, so on the STRETCH the one-sense D′ is not the
+whole family and the mixed corner PAIR types (+−, −+) need their own certificate, same 4-parameter design; rows of
+three, type F, a third box meeter): the room of THOSE structures is not bounded here;
 (O5) Lean: `pair_pierce` is an axiom; its reduction §2.2 is prose.
 
 ## 8. What the brief had wrong
