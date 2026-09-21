@@ -401,6 +401,30 @@ minimiser, and above all the 11 `k0_00` cells, are the **drain-census** route's 
 
 ---
 
+**[M]/[C] A256 (2026-09-21) — the trump5 window row is blocked by the PIN SLACK of A60's records, not by the seam.**
+A212's 149 trump5 nodes (13 gallery + 136 of A60's alive frontier; 65 DEAD / 84 ALIVE at pad 0) were re-triaged
+against the CONTRACTED Trump images along both tube rays, at every depth of the pad's slab, on the nodes' own root
+boxes padded outward (`attempts/A256-trump5-passes/code/ray256.py`, `results/triage256.json`): **class (a) 149,
+class (b) 0 at pad 0, at g1 and at the whole-window pad**. The five corner pins force `g = id` and then no image
+square lies in any node's H box, so **the Trump residue of the class was wholly discharged by A60/A83 before A212
+ran** — A212's survivors are ordinary residue, the (D)-leaf tube rules have an empty domain here, and the remaining
+s0 work is plain kills. **The blocker** is elsewhere and is quantitative: A60's records carry pin cores of half-side
+`1/2 − δ_pin` with **δ_pin = 3.08e-8** on 146 of the 149 (only `slack0.02_c0_Y0272 / _Y0411 / _Y0419` carry 2e-2),
+while the k5 pages the pass loop closes at g1 carry **δ_pin = 1e-2**; A211's pad enters "only through Theorem FC's
+slot pads and CC's lam", never through the pins, so a dilated family whose pins sit up to (λ−1)·3/2 = 6.0e-3 (g1) /
+2.24e-2 (window) off slots(s0) does not satisfy those nodes' pin hypothesis at all. In Lemma SEAM's arithmetic
+**T_K(3.08e-8) = −3.3e-7 < 0**: those records reach no side below s0 whatsoever. This is A60's own ledger finding
+(`attempts/A60-trump5-campaign/notes/ledger.md` §1, transfer shell 4.0e-10 relative) and
+`docs/proofs/contraction_tube.md` §4.4 item 1 ("every A60 (K) leaf must be re-emitted at δ_pin = 1e-2"), now shown
+to bind on the FRONTIER records too. **Lemma TUBE-KILL** — the tube theorem used as a kill for m < ŝ plus
+uniqueness at ŝ, hypotheses (i) all eleven named, (ii) containment in (r_c − 2(s0 − ŝ), r_θ), (iii) a slot-ray
+certificate with trump5's pins and T ≥ T′, (iv) T_K(δ_pin) ≥ T′ — is stated and implemented with its own verifier
+(`attempts/A256-trump5-passes/notes/trump5_closure.md` §3, `code/tree256.py`, `certs/verify_tubekill256.py`); it is
+OFF, because its domain is empty. **The seam is still an obligation, and not the first one:** δ_basin(trump5) =
+0.0257 is [T], **δ_LP(trump5) has never been scanned** (§4.2 of the tube note), and O1 (re-emission at
+δ_pin ≥ 1e-2) blocks every window statement about trump5 before the seam is reached.
+
+
 ## 4. k0_00 — the frame residue
 
 ![the strict record and its drain](residue_map/strict_3p9907_drain.svg)
