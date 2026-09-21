@@ -1,0 +1,32 @@
+13:24:27 [t3] start slack0.02_c0_Y0272 pad zero node R.3.4 wall 1800 (lab 3, mine 2, free 12910 MB)
+   A256 shadows: {'load211': 'attempts/A256-trump5-passes/code', 'poly204': 'attempts/A256-trump5-passes/code', 'stage209': 'attempts/A256-trump5-passes/code', 'inherit211': 'attempts/A256-trump5-passes/code'}
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A212-trump5-tree/certs/csp209_slack0.02_c0_Y0272_zero_s0.json)
+   INHERIT slack0.02_c0_Y0272 pad zero: 3 prior trees, 41 paths, 7 branches inherited DEAD (final, with their certificates), 7 start nodes (0 from the A203 root)
+== slack0.02_c0_Y0272 page pad zero: start attempts/A212-trump5-tree/certs/csp209_slack0.02_c0_Y0272_zero_s0.json; basins []; INHERIT 7 dead branches (final) + 7 start nodes ['R.3.4', 'R.3.5', 'R.3.6', 'R.3.7', 'R.4', 'R.5', 'R.6']; H [1.38, 1.519, 2.498, 2.637, 0.0, 14.25]; forced H ['TL(0,0)']; 6 slots; free squares 5
+   INHERITED DEAD R.1          TR(1,0)<-(14,)  [A212 tree: every branch DEAD] attempts/A212-trump5-tree/certs/trump5tree212_slack0.02_c0_Y0272.json
+   INHERITED DEAD R.2          TR(1,0)<-(17,)  [A212 tree: every branch DEAD] attempts/A212-trump5-tree/certs/trump5tree212_slack0.02_c0_Y0272.json
+   INHERITED DEAD R.3.1        BR(0,1)<-(11,)  [A212 tree: every branch DEAD] attempts/A212-trump5-tree/certs/trump5tree212_slack0.02_c0_Y0272.json
+   INHERITED DEAD R.3.2        BR(0,1)<-(12,)  [A212 tree: FC] attempts/A212-trump5-tree/certs/trump5tree212_slack0.02_c0_Y0272.json
+   INHERITED DEAD R.3.3.p1     (1.437499, 1.885676, 1.437499, 1.769437)<-(0,)  [A212 tree: every branch DEAD] attempts/A212-trump5-tree/certs/trump5tree212_slack0.02_c0_Y0272.json
+   INHERITED DEAD R.3.3.p2     (2.03143, 2.439585, 3.027255, 3.439584)<-(1,)  [A211 tree: every branch DEAD] attempts/A256-trump5-passes/certs/coarsetree211_slack0.02_c0_Y0272__zero_R.3.3.p2.json
+   INHERITED DEAD R.3.3.p3     (2.871469, 3.439584, 1.437499, 2.439585)<-(2,)  [A211 tree: every branch DEAD] attempts/A256-trump5-passes/certs/coarsetree211_slack0.02_c0_Y0272__zero_R.3.3.p3.json
+   A229 SHARD: --start R.3.4 -- 1 of them are start nodes of this page/pad right now (7 start nodes in all)
+   start R.3.4: applied step 1/1 -- BR(0,1) <- [17]
+   node R.3.4      d0 root: INTERNAL (5.8 s, 1 rounds; t=12.4)
+   node R.3.4r1    d0 root<-None: DEAD by FC r1 (2.6 s, 1 rounds; t=15.0)
+   start R.3.4        => DEAD (2 nodes; t = 15 s of 1800.0)
+   start R.3.5: SKIPPED (filter)
+   start R.3.6: SKIPPED (filter)
+   start R.3.7: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   start R.5: SKIPPED (filter)
+   start R.6: SKIPPED (filter)
+   => ALIVE (zero_page) in 15.0 s: 7 start runs, 2 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 7 inherited dead (7 up front + 0 in tree), 8 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 1 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2 d2 DEAD INHERIT 0.0s; R.3.3.p1 d3 DEAD INHERIT 0.0s; R.3.3.p2 d3 DEAD INHERIT 0.0s; R.3.3.p3 d3 DEAD INHERIT 0.0s; R.3.4 d0 INTERNAL 5.8s; R.3.4r1 d0 DEAD FC 2.6s
+== slack0.02_c0_Y0272: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 79, 'misses': 82, 'entries': 82}; clip {'hits': 3054, 'misses': 8974, 'entries': 8974}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 161, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 3}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 83, 'obs_misses': 78, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 78, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
