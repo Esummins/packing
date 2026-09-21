@@ -1,0 +1,32 @@
+09:25:23 [t1] start c0_Y0250 pad zero node R.2.2.2.1.2 wall 1800 (lab 4, mine 2, free 11696 MB)
+   A256 shadows: {'load211': 'attempts/A256-trump5-passes/code', 'poly204': 'attempts/A256-trump5-passes/code', 'stage209': 'attempts/A256-trump5-passes/code', 'inherit211': 'attempts/A256-trump5-passes/code'}
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A212-trump5-tree/certs/csp209_c0_Y0250_zero_s0.json)
+   INHERIT c0_Y0250 pad zero: 3 prior trees, 79 paths, 5 branches inherited DEAD (final, with their certificates), 7 start nodes (0 from the A203 root)
+== c0_Y0250 page pad zero: start attempts/A212-trump5-tree/certs/csp209_c0_Y0250_zero_s0.json; basins []; INHERIT 5 dead branches (final) + 7 start nodes ['R.2.2.2.1.2', 'R.2.2.2.2', 'R.2.2.3', 'R.2.2.4', 'R.2.3', 'R.2.4', 'R.3']; H [1.449, 1.519, 2.078, 2.218, 28.072, 41.112]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1          BL(0,2)<-(3,)  [A212 tree: every branch DEAD] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0250.json
+   INHERITED DEAD R.2.1        BL(1,1)<-(11,)  [A212 tree: EmptyBox] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0250.json
+   INHERITED DEAD R.2.2.1      TR(1,0)<-(17,)  [A212 tree: EmptyBox] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0250.json
+   INHERITED DEAD R.2.2.2.1.1.1 F2<-t  [A211 tree: every branch DEAD] attempts/A256-trump5-passes/certs/coarsetree211_c0_Y0250__zero_R.2.2.2.1.1.1.json
+   INHERITED DEAD R.2.2.2.1.1.2 F2<-t  [A211 tree: every branch DEAD] attempts/A256-trump5-passes/certs/coarsetree211_c0_Y0250__zero_R.2.2.2.1.1.2.json
+   A229 SHARD: --start R.2.2.2.1.2 -- 1 of them are start nodes of this page/pad right now (7 start nodes in all)
+   start R.2.2.2.1.2: applied step 1/1 -- RSPLIT F1 t>=53.1301 (23 pieces)
+   node R.2.2.2.1.2 d0 root: INTERNAL (13.8 s, 1 rounds; t=37.8)
+   no-room (k=10, m=1): UNDECIDED in 19 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.2.2.2.1.2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.2.2.2.1.2.p1 d1 pocket<-[0]: INTERNAL (23.6 s, 1 rounds; t=89.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.2.2.1.2.p1: split F3 at TR(0,1) (meeting fraction 0.235681; alive rows []; named ['F3', 'F4', 'F5'])
+   node R.2.2.2.1.2.p1.1 d2 TR(0,1)<-None: INTERNAL (25.3 s, 1 rounds; t=114.4)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.2.2.1.2.p1.1: split F4 at BR(0,1) (meeting fraction 0.236904; alive rows []; named ['F3', 'F4', 'F5'])
+   node R.2.2.2.1.2.p1.1.1 d3 BR(0,1)<-None: DEAD by REACH r1 (8.1 s, 1 rounds; t=122.6)
+   node R.2.2.2.1.2.p1.1.2 d3 BR(0,1)<-None: DEAD by REACH r1 (3.4 s, 1 rounds; t=126.0)
+   node R.2.2.2.1.2.p1.2 d2 TR(0,1)<-None: INTERNAL (13.3 s, 1 rounds; t=139.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.2.2.1.2.p1.2: split F4 at BR(0,1) (meeting fraction 0.236904; alive rows []; named ['F3', 'F4', 'F5'])
+   node R.2.2.2.1.2.p1.2.1 d3 BR(0,1)<-None: INTERNAL (15.7 s, 1 rounds; t=155.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.2.2.2.1.2.p1.2.1: bisect F2 on t at 53.1301 (extents (0.114756, 0.142734), tilt 90.0 deg, core non-empty, 61 piece(s); split 1 of 4)
+   node R.2.2.2.1.2.p1.2.1.1 d4 F2<-['t<=53.1301']: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=156.0)
+   node R.2.2.2.1.2.p1.2.1.2 d4 F2<-['t>=53.1301']: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=156.4)
