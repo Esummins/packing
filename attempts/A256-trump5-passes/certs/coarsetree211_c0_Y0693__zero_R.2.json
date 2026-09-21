@@ -185509,10 +185509,10 @@
       "F2"
      ],
      "excluded": null,
-     "verdict": "INTERNAL",
-     "clip": null,
-     "killed_round": null,
-     "leaf": null,
+     "verdict": "DEAD",
+     "clip": "NOROOM-POCKET",
+     "killed_round": 1,
+     "leaf": "no-room at R.2.2.1.3 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square",
      "reason": null,
      "seconds": 5.9,
      "t": 311.4,
@@ -191237,7 +191237,82 @@
       "F3": 20,
       "F4": 11
      },
-     "rebin": []
+     "rebin": [],
+     "snap": {
+      "label": "R.2.2.1.3",
+      "n_cands": 0,
+      "n_anon": 1,
+      "eps": 0.06,
+      "deg": 3.0,
+      "verdict": null,
+      "cands": [],
+      "where": "internal",
+      "depth": 3,
+      "seconds": 0.001
+     },
+     "cc": {
+      "n_rows": 1,
+      "seconds": 0.001,
+      "rows": [
+       {
+        "nid": "c0_Y0693",
+        "pad": "zero",
+        "lam": 1.0,
+        "label": "R.2.2.1.3",
+        "slot": "TL(0,0)",
+        "corner": "TL",
+        "role": "F3",
+        "all_near": false,
+        "role_box": [
+         0.5,
+         0.713264,
+         2.499999,
+         2.801667,
+         0.0,
+         90.0
+        ],
+        "n_classes": 20,
+        "n_near": 9,
+        "dead_classes": 0,
+        "n_band": 60,
+        "cells_before": [
+         9
+        ],
+        "cells_killed": [],
+        "cells_left": [
+         9
+        ],
+        "roles_excluded": [],
+        "named_meeters": [],
+        "verdict": "ALIVE",
+        "why": null,
+        "verifier": "[C: closed-form trace; Lemma CORNER-COVER (attempts/A210-corner-cover/notes/corner_cover.md)] -- no verifier clause"
+       }
+      ]
+     },
+     "noroom": {
+      "label": "R.2.2.1.3",
+      "depth": 3,
+      "k": 10,
+      "m": 1,
+      "verdict": "DEAD",
+      "clip": "NOROOM-POCKET",
+      "bound": null,
+      "cn_bound": null,
+      "n_pockets": 1,
+      "pockets": [
+       [
+        1.166523,
+        1.404396,
+        3.323273,
+        3.377084
+       ]
+      ],
+      "seconds": 9.0,
+      "reason": "every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square",
+      "cap": 120.0,
+      "short_cap": null
+     }
     }
    ],
    "basins": [],
@@ -192282,7 +192357,7 @@
    "cert_suffix": "zero_R.2",
    "shard": "A229: ONE SHARD of this page -- only the start nodes in start_filter were run; the others are recorded SKIPPED (filter) and are the sibling shards' work.  This certificate is merged with the page certificate (and every sibling shard's) on the PATH KEY by Lemma INHERIT file-wise (attempts/A229-start-parallel/notes/parallel229.md).",
    "n_nodes": 40,
-   "seconds": 311.4
+   "seconds": 322.8
   }
  },
  "cls": "trump5",
