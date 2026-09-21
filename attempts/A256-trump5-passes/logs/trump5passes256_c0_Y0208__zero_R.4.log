@@ -1,0 +1,49 @@
+13:32:48 [t2] start c0_Y0208 pad zero node R.4 wall 1800 (lab 3, mine 2, free 13690 MB)
+   A256 shadows: {'load211': 'attempts/A256-trump5-passes/code', 'poly204': 'attempts/A256-trump5-passes/code', 'stage209': 'attempts/A256-trump5-passes/code', 'inherit211': 'attempts/A256-trump5-passes/code'}
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 zero pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A212-trump5-tree/certs/csp209_c0_Y0208_zero_s0.json)
+   INHERIT c0_Y0208 pad zero: 6 prior trees, 33 paths, 12 branches inherited DEAD (final, with their certificates), 5 start nodes (0 from the A203 root)
+== c0_Y0208 page pad zero: start attempts/A212-trump5-tree/certs/csp209_c0_Y0208_zero_s0.json; basins []; INHERIT 12 dead branches (final) + 5 start nodes ['R.2', 'R.3', 'R.4', 'R.5', 'R.6']; H [1.493, 1.519, 1.493, 1.519, 0.0, 14.25]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1.1        BR(0,1)<-(16, 18)  [A212 tree: every branch DEAD] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0208.json
+   INHERITED DEAD R.1.2        BR(0,1)<-(16, 22)  [A212 tree: EmptyBox] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0208.json
+   INHERITED DEAD R.1.3        BR(0,1)<-(16, 23)  [A212 tree: EmptyBox] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0208.json
+   INHERITED DEAD R.1.4        BR(0,1)<-(17, 18)  [A212 tree: FC] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0208.json
+   INHERITED DEAD R.1.5        BR(0,1)<-(17, 21)  [A212 tree: EmptyBox] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0208.json
+   INHERITED DEAD R.1.6        BR(0,1)<-(17, 22)  [A212 tree: EmptyBox] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0208.json
+   INHERITED DEAD R.1.7        BR(0,1)<-(17, 23)  [A212 tree: EmptyBox] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0208.json
+   INHERITED DEAD R.1.8.1.1    BL(0,2)<-H  [A212 tree: COUNT] attempts/A212-trump5-tree/certs/trump5tree212_c0_Y0208.json
+   INHERITED DEAD R.1.8.1.2    BL(0,2)<-H  [A211 tree: COUNT] attempts/A256-trump5-passes/certs/coarsetree211_c0_Y0208__zero_R.1.8.1.2.json
+   INHERITED DEAD R.1.8.2      BL(1,1)<-F2  [A211 tree: every branch DEAD] attempts/A256-trump5-passes/certs/coarsetree211_c0_Y0208__zero_R.1.8.2.json
+   INHERITED DEAD R.1.9        BR(0,1)<-(18, 22)  [A211 tree: every branch DEAD] attempts/A256-trump5-passes/certs/coarsetree211_c0_Y0208__zero_R.1.9.json
+   INHERITED DEAD R.1.10       BR(0,1)<-(18, 23)  [A211 tree: NOROOM] attempts/A256-trump5-passes/certs/coarsetree211_c0_Y0208__zero_R.1.10.json
+   A229 SHARD: --start R.4 -- 1 of them are start nodes of this page/pad right now (5 start nodes in all)
+   start R.2: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   start R.4: applied step 1/1 -- BL(0,2) <- [9]
+   node R.4        d0 root: INTERNAL (2.6 s, 1 rounds; t=30.4)
+   node R.4r1      d0 root<-None: INTERNAL (6.2 s, 1 rounds; t=36.6)
+   node R.4.1      d1 BR(0,1)<-[16, 18]: INTERNAL (6.1 s, 1 rounds; t=42.8)
+   no-room (k=10, m=1): UNDECIDED in 14 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.4.1: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.4.1.p1   d2 pocket<-[0]: DEAD by EmptyBox r1 (4.0 s, 1 rounds; t=62.5)
+   node R.4.1.p2   d2 pocket<-[1]: INTERNAL (20.1 s, 1 rounds; t=82.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.4.1.p2: split F4 at BL(1,1) (meeting fraction 0.071916; alive rows []; named ['F2', 'F3', 'F4', 'H'])
+   node R.4.1.p2.1 d3 BL(1,1)<-None: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=83.0)
+   node R.4.1.p2.2 d3 BL(1,1)<-None: DEAD by EmptyBox r1 (0.0 s, 1 rounds; t=83.0)
+   node R.4.2      d1 BR(0,1)<-[16, 22]: INTERNAL (3.3 s, 1 rounds; t=86.4)
+   node R.4.2r1    d1 root<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=86.6)
+   node R.4.3      d1 BR(0,1)<-[16, 23]: INTERNAL (4.1 s, 1 rounds; t=90.8)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.4.3      d1: DEAD by EmptyBox -- no-room at R.4.3 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.4.4      d1 BR(0,1)<-[17, 18]: DEAD by FC r1 (5.4 s, 1 rounds; t=98.3)
+   node R.4.5      d1 BR(0,1)<-[17, 21]: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=98.7)
+   node R.4.6      d1 BR(0,1)<-[17, 22]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=99.0)
+   node R.4.7      d1 BR(0,1)<-[17, 23]: INTERNAL (2.6 s, 1 rounds; t=101.7)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.4.7      d1: DEAD by EmptyBox -- no-room at R.4.7 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.4.8      d1 BR(0,1)<-[18, 21]: INTERNAL (3.2 s, 1 rounds; t=106.4)
+   no-room (k=10, m=1): UNDECIDED in 9 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.4.8: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.4.8.p1   d2 pocket<-[0]: DEAD by EmptyBox r1 (3.5 s, 1 rounds; t=119.7)
+   node R.4.9      d1 BR(0,1)<-[18, 22]: INTERNAL (4.4 s, 1 rounds; t=124.1)
