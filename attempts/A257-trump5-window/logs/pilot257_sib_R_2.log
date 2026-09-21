@@ -1,0 +1,30 @@
+== A257 seam pilot: synth257_d001_h002_t2 pad g1 (journal has 1 row(s))
+   1 near-Trump sibling(s) to run: ['R.2']
+   stage 0 g1 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A257-trump5-window/certs/csp209_synth257_d001_h002_t2_g1_s0.json)
+== synth257_d001_h002_t2 pad g1 [sibling R.2]: lam 1.004000117048806, H [1.6874, 1.6891, 1.9587, 1.9604, 40.0934, 40.2462], 6 slots, 4 free squares, delta_pin [0.01]; wall 1800 s only=R.2
+   node R          d0 root: INTERNAL (8.9 s, 1 rounds; t=9.0)
+   GATE R: contains the Trump image id ({'F1': 6, 'F2': 10, 'H0': 7, 'H1': 9}); no kill rule will be applied here
+   node Rr1        d0 root<-None: INTERNAL (2.5 s, 1 rounds; t=11.5)
+   GATE Rr1: contains the Trump image id ({'F1': 6, 'F2': 10, 'F3': 4, 'F4': 8, 'H0': 7, 'H1': 9}); no kill rule will be applied here
+   node Rr2        d0 root<-None: INTERNAL (8.9 s, 1 rounds; t=20.4)
+   GATE Rr2: contains the Trump image id ({'F1': 6, 'F2': 10, 'F3': 4, 'F4': 8, 'H0': 7, 'H1': 9}); no kill rule will be applied here
+   ALIGNED cut 1 at R: F3 on y at 2.534157 (excess 527.0995 x radius; image on the lo side -> R.1, near-Trump sibling -> R.2)
+   Lemma ROLE-SPLIT at R: bisect F3 on y at 2.534157 (extents (0.192019, 0.877086), tilt 90.0 deg, core non-empty, 24 piece(s); split 1 of 4)
+   node R.2        d1 F3<-['y>=2.534157']: INTERNAL (12.4 s, 1 rounds; t=32.8)
+   Rule NS at the WEDGE at R.2: F1 meets / misses the wedge of (F3, TL(0,0)) -- 6 target(s): wedge-e-R=[0.5,1.00683,2.87026,3.87708]; wedge--e-B=[-0.0,0.68033,2.87026,3.37708]; wedge--e-B=[0.68033,1.00683,2.87026,2.87708]; wedge-e^-R
+   node R.2.1      d2 TL(0,0)<-['meets W']: INTERNAL (6.0 s, 1 rounds; t=39.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.2.1: bisect F3 on y at 2.955621 (extents (0.175165, 0.842927), tilt 90.0 deg, core non-empty, 54 piece(s); split 2 of 4)
+   node R.2.1.1    d3 F3<-['y<=2.955621']: INTERNAL (11.3 s, 1 rounds; t=50.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.2.1.1: bisect F3 on t at 53.1301 (extents (0.115953, 0.367948), tilt 90.0 deg, core non-empty, 22 piece(s); split 3 of 4)
+   node R.2.1.1.1  d4 F3<-['t<=53.1301']: INTERNAL (8.9 s, 1 rounds; t=59.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   node R.2.1.1.1x d4 root<-None: DEAD by EmptyBox r3 (49.0 s, 3 rounds; t=109.0)
+   node R.2.1.1.2  d4 F3<-['t>=53.1301']: INTERNAL (6.1 s, 1 rounds; t=115.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   node R.2.1.1.2x d4 root<-None: DEAD by EmptyBox r3 (37.4 s, 3 rounds; t=152.7)
+   node R.2.1.2    d3 F3<-['y>=2.955621']: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=154.4)
+   node R.2.2      d2 TL(0,0)<-['misses W']: DEAD by FC+EPS rNone (0.0 s, 1 rounds; t=154.4)
+   SIBLING R.2          DEAD      by EmptyBox,FC+EPS in 133 s (subtree 9 node(s); run 154 s)
+== A257 seam pilot: done
