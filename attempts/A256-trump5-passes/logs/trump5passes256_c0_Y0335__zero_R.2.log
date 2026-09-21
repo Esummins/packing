@@ -21,3 +21,32 @@
    node R.2.1      d1 BR(0,1)<-[18]: INTERNAL (3.1 s, 1 rounds; t=19.4)
    node R.2.1.1    d2 BL(0,2)<-[3, 4]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=20.2)
    node R.2.1.2    d2 BL(0,2)<-[3, 8]: DEAD by EmptyBox r1 (1.9 s, 1 rounds; t=22.1)
+   node R.2.1.3    d2 BL(0,2)<-[3, 9]: DEAD by COUNT r1 (7.3 s, 1 rounds; t=29.4)
+   node R.2.1.4    d2 BL(0,2)<-[3, 14]: DEAD by COUNT r1 (4.9 s, 1 rounds; t=34.3)
+   node R.2.1.5    d2 BL(0,2)<-[4, 8]: DEAD by EmptyBox r1 (1.3 s, 1 rounds; t=35.6)
+   node R.2.1.6    d2 BL(0,2)<-[4, 9]: DEAD by COUNT r1 (2.8 s, 1 rounds; t=38.5)
+   node R.2.1.7    d2 BL(0,2)<-[4, 14]: DEAD by COUNT r1 (2.1 s, 1 rounds; t=40.6)
+   node R.2.2      d1 BR(0,1)<-[22]: INTERNAL (3.3 s, 1 rounds; t=44.0)
+   node R.2.2.1    d2 BL(0,2)<-[3, 9]: DEAD by EmptyBox r1 (6.5 s, 1 rounds; t=50.6)
+   node R.2.2.2    d2 BL(0,2)<-[3, 14]: DEAD by EmptyBox r1 (1.5 s, 1 rounds; t=52.2)
+   node R.2.2.3    d2 BL(0,2)<-[4, 9]: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=53.9)
+   node R.2.2.4    d2 BL(0,2)<-[4, 14]: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=55.2)
+   node R.2.3      d1 BR(0,1)<-[23]: INTERNAL (4.5 s, 1 rounds; t=59.8)
+   node R.2.3.1    d2 BL(0,2)<-[3, 4]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=60.6)
+   node R.2.3.2    d2 BL(0,2)<-[3, 8]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=61.7)
+   node R.2.3.3    d2 BL(0,2)<-[3, 9]: DEAD by COUNT r1 (7.1 s, 1 rounds; t=68.9)
+   node R.2.3.4    d2 BL(0,2)<-[3, 14]: DEAD by COUNT r1 (2.4 s, 1 rounds; t=71.4)
+   node R.2.3.5    d2 BL(0,2)<-[4, 8]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=71.8)
+   node R.2.3.6    d2 BL(0,2)<-[4, 9]: DEAD by COUNT r1 (2.6 s, 1 rounds; t=74.5)
+   node R.2.3.7    d2 BL(0,2)<-[4, 14]: DEAD by COUNT r1 (2.0 s, 1 rounds; t=76.5)
+   start R.2          => DEAD (22 nodes; t = 77 s of 1800.0)
+   start R.3: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   => ALIVE (zero_page) in 76.6 s: 3 start runs, 22 nodes, depth 2, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 11 inherited dead (11 up front + 0 in tree), 29 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 4 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2.1 d3 DEAD INHERIT 0.0s; R.1.2.2 d3 DEAD INHERIT 0.0s; R.1.2.3 d3 DEAD INHERIT 0.0s; R.1.2.4.1.1 d5 DEAD INHERIT 0.0s; R.1.2.4.1.2 d5 DEAD INHERIT 0.0s; R.1.2.4.2 d4 DEAD INHERIT 0.0s; R.1.2.5 d3 DEAD INHERIT 0.0s; R.1.3 d2 DEAD INHERIT 0.0s; R.1.4 d2 DEAD INHERIT 0.0s; R.1.5 d2 DEAD INHERIT 0.0s; R.2 d0 INTERNAL 2.8s; R.2.1 d1 INTERNAL 3.1s; R.2.1.1 d2 DEAD EmptyBox 0.7s; R.2.1.2 d2 DEAD EmptyBox 1.9s; R.2.1.3 d2 DEAD COUNT 7.3s; R.2.1.4 d2 DEAD COUNT 4.9s; R.2.1.5 d2 DEAD EmptyBox 1.3s; R.2.1.6 d2 DEAD COUNT 2.8s; R.2.1.7 d2 DEAD COUNT 2.1s; R.2.2 d1 INTERNAL 3.3s; R.2.2.1 d2 DEAD EmptyBox 6.5s; R.2.2.2 d2 DEAD EmptyBox 1.5s; R.2.2.3 d2 DEAD EmptyBox 1.7s; R.2.2.4 d2 DEAD EmptyBox 1.2s; R.2.3 d1 INTERNAL 4.5s; R.2.3.1 d2 DEAD EmptyBox 0.6s; R.2.3.2 d2 DEAD EmptyBox 1.0s; R.2.3.3 d2 DEAD COUNT 7.1s; R.2.3.4 d2 DEAD COUNT 2.4s; R.2.3.5 d2 DEAD EmptyBox 0.3s; R.2.3.6 d2 DEAD COUNT 2.6s; R.2.3.7 d2 DEAD COUNT 2.0s
+== c0_Y0335: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 991, 'misses': 331, 'entries': 331}; clip {'hits': 45654, 'misses': 27925, 'entries': 27925}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1322, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 23}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 1023, 'obs_misses': 299, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 299, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
