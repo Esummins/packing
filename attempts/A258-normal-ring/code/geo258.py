@@ -180,3 +180,11 @@ def tight_ring(s, phi):
     K = s - 1 / c - c - g
     a = (K * c - 1) / (c - g)
     return a, K - a
+
+
+def seated(s, w, a, phi):
+    """the SEATED POKER of a sense-+ row of two on wall w: the unit square of the row's tilt standing in the
+    TOOTH, its lowest vertex at the apex (a + sec, cos) -- edge to edge with Q1 (length tan phi) and Q2."""
+    c, g = math.cos(phi), math.sin(phi)
+    p = (a + 1 / c, c)
+    return wall_to_xy(w, s, [p, (p[0] + c, p[1] + g), (p[0] + c - g, p[1] + c + g), (p[0] - g, p[1] + c)])

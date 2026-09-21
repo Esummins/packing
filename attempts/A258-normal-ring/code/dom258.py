@@ -42,7 +42,10 @@ def corner_forms(sgA, alpha, lA, sgB, beta, lB, s_ref=10.0):
                 ca, cb = -float(m[0]), float(m[1])
                 if c0 + max(0.0, ca) + max(0.0, cb) >= 0:
                     out.append((ca, cb, c0))
-    return out
+    ded = {}
+    for f in out:                                  # the same axis arrives once per parallel edge: keep one
+        ded[tuple(round(v, 12) for v in f)] = f
+    return list(ded.values())
 
 
 def sup_margin(s, phi, sg=(1, 1, 1, 1), l=(2, 2, 2, 2), slots=True):
@@ -50,6 +53,8 @@ def sup_margin(s, phi, sg=(1, 1, 1, 1), l=(2, 2, 2, 2), slots=True):
     K = [s - (l[w] - 1) / math.cos(phi[w]) - math.cos(phi[w]) - math.sin(phi[w]) for w in range(4)]
     if min(K) < 0:
         return min(K), None
+    if max(K) >= 2:                    # a + b = K with a, b <= 1 - t  =>  t <= (2 - K) / 2
+        return (2 - max(K)) / 2, None
     Aub, bub = [], []
 
     def add(coefs, const):            # sum coefs[w]*a_w + const >= t   ->   -coefs.a + t <= const
