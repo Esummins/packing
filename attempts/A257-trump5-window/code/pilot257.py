@@ -118,6 +118,7 @@ def one_run(S9, nid, pad, wall, only=None, spine=False, tag="spine", depth=8, no
                                kind=n.get("kind"), seconds=n.get("seconds"), gate=bool((n.get("trump_gate") or {}).get("contains")),
                                n_anon=n.get("n_anon"), reason=str(n.get("reason") or "")[:200],
                                leaf=str(n.get("leaf") or "")[:300]) for n in tree.nodes]
+    out["tube_nodes"] = [n for n in tree.nodes if n.get("verdict") in ("TUBE-KILL", "TRUMP-TUBE")]
     out["seconds"], out["cls"], out["record"] = round(T.now(), 1), cls, row.get("record")
     out["wall_hit"] = bool(T.out_of_time())
     out["tests"] = T.tests[-1500:]
@@ -183,7 +184,10 @@ def main():
     if a.phase in ("spine", "all") and spine is None:
         t0 = time.time()
         out = one_run(S9, nid, a.pad, a.wall_spine, only=None, spine=True, tag="spine", depth=a.depth, nodes=a.nodes)
-        save(dict(nid=nid, pad=a.pad, phase="spine", out=out), os.path.join(CERTS, "pilot257_%s_%s_spine.json" % (nid, a.pad)))
+        save(dict(nid=nid, pad=a.pad, phase="spine", out=out,
+                  runs={"%s_spine" % a.pad: dict(pad=a.pad, mode="pilot-spine", nodes=out.get("tube_nodes") or [],
+                                                 verifier="[V: certs/verify_tubekill257.py]")}),
+             os.path.join(CERTS, "pilot257_%s_%s_spine.json" % (nid, a.pad)))
         row = dict(nid=nid, pad=a.pad, phase="spine", only=None, verdict=out.get("verdict"),
                    aligned_cuts=out.get("aligned_cuts"), tube_kills=out.get("tube_kills"), gate_hits=out.get("gate_hits"),
                    gate_conflicts=out.get("gate_conflicts"), n_nodes=out.get("n_nodes"), seconds=out.get("seconds"),
