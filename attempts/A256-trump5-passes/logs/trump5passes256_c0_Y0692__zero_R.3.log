@@ -80,3 +80,21 @@
    Lemma POCKET at R.3.4.3.1: 1 pockets (k=10, m=1): the next square instantiated in each
    node R.3.4.3.1.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (2.2 s, 1 rounds; t=270.8)
    node R.3.4.3.2  d3 BL(0,2)<-[4]: INTERNAL (6.1 s, 1 rounds; t=277.0)
+   no-room (k=10, m=1): UNDECIDED in 10 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.4.3.2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.4.3.2.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=290.1)
+   node R.3.4.3.3  d3 BL(0,2)<-[9]: INTERNAL (7.1 s, 1 rounds; t=297.4)
+   no-room (k=10, m=1): UNDECIDED in 12 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.4.3.3: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.4.3.3.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=315.5)
+   node R.3.4.4    d2 BL(1,1)<-[13]: DEAD by COUNT r1 (10.4 s, 1 rounds; t=326.2)
+   start R.3          => DEAD (46 nodes; t = 326 s of 1800.0)
+   start R.4: SKIPPED (filter)
+   => ALIVE (zero_page) in 326.3 s: 3 start runs, 46 nodes, depth 4, 1 CC kills, 0 exact leaf cascades, 1 NS splits, 4 pocket splits, 0 role splits (0 empty-half kills), 10 inherited dead (10 up front + 0 in tree), 40 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 37 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.04 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2 d2 DEAD INHERIT 0.0s; R.1.3.1 d3 DEAD INHERIT 0.0s; R.1.3.2.1 d4 DEAD INHERIT 0.0s; R.1.3.2.2 d4 DEAD INHERIT 0.0s; R.1.3.2.3 d4 DEAD INHERIT 0.0s; R.1.3.2.4 d4 DEAD INHERIT 0.0s; R.1.3.3 d3 DEAD INHERIT 0.0s; R.1.4 d2 DEAD INHERIT 0.0s; R.1.5 d2 DEAD INHERIT 0.0s; R.3 d0 INTERNAL 2.4s; R.3.1 d1 INTERNAL 2.5s; R.3.1.1 d2 DEAD EmptyBox 0.4s; R.3.1.2 d2 DEAD EmptyBox 3.0s; R.3.1.3 d2 DEAD CC 5.8s; R.3.1.4 d2 DEAD EmptyBox 0.3s; R.3.1.5 d2 DEAD EmptyBox 0.2s; R.3.2 d1 INTERNAL 1.6s; R.3.2.1 d2 INTERNAL 1.7s; R.3.2.1.1 d3 DEAD EmptyBox 0.2s; R.3.2.1.2 d3 DEAD EmptyBox 0.5s; R.3.2.2 d2 DEAD FC 3.1s; R.3.2.3 d2 INTERNAL 7.1s; R.3.2.3.1 d3 DEAD FC 7.1s; R.3.2.3.2 d3 DEAD NOROOM 5.6s; R.3.2.3.3 d3 DEAD FC 1.6s; R.3.3 d1 INTERNAL 2.3s; R.3.3.1 d2 DEAD NOROOM-POCKET 7.6s; R.3.3.2 d2 DEAD NOROOM-POCKET 6.1s; R.3.3.3 d2 DEAD EmptyBox 0.3s; R.3.3.4 d2 DEAD NOROOM 6.0s; R.3.3.5 d2 INTERNAL 9.1s; R.3.3.5.p1 d3 INTERNAL 29.6s; R.3.3.5.p1.1 d4 DEAD COUNT 8.7s; R.3.3.5.p1.2 d4 DEAD COUNT 2.3s; R.3.3.6 d2 INTERNAL 5.4s; R.3.3.6r1 d2 DEAD S-CLIP 6.6s; R.3.3.7 d2 DEAD EmptyBox 0.3s; R.3.3.8 d2 INTERNAL 3.0s; R.3.3.8r1 d2 DEAD EmptyBox 1.2s; R.3.3.9 d2 DEAD NOROOM 5.5s; R.3.3.10 d2 DEAD EmptyBox 0.5s; R.3.4 d1 INTERNAL 1.9s; R.3.4.1 d2 INTERNAL 2.4s; R.3.4.1.1 d3 DEAD EmptyBox 0.2s; R.3.4.1.2 d3 DEAD NOROOM 4.0s; R.3.4.1.3 d3 DEAD EmptyBox 4.3s; R.3.4.2 d2 DEAD FC 2.5s; R.3.4.3 d2 INTERNAL 2.1s; R.3.4.3.1 d3 INTERNAL 4.5s; R.3.4.3.1.p1 d4 DEAD EmptyBox 2.2s; R.3.4.3.2 d3 INTERNAL 6.1s; R.3.4.3.2.p1 d4 DEAD EmptyBox 1.1s; R.3.4.3.3 d3 INTERNAL 7.1s; R.3.4.3.3.p1 d4 DEAD EmptyBox 1.0s; R.3.4.4 d2 DEAD COUNT 10.4s
+== c0_Y0692: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 2776, 'misses': 956, 'entries': 956}; clip {'hits': 84565, 'misses': 530096, 'entries': 130096}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 3732, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 47}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 3082, 'obs_misses': 810, 'build_hits': 0, 'build_misses': 10, 'bisect_hits': 0, 'bisect_misses': 10, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 810, 'build_entries': 11, 'bisect_entries': 10, 'on': True}
