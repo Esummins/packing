@@ -19,7 +19,14 @@ FP, MB = P.FP, P.MB
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 EXACT = os.path.join(ROOT, "attempts", "A03-upper-reconstruct", "trump11_exact.json")
-TUBE_CERT = os.path.join(ROOT, "certs", "tube_scale_T5.71e-2_window.json")
+TUBE_CERT = os.path.join(ROOT, "certs", "tube_scale_T5.71e-2_window.json")       # A212: the SCALE ray, pad 0
+# A256: the WINDOW leaf (Lemma TUBE-KILL) uses the SLOT ray instead -- the trump5 pins ride their slot lines, so
+# the pinned coordinates of the pull-back have w = 0 exactly (contraction_tube.md s.4.1, and s.5's finding that
+# the scale ray is the wrong model for pinned squares: a pin sits t|alpha|/s-hat off it, 6.1e-3 over the G1 slab).
+# certs/tube_slot_T4.5e-2_landing.json: mode slot, pins [0, 1, 2, 3, 5] (trump5's), T = 9/200, r_c = 1/625,
+# r_theta = 21/10000, r_s = 0.
+TUBE_CERT_SLOT = os.path.join(ROOT, "certs", "tube_slot_T4.5e-2_landing.json")
+RAY_CERT = {"scale": TUBE_CERT, "slot": TUBE_CERT_SLOT}
 S0 = MB.S_RAT
 EPS = Fr(1, 10 ** 9)                   # the gate's margin (in favour of containment)
 PIN_TOL = Fr(1, 10 ** 6)               # the pins: the R-family shift + rounding
@@ -176,10 +183,12 @@ def gate(pg):
 
 
 # ------------------------------------------------------------------ the tube leaf
-def radii():
-    c = json.load(open(TUBE_CERT, encoding="utf-8"))
+def radii(ray="scale"):
+    f = RAY_CERT[ray]
+    c = json.load(open(f, encoding="utf-8"))
     rc, rt, T = Fr(c["r_c"]), Fr(c["r_theta"]), Fr(c["T"])
-    return dict(cert=os.path.relpath(TUBE_CERT, ROOT).replace("\\", "/"), r_c=rc, r_theta=rt, T=T, r_c_eff=rc - 2 * (S0 - shat()), r_s=Fr(c["r_s"]))
+    return dict(cert=os.path.relpath(f, ROOT).replace("\\", "/"), ray=ray, mode=(c.get("spec") or c.get("direction_spec") or {}).get("mode"),
+                r_c=rc, r_theta=rt, T=T, r_c_eff=rc - 2 * (S0 - shat()), r_s=Fr(c["r_s"]))
 
 
 def theta_window(q, rt):
@@ -191,9 +200,9 @@ def theta_window(q, rt):
     return out
 
 
-def tube(pg, g, assign, pins):
+def tube(pg, g, assign, pins, ray="scale"):
     """-> dict(fits, radii, roles {role: dict(square, fits, dx, dy, dt)}, worst): Lemma TUBE-LEAF's containment, exact on the centres."""
-    R = radii()
+    R = radii(ray)
     rc, rt = R["r_c_eff"] - EPS, R["r_theta"]
     sq = {q["i"]: q for q in images()[g]}
     rep, fits_all, worst = {}, True, None
@@ -222,9 +231,9 @@ def tube(pg, g, assign, pins):
                 roles=rep, worst=worst, g=g, assignment=dict(assign), pins=dict(pins))
 
 
-def aligned_split(pg, g, assign):
+def aligned_split(pg, g, assign, ray="scale"):
     """the cut at the tube wall (s.3): the (role, dim, m, side-with-the-image) of the largest excess over the tube box, or None."""
-    R = radii()
+    R = radii(ray)
     rc, rt = R["r_c_eff"] - EPS, R["r_theta"]
     sq = {q["i"]: q for q in images()[g]}
     best = None
