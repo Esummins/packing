@@ -89,6 +89,41 @@ def sup_margin(s, phi, sg=(1, 1, 1, 1), l=(2, 2, 2, 2), slots=True):
     return best
 
 
+def min_side(phi, sg=(1, 1, 1, 1), l=(2, 2, 2, 2), slots=False, t0=0.0):
+    """the LEAST side at which a pinwheel of rows with these tilts / senses / lengths exists (closed conditions,
+    margin t0): everything is linear in (a_0..a_3, s) too, since K_w = s - kappa_w.  Returns (s_min, a) or (inf, None)."""
+    kap = [(l[w] - 1) / math.cos(phi[w]) + math.cos(phi[w]) + math.sin(phi[w]) for w in range(4)]
+    Aub, bub = [], []
+    for w in range(4):
+        e = [0.0] * 5
+        e[w] = 1.0
+        Aub.append(list(e)); bub.append(1.0 - t0)                          # a <= 1 - t0
+        r = [0.0] * 5; r[w] = -1.0; r[4] = 1.0
+        Aub.append(list(r)); bub.append(1.0 - t0 + kap[w])                   # b = s - kap - a <= 1 - t0
+        Aub.append([-v for v in r]); bub.append(-kap[w])                     # b >= 0
+        if slots and l[w] == 2:
+            sec = 1.0 / math.cos(phi[w])
+            Aub.append(list(e)); bub.append(2.0 - sec - t0)
+            Aub.append(list(r)); bub.append(2.0 - sec - t0 + kap[w])
+    forms = [corner_forms(sg[k], phi[k], l[k], sg[k - 1], phi[k - 1], l[k - 1]) for k in range(4)]
+    if any(len(f) == 0 for f in forms):
+        return float('inf'), None
+    best = (float('inf'), None)
+    bounds = [(0.0, 1.0)] * 4 + [(2.0, 8.0)]
+    for ch in itertools.product(*forms):
+        A2, b2 = list(Aub), list(bub)
+        for k, (ca, cb, c0) in enumerate(ch):                                # ca a_k + cb (s - kap' - a') + c0 >= t0
+            co = [0.0] * 5
+            co[k] -= ca
+            co[(k - 1) % 4] += cb
+            co[4] -= cb
+            A2.append(co); b2.append(c0 - cb * kap[(k - 1) % 4] - t0)
+        r = linprog([0, 0, 0, 0, 1.0], A_ub=A2, b_ub=b2, bounds=bounds, method='highs')
+        if r.status == 0 and r.fun < best[0]:
+            best = (float(r.fun), [float(v) for v in r.x[:4]])
+    return best
+
+
 def verify(s, a, phi, sg=(1, 1, 1, 1), l=(2, 2, 2, 2)):
     """full geometry re-check of a ring: containment, all pairs, every box met by >= 2, cells met by >= 2."""
     sq = G.ring(s, a, phi, sg, l)
