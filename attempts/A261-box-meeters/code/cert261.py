@@ -154,7 +154,7 @@ def main():
              for e in st['stack']]
     ft, fl = open(base + '.tree', 'ab'), open(base + '.leaves', 'ab')
     t0 = tlast = time.time()
-    vol0 = float(np.prod([b - c for c, b in dom]))
+    vol0 = float(np.prod([b - c for c, b in dom if b > c]))
 
     def save(done=False):
         ft.flush(); fl.flush()
@@ -192,7 +192,7 @@ def main():
             for p, y in leaf:
                 fl.write(V.REC.pack(*p, *[float(v) for v in y]))
             st['leaves'] += 1
-            st['vol'] += float(np.prod([b - c for c, b in box]))
+            st['vol'] += float(np.prod([b - c for c, b in box if b > c]))
         else:
             d = max(range(4), key=lambda w: (box[w][1] - box[w][0], -((w - depth) % 4)))
             lo, hi = box[d]
