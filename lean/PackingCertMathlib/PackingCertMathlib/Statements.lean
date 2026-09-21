@@ -47,6 +47,7 @@ import PackingCertMathlib.Statements.Open.TypeTChase
 import PackingCertMathlib.Statements.Open.FamilyStuck
 import PackingCertMathlib.Statements.Open.RingPocket
 import PackingCertMathlib.Statements.Open.CentreDisc
+import PackingCertMathlib.Statements.Open.Peel
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 
