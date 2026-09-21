@@ -34,3 +34,34 @@
    no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
    Rule NS at R.2.2.p1.2.2: split F5 at TR(1,0) (meeting fraction 0.336608; alive rows []; named ['F2', 'F4', 'F5'])
    node R.2.2.p1.2.2.1 d4 TR(1,0)<-None: DEAD by REACH r1 (12.1 s, 1 rounds; t=233.6)
+   node R.2.2.p1.2.2.2 d4 TR(1,0)<-None: INTERNAL (5.3 s, 1 rounds; t=239.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.2.2.p1.2.2.2: bisect F1 on t at 53.1301 (extents (0.289953, 0.207845), tilt 90.0 deg, core non-empty, 52 piece(s); split 1 of 4)
+   node R.2.2.p1.2.2.2.1 d5 F1<-['t<=53.1301']: INTERNAL (13.7 s, 1 rounds; t=252.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.2.2.p1.2.2.2.1: bisect F3 on t at 53.1301 (extents (0.190739, 0.301668), tilt 90.0 deg, core non-empty, 21 piece(s); split 1 of 4)
+   node R.2.2.p1.2.2.2.1.1 d6 F3<-['t<=53.1301']: INTERNAL (10.3 s, 1 rounds; t=263.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.2.p1.2.2.2.1.1: split F3 at BL(0,2) (meeting fraction 0.074055; alive rows []; named ['F3', 'F4', 'F5'])
+   node R.2.2.p1.2.2.2.1.1.1 d7 BL(0,2)<-None: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=263.9)
+   node R.2.2.p1.2.2.2.1.1.2 d7 BL(0,2)<-None: DEAD by MISS-CLIP r1 (0.0 s, 1 rounds; t=264.0)
+   node R.2.2.p1.2.2.2.1.2 d6 F3<-['t>=53.1301']: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=264.6)
+   node R.2.2.p1.2.2.2.2 d5 F1<-['t>=53.1301']: DEAD by S-CLIP r1 (1.1 s, 1 rounds; t=265.8)
+   start R.2.2        => DEAD (18 nodes; t = 266 s of 1800.0)
+   start R.2.3: SKIPPED (filter)
+   start R.2.4: SKIPPED (filter)
+   start R.2.5: SKIPPED (filter)
+   start R.2.6: SKIPPED (filter)
+   start R.2.7: SKIPPED (filter)
+   start R.2.8: SKIPPED (filter)
+   start R.2.9: SKIPPED (filter)
+   start R.2.11: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   => ALIVE (zero_page) in 265.9 s: 10 start runs, 18 nodes, depth 7, 0 CC kills, 0 exact leaf cascades, 6 NS splits, 1 pocket splits, 2 role splits (0 empty-half kills), 5 inherited dead (5 up front + 0 in tree), 14 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 18 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.03 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1.1 d3 DEAD INHERIT 0.0s; R.2.1.2.1 d4 DEAD INHERIT 0.0s; R.2.1.2.2 d4 DEAD INHERIT 0.0s; R.2.10 d2 DEAD INHERIT 0.0s; R.2.2 d0 INTERNAL 11.4s; R.2.2.p1 d1 INTERNAL 60.2s; R.2.2.p1.1 d2 DEAD REACH 26.6s; R.2.2.p1.2 d2 INTERNAL 17.9s; R.2.2.p1.2.1 d3 INTERNAL 16.7s; R.2.2.p1.2.1.1 d4 DEAD REACH 12.0s; R.2.2.p1.2.1.2 d4 INTERNAL 6.9s; R.2.2.p1.2.1.2.1 d5 DEAD EmptyBox 1.6s; R.2.2.p1.2.1.2.2 d5 DEAD EmptyBox 0.4s; R.2.2.p1.2.2 d3 INTERNAL 7.1s; R.2.2.p1.2.2.1 d4 DEAD REACH 12.1s; R.2.2.p1.2.2.2 d4 INTERNAL 5.3s; R.2.2.p1.2.2.2.1 d5 INTERNAL 13.7s; R.2.2.p1.2.2.2.1.1 d6 INTERNAL 10.3s; R.2.2.p1.2.2.2.1.1.1 d7 DEAD EmptyBox 0.7s; R.2.2.p1.2.2.2.1.1.2 d7 DEAD MISS-CLIP 0.0s; R.2.2.p1.2.2.2.1.2 d6 DEAD EmptyBox 0.5s; R.2.2.p1.2.2.2.2 d5 DEAD S-CLIP 1.1s
+== c0_Y0778: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1004, 'misses': 370, 'entries': 370}; clip {'hits': 60258, 'misses': 303882, 'entries': 103882}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1374, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 19}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 1047, 'obs_misses': 345, 'build_hits': 0, 'build_misses': 1, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 326, 'build_entries': 1, 'bisect_entries': 0, 'on': True}
