@@ -41,3 +41,43 @@
    node R.2.4.2.1  d2 BL(1,1)<-[6, 8]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=114.2)
    node R.2.4.2.2  d2 BL(1,1)<-[7, 8]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=114.5)
    node R.2.4.2.3  d2 BL(1,1)<-[7, 11]: DEAD by S-CLIP r1 (1.2 s, 1 rounds; t=115.8)
+   node R.2.4.2.4  d2 BL(1,1)<-[8, 11]: INTERNAL (20.6 s, 1 rounds; t=136.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.4.2.4: split F2 at BL(0,2) (meeting fraction 0.056629; alive rows []; named ['F2', 'F3', 'F4'])
+   node R.2.4.2.4.1 d3 BL(0,2)<-None: DEAD by REACH r1 (8.6 s, 1 rounds; t=145.2)
+   node R.2.4.2.4.2 d3 BL(0,2)<-None: INTERNAL (5.4 s, 1 rounds; t=150.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.4.2.4.2: split F5 at TR(0,1) (meeting fraction 0.049602; alive rows []; named ['F1', 'F5', 'H'])
+   node R.2.4.2.4.2.1 d4 TR(0,1)<-None: INTERNAL (10.6 s, 1 rounds; t=161.2)
+   node R.2.4.2.4.2.1 d4: DEAD by CC -- rule CC at R.2.4.2.4.2.1 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F3 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inter
+   node R.2.4.2.4.2.2 d4 TR(0,1)<-None: INTERNAL (3.4 s, 1 rounds; t=164.8)
+   node R.2.4.2.4.2.2 d4: DEAD by CC -- rule CC at R.2.4.2.4.2.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F3 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inter
+   node R.2.4.2.5  d2 BL(1,1)<-[8, 12]: INTERNAL (5.4 s, 1 rounds; t=170.3)
+   node R.2.4.2.5  d2: DEAD by CC -- rule CC at R.2.4.2.5 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F3 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior 
+   node R.2.4.2.6  d2 BL(1,1)<-[8, 16]: INTERNAL (13.5 s, 1 rounds; t=184.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.4.2.6: split F2 at BL(0,2) (meeting fraction 0.082562; alive rows []; named ['F2', 'F3', 'F4'])
+   node R.2.4.2.6.1 d3 BL(0,2)<-None: DEAD by REACH r1 (10.4 s, 1 rounds; t=194.4)
+   node R.2.4.2.6.2 d3 BL(0,2)<-None: INTERNAL (3.2 s, 1 rounds; t=197.7)
+   node R.2.4.2.6.2 d3: DEAD by CC -- rule CC at R.2.4.2.6.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F3 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interio
+   node R.2.4.3    d1 TL(0,0)<-[8]: INTERNAL (4.3 s, 1 rounds; t=202.3)
+   node R.2.4.3.1  d2 BL(1,1)<-[3]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=204.0)
+   node R.2.4.3.2  d2 BL(1,1)<-[11]: INTERNAL (5.4 s, 1 rounds; t=209.5)
+   node R.2.4.3.2r1 d2 root<-None: INTERNAL (10.0 s, 1 rounds; t=219.6)
+   node R.2.4.3.2  d2: DEAD by CC -- rule CC at R.2.4.3.2 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F5 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior 
+   node R.2.4.3.3  d2 BL(1,1)<-[12]: INTERNAL (3.9 s, 1 rounds; t=223.8)
+   node R.2.4.3.3r1 d2 root<-None: INTERNAL (6.8 s, 1 rounds; t=230.7)
+   node R.2.4.3.3  d2: DEAD by CC -- rule CC at R.2.4.3.3 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F5 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior 
+   node R.2.4.3.4  d2 BL(1,1)<-[16]: INTERNAL (3.7 s, 1 rounds; t=234.7)
+   node R.2.4.3.4r1 d2 root<-None: INTERNAL (7.6 s, 1 rounds; t=242.3)
+   node R.2.4.3.4  d2: DEAD by CC -- rule CC at R.2.4.3.4 (Lemma CORNER-COVER; zero pad, lam 1.0): rule CC: F5 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interior 
+   start R.2.4        => DEAD (32 nodes; t = 243 s of 1800.0)
+   start R.3: SKIPPED (filter)
+   => ALIVE (zero_page) in 242.6 s: 3 start runs, 32 nodes, depth 4, 7 CC kills, 0 exact leaf cascades, 3 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 9 inherited dead (9 up front + 0 in tree), 29 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 34 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.04 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1.1 d3 DEAD INHERIT 0.0s; R.2.1.2.1.1 d5 DEAD INHERIT 0.0s; R.2.1.2.1.2.1 d6 DEAD INHERIT 0.0s; R.2.1.2.1.2.2 d6 DEAD INHERIT 0.0s; R.2.1.2.2 d4 DEAD INHERIT 0.0s; R.2.1.3 d3 DEAD INHERIT 0.0s; R.2.1.4 d3 DEAD INHERIT 0.0s; R.2.3 d2 DEAD INHERIT 0.0s; R.2.4 d0 INTERNAL 2.6s; R.2.4.1 d1 INTERNAL 3.3s; R.2.4.1.1 d2 DEAD NOROOM 4.6s; R.2.4.1.2 d2 DEAD NOROOM 3.8s; R.2.4.1.3 d2 DEAD EmptyBox 0.8s; R.2.4.1.4 d2 INTERNAL 6.6s; R.2.4.1.4.p1 d3 DEAD EmptyBox 2.3s; R.2.4.1.4.p2 d3 DEAD EmptyBox 0.3s; R.2.4.1.5 d2 DEAD NOROOM 3.2s; R.2.4.1.6 d2 INTERNAL 6.7s; R.2.4.1.6.p1 d3 DEAD EmptyBox 3.6s; R.2.4.2 d1 INTERNAL 3.0s; R.2.4.2.1 d2 DEAD EmptyBox 0.9s; R.2.4.2.2 d2 DEAD EmptyBox 0.3s; R.2.4.2.3 d2 DEAD S-CLIP 1.2s; R.2.4.2.4 d2 INTERNAL 20.6s; R.2.4.2.4.1 d3 DEAD REACH 8.6s; R.2.4.2.4.2 d3 INTERNAL 5.4s; R.2.4.2.4.2.1 d4 DEAD CC 10.6s; R.2.4.2.4.2.2 d4 DEAD CC 3.4s; R.2.4.2.5 d2 DEAD CC 5.4s; R.2.4.2.6 d2 INTERNAL 13.5s; R.2.4.2.6.1 d3 DEAD REACH 10.4s; R.2.4.2.6.2 d3 DEAD CC 3.2s; R.2.4.3 d1 INTERNAL 4.3s; R.2.4.3.1 d2 DEAD EmptyBox 1.0s; R.2.4.3.2 d2 INTERNAL 5.4s; R.2.4.3.2r1 d2 DEAD CC 10.0s; R.2.4.3.3 d2 INTERNAL 3.9s; R.2.4.3.3r1 d2 DEAD CC 6.8s; R.2.4.3.4 d2 INTERNAL 3.7s; R.2.4.3.4r1 d2 DEAD CC 7.6s
+== c0_Y1036: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1947, 'misses': 649, 'entries': 649}; clip {'hits': 75314, 'misses': 352374, 'entries': 152374}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 2596, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 33}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 2088, 'obs_misses': 588, 'build_hits': 0, 'build_misses': 5, 'bisect_hits': 0, 'bisect_misses': 5, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 588, 'build_entries': 5, 'bisect_entries': 5, 'on': True}
