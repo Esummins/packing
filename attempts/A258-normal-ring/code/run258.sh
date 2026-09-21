@@ -13,6 +13,6 @@ case "$1" in
   poker) python poker258.py ;;
   pages) python pages258.py ;;
   scan) ( nohup python scan258.py >> ../logs/scan258.log 2>&1 & echo $! >> ../logs/pids.txt ) ;;
-  side) ( nohup python side258.py >> ../logs/side258.log 2>&1 & echo $! >> ../logs/pids.txt ) ;;
+  side) ( nohup bash -c 'python side258.py >> ../logs/side258.log 2>&1; cd ../../.. && git add attempts/A258-normal-ring/results/side258.jsonl attempts/A258-normal-ring/results/scan258.jsonl attempts/A258-normal-ring/logs/side258.log && git commit -q -m "A258: side258 rows (detached run ended)" -- attempts/A258-normal-ring/results/side258.jsonl attempts/A258-normal-ring/results/scan258.jsonl attempts/A258-normal-ring/logs/side258.log' > /dev/null 2>&1 & echo $! >> ../logs/pids.txt ) ;;
   *) echo "usage: run258.sh test|dom|norm|poker|pages|side|scan" ;;
 esac
