@@ -25,3 +25,30 @@
    no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
    Rule NS at R.1.4.1.p1: split H at TR(1,0) (meeting fraction 0.076513; alive rows []; named ['F2', 'F3', 'H'])
    node R.1.4.1.p1.1 d3 TR(1,0)<-None: DEAD by REACH r1 (8.7 s, 1 rounds; t=75.8)
+   node R.1.4.1.p1.2 d3 TR(1,0)<-None: INTERNAL (6.9 s, 1 rounds; t=82.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.4.1.p1.2: split F2 at BL(0,2) (meeting fraction 0.304849; alive rows []; named ['F1', 'F2', 'H'])
+   node R.1.4.1.p1.2.1 d4 BL(0,2)<-None: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=83.3)
+   node R.1.4.1.p1.2.2 d4 BL(0,2)<-None: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=83.4)
+   node R.1.4.2    d1 BR(0,1)<-[17]: DEAD by EmptyBox r1 (2.2 s, 1 rounds; t=85.6)
+   node R.1.4.3    d1 BR(0,1)<-[21]: INTERNAL (4.7 s, 1 rounds; t=90.3)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 2 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.1.4.3    d1: DEAD by NOROOM-POCKET -- no-room at R.1.4.3 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.1.4.4    d1 BR(0,1)<-[22]: INTERNAL (4.1 s, 1 rounds; t=97.4)
+   no-room (k=10, m=1): UNDECIDED in 8 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.1.4.4: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.1.4.4.p1 d2 pocket<-[0]: INTERNAL (10.4 s, 1 rounds; t=116.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.1.4.4.p1: split H at TR(1,0) (meeting fraction 0.076478; alive rows []; named ['F2', 'F3', 'H'])
+   node R.1.4.4.p1.1 d3 TR(1,0)<-None: DEAD by EmptyBox r1 (3.1 s, 1 rounds; t=119.7)
+   node R.1.4.4.p1.2 d3 TR(1,0)<-None: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=120.5)
+   start R.1.4        => DEAD (13 nodes; t = 121 s of 1800.0)
+   start R.2: SKIPPED (filter)
+   => ALIVE (zero_page) in 120.5 s: 3 start runs, 13 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 3 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 10 inherited dead (10 up front + 0 in tree), 17 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 13 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2.1 d3 DEAD INHERIT 0.0s; R.1.2.2.1 d4 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.1 d7 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2 d7 DEAD INHERIT 0.0s; R.1.2.2.2.1.2 d6 DEAD INHERIT 0.0s; R.1.2.2.2.2 d5 DEAD INHERIT 0.0s; R.1.2.3 d3 DEAD INHERIT 0.0s; R.1.2.4 d3 DEAD INHERIT 0.0s; R.1.2.5 d3 DEAD INHERIT 0.0s; R.1.4 d0 INTERNAL 3.7s; R.1.4.1 d1 INTERNAL 11.1s; R.1.4.1.p1 d2 INTERNAL 23.8s; R.1.4.1.p1.1 d3 DEAD REACH 8.7s; R.1.4.1.p1.2 d3 INTERNAL 6.9s; R.1.4.1.p1.2.1 d4 DEAD EmptyBox 0.5s; R.1.4.1.p1.2.2 d4 DEAD EmptyBox 0.1s; R.1.4.2 d1 DEAD EmptyBox 2.2s; R.1.4.3 d1 DEAD NOROOM-POCKET 4.7s; R.1.4.4 d1 INTERNAL 4.1s; R.1.4.4.p1 d2 INTERNAL 10.4s; R.1.4.4.p1.1 d3 DEAD EmptyBox 3.1s; R.1.4.4.p1.2 d3 DEAD EmptyBox 0.7s
+== c0_Y0257: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 803, 'misses': 328, 'entries': 328}; clip {'hits': 24355, 'misses': 360730, 'entries': 160730}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1131, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 14}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 881, 'obs_misses': 310, 'build_hits': 0, 'build_misses': 3, 'bisect_hits': 0, 'bisect_misses': 3, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 310, 'build_entries': 3, 'bisect_entries': 3, 'on': True}
