@@ -42,3 +42,15 @@
    Rule NS at R.2.3.4.p1.2: split F5 at BL(1,1) (meeting fraction 0.167514; alive rows []; named ['F3', 'F5', 'H'])
    node R.2.3.4.p1.2.1 d4 BL(1,1)<-None: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=114.9)
    node R.2.3.4.p1.2.2 d4 BL(1,1)<-None: DEAD by MISS-CLIP r1 (0.0 s, 1 rounds; t=114.9)
+   node R.2.3.5    d1 BR(0,1)<-[23]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=115.1)
+   start R.2.3        => DEAD (14 nodes; t = 115 s of 1800.0)
+   start R.3: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   => ALIVE (zero_page) in 115.1 s: 3 start runs, 14 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 3 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 11 inherited dead (11 up front + 0 in tree), 19 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 13 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1.1 d3 DEAD INHERIT 0.0s; R.2.1.2.1.1.1.1.1 d8 DEAD INHERIT 0.0s; R.2.1.2.1.1.1.1.2 d8 DEAD INHERIT 0.0s; R.2.1.2.1.1.1.2 d7 DEAD INHERIT 0.0s; R.2.1.2.1.1.2 d6 DEAD INHERIT 0.0s; R.2.1.2.1.2 d5 DEAD INHERIT 0.0s; R.2.1.2.2 d4 DEAD INHERIT 0.0s; R.2.1.3 d3 DEAD INHERIT 0.0s; R.2.1.4 d3 DEAD INHERIT 0.0s; R.2.2 d2 DEAD INHERIT 0.0s; R.2.3 d0 INTERNAL 4.2s; R.2.3.1 d1 INTERNAL 5.5s; R.2.3.1.p1 d2 INTERNAL 29.2s; R.2.3.1.p1.1 d3 DEAD EmptyBox 6.2s; R.2.3.1.p1.2 d3 DEAD EmptyBox 1.2s; R.2.3.2 d1 DEAD FC 0.9s; R.2.3.3 d1 DEAD NOROOM-POCKET 3.5s; R.2.3.4 d1 INTERNAL 3.3s; R.2.3.4.p1 d2 INTERNAL 9.6s; R.2.3.4.p1.1 d3 DEAD REACH 5.1s; R.2.3.4.p1.2 d3 INTERNAL 3.4s; R.2.3.4.p1.2.1 d4 DEAD EmptyBox 0.4s; R.2.3.4.p1.2.2 d4 DEAD MISS-CLIP 0.0s; R.2.3.5 d1 DEAD EmptyBox 0.1s
+== c0_Y0248: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 684, 'misses': 290, 'entries': 290}; clip {'hits': 22683, 'misses': 336338, 'entries': 136338}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 974, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 15}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 777, 'obs_misses': 257, 'build_hits': 0, 'build_misses': 3, 'bisect_hits': 0, 'bisect_misses': 3, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 257, 'build_entries': 3, 'bisect_entries': 3, 'on': True}
