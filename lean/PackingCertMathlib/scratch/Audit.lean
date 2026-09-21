@@ -103,6 +103,13 @@ import PackingCertMathlib.Statements
 #print axioms PackingCert.S11.OpenLemmas.one_flush_value_of_locked_crowd_free
 #print axioms PackingCert.S11.OpenLemmas.exists_optimal_singly_met
 #print axioms PackingCert.S11.OpenLemmas.optimal_psiMin_not_stuck
+#print axioms PackingCert.S11.OpenLemmas.LockedWall.unlock_swap
+#print axioms PackingCert.S11.OpenLemmas.LockedWall.plug_kernel
+#print axioms PackingCert.S11.OpenLemmas.LockedWall.poke_chord
+#print axioms PackingCert.S11.OpenLemmas.LockedWall.open_tooth_at_tilt
+#print axioms PackingCert.S11.OpenLemmas.LockedWall.hybrid_pierce
+#print axioms PackingCert.S11.OpenLemmas.LockedWall.lockedWall_excludes
+#print axioms PackingCert.S11.OpenLemmas.LockedWall.k0_value_of_hybrid
 #print axioms PackingCert.S11.OpenLemmas.lemma_A189_noroom
 #print axioms PackingCert.S11.OpenLemmas.no_vv_of_not_mem_span
 #print axioms PackingCert.S11.OpenLemmas.no_vv_pair
