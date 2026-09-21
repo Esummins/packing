@@ -17,6 +17,7 @@ sys.dont_write_bytecode = True
 import dom258 as Dm          # noqa: E402
 import geo258 as G           # noqa: E402
 import norm258 as N          # noqa: E402
+import retreat258 as R258   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
@@ -128,12 +129,38 @@ def page_exchange():
     for i, Q in enumerate(nine):
         P.sq(Q, PURPLE if i == 8 else BLUE, 'F' if i == 8 else None)
     P.poly(G.ribbon(s, w), fill='url(#stip)', stroke='none')
-    P.note(['IS: a point of D (margin %.4f) with the SEATED poker in the tooth of wall %d; ' % (G.in_D(s, a2, phi), w)
-            + checked(nine, s), 'Hall minimum = %d: family-stuck as a 9-square structure.  Stipple: that wall\'s'
-            % G.hall_min(nine, s)[0], 'ribbon [s-2, 2] x [0, 1].  a = (%s), phi = %.3f deg.'
-            % (', '.join('%.3f' % v for v in a2), phi[0] / G.DEG)])
+    c_, g_ = math.cos(phi[w]), math.sin(phi[w])
+    tau = (1 - c_ + 0.008) / c_
+    vdir = G.wall_to_xy(w, s, [(-g_, c_)])[0] - G.wall_to_xy(w, s, [(0.0, 0.0)])[0]
+    lifted = nine[8] + tau * vdir
+    gl = min(G.sat_gap(lifted, Q) for Q in nine[:8])
+    assert gl >= -1e-9, gl
+    h_l = G.hall_min(nine[:8] + [lifted], s)[0]
+    P.poly(lifted, fill='none', stroke=PURPLE, stroke_width='1.2', stroke_dasharray='4,3')
+    P.note(['IS: a point of D (margin %.4f) with the SEATED poker F in the tooth of wall %d; ' % (G.in_D(s, a2, phi), w)
+            + checked(nine, s), 'Family-stuck ONLY AS DRAWN (Hall minimum %d): F meets the two slots of that wall by a SLIVER '
+            '(depth 1 - cos phi = %.3f; inset (d)) and NOTHING holds it there.' % (G.hall_min(nine, s)[0], 1 - c_),
+            'Dashed: F slid by %.3f along the edge direction of the row -- still a packing (gap to the ring %.1e), Hall minimum %d:'
+            ' it UNSTICKS.  A poker counts only if a free square blocks this retreat (normal_ring.md P4).' % (tau, gl, h_l),
+            'a = (%s), phi = %.3f deg.  Stipple: the ribbon [s-2, 2] x [0, 1].' % (', '.join('%.3f' % v for v in a2),
+                                                                                  phi[0] / G.DEG)])
     pans.append(P)
-    write('exchange.svg', pans, int(3 * W + 20), int(60 + s * SC + 150),
+    # (d) the tooth at 10x: a nested svg whose viewBox is a window of panel (c)
+    apex = G.wall_to_xy(w, s, [(a2[w] + 1 / c_, c_)])[0]
+    px, py = P.pt(apex)
+    r = 0.19 * SC
+    I = Panel(20 + 3 * W, 60, s, '(d) panel (c) at 10x around the tooth apex')
+    inner = [ln.replace('/>', ' vector-effect="non-scaling-stroke"/>') for ln in P.o if ln.startswith('<polygon')]
+    I.o.append('<svg x="%.1f" y="%.1f" width="%.1f" height="%.1f" viewBox="%.2f %.2f %.2f %.2f">%s</svg>'
+               % (I.x0, I.y0, s * SC, s * SC, px - r, py - r, 2 * r, 2 * r, ''.join(inner)))
+    cl = G.cells(s)
+    aL, aR = R258.clip_area(nine[8], cl[('L', w)]), R258.clip_area(nine[8], cl[('R', w)])
+    I.note(['IS: the window of half-width 0.19 around the lowest vertex of F (%.4f, %.4f), magnified 10x.' % tuple(apex),
+            'The long dashed grey lines are the slot boundaries (depth 1 and the ends of L = [1,2], R = [s-2, s-1]); '
+            'the stippled band is the ribbon.', 'F shares area %.1e with slot L and %.1e with slot R -- the whole '
+            'family-stuck property of the nine squares hangs on these two slivers.' % (aL, aR)])
+    pans.append(I)
+    write('exchange.svg', pans, int(4 * W + 20), int(60 + s * SC + 150),
           'A258 -- the exchange W -> T on a corpus ring (Lemma NORMAL-CELL), before / after')
 
 
@@ -181,61 +208,8 @@ def page_ring():
           'A258 -- the NORMAL RING: a pinwheel of four common-tilt pairs, parameters (a_w, phi_w), and its domain D')
 
 
-def page_excluded():
-    s = G.SHAT
-    pans = []
-    W = 4 * SC + 120
-    jobs = [('(a) mixed senses + + + - (14.5 deg)', (1, 1, 1, -1), (2, 2, 2, 2), [14.545] * 4,
-             '[M] scan258: sup-margin < 0 on the whole tilt grid; -> 0 only as all tilts -> 0.'),
-            ('(b) a row of THREE (tilts 8 deg)', (1, 1, 1, 1), (3, 2, 2, 2), [8.0] * 4,
-             '[T] common tilt: 2 sec + cos + sin + tan(45 - phi/2) >= 4 > s.  [M] any tilts: scan258.'),
-            ('(c) alternating + - + - (10 deg)', (1, -1, 1, -1), (2, 2, 2, 2), [10.0] * 4,
-             '[T] near flat: a mixed corner needs a >= 1 - phi/2 AND b >= 1 - phi^2/2.')]
-    for k, (title, sg, l, degs, why) in enumerate(jobs):
-        phi = [d * G.DEG for d in degs]
-        t, a = Dm.sup_margin(s, phi, sg, l, False)
-        P = Panel(20 + k * W, 60, s, title + ': NOT a ring')
-        P.cells()
-        if a is not None:
-            sq = G.ring(s, a, phi, sg, l)
-            bad = [(i, j) for i in range(len(sq)) for j in range(i) if G.sat_gap(sq[i], sq[j]) < -1e-9]
-            badset = {i for p in bad for i in p}
-            cl = G.cells(s)
-            unmet = [kk for kk in range(4) if sum(G.depth(Q, cl[('C', kk)]) > 1e-9 for Q in sq) < 2]
-            for i, Q in enumerate(sq):
-                P.sq(Q, RED if i in badset else BLUE)
-            for kk in unmet:
-                P.poly(cl[('C', kk)], fill=RED, fill_opacity='0.25', stroke=RED, stroke_width='1')
-            P.note(['IS: the LP optimum of the offsets for these tilts: least margin %.4f < 0 (dom258.sup_margin); the LP spreads the deficit equally over the corners.' % t,
-                    'red squares overlap (%d pair(s)); red boxes are met by fewer than two (%d).' % (len(bad), len(unmet)),
-                    why])
-        pans.append(P)
-    # (d) the COUNTEREXAMPLE on the stretch window: the mixed pattern + + + - exists above s_mix = 3.9298
-    rows = [json.loads(ln) for ln in open(os.path.join(HERE, '..', 'results', 'side258.jsonl'), encoding='utf-8')]
-    r = [x for x in rows if x['senses'] == [1, 1, 1, -1] and x['lengths'] == [2, 2, 2, 2]][0]
-    s2, sg, phi = 3.95, tuple(r['senses']), [d * G.DEG for d in r['tilts_deg']]
-    t, a = Dm.sup_margin(s2, phi, sg, (2, 2, 2, 2), False)
-    sq = G.ring(s2, a, phi, sg)
-    P = Panel(20 + 3 * W, 60, s2, '(d) COUNTEREXAMPLE at s = 3.95: + + + - IS a ring of pairs')
-    P.cells()
-    for i, Q in enumerate(sq):
-        P.sq(Q, RED if sg[i // 2] < 0 else BLUE)
-    mt = G.meet_table(sq, s2, 1e-9)
-    thin = [k for k, v in mt.items() if len(v) < 2]
-    for k in thin:
-        P.poly(G.cells(s2)[k], fill='url(#stip)', stroke='none')
-    P.note(['IS: a packing of eight squares, four common-tilt ROWS OF TWO, senses + + + - (red = sense -), tilts '
-            '(%s) deg, least margin %.4f; ' % (', '.join('%.2f' % d for d in r['tilts_deg']), t) + checked(sq, s2),
-            'every corner box is doubly met; stippled: border cells met by only ONE ring square (%d) -- they need a '
-            'free square each, so this is NOT an all-ADJ ring (A255 found none: consistent).' % len(thin),
-            '[M] least side of this pattern over all tilts: %.4f (side258) -- above s-hat = 3.8771 by 0.053, below 4: '
-            'COMMON-SENSE at ring level fails on the stretch window (s-hat, 4), not on [3.82, s-hat].' % r['s_min']])
-    pans.append(P)
-    write('excluded.svg', pans, int(4 * W + 20), int(60 + s * SC + 150),
-          'A258 -- (a)-(c): structures excluded at s-hat, drawn as FAILED constructions;  (d): the mixed-sense ring that EXISTS above 3.93')
-
-
 if __name__ == '__main__':
     page_exchange()
     page_ring()
-    page_excluded()
+    import pages258b
+    pages258b.page_excluded()

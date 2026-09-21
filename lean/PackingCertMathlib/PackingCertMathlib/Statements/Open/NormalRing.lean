@@ -10,7 +10,8 @@ in `[0, s]²`, `m = ⌈√n⌉`, `m − 1 < s < m`.
 * `exists_lex_max` [T]: two bounded `ℕ`-valued potentials have a LEXICOGRAPHIC maximiser on the packings
   at side `s` (one step, no iteration) — from `exists_max_potential` by the encoding `Φ₁ (B₂+1) + Φ₂`.
 * `exists_normalForm` [T from `normal_form_step`]: a packing at side `s` exists only if one in NORMAL FORM
-  (P1 touch-normal, P2 row-normal modulo longer rows, P2′ the blocker of a normal cell has nowhere to go).
+  (P1 touch-normal, P2 row-normal modulo longer rows, P2′ the blocker of a normal cell has nowhere to go,
+  P4 RETREAT: no free square can be re-posed to meet fewer border cells — a poker is HELD in its ribbon).
 * `alt_side_poly`, `row_three_poly` [T]: the polynomial cores (half-angle `u = tan(φ/2)`) of
   ALT-SIDE (an alternating-sense pinwheel of common-tilt pairs needs side `> 4`) and ROW-THREE (a row of
   three cannot have a doubly met end box beside a common-tilt row below side 4).
@@ -62,23 +63,28 @@ theorem exists_lex_max (n : ℕ) (s : ℝ) (Φ₁ Φ₂ : (Fin n → Set RP) →
 /-- Φ₁: the number of wall-touching squares (normal_ring.md §1.1; opaque). -/
 opaque touchPotential (n : ℕ) (s : ℝ) (Q : Fin n → Set RP) : ℕ
 
-/-- Φ₂: the sorted (descending) row-length vector of the maximal common-tilt wall rows, read as a number in
-base `n + 1` (normal_ring.md §1.1; opaque). -/
+/-- Φ₂: the pair (sorted descending row-length vector of the maximal common-tilt wall rows, RETREAT count
+`N − #{(border cell, non-toucher) incidences}`), lexicographic, read as one number (normal_ring.md §1.1;
+opaque).  The retreat count is upper semicontinuous ("meets" is an open condition) and integer-valued. -/
 opaque rowVecPotential (n : ℕ) (s : ℝ) (Q : Fin n → Set RP) : ℕ
 
-/-- NORMAL FORM (normal_ring.md §1.2; opaque): P1 ∧ P2 ∧ P2′. -/
+/-- A bound for Φ₂ (opaque: `(n+1)^n · (n (8m − 20) + 1)` serves). -/
+opaque normalBound (n : ℕ) : ℕ
+
+/-- NORMAL FORM (normal_ring.md §1.2; opaque): P1 ∧ P2 ∧ P2′ ∧ P4 (P4 = RETREAT: no free square can be
+re-posed, alone or jointly with other non-touchers, so as to meet fewer border cells). -/
 opaque NormalForm (n m : ℕ) (s : ℝ) (Q : Fin n → Set RP) : Prop
 
 /-- [T-prose] at most `n` squares touch a wall. -/
 axiom touchPotential_le (n : ℕ) (s : ℝ) (Q : Fin n → Set RP) : touchPotential n s Q ≤ n
 
-/-- [T-prose] at most `n` rows, each of length `≤ n`. -/
+/-- [T-prose] at most `n` rows, each of length `≤ n`; at most `n (8m − 20)` incidences. -/
 axiom rowVecPotential_le (n : ℕ) (s : ℝ) (Q : Fin n → Set RP) :
-    rowVecPotential n s Q ≤ (n + 1) ^ n
+    rowVecPotential n s Q ≤ normalBound n
 
-/-- **NORMAL-FORM step** [T-prose, normal_ring.md §1.2]: a packing violating P1, P2 or P2′ exchanges
-(Lemma CELLS on a one- or two-cell family of tilted cells) into a packing at the same side that is
-lexicographically larger in (wall touchers, sorted row vector). -/
+/-- **NORMAL-FORM step** [T-prose, normal_ring.md §1.2]: a packing violating P1, P2, P2′ or P4 exchanges
+(Lemma CELLS on a family of at most three cells of any pose) into a packing at the same side that is
+lexicographically larger in (wall touchers, (sorted row vector, retreat count)). -/
 axiom normal_form_step (n m : ℕ) (s : ℝ) (Q : Fin n → Set RP) (hP : IsPacking n s Q)
     (hN : ¬ NormalForm n m s Q) :
     ∃ Q', IsPacking n s Q' ∧ (touchPotential n s Q < touchPotential n s Q' ∨
@@ -88,7 +94,7 @@ axiom normal_form_step (n m : ℕ) (s : ℝ) (Q : Fin n → Set RP) (hP : IsPack
 theorem exists_normalForm (n m : ℕ) (s : ℝ) (h : ∃ Q, IsPacking n s Q) :
     ∃ Q, IsPacking n s Q ∧ NormalForm n m s Q := by
   obtain ⟨Q, hQ, hmax⟩ := exists_lex_max n s (touchPotential n s) (rowVecPotential n s) n
-    ((n + 1) ^ n) (touchPotential_le n s) (rowVecPotential_le n s) h
+    (normalBound n) (touchPotential_le n s) (rowVecPotential_le n s) h
   refine ⟨Q, hQ, ?_⟩
   by_contra hN
   obtain ⟨Q', hQ', hlt⟩ := normal_form_step n m s Q hQ hN
@@ -117,11 +123,14 @@ theorem row_three_poly (u : ℝ) (h0 : 0 < u) : 0 < 4 * u ^ 2 - 4 * u ^ 3 + 8 * 
   have : 0 < 2 * (u - 1 / 4) ^ 2 + 7 / 8 := by positivity
   exact mul_pos (by positivity) this
 
-/-- The packing contains a HYBRID NORMAL RING (normal_ring.md §3.4, family258.md; opaque). -/
+/-- The packing contains a HYBRID NORMAL RING with a HELD poker (normal_ring.md §3.5, family258.md §6;
+opaque): eight wall touchers of one sense, each wall a common-tilt row of two (domain `D′`) or an open pair
+locked by a free square, and a free square in a ribbon tooth that no re-posing of the free squares frees. -/
 opaque HasNormalRing (n m : ℕ) (s : ℝ) (Q : Fin n → Set RP) : Prop
 
-/-- **NORMAL-RING(n)** [C] (A258).  Open: floating root meeters (N1), mixed senses with per-wall tilts
-([M] only: least side `> 4` on the tilt grid), type-F corners above `s*`. -/
+/-- **NORMAL-RING(n)** [C] (A258), meant on the window `s ≤ ŝ`.  Open: floating root meeters (N1); the
+other pinwheels of rows are excluded below side 3.9298 by an LP scan over per-wall tilts only ([M]: mixed
+senses + + + − exist from 3.9298, flat rows = type F from 3.9347 — both above `ŝ`, both below 4). -/
 axiom normal_ring (n m : ℕ) (s : ℝ) (Q : Fin n → Set RP) (hP : IsPacking n s Q)
     (hlo : (m : ℝ) - 1 < s) (hhi : s < m) (hfs : FamilyStuckN n m s Q)
     (hN : NormalForm n m s Q) : HasNormalRing n m s Q
