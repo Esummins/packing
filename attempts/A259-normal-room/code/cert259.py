@@ -35,7 +35,7 @@ import room259 as R                                                   # noqa: E4
 import pair259 as P                                                   # noqa: E402
 
 DEG = math.pi / 180.0
-SMAX, SMIN, TOL = Z.SHAT, 3.82, 1e-6
+SMAX, SMIN, TOL = 3.8771, 3.82, 1e-6                                # SMAX >= s-hat = 3.87708359..., so s-hat itself is covered
 ETA = 1.0 / 64                                                        # the OPEN double-limit layer e0, delta1 > 1 - ETA (s.3.3)
 BINS = [(-45.0 + 1.0 * k + 0.5, 0.5) for k in range(90)]              # (mid, half-width) in degrees
 

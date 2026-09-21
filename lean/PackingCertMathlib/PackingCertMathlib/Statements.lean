@@ -49,6 +49,7 @@ import PackingCertMathlib.Statements.Open.RingPocket
 import PackingCertMathlib.Statements.Open.CentreDisc
 import PackingCertMathlib.Statements.Open.Peel
 import PackingCertMathlib.Statements.Open.CommonSense
+import PackingCertMathlib.Statements.Open.NormalRoom
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 
