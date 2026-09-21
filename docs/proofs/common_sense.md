@@ -20,10 +20,12 @@ results `attempts/A255-common-sense/results/sense255.md` (+ jsonl); pages
 > **[F] COMMON-SENSE as a LOCAL lemma** (the brief's candidate: "family-stuck ⟹ the wall touchers at a corner have one
 > sense, else some family in the neighbourhood has |M(Π)| ≤ |Π|").  The local counter-hypothesis — root c00 met by
 > exactly B, A; c01 also by C ∉ {A,B}; c10 also by D ∉ {A,B,C} (every CELLS family of {c00,c01,c10} over-met); two
-> designated wall touchers of different sense (+/−, or flat/tilted) — is REALISED in **20 of 20** pair types
-> (B–A across the corner, B–C along the wall, B–D, C–D; margins 0.018 … 0.053; `local_witnesses.svg`), and the
-> problem is s-free (§3.1), so this holds for every m ≥ 4.  Adding the addendum's clause "the slide is BLOCKED"
-> (a fifth square meets the normal cell) does not empty it: every blocked type run so far is FEASIBLE (§3.2).
+> designated wall touchers of different sense (+/−, or flat/tilted) — is REALISED in **19 of 20** pair types
+> (B–A across the corner, B–C along the wall, B–D, C–D; margins 0.006 … 0.046, every witness re-verified by
+> `test255`; `local_witnesses.svg`); the 20th (C flat on the wall, D tilted on the floor) is UNDECIDED (sup −0.0002,
+> 60 restarts).  The problem is s-free (§3.1), so this holds for every m ≥ 4.  With the addendum's clause "the slide
+> is BLOCKED" (a fifth square meets the normal cell) the feasible set SHRINKS TO THE EDGE: W:+− is realised by 0.0019
+> only, K:+− (the mixed corner) was NOT found (−0.0006, 25 restarts); the other six rows run detached (§3.2).
 > **Sense is not forced by anything inside one corner's neighbourhood.**
 >
 > **[T] What is a theorem** (n-general): SENSE-INVARIANT (§1); **NORMAL-CELL** — SLIDE-NORMAL in its true form is
@@ -48,9 +50,10 @@ results `attempts/A255-common-sense/results/sense255.md` (+ jsonl); pages
 > tilts the claim is open.
 >
 > **[M] Ring level** (`ringsense255`, detached): the all-ADJ ring with a prescribed sense pattern, 43 orbits × 2 sides.
-> Done at exit: the pinwheel exists (control, +0.021 at 3.99); one member flipped: NOT FOUND (−0.016, 8 restarts).
-> Rows land in `sense255.md` §5.  If no mixed pattern is found this is the first [M] evidence FOR common sense — at
-> ring level, where the brief's local form fails.
+> COMPLETE: the pinwheel exists at both sides (controls, +0.021 at 3.99, +0.011 at ŝ); **0 of the 84 mixed rows
+> (42 orbits × {3.99, ŝ}) has a ring** — best mixed sup-margin −0.0140 (8 restarts each; `sense255.md` §5).  This is
+> the first [M] evidence FOR common sense — at ring level, where the brief's local form fails.  Not a certificate
+> (16 coordinates: out of reach of the interval engine, A247 §4.3).
 >
 > **Plainly:** COMMON-SENSE is **not proved, false as a local statement, open in normal form**.  ONLY-RING(11),
 > FAMILY-STUCK-EXIST(11), k0_00: unchanged.
@@ -116,16 +119,17 @@ meets c10, not c00; pairwise disjoint; two designated TOUCHERS (exact touching: 
 the rest unconstrained; sup of the least margin by Nelder–Mead.  Every square lies in [0, 2 + √2]², so for
 s > 2 + √2 the far walls never bind: **the local problem is s-free and identical for every m ≥ 4** — what changes with
 m is only WHO C can be (m = 4: the facing corner's toucher may reach c01; m ≥ 5: c01, c02, … are served by the wall's
-own row until mid-wall, A254 §1.2).  Result: 6 common-sense controls FEASIBLE; **20 / 20 violating types FEASIBLE**.
-So no interval certificate is called for: there is nothing infeasible to certify, and the price of the brief's tree
-is 0 CPU-h.  (triples247's engine cannot express exact touching — a measure-zero constraint; had a type been
+own row until mid-wall, A254 §1.2).  Result: 6 common-sense controls FEASIBLE; **19 / 20 violating types FEASIBLE**;
+P4:0+ UNDECIDED (−0.0002: C flat above the root behaves like FLAT-ABOVE, A248 §1.3 — the one candidate for a
+certificate, 9 coordinates; not run, not priced: no 20-box benchmark was taken).  No tree was launched.  (triples247's engine cannot express exact touching — a measure-zero constraint; had a type been
 infeasible the enclosures of `enc247` wrapped with the touching parametrisation were the plan.)
 
 **3.2 Local search WITH the slide-block clause [M] (`blocked255`).**  Fifth square E; s₁ = B with slider C on the wall
 (W types) or s₁ = A with slider D (K types, the mixed corner surviving its floor row's normalisation); some square
-other than s₁ and the slider meets T.  W:+−, W:−+, W:+0 FEASIBLE (0.035, 0.023, 0.026); the remaining rows are in
-`sense255.md` §4 (detached).  **The blocked counter-hypothesis is locally realisable**: a second-layer square over
-s₁ and the slider is enough, and nothing inside the neighbourhood forbids it.  What would forbid it is the COUNT — each
+other than s₁ and the slider meets T.  W:+− FEASIBLE by 0.0019; K:+− NOT FOUND (−0.0006, 25 restarts); the remaining rows are in
+`sense255.md` §4 (detached, 80 restarts).  **The slide-block clause bites**: the blocked counter-hypothesis survives
+only marginally on the wall and is not found at the corner — the PI's clause is where the local content is, and the
+blocked types (12 coordinates) are the right targets for a certificate, not the unblocked ones.  What would forbid it is the COUNT — each
 blocked row end consumes a non-ring square, and n − 4(m−2) is 3 at n = 11 — i.e. a global argument.
 
 **3.3 Corpus [M]** — §0 and `sense255.md` §1–2.  The corpus is not family-stuck anywhere (A250), so it can only say at
@@ -148,9 +152,12 @@ come from the two rows meeting at the corner both being blocked; (N5) the room.
 
 ## 5. What the brief had wrong
 
-1. The guard on "reducible" (corrected by the addendum; §2.1 states the caveats).  2. COMMON-SENSE is not local: the
-"exhaustive local search on the counter-hypothesis" returns FEASIBLE in every type, with or without the slide clause;
-no tree, no price.  3. SLIDE-NORMAL needs neither a path, nor a minimal C, nor blocker (a): it is CELLS on {T}.
+1. The guard on "reducible" (corrected by the addendum; §2.1 states the caveats).  2. COMMON-SENSE without the slide clause is not local: the
+search on the counter-hypothesis returns FEASIBLE in 19 of 20 types; with the clause it is marginal / not found.
+2b. **A bug of mine, caught by the page geometry check:** the first `local255` / `blocked255` runs used a soft
+containment term (1 + 10·violation) that let free squares leave the quadrant by ≤ 0.097; all 26 + 3 rows of
+`results/archive/*_v1_containment_bug.jsonl` are INVALID (they claimed 20/20 and W margins 0.023–0.035).  Fixed by
+parametrising free squares inside the quadrant (cx = w/2 + a²); every current witness is re-verified by `test255`.  3. SLIDE-NORMAL needs neither a path, nor a minimal C, nor blocker (a): it is CELLS on {T}.
 4. Claim (c) is false literally.  5. "The chain c01, c02, … is not overlapped by the facing corner until mid-wall":
 right, and the local lemma is literally the same statement for m ≥ 5 because it is s-free (§3.1).
 

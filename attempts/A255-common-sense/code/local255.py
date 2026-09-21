@@ -65,7 +65,8 @@ def poses_of(x, spec):
     out, sm = [], []
     for name, role, sg, k, npar in spec:
         if role == 'F':
-            cx, cy, th = x[k], x[k + 1], x[k + 2]
+            th = x[k + 2]                                # free square: cx = w/2 + a^2, cy = w/2 + b^2 (inside the quadrant)
+            cx, cy = 0.5 * w(th) + x[k] ** 2, 0.5 * w(th) + x[k + 1] ** 2
         else:
             t = x[k]
             th = 0.0 if sg == '0' else x[k + 1]
@@ -94,8 +95,8 @@ def terms(x, spec):
     ps, sm = poses_of(x, spec)
     V = [G.corners_of(*p) for p in ps]
     t = [sat_gap(V[i], V[j]) for i in range(4) for j in range(i)]
-    t += [min(1.0, 1.0 + 10.0 * min(v[:, 0].min(), v[:, 1].min())) for v in V]      # containment: hard
-    t += [min(1.0, 1.0 + 10.0 * (3.42 - max(v[:, 0].max(), v[:, 1].max()))) for v in V]
+    t += [1.0 if min(v[:, 0].min(), v[:, 1].min()) >= -1e-12 else 10.0 * min(v[:, 0].min(), v[:, 1].min()) for v in V]
+    t += [1.0 if max(v[:, 0].max(), v[:, 1].max()) <= 3.42 else 10.0 * (3.42 - max(v[:, 0].max(), v[:, 1].max())) for v in V]
     t += [G.depth(*ps[0], C00), G.depth(*ps[1], C00), G.depth(*ps[2], C01), G.depth(*ps[3], C10)]
     t += [-G.depth(*ps[2], C00), -G.depth(*ps[3], C00)]
     t += [4.0 * v for v in sm]
@@ -111,7 +112,9 @@ def random_start(rng, spec, dim):
     for name, role, sg, k, npar in spec:
         base = {'B': (0.6, 1.2), 'A': (1.2, 0.6), 'C': (0.9, 2.4), 'D': (2.4, 0.9)}[name]
         if role == 'F':
-            x[k:k + 3] = [base[0] + rng.normal(0, 0.3), base[1] + rng.normal(0, 0.3), rng.uniform(0, 2 * Q)]
+            th0 = rng.uniform(0, 2 * Q)
+            x[k:k + 3] = [math.sqrt(max(1e-3, base[0] + rng.normal(0, 0.3) - 0.5 * w(th0))),
+                          math.sqrt(max(1e-3, base[1] + rng.normal(0, 0.3) - 0.5 * w(th0))), th0]
         else:
             x[k] = (base[1] if role == 'V' else base[0]) + rng.normal(0, 0.3)
             if sg != '0':

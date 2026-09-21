@@ -42,12 +42,13 @@ def layout(kind, sg):
 
 def terms(x, spec, dim, kind):
     t, ps = L.terms(x[:dim], spec)
-    E = (x[dim], x[dim + 1], x[dim + 2])
+    hwE = 0.5 * L.w(x[dim + 2])
+    E = (hwE + x[dim] ** 2, hwE + x[dim + 1] ** 2, x[dim + 2])      # inside the quadrant by construction
     VE = G.corners_of(*E)
     V = [G.corners_of(*p) for p in ps]
     t += [L.sat_gap(VE, v) for v in V]
-    t += [min(1.0, 1.0 + 10.0 * min(VE[:, 0].min(), VE[:, 1].min())),
-          min(1.0, 1.0 + 10.0 * (3.42 - max(VE[:, 0].max(), VE[:, 1].max()))),
+    t += [1.0,
+          1.0 if VE.max() <= 3.42 else 10.0 * (3.42 - VE.max()),
           -G.depth(*E, L.C00)]                         # E is not a third root meeter (|M(c00)| = 2)
     s1 = ps[0] if kind == 'W' else ps[1]
     sec = 1.0 / math.cos(math.radians(G.phi_deg(s1[2])))
@@ -69,7 +70,7 @@ def solve(kind, sg, restarts, seed):
         if os.path.exists(L.STOP):
             break
         x0 = np.concatenate([L.random_start(rng, spec, dim),
-                             [rng.uniform(0.6, 2.6), rng.uniform(0.6, 2.6), rng.uniform(0, math.pi / 2)]])
+                             [rng.uniform(0.2, 1.4), rng.uniform(0.2, 1.4), rng.uniform(0, math.pi / 2)]])
         res = minimize(lambda x: -min(terms(x, spec, dim, kind)[0]), x0, method='Nelder-Mead',
                        options={'maxiter': 4000, 'xatol': 1e-7, 'fatol': 1e-9, 'adaptive': True})
         if -res.fun > best:
@@ -87,9 +88,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--restarts', type=int, default=80)
     ap.add_argument('--seed', type=int, default=2255)
+    ap.add_argument('--types', default='')
     a = ap.parse_args()
     done = {json.loads(l)['type'] for l in open(OUT)} if os.path.exists(OUT) else set()
-    for kind, sg in TYPES:
+    todo = [tuple(t.split(':')) for t in a.types.split(',')] if a.types else TYPES
+    for kind, sg in todo:
         if '%s:%s' % (kind, sg) in done or os.path.exists(L.STOP):
             continue
         row = solve(kind, sg, a.restarts, a.seed)

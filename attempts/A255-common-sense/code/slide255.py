@@ -59,6 +59,18 @@ def extreme_cell(i, wall, d, s, table):
     return bk
 
 
+def own_cells(a_i, wall, s):
+    """the border cells on this wall whose along-wall interval contains s1's centre coordinate a_i."""
+    out = []
+    for k in G.all_cells(s):
+        R = G.cell_rect(k, s)
+        on = {'x0': R[0] < 1e-9, 'x1': R[1] > s - 1e-9, 'y0': R[2] < 1e-9, 'y1': R[3] > s - 1e-9}[wall]
+        lo, hi = (R[2], R[3]) if wall in ('x0', 'x1') else (R[0], R[1])
+        if on and lo <= a_i <= hi:
+            out.append(k)
+    return out
+
+
 def records(poses, s):
     V = [G.corners_of(*p) for p in poses]
     table = G.meeter_table(poses, s, G.all_cells(s))
@@ -102,7 +114,9 @@ def records(poses, s):
                         al, dep = wall_coords(poses[j], wall, s)
                         above = dep > 1.0 and abs(al - a_i) < hw
                         t = 'W' if wall in tch[j] else ('a' if (c and j in table[c]) else 'U')
-                        types.append({'j': j, 'type': t, 'above': bool(above), 'sense': G.sense(poses[j][2]),
+                        own = any(G.depth(poses[j][0], poses[j][1], poses[j][2], G.cell_rect(k, s)) > G.MEET
+                                  for k in own_cells(a_i, wall, s))
+                        types.append({'j': j, 'type': t, 'above': bool(above), 'sense': G.sense(poses[j][2]), 'meets_own': bool(own),
                                       'meets_c': bool(c and j in table[c])})
                     rec['blockers'] = types
                 yield rec
@@ -126,6 +140,8 @@ def main():
                     for b in r['blockers']:
                         if b['above']:
                             claim['above-blocker' + (' MEETS c' if b['meets_c'] else ' misses c')] += 1
+                            claim[band + ' above-blocker' + (' MEETS' if b['meets_own'] else ' misses') +
+                                  " s1's own cell"] += 1
                 f.write(json.dumps({'corpus': corpus, 'rid': rid, 's': s, **r}) + '\n')
     out = {'status': {b: dict(t) for b, t in tab.items()}, 'blocked_types': {b: dict(t.most_common()) for b, t in btab.items()},
            'pi_claim_c': dict(claim)}
