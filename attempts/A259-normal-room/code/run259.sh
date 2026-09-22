@@ -12,6 +12,8 @@ case "$1" in
     done; done ;;
   sample)
     python sample259.py --n 30 --sides 3.82,shat,3.95,3.99 --seed 2 >> ../logs/sample259.log 2>&1 ;;
+  verify)
+    python verify259.py --sample 1.0 > ../results/verify259.json 2>> ../logs/cert259.log ;;
   cert)
     python cert259.py --mode run >> ../logs/cert259.log 2>&1 ;;
   chain)   # the certificate tree, then its verifier, then the remaining cross-check samples (one python at a time)

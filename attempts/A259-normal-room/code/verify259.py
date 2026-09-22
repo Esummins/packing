@@ -2,11 +2,31 @@
 DIFFERENT tilt binning (0.5-degree bins offset by a quarter degree -- an independent cover of [-45, 45));
 (2) PRUNE leaves are re-derived; (3) the leaves of each cell tile the root cell exactly (volume identity in exact
 dyadic arithmetic via fractions); (4) LAYER / OPEN leaves are listed, never counted as certified.
+A CERT leaf that the independent binning does NOT re-certify is NOT a counterexample (both covers over-approximate the
+pocket, differently): it is bisected (as the tree bisects, depth <= 8) and every child must be CERT or PRUNE under the
+independent binning; only a child that still fails at depth 8 counts as bad (results/verify259.md).
     python verify259.py [--sample 0.1]   (fraction of CERT leaves re-checked; 1.0 = all)"""
 import argparse, glob, json, math, os, random, sys
 from fractions import Fraction as F
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import cert259 as K
+
+def recert(lo, hi, bins, depth):
+    """bisect (the tree's rule) until every piece is CERT / PRUNE under the independent binning; depth <= 8."""
+    st, m = K.check_box(lo, hi, bins)
+    if st != 'FAIL':
+        return True
+    if depth >= 8:
+        return False
+    import numpy as np
+    r = (np.array(hi) - np.array(lo)) * np.array([1.0, 2.0, 1.0, 2.0])
+    k = int(r.argmax()); mid = 0.5 * (lo[k] + hi[k])
+    for a_, b_ in ((lo[k], mid), (mid, hi[k])):
+        l2, h2 = list(lo), list(hi); l2[k], h2[k] = a_, b_
+        if not recert(l2, h2, bins, depth + 1):
+            return False
+    return True
+
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--sample', type=float, default=1.0); a = ap.parse_args()
@@ -23,11 +43,15 @@ def main():
             vol += fr[0] * fr[1] * F(ph[0]).limit_denominator(1 << 30) * F(ph[1]).limit_denominator(1 << 30)
             if r['st'] in ('CERT', 'PRUNE') and random.random() < a.sample:
                 st, m = K.check_box(r['lo'], r['hi'], bins)
-                if st != r['st'] and not (r['st'] == 'PRUNE' and st == 'PRUNE'):
-                    bad += 1; print('MISMATCH', fn, r, st, m)
+                if st == 'FAIL':
+                    ok = recert(r['lo'], r['hi'], bins, 0)
+                    print('REFINED', fn, r, 'independent cover fails at the leaf; bisected re-certification:', ok)
+                    if not ok:
+                        bad += 1; print('MISMATCH', fn, r, st, m)
         if vol != 1:
             bad += 1; print('TILING FAILS', fn, float(vol))
     print(json.dumps({'leaves': tot, 'bad': bad}))
     return 1 if bad else 0
 
-sys.exit(main())
+if __name__ == "__main__":
+    sys.exit(main())
