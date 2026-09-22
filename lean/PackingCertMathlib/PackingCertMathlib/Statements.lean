@@ -54,6 +54,7 @@ import PackingCertMathlib.Statements.Open.NormalRoom
 import PackingCertMathlib.Statements.Open.LockedWall
 import PackingCertMathlib.Statements.Open.BoxMeeters
 import PackingCertMathlib.Statements.Open.NoJam
+import PackingCertMathlib.Statements.Open.OpenPairs
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 
