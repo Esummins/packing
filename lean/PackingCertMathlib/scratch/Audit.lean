@@ -120,6 +120,14 @@ import PackingCertMathlib.Statements
 #print axioms PackingCert.S11.OpenLemmas.LockedWall.hybrid_pierce
 #print axioms PackingCert.S11.OpenLemmas.LockedWall.lockedWall_excludes
 #print axioms PackingCert.S11.OpenLemmas.LockedWall.k0_value_of_hybrid
+#print axioms PackingCert.S11.OpenLemmas.retreat_cone_core
+#print axioms PackingCert.S11.OpenLemmas.retreat_leaves_box_core
+#print axioms PackingCert.S11.OpenLemmas.jam_count_core
+#print axioms PackingCert.S11.OpenLemmas.jam_count_eleven
+#print axioms PackingCert.S11.OpenLemmas.opposite_slab_core
+#print axioms PackingCert.S11.OpenLemmas.jam_count
+#print axioms PackingCert.S11.OpenLemmas.no_jam_of_count
+#print axioms PackingCert.S11.OpenLemmas.box_meeters_262
 #print axioms PackingCert.S11.OpenLemmas.lemma_A189_noroom
 #print axioms PackingCert.S11.OpenLemmas.no_vv_of_not_mem_span
 #print axioms PackingCert.S11.OpenLemmas.no_vv_pair
