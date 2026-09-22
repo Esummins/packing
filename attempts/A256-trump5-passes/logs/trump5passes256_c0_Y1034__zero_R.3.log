@@ -33,3 +33,13 @@
    node R.3.1.p1.p1.1.1 d5 TR(1,0)<-None: DEAD by EmptyBox r1 (3.5 s, 1 rounds; t=1414.8)
    node R.3.1.p1.p1.1.2 d5 TR(1,0)<-None: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=1415.6)
    node R.3.1.p1.p1.2 d4 TL(0,0)<-None: INTERNAL (259.5 s, 1 rounds; t=1675.1)
+   node R.3.1.p1.p1.2: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R.3          => ALIVE (8 nodes; t = 2002 s of 1800.0)
+   => ALIVE (zero_page) in 2002.5 s: 2 start runs, 8 nodes, depth 5, 0 CC kills, 0 exact leaf cascades, 2 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 10 inherited dead (10 up front + 0 in tree), 12 dead / 4 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 10 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2.p1.1 d4 DEAD INHERIT 0.0s; R.1.2.p1.2.1 d5 DEAD INHERIT 0.0s; R.1.2.p1.2.2.1.1 d7 DEAD INHERIT 0.0s; R.1.2.p1.2.2.1.2.1 d8 DEAD INHERIT 0.0s; R.1.2.p1.2.2.1.2.2 d8 DEAD INHERIT 0.0s; R.1.2.p1.2.2.2 d6 DEAD INHERIT 0.0s; R.1.2.p2 d3 DEAD INHERIT 0.0s; R.1.3 d2 DEAD INHERIT 0.0s; R.1.4 d2 DEAD INHERIT 0.0s; R.3 d0 INTERNAL 4.1s; R.3.1 d1 INTERNAL 4.6s; R.3.1.p1 d2 INTERNAL 68.1s; R.3.1.p1.p1 d3 INTERNAL 180.5s; R.3.1.p1.p1.1 d4 INTERNAL 339.9s; R.3.1.p1.p1.1.1 d5 DEAD EmptyBox 3.5s; R.3.1.p1.p1.1.2 d5 DEAD EmptyBox 0.8s; R.3.1.p1.p1.2 d4 ALIVE 259.5s; R.3.2 d1 ALIVE 0.0s; R.3.3 d1 ALIVE 0.0s; R.3.4 d1 ALIVE 0.0s
+== c0_Y1034: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 591, 'misses': 184, 'entries': 184}; clip {'hits': 52299, 'misses': 582158, 'entries': 182158}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 775, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 9}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 616, 'obs_misses': 192, 'build_hits': 0, 'build_misses': 2, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 99, 'build_entries': 2, 'bisect_entries': 0, 'on': True}
