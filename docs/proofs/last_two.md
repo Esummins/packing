@@ -81,10 +81,21 @@ free squares that never meet T_u — is kept and the tree refines h_u to 2⁻⁷
 (h_u, h_v, θ_C, y_X, φ_X)), adaptive bisection (tilt radians × 2), depth ≤ 30; resumable per cell, `logs/STOP`.
 **1.3 Price and benchmark.**  Box test 0.01–0.1 s (early exit on the first failing bin).  In-domain samples
 (`probe266`, 60 at seed 1): CERT 36 / 48 / 55 / 60 of 60 at radius 0.02 / 0.01 / 0.005 / 0.0025 (positions and
-radians alike) — the statement has a margin at every point tried.  The tree's price is in `logs/time266b.log`
-(a 1/1200 sub-cell of root cell 1,1,0 under the left-shadow test) and `certs/strip266_jam_index.jsonl` (per cell,
-as they land).  The `mir` lane (X's mirrored orientation, φ_X ∈ [45°, 90°)) runs after `jam` and its verifier: it
-is the general s-free lemma, not needed for the JAM ring (whose X is wall 3's START square of sense +).
+radians alike) — the statement has a margin at every point tried, but a SMALL one: 0.005–0.02 in parameter
+radius.  **Price (`time266`)**: a 1/1200 sub-cell of root cell 1,1,0 (θ_C, y_X, φ_X ranges 1.25°, 0.093, 1.25°;
+full (h_u, h_v) square) costs 535 s and 18 133 leaves, 16 004 of them with h_u, h_v refined to 2⁻⁷ over the WHOLE
+square — the left-shadow test changed nothing (the annulus was not the driver): the 1° tilt bins of Q cost a
+fixed 0.017 (w(0.5°) − 1/w(0.5°)) of the margin, so every box must shrink to radius ≈ 0.005 in the position
+parameters before it certifies, and the same will hold in θ_C, y_X, φ_X.  A root cell is ≈ 6·10⁵ s, the 27 cells
+of a lane ≈ 5·10³ CPU-h — **A265's "1–3 CPU-h" was wrong** (it priced the pocket's emptiness, not the margin of the
+over-approximation; 0.1° bins would cut the fixed loss to 0.0035 at 5× the per-box cost and still leave ~10⁸
+boxes).  Launched instead (`run266.sh chain`, after `cap266` and the 3000 / 1500-sample probes): the `jam` lane on
+the six ring-relevant root cells (θ_C < 15°, y_X ≥ 1.63 — the ring's X meets the TL box, so y_X > 2.2 — φ_X ≤ 45°)
+with a BUDGET of 150 000 boxes each (≈ 40 min; the unvisited subtrees are written OPEN 'budget', tiled, and the
+index records the certified volume fraction per cell), then `verify266` on a 10 % sample.  What this buys is a
+certified sub-volume and a sampled margin map, not the lemma; the `mir` lane (φ_X ∈ [45°, 90°), the general
+s-free lemma, not needed for the JAM ring whose X is wall 3's START square of sense +) is not launched.  The
+lemma's cheaper route is the hand proof (§1.4).
 **1.4 What a hand proof would need.**  Q and C are separated by a line through one of their eight edges (SAT);
 with C's lower-left edge as the separator, Q lies in the wedge between the wall and that edge line (apex on the
 wall at height h_v + c + h_u cot θ_C, opening angle θ_C) and meets the parallelogram T_u ∩ {left of the edge} — a

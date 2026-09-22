@@ -708,9 +708,17 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        verifier `verify262`; not started at exit — chain3 waits for search262].
    5b. BL sectors = **pair3 at the BL corner with C's wall drop T_u** [T given STRIP] + **STRIP** — A265: a TWO-square,
        s-free, sector-free statement (C, X and the wall seal the strip; `strip_plug.md` §1): [T] for a flat C in
-       standard orientation, [T-computed] on 323 rings (no square free of {C, X} enters the strip), [C] for a tilted
-       C / mirrored orientations (Lean `strip_two`, `strip_of_two_obstacles`); the 7-parameter `jam` job is no longer
-       the fallback — a 5-parameter STRIP₂ tree (1–3 CPU-h) would be.
+       standard orientation, [T-computed] on 323 rings (no square free of {C, X} enters the strip).  A266
+       (`last_two.md` §1): **[F] as A265 stated it for a tilted C** — "h_u, h_v < 1" is not "C meets the open box"
+       once θ_C > 0 (C meets (0,1)² iff h_u cos + h_v sin < cos + sin − sin cos, Lean `open_box_tilted`), and between
+       the two a flat square under C is a free square in the strip (drawn); the flat-C chord proof does not carry
+       (chords are bounded by C's lower-left edge, up to h_u + sin θ_C).  On the true domain (C meets the box, X
+       above C): [M] 60/60 in-domain points certify at radius 0.0025, exact pocket empty; [T-computed*] `strip266`,
+       a 5-parameter LEFT-SHADOW box tree (Lean `left_shadow`, own verifier `verify266`) — priced at ~5·10³ CPU-h
+       for the 27 root cells (535 s per 1/1200 sub-cell; A265's 1–3 CPU-h was wrong: the 1° tilt bins cost 0.017
+       of a 0.005–0.02 margin), so launched BUDGETED on the six ring-relevant cells (150 000 boxes each, the rest
+       OPEN 'budget', the index records the certified volume).  **And `pair3` has not started** (A262's chain3
+       waits for search262, alive at exit): the BL sector is [T-computed*] on two chains.
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
@@ -746,7 +754,15 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
          (the brief's "> 3" is not a consequence), and the statement the chain needs is CAPACITY-2 — no two
          interior-disjoint free squares both missing O (Lean `gap_needs_two_misses`) — weaker than ROOM ≤ 1;
          CAPACITY-2 on the wide gap [C] via P1 on the lower gap meeter (`strip_plug.md` §3).  The non-ADJ
-         certificates P2n / WEn / WSn are queued and will mark exactly this region OPEN.
+         certificates P2n / WEn / WSn are queued and will mark exactly this region OPEN.  A266 (`last_two.md` §2):
+         **[T] CAPACITY-2 = three gap statements** (Lean `capacity_two_of_gap`): MISS-IN-GAP (every miss is a gap
+         square of an unserved wall) ∧ GAP-HOLDS-ONE-MISS (two disjoint gap squares of one wall never both miss O)
+         ∧ ONE-UNSERVED-WALL — all [C]; the brief's "two squares in the notch need width ≥ 2 > e" is [F] as an
+         argument (they STACK); the stack's upper square contains O: [T] horizontally (`gap_interval_centre`: a
+         unit interval inside [1, s − 1] contains s/2), [C] vertically (the wedge / lip cases of A264).  [M]
+         `cap266`: no two interior-disjoint misses on any ring tried (A260's 32 non-ADJ rings have empty miss
+         regions; wide-gap starts and 40 random non-ADJ rings in the chain); A265's FULL-corner witness is not a
+         ring (its corner pair overlaps by 0.007).
 11. **8 + 1 < 11** [T]: eight ring squares + one square containing O — Lean `openPairs_excludes`,
     `normalRoom_count`.  Hence no normal-form family-stuck packing of 11 on the window ⟹ **FAMILY-STUCK-EXIST(11)**
     fails in value form ⟹ with 1: **k0_00 is empty** (Lean `k0_value_of_factors`, `lockedWall_excludes`).
@@ -755,10 +771,16 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
 13. **The stretch (ŝ, 4)** [M only] and **uniqueness at ŝ** (the iterated form of VALUE-WLOG, `common_sense.md`
     §2.1 (i): SWAP-RIGIDITY k ≤ 3 [M], k ≥ 4 [C]) are outside this list.
 
-**Still [C] or waiting, exactly (A265, 2026-09-22):** 5b STRIP₂ for a tilted C and the mirrored orientations
-(flat C standard orientation [T]; 323 rings [T-computed]; or a 5-parameter tree); 5d (float262 / indirect jams);
-6's Lean axiom `jam_count`; 8a–8b chains; 10a–10c chains (P2 cells 3,5 / 3,6 in A265's lane, the rest of P2 / WE /
-WS in A263's); 10d CAPACITY-2 on the wide non-ADJ gap + the wedge and 1 + w − sec ≤ e < sec sub-cases; the
-[T-prose] Lean axioms (`meeters_split`, `band_count`, `normal_form_step`, the three corner lemmas of A264); the
-stretch.
+**Still [C] or waiting, exactly (A266, 2026-09-22):** 5a/5b `pair3` (A262's chain3: NOT STARTED — search262
+alive); 5b STRIP₂ for a tilted C on its true domain ([T-computed*] `strip266`, budgeted: the full tree is ~5·10³
+CPU-h; a hand proof is the cheaper route, §1.4 of `last_two.md` lists the cases); 5d (float262 / indirect jams,
+in chain3); 6's Lean axiom `jam_count`; 8a–8b chains (A261 `cert261.jsonl`, A263's 492 slab jobs); 10a A259's
+tree (verify259 rerun alive), 10b A260's hybAB; 10c A263's P2 (cell 4,4 open at 10 947 s, index 36/42 ok) / WE (1
+cell) / WS (3 cells) chains and A265's lane (cells 3,5 / 3,6: `P2265_index.jsonl` has 3 rows at exit); 10d the
+three gap statements of CAPACITY-2 (MISS-IN-GAP, GAP-HOLDS-ONE-MISS's vertical half + wedge + 1 + w − sec ≤ e <
+sec, ONE-UNSERVED-WALL); the [T-prose] Lean axioms (`meeters_split`, `band_count`, `normal_form_step`, the three
+corner lemmas of A264); the stretch.  **Running chains that must land for the chain to be all [T] /
+[T-computed] on [3.82, ŝ]:** A259 verify rerun (10a), A262 chain3 (5a, 5b pair3, 5d), A263 WE / WS / P2 4,4 + the
+slab jobs (8b, 10c), A265's lane (10c), A266's chain (5b strip266 — budgeted, so a hand proof or ~5·10³ CPU-h is
+still owed).
 
