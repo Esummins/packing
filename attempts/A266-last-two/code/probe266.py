@@ -1,7 +1,8 @@
 """A266 probe of STRIP_2's domain: in-domain samples (X avoids C, meets T_u, in the quadrant), the box test at shrinking
 radii on each, and for a FAILING small box the EXACT centre-set search for a real bad square (Q free of C, X, in the
 quadrant, meeting int T_u) at the box middle -- every reported witness passes the exact SAT + containment check.
-    python probe266.py [--n 60] [--lane jam|mir] [--seed 1]  -> results/probe266.json"""
+    python probe266.py [--n 60] [--lane jam|mir] [--seed 1] [--nobox]  -> results/probe266_<lane>[_nobox].json
+(--nobox drops "C meets the open box": the reading of strip_plug.md s.1.1; its FAILS are [F] witnesses for that reading)"""
 import argparse
 import json
 import math
@@ -26,20 +27,22 @@ def verts_of(x):
     return M.sq(*cC, th, 0.5), M.sq(*cX, ph, 0.5), M.sq(*cT, th, 0.5)
 
 
-def in_domain(x):
+def in_domain(x, box=True):
     C, X, T = verts_of(x)
-    if X[:, 1].min() < -1e-12 or Z.poly_gap(C, M.UNIT) >= -1e-9:      # X over the floor; C meets the open unit box
+    if X[:, 1].min() < -1e-12 or (box and Z.poly_gap(C, M.UNIT) >= -1e-9):   # X over the floor; C meets the open unit box
+        return False
+    if X[:, 1].min() < x[1] - 1e-12:                                   # X above C (its lowest point not below C's)
         return False
     return Z.poly_gap(X, C) >= -1e-12 and Z.poly_gap(X, T) < -1e-9
 
 
-def sample(rng, lane, n):
+def sample(rng, lane, n, box=True):
     p0, p1 = M.LANES[lane]
     out = []
     while len(out) < n:
         x = [rng.uniform(0.001, 0.999), rng.uniform(0.0, 0.999), rng.uniform(0, 45) * DEG, rng.uniform(*M.YX),
              rng.uniform(p0, p1) * DEG]
-        if in_domain(x):
+        if in_domain(x, box):
             out.append(x)
     return out
 
@@ -77,9 +80,10 @@ def main():
     ap.add_argument('--n', type=int, default=60)
     ap.add_argument('--lane', default='jam')
     ap.add_argument('--seed', type=int, default=1)
+    ap.add_argument('--nobox', action='store_true')                   # the WRONG domain (h_u, h_v < 1 only): [F] witnesses
     a = ap.parse_args()
     rng = np.random.default_rng(a.seed)
-    xs = sample(rng, a.lane, a.n)
+    xs = sample(rng, a.lane, a.n, not a.nobox)
     rows, fails = [], 0
     for x in xs:
         rec = dict(x=[float(t) for t in x], radii={})
@@ -96,8 +100,8 @@ def main():
                 rec['witness'] = dict(pose=pose, check=witness_check(pose, x))
         rows.append(rec)
         print(json.dumps(rec), flush=True)
-    json.dump(dict(lane=a.lane, n=len(rows), fails_at_0025=fails, rows=rows),
-              open(os.path.join(HERE, '..', 'results', 'probe266_%s.json' % a.lane), 'w'), indent=1)
+    json.dump(dict(lane=a.lane, n=len(rows), fails_at_0025=fails, nobox=a.nobox, rows=rows),
+              open(os.path.join(HERE, '..', 'results', 'probe266_%s%s.json' % (a.lane, '_nobox' if a.nobox else '')), 'w'), indent=1)
     print('fails at r=0.0025:', fails, 'of', len(rows))
 
 
