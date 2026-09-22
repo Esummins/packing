@@ -61,3 +61,25 @@
    no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
    Lemma ROLE-SPLIT at R.3.3.5.p1.2.2.2.1.1.1.2: bisect F2 on y at 2.719271 (extents (0.134381, 0.438544), tilt 19.5058 deg, core non-empty, 52 piece(s); split 3 of 4)
    node R.3.3.5.p1.2.2.2.1.1.1.2.1 d1 F2<-['y<=2.719271']: DEAD by FC r1 (10.6 s, 1 rounds; t=43.9)
+   node R.3.3.5.p1.2.2.2.1.1.1.2.2 d1 F2<-['y>=2.719271']: INTERNAL (13.0 s, 1 rounds; t=56.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R.3.3.5.p1.2.2.2.1.1.1.2.2: bisect F4 on y at 1.789341 (extents (0.016609, 0.277017), tilt 1.8192 deg, core non-empty, 23 piece(s); split 2 of 4)
+   node R.3.3.5.p1.2.2.2.1.1.1.2.2.1 d2 F4<-['y<=1.789341']: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=57.6)
+   node R.3.3.5.p1.2.2.2.1.1.1.2.2.2 d2 F4<-['y>=1.789341']: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=57.9)
+   start R.3.3.5.p1.2.2.2.1.1.1.2 => DEAD (5 nodes; t = 58 s of 1800.0)
+   start R.3.3.5.p1.2.2.2.1.1.2: SKIPPED (filter)
+   start R.3.3.5.p1.2.2.2.1.2: SKIPPED (filter)
+   start R.3.3.5.p1.2.2.2.2: SKIPPED (filter)
+   start R.3.3.5.p2: SKIPPED (filter)
+   start R.3.3.6: SKIPPED (filter)
+   start R.3.4: SKIPPED (filter)
+   start R.3.5: SKIPPED (filter)
+   start R.3.6: SKIPPED (filter)
+   => ALIVE (zero_page) in 58.0 s: 16 start runs, 5 nodes, depth 2, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 2 role splits (0 empty-half kills), 44 inherited dead (44 up front + 0 in tree), 47 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 4 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2.1 d3 DEAD INHERIT 0.0s; R.1.2.2.1 d4 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.1.1.1 d9 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.1.1.2 d9 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.1.2 d8 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.1 d9 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.1 d10 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.2.1.1 d12 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.2.1.2.1 d13 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.2.1.2.2.1.1.1.1 d17 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.2.1.2.2.1.1.1.2 d17 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.2.1.2.2.1.1.2 d16 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.2.1.2.2.1.2 d15 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.2.1.2.2.2 d14 DEAD INHERIT 0.0s; R.1.2.2.2.1.1.2.p1.2.2.2 d11 DEAD INHERIT 0.0s; R.1.2.2.2.1.2 d6 DEAD INHERIT 0.0s; R.1.2.2.2.2 d5 DEAD INHERIT 0.0s; R.1.2.3 d3 DEAD INHERIT 0.0s; R.1.2.4 d3 DEAD INHERIT 0.0s; R.1.2.5 d3 DEAD INHERIT 0.0s; R.1.2.6 d3 DEAD INHERIT 0.0s; R.1.3 d2 DEAD INHERIT 0.0s; R.1.4 d2 DEAD INHERIT 0.0s; R.1.5 d2 DEAD INHERIT 0.0s; R.2.1 d2 DEAD INHERIT 0.0s; R.2.2.1 d3 DEAD INHERIT 0.0s; R.2.2.2.p1.1 d5 DEAD INHERIT 0.0s; R.2.2.2.p1.2.1 d6 DEAD INHERIT 0.0s; R.2.2.2.p1.2.2.1 d7 DEAD INHERIT 0.0s; R.2.2.2.p1.2.2.2.1 d8 DEAD INHERIT 0.0s; R.2.2.2.p1.2.2.2.2.1 d9 DEAD INHERIT 0.0s; R.2.2.2.p1.2.2.2.2.2.1.1.1.1 d13 DEAD INHERIT 0.0s; R.2.2.2.p1.2.2.2.2.2.1.1.1.2 d13 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2 d2 DEAD INHERIT 0.0s; R.3.3.1 d3 DEAD INHERIT 0.0s; R.3.3.2 d3 DEAD INHERIT 0.0s; R.3.3.3 d3 DEAD INHERIT 0.0s; R.3.3.4 d3 DEAD INHERIT 0.0s; R.3.3.5.p1.1 d5 DEAD INHERIT 0.0s; R.3.3.5.p1.2.1 d6 DEAD INHERIT 0.0s; R.3.3.5.p1.2.2.1 d7 DEAD INHERIT 0.0s; R.3.3.5.p1.2.2.2.1.1.1.1 d11 DEAD INHERIT 0.0s; R.3.3.5.p1.2.2.2.1.1.1.2 d0 INTERNAL 15.0s; R.3.3.5.p1.2.2.2.1.1.1.2.1 d1 DEAD FC 10.6s; R.3.3.5.p1.2.2.2.1.1.1.2.2 d1 INTERNAL 13.0s; R.3.3.5.p1.2.2.2.1.1.1.2.2.1 d2 DEAD EmptyBox 0.7s; R.3.3.5.p1.2.2.2.1.1.1.2.2.2 d2 DEAD EmptyBox 0.2s
+== c0_Y0346: g1 None | pad0 ALIVE   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 217, 'misses': 157, 'entries': 157}; clip {'hits': 9188, 'misses': 21134, 'entries': 21134}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 374, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 6}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 226, 'obs_misses': 148, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 148, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
