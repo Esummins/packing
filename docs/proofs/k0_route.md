@@ -706,8 +706,11 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
    third-meeter type is free by monotonicity.  So NO-JAM(11) = ROOM(JAM ring) ≤ 1, per JAM corner (sectors):
    5a. TL sectors of a JAM corner = **pair3** (row of two + one wall square, 4 parameters) [T-computed*, A262 chain3,
        verifier `verify262`; not started at exit — chain3 waits for search262].
-   5b. BL sectors = **pair3 at the BL corner with C's wall drop T_u** [T given STRIP] + **STRIP** [C] (`three_lemmas.md`
-       §4.3; [M] 323/323 rings; the 7-parameter `jam` job is the fallback, 15–500 CPU-h, pilot in chain3).
+   5b. BL sectors = **pair3 at the BL corner with C's wall drop T_u** [T given STRIP] + **STRIP** — A265: a TWO-square,
+       s-free, sector-free statement (C, X and the wall seal the strip; `strip_plug.md` §1): [T] for a flat C in
+       standard orientation, [T-computed] on 323 rings (no square free of {C, X} enters the strip), [C] for a tilted
+       C / mirrored orientations (Lean `strip_two`, `strip_of_two_obstacles`); the 7-parameter `jam` job is no longer
+       the fallback — a 5-parameter STRIP₂ tree (1–3 CPU-h) would be.
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
@@ -731,13 +734,19 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
     10a. Normal D′ (four rows): A259's PAIR tree [T-computed*: index filling, all ok] + A260's LAYER (PLUG) [T +
          T-computed, verified 0 bad] — `normal_room.md`, `locked_wall.md` §4.
     10b. Hybrid, common tilt, all-ADJ, e ≤ ½: A260's hybA / hybB (81/81) / hybAB [T-computed*: 8/81 at A260's exit].
-    10c. Hybrid, independent tilts, all-ADJ: A263's P2 ∧ WE ∧ WS [T] reduction + [T-computed*: P2 40/81 cells at
-         A264's exit, three cells (3,4) (3,5) (3,6) reported `ok: false` = OPEN at depth 26 — to be re-examined; WS 3
-         cells, WE 1 cell].
+    10c. Hybrid, independent tilts, all-ADJ: A263's P2 ∧ WE ∧ WS [T] reduction + [T-computed*: P2 41/81 cells in
+         A263's chain, five OPEN (2,4 / 2,5 / 3,4 / 3,5 / 3,6) — A265 [T]: the OPEN leaves are a SIDE mismatch (P2
+         tested at 3.8771 on boxes all-ADJ only near 3.82; the failing square is at the centre line, not the corner,
+         and is a real P2 miss at 3.8771 where P2 is not required) — re-run at the ADJ-consistent side s_eff (Lean
+         `adj_side_bound`, `p2_of_adj_side`) + graded plug: 2,4 / 2,5 / 3,4 certified (`verify265`), 3,5 / 3,6 in
+         A265's second lane (`certs/P2265_index.jsonl`) — `strip_plug.md` §2; WS 3 cells, WE 1 cell, no OPEN].
     10d. Non-ADJ (wide gap, e up to 1.169): ROOM is [F] as a bare-ring statement; STRUCTURE closes the strip:
-         GAP-CELL, BLOCKER-SIDE, STRIP-CHAIN [T] for e ≥ sec φ₁ at common tilt; the case 1 + w − sec ≤ e < sec, the
-         wedge case and the count to a fourth free square [C] — `three_lemmas.md` §2.  The non-ADJ certificates
-         P2n / WEn / WSn are queued and will mark exactly this region OPEN.
+         GAP-CELL, BLOCKER-SIDE, STRIP-CHAIN [T] for e ≥ sec φ₁ at common tilt; the case 1 + w − sec ≤ e < sec and
+         the wedge case [C] — `three_lemmas.md` §2.  A265 [T]: the derived count is TWO free squares in the gap
+         (the brief's "> 3" is not a consequence), and the statement the chain needs is CAPACITY-2 — no two
+         interior-disjoint free squares both missing O (Lean `gap_needs_two_misses`) — weaker than ROOM ≤ 1;
+         CAPACITY-2 on the wide gap [C] via P1 on the lower gap meeter (`strip_plug.md` §3).  The non-ADJ
+         certificates P2n / WEn / WSn are queued and will mark exactly this region OPEN.
 11. **8 + 1 < 11** [T]: eight ring squares + one square containing O — Lean `openPairs_excludes`,
     `normalRoom_count`.  Hence no normal-form family-stuck packing of 11 on the window ⟹ **FAMILY-STUCK-EXIST(11)**
     fails in value form ⟹ with 1: **k0_00 is empty** (Lean `k0_value_of_factors`, `lockedWall_excludes`).
@@ -746,7 +755,10 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
 13. **The stretch (ŝ, 4)** [M only] and **uniqueness at ŝ** (the iterated form of VALUE-WLOG, `common_sense.md`
     §2.1 (i): SWAP-RIGIDITY k ≤ 3 [M], k ≥ 4 [C]) are outside this list.
 
-**Still [C] or waiting, exactly:** 5b STRIP (or the `jam` tree); 5d (float262 / indirect jams); 6's Lean axiom
-`jam_count`; 8a–8b chains; 10a–10c chains (and the three OPEN P2 cells); 10d the gap closure; the [T-prose] Lean
-axioms (`meeters_split`, `band_count`, `normal_form_step`, the three corner lemmas of A264); the stretch.
+**Still [C] or waiting, exactly (A265, 2026-09-22):** 5b STRIP₂ for a tilted C and the mirrored orientations
+(flat C standard orientation [T]; 323 rings [T-computed]; or a 5-parameter tree); 5d (float262 / indirect jams);
+6's Lean axiom `jam_count`; 8a–8b chains; 10a–10c chains (P2 cells 3,5 / 3,6 in A265's lane, the rest of P2 / WE /
+WS in A263's); 10d CAPACITY-2 on the wide non-ADJ gap + the wedge and 1 + w − sec ≤ e < sec sub-cases; the
+[T-prose] Lean axioms (`meeters_split`, `band_count`, `normal_form_step`, the three corner lemmas of A264); the
+stretch.
 
