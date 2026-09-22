@@ -11,5 +11,10 @@ case "$1" in
     stop; python cert265.py --cells "3,5;3,6" --maxdepth 26 >> $LOG 2>&1
     stop; python verify265.py --sample 1.0 >> $LOG 2>&1
     stop; python pages265.py >> $LOG 2>&1
+    cd ../../.. && git add attempts/A265-strip-plug/certs attempts/A265-strip-plug/results docs/residue_map/campaigns/A265-strip-plug \
+      && git commit -q -m "A265 lane: P2 cells 3,5 / 3,6, verify265, strip265, miss265, pages (detached commit at lane end)
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>" -- attempts/A265-strip-plug/certs attempts/A265-strip-plug/results docs/residue_map/campaigns/A265-strip-plug >> attempts/A265-strip-plug/logs/chain265.log 2>&1
+    cd attempts/A265-strip-plug/code
     echo "cells end $(date)" >> $LOG ;;
 esac
