@@ -1,4 +1,4 @@
-# STRIP AND PLUG — the STRIP is sealed by C, X and the wall alone (two obstacles, no sector, s-free; [T] for a flat C in standard orientation, [T-computed] on 323 rings, [C] in general); A263's OPEN P2 leaves were not a corner layer but a SIDE mismatch (P2 tested at 3.8771 on boxes that are all-ADJ only near 3.82) — the five cells certify at the ADJ-consistent side; the gap COUNT: what GAP-CELL gives is two, and the chain needs CAPACITY-2, not ROOM ≤ 1 — A265, 2026-09-22
+# STRIP AND PLUG — the STRIP is sealed by C, X and the wall alone (two obstacles, no sector, s-free; [T] for a flat C in standard orientation, [T-computed] on 18 rings at exit / 323 in the lane, [C] in general); A263's OPEN P2 leaves were not a corner layer but a SIDE mismatch (P2 tested at 3.8771 on boxes that are all-ADJ only near 3.82) — the five cells certify at the ADJ-consistent side; the gap COUNT: what GAP-CELL gives is two, and the chain needs CAPACITY-2, not ROOM ≤ 1 — A265, 2026-09-22
 
 The brief (A265 BRIEF): (1) Lemma STRIP, the last lemma of the jammed sector (three_lemmas.md §4.3); (2) the OPEN
 P2 cells 2,4 / 2,5 / 3,4 / 3,5 / 3,6 of A263 with the PLUG as a fifth obstacle; (3) the gap count; (4) the chain
@@ -13,10 +13,11 @@ open box), T_u = C − h_u e_x its wall drop, S := T_u ∖ C the STRIP; X the wa
 
 ## 0. Verdict
 
-> **STRIP (task 1).**  [T-computed, 323 rings, `strip265`]: the strip is sealed by **C, X and the wall ALONE** — on
-> every JAM ring of A264 (A262's 34 + search262's 289, five sides) NO unit square of the container interior-disjoint
-> from C and X has an interior point in S (both sectors return −9 = no such square; A, A₂ and the sector condition
-> are never needed; C alone does NOT seal it: BL-floor margin up to §1.2's value with C only).  So STRIP is a
+> **STRIP (task 1).**  [T-computed, `strip265`: 18 JAM rings across the five sides at exit (3°–5° grids); the
+> 323-ring 1° run is the second lane's first step, `results/strip265.json`]: the strip is sealed by **C, X and the
+> wall ALONE** — on every ring tested NO unit square of the container interior-disjoint from C and X has an interior
+> point in S (both sectors return −9 = no such square; A, A₂ and the sector condition are never needed; C alone
+> does NOT seal it: BL-floor margin up to −0.06 with C only, i.e. a square below C meets S but is no sector square).  So STRIP is a
 > **two-square, s-free, sector-free statement** on the 5 parameters (h_u, h_v, θ_C; y_X, φ_X) — not the 7-parameter
 > `jam` job and not A264's 4-square sector statement.  [T] the mechanism (§1.3): a square Q free of C with an
 > interior point p ∈ S has a horizontal chord through p shorter than h_u < 1, so p lies in Q's bottom or top TIP
@@ -34,8 +35,9 @@ open box), T_u = C − h_u e_x its wall drop, S := T_u ∖ C the STRIP; X the wa
 > **The OPEN P2 leaves (task 2): [F] the brief's reading, [T] the cause, [T-computed] the fix.**  The OPEN leaves
 > of cells 2,4 / 2,5 / 3,4 / 3,5 / 3,6 sit at b ∈ [0.88, 1], φ_W ∈ [10°, 20°], a′ ∈ [0.45, 0.52], φ₁′ ∈ [21°, 33°]
 > (not "b ≥ 0.98": cell 3,4 has OPEN leaves at b = 0.88).  The failing square is NOT at the corner: it is a square
-> on the centre line, 0.7 from the right wall, that misses O "to the right wall" (case (ii)) by +0.020 at
-> s = 3.8771 — a REAL P2 miss there (exact centre sets, `miss265`).  But at 3.8771 these boxes are NOT all-ADJ:
+> on the centre line, 0.7 from the right wall, that misses O "to the right wall" (case (ii)) by up to +0.030 at
+> s = 3.8771 — a REAL P2 miss there (exact centre sets, `miss265`: 134 of 500 sampled OPEN leaves have a positive
+> exact margin at 3.8771, none at their own s_eff, where all are ≤ −0.040).  But at 3.8771 these boxes are NOT all-ADJ:
 > a′ + w(φ₁′) = 1.822 < s − 2 = 1.877 (S′ misses its far slot); the ring is ADJ-feasible only for s ≤ a′ + w + 2 ≈
 > 3.82–3.86, and there the same box has margin −0.061.  A263's test imposes ADJ at SMIN = 3.82 and evaluates at
 > SMAX = 3.8771 — sound but lossy, and the loss is exactly the OPEN region.  **Fix (`cert265`, sound by the
@@ -56,7 +58,7 @@ open box), T_u = C − h_u e_x its wall drop, S := T_u ∖ C the STRIP; X the wa
 > same unit cell, so the lower one has a free drop unless the other blocks it from below-right.  The sub-case
 > 1 + w − sec ≤ e < sec and the wedge case φ_W ≠ φ₁ remain [C] (§3.2).
 > **Plainly.**  N1 (jammed sector) = pair3 + STRIP; STRIP is now a 2-square lemma, proved for a flat C, tested on
-> every ring.  The OPEN P2 cells are closed (three certified at exit, two relaunched).  The non-ADJ gap needs
+> every ring tried (the full 323 in the lane).  The OPEN P2 cells are closed (three certified at exit, two relaunched).  The non-ADJ gap needs
 > CAPACITY-2, not ROOM.  k0_00 unchanged.
 
 ## 1. STRIP  (task 1)
@@ -67,13 +69,15 @@ unit square Q ⊆ quadrant with int Q ∩ int C = ∅ = int Q ∩ int X has an i
 and m-free (the quadrant only), needs neither A, A₂ nor the sector, and implies A264's STRIP (fewer obstacles, more
 squares: Lean `strip_of_two_obstacles`).  With STRIP: the BL-sector pocket of {A, A₂, X, C} ⊆ the pocket of
 {A, A₂, T_u} — `pair3` at the BL corner (three_lemmas.md §4.3, Lean `jam_sector_of_strip`).
-**1.2 [T-computed] `strip265`** (323 rings, exact centre sets, 1° grid; for each obstacle subset the max over
-squares free of the subset AND meeting S with positive area of the sector functional): {C, X}: −9 / −9 on every ring
-(no such square exists at all); {A, A₂, X, C}, {A, X, C}: −9 / −9; {C} alone: BL-floor up to −0.17 (a square below
-C meeting S exists but is not a sector square); {A, C}: −0.19 / −9; {A, X}: +0.9 (without C the strip is just
-space); {A}, {X}, ∅: ≥ +0.5.  So X is the strip's LID and C its right wall; nothing else is used.  Facts recorded
-per ring: h_u ∈ [0.001, 0.75], h_v ∈ [0.88, 1.0), θ_C up to 13°, X's intrusion into T_u (area up to 0.05, depth up
-to 0.26).  Page `strip_two_obstacles.svg`.
+**1.2 [T-computed] `strip265`** (exact centre sets; for each obstacle subset the max over squares free of the
+subset AND meeting S with positive area of the sector functional).  At exit: 3 rings at ŝ with all 9 subsets (5°
+grid) + 15 rings spread over 3.82 / 3.85 / ŝ / 3.92 / 3.95 / 3.99 with {C, X} and {C} (3° grid): {C, X}: −9 / −9
+on every ring (no such square exists at all); {A, A₂, X, C}, {A, X, C}: −9 / −9; {C} alone: BL-floor −0.06 … −0.22
+(a square below C meeting S exists but is not a sector square); {A, C}: −0.19 / −9; {A, X}: +0.9 (without C the
+strip is just space); {A}, {X}, ∅: ≥ +0.5.  So X is the strip's LID and C its right wall; nothing else is used.
+The 323-ring 1° run (all subsets, ≈ 20 min) is the second lane's first step; its `worst` block is the number to
+quote.  Facts recorded per ring: h_u ∈ [0.001, 0.75], h_v ∈ [0.88, 1.0), θ_C up to 13°, X's intrusion into T_u.
+Page `strip_two_obstacles.svg` (written by the lane).
 **1.3 The mechanism, and a proof for a flat C [T].**  Let C = [h_u, h_u+1] × [h_v, h_v+1] (θ_C = 0), so S = [0, h_u)
 × [h_v, h_v+1].  Let Q (tilt ψ ∈ [0°, 45°], bottom vertex B, right R = B + (c, s), left L = B + (−s, c), top
 T = B + (c − s, w)) be free of C with p ∈ int Q ∩ S.
@@ -110,15 +114,16 @@ confined by C's left flank line instead of x = h_u, the column is a parallelogra
 per tilt bin of Q, the strip region T_u ⊕ Q₀ relaxed by the box) is A259's method on (h_u, h_v, θ_C, y_X, φ_X) with
 the DIRECT-JAM domain: ≈ 3 · 10⁴ boxes at 0.05 s (Monte-Carlo guess from the rings' margins −9 = the pocket is
 EMPTY, so most boxes prune on core overlap of Q's kernel with C ∪ X) — 1–3 CPU-h; not launched (the hand lemma is
-the better route; the 323-ring test already covers every witness the searches produced).
+the better route; the ring test covers every witness the searches produced).
 
 ## 2. The OPEN P2 leaves  (task 2)
 
 **2.1 What they are [T-computed] (`miss265`).**  For each of the five cells, 100 OPEN leaves (the 40 largest box
 margins + 60 random) evaluated exactly (geo263.factor_margin, 0.25° grid): at SMAX = 3.8771 the exact P2 margin is
-POSITIVE on the leaves of 3,5 (up to +0.0225: a real P2 miss, the pose (2.51, 1.94), ψ = 24.7°, case (ii)) and
-negative but within 0.02 of zero elsewhere (box relaxation at depth 26); at the leaf's own s_eff it is ≤ −0.05 on
-every leaf sampled (`results/miss265.json`).  The missing square sits on the horizontal centre line 0.575 right
+POSITIVE on 5 / 53 / 14 / 62 / 0 of the 100 sampled leaves of 2,4 / 2,5 / 3,4 / 3,5 / 3,6 (max +0.0125 / +0.030 /
++0.024 / +0.030 / −0.024: real P2 misses, e.g. the pose (2.51, 1.94), ψ = 24.7°, case (ii)) and negative but
+within 0.03 of zero elsewhere (box relaxation at depth 26); at the leaf's own s_eff it is ≤ −0.057 / −0.041 /
+−0.049 / −0.040 / −0.069 on every leaf sampled (`results/miss265.json`).  The missing square sits on the horizontal centre line 0.575 right
 of O, 0.7 from the right wall, above W and left of S′: the PLUG (any ρ < 0.35) does not touch it.  Its region is
 LEFT(S′) — where W′ would stand in the ring: the FULL corner scan (§2.3) says whether W′ blocks it.
 **2.2 The cause and the fix [T].**  The all-ADJ family at side s requires b + w(φ_W) ≥ s − 2 and a′ + w(φ₁′) ≥
@@ -166,8 +171,8 @@ corner's 4–6) is out of the box-tree budget; the P1 route is the one to take.
 
 ## 4. The chain list — `k0_route.md` §13, updated links
 
-5b: BL sectors = pair3 at BL with T_u [T given STRIP] + STRIP [T flat C standard orientation; T-computed 323
-rings; C general] — was [C] outright.  10c: the three OPEN P2 cells: [T-computed] 2,4 / 2,5 / 3,4 (verify265),
+5b: BL sectors = pair3 at BL with T_u [T given STRIP] + STRIP [T flat C standard orientation; T-computed 18
+rings at exit, 323 in the lane; C general] — was [C] outright.  10c: the three OPEN P2 cells: [T-computed] 2,4 / 2,5 / 3,4 (verify265),
 3,5 / 3,6 relaunched — the cause [T] (side mismatch), no real miss of the independent-tilt room found.  10d: the
 count "> 3" [F as a derivation]; the needed statement is CAPACITY-2 [C]; (i) and (ii) unchanged [C].  Still [C]:
 5b STRIP in general (tilted C, mirrored orientations), 5d, 6's `jam_count`, 8a–8b chains, 10a–10c chains, 10d

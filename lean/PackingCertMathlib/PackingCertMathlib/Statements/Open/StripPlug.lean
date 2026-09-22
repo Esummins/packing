@@ -22,9 +22,10 @@ import PackingCertMathlib.Statements.Open.ThreeLemmas
   CAPACITY-2 (no two interior-disjoint free squares both miss `O`), weaker than ROOM ≤ 1 (strip_plug.md §3).
 
 **What is not.**
-* `strip_two` [C]: STRIP against `{C, X}` alone — [T-computed] on A264's 323 JAM rings (`strip265`): no unit square
-  of the corner quadrant interior-disjoint from `C` and `X` has an interior point in `T_u ∖ C` (−9 on every ring:
-  such a square does not exist, sector condition unused); a hand proof is written for a flat `C` only (§1.3).
+* `strip_two` [C]: STRIP against `{C, X}` alone — [T-computed] on 18 of A264's 323 JAM rings at exit, the rest in
+  the lane (`strip265`): no unit square of the corner quadrant interior-disjoint from `C` and `X` has an interior
+  point in `T_u ∖ C` (−9 on every ring tested: such a square does not exist, sector condition unused); a hand proof
+  is written for a flat `C` only (strip_plug.md §1.3).
 -/
 
 namespace PackingCert.S11.OpenLemmas.StripPlug
@@ -63,7 +64,7 @@ theorem plug_graded (w ρ a c : ℝ) (h1 : 1 ≤ w) (h2 : w * w ≤ 2) (hρ0 : 0
 opaque TwoFree (Q : Set RP) : Prop
 
 /-- **STRIP against `{C, X}`** [C] (strip_plug.md §1): no unit square of the quadrant interior-disjoint from `C`
-and `X` has an interior point in `T_u ∖ C`.  [T-computed] on 323 JAM rings (`strip265`, exact centre sets). -/
+and `X` has an interior point in `T_u ∖ C`.  [T-computed] on 18 JAM rings at exit, 323 in the lane (`strip265`). -/
 axiom strip_two (Q : Set RP) (h : TwoFree Q) :
     ¬ PackingCert.S11.OpenLemmas.ThreeLemmas.InStrip Q
 
