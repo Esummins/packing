@@ -26,7 +26,12 @@ SOUNDNESS (the bad set is OVER-approximated, A259's CORE / KERNEL lemmas [T]):
     every bin's TEST has area <= ATOL;  PRUNE iff B misses the domain for EVERY x in B:  hi_yX - cos(hi_phi) <
     max(0, lo_hv), or core(X) and core(C) overlap, or outer(X) and outer(T_u) are disjoint (T_u's outer: mid (h_v, th),
     rho = r_hv + r_th), or outer(C) misses the closed unit box.
-    python strip266.py --mode bench            python strip266.py --mode run --lane jam|mir [--only i,j,k]"""
+PRICE (time266, left-shadow test): a 1/1200 sub-cell of root cell 1,1,0 costs 535 s and 18 133 leaves with h_u, h_v
+refined to 2^-7 over the WHOLE square (the 1-degree tilt bins of Q cost a fixed 0.017 in the over-approximation and
+the statement's own margin is 0.005-0.02 in parameter radius on random in-domain points: probe266) -- a root cell is
+~6e5 s and the 27 cells ~5e3 CPU-h, not A265's 1-3 CPU-h.  Hence --budget: boxes per cell, the unvisited subtrees
+are written OPEN 'budget' (tiled, honest); the index records the certified VOLUME fraction per cell.
+    python strip266.py --mode bench      python strip266.py --mode run --lane jam|mir [--only i,j,k;...] [--budget N]"""
 import argparse
 import json
 import math
@@ -133,9 +138,17 @@ def check_box(lo, hi, bins=BINS):
     return 'CERT', worst
 
 
+BUDGET = [10 ** 12]                                                   # boxes left for the cell
+
+
 def tree(lo, hi, depth, maxdepth, out, stats):
+    if BUDGET[0] <= 0:                                                 # budget exhausted: the subtree is OPEN (honest, tiled)
+        stats['BUDGET'] = stats.get('BUDGET', 0) + 1
+        out.append({'lo': list(map(float, lo)), 'hi': list(map(float, hi)), 'st': 'OPEN', 'm': 'budget'})
+        return False
     st, m = check_box(lo, hi)
     stats[st] = stats.get(st, 0) + 1
+    BUDGET[0] -= 1
     if st != 'FAIL':
         out.append({'lo': list(map(float, lo)), 'hi': list(map(float, hi)), 'st': st, 'm': m})
         return True
@@ -182,8 +195,10 @@ def main():
     ap.add_argument('--seed', type=int, default=1)
     ap.add_argument('--lane', default='jam')
     ap.add_argument('--maxdepth', type=int, default=30)
-    ap.add_argument('--only', default='')
+    ap.add_argument('--only', default='')                             # "i,j,k" or "i,j,k;i,j,k;..." (subset of the 27 cells)
+    ap.add_argument('--budget', type=int, default=0)                  # boxes per cell (0 = unlimited); the rest is OPEN 'budget'
     a = ap.parse_args()
+    only = set(a.only.split(';')) if a.only else set()
     Z.belownormal()
     certs = os.path.join(HERE, '..', 'certs')
     os.makedirs(certs, exist_ok=True)
@@ -199,13 +214,18 @@ def main():
         for j in range(3):
             for kk in range(3):
                 cell = '%d,%d,%d' % (i, j, kk)
-                if cell in done or (a.only and a.only != cell):
+                if cell in done or (only and cell not in only):
                     continue
                 if os.path.exists(stop):
                     return
                 lo, hi = root(a.lane, i, j, kk)
                 t0, out, stats = time.time(), [], {}
+                BUDGET[0] = a.budget if a.budget > 0 else 10 ** 12
                 ok = tree(lo, hi, 0, a.maxdepth, out, stats)
+                vol = {}
+                for r in out:
+                    v = float(np.prod((np.array(r['hi']) - np.array(r['lo'])) / (np.array(hi) - np.array(lo))))
+                    vol[r['st']] = vol.get(r['st'], 0.0) + v
                 with open(os.path.join(certs, 'strip266_%s_cell_%d_%d_%d.jsonl' % (a.lane, i, j, kk)), 'w') as fh:
                     for row in out:
                         fh.write(json.dumps(row) + '\n')
