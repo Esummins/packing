@@ -139,9 +139,14 @@ lo_a′ > 0.48, 1/16 for lo_a′ > 0.417 — Lemma PLUG needs a′ > √2/4 + ρ
 with none.  3,5 and 3,6: relaunched (`run265.sh cells`) after the strip test; the index says.  Verifier:
 `results/verify265.json` (all CERT / PRUNE leaves re-derived under 0.4° bins with 0 as an edge; a leaf the
 independent cover rejects is bisected to depth 8; the recorded side is recomputed; the plug hypothesis checked).
-FULL-corner scan at the worst leaf (s₁ at W's tilt, W′ over 13 shifts × 11 tilts, non-ADJ domain): in
-`results/miss265.json` (`full_scan`) — the largest FULL margin over the scan is what the ring can do with the
-square; ≤ 0 means every 4-square corner blocks it.
+FULL-corner scan at the worst leaf (b = 0.994, φ_W = 14.3°, a′ = 0.490, φ₁′ = 25.5°; s₁ at W's tilt, W′ over 13
+shifts × 11 tilts, non-ADJ domain, s = 3.8771): **+0.025 at (e, e′, φ_W′) = (0.1, 0.6, 38°)** — the 4-square corner
+does NOT block the square when the right wall is non-ADJ on both ends (δ_W′ = 2.20 > 2: W′ misses its far slot
+too, b′ = 0.28); the free square (centre (2.52, 1.94), ψ = 25.5°) reaches x = 3.18 > s − 1 and so MEETS the
+unserved slot R — it is the far-slot free square of `nonadj_free_meeter`, missing O.  [M] a bare-ring ROOM
+witness on the non-ADJ family at ŝ by a CENTRE-LINE square (A263's witness was a floor cell in a wide gap): the
+same conclusion, CAPACITY-2 is the statement to prove there (§3); it is not a k0 counterexample (one miss is
+allowed, two are needed).
 **2.4 What the brief had wrong.**  "The OPEN leaves sit at b ≥ 0.98 … the closed-corner layer that A260 closed with
 PLUG": the leaves reach b = 0.88, the failing square is at the container's centre line, and the plug is idle on
 them.  The mechanism is the SIDE, not the corner.
