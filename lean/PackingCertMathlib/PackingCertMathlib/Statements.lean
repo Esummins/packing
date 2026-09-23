@@ -60,6 +60,7 @@ import PackingCertMathlib.Statements.Open.StripPlug
 import PackingCertMathlib.Statements.Open.LastTwo
 import PackingCertMathlib.Statements.Open.StripEnclosure
 import PackingCertMathlib.Statements.Open.RingDomain
+import PackingCertMathlib.Statements.Open.StripJam
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 
