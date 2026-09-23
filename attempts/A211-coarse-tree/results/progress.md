@@ -1,6 +1,6 @@
-# A211 progress -- 2026-09-23 13:56:00
+# A211 progress -- 2026-09-23 14:06:07
 
-The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
+The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the g1 pad (lam = s0/3.861637: A57's G1 slab (3.861637, s0], s-hat included -- NOT the window [3.82, s0]; A270); wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
 ## Where the alive k5 gallery pages stand (A225 PROGRESS: start nodes left / alive leaves / depth)
 
@@ -11,7 +11,7 @@ A *start node* is an alive leaf the run inherited from the previous run (Lemma I
 | k5_16_interior_Y1117 | g1 | 10 | 8 | 1 | 1 | **2** | 11 | 5 | 1 | 0.51 | 0.07 | 2026-09-12 23:28:01 |
 | k5_16_interior_Y1117 | zero | 0 | 0 | 0 | 0 | **0** | 0 | 0 | 1 | 0.00 | 0.00 | 2026-09-12 22:57:37 (**this pad is now DEAD**) |
 
-**TOTAL over the 1 alive k5 gallery pages (window pad):** 2 start nodes left, 11 alive leaves (the next runs' start nodes), deepest branch 5, 2 run(s) over both pads for 0.51 CPU-h spent; ESTIMATE (not a bound) 0.07 CPU-h to close the start nodes now open at the window pad -- an UNDER-estimate: the start nodes still alive are the ones that already survived a full wall, and each survivor splits into several new start nodes.
+**TOTAL over the 1 alive k5 gallery pages (g1 pad = A57's G1 slab (3.861637, s0], s-hat incl. -- NOT the window; A270):** 2 start nodes left, 11 alive leaves (the next runs' start nodes), deepest branch 5, 2 run(s) over both pads for 0.51 CPU-h spent; ESTIMATE (not a bound) 0.07 CPU-h to close the start nodes now open at the g1 pad -- an UNDER-estimate: the start nodes still alive are the ones that already survived a full wall, and each survivor splits into several new start nodes.
 
 ## The 19 alive k5 gallery pages (18 nodes)
 
@@ -671,7 +671,19 @@ CPU-h in this block: 66.65
 
 ## Price and projection
 
-* gallery: 17 / 18 pages DEAD at the window pad, 8.84 CPU-h
-* frontier: 303 nodes run (300 DEAD at the window pad), 66.65 CPU-h; the census has 0 alive nodes, 0 remaining
+* gallery: 17 / 18 pages DEAD at the g1 pad (the G1 slab only), 8.84 CPU-h
+* frontier: 303 nodes run (300 DEAD at the g1 pad: dead on G1 = (3.861637, s0], s-hat incl.; nothing below it), 66.65 CPU-h; the census has 0 alive nodes, 0 remaining
 * PRICE over the first 20 frontier nodes: mean 537 s, median 444 s per node (both pads); PROJECTION for the remaining 0: 0.0 CPU-h (cap 200)
+
+## Per slab (A270) -- what is certified for k5_11 / k5_16 on G1-G4
+
+"census 0 alive" above is over A57 tree ROWS: A57's G1 cover has 290 level-1 boxes with NO row at all (the unfinished shard tails: k5_11 136, k5_16 154, plus 6 T5 trim pieces of closed untrimmed rows -- attempts/A270-k5-lower-slabs/results/cover270.json) and two k5_16 pages (Y1117, Y0436) closed only by pad-0 kills (s0 only); a g1-pad DEAD is a statement on G1 only.
+
+| class | G1 = (3.861637, s0], s-hat incl. | G2 = (3.847016, 3.861637] | G3 = (3.832450, 3.847016] | G4 = [3.82, 3.832450] |
+|---|---|---|---|---|
+| `k5_11` | **OPEN**: 126 cover box(es) with no G1 row / an s0-only kill, not yet DEAD at g4 | **OPEN**: 289 record(s) of tiers 1-2 left (A270 g4) | **OPEN**: 779 record(s) left + the NO-child LP | **OPEN**: 779 record(s) left + the NO-child LP |
+| `k5_16` | **OPEN**: 161 cover box(es) with no G1 row / an s0-only kill, not yet DEAD at g4 | **OPEN**: 370 record(s) of tiers 1-2 left (A270 g4) | **OPEN**: 876 record(s) left + the NO-child LP | **OPEN**: 876 record(s) left + the NO-child LP |
+| `trump5` | **OPEN**: A268's g1 verdicts ran on A60's 3e-8 records (s0-only); A269 re-emits | **OPEN** (A269 pad tube) | **OPEN** (A269) | **OPEN** (A269 pad window) |
+
+No kill on disk before A270 reaches below 3.851408 for these classes (every k5 record carries pin slack <= 1e-2).  Live: `attempts/A270-k5-lower-slabs/results/progress270.md`; the argument: `notes/slabs270.md`.
 
