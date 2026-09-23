@@ -1,0 +1,32 @@
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A270-k5-lower-slabs\code\run270.py", line 63, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A270-k5-lower-slabs\code\run270.py", line 57, in main
+    runpy.run_path(sys.argv[0], run_name="__main__")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 426, in <module>
+    run_page(doc, a, cert)
+    ~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 362, in run_page
+    s0 = stage209.stage0(a.nid, pad, log=log)
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\stage209.py", line 60, in stage0
+    out = s0.run()
+  File "C:\Users\esumm\code\packing\attempts\A203-csp-consistency\code\fast30.py", line 186, in run
+    return self.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A203-csp-consistency\code\fast30.py", line 217, in result
+    return CT.certificate(self)
+           ~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A203-csp-consistency\code\cert203.py", line 54, in certificate
+    for pc in st.alive[p]:
+              ~~~~~~~~^^^
+KeyError: 'BL(1,0)'
+BENCH rc=1 1 s
