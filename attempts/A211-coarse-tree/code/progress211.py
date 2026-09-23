@@ -51,9 +51,9 @@ def alive_block(L2, per, gnodes):
             tot["wall"] += st["wall_total"] / 3600.0
             tot["runs"] += st["n_runs"]
     L2.append("")
-    L2.append("**TOTAL over the %d alive k5 gallery pages (window pad):** %d start nodes left, %d alive leaves (the next runs' "
+    L2.append("**TOTAL over the %d alive k5 gallery pages (g1 pad = A57's G1 slab (3.861637, s0], s-hat incl. -- NOT the window; A270):** %d start nodes left, %d alive leaves (the next runs' "
               "start nodes), deepest branch %d, %d run(s) over both pads for %.2f CPU-h spent; ESTIMATE (not a bound) %.2f CPU-h "
-              "to close the start nodes now open at the window pad -- an UNDER-estimate: the start nodes still alive are the ones "
+              "to close the start nodes now open at the g1 pad -- an UNDER-estimate: the start nodes still alive are the ones "
               "that already survived a full wall, and each survivor splits into several new start nodes."
               % (len(alive), tot["left"], tot["leaves"], tot["depth"], tot["runs"], tot["wall"], tot["est"]))
     L2.append("")
@@ -74,7 +74,7 @@ def main():
     L2 = ["# A211 progress -- %s" % time.strftime("%Y-%m-%d %H:%M:%S"), "",
           "The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); "
           "at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  "
-          "Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.", ""]
+          "Pad 0 FIRST then the g1 pad (lam = s0/3.861637: A57's G1 slab (3.861637, s0], s-hat included -- NOT the window [3.82, s0]; A270); wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.", ""]
 
     def table(nodes, title):
         L2.append("## %s (%d nodes)" % (title, len(nodes)))
@@ -110,12 +110,12 @@ def main():
     kills_f = sum(1 for n in fnodes if (per[n].get("g1") or {}).get("verdict") == "DEAD")
     L2.append("## Price and projection")
     L2.append("")
-    L2.append("* gallery: %d / %d pages DEAD at the window pad, %.2f CPU-h" % (kills_g, len(gnodes), tg / 3600))
+    L2.append("* gallery: %d / %d pages DEAD at the g1 pad (the G1 slab only), %.2f CPU-h" % (kills_g, len(gnodes), tg / 3600))
     if fnodes:
         first = secs[:20]
         mean, med = statistics.mean(first), statistics.median(first)
         proj = mean * len(remaining) / 3600
-        L2.append("* frontier: %d nodes run (%d DEAD at the window pad), %.2f CPU-h; the census has %d alive nodes, %d remaining" % (len(fnodes), kills_f, tf / 3600, len(census), len(remaining)))
+        L2.append("* frontier: %d nodes run (%d DEAD at the g1 pad: dead on G1 = (3.861637, s0], s-hat incl.; nothing below it), %.2f CPU-h; the census has %d alive nodes, %d remaining" % (len(fnodes), kills_f, tf / 3600, len(census), len(remaining)))
         L2.append("* PRICE over the first %d frontier nodes: mean %.0f s, median %.0f s per node (both pads); PROJECTION for the remaining %d: %.1f CPU-h (cap %.0f)" % (len(first), mean, med, len(remaining), proj, CAP_CPUH))
         if len(first) >= 20 and proj > CAP_CPUH and not os.path.exists(os.path.join(HERE, "..", "logs", "FRONTIER_STOPPED")):
             # the frontier STOP fired once (2026-09-13 20:22, projection 236 CPU-h); the marker keeps it from re-firing
@@ -127,6 +127,18 @@ def main():
     else:
         L2.append("* frontier: not started; the census has %d alive nodes (%s)" % (len(census), dict(collections.Counter(c["tree"] for c in census))))
     L2.append("")
+    # A270 (2026-09-23): the per-slab line.  load211.census() reads A57 tree ROWS only: a cover box whose shard never
+    # reached it has no row, and a gallery page moved to killed/ by a pad-0 (s0-only) kill counts as closed there.
+    b270 = os.path.join(HERE, "..", "..", "A270-k5-lower-slabs", "results", "slabs270_board.md")
+    if os.path.exists(b270):
+        L2.append("## Per slab (A270) -- what is certified for k5_11 / k5_16 on G1-G4")
+        L2.append("")
+        L2.append("\"census 0 alive\" above is over A57 tree ROWS: A57's G1 cover has 290 level-1 boxes with NO row at all (the unfinished "
+                  "shard tails: k5_11 136, k5_16 154, plus 6 T5 trim pieces of closed untrimmed rows -- attempts/A270-k5-lower-slabs/results/cover270.json) and two k5_16 pages "
+                  "(Y1117, Y0436) closed only by pad-0 kills (s0 only); a g1-pad DEAD is a statement on G1 only.")
+        L2.append("")
+        L2 += open(b270, encoding="utf-8").read().splitlines()
+        L2.append("")
     with open(OUT, "w", encoding="utf-8") as f:
         f.write("\n".join(L2) + "\n")
     print("progress: %d gallery, %d frontier nodes; %.1f CPU-h" % (len(gnodes), len(fnodes), (tg + tf) / 3600))

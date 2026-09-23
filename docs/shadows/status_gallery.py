@@ -286,6 +286,31 @@ def load_a57_corpus():
 
 
 # ---------------------------------------------------------------------------
+# A270 (2026-09-23): the SLAB a page's displayed kill covers, and the per-class per-slab block.  A kill is a statement
+# about the slab its hypothesis reaches (attempts/A270-k5-lower-slabs/notes/slabs270.md s.1): a chain page kill at
+# the g1 pad on an A57 record (pins +-1e-2) covers G1 = (3.861637, s0], s-hat included; a pad-0 kill covers s0 only
+# (WINDOW-PENDING); A57's LP / T5 leaves at pin cores 49/100 cover G1 (Corollary B' with A_S = 3/2); anything else is
+# shown as '?' (its own certificate decides).  Display only: never a verdict, never moves a page.
+# ---------------------------------------------------------------------------
+A270_BOARD = os.path.join(ROOT, "attempts", "A270-k5-lower-slabs", "results", "slabs270_board.md")
+
+
+def a270_slab(rec):
+    if not rec:
+        return "--"
+    t = " ".join(str(rec.get(k) or "") for k in ("leaf", "note", "source", "attempt"))
+    if re.search(r"s0-only|WINDOW-PENDING|zero pad|\[pad 0|pad 0 \(lam = 1\)", t):
+        return "s0 only"
+    if re.search(r"\bg1 pad|the g1 pad|stage1-propagation; g1|window pad", t):
+        return "G1"
+    if re.search(r"pad g4|g4 pad|_r270w4", t):
+        return "G1-G4"
+    if re.search(r"case-measure-certificate|PASS --|pin-clip|KILL-BY-LOGIC|tight common-inscribed", t):
+        return "G1"
+    return "?"
+
+
+# ---------------------------------------------------------------------------
 # the kill table
 # ---------------------------------------------------------------------------
 
@@ -1539,6 +1564,14 @@ def write_status(galleries, verdicts, table, paused, clip_n, dry):
     w(para)
     w("")
 
+    # ---- A270: per slab ------------------------------------------------
+    if os.path.exists(A270_BOARD):
+        w("### Per slab (A270: what is certified for k5_11 / k5_16 / trump5 on G1-G4)")
+        w("")
+        for ln in io.open(A270_BOARD, encoding="utf-8").read().splitlines():
+            w(ln)
+        w("")
+
     # ---- counts --------------------------------------------------------
     w("## Counts")
     w("")
@@ -1584,10 +1617,10 @@ def write_status(galleries, verdicts, table, paused, clip_n, dry):
         w("## Checklist -- `%s`: %s" % (g["name"], g["title"]))
         w("")
         w(
-            "| page | node | class | level | family | status | leaf | attempt | date | "
+            "| page | node | class | level | family | status | slab (A270) | leaf | attempt | date | "
             "subtree cost (CPU-h, A142 rank) |"
         )
-        w("|---|---|---|---|---|---|---|---|---|---|")
+        w("|---|---|---|---|---|---|---|---|---|---|---|")
         for p in sorted(
             g["pages"], key=lambda q: (verdicts[(g["name"], q["file"])][0] != "DEAD", q["node"])
         ):
@@ -1600,7 +1633,7 @@ def write_status(galleries, verdicts, table, paused, clip_n, dry):
             if prog:
                 leafcell = md_escape(prog) if not rec else (leafcell + " -- " + md_escape(prog))
             w(
-                "| %s [`%s`](%s) | `%s` | `%s` | %s | `%s` | **%s** | %s | %s | %s | %s%s |"
+                "| %s [`%s`](%s) | `%s` | `%s` | %s | `%s` | **%s** | %s | %s | %s | %s | %s%s |"
                 % (
                     box,
                     p["file"],
@@ -1610,6 +1643,7 @@ def write_status(galleries, verdicts, table, paused, clip_n, dry):
                     p["level"],
                     p["family"],
                     st,
+                    (a270_slab(rec) if st == "DEAD" else "--"),
                     leafcell,
                     rec["attempt"] if rec else ("A211" if prog else "--"),
                     rec["date"] if rec else (pdate or "--"),
