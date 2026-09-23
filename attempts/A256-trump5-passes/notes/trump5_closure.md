@@ -120,6 +120,17 @@ to bind on the frontier records too, not only on the PASS leaves.
 | **O5** | the **audit** of A256's DEAD leaves (A211 S7 runs `audit211` per shard) | **[C]** | `audit211.py` reads A211's own certs/results; A256's worker skips it deliberately rather than write into A211's tree |
 | **O6** | Lean: the tube obligation | **[C]** | `lean/tube_obligation_A83.md` (~400 lines, no new analysis) |
 
+**A269 update (2026-09-23, `attempts/A269-trump5-reemit/notes/trump5_row.md`).**
+
+| id | status after A269 |
+|---|---|
+| O1 | **149 records re-emitted** (`attempts/A269-trump5-reemit/records/`, A60's files untouched): `*_r269a` at delta_pin 9/500 for pad A `tube` (lam 969271/958021, slab (3.832084, s0], the tube slab) and `*_r269b` at **9/400** for pad B `window` (lam 969271/955000, (3.82, s0]) -- 1.8e-2 is NOT enough at pad B (drift 0.0224152).  Class (b) = 0 at both pads, so pad B alone is the full-window statement per root; benchmark 10 roots x 2 pads **20/20 DEAD in one wall**, ~12 CPU-h per pad; pad B launched over all 149.  Still open under O1: A60's ladder kills and 49 PASS leaves at slack pins, and the Trump-containing (D) branch (TUBE-KILL on pad A + a re-centred sub-slab record) |
+| O2 | superseded for the window: the s0 row (pad 0) is closed (A256 pass 12); the window row runs on the re-emitted records |
+| O3 | unchanged [C] |
+| O4 | closed (A257); A269 also found that this file's `--tube` (run256.install_tube) recurses -- run269 installs Tree257 through a proxy |
+| O5 | unchanged [C]: A269's DEAD leaves are not audited by audit211 either |
+| O6 | unchanged [C] |
+
 **Verdict on the seam (the brief's question).**  delta_basin(trump5) = 0.0257 at delta_pin = 1e-2 is **[T]**
 (Lemma SEAM + the certified tube).  delta_LP(trump5) is **[C]** -- never scanned.  So the seam is an **obligation,
 not a closed link**, and it is not even the first one: O1 (the pin slack of A60's records) blocks every window

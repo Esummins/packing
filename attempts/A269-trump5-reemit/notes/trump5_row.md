@@ -72,3 +72,71 @@ Tree257 call their base as `N11.Tree211.<method>(self, ...)` through that module
 (`__init__` first) recurses into itself: the tube tree has never run through run211.  `run269.setup` points
 `tree256.N11` / `tree257.N11` at a proxy whose Tree211 is the real class (leaf268's wrapper already installed on it)
 and only then rebinds `tree211.Tree211` to Tree257 -- verified end to end on c0_Y0169_r269b (51 nodes, 120 s).
+
+## 4. [M] The benchmark (10 roots x 2 pads, pass 1) and the price
+
+Ten roots of A256's triage, 6 of A212's 84 ALIVE (c0_Y0208, Y0263, Y0442, Y0698, Y0877, Y1033) and 4 of its 65 DEAD
+(c0_Y0165, Y0270, Y0950, Y1132), each at pad B (`*_r269b`) and pad A (`*_r269a`), one 1,800 s wall, 4 workers,
+count268 + leaf268 + Tree257 ON (`results/terminal269.jsonl`, `results/ran269.txt`, `logs/runs/`):
+
+| | pad B `window` | pad A `tube` |
+|---|---|---|
+| DEAD in ONE wall | **10 / 10** | **10 / 10** |
+| tree seconds, sum / mean / max | 2,521 / 252 / 543 | 2,398 / 240 / 534 |
+| worker wall per root incl. stage 0 + verify, mean | 287 s | 277 s |
+| count268: INFEASIBLE (dumps VERIFIED by verify268) | 31 (31 / 0 failed) | 32 (32 / 0 failed) |
+| capped counts / forced ROLE-SPLITs | 0 / 0 | 0 / 0 |
+| gate evaluations / gate hits / TUBE-KILL | 1,093 nodes over both pads / **0** / 0 | |
+
+Pad B is no harder than pad A here (+5 % time): the larger lam and the 9/400 pins cost little.  **Price** (benchmark
+mean, 4 workers): **149 x 287 s = 11.9 CPU-h per pad, 23.4 CPU-h for 149 x 2 pads**; ceiling if every root used its
+whole wall once: 74.5 CPU-h per pad.  Under the 150 CPU-h gate either way.
+
+## 5. What is launched, how to stop it, how to resume
+
+Pad B only, over the 139 roots not yet closed (the 10 benchmark records are closed at both pads):
+
+    (cd /c/Users/esumm/code/packing && nohup bash attempts/A269-trump5-reemit/code/loop269.sh 4 1800 window \
+         > attempts/A269-trump5-reemit/logs/loop269.log 2>&1 &)
+
+Pad A is **not** launched: every root is class (a) (s.3), so a pad-B DEAD already implies it (s.1), and a pad-A DEAD
+alone is not a window statement for (3.82, 3.832084].  It is the fallback for any root pad B leaves STALLED:
+`loop269.sh 4 1800 tube <comma list of sources>`.
+**STOP:** `touch attempts/A269-trump5-reemit/logs/STOP_LOOP` (loop, top of next pass) / `.../logs/STOP` (workers, after
+their current start node).  **RESUME:** `rm -f` both STOP files and relaunch the same line: the pass number continues
+from `results/ran269.txt`, the queue is rebuilt from the certificates (Lemma INHERIT / PAR), STALLED start nodes
+(`results/stalled269.txt`) are never requeued, a crash (`results/crashed269.txt`) is not a pass.
+Progress: `results/progress.md` (rewritten every pass).
+
+## 6. The row, stated exactly -- and what it still needs  [T] conditional / [C]
+
+**When every `<r>_r269b` record is DEAD at pad B** (`results/progress.md`: window CLOSED = 149), the statement is:
+
+> **no packing of eleven unit squares at any side m in (3.82, s0] with trump5's five class pins has its H square in
+> the H box(es) of any of the 149 A60 records** -- by the 149 pad-B certificates `certs/coarsetree211_<r>_r269b*.json`
+> (A211 chain: Lemma CT, INHERIT, ROLE-SPLIT, CORNER-COVER, FC, the exact cascade; [C: closed-form / library clip trace]
+> as A211 S7, audited by nothing yet -- O5), the JOINT COUNT kills decided by count268 each with its verify268 clause,
+> HYP(r, 9/400, s0/3.82) of s.1 (Corollary B' with drift 0.0224152 < 9/400).
+
+That is **not yet the trump5 full-window row**.  The row also needs, for the rest of trump5's H-space (every part of
+the class the 149 records do not cover):
+1. **A60's ladder kills above the frontier**, proved at delta_pin = 3.08e-8 -- re-proved at 9/400, pad B (~818 node
+   records; A257 priced 20-25 CPU-h; at this benchmark's rates probably less).  [C]
+2. **A60's 49 PASS (K) leaves** re-certified at slack pins (13.3 CPU-h at 1e-2, A257) -- or, cheaper, re-run as
+   ordinary A211 roots at pad B like the 149 here.  [C]
+3. **The Trump-containing branch** (A60's (D) side: the only class-(b) part of trump5, since all 149 are (a)):
+   TUBE-KILL on pad A at 9/500 (T' = 0.0449996 <= T_tube = 9/200 <= T_K = 0.0459729) gives no packing at m < s-hat
+   and **uniqueness at s-hat** (Theorem T1's equality clause, `certs/verify_tubekill257.py`); the remaining slab
+   (3.82, 3.832084] of that branch needs a record whose cores EXCLUDE m = s-hat (re-centred cores, s.1).  [C]
+4. O5 (A211's audit on the DEAD leaves) and O3 (trump5's own delta_LP) as in A256.
+Uniqueness at s-hat therefore comes from item 3, not from this run.
+
+## 7. What the brief had wrong
+
+* **Pad B at 1.8e-2 is not a window statement.**  The drift at lam_B = s0/3.82 is 0.0224152 > 1.8e-2; with the same
+  records pad B only reaches 3.83111.  Pad B needs its own records at >= 0.0224152 (9/400 here) -- and then pad B
+  ALONE covers (3.82, s0] for every class-(a) root, so "pad A then pad B" is backwards: B first, A only for class (b).
+* **"class (b) may now be non-empty with slack pins"** -- it is empty at both pads (s.3); the H boxes decide it.
+* **The price.**  "70-140 CPU-h per slab" (A257) -> measured ~12 CPU-h per pad: every benchmark root died in one wall
+  (the A268 levers + A220/A224 remove the capped-count wall that dominated A212's 47.6 CPU-h pass).
+* **A256's `--tube` cannot run** (s.3: the Tree211 rebinding recurses) -- a fourth defect beside A257's three.

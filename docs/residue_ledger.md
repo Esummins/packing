@@ -741,6 +741,8 @@ for every k0 packing of the window, geometric, untested below side 3.89.
 
 **[T]/[M] A268 (2026-09-23) - TERMINAL LEAVES (attempts/A268-terminal-leaves/notes/terminal268.md).**  The k5 / trump5 terminal walls were 99.4-99.8 % CAPPED JOINT COUNTS (no claim).  **Lemma COUNT-PRUNE [T]** makes the count exhaustive in practice (count268, own verifier clause verify268): the k5 residue's ONE live start node (Y0384 g1) is JOINT-COUNT infeasible -- DEAD, VERIFIED.  trump5 pad 0 has no start node left (A256 pass 12); the g1 window pad (84 roots) was never run and is now in A268's loop.  Seam far siblings: fixed points closed by a forced Lemma ROLE-SPLIT (R.1.2.1 DEAD).  Verdicts land from the loop's certificates.
 
+**[T]/[M] A269 (2026-09-23) - TRUMP5 RE-EMITTED AT SLACK PINS (attempts/A269-trump5-reemit/notes/trump5_row.md).**  The 149 A60 trump5 records are re-emitted (A60 untouched) with pin cores 9/500 for pad A (lam 969271/958021, the tube slab (3.832084, s0]) and **9/400** for pad B (lam 969271/955000, (3.82, s0]): 1.8e-2 is NOT a window statement at pad B (drift (lam_B - 1)3/2 = 0.0224152).  Nothing inherits from the tight-pin certificates.  Class (b) = 0 at both pads, so a pad-B DEAD is the full-window statement per record (and implies pad A).  Benchmark: 10 roots x 2 pads, 20/20 DEAD in one 1800 s wall (~12 CPU-h per pad for 149); pad-B loop launched over all 149.  The trump5 row still needs A60's ladder kills + 49 PASS leaves at slack pins and the Trump (D) branch (TUBE-KILL on pad A, uniqueness at s-hat).
+
 
 ## 5. Lean / TCB
 
