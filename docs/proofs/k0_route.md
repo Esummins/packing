@@ -732,6 +732,14 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        sliver) — they are RING-level facts; STRIP₂ itself is [M] true on every violator (`probe271`, sup t → 0 only as
        h_v → 1).  So 5b = STRIP₂-IN-JAM [T-prose: H1–H3 + (U3)–(U6) + (U8)] + the five ring inequalities on the JAM-ring
        family [M; ~10³ CPU-h as a corner-local residual, not launched] + `pair3` (not landed).
+       **A272 (`strip_jam.md`)**: on every violator the square's best attempt is stopped by X's RIGHT BOUNDARY
+       shadowing T_u's top (C never active; sup t = −0.017 over H1–H3, at X FLAT, `left272`); the problem reduces [T]
+       to the DISC LEMMA (a point q above L_h at distance ≥ ½ from the convex sets Ξ = left of X's right boundary and
+       Γ = right of C's left boundary, within 1/√2 of the strip: impossible), tilt-free, five parameters — [M] on all
+       of H1–H3 (sup slack −0.005, only as h_v → 1), NOT proved; the case q_y > X_top with Q left of X is dead by
+       Lemma CL [T] (so (U8) is folded, never assumed).  So 5b = STRIP₂-IN-JAM [T-prose under (U3)–(U6)+(U8) OR under
+       the DISC LEMMA; Lean `strip_two_in_jam_of_disc`] + the disc lemma's certificate [~20 CPU-h on R, ~10² on H1–H3,
+       not launched] or a proof + `pair3` (not landed).
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
