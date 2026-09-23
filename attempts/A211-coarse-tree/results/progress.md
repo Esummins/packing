@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-23 12:25:07
+# A211 progress -- 2026-09-23 12:30:27
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the G1 window pad; wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -292,7 +292,7 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y0977 | zero | 2 (tree: 4 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 18 |
 | k5_11_interior_Y0978 | g1 | 2 (tree: 80 nodes, depth 8, CC 5, exact 0, NS 4, pockets 8) | DEAD | 376 |
 | k5_11_interior_Y0978 | zero | 2 (tree: 72 nodes, depth 8, CC 4, exact 0, NS 4, pockets 7) | DEAD (s0-only, WINDOW-PENDING) | 300 |
-| k5_11_interior_Y0954 | g1 | 2 (tree: 12 nodes, depth 3, CC 0, exact 0, NS 0, pockets 3) | ALIVE | 182 |
+| k5_11_interior_Y0954 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_11_interior_Y0954 | zero | 2 (tree: 8 nodes, depth 2, CC 0, exact 0, NS 0, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 66 |
 | k5_11_interior_Y0976 | g1 | 2 (tree: 126 nodes, depth 7, CC 2, exact 0, NS 1, pockets 24) | DEAD | 856 |
 | k5_11_interior_Y0976 | zero | 2 (tree: 113 nodes, depth 7, CC 2, exact 0, NS 1, pockets 23) | DEAD (s0-only, WINDOW-PENDING) | 751 |
@@ -336,7 +336,7 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y1122 | zero | 0 | DEAD (s0-only, WINDOW-PENDING) | 18 |
 | k5_11_interior_Y1127 | g1 | 2 (tree: 14 nodes, depth 1, CC 0, exact 0, NS 0, pockets 0) | DEAD | 42 |
 | k5_11_interior_Y1127 | zero | 2 (tree: 14 nodes, depth 1, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 42 |
-| k5_11_interior_Y1103 | g1 | 2 (tree: 11 nodes, depth 2, CC 0, exact 0, NS 0, pockets 2) | ALIVE | 111 |
+| k5_11_interior_Y1103 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_11_interior_Y1103 | zero | 2 (tree: 17 nodes, depth 3, CC 0, exact 0, NS 0, pockets 4) | DEAD (s0-only, WINDOW-PENDING) | 169 |
 | k5_11_interior_Y1132 | g1 | 0 | DEAD | 19 |
 | k5_11_interior_Y1132 | zero | 0 | DEAD (s0-only, WINDOW-PENDING) | 18 |
@@ -350,7 +350,7 @@ CPU-h in this block: 8.84
 | k5_11_interior_Y1128 | zero | 2 (tree: 190 nodes, depth 7, CC 9, exact 0, NS 5, pockets 34) | DEAD (s0-only, WINDOW-PENDING) | 1217 |
 | k5_11_interior_Y1150 | g1 | 2 (tree: 25 nodes, depth 2, CC 4, exact 0, NS 0, pockets 0) | DEAD | 49 |
 | k5_11_interior_Y1150 | zero | 2 (tree: 20 nodes, depth 2, CC 3, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 41 |
-| k5_11_interior_Y1108 | g1 | 2 (tree: 17 nodes, depth 3, CC 0, exact 0, NS 0, pockets 4) | ALIVE | 158 |
+| k5_11_interior_Y1108 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_11_interior_Y1108 | zero | 2 (tree: 10 nodes, depth 2, CC 0, exact 0, NS 0, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 59 |
 | k5_11_interior_Y0119_D06__L1 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_11_interior_Y0119_D06__L1 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 1 |
@@ -450,11 +450,11 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0256 | zero | 2 (tree: 40 nodes, depth 6, CC 0, exact 0, NS 8, pockets 4) | DEAD (s0-only, WINDOW-PENDING) | 182 |
 | k5_16_interior_Y0279 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 1 |
 | k5_16_interior_Y0279 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 2 |
-| k5_16_interior_Y0127 | g1 | 2 (tree: 2 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 30 |
+| k5_16_interior_Y0127 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_16_interior_Y0127 | zero | 2 (tree: 119 nodes, depth 8, CC 0, exact 0, NS 7, pockets 18) | DEAD (s0-only, WINDOW-PENDING) | 1784 |
-| k5_16_interior_Y0130 | g1 | 2 (tree: 3 nodes, depth 1, CC 0, exact 0, NS 1, pockets 0) | ALIVE | 958 |
+| k5_16_interior_Y0130 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_16_interior_Y0130 | zero | 2 (tree: 35 nodes, depth 2, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 182 |
-| k5_16_interior_Y0186 | g1 | 2 (tree: 3 nodes, depth 1, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 770 |
+| k5_16_interior_Y0186 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_16_interior_Y0186 | zero | 2 (tree: 7 nodes, depth 2, CC 0, exact 0, NS 1, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 1505 |
 | k5_16_interior_Y0281 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 2 |
 | k5_16_interior_Y0281 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 3 |
@@ -462,7 +462,7 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0290 | zero | 2 (tree: 112 nodes, depth 5, CC 0, exact 0, NS 0, pockets 4) | DEAD (s0-only, WINDOW-PENDING) | 299 |
 | k5_16_interior_Y0308 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 1 |
 | k5_16_interior_Y0308 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 2 |
-| k5_16_interior_Y0280 | g1 | 2 (tree: 61 nodes, depth 5, CC 0, exact 0, NS 6, pockets 11) | ALIVE | 640 |
+| k5_16_interior_Y0280 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_16_interior_Y0280 | zero | 2 (tree: 60 nodes, depth 5, CC 0, exact 0, NS 6, pockets 10) | ALIVE | 567 |
 | k5_16_interior_Y0358 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 2 |
 | k5_16_interior_Y0358 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 3 |
@@ -476,7 +476,7 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0414 | zero | 2 (tree: 48 nodes, depth 6, CC 0, exact 0, NS 4, pockets 3) | DEAD (s0-only, WINDOW-PENDING) | 207 |
 | k5_16_interior_Y0376 | g1 | 2 (tree: 7 nodes, depth 2, CC 0, exact 0, NS 0, pockets 1) | DEAD | 57 |
 | k5_16_interior_Y0376 | zero | 2 (tree: 224 nodes, depth 10, CC 0, exact 9, NS 19, pockets 16) | DEAD (s0-only, WINDOW-PENDING) | 1702 |
-| k5_16_interior_Y0384 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | ALIVE (wall) | 2808 |
+| k5_16_interior_Y0384 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 10 |
 | k5_16_interior_Y0384 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 4 |
 | k5_16_interior_Y0422 | g1 | 2 (tree: 58 nodes, depth 5, CC 0, exact 0, NS 1, pockets 5) | DEAD | 295 |
 | k5_16_interior_Y0422 | zero | 2 (tree: 51 nodes, depth 4, CC 0, exact 0, NS 0, pockets 4) | DEAD (s0-only, WINDOW-PENDING) | 244 |
@@ -504,11 +504,11 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0495 | zero | 2 (tree: 3 nodes, depth 1, CC 0, exact 0, NS 0, pockets 0) | ALIVE | 741 |
 | k5_16_interior_Y0513 | g1 | 2 (tree: 7 nodes, depth 2, CC 0, exact 0, NS 0, pockets 1) | DEAD | 61 |
 | k5_16_interior_Y0513 | zero | 2 (tree: 233 nodes, depth 9, CC 0, exact 34, NS 15, pockets 10) | DEAD (s0-only, WINDOW-PENDING) | 1731 |
-| k5_16_interior_Y0517 | g1 | 2 (tree: 33 nodes, depth 3, CC 0, exact 0, NS 0, pockets 3) | ALIVE | 223 |
+| k5_16_interior_Y0517 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_16_interior_Y0517 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 15 |
 | k5_16_interior_Y0559 | g1 | 2 (tree: 219 nodes, depth 7, CC 0, exact 0, NS 24, pockets 27) | DEAD | 1558 |
 | k5_16_interior_Y0559 | zero | 2 (tree: 217 nodes, depth 7, CC 0, exact 0, NS 23, pockets 26) | DEAD (s0-only, WINDOW-PENDING) | 1330 |
-| k5_16_interior_Y0540 | g1 | 2 (tree: 12 nodes, depth 4, CC 0, exact 0, NS 2, pockets 2) | ALIVE | 1055 |
+| k5_16_interior_Y0540 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_16_interior_Y0540 | zero | 2 (tree: 10 nodes, depth 4, CC 0, exact 0, NS 2, pockets 2) | ALIVE | 267 |
 | k5_16_interior_Y0568 | g1 | 2 (tree: 55 nodes, depth 4, CC 0, exact 0, NS 3, pockets 2) | DEAD | 212 |
 | k5_16_interior_Y0568 | zero | 2 (tree: 59 nodes, depth 4, CC 0, exact 0, NS 1, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 120 |
@@ -556,13 +556,13 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0672 | zero | 2 (tree: 9 nodes, depth 3, CC 0, exact 0, NS 4, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 1231 |
 | k5_16_interior_Y0727 | g1 | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 0 |
 | k5_16_interior_Y0727 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 1 |
-| k5_16_interior_Y0687 | g1 | 2 (tree: 162 nodes, depth 11, CC 0, exact 8, NS 16, pockets 6) | ALIVE | 1304 |
+| k5_16_interior_Y0687 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 1 |
 | k5_16_interior_Y0687 | zero | 2 (tree: 120 nodes, depth 11, CC 0, exact 6, NS 14, pockets 6) | ALIVE | 844 |
 | k5_16_interior_Y0735 | g1 | 2 (tree: 84 nodes, depth 4, CC 0, exact 0, NS 0, pockets 5) | DEAD | 505 |
 | k5_16_interior_Y0735 | zero | 2 (tree: 75 nodes, depth 4, CC 0, exact 0, NS 0, pockets 4) | DEAD (s0-only, WINDOW-PENDING) | 390 |
-| k5_16_interior_Y0702 | g1 | 2 (tree: 231 nodes, depth 14, CC 0, exact 26, NS 15, pockets 6) | ALIVE | 1710 |
+| k5_16_interior_Y0702 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 1 |
 | k5_16_interior_Y0702 | zero | 2 (tree: 213 nodes, depth 14, CC 0, exact 22, NS 15, pockets 6) | ALIVE | 1790 |
-| k5_16_interior_Y0713 | g1 | 2 (tree: 119 nodes, depth 5, CC 0, exact 0, NS 6, pockets 15) | ALIVE | 700 |
+| k5_16_interior_Y0713 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 1 |
 | k5_16_interior_Y0713 | zero | 2 (tree: 121 nodes, depth 5, CC 0, exact 0, NS 7, pockets 15) | ALIVE | 712 |
 | k5_16_interior_Y0743 | g1 | 2 (tree: 120 nodes, depth 7, CC 0, exact 0, NS 5, pockets 11) | DEAD | 620 |
 | k5_16_interior_Y0743 | zero | 2 (tree: 111 nodes, depth 7, CC 0, exact 0, NS 7, pockets 10) | DEAD (s0-only, WINDOW-PENDING) | 898 |
@@ -570,7 +570,7 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0745 | zero | 2 (tree: 1 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 2 |
 | k5_16_interior_Y0752 | g1 | 2 (tree: 39 nodes, depth 6, CC 0, exact 0, NS 2, pockets 4) | DEAD | 156 |
 | k5_16_interior_Y0752 | zero | 2 (tree: 33 nodes, depth 5, CC 0, exact 0, NS 2, pockets 0) | DEAD (s0-only, WINDOW-PENDING) | 88 |
-| k5_16_interior_Y0738 | g1 | 2 (tree: 117 nodes, depth 5, CC 0, exact 0, NS 2, pockets 12) | ALIVE | 625 |
+| k5_16_interior_Y0738 | g1 | 2 (tree: 0 nodes, depth 0, CC 0, exact 0, NS 0, pockets 0) | DEAD | 1 |
 | k5_16_interior_Y0738 | zero | 2 (tree: 38 nodes, depth 3, CC 0, exact 0, NS 0, pockets 7) | ALIVE | 278 |
 | k5_16_interior_Y0803 | g1 | 2 (tree: 81 nodes, depth 8, CC 0, exact 0, NS 11, pockets 6) | DEAD | 347 |
 | k5_16_interior_Y0803 | zero | 2 (tree: 54 nodes, depth 6, CC 0, exact 0, NS 2, pockets 1) | DEAD (s0-only, WINDOW-PENDING) | 151 |
@@ -667,11 +667,11 @@ CPU-h in this block: 8.84
 | k5_16_interior_Y0461__L1 | g1 | 2 (tree: 216 nodes, depth 5, CC 0, exact 0, NS 3, pockets 11) | DEAD | 820 |
 | k5_16_interior_Y0461__L1 | zero | 2 (tree: 210 nodes, depth 5, CC 0, exact 0, NS 4, pockets 11) | DEAD (s0-only, WINDOW-PENDING) | 660 |
 
-CPU-h in this block: 69.78
+CPU-h in this block: 66.65
 
 ## Price and projection
 
 * gallery: 17 / 18 pages DEAD at the window pad, 8.84 CPU-h
-* frontier: 303 nodes run (286 DEAD at the window pad), 69.78 CPU-h; the census has 14 alive nodes, 0 remaining
+* frontier: 303 nodes run (300 DEAD at the window pad), 66.65 CPU-h; the census has 0 alive nodes, 0 remaining
 * PRICE over the first 20 frontier nodes: mean 537 s, median 444 s per node (both pads); PROJECTION for the remaining 0: 0.0 CPU-h (cap 200)
 

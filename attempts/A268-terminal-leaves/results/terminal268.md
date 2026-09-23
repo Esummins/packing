@@ -48,3 +48,22 @@ median of the 6 roots ~490 s -> ~12 CPU-h expected), later passes on the ALIVE r
 `results/verify268.jsonl`.
 STOP: `touch attempts/A268-terminal-leaves/logs/STOP_LOOP` (after the pass) or `.../logs/STOP` (after each shard).
 RESUME: remove both, relaunch the same line (the pass number continues from `results/ran268.txt`).
+
+## 5. Follow-up (coordinator, 2026-09-23 ~13:00): the k5 fold
+
+* The loop was STOPPED by the coordinator (trump5 g1 ran on A60's delta_pin 3e-8 records: those verdicts are s0-only
+  per A256 O1; A269 re-emits the records).  Not relaunched.
+* The readers: fold211 folds the LAST `mode=page, pad=g1, verdict=DEAD` row per nid of A211 `results/coarsetree211.jsonl`
+  into `superseded_by_coarsetree_A211.jsonl`; load211.census / progress211 read that ledger.  Y0384's shard row
+  (12:25:45) was already DEAD; one supplementary row re-emits it with the COUNT268 clause appended to `verifier`
+  (`a268_supplement`, `a268_dump` = certs/count268_k5_16_interior_Y0384_bfecebcd18d63407.json, VERIFIED).
+* The census's 14 alive nodes = Y0384 + 13 roots whose g1 start nodes were ALL closed by per-start-node shards
+  (Lemma INHERIT (c) + PAR: 0 start nodes left in inherit211.merge) but which never had a page-level DEAD row (every
+  shard row is ALIVE with its siblings "SKIPPED (filter)").  A plain run211 merge run (`--pads g1 --cert-suffix
+  g1_merge268`, no start node to run) wrote each page's DEAD row, citing every inherited kill's certificate:
+  Y0954 (k5_11), Y1103, Y1108, and k5_16 Y0127, Y0130, Y0186, Y0280, Y0517, Y0540, Y0687, Y0702, Y0713, Y0738.
+* After fold211 + progress211: census 0 alive; frontier 300/303 DEAD rows (the 3 others are Y0738_D01-D03, closed
+  by the ancestor Y0738's kill); gallery 17/18 with Y1117 closed by docs/shadows/a57v4/killed.
+* rowcascade241 does NOT read A211 at all: its only row sources are (A) parametric window certificates and (B) the
+  Lemma K1 climb.  So k5_11 / k5_16 stay [OPEN] there until a source "(C) the A57 class tree closed at the g1
+  window pad" is admitted with its own soundness clause -- not added here.
