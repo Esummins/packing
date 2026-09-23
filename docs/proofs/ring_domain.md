@@ -59,7 +59,7 @@ derivation is a statement about the three squares A, C, X in the corner quadrant
 > **Statement (§5): STRIP₂-IN-JAM [T-prose].**  Under H1–H3 (a JAM corner at a side in [3.82, ŝ]) and the four
 > ring inequalities (U3)–(U6) + (U8), no unit square of the quadrant interior-disjoint from C and X has an interior
 > point in S.  Lean: `RingDomain` is no longer opaque — `JamCorner ∧ RingIneq`, with `strip_two_in_jam` the axiom
-> and `strip_two_in_ring_of_jam` the bridge; the five derived conditions are theorems (`derived_conditions`).
+> and `strip_two_in_ring_of_jam` the bridge; the derived conditions' arithmetic cores are theorems (`low_core`, `lh_gt_one`, `u1_core`, `u9_core`, `x_high`).
 > **NO-JAM(11) still lacks** (§6): `pair3` (A262 chain3, not landed), (U3)–(U6) + (U8) on the JAM rings as a ring-level
 > statement or the ~10³ CPU-h residual certificate, 5d, `jam_count`.
 
@@ -216,8 +216,7 @@ by s̄ − 1 ≥ m − 2 ≥ 3: every bound improves).
 ## 8. Lean, reproduce
 
 `Statements/Open/RingDomain.lean`: theorems `low_core`, `lh_gt_one` (Lemma LOW's arithmetic), `u1_core`, `u9_core`,
-`x_high` ((F1)); `JamCorner`, `RingIneq` opaque; `RingDomain` redefined as their conjunction (the five derived
-conditions are `derived_conditions`, a theorem from the cores stated on the parameters); axiom [T-prose]
-`strip_two_in_jam`; theorem `strip_two_in_ring_of_jam` (A267's `strip_in_ring_of_enclosure` with the new domain);
+`x_high` ((F1)); `JamCorner` (H1–H3), `RingIneq` ((U3)–(U6) + (U8)) opaque — together they replace A267's opaque `RingDomain`;
+axiom [T-prose] `strip_two_in_jam`; theorem `strip_two_in_ring_of_jam` (A267's `strip_in_ring_of_enclosure` with the new domain);
 build + audit 0 sorry.  Reproduce (each ≤ 6 min, `JAM_COARSE=1`): `python check271.py`, `python adv271.py 300`,
 `python probe271.py 360 two`, `python probe271.py 200 three`, `python mc271.py 20000 walk`, `python pages271.py`.

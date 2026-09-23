@@ -725,6 +725,13 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        cannot cross (depth ≤ w_max/2 ≤ 0.11 vs ≥ 0.30 to T_u's top edge; Lean `wedge_extent_core`), on an explicit
        ring domain (D1)–(D2), (U1)–(U9) holding on 43/43 JAM rings with positive margin (`hyp267`); off that
        domain STRIP₂ stays [T-computed*] (`strip266`).  So 5b = STRIP₂-IN-RING [T-prose] + `pair3` (not landed).
+       **A271 (`ring_domain.md`)**: of the ten domain conditions, (D1), (D2), (U1), (U2), (U9) are THEOREMS from the
+       JAM hypotheses H1–H3 (Lemma SLOPE + Lemma LOW: a floater sharing its box with a floor toucher has L_h ≥ 1.121;
+       BLOCKER-SIDE's mirror puts X above C's upper-left line; X_low > 1.406 from the window), (U8) is [M] positive
+       (margin 0.094) and **(U3)–(U6) are FALSE as consequences of H1–H5** (drawn: |φ − θ| ≥ 13°, X meeting T_u by a
+       sliver) — they are RING-level facts; STRIP₂ itself is [M] true on every violator (`probe271`, sup t → 0 only as
+       h_v → 1).  So 5b = STRIP₂-IN-JAM [T-prose: H1–H3 + (U3)–(U6) + (U8)] + the five ring inequalities on the JAM-ring
+       family [M; ~10³ CPU-h as a corner-local residual, not launched] + `pair3` (not landed).
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
