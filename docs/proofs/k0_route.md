@@ -719,6 +719,12 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        of a 0.005–0.02 margin), so launched BUDGETED on the six ring-relevant cells (150 000 boxes each, the rest
        OPEN 'budget', the index records the certified volume).  **And `pair3` has not started** (A262's chain3
        waits for search262, alive at exit): the BL sector is [T-computed*] on two chains.
+       **A267 (`strip_enclosure.md`): STRIP₂-IN-RING [T-prose]** — the corner-box entry is closed by Lemma
+       WEDGE-FLOAT [T] (no free square of the strip has its centre at or below height 1; needs neither A nor
+       WEDGED-SEAL; Lean `wedge_float_core`), the C–X entry is a WEDGE along C's upper-left edge that a poke
+       cannot cross (depth ≤ w_max/2 ≤ 0.11 vs ≥ 0.30 to T_u's top edge; Lean `wedge_extent_core`), on an explicit
+       ring domain (D1)–(D2), (U1)–(U9) holding on 43/43 JAM rings with positive margin (`hyp267`); off that
+       domain STRIP₂ stays [T-computed*] (`strip266`).  So 5b = STRIP₂-IN-RING [T-prose] + `pair3` (not landed).
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
@@ -772,8 +778,8 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
     §2.1 (i): SWAP-RIGIDITY k ≤ 3 [M], k ≥ 4 [C]) are outside this list.
 
 **Still [C] or waiting, exactly (A266, 2026-09-22):** 5a/5b `pair3` (A262's chain3: NOT STARTED — search262
-alive); 5b STRIP₂ for a tilted C on its true domain ([T-computed*] `strip266`, budgeted: the full tree is ~5·10³
-CPU-h; a hand proof is the cheaper route, §1.4 of `last_two.md` lists the cases); 5d (float262 / indirect jams,
+alive); 5b STRIP₂ off the ring domain ([T-prose] on it, A267 `strip_enclosure.md` §3; [T-computed*] `strip266`
+elsewhere, budgeted: the full tree is ~5·10³ CPU-h); 5d (float262 / indirect jams,
 in chain3); 6's Lean axiom `jam_count`; 8a–8b chains (A261 `cert261.jsonl`, A263's 492 slab jobs); 10a A259's
 tree (verify259 rerun alive), 10b A260's hybAB; 10c A263's P2 (cell 4,4 open at 10 947 s, index 36/42 ok) / WE (1
 cell) / WS (3 cells) chains and A265's lane (cells 3,5 / 3,6: `P2265_index.jsonl` has 3 rows at exit); 10d the
