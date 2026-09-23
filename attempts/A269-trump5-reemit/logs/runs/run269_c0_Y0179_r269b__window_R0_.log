@@ -1,0 +1,104 @@
+13:12:15 [w3] pass 2 start c0_Y0179_r269b window:R0+ wall 1800 (lab 7, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0179_r269b at the window pad: ALIVE in 26445 ms; kills {'H-clip': 0, 'P': 3412, 'W': 815, 'C': 872, 'M': 4205, 'L': 7, 'R': 3142, 'X': 923}; CSP units 69 -> 69 alive; caps {'BL(0,2)': 1, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': 1}; forced H ['BL(0,2)', 'TL(0,0)']
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT c0_Y0179_r269b pad window: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== c0_Y0179_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_c0_Y0179_r269b_window_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [1.31, 1.38, 2.498, 2.567, 41.112, 53.13]; forced H ['BL(0,2)', 'TL(0,0)']; 6 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (3.0 s, 1 rounds; t=3.0)
+   node R0+r1      d0 root<-None: INTERNAL (1.8 s, 1 rounds; t=4.9)
+   node R0+.1      d1 BL(1,1)<-[11]: INTERNAL (3.4 s, 1 rounds; t=8.3)
+   node R0+.1.1    d2 BR(0,1)<-[17]: DEAD by EmptyBox r1 (2.7 s, 1 rounds; t=11.1)
+   node R0+.1.2    d2 BR(0,1)<-[18]: INTERNAL (1.8 s, 1 rounds; t=12.9)
+   node R0+.1.2r1  d2 root<-None: INTERNAL (3.1 s, 1 rounds; t=16.0)
+   node R0+.1.2    d2: DEAD by CC -- rule CC at R0+.1.2 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.1.3    d2 BR(0,1)<-[21]: INTERNAL (2.0 s, 1 rounds; t=18.1)
+   node R0+.1.3.1  d3 TR(1,0)<-[14, 18]: DEAD by S-CLIP r1 (3.6 s, 1 rounds; t=21.7)
+   node R0+.1.3.2  d3 TR(1,0)<-[18, 19]: DEAD by EmptyBox r1 (1.5 s, 1 rounds; t=23.3)
+   node R0+.1.4    d2 BR(0,1)<-[22]: INTERNAL (1.7 s, 1 rounds; t=25.0)
+   node R0+.1.4.1  d3 TR(1,0)<-[14]: INTERNAL (1.8 s, 1 rounds; t=26.8)
+   node R0+.1.4.1  d3: DEAD by CC -- rule CC at R0+.1.4.1 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.1.4.2  d3 TR(1,0)<-[18]: INTERNAL (3.5 s, 1 rounds; t=30.6)
+   node R0+.1.4.2r1 d3 root<-None: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=30.9)
+   node R0+.1.4.3  d3 TR(1,0)<-[19]: INTERNAL (2.3 s, 1 rounds; t=33.3)
+   node R0+.1.4.3  d3: DEAD by CC -- rule CC at R0+.1.4.3 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.1.5    d2 BR(0,1)<-[23]: INTERNAL (1.3 s, 1 rounds; t=34.9)
+   node R0+.1.5r1  d2 root<-None: INTERNAL (2.0 s, 1 rounds; t=36.9)
+   node R0+.1.5    d2: DEAD by CC -- rule CC at R0+.1.5 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.2      d1 BL(1,1)<-[12]: INTERNAL (1.6 s, 1 rounds; t=38.6)
+   node R0+.2.1    d2 BR(0,1)<-[16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=38.8)
+   node R0+.2.2    d2 BR(0,1)<-[17]: DEAD by FC r1 (1.9 s, 1 rounds; t=40.8)
+   node R0+.2.3    d2 BR(0,1)<-[18]: INTERNAL (1.5 s, 1 rounds; t=42.3)
+   node R0+.2.3r1  d2 root<-None: INTERNAL (2.3 s, 1 rounds; t=44.7)
+   node R0+.2.3    d2: DEAD by CC -- rule CC at R0+.2.3 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.2.4    d2 BR(0,1)<-[21]: INTERNAL (2.2 s, 1 rounds; t=47.2)
+   node R0+.2.4.1  d3 TR(1,0)<-[14, 18]: DEAD by S-CLIP r1 (1.9 s, 1 rounds; t=49.2)
+   node R0+.2.4.2  d3 TR(1,0)<-[18, 19]: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=50.6)
+   node R0+.2.5    d2 BR(0,1)<-[22]: INTERNAL (1.8 s, 1 rounds; t=52.6)
+   node R0+.2.5.1  d3 TR(1,0)<-[14]: INTERNAL (1.5 s, 1 rounds; t=54.2)
+   node R0+.2.5.1  d3: DEAD by CC -- rule CC at R0+.2.5.1 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.2.5.2  d3 TR(1,0)<-[18]: DEAD by FC r1 (2.9 s, 1 rounds; t=57.4)
+   node R0+.2.5.3  d3 TR(1,0)<-[19]: INTERNAL (1.7 s, 1 rounds; t=59.2)
+   node R0+.2.5.3  d3: DEAD by CC -- rule CC at R0+.2.5.3 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.2.6    d2 BR(0,1)<-[23]: INTERNAL (1.3 s, 1 rounds; t=60.6)
+   node R0+.2.6r1  d2 root<-None: INTERNAL (2.2 s, 1 rounds; t=62.9)
+   node R0+.2.6    d2: DEAD by CC -- rule CC at R0+.2.6 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.3      d1 BL(1,1)<-[16]: INTERNAL (1.6 s, 1 rounds; t=64.7)
+   node R0+.3.1    d2 BR(0,1)<-[17]: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=65.2)
+   node R0+.3.2    d2 BR(0,1)<-[18]: INTERNAL (2.2 s, 1 rounds; t=67.5)
+   node R0+.3.2r1  d2 root<-None: INTERNAL (5.2 s, 1 rounds; t=72.8)
+   node R0+.3.2    d2: DEAD by CC -- rule CC at R0+.3.2 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.3.3    d2 BR(0,1)<-[21]: INTERNAL (2.8 s, 1 rounds; t=75.8)
+   node R0+.3.3.1  d3 TR(1,0)<-[14, 18]: DEAD by S-CLIP r1 (1.4 s, 1 rounds; t=77.3)
+   node R0+.3.3.2  d3 TR(1,0)<-[18, 19]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=77.7)
+   node R0+.3.4    d2 BR(0,1)<-[22]: INTERNAL (2.0 s, 1 rounds; t=79.9)
+   node R0+.3.4.1  d3 TR(1,0)<-[14]: INTERNAL (2.6 s, 1 rounds; t=82.6)
+   node R0+.3.4.1  d3: DEAD by CC -- rule CC at R0+.3.4.1 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.3.4.2  d3 TR(1,0)<-[18]: DEAD by COUNT r1 (4.3 s, 1 rounds; t=87.4)
+   node R0+.3.4.3  d3 TR(1,0)<-[19]: INTERNAL (1.8 s, 1 rounds; t=89.4)
+   node R0+.3.4.3  d3: DEAD by CC -- rule CC at R0+.3.4.3 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.3.5    d2 BR(0,1)<-[23]: INTERNAL (1.4 s, 1 rounds; t=91.3)
+   node R0+.3.5r1  d2 root<-None: INTERNAL (2.3 s, 1 rounds; t=93.7)
+   node R0+.3.5    d2: DEAD by CC -- rule CC at R0+.3.5 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.4      d1 BL(1,1)<-[17]: INTERNAL (1.5 s, 1 rounds; t=95.5)
+   node R0+.4.1    d2 BR(0,1)<-[16]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=96.1)
+   node R0+.4.2    d2 BR(0,1)<-[18]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=96.4)
+   node R0+.4.3    d2 BR(0,1)<-[21]: INTERNAL (2.9 s, 1 rounds; t=99.4)
+   node R0+.4.3r1  d2 root<-None: INTERNAL (2.0 s, 1 rounds; t=101.6)
+   node R0+.4.3    d2: DEAD by CC -- rule CC at R0+.4.3 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.4.4    d2 BR(0,1)<-[22]: INTERNAL (3.3 s, 1 rounds; t=105.2)
+   node R0+.4.4r1  d2 root<-None: INTERNAL (3.8 s, 1 rounds; t=109.2)
+   node R0+.4.4    d2: DEAD by CC -- rule CC at R0+.4.4 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.4.5    d2 BR(0,1)<-[23]: INTERNAL (2.8 s, 1 rounds; t=112.3)
+   node R0+.4.5r1  d2 root<-None: INTERNAL (2.6 s, 1 rounds; t=115.2)
+   node R0+.4.5    d2: DEAD by CC -- rule CC at R0+.4.5 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an inte
+   node R0+.5      d1 BL(1,1)<-[18]: INTERNAL (1.5 s, 1 rounds; t=117.0)
+   node R0+.5.1    d2 TR(1,0)<-[14]: INTERNAL (1.9 s, 1 rounds; t=119.1)
+   node R0+.5.1.1  d3 BR(0,1)<-[11]: DEAD by FC r1 (3.1 s, 1 rounds; t=122.4)
+   node R0+.5.1.2  d3 BR(0,1)<-[16]: INTERNAL (3.8 s, 1 rounds; t=126.4)
+   node R0+.5.1.2  d3: DEAD by CC -- rule CC at R0+.5.1.2 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.5.1.3  d3 BR(0,1)<-[21]: INTERNAL (3.2 s, 1 rounds; t=130.0)
+   node R0+.5.1.3  d3: DEAD by CC -- rule CC at R0+.5.1.3 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.5.1.4  d3 BR(0,1)<-[22]: INTERNAL (3.3 s, 1 rounds; t=133.7)
+   node R0+.5.1.4  d3: DEAD by CC -- rule CC at R0+.5.1.4 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.5.2    d2 TR(1,0)<-[19]: INTERNAL (3.0 s, 1 rounds; t=137.2)
+   node R0+.5.2.1  d3 BR(0,1)<-[11]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=137.5)
+   node R0+.5.2.2  d3 BR(0,1)<-[16]: DEAD by REACH r1 (4.5 s, 1 rounds; t=142.3)
+   node R0+.5.2.3  d3 BR(0,1)<-[21]: INTERNAL (3.4 s, 1 rounds; t=145.9)
+   node R0+.5.2.3  d3: DEAD by CC -- rule CC at R0+.5.2.3 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.5.2.4  d3 BR(0,1)<-[22]: INTERNAL (4.2 s, 1 rounds; t=150.6)
+   node R0+.5.2.4  d3: DEAD by CC -- rule CC at R0+.5.2.4 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an in
+   node R0+.5.3    d2 TR(1,0)<-[23]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=151.2)
+   start R0+          => DEAD (64 nodes; t = 151 s of 1800.0)
+   => DEAD (window_page) in 151.4 s: 1 start runs, 64 nodes, depth 3, 20 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 39 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 55 evaluation(s), 4 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.05 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 3.0s; R0+r1 d0 INTERNAL 1.8s; R0+.1 d1 INTERNAL 3.4s; R0+.1.1 d2 DEAD EmptyBox 2.7s; R0+.1.2 d2 INTERNAL 1.8s; R0+.1.2r1 d2 DEAD CC 3.1s; R0+.1.3 d2 INTERNAL 2.0s; R0+.1.3.1 d3 DEAD S-CLIP 3.6s; R0+.1.3.2 d3 DEAD EmptyBox 1.5s; R0+.1.4 d2 INTERNAL 1.7s; R0+.1.4.1 d3 DEAD CC 1.8s; R0+.1.4.2 d3 INTERNAL 3.5s; R0+.1.4.2r1 d3 DEAD EmptyBox 0.2s; R0+.1.4.3 d3 DEAD CC 2.3s; R0+.1.5 d2 INTERNAL 1.3s; R0+.1.5r1 d2 DEAD CC 2.0s; R0+.2 d1 INTERNAL 1.6s; R0+.2.1 d2 DEAD EmptyBox 0.1s; R0+.2.2 d2 DEAD FC 1.9s; R0+.2.3 d2 INTERNAL 1.5s; R0+.2.3r1 d2 DEAD CC 2.3s; R0+.2.4 d2 INTERNAL 2.2s; R0+.2.4.1 d3 DEAD S-CLIP 1.9s; R0+.2.4.2 d3 DEAD EmptyBox 1.4s; R0+.2.5 d2 INTERNAL 1.8s; R0+.2.5.1 d3 DEAD CC 1.5s; R0+.2.5.2 d3 DEAD FC 2.9s; R0+.2.5.3 d3 DEAD CC 1.7s; R0+.2.6 d2 INTERNAL 1.3s; R0+.2.6r1 d2 DEAD CC 2.2s; R0+.3 d1 INTERNAL 1.6s; R0+.3.1 d2 DEAD EmptyBox 0.4s; R0+.3.2 d2 INTERNAL 2.2s; R0+.3.2r1 d2 DEAD CC 5.2s; R0+.3.3 d2 INTERNAL 2.8s; R0+.3.3.1 d3 DEAD S-CLIP 1.4s; R0+.3.3.2 d3 DEAD EmptyBox 0.3s; R0+.3.4 d2 INTERNAL 2.0s; R0+.3.4.1 d3 DEAD CC 2.6s; R0+.3.4.2 d3 DEAD COUNT 4.3s; R0+.3.4.3 d3 DEAD CC 1.8s; R0+.3.5 d2 INTERNAL 1.4s; R0+.3.5r1 d2 DEAD CC 2.3s; R0+.4 d1 INTERNAL 1.5s; R0+.4.1 d2 DEAD EmptyBox 0.5s; R0+.4.2 d2 DEAD EmptyBox 0.1s; R0+.4.3 d2 INTERNAL 2.9s; R0+.4.3r1 d2 DEAD CC 2.0s; R0+.4.4 d2 INTERNAL 3.3s; R0+.4.4r1 d2 DEAD CC 3.8s; R0+.4.5 d2 INTERNAL 2.8s; R0+.4.5r1 d2 DEAD CC 2.6s; R0+.5 d1 INTERNAL 1.5s; R0+.5.1 d2 INTERNAL 1.9s; R0+.5.1.1 d3 DEAD FC 3.1s; R0+.5.1.2 d3 DEAD CC 3.8s; R0+.5.1.3 d3 DEAD CC 3.2s; R0+.5.1.4 d3 DEAD CC 3.3s; R0+.5.2 d2 INTERNAL 3.0s; R0+.5.2.1 d3 DEAD EmptyBox 0.1s; R0+.5.2.2 d3 DEAD REACH 4.5s; R0+.5.2.3 d3 DEAD CC 3.4s; R0+.5.2.4 d3 DEAD CC 4.2s; R0+.5.3 d2 DEAD EmptyBox 0.1s
+== c0_Y0179_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 2567, 'misses': 736, 'entries': 736}; clip {'hits': 145243, 'misses': 78965, 'entries': 78965}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 3303, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 64}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 2636, 'obs_misses': 667, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 667, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   A268: c0_Y0179_r269b window R0+ -> DEAD; count268 265 call(s), 0 capped, 5 INFEASIBLE (dumps 5: 5 VERIFIED, 0 FAILED), 3.1 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
