@@ -100,6 +100,8 @@ def main():
         pilot257.setup = setup
         sys.argv = ["pilot257.py"] + argv
         pilot257.main()
+        finish("seam", ["page", "synth257_d001_h002_t2", "--pads", argv[argv.index("--pad") + 1] if "--pad" in argv else "g1",
+                        "--start", argv[argv.index("--only-sibling") + 1] if "--only-sibling" in argv else None], journal=pilot257.JOURNAL)
         return
     if chain == "trump5":
         sys.path.insert(0, A256)
@@ -116,6 +118,84 @@ def main():
     install_levers()
     sys.argv = [os.path.join(A211, "run211.py")] + argv
     runpy.run_path(sys.argv[0], run_name="__main__")
+    finish(chain, argv)
+
+
+def verify_dumps(paths):
+    """the COUNT268 verifier clause, IN PROCESS (no extra python): verify268 on every new dump, appended to
+    results/verify268.jsonl; returns (n verified, n failed)."""
+    import json
+    import verify268
+    ok = bad = 0
+    out = os.environ.get("A268_VERIFY_OUT") or os.path.join(HERE, "..", "results", "verify268.jsonl")
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
+    for p in paths:
+        try:
+            r = verify268.verify(p)
+        except Exception as e:                                      # noqa: BLE001
+            r = dict(path=p, verdict="FAILED (verifier error %r)" % (e,))
+        ok += r["verdict"].startswith("VERIFIED")
+        bad += not r["verdict"].startswith("VERIFIED")
+        with open(out, "a", encoding="utf-8") as f:
+            f.write(json.dumps(r, default=str) + chr(10))
+    return ok, bad
+
+
+def finish(chain, argv, journal=None):
+    """after run211: stamp the certificate with what A268 changed (flags, every count268 call, the dumps of every
+    INFEASIBLE count = the COUNT268 verifier clause's inputs, the forced splits) and append A268's own row."""
+    import json
+    import count268
+    get = lambda k: argv[argv.index(k) + 1] if k in argv else None      # noqa: E731
+    nid, pad, suf = argv[1], get("--pads"), get("--cert-suffix")
+    cert = os.path.join(os.path.abspath(get("--cert-dir") or "."), "coarsetree211_%s%s.json" % (nid, ("__" + suf) if suf else ""))
+    st = count268.STATS
+    force = None
+    if "leaf268" in sys.modules:
+        force = dict(sys.modules["leaf268"].REP)
+    a268 = dict(count=count268.ON, force=force, node_cap=count268.NODE_CAP, budget=count268.BUDGET,
+                calls=len(st), capped=sum(1 for r in st if r["capped"]), infeasible=sum(1 for r in st if not r["feasible"]),
+                count_seconds=round(sum(r["seconds"] for r in st), 1), max_nodes=max([r["nodes"] for r in st] or [0]),
+                dumps=[r["dump"] for r in st if r.get("dump")],
+                verifier="[V: attempts/A268-terminal-leaves/code/verify268.py <dump>] for every JOINT COUNT kill decided by "
+                         "count268 (Lemma COUNT-PRUNE, notes/terminal268.md s.2); forced splits: Lemma ROLE-SPLIT (s.3)")
+    a268["verified"], a268["verify_failed"] = verify_dumps(a268["dumps"])
+    verdict = None
+    if journal:                                                     # seam: the pilot's journal row is the record
+        run = {}
+        try:
+            rows = [json.loads(x) for x in open(journal, encoding="utf-8") if x.strip()]
+            r = [x for x in rows if x.get("phase") == "sibling" and x.get("only") == get("--start")][-1]
+            verdict, run = r.get("verdict"), dict(seconds=r.get("run_seconds"), n_nodes=r.get("n_nodes"), wall=r.get("wall_hit"))
+        except Exception:                                           # noqa: BLE001
+            pass
+        cert = journal
+    try:
+        if journal:
+            raise StopIteration
+        doc = json.load(open(cert, encoding="utf-8"))
+        doc.setdefault("a268", []).append(dict(a268, pad=pad, start=get("--start"), when=time.strftime("%Y-%m-%d %H:%M:%S")))
+        tmp = cert + ".a268tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(doc, f, indent=1, default=str)
+        os.replace(tmp, cert)
+        verdict = (doc.get("verdicts") or {}).get(pad)
+        run = (doc.get("runs") or {}).get("%s_page" % pad) or {}
+    except StopIteration:
+        pass
+    except Exception as e:                                          # noqa: BLE001
+        print("   A268 finish: certificate not stamped (%r)" % (e,), flush=True)
+        run = {}
+    row = dict(chain=chain, nid=nid, pad=pad, start=get("--start"), verdict=verdict, seconds=run.get("seconds"),
+               n_nodes=run.get("n_nodes"), max_depth=run.get("max_depth"), wall=run.get("wall"), cert=cert.replace("\\", "/"),
+               when=time.strftime("%Y-%m-%d %H:%M:%S"), **{k: v for k, v in a268.items() if k != "verifier"})
+    out = os.environ.get("A268_RESULTS") or os.path.join(HERE, "..", "results", "terminal268.jsonl")
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
+    with open(out, "a", encoding="utf-8") as f:
+        f.write(json.dumps(row, default=str) + chr(10))
+    print("   A268: %s %s %s -> %s; count268 %d call(s), %d capped, %d INFEASIBLE (dumps %d: %d VERIFIED, %d FAILED), %.1f s; forced %s" % (
+        nid, pad, get("--start"), verdict, row["calls"], row["capped"], row["infeasible"], len(row["dumps"]), row["verified"], row["verify_failed"],
+        a268["count_seconds"] or 0, force), flush=True)
 
 
 if __name__ == "__main__":

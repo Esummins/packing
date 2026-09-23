@@ -5,7 +5,8 @@ checked on each new row against every chosen row (pair table, distinct cells, ch
 one look-ahead (a later role with NO row pairwise compatible with every chosen row ends the branch), and
 at a full fixed assignment an exhaustive search over SETS of at most n_free anonymous rows (combinations, i.e. MORE
 permissive than tree205's rec_free, which only picks rows meeting a still-needed slot) with the anon caps.  Every
-slot must reach 2 meeters.  Arithmetic exact (Fractions from the typed encoding).  Prints VERIFIED / FAILED.
+slot must reach 2 meeters.  EVERY fixed role must take a row: a role with no row at all (the dump's fixed_roles) makes
+the count infeasible outright, exactly as in tree205.  Arithmetic exact (Fractions from the typed encoding).
 
     python verify268.py <dump.json> [...]
 """
@@ -40,7 +41,7 @@ def verify(path):
             if (comp[i] >> j) & 1:
                 ok[i][j] = ok[j][i] = True
     ch = [[dec(v) for v in o["ch"]] for o in opts]
-    owners = []
+    owners = list(d.get("fixed_roles") or sorted((d.get("search") or {}).get("n_fixed") or {}))   # EVERY fixed role, a row-less one too
     for o in opts:
         if o["owner"] != "free" and o["owner"] not in owners:
             owners.append(o["owner"])

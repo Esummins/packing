@@ -194,8 +194,8 @@ def dump(pg, slots, free_opts, fixed_opts, n_free, lines, base_chords, s, caps, 
             if pg.pair_ok(wi, oi, wj, oj):
                 bits |= 1 << j
         comp.append(hex(bits))
-    doc = dict(kind="A268 count dump (tree205.count_search contract)", nid=getattr(pg, "nid", None), slots=list(slots),
-               n_free=n_free, caps={p: enc(caps[p]) for p in slots}, s=enc(s), use_chords=use_chords, lines=[str(l) for l in L],
+    doc = dict(kind="A268 count dump (tree205.count_search contract)", nid=getattr(pg, "nid", None) or os.environ.get("A268_NID"), slots=list(slots),
+               fixed_roles=sorted(fixed_opts), n_free=n_free, caps={p: enc(caps[p]) for p in slots}, s=enc(s), use_chords=use_chords, lines=[str(l) for l in L],
                base=[enc(base_chords[l]) for l in L], opts=rows, comp=comp, search=row)
     body = json.dumps(doc, sort_keys=True)
     h = hashlib.sha256(body.encode()).hexdigest()[:16]
