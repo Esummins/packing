@@ -1,0 +1,30 @@
+15:41:09 [w3] pass 2 start c0_Y0790_r269b window:R0+ wall 1800 (lab 9, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y0790_r269b at the window pad: ALIVE in 21256 ms; kills {'H-clip': 0, 'P': 3520, 'W': 1287, 'C': 764, 'M': 2803, 'L': 2, 'R': 3474, 'X': 1043}; CSP units 504 -> 504 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT c0_Y0790_r269b pad window: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== c0_Y0790_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_c0_Y0790_r269b_window_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.218, 2.358, 1.38, 1.519, 73.74, 82.372]; forced H []; 6 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (32.2 s, 1 rounds; t=32.3)
+   node R0+.1      d1 BR(0,1)<-[18]: INTERNAL (2.9 s, 1 rounds; t=35.3)
+   node R0+.1.1    d2 TL(0,0)<-[3, 8]: INTERNAL (6.1 s, 1 rounds; t=41.4)
+   no-room (k=9, m=2): UNDECIDED in 32 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.1.p1 d3 pocket<-[0]: INTERNAL (16.0 s, 1 rounds; t=89.2)
+   no-room (k=10, m=1): UNDECIDED in 34 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.1.p1.p1 d4 pocket<-[0]: INTERNAL (805.2 s, 1 rounds; t=937.9)
+   node R0+.1.1.p1.p1: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R0+          => ALIVE (5 nodes; t = 1837 s of 1800.0)
+   => ALIVE (window_page) in 1836.8 s: 1 start runs, 5 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 0 dead / 14 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 7 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 32.2s; R0+.1 d1 INTERNAL 2.9s; R0+.1.1 d2 INTERNAL 6.1s; R0+.1.1.p1 d3 INTERNAL 16.0s; R0+.1.1.p1.p1 d4 ALIVE 805.2s; R0+.1.2 d2 ALIVE 0.0s; R0+.1.3 d2 ALIVE 0.0s; R0+.1.4 d2 ALIVE 0.0s; R0+.1.5 d2 ALIVE 0.0s; R0+.1.6 d2 ALIVE 0.0s; R0+.1.7 d2 ALIVE 0.0s; R0+.1.8 d2 ALIVE 0.0s; R0+.1.9 d2 ALIVE 0.0s; R0+.1.10 d2 ALIVE 0.0s; R0+.1.11 d2 ALIVE 0.0s; R0+.2 d1 ALIVE 0.0s; R0+.3 d1 ALIVE 0.0s; R0+.4 d1 ALIVE 0.0s
+== c0_Y0790_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 215, 'misses': 154, 'entries': 154}; clip {'hits': 6194, 'misses': 738096, 'entries': 138096}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 369, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 5}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 253, 'obs_misses': 154, 'build_hits': 0, 'build_misses': 2, 'bisect_hits': 0, 'bisect_misses': 1, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 134, 'build_entries': 2, 'bisect_entries': 1, 'on': True}
+   A268: c0_Y0790_r269b window R0+ -> ALIVE; count268 76 call(s), 1 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 1718.5 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
