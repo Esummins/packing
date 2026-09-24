@@ -273,8 +273,9 @@ One or two lines each; n-general unless "n = 11" is said.  Format: tag, NAME —
   `wedge_extent_core`, `strip_in_ring_of_enclosure`; A267.
 - [T] **SLOPE, LOW** — a floater sharing its box with a floor toucher has L_h ≥ 1.121 (> 1, no uniform margin, in the
   steep case); (D1), (D2), (U1), (U2), (U9) are theorems from H1–H3.  `ring_domain.md` §0, §2; Lean `low_core`,
-  `lh_gt_one`, `lh_gt_one_steep`, `tangent_core`, `u1_core`, `u9_core`, `x_high`; A271.  (Caveat: A273 notes that
-  `lh_gt_one` carries cos α ≥ 1/√2 as a hypothesis, "worth checking" — `disc273.md` §7.5; see s.5.4, source disagreements.)
+  `lh_gt_one`, `lh_gt_one_steep`, `tangent_core`, `u1_core`, `u9_core`, `x_high`; A271 (+ the A271 follow-up after
+  A273's flag, commit 7cb36df98: `lh_gt_one` covers α ≤ 45°, cases α > 45° by the top vertex and `lh_gt_one_steep`;
+  s.5.4 item 7).
 - [T] **Lemma CL** — the case q_y > X_top with Q left of X is dead ((D − cos φ) cot φ ≤ c); **the reduction** of every
   other case to a statement about a point and convex sets; `centre_right_core`.  `strip_jam.md` §0; Lean `cl_core_i`,
   `cl_core_ii`, `d_low_core`, `centre_right_core`; A272.  (The statement it reduced to, the DISC LEMMA, is [F]: s.5.)
@@ -671,9 +672,12 @@ This section is what stops agents repeating them.  Grouped by theme; each: the c
    `OpenPairs.lean`.  Both true at once if the old axiom was left declared; not checked here.
 6. **`centre_disc_ring`.**  A251 introduced it as an axiom [T-computed]; A252 (later) refuted its premise and REMOVED
    it (`centre_disc.md` §5); AUDIT has no such entry today.  A252 is later.
-7. **Lemma LOW's Lean core.**  A271 (`ring_domain.md` §0): LOW for "all tilts α ∈ [0°, 90°) of A", with `lh_gt_one`
-   and `lh_gt_one_steep`.  A273 (later, `disc273.md` §7.5, §2.4): "`lh_gt_one` carries cos α ≥ 1/√2 as a hypothesis …
-   worth checking before any other certificate leans on it"; A273 does not use LOW.  Unresolved in the sources.
+7. **Lemma LOW's Lean core.**  A271's first Lean file (commit 31062dbb1, 2026-09-23 15:44) had `lh_gt_one` with the
+   hypothesis cos α ≥ 0.7071 only.  A273 (`disc273.md` §7.5, §2.4) flagged it: "worth checking before any other
+   certificate leans on it"; A273 does not use LOW.  The A271 follow-up (commit 7cb36df98, 2026-09-23 18:37, later):
+   "α is not a frame convention", α ∈ (45°, 90°) is a genuine case (least L_h 1.1405), covered by A's top vertex
+   (L_h ≥ 1.121) and `lh_gt_one_steep` + `tangent_core` (L_h > 1, no uniform margin); (D1) [T] survives
+   (`RingDomain.lean` header; `ring_domain.md` §0 as it reads today).  Resolved by the later commit.
 8. **A273's Lean/AUDIT note.**  `disc273.md` §0: "Lean unchanged (DiscLemma is opaque; its prose content is [F]; AUDIT
    note)".  `lean/AUDIT.md` (2026-09-23 18:37) and `StripJam.lean` contain no A273 note.  Recorded, not fixed here.
 9. **A273's price.**  `disc273.md` §4: "all cells but the corner-adjacent ones in seconds to minutes".  Index (later):
