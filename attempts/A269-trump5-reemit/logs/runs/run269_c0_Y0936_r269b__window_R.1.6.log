@@ -1,0 +1,34 @@
+22:48:32 [w3] pass 3 start c0_Y0936_r269b window:R.1.6 wall 1800 (lab 11, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 window pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A269-trump5-reemit/certs/csp209_c0_Y0936_r269b_window_s0.json)
+   INHERIT c0_Y0936_r269b pad window: 3 prior trees, 63 paths, 4 branches inherited DEAD (final, with their certificates), 7 start nodes (0 from the A203 root)
+== c0_Y0936_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_c0_Y0936_r269b_window_s0.json; basins []; INHERIT 4 dead branches (final) + 7 start nodes ['R.1.4.p1.p1', 'R.1.6', 'R.1.7', 'R.1.8', 'R.2', 'R.3', 'R.4']; H [2.358, 2.498, 2.358, 2.498, 0.0, 14.25]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1.1        TL(0,0)<-(3, 8)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R0_.json
+   INHERITED DEAD R.1.2        TL(0,0)<-(3, 9)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R0_.json
+   INHERITED DEAD R.1.3        TL(0,0)<-(3, 14)  [A211 tree: NOROOM-POCKET] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R0_.json
+   INHERITED DEAD R.1.5        TL(0,0)<-(4, 9)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R.1.5.json
+   A229 SHARD: --start R.1.6 -- 1 of them are start nodes of this page/pad right now (7 start nodes in all)
+   start R.1.4.p1.p1: SKIPPED (filter)
+   start R.1.6: applied step 1/1 -- TL(0,0) <- [4, 14]
+   node R.1.6      d0 root: INTERNAL (6.8 s, 1 rounds; t=50.5)
+   node R.1.6r1    d0 root<-None: INTERNAL (12.8 s, 1 rounds; t=63.3)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 6 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.1.6      d0: DEAD by NOROOM-POCKET -- no-room at R.1.6 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   start R.1.6        => DEAD (2 nodes; t = 70 s of 1800.0)
+   start R.1.7: SKIPPED (filter)
+   start R.1.8: SKIPPED (filter)
+   start R.2: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   => ALIVE (window_page) in 69.8 s: 7 start runs, 2 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 4 inherited dead (4 up front + 0 in tree), 5 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 2 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2 d2 DEAD INHERIT 0.0s; R.1.3 d2 DEAD INHERIT 0.0s; R.1.5 d2 DEAD INHERIT 0.0s; R.1.6 d0 INTERNAL 6.8s; R.1.6r1 d0 DEAD NOROOM-POCKET 12.8s
+== c0_Y0936_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 196, 'misses': 140, 'entries': 140}; clip {'hits': 2847, 'misses': 31131, 'entries': 31131}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 336, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 3}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 222, 'obs_misses': 134, 'build_hits': 0, 'build_misses': 1, 'bisect_hits': 0, 'bisect_misses': 1, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 134, 'build_entries': 1, 'bisect_entries': 1, 'on': True}
+   A268: c0_Y0936_r269b window R.1.6 -> ALIVE; count268 34 call(s), 0 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 0.4 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
