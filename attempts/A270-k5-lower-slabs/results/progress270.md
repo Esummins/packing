@@ -1,4 +1,4 @@
-# A270 progress -- 2026-09-23 19:14:44
+# A270 progress -- 2026-09-23 19:16:14
 
 The pad-g4 campaign (notes/slabs270.md): A57's level-1 cover rebuilt at pin slack 9/400, every chain page re-emitted as <id>_r270w4 and run through A211's chain at pad g4 = the window (3.82, s0] with A268's levers (count268, leaf268, the STALLED invariant).  A DEAD here is a statement on the WHOLE window, s-hat included.
 
@@ -8,7 +8,7 @@ The pad-g4 campaign (notes/slabs270.md): A57's level-1 cover rebuilt at pin slac
 | k5_11 | 2 | 163 | 0 | 0 | 163 |
 | k5_11 | 3 | 476 | 0 | 0 | 476 |
 | k5_11 | 4 | 14 | 0 | 0 | 14 |
-| k5_16 | 1 | 161 | 15 | 2 | 144 |
+| k5_16 | 1 | 161 | 16 | 3 | 142 |
 | k5_16 | 2 | 209 | 0 | 0 | 209 |
 | k5_16 | 3 | 500 | 0 | 0 | 500 |
 | k5_16 | 4 | 6 | 0 | 0 | 6 |
@@ -16,8 +16,8 @@ The pad-g4 campaign (notes/slabs270.md): A57's level-1 cover rebuilt at pin slac
 ## Per slab
 
 * **k5_11**: G1 (incl. s-hat) OPEN -- 17 priority-1 record(s) not yet DEAD at g4; G2 OPEN -- 180 priority-1/2 record(s) left; G3 / G4 OPEN -- 670 record(s) left + the NO-child LP at 9/400 cores.
-* **k5_16**: G1 (incl. s-hat) OPEN -- 146 priority-1 record(s) not yet DEAD at g4; G2 OPEN -- 355 priority-1/2 record(s) left; G3 / G4 OPEN -- 861 record(s) left + the NO-child LP at 9/400 cores.
+* **k5_16**: G1 (incl. s-hat) OPEN -- 145 priority-1 record(s) not yet DEAD at g4; G2 OPEN -- 354 priority-1/2 record(s) left; G3 / G4 OPEN -- 860 record(s) left + the NO-child LP at 9/400 cores.
 
 trump5: all four slabs OPEN here -- A269 (re-emitted records, pads tube / window) owns them.
 
-CPU-h spent by the campaign: **19.16** (cap 150)
+CPU-h spent by the campaign: **19.17** (cap 150)
