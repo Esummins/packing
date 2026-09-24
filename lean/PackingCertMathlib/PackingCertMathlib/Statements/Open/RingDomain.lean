@@ -13,7 +13,13 @@ import PackingCertMathlib.Statements.Open.StripEnclosure
   `R = (u + c, h_v + s)` give `h_v ≥ k + m u` and `h_v + s ≥ k + m (u + c)`.  With `d = x_min − u > 0` and
   `c − d > 0`: `c h_v ≥ c cos α − s d` (split on `c m ≤ s`).
 * `lh_gt_one` [T]: from `c h_v ≥ c cos α − s d`, `d < 1 − s`, `cos α ≥ 0.7071`, `c ≥ 0.7071`: `h_v + c > 1` — the
-  floater's left vertex is above height 1 whenever a floor toucher shares its box ((D1)'s `L_h > 1`).
+  floater's left vertex is above height 1 whenever a floor toucher shares its box ((D1)'s `L_h > 1`).  The
+  hypothesis `cos α ≥ 0.7071` is A's tilt `α ≤ 45°`; A's tilt is NOT a frame convention (the corner frame is fixed
+  by C and X, tilts of a floor toucher are read in `[0°, 90°)` with its lowest vertex as anchor), so the range
+  `α ∈ (45°, 90°)` is a genuine case (A273's flag; feasible under H1–H3, `adv271`-style search: least `L_h` 1.1405):
+  there A's TOP vertex `(x_min + cos α, cos α + sin α)` replaces the left vertex in `low_core` when it is left of
+  C's right vertex `R` (giving `L_h ≥ cos α (1 − tan θ) + sin α + tan(45° − θ/2) ≥ 1.121`), and `lh_gt_one_steep`
+  (with `tangent_core`) covers the remaining case (A's top vertex right of `R`): `L_h > 1`, no uniform margin.
 * `u1_core` [T] ((U1)): `c sφ + s · dy < 1` when `dy < s` (X meets int `T_u`, so `X_low − L_h < s`), `sφ ≤ c`.
 * `u9_core` [T] ((U9), the top vertex of `T_u`): `sφ² − sφ c + cφ · dy < 1` when `dy < c + s + cφ + sφ − 1.82`
   (`C_top − X_low` under `X_top > s̄ − 1 ≥ 2.82`, `h_v < 1`), `cφ ≥ sφ ≥ 0`, `c ≥ 0.7071`, `c + s ≤ 1.4143`.
@@ -56,6 +62,38 @@ theorem lh_gt_one (c s d ca hv : ℝ) (h1 : c ^ 2 + s ^ 2 = 1) (hc : 7071 / 1000
   push_neg at hcon
   nlinarith [mul_le_mul_of_nonneg_left hd.le hs, mul_le_mul_of_nonneg_left hca hc0,
              mul_le_mul_of_nonneg_left hcon hc0, mul_lt_mul_of_pos_left hkey (show (0:ℝ) < c by linarith)]
+
+/-- Tangent bound for `cos α = (1 + tan²α)^{-1/2}` [T]: `cos α ≥ 0.707 − 0.354 (tan α − 1)` on `tan α ∈ [1, 3]`
+(the function is convex there; the line lies below its tangent at `tan α = 1`). -/
+theorem tangent_core (ca t : ℝ) (hca : 0 < ca) (h : ca ^ 2 * (1 + t ^ 2) = 1) (ht : 1 ≤ t) (ht3 : t ≤ 3) :
+    707 / 1000 - 354 / 1000 * (t - 1) ≤ ca := by
+  by_contra hcon
+  push_neg at hcon
+  have hL : 0 < 707 / 1000 - 354 / 1000 * (t - 1) := by linarith
+  have h2 : ca ^ 2 < (707 / 1000 - 354 / 1000 * (t - 1)) ^ 2 := by nlinarith
+  nlinarith [mul_lt_mul_of_pos_right h2 (show (0:ℝ) < 1 + t ^ 2 by positivity),
+             mul_nonneg (sub_nonneg.2 ht) (sub_nonneg.2 ht3),
+             mul_nonneg (mul_nonneg (sub_nonneg.2 ht) (sub_nonneg.2 ht)) (sub_nonneg.2 ht3)]
+
+/-- **Lemma LOW, the steep case** [T] (A's tilt `α ∈ (45°, 90°)`, A's top vertex right of C's right vertex `R`):
+`R` lies above A's upper-left edge line (slope `tan α = t ≥ 1`), so `h_v ≥ cos α − s + (R_x − x_min) tan α` with
+`R_x − x_min = h_u + w(θ) − x_min > c + s − 1`; with `cos α = ca`, `ca² (1 + t²) = 1`, `c ≥ 0.7071`, `0 ≤ s ≤ c`:
+`h_v + c > 1`.  Split on `t ≥ 1 + 2s` ((w−1)(t−1) ≥ 2(1−c) by `(1−c)(1+c) = s²`, `s ≤ c`) and `t < 1 + 2s`
+(`tangent_core`). -/
+theorem lh_gt_one_steep (c s ca t hv : ℝ) (h1 : c ^ 2 + s ^ 2 = 1) (hc : 7071 / 10000 ≤ c) (hs : 0 ≤ s)
+    (hsc : s ≤ c) (hca : 0 < ca) (hcat : ca ^ 2 * (1 + t ^ 2) = 1) (ht : 1 ≤ t)
+    (h : ca - s + (c + s - 1) * t < hv) : 1 < hv + c := by
+  have hc1 : c ≤ 1 := by nlinarith
+  have hw : 0 ≤ c + s - 1 := by nlinarith
+  have hid : (1 - c) * (1 + c) = s ^ 2 := by nlinarith
+  by_cases hbig : 1 + 2 * s ≤ t
+  · nlinarith [mul_le_mul_of_nonneg_left (show 2 * s ≤ t - 1 by linarith) hw,
+               mul_nonneg (sub_nonneg.2 hc1) (sub_nonneg.2 hsc)]
+  · push_neg at hbig
+    have ht3 : t ≤ 3 := by nlinarith
+    have htan := tangent_core ca t hca hcat ht ht3
+    nlinarith [mul_nonneg hw (sub_nonneg.2 ht), mul_nonneg (sub_nonneg.2 ht) (sub_nonneg.2 hbig.le),
+               mul_nonneg hs (sub_nonneg.2 ht), mul_nonneg (sub_nonneg.2 hc1) hs]
 
 /-- **(U1), the core** [T]: `c sφ + s dy < 1` from `dy < s`, `0 < s`, `sφ ≤ c`, `c² + s² = 1`. -/
 theorem u1_core (c s sphi dy : ℝ) (h1 : c ^ 2 + s ^ 2 = 1) (hc : 0 < c) (hs : 0 < s) (hsphi : sphi ≤ c)
@@ -108,6 +146,8 @@ theorem strip_two_in_ring_of_jam (hjam : JamCorner) (hring : RingIneq)
 
 #print axioms low_core
 #print axioms lh_gt_one
+#print axioms tangent_core
+#print axioms lh_gt_one_steep
 #print axioms u1_core
 #print axioms u9_core
 #print axioms x_high

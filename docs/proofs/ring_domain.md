@@ -26,10 +26,12 @@ derivation is a statement about the three squares A, C, X in the corner quadrant
 ## 0. Verdict
 
 > **[T] Five of the ten conditions are theorems from H1–H3** (§2): **(D1)** h_v < 1, g < 1 (C meets the box) and
-> L_h > 1 — by **Lemma LOW**: L_h ≥ cos α + tan(45° − θ/2) ≥ 1.121 whenever a floor toucher A shares the open box
-> with the floater C (proof: **Lemma SLOPE** — the line separating A from C has POSITIVE slope, A below-right, C
+> L_h > 1 — by **Lemma LOW** (all tilts α ∈ [0°, 90°) of A; α is not a frame convention): L_h ≥ cos α + tan(45° −
+> θ/2) ≥ 1.121 for α ≤ 45°, ≥ 1.121 for α > 45° with A's top vertex left of C's right vertex, and > 1 (no uniform
+> margin; [M] ≥ 1.14) in the remaining steep case, whenever a floor toucher A shares the open box with the floater C
+> (proof: **Lemma SLOPE** — the line separating A from C has POSITIVE slope, A below-right, C
 > above-left; then A's left vertex under the line and C's vertices B, R above it give h_v ≥ cos α − tan θ ·
-> (x_min(A) − u)⁺; Lean `low_core`, `lh_gt_one`); **(D2)** X_low ≥ h_v — by H1 + the window: X_low > s̄ − 1 − w(φ)
+> (x_min(A) − u)⁺, or the same with A's top vertex; Lean `low_core`, `lh_gt_one`, `lh_gt_one_steep`, `tangent_core`); **(D2)** X_low ≥ h_v — by H1 + the window: X_low > s̄ − 1 − w(φ)
 > ≥ 1.406 > 1 > h_v; **(U1)** a₁ < a* ⟺ c sin φ + s (X_low − L_h) < 1, and X_low − L_h < s (X meets int T_u ⊂
 > {y < C_top}) gives c sin φ + s² ≤ 1 − c (c − sin φ) ≤ 1 (Lean `u1_core`); **(U2)** b_X ≥ 0 on [a₁, a₂] — by
 > BLOCKER-SIDE (mirror, `box_meeters.md` §1.2): X is separated from C by a line of positive slope, so no point of X
@@ -77,16 +79,34 @@ PUSH (ii) (`k0_count.md` §2).  If n_v ≥ 0: C lies in {n·x ≤ β} ∩ quadra
 β ≥ n_u + n_v (n_v = 0: C's width ≥ 1 needs β ≥ n_u); but A's point p of the open box has β ≤ n·p < n_u + n_v.  ∎
 This is the "PUSH (i)" remark of `box_meeters.md` §1.2, now with its proof.  In slope form: A lies BELOW a line
 y = k + m x with m = −n_u/n_v > 0, C ABOVE it.
-**(F4) Lemma LOW.**  *Under H3, h_v ≥ cos α − tan θ · (x_min(A) − u)⁺ and L_h = h_v + cos θ ≥ cos α +
-tan(45° − θ/2) ≥ 1/√2 + tan 22.5° = 1.1213 > 1.*  Proof: A's left vertex (x_min, cos α) is under the line:
-k ≥ cos α − m x_min.  C's vertices B = (u, h_v) and R = (u + c, h_v + s) are above it: h_v ≥ k + m u ≥ cos α +
-m (u − x_min) and h_v + s ≥ k + m (u + c) ≥ cos α + m (u + c − x_min).  Put d = x_min − u.  If d ≤ 0 the first
-gives h_v ≥ cos α.  If d > 0: c − d = h_u + w − x_min > 0 (x_min < 1 ≤ w, h_u > 0), so the second bound rises with m
-and the first falls; for m ≤ s/c the first is ≥ cos α − (s/c) d, for m ≥ s/c the second is ≥ cos α − s +
-(s/c)(c − d) = cos α − (s/c) d.  Hence h_v ≥ cos α − tan θ · d with d < 1 − h_u − s < 1 − s, and L_h ≥ cos α + c −
-tan θ (1 − s) = cos α + (1 − s)/c = cos α + tan(45° − θ/2).  ∎  (Lean `low_core`: the arithmetic from the two
-vertex inequalities; `lh_gt_one`: cos α ≥ 1/√2 and (1 − s)/c ≥ 0.414 for θ ≤ 45°.)  Corollary: h_v ≥ 1/√2 − tan θ
-(1 − s) ≥ 0.414 for every JAM floater (rings: h_v ≥ 0.929).
+**(F4) Lemma LOW (full range of A's tilt).**  *Under H3, L_h = h_v + cos θ > 1; moreover L_h ≥ cos α +
+tan(45° − θ/2) ≥ 1.121 when α ≤ 45°, and L_h ≥ cos α (1 − tan θ) + sin α + tan(45° − θ/2) ≥ 1.121 when α > 45° and
+A's top vertex is left of C's right vertex R.*  A's tilt α ∈ [0°, 90°) is read with its lowest vertex as anchor and is
+NOT a frame convention: the corner frame is fixed by C and X (reflecting across the diagonal swaps the wall and the
+floor), so α ∈ (45°, 90°) — A nearly flat with its lowest vertex at the right, or steep — is a genuine case (A273's
+flag; it is feasible under H1–H3: an `adv271`-style search restricted to α > 45° reaches L_h = 1.1405 at α = 50.6°,
+θ = 45°, h_u → 0, h_v = 0.433, in the third case below).  Proof.  The separator y = k + m x (m > 0, Lemma SLOPE) lies
+above every point P of A, so k ≥ y_P − m x_P; C's B = (u, h_v) and R = (u + c, h_v + s) lie above it.  For any P ∈ A
+with x_P < R_x = u + c: h_v ≥ y_P − m (x_P − u) and h_v ≥ y_P − s + m (R_x − x_P); the second rises with m, the first
+falls, and the maximum of the two is ≥ their value at m = s/c: **h_v ≥ y_P − tan θ · (x_P − u)⁺**.
+ (a) α ≤ 45°: P = A's left vertex (x_min, cos α), x_min < 1 < R_x, x_min − u < 1 − h_u − s < 1 − s: h_v ≥ cos α −
+ tan θ (1 − s), L_h ≥ cos α + c − tan θ (1 − s) = cos α + (1 − s)/c = cos α + tan(45° − θ/2) ≥ 1/√2 + tan 22.5° = 1.1213
+ (Lean `low_core`, `lh_gt_one`).
+ (b) α > 45°, A's top vertex P = (x_min + cos α, cos α + sin α) has x_P < R_x: x_P − u < 1 + cos α − s, so L_h ≥
+ cos α + sin α + c − tan θ (1 + cos α − s) = cos α (1 − tan θ) + sin α + tan(45° − θ/2) ≥ sin α + 0.4142 ≥ 1.1213
+ (`low_core` with the top vertex; tan θ ≤ 1, sin α ≥ 1/√2).
+ (c) α > 45°, A's top vertex right of R (x_min + cos α ≥ R_x): R lies above the separator, which lies above A's
+ upper-left edge on [x_min, x_min + cos α] ∋ R_x, so h_v + s ≥ cos α + (R_x − x_min) tan α with R_x − x_min = h_u +
+ w − x_min > w − 1 (h_u > 0, x_min < 1, tan α ≥ 1): **h_v > cos α − s + (w − 1) tan α** and L_h > cos α + c − s +
+ (w − 1) tan α =: G(α, θ).  G > 1: G − 1 = cos α + (w − 1)(tan α − 1) − 2(1 − c); with (1 − c)(1 + c) = s² and s ≤ c,
+ (w − 1) · 2s ≥ 2(1 − c) (⟺ (1 − c)(c − s) ≥ 0), so for tan α ≥ 1 + 2s the last two terms sum to ≥ 0 and cos α > 0
+ decides; for tan α < 1 + 2s ≤ 2.42 the tangent bound cos α ≥ 0.707 − 0.354 (tan α − 1) (convexity of (1 + t²)^{−1/2}
+ on t ≥ 1) gives G − 1 ≥ 0.707 − 2(1 − c) + (tan α − 1)((w − 1) − 0.354) > 0 (at tan α = 1 it is ≥ 0.121; the bracket
+ is ≥ 0 for s ≥ 0.604, and for s < 0.604 the value at tan α = 1 + 2s is ≥ 0.707 − 0.708 s > 0) — Lean
+ `lh_gt_one_steep`, `tangent_core`.  No uniform margin: G → 1⁺ as θ → 0, α → 90° (a flat C over an almost flat A whose
+ lowest vertex is its right corner); with (F1) that limit has C_top < 1.41 < X_low and is not a JAM.  ∎
+So **(D1) L_h > 1 is [T] for every tilt of A**; the margin 1.121 is [T] in cases (a), (b) and [M] (≥ 1.14) in (c).
+Corollary: h_v ≥ 1/√2 − tan θ (1 − s) ≥ 0.414 in case (a); rings: h_v ≥ 0.929.
 **(F5) X above C's upper-left line.**  H2 is exactly the hypothesis of BLOCKER-SIDE's mirror (`box_meeters.md`
 §1.2, Lean `blocker_side_core`): X meets T_u and misses int C, so a separating normal m from X to C has
 m_u > 0 > m_v — X is ABOVE a line of positive slope, C below it.  In C's frame: **every point of X with
@@ -102,7 +122,7 @@ a line through B or R with C on its wrong side: from B the lower-left edge direc
 | condition | verdict | from | margin under H1–H3 (`adv271`) | rings (`hyp267`) |
 |---|---|---|---|---|
 | (D1) h_v < 1, g < 1 | [T] | H3 (C meets the box), (F2) | → 0 (h_v → 1: C leaves the box) | 0.0009 |
-| (D1) L_h > 1 | [T] L_h ≥ 1.121 | Lemma LOW (H3) | ≥ 0.12 | ≥ 0.89 |
+| (D1) L_h > 1 | [T] all tilts of A; L_h ≥ 1.121 unless A steep with its top right of R | Lemma LOW (H3) | ≥ 0.12 (α ≤ 45°); 0.14 (α > 45°, [M]) | ≥ 0.89 |
 | (D2) X_low ≥ h_v, X meets int T_u, misses int C | [T] | (F1) (H1 + s̄ ≥ 3.82), H2 | → 0 (X's depth in T_u → 0) | 0.0016 |
 | (U1) a₁ < a* | [T] | H2 (X_low < C_top) | 0.109 | ≥ 0.29 |
 | (U2) b_X ≥ 0 on [a₁, a₂] | [T] | (F5) = BLOCKER-SIDE mirror (H2) | → 0 (X's edge on C's line) | 0.0016 |
@@ -215,7 +235,7 @@ by s̄ − 1 ≥ m − 2 ≥ 3: every bound improves).
 
 ## 8. Lean, reproduce
 
-`Statements/Open/RingDomain.lean`: theorems `low_core`, `lh_gt_one` (Lemma LOW's arithmetic), `u1_core`, `u9_core`,
+`Statements/Open/RingDomain.lean`: theorems `low_core`, `lh_gt_one`, `lh_gt_one_steep`, `tangent_core` (Lemma LOW's arithmetic, all tilts of A), `u1_core`, `u9_core`,
 `x_high` ((F1)); `JamCorner` (H1–H3), `RingIneq` ((U3)–(U6) + (U8)) opaque — together they replace A267's opaque `RingDomain`;
 axiom [T-prose] `strip_two_in_jam`; theorem `strip_two_in_ring_of_jam` (A267's `strip_in_ring_of_enclosure` with the new domain);
 build + audit 0 sorry.  Reproduce (each ≤ 6 min, `JAM_COARSE=1`): `python check271.py`, `python adv271.py 300`,
