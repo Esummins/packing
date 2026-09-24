@@ -105,10 +105,10 @@ theorem k0_value_of_factors (s : ℝ) (hlo : (382 : ℝ) / 100 ≤ s) (hhi : s �
     (hall : ∀ Q, IsPacking 11 s Q → FamilyStuckN 11 4 s Q) : ¬ ∃ Q, IsPacking 11 s Q := by
   refine normal_excludes_value 11 4 s ?_ ?_ (fun Q hQ => openPairs_excludes s hlo hhi Q hQ) hall
   · norm_num; linarith
-  /- **SLAB-CUBE**: formerly the axiom `slab_cube` on the opaque `SlabCubeRing` (A263); discharged by the theorem
-`slab_cube_264` (ThreeLemmas.lean, A264) and removed on 2026-09-23 so the audit no longer lists it. -/
+  · norm_num; linarith
 
-) : ¬ SlabCubeRing s
+/- **SLAB-CUBE**: formerly the axiom `slab_cube` on the opaque `SlabCubeRing` (A263); discharged by the theorem
+`slab_cube_264` (ThreeLemmas.lean, A264) and removed on 2026-09-23 so the audit no longer lists it. -/
 
 #print axioms principal_normal
 #print axioms clip_mono
