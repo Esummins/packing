@@ -227,3 +227,95 @@ One or two lines each; n-general unless "n = 11" is said.  Format: tag, NAME —
   Π is maximal; so a ninth square meets a third box or both slots of one wall.  `normal_ring.md` §2; A258.
 - [T] **gap_needs_two_misses**; **CAPACITY-2 = three gap statements**; **gap_interval_centre** (a unit interval in
   [1, s − 1] contains s/2).  `strip_plug.md` §0; `last_two.md` §0; Lean same names, `capacity_two_of_gap`; A265/A266.
+
+### 2.3 Room (what fits in the pocket)
+
+- [T] **HOLE-ONE** — in a square container of side σ ≤ 2 every unit square contains the centre, so at most one fits;
+  applied to σ = s − 2 the slack is (4 − s)/2 > 0 exactly on s < 4.  **NOTCH-NARROW** [T] — a unit square does not fit
+  a rectangle with a side < 1.  So capacity(flush-limit pocket) = 1 for s ∈ (3, 4): 8 + 1 = 9 < 11.
+  `mintilt253.md` §0, §3 (A253); tilt form Lean `hole_one_tilt` (`normal_room.md` §2.1, A259).
+- [T] **INRADIUS, THREE-DISC, CENTRE-DISC ⟹ capacity ≤ 2, MID-NOTCH** (no wall notch of an all-ADJ ring holds a
+  disc of radius ½ for s > 3.27645; robust form s > 3.80342), **GAP** (a wall's two touchers overlap or leave a gap
+  < 4 − s).  `ring_pocket.md` §0, §3; Lean `inradius_sep`, `capacity_le_two_of_centre_disc` (theorems), axioms
+  `unit_square_inball`, `three_disc`, `mid_notch_wall` [T-prose]; A251.
+- [T] **MOUTH, CONTACT-TRIPLES, NOTCH-SEP, TWO-VERTEX, TWO-PIECES, POKER-ANCHORED; ring + POKER structure** — sixteen
+  eight-cell families are met by the ring alone, so the only protection is a poker; if the admissible centres beside
+  the pinned poker have diameter < 1, capacity ≤ 2.  `centre_disc.md` §0, §5; Lean `capacity_le_two_of_two_pieces`,
+  `capacity_le_two_of_anchor`, `ring_pocket_of_poker_residual` (theorems), `ring_has_poker`, `pocket_count_three`
+  (axioms [T-prose]); A252.
+- [T] **LIMIT-UNIQUE(4) + USC** — the flush stratum of the all-ADJ family is exactly the two pinwheels, so some
+  τ₀ > 0 (NOT effective), uniform on [3.82, 4 − η], gives capacity ≤ 1 for all rings with all eight tilts < τ₀.
+  `peel.md` §0, §2.4, §5; A254.
+- [T] **JAGGED, WEDGE (J3), PIERCE (J4)** — k points, one in the interior of every unit square inside P, bound the
+  capacity by k.  `pocket_waste.md` §0, §2; Lean `capacity_le_of_pierce`; A237.  **POCKET-CAP** [T]+[M]: a stable ring
+  is impossible if its pocket's capacity is < n − p.  Lean `ring_capacity_of_pocket_cap` etc. over axiom `pocket_cap`.
+- [T] **NORMAL-ROOM reduction** — a free square missing O forces, at one corner, a CORNER-PAIR violation (4 parameters,
+  s eliminated: Lean `corner_frame_mono`); TOOTH; WEDGE (the START gap holds nothing if a < 1).  `normal_room.md` §2;
+  Lean `hole_one_tilt`, `tooth_flat`, `normalRoom_excludes`, axiom `pair_pierce`; A259.
+- [T] **OPEN-TOOTH** (least depth in the open notch ≥ cos φ − (e/2) sin 2ψ); **PLUG** (a′ ∈ (0.354 + ρ, 1) ⟹ no free
+  square meets [0, ρ]²; closes CORNER-NOTCH with the layer certificate).  `locked_wall.md` §0, §2, §4; Lean
+  `open_tooth_at_tilt`, `plug_kernel`, `poke_chord` (theorems), axiom `hybrid_pierce`; A260.  **plug_graded** [T]
+  (ρ = 1/4, 1/8, 1/16), `strip_plug.md` §0, A265.
+- [T] **FACTORISATION with the PRINCIPAL NORMAL** — a free square missing O violates at one corner one of P2 / WE / WS,
+  each two squares and four parameters, tilts independent; **WEDGE-NOTCH** in closed form (≤ 12 vertex values of a
+  2-variable LP).  `open_pairs.md` §0 (a), (a′), §1–2; Lean `principal_normal`, `factor_cover`, `wedge_depth_common`,
+  `clip_mono` (theorems), axiom `factor_pierce`; A263.
+- [T] **ADJ side bound** — test each box at s_eff = min(SMAX, hi_b + w(hi_φW) + 2, hi_a′ + w(hi_φ₁′) + 2) (corner-frame
+  monotonicity).  `strip_plug.md` §0; Lean `adj_side_bound`, `p2_of_adj_side`; A265.
+- [T] **GAP-CELL, BLOCKER-SIDE for the gap, STRIP-CHAIN** (common tilt, e ≥ sec φ₁) — pieces of the non-serving gap.
+  `three_lemmas.md` §0 Lemma 2 (a)–(c); A264.  **Non-ADJ count** [T]: a non-served far slot needs a FREE third meeter;
+  non-ADJ walls carry a free square in the unserved slot (Lean `nonadj_free_meeter`).  `open_pairs.md` §3.1; A263.
+- [T] **STRIP for a flat C in standard orientation** (chord / column / shrink).  `strip_plug.md` §0, §1.3; Lean
+  `strip_of_two_obstacles` (STRIP against {C, X} ⟹ A264's `strip_lemma`); A265.
+- [T] **WEDGE-FLOAT** — if C meets the open box with h_v < 1 < h_v + cos θ, every quadrant square free of C with a point
+  in S has its centre strictly above height 1 (A and WEDGED-SEAL not used).  `strip_enclosure.md` §0, §1; Lean
+  `wedge_float_core`; A267.  [T-prose] **STRIP₂-IN-RING** on (D1)–(D2), (U1)–(U9): Lean `strip_two_in_ring` (axiom),
+  `wedge_extent_core`, `strip_in_ring_of_enclosure`; A267.
+- [T] **SLOPE, LOW** — a floater sharing its box with a floor toucher has L_h ≥ 1.121 (> 1, no uniform margin, in the
+  steep case); (D1), (D2), (U1), (U2), (U9) are theorems from H1–H3.  `ring_domain.md` §0, §2; Lean `low_core`,
+  `lh_gt_one`, `lh_gt_one_steep`, `tangent_core`, `u1_core`, `u9_core`, `x_high`; A271.  (Caveat: A273 notes that
+  `lh_gt_one` carries cos α ≥ 1/√2 as a hypothesis, "worth checking" — `disc273.md` §7.5; see s.5.4, source disagreements.)
+- [T] **Lemma CL** — the case q_y > X_top with Q left of X is dead ((D − cos φ) cot φ ≤ c); **the reduction** of every
+  other case to a statement about a point and convex sets; `centre_right_core`.  `strip_jam.md` §0; Lean `cl_core_i`,
+  `cl_core_ii`, `d_low_core`, `centre_right_core`; A272.  (The statement it reduced to, the DISC LEMMA, is [F]: s.5.)
+- [T] **DROP LEMMA is h_v-invariant (4 parameters); ⟹ STRIP₂-IN-JAM** by A272's reduction; **the limit θ = φ = 0
+  holds with ZERO margin**.  `disc273.md` §1, §2.1, §5; A273.  Lean unchanged (`DiscLemma` opaque).
+
+### 2.4 Corner geometry
+
+- [T] **SIDEBAND (a)** (sharp constant c), **Lemma A1** (ℓ∞ centre separation ≥ 1/√2), **A2** (two meeters' centres
+  in distinct cells of the 2 × 2 grid), **Theorem B** (a second meeter exists iff one of (NE), (W), (S), (P) holds),
+  **Cor. B1** (a pressed first meeter admits no second meeter of the unit box).  `sideband.md` §0; Lean
+  `Sideband.not_both_ne`, `linf_sep`, `distinct_cells`; A169.
+- [T] **Theorem CEIL (per corner)** — every corner of every packing has min(d₁, d₂) ≤ 1 − 1/√2, equality only for the
+  diagonal 45° pair.  `k0_blocked_side.md` §2.1; A92.
+- [T] **PUSH** — two quadrant squares meeting the open corner box push each other OUT (n_u > 0 or n_v > 0; along the
+  wall a pushed square touches).  **HOLD** — at an FJ point a pressed meeter has a holder.  `k0_count.md` §2–3;
+  Lean `lemma_PUSH` (axiom [T in prose]); A218.
+- [T] **ONE-TILTED** — two axis-parallel squares both meeting the open corner box overlap.  `wall_torque.md` §3; Lean
+  `one_tilted` (axiom [T in prose]); A219.
+- [T] **WEDGED-SEAL** — a corner square touching both walls (any tilt) has no second box meeter; = Cor. B1.
+  `wedged_seal.md` §0; Lean `wedged_seal` (theorem via `lemma_PUSH`); A239.
+- [T] **TILT-MIN binds UPWARD** (sin θ ≤ δ; partner's lowest point ≥ 1 − (δ − sin θ) tan θ) and **DEPTH-BUDGET**
+  d_A + d_B ≤ 1 (flat wall meeter + any partner).  `pocket_waste.md` §1; A237.
+- [T] **REACH, GEAR-RATIO, LEVER** — for flat + tilted crowds under torque balance (structure statements).
+  `attempts/A239-rings-below-4/notes/rings_below_4.md`; ledger §4 A239 note; A239.
+- [T] **A246's rules** — TWO-CORNERS, MAX-FIVE, SQUARE-IN-TRIANGLE (1/a + 1/b ≤ 1), NOT-SELF-SUFFICIENT, TYPE-F-OWN,
+  ADJ-REACH, CAP-REDUCTION.  `construct_towards.md` §0, §5; A246.
+- [T] **CATALOGUE (PROJECTION)** — a square meets cells of at most one corner neighbourhood N_c (s > 2 + √2); every
+  subset realisable below 4; **TWO-FAR** (s > 7/2); **UPPER-END** (no 12-stuck 11-packing at s ≥ 4 + √2).
+  `perimeter_walk.md` §0; Lean axioms `two_far`, `upper_end_twelve_stuck`; A247.
+- [T] **POKE's true form, TOP-2, FLAT-ABOVE**; **TWO-POKERS** — two wall-touching type-F pokers on one wall need
+  s ≥ s* = 2 + min_θ[tan(45° − θ/2) + tan(θ/2) + sec θ] = 3.9342370 > ŝ (minimum [T-computed], 146 403 boxes).
+  `corner_chase.md` §0, §3.2; Lean `two_pokers_window` (theorem), axioms `top_two`, `flat_above`, `two_pokers`
+  [T-prose]; A248.
+- [T] **T-CELLS, T-TIP, T-SLOTS; FAMILY-STUCK per corner and per wall** (8 outside incidences; ADJ supply ≤ 1 per slot).
+  `type_t_chase.md` §0, §1, §3; Lean axioms `t_cells`, `t_cells_floor`, `t_tip` [T-prose]; A249.
+- [T] **Lemma STACK** (mutual wall pair ordered, clearance < 4 − s, stack height ≥ 2) and **WALL-CLICK** (under
+  H-ROOM).  `snap_down.md` §1–2; Lean `lemma_STACK` (axiom [T in prose]); A245.
+- [T] **SAME-WALL, BLOCKER-SIDE, STRIP-LANDING** — ≤ 1 toucher per wall at a doubly-met box, every further meeter
+  floats.  `box_meeters.md` §0, §1; Lean `same_wall_core`, `blocker_side_core`, `strip_landing_core` (theorems),
+  `meeters_split` (axiom [T-prose]); A261.
+- [T] **Corner closed forms** of the normal ring: (D4), E_A, E_B exact signed separations; the B-type's other axis
+  never separates when a < 1.  `family258.md` §2; A258.  **ROW-THREE** and **ALT-SIDE** need side > 4 at common tilt
+  (Lean `row_three_poly`, `alt_side_poly`), `normal_ring.md` §3.2–3.3; A258.
