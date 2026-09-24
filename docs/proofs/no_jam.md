@@ -63,7 +63,7 @@ Doubly-met box, meeters ≤ 4 (A2 cells), ≤ 1 toucher per wall (SAME-WALL [T])
 | mirror JAM | (0,1,1) | reflection across the diagonal | | | reflection |
 | FLOAT2 | (0,0,≥2) | C, D float, both meet; blockers A′ (floor) and X′ (wall) meet neither | both walls e = 1 | | none; [M] `float262` (pending) |
 
-[T] X misses the open box ⟺ its leftmost vertex is at height ≥ 1 ⟺ y_X ≥ 1 − cos φ_X (y_X = the lowest point).
+[T] X misses the open box (0,1)² ⟺ X's LOWEST point is at height ≥ 1: with X's leftmost vertex (0, y_X) and edges (cos φ_X, sin φ_X), (sin φ_X, −cos φ_X) the lowest point is y_X − cos φ_X, so the condition is y_X − cos φ_X ≥ 1 (the leftmost vertex is then at height ≥ 1 + cos φ_X).  [The earlier gloss "y_X ≥ 1 − cos φ_X" was a slip: A278 erratum, fixed A279.]
 [T] C serves no wall slot as a toucher; it may MEET a slot (in the drawn ring C meets BL01 with A and X) — that
 counts for family-stuck but not for the wall's row.  [T] a floater meets one box only (boxes are s − 2 > 1.8 apart).
 **Global structures by (j, shared)**: j = 1: the JAM RING (walls 0–2 rows of two or open pairs, wall 3 = X + C):
