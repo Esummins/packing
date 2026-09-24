@@ -610,3 +610,81 @@ This section is what stops agents repeating them.  Grouped by theme; each: the c
   witness JAM, the JAMMED FLOATER (every wall-touching cell meeting C overlaps A or X by ≥ 0.0090).  **"A slab of
   near-flat tilts is excluded"** (A261's own, caught by its engine) — D′ reaches 0.7°–1.4° on one wall at ŝ.
   `box_meeters.md` §0; A261.
+
+### 5.3 The strip / disc sequence and the certificate readings (A263–A274)
+
+- [F] **P2 without the principal normal** — a 44° square hugging the right wall where the dropped W′ stood misses O "to
+  the floor" by +0.03 (`fact263_rows_v0.jsonl`).  **ROOM ≤ 1 as a bare-ring statement on non-ADJ wide gaps** — for
+  e ≳ 1 + w(φ₁) − sec φ₁ a unit cell touching the wall fits in the gap (drawn).  **"3.9347 − Cφ"** — wrong limit: the
+  near-flat mixed ring tends to the domino pinwheel at ANY side.  `open_pairs.md` §0, §5.4, §7; A263.
+- [F] **The reading of A263's OPEN P2 leaves as a corner layer "b ≥ 0.98"** — they sit at b ∈ [0.88, 1] and the failing
+  square is on the centre line, 0.7 from the right wall; a REAL P2 miss at 3.8771, where those boxes are not all-ADJ
+  (a′ + w(φ₁′) = 1.822 < s − 2): a SIDE-MISMATCH artefact (ADJ imposed at 3.82, evaluated at 3.8771).
+  `strip_plug.md` §0; A265.
+- [F] **STRIP₂ as A265 stated it for a tilted C** ("0 < h_u, h_v < 1" as "C meets the open box") — h_u = 0.963,
+  h_v = 0.848, θ_C = 31.7°, X flat at y_X = 2.81: a FLAT square at (0.599, 0.820) is free of C (+0.084) and X (+0.515)
+  and meets int T_u (depth 0.47) (`probe266`, page `strip_tilted.svg`); the flat-C chord proof does not carry (chords
+  bounded by C's lower-left edge up to h_u + sin θ_C).  `last_two.md` §0; A266.
+- [F] **(U3), (U4), (U5), (U6) as consequences of H1–H5** — `adv271` minima −0.199 (U3: θ = 34.5°, φ = 0°), −0.300
+  (U4), −0.243 (U5), −0.184 (U6), all with |φ − θ| ≥ 13° (pages (b)–(d)); they are RING-level facts.
+  `ring_domain.md` §0; A271.  And **on the near-flat corner θ, φ ≤ 5°** ("R1 is dead", tagged "[F as consequences]"):
+  exact H1–H3 witnesses W1 (U4 = −0.2985, θ = 0.500°, φ = 4.997°) and W2 (U5 = cos φ − 1 = −0.0038, θ = 0); numerically
+  U3 −0.0325, U4 −0.7378, U5 −0.0038, U6 −0.00047 on the sub-box; only (U8) holds ([T] via 1.82 − w(θ)).
+  `attempts/A274-flat-corner/notes/flat274_part2.md`, `results/r1_274.md`, `results/witness274.json`; A274.
+- [F] **The DISC LEMMA** (A272: a point q above L_h at distance ≥ ½ from Ξ and Γ within 1/√2 of the strip is
+  impossible) — exact Fraction witness `witness273`: h_u = 17/20, h_v = 199/200, tan(θ/2) = 7/100 (8.01°), X_low =
+  211/100, φ = 0, side 387/100, q = (2409/1600, 1294051/500000), p = (99221/100000, 21099/10000); disc slack up to
+  +0.0079.  Why: the distance form forgets the CONE — the drop conv(D(q, ½) ∪ {p}) crosses X's corner (overlap 1.1·10⁻³).
+  Also [F]: A272's "sup slack −0.005, attained only as h_v → 1" (an optimiser artefact along a flat direction).
+  `disc273.md` §0, §7; A273.  (A272's Lean axiom `strip_two_in_jam_of_disc` stands on an opaque `DiscLemma`.)
+- [F] **The tilt-split guess** — A272's brief split the violators on |φ − θ|; A272: "the case split is not on
+  |φ − θ| … the worst points have X FLAT" (`strip_jam.md` §0 "What the brief had wrong").  A274: the zero-margin
+  direction is φ ≪ θ (0.25 θ² at φ = 0), not the diagonal (0.5 θ).  A273's "boundary layer h_v → 1" — not a layer
+  (h_v-invariance); the layer is θ, φ → 0 (`disc273.md` §7.2).
+
+### 5.4 Pitfalls from other classes, and source disagreements (recorded both ways, later named)
+
+- [F] **"k5 closed at the window pad"** (k5, but a k0 pitfall) — "g1" is A57's G1 SLAB (3.861637, s0], not the window;
+  k5_11 / k5_16 are NOT dead on G1 (290 A57 G1 cover boxes never emitted + two s0-only pages), and nothing on G2–G4.
+  `attempts/A270-k5-lower-slabs/BRIEF.md` line 3; LOG 2026-09-23 A270; `docs/shadows/STATUS.md` per-slab table.
+- [F] **The rowing rule** "row a class C when every one-slot EXTENSION of C is full-window closed" (A241's brief) —
+  unsound: Lemma K1 climbs UP containment; a packing with skeleton exactly C carries no fifth simple square.  Closed
+  extensions give only SLOT-CROWD (forced cells).  `residue_ledger.md` §3 A241 note; LOG 2026-09-16 A241; A241.
+- [F] **Price of the corner seed "25–30 desktop-days"** (A84) — the seed is a 10¹⁶-node cover (`k0_route.md` §8.4).
+  **"The corner seed forces the selected form"** (A84) — void (K0-FREE is ∀-packings, `k0_route.md` §3, §9).
+- [F] **A87's quantitative drain; (b) exit map; (c) selection compatibility** — void / false as mechanisms
+  (`drain_flow_k0.md` §3).  **A92's route-3 object** (an 8-core K-leaf) does not exist (empty core for δ < 0.134).
+
+**Source disagreements** (each recorded both ways; the later source is named):
+1. **Chain status lines vs index files.**  `k0_route.md` §13 (A264–A273 edits, 2026-09-22/23): A259 "index filling /
+   verify259 rerun alive", A260 hybAB "8/81", A261 "11/50 verified", A263 P2 "41/81, five OPEN".  Index files read
+   2026-09-23: A259 81/81 + verified bad 0 (commit 8512d81d1, 2026-09-22); A260 81/81 ×4, bad 0; A261 50/50 verified;
+   A263 P2 70/81 indexed, 20 not ok.  The files are later.  (s.3.)
+2. **j = 2 adjacent JAM rings.**  A262 (2026-09-22, `no_jam.md` §0): "no ring found (best −0.0078)".  A264 (later, same
+   day, `three_lemmas.md` §0 "N6 corrected [F → M]"): they EXIST, t = 0.0071 at ŝ, capacity 1.  A264 is later.
+3. **STRIP₂'s margin at the flat corner.**  A273 (`disc273.md` §5): ~0.15 θ².  A274 (later, `r1_274.md`): 0.25 θ² at
+   φ = 0 and 0.5 θ on θ = φ; A274 reproduces A273's data points.  A274 is later.
+4. **DISC LEMMA.**  A272 (`strip_jam.md` §0): [M] holds, sup slack −0.005.  A273 (later): [F], +0.0079.  A273 is later;
+   `strip_jam.md` carries A273's correction banner.
+5. **`slab_cube`.**  A264 (`three_lemmas.md` §0): "`slab_cube` is no longer an axiom" (replaced by `slab_cube_264` for
+   rings of pairs).  `lean/AUDIT.md` (2026-09-23 18:37, later) still lists `slab_cube` as an axiom (OPEN) declared in
+   `OpenPairs.lean`.  Both true at once if the old axiom was left declared; not checked here.
+6. **`centre_disc_ring`.**  A251 introduced it as an axiom [T-computed]; A252 (later) refuted its premise and REMOVED
+   it (`centre_disc.md` §5); AUDIT has no such entry today.  A252 is later.
+7. **Lemma LOW's Lean core.**  A271 (`ring_domain.md` §0): LOW for "all tilts α ∈ [0°, 90°) of A", with `lh_gt_one`
+   and `lh_gt_one_steep`.  A273 (later, `disc273.md` §7.5, §2.4): "`lh_gt_one` carries cos α ≥ 1/√2 as a hypothesis …
+   worth checking before any other certificate leans on it"; A273 does not use LOW.  Unresolved in the sources.
+8. **A273's Lean/AUDIT note.**  `disc273.md` §0: "Lean unchanged (DiscLemma is opaque; its prose content is [F]; AUDIT
+   note)".  `lean/AUDIT.md` (2026-09-23 18:37) and `StripJam.lean` contain no A273 note.  Recorded, not fixed here.
+9. **A273's price.**  `disc273.md` §4: "all cells but the corner-adjacent ones in seconds to minutes".  Index (later):
+   c5_4 / c5_5 (θ 25–30°) capped at 400 000 boxes with OPEN leaves.  The index is later.
+10. **Strip prices.**  A265: STRIP tree ≈ 1–3 CPU-h.  A266 (later): ~5·10³ CPU-h ("A265's 1–3 CPU-h was wrong").
+   A272: disc-lemma tree ~20 / 10² CPU-h.  A273 (later): hours (for the DROP form).  Later ones stand.
+11. **`strip265` ring count.**  `strip_plug.md`: 18 at exit, 323 in the lane.  `strip265.json` today: n = 432.
+12. **FLOAT2.**  `no_jam.md` §1 (A262): "[M] `float262` (pending)"; `three_lemmas.md` §4.5 (A264): "not run".
+   `float262.json` (2026-09-23 11:59, uncommitted): "JAMMED FLOAT2 EXISTS", sup_t +0.00224.  The file is later.
+13. **SLIDE's d₂ bound.**  A92's sequential proof gives only Σ_{i≥1} d_i ≥ ŝ − m; A94's joint translation gives the
+   d₂ bound (`slot_crowds.md` §0, §3.4).  A94 is later.
+14. **A85's f₂ and the k0 frontier.**  A85: f₂ = 1/3 at A60 defaults, FAILs are coverage holes.  A99 (later, REGISTRY
+   A99): "A85's k0_00 FAILs are LP row-generation failures, so f2 ~ 0".  A115 (later): a plain 240 s warm re-solve
+   certified 10 of 55 cells — "the stored node results were simply row-generation-incomplete" (`residue_ledger.md` §4).
