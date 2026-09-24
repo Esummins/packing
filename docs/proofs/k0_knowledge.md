@@ -948,11 +948,71 @@ that form each corner box is met by exactly two squares, one on each wall; each 
 squares, a row of three, or an open pair held apart by a free square; and the eight wall squares form a pinwheel
 ring.  Every other square must lie in the ring's central pocket, and the whole case analysis comes down to one
 statement: every free square of the pocket covers the centre point O, so the pocket holds at most one square — 8 + 1
-= 9 < 11.  That statement is PROVED where it is a theorem (the near-flat cube, the flush limit, the hole-one lemma),
-CERTIFIED by box trees with independent verifiers on the normal ring, the hybrid ring and the window exclusions, and
+= 9 < 11 (the other pinwheels of rows are excluded below ŝ separately: the window exclusions).  The pieces are PROVED
+where they are theorems (the hole-one lemma, the flush limit, the near-flat cube), CERTIFIED by box trees with
+independent verifiers on the normal ring, the hybrid ring and the window exclusions' LP part, and
 still OWED in four places: (i) corners where a box meeter floats off its wall (the JAM corner — `pair3` and the strip
 lemma, whose last piece is a thin near-flat corner that no computation can reach and that needs a hand proof);
 (ii) the FLOAT2 and indirect-jam corners (no room statement at all yet); (iii) twenty open cells of the independent-
 tilt pair certificate and the near-flat slab jobs; (iv) rings whose wall squares do not reach the far slots (non-ADJ),
 where the needed statement is only that two free squares cannot both miss O.  Underneath all of it: the k1_00 tree,
 and the Lean formalisation of the [T-prose] steps.
+
+## 9. GENERAL n
+
+**9.1 Which items are m-free** (stated for every n; the sources' own "n-general" / "any n, any s" lines).  Exchange:
+SWAP, STEP, CELLS, `teleport_packing`, NORMAL-CELL, UNLOCK / HELD / LIFT, WALL-SLOT, SWAP-LEAF, VALUE-WLOG, NORMAL-FORM
+(P1–P4, "any n, any s").  Corner geometry: SIDEBAND (a), A1, A2, Theorem B, PUSH, HOLD, ONE-TILTED, WEDGED-SEAL,
+TILT-MIN, SAME-WALL, BLOCKER-SIDE, STRIP-LANDING, T-CELLS / T-TIP / T-SLOTS, STACK (2 + √2 ≤ s < 4), A246's rules
+(s ∈ (2 + √2, 4]; only f = n − 8 uses n), CATALOGUE (s > 2 + √2), TWO-FAR (s > 7/2), EPS-1…6.  Room: HOLE-ONE (any
+square container of side ≤ 2), NOTCH-NARROW, INRADIUS, THREE-DISC, MID-NOTCH, TWO-PIECES, POKER-ANCHORED, PIERCE,
+PLUG ("any n, s, m"), WEDGE-FLOAT ("any n, s-free"), the NORMAL-RING corner closed forms ("a two-square statement").
+Counting: CEIL, FLUSH, the perimeter count n ≥ 4(m − 2) + 1, NO-CLOSURE, BAND-COUNT (general), PEEL-0.  Force:
+TWO-CONTACT, STRUT, Theorem SO, Lemma W, TORQUE-ID, LOCALITY, RADIAL, CHAIN, NO-VV-IND, CROSS-PLANAR.  Sources: s.2.
+
+**9.2 Which are m = 4 (n = 11) only.**  The border system's perfect-matching conflict graph below 4 (`family250.md`
+§1.3); row lengths ℓ ≤ 3 and "opposite walls never interact" (`normal_ring.md` §4); LIMIT-UNIQUE(4) (the flush stratum
+is exactly the two pinwheels — "[F]" for m ≥ 5, `peel.md` §0); HOLE-ONE's use at σ = s − 2 (slack (4 − s)/2);
+TWO-POKERS' window statement (s* = 3.9342 > ŝ; "for n ≥ 16 (s ≥ 4) TWO-POKERS is empty", `corner_chase.md` §5); every
+number of §3.2–3.4 of `normal_ring.md` and every certificate of s.3; the JAM analysis (H1 uses s̄ ≥ 3.82); the lock
+statistics; Theorem U, the basin, k1_00's tree, SWAP-RIGIDITY (Trump-specific).  K0-FREE's MECHANISM is n-general
+(O-TELEPORT-N, `local_lock.md` §5); its KILL is the n = 11 k1_00 tree.
+
+**9.3 NORMAL-RING(n) and its general facts** (`normal_ring.md` §4, A258).  [C] NORMAL-RING(n): four rows of m − 2 of
+one sense, K = s − (m − 3) sec φ − w(φ), a + b = K, a, b < 1, the same corner condition, plus locked walls.  [T] for all
+m: NORMAL-FORM P1–P3; a row of m − 2 with a, b < 1 is row-normal; the corner closed forms; least side (m − 3) sec φ + w +
+1 + tan(φ/2) → m − 1; **the tight normal ring's flush limit is the TIGHT PINWHEEL for every m** (a row has no internal
+gaps: A254's wall slack lives only in rings that are not row-normal).  General system: 8m − 20 border cells; family-
+stuck needs one poker in a NARROW ribbon (`peel.md` §1.2).
+
+**9.4 PEEL / the onion** (`peel.md`, A254).  [T] PEEL-0: k core squares ⟹ s ≥ 2 + s(k).  With BAND-COUNT, a packing with
+NO straddler has s ≥ 2 + s(n − 4(m − 2)) — exactly the tight flush pinwheel (four 1 × (m − 2) wall blocks; pocket =
+hole [1, s − 1]² ⊔ four isolated notches); HOLE-ONE is m = 4 (n′ = 3, s(3) = 2).  For m ≥ 5 only the weaker
+s ≥ (s(n′) + m + 1)/2 on the whole flush stratum (POKE: pocket squares poke into mid-wall gaps).  Conditional [C]:
+ONLY-RING(n) + MONOTONE-ROOM(n) ⟹ "no family-stuck packing below 2 + s(n − 4(m − 2))" (Lean `peel_excludes`).  Table
+(36 values n ≤ 100 below ⌈√n⌉, on the tight pinwheel): THEOREM-WINDOW 6 (n = 5, 10, 11, 18, 19, 29), THEOREM-AT-RECORD
+3 (17, 26, 27), RECORDS-ONLY 26, EQUALITY 1 (n = 84), NOT-EXCLUDED 0 (`results/peel254_table.md`).  n = 11: "nothing
+new is closed".
+
+**9.5 The PI's structural reading, as the sources state it.**
+- **ONLY-RING** [C] (the PI; `mintilt253.md` §4, `peel.md` §1.3): every family-stuck packing below m contains the ring;
+  its other squares are ≥ 1 poker and free squares.  Plausible from the ILP (the minimal structure is the all-ADJ ring +
+  one poker), not proved; "the count does not prove uniqueness".  At n = 11 the chain replaces it by NORMAL-FORM +
+  BOX-MEETERS + ROW CLASSIFICATION (links 2–7).
+- **RETREAT** (the coordinator's addendum, P4 / Φ₄): free squares sit where they meet the fewest border cells; a poker
+  that is not HELD does not count, and nothing can hold a seated poker ("beside a seated poker no unit square fits at
+  all") — `normal_ring.md` §0, §2.1; HELD-JAM does NOT exclude the JAM ring (`no_jam.md` §0).
+- **The domino pinwheel is the limit** [T]: the τ → 0 limit of the all-ADJ ring is the four-corner domino pinwheel with
+  capacity exactly 1 (`mintilt253.md` §0); the near-flat mixed ring tends to it at ANY side (`open_pairs.md` §5.4); the
+  flush limit of the tight normal ring is the tight pinwheel for every m (`normal_ring.md` §4); A226's CROWD-ABOVE builds
+  four crowds from corner dominoes at every side > s(n) (`one_flush.md` §0).
+- **Why a variational argument is needed for all n** — A226: the all-packings statement STUCK(n) is false for every n
+  whose record has corner dominoes, and a doubly-met corner costs O(ε), so "the obligation is ONE-FLUSH(n) … a
+  statement about minimisers whose proof must be an IMPROVEMENT argument (every four-crowd at side S admits a packing at
+  side < S), not a counting, waste or perimeter bound" (`one_flush.md` §0).  A233: the extremal (Ψ-minimal optimum)
+  route is n-general and reduces ONE-FLUSH(n) in value form to LOCKED-CROWD-FREE(n) (`local_lock.md` §0).  A255/A258:
+  VALUE-WLOG makes the choice of packing free, and the lexicographic normal form is the variational selection the n = 11
+  chain uses.  **SEAM** [C] (A223): every optimum below ⌈√n⌉ is flush squares + ONE tilted grain — consistent with
+  n = 5, 10, 11, 19 (`two_grains.md` §4).
+- **n-general evidence** [M]: the ONE-FLUSH survey (21 records, n = 5 … 55: ≥ 3 flush corners each; Trump the only
+  doubly-met corner) — `one_flush.md` §0; records are cross-braced, none a ring — `ring_capacity.md` §0.
