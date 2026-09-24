@@ -756,6 +756,11 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        three pins R_X / T / L; at φ > 0 the flat square is dead outright, slack first order).  Lean `Statements/Open/FlatX.lean`
        (cores [T], `strip_two_in_jam_corner` [T-prose]).  So 5b = STRIP₂-IN-JAM [T on the corner (A276) + T-computed outside it
        (A273's drop tree; c5_4 / c5_5 at θ 25–30° capped, still open)] + `pair3` (not landed).
+       **A280 (2026-09-24):** A273's steep-C OPEN layer (θ ≥ 25°, 24 capped / open cells) was a MISSING PRUNE: the open
+       leaves have X wholly above T_u (H2 fails; (D-low)) and the h_u → 1 corner is excluded by Lemma LOW; drop slack
+       negative at every open leaf [M].  tree280 (A273's test + DLOW / SEP / LOWF) closes the bench cells in ≤ 327 boxes,
+       verify280 PASS; the 29 steep cells run gated on A273's chain (`attempts/A280-drop-steep/code/run280.sh`).  So 5b =
+       STRIP₂-IN-JAM [T on the corner + T-computed outside it once run280 lands (LOWF leans on (F4)(c) prose)] + `pair3`.
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: **[C] = two CAP-2 statements** (A277, 2026-09-23,

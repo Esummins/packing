@@ -1217,3 +1217,27 @@ pathspecs, fetch + plain merge only, no response over ~15k tokens); never touch 
   Cheapest certificate: A278's tree with (NEST), (Σ), (WEDGE), FLAT-C as monotone prunes; 2-D slice bench first.  A279 part 3.4.
 - s.5 [F→fixed] the gloss "X misses B iff y_X ≥ 1 − cos φ_X" is corrected in s.1 and `no_jam.md` §1 (A279).
 - s.8 5d — unchanged: two CAP-2 statements [C]; `float2_local` [C] stands; NestResidual.lean adds no axiom (A279).
+
+## 13. APPENDS — A280 (2026-09-24), THE DROP LEMMA AT STEEP C (`attempts/A280-drop-steep/notes/drop280.md`)
+
+- s.5.3 [F→diagnosed] **"A273's OPEN layer at θ ≥ 25° is a weak drop test or a miss"** — neither: every sampled OPEN
+  leaf is OUTSIDE H1–H3 (X wholly above T_u, exact area X ∩ T_u = 0, dip D ≤ 0.004 < (D-low) 0.136–0.184).  A273's
+  `prune4` omitted H2's "int X meets int T_u" and Lemma LOW.  c6_2 10/10, c7_6 191 729/191 732, c8_3 189 943/189 949
+  OPEN leaves pruned by DLOW; the rest are big boxes left by the 400k cap.  `diag280`; A280 §0.
+- s.4 [M] **drop slack at the open leaves** — negative everywhere (−0.00006 … −0.0002 on the DLOW slivers, −0.017 …
+  −0.32 at the big boxes): no counterexample to the DROP LEMMA at steep C.  Two ZERO-MARGIN limits of the drop lemma,
+  both outside H1–H3: D → 0 with X above T_u; h_u → 1 on the (D-low) boundary (q = (½, L_h) at the wall, the unit
+  square between the wall and C's left vertex, slack −0.0012 at h_u 0.9999) — excluded by LOW + the open box
+  (h_u ≤ 0.854 at θ = 40°).  Any drop-type tree must prune with H2 and LOW.  A280 §0, §4; page (c).
+- s.2.3 [T] **DLOW, SEP, LOWF** (box prunes) — (D-low) D ≥ (c − sin φ) tan(min(θ, φ)); separating axis X | T_u;
+  LOW full range (F4): L_h ≥ LOWB(θ) = min(1/√2 + tan(45° − θ/2), min_α G(α, θ)), G = cos α + c − s + (c + s − 1) tan α
+  (case (c) is prose in (F4); Lean `lh_gt_one_steep` proves only G > 1) — LOWB 1.344 / 1.284 / 1.228 / 1.173 / 1.109
+  at θ 25 / 30 / 35 / 40 / 45°.  `prune280`, `verify280` (mpmath.iv); A280 §2.
+- s.3 [T-computed] **tree280 + verify280 bench** — c6_2, c7_6, c8_6, c8_3, c5_4 CERT in 51–327 boxes (≤ 1 s) and
+  verify280 PASS (coverage, 0 disagreements) vs A273's 400k boxes / OPEN; `_bench` files.  The run over the 29 steep
+  cells not CERT in index273 is LAUNCHED gated on A273's chain (`run280.sh`, ~0.1–0.3 CPU-h, commit per cell).
+- s.5.4 [erratum] the brief's strengthening (LEFT + height split) — LEFT is already Γ (P1); the chord conditions of the
+  height split are implied by the disc (central symmetry); the missing pieces were prunes.  Sound further option, unused:
+  the quarter-turn orbit of p about q lies in int Q (drop → conv(D(q, ½) ∪ orbit)).  A280 §1, §3.
+- s.8 5b — STRIP₂-IN-JAM [T on the corner (A276) + T-computed outside it: A273's CERT cells + A280's steep cells when
+  run280 lands] + `pair3`; the ring route (U3)–(U6), (U8) is not needed at steep C.
