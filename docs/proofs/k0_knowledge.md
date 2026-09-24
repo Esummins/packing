@@ -753,3 +753,83 @@ path, but each is a statement someone may try to prove again — know what it wo
 - [C] **H1 = T3|k0** (A87, DF-O4 OPEN): no k0 configuration with s < ŝ is FJ-critical — "not affordable as a cover".
 - [C] **RING** as a structure census (A219; 2.6·10¹¹ structures), **LOCK-FREE⁺(< 4)** (ledger §4), **NO-VV-STRESS(n)**
   (A235), **RES-N(δ_∞)** (A92-G1, the nicked slab) — the load-era forms.
+
+## 7. DEAD ROUTES [D] — the reason each died and its price, so nobody re-prices them
+
+The recurring reasons: **PRODUCT LAW** (a leaf that needs every one of several independent roles localised at once
+multiplies the per-role counts — four corners, eight meeters, 17 coordinates); **DIMENSION** (a box cover of a
+positive-dimensional family at the radius a certificate fixes); **MARGIN vs BIN** (the certificate's tilt / box bins
+cost more than the statement's margin, or the margin is zero); **FALSE LEAF** (the leaf's statement is false or does
+not hold on a cell's fibre); **LOAD** (a force argument cannot see rattler crowds).
+
+### 7.1 The volume trees (the k0_00 zone tree and its cascades)
+
+- [D] **A38 root power** — the far-field tree at s0: a per-node LP DECISION wall, 70–700 desktop-days as an open-ended
+  floor (`attempts/A38-root-power/results/rootpower_report.md`; `k0_route.md` header).  A84: ≥ 100 desktop-days plain.
+- [D] **A85 interior-first tree** — level 1 undecidable (η −0.12…−0.34, all repairs fail); depth 2 decides (τ = budget −
+  1.0…1.27) at ≈ 1 000 s LP + 630–860 s certification per node; f₂ = 1/3 at A60 defaults.  **Price 3 200–7 000 CPU-h if
+  f₂ ≈ 0.85, ≥ 3·10⁴ CPU-h if f₂ = 1/3.**  "The order-of-magnitude cut the brief asked for does not exist along
+  C1–C3."  `k0_route.md` §0, §7–8; A85.  Reason: MARGIN (certification reliability at η ≈ −1).
+- [D] **A85 corner seed as a cover (C3)** — N_pair ≈ 3.4·10⁴ per corner, 2.9·10¹⁶ four-corner nodes after prunes and
+  /8; level 1 alone 2.8·10⁴ attemptable LP nodes (≈ 1.3·10⁴ CPU-h); no finite case list (K0-PAIR (b)).  `k0_route.md`
+  §7.2, §8.4; A85.  Reason: PRODUCT LAW + DIMENSION.
+- [D] **A87 H1 as a certificate (T3 restricted to k0)** — the restriction prunes nothing at cell level; the cell count is
+  the 33-dimensional volume at the discharge scale: 10⁶³ cells at h = 10⁻², 10¹⁰⁶ at 5·10⁻⁴.  `drain_flow_k0.md` §0,
+  §6; A87.  Reason: DIMENSION.
+- [D] **A92 crowd certificate chain** — certified only at δ = 0.3 (Theorem S(0.3)); δ = 0.2 undecided (LP a
+  non-converged lower bound; 65/65 run-B holes); δ ≤ 0.1 impossible for the weighted root LP; the residue RES-N(δ_∞)
+  and uniqueness at ŝ are not reached.  `k0_blocked_side.md` §0, §5–6; A92.  Reason: MARGIN.
+- [D] **A99 k0 tree v2** — "NET PRICE INCREASE, not the ~10x asked for"; R1 (sub-box re-verification) 0/1; the frontier
+  9 341–21 661 CPU-h.  REGISTRY row A99; LOG 2026-09-05 A99; `residue_ledger.md` §4.  A115 (warm re-solves) removed
+  1 023–2 372 CPU-h of it for 29.8 CPU-h, leaving twelve CONVERGED-ALIVE cells (τ = budget, minmass 1: "no LP time kills
+  them"); the ledger's one-table row: "12 cells; tree priced ~12,000 CPU-h after A115".  A115 T3: corner rows at the
+  node level kill nothing genuinely alive — at depth 0 every Trump image realises nine corner incidences against a
+  budget of eight, so the root crowd LP can never pass.  Reason: the LP cannot see K0-FREE (the K01 supports have
+  one DEEP meeter per corner).
+- [D] **A143 corner-first root / A166 nearest-corner sub-tree** — sound covers, not cheaper (A143 kills 0 of 216 level-1
+  cells).  `residue_ledger.md` §4 A143, A166 notes.
+- [D] **A165–A168 / A183 / A191 the PI's k0 cascade on l1_104** — sound, does not close the cell; A191: 17 of 64 alive
+  S2 nodes DEAD (frozen verifier), 305 s per node; A195's re-price (`docs/budget.md` "The cascade route"): eleven
+  cells × 1 375 CPU-h (deep kill rate 1.00) = 15 125 CPU-h … × 359 647 (rate 0.95, "the measured S3 rate carried
+  down") = 3 956 117 CPU-h, "not purchasable".  Reason: PRODUCT LAW (the kill rate per level compounds).
+- [D] **A232 SWAP-LEAF on the k0 root cells** — the eleven converged-alive cells box ONE square (u = 10), so the leaf asks
+  for ten disjoint squares in [0, 3.82]² avoiding H's reach set (s(10) = 3.70711, slack 0.113); the search places 6–9;
+  A185's split cannot help (SPLIT-INVARIANCE).  `swap_leaf.md` §0; A232.  Reason: FALSE LEAF at that depth (the leaf
+  is sound; it is only available at the crowd-conditioned root, u = 3, which is the cascade again).
+- [D] **A242 crowd root, leaf L1 = NO-ROOM(m = 3) over the eight cores** — L1 fires only when ALL EIGHT roles are at
+  A60's box scale: ≈ 1.7·10¹⁷ cells, **≈ 10¹⁵ CPU-h** at 20–35 s/cell; L2 (BOX-GORDAN, [T] new) is gated by L1's own
+  weakness (worst pocket gap 0); L3 dropped (a quantifier: A239's lemmas need the Ψ-minimiser).
+  `attempts/A242-crowd-root/notes/crowd242.md` §0; A242.  Reason: PRODUCT LAW.
+- [D] **A243 REACH-SUMMARY re-root** — the 16-coordinate grid g¹⁶/8 = 1.25·10¹⁵ cells at g = 10; R1 (REACH) and R2
+  (LEVER) are not cell inequalities ([Q-ALONG-WALL], [Q-STRUCTURE]); R3 subtracts only the FIBRE's cores, empty in every
+  occupied bin at h = 0.2 — the honest price returns to A242's ≈ 10¹⁵ CPU-h.
+  `attempts/A243-reach-root/notes/reach243.md` §0; A243.  Reason: FALSE LEAF on the fibre + PRODUCT LAW.
+
+### 7.2 The structure censuses and ring certificates
+
+- [D] **A219 RING as a finite structure question** — 2.6·10¹¹ structures (h ≤ 3 interior holders), 2.3·10⁶ CPU-days at
+  0.78 s each (232 CPU-days without interior holders); and it would exclude LOADED four-crowds only.
+  `wall_torque.md` §0, §6; A219.  Reason: PRODUCT LAW + LOAD.
+- [D] **A233 arm structure list** — finite and small (≤ 10⁷ row lists per corner at H ≤ 5), but it decides only LOCKED,
+  and locked corners exist at the optimum (Trump's TL).  `local_lock.md` §0, §4; A233.  Reason: FALSE LEAF.
+- [D] **A247 perimeter walks** — 66 112 676 788 labelled walks (13 453 179 721 after the 62 pair kills; 820 161 up to
+  the type-F conditional); per-walk bounded search over 11 poses + s is out of reach; 92 pair problems η-degenerate.
+  `perimeter_walk.md` §0; `family250.md` §2.3; A247/A250.  Reason: PRODUCT LAW + MARGIN (the η-degeneracy).
+- [D] **A251 box-valid PIERCE over the 17-coordinate ring family** — ε* = 0.1397 admits a box half-width only r = 0.0312
+  in all 17 coordinates: **3.9·10¹⁸ boxes ≈ 5·10¹⁴ CPU-h** against a 200 CPU-h stop ("stop at the design"); the AREA
+  bound breaks at ε = 0.03.  `ring_pocket.md` §0; A251.  Reason: DIMENSION ("the COUNT — 17 coordinates at a radius the
+  certificate fixes").
+- [D] **A252 disc criteria** — every INRADIUS-only criterion fails in the flat-flat limit (s.5.2).  Reason: FALSE LEAF.
+- [D] **A237 area / waste form of POCKET-CAP** — needs a tilt floor ≥ 32° at n = 11 (none exists); closes at no n ≥ 18.
+  `pocket_waste.md` §0; A237.  Reason: MARGIN (O(ε) waste).
+- [D] **A266 `strip266` (5-parameter LEFT-SHADOW tree for STRIP₂)** — ~5·10³ CPU-h for the 27 root cells (535 s per
+  1/1200 sub-cell; the 1° tilt bins cost 0.017 of a 0.005–0.02 margin); the plain annulus test 170 CPU-h per root cell;
+  launched budgeted, every cell OPEN at the budget (s.3).  `last_two.md` §0, §1.3; `k0_route.md` §13 5b; A266.
+  Reason: MARGIN vs BIN.
+- [D] **A262 7-parameter `jam` kernel** — priced 15 (median) – 500 (mean) CPU-h, heavy tail (`price262`); made
+  unnecessary by A264's reduction to `pair3` + STRIP (`three_lemmas.md` §0 Lemma 1: "The 7-parameter `jam` job is then
+  unnecessary").  `no_jam.md` §0; A262/A264.  Reason: DIMENSION (superseded by a 4 + 2-square split).
+- [D] **A271 residual certificate on R** (the ring-inequality violators, ~18 % of H1–H3) — ~10³ CPU-h, not launched
+  ("over the 20 CPU-h line by two orders").  `ring_domain.md` §0; A271.  Superseded by A273's DROP form (hours).
+- [D] **The DROP tree on the corner θ, φ ≤ 5°** — cannot be bought at any price: STRIP₂'s own margin → 0 (`disc273.md`
+  §5, §7.3).  Reason: MARGIN = 0.
