@@ -474,8 +474,10 @@ tiling check).  "ok" = the tree's cell verdict; "verified" = the independent ver
   552 rows today).  `k0_route.md` §13 5e; `three_lemmas.md` §4.5.
 - [M] **HELD-JAM does not exclude the JAM ring**: the bare ring never blocks C's retreat (35/35), a single free square G
   blocks every retreat direction in 31/35.  `no_jam.md` §0; A262.
-- [M] **FLOAT2 (5d)**: `attempts/A262-no-jam/results/float262.json` (chain3 output, 2026-09-23 11:59, **uncommitted,
-  in no doc yet**): verdict "JAMMED FLOAT2 EXISTS", sup_t = +0.00224 over 108 starts.  The corpus census below 4 had
+- [M] **The FLOAT2 witness (5d)**: `attempts/A262-no-jam/results/float262.json` (chain3 output, 2026-09-23 11:59):
+  verdict "JAMMED FLOAT2 EXISTS", sup_t = +0.00224 over 108 starts; poses (x, y, tilt rad) C (0.7307, 1.5955, 0.2525),
+  D (0.9503, 0.6035, 0.2246), A (1.9911, 0.6090, 0.2522), X (0.6549, 2.6825, 0.3988) in the file; drawn in
+  `docs/residue_map/current/k0_stuck_2026-09-23.svg` panel (b); now cited in `k0_route.md` §13 5d.  The corpus census below 4 had
   1 FLOAT2 corner, a rattler with a free straight drop (`cp85_032`, s = 3.9240) (`box_meeters.md` §0).  No room
   statement for FLOAT2 exists (chain 5d stays [C]).
 - [M] **Middle toucher (span262)**: `results/span262.json` sup_t −0.0327 at cap ŝ (72 starts) — no JAM ring with X a
@@ -729,10 +731,10 @@ gives one).
   `pinwheel_corner_pp`, `strip_two_in_ring`, `strip_two_in_jam`, `strip_two_in_jam_of_disc` (whose opaque `DiscLemma`
   is [F] as stated — s.5.3; the DROP form has no Lean statement yet), `lemma_PUSH`, `two_pokers`, `top_two`,
   `flat_above`.  Closing each is a Lean formalisation of a prose proof (the files' "O-…" obligations).
-- [C] **The Lean axioms `touch_normal`, `rows_classified`** (`box_meeters.md` §7: "[C] `touch_normal`,
-  `rows_classified`") — while `k0_route.md` §13 link 7 tags ROW CLASSIFICATION [T] (`normal_ring.md` §3.1) and link 4
-  derives the meeter split: the prose is [T] per the chain, the Lean axioms are tagged [C] in A261's own file.  The
-  Lean consumers `k0_value_of_factors` / `k0_value_of_hybrid` also depend on the axiom `normal_ring` (AUDIT).
+- [C] **The Lean axiom `touch_normal`** (= NO-JAM(11), `box_meeters.md` §7).  **`rows_classified` is [T-prose]**: the
+  prose is [T] (`normal_ring.md` §3.1) and the Lean statement is a documented axiom — retagged [T-prose] in
+  `k0_route.md` §13 link 7 and `box_meeters.md` §7 (coordinator, 2026-09-23; A261's file had tagged it [C]).  The Lean
+  consumers `k0_value_of_factors` / `k0_value_of_hybrid` also depend on the axiom `normal_ring` (AUDIT).
 - [C] **Dependency: k1_00's tree** (K0-O1: (k1-a) no corner-pinned packing on [3.82, ŝ), (k1-b) at ŝ a Trump image) —
   every exchange lemma (K0-FREE, CELLS/RAISE, SWAP-LEAF, WALL-SLOT, link 12) consumes it; A84 priced it 200–300 CPU-h
   (`k0_route.md` §3, §6 table).  Its status is k1_00's own ledger, not this file.
@@ -898,9 +900,9 @@ files and the later notes (A273 index, A274) say.  Files in `docs/proofs/` unles
      has 552 rows; no source text reports on the extra rows.
 6. **BOX-MEETERS(11)** [T from 5]: every box has exactly two meeters, wall touchers, eight distinct — `box_meeters.md`
    §5 (Lean `box_meeters_262` from the axiom `jam_count` [C = 5a–5d]).  TODAY: unchanged.
-7. **ROW CLASSIFICATION** [T]: each wall carries a row of two, a row of three or an open pair — `normal_ring.md` §3.1.
-   TODAY: unchanged in prose; the Lean axioms `touch_normal`, `rows_classified` are tagged [C] in `box_meeters.md` §7
-   (s.6).
+7. **ROW CLASSIFICATION** [T-prose]: each wall carries a row of two, a row of three or an open pair — `normal_ring.md`
+   §3.1.  TODAY: prose [T]; Lean `rows_classified` a documented axiom, retagged [T-prose] in `k0_route.md` §13 and
+   `box_meeters.md` §7 (was [C]); `touch_normal` stays [C] = NO-JAM (s.6).
 8. **WINDOW EXCLUSIONS**:
    - 8a. Rows of three, exactly flat walls, mixed senses at tilts ≥ 0.703° on every wall: A261's LP certificates
      [T-computed\*: 11/50 verified at A261's exit].  TODAY: **[T-computed] — `cert261.jsonl` 50/50 done and verified,

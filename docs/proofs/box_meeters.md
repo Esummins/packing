@@ -206,8 +206,8 @@ WEDGED-SEAL + TWO-CORNERS] every box has exactly two meeters, touchers of its tw
 ## 7. Lean, reproduce
 
 `Statements/Open/BoxMeeters.lean`: theorems `same_wall_core`, `blocker_side_core`, `strip_landing_core`, `cert_core`,
-`box_meeters`, `normal_ring_of_parts`, `only_ring_value_261`; axioms [T-prose] `meeters_split`; [C] `touch_normal`,
-`rows_classified`; opaque `FloatingMeeter`, `BoxMeetersForm`; build + audit 0 sorry.  Reproduce:
+`box_meeters`, `normal_ring_of_parts`, `only_ring_value_261`; axioms [T-prose] `meeters_split`, `rows_classified`; [C] `touch_normal`
+(= NO-JAM); opaque `FloatingMeeter`, `BoxMeetersForm`; build + audit 0 sorry.  Reproduce:
 `bash attempts/A261-box-meeters/code/run261.sh test|census|pages` (≤ 2 min each), `local` (unreliable rows, 10 min),
 `python code/jam261.py` + `checkjam261.py` (JAM_COARSE=1 for the search; ≈ 10 min), `cert [hours]` (detached,
 resumable, `logs/STOP`), `verify`.

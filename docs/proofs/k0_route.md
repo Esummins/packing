@@ -753,11 +753,11 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
-       `span262` in chain3) — no room statement yet [C].
+       `span262` in chain3) — no room statement yet [C].  **FLOAT2 witness [M] (2026-09-23):** `attempts/A262-no-jam/results/float262.json`, "JAMMED FLOAT2 EXISTS", sup_t +0.0022 over 108 starts (poses C, D, A, X in the file), drawn in `docs/residue_map/current/k0_stuck_2026-09-23.svg` panel (b); its room is OPEN.
    5e. Adversary / search: 399 structured starts, capacity ≤ 1 always, no 11-witness [M].
 6. **BOX-MEETERS(11)** [T from 5]: every box has exactly two meeters, wall touchers, eight distinct — `box_meeters.md`
    §5 (Lean `box_meeters_262` from the axiom `jam_count` [C = 5a–5d]).
-7. **ROW CLASSIFICATION** [T]: each wall carries a row of two, a row of three or an open pair — `normal_ring.md` §3.1.
+7. **ROW CLASSIFICATION** [T-prose]: each wall carries a row of two, a row of three or an open pair — `normal_ring.md` §3.1 (prose [T]; Lean `rows_classified` a documented axiom).
 8. **WINDOW EXCLUSIONS** (which pinwheels of rows exist below ŝ):
    8a. Rows of three, exactly flat walls, mixed senses at tilts ≥ 0.703° on every wall: A261's LP certificates
        [T-computed*: 11/50 verified at A261's exit; `cert261.jsonl` says which; M1 last].
