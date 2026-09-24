@@ -31,8 +31,8 @@ three 4-parameter jobs, and the leftovers of the non-ADJ family and of the tilt 
   certificates P2 / WE / WS run detached (`run263.sh chain`, own verifier `verify263`); all-ADJ, shift
   `e ≤ ½`.  On the non-ADJ family (`e ≤ 1.2`) the statement is FALSE for wide gaps as a bare-ring
   statement (open_pairs.md §3.2) and the exclusion there is the structure lemma §3.3 [C].
-* `slab_cube` [C]: the all-near-flat cube `(0, 0.703°)⁴` of the patterns + + + − and + − + −, where the
-  LP margin is `∝ ε` and no box certificate exists (open_pairs.md §5.3: the first-order lemma).
+* `slab_cube` -- DISCHARGED (A264, 2026-09-22): the all-near-flat cube `(0, 0.703°)⁴` of the mixed patterns
+  is excluded by the theorem `slab_cube_264` (ThreeLemmas.lean, three_lemmas.md §3); the former axiom is removed.
 -/
 
 namespace PackingCert.S11.OpenLemmas.OpenPairs
@@ -105,14 +105,10 @@ theorem k0_value_of_factors (s : ℝ) (hlo : (382 : ℝ) / 100 ≤ s) (hhi : s �
     (hall : ∀ Q, IsPacking 11 s Q → FamilyStuckN 11 4 s Q) : ¬ ∃ Q, IsPacking 11 s Q := by
   refine normal_excludes_value 11 4 s ?_ ?_ (fun Q hQ => openPairs_excludes s hlo hhi Q hQ) hall
   · norm_num; linarith
-  · norm_num; linarith
+  /- **SLAB-CUBE**: formerly the axiom `slab_cube` on the opaque `SlabCubeRing` (A263); discharged by the theorem
+`slab_cube_264` (ThreeLemmas.lean, A264) and removed on 2026-09-23 so the audit no longer lists it. -/
 
-/-- **SLAB-CUBE** [C] (open_pairs.md §5.3): the patterns + + + − and + − + − with all four tilts in
-`(0, 0.703°)` admit no ring at side `≤ 3.8771` — the first-order lemma (a near-flat MIXED corner forces an
-END offset `≥ 1 + ε(1 − a) − O(ε²)`); stated abstractly on the opaque `SlabCubeRing`. -/
-opaque SlabCubeRing (s : ℝ) : Prop
-
-axiom slab_cube (s : ℝ) (hs : s ≤ (38771 : ℝ) / 10000) : ¬ SlabCubeRing s
+) : ¬ SlabCubeRing s
 
 #print axioms principal_normal
 #print axioms clip_mono
