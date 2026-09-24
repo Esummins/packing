@@ -16,6 +16,8 @@ tilt ψ) with p ∈ int Q ∩ S.  The point T' := (c, C_top) is T_u's top vertex
 
 ## 0. Verdict
 
+**A273 (2026-09-23): the DISC LEMMA below is [F] (exact witness); the corrected DROP LEMMA is in §5's correction note and `attempts/A273-disc-lemma/notes/disc273.md`.**
+
 > **[M] The mechanism on every violator (§1, page (a)–(f)).**  Restricting the probe to squares that could contain a
 > strip point (centre above L_h by WEDGE-FLOAT, and LEFT: the part below C_top left of C), the best square on
 > every violator is stopped by **X and T_u only** — active terms `gap_X` + `depth_Tu` (+ the LEFT constraint), C's
@@ -139,6 +141,14 @@ poke is stopped by X's right boundary alone, i.e. by the DROP's side condition d
 reduction of §3 keeps Ξ whole (X's lower-right edge AND its right edge, up to R_X and T_X) instead of the wedge roof.
 
 ## 5. The DISC LEMMA  [M on H1–H3; [T] nowhere yet]
+
+> **[F] A273 correction (2026-09-23, `attempts/A273-disc-lemma/notes/disc273.md`).**  The statement below is FALSE on
+> H1–H3: exact Fraction witness `witness273` (h_u 17/20, h_v 199/200, tan(θ/2) 7/100, X_low 211/100, X flat) — a centre
+> q with dist(q, Ξ), dist(q, Γ) ≥ ½ and a strip point within 1/√2; the disc slack reaches +0.008, the "sup −0.005 at
+> h_v → 1" below is an optimiser artefact.  The distance form drops the cone: the reduction (P3) gives the whole DROP
+> conv(D(q, ½) ∪ {p}) ⊂ Q, and the corrected **DROP LEMMA** (no (q, p) with the drop missing int Ξ and int Γ, q_x ≥ ½)
+> is what A273 certifies — 4 parameters (h_v-invariant), box-valid penumbra test, verified tree over (θ, φ) cells
+> outside the corner θ, φ ≤ 5°, where STRIP₂'s own margin → 0 (open layer, hand proof needed).
 
 **Statement.**  *Under H1–H3, no point q with q_y > L_h, dist(q, Ξ) ≥ ½, dist(q, Γ) ≥ ½ has dist(q, P) < 1/√2,
 P := S ∖ int(Ξ ∪ Γ); and none with q_y ∈ (L_h, X_low), dist(q, Ξ′) ≥ ½, dist(q, Γ) ≥ ½ has dist(q, S ∖ int Ξ′) < 1/√2.*

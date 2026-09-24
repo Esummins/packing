@@ -740,6 +740,12 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        Lemma CL [T] (so (U8) is folded, never assumed).  So 5b = STRIP₂-IN-JAM [T-prose under (U3)–(U6)+(U8) OR under
        the DISC LEMMA; Lean `strip_two_in_jam_of_disc`] + the disc lemma's certificate [~20 CPU-h on R, ~10² on H1–H3,
        not launched] or a proof + `pair3` (not landed).
+       **A273 (2026-09-23):** the DISC LEMMA as stated is [F] (exact witness `witness273`); the corrected DROP LEMMA
+       (the whole cone conv(D(q, ½) ∪ {p}) misses int Ξ, int Γ) is 4-parameter (h_v-invariant) and certified by a
+       box-valid penumbra tree + independent verifier over (θ, φ) cells (`attempts/A273-disc-lemma`, running, hours
+       not 10² CPU-h) EXCEPT the corner θ ≤ 5° ∧ φ ≤ 5°, where STRIP₂'s own slack → 0 (≈ 0.15 θ² at φ = 0): that
+       layer needs a hand proof (or A271's ring inequalities).  So 5b = STRIP₂-IN-JAM [T-prose, the DROP form] + the
+       drop tree [T-computed when verify273 passes, outside the corner] + the corner [C] + `pair3`.
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
