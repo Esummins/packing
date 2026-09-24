@@ -1,0 +1,56 @@
+22:54:56 [w4] pass 3 start c0_Y0936_r269b window:R.4 wall 1800 (lab 11, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 window pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A269-trump5-reemit/certs/csp209_c0_Y0936_r269b_window_s0.json)
+   INHERIT c0_Y0936_r269b pad window: 8 prior trees, 97 paths, 8 branches inherited DEAD (final, with their certificates), 3 start nodes (0 from the A203 root)
+== c0_Y0936_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_c0_Y0936_r269b_window_s0.json; basins []; INHERIT 8 dead branches (final) + 3 start nodes ['R.2', 'R.3', 'R.4']; H [2.358, 2.498, 2.358, 2.498, 0.0, 14.25]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1.1        TL(0,0)<-(3, 8)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R0_.json
+   INHERITED DEAD R.1.2        TL(0,0)<-(3, 9)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R0_.json
+   INHERITED DEAD R.1.3        TL(0,0)<-(3, 14)  [A211 tree: NOROOM-POCKET] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R0_.json
+   INHERITED DEAD R.1.4.p1.p1  (0.5, 3.377084, 0.5, 3.377084)<-(0,)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R.1.4.p1.p1.json
+   INHERITED DEAD R.1.5        TL(0,0)<-(4, 9)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R.1.5.json
+   INHERITED DEAD R.1.6        TL(0,0)<-(4, 14)  [A211 tree: NOROOM-POCKET] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R.1.6.json
+   INHERITED DEAD R.1.7        TL(0,0)<-(8, 9)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R.1.7.json
+   INHERITED DEAD R.1.8        TL(0,0)<-(8, 14)  [A211 tree: EmptyBox] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0936_r269b__window_R.1.8.json
+   A229 SHARD: --start R.4 -- 1 of them are start nodes of this page/pad right now (3 start nodes in all)
+   start R.2: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   start R.4: applied step 1/1 -- BR(0,1) <- [23]
+   node R.4        d0 root: INTERNAL (2.3 s, 1 rounds; t=45.4)
+   node R.4.1      d1 TL(0,0)<-[3, 9]: INTERNAL (6.7 s, 1 rounds; t=52.2)
+   no-room (k=9, m=2): UNDECIDED in 17 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R.4.1: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R.4.1.p1   d2 pocket<-[0]: INTERNAL (8.9 s, 1 rounds; t=78.2)
+   no-room (k=10, m=1): UNDECIDED in 8 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.4.1.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.4.1.p1.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (2.2 s, 1 rounds; t=89.0)
+   node R.4.1.p2   d2 pocket<-[1]: DEAD by EmptyBox r1 (1.5 s, 1 rounds; t=90.5)
+   node R.4.1.p3   d2 pocket<-[2]: INTERNAL (1.5 s, 1 rounds; t=92.0)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F2): every pose is impossible -- the case is dead by the pair leaf)
+   node R.4.1.p3   d2: DEAD by EmptyBox -- no-room at R.4.1.p3 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F2): every pose is impossible -- the case is dead by the pair leaf
+   node R.4.2      d1 TL(0,0)<-[3, 14]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=92.9)
+   node R.4.3      d1 TL(0,0)<-[4, 8]: INTERNAL (2.7 s, 1 rounds; t=95.6)
+   node R.4.3      d1: DEAD by CC -- rule CC at R.4.3 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F2 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an interi
+   node R.4.4      d1 TL(0,0)<-[4, 9]: INTERNAL (2.8 s, 1 rounds; t=98.7)
+   node R.4.4.1    d2 BL(1,1)<-[6]: INTERNAL (2.1 s, 1 rounds; t=101.0)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R.4.4.1    d2: DEAD by EmptyBox -- no-room at R.4.4.1 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.4.4.2    d2 BL(1,1)<-[8]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=101.6)
+   node R.4.4.3    d2 BL(1,1)<-[11]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=102.7)
+   node R.4.4.4    d2 BL(1,1)<-[16]: INTERNAL (6.5 s, 1 rounds; t=109.3)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.4.4.4    d2: DEAD by NOROOM -- no-room at R.4.4.4 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.4.5      d1 TL(0,0)<-[4, 14]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=112.6)
+   node R.4.6      d1 TL(0,0)<-[8, 9]: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=113.1)
+   start R.4          => DEAD (15 nodes; t = 113 s of 1800.0)
+   => ALIVE (window_page) in 113.2 s: 3 start runs, 15 nodes, depth 3, 1 CC kills, 0 exact leaf cascades, 0 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 8 inherited dead (8 up front + 0 in tree), 19 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 14 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1 d2 DEAD INHERIT 0.0s; R.1.2 d2 DEAD INHERIT 0.0s; R.1.3 d2 DEAD INHERIT 0.0s; R.1.4.p1.p1 d4 DEAD INHERIT 0.0s; R.1.5 d2 DEAD INHERIT 0.0s; R.1.6 d2 DEAD INHERIT 0.0s; R.1.7 d2 DEAD INHERIT 0.0s; R.1.8 d2 DEAD INHERIT 0.0s; R.4 d0 INTERNAL 2.3s; R.4.1 d1 INTERNAL 6.7s; R.4.1.p1 d2 INTERNAL 8.9s; R.4.1.p1.p1 d3 DEAD EmptyBox 2.2s; R.4.1.p2 d2 DEAD EmptyBox 1.5s; R.4.1.p3 d2 DEAD EmptyBox 1.5s; R.4.2 d1 DEAD EmptyBox 0.6s; R.4.3 d1 DEAD CC 2.7s; R.4.4 d1 INTERNAL 2.8s; R.4.4.1 d2 DEAD EmptyBox 2.1s; R.4.4.2 d2 DEAD EmptyBox 0.2s; R.4.4.3 d2 DEAD EmptyBox 1.1s; R.4.4.4 d2 DEAD NOROOM 6.5s; R.4.5 d1 DEAD EmptyBox 0.3s; R.4.6 d1 DEAD EmptyBox 0.4s
+== c0_Y0936_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 776, 'misses': 358, 'entries': 358}; clip {'hits': 15447, 'misses': 268446, 'entries': 68446}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1134, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 16}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 872, 'obs_misses': 328, 'build_hits': 0, 'build_misses': 3, 'bisect_hits': 0, 'bisect_misses': 3, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 328, 'build_entries': 5, 'bisect_entries': 3, 'on': True}
+   A268: c0_Y0936_r269b window R.4 -> ALIVE; count268 142 call(s), 0 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 2.4 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
