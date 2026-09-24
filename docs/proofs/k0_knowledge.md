@@ -319,3 +319,77 @@ One or two lines each; n-general unless "n = 11" is said.  Format: tag, NAME —
 - [T] **Corner closed forms** of the normal ring: (D4), E_A, E_B exact signed separations; the B-type's other axis
   never separates when a < 1.  `family258.md` §2; A258.  **ROW-THREE** and **ALT-SIDE** need side > 4 at common tilt
   (Lean `row_three_poly`, `alt_side_poly`), `normal_ring.md` §3.2–3.3; A258.
+
+### 2.5 Window exclusions (which pinwheels of rows exist below ŝ)
+
+- [T] **NEAR-FLAT CUBE** — at a mixed (+,−) corner with tilts ≤ ε₀ = 0.703° BOTH offsets exceed 1 − λ, λ = ε₀/2 +
+  ε₀²/2; at (−,+) one offset exceeds 1 − μ; at (+,+) the END offset exceeds 1 − ε₀²/2 − a tan ε₀; with a_w + b_w ≤ s − 2
+  the patterns + + + −, + − + − are infeasible for s < 3.9813 and + + − − for s < 3.9814 (margin 0.104–0.106 at ŝ).
+  `three_lemmas.md` §0 Lemma 3, §3; Lean `cube_pppm`, `cube_pmpm`, `cube_ppmm`, `slab_cube_264` (theorems) over the
+  axioms `mixed_corner_pm`, `mixed_corner_mp`, `pinwheel_corner_pp` [T-prose]; A264.  (Replaces A263's axiom
+  `slab_cube` for rings of pairs; `slab_cube` is still declared in `OpenPairs.lean` per AUDIT — s.5.4.)
+- [T] **ROW-THREE / ALT-SIDE at common tilt** need side > 4 (§2.4).  `normal_ring.md` §3.2–3.3; A258.
+- [T] **TWO-POKERS on the window** — no wall carries two type-F pokers on [3.82, ŝ] (Lean `two_pokers_window`); with
+  [M] SEPARATE-NOTCHES: no 12-stuck 11-packing on the window has four type-F corners [T given M].  `corner_chase.md` §0;
+  A248.
+- [T] **FAMILY-STUCK dead at s ≥ 4** (§2.1) and **UPPER-END** (12-stuck dead at s ≥ 4 + √2) (§2.4).
+- (Certified parts of the window exclusions — A261's LP certificates, A263's slab jobs — are in s.3; the measured
+  least sides of the other pinwheels are in s.4.)
+
+### 2.6 Force and torque facts (A217–A240) — which are theorems, which were superseded
+
+None of these is in the current chain (s.8): the chain is load-free (A222 onward, `ring_swap.md` §1.8: "Loads are never
+used … rattler crowds are covered").  They stand as theorems about FJ points and as the reasons the load routes died.
+- [T] **PUSH, HOLD** (A218, §2.4).  [T, vacuous] **K0-COUNT** (A218, §2.2) — its hypotheses LOAD, DISTINCT are [F] (s.5).
+- [T] **CEIL, TWO-CONTACT** (a loaded tilted wall square, tilt ∉ {0°, 45°, 90°}, needs ≥ 2 further loaded contacts;
+  Lean `two_contact_core` axiom), **ONE-TILTED**.  [T] **STRUT** (a two-force member's rotation about one contact is a
+  first-order zero mode) and **Theorem SO** (second-order necessary condition, selection form: v₂ < 0 ⟹ not a
+  σ-minimiser).  `wall_torque.md` §1–3, §5; A219.
+- [T] **Lemma W** (a wall torques a square toward its own alignment: τ = W(sin θ − cos θ)/2), **TORQUE-ID** (circulation
+  term), **CORNER-LOAD** (frame handedness decides floor- vs wall-loaded corner), **EXTENT**, **LEAN-SLIDE**.
+  `two_grains.md` §1.2–1.4, §2.2, §2.5; A223 (Lemma W is A217 §2).
+- [T] **WALL-EXCESS** — touchers' chords 1/max(cos θ_i, sin θ_i) ≥ 1 on the line at 1/√2 are disjoint, Σ ≤ s, excess
+  zero only flush; sealed pocket area tan(min(φ, 90° − φ))/2 at common tilt.  `realign.md` §1; Lean
+  `lemma_WALL_EXCESS` (axiom [T]), `chordT_ge_one`, `wall_count_le`; A231.
+- [T] **LOCALITY** (the lock is decided inside the arm [0, 1 + 2√2]²), **RADIAL** / Corollary **CHAIN** (a loaded arm
+  is held by a net corner-ward push from outside; the loaded component reaches a far wall), **NO-SELF-STRESS** (λ₀ = 1).
+  `local_lock.md` §0, §2–3; A233.  **Superseded:** A219's [M] RING ("no loaded four-crowd balances by walls and meeters
+  alone", 193/193) — A233: "A219's RING measured on 193, now a one-line theorem for all n" (CHAIN).  Neither excludes
+  anything: Trump's TL crowd satisfies CHAIN.
+- [T] **TORQUE-ID in three forms** (G) global, (W) no per-wall identity, (K) per corner = RADIAL's rotational twin
+  (Lemma ARM-MOMENT).  `handedness.md` §0; A234.
+- [T] **NO-VV-IND** — a vertex-on-vertex row outside the span of the other active rows carries no load (the feasible
+  set near a VV contact is a union, a reflex corner); **CONCURRENT**, **KNIFE**.  `no_vv.md` §0; Lean
+  `no_vv_of_not_mem_span`, `no_vv_pair` (theorems); A235.
+- [T] **PARTNER-TORQUE** (contact torques read the tilt difference and the contact position, never handedness);
+  **chains (iii)** = CHAIN; **CROSS-PLANAR** (a left-right and a floor-ceiling chain share a square or touch).
+  `cross.md` §0; Lean `crossing_lemma` (axiom, classical), `chains_meet`, `chains_share_or_touch` (theorems); A240.
+- [T] **K0-ROT** (A85, §2.1) — Trump's rotation profile is V-shaped, D⁺σ = D⁻σ = 3.877 [M] (`k0_route.md` §5.2).
+- **What superseded the force line as a whole:** A222's CELLS / RAISE (load-free; covers rattler crowds, which are 61
+  of 70 doubly-met corners at A217's genuine k0 FJ points, `k0_count.md` §5), then A250's FAMILY-STUCK and A258's
+  NORMAL-FORM.  The drain reading (A217/A218: "a forced four-crowd wants to SETTLE a corner") survives only as
+  motivation (`k0_count.md` §0).
+
+## 3. CERTIFIED facts [T-computed] — status read from the index files on 2026-09-23
+
+Every certificate below follows the pattern of s.10 (box tree + own independent verifier, bisect-on-disagreement,
+tiling check).  "ok" = the tree's cell verdict; "verified" = the independent verifier's `bad = 0`.
+- [T-computed] **A259 NORMAL-ROOM corner-PAIR tree** (10a) — domain D′, s ∈ [3.82, 3.8771]: `attempts/A259-normal-room/
+  certs/pair259_index.jsonl` 81/81 ok; verifier `verify259.py` rerun (bisected re-certification of 9 independent-cover
+  failures, which were the verifier's ψ = 0 bin, `results/verify259.md`): `results/verify259.json` leaves CERT 78 099,
+  PRUNE 3 066, LAYER 5 184, OPEN 0, **bad 0** (commit 8512d81d1, 2026-09-22).  **COMPLETE** (the chain's "index
+  filling / verify259 rerun alive" is older than this commit).
+- [T-computed] **A260 LAYER + hybrid corner-PAIR trees** (10a layer, 10b) — `attempts/A260-locked-wall/certs/`
+  layer260 / hybA260 / hybB260 / hybAB260 indices each **81/81 ok**; `results/verify260.json`: layer 93 CERT, hybA 9 375
+  CERT + 13 309 PRUNE, hybB 28 648 + 32 521, hybAB 58 903 + 83 162, OPEN 0 everywhere, **bad 0**.  **COMPLETE** for the
+  all-ADJ common-tilt hybrid family, e ∈ (0, ½] (`locked_wall.md` §3.3).  (The chain's "8/81 at A260's exit" is older.)
+- [T-computed] **A261 window-exclusion LP certificates** (8a: rows of three, exactly flat walls, mixed senses at tilts
+  ≥ 0.703°) — `attempts/A261-box-meeters/results/cert261.jsonl`: **50/50 jobs done and verified**, feasible 0,
+  undecided 0 on every job (the chain's "11/50 verified at A261's exit" is older).  Method `box_meeters.md` §3.
+- [T-computed\*] **A263 factor certificates** (10c) — `attempts/A263-open-pairs/certs/P2263_index.jsonl`: 70 of 81
+  cells indexed, **50 ok, 20 not ok** (cells 2,4 2,5 3,4 3,5 3,6 4,4 4,5 4,6 4,7 5,4 5,5 5,6 5,7 6,4 6,5 6,6 6,7 6,8 7,5
+  7,6; e.g. 7,6: FAIL 301 757 / CERT 20 307 leaves after 14 838 s); WE263 1/1 ok; WS263 3/3 ok.  No A263 verifier
+  output is on disk.  A265 [T] diagnosed the first five failing cells as a SIDE mismatch (s.5); its re-run lane
+  `attempts/A265-strip-plug/certs/P2265_index.jsonl`: 2,4 / 2,5 / 3,4 **ok**, 3,5 / 3,6 **not ok**; `results/
+  verify265.json` bad 0 with OPEN leaves 3 837 (3,5) and 911 (3,6).  Of the fifteen later failing cells, 4,4 is named
+  open in `k0_route.md` §13's closing paragraph; 4,5 … 7,6 appear in no source text yet (index only).
