@@ -1,0 +1,45 @@
+21:09:56 [w4] pass 1 start k5_16_interior_Y0977_r270w4 g4:R0+ wall 1800 (lab 11, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y0977_r270w4 at the g4 pad: ALIVE in 46574 ms; kills {'H-clip': 0, 'P': 5054, 'W': 2724, 'C': 1394, 'M': 5811, 'L': 7, 'R': 2741, 'X': 767}; CSP units 512 -> 512 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0977_r270w4 pad g4: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0977_r270w4 page pad g4: start attempts/A270-k5-lower-slabs/certs/csp209_k5_16_interior_Y0977_r270w4_g4_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.218, 2.358, 2.358, 2.498, 14.25, 28.072]; forced H []; 6 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (6.2 s, 1 rounds; t=6.3)
+   node R0+.1      d1 TL(1,0)<-[8]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=6.8)
+   node R0+.2      d1 TL(1,0)<-[9]: INTERNAL (3.5 s, 1 rounds; t=10.4)
+   node R0+.2.1    d2 TR(0,1)<-[16]: INTERNAL (4.2 s, 1 rounds; t=14.7)
+   node R0+.2.1.1  d3 BL(1,0)<-[5]: INTERNAL (4.5 s, 1 rounds; t=19.3)
+   no-room (k=9, m=2): UNDECIDED in 29 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.2.1.1: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.2.1.1.p1 d4 pocket<-[0]: INTERNAL (8.9 s, 1 rounds; t=57.4)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 4 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R0+.2.1.1.p1 d4: DEAD by NOROOM-POCKET -- no-room at R0+.2.1.1.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R0+.2.1.1.p2 d4 pocket<-[1]: INTERNAL (6.9 s, 1 rounds; t=68.7)
+   no-room (k=10, m=1): UNDECIDED in 12 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.2.1.1.p2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.2.1.1.p2.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (5.2 s, 1 rounds; t=86.8)
+   node R0+.2.1.2  d3 BL(1,0)<-[6]: INTERNAL (2.9 s, 1 rounds; t=89.7)
+   no-room (k=9, m=2): UNDECIDED in 26 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.2.1.2: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.2.1.2.p1 d4 pocket<-[0]: INTERNAL (16.2 s, 1 rounds; t=131.8)
+   no-room (k=10, m=1): UNDECIDED in 25 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.2.1.2.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.2.1.2.p1.p1 d5 pocket<-[0]: INTERNAL (916.8 s, 1 rounds; t=1077.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.2.1.2.p1.p1: split F2 at BL(1,0) (meeting fraction 0.032978; alive rows [5, 10, 15]; named ['F2', 'F3', 'F4', 'F5'])
+   node R0+.2.1.2.p1.p1.1 d6 BL(1,0)<-None: INTERNAL (394.3 s, 1 rounds; t=1698.8)
+   node R0+.2.1.2.p1.p1.1: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R0+          => ALIVE (12 nodes; t = 1874 s of 1800.0)
+   => ALIVE (g4_page) in 1874.0 s: 1 start runs, 12 nodes, depth 6, 0 CC kills, 0 exact leaf cascades, 1 NS splits, 4 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 3 dead / 12 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 16 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 6.2s; R0+.1 d1 DEAD EmptyBox 0.5s; R0+.2 d1 INTERNAL 3.5s; R0+.2.1 d2 INTERNAL 4.2s; R0+.2.1.1 d3 INTERNAL 4.5s; R0+.2.1.1.p1 d4 DEAD NOROOM-POCKET 8.9s; R0+.2.1.1.p2 d4 INTERNAL 6.9s; R0+.2.1.1.p2.p1 d5 DEAD EmptyBox 5.2s; R0+.2.1.2 d3 INTERNAL 2.9s; R0+.2.1.2.p1 d4 INTERNAL 16.2s; R0+.2.1.2.p1.p1 d5 INTERNAL 916.8s; R0+.2.1.2.p1.p1.1 d6 ALIVE 394.3s; R0+.2.1.2.p1.p1.2 d6 ALIVE 0.0s; R0+.2.1.3 d3 ALIVE 0.0s; R0+.2.1.4 d3 ALIVE 0.0s; R0+.2.1.5 d3 ALIVE 0.0s; R0+.2.1.6 d3 ALIVE 0.0s; R0+.2.1.7 d3 ALIVE 0.0s; R0+.2.2 d2 ALIVE 0.0s; R0+.2.3 d2 ALIVE 0.0s; R0+.2.4 d2 ALIVE 0.0s; R0+.2.5 d2 ALIVE 0.0s; R0+.3 d1 ALIVE 0.0s
+== k5_16_interior_Y0977_r270w4: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 828, 'misses': 317, 'entries': 317}; clip {'hits': 18682, 'misses': 1046926, 'entries': 46926}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1145, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 12}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 980, 'obs_misses': 270, 'build_hits': 0, 'build_misses': 5, 'bisect_hits': 0, 'bisect_misses': 4, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 236, 'build_entries': 5, 'bisect_entries': 4, 'on': True}
+   A268: k5_16_interior_Y0977_r270w4 g4 R0+ -> ALIVE; count268 156 call(s), 5 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 1720.0 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
