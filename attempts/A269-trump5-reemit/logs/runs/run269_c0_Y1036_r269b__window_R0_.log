@@ -1,0 +1,46 @@
+17:40:41 [w1] pass 2 start c0_Y1036_r269b window:R0+ wall 1800 (lab 10, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y1036_r269b at the window pad: ALIVE in 47174 ms; kills {'H-clip': 0, 'P': 3452, 'W': 1752, 'C': 976, 'M': 4402, 'L': 7, 'R': 3140, 'X': 1362}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT c0_Y1036_r269b pad window: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== c0_Y1036_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_c0_Y1036_r269b_window_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.498, 2.637, 2.358, 2.498, 53.13, 64.011]; forced H []; 6 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (44.9 s, 1 rounds; t=45.0)
+   node R0+.1      d1 BR(0,1)<-[11]: INTERNAL (4.3 s, 1 rounds; t=49.4)
+   node R0+.1.1    d2 TR(1,0)<-[8]: INTERNAL (4.8 s, 1 rounds; t=54.2)
+   node R0+.1.1.1  d3 BL(0,2)<-[3]: INTERNAL (11.4 s, 1 rounds; t=65.6)
+   no-room (k=9, m=2): UNDECIDED in 38 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.1: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.1.1.p1 d4 pocket<-[0]: INTERNAL (13.7 s, 1 rounds; t=117.0)
+   no-room (k=10, m=1): UNDECIDED in 32 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.1.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.1.1.p1.p1 d5 pocket<-[0]: INTERNAL (372.6 s, 1 rounds; t=542.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.1.1.1.p1.p1: split F4 at TL(0,0) (meeting fraction 0.006175; alive rows [9]; named ['F2', 'F3', 'F4', 'F5'])
+   node R0+.1.1.1.p1.p1.1 d6 TL(0,0)<-None: DEAD by REACH r1 (3.7 s, 1 rounds; t=933.8)
+   node R0+.1.1.1.p1.p1.2 d6 TL(0,0)<-None: INTERNAL (2.0 s, 1 rounds; t=935.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.1.1.1.p1.p1.2: bisect F3 on t at 53.1301 (extents (0.126977, 0.301669), tilt 90.0 deg, core non-empty, 15 piece(s); split 1 of 4)
+   node R0+.1.1.1.p1.p1.2.1 d7 F3<-['t<=53.1301']: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=936.4)
+   node R0+.1.1.1.p1.p1.2.2 d7 F3<-['t>=53.1301']: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=936.7)
+   node R0+.1.1.2  d3 BL(0,2)<-[4]: INTERNAL (8.6 s, 1 rounds; t=945.4)
+   no-room (k=9, m=2): UNDECIDED in 28 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.2: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.1.2.p1 d4 pocket<-[0]: INTERNAL (14.2 s, 1 rounds; t=987.8)
+   no-room (k=10, m=1): UNDECIDED in 23 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.2.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.1.2.p1.p1 d5 pocket<-[0]: INTERNAL (811.5 s, 1 rounds; t=1828.2)
+   node R0+.1.1.2.p1.p1: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R0+          => ALIVE (13 nodes; t = 2555 s of 1800.0)
+   => ALIVE (window_page) in 2554.8 s: 1 start runs, 13 nodes, depth 7, 0 CC kills, 0 exact leaf cascades, 1 NS splits, 4 pocket splits, 1 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 3 dead / 9 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 16 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 44.9s; R0+.1 d1 INTERNAL 4.3s; R0+.1.1 d2 INTERNAL 4.8s; R0+.1.1.1 d3 INTERNAL 11.4s; R0+.1.1.1.p1 d4 INTERNAL 13.7s; R0+.1.1.1.p1.p1 d5 INTERNAL 372.6s; R0+.1.1.1.p1.p1.1 d6 DEAD REACH 3.7s; R0+.1.1.1.p1.p1.2 d6 INTERNAL 2.0s; R0+.1.1.1.p1.p1.2.1 d7 DEAD EmptyBox 0.5s; R0+.1.1.1.p1.p1.2.2 d7 DEAD EmptyBox 0.2s; R0+.1.1.2 d3 INTERNAL 8.6s; R0+.1.1.2.p1 d4 INTERNAL 14.2s; R0+.1.1.2.p1.p1 d5 ALIVE 811.5s; R0+.1.1.3 d3 ALIVE 0.0s; R0+.1.1.4 d3 ALIVE 0.0s; R0+.1.2 d2 ALIVE 0.0s; R0+.1.3 d2 ALIVE 0.0s; R0+.1.4 d2 ALIVE 0.0s; R0+.2 d1 ALIVE 0.0s; R0+.3 d1 ALIVE 0.0s; R0+.4 d1 ALIVE 0.0s
+== c0_Y1036_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 728, 'misses': 237, 'entries': 237}; clip {'hits': 22059, 'misses': 992553, 'entries': 192553}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 965, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 13}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 807, 'obs_misses': 234, 'build_hits': 0, 'build_misses': 4, 'bisect_hits': 0, 'bisect_misses': 2, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 170, 'build_entries': 4, 'bisect_entries': 2, 'on': True}
+   A268: c0_Y1036_r269b window R0+ -> ALIVE; count268 168 call(s), 11 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 2332.2 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
