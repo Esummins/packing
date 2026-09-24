@@ -539,3 +539,74 @@ This section is what stops agents repeating them.  Grouped by theme; each: the c
   `last_two.md` §0; A264/A265/A266.
 - [F] **"8 + j" and "j ≥ 2 needs room 0"** (A262 brief) — X IS the next box's meeter, so the outer structure has 8
   squares for j = 1 and j = 2; room ≤ 1 already gives n ≤ 9.  `no_jam.md` §0; A262.
+
+### 5.2 Local, corner and force claims
+
+- [F] **"A 2-crowd is a mixed-sign V or contains an axis-aligned blocker"** (PI/advisor prune, A85).  Witness: the
+  floating same-sense pair A (tilt 40°, lowest vertex (0.643, 0.7)) / B (tilt 30°), SAT gap 0.044; 32 % of the 33 656
+  surviving pair boxes are same-sense.  `k0_route.md` §4.4 (b); A85.  Why: the pair space has interior.
+- [F] **SIDEBAND "within 1 of a wall" at the widened box** — two 45° diamonds at (1.01, 1.7226) / (1.7226, 1.01), gap
+  0.00777; **SIDEBAND (b) "the other centre lies outside that band"** — Q1 = [0.1, 1.1] × [0, 1], Q2 at 2.866°.  The
+  true forms are the sharp constant c and A2's distinct cells.  `sideband.md` §0; A169.
+- [F] **L2 "squares cannot load along a wall without a net torque"** — flat squares compress edge-to-edge along a wall
+  with zero torque (the simple packing's rows); 45° diamonds pinched between a wall and a flat square.  The content is
+  TWO-CONTACT.  `wall_torque.md` §0, §2; A219.
+- [F] **"The chain formula decreases toward alignment"** — the corner-anchored ladder Λ(θ) = 2 + 4t/(t² + 1) is MINIMAL
+  at 45° and rises to 4 at alignment.  **TWO-GRAIN as geometry** — 12/193 four-crowds have ONE grain meeting all four
+  corners; `w062_crowd` has all eleven squares '+' (crowd-held).  **TORQUE-ID as an obstruction by itself** — nothing
+  bounds the circulation.  `two_grains.md` §0, §1.3, §2.3; A223.
+- [F] **"No non-trivial optimal packing has four flush corners"** (PI) — n = 5 and 10 are PROVED optimal with four;
+  18 later records too.  **STUCK(n) for all packings / Theorem PERIMETER** — Proposition CROWD-ABOVE builds four
+  doubly-met corners at EVERY side > s(n) from a record with corner dominoes (verified n = 26, 28, 29, 37, 40, 50, 51,
+  55; page `crowd_above.svg`); a doubly-met corner costs O(ε).  `one_flush.md` §0; A226.
+- [F] **"Each non-flush corner corresponds to a grain we can drain"** — the swap CONSUMES the meeters.  **The area
+  horn** — all-diamond sealed walls waste 2⌊s/√2⌋ − 1 = 3 < s(11)² − 11 = 4.03.  `realign.md` §0; A231.  Also "kink-side
+  ⟹ tilts near 45°" (ledger §4 A231 note).
+- [F] **"At a k-maximal minimiser below ⌈√n⌉ no corner box is doubly met by locked meeters"** (A233 brief) — Trump's TL
+  corner is doubly met (nick sq4, 40.18° carrier sq6), both LOCKED, and Trump is k-maximal.  `local_lock.md` §0; A233.
+- [F] **"A handedness count separates a four-crowd from an optimum"** — every candidate scalar's range on the 193
+  four-crowds overlaps its range on the 883 free FJ points and the optima (`hand234.md`).  `handedness.md` §0; A234.
+- [F] **NO-VV as a consequence of local optimality in general** — at stuck configurations the VV row is in the span of
+  the others (82/82); 25/26 HELD witnesses with a loaded tilted VV are FJ under every consistent selection.
+  `no_vv.md` §0; A235.  (Coordinator addendum 2026-09-15: with COMPOSITE edges the records' 12 contacts are not genuine
+  VV; "s.5's 'false' refers to the naive classification only" — `no_vv.md` addendum.)
+- [F] **Lemma OPPOSE** ("corner jams require opposing torques") — locked corners same-handed 215 : 11 (free FJ points
+  44 : 1).  **Alternation of wall grains** — 0/193.  **"The shared square is obstructed"** — 90 tilted interior crossing
+  squares carry both chains unloaded; Trump crosses at a flush square.  `cross.md` §0; A240.
+- [F] **TILT-MIN as a lower bound θ ≥ θ_min for locked corners** (a tilt floor) — A89: no loaded tilt floor by any local
+  argument; the HELD witnesses sit at their generator's floor.  **"A unit square cannot approach a tilted edge closer
+  than a tilt-dependent margin"** — a square parallel to the edge approaches at distance 0.  `pocket_waste.md` §0; A237.
+- [F] **The PI's STACK dichotomy** (contact forced; a handedness pairing forced) — two flat squares [0,1]×[0.9,1.9],
+  [0,1]×[1.95,2.95] are a mutual pair at 3.82 with a gap 0.05; floating pairs 2 235 / 4 000.  **"The packing after the
+  click is at no larger side"** — the global click raises the side on 7/115 and 102/550 (max 0.049).  `snap_down.md` §0;
+  A245.
+- [F] **POKE's directional claim** (the poker's tilt sense is forced) — exact witness beside A = [19/20, 39/20] × [0,1]:
+  cos θ = 3/5, lowest vertex (4/5, 9/10), CW sense; 7 of 288 corpus type-F views are CW.  **Pinning forces an interior
+  square** — not in the exchange form.  `corner_chase.md` §0, §1.1, §2.2; A248.
+- [F] **TWO-TILTED as a window bound** — the mutual type-T wall problem has sup SAT margin +0.078 at 3.82: s_T* < 3.82;
+  the all-ADJ type-T ring EXISTS at ŝ.  `type_t_chase.md` §0, §2; A249.
+- [F] **CENTRE-DISC about the container centre** (A251 §3.5's "one inequality", A252 brief) — Lemma MOUTH: the mouth
+  disc's distance from O tends to (s/2 − 3/2)√2 > 1/√3 iff s > 3 + 2/√6 = 3.81650 (the whole window); far_O = 0.628
+  at 3.99 on feasible rings.  **Every INRADIUS-only criterion in the flat-flat limit** — a corner notch holds the disc
+  of radius ½ at (½, ½) but no unit square (page `notch_disc.svg`).  The brief's premise (inscribed disc small) — it
+  has radius 0.771 at ŝ.  `centre_disc.md` §0; A252.  (Consequence: A251's axiom `centre_disc_ring` was REMOVED.)
+- [F] **A positive minimum tilt θ_min(s)** (PI, A253) — θ_min(s) = 0 on the whole window; the limit is the four-corner
+  domino pinwheel.  `mintilt253.md` §0, §2; A253.
+- [F] **"The flush limit of the general ring is the pinwheel" for m ≥ 5** — the flush stratum keeps wall slack; also
+  "equality at n = 65" (the only equality n ≤ 100 is n = 84).  `peel.md` §0, §6; A254.
+- [F] **COMMON-SENSE as a LOCAL lemma** — the local counter-hypothesis is realised in 19 of 20 pair types (margins
+  0.006 … 0.046, `local_witnesses.svg`), s-free; **the PI's claim (c)** (a square above s₁ at its tilt poking down past
+  it is never a second meeter) — `rand_0_0441|free`, s = 3.9352, depth 0.265.  `common_sense.md` §0; A255.
+- [F] **"Every normal-form family-stuck packing is the pinwheel of four pairs"** — the normal form is the HYBRID ring
+  (43/44 corpus walls locked by the poker).  **`common_sense.md` §2.3's simultaneous row-normality** — rows (3,1) →
+  (2,2) → (3,1) cycle.  **"Mixed-sense pinwheel of pairs cannot close"** — with PER-WALL tilts + + + − exists from
+  s = 3.9298 (tilts 14.02°, 14.02°, 14.02° | 10.94°; `excluded.svg` (d)): a drawn counterexample to ring-level
+  COMMON-SENSE on the stretch (ŝ, 4), not on [3.82, ŝ].  `normal_ring.md` §0, §1.2, §3.3, §6; A258.
+- [F] **NORMAL-ROOM without (D2)** — drop "every row end meets its corner box" and a free square missing O exists at
+  every side (+0.17 at ŝ), two disjoint ones at 3.95 / 3.99 (`capacity259.json`, `worst_case.svg`).  `normal_room.md`
+  §0; A259.
+- [F] **"A straight slide lands a floater / what blocks it is a lower box meeter"** — witness LIFT (a row END pushed 0.41
+  off its wall, both straight drops blocked, lands by STRIP-LANDING).  **TOUCH-NORMAL from P1 inside the corner** —
+  witness JAM, the JAMMED FLOATER (every wall-touching cell meeting C overlaps A or X by ≥ 0.0090).  **"A slab of
+  near-flat tilts is excluded"** (A261's own, caught by its engine) — D′ reaches 0.7°–1.4° on one wall at ŝ.
+  `box_meeters.md` §0; A261.
