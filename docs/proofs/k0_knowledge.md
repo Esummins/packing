@@ -1016,3 +1016,84 @@ new is closed".
   n = 5, 10, 11, 19 (`two_grains.md` §4).
 - **n-general evidence** [M]: the ONE-FLUSH survey (21 records, n = 5 … 55: ≥ 3 flush corners each; Trump the only
   doubly-met corner) — `one_flush.md` §0; records are cross-braced, none a ring — `ring_capacity.md` §0.
+
+## 10. TOOLS AND CONVENTIONS for the next agent
+
+**10.1 The corpus** (read-only; every file is some attempt's result).
+- A217 witnesses: `attempts/A217-torque-probe/results/witnesses217.jsonl` (486 FJ-feasible local optima, sides
+  3.886746 … 5.001260; classes SETTLED / K0FREE / BOXK0 / HELD / CROWD) + `search217_*.jsonl` (the 4 534 packings A222
+  tested); the ring `rand_0_0569|t20` (side 4.1099) is in it.
+- A244 twelve-stuck: `attempts/A244-twelve-stuck/results/twelve244.jsonl` (489 rows, 488 twelve-stuck, 4.000010 … 4.5,
+  interval-certified), `twelve244_ctrl.jsonl` (the 4-stuck control), `probe244_below4.jsonl` (the failed sub-4 probe).
+- Ring witnesses: A249's exact all-ADJ type-T ring at ŝ `attempts/A249-type-t-chase/results/twotilted249_ring2.json`
+  (+ `twotilted249_ring.json`, `twotilted249_wall.json`); A226's crowd rings `ring11_226.jsonl`; A253's ring + poker rows
+  (`attempts/A253-min-tilt/results/room253.jsonl`, `mintilt253_curve.jsonl`).
+- A258's normal rings: `attempts/A258-normal-ring/results/` (`norm258.jsonl`, `poker258.jsonl`, `exact258.json`,
+  `side258.jsonl`, `typeF258.json`); the 46 corpus rings = A253's 44 ring + poker rows + A255's 2 controls.
+- A262's JAM rings: `attempts/A262-no-jam/results/ring262.jsonl`, `adv262.jsonl`, `search262.jsonl` (A264's 323 = ring262
+  + search262 at five sides); `float262.json`, `span262.json`.
+- Exact counterexamples: `witness273` (A273, the DISC LEMMA), `attempts/A274-flat-corner/results/witness274.json` (W1, W2),
+  `adv271` / `r1_274.json` (ring-inequality violators, rationalised), A248's CW poker, A252's `notch_disc.svg` notch, A266's
+  `probe266 --nobox` strip squares.
+- k0 optima: `attempts/A85-k0-route/results/cp85_k0_search.json` (262 k0 optima, 516 runs); records: A226's survey
+  (21 packings, Ellsworth's coordinates, re-verified by exact SAT).
+
+**10.2 The exact-check tools.**
+- Geometry check (exact SAT on edge normals): A217 `geom217.meets_box`; rational squares via tan(θ/2) in Fractions
+  (`witness273`, `witness274.py`); interval certification in mpmath (`verify244`, `verify250`: inflate, then 40-digit
+  intervals for containment, pairwise interior-disjointness, depths).
+- The 12-cell family test: `attempts/A250-family-stuck/code/fam250.py` (conflict graph, every admissible family, Hall
+  check; `test250`), `fam262` (12 cells on a ring + free square), `cells254` (general m).
+- Region search: `attempts/A222-ring-swap/code/region222.py` (c-space per tilt, greedy, polish, exact check);
+  `capacity259` (exact centre sets per tilt bin).
+- PIERCE: `attempts/A237-pocket-waste/code/pocket237.py` (box-valid PIERCE: (P ⊖ K) ⊆ ∪(p_i + K) per tilt bin; Lean
+  `capacity_le_of_pierce`); A251's sound cores `geom251.core_members` (half-side (½ − ρ)/w(Δθ)).
+- Swap leaf: `verify_swap232.py` (`swap-leaf-certificate-v1`).  Frozen verifiers `verify_case.py` (sha 521cb01f…) and
+  `verify_case_v4.py` are never edited.
+
+**10.3 The certificate pattern** (A259 onward; each item is a lesson with its source).
+1. A box test that is sound by construction: cores that lie inside EVERY member of the box (verified vertex-by-vertex
+   with intervals), kernels / hulls per tilt bin, float margins EPS = 10⁻⁹ (`disc273.md` §2).  Subtract only CORES,
+   never reach sets (A242 §2: "the free region over-approximated as container MINUS THE CORES").
+2. An OWN verifier that imports none of the tree's code, re-derives every leaf with a different binning and directed
+   rounding, replays the split for a tiling identity (no gap, no overlap, every leaf used once) — `verify259/260/263/
+   265/266/273`.
+3. BISECT ON DISAGREEMENT: a leaf the verifier cannot close is bisected by the tree's rule (depth ≤ 6–8) and every piece
+   re-verified; still open ⇒ DISAGREE, never green (`verify259.md`: the nine first-run MISMATCHes were the verifier's
+   ψ = 0 bin, kernel footprint 0.9957 < 1 — "the verifier's bin, not a hole").
+4. SIDE / ADJ consistency: evaluate each box at the side its own hypotheses allow (s_eff), never impose a domain at one
+   side and test at another (A265 §0: A263's OPEN P2 leaves were exactly that); PRUNE only by hypotheses the verifier
+   re-derives (A273 §2.4, §3 (ii)).
+5. Budget + index: one index row per cell, OPEN leaves counted, "PASS with OPEN leaves: not certified" (A273's index).
+
+**10.4 The SVG rules** (the briefs of A260–A271, repeated in every page note): every panel geometry-checked (the drawn
+squares ARE the checked configuration — `page274` asserts it), a note per panel saying what it IS, slivers drawn with a
+10× inset, undecided regions grey stipple; pages under `docs/residue_map/campaigns/<Ann>/`.
+
+**10.5 The ops rules** (every brief A241 onward, e.g. `attempts/A274-flat-corner/BRIEF.md` lines 3–7): ONE heavy python at
+a time (BelowNormal, affinity 0xFFFF, PYTHONDONTWRITEBYTECODE=1); LAUNCH-AND-EXIT (detached, resumable runs with
+`logs/STOP`; never wait on a run); tiny-step writing (≤ 120 lines per Write, a commit after every piece with explicit
+pathspecs, fetch + plain merge only, no response over ~15k tokens); never touch another campaign's files or processes.
+
+**10.6 Pitfalls** (each has cost the lab at least one attempt).
+- **An optimiser's sup is not evidence.**  A272's "sup slack −0.005 on H1–H3, attained only as h_v → 1" was an artefact;
+  the exact witness has +0.0079 (A273).  A253: "a failure to find a ring at a smaller τ would not be a proof either way,
+  and at τ = 0.1° the margins are at the optimiser's resolution".  A244: "EVIDENCE, not proof".
+- **Census counts vs closed classes.**  "census 0 alive" counted A57 tree ROWS; 290 G1 cover boxes were never emitted
+  (A270, LOG 2026-09-23); "k5 closed at the window pad" read the G1 slab pad as the window (s.5.4).  A107: a glob bug
+  read zero files silently ("264 k0_00 node jsons … were silently reading zero files", LOG).  A113 / A107: "a slot-set
+  match is not a packing match" (`residue_ledger.md` §4).
+- **Soft containment.**  An optimiser's penalty (soft) feasibility is not a packing: every candidate is re-checked exactly
+  (A244 inflate + intervals; A274 rationalises every minimiser and re-checks all H1–H3 tests in Fractions); A265's
+  FULL-corner witness overlapped by 0.007 and was not a ring (`last_two.md` §0).  A domain written as a loose box is
+  not the geometric condition: "h_u, h_v < 1" is not "C meets the open box" once C tilts (A266).
+- **Verifier bins.**  A verifier with a different binning can fail a correct leaf (A259's ψ = 0 bin); the tilt bin can
+  cost more than the margin (`strip266`: 0.017 of a 0.005–0.02 margin); a zero-margin layer cannot be binned at all
+  (A273's corner).
+- **Stored results can be incomplete.**  A85's FAILs were row-generation-incomplete; a plain warm re-solve certified
+  cells no queue had reached (A115, `residue_ledger.md` §4).
+- **A refuted statement can survive as a Lean axiom.**  A251's `centre_disc_ring` had to be removed (A252); A272's
+  `strip_two_in_jam_of_disc` still stands on the opaque `DiscLemma` whose prose content is [F] (A273; no AUDIT note
+  yet, s.5.4).
+- **"Unchanged" is the honest default.**  Every doc A218–A274 ends "k0_00 unchanged" unless a chain link moved; say
+  which link, with its tag, or say unchanged.
