@@ -758,8 +758,14 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        (A273's drop tree; c5_4 / c5_5 at θ 25–30° capped, still open)] + `pair3` (not landed).
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
-   5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
-       `span262` in chain3) — no room statement yet [C].  **FLOAT2 witness [M] (2026-09-23):** `attempts/A262-no-jam/results/float262.json`, "JAMMED FLOAT2 EXISTS", sup_t +0.0022 over 108 starts (poses C, D, A, X in the file), drawn in `docs/residue_map/current/k0_stuck_2026-09-23.svg` panel (b); its room is OPEN.
+   5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: **[C] = two CAP-2 statements** (A277, 2026-09-23,
+       `float2_room.md`): n ≤ 8 + cap(S_8) with every blocker a pocket square, so what n = 11 needs at a non-PAIR corner is CAP-2 of its two
+       box meeters — BL-CAP-2(C, D) for FLOAT2, BL-CAP-2(A, C) for the indirect JAM and the middle toucher above X (no two disjoint BL-sector
+       misses; diameter test, Lean `cap2_of_diam`); ROOM is one more than needed and FALSE for FLOAT2 whenever a blocker outside S_8 misses O.
+       [T] ONE-DROP, MUTUAL; LOW with a floating D; STRIP-C / STRIP-D = 5b's strip lemma iff the blocker serves its far box.  **The FLOAT2
+       witness float262.json is [F] as a normal-form object**: D's floor drop is free (A blocks nothing), the corner is a JAM corner after one
+       drop; with Y blocking it, P1 still lands D (J_D = +0.024); [M] `float277` sup ≤ 0 in the 4-square P1-sense model.  Certificate `cert277`
+       (6 / 5 parameters, diameter) benched 12/12, priced 30–1000 / 3–100 CPU-h, not launched.  Lean axiom `bl_cap2_float2` [C].
    5e. Adversary / search: 399 structured starts, capacity ≤ 1 always, no 11-witness [M].
 6. **BOX-MEETERS(11)** [T from 5]: every box has exactly two meeters, wall touchers, eight distinct — `box_meeters.md`
    §5 (Lean `box_meeters_262` from the axiom `jam_count` [C = 5a–5d]).
