@@ -80,8 +80,8 @@ def objective(x, sq, hv, stage='nest'):
         m = min(m, ps[1][1] - 0.5 * L.w(ps[1][2]) - hv)                  # h_v(D) >= hv
     P = [L.verts(*p) for p in ps]
     m = min(m, nest(P)[0])
-        if stage == 'cell' and m > -0.05:
-            m = min(m, -j_any(P, 0)[0], -j_any(P, 1)[0])
+    if stage == 'cell' and m > -0.05:
+        m = min(m, -j_any(P, 0)[0], -j_any(P, 1)[0])
     return -m
 
 
