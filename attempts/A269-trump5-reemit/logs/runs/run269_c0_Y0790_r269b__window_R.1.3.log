@@ -1,0 +1,36 @@
+21:12:37 [w3] pass 3 start c0_Y0790_r269b window:R.1.3 wall 1800 (lab 11, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 window pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A269-trump5-reemit/certs/csp209_c0_Y0790_r269b_window_s0.json)
+   INHERIT c0_Y0790_r269b pad window: 3 prior trees, 38 paths, 2 branches inherited DEAD (final, with their certificates), 12 start nodes (0 from the A203 root)
+== c0_Y0790_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_c0_Y0790_r269b_window_s0.json; basins []; INHERIT 2 dead branches (final) + 12 start nodes ['R.1.3', 'R.1.4', 'R.1.5', 'R.1.6', 'R.1.7', 'R.1.8', 'R.1.9', 'R.1.10', 'R.1.11', 'R.2']; H [2.218, 2.358, 1.38, 1.519, 73.74, 82.372]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1.1.p1.p1  (0.5, 3.377084, 0.5, 3.377084)<-(0,)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0790_r269b__window_R.1.1.p1.p1.json
+   INHERITED DEAD R.1.2        TL(0,0)<-(3, 9)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_c0_Y0790_r269b__window_R.1.2.json
+   A229 SHARD: --start R.1.3 -- 1 of them are start nodes of this page/pad right now (12 start nodes in all)
+   start R.1.3: applied step 1/1 -- TL(0,0) <- [3, 13]
+   node R.1.3      d0 root: INTERNAL (6.4 s, 1 rounds; t=44.1)
+   no-room (k=9, m=2): DEAD by NOROOM-POCKET in 16 s (3 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.1.3      d0: DEAD by NOROOM-POCKET -- no-room at R.1.3 (k=9, m=2; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   start R.1.3        => DEAD (1 nodes; t = 60 s of 1800.0)
+   start R.1.4: SKIPPED (filter)
+   start R.1.5: SKIPPED (filter)
+   start R.1.6: SKIPPED (filter)
+   start R.1.7: SKIPPED (filter)
+   start R.1.8: SKIPPED (filter)
+   start R.1.9: SKIPPED (filter)
+   start R.1.10: SKIPPED (filter)
+   start R.1.11: SKIPPED (filter)
+   start R.2: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   => ALIVE (window_page) in 60.5 s: 12 start runs, 1 nodes, depth 0, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 2 inherited dead (2 up front + 0 in tree), 3 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 2 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1.1.p1.p1 d4 DEAD INHERIT 0.0s; R.1.2 d2 DEAD INHERIT 0.0s; R.1.3 d0 DEAD NOROOM-POCKET 6.4s
+== c0_Y0790_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 101, 'misses': 98, 'entries': 98}; clip {'hits': 3664, 'misses': 55889, 'entries': 55889}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 199, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 2}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 142, 'obs_misses': 93, 'build_hits': 0, 'build_misses': 1, 'bisect_hits': 0, 'bisect_misses': 1, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 93, 'build_entries': 1, 'bisect_entries': 1, 'on': True}
+   A268: c0_Y0790_r269b window R.1.3 -> ALIVE; count268 18 call(s), 0 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 1.8 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
