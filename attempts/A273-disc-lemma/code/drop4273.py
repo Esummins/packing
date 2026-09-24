@@ -4,7 +4,7 @@ are used, both vertical), so it is stated in the C_TOP FRAME y'' = y - C_top ove
   T_u'' vertices (s, -c-s), (s+c, -c), (c, 0), (0, -s);  L_h'' = -s;  X_low'' = -D, X_top'' = -D + sin phi + cos phi;
   Gam'' = {y'' >= -(c+s), y'' <= 0, c(x - h_u - s) + s(y'' + c + s) >= 0, -s(x - h_u) + c(y'' + s) <= 0}.
 h_v enters ONLY through PRUNE: the box is pruned when no h_v in (0, 1) satisfies the H1-H3 necessary conditions for
-any parameter of the box (lower bounds: LOW, X_top > 2.82; upper: h_v < 1, open box, X_top <= s^), or when X and C
+any parameter of the box (lower bounds: X_top > 2.82, h_v > 0 -- Lemma LOW deliberately NOT used; upper: h_v < 1, open box, X_top <= s^), or when X and C
 share an interior point for every parameter of the box (H2).
 Cells, rules and soundness as drop273 (whose cell_dead is reused unchanged)."""
 import math
@@ -78,8 +78,7 @@ def prune4(b):
     if hu[0] >= 1.0:
         return 'box_hu'
     ws, wp = G.iadd(Cc, S), G.iadd(SP, CP)
-    lows = [('LOW', G.isub(G.iadd((SE.R2LO, SE.R2HI), G.idiv_pos(G.isub((1.0, 1.0), S), Cc)), Cc)),
-            ('X_top_gt', G.iadd(G.isub(G.isub((2.82, 2.82), wp), ws), dd)), ('hv_pos', (0.0, 0.0))]
+    lows = [('X_top_gt', G.iadd(G.isub(G.isub((2.82, 2.82), wp), ws), dd)), ('hv_pos', (0.0, 0.0))]   # Lemma LOW NOT used
     ups = [('hv_lt1', (1.0, 1.0)), ('X_top_le', G.iadd(G.isub(G.isub((SE.SHAT_HI, SE.SHAT_HI), wp), ws), dd))]
     ob = G.isub(G.isub(G.iadd(Cc, S), G.imul(S, Cc)), G.imul(hu, Cc))
     if ob[1] <= 0.0:

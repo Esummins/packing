@@ -128,11 +128,11 @@ def tu_outer(b, T):
 
 
 def hv_window_empty(b, T):
-    """PRUNE re-derived: no h_v in (0, 1) meets LOW, X_top > 2.82, X_top <= s^, open box, for any point of b."""
+    """PRUNE re-derived: no h_v in (0, 1) meets X_top > 2.82, X_top <= s^, open box, for any point of b; or X hits C."""
     s, c, sp, cp = T
     hu, dd = I(*b[0]), I(*b[2])
     ws, wp = c + s, sp + cp
-    lows = [1 / iv.sqrt(2) + (1 - s) / c - c, 2.82 - wp - ws + dd, I(0)]
+    lows = [2.82 - wp - ws + dd, I(0)]                                # Lemma LOW not used
     ob = c + s - s * c - hu * c
     if ob.b <= 0:
         return True
