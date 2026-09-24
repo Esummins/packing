@@ -22,10 +22,10 @@ C's at h_u < 1.  [C] no such square exists (it must thread the gap between A's t
 with its centre below 1.4385); psi_1 < 0 lets it sit higher by (s/2 - q_1x) tan|psi_1|.  On every JAM ring measured
 (A262) the whole BL sector is empty of misses.
 **[T] S4 (side-by-side wall misses: the mirror).**  Two wall-sector misses with disjoint y-ranges force the lower one
-into [0, 2.15] x [0, 1.4385]: a unit square with points below height 1 -- left of A it is in the START gap of width
-a < 1 (the WEDGE case of normal_room.md s.2, [T] there for a ring with the END square above, [C] here with C floating),
-right of A its centre has x >= a + w(alpha) - ... >= 1.9 > s/2 - 1/2 = 1.4385 -- hmm, only if it is right of ALL of A;
-a square poking over A's right shoulder with centre x <= 1.4385 must have a point above A: [C].
+into [0, 2.15] x [0, 1.4385]: a unit square with points below height 1, interior-disjoint from A (on the floor over
+x in [a, a + w(alpha)], a < 1) and from C.  [C] no such square exists: left of A it is in the START gap of width a < 1
+(the WEDGE case of normal_room.md s.2 -- [T] there for a ring with the END square above, [C] here with C floating);
+with centre x <= 1.4385 it cannot be entirely right of A, so otherwise it pokes over A's shoulder under C.
 **Where the analytic route stops.**  last_two.md s.2.2's stacking argument needs a GAP STRIP (two squares in a strip of
 width < 2 cannot be side by side, and the upper one's x-range then contains s/2); here the misses are not confined to a
 strip -- S3 is the analogue, and it leaves the near-flat left square [C].  strip_jam.md's LEFT constraint and Lemma
