@@ -1149,3 +1149,29 @@ pathspecs, fetch + plain merge only, no response over ~15k tokens); never touch 
 - s.5 [F] **the gloss "X misses B iff y_X ≥ 1 − cos φ_X"** (s.1 JAM entry, `no_jam.md` §1) — the LOWEST point of X must be ≥ 1
   (X ⊆ {y ≥ 1}); the leftmost vertex is then at height ≥ 1 + cos φ_X.  H1 and `float2_room.md` have it right.  A278 part 1.
 - s.8 5d — unchanged: two CAP-2 statements [C]; NO-FLOAT2 would delete `bl_cap2_float2` and is itself [C] (A278).
+
+## 12. APPENDS — A279 (2026-09-24), THE NEST RESIDUAL (`nest_residual.md`; parts `attempts/A279-nest-residual/notes/`)
+
+- s.2.3 [T] **NOT-BOTH, D HIGH** — under (NEST) D's parallel edge lines (angle θ_D) are not both separators (Y beyond the lower-right
+  one gives η₊ ≥ θ_D, C beyond the upper-left one α₋ ≤ θ_D); Y's top vertex under D's lower-right edge forces h_v(D) ≥ 1 − sin θ_D
+  and h_u(D) < 1 − sin θ_D + sin θ_D tan θ_D.  Lean `nest_not_both_edges`; A279 part 2.
+- s.2.3 [T] **(Σ), (Σ′)** — inscribed-disc centres across the C|D and D|Y separators: (m_Y,x − m_C,x) tan η + (m_D,x − m_C,x)(tan α −
+  tan η) > sec α + sec η − 1/2 − 1/√2 ≥ 0.793 (C below 1, Y on the floor); every shallow nest is impossible (tan α > 0.95 at η → 0;
+  page panel (b)).  Vertex form: h_v(D) ≥ 1 − (cos a + cos θ_D) tan η, h_v(D) < 1 − w_D + (h_u(D) + cos θ_D) tan α.  Lean `sigma_core`,
+  `sigma_prime_low`; A279 part 3.
+- s.2.3 [T] **(WEDGE), FLAT-C** — C between the wall and the steep separator: h_u(D) ≥ 1/2 + 1/(2 sin α) + (h_v(D) + cos θ_D − 1 −
+  w_C/2) cot α, so h_v(D) + cos θ_D < 1 + w_C/2; a flat C at height y₀ < 1 forces D's left vertex under its bottom edge: h_u(D) ≥ 0.70,
+  h_v(D) < 1 − cos θ_D, then η > 18° (θ_D ≤ 60°).  Lean `flat_c_core`; A279 part 3.
+- s.2.1 [T] **the cells to test in NEST** — flat floor cells fail iff x_L(Y) < 1 + sup I(C); SWEEP is empty; N_Y := Y − sec a·e_x (Y's left
+  normal cell, (E1); inside the container iff x_L(Y) ≥ sec a) lands D iff C, X miss it; N_X := X − sec φ_X·e_y (inside iff X_low ≥ sec φ_X)
+  lands C iff D, Y miss it.  [T-computed] on A277's witness N_X meets D (0.044), N_Y is outside the container.  A279 part 2.6.
+- s.2.2 [T] **count chase** — FAMILY-STUCK with M(B) = {C, D} forces third meeters of c01 = [0,1]×[1,2] and c10 = [1,2]×[0,1] (P1⁺,
+  Π = {B, c01}, {B, c10}); in the 4-square model X_low, x_L(Y) ∈ [1, 2).  "Y meets B" is NOT forced by (Σ)/(WEDGE).  A279 part 2.5.
+- s.4 [M] **nest279** — two-stage search (NEST feasibility over the 4-square model, then any-pose cells), running at exit, self-committing
+  (`attempts/A279-nest-residual/results/nest279.jsonl`); two earlier runs stuck on an optimiser plateau are kept as [F]-evidence rows.
+  No NEST quadruple in hand; A277's `float277` never explored the NEST end (its optimum is a boundary).
+- s.6 [C] **NEST-emptiness** — "no FLOAT2 quadruple satisfies (NEST)" would prove the P1-SENSE 4-square statement (every FLOAT2 corner
+  has a sweep or normal cell met by D or C alone among the four), NOT L: a sweep cell's part outside D need not be in the shadow.
+  Cheapest certificate: A278's tree with (NEST), (Σ), (WEDGE), FLAT-C as monotone prunes; 2-D slice bench first.  A279 part 3.4.
+- s.5 [F→fixed] the gloss "X misses B iff y_X ≥ 1 − cos φ_X" is corrected in s.1 and `no_jam.md` §1 (A279).
+- s.8 5d — unchanged: two CAP-2 statements [C]; `float2_local` [C] stands; NestResidual.lean adds no axiom (A279).

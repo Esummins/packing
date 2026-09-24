@@ -771,6 +771,10 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        witness is landed by the flat floor cell with shadow margin 0.032 and by SWEEP; [C] NO-FLOAT2 (residual (NEST): Y under a high D),
        certificate > 10^3 CPU-h naive, not launched -- so `bl_cap2_float2` stays; [C] BL-CAP-2(A, C) with S1-S4, cert277 jam 3-100 CPU-h not
        launched.  Lean `Statements/Open/NoFloat2.lean` (axioms `no_float2_of_local` [T-prose], `float2_local` [C]).
+       **A279 (2026-09-24, `nest_residual.md`):** the NEST sub-residual: [T] NOT-BOTH, D HIGH, (Sigma) (shallow nests impossible: tan alpha > 0.95
+       at eta -> 0), (WEDGE), FLAT-C; cells N_Y / N_X named and tested; count chase: third meeters of c01, c10 forced, "Y meets B" not; [M] nest279
+       running at exit (no NEST quadruple in hand); [C] NEST-emptiness.  Erratum: (NEST) is the P1-sense residual, L's shadow residual is larger.
+       Lean `Statements/Open/NestResidual.lean` (4 cores [T], no new axiom).  `float2_local`, `bl_cap2_float2` unchanged.
    5e. Adversary / search: 399 structured starts, capacity ≤ 1 always, no 11-witness [M].
 6. **BOX-MEETERS(11)** [T from 5]: every box has exactly two meeters, wall touchers, eight distinct — `box_meeters.md`
    §5 (Lean `box_meeters_262` from the axiom `jam_count` [C = 5a–5d]).
