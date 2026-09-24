@@ -45,11 +45,14 @@ def arc(Up, Lo):
 
 
 def nest(P):
-    """P = [C, D, X, Y]; returns (margin in deg/100, arcs).  margin > 0 <=> eta_+ < alpha_- and alpha_+ < xi_-."""
-    (al, _), (et, _), (xi, _) = arc(P[0], P[1]), arc(P[1], P[3]), arc(P[2], P[0])
+    """P = [C, D, X, Y]; returns (margin, arcs).  margin > 0 <=> eta_+ < alpha_- and alpha_+ < xi_- (then in deg/100);
+    if some pair has no positive-slope separator of the right orientation, margin = the least (negative) peak gap
+    along the positive-slope normals -- continuous in the poses (no plateau for the optimiser)."""
+    (al, pa), (et, pe), (xi, px) = arc(P[0], P[1]), arc(P[1], P[3]), arc(P[2], P[0])
+    arcs = dict(alpha=al, eta=et, xi=xi, peaks=[pa, pe, px])
     if al is None or et is None or xi is None:
-        return -1.0, dict(alpha=al, eta=et, xi=xi)
-    return min(al[0] - et[1], xi[0] - al[1]) / 100.0, dict(alpha=al, eta=et, xi=xi)
+        return min(pa, pe, px), arcs
+    return min(al[0] - et[1], xi[0] - al[1]) / 100.0, arcs
 
 
 def j_any(P, i):
@@ -75,9 +78,8 @@ def objective(x, sq, hv, stage='nest'):
     t, ps, nm = L.terms(x, sq, MEET, NOTMEET); m = min(t)
     if hv is not None:
         m = min(m, ps[1][1] - 0.5 * L.w(ps[1][2]) - hv)                  # h_v(D) >= hv
-    if m > -0.5:
-        P = [L.verts(*p) for p in ps]
-        m = min(m, nest(P)[0])
+    P = [L.verts(*p) for p in ps]
+    m = min(m, nest(P)[0])
         if stage == 'cell' and m > -0.05:
             m = min(m, -j_any(P, 0)[0], -j_any(P, 1)[0])
     return -m
@@ -119,8 +121,9 @@ if __name__ == '__main__':
     Z.belownormal()
     done = {(json.loads(l)['mode'], json.loads(l)['seed']) for l in open(OUT)} if os.path.exists(OUT) else set()
     mode = ('hv%.2f' % a.hv if a.hv is not None else 'free') + '/' + a.stage
+    STOP = os.path.join(HERE, '..', 'logs', 'STOP')
     for sd in map(int, a.seeds.split(',')):
-        if (mode, sd) in done:
+        if (mode, sd) in done or os.path.exists(STOP):
             continue
         row = run(a.restarts, sd, a.hv, a.stage)
         with open(OUT, 'a') as fh:
