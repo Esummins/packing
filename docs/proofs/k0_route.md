@@ -750,6 +750,12 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        not 10² CPU-h) EXCEPT the corner θ ≤ 5° ∧ φ ≤ 5°, where STRIP₂'s own slack → 0 (≈ 0.15 θ² at φ = 0): that
        layer needs a hand proof (or A271's ring inequalities).  So 5b = STRIP₂-IN-JAM [T-prose, the DROP form] + the
        drop tree [T-computed when verify273 passes, outside the corner] + the corner [C] + `pair3`.
+       **A276 (2026-09-23):** the corner is CLOSED by hand: `docs/proofs/flat_x.md` -- Theorem FLAT-X [T] (φ = 0, θ ≤ 30°: the
+       intruder is the flat square resting on C's top line against X's right edge, corner (1, C_top) at distance (1 − c) c from
+       T_u, the 0.25 θ² halved by the probe) and Theorem CORNER [T] (0 ≤ θ, φ ≤ 5°: case split on Q's left vertex with the
+       three pins R_X / T / L; at φ > 0 the flat square is dead outright, slack first order).  Lean `Statements/Open/FlatX.lean`
+       (cores [T], `strip_two_in_jam_corner` [T-prose]).  So 5b = STRIP₂-IN-JAM [T on the corner (A276) + T-computed outside it
+       (A273's drop tree; c5_4 / c5_5 at θ 25–30° capped, still open)] + `pair3` (not landed).
    5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — the same per-corner sectors apply
        (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].
    5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
