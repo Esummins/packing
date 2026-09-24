@@ -63,6 +63,7 @@ import PackingCertMathlib.Statements.Open.RingDomain
 import PackingCertMathlib.Statements.Open.StripJam
 import PackingCertMathlib.Statements.Open.FlatX
 import PackingCertMathlib.Statements.Open.Float2Room
+import PackingCertMathlib.Statements.Open.NoFloat2
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 
