@@ -1,11 +1,11 @@
-# A270 progress -- 2026-09-24 02:30:15
+# A270 progress -- 2026-09-24 02:34:54
 
 The pad-g4 campaign (notes/slabs270.md): A57's level-1 cover rebuilt at pin slack 9/400, every chain page re-emitted as <id>_r270w4 and run through A211's chain at pad g4 = the window (3.82, s0] with A268's levers (count268, leaf268, the STALLED invariant).  A DEAD here is a statement on the WHOLE window, s-hat included.
 
 | class | priority | records | DEAD at g4 | run, open | not run |
 |---|---|---|---|---|---|
 | k5_11 | 1 | 137 | 120 | 17 | 0 |
-| k5_11 | 2 | 163 | 65 | 5 | 93 |
+| k5_11 | 2 | 163 | 65 | 6 | 92 |
 | k5_11 | 3 | 476 | 0 | 0 | 476 |
 | k5_11 | 4 | 14 | 0 | 0 | 14 |
 | k5_16 | 1 | 161 | 146 | 15 | 0 |
@@ -20,4 +20,4 @@ The pad-g4 campaign (notes/slabs270.md): A57's level-1 cover rebuilt at pin slac
 
 trump5: all four slabs OPEN here -- A269 (re-emitted records, pads tube / window) owns them.
 
-CPU-h spent by the campaign: **43.37** (cap 150)
+CPU-h spent by the campaign: **43.87** (cap 150)
