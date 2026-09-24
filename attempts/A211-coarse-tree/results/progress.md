@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-23 23:01:51
+# A211 progress -- 2026-09-23 23:11:57
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the g1 pad (lam = s0/3.861637: A57's G1 slab (3.861637, s0], s-hat included -- NOT the window [3.82, s0]; A270); wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -682,7 +682,7 @@ CPU-h in this block: 66.65
 | class | G1 = (3.861637, s0], s-hat incl. | G2 = (3.847016, 3.861637] | G3 = (3.832450, 3.847016] | G4 = [3.82, 3.832450] |
 |---|---|---|---|---|
 | `k5_11` | **OPEN**: 17 cover box(es) with no G1 row / an s0-only kill, not yet DEAD at g4 | **OPEN**: 180 record(s) of tiers 1-2 left (A270 g4) | **OPEN**: 670 record(s) left + the NO-child LP | **OPEN**: 670 record(s) left + the NO-child LP |
-| `k5_16` | **OPEN**: 34 cover box(es) with no G1 row / an s0-only kill, not yet DEAD at g4 | **OPEN**: 243 record(s) of tiers 1-2 left (A270 g4) | **OPEN**: 749 record(s) left + the NO-child LP | **OPEN**: 749 record(s) left + the NO-child LP |
+| `k5_16` | **OPEN**: 26 cover box(es) with no G1 row / an s0-only kill, not yet DEAD at g4 | **OPEN**: 235 record(s) of tiers 1-2 left (A270 g4) | **OPEN**: 741 record(s) left + the NO-child LP | **OPEN**: 741 record(s) left + the NO-child LP |
 | `trump5` | **OPEN**: A268's g1 verdicts ran on A60's 3e-8 records (s0-only); A269 re-emits | **OPEN** (A269 pad tube) | **OPEN** (A269) | **OPEN** (A269 pad window) |
 
 No kill on disk before A270 reaches below 3.851408 for these classes (every k5 record carries pin slack <= 1e-2).  Live: `attempts/A270-k5-lower-slabs/results/progress270.md`; the argument: `notes/slabs270.md`.
