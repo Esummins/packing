@@ -688,7 +688,7 @@ This section is what stops agents repeating them.  Grouped by theme; each: the c
    A272: disc-lemma tree ~20 / 10² CPU-h.  A273 (later): hours (for the DROP form).  Later ones stand.
 11. **`strip265` ring count.**  `strip_plug.md`: 18 at exit, 323 in the lane.  `strip265.json` today: n = 432.
 12. **FLOAT2.**  `no_jam.md` §1 (A262): "[M] `float262` (pending)"; `three_lemmas.md` §4.5 (A264): "not run".
-   `float262.json` (2026-09-23 11:59, uncommitted): "JAMMED FLOAT2 EXISTS", sup_t +0.00224.  The file is later.
+   `float262.json` (2026-09-23 11:59, committed 2026-09-23): "JAMMED FLOAT2 EXISTS", sup_t +0.00224.  The file is later.
 13. **SLIDE's d₂ bound.**  A92's sequential proof gives only Σ_{i≥1} d_i ≥ ŝ − m; A94's joint translation gives the
    d₂ bound (`slot_crowds.md` §0, §3.4).  A94 is later.
 14. **A85's f₂ and the k0 frontier.**  A85: f₂ = 1/3 at A60 defaults, FAILs are coverage holes.  A99 (later, REGISTRY
@@ -895,7 +895,7 @@ files and the later notes (A273 index, A274) say.  Files in `docs/proofs/` unles
      (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].  TODAY: unchanged.
    - 5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
      `span262`) — no room statement [C].  TODAY: `float262.json` reports "JAMMED FLOAT2 EXISTS" (sup_t +0.00224,
-     uncommitted chain output); `span262.json` sup_t −0.0327 at ŝ.  Still no room statement: [C].
+     chain output, committed 2026-09-23); `span262.json` sup_t −0.0327 at ŝ.  Still no room statement: [C].
    - 5e. Adversary / search: 399 structured starts, capacity ≤ 1 always, no 11-witness [M].  TODAY: `search262.jsonl`
      has 552 rows; no source text reports on the extra rows.
 6. **BOX-MEETERS(11)** [T from 5]: every box has exactly two meeters, wall touchers, eight distinct — `box_meeters.md`
