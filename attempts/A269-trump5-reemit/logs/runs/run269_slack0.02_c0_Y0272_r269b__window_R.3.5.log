@@ -1,0 +1,42 @@
+00:16:08 [w3] pass 3 start slack0.02_c0_Y0272_r269b window:R.3.5 wall 1800 (lab 11, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 window pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A269-trump5-reemit/certs/csp209_slack0.02_c0_Y0272_r269b_window_s0.json)
+   INHERIT slack0.02_c0_Y0272_r269b pad window: 4 prior trees, 69 paths, 7 branches inherited DEAD (final, with their certificates), 6 start nodes (0 from the A203 root)
+== slack0.02_c0_Y0272_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_slack0.02_c0_Y0272_r269b_window_s0.json; basins []; INHERIT 7 dead branches (final) + 6 start nodes ['R.3.5', 'R.3.6', 'R.3.7', 'R.4', 'R.5', 'R.6']; H [1.38, 1.519, 2.498, 2.637, 0.0, 14.25]; forced H ['TL(0,0)']; 6 slots; free squares 5
+   INHERITED DEAD R.1          TR(1,0)<-(14,)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_slack0.02_c0_Y0272_r269b__window_R0_.json
+   INHERITED DEAD R.2          TR(1,0)<-(17,)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_slack0.02_c0_Y0272_r269b__window_R0_.json
+   INHERITED DEAD R.3.1        BR(0,1)<-(11,)  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_slack0.02_c0_Y0272_r269b__window_R0_.json
+   INHERITED DEAD R.3.2        BR(0,1)<-(12,)  [A211 tree: EmptyBox] attempts/A269-trump5-reemit/certs/coarsetree211_slack0.02_c0_Y0272_r269b__window_R0_.json
+   INHERITED DEAD R.3.3.p1.p1.1 BL(1,1)<-F1  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_slack0.02_c0_Y0272_r269b__window_R.3.3.p1.p1.1.json
+   INHERITED DEAD R.3.3.p1.p1.2 BL(1,1)<-F1  [A211 tree: every branch DEAD] attempts/A269-trump5-reemit/certs/coarsetree211_slack0.02_c0_Y0272_r269b__window_R.3.3.p1.p1.2.json
+   INHERITED DEAD R.3.4        BR(0,1)<-(17,)  [A211 tree: EmptyBox] attempts/A269-trump5-reemit/certs/coarsetree211_slack0.02_c0_Y0272_r269b__window_R.3.4.json
+   A229 SHARD: --start R.3.5 -- 1 of them are start nodes of this page/pad right now (6 start nodes in all)
+   start R.3.5: applied step 1/1 -- BR(0,1) <- [21]
+   node R.3.5      d0 root: INTERNAL (9.7 s, 1 rounds; t=15.9)
+   no-room (k=9, m=2): UNDECIDED in 26 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.3.5: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R.3.5.p1   d1 pocket<-[0]: INTERNAL (6.6 s, 1 rounds; t=49.1)
+   no-room (k=10, m=1): UNDECIDED in 12 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.5.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.5.p1.p1 d2 pocket<-[0]: INTERNAL (7.3 s, 1 rounds; t=68.6)
+   node R.3.5.p1.p1 d2: DEAD by CC -- rule CC at R.3.5.p1.p1 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an 
+   node R.3.5.p2   d1 pocket<-[1]: INTERNAL (2.7 s, 1 rounds; t=71.3)
+   node R.3.5.p2   d1: DEAD by CC -- rule CC at R.3.5.p2 (Lemma CORNER-COVER; window pad, lam 1.014943): rule CC: F1 is a corner square at TL (Lemma CORNER-COVER), so every other meeter of TL(0,0) has an int
+   start R.3.5        => DEAD (4 nodes; t = 72 s of 1800.0)
+   start R.3.6: SKIPPED (filter)
+   start R.3.7: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   start R.5: SKIPPED (filter)
+   start R.6: SKIPPED (filter)
+   => ALIVE (window_page) in 71.8 s: 6 start runs, 4 nodes, depth 2, 2 CC kills, 0 exact leaf cascades, 0 NS splits, 2 pocket splits, 0 role splits (0 empty-half kills), 7 inherited dead (7 up front + 0 in tree), 9 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 8 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1 d2 DEAD INHERIT 0.0s; R.3.2 d2 DEAD INHERIT 0.0s; R.3.3.p1.p1.1 d5 DEAD INHERIT 0.0s; R.3.3.p1.p1.2 d5 DEAD INHERIT 0.0s; R.3.4 d2 DEAD INHERIT 0.0s; R.3.5 d0 INTERNAL 9.7s; R.3.5.p1 d1 INTERNAL 6.6s; R.3.5.p1.p1 d2 DEAD CC 7.3s; R.3.5.p2 d1 DEAD CC 2.7s
+== slack0.02_c0_Y0272_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 422, 'misses': 164, 'entries': 164}; clip {'hits': 8576, 'misses': 588078, 'entries': 188078}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 586, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 5}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 480, 'obs_misses': 153, 'build_hits': 0, 'build_misses': 2, 'bisect_hits': 0, 'bisect_misses': 2, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 152, 'build_entries': 2, 'bisect_entries': 2, 'on': True}
+   A268: slack0.02_c0_Y0272_r269b window R.3.5 -> ALIVE; count268 62 call(s), 0 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 4.2 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
