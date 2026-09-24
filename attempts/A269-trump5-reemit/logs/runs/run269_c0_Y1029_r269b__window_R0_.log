@@ -1,0 +1,36 @@
+18:24:24 [w2] pass 2 start c0_Y1029_r269b window:R0+ wall 1800 (lab 11, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y1029_r269b at the window pad: ALIVE in 69993 ms; kills {'H-clip': 0, 'P': 5042, 'W': 1668, 'C': 1234, 'M': 5777, 'L': 7, 'R': 3461, 'X': 1322}; CSP units 210 -> 210 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H ['TR(0,1)']
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT c0_Y1029_r269b pad window: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== c0_Y1029_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_c0_Y1029_r269b_window_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.498, 2.637, 2.218, 2.358, 64.011, 73.74]; forced H ['TR(0,1)']; 6 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (41.7 s, 1 rounds; t=41.8)
+   node R0+.1      d1 BR(0,1)<-[16]: DEAD by FC r1 (4.4 s, 1 rounds; t=46.2)
+   node R0+.2      d1 BR(0,1)<-[21]: INTERNAL (1.5 s, 1 rounds; t=47.8)
+   node R0+.2.1    d2 TR(1,0)<-[8]: INTERNAL (2.2 s, 1 rounds; t=50.0)
+   node R0+.2.1.1  d3 TL(0,0)<-[3]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=50.3)
+   node R0+.2.1.2  d3 TL(0,0)<-[4]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=50.5)
+   node R0+.2.1.3  d3 TL(0,0)<-[9]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=50.6)
+   node R0+.2.1.4  d3 TL(0,0)<-[14]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=50.7)
+   node R0+.2.2    d2 TR(1,0)<-[9]: INTERNAL (1.9 s, 1 rounds; t=52.6)
+   node R0+.2.2.1  d3 TL(0,0)<-[3]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=52.9)
+   node R0+.2.2.2  d3 TL(0,0)<-[4]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=53.1)
+   node R0+.2.2.3  d3 TL(0,0)<-[8]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=53.3)
+   node R0+.2.3    d2 TR(1,0)<-[14]: INTERNAL (1.4 s, 1 rounds; t=54.7)
+   node R0+.2.3.1  d3 TL(0,0)<-[3]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=54.9)
+   node R0+.2.3.2  d3 TL(0,0)<-[4]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=55.1)
+   node R0+.2.3.3  d3 TL(0,0)<-[8]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=55.3)
+   start R0+          => DEAD (16 nodes; t = 55 s of 1800.0)
+   => DEAD (window_page) in 55.3 s: 1 start runs, 16 nodes, depth 3, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 11 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 5 evaluation(s), 4 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 41.7s; R0+.1 d1 DEAD FC 4.4s; R0+.2 d1 INTERNAL 1.5s; R0+.2.1 d2 INTERNAL 2.2s; R0+.2.1.1 d3 DEAD EmptyBox 0.2s; R0+.2.1.2 d3 DEAD EmptyBox 0.2s; R0+.2.1.3 d3 DEAD EmptyBox 0.1s; R0+.2.1.4 d3 DEAD EmptyBox 0.1s; R0+.2.2 d2 INTERNAL 1.9s; R0+.2.2.1 d3 DEAD EmptyBox 0.3s; R0+.2.2.2 d3 DEAD EmptyBox 0.1s; R0+.2.2.3 d3 DEAD EmptyBox 0.1s; R0+.2.3 d2 INTERNAL 1.4s; R0+.2.3.1 d3 DEAD EmptyBox 0.1s; R0+.2.3.2 d3 DEAD EmptyBox 0.1s; R0+.2.3.3 d3 DEAD EmptyBox 0.1s
+== c0_Y1029_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 219, 'misses': 68, 'entries': 68}; clip {'hits': 7574, 'misses': 7320, 'entries': 7320}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 287, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 16}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 222, 'obs_misses': 65, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 65, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   A268: c0_Y1029_r269b window R0+ -> DEAD; count268 42 call(s), 0 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 0.6 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
