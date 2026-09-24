@@ -90,8 +90,8 @@ Objective t = min(local261's terms: gaps, containment, box depths of C and D, X 
 of every floater blocked; and −J_F for every floater F on A261's coarse any-pose grid).  sup t > 0 ⟺ a FLOAT2 corner
 that neither a drop nor P1 lands, in the 4- or 5-square local model.  Rows finished at this writing (12 restarts each,
 6 seeded from the exact witness of §2 with jitter): **F4 (C, D, X, Y): sup = −0.000000 (seeds 1, 2), NO-WITNESS** — the
-optimum is the degenerate boundary (a floater touching).  F5 (+ a fifth floater K), F3 (no floor toucher), F4b (X, Y
-free to meet the box): see the jsonl / log; whatever they say is [M] for the local model only.
+optimum is the degenerate boundary (a floater touching); **F5 (+ a fifth floater K as an indirect blocker): sup = −0.000002
+(seed 1), NO-WITNESS.**  F5 seed 2, F3 (no floor toucher), F4b (X, Y free to meet the box): see the jsonl / log; whatever they say is [M] for the local model only.
 
 ## 5. Strips and the indirect jam  (parts 4, 5)
 

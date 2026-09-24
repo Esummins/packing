@@ -11,11 +11,12 @@ exact witness of part 2 with growing jitter, 6 random), BelowNormal, one process
 | F4 | C:F D:F X:V Y:H | 99 (1 restart, witness) | -0.0049 | D at h_v = 0.0001, J_D = +0.0049 (a flat floor cell lands D) |
 | F4 | same | 1 | -0.0000000 | C at h_u = h_v = 0 (a corner square: not a floater), C's floor drop unblocked |
 | F4 | same | 2 | -0.0000000 | D at h_v = 0.0 (a floor toucher: the corner is a JAM), Y's depth into T_v(D) = 0 |
+| F5 | C:F D:F K:F X:V Y:H | 1 | -0.000002 | NO-WITNESS with a fifth floater K available as an indirect blocker (507 s) |
 **Reading:** the supremum is 0 and is attained only on the boundary where a floater becomes a toucher -- exactly the
 degeneration FLOAT2 -> JAM (or -> corner square).  So [M]: **no FLOAT2 corner that P1 cannot land exists in the
 4-square model {C, D, X, Y}**; the witness of part 2 (all four drops blocked) fails only P1's flat floor cells.
-Pending in the jsonl / log (the process runs on, detached, resumable): F5 (+ a fifth floater K as an indirect blocker),
-F3 (no floor toucher), F4b (X, Y free to meet the box).  Their rows are [M] for the local model only; an optimiser's
+Pending in the jsonl / log (the process runs on, detached, resumable): F5 seed 2, F3 (no floor toucher), F4b (X, Y
+free to meet the box).  Their rows are [M] for the local model only; an optimiser's
 sup is never evidence a lemma is true -- here it says where a THEOREM should be looked for (7.3 (L6)).
 
 ## 7.2 Lean  (Statements/Open/Float2Room.lean; one import line in Statements.lean; AUDIT regenerated)
