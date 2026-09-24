@@ -1,0 +1,37 @@
+18:26:28 [w4] pass 2 start c0_Y1039_r269b window:R0+ wall 1800 (lab 11, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A269: shadows ['inherit211', 'load211', 'poly204', 'stage209']; pads {'tube': 1.0117429576178392, 'window': 1.0149434554973822}; loader load269; count268 True; leaf268 True; Tree257 (gate + aligned split + TUBE-KILL) True
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP c0_Y1039_r269b at the window pad: ALIVE in 51932 ms; kills {'H-clip': 0, 'P': 3788, 'W': 1534, 'C': 1054, 'M': 4741, 'L': 7, 'R': 3310, 'X': 1231}; CSP units 512 -> 512 alive; caps {'BL(0,2)': None, 'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(0,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT c0_Y1039_r269b pad window: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== c0_Y1039_r269b page pad window: start attempts/A269-trump5-reemit/certs/csp209_c0_Y1039_r269b_window_s0.json; basins []; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.498, 2.637, 2.358, 2.498, 82.372, 90.0]; forced H []; 6 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (51.3 s, 1 rounds; t=51.4)
+   node R0+r1      d0 root<-None: INTERNAL (5.5 s, 1 rounds; t=56.9)
+   node R0+.1      d1 TR(1,0)<-[7]: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=59.0)
+   node R0+.2      d1 TR(1,0)<-[8]: INTERNAL (8.0 s, 1 rounds; t=67.0)
+   node R0+.2.1    d2 TL(0,0)<-[3]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=67.6)
+   node R0+.2.2    d2 TL(0,0)<-[4]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=67.8)
+   node R0+.2.3    d2 TL(0,0)<-[9]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=68.0)
+   node R0+.2.4    d2 TL(0,0)<-[14]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=68.2)
+   node R0+.3      d1 TR(1,0)<-[9]: INTERNAL (3.1 s, 1 rounds; t=71.3)
+   node R0+.3.1    d2 TL(0,0)<-[3]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=71.6)
+   node R0+.3.2    d2 TL(0,0)<-[4]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=71.8)
+   node R0+.3.3    d2 TL(0,0)<-[8]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=72.0)
+   node R0+.4      d1 TR(1,0)<-[13]: DEAD by FC r1 (2.1 s, 1 rounds; t=74.2)
+   node R0+.5      d1 TR(1,0)<-[14]: INTERNAL (3.8 s, 1 rounds; t=78.1)
+   node R0+.5.1    d2 TL(0,0)<-[3]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=78.7)
+   node R0+.5.2    d2 TL(0,0)<-[4]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=78.9)
+   node R0+.5.3    d2 TL(0,0)<-[8]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=79.1)
+   start R0+          => DEAD (17 nodes; t = 79 s of 1800.0)
+   => DEAD (window_page) in 79.2 s: 1 start runs, 17 nodes, depth 2, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 12 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 4 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 51.3s; R0+r1 d0 INTERNAL 5.5s; R0+.1 d1 DEAD EmptyBox 2.1s; R0+.2 d1 INTERNAL 8.0s; R0+.2.1 d2 DEAD EmptyBox 0.6s; R0+.2.2 d2 DEAD EmptyBox 0.2s; R0+.2.3 d2 DEAD EmptyBox 0.2s; R0+.2.4 d2 DEAD EmptyBox 0.1s; R0+.3 d1 INTERNAL 3.1s; R0+.3.1 d2 DEAD EmptyBox 0.2s; R0+.3.2 d2 DEAD EmptyBox 0.1s; R0+.3.3 d2 DEAD EmptyBox 0.2s; R0+.4 d1 DEAD FC 2.1s; R0+.5 d1 INTERNAL 3.8s; R0+.5.1 d2 DEAD EmptyBox 0.5s; R0+.5.2 d2 DEAD EmptyBox 0.1s; R0+.5.3 d2 DEAD EmptyBox 0.2s
+== c0_Y1039_r269b: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 338, 'misses': 135, 'entries': 135}; clip {'hits': 15435, 'misses': 12761, 'entries': 12761}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 473, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 17}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 344, 'obs_misses': 129, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 129, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   A268: c0_Y1039_r269b window R0+ -> DEAD; count268 46 call(s), 0 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 0.5 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
