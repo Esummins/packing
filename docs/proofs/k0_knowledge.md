@@ -833,3 +833,62 @@ not hold on a cell's fibre); **LOAD** (a force argument cannot see rattler crowd
   ("over the 20 CPU-h line by two orders").  `ring_domain.md` §0; A271.  Superseded by A273's DROP form (hours).
 - [D] **The DROP tree on the corner θ, φ ≤ 5°** — cannot be bought at any price: STRIP₂'s own margin → 0 (`disc273.md`
   §5, §7.3).  Reason: MARGIN = 0.
+
+### 7.3 Dead theory routes (a proof shape that cannot work, with the reason)
+
+- [D] **Counting** — K0-COUNT (LOAD, DISTINCT false), the perimeter sweep (closes only n ≤ 4), NO-CLOSURE (slack 2 at
+  n = 11, closes at no n), A246's composition (locally feasible below 4), the family ILP (9 ≤ 11).  Why: "the rules
+  are local and the obstruction below 4 is global" (`family250.md` §2.2).  A218/A222/A236/A246/A250.
+- [D] **Force / torque / handedness** — RING needs loads (rattler crowds invisible: 61/70 corners), handedness never
+  separates, OPPOSE false, NO-VV not forced; A222: "Loads are never used" in the route that replaced them.  A218–A240.
+- [D] **Local per-corner closures** — every LOCAL mechanism (corner waste, chord deficit, wall budget, per-corner side
+  charge) is doomed: a doubly-met corner costs O(ε) (CROWD-ABOVE, `one_flush.md` §0); a locked 2-crowd exists at the
+  optimum (Trump's TL, `local_lock.md` §0); COMMON-SENSE is false locally (`common_sense.md` §0).  A226/A233/A255.
+- [D] **Area / waste / tilt floor** — no tilt floor exists (A89; TILT-MIN binds upward; θ_min = 0); waste of a
+  near-flush ring is O(ε).  `pocket_waste.md` §0; `mintilt253.md` §0.  A237/A253.
+- [D] **Disc / radius bounds on the pocket** — the MOUTH and the flat-flat notch (A252); "the proof of the pocket bound
+  must use SQUARE room … a disc radius alone cannot do it".
+- [D] **Ring-domain transfer at small angles (A274 R1)** — (U3)–(U6) fail on exact H1–H3 witnesses inside θ, φ ≤ 5°.
+- [D] **Drain / flow as a proof** — the quantitative drain is false as a mechanism, the exit map does not exist
+  (codim-3 strata), H1 is T3 (DIMENSION).  `drain_flow_k0.md` §0, §3; A87.  CLICK-DOWN ⟺ STUCK-4 (the click is the
+  conjecture, not a mechanism below 4, where no test object exists), `two_grains.md` §0; A223.
+
+## 8. THE CURRENT CHAIN — `k0_route.md` §13 copied and re-tagged as of 2026-09-23
+
+Source: `k0_route.md` §13 (A264, 2026-09-22, with A265–A273 edits).  The tags are §13's; "TODAY" adds what the index
+files and the later notes (A273 index, A274) say.  Files in `docs/proofs/` unless noted.
+
+1. **A packing of 11 at side s ∈ [3.82, ŝ] is family-stuck or reduces to the k ≥ 1 classes** [T] — `normal_ring.md`
+   §1.2 (Lean `normal_ring_value`); the k ≥ 1 classes are the k1_00 / k5 trees (their own ledgers).  TODAY: unchanged;
+   the reduction consumes k1_00's tree (s.6, dependency).
+2. **NORMAL FORM** [T]: a lexicographic maximiser of (Φ₁, Φ₂, Φ₄, Φ₃) with P1, P2, P2′, P3, P4 (RETREAT) —
+   `normal_ring.md` §1 (Lean `exists_normalForm`; compactness [T-prose]); P1⁺ — `box_meeters.md` §1.1.  TODAY: unchanged.
+3. **BAND-COUNT / HOLE-ONE** [T]: ≤ 1 square contains O, every other square meets the unit band — `peel.md` §2.1,
+   `normal_room.md` §2.1 (Lean `hole_one_tilt`; `band_count` [T-prose]).  TODAY: unchanged.
+4. **MEETERS SPLIT** [T]: a doubly-met box has ≤ 1 toucher per wall, none touching both, every further meeter floats
+   (SAME-WALL, WEDGED-SEAL, TWO-CORNERS) — `box_meeters.md` §0, §2 (Lean `same_wall_core`; `meeters_split`
+   [T-prose]).  Corner types PAIR / THIRD / JAM / FLOAT2 — `no_jam.md` §1.  TODAY: unchanged.
+5. **COUNT + ROOM ⟹ n ≤ 9 for every corner type** [T] — `no_jam.md` §2.3 (Lean `jam_count_core`, `no_jam_of_count`);
+   the third-meeter type is free by monotonicity.  So NO-JAM(11) = ROOM(JAM ring) ≤ 1, per JAM corner (sectors):
+   - 5a. TL sectors = **pair3** (4 parameters) [T-computed\*, A262 chain3].  TODAY: **not landed** — chain3 ran
+     `float262` (2026-09-23 11:59); no `pair3` index.
+   - 5b. BL sectors = **pair3 at BL with T_u** [T given STRIP] + **STRIP₂**.  The history, each step later than the
+     one before: A265 STRIP [T] for a flat C, [T-computed] on the rings tested; A266 **[F] as A265 stated it for a
+     tilted C**, [M] 60/60 on the true domain, [T-computed\*] `strip266` (~5·10³ CPU-h, budgeted); A267 STRIP₂-IN-RING
+     [T-prose] (WEDGE-FLOAT [T], `wedge_extent_core`) on the ring domain (D1)–(D2), (U1)–(U9), 43/43 JAM rings;
+     A271: (D1), (D2), (U1), (U2), (U9) are THEOREMS from H1–H3, (U3)–(U6) FALSE as consequences, (U8) [M] +0.094;
+     A272: the problem reduces [T] to the DISC LEMMA [M]; **A273: the DISC LEMMA is [F]** (`witness273`); the corrected
+     DROP LEMMA (4 parameters, h_v-invariant) is certified by a box-valid penumbra tree + `verify273` EXCEPT the corner
+     θ ≤ 5° ∧ φ ≤ 5°, which needs a hand proof.  So 5b = STRIP₂-IN-JAM [T-prose, the DROP form] + the drop tree
+     [T-computed when verify273 passes, outside the corner] + the corner [C] + `pair3`.
+     TODAY: the drop tree has 42/81 cells, **40 CERT and verified PASS**, c5_4 / c5_5 capped with OPEN leaves, θ-bins
+     0 and 6–8 not run; **A274: the ring-domain route R1 is DEAD on the corner** ((U3)–(U6) fail there on exact H1–H3
+     witnesses; only (U8) holds); STRIP₂'s own margin there is 0.25 θ² at φ = 0, 0.5 θ on θ = φ (A274, correcting
+     A273's 0.15 θ²).  The corner stays [C]; no Lean statement of the DROP form exists.
+   - 5c. j = 2 opposite: room 0 [M]; j = 2 adjacent: rings exist, capacity 1 [M] — per-corner sectors apply
+     (`three_lemmas.md` §4.4); j ≥ 3: none on the window [M].  TODAY: unchanged.
+   - 5d. Indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X: [M] pending (`float262`,
+     `span262`) — no room statement [C].  TODAY: `float262.json` reports "JAMMED FLOAT2 EXISTS" (sup_t +0.00224,
+     uncommitted chain output); `span262.json` sup_t −0.0327 at ŝ.  Still no room statement: [C].
+   - 5e. Adversary / search: 399 structured starts, capacity ≤ 1 always, no 11-witness [M].  TODAY: `search262.jsonl`
+     has 552 rows; no source text reports on the extra rows.
