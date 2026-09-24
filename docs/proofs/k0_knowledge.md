@@ -140,3 +140,90 @@ s.5).  The k0 chain's own "slab" (`open_pairs.md` §5, A263) is different: some 
 form re-packs one square per step, and a k-step chain ending at a Trump image is k = 1 Theorem U [T], k ≤ 3
 SWAP-RIGIDITY [M], k ≥ 4 [C] (ibid.; `ring_swap.md` §1.7).  AllForm vs MinForm: `stratum_kill` for every packing vs
 for σ-minimisers only (`k0_route.md` §9; `drain_flow_k0.md` §0, A87: the k0_00 obligation is legitimately MinForm).
+
+## 2. THEOREMS about k0
+
+One or two lines each; n-general unless "n = 11" is said.  Format: tag, NAME — statement.  Source; Lean; attempt.
+
+### 2.1 Exchange and normalisation
+
+- [T] **K0-D4** — equivariant /8 quotient of any zone-tree with (K)/(C)/(D)/(D′)/(T) leaves; instance (i) the
+  interior-first root (Theorem A38.1 + `d4_wlog`), instance (ii) the corner seed.  `k0_route.md` §2; A85.
+- [T] **K0-FREE** — a packing at m ∈ [3.82, ŝ] with a corner box met by ≤ 1 square does not exist (m < ŝ) or is a
+  Trump image (m = ŝ), GIVEN k1_00's tree (k1-a/k1-b) and Theorem U; ∀-packings, no selection.  `k0_route.md` §3;
+  Lean `teleport_packing`; A85.  Corollary **K0-FREE′**: every non-image packing on W has every corner doubly met.
+- [T] **K0-WIDEN** — a meeter of B_c(m) dilates to a meeter of B_c^w(s0), w ≤ 0.025509; converse for the unwidened
+  box.  `k0_route.md` §4.1; Lean `k0_widen_stmt` (theorem, `Dilation.lean`); A85.
+- [T] **K0-BLOCKED (structure)** — else eight distinct squares in the four widened reach sets, ≤ 3 free (widened boxes
+  are 1.826 > √2 apart).  `k0_route.md` §4.2; A85.
+- [T] **K0-ATLAS** — a node whose eleven squares lie in an A37 atlas box (V ≥ s0) is empty for m < s0 (dilates have
+  strictly positive wall margins).  `k0_route.md` §4.3, §12; Lean `PackingCert.Atlas.atlas_dilated_kill_fold`; A85/A86.
+- [T] **K0-PAIR (a)** — two axis-aligned squares meeting int[0,1]² overlap (w = 0).  (b) [T+M] the corner 2-crowd space
+  has interior in the 6-dim pose space and contains same-sense tilted pairs (exhibit, SAT gap 0.0441).  (c) [S] the
+  rigidity that exists is box-level.  `k0_route.md` §4.4; A85.  [S] **K0-REUSE** — the near-slot pocket is k1_00's
+  tree + a one-square ladder.  `k0_route.md` §4.5.
+- [T] **K0-ROT** — at a σ-minimiser D⁺σ ≥ 0 and D⁻σ ≥ 0 (one-sided rotation derivatives with the exact
+  centre-height term); a (C) leaf in the selected form only.  `k0_route.md` §5.1; A85.
+- [T] **SWAP / STEP / CELLS** — a same-side exchange of X ⊆ P into |X| squares of U(X) is a packing; the sweep's
+  step; a packing exchanges into one containing a disjoint cell family Π whenever |M(Π)| ≤ |Π|.  `ring_swap.md` §1.1–1.3;
+  Lean `swap_packing`, `teleport_of_swap`, `cells_swap` (theorems); A222.
+- [T] **RAISE(0 → 1) + k1-a ⟹ k0_00 empty** — `ring_swap.md` §1.5; Lean `no_packing_of_raise` (theorem; RAISE itself is
+  the axiom `raise_zero_one`, [C]); A222.
+- [T] **SWAP-LEAF** — a cell with an injection naming X, |X| fixed-pose unit squares (one the corner slot), and one
+  exact MISS certificate per (square, role outside X) is empty wherever k1-a holds; **X-FORCED** (|X| ≥ u, the number
+  of unboxed roles); **SPLIT-INVARIANCE** (A185's split never lowers u; only conditioning does).  `swap_leaf.md` §0;
+  Lean `swap_leaf_dead`, `swap_leaf_exchange`, `swap_leaf_corner` (theorems, std only); verifier `verify_swap232.py`;
+  A232.
+- [T] **WALL-SLOT** — a wall slot met by ≤ 1 square swaps in its slot square at the same side (with SLOT-MET [S] the
+  corner becomes singly met, then K0-FREE).  `attempts/A243-reach-root/notes/wall_slot243.md`; Lean `wall_slot_link`
+  (axiom, `StuckExist.lean`); A243.
+- [T] **FAMILY-STUCK is the right hypothesis; dead at s ≥ 4** — no 11-square configuration at side ≥ 4 is
+  family-stuck (the twelve cells are a legal family), hence RAISE at every s ≥ 4.  `family250.md` §1.2, §2.1; Lean
+  `no_family_stuck_ge_four`, `raise_of_ge_four`, `family_stuck_of_stuck_exist` (theorems); A250.
+- [T] **VALUE-WLOG, NORMAL-CELL, ONE-STEP NORMALISATION** — a longest-row maximiser exists and is row-normal or some
+  packing at s is not family-stuck.  `common_sense.md` §2.1–2.3; Lean `exists_max_potential`, `value_form_normal`,
+  `exists_rowNormal` (theorems), `normal_cell_step` (axiom [T-prose]); A255.  (Its last line "simultaneous
+  row-normality" is [F], s.5.)
+- [T] **NORMAL-FORM** — a lexicographic maximiser of (Φ₁, Φ₂, Φ₄, Φ₃) exists with P1, P2, P2′, P3, P4; the compactness
+  step is [T-prose].  `normal_ring.md` §1.2; Lean `exists_lex_max`, `exists_normalForm` (theorems) over the axioms
+  `touchPotential_le`, `rowVecPotential_le`, `normal_form_step` [T-prose]; A258.  Chain link 1: `normal_ring_value`.
+- [T] **UNLOCK = P2′; HELD; LIFT** — a lock survives in the maximiser iff (P ∖ {W, F}) ∪ {T} is saturated; F + λv
+  clears T after λ_T = e sin φ.  `locked_wall.md` §1; Lean `unlock_swap`; A260.
+- [T] **The common-tilt exchange is P2′ again** — in the maximiser every unequal-tilt open pair is held by a free
+  square in every such cell.  `open_pairs.md` §0 (b), §4; A263.
+- [T] **REDUCE** — the 3-for-3 exchange (corner domino + one leftover) is `cells_swap` with k = 3.  `snap_down.md` §3;
+  Lean `reduce_three_for_three`; A245.
+- [T] **EXTREMAL(n) / NO-ROTATE** — the Ψ-minimal optimal packing has no retreating square (global minimum: several
+  squares may move); the FLUSH-STACK click changes Ψ by (4 − s) − d_c(B) − d_c′(B′) − d_c(B′).  `local_lock.md` §1;
+  `corner_chase.md` §2; Lean `no_retreat_of_psiMin`, `psiMin_no_lowering`, `no_rotate`; A233/A248.
+- [T] **SLIDE** (∀-packings, modulo k1-a) — at every corner of a K0-BLOCKED packing at m < ŝ, d₂(c) ≥ ŝ − m.
+  `k0_blocked_side.md` §3.1 (A92); the joint-translation proof is A94's (`slot_crowds.md` §3.4); Lean `lemma_SLIDE`.
+- [T] **DF-K0** — H1(ŝ) ⟹ the k0_00 instance of `StratumKillMin`; the drain step is unnecessary, the exit map does
+  not exist (codim-3 strata), selection compatibility is void.  `drain_flow_k0.md` §0, §2 (A87); Lean consumers
+  `s_eleven_ge_of_split`, `s_eleven_unique_of_split` (A86).  **F-LEAF** [T]: minimiser-only (C) leaves are admissible.
+- [T] **Lemma CH / D1 / D2** (descent) — a corner met at depths d₁ ≥ d₂ converts rigidly to simple at side cost d₂;
+  conversion descent yields exactly 0 at a k0 corner at every side.  `descent.md` (A194; ledger §4 A194 note).
+
+### 2.2 Counting (every count below closes nothing at n = 11 — s.5)
+
+- [T, vacuous] **K0-COUNT** — under LOAD and DISTINCT at four doubly-met open corners, n ≥ 12.  `k0_count.md` §4; A218.
+- [T] **CEIL** — s(n) ≤ ⌈√n⌉ (Lean `fits_eleven_four` from the axiom `simple_packing_fits`).  `wall_torque.md` §1; A219.
+- [T] **FLUSH** — n axis-aligned unit squares need side ≥ ⌈√n⌉ (Lean `lemma_FLUSH` axiom [T in prose],
+  `flush_eleven_four`).  **FOUR-WALL (conditional)** and **CLICK-DOWN ⟺ STUCK** [T] (Lean `four_wall`,
+  `no_stuck_in_window` over the axiom `click_down` [C]).  `two_grains.md` §3; A223.
+- [T] **Perimeter count** — family-stuck needs n ≥ 4⌊s⌋ − 3 = 4(m − 2) + 1; closes for no n ((m − 3)² ≥ 0).
+  `family250.md` §2.1; `peel.md` §1.2; A250/A254.  `ring_swap.md` §1.4: counting closes only for n ≤ 4.
+- [T] **NO-CLOSURE** — 4(m − 2) + ((m − 2)² − 3) + 4 = m² − 3 ≥ n whenever s(n) < m; at n = 11: 8 + 1 + 4 = 13 ≥ 11.
+  With TILT-BAND, BAND-FLUSH, BAND-COUNT, CORE-CAP, Lemma TWO.  `ring_capacity.md` §0, §2–3; Lean `count_never_closes`;
+  A236.
+- [T] **BAND-COUNT (general)** — at s ∈ (m−1, m), s > 2 + √2, at most 4(m − 2) squares of ANY packing are band squares.
+  `peel.md` §2.1; Lean `band_count` (axiom [T-prose]); A254.  **PEEL-0** [T]: core squares pack at side s − 2, so
+  s ≥ 2 + s(k).  `peel.md` §2.2; Lean `core_fits`, `peel_side_bound`, `peel_no_straddler` (theorems); A254.
+- [T] **COUNT (NO-JAM)** — n = 8 − E + U + F_box + F_rest, consistent with 11; **ROOM(S_min) ≤ 1 ⟹ n ≤ 9** for every
+  corner type.  `no_jam.md` §0, §2; Lean `jam_count_core`, `no_jam_of_count`, `box_meeters_262`; A262.
+- [T] **8 + 1 < 11** — eight ring squares + one square containing O.  Lean `openPairs_excludes`, `normalRoom_count`,
+  `k0_value_of_factors`, `lockedWall_excludes`; `k0_route.md` §13 link 11.
+- [T] **The ninth square** — every cell of the bare normal ring has exactly two ring meeters; |M(Π)| − |Π| ≥ 1 unless
+  Π is maximal; so a ninth square meets a third box or both slots of one wall.  `normal_ring.md` §2; A258.
+- [T] **gap_needs_two_misses**; **CAPACITY-2 = three gap statements**; **gap_interval_centre** (a unit interval in
+  [1, s − 1] contains s/2).  `strip_plug.md` §0; `last_two.md` §0; Lean same names, `capacity_two_of_gap`; A265/A266.
