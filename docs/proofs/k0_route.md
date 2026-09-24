@@ -17,6 +17,10 @@ Companions: `protected_trees.md` (Lemma P-TREE, whose leaf semantics this file e
 
 ## 0. Verdict
 
+> **Start here instead (A275, 2026-09-23): [`k0_knowledge.md`](k0_knowledge.md)** — everything the lab knows about k0
+> (true, false, certified, measured, conjectured, dead routes), with this file's §13 re-tagged as of 2026-09-23.  The
+> verdict below is A85's (2026-09-02) and describes the volume-tree route, now dead (`k0_knowledge.md` §7).
+
 > **Re-price (§8, stacked): k0_00 ≈ 3 200–7 000 CPU-h (45–100 desktop-days at three slots)
 > if depth-2 certifications repair at ≈ 85 % — a 3–30× cut on A38's floor but NOT below A84's
 > plain "≥ 100 desktop-days at one slot"; ≥ 3·10⁴ CPU-h if only first-pass certifications
