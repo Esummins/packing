@@ -892,3 +892,67 @@ files and the later notes (A273 index, A274) say.  Files in `docs/proofs/` unles
      uncommitted chain output); `span262.json` sup_t −0.0327 at ŝ.  Still no room statement: [C].
    - 5e. Adversary / search: 399 structured starts, capacity ≤ 1 always, no 11-witness [M].  TODAY: `search262.jsonl`
      has 552 rows; no source text reports on the extra rows.
+6. **BOX-MEETERS(11)** [T from 5]: every box has exactly two meeters, wall touchers, eight distinct — `box_meeters.md`
+   §5 (Lean `box_meeters_262` from the axiom `jam_count` [C = 5a–5d]).  TODAY: unchanged.
+7. **ROW CLASSIFICATION** [T]: each wall carries a row of two, a row of three or an open pair — `normal_ring.md` §3.1.
+   TODAY: unchanged in prose; the Lean axioms `touch_normal`, `rows_classified` are tagged [C] in `box_meeters.md` §7
+   (s.6).
+8. **WINDOW EXCLUSIONS**:
+   - 8a. Rows of three, exactly flat walls, mixed senses at tilts ≥ 0.703° on every wall: A261's LP certificates
+     [T-computed\*: 11/50 verified at A261's exit].  TODAY: **[T-computed] — `cert261.jsonl` 50/50 done and verified,
+     feasible 0, undecided 0.**
+   - 8b. The slab (some wall in (0, 0.703°), not all): A263's 492 engine jobs [T-computed\*, queued after WE].  TODAY:
+     no slab-job index on disk; the last line of A263's `logs/chain263.log` is P2 cell 7,6 (14 838 s).  [C] until they run.
+   - 8c. **The all-near-flat cube of every mixed pattern: [T]** — `three_lemmas.md` §3 (Lean `slab_cube_264`).
+   - 8d. One sense, common tilt, rows of two: the normal family D′ / the hybrid ring — not excluded, it exists; room 10.
+   - 8e. Mixed senses with per-wall tilts exist from s = 3.9298 > ŝ [M, A258] — outside the window.
+9. **LOCKS AND OPEN PAIRS** [T]: an open pair survives only HELD by a free square (UNLOCK = P2′; LIFT) —
+   `locked_wall.md` §1; unequal tilts survive only as locks — `open_pairs.md` §4.  Non-ADJ walls carry a free square in
+   the unserved slot [T, Lean `nonadj_free_meeter`].  TODAY: unchanged.
+10. **ROOM: every free square of the hybrid normal ring contains O**:
+    - 10a. Normal D′: A259's PAIR tree [T-computed\*: index filling] + A260's LAYER (PLUG) [T + T-computed, 0 bad].
+      TODAY: **[T-computed] — 81/81 cells, `verify259.json` bad 0 (CERT 78 099, PRUNE 3 066, LAYER 5 184, OPEN 0).**
+    - 10b. Hybrid, common tilt, all-ADJ, e ≤ ½: hybA / hybB / hybAB [T-computed\*: 8/81 at A260's exit].  TODAY:
+      **[T-computed] — 81/81 each, `verify260.json` bad 0, OPEN 0.**
+    - 10c. Hybrid, independent tilts, all-ADJ: A263's P2 ∧ WE ∧ WS [T] reduction + certificates; A265 [T]: the OPEN
+      leaves are a SIDE mismatch, re-run at s_eff + graded plug (2,4 / 2,5 / 3,4 certified by `verify265`; 3,5 / 3,6 in
+      A265's lane); WS 3 cells, WE 1 cell.  TODAY: WE 1/1 ok, WS 3/3 ok; **P2 70/81 indexed, 50 ok, 20 not ok**; A265's
+      lane: 3,5 / 3,6 not ok (OPEN leaves 3 837 / 911, bad 0).  [T-computed\*] with twenty cells to repair.
+    - 10d. Non-ADJ (wide gap, e up to 1.169): ROOM is [F] as a bare-ring statement; STRUCTURE closes the strip (GAP-CELL,
+      BLOCKER-SIDE, STRIP-CHAIN [T] for e ≥ sec φ₁ at common tilt); the statement needed is CAPACITY-2 (Lean
+      `gap_needs_two_misses`) = three gap statements (Lean `capacity_two_of_gap`), all [C]; the stack's upper square
+      contains O horizontally [T] (`gap_interval_centre`), vertically [C].  [M] `cap266`: no two disjoint misses on any
+      ring tried.  TODAY: unchanged; P2n / WEn / WSn not run.
+11. **8 + 1 < 11** [T]: eight ring squares + one square containing O — Lean `openPairs_excludes`, `normalRoom_count`.
+    Hence no normal-form family-stuck packing of 11 on the window ⟹ FAMILY-STUCK-EXIST(11) fails in value form ⟹ with 1:
+    **k0_00 is empty** (Lean `k0_value_of_factors`, `lockedWall_excludes`).
+12. **k0_00 via CELLS / K0-FREE** [T]: Lemma CELLS (`ring_swap.md` §1.3, Lean `cells_swap`), K0-FREE = |Π| = 1;
+    RAISE(0 → 1) is exactly 11 (`ring_swap.md` §0).
+13. **The stretch (ŝ, 4)** [M only] and **uniqueness at ŝ** (the iterated VALUE-WLOG: SWAP-RIGIDITY k ≤ 3 [M], k ≥ 4
+    [C]) are outside this list.
+
+**Still [C] or waiting, TODAY** (compare `k0_route.md` §13's closing paragraph, A266): 5a/5b `pair3` (not landed);
+5b the DROP tree's remaining cells (θ-bins 0, 6–8; c5_4 / c5_5 capped) and the near-flat corner θ, φ ≤ 5° (a hand
+proof; R1 dead); 5d FLOAT2 / indirect jams / middle toucher (no room statement; a jammed FLOAT2 configuration is now
+[M]); 6's axiom `jam_count`; 8b the slab jobs; 10c the twenty P2 cells; 10d the three gap statements of CAPACITY-2;
+the [T-prose] Lean axioms (s.6); the dependency k1_00's tree; the stretch; uniqueness k ≥ 4.  **Closed since §13 was
+last written**: 8a (A261 50/50), 10a (A259 verified), 10b (A260 81/81 ×3 + layer).
+
+**Plain-language summary — what k0 exclusion at n = 11 now rests on.**  Suppose eleven unit squares fit in a square of
+side between 3.82 and Trump's 3.877084.  If some border cell (a corner box or a wall slot next to it) is crowded by
+too few squares, the squares can be swapped, at the same side, so that a corner square sits flush — and then the
+k1_00 tree (a separate, owed computation) rules the packing out.  So we may assume every family of border cells is
+over-crowded ("family-stuck"), and among all such packings we pick the most orderly one (the lexicographic normal
+form: most wall-touching squares, longest equal-tilt rows, free squares as far from the border as they can go).  In
+that form each corner box is met by exactly two squares, one on each wall; each wall carries a row of two tilted
+squares, a row of three, or an open pair held apart by a free square; and the eight wall squares form a pinwheel
+ring.  Every other square must lie in the ring's central pocket, and the whole case analysis comes down to one
+statement: every free square of the pocket covers the centre point O, so the pocket holds at most one square — 8 + 1
+= 9 < 11.  That statement is PROVED where it is a theorem (the near-flat cube, the flush limit, the hole-one lemma),
+CERTIFIED by box trees with independent verifiers on the normal ring, the hybrid ring and the window exclusions, and
+still OWED in four places: (i) corners where a box meeter floats off its wall (the JAM corner — `pair3` and the strip
+lemma, whose last piece is a thin near-flat corner that no computation can reach and that needs a hand proof);
+(ii) the FLOAT2 and indirect-jam corners (no room statement at all yet); (iii) twenty open cells of the independent-
+tilt pair certificate and the near-flat slab jobs; (iv) rings whose wall squares do not reach the far slots (non-ADJ),
+where the needed statement is only that two free squares cannot both miss O.  Underneath all of it: the k1_00 tree,
+and the Lean formalisation of the [T-prose] steps.
