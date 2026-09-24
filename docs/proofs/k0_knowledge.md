@@ -31,6 +31,48 @@ n-general statements (m = 4 at n = 11), ε = m − s.  w(θ) = cos θ + sin θ. 
 **Reading order for a new agent.**  s.8 (the chain as of today) → s.5 (what is false: do not repeat it) → s.7 (what
 is dead: do not re-price it) → s.1 (definitions) → s.2–s.4 → s.6 (what is open, and what would close each item).
 
+**How to use this document.**  Read s.0.5 (one page) first; then read ONLY the sections your brief names.  The appends
+(s.11 A278, s.12 A279, and later ones) update s.2–s.8 in place of re-editing them — check them for your topic.
+
+## 0.5 The k0 exclusion in one page (as of 2026-09-24)
+
+**What k0 is, and why room, not force.**  k0_00 = packings of 11 unit squares with no square flush at a census slot
+(s.1); the target is "none at any side in [3.82, ŝ]".  A same-side exchange (Lemma CELLS) turns any packing with an
+under-met border family into one with a flush corner, which k1_00's tree kills — so only FAMILY-STUCK packings remain,
+and those are excluded by ROOM (the ring's pocket holds one square: 8 + 1 < 11); force / torque / handedness arguments
+were abandoned because they cannot see unloaded (rattler) crowds, 61 of 70 corners at the k0 FJ points (s.2.6, s.7.3).
+
+**The chain in 8 steps** (s.8; `k0_route.md` §13):
+- Swap to a flush corner unless family-stuck; k1_00's tree kills the flush case — [T] + dependency [C] (s.2.1, s.6).
+- Pick the most orderly packing (lexicographic normal form P1–P4) — [T] (compactness [T-prose]) (s.2.1).
+- At most one square covers the centre O; every other square meets the unit band — [T] (s.2.3).
+- Each corner box: ≤ 1 toucher per wall, extra meeters float — [T] (s.2.4); corner types PAIR / THIRD / JAM / FLOAT2 (s.1).
+- JAM and FLOAT2 corners need their own room statement (link 5): the strip lemma [T on the flat corner, A276 FLAT-X /
+  CORNER; T-computed* outside it: index273 67/81 cells, 43 CERT, 24 OPEN-LAYER on 2026-09-24] + `pair3` [not
+  landed] + link 5d [C] (s.3, s.6, s.8).
+- Each wall is a row of two, a row of three or an open pair — [T-prose] (s.8 link 7); the other pinwheels are excluded
+  below ŝ: A261 50/50 [T-computed], near-flat cube [T], slab jobs [C] (s.2.5, s.3).
+- Open pairs survive only as locks held by a free square — [T] (s.2.1).
+- Room: every free square of the (hybrid) normal ring contains O — [T-computed] on D′ and the common-tilt hybrid
+  (A259, A260), [T-computed\*] independent tilts (20 P2 cells open), [C] non-ADJ = CAPACITY-2 (s.3, s.6).  Then 8 + 1 < 11.
+
+**The two open CAP-2 conjectures of link 5d** (s.6, s.11, s.12):
+- [C] BL-CAP-2(C, D) (FLOAT2 corner; Lean `bl_cap2_float2`) — made unnecessary by NO-FLOAT2 (= the 4-square statement L,
+  Lean `float2_local`), whose P1-sense residual is (NEST); NEST-emptiness proves the P1-sense statement, not L (A279).
+  Closes by: `cert277` (30–1000 CPU-h) or a NO-FLOAT2 certificate / proof (NEST prunes first).
+- [C] BL-CAP-2(A, C) (JAM with any holder) — S1–S4 [T], no hand proof; closes by `cert277 --fam jam` (5 params, 3–100 CPU-h).
+
+**Five FALSE turns not to repeat** (s.5):
+- "Counting closes it" — every count (K0-COUNT, sweep, NO-CLOSURE, family ILP = 9) has slack at n = 11 (s.5.1).
+- "One corner decides" — COMMON-SENSE, TOUCH-NORMAL, POKE's sense are false locally; Trump has a locked 2-crowd (s.5.2).
+- "A disc radius bounds the pocket" — CENTRE-DISC about O fails at the corner MOUTH; the DISC LEMMA is false (s.5.2–5.3).
+- "There is a tilt floor / positive minimum tilt" — θ_min = 0; the limit is the domino pinwheel (s.5.2).
+- "The domain box is the condition" — STRIP₂ with "h_u, h_v < 1" for tilted C; (U3)–(U6) from H1–H5 (s.5.3).
+
+**Three pitfalls** (s.10.6): an optimiser's sup is not evidence (A272's −0.005 was +0.0079); census counts are not
+closed classes ("k5 closed at the window pad" read the G1 slab pad as the window); a verifier bin or a soft
+(penalty) feasibility is not a certificate — re-check exactly, bisect on disagreement.
+
 ## 1. DEFINITIONS (fixed)
 
 **k0 / k0_00.**  The packings of 11 unit squares whose skeleton is empty: no square is axis-aligned at a census slot
