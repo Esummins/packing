@@ -463,3 +463,79 @@ tiling check).  "ok" = the tree's cell verdict; "verified" = the independent ver
   A259); hybrid family with independent tilts sup −0.0654 at ŝ, corpus 46/46 (`locked_wall.md` §0, A260); factors
   sound on 82 test rings × 4 corners, every factor < 0 (max −0.0654 / −0.0051) (`open_pairs.md` §0, A263); GAP-DEPTH-ONE
   quadrant form 2 046 pairs, least 1.0027 (`locked_wall.md` §0).
+- [M] **JAM rings exist on the whole window** (`ring262`, `adv262`: 8 squares, exact check, margin 0.0104 at ŝ, 0.0099
+  at 3.82; 34 rings) and **ROOM ≤ 1 on them**: every free square contains O, pierce margin ≤ −0.070 at ŝ, ≤ −0.105 at
+  3.82, adversary ≤ −0.085 / −0.133; capacity exactly 1; ring + its one free square never family-stuck.  `no_jam.md` §0;
+  A262.  j = 2 OPPOSITE: a ring exists (t = +0.0016 at ŝ), room 0.  j = 2 ADJACENT: rings EXIST (t = 0.0071 at ŝ,
+  0.0010 at 3.82), capacity 1 (A264, correcting A262 — s.5).  j = 3, 4: rings only at 3.95 / 3.99, room 0, none on the
+  window.  `three_lemmas.md` §0 Lemma 1; A264.
+- [M] **Adversary / search** (5e): 399 structured starts, capacity ≤ 1 always, no 11-witness (`search262`; the file has
+  552 rows today).  `k0_route.md` §13 5e; `three_lemmas.md` §4.5.
+- [M] **HELD-JAM does not exclude the JAM ring**: the bare ring never blocks C's retreat (35/35), a single free square G
+  blocks every retreat direction in 31/35.  `no_jam.md` §0; A262.
+- [M] **FLOAT2 (5d)**: `attempts/A262-no-jam/results/float262.json` (chain3 output, 2026-09-23 11:59, **uncommitted,
+  in no doc yet**): verdict "JAMMED FLOAT2 EXISTS", sup_t = +0.00224 over 108 starts.  The corpus census below 4 had
+  1 FLOAT2 corner, a rattler with a free straight drop (`cp85_032`, s = 3.9240) (`box_meeters.md` §0).  No room
+  statement for FLOAT2 exists (chain 5d stays [C]).
+- [M] **Middle toucher (span262)**: `results/span262.json` sup_t −0.0327 at cap ŝ (72 starts) — no JAM ring with X a
+  middle toucher under a START square found there.  (Reported as "pending" in `no_jam.md` §1; the file is 2026-09-21.)
+- [M] **STRIP₂ on the true domain** (tilted C): 60/60 in-domain samples certify under the box test at radius 0.0025,
+  exact pocket empty (`last_two.md` §0, A266).  On A271's violators of (U3)–(U6): sup t = 0.00000, approached only as
+  C's box depth → 0 (`ring_domain.md` §0).  (U8) positive under H1–H3, adversary minimum +0.094 (ibid.).  The residual
+  R = H1–H3 ∖ ring inequalities is ~18 % of the H1–H3 set (`mc271`, 20 000 samples).
+- [M] **STRIP₂'s own margin near the flat corner** — A273: square slack −0.0049 (8°), −0.0027 (5.9°), −0.0012 (4°),
+  −0.0003 (2°), −0.00008 (1°), "roughly 0.15 θ² rad" (`disc273.md` §5).  A274 (later, same day): first order ≈ 0.5 θ on
+  the diagonal θ = φ, second order ≈ 0.25 θ² on the edge φ = 0 (X flat) — "A273's roughly 0.15 θ² is 0.25 θ²"
+  (`attempts/A274-flat-corner/results/r1_274.md`).  The two are recorded in s.5.4.
+- [M] **CAPACITY-2**: no two interior-disjoint misses on any ring tried — A260's 32 non-ADJ adversary rings have an
+  EMPTY miss region (`cap266`); A265's FULL-corner witness is not a ring (overlap 0.007).  `last_two.md` §0; A266.
+- [M] **SEPARATE-NOTCHES** — no free square serves two adjacent notches (sup margin −0.003 at ŝ, −0.006 at 3.82).
+  `corner_chase.md` §0; A248.
+- [M] **MIN-TILT** — the joint ring + poker margin M(τ, s) > 0 for every τ tested down to 0.1° (5.7·10⁻⁸ at ŝ); the
+  pocket capacity is CONSTANT 1 along the tilt ladder τ = 26° … 6° at ŝ (PIERCE(1) + region search); θ_max(s) ∈
+  (26°, 30°) at ŝ.  `mintilt253.md` §0, §5; A253.
+- [M] **ONE-FLUSH survey** — 21 record packings (n = 5 … 55, re-verified by exact SAT): every one below ⌈√n⌉ has ≥ 3
+  flush corners, 20 have four; Trump is the only one with a doubly-met corner (TR).  `one_flush.md` §0; A226.
+- [M] **RAISE on the witnesses** — holds on all 4 534 A217 witnesses at their own sides; below 4 every witness has a
+  corner met by ≤ 1.  **SWAP-RIGIDITY** of Trump for |Y| ≤ 3: no different re-packing found (201 subsets).
+  `ring_swap.md` §0, §1.7; ledger §4 A222 note; A222.
+- [M] **Corpus corner census below 4** (3 242 doubly-met corners): 29 PAIR (+ 56 on the rings), 2 FLOAT1, 1 FLOAT2, all
+  three rattlers within 4·10⁻³ of a wall; no third meeter, no same-wall toucher pair.  `box_meeters.md` §0; A261.
+- [M] **Sense on the corpus** — toucher-sense violations are common and every one reduces by Lemma CELLS at scope ≤ L2;
+  on the rings every in-container normal cell is met by exactly ONE square, the next toucher (112/112).
+  `common_sense.md` §0; A255.
+- [M] **Mechanism measurements of the dead load routes** (not leaned on by the chain; for the record): RING 193/193
+  (A219), click to 4.000 on 193/193 four-crowds (A223), anchored re-alignment strict on 783/792 (A231), CHAIN 1 013/1 013
+  (A233), handedness ranges overlap (A234), VV unloadable at every optimum (A235 + addendum), locked same-handed 215 : 11
+  (A240).  Sources: s.2.6.
+
+## 5. FALSE statements [F] — what was claimed, the witness, and why it failed
+
+This section is what stops agents repeating them.  Grouped by theme; each: the claim (who made it) — the witness
+(file / page) — why.
+
+### 5.1 Counting and capacity claims
+
+- [F] **"Four doubly-met open corners need 8 meeters + ≥ 4 along-wall holders = 12 > 11"** (A217's count; the brief's
+  G2 "a holder serves at most two meeters").  Witness: `rand_0_0569|t20` (side 4.1099), a FORCE-BALANCED four-crowd
+  with NINE squares — a compression ring through the eight meeters with one link (page
+  `count218_held_rand_0_0569_t20.svg`); the true sharing bound is FOUR (a 45° centre square touching four 45° corner
+  meeters); LOAD fails on 61 of 70 doubly-met corners at genuine k0 FJ points (rattler crowds).  `k0_count.md` §0, §4–5;
+  A218.
+- [F] **"The perimeter sweep count closes"** (PI, A222: each exposed cell needs a SECOND meeter; "k0 and k1 trivially
+  empty if the count holds").  An exposed cell needs ONE remaining meeter (a teleport); over 8 cells the sweep needs
+  Σ|M_k| ≤ 8 while ≥ 9 squares meet them when every corner is doubly met; counting closes only for n ≤ 4.
+  `ring_swap.md` §0, §1.4; A222.
+- [F] **"Records are rings" / Lemma BAND as a structure statement** — every record n = 5..55 is cross-braced (Trump has
+  5 straddlers of depth up to 0.94); on 193 witnesses the loaded component contains a core square in 67.
+  `ring_capacity.md` §0; A236.  The band-plus-core count excludes a four-crowd for NO n (NO-CLOSURE).
+- [F] **The composition of A246's rules forces s ≥ 4** — the rules bound COUNTS, satisfiable with f = 3 at every side;
+  a wall with two flat meeters at offsets δ, δ′ > s − 3 is a packing for s < 4.  `construct_towards.md` §0, §3; A246.
+- [F] **The family-stuck count closes the window** — the ILP minimum below 4 is 9 ≤ 11 under every proved layer.
+  `family250.md` §0, §2.2; A250.  (Also [F] "the count alone" for type-T rings: `type_t_chase.md` §0 (A249).)
+- [F] **"> 3 free squares in the gap"** (A264 brief) and **"two squares in the notch need width ≥ 2 > e"** (A266
+  brief) — the derived count is TWO (a square meeting a floor cell can contain O: [1.44, 2.44] × [0.95, 1.95] at ŝ),
+  and two near-flat squares STACK in a gap of width 1.17.  `three_lemmas.md` §0 Lemma 2 (d); `strip_plug.md` §0;
+  `last_two.md` §0; A264/A265/A266.
+- [F] **"8 + j" and "j ≥ 2 needs room 0"** (A262 brief) — X IS the next box's meeter, so the outer structure has 8
+  squares for j = 1 and j = 2; room ≤ 1 already gives n ≤ 9.  `no_jam.md` §0; A262.
