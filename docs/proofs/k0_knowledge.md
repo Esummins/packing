@@ -688,3 +688,68 @@ This section is what stops agents repeating them.  Grouped by theme; each: the c
 14. **A85's f₂ and the k0 frontier.**  A85: f₂ = 1/3 at A60 defaults, FAILs are coverage holes.  A99 (later, REGISTRY
    A99): "A85's k0_00 FAILs are LP row-generation failures, so f2 ~ 0".  A115 (later): a plain 240 s warm re-solve
    certified 10 of 55 cells — "the stored node results were simply row-generation-incomplete" (`residue_ledger.md` §4).
+
+## 6. CONJECTURES [C] still in the chain — exactly, and what would close each
+
+Numbered by chain link (s.8).  "Theory" = a hand proof; "certificate" = a box tree + verifier (price where a source
+gives one).
+- [C] **5a / 5b `pair3`** — the TL sectors of a JAM corner, and the BL sectors with T_u as the END square: a row of two
+  + one wall square, 4 parameters.  Certificate: A262's `tree262 pair3` + `verify262`, ≈ 3 CPU-h; chain3 ran `float262`
+  and has not produced a `pair3` index.  `no_jam.md` §0; `three_lemmas.md` §0 Lemma 1; `k0_route.md` §13.
+- [C] **5b STRIP₂-IN-JAM on the near-flat corner θ_C ≤ 5° ∧ φ_X ≤ 5°** — the DROP LEMMA's margin → 0 there (zero at
+  θ = φ = 0), so "no box tree closes it; it needs a hand proof" (`disc273.md` §5).  Theory routes: A273's fan sketch
+  (the drop's apex angle > 90° vs a channel opening ≤ 5°; "not written out"); A274's R1 (the ring domain) is DEAD (s.5.3);
+  A274's R2 (direct slot argument, second order along φ → 0) not done (`r1_274.md` "For the theory agent").
+  Alternative: A271's ring inequalities as a ring-level statement (the ~10³ CPU-h residual certificate, not launched,
+  `ring_domain.md` §0).  Outside the corner: the DROP tree, 40/81 cells certified + verified, c5_4 / c5_5 capped with
+  OPEN leaves, θ-bins 0, 6–8 pending (s.3).
+- [C] **5b off the ring domain, the older route** — `strip266` [T-computed\*]: a full tree priced ~5·10³ CPU-h; the
+  budgeted six cells are all OPEN at the budget.  Superseded in the chain by the DROP form (A273), kept as the fallback.
+- [C] **5d — indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X**: "no room statement
+  yet" (`k0_route.md` §13 5d).  `float262` [M] now reports a jammed FLOAT2 configuration (s.4); no ROOM measurement
+  on it exists.  What would close it: a ROOM ≤ 1 statement for the FLOAT2 structure (the per-corner sector method).
+- [C] **6 — the Lean axiom `jam_count`** (= 5a–5d); BOX-MEETERS(11) is [T from 5] (`box_meeters_262`).
+- [C] **8b — the slab** (some wall in (0, 0.703°), not all): A263's 492 engine jobs [T-computed\*], "priced 1–10⁵ leaves
+  each, 2·10⁷ for the boxes adjacent to the cube" (`open_pairs.md` §0 (d), §5.2); no slab-job index exists on disk.
+  The all-near-flat cube itself is [T] (8c).
+- [C] **10c — the remaining P2 cells** — 20 of 70 indexed cells not ok (s.3); A265's s_eff fix certified three of its
+  five, 3,5 / 3,6 still OPEN.  Certificate route: the s_eff + graded-plug re-run (`cert265`) on every not-ok cell.
+- [C] **10d — CAPACITY-2 on the non-ADJ family** = MISS-IN-GAP ∧ GAP-HOLDS-ONE-MISS ∧ ONE-UNSERVED-WALL (Lean axioms
+  `miss_in_gap`, `gap_holds_one_miss`, `one_unserved_wall`; `capacity_two_of_gap` [T]).  GAP-HOLDS-ONE-MISS: the
+  horizontal half is [T] (`gap_interval_centre`), the vertical half [C] (the wedge / lip cases), plus the sub-case
+  1 + w − sec φ₁ ≤ e < sec φ₁ and the wedge case φ_W ≠ φ₁.  Theory: "P1 on the lower gap square is still the way"
+  (`last_two.md` §0).  Certificate: the non-ADJ trees P2n / WEn / WSn (queued; they "will mark exactly this region
+  OPEN", `k0_route.md` §13 10d).  [M] `cap266`: no two disjoint misses on any ring tried.
+- [C] **The [T-prose] Lean axioms of the chain**: `meeters_split`, `band_count`, `normal_form_step` (with
+  `touchPotential_le`, `rowVecPotential_le`), the three corner lemmas `mixed_corner_pm`, `mixed_corner_mp`,
+  `pinwheel_corner_pp`, `strip_two_in_ring`, `strip_two_in_jam`, `strip_two_in_jam_of_disc` (whose opaque `DiscLemma`
+  is [F] as stated — s.5.3; the DROP form has no Lean statement yet), `lemma_PUSH`, `two_pokers`, `top_two`,
+  `flat_above`.  Closing each is a Lean formalisation of a prose proof (the files' "O-…" obligations).
+- [C] **The Lean axioms `touch_normal`, `rows_classified`** (`box_meeters.md` §7: "[C] `touch_normal`,
+  `rows_classified`") — while `k0_route.md` §13 link 7 tags ROW CLASSIFICATION [T] (`normal_ring.md` §3.1) and link 4
+  derives the meeter split: the prose is [T] per the chain, the Lean axioms are tagged [C] in A261's own file.  The
+  Lean consumers `k0_value_of_factors` / `k0_value_of_hybrid` also depend on the axiom `normal_ring` (AUDIT).
+- [C] **Dependency: k1_00's tree** (K0-O1: (k1-a) no corner-pinned packing on [3.82, ŝ), (k1-b) at ŝ a Trump image) —
+  every exchange lemma (K0-FREE, CELLS/RAISE, SWAP-LEAF, WALL-SLOT, link 12) consumes it; A84 priced it 200–300 CPU-h
+  (`k0_route.md` §3, §6 table).  Its status is k1_00's own ledger, not this file.
+- [C] **Uniqueness at ŝ** — SWAP-RIGIDITY of Trump for k ≥ 4 re-packed squares (k = 1 Theorem U [T], k ≤ 3 [M]).
+  `common_sense.md` §2.1 (i); `ring_swap.md` §1.7.  **The stretch (ŝ, 4)** — [M] only (chain link 13).
+
+**Forms of the k0 obligation that the chain has superseded** (each still a named [C] axiom; none is on the chain's
+path, but each is a statement someone may try to prove again — know what it would buy):
+- [C] **RAISE(0 → 1)** (A222, `raise_zero_one`) ⟸ **STUCK-4(11)** = **CLICK-DOWN** (A223, `click_down`; `stuck4_eleven`,
+  `stuck4_unlocked_eleven`, A242) ⟸ nothing proved; **STEP** (A231: a corner swap exists; with k1-a kills every
+  four-crowd, `fourcrowd_dead_of_step_kill`).
+- [C] **ONE-FLUSH(n)** (A226, `one_flush`; the optimum form) ⟸ **LOCKED-CROWD-FREE(n)** (A233, `locked_crowd_free`) ⟸
+  **RING-CAPACITY(n)** (A236, `ring_capacity`) ⟸ **POCKET(n)** (A237, `pocket_cap`); **REALIGN** (A231, `realign`) +
+  STEP ⟹ ONE-FLUSH(n).  **SEAM** (A223): one tilted grain at every optimum below ⌈√n⌉.
+- [C] **STUCK-EXIST(11)** (A246, `stuck_exist_eleven`) ⟹ **FAMILY-STUCK-EXIST(11)** (A250, `family_stuck_exist_eleven`;
+  the weaker, current existence form) ⟸ RING-POCKET(11) (A251, `ring_pocket_eleven`) ⟸ RING-POKER-RESIDUAL(11)
+  (A252, `ring_poker_residual`) + `family_stuck_non_ring`; **SNAP-DOWN(11)** (A245, `snap_down`);
+  `corner_chase_closes`, `type_t_chase_closes` (A248/A249).
+- [C] **ONLY-RING(n), MONOTONE-ROOM(n)** (A253/A254, `only_ring`, `ring_peel`; ⟹ `peel_excludes`), **QUANT-ROOM(11)**
+  (an effective τ₀), **COMMON-SENSE(n)** (A255, `common_sense`, `ring_of_common_sense`), **NORMAL-RING(11)** (A258,
+  `normal_ring`, hybrid form).  MONOTONE-ROOM is [M] "true in normal form" (A259).
+- [C] **H1 = T3|k0** (A87, DF-O4 OPEN): no k0 configuration with s < ŝ is FJ-critical — "not affordable as a cover".
+- [C] **RING** as a structure census (A219; 2.6·10¹¹ structures), **LOCK-FREE⁺(< 4)** (ledger §4), **NO-VV-STRESS(n)**
+  (A235), **RES-N(δ_∞)** (A92-G1, the nicked slab) — the load-era forms.
