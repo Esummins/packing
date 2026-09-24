@@ -70,17 +70,22 @@ def j_any(P, i):
     return float(val(z)), dict(wall=wall, tilt_deg=math.degrees(z[0]) % 90.0, pos=float(z[1]))
 
 
-def objective(x, sq, hv):
+def objective(x, sq, hv, stage='nest'):
+    """stage 'nest': min(local terms, NEST margin) -- is a NEST quadruple realisable at all?  stage 'cell': also -J_any."""
     t, ps, nm = L.terms(x, sq, MEET, NOTMEET); m = min(t)
     if hv is not None:
         m = min(m, ps[1][1] - 0.5 * L.w(ps[1][2]) - hv)                  # h_v(D) >= hv
-    if m > -0.05:
+    if m > -0.5:
         P = [L.verts(*p) for p in ps]
-        m = min(m, nest(P)[0], -j_any(P, 0)[0], -j_any(P, 1)[0])
+        m = min(m, nest(P)[0])
+        if stage == 'cell' and m > -0.05:
+            m = min(m, -j_any(P, 0)[0], -j_any(P, 1)[0])
     return -m
 
 
 def seed(sq, rng, hv):
+    if rng.uniform() < 0.5:                                              # half the starts: local261-style random
+        return np.concatenate([np.append(rng.uniform(0.0, 1.1, 2 if s_[1] == 'F' else 1), rng.uniform(0, math.pi / 2)) for s_ in sq])
     """C at the wall meeting the box, D high and to the right, Y under D, X above C (the NEST picture) + noise."""
     hvD = rng.uniform(0.3, 0.9) if hv is None else rng.uniform(hv, min(hv + 0.4, 0.95))
     x = [math.sqrt(rng.uniform(0.01, 0.2)), math.sqrt(rng.uniform(0.6, 1.2)), rng.uniform(0.05, 0.8),      # C
@@ -90,18 +95,18 @@ def seed(sq, rng, hv):
     return np.array(x)
 
 
-def run(restarts, sd, hv):
+def run(restarts, sd, hv, stage):
     sq, dim = L.layout(SPEC); rng = np.random.default_rng(sd); best, bx, t0 = -1e9, None, time.time()
     for r in range(restarts):
         x0 = seed(sq, rng, hv)
-        opt = dict(maxiter=1500, xatol=1e-9, fatol=1e-11, adaptive=True)
-        res = minimize(objective, x0, args=(sq, hv), method='Nelder-Mead', options=opt)
-        res = minimize(objective, res.x, args=(sq, hv), method='Nelder-Mead', options=opt)
+        opt = dict(maxiter=4000 if stage == 'nest' else 1500, xatol=1e-9, fatol=1e-11, adaptive=True)
+        res = minimize(objective, x0, args=(sq, hv, stage), method='Nelder-Mead', options=opt)
+        res = minimize(objective, res.x, args=(sq, hv, stage), method='Nelder-Mead', options=opt)
         if -res.fun > best:
             best, bx = -res.fun, res.x
     t, ps, names = L.terms(bx, sq, MEET, NOTMEET); P = [L.verts(*p) for p in ps]
     nm, arcs = nest(P); jC, cC = j_any(P, 0); jD, cD = j_any(P, 1)
-    return dict(mode='hv%.2f' % hv if hv is not None else 'free', seed=sd, restarts=restarts, sup_margin=float(best),
+    return dict(mode=('hv%.2f' % hv if hv is not None else 'free') + '/' + stage, seed=sd, restarts=restarts, sup_margin=float(best),
                 seconds=round(time.time() - t0, 1), poses={n: list(map(float, p)) for n, p in zip(names, ps)},
                 local_min=float(min(t)), nest_margin_deg=nm * 100, arcs=arcs, J_C=jC, cell_C=cC, J_D=jD, cell_D=cD,
                 hD=[float(P[1][:, 0].min()), float(P[1][:, 1].min())], hC=[float(P[0][:, 0].min()), float(P[0][:, 1].min())],
@@ -110,14 +115,14 @@ def run(restarts, sd, hv):
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('--restarts', type=int, default=10)
-    ap.add_argument('--seeds', default='1,2,3'); ap.add_argument('--hv', type=float, default=None); a = ap.parse_args()
+    ap.add_argument('--seeds', default='1,2,3'); ap.add_argument('--hv', type=float, default=None); ap.add_argument('--stage', default='nest'); a = ap.parse_args()
     Z.belownormal()
     done = {(json.loads(l)['mode'], json.loads(l)['seed']) for l in open(OUT)} if os.path.exists(OUT) else set()
-    mode = 'hv%.2f' % a.hv if a.hv is not None else 'free'
+    mode = ('hv%.2f' % a.hv if a.hv is not None else 'free') + '/' + a.stage
     for sd in map(int, a.seeds.split(',')):
         if (mode, sd) in done:
             continue
-        row = run(a.restarts, sd, a.hv)
+        row = run(a.restarts, sd, a.hv, a.stage)
         with open(OUT, 'a') as fh:
             fh.write(json.dumps(row) + '\n')
         print(mode, sd, row['verdict'], '%.6f' % row['sup_margin'], 'J_C %.4f J_D %.4f' % (row['J_C'], row['J_D']), row['cell_D'], row['seconds'], 's', flush=True)
