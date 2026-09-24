@@ -393,3 +393,73 @@ tiling check).  "ok" = the tree's cell verdict; "verified" = the independent ver
   `attempts/A265-strip-plug/certs/P2265_index.jsonl`: 2,4 / 2,5 / 3,4 **ok**, 3,5 / 3,6 **not ok**; `results/
   verify265.json` bad 0 with OPEN leaves 3 837 (3,5) and 911 (3,6).  Of the fifteen later failing cells, 4,4 is named
   open in `k0_route.md` §13's closing paragraph; 4,5 … 7,6 appear in no source text yet (index only).
+- [T-computed\*] **A262 `pair3` and the `jam` kernel** (5a, 5b) — `chain3.sh` ran `float262` (twice, after a fork
+  retry, `attempts/A262-no-jam/logs/chain3.log`, last write 2026-09-23 11:59); **no `pair3` index exists** (the
+  `certs/` directory is empty).  `pair3` is priced ≈ 3 CPU-h, the 7-parameter `jam` kernel 15 (median) – 500 (mean)
+  CPU-h (`no_jam.md` §0).  Not landed.
+- [T-computed\*] **A266 `strip266`** (5b off the ring domain; LEFT-SHADOW box tree, own verifier `verify266`) — budgeted
+  lane `jam`: `attempts/A266-last-two/certs/strip266_jam_index.jsonl` 6/6 cells **not ok** (≈ 75 000 leaves each, the
+  budget); `results/verify266_jam.json` bad 0, leaves CERT 110 070, PRUNE 91 356, **OPEN 248 622**.  Full tree priced
+  ~5·10³ CPU-h (`last_two.md` §0) — see s.7.
+- [T-computed\*] **A273 DROP-LEMMA tree** (5b, 4-parameter, box-valid penumbra test, independent `verify273`) —
+  `attempts/A273-disc-lemma/certs/index273.jsonl`: 42 of 81 (θ, φ) cells indexed (θ-bins 1–5, i.e. θ ∈ [5°, 30°]);
+  **40 CERT, all verified PASS** (`results/verify273_index.jsonl`); **c5_4 (θ 25–30°, φ 20–25°) and c5_5 (θ 25–30°,
+  φ 25–30°) hit the 400 000-box cap: OPEN-LAYER with 127 845 / 154 644 OPEN leaves** ("PASS with … OPEN leaves: not
+  certified").  θ-bins 6–8 and 0 not yet run; the corner θ ≤ 5° ∧ φ ≤ 5° is OPEN by design (s.6).  disc273 §4
+  expected only the corner-adjacent cells c1_0 / c0_1 to be expensive — the capped cells are elsewhere (s.5.4).
+- [T-computed] **A265 `strip265`** — no unit square interior-disjoint from C and X has an interior point in the strip
+  (worst −9 = no such square, both sectors) on the JAM rings tested: `attempts/A265-strip-plug/results/strip265.json`
+  n = 432 (the doc says 18 at exit, 323 in the lane).  A statement about the tested rings only.
+- [T-computed] **A264 `cube264`** — the corner-lemma constants at 60 digits; 0 violations on 20 000 random near-flat
+  corners against exact SAT.  `three_lemmas.md` §0.
+- [T-computed] **TWO-POKERS minimum** ≥ 1.934236 over the whole triangle by 146 403 monotone-enclosure boxes
+  (`twopokers248`).  `corner_chase.md` §0; A248.
+- [T-computed] **SLOT-MET(η)** — for meetings of depth ≥ η, by interval branch-and-bound, η = 0.05 … 10⁻⁷ (191 525 –
+  649 243 boxes, guard 10⁻⁹, `attempts/A246-construct-towards/results/slotmet246_*.json`); the depth-free limit stays
+  [S].  `construct_towards.md` §0; A246.
+- [T-computed] **A247 pair table** — of 851 pair problems (level (0.05, 0.07), window [3.82, ŝ]) the branch-and-bound
+  decided 759 (697 feasible with exact witnesses, 62 infeasible), 92 undecided (η-degenerate); the walk counts
+  66 112 676 788 → 13 453 179 721 labelled walks after the 62 kills.  `perimeter_walk.md` §0; A247.
+- [T-computed] **A250 ILP count** — below 4 the exact minimum number of squares of a family-stuck incidence structure
+  is **9** (13 at s ≥ 4), unchanged by SLOT-MET and the 62 pair kills; the corpus: 0 of A244's 488 twelve-stuck and 0
+  of A217's 486 witnesses are even PAIR-stuck.  `family250.md` §0, §2.2, §4; `count250.py`; A250.
+- [T-computed] **The all-ADJ type-T ring exists at ŝ** (exact rational witness, C2 pinwheel at tilt 14.6°, margin 0.037,
+  `attempts/A249-type-t-chase/results/twotilted249_ring2.json`, `test249.test_ring_exact`) and its pocket has capacity
+  ≤ 1 (PIERCE(1) residual 0).  `type_t_chase.md` §0; Lean `two_tilted_ring_exists` (axiom [T-computed]); A249.
+- [T-computed] **Pocket certificates at explicit rings** — A226's rings at 3.90 and the window family ring(S, θ ≤ 30°)
+  hold ONE square (PIERCE(1), `pocket_waste.md` §0, A237); A249's ŝ witness survives a core shrink ε* = 0.0952 for
+  PIERCE(1) and 0.1397 for PIERCE(2) (`ring_pocket.md` §0, A251); poker margin +0.00166 at A249's ring and residual
+  centre set EMPTY beside it (`centre_disc.md` §0, A252); the flush-limit pocket decomposition in rational arithmetic
+  at six sides (`mintilt253.md` §0, §5, A253).
+- [T-computed] **CELLS/meeting census on the corpus** — `cells254` enumerates all 15 / 1 295 / 65 535 / 3 111 695
+  admissible families at m = 3..6 (`peel.md` §1.2, A254); A250 conflict graph (`fam250.conflicts`, `test250`).
+- [T-computed] **Older k0 certificates**: Theorem A38.1 (root occupancy at s0, `root_s0.json`); the first certified
+  k0_00 interior kill `certs/k0_00/s1int_l2_l2_p114_010` (A85); A92's Theorem S(0.3) (`certs/runA_S_d0.3_e1_v2.json` +
+  `runB_…`, frozen `verify_case.py` PASS — no K0-BLOCKED packing on [3.82, s0) has every second intruder at depth
+  ≥ 0.3; `k0_blocked_side.md` §0); A115's 22 level-1 + 13 level-2 + 2 level-3 + 10 A85/A99 cells certified dead for
+  29.8 CPU-h (`residue_ledger.md` §4); A86's atlas + 12 ghost-drain boxes replayed in Lean (`AtlasCheck.lean`, 48/49
+  with L ≥ s0; `k0_route.md` §12).
+
+## 4. MEASURED facts [M] the chain leans on (not proved)
+
+- [M] **No k0 local optimum below ŝ**: 262 k0 optima from 516 targeted runs, best at s0 + 0.0101 (four axis-aligned
+  squares off their slots by 1.6·10⁻³–8.6·10⁻³), first with no axis-aligned square at s0 + 0.0286.  `k0_route.md`
+  §4.5–4.6, §10; `attempts/A85-k0-route/results/cp85_k0_search.json`; A85.
+- [M] **No four-crowd / 12-stuck / family-stuck packing below 4 was ever found**: A217 lowest four-crowd local optimum
+  4.0013–4.0014 (`ring_swap.md` §2.3, `two_grains.md` §0); A244: 482 verified 12-stuck packings from 4.000010 to 4.5,
+  none below 4 in 434 descents + 4 056 fixed-side restarts, none LOCKED; the 4-stuck control 4.000015
+  (`attempts/A244-twelve-stuck/notes/twelve244.md` §0); A250's family search: none on [3.82, 4.6], least side where even
+  the |Π| ≤ 3 rows are met ≈ 4.0017 (`family250.md` §3).  Evidence, not proof (A244 §2 says how strong).
+- [M] **Normal-form reading on the corpus rings** (46 rings): poker removed, W → T on 4/4 walls in 46/46 and 46/46 land
+  in D; poker kept, the poker's wall is LOCKED on 43/44 (lock shift 0.0005 … 0.13).  `normal_ring.md` §0, §3.5; A258.
+- [M] **Least sides of the other pinwheels of rows** (`side258`, exact LP per tilt vector, grid 11⁴ + polish): mixed
+  + + + − 3.9298 (per-wall tilts; not all-ADJ), + − + − 3.9484, + + − − 3.9767, a flat row 3.9347, a flat row of three
+  3.9814, row of three with tilts ≥ 3° 4.0126; ≥ two rows of three > 4.  Margin 0.053 in the side at ŝ.
+  `normal_ring.md` §0, §3.2–3.4; A258.  (8e of the chain.)
+- [M] **Ring-level COMMON-SENSE on [3.82, ŝ]**: 0 of 84 mixed-sense all-ADJ ring rows (42 orbits × {3.99, ŝ}) close
+  (best −0.0140).  `common_sense.md` §0; A255.  With per-wall tilts it fails above 3.9298 (s.5).
+- [M] **ROOM on the families beyond the certified parts**: ROTATED-HOLE sharp form, sup miss-margin → −(4 − s)/2 from
+  below (24 adversary runs, 5 241 + 6 177 random pairs; MONOTONE-ROOM "true in normal form") (`normal_room.md` §0,
+  A259); hybrid family with independent tilts sup −0.0654 at ŝ, corpus 46/46 (`locked_wall.md` §0, A260); factors
+  sound on 82 test rings × 4 corners, every factor < 0 (max −0.0654 / −0.0051) (`open_pairs.md` §0, A263); GAP-DEPTH-ONE
+  quadrant form 2 046 pairs, least 1.0027 (`locked_wall.md` §0).
