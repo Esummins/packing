@@ -1128,3 +1128,24 @@ pathspecs, fetch + plain merge only, no response over ~15k tokens); never touch 
   yet, s.5.4).
 - **"Unchanged" is the honest default.**  Every doc A218–A274 ends "k0_00 unchanged" unless a chain link moved; say
   which link, with its tag, or say unchanged.
+
+## 11. APPENDS — A278 (2026-09-24), NO-FLOAT2 (`no_float2.md`; parts `attempts/A278-no-float2/notes/`)
+
+- s.2.3 [T] **FLOAT-SLOPE** — two interior-disjoint unit squares of the quadrant both meeting the open box are separated only by
+  positive-slope lines, and one is upper-left of EVERY separator (SQUARE-IN-TRIANGLE with β < n_u + n_v; NOTCH-NARROW; the
+  separating normals form one arc).  A277's MUTUAL case (N) is empty; in a FLOAT2 corner T_u(C), T_v(D) are blocked by squares
+  outside {C, D}.  `no_float2.md` §0; Lean `float_slope_core`; A278.
+- s.2.1 [T] **SHADOW-CELL** — a wall-touching cell T of any pose with int T ∖ int D inside the shadow of an obstacle set O ∋ D
+  (points no unit square interior-disjoint from O covers) and missing O ∖ {D} is met by D alone in every packing ⊇ O; P1 lands D.
+  Disc test: dist(T ∖ int D, K_outer) > 1/√2.  **NO-FLOAT2 ⟸ L** (four squares).  Lean `shadow_cell_core`; A278.
+- s.2.1 [T] **Cor. 2.2 / SWEEP** — with M(B) = {C, D} no wall cell disjoint from B is met by ⊆ {C, D}; D lands by a slide in any
+  direction between the C–D and Y–D separator angles unless the Y–D separators are all shallower ((NEST)).  A278 parts 2, 6.
+- s.3 [T-computed] **A277's Y-poke witness lands** — flat floor cell [0.486, 1.486] × [0,1] met by D alone, shadow margin 0.0319
+  (`cell278`); also by SWEEP (Y→D 77.2° > C→D 12.9°).  No normal-form FLOAT2 corner on disk (as A277 said, now exact).
+- s.6 [C] **NO-FLOAT2** — = L on 10 (12) parameters; residual satisfies (NEST) η₊ < α₋ ≤ α₊ < ξ₋ (Y UNDER a high D, C at the
+  wall); certificate designed (prune / cell / shadow by cores), naive price > 10³ CPU-h, not launched.  Lean axiom `float2_local`.
+  [C] **BL-CAP-2(A, C)** — S1–S4 [T] (misses lie below / left of lines through O; floor-sector centres q_y ≤ 1.4385 at ψ ≥ 0;
+  side-by-side misses force one into [0, 1.4385] × [0, 2.15]); no hand proof; cert277 --fam jam (5 params, 3–100 CPU-h).
+- s.5 [F] **the gloss "X misses B iff y_X ≥ 1 − cos φ_X"** (s.1 JAM entry, `no_jam.md` §1) — the LOWEST point of X must be ≥ 1
+  (X ⊆ {y ≥ 1}); the leftmost vertex is then at height ≥ 1 + cos φ_X.  H1 and `float2_room.md` have it right.  A278 part 1.
+- s.8 5d — unchanged: two CAP-2 statements [C]; NO-FLOAT2 would delete `bl_cap2_float2` and is itself [C] (A278).

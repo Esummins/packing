@@ -766,6 +766,11 @@ how much is done); [C] links are the obligations.  Files in `docs/proofs/` unles
        witness float262.json is [F] as a normal-form object**: D's floor drop is free (A blocks nothing), the corner is a JAM corner after one
        drop; with Y blocking it, P1 still lands D (J_D = +0.024); [M] `float277` sup ≤ 0 in the 4-square P1-sense model.  Certificate `cert277`
        (6 / 5 parameters, diameter) benched 12/12, priced 30–1000 / 3–100 CPU-h, not launched.  Lean axiom `bl_cap2_float2` [C].
+       **A278 (2026-09-24, `no_float2.md`):** [T] FLOAT-SLOPE (case (N) of MUTUAL is empty; X, Y outside {C, D}); [T] SHADOW-CELL reduces
+       NO-FLOAT2 to the 4-square statement L (a wall cell whose part outside D is unreachable by any admissible square); [T-computed] A277's
+       witness is landed by the flat floor cell with shadow margin 0.032 and by SWEEP; [C] NO-FLOAT2 (residual (NEST): Y under a high D),
+       certificate > 10^3 CPU-h naive, not launched -- so `bl_cap2_float2` stays; [C] BL-CAP-2(A, C) with S1-S4, cert277 jam 3-100 CPU-h not
+       launched.  Lean `Statements/Open/NoFloat2.lean` (axioms `no_float2_of_local` [T-prose], `float2_local` [C]).
    5e. Adversary / search: 399 structured starts, capacity ≤ 1 always, no 11-witness [M].
 6. **BOX-MEETERS(11)** [T from 5]: every box has exactly two meeters, wall touchers, eight distinct — `box_meeters.md`
    §5 (Lean `box_meeters_262` from the axiom `jam_count` [C = 5a–5d]).
