@@ -70,3 +70,73 @@ replacing X ⊆ P by |X| unit squares inside U(X) = (⋃X) ∪ Free keeps the pa
 `teleport_packing`.  **TWELVE-STUCK** = every one of the 12 cells met by ≥ 2 squares (A244); **PAIR-STUCK** = also every
 domino {c00, c01}; **FAMILY-STUCK** = |M(Π)| > |Π| for EVERY admissible family (n-general; Lean `FamilyStuckN`,
 `familyStuck_twelveStuck`).  TELEPORT-STUCK = every corner box met by ≥ 2 (Lean `TeleportStuck`, `TwoGrains.lean`).
+
+**Meeter / toucher / floater / poker / holder / rattler.**  A MEETER of c meets int B_c.  A TOUCHER touches a wall
+(a WALL TOUCHER of wall w).  A FLOATER is a box meeter touching no wall; SAME-WALL + WEDGED-SEAL make every box meeter
+beyond one toucher per wall a floater (`box_meeters.md` §0, A261).  A POKER (A252's corrected structure) is a FREE
+square meeting BOTH slots of one wall, by convexity with its corner in the overlap [0,1] × [s−2, 2] (`centre_disc.md`
+§0); the SEATED poker stands in a row's TOOTH at the row's tilt (`normal_ring.md` §2).  A248's POKE is the older use:
+a tilted wall square beside a flat meeter that pokes into the corner box (`corner_chase.md` §1).  A HOLDER of a meeter
+Q is a square whose force on Q (FJ stress) has a strictly negative component toward the corner; ALONG ITS WALL if
+along the wall Q touches (`k0_count.md` §1, A218).  A RATTLER MEETER carries no loaded row (ibid.).  A LOCK is a free
+square meeting a normal cell of an open pair; it is HELD iff (P ∖ {W, F}) ∪ {T} is SATURATED (`locked_wall.md` §1.2).
+
+**Sense / handedness.**  φ(Q) := ((θ + 45°) mod 90°) − 45°, sense(Q) := sign φ (flat 0; 45°: none); SENSE-INVARIANT
+[T]: a quarter turn fixes θ mod 90°, so sense is frame-free round the perimeter, a reflection flips it; a C4 or C2
+pinwheel has one sense (`common_sense.md` §1, A255).  A223's HANDEDNESS: '+' for θ mod 90 ∈ (0°, 45°), '−' for
+(45°, 90°), 'D' at 45°, 'F' flat (`two_grains.md` header).  FRAME handedness equals global at BL, TR and is swapped
+at BR, TL (`two_grains.md` §1.4).  Type F corner = a flat meeter on a wall + a tilted partner; type T = both meeters
+tilted (`corner_chase.md`, `type_t_chase.md`, A248/A249).
+
+**Rows, normal cell, potentials, P1–P4** (`common_sense.md` §2.2–2.3, A255; `normal_ring.md` §0, §1.2, A258).
+NORMAL CELL of a wall toucher s₁ of tilt φ: T := s₁ ± sec φ · e_wall (a unit square touching the same wall, sharing a
+segment of length 1 − tan|φ| with s₁); NORMAL-CELL [T]: if T is met by ≤ 1 square D ≠ s₁, D exchanges onto T (Lemma
+CELLS with Π = {T}).  A ROW = {s₁ + k sec φ e : k = 0..ℓ−1} ⊆ P of wall touchers.  Φ = (Φ₁, Φ₂, Φ₄, Φ₃)
+lexicographically: Φ₁ = #wall touchers; Φ₂ = sorted vector of maximal common-tilt row lengths; Φ₄ = −#(border cell,
+non-toucher) incidences (the RETREAT term); Φ₃ = −Σ (counter-clockwise wall coordinate of the touchers).  A maximiser
+satisfies **P1** touch-normal (every wall-touching unit cell met by a toucher or by ≥ 2 squares, if a non-toucher
+exists); **P2** row-normal modulo longer rows; **P2′** a free square blocking a normal cell with W has nowhere else
+to go; **P4** RETREAT (no re-posing of non-touchers lowers the incidence count: a free square in a slot is HELD);
+**P3** every maximal row is blocked against the clockwise slide.  **P1⁺** = the family form of P1: a family of disjoint
+wall-touching cells of any pose with |M(Π)| ≤ |Π| is met by touchers only (`box_meeters.md` §1.1, A261).
+
+**Corner types** of a doubly-met box (`no_jam.md` §1, A262; (touchers on u, on v, floaters)): **PAIR** (1,1,0) — A the
+floor START, B the wall END; **THIRD** (1,1,≥1) — PAIR + floater(s); **JAM** (1,0,1) — A on the floor meets, C floats
+and meets, X on the wall ABOVE C misses the box (X_low ≥ 1, i.e. y_X ≥ 1 − cos φ_X) and jams C; mirror JAM (0,1,1);
+**FLOAT2** (0,0,≥2) — two floaters meet, the blockers meet neither.
+
+**The ring families.**
+* **All-ADJ ring, 17 coordinates** (A249/A251): eight wall-touching tilted meeters, each reaching the far slot of its
+  wall; per corner (θ_B, δ_B) of the wall meeter and (θ_A, δ_A) of the floor meeter, plus s; all-ADJ forces
+  δ ∈ (s − 2 − w(θ), 1) ⊆ (0.406, 1) on W, so the box is [0, 90°]⁸ × [0.406, 1]⁸ × [3.82, 4] (`ring_pocket.md` §0-§1).
+* **The normal ring, domain D** (`family258.md` §2, A258): the pinwheel of four common-tilt ROWS OF TWO of one sense,
+  parameters (a_w, φ_w) + s, b_w := K(φ_w, s) − a_w, K = s − sec φ − cos φ − sin φ; (D1) 0 < φ_w < 45°; (D2) a_w,
+  b_w < 1 (row ends meet both boxes); (D3) a_w + sec φ_w < 2, b_w + sec φ_w < 2 (slot cut: all 12 cells met by exactly
+  two ring squares); (D4) max(E_A, E_B) ≥ 0 at every corner (common tilt: a sin φ + b cos φ ≥ 1).  **D′** = D without
+  (D3).  **D_tight** = all four corners in contact (C4, explicit).  Least side 1 + sec φ + cos φ + sin φ + tan(φ/2).
+* **Hybrid family D^h** (`family258.md` §7): D′ with r ∈ {0..3} walls replaced by LOCKED walls (an open pair s₁, W with
+  open gap e = s − a − b − sec φ₁ − w(φ₁) > 0 and a free square in the open notch): 8 + 2r coordinates + s.
+* **The JAM ring** (`no_jam.md` §0): floor row, right row, ceiling row, X on the left wall serving TL, C floating
+  0.57–0.72 off the wall meeting the BL box by a sliver 0.003–0.010.
+* **ADJ / non-ADJ**: ADJ = every toucher reaches its far slot (s₁: a + w(φ₁) > s − 2; W: δ_W < 2); without ADJ the
+  open shift reaches e ≤ 1.169 (≤ 0.349 with ADJ) [M] (`open_pairs.md` §0 (c), §3.1, A263).
+
+**The JAM corner hypotheses H1–H5** (`ring_domain.md` §0 notation, A271; BL frame, wall x = 0, floor y = 0; C the
+floater, T_u = C − h_u e_x its WALL DROP, S = T_u ∖ C the STRIP; X the wall toucher; A the floor toucher; s̄ the
+side).  **H1** X meets the open TL box (X_top > s̄ − 1), X ⊆ the container, X misses the open BL box (X_low ≥ 1).
+**H2** int X ∩ int T_u ≠ ∅ (X holds C), int X ∩ int C = ∅.  **H3** C meets the open box and floats (h_u, h_v > 0);
+A meets the open box; int A ∩ int C = ∅.  **H4** s̄ ∈ [3.82, ŝ]; family-stuck and normal (P1–P4).  **H5** HELD-JAM (not
+used).  A271: only H4's side bounds are ever used.  Ring domain (D1)–(D2), (U1)–(U9): `strip_enclosure.md` §3 (A267).
+C meets (0,1)² iff h_u cos θ + h_v sin θ < cos θ + sin θ − sin θ cos θ (Lean `open_box_tilted`, `last_two.md` §0, A266).
+
+**The slabs G1–G4 and the window.**  A57's four side slabs (the k5 trees' sides): G1 = (3.861637, s0] (ŝ included),
+G2 = (3.847016, 3.861637], G3 = (3.832450, 3.847016], G4 = [3.82, 3.832450] (`slot_crowds.md` §5 table;
+`docs/shadows/STATUS.md` per-slab table, A270).  "g1 pad" = the G1 slab's pad, NOT the window (A270 BRIEF line 3; see
+s.5).  The k0 chain's own "slab" (`open_pairs.md` §5, A263) is different: some wall's tilt in (0, 0.703°).
+
+**Value form vs uniqueness form.**  VALUE: "no packing of 11 unit squares at side m < ŝ" — any same-side operation
+(exchange, motion) is admissible, so the argument may choose which packing at side m it studies (VALUE-WLOG [T],
+`common_sense.md` §2.1).  UNIQUENESS at ŝ: the one-step normal form proves nothing about the given P; the iterated
+form re-packs one square per step, and a k-step chain ending at a Trump image is k = 1 Theorem U [T], k ≤ 3
+SWAP-RIGIDITY [M], k ≥ 4 [C] (ibid.; `ring_swap.md` §1.7).  AllForm vs MinForm: `stratum_kill` for every packing vs
+for σ-minimisers only (`k0_route.md` §9; `drain_flow_k0.md` §0, A87: the k0_00 obligation is legitimately MinForm).
