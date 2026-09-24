@@ -82,12 +82,15 @@ def cell_dead(B, z, h, part):
     return None
 
 
-def box_test(b, h0=0.125, hmin=1.0 / 4096, budget=60000):
+def box_test(b, **kw):
     """returns (verdict, stats): verdict in {'PRUNE:<rule>', 'CERT', 'FAIL'}; stats counts cells per rule."""
     rule = SE.prune(b)
     if rule:
         return 'PRUNE:' + rule, {}
-    B = BoxSets(b)
+    return run_cells(BoxSets(b), **kw)
+
+
+def run_cells(B, h0=0.125, hmin=1.0 / 4096, budget=60000):
     xs = [p[0] for p in B.Tuo]
     ys = [p[1] for p in B.Tuo]
     x0, x1 = max(0.5, min(xs) - G.R2) - 1e-9, max(xs) + G.R2

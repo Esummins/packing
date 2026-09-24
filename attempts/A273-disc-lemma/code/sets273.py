@@ -93,21 +93,23 @@ def affine(f, npl, k):
 
 
 def core(kind, b):
-    """a convex polygon inside the true set for EVERY parameter in b.  Each defining constraint's nominal half-plane
-    (midpoint parameters) is moved inward by its own offset d_k, raised by the interval deficit at the failing
-    vertices until every vertex passes the interval test (<= 16 rounds); convexity of the true set then gives
-    core subset true set.  Empty list = no core (the box test then gets no kill from this set)."""
+    """a convex polygon inside the true set for EVERY parameter in b (see core_from)."""
     trig = G.trig(b)
     mk = {'xi': cons_xi, 'xil': cons_xil, 'gam': cons_gam}[kind]
-    f = mk(b, trig)
     m = [0.5 * (lo + hi) for lo, hi in b]
     mb = [(v, v) for v in m]
-    fm = mk(mb, G.trig(mb))
+    return core_from(mk(b, trig), mk(mb, G.trig(mb)), None)
+
+
+def core_from(f, fm, _nominal):
+    """Each defining constraint's nominal half-plane (midpoint parameters, fm) is moved inward by its own offset d_k,
+    raised by the interval deficit (f over the whole box) at the failing vertices until every vertex passes
+    (<= 16 rounds); convexity of the true set then gives core subset true set.  [] = no core (no kill from it)."""
     nk = len(fm((0.0, 0.0)))
     A = [affine(fm, None, k) for k in range(nk)]
     d = [0.0] * nk
     for _ in range(16):
-        P = [(-1.0, -1.0), (BIG + 1.0, -1.0), (BIG + 1.0, 8.0), (-1.0, 8.0)]
+        P = [(-1.0, -9.0), (BIG + 1.0, -9.0), (BIG + 1.0, 9.0), (-1.0, 9.0)]
         for k in range(nk):
             a, bb, c = A[k]
             P = G.clip(P, a, bb, c - d[k])
