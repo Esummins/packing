@@ -102,7 +102,7 @@ wall-touching cells of any pose with |M(Π)| ≤ |Π| is met by touchers only (`
 
 **Corner types** of a doubly-met box (`no_jam.md` §1, A262; (touchers on u, on v, floaters)): **PAIR** (1,1,0) — A the
 floor START, B the wall END; **THIRD** (1,1,≥1) — PAIR + floater(s); **JAM** (1,0,1) — A on the floor meets, C floats
-and meets, X on the wall ABOVE C misses the box (X_low ≥ 1, i.e. y_X ≥ 1 − cos φ_X) and jams C; mirror JAM (0,1,1);
+and meets, X on the wall ABOVE C misses the box (its LOWEST point ≥ 1: with X's leftmost vertex (0, y_X), edges (cos φ_X, sin φ_X), (sin φ_X, −cos φ_X), X_low = y_X − cos φ_X ≥ 1 — A278 erratum, fixed A279) and jams C; mirror JAM (0,1,1);
 **FLOAT2** (0,0,≥2) — two floaters meet, the blockers meet neither.
 
 **The ring families.**
