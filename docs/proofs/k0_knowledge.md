@@ -282,6 +282,18 @@ One or two lines each; n-general unless "n = 11" is said.  Format: tag, NAME —
 - [T] **DROP LEMMA is h_v-invariant (4 parameters); ⟹ STRIP₂-IN-JAM** by A272's reduction; **the limit θ = φ = 0
   holds with ZERO margin**.  `disc273.md` §1, §2.1, §5; A273.  Lean unchanged (`DiscLemma` opaque).
 
+- [T] **ONE-DROP, MUTUAL, the drop form of P1** (A277) — a square interior-disjoint from a box-meeting floater blocks at most
+  one of its two drops (BLOCKER-SIDE + its mirror on one separating normal); two floaters meeting the open box are separated
+  by a positive-slope line — then only the upper-left one's floor drop and the lower-right one's wall drop can be blocked by
+  the other — or block no drop of each other; in the Φ₁-maximiser every drop of every non-toucher is blocked.  Lemma LOW holds
+  with a FLOATING lower-right square in A's role (its proof uses only a point of that square under the separator).
+  `float2_room.md` §1, §5.1; Lean `one_drop_core`; A277.
+- [T] **CAP-2 is the room statement of link 5d** (A277) — n ≤ 8 + cap(S_8) with EVERY non-S_8 square (middle touchers,
+  blockers) a pocket square; two misses ⟹ two BL-sector misses (PAIR corners kill theirs); so a non-PAIR corner needs
+  **BL-CAP-2 of its two box meeters** (no two disjoint BL-sector misses; diameter < 1 of the admissible-centre region
+  suffices), not ROOM — which is FALSE for FLOAT2 whenever a blocker outside S_8 misses O.  The strip lemma STRIP₂-IN-JAM
+  transfers to a FLOAT2 floater verbatim iff its blocker serves the far box (H1); the indirect JAM needs no reduction (its
+  holder is a pocket square).  `float2_room.md` §0, §3, §5; Lean `cap2_count_core`, `cap2_of_diam`, `float2_ten`; A277.
 ### 2.4 Corner geometry
 
 - [T] **SIDEBAND (a)** (sharp constant c), **Lemma A1** (ℓ∞ centre separation ≥ 1/√2), **A2** (two meeters' centres
@@ -645,6 +657,14 @@ This section is what stops agents repeating them.  Grouped by theme; each: the c
   direction is φ ≪ θ (0.25 θ² at φ = 0), not the diagonal (0.5 θ).  A273's "boundary layer h_v → 1" — not a layer
   (h_v-invariance); the layer is θ, φ → 0 (`disc273.md` §7.2).
 
+- [F] **The FLOAT2 witness as a normal-form object** (`float262.json`, A262; the A277 brief's "A on the floor and X on the wall
+  block their drops") — D's floor drop is FREE (h_v(D) = 0.0047; overlap 0 with A, X, C, exact): A is a MIDDLE toucher (leftmost
+  x = 1.382) blocking nothing; D drops (Φ₁ + 1) and the corner is a JAM corner inside H1–H3.  "JAMMED FLOAT2 EXISTS" is A261's
+  coarse-grid J (the drop cell is off the grid).  A floor toucher Y (77.2°, left vertex under D's right vertex) blocks the drop
+  with gaps ≥ 0.00055 and all four drops are then blocked [T-computed], yet P1 lands D on a flat floor cell (J_D = +0.024).
+  Also [F]: "S_min = {C, D} + their blockers" (the blockers are pocket squares, not S_min); "the sectors are pair-type
+  certificates already run" (independent tilts; two-obstacle ROOM fails by +0.64 on the dropped witness); "the P4 chain reduces
+  the indirect jam to the direct one" (the toucher holds the last link, not C).  `float2_room.md` §2, §7; A277.
 ### 5.4 Pitfalls from other classes, and source disagreements (recorded both ways, later named)
 
 - [F] **"k5 closed at the window pad"** (k5, but a k0 pitfall) — "g1" is A57's G1 SLAB (3.861637, s0], not the window;
@@ -711,9 +731,14 @@ gives one).
   OPEN leaves, θ-bins 0, 6–8 pending (s.3).
 - [C] **5b off the ring domain, the older route** — `strip266` [T-computed\*]: a full tree priced ~5·10³ CPU-h; the
   budgeted six cells are all OPEN at the budget.  Superseded in the chain by the DROP form (A273), kept as the fallback.
-- [C] **5d — indirect jams (a non-toucher blocker), FLOAT2 corners, a middle toucher above X**: "no room statement
-  yet" (`k0_route.md` §13 5d).  `float262` [M] now reports a jammed FLOAT2 configuration (s.4); no ROOM measurement
-  on it exists.  What would close it: a ROOM ≤ 1 statement for the FLOAT2 structure (the per-corner sector method).
+- [C] **5d — indirect jams, FLOAT2 corners, a middle toucher above X = TWO CAP-2 STATEMENTS** (A277, `float2_room.md`):
+  BL-CAP-2(C, D) for a FLOAT2 corner (Lean axiom `bl_cap2_float2`) and BL-CAP-2(A, C) for a JAM corner with any holder
+  (direct, indirect, middle toucher above X) — no two interior-disjoint BL-sector misses free of the two box meeters.  What
+  would close each: the diameter certificate `cert277` (6 / 5 parameters, 0.02 s per box, 12/12 bench points CERT), priced
+  30–1000 / 3–100 CPU-h, not launched (add a P1-aware PRUNE first); or a theorem that no normal-form FLOAT2 corner exists
+  ([M] `float277`: sup 0, attained only where a floater becomes a toucher); or, for FLOAT2 corners whose blockers serve
+  their far boxes, the 4-parameter dropped pair (~3 CPU-h) + 5b's strips.  [C] INDIRECT-FREE (no free square meets
+  S_u(C) under H1 with X above C, holding or not) would leave middle touchers as the only indirect holders.
 - [C] **6 — the Lean axiom `jam_count`** (= 5a–5d); BOX-MEETERS(11) is [T from 5] (`box_meeters_262`).
 - [C] **8b — the slab** (some wall in (0, 0.703°), not all): A263's 492 engine jobs [T-computed\*], "priced 1–10⁵ leaves
   each, 2·10⁷ for the boxes adjacent to the cube" (`open_pairs.md` §0 (d), §5.2); no slab-job index exists on disk.
