@@ -1,0 +1,421 @@
+00:56:09 [w1] pass 1 start k5_11_interior_Y0186_r270w4 g4:R0+ wall 1800 (lab 11, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_11_interior_Y0186_r270w4 at the g4 pad: ALIVE in 24005 ms; kills {'H-clip': 0, 'P': 2394, 'W': 816, 'C': 692, 'M': 2553, 'L': 9, 'R': 2900, 'X': 1105}; CSP units 512 -> 512 alive; caps {'BL(1,1)': None, 'BR(0,1)': None, 'TR(0,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_11_interior_Y0186_r270w4 pad g4: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_11_interior_Y0186_r270w4 page pad g4: start attempts/A270-k5-lower-slabs/certs/csp209_k5_11_interior_Y0186_r270w4_g4_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [1.38, 1.519, 2.358, 2.498, 73.74, 82.372]; forced H []; 4 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (24.7 s, 1 rounds; t=24.8)
+   node R0+.1      d1 TL(1,0)<-[14]: INTERNAL (1.9 s, 1 rounds; t=26.8)
+   node R0+.1.1    d2 BL(1,1)<-[11]: INTERNAL (2.5 s, 1 rounds; t=29.3)
+   node R0+.1.1.1  d3 BR(0,1)<-[17]: DEAD by EmptyBox r1 (1.8 s, 1 rounds; t=31.2)
+   node R0+.1.1.2  d3 BR(0,1)<-[18]: INTERNAL (2.6 s, 1 rounds; t=33.8)
+   no-room (k=9, m=2): UNDECIDED in 26 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.2: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.1.2.p1 d4 pocket<-[0]: INTERNAL (9.5 s, 1 rounds; t=69.6)
+   no-room (k=10, m=1): UNDECIDED in 17 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.2.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.1.2.p1.p1 d5 pocket<-[0]: INTERNAL (6.6 s, 1 rounds; t=92.8)
+   node R0+.1.1.2.p1.p1 d5: DEAD by CC -- rule CC at R0+.1.1.2.p1.p1 (Lemma CORNER-COVER; g4 pad, lam 1.014943): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an 
+   node R0+.1.1.2.p2 d4 pocket<-[1]: INTERNAL (4.9 s, 1 rounds; t=97.8)
+   node R0+.1.1.2.p2r1 d4 root<-None: DEAD by S-CLIP r1 (8.2 s, 1 rounds; t=106.0)
+   node R0+.1.1.3  d3 BR(0,1)<-[21]: INTERNAL (2.8 s, 1 rounds; t=108.8)
+   node R0+.1.1.3.1 d4 TR(0,0)<-[18]: DEAD by EmptyBox r1 (6.4 s, 1 rounds; t=115.3)
+   node R0+.1.1.3.2 d4 TR(0,0)<-[23]: INTERNAL (8.9 s, 1 rounds; t=124.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 4 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.1.1.3.2 d4: DEAD by NOROOM -- no-room at R0+.1.1.3.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.1.1.3.3 d4 TR(0,0)<-[24]: INTERNAL (3.0 s, 1 rounds; t=131.2)
+   no-room (k=10, m=1): UNDECIDED in 11 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.3.3: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.1.3.3.p1 d5 pocket<-[0]: INTERNAL (7.7 s, 1 rounds; t=149.6)
+   node R0+.1.1.3.3.p1 d5: DEAD by CC -- rule CC at R0+.1.1.3.3.p1 (Lemma CORNER-COVER; g4 pad, lam 1.014943): rule CC: F4 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an i
+   node R0+.1.1.4  d3 BR(0,1)<-[22]: INTERNAL (6.6 s, 1 rounds; t=156.4)
+   no-room (k=9, m=2): UNDECIDED in 13 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.4: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.1.4.p1 d4 pocket<-[0]: INTERNAL (7.1 s, 1 rounds; t=176.9)
+   no-room (k=10, m=1): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.4.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.1.4.p1.p1 d5 pocket<-[0]: INTERNAL (8.0 s, 1 rounds; t=200.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.1.1.4.p1.p1: split F1 at TR(0,0) (meeting fraction 0.106226; alive rows [23, 24]; named ['F1', 'F3', 'F4', 'F5'])
+   node R0+.1.1.4.p1.p1.1 d6 TR(0,0)<-None: INTERNAL (2.8 s, 1 rounds; t=203.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.1.1.4.p1.p1.1: bisect F5 on y at 2.851886 (extents (0.815684, 1.050395), tilt 90.0 deg, core EMPTY, 7 piece(s); split 1 of 4)
+   node R0+.1.1.4.p1.p1.1.1 d7 F5<-['y<=2.851886']: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=203.5)
+   node R0+.1.1.4.p1.p1.1.2 d7 F5<-['y>=2.851886']: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=203.6)
+   node R0+.1.1.4.p1.p1.2 d6 TR(0,0)<-None: INTERNAL (1.9 s, 1 rounds; t=205.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.1.1.4.p1.p1.2: bisect F5 on y at 2.851886 (extents (0.815684, 1.050395), tilt 90.0 deg, core EMPTY, 7 piece(s); split 1 of 4)
+   node R0+.1.1.4.p1.p1.2.1 d7 F5<-['y<=2.851886']: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=207.9)
+   node R0+.1.1.4.p1.p1.2.2 d7 F5<-['y>=2.851886']: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=208.8)
+   node R0+.1.1.5  d3 BR(0,1)<-[23]: INTERNAL (1.5 s, 1 rounds; t=210.4)
+   no-room (k=9, m=2): UNDECIDED in 18 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.5: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.1.5.p1 d4 pocket<-[0]: INTERNAL (4.7 s, 1 rounds; t=233.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.1.1.5.p1 d4: DEAD by NOROOM -- no-room at R0+.1.1.5.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.1.1.5.p2 d4 pocket<-[1]: INTERNAL (2.6 s, 1 rounds; t=238.5)
+   no-room (k=10, m=1): UNDECIDED in 13 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.1.5.p2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.1.5.p2.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (1.3 s, 1 rounds; t=252.7)
+   node R0+.1.2    d2 BL(1,1)<-[12]: INTERNAL (5.4 s, 1 rounds; t=258.3)
+   node R0+.1.2.1  d3 BR(0,1)<-[18]: INTERNAL (4.6 s, 1 rounds; t=263.0)
+   node R0+.1.2.1r1 d3 root<-None: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=263.5)
+   node R0+.1.2.2  d3 BR(0,1)<-[21]: INTERNAL (6.1 s, 1 rounds; t=269.8)
+   node R0+.1.2.2r1 d3 root<-None: INTERNAL (7.0 s, 1 rounds; t=277.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.1.2.2  d3: DEAD by NOROOM -- no-room at R0+.1.2.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.1.2.3  d3 BR(0,1)<-[22]: INTERNAL (5.7 s, 1 rounds; t=286.1)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 11 s (1 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.1.2.3  d3: DEAD by NOROOM-CN -- no-room at R0+.1.2.3 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the re
+   node R0+.1.2.4  d3 BR(0,1)<-[23]: INTERNAL (1.0 s, 1 rounds; t=298.1)
+   no-room (k=9, m=2): UNDECIDED in 21 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.2.4: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.2.4.p1 d4 pocket<-[0]: INTERNAL (7.2 s, 1 rounds; t=326.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.1.2.4.p1 d4: DEAD by NOROOM -- no-room at R0+.1.2.4.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.1.2.4.p2 d4 pocket<-[1]: INTERNAL (2.4 s, 1 rounds; t=332.2)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 9 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R0+.1.2.4.p2 d4: DEAD by NOROOM-POCKET -- no-room at R0+.1.2.4.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R0+.1.3    d2 BL(1,1)<-[16]: INTERNAL (1.6 s, 1 rounds; t=343.2)
+   node R0+.1.3.1  d3 BR(0,1)<-[17]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=344.3)
+   node R0+.1.3.2  d3 BR(0,1)<-[18]: INTERNAL (3.5 s, 1 rounds; t=348.0)
+   no-room (k=9, m=2): UNDECIDED in 21 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.3.2: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.3.2.p1 d4 pocket<-[0]: INTERNAL (5.1 s, 1 rounds; t=374.0)
+   no-room (k=10, m=1): UNDECIDED in 23 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.3.2.p1: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.3.2.p1.p1 d5 pocket<-[0]: INTERNAL (9.3 s, 1 rounds; t=406.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.1.3.2.p1.p1: split F3 at BL(1,1) (meeting fraction 0.00726; alive rows []; named ['F2', 'F3', 'H'])
+   node R0+.1.3.2.p1.p1.1 d6 BL(1,1)<-None: DEAD by S-CLIP r1 (3.8 s, 1 rounds; t=410.9)
+   node R0+.1.3.2.p1.p1.2 d6 BL(1,1)<-None: DEAD by S-CLIP r1 (0.6 s, 1 rounds; t=411.7)
+   node R0+.1.3.2.p1.p2 d5 pocket<-[1]: INTERNAL (6.9 s, 1 rounds; t=418.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.1.3.2.p1.p2: split F3 at BL(1,1) (meeting fraction 0.015313; alive rows []; named ['F2', 'F3', 'H'])
+   node R0+.1.3.2.p1.p2.1 d6 BL(1,1)<-None: DEAD by S-CLIP r1 (3.5 s, 1 rounds; t=422.5)
+   node R0+.1.3.2.p1.p2.2 d6 BL(1,1)<-None: DEAD by S-CLIP r1 (0.6 s, 1 rounds; t=423.4)
+   node R0+.1.3.3  d3 BR(0,1)<-[21]: INTERNAL (4.2 s, 1 rounds; t=427.8)
+   node R0+.1.3.3.1 d4 TR(0,0)<-[18]: DEAD by EmptyBox r1 (3.1 s, 1 rounds; t=431.1)
+   node R0+.1.3.3.2 d4 TR(0,0)<-[23]: INTERNAL (2.4 s, 1 rounds; t=433.7)
+   no-room (k=10, m=1): DEAD by NOROOM in 4 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.1.3.3.2 d4: DEAD by NOROOM -- no-room at R0+.1.3.3.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.1.3.3.3 d4 TR(0,0)<-[24]: INTERNAL (1.2 s, 1 rounds; t=439.0)
+   no-room (k=10, m=1): UNDECIDED in 10 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.3.3.3: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.3.3.3.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (6.1 s, 1 rounds; t=455.6)
+   node R0+.1.3.4  d3 BR(0,1)<-[22]: INTERNAL (2.2 s, 1 rounds; t=458.2)
+   no-room (k=9, m=2): UNDECIDED in 16 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.3.4: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.3.4.p1 d4 pocket<-[0]: INTERNAL (3.5 s, 1 rounds; t=478.4)
+   no-room (k=10, m=1): UNDECIDED in 16 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.3.4.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.3.4.p1.p1 d5 pocket<-[0]: INTERNAL (6.2 s, 1 rounds; t=500.7)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.1.3.4.p1.p1: split F4 at BL(1,1) (meeting fraction 0.03877; alive rows [18]; named ['F2', 'F4', 'F5', 'H'])
+   node R0+.1.3.4.p1.p1.1 d6 BL(1,1)<-None: DEAD by REACH r1 (3.5 s, 1 rounds; t=505.2)
+   node R0+.1.3.4.p1.p1.2 d6 BL(1,1)<-None: INTERNAL (2.0 s, 1 rounds; t=507.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.1.3.4.p1.p1.2: bisect F5 on y at 2.847731 (extents (0.951156, 1.058706), tilt 90.0 deg, core EMPTY, 5 piece(s); split 1 of 4)
+   node R0+.1.3.4.p1.p1.2.1 d7 F5<-['y<=2.847731']: DEAD by S-CLIP r1 (2.4 s, 1 rounds; t=510.4)
+   node R0+.1.3.4.p1.p1.2.2 d7 F5<-['y>=2.847731']: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=511.2)
+   node R0+.1.3.5  d3 BR(0,1)<-[23]: INTERNAL (1.3 s, 1 rounds; t=512.8)
+   no-room (k=9, m=2): UNDECIDED in 20 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.3.5: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.3.5.p1 d4 pocket<-[0]: INTERNAL (4.5 s, 1 rounds; t=537.5)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.1.3.5.p1 d4: DEAD by NOROOM -- no-room at R0+.1.3.5.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.1.3.5.p2 d4 pocket<-[1]: INTERNAL (2.5 s, 1 rounds; t=542.7)
+   no-room (k=10, m=1): UNDECIDED in 15 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.3.5.p2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.3.5.p2.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=559.7)
+   node R0+.1.3.5.p3 d4 pocket<-[2]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=560.5)
+   node R0+.1.4    d2 BL(1,1)<-[17]: INTERNAL (5.3 s, 1 rounds; t=566.1)
+   node R0+.1.4.1  d3 BR(0,1)<-[16]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=567.0)
+   node R0+.1.4.2  d3 BR(0,1)<-[18]: INTERNAL (3.4 s, 1 rounds; t=570.7)
+   node R0+.1.4.2r1 d3 root<-None: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=571.2)
+   node R0+.1.4.3  d3 BR(0,1)<-[21]: INTERNAL (7.5 s, 1 rounds; t=579.1)
+   node R0+.1.4.3r1 d3 root<-None: INTERNAL (4.3 s, 1 rounds; t=583.8)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.1.4.3  d3: DEAD by NOROOM -- no-room at R0+.1.4.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.1.4.4  d3 BR(0,1)<-[22]: INTERNAL (3.6 s, 1 rounds; t=590.7)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 9 s (1 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.1.4.4  d3: DEAD by NOROOM-CN -- no-room at R0+.1.4.4 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the re
+   node R0+.1.4.5  d3 BR(0,1)<-[23]: INTERNAL (2.9 s, 1 rounds; t=603.1)
+   no-room (k=9, m=2): UNDECIDED in 18 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.4.5: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.1.4.5.p1 d4 pocket<-[0]: INTERNAL (4.7 s, 1 rounds; t=626.1)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.1.4.5.p1 d4: DEAD by NOROOM -- no-room at R0+.1.4.5.p1 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.1.4.5.p2 d4 pocket<-[1]: INTERNAL (1.9 s, 1 rounds; t=632.2)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 6 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R0+.1.4.5.p2 d4: DEAD by NOROOM-POCKET -- no-room at R0+.1.4.5.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R0+.1.5    d2 BL(1,1)<-[18]: INTERNAL (3.3 s, 1 rounds; t=642.6)
+   node R0+.1.5r1  d2 root<-None: INTERNAL (1.6 s, 1 rounds; t=644.5)
+   node R0+.1.5.1  d3 BR(0,1)<-[11]: INTERNAL (5.1 s, 1 rounds; t=650.0)
+   node R0+.1.5.1  d3: DEAD by CC -- rule CC at R0+.1.5.1 (Lemma CORNER-COVER; g4 pad, lam 1.014943): rule CC: F3 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interi
+   node R0+.1.5.2  d3 BR(0,1)<-[12]: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=651.2)
+   node R0+.1.5.3  d3 BR(0,1)<-[16]: INTERNAL (5.7 s, 1 rounds; t=657.3)
+   no-room (k=10, m=1): UNDECIDED in 17 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.1.5.3: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.1.5.3.p1 d4 pocket<-[0]: DEAD by S-CLIP r1 (3.0 s, 1 rounds; t=677.9)
+   node R0+.1.5.4  d3 BR(0,1)<-[21]: INTERNAL (4.1 s, 1 rounds; t=682.3)
+   node R0+.1.5.4  d3: DEAD by CC -- rule CC at R0+.1.5.4 (Lemma CORNER-COVER; g4 pad, lam 1.014943): rule CC: F3 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an interi
+   node R0+.1.5.5  d3 BR(0,1)<-[22]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=684.2)
+   node R0+.2      d1 TL(1,0)<-[17]: INTERNAL (0.6 s, 1 rounds; t=685.2)
+   node R0+.2.1    d2 BR(0,1)<-[16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=685.6)
+   node R0+.2.2    d2 BR(0,1)<-[21]: INTERNAL (1.0 s, 1 rounds; t=687.1)
+   node R0+.2.2.1  d3 TR(0,0)<-[14, 23]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=688.2)
+   node R0+.2.2.2  d3 TR(0,0)<-[14, 24]: DEAD by REACH r1 (1.4 s, 1 rounds; t=690.0)
+   node R0+.2.2.3  d3 TR(0,0)<-[19, 23]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=691.2)
+   node R0+.2.2.4  d3 TR(0,0)<-[19, 24]: INTERNAL (1.5 s, 1 rounds; t=693.1)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.2.2.4  d3: DEAD by NOROOM -- no-room at R0+.2.2.4 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.2.3    d2 BR(0,1)<-[22]: INTERNAL (0.6 s, 1 rounds; t=697.5)
+   node R0+.2.3.1  d3 TR(0,0)<-[14, 23]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=698.3)
+   node R0+.2.3.2  d3 TR(0,0)<-[14, 24]: DEAD by REACH r1 (1.0 s, 1 rounds; t=700.0)
+   node R0+.2.3.3  d3 TR(0,0)<-[19, 23]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=700.7)
+   node R0+.2.3.4  d3 TR(0,0)<-[19, 24]: INTERNAL (1.0 s, 1 rounds; t=702.3)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.2.3.4  d3: DEAD by NOROOM -- no-room at R0+.2.3.4 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.2.4    d2 BR(0,1)<-[23]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=704.3)
+   node R0+.3      d1 TL(1,0)<-[18]: INTERNAL (1.6 s, 1 rounds; t=706.6)
+   node R0+.3.1    d2 TR(0,0)<-[19]: INTERNAL (3.4 s, 1 rounds; t=710.6)
+   node R0+.3.1.1  d3 BR(0,1)<-[11]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=712.0)
+   node R0+.3.1.2  d3 BR(0,1)<-[16]: INTERNAL (4.8 s, 1 rounds; t=717.3)
+   no-room (k=9, m=2): UNDECIDED in 32 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.1.2: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.1.2.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=749.8)
+   node R0+.3.1.2.p2 d4 pocket<-[1]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=751.3)
+   node R0+.3.1.2.p3 d4 pocket<-[2]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=752.5)
+   node R0+.3.1.3  d3 BR(0,1)<-[21]: INTERNAL (2.1 s, 1 rounds; t=755.1)
+   no-room (k=9, m=2): UNDECIDED in 24 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.1.3: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.1.3.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=781.6)
+   node R0+.3.1.3.p2 d4 pocket<-[1]: INTERNAL (4.6 s, 1 rounds; t=786.6)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.3.1.3.p2 d4: DEAD by NOROOM -- no-room at R0+.3.1.3.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.3.1.3.p3 d4 pocket<-[2]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=790.3)
+   node R0+.3.1.4  d3 BR(0,1)<-[22]: INTERNAL (2.3 s, 1 rounds; t=793.1)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 18 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.3.1.4  d3: DEAD by NOROOM-CN -- no-room at R0+.3.1.4 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the re
+   node R0+.3.1.5  d3 BR(0,1)<-[23]: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=813.7)
+   node R0+.3.2    d2 TR(0,0)<-[23]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=815.1)
+   node R0+.3.3    d2 TR(0,0)<-[24]: INTERNAL (2.7 s, 1 rounds; t=818.3)
+   node R0+.3.3.1  d3 BR(0,1)<-[11]: INTERNAL (5.3 s, 1 rounds; t=824.1)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 20 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.3.3.1  d3: DEAD by NOROOM-CN -- no-room at R0+.3.3.1 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the re
+   node R0+.3.3.2  d3 BR(0,1)<-[12]: DEAD by EmptyBox r1 (1.3 s, 1 rounds; t=846.0)
+   node R0+.3.3.3  d3 BR(0,1)<-[16]: INTERNAL (5.2 s, 1 rounds; t=851.6)
+   no-room (k=9, m=2): UNDECIDED in 24 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3.3: 1 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.3.3.p1 d4 pocket<-[0]: INTERNAL (2.6 s, 1 rounds; t=878.7)
+   no-room (k=10, m=1): UNDECIDED in 22 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3.3.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.3.3.p1.p1 d5 pocket<-[0]: INTERNAL (4.1 s, 1 rounds; t=906.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.3.3.3.p1.p1: split F4 at TR(0,0) (meeting fraction 0.304723; alive rows [19, 23]; named ['F1', 'F2', 'F4', 'F5'])
+   node R0+.3.3.3.p1.p1.1 d6 TR(0,0)<-None: INTERNAL (2.9 s, 1 rounds; t=911.4)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.3.3.p1.p1.1: bisect F5 on y at 1.938542 (extents (1.729075, 2.877084), tilt 90.0 deg, core EMPTY, 9 piece(s); split 1 of 4)
+   node R0+.3.3.3.p1.p1.1.1 d7 F5<-['y<=1.938542']: INTERNAL (4.5 s, 1 rounds; t=916.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.3.3.p1.p1.1.1: bisect F1 on t at 53.1301 (extents (0.217234, 0.198256), tilt 90.0 deg, core non-empty, 29 piece(s); split 1 of 4)
+   node R0+.3.3.3.p1.p1.1.1.1 d8 F1<-['t<=53.1301']: DEAD by EmptyBox r1 (1.5 s, 1 rounds; t=919.0)
+   node R0+.3.3.3.p1.p1.1.1.2 d8 F1<-['t>=53.1301']: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=919.9)
+   node R0+.3.3.3.p1.p1.1.2 d7 F5<-['y>=1.938542']: INTERNAL (3.6 s, 1 rounds; t=924.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.3.3.p1.p1.1.2: bisect F5 on x at 2.657813 (extents (1.438542, 1.438542), tilt 90.0 deg, core EMPTY, 16 piece(s); split 2 of 4)
+   node R0+.3.3.3.p1.p1.1.2.1 d8 F5<-['x<=2.657813']: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=924.6)
+   node R0+.3.3.3.p1.p1.1.2.2 d8 F5<-['x>=2.657813']: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=925.7)
+   node R0+.3.3.3.p1.p1.2 d6 TR(0,0)<-None: INTERNAL (2.3 s, 1 rounds; t=928.6)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.3.3.p1.p1.2: bisect F5 on y at 1.938542 (extents (1.729075, 2.877084), tilt 90.0 deg, core EMPTY, 9 piece(s); split 1 of 4)
+   node R0+.3.3.3.p1.p1.2.1 d7 F5<-['y<=1.938542']: INTERNAL (3.4 s, 1 rounds; t=932.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.3.3.p1.p1.2.1: bisect F1 on t at 53.1301 (extents (0.196336, 0.214496), tilt 90.0 deg, core non-empty, 16 piece(s); split 1 of 4)
+   node R0+.3.3.3.p1.p1.2.1.1 d8 F1<-['t<=53.1301']: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=935.6)
+   node R0+.3.3.3.p1.p1.2.1.2 d8 F1<-['t>=53.1301']: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=936.4)
+   node R0+.3.3.3.p1.p1.2.2 d7 F5<-['y>=1.938542']: INTERNAL (1.8 s, 1 rounds; t=938.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.3.3.p1.p1.2.2: bisect F4 on y at 2.438541 (extents (1.816445, 1.877085), tilt 90.0 deg, core EMPTY, 22 piece(s); split 1 of 4)
+   node R0+.3.3.3.p1.p1.2.2.1 d8 F4<-['y<=2.438541']: INTERNAL (4.9 s, 1 rounds; t=944.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.3.3.3.p1.p1.2.2.1: bisect F2 on t at 53.1301 (extents (0.287708, 0.199718), tilt 90.0 deg, core non-empty, 5 piece(s); split 1 of 4)
+   node R0+.3.3.3.p1.p1.2.2.1.1 d9 F2<-['t<=53.1301']: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=945.1)
+   node R0+.3.3.3.p1.p1.2.2.1.2 d9 F2<-['t>=53.1301']: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=945.7)
+   node R0+.3.3.3.p1.p1.2.2.2 d8 F4<-['y>=2.438541']: DEAD by EmptyBox r1 (1.3 s, 1 rounds; t=947.6)
+   node R0+.3.3.4  d3 BR(0,1)<-[17]: DEAD by EmptyBox r1 (1.6 s, 1 rounds; t=949.7)
+   node R0+.3.3.5  d3 BR(0,1)<-[21]: INTERNAL (2.3 s, 1 rounds; t=952.7)
+   no-room (k=9, m=2): UNDECIDED in 31 s (3 pockets; 3 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3.5: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.3.5.p1 d4 pocket<-[0]: INTERNAL (3.9 s, 1 rounds; t=987.9)
+   no-room (k=10, m=1): UNDECIDED in 21 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3.5.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.3.5.p1.p1 d5 pocket<-[0]: INTERNAL (7.3 s, 1 rounds; t=1017.0)
+   node R0+.3.3.5.p1.p1 d5: DEAD by CC -- rule CC at R0+.3.3.5.p1.p1 (Lemma CORNER-COVER; g4 pad, lam 1.014943): rule CC: F2 is a corner square at TR (Lemma CORNER-COVER), so every other meeter of TR(0,0) has an 
+   node R0+.3.3.5.p2 d4 pocket<-[1]: INTERNAL (4.5 s, 1 rounds; t=1022.8)
+   no-room (k=10, m=1): UNDECIDED in 18 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3.5.p2: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.3.5.p2.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (2.7 s, 1 rounds; t=1044.0)
+   node R0+.3.3.5.p2.p2 d5 pocket<-[1]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=1044.7)
+   node R0+.3.3.5.p3 d4 pocket<-[2]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=1045.5)
+   node R0+.3.3.6  d3 BR(0,1)<-[22]: INTERNAL (5.0 s, 1 rounds; t=1051.3)
+   no-room (k=9, m=2): UNDECIDED in 26 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3.6: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.3.3.6.p1 d4 pocket<-[0]: INTERNAL (2.5 s, 1 rounds; t=1079.9)
+   no-room (k=10, m=1): UNDECIDED in 18 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3.6.p1: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.3.6.p1.p1 d5 pocket<-[0]: INTERNAL (9.0 s, 1 rounds; t=1107.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.3.3.6.p1.p1: split F5 at TR(0,0) (meeting fraction 0.384559; alive rows []; named ['F1', 'F2', 'F5'])
+   node R0+.3.3.6.p1.p1.1 d6 TR(0,0)<-None: DEAD by EmptyBox r1 (3.5 s, 1 rounds; t=1111.8)
+   node R0+.3.3.6.p1.p1.2 d6 TR(0,0)<-None: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=1113.1)
+   node R0+.3.3.6.p2 d4 pocket<-[1]: INTERNAL (5.6 s, 1 rounds; t=1119.2)
+   no-room (k=10, m=1): UNDECIDED in 13 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.3.3.6.p2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.3.3.6.p2.p1 d5 pocket<-[0]: DEAD by S-CLIP r1 (5.5 s, 1 rounds; t=1138.6)
+   node R0+.3.3.7  d3 BR(0,1)<-[23]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=1139.9)
+   node R0+.4      d1 TL(1,0)<-[19]: INTERNAL (1.5 s, 1 rounds; t=1142.0)
+   node R0+.4.1    d2 BL(1,1)<-[11]: INTERNAL (1.8 s, 1 rounds; t=1144.6)
+   node R0+.4.1.1  d3 BR(0,1)<-[17]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=1145.7)
+   node R0+.4.1.2  d3 BR(0,1)<-[18]: INTERNAL (4.9 s, 1 rounds; t=1151.3)
+   no-room (k=9, m=2): UNDECIDED in 29 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.1.2: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.4.1.2.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=1181.6)
+   node R0+.4.1.2.p2 d4 pocket<-[1]: INTERNAL (6.1 s, 1 rounds; t=1188.4)
+   no-room (k=10, m=1): DEAD by NOROOM in 4 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.4.1.2.p2 d4: DEAD by NOROOM -- no-room at R0+.4.1.2.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.4.1.2.p3 d4 pocket<-[2]: DEAD by FC r1 (4.4 s, 1 rounds; t=1198.1)
+   node R0+.4.1.3  d3 BR(0,1)<-[21]: INTERNAL (2.3 s, 1 rounds; t=1201.1)
+   node R0+.4.1.3.1 d4 TR(0,0)<-[18]: DEAD by EmptyBox r1 (3.8 s, 1 rounds; t=1205.6)
+   node R0+.4.1.3.2 d4 TR(0,0)<-[23]: INTERNAL (5.7 s, 1 rounds; t=1212.0)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 10 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R0+.4.1.3.2 d4: DEAD by NOROOM-POCKET -- no-room at R0+.4.1.3.2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R0+.4.1.3.3 d4 TR(0,0)<-[24]: INTERNAL (3.0 s, 1 rounds; t=1226.3)
+   no-room (k=10, m=1): UNDECIDED in 8 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.1.3.3: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.1.3.3.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=1235.6)
+   node R0+.4.1.4  d3 BR(0,1)<-[22]: INTERNAL (2.0 s, 1 rounds; t=1238.4)
+   no-room (k=9, m=2): UNDECIDED in 22 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.1.4: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.4.1.4.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (2.7 s, 1 rounds; t=1263.9)
+   node R0+.4.1.4.p2 d4 pocket<-[1]: INTERNAL (3.8 s, 1 rounds; t=1268.6)
+   no-room (k=10, m=1): UNDECIDED in 25 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.1.4.p2: 3 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.1.4.p2.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=1295.7)
+   node R0+.4.1.4.p2.p2 d5 pocket<-[1]: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=1297.7)
+   node R0+.4.1.4.p2.p3 d5 pocket<-[2]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=1299.5)
+   node R0+.4.1.5  d3 BR(0,1)<-[23]: INTERNAL (1.6 s, 1 rounds; t=1301.8)
+   no-room (k=9, m=2): UNDECIDED in 22 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.1.5: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.4.1.5.p1 d4 pocket<-[0]: INTERNAL (3.4 s, 1 rounds; t=1328.4)
+   no-room (k=10, m=1): UNDECIDED in 13 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.1.5.p1: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.1.5.p1.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=1343.0)
+   node R0+.4.1.5.p1.p2 d5 pocket<-[1]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=1344.7)
+   node R0+.4.1.5.p2 d4 pocket<-[1]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=1345.8)
+   node R0+.4.1.5.p3 d4 pocket<-[2]: INTERNAL (4.6 s, 1 rounds; t=1351.2)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.4.1.5.p3 d4: DEAD by NOROOM -- no-room at R0+.4.1.5.p3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.4.2    d2 BL(1,1)<-[12]: INTERNAL (4.8 s, 1 rounds; t=1360.5)
+   node R0+.4.2.1  d3 BR(0,1)<-[21]: INTERNAL (9.4 s, 1 rounds; t=1370.7)
+   node R0+.4.2.1r1 d3 root<-None: INTERNAL (5.7 s, 1 rounds; t=1377.2)
+   no-room (k=10, m=1): UNDECIDED in 12 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.2.1: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.2.1.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=1390.4)
+   node R0+.4.2.1.p2 d4 pocket<-[1]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=1391.4)
+   node R0+.4.2.2  d3 BR(0,1)<-[22]: INTERNAL (5.2 s, 1 rounds; t=1397.4)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 18 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.4.2.2  d3: DEAD by NOROOM-CN -- no-room at R0+.4.2.2 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the re
+   node R0+.4.2.3  d3 BR(0,1)<-[23]: INTERNAL (2.0 s, 1 rounds; t=1419.5)
+   no-room (k=9, m=2): UNDECIDED in 23 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.2.3: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.4.2.3.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=1444.0)
+   node R0+.4.2.3.p2 d4 pocket<-[1]: INTERNAL (5.2 s, 1 rounds; t=1450.0)
+   no-room (k=10, m=1): DEAD by NOROOM in 4 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.4.2.3.p2 d4: DEAD by NOROOM -- no-room at R0+.4.2.3.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.4.2.3.p3 d4 pocket<-[2]: INTERNAL (2.4 s, 1 rounds; t=1458.4)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 11 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R0+.4.2.3.p3 d4: DEAD by NOROOM-POCKET -- no-room at R0+.4.2.3.p3 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R0+.4.3    d2 BL(1,1)<-[16]: INTERNAL (1.2 s, 1 rounds; t=1472.0)
+   node R0+.4.3.1  d3 BR(0,1)<-[17]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=1473.6)
+   node R0+.4.3.2  d3 BR(0,1)<-[18]: INTERNAL (6.2 s, 1 rounds; t=1480.7)
+   no-room (k=9, m=2): UNDECIDED in 28 s (3 pockets; 2 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.3.2: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.4.3.2.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=1509.7)
+   node R0+.4.3.2.p2 d4 pocket<-[1]: INTERNAL (9.1 s, 1 rounds; t=1519.6)
+   no-room (k=10, m=1): UNDECIDED in 17 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.3.2.p2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.3.2.p2.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (3.7 s, 1 rounds; t=1541.2)
+   node R0+.4.3.2.p3 d4 pocket<-[2]: INTERNAL (7.7 s, 1 rounds; t=1549.7)
+   no-room (k=10, m=1): UNDECIDED in 17 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.3.2.p3: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.3.2.p3.p1 d5 pocket<-[0]: DEAD by S-CLIP r1 (3.9 s, 1 rounds; t=1571.9)
+   node R0+.4.3.2.p3.p2 d5 pocket<-[1]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=1573.0)
+   node R0+.4.3.3  d3 BR(0,1)<-[21]: INTERNAL (2.5 s, 1 rounds; t=1576.3)
+   node R0+.4.3.3.1 d4 TR(0,0)<-[18]: DEAD by EmptyBox r1 (2.0 s, 1 rounds; t=1579.3)
+   node R0+.4.3.3.2 d4 TR(0,0)<-[23]: INTERNAL (6.9 s, 1 rounds; t=1587.1)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 11 s (2 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R0+.4.3.3.2 d4: DEAD by NOROOM-POCKET -- no-room at R0+.4.3.3.2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R0+.4.3.3.3 d4 TR(0,0)<-[24]: INTERNAL (1.6 s, 1 rounds; t=1601.4)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.4.3.3.3 d4: DEAD by NOROOM -- no-room at R0+.4.3.3.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.4.3.4  d3 BR(0,1)<-[22]: INTERNAL (1.9 s, 1 rounds; t=1608.6)
+   no-room (k=9, m=2): UNDECIDED in 20 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.3.4: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.4.3.4.p1 d4 pocket<-[0]: INTERNAL (3.6 s, 1 rounds; t=1632.9)
+   no-room (k=10, m=1): UNDECIDED in 21 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.3.4.p1: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.3.4.p1.p1 d5 pocket<-[0]: INTERNAL (5.3 s, 1 rounds; t=1660.5)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R0+.4.3.4.p1.p1: split F4 at BL(1,1) (meeting fraction 0.033514; alive rows [18]; named ['F2', 'F4', 'F5', 'H'])
+   node R0+.4.3.4.p1.p1.1 d6 BL(1,1)<-None: INTERNAL (5.5 s, 1 rounds; t=1667.2)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.4.3.4.p1.p1.1: bisect F5 on y at 2.847548 (extents (0.99671, 1.059072), tilt 90.0 deg, core EMPTY, 25 piece(s); split 1 of 4)
+   node R0+.4.3.4.p1.p1.1.1 d7 F5<-['y<=2.847548']: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=1668.7)
+   node R0+.4.3.4.p1.p1.1.2 d7 F5<-['y>=2.847548']: DEAD by EmptyBox r1 (1.8 s, 1 rounds; t=1671.4)
+   node R0+.4.3.4.p1.p1.2 d6 BL(1,1)<-None: INTERNAL (2.5 s, 1 rounds; t=1674.8)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Lemma ROLE-SPLIT at R0+.4.3.4.p1.p1.2: bisect F5 on y at 2.847548 (extents (0.99671, 1.059072), tilt 90.0 deg, core EMPTY, 25 piece(s); split 1 of 4)
+   node R0+.4.3.4.p1.p1.2.1 d7 F5<-['y<=2.847548']: DEAD by EmptyBox r1 (3.6 s, 1 rounds; t=1679.6)
+   node R0+.4.3.4.p1.p1.2.2 d7 F5<-['y>=2.847548']: DEAD by S-CLIP r1 (1.8 s, 1 rounds; t=1682.2)
+   node R0+.4.3.4.p1.p2 d5 pocket<-[1]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=1684.1)
+   node R0+.4.3.4.p2 d4 pocket<-[1]: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=1687.3)
+   node R0+.4.3.5  d3 BR(0,1)<-[23]: INTERNAL (1.8 s, 1 rounds; t=1690.0)
+   no-room (k=9, m=2): UNDECIDED in 25 s (4 pockets; 2 of 4 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.3.5: 4 pockets (k=9, m=2): the next square instantiated in each
+   node R0+.4.3.5.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=1716.5)
+   node R0+.4.3.5.p2 d4 pocket<-[1]: INTERNAL (5.4 s, 1 rounds; t=1722.9)
+   no-room (k=10, m=1): DEAD by NOROOM in 3 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.4.3.5.p2 d4: DEAD by NOROOM -- no-room at R0+.4.3.5.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.4.3.5.p3 d4 pocket<-[2]: INTERNAL (3.1 s, 1 rounds; t=1730.7)
+   no-room (k=10, m=1): UNDECIDED in 14 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.3.5.p3: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.3.5.p3.p1 d5 pocket<-[0]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=1746.5)
+   node R0+.4.3.5.p3.p2 d5 pocket<-[1]: DEAD by EmptyBox r1 (1.3 s, 1 rounds; t=1748.8)
+   node R0+.4.3.5.p4 d4 pocket<-[3]: DEAD by S-CLIP r1 (1.6 s, 1 rounds; t=1751.3)
+   node R0+.4.4    d2 BL(1,1)<-[17]: INTERNAL (2.8 s, 1 rounds; t=1755.0)
+   node R0+.4.4.1  d3 BR(0,1)<-[16]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=1756.7)
+   node R0+.4.4.2  d3 BR(0,1)<-[21]: INTERNAL (5.7 s, 1 rounds; t=1763.4)
+   node R0+.4.4.2r1 d3 root<-None: INTERNAL (5.8 s, 1 rounds; t=1770.3)
+   no-room (k=10, m=1): UNDECIDED in 11 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R0+.4.4.2: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R0+.4.4.2.p1 d4 pocket<-[0]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=1782.8)
+   node R0+.4.4.2.p2 d4 pocket<-[1]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=1783.9)
+   node R0+.4.4.3  d3 BR(0,1)<-[22]: INTERNAL (2.1 s, 1 rounds; t=1787.0)
+   no-room (k=9, m=2): DEAD by NOROOM-CN in 18 s (2 pockets; pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the)
+   node R0+.4.4.3  d3: DEAD by NOROOM-CN -- no-room at R0+.4.4.3 (k=9, m=2; A189 Lemma 1 + Lemma CN on the role boxes): pocket CN bound 1 < 2 free squares (Lemma CN on the 1 pocket(s) that survive the cover; the re
+   start R0+          => ALIVE (218 nodes; t = 1807 s of 1800.0)
+   => ALIVE (g4_page) in 1807.5 s: 1 start runs, 218 nodes, depth 9, 5 CC kills, 0 exact leaf cascades, 7 NS splits, 43 pocket splits, 12 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 126 dead / 2 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 213 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.16 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 24.7s; R0+.1 d1 INTERNAL 1.9s; R0+.1.1 d2 INTERNAL 2.5s; R0+.1.1.1 d3 DEAD EmptyBox 1.8s; R0+.1.1.2 d3 INTERNAL 2.6s; R0+.1.1.2.p1 d4 INTERNAL 9.5s; R0+.1.1.2.p1.p1 d5 DEAD CC 6.6s; R0+.1.1.2.p2 d4 INTERNAL 4.9s; R0+.1.1.2.p2r1 d4 DEAD S-CLIP 8.2s; R0+.1.1.3 d3 INTERNAL 2.8s; R0+.1.1.3.1 d4 DEAD EmptyBox 6.4s; R0+.1.1.3.2 d4 DEAD NOROOM 8.9s; R0+.1.1.3.3 d4 INTERNAL 3.0s; R0+.1.1.3.3.p1 d5 DEAD CC 7.7s; R0+.1.1.4 d3 INTERNAL 6.6s; R0+.1.1.4.p1 d4 INTERNAL 7.1s; R0+.1.1.4.p1.p1 d5 INTERNAL 8.0s; R0+.1.1.4.p1.p1.1 d6 INTERNAL 2.8s; R0+.1.1.4.p1.p1.1.1 d7 DEAD EmptyBox 0.2s; R0+.1.1.4.p1.p1.1.2 d7 DEAD EmptyBox 0.1s; R0+.1.1.4.p1.p1.2 d6 INTERNAL 1.9s; R0+.1.1.4.p1.p1.2.1 d7 DEAD EmptyBox 2.1s; R0+.1.1.4.p1.p1.2.2 d7 DEAD EmptyBox 0.8s; R0+.1.1.5 d3 INTERNAL 1.5s; R0+.1.1.5.p1 d4 DEAD NOROOM 4.7s; R0+.1.1.5.p2 d4 INTERNAL 2.6s; R0+.1.1.5.p2.p1 d5 DEAD EmptyBox 1.3s; R0+.1.2 d2 INTERNAL 5.4s; R0+.1.2.1 d3 INTERNAL 4.6s; R0+.1.2.1r1 d3 DEAD EmptyBox 0.3s; R0+.1.2.2 d3 INTERNAL 6.1s; R0+.1.2.2r1 d3 DEAD NOROOM 7.0s; R0+.1.2.3 d3 DEAD NOROOM-CN 5.7s; R0+.1.2.4 d3 INTERNAL 1.0s; R0+.1.2.4.p1 d4 DEAD NOROOM 7.2s; R0+.1.2.4.p2 d4 DEAD NOROOM-POCKET 2.4s; R0+.1.3 d2 INTERNAL 1.6s; R0+.1.3.1 d3 DEAD EmptyBox 1.0s; R0+.1.3.2 d3 INTERNAL 3.5s; R0+.1.3.2.p1 d4 INTERNAL 5.1s; R0+.1.3.2.p1.p1 d5 INTERNAL 9.3s; R0+.1.3.2.p1.p1.1 d6 DEAD S-CLIP 3.8s; R0+.1.3.2.p1.p1.2 d6 DEAD S-CLIP 0.6s; R0+.1.3.2.p1.p2 d5 INTERNAL 6.9s; R0+.1.3.2.p1.p2.1 d6 DEAD S-CLIP 3.5s; R0+.1.3.2.p1.p2.2 d6 DEAD S-CLIP 0.6s; R0+.1.3.3 d3 INTERNAL 4.2s; R0+.1.3.3.1 d4 DEAD EmptyBox 3.1s; R0+.1.3.3.2 d4 DEAD NOROOM 2.4s; R0+.1.3.3.3 d4 INTERNAL 1.2s; R0+.1.3.3.3.p1 d5 DEAD EmptyBox 6.1s; R0+.1.3.4 d3 INTERNAL 2.2s; R0+.1.3.4.p1 d4 INTERNAL 3.5s; R0+.1.3.4.p1.p1 d5 INTERNAL 6.2s; R0+.1.3.4.p1.p1.1 d6 DEAD REACH 3.5s; R0+.1.3.4.p1.p1.2 d6 INTERNAL 2.0s; R0+.1.3.4.p1.p1.2.1 d7 DEAD S-CLIP 2.4s; R0+.1.3.4.p1.p1.2.2 d7 DEAD EmptyBox 0.5s; R0+.1.3.5 d3 INTERNAL 1.3s; R0+.1.3.5.p1 d4 DEAD NOROOM 4.5s; R0+.1.3.5.p2 d4 INTERNAL 2.5s; R0+.1.3.5.p2.p1 d5 DEAD EmptyBox 1.7s; R0+.1.3.5.p3 d4 DEAD EmptyBox 0.5s; R0+.1.4 d2 INTERNAL 5.3s; R0+.1.4.1 d3 DEAD EmptyBox 0.6s; R0+.1.4.2 d3 INTERNAL 3.4s; R0+.1.4.2r1 d3 DEAD EmptyBox 0.3s; R0+.1.4.3 d3 INTERNAL 7.5s; R0+.1.4.3r1 d3 DEAD NOROOM 4.3s; R0+.1.4.4 d3 DEAD NOROOM-CN 3.6s; R0+.1.4.5 d3 INTERNAL 2.9s; R0+.1.4.5.p1 d4 DEAD NOROOM 4.7s; R0+.1.4.5.p2 d4 DEAD NOROOM-POCKET 1.9s; R0+.1.5 d2 INTERNAL 3.3s; R0+.1.5r1 d2 INTERNAL 1.6s; R0+.1.5.1 d3 DEAD CC 5.1s; R0+.1.5.2 d3 DEAD EmptyBox 0.4s; R0+.1.5.3 d3 INTERNAL 5.7s; R0+.1.5.3.p1 d4 DEAD S-CLIP 3.0s; R0+.1.5.4 d3 DEAD CC 4.1s; R0+.1.5.5 d3 DEAD EmptyBox 1.1s; R0+.2 d1 INTERNAL 0.6s; R0+.2.1 d2 DEAD EmptyBox 0.1s; R0+.2.2 d2 INTERNAL 1.0s; R0+.2.2.1 d3 DEAD EmptyBox 0.7s; R0+.2.2.2 d3 DEAD REACH 1.4s; R0+.2.2.3 d3 DEAD EmptyBox 0.8s; R0+.2.2.4 d3 DEAD NOROOM 1.5s; R0+.2.3 d2 INTERNAL 0.6s; R0+.2.3.1 d3 DEAD EmptyBox 0.3s; R0+.2.3.2 d3 DEAD REACH 1.0s; R0+.2.3.3 d3 DEAD EmptyBox 0.3s; R0+.2.3.4 d3 DEAD NOROOM 1.0s; R0+.2.4 d2 DEAD EmptyBox 0.1s; R0+.3 d1 INTERNAL 1.6s; R0+.3.1 d2 INTERNAL 3.4s; R0+.3.1.1 d3 DEAD EmptyBox 0.9s; R0+.3.1.2 d3 INTERNAL 4.8s; R0+.3.1.2.p1 d4 DEAD EmptyBox 0.5s; R0+.3.1.2.p2 d4 DEAD EmptyBox 1.0s; R0+.3.1.2.p3 d4 DEAD EmptyBox 0.8s; R0+.3.1.3 d3 INTERNAL 2.1s; R0+.3.1.3.p1 d4 DEAD EmptyBox 2.1s; R0+.3.1.3.p2 d4 DEAD NOROOM 4.6s; R0+.3.1.3.p3 d4 DEAD EmptyBox 0.7s; R0+.3.1.4 d3 DEAD NOROOM-CN 2.3s; R0+.3.1.5 d3 DEAD EmptyBox 1.2s; R0+.3.2 d2 DEAD EmptyBox 0.9s; R0+.3.3 d2 INTERNAL 2.7s; R0+.3.3.1 d3 DEAD NOROOM-CN 5.3s; R0+.3.3.2 d3 DEAD EmptyBox 1.3s; R0+.3.3.3 d3 INTERNAL 5.2s; R0+.3.3.3.p1 d4 INTERNAL 2.6s; R0+.3.3.3.p1.p1 d5 INTERNAL 4.1s; R0+.3.3.3.p1.p1.1 d6 INTERNAL 2.9s; R0+.3.3.3.p1.p1.1.1 d7 INTERNAL 4.5s; R0+.3.3.3.p1.p1.1.1.1 d8 DEAD EmptyBox 1.5s; R0+.3.3.3.p1.p1.1.1.2 d8 DEAD EmptyBox 0.3s; R0+.3.3.3.p1.p1.1.2 d7 INTERNAL 3.6s; R0+.3.3.3.p1.p1.1.2.1 d8 DEAD EmptyBox 0.1s; R0+.3.3.3.p1.p1.1.2.2 d8 DEAD EmptyBox 0.6s; R0+.3.3.3.p1.p1.2 d6 INTERNAL 2.3s; R0+.3.3.3.p1.p1.2.1 d7 INTERNAL 3.4s; R0+.3.3.3.p1.p1.2.1.1 d8 DEAD EmptyBox 2.1s; R0+.3.3.3.p1.p1.2.1.2 d8 DEAD EmptyBox 0.2s; R0+.3.3.3.p1.p1.2.2 d7 INTERNAL 1.8s; R0+.3.3.3.p1.p1.2.2.1 d8 INTERNAL 4.9s; R0+.3.3.3.p1.p1.2.2.1.1 d9 DEAD EmptyBox 0.2s; R0+.3.3.3.p1.p1.2.2.1.2 d9 DEAD EmptyBox 0.1s; R0+.3.3.3.p1.p1.2.2.2 d8 DEAD EmptyBox 1.3s; R0+.3.3.4 d3 DEAD EmptyBox 1.6s; R0+.3.3.5 d3 INTERNAL 2.3s; R0+.3.3.5.p1 d4 INTERNAL 3.9s; R0+.3.3.5.p1.p1 d5 DEAD CC 7.3s; R0+.3.3.5.p2 d4 INTERNAL 4.5s; R0+.3.3.5.p2.p1 d5 DEAD EmptyBox 2.7s; R0+.3.3.5.p2.p2 d5 DEAD EmptyBox 0.1s; R0+.3.3.5.p3 d4 DEAD EmptyBox 0.1s; R0+.3.3.6 d3 INTERNAL 5.0s; R0+.3.3.6.p1 d4 INTERNAL 2.5s; R0+.3.3.6.p1.p1 d5 INTERNAL 9.0s; R0+.3.3.6.p1.p1.1 d6 DEAD EmptyBox 3.5s; R0+.3.3.6.p1.p1.2 d6 DEAD EmptyBox 0.7s; R0+.3.3.6.p2 d4 INTERNAL 5.6s; R0+.3.3.6.p2.p1 d5 DEAD S-CLIP 5.5s; R0+.3.3.7 d3 DEAD EmptyBox 0.7s; R0+.4 d1 INTERNAL 1.5s; R0+.4.1 d2 INTERNAL 1.8s; R0+.4.1.1 d3 DEAD EmptyBox 0.5s; R0+.4.1.2 d3 INTERNAL 4.9s; R0+.4.1.2.p1 d4 DEAD EmptyBox 0.5s; R0+.4.1.2.p2 d4 DEAD NOROOM 6.1s; R0+.4.1.2.p3 d4 DEAD FC 4.4s; R0+.4.1.3 d3 INTERNAL 2.3s; R0+.4.1.3.1 d4 DEAD EmptyBox 3.8s; R0+.4.1.3.2 d4 DEAD NOROOM-POCKET 5.7s; R0+.4.1.3.3 d4 INTERNAL 3.0s; R0+.4.1.3.3.p1 d5 DEAD EmptyBox 1.0s; R0+.4.1.4 d3 INTERNAL 2.0s; R0+.4.1.4.p1 d4 DEAD EmptyBox 2.7s; R0+.4.1.4.p2 d4 INTERNAL 3.8s; R0+.4.1.4.p2.p1 d5 DEAD EmptyBox 1.1s; R0+.4.1.4.p2.p2 d5 DEAD EmptyBox 1.2s; R0+.4.1.4.p2.p3 d5 DEAD EmptyBox 1.0s; R0+.4.1.5 d3 INTERNAL 1.6s; R0+.4.1.5.p1 d4 INTERNAL 3.4s; R0+.4.1.5.p1.p1 d5 DEAD EmptyBox 0.5s; R0+.4.1.5.p1.p2 d5 DEAD EmptyBox 0.8s; R0+.4.1.5.p2 d4 DEAD EmptyBox 0.3s; R0+.4.1.5.p3 d4 DEAD NOROOM 4.6s; R0+.4.2 d2 INTERNAL 4.8s; R0+.4.2.1 d3 INTERNAL 9.4s; R0+.4.2.1r1 d3 INTERNAL 5.7s; R0+.4.2.1.p1 d4 DEAD EmptyBox 0.9s; R0+.4.2.1.p2 d4 DEAD EmptyBox 0.2s; R0+.4.2.2 d3 DEAD NOROOM-CN 5.2s; R0+.4.2.3 d3 INTERNAL 2.0s; R0+.4.2.3.p1 d4 DEAD EmptyBox 0.3s; R0+.4.2.3.p2 d4 DEAD NOROOM 5.2s; R0+.4.2.3.p3 d4 DEAD NOROOM-POCKET 2.4s; R0+.4.3 d2 INTERNAL 1.2s; R0+.4.3.1 d3 DEAD EmptyBox 0.7s; R0+.4.3.2 d3 INTERNAL 6.2s; R0+.4.3.2.p1 d4 DEAD EmptyBox 0.7s; R0+.4.3.2.p2 d4 INTERNAL 9.1s; R0+.4.3.2.p2.p1 d5 DEAD EmptyBox 3.7s; R0+.4.3.2.p3 d4 INTERNAL 7.7s; R0+.4.3.2.p3.p1 d5 DEAD S-CLIP 3.9s; R0+.4.3.2.p3.p2 d5 DEAD EmptyBox 0.2s; R0+.4.3.3 d3 INTERNAL 2.5s; R0+.4.3.3.1 d4 DEAD EmptyBox 2.0s; R0+.4.3.3.2 d4 DEAD NOROOM-POCKET 6.9s; R0+.4.3.3.3 d4 DEAD NOROOM 1.6s; R0+.4.3.4 d3 INTERNAL 1.9s; R0+.4.3.4.p1 d4 INTERNAL 3.6s; R0+.4.3.4.p1.p1 d5 INTERNAL 5.3s; R0+.4.3.4.p1.p1.1 d6 INTERNAL 5.5s; R0+.4.3.4.p1.p1.1.1 d7 DEAD EmptyBox 0.1s; R0+.4.3.4.p1.p1.1.2 d7 DEAD EmptyBox 1.8s; R0+.4.3.4.p1.p1.2 d6 INTERNAL 2.5s; R0+.4.3.4.p1.p1.2.1 d7 DEAD EmptyBox 3.6s; R0+.4.3.4.p1.p1.2.2 d7 DEAD S-CLIP 1.8s; R0+.4.3.4.p1.p2 d5 DEAD EmptyBox 0.9s; R0+.4.3.4.p2 d4 DEAD EmptyBox 2.1s; R0+.4.3.5 d3 INTERNAL 1.8s; R0+.4.3.5.p1 d4 DEAD EmptyBox 0.3s; R0+.4.3.5.p2 d4 DEAD NOROOM 5.4s; R0+.4.3.5.p3 d4 INTERNAL 3.1s; R0+.4.3.5.p3.p1 d5 DEAD EmptyBox 0.6s; R0+.4.3.5.p3.p2 d5 DEAD EmptyBox 1.3s; R0+.4.3.5.p4 d4 DEAD S-CLIP 1.6s; R0+.4.4 d2 INTERNAL 2.8s; R0+.4.4.1 d3 DEAD EmptyBox 0.7s; R0+.4.4.2 d3 INTERNAL 5.7s; R0+.4.4.2r1 d3 INTERNAL 5.8s; R0+.4.4.2.p1 d4 DEAD EmptyBox 0.2s; R0+.4.4.2.p2 d4 DEAD EmptyBox 0.1s; R0+.4.4.3 d3 DEAD NOROOM-CN 2.1s; R0+.4.4.4 d3 ALIVE 0.0s; R0+.4.5 d2 ALIVE 0.0s
+== k5_11_interior_Y0186_r270w4: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 13509, 'misses': 4850, 'entries': 1850}; clip {'hits': 340993, 'misses': 12815060, 'entries': 15060}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 18359, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 218}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 15594, 'obs_misses': 4335, 'build_hits': 0, 'build_misses': 70, 'bisect_hits': 0, 'bisect_misses': 64, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 3980, 'build_entries': 70, 'bisect_entries': 64, 'on': True}
+   A268: k5_11_interior_Y0186_r270w4 g4 R0+ -> ALIVE; count268 1046 call(s), 0 capped, 14 INFEASIBLE (dumps 14: 14 VERIFIED, 0 FAILED), 18.4 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
