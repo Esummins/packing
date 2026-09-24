@@ -42,5 +42,5 @@ tan eta > cos th_D / (cos a + cos th_D) >= cos th_D / (1 + cos th_D): a flat C f
 (eta > 18 deg for th_D <= 60 deg), and then (NEST) needs alpha > eta with alpha >= th_D as well (the separator
 through C's corner (x0 + 1, y0) must clear L_D).  Not a contradiction by itself: the exact chain is part 4's job.
 **3.4 What is still needed for a hand proof of "NEST is infeasible".**  A single chain combining (Sigma) [shallow
-angles impossible], (WEDGE) [steep alpha needs a flat-ish C], FLAT-C [flat C impossible] with quantitative
+angles impossible], (WEDGE) [steep alpha needs a flat-ish C], FLAT-C [a flat C forces eta > 18 deg] with quantitative
 intermediate cases -- a 3-parameter (th_C, alpha, h_v) sweep at worst.  [C] until part 4.
