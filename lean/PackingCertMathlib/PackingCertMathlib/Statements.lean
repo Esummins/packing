@@ -65,6 +65,7 @@ import PackingCertMathlib.Statements.Open.FlatX
 import PackingCertMathlib.Statements.Open.Float2Room
 import PackingCertMathlib.Statements.Open.NoFloat2
 import PackingCertMathlib.Statements.Open.NestResidual
+import PackingCertMathlib.Statements.Open.CornerCost
 import PackingCertMathlib.Statements.SnapRule
 import PackingCertMathlib.Statements.SwapLeaf
 
