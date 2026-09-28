@@ -1,0 +1,90 @@
+03:01:42 [w4] pass 2 start k5_16_interior_Y0672_r270w4 g4:R.5 wall 1800 (lab 7, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 g4 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A270-k5-lower-slabs/certs/csp209_k5_16_interior_Y0672_r270w4_g4_s0.json)
+   INHERIT k5_16_interior_Y0672_r270w4 pad g4: 11 prior trees, 191 paths, 11 branches inherited DEAD (final, with their certificates), 4 start nodes (0 from the A203 root)
+== k5_16_interior_Y0672_r270w4 page pad g4: start attempts/A270-k5-lower-slabs/certs/csp209_k5_16_interior_Y0672_r270w4_g4_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 11 dead branches (final) + 4 start nodes ['R.2.1.4.p1.p1', 'R.3', 'R.4', 'R.5']; H [2.358, 2.498, 2.358, 2.498, 0.0, 14.25]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1          TL(1,0)<-(7,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R0_.json
+   INHERITED DEAD R.2.1.1      BL(1,0)<-(5,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R0_.json
+   INHERITED DEAD R.2.1.2      BL(1,0)<-(6,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R0_.json
+   INHERITED DEAD R.2.1.3      BL(1,0)<-(7,)  [A211 tree: EmptyBox] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R0_.json
+   INHERITED DEAD R.2.1.5      BL(1,0)<-(11,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R.2.1.5.json
+   INHERITED DEAD R.2.1.6      BL(1,0)<-(12,)  [A211 tree: EmptyBox] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R.2.1.6.json
+   INHERITED DEAD R.2.1.7      BL(1,0)<-(15,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R.2.1.7.json
+   INHERITED DEAD R.2.2        TR(0,1)<-(19,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R.2.2.json
+   INHERITED DEAD R.2.3        TR(0,1)<-(21,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R.2.3.json
+   INHERITED DEAD R.2.4        TR(0,1)<-(22,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R.2.4.json
+   INHERITED DEAD R.2.5        TR(0,1)<-(23,)  [A211 tree: EmptyBox] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0672_r270w4__g4_R.2.5.json
+   A229 SHARD: --start R.5 -- 1 of them are start nodes of this page/pad right now (4 start nodes in all)
+   start R.2.1.4.p1.p1: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   start R.4: SKIPPED (filter)
+   start R.5: applied step 1/1 -- TL(1,0) <- [19]
+   node R.5        d0 root: INTERNAL (1.6 s, 1 rounds; t=5.2)
+   node R.5.1      d1 BR(0,1)<-[10]: INTERNAL (1.8 s, 1 rounds; t=7.1)
+   node R.5.1r1    d1 root<-None: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=8.3)
+   node R.5.2      d1 BR(0,1)<-[11]: DEAD by FC r1 (1.9 s, 1 rounds; t=10.2)
+   node R.5.3      d1 BR(0,1)<-[15]: INTERNAL (0.9 s, 1 rounds; t=11.1)
+   node R.5.3r1    d1 root<-None: INTERNAL (1.8 s, 1 rounds; t=12.9)
+   no-room (k=9, m=2): UNDECIDED in 21 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.5.3: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R.5.3.p1   d2 pocket<-[0]: INTERNAL (5.8 s, 1 rounds; t=40.2)
+   node R.5.3.p1r1 d2 root<-None: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=40.5)
+   node R.5.3.p2   d2 pocket<-[1]: INTERNAL (2.9 s, 1 rounds; t=43.4)
+   no-room (k=10, m=1): DEAD by NOROOM-POCKET in 5 s (1 pockets; every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square)
+   node R.5.3.p2   d2: DEAD by NOROOM-POCKET -- no-room at R.5.3.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): every pocket is DEAD (Lemma POCKET-DEAD): the node has no free unit square
+   node R.5.4      d1 BR(0,1)<-[16]: INTERNAL (1.3 s, 1 rounds; t=50.0)
+   node R.5.4.1    d2 BL(1,0)<-[5]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=51.2)
+   node R.5.4.2    d2 BL(1,0)<-[6]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=51.5)
+   node R.5.4.3    d2 BL(1,0)<-[10]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=51.7)
+   node R.5.5      d1 BR(0,1)<-[21]: INTERNAL (1.7 s, 1 rounds; t=53.5)
+   node R.5.5.1    d2 BL(1,0)<-[5, 11]: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=54.0)
+   node R.5.5.2    d2 BL(1,0)<-[5, 16]: DEAD by EmptyBox r1 (1.7 s, 1 rounds; t=55.7)
+   node R.5.5.3    d2 BL(1,0)<-[6, 10]: INTERNAL (1.1 s, 1 rounds; t=56.9)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.5.5.3    d2: DEAD by EmptyBox -- no-room at R.5.5.3 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.5.5.4    d2 BL(1,0)<-[6, 15]: INTERNAL (0.8 s, 1 rounds; t=58.0)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.5.5.4    d2: DEAD by EmptyBox -- no-room at R.5.5.4 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.5.5.5    d2 BL(1,0)<-[10, 11]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=58.5)
+   node R.5.5.6    d2 BL(1,0)<-[10, 16]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=58.9)
+   node R.5.5.7    d2 BL(1,0)<-[11, 15]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=59.5)
+   node R.5.6      d1 BR(0,1)<-[22]: INTERNAL (1.6 s, 1 rounds; t=61.1)
+   node R.5.6.1    d2 BL(1,0)<-[5, 6]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=61.4)
+   node R.5.6.2    d2 BL(1,0)<-[5, 11]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=61.7)
+   node R.5.6.3    d2 BL(1,0)<-[5, 16]: DEAD by EmptyBox r1 (1.9 s, 1 rounds; t=63.6)
+   node R.5.6.4    d2 BL(1,0)<-[6, 10]: INTERNAL (0.8 s, 1 rounds; t=64.5)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.5.6.4    d2: DEAD by EmptyBox -- no-room at R.5.6.4 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.5.6.5    d2 BL(1,0)<-[6, 15]: INTERNAL (0.9 s, 1 rounds; t=65.6)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.5.6.5    d2: DEAD by EmptyBox -- no-room at R.5.6.5 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.5.6.6    d2 BL(1,0)<-[6, 16]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=66.1)
+   node R.5.6.7    d2 BL(1,0)<-[10, 11]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=66.5)
+   node R.5.6.8    d2 BL(1,0)<-[10, 16]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=66.9)
+   node R.5.6.9    d2 BL(1,0)<-[11, 15]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=67.6)
+   node R.5.7      d1 BR(0,1)<-[23]: INTERNAL (1.3 s, 1 rounds; t=69.1)
+   node R.5.7.1    d2 BL(1,0)<-[5, 11]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=69.5)
+   node R.5.7.2    d2 BL(1,0)<-[5, 16]: DEAD by EmptyBox r1 (1.5 s, 1 rounds; t=71.0)
+   node R.5.7.3    d2 BL(1,0)<-[6, 10]: INTERNAL (0.9 s, 1 rounds; t=72.0)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.5.7.3    d2: DEAD by EmptyBox -- no-room at R.5.7.3 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.5.7.4    d2 BL(1,0)<-[6, 15]: INTERNAL (0.9 s, 1 rounds; t=73.2)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf)
+   node R.5.7.4    d2: DEAD by EmptyBox -- no-room at R.5.7.4 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F3): every pose is impossible -- the case is dead by the pair leaf
+   node R.5.7.5    d2 BL(1,0)<-[6, 16]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=73.8)
+   node R.5.7.6    d2 BL(1,0)<-[10, 11]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=74.1)
+   node R.5.7.7    d2 BL(1,0)<-[10, 16]: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=74.5)
+   node R.5.7.8    d2 BL(1,0)<-[11, 15]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=75.2)
+   start R.5          => DEAD (40 nodes; t = 75 s of 1800.0)
+   => ALIVE (g4_page) in 75.3 s: 4 start runs, 40 nodes, depth 2, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 1 pocket splits, 0 role splits (0 empty-half kills), 11 inherited dead (11 up front + 0 in tree), 42 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 23 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1.1 d3 DEAD INHERIT 0.0s; R.2.1.2 d3 DEAD INHERIT 0.0s; R.2.1.3 d3 DEAD INHERIT 0.0s; R.2.1.5 d3 DEAD INHERIT 0.0s; R.2.1.6 d3 DEAD INHERIT 0.0s; R.2.1.7 d3 DEAD INHERIT 0.0s; R.2.2 d2 DEAD INHERIT 0.0s; R.2.3 d2 DEAD INHERIT 0.0s; R.2.4 d2 DEAD INHERIT 0.0s; R.2.5 d2 DEAD INHERIT 0.0s; R.5 d0 INTERNAL 1.6s; R.5.1 d1 INTERNAL 1.8s; R.5.1r1 d1 DEAD EmptyBox 1.2s; R.5.2 d1 DEAD FC 1.9s; R.5.3 d1 INTERNAL 0.9s; R.5.3r1 d1 INTERNAL 1.8s; R.5.3.p1 d2 INTERNAL 5.8s; R.5.3.p1r1 d2 DEAD EmptyBox 0.3s; R.5.3.p2 d2 DEAD NOROOM-POCKET 2.9s; R.5.4 d1 INTERNAL 1.3s; R.5.4.1 d2 DEAD EmptyBox 1.1s; R.5.4.2 d2 DEAD EmptyBox 0.2s; R.5.4.3 d2 DEAD EmptyBox 0.2s; R.5.5 d1 INTERNAL 1.7s; R.5.5.1 d2 DEAD EmptyBox 0.4s; R.5.5.2 d2 DEAD EmptyBox 1.7s; R.5.5.3 d2 DEAD EmptyBox 1.1s; R.5.5.4 d2 DEAD EmptyBox 0.8s; R.5.5.5 d2 DEAD EmptyBox 0.3s; R.5.5.6 d2 DEAD EmptyBox 0.3s; R.5.5.7 d2 DEAD EmptyBox 0.6s; R.5.6 d1 INTERNAL 1.6s; R.5.6.1 d2 DEAD EmptyBox 0.2s; R.5.6.2 d2 DEAD EmptyBox 0.2s; R.5.6.3 d2 DEAD EmptyBox 1.9s; R.5.6.4 d2 DEAD EmptyBox 0.8s; R.5.6.5 d2 DEAD EmptyBox 0.9s; R.5.6.6 d2 DEAD EmptyBox 0.2s; R.5.6.7 d2 DEAD EmptyBox 0.3s; R.5.6.8 d2 DEAD EmptyBox 0.3s; R.5.6.9 d2 DEAD EmptyBox 0.6s; R.5.7 d1 INTERNAL 1.3s; R.5.7.1 d2 DEAD EmptyBox 0.2s; R.5.7.2 d2 DEAD EmptyBox 1.5s; R.5.7.3 d2 DEAD EmptyBox 0.9s; R.5.7.4 d2 DEAD EmptyBox 0.9s; R.5.7.5 d2 DEAD EmptyBox 0.2s; R.5.7.6 d2 DEAD EmptyBox 0.3s; R.5.7.7 d2 DEAD EmptyBox 0.3s; R.5.7.8 d2 DEAD EmptyBox 0.5s
+== k5_16_interior_Y0672_r270w4: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1395, 'misses': 448, 'entries': 448}; clip {'hits': 40781, 'misses': 429121, 'entries': 29121}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1843, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 41}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 1462, 'obs_misses': 428, 'build_hits': 0, 'build_misses': 2, 'bisect_hits': 0, 'bisect_misses': 2, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 428, 'build_entries': 8, 'bisect_entries': 2, 'on': True}
+   A268: k5_16_interior_Y0672_r270w4 g4 R.5 -> ALIVE; count268 237 call(s), 0 capped, 1 INFEASIBLE (dumps 1: 1 VERIFIED, 0 FAILED), 1.6 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
