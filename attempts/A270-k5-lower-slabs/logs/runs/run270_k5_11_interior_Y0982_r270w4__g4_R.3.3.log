@@ -1,0 +1,82 @@
+00:42:29 [w3] pass 2 start k5_11_interior_Y0982_r270w4 g4:R.3.3 wall 1800 (lab 7, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 g4 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A270-k5-lower-slabs/certs/csp209_k5_11_interior_Y0982_r270w4_g4_s0.json)
+   INHERIT k5_11_interior_Y0982_r270w4 pad g4: 5 prior trees, 238 paths, 9 branches inherited DEAD (final, with their certificates), 4 start nodes (0 from the A203 root)
+== k5_11_interior_Y0982_r270w4 page pad g4: start attempts/A270-k5-lower-slabs/certs/csp209_k5_11_interior_Y0982_r270w4_g4_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 9 dead branches (final) + 4 start nodes ['R.3.2', 'R.3.3', 'R.3.4', 'R.3.5']; H [1.38, 1.519, 2.218, 2.358, 41.112, 53.13]; forced H []; 4 slots; free squares 5
+   INHERITED DEAD R.1          TL(1,0)<-(14,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R0_.json
+   INHERITED DEAD R.2          TL(1,0)<-(18,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R0_.json
+   INHERITED DEAD R.3.1.1      BR(0,1)<-(17,)  [A211 tree: EmptyBox] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R0_.json
+   INHERITED DEAD R.3.1.2      BR(0,1)<-(18,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R0_.json
+   INHERITED DEAD R.3.1.3      BR(0,1)<-(21,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R0_.json
+   INHERITED DEAD R.3.1.4      BR(0,1)<-(22,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R0_.json
+   INHERITED DEAD R.3.1.5.p1   (3.068863, 3.377084, 1.499999, 1.907968)<-(0,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R.3.1.5.p1.json
+   INHERITED DEAD R.3.1.5.p2   (1.499999, 1.892396, 3.223479, 3.377084)<-(1,)  [A211 tree: EmptyBox] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R.3.1.5.p2.json
+   INHERITED DEAD R.3.1.5.p3   (3.042491, 3.377084, 3.043618, 3.377084)<-(2,)  [A211 tree: NOROOM] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0982_r270w4__g4_R.3.1.5.p3.json
+   A229 SHARD: --start R.3.3 -- 1 of them are start nodes of this page/pad right now (4 start nodes in all)
+   start R.3.2: SKIPPED (filter)
+   start R.3.3: applied step 1/1 -- BL(1,1) <- [16]
+   node R.3.3      d0 root: INTERNAL (1.6 s, 1 rounds; t=8.6)
+   node R.3.3.1    d1 BR(0,1)<-[17]: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=9.6)
+   node R.3.3.2    d1 BR(0,1)<-[18]: INTERNAL (2.1 s, 1 rounds; t=11.8)
+   no-room (k=9, m=2): UNDECIDED in 28 s (3 pockets; 3 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.2: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R.3.3.2.p1 d2 pocket<-[0]: DEAD by EmptyBox r1 (2.1 s, 1 rounds; t=42.2)
+   node R.3.3.2.p2 d2 pocket<-[1]: INTERNAL (7.2 s, 1 rounds; t=49.4)
+   no-room (k=10, m=1): UNDECIDED in 13 s (1 pockets; 1 of 1 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.2.p2: 1 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.3.2.p2.p1 d3 pocket<-[0]: DEAD by S-CLIP r1 (2.1 s, 1 rounds; t=64.3)
+   node R.3.3.2.p3 d2 pocket<-[2]: INTERNAL (5.3 s, 1 rounds; t=69.6)
+   no-room (k=10, m=1): DEAD by EmptyBox in 0 s (0 pockets; EmptyBox(F4): every pose is impossible -- the case is dead by the pair leaf)
+   node R.3.3.2.p3 d2: DEAD by EmptyBox -- no-room at R.3.3.2.p3 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F4): every pose is impossible -- the case is dead by the pair leaf
+   node R.3.3.3    d1 BR(0,1)<-[21]: INTERNAL (2.5 s, 1 rounds; t=72.6)
+   node R.3.3.3.1  d2 TR(0,0)<-[18]: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=73.2)
+   node R.3.3.3.2  d2 TR(0,0)<-[23]: INTERNAL (6.3 s, 1 rounds; t=79.6)
+   no-room (k=10, m=1): UNDECIDED in 14 s (2 pockets; 1 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.3.2: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.3.3.2.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=94.9)
+   node R.3.3.3.2.p2 d3 pocket<-[1]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=95.0)
+   node R.3.3.3.3  d2 TR(0,0)<-[24]: INTERNAL (3.2 s, 1 rounds; t=98.3)
+   no-room (k=10, m=1): DEAD by NOROOM in 1 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.3.3.3  d2: DEAD by NOROOM -- no-room at R.3.3.3.3 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.3.4    d1 BR(0,1)<-[22]: INTERNAL (1.8 s, 1 rounds; t=101.5)
+   no-room (k=9, m=2): UNDECIDED in 23 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.4: 2 pockets (k=9, m=2): the next square instantiated in each
+   node R.3.3.4.p1 d2 pocket<-[0]: INTERNAL (3.9 s, 1 rounds; t=128.3)
+   no-room (k=10, m=1): UNDECIDED in 21 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.4.p1: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.3.4.p1.p1 d3 pocket<-[0]: INTERNAL (2.8 s, 1 rounds; t=152.0)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.3.3.4.p1.p1: split F1 at TR(0,0) (meeting fraction 0.220565; alive rows []; named ['F1', 'F4', 'F5'])
+   node R.3.3.4.p1.p1.1 d4 TR(0,0)<-None: DEAD by S-CLIP r1 (2.0 s, 1 rounds; t=154.1)
+   node R.3.3.4.p1.p1.2 d4 TR(0,0)<-None: DEAD by S-CLIP r1 (0.4 s, 1 rounds; t=154.6)
+   node R.3.3.4.p1.p2 d3 pocket<-[1]: DEAD by EmptyBox r1 (1.3 s, 1 rounds; t=156.0)
+   node R.3.3.4.p2 d2 pocket<-[1]: INTERNAL (3.6 s, 1 rounds; t=159.6)
+   no-room (k=10, m=1): DEAD by EmptyBox in 2 s (0 pockets; EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf)
+   node R.3.3.4.p2 d2: DEAD by EmptyBox -- no-room at R.3.3.4.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.3.3.5    d1 BR(0,1)<-[23]: INTERNAL (1.7 s, 1 rounds; t=163.3)
+   no-room (k=9, m=2): UNDECIDED in 26 s (3 pockets; 3 of 3 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.5: 3 pockets (k=9, m=2): the next square instantiated in each
+   node R.3.3.5.p1 d2 pocket<-[0]: DEAD by EmptyBox r1 (4.7 s, 1 rounds; t=193.9)
+   node R.3.3.5.p2 d2 pocket<-[1]: INTERNAL (3.7 s, 1 rounds; t=197.7)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R.3.3.5.p2 d2: DEAD by NOROOM -- no-room at R.3.3.5.p2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.3.5.p3 d2 pocket<-[2]: INTERNAL (2.2 s, 1 rounds; t=202.4)
+   no-room (k=10, m=1): UNDECIDED in 19 s (2 pockets; 2 of 2 pocket(s) survive the cover)
+   Lemma POCKET at R.3.3.5.p3: 2 pockets (k=10, m=1): the next square instantiated in each
+   node R.3.3.5.p3.p1 d3 pocket<-[0]: DEAD by EmptyBox r1 (1.6 s, 1 rounds; t=223.1)
+   node R.3.3.5.p3.p2 d3 pocket<-[1]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=224.0)
+   start R.3.3        => DEAD (26 nodes; t = 224 s of 1800.0)
+   start R.3.4: SKIPPED (filter)
+   start R.3.5: SKIPPED (filter)
+   => ALIVE (g4_page) in 224.1 s: 4 start runs, 26 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 1 NS splits, 7 pocket splits, 0 role splits (0 empty-half kills), 9 inherited dead (9 up front + 0 in tree), 25 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 26 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2 d1 DEAD INHERIT 0.0s; R.3.1.1 d3 DEAD INHERIT 0.0s; R.3.1.2 d3 DEAD INHERIT 0.0s; R.3.1.3 d3 DEAD INHERIT 0.0s; R.3.1.4 d3 DEAD INHERIT 0.0s; R.3.1.5.p1 d4 DEAD INHERIT 0.0s; R.3.1.5.p2 d4 DEAD INHERIT 0.0s; R.3.1.5.p3 d4 DEAD INHERIT 0.0s; R.3.3 d0 INTERNAL 1.6s; R.3.3.1 d1 DEAD EmptyBox 1.0s; R.3.3.2 d1 INTERNAL 2.1s; R.3.3.2.p1 d2 DEAD EmptyBox 2.1s; R.3.3.2.p2 d2 INTERNAL 7.2s; R.3.3.2.p2.p1 d3 DEAD S-CLIP 2.1s; R.3.3.2.p3 d2 DEAD EmptyBox 5.3s; R.3.3.3 d1 INTERNAL 2.5s; R.3.3.3.1 d2 DEAD EmptyBox 0.5s; R.3.3.3.2 d2 INTERNAL 6.3s; R.3.3.3.2.p1 d3 DEAD EmptyBox 0.9s; R.3.3.3.2.p2 d3 DEAD EmptyBox 0.1s; R.3.3.3.3 d2 DEAD NOROOM 3.2s; R.3.3.4 d1 INTERNAL 1.8s; R.3.3.4.p1 d2 INTERNAL 3.9s; R.3.3.4.p1.p1 d3 INTERNAL 2.8s; R.3.3.4.p1.p1.1 d4 DEAD S-CLIP 2.0s; R.3.3.4.p1.p1.2 d4 DEAD S-CLIP 0.4s; R.3.3.4.p1.p2 d3 DEAD EmptyBox 1.3s; R.3.3.4.p2 d2 DEAD EmptyBox 3.6s; R.3.3.5 d1 INTERNAL 1.7s; R.3.3.5.p1 d2 DEAD EmptyBox 4.7s; R.3.3.5.p2 d2 DEAD NOROOM 3.7s; R.3.3.5.p3 d2 INTERNAL 2.2s; R.3.3.5.p3.p1 d3 DEAD EmptyBox 1.6s; R.3.3.5.p3.p2 d3 DEAD EmptyBox 0.8s
+== k5_11_interior_Y0982_r270w4: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 1803, 'misses': 703, 'entries': 703}; clip {'hits': 40936, 'misses': 2887068, 'entries': 87068}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 2506, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 27}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 2117, 'obs_misses': 618, 'build_hits': 0, 'build_misses': 9, 'bisect_hits': 0, 'bisect_misses': 8, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 583, 'build_entries': 11, 'bisect_entries': 8, 'on': True}
+   A268: k5_11_interior_Y0982_r270w4 g4 R.3.3 -> ALIVE; count268 127 call(s), 0 capped, 1 INFEASIBLE (dumps 1: 1 VERIFIED, 0 FAILED), 1.2 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
