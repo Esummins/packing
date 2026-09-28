@@ -221,6 +221,9 @@ def run_rings(sides, restarts):
     classes = sorted({canonical(list(r)) for r in itertools.product(['T', 'Ff', 'Fw'], repeat=4)})
     out = {}
     for roles in classes:
+        if os.path.exists(os.path.join(HERE, '..', 'logs', 'STOP')):       # coordinator's stop file
+            print('STOP seen, exiting', flush=True)
+            break
         wt = wall_types(list(roles))
         dead = ('Pi', 'Pi') in wt
         f = sum(r != 'T' for r in roles)
