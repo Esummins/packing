@@ -1,0 +1,56 @@
+16:47:40 [w2] pass 3 start k5_11_interior_Y0803_r270w4 g4:R.2 wall 1800 (lab 7, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 g4 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A270-k5-lower-slabs/certs/csp209_k5_11_interior_Y0803_r270w4_g4_s0.json)
+   INHERIT k5_11_interior_Y0803_r270w4 pad g4: 1 prior trees, 27 paths, 1 branches inherited DEAD (final, with their certificates), 2 start nodes (0 from the A203 root)
+== k5_11_interior_Y0803_r270w4 page pad g4: start attempts/A270-k5-lower-slabs/certs/csp209_k5_11_interior_Y0803_r270w4_g4_s0.json; basins [('BL(1,1)', 0.06)]; INHERIT 1 dead branches (final) + 2 start nodes ['R.2', 'R0++/BL(1,1)']; H [1.939, 2.078, 1.659, 1.799, 53.13, 64.011]; forced H ['BL(1,1)']; 4 slots; free squares 5
+   INHERITED DEAD R.1          BL(1,1)<-(8,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_11_interior_Y0803_r270w4__g4_R0_.json
+   A229 SHARD: --start R.2 -- 1 of them are start nodes of this page/pad right now (2 start nodes in all)
+Traceback (most recent call last):
+  File "C:\Users\esumm\code\packing\attempts\A270-k5-lower-slabs\code\run270.py", line 65, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A270-k5-lower-slabs\code\run270.py", line 59, in main
+    runpy.run_path(sys.argv[0], run_name="__main__")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 426, in <module>
+    run_page(doc, a, cert)
+    ~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 375, in run_page
+    key, v = run_tree(doc, a, pad, cert, log=log)
+             ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 238, in run_tree
+    agg = run_starts(doc, d, a, pad, cert, T, rec, cls, start, basins, rows, starts, dead_paths, base, M is not None, log=log)
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\run211.py", line 315, in run_starts
+    out = tree.run()
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\tree206b.py", line 39, in run
+    clip, rnd = N6.cascade(pg, self.rounds, log=self.log)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\tree207.py", line 108, in cascade
+    clip, rnd = TB.cascade(pg, rounds, log=log)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\tree205b.py", line 43, in cascade
+    PB.run(pg, max_rounds=rounds, on_round=on_round)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\poly204b.py", line 191, in run
+    info = propagate_round(self, rnd)
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\poly204b.py", line 24, in propagate_round
+    free_opts, fixed_opts, single = self.build_options()
+                                    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\tree206.py", line 77, in build_options
+    free_opts, fixed_opts, single = T5.TreePage.build_options(self)
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A211-coarse-tree\code\tree205.py", line 146, in build_options
+    free_opts, fixed_opts, single = P.PolyPage.build_options(self)
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\esumm\code\packing\attempts\A198-fastprop\code\fastprop.py", line 516, in build_options
+    cells = self.role_cells(role)
+  File "C:\Users\esumm\code\packing\attempts\A198-fastprop\code\fastprop.py", line 461, in role_cells
+    pcs = self.nd.boxes[role].pieces
+          ~~~~~~~~~~~~~^^^^^^
+KeyError: 'F2'
