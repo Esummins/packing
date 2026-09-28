@@ -32,9 +32,9 @@ Proof.  Another toucher Q' above Q has its lowest vertex at abscissa sin th' in 
 Q's upper boundary is concave on [0, w] with minimum min(y_L, y_R) at an endpoint, so Q' lies above min(y_L, y_R);
 the flat case is y_up = 1 + d.  Sharp: Q' nesting on the low end vertex attains it.  QED
 Corollary (poker): for the poker B of an F corner (flat A = [d, 1+d] x [0,1] on the floor), y_L = 1 - d_B + cos th
->= 1 + psi(th), psi(t) := (1 - sin t)/cos t, so E(B) >= 1 + psi(th) (th <= 45) and E(B) >= 1 + psi(th) - cos th +
-sin th = 1 + sin th - (1 - sin th)(sec th - 1) ... >= 1 + sin th - ... ; in every case E(B) > 1 (psi(th) > 0 for
-th < 90).  The full REACH of B along its wall is y_T >= 1 + psi(th) + sin th >= 2 (TOP-2), but only E(B) is
+>= 1 + psi(th), psi(t) := (1 - sin t)/cos t, so E(B) >= 1 + psi(th) for th <= 45 deg, and for th > 45 deg
+E(B) = y_V + sin th >= 2 - cos th (TOP-2's inequality (1 - sin th) tan th <= w(th) - 1); in every case E(B) >= 1 +
+min(psi(th), 1 - cos th) > 1.  The full REACH of B along its wall is y_T >= 1 + psi(th) + sin th >= 2 (TOP-2), but only E(B) is
 exclusive: a tilted neighbour may nest under B's high vertex (STACK / the mutual pair), a flat neighbour may not
 (FLAT-ABOVE: its bottom >= y_T).
 Lemma EXT-tau.  A T-meeter B of frame tilt th and offset d_B (its low vertex at distance d_B from the far wall,
