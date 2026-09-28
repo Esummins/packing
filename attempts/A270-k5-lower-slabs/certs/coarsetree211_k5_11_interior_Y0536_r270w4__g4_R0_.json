@@ -1,0 +1,61 @@
+{
+ "nid": "k5_11_interior_Y0536_r270w4",
+ "runs": {},
+ "cls": "k5_11",
+ "record": "attempts/A270-k5-lower-slabs/records/k5_11_interior_Y0536_r270w4.json",
+ "tree": "k5_11_interior_G1",
+ "level": "1",
+ "stage0": {
+  "g4": {
+   "verdict": "DEAD",
+   "leaf": "H-CONSISTENCY: no piece of H is compatible with any option of a forced slot (mutual clip {'MC:TL(1,0)': 512}; 512 units, 25 options)",
+   "seconds": 12.9,
+   "source": "A209 csp209 (A203's Stage0 + CSP on the record)",
+   "file": "attempts/A270-k5-lower-slabs/certs/csp209_k5_11_interior_Y0536_r270w4_g4_s0.json",
+   "cached": false,
+   "kills": {
+    "H-clip": 0,
+    "P": 3480,
+    "W": 871,
+    "C": 852,
+    "M": 2579,
+    "L": 14,
+    "R": 1935,
+    "X": 56
+   },
+   "caps": {},
+   "forced_H": [],
+   "n_units_alive": 0,
+   "n_units": 512,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)"
+  }
+ },
+ "verdicts": {
+  "g4": "DEAD (stage 0)"
+ },
+ "stage_reached": "0",
+ "a268": [
+  {
+   "count": true,
+   "force": {
+    "forced": 0,
+    "skipped_cap": 0,
+    "none": 0
+   },
+   "node_cap": 2000000,
+   "budget": 240.0,
+   "calls": 0,
+   "capped": 0,
+   "infeasible": 0,
+   "count_seconds": 0,
+   "max_nodes": 0,
+   "dumps": [],
+   "verifier": "[V: attempts/A268-terminal-leaves/code/verify268.py <dump>] for every JOINT COUNT kill decided by count268 (Lemma COUNT-PRUNE, notes/terminal268.md s.2); forced splits: Lemma ROLE-SPLIT (s.3)",
+   "verified": 0,
+   "verify_failed": 0,
+   "pad": "g4",
+   "start": "R0+",
+   "when": "2026-09-28 09:08:32"
+  }
+ ]
+}
