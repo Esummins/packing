@@ -1,0 +1,26 @@
+03:41:50 [w4] pass 2 start k5_16_interior_Y0839_r270w4 g4:R0+ wall 1800 (lab 7, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y0839_r270w4 at the g4 pad: ALIVE in 24394 ms; kills {'H-clip': 0, 'P': 4940, 'W': 1795, 'C': 1242, 'M': 4243, 'L': 7, 'R': 3335, 'X': 963}; CSP units 485 -> 485 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H ['BR(0,1)']
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0839_r270w4 pad g4: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0839_r270w4 page pad g4: start attempts/A270-k5-lower-slabs/certs/csp209_k5_16_interior_Y0839_r270w4_g4_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.498, 2.637, 1.519, 1.659, 53.13, 64.011]; forced H ['BR(0,1)']; 6 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (3.2 s, 1 rounds; t=3.2)
+   node R0+.1      d1 BR(0,1)<-[10]: DEAD by FC r1 (1.6 s, 1 rounds; t=4.9)
+   node R0+.2      d1 BR(0,1)<-[15]: INTERNAL (1.5 s, 1 rounds; t=6.4)
+   node R0+.2r1    d1 root<-None: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=7.6)
+   node R0+.3      d1 BR(0,1)<-[18]: DEAD by REACH r1 (0.8 s, 1 rounds; t=8.4)
+   node R0+.4      d1 BR(0,1)<-[23]: DEAD by FC r1 (1.4 s, 1 rounds; t=9.8)
+   start R0+          => DEAD (6 nodes; t = 10 s of 1800.0)
+   => DEAD (g4_page) in 9.8 s: 1 start runs, 6 nodes, depth 1, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 4 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 2 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 3.2s; R0+.1 d1 DEAD FC 1.6s; R0+.2 d1 INTERNAL 1.5s; R0+.2r1 d1 DEAD EmptyBox 1.2s; R0+.3 d1 DEAD REACH 0.8s; R0+.4 d1 DEAD FC 1.4s
+== k5_16_interior_Y0839_r270w4: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 137, 'misses': 59, 'entries': 59}; clip {'hits': 7087, 'misses': 7436, 'entries': 7436}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 196, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 6}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 139, 'obs_misses': 57, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 57, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   A268: k5_16_interior_Y0839_r270w4 g4 R0+ -> DEAD; count268 18 call(s), 0 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 0.1 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
