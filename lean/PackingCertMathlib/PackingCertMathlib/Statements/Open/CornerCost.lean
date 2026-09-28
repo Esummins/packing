@@ -4,29 +4,42 @@ import PackingCertMathlib.Statements.Open.TypeTChase
 /-!
 # -- OPEN: CORNER COST -- the two corner classes F / T, their wall roles, and the f-table (A281)
 
-`docs/proofs/corner_cost.md` (parts in `attempts/A281-corner-cost/notes/`).  On the k0 window every corner
-box is doubly met with at most one toucher per wall; the PAIR corner's two touchers are either one FLAT +
-one POKER (class F) or both TILTED (class T).  Each corner puts one meeter on each of its two walls, so a
-corner is `T`, `Ff` (flat on its outgoing wall, poker on its incoming wall) or `Fw` (the mirror), and every
-wall carries a PAIR of roles from {Phi, Pi, tau}.  The finite bookkeeping below is decided by `decide` over
-the 81 assignments (case split + `decide`); the geometry enters through two named hypotheses on the predicate `Realised`
+`docs/proofs/corner_cost.md` (parts in `attempts/A281-corner-cost/notes/`).  On the k0 window
+every corner
+box is doubly met with at most one toucher per wall; the PAIR corner's two touchers are either one
+FLAT +
+one POKER (class F) or both TILTED (class T).  Each corner puts one meeter on each of its two
+walls, so a
+corner is `T`, `Ff` (flat on its outgoing wall, poker on its incoming wall) or `Fw` (the mirror),
+and every
+wall carries a PAIR of roles from {Phi, Pi, tau}.  The finite bookkeeping below is decided by
+`decide` over
+the 81 assignments (case split + `decide`); the geometry enters through two named hypotheses on
+the predicate `Realised`
 ("some k0 packing of eleven squares at a side in [3.82, ŝ] has these four corner classes"):
 
-* `no_PiPi_window` [T-prose from `two_pokers_window`]: a realised assignment has no wall of type Pi-Pi
+* `no_PiPi_window` [T-prose from `two_pokers_window`]: a realised assignment has no wall of type
+Pi-Pi
   (TWO-POKERS, s* = 3.9342 > ŝ).
-* `notches_le_three` [M, SEPARATE-NOTCHES]: on a Phi-Pi wall the poker's slot needs a FREE square (the
-  flat cannot meet it, FLAT-ABOVE; no other meeter can, PROJECTION / SAME-WALL), one free square serves at
+* `notches_le_three` [M, SEPARATE-NOTCHES]: on a Phi-Pi wall the poker's slot needs a FREE square
+(the
+  flat cannot meet it, FLAT-ABOVE; no other meeter can, PROJECTION / SAME-WALL), one free square
+  serves at
   most one poker notch, and there are three free squares.
 
-Consequences (theorems): `allF_is_pinwheel` (four F corners without a Pi-Pi wall have four Phi-Pi walls),
-`realised_has_T` (every realised skeleton has a T corner), `notches_of_noPiPi` (the count never exceeds
-four and the pinwheel is the only assignment reaching it).  The [T]-only layer of the f-table (the room
+Consequences (theorems): `allF_is_pinwheel` (four F corners without a Pi-Pi wall have four Phi-Pi
+walls),
+`realised_has_T` (every realised skeleton has a T corner), `notches_of_noPiPi` (the count never
+exceeds
+four and the pinwheel is the only assignment reaching it).  The [T]-only layer of the f-table (the
+room
 count with PROJECTION sharing, which kills nothing) is `count281.py`; it is not formalised.
 -/
 
 namespace PackingCert.S11.OpenLemmas
 
-/-- the class of a PAIR corner: both tilted / flat on the outgoing wall / flat on the incoming wall. -/
+/-- the class of a PAIR corner: both tilted / flat on the outgoing wall / flat on the incoming
+wall. -/
 inductive Role | T | Ff | Fw
   deriving DecidableEq, Repr
 
@@ -95,9 +108,11 @@ theorem notches_of_noPiPi :
   rintro ⟨c0, c1, c2, c3⟩
   cases c0 <;> cases c1 <;> cases c2 <;> cases c3 <;> decide
 
-/-- **T OR PINWHEEL** [T]: without a Pi-Pi wall, either some corner is class T or all four are F in the
+/-- **T OR PINWHEEL** [T]: without a Pi-Pi wall, either some corner is class T or all four are F
+in the
 pinwheel arrangement. -/
-theorem hasT_or_pinwheel : ∀ a : Assign, a.hasPiPi = false → a.hasT = true ∨ a.notches = 4 := by
+theorem hasT_or_pinwheel :
+    ∀ a : Assign, a.hasPiPi = false → a.hasT = true ∨ a.notches = 4 := by
   rintro ⟨c0, c1, c2, c3⟩
   cases c0 <;> cases c1 <;> cases c2 <;> cases c3 <;> decide
 
@@ -105,12 +120,15 @@ theorem hasT_or_pinwheel : ∀ a : Assign, a.hasPiPi = false → a.hasT = true �
 these classes" -- the bridge from the geometry to the bookkeeping; opaque here. -/
 axiom Realised : Assign → Prop
 
-/-- **NO Pi-Pi WALL** [T-prose] (`corner_cost.md` part 2, from `two_pokers_window`): two pokers on one
+/-- **NO Pi-Pi WALL** [T-prose] (`corner_cost.md` part 2, from `two_pokers_window`): two pokers on
+one
 wall need side `≥ s* = 3.9342370 > ŝ`, so a realised assignment has no Pi-Pi wall. -/
 axiom no_PiPi_window (a : Assign) (h : Realised a) : a.hasPiPi = false
 
-/-- **NOTCHES ≤ 3** [M] (`corner_chase.md` §3.3 SEPARATE-NOTCHES, sup margin −0.003 at ŝ): each Phi-Pi
-wall's poker slot is met by a free square of its own (FLAT-ABOVE + PROJECTION [T]; one free square per
+/-- **NOTCHES ≤ 3** [M] (`corner_chase.md` §3.3 SEPARATE-NOTCHES, sup margin −0.003 at ŝ): each
+Phi-Pi
+wall's poker slot is met by a free square of its own (FLAT-ABOVE + PROJECTION [T]; one free square
+per
 notch [M]), and a realised eleven-square packing has three free squares. -/
 axiom notches_le_three (a : Assign) (h : Realised a) : a.notches ≤ 3
 
@@ -121,7 +139,8 @@ theorem realised_has_T (a : Assign) (h : Realised a) : a.hasT = true := by
   · have := notches_le_three a h
     omega
 
-/-- **NO ALL-F SKELETON ON THE WINDOW** [T given the two hypotheses] (A248's corollary in role form).
+/-- **NO ALL-F SKELETON ON THE WINDOW** [T given the two hypotheses] (A248's corollary in role
+form).
 -/
 theorem no_allF_realised (a : Assign) (h : Realised a) : a.f ≠ 4 := by
   intro h4
