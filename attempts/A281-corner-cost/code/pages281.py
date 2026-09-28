@@ -100,7 +100,7 @@ def main():
             note = ['(a%d) %s: sup margin %+.4f at s-hat; exact check %s.' % (k + 1, name, m, rec['exact_ok']),
                     'container / disjoint / boxes: %s / %s / %s.' % tuple(rec['exact'].get(t) for t in ('container', 'disjoint', 'boxes')),
                     'Alive by SIDE on W [T-computed].']
-        draw_config(svg, ox, oy, sc, s, rec['roles'], rec['x'], [0, 3], '(a%d) %s' % (k + 1, name), note)
+        draw_config(svg, ox, oy, sc, s, {int(k): v for k, v in rec['roles'].items()}, rec['x'], [0, 3], '(a%d) %s' % (k + 1, name), note)
         if name == 'PiPi':
             P = panel(ox, oy, sc, s)
             svg.append(poly(P, [(0, 1), (1, 1), (1, s - 1), (0, s - 1)], 'url(#stip)', 'none', 0, 'opacity="0.5"'))
@@ -125,7 +125,7 @@ def main():
         else:
             note = ['(b%d) %s: sup margin %+.4f < 0: IMPOSSIBLE' % (k + 1, name, m),
                     '(a flat never meets the poker slot: FLAT-ABOVE [T])' if 'PhiPi' in name else '(not found)', sense]
-        draw_config(svg, ox, oy, sc, s, rec['roles'], rec['x'], [0, 3], '(b%d) %s' % (k + 1, name), note, extra)
+        draw_config(svg, ox, oy, sc, s, {int(k): v for k, v in rec['roles'].items()}, rec['x'], [0, 3], '(b%d) %s' % (k + 1, name), note, extra)
         checks['b%d' % (k + 1)] = {'name': name, 'sup_margin': m, 'exact_ok': rec['exact_ok'], 'exact': rec['exact']}
     # (c) the f-table
     y2 = y1 + s * sc + 60

@@ -22,5 +22,5 @@ f-table (part 6).  `fslots281.py`: the F-SLOTS-ONE probe.  `pages281.py`: the pa
   f = 4 is a HOLDER kill (four notches, three free squares, SEPARATE-NOTCHES [M]), not a side kill -- part 6.
 * The f = 3 orbit Ff/Ff/Ff/T exists on all of W (0.047 / 0.054).  The orbits with a Pi-Pi wall fail at both ends
   (sup -0.0003 .. -0.0004, the TWO-POKERS deficit at these sides being small: s* - s-hat = 0.057 is spent on the pokers'
-  own tilt windows).  The remaining orbits: table 7.2 (a class with sup <= 0 and no exact witness is UNDECIDED by side
+  own tilt windows).  The remaining orbits: table 7.2 (rows still landing at exit are PENDING -- `finish281.sh` commits them; a class with sup <= 0 and no exact witness is UNDECIDED by side
   and drawn grey; the count of part 6 does not need side-realisability, it only needs the wall types).
