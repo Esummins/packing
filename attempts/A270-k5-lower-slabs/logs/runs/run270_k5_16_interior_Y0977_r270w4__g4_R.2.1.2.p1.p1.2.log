@@ -1,0 +1,58 @@
+23:05:07 [w4] pass 2 start k5_16_interior_Y0977_r270w4 g4:R.2.1.2.p1.p1.2 wall 1800 (lab 7, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+   stage 0 g4 pad: ALIVE (A209 csp209 (A203's Stage0 + CSP on the record): attempts/A270-k5-lower-slabs/certs/csp209_k5_16_interior_Y0977_r270w4_g4_s0.json)
+   INHERIT k5_16_interior_Y0977_r270w4 pad g4: 2 prior trees, 31 paths, 3 branches inherited DEAD (final, with their certificates), 11 start nodes (0 from the A203 root)
+== k5_16_interior_Y0977_r270w4 page pad g4: start attempts/A270-k5-lower-slabs/certs/csp209_k5_16_interior_Y0977_r270w4_g4_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 3 dead branches (final) + 11 start nodes ['R.2.1.2.p1.p1.2', 'R.2.1.3', 'R.2.1.4', 'R.2.1.5', 'R.2.1.6', 'R.2.1.7', 'R.2.2', 'R.2.3', 'R.2.4', 'R.2.5']; H [2.218, 2.358, 2.358, 2.498, 14.25, 28.072]; forced H []; 6 slots; free squares 5
+   INHERITED DEAD R.1          TL(1,0)<-(8,)  [A211 tree: EmptyBox] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0977_r270w4__g4_R0_.json
+   INHERITED DEAD R.2.1.1      BL(1,0)<-(5,)  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0977_r270w4__g4_R0_.json
+   INHERITED DEAD R.2.1.2.p1.p1.1 BL(1,0)<-F2  [A211 tree: every branch DEAD] attempts/A270-k5-lower-slabs/certs/coarsetree211_k5_16_interior_Y0977_r270w4__g4_R.2.1.2.p1.p1.1.json
+   A229 SHARD: --start R.2.1.2.p1.p1.2 -- 1 of them are start nodes of this page/pad right now (11 start nodes in all)
+   start R.2.1.2.p1.p1.2: applied step 1/1 -- NS F2 misses at BL(1,0)
+   node R.2.1.2.p1.p1.2 d0 root: INTERNAL (22.0 s, 1 rounds; t=193.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.1.2.p1.p1.2: split F4 at TR(1,0) (meeting fraction 0.039038; alive rows [23]; named ['F1', 'F4', 'F5', 'H'])
+   node R.2.1.2.p1.p1.2.1 d1 TR(1,0)<-None: INTERNAL (16.9 s, 1 rounds; t=210.9)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.1.2.p1.p1.2.1: split F5 at TR(1,0) (meeting fraction 0.008312; alive rows [23]; named ['F1', 'F4', 'F5', 'H'])
+   node R.2.1.2.p1.p1.2.1.1 d2 TR(1,0)<-None: DEAD by S-CLIP r1 (1.2 s, 1 rounds; t=212.9)
+   node R.2.1.2.p1.p1.2.1.2 d2 TR(1,0)<-None: DEAD by S-CLIP r1 (0.4 s, 1 rounds; t=213.4)
+   node R.2.1.2.p1.p1.2.2 d1 TR(1,0)<-None: INTERNAL (3.7 s, 1 rounds; t=217.1)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.1.2.p1.p1.2.2: split F5 at TR(1,0) (meeting fraction 0.008312; alive rows [23]; named ['F1', 'F5', 'H'])
+   node R.2.1.2.p1.p1.2.2.1 d2 TR(1,0)<-None: INTERNAL (3.4 s, 1 rounds; t=221.3)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.1.2.p1.p1.2.2.1: split F5 at TR(0,1) (meeting fraction 0.077918; alive rows [22, 23]; named ['F2', 'F4', 'F5', 'H'])
+   node R.2.1.2.p1.p1.2.2.1.1 d3 TR(0,1)<-None: DEAD by S-CLIP r1 (0.9 s, 1 rounds; t=223.0)
+   node R.2.1.2.p1.p1.2.2.1.2 d3 TR(0,1)<-None: DEAD by MISS-CLIP r1 (0.0 s, 1 rounds; t=223.1)
+   node R.2.1.2.p1.p1.2.2.2 d2 TR(1,0)<-None: INTERNAL (3.3 s, 1 rounds; t=226.4)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.1.2.p1.p1.2.2.2: split F5 at TR(0,1) (meeting fraction 0.077918; alive rows [22, 23]; named ['F2', 'F4', 'F5', 'H'])
+   node R.2.1.2.p1.p1.2.2.2.1 d3 TR(0,1)<-None: INTERNAL (3.2 s, 1 rounds; t=230.4)
+   no-room (k=11, m=0): VACUOUS in 0 s (0 pockets; None)
+   Rule NS at R.2.1.2.p1.p1.2.2.2.1: split F4 at TR(0,1) (meeting fraction 0.087786; alive rows [22, 23]; named ['F2', 'F4', 'F5', 'H'])
+   node R.2.1.2.p1.p1.2.2.2.1.1 d4 TR(0,1)<-None: DEAD by EmptyBox r1 (1.3 s, 1 rounds; t=232.5)
+   node R.2.1.2.p1.p1.2.2.2.1.2 d4 TR(0,1)<-None: DEAD by S-CLIP r1 (0.6 s, 1 rounds; t=233.2)
+   node R.2.1.2.p1.p1.2.2.2.2 d3 TR(0,1)<-None: DEAD by EmptyBox r1 (2.0 s, 1 rounds; t=235.2)
+   start R.2.1.2.p1.p1.2 => DEAD (13 nodes; t = 235 s of 1800.0)
+   start R.2.1.3: SKIPPED (filter)
+   start R.2.1.4: SKIPPED (filter)
+   start R.2.1.5: SKIPPED (filter)
+   start R.2.1.6: SKIPPED (filter)
+   start R.2.1.7: SKIPPED (filter)
+   start R.2.2: SKIPPED (filter)
+   start R.2.3: SKIPPED (filter)
+   start R.2.4: SKIPPED (filter)
+   start R.2.5: SKIPPED (filter)
+   start R.3: SKIPPED (filter)
+   => ALIVE (g4_page) in 235.2 s: 11 start runs, 13 nodes, depth 4, 0 CC kills, 0 exact leaf cascades, 6 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 3 inherited dead (3 up front + 0 in tree), 10 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 12 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.02 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R.1 d1 DEAD INHERIT 0.0s; R.2.1.1 d3 DEAD INHERIT 0.0s; R.2.1.2.p1.p1.1 d6 DEAD INHERIT 0.0s; R.2.1.2.p1.p1.2 d0 INTERNAL 22.0s; R.2.1.2.p1.p1.2.1 d1 INTERNAL 16.9s; R.2.1.2.p1.p1.2.1.1 d2 DEAD S-CLIP 1.2s; R.2.1.2.p1.p1.2.1.2 d2 DEAD S-CLIP 0.4s; R.2.1.2.p1.p1.2.2 d1 INTERNAL 3.7s; R.2.1.2.p1.p1.2.2.1 d2 INTERNAL 3.4s; R.2.1.2.p1.p1.2.2.1.1 d3 DEAD S-CLIP 0.9s; R.2.1.2.p1.p1.2.2.1.2 d3 DEAD MISS-CLIP 0.0s; R.2.1.2.p1.p1.2.2.2 d2 INTERNAL 3.3s; R.2.1.2.p1.p1.2.2.2.1 d3 INTERNAL 3.2s; R.2.1.2.p1.p1.2.2.2.1.1 d4 DEAD EmptyBox 1.3s; R.2.1.2.p1.p1.2.2.2.1.2 d4 DEAD S-CLIP 0.6s; R.2.1.2.p1.p1.2.2.2.2 d3 DEAD EmptyBox 2.0s
+== k5_16_interior_Y0977_r270w4: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 542, 'misses': 151, 'entries': 151}; clip {'hits': 38374, 'misses': 11874, 'entries': 11874}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 693, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 14}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 531, 'obs_misses': 162, 'build_hits': 0, 'build_misses': 0, 'bisect_hits': 0, 'bisect_misses': 0, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 82, 'build_entries': 0, 'bisect_entries': 0, 'on': True}
+   A268: k5_16_interior_Y0977_r270w4 g4 R.2.1.2.p1.p1.2 -> ALIVE; count268 116 call(s), 0 capped, 2 INFEASIBLE (dumps 2: 2 VERIFIED, 0 FAILED), 199.6 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
