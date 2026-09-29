@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-28 18:30:57
+# A211 progress -- 2026-09-28 18:41:05
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the g1 pad (lam = s0/3.861637: A57's G1 slab (3.861637, s0], s-hat included -- NOT the window [3.82, s0]; A270); wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
@@ -681,7 +681,7 @@ CPU-h in this block: 66.65
 
 | class | G1 = (3.861637, s0], s-hat incl. | G2 = (3.847016, 3.861637] | G3 = (3.832450, 3.847016] | G4 = [3.82, 3.832450] |
 |---|---|---|---|---|
-| `k5_11` | **OPEN**: 11 cover box(es) with no G1 row / an s0-only kill, not yet DEAD at g4 | **OPEN**: 31 record(s) of tiers 1-2 left (A270 g4) | **OPEN**: 110 record(s) left + the NO-child LP | **OPEN**: 110 record(s) left + the NO-child LP |
+| `k5_11` | **OPEN**: 11 cover box(es) with no G1 row / an s0-only kill, not yet DEAD at g4 | **OPEN**: 31 record(s) of tiers 1-2 left (A270 g4) | **OPEN**: 105 record(s) left + the NO-child LP | **OPEN**: 105 record(s) left + the NO-child LP |
 | `k5_16` | **OPEN**: 10 cover box(es) with no G1 row / an s0-only kill, not yet DEAD at g4 | **OPEN**: 34 record(s) of tiers 1-2 left (A270 g4) | **OPEN**: 540 record(s) left + the NO-child LP | **OPEN**: 540 record(s) left + the NO-child LP |
 | `trump5` | **OPEN**: A268's g1 verdicts ran on A60's 3e-8 records (s0-only); A269 re-emits | **OPEN** (A269 pad tube) | **OPEN** (A269) | **OPEN** (A269 pad window) |
 
