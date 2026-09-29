@@ -1,4 +1,4 @@
-# A211 progress -- 2026-09-29 07:49:23
+# A211 progress -- 2026-09-29 07:59:27
 
 The COARSE tree (notes/coarse_tree.md): A202 stage 0 + A203 CSP; coarse internal nodes (re-binned pieces <= 96 units, refine 1, no lonely clip, reach depth 2; ONE round; branch at once); at every fully named leaf: rule CC (Lemma CORNER-COVER) -> A208 no-room + pocket CN bound (pockets branched at k = 9) -> A207 basin clip -> A206 Rule NS (MAX_FRAC 0.5) -> the exact cascade + sharp round.  Pad 0 FIRST then the g1 pad (lam = s0/3.861637: A57's G1 slab (3.861637, s0], s-hat included -- NOT the window [3.82, s0]; A270); wall 1800 s per pad per page; depth cap 6; node cap 600; every kill [C: closed-form / library clip trace + the leaf lemma], no verifier clause.
 
