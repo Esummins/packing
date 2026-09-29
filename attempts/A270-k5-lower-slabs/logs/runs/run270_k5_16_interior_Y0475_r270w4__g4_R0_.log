@@ -1,0 +1,48 @@
+23:13:42 [w4] pass 3 start k5_16_interior_Y0475_r270w4 g4:R0+ wall 1800 (lab 7, mine 3)
+   A268 COUNT-PRUNE installed (nodes 2000000, budget 240 s, wall-aware)
+   A268 FORCED ROLE-SPLIT installed at the fixed-point leaf (cap 8 per role per path)
+   A270: pads {'g1': 1.004000117048806, 'g2': 1.0078159279815837, 'g3': 1.0116463358947931, 'g4': 1.0149434554973822}; loader load270; count268 True; leaf268 True; certs attempts\A270-k5-lower-slabs\certs
+   priority class 16384 (16384 = BelowNormal), affinity 0xFFFF
+== stage 0 + CSP k5_16_interior_Y0475_r270w4 at the g4 pad: ALIVE in 33150 ms; kills {'H-clip': 0, 'P': 4444, 'W': 1483, 'C': 822, 'M': 4021, 'L': 7, 'R': 4225, 'X': 1552}; CSP units 512 -> 512 alive; caps {'BL(1,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,1)': None, 'TR(1,0)': None, 'TL(1,0)': None}; forced H []
+   INHERIT: the start path [] carries no COMPLETE ancestor snapshot -- it is replayed from the A203 stage-0 root (0 steps)
+   INHERIT k5_16_interior_Y0475_r270w4 pad g4: 0 prior trees, 0 paths, 0 branches inherited DEAD (final, with their certificates), 1 start nodes (1 from the A203 root)
+== k5_16_interior_Y0475_r270w4 page pad g4: start attempts/A270-k5-lower-slabs/certs/csp209_k5_16_interior_Y0475_r270w4_g4_s0.json; basins [('TR(0,1)', 0.02), ('TR(1,0)', 0.03)]; INHERIT 0 dead branches (final) + 1 start nodes ['R0+']; H [2.637, 2.777, 2.218, 2.358, 0.0, 14.25]; forced H []; 6 slots; free squares 5
+   A229 SHARD: --start R0+ -- 1 of them are start nodes of this page/pad right now (1 start nodes in all)
+   node R0+        d0 root: INTERNAL (4.0 s, 1 rounds; t=4.1)
+   node R0+r1      d0 root<-None: INTERNAL (2.2 s, 1 rounds; t=6.2)
+   node R0+.1      d1 BL(1,0)<-[5]: INTERNAL (4.0 s, 1 rounds; t=10.3)
+   node R0+.1.1    d2 TR(1,0)<-[7]: DEAD by EmptyBox r1 (3.3 s, 1 rounds; t=13.7)
+   node R0+.1.2    d2 TR(1,0)<-[8]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=14.5)
+   node R0+.1.3    d2 TR(1,0)<-[9]: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=15.2)
+   node R0+.1.4    d2 TR(1,0)<-[12]: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=15.9)
+   node R0+.1.5    d2 TR(1,0)<-[13]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=16.7)
+   node R0+.1.6    d2 TR(1,0)<-[14]: DEAD by EmptyBox r1 (1.1 s, 1 rounds; t=17.8)
+   node R0+.1.7    d2 TR(1,0)<-[19]: DEAD by EmptyBox r1 (0.8 s, 1 rounds; t=18.7)
+   node R0+.2      d1 BL(1,0)<-[6]: INTERNAL (2.9 s, 1 rounds; t=21.6)
+   node R0+.2r1    d1 root<-None: INTERNAL (2.5 s, 1 rounds; t=24.2)
+   node R0+.2r2    d1 root<-None: INTERNAL (3.1 s, 1 rounds; t=27.4)
+   no-room (k=10, m=1): DEAD by NOROOM in 5 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.2      d1: DEAD by NOROOM -- no-room at R0+.2 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.3      d1 BL(1,0)<-[7]: INTERNAL (3.5 s, 1 rounds; t=35.7)
+   node R0+.3r1    d1 root<-None: DEAD by FC r1 (1.5 s, 1 rounds; t=37.3)
+   node R0+.4      d1 BL(1,0)<-[10]: DEAD by EmptyBox r1 (1.2 s, 1 rounds; t=38.6)
+   node R0+.5      d1 BL(1,0)<-[11]: INTERNAL (2.5 s, 1 rounds; t=41.1)
+   node R0+.5r1    d1 root<-None: INTERNAL (2.4 s, 1 rounds; t=43.6)
+   node R0+.5r2    d1 root<-None: INTERNAL (3.3 s, 1 rounds; t=46.9)
+   no-room (k=10, m=1): DEAD by NOROOM in 2 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.5      d1: DEAD by NOROOM -- no-room at R0+.5 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R0+.6      d1 BL(1,0)<-[12]: INTERNAL (1.8 s, 1 rounds; t=50.3)
+   node R0+.6r1    d1 root<-None: INTERNAL (3.6 s, 1 rounds; t=53.9)
+   node R0+.6r2    d1 root<-None: INTERNAL (7.9 s, 1 rounds; t=61.9)
+   no-room (k=10, m=1): DEAD by NOROOM in 5 s (0 pockets; bisection alone: every pose of a free unit square meets some core)
+   node R0+.6      d1: DEAD by NOROOM -- no-room at R0+.6 (k=10, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   start R0+          => DEAD (22 nodes; t = 67 s of 1800.0)
+   => DEAD (g4_page) in 66.7 s: 1 start runs, 22 nodes, depth 2, 0 CC kills, 0 exact leaf cascades, 0 NS splits, 0 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 12 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 9 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R0+ d0 INTERNAL 4.0s; R0+r1 d0 INTERNAL 2.2s; R0+.1 d1 INTERNAL 4.0s; R0+.1.1 d2 DEAD EmptyBox 3.3s; R0+.1.2 d2 DEAD EmptyBox 0.8s; R0+.1.3 d2 DEAD EmptyBox 0.7s; R0+.1.4 d2 DEAD EmptyBox 0.6s; R0+.1.5 d2 DEAD EmptyBox 0.8s; R0+.1.6 d2 DEAD EmptyBox 1.1s; R0+.1.7 d2 DEAD EmptyBox 0.8s; R0+.2 d1 INTERNAL 2.9s; R0+.2r1 d1 INTERNAL 2.5s; R0+.2r2 d1 DEAD NOROOM 3.1s; R0+.3 d1 INTERNAL 3.5s; R0+.3r1 d1 DEAD FC 1.5s; R0+.4 d1 DEAD EmptyBox 1.2s; R0+.5 d1 INTERNAL 2.5s; R0+.5r1 d1 INTERNAL 2.4s; R0+.5r2 d1 DEAD NOROOM 3.3s; R0+.6 d1 INTERNAL 1.8s; R0+.6r1 d1 INTERNAL 3.6s; R0+.6r2 d1 DEAD NOROOM 7.9s
+== k5_16_interior_Y0475_r270w4: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+   caches (A211d, pure: same results, same test counts): K' {'hits': 903, 'misses': 388, 'entries': 388}; clip {'hits': 31876, 'misses': 28799, 'entries': 28799}
+   coarse core (A211e, S2': union-hull K' on a coarse tilt grid at internal nodes): {'kmode': 'union', 'n_grid': 33, 'coarse_builds': 0, 'grid_fallbacks': 0, 'pieces_fallbacks': 0, 'exact_builds': 1291, 'conditional': {'parent_seconds': 20.0, 'roles': 99, 'coarse_nodes': 0, 'exact_core_nodes': 22}}
+   no-room memo (A211f, pure: A189 build_node / bisect_free across parent and children): {'obs_hits': 970, 'obs_misses': 351, 'build_hits': 0, 'build_misses': 3, 'bisect_hits': 0, 'bisect_misses': 3, 'build_saved': 0.0, 'bisect_saved': 0.0, 'obs_entries': 351, 'build_entries': 3, 'bisect_entries': 3, 'on': True}
+   A268: k5_16_interior_Y0475_r270w4 g4 R0+ -> DEAD; count268 66 call(s), 0 capped, 0 INFEASIBLE (dumps 0: 0 VERIFIED, 0 FAILED), 1.1 s; forced {'forced': 0, 'skipped_cap': 0, 'none': 0}
