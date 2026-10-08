@@ -25,3 +25,12 @@ except the user-chosen output paths, the only network access is the documented u
 See `spot242.json` / `spot242.jsonl`: (a) L/A = 31/8; (b) M = 10999479944 units (point 2247714156, 2-of-3
 3188007592, 2-of-5 989672288, 3-of-5 4574085908), D4 invariance; (c) 3,240 exact poses, 0 failures, minimum charge
 1000047518, never below the recorded row minimum; (d) 11 Gamma - M = 107864 units.
+
+## Verdict (written by code/final242.py)
+
+**FAIL** -- replay PASS_REPLAY_PYTHON_ALL_ROWS, controls PASS_INDEPENDENT_EXACT_CONTROLS, spot-check PASS, integrity FAIL.
+
+* rows replayed 12028 / 12028; minimum 999962528 (= Gamma), budget 10999479944, surplus 107864; slabs 86299918, cells 511649694680
+* row-by-row against their evidence (minimum, cells, slabs): initial: 0 rows differ, histogram equal True, totals equal True; portable: 0 rows differ, histogram equal True, totals equal True
+* runtime: shard wall [3935, 4164] s (pure-Python kernel, 2 shards in parallel, BelowNormal); CPU 8089.2 s summed
+* controls: containment 48112; boundary samples 5586 centres, minimum 1000047518
