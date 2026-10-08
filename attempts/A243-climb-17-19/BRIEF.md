@@ -52,3 +52,13 @@ and what the survivors look like (pages).
    its soundness statement: a DEAD branch is a theorem about that slot-set hypothesis on the window), pages,
    registry row, LOG entry.  Report once (<= 15 lines: per-n table, rule counts, verdict on "relatively quickly",
    commits) and EXIT.
+
+## Addendum 2b (coordinator, after the PI: "start at k4 and climb, or at k ~ 15 and descend?") -- BOTH, top-down first
+The forward FC tree's "pin S -> k+1" branches should CITE closed k+1 classes, not re-solve them per path.  So:
+an A53-style slot-set CENSUS at the window (locked skeletons inside [0, s_hi]^2, lattice from each corner,
+D4-reduced) from k_max down to the record's k (8 at n = 17, 11 at n = 19); close each class by its own tree (few
+free squares = the toolkit's strongest regime); the per-class verdict table is that n's window scoreboard; the
+record's class must survive to the tube.  Then the climb from the four-corner root uses the table: a "pin S" branch
+is DEAD at once when its slot set lies in a closed class (Lemma K1), so the climb is only the "all pin-adjacent
+cells doubly met" spine.  Report both halves: classes per k, how many die at the root, CPU-h for the descent, then
+the climb with the table in place.
