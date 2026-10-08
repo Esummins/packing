@@ -1,0 +1,55 @@
+{
+ "nid": "n17_k16_0000",
+ "runs": {
+  "window_page": {
+   "pad": "window",
+   "mode": "page",
+   "source": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0000_window_s0.json",
+   "verdict": "DEAD",
+   "leaf": "stage 0: H's box has no pose clear of the pins and walls (closed form)",
+   "n_nodes": 0,
+   "seconds": 0.0,
+   "window_pending": false,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)",
+   "stage0_kill": true,
+   "nodes": []
+  }
+ },
+ "camp": "A243",
+ "n": 17,
+ "cls": "n17_k16_0000",
+ "hypothesis": "A243 page (attempts/A243-climb-17-19/code/root243.py): P is a packing of 17 unit squares in [0, m]^2, m in [116511/25000, 4675531/1000000], containing an axis-aligned unit square at every slot of class n17_k16_0000 (BL(0,0),BL(0,1),BL(0,2),BL(0,3),BL(1,0),BL(1,1),BL(1,2),BL(1,3),BL(2,0),BL(2,1),BL(2,2),BL(2,3),BL(3,0),BL(3,1),BL(3,2),BL(3,3)); after the dilation to side 4675531/1000000 the pins lie in boxes of half-width (lambda_max - 1) max(u, v) about the slots (cores a = 1/2 - d).  Forced cells: exactly those whose extension class is DEAD on this n's table (Theorem FC).  A DEAD verdict is `stratum_kill` for n17_k16_0000 on the window (Lemma K1 / Theorem FC, n-general).",
+ "spine": false,
+ "assumed": [],
+ "window": [
+  "116511/25000",
+  "4675531/1000000"
+ ],
+ "budget": 0,
+ "record": "attempts/A243-climb-17-19/code/root243.py (synthesised)",
+ "tree": "n17_k16_0000_window",
+ "level": "16",
+ "stage0": {
+  "window": {
+   "verdict": "DEAD",
+   "leaf": "H's box has no pose clear of the pins and walls (closed form)",
+   "seconds": 0.0,
+   "source": "A209 csp209 (A203's Stage0 + CSP on the record)",
+   "file": "attempts/A243-climb-17-19/certs/n17/csp209_n17_k16_0000_window_s0.json",
+   "cached": false,
+   "kills": {
+    "H-clip": 64
+   },
+   "caps": {},
+   "forced_H": [],
+   "n_units_alive": null,
+   "n_units": null,
+   "verifier": "[C: closed-form trace] A202 stage 0 + A203 CSP (no verifier clause)"
+  }
+ },
+ "verdicts": {
+  "window": "DEAD (stage 0)"
+ },
+ "stage_reached": "0",
+ "seconds_total": 0.0
+}

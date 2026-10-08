@@ -87,6 +87,34 @@ def run_class(n, cls, wall, log):
                 when=time.strftime("%Y-%m-%d %H:%M:%S"))
 
 
+def run_tasks(worker, log):
+    """logs/TASKS_w<W>.txt: one script per line ("script.py arg ..."), run IN THIS PROCESS (runpy) so that the agent's
+    analyses never add a third python process; the file is renamed to .done afterwards."""
+    import contextlib
+    import runpy
+    f = os.path.join(A243, "logs", "TASKS_w%d.txt" % worker)
+    if not os.path.exists(f):
+        return
+    done = f[:-4] + "_%s.done" % time.strftime("%H%M%S")
+    os.replace(f, done)
+    for ln in open(done, encoding="utf-8"):
+        args = ln.split()
+        if not args or args[0].startswith("#"):
+            continue
+        out = os.path.join(A243, "logs", "task_%s.log" % os.path.splitext(args[0])[0])
+        old = sys.argv
+        sys.argv = list(args)
+        with open(out, "a", encoding="utf-8") as fo, contextlib.redirect_stdout(fo):
+            try:
+                runpy.run_path(os.path.join(HERE, args[0]), run_name="__main__")
+            except SystemExit:
+                pass
+            except Exception as e:                                # noqa: BLE001
+                print("TASK FAILED %r" % (e,))
+        sys.argv = old
+        log("   task %s done (%s)" % (" ".join(args), os.path.basename(out)))
+
+
 def git_commit(paths, msg, log):
     for k in range(6):
         try:
@@ -134,6 +162,7 @@ def main():
             v = tab.reload().verdicts.get(cls)
             if v and not (a.rewall and v.get("verdict") == "ALIVE" and float(v.get("wall") or 0) < wall):
                 continue
+            run_tasks(a.worker, log)
             if os.path.exists(os.path.join(A243, "logs", "STOP")):
                 log("== logs/STOP present: exiting")
                 return 0
