@@ -7,7 +7,7 @@ generalises: it is Conjecture ONE-FLUSH(n) restricted to the optimum (`04`).  Th
 SWAP/CELLS, the extremal reduction to LOCKED-CROWD-FREE(n)), every refuted route with its witness, the measured
 facts, the n = 11 form STEP on the eleven cells, and the current n = 11 chain with its open links.  Tags [T]/[M]/[F]/[C].
 
-Repository {REPO_URL}.  Sources: `docs/proofs/{k0_route,ring_swap,one_flush,local_lock,swap_leaf,k0_count,
+Repository https://github.com/Esummins/packing (paths under `blob/master/`; e.g. https://github.com/Esummins/packing/blob/master/docs/proofs/k0_route.md).  Sources: `docs/proofs/{k0_route,ring_swap,one_flush,local_lock,swap_leaf,k0_count,
 wall_torque,two_grains,handedness,cross,no_vv,realign,ring_capacity,pocket_waste,drain_flow_k0,noroom}.md`,
 `lean/PackingCertMathlib/PackingCertMathlib/Statements/Open/`, `attempts/A275-k0-knowledge/` (the compilation:
 72 [T], 17 [T-computed], 21 [M], 38 [F], 18 [C] entries).

@@ -126,6 +126,6 @@ node with its rule, its exact miss certificates and its seconds) and an SVG page
 3. If your sqverify-fast style exact sweeps can replace the lane cover (the no-room blocker: ~98 % of a lane run is
    a float witness search, A221 §0), that is the one kernel we would import.
 
-Sources: `attempts/{A202-fast30,A203-csp-consistency,A206-named-split,A208-noroom-leaves,A210-corner-cover,
+Sources (https://github.com/Esummins/packing/blob/master/): `attempts/{A202-fast30,A203-csp-consistency,A206-named-split,A208-noroom-leaves,A210-corner-cover,
 A211-coarse-tree,A213-int-polycore,A214-c-kernel,A215-closed-node-benchmark,A220-exact-first,A221-lane-cover,
 A229-start-parallel}/`; `docs/proofs/` as listed; `writeup/05_status_sheet.md`.

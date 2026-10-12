@@ -131,5 +131,5 @@ Repository https://github.com/Esummins/packing; `blob/master/attempts/REGISTRY.m
 | 10-07 | **A243 climb 17/19** | running | the toolkit generalised to any n; census 2,500 classes; n = 17 k = 16, 15 dead at the root; k = 14 67/68; k = 13 running (`06`) |
 | 10-11 | A244 outreach series | this | the eight pieces and `ISSUES.md` |
 
-Sources: `attempts/REGISTRY.md`; `writeup/03_lab_timeline.md` (phases I–VII with the stuck/unblock episodes);
+Sources (https://github.com/Esummins/packing/blob/master/): `attempts/REGISTRY.md`; `writeup/03_lab_timeline.md` (phases I–VII with the stuck/unblock episodes);
 `LOG.md`; your `packing/frontier/n-011.md` (T-037, T-060, T-112 dates).

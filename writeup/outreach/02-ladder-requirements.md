@@ -7,7 +7,7 @@ is what the geometric toolkit acts on: closed strata at level k + 1 are the forc
 no closed extension gives the toolkit nothing (A238), and the local lemmas about the two meeters of a cell beside
 a simple square (ONE-TILTED, WEDGED-SEAL, EPS, SNAP) are the leaf rules.  Tags [T]/[M]/[F]/[C] with lab sources.
 
-Companion to `01-stratification-program.md`; repository {REPO_URL}.  "Meets" always means interior-to-interior;
+Companion to `01-stratification-program.md`; repository https://github.com/Esummins/packing (paths under `blob/master/`; e.g. https://github.com/Esummins/packing/blob/master/docs/proofs/forced_corners.md).  "Meets" always means interior-to-interior;
 the open corner box is (0,1)² in a corner's frame; a cell's slot box B_p(m) is the closed unit square at slot p at
 side m and B_p⁺ its padded image on the s0 page (`01` §2).
 
@@ -143,6 +143,6 @@ Theorem B's second-meeter criterion [C] in Lean), Lemma SEAL / WEDGE / NO-SECOND
    `attempts/A241-row-cascade/code/param241.py`).  Success hands every k ≤ 3 class 2–5 forced cells.
 3. Prove or refute the one-blocker SNAP conjecture of §5 on a page we supply (`k5_11_interior_Y0865`, A224 §4).
 
-Sources: `docs/proofs/{ring_swap,slot_crowds,forced_corners,sideband,wall_torque,wedged_seal,lemma_eps,snap_rule,
+Sources (https://github.com/Esummins/packing/blob/master/): `docs/proofs/{ring_swap,slot_crowds,forced_corners,sideband,wall_torque,wedged_seal,lemma_eps,snap_rule,
 k0_count,corner_seal}.md`; `attempts/A238-k4-benchmark/notes/k4_238.md`; `attempts/A241-row-cascade/{notes/cascade241.md,
 results/rows241.md}`; `lean/AUDIT.md`.

@@ -97,7 +97,7 @@ bound; we offer the receipts for retention beside T-037 if they are useful, and 
 3. The secondary (JavaScript BigInt) checker we refused to run for network reasons: if your records lane has a
    retained offline copy, we would run it on the same pin.
 
-Sources: `attempts/A242-replay-31-8/{BRIEF.md,results/replay242.md,results/replay242.json,results/spot242.json,
+Sources (https://github.com/Esummins/packing/blob/master/): `attempts/A242-replay-31-8/{BRIEF.md,results/replay242.md,results/replay242.json,results/spot242.json,
 results/controls242.json,results/integrity242.txt,results/adopt242_dryrun.txt,ext/PIN.json}`;
 `docs/proofs/threshold_bound.md`; `lean/PackingCertMathlib/PackingCertMathlib/Statements/Open/ThresholdBound.lean`;
 your `packing/frontier/n-011.md` and the n11 threshold-bound review (Part II).

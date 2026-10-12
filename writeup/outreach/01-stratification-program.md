@@ -9,7 +9,7 @@ empty, and what remains is three k = 5 classes, sixteen protected low-k classes 
 tagged [T] proved / [M] measured / [F] refuted / [C] obligation, with its lab source and Lean name.
 
 Written for the Squares Project (jlevy/squares) by the n = 11 lab of E. Summins (PI) — see `00-README.md` for
-the series, the ask, and the retained package.  Repository: {REPO_URL} (private pending the PI's decision).
+the series, the ask, and the retained package.  Repository: https://github.com/Esummins/packing (public); paths below are under `blob/master/`, e.g. https://github.com/Esummins/packing/blob/master/docs/proofs/instratum_bridge.md.
 
 ## 1. Why a stratification, and the PI's framing
 
@@ -133,7 +133,7 @@ downstream theorem rests on.  Nothing here claims s(11) = ŝ.
   status: used                         # n = 11: 52/52 window rows; n = 17: k = 16, 15 dead
   note: 'Case split by structure, not by position; each kill is a readable theorem; cost
     concentrates in the low-k strata.'
-  refs: [{REPO_URL} docs/proofs/instratum_bridge.md, forced_corners.md, slot_crowds.md]
+  refs: [https://github.com/Esummins/packing/blob/master/docs/proofs/instratum_bridge.md, https://github.com/Esummins/packing/blob/master/docs/proofs/forced_corners.md, https://github.com/Esummins/packing/blob/master/docs/proofs/slot_crowds.md]
 ```
 
 ## What we ask
@@ -144,6 +144,6 @@ downstream theorem rests on.  Nothing here claims s(11) = ŝ.
 3. Tell us where your vocabulary and ours should be unified (pins ↔ parents settled in slots; stratum kill ↔ a
    per-class threshold certificate; pad ↔ dilation of the parent side).
 
-Sources: `docs/proofs/{contact_census,instratum_bridge,closed_disjoint_bridge,forced_corners,protected_trees}.md`,
+Sources (https://github.com/Esummins/packing/blob/master/): `docs/proofs/{contact_census,instratum_bridge,closed_disjoint_bridge,forced_corners,protected_trees}.md`,
 `attempts/REGISTRY.md` rows A53–A61, A100, A114, A146, A209–A212, A238, A241, A270; `lean/AUDIT.md`;
 `writeup/05_status_sheet.md`.
