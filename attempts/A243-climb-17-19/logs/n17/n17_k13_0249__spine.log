@@ -1,0 +1,67 @@
+== stage 0 + CSP n17_k13_0249__spine at the window pad: ALIVE in 8564 ms; kills {'H-clip': 0, 'P': 3282, 'W': 194, 'C': 0, 'M': 0, 'L': 0, 'R': 653, 'X': 137}; CSP units 104 -> 104 alive; caps {'TR(1,0)': None, 'TL(1,0)': None}; forced H []
+== n17_k13_0249__spine page pad window: start attempts/A243-climb-17-19/certs/n17/csp209_n17_k13_0249__spine_window_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [1.419, 3.486, 2.338, 4.176, 0.0, 90.0]; forced H []; 2 slots; free squares 3
+   node R          d0 root: INTERNAL (1.1 s, 1 rounds; t=1.2)
+   node R.1        d1 TL(1,0)<-[10]: INTERNAL (0.7 s, 1 rounds; t=1.9)
+   node R.1.1      d2 TR(1,0)<-[22]: INTERNAL (3.4 s, 1 rounds; t=5.3)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 1 s
+   node R.1.1      d2: DEAD by NOROOM -- no-room at R.1.1 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.2      d2 TR(1,0)<-[23]: INTERNAL (0.8 s, 1 rounds; t=7.4)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 1 s
+   node R.1.2      d2: DEAD by NOROOM -- no-room at R.1.2 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.3      d2 TR(1,0)<-[28]: INTERNAL (0.9 s, 1 rounds; t=9.3)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 1 s
+   node R.1.3      d2: DEAD by NOROOM -- no-room at R.1.3 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4      d2 TR(1,0)<-[29]: INTERNAL (0.7 s, 1 rounds; t=11.3)
+   no-room (k=16, m=1, n=17): DEAD by EmptyBox in 0 s
+   node R.1.4      d2: DEAD by EmptyBox -- no-room at R.1.4 (k=16, m=1; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.2        d1 TL(1,0)<-[11]: INTERNAL (0.7 s, 1 rounds; t=12.2)
+   node R.2.1      d2 TR(1,0)<-[16]: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=12.4)
+   node R.2.2      d2 TR(1,0)<-[22]: INTERNAL (2.5 s, 1 rounds; t=14.9)
+   no-room (k=16, m=1, n=17): UNDECIDED in 10 s
+   Lemma POCKET at R.2.2: 1 pockets (k=16, m=1): the next square instantiated in each
+   node R.2.2.p1   d3 pocket<-[0]: INTERNAL (5.4 s, 1 rounds; t=30.0)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Lemma ROLE-SPLIT at R.2.2.p1: bisect F1 on t at 53.1301 (extents (0.225178, 0.262126), tilt 90.0 deg, core non-empty, 32 piece(s); split 1 of 4)
+   node R.2.2.p1.1 d4 F1<-['t<=53.1301']: DEAD by EmptyBox r1 (0.7 s, 1 rounds; t=30.7)
+   node R.2.2.p1.2 d4 F1<-['t>=53.1301']: DEAD by EmptyBox r1 (0.6 s, 1 rounds; t=31.3)
+   node R.2.3      d2 TR(1,0)<-[23]: INTERNAL (3.4 s, 1 rounds; t=34.7)
+   no-room (k=16, m=1, n=17): DEAD by EmptyBox in 2 s
+   node R.2.3      d2: DEAD by EmptyBox -- no-room at R.2.3 (k=16, m=1; A189 Lemma 1 on the role boxes): EmptyBox(F1): every pose is impossible -- the case is dead by the pair leaf
+   node R.2.4      d2 TR(1,0)<-[28]: INTERNAL (2.1 s, 1 rounds; t=38.9)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 2 s
+   node R.2.4      d2: DEAD by NOROOM -- no-room at R.2.4 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2.5      d2 TR(1,0)<-[29]: INTERNAL (0.6 s, 1 rounds; t=41.4)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 2 s
+   node R.2.5      d2: DEAD by NOROOM -- no-room at R.2.5 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3        d1 TL(1,0)<-[16]: INTERNAL (1.1 s, 1 rounds; t=44.2)
+   node R.3.1      d2 TR(1,0)<-[22]: INTERNAL (1.6 s, 1 rounds; t=45.9)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 1 s
+   node R.3.1      d2: DEAD by NOROOM -- no-room at R.3.1 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.3.2      d2 TR(1,0)<-[23]: INTERNAL (0.8 s, 1 rounds; t=47.8)
+   no-room (k=16, m=1, n=17): DEAD by EmptyBox in 0 s
+   node R.3.2      d2: DEAD by EmptyBox -- no-room at R.3.2 (k=16, m=1; A189 Lemma 1 on the role boxes): EmptyBox(H): every pose is impossible -- the case is dead by the pair leaf
+   node R.3.3      d2 TR(1,0)<-[28]: INTERNAL (3.5 s, 1 rounds; t=51.5)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 1 s
+   node R.3.3      d2: DEAD by NOROOM -- no-room at R.3.3 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.4        d1 TL(1,0)<-[17]: INTERNAL (0.9 s, 1 rounds; t=53.5)
+   no-room (k=15, m=2, n=17): UNDECIDED in 15 s
+   Lemma POCKET at R.4: 1 pockets (k=15, m=2): the next square instantiated in each
+   node R.4.p1     d2 pocket<-[0]: INTERNAL (1.2 s, 1 rounds; t=69.5)
+   no-room (k=16, m=1, n=17): UNDECIDED in 14 s
+   Lemma POCKET at R.4.p1: 1 pockets (k=16, m=1): the next square instantiated in each
+   node R.4.p1.p1  d3 pocket<-[0]: INTERNAL (1.1 s, 1 rounds; t=84.2)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Rule NS at R.4.p1.p1: split H at TL(1,0) (meeting fraction 0.260143; alive rows [22, 23]; named ['F1', 'F2', 'F3', 'H'])
+   node R.4.p1.p1.1 d4 TL(1,0)<-None: INTERNAL (4.4 s, 1 rounds; t=88.7)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Lemma ROLE-SPLIT at R.4.p1.p1.1: bisect F3 on x at 2.337766 (extents (3.675531, 3.675531), tilt 90.0 deg, core EMPTY, 12 piece(s); split 1 of 4)
+   node R.4.p1.p1.1.1 d5 F3<-['x<=2.337766']: DEAD by EmptyBox r1 (0.9 s, 1 rounds; t=89.8)
+   node R.4.p1.p1.1.2 d5 F3<-['x>=2.337766']: INTERNAL (3.3 s, 1 rounds; t=93.1)
+   node R.4.p1.p1.1.2: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R            => ALIVE (25 nodes; t = 93 s of 90)
+   => ALIVE (window_page) in 93.2 s: 0 start runs, 25 nodes, depth 5, 0 CC kills, 0 exact leaf cascades, 1 NS splits, 3 pocket splits, 2 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 14 dead / 4 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 37 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R d0 INTERNAL 1.1s; R.1 d1 INTERNAL 0.7s; R.1.1 d2 DEAD NOROOM 3.4s; R.1.2 d2 DEAD NOROOM 0.8s; R.1.3 d2 DEAD NOROOM 0.9s; R.1.4 d2 DEAD EmptyBox 0.7s; R.2 d1 INTERNAL 0.7s; R.2.1 d2 DEAD EmptyBox 0.1s; R.2.2 d2 INTERNAL 2.5s; R.2.2.p1 d3 INTERNAL 5.4s; R.2.2.p1.1 d4 DEAD EmptyBox 0.7s; R.2.2.p1.2 d4 DEAD EmptyBox 0.6s; R.2.3 d2 DEAD EmptyBox 3.4s; R.2.4 d2 DEAD NOROOM 2.1s; R.2.5 d2 DEAD NOROOM 0.6s; R.3 d1 INTERNAL 1.1s; R.3.1 d2 DEAD NOROOM 1.6s; R.3.2 d2 DEAD EmptyBox 0.8s; R.3.3 d2 DEAD NOROOM 3.5s; R.4 d1 INTERNAL 0.9s; R.4.p1 d2 INTERNAL 1.2s; R.4.p1.p1 d3 INTERNAL 1.1s; R.4.p1.p1.1 d4 INTERNAL 4.4s; R.4.p1.p1.1.1 d5 DEAD EmptyBox 0.9s; R.4.p1.p1.1.2 d5 ALIVE 3.3s; R.4.p1.p1.2 d4 ALIVE 0.0s; R.5 d1 ALIVE 0.0s; R.6 d1 ALIVE 0.0s
+== n17_k13_0249__spine: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+ROW243 {"nid": "n17_k13_0249__spine", "cls": "n17_k13_0249", "n": 17, "k": 13, "spine": true, "assumed": ["TR(1,0)", "TL(1,0)"], "forced": ["TR(1,0)", "TL(1,0)"], "forced_ext": {"TR(1,0)": "n17_k14_0225", "TL(1,0)": "n17_k14_0190"}, "verdict": "ALIVE", "stage0_verdict": "ALIVE", "stage0_leaf": "", "stage0_kills": {"H-clip": 0, "P": 3282, "W": 194, "C": 0, "M": 0, "L": 0, "R": 653, "X": 137}, "stage0_seconds": 8.6, "tree_seconds": 93.2, "seconds_total": 101.9, "n_nodes": 25, "max_depth": 5, "dead_leaves": 14, "alive_leaves": 4, "kills_by_rule": {"NOROOM": 7, "EmptyBox": 7}, "root_verdict": "INTERNAL", "root_clip": null, "wall": true, "snap": {"runs": 37, "kills": 0, "handoffs": 0}, "noroom": [{"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "EmptyBox"}, {"k": 16, "m": 1, "verdict": "UNDECIDED", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "EmptyBox"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "EmptyBox"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}], "undecided": ["undecided (wall) at the fully named leaf before the leaf rules", "undecided: wall before this branch ran", "undecided: wall before this branch ran", "undecided: wall before this branch ran"], "leaf": "", "tag": "descend", "wall_s": 90, "cert": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k13_0249__spine.json.gz", "when": "2026-10-11 21:10:11"}

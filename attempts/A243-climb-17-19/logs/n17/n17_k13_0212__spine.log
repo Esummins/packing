@@ -1,0 +1,61 @@
+== stage 0 + CSP n17_k13_0212__spine at the window pad: ALIVE in 10210 ms; kills {'H-clip': 0, 'P': 3392, 'W': 104, 'C': 0, 'M': 0, 'L': 0, 'R': 1085, 'X': 220}; CSP units 128 -> 128 alive; caps {'BR(0,1)': None, 'TR(0,2)': None, 'TR(1,1)': None}; forced H []
+== n17_k13_0212__spine page pad window: start attempts/A243-climb-17-19/certs/n17/csp209_n17_k13_0212__spine_window_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.108, 4.176, 1.189, 3.486, 0.0, 90.0]; forced H []; 3 slots; free squares 3
+   node R          d0 root: INTERNAL (2.1 s, 1 rounds; t=2.1)
+   node R.1        d1 BR(0,1)<-[25]: INTERNAL (1.2 s, 1 rounds; t=3.3)
+   node R.1.1      d2 TR(1,1)<-[20]: INTERNAL (1.9 s, 1 rounds; t=5.2)
+   no-room (k=16, m=1, n=17): UNDECIDED in 14 s
+   Lemma POCKET at R.1.1: 2 pockets (k=16, m=1): the next square instantiated in each
+   node R.1.1.p1   d3 pocket<-[0]: DEAD by EmptyBox r1 (1.4 s, 1 rounds; t=20.1)
+   node R.1.1.p2   d3 pocket<-[1]: DEAD by EmptyBox r1 (0.2 s, 1 rounds; t=20.3)
+   node R.1.2      d2 TR(1,1)<-[21]: INTERNAL (1.6 s, 1 rounds; t=22.0)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 2 s
+   node R.1.2      d2: DEAD by NOROOM -- no-room at R.1.2 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.3      d2 TR(1,1)<-[22]: INTERNAL (2.5 s, 1 rounds; t=26.1)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 2 s
+   node R.1.3      d2: DEAD by NOROOM -- no-room at R.1.3 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.4      d2 TR(1,1)<-[27]: INTERNAL (1.0 s, 1 rounds; t=29.0)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 1 s
+   node R.1.4      d2: DEAD by NOROOM -- no-room at R.1.4 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.5      d2 TR(1,1)<-[28]: INTERNAL (0.9 s, 1 rounds; t=30.9)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 1 s
+   node R.1.5      d2: DEAD by NOROOM -- no-room at R.1.5 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.6      d2 TR(1,1)<-[32]: INTERNAL (2.8 s, 1 rounds; t=34.7)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 2 s
+   node R.1.6      d2: DEAD by NOROOM -- no-room at R.1.6 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.2        d1 BR(0,1)<-[26]: INTERNAL (1.2 s, 1 rounds; t=37.7)
+   no-room (k=15, m=2, n=17): UNDECIDED in 16 s
+   Lemma POCKET at R.2: 1 pockets (k=15, m=2): the next square instantiated in each
+   node R.2.p1     d2 pocket<-[0]: INTERNAL (1.8 s, 1 rounds; t=55.6)
+   no-room (k=16, m=1, n=17): UNDECIDED in 15 s
+   Lemma POCKET at R.2.p1: 1 pockets (k=16, m=1): the next square instantiated in each
+   node R.2.p1.p1  d3 pocket<-[0]: INTERNAL (2.6 s, 1 rounds; t=73.3)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Lemma ROLE-SPLIT at R.2.p1.p1: bisect F2 on x at 2.337766 (extents (3.675531, 3.675531), tilt 90.0 deg, core EMPTY, 12 piece(s); split 1 of 4)
+   node R.2.p1.p1.1 d4 F2<-['x<=2.337766']: DEAD by EmptyBox r1 (0.3 s, 1 rounds; t=74.5)
+   node R.2.p1.p1.2 d4 F2<-['x>=2.337766']: INTERNAL (2.6 s, 1 rounds; t=77.1)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Lemma ROLE-SPLIT at R.2.p1.p1.2: bisect F3 on x at 2.337766 (extents (3.675531, 3.675531), tilt 90.0 deg, core EMPTY, 12 piece(s); split 1 of 4)
+   node R.2.p1.p1.2.1 d5 F3<-['x<=2.337766']: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=77.4)
+   node R.2.p1.p1.2.2 d5 F3<-['x>=2.337766']: INTERNAL (1.5 s, 1 rounds; t=79.0)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Lemma ROLE-SPLIT at R.2.p1.p1.2.2: bisect F3 on y at 2.278809 (extents (1.806869, 1.884906), tilt 90.0 deg, core EMPTY, 14 piece(s); split 2 of 4)
+   node R.2.p1.p1.2.2.1 d6 F3<-['y<=2.278809']: INTERNAL (2.1 s, 1 rounds; t=81.4)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Rule NS at R.2.p1.p1.2.2.1: split F2 at BR(0,1) (meeting fraction 0.301236; alive rows [31, 32]; named ['F1', 'F2', 'F3', 'H'])
+   node R.2.p1.p1.2.2.1.1 d7 BR(0,1)<-None: INTERNAL (1.4 s, 1 rounds; t=83.1)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Rule NS at R.2.p1.p1.2.2.1.1: split F3 at TR(1,1) (meeting fraction 0.316968; alive rows [20, 21, 22, 27, 28, 32]; named ['F1', 'F2', 'F3', 'H'])
+   node R.2.p1.p1.2.2.1.1.1 d8 TR(1,1)<-None: INTERNAL (3.7 s, 1 rounds; t=87.0)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Rule NS at R.2.p1.p1.2.2.1.1.1: split F2 at TR(1,1) (meeting fraction 0.287628; alive rows [20, 21, 22, 27, 28, 32]; named ['F1', 'F2', 'F3', 'H'])
+   node R.2.p1.p1.2.2.1.1.1.1 d9 TR(1,1)<-None: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=88.2)
+   node R.2.p1.p1.2.2.1.1.1.2 d9 TR(1,1)<-None: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=88.7)
+   node R.2.p1.p1.2.2.1.1.2 d8 TR(1,1)<-None: INTERNAL (2.2 s, 1 rounds; t=91.0)
+   node R.2.p1.p1.2.2.1.1.2: ALIVE [undecided (wall) at the fully named leaf before the leaf rules]
+   start R            => ALIVE (23 nodes; t = 91 s of 90)
+   => ALIVE (window_page) in 91.2 s: 0 start runs, 23 nodes, depth 9, 0 CC kills, 0 exact leaf cascades, 3 NS splits, 3 pocket splits, 3 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 11 dead / 6 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 31 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R d0 INTERNAL 2.1s; R.1 d1 INTERNAL 1.2s; R.1.1 d2 INTERNAL 1.9s; R.1.1.p1 d3 DEAD EmptyBox 1.4s; R.1.1.p2 d3 DEAD EmptyBox 0.2s; R.1.2 d2 DEAD NOROOM 1.6s; R.1.3 d2 DEAD NOROOM 2.5s; R.1.4 d2 DEAD NOROOM 1.0s; R.1.5 d2 DEAD NOROOM 0.9s; R.1.6 d2 DEAD NOROOM 2.8s; R.2 d1 INTERNAL 1.2s; R.2.p1 d2 INTERNAL 1.8s; R.2.p1.p1 d3 INTERNAL 2.6s; R.2.p1.p1.1 d4 DEAD EmptyBox 0.3s; R.2.p1.p1.2 d4 INTERNAL 2.6s; R.2.p1.p1.2.1 d5 DEAD EmptyBox 0.1s; R.2.p1.p1.2.2 d5 INTERNAL 1.5s; R.2.p1.p1.2.2.1 d6 INTERNAL 2.1s; R.2.p1.p1.2.2.1.1 d7 INTERNAL 1.4s; R.2.p1.p1.2.2.1.1.1 d8 INTERNAL 3.7s; R.2.p1.p1.2.2.1.1.1.1 d9 DEAD EmptyBox 1.0s; R.2.p1.p1.2.2.1.1.1.2 d9 DEAD EmptyBox 0.4s; R.2.p1.p1.2.2.1.1.2 d8 ALIVE 2.2s; R.2.p1.p1.2.2.1.2 d7 ALIVE 0.0s; R.2.p1.p1.2.2.2 d6 ALIVE 0.0s; R.3 d1 ALIVE 0.0s; R.4 d1 ALIVE 0.0s; R.5 d1 ALIVE 0.0s
+== n17_k13_0212__spine: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+ROW243 {"nid": "n17_k13_0212__spine", "cls": "n17_k13_0212", "n": 17, "k": 13, "spine": true, "assumed": ["BR(0,1)", "TR(0,2)", "TR(1,1)"], "forced": ["BR(0,1)", "TR(0,2)", "TR(1,1)"], "forced_ext": {"BR(0,1)": "n17_k14_0193", "TR(0,2)": "n17_k14_0194", "TR(1,1)": "n17_k14_0191"}, "verdict": "ALIVE", "stage0_verdict": "ALIVE", "stage0_leaf": "", "stage0_kills": {"H-clip": 0, "P": 3392, "W": 104, "C": 0, "M": 0, "L": 0, "R": 1085, "X": 220}, "stage0_seconds": 10.2, "tree_seconds": 91.2, "seconds_total": 101.6, "n_nodes": 23, "max_depth": 9, "dead_leaves": 11, "alive_leaves": 6, "kills_by_rule": {"EmptyBox": 6, "NOROOM": 5}, "root_verdict": "INTERNAL", "root_clip": null, "wall": true, "snap": {"runs": 31, "kills": 0, "handoffs": 0}, "noroom": [{"k": 16, "m": 1, "verdict": "UNDECIDED", "clip": null}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 15, "m": 2, "verdict": "UNDECIDED", "clip": null}, {"k": 16, "m": 1, "verdict": "UNDECIDED", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}], "undecided": ["undecided (wall) at the fully named leaf before the leaf rules", "undecided: wall before this branch ran", "undecided: wall before this branch ran", "undecided: wall before this branch ran", "undecided: wall before this branch ran", "undecided: wall before this branch ran"], "leaf": "", "tag": "descend", "wall_s": 90, "cert": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k13_0212__spine.json.gz", "when": "2026-10-11 20:51:37"}
