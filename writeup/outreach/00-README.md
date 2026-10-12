@@ -8,7 +8,7 @@ replay of your T-037.  Each note ends with "What we ask": compute on the climb, 
 registration of the strategy.  Every mathematical claim is tagged and sourced; nothing here claims s(11).
 
 Repository: **https://github.com/Esummins/packing** (public; files cited as `blob/master/<path>`).
-Licence: to be stated by the PI (placeholder).  Author only — these notes are drafts for the PI; nothing has been
+Licence: code MIT, documents and data CC BY 4.0 (LICENSE at the repository root).  Author only — these notes are drafts for the PI; nothing has been
 posted.  Tags shared with your record: **[T]** proved in prose (Lean name given where one exists), **[M]** measured
 (run cited), **[F]** refuted (witness given), **[C]** obligation / conjecture / certificate-backed as stated; the
 lab's own status sheet (`writeup/05_status_sheet.md`) adds [L] Lean-checked and [P] priced.
