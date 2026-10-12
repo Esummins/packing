@@ -1,0 +1,39 @@
+== stage 0 + CSP n17_k12_0208__spine at the window pad: ALIVE in 13032 ms; kills {'H-clip': 0, 'P': 3558, 'W': 215, 'C': 0, 'M': 0, 'L': 0, 'R': 2681, 'X': 444}; CSP units 160 -> 160 alive; caps {'BL(2,0)': None, 'BR(0,1)': None, 'BR(1,0)': None, 'TR(0,2)': None, 'TR(1,1)': None}; forced H []
+== n17_k12_0208__spine page pad window: start attempts/A243-climb-17-19/certs/n17/csp209_n17_k12_0208__spine_window_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.108, 4.176, 0.5, 3.486, 0.0, 90.0]; forced H []; 5 slots; free squares 4
+   node R          d0 root: INTERNAL (3.4 s, 1 rounds; t=3.4)
+   node R.1        d1 BL(2,0)<-[18]: INTERNAL (2.5 s, 1 rounds; t=5.9)
+   node R.1.1      d2 BR(0,1)<-[25]: INTERNAL (4.5 s, 1 rounds; t=10.4)
+   node R.1.1.1    d3 TR(1,1)<-[20]: INTERNAL (3.7 s, 1 rounds; t=14.1)
+   no-room (k=16, m=1, n=17): UNDECIDED in 21 s
+   Lemma POCKET at R.1.1.1: 2 pockets (k=16, m=1): the next square instantiated in each
+   node R.1.1.1.p1 d4 pocket<-[0]: INTERNAL (8.8 s, 1 rounds; t=44.2)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Rule NS at R.1.1.1.p1: split F4 at TR(0,2) (meeting fraction 0.268149; alive rows []; named ['F2', 'F4', 'H'])
+   node R.1.1.1.p1.1 d5 TR(0,2)<-None: INTERNAL (7.0 s, 1 rounds; t=51.3)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Rule NS at R.1.1.1.p1.1: split F4 at TR(1,1) (meeting fraction 0.369085; alive rows []; named ['F3', 'F4', 'H'])
+   node R.1.1.1.p1.1.1 d6 TR(1,1)<-None: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=51.8)
+   node R.1.1.1.p1.1.2 d6 TR(1,1)<-None: DEAD by MISS-CLIP r1 (0.0 s, 1 rounds; t=51.9)
+   node R.1.1.1.p1.2 d5 TR(0,2)<-None: INTERNAL (2.1 s, 1 rounds; t=54.0)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Rule NS at R.1.1.1.p1.2: split F4 at TR(1,1) (meeting fraction 0.369085; alive rows []; named ['F3', 'F4', 'H'])
+   node R.1.1.1.p1.2.1 d6 TR(1,1)<-None: DEAD by EmptyBox r1 (0.4 s, 1 rounds; t=54.4)
+   node R.1.1.1.p1.2.2 d6 TR(1,1)<-None: DEAD by MISS-CLIP r1 (0.0 s, 1 rounds; t=54.5)
+   node R.1.1.1.p2 d4 pocket<-[1]: INTERNAL (6.2 s, 1 rounds; t=60.7)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   Rule NS at R.1.1.1.p2: split H at TR(0,2) (meeting fraction 0.268818; alive rows []; named ['F2', 'F4', 'H'])
+   node R.1.1.1.p2.1 d5 TR(0,2)<-None: DEAD by FC r1 (4.0 s, 1 rounds; t=64.7)
+   node R.1.1.1.p2.2 d5 TR(0,2)<-None: DEAD by FC r1 (1.5 s, 1 rounds; t=66.3)
+   node R.1.1.2    d3 TR(1,1)<-[21]: INTERNAL (5.9 s, 1 rounds; t=72.3)
+   no-room (k=16, m=1, n=17): DEAD by NOROOM in 2 s
+   node R.1.1.2    d3: DEAD by NOROOM -- no-room at R.1.1.2 (k=16, m=1; A189 Lemma 1 on the role boxes): bisection alone: every pose of a free unit square meets some core
+   node R.1.1.3    d3 TR(1,1)<-[22]: INTERNAL (3.5 s, 1 rounds; t=78.7)
+   no-room (k=16, m=1, n=17): UNDECIDED in 20 s
+   node R.1.1.3   : ALIVE [undecided (wall) at the fully named leaf before the exact cascade]
+   start R            => ALIVE (16 nodes; t = 99 s of 90)
+   => ALIVE (window_page) in 99.0 s: 0 start runs, 16 nodes, depth 6, 0 CC kills, 0 exact leaf cascades, 4 NS splits, 1 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 7 dead / 13 alive leaves (WALL)
+   A224 Rule SNAP [ON]: 17 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.01 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R d0 INTERNAL 3.4s; R.1 d1 INTERNAL 2.5s; R.1.1 d2 INTERNAL 4.5s; R.1.1.1 d3 INTERNAL 3.7s; R.1.1.1.p1 d4 INTERNAL 8.8s; R.1.1.1.p1.1 d5 INTERNAL 7.0s; R.1.1.1.p1.1.1 d6 DEAD EmptyBox 0.5s; R.1.1.1.p1.1.2 d6 DEAD MISS-CLIP 0.0s; R.1.1.1.p1.2 d5 INTERNAL 2.1s; R.1.1.1.p1.2.1 d6 DEAD EmptyBox 0.4s; R.1.1.1.p1.2.2 d6 DEAD MISS-CLIP 0.0s; R.1.1.1.p2 d4 INTERNAL 6.2s; R.1.1.1.p2.1 d5 DEAD FC 4.0s; R.1.1.1.p2.2 d5 DEAD FC 1.5s; R.1.1.2 d3 DEAD NOROOM 5.9s; R.1.1.3 d3 ALIVE 3.5s; R.1.1.4 d3 ALIVE 0.0s; R.1.1.5 d3 ALIVE 0.0s; R.1.1.6 d3 ALIVE 0.0s; R.1.1.7 d3 ALIVE 0.0s; R.1.2 d2 ALIVE 0.0s; R.1.3 d2 ALIVE 0.0s; R.1.4 d2 ALIVE 0.0s; R.1.5 d2 ALIVE 0.0s; R.2 d1 ALIVE 0.0s; R.3 d1 ALIVE 0.0s; R.4 d1 ALIVE 0.0s; R.5 d1 ALIVE 0.0s
+== n17_k12_0208__spine: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+ROW243 {"nid": "n17_k12_0208__spine", "cls": "n17_k12_0208", "n": 17, "k": 12, "spine": true, "assumed": ["BL(2,0)", "BR(0,1)", "BR(1,0)", "TR(0,2)", "TR(1,1)"], "forced": ["BL(2,0)", "BR(0,1)", "BR(1,0)", "TR(0,2)", "TR(1,1)"], "forced_ext": {"BL(2,0)": "n17_k13_0197", "BR(0,1)": "n17_k13_0219", "BR(1,0)": "n17_k13_0212", "TR(0,2)": "n17_k13_0220", "TR(1,1)": "n17_k13_0216"}, "verdict": "ALIVE", "stage0_verdict": "ALIVE", "stage0_leaf": "", "stage0_kills": {"H-clip": 0, "P": 3558, "W": 215, "C": 0, "M": 0, "L": 0, "R": 2681, "X": 444}, "stage0_seconds": 13.0, "tree_seconds": 99.0, "seconds_total": 112.2, "n_nodes": 16, "max_depth": 6, "dead_leaves": 7, "alive_leaves": 13, "kills_by_rule": {"EmptyBox": 2, "MISS-CLIP": 2, "FC": 2, "NOROOM": 1}, "root_verdict": "INTERNAL", "root_clip": null, "wall": true, "snap": {"runs": 17, "kills": 0, "handoffs": 0}, "noroom": [{"k": 16, "m": 1, "verdict": "UNDECIDED", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 16, "m": 1, "verdict": "DEAD", "clip": "NOROOM"}, {"k": 16, "m": 1, "verdict": "UNDECIDED", "clip": null}], "undecided": ["undecided (wall) at the fully named leaf before the exact cascade", "undecided: wall before this branch ran", "undecided: wall before this branch ran", "undecided: wall before this branch ran", "undecided: wall before this branch ran", "undecided: wall before this branch ran"], "leaf": "", "tag": "descend", "wall_s": 90, "cert": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k12_0208__spine.json.gz", "when": "2026-10-11 22:02:33"}
