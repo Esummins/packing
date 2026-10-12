@@ -1,0 +1,24 @@
+== stage 0 + CSP n17_k14_0254__spine at the window pad: ALIVE in 8952 ms; kills {'H-clip': 0, 'P': 3296, 'W': 0, 'C': 0, 'M': 0, 'L': 0, 'R': 382, 'X': 46}; CSP units 96 -> 96 alive; caps {'BR(1,1)': None, 'TR(1,1)': None}; forced H []
+== n17_k14_0254__spine page pad window: start attempts/A243-climb-17-19/certs/n17/csp209_n17_k14_0254__spine_window_s0.json; basins []; INHERIT 0 dead branches (final) + 0 start nodes []; H [2.338, 3.486, 1.189, 3.486, 0.0, 90.0]; forced H []; 2 slots; free squares 2
+   node R          d0 root: INTERNAL (1.4 s, 1 rounds; t=1.4)
+   node R.1        d1 BR(1,1)<-[19]: INTERNAL (0.6 s, 1 rounds; t=2.1)
+   node R.1r1      d1 root<-None: INTERNAL (3.2 s, 1 rounds; t=5.3)
+   no-room (k=17, m=0, n=17): VACUOUS in 0 s
+   node R.1x       d1 root<-None: DEAD by EmptyBox r1 (0.5 s, 1 rounds; t=5.8)
+   node R.2        d1 BR(1,1)<-[20]: INTERNAL (1.3 s, 1 rounds; t=7.0)
+   no-room (k=16, m=1, n=17): UNDECIDED in 13 s
+   Lemma POCKET at R.2: 1 pockets (k=16, m=1): the next square instantiated in each
+   node R.2.p1     d2 pocket<-[0]: DEAD by S-CLIP r1 (1.4 s, 1 rounds; t=21.1)
+   node R.3        d1 BR(1,1)<-[21]: DEAD by FC r1 (1.7 s, 1 rounds; t=22.8)
+   node R.4        d1 BR(1,1)<-[25]: INTERNAL (0.5 s, 1 rounds; t=23.4)
+   node R.4r1      d1 root<-None: DEAD by EmptyBox r1 (1.0 s, 1 rounds; t=24.4)
+   node R.5        d1 BR(1,1)<-[26]: INTERNAL (0.7 s, 1 rounds; t=25.1)
+   node R.5r1      d1 root<-None: DEAD by EmptyBox r1 (0.1 s, 1 rounds; t=25.2)
+   node R.6        d1 BR(1,1)<-[27]: DEAD by FC r1 (0.6 s, 1 rounds; t=25.9)
+   start R            => DEAD (12 nodes; t = 26 s of 90)
+   => DEAD (window_page) in 25.9 s: 0 start runs, 12 nodes, depth 2, 0 CC kills, 1 exact leaf cascades, 0 NS splits, 1 pocket splits, 0 role splits (0 empty-half kills), 0 inherited dead (0 up front + 0 in tree), 6 dead / 0 alive leaves
+   A224 Rule SNAP [ON]: 7 evaluation(s), 0 candidate(s), 0 KILL(s), 0 hand-off(s), 0 partial (anonymous squares left), 0.00 s; first kill at t = None s
+   A220: exact-first 0 run(s), 0 kill(s), 0 timeout(s), 0.0 s; short no-room cap 0 time(s) [flags {'exact_first': '', 'budget': 45.0, 'rounds': 1, 'small_ext': 0.25, 'noroom_inherit': True, 'child_cap': 25.0, 'shrink': 0.5}]
+   per node: R d0 INTERNAL 1.4s; R.1 d1 INTERNAL 0.6s; R.1r1 d1 INTERNAL 3.2s; R.1x d1 DEAD EmptyBox 0.5s [exact]; R.2 d1 INTERNAL 1.3s; R.2.p1 d2 DEAD S-CLIP 1.4s; R.3 d1 DEAD FC 1.7s; R.4 d1 INTERNAL 0.5s; R.4r1 d1 DEAD EmptyBox 1.0s; R.5 d1 INTERNAL 0.7s; R.5r1 d1 DEAD EmptyBox 0.1s; R.6 d1 DEAD FC 0.6s
+== n17_k14_0254__spine: g1 None | pad0 None   (pad-0 verdict beside the window verdict; a page is killed only by a DEAD g1)
+ROW243 {"nid": "n17_k14_0254__spine", "cls": "n17_k14_0254", "n": 17, "k": 14, "spine": true, "assumed": ["BR(1,1)", "TR(1,1)"], "forced": ["BR(1,1)", "TR(1,1)"], "forced_ext": {"BR(1,1)": "n17_k15_0147", "TR(1,1)": "n17_k15_0147"}, "verdict": "DEAD", "stage0_verdict": "ALIVE", "stage0_leaf": "", "stage0_kills": {"H-clip": 0, "P": 3296, "W": 0, "C": 0, "M": 0, "L": 0, "R": 382, "X": 46}, "stage0_seconds": 9.0, "tree_seconds": 25.9, "seconds_total": 34.9, "n_nodes": 12, "max_depth": 2, "dead_leaves": 6, "alive_leaves": 0, "kills_by_rule": {"EmptyBox": 3, "S-CLIP": 1, "FC": 2}, "root_verdict": "INTERNAL", "root_clip": null, "wall": false, "snap": {"runs": 7, "kills": 0, "handoffs": 0}, "noroom": [{"k": 17, "m": 0, "verdict": "VACUOUS", "clip": null}, {"k": 16, "m": 1, "verdict": "UNDECIDED", "clip": null}], "undecided": [], "leaf": "every branch DEAD (0 inherited from prior certificates + 6 proved here): R.1x root<-None by EmptyBox; R.2.p1 pocket<-[0] by S-CLIP; R.3 BR(1,1)<-[21] by FC; R.4r1 root<-None by EmptyBox; R.5r1 root<-None by EmptyBox; R.6 BR(1,1)<-[27] by FC", "tag": "descend", "wall_s": 90, "cert": "attempts/A243-climb-17-19/certs/n17/climb243_n17_k14_0254__spine.json.gz", "when": "2026-10-11 20:33:45"}
