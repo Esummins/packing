@@ -1352,3 +1352,52 @@ supersedes.
 - Unchanged since s.3: 8a A261 50/50 [T-computed]; 10a A259 81/81, bad 0 [T-computed]; 10b A260 hybA / hybB / hybAB
   / layer 81/81, bad 0 [T-computed]; A266 `strip266` 6/6 budgeted cells not ok (now moot for 5b: the drop tree
   replaced it).
+
+**15.2 Measured facts landed after the last append (supersede s.4, s.12, s.14 where named).**
+- [M] **nest279 finished** (A279's two-stage NEST search; `attempts/A279-nest-residual/results/nest279.jsonl`, last
+  row 2026-09-24 02:10, committed 1c58fca08): 8 rows, **all NO-WITNESS** — free/nest seeds 1–4 sup margin −0.0 (the
+  boundary), hv0.50/nest seeds 1–2 −0.0 / −0.00183, free/cell seeds 1–2 −0.000037 / −0.0163.  No NEST quadruple was
+  found; an optimiser's sup is not evidence (s.10), so NEST-emptiness stays [C].  Supersedes s.12 "running at exit".
+- [M]/[T-computed] **A281's 8-square outer structures — all 30 rows landed** (`attempts/A281-corner-cost/results/
+  wall281_rings.json`, 2026-09-28 15:47, *wt*: 12 rows committed, 18 not).  Per orbit, sup margin at 3.82 / ŝ;
+  "exact" = rationalised witness passing every check (`corner_cost.md` §7: sup ≤ 0 with no exact witness is
+  UNDECIDED by side):
+  - EXIST on all of W, exact at both ends [T-computed]: Ff/Ff/Ff/Ff +0.0451 / +0.0519; Ff/Ff/Ff/T +0.0467 / +0.0538;
+    Ff/Ff/T/T +0.0486 / +0.0559; Ff/T/Ff/T +0.0492 / +0.0565; Ff/T/T/T +0.0399 / +0.0462; T/T/T/T +0.0409 / +0.0643.
+  - a ΠΠ wall, side-dead by TWO-POKERS [T] (s.14), sup −0.0003 … −0.0017: Ff/Ff/Ff/Fw, Ff/Ff/Fw/Fw, Ff/Ff/T/Fw,
+    Ff/Fw/Ff/Fw, Ff/Fw/Ff/T, Ff/T/T/Fw.
+  - **no ΠΠ wall and sup < 0 — UNDECIDED [M]**: Ff/Ff/Fw/T −0.00043 / −0.00174; Ff/Fw/T/T −0.00045 / −0.00032;
+    Ff/T/Fw/T −0.00174 / −0.00031.  `corner_cost.md` §7 says only "orbits with a ΠΠ wall fail"; these three rows are
+    later and no source text reads them.  Nothing in the chain depends on them (s.14: ROOM closes, not side).
+  `logs/finish281.log`: `finish281.sh` regenerated `corner_cost.md` and then **crashed in `pages281.py`**
+  (`KeyError: 0` in `wall281.unpack`), so the page's ring panels and the 18 rows were never committed.  The ledger s.4
+  A281 note ("ring rows pending, finisher armed") is therefore stale.
+- [M] 5e: `attempts/A262-no-jam/results/search262.jsonl` (2026-09-22 01:07, untracked) and `span262.json` (untracked)
+  are unchanged since s.8; no source text reports on search262's extra rows.
+
+**15.3 External and window facts (2026-09-29 … 2026-10-22).**
+- **T-037 replayed: PASS.**  A242-replay-31-8 (`attempts/A242-replay-31-8/results/replay242.md`, verdict written
+  2026-10-11): Kleddamag's certified s(11) > 31/8 (v1.0.2, certificate sha256 57e9927d…) — 12 028 / 12 028 rows
+  replayed, 0 differ, independent exact controls PASS, own spot-check PASS (3 240 exact poses, 11Γ − M = 107 864·10⁻⁹),
+  integrity PASS ×2.  Lean: axiom `threshold_bound_31_8` [EXTERNAL] with `window_restrict`, `lb382_of_threshold`
+  (`Statements/Open/ThresholdBound.lean`).  The window W′ = [31/8, s0] = [3.875, 3.877084] is **available, not adopted**
+  (`residue_ledger.md` §0 Window row: "adoption = coordinator (…adopt242.py --dry-run); CURRENT.json untouched").
+  For k0: every link of s.8 is a statement for all s in W = [3.82, ŝ], so it holds on W′ ∩ [3.875, ŝ] unchanged;
+  nothing in the k0 chain was re-run or re-priced on W′ (A242's dry run lists k5 / trump5 / tube effects only: LOG A242).
+- **s(11) is settled in the external record.**  `writeup/outreach/00-README.md` §1 and `07-timeline.md`: T-060
+  (registered 2026-09-29: Ahmed's global equality s(11) = T, V3/C3/S5; Lean formalisation reported 2026-10-06) and
+  T-112 (2026-10-06: uniqueness of Trump's packing at T).  The owner's reply on #526: "n = 11 is settled in this record
+  by T-060 and T-112, so K0-FREE, SWAP and CELLS, the extremal reduction and the measured facts are structural results
+  at a settled count and are not registered"; the ten refuted routes are kept in the retained packet
+  `esummins-packing-2026-10-12`; the field-certificate / `pair3` / STRIP₂ request waits in `think-tnfo`; the extremal
+  reduction's review is shared with #524 (`think-s1ru`).  So the lab's k0 chain no longer decides s(11) for anyone; its
+  value is the n-general programme (s.9; 00-README §1, the PI's framing: "a program to gain deeper insight … for all n").
+- **Lean** (`lean/AUDIT.md`, 2026-10-07 20:54, after A242): the k0 axioms of s.6 / s.11–s.14 are unchanged
+  (`bl_cap2_float2`, `float2_local`, `no_PiPi_window`, `notches_le_three`, `strip_two_in_jam`, `strip_two_in_jam_corner`,
+  …); the audit's verdict line "3 statement(s) depend on `sorryAx` or produced no output" refers to three
+  ThresholdBound theorems with "(no output)" (`wnd'_subset_wnd`, `stratum_kill_of_wnd'`, `trump_residual_of_wnd'`;
+  the audit's own rc = 1, commit 2e479b8fc), none of them k0.  s.0's "AUDIT generated 2026-09-23 18:37" is older.
+- **Attempt-id collisions** (a citation pitfall): A242 = `A242-crowd-root` (2026-09-16, k0 STUCK-4 root, s.7) and
+  `A242-replay-31-8` (2026-10-07); A243 = `A243-reach-root` (2026-09-16, s.7) and `A243-climb-17-19` (2026-10-07);
+  A244 = `A244-twelve-stuck` (2026-09-16, the corpus of s.10) and `A244-outreach-series` (2026-10-11).  Cite the
+  directory name, not the bare number.
