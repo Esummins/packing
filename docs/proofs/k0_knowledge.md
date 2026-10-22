@@ -1442,7 +1442,9 @@ supersedes.
 + [T-computed] (80 cells, A273 + A280) — COMPLETE — + `pair3`.**  5c [M].  5d [C] the two CAP-2 statements (s.11,
 s.12: BL-CAP-2(C, D) ⟸ NO-FLOAT2 = L, residual (NEST) [C], nest279 [M] no witness; BL-CAP-2(A, C) [C]; `cert277`
 not launched, 30–1000 / 3–100 CPU-h).  5e [M].  6 [T from 5] (axiom `jam_count` [C]).  7 [T-prose].  8a
-[T-computed].  **8b [T-computed\*]: 488 of the 492 non-cube slab jobs PASS; SM1_0, SM1_01, SM1_013, SM1_03 owed.**
+[T-computed].  **8b [T-computed\*]: 488 of the 494 slab jobs PASS; SM3_0123 (FAIL) and SM1_0123 (not done) lie in 8c's cube [T];
+SM1_0, SM1_01, SM1_013, SM1_03 owed** (`k0_route.md` §13 says "492 engine jobs", `open_pairs.md` §5.2 "494 jobs after
+symmetry"; the state files number 494).
 8c [T].  8d exists (room 10).  8e [M].  9 [T].  10a, 10b [T-computed].  **10c [T-computed\*]: WS complete; P2 24
 cells and WE 18 cells not ok; 16 verifier-bad leaves in P2 6,7 / 7,7 to bisect.**  10d [C] (P2n: 10/10 cells not
 ok, as designed).  11, 12 [T].  13 outside.
