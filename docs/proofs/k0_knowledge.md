@@ -1401,3 +1401,60 @@ supersedes.
   `A242-replay-31-8` (2026-10-07); A243 = `A243-reach-root` (2026-09-16, s.7) and `A243-climb-17-19` (2026-10-07);
   A244 = `A244-twelve-stuck` (2026-09-16, the corpus of s.10) and `A244-outreach-series` (2026-10-11).  Cite the
   directory name, not the bare number.
+
+**15.4 Contradictions between sources found on 2026-10-22 (each recorded both ways; the later / primary one named).**
+1. `residue_ledger.md` §0 Window row says "replay verdict PASS 2026-10-11" AND "T-037 replay verdict: FAIL (A242: all
+   12,028 rows replayed …)".  Later and primary: `replay242.md` (final242, 2026-10-11) **PASS**; commit d837ed9f6 says
+   the earlier FAIL was "the priority wrapper's traceback appended after PASS"; 8f742e5da "keep the single PASS
+   verdict".  The FAIL clause in the row is a stale marker.
+2. `k0_route.md` §13 5b (A280, 2026-09-24): "T-computed outside it once run280 lands" vs `index280.jsonl` + 29
+   `verify280` PASS (2026-09-27).  Later: landed (15.1).  Same for s.13 here ("LAUNCHED gated").
+3. This file's s.6 "[C] 5b STRIP₂-IN-JAM on the near-flat corner" and s.8 5b "The corner stays [C]" (2026-09-23, A275
+   pieces 08–13) vs A276 Theorems FLAT-X / CORNER [T] (`flat_x.md`, LOG 2026-09-23, after A275).  Later: [T].  s.0.5
+   (2026-09-24) already said so; s.6 / s.8 were never edited in place.
+4. s.0.5 "index273 67/81 cells, 43 CERT, 24 OPEN-LAYER on 2026-09-24" (10:04) vs `index273.jsonl` final (12:55 that
+   day): 81 rows, 51 CERT, 30 OPEN-LAYER.  Later: 81 / 51 / 30, then A280 closes 29 of the 30.
+5. 10c P2 counts: `k0_route.md` §13 "P2 41/81" and "index 36/42 ok" (2026-09-22); s.3 here "70 of 81, 50 ok, 20 not ok"
+   (2026-09-23); the index on 2026-10-22: 81/81, 54 ok, 27 not ok (mtime 2026-09-24 07:29).  Later: the index.
+6. 10c WE / WS: "WS 3 cells, WE 1 cell" (`k0_route.md` §13; s.8 "WE 1/1, WS 3/3") vs the 81-cell indices (WS 81/81 ok
+   2026-09-24; WE 63/81 ok 2026-09-28).  Later: the 81-cell indices.
+7. A262 chain3: `k0_route.md` §13 "chain3 waits for search262, alive at exit" vs `chain3.log`: `float262` ran four times
+   with fork failures; `pair3` never started; last write 2026-09-28 15:06.  Later: the log.
+8. A281: `corner_cost.md` §7 / s.14 / ledger s.4 "rows still landing … finish281.sh commits them" (2026-09-28 15:25) vs
+   `finish281.log` (crash in `pages281.py`) and `wall281_rings.json` (30 rows, 15:47, 18 uncommitted).  Later: the files.
+9. A281 refinement, not a reversal: §7 "the orbits with a Π–Π wall fail" (12 rows) vs 30 rows: three orbits without a
+   Π–Π wall also have sup < 0 (UNDECIDED by §7's own rule).  Later: the 30-row file.
+10. `writeup/outreach/03-k0-status.md` (2026-10-11) cites the compilation as `attempts/A275-k0-knowledge/` with the
+    2026-09-23 counts, and `07-timeline.md` "the 1,103-line compilation"; the file is `docs/proofs/k0_knowledge.md`,
+    1 277 lines at pin 651a9a5.  Later and primary: this file (the header note answers #526).
+11. `03-k0-status.md` §5 (2026-10-11) lists "STRIP₂ off the ring domain (budgeted ~5·10³ CPU-h …)" as open and says
+    "Several [T-computed*] chains (A259–A266) were left running" — later in date than the index files but stale in
+    content: A259 / A260 were complete on 2026-09-22/23 and STRIP₂-IN-JAM's drop tree on 2026-09-27 (15.1).  Primary:
+    the index files.
+12. "Zero sorrys is the trust signal" vs AUDIT 2026-10-07's verdict line (3 statements with "(no output)", rc = 1):
+    all three are ThresholdBound statements, none k0; every k0 row reads sorry 0.
+13. Attempt-id collisions A242 / A243 / A244 (15.3) — each pair is two campaigns; s.7's A242 / A243 and s.10's A244 are
+    the 2026-09-16 ones.
+
+**15.5 The chain on 2026-10-22 (s.8 re-tagged; `k0_route.md` §13 is the source of every statement).**
+1 [T] (+ dependency: k1_00's tree).  2 [T] (compactness [T-prose]).  3 [T] (`band_count` [T-prose]).  4 [T]
+(`meeters_split` [T-prose]).  5 [T].  **5a [C] `pair3`, never started (≈ 3 CPU-h).  5b strip half [T] (corner, A276)
++ [T-computed] (80 cells, A273 + A280) — COMPLETE — + `pair3`.**  5c [M].  5d [C] the two CAP-2 statements (s.11,
+s.12: BL-CAP-2(C, D) ⟸ NO-FLOAT2 = L, residual (NEST) [C], nest279 [M] no witness; BL-CAP-2(A, C) [C]; `cert277`
+not launched, 30–1000 / 3–100 CPU-h).  5e [M].  6 [T from 5] (axiom `jam_count` [C]).  7 [T-prose].  8a
+[T-computed].  **8b [T-computed\*]: 488 of the 492 non-cube slab jobs PASS; SM1_0, SM1_01, SM1_013, SM1_03 owed.**
+8c [T].  8d exists (room 10).  8e [M].  9 [T].  10a, 10b [T-computed].  **10c [T-computed\*]: WS complete; P2 24
+cells and WE 18 cells not ok; 16 verifier-bad leaves in P2 6,7 / 7,7 to bisect.**  10d [C] (P2n: 10/10 cells not
+ok, as designed).  11, 12 [T].  13 outside.
+
+**Still owed, exactly, on 2026-10-22:** `pair3`; 5d (one of: `cert277` both families, or NO-FLOAT2 by proof /
+certificate + BL-CAP-2(A, C)); the four SM1 slab jobs; the 24 P2 + 18 WE cells of 10c (+ the bisection); 10d's three
+gap statements of CAPACITY-2; the [T-prose] Lean axioms and Lemma LOW's (F4)(c) prose; k1_00's tree; the stretch and
+uniqueness k ≥ 4 (outside).  **Closed since s.8 was written:** 5b's strip half (A276 + A280), 10c WS.
+
+**Plain language, updated.**  The strip lemma at a jammed corner — last month's hardest-looking piece — is now done:
+a hand proof covers the thin near-flat corner, and two box trees with independent verifiers cover every other tilt.
+What k0 at n = 11 still rests on: one small computation never run (`pair3`), the FLOAT2 / indirect-jam corners (two
+named open statements), four near-flat slab jobs, 42 open cells of the independent-tilt ring certificates, the
+wide-gap rings (two misses never fit), and the k1_00 tree.  Externally, s(11) is now settled (T-060, T-112), so this
+chain matters as the n = 11 worked instance of an all-n programme (s.9), not as the value.
