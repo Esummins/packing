@@ -9,7 +9,7 @@ facts, the n = 11 form STEP on the eleven cells, and the current n = 11 chain wi
 
 Repository https://github.com/Esummins/packing (paths under `blob/master/`; e.g. https://github.com/Esummins/packing/blob/master/docs/proofs/k0_route.md).  Sources: `docs/proofs/{k0_route,ring_swap,one_flush,local_lock,swap_leaf,k0_count,
 wall_torque,two_grains,handedness,cross,no_vv,realign,ring_capacity,pocket_waste,drain_flow_k0,noroom}.md`,
-`lean/PackingCertMathlib/PackingCertMathlib/Statements/Open/`, `attempts/A275-k0-knowledge/` (the compilation:
+`lean/PackingCertMathlib/PackingCertMathlib/Statements/Open/`, `docs/proofs/k0_knowledge.md` (the compilation, present at the pin and brought to 2026-10-22 at commit e5ebaa64a; `attempts/A275-k0-knowledge/` holds only its brief:
 72 [T], 17 [T-computed], 21 [M], 38 [F], 18 [C] entries).
 
 ## 1. Theorems (n-general unless marked)
