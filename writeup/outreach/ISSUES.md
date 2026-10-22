@@ -25,7 +25,7 @@ replies on the issue) and will not open pull requests.  The series index is `wri
 stratify packings by the D4-class of their lattice-slot skeleton (Young 4-tuples), kill classes on a side window by
 exact per-class certificates and geometric trees, climb containment by Lemma K1.  At n = 11: a census of 1110
 tuples / 163 classes exhaustive at every side in (3, 4) (Lean theorem, standard axioms), **52 of 52 k5/k6 classes
-certified empty on the whole window [191/50, s0]** (parametric certificates, frozen verifier sha256 521cb01fe656…),
+certified empty on the whole window [191/50, s0]** (parametric certificates, frozen verifier sha256 1574ddbdcd57e642… (committed LF file; the earlier 521cb01fe656… was a CRLF working copy)),
 the k ≥ 6 tier empty, and a residue of three k = 5 classes, sixteen K1-protected classes and k = 0.  The record of
 what is theorem and what is axiom is `lean/AUDIT.md` (three named open axioms).  Details:
 `writeup/outreach/01-stratification-program.md`; timeline `07-timeline.md`.

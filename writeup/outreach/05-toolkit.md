@@ -89,10 +89,10 @@ unsound at n > 11 and replaced).
 
 ## 6. What is frozen and verified
 
-* **Frozen verifier v1** `attempts/A57-shadow-trees/code/verify_case.py` (sha256 521cb01fe656…): exact-core
+* **Frozen verifier v1** `attempts/A57-shadow-trees/code/verify_case.py` (sha256 1574ddbdcd57e642… (committed LF file; the earlier 521cb01fe656… was a CRLF working copy)): exact-core
   case-measure certificates; the chain every window row and the 3.82 bound run under.  Lean `case_verifier_kill`
   (`Statements/CaseVerifier.lean`): the Lean checker is byte-faithful to it (A70, A117: 30/30 byte-identical).
-* **Measure verifier** `certs/verify_measure.py` (2a735939d67f…): s(11) ≥ 3.82 (`certs/measure_certificate_3.82.json`,
+* **Measure verifier** `certs/verify_measure.py` (87fa3d31cb91c7ef… (committed LF file; the earlier 2a735939d67f… was a CRLF working copy)): s(11) ≥ 3.82 (`certs/measure_certificate_3.82.json`,
   two independent exact verifiers; Lean `lower_bound_382`).  **Parametric** `verify_param.py` (A56/A96): the 4-D
   window verifier (Lean `parametrization`).  **v4** boxed windows (Theorem W, Lean end to end); **v5** guard lines
   (Theorem G; a soundness bug found by external review and fixed, `writeup/05_status_sheet.md` §2 — the repro and
