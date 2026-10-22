@@ -1288,3 +1288,67 @@ pathspecs, fetch + plain merge only, no response over ~15k tokens); never touch 
 - s.3/s.4 [T-computed]/[M] **8-square outer structures** of the orbits (`wall281_rings.json`, part 7 table 7.2; rows still landing at exit -- a later agent reads them; `finish281.sh` commits them): the all-F
   pinwheel EXISTS on all of W (C4 witness d = 0.662, θ = 14.2°, y_V = 0.948 at ŝ; margins 0.045 / 0.052) — A248's f = 4 kill
   is a HOLDER kill, not a side kill; Ff/Ff/Ff/T exists (0.047 / 0.054); orbits with a ΠΠ wall fail (−0.0003 … −0.0004).
+
+## 15. REFRESH — the state on 2026-10-22 (A275 re-run; every index read-only, nothing launched or touched)
+
+**15.0 What was re-read, and the clock.**  `k0_route.md` §13 (last edited by A280, 2026-09-24, `git log`; A281 did
+not touch it), every index named below, `LOG.md` through its last entry (A243, 2026-10-07), `residue_ledger.md` §0 and
+§4, `lean/AUDIT.md` (generated 2026-10-07 20:54), `writeup/outreach/` (A244 series, 2026-10-11; digest fix
+2026-10-22), and the owner's reply on jlevy/squares #526.  **No lab worker process was running on 2026-10-22** (the
+Win32 process list shows no lab python/bash), so every chain below is STOPPED: its numbers are final for its last run,
+not "running".  Several result files were written after their campaign's last commit and are uncommitted or untracked
+in the working tree (marked *wt*); they are cited by path and mtime and were not committed by this agent (other
+campaigns' state).  Tags as in s.0.  Each item: what, numbers, file (mtime), and which earlier line of this file it
+supersedes.
+
+**15.1 The certificates of the chain — status on 2026-10-22 (supersedes s.3, s.8 TODAY lines, s.13).**
+- [T-computed] **5b STRIP₂-IN-JAM drop tree — COMPLETE on the whole (θ, φ) ∈ [0°, 45°]² grid of 81 cells.**
+  `attempts/A273-disc-lemma/certs/index273.jsonl` (2026-09-24 12:55): 81/81 rows, **51 CERT** with
+  `results/verify273_index.jsonl` PASS and 0 OPEN; 30 OPEN-LAYER = the corner cell c0_0 (θ, φ ∈ [0°, 5°]; one OPEN
+  box by design) + 29 steep cells (c5_4–c5_8, c6_2–c6_8, c7_1–c7_8, c8_0–c8_8; 127 845–194 139 OPEN leaves each at the
+  400 000-box cap).  `attempts/A280-drop-steep/certs/index280.jsonl` (committed cell by cell 2026-09-27 22:35–22:38,
+  last commit b6039f5e2): **those 29 cells CERT** in 35–517 boxes, `results/verify280_c*.json` **29/29 PASS**
+  (coverage, 0 disagreements, 0 bisected).  The corner c0_0 is A276's Theorem CORNER (0 ≤ θ, φ ≤ 5°) + Theorem
+  FLAT-X (φ = 0, θ ≤ 30°) [T] (`flat_x.md`; A276 LOG: "A273's index excludes exactly the corner cell").  So 5b's strip
+  half is [T] (corner) + [T-computed] (80 cells), with A280's prune LOWF leaning on Lemma LOW's (F4)(c) prose (Lean
+  `lh_gt_one_steep` proves only G > 1; `drop280.md` §2).  Lean carries STRIP₂-IN-JAM as the axiom `strip_two_in_jam`
+  (`RingDomain.lean`) and the corner as the axioms `strip_two_in_jam_corner`, `strip_two_in_jam_flat_x` (`FlatX.lean`);
+  no Lean statement names the drop tree (AUDIT 2026-10-07).  Supersedes: s.0.5 ("index273 67/81 … 24 OPEN-LAYER"),
+  s.3 A273 entry, s.6 "[C] 5b … corner" (closed by A276 on 2026-09-23 already), s.8 5b TODAY, s.13 ("run280 gated").
+  `k0_route.md` §13 5b still reads "once run280 lands" — stale since 2026-09-27.
+- [C] **5a / 5b `pair3` — never started.**  `attempts/A262-no-jam/certs/` is empty; `logs/chain3.log` (last write
+  2026-09-28 15:06) shows chain3 re-running `float262` four times (each "JAMMED FLOAT2 EXISTS", sup_t
+  0.00223926003420849; `results/float262.json` rewritten 2026-09-28 15:06, *wt*) and two fork failures ("Resource
+  temporarily unavailable"); no `pair3` line.  Price ≈ 3 CPU-h (`no_jam.md` §0).  With 5b's strip half complete,
+  **`pair3` is the only certificate left in 5a/5b.**
+- [T-computed\*] **10c A263 P2 (hybrid, independent tilts, all-ADJ)** — `attempts/A263-open-pairs/certs/
+  P2263_index.jsonl` (2026-09-24 07:29, *wt*: +59 lines over HEAD): 82 lines, **81/81 cells, 54 ok, 27 not ok** (2,4
+  2,5 3,4 3,5 3,6 4,4 4,5 4,6 4,7 5,4 5,5 5,6 5,7 6,4 6,5 6,6 6,7 6,8 7,5 7,6 7,7 7,8 8,4 8,5 8,6 8,7 8,8).  The twenty
+  of s.3 are among them; the eleven cells indexed after 2026-09-23 gave 4 ok, 7 not ok.  A265's s_eff lane
+  (`attempts/A265-strip-plug/certs/P2265_index.jsonl`, unchanged since 2026-09-22): 2,4 / 2,5 / 3,4 ok, 3,5 / 3,6 not ok.
+  So 24 cells of P2 are not ok on any lane.  Supersedes s.3 ("70 of 81, 50 ok, 20 not ok") and s.8 10c TODAY.
+- [T-computed] **10c WS (the right wall's pair)** — `certs/WS263_index.jsonl` (2026-09-24 07:45, *wt*): 81/81 cells
+  ok.  **[T-computed\*] 10c WE (the floor's own pair)** — `certs/WE263_index.jsonl` (2026-09-28 20:58, untracked): 81
+  cells, **63 ok, 18 not ok = the whole θ-rows 5 and 6** (5,0–5,8, 6,0–6,8; 47 431–130 893 leaves, 1 881–7 399 s each).
+  The earlier "WS 3 cells / WE 1 cell" (`k0_route.md` §13 10c; s.8 "WE 1/1, WS 3/3") were the first runs; the 81-cell
+  indices are later.
+- **The A263 verifier, first output** — `results/verify263_adj.json` (2026-09-29 06:44, untracked): leaves P2 CERT
+  332 748 / PRUNE 354 193 / OPEN 1 840 672 (5 797 plug leaves); WE 1 345 436 / 498 545 / 186 248; WS 24 396 / 10 702 /
+  OPEN 0; **"bad": 16** — sixteen MISMATCH lines, all CERT leaves of P2 cells 6,7 (9) and 7,7 (7) that the verifier
+  re-evaluates as FAIL.  Both cells are already not ok, so no ok cell is touched, but no bisection output is on disk
+  (the s.10 pattern requires one before those CERT leaves count).  s.3 said "No A263 verifier output is on disk" — true
+  on 2026-09-23, superseded.
+- [T-computed\*] **10d non-ADJ certificates started** — `certs/P2n263_index.jsonl` (2026-09-29 17:14, untracked): 10
+  cells (0,0–0,8, 1,0), **all not ok**, as `k0_route.md` §13 10d said they would be ("will mark exactly this region
+  OPEN"); WEn / WSn: no index.  10d stays [C] (CAPACITY-2's three gap statements).
+- [T-computed\*] **8b the slab jobs** (`open_pairs.md` §5.2: 494 jobs = the boxes [0, 0.703°]^S × [0.703°, 45°]^rest
+  per pattern; a job's `tdomain` is in units of 45°, so 1/64 = 0.703°) — `certs/S[MR]*.state.json` (last 2026-09-29
+  15:30): **489 done, 5 not done** (SM1_0, SM1_01, SM1_013, SM1_03, SM1_0123); `results/slabverify263.log` (untracked):
+  489 verified, **488 PASS (bad 0)**, 1 FAIL = SM3_0123 (3 509 undecided leaves).  SM3_0123 and SM1_0123 are the
+  all-four-walls-in-the-slab cubes of the patterns + − + − and + + + −, i.e. the region of 8c, which is [T] by A264's
+  near-flat cube (`three_lemmas.md` §3, Lean `slab_cube_264`); SM1_0123's partial state holds 46 undecided and 1
+  feasible leaf, inside that cube.  **8b owes exactly SM1_0, SM1_01, SM1_013, SM1_03** (SM1_013 priced ≈ 3·10⁷ leaves,
+  "heavy tail", `open_pairs.md` §5.2).  Supersedes s.8 8b TODAY ("no slab-job index on disk").
+- Unchanged since s.3: 8a A261 50/50 [T-computed]; 10a A259 81/81, bad 0 [T-computed]; 10b A260 hybA / hybB / hybAB
+  / layer 81/81, bad 0 [T-computed]; A266 `strip266` 6/6 budgeted cells not ok (now moot for 5b: the drop tree
+  replaced it).
