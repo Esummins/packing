@@ -1,5 +1,16 @@
 # k0 — THE KNOWLEDGE DOCUMENT: everything the lab knows about k0 as a class (A275, 2026-09-23)
 
+> **Refresh, 2026-10-22 (A275 re-run) — and the answer to jlevy/squares issue #526.**  The owner's reply on #526 (read
+> 2026-10-22 with `gh issue view 526 -R jlevy/squares --comments`) asks where the compilation cited by
+> `writeup/outreach/03-k0-status.md` is: 03 points at `attempts/A275-k0-knowledge/`, which holds only `BRIEF.md`.  **The
+> compilation is THIS file, `docs/proofs/k0_knowledge.md`**, present at the pinned commit 651a9a5 (1 277 lines there;
+> `git show 651a9a5:docs/proofs/k0_knowledge.md`).  03's counts (72 [T], 17 [T-computed], 21 [M], 38 [F], 18 [C]) and
+> `07-timeline.md`'s "1,103-line compilation" are the 2026-09-23 first pass (`LOG.md`, A275 entry); the A276–A281
+> appends came later.  **What changed after the last append (A281, 2026-09-28) is s.15** — read it before s.3, s.6 and
+> s.8, whose TODAY lines are as of 2026-09-23/24: the STRIP₂-IN-JAM drop tree is complete (A273 51 + A280 29 cells CERT
+> and verified, the corner cell by A276's hand proof); A263's P2 / WE / WS / slab indices are full; `pair3` never ran;
+> T-037 was replayed PASS (window W′ = [31/8, s0] available, not adopted); s(11) is settled externally (T-060, T-112).
+
 What is true, false, certified, measured, conjectured, and which routes are dead — compiled from the repo only, with
 exact citations, for the PI's overview and as the onboarding text for every future k0 theory agent.  **No new
 mathematics is in this file.**  Every entry repeats a source's own statement and tag; where two sources disagree both
@@ -35,6 +46,8 @@ is dead: do not re-price it) → s.1 (definitions) → s.2–s.4 → s.6 (what i
 (s.11 A278, s.12 A279, and later ones) update s.2–s.8 in place of re-editing them — check them for your topic.
 
 ## 0.5 The k0 exclusion in one page (as of 2026-09-24)
+
+*(Status lines in this page are as of 2026-09-24; s.15 supersedes them where it says so — 2026-10-22.)*
 
 **What k0 is, and why room, not force.**  k0_00 = packings of 11 unit squares with no square flush at a census slot
 (s.1); the target is "none at any side in [3.82, ŝ]".  A same-side exchange (Lemma CELLS) turns any packing with an
