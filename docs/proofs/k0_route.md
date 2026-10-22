@@ -20,6 +20,9 @@ Companions: `protected_trees.md` (Lemma P-TREE, whose leaf semantics this file e
 > **Start here instead (A275, 2026-09-23): [`k0_knowledge.md`](k0_knowledge.md)** — everything the lab knows about k0
 > (true, false, certified, measured, conjectured, dead routes), with this file's §13 re-tagged as of 2026-09-23.  The
 > verdict below is A85's (2026-09-02) and describes the volume-tree route, now dead (`k0_knowledge.md` §7).
+> **Refreshed 2026-10-22 (A275 re-run): `k0_knowledge.md` §15** — the status on that day: 5b's STRIP₂-IN-JAM drop
+> tree is COMPLETE (A273 51 + A280 29 cells CERT + verified, 2026-09-27; the corner by A276) although §13 5b below still
+> says "once run280 lands"; `pair3` never started; 10c P2 54/81 ok, WE 63/81, WS 81/81; 8b 488/494 slab jobs PASS.
 
 > **Re-price (§8, stacked): k0_00 ≈ 3 200–7 000 CPU-h (45–100 desktop-days at three slots)
 > if depth-2 certifications repair at ≈ 85 % — a 3–30× cut on A38's floor but NOT below A84's
